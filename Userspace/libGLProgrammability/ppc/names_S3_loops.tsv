@@ -198,9 +198,9 @@ use	_RegistersCleanup	uVar7	sourceIndex	INFERRED	initialised to a literal, stepp
 use	_RegistersCleanup	uVar8	instructionIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#17	+27	all	all
 use	_RegistersCleanup	uVar9	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+10	all	all
 use	_RegistersCleanup	uVar9	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#33	+6	all	all
-use	_InstructionAdd	iVar10	loopIndex3	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#37	+73	all	all
-use	_InstructionAdd	iVar14	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#78	+25	all	all
-use	_InstructionAdd	iVar15	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#129	+37	all	all
+use	_InstructionAdd	iVar10	operandIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#37	+73	all	all
+use	_InstructionAdd	iVar14	sourceComponent	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#78	+25	all	all
+use	_InstructionAdd	iVar15	destComponent	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#129	+37	all	all
 use	_BlockFree	uVar1	instructionIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+7	all	all
 use	_RegistersInitialize	uVar5	recordIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+13	all	all
 use	_RegistersFree	uVar2	recordIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+8	all	all

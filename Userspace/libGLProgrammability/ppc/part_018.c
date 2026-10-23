@@ -723,13 +723,13 @@ LAB_97c08e8c:
 }
 
 /* _GetRegisterIndicies @ 0x97c08ee4 (168 bytes) */
-int _GetRegisterIndicies(stream, outFirstIndex, outLastIndex, listKind, registerNumber, lookUpArrays, isArray, arrayExtent)
+int _GetRegisterIndicies(stream, outFirstIndex, outLastIndex, listKind, registerNumber, isIndirect, isArray, arrayExtent)
   undefined4 stream;
   int *outFirstIndex;
   int *outLastIndex;
   undefined4 listKind;
   int registerNumber;
-  int lookUpArrays;
+  int isIndirect;
   int isArray;
   int arrayExtent;
 {
@@ -737,7 +737,7 @@ int _GetRegisterIndicies(stream, outFirstIndex, outLastIndex, listKind, register
   
   *outFirstIndex = 0;
   *outLastIndex = -1;
-  if (lookUpArrays != 0) {
+  if (isIndirect != 0) {
     ((int (*)())_GetStreamArray_97c08e40)(listKind,registerNumber,stream,outFirstIndex,outLastIndex);
   }
   lastIndex = *outLastIndex;
@@ -1638,49 +1638,73 @@ int _RegisterFree(reg)
 }
 
 /* _InstructionAdd @ 0x97c0a0a4 (1324 bytes) */
-int _InstructionAdd(param_1, param_2, param_3)
-  undefined4 *param_1;
-  int *param_2;
-  int param_3;
+int _InstructionAdd(program, block, operationChunk)
+  undefined4 *program;
+  int *block;
+  int operationChunk;
 {
+  int newSourceCount;
+  int oldSourceCount;
+  int destAsSourceProbe;
+  int destSlotRegister;
+  int destsEnd;
+  int grownDests;
+  int newDestCount;
+  int sourceSlotRegister;
+  int sourcesEnd;
+  int grownSources;
+  int oldSourceCountInLoop;
+  uint destIsArrayAccess;
+  uint destComponentUsed;
+  uint destWord1Copy;
+  uint sourceIsArrayAccess;
+  uint sourceComponentUsed;
+  uint destWord2;
+  uint destWord;
+  uint sourceRegisterIndex;
+  uint operandWord;
+  int sourceCountBeforeAddress;
+  int addressRegisterProbe;
+  int destRegisterIndex;
+  int instructionsEnd;
   int validArgs;
-  int loopIndex;
-  int loopIndex3;
-  undefined4 allocation;
-  int allocation2;
-  int allocation4;
-  int allocation3;
-  bool bVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  undefined4 registerValue2;
-  int iVar6;
-  int iVar7;
-  int registerValue3;
-  uint uVar9;
-  int registerValue;
-  int *piVar11;
-  int iVar12;
-  uint *puVar13;
-  int loopIndex2;
-  int iVar15;
-  uint local_70 [5];
-  int local_5c;
-  int local_58;
-  int local_54 [3];
+  int destComponent;
+  int operandIndex;
+  undefined4 newArray;
+  int grownInstructions;
+  int grownSourcesForAddress;
+  int grownSourcesForDest;
+  bool destIsAlsoSource;
+  uint operandSizeBits;
+  int oldInstructionCount;
+  uint sourceWord;
+  undefined4 addedSourceRegister;
+  int destProbe;
+  int sourceProbe;
+  int sourceRegister;
+  uint usesIndirect;
+  int destRegister;
+  int *instruction;
+  int sourceOperandCursor;
+  uint *componentFlagCursor;
+  int sourceComponent;
+  int operandCursor;
+  uint operandScratch [5];
+  int sourceLastIndex;
+  int destFirstIndex;
+  int destLastIndex [3];
   
-  iVar3 = *param_2;
-  *param_2 = iVar3 + 1;
-  uVar9 = 0;
-  bVar1 = false;
-  allocation2 = _realloc(param_2[1],(iVar3 + 1) * 0x1c);
-  param_2[1] = allocation2;
-  iVar3 = allocation2 + *param_2 * 0x1c;
-  piVar11 = (int *)(iVar3 + -0x1c);
-  *(undefined4 *)(iVar3 + -0xc) = 0;
-  *(int *)(iVar3 + -4) = param_3;
-  switch(*(uint *)(param_3 + 0xc) >> 0x12 & 0xff) {
+  oldInstructionCount = *block;
+  *block = oldInstructionCount + 1;
+  usesIndirect = 0;
+  destIsAlsoSource = false;
+  grownInstructions = _realloc(block[1],(oldInstructionCount + 1) * 0x1c);
+  block[1] = grownInstructions;
+  instructionsEnd = grownInstructions + *block * 0x1c;
+  instruction = (int *)(instructionsEnd + -0x1c);
+  *(undefined4 *)(instructionsEnd + -0xc) = 0;
+  *(int *)(instructionsEnd + -4) = operationChunk;
+  switch(*(uint *)(operationChunk + 0xc) >> 0x12 & 0xff) {
   case 0x4b:
   case 0x4c:
   case 0x4d:
@@ -1696,155 +1720,155 @@ int _InstructionAdd(param_1, param_2, param_3)
   case 0x69:
   case 0x6a:
   case 0x6b:
-    *(undefined4 *)(iVar3 + -0xc) = 1;
+    *(undefined4 *)(instructionsEnd + -0xc) = 1;
     break;
   case 0x6d:
-    bVar1 = true;
+    destIsAlsoSource = true;
   }
-  *piVar11 = 0;
-  loopIndex3 = 0;
-  *(undefined4 *)(iVar3 + -8) = 0;
-  allocation = _malloc(4);
-  *(undefined4 *)(iVar3 + -0x18) = allocation;
-  validArgs = ((int (*)())_GetValidArgs)(param_3);
-  iVar12 = param_3;
-  iVar15 = param_3;
+  *instruction = 0;
+  operandIndex = 0;
+  *(undefined4 *)(instructionsEnd + -8) = 0;
+  newArray = _malloc(4);
+  *(undefined4 *)(instructionsEnd + -0x18) = newArray;
+  validArgs = ((int (*)())_GetValidArgs)(operationChunk);
+  sourceOperandCursor = operationChunk;
+  operandCursor = operationChunk;
   if (0 < validArgs) {
     do {
-      uVar4 = *(uint *)(iVar15 + 0x1c);
-      local_70[0] = 0;
-      uVar2 = uVar4 >> 0xc & 3;
-      local_70[1] = 0;
-      local_70[2] = 0;
-      local_70[3] = 0;
-      if (uVar2 == 1) {
+      sourceWord = *(uint *)(operandCursor + 0x1c);
+      operandScratch[0] = 0;
+      operandSizeBits = sourceWord >> 0xc & 3;
+      operandScratch[1] = 0;
+      operandScratch[2] = 0;
+      operandScratch[3] = 0;
+      if (operandSizeBits == 1) {
 LAB_97c0a284:
-        *(undefined4 *)((int)local_70 + (*(uint *)(iVar15 + 0x1c) >> 0x11 & 0xc)) = 1;
+        *(undefined4 *)((int)operandScratch + (*(uint *)(operandCursor + 0x1c) >> 0x11 & 0xc)) = 1;
 LAB_97c0a290:
-        *(undefined4 *)((int)local_70 + (*(uint *)(iVar15 + 0x1c) >> 0x13 & 0xc)) = 1;
+        *(undefined4 *)((int)operandScratch + (*(uint *)(operandCursor + 0x1c) >> 0x13 & 0xc)) = 1;
       }
       else {
-        if (1 < uVar2) {
-          if (uVar2 != 2) {
-            if (uVar2 != 3) goto LAB_97c0a29c;
-            *(undefined4 *)((int)local_70 + (uVar4 >> 0xd & 0xc)) = 1;
-            uVar4 = *(uint *)(iVar15 + 0x1c);
+        if (1 < operandSizeBits) {
+          if (operandSizeBits != 2) {
+            if (operandSizeBits != 3) goto LAB_97c0a29c;
+            *(undefined4 *)((int)operandScratch + (sourceWord >> 0xd & 0xc)) = 1;
+            sourceWord = *(uint *)(operandCursor + 0x1c);
           }
-          *(undefined4 *)((int)local_70 + (uVar4 >> 0xf & 0xc)) = 1;
+          *(undefined4 *)((int)operandScratch + (sourceWord >> 0xf & 0xc)) = 1;
           goto LAB_97c0a284;
         }
-        if (uVar2 == 0) goto LAB_97c0a290;
+        if (operandSizeBits == 0) goto LAB_97c0a290;
       }
 LAB_97c0a29c:
-      uVar2 = *(uint *)(iVar15 + 0x1c);
-      uVar9 = uVar9 | uVar2 >> 0x1f;
-      ((int (*)())_GetRegisterIndicies)(*param_1,local_70 + 4,&local_5c,uVar2 >> 0x17 & 7,(uint)*(ushort *)(iVar15 + 0x22),
-                 uVar2 >> 0x1f,uVar2 >> 0xe & 1,uVar2 >> 0xc & 3);
-      if ((int)local_70[4] <= local_5c) {
-        uVar2 = local_70[4];
+      operandWord = *(uint *)(operandCursor + 0x1c);
+      usesIndirect = usesIndirect | operandWord >> 0x1f;
+      ((int (*)())_GetRegisterIndicies)(*program,operandScratch + 4,&sourceLastIndex,operandWord >> 0x17 & 7,(uint)*(ushort *)(operandCursor + 0x22),
+                 operandWord >> 0x1f,operandWord >> 0xe & 1,operandWord >> 0xc & 3);
+      if ((int)operandScratch[4] <= sourceLastIndex) {
+        sourceRegisterIndex = operandScratch[4];
         do {
-          loopIndex2 = 0;
-          puVar13 = local_70;
+          sourceComponent = 0;
+          componentFlagCursor = operandScratch;
           do {
-            uVar4 = *puVar13;
-            puVar13 = puVar13 + 1;
-            if ((uVar4 != 0) &&
-               (iVar7 = ((int (*)())_GetRegister)(param_1,*(uint *)(iVar12 + 0x1c) >> 0x17 & 7,uVar2,loopIndex2),
-               iVar7 != 0)) {
-              iVar7 = *piVar11;
-              *piVar11 = iVar7 + 1;
-              iVar7 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar7 + 1) * 4);
-              *(int *)(iVar3 + -0x18) = iVar7;
-              iVar7 = iVar7 + *piVar11 * 4;
-              registerValue3 = ((int (*)())_GetRegister)(param_1,*(uint *)(iVar12 + 0x1c) >> 0x17 & 7,uVar2,loopIndex2);
-              *(int *)(iVar7 + -4) = registerValue3;
-              uVar4 = 0;
-              *(uint *)(registerValue3 + 0x1c) = *(uint *)(registerValue3 + 0x1c) | *(uint *)(iVar12 + 0x1c) >> 0x1f;
-              iVar7 = *(int *)(iVar7 + -4);
-              if (((*(uint *)(iVar12 + 0x1c) & 0x4000) != 0) &&
-                 (1 < (*(uint *)(iVar12 + 0x1c) >> 0xc & 3) + 1)) {
-                uVar4 = 1;
+            sourceComponentUsed = *componentFlagCursor;
+            componentFlagCursor = componentFlagCursor + 1;
+            if ((sourceComponentUsed != 0) &&
+               (sourceProbe = ((int (*)())_GetRegister)(program,*(uint *)(sourceOperandCursor + 0x1c) >> 0x17 & 7,sourceRegisterIndex,sourceComponent),
+               sourceProbe != 0)) {
+              oldSourceCountInLoop = *instruction;
+              *instruction = oldSourceCountInLoop + 1;
+              grownSources = _realloc(*(undefined4 *)(instructionsEnd + -0x18),(oldSourceCountInLoop + 1) * 4);
+              *(int *)(instructionsEnd + -0x18) = grownSources;
+              sourcesEnd = grownSources + *instruction * 4;
+              sourceRegister = ((int (*)())_GetRegister)(program,*(uint *)(sourceOperandCursor + 0x1c) >> 0x17 & 7,sourceRegisterIndex,sourceComponent);
+              *(int *)(sourcesEnd + -4) = sourceRegister;
+              sourceIsArrayAccess = 0;
+              *(uint *)(sourceRegister + 0x1c) = *(uint *)(sourceRegister + 0x1c) | *(uint *)(sourceOperandCursor + 0x1c) >> 0x1f;
+              sourceSlotRegister = *(int *)(sourcesEnd + -4);
+              if (((*(uint *)(sourceOperandCursor + 0x1c) & 0x4000) != 0) &&
+                 (1 < (*(uint *)(sourceOperandCursor + 0x1c) >> 0xc & 3) + 1)) {
+                sourceIsArrayAccess = 1;
               }
-              *(uint *)(iVar7 + 0x20) = *(uint *)(iVar7 + 0x20) | uVar4;
+              *(uint *)(sourceSlotRegister + 0x20) = *(uint *)(sourceSlotRegister + 0x20) | sourceIsArrayAccess;
             }
-            loopIndex2 = loopIndex2 + 1;
-          } while (loopIndex2 < 4);
-          uVar2 = uVar2 + 1;
-        } while ((int)uVar2 <= local_5c);
+            sourceComponent = sourceComponent + 1;
+          } while (sourceComponent < 4);
+          sourceRegisterIndex = sourceRegisterIndex + 1;
+        } while ((int)sourceRegisterIndex <= sourceLastIndex);
       }
-      loopIndex3 = loopIndex3 + 1;
-      iVar12 = iVar12 + 8;
-      iVar15 = iVar15 + 8;
-    } while (loopIndex3 < validArgs);
+      operandIndex = operandIndex + 1;
+      sourceOperandCursor = sourceOperandCursor + 8;
+      operandCursor = operandCursor + 8;
+    } while (operandIndex < validArgs);
   }
-  uVar2 = *(uint *)(param_3 + 0x14);
-  local_70[1] = uVar2 >> 0xe & 1;
-  local_70[3] = uVar2 >> 0x10 & 1;
-  local_70[0] = uVar2 >> 0xd & 1;
-  local_70[2] = uVar2 >> 0xf & 1;
-  *(undefined4 *)(iVar3 + -0x14) = 0;
-  allocation = _malloc(4);
-  *(undefined4 *)(iVar3 + -0x10) = allocation;
-  *(uint *)(iVar3 + -0xc) =
-       *(uint *)(iVar3 + -0xc) | (uint)((*(uint *)(param_3 + 0x14) >> 0x11 & 7) == 3);
-  uVar4 = *(uint *)(param_3 + 0x14);
-  uVar2 = *(uint *)(param_3 + 0x18);
-  ((int (*)())_GetRegisterIndicies)(*param_1,&local_58,local_54,uVar4 >> 0x11 & 7,uVar2 & 0xffff,uVar2 >> 0x1f,
-             uVar4 >> 0xc & 1,uVar4 >> 10 & 3);
-  if (local_58 <= local_54[0]) {
-    iVar12 = local_58;
+  destWord = *(uint *)(operationChunk + 0x14);
+  operandScratch[1] = destWord >> 0xe & 1;
+  operandScratch[3] = destWord >> 0x10 & 1;
+  operandScratch[0] = destWord >> 0xd & 1;
+  operandScratch[2] = destWord >> 0xf & 1;
+  *(undefined4 *)(instructionsEnd + -0x14) = 0;
+  newArray = _malloc(4);
+  *(undefined4 *)(instructionsEnd + -0x10) = newArray;
+  *(uint *)(instructionsEnd + -0xc) =
+       *(uint *)(instructionsEnd + -0xc) | (uint)((*(uint *)(operationChunk + 0x14) >> 0x11 & 7) == 3);
+  destWord1Copy = *(uint *)(operationChunk + 0x14);
+  destWord2 = *(uint *)(operationChunk + 0x18);
+  ((int (*)())_GetRegisterIndicies)(*program,&destFirstIndex,destLastIndex,destWord1Copy >> 0x11 & 7,destWord2 & 0xffff,destWord2 >> 0x1f,
+             destWord1Copy >> 0xc & 1,destWord1Copy >> 10 & 3);
+  if (destFirstIndex <= destLastIndex[0]) {
+    destRegisterIndex = destFirstIndex;
     do {
-      loopIndex = 0;
-      puVar13 = local_70;
+      destComponent = 0;
+      componentFlagCursor = operandScratch;
       do {
-        uVar4 = *puVar13;
-        puVar13 = puVar13 + 1;
-        if (uVar4 != 0) {
-          iVar6 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,loopIndex);
-          if (iVar6 != 0) {
-            iVar6 = *(int *)(iVar3 + -0x14) + 1;
-            *(int *)(iVar3 + -0x14) = iVar6;
-            iVar6 = _realloc(*(undefined4 *)(iVar3 + -0x10),iVar6 * 4);
-            *(int *)(iVar3 + -0x10) = iVar6;
-            iVar6 = iVar6 + *(int *)(iVar3 + -0x14) * 4;
-            registerValue = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,loopIndex);
-            *(int *)(iVar6 + -4) = registerValue;
-            uVar4 = 0;
-            *(uint *)(registerValue + 0x1c) = *(uint *)(registerValue + 0x1c) | *(uint *)(param_3 + 0x18) >> 0x1f;
-            iVar6 = *(int *)(iVar6 + -4);
-            if (((*(uint *)(param_3 + 0x14) & 0x1000) != 0) &&
-               (1 < (*(uint *)(param_3 + 0x14) >> 10 & 3) + 1)) {
-              uVar4 = 1;
+        destComponentUsed = *componentFlagCursor;
+        componentFlagCursor = componentFlagCursor + 1;
+        if (destComponentUsed != 0) {
+          destProbe = ((int (*)())_GetRegister)(program,*(uint *)(operationChunk + 0x14) >> 0x11 & 7,destRegisterIndex,destComponent);
+          if (destProbe != 0) {
+            newDestCount = *(int *)(instructionsEnd + -0x14) + 1;
+            *(int *)(instructionsEnd + -0x14) = newDestCount;
+            grownDests = _realloc(*(undefined4 *)(instructionsEnd + -0x10),newDestCount * 4);
+            *(int *)(instructionsEnd + -0x10) = grownDests;
+            destsEnd = grownDests + *(int *)(instructionsEnd + -0x14) * 4;
+            destRegister = ((int (*)())_GetRegister)(program,*(uint *)(operationChunk + 0x14) >> 0x11 & 7,destRegisterIndex,destComponent);
+            *(int *)(destsEnd + -4) = destRegister;
+            destIsArrayAccess = 0;
+            *(uint *)(destRegister + 0x1c) = *(uint *)(destRegister + 0x1c) | *(uint *)(operationChunk + 0x18) >> 0x1f;
+            destSlotRegister = *(int *)(destsEnd + -4);
+            if (((*(uint *)(operationChunk + 0x14) & 0x1000) != 0) &&
+               (1 < (*(uint *)(operationChunk + 0x14) >> 10 & 3) + 1)) {
+              destIsArrayAccess = 1;
             }
-            *(uint *)(iVar6 + 0x20) = *(uint *)(iVar6 + 0x20) | uVar4;
+            *(uint *)(destSlotRegister + 0x20) = *(uint *)(destSlotRegister + 0x20) | destIsArrayAccess;
           }
-          if ((bVar1 || (int)uVar2 < 0) &&
-             (iVar6 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,loopIndex),
-             iVar6 != 0)) {
-            iVar6 = *piVar11;
-            *piVar11 = iVar6 + 1;
-            allocation3 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar6 + 1) * 4);
-            iVar6 = *piVar11;
-            *(int *)(iVar3 + -0x18) = allocation3;
-            registerValue2 = ((int (*)())_GetRegister)(param_1,*(uint *)(param_3 + 0x14) >> 0x11 & 7,iVar12,loopIndex);
-            *(undefined4 *)(allocation3 + iVar6 * 4 + -4) = registerValue2;
+          if ((destIsAlsoSource || (int)destWord2 < 0) &&
+             (destAsSourceProbe = ((int (*)())_GetRegister)(program,*(uint *)(operationChunk + 0x14) >> 0x11 & 7,destRegisterIndex,destComponent),
+             destAsSourceProbe != 0)) {
+            oldSourceCount = *instruction;
+            *instruction = oldSourceCount + 1;
+            grownSourcesForDest = _realloc(*(undefined4 *)(instructionsEnd + -0x18),(oldSourceCount + 1) * 4);
+            newSourceCount = *instruction;
+            *(int *)(instructionsEnd + -0x18) = grownSourcesForDest;
+            addedSourceRegister = ((int (*)())_GetRegister)(program,*(uint *)(operationChunk + 0x14) >> 0x11 & 7,destRegisterIndex,destComponent);
+            *(undefined4 *)(grownSourcesForDest + newSourceCount * 4 + -4) = addedSourceRegister;
           }
         }
-        loopIndex = loopIndex + 1;
-      } while (loopIndex < 4);
-      iVar12 = iVar12 + 1;
-    } while (iVar12 <= local_54[0]);
+        destComponent = destComponent + 1;
+      } while (destComponent < 4);
+      destRegisterIndex = destRegisterIndex + 1;
+    } while (destRegisterIndex <= destLastIndex[0]);
   }
-  if ((uVar9 != 0 || (int)uVar2 < 0) && (iVar12 = ((int (*)())_GetRegister)(param_1,4,0,0), iVar12 != 0)) {
-    iVar12 = *piVar11;
-    *piVar11 = iVar12 + 1;
-    allocation4 = _realloc(*(undefined4 *)(iVar3 + -0x18),(iVar12 + 1) * 4);
-    iVar12 = *piVar11;
-    *(int *)(iVar3 + -0x18) = allocation4;
-    registerValue2 = ((int (*)())_GetRegister)(param_1,4,0,0);
-    *(undefined4 *)(allocation4 + iVar12 * 4 + -4) = registerValue2;
+  if ((usesIndirect != 0 || (int)destWord2 < 0) && (addressRegisterProbe = ((int (*)())_GetRegister)(program,4,0,0), addressRegisterProbe != 0)) {
+    sourceCountBeforeAddress = *instruction;
+    *instruction = sourceCountBeforeAddress + 1;
+    grownSourcesForAddress = _realloc(*(undefined4 *)(instructionsEnd + -0x18),(sourceCountBeforeAddress + 1) * 4);
+    sourceCountBeforeAddress = *instruction;
+    *(int *)(instructionsEnd + -0x18) = grownSourcesForAddress;
+    addedSourceRegister = ((int (*)())_GetRegister)(program,4,0,0);
+    *(undefined4 *)(grownSourcesForAddress + sourceCountBeforeAddress * 4 + -4) = addedSourceRegister;
   }
-  return piVar11;
+  return instruction;
 }
 
 /* _InstructionFree @ 0x97c0a65c (88 bytes) */
@@ -2121,30 +2145,33 @@ int _GetBlock(program, labelIndex)
 }
 
 /* _Blockify @ 0x97c0abd8 (752 bytes) */
-int _Blockify(param_1)
-  int *param_1;
+int _Blockify(program)
+  int *program;
 {
-  int block2;
-  int iVar1;
-  int iVar2;
-  int block;
-  uint uVar4;
-  int iVar5;
-  uint uVar6;
-  int iVar7;
-  undefined4 local_30 [6];
+  uint operationLabel;
+  int ownerBlock;
+  int stream;
+  int operationBlock;
+  int currentBlock;
+  int fallthroughBlock;
+  int edgeTargetBlock;
+  uint blockLabel;
+  int nextOperation;
+  uint nextOperationLabel;
+  int operationChunk;
+  undefined4 nextBlockIndex [6];
   
-  _memset(param_1[6],0,param_1[5] << 2);
-  ((int (*)())_GetOrAddBlock)(param_1,0);
-  iVar7 = **(int **)(*param_1 + 0x20);
-  while (iVar7 != 0) {
-    iVar5 = *(int *)(iVar7 + 8);
-    uVar4 = *(uint *)(iVar7 + 0xc);
-    if (iVar5 != 0) {
-      uVar4 = *(uint *)(iVar5 + 0xc);
+  _memset(program[6],0,program[5] << 2);
+  ((int (*)())_GetOrAddBlock)(program,0);
+  operationChunk = **(int **)(*program + 0x20);
+  while (operationChunk != 0) {
+    nextOperation = *(int *)(operationChunk + 8);
+    blockLabel = *(uint *)(operationChunk + 0xc);
+    if (nextOperation != 0) {
+      blockLabel = *(uint *)(nextOperation + 0xc);
     }
-    uVar4 = uVar4 & 0x3ffff;
-    switch(*(uint *)(iVar7 + 0xc) >> 0x12 & 0xff) {
+    blockLabel = blockLabel & 0x3ffff;
+    switch(*(uint *)(operationChunk + 0xc) >> 0x12 & 0xff) {
     case 0x4b:
     case 0x54:
     case 0x55:
@@ -2156,9 +2183,9 @@ int _Blockify(param_1)
     case 0x69:
     case 0x6a:
     case 0x6b:
-      ((int (*)())_GetOrAddBlock)(param_1,uVar4);
+      ((int (*)())_GetOrAddBlock)(program,blockLabel);
     case 0x4c:
-      uVar4 = *(uint *)(iVar7 + 0x10) & 0x3ffff;
+      blockLabel = *(uint *)(operationChunk + 0x10) & 0x3ffff;
       break;
     case 0x4d:
     case 0x59:
@@ -2166,25 +2193,25 @@ int _Blockify(param_1)
     default:
       goto switchD_97c0ac70_caseD_4e;
     }
-    ((int (*)())_GetOrAddBlock)(param_1,uVar4);
-    iVar5 = *(int *)(iVar7 + 8);
+    ((int (*)())_GetOrAddBlock)(program,blockLabel);
+    nextOperation = *(int *)(operationChunk + 8);
 switchD_97c0ac70_caseD_4e:
-    iVar7 = iVar5;
+    operationChunk = nextOperation;
   }
-  _memset(param_1[6],0,param_1[5] << 2);
-  local_30[0] = 0;
-  ((int (*)())_GetBlockFrom)(param_1,0,local_30);
-  iVar5 = *param_1;
-  iVar7 = **(int **)(iVar5 + 0x20);
-  if (**(int **)(iVar5 + 0x20) != 0) {
+  _memset(program[6],0,program[5] << 2);
+  nextBlockIndex[0] = 0;
+  ((int (*)())_GetBlockFrom)(program,0,nextBlockIndex);
+  stream = *program;
+  operationChunk = **(int **)(stream + 0x20);
+  if (**(int **)(stream + 0x20) != 0) {
     do {
-      iVar5 = *(int *)(iVar7 + 8);
-      uVar4 = *(uint *)(iVar7 + 0xc);
-      if (iVar5 != 0) {
-        uVar4 = *(uint *)(iVar5 + 0xc);
+      nextOperation = *(int *)(operationChunk + 8);
+      blockLabel = *(uint *)(operationChunk + 0xc);
+      if (nextOperation != 0) {
+        blockLabel = *(uint *)(nextOperation + 0xc);
       }
-      uVar4 = uVar4 & 0x3ffff;
-      switch(*(uint *)(iVar7 + 0xc) >> 0x12 & 0xff) {
+      blockLabel = blockLabel & 0x3ffff;
+      switch(*(uint *)(operationChunk + 0xc) >> 0x12 & 0xff) {
       case 0x4b:
       case 0x54:
       case 0x55:
@@ -2196,9 +2223,9 @@ switchD_97c0ac70_caseD_4e:
       case 0x69:
       case 0x6a:
       case 0x6b:
-        ((int (*)())_GetBlockFrom)(param_1,uVar4,local_30);
+        ((int (*)())_GetBlockFrom)(program,blockLabel,nextBlockIndex);
       case 0x4c:
-        uVar4 = *(uint *)(iVar7 + 0x10) & 0x3ffff;
+        blockLabel = *(uint *)(operationChunk + 0x10) & 0x3ffff;
         break;
       case 0x4d:
       case 0x59:
@@ -2206,48 +2233,48 @@ switchD_97c0ac70_caseD_4e:
       default:
         goto switchD_97c0adac_caseD_4e;
       }
-      ((int (*)())_GetBlockFrom)(param_1,uVar4,local_30);
-      iVar5 = *(int *)(iVar7 + 8);
+      ((int (*)())_GetBlockFrom)(program,blockLabel,nextBlockIndex);
+      nextOperation = *(int *)(operationChunk + 8);
 switchD_97c0adac_caseD_4e:
-      iVar7 = iVar5;
-    } while (iVar5 != 0);
-    iVar5 = *param_1;
+      operationChunk = nextOperation;
+    } while (nextOperation != 0);
+    stream = *program;
   }
-  iVar1 = ((int (*)())_GetBlock)(param_1,0);
-  iVar7 = **(int **)(iVar5 + 0x20);
+  currentBlock = ((int (*)())_GetBlock)(program,0);
+  operationChunk = **(int **)(stream + 0x20);
   do {
-    if (iVar7 == 0) {
+    if (operationChunk == 0) {
       return;
     }
-    uVar4 = *(uint *)(iVar7 + 0xc) & 0x3ffff;
-    uVar6 = uVar4;
-    if (*(int *)(iVar7 + 8) != 0) {
-      uVar6 = *(uint *)(*(int *)(iVar7 + 8) + 0xc) & 0x3ffff;
+    operationLabel = *(uint *)(operationChunk + 0xc) & 0x3ffff;
+    nextOperationLabel = operationLabel;
+    if (*(int *)(operationChunk + 8) != 0) {
+      nextOperationLabel = *(uint *)(*(int *)(operationChunk + 8) + 0xc) & 0x3ffff;
     }
-    block2 = ((int (*)())_GetBlock)(param_1,uVar4);
-    iVar5 = iVar1;
-    if (block2 != 0) {
-      iVar5 = block2;
+    operationBlock = ((int (*)())_GetBlock)(program,operationLabel);
+    ownerBlock = currentBlock;
+    if (operationBlock != 0) {
+      ownerBlock = operationBlock;
     }
-    ((int (*)())_InstructionAdd)(param_1,iVar5,iVar7);
-    iVar1 = iVar5;
-    switch(*(uint *)(iVar7 + 0xc) >> 0x12 & 0xff) {
+    ((int (*)())_InstructionAdd)(program,ownerBlock,operationChunk);
+    currentBlock = ownerBlock;
+    switch(*(uint *)(operationChunk + 0xc) >> 0x12 & 0xff) {
     case 0x4b:
     case 0x54:
     case 0x58:
     case 0x69:
-      iVar2 = ((int (*)())_GetBlock)(param_1,uVar6);
-      block = ((int (*)())_GetBlock)(param_1,*(uint *)(iVar7 + 0x10) & 0x3ffff);
+      fallthroughBlock = ((int (*)())_GetBlock)(program,nextOperationLabel);
+      edgeTargetBlock = ((int (*)())_GetBlock)(program,*(uint *)(operationChunk + 0x10) & 0x3ffff);
       goto LAB_97c0b02c;
     case 0x4c:
       break;
     case 0x4d:
-      iVar1 = ((int (*)())_GetBlock)(param_1,uVar6);
+      currentBlock = ((int (*)())_GetBlock)(program,nextOperationLabel);
       break;
     default:
-      block = ((int (*)())_GetBlock)(param_1,uVar6);
-      iVar2 = block;
-      if (block != 0) goto LAB_97c0b02c;
+      edgeTargetBlock = ((int (*)())_GetBlock)(program,nextOperationLabel);
+      fallthroughBlock = edgeTargetBlock;
+      if (edgeTargetBlock != 0) goto LAB_97c0b02c;
       break;
     case 0x55:
     case 0x56:
@@ -2256,18 +2283,18 @@ switchD_97c0adac_caseD_4e:
     case 0x5b:
     case 0x6a:
     case 0x6b:
-      iVar2 = ((int (*)())_GetBlock)(param_1,uVar6);
-      block = ((int (*)())_GetBlock)(param_1,*(uint *)(iVar7 + 0x10) & 0x3ffff);
-      ((int (*)())_BlockAddSuccessor)(iVar5,iVar2);
+      fallthroughBlock = ((int (*)())_GetBlock)(program,nextOperationLabel);
+      edgeTargetBlock = ((int (*)())_GetBlock)(program,*(uint *)(operationChunk + 0x10) & 0x3ffff);
+      ((int (*)())_BlockAddSuccessor)(ownerBlock,fallthroughBlock);
       goto LAB_97c0b02c;
     case 0x59:
-      block = ((int (*)())_GetBlock)(param_1,uVar6);
-      iVar2 = block;
+      edgeTargetBlock = ((int (*)())_GetBlock)(program,nextOperationLabel);
+      fallthroughBlock = edgeTargetBlock;
 LAB_97c0b02c:
-      iVar1 = iVar2;
-      ((int (*)())_BlockAddSuccessor)(iVar5,block);
+      currentBlock = fallthroughBlock;
+      ((int (*)())_BlockAddSuccessor)(ownerBlock,edgeTargetBlock);
     }
-    iVar7 = *(int *)(iVar7 + 8);
+    operationChunk = *(int *)(operationChunk + 8);
   } while( true );
 }
 
@@ -2374,91 +2401,94 @@ int _ProgramFree(program)
 int _FlattenIfs(stream)
   int stream;
 {
-  int *piVar1;
-  bool bVar2;
-  uint uVar3;
-  int iVar4;
-  uint *puVar5;
-  int iVar6;
-  int iVar7;
-  uint uVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
+  uint destWord;
+  uint sourceWord;
+  int sourceCount;
+  int *nextLink;
+  bool canFlatten;
+  uint prevOpcode;
+  int prevOperation;
+  uint *operandCursor;
+  int endifOperation;
+  int elseOperation;
+  uint targetLabel;
+  int scanOperation;
+  int resumeOperation;
+  int operationChunk;
   
-  iVar11 = **(int **)(stream + 0x20);
+  operationChunk = **(int **)(stream + 0x20);
   do {
     while( true ) {
-      if (iVar11 == 0) {
+      if (operationChunk == 0) {
         return;
       }
-      iVar10 = iVar11;
-      if ((*(uint *)(iVar11 + 0xc) >> 0x12 & 0xff) == 0x55) break;
+      resumeOperation = operationChunk;
+      if ((*(uint *)(operationChunk + 0xc) >> 0x12 & 0xff) == 0x55) break;
 LAB_97c0b480:
-      iVar11 = *(int *)(iVar10 + 8);
+      operationChunk = *(int *)(resumeOperation + 8);
     }
-    iVar7 = 0;
-    bVar2 = true;
-    uVar8 = *(uint *)(iVar11 + 0x10) & 0x3ffff;
-    iVar4 = 0;
-    iVar9 = iVar11;
+    elseOperation = 0;
+    canFlatten = true;
+    targetLabel = *(uint *)(operationChunk + 0x10) & 0x3ffff;
+    prevOperation = 0;
+    scanOperation = operationChunk;
     do {
-      if (((*(uint *)(iVar9 + 0xc) & 0x3ffff) == uVar8) && (iVar4 != 0)) {
-        uVar3 = *(uint *)(iVar4 + 0xc) >> 0x12 & 0xff;
-        if (uVar3 == 0x58) {
-          uVar8 = *(uint *)(iVar4 + 0x10) & 0x3ffff;
-          iVar7 = iVar4;
+      if (((*(uint *)(scanOperation + 0xc) & 0x3ffff) == targetLabel) && (prevOperation != 0)) {
+        prevOpcode = *(uint *)(prevOperation + 0xc) >> 0x12 & 0xff;
+        if (prevOpcode == 0x58) {
+          targetLabel = *(uint *)(prevOperation + 0x10) & 0x3ffff;
+          elseOperation = prevOperation;
         }
         else {
-          iVar6 = iVar4;
-          if (uVar3 == 0x59) break;
+          endifOperation = prevOperation;
+          if (prevOpcode == 0x59) break;
         }
       }
-      switch(*(uint *)(iVar9 + 0xc) >> 0x12 & 0xff) {
+      switch(*(uint *)(scanOperation + 0xc) >> 0x12 & 0xff) {
       case 0x4b:
       case 0x54:
       case 0x69:
-        if (uVar8 < (*(uint *)(iVar9 + 0x10) & 0x3ffff)) goto switchD_97c0b318_caseD_4c;
+        if (targetLabel < (*(uint *)(scanOperation + 0x10) & 0x3ffff)) goto switchD_97c0b318_caseD_4c;
         break;
       case 0x4c:
       case 0x4d:
 switchD_97c0b318_caseD_4c:
-        bVar2 = false;
+        canFlatten = false;
       }
-      iVar4 = ((int (*)())_GetValidArgs)(iVar9);
-      if (0 < iVar4) {
-        puVar5 = (uint *)(iVar9 + 0x1c);
+      sourceCount = ((int (*)())_GetValidArgs)(scanOperation);
+      if (0 < sourceCount) {
+        operandCursor = (uint *)(scanOperation + 0x1c);
         do {
-          uVar3 = *puVar5;
-          puVar5 = puVar5 + 2;
-          if ((int)uVar3 < 0) {
-            bVar2 = false;
+          sourceWord = *operandCursor;
+          operandCursor = operandCursor + 2;
+          if ((int)sourceWord < 0) {
+            canFlatten = false;
           }
-          if (((uVar3 & 0x4000) != 0) && (1 < (uVar3 >> 0xc & 3) + 1)) {
-            bVar2 = false;
+          if (((sourceWord & 0x4000) != 0) && (1 < (sourceWord >> 0xc & 3) + 1)) {
+            canFlatten = false;
           }
-          iVar4 = iVar4 + -1;
-        } while (iVar4 != 0);
+          sourceCount = sourceCount + -1;
+        } while (sourceCount != 0);
       }
-      uVar3 = *(uint *)(iVar9 + 0x14);
-      if ((uVar3 & 0x1e000) != 0) {
-        if (*(int *)(iVar9 + 0x18) < 0) {
-          bVar2 = false;
+      destWord = *(uint *)(scanOperation + 0x14);
+      if ((destWord & 0x1e000) != 0) {
+        if (*(int *)(scanOperation + 0x18) < 0) {
+          canFlatten = false;
         }
-        if (((uVar3 & 0x1000) != 0) && (1 < (uVar3 >> 10 & 3) + 1)) {
-          bVar2 = false;
+        if (((destWord & 0x1000) != 0) && (1 < (destWord >> 10 & 3) + 1)) {
+          canFlatten = false;
         }
       }
-      piVar1 = (int *)(iVar9 + 8);
-      iVar4 = iVar9;
-      iVar6 = 0;
-      iVar9 = *piVar1;
-    } while (*piVar1 != 0);
-    if (!bVar2) goto LAB_97c0b480;
-    iVar10 = *(int *)(iVar11 + 4);
-    _FlattenIf(stream,iVar11,iVar7,iVar6);
-    if (iVar10 != 0) goto LAB_97c0b480;
-    iVar11 = **(int **)(stream + 0x20);
+      nextLink = (int *)(scanOperation + 8);
+      prevOperation = scanOperation;
+      endifOperation = 0;
+      scanOperation = *nextLink;
+    } while (*nextLink != 0);
+    if (!canFlatten) goto LAB_97c0b480;
+    resumeOperation = *(int *)(operationChunk + 4);
+    _FlattenIf(stream,operationChunk,elseOperation,endifOperation);
+    if (resumeOperation != 0) goto LAB_97c0b480;
+    operationChunk = **(int **)(stream + 0x20);
   } while( true );
 }
 
