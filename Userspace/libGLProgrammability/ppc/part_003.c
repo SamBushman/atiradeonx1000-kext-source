@@ -1372,7 +1372,7 @@ int _scan_token(in, yylvalpp, scratchR5, scratchR6, scratchR7, scratchR8)
                     
     token = (**(code **)(inputSrc + 4))
                       (inputSrc,yylvalpp,scratchR5,scratchR6,scratchR7,scratchR8,*(int *)PTR__cpp_a7b7c0a4);
-    return inputSrc;
+    return token;
   }
   return token;
 }

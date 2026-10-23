@@ -150,7 +150,7 @@ local	_scan_token	puVar1	cppGlobalSlot	CONFIRMED	PTR__cpp: address of the global
 local	_scan_token	pcVar3	finalFn	CONFIRMED	in->final callback run when the stream is exhausted
 use	_scan_token	iVar2	finalResult	CONFIRMED	result of the final callback; 0 ends the scan with -1	^\s*if\ \(\(pcVar3\ !=\ \(code\ \*\)0x0\)\ \&\&\ \(iVar2\ =\ \(\*pcVar3\)\(\*\(undefined4\ \*\)puVar1\),\ iVar2\ ==\ 0\)\)\ \{$@1	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)PTR__cpp_a7b7c0a4\ \+\ 0x20\);$	all	none
 use	_scan_token	iVar2	inputSrc	CONFIRMED	cpp current input source after popping this one	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)PTR__cpp_a7b7c0a4\ \+\ 0x20\);$@1	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(iVar2\ \+\ 4\)\)$	all	none
-use	_scan_token	iVar2	inputSrc	CONFIRMED	cpp current input source after popping this one	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(iVar2\ \+\ 4\)\)$@1	^\s*return\ iVar2;$	rhs	all
+use	_scan_token	iVar2	inputSrc	CONFIRMED	cpp current input source after popping this one	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(iVar2\ \+\ 4\)\)$@1	^\s*return\ iVar2;$	rhs	none
 use	_scan_token	iVar2	token	CONFIRMED	token code from _ReadToken, or from the previous input source after the stream ended	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(iVar2\ \+\ 4\)\)$@1	^\s*\(iVar2,param_2,param_3,param_4,param_5,param_6,\*\(int\ \*\)PTR__cpp_a7b7c0a4\);$	lhs	none
 use	_scan_token	iVar2	token	CONFIRMED	token code from _ReadToken, or from the previous input source after the stream ended	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)_ReadToken\)\(param_1\[6\],param_2\);$@1		all	none
 local	_ReadFromTokenStream	param_1	ts	CONFIRMED	TokenStream to read from (rewound)
