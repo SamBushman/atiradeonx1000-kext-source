@@ -265,7 +265,7 @@ use	_InterpreterNoiseGeneratorCalculate3D	dVar5	amplitude	INFERRED	every definit
 use	_InterpreterRasterOpMachine_AlphaTest	uVar3	framebufferFormat	INFERRED	every definition is the result of a call whose name says it returns this	#3	+2	all	all
 use	_InterpreterRasterOpMachine_Blending	uVar6	framebufferFormat	INFERRED	every definition is the result of a call whose name says it returns this	#7	+2	all	all
 use	_PPCRuntimeCompilerLoadSourceNO	iVar4	chunkIndex	INFERRED	every definition is the result of a call whose name says it returns this	#41	+1	all	all
-use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	chunkIndex	INFERRED	every definition is the result of a call whose name says it returns this	#65	+2	all	all
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	convertWordCount	INFERRED	every definition is the result of a call whose name says it returns this	#65	+2	all	all
 use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	uVar4	framebufferFormat	INFERRED	every definition is the result of a call whose name says it returns this	#22	+32	all	all
 use	_PPCRuntimeCompilerWritePrologNO	iVar7	chunkIndex	INFERRED	every definition is the result of a call whose name says it returns this	#82	+3	all	all
 use	_PPCRuntimeCompilerWritePrologAV	iVar7	chunkIndex	INFERRED	every definition is the result of a call whose name says it returns this	#65	+30	all	all

@@ -273,3 +273,63 @@ local	_glpRTCAddAChunk_97be4088	param_1	chunk	CONFIRMED	zero-terminated array of
 local	_glpRTCAddAChunk_97be4088	param_2	dest	CONFIRMED	code cursor the words are copied to
 local	_glpRTCAddAChunk_97be4088	iVar1	word	CONFIRMED	the instruction word being copied
 local	_glpRTCAddAChunk_97be4088	iVar2	wordCount	CONFIRMED	number of words copied; returned
+local	_PPCRuntimeCompilerWriteDestinationNO	param_2	destIndex	INFERRED	destination operand index: word 0 is advanced by index*0x10
+local	_PPCRuntimeCompilerWriteDestinationNO	uVar2	storeRsField	INFERRED	RS register field of the emitted stfs: starts at register 16 (0x2000000) and advances one register (0x200000) per component
+local	_PPCRuntimeCompilerWriteDestinationNO	local_50	destDescWord0	CONFIRMED	word 0 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationNO	local_4c	destDescWord1	CONFIRMED	word 1 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationNO	local_48	destDescWord2	CONFIRMED	word 2 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationNO	local_44	destDescWord3	CONFIRMED	word 3 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationNO	local_40	destDescWord4	CONFIRMED	word 4 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationNO	local_3c	destDescWord5	CONFIRMED	word 5 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationNO	local_38	destDescWord6	CONFIRMED	word 6 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationNO	local_34	destDescWord7	CONFIRMED	word 7 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationNO	local_30	destDescWord8	CONFIRMED	word 8 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationAV	param_2	destIndex	INFERRED	destination operand index: word 0 is advanced by index*0x10
+use	_PPCRuntimeCompilerWriteDestinationAV	puVar2	swizzleDescPtr	INFERRED	address of destination descriptor word 2, passed with register 2 to SwizzleRegisterAV	^\s*puVar2\ =\ \&local_48;$	+3
+local	_PPCRuntimeCompilerWriteDestinationAV	local_50	destDescWord0	CONFIRMED	word 0 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationAV	local_4c	destDescWord1	CONFIRMED	word 1 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationAV	local_48	destDescWord2	CONFIRMED	word 2 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationAV	local_44	destDescWord3	CONFIRMED	word 3 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationAV	local_40	destDescWord4	CONFIRMED	word 4 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationAV	local_3c	destDescWord5	CONFIRMED	word 5 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationAV	local_38	destDescWord6	CONFIRMED	word 6 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationAV	local_34	destDescWord7	CONFIRMED	word 7 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCRuntimeCompilerWriteDestinationAV	local_30	destDescWord8	CONFIRMED	word 8 of the 9-word destination operand descriptor copied from instruction +0xc (word 0 base offset, word 4 low half = type code, word 7 low byte = component write mask)
+local	_PPCNoiseGeneratorInitialise	param_1	noiseTable	INFERRED	noise state block (0xa20 bytes): permutation bytes at +0, gradient floats at +0x210, duplicated tables at +0x100.. and +0x610..; advanced by the final duplicate loop
+local	_PPCNoiseGeneratorInitialise	uVar1	swapByte	CONFIRMED	permutation byte held while two entries are swapped
+local	_PPCNoiseGeneratorInitialise	uVar2	gradientWord	CONFIRMED	gradient float copied into the duplicated table
+local	_PPCNoiseGeneratorInitialise	pfVar5	gradientCursor	CONFIRMED	walks the 256 gradient floats at +0x210
+use	_PPCNoiseGeneratorInitialise	puVar7	shuffleCursor	CONFIRMED	walks the permutation backwards from 255 to 1 for the shuffle	^\s*puVar7\ =\ param_1\ \+\ 0xff;$	+1
+use	_PPCNoiseGeneratorInitialise	puVar7	shuffleCursor	CONFIRMED	walks the permutation backwards from 255 to 1 for the shuffle	^\s*uVar1\ =\ \*puVar7;$	+1
+use	_PPCNoiseGeneratorInitialise	puVar7	shuffleCursor	CONFIRMED	walks the permutation backwards from 255 to 1 for the shuffle	^\s*\*puVar7\ =\ param_1\[iVar4\];$	+2
+use	_PPCNoiseGeneratorInitialise	puVar7	shuffleCursor	CONFIRMED	walks the permutation backwards from 255 to 1 for the shuffle	^\s*\}\ while\ \(puVar7\ !=\ param_1\);$	+1
+use	_PPCNoiseGeneratorInitialise	puVar7	duplicateCursor	CONFIRMED	walks the gradient table (+0x210) in 4-byte steps while it is duplicated at +0x610	^\s*puVar7\ =\ param_1;$	+1
+use	_PPCNoiseGeneratorInitialise	puVar7	duplicateCursor	CONFIRMED	walks the gradient table (+0x210) in 4-byte steps while it is duplicated at +0x610	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(puVar7\ \+\ 0x210\);$	+1
+use	_PPCNoiseGeneratorInitialise	puVar7	duplicateCursor	CONFIRMED	walks the gradient table (+0x210) in 4-byte steps while it is duplicated at +0x610	^\s*\*\(undefined4\ \*\)\(puVar7\ \+\ 0x610\)\ =\ uVar2;$	+2
+use	_PPCNoiseGeneratorInitialise	puVar7	duplicateCursor	CONFIRMED	walks the gradient table (+0x210) in 4-byte steps while it is duplicated at +0x610	^\s*return\ puVar7;$	+1
+use	_PPCNoiseGeneratorInitialise	iVar4	swapIndex	CONFIRMED	random index in 0..255 chosen for the swap	^\s*iVar4\ =\ uVar6\ \+\ \(\(\(int\)uVar6\ >>\ 8\)\ \+\ \(uint\)\(\(int\)uVar6\ <\ 0\ \&\&\ \(uVar6\ \&\ 0xff\)\ !=\ 0\)\)\ \*\ \-0x100;$	+2
+use	_PPCNoiseGeneratorInitialise	iVar4	swapIndex	CONFIRMED	random index in 0..255 chosen for the swap	^\s*param_1\[iVar4\]\ =\ uVar1;$	+1
+use	_PPCNoiseGeneratorInitialise	iVar4	duplicateCountdown	CONFIRMED	0x102 entries still to duplicate	^\s*iVar4\ =\ 0x102;$	+1
+use	_PPCNoiseGeneratorInitialise	iVar4	duplicateCountdown	CONFIRMED	0x102 entries still to duplicate	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+local	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	bVar1	colorMaskActive	INFERRED	buffer-mask stage enabled and some colour channel is masked out
+local	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	bVar2	logicOpActive	INFERRED	logic-op stage enabled and the operation is not CLEAR/AND/..: value above 3
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	emulator	CONFIRMED	compiler +0xe20: the emulator context (program info at +0xd80)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe20\);$	+1
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	emulator	CONFIRMED	compiler +0xe20: the emulator context (program info at +0xd80)	^\s*if\ \(\(\(\*\(uint\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0xd80\)\ \+\ 0x3c\)\ \&\ 0x40\)\ !=\ 0\)\ \&\&$	+2
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	emulator	CONFIRMED	compiler +0xe20: the emulator context (program info at +0xd80)	^\s*if\ \(\(\(\*\(uint\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0xd80\)\ \+\ 0x3c\)\ \&\ 0x20\)\ !=\ 0\)\ \&\&$	+2
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	emulator	CONFIRMED	compiler +0xe20: the emulator context (program info at +0xd80)	^\s*if\ \(\(\*\(uint\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0xd80\)\ \+\ 0x3c\)\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	emulator	CONFIRMED	compiler +0xe20: the emulator context (program info at +0xd80)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe20\);$@2	+1
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	emulator	CONFIRMED	compiler +0xe20: the emulator context (program info at +0xd80)	^\s*if\ \(\(\*\(uint\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0xd80\)\ \+\ 0x3c\)\ \&\ 6\)\ !=\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	emulator	CONFIRMED	compiler +0xe20: the emulator context (program info at +0xd80)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe20\);$@3	+1
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	emulator	CONFIRMED	compiler +0xe20: the emulator context (program info at +0xd80)	^\s*if\ \(\(\(\(\*\(uint\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0xd80\)\ \+\ 0x3c\)\ \&\ 8\)\ !=\ 0\)\ \|\|\ \(bVar2\)\)\ \|\|\ \(bVar1\)\)\ \{$	+2
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	emulator	CONFIRMED	compiler +0xe20: the emulator context (program info at +0xd80)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe20\);$@4	+1
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	emulator	CONFIRMED	compiler +0xe20: the emulator context (program info at +0xd80)	^\s*if\ \(\(\*\(uint\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0xd80\)\ \+\ 0x3c\)\ \&\ 8\)\ !=\ 0\)\ \{$	+1
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	emulator	CONFIRMED	compiler +0xe20: the emulator context (program info at +0xd80)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xe20\);$@5	+1
+use	_PPCRuntimeCompilerWriteFinalFragmentToBuffer	iVar6	emulator	CONFIRMED	compiler +0xe20: the emulator context (program info at +0xd80)	^\s*if\ \(\(\*\(uint\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0xd80\)\ \+\ 0x3c\)\ \&\ 0x20\)\ !=\ 0\)\ \{$	+1
+local	_PPCRuntimeCompilerTestConditionRegisterAV	param_2	condDescWord0	INFERRED	leading word of the by-value condition operand descriptor (spilled, unused)
+local	_PPCRuntimeCompilerTestConditionRegisterAV	param_3	condDescWord1	INFERRED	second descriptor word (spilled, unused)
+local	_PPCRuntimeCompilerTestConditionRegisterAV	param_4	condDescWord2	INFERRED	third descriptor word (spilled, unused)
+local	_PPCRuntimeCompilerTestConditionRegisterAV	param_5	condDescWord3	INFERRED	fourth descriptor word (spilled, unused)
+local	_PPCRuntimeCompilerTestConditionRegisterAV	param_6	condDescWord4	INFERRED	fifth descriptor word (spilled, unused)
+local	_PPCRuntimeCompilerTestConditionRegisterAV	param_7	condDescWord5	INFERRED	sixth descriptor word (spilled, unused)
+local	_PPCRuntimeCompilerTestConditionRegisterAV	param_8	condDescWord6	INFERRED	seventh descriptor word (spilled, unused)
+local	_PPCRuntimeCompilerTestConditionRegisterAV	param_9	conditionWord	CONFIRMED	last descriptor word: bits 16..23 select the condition (0..7), bytes at +2.. give the swizzle

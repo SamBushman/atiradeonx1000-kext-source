@@ -741,9 +741,9 @@ int TPPStreamCompiler__newIndirectOperandFromConstant(this, parseOperand, type)
   unsigned char * newChunk;
   undefined4 a1;
   undefined4 a1_00;
-  undefined4 in_r6;
+  undefined4 leftoverR6;
   int slotMatched;
-  int in_r8;
+  int leftoverR8;
   undefined4 *valueCursor;
   int constantList;
   int slotIndex;
@@ -780,7 +780,7 @@ int TPPStreamCompiler__newIndirectOperandFromConstant(this, parseOperand, type)
   __ZN11ParseSymbolC1Ev(newSymbol);
   matchedChunk = 0;
   typeNominalSize = (**(code **)(*(int *)typeSaved + 0x2c))
-                    (typeSaved,a1,type,in_r6,slotMatched,in_r8,typeSaved);
+                    (typeSaved,a1,type,leftoverR6,slotMatched,leftoverR8,typeSaved);
   operandValueCount = ParseOperand__GetBaseSize(parseOperand);
   constantSlotCount = (operandValueCount - 1U) / typeNominalSize + 1;
   if (chunkCursor == 0) {
@@ -860,7 +860,7 @@ LAB_97bc4c8c:
           *(uint *)(newSymbol + 0x28) = chunkWord0 & 0xffff;
           ParseSymbol__SetName(newSymbol,symbolNameText);
           typeQualifier = (**(code **)(*(int *)typeSaved + 0x24))
-                             (typeSaved,a1_00,constantIndex,operandGlTypeWord,slotMatched,in_r8,typeSaved);
+                             (typeSaved,a1_00,constantIndex,operandGlTypeWord,slotMatched,leftoverR8,typeSaved);
           *(uint *)(newSymbol + 0x38) = (uint)(typeQualifier != 0);
           ParseSymbol__SetChunk(newSymbol,newChunk);
           *(undefined4 *)(newSymbol + 0x44) = 0;
@@ -913,7 +913,7 @@ LAB_97bc4c8c:
         else {
           operandGlType = *(ushort *)(*(int *)parseOperand + 0x2c);
         }
-        in_r8 = constantValues[0];
+        leftoverR8 = constantValues[0];
         if (usageGlTypes[0] == operandGlType) {
           constantValues[5] = typeNominalSize ^ 0x80000000;
           constantValues[4] = 0x43300000;
@@ -987,7 +987,7 @@ LAB_97bc4a38:
                 else {
                   operandGlType = *(ushort *)(*(int *)parseOperand + 0x2c);
                 }
-                in_r8 = constantValues[0];
+                leftoverR8 = constantValues[0];
                 if (usageGlTypes[0] == operandGlType) {
                   constantValues[5] = typeNominalSize ^ 0x80000000;
                   constantValues[4] = 0x43300000;
@@ -1101,17 +1101,17 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, i
   void *elementOperand;
   unsigned char * combinedResultOperand;
   uint combineStreamType;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
-  undefined4 extraout_r4_03;
-  undefined4 extraout_r4_04;
+  undefined4 leftoverR4;
+  undefined4 leftoverR4_00;
+  undefined4 leftoverR4_01;
+  undefined4 leftoverR4_02;
+  undefined4 leftoverR4_03;
+  undefined4 leftoverR4_04;
   unsigned char ** operandAArg;
   unsigned char ** operandBArg;
-  undefined4 in_r8;
+  undefined4 leftoverR8;
   undefined4 uVar14;
-  unsigned char * in_r10;
+  unsigned char * leftoverR10;
   undefined4 uVar15;
   int fieldIndex;
   int operandSide;
@@ -1182,20 +1182,20 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, i
       opSrc2A = 0;
       opSrc2B = 0;
       opWord13 = 0;
-      ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&srcDescA,this,operandSlots[0],operandBArg,isEqualTestArg,in_r8,0,0);
+      ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&srcDescA,this,operandSlots[0],operandBArg,isEqualTestArg,leftoverR8,0,0);
       opSrc0A = srcDescA;
       opSrc0B = srcDescB;
       if (TPPStreamCompiler__equalOperands__source0Indirect != 0) {
         opSrc0A = srcDescA & 0x8fffff00 | 0x80000000;
       }
-      ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&srcDescA,this,operandSlots[1],operandBArg,isEqualTestArg,in_r8,srcDescA,uVar9);
+      ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&srcDescA,this,operandSlots[1],operandBArg,isEqualTestArg,leftoverR8,srcDescA,uVar9);
       opSrc1A = srcDescA;
       opSrc1B = srcDescB;
       if (TPPStreamCompiler__equalOperands__source1Indirect != 0) {
         opSrc1A = srcDescA & 0x8fffff00 | 0x80000000;
       }
       resultOperand[0] = (unsigned char *)((int (*)())TPPStreamCompiler__newTemporary)(this,type);
-      ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&srcDescA,this,resultOperand[0],operandBArg,isEqualTestArg,in_r8);
+      ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&srcDescA,this,resultOperand[0],operandBArg,isEqualTestArg,leftoverR8);
       opDest1 = srcDescB;
       compareOpcode = 0x31;
       opDest0 = srcDescA;
@@ -1282,13 +1282,13 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, i
             opAuxA = 0;
             opAuxB = 0;
             opWord13 = 0;
-            ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&elemDescA,this,combinedResultOperand,operandAArg,isEqualTestArg,in_r8);
+            ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&elemDescA,this,combinedResultOperand,operandAArg,isEqualTestArg,leftoverR8);
             opDest0 = elemDescA;
             opDest1 = elemDescB;
-            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&elemDescA,this,elementResultOperand,operandAArg,isEqualTestArg,in_r8,elementSourceSymbol,in_r10);
+            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&elemDescA,this,elementResultOperand,operandAArg,isEqualTestArg,leftoverR8,elementSourceSymbol,leftoverR10);
             opSrc0A = elemDescA;
             opSrc0B = elemDescB;
-            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&elemDescA,this,resultOperand[0],operandAArg,isEqualTestArg,in_r8,elementSourceSymbol,in_r10
+            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&elemDescA,this,resultOperand[0],operandAArg,isEqualTestArg,leftoverR8,elementSourceSymbol,leftoverR10
                       );
             opHeader = ((isEqualTest == 0) + 0x24) * 0x40000 | opHeader & 0xfc03ffff;
             opFlags = (opDest0 >> 0xc & 1) << 0x1c | opFlags & 0xefffffff;
@@ -1300,7 +1300,7 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, i
             else {
               glTypeCode = *(ushort *)(*(int *)resultOperand[0] + 0x2c);
             }
-            in_r10 = resultOperand[0];
+            leftoverR10 = resultOperand[0];
             combineStreamType = GetPPStreamTypeForGLType((uint)glTypeCode);
             opFlags = (combineStreamType & 7) << 0x17 | opFlags & 0xfc7fffff;
             arrayCombineLogicalSize = ParseOperand__GetLogicalSize(resultOperand[0]);
@@ -1333,7 +1333,7 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, i
             fieldType = *(int **)(fieldsBegin + fieldIndex * 8);
             parentName = *(unsigned char ***)(*(int *)operandSlots[operandSide] + 0x14);
             fieldNameString = (**(code **)(*fieldType + 0x1c))
-                              (fieldType,(int)uVar19,operandAArg,operandBArg,isEqualTestArg,in_r8,operandSlots[operandSide]);
+                              (fieldType,(int)uVar19,operandAArg,operandBArg,isEqualTestArg,leftoverR8,operandSlots[operandSide]);
             *(undefined1 *)(*(int *)(fieldNameString + 4) + *(int *)(*(int *)(fieldNameString + 4) + -0xc)) =
                  *DAT_a7b7bd9c;
             fieldNameChars = *(unsigned char ***)(fieldNameString + 4);
@@ -1364,11 +1364,11 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, i
             ParseSymbol__SetParseTreeType(elementSymbol,*(unsigned char **)(*(int *)(structFieldList + 4) + fieldIndex * 8));
             *(undefined4 *)(elementSymbol + 0x28) = *(undefined4 *)(*(int *)operandSlots[operandSide] + 0x28);
             *(unsigned char **)operandSlots[operandSide + 2] = elementSymbol;
-            uVar9 = extraout_r4;
+            uVar9 = leftoverR4;
             if ((*(short *)(elementSymbol + 0x2c) != 0x7ffe) && (*(short *)(elementSymbol + 0x2c) != 0x7fff)) {
               ParseSymbolTable__processOperand
                         (*(unsigned char **)(this + 0x68),operandSlots[operandSide + 2]);
-              uVar9 = extraout_r4_00;
+              uVar9 = leftoverR4_00;
             }
             elementResultOperand = resultOperand[0];
             uVar19 = CONCAT44(resultOperand[0],uVar9);
@@ -1385,14 +1385,14 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, i
           if (operandSlots[2] != (void *)0x0) {
             __ZN12ParseOperandD1Ev(operandSlots[2]);
             __ZdlPv(combinedResultOperand);
-            uVar19 = CONCAT44(resultOperand[0],extraout_r4_01);
+            uVar19 = CONCAT44(resultOperand[0],leftoverR4_01);
           }
           combinedResultOperand = operandSlots[3];
           resultOperand[0] = (unsigned char *)((ulonglong)uVar19 >> 0x20);
           if (operandSlots[3] != (void *)0x0) {
             __ZN12ParseOperandD1Ev(operandSlots[3]);
             __ZdlPv(combinedResultOperand);
-            uVar19 = CONCAT44(resultOperand[0],extraout_r4_02);
+            uVar19 = CONCAT44(resultOperand[0],leftoverR4_02);
           }
           resultOperand[0] = (unsigned char *)((ulonglong)uVar19 >> 0x20);
           if ((elementResultOperand != (unsigned char *)0x0) && (resultOperand[0] != (unsigned char *)0x0)) {
@@ -1413,13 +1413,13 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, i
             opSrc2B = 0;
             opWord13 = 0;
             opHeader = 0x40000000;
-            ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&fieldDescA,this,structCombinedResultOperand,operandBArg,isEqualTestArg,in_r8);
+            ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&fieldDescA,this,structCombinedResultOperand,operandBArg,isEqualTestArg,leftoverR8);
             opDest0 = fieldDescA;
             opDest1 = fieldDescB;
-            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&fieldDescA,this,elementResultOperand,operandBArg,isEqualTestArg,in_r8,uVar14,uVar15);
+            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&fieldDescA,this,elementResultOperand,operandBArg,isEqualTestArg,leftoverR8,uVar14,uVar15);
             opSrc0A = fieldDescA;
             opSrc0B = fieldDescB;
-            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&fieldDescA,this,resultOperand[0],operandBArg,isEqualTestArg,in_r8,uVar14,uVar15);
+            ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&fieldDescA,this,resultOperand[0],operandBArg,isEqualTestArg,leftoverR8,uVar14,uVar15);
             opHeader = ((isEqualTest == 0) + 0x24) * 0x40000 | opHeader & 0xfc03ffff;
             opFlags = (opDest0 >> 0xc & 1) << 0x1c | opFlags & 0xefffffff;
             opSrc1A = fieldDescA;
@@ -1440,11 +1440,11 @@ int TPPStreamCompiler__equalOperands(this, type, parseOperand1, parseOperand2, i
             __ZN12ParseOperandD1Ev(elementResultOperand);
             __ZdlPv(elementResultOperand);
             elementResultOperand = resultOperand[0];
-            uVar19 = CONCAT44(structCombinedResultOperand,extraout_r4_03);
+            uVar19 = CONCAT44(structCombinedResultOperand,leftoverR4_03);
             if (resultOperand[0] != (unsigned char *)0x0) {
               __ZN12ParseOperandD1Ev(resultOperand[0]);
               __ZdlPv(elementResultOperand);
-              uVar19 = CONCAT44(structCombinedResultOperand,extraout_r4_04);
+              uVar19 = CONCAT44(structCombinedResultOperand,leftoverR4_04);
             }
           }
           resultOperand[0] = (unsigned char *)((ulonglong)uVar19 >> 0x20);
@@ -1645,19 +1645,19 @@ int TPPStreamCompiler__assignOperands(this, parseOperand1, parseOperand2, allowC
   unsigned char *childOperand;
   unsigned char * childSymbol;
   void *elemOperand;
-  unsigned char * extraout_r4;
-  unsigned char * extraout_r4_00;
-  unsigned char * extraout_r4_01;
-  unsigned char * extraout_r4_02;
-  unsigned char * extraout_r4_03;
+  unsigned char * leftoverR4;
+  unsigned char * leftoverR4_00;
+  unsigned char * leftoverR4_01;
+  unsigned char * leftoverR4_02;
+  unsigned char * leftoverR4_03;
   unsigned char ** ppPVar9;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
+  undefined4 leftoverR7;
+  undefined4 leftoverR8;
+  undefined4 leftoverR9;
   int nameBufferSize;
   int fieldNameString;
   int fieldsBegin;
-  undefined4 in_r10;
+  undefined4 leftoverR10;
   int operandSide;
   int sideCountdown;
   int destLogicalSize;
@@ -1720,7 +1720,7 @@ int TPPStreamCompiler__assignOperands(this, parseOperand1, parseOperand2, allowC
             fieldType = *(int **)(fieldsBegin + fieldCountdown * 8);
             parentName = *(unsigned char ***)(*(int *)operandSlots[operandSide] + 0x14);
             fieldNameString = (**(code **)(*fieldType + 0x1c))
-                               (fieldType,pPVar7,ppPVar9,iVar12,in_r7,in_r8,operandSlots[operandSide]);
+                               (fieldType,pPVar7,ppPVar9,iVar12,leftoverR7,leftoverR8,operandSlots[operandSide]);
             *(undefined1 *)(*(int *)(fieldNameString + 4) + *(int *)(*(int *)(fieldNameString + 4) + -0xc)) =
                  *DAT_a7b7bd9c;
             fieldNameChars = *(int *)(fieldNameString + 4);
@@ -1751,11 +1751,11 @@ int TPPStreamCompiler__assignOperands(this, parseOperand1, parseOperand2, allowC
             ParseSymbol__SetParseTreeType(childSymbol,*(unsigned char **)(*(int *)(structFieldList + 4) + fieldCountdown * 8));
             *(undefined4 *)(childSymbol + 0x28) = *(undefined4 *)(*(int *)operandSlots[operandSide] + 0x28);
             *(unsigned char **)operandSlots[operandSide + 2] = childSymbol;
-            pPVar7 = extraout_r4;
+            pPVar7 = leftoverR4;
             if ((*(short *)(childSymbol + 0x2c) != 0x7ffe) && (*(short *)(childSymbol + 0x2c) != 0x7fff)) {
               ParseSymbolTable__processOperand
                         (*(unsigned char **)(this + 0x68),operandSlots[operandSide + 2]);
-              pPVar7 = extraout_r4_00;
+              pPVar7 = leftoverR4_00;
             }
             operandSide = operandSide + 1;
             if (1 < operandSide) break;
@@ -1765,17 +1765,17 @@ int TPPStreamCompiler__assignOperands(this, parseOperand1, parseOperand2, allowC
           iVar12 = allowCopyPropagation;
           ((int (*)())TPPStreamCompiler__assignOperands)(this,operandSlots + 2,ppPVar9,allowCopyPropagation);
           operandToFree = operandSlots[2];
-          pPVar7 = extraout_r4_01;
+          pPVar7 = leftoverR4_01;
           if (operandSlots[2] != (void *)0x0) {
             __ZN12ParseOperandD1Ev(operandSlots[2]);
             __ZdlPv(operandToFree);
-            pPVar7 = extraout_r4_02;
+            pPVar7 = leftoverR4_02;
           }
           operandToFree = operandSlots[3];
           if (operandSlots[3] != (void *)0x0) {
             __ZN12ParseOperandD1Ev(operandSlots[3]);
             __ZdlPv(operandToFree);
-            pPVar7 = extraout_r4_03;
+            pPVar7 = leftoverR4_03;
           }
           if (fieldCountdown == 0) break;
           fieldsBegin = *(int *)(structFieldList + 4);
@@ -1846,13 +1846,13 @@ int TPPStreamCompiler__assignOperands(this, parseOperand1, parseOperand2, allowC
     opWord13 = 0;
     if (pendingOperand == (unsigned char *)0x0) {
       opHeader = 0x20000000;
-      ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&scratchDescA,this,*parseOperand1,iVar12,in_r7,in_r8);
+      ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&scratchDescA,this,*parseOperand1,iVar12,leftoverR7,leftoverR8);
       opDest0 = scratchDescA;
       opDest1 = scratchDescB;
       if (TPPStreamCompiler__assignOperands__destIndirect != 0) {
         opDest1 = scratchDescB & 0x800fffff | 0x80000000;
       }
-      ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&scratchDescA,this,*parseOperand2,iVar12,in_r7,in_r8,in_r9,in_r10)
+      ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&scratchDescA,this,*parseOperand2,iVar12,leftoverR7,leftoverR8,leftoverR9,leftoverR10)
       ;
       opSrc0A = scratchDescA;
       opSrc0B = scratchDescB;
@@ -1899,13 +1899,13 @@ int TPPStreamCompiler__assignOperands(this, parseOperand1, parseOperand2, allowC
       opHeader = opHeader & 0x1c03ffff | 0x41b40000;
       ((int (*)())__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_)(this,parseOperand1,parseOperand2,ppPVar9);
       ParseOperand__RemoveDirectIndex(*parseOperand1);
-      ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&scratchDescA,this,*parseOperand1,ppPVar9,in_r7,in_r8);
+      ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&scratchDescA,this,*parseOperand1,ppPVar9,leftoverR7,leftoverR8);
       opDest0 = scratchDescA;
       opDest1 = scratchDescB;
-      ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&scratchDescA,this,*parseOperand2,ppPVar9,in_r7,in_r8,in_r9,in_r10);
+      ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&scratchDescA,this,*parseOperand2,ppPVar9,leftoverR7,leftoverR8,leftoverR9,leftoverR10);
       opSrc0A = scratchDescA;
       opSrc0B = scratchDescB;
-      ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&scratchDescA,this,operandSlotsHigh[2],ppPVar9,in_r7,in_r8,in_r9,in_r10);
+      ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&scratchDescA,this,operandSlotsHigh[2],ppPVar9,leftoverR7,leftoverR8,leftoverR9,leftoverR10);
       opFlags = (opDest0 >> 0xc & 1) << 0x1c | opFlags & 0xefffffff;
       opSrc1A = scratchDescA;
       opSrc1B = scratchDescB;
@@ -1944,9 +1944,9 @@ int TPPStreamCompiler__getArrayOffset(this, arrayOperand)
   byte chunkKind;
   undefined4 *foundSymbol;
   unsigned char * elementSymbol;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r10;
+  undefined4 leftoverR7;
+  undefined4 leftoverR8;
+  undefined4 leftoverR10;
   uint baseRegister;
   uint elementRegister;
   char indexSuffix [20];
@@ -1989,8 +1989,8 @@ LAB_97bc6330:
     __ZdlPv(elementSymbol);
   }
   if (foundSymbol == (undefined4 *)0x0) {
-    TPPStreamCompiler__warning(this,(char *)0x0,*(char **)(*(int *)arrayOperand + 0x14),DAT_a7b7bd3c,in_r7,in_r8,
-            *(int *)arrayOperand,in_r10);
+    TPPStreamCompiler__warning(this,(char *)0x0,*(char **)(*(int *)arrayOperand + 0x14),DAT_a7b7bd3c,leftoverR7,leftoverR8,
+            *(int *)arrayOperand,leftoverR10);
     elementRegister = baseRegister;
     goto LAB_97bc6440;
   }
@@ -2026,8 +2026,8 @@ int TPPStreamCompiler__constructReplicate(this, parseOperand1, parseOperand2, pa
   int destLogicalSize;
   uint streamType;
   int *sourceOperand;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 leftoverR7;
+  undefined4 leftoverR8;
   undefined4 unusedArg7;
   undefined4 unusedArg8;
   int componentIndex;
@@ -2067,7 +2067,7 @@ int TPPStreamCompiler__constructReplicate(this, parseOperand1, parseOperand2, pa
   opSrc1B = 0;
   opSrc2A = 0;
   opSrc2B = 0;
-  ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&operandDescA,this,*parseOperand1,param_4,in_r7,in_r8);
+  ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&operandDescA,this,*parseOperand1,param_4,leftoverR7,leftoverR8);
   sourceOperand = *(int **)parseOperand2;
   opDest0 = operandDescA & 0xfffe1c2f | 0x6c;
   opDest1 = operandDescB;
@@ -2096,7 +2096,7 @@ int TPPStreamCompiler__constructReplicate(this, parseOperand1, parseOperand2, pa
     ((int (*)())TPPStreamCompiler__getConstantAsSourceVar)((unsigned char *)&operandDescA,(uint)this,constantWords,1,(uint)sourceGlType);
   }
   else {
-    ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&operandDescA,this,sourceOperand,param_4,in_r7,in_r8,unusedArg7,unusedArg8);
+    ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&operandDescA,this,sourceOperand,param_4,leftoverR7,leftoverR8,unusedArg7,unusedArg8);
   }
   opSrc0A = operandDescA;
   opSrc0B = operandDescB;
@@ -2153,8 +2153,8 @@ int TPPStreamCompiler__constructDiagonal(this, parseOperand1, parseOperand2, par
   int logicalSize;
   int zeroCountdown;
   uint destDescMasked;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 leftoverR7;
+  undefined4 leftoverR8;
   uint destDescWithOpcode;
   undefined4 unusedArg8;
   int *sourceOperand;
@@ -2233,7 +2233,7 @@ int TPPStreamCompiler__constructDiagonal(this, parseOperand1, parseOperand2, par
       fillauxA = 0;
       fillauxB = 0;
       fillflags = 0;
-      ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&operandDescA,this,*parseOperand1,param_4,in_r7,in_r8);
+      ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&operandDescA,this,*parseOperand1,param_4,leftoverR7,leftoverR8);
       sourceOperand = *(int **)parseOperand2;
       destDescMasked = operandDescA & 0xfffe1c0f;
       destDescWithOpcode = destDescMasked | 0x6c;
@@ -2285,10 +2285,10 @@ int TPPStreamCompiler__constructDiagonal(this, parseOperand1, parseOperand2, par
         diagsrc2B = 0;
         diagauxA = 0;
         diagauxB = 0;
-        ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&operandDescA,this,*parseOperand1,param_4,in_r7,in_r8);
+        ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&operandDescA,this,*parseOperand1,param_4,leftoverR7,leftoverR8);
         diagdest0 = operandDescA & 0xfffe1c03 | 0x6c;
         diagdest1 = operandDescB;
-        ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&operandDescA,this,*(undefined4 *)parseOperand2,param_4,in_r7,in_r8,
+        ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&operandDescA,this,*(undefined4 *)parseOperand2,param_4,leftoverR7,leftoverR8,
                    destDescWithOpcode,unusedArg8);
         diagsrc0A = operandDescA;
         diagsrc0B = operandDescB;
@@ -2386,7 +2386,7 @@ LAB_97bc6b98:
       logicalSize2 = ParseOperand__GetLogicalSize(*parseOperand1);
       fillflags = (logicalSize2 + -1) * 0x4000000 & 0xc000000U | fillflags & 0xf3f3ffff;
       param_4 = 0;
-      in_r7 = 0;
+      leftoverR7 = 0;
       ((int (*)())TPPStreamCompiler__AddOperation)((unsigned char *)this,parseOperand1,(unsigned char *)&fillheader,(char *)0x0,
                    0);
       diagonalCell = diagonalCell + 1;
@@ -2776,14 +2776,14 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
   int argFieldNameString;
   int parentNameLength;
   unsigned char * argFieldSymbol;
-  unsigned char ** extraout_r4;
-  unsigned char ** extraout_r4_00;
-  unsigned char ** extraout_r4_01;
-  unsigned char ** extraout_r4_02;
+  unsigned char ** leftoverR4;
+  unsigned char ** leftoverR4_00;
+  unsigned char ** leftoverR4_01;
+  unsigned char ** leftoverR4_02;
   unsigned char ** argCursor;
   uint remainingArgs;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 leftoverR7;
+  undefined4 leftoverR8;
   unsigned char *destOperand;
   uint a6;
   uint fieldCount;
@@ -2823,7 +2823,7 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
           remainingArgs = argCount;
           while( true ) {
             fieldType = *(int **)(fieldsBegin + fieldIndex * 8);
-            fieldNameString = (**(code **)(*fieldType + 0x1c))(fieldType,destOperandPtr,argCursor,remainingArgs,in_r7,in_r8,a6);
+            fieldNameString = (**(code **)(*fieldType + 0x1c))(fieldType,destOperandPtr,argCursor,remainingArgs,leftoverR7,leftoverR8,a6);
             a6 = *(uint *)(*(int *)(fieldNameString + 4) + -0xc);
             *(undefined1 *)(*(int *)(fieldNameString + 4) + a6) = **(undefined1 **)(local_54 + 0x4a30);
             fieldNameChars = *(uint *)(fieldNameString + 4);
@@ -2856,7 +2856,7 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
               if (*(short *)(argSymbol + 0x2c) == 0x7ffe) {
                 argParentName = *(int *)(argSymbol + 0x14);
                 argStructFieldList = *(int *)(*(int *)(argSymbol + 0xc) + 8);
-                destOperandPtr = extraout_r4;
+                destOperandPtr = leftoverR4;
                 if (argStructFieldList != 0) {
                   argFieldIndex = 0;
                   argFieldCount = *(int *)(argStructFieldList + 8) - *(int *)(argStructFieldList + 4) >> 3;
@@ -2923,7 +2923,7 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
                     } while (cleanupIndex < argFieldCount);
                   }
                   _free(argFieldOperands);
-                  destOperandPtr = extraout_r4_00;
+                  destOperandPtr = leftoverR4_00;
                 }
               }
               else {
@@ -2935,7 +2935,7 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
               if (childSymbol != (unsigned char *)0x0) {
                 __ZN11ParseSymbolD1Ev(childSymbol);
                 __ZdlPv(childSymbol);
-                destOperandPtr = extraout_r4_01;
+                destOperandPtr = leftoverR4_01;
               }
               *(undefined4 *)childOperandSlot = 0;
             }
@@ -2951,7 +2951,7 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
             if (childOperandSlot != (unsigned char *)0x0) {
               __ZN12ParseOperandD1Ev(childOperandSlot);
               __ZdlPv(operandToFree);
-              destOperandPtr = extraout_r4_02;
+              destOperandPtr = leftoverR4_02;
             }
             fieldIndex = fieldIndex + 1;
             if (fieldCount <= fieldIndex) break;
@@ -3110,11 +3110,11 @@ int TPPStreamCompiler__FinishScalerSelect(this, destOperandPtr)
   ushort pendingGlType;
   uint streamType;
   unsigned char ** pendingIndexSlotPtr;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 leftoverR7;
+  undefined4 leftoverR8;
   int pendingOperand;
   undefined4 recordLine;
-  undefined4 in_r10;
+  undefined4 leftoverR10;
   unsigned char * operandToFree;
   uint opHeader;
   uint opFlags;
@@ -3157,14 +3157,14 @@ int TPPStreamCompiler__FinishScalerSelect(this, destOperandPtr)
     ((int (*)())__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_)(this,(unsigned char **)(this + 0x88),destOperandPtr,pendingIndexSlotPtr);
     opHeader = opHeader & 0xfc03ffff | 0x1b40000;
     ParseOperand__RemoveDirectIndex(*(unsigned char **)(this + 0x88));
-    ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&operandDescA,this,*(undefined4 *)(this + 0x88),pendingIndexSlotPtr,in_r7,
-                        in_r8);
+    ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&operandDescA,this,*(undefined4 *)(this + 0x88),pendingIndexSlotPtr,leftoverR7,
+                        leftoverR8);
     opDest0 = operandDescA;
     opDest1 = operandDescB;
-    ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&operandDescA,this,*destOperandPtr,pendingIndexSlotPtr,in_r7,in_r8,recordLine,in_r10);
+    ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&operandDescA,this,*destOperandPtr,pendingIndexSlotPtr,leftoverR7,leftoverR8,recordLine,leftoverR10);
     opSrc0A = operandDescA;
     opSrc0B = operandDescB;
-    ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&operandDescA,this,pendingIndexSlots[0],pendingIndexSlotPtr,in_r7,in_r8,recordLine,in_r10);
+    ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&operandDescA,this,pendingIndexSlots[0],pendingIndexSlotPtr,leftoverR7,leftoverR8,recordLine,leftoverR10);
     opFlags = (opDest0 >> 0xc & 1) << 0x1c | opFlags & 0xefffffff;
     opSrc1A = operandDescA;
     opSrc1B = operandDescB;
@@ -3247,10 +3247,10 @@ int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi(this, oper
   unsigned char * operandType;
   uint tempStreamType;
   int tempLogicalSize;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 leftoverR7;
+  undefined4 leftoverR8;
   undefined4 recordLine;
-  undefined4 in_r10;
+  undefined4 leftoverR10;
   int aliasScanIndex2;
   int operandIndex;
   uint opHeader;
@@ -3307,14 +3307,14 @@ int __ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi(this, oper
         offsetOperandSlotPtr = &offsetOperand;
         ((int (*)())__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_)(this,&tempOperand,operands + operandIndex,offsetOperandSlotPtr);
         opHeader = opHeader & 0xfc03ffff | 0xe40000;
-        ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&operandDescA,this,tempOperand,offsetOperandSlotPtr,in_r7,in_r8);
+        ((int (*)())TPPStreamCompiler__getOperandAsDestVar)((unsigned char *)&operandDescA,this,tempOperand,offsetOperandSlotPtr,leftoverR7,leftoverR8);
         opDest0 = operandDescA;
         opDest1 = operandDescB;
         ParseOperand__RemoveDirectIndex(operands[operandIndex]);
-        ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&operandDescA,this,operands[operandIndex],offsetOperandSlotPtr,in_r7,in_r8,recordLine,in_r10);
+        ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&operandDescA,this,operands[operandIndex],offsetOperandSlotPtr,leftoverR7,leftoverR8,recordLine,leftoverR10);
         opSrc0A = operandDescA;
         opSrc0B = operandDescB;
-        ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&operandDescA,this,offsetOperand,offsetOperandSlotPtr,in_r7,in_r8,recordLine,in_r10);
+        ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&operandDescA,this,offsetOperand,offsetOperandSlotPtr,leftoverR7,leftoverR8,recordLine,leftoverR10);
         opFlags = (opDest0 >> 0xc & 1) << 0x1c | opFlags & 0xefffffff;
         opSrc1A = operandDescA;
         opSrc1B = operandDescB;
@@ -3803,9 +3803,9 @@ int TPPStreamCompiler__generateAddressLoad(this, operand)
   unsigned char * this;
   unsigned char * operand;
 {
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 leftoverR6;
+  undefined4 leftoverR7;
+  undefined4 leftoverR8;
   void *indexOperand;
   undefined4 opHeader;
   undefined4 opFlags;
@@ -3840,7 +3840,7 @@ int TPPStreamCompiler__generateAddressLoad(this, operand)
     opSrc2B = 0;
     opHeader = 0x21200000;
     opWord13 = 0;
-    ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&indexDescA,this,indexOperand,in_r6,in_r7,in_r8,0,0);
+    ((int (*)())TPPStreamCompiler__getOperandAsSourceVar)((unsigned char *)&indexDescA,this,indexOperand,leftoverR6,leftoverR7,leftoverR8,0,0);
     opDest0 = opDest0 & 0xfff1ffff | 0x82000;
     opSrc0A = indexDescA;
     opSrc0B = indexDescB;
@@ -4332,10 +4332,10 @@ int TPPStreamCompiler__parseIntermediateTree(this, root)
   void *position;
   void *allocation;
   int iVar1;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 leftoverR5;
+  undefined4 leftoverR6;
+  undefined4 leftoverR7;
+  undefined4 leftoverR8;
   void *oldTemporaryAllocator;
   unsigned char * labelQueue;
   bool succeeded;
@@ -4386,7 +4386,7 @@ int TPPStreamCompiler__parseIntermediateTree(this, root)
       }
     }
     *(undefined4 *)(*(int *)(this + 0x68) + 0x50) = 1;
-    (**(code **)(*(int *)root + 0x10))(root,this,in_r5,in_r6,in_r7,in_r8,*(int *)root);
+    (**(code **)(*(int *)root + 0x10))(root,this,leftoverR5,leftoverR6,leftoverR7,leftoverR8,*(int *)root);
     *(undefined4 *)(*(int *)(this + 0x68) + 0x50) = 0;
     if (*(int *)(this + 0xa8) == 1) {
       addressUsageRecord[0] = 0;
