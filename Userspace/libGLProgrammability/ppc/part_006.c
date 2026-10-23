@@ -4,21 +4,22 @@
 int _ShGetInfoLog(handle)
   int *handle;
 {
+  int linkerObj;
   undefined *terminalPtr;
-  int iVar2;
+  int compilerObj;
   int *infoSink;
   int result;
   
   result = 0;
   if (handle != (int *)0x0) {
-    iVar2 = (**(code **)(*handle + 8))(handle);
-    if (iVar2 == 0) {
-      iVar2 = (**(code **)(*handle + 0xc))(handle);
-      if (iVar2 == 0) {
+    compilerObj = (**(code **)(*handle + 8))(handle);
+    if (compilerObj == 0) {
+      linkerObj = (**(code **)(*handle + 0xc))(handle);
+      if (linkerObj == 0) {
         return 0;
       }
-      iVar2 = (**(code **)(*handle + 0xc))(handle);
-      infoSink = *(int **)(iVar2 + 0x84);
+      linkerObj = (**(code **)(*handle + 0xc))(handle);
+      infoSink = *(int **)(linkerObj + 0x84);
     }
     else {
       infoSink = (int *)(**(code **)(*handle + 8))(handle);
@@ -209,12 +210,12 @@ int _ShGetActiveUniform(handle, index, maxLength, lengthOut, sizeOut, typeOut, s
 }
 
 /* _ShGetUniformTypeInfo @ 0x97ba216c (116 bytes) */
-int _ShGetUniformTypeInfo(handle, index, param_3, param_4, param_5)
+int _ShGetUniformTypeInfo(handle, index, sizeOut, typeOut, stageUseOut)
   int *handle;
   long index;
-  long *param_3;
-  ulong *param_4;
-  uchar *param_5;
+  long *sizeOut;
+  ulong *typeOut;
+  uchar *stageUseOut;
 {
   unsigned char * linkerObj;
   undefined4 result;
@@ -223,7 +224,7 @@ int _ShGetUniformTypeInfo(handle, index, param_3, param_4, param_5)
   if ((handle != (int *)0x0) &&
      (linkerObj = (unsigned char *)(**(code **)(*handle + 0xc))(handle), linkerObj != (unsigned char *)0x0
      )) {
-    result = TGenericLinker__getUniformTypeInfo(linkerObj,index,param_3,param_4,param_5);
+    result = TGenericLinker__getUniformTypeInfo(linkerObj,index,sizeOut,typeOut,stageUseOut);
   }
   return result;
 }
@@ -543,23 +544,23 @@ int TVariable__dump(this, infoSink)
   char *qualifierString;
   int symbolName;
   int nameData;
-  unsigned char * this_00;
+  unsigned char *sinkBase;
   
   symbolName = *(int *)(this + 4);
-  this_00 = infoSink + 8;
+  sinkBase = infoSink + 8;
   nameData = *(int *)(symbolName + 4);
   *(undefined1 *)(nameData + *(int *)(nameData + -0xc)) = *DAT_a7b7ba80;
-  __ZN13TInfoSinkBase6appendEPKc(this_00,*(char **)(symbolName + 4));
-  __ZN13TInfoSinkBase6appendEPKc(this_00,": ");
+  __ZN13TInfoSinkBase6appendEPKc(sinkBase,*(char **)(symbolName + 4));
+  __ZN13TInfoSinkBase6appendEPKc(sinkBase,": ");
   qualifierString = (char *)getQualifierString(*(uint *)(this + 0x30) >> 0x19);
-  __ZN13TInfoSinkBase6appendEPKc(this_00,qualifierString);
-  __ZN13TInfoSinkBase6appendEPKc(this_00," ");
+  __ZN13TInfoSinkBase6appendEPKc(sinkBase,qualifierString);
+  __ZN13TInfoSinkBase6appendEPKc(sinkBase," ");
   basicString = (char *)TType__getBasicString(*(uint *)(this + 0x30) >> 0x13 & 0x3f);
-  __ZN13TInfoSinkBase6appendEPKc(this_00,basicString);
+  __ZN13TInfoSinkBase6appendEPKc(sinkBase,basicString);
   if ((*(uint *)(this + 0x30) & 0x200) != 0) {
-    __ZN13TInfoSinkBase6appendEPKc(this_00,"[0]");
+    __ZN13TInfoSinkBase6appendEPKc(sinkBase,"[0]");
   }
-  return __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
+  return __ZN13TInfoSinkBase6appendEPKc(sinkBase,"\n");
 }
 
 /* TFunction__dump @ 0x97ba2a38 (216 bytes) */
@@ -572,22 +573,22 @@ int TFunction__dump(this, infoSink)
   int nameData;
   char *basicString;
   int symbolName;
-  unsigned char * this_00;
+  unsigned char *sinkBase;
   
   terminalPtr = DAT_a7b7ba80;
   symbolName = *(int *)(this + 4);
-  this_00 = infoSink + 8;
+  sinkBase = infoSink + 8;
   nameData = *(int *)(symbolName + 4);
   *(undefined1 *)(nameData + *(int *)(nameData + -0xc)) = *DAT_a7b7ba80;
-  __ZN13TInfoSinkBase6appendEPKc(this_00,*(char **)(symbolName + 4));
-  __ZN13TInfoSinkBase6appendEPKc(this_00,": ");
+  __ZN13TInfoSinkBase6appendEPKc(sinkBase,*(char **)(symbolName + 4));
+  __ZN13TInfoSinkBase6appendEPKc(sinkBase,": ");
   basicString = (char *)TType__getBasicString(*(uint *)(this + 0x40) >> 0x13 & 0x3f);
-  __ZN13TInfoSinkBase6appendEPKc(this_00,basicString);
-  __ZN13TInfoSinkBase6appendEPKc(this_00," ");
+  __ZN13TInfoSinkBase6appendEPKc(sinkBase,basicString);
+  __ZN13TInfoSinkBase6appendEPKc(sinkBase," ");
   mangledName = (**(code **)(*(int *)this + 8))(this);
   *(undefined1 *)(*(int *)(mangledName + 4) + *(int *)(*(int *)(mangledName + 4) + -0xc)) = *terminalPtr;
-  __ZN13TInfoSinkBase6appendEPKc(this_00,*(char **)(mangledName + 4));
-  return __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
+  __ZN13TInfoSinkBase6appendEPKc(sinkBase,*(char **)(mangledName + 4));
+  return __ZN13TInfoSinkBase6appendEPKc(sinkBase,"\n");
 }
 
 /* TSymbolTableLevel__dump @ 0x97ba2b10 (112 bytes) */
@@ -753,7 +754,7 @@ int __ZN17TSymbolTableLevelD4Ev(this, staleR4)
   undefined4 staleR4;
 {
   int *symbol;
-  undefined4 extraout_r4;
+  undefined4 r4Out0;
   undefined4 staleR5;
   undefined4 staleR6;
   undefined4 staleR7;
@@ -771,7 +772,7 @@ int __ZN17TSymbolTableLevelD4Ev(this, staleR4)
       }
       std___Rb_tree_base_iterator___M_increment((unsigned char *)iter);
       treeEnd = *(int *)((int)this + 4);
-      staleR4 = extraout_r4;
+      staleR4 = r4Out0;
     } while (iter[0] != treeEnd);
   }
   if (*(int *)((int)this + 8) != 0) {
@@ -790,7 +791,8 @@ int TSymbolTableLevel__relateToOperator(this, str, op)
   char *str;
   undefined4 op;
 {
-  int iVar1;
+  int nameCompare;
+  int isFunction;
   int symbol;
   int iter [4];
   int treeEnd;
@@ -799,12 +801,12 @@ int TSymbolTableLevel__relateToOperator(this, str, op)
   iter[0] = *(int *)(treeEnd + 8);
   if (iter[0] != treeEnd) {
     do {
-      iVar1 = (**(code **)(**(int **)(iter[0] + 0x18) + 0xc))(*(int **)(iter[0] + 0x18));
-      if (iVar1 != 0) {
+      isFunction = (**(code **)(**(int **)(iter[0] + 0x18) + 0xc))(*(int **)(iter[0] + 0x18));
+      if (isFunction != 0) {
         symbol = *(int *)(iter[0] + 0x18);
-        iVar1 = __ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc
+        nameCompare = __ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc
                           (*(void **)(symbol + 4),str);
-        if (iVar1 == 0) {
+        if (nameCompare == 0) {
           *(undefined4 *)(symbol + 0x4c) = op;
         }
       }
@@ -922,8 +924,10 @@ int __ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   unsigned char * variable;
   unsigned char * map;
 {
-  uint uVar1;
-  int iVar2;
+  int nominalSize;
+  int srcUnionArray;
+  uint copyScratch;
+  int arrayInformationType;
   unsigned char * poolAllocator;
   undefined4 *unionArray;
   undefined4 assertLine;
@@ -933,41 +937,41 @@ int __ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   *(int *)this = DAT_a7b7ba78 + 8;
   *(undefined ***)((int)this + 0xc) = &PTR___ZN5TTypeD1Ev_a7b7d590;
   TType__copyType((unsigned char *)((int)this + 0xc),(unsigned char *)(variable + 0xc),map);
-  iVar2 = *(int *)(variable + 0x3c);
-  uVar1 = *(uint *)(variable + 0x34);
-  *(uint *)((int)this + 0x34) = uVar1;
-  if (iVar2 == 0) {
-    iVar2 = *(int *)(variable + 0x38);
+  arrayInformationType = *(int *)(variable + 0x3c);
+  copyScratch = *(uint *)(variable + 0x34);
+  *(uint *)((int)this + 0x34) = copyScratch;
+  if (arrayInformationType == 0) {
+    srcUnionArray = *(int *)(variable + 0x38);
     *(undefined4 *)((int)this + 0x3c) = 0;
-    uVar1 = 0;
-    if (iVar2 == 0) goto LAB_97ba314c;
-    uVar1 = *(uint *)(variable + 0x14);
-    if (uVar1 == 0) {
-      uVar1 = *(uint *)(variable + 0x30);
-      if ((uVar1 & 0x400) == 0) {
-        uVar1 = (int)(uVar1 << 0xd | uVar1 >> 0x13) >> 0x18;
+    copyScratch = 0;
+    if (srcUnionArray == 0) goto LAB_97ba314c;
+    copyScratch = *(uint *)(variable + 0x14);
+    if (copyScratch == 0) {
+      copyScratch = *(uint *)(variable + 0x30);
+      if ((copyScratch & 0x400) == 0) {
+        copyScratch = (int)(copyScratch << 0xd | copyScratch >> 0x13) >> 0x18;
       }
       else {
-        iVar2 = (int)(uVar1 << 0xd | uVar1 >> 0x13) >> 0x18;
-        uVar1 = iVar2 * iVar2;
+        nominalSize = (int)(copyScratch << 0xd | copyScratch >> 0x13) >> 0x18;
+        copyScratch = nominalSize * nominalSize;
       }
-      if (uVar1 == 1) {
+      if (copyScratch == 1) {
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
         unionArray = (undefined4 *)TPoolAllocator__allocate(poolAllocator,4);
         *(undefined4 **)((int)this + 0x38) = unionArray;
-        uVar1 = *(uint *)((int)this + 0x30) >> 0x13 & 0x3f;
-        if (uVar1 == 2) {
+        copyScratch = *(uint *)((int)this + 0x30) >> 0x13 & 0x3f;
+        if (copyScratch == 2) {
 LAB_97ba311c:
           *unionArray = **(undefined4 **)(variable + 0x38);
           return;
         }
-        if (uVar1 < 3) {
-          if (uVar1 == 1) {
+        if (copyScratch < 3) {
+          if (copyScratch == 1) {
             *unionArray = **(undefined4 **)(variable + 0x38);
             return;
           }
         }
-        else if (uVar1 == 3) goto LAB_97ba311c;
+        else if (copyScratch == 3) goto LAB_97ba311c;
         assertText = "false && \"Unknown type\"";
         assertLine = 0xb9;
       }
@@ -989,7 +993,7 @@ LAB_97ba311c:
              "/SourceCache/OpenGL/OpenGL-4.7.14/GLProgrammability/glslang/MachineIndependent/SymbolTable.cpp"
              ,assertLine,assertText);
 LAB_97ba314c:
-  *(uint *)((int)this + 0x38) = uVar1;
+  *(uint *)((int)this + 0x38) = copyScratch;
   return;
 }
 
@@ -999,8 +1003,10 @@ int __ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   unsigned char * variable;
   unsigned char * map;
 {
-  uint uVar1;
-  int iVar2;
+  int nominalSize;
+  int srcUnionArray;
+  uint copyScratch;
+  int arrayInformationType;
   unsigned char * poolAllocator;
   undefined4 *unionArray;
   undefined4 assertLine;
@@ -1010,41 +1016,41 @@ int __ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   *(int *)this = DAT_a7b7ba78 + 8;
   *(undefined ***)((int)this + 0xc) = &PTR___ZN5TTypeD1Ev_a7b7d590;
   TType__copyType((unsigned char *)((int)this + 0xc),(unsigned char *)(variable + 0xc),map);
-  iVar2 = *(int *)(variable + 0x3c);
-  uVar1 = *(uint *)(variable + 0x34);
-  *(uint *)((int)this + 0x34) = uVar1;
-  if (iVar2 == 0) {
-    iVar2 = *(int *)(variable + 0x38);
+  arrayInformationType = *(int *)(variable + 0x3c);
+  copyScratch = *(uint *)(variable + 0x34);
+  *(uint *)((int)this + 0x34) = copyScratch;
+  if (arrayInformationType == 0) {
+    srcUnionArray = *(int *)(variable + 0x38);
     *(undefined4 *)((int)this + 0x3c) = 0;
-    uVar1 = 0;
-    if (iVar2 == 0) goto LAB_97ba314c;
-    uVar1 = *(uint *)(variable + 0x14);
-    if (uVar1 == 0) {
-      uVar1 = *(uint *)(variable + 0x30);
-      if ((uVar1 & 0x400) == 0) {
-        uVar1 = (int)(uVar1 << 0xd | uVar1 >> 0x13) >> 0x18;
+    copyScratch = 0;
+    if (srcUnionArray == 0) goto LAB_97ba314c;
+    copyScratch = *(uint *)(variable + 0x14);
+    if (copyScratch == 0) {
+      copyScratch = *(uint *)(variable + 0x30);
+      if ((copyScratch & 0x400) == 0) {
+        copyScratch = (int)(copyScratch << 0xd | copyScratch >> 0x13) >> 0x18;
       }
       else {
-        iVar2 = (int)(uVar1 << 0xd | uVar1 >> 0x13) >> 0x18;
-        uVar1 = iVar2 * iVar2;
+        nominalSize = (int)(copyScratch << 0xd | copyScratch >> 0x13) >> 0x18;
+        copyScratch = nominalSize * nominalSize;
       }
-      if (uVar1 == 1) {
+      if (copyScratch == 1) {
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
         unionArray = (undefined4 *)TPoolAllocator__allocate(poolAllocator,4);
         *(undefined4 **)((int)this + 0x38) = unionArray;
-        uVar1 = *(uint *)((int)this + 0x30) >> 0x13 & 0x3f;
-        if (uVar1 == 2) {
+        copyScratch = *(uint *)((int)this + 0x30) >> 0x13 & 0x3f;
+        if (copyScratch == 2) {
 LAB_97ba311c:
           *unionArray = **(undefined4 **)(variable + 0x38);
           return;
         }
-        if (uVar1 < 3) {
-          if (uVar1 == 1) {
+        if (copyScratch < 3) {
+          if (copyScratch == 1) {
             *unionArray = **(undefined4 **)(variable + 0x38);
             return;
           }
         }
-        else if (uVar1 == 3) goto LAB_97ba311c;
+        else if (copyScratch == 3) goto LAB_97ba311c;
         assertText = "false && \"Unknown type\"";
         assertLine = 0xb9;
       }
@@ -1066,7 +1072,7 @@ LAB_97ba311c:
              "/SourceCache/OpenGL/OpenGL-4.7.14/GLProgrammability/glslang/MachineIndependent/SymbolTable.cpp"
              ,assertLine,assertText);
 LAB_97ba314c:
-  *(uint *)((int)this + 0x38) = uVar1;
+  *(uint *)((int)this + 0x38) = copyScratch;
   return;
 }
 
@@ -1076,8 +1082,10 @@ int __ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   unsigned char * variable;
   unsigned char * map;
 {
-  uint uVar1;
-  int iVar2;
+  int nominalSize;
+  int srcUnionArray;
+  uint copyScratch;
+  int arrayInformationType;
   unsigned char * poolAllocator;
   undefined4 *unionArray;
   undefined4 assertLine;
@@ -1087,41 +1095,41 @@ int __ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   *(int *)this = DAT_a7b7ba78 + 8;
   *(undefined ***)((int)this + 0xc) = &PTR___ZN5TTypeD1Ev_a7b7d590;
   TType__copyType((unsigned char *)((int)this + 0xc),(unsigned char *)(variable + 0xc),map);
-  iVar2 = *(int *)(variable + 0x3c);
-  uVar1 = *(uint *)(variable + 0x34);
-  *(uint *)((int)this + 0x34) = uVar1;
-  if (iVar2 == 0) {
-    iVar2 = *(int *)(variable + 0x38);
+  arrayInformationType = *(int *)(variable + 0x3c);
+  copyScratch = *(uint *)(variable + 0x34);
+  *(uint *)((int)this + 0x34) = copyScratch;
+  if (arrayInformationType == 0) {
+    srcUnionArray = *(int *)(variable + 0x38);
     *(undefined4 *)((int)this + 0x3c) = 0;
-    uVar1 = 0;
-    if (iVar2 == 0) goto LAB_97ba314c;
-    uVar1 = *(uint *)(variable + 0x14);
-    if (uVar1 == 0) {
-      uVar1 = *(uint *)(variable + 0x30);
-      if ((uVar1 & 0x400) == 0) {
-        uVar1 = (int)(uVar1 << 0xd | uVar1 >> 0x13) >> 0x18;
+    copyScratch = 0;
+    if (srcUnionArray == 0) goto LAB_97ba314c;
+    copyScratch = *(uint *)(variable + 0x14);
+    if (copyScratch == 0) {
+      copyScratch = *(uint *)(variable + 0x30);
+      if ((copyScratch & 0x400) == 0) {
+        copyScratch = (int)(copyScratch << 0xd | copyScratch >> 0x13) >> 0x18;
       }
       else {
-        iVar2 = (int)(uVar1 << 0xd | uVar1 >> 0x13) >> 0x18;
-        uVar1 = iVar2 * iVar2;
+        nominalSize = (int)(copyScratch << 0xd | copyScratch >> 0x13) >> 0x18;
+        copyScratch = nominalSize * nominalSize;
       }
-      if (uVar1 == 1) {
+      if (copyScratch == 1) {
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
         unionArray = (undefined4 *)TPoolAllocator__allocate(poolAllocator,4);
         *(undefined4 **)((int)this + 0x38) = unionArray;
-        uVar1 = *(uint *)((int)this + 0x30) >> 0x13 & 0x3f;
-        if (uVar1 == 2) {
+        copyScratch = *(uint *)((int)this + 0x30) >> 0x13 & 0x3f;
+        if (copyScratch == 2) {
 LAB_97ba311c:
           *unionArray = **(undefined4 **)(variable + 0x38);
           return;
         }
-        if (uVar1 < 3) {
-          if (uVar1 == 1) {
+        if (copyScratch < 3) {
+          if (copyScratch == 1) {
             *unionArray = **(undefined4 **)(variable + 0x38);
             return;
           }
         }
-        else if (uVar1 == 3) goto LAB_97ba311c;
+        else if (copyScratch == 3) goto LAB_97ba311c;
         assertText = "false && \"Unknown type\"";
         assertLine = 0xb9;
       }
@@ -1143,7 +1151,7 @@ LAB_97ba311c:
              "/SourceCache/OpenGL/OpenGL-4.7.14/GLProgrammability/glslang/MachineIndependent/SymbolTable.cpp"
              ,assertLine,assertText);
 LAB_97ba314c:
-  *(uint *)((int)this + 0x38) = uVar1;
+  *(uint *)((int)this + 0x38) = copyScratch;
   return;
 }
 
@@ -1152,13 +1160,13 @@ int TVariable__clone(this, map)
   unsigned char * this;
   unsigned char * map;
 {
-  unsigned char * this_00;
-  void *this_01;
+  unsigned char *poolAllocator;
+  void *clone;
   
-  this_00 = (unsigned char *)GetGlobalPoolAllocator();
-  this_01 = (void *)TPoolAllocator__allocate(this_00,0x40);
-  ((int (*)())__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE)(this_01,this,map);
-  return this_01;
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  clone = (void *)TPoolAllocator__allocate(poolAllocator,0x40);
+  ((int (*)())__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE)(clone,this,map);
+  return clone;
 }
 
 /* __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE @ 0x97ba31b0 (4 bytes) */
@@ -1167,17 +1175,19 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   unsigned char * function;
   unsigned char * map;
 {
+  int finishPtr;
+  int newFinish;
   undefined4 poolAllocator2;
   undefined1 *nulCharPtr;
   int *emptyRepRefCount;
   void *nameString;
-  undefined4 uVar4;
+  undefined4 field4c;
   unsigned char * poolAllocator;
   void *nameStrMem;
   unsigned char * paramType;
   int srcParams;
   undefined4 *paramFinish;
-  int iVar8;
+  int emptyRep;
   int srcNameData;
   int srcParamName;
   uint paramIdx;
@@ -1185,19 +1195,19 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   unsigned char * srcParamType;
   char reservation;
   byte cr0Reg;
-  undefined4 uStack_60;
-  undefined4 uStack_5c;
+  undefined4 emptyParamName;
+  undefined4 emptyParamType;
   undefined4 auStack_50 [4];
   
   ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)function);
   *(int *)this = DAT_a7b7ba7c + 8;
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0xc) = poolAllocator2;
-  iVar8 = DAT_a7b7ba74;
+  emptyRep = DAT_a7b7ba74;
   *(undefined4 *)((int)this + 0x18) = 0;
   *(undefined4 *)((int)this + 0x10) = 0;
   *(undefined4 *)((int)this + 0x14) = 0;
-  emptyRepRefCount = (int *)(iVar8 + 8);
+  emptyRepRefCount = (int *)(emptyRep + 8);
   *(undefined ***)((int)this + 0x1c) = &PTR___ZN5TTypeD1Ev_a7b7d590;
   do {
     if (reservation != '\0') {
@@ -1208,27 +1218,27 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   } while (!(bool)(cr0Reg >> 1 & 1));
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0x44) = poolAllocator2;
-  *(int *)((int)this + 0x48) = iVar8 + 0xc;
+  *(int *)((int)this + 0x48) = emptyRep + 0xc;
   nulCharPtr = DAT_a7b7ba80;
   for (paramIdx = 0; paramIdx < (uint)(*(int *)(function + 0x14) - *(int *)(function + 0x10) >> 3);
       paramIdx = paramIdx + 1) {
     paramFinish = *(undefined4 **)((int)this + 0x14);
     if (paramFinish == *(undefined4 **)((int)this + 0x18)) {
       std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux
-                ((int)this + 0xc,*(undefined4 *)((int)this + 0x14),&uStack_60);
+                ((int)this + 0xc,*(undefined4 *)((int)this + 0x14),&emptyParamName);
     }
     else {
-      iVar8 = 0;
+      newFinish = 0;
       if (paramFinish != (undefined4 *)0x0) {
-        paramFinish[1] = uStack_5c;
-        *paramFinish = uStack_60;
-        iVar8 = *(int *)((int)this + 0x14);
+        paramFinish[1] = emptyParamType;
+        *paramFinish = emptyParamName;
+        newFinish = *(int *)((int)this + 0x14);
       }
-      *(int *)((int)this + 0x14) = iVar8 + 8;
+      *(int *)((int)this + 0x14) = newFinish + 8;
     }
     srcParams = *(int *)(function + 0x10);
     srcParamName = *(int *)(srcParams + paramIdx * 8);
-    iVar8 = *(int *)((int)this + 0x14);
+    finishPtr = *(int *)((int)this + 0x14);
     srcNameData = *(int *)(srcParamName + 4);
     *(undefined1 *)(srcNameData + *(int *)(srcNameData + -0xc)) = *nulCharPtr;
     nameText = *(char **)(srcParamName + 4);
@@ -1241,20 +1251,20 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
                 (nameStrMem,nameText,(unsigned char *)auStack_50);
       nameString = nameStrMem;
     }
-    *(void **)(iVar8 + -8) = nameString;
+    *(void **)(finishPtr + -8) = nameString;
     srcParamType = *(unsigned char **)(srcParams + paramIdx * 8 + 4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     paramType = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     *(undefined ***)paramType = &PTR___ZN5TTypeD1Ev_a7b7d590;
     TType__copyType(paramType,srcParamType,map);
-    *(unsigned char **)(iVar8 + -4) = paramType;
+    *(unsigned char **)(finishPtr + -4) = paramType;
   }
   TType__copyType((unsigned char *)((int)this + 0x1c),(unsigned char *)(function + 0x1c),map);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_
             ((void *)((int)this + 0x44),(unsigned char *)(function + 0x44));
-  uVar4 = *(undefined4 *)(function + 0x4c);
+  field4c = *(undefined4 *)(function + 0x4c);
   *(undefined4 *)((int)this + 0x50) = *(undefined4 *)(function + 0x50);
-  *(undefined4 *)((int)this + 0x4c) = uVar4;
+  *(undefined4 *)((int)this + 0x4c) = field4c;
   return;
 }
 
@@ -1264,17 +1274,19 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   unsigned char * function;
   unsigned char * map;
 {
+  int finishPtr;
+  int newFinish;
   undefined4 poolAllocator2;
   undefined1 *nulCharPtr;
   int *emptyRepRefCount;
   void *nameString;
-  undefined4 uVar4;
+  undefined4 field4c;
   unsigned char * poolAllocator;
   void *nameStrMem;
   unsigned char * paramType;
   int srcParams;
   undefined4 *paramFinish;
-  int iVar8;
+  int emptyRep;
   int srcNameData;
   int srcParamName;
   uint paramIdx;
@@ -1282,19 +1294,19 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   unsigned char * srcParamType;
   char reservation;
   byte cr0Reg;
-  undefined4 uStack_60;
-  undefined4 uStack_5c;
+  undefined4 emptyParamName;
+  undefined4 emptyParamType;
   undefined4 auStack_50 [4];
   
   ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)function);
   *(int *)this = DAT_a7b7ba7c + 8;
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0xc) = poolAllocator2;
-  iVar8 = DAT_a7b7ba74;
+  emptyRep = DAT_a7b7ba74;
   *(undefined4 *)((int)this + 0x18) = 0;
   *(undefined4 *)((int)this + 0x10) = 0;
   *(undefined4 *)((int)this + 0x14) = 0;
-  emptyRepRefCount = (int *)(iVar8 + 8);
+  emptyRepRefCount = (int *)(emptyRep + 8);
   *(undefined ***)((int)this + 0x1c) = &PTR___ZN5TTypeD1Ev_a7b7d590;
   do {
     if (reservation != '\0') {
@@ -1305,27 +1317,27 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   } while (!(bool)(cr0Reg >> 1 & 1));
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0x44) = poolAllocator2;
-  *(int *)((int)this + 0x48) = iVar8 + 0xc;
+  *(int *)((int)this + 0x48) = emptyRep + 0xc;
   nulCharPtr = DAT_a7b7ba80;
   for (paramIdx = 0; paramIdx < (uint)(*(int *)(function + 0x14) - *(int *)(function + 0x10) >> 3);
       paramIdx = paramIdx + 1) {
     paramFinish = *(undefined4 **)((int)this + 0x14);
     if (paramFinish == *(undefined4 **)((int)this + 0x18)) {
       std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux
-                ((int)this + 0xc,*(undefined4 *)((int)this + 0x14),&uStack_60);
+                ((int)this + 0xc,*(undefined4 *)((int)this + 0x14),&emptyParamName);
     }
     else {
-      iVar8 = 0;
+      newFinish = 0;
       if (paramFinish != (undefined4 *)0x0) {
-        paramFinish[1] = uStack_5c;
-        *paramFinish = uStack_60;
-        iVar8 = *(int *)((int)this + 0x14);
+        paramFinish[1] = emptyParamType;
+        *paramFinish = emptyParamName;
+        newFinish = *(int *)((int)this + 0x14);
       }
-      *(int *)((int)this + 0x14) = iVar8 + 8;
+      *(int *)((int)this + 0x14) = newFinish + 8;
     }
     srcParams = *(int *)(function + 0x10);
     srcParamName = *(int *)(srcParams + paramIdx * 8);
-    iVar8 = *(int *)((int)this + 0x14);
+    finishPtr = *(int *)((int)this + 0x14);
     srcNameData = *(int *)(srcParamName + 4);
     *(undefined1 *)(srcNameData + *(int *)(srcNameData + -0xc)) = *nulCharPtr;
     nameText = *(char **)(srcParamName + 4);
@@ -1338,20 +1350,20 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
                 (nameStrMem,nameText,(unsigned char *)auStack_50);
       nameString = nameStrMem;
     }
-    *(void **)(iVar8 + -8) = nameString;
+    *(void **)(finishPtr + -8) = nameString;
     srcParamType = *(unsigned char **)(srcParams + paramIdx * 8 + 4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     paramType = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     *(undefined ***)paramType = &PTR___ZN5TTypeD1Ev_a7b7d590;
     TType__copyType(paramType,srcParamType,map);
-    *(unsigned char **)(iVar8 + -4) = paramType;
+    *(unsigned char **)(finishPtr + -4) = paramType;
   }
   TType__copyType((unsigned char *)((int)this + 0x1c),(unsigned char *)(function + 0x1c),map);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_
             ((void *)((int)this + 0x44),(unsigned char *)(function + 0x44));
-  uVar4 = *(undefined4 *)(function + 0x4c);
+  field4c = *(undefined4 *)(function + 0x4c);
   *(undefined4 *)((int)this + 0x50) = *(undefined4 *)(function + 0x50);
-  *(undefined4 *)((int)this + 0x4c) = uVar4;
+  *(undefined4 *)((int)this + 0x4c) = field4c;
   return;
 }
 
@@ -1361,17 +1373,19 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   unsigned char * function;
   unsigned char * map;
 {
+  int finishPtr;
+  int newFinish;
   undefined4 poolAllocator2;
   undefined1 *nulCharPtr;
   int *emptyRepRefCount;
   void *nameString;
-  undefined4 uVar4;
+  undefined4 field4c;
   unsigned char * poolAllocator;
   void *nameStrMem;
   unsigned char * paramType;
   int srcParams;
   undefined4 *paramFinish;
-  int iVar8;
+  int emptyRep;
   int srcNameData;
   int srcParamName;
   uint paramIdx;
@@ -1387,11 +1401,11 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   *(int *)this = DAT_a7b7ba7c + 8;
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0xc) = poolAllocator2;
-  iVar8 = DAT_a7b7ba74;
+  emptyRep = DAT_a7b7ba74;
   *(undefined4 *)((int)this + 0x18) = 0;
   *(undefined4 *)((int)this + 0x10) = 0;
   *(undefined4 *)((int)this + 0x14) = 0;
-  emptyRepRefCount = (int *)(iVar8 + 8);
+  emptyRepRefCount = (int *)(emptyRep + 8);
   *(undefined ***)((int)this + 0x1c) = &PTR___ZN5TTypeD1Ev_a7b7d590;
   do {
     if (reservation != '\0') {
@@ -1402,7 +1416,7 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   } while (!(bool)(cr0Reg >> 1 & 1));
   poolAllocator2 = GetGlobalPoolAllocator();
   *(undefined4 *)((int)this + 0x44) = poolAllocator2;
-  *(int *)((int)this + 0x48) = iVar8 + 0xc;
+  *(int *)((int)this + 0x48) = emptyRep + 0xc;
   nulCharPtr = DAT_a7b7ba80;
   for (paramIdx = 0; paramIdx < (uint)(*(int *)(function + 0x14) - *(int *)(function + 0x10) >> 3);
       paramIdx = paramIdx + 1) {
@@ -1413,17 +1427,17 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
                  *(undefined4 *)((int)this + 0x14),&emptyParamName);
     }
     else {
-      iVar8 = 0;
+      newFinish = 0;
       if (paramFinish != (undefined4 *)0x0) {
         paramFinish[1] = emptyParamType;
         *paramFinish = emptyParamName;
-        iVar8 = *(int *)((int)this + 0x14);
+        newFinish = *(int *)((int)this + 0x14);
       }
-      *(int *)((int)this + 0x14) = iVar8 + 8;
+      *(int *)((int)this + 0x14) = newFinish + 8;
     }
     srcParams = *(int *)(function + 0x10);
     srcParamName = *(int *)(srcParams + paramIdx * 8);
-    iVar8 = *(int *)((int)this + 0x14);
+    finishPtr = *(int *)((int)this + 0x14);
     srcNameData = *(int *)(srcParamName + 4);
     *(undefined1 *)(srcNameData + *(int *)(srcNameData + -0xc)) = *nulCharPtr;
     nameText = *(char **)(srcParamName + 4);
@@ -1436,20 +1450,20 @@ int __ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
                 (nameStrMem,nameText,(unsigned char *)nameCtorAlloc);
       nameString = nameStrMem;
     }
-    *(void **)(iVar8 + -8) = nameString;
+    *(void **)(finishPtr + -8) = nameString;
     srcParamType = *(unsigned char **)(srcParams + paramIdx * 8 + 4);
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     paramType = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     *(undefined ***)paramType = &PTR___ZN5TTypeD1Ev_a7b7d590;
     TType__copyType(paramType,srcParamType,map);
-    *(unsigned char **)(iVar8 + -4) = paramType;
+    *(unsigned char **)(finishPtr + -4) = paramType;
   }
   TType__copyType((unsigned char *)((int)this + 0x1c),(unsigned char *)(function + 0x1c),map);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_
             ((void *)((int)this + 0x44),(unsigned char *)(function + 0x44));
-  uVar4 = *(undefined4 *)(function + 0x4c);
+  field4c = *(undefined4 *)(function + 0x4c);
   *(undefined4 *)((int)this + 0x50) = *(undefined4 *)(function + 0x50);
-  *(undefined4 *)((int)this + 0x4c) = uVar4;
+  *(undefined4 *)((int)this + 0x4c) = field4c;
   return;
 }
 
@@ -1458,13 +1472,13 @@ int TFunction__clone(this, map)
   unsigned char * this;
   unsigned char * map;
 {
-  unsigned char * this_00;
-  void *this_01;
+  unsigned char *poolAllocator;
+  void *clone;
   
-  this_00 = (unsigned char *)GetGlobalPoolAllocator();
-  this_01 = (void *)TPoolAllocator__allocate(this_00,0x54);
-  ((int (*)())__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE)(this_01,this,map);
-  return this_01;
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  clone = (void *)TPoolAllocator__allocate(poolAllocator,0x54);
+  ((int (*)())__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE)(clone,this,map);
+  return clone;
 }
 
 /* TSymbolTableLevel__clone @ 0x97ba33f0 (352 bytes) */
@@ -1474,13 +1488,13 @@ int TSymbolTableLevel__clone(this, map)
 {
   int *refCountPtr;
   int atomicStore;
-  int iVar2;
+  int oldRefCount;
   unsigned char * poolAllocator;
   undefined4 *newLevel;
   undefined4 *headerNode;
   int *clonedSymbol;
   unsigned char * symbolName;
-  undefined4 *in_r5;
+  undefined4 *insertKeyPtr;
   undefined4 staleR6;
   undefined4 staleR7;
   undefined4 staleR8;
@@ -1490,7 +1504,7 @@ int TSymbolTableLevel__clone(this, map)
   int iter [4];
   int treeEnd;
   undefined4 insertIter;
-  undefined4 local_6c;
+  undefined4 unusedInsertWord;
   undefined4 insertResultAlloc;
   undefined4 insertResultData;
   undefined4 nameCopyAlloc;
@@ -1516,27 +1530,27 @@ int TSymbolTableLevel__clone(this, map)
   if (iter[0] != treeEnd) {
     do {
       clonedSymbol = (int *)(**(code **)(**(int **)(iter[0] + 0x18) + 0x18))
-                                (*(int **)(iter[0] + 0x18),map,in_r5,staleR6,staleR7,staleR8,a6);
-      local_6c = 0;
+                                (*(int **)(iter[0] + 0x18),map,insertKeyPtr,staleR6,staleR7,staleR8,a6);
+      unusedInsertWord = 0;
       symbolName = (unsigned char *)(**(code **)(*clonedSymbol + 8))(clonedSymbol);
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&nameCopyAlloc,symbolName);
-      in_r5 = &nameCopyAlloc;
+      insertKeyPtr = &nameCopyAlloc;
       pairSymbol = clonedSymbol;
       std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&insertResultAlloc,newLevel,&nameCopyAlloc);
       insertIter = insertResultAlloc;
       refCountPtr = (int *)(nameCopyData + -4);
-      local_6c = insertResultData;
+      unusedInsertWord = insertResultData;
       destroyAlloc[0] = nameCopyAlloc;
       do {
-        iVar2 = *refCountPtr;
-        a6 = iVar2 + -1;
+        oldRefCount = *refCountPtr;
+        a6 = oldRefCount + -1;
         if (reservation != '\0') {
           atomicStore = storeWordConditionalIndexed(a6,0,refCountPtr);
           *refCountPtr = atomicStore;
           cr0Reg = 2;
         }
       } while (!(bool)(cr0Reg >> 1 & 1));
-      if (iVar2 < 1) {
+      if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                   ((unsigned char *)(nameCopyData + -0xc),destroyAlloc);
       }
@@ -1556,7 +1570,7 @@ int TSymbolTable__copyTable(this, symbolTable)
   int getenvResult;
   undefined4 atomicStore;
   undefined *forceNewPtr;
-  int iVar3;
+  int vecFinish;
   undefined4 *treeHeader;
   uint loopIndex;
   char reservation;
@@ -1622,12 +1636,12 @@ int TSymbolTable__copyTable(this, symbolTable)
                  clonedLevel);
     }
     else {
-      iVar3 = 0;
+      vecFinish = 0;
       if (treeHeader != (undefined4 *)0x0) {
         *treeHeader = clonedLevel[0];
-        iVar3 = *(int *)(this + 4);
+        vecFinish = *(int *)(this + 4);
       }
-      *(int *)(this + 4) = iVar3 + 4;
+      *(int *)(this + 4) = vecFinish + 4;
     }
   }
   if (typeMapCount != 0) {
@@ -8016,6 +8030,9 @@ int yylex(yYSTYPE, parseContext)
   unsigned char * yYSTYPE;
   void *parseContext;
 {
+  void *infoSinkBase;
+  int nextBufferAction;
+  int commentResult;
   uint yyAct;
   int nxtIndex;
   byte *matchStart;
@@ -8030,8 +8047,8 @@ int yylex(yYSTYPE, parseContext)
   uint yyC;
   undefined *yyDefPtr;
   byte *yyBp;
-  int iVar12;
-  void *pvVar13;
+  int yyCurrentState;
+  void *tokenString;
   byte *yyCp;
   double floatValue;
   undefined4 identCtorAlloc [4];
@@ -8056,27 +8073,27 @@ int yylex(yYSTYPE, parseContext)
 switchD_97bac34c_caseD_1:
   *_yy_c_buf_p = _yy_hold_char;
   yyBp = _yy_c_buf_p;
-  iVar12 = _yy_start;
+  yyCurrentState = _yy_start;
 LAB_97bac214:
   yyDefPtr = &_yy_def;
-  stateOffset = iVar12 << 1;
+  stateOffset = yyCurrentState << 1;
   do {
     yyC = (uint)(byte)(DAT_97c37983)[(uint)*_yy_c_buf_p * 4];
     if (*(short *)(&_yy_accept + stateOffset) != 0) {
       _yy_last_accepting_cpos = _yy_c_buf_p;
-      _yy_last_accepting_state = iVar12;
+      _yy_last_accepting_state = yyCurrentState;
     }
     while (nxtIndex = ((int)*(short *)(&_yy_base + stateOffset) + yyC) * 2,
-          *(short *)(&_yy_chk + nxtIndex) != iVar12) {
-      iVar12 = (int)*(short *)(&_yy_def + stateOffset);
-      stateOffset = iVar12 << 1;
-      if (0x199 < iVar12) {
+          *(short *)(&_yy_chk + nxtIndex) != yyCurrentState) {
+      yyCurrentState = (int)*(short *)(&_yy_def + stateOffset);
+      stateOffset = yyCurrentState << 1;
+      if (0x199 < yyCurrentState) {
         yyC = (uint)(byte)(DAT_97c37d83)[yyC * 4];
       }
     }
-    iVar12 = (int)*(short *)(&_yy_nxt + nxtIndex);
+    yyCurrentState = (int)*(short *)(&_yy_nxt + nxtIndex);
     _yy_c_buf_p = _yy_c_buf_p + 1;
-    stateOffset = iVar12 * 2;
+    stateOffset = yyCurrentState * 2;
   } while (*(short *)(&_yy_base + stateOffset) != 0x260);
 LAB_97bac2e4:
   yyAct = (uint)*(short *)(&_yy_accept + stateOffset);
@@ -8531,9 +8548,9 @@ LAB_97bad2c8:
     *(float *)(yYSTYPE + 4) = (float)floatValue;
     break;
   case 0x5e:
-    iVar12 = PaParseComment((int *)yYSTYPE,parseContext);
+    commentResult = PaParseComment((int *)yYSTYPE,parseContext);
     token = 0;
-    if (iVar12 != 0) goto switchD_97bac34c_caseD_1;
+    if (commentResult != 0) goto switchD_97bac34c_caseD_1;
     break;
   case 0x5f:
     token = 0x13d;
@@ -8730,21 +8747,21 @@ LAB_97bad2c8:
     yyBp = _yytext;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     stringMem = (void *)TPoolAllocator__allocate(poolAllocator,8);
-    pvVar13 = (void *)0x0;
+    tokenString = (void *)0x0;
     if (stringMem != (void *)0x0) {
       stringCtorAlloc[0] = GetGlobalPoolAllocator();
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
                 (stringMem,(char *)yyBp,(unsigned char *)stringCtorAlloc);
-      pvVar13 = stringMem;
+      tokenString = stringMem;
     }
-    *(void **)(yYSTYPE + 4) = pvVar13;
+    *(void **)(yYSTYPE + 4) = tokenString;
     token = 0x12f;
     break;
   case 0x8f:
-    pvVar13 = *(void **)((int)parseContext + 8);
-    __ZN13TInfoSinkBase6appendEPKc(pvVar13,"FLEX: Unknown char ");
-    __ZN13TInfoSinkBase6appendEPKc(pvVar13,(char *)_yytext);
-    __ZN13TInfoSinkBase6appendEPKc(pvVar13,"\n");
+    infoSinkBase = *(void **)((int)parseContext + 8);
+    __ZN13TInfoSinkBase6appendEPKc(infoSinkBase,"FLEX: Unknown char ");
+    __ZN13TInfoSinkBase6appendEPKc(infoSinkBase,(char *)_yytext);
+    __ZN13TInfoSinkBase6appendEPKc(infoSinkBase,"\n");
     token = 0;
     break;
   case 0x90:
@@ -8760,21 +8777,21 @@ LAB_97bad2c8:
     if (_yy_c_buf_p <= (byte *)(*(int *)(_yy_current_buffer + 4) + _yy_n_chars)) {
       _yy_c_buf_p = _yytext + (int)(yyCp + (-1 - (int)matchStart));
       stateOffset = ((int (*)())yy_get_previous_state)();
-      iVar12 = ((int (*)())yy_try_NUL_trans)(stateOffset);
-      if (iVar12 == 0) goto LAB_97bad2c8;
+      yyCurrentState = ((int (*)())yy_try_NUL_trans)(stateOffset);
+      if (yyCurrentState == 0) goto LAB_97bad2c8;
       _yy_c_buf_p = _yy_c_buf_p + 1;
       yyBp = _yytext;
       goto LAB_97bac214;
     }
-    iVar12 = ((int (*)())yy_get_next_buffer)();
-    if (iVar12 == 1) goto LAB_97bad2f8;
-    if (1 < iVar12) {
-      if (iVar12 == 2) goto LAB_97bad344;
+    nextBufferAction = ((int (*)())yy_get_next_buffer)();
+    if (nextBufferAction == 1) goto LAB_97bad2f8;
+    if (1 < nextBufferAction) {
+      if (nextBufferAction == 2) goto LAB_97bad344;
       goto switchD_97bac34c_caseD_1;
     }
-    if (iVar12 != 0) goto switchD_97bac34c_caseD_1;
+    if (nextBufferAction != 0) goto switchD_97bac34c_caseD_1;
     _yy_c_buf_p = _yytext + (int)(yyCp + (-1 - (int)matchStart));
-    iVar12 = ((int (*)())yy_get_previous_state)();
+    yyCurrentState = ((int (*)())yy_get_previous_state)();
     yyBp = _yytext;
     goto LAB_97bac214;
   case 0x92:
@@ -8801,9 +8818,12 @@ LAB_97bad344:
 /* yy_get_next_buffer @ 0x97bad390 (656 bytes) */
 int yy_get_next_buffer()
 {
+  int newChBuf;
+  int newSize;
+  int numToRead;
   undefined1 ch;
   int b;
-  int iVar3;
+  int retVal;
   void *oldChBuf;
   undefined4 yy_flex_reallocResult;
   uint oldSize;
@@ -8818,7 +8838,7 @@ int yy_get_next_buffer()
     yy_fatal_error("fatal flex scanner internal error--end of buffer missed");
   }
   if (*(int *)(_yy_current_buffer + 0x20) == 0) {
-    iVar3 = 2 - (uint)((int)_yy_c_buf_p - (int)_yytext == 1);
+    retVal = 2 - (uint)((int)_yy_c_buf_p - (int)_yytext == 1);
   }
   else {
     numberToMove = _yy_c_buf_p + (-1 - (int)_yytext);
@@ -8836,39 +8856,39 @@ int yy_get_next_buffer()
       _yy_n_chars = (undefined1 *)0x0;
     }
     else {
-      iVar3 = *(int *)(_yy_current_buffer + 0xc) - (int)numberToMove;
+      numToRead = *(int *)(_yy_current_buffer + 0xc) - (int)numberToMove;
       b = _yy_current_buffer;
       source = _yy_c_buf_p;
-      while (iVar3 = iVar3 + -1, _yy_current_buffer = b, _yy_c_buf_p = source, iVar3 < 1) {
+      while (numToRead = numToRead + -1, _yy_current_buffer = b, _yy_c_buf_p = source, numToRead < 1) {
         oldChBuf = *(void **)(b + 4);
         if (*(int *)(b + 0x14) == 0) {
           *(undefined4 *)(b + 4) = 0;
         }
         else {
           oldSize = *(uint *)(b + 0xc);
-          iVar3 = oldSize << 1;
-          if (iVar3 < 1) {
-            iVar3 = oldSize + (oldSize >> 3);
+          newSize = oldSize << 1;
+          if (newSize < 1) {
+            newSize = oldSize + (oldSize >> 3);
           }
-          *(int *)(b + 0xc) = iVar3;
+          *(int *)(b + 0xc) = newSize;
           yy_flex_reallocResult = yy_flex_realloc(oldChBuf,*(int *)(b + 0xc) + 2);
           *(undefined4 *)(b + 4) = yy_flex_reallocResult;
         }
-        iVar3 = *(int *)(b + 4);
-        if (iVar3 == 0) {
+        newChBuf = *(int *)(b + 4);
+        if (newChBuf == 0) {
           yy_fatal_error("fatal error - scanner input buffer overflow");
-          iVar3 = *(int *)(b + 4);
+          newChBuf = *(int *)(b + 4);
         }
-        source = source + (iVar3 - (int)oldChBuf);
+        source = source + (newChBuf - (int)oldChBuf);
         b = _yy_current_buffer;
-        iVar3 = *(int *)(_yy_current_buffer + 0xc) - (int)numberToMove;
+        numToRead = *(int *)(_yy_current_buffer + 0xc) - (int)numberToMove;
       }
-      if (0x2000 < iVar3) {
-        iVar3 = 0x2000;
+      if (0x2000 < numToRead) {
+        numToRead = 0x2000;
       }
-      _yy_n_chars = (undefined1 *)_yylex_CPP(numberToMove + *(int *)(b + 4),iVar3);
+      _yy_n_chars = (undefined1 *)_yylex_CPP(numberToMove + *(int *)(b + 4),numToRead);
       if (_yy_n_chars != (undefined1 *)0x0) {
-        if (iVar3 <= (int)_yy_n_chars) {
+        if (numToRead <= (int)_yy_n_chars) {
           yy_fatal_error("input buffer overflow, can\'t enlarge buffer because scanner uses REJECT")
           ;
         }
@@ -8877,14 +8897,14 @@ int yy_get_next_buffer()
       }
     }
     *(undefined1 **)(_yy_current_buffer + 0x10) = _yy_n_chars;
-    iVar3 = 0;
+    retVal = 0;
     if (_yy_n_chars == (undefined1 *)0x0) {
       if (numberToMove == (undefined1 *)0x0) {
-        iVar3 = 1;
+        retVal = 1;
         ((int (*)())yyrestart)(_yyin);
       }
       else {
-        iVar3 = 2;
+        retVal = 2;
         *(undefined4 *)(_yy_current_buffer + 0x24) = 2;
       }
     }
@@ -8893,7 +8913,7 @@ int yy_get_next_buffer()
     _yy_n_chars[*(int *)(_yy_current_buffer + 4) + 1] = 0;
     _yytext = *(undefined1 **)(_yy_current_buffer + 4);
   }
-  return iVar3;
+  return retVal;
 }
 
 /* yy_get_previous_state @ 0x97bad620 (280 bytes) */

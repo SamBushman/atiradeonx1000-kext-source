@@ -60,10 +60,11 @@ int TemporaryAllocator__getTemporary(this, glType)
   unsigned char * this;
   int glType;
 {
+  int remaining;
   int classOffset;
   int byteOffset;
   int classIdx;
-  int iVar3;
+  int slotValue;
   int *slotPtr;
   uint newCapacity;
   int allocation;
@@ -89,27 +90,27 @@ int TemporaryAllocator__getTemporary(this, glType)
   slotOffset = 0;
   if (*(uint *)(this + classOffset + 100) != 0) {
     slotPtr = *(int **)(this + classOffset);
-    iVar3 = *slotPtr;
-    while (iVar3 != 0) {
+    slotValue = *slotPtr;
+    while (slotValue != 0) {
       loopIndex = loopIndex + 1;
       slotOffset = loopIndex * 4;
       if (*(uint *)(this + classOffset + 100) <= loopIndex) break;
       slotPtr = slotPtr + 1;
-      iVar3 = *slotPtr;
+      slotValue = *slotPtr;
     }
   }
   if (*(uint *)(this + classOffset + 100) <= loopIndex) {
     allocation = _malloc(*(uint *)(this + classOffset + 100) * 4 + 0x40);
-    iVar3 = *(int *)(this + classOffset + 100);
+    remaining = *(int *)(this + classOffset + 100);
     copyIdx = 0;
-    if (iVar3 != 0) {
+    if (remaining != 0) {
       oldSlots = *(int *)(this + classOffset);
       do {
         byteOffset = copyIdx * 4;
         copyIdx = copyIdx + 1;
         *(undefined4 *)(byteOffset + allocation) = *(undefined4 *)(byteOffset + oldSlots);
-        iVar3 = iVar3 + -1;
-      } while (iVar3 != 0);
+        remaining = remaining + -1;
+      } while (remaining != 0);
     }
     _memset(*(int *)(this + classOffset + 100) * 4 + allocation,0,0x40);
     if (*(int *)(this + classOffset) != 0) {
@@ -119,12 +120,12 @@ int TemporaryAllocator__getTemporary(this, glType)
     newCapacity = *(int *)(this + classOffset + 100) + 0x10;
     *(uint *)(this + classOffset + 100) = newCapacity;
     if (loopIndex < newCapacity) {
-      iVar3 = *(int *)(slotOffset + allocation);
-      while (iVar3 != 0) {
+      slotValue = *(int *)(slotOffset + allocation);
+      while (slotValue != 0) {
         loopIndex = loopIndex + 1;
         slotOffset = loopIndex * 4;
         if (newCapacity <= loopIndex) break;
-        iVar3 = *(int *)(slotOffset + *(int *)(this + classOffset));
+        slotValue = *(int *)(slotOffset + *(int *)(this + classOffset));
       }
     }
   }
@@ -319,6 +320,9 @@ int __ZN11ParseSymbolC2ERKS_(this, parseSymbol)
   void *this;
   unsigned char * parseSymbol;
 {
+  undefined4 field54;
+  undefined4 field34;
+  undefined4 field48;
   undefined2 arraySize;
   undefined2 openGLType;
   int directIndexCount;
@@ -329,19 +333,19 @@ int __ZN11ParseSymbolC2ERKS_(this, parseSymbol)
   undefined4 field58;
   undefined4 field5c;
   undefined4 field38;
-  undefined4 uVar11;
+  undefined4 field28;
   undefined4 field60;
   undefined4 field3c;
   uint loopIdx;
   
   openGLType = *(undefined2 *)(parseSymbol + 0x2c);
-  uVar11 = *(undefined4 *)(parseSymbol + 0x28);
+  field28 = *(undefined4 *)(parseSymbol + 0x28);
   loopIdx = 0;
   arraySize = *(undefined2 *)(parseSymbol + 0x2e);
   parseTreeType = *(unsigned char **)(parseSymbol + 0xc);
   *(undefined2 *)((int)this + 0x30) = *(undefined2 *)(parseSymbol + 0x30);
   *(undefined2 *)((int)this + 0x2c) = openGLType;
-  *(undefined4 *)((int)this + 0x28) = uVar11;
+  *(undefined4 *)((int)this + 0x28) = field28;
   *(undefined4 *)((int)this + 0x44) = 1;
   *(undefined2 *)((int)this + 0x2e) = arraySize;
   *(undefined4 *)((int)this + 0x14) = 0;
@@ -352,11 +356,11 @@ int __ZN11ParseSymbolC2ERKS_(this, parseSymbol)
   *(undefined4 *)((int)this + 8) = 0;
   *(undefined4 *)((int)this + 0x50) = 0;
   ((int (*)())ParseSymbol__SetParseTreeType)(this,parseTreeType);
-  uVar11 = *(undefined4 *)(parseSymbol + 0x48);
+  field48 = *(undefined4 *)(parseSymbol + 0x48);
   *(undefined4 *)((int)this + 0x10) = *(undefined4 *)(parseSymbol + 0x10);
-  *(undefined4 *)((int)this + 0x48) = uVar11;
+  *(undefined4 *)((int)this + 0x48) = field48;
   ((int (*)())ParseSymbol__ResolveOpenGLType)(this);
-  uVar11 = *(undefined4 *)(parseSymbol + 0x34);
+  field34 = *(undefined4 *)(parseSymbol + 0x34);
   field38 = *(undefined4 *)(parseSymbol + 0x38);
   field3c = *(undefined4 *)(parseSymbol + 0x3c);
   field60 = *(undefined4 *)(parseSymbol + 0x60);
@@ -365,7 +369,7 @@ int __ZN11ParseSymbolC2ERKS_(this, parseSymbol)
   field40 = *(undefined4 *)(parseSymbol + 0x40);
   name = *(char **)(parseSymbol + 0x14);
   *(undefined4 *)((int)this + 0x4c) = *(undefined4 *)(parseSymbol + 0x4c);
-  *(undefined4 *)((int)this + 0x34) = uVar11;
+  *(undefined4 *)((int)this + 0x34) = field34;
   *(undefined4 *)((int)this + 0x38) = field38;
   *(undefined4 *)((int)this + 0x3c) = field3c;
   *(undefined4 *)((int)this + 0x60) = field60;
@@ -375,9 +379,9 @@ int __ZN11ParseSymbolC2ERKS_(this, parseSymbol)
   ((int (*)())ParseSymbol__SetName)(this,name);
   *(undefined4 *)((int)this + 0x24) = 0;
   directIndexCount = *(int *)(parseSymbol + 0x24);
-  uVar11 = *(undefined4 *)(parseSymbol + 0x54);
+  field54 = *(undefined4 *)(parseSymbol + 0x54);
   *(undefined4 *)((int)this + 0x18) = 0;
-  *(undefined4 *)((int)this + 0x54) = uVar11;
+  *(undefined4 *)((int)this + 0x54) = field54;
   if (directIndexCount != 0) {
     do {
       directIndex = ((int (*)())ParseSymbol__GetDirectIndex)(parseSymbol,loopIdx);
@@ -393,6 +397,9 @@ int __ZN11ParseSymbolC1ERKS_(this, parseSymbol)
   void *this;
   unsigned char * parseSymbol;
 {
+  undefined4 field54;
+  undefined4 field34;
+  undefined4 field48;
   undefined2 arraySize;
   undefined2 openGLType;
   int directIndexCount;
@@ -403,19 +410,19 @@ int __ZN11ParseSymbolC1ERKS_(this, parseSymbol)
   undefined4 field58;
   undefined4 field5c;
   undefined4 field38;
-  undefined4 uVar11;
+  undefined4 field28;
   undefined4 field60;
   undefined4 field3c;
   uint loopIdx;
   
   openGLType = *(undefined2 *)(parseSymbol + 0x2c);
-  uVar11 = *(undefined4 *)(parseSymbol + 0x28);
+  field28 = *(undefined4 *)(parseSymbol + 0x28);
   loopIdx = 0;
   arraySize = *(undefined2 *)(parseSymbol + 0x2e);
   parseTreeType = *(unsigned char **)(parseSymbol + 0xc);
   *(undefined2 *)((int)this + 0x30) = *(undefined2 *)(parseSymbol + 0x30);
   *(undefined2 *)((int)this + 0x2c) = openGLType;
-  *(undefined4 *)((int)this + 0x28) = uVar11;
+  *(undefined4 *)((int)this + 0x28) = field28;
   *(undefined4 *)((int)this + 0x44) = 1;
   *(undefined2 *)((int)this + 0x2e) = arraySize;
   *(undefined4 *)((int)this + 0x14) = 0;
@@ -426,11 +433,11 @@ int __ZN11ParseSymbolC1ERKS_(this, parseSymbol)
   *(undefined4 *)((int)this + 8) = 0;
   *(undefined4 *)((int)this + 0x50) = 0;
   ((int (*)())ParseSymbol__SetParseTreeType)(this,parseTreeType);
-  uVar11 = *(undefined4 *)(parseSymbol + 0x48);
+  field48 = *(undefined4 *)(parseSymbol + 0x48);
   *(undefined4 *)((int)this + 0x10) = *(undefined4 *)(parseSymbol + 0x10);
-  *(undefined4 *)((int)this + 0x48) = uVar11;
+  *(undefined4 *)((int)this + 0x48) = field48;
   ((int (*)())ParseSymbol__ResolveOpenGLType)(this);
-  uVar11 = *(undefined4 *)(parseSymbol + 0x34);
+  field34 = *(undefined4 *)(parseSymbol + 0x34);
   field38 = *(undefined4 *)(parseSymbol + 0x38);
   field3c = *(undefined4 *)(parseSymbol + 0x3c);
   field60 = *(undefined4 *)(parseSymbol + 0x60);
@@ -439,7 +446,7 @@ int __ZN11ParseSymbolC1ERKS_(this, parseSymbol)
   field40 = *(undefined4 *)(parseSymbol + 0x40);
   name = *(char **)(parseSymbol + 0x14);
   *(undefined4 *)((int)this + 0x4c) = *(undefined4 *)(parseSymbol + 0x4c);
-  *(undefined4 *)((int)this + 0x34) = uVar11;
+  *(undefined4 *)((int)this + 0x34) = field34;
   *(undefined4 *)((int)this + 0x38) = field38;
   *(undefined4 *)((int)this + 0x3c) = field3c;
   *(undefined4 *)((int)this + 0x60) = field60;
@@ -449,9 +456,9 @@ int __ZN11ParseSymbolC1ERKS_(this, parseSymbol)
   ((int (*)())ParseSymbol__SetName)(this,name);
   *(undefined4 *)((int)this + 0x24) = 0;
   directIndexCount = *(int *)(parseSymbol + 0x24);
-  uVar11 = *(undefined4 *)(parseSymbol + 0x54);
+  field54 = *(undefined4 *)(parseSymbol + 0x54);
   *(undefined4 *)((int)this + 0x18) = 0;
-  *(undefined4 *)((int)this + 0x54) = uVar11;
+  *(undefined4 *)((int)this + 0x54) = field54;
   if (directIndexCount != 0) {
     do {
       directIndex = ((int (*)())ParseSymbol__GetDirectIndex)(parseSymbol,loopIdx);
@@ -467,6 +474,9 @@ int __ZN11ParseSymbolC4ERKS_(this, parseSymbol)
   void *this;
   unsigned char * parseSymbol;
 {
+  undefined4 field54;
+  undefined4 field34;
+  undefined4 field48;
   undefined2 arraySize;
   undefined2 openGLType;
   int directIndexCount;
@@ -477,19 +487,19 @@ int __ZN11ParseSymbolC4ERKS_(this, parseSymbol)
   undefined4 field58;
   undefined4 field5c;
   undefined4 field38;
-  undefined4 uVar11;
+  undefined4 field28;
   undefined4 field60;
   undefined4 field3c;
   uint loopIdx;
   
   openGLType = *(undefined2 *)(parseSymbol + 0x2c);
-  uVar11 = *(undefined4 *)(parseSymbol + 0x28);
+  field28 = *(undefined4 *)(parseSymbol + 0x28);
   loopIdx = 0;
   arraySize = *(undefined2 *)(parseSymbol + 0x2e);
   parseTreeType = *(unsigned char **)(parseSymbol + 0xc);
   *(undefined2 *)((int)this + 0x30) = *(undefined2 *)(parseSymbol + 0x30);
   *(undefined2 *)((int)this + 0x2c) = openGLType;
-  *(undefined4 *)((int)this + 0x28) = uVar11;
+  *(undefined4 *)((int)this + 0x28) = field28;
   *(undefined4 *)((int)this + 0x44) = 1;
   *(undefined2 *)((int)this + 0x2e) = arraySize;
   *(undefined4 *)((int)this + 0x14) = 0;
@@ -500,11 +510,11 @@ int __ZN11ParseSymbolC4ERKS_(this, parseSymbol)
   *(undefined4 *)((int)this + 8) = 0;
   *(undefined4 *)((int)this + 0x50) = 0;
   ((int (*)())ParseSymbol__SetParseTreeType)(this,parseTreeType);
-  uVar11 = *(undefined4 *)(parseSymbol + 0x48);
+  field48 = *(undefined4 *)(parseSymbol + 0x48);
   *(undefined4 *)((int)this + 0x10) = *(undefined4 *)(parseSymbol + 0x10);
-  *(undefined4 *)((int)this + 0x48) = uVar11;
+  *(undefined4 *)((int)this + 0x48) = field48;
   ((int (*)())ParseSymbol__ResolveOpenGLType)(this);
-  uVar11 = *(undefined4 *)(parseSymbol + 0x34);
+  field34 = *(undefined4 *)(parseSymbol + 0x34);
   field38 = *(undefined4 *)(parseSymbol + 0x38);
   field3c = *(undefined4 *)(parseSymbol + 0x3c);
   field60 = *(undefined4 *)(parseSymbol + 0x60);
@@ -513,7 +523,7 @@ int __ZN11ParseSymbolC4ERKS_(this, parseSymbol)
   field40 = *(undefined4 *)(parseSymbol + 0x40);
   name = *(char **)(parseSymbol + 0x14);
   *(undefined4 *)((int)this + 0x4c) = *(undefined4 *)(parseSymbol + 0x4c);
-  *(undefined4 *)((int)this + 0x34) = uVar11;
+  *(undefined4 *)((int)this + 0x34) = field34;
   *(undefined4 *)((int)this + 0x38) = field38;
   *(undefined4 *)((int)this + 0x3c) = field3c;
   *(undefined4 *)((int)this + 0x60) = field60;
@@ -523,9 +533,9 @@ int __ZN11ParseSymbolC4ERKS_(this, parseSymbol)
   ((int (*)())ParseSymbol__SetName)(this,name);
   *(undefined4 *)((int)this + 0x24) = 0;
   directIndexCount = *(int *)(parseSymbol + 0x24);
-  uVar11 = *(undefined4 *)(parseSymbol + 0x54);
+  field54 = *(undefined4 *)(parseSymbol + 0x54);
   *(undefined4 *)((int)this + 0x18) = 0;
-  *(undefined4 *)((int)this + 0x54) = uVar11;
+  *(undefined4 *)((int)this + 0x54) = field54;
   if (directIndexCount != 0) {
     do {
       directIndex = ((int (*)())ParseSymbol__GetDirectIndex)(parseSymbol,loopIdx);
@@ -541,9 +551,10 @@ int ParseSymbol__operator_(this, parseSymbol)
   unsigned char * this;
   unsigned char * parseSymbol;
 {
+  undefined4 field54;
   undefined2 field30;
   undefined2 openGLType;
-  undefined4 uVar3;
+  undefined4 field48;
   uint directIndex;
   char *name;
   unsigned char * parseTreeType;
@@ -576,11 +587,11 @@ int ParseSymbol__operator_(this, parseSymbol)
     parseTreeType = *(unsigned char **)(parseSymbol + 0xc);
     *(undefined4 *)(this + 0x28) = *(undefined4 *)(parseSymbol + 0x28);
     ((int (*)())ParseSymbol__SetParseTreeType)(this,parseTreeType);
-    uVar3 = *(undefined4 *)(parseSymbol + 0x48);
+    field48 = *(undefined4 *)(parseSymbol + 0x48);
     *(undefined4 *)(this + 0x10) = *(undefined4 *)(parseSymbol + 0x10);
-    *(undefined4 *)(this + 0x48) = uVar3;
+    *(undefined4 *)(this + 0x48) = field48;
     ((int (*)())ParseSymbol__ResolveOpenGLType)(this);
-    uVar3 = *(undefined4 *)(parseSymbol + 0x54);
+    field54 = *(undefined4 *)(parseSymbol + 0x54);
     field34 = *(undefined4 *)(parseSymbol + 0x34);
     field38 = *(undefined4 *)(parseSymbol + 0x38);
     field3c = *(undefined4 *)(parseSymbol + 0x3c);
@@ -596,7 +607,7 @@ int ParseSymbol__operator_(this, parseSymbol)
     *(undefined4 *)(this + 0x5c) = field5c;
     *(undefined4 *)(this + 0x58) = field58;
     *(undefined4 *)(this + 0x40) = field40;
-    *(undefined4 *)(this + 0x54) = uVar3;
+    *(undefined4 *)(this + 0x54) = field54;
     *(undefined4 *)(this + 8) = 0;
     *(undefined4 *)(this + 0x50) = 0;
     *(undefined4 *)(this + 4) = 0;
@@ -943,6 +954,7 @@ int ParseSymbol__ChangeArrayNameForArrayIndex(this, bracketLevel, newIndex)
   uint bracketLevel;
   int newIndex;
 {
+  char *charPtr;
   int copyIndex;
   int length;
   char ch;
@@ -950,7 +962,7 @@ int ParseSymbol__ChangeArrayNameForArrayIndex(this, bracketLevel, newIndex)
   int hashIdx;
   int allocation;
   int oldNameToFree;
-  char *pcVar6;
+  char *srcName;
   int oldName;
   int outPos;
   char indexText [28];
@@ -962,8 +974,8 @@ int ParseSymbol__ChangeArrayNameForArrayIndex(this, bracketLevel, newIndex)
   loopIndex = 0;
   copyIndex = 0;
   if (bracketLevel != 0xffffffff) {
-    pcVar6 = *(char **)(this + 0x14);
-    ch = *pcVar6;
+    srcName = *(char **)(this + 0x14);
+    ch = *srcName;
     while (ch != '\0') {
       if (ch == '[') {
         loopIndex = loopIndex + 1;
@@ -972,7 +984,7 @@ int ParseSymbol__ChangeArrayNameForArrayIndex(this, bracketLevel, newIndex)
       copyIndex = copyIndex + 1;
       outPos = outPos + 1;
       if (bracketLevel + 1 <= loopIndex) break;
-      ch = pcVar6[copyIndex];
+      ch = srcName[copyIndex];
     }
   }
   *(undefined1 *)(allocation + outPos) = 0;
@@ -1005,9 +1017,9 @@ int ParseSymbol__ChangeArrayNameForArrayIndex(this, bracketLevel, newIndex)
   *(undefined4 *)(this + 0x1c) = 0;
   *(int *)(this + 0x14) = allocation;
   for (; outPos != 0; outPos = outPos + -1) {
-    pcVar6 = (char *)(allocation + hashIdx);
+    charPtr = (char *)(allocation + hashIdx);
     hashIdx = hashIdx + 1;
-    *(int *)(this + 0x1c) = *(int *)(this + 0x1c) + (int)*pcVar6;
+    *(int *)(this + 0x1c) = *(int *)(this + 0x1c) + (int)*charPtr;
   }
   return;
 }
@@ -1307,9 +1319,10 @@ int __ZN12ParseOperandC2ERKS_(this, parseOperand)
   void *this;
   unsigned char * parseOperand;
 {
+  undefined4 field28;
   undefined2 field18;
   int directIndexCount;
-  undefined4 uVar3;
+  undefined4 field04;
   uint directIndex;
   uchar swizzle;
   undefined4 field24;
@@ -1319,10 +1332,10 @@ int __ZN12ParseOperandC2ERKS_(this, parseOperand)
   *(undefined4 *)((int)this + 0x20) = 0;
   directIndexCount = *(int *)(parseOperand + 0x20);
   field18 = *(undefined2 *)(parseOperand + 0x18);
-  uVar3 = *(undefined4 *)(parseOperand + 4);
+  field04 = *(undefined4 *)(parseOperand + 4);
   field24 = *(undefined4 *)(parseOperand + 0x24);
   *(undefined4 *)this = *(undefined4 *)parseOperand;
-  *(undefined4 *)((int)this + 4) = uVar3;
+  *(undefined4 *)((int)this + 4) = field04;
   *(undefined2 *)((int)this + 0x18) = field18;
   *(undefined4 *)((int)this + 0x24) = field24;
   *(undefined4 *)((int)this + 0x14) = 0;
@@ -1345,9 +1358,9 @@ int __ZN12ParseOperandC2ERKS_(this, parseOperand)
       loopIndex = loopIndex + 1;
     } while (loopIndex < *(uint *)(parseOperand + 0x14));
   }
-  uVar3 = *(undefined4 *)(parseOperand + 0x28);
+  field28 = *(undefined4 *)(parseOperand + 0x28);
   *(undefined4 *)((int)this + 0x2c) = *(undefined4 *)(parseOperand + 0x2c);
-  *(undefined4 *)((int)this + 0x28) = uVar3;
+  *(undefined4 *)((int)this + 0x28) = field28;
   return;
 }
 
@@ -1364,9 +1377,10 @@ int __ZN12ParseOperandC4ERKS_(this, parseOperand)
   void *this;
   unsigned char * parseOperand;
 {
+  undefined4 field28;
   undefined2 field18;
   int directIndexCount;
-  undefined4 uVar3;
+  undefined4 field04;
   uint directIndex;
   uchar swizzle;
   undefined4 field24;
@@ -1376,10 +1390,10 @@ int __ZN12ParseOperandC4ERKS_(this, parseOperand)
   *(undefined4 *)((int)this + 0x20) = 0;
   directIndexCount = *(int *)(parseOperand + 0x20);
   field18 = *(undefined2 *)(parseOperand + 0x18);
-  uVar3 = *(undefined4 *)(parseOperand + 4);
+  field04 = *(undefined4 *)(parseOperand + 4);
   field24 = *(undefined4 *)(parseOperand + 0x24);
   *(undefined4 *)this = *(undefined4 *)parseOperand;
-  *(undefined4 *)((int)this + 4) = uVar3;
+  *(undefined4 *)((int)this + 4) = field04;
   *(undefined2 *)((int)this + 0x18) = field18;
   *(undefined4 *)((int)this + 0x24) = field24;
   *(undefined4 *)((int)this + 0x14) = 0;
@@ -1402,9 +1416,9 @@ int __ZN12ParseOperandC4ERKS_(this, parseOperand)
       loopIndex = loopIndex + 1;
     } while (loopIndex < *(uint *)(parseOperand + 0x14));
   }
-  uVar3 = *(undefined4 *)(parseOperand + 0x28);
+  field28 = *(undefined4 *)(parseOperand + 0x28);
   *(undefined4 *)((int)this + 0x2c) = *(undefined4 *)(parseOperand + 0x2c);
-  *(undefined4 *)((int)this + 0x28) = uVar3;
+  *(undefined4 *)((int)this + 0x28) = field28;
   return;
 }
 
@@ -1426,28 +1440,28 @@ int __ZN12ParseOperandD1Ev(this)
 int __ZN12ParseOperandD4Ev(this)
   void *this;
 {
-  void *this_00;
+  void *symbol;
   
-  this_00 = *(void **)this;
-  if (this_00 == (void *)0x0) goto LAB_97bbb3cc;
-  if ((*(int *)((int)this_00 + 0x3c) == 0) ||
+  symbol = *(void **)this;
+  if (symbol == (void *)0x0) goto LAB_97bbb3cc;
+  if ((*(int *)((int)symbol + 0x3c) == 0) ||
      (ParseOperand__temporaryAllocator == (unsigned char *)0x0)) {
-    if ((*(int *)((int)this_00 + 0x58) != 0) &&
+    if ((*(int *)((int)symbol + 0x58) != 0) &&
        (ParseOperand__addressTempAllocator != (unsigned char *)0x0)) {
       AddressTempAllocator__releaseTemporary
-                (ParseOperand__addressTempAllocator,*(undefined4 *)((int)this_00 + 0x28));
+                (ParseOperand__addressTempAllocator,*(undefined4 *)((int)symbol + 0x28));
       goto LAB_97bbb3a4;
     }
   }
   else {
-    ((int (*)())TemporaryAllocator__releaseTemporary)(ParseOperand__temporaryAllocator,(uint)*(ushort *)((int)this_00 + 0x2c),
-               *(uint *)((int)this_00 + 0x28));
+    ((int (*)())TemporaryAllocator__releaseTemporary)(ParseOperand__temporaryAllocator,(uint)*(ushort *)((int)symbol + 0x2c),
+               *(uint *)((int)symbol + 0x28));
 LAB_97bbb3a4:
-    this_00 = *(void **)this;
+    symbol = *(void **)this;
   }
-  if ((*(int *)((int)this_00 + 0x50) == 0) && (this_00 != (void *)0x0)) {
-    ((int (*)())__ZN11ParseSymbolD1Ev)(this_00);
-    __ZdlPv(this_00);
+  if ((*(int *)((int)symbol + 0x50) == 0) && (symbol != (void *)0x0)) {
+    ((int (*)())__ZN11ParseSymbolD1Ev)(symbol);
+    __ZdlPv(symbol);
   }
 LAB_97bbb3cc:
   if (*(int *)((int)this + 0x1c) != 0) {
@@ -1465,19 +1479,20 @@ int ParseOperand__operator_(this, parseOperand)
   unsigned char * this;
   unsigned char * parseOperand;
 {
+  undefined4 field28;
   undefined2 field18;
-  undefined4 uVar2;
+  undefined4 field04;
   uint directIndex;
   uchar swizzle;
   undefined4 field24;
   uint loopIndex;
   
   if (this != parseOperand) {
-    uVar2 = *(undefined4 *)(parseOperand + 4);
+    field04 = *(undefined4 *)(parseOperand + 4);
     field18 = *(undefined2 *)(parseOperand + 0x18);
     field24 = *(undefined4 *)(parseOperand + 0x24);
     *(undefined4 *)this = *(undefined4 *)parseOperand;
-    *(undefined4 *)(this + 4) = uVar2;
+    *(undefined4 *)(this + 4) = field04;
     *(undefined2 *)(this + 0x18) = field18;
     *(undefined4 *)(this + 0x24) = field24;
     ClearDirectIndex(this);
@@ -1497,9 +1512,9 @@ int ParseOperand__operator_(this, parseOperand)
         loopIndex = loopIndex + 1;
       } while (loopIndex < *(uint *)(parseOperand + 0x14));
     }
-    uVar2 = *(undefined4 *)(parseOperand + 0x28);
+    field28 = *(undefined4 *)(parseOperand + 0x28);
     *(undefined4 *)(this + 0x2c) = *(undefined4 *)(parseOperand + 0x2c);
-    *(undefined4 *)(this + 0x28) = uVar2;
+    *(undefined4 *)(this + 0x28) = field28;
   }
   return this;
 }
@@ -1658,6 +1673,8 @@ int ParseOperand__GetAsDestVar(destDesc, operand, markWord1)
   unsigned char * operand;
   int markWord1;
 {
+  uint newWord;
+  uint descWord;
   uint isMatrix;
   int isMatrix2;
   uint loopIndex;
@@ -1665,7 +1682,7 @@ int ParseOperand__GetAsDestVar(destDesc, operand, markWord1)
   int directIndex;
   int swizzle;
   short columnOffset;
-  uint uVar1;
+  uint directCount;
   int classBits;
   short regOffset;
   uint directStart;
@@ -1684,10 +1701,10 @@ int ParseOperand__GetAsDestVar(destDesc, operand, markWord1)
   if (isMatrix2 == 0) {
 LAB_97bbb868:
     regOffset = columnOffset;
-    uVar1 = *(uint *)(operand + 0x20);
+    directCount = *(uint *)(operand + 0x20);
   }
   else {
-    uVar1 = 0;
+    directCount = 0;
     if (*(int *)(operand + 0x20) != 0) {
       columnOffset = GetDirectIndex(operand,0);
       directStart = 1;
@@ -1695,26 +1712,26 @@ LAB_97bbb868:
       goto LAB_97bbb868;
     }
   }
-  if (directStart == uVar1) {
+  if (directStart == directCount) {
     if (*(int *)(operand + 0x14) == 0) {
-      uVar1 = *destDesc;
-      directStart = uVar1 >> 10 & 3;
+      descWord = *destDesc;
+      directStart = descWord >> 10 & 3;
       if (directStart == 1) {
 LAB_97bbb950:
-        uVar1 = uVar1 | 0x4000;
-        *destDesc = uVar1;
+        descWord = descWord | 0x4000;
+        *destDesc = descWord;
       }
       else if (directStart != 0) {
         if (directStart != 2) {
           if (directStart != 3) goto LAB_97bbba00;
-          uVar1 = uVar1 | 0x10000;
-          *destDesc = uVar1;
+          descWord = descWord | 0x10000;
+          *destDesc = descWord;
         }
-        uVar1 = uVar1 | 0x8000;
-        *destDesc = uVar1;
+        descWord = descWord | 0x8000;
+        *destDesc = descWord;
         goto LAB_97bbb950;
       }
-      *destDesc = uVar1 | 0x2000;
+      *destDesc = descWord | 0x2000;
     }
     else {
       loopIndex = 0;
@@ -1750,44 +1767,44 @@ LAB_97bbb904:
   }
   else {
     directIdx = directStart;
-    if (directStart < uVar1) {
+    if (directStart < directCount) {
       do {
         directIndex = GetDirectIndex(operand,directIdx);
         if (directIndex == 1) {
-          uVar1 = (directIdx - directStart) * 0x40 & 0xc0 | *destDesc & 0xffffff3f | 0x4000;
+          newWord = (directIdx - directStart) * 0x40 & 0xc0 | *destDesc & 0xffffff3f | 0x4000;
 LAB_97bbb9ec:
-          *destDesc = uVar1;
-          uVar1 = *(uint *)(operand + 0x20);
+          *destDesc = newWord;
+          directCount = *(uint *)(operand + 0x20);
         }
         else {
           if (directIndex == 0) {
-            uVar1 = (directIdx - directStart) * 0x100 & 0x300 | *destDesc & 0xfffffcff | 0x2000;
+            newWord = (directIdx - directStart) * 0x100 & 0x300 | *destDesc & 0xfffffcff | 0x2000;
             goto LAB_97bbb9ec;
           }
           if (directIndex == 2) {
-            uVar1 = (directIdx - directStart) * 0x10 & 0x30 | *destDesc & 0xffffffcf | 0x8000;
+            newWord = (directIdx - directStart) * 0x10 & 0x30 | *destDesc & 0xffffffcf | 0x8000;
             goto LAB_97bbb9ec;
           }
           if (directIndex == 3) {
-            uVar1 = (directIdx - directStart) * 4 & 0xc | *destDesc & 0xfffffff3 | 0x10000;
+            newWord = (directIdx - directStart) * 4 & 0xc | *destDesc & 0xfffffff3 | 0x10000;
             goto LAB_97bbb9ec;
           }
         }
         directIdx = directIdx + 1;
-      } while (directIdx < uVar1);
+      } while (directIdx < directCount);
     }
   }
 LAB_97bbba00:
   if (*(char *)**(undefined4 **)operand == '\0') {
-    uVar1 = *destDesc;
+    descWord = *destDesc;
     classBits = 1;
   }
   else {
     if (*(char *)**(undefined4 **)operand != '\x04') goto LAB_97bbba4c;
-    uVar1 = *destDesc;
+    descWord = *destDesc;
     classBits = 3;
   }
-  *destDesc = classBits << 0x11 | uVar1 & 0xfff1ffff;
+  *destDesc = classBits << 0x11 | descWord & 0xfff1ffff;
   *(short *)((int)destDesc + 6) = *(short *)(**(int **)operand + 0x12) + regOffset;
 LAB_97bbba4c:
   if (markWord1 != 0) {
@@ -1802,15 +1819,22 @@ int ParseOperand__GetAsSourceVar(srcDesc, operand, markWord1)
   unsigned char * operand;
   int markWord1;
 {
+  uint sizeBits;
+  uint descWord;
+  uint flagBits;
+  uint directIndex;
+  uint swizzle0;
+  uint swizzleWord;
+  int classBits;
   int logicalSize;
   int isMatrix;
   uint loopIndex;
   uint swizzle;
   byte chunkKind;
-  uint uVar2;
+  uint swizzleCount;
   ushort scalerWidth;
-  int iVar3;
-  uint uVar5;
+  int directCount;
+  uint regOffsetCarry;
   ushort matrixWidth;
   uint oldWord0;
   int directLeft;
@@ -1818,40 +1842,40 @@ int ParseOperand__GetAsSourceVar(srcDesc, operand, markWord1)
   
   *srcDesc = 0;
   srcDesc[1] = 0;
-  uVar5 = 0;
+  regOffsetCarry = 0;
   regOffset = 0;
   scalerWidth = GetScalerWidthForType((uint)*(ushort *)(*(int *)operand + 0x2c));
   loopIndex = 0;
   *srcDesc = *srcDesc & 0xff85ffff | 0xd8000;
-  uVar2 = *(uint *)(operand + 0x14);
-  if (uVar2 != 0) {
+  swizzleCount = *(uint *)(operand + 0x14);
+  if (swizzleCount != 0) {
     do {
       if (loopIndex == 1) {
         swizzle = ParseOperand__GetSwizzle(operand,1);
-        uVar2 = (swizzle & 3) << 0x13 | *srcDesc & 0xffe7ffff;
+        swizzleWord = (swizzle & 3) << 0x13 | *srcDesc & 0xffe7ffff;
 LAB_97bbbb6c:
-        *srcDesc = uVar2;
-        uVar2 = *(uint *)(operand + 0x14);
+        *srcDesc = swizzleWord;
+        swizzleCount = *(uint *)(operand + 0x14);
       }
       else {
         if (loopIndex == 0) {
           swizzle = ParseOperand__GetSwizzle(operand,0);
-          uVar2 = (swizzle & 3) << 0x15 | *srcDesc & 0xff9fffff;
+          swizzleWord = (swizzle & 3) << 0x15 | *srcDesc & 0xff9fffff;
           goto LAB_97bbbb6c;
         }
         if (loopIndex == 2) {
           swizzle = ParseOperand__GetSwizzle(operand,2);
-          uVar2 = (swizzle & 3) << 0x11 | *srcDesc & 0xfff9ffff;
+          swizzleWord = (swizzle & 3) << 0x11 | *srcDesc & 0xfff9ffff;
           goto LAB_97bbbb6c;
         }
         if (loopIndex == 3) {
           swizzle = ParseOperand__GetSwizzle(operand,3);
-          uVar2 = (swizzle & 3) << 0xf | *srcDesc & 0xfffe7fff;
+          swizzleWord = (swizzle & 3) << 0xf | *srcDesc & 0xfffe7fff;
           goto LAB_97bbbb6c;
         }
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex < uVar2);
+    } while (loopIndex < swizzleCount);
   }
   isMatrix = ((int (*)())ParseOperand__IsMatrix)(operand);
   matrixWidth = 1;
@@ -1859,19 +1883,19 @@ LAB_97bbbb6c:
     matrixWidth = scalerWidth;
   }
   if (scalerWidth == 1) {
-    iVar3 = *(int *)(operand + 0x20);
-    if (iVar3 == 0) {
-      uVar2 = *srcDesc >> 0x15 & 3;
-      *srcDesc = uVar2 << 0x13 | uVar2 << 0x11 | uVar2 << 0xf | *srcDesc & 0xffe07fff;
+    directCount = *(int *)(operand + 0x20);
+    if (directCount == 0) {
+      swizzle0 = *srcDesc >> 0x15 & 3;
+      *srcDesc = swizzle0 << 0x13 | swizzle0 << 0x11 | swizzle0 << 0xf | *srcDesc & 0xffe07fff;
       goto LAB_97bbbbc4;
     }
   }
   else {
 LAB_97bbbbc4:
-    iVar3 = *(int *)(operand + 0x20);
+    directCount = *(int *)(operand + 0x20);
   }
-  directLeft = iVar3;
-  if (iVar3 != 0) {
+  directLeft = directCount;
+  if (directCount != 0) {
     while( true ) {
       if (matrixWidth < 2) {
         if (1 < scalerWidth) {
@@ -1881,53 +1905,53 @@ LAB_97bbbbc4:
       else {
         matrixWidth = 1;
       }
-      uVar2 = GetDirectIndex(operand,iVar3 - directLeft);
+      directIndex = GetDirectIndex(operand,directCount - directLeft);
       if (scalerWidth < 2) {
-        *srcDesc = (uVar2 & 3) << 0x15 |
-                   (uVar2 & 3) << 0x13 |
-                   (uVar2 & 3) << 0x11 | (uVar2 & 3) << 0xf | *srcDesc & 0xff807fff;
-        uVar2 = uVar5;
+        *srcDesc = (directIndex & 3) << 0x15 |
+                   (directIndex & 3) << 0x13 |
+                   (directIndex & 3) << 0x11 | (directIndex & 3) << 0xf | *srcDesc & 0xff807fff;
+        directIndex = regOffsetCarry;
       }
-      regOffset = (short)uVar2;
+      regOffset = (short)directIndex;
       if (directLeft + -1 == 0) break;
-      iVar3 = *(int *)(operand + 0x20);
-      uVar5 = uVar2;
+      directCount = *(int *)(operand + 0x20);
+      regOffsetCarry = directIndex;
       directLeft = directLeft + -1;
     }
   }
   chunkKind = *(byte *)**(undefined4 **)operand;
   if (chunkKind == 2) {
-    uVar5 = *srcDesc & 0xfc7fffff;
+    descWord = *srcDesc & 0xfc7fffff;
   }
   else {
     if (chunkKind < 3) {
       if (chunkKind != 0) goto LAB_97bbbcb0;
-      uVar5 = *srcDesc;
-      iVar3 = 1;
+      descWord = *srcDesc;
+      classBits = 1;
     }
     else if (chunkKind == 3) {
-      uVar5 = *srcDesc;
-      iVar3 = 2;
+      descWord = *srcDesc;
+      classBits = 2;
     }
     else {
       if (chunkKind != 4) goto LAB_97bbbcb0;
-      uVar5 = *srcDesc;
-      iVar3 = 3;
+      descWord = *srcDesc;
+      classBits = 3;
     }
-    uVar5 = iVar3 << 0x17 | uVar5 & 0xfc7fffff;
+    descWord = classBits << 0x17 | descWord & 0xfc7fffff;
   }
-  *srcDesc = uVar5;
+  *srcDesc = descWord;
   *(short *)((int)srcDesc + 6) = *(short *)(**(int **)operand + 0x12) + regOffset;
 LAB_97bbbcb0:
   *srcDesc = (uint)(matrixWidth != 1) * 0x4000 | *srcDesc & 0xffffbfff;
   logicalSize = ((int (*)())ParseOperand__GetLogicalSize)(operand);
   oldWord0 = *srcDesc;
-  uVar5 = (logicalSize + -1) * 0x1000 & 0x3000;
-  *srcDesc = uVar5 | oldWord0 & 0xffffcfff;
-  uVar2 = (*(uint *)(operand + 0x28) & 1) << 0x1b;
-  *srcDesc = uVar2 | uVar5 | oldWord0 & 0xf7ffcfff;
+  sizeBits = (logicalSize + -1) * 0x1000 & 0x3000;
+  *srcDesc = sizeBits | oldWord0 & 0xffffcfff;
+  flagBits = (*(uint *)(operand + 0x28) & 1) << 0x1b;
+  *srcDesc = flagBits | sizeBits | oldWord0 & 0xf7ffcfff;
   if (markWord1 != 0) {
-    *srcDesc = uVar2 | uVar5 | oldWord0 & 0x87ffcfff | 0x80000000;
+    *srcDesc = flagBits | sizeBits | oldWord0 & 0x87ffcfff | 0x80000000;
     *(undefined1 *)((int)srcDesc + 3) = 0;
   }
   return srcDesc;
@@ -1996,14 +2020,15 @@ int ParseOperand__GetLogicalSize(this)
 int ParseOperand__isWriteable(this)
   unsigned char * this;
 {
-  undefined4 uVar1;
-  int *a0;
+  undefined4 qualifier;
+  undefined4 result;
+  int *parseTreeType;
   
-  uVar1 = 0;
+  result = 0;
   if (*(int *)this != 0) {
-    a0 = *(int **)(*(int *)this + 0xc);
-    uVar1 = (**(code **)(*a0 + 0x24))(a0);
-    switch(uVar1) {
+    parseTreeType = *(int **)(*(int *)this + 0xc);
+    qualifier = (**(code **)(*parseTreeType + 0x24))(parseTreeType);
+    switch(qualifier) {
     case 0:
     case 1:
     case 5:
@@ -2017,13 +2042,13 @@ int ParseOperand__isWriteable(this)
     case 0xf:
     case 0x12:
     case 0x13:
-      uVar1 = 1;
+      result = 1;
       break;
     default:
-      uVar1 = 0;
+      result = 0;
     }
   }
-  return uVar1;
+  return result;
 }
 
 /* ParseOperand__AddSwizzle @ 0x97bbbef8 (184 bytes) */

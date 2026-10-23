@@ -437,15 +437,16 @@ int BindingTable__InsertAttribRequestBinding(this, binding)
   unsigned char * this;
   unsigned char * binding;
 {
+  unsigned char *nextNode;
   int location;
-  unsigned char * pBVar1;
+  unsigned char *existing;
   int hashIdx;
   unsigned char * curNode;
   
   if (binding != (unsigned char *)0x0) {
-    pBVar1 = (unsigned char *)((int (*)())BindingTable__FindAttribRequestBinding)(this,binding);
-    if (pBVar1 == (unsigned char *)0x0) {
-      pBVar1 = *(unsigned char **)(this + 4);
+    existing = (unsigned char *)((int (*)())BindingTable__FindAttribRequestBinding)(this,binding);
+    if (existing == (unsigned char *)0x0) {
+      nextNode = *(unsigned char **)(this + 4);
       if (*(unsigned char **)(this + 4) == (unsigned char *)0x0) {
         *(unsigned char **)(this + 4) = binding;
         hashIdx = Binding__GetHash(binding,*(uint *)this);
@@ -453,27 +454,27 @@ int BindingTable__InsertAttribRequestBinding(this, binding)
       }
       else {
         do {
-          curNode = pBVar1;
-          pBVar1 = (unsigned char *)((int (*)())Binding__GetNextBinding)(curNode);
-        } while (pBVar1 != (unsigned char *)0x0);
+          curNode = nextNode;
+          nextNode = (unsigned char *)((int (*)())Binding__GetNextBinding)(curNode);
+        } while (nextNode != (unsigned char *)0x0);
         ((int (*)())Binding__SetNextBinding)(curNode,binding);
         hashIdx = Binding__GetHash(binding,*(uint *)this);
-        pBVar1 = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 8));
-        if (pBVar1 == (unsigned char *)0x0) {
+        nextNode = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 8));
+        if (nextNode == (unsigned char *)0x0) {
           *(unsigned char **)(hashIdx * 4 + *(int *)(this + 8)) = binding;
         }
         else {
           do {
-            curNode = pBVar1;
-            pBVar1 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(curNode);
-          } while (pBVar1 != (unsigned char *)0x0);
+            curNode = nextNode;
+            nextNode = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(curNode);
+          } while (nextNode != (unsigned char *)0x0);
           ((int (*)())Binding__SetNextBindingInHash)(curNode,binding);
         }
       }
       return 1;
     }
     location = ((int (*)())Binding__GetLocation)(binding);
-    ((int (*)())Binding__SetLocation)(pBVar1,location);
+    ((int (*)())Binding__SetLocation)(existing,location);
   }
   return 0;
 }
@@ -499,14 +500,14 @@ int BindingTable__FindAttribRequestBinding(this, binding)
 {
   int isEqual;
   int hashIdx;
-  unsigned char * this_00;
+  unsigned char *entry;
   
   hashIdx = Binding__GetHash(binding,*(uint *)this);
-  this_00 = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 8));
-  while ((this_00 != (unsigned char *)0x0 && (isEqual = __ZeqRK7BindingS1_(this_00,binding), isEqual != 1))) {
-    this_00 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(this_00);
+  entry = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 8));
+  while ((entry != (unsigned char *)0x0 && (isEqual = __ZeqRK7BindingS1_(entry,binding), isEqual != 1))) {
+    entry = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(entry);
   }
-  return this_00;
+  return entry;
 }
 
 /* BindingTable__FindAttribRequestBindingLocationByName @ 0x97bb0a7c (228 bytes) */
@@ -547,6 +548,7 @@ int BindingTable__InsertClientAttribBinding(this, binding)
   unsigned char * this;
   unsigned char * binding;
 {
+  unsigned char *nextNode;
   int bindingSlots;
   int isBuiltIn;
   int activeIndex;
@@ -555,7 +557,7 @@ int BindingTable__InsertClientAttribBinding(this, binding)
   int newLocation;
   int curLocation;
   unsigned char * prev;
-  unsigned char * pBVar4;
+  unsigned char *nextBinding;
   unsigned char * cur;
   
   if (binding == (unsigned char *)0x0) {
@@ -563,19 +565,19 @@ int BindingTable__InsertClientAttribBinding(this, binding)
   }
   newBinding = operator_new(0x38);
   __ZN7BindingC1ERKS_(newBinding,binding);
-  pBVar4 = *(unsigned char **)(this + 0xc);
-  if (pBVar4 != (unsigned char *)0x0) {
+  nextBinding = *(unsigned char **)(this + 0xc);
+  if (nextBinding != (unsigned char *)0x0) {
     newLocation = ((int (*)())Binding__GetLocation)(newBinding);
     prev = (unsigned char *)0x0;
-    cur = pBVar4;
+    cur = nextBinding;
     do {
       curLocation = ((int (*)())Binding__GetLocation)(cur);
-      pBVar4 = cur;
+      nextBinding = cur;
       if (newLocation < curLocation) break;
-      pBVar4 = (unsigned char *)((int (*)())Binding__GetNextBinding)(cur);
+      nextBinding = (unsigned char *)((int (*)())Binding__GetNextBinding)(cur);
       prev = cur;
-      cur = pBVar4;
-    } while (pBVar4 != (unsigned char *)0x0);
+      cur = nextBinding;
+    } while (nextBinding != (unsigned char *)0x0);
     if (prev != (unsigned char *)0x0) {
       ((int (*)())Binding__SetNextBinding)(prev,newBinding);
       goto LAB_97bb0bf0;
@@ -583,17 +585,17 @@ int BindingTable__InsertClientAttribBinding(this, binding)
   }
   *(unsigned char **)(this + 0xc) = newBinding;
 LAB_97bb0bf0:
-  ((int (*)())Binding__SetNextBinding)(newBinding,pBVar4);
+  ((int (*)())Binding__SetNextBinding)(newBinding,nextBinding);
   hashIdx = Binding__GetHash(newBinding,*(uint *)this);
-  pBVar4 = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 0x10));
-  if (pBVar4 == (unsigned char *)0x0) {
+  nextNode = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 0x10));
+  if (nextNode == (unsigned char *)0x0) {
     *(unsigned char **)(hashIdx * 4 + *(int *)(this + 0x10)) = newBinding;
   }
   else {
     do {
-      prev = pBVar4;
-      pBVar4 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(prev);
-    } while (pBVar4 != (unsigned char *)0x0);
+      prev = nextNode;
+      nextNode = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(prev);
+    } while (nextNode != (unsigned char *)0x0);
     ((int (*)())Binding__SetNextBindingInHash)(prev,newBinding);
   }
   ((int (*)())Binding__SetNextBindingInHash)(newBinding,(unsigned char *)0x0);
@@ -618,83 +620,90 @@ int BindingTable__InsertAttribBinding(this, binding)
   unsigned char * this;
   unsigned char * binding;
 {
+  unsigned char *nextNode;
+  unsigned char *curNode;
+  int bindingSlots;
+  int isBuiltIn;
+  int activeIndex;
+  int hashIdx;
+  int curLocation;
   int slotCount;
-  undefined4 uVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  unsigned char * pBVar5;
-  unsigned char * pBVar6;
+  undefined4 result;
+  int builtInOrCmp;
+  int prevLocation;
+  int newLocation;
+  unsigned char *prevBinding;
+  unsigned char *nextBinding;
   unsigned char * curBinding;
   
-  uVar1 = 0;
+  result = 0;
   if (binding != (unsigned char *)0x0) {
-    iVar3 = 0;
-    iVar2 = Binding__IsBuiltIn(binding);
-    pBVar6 = *(unsigned char **)(this + 0xc);
-    iVar4 = 1;
-    if ((iVar2 != 0) && (iVar2 = _memcmp(*(undefined4 *)(binding + 8),"gl_Vertex",10), iVar2 == 0))
+    prevLocation = 0;
+    builtInOrCmp = Binding__IsBuiltIn(binding);
+    nextBinding = *(unsigned char **)(this + 0xc);
+    newLocation = 1;
+    if ((builtInOrCmp != 0) && (builtInOrCmp = _memcmp(*(undefined4 *)(binding + 8),"gl_Vertex",10), builtInOrCmp == 0))
     {
-      if ((pBVar6 != (unsigned char *)0x0) && (iVar2 = ((int (*)())Binding__GetLocation)(pBVar6), iVar2 == 0)) {
+      if ((nextBinding != (unsigned char *)0x0) && (builtInOrCmp = ((int (*)())Binding__GetLocation)(nextBinding), builtInOrCmp == 0)) {
         return 0;
       }
-      iVar4 = 0;
+      newLocation = 0;
     }
-    pBVar5 = (unsigned char *)0x0;
-    if (pBVar6 != (unsigned char *)0x0) {
+    prevBinding = (unsigned char *)0x0;
+    if (nextBinding != (unsigned char *)0x0) {
       do {
-        curBinding = pBVar6;
-        iVar4 = iVar3 + iVar4;
-        iVar2 = ((int (*)())Binding__GetLocation)(curBinding);
+        curBinding = nextBinding;
+        newLocation = prevLocation + newLocation;
+        curLocation = ((int (*)())Binding__GetLocation)(curBinding);
         slotCount = ((int (*)())Binding__GetBindingSlots)(binding);
-        pBVar6 = curBinding;
-        if (iVar4 + slotCount <= iVar2) goto LAB_97bb0db4;
-        iVar3 = ((int (*)())Binding__GetLocation)(curBinding);
-        iVar4 = ((int (*)())Binding__GetBindingSlots)(curBinding);
-        pBVar6 = (unsigned char *)((int (*)())Binding__GetNextBinding)(curBinding);
-        pBVar5 = curBinding;
-      } while (pBVar6 != (unsigned char *)0x0);
-      iVar4 = iVar3 + iVar4;
+        nextBinding = curBinding;
+        if (newLocation + slotCount <= curLocation) goto LAB_97bb0db4;
+        prevLocation = ((int (*)())Binding__GetLocation)(curBinding);
+        newLocation = ((int (*)())Binding__GetBindingSlots)(curBinding);
+        nextBinding = (unsigned char *)((int (*)())Binding__GetNextBinding)(curBinding);
+        prevBinding = curBinding;
+      } while (nextBinding != (unsigned char *)0x0);
+      newLocation = prevLocation + newLocation;
     }
 LAB_97bb0db4:
-    if (pBVar5 == (unsigned char *)0x0) {
+    if (prevBinding == (unsigned char *)0x0) {
       *(unsigned char **)(this + 0xc) = binding;
     }
     else {
-      ((int (*)())Binding__SetNextBinding)(pBVar5,binding);
+      ((int (*)())Binding__SetNextBinding)(prevBinding,binding);
     }
-    ((int (*)())Binding__SetNextBinding)(binding,pBVar6);
-    ((int (*)())Binding__SetLocation)(binding,iVar4);
-    iVar2 = Binding__GetHash(binding,*(uint *)this);
-    pBVar6 = *(unsigned char **)(iVar2 * 4 + *(int *)(this + 0x10));
-    if (pBVar6 == (unsigned char *)0x0) {
-      *(unsigned char **)(iVar2 * 4 + *(int *)(this + 0x10)) = binding;
+    ((int (*)())Binding__SetNextBinding)(binding,nextBinding);
+    ((int (*)())Binding__SetLocation)(binding,newLocation);
+    hashIdx = Binding__GetHash(binding,*(uint *)this);
+    nextNode = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 0x10));
+    if (nextNode == (unsigned char *)0x0) {
+      *(unsigned char **)(hashIdx * 4 + *(int *)(this + 0x10)) = binding;
     }
     else {
       do {
-        pBVar5 = pBVar6;
-        pBVar6 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(pBVar5);
-      } while (pBVar6 != (unsigned char *)0x0);
-      ((int (*)())Binding__SetNextBindingInHash)(pBVar5,binding);
+        curNode = nextNode;
+        nextNode = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(curNode);
+      } while (nextNode != (unsigned char *)0x0);
+      ((int (*)())Binding__SetNextBindingInHash)(curNode,binding);
     }
     ((int (*)())Binding__SetNextBindingInHash)(binding,(unsigned char *)0x0);
-    iVar2 = *(int *)(this + 0x1c);
-    *(int *)(this + 0x1c) = iVar2 + 1;
-    ((int (*)())Binding__SetActiveIndex)(binding,iVar2);
-    iVar2 = Binding__IsBuiltIn(binding);
-    if (iVar2 == 0) {
-      iVar2 = ((int (*)())Binding__GetBindingSlots)(binding);
-      *(int *)(this + 0x28) = *(int *)(this + 0x28) + iVar2;
+    activeIndex = *(int *)(this + 0x1c);
+    *(int *)(this + 0x1c) = activeIndex + 1;
+    ((int (*)())Binding__SetActiveIndex)(binding,activeIndex);
+    isBuiltIn = Binding__IsBuiltIn(binding);
+    if (isBuiltIn == 0) {
+      bindingSlots = ((int (*)())Binding__GetBindingSlots)(binding);
+      *(int *)(this + 0x28) = *(int *)(this + 0x28) + bindingSlots;
     }
-    iVar2 = ((int (*)())Binding__GetBindingSlots)(binding);
-    *(int *)(this + 0x34) = *(int *)(this + 0x34) + iVar2;
+    bindingSlots = ((int (*)())Binding__GetBindingSlots)(binding);
+    *(int *)(this + 0x34) = *(int *)(this + 0x34) + bindingSlots;
     if (*(int *)(this + 0x38) < *(int *)(binding + 0x10) + 1) {
       *(int *)(this + 0x38) = *(int *)(binding + 0x10) + 1;
     }
-    uVar1 = 1;
+    result = 1;
     binding[0x34] = 0x1;
   }
-  return uVar1;
+  return result;
 }
 
 /* BindingTable__NextAttribBinding @ 0x97bb0ecc (24 bytes) */
@@ -718,14 +727,14 @@ int BindingTable__FindAttribBinding(this, binding)
 {
   int isEqual;
   int hashIdx;
-  unsigned char * this_00;
+  unsigned char *entry;
   
   hashIdx = Binding__GetHash(binding,*(uint *)this);
-  this_00 = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 0x10));
-  while ((this_00 != (unsigned char *)0x0 && (isEqual = __ZeqRK7BindingS1_(this_00,binding), isEqual != 1))) {
-    this_00 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(this_00);
+  entry = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 0x10));
+  while ((entry != (unsigned char *)0x0 && (isEqual = __ZeqRK7BindingS1_(entry,binding), isEqual != 1))) {
+    entry = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(entry);
   }
-  return this_00;
+  return entry;
 }
 
 /* BindingTable__FindAttribBindingLocationByName @ 0x97bb0f58 (228 bytes) */
@@ -807,7 +816,7 @@ int BindingTable__InsertSingleUniform(this, binding, isFragment)
   int isBuiltIn;
   int activeIndex;
   int hashIdx;
-  undefined4 uVar1;
+  undefined4 result;
   int location;
   unsigned char * nextNode;
   unsigned char * curNode;
@@ -815,7 +824,7 @@ int BindingTable__InsertSingleUniform(this, binding, isFragment)
   int lastLocation;
   int lastSlots;
   
-  uVar1 = 0;
+  result = 0;
   if (binding != (unsigned char *)0x0) {
     lastLocation = 0;
     lastSlots = 0;
@@ -878,9 +887,9 @@ int BindingTable__InsertSingleUniform(this, binding, isFragment)
     if (*(int *)(this + 0x3c) < *(int *)(binding + 0x10) + 1) {
       *(int *)(this + 0x3c) = *(int *)(binding + 0x10) + 1;
     }
-    uVar1 = 1;
+    result = 1;
   }
-  return uVar1;
+  return result;
 }
 
 /* BindingTable__AddSingleUniformReference @ 0x97bb12b4 (184 bytes) */
@@ -923,19 +932,27 @@ int BindingTable__InsertUniformArray(this, binding, param_3, firstTable, endTabl
   int endTable;
   unsigned char ** parseSymbolTable;
 {
-  bool bVar1;
+  int elementIdx;
+  int bindingSlots;
+  int activeIndex;
+  int hashIdx;
+  int location;
+  int probeIdx;
+  int isBuiltIn;
+  int lastIndex;
+  bool keepElement;
   undefined4 result;
-  int iVar3;
-  int iVar4;
+  int elementIdxDown;
+  int symbolFound;
   unsigned char * elementBinding;
   unsigned char * symbolTable;
-  int iVar5;
-  int iVar6;
+  int slotsOrFound;
+  int curLocation;
   unsigned char * nextNode;
   unsigned char * curNode;
   uint glType;
   ulong elementsLeft;
-  int iVar11;
+  int stageIdx;
   unsigned char ** tablePtr;
   char indexText [32];
   char indexText2 [32];
@@ -944,58 +961,58 @@ int BindingTable__InsertUniformArray(this, binding, param_3, firstTable, endTabl
   result = 0;
   if (binding != (unsigned char *)0x0) {
     stageMaxIndex = DAT_97c38f98;
-    iVar3 = ((int (*)())Binding__GetDecSize)(binding);
-    while (iVar3 = iVar3 + -1, -1 < iVar3) {
+    elementIdxDown = ((int (*)())Binding__GetDecSize)(binding);
+    while (elementIdxDown = elementIdxDown + -1, -1 < elementIdxDown) {
       Binding__RemoveNameBackToChar(binding,0x5b);
-      _sprintf(indexText,"[%d]",iVar3);
+      _sprintf(indexText,"[%d]",elementIdxDown);
       Binding__CatName(binding,indexText);
-      for (iVar11 = firstTable; iVar11 < endTable; iVar11 = iVar11 + 1) {
-        if (((parseSymbolTable[iVar11] != (unsigned char *)0x0) &&
-            (iVar4 = ParseSymbolTable__FindSymbolByName(parseSymbolTable[iVar11],*(char **)(binding + 8)),
-            iVar4 != 0)) && (*(int *)((int)&stageMaxIndex + iVar11 * 4) < iVar3)) {
-          *(int *)((int)&stageMaxIndex + iVar11 * 4) = iVar3;
+      for (stageIdx = firstTable; stageIdx < endTable; stageIdx = stageIdx + 1) {
+        if (((parseSymbolTable[stageIdx] != (unsigned char *)0x0) &&
+            (symbolFound = ParseSymbolTable__FindSymbolByName(parseSymbolTable[stageIdx],*(char **)(binding + 8)),
+            symbolFound != 0)) && (*(int *)((int)&stageMaxIndex + stageIdx * 4) < elementIdxDown)) {
+          *(int *)((int)&stageMaxIndex + stageIdx * 4) = elementIdxDown;
         }
       }
     }
     (*(unsigned int *)((unsigned char *)&(stageMaxIndex) + 0)) = (int)((ulonglong)stageMaxIndex >> 0x20);
-    iVar3 = (*(unsigned int *)((unsigned char *)&(stageMaxIndex) + 4));
+    lastIndex = (*(unsigned int *)((unsigned char *)&(stageMaxIndex) + 4));
     if ((*(int *)((unsigned char *)&(stageMaxIndex) + 4)) < (*(int *)((unsigned char *)&(stageMaxIndex) + 0))) {
-      iVar3 = (*(unsigned int *)((unsigned char *)&(stageMaxIndex) + 0));
+      lastIndex = (*(unsigned int *)((unsigned char *)&(stageMaxIndex) + 0));
     }
-    iVar11 = 0;
+    elementIdx = 0;
     Binding__RemoveNameBackToChar(binding,0x5b);
-    if (-1 < iVar3) {
-      elementsLeft = iVar3 + 1;
+    if (-1 < lastIndex) {
+      elementsLeft = lastIndex + 1;
       do {
-        bVar1 = true;
+        keepElement = true;
         elementBinding = operator_new(0x38);
         __ZN7BindingC1ERKS_(elementBinding,binding);
-        _sprintf(indexText2,"[%d]",iVar11);
+        _sprintf(indexText2,"[%d]",elementIdx);
         Binding__CatName(elementBinding,indexText2);
-        iVar4 = Binding__IsBuiltIn(binding);
-        if (iVar4 != 0) {
-          bVar1 = false;
+        isBuiltIn = Binding__IsBuiltIn(binding);
+        if (isBuiltIn != 0) {
+          keepElement = false;
           if (firstTable < endTable) {
             tablePtr = parseSymbolTable + firstTable;
-            iVar4 = firstTable;
+            probeIdx = firstTable;
             do {
               symbolTable = *tablePtr;
               tablePtr = tablePtr + 1;
               if ((symbolTable != (unsigned char *)0x0) &&
-                 (iVar5 = ParseSymbolTable__FindSymbolByName(symbolTable,*(char **)(elementBinding + 8)),
-                 iVar5 != 0)) goto LAB_97bb1538;
-              iVar4 = iVar4 + 1;
-            } while (iVar4 < endTable);
+                 (slotsOrFound = ParseSymbolTable__FindSymbolByName(symbolTable,*(char **)(elementBinding + 8)),
+                 slotsOrFound != 0)) goto LAB_97bb1538;
+              probeIdx = probeIdx + 1;
+            } while (probeIdx < endTable);
           }
           if (elementBinding != (unsigned char *)0x0) {
             __ZN7BindingD1Ev(elementBinding);
             __ZdlPv(elementBinding);
           }
         }
-        if (bVar1) {
+        if (keepElement) {
 LAB_97bb1538:
-          iVar4 = 0;
-          iVar5 = 0;
+          location = 0;
+          slotsOrFound = 0;
           nextNode = *(unsigned char **)(this + 0x14);
           if (*(unsigned char **)(this + 0x14) == (unsigned char *)0x0) {
             *(unsigned char **)(this + 0x14) = elementBinding;
@@ -1003,20 +1020,20 @@ LAB_97bb1538:
           else {
             do {
               curNode = nextNode;
-              iVar6 = ((int (*)())Binding__GetLocation)(curNode);
-              if (-1 < iVar6) {
-                iVar5 = ((int (*)())Binding__GetBindingSlots)(curNode);
-                iVar4 = iVar6;
+              curLocation = ((int (*)())Binding__GetLocation)(curNode);
+              if (-1 < curLocation) {
+                slotsOrFound = ((int (*)())Binding__GetBindingSlots)(curNode);
+                location = curLocation;
               }
               nextNode = (unsigned char *)((int (*)())Binding__GetNextBinding)(curNode);
             } while (nextNode != (unsigned char *)0x0);
             ((int (*)())Binding__SetNextBinding)(curNode,elementBinding);
           }
-          ((int (*)())Binding__SetLocation)(elementBinding,iVar4 + iVar5);
-          iVar4 = Binding__GetHash(elementBinding,*(uint *)this);
-          nextNode = *(unsigned char **)(iVar4 * 4 + *(int *)(this + 0x18));
+          ((int (*)())Binding__SetLocation)(elementBinding,location + slotsOrFound);
+          hashIdx = Binding__GetHash(elementBinding,*(uint *)this);
+          nextNode = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 0x18));
           if (nextNode == (unsigned char *)0x0) {
-            *(unsigned char **)(iVar4 * 4 + *(int *)(this + 0x18)) = elementBinding;
+            *(unsigned char **)(hashIdx * 4 + *(int *)(this + 0x18)) = elementBinding;
           }
           else {
             do {
@@ -1026,29 +1043,29 @@ LAB_97bb1538:
             ((int (*)())Binding__SetNextBindingInHash)(curNode,elementBinding);
           }
           ((int (*)())Binding__SetActualSize)(elementBinding,elementsLeft);
-          if (iVar11 == 0) {
-            iVar4 = *(int *)(this + 0x20);
-            *(int *)(this + 0x20) = iVar4 + 1;
-            ((int (*)())Binding__SetActiveIndex)(elementBinding,iVar4);
+          if (elementIdx == 0) {
+            activeIndex = *(int *)(this + 0x20);
+            *(int *)(this + 0x20) = activeIndex + 1;
+            ((int (*)())Binding__SetActiveIndex)(elementBinding,activeIndex);
           }
-          iVar4 = Binding__IsBuiltIn(elementBinding);
-          if (iVar4 == 0) {
-            iVar4 = ((int (*)())Binding__GetBindingSlots)(elementBinding);
-            *(int *)(this + 0x24) = *(int *)(this + 0x24) + iVar4;
+          isBuiltIn = Binding__IsBuiltIn(elementBinding);
+          if (isBuiltIn == 0) {
+            bindingSlots = ((int (*)())Binding__GetBindingSlots)(elementBinding);
+            *(int *)(this + 0x24) = *(int *)(this + 0x24) + bindingSlots;
           }
-          if (iVar11 <= (*(int *)((unsigned char *)&(stageMaxIndex) + 0))) {
+          if (elementIdx <= (*(int *)((unsigned char *)&(stageMaxIndex) + 0))) {
             elementBinding[0x34] = 0x1;
-            iVar4 = ((int (*)())Binding__GetBindingSlots)(elementBinding);
-            *(int *)(this + 0x2c) = *(int *)(this + 0x2c) + iVar4;
+            bindingSlots = ((int (*)())Binding__GetBindingSlots)(elementBinding);
+            *(int *)(this + 0x2c) = *(int *)(this + 0x2c) + bindingSlots;
             glType = ((int (*)())Binding__GetOpenGLType)(elementBinding);
             if ((0x8b5c < glType) && (glType < 0x8b65)) {
               *(int *)(this + 0x40) = *(int *)(this + 0x40) + 1;
             }
           }
-          if (iVar11 <= (*(int *)((unsigned char *)&(stageMaxIndex) + 4))) {
+          if (elementIdx <= (*(int *)((unsigned char *)&(stageMaxIndex) + 4))) {
             elementBinding[0x35] = 0x1;
-            iVar4 = ((int (*)())Binding__GetBindingSlots)(binding);
-            *(int *)(this + 0x30) = *(int *)(this + 0x30) + iVar4;
+            bindingSlots = ((int (*)())Binding__GetBindingSlots)(binding);
+            *(int *)(this + 0x30) = *(int *)(this + 0x30) + bindingSlots;
             glType = ((int (*)())Binding__GetOpenGLType)(elementBinding);
             if ((0x8b5c < glType) && (glType < 0x8b65)) {
               *(int *)(this + 0x44) = *(int *)(this + 0x44) + 1;
@@ -1058,9 +1075,9 @@ LAB_97bb1538:
             *(int *)(this + 0x3c) = *(int *)(elementBinding + 0x10) + 1;
           }
         }
-        iVar11 = iVar11 + 1;
+        elementIdx = elementIdx + 1;
         elementsLeft = elementsLeft - 1;
-      } while (iVar11 <= iVar3);
+      } while (elementIdx <= lastIndex);
     }
     __ZN7BindingD1Ev(binding);
     __ZdlPv(binding);
@@ -1090,14 +1107,14 @@ int BindingTable__FindUniformBinding(this, binding)
 {
   int isEqual;
   int hashIdx;
-  unsigned char * this_00;
+  unsigned char *entry;
   
   hashIdx = Binding__GetHash(binding,*(uint *)this);
-  this_00 = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 0x18));
-  while ((this_00 != (unsigned char *)0x0 && (isEqual = __ZeqRK7BindingS1_(this_00,binding), isEqual != 1))) {
-    this_00 = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(this_00);
+  entry = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 0x18));
+  while ((entry != (unsigned char *)0x0 && (isEqual = __ZeqRK7BindingS1_(entry,binding), isEqual != 1))) {
+    entry = (unsigned char *)((int (*)())Binding__GetNextBindingInHash)(entry);
   }
-  return this_00;
+  return entry;
 }
 
 /* BindingTable__FindUniformBindingByName @ 0x97bb17a8 (116 bytes) */
@@ -1105,16 +1122,16 @@ int BindingTable__FindUniformBindingByName(this, str)
   unsigned char * this;
   char *str;
 {
-  unsigned char * this_00;
+  unsigned char *probe;
   
   if (str != (char *)0x0) {
-    this_00 = operator_new(0x38);
-    __ZN7BindingC1Ev(this_00);
-    if (this_00 != (unsigned char *)0x0) {
-      Binding__SetName(this_00,str);
-      ((int (*)())BindingTable__FindUniformBinding)(this,this_00);
-      __ZN7BindingD1Ev(this_00);
-      __ZdlPv(this_00);
+    probe = operator_new(0x38);
+    __ZN7BindingC1Ev(probe);
+    if (probe != (unsigned char *)0x0) {
+      Binding__SetName(probe,str);
+      ((int (*)())BindingTable__FindUniformBinding)(this,probe);
+      __ZN7BindingD1Ev(probe);
+      __ZdlPv(probe);
     }
   }
   return 0;
@@ -1492,13 +1509,13 @@ LAB_97bb1ddc:
 }
 
 /* ConstructLinker @ 0x97bb1e78 (64 bytes) */
-int ConstructLinker(param_1)
-  int param_1;
+int ConstructLinker(linkerArg)
+  int linkerArg;
 {
   void *this;
   
   this = operator_new(0x88);
-  __ZN14TGenericLinkerC1Ei(this,param_1);
+  __ZN14TGenericLinkerC1Ei(this,linkerArg);
   return this;
 }
 
@@ -1524,6 +1541,7 @@ int UpdateOperations(_PPStreamChunk1, _PPStreamChunk2, param_3, _PPStreamChunk3,
   int numCopies;
   int adjust;
 {
+  int operandIdx;
   bool matchesKind;
   int walkIdx;
   int newWalkIdx;
@@ -1547,7 +1565,7 @@ int UpdateOperations(_PPStreamChunk1, _PPStreamChunk2, param_3, _PPStreamChunk3,
         target = _PPStreamChunk1;
         do {
           chunkInfo = *(uint *)(chunk + 0xc);
-          iVar8 = 0;
+          operandIdx = 0;
           if (chunkInfo >> 0x1d != 0) {
             operand = chunk + 0x10;
             do {
@@ -1578,8 +1596,8 @@ LAB_97bb1f94:
                         walkIdx = walkIdx + -1;
                       } while (walkIdx != 0);
                     }
-                    *(short *)(target + iVar8 * 8 + 0x22) =
-                         *(short *)(target + iVar8 * 8 + 0x22) - (short)adjust;
+                    *(short *)(target + operandIdx * 8 + 0x22) =
+                         *(short *)(target + operandIdx * 8 + 0x22) - (short)adjust;
                     chunkInfo = *(uint *)(chunk + 0xc);
                     kind = *_PPStreamChunk3;
                     walkIdx = newWalkIdx;
@@ -1587,9 +1605,9 @@ LAB_97bb1f94:
                 }
               }
 LAB_97bb1fe8:
-              iVar8 = iVar8 + 1;
+              operandIdx = operandIdx + 1;
               operand = operand + 8;
-            } while (iVar8 < (int)(chunkInfo >> 0x1d));
+            } while (operandIdx < (int)(chunkInfo >> 0x1d));
           }
           if (kind == 0x2) {
             if ((*(uint *)(chunk + 0x14) & 0xe0000) == 0) goto LAB_97bb2064;
