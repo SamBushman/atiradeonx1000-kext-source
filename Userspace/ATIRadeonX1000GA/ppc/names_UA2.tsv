@@ -1,0 +1,7 @@
+local	FUN_000055a4	dVar61	srcRightExact	INFERRED	srcLeftFloat + width, the right edge as double (pair of srcLeftExact)
+local	FUN_000055a4	dVar2	srcBottomExact	INFERRED	srcTopFloat + height, the bottom edge as double (pair of srcTopExact)
+local	FUN_000055a4	uVar51	dstRectLeft	INFERRED	dstOffsetX + region x: left edge written to the rect command words
+local	FUN_000055a4	iVar20	blockEndIdx	INFERRED	setupWords + const: index of the block-final word (cmdWrite[iVar20] = 0x5c8 / 10) and the advance of cmdWrite
+local	FUN_000055a4	uVar8	yPacked16	INFERRED	iVar26*0x10000: y shifted into the high half of a rect corner word
+local	FUN_000055a4	fVar12	texV0	INFERRED	heightRatio-scaled float stored as a texture-coordinate word (GH_F2U into scratchWord3 / command)
+local	FUN_000055a4	fVar13	texV1	INFERRED	second heightRatio-scaled float stored as a texture-coordinate word
