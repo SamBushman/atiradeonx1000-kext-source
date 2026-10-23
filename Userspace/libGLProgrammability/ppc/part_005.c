@@ -1,141 +1,141 @@
 #include "decls.h"
 
 /* __ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped @ 0x97b9ba78 (208 bytes) */
-int __ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped(this, param_2, intermTyped, param_4, param_5, param_6)
+int __ZN13TParseContext14boolErrorCheckEiPK12TIntermTyped(this, sourceLoc, intermTyped, scratchR6, scratchR7, scratchR8)
   void *this;
-  int param_2;
+  int sourceLoc;
   unsigned char * intermTyped;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 scratchR6;
+  undefined4 scratchR7;
+  undefined4 scratchR8;
 {
-  int iVar1;
-  undefined4 in_r9;
-  undefined4 in_r10;
+  int typeQueryResult;
+  undefined4 scratchR9;
+  undefined4 scratchR10;
   
-  iVar1 = (**(code **)(*(int *)intermTyped + 0x40))(intermTyped,param_2,intermTyped,param_4,param_5,param_6);
-  if ((((iVar1 == 3) && (iVar1 = (**(code **)(*(int *)intermTyped + 0x54))(intermTyped), iVar1 == 0)) &&
-      (iVar1 = (**(code **)(*(int *)intermTyped + 0x50))(intermTyped), iVar1 == 0)) &&
-     (iVar1 = (**(code **)(*(int *)intermTyped + 0x58))(intermTyped), iVar1 == 0)) {
+  typeQueryResult = (**(code **)(*(int *)intermTyped + 0x40))(intermTyped,sourceLoc,intermTyped,scratchR6,scratchR7,scratchR8);
+  if ((((typeQueryResult == 3) && (typeQueryResult = (**(code **)(*(int *)intermTyped + 0x54))(intermTyped), typeQueryResult == 0)) &&
+      (typeQueryResult = (**(code **)(*(int *)intermTyped + 0x50))(intermTyped), typeQueryResult == 0)) &&
+     (typeQueryResult = (**(code **)(*(int *)intermTyped + 0x58))(intermTyped), typeQueryResult == 0)) {
     return 0;
   }
   TParseContext__error
-            ((int)this,(char *)param_2,"boolean expression expected","","",param_6,in_r9,in_r10);
+            ((int)this,(char *)sourceLoc,"boolean expression expected","","",scratchR8,scratchR9,scratchR10);
   return 1;
 }
 
 /* __ZN13TParseContext14boolErrorCheckEiRK11TPublicType @ 0x97b9bb48 (132 bytes) */
-int __ZN13TParseContext14boolErrorCheckEiRK11TPublicType(this, param_2, publicType)
+int __ZN13TParseContext14boolErrorCheckEiRK11TPublicType(this, sourceLoc, publicType)
   void *this;
-  int param_2;
+  int sourceLoc;
   unsigned char * publicType;
 {
-  undefined4 uVar1;
-  undefined4 in_r8;
-  undefined4 in_r9;
-  undefined4 in_r10;
+  undefined4 result;
+  undefined4 scratchR8;
+  undefined4 scratchR9;
+  undefined4 scratchR10;
   
   if ((((*(int *)publicType != 3) || (*(int *)(publicType + 0x10) != 0)) || (*(int *)(publicType + 0xc) != 0)
-      ) || (uVar1 = 0, 1 < *(int *)(publicType + 8))) {
+      ) || (result = 0, 1 < *(int *)(publicType + 8))) {
     TParseContext__error
-              ((int)this,(char *)param_2,"boolean expression expected","","",in_r8,in_r9,in_r10);
-    uVar1 = 1;
+              ((int)this,(char *)sourceLoc,"boolean expression expected","","",scratchR8,scratchR9,scratchR10);
+    result = 1;
   }
-  return uVar1;
+  return result;
 }
 
 /* TParseContext__samplerErrorCheck @ 0x97b9bbcc (184 bytes) */
-int TParseContext__samplerErrorCheck(this, param_2, publicType, str)
+int TParseContext__samplerErrorCheck(this, sourceLoc, publicType, str)
   unsigned char * this;
-  int param_2;
+  int sourceLoc;
   unsigned char * publicType;
   char *str;
 {
   int containsSamplerResult;
-  int iVar1;
+  int basicType;
   char *basicString;
-  char *pcVar3;
-  undefined4 in_r8;
-  undefined4 in_r9;
-  undefined4 in_r10;
+  char *extraInfo;
+  undefined4 scratchR8;
+  undefined4 scratchR9;
+  undefined4 scratchR10;
   
-  iVar1 = *(int *)publicType;
-  if (iVar1 == 0xe) {
+  basicType = *(int *)publicType;
+  if (basicType == 0xe) {
     containsSamplerResult = ((int (*)())TParseContext__containsSampler)(this,*(unsigned char **)(publicType + 0x14));
     if (containsSamplerResult == 0) {
       return 0;
     }
     basicString = (char *)TType__getBasicString(*(undefined4 *)publicType);
-    pcVar3 = "(structure contains a sampler)";
+    extraInfo = "(structure contains a sampler)";
   }
   else {
-    if (7 < iVar1 - 5U) {
+    if (7 < basicType - 5U) {
       return 0;
     }
-    basicString = (char *)TType__getBasicString(iVar1);
-    pcVar3 = "";
+    basicString = (char *)TType__getBasicString(basicType);
+    extraInfo = "";
   }
-  error((int)this,(char *)param_2,str,basicString,pcVar3,in_r8,in_r9,in_r10);
+  error((int)this,(char *)sourceLoc,str,basicString,extraInfo,scratchR8,scratchR9,scratchR10);
   return 1;
 }
 
 /* TParseContext__structQualifierErrorCheck @ 0x97b9bc84 (172 bytes) */
-int TParseContext__structQualifierErrorCheck(this, param_2, publicType, param_4, param_5, param_6, param_7)
+int TParseContext__structQualifierErrorCheck(this, sourceLoc, publicType, scratchR6, scratchR7, scratchR8, scratchR9)
   unsigned char * this;
-  int param_2;
+  int sourceLoc;
   unsigned char * publicType;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 scratchR6;
+  undefined4 scratchR7;
+  undefined4 scratchR8;
+  undefined4 scratchR9;
 {
-  int iVar1;
+  int qualifierThenResult;
   char *qualifierString;
-  undefined4 uVar3;
-  undefined4 in_r10;
+  undefined4 result;
+  undefined4 scratchR10;
   
-  iVar1 = *(int *)(publicType + 4);
-  if ((iVar1 - 3U < 3) && (*(int *)publicType == 0xe)) {
-    qualifierString = (char *)getQualifierString(iVar1);
-    error((int)this,(char *)param_2,"cannot be used with a structure",qualifierString,"",param_6,param_7,
-          in_r10);
-    uVar3 = 1;
+  qualifierThenResult = *(int *)(publicType + 4);
+  if ((qualifierThenResult - 3U < 3) && (*(int *)publicType == 0xe)) {
+    qualifierString = (char *)getQualifierString(qualifierThenResult);
+    error((int)this,(char *)sourceLoc,"cannot be used with a structure",qualifierString,"",scratchR8,scratchR9,
+          scratchR10);
+    result = 1;
   }
   else {
-    if ((iVar1 != 6) &&
-       (iVar1 = ((int (*)())TParseContext__samplerErrorCheck)(this,param_2,publicType,"samplers must be uniform"), iVar1 != 0)) {
+    if ((qualifierThenResult != 6) &&
+       (qualifierThenResult = ((int (*)())TParseContext__samplerErrorCheck)(this,sourceLoc,publicType,"samplers must be uniform"), qualifierThenResult != 0)) {
       return 1;
     }
-    uVar3 = 0;
+    result = 0;
   }
-  return uVar3;
+  return result;
 }
 
 /* TParseContext__parameterSamplerErrorCheck @ 0x97b9bd30 (184 bytes) */
-int TParseContext__parameterSamplerErrorCheck(this, param_2, qualifier, type)
+int TParseContext__parameterSamplerErrorCheck(this, sourceLoc, qualifier, type)
   unsigned char * this;
-  int param_2;
+  int sourceLoc;
   int qualifier;
   int *type;
 {
-  int iVar1;
+  int basicType;
   char *basicString;
-  undefined4 uVar3;
-  undefined4 in_r8;
-  undefined4 in_r9;
-  undefined4 in_r10;
+  undefined4 result;
+  undefined4 scratchR8;
+  undefined4 scratchR9;
+  undefined4 scratchR10;
   
-  if (((qualifier - 10U < 2) && (iVar1 = (**(code **)(*type + 0x20))(type), iVar1 != 0xe)) &&
-     (iVar1 = (**(code **)(*type + 0x20))(type), iVar1 - 5U < 8)) {
+  if (((qualifier - 10U < 2) && (basicType = (**(code **)(*type + 0x20))(type), basicType != 0xe)) &&
+     (basicType = (**(code **)(*type + 0x20))(type), basicType - 5U < 8)) {
     basicString = (char *)TType__getBasicString((uint)type[9] >> 0x13 & 0x3f);
-    error((int)this,(char *)param_2,"samplers cannot be output parameters",basicString,"",in_r8,in_r9,
-          in_r10);
-    uVar3 = 1;
+    error((int)this,(char *)sourceLoc,"samplers cannot be output parameters",basicString,"",scratchR8,scratchR9,
+          scratchR10);
+    result = 1;
   }
   else {
-    uVar3 = 0;
+    result = 0;
   }
-  return uVar3;
+  return result;
 }
 
 /* TParseContext__containsSampler @ 0x97b9bde8 (180 bytes) */
@@ -143,28 +143,29 @@ int TParseContext__containsSampler(this, type)
   unsigned char * this;
   unsigned char * type;
 {
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
-  uint uVar4;
+  int typeList;
+  int basicType;
+  undefined4 result;
+  int fieldsBegin;
+  uint fieldIndex;
   
-  iVar1 = (**(code **)(*(int *)type + 0x20))(type,type);
-  uVar2 = 1;
-  if (7 < iVar1 - 5U) {
-    iVar1 = (**(code **)(*(int *)type + 0x20))(type);
-    if (iVar1 == 0xe) {
-      iVar1 = *(int *)(type + 8);
-      for (uVar4 = 0; iVar3 = *(int *)(iVar1 + 4), uVar4 < (uint)(*(int *)(iVar1 + 8) - iVar3 >> 3);
-          uVar4 = uVar4 + 1) {
-        iVar3 = ((int (*)())TParseContext__containsSampler)(this,*(unsigned char **)(iVar3 + uVar4 * 8));
-        if (iVar3 != 0) {
+  basicType = (**(code **)(*(int *)type + 0x20))(type,type);
+  result = 1;
+  if (7 < basicType - 5U) {
+    basicType = (**(code **)(*(int *)type + 0x20))(type);
+    if (basicType == 0xe) {
+      typeList = *(int *)(type + 8);
+      for (fieldIndex = 0; fieldsBegin = *(int *)(typeList + 4), fieldIndex < (uint)(*(int *)(typeList + 8) - fieldsBegin >> 3);
+          fieldIndex = fieldIndex + 1) {
+        fieldsBegin = ((int (*)())TParseContext__containsSampler)(this,*(unsigned char **)(fieldsBegin + fieldIndex * 8));
+        if (fieldsBegin != 0) {
           return 1;
         }
       }
     }
-    uVar2 = 0;
+    result = 0;
   }
-  return uVar2;
+  return result;
 }
 
 /* TParseContext__insertBuiltInArrayAtGlobalLevel @ 0x97b9be9c (740 bytes) */
@@ -1186,43 +1187,43 @@ int TParseContext__nonInitErrorCheck(this, param_2, text, publicType)
 }
 
 /* TParseContext__paramErrorCheck @ 0x97b9d3d8 (216 bytes) */
-int TParseContext__paramErrorCheck(this, param_2, qualifier1, qualifier2, type)
+int TParseContext__paramErrorCheck(this, sourceLoc, qualifier1, qualifier2, type)
   unsigned char * this;
-  int param_2;
+  int sourceLoc;
   int qualifier1;
   int qualifier2;
   int *type;
 {
-  int iVar1;
+  int typeVtable;
   char *qualifierString;
-  char *pcVar3;
-  char *pcVar4;
-  undefined4 in_r8;
-  undefined4 in_r9;
-  undefined4 in_r10;
+  char *errorReason;
+  char *qualifier2String;
+  undefined4 scratchR8;
+  undefined4 scratchR9;
+  undefined4 scratchR10;
   
   if (qualifier1 == 2) {
     if (qualifier2 == 9) {
-      iVar1 = *type;
+      typeVtable = *type;
       qualifier2 = 0xc;
       goto LAB_97b9d48c;
     }
     qualifierString = (char *)getQualifierString(2);
-    pcVar4 = (char *)getQualifierString(qualifier2);
-    pcVar3 = "qualifier not allowed with ";
+    qualifier2String = (char *)getQualifierString(qualifier2);
+    errorReason = "qualifier not allowed with ";
   }
   else {
     if (qualifier1 == 0) {
-      iVar1 = *type;
+      typeVtable = *type;
 LAB_97b9d48c:
-      (**(code **)(iVar1 + 0x28))(type,qualifier2);
+      (**(code **)(typeVtable + 0x28))(type,qualifier2);
       return 0;
     }
     qualifierString = (char *)getQualifierString(qualifier1);
-    pcVar3 = "qualifier not allowed on function parameter";
-    pcVar4 = "";
+    errorReason = "qualifier not allowed on function parameter";
+    qualifier2String = "";
   }
-  error((int)this,(char *)param_2,pcVar3,qualifierString,pcVar4,in_r8,in_r9,in_r10);
+  error((int)this,(char *)sourceLoc,errorReason,qualifierString,qualifier2String,scratchR8,scratchR9,scratchR10);
   return 1;
 }
 

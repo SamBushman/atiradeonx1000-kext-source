@@ -5797,22 +5797,22 @@ int TParseContext__recover(this)
 }
 
 /* TParseContext__error @ 0x97b9a7c4 (104 bytes) */
-int TParseContext__error(param_1, param_2, param_3, str, param_5, param_6, param_7, param_8)
-  int param_1;
-  char *param_2;
-  char *param_3;
+int TParseContext__error(this, sourceLoc, reason, str, extraInfoFormat, varArg1, varArg2, varArg3)
+  int this;
+  char *sourceLoc;
+  char *reason;
   char *str;
-  char *param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  char *extraInfoFormat;
+  undefined4 varArg1;
+  undefined4 varArg2;
+  undefined4 varArg3;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, str, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  int iVar1;
-  int *piVar2;
-  int iVar3;
+  unsigned int ghidra_home[8] = { this, sourceLoc, reason, str, extraInfoFormat, varArg1, varArg2, varArg3 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  int atomicStore;
+  int *refCountPtr;
+  int oldRefCount;
   uint a1;
-  void *pvVar4;
+  void *infoSink;
   char reservation;
   byte cr0Flags;
   char acStack_210 [400];
@@ -5820,70 +5820,70 @@ int TParseContext__error(param_1, param_2, param_3, str, param_5, param_6, param
   char acStack_70 [64];
   unsigned char aaStack_30 [24];
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
-  _vsnprintf(acStack_210,400,param_5,&(*(unsigned int *)((unsigned char *)ghidra_home + 20)));
-  __ZN13TInfoSinkBase6appendEPKc(*(void **)(param_1 + 8),"ERROR: ");
-  pvVar4 = *(void **)(param_1 + 8);
-  a1 = (uint)param_2 & 0xffff;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = varArg1;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = varArg2;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = varArg3;
+  _vsnprintf(acStack_210,400,extraInfoFormat,&(*(unsigned int *)((unsigned char *)ghidra_home + 20)));
+  __ZN13TInfoSinkBase6appendEPKc(*(void **)(this + 8),"ERROR: ");
+  infoSink = *(void **)(this + 8);
+  a1 = (uint)sourceLoc & 0xffff;
   cr0Flags = (a1 == 0) << 1;
   if (a1 == 0) {
-    _sprintf(acStack_70,"%d:? ",(int)param_2 >> 0x10);
+    _sprintf(acStack_70,"%d:? ",(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(acStack_70,"%d:%d",(int)param_2 >> 0x10,a1);
+    _sprintf(acStack_70,"%d:%d",(int)sourceLoc >> 0x10,a1);
   }
   __ZNSsC1EPKcRKSaIcE(apcStack_80,acStack_70,aaStack_30);
   apcStack_80[0][*(int *)(apcStack_80[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
-  __ZN13TInfoSinkBase6appendEPKc(pvVar4,apcStack_80[0]);
-  piVar2 = (int *)(apcStack_80[0] + -4);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,apcStack_80[0]);
+  refCountPtr = (int *)(apcStack_80[0] + -4);
   do {
-    iVar3 = *piVar2;
+    oldRefCount = *refCountPtr;
     if (reservation != '\0') {
-      iVar1 = storeWordConditionalIndexed(iVar3 + -1,0,piVar2);
-      *piVar2 = iVar1;
+      atomicStore = storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+      *refCountPtr = atomicStore;
       cr0Flags = 2;
     }
   } while (!(bool)(cr0Flags >> 1 & 1));
-  if (iVar3 < 1) {
+  if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(apcStack_80[0] + -0xc));
   }
-  __ZN13TInfoSinkBase6appendEPKc(pvVar4,": ");
-  pvVar4 = *(void **)(param_1 + 8);
-  __ZN13TInfoSinkBase6appendEPKc(pvVar4,"\'");
-  __ZN13TInfoSinkBase6appendEPKc(pvVar4,str);
-  __ZN13TInfoSinkBase6appendEPKc(pvVar4,"\' : ");
-  __ZN13TInfoSinkBase6appendEPKc(pvVar4,param_3);
-  __ZN13TInfoSinkBase6appendEPKc(pvVar4," ");
-  __ZN13TInfoSinkBase6appendEPKc(pvVar4,acStack_210);
-  __ZN13TInfoSinkBase6appendEPKc(pvVar4,"\n");
-  *(int *)(param_1 + 0x18) = *(int *)(param_1 + 0x18) + 1;
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
+  infoSink = *(void **)(this + 8);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,"\'");
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,str);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,"\' : ");
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,reason);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink," ");
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,acStack_210);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
+  *(int *)(this + 0x18) = *(int *)(this + 0x18) + 1;
   return;
 }
 
 /* FUN_97b9a844 @ 0x97b9a844 (12 bytes) */
-int FUN_97b9a844(param_1)
-  void *param_1;
+int FUN_97b9a844(infoSink)
+  void *infoSink;
 {
-  bool bVar1;
+  bool columnIsZero;
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   char *unaff_r26;
   char *unaff_r27;
   uint unaff_r28;
-  void *pvVar5;
+  void *infoSink2;
   int unaff_r30;
   int unaff_r31;
   char reservation;
   byte cr0Flags;
   
-  __ZN13TInfoSinkBase6appendEPKc(param_1,(char *)(unaff_r31 + 0x8dfd0));
-  pvVar5 = *(void **)(unaff_r30 + 8);
-  bVar1 = (unaff_r28 & 0xffff) == 0;
-  cr0Flags = bVar1 << 1;
-  if (bVar1) {
+  __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)(unaff_r31 + 0x8dfd0));
+  infoSink2 = *(void **)(unaff_r30 + 8);
+  columnIsZero = (unaff_r28 & 0xffff) == 0;
+  cr0Flags = columnIsZero << 1;
+  if (columnIsZero) {
     _sprintf(&STACKARG(0x1e0),(char *)(unaff_r31 + 0x8e018),(int)unaff_r28 >> 0x10);
   }
   else {
@@ -5891,7 +5891,7 @@ int FUN_97b9a844(param_1)
   }
   __ZNSsC1EPKcRKSaIcE(&STACKARG(0x1d0),&STACKARG(0x1e0),(unsigned char *)&STACKARG(0x220));
   (*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0))[*(int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -0xc)] = **(char **)(unaff_r31 + 0xffe18e4);
-  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)));
   refCountPtr = (int *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -4);
   do {
     oldRefCount = *refCountPtr;
@@ -5904,223 +5904,230 @@ int FUN_97b9a844(param_1)
   if (oldRefCount < 1) {
     __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)((*(char * *)(*(unsigned int *)__builtin_frame_address(0) + 0x1d0)) + -0xc));
   }
-  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e020));
-  pvVar5 = *(void **)(unaff_r30 + 8);
-  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e9e0));
-  __ZN13TInfoSinkBase6appendEPKc(pvVar5,unaff_r27);
-  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e9e4));
-  __ZN13TInfoSinkBase6appendEPKc(pvVar5,unaff_r26);
-  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8e9ec));
-  __ZN13TInfoSinkBase6appendEPKc(pvVar5,&STACKARG(0x40));
-  __ZN13TInfoSinkBase6appendEPKc(pvVar5,(char *)(unaff_r31 + 0x8c464));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(char *)(unaff_r31 + 0x8e020));
+  infoSink2 = *(void **)(unaff_r30 + 8);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(char *)(unaff_r31 + 0x8e9e0));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,unaff_r27);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(char *)(unaff_r31 + 0x8e9e4));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,unaff_r26);
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(char *)(unaff_r31 + 0x8e9ec));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,&STACKARG(0x40));
+  __ZN13TInfoSinkBase6appendEPKc(infoSink2,(char *)(unaff_r31 + 0x8c464));
   *(int *)(unaff_r30 + 0x18) = *(int *)(unaff_r30 + 0x18) + 1;
   return;
 }
 
 /* TParseContext__assignError @ 0x97b9a9b4 (96 bytes) */
-int TParseContext__assignError(this, param_2, str, text1, text2)
+int TParseContext__assignError(this, sourceLoc, str, text1, text2)
   unsigned char * this;
-  int param_2;
+  int sourceLoc;
   char *str;
   int text1;
   int text2;
 {
-  byte bVar1;
-  byte *pbVar2;
-  undefined4 uVar3;
+  byte terminalChar;
+  byte *terminalPtr;
+  undefined4 text1Chars;
   
-  pbVar2 = DAT_a7b7ba18;
+  terminalPtr = DAT_a7b7ba18;
   *(byte *)(*(int *)(text1 + 4) + *(int *)(*(int *)(text1 + 4) + -0xc)) = *DAT_a7b7ba18;
-  bVar1 = *pbVar2;
-  uVar3 = *(undefined4 *)(text1 + 4);
-  *(byte *)(*(int *)(text2 + 4) + *(int *)(*(int *)(text2 + 4) + -0xc)) = bVar1;
-  return error((int)this,(char *)param_2,"",str,"cannot convert from \'%s\' to \'%s\'",
-        *(undefined4 *)(text2 + 4),uVar3,(uint)bVar1);
+  terminalChar = *terminalPtr;
+  text1Chars = *(undefined4 *)(text1 + 4);
+  *(byte *)(*(int *)(text2 + 4) + *(int *)(*(int *)(text2 + 4) + -0xc)) = terminalChar;
+  return error((int)this,(char *)sourceLoc,"",str,"cannot convert from \'%s\' to \'%s\'",
+        *(undefined4 *)(text2 + 4),text1Chars,(uint)terminalChar);
 }
 
 /* TParseContext__unaryOpError @ 0x97b9aa14 (84 bytes) */
-int TParseContext__unaryOpError(this, param_2, str, text)
+int TParseContext__unaryOpError(this, sourceLoc, str, text)
   unsigned char * this;
-  int param_2;
+  int sourceLoc;
   char *str;
   int text;
 {
   *(undefined1 *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = *DAT_a7b7ba18;
-  return error((int)this,(char *)param_2," wrong operand type",str,
+  return error((int)this,(char *)sourceLoc," wrong operand type",str,
         "no operation \'%s\' exists that takes an operand of type %s (or there is no acceptable conversion)"
         ,str,*(undefined4 *)(text + 4),text);
 }
 
 /* TParseContext__binaryOpError @ 0x97b9aa68 (104 bytes) */
-int TParseContext__binaryOpError(this, param_2, str, text1, text2)
+int TParseContext__binaryOpError(this, sourceLoc, str, text1, text2)
   unsigned char * this;
-  int param_2;
+  int sourceLoc;
   char *str;
   int text1;
   int text2;
 {
-  undefined1 *puVar1;
-  undefined4 uVar2;
+  undefined1 *terminalPtr;
+  undefined4 text2Chars;
   
-  puVar1 = DAT_a7b7ba18;
+  terminalPtr = DAT_a7b7ba18;
   *(undefined1 *)(*(int *)(text2 + 4) + *(int *)(*(int *)(text2 + 4) + -0xc)) = *DAT_a7b7ba18;
-  uVar2 = *(undefined4 *)(text2 + 4);
-  *(undefined1 *)(*(int *)(text1 + 4) + *(int *)(*(int *)(text1 + 4) + -0xc)) = *puVar1;
-  return error((int)this,(char *)param_2," wrong operand types ",str,
+  text2Chars = *(undefined4 *)(text2 + 4);
+  *(undefined1 *)(*(int *)(text1 + 4) + *(int *)(*(int *)(text1 + 4) + -0xc)) = *terminalPtr;
+  return error((int)this,(char *)sourceLoc," wrong operand types ",str,
         "no operation \'%s\' exists that takes a left-hand operand of type \'%s\' and a right operand of type \'%s\' (or there is no acceptable conversion)"
-        ,str,*(undefined4 *)(text1 + 4),uVar2);
+        ,str,*(undefined4 *)(text1 + 4),text2Chars);
 }
 
 /* TParseContext__lValueErrorCheck @ 0x97b9aad0 (944 bytes) */
-int TParseContext__lValueErrorCheck(this, param_2, str, intermTyped, param_5, param_6, param_7, param_8)
+int TParseContext__lValueErrorCheck(this, sourceLoc, str, intermTyped, scratchR7, scratchR8, scratchR9, scratchR10)
   unsigned char * this;
-  int param_2;
+  int sourceLoc;
   char *str;
   unsigned char * intermTyped;
-  undefined4 param_5;
-  undefined4 param_6;
-  uint param_7;
-  undefined4 param_8;
+  undefined4 scratchR7;
+  undefined4 scratchR8;
+  uint scratchR9;
+  undefined4 scratchR10;
 {
+  int *swizzleElement;
+  int *swizzleAggregate;
+  char *errorReason;
+  int componentSeenCount;
+  int swizzleSequence;
+  int binaryOp;
+  int basicType;
   int lValueErrorCheckResult;
-  bool bVar1;
-  int iVar2;
-  int *piVar3;
-  int *piVar4;
+  bool hasSymbolNode;
+  int symbolName;
+  int *symbolNode;
+  int *binaryNode;
   unsigned char * pTVar5;
-  int iVar6;
-  uint uVar7;
+  int componentConstUnion;
+  uint qualifier;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 a1;
   undefined4 a1_00;
-  char *pcVar8;
-  char *pcVar9;
-  undefined4 *puVar10;
-  undefined4 uVar11;
-  char *pcVar12;
-  int local_30 [4];
+  char *tokenCopy;
+  char *extraInfoFormat;
+  undefined4 *elementCursor;
+  undefined4 symbolNameChars;
+  char *modifyReason;
+  int componentSeen [4];
   
-  pcVar8 = str;
+  tokenCopy = str;
   pTVar5 = intermTyped;
-  piVar3 = (int *)(**(code **)(*(int *)intermTyped + 0x28))(intermTyped);
-  piVar4 = (int *)(**(code **)(*(int *)intermTyped + 0x20))(intermTyped);
-  if (piVar4 == (int *)0x0) {
-    bVar1 = piVar3 != (int *)0x0;
-    uVar11 = 0;
+  symbolNode = (int *)(**(code **)(*(int *)intermTyped + 0x28))(intermTyped);
+  binaryNode = (int *)(**(code **)(*(int *)intermTyped + 0x20))(intermTyped);
+  if (binaryNode == (int *)0x0) {
+    hasSymbolNode = symbolNode != (int *)0x0;
+    symbolNameChars = 0;
     a1 = extraout_r4;
-    if (bVar1) {
-      iVar2 = (**(code **)(*piVar3 + 0x60))(piVar3);
-      param_7 = (uint)*DAT_a7b7ba18;
-      *(byte *)(*(int *)(iVar2 + 4) + *(int *)(*(int *)(iVar2 + 4) + -0xc)) = *DAT_a7b7ba18;
-      uVar11 = *(undefined4 *)(iVar2 + 4);
+    if (hasSymbolNode) {
+      symbolName = (**(code **)(*symbolNode + 0x60))(symbolNode);
+      scratchR9 = (uint)*DAT_a7b7ba18;
+      *(byte *)(*(int *)(symbolName + 4) + *(int *)(*(int *)(symbolName + 4) + -0xc)) = *DAT_a7b7ba18;
+      symbolNameChars = *(undefined4 *)(symbolName + 4);
       a1 = extraout_r4_00;
     }
-    pcVar12 = (char *)0x0;
-    uVar7 = (**(code **)(*(int *)intermTyped + 0x44))(intermTyped,a1,pcVar8,pTVar5,param_5,param_6,param_7);
-    if (uVar7 < 0x12) {
-      param_7 = uVar7 * 4;
-      switch(uVar7) {
+    modifyReason = (char *)0x0;
+    qualifier = (**(code **)(*(int *)intermTyped + 0x44))(intermTyped,a1,tokenCopy,pTVar5,scratchR7,scratchR8,scratchR9);
+    if (qualifier < 0x12) {
+      scratchR9 = qualifier * 4;
+      switch(qualifier) {
       default:
         goto switchD_97b9ace4_caseD_0;
       case 2:
       case 0xc:
-        pcVar12 = "can\'t modify a const";
+        modifyReason = "can\'t modify a const";
         break;
       case 3:
-        pcVar12 = "can\'t modify an attribute";
+        modifyReason = "can\'t modify an attribute";
         break;
       case 4:
-        pcVar12 = "can\'t modify a varying";
+        modifyReason = "can\'t modify a varying";
         break;
       case 6:
-        pcVar12 = "can\'t modify a uniform";
+        modifyReason = "can\'t modify a uniform";
         break;
       case 7:
-        pcVar12 = "can\'t modify an input";
+        modifyReason = "can\'t modify an input";
         break;
       case 0x10:
-        pcVar12 = "can\'t modify gl_FrontFace";
+        modifyReason = "can\'t modify gl_FrontFace";
         break;
       case 0x11:
-        pcVar12 = "can\'t modify gl_FragCoord";
+        modifyReason = "can\'t modify gl_FragCoord";
       }
     }
     else {
 switchD_97b9ace4_caseD_0:
-      iVar2 = (**(code **)(*(int *)intermTyped + 0x40))
-                        (intermTyped,a1_00,pcVar8,pTVar5,param_5,param_6,param_7);
-      if (iVar2 - 5U < 8) {
-        pcVar12 = "can\'t modify a sampler";
+      basicType = (**(code **)(*(int *)intermTyped + 0x40))
+                        (intermTyped,a1_00,tokenCopy,pTVar5,scratchR7,scratchR8,scratchR9);
+      if (basicType - 5U < 8) {
+        modifyReason = "can\'t modify a sampler";
       }
       else {
-        iVar2 = (**(code **)(*(int *)intermTyped + 0x40))(intermTyped);
-        if (iVar2 == 0) {
-          pcVar12 = "can\'t modify void";
+        basicType = (**(code **)(*(int *)intermTyped + 0x40))(intermTyped);
+        if (basicType == 0) {
+          modifyReason = "can\'t modify void";
         }
         else {
-          iVar2 = (**(code **)(*(int *)intermTyped + 0x40))(intermTyped);
-          if (iVar2 == 0xf) {
-            pcVar12 = "can\'t modify an address";
+          basicType = (**(code **)(*(int *)intermTyped + 0x40))(intermTyped);
+          if (basicType == 0xf) {
+            modifyReason = "can\'t modify an address";
           }
         }
       }
     }
-    if (pcVar12 != (char *)0x0) {
-      if (bVar1) {
-        error((int)this,(char *)param_2," l-value required",str,"\"%s\" (%s)",uVar11,pcVar12,
-              param_8);
+    if (modifyReason != (char *)0x0) {
+      if (hasSymbolNode) {
+        error((int)this,(char *)sourceLoc," l-value required",str,"\"%s\" (%s)",symbolNameChars,modifyReason,
+              scratchR10);
         return 1;
       }
-      pcVar8 = " l-value required";
-      pcVar9 = "(%s)";
+      errorReason = " l-value required";
+      extraInfoFormat = "(%s)";
       goto LAB_97b9aea4;
     }
-    if (bVar1) {
+    if (hasSymbolNode) {
       return 0;
     }
 LAB_97b9ae0c:
-    pcVar8 = " l-value required";
+    errorReason = " l-value required";
   }
   else {
-    iVar2 = piVar4[0xc];
-    if (iVar2 < 0x2d) goto LAB_97b9ae0c;
-    if (iVar2 < 0x30) {
-      pTVar5 = (unsigned char *)(**(code **)(*piVar4 + 0x68))(piVar4);
-      lValueErrorCheckResult = ((int (*)())TParseContext__lValueErrorCheck)(this,param_2,str,pTVar5,param_5,param_6,param_7,param_8);
+    binaryOp = binaryNode[0xc];
+    if (binaryOp < 0x2d) goto LAB_97b9ae0c;
+    if (binaryOp < 0x30) {
+      pTVar5 = (unsigned char *)(**(code **)(*binaryNode + 0x68))(binaryNode);
+      lValueErrorCheckResult = ((int (*)())TParseContext__lValueErrorCheck)(this,sourceLoc,str,pTVar5,scratchR7,scratchR8,scratchR9,scratchR10);
       return lValueErrorCheckResult;
     }
-    if (iVar2 != 0x30) goto LAB_97b9ae0c;
-    pTVar5 = (unsigned char *)(**(code **)(*piVar4 + 0x68))(piVar4);
-    local_30[0] = ((int (*)())TParseContext__lValueErrorCheck)(this,param_2,str,pTVar5,param_5,param_6,param_7,param_8);
-    if (local_30[0] != 0) {
-      return local_30[0];
+    if (binaryOp != 0x30) goto LAB_97b9ae0c;
+    pTVar5 = (unsigned char *)(**(code **)(*binaryNode + 0x68))(binaryNode);
+    componentSeen[0] = ((int (*)())TParseContext__lValueErrorCheck)(this,sourceLoc,str,pTVar5,scratchR7,scratchR8,scratchR9,scratchR10);
+    if (componentSeen[0] != 0) {
+      return componentSeen[0];
     }
-    local_30[1] = local_30[0];
-    local_30[2] = local_30[0];
-    local_30[3] = local_30[0];
-    piVar3 = (int *)(**(code **)(*piVar4 + 0x6c))(piVar4);
-    piVar3 = (int *)(**(code **)(*piVar3 + 0x1c))(piVar3);
-    iVar2 = (**(code **)(*piVar3 + 100))(piVar3);
-    puVar10 = *(undefined4 **)(iVar2 + 4);
+    componentSeen[1] = componentSeen[0];
+    componentSeen[2] = componentSeen[0];
+    componentSeen[3] = componentSeen[0];
+    swizzleAggregate = (int *)(**(code **)(*binaryNode + 0x6c))(binaryNode);
+    swizzleAggregate = (int *)(**(code **)(*swizzleAggregate + 0x1c))(swizzleAggregate);
+    swizzleSequence = (**(code **)(*swizzleAggregate + 100))(swizzleAggregate);
+    elementCursor = *(undefined4 **)(swizzleSequence + 4);
     while( true ) {
-      iVar2 = (**(code **)(*piVar3 + 100))(piVar3);
-      if (puVar10 == *(undefined4 **)(iVar2 + 8)) {
+      swizzleSequence = (**(code **)(*swizzleAggregate + 100))(swizzleAggregate);
+      if (elementCursor == *(undefined4 **)(swizzleSequence + 8)) {
         return 0;
       }
-      piVar4 = (int *)(**(code **)(*(int *)*puVar10 + 0x14))((int *)*puVar10);
-      iVar6 = (**(code **)(*piVar4 + 0x18))(piVar4);
-      iVar2 = local_30[**(int **)(iVar6 + 0x30)];
-      local_30[**(int **)(iVar6 + 0x30)] = iVar2 + 1;
-      if (1 < iVar2 + 1) break;
-      puVar10 = puVar10 + 1;
+      swizzleElement = (int *)(**(code **)(*(int *)*elementCursor + 0x14))((int *)*elementCursor);
+      componentConstUnion = (**(code **)(*swizzleElement + 0x18))(swizzleElement);
+      componentSeenCount = componentSeen[**(int **)(componentConstUnion + 0x30)];
+      componentSeen[**(int **)(componentConstUnion + 0x30)] = componentSeenCount + 1;
+      if (1 < componentSeenCount + 1) break;
+      elementCursor = elementCursor + 1;
     }
-    pcVar8 = " l-value of swizzle cannot have duplicate components";
+    errorReason = " l-value of swizzle cannot have duplicate components";
   }
-  pcVar9 = "";
-  pcVar12 = pcVar9;
+  extraInfoFormat = "";
+  modifyReason = extraInfoFormat;
 LAB_97b9aea4:
-  error((int)this,(char *)param_2,pcVar8,str,pcVar9,pcVar12,param_7,param_8);
+  error((int)this,(char *)sourceLoc,errorReason,str,extraInfoFormat,modifyReason,scratchR9,scratchR10);
   return 1;
 }
 
@@ -6129,18 +6136,18 @@ int TParseContext__constErrorCheck(this, intermTyped)
   unsigned char * this;
   unsigned char * intermTyped;
 {
-  int iVar1;
-  char *pcVar2;
-  undefined4 in_r8;
-  undefined4 in_r9;
-  undefined4 in_r10;
+  int qualifier;
+  char *sourceLoc;
+  undefined4 scratchR8;
+  undefined4 scratchR9;
+  undefined4 scratchR10;
   
-  iVar1 = (**(code **)(*(int *)intermTyped + 0x44))(intermTyped,intermTyped);
-  if (iVar1 != 2) {
-    pcVar2 = (char *)(*(code *)**(undefined4 **)intermTyped)(intermTyped);
-    error((int)this,pcVar2,"constant expression required","","",in_r8,in_r9,in_r10);
+  qualifier = (**(code **)(*(int *)intermTyped + 0x44))(intermTyped,intermTyped);
+  if (qualifier != 2) {
+    sourceLoc = (char *)(*(code *)**(undefined4 **)intermTyped)(intermTyped);
+    error((int)this,sourceLoc,"constant expression required","","",scratchR8,scratchR9,scratchR10);
   }
-  return iVar1 != 2;
+  return qualifier != 2;
 }
 
 /* TParseContext__integerErrorCheck @ 0x97b9af54 (172 bytes) */
@@ -6149,87 +6156,88 @@ int TParseContext__integerErrorCheck(this, intermTyped, str)
   unsigned char * intermTyped;
   char *str;
 {
-  int iVar1;
-  char *pcVar2;
-  undefined4 in_r8;
-  undefined4 in_r9;
-  undefined4 in_r10;
+  int basicTypeThenSize;
+  char *sourceLoc;
+  undefined4 scratchR8;
+  undefined4 scratchR9;
+  undefined4 scratchR10;
   
-  iVar1 = (**(code **)(*(int *)intermTyped + 0x40))(intermTyped,intermTyped,str);
-  if ((iVar1 == 2) && (iVar1 = (**(code **)(*(int *)intermTyped + 0x48))(intermTyped), iVar1 == 1)) {
+  basicTypeThenSize = (**(code **)(*(int *)intermTyped + 0x40))(intermTyped,intermTyped,str);
+  if ((basicTypeThenSize == 2) && (basicTypeThenSize = (**(code **)(*(int *)intermTyped + 0x48))(intermTyped), basicTypeThenSize == 1)) {
     return 0;
   }
-  pcVar2 = (char *)(*(code *)**(undefined4 **)intermTyped)(intermTyped);
-  error((int)this,pcVar2,"integer expression required",str,"",in_r8,in_r9,in_r10);
+  sourceLoc = (char *)(*(code *)**(undefined4 **)intermTyped)(intermTyped);
+  error((int)this,sourceLoc,"integer expression required",str,"",scratchR8,scratchR9,scratchR10);
   return 1;
 }
 
 /* TParseContext__globalErrorCheck @ 0x97b9b000 (84 bytes) */
-int TParseContext__globalErrorCheck(this, param_2, param_3, str, param_5, param_6)
+int TParseContext__globalErrorCheck(this, sourceLoc, isGlobalScope, str, scratchR7, scratchR8)
   unsigned char * this;
-  int param_2;
-  int param_3;
+  int sourceLoc;
+  int isGlobalScope;
   char *str;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 scratchR7;
+  undefined4 scratchR8;
 {
-  undefined4 in_r9;
-  undefined4 in_r10;
+  undefined4 scratchR9;
+  undefined4 scratchR10;
   
-  if (param_3 == 0) {
-    error((int)this,(char *)param_2,"only allowed at global scope",str,"",param_6,in_r9,in_r10);
+  if (isGlobalScope == 0) {
+    error((int)this,(char *)sourceLoc,"only allowed at global scope",str,"",scratchR8,scratchR9,scratchR10);
   }
-  return param_3 == 0;
+  return isGlobalScope == 0;
 }
 
 /* TParseContext__reservedErrorCheck @ 0x97b9b054 (376 bytes) */
-int TParseContext__reservedErrorCheck(this, param_2, text)
+int TParseContext__reservedErrorCheck(this, sourceLoc, text)
   unsigned char * this;
-  int param_2;
+  int sourceLoc;
   unsigned char * text;
 {
+  int compareResult;
   int atomicStore;
-  int iVar2;
+  int levelCount;
   int *refCountPtr;
   int oldRefCount;
-  uint *puVar5;
-  undefined4 in_r8;
-  undefined4 in_r10;
-  uint uVar6;
-  uint uVar7;
+  uint *minLengthPtr;
+  undefined4 scratchR8;
+  undefined4 scratchR10;
+  uint reservedPrefixLength;
+  uint namePrefixLength;
   char reservation;
   byte cr0Flags;
-  undefined4 local_80;
-  int local_7c;
-  undefined4 local_70;
-  int local_6c;
-  undefined4 local_60 [4];
-  undefined4 local_50 [4];
-  undefined4 local_40 [4];
-  uint local_30;
-  uint local_2c [4];
+  undefined4 namePrefix;
+  int namePrefixChars;
+  undefined4 reservedPrefix;
+  int reservedPrefixChars;
+  undefined4 allocatorArg [4];
+  undefined4 destroyArgA [4];
+  undefined4 destroyArgB [4];
+  uint prefixLength;
+  uint prefixLengths [4];
   
-  iVar2 = (*(int **)(this + 4))[1] - **(int **)(this + 4) >> 2;
-  if ((iVar2 != 1) && (iVar2 != 2)) {
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_mm(&local_80,text,0,3);
-    local_60[0] = GetGlobalPoolAllocator();
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(&local_70,"gl_",(unsigned char *)local_60)
+  levelCount = (*(int **)(this + 4))[1] - **(int **)(this + 4) >> 2;
+  if ((levelCount != 1) && (levelCount != 2)) {
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_mm(&namePrefix,text,0,3);
+    allocatorArg[0] = GetGlobalPoolAllocator();
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(&reservedPrefix,"gl_",(unsigned char *)allocatorArg)
     ;
-    puVar5 = local_2c;
-    uVar6 = *(uint *)(local_6c + -0xc);
-    local_30 = uVar6;
-    uVar7 = *(uint *)(local_7c + -0xc);
-    local_2c[0] = uVar7;
-    if (uVar6 <= uVar7) {
-      puVar5 = &local_30;
+    minLengthPtr = prefixLengths;
+    reservedPrefixLength = *(uint *)(reservedPrefixChars + -0xc);
+    prefixLength = reservedPrefixLength;
+    namePrefixLength = *(uint *)(namePrefixChars + -0xc);
+    prefixLengths[0] = namePrefixLength;
+    if (reservedPrefixLength <= namePrefixLength) {
+      minLengthPtr = &prefixLength;
     }
-    iVar2 = _memcmp(local_6c,local_7c,*puVar5);
-    cr0Flags = (iVar2 == 0) << 1;
-    if (iVar2 == 0) {
-      iVar2 = uVar6 - uVar7;
+    compareResult = _memcmp(reservedPrefixChars,namePrefixChars,*minLengthPtr);
+    cr0Flags = (compareResult == 0) << 1;
+    if (compareResult == 0) {
+      compareResult = reservedPrefixLength - namePrefixLength;
     }
-    refCountPtr = (int *)(local_6c + -4);
-    local_50[0] = local_70;
+    refCountPtr = (int *)(reservedPrefixChars + -4);
+    destroyArgA[0] = reservedPrefix;
     do {
       oldRefCount = *refCountPtr;
       if (reservation != '\0') {
@@ -6240,10 +6248,10 @@ int TParseContext__reservedErrorCheck(this, param_2, text)
     } while (!(bool)(cr0Flags >> 1));
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_6c + -0xc),local_50);
+                ((unsigned char *)(reservedPrefixChars + -0xc),destroyArgA);
     }
-    refCountPtr = (int *)(local_7c + -4);
-    local_40[0] = local_80;
+    refCountPtr = (int *)(namePrefixChars + -4);
+    destroyArgB[0] = namePrefix;
     do {
       oldRefCount = *refCountPtr;
       if (reservation != '\0') {
@@ -6254,10 +6262,10 @@ int TParseContext__reservedErrorCheck(this, param_2, text)
     } while (!(bool)(cr0Flags >> 1 & 1));
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_7c + -0xc),local_40);
+                ((unsigned char *)(namePrefixChars + -0xc),destroyArgB);
     }
-    if (iVar2 == 0) {
-      error((int)this,(char *)param_2,"reserved built-in name","gl_","",in_r8,local_7c,in_r10);
+    if (compareResult == 0) {
+      error((int)this,(char *)sourceLoc,"reserved built-in name","gl_","",scratchR8,namePrefixChars,scratchR10);
       return 1;
     }
   }
@@ -6265,30 +6273,36 @@ int TParseContext__reservedErrorCheck(this, param_2, text)
 }
 
 /* TParseContext__constructorErrorCheck @ 0x97b9b1cc (2036 bytes) */
-int TParseContext__constructorErrorCheck(this, param_2, intermNode, function, op, type)
+int TParseContext__constructorErrorCheck(this, sourceLoc, intermNode, function, op, type)
   unsigned char * this;
-  int param_2;
+  int sourceLoc;
   unsigned char * intermNode;
   unsigned char * function;
   int op;
   int *type;
 {
+  int *argTyped;
+  char *errorReason;
+  int totalSize;
+  int argBasicType;
+  int paramIsArray;
+  int paramTypeVtable;
   int *refCountPtr;
   int oldRefCount;
   int newRefCount;
-  int iVar1;
-  bool bVar2;
-  bool bVar3;
-  bool bVar4;
-  bool bVar5;
-  bool bVar6;
-  int *piVar7;
-  int iVar8;
-  unsigned char * psVar9;
+  int paramOffset;
+  bool full;
+  bool constType;
+  bool arrayArg;
+  bool matrixInMatrix;
+  bool overFull;
+  int *paramType;
+  int ctorNominalSize;
+  unsigned char * functionName;
   unsigned char * this_00;
   void *this_01;
   uint *a0;
-  int iVar10;
+  int paramSizeOrScratchR4;
   int extraout_r4;
   int extraout_r4_00;
   int extraout_r4_01;
@@ -6301,23 +6315,23 @@ int TParseContext__constructorErrorCheck(this, param_2, intermNode, function, op
   int extraout_r4_06;
   undefined4 a1_01;
   undefined4 extraout_r4_07;
-  undefined4 uVar11;
+  undefined4 scratchR4;
   unsigned char * pTVar12;
-  char *pcVar13;
+  char *structNameChars;
   unsigned char * pTVar14;
-  char *pcVar15;
-  int iVar16;
-  char *pcVar17;
-  int *piVar18;
+  char *errorToken;
+  int opCopy;
+  char *extraInfoFormat;
+  int *typeCopy;
   uint a6;
-  uint uVar19;
+  uint ctorTypeBits;
   int a6_00;
-  int in_r10;
+  int scratchR10;
   unsigned char * pTVar20;
-  int iVar21;
+  int paramIndex;
   char reservation;
   byte cr0Flags;
-  undefined8 uVar23;
+  undefined8 allocPair;
   undefined **stackType;
   int stackTypeArraySize;
   unsigned char * stackTypeStructure;
@@ -6328,66 +6342,66 @@ int TParseContext__constructorErrorCheck(this, param_2, intermNode, function, op
   int stackTypeWord1c;
   int stackTypeWord20;
   uint stackTypeBits;
-  undefined4 local_90;
-  int local_8c;
-  undefined4 local_80;
-  char *local_7c;
-  undefined4 local_70 [4];
-  undefined4 local_60 [4];
-  undefined4 local_50 [4];
+  undefined4 nameCopy1;
+  int nameCopy1CharsOrScratch;
+  undefined4 nameCopy2;
+  char *nameCopy2Chars;
+  undefined4 allocatorArg [4];
+  undefined4 destroyArgA [4];
+  undefined4 destroyArgB [4];
   
   a6 = op - 0x66;
-  iVar10 = param_2;
+  paramSizeOrScratchR4 = sourceLoc;
   pTVar12 = intermNode;
   pTVar14 = function;
-  iVar16 = op;
-  piVar18 = type;
+  opCopy = op;
+  typeCopy = type;
   switch(a6) {
   case 0:
-    uVar19 = stackTypeBits & 0xfff | 0x100800;
+    ctorTypeBits = stackTypeBits & 0xfff | 0x100800;
     goto LAB_97b9b330;
   case 1:
-    iVar8 = 1;
-    uVar19 = stackTypeBits & 0x1fffff | 0x180000;
+    ctorNominalSize = 1;
+    ctorTypeBits = stackTypeBits & 0x1fffff | 0x180000;
     break;
   case 2:
-    iVar8 = 1;
+    ctorNominalSize = 1;
     goto LAB_97b9b2f0;
   case 3:
-    uVar19 = stackTypeBits & 0xfffff | 0x80000;
+    ctorTypeBits = stackTypeBits & 0xfffff | 0x80000;
     goto LAB_97b9b2e4;
   case 4:
-    iVar8 = 3;
-    uVar19 = stackTypeBits & 0xfffff | 0x80000;
+    ctorNominalSize = 3;
+    ctorTypeBits = stackTypeBits & 0xfffff | 0x80000;
     break;
   case 5:
-    uVar19 = stackTypeBits & 0xfffff | 0x80000;
+    ctorTypeBits = stackTypeBits & 0xfffff | 0x80000;
     goto LAB_97b9b3cc;
   case 6:
-    uVar19 = stackTypeBits & 0x1fffff | 0x180000;
+    ctorTypeBits = stackTypeBits & 0x1fffff | 0x180000;
 LAB_97b9b2e4:
-    iVar8 = 2;
+    ctorNominalSize = 2;
     break;
   case 7:
-    iVar8 = 3;
+    ctorNominalSize = 3;
     goto LAB_97b9b2f0;
   case 8:
-    uVar19 = stackTypeBits & 0x1fffff | 0x180000;
+    ctorTypeBits = stackTypeBits & 0x1fffff | 0x180000;
     goto LAB_97b9b3cc;
   case 9:
-    iVar8 = 2;
+    ctorNominalSize = 2;
 LAB_97b9b2f0:
-    uVar19 = iVar8 << 0x13 | stackTypeBits & 0x7ffff;
+    ctorTypeBits = ctorNominalSize << 0x13 | stackTypeBits & 0x7ffff;
     break;
   case 10:
-    uVar19 = stackTypeBits & 0x1fff | 0x101800;
+    ctorTypeBits = stackTypeBits & 0x1fff | 0x101800;
 LAB_97b9b330:
     a6 = 0;
-    stackTypeBits = uVar19 & 0xfffff9ff;
-    local_8c = stackTypeBits << 0xd;
-    piVar18 = (int *)0x0;
+    stackTypeBits = ctorTypeBits & 0xfffff9ff;
+    nameCopy1CharsOrScratch = stackTypeBits << 0xd;
+    typeCopy = (int *)0x0;
     type[8] = 0;
-    type[9] = uVar19 & 0x7f800 | uVar19 & 0xfff80000 | type[9] & 0x1ffU;
+    type[9] = ctorTypeBits & 0x7f800 | ctorTypeBits & 0xfff80000 | type[9] & 0x1ffU;
     stackTypeArraySize = 0;
     stackTypeStructure = (unsigned char *)0x0;
     stackTypeFieldName = 0;
@@ -6406,23 +6420,23 @@ LAB_97b9b330:
     type[7] = 0;
     goto LAB_97b9b714;
   case 0xb:
-    uVar19 = stackTypeBits & 0x7ffff | 0x100000;
+    ctorTypeBits = stackTypeBits & 0x7ffff | 0x100000;
 LAB_97b9b3cc:
-    iVar8 = 4;
+    ctorNominalSize = 4;
     break;
   case 0xc:
-    iVar8 = 2;
+    ctorNominalSize = 2;
     goto LAB_97b9b490;
   case 0xd:
-    uVar19 = stackTypeBits & 0x1bff | 0x81800;
+    ctorTypeBits = stackTypeBits & 0x1bff | 0x81800;
     goto LAB_97b9b4a0;
   case 0xe:
-    iVar8 = 4;
+    ctorNominalSize = 4;
 LAB_97b9b490:
-    uVar19 = iVar8 << 0xb | stackTypeBits & 0x3ff | 0x80000;
+    ctorTypeBits = ctorNominalSize << 0xb | stackTypeBits & 0x3ff | 0x80000;
 LAB_97b9b4a0:
-    a6 = uVar19 & 0xfffffdff | 0x400;
-    type[9] = uVar19 & 0x7f800 | uVar19 & 0xfff80000 | type[9] & 0x1ffU | 0x400;
+    a6 = ctorTypeBits & 0xfffffdff | 0x400;
+    type[9] = ctorTypeBits & 0x7f800 | ctorTypeBits & 0xfff80000 | type[9] & 0x1ffU | 0x400;
     type[8] = 0;
     stackTypeArraySize = 0;
     stackTypeStructure = (unsigned char *)0x0;
@@ -6440,16 +6454,16 @@ LAB_97b9b4a0:
     type[5] = 0;
     type[6] = 0;
     type[7] = 0;
-    local_8c = in_r10;
+    nameCopy1CharsOrScratch = scratchR10;
     stackTypeBits = a6;
     goto LAB_97b9b714;
   case 0xf:
     pTVar20 = *(unsigned char **)(function + 0x24);
-    psVar9 = (unsigned char *)
+    functionName = (unsigned char *)
              (**(code **)(*(int *)(function + 0x1c) + 0x18))
-                       (function + 0x1c,param_2,intermNode,function,op,type,function + 0x1c);
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_((unsigned char *)&local_90,psVar9);
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&local_80,(unsigned char *)&local_90);
+                       (function + 0x1c,sourceLoc,intermNode,function,op,type,function + 0x1c);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_((unsigned char *)&nameCopy1,functionName);
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&nameCopy2,(unsigned char *)&nameCopy1);
     stackTypeBits = stackTypeBits & 0x9ff | 0x700800;
     stackType = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
     stackTypeWord20 = 0;
@@ -6459,24 +6473,24 @@ LAB_97b9b4a0:
     stackTypeWord1c = 0;
     stackTypeStructure = pTVar20;
     stackTypeStructureSize = TType__setStructSize((unsigned char *)&stackType,pTVar20);
-    pcVar13 = local_7c;
-    local_7c[*(int *)(local_7c + -0xc)] = *DAT_a7b7ba18;
+    structNameChars = nameCopy2Chars;
+    nameCopy2Chars[*(int *)(nameCopy2Chars + -0xc)] = *DAT_a7b7ba18;
     this_00 = (unsigned char *)GetGlobalPoolAllocator();
-    uVar23 = TPoolAllocator__allocate(this_00,8);
-    this_01 = (void *)((ulonglong)uVar23 >> 0x20);
-    iVar10 = (int)uVar23;
+    allocPair = TPoolAllocator__allocate(this_00,8);
+    this_01 = (void *)((ulonglong)allocPair >> 0x20);
+    paramSizeOrScratchR4 = (int)allocPair;
     cr0Flags = (this_01 == (void *)0x0) << 1;
     stackTypeTypeName = (void *)0x0;
     if (this_01 != (void *)0x0) {
-      local_70[0] = GetGlobalPoolAllocator();
-      pTVar12 = (unsigned char *)local_70;
+      allocatorArg[0] = GetGlobalPoolAllocator();
+      pTVar12 = (unsigned char *)allocatorArg;
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                (this_01,pcVar13,(unsigned char *)pTVar12);
+                (this_01,structNameChars,(unsigned char *)pTVar12);
       stackTypeTypeName = this_01;
-      iVar10 = extraout_r4;
+      paramSizeOrScratchR4 = extraout_r4;
     }
-    refCountPtr = (int *)(local_7c + -4);
-    local_60[0] = local_80;
+    refCountPtr = (int *)(nameCopy2Chars + -4);
+    destroyArgA[0] = nameCopy2;
     do {
       oldRefCount = *refCountPtr;
       if (reservation != '\0') {
@@ -6487,8 +6501,8 @@ LAB_97b9b4a0:
     } while (!(bool)(cr0Flags >> 1 & 1));
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_7c + -0xc),local_60);
-      iVar10 = extraout_r4_00;
+                ((unsigned char *)(nameCopy2Chars + -0xc),destroyArgA);
+      paramSizeOrScratchR4 = extraout_r4_00;
     }
     type[1] = stackTypeArraySize;
     type[2] = (int)stackTypeStructure;
@@ -6501,10 +6515,10 @@ LAB_97b9b4a0:
                  (stackTypeBits >> 10 & 1) << 10 |
                  stackTypeBits & 0x7f800 |
                  (stackTypeBits >> 0x13 & 0x3f) << 0x13 | stackTypeBits & 0xfe000000 | type[9] & 0x1ffU;
-    refCountPtr = (int *)(local_8c + -4);
+    refCountPtr = (int *)(nameCopy1CharsOrScratch + -4);
     type[8] = stackTypeWord20;
     stackType = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-    local_50[0] = local_90;
+    destroyArgB[0] = nameCopy1;
     do {
       oldRefCount = *refCountPtr;
       a6 = oldRefCount - 1;
@@ -6516,18 +6530,18 @@ LAB_97b9b4a0:
     } while (!(bool)(cr0Flags >> 1 & 1));
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(local_8c + -0xc),local_50);
-      iVar10 = extraout_r4_01;
+                ((unsigned char *)(nameCopy1CharsOrScratch + -0xc),destroyArgB);
+      paramSizeOrScratchR4 = extraout_r4_01;
     }
     goto LAB_97b9b714;
   default:
-    pcVar13 = "expected constructor";
-    pcVar15 = "Internal Error";
+    errorReason = "expected constructor";
+    errorToken = "Internal Error";
     goto LAB_97b9b9d8;
   }
-  a6 = iVar8 << 0xb | uVar19 & 0xfff801ff;
-  local_8c = a6 << 0xd;
-  type[9] = iVar8 << 0xb | uVar19 & 0xfff80000 | type[9] & 0x1ffU;
+  a6 = ctorNominalSize << 0xb | ctorTypeBits & 0xfff801ff;
+  nameCopy1CharsOrScratch = a6 << 0xd;
+  type[9] = ctorNominalSize << 0xb | ctorTypeBits & 0xfff80000 | type[9] & 0x1ffU;
   type[8] = 0;
   stackTypeArraySize = 0;
   stackTypeStructure = (unsigned char *)0x0;
@@ -6547,119 +6561,119 @@ LAB_97b9b4a0:
   type[7] = 0;
   stackTypeBits = a6;
 LAB_97b9b714:
-  iVar8 = 0;
-  bVar3 = true;
-  bVar2 = false;
-  bVar6 = false;
-  bVar5 = false;
-  bVar4 = false;
-  in_r10 = local_8c;
-  for (iVar21 = 0; iVar21 < *(int *)(function + 0x14) - *(int *)(function + 0x10) >> 3;
-      iVar21 = iVar21 + 1) {
-    iVar1 = iVar21 * 8;
-    piVar7 = *(int **)(*(int *)(function + 0x10) + iVar1 + 4);
-    a6_00 = *piVar7;
-    iVar10 = (**(code **)(a6_00 + 0x30))(piVar7,iVar10,pTVar12,pTVar14,iVar16,piVar18,a6_00);
-    iVar8 = iVar8 + iVar10;
-    uVar11 = a1;
+  totalSize = 0;
+  constType = true;
+  full = false;
+  overFull = false;
+  matrixInMatrix = false;
+  arrayArg = false;
+  scratchR10 = nameCopy1CharsOrScratch;
+  for (paramIndex = 0; paramIndex < *(int *)(function + 0x14) - *(int *)(function + 0x10) >> 3;
+      paramIndex = paramIndex + 1) {
+    paramOffset = paramIndex * 8;
+    paramType = *(int **)(*(int *)(function + 0x10) + paramOffset + 4);
+    a6_00 = *paramType;
+    paramSizeOrScratchR4 = (**(code **)(a6_00 + 0x30))(paramType,paramSizeOrScratchR4,pTVar12,pTVar14,opCopy,typeCopy,a6_00);
+    totalSize = totalSize + paramSizeOrScratchR4;
+    scratchR4 = a1;
     if ((op - 0x72U < 3) &&
-       (piVar7 = *(int **)(*(int *)(function + 0x10) + iVar1 + 4), iVar10 = *piVar7,
-       iVar10 = (**(code **)(iVar10 + 0x34))(piVar7,a1,pTVar12,pTVar14,iVar16,piVar18,iVar10),
-       uVar11 = extraout_r4_02, iVar10 != 0)) {
-      bVar5 = true;
+       (paramType = *(int **)(*(int *)(function + 0x10) + paramOffset + 4), paramSizeOrScratchR4 = *paramType,
+       paramSizeOrScratchR4 = (**(code **)(paramSizeOrScratchR4 + 0x34))(paramType,a1,pTVar12,pTVar14,opCopy,typeCopy,paramSizeOrScratchR4),
+       scratchR4 = extraout_r4_02, paramSizeOrScratchR4 != 0)) {
+      matrixInMatrix = true;
     }
-    if (bVar2) {
-      bVar6 = true;
+    if (full) {
+      overFull = true;
     }
     if ((op != 0x75) &&
-       (iVar10 = (**(code **)(*type + 0x30))(type), uVar11 = extraout_r4_03, iVar10 <= iVar8))
+       (paramSizeOrScratchR4 = (**(code **)(*type + 0x30))(type), scratchR4 = extraout_r4_03, paramSizeOrScratchR4 <= totalSize))
     {
-      bVar2 = true;
+      full = true;
     }
-    piVar7 = *(int **)(*(int *)(function + 0x10) + iVar1 + 4);
-    iVar10 = *piVar7;
-    iVar10 = (**(code **)(iVar10 + 0x24))(piVar7,uVar11,pTVar12,pTVar14,iVar16,piVar18,iVar10);
-    if (iVar10 != 2) {
-      bVar3 = false;
+    paramType = *(int **)(*(int *)(function + 0x10) + paramOffset + 4);
+    paramTypeVtable = *paramType;
+    paramTypeVtable = (**(code **)(paramTypeVtable + 0x24))(paramType,scratchR4,pTVar12,pTVar14,opCopy,typeCopy,paramTypeVtable);
+    if (paramTypeVtable != 2) {
+      constType = false;
     }
-    a0 = *(uint **)(*(int *)(function + 0x10) + iVar1 + 4);
+    a0 = *(uint **)(*(int *)(function + 0x10) + paramOffset + 4);
     a6 = *a0;
-    iVar10 = (**(code **)(a6 + 0x38))(a0,a1_00,pTVar12,pTVar14,iVar16,piVar18,a6);
-    if (iVar10 != 0) {
-      bVar4 = true;
+    paramIsArray = (**(code **)(a6 + 0x38))(a0,a1_00,pTVar12,pTVar14,opCopy,typeCopy,a6);
+    if (paramIsArray != 0) {
+      arrayArg = true;
     }
-    iVar10 = extraout_r4_04;
+    paramSizeOrScratchR4 = extraout_r4_04;
   }
-  if (bVar3) {
+  if (constType) {
     (**(code **)(*type + 0x28))(type,2);
-    iVar10 = extraout_r4_05;
+    paramSizeOrScratchR4 = extraout_r4_05;
   }
-  if (bVar4) {
-    pcVar13 = "constructing from a non-dereferenced array";
+  if (arrayArg) {
+    errorReason = "constructing from a non-dereferenced array";
   }
   else {
-    if (bVar5) {
-      pcVar13 = "constructing matrix from matrix";
-      pcVar15 = "constructor";
-      pcVar17 = "(reserved)";
+    if (matrixInMatrix) {
+      errorReason = "constructing matrix from matrix";
+      errorToken = "constructor";
+      extraInfoFormat = "(reserved)";
       goto LAB_97b9b9dc;
     }
-    if (bVar6) {
-      pcVar13 = "too many arguments";
+    if (overFull) {
+      errorReason = "too many arguments";
     }
-    else if (((iVar8 == 1) ||
-             (iVar21 = (**(code **)(*type + 0x30))(type,iVar10,pTVar12,pTVar14,iVar16),
-             iVar10 = extraout_r4_06, iVar21 <= iVar8)) && ((0 < iVar8 || (op != 0x75)))) {
-      piVar7 = (int *)(**(code **)(*(int *)intermNode + 0x14))(intermNode,iVar10,pTVar12,pTVar14,iVar16);
-      if (piVar7 == (int *)0x0) {
-        pcVar13 = "constructor argument does not have a type";
+    else if (((totalSize == 1) ||
+             (paramIndex = (**(code **)(*type + 0x30))(type,paramSizeOrScratchR4,pTVar12,pTVar14,opCopy),
+             paramSizeOrScratchR4 = extraout_r4_06, paramIndex <= totalSize)) && ((0 < totalSize || (op != 0x75)))) {
+      argTyped = (int *)(**(code **)(*(int *)intermNode + 0x14))(intermNode,paramSizeOrScratchR4,pTVar12,pTVar14,opCopy);
+      if (argTyped == (int *)0x0) {
+        errorReason = "constructor argument does not have a type";
       }
       else {
-        uVar11 = a1_01;
+        scratchR4 = a1_01;
         if ((op == 0x75) ||
-           (iVar10 = (**(code **)(*piVar7 + 0x40))(piVar7,a1_01,pTVar12,pTVar14,iVar16),
-           uVar11 = extraout_r4_07, 7 < iVar10 - 5U)) {
-          iVar10 = (**(code **)(*piVar7 + 0x40))(piVar7,uVar11,pTVar12,pTVar14,iVar16);
-          if (iVar10 != 0) {
+           (paramSizeOrScratchR4 = (**(code **)(*argTyped + 0x40))(argTyped,a1_01,pTVar12,pTVar14,opCopy),
+           scratchR4 = extraout_r4_07, 7 < paramSizeOrScratchR4 - 5U)) {
+          argBasicType = (**(code **)(*argTyped + 0x40))(argTyped,scratchR4,pTVar12,pTVar14,opCopy);
+          if (argBasicType != 0) {
             return 0;
           }
-          pcVar13 = "cannot convert a void";
+          errorReason = "cannot convert a void";
         }
         else {
-          pcVar13 = "cannot convert a sampler";
+          errorReason = "cannot convert a sampler";
         }
       }
     }
     else {
-      pcVar13 = "not enough data provided for construction";
+      errorReason = "not enough data provided for construction";
     }
   }
-  pcVar15 = "constructor";
+  errorToken = "constructor";
 LAB_97b9b9d8:
-  pcVar17 = "";
+  extraInfoFormat = "";
 LAB_97b9b9dc:
-  error((int)this,(char *)param_2,pcVar13,pcVar15,pcVar17,piVar18,a6,in_r10);
+  error((int)this,(char *)sourceLoc,errorReason,errorToken,extraInfoFormat,typeCopy,a6,scratchR10);
   return 1;
 }
 
 /* TParseContext__voidErrorCheck @ 0x97b9ba00 (120 bytes) */
-int TParseContext__voidErrorCheck(this, param_2, text, publicType)
+int TParseContext__voidErrorCheck(this, sourceLoc, text, publicType)
   unsigned char * this;
-  int param_2;
+  int sourceLoc;
   unsigned char * text;
   unsigned char * publicType;
 {
-  byte bVar1;
-  int iVar2;
-  undefined4 in_r8;
+  byte terminalChar;
+  int basicType;
+  undefined4 scratchR8;
   
-  iVar2 = *(int *)publicType;
-  if (iVar2 == 0) {
-    bVar1 = *DAT_a7b7ba18;
-    *(byte *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = bVar1;
-    error((int)this,(char *)param_2,"illegal use of type \'void\'",*(char **)(text + 4),"",in_r8,
-          (uint)bVar1,text);
+  basicType = *(int *)publicType;
+  if (basicType == 0) {
+    terminalChar = *DAT_a7b7ba18;
+    *(byte *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = terminalChar;
+    error((int)this,(char *)sourceLoc,"illegal use of type \'void\'",*(char **)(text + 4),"",scratchR8,
+          (uint)terminalChar,text);
   }
-  return iVar2 == 0;
+  return basicType == 0;
 }
 
