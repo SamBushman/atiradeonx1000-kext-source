@@ -379,7 +379,7 @@ extern int FUN_00017b20();
 extern int FUN_00017e10();
 extern int FUN_00017ee0();
 extern int FUN_00018090();
-extern int FUN_00018120();
+extern int glCopyPixels_impl();
 extern int glDrawPixels_impl();
 extern int FUN_000198b0();
 extern int gld_drawPixelsDispatch();

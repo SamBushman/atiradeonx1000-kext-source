@@ -173,7 +173,7 @@
 0x17e10	FUN_00017e10	204	no	calls an import (CFNotificationCenterGetDistributedCenter); calls an import (CFNotificationCenterRemoveObserver); calls an import (CFRelease)
 0x17ee0	FUN_00017ee0	432	no	calls an import (fgets); calls an import (free); calls an import (getpid)
 0x18090	FUN_00018090	100	yes	
-0x18120	FUN_00018120	6016	no	calls an import (malloc); indirect call (driver context / vtable / callback)
+0x18120	glCopyPixels_impl	6016	no	calls an import (malloc); indirect call (driver context / vtable / callback)
 0x18a40	glDrawPixels_impl	3636	no	calls an import (free); calls an import (glgConvertType); calls an import (glgPixelCenters)
 0x198b0	FUN_000198b0	228	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x199a0	gld_drawPixelsDispatch	68	no	no static blocker: a test could reach it (needs arguments / state no test builds)

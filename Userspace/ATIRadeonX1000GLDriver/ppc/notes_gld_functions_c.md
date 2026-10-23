@@ -61,4 +61,10 @@ The RGB scale (unit state +0x474) selects the destination scale bits (0x115 / 0x
 
 ## 5. Not identified (candidates left for later rounds)
 FUN_000d8450; the 0xd5390 / 0xd55c0 emitters (one-instruction emitters: 0xe colorclamp, add secondary colour); FUN_00007b0d0 (fixed-function vertex program?);
-FUN_000353a0 / FUN_00018120 (ring writers with GH_F2U conversions: immediate-mode vertex submission?); FUN_00097440 / FUN_00093a40 (0x81fa GL state).
+FUN_000353a0 (ring writer with GH_F2U conversions; locking via pthread); FUN_00097440 / FUN_00093a40 (0x81fa GL state).
+
+## 6. glCopyPixels (FUN_00018120, INFERRED)
+`glCopyPixels_impl(ctx, rasterPos[2], x, y, width, height, type)`: type 0x1801 is GL_DEPTH, `param_7 - 0x1801 < 2` covers depth and stencil. It recomputes the fast-path
+eligibility bits at ctx+0x26b0 from the engine state (colour mask, blend, depth, stencil, alpha test enables and their functions), clips against the drawable,
+tests overlap of the source and destination rectangles and chooses one of four modes (0 slow path, 1 hardware blit through FUN_00020b30, 2 / 3 textured-quad
+variants). It is the third member of the pixel-transfer family with `glDrawPixels_impl` (FUN_00018a40) and `glReadPixels_impl` (FUN_00029294).

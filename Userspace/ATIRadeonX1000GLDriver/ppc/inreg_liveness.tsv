@@ -173,7 +173,7 @@
 17ee0	FUN_00017ee0	r10	PASS-no	17f00 bl 0x1a3ae0	; symbol stub for: _getpid
 17f1f8	FUN_0017f1f8	r7	PASS-deep	17f27c bl 0x1054ec
 17f1f8	FUN_0017f1f8	r8	PASS-deep	17f27c bl 0x1054ec
-18120	FUN_00018120	r10	PASS-no	18168 bl 0xa2f0
+18120	glCopyPixels_impl	r10	PASS-no	18168 bl 0xa2f0
 18ad08	R300SchedModel__vslot16	r7	PASS-indirect	18ad4c bl 0x1043f0
 18ad08	R300SchedModel__vslot16	r8	PASS-indirect	18ad4c bl 0x1043f0
 18b1bc	FUN_0018b1bc	r8	PASS-indirect	18b29c bl 0x19423c

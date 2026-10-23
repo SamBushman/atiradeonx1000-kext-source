@@ -1,0 +1,11 @@
+# fork E4 (round 4): glCopyPixels
+func	FUN_00018120	glCopyPixels_impl	INFERRED	(x, y, width, height, type) with type tested against GL_DEPTH 0x1801 / GL_STENCIL 0x1802; reads the raster position from a float[2], clips and tests source/destination rectangle overlap, builds the fast-path eligibility flags at ctx+0x26b0 from the engine state and then blits (FUN_00020b30) or falls back; sibling of glDrawPixels_impl (FUN_00018a40) and glReadPixels_impl
+local	FUN_00018120	param_1	ctx	CONFIRMED	GL context (ctx+0x10 engine state, ctx+0x154 render flags, ctx+0x160 drawable height)
+local	FUN_00018120	param_2	rasterPos	CONFIRMED	float[2]: current raster position x, y (y flipped with the drawable height when ctx byte 0x2b7c is set)
+local	FUN_00018120	param_3	srcX	CONFIRMED	x of the source rectangle; param_3 + param_5 is its right edge
+local	FUN_00018120	param_4	srcY	CONFIRMED	y of the source rectangle; param_4 + param_6 is its bottom edge
+local	FUN_00018120	param_5	width	CONFIRMED	width of the copied rectangle
+local	FUN_00018120	param_6	height	CONFIRMED	height of the copied rectangle
+local	FUN_00018120	param_7	copyType	CONFIRMED	GL_COLOR 0x1800 / GL_DEPTH 0x1801 / GL_STENCIL 0x1802 (tests param_7 == 0x1801, param_7 - 0x1801 < 2)
+local	FUN_00018120	iVar50	engineState	CONFIRMED	= *(ctx + 0x10): the GL engine state (pixel store, read buffer at +0x2db8, depth/stencil/blend enables)
+local	FUN_00018120	bVar22	srcDstOverlap	INFERRED	true when the destination rectangle at the raster position intersects the source rectangle; forces the slow path for the overlapping fast-path modes

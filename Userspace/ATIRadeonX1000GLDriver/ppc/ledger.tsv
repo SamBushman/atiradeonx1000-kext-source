@@ -172,7 +172,7 @@
 0x17e10	204	FUN_00017e10	part_002	converted
 0x17ee0	432	FUN_00017ee0	part_002	converted
 0x18090	100	FUN_00018090	part_002	converted
-0x18120	6016	FUN_00018120	part_002	converted
+0x18120	6016	glCopyPixels_impl	part_002	converted
 0x18a40	3636	glDrawPixels_impl	part_002	converted
 0x198b0	228	FUN_000198b0	part_002	converted
 0x199a0	68	gld_drawPixelsDispatch	part_002	converted
