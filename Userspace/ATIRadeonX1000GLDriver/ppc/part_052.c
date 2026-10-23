@@ -16,8 +16,8 @@ int R300MachineAssembler__emitTexRecord(this, inst, unused, compiler)
   int iVar7;
   
   operandVReg = (int *)IRInst__getOperandSource(inst,1);
-  sourceRegister = thunk_FUN_00134de8(*(undefined4 *)(compiler + 0x6c4),operandVReg);
-  iVar2 = (**(code **)(**(int **)(compiler + 0x30c) + 0x7c))(*(int **)(compiler + 0x30c),inst);
+  sourceRegister = thunk_FUN_00134de8(*(undefined4 *)(compiler + COMP_currentProgram),operandVReg);
+  iVar2 = (**(code **)(**(int **)(compiler + COMP_target) + 0x7c))(*(int **)(compiler + COMP_target),inst);
   if (iVar2 == 0) {
     IRInst__getOperandRecord(inst,0);
   }
@@ -29,7 +29,7 @@ int R300MachineAssembler__emitTexRecord(this, inst, unused, compiler)
     *(char *)(this[0x18] * 0x48 + this[0x16] + 0x19) = (char)iVar2;
     iVar7 = this[0x18];
     iVar3 = this[0x16];
-    sourceRegister = thunk_FUN_00134de8(*(undefined4 *)(compiler + 0x6c4),inst);
+    sourceRegister = thunk_FUN_00134de8(*(undefined4 *)(compiler + COMP_currentProgram),inst);
     *(undefined2 *)(iVar7 * 0x48 + iVar3 + 0xc) = sourceRegister;
   }
   else {
@@ -46,7 +46,7 @@ int R300MachineAssembler__emitTexRecord(this, inst, unused, compiler)
          (char)*(int *)(PTR_DAT_001e913c + irOpcode * 0x38 + 0xc);
   }
   texFlags = 0xc;
-  iVar2 = *(int *)(iVar2 * 0xc + *(int *)(*(int *)(compiler + 0x6c4) + 0x78) + 4);
+  iVar2 = *(int *)(iVar2 * 0xc + *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x78) + 4);
   if (((iVar2 != 2) && (texFlags = 8, iVar2 != 3)) && (texFlags = 0, iVar2 == 1)) {
     texFlags = 0xe;
   }
@@ -1583,20 +1583,20 @@ int R300VMachineAssembler__init(this, program, allocatorArg, compiler)
   int maxInstructions;
   
   *(int *)(this + 0xc) = compiler;
-  *(undefined4 *)(this + 0x88) = *(undefined4 *)(compiler + 0x30c);
-  maxInstructions = *(int *)(compiler + 0x324) << 4;
-  programInstructionLimit = *(int *)(*(int *)(compiler + 0x30c) + 0x40) << 4;
+  *(undefined4 *)(this + 0x88) = *(undefined4 *)(compiler + COMP_target);
+  maxInstructions = *(int *)(compiler + COMP_nextInstId) << 4;
+  programInstructionLimit = *(int *)(*(int *)(compiler + COMP_target) + 0x40) << 4;
   if (maxInstructions < programInstructionLimit) {
     maxInstructions = programInstructionLimit;
   }
-  allocation = Arena__alloc(*(undefined4 *)(compiler + 0x374),maxInstructions);
+  allocation = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaA),maxInstructions);
   *(undefined4 *)(this + 0x44) = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(compiler + 0x374),*(int *)(compiler + 0x324) * 0x38);
+  allocation = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaA),*(int *)(compiler + COMP_nextInstId) * 0x38);
   *(undefined4 *)(this + 0x40) = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(compiler + 0x374),900);
+  allocation = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaA),900);
   *(undefined4 *)(this + 0x1c) = 0;
   *(undefined4 *)(this + 0x54) = allocation;
-  allocation = Arena__alloc(*(undefined4 *)(compiler + 0x374),*(int *)(compiler + 0x324) << 3);
+  allocation = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaA),*(int *)(compiler + COMP_nextInstId) << 3);
   *(undefined4 *)(this + 8) = allocation;
   allocation = FUN_000e14e4(compiler,0x28,allocatorArg);
   *(undefined4 *)(this + 0x50) = allocation;
@@ -2076,7 +2076,7 @@ int R300VMachineAssembler__create(unusedThis, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x378);
+  arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x90);
   *allocation = arena;
   allocation[1] = &PTR_FUN_001eb808;
@@ -3195,7 +3195,7 @@ int R520VMachineAssembler__vslot37_closeConditional(this, node, extra1, compiler
   callResult = (**(code **)(*node + 0x40))(node);
   if (callResult == 0) {
     if ((node[0x51] == 0) || (*(int *)(*(int *)(this + 0x94) + 4) != 2)) {
-      if (**(int **)(compiler + 0x6c4) == 0) {
+      if (**(int **)(compiler + COMP_currentProgram) == 0) {
         newInst = (int *)IRInst__create(0x57,compiler);
         iVar6 = ((int (*)())R520VMachineAssembler__getOrCreateConstantZeroInst)(this);
         callResult = DAT_001b2d50;

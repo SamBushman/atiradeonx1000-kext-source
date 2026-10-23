@@ -54,10 +54,10 @@
 1300b0	pass_remove_empty_graphs	r9	PASS-indirect	GARBAGE	
 131d08	FUN_00131d08	r8	PASS-indirect	GARBAGE	
 131d08	FUN_00131d08	r10	PASS-indirect	GARBAGE	
-139f84	FUN_00139f84	r6	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 139fb0 bctrl via +0x40 (argument registers up to r6)
-139f84	FUN_00139f84	r7	PASS-indirect	GARBAGE	
-139f84	FUN_00139f84	r8	PASS-indirect	GARBAGE	
-139f84	FUN_00139f84	r9	PASS-indirect	GARBAGE	
+139f84	Block__scanBranchConeForFetchAndInterp	r6	PASS-indirect	GARBAGE-UNSUPPLIED	supply=GARBAGE []; 139fb0 bctrl via +0x40 (argument registers up to r6)
+139f84	Block__scanBranchConeForFetchAndInterp	r7	PASS-indirect	GARBAGE	
+139f84	Block__scanBranchConeForFetchAndInterp	r8	PASS-indirect	GARBAGE	
+139f84	Block__scanBranchConeForFetchAndInterp	r9	PASS-indirect	GARBAGE	
 13a8a4	FUN_0013a8a4	r7	PASS-deep	GARBAGE	
 13a8a4	FUN_0013a8a4	r8	PASS-deep	GARBAGE	
 147704	FUN_00147704	r7	PASS-deep	GARBAGE	

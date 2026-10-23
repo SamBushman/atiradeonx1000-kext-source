@@ -617,7 +617,7 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
   undefined4 excludedRegs3;
   int swizzleComponentUse [2];
   
-  allocCtxOrBlock = *(int *)(compiler + 0x6c4);
+  allocCtxOrBlock = *(int *)(compiler + COMP_currentProgram);
   *(undefined4 *)(allocCtxOrBlock + 0x244) = 0;
   *(undefined4 *)(allocCtxOrBlock + 0x240) = 0;
   if (0 < fixedRegCount) {
@@ -634,7 +634,7 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
     }
   }
   bitCount = regCount * 4;
-  arena = *(undefined4 *)(compiler + 0x378);
+  arena = *(undefined4 *)(compiler + COMP_arenaB);
   liveWordCount = bitCount + 0x1f >> 5;
   allocation = (undefined4 *)Arena__alloc(arena,liveWordCount * 4 + 0xc);
   liveWords = allocation + 1;
@@ -652,7 +652,7 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
       liveWordCount = liveWordCount - 1;
     } while (liveWordCount != 0);
   }
-  allocArena = *(undefined4 *)(compiler + 0x378);
+  allocArena = *(undefined4 *)(compiler + COMP_arenaB);
   worklist = (undefined4 *)Arena__alloc(allocArena,0x18);
   worklistVecHeader = worklist + 1;
   *worklist = allocArena;
@@ -2227,7 +2227,7 @@ int FUN_00134ef4(param_1, param_2, param_3, compiler)
     *param_2 = 0;
     iVar2 = *param_3;
     if (iVar2 == 0) {
-      arena = *(undefined4 *)(compiler + 0x378);
+      arena = *(undefined4 *)(compiler + COMP_arenaB);
       allocation = (undefined4 *)Arena__alloc(arena,0x24);
       *allocation = arena;
       *(undefined4 **)(param_1 + 8) = allocation + 1;
@@ -2236,7 +2236,7 @@ int FUN_00134ef4(param_1, param_2, param_3, compiler)
     }
     else {
       if (*(int *)(iVar2 + 0x1c) == 0) {
-        arena = *(undefined4 *)(compiler + 0x378);
+        arena = *(undefined4 *)(compiler + COMP_arenaB);
         allocation = (undefined4 *)Arena__alloc(arena,0x24);
         *allocation = arena;
         *(undefined4 **)(iVar2 + 0x1c) = allocation + 1;
@@ -2320,7 +2320,7 @@ int FUN_00135110(param_1, param_2, param_3, param_4, compiler)
   param_1[7] = 0;
   param_1[8] = 0;
   *(int *)(param_2 * 4 + *(int *)(param_4 + 0x20)) = param_2;
-  arena = *(undefined4 *)(compiler + 0x378);
+  arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
   allocation[1] = 2;
@@ -2352,7 +2352,7 @@ int FUN_001351c4(param_1, param_2, param_3, param_4, compiler)
   param_1[7] = 0;
   param_1[8] = 0;
   *(int *)(param_2 * 4 + *(int *)(param_4 + 0x20)) = param_2;
-  arena = *(undefined4 *)(compiler + 0x378);
+  arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   *allocation = arena;
   allocation[1] = 2;
@@ -3491,7 +3491,7 @@ int FUN_00136ec4(param_1, param_2, param_3, param_4, compiler)
   param_1[3] = param_3;
   param_1[0xb] = compiler;
   if (param_3 != 0) {
-    iVar1 = Arena__alloc(*(undefined4 *)(compiler + 0x378),param_3 << 2);
+    iVar1 = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),param_3 << 2);
     param_1[8] = iVar1;
     arena = *(undefined4 *)(param_1[0xb] + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x14);
@@ -3606,7 +3606,7 @@ int FUN_0013719c(param_1, param_2, param_3, param_4, compiler)
   param_1[3] = param_3;
   param_1[0xb] = compiler;
   if (param_3 != 0) {
-    iVar1 = Arena__alloc(*(undefined4 *)(compiler + 0x378),param_3 << 2);
+    iVar1 = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),param_3 << 2);
     param_1[8] = iVar1;
     arena = *(undefined4 *)(param_1[0xb] + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x14);
@@ -4598,7 +4598,7 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
       } while (liveInChangedAny);
       return;
     }
-    arena = *(undefined4 *)(compiler + 0x378);
+    arena = *(undefined4 *)(compiler + COMP_arenaB);
     block = *(int **)(blockArray + blockIndex * 4);
     allocation = (undefined4 *)Arena__alloc(arena,bitsetAllocBytes);
     bitsetWords = allocation + 1;
@@ -4618,7 +4618,7 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
       } while (zeroWordsLeft != 0);
     }
     block[0x41] = (int)bitsetWords;
-    arena = *(undefined4 *)(compiler + 0x378);
+    arena = *(undefined4 *)(compiler + COMP_arenaB);
     allocation = (undefined4 *)Arena__alloc(arena,bitsetAllocBytes);
     bitsetWords = allocation + 1;
     *allocation = arena;
@@ -4637,7 +4637,7 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
       } while (zeroWordsLeft != 0);
     }
     block[0x40] = (int)bitsetWords;
-    arena = *(undefined4 *)(compiler + 0x378);
+    arena = *(undefined4 *)(compiler + COMP_arenaB);
     allocation = (undefined4 *)Arena__alloc(arena,bitsetAllocBytes);
     bitsetWords = allocation + 1;
     *allocation = arena;
@@ -4808,8 +4808,8 @@ LAB_00138d24: ;
   } while( true );
 }
 
-/* FUN_00138fb4 @ 0x138fb4 (84 bytes) */
-int FUN_00138fb4(inst, param_2, param_3, param_4)
+/* Program__finishUsevectorChain @ 0x138fb4 (84 bytes) */
+int Program__finishUsevectorChain(inst, param_2, param_3, param_4)
   undefined4 inst;
   undefined4 param_2;
   undefined4 param_3;

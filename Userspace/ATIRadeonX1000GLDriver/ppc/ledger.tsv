@@ -2514,7 +2514,7 @@
 0x1382b8	216	FUN_001382b8	part_041	converted
 0x138390	772	FUN_00138390	part_041	converted
 0x138694	2336	HwLimits__computeBlockLiveness	part_041	converted
-0x138fb4	84	FUN_00138fb4	part_041	converted
+0x138fb4	84	Program__finishUsevectorChain	part_041	converted
 0x139008	44	FUN_00139008	part_041	converted
 0x139034	40	FUN_00139034	part_041	converted
 0x13905c	308	FUN_0013905c	part_041	converted
@@ -2529,7 +2529,7 @@
 0x1398b4	964	FUN_001398b4	part_042	converted
 0x139c78	200	FUN_00139c78	part_042	converted
 0x139d40	524	FUN_00139d40	part_042	converted
-0x139f84	700	FUN_00139f84	part_042	converted
+0x139f84	700	Block__scanBranchConeForFetchAndInterp	part_042	converted
 0x13a240	332	FUN_0013a240	part_042	converted
 0x13a38c	696	FUN_0013a38c	part_042	converted
 0x13a644	304	FUN_0013a644	part_042	converted
@@ -2539,7 +2539,7 @@
 0x13b3f0	172	Program__hoistFetchInsts	part_042	converted
 0x13bd68	1124	Program__eliminateDeadInstsAndRecountUses	part_042	converted
 0x13c210	964	FUN_0013c210	part_042	converted
-0x13c60c	1084	FUN_0013c60c	part_042	converted
+0x13c60c	1084	Program__scanUsevectorChains	part_042	converted
 0x13ca84	112	FUN_0013ca84	part_042	converted
 0x13caf4	1644	IfHeader__convertInnerIfToCmov	part_042	converted
 0x13d160	376	pass_rewrite	part_042	converted
@@ -2877,7 +2877,7 @@
 0x17ae28	172	FUN_0017ae28	part_047	converted
 0x17af58	200	FUN_0017af58	part_047	converted
 0x17b020	268	FUN_0017b020	part_047	converted
-0x17b12c	2112	FUN_0017b12c	part_047	converted
+0x17b12c	2112	ValueKey__mixLiteralSources	part_047	converted
 0x17b96c	748	FUN_0017b96c	part_047	converted
 0x17bc58	288	FUN_0017bc58	part_048	converted
 0x17bd78	388	FUN_0017bd78	part_048	converted
@@ -2920,8 +2920,8 @@
 0x17f78c	96	FUN_0017f78c	part_048	converted
 0x17f7ec	1848	FUN_0017f7ec	part_048	converted
 0x180154	888	FUN_00180154	part_048	converted
-0x180250	1504	FUN_00180250	part_048	converted
-0x180830	2472	FUN_00180830	part_048	converted
+0x180250	1504	ValueKey__canonicalizeConstantSources	part_048	converted
+0x180830	2472	ValueKey__simplifyModifiersAndAddressing	part_048	converted
 0x181928	140	FUN_00181928	part_048	converted
 0x1819b4	252	FUN_001819b4	part_048	converted
 0x181ab0	208	FUN_00181ab0	part_048	converted

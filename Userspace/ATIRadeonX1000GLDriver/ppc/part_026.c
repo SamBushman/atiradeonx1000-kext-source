@@ -2793,7 +2793,7 @@ int FUN_000f94dc(compiler, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 local_68 [4];
   undefined4 local_58 [4];
   
-  if (*(int *)(compiler + 0x374) == 0) {
+  if (*(int *)(compiler + COMP_arenaA) == 0) {
     uVar9 = 0;
     switch(param_7) {
     case 0:
@@ -2903,7 +2903,7 @@ int FUN_000f94dc(compiler, param_2, param_3, param_4, param_5, param_6, param_7)
     }
     ((int (*)())FUN_000f92fc)(compiler,puVar12,successor);
     if (puVar10 == (undefined4 *)0x0) {
-      *(undefined4 **)(compiler + 0x374) = puVar12;
+      *(undefined4 **)(compiler + COMP_arenaA) = puVar12;
     }
     else {
       arena = 2;
@@ -2912,7 +2912,7 @@ int FUN_000f94dc(compiler, param_2, param_3, param_4, param_5, param_6, param_7)
       }
       IRInst__setOperandRef(puVar10,arena,allocation[0x24]);
       ((int (*)())FUN_000f92fc)(compiler,puVar10,successor);
-      *(undefined4 **)(compiler + 0x374) = puVar10;
+      *(undefined4 **)(compiler + COMP_arenaA) = puVar10;
     }
   }
   arenaAt374 = *(undefined4 *)(*(int *)(compiler + 8) + 0x374);
@@ -2943,7 +2943,7 @@ int FUN_000f94dc(compiler, param_2, param_3, param_4, param_5, param_6, param_7)
   operandRecord2 = IRInst__getOperandRecord(inst,1);
   *(undefined4 *)(operandRecord2 + 0xc) = 0x3a;
   *(int *)(operandRecord2 + 8) = iVar11;
-  IRInst__appendSource(inst,*(undefined4 *)(*(int *)(compiler + 0x374) + 0x8c));
+  IRInst__appendSource(inst,*(undefined4 *)(*(int *)(compiler + COMP_arenaA) + 0x8c));
   DList__pushBack(param_2,inst);
   return;
 }

@@ -468,7 +468,7 @@ int KhanPs__vslot9(this, param_2, param_3, param_4, param_5, param_6, param_7, p
   undefined4 uVar5;
   int iVar6;
   
-  uVar5 = *(undefined4 *)(compiler + 0x6c4);
+  uVar5 = *(undefined4 *)(compiler + COMP_currentProgram);
   iVar4 = *(int *)(PTR_DAT_001e8b84 + param_2 * 4);
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
   callResult = IRInst__create(0x8b,compiler);
@@ -520,7 +520,7 @@ int KhanPs__vslot5(this, param_2, compiler)
   double dVar10;
   
   if (param_2 == 1) {
-    iVar6 = *(int *)(compiler + 0x6c4);
+    iVar6 = *(int *)(compiler + COMP_currentProgram);
     callResult = FUN_00127534(*(undefined4 *)(iVar6 + 0x3ac),0x1b,0,0);
     if (callResult != 0) {
       FUN_001041d0(*(undefined4 *)(callResult + 0x38),3,3,8,0);
@@ -550,10 +550,10 @@ int KhanPs__vslot5(this, param_2, compiler)
         iVar5 = IRInst__getOperandRecord(newInst,1);
         dVar10 = (double)FLOAT_001aa108;
         *(undefined4 *)(iVar5 + 0x10) = uVar1;
-        ((void (*)())FUN_000f79c4)(newInst,*(undefined4 *)(compiler + 0x6c4),2,dVar10,dVar10,dVar10,dVar10);
+        ((void (*)())FUN_000f79c4)(newInst,*(undefined4 *)(compiler + COMP_currentProgram),2,dVar10,dVar10,dVar10,dVar10);
         IROperand__setModifierBits(newInst + 0x2f,1,1);
         dVar10 = (double)FLOAT_001aa0e8;
-        ((void (*)())FUN_000f79c4)(newInst,*(undefined4 *)(compiler + 0x6c4),3,dVar10,dVar10,dVar10,dVar10);
+        ((void (*)())FUN_000f79c4)(newInst,*(undefined4 *)(compiler + COMP_currentProgram),3,dVar10,dVar10,dVar10,dVar10);
         VReg__addUse(callResult,1,newInst);
         FUN_0012306c(uVar3,newInst);
         Block__appendInst(*(undefined4 *)(iVar6 + 0x3a0),newInst);
@@ -1469,7 +1469,7 @@ int KhanVs__vslot9(this, param_2, param_3, param_4, param_5, param_6, param_7, p
   int iVar10;
   
   iVar7 = compiler;
-  arena = *(undefined4 *)(compiler + 0x6c4);
+  arena = *(undefined4 *)(compiler + COMP_currentProgram);
   switch(param_2) {
   case 0:
     uVar2 = 0x27;
@@ -1845,10 +1845,10 @@ int FUN_0012aa78(compiler, param_2, param_3, param_4, param_5)
   int param_5;
 {
   if (((*(int *)(param_5 + 0x140) == 0) ||
-      (param_2 * param_4 + param_3 <= *(int *)(*(int *)(compiler + 0x30c) + 0x2c))) &&
+      (param_2 * param_4 + param_3 <= *(int *)(*(int *)(compiler + COMP_target) + 0x2c))) &&
      ((*(int *)(compiler + 0x318) == 0 ||
       ((param_2 <= *(int *)(compiler + 0x478) &&
-       (param_2 * (*(int *)(compiler + 0x324) - *(int *)(param_5 + 0x130)) <=
+       (param_2 * (*(int *)(compiler + COMP_nextInstId) - *(int *)(param_5 + 0x130)) <=
         *(int *)(compiler + 0x478) << 1)))))) {
     return 0;
   }

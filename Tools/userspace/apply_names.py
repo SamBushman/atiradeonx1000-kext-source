@@ -190,7 +190,13 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
                 def alt(m):
                     v = int(m.group(0), 16)
                     return '(?:%s)' % '|'.join([m.group(0)] + rev[v]) if v in rev else m.group(0)
-                try: PATALT[pat] = re.compile(re.sub(r'0x[0-9a-f]+', alt, pat))
+                def alt_dec(m):       # `+ 8` (Ghidra prints small offsets in decimal): also matches the field constant
+                    v = int(m.group(2))
+                    return m.group(1) + '(?:%s)' % '|'.join([m.group(2)] + [re.escape(k) for k in rev[v]]) if v in rev else m.group(0)
+                def alt_idx(m):       # `[2]` / `[0x8a]`: a word index = offset / 4, spelled `CONST / 4` after apply_fields
+                    v = int(m.group(2), 0) * 4
+                    return m.group(1) + '(?:%s)' % '|'.join([m.group(2)] + [re.escape(k) + r'\ /\ 4' for k in rev[v]]) if v in rev else m.group(0)
+                try: PATALT[pat] = re.compile(re.sub(r'(\\\[)(0x[0-9a-f]+|\d+)(?=\\\])', alt_idx, re.sub(r'(\\\+\\ )(\d+)\b', alt_dec, re.sub(r'0x[0-9a-f]+', alt, pat))))
                 except re.error: PATALT[pat] = None
             return bool(PATALT[pat] and PATALT[pat].search(N[i]))
         d0, d1 = declblock()
@@ -254,7 +260,7 @@ def apply_uses(lines, s, e, name, uses, allrows, declset):
 
 ALIAS_G = re.compile(r'^asm\("\.globl [A-Za-z_]\w*"\);$')
 ALIAS_S = re.compile(r'^(asm\("\.set [A-Za-z_]\w*, )(_[A-Za-z]\w*)"\);$')
-FUNC_SKIP = re.compile(r'(^|/)(names(_[^/]*)?\.tsv|class_methods\.tsv|subsystem_map\.tsv|compiler_opcodes\.tsv|fields_gld\.tsv|notes[^/]*)$')
+FUNC_SKIP = re.compile(r'(^|/)(names(_[^/]*)?\.tsv|class_methods\.tsv|subsystem_map\.tsv|compiler_opcodes\.tsv|fields_[^/]*\.tsv|notes[^/]*)$')
 
 
 def apply_funcs(d, funcs, decl, check):

@@ -965,7 +965,7 @@ int R300MachineAssembler__resolveSourceRegister(this, inst, sourceIndex, compile
      (callResult = (**(code **)(*operandVReg + 0x50))(operandVReg), callResult == 0)) {
     return;
   }
-  thunk_FUN_00134de8(*(undefined4 *)(compiler + 0x6c4),operandVReg);
+  thunk_FUN_00134de8(*(undefined4 *)(compiler + COMP_currentProgram),operandVReg);
   return;
 }
 
@@ -1159,7 +1159,7 @@ int R300MachineAssembler__create(unusedThis, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x378);
+  arena = *(undefined4 *)(compiler + COMP_arenaB);
   allocation = (undefined4 *)Arena__alloc(arena,0xac);
   *allocation = arena;
   allocation[1] = &PTR_FUN_001eb6a0;

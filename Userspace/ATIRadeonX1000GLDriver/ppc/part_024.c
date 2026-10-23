@@ -149,17 +149,17 @@ int FUN_000ec2c4(param_1, param_2)
 int Program__freeWorkArrays(program)
   int program;
 {
-  if (*(int *)(program + 0x394) != 0) {
-    Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x374),*(int *)(program + 0x394));
-    *(undefined4 *)(program + 0x394) = 0;
+  if (*(int *)(program + PROG_workArray0) != 0) {
+    Arena__free(*(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaA),*(int *)(program + PROG_workArray0));
+    *(undefined4 *)(program + PROG_workArray0) = 0;
   }
-  if (*(int *)(program + 0x398) != 0) {
-    Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x374),*(int *)(program + 0x398));
-    *(undefined4 *)(program + 0x398) = 0;
+  if (*(int *)(program + PROG_workArray1) != 0) {
+    Arena__free(*(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaA),*(int *)(program + PROG_workArray1));
+    *(undefined4 *)(program + PROG_workArray1) = 0;
   }
-  if (*(int *)(program + 0x39c) != 0) {
-    Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x374),*(int *)(program + 0x39c));
-    *(undefined4 *)(program + 0x39c) = 0;
+  if (*(int *)(program + PROG_workArray2) != 0) {
+    Arena__free(*(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaA),*(int *)(program + PROG_workArray2));
+    *(undefined4 *)(program + PROG_workArray2) = 0;
   }
   return;
 }
@@ -530,7 +530,7 @@ int FUN_000ecc1c(inst, param_2, compiler)
   
   iVar1 = (**(code **)(*inst + 0x60))(inst,param_2,compiler);
   if (iVar1 != 0) {
-    iVar1 = IRInst__hasSingleUse(inst,*(undefined4 *)(compiler + 0x6c4));
+    iVar1 = IRInst__hasSingleUse(inst,*(undefined4 *)(compiler + COMP_currentProgram));
     if (iVar1 == 0) {
       return 0;
     }
@@ -540,10 +540,10 @@ int FUN_000ecc1c(inst, param_2, compiler)
     }
     inst = (int *)IRInst__getOperandSource(inst,1);
   }
-  iVar1 = IRInst__hasSingleUse(inst,*(undefined4 *)(compiler + 0x6c4));
+  iVar1 = IRInst__hasSingleUse(inst,*(undefined4 *)(compiler + COMP_currentProgram));
   if ((((iVar1 != 0) &&
-       (iVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x44))
-                          (*(int **)(compiler + 0x30c),inst), iVar1 != 0)) &&
+       (iVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x44))
+                          (*(int **)(compiler + COMP_target),inst), iVar1 != 0)) &&
       ((*(uint *)(inst[0x56] + 0xc) & 8) != 0)) &&
      ((iVar1 = FUN_000f2d18(param_2,0x10203), iVar1 != 0 ||
       (iVar1 = ((int (*)())FUN_000ecb90)(inst,compiler), iVar1 != 0)))) {
@@ -739,7 +739,7 @@ int HwLimits__vslot43(this, inst, param_3, compiler)
   if (*(int *)(iVar1 + 0x10) != DAT_001aa800) {
     inst2 = IRInst__create(0x31,compiler);
     fparam_1 = (double)FLOAT_001aa0d4;
-    ((void (*)())FUN_000f79c4)(inst2,*(undefined4 *)(compiler + 0x6c4),1,fparam_1,fparam_1,fparam_1,
+    ((void (*)())FUN_000f79c4)(inst2,*(undefined4 *)(compiler + COMP_currentProgram),1,fparam_1,fparam_1,fparam_1,
                  (double)FLOAT_001aa0e8);
     IRInst__setOperandRef(inst2,0,*(undefined4 *)(inst + 0xa4));
     iVar3 = IRInst__getOperandRecord(inst,0);
@@ -834,7 +834,7 @@ int Program__beginPass(program, param_2)
   int *a0;
   uint loopIndex;
   
-  a0 = *(int **)(program + 900);
+  a0 = *(int **)(program + PROG_blockListHead);
   iVar1 = a0[2];
   while (iVar1 != 0) {
     (**(code **)(*a0 + 0x48))(a0,param_2);
@@ -842,13 +842,13 @@ int Program__beginPass(program, param_2)
     param_2 = extraout_r4;
     iVar1 = a0[2];
   }
-  iVar1 = *(int *)(program + 0x3c4);
+  iVar1 = *(int *)(program + PROG_instructionVector);
   iVar3 = 0;
   for (loopIndex = 1; loopIndex <= *(uint *)(iVar1 + 4); loopIndex = loopIndex + 1) {
     iVar2 = *(int *)(*(int *)(iVar1 + 8) + iVar3);
     if ((*(uint *)(iVar2 + 0x14) & 1) != 0) {
       IRInst__getOperandRecord(iVar2,0);
-      iVar1 = *(int *)(program + 0x3c4);
+      iVar1 = *(int *)(program + PROG_instructionVector);
     }
     iVar3 = iVar3 + 4;
   }
@@ -1675,7 +1675,7 @@ int Program__addInst(program, inst)
   uint count;
   uint *vectorHeader;
   
-  vectorHeader = *(uint **)(program + 0x3c4);
+  vectorHeader = *(uint **)(program + PROG_instructionVector);
   count = vectorHeader[1];
   if (count < *vectorHeader) {
     _memset(count * 4 + vectorHeader[2],0,4);
@@ -2320,7 +2320,7 @@ int Program__removeInst(program, inst)
   uint *vectorHeader;
   uint *vectorHeaderAlias;
   
-  vectorHeader = *(uint **)(program + 0x3c4);
+  vectorHeader = *(uint **)(program + PROG_instructionVector);
   count = vectorHeader[1];
   if (count != 0) {
     index = 0;
@@ -2330,19 +2330,19 @@ int Program__removeInst(program, inst)
         if (count <= index) {
           _memset(count * 4 + vectorHeader[2],0,(index - count) * 4 + 4);
           vectorHeader[1] = index + 1;
-          vectorHeaderAlias = *(uint **)(program + 0x3c4);
+          vectorHeaderAlias = *(uint **)(program + PROG_instructionVector);
         }
         elementRef = (int *)(index * 4 + vectorHeader[2]);
         vectorHeader = vectorHeaderAlias;
       }
       else {
         elementRef = (int *)Vector__elementRefGrow(vectorHeader,index);
-        vectorHeader = *(uint **)(program + 0x3c4);
+        vectorHeader = *(uint **)(program + PROG_instructionVector);
       }
       nextIndex = index + 1;
       if (*elementRef == inst) {
         Vector__removeAt(vectorHeader,index);
-        vectorHeader = *(uint **)(program + 0x3c4);
+        vectorHeader = *(uint **)(program + PROG_instructionVector);
       }
       count = vectorHeader[1];
       index = nextIndex;

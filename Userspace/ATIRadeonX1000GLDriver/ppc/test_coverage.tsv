@@ -2514,7 +2514,7 @@
 0x1382b8	FUN_001382b8	216	no	indirect call (driver context / vtable / callback)
 0x138390	FUN_00138390	772	no	indirect call (driver context / vtable / callback)
 0x138694	HwLimits__computeBlockLiveness	2336	no	indirect call (driver context / vtable / callback)
-0x138fb4	FUN_00138fb4	84	no	indirect call (driver context / vtable / callback)
+0x138fb4	Program__finishUsevectorChain	84	no	indirect call (driver context / vtable / callback)
 0x139008	FUN_00139008	44	yes	
 0x139034	FUN_00139034	40	yes	
 0x13905c	FUN_0013905c	308	no	indirect call (driver context / vtable / callback)
@@ -2529,7 +2529,7 @@
 0x1398b4	FUN_001398b4	964	yes	
 0x139c78	FUN_00139c78	200	no	indirect call (driver context / vtable / callback)
 0x139d40	FUN_00139d40	556	no	indirect call (driver context / vtable / callback)
-0x139f84	FUN_00139f84	700	no	indirect call (driver context / vtable / callback)
+0x139f84	Block__scanBranchConeForFetchAndInterp	700	no	indirect call (driver context / vtable / callback)
 0x13a240	FUN_0013a240	332	yes	
 0x13a38c	FUN_0013a38c	696	yes	
 0x13a644	FUN_0013a644	304	no	indirect call (driver context / vtable / callback)
@@ -2539,7 +2539,7 @@
 0x13b3f0	Program__hoistFetchInsts	2308	no	indirect call (driver context / vtable / callback)
 0x13bd68	Program__eliminateDeadInstsAndRecountUses	1168	no	indirect call (driver context / vtable / callback)
 0x13c210	FUN_0013c210	976	yes	
-0x13c60c	FUN_0013c60c	1100	yes	
+0x13c60c	Program__scanUsevectorChains	1100	yes	
 0x13ca84	FUN_0013ca84	112	no	indirect call (driver context / vtable / callback)
 0x13caf4	IfHeader__convertInnerIfToCmov	1644	no	indirect call (driver context / vtable / callback)
 0x13d160	pass_rewrite	576	no	indirect call (driver context / vtable / callback)
@@ -2877,7 +2877,7 @@
 0x17ae28	FUN_0017ae28	272	yes	
 0x17af58	FUN_0017af58	200	yes	
 0x17b020	FUN_0017b020	268	no	indirect call (driver context / vtable / callback)
-0x17b12c	FUN_0017b12c	2112	no	indirect call (driver context / vtable / callback)
+0x17b12c	ValueKey__mixLiteralSources	2112	no	indirect call (driver context / vtable / callback)
 0x17b96c	FUN_0017b96c	748	no	indirect call (driver context / vtable / callback)
 0x17bc58	FUN_0017bc58	288	no	indirect call (driver context / vtable / callback)
 0x17bd78	FUN_0017bd78	500	yes	
@@ -2920,8 +2920,8 @@
 0x17f78c	FUN_0017f78c	96	yes	
 0x17f7ec	FUN_0017f7ec	1848	no	indirect call (driver context / vtable / callback)
 0x180154	FUN_00180154	888	yes	
-0x180250	FUN_00180250	1504	no	indirect call (driver context / vtable / callback)
-0x180830	FUN_00180830	4312	no	indirect call (driver context / vtable / callback)
+0x180250	ValueKey__canonicalizeConstantSources	1504	no	indirect call (driver context / vtable / callback)
+0x180830	ValueKey__simplifyModifiersAndAddressing	4312	no	indirect call (driver context / vtable / callback)
 0x181928	FUN_00181928	140	no	indirect call (driver context / vtable / callback)
 0x1819b4	FUN_001819b4	252	no	indirect call (driver context / vtable / callback)
 0x181ab0	FUN_00181ab0	208	yes	

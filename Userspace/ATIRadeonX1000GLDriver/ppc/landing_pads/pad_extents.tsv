@@ -420,8 +420,8 @@ ffd5c	ffd60	FUN_000fd5c8
 13c1cc	13c1e4	Program__eliminateDeadInstsAndRecountUses
 13c5d4	13c5e8	FUN_0013c210
 13c5e8	13c600	FUN_0013c210
-13ca48	13ca5c	FUN_0013c60c
-13ca5c	13ca74	FUN_0013c60c
+13ca48	13ca5c	Program__scanUsevectorChains
+13ca5c	13ca74	Program__scanUsevectorChains
 13d2d8	13d2f0	pass_rewrite
 13dba4	13dba8	FUN_0013da3c
 13dd38	13dd50	FUN_0013da3c
@@ -521,7 +521,7 @@ ffd5c	ffd60	FUN_000fd5c8
 17ece0	17ece4	FUN_0017ebb0
 17edb0	17edd0	FUN_0017ebb0
 17f03c	17f040	FUN_0017ee68
-1811d8	1811f8	FUN_00180830
+1811d8	1811f8	ValueKey__simplifyModifiersAndAddressing
 181fdc	181ff8	FUN_00181f00
 182010	18202c	FUN_00181f00
 182040	182060	FUN_00181f00

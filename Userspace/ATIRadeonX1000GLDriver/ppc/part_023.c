@@ -426,9 +426,9 @@ int Block__ctor_ea020(this, compiler)
   DListNode__init(this + 0x24);
   this[0x2a] = compiler;
   this[0x2b] = 0;
-  iVar3 = *(int *)(compiler + 0x32c);
+  iVar3 = *(int *)(compiler + COMP_nextBlockId);
   this[0x2c] = iVar3;
-  *(int *)(compiler + 0x32c) = iVar3 + 1;
+  *(int *)(compiler + COMP_nextBlockId) = iVar3 + 1;
   this[0x3a] = 0x7fffffff;
   this[0x46] = 0xffffffff;
   this[0x4a] = 0;
@@ -481,9 +481,9 @@ int Block__ctor_ea148(this, compiler)
   DListNode__init(this + 0x24);
   this[0x2a] = compiler;
   this[0x2b] = 0;
-  iVar3 = *(int *)(compiler + 0x32c);
+  iVar3 = *(int *)(compiler + COMP_nextBlockId);
   this[0x2c] = iVar3;
-  *(int *)(compiler + 0x32c) = iVar3 + 1;
+  *(int *)(compiler + COMP_nextBlockId) = iVar3 + 1;
   this[0x3a] = 0x7fffffff;
   this[0x46] = 0xffffffff;
   this[0x4a] = 0;
@@ -566,7 +566,7 @@ int AnyBlock__ctor_ea3c0(this, compiler)
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
   *this = PTR_DAT_001e8b58 + 8;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   allocation[1] = 2;
   *allocation = arena;
@@ -588,7 +588,7 @@ int AnyBlock__ctor_ea478(this, compiler)
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
   *this = PTR_DAT_001e8b58 + 8;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
   allocation[1] = 2;
   *allocation = arena;
@@ -617,7 +617,7 @@ int IfHeader__ctor_ea530(this, compiler)
   this[0x4d] = 0;
   this[0x4e] = 0;
   this[0x51] = 1;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x130);
   puVar3 = allocation + 1;
   *allocation = arena;
@@ -643,7 +643,7 @@ int IfHeader__ctor_ea600(this, compiler)
   this[0x4d] = 0;
   this[0x4e] = 0;
   this[0x51] = 1;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x130);
   puVar3 = allocation + 1;
   *allocation = arena;
@@ -674,7 +674,7 @@ int IfHeader__ctor_ea6d0(this, param_2, param_3, param_4, compiler)
   this[0x51] = 1;
   this[0x54] = 0;
   if (param_4 == 0) {
-    arena = *(undefined4 *)(compiler + 0x374);
+    arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x130);
     *allocation = arena;
     ((int (*)())Block__ctor_ea020)(allocation + 1,compiler);
@@ -682,7 +682,7 @@ int IfHeader__ctor_ea6d0(this, param_2, param_3, param_4, compiler)
   }
   Block__connect(this,this[0x4d]);
   Block__appendInst(this,this[0x4c]);
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;
   ((int (*)())Block__ctor_ea148)(allocation + 1,compiler);
@@ -716,14 +716,14 @@ int PostLoopFooter__ctor_ea828(this, param_2, param_3, param_4, compiler)
   this[0x4e] = 0;
   this[0x4f] = 0;
   this[0x51] = param_4;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;
   ((int (*)())Block__ctor_ea148)(allocation + 1,compiler);
   allocation[0x4c] = this;
   allocation[1] = &PTR_FUN_001e9c10;
   this[0x54] = allocation + 1;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   puVar6 = allocation + 1;
   *allocation = arena;
@@ -738,11 +738,11 @@ int PostLoopFooter__ctor_ea828(this, param_2, param_3, param_4, compiler)
     iVar2 = IRInst__getOperandRecord(arena,0);
     *(undefined4 *)(iVar2 + 8) = param_2;
     *(undefined4 *)(iVar2 + 0xc) = 0x27;
-    arena = FUN_00127608(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3ac),4,param_2,0);
+    arena = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,param_2,0);
     IRInst__setOperandRef(this[0x52],1,arena);
   }
   else {
-    arena = *(undefined4 *)(compiler + 0x374);
+    arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     puVar6 = allocation + 1;
     *allocation = arena;
@@ -751,7 +751,7 @@ int PostLoopFooter__ctor_ea828(this, param_2, param_3, param_4, compiler)
     iVar2 = IRInst__getOperandRecord(puVar6,0);
     *(undefined4 *)(iVar2 + 8) = param_2;
     *(undefined4 *)(iVar2 + 0xc) = 0x27;
-    iVar2 = FUN_00127608(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3ac),4,0,0);
+    iVar2 = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,0,0);
     piVar3 = *(int **)(iVar2 + 0x18);
     if (*piVar3 == 0) {
       piVar3 = (int *)Vector__elementRefGrow(piVar3,0);
@@ -1146,14 +1146,14 @@ int PostLoopFooter__ctor_eb3c8(this, param_2, param_3, param_4, compiler)
   this[0x4e] = 0;
   this[0x4f] = 0;
   this[0x51] = param_4;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;
   ((int (*)())Block__ctor_ea148)(allocation + 1,compiler);
   allocation[0x4c] = this;
   allocation[1] = &PTR_FUN_001e9c10;
   this[0x54] = allocation + 1;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   puVar6 = allocation + 1;
   *allocation = arena;
@@ -1168,11 +1168,11 @@ int PostLoopFooter__ctor_eb3c8(this, param_2, param_3, param_4, compiler)
     iVar2 = IRInst__getOperandRecord(arena,0);
     *(undefined4 *)(iVar2 + 8) = param_2;
     *(undefined4 *)(iVar2 + 0xc) = 0x27;
-    arena = FUN_00127608(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3ac),4,param_2,0);
+    arena = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,param_2,0);
     IRInst__setOperandRef(this[0x52],1,arena);
   }
   else {
-    arena = *(undefined4 *)(compiler + 0x374);
+    arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     puVar6 = allocation + 1;
     *allocation = arena;
@@ -1181,7 +1181,7 @@ int PostLoopFooter__ctor_eb3c8(this, param_2, param_3, param_4, compiler)
     iVar2 = IRInst__getOperandRecord(puVar6,0);
     *(undefined4 *)(iVar2 + 8) = param_2;
     *(undefined4 *)(iVar2 + 0xc) = 0x27;
-    iVar2 = FUN_00127608(*(undefined4 *)(*(int *)(compiler + 0x6c4) + 0x3ac),4,0,0);
+    iVar2 = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,0,0);
     piVar3 = *(int **)(iVar2 + 0x18);
     if (*piVar3 == 0) {
       piVar3 = (int *)Vector__elementRefGrow(piVar3,0);
@@ -1228,7 +1228,7 @@ int IfHeader__ctor_eb688(this, param_2, param_3, param_4, compiler)
   this[0x51] = 1;
   this[0x54] = 0;
   if (param_4 == 0) {
-    arena = *(undefined4 *)(compiler + 0x374);
+    arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x130);
     *allocation = arena;
     ((int (*)())Block__ctor_ea020)(allocation + 1,compiler);
@@ -1236,7 +1236,7 @@ int IfHeader__ctor_eb688(this, param_2, param_3, param_4, compiler)
   }
   Block__connect(this,this[0x4d]);
   Block__appendInst(this,this[0x4c]);
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;
   ((int (*)())Block__ctor_ea148)(allocation + 1,compiler);
@@ -1329,7 +1329,7 @@ int IfHeaderStatic__ctor_eb9e0(this, param_2, param_3, compiler)
   *this = &PTR_FUN_001e9d18;
   Block__appendInst(this,param_2);
   this[0x50] = param_3;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;
   ((int (*)())Block__ctor_ea148)(allocation + 1,compiler);
@@ -1354,7 +1354,7 @@ int IfHeaderStatic__ctor_ebac8(this, param_2, param_3, compiler)
   *this = &PTR_FUN_001e9d18;
   Block__appendInst(this,param_2);
   this[0x50] = param_3;
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;
   ((int (*)())Block__ctor_ea148)(allocation + 1,compiler);

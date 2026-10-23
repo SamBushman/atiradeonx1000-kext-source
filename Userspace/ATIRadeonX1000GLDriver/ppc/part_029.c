@@ -8,7 +8,7 @@ int FUN_00107df4(param_1, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   FUN_00107da8(allocation + 1,param_1,compiler);
@@ -23,7 +23,7 @@ int IRLoadConst__vslot43(this, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   FUN_00107da8(allocation + 1,this,compiler);
@@ -75,7 +75,7 @@ int FUN_00107fd0(param_1, param_2, compiler)
   param_1[0x20] = 0;
   param_1[5] = param_1[5] | 0x18;
   *param_1 = puVar1 + 8;
-  return Program__addInst(*(undefined4 *)(compiler + 0x6c4),param_1);
+  return Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),param_1);
 }
 
 /* IRLoadConst__vslot55 @ 0x108064 (68 bytes) */
@@ -86,7 +86,7 @@ int IRLoadConst__vslot55(this, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00107fd0)(allocation + 1,this,compiler);
@@ -132,7 +132,7 @@ int FUN_001081c0(param_1, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108174)(allocation + 1,param_1,compiler);
@@ -147,7 +147,7 @@ int IRLoadConst__vslot47(this, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108174)(allocation + 1,this,compiler);
@@ -192,7 +192,7 @@ int FUN_00108350(param_1, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108304)(allocation + 1,param_1,compiler);
@@ -207,7 +207,7 @@ int IRLoadConst__vslot49(this, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108304)(allocation + 1,this,compiler);
@@ -247,7 +247,7 @@ int FUN_001084b8(param_1, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108448)(allocation + 1,param_1,compiler);
@@ -262,7 +262,7 @@ int IRLoadConst__vslot45(this, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108448)(allocation + 1,this,compiler);
@@ -280,10 +280,10 @@ int IRExport__ctor_1085b0(this, compiler)
   FUN_001071a8(this,0x30,compiler);
   this[5] = this[5] | 0x12;
   *this = &PTR_FUN_001ea118;
-  if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0x4000) == 0) {
-    Program__addInst(*(int *)(compiler + 0x6c4),this);
+  if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) == 0) {
+    Program__addInst(*(int *)(compiler + COMP_currentProgram),this);
   }
-  uVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x178))(*(int **)(compiler + 0x30c),compiler);
+  uVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x178))(*(int **)(compiler + COMP_target),compiler);
   opcodeInfo = Opcode__getInfo(uVar1);
   uVar1 = DAT_001af9c8;
   this[0x21] = 1;
@@ -396,10 +396,10 @@ int IRExport__ctor_108918(this, compiler)
   FUN_001071a8(this,0x30,compiler);
   this[5] = this[5] | 0x12;
   *this = &PTR_FUN_001ea118;
-  if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0x4000) == 0) {
-    Program__addInst(*(int *)(compiler + 0x6c4),this);
+  if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) == 0) {
+    Program__addInst(*(int *)(compiler + COMP_currentProgram),this);
   }
-  uVar1 = (**(code **)(**(int **)(compiler + 0x30c) + 0x178))(*(int **)(compiler + 0x30c),compiler);
+  uVar1 = (**(code **)(**(int **)(compiler + COMP_target) + 0x178))(*(int **)(compiler + COMP_target),compiler);
   opcodeInfo = Opcode__getInfo(uVar1);
   uVar1 = DAT_001af9c8;
   this[0x21] = 1;
@@ -443,7 +443,7 @@ int IRLoadConst__vslot77(this, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108a50)(allocation + 1,this,compiler);
@@ -464,7 +464,7 @@ int FUN_00108b54(this, param_2, compiler)
   *this = puVar1;
   this[5] = this[5] | 0x18;
   this[0x4b] = 0;
-  return Program__addInst(*(undefined4 *)(compiler + 0x6c4),this);
+  return Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),this);
 }
 
 /* IRLoadConst__vslot53 @ 0x108bec (68 bytes) */
@@ -475,7 +475,7 @@ int IRLoadConst__vslot53(this, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108b54)(allocation + 1,this,compiler);
@@ -589,7 +589,7 @@ int IRLoadConst__vslot63(this, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00108e8c)(allocation + 1,this,compiler);
@@ -795,7 +795,7 @@ int FUN_00109480(param_1, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00109428)(allocation + 1,param_1,compiler);
@@ -920,7 +920,7 @@ int FUN_00109810(param_1, compiler)
   undefined4 *allocation;
   undefined4 arena;
   
-  arena = *(undefined4 *)(compiler + 0x374);
+  arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
   ((int (*)())FUN_00109764)(allocation + 1,param_1,compiler);

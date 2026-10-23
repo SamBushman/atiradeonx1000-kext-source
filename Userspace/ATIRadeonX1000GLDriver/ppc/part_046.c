@@ -788,7 +788,7 @@ int FUN_001745f0(ctx)
   callResult = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),9);
   uVar2 = 0;
   if (callResult != 0) {
-    callResult = FUN_00180250(ctx);
+    callResult = ValueKey__canonicalizeConstantSources(ctx);
     if (callResult != 0) {
       ((int (*)())FUN_001745ac)(ctx);
     }
@@ -800,10 +800,10 @@ int FUN_001745f0(ctx)
       ((int (*)())FUN_001745ac)(ctx);
     }
     callResult = (**(code **)(**(int **)(ctx + 0xb0) + 0x24))(*(int **)(ctx + 0xb0));
-    if ((callResult != 0) && (callResult = FUN_0017b12c(ctx), callResult != 0)) {
+    if ((callResult != 0) && (callResult = ValueKey__mixLiteralSources(ctx), callResult != 0)) {
       ((int (*)())FUN_001745ac)(ctx);
     }
-    callResult = FUN_00180830(ctx);
+    callResult = ValueKey__simplifyModifiersAndAddressing(ctx);
     uVar2 = 1;
     if (callResult != 0) {
       ((int (*)())FUN_001745ac)(ctx);
@@ -827,9 +827,9 @@ int FUN_001746c8(compiler, param_2)
   
   **(undefined4 **)(compiler + 0x3f4) = param_2;
   puVar1 = (undefined4 *)
-           HashTable__find(*(undefined4 *)(compiler + 1000),*(undefined4 *)(compiler + 0x3f4));
+           HashTable__find(*(undefined4 *)(compiler + COMP_pointerSet),*(undefined4 *)(compiler + 0x3f4));
   if (puVar1 == (undefined4 *)0x0) {
-    arena = *(undefined4 *)(compiler + 0x378);
+    arena = *(undefined4 *)(compiler + COMP_arenaB);
     allocation = (undefined4 *)Arena__alloc(arena,0x34);
     puVar1 = allocation + 1;
     *allocation = arena;
@@ -845,7 +845,7 @@ int FUN_001746c8(compiler, param_2)
     allocation[0xb] = 0;
     allocation[1] = param_2;
     allocation[8] = 0;
-    HashTable__insert(*(undefined4 *)(compiler + 1000),puVar1);
+    HashTable__insert(*(undefined4 *)(compiler + COMP_pointerSet),puVar1);
     puVar6 = *(uint **)(compiler + 0x3dc);
     uVar4 = puVar6[1];
     if (uVar4 < *puVar6) {

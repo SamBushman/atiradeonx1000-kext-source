@@ -1,0 +1,19 @@
+# fork E3 round 4: loop passes, remove_empty_graphs, constant-if folding
+local	pass_loop_trans	local_84	loopInfo	CONFIRMED	the first twelve words of the 0x44-byte LoopInfo record (contiguous locals local_84[12], then loopInfoCounterInit, loopInfoProgram): passed to every LoopInfo__ function
+local	LoopInfo__convertToHardwareLoop	param_3	passThroughR5	UNKNOWN	forwarded unchanged to FUN_000f4a84 and Block__getBranchInst (call-argument registers, not a parameter of its own)
+local	LoopInfo__convertToHardwareLoop	param_4	passThroughR6	UNKNOWN	forwarded unchanged to FUN_000f4a84
+local	LoopInfo__convertToHardwareLoop	param_5	passThroughR7	UNKNOWN	forwarded unchanged to FUN_000f4a84
+local	LoopInfo__convertToHardwareLoop	param_6	passThroughR8	UNKNOWN	forwarded unchanged to FUN_000f4a84 and Block__getBranchInst
+local	LoopInfo__convertToHardwareLoop	param_7	passThroughR9	UNKNOWN	forwarded unchanged to FUN_000f4a84
+local	LoopInfo__matchExit	local_38	swizzleWord	CONFIRMED	the 4-byte swizzle word of an operand record (+0x10), indexed by byte with the counter lane
+local	LoopInfo__matchExit	bVar1	boundLaneSwizzle	INFERRED	swizzle byte of the compare's counter lane, stored to loopInfo+0x14 (bound lane)
+local	LoopInfo__matchExit	fVar2	constantBound	CONFIRMED	GH_U2F of the bound instruction's first constant word: truncated to int and stored to loopInfo+0x18 with the constant flag +0x1c = 1
+local	pass_remove_empty_graphs	iVar2	testResult	INFERRED	holds the result of the Block predicates and Compiler__isOptionEnabled tests of the pass
+local	Program__foldConstantIfRegion	param_1	program	CONFIRMED	program+0x474 stamp, program+8 compiler, Program__removeInst(param_1, ...), Program__freeWorkArrays(param_1)
+local	Program__foldConstantIfRegion	param_2	ifHeader	CONFIRMED	header+0x14c (word 0x53) is the known condition value; +0x134/+0x138 (words 0x4d/0x4e) the then/else arm entries; its branch instruction is removed
+local	Program__foldConstantIfRegion	param_3	ifFooter	INFERRED	the matching footer: Block__findSimpleSuccessor(param_3), predecessor index of the surviving arm
+local	Program__foldConstantIfRegion	param_4	outSurvivingEntry	CONFIRMED	*param_4 receives Block__getSuccessor(header, cond != 1): the surviving arm's entry block
+local	Program__foldConstantIfRegion	param_5	outSurvivingExit	CONFIRMED	*param_5 receives Block__getPredecessor(footer, cond != 1): the surviving arm's exit block
+local	Program__foldConstantIfRegion	piVar15	deadBlock	CONFIRMED	popped from the worklist of the dead arm; its successors are queued, then it is detached with Block__detach
+local	Program__foldConstantIfRegion	a0	deadBlockSuccessor	CONFIRMED	successor of the dead block, stamped with program+0x474 (+0x118 words) and queued once
+local	Program__foldConstantIfRegion	iVar7	survivingEntry	CONFIRMED	Block__getSuccessor(header, cond != 1), also stored in *param_4
