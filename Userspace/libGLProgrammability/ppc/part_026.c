@@ -2304,7 +2304,7 @@ int _init_object(ob)
   uint objectBits;
   uint classifyResult;
   int compareResult;
-  undefined4 r3Out0;
+  undefined4 r3AfterFree;
   undefined4 *v2ArrayCursor;
   code *fdeCompare;
   undefined4 *v1IndexBase;
@@ -2420,7 +2420,7 @@ LAB_97c1d890:
         v1[1] = v1[1] + *(int *)(erraticAlias + 4);
       }
       _free(erraticVec);
-      returnValue = r3Out0;
+      returnValue = r3AfterFree;
     }
     *linearVec = *(undefined4 *)(ob + 0xc);
     *(uint *)(ob + 0x10) = *(uint *)(ob + 0x10) | 0x80000000;

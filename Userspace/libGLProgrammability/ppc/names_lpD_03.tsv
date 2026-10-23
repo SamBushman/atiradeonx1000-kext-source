@@ -80,5 +80,5 @@ local	__gxx_exception_cleanup	extraout_r4	r4Out0	UNKNOWN	Ghidra extra-output var
 local	FUN_97c19d00	extraout_r3	r3Out0	UNKNOWN	Ghidra extra-output variable: value of r3 after a call; only forwarded
 local	___cxa_end_catch	extraout_r3	r3AfterDelete	UNKNOWN	Ghidra extra-output variable: value of r3 after a call; only forwarded
 local	___deregister_frame	extraout_r3	r3Out0	UNKNOWN	Ghidra extra-output variable: value of r3 after a call; only forwarded
-local	_init_object	extraout_r3	r3Out0	UNKNOWN	Ghidra extra-output variable: value of r3 after a call; only forwarded
+local	_init_object	extraout_r3	r3AfterFree	UNKNOWN	Ghidra extra-output variable: value of r3 after a call; only forwarded
 local	TType__setStructSize	a0	r3In0	UNKNOWN	Ghidra input-register variable: r3 as left by the previous call, forwarded to the next call
