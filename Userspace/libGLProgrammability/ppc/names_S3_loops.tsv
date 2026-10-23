@@ -208,7 +208,7 @@ use	_BlocksFree	uVar2	blockIndex	INFERRED	initialised to a literal, stepped by o
 use	_FlattenIf	uVar18	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#84	+320	all	all
 use	_EmulateOp	iVar18	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#14	+20	all	all
 use	_DetectConstantLoopsSimple	uVar8	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#317	+87	all	all
-use	_UnrollConstantLoopsSimple	uVar9	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#82	+113	all	all
+use	_UnrollConstantLoopsSimple	uVar9	newOpIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#82	+113	all	all
 use	_PPParserMacroCreateFromMacro	uVar4	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#1	+14	all	all
 use	_PPParserParseAddressDeclaration	uVar3	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#3	+35	all	all
 use	_PPParserParseAddressDeclaration	uVar4	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#30	+8	all	all

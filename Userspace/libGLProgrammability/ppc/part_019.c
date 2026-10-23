@@ -2582,283 +2582,293 @@ LAB_97c0f970:
 }
 
 /* _UnrollConstantLoopsSimple @ 0x97c0fb5c (1808 bytes) */
-int _UnrollConstantLoopsSimple(param_1, param_2)
-  int param_1;
-  int param_2;
+int _UnrollConstantLoopsSimple(stream, allowRepify)
+  int stream;
+  int allowRepify;
 {
-  uint loopIndex;
-  uint *puVar1;
-  bool bVar2;
-  int iVar3;
-  undefined4 hashSetNewResult;
-  int iVar5;
-  uint uVar6;
-  int iVar7;
-  uint *puVar8;
-  uint uVar9;
-  bool bVar10;
-  uint *puVar11;
-  int iVar12;
-  int iVar13;
-  uint local_280;
-  uint local_27c;
-  int local_26c;
-  uint local_250;
-  uint local_24c;
-  longlong local_220;
-  uint local_210;
-  uint local_20c;
-  undefined4 local_208;
-  undefined4 local_204;
-  undefined4 local_1e0;
-  undefined4 local_1dc;
-  undefined4 local_1c8;
-  undefined4 local_1c4;
-  undefined4 local_1c0;
-  undefined4 local_1bc;
-  undefined4 local_1b0;
-  undefined4 local_1ac;
-  undefined4 local_1a8;
-  undefined4 local_1a4;
-  undefined4 local_1a0;
-  uint local_180 [8];
-  int *local_160 [4];
-  undefined4 local_150;
-  uint local_140 [4];
-  int *local_130;
-  uint local_120 [4];
-  undefined4 local_110;
-  uint local_100 [4];
-  undefined4 local_f0;
-  uint *local_e0 [9];
-  undefined4 *local_bc;
-  uint *local_b0 [8];
-  uint local_90 [5];
-  undefined4 local_7c;
-  undefined2 uStack_7a;
-  undefined4 local_78;
-  undefined4 local_74;
-  undefined4 local_70;
-  uint local_6c;
-  uint local_68;
-  undefined4 local_64;
-  undefined4 local_60;
-  undefined4 local_5c;
-  int local_50;
-  int local_4c [5];
+  uint newOp;
+  int patchesLeft;
+  int tableByteOffset;
+  int iterationCount;
+  int repifyResult;
+  int operandIndex;
+  int anchorOp;
+  int knownCountRegister;
+  int operandTableIndex;
+  int foundEnd;
+  bool hasNext;
+  uint newOpIndex;
+  uint *labelSlot;
+  bool isCountKnown;
+  undefined4 knownRegisters;
+  int scanCursor;
+  uint operandWord;
+  int nextOperandIndex;
+  uint *tableBase;
+  uint loopEndLabel;
+  bool bodyIsStraightLine;
+  uint *tableCursor;
+  int previousOperation;
+  int operationChunk;
+  uint countInfoRegister;
+  uint countInfoBank;
+  int countInfoIsConstant;
+  uint lookupKeyRegister;
+  uint lookupKeyBank;
+  longlong convertScratch;
+  uint counterInfoRegister;
+  uint counterInfoBank;
+  undefined4 counterInfoPrecision;
+  undefined4 counterInfoType;
+  undefined4 oneConstRegister;
+  undefined4 oneConstBank;
+  undefined4 oneConstX;
+  undefined4 oneConstY;
+  undefined4 oneConstZ;
+  undefined4 oneConstW;
+  undefined4 condTempRegister;
+  undefined4 condTempBank;
+  undefined4 condTempPrecision;
+  undefined4 condTempType;
+  undefined4 condTempSize;
+  uint newOps [8];
+  int *insertAfterAnchors [4];
+  undefined4 insertAfterAnchorsTail;
+  uint insertBeforeAnchors [4];
+  int *insertBeforeAnchorsTail;
+  uint opcodeTable [4];
+  undefined4 opcodeTableTail;
+  uint sourceCountTable [4];
+  undefined4 sourceCountTableTail;
+  uint *operandPtrTable [9];
+  undefined4 *operandPtrTableTail;
+  uint *destPtrTable [8];
+  uint opRecord [5];
+  undefined4 opRecordSrc0B;
+  undefined2 opRecordSrc0BHigh;
+  undefined4 opRecordSrc1A;
+  undefined4 opRecordSrc1B;
+  undefined4 opRecordSrc2A;
+  uint opRecordSrc2B;
+  uint opRecordAuxA;
+  undefined4 opRecordAuxB;
+  undefined4 opRecordLine;
+  undefined4 opRecordWord13;
+  int loopStart;
+  int loopEnd [5];
   
-  hashSetNewResult = _HashSetNew((*(uint *)(*(int *)(param_1 + 4) + 8) >> 5) + 1,DAT_a7b7bf80,DAT_a7b7bf7c);
-  iVar13 = **(int **)(param_1 + 0x20);
+  knownRegisters = _HashSetNew((*(uint *)(*(int *)(stream + 4) + 8) >> 5) + 1,DAT_a7b7bf80,DAT_a7b7bf7c);
+  operationChunk = **(int **)(stream + 0x20);
   do {
     while( true ) {
-      if (iVar13 == 0) {
-        ((int (*)())_ClearRegisterState)(hashSetNewResult);
-        _HashSetFree(hashSetNewResult);
+      if (operationChunk == 0) {
+        ((int (*)())_ClearRegisterState)(knownRegisters);
+        _HashSetFree(knownRegisters);
         return;
       }
-      if ((*(uint *)(iVar13 + 0xc) >> 0x12 & 0xff) == 0x57) break;
+      if ((*(uint *)(operationChunk + 0xc) >> 0x12 & 0xff) == 0x57) break;
 LAB_97c102a8:
-      ((int (*)())_EmulateOp)(param_1,iVar13,hashSetNewResult);
+      ((int (*)())_EmulateOp)(stream,operationChunk,knownRegisters);
 LAB_97c102ac:
-      iVar13 = *(int *)(iVar13 + 8);
+      operationChunk = *(int *)(operationChunk + 8);
     }
-    bVar2 = false;
-    if (param_2 != 0) {
-      local_27c = *(uint *)(iVar13 + 0x1c) >> 0x17 & 7;
-      local_280 = (uint)*(ushort *)(iVar13 + 0x22);
-      ((int (*)())_GetRegisterTypeInfo)(param_1,&local_280);
-      bVar2 = local_26c != 0;
+    isCountKnown = false;
+    if (allowRepify != 0) {
+      countInfoBank = *(uint *)(operationChunk + 0x1c) >> 0x17 & 7;
+      countInfoRegister = (uint)*(ushort *)(operationChunk + 0x22);
+      ((int (*)())_GetRegisterTypeInfo)(stream,&countInfoRegister);
+      isCountKnown = countInfoIsConstant != 0;
     }
-    if (bVar2) goto LAB_97c102a8;
-    local_4c[0] = 0;
-    bVar10 = true;
-    uVar9 = *(uint *)(iVar13 + 0x10) & 0x3ffff;
-    bVar2 = true;
-    iVar12 = 0;
-    iVar5 = iVar13;
-    while ((iVar3 = local_4c[0], bVar2 &&
-           ((((*(uint *)(iVar5 + 0xc) & 0x3ffff) != uVar9 || (iVar12 == 0)) ||
-            (iVar3 = iVar12, (*(uint *)(iVar12 + 0xc) >> 0x12 & 0xff) != 0x5b))))) {
-      switch(*(uint *)(iVar5 + 0xc) >> 0x12 & 0xff) {
+    if (isCountKnown) goto LAB_97c102a8;
+    loopEnd[0] = 0;
+    bodyIsStraightLine = true;
+    loopEndLabel = *(uint *)(operationChunk + 0x10) & 0x3ffff;
+    hasNext = true;
+    previousOperation = 0;
+    scanCursor = operationChunk;
+    while ((foundEnd = loopEnd[0], hasNext &&
+           ((((*(uint *)(scanCursor + 0xc) & 0x3ffff) != loopEndLabel || (previousOperation == 0)) ||
+            (foundEnd = previousOperation, (*(uint *)(previousOperation + 0xc) >> 0x12 & 0xff) != 0x5b))))) {
+      switch(*(uint *)(scanCursor + 0xc) >> 0x12 & 0xff) {
       case 0x4b:
       case 0x54:
       case 0x69:
-        if (uVar9 < (*(uint *)(iVar5 + 0x10) & 0x3ffff)) goto switchD_97c0fc88_caseD_4c;
+        if (loopEndLabel < (*(uint *)(scanCursor + 0x10) & 0x3ffff)) goto switchD_97c0fc88_caseD_4c;
         break;
       case 0x4c:
       case 0x4d:
 switchD_97c0fc88_caseD_4c:
-        bVar10 = false;
+        bodyIsStraightLine = false;
       }
-      bVar2 = *(int *)(iVar5 + 8) != 0;
-      iVar12 = iVar5;
-      iVar5 = *(int *)(iVar5 + 8);
+      hasNext = *(int *)(scanCursor + 8) != 0;
+      previousOperation = scanCursor;
+      scanCursor = *(int *)(scanCursor + 8);
     }
-    local_4c[0] = iVar3;
-    iVar12 = -1;
-    local_24c = *(uint *)(iVar13 + 0x1c) >> 0x17 & 7;
-    local_250 = (uint)*(ushort *)(iVar13 + 0x22);
-    local_50 = iVar13;
-    iVar5 = _HashSetGet(hashSetNewResult,&local_250);
-    if (iVar5 == 0) {
+    loopEnd[0] = foundEnd;
+    iterationCount = -1;
+    lookupKeyBank = *(uint *)(operationChunk + 0x1c) >> 0x17 & 7;
+    lookupKeyRegister = (uint)*(ushort *)(operationChunk + 0x22);
+    loopStart = operationChunk;
+    knownCountRegister = _HashSetGet(knownRegisters,&lookupKeyRegister);
+    if (knownCountRegister == 0) {
 LAB_97c0fe04:
-      puVar8 = &local_280;
-      loopIndex = 0;
-      local_20c = *(uint *)(local_50 + 0x1c) >> 0x17 & 7;
-      local_210 = (uint)*(ushort *)(local_50 + 0x22);
-      ((int (*)())_GetRegisterTypeInfo)(param_1,&local_210);
-      local_1c8 = 0x3f800000;
-      local_1bc = 0;
-      local_1c4 = 0;
-      local_1c0 = 0;
-      local_1dc = 2;
-      local_1e0 = _AddConstantParam(param_1,local_208,local_204,0,0x3f800000,0,0,0);
-      local_1ac = 1;
-      local_1a4 = 4;
-      local_1a8 = 0;
-      local_1a0 = 0;
-      local_1b0 = _AddTempRegister(param_1,0,4,0);
-      local_160[0] = &local_50;
-      local_160[1] = (int *)local_180;
-      local_160[2] = (int *)(local_180 + 1);
-      local_160[3] = (int *)(local_180 + 2);
-      local_130 = local_4c;
-      local_110 = DAT_97c3aa98;
-      local_180[0] = 0;
-      local_180[1] = 0;
-      local_180[2] = 0;
-      local_180[3] = 0;
-      local_180[4] = 0;
-      local_150 = 0;
-      local_140[0] = 0;
-      local_140[1] = 0;
-      local_140[2] = 0;
-      local_140[3] = 0;
-      local_120[0] = DAT_97c3aa88;
-      local_120[1] = DAT_97c3aa8c;
-      local_120[2] = DAT_97c3aa90;
-      local_120[3] = DAT_97c3aa94;
-      local_100[0] = DAT_97c3aa9c;
-      local_100[1] = DAT_97c3aaa0;
-      local_100[2] = DAT_97c3aaa4;
-      local_100[3] = DAT_97c3aaa8;
-      local_b0[3] = (uint *)0x0;
-      local_b0[4] = &local_210;
-      local_e0[0] = &local_210;
-      local_e0[3] = (uint *)0x0;
-      local_e0[4] = (uint *)0x0;
-      local_e0[5] = (uint *)0x0;
-      local_e0[6] = (uint *)0x0;
-      local_e0[7] = (uint *)0x0;
-      local_e0[8] = &local_210;
-      local_b0[1] = (uint *)0x0;
-      local_b0[2] = (uint *)0x0;
-      iVar12 = 0;
-      local_f0 = DAT_97c3aaac;
-      local_bc = &local_1e0;
-      local_b0[0] = &local_1b0;
-      local_e0[1] = &local_1e0;
-      local_e0[2] = &local_1b0;
-      puVar11 = puVar8;
+      tableBase = &countInfoRegister;
+      newOpIndex = 0;
+      counterInfoBank = *(uint *)(loopStart + 0x1c) >> 0x17 & 7;
+      counterInfoRegister = (uint)*(ushort *)(loopStart + 0x22);
+      ((int (*)())_GetRegisterTypeInfo)(stream,&counterInfoRegister);
+      oneConstX = 0x3f800000;
+      oneConstW = 0;
+      oneConstY = 0;
+      oneConstZ = 0;
+      oneConstBank = 2;
+      oneConstRegister = _AddConstantParam(stream,counterInfoPrecision,counterInfoType,0,0x3f800000,0,0,0);
+      condTempBank = 1;
+      condTempType = 4;
+      condTempPrecision = 0;
+      condTempSize = 0;
+      condTempRegister = _AddTempRegister(stream,0,4,0);
+      insertAfterAnchors[0] = &loopStart;
+      insertAfterAnchors[1] = (int *)newOps;
+      insertAfterAnchors[2] = (int *)(newOps + 1);
+      insertAfterAnchors[3] = (int *)(newOps + 2);
+      insertBeforeAnchorsTail = loopEnd;
+      opcodeTableTail = DAT_97c3aa98;
+      newOps[0] = 0;
+      newOps[1] = 0;
+      newOps[2] = 0;
+      newOps[3] = 0;
+      newOps[4] = 0;
+      insertAfterAnchorsTail = 0;
+      insertBeforeAnchors[0] = 0;
+      insertBeforeAnchors[1] = 0;
+      insertBeforeAnchors[2] = 0;
+      insertBeforeAnchors[3] = 0;
+      opcodeTable[0] = DAT_97c3aa88;
+      opcodeTable[1] = DAT_97c3aa8c;
+      opcodeTable[2] = DAT_97c3aa90;
+      opcodeTable[3] = DAT_97c3aa94;
+      sourceCountTable[0] = DAT_97c3aa9c;
+      sourceCountTable[1] = DAT_97c3aaa0;
+      sourceCountTable[2] = DAT_97c3aaa4;
+      sourceCountTable[3] = DAT_97c3aaa8;
+      destPtrTable[3] = (uint *)0x0;
+      destPtrTable[4] = &counterInfoRegister;
+      operandPtrTable[0] = &counterInfoRegister;
+      operandPtrTable[3] = (uint *)0x0;
+      operandPtrTable[4] = (uint *)0x0;
+      operandPtrTable[5] = (uint *)0x0;
+      operandPtrTable[6] = (uint *)0x0;
+      operandPtrTable[7] = (uint *)0x0;
+      operandPtrTable[8] = &counterInfoRegister;
+      destPtrTable[1] = (uint *)0x0;
+      destPtrTable[2] = (uint *)0x0;
+      tableByteOffset = 0;
+      sourceCountTableTail = DAT_97c3aaac;
+      operandPtrTableTail = &oneConstRegister;
+      destPtrTable[0] = &condTempRegister;
+      operandPtrTable[1] = &oneConstRegister;
+      operandPtrTable[2] = &condTempRegister;
+      tableCursor = tableBase;
       do {
-        local_90[4] = 0;
-        local_7c = 0;
-        local_78 = 0;
-        local_74 = 0;
-        local_70 = 0;
-        local_6c = 0;
-        local_68 = 0;
-        local_64 = 0;
-        local_90[0] = 0;
-        local_90[1] = 0;
-        local_90[2] = 0;
-        local_90[3] = 0;
-        local_60 = 0;
-        local_5c = 0;
-        if ((int *)puVar11[0x48] == (int *)0x0) {
-          iVar5 = *(int *)puVar11[0x50];
+        opRecord[4] = 0;
+        opRecordSrc0B = 0;
+        opRecordSrc1A = 0;
+        opRecordSrc1B = 0;
+        opRecordSrc2A = 0;
+        opRecordSrc2B = 0;
+        opRecordAuxA = 0;
+        opRecordAuxB = 0;
+        opRecord[0] = 0;
+        opRecord[1] = 0;
+        opRecord[2] = 0;
+        opRecord[3] = 0;
+        opRecordLine = 0;
+        opRecordWord13 = 0;
+        if ((int *)tableCursor[0x48] == (int *)0x0) {
+          anchorOp = *(int *)tableCursor[0x50];
         }
         else {
-          iVar5 = *(int *)puVar11[0x48];
+          anchorOp = *(int *)tableCursor[0x48];
         }
-        local_90[0] = (puVar11[0x58] & 0xff) << 0x12;
-        local_60 = *(undefined4 *)(iVar5 + 0x3c);
-        local_90[0] = puVar11[0x60] << 0x1d | local_90[0];
-        local_90[1] = 0x1800000;
-        if (puVar11[0x74] != 0) {
-          local_90[2] = 0x6c;
-          local_90[2] = 0x206c;
-          local_90[2] = (*(uint *)(puVar11[0x74] + 4) & 7) << 0x11 | 0x206c;
-          local_90[3] = (uint)*(ushort *)(puVar11[0x74] + 2);
+        opRecord[0] = (tableCursor[0x58] & 0xff) << 0x12;
+        opRecordLine = *(undefined4 *)(anchorOp + 0x3c);
+        opRecord[0] = tableCursor[0x60] << 0x1d | opRecord[0];
+        opRecord[1] = 0x1800000;
+        if (tableCursor[0x74] != 0) {
+          opRecord[2] = 0x6c;
+          opRecord[2] = 0x206c;
+          opRecord[2] = (*(uint *)(tableCursor[0x74] + 4) & 7) << 0x11 | 0x206c;
+          opRecord[3] = (uint)*(ushort *)(tableCursor[0x74] + 2);
         }
-        iVar5 = 0;
-        if (0 < (int)puVar11[0x60]) {
+        operandIndex = 0;
+        if (0 < (int)tableCursor[0x60]) {
           do {
-            uVar6 = local_90[iVar5 * 2 + 4];
-            iVar3 = loopIndex * 2 + iVar5;
-            local_90[iVar5 * 2 + 4] = uVar6 & 0xff81cfff | 0xd8000;
-            iVar7 = iVar5 + 1;
-            local_90[iVar5 * 2 + 4] =
-                 (local_e0[iVar3][1] & 7) << 0x17 | uVar6 & 0xfc01cfff | 0xd8000;
-            (&uStack_7a)[iVar5 * 4] = (short)*local_e0[iVar3];
-            iVar5 = iVar7;
-          } while (iVar7 < *(int *)((int)local_100 + iVar12));
+            operandWord = opRecord[operandIndex * 2 + 4];
+            operandTableIndex = newOpIndex * 2 + operandIndex;
+            opRecord[operandIndex * 2 + 4] = operandWord & 0xff81cfff | 0xd8000;
+            nextOperandIndex = operandIndex + 1;
+            opRecord[operandIndex * 2 + 4] =
+                 (operandPtrTable[operandTableIndex][1] & 7) << 0x17 | operandWord & 0xfc01cfff | 0xd8000;
+            (&opRecordSrc0BHigh)[operandIndex * 4] = (short)*operandPtrTable[operandTableIndex];
+            operandIndex = nextOperandIndex;
+          } while (nextOperandIndex < *(int *)((int)sourceCountTable + tableByteOffset));
         }
-        if ((undefined4 *)puVar11[0x48] == (undefined4 *)0x0) {
-          uVar6 = _PPStreamInsertOperationBeforeChunk
-                            (param_1,local_90,0,0,*(undefined4 *)puVar11[0x50]);
+        if ((undefined4 *)tableCursor[0x48] == (undefined4 *)0x0) {
+          newOp = _PPStreamInsertOperationBeforeChunk
+                            (stream,opRecord,0,0,*(undefined4 *)tableCursor[0x50]);
         }
         else {
-          uVar6 = _PPStreamInsertOperationAfterChunk
-                            (param_1,local_90,0,0,*(undefined4 *)puVar11[0x48]);
+          newOp = _PPStreamInsertOperationAfterChunk
+                            (stream,opRecord,0,0,*(undefined4 *)tableCursor[0x48]);
         }
-        loopIndex = loopIndex + 1;
-        puVar11[0x40] = uVar6;
-        iVar12 = iVar12 + 4;
-        puVar11 = puVar11 + 1;
-      } while (loopIndex < 5);
-      local_70 = 0;
-      local_6c = *(uint *)(*(int *)(local_180[3] + 8) + 0xc) & 0x3ffff;
-      local_90[1] = local_6c;
-      local_90[2] = *(uint *)(local_50 + 0x10) & 0x3ffff;
-      local_90[4] = 0;
-      local_68 = local_90[2];
-      iVar12 = 5;
-      local_64 = 0;
-      local_60 = 0;
-      local_90[0] = 0;
-      local_90[3] = 0;
+        newOpIndex = newOpIndex + 1;
+        tableCursor[0x40] = newOp;
+        tableByteOffset = tableByteOffset + 4;
+        tableCursor = tableCursor + 1;
+      } while (newOpIndex < 5);
+      opRecordSrc2A = 0;
+      opRecordSrc2B = *(uint *)(*(int *)(newOps[3] + 8) + 0xc) & 0x3ffff;
+      opRecord[1] = opRecordSrc2B;
+      opRecord[2] = *(uint *)(loopStart + 0x10) & 0x3ffff;
+      opRecord[4] = 0;
+      opRecordAuxA = opRecord[2];
+      patchesLeft = 5;
+      opRecordAuxB = 0;
+      opRecordLine = 0;
+      opRecord[0] = 0;
+      opRecord[3] = 0;
       do {
-        puVar11 = puVar8 + 0x40;
-        puVar1 = puVar8 + 0x7c;
-        puVar8 = puVar8 + 1;
-        *(uint *)(*puVar11 + 0x10) = *puVar1 & 0x3ffff | *(uint *)(*puVar11 + 0x10) & 0xfffc0000;
-        iVar12 = iVar12 + -1;
-      } while (iVar12 != 0);
-      *(uint *)(local_50 + 0xc) = *(uint *)(local_50 + 0xc) & 0xfc03ffff | 0x1a80000;
-      *(uint *)(local_50 + 0xc) = *(uint *)(local_50 + 0xc) & 0x1fffffff;
-      *(uint *)(local_4c[0] + 0xc) = *(uint *)(local_4c[0] + 0xc) & 0xfc03ffff | 0x1ac0000;
-      *(uint *)(local_4c[0] + 0x10) =
-           *(uint *)(*(int *)(local_50 + 8) + 0xc) & 0x3ffff |
-           *(uint *)(local_4c[0] + 0x10) & 0xfffc0000;
+        tableCursor = tableBase + 0x40;
+        labelSlot = tableBase + 0x7c;
+        tableBase = tableBase + 1;
+        *(uint *)(*tableCursor + 0x10) = *labelSlot & 0x3ffff | *(uint *)(*tableCursor + 0x10) & 0xfffc0000;
+        patchesLeft = patchesLeft + -1;
+      } while (patchesLeft != 0);
+      *(uint *)(loopStart + 0xc) = *(uint *)(loopStart + 0xc) & 0xfc03ffff | 0x1a80000;
+      *(uint *)(loopStart + 0xc) = *(uint *)(loopStart + 0xc) & 0x1fffffff;
+      *(uint *)(loopEnd[0] + 0xc) = *(uint *)(loopEnd[0] + 0xc) & 0xfc03ffff | 0x1ac0000;
+      *(uint *)(loopEnd[0] + 0x10) =
+           *(uint *)(*(int *)(loopStart + 8) + 0xc) & 0x3ffff |
+           *(uint *)(loopEnd[0] + 0x10) & 0xfffc0000;
       goto LAB_97c102a8;
     }
-    if (((*(int *)(iVar5 + 0x14) == 0) || (*(int *)(iVar5 + 0x10) != 0)) ||
-       (*(int *)(iVar5 + 0xc) != 1)) {
-      bVar10 = false;
+    if (((*(int *)(knownCountRegister + 0x14) == 0) || (*(int *)(knownCountRegister + 0x10) != 0)) ||
+       (*(int *)(knownCountRegister + 0xc) != 1)) {
+      bodyIsStraightLine = false;
     }
     else {
-      iVar12 = (int)*(float *)(iVar5 + 0x18);
-      local_220 = (longlong)iVar12;
+      iterationCount = (int)*(float *)(knownCountRegister + 0x18);
+      convertScratch = (longlong)iterationCount;
     }
-    if (!bVar10) goto LAB_97c0fe04;
-    iVar13 = *(int *)(local_50 + 4);
-    if (((param_2 == 0) || (iVar12 < 1)) ||
-       (iVar5 = ((int (*)())_RepifyConstantLoopSimple)(param_1,local_50,local_4c[0],iVar12), iVar5 == 0)) {
-      ((int (*)())_UnrollConstantLoopSimple)(param_1,local_50,local_4c[0],iVar12);
+    if (!bodyIsStraightLine) goto LAB_97c0fe04;
+    operationChunk = *(int *)(loopStart + 4);
+    if (((allowRepify == 0) || (iterationCount < 1)) ||
+       (repifyResult = ((int (*)())_RepifyConstantLoopSimple)(stream,loopStart,loopEnd[0],iterationCount), repifyResult == 0)) {
+      ((int (*)())_UnrollConstantLoopSimple)(stream,loopStart,loopEnd[0],iterationCount);
     }
-    if (iVar13 != 0) goto LAB_97c102ac;
-    iVar13 = **(int **)(param_1 + 0x20);
+    if (operationChunk != 0) goto LAB_97c102ac;
+    operationChunk = **(int **)(stream + 0x20);
   } while( true );
 }
 
@@ -2869,19 +2879,22 @@ int _instructionIndexHashFunction()
 }
 
 /* _UnrollConstantLoopSimple @ 0x97c102f4 (596 bytes) */
-int _UnrollConstantLoopSimple(stream, param_2, param_3, param_4)
+int _UnrollConstantLoopSimple(stream, loopStart, loopEnd, iterationCount)
   int stream;
-  int param_2;
-  int param_3;
-  int param_4;
+  int loopStart;
+  int loopEnd;
+  int iterationCount;
 {
-  int hashTableGetResult;
-  bool bVar1;
-  int iVar2;
-  undefined4 hashTableNewResult;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  int endOfCopies;
+  int operationAfterEnd;
+  int nextOperation;
+  int mappedLabel;
+  bool isFirstInsert;
+  int removeCursor;
+  undefined4 labelMap;
+  int insertionPoint;
+  int copyCursor;
+  int bodyOperation;
   undefined4 opHeader;
   undefined4 opFlags;
   undefined4 opDest0;
@@ -2897,22 +2910,22 @@ int _UnrollConstantLoopSimple(stream, param_2, param_3, param_4)
   undefined4 opLine;
   undefined4 opWord13;
   
-  iVar4 = param_3;
-  if (0 < param_4) {
-    hashTableNewResult = _HashTableNew((*(uint *)(*(int *)(stream + 0x20) + 8) >> 5) + 1,DAT_a7b7bf78,
+  insertionPoint = loopEnd;
+  if (0 < iterationCount) {
+    labelMap = _HashTableNew((*(uint *)(*(int *)(stream + 0x20) + 8) >> 5) + 1,DAT_a7b7bf78,
                           DAT_a7b7bf74);
     do {
-      iVar5 = 0;
-      bVar1 = true;
-      for (iVar6 = *(int *)(param_2 + 8); (iVar6 != 0 && (iVar6 != param_3));
-          iVar6 = *(int *)(iVar6 + 8)) {
-        iVar4 = _PPStreamInsertOperationAfterChunk(stream,iVar6 + 0xc,0,0,iVar4);
-        if (bVar1) {
-          iVar5 = iVar4;
+      copyCursor = 0;
+      isFirstInsert = true;
+      for (bodyOperation = *(int *)(loopStart + 8); (bodyOperation != 0 && (bodyOperation != loopEnd));
+          bodyOperation = *(int *)(bodyOperation + 8)) {
+        insertionPoint = _PPStreamInsertOperationAfterChunk(stream,bodyOperation + 0xc,0,0,insertionPoint);
+        if (isFirstInsert) {
+          copyCursor = insertionPoint;
         }
-        bVar1 = bVar1 && iVar4 == 0;
-        _HashTableAdd(hashTableNewResult,(*(uint *)(iVar6 + 0xc) & 0x3ffff) + 1,
-                      (*(uint *)(iVar4 + 0xc) & 0x3ffff) + 1);
+        isFirstInsert = isFirstInsert && insertionPoint == 0;
+        _HashTableAdd(labelMap,(*(uint *)(bodyOperation + 0xc) & 0x3ffff) + 1,
+                      (*(uint *)(insertionPoint + 0xc) & 0x3ffff) + 1);
       }
       opFlags = 0;
       opHeader = 0x1b80000;
@@ -2928,96 +2941,96 @@ int _UnrollConstantLoopSimple(stream, param_2, param_3, param_4)
       opAuxB = 0;
       opLine = 0;
       opWord13 = 0;
-      iVar4 = _PPStreamInsertOperationAfterChunk(stream,&opHeader,0,0,iVar4);
-      _HashTableAdd(hashTableNewResult,(*(uint *)(param_3 + 0xc) & 0x3ffff) + 1,
-                    (*(uint *)(iVar4 + 0xc) & 0x3ffff) + 1);
-      if (bVar1) {
-        iVar5 = iVar4;
+      insertionPoint = _PPStreamInsertOperationAfterChunk(stream,&opHeader,0,0,insertionPoint);
+      _HashTableAdd(labelMap,(*(uint *)(loopEnd + 0xc) & 0x3ffff) + 1,
+                    (*(uint *)(insertionPoint + 0xc) & 0x3ffff) + 1);
+      if (isFirstInsert) {
+        copyCursor = insertionPoint;
       }
-      if (!bVar1 || iVar4 != 0) {
+      if (!isFirstInsert || insertionPoint != 0) {
         do {
-          if (iVar5 == iVar4) break;
-          hashTableGetResult = _HashTableGet(hashTableNewResult,(*(uint *)(iVar5 + 0x10) & 0x3ffff) + 1);
-          if (hashTableGetResult != 0) {
-            *(uint *)(iVar5 + 0x10) = hashTableGetResult - 1U & 0x3ffff | *(uint *)(iVar5 + 0x10) & 0xfffc0000;
+          if (copyCursor == insertionPoint) break;
+          mappedLabel = _HashTableGet(labelMap,(*(uint *)(copyCursor + 0x10) & 0x3ffff) + 1);
+          if (mappedLabel != 0) {
+            *(uint *)(copyCursor + 0x10) = mappedLabel - 1U & 0x3ffff | *(uint *)(copyCursor + 0x10) & 0xfffc0000;
           }
-          iVar5 = *(int *)(iVar5 + 8);
-        } while (iVar5 != 0);
+          copyCursor = *(int *)(copyCursor + 8);
+        } while (copyCursor != 0);
       }
-      param_4 = param_4 + -1;
-    } while (0 < param_4);
-    _HashTableFree(hashTableNewResult);
+      iterationCount = iterationCount + -1;
+    } while (0 < iterationCount);
+    _HashTableFree(labelMap);
   }
-  iVar5 = *(int *)(param_3 + 8);
-  iVar6 = *(int *)(iVar4 + 8);
-  iVar4 = iVar5;
-  while (iVar2 = iVar4, iVar2 != iVar6) {
-    iVar4 = *(int *)(iVar2 + 8);
-    if ((*(uint *)(iVar2 + 0xc) >> 0x12 & 0xff) == 0x6e) {
-      _PPStreamRemoveOperation(stream,iVar2);
+  operationAfterEnd = *(int *)(loopEnd + 8);
+  endOfCopies = *(int *)(insertionPoint + 8);
+  nextOperation = operationAfterEnd;
+  while (removeCursor = nextOperation, removeCursor != endOfCopies) {
+    nextOperation = *(int *)(removeCursor + 8);
+    if ((*(uint *)(removeCursor + 0xc) >> 0x12 & 0xff) == 0x6e) {
+      _PPStreamRemoveOperation(stream,removeCursor);
     }
   }
-  while (param_2 != iVar5) {
-    iVar4 = *(int *)(param_2 + 8);
-    _PPStreamRemoveOperation(stream,param_2);
-    param_2 = iVar4;
+  while (loopStart != operationAfterEnd) {
+    nextOperation = *(int *)(loopStart + 8);
+    _PPStreamRemoveOperation(stream,loopStart);
+    loopStart = nextOperation;
   }
   return;
 }
 
 /* _RepifyConstantLoopSimple @ 0x97c10548 (384 bytes) */
-int _RepifyConstantLoopSimple(compileContext, param_2, param_3, param_4)
+int _RepifyConstantLoopSimple(compileContext, loopStart, loopEnd, iterationCount)
   int compileContext;
-  int param_2;
-  int param_3;
-  uint param_4;
+  int loopStart;
+  int loopEnd;
+  uint iterationCount;
 {
-  uint uVar1;
-  undefined4 hashSetNewResult;
-  int hashSetGetResult;
+  uint opcode;
+  undefined4 knownRegisters;
+  int knownRegister;
   undefined2 addConstantParamResult;
-  int iVar5;
-  int iVar6;
-  uint local_70;
-  uint local_6c;
-  float local_40;
-  undefined4 local_3c;
-  undefined4 local_38;
-  undefined4 local_34;
-  undefined4 local_30;
-  uint uStack_2c;
+  int isConstantLoop;
+  int bodyOperation;
+  uint lookupKeyRegister;
+  uint lookupKeyBank;
+  float constantX;
+  undefined4 constantY;
+  undefined4 constantZ;
+  undefined4 constantW;
+  undefined4 convertHigh;
+  uint convertLow;
   
-  hashSetNewResult = _HashSetNew((*(uint *)(*(int *)(compileContext + 4) + 8) >> 5) + 1,DAT_a7b7bf80,DAT_a7b7bf7c);
-  iVar6 = *(int *)(param_2 + 8);
-  iVar5 = 1;
+  knownRegisters = _HashSetNew((*(uint *)(*(int *)(compileContext + 4) + 8) >> 5) + 1,DAT_a7b7bf80,DAT_a7b7bf7c);
+  bodyOperation = *(int *)(loopStart + 8);
+  isConstantLoop = 1;
   do {
-    if ((iVar6 == 0) || (iVar6 == param_3)) goto LAB_97c10628;
-    uVar1 = *(uint *)(iVar6 + 0xc) >> 0x12 & 0xff;
-    if ((uVar1 == 0x57) || (uVar1 == 0x48)) {
-      local_6c = *(uint *)(iVar6 + 0x1c) >> 0x17 & 7;
-      local_70 = (uint)*(ushort *)(iVar6 + 0x22);
-      hashSetGetResult = _HashSetGet(hashSetNewResult,&local_70);
-      if ((hashSetGetResult == 0) || (*(int *)(hashSetGetResult + 0x14) == 0)) {
-        iVar5 = 0;
+    if ((bodyOperation == 0) || (bodyOperation == loopEnd)) goto LAB_97c10628;
+    opcode = *(uint *)(bodyOperation + 0xc) >> 0x12 & 0xff;
+    if ((opcode == 0x57) || (opcode == 0x48)) {
+      lookupKeyBank = *(uint *)(bodyOperation + 0x1c) >> 0x17 & 7;
+      lookupKeyRegister = (uint)*(ushort *)(bodyOperation + 0x22);
+      knownRegister = _HashSetGet(knownRegisters,&lookupKeyRegister);
+      if ((knownRegister == 0) || (*(int *)(knownRegister + 0x14) == 0)) {
+        isConstantLoop = 0;
 LAB_97c10628:
-        ((int (*)())_ClearRegisterState)(hashSetNewResult);
-        _HashSetFree(hashSetNewResult);
-        if (iVar5 != 0) {
-          uStack_2c = param_4 ^ 0x80000000;
-          local_30 = 0x43300000;
-          local_34 = 0;
-          local_3c = 0;
-          local_38 = 0;
-          local_40 = (float)((double)CONCAT44(0x43300000,uStack_2c) - DOUBLE_97c30a58);
-          *(uint *)(param_2 + 0x1c) = *(uint *)(param_2 + 0x1c) & 0xfc7fffff | 0x1000000;
-          addConstantParamResult = _AddConstantParam(compileContext,0,1,0,local_40,0,0,0);
-          *(undefined2 *)(param_2 + 0x22) = addConstantParamResult;
+        ((int (*)())_ClearRegisterState)(knownRegisters);
+        _HashSetFree(knownRegisters);
+        if (isConstantLoop != 0) {
+          convertLow = iterationCount ^ 0x80000000;
+          convertHigh = 0x43300000;
+          constantW = 0;
+          constantY = 0;
+          constantZ = 0;
+          constantX = (float)((double)CONCAT44(0x43300000,convertLow) - DOUBLE_97c30a58);
+          *(uint *)(loopStart + 0x1c) = *(uint *)(loopStart + 0x1c) & 0xfc7fffff | 0x1000000;
+          addConstantParamResult = _AddConstantParam(compileContext,0,1,0,constantX,0,0,0);
+          *(undefined2 *)(loopStart + 0x22) = addConstantParamResult;
         }
-        return iVar5;
+        return isConstantLoop;
       }
     }
-    ((int (*)())_EmulateOp)(compileContext,iVar6,hashSetNewResult);
-    iVar6 = *(int *)(iVar6 + 8);
+    ((int (*)())_EmulateOp)(compileContext,bodyOperation,knownRegisters);
+    bodyOperation = *(int *)(bodyOperation + 8);
   } while( true );
 }
 
