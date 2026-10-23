@@ -898,10 +898,10 @@ LAB_97c196cc:
 }
 
 /* parse_lsda_header @ 0x97c196ec (216 bytes) */
-int parse_lsda_header(_Unwind_Context, param_2, lsda_header_info)
-  unsigned char * _Unwind_Context;
+int parse_lsda_header(context, param_2, info)
+  unsigned char * context;
   uchar *param_2;
-  unsigned char * lsda_header_info;
+  unsigned char * info;
 {
   unsigned char uVar1;
   uint uVar2;
@@ -911,66 +911,66 @@ int parse_lsda_header(_Unwind_Context, param_2, lsda_header_info)
   unsigned char * plVar6;
   uint local_30 [7];
   
-  if (_Unwind_Context == (unsigned char *)0x0) {
+  if (context == (unsigned char *)0x0) {
     uVar1 = 0;
   }
   else {
-    uVar1 = ((int (*)())__Unwind_GetRegionStart)(_Unwind_Context);
+    uVar1 = ((int (*)())__Unwind_GetRegionStart)(context);
   }
-  *(unsigned char *)lsda_header_info = uVar1;
+  *(unsigned char *)info = uVar1;
   uVar4 = (uint)*param_2;
   plVar5 = (unsigned char *)(param_2 + 1);
   if (uVar4 == 0xff) {
-    *(unsigned char *)(lsda_header_info + 4) = uVar1;
+    *(unsigned char *)(info + 4) = uVar1;
   }
   else {
-    uVar2 = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)(uVar4,_Unwind_Context);
+    uVar2 = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)(uVar4,context);
     plVar5 = (unsigned char *)
-             ((int (*)())__Z28read_encoded_value_with_basehjPKhPj)(uVar4,uVar2,(uchar *)plVar5,(uint *)(lsda_header_info + 4));
+             ((int (*)())__Z28read_encoded_value_with_basehjPKhPj)(uVar4,uVar2,(uchar *)plVar5,(uint *)(info + 4));
   }
   plVar6 = plVar5 + 1;
-  lsda_header_info[0x14] = *plVar5;
+  info[0x14] = *plVar5;
   plVar5 = (unsigned char *)0x0;
-  if (lsda_header_info[0x14] != 0xff) {
+  if (info[0x14] != 0xff) {
     plVar6 = (unsigned char *)((int (*)())__Z12read_uleb128PKhPj)((uchar *)plVar6,local_30);
     plVar5 = plVar6 + local_30[0];
   }
-  *(unsigned char **)(lsda_header_info + 0xc) = plVar5;
-  lsda_header_info[0x15] = *plVar6;
+  *(unsigned char **)(info + 0xc) = plVar5;
+  info[0x15] = *plVar6;
   iVar3 = ((int (*)())__Z12read_uleb128PKhPj)((uchar *)(plVar6 + 1),local_30);
-  *(uint *)(lsda_header_info + 0x10) = iVar3 + local_30[0];
+  *(uint *)(info + 0x10) = iVar3 + local_30[0];
   return iVar3;
 }
 
 /* __Z15get_ttype_entryP16lsda_header_infoj @ 0x97c197c4 (84 bytes) */
-int __Z15get_ttype_entryP16lsda_header_infoj(lsda_header_info, param_2)
-  unsigned char * lsda_header_info;
+int __Z15get_ttype_entryP16lsda_header_infoj(info, param_2)
+  unsigned char * info;
   uint param_2;
 {
   int iVar1;
   uint local_20 [4];
   
-  iVar1 = ((int (*)())__Z21size_of_encoded_valueh)((uint)(byte)lsda_header_info[0x14]);
-  ((int (*)())__Z28read_encoded_value_with_basehjPKhPj)((uint)(byte)lsda_header_info[0x14],*(uint *)(lsda_header_info + 8),
-             (uchar *)(*(int *)(lsda_header_info + 0xc) - param_2 * iVar1),local_20);
+  iVar1 = ((int (*)())__Z21size_of_encoded_valueh)((uint)(byte)info[0x14]);
+  ((int (*)())__Z28read_encoded_value_with_basehjPKhPj)((uint)(byte)info[0x14],*(uint *)(info + 8),
+             (uchar *)(*(int *)(info + 0xc) - param_2 * iVar1),local_20);
   return local_20[0];
 }
 
 /* get_adjusted_ptr @ 0x97c19818 (152 bytes) */
-int get_adjusted_ptr(type_info1, type_info2, param_3)
-  unsigned char * type_info1;
-  unsigned char * type_info2;
+int get_adjusted_ptr(catchType, throwType, param_3)
+  unsigned char * catchType;
+  unsigned char * throwType;
   void **param_3;
 {
   int iVar1;
   undefined4 *local_20 [4];
   
   local_20[0] = *param_3;
-  iVar1 = (**(code **)(*(int *)type_info2 + 8))(type_info2,type_info2,param_3);
+  iVar1 = (**(code **)(*(int *)throwType + 8))(throwType,throwType,param_3);
   if (iVar1 != 0) {
     local_20[0] = (undefined4 *)*local_20[0];
   }
-  iVar1 = (**(code **)(*(int *)type_info1 + 0x10))(type_info1,type_info2,local_20,1);
+  iVar1 = (**(code **)(*(int *)catchType + 0x10))(catchType,throwType,local_20,1);
   if (iVar1 != 0) {
     *param_3 = local_20[0];
   }
@@ -978,27 +978,27 @@ int get_adjusted_ptr(type_info1, type_info2, param_3)
 }
 
 /* check_exception_spec @ 0x97c198b0 (124 bytes) */
-int check_exception_spec(lsda_header_info, type_info, param_3, param_4)
-  unsigned char * lsda_header_info;
-  unsigned char * type_info;
+int check_exception_spec(info, throwType, param_3, param_4)
+  unsigned char * info;
+  unsigned char * throwType;
   void *param_3;
   int param_4;
 {
-  unsigned int ghidra_home[8] = { lsda_header_info, type_info, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { info, throwType, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   unsigned char * ptVar1;
   int iVar2;
   uchar *puVar3;
   uint local_20 [4];
   
-  puVar3 = (uchar *)((*(int *)(lsda_header_info + 0xc) - param_4) + -1);
+  puVar3 = (uchar *)((*(int *)(info + 0xc) - param_4) + -1);
   (*(void * *)((unsigned char *)ghidra_home + 8)) = param_3;
   do {
     puVar3 = (uchar *)((int (*)())__Z12read_uleb128PKhPj)(puVar3,local_20);
     if (local_20[0] == 0) {
       return 0;
     }
-    ptVar1 = (unsigned char *)((int (*)())__Z15get_ttype_entryP16lsda_header_infoj)(lsda_header_info,local_20[0]);
-    iVar2 = ((int (*)())get_adjusted_ptr)(ptVar1,type_info,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
+    ptVar1 = (unsigned char *)((int (*)())__Z15get_ttype_entryP16lsda_header_infoj)(info,local_20[0]);
+    iVar2 = ((int (*)())get_adjusted_ptr)(ptVar1,throwType,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
   } while (iVar2 == 0);
   return 1;
 }
@@ -1013,7 +1013,7 @@ int ___gxx_personality_v0(param_1, param_2, param_3, param_4, param_5, param_6)
   unsigned char * param_6;
 {
   bool bVar1;
-  uchar *unwind_GetLanguageSpecificDataResult;
+  uchar *languageSpecificData;
   uchar *puVar3;
   unsigned char iP;
   uint uVar5;
@@ -1050,12 +1050,12 @@ int ___gxx_personality_v0(param_1, param_2, param_3, param_4, param_5, param_6)
     bVar1 = new_value == 0;
     goto LAB_97c19c74;
   }
-  unwind_GetLanguageSpecificDataResult = (uchar *)((int (*)())__Unwind_GetLanguageSpecificData)(param_6);
-  if (unwind_GetLanguageSpecificDataResult == (uchar *)0x0) {
+  languageSpecificData = (uchar *)((int (*)())__Unwind_GetLanguageSpecificData)(param_6);
+  if (languageSpecificData == (uchar *)0x0) {
     return 8;
   }
   new_value = 0;
-  puVar3 = (uchar *)((int (*)())parse_lsda_header)(param_6,unwind_GetLanguageSpecificDataResult,(unsigned char *)&iStack_80);
+  puVar3 = (uchar *)((int (*)())parse_lsda_header)(param_6,languageSpecificData,(unsigned char *)&iStack_80);
   puVar10 = (uchar *)0x0;
   new_value_00 = 0;
   uStack_78 = ((int (*)())__Z21base_of_encoded_valuehP15_Unwind_Context)((uint)bStack_6c,param_6);
@@ -1110,7 +1110,7 @@ LAB_97c19c1c:
         *(unsigned char *)(param_5 - 0xc) = new_value;
         *(unsigned char *)(param_5 - 0x18) = new_value_00;
         *(uchar **)(param_5 - 0x14) = puVar10;
-        *(uchar **)(param_5 - 0x10) = unwind_GetLanguageSpecificDataResult;
+        *(uchar **)(param_5 - 0x10) = languageSpecificData;
         *(void **)(param_5 - 8) = apvStack_48[0];
       }
       return 6;

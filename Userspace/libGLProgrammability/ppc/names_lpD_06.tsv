@@ -1,6 +1,5 @@
 local	__cxxabiv1____vmi_class_type_info____do_upcast	uVar1	baseOffsetFlags	CONFIRMED	__base_class_type_info::__offset_flags: bit0 virtual, bit1 public, offset in bits 8..
 local	__cxxabiv1____vmi_class_type_info____do_upcast	ptVar4	resultBaseType	CONFIRMED	result.base_type read back (+0xc); 8 = nonvirtual_base_type
-local	__cxxabiv1____vmi_class_type_info____do_upcast	r5In0	adjustedObjPtr	CONFIRMED	obj_ptr advanced by the (virtual) base offset for the recursive __do_upcast
 local	__cxxabiv1____vmi_class_type_info____do_upcast	uVar5	srcDetails	CONFIRMED	src_details: result.src_details (+8) or this->__flags when unknown (bit 0x10)
 local	__cxxabiv1____vmi_class_type_info____do_upcast	p_Var6	baseInfo	CONFIRMED	this + i*8: __base_info[i] (base_type at +0x10, offset_flags at +0x14), walked downwards
 local	__cxxabiv1____vmi_class_type_info____do_upcast	local_40	result2DstPtr	CONFIRMED	__upcast_result result2 of the recursive call: dst_ptr
@@ -20,7 +19,6 @@ local	___dynamic_cast	param_1	srcPtr	CONFIRMED	const void* src_ptr: the pointer 
 local	___dynamic_cast	param_2	srcType	CONFIRMED	const __class_type_info* src_type
 local	___dynamic_cast	param_3	dstType	CONFIRMED	const __class_type_info* dst_type
 local	___dynamic_cast	param_4	src2dst	CONFIRMED	ptrdiff_t src2dst hint
-local	___dynamic_cast	r3In0	whole	CONFIRMED	whole_type = vtable[-1]: the type_info of the most derived object
 local	___dynamic_cast	uVar1	dst2srcKind	CONFIRMED	result.dst2src, recomputed from src2dst when unknown
 local	___dynamic_cast	iVar2	castResult	CONFIRMED	returned dst pointer, null when the cast fails or is ambiguous
 local	___dynamic_cast	local_40	resultDstPtr	CONFIRMED	__dyncast_result result: dst_ptr
