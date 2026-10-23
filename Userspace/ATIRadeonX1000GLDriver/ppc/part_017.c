@@ -7074,258 +7074,278 @@ int psnDecAllocateTempsAndCompact(psnState, decodedProgram, rsWords, programImag
   int rsWords;
   undefined4 programImage;
 {
+  uint stackTop;
+  ushort readMask;
+  ushort writeMaskLive;
+  ushort newTempRegister;
+  ushort liveMaskBefore;
+  ushort destLiveMask;
+  uint entryCountAfterLoop;
+  uint entryCount;
+  ushort *addressSlotPtr;
+  int scanEntry;
+  int entryOffset;
+  int freeListIndex;
+  int groupUsageCursor;
+  int addressSlotOffset;
+  int halfByteOffset2;
+  int groupCounter;
+  int groupCursor;
+  int halfByteOffset;
+  int halfCursor;
+  bool outputHasDepthBit;
   uint loopIndex2;
   uint loopIndex;
-  bool bVar1;
-  int iVar2;
-  uint uVar3;
+  bool loopContinue;
+  int entryMode;
+  uint freeEntryNext;
   undefined4 extraout_r4;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  int slotCounter;
+  int groupUsageBase;
+  int slotOffset;
   undefined4 uVar7;
-  int iVar8;
-  undefined2 *puVar9;
-  int iVar10;
+  int halfCounter;
+  undefined2 *destMapEntry;
+  int halfCounter2;
   uint uVar11;
-  short sVar13;
-  ushort uVar14;
-  ushort uVar15;
+  short targetIndex;
+  ushort outputMask;
+  ushort renderTarget;
   short *psVar12;
-  ushort *puVar16;
-  uint uVar17;
-  ushort *puVar18;
-  ushort *puVar19;
-  uint *puVar20;
-  short *psVar21;
-  undefined2 uVar22;
-  undefined2 uVar23;
-  uint uVar24;
-  int iVar25;
-  int iVar26;
+  ushort *sourceMapEntry;
+  uint freeEntryValue;
+  ushort *halfWords;
+  ushort *readMaskPtr;
+  uint *freeTempStack;
+  short *targetLiveTable;
+  undefined2 mappedAlphaDest;
+  undefined2 mappedRgbDest;
+  uint regMapTable;
+  int entry;
+  int initCounter;
   uint uStack_68;
-  uint uStack_64;
+  uint maxTempIndex;
   short *psStack_60;
   undefined4 uStack_50;
   
   uVar11 = *(uint *)(psnState + 0x30);
-  uVar24 = decodedProgram[3];
-  psVar21 = (short *)(uVar24 + uVar11 * 4);
-  psStack_60 = psVar21 + 8;
+  regMapTable = decodedProgram[3];
+  targetLiveTable = (short *)(regMapTable + uVar11 * 4);
+  psStack_60 = targetLiveTable + 8;
   if (rsWords == 0) {
-    puVar20 = (uint *)0x0;
+    freeTempStack = (uint *)0x0;
   }
   else {
-    puVar20 = &uStack_68;
+    freeTempStack = &uStack_68;
     uVar11 = 0x80;
   }
-  sVar13 = 0;
-  iVar26 = 4;
-  psVar12 = psVar21;
+  targetIndex = 0;
+  initCounter = 4;
+  psVar12 = targetLiveTable;
   do {
-    *psVar12 = sVar13;
+    *psVar12 = targetIndex;
     psVar12[1] = 0xf;
-    sVar13 = sVar13 + 1;
+    targetIndex = targetIndex + 1;
     psVar12 = psVar12 + 2;
-    iVar26 = iVar26 + -1;
-  } while (iVar26 != 0);
-  psVar21[1] = psVar21[1] | 0x10;
-  _memset(uVar24,0,*(int *)(psnState + 0x30) << 2);
+    initCounter = initCounter + -1;
+  } while (initCounter != 0);
+  targetLiveTable[1] = targetLiveTable[1] | 0x10;
+  _memset(regMapTable,0,*(int *)(psnState + 0x30) << 2);
   uStack_68 = 0;
   if (uVar11 != 0) {
     uStack_68 = uVar11 & 0xffff;
-    iVar26 = 0;
-    uVar17 = uStack_68;
+    freeListIndex = 0;
+    freeEntryValue = uStack_68;
     do {
-      uVar3 = uVar17 - 1;
-      uVar17 = uVar3 & 0xffff;
-      psStack_60[iVar26] = (short)uVar3;
+      freeEntryNext = freeEntryValue - 1;
+      freeEntryValue = freeEntryNext & 0xffff;
+      psStack_60[freeListIndex] = (short)freeEntryNext;
       uVar11 = uVar11 - 1;
-      iVar26 = iVar26 + 1;
+      freeListIndex = freeListIndex + 1;
     } while (uVar11 != 0);
   }
   loopIndex = 0;
-  uStack_64 = 0;
-  uVar11 = *decodedProgram;
-  iVar26 = (uVar11 - 1) * 0xa0;
+  maxTempIndex = 0;
+  entryCount = *decodedProgram;
+  entryOffset = (entryCount - 1) * 0xa0;
   do {
-    iVar25 = iVar26 + decodedProgram[2];
-    iVar2 = *(int *)(iVar25 + 0x8c);
-    if (iVar2 == 2) {
-      iVar8 = 0;
-      iVar6 = 0;
-      iVar2 = iVar25;
+    entry = entryOffset + decodedProgram[2];
+    entryMode = *(int *)(entry + 0x8c);
+    if (entryMode == 2) {
+      halfCounter = 0;
+      slotOffset = 0;
+      halfCursor = entry;
       do {
-        if (((((*(ushort *)(iVar2 + 6) != 0) && ((*(uint *)(iVar2 + 0x30) & 0x400) != 0)) &&
-             ((*(uint *)(iVar2 + 0x30) & 0x1800) == 0)) &&
-            ((uStack_50 = 0x3f800000, *(float *)(iVar2 + 0x2c) == 1.0 &&
-             ((*(ushort *)(iVar2 + 10) & 0x10) == 0)))) &&
-           ((*(short *)((iVar6 + (*(ushort *)(iVar2 + 8) & 3)) * 2 + iVar25 + 0x80) ==
-             *(short *)(iVar2 + 4) &&
-            ((*(ushort *)(iVar2 + 6) & ~(*(ushort *)(iVar2 + 10) & 0xf)) == 0)))) {
-          *(undefined2 *)(iVar2 + 6) = 0;
+        if (((((*(ushort *)(halfCursor + 6) != 0) && ((*(uint *)(halfCursor + 0x30) & 0x400) != 0)) &&
+             ((*(uint *)(halfCursor + 0x30) & 0x1800) == 0)) &&
+            ((uStack_50 = 0x3f800000, *(float *)(halfCursor + 0x2c) == 1.0 &&
+             ((*(ushort *)(halfCursor + 10) & 0x10) == 0)))) &&
+           ((*(short *)((slotOffset + (*(ushort *)(halfCursor + 8) & 3)) * 2 + entry + 0x80) ==
+             *(short *)(halfCursor + 4) &&
+            ((*(ushort *)(halfCursor + 6) & ~(*(ushort *)(halfCursor + 10) & 0xf)) == 0)))) {
+          *(undefined2 *)(halfCursor + 6) = 0;
         }
-        bVar1 = iVar8 != 1;
-        iVar2 = iVar2 + 0x40;
-        iVar6 = iVar6 + 3;
-        iVar8 = iVar8 + 1;
-      } while (bVar1);
-      iVar2 = *(int *)(iVar25 + 0x8c);
+        loopContinue = halfCounter != 1;
+        halfCursor = halfCursor + 0x40;
+        slotOffset = slotOffset + 3;
+        halfCounter = halfCounter + 1;
+      } while (loopContinue);
+      entryMode = *(int *)(entry + 0x8c);
     }
-    if (iVar2 == 2) {
-      iVar2 = 0;
+    if (entryMode == 2) {
+      halfByteOffset = 0;
       do {
-        puVar18 = (ushort *)(iVar2 + iVar25);
-        uVar14 = puVar18[1];
-        bVar1 = (uVar14 >> 4 & 1) != 0;
-        if ((bVar1) && ((psVar21[1] & 0x10U) == 0)) {
-          uVar14 = uVar14 & 0xffef;
-          puVar18[1] = uVar14;
+        halfWords = (ushort *)(halfByteOffset + entry);
+        outputMask = halfWords[1];
+        outputHasDepthBit = (outputMask >> 4 & 1) != 0;
+        if ((outputHasDepthBit) && ((targetLiveTable[1] & 0x10U) == 0)) {
+          outputMask = outputMask & 0xffef;
+          halfWords[1] = outputMask;
         }
-        uVar15 = *puVar18;
-        uVar14 = (psVar21[(uint)uVar15 * 2 + 1] | 0x10U) & uVar14;
-        puVar18[1] = uVar14;
-        psVar21[(uint)uVar15 * 2 + 1] = psVar21[(uint)uVar15 * 2 + 1] & ~uVar14;
-        if (bVar1) {
-          psVar21[1] = psVar21[1] & 0xffef;
+        renderTarget = *halfWords;
+        outputMask = (targetLiveTable[(uint)renderTarget * 2 + 1] | 0x10U) & outputMask;
+        halfWords[1] = outputMask;
+        targetLiveTable[(uint)renderTarget * 2 + 1] = targetLiveTable[(uint)renderTarget * 2 + 1] & ~outputMask;
+        if (outputHasDepthBit) {
+          targetLiveTable[1] = targetLiveTable[1] & 0xffef;
         }
-        bVar1 = iVar2 != 0x40;
-        iVar2 = iVar2 + 0x40;
-      } while (bVar1);
+        loopContinue = halfByteOffset != 0x40;
+        halfByteOffset = halfByteOffset + 0x40;
+      } while (loopContinue);
     }
-    iVar6 = 0;
-    uVar23 = *(undefined2 *)(uVar24 + (uint)*(ushort *)(iVar25 + 4) * 4);
-    uVar22 = *(undefined2 *)((uint)*(ushort *)(iVar25 + 0x44) * 4 + uVar24);
-    iVar2 = iVar25;
+    halfByteOffset2 = 0;
+    mappedRgbDest = *(undefined2 *)(regMapTable + (uint)*(ushort *)(entry + 4) * 4);
+    mappedAlphaDest = *(undefined2 *)((uint)*(ushort *)(entry + 0x44) * 4 + regMapTable);
+    halfCursor = entry;
     do {
-      puVar9 = (undefined2 *)(uVar24 + (uint)*(ushort *)(iVar2 + 4) * 4);
-      uVar14 = puVar9[1];
-      uVar15 = uVar14 & *(ushort *)(iVar2 + 6);
-      *(ushort *)(iVar2 + 6) = uVar15;
-      if ((*(int *)(iVar25 + 0x8c) != 2) && (uVar15 != 0)) {
-        uVar15 = 0xf;
-        *(undefined2 *)(iVar2 + 6) = 0xf;
+      destMapEntry = (undefined2 *)(regMapTable + (uint)*(ushort *)(halfCursor + 4) * 4);
+      destLiveMask = destMapEntry[1];
+      writeMaskLive = destLiveMask & *(ushort *)(halfCursor + 6);
+      *(ushort *)(halfCursor + 6) = writeMaskLive;
+      if ((*(int *)(entry + 0x8c) != 2) && (writeMaskLive != 0)) {
+        writeMaskLive = 0xf;
+        *(undefined2 *)(halfCursor + 6) = 0xf;
       }
-      puVar9[1] = puVar9[1] & ~uVar15;
-      if ((*(short *)(iVar2 + 2) == 0 && *(short *)(iVar2 + 6) == 0) &&
-         ((*(uint *)(iVar2 + 0x30) & 1) == 0)) {
-        *(undefined4 *)(iVar2 + 0x24) = 0;
-        *(undefined4 *)(iVar2 + 0x14) = 0;
-        *(undefined4 *)(iVar2 + 0x18) = 0;
-        *(undefined4 *)(iVar2 + 0x1c) = 0;
-        *(undefined4 *)(iVar2 + 0x20) = 0;
+      destMapEntry[1] = destMapEntry[1] & ~writeMaskLive;
+      if ((*(short *)(halfCursor + 2) == 0 && *(short *)(halfCursor + 6) == 0) &&
+         ((*(uint *)(halfCursor + 0x30) & 1) == 0)) {
+        *(undefined4 *)(halfCursor + 0x24) = 0;
+        *(undefined4 *)(halfCursor + 0x14) = 0;
+        *(undefined4 *)(halfCursor + 0x18) = 0;
+        *(undefined4 *)(halfCursor + 0x1c) = 0;
+        *(undefined4 *)(halfCursor + 0x20) = 0;
       }
-      if (((puVar20 != (uint *)0x0) && (uVar14 != 0)) && (puVar9[1] == 0)) {
-        uVar3 = *puVar20;
-        *(undefined2 *)(uVar3 * 2 + puVar20[2]) = *puVar9;
-        *puVar20 = uVar3 + 1;
-        *puVar9 = 0;
+      if (((freeTempStack != (uint *)0x0) && (destLiveMask != 0)) && (destMapEntry[1] == 0)) {
+        stackTop = *freeTempStack;
+        *(undefined2 *)(stackTop * 2 + freeTempStack[2]) = *destMapEntry;
+        *freeTempStack = stackTop + 1;
+        *destMapEntry = 0;
       }
-      bVar1 = iVar6 != 0x40;
-      iVar2 = iVar2 + 0x40;
-      iVar6 = iVar6 + 0x40;
-    } while (bVar1);
-    iVar8 = 0;
-    iVar6 = 0x80;
-    iVar2 = iVar25;
+      loopContinue = halfByteOffset2 != 0x40;
+      halfCursor = halfCursor + 0x40;
+      halfByteOffset2 = halfByteOffset2 + 0x40;
+    } while (loopContinue);
+    halfCounter = 0;
+    addressSlotOffset = 0x80;
+    groupCursor = entry;
     do {
-      puVar18 = (ushort *)(iVar25 + iVar6);
-      iVar4 = 0;
-      iVar5 = iVar2 + 0x10;
+      addressSlotPtr = (ushort *)(entry + addressSlotOffset);
+      slotCounter = 0;
+      groupUsageBase = groupCursor + 0x10;
       do {
-        if ((*puVar18 & 0x8000) == 0) {
-          puVar19 = (ushort *)(iVar5 + 4);
-          iVar10 = 0;
-          puVar16 = (ushort *)(uVar24 + (uint)*puVar18 * 4);
+        if ((*addressSlotPtr & 0x8000) == 0) {
+          readMaskPtr = (ushort *)(groupUsageBase + 4);
+          halfCounter2 = 0;
+          sourceMapEntry = (ushort *)(regMapTable + (uint)*addressSlotPtr * 4);
           do {
-            uVar14 = puVar16[1];
-            uVar15 = *puVar19;
-            puVar16[1] = uVar15 | uVar14;
-            if ((uVar14 == 0) && (uVar15 != 0)) {
+            liveMaskBefore = sourceMapEntry[1];
+            readMask = *readMaskPtr;
+            sourceMapEntry[1] = readMask | liveMaskBefore;
+            if ((liveMaskBefore == 0) && (readMask != 0)) {
               uStack_68 = uStack_68 - 1;
-              uVar14 = psStack_60[uStack_68];
-              if (uStack_64 < uVar14) {
-                uStack_64 = (uint)uVar14;
+              newTempRegister = psStack_60[uStack_68];
+              if (maxTempIndex < newTempRegister) {
+                maxTempIndex = (uint)newTempRegister;
               }
-              *puVar16 = uVar14;
+              *sourceMapEntry = newTempRegister;
             }
-            bVar1 = iVar10 != 1;
-            puVar19 = puVar19 + 0x20;
-            iVar10 = iVar10 + 1;
-          } while (bVar1);
+            loopContinue = halfCounter2 != 1;
+            readMaskPtr = readMaskPtr + 0x20;
+            halfCounter2 = halfCounter2 + 1;
+          } while (loopContinue);
         }
-        bVar1 = iVar4 != 2;
-        iVar5 = iVar5 + 2;
-        puVar18 = puVar18 + 1;
-        iVar4 = iVar4 + 1;
-      } while (bVar1);
-      bVar1 = iVar8 != 1;
-      iVar2 = iVar2 + 6;
-      iVar6 = iVar6 + 6;
-      iVar8 = iVar8 + 1;
-    } while (bVar1);
-    if (*(short *)(iVar25 + 6) == 0) {
-      uVar23 = 0;
+        loopContinue = slotCounter != 2;
+        groupUsageBase = groupUsageBase + 2;
+        addressSlotPtr = addressSlotPtr + 1;
+        slotCounter = slotCounter + 1;
+      } while (loopContinue);
+      loopContinue = halfCounter != 1;
+      groupCursor = groupCursor + 6;
+      addressSlotOffset = addressSlotOffset + 6;
+      halfCounter = halfCounter + 1;
+    } while (loopContinue);
+    if (*(short *)(entry + 6) == 0) {
+      mappedRgbDest = 0;
     }
-    *(undefined2 *)(iVar25 + 4) = uVar23;
-    if (*(short *)(iVar25 + 0x46) == 0) {
-      uVar22 = 0;
+    *(undefined2 *)(entry + 4) = mappedRgbDest;
+    if (*(short *)(entry + 0x46) == 0) {
+      mappedAlphaDest = 0;
     }
-    *(undefined2 *)(iVar25 + 0x44) = uVar22;
-    iVar2 = 0;
+    *(undefined2 *)(entry + 0x44) = mappedAlphaDest;
+    groupCounter = 0;
     uVar7 = 0xffffffff;
-    iVar6 = iVar25 + 0x10;
+    groupUsageCursor = entry + 0x10;
     do {
-      psVar12 = (short *)(iVar6 + 4);
-      iVar8 = 0;
+      psVar12 = (short *)(groupUsageCursor + 4);
+      halfCounter = 0;
       do {
         if (*psVar12 == 0 && psVar12[0x20] == 0) {
           psVar12[0x36] = -1;
         }
         else if ((psVar12[0x36] & 0x8000U) == 0) {
-          psVar12[0x36] = *(short *)(uVar24 + (uint)(ushort)psVar12[0x36] * 4);
+          psVar12[0x36] = *(short *)(regMapTable + (uint)(ushort)psVar12[0x36] * 4);
         }
-        bVar1 = iVar8 != 2;
+        loopContinue = halfCounter != 2;
         psVar12 = psVar12 + 1;
-        iVar8 = iVar8 + 1;
-      } while (bVar1);
-      bVar1 = iVar2 != 1;
-      iVar6 = iVar6 + 6;
-      iVar2 = iVar2 + 1;
-    } while (bVar1);
-    if (*(int *)(iVar25 + 0x8c) == 2) {
-      ((int (*)())psnDecRecomputeSourceUsage)(iVar25);
-      ((int (*)())psnDecSortAddressSlots)(iVar25,0);
-      ((int (*)())psnDecSortAddressSlots)(iVar25,1);
-      ((int (*)())psnDecCanonicalizeEntry)(iVar25,extraout_r4,iVar4,iVar5,uVar7,iVar2,psVar12,iVar6);
+        halfCounter = halfCounter + 1;
+      } while (loopContinue);
+      loopContinue = groupCounter != 1;
+      groupUsageCursor = groupUsageCursor + 6;
+      groupCounter = groupCounter + 1;
+    } while (loopContinue);
+    if (*(int *)(entry + 0x8c) == 2) {
+      ((int (*)())psnDecRecomputeSourceUsage)(entry);
+      ((int (*)())psnDecSortAddressSlots)(entry,0);
+      ((int (*)())psnDecSortAddressSlots)(entry,1);
+      ((int (*)())psnDecCanonicalizeEntry)(entry,extraout_r4,slotCounter,groupUsageBase,uVar7,groupCounter,psVar12,groupUsageCursor);
     }
     loopIndex = loopIndex + 1;
-    iVar26 = iVar26 + -0xa0;
-  } while (uVar11 != loopIndex);
-  uVar11 = *decodedProgram;
-  if (uVar11 == 0) {
+    entryOffset = entryOffset + -0xa0;
+  } while (entryCount != loopIndex);
+  entryCountAfterLoop = *decodedProgram;
+  if (entryCountAfterLoop == 0) {
     loopIndex = 0;
   }
   else {
     loopIndex2 = 0;
     loopIndex = 0;
     do {
-      iVar26 = decodedProgram[2] + loopIndex2 * 0xa0;
-      if (((*(short *)(iVar26 + 2) != 0 || *(short *)(iVar26 + 6) != 0) ||
-          ((*(uint *)(iVar26 + 0x30) & 1) != 0)) ||
-         ((*(short *)(iVar26 + 0x42) != 0 || *(short *)(iVar26 + 0x46) != 0 ||
-          ((*(uint *)(iVar26 + 0x70) & 1) != 0)))) {
+      scanEntry = decodedProgram[2] + loopIndex2 * 0xa0;
+      if (((*(short *)(scanEntry + 2) != 0 || *(short *)(scanEntry + 6) != 0) ||
+          ((*(uint *)(scanEntry + 0x30) & 1) != 0)) ||
+         ((*(short *)(scanEntry + 0x42) != 0 || *(short *)(scanEntry + 0x46) != 0 ||
+          ((*(uint *)(scanEntry + 0x70) & 1) != 0)))) {
         if (loopIndex < loopIndex2) {
-          _memcpy(loopIndex * 0xa0 + decodedProgram[2],iVar26,0xa0);
-          uVar11 = *decodedProgram;
+          _memcpy(loopIndex * 0xa0 + decodedProgram[2],scanEntry,0xa0);
+          entryCountAfterLoop = *decodedProgram;
         }
         loopIndex = loopIndex + 1;
       }
       loopIndex2 = loopIndex2 + 1;
-    } while (loopIndex2 < uVar11);
+    } while (loopIndex2 < entryCountAfterLoop);
   }
   *decodedProgram = loopIndex;
-  decodedProgram[1] = uStack_64 + 1;
+  decodedProgram[1] = maxTempIndex + 1;
   if (loopIndex == 0) {
     uVar7 = 0x80000004;
   }
@@ -8317,103 +8337,111 @@ int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, param_4, param_5
   undefined4 param_4;
   undefined4 param_5;
 {
+  int clearCounter;
+  int destHalf;
+  int slotIndexInit;
+  int sourceSlotsB;
+  int halfByteOffset;
+  int groupIndex;
+  bool lastSourceReached;
+  bool lastSlotReached;
   int loopIndex;
   int loopIndex2;
-  bool bVar1;
-  ushort uVar2;
-  undefined2 uVar3;
-  int iVar4;
-  short *psVar5;
-  uint uVar6;
-  undefined2 *puVar7;
+  bool loopContinue;
+  ushort destSelectWord;
+  undefined2 savedSrcpOp;
+  int sourceSlotsA;
+  short *usageWordPtr;
+  uint otherSelect;
+  undefined2 *clearSlotPtr;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
-  undefined4 uVar8;
+  undefined4 halfSize;
   uint uVar9;
-  int iVar10;
-  uint uVar11;
+  int sourceIndex;
+  uint slotSearchIndex;
   int iVar12;
-  int iVar13;
+  int usageHalfBase;
   undefined2 *puVar14;
-  int iVar15;
-  ushort *puVar16;
+  int sourceCounter;
+  ushort *otherSelectPtr;
   
   if ((*(int *)(entry + 0x8c) == 2) && (*(int *)(otherEntry + 0x8c) == 2)) {
-    iVar4 = entry;
-    iVar12 = otherEntry;
+    sourceSlotsA = entry;
+    sourceSlotsB = otherEntry;
     if (reverseRoles != 0) {
-      iVar4 = otherEntry;
-      iVar12 = entry;
+      sourceSlotsA = otherEntry;
+      sourceSlotsB = entry;
     }
     loopIndex = 0;
     loopIndex2 = 0;
-    iVar15 = 0;
+    sourceCounter = 0;
     do {
-      if ((*(ushort *)(iVar12 + 8) & 0x200) != 0) {
+      if ((*(ushort *)(sourceSlotsB + 8) & 0x200) != 0) {
         loopIndex = loopIndex + 1;
       }
-      if ((*(ushort *)(iVar12 + 8) & 0x100) != 0) {
+      if ((*(ushort *)(sourceSlotsB + 8) & 0x100) != 0) {
         loopIndex2 = loopIndex2 + 1;
       }
-      uVar2 = *(ushort *)(iVar4 + 0x48);
-      if ((uVar2 & 0x200) != 0) {
+      destSelectWord = *(ushort *)(sourceSlotsA + 0x48);
+      if ((destSelectWord & 0x200) != 0) {
         loopIndex = loopIndex + 1;
       }
-      uVar9 = uVar2 & 0x100;
-      if ((uVar2 & 0x100) != 0) {
+      uVar9 = destSelectWord & 0x100;
+      if ((destSelectWord & 0x100) != 0) {
         loopIndex2 = loopIndex2 + 1;
       }
-      bVar1 = iVar15 != 2;
-      iVar12 = iVar12 + 4;
-      iVar4 = iVar4 + 4;
-      iVar15 = iVar15 + 1;
-    } while (bVar1);
+      loopContinue = sourceCounter != 2;
+      sourceSlotsB = sourceSlotsB + 4;
+      sourceSlotsA = sourceSlotsA + 4;
+      sourceCounter = sourceCounter + 1;
+    } while (loopContinue);
     if ((loopIndex < 4) && (loopIndex2 < 4)) {
-      iVar4 = 0;
+      groupIndex = 0;
       puVar14 = (undefined2 *)(entry + 0x10);
       do {
-        psVar5 = puVar14 + 2;
-        iVar12 = 0;
+        usageWordPtr = puVar14 + 2;
+        slotIndexInit = 0;
         do {
-          if ((*psVar5 == 0) && (psVar5[0x20] == 0)) {
-            psVar5[0x36] = -1;
+          if ((*usageWordPtr == 0) && (usageWordPtr[0x20] == 0)) {
+            usageWordPtr[0x36] = -1;
           }
-          bVar1 = iVar12 != 2;
-          psVar5 = psVar5 + 1;
-          iVar12 = iVar12 + 1;
-        } while (bVar1);
-        bVar1 = iVar4 != 1;
+          loopContinue = slotIndexInit != 2;
+          usageWordPtr = usageWordPtr + 1;
+          slotIndexInit = slotIndexInit + 1;
+        } while (loopContinue);
+        loopContinue = groupIndex != 1;
         puVar14 = puVar14 + 3;
-        iVar4 = iVar4 + 1;
-      } while (bVar1);
-      iVar4 = (uint)(reverseRoles != 0) * 0x40;
-      iVar10 = 0;
-      iVar12 = iVar4 + 0x16;
-      puVar16 = (ushort *)(otherEntry + iVar4 + 8);
-      iVar13 = entry + iVar12;
-      uVar11 = 2;
+        groupIndex = groupIndex + 1;
+      } while (loopContinue);
+      halfByteOffset = (uint)(reverseRoles != 0) * 0x40;
+      sourceIndex = 0;
+      iVar12 = halfByteOffset + 0x16;
+      otherSelectPtr = (ushort *)(otherEntry + halfByteOffset + 8);
+      usageHalfBase = entry + iVar12;
+      slotSearchIndex = 2;
       do {
-        uVar6 = (uint)*puVar16;
-        if ((*puVar16 & 0x100) != 0) {
-          puVar14 = (undefined2 *)(entry + iVar4 + 0x14);
-          uVar11 = 0;
+        otherSelect = (uint)*otherSelectPtr;
+        if ((*otherSelectPtr & 0x100) != 0) {
+          puVar14 = (undefined2 *)(entry + halfByteOffset + 0x14);
+          slotSearchIndex = 0;
           param_4 = 0xffff;
           iVar12 = entry;
           do {
             uVar9 = 0;
             if (*(short *)(iVar12 + 0x80) == -1) {
-              if ((uVar6 & 3) == 3) {
+              if ((otherSelect & 3) == 3) {
                 return 0;
               }
               uVar9 = 1;
-              *(undefined2 *)(iVar12 + 0x80) = *(undefined2 *)((uVar6 & 3) * 2 + otherEntry + 0x80);
+              *(undefined2 *)(iVar12 + 0x80) = *(undefined2 *)((otherSelect & 3) * 2 + otherEntry + 0x80);
               *puVar14 = 7;
-              uVar6 = *puVar16 & 0xfffc | uVar11;
-              *puVar16 = (ushort)uVar6;
+              otherSelect = *otherSelectPtr & 0xfffc | slotSearchIndex;
+              *otherSelectPtr = (ushort)otherSelect;
             }
-            bVar1 = uVar11 == 2;
-            uVar11 = uVar11 + 1;
-            if (bVar1) {
+            lastSlotReached = slotSearchIndex == 2;
+            slotSearchIndex = slotSearchIndex + 1;
+            if (lastSlotReached) {
               if (uVar9 == 0) {
                 return 0;
               }
@@ -8423,26 +8451,26 @@ int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, param_4, param_5
             puVar14 = puVar14 + 1;
           } while (uVar9 == 0);
         }
-        if ((uVar6 & 0x200) != 0) {
-          puVar14 = (undefined2 *)(iVar13 + 4);
-          uVar11 = 0;
+        if ((otherSelect & 0x200) != 0) {
+          puVar14 = (undefined2 *)(usageHalfBase + 4);
+          slotSearchIndex = 0;
           param_4 = 0xffff;
           iVar12 = entry;
           do {
             uVar9 = 0;
             if (*(short *)(iVar12 + 0x86) == -1) {
-              if ((uVar6 & 3) == 3) {
+              if ((otherSelect & 3) == 3) {
                 return 0;
               }
               uVar9 = 1;
-              *(undefined2 *)(iVar12 + 0x86) = *(undefined2 *)((uVar6 & 3) * 2 + otherEntry + 0x86);
+              *(undefined2 *)(iVar12 + 0x86) = *(undefined2 *)((otherSelect & 3) * 2 + otherEntry + 0x86);
               *puVar14 = 8;
-              uVar6 = *puVar16 & 0xfffc | uVar11;
-              *puVar16 = (ushort)uVar6;
+              otherSelect = *otherSelectPtr & 0xfffc | slotSearchIndex;
+              *otherSelectPtr = (ushort)otherSelect;
             }
-            bVar1 = uVar11 == 2;
-            uVar11 = uVar11 + 1;
-            if (bVar1) {
+            lastSlotReached = slotSearchIndex == 2;
+            slotSearchIndex = slotSearchIndex + 1;
+            if (lastSlotReached) {
               if (uVar9 == 0) {
                 return 0;
               }
@@ -8452,31 +8480,31 @@ int psnDecTryMergeAddressSlots(entry, otherEntry, reverseRoles, param_4, param_5
             puVar14 = puVar14 + 1;
           } while (uVar9 == 0);
         }
-        bVar1 = iVar10 == 2;
-        puVar16 = puVar16 + 2;
-        iVar10 = iVar10 + 1;
-        if (bVar1) {
-          iVar13 = iVar4 + entry;
-          iVar4 = iVar4 + otherEntry;
-          uVar8 = 0x40;
-          uVar3 = *(undefined2 *)(iVar13 + 0x2a);
-          _memcpy(iVar13,iVar4,0x40);
-          puVar7 = (undefined2 *)(iVar4 + 8);
-          iVar10 = 0;
-          *(undefined2 *)(iVar4 + 6) = 0;
-          *(undefined2 *)(iVar4 + 2) = 0;
-          *(undefined2 *)(iVar13 + 0x2a) = uVar3;
+        lastSourceReached = sourceIndex == 2;
+        otherSelectPtr = otherSelectPtr + 2;
+        sourceIndex = sourceIndex + 1;
+        if (lastSourceReached) {
+          destHalf = halfByteOffset + entry;
+          halfByteOffset = halfByteOffset + otherEntry;
+          halfSize = 0x40;
+          savedSrcpOp = *(undefined2 *)(destHalf + 0x2a);
+          _memcpy(destHalf,halfByteOffset,0x40);
+          clearSlotPtr = (undefined2 *)(halfByteOffset + 8);
+          clearCounter = 0;
+          *(undefined2 *)(halfByteOffset + 6) = 0;
+          *(undefined2 *)(halfByteOffset + 2) = 0;
+          *(undefined2 *)(destHalf + 0x2a) = savedSrcpOp;
           do {
-            bVar1 = iVar10 != 2;
-            *puVar7 = 0;
-            puVar7[1] = 0;
-            iVar10 = iVar10 + 1;
-            puVar7 = puVar7 + 2;
-          } while (bVar1);
+            loopContinue = clearCounter != 2;
+            *clearSlotPtr = 0;
+            clearSlotPtr[1] = 0;
+            clearCounter = clearCounter + 1;
+            clearSlotPtr = clearSlotPtr + 2;
+          } while (loopContinue);
           ((int (*)())psnDecRecomputeSourceUsage)(entry);
-          ((int (*)())psnDecCanonicalizeEntry)(entry,extraout_r4,uVar8,param_4,uVar9,uVar11,iVar12,puVar14);
+          ((int (*)())psnDecCanonicalizeEntry)(entry,extraout_r4,halfSize,param_4,uVar9,slotSearchIndex,iVar12,puVar14);
           ((int (*)())psnDecRecomputeSourceUsage)(otherEntry);
-          ((int (*)())psnDecCanonicalizeEntry)(otherEntry,extraout_r4_00,uVar8,param_4,uVar9,uVar11,iVar12,puVar14);
+          ((int (*)())psnDecCanonicalizeEntry)(otherEntry,extraout_r4_00,halfSize,param_4,uVar9,slotSearchIndex,iVar12,puVar14);
           return 1;
         }
       } while( true );
