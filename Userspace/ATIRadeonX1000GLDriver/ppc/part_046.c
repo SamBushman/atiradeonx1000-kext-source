@@ -391,6 +391,7 @@ int FUN_00173cdc(ctx, param_2)
   int ctx;
   int param_2;
 {
+  int isOptionEnabled;
   int iVar1;
   int *piVar2;
   undefined4 uVar3;
@@ -401,8 +402,8 @@ int FUN_00173cdc(ctx, param_2)
   undefined4 local_38 [4];
   undefined4 local_28 [4];
   
-  iVar1 = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),8);
-  if ((iVar1 == 0) ||
+  isOptionEnabled = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),8);
+  if ((isOptionEnabled == 0) ||
      (*(int *)(*(int *)(ctx + 0x238) + 0x658) <=
       *(int *)(*(int *)(*(int *)(ctx + 0x238) + 0x6c4) + 0xa8))) {
     uVar3 = 0;
@@ -447,7 +448,7 @@ int Compiler__valueNumberForExpr(param_1, param_2)
   undefined4 *puVar2;
   int *piVar3;
   uint uVar4;
-  undefined4 uVar5;
+  undefined4 nextNegativeValueNumberResult;
   uint *puVar6;
   
   *(undefined4 *)(*(int *)(param_1 + 0x3f0) + 4) = 0;
@@ -467,8 +468,8 @@ int Compiler__valueNumberForExpr(param_1, param_2)
     *(undefined1 *)((int)puVar2 + 0xd) = 0;
     puVar2[4] = 0;
     puVar2[7] = 0;
-    uVar5 = Compiler__nextNegativeValueNumber(param_1);
-    puVar2[2] = uVar5;
+    nextNegativeValueNumberResult = Compiler__nextNegativeValueNumber(param_1);
+    puVar2[2] = nextNegativeValueNumberResult;
     HashTable__insert(*(undefined4 *)(param_1 + 0x3e4),puVar1);
     HashTable__insert(*(undefined4 *)(param_1 + 0x3e0),puVar1);
     puVar6 = *(uint **)(param_1 + 0x3d8);
@@ -545,7 +546,7 @@ LAB_00173fa0:
   while( true ) {
     loopIndex2 = (**(code **)(*loopIndex5 + 0x14))(loopIndex5);
     if (loopIndex2 < loopIndex) break;
-    uVar4 = FUN_00105c5c(*(undefined4 *)(ctx + 0xb0),loopIndex);
+    uVar4 = IRInst__getDefiningField128(*(undefined4 *)(ctx + 0xb0),loopIndex);
     loopIndex5 = *(int **)(ctx + 0xb0);
     *(undefined4 *)(loopIndex3 + 0x1bc) = uVar4;
     loopIndex = loopIndex + 1;
@@ -1108,7 +1109,7 @@ int FUN_00174ce0(param_1, param_2, param_3)
   undefined4 *puVar1;
   undefined4 *puVar2;
   int *piVar3;
-  undefined4 uVar4;
+  undefined4 nextValueNumberResult;
   uint uVar5;
   uint *puVar6;
   
@@ -1133,9 +1134,9 @@ int FUN_00174ce0(param_1, param_2, param_3)
     puVar2[9] = 0;
     puVar2[10] = 0;
     puVar2[0xb] = 0;
-    uVar4 = Compiler__nextValueNumber(param_1);
+    nextValueNumberResult = Compiler__nextValueNumber(param_1);
     puVar2[2] = param_3;
-    puVar2[1] = uVar4;
+    puVar2[1] = nextValueNumberResult;
     puVar2[3] = param_2;
     HashTable__insert(*(undefined4 *)(param_1 + 1000),puVar1);
     HashTable__insert(*(undefined4 *)(param_1 + 0x3ec),puVar1);
@@ -1158,6 +1159,7 @@ int FUN_00174ce0(param_1, param_2, param_3)
 int FUN_00174e0c(param_1)
   int *param_1;
 {
+  undefined4 nextValueNumberResult;
   int operandRecord;
   undefined4 uVar1;
   int loopIndex2;
@@ -1193,7 +1195,7 @@ int FUN_00174e0c(param_1)
     loopIndex3 = (int *)param_1[0x2c];
   }
   loopIndex2 = FUN_001055cc(loopIndex3);
-  if ((((loopIndex2 != 0) || (loopIndex2 = FUN_001045e4(param_1[0x2c]), loopIndex2 != 0)) ||
+  if ((((loopIndex2 != 0) || (loopIndex2 = IRInst__isProjectionOfClass26or3a(param_1[0x2c]), loopIndex2 != 0)) ||
       (loopIndex3 = (int *)param_1[0x2c], *(int *)(loopIndex3[0x22] + 8) == 0xb4)) ||
      ((loopIndex2 = (**(code **)(*loopIndex3 + 0x6c))(loopIndex3), loopIndex2 != 0 ||
       (loopIndex2 = (**(code **)(*(int *)param_1[0x2c] + 0x58))((int *)param_1[0x2c]), loopIndex2 != 0)))) {
@@ -1202,8 +1204,8 @@ LAB_00174efc:
     loopIndex3 = param_1;
     do {
       iVar9 = param_1[0x8e];
-      uVar1 = Compiler__nextValueNumber(iVar9);
-      loopIndex4 = (int *)((int (*)())FUN_001746c8)(iVar9,uVar1);
+      nextValueNumberResult = Compiler__nextValueNumber(iVar9);
+      loopIndex4 = (int *)((int (*)())FUN_001746c8)(iVar9,nextValueNumberResult);
       loopIndex4[2] = loopIndex2;
       loopIndex4[1] = (int)param_1;
       HashTable__insert(*(undefined4 *)(param_1[0x8e] + 1000),loopIndex4);
@@ -1426,7 +1428,7 @@ LAB_001757d8:
   iVar9 = 0;
   if (*(int *)(loopIndex2 + 0x10) != 0x1010101) {
     loopIndex2 = IRInst__getOperandRecord(param_1[0x2c],0);
-    iVar9 = FUN_000f30d4(*(undefined4 *)(loopIndex2 + 0x10));
+    iVar9 = SelectWord__firstWrittenComponent(*(undefined4 *)(loopIndex2 + 0x10));
   }
   loopIndex2 = (**(code **)(*(int *)param_1[0x2c] + 100))((int *)param_1[0x2c]);
   if (loopIndex2 == 0) {
@@ -1790,6 +1792,8 @@ int Program__valueNumberInst(param_1, param_2, param_3, param_4, param_5)
   int *param_4;
   undefined4 param_5;
 {
+  int eliminateRedundantInstResult;
+  int canonicalizeCommutativeOperandsResult;
   int valueNumberEnabled;
   int iVar1;
   int iVar2;
@@ -1814,8 +1818,8 @@ LAB_00175e58:
       iVar1 = ((int (*)())FUN_00173638)(iVar1);
       if (iVar1 == 0) {
         FUN_00180154(*param_4);
-        iVar1 = ((int (*)())ValueKey__canonicalizeCommutativeOperands)(*param_4);
-        if (iVar1 != 0) {
+        canonicalizeCommutativeOperandsResult = ((int (*)())ValueKey__canonicalizeCommutativeOperands)(*param_4);
+        if (canonicalizeCommutativeOperandsResult != 0) {
           ((int (*)())FUN_001745ac)(*param_4);
         }
         iVar1 = ((int (*)())FUN_001758d8)(*param_4,param_2,param_3,param_1);
@@ -1897,8 +1901,8 @@ LAB_001760e4:
           }
           goto LAB_00176244;
         }
-        iVar1 = ((int (*)())Program__eliminateRedundantInst)(iVar2,*(undefined4 *)(*param_4 + 0xb0),param_5,param_1);
-        if (iVar1 == 0) goto LAB_00176244;
+        eliminateRedundantInstResult = ((int (*)())Program__eliminateRedundantInst)(iVar2,*(undefined4 *)(*param_4 + 0xb0),param_5,param_1);
+        if (eliminateRedundantInstResult == 0) goto LAB_00176244;
         *param_4 = iVar2;
         iVar1 = (**(code **)(**(int **)(iVar2 + 0xb0) + 100))(*(int **)(iVar2 + 0xb0));
         if (iVar1 == 0) {
@@ -2161,10 +2165,10 @@ int FUN_001765a4(param_1, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
-  undefined4 uVar1;
+  undefined4 valueNumberForExprResult;
   
-  uVar1 = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(param_1 + 0x238),param_2);
-  *(undefined4 *)(param_3 * 4 + param_1 + 0x30) = uVar1;
+  valueNumberForExprResult = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(param_1 + 0x238),param_2);
+  *(undefined4 *)(param_3 * 4 + param_1 + 0x30) = valueNumberForExprResult;
   return;
 }
 
@@ -2221,13 +2225,14 @@ int FUN_0017662c(ctx)
 int FUN_001766bc(ctx)
   int ctx;
 {
+  int valueNumberForExprResult;
   undefined4 opcodeInfo;
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),0);
-  if ((*(int *)(iVar1 + 4) == *(int *)(ctx + 0x184)) ||
-     (uVar2 = 0, *(int *)(iVar1 + 4) == *(int *)(ctx + 0x194))) {
+  valueNumberForExprResult = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),0);
+  if ((*(int *)(valueNumberForExprResult + 4) == *(int *)(ctx + 0x184)) ||
+     (uVar2 = 0, *(int *)(valueNumberForExprResult + 4) == *(int *)(ctx + 0x194))) {
     iVar1 = *(int *)(ctx + 0xb0);
     opcodeInfo = Opcode__getInfo(0x1c);
     *(undefined4 *)(iVar1 + 0x88) = opcodeInfo;
@@ -2336,7 +2341,7 @@ int FUN_00176954(ctx, param_2)
 {
   float *pfVar1;
   float *pfVar2;
-  undefined4 uVar3;
+  undefined4 valueNumberForExprResult;
   undefined4 uVar4;
   int iVar5;
   
@@ -2349,9 +2354,9 @@ int FUN_00176954(ctx, param_2)
     if (iVar5 == 0) {
       uVar4 = 0;
     }
-    uVar3 = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),uVar4);
+    valueNumberForExprResult = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),uVar4);
     uVar4 = 1;
-    *(undefined4 *)(param_2 * 4 + ctx + 0x30) = uVar3;
+    *(undefined4 *)(param_2 * 4 + ctx + 0x30) = valueNumberForExprResult;
   }
   else {
     uVar4 = 0;

@@ -3047,7 +3047,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 105164	10519c	eh-pad	IRInst__ctor_10502c	14	0x193cc0,__Unwind_Resume
 1052e8	105320	eh-pad	IRInst__ctor_1051b0	14	0x193cc0,__Unwind_Resume
 1053cc	1053ec	eh-pad	IRInst__setOperandSourceRaw	8	0x193cc0,__Unwind_Resume
-10635c	10637c	eh-pad	FUN_001062c0	8	0x193cc0,__Unwind_Resume
+10635c	10637c	eh-pad	IRInst__getOrCreateOperandRecord	8	0x193cc0,__Unwind_Resume
 106800	106804	millicode	IRPhiNode__validate	1	
 1073a4	1073c4	eh-pad	FUN_00107350	8	0x193cc0,__Unwind_Resume
 1074a8	1074c8	eh-pad	IRLoadConst__vslot75	8	0x193cc0,__Unwind_Resume
@@ -3430,16 +3430,16 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 185878	18587c	eh-pad	FUN_00184ef0	1	__Unwind_Resume
 185c28	185c2c	eh-pad	Inst__tryDp3Add	1	__Unwind_Resume
 187588	1875a8	other	FUN_00186a88	8	
-189764	18976c	millicode	FUN_001896f8	2	
+189764	18976c	millicode	SelectWord__isDefaultAfterCanonicalise	2	
 1897f8	1897fc	millicode	KhanPs__vslot66_callHelper189788	1	
 18a528	18a548	eh-pad	R300SchedModel__vslot28	8	0x193cc0,__Unwind_Resume
 18a68c	18a690	eh-pad	R300SchedModel__vslot28	1	__Unwind_Resume
-18e13c	18e164	other	R300SchedModel__vslot13	10	0x193cc0
-18e174	18e18c	eh-pad	R300SchedModel__vslot13	6	0x193cc0,__Unwind_Resume
-18e854	18e868	other	R300SchedModel__vslot27	5	0x193cc0
-18e878	18e890	eh-pad	R300SchedModel__vslot27	6	0x193cc0,__Unwind_Resume
-18f21c	18f220	millicode	R300SchedModel__vslot27	1	
-18f280	18f284	eh-pad	R300SchedModel__vslot27	1	__Unwind_Resume
+18e13c	18e164	other	R300SchedModel__tryRewriteConsumerSelects	10	0x193cc0
+18e174	18e18c	eh-pad	R300SchedModel__tryRewriteConsumerSelects	6	0x193cc0,__Unwind_Resume
+18e854	18e868	other	R300SchedModel__legalizeInstruction	5	0x193cc0
+18e878	18e890	eh-pad	R300SchedModel__legalizeInstruction	6	0x193cc0,__Unwind_Resume
+18f21c	18f220	millicode	R300SchedModel__legalizeInstruction	1	
+18f280	18f284	eh-pad	R300SchedModel__legalizeInstruction	1	__Unwind_Resume
 19018c	19026c	table	FUN_00190100	56	
 190e78	190e7c	eh-pad	R300VSchedModel__vslot27	1	__Unwind_Resume
 191708	191710	other	R300VSchedModel__vslot12	2	

@@ -775,6 +775,7 @@ int FUN_0005d470(param_1, param_2, param_3)
   int *param_2;
   int param_3;
 {
+  int extvsOperandDataTypeResult;
   uint uVar1;
   undefined4 uVar2;
   int iVar3;
@@ -798,13 +799,13 @@ int FUN_0005d470(param_1, param_2, param_3)
   }
   iVar5 = param_3 + 4;
   iVar4 = iVar3 * 0x10 + *(int *)(iVar4 + 0x1c);
-  iVar3 = extvsOperandDataType(param_2 + 7,iVar5);
+  extvsOperandDataTypeResult = extvsOperandDataType(param_2 + 7,iVar5);
   if (*(uint *)(param_3 + 0x40) < 4) {
-    if (iVar3 == 0x87bf) {
+    if (extvsOperandDataTypeResult == 0x87bf) {
       extvsEncodeSourceOperand(param_1,param_2,iVar5,iVar4,3,0,0);
     }
     else {
-      if (iVar3 != 0x87c0) goto LAB_0005d600;
+      if (extvsOperandDataTypeResult != 0x87c0) goto LAB_0005d600;
       extvsEncodeSourceOperand(param_1,param_2,iVar5,iVar4,3,0,*(uint *)(param_3 + 0x40));
     }
     extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar4 + 4,0);
@@ -826,6 +827,7 @@ int FUN_0005d620(param_1, param_2, param_3)
   int *param_2;
   int param_3;
 {
+  int extvsOperandDataTypeResult;
   undefined4 uVar1;
   int iVar2;
   int iVar3;
@@ -851,11 +853,11 @@ int FUN_0005d620(param_1, param_2, param_3)
   piVar4 = param_2 + 7;
   iVar3 = param_3 + 0x20;
   iVar5 = iVar2 * 0x10 + *(int *)(iVar5 + 0x1c);
-  iVar2 = extvsOperandDataType(piVar4,iVar3);
+  extvsOperandDataTypeResult = extvsOperandDataType(piVar4,iVar3);
   uVar6 = *(uint *)(param_3 + 0x40);
   if (uVar6 < 4) {
     extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar5,3,0,0);
-    if (iVar2 == 0x87bf) {
+    if (extvsOperandDataTypeResult == 0x87bf) {
       extvsEncodeSourceSwizzle(param_2,piVar4,iVar3,iVar5 + 4,0);
       if (uVar6 == 1) {
         uVar6 = *(uint *)(iVar5 + 4) >> 0x10 & 7;
@@ -880,7 +882,7 @@ int FUN_0005d620(param_1, param_2, param_3)
       }
     }
     else {
-      if (iVar2 != 0x87c0) goto LAB_0005d850;
+      if (extvsOperandDataTypeResult != 0x87c0) goto LAB_0005d850;
       extvsEncodeSourceSwizzle(param_2,piVar4,iVar3,iVar5 + 4,uVar6);
 LAB_0005d81c:
       uVar6 = *(uint *)(iVar5 + 4);

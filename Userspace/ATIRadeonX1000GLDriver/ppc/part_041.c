@@ -313,6 +313,7 @@ int FUN_00131d08(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_4;
   int param_5;
 {
+  int allocation2;
   int operandRecord;
   int loopIndex;
   int *piVar1;
@@ -332,7 +333,7 @@ int FUN_00131d08(param_1, param_2, param_3, param_4, param_5)
   int *piVar13;
   
   iVar4 = *(int *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 0x14) << 2;
-  iVar3 = Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x378),iVar4);
+  allocation2 = Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x378),iVar4);
   iVar4 = Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x378),iVar4);
   arena = Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x378),
                        *(int *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 0x14) << 2);
@@ -355,7 +356,7 @@ int FUN_00131d08(param_1, param_2, param_3, param_4, param_5)
         puVar8 = puVar8 + 1;
         iVar10 = iVar10 + -1;
       } while (iVar10 != 0);
-      *(undefined4 **)(iVar3 + iVar12) = allocation + 1;
+      *(undefined4 **)(allocation2 + iVar12) = allocation + 1;
       arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
       allocation = (undefined4 *)Arena__alloc(arena,0x20c);
       iVar10 = 0x80;
@@ -407,11 +408,11 @@ LAB_00131f98:
               else {
                 iVar10 = iVar10 * 4;
                 in_r8 = uVar9 >> 3 & 0x1ffffffc;
-                if ((*(uint *)(in_r8 + *(int *)(iVar3 + iVar10) + 8) >> (uVar9 & 0x1f) & 1) != 0)
+                if ((*(uint *)(in_r8 + *(int *)(allocation2 + iVar10) + 8) >> (uVar9 & 0x1f) & 1) != 0)
                 goto LAB_00131f98;
                 iVar11 = *(int *)(*(int *)(param_1 + 0x3c0) + 0x14);
                 *(int *)(iVar10 + iVar11) = *(int *)(iVar10 + iVar11) + 1;
-                iVar10 = *(int *)(iVar3 + iVar10);
+                iVar10 = *(int *)(allocation2 + iVar10);
               }
               in_r10 = (int *)(1 << (uVar9 & 0x1f) | *(uint *)(in_r8 + iVar10 + 8));
               *(int **)(in_r8 + iVar10 + 8) = in_r10;
@@ -433,7 +434,7 @@ LAB_00131f98:
   if (-1 < iVar11) {
     iVar11 = iVar11 * 4;
     iVar10 = 0;
-    piVar13 = (int *)(iVar3 + iVar11);
+    piVar13 = (int *)(allocation2 + iVar11);
     piVar6 = (int *)(iVar4 + iVar11);
     do {
       iVar11 = *piVar6;
@@ -451,7 +452,7 @@ LAB_00131f98:
     iVar10 = *(int *)(param_1 + 8);
   }
   Arena__free(*(undefined4 *)(iVar10 + 0x378),iVar4);
-  Arena__free(*(undefined4 *)(*(int *)(param_1 + 8) + 0x378),iVar3);
+  Arena__free(*(undefined4 *)(*(int *)(param_1 + 8) + 0x378),allocation2);
   iVar4 = *(int *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 0x14) << 2;
   piVar6 = (int *)Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x378),iVar4);
   *piVar6 = 0;
@@ -760,7 +761,7 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
                         srcIndex <= innerIndexOrScratch; srcIndex = srcIndex + 1) {
                       if ((((walkInst[srcIndex * 6 + 0x28] & 1U) != 0) ||
                           ((walkInst[srcIndex * 6 + 0x28] & 2U) != 0)) ||
-                         (innerIndexOrScratch = FUN_000f31e8(walkInst,srcIndex), innerIndexOrScratch == 0))
+                         (innerIndexOrScratch = IRInst__isSourceSelectIdentity(walkInst,srcIndex), innerIndexOrScratch == 0))
                       goto code_r0x001327f0;
                     }
                     if ((walkInst[0x48] == 0) && (walkInst[0x49] == 0)) {
@@ -973,7 +974,7 @@ code_r0x00132ca8: ;
                          ((nextRow = (**(code **)(*cursorInst + 0x50))(cursorInst), nextRow == 0 &&
                           (nextRow = ((int (*)())FUN_00137e98)(walkInst,innerIndexOrScratch,walkInst), nextRow == 0)))))) {
                     srcOperandRecord = IRInst__getOperandRecord(walkInst,innerIndexOrScratch);
-                    FUN_000f3398(swizzleComponentUse,*(undefined4 *)(srcOperandRecord + 0x10));
+                    SelectWord__readMask(swizzleComponentUse,*(undefined4 *)(srcOperandRecord + 0x10));
                     excludedRegs0 = swizzleComponentUse[0];
                     repReg2 = ((int (*)())FUN_00134bf0)(graph,cursorInst[0x25],useCoalesced);
                     loopLeft4 = 4;
@@ -1176,7 +1177,7 @@ int FUN_0013323c(pass, param_2)
                      ((iVar9 = RegKind__flagBit0(piVar10[0x26]), iVar9 != 0 && ((piVar10[5] & 2U) == 0)))
                      ) && (iVar9 = (**(code **)(*piVar10 + 0x50))(piVar10), iVar9 == 0)))) {
                   iVar9 = IRInst__getOperandRecord(piVar26,1);
-                  FUN_000f3398(&local_68,*(undefined4 *)(iVar9 + 0x10));
+                  SelectWord__readMask(&local_68,*(undefined4 *)(iVar9 + 0x10));
                   iVar21 = 0;
                   local_98 = local_68;
                   iVar9 = -1;
@@ -1242,7 +1243,7 @@ int FUN_0013323c(pass, param_2)
                   uVar16 = *puVar24;
                   puVar24 = puVar24 + 6;
                   if ((((uVar16 & 1) != 0) || ((uVar16 & 2) != 0)) ||
-                     (iVar21 = FUN_000f31e8(piVar26,iVar9), iVar21 == 0)) goto LAB_001339e0;
+                     (iVar21 = IRInst__isSourceSelectIdentity(piVar26,iVar9), iVar21 == 0)) goto LAB_001339e0;
                 }
                 if ((piVar26[0x48] != 0) || (piVar26[0x49] != 0)) goto LAB_001339e0;
                 if (((piVar26[0x20] != 0) &&
@@ -1424,7 +1425,7 @@ LAB_00133bd0:
         arena = local_60;
         iVar3 = IRInst__getOperandRecord(piVar14,1);
         *(undefined4 *)(iVar3 + 0x10) = arena;
-        FUN_000f3398(local_5c,arena);
+        SelectWord__readMask(local_5c,arena);
         local_98 = local_5c[0];
         arena = IRInst__getOperandSource(piVar14,1);
         iVar3 = 0;
@@ -1787,6 +1788,7 @@ LAB_001345fc:
 int FUN_00134658(param_1)
   int param_1;
 {
+  int pass_color_graphResult;
   uint loopIndex;
   uint *puVar1;
   uint *puVar2;
@@ -1909,8 +1911,8 @@ int FUN_00134658(param_1)
     if (iVar9 != 0) {
       ((int (*)())FUN_001378e8)(*(undefined4 *)(param_1 + 0x3c0),*(undefined4 *)(param_1 + 8));
     }
-    iVar9 = ((int (*)())pass_color_graph)(*(undefined4 *)(param_1 + 0x3c0));
-    if (iVar9 != 0) {
+    pass_color_graphResult = ((int (*)())pass_color_graph)(*(undefined4 *)(param_1 + 0x3c0));
+    if (pass_color_graphResult != 0) {
       iVar5 = *(int *)(*(int *)(param_1 + 0x3c0) + 0x24);
       iVar4 = *(int *)(iVar5 + 4);
       if (iVar4 == 0) {
@@ -1976,7 +1978,7 @@ LAB_00134a58:
       ((int (*)())FUN_001357d4)(iVar4);
       Arena__free(*(undefined4 *)(iVar4 + -4),iVar4 + -4);
     }
-    if (iVar9 == 0) {
+    if (pass_color_graphResult == 0) {
       *(undefined4 *)(param_1 + 0x34) = 6;
       return;
     }
@@ -3475,6 +3477,7 @@ int FUN_00136ec4(param_1, param_2, param_3, param_4, compiler)
   int param_4;
   int compiler;
 {
+  int allocation2;
   int loopIndex2;
   int loopIndex;
   int iVar1;
@@ -3491,8 +3494,8 @@ int FUN_00136ec4(param_1, param_2, param_3, param_4, compiler)
   param_1[3] = param_3;
   param_1[0xb] = compiler;
   if (param_3 != 0) {
-    iVar1 = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),param_3 << 2);
-    param_1[8] = iVar1;
+    allocation2 = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),param_3 << 2);
+    param_1[8] = allocation2;
     arena = *(undefined4 *)(param_1[0xb] + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x14);
     *allocation = arena;
@@ -3552,9 +3555,9 @@ int FUN_00136ec4(param_1, param_2, param_3, param_4, compiler)
     (**(code **)(**(int **)(param_1[0xb] + 0x30c) + 0x134))(*(int **)(param_1[0xb] + 0x30c),iVar4);
     iVar4 = Arena__alloc(*(undefined4 *)(param_1[0xb] + 0x378),iVar1);
     param_1[6] = iVar4;
-    iVar1 = Arena__alloc(*(undefined4 *)(param_1[0xb] + 0x378),iVar1);
+    allocation2 = Arena__alloc(*(undefined4 *)(param_1[0xb] + 0x378),iVar1);
     iVar4 = param_1[0xb];
-    param_1[5] = iVar1;
+    param_1[5] = allocation2;
     if (0 < *(int *)(*(int *)(iVar4 + 0x30c) + 0x14)) {
       loopIndex = 0;
       do {
@@ -3590,6 +3593,7 @@ int FUN_0013719c(param_1, param_2, param_3, param_4, compiler)
   int param_4;
   int compiler;
 {
+  int allocation2;
   int loopIndex2;
   int loopIndex;
   int iVar1;
@@ -3606,8 +3610,8 @@ int FUN_0013719c(param_1, param_2, param_3, param_4, compiler)
   param_1[3] = param_3;
   param_1[0xb] = compiler;
   if (param_3 != 0) {
-    iVar1 = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),param_3 << 2);
-    param_1[8] = iVar1;
+    allocation2 = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaB),param_3 << 2);
+    param_1[8] = allocation2;
     arena = *(undefined4 *)(param_1[0xb] + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x14);
     *allocation = arena;
@@ -3667,9 +3671,9 @@ int FUN_0013719c(param_1, param_2, param_3, param_4, compiler)
     (**(code **)(**(int **)(param_1[0xb] + 0x30c) + 0x134))(*(int **)(param_1[0xb] + 0x30c),iVar4);
     iVar4 = Arena__alloc(*(undefined4 *)(param_1[0xb] + 0x378),iVar1);
     param_1[6] = iVar4;
-    iVar1 = Arena__alloc(*(undefined4 *)(param_1[0xb] + 0x378),iVar1);
+    allocation2 = Arena__alloc(*(undefined4 *)(param_1[0xb] + 0x378),iVar1);
     iVar4 = param_1[0xb];
-    param_1[5] = iVar1;
+    param_1[5] = allocation2;
     if (0 < *(int *)(*(int *)(iVar4 + 0x30c) + 0x14)) {
       loopIndex = 0;
       do {
@@ -4352,7 +4356,7 @@ int FUN_00138390(param_1, param_2)
                 ((operandVReg[5] & 2U) == 0)) &&
                (iVar7 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar7 == 0)) {
               operandRecord = IRInst__getOperandRecord(piVar11,iVar10);
-              FUN_000f3398(local_38,*(undefined4 *)(operandRecord + 0x10));
+              SelectWord__readMask(local_38,*(undefined4 *)(operandRecord + 0x10));
               iVar7 = 0;
               local_48 = local_38[0];
               iVar8 = 4;
@@ -4692,7 +4696,7 @@ LAB_00138d5c:
                      (callResult = ((int (*)())FUN_00137e98)(walkInst,sourceIndex,walkInst), callResult == 0)))))) {
                   srcOperandRecord = IRInst__getOperandRecord(walkInst,sourceIndex);
                   componentNo = 0;
-                  FUN_000f3398(swizzleComponentUse,*(undefined4 *)(srcOperandRecord + 0x10));
+                  SelectWord__readMask(swizzleComponentUse,*(undefined4 *)(srcOperandRecord + 0x10));
                   usedComponents = swizzleComponentUse[0];
                   callResult = sourceInst[0x25];
                   bitIndex = callResult << 2;

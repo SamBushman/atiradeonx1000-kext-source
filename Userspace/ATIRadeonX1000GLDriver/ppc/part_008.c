@@ -181,6 +181,7 @@ int glExtractComponentEXT_impl(ctx, resultId, sourceId, componentIndex)
   undefined4 sourceId;
   uint componentIndex;
 {
+  int extvsOperandDataTypeResult;
   int iVar1;
   int iVar2;
   
@@ -190,8 +191,8 @@ int glExtractComponentEXT_impl(ctx, resultId, sourceId, componentIndex)
                          &DAT_001db998,0,&DAT_001db998);
     if (iVar1 != 0) {
       iVar1 = *(int *)(iVar2 + 0x14) * 0x74 + *(int *)(iVar2 + 0x18);
-      iVar2 = ((int (*)())extvsOperandDataType)(iVar2 + 0x1c,iVar1 + -0x70);
-      if (iVar2 == 0x87bf) {
+      extvsOperandDataTypeResult = ((int (*)())extvsOperandDataType)(iVar2 + 0x1c,iVar1 + -0x70);
+      if (extvsOperandDataTypeResult == 0x87bf) {
         if (componentIndex == 1) {
           *(undefined4 *)(iVar1 + -0x5c) = 0;
           *(undefined4 *)(iVar1 + -0x68) = 0;
@@ -2454,6 +2455,7 @@ int FUN_00057cf0(param_1, param_2, param_3)
   int *param_2;
   int param_3;
 {
+  uint extvsOperandDataTypeResult;
   uint uVar1;
   undefined4 uVar2;
   int iVar3;
@@ -2477,9 +2479,9 @@ int FUN_00057cf0(param_1, param_2, param_3)
   
   piVar5 = param_2 + 7;
   iVar4 = param_3 + 4;
-  uVar1 = ((int (*)())extvsOperandDataType)(piVar5,iVar4);
-  if (0x87bd < uVar1) {
-    if (uVar1 < 0x87c0) {
+  extvsOperandDataTypeResult = ((int (*)())extvsOperandDataType)(piVar5,iVar4);
+  if (0x87bd < extvsOperandDataTypeResult) {
+    if (extvsOperandDataTypeResult < 0x87c0) {
       iVar3 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
       iVar6 = *(int *)(iVar3 + 0x18);
       if (0x100 < iVar6 + 2U) {
@@ -2520,7 +2522,7 @@ int FUN_00057cf0(param_1, param_2, param_3)
       *(uint *)(iVar3 + 0x18) = uVar1;
       return 2;
     }
-    if (uVar1 == 0x87c0) {
+    if (extvsOperandDataTypeResult == 0x87c0) {
       iVar6 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
       iVar3 = *(int *)(iVar6 + 0x18);
       if (0x100 < iVar3 + 7U) {

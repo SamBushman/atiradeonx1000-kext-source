@@ -549,8 +549,8 @@ LAB_000f5cd8:
   return uVar3;
 }
 
-/* FUN_000f5cf0 @ 0xf5cf0 (412 bytes) */
-int FUN_000f5cf0(inst, param_2, param_3, param_4)
+/* IRInst__getUniformSourceConstant @ 0xf5cf0 (412 bytes) */
+int IRInst__getUniformSourceConstant(inst, param_2, param_3, param_4)
   int inst;
   int param_2;
   undefined4 param_3;
@@ -1803,7 +1803,7 @@ int FUN_000f7bf4(param_1, param_2)
 {
   int listCount;
   int iVar1;
-  undefined4 uVar2;
+  undefined4 allocation;
   int iVar3;
   
   param_1[8] = param_2;
@@ -1812,20 +1812,20 @@ int FUN_000f7bf4(param_1, param_2)
   iVar3 = *(int *)(param_1[8] + 8);
   iVar1 = listCount * 4 + 4;
   param_1[9] = iVar3;
-  uVar2 = Arena__alloc(*(undefined4 *)(iVar3 + 0x378),iVar1);
-  param_1[2] = uVar2;
-  uVar2 = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[1] = uVar2;
-  uVar2 = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[4] = uVar2;
-  uVar2 = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[3] = uVar2;
-  uVar2 = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  *param_1 = uVar2;
-  uVar2 = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
-  param_1[6] = uVar2;
-  uVar2 = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
-  param_1[5] = uVar2;
+  allocation = Arena__alloc(*(undefined4 *)(iVar3 + 0x378),iVar1);
+  param_1[2] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
+  param_1[1] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
+  param_1[4] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
+  param_1[3] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
+  *param_1 = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
+  param_1[6] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
+  param_1[5] = allocation;
   return;
 }
 
@@ -1836,7 +1836,7 @@ int FUN_000f7cd8(param_1, param_2)
 {
   int listCount;
   int iVar1;
-  undefined4 uVar2;
+  undefined4 allocation;
   int iVar3;
   
   param_1[8] = param_2;
@@ -1845,20 +1845,20 @@ int FUN_000f7cd8(param_1, param_2)
   iVar3 = *(int *)(param_1[8] + 8);
   iVar1 = listCount * 4 + 4;
   param_1[9] = iVar3;
-  uVar2 = Arena__alloc(*(undefined4 *)(iVar3 + 0x378),iVar1);
-  param_1[2] = uVar2;
-  uVar2 = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[1] = uVar2;
-  uVar2 = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[4] = uVar2;
-  uVar2 = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  param_1[3] = uVar2;
-  uVar2 = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
-  *param_1 = uVar2;
-  uVar2 = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
-  param_1[6] = uVar2;
-  uVar2 = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
-  param_1[5] = uVar2;
+  allocation = Arena__alloc(*(undefined4 *)(iVar3 + 0x378),iVar1);
+  param_1[2] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
+  param_1[1] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
+  param_1[4] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
+  param_1[3] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),iVar1);
+  *param_1 = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
+  param_1[6] = allocation;
+  allocation = Arena__alloc(*(undefined4 *)(param_1[9] + 0x378),param_1[7] * 4 + 4);
+  param_1[5] = allocation;
   return;
 }
 
@@ -2603,14 +2603,14 @@ int FUN_000f8f88(param_1, param_2)
 {
   bool bVar1;
   undefined *puVar2;
-  int iVar3;
+  int psnPackedLaneSourceResult;
   int iVar4;
   
   puVar2 = PTR_DAT_001e8bb8;
   iVar4 = 0;
   do {
-    iVar3 = psnPackedLaneSource(param_1,iVar4);
-    (**(code **)(*param_2 + 0x88))(param_2,1,iVar4,*(undefined4 *)(puVar2 + iVar3 * 4));
+    psnPackedLaneSourceResult = psnPackedLaneSource(param_1,iVar4);
+    (**(code **)(*param_2 + 0x88))(param_2,1,iVar4,*(undefined4 *)(puVar2 + psnPackedLaneSourceResult * 4));
     bVar1 = iVar4 != 3;
     iVar4 = iVar4 + 1;
   } while (bVar1);
@@ -2956,6 +2956,7 @@ int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
   undefined4 param_4;
   int param_5;
 {
+  int psnPackedLaneComponentResult;
   void *newInst;
   int operandRecord2;
   int operandRecord;
@@ -3010,9 +3011,9 @@ int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
   uVar14 = 0;
   uVar17 = 0;
   do {
-    iVar5 = psnPackedLaneComponent(param_3,uVar17);
+    psnPackedLaneComponentResult = psnPackedLaneComponent(param_3,uVar17);
     bVar1 = uVar17 != 3;
-    uVar14 = uVar14 | (uint)(iVar5 == 2) << (uVar17 & 0x3f);
+    uVar14 = uVar14 | (uint)(psnPackedLaneComponentResult == 2) << (uVar17 & 0x3f);
     uVar17 = uVar17 + 1;
   } while (bVar1);
   if (uVar14 != 0) {
@@ -3046,9 +3047,9 @@ int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
   uVar14 = 0;
   uVar17 = 0;
   do {
-    iVar5 = psnPackedLaneComponent(param_3,uVar17);
+    psnPackedLaneComponentResult = psnPackedLaneComponent(param_3,uVar17);
     bVar1 = uVar17 != 3;
-    uVar14 = uVar14 | (uint)(iVar5 == 3) << (uVar17 & 0x3f);
+    uVar14 = uVar14 | (uint)(psnPackedLaneComponentResult == 3) << (uVar17 & 0x3f);
     uVar17 = uVar17 + 1;
   } while (bVar1);
   if (uVar14 != 0) {
@@ -3171,8 +3172,8 @@ LAB_000f9f08:
     }
     iVar20 = 0;
     do {
-      iVar5 = psnPackedLaneComponent(param_3,iVar20);
-      if (iVar5 == 0) {
+      psnPackedLaneComponentResult = psnPackedLaneComponent(param_3,iVar20);
+      if (psnPackedLaneComponentResult == 0) {
         *(undefined1 *)((int)pvVar4 + 0x9c) = 1;
       }
       else {
@@ -3867,6 +3868,8 @@ int FUN_000fb3d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   dword *param_6;
   int param_7;
 {
+  undefined4 psnPackedLaneSourceResult;
+  undefined4 psnPackedLaneSourceResult2;
   void *newInst;
   int *newInst3;
   dword *newInst2;
@@ -3886,7 +3889,7 @@ int FUN_000fb3d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   void *inst;
   int operandRecord;
   undefined4 uVar12;
-  undefined4 uVar13;
+  undefined4 psnPackedLaneSourceResult3;
   undefined4 uVar14;
   void *pvVar15;
   void *inst2;
@@ -4576,9 +4579,9 @@ LAB_000fc74c:
   }
   else {
     arena = psnPackedLaneSource(param_4,0);
-    uVar35 = psnPackedLaneSource(param_4,1);
-    uVar12 = psnPackedLaneSource(param_4,2);
-    uVar13 = psnPackedLaneSource(param_4,3);
+    psnPackedLaneSourceResult = psnPackedLaneSource(param_4,1);
+    psnPackedLaneSourceResult2 = psnPackedLaneSource(param_4,2);
+    psnPackedLaneSourceResult3 = psnPackedLaneSource(param_4,3);
     pdVar18 = local_94;
     pdVar25 = (dword *)(*(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1);
     *(dword **)(*(int *)(param_1 + 8) + 0x3ac) = pdVar25;
@@ -4592,9 +4595,9 @@ LAB_000fc74c:
     *(dword **)(operandRecord2 + 8) = pdVar31;
     local_94[0] = 0x10203;
     fparam_1 = (double)((double (*)())FUN_000f8a30)(arena,0,&local_98,pdVar18);
-    fparam_2 = (double)((double (*)())FUN_000f8a30)(uVar35,1,&local_98,pdVar18);
-    fparam_3 = (double)((double (*)())FUN_000f8a30)(uVar12,2,&local_98,pdVar18);
-    fparam_4 = (double)((double (*)())FUN_000f8a30)(uVar13,3,&local_98,pdVar18);
+    fparam_2 = (double)((double (*)())FUN_000f8a30)(psnPackedLaneSourceResult,1,&local_98,pdVar18);
+    fparam_3 = (double)((double (*)())FUN_000f8a30)(psnPackedLaneSourceResult2,2,&local_98,pdVar18);
+    fparam_4 = (double)((double (*)())FUN_000f8a30)(psnPackedLaneSourceResult3,3,&local_98,pdVar18);
     dVar4 = local_94[0];
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     *(dword *)(operandRecord2 + 0x10) = dVar4;
@@ -5706,7 +5709,7 @@ code_r0x000fed00:
       if (bVar1) {
         (**(code **)(*piVar18 + 0x90))(piVar18,uVar41);
       }
-      FUN_0010469c(piVar18,param_1,0x2b,0);
+      IRInst__setHardwareRegisterAndAdd(piVar18,param_1,0x2b,0);
       piVar18[0x20] = 1;
       piVar18 = (int *)FUN_001084b8(0x31,*(undefined4 *)(param_1 + 8));
       iVar43 = IRInst__getOperandRecord(piVar18,0);
@@ -5717,7 +5720,7 @@ code_r0x000fed00:
       *(int *)(iVar43 + 8) = iVar34;
       (**(code **)(*piVar18 + 0x90))(piVar18,uVar41);
       ((int (*)())FUN_000f92fc)(param_1,piVar18,local_180);
-      FUN_0010469c(piVar18,param_1,0x2c,in_r6);
+      IRInst__setHardwareRegisterAndAdd(piVar18,param_1,0x2c,in_r6);
       local_ac = 1;
       goto switchD_000fdaf0_caseD_2;
     case 0x43:
@@ -7652,7 +7655,7 @@ code_r0x00103300:
             }
             pppppuVar15 = pppppuVar52;
           }
-          FUN_00193fa4(ppppppuVar48 + 0x24);
+          DList__initSentinel(ppppppuVar48 + 0x24);
           DList__unlink(ppppppuVar48);
           if (ppppppuVar48 != (uint ******)0x0) {
             (*(code *)(*ppppppuVar48)[1])(ppppppuVar48);
@@ -8039,7 +8042,7 @@ code_r0x00101d1c:
       iVar43 = iVar43 + 4;
     } while (ppppppuVar38 != ppppppuVar40);
   }
-  local_b8 = FUN_000f3a30(ppppppuVar19);
+  local_b8 = IRInst__countWrittenComponents(ppppppuVar19);
   if (bVar1) {
     iVar20 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
     *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar20;
@@ -8057,7 +8060,7 @@ code_r0x00101d1c:
       iVar47 = 0;
       local_58 = local_7c;
       do {
-        iVar21 = FUN_000f30d4(local_178);
+        iVar21 = SelectWord__firstWrittenComponent(local_178);
         iVar22 = ((int (*)())FUN_000f9140)(param_1,iVar34,(uint)*ppppppuVar49 >> 0x10 & 0x3fff);
         ppppuVar45 = local_58;
         if (0 < (int)ppppppuVar38) {
@@ -8101,7 +8104,7 @@ code_r0x00101d1c:
       } while (local_b8 + -1 != iVar47);
     }
     ppppppuVar19[0x27] = (uint *****)local_178;
-    if ((iVar43 != 0) && (iVar34 = FUN_000f30d4(local_178), 1 < (int)ppppppuVar38)) {
+    if ((iVar43 != 0) && (iVar34 = SelectWord__firstWrittenComponent(local_178), 1 < (int)ppppppuVar38)) {
       ppppppuVar49 = (uint ******)((int)((unsigned char *)0x0) + 1);
       do {
         iVar43 = IRInst__getOperandRecord(ppppppuVar19,ppppppuVar49);

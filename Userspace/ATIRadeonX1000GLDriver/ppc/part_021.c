@@ -169,7 +169,7 @@ int FUN_000e1888(param_1)
 {
   bool bVar1;
   int iVar2;
-  undefined4 uVar3;
+  undefined4 allocation;
   int iVar4;
   
   iVar4 = 0x14;
@@ -191,8 +191,8 @@ int FUN_000e1888(param_1)
     bVar1 = iVar2 != 2;
     iVar2 = iVar2 + 1;
   } while (bVar1);
-  uVar3 = Arena__alloc(*(undefined4 *)(param_1 + 0x370),0x2000);
-  *(undefined4 *)(param_1 + 0x3a0) = uVar3;
+  allocation = Arena__alloc(*(undefined4 *)(param_1 + 0x370),0x2000);
+  *(undefined4 *)(param_1 + 0x3a0) = allocation;
   *(undefined4 *)(param_1 + 0x3a8) = 0;
   *(undefined4 *)(param_1 + 0x3a4) = 0;
   return FUN_000e0850(param_1);
@@ -1342,7 +1342,7 @@ int FUN_000e33cc(compiler, param_2, param_3)
   int iVar1;
   undefined4 *vectorAlloc;
   int *piVar3;
-  undefined4 uVar4;
+  undefined4 allocation;
   
   iVar1 = *(int *)(param_2 + 8);
   compiler[0xd] = param_2;
@@ -1361,8 +1361,8 @@ int FUN_000e33cc(compiler, param_2, param_3)
   vectorAlloc[1] = 2;
   vectorAlloc[4] = arenaAt378;
   vectorAlloc[2] = 0;
-  uVar4 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar4;
+  allocation = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = allocation;
   compiler[10] = (int)(vectorAlloc + 1);
   arenaAt378 = *(undefined4 *)(*compiler + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
@@ -1370,8 +1370,8 @@ int FUN_000e33cc(compiler, param_2, param_3)
   vectorAlloc[1] = 2;
   vectorAlloc[4] = arenaAt378;
   vectorAlloc[2] = 0;
-  uVar4 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar4;
+  allocation = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = allocation;
   compiler[0xb] = (int)(vectorAlloc + 1);
   arenaAt378 = *(undefined4 *)(*compiler + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
@@ -1379,8 +1379,8 @@ int FUN_000e33cc(compiler, param_2, param_3)
   vectorAlloc[1] = 2;
   vectorAlloc[2] = 0;
   vectorAlloc[4] = arenaAt378;
-  uVar4 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar4;
+  allocation = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = allocation;
   compiler[9] = (int)(vectorAlloc + 1);
   piVar3 = *(int **)(*compiler + 0x30c);
   piVar3 = (int *)(**(code **)(*piVar3 + 0x68))(piVar3,*compiler);
@@ -1401,7 +1401,7 @@ int FUN_000e3544(compiler, param_2, param_3)
   int iVar1;
   undefined4 *vectorAlloc;
   int *piVar3;
-  undefined4 uVar4;
+  undefined4 allocation;
   
   iVar1 = *(int *)(param_2 + 8);
   compiler[0xd] = param_2;
@@ -1420,8 +1420,8 @@ int FUN_000e3544(compiler, param_2, param_3)
   vectorAlloc[1] = 2;
   vectorAlloc[4] = arenaAt378;
   vectorAlloc[2] = 0;
-  uVar4 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar4;
+  allocation = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = allocation;
   compiler[10] = (int)(vectorAlloc + 1);
   arenaAt378 = *(undefined4 *)(*compiler + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
@@ -1429,8 +1429,8 @@ int FUN_000e3544(compiler, param_2, param_3)
   vectorAlloc[1] = 2;
   vectorAlloc[4] = arenaAt378;
   vectorAlloc[2] = 0;
-  uVar4 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar4;
+  allocation = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = allocation;
   compiler[0xb] = (int)(vectorAlloc + 1);
   arenaAt378 = *(undefined4 *)(*compiler + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
@@ -1438,8 +1438,8 @@ int FUN_000e3544(compiler, param_2, param_3)
   vectorAlloc[1] = 2;
   vectorAlloc[2] = 0;
   vectorAlloc[4] = arenaAt378;
-  uVar4 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar4;
+  allocation = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = allocation;
   compiler[9] = (int)(vectorAlloc + 1);
   piVar3 = *(int **)(*compiler + 0x30c);
   piVar3 = (int *)(**(code **)(*piVar3 + 0x68))(piVar3,*compiler);

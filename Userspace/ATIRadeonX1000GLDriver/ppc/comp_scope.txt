@@ -27,7 +27,7 @@ IRInst__ctor_1051b0 compiler
 IRInst__setOperandSourceRaw compiler
 IRInst__removeFromList compiler
 IRInst__removeFromListEx compiler
-FUN_001062c0 compiler
+IRInst__getOrCreateOperandRecord compiler
 IRInst__validate compiler
 IRMix__validate compiler
 FUN_00107350 compiler

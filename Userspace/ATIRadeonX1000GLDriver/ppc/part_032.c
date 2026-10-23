@@ -1822,7 +1822,7 @@ int Program__packPsInputs(param_1)
                   piVar6 = (int *)Vector__elementRefGrow(puVar18,uVar23);
                 }
                 iVar25 = *piVar6;
-                if (((iVar25 != 0) && (iVar10 = FUN_000f3a30(iVar25), iVar19 + iVar10 < 5)) &&
+                if (((iVar25 != 0) && (iVar10 = IRInst__countWrittenComponents(iVar25), iVar19 + iVar10 < 5)) &&
                    ((*(int *)(iVar25 + 0x144) == iVar20 &&
                     ((iVar7 == *(int *)(iVar25 + 0x13c) && (iVar22 == *(int *)(iVar25 + 0x140)))))))
                 {
@@ -1955,8 +1955,8 @@ int Program__packPsInputs(param_1)
              (*(int *)(iVar19 + 0x148) < *(int *)(param_1 + 1000))) ||
             (*(int *)(param_1 + 0x3ec) <= *(int *)(iVar19 + 0x148))) &&
            (((arena == 0x24 || (arena == 0x15)) &&
-            ((arena = FUN_000f3a30(iVar19), arena != 4 &&
-             (arena = FUN_000f3a30(iVar19), arena != 0)))))) {
+            ((arena = IRInst__countWrittenComponents(iVar19), arena != 4 &&
+             (arena = IRInst__countWrittenComponents(iVar19), arena != 0)))))) {
           uVar23 = allocation[2];
           uVar14 = uVar14 + 1;
           if (uVar23 < *puVar18) {
@@ -2451,12 +2451,13 @@ int FUN_001134bc(param_1, param_2, param_3)
   int *param_2;
   int param_3;
 {
+  int instFlagBit2Result;
   int iVar1;
   
   iVar1 = *(int *)(param_1 + 0xc);
   if (iVar1 == 0) {
-    iVar1 = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(param_3 + 8),param_2);
-    if (iVar1 != 0) {
+    instFlagBit2Result = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(param_3 + 8),param_2);
+    if (instFlagBit2Result != 0) {
       return 1;
     }
     iVar1 = *(int *)(param_1 + 0xc);
@@ -2468,8 +2469,8 @@ int FUN_001134bc(param_1, param_2, param_3)
   if (iVar1 != 0) {
     return 9;
   }
-  iVar1 = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(param_3 + 8),param_2);
-  if (iVar1 != 0) {
+  instFlagBit2Result = ((int (*)())OpcodeTraits__instFlagBit2)(*(undefined4 *)(param_3 + 8),param_2);
+  if (instFlagBit2Result != 0) {
     return 1;
   }
   return 0;
@@ -2620,14 +2621,14 @@ int FUN_0011379c(param_1, param_2)
   int param_2;
 {
   int iVar1;
-  int iVar2;
+  int flagBit7Result;
   undefined4 uVar3;
   int iVar4;
   
   iVar1 = (**(code **)(**(int **)(param_1 + 0x30c) + 0x16c))(*(int **)(param_1 + 0x30c),param_2);
   iVar4 = *(int *)(*(int *)(param_2 + 0x88) + 8);
-  iVar2 = ((int (*)())OpcodeTraits__flagBit7)(iVar4,param_1);
-  if ((iVar2 != 0) || (uVar3 = 1, (*(uint *)(iVar1 + iVar4 * 0x38) & 2) == 0)) {
+  flagBit7Result = ((int (*)())OpcodeTraits__flagBit7)(iVar4,param_1);
+  if ((flagBit7Result != 0) || (uVar3 = 1, (*(uint *)(iVar1 + iVar4 * 0x38) & 2) == 0)) {
     uVar3 = 0;
   }
   return uVar3;

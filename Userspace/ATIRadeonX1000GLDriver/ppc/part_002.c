@@ -480,6 +480,7 @@ int gld_ensureTextureBackingSized2(param_1, param_2, param_3, param_4)
   int param_3;
   int param_4;
 {
+  int gld_isStampRetiredResult;
   bool bVar1;
   ushort *puVar2;
   ushort *puVar3;
@@ -546,8 +547,8 @@ LAB_0000adc0:
     uVar6 = (uint)*(byte *)(iVar9 + 0x6c);
     if (uVar6 == 0) {
 LAB_0000ad38:
-      iVar9 = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 0xc));
-      if (iVar9 == 0) goto LAB_0000adc0;
+      gld_isStampRetiredResult = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 0xc));
+      if (gld_isStampRetiredResult == 0) goto LAB_0000adc0;
     }
     else {
       if ((ushort)((*(ushort *)(iVar10 + 0x1c) | *(ushort *)(iVar10 + 0x28)) &
@@ -569,8 +570,8 @@ LAB_0000ad38:
           in_cr0 = bVar1 << 1;
         } while (bVar1);
       }
-      iVar9 = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 0xc));
-      if (iVar9 == 0) {
+      gld_isStampRetiredResult = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 0xc));
+      if (gld_isStampRetiredResult == 0) {
         _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),9,iVar10 + 0xc,1,0,0);
       }
     }
@@ -586,6 +587,7 @@ int gld_ensureTextureAgpRefBacking(param_1, param_2, param_3)
   undefined4 *param_2;
   int param_3;
 {
+  int gld_isStampRetiredResult;
   bool bVar1;
   ushort *puVar2;
   ushort *puVar3;
@@ -653,8 +655,8 @@ LAB_0000b010:
     uVar6 = (uint)*(byte *)(iVar9 + 0x6c);
     if (uVar6 == 0) {
 LAB_0000af80:
-      iVar9 = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 8));
-      if (iVar9 == 0) goto LAB_0000b010;
+      gld_isStampRetiredResult = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 8));
+      if (gld_isStampRetiredResult == 0) goto LAB_0000b010;
     }
     else {
       if ((ushort)((*(ushort *)(iVar10 + 0x1c) | *(ushort *)(iVar10 + 0x28)) &
@@ -676,8 +678,8 @@ LAB_0000af80:
           in_cr0 = bVar1 << 1;
         } while (bVar1);
       }
-      iVar9 = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 8));
-      if (iVar9 == 0) {
+      gld_isStampRetiredResult = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 8));
+      if (gld_isStampRetiredResult == 0) {
         _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),9,iVar10 + 8,1,0,0);
       }
     }
@@ -8959,10 +8961,10 @@ int gld_setIntegerEngineParam(param_1, param_2, param_3)
 int FUN_00017720(rendererIndex)
   undefined4 rendererIndex;
 {
-  uint uVar1;
+  uint gld_testRendererAvailableResult;
   
-  uVar1 = gld_testRendererAvailable(rendererIndex);
-  return uVar1 | 0x1900;
+  gld_testRendererAvailableResult = gld_testRendererAvailable(rendererIndex);
+  return gld_testRendererAvailableResult | 0x1900;
 }
 
 /* gld_fillCapsBlock @ 0x17750 (748 bytes) */
@@ -10815,15 +10817,15 @@ int FUN_000199f0(param_1, param_2)
   int param_2;
 {
   uint uVar1;
-  int iVar2;
+  int gld_bufferEnumToIndexResult;
   undefined4 uVar3;
   
   if (param_1 != 0) {
-    iVar2 = ((int (*)())gld_bufferEnumToIndex)((uint)*(ushort *)(((unsigned char *)0x00002dba) + *(int *)(param_1 + 0x10)),
+    gld_bufferEnumToIndexResult = ((int (*)())gld_bufferEnumToIndex)((uint)*(ushort *)(((unsigned char *)0x00002dba) + *(int *)(param_1 + 0x10)),
                          *(undefined4 *)(param_1 + 0x154));
     uVar1 = *(uint *)(param_1 + 0x154);
     if (((((uVar1 & 0x20) == 0) && (((uVar1 & 0x10) != 0 || ((uVar1 & 0x400) == 0)))) ||
-        ((iVar2 != 0 && ((iVar2 != 1 || ((uVar1 & 0x400) != 0)))))) ||
+        ((gld_bufferEnumToIndexResult != 0 && ((gld_bufferEnumToIndexResult != 1 || ((uVar1 & 0x400) != 0)))))) ||
        (((uVar1 & 0x70000000) != 0 ||
         (((uVar3 = 6, param_2 < 6 && (uVar3 = 4, param_2 < 4)) && (uVar3 = 2, param_2 < 2)))))) {
       uVar3 = 1;
@@ -10843,16 +10845,16 @@ int FUN_00019ad0(param_1, param_2)
   int param_2;
 {
   uint uVar1;
-  int iVar2;
+  int gld_bufferEnumToIndexResult;
   
   if (param_1 == 0) {
     return;
   }
-  iVar2 = ((int (*)())gld_bufferEnumToIndex)((uint)*(ushort *)(((unsigned char *)0x00002dba) + *(int *)(param_1 + 0x10)),
+  gld_bufferEnumToIndexResult = ((int (*)())gld_bufferEnumToIndex)((uint)*(ushort *)(((unsigned char *)0x00002dba) + *(int *)(param_1 + 0x10)),
                        *(undefined4 *)(param_1 + 0x154));
   uVar1 = *(uint *)(param_1 + 0x154);
   if (((((uVar1 & 0x20) == 0) && (((uVar1 & 0x10) != 0 || ((uVar1 & 0x400) == 0)))) ||
-      ((iVar2 != 0 && ((iVar2 != 1 || ((uVar1 & 0x400) != 0)))))) || ((uVar1 & 0x70000000) != 0)) {
+      ((gld_bufferEnumToIndexResult != 0 && ((gld_bufferEnumToIndexResult != 1 || ((uVar1 & 0x400) != 0)))))) || ((uVar1 & 0x70000000) != 0)) {
 LAB_00019b60:
     *(undefined4 *)(param_1 + 0x2a58) = 0x3f800000;
     *(undefined1 *)(param_1 + 0x2a5d) = 1;

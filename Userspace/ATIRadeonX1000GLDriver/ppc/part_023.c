@@ -179,6 +179,7 @@ int FUN_000e9adc(param_1, param_2, param_3)
   int param_2;
   undefined4 param_3;
 {
+  uint predecessorIndexResult;
   uint uVar1;
   uint uVar2;
   undefined4 *puVar3;
@@ -198,18 +199,18 @@ int FUN_000e9adc(param_1, param_2, param_3)
     puVar3 = (undefined4 *)Vector__elementRefGrow(puVar4,uVar1);
   }
   *puVar3 = param_3;
-  uVar1 = Block__predecessorIndex(param_2,param_1);
+  predecessorIndexResult = Block__predecessorIndex(param_2,param_1);
   puVar4 = *(uint **)(param_2 + 0xd4);
-  if (uVar1 < *puVar4) {
+  if (predecessorIndexResult < *puVar4) {
     uVar2 = puVar4[1];
-    if (uVar2 <= uVar1) {
-      _memset(uVar2 * 4 + puVar4[2],0,(uVar1 - uVar2) * 4 + 4);
-      puVar4[1] = uVar1 + 1;
+    if (uVar2 <= predecessorIndexResult) {
+      _memset(uVar2 * 4 + puVar4[2],0,(predecessorIndexResult - uVar2) * 4 + 4);
+      puVar4[1] = predecessorIndexResult + 1;
     }
-    puVar3 = (undefined4 *)(uVar1 * 4 + puVar4[2]);
+    puVar3 = (undefined4 *)(predecessorIndexResult * 4 + puVar4[2]);
   }
   else {
-    puVar3 = (undefined4 *)Vector__elementRefGrow(puVar4,uVar1);
+    puVar3 = (undefined4 *)Vector__elementRefGrow(puVar4,predecessorIndexResult);
   }
   *puVar3 = param_3;
   FUN_000e8d5c(param_3,param_1);

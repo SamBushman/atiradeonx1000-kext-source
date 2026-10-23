@@ -2179,7 +2179,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001d8720, /* +0x2200 */
     0x0018b654, /* -> R300SchedModel__vslot11 */ /* +0x2204 */
     0x0018f674, /* -> R300SchedModel__vslot12 */ /* +0x2208 */
-    0x0018dabc, /* -> R300SchedModel__vslot13 */ /* +0x220c */
+    0x0018dabc, /* -> R300SchedModel__tryRewriteConsumerSelects */ /* +0x220c */
     0x0018b9cc, /* -> R300SchedModel__vslot14 */ /* +0x2210 */
     0x00189be4, /* -> R300SchedModel__vslot15 */ /* +0x2214 */
     0x0018ad08, /* -> R300SchedModel__vslot16 */ /* +0x2218 */
@@ -2193,7 +2193,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001722cc, /* -> ResourceModel__vslot24 */ /* +0x2238 */
     0x00172328, /* -> ResourceModel__vslot25 */ /* +0x223c */
     0x0018a1ec, /* -> R300SchedModel__vslot26 */ /* +0x2240 */
-    0x0018e1a8, /* -> R300SchedModel__vslot27 */ /* +0x2244 */
+    0x0018e1a8, /* -> R300SchedModel__legalizeInstruction */ /* +0x2244 */
     0x0018a440, /* -> R300SchedModel__vslot28 */ /* +0x2248 */
     0x001723d8, /* -> ResourceModel__vslot29 */ /* +0x224c */
     0x001d8790, /* +0x2250 */
@@ -2363,7 +2363,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001d8720, /* +0x24e0 */
     0x0018b654, /* -> R300SchedModel__vslot11 */ /* +0x24e4 */
     0x0018f674, /* -> R300SchedModel__vslot12 */ /* +0x24e8 */
-    0x0018dabc, /* -> R300SchedModel__vslot13 */ /* +0x24ec */
+    0x0018dabc, /* -> R300SchedModel__tryRewriteConsumerSelects */ /* +0x24ec */
     0x0018b9cc, /* -> R300SchedModel__vslot14 */ /* +0x24f0 */
     0x00189be4, /* -> R300SchedModel__vslot15 */ /* +0x24f4 */
     0x0018ad08, /* -> R300SchedModel__vslot16 */ /* +0x24f8 */
@@ -2377,7 +2377,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001722cc, /* -> ResourceModel__vslot24 */ /* +0x2518 */
     0x00172328, /* -> ResourceModel__vslot25 */ /* +0x251c */
     0x001d8c0c, /* +0x2520 */
-    0x0018e1a8, /* -> R300SchedModel__vslot27 */ /* +0x2524 */
+    0x0018e1a8, /* -> R300SchedModel__legalizeInstruction */ /* +0x2524 */
     0x0018a440, /* -> R300SchedModel__vslot28 */ /* +0x2528 */
     0x001723d8, /* -> ResourceModel__vslot29 */ /* +0x252c */
     0x001d8790, /* +0x2530 */

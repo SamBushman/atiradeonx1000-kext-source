@@ -384,7 +384,7 @@ int Scheduler__issueNode(scheduler, node)
   *(int *)(node + 0x2c) = iVar1;
   *(int *)(node + 0x30) = iVar1;
   (**(code **)(*(int *)scheduler[2] + 0x10))((int *)scheduler[2],*(undefined4 *)(node + 0x38));
-  ((int (*)())FUN_0017212c)(scheduler[2],node);
+  ((int (*)())SchedModel__uncountNode)(scheduler[2],node);
   (**(code **)(*(int *)scheduler[3] + 0x10))((int *)scheduler[3],node);
   ((int (*)())Scheduler__releaseOperandsOfIssuedNode)(scheduler,node);
   iVar1 = (**(code **)(**(int **)(*scheduler + 0x30c) + 0xd4))(*(int **)(*scheduler + 0x30c));
@@ -437,7 +437,7 @@ int Scheduler__tryReuseAddressRegister(scheduler, node)
   undefined4 uVar15;
   undefined4 local_58 [8];
   
-  FUN_001045e4(*(undefined4 *)(node + 0x38));
+  IRInst__isProjectionOfClass26or3a(*(undefined4 *)(node + 0x38));
   if (scheduler[0x61] < 0) {
     if (*(int *)(*(int *)(node + 0x38) + 0x98) == 0x3a) {
       scheduler[0x61] = 1;
@@ -721,7 +721,7 @@ int Scheduler__tryReuseLoopIndexLoad(scheduler, node)
   
   iVar9 = 0;
   inst = *(undefined4 *)(node + 0x38);
-  FUN_00104644(inst);
+  IRInst__isProjectionOfClass44(inst);
   piVar2 = scheduler;
   piVar11 = scheduler;
   do {
@@ -730,7 +730,7 @@ int Scheduler__tryReuseLoopIndexLoad(scheduler, node)
       iVar13 = *(int *)(iVar16 + 0x130);
       iVar10 = *(int *)(iVar16 + 0x134);
       iVar8 = *(int *)(iVar16 + 300);
-      iVar3 = FUN_00105c5c(inst,0);
+      iVar3 = IRInst__getDefiningField128(inst,0);
       sourceDef2 = IRInst__getOperandSource(inst,1);
       if (iVar13 == *(int *)(sourceDef2 + 0x94)) {
         if ((iVar10 <= iVar3) && (iVar3 < iVar10 + iVar8)) goto LAB_0016ddd8;
@@ -768,7 +768,7 @@ LAB_0016ddd8:
           *allocation = arena;
           puVar12 = allocation + 1;
           FUN_00109a80(puVar12,0xfa,*scheduler);
-          uVar6 = FUN_00105c5c(inst,0);
+          uVar6 = IRInst__getDefiningField128(inst,0);
           allocation[0x27] = 0x45;
           allocation[0x26] = loopIndex;
           sourceDef = IRInst__getOperandSource(inst,1);
@@ -816,8 +816,8 @@ int Scheduler__enqueueReadyNode(scheduler, node)
        (iVar2 = (**(code **)(**(int **)(scheduler + 0xc) + 0x24))
                           (*(int **)(scheduler + 0xc),*(undefined4 *)(node + 0x38)), iVar2 == 0)) {
       if (((*(int *)(node + 0x58) == 0) &&
-          (iVar2 = FUN_001045e4(*(undefined4 *)(node + 0x38)), iVar2 == 0)) &&
-         (iVar2 = FUN_00104644(*(undefined4 *)(node + 0x38)), iVar2 == 0)) {
+          (iVar2 = IRInst__isProjectionOfClass26or3a(*(undefined4 *)(node + 0x38)), iVar2 == 0)) &&
+         (iVar2 = IRInst__isProjectionOfClass44(*(undefined4 *)(node + 0x38)), iVar2 == 0)) {
         ((int (*)())Scheduler__issueNode)(scheduler,node);
         return;
       }
@@ -1151,7 +1151,7 @@ int Scheduler__advanceCycle(scheduler)
     puVar3 = puVar3 + 1;
     iVar10 = iVar10 + -1;
   } while (iVar10 != 0);
-  FUN_00193fa4(puVar4 + 5);
+  DList__initSentinel(puVar4 + 5);
   iVar10 = scheduler[0x15];
   for (iVar9 = *(int *)(scheduler[0x15] + 8); iVar9 != 0; iVar9 = *(int *)(iVar9 + 8)) {
     DList__unlink(iVar10);
@@ -1347,9 +1347,9 @@ LAB_0016ec14:
     }
     iVar10 = iVar5;
   }
-  iVar10 = FUN_00193f08(scheduler + 0x3e);
-  if ((((iVar10 == 0) && (iVar10 = FUN_00193f08(scheduler + 0x13), iVar10 != 0)) &&
-      (iVar10 = FUN_00193f08(scheduler + 0xd), iVar10 != 0)) &&
+  iVar10 = DList__isEmpty(scheduler + 0x3e);
+  if ((((iVar10 == 0) && (iVar10 = DList__isEmpty(scheduler + 0x13), iVar10 != 0)) &&
+      (iVar10 = DList__isEmpty(scheduler + 0xd), iVar10 != 0)) &&
      (iVar10 = DList__count(scheduler + 0x3e), iVar10 == scheduler[0x3d])) {
     iVar10 = scheduler[0x40];
     for (iVar5 = *(int *)(scheduler[0x40] + 8); iVar5 != 0; iVar5 = *(int *)(iVar5 + 8)) {
@@ -1364,7 +1364,7 @@ LAB_0016ec14:
      (iVar10 = (**(code **)(*(int *)scheduler[2] + 0x18))((int *)scheduler[2]), iVar10 != 0)) {
     ((int (*)())Scheduler__splitAddressRegisterUses)(scheduler);
   }
-  FUN_00164a74(scheduler,iVar9,iVar8);
+  Scheduler__updateFetchBatchMode(scheduler,iVar9,iVar8);
   return scheduler[0xb] - iVar7;
 }
 
@@ -1392,10 +1392,10 @@ LAB_0016ef04:
   iVar1 = (**(code **)(*(int *)scheduler[2] + 0x4c))
                     ((int *)scheduler[2],*(undefined4 *)(node + 0x38));
   if ((iVar1 != *(int *)(node + 0x58)) || (iVar2 != *(int *)(node + 0x5c))) {
-    ((int (*)())FUN_0017212c)(scheduler[2],node);
+    ((int (*)())SchedModel__uncountNode)(scheduler[2],node);
     *(int *)(node + 0x58) = iVar1;
     *(int *)(node + 0x5c) = iVar2;
-    ((int (*)())FUN_00172078)(scheduler[2],node);
+    ((int (*)())SchedModel__countIssuedNode)(scheduler[2],node);
   }
 LAB_0016ef60:
   iVar1 = Scheduler__isNodeReady(scheduler,node);
@@ -1411,6 +1411,10 @@ int Scheduler__selectNextNode(scheduler, cycleLimit)
   int *scheduler;
   int cycleLimit;
 {
+  int isEmpty;
+  int isProjectionOfClass44;
+  int isProjectionOfClass26or3a;
+  int dependencyLatency;
   int balanceEnabled;
   int schedulerAllocRegEnabled;
   int operandRecord;
@@ -1484,10 +1488,10 @@ int Scheduler__selectNextNode(scheduler, cycleLimit)
   while (*(int *)(node + 8) != 0) {
     piVar9 = *(int **)(node + 0x38);
     if ((iVar4 == 0) && (cycleLimit < *(int *)(node + 0x10))) goto LAB_00170868;
-    iVar4 = FUN_001045e4(piVar9);
-    if (iVar4 == 0) {
-      iVar4 = FUN_00104644(piVar9);
-      if (iVar4 != 0) {
+    isProjectionOfClass26or3a = IRInst__isProjectionOfClass26or3a(piVar9);
+    if (isProjectionOfClass26or3a == 0) {
+      isProjectionOfClass44 = IRInst__isProjectionOfClass44(piVar9);
+      if (isProjectionOfClass44 != 0) {
         iVar4 = ((int (*)())Scheduler__tryReuseLoopIndexLoad)(scheduler,node);
         iVar22 = iVar22 + 1;
         goto joined_r0x00170058;
@@ -1519,9 +1523,9 @@ LAB_0017036c:
             if ((*(int *)(node + 0x58) == 2) &&
                (iVar4 = (**(code **)(*(int *)scheduler[2] + 0x34))((int *)scheduler[2],node),
                iVar4 != 0)) {
-              ((int (*)())FUN_0017212c)(scheduler[2],node);
+              ((int (*)())SchedModel__uncountNode)(scheduler[2],node);
               (**(code **)(*(int *)scheduler[2] + 0x38))((int *)scheduler[2],node);
-              ((int (*)())FUN_00172078)(scheduler[2],node);
+              ((int (*)())SchedModel__countIssuedNode)(scheduler[2],node);
             }
             piVar9[0x26] = 0;
           }
@@ -1751,7 +1755,7 @@ LAB_00170838:
   if (iVar4 == 0) {
 LAB_00170868:
     if (((0 < iVar24) || (0 < iVar22)) &&
-       ((iVar23 == 0 && (iVar4 = FUN_00193f08(scheduler + 0x19), iVar4 != 0)))) {
+       ((iVar23 == 0 && (iVar4 = DList__isEmpty(scheduler + 0x19), iVar4 != 0)))) {
       iVar4 = 5;
       piVar9 = (int *)scheduler[0xc];
       do {
@@ -1759,7 +1763,7 @@ LAB_00170868:
         piVar9 = piVar9 + 1;
         iVar4 = iVar4 + -1;
       } while (iVar4 != 0);
-      iVar4 = FUN_00193f08((int *)scheduler[0xc] + 5);
+      iVar4 = DList__isEmpty((int *)scheduler[0xc] + 5);
       if (iVar4 != 0) {
         if (0 >= iVar24) {
           if (iVar22 < 1) {
@@ -1788,7 +1792,7 @@ LAB_00170868:
 LAB_0016f038:
                   if (*(int *)(iVar22 + 0x48) < 1) goto code_r0x0016f044;
                   puVar19 = PTR_DAT_001e8b8c;
-                  FUN_000f31f8(&vec2Capacity,0,*(undefined4 *)(*(int *)(node + 0x38) + 0xc));
+                  SelectWord__selectWhereMasked(&vec2Capacity,0,*(undefined4 *)(*(int *)(node + 0x38) + 0xc));
                   iVar22 = Scheduler__createCopyNode(piStack00000018,*(undefined4 *)(node + 0x38),vec2Capacity,
                                         piStack00000018[0xb],node + 0xc);
                   puVar20 = *(uint **)(node + 0x40);
@@ -1910,8 +1914,8 @@ LAB_0016f038:
                   uVar7 = *(undefined4 *)(node + 0x38);
                   *(int *)(iVar22 + 0x34) = *(int *)(iVar22 + 0x34) + -1;
                   iVar23 = *(int *)(node + 0x2c);
-                  iVar24 = Scheduler__getDependencyLatency(piStack00000018,uVar7,*(undefined4 *)(iVar22 + 0x38),0,1,0);
-                  iVar23 = iVar23 + iVar24;
+                  dependencyLatency = Scheduler__getDependencyLatency(piStack00000018,uVar7,*(undefined4 *)(iVar22 + 0x38),0,1,0);
+                  iVar23 = iVar23 + dependencyLatency;
                   if (*(int *)(iVar22 + 0x30) < iVar23) {
                     *(int *)(iVar22 + 0x30) = iVar23;
                   }
@@ -1927,8 +1931,8 @@ LAB_0016f3cc:
           } while ((int)uVar16 < iVar4);
         }
         piVar9 = piStack00000018;
-        iVar4 = FUN_00193f08(piStack00000018 + 0x13);
-        if (iVar4 == 0) {
+        isEmpty = DList__isEmpty(piStack00000018 + 0x13);
+        if (isEmpty == 0) {
           node = piVar9[0x15];
           iVar4 = (**(code **)(*(int *)piStack00000018[2] + 0xc))
                             ((int *)piStack00000018[2],*(undefined4 *)(node + 0x38));
@@ -1944,10 +1948,10 @@ LAB_0016f3cc:
       }
     }
 LAB_001708c4:
-    iVar4 = FUN_00193f08(scheduler + 0x13);
+    iVar4 = DList__isEmpty(scheduler + 0x13);
   }
   else {
-    iVar4 = FUN_00193f08(scheduler + 0xd);
+    iVar4 = DList__isEmpty(scheduler + 0xd);
   }
   if ((iVar4 != 0) || (!bVar1)) {
     return 0;
@@ -2056,12 +2060,12 @@ LAB_0016fcc0:
                     piVar9 = (int *)Vector__elementRefGrow(&vecCapacity,puVar29);
                   }
                   iVar24 = *piVar9;
-                  ((int (*)())FUN_0017212c)(scheduler[2],iVar24);
+                  ((int (*)())SchedModel__uncountNode)(scheduler[2],iVar24);
                   iVar22 = *(int *)(iVar24 + 0x38);
-                  FUN_000f31f8(&STACKARG(0xffffffb8),0,*(undefined4 *)(iVar22 + 0xc));
+                  SelectWord__selectWhereMasked(&STACKARG(0xffffffb8),0,*(undefined4 *)(iVar22 + 0xc));
                   *(undefined4 *)(iVar22 + 0x9c) = in_stack_ffffffb8;
                   iVar22 = *(int *)(iVar24 + 0x38);
-                  FUN_000f3340(&STACKARG(0xffffffbc),0x10203,*(undefined4 *)(iVar22 + 0xc));
+                  SelectWord__maskUnused(&STACKARG(0xffffffbc),0x10203,*(undefined4 *)(iVar22 + 0xc));
                   operandRecord = IRInst__getOperandRecord(iVar22,1);
                   *(undefined4 *)(operandRecord + 0x10) = in_stack_ffffffbc;
                   arena = (**(code **)(*(int *)scheduler[2] + 0x4c))
@@ -2080,7 +2084,7 @@ LAB_0016fcc0:
                   }
                   Scheduler__addDataDependencyEdge(scheduler,*puVar15,iVar24,1,0,
                                *(undefined4 *)(*(int *)(iVar24 + 0x38) + 0xc),(uint)puVar20);
-                  ((int (*)())FUN_00172078)(scheduler[2],iVar24);
+                  ((int (*)())SchedModel__countIssuedNode)(scheduler[2],iVar24);
                   if (puVar29 < vec2Capacity) {
                     if (vec2Count <= puVar29) {
                       _memset((int)vec2Count * 4 + vec2Data,0,((int)puVar29 - (int)vec2Count) * 4 + 4)
@@ -2155,7 +2159,7 @@ LAB_0016fcc0:
                      (piVar9[5] == *(int *)(iVar24 + 0x14))) {
                     if (((*(int *)(iVar17 + 0x2c) < 0) ||
                         ((*(uint *)(*(int *)(iVar17 + 0x38) + 0x14) & 0x40) == 0)) &&
-                       (iVar17 = FUN_00166a0c(scheduler,iVar17), uVar11 = local_54, iVar17 == 0)) {
+                       (iVar17 = Scheduler__hasOtherFlaggedProducer(scheduler,iVar17), uVar11 = local_54, iVar17 == 0)) {
                       puVar20 = (uint *)*piVar9;
                       if (puVar20[0x18] != *(uint *)(iVar4 + 0x60)) {
                         puVar20[0x18] = *(uint *)(iVar4 + 0x60);
@@ -2341,7 +2345,7 @@ int Scheduler__scheduleCycle(scheduler)
   int iVar4;
   undefined4 uVar5;
   
-  if (((*(int *)(scheduler + 0x118) == 0) && (iVar2 = FUN_00193f08(scheduler + 0x4c), iVar2 == 0)) &&
+  if (((*(int *)(scheduler + 0x118) == 0) && (iVar2 = DList__isEmpty(scheduler + 0x4c), iVar2 == 0)) &&
      (*(int *)(scheduler + 0x20) != 0)) {
     iVar2 = *(int *)(*(int *)(scheduler + 0x54) + 0x10);
     iVar3 = (**(code **)(**(int **)(scheduler + 8) + 0x84))(*(int **)(scheduler + 8));
@@ -2358,7 +2362,7 @@ int Scheduler__scheduleCycle(scheduler)
   iVar3 = 0;
   while( true ) {
     while( true ) {
-      iVar4 = FUN_00193f08(iVar3 + scheduler + 0xac);
+      iVar4 = DList__isEmpty(iVar3 + scheduler + 0xac);
       if (iVar4 != 0) break;
       uVar5 = *(undefined4 *)(iVar3 + scheduler + 0xb4);
       DList__unlink(uVar5);
@@ -2376,7 +2380,7 @@ int Scheduler__scheduleCycle(scheduler)
     iVar3 = iVar2 * 0x18;
   }
   while (((iVar2 = (**(code **)(**(int **)(scheduler + 8) + 0x20))(*(int **)(scheduler + 8)), iVar2 == 0
-          && (*(int *)(scheduler + 0x118) == 0)) && (iVar2 = FUN_0016629c(scheduler), iVar2 != 0))) {
+          && (*(int *)(scheduler + 0x118) == 0)) && (iVar2 = Scheduler__expandPresubToAdd(scheduler), iVar2 != 0))) {
     ((int (*)())Scheduler__issueNode)(scheduler,iVar2);
   }
   iVar2 = Scheduler__commitBundle(scheduler);
@@ -2384,12 +2388,12 @@ int Scheduler__scheduleCycle(scheduler)
     (**(code **)(**(int **)(scheduler + 8) + 0x7c))(*(int **)(scheduler + 8));
   }
   ((int (*)())Scheduler__advanceCycle)(scheduler);
-  iVar3 = FUN_00193f08(scheduler + 0x4c);
-  if ((iVar3 == 0) || (iVar3 = FUN_00193f08(scheduler + 0x34), iVar3 == 0)) {
+  iVar3 = DList__isEmpty(scheduler + 0x4c);
+  if ((iVar3 == 0) || (iVar3 = DList__isEmpty(scheduler + 0x34), iVar3 == 0)) {
     uVar5 = 0;
   }
   else {
-    iVar3 = FUN_00193f08(scheduler + 100);
+    iVar3 = DList__isEmpty(scheduler + 100);
     uVar5 = 1;
     if (iVar3 == 0) {
       iVar3 = Scheduler__commitBundle(scheduler);
@@ -2500,7 +2504,7 @@ int Scheduler__issueDeadNode(scheduler, node)
   uVar1 = *(undefined4 *)(scheduler + 0x2c);
   *(undefined4 *)(node + 0x2c) = uVar1;
   *(undefined4 *)(node + 0x30) = uVar1;
-  ((int (*)())FUN_0017212c)(*(undefined4 *)(scheduler + 8),node);
+  ((int (*)())SchedModel__uncountNode)(*(undefined4 *)(scheduler + 8),node);
   ((int (*)())Scheduler__releaseOperandsOfIssuedNode)(scheduler,node);
   ((int (*)())Scheduler__updateSuccessorsAfterIssue)(scheduler,node);
   iVar2 = (**(code **)(**(int **)(scheduler + 0xc) + 0x20))
@@ -2521,24 +2525,78 @@ int Scheduler__scheduleBlock(scheduler, block)
   int *scheduler;
   int block;
 {
-  bool bVar1;
+  uint vectorLength3;
+  uint successorIndex;
+  uint vectorLength2;
+  uint vectorLength;
+  uint vectorIndex2;
+  uint vectorIndex;
+  undefined4 *clearCursor5;
+  uint *allNodeVector;
+  int *aluReadyList;
+  int *nextInstNode;
+  int *counterCursor;
+  int *hwDescription2;
+  int *fetchList;
+  int *nodeRef2;
+  int *loopLoadCursor;
+  int *clearCursor3;
+  int *hwDescription;
+  int *nodeInst;
+  int *nodeRef;
+  int *clearCursor2;
+  int *clearCursor;
+  int successorBlock;
+  int seedListFirstNode;
+  int successorVector;
+  int hasBlockFlags;
+  int wordsLeft2;
+  int wordsLeft;
+  int cycleResult;
+  int groupNode;
+  int groupListEmpty;
+  int commitResult;
+  int readyListEmpty;
+  int needsNoNode;
+  int isEntryOrExit;
+  int fetchListEmpty;
+  int sentinelNode;
+  int optionEnabled;
+  int loopLoadIndex;
+  int componentsLeft2;
+  int destRegNumber;
+  int fileRegCount;
+  int regIndex;
+  int hwRegCount;
+  int bitSetWordsLeft;
+  int byteOffset2;
+  int groupNextNode;
+  int maxHeight2;
+  int maxHeight;
+  int isFetchNode;
+  int nextListNode;
+  int highWaterScalar;
+  int highWaterVector;
+  int node;
+  int componentIndex;
+  bool continueLoop;
   int iVar2;
-  int *piVar3;
-  undefined4 *puVar4;
-  int *piVar5;
-  int iVar6;
-  undefined4 *puVar7;
-  uint uVar8;
-  uint uVar9;
-  int iVar10;
-  int *piVar11;
-  uint uVar12;
-  int *piVar13;
-  uint *puVar14;
-  int *piVar15;
-  int iVar16;
-  int local_48;
-  int local_44;
+  int *liveOutSet;
+  undefined4 *clearCursor4;
+  int *setCursor;
+  int byteOffset3;
+  undefined4 *bundleRecord;
+  uint regIndexU;
+  uint wordByteOffset;
+  int byteOffset;
+  int *lastScheduledInst;
+  uint bitMask;
+  int *nextInst;
+  uint *externalNodeVector;
+  int *inst;
+  int componentsLeft;
+  int writeMaskBytes;
+  int zero;
   /* NOTE (issue #64): declared 8 bytes, but DListNode__init's sentinel-list init writes through +0x14
    * (6 words) - confirmed via stock disasm and by tracing the actual crash: local_38 = auStack_40+0xc
    * computed a pointer past the declared array, into whatever unrelated stack content followed it, so
@@ -2554,159 +2612,159 @@ int Scheduler__scheduleBlock(scheduler, block)
   Scheduler__buildDependencyGraph(scheduler,block);
   Scheduler__buildCoScheduleGroups(scheduler);
   Scheduler__computeNodePriorities(scheduler);
-  piVar3 = (int *)scheduler[0x4c];
-  iVar2 = *piVar3;
-  if (iVar2 != 0) {
-    if (iVar2 == 0) {
-      iVar2 = 1;
+  liveOutSet = (int *)scheduler[0x4c];
+  bitSetWordsLeft = *liveOutSet;
+  if (bitSetWordsLeft != 0) {
+    if (bitSetWordsLeft == 0) {
+      bitSetWordsLeft = 1;
     }
     do {
-      piVar3[2] = 0;
-      piVar3 = piVar3 + 1;
-      iVar2 = iVar2 + -1;
-    } while (iVar2 != 0);
+      liveOutSet[2] = 0;
+      liveOutSet = liveOutSet + 1;
+      bitSetWordsLeft = bitSetWordsLeft + -1;
+    } while (bitSetWordsLeft != 0);
   }
-  iVar2 = scheduler[0x51];
-  if (0 < iVar2) {
-    uVar8 = 0;
+  hwRegCount = scheduler[0x51];
+  if (0 < hwRegCount) {
+    regIndexU = 0;
     do {
-      uVar9 = uVar8 >> 3 & 0x1ffffffc;
-      uVar12 = uVar8 & 0x1f;
-      if (((*(uint *)(uVar9 + *(int *)(scheduler[1] + 0x430) + 8) >> uVar12 & 1) != 0) &&
-         ((*(uint *)(uVar9 + *(int *)(block + 0x104) + 8) >> uVar12 & 1) == 0)) {
-        *(uint *)(uVar9 + scheduler[0x4c] + 8) = 1 << uVar12 | *(uint *)(uVar9 + scheduler[0x4c] + 8);
+      wordByteOffset = regIndexU >> 3 & 0x1ffffffc;
+      bitMask = regIndexU & 0x1f;
+      if (((*(uint *)(wordByteOffset + *(int *)(scheduler[1] + 0x430) + 8) >> bitMask & 1) != 0) &&
+         ((*(uint *)(wordByteOffset + *(int *)(block + 0x104) + 8) >> bitMask & 1) == 0)) {
+        *(uint *)(wordByteOffset + scheduler[0x4c] + 8) = 1 << bitMask | *(uint *)(wordByteOffset + scheduler[0x4c] + 8);
       }
       iVar2 = 4;
-      piVar3 = scheduler;
+      clearCursor = scheduler;
       do {
-        piVar5 = piVar3 + 0x4d;
-        piVar3 = piVar3 + 1;
-        *(undefined4 *)(uVar8 * 4 + *piVar5) = 0;
+        setCursor = clearCursor + 0x4d;
+        clearCursor = clearCursor + 1;
+        *(undefined4 *)(regIndexU * 4 + *setCursor) = 0;
         iVar2 = iVar2 + -1;
       } while (iVar2 != 0);
-      iVar2 = scheduler[0x51];
-      uVar8 = uVar8 + 1;
-    } while ((int)uVar8 < iVar2);
+      hwRegCount = scheduler[0x51];
+      regIndexU = regIndexU + 1;
+    } while ((int)regIndexU < hwRegCount);
   }
   if (scheduler[0x58] != 0) {
-    piVar3 = scheduler;
+    clearCursor2 = scheduler;
     while( true ) {
-      if (0 < iVar2) {
-        iVar2 = 0;
+      if (0 < hwRegCount) {
+        regIndex = 0;
         do {
-          iVar10 = iVar2 * 4;
-          iVar2 = iVar2 + 1;
-          *(undefined4 *)(iVar10 + piVar3[0x54]) = 0;
-        } while (iVar2 < scheduler[0x51]);
+          byteOffset = regIndex * 4;
+          regIndex = regIndex + 1;
+          *(undefined4 *)(byteOffset + clearCursor2[0x54]) = 0;
+        } while (regIndex < scheduler[0x51]);
       }
-      piVar5 = *(int **)(*scheduler + 0x30c);
-      iVar2 = (**(code **)(*piVar5 + 0x13c))(piVar5,*scheduler);
-      if (0 < iVar2) {
-        iVar10 = 0;
+      hwDescription2 = *(int **)(*scheduler + 0x30c);
+      fileRegCount = (**(code **)(*hwDescription2 + 0x13c))(hwDescription2,*scheduler);
+      if (0 < fileRegCount) {
+        componentIndex = 0;
         do {
-          iVar6 = iVar10 * 4;
-          iVar10 = iVar10 + 1;
-          *(undefined4 *)(iVar6 + piVar3[0x58]) = 0;
-          iVar2 = iVar2 + -1;
-        } while (iVar2 != 0);
+          byteOffset3 = componentIndex * 4;
+          componentIndex = componentIndex + 1;
+          *(undefined4 *)(byteOffset3 + clearCursor2[0x58]) = 0;
+          fileRegCount = fileRegCount + -1;
+        } while (fileRegCount != 0);
       }
-      piVar3 = piVar3 + 1;
-      if (scheduler + 4 == piVar3) break;
-      iVar2 = scheduler[0x51];
+      clearCursor2 = clearCursor2 + 1;
+      if (scheduler + 4 == clearCursor2) break;
+      hwRegCount = scheduler[0x51];
     }
   }
-  puVar14 = (uint *)scheduler[5];
-  uVar8 = puVar14[1];
-  if (uVar8 != 0) {
-    uVar12 = 0;
+  externalNodeVector = (uint *)scheduler[5];
+  vectorLength = externalNodeVector[1];
+  if (vectorLength != 0) {
+    vectorIndex = 0;
     do {
-      if (uVar12 < *puVar14) {
-        if (uVar8 <= uVar12) {
-          _memset(uVar8 * 4 + puVar14[2],0,(uVar12 - uVar8) * 4 + 4);
-          puVar14[1] = uVar12 + 1;
+      if (vectorIndex < *externalNodeVector) {
+        if (vectorLength <= vectorIndex) {
+          _memset(vectorLength * 4 + externalNodeVector[2],0,(vectorIndex - vectorLength) * 4 + 4);
+          externalNodeVector[1] = vectorIndex + 1;
         }
-        piVar3 = (int *)(uVar12 * 4 + puVar14[2]);
+        nodeRef = (int *)(vectorIndex * 4 + externalNodeVector[2]);
       }
       else {
-        piVar3 = (int *)Vector__elementRefGrow(puVar14,uVar12);
+        nodeRef = (int *)Vector__elementRefGrow(externalNodeVector,vectorIndex);
       }
-      uVar12 = uVar12 + 1;
-      iVar10 = *piVar3;
-      piVar3 = *(int **)(iVar10 + 0x38);
-      iVar2 = piVar3[0x25];
-      if ((((piVar3[0x20] != 0) && (iVar6 = RegKind__flagBit0(piVar3[0x26]), iVar6 != 0)) &&
-          ((piVar3[5] & 2U) == 0)) &&
-         ((iVar6 = (**(code **)(*piVar3 + 0x50))(piVar3), iVar6 == 0 && ((piVar3[5] & 0x40U) != 0)))
+      vectorIndex = vectorIndex + 1;
+      node = *nodeRef;
+      nodeInst = *(int **)(node + 0x38);
+      destRegNumber = nodeInst[0x25];
+      if ((((nodeInst[0x20] != 0) && (byteOffset3 = RegKind__flagBit0(nodeInst[0x26]), byteOffset3 != 0)) &&
+          ((nodeInst[5] & 2U) == 0)) &&
+         ((byteOffset3 = (**(code **)(*nodeInst + 0x50))(nodeInst), byteOffset3 == 0 && ((nodeInst[5] & 0x40U) != 0)))
          ) {
-        local_48 = piVar3[3];
-        if (*(int *)(iVar10 + 0x60) != 0) {
-          *(int *)(*(int *)(iVar10 + 0x60) + 8) = iVar10;
-          *(int *)(*(int *)(iVar10 + 0x60) + 4) = iVar2;
-          local_48 = **(int **)(iVar10 + 0x60);
+        writeMaskBytes = nodeInst[3];
+        if (*(int *)(node + 0x60) != 0) {
+          *(int *)(*(int *)(node + 0x60) + 8) = node;
+          *(int *)(*(int *)(node + 0x60) + 4) = destRegNumber;
+          writeMaskBytes = **(int **)(node + 0x60);
         }
-        iVar16 = 4;
-        iVar6 = 0;
-        piVar5 = scheduler;
+        componentsLeft = 4;
+        byteOffset3 = 0;
+        counterCursor = scheduler;
         do {
-          if (*(char *)((int)&local_48 + iVar6) != '\0') {
-            *(int *)(piVar5[0x4d] + iVar2 * 4) = iVar10;
-            if (piVar5[0x54] != 0) {
-              *(undefined4 *)(piVar5[0x54] + iVar2 * 4) = 0x7fffffff;
+          if (*(char *)((int)&writeMaskBytes + byteOffset3) != '\0') {
+            *(int *)(counterCursor[0x4d] + destRegNumber * 4) = node;
+            if (counterCursor[0x54] != 0) {
+              *(undefined4 *)(counterCursor[0x54] + destRegNumber * 4) = 0x7fffffff;
             }
-            if (*(int *)(iVar10 + 0x60) != 0) {
-              *(int *)(iVar6 * 4 + *(int *)(iVar10 + 0x60) + 0x18) = iVar10;
-              *(undefined4 *)(*(int *)(iVar10 + 0x60) + 0x14) = 0;
+            if (*(int *)(node + 0x60) != 0) {
+              *(int *)(byteOffset3 * 4 + *(int *)(node + 0x60) + 0x18) = node;
+              *(undefined4 *)(*(int *)(node + 0x60) + 0x14) = 0;
             }
           }
-          iVar6 = iVar6 + 1;
-          piVar5 = piVar5 + 1;
-          iVar16 = iVar16 + -1;
-        } while (iVar16 != 0);
-        if (piVar3[0x26] == 1) {
-          piVar3 = *(int **)(*scheduler + 0x30c);
-          iVar6 = (**(code **)(*piVar3 + 0x138))(piVar3,*scheduler);
-          iVar10 = scheduler[0x67];
-          if (scheduler[0x67] < iVar2 - iVar6) {
-            iVar10 = iVar2 - iVar6;
+          byteOffset3 = byteOffset3 + 1;
+          counterCursor = counterCursor + 1;
+          componentsLeft = componentsLeft + -1;
+        } while (componentsLeft != 0);
+        if (nodeInst[0x26] == 1) {
+          hwDescription = *(int **)(*scheduler + 0x30c);
+          byteOffset3 = (**(code **)(*hwDescription + 0x138))(hwDescription,*scheduler);
+          highWaterVector = scheduler[0x67];
+          if (scheduler[0x67] < destRegNumber - byteOffset3) {
+            highWaterVector = destRegNumber - byteOffset3;
           }
-          scheduler[0x67] = iVar10;
+          scheduler[0x67] = highWaterVector;
         }
         else {
-          iVar10 = scheduler[0x66];
-          if (scheduler[0x66] < iVar2) {
-            iVar10 = iVar2;
+          highWaterScalar = scheduler[0x66];
+          if (scheduler[0x66] < destRegNumber) {
+            highWaterScalar = destRegNumber;
           }
-          scheduler[0x66] = iVar10;
-          if (iVar2 <= scheduler[0x68]) {
-            iVar2 = scheduler[0x68];
+          scheduler[0x66] = highWaterScalar;
+          if (destRegNumber <= scheduler[0x68]) {
+            destRegNumber = scheduler[0x68];
           }
-          scheduler[0x68] = iVar2;
+          scheduler[0x68] = destRegNumber;
         }
       }
-      puVar14 = (uint *)scheduler[5];
-      uVar8 = puVar14[1];
-    } while (uVar12 < uVar8);
+      externalNodeVector = (uint *)scheduler[5];
+      vectorLength = externalNodeVector[1];
+    } while (vectorIndex < vectorLength);
   }
-  iVar2 = 4;
-  piVar3 = scheduler;
+  componentsLeft2 = 4;
+  clearCursor3 = scheduler;
   do {
-    piVar3[0x5c] = 0;
-    piVar3 = piVar3 + 1;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  iVar2 = 0;
-  piVar3 = scheduler;
+    clearCursor3[0x5c] = 0;
+    clearCursor3 = clearCursor3 + 1;
+    componentsLeft2 = componentsLeft2 + -1;
+  } while (componentsLeft2 != 0);
+  loopLoadIndex = 0;
+  loopLoadCursor = scheduler;
   do {
-    bVar1 = iVar2 != 1;
-    piVar3[0x62] = 0;
-    iVar2 = iVar2 + 1;
-    piVar3 = piVar3 + 1;
-  } while (bVar1);
-  iVar2 = Compiler__isOptionEnabled(*scheduler,0x47);
-  if ((iVar2 != 0) && (iVar2 = Compiler__isOptionEnabled(*scheduler,0x24), iVar2 != 0)) {
+    continueLoop = loopLoadIndex != 1;
+    loopLoadCursor[0x62] = 0;
+    loopLoadIndex = loopLoadIndex + 1;
+    loopLoadCursor = loopLoadCursor + 1;
+  } while (continueLoop);
+  optionEnabled = Compiler__isOptionEnabled(*scheduler,0x47);
+  if ((optionEnabled != 0) && (optionEnabled = Compiler__isOptionEnabled(*scheduler,0x24), optionEnabled != 0)) {
     Scheduler__packDotProductCandidates(scheduler);
   }
-  uVar12 = 0;
+  vectorIndex2 = 0;
   (**(code **)(*(int *)scheduler[2] + 8))((int *)scheduler[2]);
   (**(code **)(*(int *)scheduler[3] + 8))((int *)scheduler[3]);
   scheduler[0x46] = 1;
@@ -2717,110 +2775,110 @@ int Scheduler__scheduleBlock(scheduler, block)
   scheduler[0x48] = -1;
   scheduler[0x49] = 0;
   DListNode__init(auStack_40);
-  local_38 = (int)(auStack_40 + 0xc);
-  puVar14 = (uint *)scheduler[6];
-  uVar8 = puVar14[1];
-  if (0 < (int)uVar8) {
+  seedListFirstNode = (int)(auStack_40 + 0xc);
+  allNodeVector = (uint *)scheduler[6];
+  vectorLength2 = allNodeVector[1];
+  if (0 < (int)vectorLength2) {
     while( true ) {
-      if (uVar12 < *puVar14) {
-        uVar9 = puVar14[1];
-        if (uVar9 <= uVar12) {
-          _memset(uVar9 * 4 + puVar14[2],0,(uVar12 - uVar9) * 4 + 4);
-          puVar14[1] = uVar12 + 1;
+      if (vectorIndex2 < *allNodeVector) {
+        vectorLength3 = allNodeVector[1];
+        if (vectorLength3 <= vectorIndex2) {
+          _memset(vectorLength3 * 4 + allNodeVector[2],0,(vectorIndex2 - vectorLength3) * 4 + 4);
+          allNodeVector[1] = vectorIndex2 + 1;
         }
-        piVar3 = (int *)(uVar12 * 4 + puVar14[2]);
+        nodeRef2 = (int *)(vectorIndex2 * 4 + allNodeVector[2]);
       }
       else {
-        piVar3 = (int *)Vector__elementRefGrow(puVar14,uVar12);
+        nodeRef2 = (int *)Vector__elementRefGrow(allNodeVector,vectorIndex2);
       }
       /* issue #76: same shared scheduler[6] array gap as part_044.c's per-format processing -
        * skip a never-populated slot instead of dereferencing it. */
-      if ((*piVar3 != 0) && (*(int *)(*piVar3 + 0x34) == 0)) {
-        DList__pushBack(auStack_40,*piVar3);
+      if ((*nodeRef2 != 0) && (*(int *)(*nodeRef2 + 0x34) == 0)) {
+        DList__pushBack(auStack_40,*nodeRef2);
       }
-      uVar12 = uVar12 + 1;
-      if (uVar8 == uVar12) break;
-      puVar14 = (uint *)scheduler[6];
+      vectorIndex2 = vectorIndex2 + 1;
+      if (vectorLength2 == vectorIndex2) break;
+      allNodeVector = (uint *)scheduler[6];
     }
   }
-  iVar10 = *(int *)(local_38 + 8);
-  iVar2 = local_38;
-  while (iVar6 = iVar10, iVar6 != 0) {
-    DList__unlink(iVar2);
-    ((int (*)())Scheduler__onNodeReady)(scheduler,iVar2);
-    iVar10 = (**(code **)(*(int *)scheduler[3] + 0x20))
-                       ((int *)scheduler[3],*(undefined4 *)(iVar2 + 0x38));
-    if ((iVar10 == 0) &&
-       (iVar10 = (**(code **)(*(int *)scheduler[3] + 0x24))
-                           ((int *)scheduler[3],*(undefined4 *)(iVar2 + 0x38)), iVar10 == 0)) {
-      iVar10 = *(int *)(iVar2 + 0xc);
-      if (*(int *)(iVar2 + 0xc) < scheduler[0x47]) {
-        iVar10 = scheduler[0x47];
+  nextListNode = *(int *)(seedListFirstNode + 8);
+  sentinelNode = seedListFirstNode;
+  while (byteOffset3 = nextListNode, byteOffset3 != 0) {
+    DList__unlink(sentinelNode);
+    ((int (*)())Scheduler__onNodeReady)(scheduler,sentinelNode);
+    isFetchNode = (**(code **)(*(int *)scheduler[3] + 0x20))
+                       ((int *)scheduler[3],*(undefined4 *)(sentinelNode + 0x38));
+    if ((isFetchNode == 0) &&
+       (isFetchNode = (**(code **)(*(int *)scheduler[3] + 0x24))
+                           ((int *)scheduler[3],*(undefined4 *)(sentinelNode + 0x38)), isFetchNode == 0)) {
+      maxHeight = *(int *)(sentinelNode + 0xc);
+      if (*(int *)(sentinelNode + 0xc) < scheduler[0x47]) {
+        maxHeight = scheduler[0x47];
       }
-      scheduler[0x47] = iVar10;
+      scheduler[0x47] = maxHeight;
     }
     else {
-      iVar10 = *(int *)(iVar2 + 0xc);
-      if (*(int *)(iVar2 + 0xc) < scheduler[0x48]) {
-        iVar10 = scheduler[0x48];
+      maxHeight2 = *(int *)(sentinelNode + 0xc);
+      if (*(int *)(sentinelNode + 0xc) < scheduler[0x48]) {
+        maxHeight2 = scheduler[0x48];
       }
-      scheduler[0x48] = iVar10;
+      scheduler[0x48] = maxHeight2;
     }
-    iVar2 = iVar6;
-    iVar10 = *(int *)(iVar6 + 8);
+    sentinelNode = byteOffset3;
+    nextListNode = *(int *)(byteOffset3 + 8);
   }
-  piVar3 = scheduler + 0xd;
+  fetchList = scheduler + 0xd;
   scheduler[0x46] = 0;
-  iVar2 = FUN_00193f08(piVar3);
-  if ((iVar2 == 0) && (scheduler[0x47] + -1 <= scheduler[0x48])) {
+  fetchListEmpty = DList__isEmpty(fetchList);
+  if ((fetchListEmpty == 0) && (scheduler[0x47] + -1 <= scheduler[0x48])) {
     scheduler[0x4a] = scheduler[0x48];
     scheduler[0x46] = 1;
   }
-  piVar5 = (int *)(*(int **)(scheduler[4] + 0x98))[2];
-  if (piVar5 != (int *)0x0) {
-    piVar11 = (int *)0x0;
-    piVar15 = *(int **)(scheduler[4] + 0x98);
+  nextInstNode = (int *)(*(int **)(scheduler[4] + 0x98))[2];
+  if (nextInstNode != (int *)0x0) {
+    lastScheduledInst = (int *)0x0;
+    inst = *(int **)(scheduler[4] + 0x98);
     do {
-      piVar13 = piVar5;
-      iVar2 = (**(code **)(*piVar15 + 0x34))(piVar15);
-      if ((iVar2 == 0) && (iVar2 = (**(code **)(*piVar15 + 0x38))(piVar15), iVar2 == 0)) {
-        iVar2 = FUN_00164df4(piVar15);
-        if (iVar2 == 0) {
-          DList__unlink(piVar15);
-          piVar15[0x56] = 0;
+      nextInst = nextInstNode;
+      isEntryOrExit = (**(code **)(*inst + 0x34))(inst);
+      if ((isEntryOrExit == 0) && (isEntryOrExit = (**(code **)(*inst + 0x38))(inst), isEntryOrExit == 0)) {
+        needsNoNode = IRInst__needsNoSchedulerNode(inst);
+        if (needsNoNode == 0) {
+          DList__unlink(inst);
+          inst[0x56] = 0;
         }
         else {
-          piVar15[5] = piVar15[5] | 4;
-          piVar11 = piVar15;
+          inst[5] = inst[5] | 4;
+          lastScheduledInst = inst;
         }
       }
       else {
-        piVar15[5] = piVar15[5] & 0xfffffffb;
+        inst[5] = inst[5] & 0xfffffffb;
       }
-      piVar5 = (int *)piVar13[2];
-      piVar15 = piVar13;
-    } while (piVar5 != (int *)0x0);
-    if (piVar11 != (int *)0x0) {
-      piVar11[5] = piVar11[5] & 0xfffffffb;
+      nextInstNode = (int *)nextInst[2];
+      inst = nextInst;
+    } while (nextInstNode != (int *)0x0);
+    if (lastScheduledInst != (int *)0x0) {
+      lastScheduledInst[5] = lastScheduledInst[5] & 0xfffffffb;
     }
   }
-  piVar5 = scheduler + 0x13;
-  iVar2 = FUN_00193f08(piVar5);
-  if ((((iVar2 == 0) || (iVar2 = FUN_00193f08(piVar3), iVar2 == 0)) ||
-      (iVar2 = FUN_00193f08(scheduler + 0x19), iVar2 == 0)) ||
-     (iVar2 = FUN_00193f08(scheduler + 0x3e), iVar2 == 0)) {
-    iVar2 = Scheduler__commitBundle(scheduler);
-    if ((iVar2 == 0) && (iVar2 = FUN_00193f08(scheduler + 0x25), iVar2 != 0)) {
-      iVar2 = FUN_00193f08(scheduler + 0x3e);
-      if (((iVar2 == 0) && (iVar2 = FUN_00193f08(piVar5), iVar2 != 0)) &&
-         ((iVar2 = FUN_00193f08(piVar3), iVar2 != 0 &&
-          (iVar2 = DList__count(scheduler + 0x3e), iVar2 == scheduler[0x3d])))) {
-        iVar2 = scheduler[0x40];
-        for (iVar10 = *(int *)(scheduler[0x40] + 8); iVar10 != 0; iVar10 = *(int *)(iVar10 + 8)) {
-          DList__unlink(iVar2);
-          *(undefined4 *)(iVar2 + 0x68) = 0;
-          DList__pushBack(piVar5,iVar2);
-          iVar2 = iVar10;
+  aluReadyList = scheduler + 0x13;
+  readyListEmpty = DList__isEmpty(aluReadyList);
+  if ((((readyListEmpty == 0) || (readyListEmpty = DList__isEmpty(fetchList), readyListEmpty == 0)) ||
+      (readyListEmpty = DList__isEmpty(scheduler + 0x19), readyListEmpty == 0)) ||
+     (readyListEmpty = DList__isEmpty(scheduler + 0x3e), readyListEmpty == 0)) {
+    commitResult = Scheduler__commitBundle(scheduler);
+    if ((commitResult == 0) && (commitResult = DList__isEmpty(scheduler + 0x25), commitResult != 0)) {
+      groupListEmpty = DList__isEmpty(scheduler + 0x3e);
+      if (((groupListEmpty == 0) && (groupListEmpty = DList__isEmpty(aluReadyList), groupListEmpty != 0)) &&
+         ((groupListEmpty = DList__isEmpty(fetchList), groupListEmpty != 0 &&
+          (groupListEmpty = DList__count(scheduler + 0x3e), groupListEmpty == scheduler[0x3d])))) {
+        groupNode = scheduler[0x40];
+        for (groupNextNode = *(int *)(scheduler[0x40] + 8); groupNextNode != 0; groupNextNode = *(int *)(groupNextNode + 8)) {
+          DList__unlink(groupNode);
+          *(undefined4 *)(groupNode + 0x68) = 0;
+          DList__pushBack(aluReadyList,groupNode);
+          groupNode = groupNextNode;
         }
       }
     }
@@ -2828,41 +2886,41 @@ int Scheduler__scheduleBlock(scheduler, block)
       ((int (*)())Scheduler__advanceCycle)(scheduler);
     }
     do {
-      iVar2 = ((int (*)())Scheduler__scheduleCycle)(scheduler);
-    } while (iVar2 == 0);
+      cycleResult = ((int (*)())Scheduler__scheduleCycle)(scheduler);
+    } while (cycleResult == 0);
     Scheduler__commitBundle(scheduler);
-    puVar7 = (undefined4 *)scheduler[0xc];
-    iVar2 = 5;
-    puVar4 = puVar7;
+    bundleRecord = (undefined4 *)scheduler[0xc];
+    wordsLeft = 5;
+    clearCursor4 = bundleRecord;
     do {
-      *puVar4 = 0;
-      puVar4 = puVar4 + 1;
-      iVar2 = iVar2 + -1;
-    } while (iVar2 != 0);
+      *clearCursor4 = 0;
+      clearCursor4 = clearCursor4 + 1;
+      wordsLeft = wordsLeft + -1;
+    } while (wordsLeft != 0);
   }
   else {
     Scheduler__commitBundle(scheduler);
-    puVar7 = (undefined4 *)scheduler[0xc];
-    iVar2 = 5;
-    puVar4 = puVar7;
+    bundleRecord = (undefined4 *)scheduler[0xc];
+    wordsLeft2 = 5;
+    clearCursor5 = bundleRecord;
     do {
-      *puVar4 = 0;
-      puVar4 = puVar4 + 1;
-      iVar2 = iVar2 + -1;
-    } while (iVar2 != 0);
+      *clearCursor5 = 0;
+      clearCursor5 = clearCursor5 + 1;
+      wordsLeft2 = wordsLeft2 + -1;
+    } while (wordsLeft2 != 0);
   }
-  FUN_00193fa4(puVar7 + 5);
-  iVar2 = (**(code **)(*(int *)scheduler[3] + 0x1c))((int *)scheduler[3]);
-  if (iVar2 != 0) {
-    iVar2 = *(int *)(block + 0xd0);
-    iVar10 = 0;
-    local_44 = 0;
-    for (uVar8 = 1; uVar8 <= *(uint *)(iVar2 + 4); uVar8 = uVar8 + 1) {
-      local_44 = *(int *)(*(int *)(iVar2 + 8) + iVar10);
-      if (local_44 != 0) {
-        *(undefined4 *)(local_44 + 0xdc) = 1;
+  DList__initSentinel(bundleRecord + 5);
+  hasBlockFlags = (**(code **)(*(int *)scheduler[3] + 0x1c))((int *)scheduler[3]);
+  if (hasBlockFlags != 0) {
+    successorVector = *(int *)(block + 0xd0);
+    byteOffset2 = 0;
+    zero = 0;
+    for (successorIndex = 1; successorIndex <= *(uint *)(successorVector + 4); successorIndex = successorIndex + 1) {
+      successorBlock = *(int *)(*(int *)(successorVector + 8) + byteOffset2);
+      if (successorBlock != 0) {
+        *(undefined4 *)(successorBlock + 0xdc) = 1;
       }
-      iVar10 = iVar10 + 4;
+      byteOffset2 = byteOffset2 + 4;
     }
   }
   return Scheduler__freeNodes(scheduler);
@@ -3055,7 +3113,7 @@ code_r0x00171ba0:
     pass_minreg_order(scheduler,program);
   }
   Scheduler__markGlobalValues(scheduler);
-  FUN_00165014(scheduler);
+  Scheduler__computeBlockRegisterSets(scheduler);
   iVar8 = *(int *)(scheduler[1] + 900);
   iVar9 = *(int *)(iVar8 + 8);
   while (iVar9 != 0) {
@@ -3208,8 +3266,8 @@ int Scheduler__run(program)
   return;
 }
 
-/* FUN_00172000 @ 0x172000 (20 bytes) */
-int FUN_00172000(param_1)
+/* SchedModel__resetCounters @ 0x172000 (20 bytes) */
+int SchedModel__resetCounters(param_1)
   int param_1;
 {
   *(undefined4 *)(param_1 + 0x14) = 0;
@@ -3242,8 +3300,8 @@ int ResourceModel__vslot23(this)
   return ((int)uVar1 >> 1) + (uint)((int)uVar1 < 0 && (uVar1 & 1) != 0);
 }
 
-/* FUN_00172078 @ 0x172078 (180 bytes) */
-int FUN_00172078(param_1, param_2)
+/* SchedModel__countIssuedNode @ 0x172078 (180 bytes) */
+int SchedModel__countIssuedNode(param_1, param_2)
   int *param_1;
   int param_2;
 {
@@ -3269,8 +3327,8 @@ int FUN_00172078(param_1, param_2)
   return;
 }
 
-/* FUN_0017212c @ 0x17212c (216 bytes) */
-int FUN_0017212c(param_1, param_2)
+/* SchedModel__uncountNode @ 0x17212c (216 bytes) */
+int SchedModel__uncountNode(param_1, param_2)
   int *param_1;
   int param_2;
 {
@@ -3481,15 +3539,15 @@ int ResourceModel__vslot11(this, param_2)
 {
   int iVar1;
   
-  ((int (*)())FUN_0017212c)(this,param_2);
+  ((int (*)())SchedModel__uncountNode)(this,param_2);
   (**(code **)(*this + 0x38))(this,param_2);
   iVar1 = (**(code **)(*this + 0xc))(this,*(undefined4 *)(param_2 + 0x38));
   if (iVar1 == 0) {
     (**(code **)(*this + 0x38))(this,param_2);
-    ((int (*)())FUN_00172078)(this,param_2);
+    ((int (*)())SchedModel__countIssuedNode)(this,param_2);
   }
   else {
-    ((int (*)())FUN_00172078)(this,param_2);
+    ((int (*)())SchedModel__countIssuedNode)(this,param_2);
   }
   return iVar1 != 0;
 }
@@ -3519,11 +3577,11 @@ int FUN_001725c4(inst, param_2, compiler)
   *(undefined4 *)(newInst + 0x94) = *(undefined4 *)(newInst + 0x14c);
   IRInst__setOperandSource(newInst,1,operandVReg,0,compiler);
   operandRecord = IRInst__getOperandRecord(inst,param_2);
-  FUN_000f3398(&local_38,*(undefined4 *)(operandRecord + 0x10));
+  SelectWord__readMask(&local_38,*(undefined4 *)(operandRecord + 0x10));
   IRInst__setOperandSource(inst,param_2,newInst,0,compiler);
-  FUN_000f31f8(&local_34,DAT_001b01b0,local_38);
+  SelectWord__selectWhereMasked(&local_34,DAT_001b01b0,local_38);
   *(undefined4 *)(newInst + 0x9c) = local_34;
-  FUN_000f3340(local_30,DAT_001b01ac,local_38);
+  SelectWord__maskUnused(local_30,DAT_001b01ac,local_38);
   operandRecord = IRInst__getOperandRecord(newInst,1);
   *(undefined4 *)(operandRecord + 0x10) = local_30[0];
   *(undefined4 *)(newInst + 0xc) = local_38;

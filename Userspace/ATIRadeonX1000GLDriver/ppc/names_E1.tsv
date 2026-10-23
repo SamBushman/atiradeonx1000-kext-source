@@ -1,0 +1,469 @@
+local	FUN_0016629c	iVar13	node	INFERRED	SchedNode cursor over the deferred-node list (scheduler word 0x27 = list at +0x94); node+0x38 is its instruction
+local	FUN_0016629c	param_1	scheduler	CONFIRMED	the Scheduler object (scheduler[2] resource model, scheduler[3] thread model)
+use	FUN_0016629c	piVar14	newAddInst	INFERRED	IRInst__create(0x12 = IrAddFloat) built from the presub node	^\s*piVar14\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_0016629c	piVar14	newAddInst	INFERRED	IRInst__create(0x12 = IrAddFloat) built from the presub node	^\s*if\ \(piVar14\ !=\ \(int\ \*\)0x0\)\ \{$	+2
+use	FUN_0016629c	piVar14	newAddInst	INFERRED	IRInst__create(0x12 = IrAddFloat) built from the presub node	^\s*if\ \(piVar14\ ==\ \(int\ \*\)0x0\)\ \{$	+2
+use	FUN_0016629c	piVar14	newAddInst	INFERRED	IRInst__create(0x12 = IrAddFloat) built from the presub node	^\s*iVar18\ =\ piVar14\[0x53\];$	+2
+use	FUN_0016629c	piVar14	newAddInst	INFERRED	IRInst__create(0x12 = IrAddFloat) built from the presub node	^\s*piVar14\[0x27\]\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0x10\);$	+2
+use	FUN_0016629c	piVar14	newAddInst	INFERRED	IRInst__create(0x12 = IrAddFloat) built from the presub node	^\s*piVar14\[3\]\ =\ local_48\[0\];$	+1
+use	FUN_0016629c	piVar14	newAddInst	INFERRED	IRInst__create(0x12 = IrAddFloat) built from the presub node	^\s*FUN_00106004\(piVar14,1,uVar3,0,\*param_1\);$	+1
+use	FUN_0016629c	piVar14	newAddInst	INFERRED	IRInst__create(0x12 = IrAddFloat) built from the presub node	^\s*iVar7\ =\ FUN_001054ec\(piVar14,1\);$	+1
+use	FUN_0016629c	piVar14	newAddInst	INFERRED	IRInst__create(0x12 = IrAddFloat) built from the presub node	^\s*FUN_00106004\(piVar14,2,uVar3,0,\*param_1\);$	+1
+use	FUN_0016629c	piVar14	newAddInst	INFERRED	IRInst__create(0x12 = IrAddFloat) built from the presub node	^\s*iVar7\ =\ FUN_001054ec\(piVar14,2\);$	+1
+use	FUN_0016629c	piVar14	newAddInst	INFERRED	IRInst__create(0x12 = IrAddFloat) built from the presub node	^\s*FUN_00103d50\(piVar14\ \+\ 0x2f,1,\(uint\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x88\)\ \+\ 8\)\ ==\ 0x9a\)\);$	+2
+use	FUN_0016629c	piVar14	newAddInst	INFERRED	IRInst__create(0x12 = IrAddFloat) built from the presub node	^\s*\*\(int\ \*\*\)\(iVar13\ \+\ 0x38\)\ =\ piVar14;$	+1
+use	FUN_0016629c	piVar14	newAddInst	INFERRED	IRInst__create(0x12 = IrAddFloat) built from the presub node	^\s*uVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\[2\]\ \+\ 0x4c\)\)\(\(int\ \*\)param_1\[2\],piVar14\);$	+1
+use	FUN_0016629c	piVar14	predEdge	INFERRED	edge element of the node's predecessor-edge vector (+0x44)	^\s*piVar14\ =\ \(int\ \*\)\*puVar4;$	+3
+use	FUN_0016629c	piVar14	predEdge	INFERRED	edge element of the node's predecessor-edge vector (+0x44)	^\s*piVar9\ =\ piVar14;$	+1
+use	FUN_0016629c	piVar14	predEdge	INFERRED	edge element of the node's predecessor-edge vector (+0x44)	^\s*piVar14\[7\]\ =\ iVar2;$	+1
+use	FUN_0016629c	piVar14	succEdge	INFERRED	edge element of the node's successor-edge vector (+0x40)	^\s*piVar14\ =\ \(int\ \*\)\(iVar2\ \+\ puVar17\[2\]\);$	+1
+use	FUN_0016629c	piVar14	succEdge	INFERRED	edge element of the node's successor-edge vector (+0x40)	^\s*piVar14\ =\ \(int\ \*\)FUN_0019423c\(puVar17,uVar15\);$	+1
+use	FUN_0016629c	piVar14	succEdge	INFERRED	edge element of the node's successor-edge vector (+0x40)	^\s*iVar7\ =\ \*piVar14;$@2	+1
+use	FUN_0016629c	piVar14	consumerPredEdge	INFERRED	edge element of the consumer's predecessor vector	^\s*piVar14\ =\ \(int\ \*\)\(iVar1\ \+\ puVar17\[2\]\);$	+1
+use	FUN_0016629c	piVar14	consumerPredEdge	INFERRED	edge element of the consumer's predecessor vector	^\s*piVar14\ =\ \(int\ \*\)FUN_0019423c\(puVar17,uVar16\);$	+1
+use	FUN_0016629c	piVar14	consumerPredEdge	INFERRED	edge element of the consumer's predecessor vector	^\s*piVar14\ =\ \(int\ \*\)\*piVar14;$	+4
+use	FUN_0016629c	piVar14	consumerPredEdge	INFERRED	edge element of the consumer's predecessor vector	^\s*if\ \(\*\(char\ \*\)\(piVar14\ \+\ 6\)\ !=\ '\\0'\)\ \{$	+1
+use	FUN_0016629c	piVar14	consumerPredEdge	INFERRED	edge element of the consumer's predecessor vector	^\s*piVar14\ =\ \(int\ \*\)\(\(int\)piVar14\ \+\ 1\);$	+1
+use	FUN_0016629c	iVar2	numSources	INFERRED	instruction slot 5 (getNumSources) of the node's instruction	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(iVar13\ \+\ 0x38\)\ \+\ 0x14\)\)\(\*\(int\ \*\*\)\(iVar13\ \+\ 0x38\)\);$	+2
+use	FUN_0016629c	iVar2	nextNode	INFERRED	node+8 saved before DList__unlink	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar13\ \+\ 8\);$	+1
+use	FUN_0016629c	iVar2	nextNode	INFERRED	node+8 saved before DList__unlink	^\s*iVar13\ =\ iVar2;$	+1
+use	FUN_0016629c	iVar2	counterCursor	INFERRED	walks the four per-component consumer counters node+0x48..	^\s*iVar2\ =\ iVar13;$	+1
+use	FUN_0016629c	iVar2	counterCursor	INFERRED	walks the four per-component consumer counters node+0x48..	^\s*if\ \(0\ <\ \*\(int\ \*\)\(iVar2\ \+\ 0x48\)\)\ \{$	+1
+use	FUN_0016629c	iVar2	counterCursor	INFERRED	walks the four per-component consumer counters node+0x48..	^\s*iVar2\ =\ iVar2\ \+\ 4;$	+1
+use	FUN_0016629c	iVar2	origInst	INFERRED	node+0x38: the instruction being rewritten	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar13\ \+\ 0x38\);$	+1
+use	FUN_0016629c	iVar2	origInst	INFERRED	node+0x38: the instruction being rewritten	^\s*iVar7\ =\ FUN_001054ec\(iVar2,0\);$	+1
+use	FUN_0016629c	iVar2	origInst	INFERRED	node+0x38: the instruction being rewritten	^\s*uVar3\ =\ FUN_00105594\(iVar2,1\);$	+1
+use	FUN_0016629c	iVar2	origInst	INFERRED	node+0x38: the instruction being rewritten	^\s*iVar7\ =\ FUN_001054ec\(iVar2,1\);$	+1
+use	FUN_0016629c	iVar2	origInst	INFERRED	node+0x38: the instruction being rewritten	^\s*uVar3\ =\ FUN_00105594\(iVar2,2\);$	+1
+use	FUN_0016629c	iVar2	origInst	INFERRED	node+0x38: the instruction being rewritten	^\s*iVar7\ =\ FUN_001054ec\(iVar2,2\);$	+1
+use	FUN_0016629c	iVar2	origInst	INFERRED	node+0x38: the instruction being rewritten	^\s*FUN_00103d50\(piVar14\ \+\ 0x2f,1,\(uint\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x88\)\ \+\ 8\)\ ==\ 0x9a\)\);$	+1
+use	FUN_0016629c	iVar2	canAddResult	INFERRED	resource model slot 3 (canAddInstruction)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\[2\]\ \+\ 0xc\)\)\(\(int\ \*\)param_1\[2\],piVar14\);$	+2
+use	FUN_0016629c	iVar2	modelSpecial	INFERRED	resource model slot 0x34(node)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\[2\]\ \+\ 0x34\)\)\(\(int\ \*\)param_1\[2\],iVar13\);$	+1
+use	FUN_0016629c	iVar2	modelSpecial	INFERRED	resource model slot 0x34(node)	^\s*if\ \(iVar2\ !=\ 0\)\ goto\ LAB_001664ec;$	+1
+use	FUN_0016629c	iVar2	counterCursor2	INFERRED	walks node+0x48.. again	^\s*iVar2\ =\ iVar7;$	+1
+use	FUN_0016629c	iVar2	counterCursor2	INFERRED	walks node+0x48.. again	^\s*\*\(int\ \*\)\(iVar2\ \+\ 0x48\)\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0x48\)\ \+\ 1;$	+1
+use	FUN_0016629c	iVar2	counterCursor2	INFERRED	walks node+0x48.. again	^\s*iVar2\ =\ iVar2\ \+\ 4;$@2	+1
+use	FUN_0016629c	iVar2	isFetchClass	INFERRED	thread model slot 0x20	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\[3\]\ \+\ 0x20\)\)$	+1
+use	FUN_0016629c	iVar2	isFetchClass	INFERRED	thread model slot 0x20	^\s*piVar14\[7\]\ =\ iVar2;$	+1
+use	FUN_0016629c	iVar2	edgeByteOffset	INFERRED	index*4 into the successor-edge vector	^\s*iVar2\ =\ uVar15\ \*\ 4;$	+1
+use	FUN_0016629c	iVar2	edgeByteOffset	INFERRED	index*4 into the successor-edge vector	^\s*piVar14\ =\ \(int\ \*\)\(iVar2\ \+\ puVar17\[2\]\);$	+1
+use	FUN_0016629c	iVar2	edgeByteOffset	INFERRED	index*4 into the successor-edge vector	^\s*iVar2\ =\ iVar2\ \+\ \-4;$	+1
+use	FUN_0016629c	iVar7	componentIndex	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*iVar7\ =\ 0;$	+1
+use	FUN_0016629c	iVar7	componentIndex	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*\*\(undefined1\ \*\)\(\(int\)local_58\ \+\ iVar7\)\ =\ 0;$	+1
+use	FUN_0016629c	iVar7	componentIndex	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*iVar7\ =\ iVar7\ \+\ 1;$	+1
+use	FUN_0016629c	iVar7	predEdgeValue	INFERRED	edge pointer loaded from a predecessor-vector element	^\s*iVar7\ =\ \*piVar14;$	+1
+use	FUN_0016629c	iVar7	predEdgeValue	INFERRED	edge pointer loaded from a predecessor-vector element	^\s*iVar2\ =\ iVar7;$	+1
+use	FUN_0016629c	iVar7	predEdgeValue	INFERRED	edge pointer loaded from a predecessor-vector element	^\s*\(\(int\ \*\)param_1\[3\],\*\(undefined4\ \*\)\(iVar7\ \+\ 0x38\)\);$	+1
+use	FUN_0016629c	iVar7	succEdgeValue	INFERRED	edge pointer loaded from a successor-vector element	^\s*iVar7\ =\ \*piVar14;$@2	+2
+use	FUN_0016629c	iVar7	succEdgeValue	INFERRED	edge pointer loaded from a successor-vector element	^\s*if\ \(\*\(int\ \*\)\(iVar7\ \+\ 8\)\ ==\ 0\)\ \{$	+3
+use	FUN_0016629c	iVar7	succEdgeValue	INFERRED	edge pointer loaded from a successor-vector element	^\s*if\ \(\(\(piVar14\[2\]\ ==\ 0\)\ \&\&\ \(piVar14\[4\]\ ==\ \*\(int\ \*\)\(iVar7\ \+\ 0x10\)\)\)\ \&\&$	+2
+use	FUN_0016629c	iVar18	componentsLeft	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*iVar18\ =\ 4;$	+1
+use	FUN_0016629c	iVar18	componentsLeft	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*iVar18\ =\ iVar18\ \+\ \-1;$	+2
+use	FUN_0016629c	iVar18	newInstId	INFERRED	new instruction +0x14c	^\s*iVar18\ =\ piVar14\[0x53\];$	+1
+use	FUN_0016629c	iVar18	newInstId	INFERRED	new instruction +0x14c	^\s*\*\(int\ \*\)\(iVar7\ \+\ 8\)\ =\ iVar18;$	+1
+use	FUN_0016629c	iVar18	componentsLeft2	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*iVar18\ =\ 4;$@2	+1
+use	FUN_0016629c	iVar18	componentsLeft2	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*iVar18\ =\ iVar18\ \+\ \-1;$@2	+2
+use	FUN_0016629c	iVar18	consumerNode	INFERRED	edge->to	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar7\ \+\ 4\);$	+2
+use	FUN_0016629c	iVar18	consumerNode	INFERRED	edge->to	^\s*FUN_00106004\(\*\(undefined4\ \*\)\(iVar18\ \+\ 0x38\),\*\(undefined4\ \*\)\(iVar7\ \+\ 0x10\),$	+3
+use	FUN_0016629c	iVar18	consumerNode	INFERRED	edge->to	^\s*FUN_0019401c\(iVar18\);$	+2
+use	FUN_0016629c	iVar18	consumerNode	INFERRED	edge->to	^\s*puVar17\ =\ \*\(uint\ \*\*\)\(iVar18\ \+\ 0x44\);$	+2
+use	FUN_0016629c	iVar18	consumerNode	INFERRED	edge->to	^\s*FUN_00194208\(\*\(undefined4\ \*\)\(iVar18\ \+\ 0x44\),uVar16\);$	+1
+use	FUN_0016629c	iVar18	consumerNode	INFERRED	edge->to	^\s*puVar17\ =\ \*\(uint\ \*\*\)\(iVar18\ \+\ 0x44\);$@2	+1
+use	FUN_0016629c	iVar18	consumerNode	INFERRED	edge->to	^\s*\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(iVar18\ \+\ 0x38\)\ \+\ 0x60\)\)\(\*\(int\ \*\*\)\(iVar18\ \+\ 0x38\)\);$	+1
+use	FUN_0016629c	iVar19	componentsLeft3	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*iVar19\ =\ 4;$	+1
+use	FUN_0016629c	iVar19	componentsLeft3	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*iVar19\ =\ iVar19\ \+\ \-1;$	+2
+use	FUN_0016629c	iVar1	consumerPendingPreds	INFERRED	consumer node +0x34	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar18\ \+\ 0x34\);$	+2
+use	FUN_0016629c	iVar1	consumerPendingPreds	INFERRED	consumer node +0x34	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar18\ \+\ 0x34\);$@2	+1
+use	FUN_0016629c	iVar1	consumerPendingPreds	INFERRED	consumer node +0x34	^\s*\*\(int\ \*\)\(iVar18\ \+\ 0x34\)\ =\ iVar1\ \+\ 1;$	+1
+use	FUN_0016629c	iVar1	edgeByteOffset2	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*iVar1\ =\ uVar16\ \*\ 4;$	+1
+use	FUN_0016629c	iVar1	edgeByteOffset2	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*piVar14\ =\ \(int\ \*\)\(iVar1\ \+\ puVar17\[2\]\);$	+1
+use	FUN_0016629c	iVar1	edgeByteOffset2	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*iVar1\ =\ iVar1\ \+\ \-4;$	+1
+use	FUN_0016629c	iVar8	producerCounterCursor	INFERRED	edge->from node, advanced by 4 per component	^\s*iVar8\ =\ \*piVar14;$	+1
+use	FUN_0016629c	iVar8	producerCounterCursor	INFERRED	edge->from node, advanced by 4 per component	^\s*\*\(int\ \*\)\(iVar8\ \+\ 0x48\)\ =\ \*\(int\ \*\)\(iVar8\ \+\ 0x48\)\ \+\ \-1;$	+1
+use	FUN_0016629c	iVar8	producerCounterCursor	INFERRED	edge->from node, advanced by 4 per component	^\s*iVar8\ =\ iVar8\ \+\ 4;$	+1
+local	FUN_0016629c	local_58	unconsumedMask	INFERRED	byte c = 1 when component c has no pending consumers (initialised 0x01010101)
+local	FUN_0016629c	local_48	writeMaskBytes	INFERRED	WriteMask__fromSelectWord of the destination select word
+use	FUN_0016629c	piVar9	edgeMaskCursor	INFERRED	byte cursor over the edge's per-component mask bytes	^\s*piVar9\ =\ piVar14;$	+1
+use	FUN_0016629c	piVar9	edgeMaskCursor	INFERRED	byte cursor over the edge's per-component mask bytes	^\s*if\ \(\*\(char\ \*\)\(piVar9\ \+\ 6\)\ !=\ '\\0'\)\ \{$	+1
+use	FUN_0016629c	piVar9	edgeMaskCursor	INFERRED	byte cursor over the edge's per-component mask bytes	^\s*piVar9\ =\ \(int\ \*\)\(\(int\)piVar9\ \+\ 1\);$	+1
+use	FUN_0016629c	puVar4	predEdgeRef	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*puVar4\ =\ \(undefined4\ \*\)\(uVar15\ \*\ 4\ \+\ puVar17\[2\]\);$	+1
+use	FUN_0016629c	puVar4	predEdgeRef	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar17,uVar15\);$	+1
+use	FUN_0016629c	puVar4	predEdgeRef	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*piVar14\ =\ \(int\ \*\)\*puVar4;$	+1
+use	FUN_0016629c	puVar17	predEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*puVar17\ =\ \*\(uint\ \*\*\)\(iVar13\ \+\ 0x44\);$	+2
+use	FUN_0016629c	puVar17	predEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*if\ \(uVar15\ <\ \*puVar17\)\ \{$	+2
+use	FUN_0016629c	puVar17	predEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*_memset\(uVar10\ \*\ 4\ \+\ puVar17\[2\],0,\(uVar15\ \-\ uVar10\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_0016629c	puVar17	predEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*puVar4\ =\ \(undefined4\ \*\)\(uVar15\ \*\ 4\ \+\ puVar17\[2\]\);$	+1
+use	FUN_0016629c	puVar17	predEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar17,uVar15\);$	+1
+use	FUN_0016629c	puVar17	predEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*puVar17\ =\ \*\(uint\ \*\*\)\(iVar13\ \+\ 0x44\);$@2	+1
+use	FUN_0016629c	puVar17	succEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*puVar17\ =\ \*\(uint\ \*\*\)\(iVar13\ \+\ 0x40\);$	+2
+use	FUN_0016629c	puVar17	succEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*if\ \(uVar15\ <\ \*puVar17\)\ \{$@2	+2
+use	FUN_0016629c	puVar17	succEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*_memset\(uVar5\ \*\ 4\ \+\ puVar17\[2\],0,\(uVar15\ \-\ uVar5\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_0016629c	puVar17	succEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*piVar14\ =\ \(int\ \*\)\(iVar2\ \+\ puVar17\[2\]\);$	+1
+use	FUN_0016629c	puVar17	succEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*piVar14\ =\ \(int\ \*\)FUN_0019423c\(puVar17,uVar15\);$	+1
+use	FUN_0016629c	puVar17	succEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*puVar17\ =\ \*\(uint\ \*\*\)\(iVar13\ \+\ 0x40\);$@2	+1
+use	FUN_0016629c	puVar17	consumerPredEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*puVar17\ =\ \*\(uint\ \*\*\)\(iVar18\ \+\ 0x44\);$	+1
+use	FUN_0016629c	puVar17	consumerPredEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*uVar5\ =\ puVar17\[1\];$@2	+1
+use	FUN_0016629c	puVar17	consumerPredEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*if\ \(uVar16\ <\ \*puVar17\)\ \{$	+2
+use	FUN_0016629c	puVar17	consumerPredEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*_memset\(uVar6\ \*\ 4\ \+\ puVar17\[2\],0,\(uVar16\ \-\ uVar6\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_0016629c	puVar17	consumerPredEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*piVar14\ =\ \(int\ \*\)\(iVar1\ \+\ puVar17\[2\]\);$	+1
+use	FUN_0016629c	puVar17	consumerPredEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*piVar14\ =\ \(int\ \*\)FUN_0019423c\(puVar17,uVar16\);$	+1
+use	FUN_0016629c	puVar17	consumerPredEdgeVector	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*puVar17\ =\ \*\(uint\ \*\*\)\(iVar18\ \+\ 0x44\);$@2	+1
+use	FUN_0016629c	uVar10	vectorLength	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*uVar10\ =\ puVar17\[1\];$	+3
+use	FUN_0016629c	uVar12	predCount	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*uVar12\ =\ puVar17\[1\];$	+2
+use	FUN_0016629c	uVar12	predCount	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*if\ \(uVar12\ ==\ uVar15\)\ break;$	+1
+use	FUN_0016629c	uVar12	succCount	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*uVar12\ =\ puVar17\[1\];$@2	+2
+use	FUN_0016629c	uVar12	succCount	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*if\ \(uVar12\ ==\ uVar10\)\ break;$	+1
+use	FUN_0016629c	uVar15	succReverseIndex	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*uVar15\ =\ uVar12\ \-\ 1;$	+3
+use	FUN_0016629c	uVar15	succReverseIndex	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*if\ \(uVar15\ <\ \*puVar17\)\ \{$@2	+1
+use	FUN_0016629c	uVar15	succReverseIndex	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*if\ \(uVar5\ <=\ uVar15\)\ \{$	+3
+use	FUN_0016629c	uVar15	succReverseIndex	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*piVar14\ =\ \(int\ \*\)FUN_0019423c\(puVar17,uVar15\);$	+1
+use	FUN_0016629c	uVar15	succReverseIndex	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*FUN_00194208\(\*\(undefined4\ \*\)\(iVar13\ \+\ 0x40\),uVar15\);$	+1
+use	FUN_0016629c	uVar15	succReverseIndex	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*uVar15\ =\ uVar15\ \-\ 1;$	+1
+use	FUN_0016629c	uVar16	consumerPredReverseIndex	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*uVar16\ =\ uVar5\ \-\ 1;$	+3
+use	FUN_0016629c	uVar16	consumerPredReverseIndex	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*if\ \(uVar16\ <\ \*puVar17\)\ \{$	+1
+use	FUN_0016629c	uVar16	consumerPredReverseIndex	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*if\ \(uVar6\ <=\ uVar16\)\ \{$	+3
+use	FUN_0016629c	uVar16	consumerPredReverseIndex	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*piVar14\ =\ \(int\ \*\)FUN_0019423c\(puVar17,uVar16\);$	+1
+use	FUN_0016629c	uVar16	consumerPredReverseIndex	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*FUN_00194208\(\*\(undefined4\ \*\)\(iVar18\ \+\ 0x44\),uVar16\);$	+1
+use	FUN_0016629c	uVar16	consumerPredReverseIndex	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*uVar16\ =\ uVar16\ \-\ 1;$	+1
+use	FUN_0016629c	uVar5	vectorLength2	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*uVar5\ =\ puVar17\[1\];$	+3
+use	FUN_0016629c	uVar5	consumerPredCount	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*uVar5\ =\ puVar17\[1\];$@2	+2
+use	FUN_0016629c	uVar5	consumerPredCount	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*if\ \(uVar5\ ==\ uVar11\)\ break;$	+1
+use	FUN_0016629c	uVar6	vectorLength3	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*uVar6\ =\ puVar17\[1\];$	+3
+use	FUN_0016629c	uVar3	origSrc1Select	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0x10\);$	+1
+use	FUN_0016629c	uVar3	origSrc1Select	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ 0x10\)\ =\ uVar3;$	+1
+use	FUN_0016629c	uVar3	origSrc2Select	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0x10\);$@2	+1
+use	FUN_0016629c	uVar3	origSrc2Select	INFERRED	read from the body of FUN_0016629c (presub node rewritten as an add)	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ 0x10\)\ =\ uVar3;$@2	+1
+use	FUN_0016629c	uVar3	newResourceClass	INFERRED	resource model slot 0x4c (resource class)	^\s*uVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\[2\]\ \+\ 0x4c\)\)\(\(int\ \*\)param_1\[2\],piVar14\);$	+2
+use	FUN_0016629c	uVar3	specialFlag	INFERRED	stored at node+0x5c	^\s*uVar3\ =\ 1;$	+1
+use	FUN_0016629c	uVar3	specialFlag	INFERRED	stored at node+0x5c	^\s*uVar3\ =\ 0;$	+1
+use	FUN_0016629c	uVar3	specialFlag	INFERRED	stored at node+0x5c	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0x5c\)\ =\ uVar3;$	+1
+use	Scheduler__scheduleBlock	bVar1	continueLoop	INFERRED	do-while condition of the two-iteration loop that clears the loop-index load slots scheduler[0x62], [0x63]	^\s*bVar1\ =\ iVar2\ !=\ 1;$	+1
+use	Scheduler__scheduleBlock	bVar1	continueLoop	INFERRED	do-while condition of the two-iteration loop that clears the loop-index load slots scheduler[0x62], [0x63]	^\s*\}\ while\ \(bVar1\);$	+1
+use	Scheduler__scheduleBlock	iVar10	byteOffset	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar10\ =\ iVar2\ \*\ 4;$	+1
+use	Scheduler__scheduleBlock	iVar10	byteOffset	INFERRED	role read from Scheduler__scheduleBlock	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ piVar3\[0x54\]\)\ =\ 0;$	+1
+use	Scheduler__scheduleBlock	iVar10	componentIndex	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar10\ =\ 0;$	+1
+use	Scheduler__scheduleBlock	iVar10	componentIndex	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar6\ =\ iVar10\ \*\ 4;$	+2
+use	Scheduler__scheduleBlock	iVar10	node	INFERRED	SchedNode loaded from the external-node vector scheduler[5]	^\s*iVar10\ =\ \*piVar3;$	+2
+use	Scheduler__scheduleBlock	iVar10	node	INFERRED	SchedNode loaded from the external-node vector scheduler[5]	^\s*if\ \(\*\(int\ \*\)\(iVar10\ \+\ 0x60\)\ !=\ 0\)\ \{$	+4
+use	Scheduler__scheduleBlock	iVar10	node	INFERRED	SchedNode loaded from the external-node vector scheduler[5]	^\s*\*\(int\ \*\)\(piVar5\[0x4d\]\ \+\ iVar2\ \*\ 4\)\ =\ iVar10;$	+1
+use	Scheduler__scheduleBlock	iVar10	node	INFERRED	SchedNode loaded from the external-node vector scheduler[5]	^\s*if\ \(\*\(int\ \*\)\(iVar10\ \+\ 0x60\)\ !=\ 0\)\ \{$@2	+3
+use	Scheduler__scheduleBlock	iVar10	highWaterVector	INFERRED	scheduler[0x67]: hardware register high-water mark	^\s*iVar10\ =\ param_1\[0x67\];$	+1
+use	Scheduler__scheduleBlock	iVar10	highWaterVector	INFERRED	scheduler[0x67]: hardware register high-water mark	^\s*iVar10\ =\ iVar2\ \-\ iVar6;$	+1
+use	Scheduler__scheduleBlock	iVar10	highWaterVector	INFERRED	scheduler[0x67]: hardware register high-water mark	^\s*param_1\[0x67\]\ =\ iVar10;$	+1
+use	Scheduler__scheduleBlock	iVar10	highWaterScalar	INFERRED	scheduler[0x66]	^\s*iVar10\ =\ param_1\[0x66\];$	+1
+use	Scheduler__scheduleBlock	iVar10	highWaterScalar	INFERRED	scheduler[0x66]	^\s*iVar10\ =\ iVar2;$	+1
+use	Scheduler__scheduleBlock	iVar10	highWaterScalar	INFERRED	scheduler[0x66]	^\s*param_1\[0x66\]\ =\ iVar10;$	+1
+use	Scheduler__scheduleBlock	iVar10	nextListNode	INFERRED	node+8 of the cursor in the ready-seeding walk	^\s*iVar10\ =\ \*\(int\ \*\)\(local_38\ \+\ 8\);$	+1
+use	Scheduler__scheduleBlock	iVar10	nextListNode	INFERRED	node+8 of the cursor in the ready-seeding walk	^\s*while\ \(iVar6\ =\ iVar10,\ iVar6\ !=\ 0\)\ \{$	+1
+use	Scheduler__scheduleBlock	iVar10	nextListNode	INFERRED	node+8 of the cursor in the ready-seeding walk	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\);$	+1
+use	Scheduler__scheduleBlock	iVar10	isFetchNode	INFERRED	thread model slot 0x20	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\[3\]\ \+\ 0x20\)\)$	+1
+use	Scheduler__scheduleBlock	iVar10	isFetchNode	INFERRED	thread model slot 0x20	^\s*if\ \(\(iVar10\ ==\ 0\)\ \&\&$	+3
+use	Scheduler__scheduleBlock	iVar10	maxHeight	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0xc\);$	+1
+use	Scheduler__scheduleBlock	iVar10	maxHeight	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar10\ =\ param_1\[0x47\];$	+1
+use	Scheduler__scheduleBlock	iVar10	maxHeight	INFERRED	role read from Scheduler__scheduleBlock	^\s*param_1\[0x47\]\ =\ iVar10;$	+1
+use	Scheduler__scheduleBlock	iVar10	maxHeight2	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0xc\);$@2	+1
+use	Scheduler__scheduleBlock	iVar10	maxHeight2	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar10\ =\ param_1\[0x48\];$	+1
+use	Scheduler__scheduleBlock	iVar10	maxHeight2	INFERRED	role read from Scheduler__scheduleBlock	^\s*param_1\[0x48\]\ =\ iVar10;$	+1
+use	Scheduler__scheduleBlock	iVar10	groupNextNode	INFERRED	role read from Scheduler__scheduleBlock	^\s*for\ \(iVar10\ =\ \*\(int\ \*\)\(param_1\[0x40\]\ \+\ 8\);\ iVar10\ !=\ 0;\ iVar10\ =\ \*\(int\ \*\)\(iVar10\ \+\ 8\)\)\ \{$	+1
+use	Scheduler__scheduleBlock	iVar10	groupNextNode	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar2\ =\ iVar10;$	+1
+use	Scheduler__scheduleBlock	iVar10	byteOffset2	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar10\ =\ 0;$@2	+1
+use	Scheduler__scheduleBlock	iVar10	byteOffset2	INFERRED	role read from Scheduler__scheduleBlock	^\s*local_44\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 8\)\ \+\ iVar10\);$	+1
+use	Scheduler__scheduleBlock	iVar10	byteOffset2	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar10\ =\ iVar10\ \+\ 4;$	+1
+use	Scheduler__scheduleBlock	iVar16	componentsLeft	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar16\ =\ 4;$	+1
+use	Scheduler__scheduleBlock	iVar16	componentsLeft	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar16\ =\ iVar16\ \+\ \-1;$	+2
+use	Scheduler__scheduleBlock	iVar2	bitSetWordsLeft	INFERRED	length of the live-out bit set scheduler[0x4c] being cleared	^\s*iVar2\ =\ \*piVar3;$	+4
+use	Scheduler__scheduleBlock	iVar2	bitSetWordsLeft	INFERRED	length of the live-out bit set scheduler[0x4c] being cleared	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+use	Scheduler__scheduleBlock	iVar2	hwRegCount	INFERRED	scheduler[0x51]: hardware registers of the target	^\s*iVar2\ =\ param_1\[0x51\];$	+2
+use	Scheduler__scheduleBlock	iVar2	hwRegCount	INFERRED	scheduler[0x51]: hardware registers of the target	^\s*iVar2\ =\ param_1\[0x51\];$@2	+1
+use	Scheduler__scheduleBlock	iVar2	hwRegCount	INFERRED	scheduler[0x51]: hardware registers of the target	^\s*\}\ while\ \(\(int\)uVar8\ <\ iVar2\);$	+1
+use	Scheduler__scheduleBlock	iVar2	hwRegCount	INFERRED	scheduler[0x51]: hardware registers of the target	^\s*if\ \(0\ <\ iVar2\)\ \{$@2	+1
+use	Scheduler__scheduleBlock	iVar2	hwRegCount	INFERRED	scheduler[0x51]: hardware registers of the target	^\s*iVar2\ =\ param_1\[0x51\];$@3	+1
+use	Scheduler__scheduleBlock	iVar2	regIndex	INFERRED	walks the per-register arrays	^\s*iVar2\ =\ 0;$	+1
+use	Scheduler__scheduleBlock	iVar2	regIndex	INFERRED	walks the per-register arrays	^\s*iVar10\ =\ iVar2\ \*\ 4;$	+2
+use	Scheduler__scheduleBlock	iVar2	regIndex	INFERRED	walks the per-register arrays	^\s*\}\ while\ \(iVar2\ <\ param_1\[0x51\]\);$	+1
+use	Scheduler__scheduleBlock	iVar2	fileRegCount	INFERRED	hardware description slot 0x13c: register count of the second file	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x13c\)\)\(piVar5,\*param_1\);$	+2
+use	Scheduler__scheduleBlock	iVar2	fileRegCount	INFERRED	hardware description slot 0x13c: register count of the second file	^\s*iVar2\ =\ iVar2\ \+\ \-1;$@3	+2
+use	Scheduler__scheduleBlock	iVar2	destRegNumber	INFERRED	instruction +0x94: hardware register written	^\s*iVar2\ =\ piVar3\[0x25\];$	+1
+use	Scheduler__scheduleBlock	iVar2	destRegNumber	INFERRED	instruction +0x94: hardware register written	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(iVar10\ \+\ 0x60\)\ \+\ 4\)\ =\ iVar2;$	+1
+use	Scheduler__scheduleBlock	iVar2	destRegNumber	INFERRED	instruction +0x94: hardware register written	^\s*\*\(int\ \*\)\(piVar5\[0x4d\]\ \+\ iVar2\ \*\ 4\)\ =\ iVar10;$	+1
+use	Scheduler__scheduleBlock	iVar2	destRegNumber	INFERRED	instruction +0x94: hardware register written	^\s*\*\(undefined4\ \*\)\(piVar5\[0x54\]\ \+\ iVar2\ \*\ 4\)\ =\ 0x7fffffff;$	+1
+use	Scheduler__scheduleBlock	iVar2	destRegNumber	INFERRED	instruction +0x94: hardware register written	^\s*if\ \(param_1\[0x67\]\ <\ iVar2\ \-\ iVar6\)\ \{$	+2
+use	Scheduler__scheduleBlock	iVar2	destRegNumber	INFERRED	instruction +0x94: hardware register written	^\s*if\ \(param_1\[0x66\]\ <\ iVar2\)\ \{$	+2
+use	Scheduler__scheduleBlock	iVar2	destRegNumber	INFERRED	instruction +0x94: hardware register written	^\s*if\ \(iVar2\ <=\ param_1\[0x68\]\)\ \{$	+2
+use	Scheduler__scheduleBlock	iVar2	destRegNumber	INFERRED	instruction +0x94: hardware register written	^\s*param_1\[0x68\]\ =\ iVar2;$	+1
+use	Scheduler__scheduleBlock	iVar2	componentsLeft2	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar2\ =\ 4;$@2	+1
+use	Scheduler__scheduleBlock	iVar2	componentsLeft2	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar2\ =\ iVar2\ \+\ \-1;$@4	+2
+use	Scheduler__scheduleBlock	iVar2	loopLoadIndex	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar2\ =\ 0;$@2	+1
+use	Scheduler__scheduleBlock	iVar2	loopLoadIndex	INFERRED	role read from Scheduler__scheduleBlock	^\s*bVar1\ =\ iVar2\ !=\ 1;$	+1
+use	Scheduler__scheduleBlock	iVar2	loopLoadIndex	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar2\ =\ iVar2\ \+\ 1;$@2	+1
+use	Scheduler__scheduleBlock	iVar2	optionEnabled	INFERRED	Compiler__isOptionEnabled(compiler, 0x47)	^\s*iVar2\ =\ FUN_000e07dc\(\*param_1,0x47\);$	+2
+use	Scheduler__scheduleBlock	iVar2	sentinelNode	INFERRED	cursor of the temporary seeding list	^\s*iVar2\ =\ local_38;$	+1
+use	Scheduler__scheduleBlock	iVar2	sentinelNode	INFERRED	cursor of the temporary seeding list	^\s*FUN_0019401c\(iVar2\);$	+2
+use	Scheduler__scheduleBlock	iVar2	sentinelNode	INFERRED	cursor of the temporary seeding list	^\s*\(\(int\ \*\)param_1\[3\],\*\(undefined4\ \*\)\(iVar2\ \+\ 0x38\)\);$	+6
+use	Scheduler__scheduleBlock	iVar2	sentinelNode	INFERRED	cursor of the temporary seeding list	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0xc\);$@2	+2
+use	Scheduler__scheduleBlock	iVar2	sentinelNode	INFERRED	cursor of the temporary seeding list	^\s*iVar2\ =\ iVar6;$	+1
+use	Scheduler__scheduleBlock	iVar2	fetchListEmpty	INFERRED	DList__isEmpty(scheduler + 0xd)	^\s*iVar2\ =\ FUN_00193f08\(piVar3\);$	+2
+use	Scheduler__scheduleBlock	iVar2	isEntryOrExit	INFERRED	IRInst slot 0x34	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x34\)\)\(piVar15\);$	+2
+use	Scheduler__scheduleBlock	iVar2	needsNoNode	INFERRED	IRInst__needsNoSchedulerNode	^\s*iVar2\ =\ FUN_00164df4\(piVar15\);$	+2
+use	Scheduler__scheduleBlock	iVar2	readyListEmpty	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar2\ =\ FUN_00193f08\(piVar5\);$	+4
+use	Scheduler__scheduleBlock	iVar2	commitResult	INFERRED	Scheduler__commitBundle	^\s*iVar2\ =\ FUN_0016c640\(param_1\);$	+2
+use	Scheduler__scheduleBlock	iVar2	groupListEmpty	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar2\ =\ FUN_00193f08\(param_1\ \+\ 0x3e\);$	+4
+use	Scheduler__scheduleBlock	iVar2	groupNode	INFERRED	first node of the deferred group list scheduler[0x40]	^\s*iVar2\ =\ param_1\[0x40\];$	+1
+use	Scheduler__scheduleBlock	iVar2	groupNode	INFERRED	first node of the deferred group list scheduler[0x40]	^\s*FUN_0019401c\(iVar2\);$@2	+4
+use	Scheduler__scheduleBlock	iVar2	cycleResult	INFERRED	Scheduler__scheduleCycle	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00170990\)\(param_1\);$	+2
+use	Scheduler__scheduleBlock	iVar2	wordsLeft	INFERRED	clears the 5-word issue bundle record	^\s*iVar2\ =\ 5;$	+1
+use	Scheduler__scheduleBlock	iVar2	wordsLeft	INFERRED	clears the 5-word issue bundle record	^\s*iVar2\ =\ iVar2\ \+\ \-1;$@5	+2
+use	Scheduler__scheduleBlock	iVar2	wordsLeft2	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar2\ =\ 5;$@2	+1
+use	Scheduler__scheduleBlock	iVar2	wordsLeft2	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar2\ =\ iVar2\ \+\ \-1;$@6	+2
+use	Scheduler__scheduleBlock	iVar2	hasBlockFlags	INFERRED	thread model slot 0x1c	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\[3\]\ \+\ 0x1c\)\)\(\(int\ \*\)param_1\[3\]\);$	+2
+use	Scheduler__scheduleBlock	iVar2	successorVector	INFERRED	block+0xd0	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\ \+\ 0xd0\);$	+1
+use	Scheduler__scheduleBlock	iVar2	successorVector	INFERRED	block+0xd0	^\s*for\ \(uVar8\ =\ 1;\ uVar8\ <=\ \*\(uint\ \*\)\(iVar2\ \+\ 4\);\ uVar8\ =\ uVar8\ \+\ 1\)\ \{$	+2
+use	Scheduler__scheduleBlock	iVar6	byteOffset3	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar6\ =\ iVar10\ \*\ 4;$	+1
+use	Scheduler__scheduleBlock	iVar6	byteOffset3	INFERRED	role read from Scheduler__scheduleBlock	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ piVar3\[0x58\]\)\ =\ 0;$	+1
+use	Scheduler__scheduleBlock	iVar6	byteOffset3	INFERRED	role read from Scheduler__scheduleBlock	^\s*if\ \(\(\(\(piVar3\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar6\ =\ FUN_00126760\(piVar3\[0x26\]\),\ iVar6\ !=\ 0\)\)\ \&\&$	+4
+use	Scheduler__scheduleBlock	iVar6	byteOffset3	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar6\ =\ 0;$	+1
+use	Scheduler__scheduleBlock	iVar6	byteOffset3	INFERRED	role read from Scheduler__scheduleBlock	^\s*if\ \(\*\(char\ \*\)\(\(int\)\&local_48\ \+\ iVar6\)\ !=\ '\\0'\)\ \{$	+1
+use	Scheduler__scheduleBlock	iVar6	byteOffset3	INFERRED	role read from Scheduler__scheduleBlock	^\s*\*\(int\ \*\)\(iVar6\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar10\ \+\ 0x60\)\ \+\ 0x18\)\ =\ iVar10;$	+1
+use	Scheduler__scheduleBlock	iVar6	byteOffset3	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	Scheduler__scheduleBlock	iVar6	byteOffset3	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x138\)\)\(piVar3,\*param_1\);$	+1
+use	Scheduler__scheduleBlock	iVar6	byteOffset3	INFERRED	role read from Scheduler__scheduleBlock	^\s*if\ \(param_1\[0x67\]\ <\ iVar2\ \-\ iVar6\)\ \{$	+2
+use	Scheduler__scheduleBlock	iVar6	byteOffset3	INFERRED	role read from Scheduler__scheduleBlock	^\s*while\ \(iVar6\ =\ iVar10,\ iVar6\ !=\ 0\)\ \{$	+1
+use	Scheduler__scheduleBlock	iVar6	byteOffset3	INFERRED	role read from Scheduler__scheduleBlock	^\s*iVar2\ =\ iVar6;$	+2
+use	Scheduler__scheduleBlock	local_38	seedListFirstNode	INFERRED	temp list sentinel auStack_40 + 0xc	^\s*local_38\ =\ \(int\)\(auStack_40\ \+\ 0xc\);$	+1
+use	Scheduler__scheduleBlock	local_38	seedListFirstNode	INFERRED	temp list sentinel auStack_40 + 0xc	^\s*iVar10\ =\ \*\(int\ \*\)\(local_38\ \+\ 8\);$	+2
+use	Scheduler__scheduleBlock	local_44	zero	INFERRED	role read from Scheduler__scheduleBlock	^\s*local_44\ =\ 0;$	+1
+use	Scheduler__scheduleBlock	local_44	successorBlock	INFERRED	element of the successor vector, flag +0xdc set	^\s*local_44\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 8\)\ \+\ iVar10\);$	+3
+use	Scheduler__scheduleBlock	local_48	writeMaskBytes	INFERRED	inst+0xc: destination write mask (bytes), or the group's mask	^\s*local_48\ =\ piVar3\[3\];$	+1
+use	Scheduler__scheduleBlock	local_48	writeMaskBytes	INFERRED	inst+0xc: destination write mask (bytes), or the group's mask	^\s*local_48\ =\ \*\*\(int\ \*\*\)\(iVar10\ \+\ 0x60\);$	+1
+use	Scheduler__scheduleBlock	local_48	writeMaskBytes	INFERRED	inst+0xc: destination write mask (bytes), or the group's mask	^\s*if\ \(\*\(char\ \*\)\(\(int\)\&local_48\ \+\ iVar6\)\ !=\ '\\0'\)\ \{$	+1
+use	Scheduler__scheduleBlock	piVar11	lastScheduledInst	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar11\ =\ \(int\ \*\)0x0;$	+1
+use	Scheduler__scheduleBlock	piVar11	lastScheduledInst	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar11\ =\ piVar15;$	+1
+use	Scheduler__scheduleBlock	piVar11	lastScheduledInst	INFERRED	role read from Scheduler__scheduleBlock	^\s*if\ \(piVar11\ !=\ \(int\ \*\)0x0\)\ \{$	+2
+use	Scheduler__scheduleBlock	piVar13	nextInst	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar13\ =\ piVar5;$	+1
+use	Scheduler__scheduleBlock	piVar13	nextInst	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar5\ =\ \(int\ \*\)piVar13\[2\];$	+2
+use	Scheduler__scheduleBlock	piVar15	inst	INFERRED	walks the block's instruction list from scheduler[4]+0x98	^\s*piVar15\ =\ \*\(int\ \*\*\)\(param_1\[4\]\ \+\ 0x98\);$	+1
+use	Scheduler__scheduleBlock	piVar15	inst	INFERRED	walks the block's instruction list from scheduler[4]+0x98	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar15\ \+\ 0x34\)\)\(piVar15\);$	+3
+use	Scheduler__scheduleBlock	piVar15	inst	INFERRED	walks the block's instruction list from scheduler[4]+0x98	^\s*FUN_0019401c\(piVar15\);$	+2
+use	Scheduler__scheduleBlock	piVar15	inst	INFERRED	walks the block's instruction list from scheduler[4]+0x98	^\s*piVar15\[5\]\ =\ piVar15\[5\]\ \|\ 4;$	+2
+use	Scheduler__scheduleBlock	piVar15	inst	INFERRED	walks the block's instruction list from scheduler[4]+0x98	^\s*piVar15\[5\]\ =\ piVar15\[5\]\ \&\ 0xfffffffb;$	+1
+use	Scheduler__scheduleBlock	piVar15	inst	INFERRED	walks the block's instruction list from scheduler[4]+0x98	^\s*piVar15\ =\ piVar13;$	+1
+use	Scheduler__scheduleBlock	piVar3	liveOutSet	INFERRED	scheduler[0x4c]	^\s*piVar3\ =\ \(int\ \*\)param_1\[0x4c\];$	+2
+use	Scheduler__scheduleBlock	piVar3	liveOutSet	INFERRED	scheduler[0x4c]	^\s*piVar3\[2\]\ =\ 0;$	+2
+use	Scheduler__scheduleBlock	piVar3	clearCursor	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar3\ =\ param_1;$	+1
+use	Scheduler__scheduleBlock	piVar3	clearCursor	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar5\ =\ piVar3\ \+\ 0x4d;$	+2
+use	Scheduler__scheduleBlock	piVar3	clearCursor2	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar3\ =\ param_1;$@2	+1
+use	Scheduler__scheduleBlock	piVar3	clearCursor2	INFERRED	role read from Scheduler__scheduleBlock	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ piVar3\[0x54\]\)\ =\ 0;$	+1
+use	Scheduler__scheduleBlock	piVar3	clearCursor2	INFERRED	role read from Scheduler__scheduleBlock	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ piVar3\[0x58\]\)\ =\ 0;$	+1
+use	Scheduler__scheduleBlock	piVar3	clearCursor2	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar3\ =\ piVar3\ \+\ 1;$@3	+2
+use	Scheduler__scheduleBlock	piVar3	nodeRef	INFERRED	element ref of the external-node vector	^\s*piVar3\ =\ \(int\ \*\)\(uVar12\ \*\ 4\ \+\ puVar14\[2\]\);$	+1
+use	Scheduler__scheduleBlock	piVar3	nodeRef	INFERRED	element ref of the external-node vector	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar14,uVar12\);$	+1
+use	Scheduler__scheduleBlock	piVar3	nodeRef	INFERRED	element ref of the external-node vector	^\s*iVar10\ =\ \*piVar3;$	+1
+use	Scheduler__scheduleBlock	piVar3	nodeInst	INFERRED	node+0x38	^\s*piVar3\ =\ \*\(int\ \*\*\)\(iVar10\ \+\ 0x38\);$	+7
+use	Scheduler__scheduleBlock	piVar3	nodeInst	INFERRED	node+0x38	^\s*if\ \(piVar3\[0x26\]\ ==\ 1\)\ \{$	+1
+use	Scheduler__scheduleBlock	piVar3	hwDescription	INFERRED	*(compiler + 0x30c)	^\s*piVar3\ =\ \*\(int\ \*\*\)\(\*param_1\ \+\ 0x30c\);$	+2
+use	Scheduler__scheduleBlock	piVar3	clearCursor3	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar3\ =\ param_1;$@3	+1
+use	Scheduler__scheduleBlock	piVar3	clearCursor3	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar3\[0x5c\]\ =\ 0;$	+2
+use	Scheduler__scheduleBlock	piVar3	loopLoadCursor	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar3\ =\ param_1;$@4	+1
+use	Scheduler__scheduleBlock	piVar3	loopLoadCursor	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar3\[0x62\]\ =\ 0;$	+1
+use	Scheduler__scheduleBlock	piVar3	loopLoadCursor	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar3\ =\ piVar3\ \+\ 1;$@5	+1
+use	Scheduler__scheduleBlock	piVar3	nodeRef2	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar3\ =\ \(int\ \*\)\(uVar12\ \*\ 4\ \+\ puVar14\[2\]\);$@2	+1
+use	Scheduler__scheduleBlock	piVar3	nodeRef2	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar14,uVar12\);$@2	+1
+use	Scheduler__scheduleBlock	piVar3	nodeRef2	INFERRED	role read from Scheduler__scheduleBlock	^\s*if\ \(\(\*piVar3\ !=\ 0\)\ \&\&\ \(\*\(int\ \*\)\(\*piVar3\ \+\ 0x34\)\ ==\ 0\)\)\ \{$	+2
+use	Scheduler__scheduleBlock	piVar3	fetchList	INFERRED	scheduler + 0xd	^\s*piVar3\ =\ param_1\ \+\ 0xd;$	+1
+use	Scheduler__scheduleBlock	piVar3	fetchList	INFERRED	scheduler + 0xd	^\s*iVar2\ =\ FUN_00193f08\(piVar3\);$	+1
+use	Scheduler__scheduleBlock	piVar3	fetchList	INFERRED	scheduler + 0xd	^\s*if\ \(\(\(\(iVar2\ ==\ 0\)\ \|\|\ \(iVar2\ =\ FUN_00193f08\(piVar3\),\ iVar2\ ==\ 0\)\)\ \|\|$	+3
+use	Scheduler__scheduleBlock	piVar3	fetchList	INFERRED	scheduler + 0xd	^\s*if\ \(\(\(iVar2\ ==\ 0\)\ \&\&\ \(iVar2\ =\ FUN_00193f08\(piVar5\),\ iVar2\ !=\ 0\)\)\ \&\&$	+3
+use	Scheduler__scheduleBlock	piVar5	setCursor	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar5\ =\ piVar3\ \+\ 0x4d;$	+1
+use	Scheduler__scheduleBlock	piVar5	setCursor	INFERRED	role read from Scheduler__scheduleBlock	^\s*\*\(undefined4\ \*\)\(uVar8\ \*\ 4\ \+\ \*piVar5\)\ =\ 0;$	+1
+use	Scheduler__scheduleBlock	piVar5	hwDescription2	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar5\ =\ \*\(int\ \*\*\)\(\*param_1\ \+\ 0x30c\);$	+2
+use	Scheduler__scheduleBlock	piVar5	counterCursor	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar5\ =\ param_1;$	+1
+use	Scheduler__scheduleBlock	piVar5	counterCursor	INFERRED	role read from Scheduler__scheduleBlock	^\s*\*\(int\ \*\)\(piVar5\[0x4d\]\ \+\ iVar2\ \*\ 4\)\ =\ iVar10;$	+3
+use	Scheduler__scheduleBlock	piVar5	counterCursor	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar5\ =\ piVar5\ \+\ 1;$	+1
+use	Scheduler__scheduleBlock	piVar5	nextInstNode	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar5\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(param_1\[4\]\ \+\ 0x98\)\)\[2\];$	+2
+use	Scheduler__scheduleBlock	piVar5	nextInstNode	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar13\ =\ piVar5;$	+1
+use	Scheduler__scheduleBlock	piVar5	nextInstNode	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar5\ =\ \(int\ \*\)piVar13\[2\];$	+1
+use	Scheduler__scheduleBlock	piVar5	nextInstNode	INFERRED	role read from Scheduler__scheduleBlock	^\s*\}\ while\ \(piVar5\ !=\ \(int\ \*\)0x0\);$	+1
+use	Scheduler__scheduleBlock	piVar5	aluReadyList	INFERRED	scheduler + 0x13	^\s*piVar5\ =\ param_1\ \+\ 0x13;$	+2
+use	Scheduler__scheduleBlock	piVar5	aluReadyList	INFERRED	scheduler + 0x13	^\s*if\ \(\(\(iVar2\ ==\ 0\)\ \&\&\ \(iVar2\ =\ FUN_00193f08\(piVar5\),\ iVar2\ !=\ 0\)\)\ \&\&$	+3
+use	Scheduler__scheduleBlock	piVar5	aluReadyList	INFERRED	scheduler + 0x13	^\s*FUN_00193f64\(piVar5,iVar2\);$	+1
+use	Scheduler__scheduleBlock	puVar14	externalNodeVector	INFERRED	scheduler[5]	^\s*puVar14\ =\ \(uint\ \*\)param_1\[5\];$	+2
+use	Scheduler__scheduleBlock	puVar14	externalNodeVector	INFERRED	scheduler[5]	^\s*if\ \(uVar12\ <\ \*puVar14\)\ \{$	+1
+use	Scheduler__scheduleBlock	puVar14	externalNodeVector	INFERRED	scheduler[5]	^\s*_memset\(uVar8\ \*\ 4\ \+\ puVar14\[2\],0,\(uVar12\ \-\ uVar8\)\ \*\ 4\ \+\ 4\);$	+2
+use	Scheduler__scheduleBlock	puVar14	externalNodeVector	INFERRED	scheduler[5]	^\s*piVar3\ =\ \(int\ \*\)\(uVar12\ \*\ 4\ \+\ puVar14\[2\]\);$	+1
+use	Scheduler__scheduleBlock	puVar14	externalNodeVector	INFERRED	scheduler[5]	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar14,uVar12\);$	+1
+use	Scheduler__scheduleBlock	puVar14	externalNodeVector	INFERRED	scheduler[5]	^\s*puVar14\ =\ \(uint\ \*\)param_1\[5\];$@2	+2
+use	Scheduler__scheduleBlock	puVar14	allNodeVector	INFERRED	scheduler[6]	^\s*puVar14\ =\ \(uint\ \*\)param_1\[6\];$	+2
+use	Scheduler__scheduleBlock	puVar14	allNodeVector	INFERRED	scheduler[6]	^\s*if\ \(uVar12\ <\ \*puVar14\)\ \{$@2	+2
+use	Scheduler__scheduleBlock	puVar14	allNodeVector	INFERRED	scheduler[6]	^\s*_memset\(uVar9\ \*\ 4\ \+\ puVar14\[2\],0,\(uVar12\ \-\ uVar9\)\ \*\ 4\ \+\ 4\);$	+2
+use	Scheduler__scheduleBlock	puVar14	allNodeVector	INFERRED	scheduler[6]	^\s*piVar3\ =\ \(int\ \*\)\(uVar12\ \*\ 4\ \+\ puVar14\[2\]\);$@2	+1
+use	Scheduler__scheduleBlock	puVar14	allNodeVector	INFERRED	scheduler[6]	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar14,uVar12\);$@2	+1
+use	Scheduler__scheduleBlock	puVar14	allNodeVector	INFERRED	scheduler[6]	^\s*puVar14\ =\ \(uint\ \*\)param_1\[6\];$@2	+1
+use	Scheduler__scheduleBlock	puVar4	clearCursor4	INFERRED	role read from Scheduler__scheduleBlock	^\s*puVar4\ =\ puVar7;$	+1
+use	Scheduler__scheduleBlock	puVar4	clearCursor4	INFERRED	role read from Scheduler__scheduleBlock	^\s*\*puVar4\ =\ 0;$	+2
+use	Scheduler__scheduleBlock	puVar4	clearCursor5	INFERRED	role read from Scheduler__scheduleBlock	^\s*puVar4\ =\ puVar7;$@2	+1
+use	Scheduler__scheduleBlock	puVar4	clearCursor5	INFERRED	role read from Scheduler__scheduleBlock	^\s*\*puVar4\ =\ 0;$@2	+2
+use	Scheduler__scheduleBlock	puVar7	bundleRecord	INFERRED	scheduler[0xc]	^\s*puVar7\ =\ \(undefined4\ \*\)param_1\[0xc\];$	+1
+use	Scheduler__scheduleBlock	puVar7	bundleRecord	INFERRED	scheduler[0xc]	^\s*puVar4\ =\ puVar7;$	+1
+use	Scheduler__scheduleBlock	puVar7	bundleRecord	INFERRED	scheduler[0xc]	^\s*puVar7\ =\ \(undefined4\ \*\)param_1\[0xc\];$@2	+1
+use	Scheduler__scheduleBlock	puVar7	bundleRecord	INFERRED	scheduler[0xc]	^\s*puVar4\ =\ puVar7;$@2	+1
+use	Scheduler__scheduleBlock	puVar7	bundleRecord	INFERRED	scheduler[0xc]	^\s*FUN_00193fa4\(puVar7\ \+\ 5\);$	+1
+use	Scheduler__scheduleBlock	uVar12	bitMask	INFERRED	role read from Scheduler__scheduleBlock	^\s*uVar12\ =\ uVar8\ \&\ 0x1f;$	+4
+use	Scheduler__scheduleBlock	uVar12	vectorIndex	INFERRED	role read from Scheduler__scheduleBlock	^\s*uVar12\ =\ 0;$	+1
+use	Scheduler__scheduleBlock	uVar12	vectorIndex	INFERRED	role read from Scheduler__scheduleBlock	^\s*if\ \(uVar12\ <\ \*puVar14\)\ \{$	+4
+use	Scheduler__scheduleBlock	uVar12	vectorIndex	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar3\ =\ \(int\ \*\)\(uVar12\ \*\ 4\ \+\ puVar14\[2\]\);$	+1
+use	Scheduler__scheduleBlock	uVar12	vectorIndex	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar14,uVar12\);$	+1
+use	Scheduler__scheduleBlock	uVar12	vectorIndex	INFERRED	role read from Scheduler__scheduleBlock	^\s*uVar12\ =\ uVar12\ \+\ 1;$	+1
+use	Scheduler__scheduleBlock	uVar12	vectorIndex	INFERRED	role read from Scheduler__scheduleBlock	^\s*\}\ while\ \(uVar12\ <\ uVar8\);$	+1
+use	Scheduler__scheduleBlock	uVar12	vectorIndex2	INFERRED	role read from Scheduler__scheduleBlock	^\s*uVar12\ =\ 0;$@2	+1
+use	Scheduler__scheduleBlock	uVar12	vectorIndex2	INFERRED	role read from Scheduler__scheduleBlock	^\s*if\ \(uVar12\ <\ \*puVar14\)\ \{$@2	+1
+use	Scheduler__scheduleBlock	uVar12	vectorIndex2	INFERRED	role read from Scheduler__scheduleBlock	^\s*if\ \(uVar9\ <=\ uVar12\)\ \{$	+3
+use	Scheduler__scheduleBlock	uVar12	vectorIndex2	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar3\ =\ \(int\ \*\)\(uVar12\ \*\ 4\ \+\ puVar14\[2\]\);$@2	+1
+use	Scheduler__scheduleBlock	uVar12	vectorIndex2	INFERRED	role read from Scheduler__scheduleBlock	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar14,uVar12\);$@2	+1
+use	Scheduler__scheduleBlock	uVar12	vectorIndex2	INFERRED	role read from Scheduler__scheduleBlock	^\s*uVar12\ =\ uVar12\ \+\ 1;$@2	+2
+use	Scheduler__scheduleBlock	uVar8	regIndexU	INFERRED	role read from Scheduler__scheduleBlock	^\s*uVar8\ =\ 0;$	+1
+use	Scheduler__scheduleBlock	uVar8	regIndexU	INFERRED	role read from Scheduler__scheduleBlock	^\s*uVar9\ =\ uVar8\ >>\ 3\ \&\ 0x1ffffffc;$	+2
+use	Scheduler__scheduleBlock	uVar8	regIndexU	INFERRED	role read from Scheduler__scheduleBlock	^\s*\*\(undefined4\ \*\)\(uVar8\ \*\ 4\ \+\ \*piVar5\)\ =\ 0;$	+1
+use	Scheduler__scheduleBlock	uVar8	regIndexU	INFERRED	role read from Scheduler__scheduleBlock	^\s*uVar8\ =\ uVar8\ \+\ 1;$	+2
+use	Scheduler__scheduleBlock	uVar8	vectorLength	INFERRED	role read from Scheduler__scheduleBlock	^\s*uVar8\ =\ puVar14\[1\];$	+2
+use	Scheduler__scheduleBlock	uVar8	vectorLength	INFERRED	role read from Scheduler__scheduleBlock	^\s*if\ \(uVar8\ <=\ uVar12\)\ \{$	+2
+use	Scheduler__scheduleBlock	uVar8	vectorLength	INFERRED	role read from Scheduler__scheduleBlock	^\s*uVar8\ =\ puVar14\[1\];$@2	+2
+use	Scheduler__scheduleBlock	uVar8	vectorLength2	INFERRED	role read from Scheduler__scheduleBlock	^\s*uVar8\ =\ puVar14\[1\];$@3	+2
+use	Scheduler__scheduleBlock	uVar8	vectorLength2	INFERRED	role read from Scheduler__scheduleBlock	^\s*if\ \(uVar8\ ==\ uVar12\)\ break;$	+1
+use	Scheduler__scheduleBlock	uVar8	successorIndex	INFERRED	role read from Scheduler__scheduleBlock	^\s*for\ \(uVar8\ =\ 1;\ uVar8\ <=\ \*\(uint\ \*\)\(iVar2\ \+\ 4\);\ uVar8\ =\ uVar8\ \+\ 1\)\ \{$	+1
+use	Scheduler__scheduleBlock	uVar9	wordByteOffset	INFERRED	role read from Scheduler__scheduleBlock	^\s*uVar9\ =\ uVar8\ >>\ 3\ \&\ 0x1ffffffc;$	+1
+use	Scheduler__scheduleBlock	uVar9	wordByteOffset	INFERRED	role read from Scheduler__scheduleBlock	^\s*if\ \(\(\(\*\(uint\ \*\)\(uVar9\ \+\ \*\(int\ \*\)\(param_1\[1\]\ \+\ 0x430\)\ \+\ 8\)\ >>\ uVar12\ \&\ 1\)\ !=\ 0\)\ \&\&$	+3
+use	Scheduler__scheduleBlock	uVar9	vectorLength3	INFERRED	role read from Scheduler__scheduleBlock	^\s*uVar9\ =\ puVar14\[1\];$	+3
+local	R300SchedModel__vslot13	param_2	node	INFERRED	SchedNode: node+0x38 instruction, node+0x40 successor edge vector, node+0x60 group record
+use	R300SchedModel__vslot13	iVar14	inst	INFERRED	node+0x38	^\s*iVar14\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x38\);$	+5
+use	R300SchedModel__vslot13	iVar14	inst	INFERRED	node+0x38	^\s*iVar4\ =\ FUN_001054ec\(iVar14,0\);$	+1
+use	R300SchedModel__vslot13	iVar14	inst	INFERRED	node+0x38	^\s*iVar3\ =\ FUN_001054ec\(iVar14,0\);$	+1
+use	R300SchedModel__vslot13	iVar14	inst	INFERRED	node+0x38	^\s*iVar3\ =\ FUN_001054ec\(iVar14,0\);$@2	+1
+use	R300SchedModel__vslot13	iVar14	inst	INFERRED	node+0x38	^\s*if\ \(\(\(\(piVar7\[5\]\ \&\ 0x200U\)\ ==\ 0\)\ \|\|$	+4
+use	R300SchedModel__vslot13	iVar14	undoInst	INFERRED	instruction popped from the undo vector	^\s*iVar14\ =\ \*piVar7;$	+1
+use	R300SchedModel__vslot13	iVar14	undoInst	INFERRED	instruction popped from the undo vector	^\s*if\ \(iVar14\ ==\ 0\)\ \{$	+1
+use	R300SchedModel__vslot13	iVar14	undoInst	INFERRED	instruction popped from the undo vector	^\s*iVar3\ =\ FUN_001054ec\(iVar3,iVar14\);$	+1
+use	R300SchedModel__vslot13	bVar1	notLastComponent	INFERRED	read from the body of R300SchedModel__vslot13	^\s*bVar1\ =\ iVar8\ !=\ 3;$	+1
+use	R300SchedModel__vslot13	bVar1	notLastComponent	INFERRED	read from the body of R300SchedModel__vslot13	^\s*\}\ while\ \(bVar1\);$	+1
+use	R300SchedModel__vslot13	bVar2	changedAny	INFERRED	a consumer select byte inside [selectLow, selectHigh] was rewritten	^\s*bVar2\ =\ false;$	+1
+use	R300SchedModel__vslot13	bVar2	changedAny	INFERRED	a consumer select byte inside [selectLow, selectHigh] was rewritten	^\s*bVar2\ =\ true;$	+1
+use	R300SchedModel__vslot13	bVar2	changedAny	INFERRED	a consumer select byte inside [selectLow, selectHigh] was rewritten	^\s*if\ \(bVar2\)\ \{$	+1
+local	R300SchedModel__vslot13	iVar13	edgeByteOffset	INFERRED	read from the body of R300SchedModel__vslot13
+use	R300SchedModel__vslot13	iVar16	edge	INFERRED	successor edge element	^\s*iVar16\ =\ \*piVar7;$	+2
+use	R300SchedModel__vslot13	iVar16	edge	INFERRED	successor edge element	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar16\ \+\ 0x10\);$	+2
+use	R300SchedModel__vslot13	iVar16	edge	INFERRED	successor edge element	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar16\ \+\ 0x10\);$@2	+1
+use	R300SchedModel__vslot13	iVar16	edge	INFERRED	successor edge element	^\s*iVar9\ =\ FUN_001054ec\(piVar7,\*\(undefined4\ \*\)\(iVar16\ \+\ 0x10\)\);$	+1
+use	R300SchedModel__vslot13	iVar16	edge	INFERRED	successor edge element	^\s*\(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x88\)\)\(piVar7,\*\(undefined4\ \*\)\(iVar16\ \+\ 0x10\),iVar8,uVar5\);$	+1
+use	R300SchedModel__vslot13	iVar16	edge	INFERRED	successor edge element	^\s*uVar17\ =\ \*\(undefined4\ \*\)\(iVar16\ \+\ 0x10\);$	+1
+use	R300SchedModel__vslot13	iVar16	consumerNumSources	INFERRED	consumer IRInst slot 5	^\s*iVar16\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x14\)\)\(piVar7\);$	+2
+use	R300SchedModel__vslot13	iVar16	undoCountOffset	INFERRED	read from the body of R300SchedModel__vslot13	^\s*iVar16\ =\ local_64\ \*\ 4;$	+2
+use	R300SchedModel__vslot13	iVar16	undoCountOffset	INFERRED	read from the body of R300SchedModel__vslot13	^\s*puVar10\ =\ \(undefined4\ \*\)\(iVar16\ \+\ local_60\);$	+1
+use	R300SchedModel__vslot13	iVar16	undoCountOffset2	INFERRED	read from the body of R300SchedModel__vslot13	^\s*iVar16\ =\ local_54\ \*\ 4;$	+2
+use	R300SchedModel__vslot13	iVar16	undoCountOffset2	INFERRED	read from the body of R300SchedModel__vslot13	^\s*puVar10\ =\ \(undefined4\ \*\)\(iVar16\ \+\ local_50\);$	+1
+use	R300SchedModel__vslot13	iVar16	consumerIsFetchOrExport	INFERRED	consumer slot 0x5c	^\s*iVar16\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x5c\)\)\(piVar7\);$	+4
+use	R300SchedModel__vslot13	iVar3	traitsClass	INFERRED	per-opcode traits record +0x34 (target class) of the node's opcode	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x30\)\)\(param_1,iVar14\);$	+4
+use	R300SchedModel__vslot13	iVar3	traitsClass	INFERRED	per-opcode traits record +0x34 (target class) of the node's opcode	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
+use	R300SchedModel__vslot13	iVar3	traitsClass	INFERRED	per-opcode traits record +0x34 (target class) of the node's opcode	^\s*else\ if\ \(iVar3\ \-\ 1U\ <\ 2\)\ \{$	+1
+use	R300SchedModel__vslot13	iVar3	traitsClass	INFERRED	per-opcode traits record +0x34 (target class) of the node's opcode	^\s*else\ if\ \(\(iVar3\ ==\ 5\)\ \&\&\ \(\*\(int\ \*\)\(param_2\ \+\ 0x60\)\ ==\ 0\)\)\ \{$	+1
+use	R300SchedModel__vslot13	iVar3	selectHigh	INFERRED	highest select value to rewrite	^\s*iVar3\ =\ 3;$	+1
+use	R300SchedModel__vslot13	iVar3	selectHigh	INFERRED	highest select value to rewrite	^\s*iVar3\ =\ 3;$@2	+1
+use	R300SchedModel__vslot13	iVar3	selectHigh	INFERRED	highest select value to rewrite	^\s*iVar3\ =\ 3;$@3	+1
+use	R300SchedModel__vslot13	iVar3	selectHigh	INFERRED	highest select value to rewrite	^\s*iVar3\ =\ 2;$	+1
+use	R300SchedModel__vslot13	iVar3	selectHigh	INFERRED	highest select value to rewrite	^\s*iVar3\ =\ iVar4;$	+1
+use	R300SchedModel__vslot13	iVar3	selectHigh	INFERRED	highest select value to rewrite	^\s*if\ \(\(iVar4\ <=\ \(int\)uVar6\)\ \&\&\ \(\(int\)uVar6\ <=\ iVar3\)\)\ \{$	+1
+use	R300SchedModel__vslot13	iVar4	writtenComponentCount	INFERRED	FUN_000f3a30: components written by the node	^\s*if\ \(\(iVar3\ ==\ 0\)\ \|\|$	+3
+use	R300SchedModel__vslot13	iVar4	selectLow	INFERRED	lowest select value to rewrite	^\s*iVar4\ =\ 3;$	+1
+use	R300SchedModel__vslot13	iVar4	selectLow	INFERRED	lowest select value to rewrite	^\s*iVar4\ =\ 3;$@2	+1
+use	R300SchedModel__vslot13	iVar4	selectLow	INFERRED	lowest select value to rewrite	^\s*iVar4\ =\ 3;$@3	+1
+use	R300SchedModel__vslot13	iVar4	selectLow	INFERRED	lowest select value to rewrite	^\s*iVar4\ =\ 0;$	+1
+use	R300SchedModel__vslot13	iVar4	selectLow	INFERRED	lowest select value to rewrite	^\s*iVar4\ =\ FUN_000f30d4\(\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\);$	+2
+use	R300SchedModel__vslot13	iVar4	selectLow	INFERRED	lowest select value to rewrite	^\s*if\ \(\(iVar4\ <=\ \(int\)uVar6\)\ \&\&\ \(\(int\)uVar6\ <=\ iVar3\)\)\ \{$	+1
+use	R300SchedModel__vslot13	uVar5	failedFlag	INFERRED	return value 0/1	^\s*uVar5\ =\ 0;$	+1
+use	R300SchedModel__vslot13	uVar5	failedFlag	INFERRED	return value 0/1	^\s*uVar5\ =\ 0;$@3	+1
+use	R300SchedModel__vslot13	uVar5	failedFlag	INFERRED	return value 0/1	^\s*uVar5\ =\ 1;$	+1
+use	R300SchedModel__vslot13	uVar5	failedFlag	INFERRED	return value 0/1	^\s*return\ uVar5;$	+1
+use	R300SchedModel__vslot13	uVar5	replacementSelect	INFERRED	value the select bytes in [selectLow, selectHigh] are replaced by	^\s*uVar5\ =\ FUN_000f3108\(\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\);$	+1
+use	R300SchedModel__vslot13	uVar5	replacementSelect	INFERRED	value the select bytes in [selectLow, selectHigh] are replaced by	^\s*uVar5\ =\ 0;$@2	+1
+use	R300SchedModel__vslot13	uVar5	replacementSelect	INFERRED	value the select bytes in [selectLow, selectHigh] are replaced by	^\s*uVar5\ =\ 0xffffffff;$	+1
+use	R300SchedModel__vslot13	uVar5	replacementSelect	INFERRED	value the select bytes in [selectLow, selectHigh] are replaced by	^\s*uVar5\ =\ 3;$	+1
+use	R300SchedModel__vslot13	uVar5	replacementSelect	INFERRED	value the select bytes in [selectLow, selectHigh] are replaced by	^\s*uVar5\ =\ 3;$@2	+1
+use	R300SchedModel__vslot13	uVar5	replacementSelect	INFERRED	value the select bytes in [selectLow, selectHigh] are replaced by	^\s*\(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x88\)\)\(piVar7,\*\(undefined4\ \*\)\(iVar16\ \+\ 0x10\),iVar8,uVar5\);$	+1
+local	R300SchedModel__vslot13	local_78	undoInstCapacity	INFERRED	read from the body of R300SchedModel__vslot13
+local	R300SchedModel__vslot13	local_74	undoInstCount	INFERRED	read from the body of R300SchedModel__vslot13
+local	R300SchedModel__vslot13	local_70	undoInstData	INFERRED	read from the body of R300SchedModel__vslot13
+local	R300SchedModel__vslot13	local_6c	undoInstArena	INFERRED	read from the body of R300SchedModel__vslot13
+local	R300SchedModel__vslot13	local_68	undoOperandCapacity	INFERRED	read from the body of R300SchedModel__vslot13
+local	R300SchedModel__vslot13	local_64	undoOperandCount	INFERRED	read from the body of R300SchedModel__vslot13
+local	R300SchedModel__vslot13	local_60	undoOperandData	INFERRED	read from the body of R300SchedModel__vslot13
+local	R300SchedModel__vslot13	local_5c	undoOperandArena	INFERRED	read from the body of R300SchedModel__vslot13
+local	R300SchedModel__vslot13	local_58	undoSelectCapacity	INFERRED	read from the body of R300SchedModel__vslot13
+local	R300SchedModel__vslot13	local_54	undoSelectCount	INFERRED	read from the body of R300SchedModel__vslot13
+local	R300SchedModel__vslot13	local_50	undoSelectData	INFERRED	read from the body of R300SchedModel__vslot13
+local	R300SchedModel__vslot13	local_4c	undoSelectArena	INFERRED	read from the body of R300SchedModel__vslot13
+use	R300SchedModel__vslot13	piVar7	edgeRef	INFERRED	read from the body of R300SchedModel__vslot13	^\s*piVar7\ =\ \(int\ \*\)\(iVar13\ \+\ puVar19\[2\]\);$	+1
+use	R300SchedModel__vslot13	piVar7	edgeRef	INFERRED	read from the body of R300SchedModel__vslot13	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar15\);$	+1
+use	R300SchedModel__vslot13	piVar7	edgeRef	INFERRED	read from the body of R300SchedModel__vslot13	^\s*iVar16\ =\ \*piVar7;$	+1
+use	R300SchedModel__vslot13	piVar7	consumerInst	INFERRED	edge->to->inst	^\s*piVar7\ =\ \(int\ \*\)\(iVar13\ \+\ puVar19\[2\]\);$@2	+1
+use	R300SchedModel__vslot13	piVar7	consumerInst	INFERRED	edge->to->inst	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar15\);$@2	+1
+use	R300SchedModel__vslot13	piVar7	consumerInst	INFERRED	edge->to->inst	^\s*piVar7\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(\*piVar7\ \+\ 4\)\ \+\ 0x38\);$	+6
+use	R300SchedModel__vslot13	piVar7	consumerInst	INFERRED	edge->to->inst	^\s*iVar16\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x14\)\)\(piVar7\);$	+1
+use	R300SchedModel__vslot13	piVar7	consumerInst	INFERRED	edge->to->inst	^\s*iVar16\ =\ FUN_00105594\(piVar7,1\);$	+2
+use	R300SchedModel__vslot13	piVar7	consumerInst	INFERRED	edge->to->inst	^\s*iVar8\ =\ \*\(int\ \*\)\(piVar7\[0x22\]\ \+\ 8\);$	+1
+use	R300SchedModel__vslot13	piVar7	consumerInst	INFERRED	edge->to->inst	^\s*a0\ =\ \(int\ \*\)FUN_00105594\(piVar7,iVar8\);$	+1
+use	R300SchedModel__vslot13	piVar7	consumerInst	INFERRED	edge->to->inst	^\s*iVar8\ =\ FUN_001054ec\(piVar7,iVar8\);$	+1
+use	R300SchedModel__vslot13	piVar7	consumerInst	INFERRED	edge->to->inst	^\s*iVar9\ =\ FUN_001054ec\(piVar7,\*\(undefined4\ \*\)\(iVar16\ \+\ 0x10\)\);$	+1
+use	R300SchedModel__vslot13	piVar7	consumerInst	INFERRED	edge->to->inst	^\s*\(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x88\)\)\(piVar7,\*\(undefined4\ \*\)\(iVar16\ \+\ 0x10\),iVar8,uVar5\);$	+1
+use	R300SchedModel__vslot13	piVar7	consumerInst	INFERRED	edge->to->inst	^\s*\*puVar10\ =\ piVar7;$	+1
+use	R300SchedModel__vslot13	piVar7	consumerInst	INFERRED	edge->to->inst	^\s*iVar16\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x5c\)\)\(piVar7\);$	+4
+use	R300SchedModel__vslot13	piVar7	undoInstRef	INFERRED	read from the body of R300SchedModel__vslot13	^\s*piVar7\ =\ \(int\ \*\)0x0;$	+1
+use	R300SchedModel__vslot13	piVar7	undoInstRef	INFERRED	read from the body of R300SchedModel__vslot13	^\s*piVar7\ =\ \(int\ \*\)\(uVar11\ \*\ 4\ \+\ local_70\);$	+1
+use	R300SchedModel__vslot13	piVar7	undoInstRef	INFERRED	read from the body of R300SchedModel__vslot13	^\s*iVar3\ =\ \*piVar7;$	+1
+use	R300SchedModel__vslot13	piVar7	undoOperandRef	INFERRED	read from the body of R300SchedModel__vslot13	^\s*piVar7\ =\ \(int\ \*\)0x0;$@2	+1
+use	R300SchedModel__vslot13	piVar7	undoOperandRef	INFERRED	read from the body of R300SchedModel__vslot13	^\s*piVar7\ =\ \(int\ \*\)\(uVar11\ \*\ 4\ \+\ local_60\);$	+1
+use	R300SchedModel__vslot13	piVar7	undoOperandRef	INFERRED	read from the body of R300SchedModel__vslot13	^\s*iVar14\ =\ \*piVar7;$	+1
+use	R300SchedModel__vslot13	puVar10	undoInstSlot	INFERRED	read from the body of R300SchedModel__vslot13	^\s*puVar10\ =\ \(undefined4\ \*\)\(iVar8\ \+\ local_70\);$	+1
+use	R300SchedModel__vslot13	puVar10	undoInstSlot	INFERRED	read from the body of R300SchedModel__vslot13	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_78,local_74\);$	+1
+use	R300SchedModel__vslot13	puVar10	undoInstSlot	INFERRED	read from the body of R300SchedModel__vslot13	^\s*\*puVar10\ =\ piVar7;$	+1
+use	R300SchedModel__vslot13	puVar10	undoOperandSlot	INFERRED	read from the body of R300SchedModel__vslot13	^\s*puVar10\ =\ \(undefined4\ \*\)\(iVar16\ \+\ local_60\);$	+1
+use	R300SchedModel__vslot13	puVar10	undoOperandSlot	INFERRED	read from the body of R300SchedModel__vslot13	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_68,local_64\);$	+1
+use	R300SchedModel__vslot13	puVar10	undoOperandSlot	INFERRED	read from the body of R300SchedModel__vslot13	^\s*\*puVar10\ =\ uVar17;$	+1
+use	R300SchedModel__vslot13	puVar10	undoSelectSlot	INFERRED	read from the body of R300SchedModel__vslot13	^\s*puVar10\ =\ \(undefined4\ \*\)\(iVar16\ \+\ local_50\);$	+1
+use	R300SchedModel__vslot13	puVar10	undoSelectSlot	INFERRED	read from the body of R300SchedModel__vslot13	^\s*puVar10\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_58,local_54\);$	+1
+use	R300SchedModel__vslot13	puVar10	undoSelectSlot	INFERRED	read from the body of R300SchedModel__vslot13	^\s*\*puVar10\ =\ uVar18;$	+1
+use	R300SchedModel__vslot13	puVar10	undoSelectRef	INFERRED	read from the body of R300SchedModel__vslot13	^\s*puVar10\ =\ \(undefined4\ \*\)0x0;$	+1
+use	R300SchedModel__vslot13	puVar10	undoSelectRef	INFERRED	read from the body of R300SchedModel__vslot13	^\s*puVar10\ =\ \(undefined4\ \*\)\(uVar11\ \*\ 4\ \+\ local_50\);$	+1
+use	R300SchedModel__vslot13	puVar10	undoSelectRef	INFERRED	read from the body of R300SchedModel__vslot13	^\s*uVar18\ =\ \*puVar10;$	+1
+use	R300SchedModel__vslot13	puVar19	successorVector	INFERRED	node+0x40	^\s*puVar19\ =\ \*\(uint\ \*\*\)\(param_2\ \+\ 0x40\);$	+2
+use	R300SchedModel__vslot13	puVar19	successorVector	INFERRED	node+0x40	^\s*if\ \(uVar15\ <\ \*puVar19\)\ \{$	+2
+use	R300SchedModel__vslot13	puVar19	successorVector	INFERRED	node+0x40	^\s*_memset\(uVar6\ \*\ 4\ \+\ puVar19\[2\],0,\(uVar15\ \-\ uVar6\)\ \*\ 4\ \+\ 4\);$	+2
+use	R300SchedModel__vslot13	puVar19	successorVector	INFERRED	node+0x40	^\s*piVar7\ =\ \(int\ \*\)\(iVar13\ \+\ puVar19\[2\]\);$	+1
+use	R300SchedModel__vslot13	puVar19	successorVector	INFERRED	node+0x40	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar15\);$	+1
+use	R300SchedModel__vslot13	puVar19	successorVector	INFERRED	node+0x40	^\s*puVar19\ =\ \*\(uint\ \*\*\)\(param_2\ \+\ 0x40\);$@3	+1
+use	R300SchedModel__vslot13	puVar19	successorVector2	INFERRED	read from the body of R300SchedModel__vslot13	^\s*puVar19\ =\ \*\(uint\ \*\*\)\(param_2\ \+\ 0x40\);$@2	+3
+use	R300SchedModel__vslot13	puVar19	successorVector2	INFERRED	read from the body of R300SchedModel__vslot13	^\s*_memset\(uVar6\ \*\ 4\ \+\ puVar19\[2\],0,\(uVar15\ \-\ uVar6\)\ \*\ 4\ \+\ 4\);$@2	+2
+use	R300SchedModel__vslot13	puVar19	successorVector2	INFERRED	read from the body of R300SchedModel__vslot13	^\s*piVar7\ =\ \(int\ \*\)\(iVar13\ \+\ puVar19\[2\]\);$@2	+1
+use	R300SchedModel__vslot13	puVar19	successorVector2	INFERRED	read from the body of R300SchedModel__vslot13	^\s*piVar7\ =\ \(int\ \*\)FUN_0019423c\(puVar19,uVar15\);$@2	+1
+use	R300SchedModel__vslot13	uVar11	successorCount	INFERRED	read from the body of R300SchedModel__vslot13	^\s*uVar11\ =\ puVar19\[1\];$	+2
+use	R300SchedModel__vslot13	uVar11	successorCount	INFERRED	read from the body of R300SchedModel__vslot13	^\s*if\ \(uVar11\ ==\ uVar15\)\ break;$	+1
+use	R300SchedModel__vslot13	uVar11	undoInstIndex	INFERRED	read from the body of R300SchedModel__vslot13	^\s*uVar11\ =\ local_74\ \-\ 1;$	+1
+use	R300SchedModel__vslot13	uVar11	undoInstIndex	INFERRED	read from the body of R300SchedModel__vslot13	^\s*if\ \(uVar11\ <\ local_74\)\ \{$	+2
+use	R300SchedModel__vslot13	uVar11	undoInstIndex	INFERRED	read from the body of R300SchedModel__vslot13	^\s*FUN_00194208\(\&local_78,uVar11\);$	+1
+use	R300SchedModel__vslot13	uVar11	undoOperandIndex	INFERRED	read from the body of R300SchedModel__vslot13	^\s*uVar11\ =\ local_64\ \-\ 1;$	+3
+use	R300SchedModel__vslot13	uVar11	undoOperandIndex	INFERRED	read from the body of R300SchedModel__vslot13	^\s*FUN_00194208\(\&local_68,uVar11\);$	+1
+use	R300SchedModel__vslot13	uVar11	undoSelectIndex	INFERRED	read from the body of R300SchedModel__vslot13	^\s*uVar11\ =\ local_54\ \-\ 1;$	+3
+use	R300SchedModel__vslot13	uVar11	undoSelectIndex	INFERRED	read from the body of R300SchedModel__vslot13	^\s*FUN_00194208\(\&local_58,uVar11\);$	+1
+use	R300SchedModel__vslot13	uVar17	undoOperandIndex2	INFERRED	operand index of the rewritten source	^\s*uVar17\ =\ \*\(undefined4\ \*\)\(iVar16\ \+\ 0x10\);$	+1
+use	R300SchedModel__vslot13	uVar17	undoOperandIndex2	INFERRED	operand index of the rewritten source	^\s*\*puVar10\ =\ uVar17;$	+1
+use	R300SchedModel__vslot13	uVar18	oldSelectWord	INFERRED	the consumer operand's select word before the rewrite	^\s*uVar18\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x10\);$	+1
+use	R300SchedModel__vslot13	uVar18	oldSelectWord	INFERRED	the consumer operand's select word before the rewrite	^\s*\*puVar10\ =\ uVar18;$	+1
+use	R300SchedModel__vslot13	uVar18	undoSelectWord	INFERRED	read from the body of R300SchedModel__vslot13	^\s*uVar18\ =\ \*puVar10;$	+1
+use	R300SchedModel__vslot13	uVar18	undoSelectWord	INFERRED	read from the body of R300SchedModel__vslot13	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x9c\)\ =\ uVar18;$	+1
+use	R300SchedModel__vslot13	uVar18	undoSelectWord	INFERRED	read from the body of R300SchedModel__vslot13	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar18;$	+1
+use	R300SchedModel__vslot13	uVar6	vectorLength	INFERRED	read from the body of R300SchedModel__vslot13	^\s*uVar6\ =\ puVar19\[1\];$	+3
+use	R300SchedModel__vslot13	uVar6	vectorLength2	INFERRED	read from the body of R300SchedModel__vslot13	^\s*uVar6\ =\ puVar19\[1\];$@2	+3
+use	R300SchedModel__vslot13	uVar6	selectByte	INFERRED	one select byte of the consumer operand	^\s*uVar6\ =\ \(uint\)\*\(byte\ \*\)\(iVar8\ \+\ iVar9\ \+\ 0x10\);$	+2
+use	R300SchedModel__vslot13	uVar6	undoInstLength	INFERRED	read from the body of R300SchedModel__vslot13	^\s*uVar6\ =\ local_74;$	+1
+use	R300SchedModel__vslot13	uVar6	undoInstLength	INFERRED	read from the body of R300SchedModel__vslot13	^\s*local_74\ =\ uVar6\ \+\ 1;$	+1
+use	R300SchedModel__vslot13	uVar6	undoOperandLength	INFERRED	read from the body of R300SchedModel__vslot13	^\s*uVar6\ =\ local_64;$	+1
+use	R300SchedModel__vslot13	uVar6	undoOperandLength	INFERRED	read from the body of R300SchedModel__vslot13	^\s*local_64\ =\ uVar6\ \+\ 1;$	+1
+use	R300SchedModel__vslot13	uVar6	undoSelectLength	INFERRED	read from the body of R300SchedModel__vslot13	^\s*uVar6\ =\ local_54;$	+1
+use	R300SchedModel__vslot13	uVar6	undoSelectLength	INFERRED	read from the body of R300SchedModel__vslot13	^\s*local_54\ =\ uVar6\ \+\ 1;$	+1

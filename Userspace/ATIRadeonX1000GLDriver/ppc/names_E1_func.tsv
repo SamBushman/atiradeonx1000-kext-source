@@ -1,0 +1,42 @@
+# round 4 fork E1
+func	FUN_00164a74	Scheduler__updateFetchBatchMode	INFERRED	called at the end of Scheduler__scheduleBlock's cycle bookkeeping with (fetch nodes at top height, max fetch depth); updates scheduler[0x46] (fetch-batch mode flag) from the ready lists and the cycle counters
+func	FUN_00164df4	IRInst__needsNoSchedulerNode	INFERRED	true for phi instructions (slot 31), pseudo instructions without sources (flag 0x8000, category != 1) and opcode 164 (IrLoad); Scheduler__scheduleBlock creates no SchedNode for such instructions and the operand walkers skip them
+func	FUN_00164fc0	IRInst__writesTrackedRegister	INFERRED	has a destination and (opcode category 1, or flag 0x40 of inst+0x14, or class +0x98 in 0x20..0x22); its result sets needsRegisterHash in Scheduler__scheduleBlock and is used by buildDependencyGraph to decide register-writer tracking
+func	FUN_00165014	Scheduler__computeBlockRegisterSets	INFERRED	allocates per-block bit sets (block+0x100, +0x104; one bit per hardware register, scheduler[0x51] bits) and fills them from the registers read by every instruction; phi inputs go to the predecessor block's +0x104 set; called once from the pass entry
+func	FUN_00166a0c	Scheduler__hasOtherFlaggedProducer	INFERRED	true when a data-edge consumer of the node also has another predecessor edge with the same operand indices whose producer instruction has flag 0x40; used by splitAddressRegisterUses to avoid sharing group records
+func	FUN_0016629c	Scheduler__expandPresubToAdd	INFERRED	takes a node of the deferred list (+0x94), builds an IrAddFloat (opcode 0x12) from its sources 1 and 2 (negate bit set when the original is opcode 0x9a IrPresubSub), asks resource model slot 3 canAddInstruction, replaces the node's instruction and re-routes its consumer edges; returns the node to issue
+func	FUN_00193f08	DList__isEmpty	CONFIRMED	returns node+8 == node+0xc: true when the list sentinel's next pointer is its own end marker
+func	FUN_00172078	SchedModel__countIssuedNode	INFERRED	after resource model slot 0x4c: class 3 bumps both vector and scalar counters (model+0xc, +0x10), class 1 / 2 one of them, special nodes the counter at +0x14
+func	FUN_000f3908	WriteMask__fromSelectWord	INFERRED	writes 4 bytes, byte c = 1 when select byte c of the operand word is not 1 (used for IrAddFloat dest: inst+0xc = destination write mask)
+func	R300SchedModel__vslot13	R300SchedModel__tryRewriteConsumerSelects	INFERRED	for a node whose result is a constant-like select, rewrites the select bytes of every consumer operand that lie in [selectLow, selectHigh] to a replacement value, recording (instruction, operand, old select word) in three undo vectors; if a consumer cannot accept it the recorded changes are undone and 0 is returned
+func	FUN_000f3a30	IRInst__countWrittenComponents	INFERRED	counts the select bytes of the destination operand (record 0, +0x10) that are not 1
+func	FUN_000f3108	SelectWord__firstUnwrittenComponent	INFERRED	index of the first byte equal to 1 in the 4-byte select word, -1 when none
+func	FUN_000f30d4	SelectWord__firstWrittenComponent	INFERRED	index of the first byte not equal to 1 in the 4-byte select word, -1 when none
+func	FUN_0018da48	SchedModel__instructionFitsAlone	INFERRED	resets a PackState, runs FUN_0018d4b4 (the slot-fit check) for the instruction and returns PackState__countFreeSlots of the result
+func	FUN_00146610	IRInst__getOperandSourceOrDefault	CONFIRMED	if inst != NULL return IRInst__getOperandSource(inst, n) else the third argument (null-safe operand-source accessor; 70 uses)
+func	FUN_0010dbd8	BitSet__setBit	CONFIRMED	byte index = bit >> 3, mask = 1 << (bit & 7), ORs the mask into the byte
+func	FUN_000f2d18	SelectWord__areCompatible	INFERRED	true when for every byte c of the two select words, one of them is 4 (unused / don't care) or the bytes are equal
+func	FUN_000f3398	SelectWord__readMask	INFERRED	out bytes c = 1 for every component c (0..3) that some byte of the select word reads (values < 4)
+func	FUN_000f3258	SelectWord__clearReadComponents	INFERRED	out word = DAT_001aa838 with byte c cleared for every select byte < 4 (complement of SelectWord__readMask against a default word)
+func	FUN_000f3190	SelectWord__isIdentity	INFERRED	true when the select word is x,y,z,w in order allowing 4 (unused) in any position (bytes: x in {4,0}, y in {4,1}, z in {4,2}, w in {3,4})
+func	FUN_000f31e8	IRInst__isSourceSelectIdentity	INFERRED	SelectWord__isIdentity of source n's select word at inst + n*0x18 + 0x9c
+func	FUN_000f3340	SelectWord__maskUnused	INFERRED	for every byte c of the mask word that is 0, byte c of the base word is replaced by 4 (unused); result stored through the first argument
+func	FUN_000f31f8	SelectWord__selectWhereMasked	INFERRED	out byte c = select byte c when mask byte c is non-zero, else 1
+func	FUN_000f35c4	IRInst__clearSourceSelectsOfUnwrittenComponents	INFERRED	for each destination select byte equal to 1 (component not written) sets that component's select to 4 in every source through slot 0x88
+func	FUN_00139838	IRInst__sourceIsSplatConstant	INFERRED	FUN_000f5cf0 finds a uniform constant of source n and the result must equal the double argument and be of kind 2
+func	FUN_000f5cf0	IRInst__getUniformSourceConstant	INFERRED	for the components selected from source n (a constant-class producer) collects the constant kind (2) and value; all selected components must agree; applies the source's abs/neg modifier bits to the value; returns 1 on success
+func	FUN_00103f84	IRInst__copyBodyFrom	CONFIRMED	IRInst__saveCounters, memcpy of 0x164 bytes, IRInst__restoreCounters
+func	FUN_00104730	IROperand__copyFrom	INFERRED	copies the modifier bits (word 5: bits 0 and 1) then the five record words
+func	FUN_001045e4	IRInst__isProjectionOfClass26or3a	INFERRED	IRInst slot 21 (isProjection) and class +0x98 in {0x26, 0x3a}
+func	FUN_00104644	IRInst__isProjectionOfClass44	INFERRED	IRInst slot 21 (isProjection) and class +0x98 == 0x44
+func	FUN_0010469c	IRInst__setHardwareRegisterAndAdd	INFERRED	stores register number (+0x94) and class (+0x98), ORs 0x42 into the flags, sets numDests = 0 and calls Program__addInst
+func	FUN_00105c5c	IRInst__getDefiningField128	INFERRED	for n == 0 returns inst+0x128; otherwise follows source n to its defining instruction and returns its +0x128 (or a virtual call result when there is no definition)
+func	FUN_001062c0	IRInst__getOrCreateOperandRecord	INFERRED	returns inline record n (inst + n*0x18 + 0x8c) for n < 5, otherwise element n-4 of the lazily created extra-operand vector
+func	FUN_00172000	SchedModel__resetCounters	CONFIRMED	zeroes the three counters at +0xc, +0x10, +0x14
+func	FUN_0017212c	SchedModel__uncountNode	INFERRED	inverse of SchedModel__countIssuedNode: decrements the counters for the node's resource class
+func	FUN_00193fa4	DList__initSentinel	INFERRED	sets sentinel+0x10 = sentinel and +8 = sentinel + 0xc
+func	FUN_001942d4	Vector__insertAt	INFERRED	grows the vector by one and shifts the elements from the index up by one slot
+func	FUN_0018976c	SelectWord__matchesDefaultPattern	INFERRED	SelectWord__areCompatible with the constant select word DAT_001b2a64
+func	FUN_00189788	SelectWord__matchesAnyKnownPattern	INFERRED	true when the select word is compatible with any of the 20 words DAT_001b2994..001b29e4
+func	FUN_001896f8	SelectWord__isDefaultAfterCanonicalise	INFERRED	looks the select word up in a 5x5x5x5 table (base-5 index of its bytes) and compares the entry with the constant DAT_001b2a68
+func	R300SchedModel__vslot27	R300SchedModel__legalizeInstruction	INFERRED	returns the instruction that replaces its argument: when option 0x40 is on and the instruction is IrFetchTextureMapKill it pushes a source negation up through single-use IrMov/IrAdd/IrMul/IrCnd producers (flipping modifier bit 0); otherwise inserts IrMovFloat copies for sources with abs/neg modifiers the hardware word cannot hold, for IrDsx/IrDsy sources, and splits sources whose select word needs more than one encodable pattern (slot 26 swizzle legalisation)

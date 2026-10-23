@@ -433,13 +433,14 @@ int FUN_000e5570(param_1, param_2, param_3)
   int param_2;
   int param_3;
 {
+  int allocation2;
   undefined4 arenaAt378;
   undefined4 *vectorAlloc;
   undefined4 *puVar1;
   undefined4 *puVar2;
   int iVar3;
   int iVar4;
-  undefined4 uVar5;
+  undefined4 allocation;
   uint uVar6;
   uint *puVar7;
   
@@ -462,8 +463,8 @@ int FUN_000e5570(param_1, param_2, param_3)
   vectorAlloc[1] = 2;
   vectorAlloc[2] = 0;
   vectorAlloc[4] = arenaAt378;
-  uVar5 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar5;
+  allocation = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = allocation;
   param_1[0x22] = (int)(vectorAlloc + 1);
   uVar6 = vectorAlloc[2];
   if (uVar6 < (uint)vectorAlloc[1]) {
@@ -508,22 +509,22 @@ int FUN_000e5570(param_1, param_2, param_3)
     puVar1 = (undefined4 *)Vector__elementRefGrow(puVar7,uVar6);
   }
   *puVar1 = 0xffffffff;
-  iVar3 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x50);
-  param_1[0x19] = iVar3;
-  iVar3 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x50);
-  param_1[0x1b] = iVar3;
-  iVar3 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),400);
-  param_1[0x1a] = iVar3;
-  iVar3 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),400);
-  param_1[0x1c] = iVar3;
+  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x50);
+  param_1[0x19] = allocation2;
+  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x50);
+  param_1[0x1b] = allocation2;
+  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),400);
+  param_1[0x1a] = allocation2;
+  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),400);
+  param_1[0x1c] = allocation2;
   arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
   vectorAlloc[4] = arenaAt378;
   vectorAlloc[2] = 0;
-  uVar5 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar5;
+  allocation = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = allocation;
   param_1[0xf] = (int)(vectorAlloc + 1);
   arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
@@ -531,8 +532,8 @@ int FUN_000e5570(param_1, param_2, param_3)
   vectorAlloc[1] = 2;
   vectorAlloc[4] = arenaAt378;
   vectorAlloc[2] = 0;
-  uVar5 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar5;
+  allocation = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = allocation;
   param_1[0x11] = (int)(vectorAlloc + 1);
   arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
@@ -540,8 +541,8 @@ int FUN_000e5570(param_1, param_2, param_3)
   vectorAlloc[1] = 2;
   vectorAlloc[2] = 0;
   vectorAlloc[4] = arenaAt378;
-  uVar5 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar5;
+  allocation = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = allocation;
   param_1[0x10] = (int)(vectorAlloc + 1);
   param_1[0x15] = 0;
   puVar1 = (undefined4 *)Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0xc);
@@ -601,13 +602,14 @@ int FUN_000e59f0(param_1, param_2, param_3)
   int param_2;
   int param_3;
 {
+  int allocation2;
   undefined4 arenaAt378;
   undefined4 *vectorAlloc;
   undefined4 *puVar1;
   undefined4 *puVar2;
   int iVar3;
   int iVar4;
-  undefined4 uVar5;
+  undefined4 allocation;
   uint uVar6;
   uint *puVar7;
   
@@ -630,8 +632,8 @@ int FUN_000e59f0(param_1, param_2, param_3)
   vectorAlloc[1] = 2;
   vectorAlloc[2] = 0;
   vectorAlloc[4] = arenaAt378;
-  uVar5 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar5;
+  allocation = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = allocation;
   param_1[0x22] = (int)(vectorAlloc + 1);
   uVar6 = vectorAlloc[2];
   if (uVar6 < (uint)vectorAlloc[1]) {
@@ -676,22 +678,22 @@ int FUN_000e59f0(param_1, param_2, param_3)
     puVar1 = (undefined4 *)Vector__elementRefGrow(puVar7,uVar6);
   }
   *puVar1 = 0xffffffff;
-  iVar3 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x50);
-  param_1[0x19] = iVar3;
-  iVar3 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x50);
-  param_1[0x1b] = iVar3;
-  iVar3 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),400);
-  param_1[0x1a] = iVar3;
-  iVar3 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),400);
-  param_1[0x1c] = iVar3;
+  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x50);
+  param_1[0x19] = allocation2;
+  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x50);
+  param_1[0x1b] = allocation2;
+  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),400);
+  param_1[0x1a] = allocation2;
+  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),400);
+  param_1[0x1c] = allocation2;
   arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
   vectorAlloc[4] = arenaAt378;
   vectorAlloc[2] = 0;
-  uVar5 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar5;
+  allocation = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = allocation;
   param_1[0xf] = (int)(vectorAlloc + 1);
   arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
@@ -699,8 +701,8 @@ int FUN_000e59f0(param_1, param_2, param_3)
   vectorAlloc[1] = 2;
   vectorAlloc[4] = arenaAt378;
   vectorAlloc[2] = 0;
-  uVar5 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar5;
+  allocation = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = allocation;
   param_1[0x11] = (int)(vectorAlloc + 1);
   arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
@@ -708,8 +710,8 @@ int FUN_000e59f0(param_1, param_2, param_3)
   vectorAlloc[1] = 2;
   vectorAlloc[2] = 0;
   vectorAlloc[4] = arenaAt378;
-  uVar5 = Arena__alloc(arenaAt378,8);
-  vectorAlloc[3] = uVar5;
+  allocation = Arena__alloc(arenaAt378,8);
+  vectorAlloc[3] = allocation;
   param_1[0x10] = (int)(vectorAlloc + 1);
   param_1[0x15] = 0;
   puVar1 = (undefined4 *)Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0xc);
@@ -2031,6 +2033,7 @@ LAB_000e7e3c:
 int Block__findSimplePredecessor(param_1)
   int param_1;
 {
+  int isSimple;
   int *a0;
   int iVar1;
   int iVar2;
@@ -2045,8 +2048,8 @@ int Block__findSimplePredecessor(param_1)
     }
     a0 = *(int **)(*(int *)(iVar1 + 8) + iVar2);
     if (a0 != (int *)0x0) {
-      iVar1 = ((int (*)())Block__isSimple)(a0);
-      if (iVar1 != 0) {
+      isSimple = ((int (*)())Block__isSimple)(a0);
+      if (isSimple != 0) {
         return a0;
       }
       iVar1 = (**(code **)(*a0 + 0x1c))(a0);
@@ -2157,12 +2160,12 @@ int Block__phiOperandIndexForPredecessor(param_1, param_2)
   undefined4 param_2;
 {
   int iVar1;
-  int iVar2;
+  int predecessorIndexResult;
   
-  iVar2 = ((int (*)())Block__predecessorIndex)(param_1,param_2);
+  predecessorIndexResult = ((int (*)())Block__predecessorIndex)(param_1,param_2);
   iVar1 = -1;
-  if (iVar2 != -1) {
-    iVar1 = iVar2 + 1;
+  if (predecessorIndexResult != -1) {
+    iVar1 = predecessorIndexResult + 1;
   }
   return iVar1;
 }
@@ -2551,7 +2554,7 @@ int FUN_000e8a08(block)
 {
   undefined4 arenaAt374;
   undefined4 *vectorAlloc;
-  undefined4 uVar2;
+  undefined4 allocation;
   
   arenaAt374 = *(undefined4 *)(*(int *)(block + 0xa8) + 0x374);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt374,0x14);
@@ -2559,8 +2562,8 @@ int FUN_000e8a08(block)
   vectorAlloc[1] = 2;
   vectorAlloc[4] = arenaAt374;
   vectorAlloc[2] = 0;
-  uVar2 = Arena__alloc(arenaAt374,8);
-  vectorAlloc[3] = uVar2;
+  allocation = Arena__alloc(arenaAt374,8);
+  vectorAlloc[3] = allocation;
   *(undefined4 **)(block + 0xc4) = vectorAlloc + 1;
   arenaAt374 = *(undefined4 *)(*(int *)(block + 0xa8) + 0x374);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt374,0x14);
@@ -2568,8 +2571,8 @@ int FUN_000e8a08(block)
   vectorAlloc[1] = 2;
   vectorAlloc[4] = arenaAt374;
   vectorAlloc[2] = 0;
-  uVar2 = Arena__alloc(arenaAt374,8);
-  vectorAlloc[3] = uVar2;
+  allocation = Arena__alloc(arenaAt374,8);
+  vectorAlloc[3] = allocation;
   *(undefined4 **)(block + 0xf8) = vectorAlloc + 1;
   arenaAt374 = *(undefined4 *)(*(int *)(block + 0xa8) + 0x374);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt374,0x14);
@@ -2577,8 +2580,8 @@ int FUN_000e8a08(block)
   vectorAlloc[1] = 2;
   vectorAlloc[2] = 0;
   vectorAlloc[4] = arenaAt374;
-  uVar2 = Arena__alloc(arenaAt374,8);
-  vectorAlloc[3] = uVar2;
+  allocation = Arena__alloc(arenaAt374,8);
+  vectorAlloc[3] = allocation;
   *(undefined4 **)(block + 0xf4) = vectorAlloc + 1;
   arenaAt374 = *(undefined4 *)(*(int *)(block + 0xa8) + 0x374);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt374,0x14);
@@ -2586,8 +2589,8 @@ int FUN_000e8a08(block)
   *vectorAlloc = arenaAt374;
   vectorAlloc[2] = 0;
   vectorAlloc[4] = arenaAt374;
-  uVar2 = Arena__alloc(arenaAt374,8);
-  vectorAlloc[3] = uVar2;
+  allocation = Arena__alloc(arenaAt374,8);
+  vectorAlloc[3] = allocation;
   *(undefined4 **)(block + 0xd0) = vectorAlloc + 1;
   arenaAt374 = *(undefined4 *)(*(int *)(block + 0xa8) + 0x374);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt374,0x14);
@@ -2595,8 +2598,8 @@ int FUN_000e8a08(block)
   *vectorAlloc = arenaAt374;
   vectorAlloc[2] = 0;
   vectorAlloc[4] = arenaAt374;
-  uVar2 = Arena__alloc(arenaAt374,8);
-  vectorAlloc[3] = uVar2;
+  allocation = Arena__alloc(arenaAt374,8);
+  vectorAlloc[3] = allocation;
   *(undefined4 **)(block + 0xd4) = vectorAlloc + 1;
   return;
 }
@@ -2922,27 +2925,28 @@ int Block__getSuccessor(block, index)
 int FUN_000e9294(param_1)
   int param_1;
 {
+  int *predecessor;
   int iVar1;
-  int *piVar2;
+  int *successor;
   undefined4 uVar3;
   
   uVar3 = *(undefined4 *)(param_1 + 0x134);
   iVar1 = ((int (*)())Block__successorCount)(uVar3);
   if ((iVar1 == 1) && (iVar1 = ((int (*)())Block__successorCount)(*(undefined4 *)(param_1 + 0x138)), iVar1 == 1)) {
-    piVar2 = (int *)((int (*)())Block__getSuccessor)(uVar3,0);
-    iVar1 = (**(code **)(*piVar2 + 0x28))(piVar2);
+    successor = (int *)((int (*)())Block__getSuccessor)(uVar3,0);
+    iVar1 = (**(code **)(*successor + 0x28))(successor);
     if (iVar1 != 0) {
-      piVar2 = (int *)((int (*)())Block__getSuccessor)(*(undefined4 *)(param_1 + 0x138),0);
-      iVar1 = (**(code **)(*piVar2 + 0x28))(piVar2);
+      successor = (int *)((int (*)())Block__getSuccessor)(*(undefined4 *)(param_1 + 0x138),0);
+      iVar1 = (**(code **)(*successor + 0x28))(successor);
       if (iVar1 != 0) {
         uVar3 = *(undefined4 *)(param_1 + 0x134);
         iVar1 = ((int (*)())Block__predecessorCount)(uVar3);
         if ((iVar1 == 1) && (iVar1 = ((int (*)())Block__predecessorCount)(*(undefined4 *)(param_1 + 0x138)), iVar1 == 1)) {
-          piVar2 = (int *)((int (*)())Block__getPredecessor)(uVar3,0);
-          iVar1 = (**(code **)(*piVar2 + 0x24))(piVar2);
+          predecessor = (int *)((int (*)())Block__getPredecessor)(uVar3,0);
+          iVar1 = (**(code **)(*predecessor + 0x24))(predecessor);
           if (iVar1 != 0) {
-            piVar2 = (int *)((int (*)())Block__getPredecessor)(*(undefined4 *)(param_1 + 0x138),0);
-            iVar1 = (**(code **)(*piVar2 + 0x24))(piVar2);
+            predecessor = (int *)((int (*)())Block__getPredecessor)(*(undefined4 *)(param_1 + 0x138),0);
+            iVar1 = (**(code **)(*predecessor + 0x24))(predecessor);
             if (iVar1 != 0) {
               return 1;
             }

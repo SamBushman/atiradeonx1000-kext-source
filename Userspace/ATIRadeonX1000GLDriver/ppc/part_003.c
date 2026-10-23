@@ -1007,6 +1007,7 @@ int FUN_0001b510(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_5;
   undefined4 param_6;
 {
+  int gldTextureMakeResidentResult;
   int loopIndex;
   bool bVar1;
   byte bVar2;
@@ -1058,8 +1059,8 @@ int FUN_0001b510(param_1, param_2, param_3, param_4, param_5, param_6)
       if (loopIndex < 4) {
         iVar17 = iVar10;
       }
-      iVar10 = gldTextureMakeResident(param_1,iVar10,param_3,param_4,param_5,param_6);
-      if (iVar10 == 0) {
+      gldTextureMakeResidentResult = gldTextureMakeResident(param_1,iVar10,param_3,param_4,param_5,param_6);
+      if (gldTextureMakeResidentResult == 0) {
         piVar14 = (int *)param_2[1];
         goto LAB_0001b730;
       }
@@ -2728,6 +2729,8 @@ int FUN_0001dc10(param_1, param_2)
   undefined4 param_1;
   int *param_2;
 {
+  int gld_setVertexArrayAgpRefBackingResult;
+  int gld_setVertexArrayNewTextureBackingResult;
   uint uVar1;
   undefined4 *puVar2;
   uint uVar3;
@@ -2788,14 +2791,14 @@ LAB_0001dcf8:
       uVar4 = (uVar3 - (uVar3 / local_2c[0]) * local_2c[0]) + 3 & 0xfffffffc;
     }
     if ((*(short *)(iVar7 + 0x312) == -0x7a42) && (local_38 < 0x4f)) {
-      iVar5 = gld_setVertexArrayNewTextureBacking(param_1,param_2,(local_38 * 0x12 + 0xc) * 4,
+      gld_setVertexArrayNewTextureBackingResult = gld_setVertexArrayNewTextureBacking(param_1,param_2,(local_38 * 0x12 + 0xc) * 4,
                            uVar4 + local_2c[0] * local_34,*(undefined4 *)(iVar7 + 0x314),uVar3);
-      if (iVar5 != 0) goto LAB_0001ddc0;
+      if (gld_setVertexArrayNewTextureBackingResult != 0) goto LAB_0001ddc0;
       uVar3 = *(uint *)(iVar7 + 0x318);
     }
-    iVar5 = gld_setVertexArrayAgpRefBacking(param_1,param_2,*(undefined4 *)(iVar7 + 0x314),
+    gld_setVertexArrayAgpRefBackingResult = gld_setVertexArrayAgpRefBacking(param_1,param_2,*(undefined4 *)(iVar7 + 0x314),
                          *(undefined4 *)(iVar7 + 0x314),uVar3);
-    if (iVar5 != 0) {
+    if (gld_setVertexArrayAgpRefBackingResult != 0) {
 LAB_0001ddc0:
       if (param_2[0x8c] == 7) {
         uVar3 = *(uint *)(iVar7 + 0x314);
@@ -2944,6 +2947,8 @@ int FUN_0001e280(param_1, param_2, param_3)
   undefined4 *param_2;
   int param_3;
 {
+  int gld_setBufferAgpRefBackingResult;
+  int gld_setBufferNewTextureBackingResult;
   bool bVar1;
   undefined4 uVar2;
   uint uVar3;
@@ -2999,8 +3004,8 @@ LAB_0001e3b0:
       }
       uVar5 = *puVar12;
       uVar3 = uVar10 + local_3c[0] * local_44;
-      iVar4 = gld_setBufferNewTextureBacking(param_1,param_2,iVar4 + (local_48 * 0x12 + 0xc) * 4,uVar3,uVar5,uVar7);
-      if (iVar4 == 0) {
+      gld_setBufferNewTextureBackingResult = gld_setBufferNewTextureBacking(param_1,param_2,iVar4 + (local_48 * 0x12 + 0xc) * 4,uVar3,uVar5,uVar7);
+      if (gld_setBufferNewTextureBackingResult == 0) {
         uVar5 = puVar12[1];
         goto LAB_0001e440;
       }
@@ -3008,8 +3013,8 @@ LAB_0001e3b0:
     else {
 LAB_0001e440:
       uVar3 = *puVar12;
-      iVar4 = gld_setBufferAgpRefBacking(param_1,param_2,uVar3,uVar3,uVar5);
-      if (iVar4 == 0) {
+      gld_setBufferAgpRefBackingResult = gld_setBufferAgpRefBacking(param_1,param_2,uVar3,uVar3,uVar5);
+      if (gld_setBufferAgpRefBackingResult == 0) {
         return 0;
       }
     }

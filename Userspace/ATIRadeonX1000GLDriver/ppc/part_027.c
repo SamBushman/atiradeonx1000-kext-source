@@ -132,8 +132,8 @@ int IRInst__restoreCounters(inst, snapshot)
   return;
 }
 
-/* FUN_00103f84 @ 0x103f84 (100 bytes) */
-int FUN_00103f84(param_1, param_2)
+/* IRInst__copyBodyFrom @ 0x103f84 (100 bytes) */
+int IRInst__copyBodyFrom(param_1, param_2)
   undefined4 param_1;
   undefined4 param_2;
 {
@@ -490,8 +490,8 @@ LAB_001045cc:
   return uVar3;
 }
 
-/* FUN_001045e4 @ 0x1045e4 (96 bytes) */
-int FUN_001045e4(param_1)
+/* IRInst__isProjectionOfClass26or3a @ 0x1045e4 (96 bytes) */
+int IRInst__isProjectionOfClass26or3a(param_1)
   int *param_1;
 {
   int iVar1;
@@ -505,8 +505,8 @@ int FUN_001045e4(param_1)
   return uVar2;
 }
 
-/* FUN_00104644 @ 0x104644 (88 bytes) */
-int FUN_00104644(param_1)
+/* IRInst__isProjectionOfClass44 @ 0x104644 (88 bytes) */
+int IRInst__isProjectionOfClass44(param_1)
   int *param_1;
 {
   int iVar1;
@@ -519,8 +519,8 @@ int FUN_00104644(param_1)
   return uVar2;
 }
 
-/* FUN_0010469c @ 0x10469c (44 bytes) */
-int FUN_0010469c(param_1, param_2, param_3, param_4)
+/* IRInst__setHardwareRegisterAndAdd @ 0x10469c (44 bytes) */
+int IRInst__setHardwareRegisterAndAdd(param_1, param_2, param_3, param_4)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
@@ -555,8 +555,8 @@ int IRInst__setOperandRef(inst, operandIndex, operandRef)
   return;
 }
 
-/* FUN_00104730 @ 0x104730 (120 bytes) */
-int FUN_00104730(param_1, param_2)
+/* IROperand__copyFrom @ 0x104730 (120 bytes) */
+int IROperand__copyFrom(param_1, param_2)
   undefined4 *param_1;
   undefined4 *param_2;
 {
@@ -841,7 +841,7 @@ int FUN_00104bf8(inst, compiler)
   bool bVar1;
   uint uVar2;
   undefined4 uVar3;
-  int iVar4;
+  int instFlagBit2Result;
   undefined4 *puVar5;
   uint uVar6;
   int iVar7;
@@ -861,8 +861,8 @@ int FUN_00104bf8(inst, compiler)
   do {
     ((int (*)())FUN_00104be8)(inst,loopIndex);
     *(undefined4 *)(iVar8 + 0xb4) = DAT_001af9bc;
-    iVar4 = OpcodeTraits__instFlagBit2(compiler,inst);
-    if (iVar4 != 0) {
+    instFlagBit2Result = OpcodeTraits__instFlagBit2(compiler,inst);
+    if (instFlagBit2Result != 0) {
       if (loopIndex == 1) {
         puVar5 = &DAT_001af9d0;
       }
@@ -1292,18 +1292,19 @@ int IRInst__getOperandSource(inst, operandIndex)
 int FUN_001055cc(param_1)
   int *param_1;
 {
+  int operandSource;
   int iVar1;
   bool bVar2;
   
   iVar1 = (**(code **)(*param_1 + 0x54))(param_1);
   bVar2 = false;
   if (iVar1 != 0) {
-    iVar1 = ((int (*)())IRInst__getOperandSource)(param_1,1);
-    if (iVar1 == 0) {
+    operandSource = ((int (*)())IRInst__getOperandSource)(param_1,1);
+    if (operandSource == 0) {
       bVar2 = param_1[0x2c] == 0x2a;
     }
     else {
-      bVar2 = *(int *)(iVar1 + 0x98) == 0x2a;
+      bVar2 = *(int *)(operandSource + 0x98) == 0x2a;
     }
   }
   return bVar2;

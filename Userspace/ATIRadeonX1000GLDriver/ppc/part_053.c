@@ -1968,7 +1968,7 @@ int R520MachineAssembler__vslot86_resolveSourceRegister(this, inst, sourceIndex,
      (iVar2 = (**(code **)(*callResult + 0x50))(callResult), iVar2 == 0)) {
     registerWord = 0;
     if (callResult[0x26] == 0x29) {
-      iVar2 = FUN_00105c5c(inst,sourceIndex);
+      iVar2 = IRInst__getDefiningField128(inst,sourceIndex);
       registerWord = iVar2 + *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x3f0) | 0x4000;
     }
     return registerWord;
@@ -2284,9 +2284,9 @@ int evaluateConstantComparison(inst, resultKnownOut)
   float local_2c;
   
   uVar1 = DAT_001b2d70;
-  iVar2 = FUN_000f5cf0(inst,1,DAT_001b2d70,&local_48);
+  iVar2 = IRInst__getUniformSourceConstant(inst,1,DAT_001b2d70,&local_48);
   if ((((iVar2 == 0) || (local_48 != 2)) ||
-      (iVar2 = FUN_000f5cf0(inst,2,uVar1,&local_30), iVar2 == 0)) || (local_30 != 2)) {
+      (iVar2 = IRInst__getUniformSourceConstant(inst,2,uVar1,&local_30), iVar2 == 0)) || (local_30 != 2)) {
     bVar3 = false;
     *resultKnownOut = 0;
   }

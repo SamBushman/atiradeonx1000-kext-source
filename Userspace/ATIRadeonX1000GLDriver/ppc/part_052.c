@@ -240,6 +240,7 @@ int R300MachineAssembler__assembleAluInstruction(this, irInst)
   int *this;
   int *irInst;
 {
+  int anyEnabledLaneSelectsXyzResult;
   undefined4 sourceDef2;
   int *sourceDef;
   bool writesRgb;
@@ -389,11 +390,11 @@ LAB_0019852c:
               }
             }
             loopRemaining = anyEnabledLaneSelectsW(piVar23,uVar14);
-            iVar13 = anyEnabledLaneSelectsXyz(piVar23,uVar14);
+            anyEnabledLaneSelectsXyzResult = anyEnabledLaneSelectsXyz(piVar23,uVar14);
             rgbSelect[(int)srcIdx] = 0x14;
             selectSrcIdx = srcIdx;
             if (loopRemaining == 0) {
-              if (iVar13 != 0) {
+              if (anyEnabledLaneSelectsXyzResult != 0) {
                 loopIndex3 = 1;
                 loopIndex2 = this + 0xe;
                 loopIndex = this;
@@ -427,7 +428,7 @@ LAB_00199c88:
               }
             }
             else {
-              if (iVar13 == 0) {
+              if (anyEnabledLaneSelectsXyzResult == 0) {
                 loopIndex3 = 1;
                 loopIndex2 = this + 0x12;
                 loopIndex = this;
@@ -727,7 +728,7 @@ LAB_00199fdc:
             (**(code **)(*this + 0xf0))
                       (this,1,alphaSelect,local_5c,piVar23,piVar25,*(code **)(*this + 0xf0));
           }
-          FUN_000f3398(&local_84,piVar23);
+          SelectWord__readMask(&local_84,piVar23);
           loopIndex3 = local_84 & 0xff;
           bVar3 = (local_84 & 0xffffff00) == 0;
           iVar13 = *(int *)(a0[0x22] + 8);
@@ -2299,7 +2300,7 @@ LAB_0019bee4:
   if (iVar2 == 1) {
     *(undefined4 *)(this + 0x24) = 1;
     *instructionWords = *instructionWords | 0x1000;
-    uVar13 = FUN_00105c5c(inst,0);
+    uVar13 = IRInst__getDefiningField128(inst,0);
     uVar12 = *instructionWords;
   }
   else if (iVar2 == 2) {
@@ -2369,6 +2370,7 @@ int R300VMachineAssembler__encodeSourceOperand(this, inst, instructionWords, sou
   int sourceNumber;
   int operandSlot;
 {
+  uint vsSourceSelectForConstantResult;
   uint offsetBits;
   uint src2Word;
   uint swizzleYField;
@@ -2510,9 +2512,9 @@ int R300VMachineAssembler__encodeSourceOperand(this, inst, instructionWords, sou
       negateFlag = negateBase9;
     }
     *sourceWord = negateFlag << 0x1b | constSelectBits | savedSrcWord & 0xf7c7ffff;
-    uVar19 = ((int (*)())vsSourceSelectForConstant)(srcDefInst,uVar19 & 0xff,&constNegated);
+    vsSourceSelectForConstantResult = ((int (*)())vsSourceSelectForConstant)(srcDefInst,uVar19 & 0xff,&constNegated);
     savedSrcWord3 = *sourceWord;
-    uVar19 = (uVar19 & 7) << 0x16;
+    uVar19 = (vsSourceSelectForConstantResult & 7) << 0x16;
     *sourceWord = uVar19 | savedSrcWord3 & 0xfe3fffff;
     negateFlagInv = negateBase9 ^ 1;
     if (constNegated == 0) {
@@ -2584,10 +2586,10 @@ LAB_0019c490:
   if (loopIndex - 1U < 2) {
     loopIndex = (**(code **)(*srcDefInst + 0x60))(srcDefInst);
     if (loopIndex == 0) {
-      swizzlePair = FUN_00105c5c(inst,sourceNumber);
+      swizzlePair = IRInst__getDefiningField128(inst,sourceNumber);
     }
     else {
-      swizzlePair = FUN_00105c5c(srcDefInst,1);
+      swizzlePair = IRInst__getDefiningField128(srcDefInst,1);
     }
     uVar19 = (uint)((ulonglong)swizzlePair >> 0x20);
     *(undefined4 *)(this + 0x24) = 1;
@@ -2609,25 +2611,25 @@ LAB_0019c490:
           defOperandRecord = IRInst__getOperandRecord(src1DefInst,1);
           constSwizzle = *(undefined4 *)(defOperandRecord + 0x10);
         }
-        swizzleMatchResult = FUN_000f2d18(constSwizzle,0);
+        swizzleMatchResult = SelectWord__areCompatible(constSwizzle,0);
         if (swizzleMatchResult != 0) {
           addrSelCleared = *sourceWord & 0x9fffffff;
           *sourceWord = addrSelCleared;
           goto LAB_0019c710;
         }
-        swizzleMatchResult = FUN_000f2d18(constSwizzle,0x1010101);
+        swizzleMatchResult = SelectWord__areCompatible(constSwizzle,0x1010101);
         if (swizzleMatchResult != 0) {
           addrSelCleared = *sourceWord & 0x9fffffff | 0x20000000;
           *sourceWord = addrSelCleared;
           goto LAB_0019c710;
         }
-        swizzleMatchResult = FUN_000f2d18(constSwizzle,0x2020202);
+        swizzleMatchResult = SelectWord__areCompatible(constSwizzle,0x2020202);
         if (swizzleMatchResult != 0) {
           addrSelCleared = *sourceWord & 0x9fffffff | 0x40000000;
           *sourceWord = addrSelCleared;
           goto LAB_0019c710;
         }
-        swizzleMatchResult = FUN_000f2d18(constSwizzle,0x3030303);
+        swizzleMatchResult = SelectWord__areCompatible(constSwizzle,0x3030303);
         if (swizzleMatchResult != 0) {
           addrSelCleared = *sourceWord & 0x9fffffff | 0x60000000;
           *sourceWord = addrSelCleared;

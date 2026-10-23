@@ -1117,7 +1117,7 @@ int FUN_0002fac0(param_1, param_2)
   char cVar6;
   char cVar7;
   int iVar8;
-  undefined1 uVar9;
+  undefined1 window_mode_to_ati_formatResult;
   char cVar10;
   char cVar11;
   char cVar12;
@@ -1154,8 +1154,8 @@ int FUN_0002fac0(param_1, param_2)
     else if ((ushort)(uVar1 - 0x40b) < 2) {
       return;
     }
-    uVar9 = ((int (*)())window_mode_to_ati_format)(local_30[0]);
-    *(undefined1 *)(param_2 + 0x38) = uVar9;
+    window_mode_to_ati_formatResult = ((int (*)())window_mode_to_ati_format)(local_30[0]);
+    *(undefined1 *)(param_2 + 0x38) = window_mode_to_ati_formatResult;
     return;
   }
   uVar2 = puVar13[0x2c];
@@ -2239,6 +2239,7 @@ int FUN_00031340(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   int param_7;
   undefined4 *param_8;
 {
+  int gld_isStampRetiredResult;
   int loopIndex;
   int loopIndex2;
   byte bVar1;
@@ -2338,8 +2339,8 @@ int FUN_00031340(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
         & 1) == 0) {
       return 0;
     }
-    iVar6 = gld_isStampRetired(param_1,puVar16[3]);
-    if (iVar6 == 0) {
+    gld_isStampRetiredResult = gld_isStampRetired(param_1,puVar16[3]);
+    if (gld_isStampRetiredResult == 0) {
       uVar17 = 1;
       a1 = (undefined4 *)0x0;
       uVar10 = 0;
@@ -2364,8 +2365,8 @@ int FUN_00031340(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
     _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xd,&local_b8,2,0,0);
   }
   if ((*(uint *)(iVar14 + 0x20) & 0x10000000) != 0) {
-    iVar6 = gld_isStampRetired(param_1,*(undefined4 *)(iVar14 + 0x1c));
-    if (iVar6 == 0) {
+    gld_isStampRetiredResult = gld_isStampRetired(param_1,*(undefined4 *)(iVar14 + 0x1c));
+    if (gld_isStampRetiredResult == 0) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),9,iVar14 + 0x1c,1,0,0);
     }
     *(uint *)(iVar14 + 0x20) = *(uint *)(iVar14 + 0x20) & 0xefffffff;
@@ -2480,6 +2481,7 @@ int FUN_00031940(param_1, param_2)
   int param_1;
   int *param_2;
 {
+  int gld_ensureTextureBackingSized2Result;
   uint loopIndex;
   bool bVar1;
   byte bVar2;
@@ -2594,9 +2596,9 @@ int FUN_00031940(param_1, param_2)
   }
   *(short *)((int)param_2 + 0x3e) = (short)(uVar23 >> (local_f8 & 0x3f));
   uVar18 = local_f8;
-  iVar11 = gld_ensureTextureBackingSized2(param_1,param_2,iVar7 + 0x3a0,iVar11);
+  gld_ensureTextureBackingSized2Result = gld_ensureTextureBackingSized2(param_1,param_2,iVar7 + 0x3a0,iVar11);
   uVar19 = 0;
-  if (iVar11 == 0) {
+  if (gld_ensureTextureBackingSized2Result == 0) {
     return 0;
   }
   iVar11 = param_2[0xd];
@@ -2782,6 +2784,11 @@ int FUN_00032100(ctx, texture, param_3, param_4, param_5, param_6)
   undefined4 param_5;
   uint param_6;
 {
+  int gld_ensureTextureBackingSized2Result;
+  int gld_setTextureNewTextureBackingResult;
+  int gld_ensureTextureSurfaceBackingResult;
+  int gld_setTextureAgpRefBackingResult;
+  int gld_ensureTextureGlobalBackingResult;
   bool bVar1;
   bool bVar2;
   byte bVar3;
@@ -3013,8 +3020,8 @@ LAB_000323a0:
   uVar22 = (uint)*(byte *)(texImages + 0x2f);
   if ((uVar27 & 0x400) == 0) {
     if ((uVar27 & 0x800) != 0) {
-      iVar11 = gld_ensureTextureGlobalBacking(ctxSaved,texture,*(undefined4 *)(texImages + 4));
-      if (iVar11 == 0) {
+      gld_ensureTextureGlobalBackingResult = gld_ensureTextureGlobalBacking(ctxSaved,texture,*(undefined4 *)(texImages + 4));
+      if (gld_ensureTextureGlobalBackingResult == 0) {
         return 0;
       }
       if (*(char *)((int)texImages + 0x6d) != '\0') {
@@ -3110,8 +3117,8 @@ LAB_000323a0:
       if ((*(short *)(iVar29 + 0x1a) == -0x7a41) &&
          ((*(char *)(iVar29 + 0x6d) != '\0' || (iVar33 * iVar11 == uVar28)))) {
         *(short *)((int)texture + 0x3e) = (short)(uVar28 >> (local_218 & 0x3f));
-        iVar11 = gld_setTextureAgpRefBacking(ctxSaved,texture,uVar32,uVar20,iVar25);
-        if (iVar11 == 0) {
+        gld_setTextureAgpRefBackingResult = gld_setTextureAgpRefBacking(ctxSaved,texture,uVar32,uVar20,iVar25);
+        if (gld_setTextureAgpRefBackingResult == 0) {
           return 0;
         }
         uVar27 = (ushort)(-2 << (uVar30 & 0x1f)) | (ushort)(0xfffffffe >> 0x20 - (uVar30 & 0x1f));
@@ -3125,8 +3132,8 @@ LAB_000323a0:
             iVar11 = 0;
           }
           bVar39 = (iVar33 << (local_218 & 0x3f)) >> iVar11 < 0x2000;
-          iVar25 = gld_setTextureNewTextureBacking(ctxSaved,texture,0x348,uVar23 * uVar22,uVar20,iVar25);
-          if (iVar25 == 0) {
+          gld_setTextureNewTextureBackingResult = gld_setTextureNewTextureBacking(ctxSaved,texture,0x348,uVar23 * uVar22,uVar20,iVar25);
+          if (gld_setTextureNewTextureBackingResult == 0) {
             return 0;
           }
           *(undefined1 *)(texture[0xd] + 0x15) = 0;
@@ -3485,9 +3492,9 @@ LAB_00032f74:
             } while (uVar32 <= local_80);
             uVar32 = iVar29 + 7;
           }
-          iVar33 = gld_ensureTextureBackingSized2(ctxSaved,texture,
+          gld_ensureTextureBackingSized2Result = gld_ensureTextureBackingSized2(ctxSaved,texture,
                                 iVar21 + uVar22 * 4 + (uVar32 & 0xfffffff8) * 4,iVar33);
-          if (iVar33 == 0) {
+          if (gld_ensureTextureBackingSized2Result == 0) {
             return 0;
           }
           *(byte *)(texture[0xd] + 0x15) = (byte)((iVar25 << iVar11) << 3) & 0x18 | 4;
@@ -3989,9 +3996,9 @@ LAB_00032480:
         uVar16 = 7;
       }
     }
-    iVar11 = gld_ensureTextureSurfaceBacking(ctxSaved,texture,*(undefined4 *)(texImages + 4),uVar16,
+    gld_ensureTextureSurfaceBackingResult = gld_ensureTextureSurfaceBacking(ctxSaved,texture,*(undefined4 *)(texImages + 4),uVar16,
                           (uint)*(byte *)(texImages + 0x36));
-    if (iVar11 == 0) {
+    if (gld_ensureTextureSurfaceBackingResult == 0) {
       return 0;
     }
     if (*(char *)((int)texImages + 0x6d) == '\0') {
@@ -4059,15 +4066,15 @@ int FUN_000341a0(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 param_5;
   undefined4 param_6;
 {
-  int iVar1;
+  int gldTextureMakeResidentResult;
   undefined4 uVar2;
   
   uVar2 = *(undefined4 *)(param_1 + 4);
-  iVar1 = ((int (*)())FUN_00032100)(uVar2,param_2,param_3,param_4,param_5,param_6);
-  if (iVar1 == 0) {
+  gldTextureMakeResidentResult = ((int (*)())FUN_00032100)(uVar2,param_2,param_3,param_4,param_5,param_6);
+  if (gldTextureMakeResidentResult == 0) {
     _gldDeleteTexture(uVar2,param_2);
   }
-  return iVar1 != 0;
+  return gldTextureMakeResidentResult != 0;
 }
 
 /* glGenerateMipmap_impl @ 0x34200 (4472 bytes) */

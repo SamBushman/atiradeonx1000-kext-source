@@ -781,10 +781,12 @@ int FUN_0010d358(inst, param_2)
   int inst;
   uint param_2;
 {
+  int flagBit7Result;
+  int uniformSourceConstant;
   int sourceDef;
   int operandRecord;
-  int iVar1;
-  int iVar2;
+  int flagBit0Result;
+  int uniformSourceConstant2;
   undefined4 uVar3;
   undefined4 uVar4;
   undefined1 auStack_58 [4];
@@ -792,27 +794,27 @@ int FUN_0010d358(inst, param_2)
   undefined1 auStack_40 [4];
   float local_3c;
   
-  iVar1 = OpcodeTraits__flagBit0(*(undefined4 *)(*(int *)(inst + 0x88) + 8),param_2);
-  if (iVar1 != 0) {
+  flagBit0Result = OpcodeTraits__flagBit0(*(undefined4 *)(*(int *)(inst + 0x88) + 8),param_2);
+  if (flagBit0Result != 0) {
     operandRecord = IRInst__getOperandRecord(inst,0);
     uVar3 = *(undefined4 *)(operandRecord + 0x10);
-    iVar1 = FUN_000f5cf0(inst,1,uVar3,auStack_58);
-    iVar2 = FUN_000f5cf0(inst,2,uVar3,auStack_40);
-    if (iVar1 == 0) {
+    uniformSourceConstant = IRInst__getUniformSourceConstant(inst,1,uVar3,auStack_58);
+    uniformSourceConstant2 = IRInst__getUniformSourceConstant(inst,2,uVar3,auStack_40);
+    if (uniformSourceConstant == 0) {
       sourceDef = IRInst__getOperandSource(inst,1);
       uVar4 = *(undefined4 *)(sourceDef + 0x98);
       sourceDef = IRInst__getOperandSource(inst,2);
       uVar3 = *(undefined4 *)(sourceDef + 0x98);
-      iVar1 = RegKind__flagBit7(uVar4);
-      if (iVar1 == 0) {
+      flagBit7Result = RegKind__flagBit7(uVar4);
+      if (flagBit7Result == 0) {
         return;
       }
-      iVar1 = RegKind__flagBit7(uVar3);
-      if (iVar1 != 0) {
+      flagBit7Result = RegKind__flagBit7(uVar3);
+      if (flagBit7Result != 0) {
         return;
       }
     }
-    else if (iVar2 != 0) {
+    else if (uniformSourceConstant2 != 0) {
       if ((((local_54 != 1.0) && (local_54 != -1.0)) && (local_54 != 2.0)) && (local_54 != -2.0)) {
         return;
       }
@@ -839,6 +841,7 @@ int FUN_0010d4cc(inst, param_2)
   int inst;
   int param_2;
 {
+  int compareCondition;
   int operandRecord;
   uint uVar1;
   uint uVar2;
@@ -879,9 +882,9 @@ int FUN_0010d4cc(inst, param_2)
     block[0x4c] = 0;
   }
   DList__unlink(inst);
-  iVar5 = IRInst__getCompareCondition(inst);
-  uVar7 = *(undefined4 *)(PTR_DAT_001e8c70 + iVar5 * 4);
-  iVar5 = *(int *)(PTR_DAT_001e8c6c + iVar5 * 4);
+  compareCondition = IRInst__getCompareCondition(inst);
+  uVar7 = *(undefined4 *)(PTR_DAT_001e8c70 + compareCondition * 4);
+  iVar5 = *(int *)(PTR_DAT_001e8c6c + compareCondition * 4);
   *(int *)(*(int *)(param_2 + 0x6c4) + 0x21c) = *(int *)(*(int *)(param_2 + 0x6c4) + 0x21c) + 1;
   FUN_00108174(inst,uVar7,param_2);
   *(undefined4 *)(inst + 0x94) = uVar12;
@@ -1082,8 +1085,8 @@ int HwLimits__dtor_10db58(this)
   return;
 }
 
-/* FUN_0010dbd8 @ 0x10dbd8 (36 bytes) */
-int FUN_0010dbd8(param_1, param_2)
+/* BitSet__setBit @ 0x10dbd8 (36 bytes) */
+int BitSet__setBit(param_1, param_2)
   int param_1;
   uint param_2;
 {
@@ -1132,7 +1135,7 @@ int FUN_0010dc20(param_1)
   } while (iVar3 != 0);
   iVar2 = 0x28;
   do {
-    ((int (*)())FUN_0010dbd8)(param_1,iVar2);
+    ((int (*)())BitSet__setBit)(param_1,iVar2);
     bVar1 = iVar2 != 0x2c;
     iVar2 = iVar2 + 1;
   } while (bVar1);
@@ -1558,12 +1561,12 @@ int FUN_0010e4ec(inst, inst2)
   undefined4 inst;
   undefined4 inst2;
 {
-  int iVar1;
-  int iVar2;
+  int countWrittenComponentsResult;
+  int countWrittenComponentsResult2;
   
-  iVar1 = FUN_000f3a30(inst);
-  iVar2 = FUN_000f3a30(inst2);
-  return iVar1 < iVar2;
+  countWrittenComponentsResult = IRInst__countWrittenComponents(inst);
+  countWrittenComponentsResult2 = IRInst__countWrittenComponents(inst2);
+  return countWrittenComponentsResult < countWrittenComponentsResult2;
 }
 
 /* FUN_0010e530 @ 0x10e530 (44 bytes) */

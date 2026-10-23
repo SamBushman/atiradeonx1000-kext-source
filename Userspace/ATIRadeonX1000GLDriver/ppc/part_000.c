@@ -790,6 +790,7 @@ int FUN_00002728(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
+  int exceptionGlobals;
   code *pcVar1;
   undefined4 uVar2;
   int iVar3;
@@ -801,14 +802,14 @@ int FUN_00002728(param_1, param_2)
   
   puStack00000018 = param_1;
   uStack0000001c = param_2;
-  iVar3 = ((int (*)())get_globals)();
-  if (iVar3 == 0) {
+  exceptionGlobals = ((int (*)())get_globals)();
+  if (exceptionGlobals == 0) {
     uStack_18 = 0xffffffff;
   }
-  else if ((*(char *)(iVar3 + 2) == '\0') && (*(char *)(iVar3 + 3) != '\x01')) {
-    if (*(byte *)(iVar3 + 3) < 0x10) {
-      pcVar1 = *(code **)(iVar3 + 8);
-      iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,iVar3);
+  else if ((*(char *)(exceptionGlobals + 2) == '\0') && (*(char *)(exceptionGlobals + 3) != '\x01')) {
+    if (*(byte *)(exceptionGlobals + 3) < 0x10) {
+      pcVar1 = *(code **)(exceptionGlobals + 8);
+      iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,exceptionGlobals);
       if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (iVar3 == 0)) {
         allocation = _malloc(0xc);
         if (allocation == (undefined4 *)0x0) {
@@ -828,8 +829,8 @@ int FUN_00002728(param_1, param_2)
       }
     }
     else if (puStack00000018[1] == 0) {
-      pcVar1 = *(code **)(iVar3 + 0x10);
-      iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,iVar3);
+      pcVar1 = *(code **)(exceptionGlobals + 0x10);
+      iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,exceptionGlobals);
       if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (iVar3 == 0)) {
         uStack_18 = (*pcVar1)(*puStack00000018);
       }
@@ -838,8 +839,8 @@ int FUN_00002728(param_1, param_2)
       }
     }
     else {
-      pcVar1 = *(code **)(iVar3 + 8);
-      iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,iVar3);
+      pcVar1 = *(code **)(exceptionGlobals + 8);
+      iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,exceptionGlobals);
       if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (iVar3 == 0)) {
         uStack_18 = (*pcVar1)(*puStack00000018,puStack00000018[2],uStack0000001c);
       }
@@ -849,7 +850,7 @@ int FUN_00002728(param_1, param_2)
     }
   }
   else {
-    uStack_18 = ((int (*)())add_routine)(iVar3,puStack00000018);
+    uStack_18 = ((int (*)())add_routine)(exceptionGlobals,puStack00000018);
   }
   return uStack_18;
 }
@@ -875,6 +876,7 @@ int FUN_000027a4(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
+  int exceptionGlobals;
   code *pcVar1;
   undefined4 uVar2;
   int iVar3;
@@ -886,14 +888,14 @@ int FUN_000027a4(param_1, param_2)
   
   puStack00000018 = param_1;
   uStack0000001c = param_2;
-  iVar3 = ((int (*)())get_globals)();
-  if (iVar3 == 0) {
+  exceptionGlobals = ((int (*)())get_globals)();
+  if (exceptionGlobals == 0) {
     uStack_18 = 0xffffffff;
   }
-  else if ((*(char *)(iVar3 + 2) == '\0') && (*(char *)(iVar3 + 3) != '\x01')) {
-    if (*(byte *)(iVar3 + 3) < 0x10) {
-      pcVar1 = *(code **)(iVar3 + 8);
-      iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,iVar3);
+  else if ((*(char *)(exceptionGlobals + 2) == '\0') && (*(char *)(exceptionGlobals + 3) != '\x01')) {
+    if (*(byte *)(exceptionGlobals + 3) < 0x10) {
+      pcVar1 = *(code **)(exceptionGlobals + 8);
+      iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,exceptionGlobals);
       if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (iVar3 == 0)) {
         allocation = _malloc(0xc);
         if (allocation == (undefined4 *)0x0) {
@@ -913,8 +915,8 @@ int FUN_000027a4(param_1, param_2)
       }
     }
     else if (puStack00000018[1] == 0) {
-      pcVar1 = *(code **)(iVar3 + 0x10);
-      iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,iVar3);
+      pcVar1 = *(code **)(exceptionGlobals + 0x10);
+      iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,exceptionGlobals);
       if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (iVar3 == 0)) {
         uStack_18 = (*pcVar1)(*puStack00000018);
       }
@@ -923,8 +925,8 @@ int FUN_000027a4(param_1, param_2)
       }
     }
     else {
-      pcVar1 = *(code **)(iVar3 + 8);
-      iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,iVar3);
+      pcVar1 = *(code **)(exceptionGlobals + 8);
+      iVar3 = __keymgr_set_and_unlock_processwide_ptr(0xe,exceptionGlobals);
       if ((*(ushort *)(*(int *)(PTR_001e88a4 + 8) + 4) < 4) || (iVar3 == 0)) {
         uStack_18 = (*pcVar1)(*puStack00000018,puStack00000018[2],uStack0000001c);
       }
@@ -934,7 +936,7 @@ int FUN_000027a4(param_1, param_2)
     }
   }
   else {
-    uStack_18 = ((int (*)())add_routine)(iVar3,puStack00000018);
+    uStack_18 = ((int (*)())add_routine)(exceptionGlobals,puStack00000018);
   }
   return uStack_18;
 }

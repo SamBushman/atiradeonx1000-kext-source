@@ -2258,7 +2258,7 @@ int FUN_00009b70(ctx)
 int gld_waitQueryStamp(param_1)
   int param_1;
 {
-  int iVar1;
+  int gld_isStampRetiredResult;
   int iVar2;
   
   iVar2 = **(int **)(param_1 + 0x234);
@@ -2266,8 +2266,8 @@ int gld_waitQueryStamp(param_1)
     if ((0x1ffff < (int)*(uint *)(iVar2 + 0x10)) || ((*(uint *)(iVar2 + 0x10) & 0xffff) != 0)) {
       _gldFlush(param_1);
     }
-    iVar1 = gld_isStampRetired(param_1,*(undefined4 *)(iVar2 + 8));
-    if (iVar1 == 0) {
+    gld_isStampRetiredResult = gld_isStampRetired(param_1,*(undefined4 *)(iVar2 + 8));
+    if (gld_isStampRetiredResult == 0) {
       _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),9,iVar2 + 8,1,0,0);
       return;
     }

@@ -96,3 +96,39 @@ swizzle-pair check, and `addInstruction` commits it.
 `FUN_0016629c` (rewrites list-0x94 nodes into an add), `FUN_00164a74` (fetch-batch state update), `FUN_00166a0c`, `FUN_00164fc0`, `FUN_00164df4`, the bodies of ResourceModel slots
 0x34..0x4c and the thread model, the six lists' exact roles, and the contents of the R300SchedModel slot bodies other than `vslot26` (swizzle legalisation) and `vslot28` (a block legaliser that
 replaces certain mov/mad forms and collapses duplicate sources). `R300SchedModel__vslot28` is called by the pass as `resourceModel slot 0x70(program)`.
+
+# Round 4 (fork E1): small scheduler functions, model slot map, leaf helpers
+
+Names: `names_E1_func.tsv` (functions), `names_E1.tsv` (variables), `names_E1_callee.tsv` / `names_E1_models.tsv` (webs defined by calls to a named function / to a model slot).
+Tiers as in the rows; the compile gate shows only that the code is unchanged.
+
+## 8. Functions identified
+
+| function | name | what it does |
+|---|---|---|
+| `FUN_0016629c` | `Scheduler__expandPresubToAdd` | walks the deferred list (scheduler word 0x27 = list at +0x94); for a node whose instruction has more than one source and at least one component with pending consumers builds an `IrAddFloat` (opcode 0x12) from the node's sources 1 and 2 (negate bit on source 1 set when the original opcode is 0x9a `IrPresubSub`), asks resource-model slot 3 (`canAddInstruction`) and, if accepted, swaps the node's instruction, updates its resource class (slot 0x4c) and the "special" flag (slot 0x34 with option 0x28), re-routes the data edges to the consumers (consumers already scheduled kill the instruction) and returns the node for issue |
+| `FUN_00164a74` | `Scheduler__updateFetchBatchMode` | end-of-cycle update of the fetch-batch mode word `scheduler[0x46]` from the two ready lists (+0x34 fetch, +0x4c ALU), the cycle counters and the arguments (count of fetch nodes at the top height, maximum fetch depth) |
+| `FUN_00165014` | `Scheduler__computeBlockRegisterSets` | allocates per block two bit sets of `scheduler[0x51]` bits (+0x100 uses, +0x104 live-out) and fills them from the registers read by every instruction; phi inputs are added to the predecessor block's +0x104 set |
+| `FUN_00166a0c` | `Scheduler__hasOtherFlaggedProducer` | a data-edge consumer of the node has another predecessor edge with the same operand indices whose producer instruction carries flag 0x40 |
+| `FUN_00164df4` | `IRInst__needsNoSchedulerNode` | phi, pseudo instruction without sources (flag 0x8000, category != 1) or opcode 164 (`IrLoad`): no `SchedNode` is created |
+| `FUN_00164fc0` | `IRInst__writesTrackedRegister` | has a destination and (category 1, flag 0x40, or class +0x98 in 0x20..0x22) |
+| `R300SchedModel::vslot13` | `tryRewriteConsumerSelects` | speculative rewrite of the select bytes of every consumer operand in `[selectLow, selectHigh]` to a replacement select, with an undo log of three vectors (instruction, operand index, old select word); 0 and full rollback if a consumer cannot take it |
+| `R300SchedModel::vslot27` | `legalizeInstruction` | see the func row: negation push-up for kills (option 0x40), `IrMovFloat` copies for sources whose abs/neg modifiers or swizzle the hardware word cannot hold, `IrDsx/IrDsy` operand copies |
+
+## 9. Resource and thread model slots as the scheduler uses them (index = offset/4; INFERRED from call sites and default bodies)
+
+ResourceModel (`scheduler[2]`): 2 reset (zeroes the state word at +4); 3 `canAddInstruction`; 4 `addInstruction`; 5 end-of-word (default calls slot 2); 6 default 0; 7 void; 8 bundle-full test (default 0, used as a loop guard
+in `scheduleCycle`); 9 bundle-empty (`state == 0`); 10 `inst+0x98 == 6`; 11 register-state fit check (called with the writer arrays `scheduler+0x4d`); 13 consumer-select rewrite (the override above), result stored
+in `node+0x5c`; 15 deferred-list bucket 1..3; 19 resource class 1/2/3 (default 3); 28 block legaliser (called by the pass entry); 29 fills the issue bundle record.
+ThreadModel (`scheduler[3]`): 2 reset (`+8 = 0, +4 = 1`); 3 issuable-now test; 7 per-block flag test (`scheduleBlock` marks the successor blocks at +0xdc); 8 fetch-class test; 9 second thread-boundary test.
+
+## 10. Leaf helpers (select words are 4 bytes, one per component; 4 means "unused", 1 in a destination select means "component not written")
+
+`SelectWord__areCompatible`, `readMask`, `clearReadComponents`, `isIdentity`, `maskUnused`, `selectWhereMasked`, `firstWrittenComponent`, `firstUnwrittenComponent`, `matchesDefaultPattern`, `matchesAnyKnownPattern`;
+`IRInst__getOperandSourceOrDefault` (70 uses), `getUniformSourceConstant`, `sourceIsSplatConstant`, `countWrittenComponents`, `clearSourceSelectsOfUnwrittenComponents`, `copyBodyFrom`, `getOrCreateOperandRecord`,
+`setHardwareRegisterAndAdd`, `isProjectionOfClass26or3a/44`; `IROperand__copyFrom`; `BitSet__setBit`; `Vector__insertAt`; `DList__isEmpty`, `initSentinel`; `SchedModel__countIssuedNode`, `uncountNode`, `resetCounters`.
+
+## 11. Not done
+
+`Scheduler__selectNextNode` (828 placeholders), `buildDependencyGraph` (658), `FUN_00187ad8`, `R300VSchedModel::vslot27`, `FUN_0018cdd8`, `FUN_00186a88`, most `R300SchedModel` slot bodies other than 13/26/27/28: the single-use temporaries are reused across many roles and need a per-block reading.
+Two functions (`R300VSchedModel__vslot27`, `R300VMachineAssembler__encodeDestinationWord/DualMathOperands`) were restored to their pre-callee-pass text after the dataflow gate rejected the callee-result rows.

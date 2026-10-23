@@ -102,7 +102,7 @@ int FUN_00146b0c(inst, param_2, param_3, param_4, param_5, param_6)
     if ((((*(int *)(*(int *)(sourceDef + 0x88) + 8) == param_3) &&
          (iVar3 = FUN_00146788(sourceDef,param_4), iVar3 != 0)) &&
         ((*(uint *)(inst + 0xb8) & 1) == 0)) &&
-       ((((*(uint *)(inst + 0xb8) & 2) == 0 && (iVar3 = FUN_00105c5c(inst,1), iVar3 == 0)) &&
+       ((((*(uint *)(inst + 0xb8) & 2) == 0 && (iVar3 = IRInst__getDefiningField128(inst,1), iVar3 == 0)) &&
         (*(int *)(inst + 0x158) == *(int *)(sourceDef + 0x158))))) {
       iVar4 = ((int (*)())FUN_00146b0c)(sourceDef,iVar5,param_3,param_4,param_5,param_6);
     }
@@ -110,7 +110,7 @@ int FUN_00146b0c(inst, param_2, param_3, param_4, param_5, param_6)
     if (((*(int *)(*(int *)(operandVReg + 0x88) + 8) == param_3) &&
         (iVar3 = FUN_00146788(operandVReg,param_4), iVar3 != 0)) &&
        (((*(uint *)(inst + 0xd0) & 1) == 0 &&
-        ((((*(uint *)(inst + 0xd0) & 2) == 0 && (iVar3 = FUN_00105c5c(inst,2), iVar3 == 0)) &&
+        ((((*(uint *)(inst + 0xd0) & 2) == 0 && (iVar3 = IRInst__getDefiningField128(inst,2), iVar3 == 0)) &&
          (*(int *)(inst + 0x158) == *(int *)(operandVReg + 0x158))))))) {
       iVar1 = ((int (*)())FUN_00146b0c)(operandVReg,iVar5,param_3,param_4,param_5,param_6);
     }
@@ -605,6 +605,7 @@ int FUN_001479f8(inst, param_2)
   int inst;
   int param_2;
 {
+  int hasSingleUse;
   bool bVar1;
   bool bVar2;
   int iVar3;
@@ -624,8 +625,8 @@ int FUN_001479f8(inst, param_2)
     if (iVar6 == 0) {
       return;
     }
-    iVar6 = IRInst__hasSingleUse(operandVReg,param_2);
-    if (iVar6 == 0) break;
+    hasSingleUse = IRInst__hasSingleUse(operandVReg,param_2);
+    if (hasSingleUse == 0) break;
     if (operandVReg[0x48] != 0) {
       bVar1 = false;
     }
@@ -669,6 +670,8 @@ int FUN_00147b8c(inst, param_2, inst2, param_4, param_5, param_6, param_7)
   int param_6;
   undefined4 *param_7;
 {
+  int definingField1282;
+  int definingField128;
   int *operandVReg;
   int *callResult;
   int *callResult2;
@@ -769,9 +772,9 @@ LAB_00147e9c:
       iVar3 = FUN_00105dbc(inst,param_2);
       iVar5 = FUN_00105dbc(inst2,param_4);
       if (iVar3 == iVar5) {
-        iVar3 = FUN_00105c5c(inst,param_2);
-        iVar5 = FUN_00105c5c(inst2,param_4);
-        if (iVar3 == iVar5) {
+        definingField128 = IRInst__getDefiningField128(inst,param_2);
+        definingField1282 = IRInst__getDefiningField128(inst2,param_4);
+        if (definingField128 == definingField1282) {
           return 1;
         }
       }
@@ -785,6 +788,8 @@ int FUN_00147f54(inst, compiler)
   int *inst;
   int compiler;
 {
+  int uniformSourceConstant;
+  int uniformSourceConstant2;
   undefined4 sourceDef3;
   int sourceDef2;
   int operandRecord3;
@@ -826,15 +831,15 @@ int FUN_00147f54(inst, compiler)
     loopIndex = 1;
     while( true ) {
       operandRecord3 = IRInst__getOperandRecord(inst,0);
-      iVar4 = FUN_000f5cf0(inst,loopIndex,*(undefined4 *)(operandRecord3 + 0x10),auStack_94);
-      if (iVar4 != 0) break;
+      uniformSourceConstant = IRInst__getUniformSourceConstant(inst,loopIndex,*(undefined4 *)(operandRecord3 + 0x10),auStack_94);
+      if (uniformSourceConstant != 0) break;
       bVar1 = loopIndex == 2;
       loopIndex = loopIndex + 1;
       if (bVar1) {
         return inst;
       }
     }
-    iVar4 = ((undefined4 (*)())FUN_0010ab8c)(iVar4,local_a8,(double)local_90);
+    iVar4 = ((undefined4 (*)())FUN_0010ab8c)(uniformSourceConstant,local_a8,(double)local_90);
     if (iVar4 == 0) {
       return inst;
     }
@@ -852,8 +857,8 @@ int FUN_00147f54(inst, compiler)
   }
   else if (iVar2 == 0x14) {
     operandRecord2 = IRInst__getOperandRecord(inst,0);
-    iVar2 = FUN_000f5cf0(inst,3,*(undefined4 *)(operandRecord2 + 0x10),auStack_94);
-    if (iVar2 == 0) {
+    uniformSourceConstant2 = IRInst__getUniformSourceConstant(inst,3,*(undefined4 *)(operandRecord2 + 0x10),auStack_94);
+    if (uniformSourceConstant2 == 0) {
       return inst;
     }
     if ((local_90 != FLOAT_001aa114) && (local_90 != FLOAT_001aa0e8)) {
@@ -1186,6 +1191,7 @@ int FUN_00148980(inst, param_2)
   int inst;
   int param_2;
 {
+  int hasSingleUse;
   int splitRgbAlphaEnabled;
   int operandRecord4;
   int operandRecord2;
@@ -1230,9 +1236,9 @@ int FUN_00148980(inst, param_2)
         if ((iVar2 == 0) && (iVar2 = FUN_001467e8(operandVReg,param_2), iVar2 != 0)) {
           iVar8 = *(int *)(param_2 + 0x478);
           *(int *)(param_2 + 0x174) = *(int *)(param_2 + 0x174) + 1;
-          iVar2 = IRInst__hasSingleUse(operandVReg,param_2);
+          hasSingleUse = IRInst__hasSingleUse(operandVReg,param_2);
           piVar4 = operandVReg;
-          if (iVar2 == 0) {
+          if (hasSingleUse == 0) {
             iVar9 = iVar8 + 1;
             piVar4 = (int *)IRInst__clone(operandVReg,*(undefined4 *)(param_2 + 8),0);
             Block__insertInstAfter(operandVReg[0x56],operandVReg,piVar4);
@@ -1293,8 +1299,8 @@ int FUN_00148980(inst, param_2)
               *(int *)(operandRecord4 + 0x10) = iVar10;
             }
           }
-          iVar2 = IRInst__hasSingleUse(inst,param_2);
-          if (iVar2 != 0) {
+          hasSingleUse = IRInst__hasSingleUse(inst,param_2);
+          if (hasSingleUse != 0) {
             if (*(int *)(inst + 0x120) != 0) {
               piVar4[0x48] = 1;
               *(undefined4 *)(inst + 0x120) = 0;
@@ -1335,6 +1341,9 @@ int FUN_00148d8c(inst, param_2)
   int *inst;
   int param_2;
 {
+  int sourceIsSplatConstantResult;
+  int hasSingleUse;
+  int sourceIsSplatConstantResult2;
   int operandRecord2;
   int operandRecord;
   bool bVar1;
@@ -1383,8 +1392,8 @@ int FUN_00148d8c(inst, param_2)
           if (iVar7 == 0) {
             return 0;
           }
-          iVar7 = IRInst__hasSingleUse(piVar8,param_2);
-          if (iVar7 == 0) {
+          hasSingleUse = IRInst__hasSingleUse(piVar8,param_2);
+          if (hasSingleUse == 0) {
             return 0;
           }
           if (piVar8[0x48] != 0) {
@@ -1429,8 +1438,8 @@ LAB_00148f68:
 LAB_001490f4:
             if (uVar4 != 0) {
               if ((piVar8[0x2e] & 1U) == 0) {
-                iVar7 = ((undefined4 (*)())FUN_00139838)(piVar8,1,0.0);
-                if (iVar7 == 0) {
+                sourceIsSplatConstantResult = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(piVar8,1,0.0);
+                if (sourceIsSplatConstantResult == 0) {
                   IROperand__setModifierBits(piVar8 + 0x29,1,1);
                 }
               }
@@ -1443,8 +1452,8 @@ LAB_001490f4:
             if ((uVar4 != 0) || (iVar7 = FUN_000f5e8c(piVar8,1), iVar7 == 0)) {
               IROperand__setModifierBits(piVar8 + 0x29,2,1);
               if (uVar4 != 0) {
-                iVar7 = ((undefined4 (*)())FUN_00139838)(piVar8,1,0.0);
-                if (iVar7 == 0) {
+                sourceIsSplatConstantResult = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(piVar8,1,0.0);
+                if (sourceIsSplatConstantResult == 0) {
                   IROperand__setModifierBits(piVar8 + 0x29,1,1);
                 }
                 goto LAB_0014937c;
@@ -1462,8 +1471,8 @@ LAB_001491e8:
             IROperand__setModifierBits(piVar8 + 0x29,1,0);
           }
           else {
-            iVar7 = ((undefined4 (*)())FUN_00139838)(piVar8,1,0.0);
-            if (iVar7 == 0) {
+            sourceIsSplatConstantResult = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(piVar8,1,0.0);
+            if (sourceIsSplatConstantResult == 0) {
               IROperand__setModifierBits(piVar8 + 0x29,1,1);
             }
           }
@@ -1473,8 +1482,8 @@ LAB_001491e8:
           if (uVar9 == 0) {
             if (uVar4 != 0) {
               if ((piVar8[0x2e] & 1U) == 0) {
-                iVar7 = ((undefined4 (*)())FUN_00139838)(piVar8,1,0.0);
-                if (iVar7 == 0) {
+                sourceIsSplatConstantResult = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(piVar8,1,0.0);
+                if (sourceIsSplatConstantResult == 0) {
                   IROperand__setModifierBits(piVar8 + 0x29,1,1);
                 }
               }
@@ -1482,8 +1491,8 @@ LAB_001491e8:
                 IROperand__setModifierBits(piVar8 + 0x29,1,0);
               }
               if ((piVar8[0x34] & 1U) == 0) {
-                iVar7 = ((undefined4 (*)())FUN_00139838)(piVar8,2,0.0);
-                if (iVar7 == 0) {
+                sourceIsSplatConstantResult = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(piVar8,2,0.0);
+                if (sourceIsSplatConstantResult == 0) {
                   IROperand__setModifierBits(piVar8 + 0x2f,1,1);
                 }
               }
@@ -1496,12 +1505,12 @@ LAB_001491e8:
             IROperand__setModifierBits(piVar8 + 0x29,2,1);
             IROperand__setModifierBits(piVar8 + 0x2f,2,1);
             if (uVar4 == 0) goto LAB_001491e8;
-            iVar7 = ((undefined4 (*)())FUN_00139838)(piVar8,1,0.0);
-            if (iVar7 == 0) {
+            sourceIsSplatConstantResult = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(piVar8,1,0.0);
+            if (sourceIsSplatConstantResult == 0) {
               IROperand__setModifierBits(piVar8 + 0x29,1,1);
             }
-            iVar7 = ((undefined4 (*)())FUN_00139838)(piVar8,2,0.0);
-            if (iVar7 == 0) {
+            sourceIsSplatConstantResult = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(piVar8,2,0.0);
+            if (sourceIsSplatConstantResult == 0) {
               IROperand__setModifierBits(piVar8 + 0x2f,1,1);
             }
           }
@@ -1514,8 +1523,8 @@ LAB_001491e8:
             if (uVar9 == 0) {
               if (uVar4 != 0) {
                 if ((piVar10[8] & 1U) != 0) goto LAB_00149328;
-                iVar11 = ((undefined4 (*)())FUN_00139838)(piVar8,iVar7,0.0);
-                if (iVar11 == 0) {
+                sourceIsSplatConstantResult2 = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(piVar8,iVar7,0.0);
+                if (sourceIsSplatConstantResult2 == 0) {
                   IROperand__setModifierBits(piVar10 + 3,1,1);
                 }
               }
@@ -1527,8 +1536,8 @@ LAB_00149328:
                 IROperand__setModifierBits(piVar12,1,0);
               }
               else {
-                iVar11 = ((undefined4 (*)())FUN_00139838)(piVar8,iVar7,0.0);
-                if (iVar11 == 0) {
+                sourceIsSplatConstantResult2 = ((undefined4 (*)())IRInst__sourceIsSplatConstant)(piVar8,iVar7,0.0);
+                if (sourceIsSplatConstantResult2 == 0) {
                   IROperand__setModifierBits(piVar12,1,1);
                 }
               }
@@ -1549,7 +1558,7 @@ LAB_0014937c:
     IROperand__setModifierBits(inst + 0x29,1,0);
   }
   iVar5 = FUN_000f3824(local_54);
-  if (((((iVar5 == 0) || (iVar5 = FUN_000f31e8(inst,1), iVar5 == 0)) &&
+  if (((((iVar5 == 0) || (iVar5 = IRInst__isSourceSelectIdentity(inst,1), iVar5 == 0)) &&
        (iVar5 = FUN_000f2c5c(local_58), iVar5 != 0)) &&
       (((char)local_58 == '\x04' && (iVar5 = IRInst__hasSingleUse(operandVReg,param_2), iVar5 != 0)))) &&
      ((iVar5 = OpcodeTraits__flagBit6(*(undefined4 *)(operandVReg[0x22] + 8),*(undefined4 *)(param_2 + 8)),
@@ -1577,6 +1586,9 @@ int FUN_001494dc(inst, param_2, param_3)
   int param_2;
   undefined4 *param_3;
 {
+  undefined4 firstWrittenComponentResult2;
+  int firstWrittenComponentResult;
+  int flagBit0Result;
   int *sourceDef;
   int operandRecord3;
   int operandRecord;
@@ -1598,14 +1610,14 @@ int FUN_001494dc(inst, param_2, param_3)
   int *local_48;
   int local_38 [3];
   
-  iVar2 = RegKind__flagBit0(inst[0x26]);
-  if (iVar2 != 0) {
+  flagBit0Result = RegKind__flagBit0(inst[0x26]);
+  if (flagBit0Result != 0) {
     iVar2 = (**(code **)(*inst + 100))(inst);
     if (iVar2 != 0) {
       for (iVar2 = 1; iVar3 = (**(code **)(*inst + 0x14))(inst), iVar2 <= iVar3;
           iVar2 = iVar2 + 1) {
         if ((((inst[iVar2 * 6 + 0x28] & 1U) != 0) || ((inst[iVar2 * 6 + 0x28] & 2U) != 0)) ||
-           (iVar3 = FUN_000f31e8(inst,iVar2), iVar3 == 0)) goto LAB_00149a40;
+           (iVar3 = IRInst__isSourceSelectIdentity(inst,iVar2), iVar3 == 0)) goto LAB_00149a40;
       }
       if ((inst[0x48] == 0) && (inst[0x49] == 0)) {
         if (((inst[0x20] != 0) &&
@@ -1646,7 +1658,7 @@ LAB_00149704:
                 for (iVar3 = 1; iVar5 = (**(code **)(*a0 + 0x14))(a0), iVar3 <= iVar5;
                     iVar3 = iVar3 + 1) {
                   if ((((a0[iVar3 * 6 + 0x28] & 1U) != 0) || ((a0[iVar3 * 6 + 0x28] & 2U) != 0)) ||
-                     (iVar5 = FUN_000f31e8(a0,iVar3), iVar5 == 0)) goto LAB_001499ec;
+                     (iVar5 = IRInst__isSourceSelectIdentity(a0,iVar3), iVar5 == 0)) goto LAB_001499ec;
                 }
                 if ((a0[0x48] == 0) && (a0[0x49] == 0)) {
                   if ((a0[0x20] != 0) &&
@@ -1767,17 +1779,17 @@ LAB_00149a40:
              (iVar2 = OpcodeTraits__flagBit8(*(undefined4 *)(sourceDef[0x22] + 8),*(undefined4 *)(param_2 + 8)),
              iVar2 == 0)) {
             operandRecord2 = IRInst__getOperandRecord(sourceDef,0);
-            iVar2 = FUN_000f30d4(*(undefined4 *)(operandRecord2 + 0x10));
+            firstWrittenComponentResult = SelectWord__firstWrittenComponent(*(undefined4 *)(operandRecord2 + 0x10));
             operandRecord = IRInst__getOperandRecord(inst,0);
-            uVar4 = FUN_000f30d4(*(undefined4 *)(operandRecord + 0x10));
+            firstWrittenComponentResult2 = SelectWord__firstWrittenComponent(*(undefined4 *)(operandRecord + 0x10));
             for (iVar3 = 1; iVar5 = (**(code **)(*sourceDef + 0x14))(sourceDef), iVar3 <= iVar5;
                 iVar3 = iVar3 + 1) {
               operandRecord3 = IRInst__getOperandRecord(sourceDef,iVar3);
-              cVar1 = *(char *)(iVar2 + operandRecord3 + 0x10);
+              cVar1 = *(char *)(firstWrittenComponentResult + operandRecord3 + 0x10);
               iVar5 = IRInst__getOperandRecord(sourceDef,iVar3);
               *(undefined4 *)(iVar5 + 0x10) = 0x4040404;
               if (cVar1 != '\x04') {
-                (**(code **)(*sourceDef + 0x88))(sourceDef,iVar3,uVar4,cVar1);
+                (**(code **)(*sourceDef + 0x88))(sourceDef,iVar3,firstWrittenComponentResult2,cVar1);
               }
             }
           }
@@ -2208,6 +2220,7 @@ int Inst__swizzleTextureFetchOutput(inst, param_2, param_3)
   int param_2;
   int param_3;
 {
+  int isIdentity;
   int operandRecord;
   int operandRecord2;
   uint uVar1;
@@ -2230,8 +2243,8 @@ int Inst__swizzleTextureFetchOutput(inst, param_2, param_3)
     iVar3 = (**(code **)(*operandVReg + 0x30))(operandVReg);
     if (((iVar3 != 0) && (iVar3 = IRInst__hasSingleUse(operandVReg,param_3), iVar3 != 0)) &&
        ((operandVReg[5] & 0x200U) == 0)) {
-      iVar3 = FUN_000f3190(local_48[0]);
-      if (iVar3 == 0) {
+      isIdentity = SelectWord__isIdentity(local_48[0]);
+      if (isIdentity == 0) {
         FUN_000f2bdc(local_28,operandVReg[0x50],local_48[0]);
         iVar3 = 0;
         local_48[0] = local_28[0];
@@ -2329,6 +2342,7 @@ int Inst__collapseAlgebraic_0014acb8(inst, param_2)
   int *inst;
   int param_2;
 {
+  int hasSingleUse;
   undefined4 sourceDef5;
   int operandRecord3;
   int operandRecord4;
@@ -2379,9 +2393,9 @@ int Inst__collapseAlgebraic_0014acb8(inst, param_2)
     operandRecord = IRInst__getOperandRecord(inst,2);
     iVar1 = FUN_000f2c5c(*(undefined4 *)(operandRecord + 0x10));
     if (iVar1 != 0) {
-      iVar1 = IRInst__hasSingleUse(sourceDef2,param_2);
+      hasSingleUse = IRInst__hasSingleUse(sourceDef2,param_2);
       uVar8 = 1;
-      if (iVar1 != 0) goto LAB_0014adfc;
+      if (hasSingleUse != 0) goto LAB_0014adfc;
     }
   }
   iVar1 = *(int *)(*(int *)(sourceDef3 + 0x88) + 8);
@@ -2400,8 +2414,8 @@ int Inst__collapseAlgebraic_0014acb8(inst, param_2)
   if (iVar1 == 0) {
     return 0;
   }
-  iVar1 = IRInst__hasSingleUse(sourceDef3,param_2);
-  if (iVar1 == 0) {
+  hasSingleUse = IRInst__hasSingleUse(sourceDef3,param_2);
+  if (hasSingleUse == 0) {
     return 0;
   }
   uVar8 = 2;
@@ -2512,6 +2526,7 @@ int Inst__collapseAlgebraic_0014b150(inst, param_2)
   int inst;
   int param_2;
 {
+  int hasSingleUse;
   undefined4 operandRecord3;
   undefined4 operandRecord4;
   int operandRecord2;
@@ -2606,8 +2621,8 @@ int Inst__collapseAlgebraic_0014b150(inst, param_2)
       if (iVar18 != 0x14) {
         return 0;
       }
-      iVar6 = IRInst__hasSingleUse(sourceDef,param_2);
-      if (iVar6 == 0) {
+      hasSingleUse = IRInst__hasSingleUse(sourceDef,param_2);
+      if (hasSingleUse == 0) {
         return 0;
       }
       if (*(int *)(sourceDef + 0x120) != 0) {
@@ -2626,8 +2641,8 @@ int Inst__collapseAlgebraic_0014b150(inst, param_2)
       if (*(int *)(*(int *)(iVar7 + 0x88) + 8) != 0x13) {
         return 0;
       }
-      iVar6 = IRInst__hasSingleUse(iVar7,param_2);
-      if (iVar6 == 0) {
+      hasSingleUse = IRInst__hasSingleUse(iVar7,param_2);
+      if (hasSingleUse == 0) {
         return 0;
       }
       if (*(int *)(iVar7 + 0x120) != 0) {
@@ -2666,10 +2681,10 @@ int Inst__collapseAlgebraic_0014b150(inst, param_2)
       local_e0 = 0;
       operandRecord4 = IRInst__getOperandRecord(iVar7,1);
       local_64 = &local_9c;
-      FUN_00104730(local_64,operandRecord4);
+      IROperand__copyFrom(local_64,operandRecord4);
       operandRecord4 = IRInst__getOperandRecord(iVar7,2);
       local_60 = &local_e4;
-      FUN_00104730(local_60,operandRecord4);
+      IROperand__copyFrom(local_60,operandRecord4);
       iVar5 = *(int *)(inst + 0x160) - *(int *)(param_2 + 0x478);
       uVar13 = *(uint *)(local_74 + 0xe8);
       if (iVar5 < 0) {
@@ -2692,10 +2707,10 @@ int Inst__collapseAlgebraic_0014b150(inst, param_2)
       uVar19 = *(undefined4 *)(inst + 0x98);
       operandRecord = IRInst__getOperandRecord(inst,uVar22);
       local_6c = &local_cc;
-      FUN_00104730(local_6c,operandRecord);
+      IROperand__copyFrom(local_6c,operandRecord);
       operandRecord = IRInst__getOperandRecord(inst,uVar23);
       local_68 = &local_b4;
-      FUN_00104730(local_68,operandRecord);
+      IROperand__copyFrom(local_68,operandRecord);
       local_e8 = DAT_001b0050;
       local_f4 = DAT_001b0050;
       local_f0 = DAT_001b0050;
@@ -2741,19 +2756,19 @@ int Inst__collapseAlgebraic_0014b150(inst, param_2)
       *(undefined4 *)(iVar7 + 0x94) = *(undefined4 *)(iVar7 + 0x14c);
       IRInst__setOperandSource(iVar7,1,operandVReg,0,*(undefined4 *)(param_2 + 8));
       operandRecord3 = IRInst__getOperandRecord(iVar7,1);
-      FUN_00104730(operandRecord3,local_64);
+      IROperand__copyFrom(operandRecord3,local_64);
       uVar22 = local_f0;
       operandRecord2 = IRInst__getOperandRecord(iVar7,1);
       *(undefined4 *)(operandRecord2 + 0x10) = uVar22;
       IRInst__setOperandSource(iVar7,2,operandVReg2,0,*(undefined4 *)(param_2 + 8));
       operandRecord3 = IRInst__getOperandRecord(iVar7,2);
-      FUN_00104730(operandRecord3,local_60);
+      IROperand__copyFrom(operandRecord3,local_60);
       uVar22 = local_ec;
       operandRecord2 = IRInst__getOperandRecord(iVar7,2);
       *(undefined4 *)(operandRecord2 + 0x10) = uVar22;
       IRInst__setOperandSource(iVar7,3,local_70,0,*(undefined4 *)(param_2 + 8));
       operandRecord3 = IRInst__getOperandRecord(iVar7,3);
-      FUN_00104730(operandRecord3,local_68);
+      IROperand__copyFrom(operandRecord3,local_68);
       uVar22 = local_f4;
       operandRecord2 = IRInst__getOperandRecord(iVar7,3);
       *(undefined4 *)(operandRecord2 + 0x10) = uVar22;
@@ -2779,7 +2794,7 @@ int Inst__collapseAlgebraic_0014b150(inst, param_2)
       *(undefined4 *)(inst + 0x94) = *(undefined4 *)(inst + 0x14c);
       IRInst__setOperandSource(inst,1,local_74,0,*(undefined4 *)(param_2 + 8));
       operandRecord3 = IRInst__getOperandRecord(inst,1);
-      FUN_00104730(operandRecord3,local_6c);
+      IROperand__copyFrom(operandRecord3,local_6c);
       if (iVar18 != 0) {
         IRInst__setExtraOperandSource(inst,iVar18,0,*(undefined4 *)(param_2 + 8));
       }
@@ -2906,13 +2921,13 @@ LAB_0014b954:
     local_98 = 0;
     local_94 = 0;
     operandRecord = IRInst__getOperandRecord(iVar4,1);
-    FUN_00104730(&local_c8,operandRecord);
+    IROperand__copyFrom(&local_c8,operandRecord);
     operandRecord = IRInst__getOperandRecord(iVar4,2);
     local_64 = &local_b0;
-    FUN_00104730(local_64,operandRecord);
+    IROperand__copyFrom(local_64,operandRecord);
     operandRecord2 = IRInst__getOperandRecord(inst,uVar7);
     local_60 = &local_98;
-    FUN_00104730(local_60,operandRecord2);
+    IROperand__copyFrom(local_60,operandRecord2);
     if (0 < *(int *)(inst + 0x84)) {
       iVar6 = 1;
       do {
@@ -3547,6 +3562,7 @@ int Inst__collapseAlgebraic_0014cec8(inst, param_2)
   int inst;
   int param_2;
 {
+  int uniformSourceConstant;
   undefined4 sourceDef2;
   undefined4 sourceDef;
   int operandRecord;
@@ -3569,8 +3585,8 @@ int Inst__collapseAlgebraic_0014cec8(inst, param_2)
           + (uint)*(byte *)(iVar1 + 0xf) == 1 && (*(int *)(iVar1 + 0x120) == 0)))))))) &&
      (inst2 = *(int *)(iVar1 + 0x124), inst2 == 0)) {
     operandRecord = IRInst__getOperandRecord(iVar1,0);
-    iVar2 = FUN_000f5cf0(iVar1,3,*(undefined4 *)(operandRecord + 0x10),local_50 + 4);
-    if ((((iVar2 != 0) && (local_3c == FLOAT_001aa0d4)) && (local_50[4] == 2)) &&
+    uniformSourceConstant = IRInst__getUniformSourceConstant(iVar1,3,*(undefined4 *)(operandRecord + 0x10),local_50 + 4);
+    if ((((uniformSourceConstant != 0) && (local_3c == FLOAT_001aa0d4)) && (local_50[4] == 2)) &&
        (local_50[0] = inst2,
        inst2 = ((int (*)())FUN_0014c604)(inst,iVar1,param_2,&local_58,&local_54,local_50), inst2 != 0)) {
       inst2 = IRInst__create(0x1c,*(undefined4 *)(param_2 + 8));
@@ -3637,6 +3653,8 @@ int Inst__collapseAlgebraic_0014d274(inst, param_2)
   int inst;
   int param_2;
 {
+  int isSourceSelectIdentity2;
+  int isSourceSelectIdentity;
   undefined4 sourceDef2;
   int operandRecord3;
   int operandRecord2;
@@ -3673,12 +3691,12 @@ int Inst__collapseAlgebraic_0014d274(inst, param_2)
   if ((*(uint *)(inst + 0xd0) & 2) != 0) {
     return 0;
   }
-  iVar3 = FUN_000f31e8(inst,1);
-  if (iVar3 == 0) {
+  isSourceSelectIdentity2 = IRInst__isSourceSelectIdentity(inst,1);
+  if (isSourceSelectIdentity2 == 0) {
     return 0;
   }
-  iVar3 = FUN_000f31e8(inst,2);
-  if (iVar3 == 0) {
+  isSourceSelectIdentity2 = IRInst__isSourceSelectIdentity(inst,2);
+  if (isSourceSelectIdentity2 == 0) {
     return 0;
   }
   iVar3 = IRInst__getOperandSource(inst,1);
@@ -3689,8 +3707,8 @@ int Inst__collapseAlgebraic_0014d274(inst, param_2)
      ((((*(uint *)(operandVReg + 0x14) & 0x200) == 0 && ((*(uint *)(operandVReg + 0xb8) & 1) == 0)) &&
       (((*(uint *)(operandVReg + 0xb8) & 2) == 0 &&
        (((*(uint *)(operandVReg + 0xd0) & 1) == 0 && ((*(uint *)(operandVReg + 0xd0) & 2) == 0)))))))) {
-    iVar2 = FUN_000f31e8(operandVReg,1);
-    if (iVar2 != 0) {
+    isSourceSelectIdentity = IRInst__isSourceSelectIdentity(operandVReg,1);
+    if (isSourceSelectIdentity != 0) {
       sourceDef2 = IRInst__getOperandSource(operandVReg,1);
       iVar2 = ((int (*)())FUN_00147044)(iVar3,sourceDef2);
       if (iVar2 != 0) {
@@ -3705,7 +3723,7 @@ int Inst__collapseAlgebraic_0014d274(inst, param_2)
        (((*(uint *)(operandVReg + 0x14) & 0x200) == 0 && ((*(uint *)(operandVReg + 0xb8) & 1) == 0)))) &&
       (((*(uint *)(operandVReg + 0xb8) & 2) == 0 &&
        (((*(uint *)(operandVReg + 0xd0) & 1) == 0 && ((*(uint *)(operandVReg + 0xd0) & 2) == 0)))))) &&
-     (iVar2 = FUN_000f31e8(operandVReg,1), iVar2 != 0)) {
+     (iVar2 = IRInst__isSourceSelectIdentity(operandVReg,1), iVar2 != 0)) {
     sourceDef2 = IRInst__getOperandSource(operandVReg,2);
     iVar2 = ((int (*)())FUN_00147044)(iVar3,sourceDef2);
     if (iVar2 != 0) {
@@ -3719,8 +3737,8 @@ int Inst__collapseAlgebraic_0014d274(inst, param_2)
       (((*(uint *)(iVar3 + 0x14) & 0x200) == 0 && ((*(uint *)(iVar3 + 0xb8) & 1) == 0)))) &&
      (((*(uint *)(iVar3 + 0xb8) & 2) == 0 &&
       (((*(uint *)(iVar3 + 0xd0) & 1) == 0 && ((*(uint *)(iVar3 + 0xd0) & 2) == 0)))))) {
-    iVar2 = FUN_000f31e8(iVar3,1);
-    if (iVar2 != 0) {
+    isSourceSelectIdentity = IRInst__isSourceSelectIdentity(iVar3,1);
+    if (isSourceSelectIdentity != 0) {
       sourceDef2 = IRInst__getOperandSource(iVar3,1);
       iVar2 = ((int (*)())FUN_00147044)(operandVReg,sourceDef2);
       if (iVar2 != 0) {
@@ -3755,8 +3773,8 @@ int Inst__collapseAlgebraic_0014d274(inst, param_2)
   if ((*(uint *)(iVar3 + 0xd0) & 2) != 0) {
     return 0;
   }
-  iVar2 = FUN_000f31e8(iVar3,1);
-  if (iVar2 == 0) {
+  isSourceSelectIdentity = IRInst__isSourceSelectIdentity(iVar3,1);
+  if (isSourceSelectIdentity == 0) {
     return 0;
   }
   sourceDef2 = IRInst__getOperandSource(iVar3,2);
@@ -3775,7 +3793,7 @@ LAB_0014d5ac:
        ((*(uint *)(operandVReg + 0xb8) & 1) == 0)) &&
       ((((((*(uint *)(operandVReg + 0xb8) & 2) == 0 && ((*(uint *)(operandVReg + 0xd0) & 1) == 0)) &&
          ((*(uint *)(operandVReg + 0xd0) & 2) == 0)) &&
-        ((iVar6 = FUN_000f31e8(operandVReg,1), iVar6 != 0 && (iVar6 = FUN_000f31e8(operandVReg,2), iVar6 != 0)))
+        ((iVar6 = IRInst__isSourceSelectIdentity(operandVReg,1), iVar6 != 0 && (iVar6 = IRInst__isSourceSelectIdentity(operandVReg,2), iVar6 != 0)))
         ) && ((*(uint *)(operandVReg + 0x14) & 0x200) == 0)))))) {
     sourceDef2 = IRInst__getOperandSource(operandVReg,1);
     iVar6 = ((int (*)())FUN_00147044)(iVar3,sourceDef2);
@@ -3846,7 +3864,7 @@ LAB_0014d5ac:
         else {
           *(int *)(sourceDef + 0x160) = *(int *)(param_2 + 0x478) + 1;
         }
-        FUN_000f35c4(inst);
+        IRInst__clearSourceSelectsOfUnwrittenComponents(inst);
         return 1;
       }
     }
@@ -3859,6 +3877,7 @@ int Inst__collapseAlgebraic_0014d8f8(node, pass)
   int node;
   int pass;
 {
+  int hasSingleUse;
   undefined4 sourceDef2;
   undefined4 sourceDef6;
   undefined4 sourceDef3;
@@ -3907,8 +3926,8 @@ int Inst__collapseAlgebraic_0014d8f8(node, pass)
   sourceDef = IRInst__getOperandSource(node,1);
   if (*(int *)(*(int *)(sourceDef + 0x88) + 8) == 0x12) {
     sourceDef2 = IRInst__getOperandSource(node,1);
-    iVar8 = IRInst__hasSingleUse(sourceDef2,pass);
-    if ((iVar8 != 0) &&
+    hasSingleUse = IRInst__hasSingleUse(sourceDef2,pass);
+    if ((hasSingleUse != 0) &&
        ((uint)*(byte *)(node + 0xc) + (uint)*(byte *)(node + 0xd) +
         (uint)*(byte *)(node + 0xe) + (uint)*(byte *)(node + 0xf) == 1)) {
       sourceDef = IRInst__getOperandSource(node,1);
@@ -3953,8 +3972,8 @@ int Inst__collapseAlgebraic_0014d8f8(node, pass)
     return 0;
   }
   sourceDef2 = IRInst__getOperandSource(node,2);
-  iVar8 = IRInst__hasSingleUse(sourceDef2,pass);
-  if (iVar8 == 0) {
+  hasSingleUse = IRInst__hasSingleUse(sourceDef2,pass);
+  if (hasSingleUse == 0) {
     return 0;
   }
   if ((uint)*(byte *)(node + 0xc) + (uint)*(byte *)(node + 0xd) +
@@ -4121,8 +4140,8 @@ LAB_0014dd2c:
     operandRecord = IRInst__getOperandRecord(sourceDef6,0);
     FUN_000f2f84(&local_54,local_58,*(undefined4 *)(operandRecord + 0x10));
     *(undefined4 *)(sourceDef4 + 0x9c) = local_54;
-    FUN_000f3908(&local_50,local_54);
-    FUN_000f3340(local_4c,0x10203,local_50);
+    WriteMask__fromSelectWord(&local_50,local_54);
+    SelectWord__maskUnused(local_4c,0x10203,local_50);
     operandRecord = IRInst__getOperandRecord(sourceDef4,1);
     *(undefined4 *)(operandRecord + 0x10) = local_4c[0];
     operandRecord = IRInst__getOperandRecord(sourceDef4,2);
@@ -4622,8 +4641,8 @@ LAB_0014edd0:
               iVar14 = *param_2;
               iVar2 = param_2[1];
               operandRecord = IRInst__getOperandRecord(iVar14,0);
-              FUN_000f3908(local_b8 + 0x14,*(undefined4 *)(operandRecord + 0x10));
-              FUN_000f3340(&local_64,0x10203,local_b8[0x14]);
+              WriteMask__fromSelectWord(local_b8 + 0x14,*(undefined4 *)(operandRecord + 0x10));
+              SelectWord__maskUnused(&local_64,0x10203,local_b8[0x14]);
               operandRecord = IRInst__getOperandRecord(iVar14,iVar2);
               *(undefined4 *)(operandRecord + 0x10) = local_64;
             }
@@ -4668,8 +4687,8 @@ LAB_0014edd0:
               iVar14 = *param_2;
               iVar2 = param_2[1];
               operandRecord = IRInst__getOperandRecord(iVar14,0);
-              FUN_000f3908(&local_60,*(undefined4 *)(operandRecord + 0x10));
-              FUN_000f3340(&local_5c,0x10203,local_60);
+              WriteMask__fromSelectWord(&local_60,*(undefined4 *)(operandRecord + 0x10));
+              SelectWord__maskUnused(&local_5c,0x10203,local_60);
               operandRecord = IRInst__getOperandRecord(iVar14,iVar2);
               *(undefined4 *)(operandRecord + 0x10) = local_5c;
             }
@@ -5020,8 +5039,8 @@ LAB_0014fad0:
     iVar18 = *param_2;
     iVar3 = param_2[1];
     operandRecord = IRInst__getOperandRecord(iVar18,0);
-    FUN_000f3908(&local_90,*(undefined4 *)(operandRecord + 0x10));
-    FUN_000f3340(&local_8c,0x10203,local_90);
+    WriteMask__fromSelectWord(&local_90,*(undefined4 *)(operandRecord + 0x10));
+    SelectWord__maskUnused(&local_8c,0x10203,local_90);
     operandRecord = IRInst__getOperandRecord(iVar18,iVar3);
     *(undefined4 *)(operandRecord + 0x10) = local_8c;
   }
@@ -5066,8 +5085,8 @@ LAB_0014fad0:
     iVar18 = *param_2;
     iVar3 = param_2[1];
     operandRecord = IRInst__getOperandRecord(iVar18,0);
-    FUN_000f3908(&local_88,*(undefined4 *)(operandRecord + 0x10));
-    FUN_000f3340(&local_84,0x10203,local_88);
+    WriteMask__fromSelectWord(&local_88,*(undefined4 *)(operandRecord + 0x10));
+    SelectWord__maskUnused(&local_84,0x10203,local_88);
     operandRecord = IRInst__getOperandRecord(iVar18,iVar3);
     *(undefined4 *)(operandRecord + 0x10) = local_84;
   }
@@ -5112,8 +5131,8 @@ LAB_0014fad0:
     iVar18 = *param_1;
     iVar3 = param_1[1];
     operandRecord = IRInst__getOperandRecord(iVar18,0);
-    FUN_000f3908(&local_80,*(undefined4 *)(operandRecord + 0x10));
-    FUN_000f3340(&local_7c,0x10203,local_80);
+    WriteMask__fromSelectWord(&local_80,*(undefined4 *)(operandRecord + 0x10));
+    SelectWord__maskUnused(&local_7c,0x10203,local_80);
     operandRecord = IRInst__getOperandRecord(iVar18,iVar3);
     *(undefined4 *)(operandRecord + 0x10) = local_7c;
   }
@@ -5158,8 +5177,8 @@ LAB_0014fad0:
     iVar18 = *param_1;
     iVar3 = param_1[1];
     operandRecord = IRInst__getOperandRecord(iVar18,0);
-    FUN_000f3908(&local_78,*(undefined4 *)(operandRecord + 0x10));
-    FUN_000f3340(&local_74,0x10203,local_78);
+    WriteMask__fromSelectWord(&local_78,*(undefined4 *)(operandRecord + 0x10));
+    SelectWord__maskUnused(&local_74,0x10203,local_78);
     operandRecord = IRInst__getOperandRecord(iVar18,iVar3);
     *(undefined4 *)(operandRecord + 0x10) = local_74;
   }
@@ -5311,6 +5330,7 @@ int FUN_001507d0(param_1, param_2, param_3)
   int *param_2;
   int param_3;
 {
+  int hasSingleUse;
   int loopIndex2;
   bool bVar1;
   bool bVar2;
@@ -5344,8 +5364,8 @@ int FUN_001507d0(param_1, param_2, param_3)
   operandVReg = IRInst__getOperandSource(*param_1,param_1[1]);
   local_48[2] = IRInst__getOperandSource(operandVReg,2);
   do {
-    iVar4 = IRInst__hasSingleUse(*(undefined4 *)((int)local_48 + iVar15),param_3);
-    if (iVar4 == 0) {
+    hasSingleUse = IRInst__hasSingleUse(*(undefined4 *)((int)local_48 + iVar15),param_3);
+    if (hasSingleUse == 0) {
       loopIndex2 = loopIndex2 + 1;
     }
     bVar1 = iVar15 != 8;
@@ -5541,6 +5561,7 @@ int Inst__collapseAlgebraic_00150d38(inst, param_2)
   int inst;
   int param_2;
 {
+  int cloneResult;
   int operandRecord4;
   int operandRecord2;
   int sourceDef;
@@ -5601,8 +5622,8 @@ int Inst__collapseAlgebraic_00150d38(inst, param_2)
         operandRecord2 = IRInst__getOperandRecord(inst,0);
         local_98 = *(undefined4 *)(operandRecord2 + 0x10);
         operandRecord2 = IRInst__getOperandRecord(inst,0);
-        FUN_000f3908(&local_78,*(undefined4 *)(operandRecord2 + 0x10));
-        FUN_000f3340(&local_74,0x10203,local_78);
+        WriteMask__fromSelectWord(&local_78,*(undefined4 *)(operandRecord2 + 0x10));
+        SelectWord__maskUnused(&local_74,0x10203,local_78);
         local_94 = local_74;
         iVar5 = (**(code **)(**(int **)(iVar14 + 0x30c) + 0x154))
                           (*(int **)(iVar14 + 0x30c),param_2,&local_88,&local_94);
@@ -5702,20 +5723,20 @@ int Inst__collapseAlgebraic_00150d38(inst, param_2)
             }
             else {
               iVar9 = iVar6 + 1;
-              iVar12 = IRInst__clone(operandVReg,*(undefined4 *)(param_2 + 8),0);
-              *(undefined4 *)(iVar12 + 0x98) = 0x31;
-              *(undefined4 *)(iVar12 + 0x94) = *(undefined4 *)(iVar12 + 0x14c);
-              Block__insertInstAfter(operandVReg[0x56],operandVReg,iVar12);
-              *(int *)(iVar12 + 0x160) = iVar9;
-              sourceDef = IRInst__getOperandSource(iVar12,1);
+              cloneResult = IRInst__clone(operandVReg,*(undefined4 *)(param_2 + 8),0);
+              *(undefined4 *)(cloneResult + 0x98) = 0x31;
+              *(undefined4 *)(cloneResult + 0x94) = *(undefined4 *)(cloneResult + 0x14c);
+              Block__insertInstAfter(operandVReg[0x56],operandVReg,cloneResult);
+              *(int *)(cloneResult + 0x160) = iVar9;
+              sourceDef = IRInst__getOperandSource(cloneResult,1);
               if (iVar6 < *(int *)(sourceDef + 0x160)) {
                 *(int *)(sourceDef + 0x160) = *(int *)(sourceDef + 0x160) + 1;
               }
               else {
                 *(int *)(sourceDef + 0x160) = iVar9;
               }
-              if (1 < *(int *)(iVar12 + 0x84)) {
-                sourceDef = IRInst__getOperandSource(iVar12,2);
+              if (1 < *(int *)(cloneResult + 0x84)) {
+                sourceDef = IRInst__getOperandSource(cloneResult,2);
                 if (iVar6 < *(int *)(sourceDef + 0x160)) {
                   *(int *)(sourceDef + 0x160) = *(int *)(sourceDef + 0x160) + 1;
                 }
@@ -5723,7 +5744,7 @@ int Inst__collapseAlgebraic_00150d38(inst, param_2)
                   *(int *)(sourceDef + 0x160) = iVar9;
                 }
               }
-              IRInst__setOperandSource(inst2,1,iVar12,0,iVar14);
+              IRInst__setOperandSource(inst2,1,cloneResult,0,iVar14);
             }
             if (iVar6 < *(int *)(iVar5 + 0x160)) {
               *(int *)(iVar5 + 0x160) = *(int *)(iVar5 + 0x160) + 1;
@@ -5914,7 +5935,7 @@ int FUN_00151370(inst, inst2, param_3)
           local_5c = 0;
           iVar7 = inst[0x49];
           operandRecord2 = IRInst__getOperandRecord(inst,1);
-          FUN_00104730(&local_70,operandRecord2);
+          IROperand__copyFrom(&local_70,operandRecord2);
           local_94 = 0;
           local_90 = 0;
           local_8c = 0;
@@ -5928,7 +5949,7 @@ int FUN_00151370(inst, inst2, param_3)
           inst[0x49] = iVar7;
           inst[0x48] = iVar4;
           operandRecord2 = IRInst__getOperandRecord(inst,1);
-          FUN_00104730(operandRecord2,&local_70);
+          IROperand__copyFrom(operandRecord2,&local_70);
           FUN_00105e54(inst,2,inst2,1);
           inst[0x27] = local_c0;
           inst[0x25] = inst[0x53];
@@ -6181,7 +6202,7 @@ int FUN_00151a74(inst, inst2, param_3)
               local_84 = 0;
               local_74 = 0;
               operandRecord3 = IRInst__getOperandRecord(inst,1);
-              FUN_00104730(&local_88,operandRecord3);
+              IROperand__copyFrom(&local_88,operandRecord3);
               local_b0[1] = 0;
               local_b0[2] = 0;
               local_b0[3] = 0;
@@ -6198,7 +6219,7 @@ int FUN_00151a74(inst, inst2, param_3)
               inst[0x26] = 0;
               inst[0x49] = 0;
               operandRecord3 = IRInst__getOperandRecord(inst,1);
-              FUN_00104730(operandRecord3,&local_88);
+              IROperand__copyFrom(operandRecord3,&local_88);
               IRInst__setOperandSource(inst,1,a0,0,*(undefined4 *)(param_3 + 8));
               IROperand__setModifierBits(inst + 0x29,1,inst2[0x2e] & 1);
               FUN_00105e54(inst,2,inst2,1);
@@ -6293,6 +6314,7 @@ int FUN_001524b8(inst, inst2, param_3)
   int *inst2;
   int param_3;
 {
+  int cloneResult;
   undefined4 sourceDef4;
   undefined4 operandRecord2;
   undefined4 sourceDef2;
@@ -6473,7 +6495,7 @@ int FUN_001524b8(inst, inst2, param_3)
               local_64 = 0;
               local_54 = 0;
               operandRecord2 = IRInst__getOperandRecord(inst,1);
-              FUN_00104730(&local_68,operandRecord2);
+              IROperand__copyFrom(&local_68,operandRecord2);
               local_90[1] = 0;
               local_90[2] = 0;
               local_90[3] = 0;
@@ -6490,7 +6512,7 @@ int FUN_001524b8(inst, inst2, param_3)
               inst[0x49] = iVar8;
               inst[0x26] = 0;
               operandRecord2 = IRInst__getOperandRecord(inst,1);
-              FUN_00104730(operandRecord2,&local_68);
+              IROperand__copyFrom(operandRecord2,&local_68);
               IRInst__setOperandSource(inst,1,a0,0,*(undefined4 *)(param_3 + 8));
               IROperand__setModifierBits(inst + 0x29,1,inst2[0x2e] & 1);
               FUN_00105e54(inst,2,inst2,1);
@@ -6550,15 +6572,15 @@ int FUN_001524b8(inst, inst2, param_3)
               }
               if (iVar5 == 0x31) {
                 sourceDef = IRInst__getOperandSource(piVar10,1);
-                iVar8 = IRInst__clone(sourceDef,*(undefined4 *)(param_3 + 8),0);
-                *(undefined4 *)(iVar8 + 0x98) = 0x31;
-                *(undefined4 *)(iVar8 + 0x94) = *(undefined4 *)(iVar8 + 0x14c);
-                Block__insertInstAfter(*(undefined4 *)(sourceDef + 0x158),sourceDef,iVar8);
-                *(int *)(iVar8 + 0x160) = *(int *)(param_3 + 0x478) + 1;
-                if (0 < *(int *)(iVar8 + 0x84)) {
+                cloneResult = IRInst__clone(sourceDef,*(undefined4 *)(param_3 + 8),0);
+                *(undefined4 *)(cloneResult + 0x98) = 0x31;
+                *(undefined4 *)(cloneResult + 0x94) = *(undefined4 *)(cloneResult + 0x14c);
+                Block__insertInstAfter(*(undefined4 *)(sourceDef + 0x158),sourceDef,cloneResult);
+                *(int *)(cloneResult + 0x160) = *(int *)(param_3 + 0x478) + 1;
+                if (0 < *(int *)(cloneResult + 0x84)) {
                   iVar5 = 1;
                   do {
-                    sourceDef3 = IRInst__getOperandSource(iVar8,iVar5);
+                    sourceDef3 = IRInst__getOperandSource(cloneResult,iVar5);
                     if (*(int *)(param_3 + 0x478) < *(int *)(sourceDef3 + 0x160)) {
                       *(int *)(sourceDef3 + 0x160) = *(int *)(sourceDef3 + 0x160) + 1;
                     }
@@ -6566,9 +6588,9 @@ int FUN_001524b8(inst, inst2, param_3)
                       *(int *)(sourceDef3 + 0x160) = *(int *)(param_3 + 0x478) + 1;
                     }
                     iVar5 = iVar5 + 1;
-                  } while (iVar5 <= *(int *)(iVar8 + 0x84));
+                  } while (iVar5 <= *(int *)(cloneResult + 0x84));
                 }
-                IRInst__setOperandSource(piVar10,1,iVar8,0,*(undefined4 *)(param_3 + 8));
+                IRInst__setOperandSource(piVar10,1,cloneResult,0,*(undefined4 *)(param_3 + 8));
               }
               else {
                 sourceDef = IRInst__getOperandSource(inst2,1);
@@ -6608,6 +6630,7 @@ int FUN_00152ea8(inst, inst2, param_3)
   int *inst2;
   int param_3;
 {
+  undefined8 cloneResult;
   int splitRgbAlphaEnabled;
   undefined4 sourceDef7;
   undefined4 operandRecord2;
@@ -6792,9 +6815,9 @@ int FUN_00152ea8(inst, inst2, param_3)
                   }
                   else {
                     sourceDef = IRInst__getOperandSource(inst4,1);
-                    uVar23 = IRInst__clone(sourceDef,uVar17,0);
-                    piVar8 = (int *)((ulonglong)uVar23 >> 0x20);
-                    uVar7 = (undefined4)uVar23;
+                    cloneResult = IRInst__clone(sourceDef,uVar17,0);
+                    piVar8 = (int *)((ulonglong)cloneResult >> 0x20);
+                    uVar7 = (undefined4)cloneResult;
                     piVar8[0x58] = *(int *)(param_3 + 0x478) + 1;
                     piVar8[0x25] = piVar8[0x53];
                     if (0 < piVar8[0x21]) {
@@ -6925,9 +6948,9 @@ int FUN_00152ea8(inst, inst2, param_3)
                   }
                   else {
                     sourceDef = IRInst__getOperandSource(inst4,2);
-                    uVar23 = IRInst__clone(sourceDef,uVar17,0);
-                    piVar10 = (int *)((ulonglong)uVar23 >> 0x20);
-                    uVar7 = (undefined4)uVar23;
+                    cloneResult = IRInst__clone(sourceDef,uVar17,0);
+                    piVar10 = (int *)((ulonglong)cloneResult >> 0x20);
+                    uVar7 = (undefined4)cloneResult;
                     piVar10[0x58] = *(int *)(param_3 + 0x478) + 1;
                     piVar10[0x25] = piVar10[0x53];
                     if (0 < piVar10[0x21]) {
@@ -7051,9 +7074,9 @@ int FUN_00152ea8(inst, inst2, param_3)
                   }
                   else {
                     sourceDef = IRInst__getOperandSource(inst3,1);
-                    uVar23 = IRInst__clone(sourceDef,uVar17,0);
-                    piVar11 = (int *)((ulonglong)uVar23 >> 0x20);
-                    uVar12 = (undefined4)uVar23;
+                    cloneResult = IRInst__clone(sourceDef,uVar17,0);
+                    piVar11 = (int *)((ulonglong)cloneResult >> 0x20);
+                    uVar12 = (undefined4)cloneResult;
                     piVar11[0x58] = *(int *)(param_3 + 0x478) + 1;
                     piVar11[0x25] = piVar11[0x53];
                     if (0 < piVar11[0x21]) {
@@ -7232,11 +7255,11 @@ LAB_00153df4:
                       local_9c = 0;
                       local_8c = 0;
                       operandRecord2 = IRInst__getOperandRecord(inst3,1);
-                      FUN_00104730(&local_a0,operandRecord2);
+                      IROperand__copyFrom(&local_a0,operandRecord2);
                       operandRecord2 = IRInst__getOperandRecord(inst4,1);
-                      FUN_00104730(&local_d0,operandRecord2);
+                      IROperand__copyFrom(&local_d0,operandRecord2);
                       operandRecord2 = IRInst__getOperandRecord(inst4,2);
-                      FUN_00104730(&local_b8,operandRecord2);
+                      IROperand__copyFrom(&local_b8,operandRecord2);
                       local_f4 = 0;
                       local_f0 = 0;
                       local_ec = 0;
@@ -7252,14 +7275,14 @@ LAB_00153df4:
                       inst[0x27] = local_118;
                       inst[0x49] = local_78;
                       operandRecord2 = IRInst__getOperandRecord(inst,1);
-                      FUN_00104730(operandRecord2,&local_d0);
+                      IROperand__copyFrom(operandRecord2,&local_d0);
                       IRInst__setOperandSource(inst,1,piVar8,0,uVar17);
                       Block__insertInstBefore(inst[0x56],inst,piVar8);
                       uVar5 = local_114;
                       operandRecord = IRInst__getOperandRecord(inst,1);
                       *(undefined4 *)(operandRecord + 0x10) = uVar5;
                       operandRecord2 = IRInst__getOperandRecord(inst,2);
-                      FUN_00104730(operandRecord2,&local_b8);
+                      IROperand__copyFrom(operandRecord2,&local_b8);
                       IRInst__setOperandSource(inst,2,piVar10,0,uVar17);
                       Block__insertInstBefore(inst[0x56],inst,piVar10);
                       uVar5 = local_110;
@@ -7267,7 +7290,7 @@ LAB_00153df4:
                       *(undefined4 *)(operandRecord + 0x10) = uVar5;
                       IROperand__setModifierBits(inst + 0x2f,1,0);
                       operandRecord2 = IRInst__getOperandRecord(inst,3);
-                      FUN_00104730(operandRecord2,&local_a0);
+                      IROperand__copyFrom(operandRecord2,&local_a0);
                       IRInst__setOperandSource(inst,3,piVar11,0,uVar17);
                       Block__insertInstBefore(inst[0x56],inst,piVar11);
                       uVar5 = local_10c;
@@ -7597,11 +7620,11 @@ int FUN_001541f0(node, inst, pass)
                   local_5c = 0;
                   iVar6 = node[1];
                   operandRecord2 = IRInst__getOperandRecord(piVar20,1);
-                  FUN_00104730(&local_70,operandRecord2);
+                  IROperand__copyFrom(&local_70,operandRecord2);
                   operandRecord2 = IRInst__getOperandRecord(piVar11,1);
-                  FUN_00104730(&local_a0,operandRecord2);
+                  IROperand__copyFrom(&local_a0,operandRecord2);
                   operandRecord2 = IRInst__getOperandRecord(piVar11,2);
-                  FUN_00104730(&local_88,operandRecord2);
+                  IROperand__copyFrom(&local_88,operandRecord2);
                   local_c8[3] = 0;
                   local_c8[1] = 0;
                   local_c8[2] = 0;
@@ -7622,12 +7645,12 @@ int FUN_001541f0(node, inst, pass)
                   node[0x49] = iVar15;
                   node[0x48] = iVar4;
                   operandRecord2 = IRInst__getOperandRecord(node,3);
-                  FUN_00104730(operandRecord2,&local_70);
+                  IROperand__copyFrom(operandRecord2,&local_70);
                   iVar4 = 0;
                   operandRecord2 = IRInst__getOperandRecord(node,1);
-                  FUN_00104730(operandRecord2,&local_a0);
+                  IROperand__copyFrom(operandRecord2,&local_a0);
                   operandRecord2 = IRInst__getOperandRecord(node,2);
-                  FUN_00104730(operandRecord2,&local_88);
+                  IROperand__copyFrom(operandRecord2,&local_88);
                   do {
                     if (*(char *)((int)&local_e0 + iVar4) == '\0') {
                       operandRecord3 = IRInst__getOperandRecord(node,1);
@@ -7708,6 +7731,9 @@ int Inst__collapseAlgebraic_00154dc0(inst, param_2)
   int *inst;
   int param_2;
 {
+  int firstWrittenComponentResult;
+  int hasSingleUse;
+  int firstWrittenComponentResult2;
   int operandRecord2;
   int sourceDef2;
   int operandRecord;
@@ -7777,8 +7803,8 @@ int Inst__collapseAlgebraic_00154dc0(inst, param_2)
           piVar18 = inst;
           inst = piVar8;
         }
-        iVar9 = IRInst__hasSingleUse(piVar18,param_2);
-        if (iVar9 == 0) {
+        hasSingleUse = IRInst__hasSingleUse(piVar18,param_2);
+        if (hasSingleUse == 0) {
           pcVar5 = *(code **)(*piVar18 + 0x4c);
         }
         else {
@@ -7869,12 +7895,12 @@ int Inst__collapseAlgebraic_00154dc0(inst, param_2)
             IRInst__setOperandSource(inst,3,operandVReg,0,iVar17);
             IROperand__setModifierBits(inst + 0x35,1,uVar7 & 1);
             IROperand__setModifierBits(inst + 0x35,2,uVar7 >> 1 & 1);
-            iVar9 = FUN_000f30d4(local_84);
-            uVar3 = *(undefined1 *)((int)&local_78 + iVar9);
-            iVar13 = FUN_000f30d4(local_7c);
+            firstWrittenComponentResult = SelectWord__firstWrittenComponent(local_84);
+            uVar3 = *(undefined1 *)((int)&local_78 + firstWrittenComponentResult);
+            firstWrittenComponentResult2 = SelectWord__firstWrittenComponent(local_7c);
             iVar9 = 0;
             local_80 = local_84;
-            uVar4 = *(undefined1 *)((int)&local_74 + iVar13);
+            uVar4 = *(undefined1 *)((int)&local_74 + firstWrittenComponentResult2);
             iVar13 = 4;
             do {
               if (*(char *)((int)&local_7c + iVar9) != '\x01') {
@@ -8004,6 +8030,8 @@ int FUN_00155654(inst, param_2, inst2, param_4)
   int inst2;
   int param_4;
 {
+  int flagBit10Result;
+  int cloneResult;
   int sourceDef2;
   int operandRecord;
   int sourceDef;
@@ -8091,21 +8119,21 @@ int FUN_00155654(inst, param_2, inst2, param_4)
         IRInst__setOperandSource(inst,param_2,operandVReg,0,*(undefined4 *)(param_4 + 8));
       }
       else {
-        iVar1 = IRInst__clone(operandVReg,*(undefined4 *)(param_4 + 8),0);
-        *(undefined4 *)(iVar1 + 0x98) = 0x31;
-        *(undefined4 *)(iVar1 + 0x94) = *(undefined4 *)(iVar1 + 0x14c);
+        cloneResult = IRInst__clone(operandVReg,*(undefined4 *)(param_4 + 8),0);
+        *(undefined4 *)(cloneResult + 0x98) = 0x31;
+        *(undefined4 *)(cloneResult + 0x94) = *(undefined4 *)(cloneResult + 0x14c);
         iVar6 = iVar4 + 1;
-        Block__insertInstAfter(operandVReg[0x56],operandVReg,iVar1);
-        *(int *)(iVar1 + 0x160) = iVar6;
-        operandVReg3 = IRInst__getOperandSource(iVar1,1);
+        Block__insertInstAfter(operandVReg[0x56],operandVReg,cloneResult);
+        *(int *)(cloneResult + 0x160) = iVar6;
+        operandVReg3 = IRInst__getOperandSource(cloneResult,1);
         if (iVar4 < *(int *)(operandVReg3 + 0x160)) {
           *(int *)(operandVReg3 + 0x160) = *(int *)(operandVReg3 + 0x160) + 1;
         }
         else {
           *(int *)(operandVReg3 + 0x160) = iVar6;
         }
-        if (1 < *(int *)(iVar1 + 0x84)) {
-          operandVReg3 = IRInst__getOperandSource(iVar1,2);
+        if (1 < *(int *)(cloneResult + 0x84)) {
+          operandVReg3 = IRInst__getOperandSource(cloneResult,2);
           if (iVar4 < *(int *)(operandVReg3 + 0x160)) {
             *(int *)(operandVReg3 + 0x160) = *(int *)(operandVReg3 + 0x160) + 1;
           }
@@ -8113,7 +8141,7 @@ int FUN_00155654(inst, param_2, inst2, param_4)
             *(int *)(operandVReg3 + 0x160) = iVar6;
           }
         }
-        IRInst__setOperandSource(inst,param_2,iVar1,0,*(undefined4 *)(param_4 + 8));
+        IRInst__setOperandSource(inst,param_2,cloneResult,0,*(undefined4 *)(param_4 + 8));
       }
       operandRecord = IRInst__getOperandRecord(inst2,1);
       uVar7 = *(undefined4 *)(operandRecord + 0x10);
@@ -8126,8 +8154,8 @@ int FUN_00155654(inst, param_2, inst2, param_4)
         operandRecord = IRInst__getOperandRecord(inst,param_2);
         *(int *)(operandRecord + 0x10) = local_28[0];
       }
-      iVar1 = OpcodeTraits__flagBit10(*(undefined4 *)(inst[0x22] + 8),*(undefined4 *)(param_4 + 8));
-      if (iVar1 == 0) {
+      flagBit10Result = OpcodeTraits__flagBit10(*(undefined4 *)(inst[0x22] + 8),*(undefined4 *)(param_4 + 8));
+      if (flagBit10Result == 0) {
         IROperand__setModifierBits(inst + param_2 * 6 + 0x23,2,1);
       }
       else {
@@ -8149,6 +8177,13 @@ int Inst__collapseAlgebraic_00155a60(inst, pass)
   void *inst;
   int pass;
 {
+  int cloneResult;
+  int definingField1282;
+  int areCompatibleResult;
+  int hasSingleUse;
+  int definingField1283;
+  int areCompatibleResult2;
+  int definingField128;
   undefined4 sourceDef;
   undefined4 sourceDef5;
   int operandRecord6;
@@ -8278,17 +8313,17 @@ LAB_00155dd0:
       }
       sourceDef4 = IRInst__getOperandSource(piVar8,1);
       iVar14 = IRInst__getOperandSource(piVar8,2);
-      iVar12 = FUN_00105c5c(inst,3);
+      definingField128 = IRInst__getDefiningField128(inst,3);
       if ((piVar8[5] & 0x200U) != 0) {
         return 0;
       }
       operandRecord3 = IRInst__getOperandRecord(inst,iVar3);
-      iVar13 = FUN_000f2d18(*(undefined4 *)(operandRecord3 + 0x10),DAT_001b004c);
-      if (iVar13 == 0) {
+      areCompatibleResult2 = SelectWord__areCompatible(*(undefined4 *)(operandRecord3 + 0x10),DAT_001b004c);
+      if (areCompatibleResult2 == 0) {
         return 0;
       }
-      iVar13 = FUN_00105c5c(inst,iVar3);
-      if (iVar13 != 0) {
+      definingField1283 = IRInst__getDefiningField128(inst,iVar3);
+      if (definingField1283 != 0) {
         return 0;
       }
       sourceDef7 = IRInst__getOperandSource(inst,3);
@@ -8296,8 +8331,8 @@ LAB_00155dd0:
         operandRecord3 = IRInst__getOperandRecord(inst,3);
         uVar10 = *(undefined4 *)(operandRecord3 + 0x10);
         operandRecord3 = IRInst__getOperandRecord(piVar8,2);
-        iVar13 = FUN_000f2d18(uVar10,*(undefined4 *)(operandRecord3 + 0x10));
-        if ((iVar13 == 0) || (iVar13 = FUN_00105c5c(piVar8,2), iVar12 != iVar13)) goto LAB_00155f5c;
+        iVar13 = SelectWord__areCompatible(uVar10,*(undefined4 *)(operandRecord3 + 0x10));
+        if ((iVar13 == 0) || (iVar13 = IRInst__getDefiningField128(piVar8,2), definingField128 != iVar13)) goto LAB_00155f5c;
         if (*(int *)(piVar8[0x22] + 8) == 0x9a) {
           iVar12 = 2;
           iVar16 = 1;
@@ -8320,12 +8355,12 @@ LAB_00155f5c:
         operandRecord5 = IRInst__getOperandRecord(inst,3);
         uVar10 = *(undefined4 *)(operandRecord5 + 0x10);
         operandRecord5 = IRInst__getOperandRecord(piVar8,1);
-        iVar14 = FUN_000f2d18(uVar10,*(undefined4 *)(operandRecord5 + 0x10));
-        if (iVar14 == 0) {
+        areCompatibleResult = SelectWord__areCompatible(uVar10,*(undefined4 *)(operandRecord5 + 0x10));
+        if (areCompatibleResult == 0) {
           return 0;
         }
-        iVar14 = FUN_00105c5c(piVar8,1);
-        if (iVar12 != iVar14) {
+        definingField1282 = IRInst__getDefiningField128(piVar8,1);
+        if (definingField128 != definingField1282) {
           return 0;
         }
         iVar14 = sourceDef4;
@@ -8342,16 +8377,16 @@ LAB_00155f5c:
           bVar2 = false;
         }
       }
-      iVar13 = IRInst__hasSingleUse(piVar8,pass);
-      if ((((iVar13 == 0) || ((*(uint *)((int)inst + 0xe8) & 2) != 0)) ||
+      hasSingleUse = IRInst__hasSingleUse(piVar8,pass);
+      if ((((hasSingleUse == 0) || ((*(uint *)((int)inst + 0xe8) & 2) != 0)) ||
           ((*(uint *)((int)inst + iVar3 * 0x18 + 0xa0) & 2) != 0)) ||
          (((piVar8[0x2e] & 2U) != 0 || ((piVar8[0x34] & 2U) != 0)))) {
         return 0;
       }
       operandRecord3 = IRInst__getOperandRecord(inst,iVar3);
-      FUN_000f3398(&local_70,*(undefined4 *)(operandRecord3 + 0x10));
+      SelectWord__readMask(&local_70,*(undefined4 *)(operandRecord3 + 0x10));
       iVar13 = IRInst__getOperandRecord(piVar8,0);
-      FUN_000f3908(&local_6c,*(undefined4 *)(iVar13 + 0x10));
+      WriteMask__fromSelectWord(&local_6c,*(undefined4 *)(iVar13 + 0x10));
       if ((local_6c << 0x18 | (local_6c >> 8 & 0xff) << 0x10 | (local_6c >> 0x10 & 0xff) << 8 |
           local_6c >> 0x18) <
           (local_70 << 0x18 | (local_70 >> 8 & 0xff) << 0x10 | (local_70 >> 0x10 & 0xff) << 8 |
@@ -8578,9 +8613,9 @@ code_r0x001564d0:
     }
   }
   operandRecord6 = IRInst__getOperandRecord(inst,iVar3);
-  FUN_000f3398(&local_88,*(undefined4 *)(operandRecord6 + 0x10));
+  SelectWord__readMask(&local_88,*(undefined4 *)(operandRecord6 + 0x10));
   iVar26 = IRInst__getOperandRecord(piVar8,0);
-  FUN_000f3908(&local_84,*(undefined4 *)(iVar26 + 0x10));
+  WriteMask__fromSelectWord(&local_84,*(undefined4 *)(iVar26 + 0x10));
   if ((((((local_88 << 0x18 | (local_88 >> 8 & 0xff) << 0x10 | (local_88 >> 0x10 & 0xff) << 8 |
           local_88 >> 0x18) <=
           (local_84 << 0x18 | (local_84 >> 8 & 0xff) << 0x10 | (local_84 >> 0x10 & 0xff) << 8 |
@@ -8610,9 +8645,9 @@ code_r0x001564d0:
     return uVar10;
   }
   operandRecord = IRInst__getOperandRecord(inst,iVar22);
-  FUN_000f3398(&local_80,*(undefined4 *)(operandRecord + 0x10));
+  SelectWord__readMask(&local_80,*(undefined4 *)(operandRecord + 0x10));
   operandRecord = IRInst__getOperandRecord(piVar27,0);
-  FUN_000f3908(&local_7c,*(undefined4 *)(operandRecord + 0x10));
+  WriteMask__fromSelectWord(&local_7c,*(undefined4 *)(operandRecord + 0x10));
   if ((local_7c << 0x18 | (local_7c >> 8 & 0xff) << 0x10 | (local_7c >> 0x10 & 0xff) << 8 |
       local_7c >> 0x18) <
       (local_80 << 0x18 | (local_80 >> 8 & 0xff) << 0x10 | (local_80 >> 0x10 & 0xff) << 8 |
@@ -8756,21 +8791,21 @@ code_r0x00156744:
           }
         }
         else {
-          iVar22 = IRInst__clone(operandVReg,*(undefined4 *)(pass + 8),0);
-          *(undefined4 *)(iVar22 + 0x98) = 0x31;
-          *(undefined4 *)(iVar22 + 0x94) = *(undefined4 *)(iVar22 + 0x14c);
-          IRInst__setOperandSource(newInst,1,iVar22,0,*(undefined4 *)(pass + 8));
-          Block__insertInstAfter(*(undefined4 *)(iVar26 + 0x158),iVar26,iVar22);
-          *(int *)(iVar22 + 0x160) = *(int *)(pass + 0x478) + 1;
-          sourceDef3 = IRInst__getOperandSource(iVar22,1);
+          cloneResult = IRInst__clone(operandVReg,*(undefined4 *)(pass + 8),0);
+          *(undefined4 *)(cloneResult + 0x98) = 0x31;
+          *(undefined4 *)(cloneResult + 0x94) = *(undefined4 *)(cloneResult + 0x14c);
+          IRInst__setOperandSource(newInst,1,cloneResult,0,*(undefined4 *)(pass + 8));
+          Block__insertInstAfter(*(undefined4 *)(iVar26 + 0x158),iVar26,cloneResult);
+          *(int *)(cloneResult + 0x160) = *(int *)(pass + 0x478) + 1;
+          sourceDef3 = IRInst__getOperandSource(cloneResult,1);
           if (*(int *)(pass + 0x478) < *(int *)(sourceDef3 + 0x160)) {
             *(int *)(sourceDef3 + 0x160) = *(int *)(sourceDef3 + 0x160) + 1;
           }
           else {
             *(int *)(sourceDef3 + 0x160) = *(int *)(pass + 0x478) + 1;
           }
-          if (1 < *(int *)(iVar22 + 0x84)) {
-            sourceDef2 = IRInst__getOperandSource(iVar22,2);
+          if (1 < *(int *)(cloneResult + 0x84)) {
+            sourceDef2 = IRInst__getOperandSource(cloneResult,2);
             if (*(int *)(pass + 0x478) < *(int *)(sourceDef2 + 0x160)) {
               *(int *)(sourceDef2 + 0x160) = *(int *)(sourceDef2 + 0x160) + 1;
             }
@@ -9008,8 +9043,8 @@ int FUN_00156d48(inst, pass, param_3)
         operandVReg[0x27] = local_c8;
       }
       iVar23 = DAT_001b004c;
-      FUN_000f3908(&local_90,local_c8);
-      FUN_000f3340(&local_8c,iVar23,local_90);
+      WriteMask__fromSelectWord(&local_90,local_c8);
+      SelectWord__maskUnused(&local_8c,iVar23,local_90);
       iVar23 = local_8c;
       if (iVar20 != local_8c) {
         if (iVar7 == 0) {
@@ -9312,6 +9347,7 @@ int FUN_00157b78(inst, param_2, param_3)
   uint param_2;
   int param_3;
 {
+  undefined4 cloneResult;
   int sourceDef;
   int operandRecord4;
   int operandRecord2;
@@ -9328,7 +9364,7 @@ int FUN_00157b78(inst, param_2, param_3)
   int iVar10;
   int iVar11;
   int iVar12;
-  undefined4 uVar13;
+  undefined4 cloneResult2;
   int iVar14;
   int operandRecord;
   uint uVar16;
@@ -9386,8 +9422,8 @@ LAB_00157ce4:
 LAB_00157cf8:
   iVar10 = (**(code **)(*operandVReg2 + 0x48))(operandVReg2);
   if ((iVar10 != 0) || (iVar10 = (**(code **)(*operandVReg2 + 0x4c))(operandVReg2), iVar10 != 0)) {
-    uVar18 = IRInst__clone(sourceDef,*(undefined4 *)(param_3 + 8),0);
-    uVar13 = IRInst__clone(inst,*(undefined4 *)(param_3 + 8),0);
+    cloneResult = IRInst__clone(sourceDef,*(undefined4 *)(param_3 + 8),0);
+    cloneResult2 = IRInst__clone(inst,*(undefined4 *)(param_3 + 8),0);
     iVar11 = inst + uVar2 * 0x18 + 0x80;
     uVar3 = *(uint *)(uVar16 * 0x18 + sourceDef + 0xa0) & 1;
     uVar4 = *(uint *)(iVar11 + 0x20) & 1;
@@ -9440,11 +9476,11 @@ LAB_00157cf8:
     if (iVar11 == 0 || iVar10 == 0) {
       iVar10 = *(int *)(sourceDef + 4);
       DList__unlink(sourceDef);
-      FUN_00103f84(sourceDef,uVar18);
+      IRInst__copyBodyFrom(sourceDef,cloneResult);
       Block__insertInstAfter(*(undefined4 *)(iVar10 + 0x158),iVar10,sourceDef);
       iVar6 = *(int *)(inst + 4);
       DList__unlink(inst);
-      FUN_00103f84(inst,uVar13);
+      IRInst__copyBodyFrom(inst,cloneResult2);
       Block__insertInstAfter(*(undefined4 *)(iVar6 + 0x158),iVar6,inst);
       return;
     }
@@ -9477,7 +9513,7 @@ LAB_0015802c:
       for (iVar1 = 1; iVar2 = (**(code **)(*inst + 0x14))(inst), iVar1 <= iVar2;
           iVar1 = iVar1 + 1) {
         if ((((inst[iVar1 * 6 + 0x28] & 1U) != 0) || ((inst[iVar1 * 6 + 0x28] & 2U) != 0)) ||
-           (iVar2 = FUN_000f31e8(inst,iVar1), iVar2 == 0)) goto LAB_00158170;
+           (iVar2 = IRInst__isSourceSelectIdentity(inst,iVar1), iVar2 == 0)) goto LAB_00158170;
       }
       if ((inst[0x48] == 0) && (inst[0x49] == 0)) {
         if (((inst[0x20] != 0) &&
@@ -9515,7 +9551,7 @@ LAB_00158170:
       }
       inst = (int *)IRInst__getOperandSource(inst,inst[0x21]);
       operandRecord = IRInst__getOperandRecord(inst,0);
-      FUN_000f3908(local_28,*(undefined4 *)(operandRecord + 0x10));
+      WriteMask__fromSelectWord(local_28,*(undefined4 *)(operandRecord + 0x10));
     } while ((param_5 & local_28[0]) == 0);
   } while( true );
 }
@@ -9527,6 +9563,9 @@ int Inst__collapseAlgebraic_00158264(inst, param_2, inst2, param_4)
   int inst2;
   int param_4;
 {
+  undefined4 readMaskResult;
+  int uniformSourceConstant;
+  int hasSingleUse;
   int operandRecord2;
   int sourceDef;
   int operandRecord;
@@ -9573,19 +9612,19 @@ int Inst__collapseAlgebraic_00158264(inst, param_2, inst2, param_4)
   }
   if (iVar17 == 0x14) {
     operandRecord2 = IRInst__getOperandRecord(inst2,0);
-    iVar2 = FUN_000f5cf0(inst2,2,*(undefined4 *)(operandRecord2 + 0x10),auStack_a4);
-    if (iVar2 == 0) goto LAB_00158720;
+    uniformSourceConstant = IRInst__getUniformSourceConstant(inst2,2,*(undefined4 *)(operandRecord2 + 0x10),auStack_a4);
+    if (uniformSourceConstant == 0) goto LAB_00158720;
     operandVReg = (int *)IRInst__getOperandSource(inst2,1);
     operandRecord = IRInst__getOperandRecord(inst2,0);
     uVar14 = *(undefined4 *)(operandRecord + 0x10);
     operandRecord = IRInst__getOperandRecord(inst2,param_2);
-    uVar4 = FUN_000f3398(&local_68,*(undefined4 *)(operandRecord + 0x10));
+    readMaskResult = SelectWord__readMask(&local_68,*(undefined4 *)(operandRecord + 0x10));
     fparam_1 = (double)local_a0;
     bVar18 = fparam_1 < 0.0;
     if (bVar18) {
       fparam_1 = -fparam_1;
     }
-    iVar17 = ((undefined4 (*)())FUN_0010ab8c)(uVar4,&local_a8,fparam_1);
+    iVar17 = ((undefined4 (*)())FUN_0010ab8c)(readMaskResult,&local_a8,fparam_1);
     if (((iVar17 != 0) && (local_a8 != 0)) &&
        (iVar17 = ((int (*)())FUN_0015800c)(inst2,operandVReg,local_a8,uVar14,local_68,param_4), iVar17 != 0)) {
       iVar17 = 0x14;
@@ -9679,7 +9718,7 @@ int Inst__collapseAlgebraic_00158264(inst, param_2, inst2, param_4)
           if ((operandVReg[5] & 0x200U) == 0) goto LAB_00158714;
           operandVReg = (int *)IRInst__getOperandSource(operandVReg,operandVReg[0x21]);
           iVar16 = IRInst__getOperandRecord(operandVReg,0);
-          FUN_000f3908(&local_64,*(undefined4 *)(iVar16 + 0x10));
+          WriteMask__fromSelectWord(&local_64,*(undefined4 *)(iVar16 + 0x10));
         } while ((local_68 & local_64) == 0);
       } while( true );
     }
@@ -9703,8 +9742,8 @@ LAB_00158770:
     if (*(int *)(*(int *)(sourceDef + 0x88) + 8) != 0x13) {
       return iVar2;
     }
-    iVar16 = IRInst__hasSingleUse(sourceDef,param_4);
-    if (iVar16 == 0) {
+    hasSingleUse = IRInst__hasSingleUse(sourceDef,param_4);
+    if (hasSingleUse == 0) {
       return iVar2;
     }
     if (*(int *)(sourceDef + 0x120) != 0) {
@@ -9758,8 +9797,8 @@ LAB_00158714:
     if (*(int *)(*(int *)(sourceDef + 0x88) + 8) != 0x12) {
       return iVar2;
     }
-    iVar16 = IRInst__hasSingleUse(sourceDef,param_4);
-    if (iVar16 == 0) {
+    hasSingleUse = IRInst__hasSingleUse(sourceDef,param_4);
+    if (hasSingleUse == 0) {
       return iVar2;
     }
     if (*(int *)(sourceDef + 0x120) != 0) {

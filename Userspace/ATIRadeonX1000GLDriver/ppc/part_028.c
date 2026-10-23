@@ -223,8 +223,8 @@ int IRInst__removeFromListEx(this, param_2, compiler)
   return DList__unlink(this);
 }
 
-/* FUN_00105c5c @ 0x105c5c (168 bytes) */
-int FUN_00105c5c(inst, param_2)
+/* IRInst__getDefiningField128 @ 0x105c5c (168 bytes) */
+int IRInst__getDefiningField128(inst, param_2)
   int inst;
   int param_2;
 {
@@ -314,7 +314,7 @@ int FUN_00105e54(param_1, param_2, inst, param_4)
   undefined4 operandRecord;
   
   operandRecord = IRInst__getOperandRecord(inst,param_4);
-  return FUN_00104730(param_2 * 0x18 + param_1 + 0x8c,operandRecord);
+  return IROperand__copyFrom(param_2 * 0x18 + param_1 + 0x8c,operandRecord);
 }
 
 /* FUN_00105e9c @ 0x105e9c (104 bytes) */
@@ -491,8 +491,8 @@ int FUN_00106230(param_1, param_2, param_3, param_4, param_5, param_6)
   return iVar1 != 0;
 }
 
-/* FUN_001062c0 @ 0x1062c0 (156 bytes) */
-int FUN_001062c0(param_1, param_2, param_3, compiler)
+/* IRInst__getOrCreateOperandRecord @ 0x1062c0 (156 bytes) */
+int IRInst__getOrCreateOperandRecord(param_1, param_2, param_3, compiler)
   int param_1;
   int param_2;
   undefined4 *param_3;
@@ -666,7 +666,7 @@ int IRProjection__validate(inst, compiler)
 {
   int iVar1;
   
-  iVar1 = FUN_001045e4(inst);
+  iVar1 = IRInst__isProjectionOfClass26or3a(inst);
   if (iVar1 != 0) {
     iVar1 = IRInst__getOperandRecord(inst,1);
     FUN_000f2c5c(*(undefined4 *)(iVar1 + 0x10));
@@ -698,7 +698,7 @@ int IRPhiNode__validate(inst, compiler)
     do {
       iVar1 = IRInst__getOperandRecord(inst,loopIndex);
       loopIndex = loopIndex + 1;
-      FUN_000f3190(*(undefined4 *)(iVar1 + 0x10));
+      SelectWord__isIdentity(*(undefined4 *)(iVar1 + 0x10));
       iVar1 = *(int *)(inst + 0x84);
     } while (loopIndex <= iVar1);
   }
@@ -939,6 +939,7 @@ int FUN_00106cf8(inst, param_2)
   int *inst;
   undefined4 param_2;
 {
+  int flagBit0Result;
   int *operandVReg;
   int *piVar1;
   int iVar2;
@@ -952,8 +953,8 @@ int FUN_00106cf8(inst, param_2)
       if (operandVReg[0x20] == 0) {
         return 0;
       }
-      iVar2 = RegKind__flagBit0(operandVReg[0x26]);
-      if (iVar2 == 0) {
+      flagBit0Result = RegKind__flagBit0(operandVReg[0x26]);
+      if (flagBit0Result == 0) {
         return 0;
       }
       if ((operandVReg[5] & 2U) != 0) {
@@ -980,7 +981,7 @@ int FUN_00106cf8(inst, param_2)
       if ((inst[iVar2 * 6 + 0x28] & 2U) != 0) {
         return 0;
       }
-      iVar3 = FUN_000f31e8(inst,iVar2);
+      iVar3 = IRInst__isSourceSelectIdentity(inst,iVar2);
       if (iVar3 == 0) {
         return 0;
       }

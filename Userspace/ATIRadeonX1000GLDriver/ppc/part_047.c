@@ -6,12 +6,12 @@ int FUN_00176ed4(param_1, param_2)
   int param_2;
 {
   undefined4 uVar1;
-  int iVar2;
+  int findInPtrSetResult;
   
   uVar1 = 0;
   if (0 < param_2) {
-    iVar2 = Compiler__findInPtrSet(*(undefined4 *)(param_1 + 0x238),param_2);
-    uVar1 = *(undefined4 *)(iVar2 + 0xc);
+    findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(param_1 + 0x238),param_2);
+    uVar1 = *(undefined4 *)(findInPtrSetResult + 0xc);
   }
   return uVar1;
 }
@@ -22,12 +22,12 @@ int FUN_00176f0c(param_1, param_2)
   int param_2;
 {
   undefined4 uVar1;
-  int iVar2;
+  int findInPtrSetResult;
   
   uVar1 = 0;
   if (0 < param_2) {
-    iVar2 = Compiler__findInPtrSet(*(undefined4 *)(param_1 + 0x238),param_2);
-    uVar1 = *(undefined4 *)(iVar2 + 0x10);
+    findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(param_1 + 0x238),param_2);
+    uVar1 = *(undefined4 *)(findInPtrSetResult + 0x10);
   }
   return uVar1;
 }
@@ -417,6 +417,7 @@ int FUN_001776b8(ctx, param_2)
 int FUN_00177748(ctx)
   int ctx;
 {
+  int findInPtrSetResult;
   bool bVar1;
   uint uVar2;
   int callResult;
@@ -452,8 +453,8 @@ int FUN_00177748(ctx)
           if (iVar8 < 1) {
             return;
           }
-          iVar8 = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar8);
-          iVar8 = *(int *)(iVar8 + 0xc);
+          findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar8);
+          iVar8 = *(int *)(findInPtrSetResult + 0xc);
           uVar2 = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
           if ((uVar2 & 2) != 0) {
             iVar8 = (DAT_001e61d0)[iVar8];
@@ -769,6 +770,7 @@ int FUN_001781a4(param_1, param_2, param_3)
   int param_2;
   undefined4 *param_3;
 {
+  int instFlagBit2Result;
   undefined4 *loopIndex2;
   int iVar2;
   int *loopIndex;
@@ -792,8 +794,8 @@ int FUN_001781a4(param_1, param_2, param_3)
   for (loopRemaining = 1;
       iVar2 = (**(code **)(**(int **)(param_2 + 0xb0) + 0x14))(*(int **)(param_2 + 0xb0)),
       loopRemaining <= iVar2; loopRemaining = loopRemaining + 1) {
-    iVar2 = OpcodeTraits__instFlagBit2(*(undefined4 *)(param_2 + 0x238),*(undefined4 *)(param_2 + 0xb0));
-    if (iVar2 == 0) {
+    instFlagBit2Result = OpcodeTraits__instFlagBit2(*(undefined4 *)(param_2 + 0x238),*(undefined4 *)(param_2 + 0xb0));
+    if (instFlagBit2Result == 0) {
       *loopIndex = 0;
     }
     else if (loopRemaining == 2) {
@@ -833,6 +835,7 @@ int FUN_00178338(ctx, param_2, param_3)
   int param_2;
   int param_3;
 {
+  int findInPtrSetResult;
   int iVar1;
   uint uVar2;
   float *pfVar3;
@@ -862,8 +865,8 @@ int FUN_00178338(ctx, param_2, param_3)
         *loopIndex = 0;
       }
       else {
-        iVar4 = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar4);
-        iVar4 = *(int *)(iVar4 + 0x10);
+        findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar4);
+        iVar4 = *(int *)(findInPtrSetResult + 0x10);
         *loopIndex = iVar4;
         iVar5 = *(int *)(ctx + 0xb0) + iVar6;
         uVar2 = *(uint *)(iVar5 + 0x20);
@@ -932,6 +935,7 @@ int FUN_00178648(ctx, param_2)
   int ctx;
   int param_2;
 {
+  int findInPtrSetResult;
   uint uVar1;
   int iVar2;
   undefined4 *puVar3;
@@ -969,8 +973,8 @@ int FUN_00178648(ctx, param_2)
           }
         }
         else {
-          iVar4 = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar4);
-          iVar4 = *(int *)(iVar4 + 0xc);
+          findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar4);
+          iVar4 = *(int *)(findInPtrSetResult + 0xc);
           *loopIndex = iVar4;
           iVar5 = *(int *)(ctx + 0xb0) + iVar6;
           uVar1 = *(uint *)(iVar5 + 0x20);
@@ -1647,7 +1651,7 @@ int FUN_001797d0(ctx, param_2)
 {
   uint uVar1;
   int iVar2;
-  undefined4 uVar3;
+  undefined4 exprRecordForValueNumberResult;
   uint uVar4;
   
   iVar2 = ((int (*)())FUN_00179608)(ctx,param_2,2,3);
@@ -1659,8 +1663,8 @@ int FUN_001797d0(ctx, param_2)
       if ((*(int *)(iVar2 + 0x120) == 0) &&
          (((*(int *)(iVar2 + 0x124) == 0 && (uVar1 == 0)) && ((uVar4 & 2) == 0)))) {
         iVar2 = param_2 * 4 + ctx;
-        uVar3 = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(iVar2 + 0x198));
-        *(undefined4 *)(iVar2 + 0x30) = uVar3;
+        exprRecordForValueNumberResult = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(iVar2 + 0x198));
+        *(undefined4 *)(iVar2 + 0x30) = exprRecordForValueNumberResult;
         return 1;
       }
       return 1;
@@ -1704,7 +1708,7 @@ int FUN_0017994c(ctx, param_2)
   uint uVar1;
   int iVar2;
   int *piVar3;
-  undefined4 uVar4;
+  undefined4 exprRecordForValueNumberResult;
   uint uVar5;
   int iVar6;
   
@@ -1719,10 +1723,10 @@ int FUN_0017994c(ctx, param_2)
         piVar3 = (int *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar2);
         if ((*(int *)(*(int *)(ctx + 0xb0) + 0x120) == 0) &&
            (*(int *)(*(int *)(ctx + 0xb0) + 0x124) == 0)) {
-          uVar4 = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),
+          exprRecordForValueNumberResult = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),
                                *(undefined4 *)
                                 (((1 - (*piVar3 >> 0x1f)) * 4 + param_2) * 4 + ctx + 0x168));
-          *(undefined4 *)(iVar6 + 0x30) = uVar4;
+          *(undefined4 *)(iVar6 + 0x30) = exprRecordForValueNumberResult;
           return 1;
         }
         return 1;
@@ -1740,7 +1744,7 @@ int FUN_00179a34(ctx, param_2)
   uint uVar1;
   int iVar2;
   int *piVar3;
-  undefined4 uVar4;
+  undefined4 exprRecordForValueNumberResult;
   uint uVar5;
   
   iVar2 = ((int (*)())FUN_00179608)(ctx,param_2,1,2);
@@ -1757,9 +1761,9 @@ int FUN_00179a34(ctx, param_2)
         }
         if ((*(int *)(*(int *)(ctx + 0xb0) + 0x120) == 0) &&
            (*(int *)(*(int *)(ctx + 0xb0) + 0x124) == 0)) {
-          uVar4 = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),
+          exprRecordForValueNumberResult = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),
                                *(undefined4 *)((iVar2 * 4 + param_2) * 4 + ctx + 0x168));
-          *(undefined4 *)(param_2 * 4 + ctx + 0x30) = uVar4;
+          *(undefined4 *)(param_2 * 4 + ctx + 0x30) = exprRecordForValueNumberResult;
           return 1;
         }
         return 1;
@@ -1846,7 +1850,7 @@ int FUN_00179cc0(ctx, param_2)
   uint uVar2;
   int iVar3;
   int *piVar4;
-  undefined4 uVar5;
+  undefined4 exprRecordForValueNumberResult;
   int member0xb0;
   int loopIndex;
   int *piVar8;
@@ -1867,9 +1871,9 @@ int FUN_00179cc0(ctx, param_2)
   loopIndex = (loopIndex == 1) + 1;
   if ((((*(int *)(member0xb0 + 0x120) == 0) && (*(int *)(member0xb0 + 0x124) == 0)) &&
       (uVar2 = *(uint *)(loopIndex * 0x18 + member0xb0 + 0xa0), (uVar2 & 1) == 0)) && ((uVar2 & 2) == 0)) {
-    uVar5 = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),
+    exprRecordForValueNumberResult = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),
                          *(undefined4 *)((loopIndex * 4 + param_2) * 4 + ctx + 0x168));
-    *(undefined4 *)(iVar3 + 0x30) = uVar5;
+    *(undefined4 *)(iVar3 + 0x30) = exprRecordForValueNumberResult;
     return 1;
   }
   return 1;
@@ -1883,7 +1887,7 @@ int FUN_00179db0(ctx, param_2)
   bool bVar1;
   int iVar2;
   int *piVar3;
-  undefined4 uVar4;
+  undefined4 exprRecordForValueNumberResult;
   int loopIndex;
   int *piVar6;
   
@@ -1902,8 +1906,8 @@ int FUN_00179db0(ctx, param_2)
   loopIndex = *(int *)(ctx + 0xb0);
   if ((((*(int *)(loopIndex + 0x120) == 0) && (*(int *)(loopIndex + 0x124) == 0)) &&
       ((*(uint *)(loopIndex + 0xe8) & 1) == 0)) && ((*(uint *)(loopIndex + 0xe8) & 2) == 0)) {
-    uVar4 = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(iVar2 + 0x198));
-    *(undefined4 *)(iVar2 + 0x30) = uVar4;
+    exprRecordForValueNumberResult = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(iVar2 + 0x198));
+    *(undefined4 *)(iVar2 + 0x30) = exprRecordForValueNumberResult;
     return 1;
   }
   return 1;
@@ -1915,7 +1919,7 @@ int FUN_00179e74(ctx, param_2)
   int param_2;
 {
   int iVar1;
-  undefined4 uVar2;
+  undefined4 exprRecordForValueNumberResult;
   uint uVar3;
   
   iVar1 = ((int (*)())FUN_00179608)(ctx,param_2,1,2);
@@ -1927,8 +1931,8 @@ int FUN_00179e74(ctx, param_2)
       if ((*(int *)(iVar1 + 0x120) == 0) &&
          (((*(int *)(iVar1 + 0x124) == 0 && ((uVar3 & 1) == 0)) && ((uVar3 & 2) == 0)))) {
         iVar1 = param_2 * 4 + ctx;
-        uVar2 = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(iVar1 + 0x178));
-        *(undefined4 *)(iVar1 + 0x30) = uVar2;
+        exprRecordForValueNumberResult = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(iVar1 + 0x178));
+        *(undefined4 *)(iVar1 + 0x30) = exprRecordForValueNumberResult;
         return 1;
       }
       return 1;
@@ -1946,7 +1950,7 @@ int FUN_00179f38(ctx, param_2)
   uint uVar2;
   int iVar3;
   float *pfVar4;
-  undefined4 uVar5;
+  undefined4 exprRecordForValueNumberResult;
   int member0xb0;
   int loopIndex;
   int *piVar8;
@@ -1970,9 +1974,9 @@ int FUN_00179f38(ctx, param_2)
      (((*(int *)(member0xb0 + 0x124) == 0 &&
        (uVar2 = *(uint *)(loopIndex * 0x18 + member0xb0 + 0xa0), (uVar2 & 1) == 0)) && ((uVar2 & 2) == 0))))
   {
-    uVar5 = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),
+    exprRecordForValueNumberResult = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),
                          *(undefined4 *)((loopIndex * 4 + param_2) * 4 + ctx + 0x168));
-    *(undefined4 *)(iVar3 + 0x30) = uVar5;
+    *(undefined4 *)(iVar3 + 0x30) = exprRecordForValueNumberResult;
     return 1;
   }
   return 1;
@@ -1983,6 +1987,8 @@ int FUN_0017a034(ctx, param_2)
   int ctx;
   int param_2;
 {
+  undefined4 findInPtrSetResult;
+  undefined4 exprRecordForValueNumberResult;
   undefined4 uVar1;
   uint uVar2;
   float *pfVar3;
@@ -2003,12 +2009,12 @@ int FUN_0017a034(ctx, param_2)
         (uVar2 = *(uint *)(iVar5 * 0x18 + member0xb0 + 0xa0), (uVar2 & 1) == 0)) && ((uVar2 & 2) == 0)) {
       iVar5 = *(int *)((iVar5 * 4 + param_2) * 4 + ctx + 0x168);
       if (iVar5 < 0) {
-        uVar1 = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar5);
-        *(undefined4 *)(iVar7 + 0x30) = uVar1;
+        exprRecordForValueNumberResult = Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar5);
+        *(undefined4 *)(iVar7 + 0x30) = exprRecordForValueNumberResult;
         return 1;
       }
-      uVar1 = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar5);
-      *(undefined4 *)(iVar7 + 0x40) = uVar1;
+      findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar5);
+      *(undefined4 *)(iVar7 + 0x40) = findInPtrSetResult;
       return 1;
     }
     uVar1 = 1;
@@ -2115,6 +2121,7 @@ int FUN_0017a294(ctx, param_2, param_3)
 int FUN_0017a3d4(ctx)
   int ctx;
 {
+  int findInPtrSetResult;
   bool bVar1;
   bool bVar2;
   float fVar3;
@@ -2186,8 +2193,8 @@ int FUN_0017a3d4(ctx)
           if (iVar11 < 1) {
             return 0;
           }
-          iVar11 = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar11);
-          iVar10 = *(int *)(iVar11 + 0xc);
+          findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar11);
+          iVar10 = *(int *)(findInPtrSetResult + 0xc);
           *loopIndex5 = iVar10;
           iVar11 = *(int *)(ctx + 0xb0) + iVar13;
           uVar4 = *(uint *)(iVar11 + 0x20);
@@ -2295,7 +2302,7 @@ int FUN_0017a748(ctx)
   uint uVar2;
   undefined4 *loopIndex2;
   int loopRemaining;
-  int iVar5;
+  int compareCondition;
   uint uVar6;
   undefined4 *loopIndex3;
   int loopIndex;
@@ -2326,11 +2333,11 @@ int FUN_0017a748(ctx)
       do {
         operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
         if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
-          iVar5 = IRInst__getCompareCondition(*(undefined4 *)(ctx + 0xb0));
-          if (*(int *)(&DAT_001e61e8 + (iVar5 * 6 + loopRemaining * 0x31) * 4) == 1) {
+          compareCondition = IRInst__getCompareCondition(*(undefined4 *)(ctx + 0xb0));
+          if (*(int *)(&DAT_001e61e8 + (compareCondition * 6 + loopRemaining * 0x31) * 4) == 1) {
             *loopIndex3 = 0;
           }
-          else if (*(int *)(&DAT_001e61e8 + (iVar5 * 6 + loopRemaining * 0x31) * 4) == 2) {
+          else if (*(int *)(&DAT_001e61e8 + (compareCondition * 6 + loopRemaining * 0x31) * 4) == 2) {
             *loopIndex3 = 0x3f800000;
           }
         }
@@ -2350,6 +2357,8 @@ int FUN_0017a748(ctx)
 int FUN_0017a8a4(ctx)
   int ctx;
 {
+  int compareCondition;
+  int findInPtrSetResult;
   int operandRecord;
   bool bVar1;
   float fVar2;
@@ -2400,9 +2409,9 @@ int FUN_0017a8a4(ctx)
         if (iVar6 < 1) {
           return 0;
         }
-        iVar6 = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar6);
+        findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar6);
         iVar8 = *(int *)(ctx + 0xb0);
-        iVar6 = *(int *)(iVar6 + 0xc);
+        iVar6 = *(int *)(findInPtrSetResult + 0xc);
         if ((*(uint *)(iVar8 + 0xb8) & 2) != 0) {
           iVar6 = (DAT_001e61d0)[iVar6];
         }
@@ -2411,8 +2420,8 @@ int FUN_0017a8a4(ctx)
           iVar6 = *(int *)(&DAT_001e61b8 + iVar6 * 4);
         }
       }
-      iVar8 = IRInst__getCompareCondition(iVar8);
-      iVar6 = *(int *)(&DAT_001e61e8 + (iVar8 * 6 + iVar6 * 0x30 + loopRemaining2) * 4);
+      compareCondition = IRInst__getCompareCondition(iVar8);
+      iVar6 = *(int *)(&DAT_001e61e8 + (compareCondition * 6 + iVar6 * 0x30 + loopRemaining2) * 4);
       if (iVar6 == 1) {
         *(undefined4 *)(iVar9 + (int)&local_58) = 0;
       }
@@ -2700,6 +2709,7 @@ int FUN_0017b020(ctx, param_2)
 int ValueKey__mixLiteralSources(key)
   int key;
 {
+  int firstUnwrittenComponentResult;
   undefined4 sourceDef;
   int operandRecord;
   int operandRecord2;
@@ -2938,13 +2948,13 @@ int ValueKey__mixLiteralSources(key)
                     *loopIndex6 = loopIndex3;
                   }
                   loopIndex6 = loopIndex6 + 1;
-                  iVar10 = FUN_000f3108(*(undefined4 *)((int)local_10c + iVar15));
+                  firstUnwrittenComponentResult = SelectWord__firstUnwrittenComponent(*(undefined4 *)((int)local_10c + iVar15));
                   loopIndex5 = (int *)*loopIndex7;
                   loopIndex7 = loopIndex7 + 1;
-                  (**(code **)(*loopIndex5 + 0x88))(loopIndex5,loopIndex3,iVar10,iVar10);
-                  *(undefined1 *)((int)local_10c + iVar10 + iVar15) = 0;
+                  (**(code **)(*loopIndex5 + 0x88))(loopIndex5,loopIndex3,firstUnwrittenComponentResult,firstUnwrittenComponentResult);
+                  *(undefined1 *)((int)local_10c + firstUnwrittenComponentResult + iVar15) = 0;
                   (**(code **)(**(int **)(key + 0xb0) + 0x88))
-                            (*(int **)(key + 0xb0),iVar14,loopIndex,iVar10);
+                            (*(int **)(key + 0xb0),iVar14,loopIndex,firstUnwrittenComponentResult);
                 }
                 *(undefined1 *)(loopIndex + *(int *)(key + 0xb0) + 0x9c) = 0;
                 *(float **)(loopIndex2 + 0x30) = literalRecord;
@@ -3056,7 +3066,7 @@ int FUN_0017b96c(ctx)
     return 0;
   }
   loopIndex3 = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),1);
-  loopIndex3 = FUN_000f3190(*(undefined4 *)(loopIndex3 + 0x10));
+  loopIndex3 = SelectWord__isIdentity(*(undefined4 *)(loopIndex3 + 0x10));
   if (loopIndex3 == 0) {
     loopIndex3 = *(int *)(ctx + 0xb0);
     puVar12 = *(uint **)(*(int *)(loopIndex3 + 0xa4) + 0x2c);

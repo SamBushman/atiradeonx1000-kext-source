@@ -287,7 +287,7 @@ int R520MachineAssembler__vslot73_setOutputDestination(this, writeRgb, writeAlph
 {
   int iVar1;
   byte outputFlags;
-  undefined1 uVar3;
+  undefined1 lanesToRgbMaskResult;
   int iVar4;
   int destinationIndex;
   undefined1 uVar6;
@@ -321,8 +321,8 @@ int R520MachineAssembler__vslot73_setOutputDestination(this, writeRgb, writeAlph
       iVar4 = *(int *)(this + 0x60);
       destinationIndex = *(int *)(this + 0xa8);
       iVar1 = IRInst__getOperandRecord(inst,0);
-      uVar3 = lanesToRgbMask(*(undefined4 *)(iVar1 + 0x10));
-      *(undefined1 *)(iVar4 * 0x48 + destinationIndex + 0x15) = uVar3;
+      lanesToRgbMaskResult = lanesToRgbMask(*(undefined4 *)(iVar1 + 0x10));
+      *(undefined1 *)(iVar4 * 0x48 + destinationIndex + 0x15) = lanesToRgbMaskResult;
     }
     if (writeAlpha != 0) {
       *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0xa8) + 0x22) = uVar6;
@@ -354,7 +354,7 @@ int R520MachineAssembler__vslot23_emitTexRecord(this, inst, blockArg, compiler)
   int *effectiveSrc1;
   undefined2 uVar7;
   int iVar5;
-  byte bVar8;
+  byte lanesToRgbMaskResult;
   undefined4 uVar6;
   byte bVar10;
   uint uVar9;
@@ -488,8 +488,8 @@ LAB_001a20d4:
   iVar5 = this[0x18] * 0x48 + this[0x2a];
   bVar10 = *(byte *)(iVar5 + 0x1d);
   iVar13 = IRInst__getOperandRecord(inst,0);
-  bVar8 = lanesToRgbMask(*(undefined4 *)(iVar13 + 0x10));
-  *(byte *)(iVar5 + 0x1d) = bVar10 | bVar8;
+  lanesToRgbMaskResult = lanesToRgbMask(*(undefined4 *)(iVar13 + 0x10));
+  *(byte *)(iVar5 + 0x1d) = bVar10 | lanesToRgbMaskResult;
   iVar5 = this[0x18] * 0x48 + this[0x2a];
   bVar10 = *(byte *)(iVar5 + 0x1e);
   iVar13 = IRInst__getOperandRecord(inst,0);

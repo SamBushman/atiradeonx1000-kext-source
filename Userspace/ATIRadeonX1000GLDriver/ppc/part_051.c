@@ -339,15 +339,15 @@ int R300MachineAssembler__rgbSelectForSrcpSwizzle(this, sourceIndex, selectOut, 
   uint swizzleLanes;
   
   swizzleLanes = swizzle & 0xffffff00 | 4;
-  callResult = FUN_000f2d18(swizzleLanes,DAT_001b2ac0);
+  callResult = SelectWord__areCompatible(swizzleLanes,DAT_001b2ac0);
   if (callResult == 0) {
-    callResult = FUN_000f2d18(swizzleLanes,DAT_001b2abc);
+    callResult = SelectWord__areCompatible(swizzleLanes,DAT_001b2abc);
     if (callResult == 0) {
-      callResult = FUN_000f2d18(swizzleLanes,DAT_001b2ab8);
+      callResult = SelectWord__areCompatible(swizzleLanes,DAT_001b2ab8);
       if (callResult == 0) {
-        callResult = FUN_000f2d18(swizzleLanes,DAT_001b2ab4);
+        callResult = SelectWord__areCompatible(swizzleLanes,DAT_001b2ab4);
         if (callResult == 0) {
-          callResult = FUN_000f2d18(swizzleLanes,DAT_001b2ac4);
+          callResult = SelectWord__areCompatible(swizzleLanes,DAT_001b2ac4);
           if (callResult != 0) {
             *(undefined4 *)(sourceIndex * 4 + selectOut) = 0x13;
           }
@@ -408,7 +408,7 @@ int R300MachineAssembler__rgbSelectForAlphaSource(this, sourceIndex, selectOut, 
 {
   int callResult;
   
-  callResult = FUN_000f2d18(swizzle & 0xffffff00 | 4,DAT_001b2ac4);
+  callResult = SelectWord__areCompatible(swizzle & 0xffffff00 | 4,DAT_001b2ac4);
   if (callResult == 0) {
     *(int *)(sourceIndex * 4 + selectOut) = sourceNumber + 0x1d;
   }
@@ -431,22 +431,22 @@ int R300MachineAssembler__rgbSelectForSourceSwizzle(this, sourceIndex, selectOut
   uint swizzleOrLane;
   
   swizzleOrLane = swizzle & 0xffffff00 | 4;
-  callResult = FUN_000f2d18(swizzleOrLane,DAT_001b2ac0);
+  callResult = SelectWord__areCompatible(swizzleOrLane,DAT_001b2ac0);
   if (callResult != 0) {
     *(int *)(sourceIndex * 4 + selectOut) = sourceNumber << 2;
     return;
   }
-  callResult = FUN_000f2d18(swizzleOrLane,DAT_001b2abc);
+  callResult = SelectWord__areCompatible(swizzleOrLane,DAT_001b2abc);
   if (callResult != 0) {
     *(int *)(selectOut + sourceIndex * 4) = sourceNumber * 4 + 1;
     return;
   }
-  callResult = FUN_000f2d18(swizzleOrLane,DAT_001b2ab8);
+  callResult = SelectWord__areCompatible(swizzleOrLane,DAT_001b2ab8);
   if (callResult != 0) {
     *(int *)(selectOut + sourceIndex * 4) = sourceNumber * 4 + 2;
     return;
   }
-  callResult = FUN_000f2d18(swizzleOrLane,DAT_001b2ab4);
+  callResult = SelectWord__areCompatible(swizzleOrLane,DAT_001b2ab4);
   if (callResult != 0) {
     *(int *)(selectOut + sourceIndex * 4) = sourceNumber * 4 + 3;
     return;
@@ -1260,7 +1260,7 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
         a0 = operandVReg2;
       }
       iVar2 = IRInst__getOperandRecord(piVar3,iVar2);
-      FUN_000f3398(local_28,*(undefined4 *)(iVar2 + 0x10));
+      SelectWord__readMask(local_28,*(undefined4 *)(iVar2 + 0x10));
       sourceLaneWord = local_28[0];
       iVar2 = (**(code **)(*a0 + 0x5c))(a0);
       if (iVar2 == 0) {

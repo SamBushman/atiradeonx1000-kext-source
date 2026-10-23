@@ -4680,6 +4680,7 @@ int evsEmitMova(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   int param_4;
 {
+  int evsAppendInstructionResult;
   int iVar1;
   int iVar2;
   undefined4 local_48;
@@ -4691,8 +4692,8 @@ int evsEmitMova(param_1, param_2, param_3, param_4)
   undefined4 local_30;
   
   iVar2 = param_2 + 4;
-  iVar1 = ((int (*)())evsAppendInstruction)(param_1,iVar2,0x48,0);
-  if (iVar1 != 0) {
+  evsAppendInstructionResult = ((int (*)())evsAppendInstruction)(param_1,iVar2,0x48,0);
+  if (evsAppendInstructionResult != 0) {
     local_48 = *(undefined4 *)(param_4 + 4);
     local_44 = *(undefined4 *)(param_4 + 8);
     local_30 = *(undefined4 *)(param_4 + 0x1c);
@@ -4716,6 +4717,7 @@ int evsEmitLogp(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   int param_4;
 {
+  int evsEncodeSourceResult;
   int iVar1;
   int iVar2;
   undefined4 uStack_38;
@@ -4730,8 +4732,8 @@ int evsEmitLogp(param_1, param_2, param_3, param_4)
     uStack_34 = 4;
     uStack_30 = 4;
     uStack_38 = 0xc;
-    iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x20,1,&uStack_38);
-    if (iVar1 != 0) {
+    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x20,1,&uStack_38);
+    if (evsEncodeSourceResult != 0) {
       return 1;
     }
   }
@@ -4803,8 +4805,10 @@ int FUN_00074ed0(param_1, param_2, param_3, param_4)
   int param_3;
   int param_4;
 {
-  int iVar1;
-  int iVar2;
+  int evsEncodeDestinationResult;
+  int evsEncodeSourceResult;
+  int extvsOperandDataTypeResult;
+  int evsAppendInstructionResult;
   int iVar3;
   uint uVar4;
   uint uStack_58;
@@ -4819,18 +4823,18 @@ int FUN_00074ed0(param_1, param_2, param_3, param_4)
   undefined4 uStack_34;
   undefined4 uStack_30;
   
-  iVar1 = extvsOperandDataType(param_3 + 0x1c,param_4 + 4);
+  extvsOperandDataTypeResult = extvsOperandDataType(param_3 + 0x1c,param_4 + 4);
   uVar4 = *(uint *)(param_4 + 0x40);
   if (3 < uVar4) {
     return 0xffffffff;
   }
   iVar3 = param_2 + 4;
-  iVar2 = ((int (*)())evsAppendInstruction)(param_1,iVar3,0x47,0);
-  if (iVar2 == 0) {
+  evsAppendInstructionResult = ((int (*)())evsAppendInstruction)(param_1,iVar3,0x47,0);
+  if (evsAppendInstructionResult == 0) {
     return 0xffffffff;
   }
-  iVar2 = ((int (*)())evsEncodeDestination)(param_1,iVar3,param_3,param_4 + 4,0);
-  if (iVar2 == 0) {
+  evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(param_1,iVar3,param_3,param_4 + 4,0);
+  if (evsEncodeDestinationResult == 0) {
     return 0xffffffff;
   }
   uStack_30 = *(undefined4 *)(param_4 + 0x38);
@@ -4840,9 +4844,9 @@ int FUN_00074ed0(param_1, param_2, param_3, param_4)
   uStack_38 = *(undefined4 *)(param_4 + 0x30);
   uStack_34 = *(undefined4 *)(param_4 + 0x34);
   uStack_40 = *(undefined4 *)(param_4 + 0x28);
-  if (iVar1 != 0x87be) {
+  if (extvsOperandDataTypeResult != 0x87be) {
     iStack_44 = uVar4 + iStack_44;
-    iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar3,param_3,&uStack_48,1,0);
+    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(param_1,iVar3,param_3,&uStack_48,1,0);
     goto LAB_00075028;
   }
   if (uVar4 == 1) {
@@ -4859,9 +4863,9 @@ LAB_00074fd4:
     uStack_50 = 0;
   }
   else if ((uVar4 == 2) || (uVar4 == 3)) goto LAB_00074fd4;
-  iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar3,param_3,&uStack_48,1,&uStack_58);
+  evsEncodeSourceResult = ((int (*)())evsEncodeSource)(param_1,iVar3,param_3,&uStack_48,1,&uStack_58);
 LAB_00075028:
-  if (iVar1 == 0) {
+  if (evsEncodeSourceResult == 0) {
     return 0xffffffff;
   }
   return 1;
@@ -4874,8 +4878,9 @@ int FUN_00075060(param_1, param_2, param_3, param_4)
   int param_3;
   int param_4;
 {
-  int iVar1;
-  int iVar2;
+  int evsEncodeDestinationResult;
+  int extvsOperandDataTypeResult;
+  int evsAppendInstructionResult;
   int iVar3;
   uint uVar4;
   uint uStack_48;
@@ -4886,17 +4891,17 @@ int FUN_00075060(param_1, param_2, param_3, param_4)
   undefined4 uStack_34;
   undefined4 uStack_30;
   
-  iVar1 = extvsOperandDataType(param_3 + 0x1c,param_4 + 4);
+  extvsOperandDataTypeResult = extvsOperandDataType(param_3 + 0x1c,param_4 + 4);
   uVar4 = *(uint *)(param_4 + 0x40);
   if (3 < uVar4) {
     return 0xffffffff;
   }
   iVar3 = param_2 + 4;
-  iVar2 = ((int (*)())evsAppendInstruction)(param_1,iVar3,0x47,0);
-  if (iVar2 == 0) {
+  evsAppendInstructionResult = ((int (*)())evsAppendInstruction)(param_1,iVar3,0x47,0);
+  if (evsAppendInstructionResult == 0) {
     return 0xffffffff;
   }
-  if (iVar1 == 0x87bf) {
+  if (extvsOperandDataTypeResult == 0x87bf) {
     uStack_48 = *(uint *)(param_4 + 4);
     uStack_44 = *(uint *)(param_4 + 8);
     uStack_40 = *(uint *)(param_4 + 0xc);
@@ -4924,7 +4929,7 @@ int FUN_00075060(param_1, param_2, param_3, param_4)
       uStack_40 = 0;
       uStack_3c = 0;
     }
-    iVar2 = ((int (*)())evsEncodeDestination)(param_1,iVar3,param_3,&uStack_48,1);
+    evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(param_1,iVar3,param_3,&uStack_48,1);
   }
   else {
     uStack_48 = *(uint *)(param_4 + 4);
@@ -4934,12 +4939,12 @@ int FUN_00075060(param_1, param_2, param_3, param_4)
     uStack_34 = *(undefined4 *)(param_4 + 0x18);
     uStack_30 = *(undefined4 *)(param_4 + 0x1c);
     uStack_44 = uVar4 + *(int *)(param_4 + 8);
-    iVar2 = ((int (*)())evsEncodeDestination)(param_1,iVar3,param_3,&uStack_48,1);
+    evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(param_1,iVar3,param_3,&uStack_48,1);
   }
-  if (iVar2 == 0) {
+  if (evsEncodeDestinationResult == 0) {
     return 0xffffffff;
   }
-  if (iVar1 != 0x87bf) {
+  if (extvsOperandDataTypeResult != 0x87bf) {
     ((int (*)())evsEncodeSource)(param_1,iVar3,param_3,param_4 + 0x20,1,0);
     return 1;
   }
@@ -5441,6 +5446,7 @@ int evsEmitMov(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   int param_4;
 {
+  int evsEncodeSourceResult;
   int iVar1;
   int iVar2;
   undefined4 uStack_38;
@@ -5455,8 +5461,8 @@ int evsEmitMov(param_1, param_2, param_3, param_4)
     uStack_34 = 5;
     uStack_30 = 6;
     uStack_2c = 7;
-    iVar1 = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x20,1,&uStack_38);
-    if (iVar1 != 0) {
+    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(param_1,iVar2,param_3,param_4 + 0x20,1,&uStack_38);
+    if (evsEncodeSourceResult != 0) {
       return 1;
     }
   }
@@ -5470,14 +5476,16 @@ int evsEmitIndexOrMove(param_1, param_2, param_3, param_4)
   undefined4 param_3;
   int param_4;
 {
-  int iVar1;
+  int evsEncodeDestinationResult;
+  int evsEncodeSourceResult;
+  int evsAppendInstructionResult;
   undefined4 uVar2;
   uint uVar3;
   uint *puVar4;
   
   puVar4 = (uint *)(param_2 + 4);
-  iVar1 = ((int (*)())evsAppendInstruction)(param_1,puVar4,0x48,0);
-  if (iVar1 != 0) {
+  evsAppendInstructionResult = ((int (*)())evsAppendInstruction)(param_1,puVar4,0x48,0);
+  if (evsAppendInstructionResult != 0) {
     if (*(uint *)(param_2 + 8) <= *(uint *)(param_2 + 4)) {
       uVar2 = (**(code **)(param_1 + 0xc))(*(uint *)(param_2 + 8) * 4 + 0x200);
       if (*(int *)(param_2 + 0xc) != 0) {
@@ -5502,14 +5510,14 @@ int evsEmitIndexOrMove(param_1, param_2, param_3, param_4)
     }
     *(undefined4 *)(uVar3 * 4 + *(int *)(param_2 + 0xc)) = 1;
     *puVar4 = *puVar4 + 1;
-    iVar1 = ((int (*)())evsEncodeSource)(param_1,puVar4,param_3,param_4 + 0x20,0,0);
-    if (iVar1 != 0) {
+    evsEncodeSourceResult = ((int (*)())evsEncodeSource)(param_1,puVar4,param_3,param_4 + 0x20,0,0);
+    if (evsEncodeSourceResult != 0) {
       ((int (*)())evsAppendInstruction)(param_1,puVar4,0x47,0);
-      iVar1 = ((int (*)())evsEncodeDestination)(param_1,puVar4,param_3,param_4 + 4,0);
-      if (iVar1 != 0) {
+      evsEncodeDestinationResult = ((int (*)())evsEncodeDestination)(param_1,puVar4,param_3,param_4 + 4,0);
+      if (evsEncodeDestinationResult != 0) {
         *(undefined1 *)(param_4 + 0x54) = 1;
-        iVar1 = ((int (*)())evsEncodeSource)(param_1,puVar4,param_3,param_4 + 0x3c,0,0);
-        if (iVar1 != 0) {
+        evsEncodeSourceResult = ((int (*)())evsEncodeSource)(param_1,puVar4,param_3,param_4 + 0x3c,0,0);
+        if (evsEncodeSourceResult != 0) {
           return 1;
         }
       }

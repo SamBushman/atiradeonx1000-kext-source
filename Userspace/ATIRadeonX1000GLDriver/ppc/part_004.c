@@ -5733,6 +5733,7 @@ int FUN_0002c230(param_1, param_2)
   int param_1;
   uint *param_2;
 {
+  undefined4 gld_bufferEnumToIndexResult;
   ushort *puVar1;
   bool bVar2;
   code *pcVar3;
@@ -5788,10 +5789,10 @@ LAB_0002c610:
       do {
         puVar1 = (ushort *)(((unsigned char *)0x00002dba) + iVar13);
         iVar13 = iVar13 + 2;
-        uVar5 = gld_bufferEnumToIndex((uint)*puVar1,*(undefined4 *)(iVar9 + 0x154));
+        gld_bufferEnumToIndexResult = gld_bufferEnumToIndex((uint)*puVar1,*(undefined4 *)(iVar9 + 0x154));
         bVar2 = iVar11 != 3;
         iVar11 = iVar11 + 1;
-        *(undefined4 *)(iVar12 + 0x2460) = uVar5;
+        *(undefined4 *)(iVar12 + 0x2460) = gld_bufferEnumToIndexResult;
         iVar12 = iVar12 + 4;
       } while (bVar2);
       puVar6 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,0x22d);
@@ -5930,7 +5931,7 @@ int gld_initContextHardwareState(param_1, param_2)
   undefined *puVar2;
   uint uVar3;
   int *piVar4;
-  undefined1 uVar6;
+  undefined1 window_mode_to_ati_formatResult;
   undefined4 uVar5;
   uint uVar7;
   int iVar8;
@@ -5967,8 +5968,8 @@ int gld_initContextHardwareState(param_1, param_2)
   ((unsigned char *)0x00002b7d)[param_1] = 0;
   ((unsigned char *)0x00002b7c)[param_1] = 1;
   *(uint *)(param_1 + 0x258c) = *(uint *)(param_1 + 0x258c) & 0xfffffffc | 1;
-  uVar6 = window_mode_to_ati_format(*(undefined4 *)(param_1 + 0x154));
-  ((unsigned char *)0x00002b7f)[param_1] = uVar6;
+  window_mode_to_ati_formatResult = window_mode_to_ati_format(*(undefined4 *)(param_1 + 0x154));
+  ((unsigned char *)0x00002b7f)[param_1] = window_mode_to_ati_formatResult;
   *(int *)(param_1 + 0x2680) = param_1 + 0x26dc;
   *(int *)(param_1 + 0x2684) = param_1 + 0x26fc;
   *(undefined4 *)(param_1 + 0x1ec) = 0;

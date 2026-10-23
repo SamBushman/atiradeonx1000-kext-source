@@ -800,7 +800,7 @@ int FUN_0010ae20(param_1, param_2, param_3)
   uVar4 = *(undefined4 *)(param_1 + 0x158);
   useCount = IRInst__useCount(param_1,param_3);
   DList__unlink(param_1);
-  FUN_00103f84(param_1,param_2);
+  IRInst__copyBodyFrom(param_1,param_2);
   IRInst__restoreCounters(param_1,&local_48);
   iVar1 = *(int *)(param_3 + 0x478);
   *(undefined4 *)(param_1 + 0x94) = *(undefined4 *)(param_1 + 0x14c);
@@ -1125,12 +1125,12 @@ int IRInst__getCompareCondition(inst)
 /* FUN_0010b820 @ 0x10b820 (220 bytes) */
 bool FUN_0010b820(undefined4 param_1,double fparam_1,double fparam_2)
 {
-  undefined4 uVar1;
+  undefined4 compareCondition;
   bool bVar2;
   
-  uVar1 = ((int (*)())IRInst__getCompareCondition)(param_1);
+  compareCondition = ((int (*)())IRInst__getCompareCondition)(param_1);
   bVar2 = false;
-  switch(uVar1) {
+  switch(compareCondition) {
   case 0:
     bVar2 = fparam_1 == fparam_2;
     break;
@@ -1274,12 +1274,12 @@ int FUN_0010bb9c(param_1, param_2, param_3, param_4, param_5, param_6)
 {
   undefined *puVar1;
   int iVar2;
-  undefined4 uVar3;
+  undefined4 field4;
   int opcodeInfo;
   
   iVar2 = (**(code **)(*param_1 + 0x14))(param_1,param_2,param_3,param_4,param_5,param_6);
-  uVar3 = OpcodeTraits__getField4(*(undefined4 *)(param_1[0x22] + 8),param_6);
-  opcodeInfo = Opcode__getInfo(uVar3);
+  field4 = OpcodeTraits__getField4(*(undefined4 *)(param_1[0x22] + 8),param_6);
+  opcodeInfo = Opcode__getInfo(field4);
   param_1[0x22] = opcodeInfo;
   if (param_5 != 0) {
     opcodeInfo = Opcode__getInfo(0x35);
@@ -1304,15 +1304,15 @@ int FUN_0010bc78(param_1, param_2)
 {
   int opcodeInfo;
   int iVar1;
-  undefined4 uVar2;
+  undefined4 field4;
   int iVar3;
   int local_28;
   int local_24;
   int local_20 [4];
   
   iVar1 = *(int *)(param_1[0x22] + 8);
-  uVar2 = OpcodeTraits__getField4(iVar1,param_2);
-  opcodeInfo = Opcode__getInfo(uVar2);
+  field4 = OpcodeTraits__getField4(iVar1,param_2);
+  opcodeInfo = Opcode__getInfo(field4);
   param_1[0x22] = opcodeInfo;
   iVar3 = (**(code **)(*param_1 + 0x14))(param_1);
   FUN_000f33f8(&local_28,param_1[0x2d]);

@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_000f2d18 @ 0xf2d18 (144 bytes) */
-int FUN_000f2d18(param_1, param_2)
+/* SelectWord__areCompatible @ 0xf2d18 (144 bytes) */
+int SelectWord__areCompatible(param_1, param_2)
   uint param_1;
   uint param_2;
 {
@@ -253,8 +253,8 @@ int FUN_000f308c(param_1)
   return 0xffffffff;
 }
 
-/* FUN_000f30d4 @ 0xf30d4 (52 bytes) */
-int FUN_000f30d4(param_1)
+/* SelectWord__firstWrittenComponent @ 0xf30d4 (52 bytes) */
+int SelectWord__firstWrittenComponent(param_1)
   undefined4 param_1;
 {
   unsigned int ghidra_home[8] = { param_1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
@@ -277,8 +277,8 @@ int FUN_000f30d4(param_1)
   return -1;
 }
 
-/* FUN_000f3108 @ 0xf3108 (52 bytes) */
-int FUN_000f3108(param_1)
+/* SelectWord__firstUnwrittenComponent @ 0xf3108 (52 bytes) */
+int SelectWord__firstUnwrittenComponent(param_1)
   undefined4 param_1;
 {
   unsigned int ghidra_home[8] = { param_1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
@@ -320,8 +320,8 @@ int FUN_000f3154(param_1)
   return 1;
 }
 
-/* FUN_000f3190 @ 0xf3190 (88 bytes) */
-int FUN_000f3190(param_1)
+/* SelectWord__isIdentity @ 0xf3190 (88 bytes) */
+int SelectWord__isIdentity(param_1)
   uint param_1;
 {
   uint uVar1;
@@ -334,19 +334,19 @@ int FUN_000f3190(param_1)
   return 0;
 }
 
-/* FUN_000f31e8 @ 0xf31e8 (16 bytes) */
-int FUN_000f31e8(param_1, param_2)
+/* IRInst__isSourceSelectIdentity @ 0xf31e8 (16 bytes) */
+int IRInst__isSourceSelectIdentity(param_1, param_2)
   int param_1;
   int param_2;
 {
-  undefined4 uVar1;
+  undefined4 isIdentity;
   
-  uVar1 = ((int (*)())FUN_000f3190)(*(undefined4 *)(param_2 * 0x18 + param_1 + 0x9c));
-  return uVar1;
+  isIdentity = ((int (*)())SelectWord__isIdentity)(*(undefined4 *)(param_2 * 0x18 + param_1 + 0x9c));
+  return isIdentity;
 }
 
-/* FUN_000f31f8 @ 0xf31f8 (96 bytes) */
-int FUN_000f31f8(param_1, param_2, param_3)
+/* SelectWord__selectWhereMasked @ 0xf31f8 (96 bytes) */
+int SelectWord__selectWhereMasked(param_1, param_2, param_3)
   undefined1 *param_1;
   undefined4 param_2;
   uint param_3;
@@ -376,8 +376,8 @@ int FUN_000f31f8(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000f3258 @ 0xf3258 (116 bytes) */
-int FUN_000f3258(param_1, param_2)
+/* SelectWord__clearReadComponents @ 0xf3258 (116 bytes) */
+int SelectWord__clearReadComponents(param_1, param_2)
   undefined4 *param_1;
   uint param_2;
 {
@@ -424,8 +424,8 @@ int FUN_000f32cc(param_1, param_2)
   return;
 }
 
-/* FUN_000f3340 @ 0xf3340 (88 bytes) */
-int FUN_000f3340(param_1, param_2, param_3)
+/* SelectWord__maskUnused @ 0xf3340 (88 bytes) */
+int SelectWord__maskUnused(param_1, param_2, param_3)
   uint *param_1;
   uint param_2;
   uint param_3;
@@ -446,8 +446,8 @@ int FUN_000f3340(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000f3398 @ 0xf3398 (96 bytes) */
-int FUN_000f3398(param_1, param_2)
+/* SelectWord__readMask @ 0xf3398 (96 bytes) */
+int SelectWord__readMask(param_1, param_2)
   undefined4 *param_1;
   uint param_2;
 {
@@ -593,8 +593,8 @@ LAB_000f35b4:
   return;
 }
 
-/* FUN_000f35c4 @ 0xf35c4 (168 bytes) */
-int FUN_000f35c4(inst)
+/* IRInst__clearSourceSelectsOfUnwrittenComponents @ 0xf35c4 (168 bytes) */
+int IRInst__clearSourceSelectsOfUnwrittenComponents(inst)
   int *inst;
 {
   int operandRecord;
@@ -786,8 +786,8 @@ int FUN_000f388c(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000f3908 @ 0xf3908 (96 bytes) */
-int FUN_000f3908(param_1, param_2)
+/* WriteMask__fromSelectWord @ 0xf3908 (96 bytes) */
+int WriteMask__fromSelectWord(param_1, param_2)
   byte *param_1;
   uint param_2;
 {
@@ -856,8 +856,8 @@ int FUN_000f39d0(param_1, param_2)
   return;
 }
 
-/* FUN_000f3a30 @ 0xf3a30 (96 bytes) */
-int FUN_000f3a30(inst)
+/* IRInst__countWrittenComponents @ 0xf3a30 (96 bytes) */
+int IRInst__countWrittenComponents(inst)
   undefined4 inst;
 {
   bool bVar1;
@@ -1197,7 +1197,7 @@ int FUN_000f403c(param_1, inst, param_3, param_4, param_5)
   switch(uVar5) {
   case 0:
     operandRecord = IRInst__getOperandRecord(inst,0);
-    ((int (*)())FUN_000f31f8)(&local_44,*(undefined4 *)(operandRecord + 0x10),param_4);
+    ((int (*)())SelectWord__selectWhereMasked)(&local_44,*(undefined4 *)(operandRecord + 0x10),param_4);
     iVar4 = 0;
     local_54[0] = local_44;
     iVar7 = 4;
@@ -1302,7 +1302,7 @@ switchD_000f40d0_caseD_2:
     if (iVar4 < 0xa2) {
       if (0x9d < iVar4) {
         operandRecord = IRInst__getOperandRecord(inst,0);
-        ((int (*)())FUN_000f31f8)(&local_28,*(undefined4 *)(operandRecord + 0x10),param_4);
+        ((int (*)())SelectWord__selectWhereMasked)(&local_28,*(undefined4 *)(operandRecord + 0x10),param_4);
         local_54[0] = local_28;
         *param_1 = 0;
         iVar4 = 0;
@@ -1350,7 +1350,7 @@ switchD_000f40d0_caseD_a:
     goto switchD_000f40d0_caseD_b;
   case 0xc:
     operandRecord = IRInst__getOperandRecord(inst,0);
-    ((int (*)())FUN_000f31f8)(local_24,*(undefined4 *)(operandRecord + 0x10),param_4);
+    ((int (*)())SelectWord__selectWhereMasked)(local_24,*(undefined4 *)(operandRecord + 0x10),param_4);
     local_54[0] = local_24[0];
     *param_1 = 0;
     iVar4 = 0;
@@ -1377,7 +1377,7 @@ LAB_000f45a4:
   case 0xe:
     if (param_3 == 1) {
       operandRecord = IRInst__getOperandRecord(inst,0);
-      ((int (*)())FUN_000f31f8)(&local_48,*(undefined4 *)(operandRecord + 0x10),param_4);
+      ((int (*)())SelectWord__selectWhereMasked)(&local_48,*(undefined4 *)(operandRecord + 0x10),param_4);
       iVar4 = 0;
       local_54[0] = local_48;
       iVar7 = 4;
@@ -1464,7 +1464,7 @@ int FUN_000f4698(inst, param_2, param_3)
   operandRecord = IRInst__getOperandRecord(inst,0);
   ((int (*)())FUN_000f3c30)(&local_18,inst,param_2,param_3,*(undefined4 *)(operandRecord + 0x10));
   operandRecord = IRInst__getOperandRecord(inst,param_2);
-  ((int (*)())FUN_000f3340)(&local_14,*(undefined4 *)(operandRecord + 0x10),local_18);
+  ((int (*)())SelectWord__maskUnused)(&local_14,*(undefined4 *)(operandRecord + 0x10),local_18);
   if (param_2 == 0) {
     *(undefined4 *)(inst + 0x9c) = local_14;
   }
@@ -1607,7 +1607,7 @@ int FUN_000f497c(inst, inst2)
   uint local_20 [5];
   
   operandRecord = IRInst__getOperandRecord(inst,0);
-  ((int (*)())FUN_000f3908)(&local_28,*(undefined4 *)(operandRecord + 0x10));
+  ((int (*)())WriteMask__fromSelectWord)(&local_28,*(undefined4 *)(operandRecord + 0x10));
   iVar1 = FUN_001055cc(inst2);
   if (iVar1 == 0) {
     operandRecord = IRInst__getOperandRecord(inst2,0);
@@ -1616,7 +1616,7 @@ int FUN_000f497c(inst, inst2)
   }
   else {
     operandRecord = IRInst__getOperandRecord(inst2,0);
-    ((int (*)())FUN_000f3908)(&local_24,*(undefined4 *)(operandRecord + 0x10));
+    ((int (*)())WriteMask__fromSelectWord)(&local_24,*(undefined4 *)(operandRecord + 0x10));
   }
   return (local_28 & local_24) != 0;
 }
