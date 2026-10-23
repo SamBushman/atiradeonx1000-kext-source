@@ -8645,7 +8645,7 @@ LAB_0003b3e0:
             uVar7 = *puVar16;
             *(undefined4 *)(iVar17 + (puVar18[1] & 0xffff) * 4) = uVar7;
             if ((uVar5 >> 0x10 & 0x1f) == 0x11) {
-              FUN_000547f0(param_1,uVar7,((unsigned char *)0x00001406U),(uVar5 & 0xffff) * 0x10 + param_8);
+              glSetLocalConstantEXT_impl(param_1,uVar7,((unsigned char *)0x00001406U),(uVar5 & 0xffff) * 0x10 + param_8);
             }
             loopIndex2 = loopIndex2 + 1;
             puVar18 = puVar18 + 2;
@@ -9271,7 +9271,7 @@ int FUN_0003c310(param_1, param_2)
     (**(code **)(param_1 + 0x18))(param_2[10]);
     param_2[10] = 0;
   }
-  return FUN_00053ef0(param_1,*param_2);
+  return glDeleteVertexShaderEXT_impl(param_1,*param_2);
 }
 
 /* FUN_0003c400 @ 0x3c400 (4136 bytes) */
@@ -9402,7 +9402,7 @@ int FUN_0003c400(ctx, shaderObject, hwProgram)
         uVar15 = shaderObject[iVar5 * 2 + loopIndex * 2 + 1];
         if (((uint)shaderObject[iVar5 * 2 + loopIndex * 2] >> 0x10 & 0xf) - 1 < 10) {
           if ((uVar15 & 0xffff) == 0) {
-            uVar7 = FUN_00054940(ctx,0x87e2);
+            uVar7 = extvsBindCurrentVertexParameter(ctx,0x87e2);
             *puVar19 = uVar7;
           }
           else {
@@ -9499,7 +9499,7 @@ LAB_0003c9b8:
           else if (uVar4 == 2) {
             if ((int)instructionWord < 0) {
               cStack_75 = (char)instructionWord;
-              FUN_00053f80(ctx,0x8782,puVar19[0x13],hwProgram[0x17],
+              glShaderOp2EXT_impl(ctx,0x8782,puVar19[0x13],hwProgram[0x17],
                            *(undefined4 *)((dstIndex + (int)cStack_75) * 4 + hwProgram[10]));
               uVar7 = puVar19[0x13];
             }
@@ -9539,103 +9539,103 @@ LAB_0003c9b8:
         } while (iVar18 != iVar20);
         switch(opcode) {
         case 0:
-          FUN_00053f00(ctx,0x8799,iVar3,local_70[0]);
+          glShaderOp1EXT_impl(ctx,0x8799,iVar3,local_70[0]);
           break;
         case 1:
-          FUN_00053f00(ctx,0x879e,iVar3,local_70[0]);
+          glShaderOp1EXT_impl(ctx,0x879e,iVar3,local_70[0]);
           break;
         case 2:
           FUN_00054080(ctx,hwProgram[0x18],local_70[0],0x87d9,0x87da,0x87db,0x87dc);
-          FUN_00053f80(ctx,0x878a,iVar3,local_70[0],hwProgram[0x18]);
+          glShaderOp2EXT_impl(ctx,0x878a,iVar3,local_70[0],hwProgram[0x18]);
           break;
         default:
           goto switchD_0003cbec_caseD_3;
         case 4:
-          FUN_00053f00(ctx,0x8789,iVar3,local_70[0]);
+          glShaderOp1EXT_impl(ctx,0x8789,iVar3,local_70[0]);
           break;
         case 5:
-          FUN_00053f00(ctx,0x878f,iVar3,local_70[0]);
+          glShaderOp1EXT_impl(ctx,0x878f,iVar3,local_70[0]);
           break;
         case 0xd:
           FUN_00054080(ctx,hwProgram[0x18],local_70[0],0x87d9,0x87da,0x87db,0x87dc);
-          FUN_00053f80(ctx,0x878a,hwProgram[0x19],local_70[0],hwProgram[0x18]);
-          FUN_000543b0(ctx,hwProgram[0x10],hwProgram[0x19],0);
+          glShaderOp2EXT_impl(ctx,0x878a,hwProgram[0x19],local_70[0],hwProgram[0x18]);
+          glInsertComponentEXT_impl(ctx,hwProgram[0x10],hwProgram[0x19],0);
           uVar26 = hwProgram[0x11];
           uVar9 = hwProgram[0x10];
           uVar7 = 0x8795;
           goto LAB_0003cdec;
         case 0xe:
-          FUN_000543b0(ctx,hwProgram[0x10],local_70[0],0);
+          glInsertComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
           uVar26 = hwProgram[0x11];
           uVar9 = hwProgram[0x10];
           uVar7 = 0x8794;
           goto LAB_0003cdec;
         case 0x10:
-          FUN_000543b0(ctx,hwProgram[0x10],local_70[0],0);
+          glInsertComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
           uVar26 = hwProgram[0x11];
           uVar9 = hwProgram[0x10];
           uVar7 = 0x8791;
           goto LAB_0003cdec;
         case 0x11:
-          FUN_00053f00(ctx,0x87a0,iVar3,local_70[0]);
+          glShaderOp1EXT_impl(ctx,0x87a0,iVar3,local_70[0]);
           break;
         case 0x13:
-          FUN_000543b0(ctx,hwProgram[0x10],local_70[0],0);
+          glInsertComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
           uVar26 = hwProgram[0x11];
           uVar9 = hwProgram[0x10];
           uVar7 = 0x8792;
 LAB_0003cdec:
-          FUN_00053f00(ctx,uVar7,uVar26,uVar9);
-          FUN_00053f00(ctx,0x8799,iVar3,hwProgram[0x11]);
+          glShaderOp1EXT_impl(ctx,uVar7,uVar26,uVar9);
+          glShaderOp1EXT_impl(ctx,0x8799,iVar3,hwProgram[0x11]);
           break;
         case 0x14:
-          FUN_00053f00(ctx,0x87a1,iVar3,local_70[0]);
+          glShaderOp1EXT_impl(ctx,0x87a1,iVar3,local_70[0]);
           break;
         case 0x1f:
-          FUN_00053f80(ctx,0x8787,iVar3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x8787,iVar3,local_70[0],local_70[1]);
           break;
         case 0x20:
-          FUN_00053f80(ctx,0x8796,iVar3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x8796,iVar3,local_70[0],local_70[1]);
           break;
         case 0x22:
-          FUN_00053f80(ctx,0x8786,iVar3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x8786,iVar3,local_70[0],local_70[1]);
           break;
         case 0x28:
-          FUN_00053f80(ctx,0x8784,iVar3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x8784,iVar3,local_70[0],local_70[1]);
           break;
         case 0x29:
-          FUN_00053f80(ctx,0x8785,iVar3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x8785,iVar3,local_70[0],local_70[1]);
           break;
         case 0x2a:
           FUN_00054080(ctx,hwProgram[0x18],local_70[0],0x87d5,0x87d6,0x87d7,0x87de);
-          FUN_00053f80(ctx,0x8785,iVar3,hwProgram[0x18],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x8785,iVar3,hwProgram[0x18],local_70[1]);
           break;
         case 0x2b:
-          FUN_00053f80(ctx,0x879f,iVar3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x879f,iVar3,local_70[0],local_70[1]);
           break;
         case 0x2c:
-          FUN_00053f80(ctx,0x878b,iVar3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x878b,iVar3,local_70[0],local_70[1]);
           break;
         case 0x2d:
-          FUN_00053f80(ctx,0x878a,iVar3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x878a,iVar3,local_70[0],local_70[1]);
           break;
         case 0x2e:
-          FUN_00053f80(ctx,0x8797,iVar3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x8797,iVar3,local_70[0],local_70[1]);
           break;
         case 0x32:
-          FUN_00053f80(ctx,0x878c,iVar3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x878c,iVar3,local_70[0],local_70[1]);
           break;
         case 0x35:
-          FUN_00053f80(ctx,0x878d,iVar3,local_70[0],local_70[1]);
+          glShaderOp2EXT_impl(ctx,0x878d,iVar3,local_70[0],local_70[1]);
           break;
         case 0x38:
-          FUN_000543b0(ctx,hwProgram[0x10],local_70[0],0);
-          FUN_000543b0(ctx,hwProgram[0x11],uVar7,0);
-          FUN_00053f80(ctx,0x8793,hwProgram[0x12],hwProgram[0x10],hwProgram[0x11]);
-          FUN_00053f00(ctx,0x8799,iVar3,hwProgram[0x12]);
+          glInsertComponentEXT_impl(ctx,hwProgram[0x10],local_70[0],0);
+          glInsertComponentEXT_impl(ctx,hwProgram[0x11],uVar7,0);
+          glShaderOp2EXT_impl(ctx,0x8793,hwProgram[0x12],hwProgram[0x10],hwProgram[0x11]);
+          glShaderOp1EXT_impl(ctx,0x8799,iVar3,hwProgram[0x12]);
           break;
         case 0x3f:
-          FUN_00054000(ctx,0x8788,iVar3,local_70[0],local_70[1],local_70[2]);
+          glShaderOp3EXT_impl(ctx,0x8788,iVar3,local_70[0],local_70[1],local_70[2]);
           break;
         case 0x41:
           uVar15 = *nextInstruction;
@@ -9651,10 +9651,10 @@ LAB_0003cdec:
           }
           break;
         case 0x48:
-          FUN_000543b0(ctx,iVar3,local_70[0],0);
+          glInsertComponentEXT_impl(ctx,iVar3,local_70[0],0);
         }
         if (((operandWord & 0x1e000) != 0x1e000) && (!bVar1)) {
-          FUN_000541a0(ctx,iVar17,iVar3,operandWord >> 0xd & 1,operandWord >> 0xe & 1,operandWord >> 0xf & 1,
+          glWriteMaskEXT_impl(ctx,iVar17,iVar3,operandWord >> 0xd & 1,operandWord >> 0xe & 1,operandWord >> 0xf & 1,
                        operandWord >> 0x10 & 1);
         }
 LAB_0003d23c:
@@ -9667,14 +9667,14 @@ LAB_0003d254:
     if (*(char *)(hwProgram + 0x23) != '\0') {
       uVar26 = hwProgram[0x16];
       uVar7 = *(undefined4 *)hwProgram[4];
-      FUN_00053f80(ctx,0x8785,uVar26,uVar7,hwProgram[0x1a]);
-      FUN_000541a0(ctx,0x879a,uVar26,1,0,0,0);
-      FUN_00053f80(ctx,0x8785,uVar26,uVar7,hwProgram[0x1b]);
-      FUN_000541a0(ctx,0x879a,uVar26,0,1,0,0);
-      FUN_00053f80(ctx,0x8785,uVar26,uVar7,hwProgram[0x1c]);
-      FUN_000541a0(ctx,0x879a,uVar26,0,0,1,0);
-      FUN_00053f80(ctx,0x8785,uVar26,uVar7,hwProgram[0x1d]);
-      FUN_000541a0(ctx,0x879a,uVar26,0,0,0,1);
+      glShaderOp2EXT_impl(ctx,0x8785,uVar26,uVar7,hwProgram[0x1a]);
+      glWriteMaskEXT_impl(ctx,0x879a,uVar26,1,0,0,0);
+      glShaderOp2EXT_impl(ctx,0x8785,uVar26,uVar7,hwProgram[0x1b]);
+      glWriteMaskEXT_impl(ctx,0x879a,uVar26,0,1,0,0);
+      glShaderOp2EXT_impl(ctx,0x8785,uVar26,uVar7,hwProgram[0x1c]);
+      glWriteMaskEXT_impl(ctx,0x879a,uVar26,0,0,1,0);
+      glShaderOp2EXT_impl(ctx,0x8785,uVar26,uVar7,hwProgram[0x1d]);
+      glWriteMaskEXT_impl(ctx,0x879a,uVar26,0,0,0,1);
     }
     extvsEndShader(ctx);
     if (!bVar2) {

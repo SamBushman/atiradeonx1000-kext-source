@@ -1263,14 +1263,14 @@ int orph_535c4(param_1, param_2, param_3)
     uVar5 = 0;
   }
   else {
-    uVar5 = FUN_00055610(param_1,iVar1 + 0x1c,0x87bf,0xfffffffe,0x87e1,0,param_2,param_3);
+    uVar5 = extvsCreateSymbol(param_1,iVar1 + 0x1c,0x87bf,0xfffffffe,0x87e1,0,param_2,param_3);
     if (1 < param_2) {
       uVar4 = 1;
       do {
         iVar2 = param_2 - uVar4;
         iVar3 = uVar4 + param_3;
         uVar4 = uVar4 + 1;
-        FUN_00055610(param_1,iVar1 + 0x1c,0x87bf,0xfffffffe,0x87e1,uVar5,iVar2,iVar3);
+        extvsCreateSymbol(param_1,iVar1 + 0x1c,0x87bf,0xfffffffe,0x87e1,uVar5,iVar2,iVar3);
       } while (param_2 != uVar4);
     }
   }
@@ -1293,9 +1293,9 @@ int orph_535f0(param_1, param_2)
   while( true ) {
     if (piVar1 == (int *)0x0) {
       iVar5 = *(int *)(((unsigned char *)0x0000116c) + param_1) + 0x14;
-      iVar2 = FUN_00055610(param_1,iVar5,0x87bf,0xfffffffc,0x87e1,0,0,param_2);
+      iVar2 = extvsCreateSymbol(param_1,iVar5,0x87bf,0xfffffffc,0x87e1,0,0,param_2);
       if (iVar2 != 0) {
-        iVar5 = FUN_00055a30(iVar5,iVar2);
+        iVar5 = extvsSymbolListGetSymbol(iVar5,iVar2);
         *(undefined4 *)(iVar5 + 0x50) = 0;
         *(undefined4 *)(iVar5 + 0x48) = 0x12;
         *(undefined1 *)(iVar5 + 0x44) = 1;

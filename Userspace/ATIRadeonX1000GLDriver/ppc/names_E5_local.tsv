@@ -1,0 +1,85 @@
+# local FUNCTION old new tier evidence (fork E5)
+local	FUN_00053a90	param_1	shaderTable	INFERRED	table at ctx+0x116c: count +4, shader objects +0xc
+local	FUN_00053a90	param_2	shaderId	CONFIRMED	compared with each object's id at +8
+local	FUN_00053f00	param_1	ctx	CONFIRMED	ctx+0x1170 / +0x1168 are the open-shader state
+local	FUN_00053f00	param_2	op	INFERRED	opcode passed through to extvsAppendInstruction (OP_*_EXT enumerant)
+local	FUN_00053f00	param_3	resultId	INFERRED	destination symbol id
+local	FUN_00053f00	param_4	arg1	INFERRED	first source symbol id
+local	FUN_00053f80	param_1	ctx	CONFIRMED	as ShaderOp1
+local	FUN_00053f80	param_2	op	INFERRED	opcode
+local	FUN_00053f80	param_3	resultId	INFERRED	destination symbol id
+local	FUN_00053f80	param_4	arg1	INFERRED	first source symbol id
+local	FUN_00053f80	param_5	arg2	INFERRED	second source symbol id
+local	FUN_00054000	param_1	ctx	CONFIRMED	as ShaderOp1
+local	FUN_00054000	param_2	op	INFERRED	opcode
+local	FUN_00054000	param_3	resultId	INFERRED	destination symbol id
+local	FUN_00054000	param_4	arg1	INFERRED	first source symbol id
+local	FUN_00054000	param_5	arg2	INFERRED	second source symbol id
+local	FUN_00054000	param_6	arg3	INFERRED	third source symbol id
+local	FUN_000541a0	param_1	ctx	CONFIRMED	ctx+0x1170 is the shader-open flag
+local	FUN_000541a0	param_2	resultId	INFERRED	passed as the destination operand
+local	FUN_000541a0	param_3	sourceId	INFERRED	passed as the source operand
+local	FUN_000541a0	param_4	enableX	INFERRED	each of the four write-enable arguments is < 2
+local	FUN_000541a0	param_5	enableY	INFERRED	write-enable for Y
+local	FUN_000541a0	param_6	enableZ	INFERRED	write-enable for Z
+local	FUN_000541a0	param_7	enableW	INFERRED	write-enable for W
+local	FUN_00054270	param_1	ctx	CONFIRMED	as the other entry points
+local	FUN_00054270	param_2	resultId	INFERRED	destination symbol id
+local	FUN_00054270	param_3	sourceId	INFERRED	source symbol id
+local	FUN_00054270	param_4	componentIndex	INFERRED	checked < 4
+local	FUN_000543b0	param_1	ctx	CONFIRMED	as the other entry points
+local	FUN_000543b0	param_2	resultId	INFERRED	destination symbol id
+local	FUN_000543b0	param_3	sourceId	INFERRED	source symbol id
+local	FUN_000543b0	param_4	componentIndex	INFERRED	checked < 4, stored in the new instruction record
+local	FUN_000547f0	param_1	ctx	CONFIRMED	as the other entry points
+local	FUN_000547f0	param_2	symbolId	INFERRED	looked up with extvsSymbolListGetSymbol
+local	FUN_000547f0	param_3	dataType	CONFIRMED	checked in 0x1400..0x140a (GL_BYTE..GL_DOUBLE range)
+local	FUN_000547f0	param_4	values	INFERRED	copied into the local-constant symbol data
+local	FUN_00055a30	param_1	symbolList	CONFIRMED	records at +4, index array at +8, count at +0xc
+local	FUN_00055a30	param_2	position	CONFIRMED	index into the index array
+local	FUN_00054da0	param_1	symbolList	CONFIRMED	index array at +8, count at +0xc
+local	FUN_00054da0	param_2	position	CONFIRMED	array position
+local	FUN_00056b80	param_1	operand	CONFIRMED	type word at +0 (2 = temp), index at +4
+local	FUN_00056b80	param_2	slot	CONFIRMED	the four symbol indices are at slot+0x18..+0x24
+local	FUN_00056b80	iVar1	operandIndex	CONFIRMED	the operand's index compared with each of the slot's four symbol indices
+local	FUN_0005e770	param_1	pointerArray	CONFIRMED	32-entry array of pointers
+local	FUN_0005e770	iVar4	entry	CONFIRMED	the entry examined and returned
+local	FUN_0005e7f0	param_1	ctx	CONFIRMED	*(ctx+0x118c) selects the shader table entry
+local	FUN_0005e7f0	param_2	shader	CONFIRMED	instruction count [5], instructions [6], symbol records [8]
+local	FUN_0005e7f0	iVar11	programState	INFERRED	hardware program state: input slots +0x24/+0x28, enabled-input mask +0x234, input register count +0x2a4
+local	FUN_0005e7f0	local_248	boundVariants	INFERRED	variant symbols bound to fixed-function vertex state (switch on state kind)
+local	FUN_0005e7f0	local_1c8	scalarVariants	INFERRED	unbound scalar (0x87be) variants collected for register assignment
+local	FUN_0005e7f0	local_148	vectorVariants	INFERRED	unbound vector (0x87bf) variants
+local	FUN_0005e7f0	local_c8	matrixVariants	INFERRED	unbound matrix (0x87c0) variants, 4 input registers each
+local	FUN_0005e7f0	iVar10	vectorVariantCount	INFERRED	count of entries stored in local_148
+local	FUN_00055da0	param_1	ctx	CONFIRMED	allocator hooks +0x10/+0x18 and copy hook +0x1344 are used
+local	FUN_00055da0	param_2	shader	CONFIRMED	+0x5c counts allocated constants
+local	FUN_00055da0	param_3	programState	INFERRED	constant pool at +0x54, size +0x58, register count +0x5c
+local	FUN_00055da0	param_4	symbol	CONFIRMED	0x54-byte symbol record: storage +0x28, data type +0x24, state-bound flag +0x44
+local	FUN_000564c0	param_1	ctx	CONFIRMED	allocator hooks as above
+local	FUN_000564c0	param_2	shader	CONFIRMED	symbol records at +0x20
+local	FUN_000564c0	param_3	programState	INFERRED	temp pool at +0x4c, count +0x50
+local	FUN_000564c0	param_4	operand	CONFIRMED	type word 2 and symbol index at +4
+local	FUN_000564c0	iVar11	symbol	CONFIRMED	index*0x54 + records; storage must be 0x87c4
+local	FUN_000564c0	iVar10	symbolIndex	CONFIRMED	operand index
+local	FUN_000564c0	iVar7	dataType	CONFIRMED	symbol+0x24 compared with 0x87bf/0x87c0/0x87be
+local	FUN_00056be0	param_1	ctx	CONFIRMED	as above
+local	FUN_00056be0	param_2	shader	CONFIRMED	instruction array [6], symbols [8], live temp count [0x19]
+local	FUN_00056be0	param_3	instIndex	CONFIRMED	only later instructions are scanned
+local	FUN_00056be0	iVar17	programState	INFERRED	temp pool +0x4c / count +0x50
+local	FUN_00056be0	uVar14	tempSlotCount	CONFIRMED	programState+0x50
+local	FUN_00056be0	iVar19	slot	CONFIRMED	0x28-byte slot: used flag +0x10, symbols +0x18..+0x24
+local	FUN_00056be0	uVar15	nextInstIndex	CONFIRMED	param_3 + 1
+local	FUN_00056be0	uVar7	instCount	CONFIRMED	shader[5]
+local	FUN_00056be0	iVar20	inst	CONFIRMED	0x74-byte instruction record
+local	FUN_00056f20	param_1	ctx	CONFIRMED	*(ctx+0x118c) selects the program state
+local	FUN_00056f20	param_2	shader	CONFIRMED	symbol records [8]
+local	FUN_00056f20	param_3	operand	INFERRED	type, index and four per-component words
+local	FUN_00056f20	param_4	outWord	INFERRED	receives the packed hardware source word
+local	FUN_00056f20	param_5	registerSelect	INFERRED	low 6 bits of the word
+local	FUN_00056f20	param_6	selectFlag	INFERRED	bit 6 of the word
+local	FUN_00056f20	param_7	matrixRow	INFERRED	index into the matrix symbol's register list
+local	FUN_0005f810	param_1	ctx	CONFIRMED	vtable-like hooks at +0xc/+0x10/+0x18 and +0x1344, shader table at +0x118c
+local	FUN_0005f810	param_2	shader	CONFIRMED	instruction count [5], instructions [6], symbols [8]
+local	FUN_0005f810	uVar23	programState	INFERRED	hardware program state (same object as in extvsAssignVertexInputs)
+local	FUN_0005f810	iVar8	writeEnableSnapshot	INFERRED	16 bytes per instruction copied from record +0xc..+0x1b
