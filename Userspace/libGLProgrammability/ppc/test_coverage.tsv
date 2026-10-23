@@ -183,7 +183,7 @@
 0x97b88ee4	_byte_scan	3060	yes	
 0x97b89cd0	_yylex_CPP	452	yes	
 0x97b89e94	_check_EOF	108	yes	
-0x97b89f04	FUN_97b89f04	72	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97b89f04	_unlinkScope__body	72	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x97b89f4c	_NewScopeInPool	152	yes	
 0x97b89fe4	_PushScope	148	yes	
 0x97b8a078	_PopScope	48	yes	
@@ -203,7 +203,7 @@
 0x97b8a794	_ReadToken	888	no	calls an import (LookUpAddString); calls an import (atoi); calls an import (eprintf)
 0x97b8ab0c	_scan_token	248	no	calls an import (free); indirect call (driver context / vtable / callback)
 0x97b8ac04	_ReadFromTokenStream	172	no	calls an import (malloc)
-0x97b8acb4	FUN_97b8acb4	96	no	calls an import (free)
+0x97b8acb4	_reget_token__body	96	no	calls an import (free)
 0x97b8ad14	_UngetToken	156	no	calls an import (malloc)
 0x97b8adb0	_DumpTokenStream	240	no	calls an import (CPPDebugLogMsg); calls an import (GetAtomString); calls an import (sprintf)
 0x97b8aed4	TBuiltIns::getNumStringArrays	20	not a C function of the rebuilt image	
@@ -272,23 +272,23 @@
 0x97b983c8	TIntermBranch::traverse	216	not a C function of the rebuilt image	
 0x97b984a0	ParseSymbol	2128	no	atomic / cache / barrier instruction; calls an import (Z22GetGlobalPoolAllocatorv); calls an import (ZN13TInfoSinkBase6appendEPKc)
 0x97b98e04	ParseBinary	780	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNK5TType17getCompleteStringEv)
-0x97b9907c	FUN_97b9907c	240	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b9907c	ParseBinary__errorReportTail	240	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
 0x97b99198	ParseUnary	444	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNK5TType17getCompleteStringEv)
-0x97b99274	FUN_97b99274	248	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b99274	ParseUnary__errorReportTail	248	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
 0x97b99398	ParseAggregate	1104	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNK15TIntermOperator13isConstructorEv)
 0x97b9982c	ParseSelection	336	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
-0x97b9989c	FUN_97b9989c	248	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b9989c	ParseSelection__errorReportTail	248	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
 0x97b999c0	ParseConstantUnion	1160	no	indirect call (driver context / vtable / callback)
 0x97b99e48	ParseLoop	336	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
-0x97b99eb8	FUN_97b99eb8	248	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b99eb8	ParseLoop__errorReportTail	248	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
 0x97b99fdc	ParseBranch	336	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
-0x97b9a04c	FUN_97b9a04c	248	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b9a04c	ParseBranch__errorReportTail	248	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
 0x97b9a170	TIntermediate::parseConstTree	428	not a C function of the rebuilt image	
 0x97b9a31c	TParseContext::parseVectorFields	612	not a C function of the rebuilt image	
 0x97b9a5e8	TParseContext::parseMatrixFields	464	not a C function of the rebuilt image	
 0x97b9a7b8	TParseContext::recover	12	not a C function of the rebuilt image	
 0x97b9a7c4	TParseContext::error	428	not a C function of the rebuilt image	
-0x97b9a844	FUN_97b9a844	324	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
+0x97b9a844	TParseContext__error__tail	324	no	atomic / cache / barrier instruction; calls an import (ZN13TInfoSinkBase6appendEPKc); calls an import (ZNSs4_Rep10_M_destroyERKSaIcE)
 0x97b9a9b4	TParseContext::assignError	96	not a C function of the rebuilt image	
 0x97b9aa14	TParseContext::unaryOpError	84	not a C function of the rebuilt image	
 0x97b9aa68	TParseContext::binaryOpError	104	not a C function of the rebuilt image	
