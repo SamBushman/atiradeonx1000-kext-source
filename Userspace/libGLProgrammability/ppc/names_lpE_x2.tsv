@@ -611,3 +611,5 @@ local	_PPCRuntimeCompilerTestConditionRegisterAV	uStack00000028	condDescWord3Cop
 local	_PPCRuntimeCompilerTestConditionRegisterAV	uStack0000002c	condDescWord4Copy	INFERRED	copy of the incoming stack argument condDescWord4 kept in a local slot (the callee re-reads it after calls)
 local	_PPCRuntimeCompilerTestConditionRegisterAV	uStack00000030	condDescWord5Copy	INFERRED	copy of the incoming stack argument condDescWord5 kept in a local slot (the callee re-reads it after calls)
 local	_PPCRuntimeCompilerTestConditionRegisterAV	uStack00000034	condDescWord6Copy	INFERRED	copy of the incoming stack argument condDescWord6 kept in a local slot (the callee re-reads it after calls)
+local	_PPCRuntimeCompilerLoadSourceAV	iStack0000001c	opOffsetsElement	INFERRED	copy of the incoming stack argument opOffsets, advanced by element*0x10 to the offsets of the loaded element
+local	TPPStreamCompiler__newIndirectOperandFromConstant	in_xer_so	xerSummaryOverflow	CONFIRMED	the XER summary-overflow bit, ORed into the CR0 value the compare-and-record (cmpw/mfcr) sequence produces; the decompiler models it as an input register that is always 0 here

@@ -748,7 +748,7 @@ int TPPStreamCompiler__newIndirectOperandFromConstant(this, parseOperand, type)
   int constantList;
   int slotIndex;
   int chunkCursor;
-  byte in_xer_so = 0;
+  byte xerSummaryOverflow = 0;
   unsigned char * typeSaved;
   undefined4 chunkWord0;
   uint chunkWord1;
@@ -884,13 +884,13 @@ LAB_97bc4c8c:
   else {
     savedConstantAllocList = this + 0x44;
     crSizeVs2 = (uint)(byte)(((int)typeNominalSize < 2) << 3 | (2 < (int)typeNominalSize) << 2 | (typeNominalSize == 2) << 1 |
-                           in_xer_so & 1) << 0x1c;
+                           xerSummaryOverflow & 1) << 0x1c;
     crSizeVs1 = (uint)(byte)(((int)typeNominalSize < 1) << 3 | (1 < (int)typeNominalSize) << 2 | (typeNominalSize == 1) << 1 |
-                           in_xer_so & 1) << 0x1c;
+                           xerSummaryOverflow & 1) << 0x1c;
     crSizeVs3 = (uint)(byte)(((int)typeNominalSize < 3) << 3 | (3 < (int)typeNominalSize) << 2 | (typeNominalSize == 3) << 1 |
-                           in_xer_so & 1) << 0x1c;
+                           xerSummaryOverflow & 1) << 0x1c;
     crSizeVs4 = (uint)(byte)(((int)typeNominalSize < 4) << 3 | (4 < (int)typeNominalSize) << 2 | (typeNominalSize == 4) << 1 |
-                           in_xer_so & 1) << 0x1c;
+                           xerSummaryOverflow & 1) << 0x1c;
     crSizeVs2Saved = crSizeVs2;
     do {
       constantValues[0] = 1;

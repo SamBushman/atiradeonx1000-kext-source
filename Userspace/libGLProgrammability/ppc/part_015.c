@@ -524,7 +524,7 @@ int _PPCRuntimeCompilerLoadSourceAV(compiler, opOffsets, opBank, opSwizzle, opIn
   int sourceSlot;
 {
   uint *codeCursor;
-  int iStack0000001c;
+  int opOffsetsElement;
   undefined4 opBankCopy;
   undefined4 opSwizzleCopy;
   undefined4 opIndexInfoCopy;
@@ -532,7 +532,7 @@ int _PPCRuntimeCompilerLoadSourceAV(compiler, opOffsets, opBank, opSwizzle, opIn
   undefined4 opFlags5Copy;
   undefined4 opTypeCopy;
   
-  iStack0000001c = opOffsets;
+  opOffsetsElement = opOffsets;
   opBankCopy = opBank;
   opSwizzleCopy = opSwizzle;
   opIndexInfoCopy = opIndexInfo;
@@ -543,9 +543,9 @@ int _PPCRuntimeCompilerLoadSourceAV(compiler, opOffsets, opBank, opSwizzle, opIn
     _PPCRuntimeCompilerBackupRegister(compiler,sourceSlot);
     _PPCRuntimeCompilerDirtyRegister(compiler,sourceSlot);
   }
-  iStack0000001c = iStack0000001c + element * 0x10;
+  opOffsetsElement = opOffsetsElement + element * 0x10;
   _PPCRuntimeCompilerLoadRegister
-            (compiler,sourceSlot,iStack0000001c,opBankCopy,opSwizzleCopy,opIndexInfoCopy,
+            (compiler,sourceSlot,opOffsetsElement,opBankCopy,opSwizzleCopy,opIndexInfoCopy,
              opStorageCopy,opFlags5Copy,opTypeCopy,opWord7,opWord8,0);
   if ((*(unsigned char *)((unsigned char *)&(opStorageCopy) + 2)) != '\0') {
     codeCursor = *(uint **)(compiler + 0xe30);
