@@ -1,10 +1,10 @@
 #include "decls.h"
 
 /* _InterpreterTextureSamplerAttachDerivatives @ 0x97bd3614 (12 bytes) */
-void _InterpreterTextureSamplerAttachDerivatives(int param_1,undefined4 param_2,double fparam_1)
+void _InterpreterTextureSamplerAttachDerivatives(int sampler,undefined4 derivatives,double derivativeScale)
 {
-  *(float *)(param_1 + 0x10) = (float)fparam_1;
-  *(undefined4 *)(param_1 + 0xc) = param_2;
+  *(float *)(sampler + 0x10) = (float)derivativeScale;
+  *(undefined4 *)(sampler + 0xc) = derivatives;
   return;
 }
 
@@ -1860,29 +1860,29 @@ int _InterpreterRasterOpMachineCreate()
 }
 
 /* _InterpreterRasterOpMachineInitialise @ 0x97bd63f0 (16 bytes) */
-int _InterpreterRasterOpMachineInitialise(param_1)
-  undefined4 *param_1;
+int _InterpreterRasterOpMachineInitialise(rasterOp)
+  undefined4 *rasterOp;
 {
-  param_1[1] = 0;
-  *param_1 = 0;
+  rasterOp[1] = 0;
+  *rasterOp = 0;
   return;
 }
 
 /* _InterpreterRasterOpMachineAttachEmulatorContext @ 0x97bd6404 (8 bytes) */
-int _InterpreterRasterOpMachineAttachEmulatorContext(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 param_2;
+int _InterpreterRasterOpMachineAttachEmulatorContext(rasterOp, emulator)
+  undefined4 *rasterOp;
+  undefined4 emulator;
 {
-  *param_1 = param_2;
+  *rasterOp = emulator;
   return;
 }
 
 /* _InterpreterRasterOpMachineAttachRuntimeCompiler @ 0x97bd640c (8 bytes) */
-int _InterpreterRasterOpMachineAttachRuntimeCompiler(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int _InterpreterRasterOpMachineAttachRuntimeCompiler(rasterOp, compiler)
+  int rasterOp;
+  undefined4 compiler;
 {
-  *(undefined4 *)(param_1 + 4) = param_2;
+  *(undefined4 *)(rasterOp + 4) = compiler;
   return;
 }
 
@@ -2852,23 +2852,23 @@ LAB_97bd7c38:
 }
 
 /* _glpRTCAddAChunk_97bd7cbc @ 0x97bd7cbc (48 bytes) */
-int _glpRTCAddAChunk_97bd7cbc(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int _glpRTCAddAChunk_97bd7cbc(chunk, dest)
+  int *chunk;
+  int *dest;
 {
-  int iVar1;
-  int iVar2;
+  int word;
+  int wordCount;
   
-  iVar2 = 0;
-  iVar1 = *param_1;
-  while (iVar1 != 0) {
-    *param_2 = iVar1;
-    iVar2 = iVar2 + 1;
-    param_1 = param_1 + 1;
-    param_2 = param_2 + 1;
-    iVar1 = *param_1;
+  wordCount = 0;
+  word = *chunk;
+  while (word != 0) {
+    *dest = word;
+    wordCount = wordCount + 1;
+    chunk = chunk + 1;
+    dest = dest + 1;
+    word = *chunk;
   }
-  return iVar2;
+  return wordCount;
 }
 
 /* _PPCRuntimeCompilerCreate @ 0x97bd7cec (88 bytes) */
@@ -2886,13 +2886,13 @@ int _PPCRuntimeCompilerCreate()
 }
 
 /* _PPCRuntimeCompilerInitialise @ 0x97bd7d44 (76 bytes) */
-int _PPCRuntimeCompilerInitialise(compiler, param_2)
+int _PPCRuntimeCompilerInitialise(compiler, optionFlags)
   int compiler;
-  undefined4 param_2;
+  undefined4 optionFlags;
 {
   *(undefined4 *)(compiler + 0xe0c) = 0xffffffff;
   *(undefined4 *)(compiler + 0xe08) = 0xffffffff;
-  *(undefined4 *)(compiler + 0xe4c) = param_2;
+  *(undefined4 *)(compiler + 0xe4c) = optionFlags;
   _PPCTextureSamplerInitialise(*(undefined4 *)(compiler + 0xe1c));
   ((int (*)())_PPCRuntimeCompilerInitialiseRegisterAllocator)(compiler);
   return ((int (*)())_PPCRuntimeCompilerInitialiseVariableInfo)(compiler);
@@ -2903,37 +2903,37 @@ int _PPCRuntimeCompilerInitialiseRegisterAllocator(compiler)
   int compiler;
 {
   uint loopIndex;
-  uint uVar1;
-  undefined4 *puVar2;
-  uint uVar3;
-  int iVar4;
+  uint optionFlags;
+  undefined4 *inUseFlag;
+  uint nextIndex;
+  int recordsLeft;
   
   *(undefined4 *)(compiler + 0xe44) = 0;
   loopIndex = 0;
   do {
-    uVar3 = loopIndex + 1;
+    nextIndex = loopIndex + 1;
     ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,loopIndex);
-    loopIndex = uVar3;
-  } while (uVar3 < 0x20);
-  uVar1 = *(uint *)(compiler + 0xe50);
-  if ((uVar1 & 1) != 0) {
-    iVar4 = 0xc;
-    puVar2 = (undefined4 *)(compiler + 0x48c);
+    loopIndex = nextIndex;
+  } while (nextIndex < 0x20);
+  optionFlags = *(uint *)(compiler + 0xe50);
+  if ((optionFlags & 1) != 0) {
+    recordsLeft = 0xc;
+    inUseFlag = (undefined4 *)(compiler + 0x48c);
     do {
-      *puVar2 = 1;
-      puVar2 = puVar2 + 0xe;
-      iVar4 = iVar4 + -1;
-    } while (iVar4 != 0);
-    uVar1 = *(uint *)(compiler + 0xe50);
+      *inUseFlag = 1;
+      inUseFlag = inUseFlag + 0xe;
+      recordsLeft = recordsLeft + -1;
+    } while (recordsLeft != 0);
+    optionFlags = *(uint *)(compiler + 0xe50);
   }
-  if ((uVar1 & 2) != 0) {
-    puVar2 = (undefined4 *)(compiler + 0xbc4);
-    iVar4 = 0xb;
+  if ((optionFlags & 2) != 0) {
+    inUseFlag = (undefined4 *)(compiler + 0xbc4);
+    recordsLeft = 0xb;
     do {
-      *puVar2 = 1;
-      puVar2 = puVar2 + 0xe;
-      iVar4 = iVar4 + -1;
-    } while (iVar4 != 0);
+      *inUseFlag = 1;
+      inUseFlag = inUseFlag + 0xe;
+      recordsLeft = recordsLeft + -1;
+    } while (recordsLeft != 0);
   }
   return;
 }
@@ -2946,26 +2946,26 @@ int _PPCRuntimeCompilerInitialiseVariableInfo(compiler)
   int allocation2;
   undefined4 allocation;
   uint loopIndex2;
-  int *piVar4;
+  int *bankCountCursor;
   uint loopIndex;
-  int iVar6;
+  int programInfo;
   int loopIndex3;
-  int iVar8;
+  int elementOffset;
   
   if (*(int *)(compiler + 0xe00) != 0) {
     _free(*(int *)(compiler + 0xe00));
     *(undefined4 *)(compiler + 0xe04) = 0;
     *(undefined4 *)(compiler + 0xe00) = 0;
   }
-  iVar6 = *(int *)(compiler + 0xe24);
-  if (iVar6 != 0) {
+  programInfo = *(int *)(compiler + 0xe24);
+  if (programInfo != 0) {
     loopIndex3 = 0;
     remaining = 4;
     *(undefined4 *)(compiler + 0xe04) = 0;
-    piVar4 = (int *)(iVar6 + 0x84);
+    bankCountCursor = (int *)(programInfo + 0x84);
     do {
-      allocation2 = *piVar4;
-      piVar4 = piVar4 + 3;
+      allocation2 = *bankCountCursor;
+      bankCountCursor = bankCountCursor + 3;
       allocation2 = *(int *)(compiler + 0xe04) + allocation2;
       *(int *)(compiler + 0xe04) = allocation2;
       remaining = remaining + -1;
@@ -2975,16 +2975,16 @@ int _PPCRuntimeCompilerInitialiseVariableInfo(compiler)
     loopIndex2 = 0;
     do {
       loopIndex = 0;
-      if (*(int *)(iVar6 + 0x84) != 0) {
+      if (*(int *)(programInfo + 0x84) != 0) {
         do {
-          iVar8 = loopIndex * 0x10;
+          elementOffset = loopIndex * 0x10;
           loopIndex = loopIndex + 1;
-          *(int *)(loopIndex3 * 8 + *(int *)(compiler + 0xe00)) = *(int *)(iVar6 + 0x80) + iVar8;
+          *(int *)(loopIndex3 * 8 + *(int *)(compiler + 0xe00)) = *(int *)(programInfo + 0x80) + elementOffset;
           loopIndex3 = loopIndex3 + 1;
-        } while (loopIndex < *(uint *)(iVar6 + 0x84));
+        } while (loopIndex < *(uint *)(programInfo + 0x84));
       }
       loopIndex2 = loopIndex2 + 1;
-      iVar6 = iVar6 + 0xc;
+      programInfo = programInfo + 0xc;
     } while (loopIndex2 < 4);
   }
   return;
@@ -3010,59 +3010,59 @@ int _PPCRuntimeCompilerOutputAllRegisters()
 }
 
 /* _PPCRuntimeCompilerAttachEmulatorContext @ 0x97bd7f60 (12 bytes) */
-int _PPCRuntimeCompilerAttachEmulatorContext(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int _PPCRuntimeCompilerAttachEmulatorContext(compiler, emulator)
+  int compiler;
+  undefined4 emulator;
 {
-  *(undefined4 *)(param_1 + 0xe20) = param_2;
-  return _PPCRasterOpMachineAttachEmulatorContext(param_1 + 0xe14,param_2);
+  *(undefined4 *)(compiler + 0xe20) = emulator;
+  return _PPCRasterOpMachineAttachEmulatorContext(compiler + 0xe14,emulator);
 }
 
 /* _PPCRuntimeCompilerAttachEmulatorProgram @ 0x97bd7f6c (8 bytes) */
-int _PPCRuntimeCompilerAttachEmulatorProgram(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int _PPCRuntimeCompilerAttachEmulatorProgram(compiler, program)
+  int compiler;
+  undefined4 program;
 {
-  *(undefined4 *)(param_1 + 0xe24) = param_2;
+  *(undefined4 *)(compiler + 0xe24) = program;
   return;
 }
 
 /* _PPCRuntimeCompilerSetOptionFlags @ 0x97bd7f74 (16 bytes) */
-int _PPCRuntimeCompilerSetOptionFlags(compiler, param_2)
+int _PPCRuntimeCompilerSetOptionFlags(compiler, optionFlags)
   int compiler;
-  uint param_2;
+  uint optionFlags;
 {
-  *(uint *)(compiler + 0xe50) = *(uint *)(compiler + 0xe50) | param_2;
+  *(uint *)(compiler + 0xe50) = *(uint *)(compiler + 0xe50) | optionFlags;
   return;
 }
 
 /* _PPCRuntimeCompilerCalculateIndirectAddress @ 0x97bd7f84 (224 bytes) */
-int _PPCRuntimeCompilerCalculateIndirectAddress(compiler, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int _PPCRuntimeCompilerCalculateIndirectAddress(compiler, elementAddress, bankIndex, unusedArg4, relativeInfo, unusedArg6, unusedArg7, unusedArg8)
   int compiler;
-  int param_2;
-  int param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  int elementAddress;
+  int bankIndex;
+  undefined4 unusedArg4;
+  undefined4 relativeInfo;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
-  ushort uVar1;
+  ushort bankMaskLo;
   uint *codeCursor;
-  short sStack00000028;
+  short relativeOffset;
   
-  sStack00000028 = (short)((uint)param_5 >> 0x10);
+  relativeOffset = (short)((uint)relativeInfo >> 0x10);
   codeCursor = *(uint **)(compiler + 0xe30);
-  *codeCursor = ((uint)(param_2 - *(int *)(param_3 * 0xc + *(int *)(compiler + 0xe24) + 0x80)) >> 4) +
-            (int)sStack00000028 & 0xffff | 0x39f00000;
+  *codeCursor = ((uint)(elementAddress - *(int *)(bankIndex * 0xc + *(int *)(compiler + 0xe24) + 0x80)) >> 4) +
+            (int)relativeOffset & 0xffff | 0x39f00000;
   *(uint **)(compiler + 0xe30) = codeCursor + 1;
-  uVar1 = *(ushort *)(param_3 * 0xc + *(int *)(compiler + 0xe24) + 0x8a);
+  bankMaskLo = *(ushort *)(bankIndex * 0xc + *(int *)(compiler + 0xe24) + 0x8a);
   codeCursor[2] = 0x1def0010;
-  codeCursor[1] = uVar1 | 0x71ef0000;
+  codeCursor[1] = bankMaskLo | 0x71ef0000;
   *(uint **)(compiler + 0xe30) = codeCursor + 3;
-  codeCursor[3] = *(ushort *)(param_3 * 0xc + *(int *)(compiler + 0xe24) + 0x80) | 0x3ee00000;
+  codeCursor[3] = *(ushort *)(bankIndex * 0xc + *(int *)(compiler + 0xe24) + 0x80) | 0x3ee00000;
   *(uint **)(compiler + 0xe30) = codeCursor + 4;
-  codeCursor[4] = *(ushort *)(param_3 * 0xc + *(int *)(compiler + 0xe24) + 0x82) | 0x62f70000;
+  codeCursor[4] = *(ushort *)(bankIndex * 0xc + *(int *)(compiler + 0xe24) + 0x82) | 0x62f70000;
   codeCursor[5] = 0x7defba14;
   *(uint **)(compiler + 0xe30) = codeCursor + 6;
   return;
@@ -3105,15 +3105,15 @@ int _PPCRuntimeCompilerLoadRegister(compiler, regIndex, opOffsets, opBank, opSwi
   uint optionFlags;
   undefined4 *emitCursorB;
   uint *emitCursor;
-  undefined4 uVar8;
+  undefined4 zero;
   uint foundRegister;
   uint matchRegister;
   int bestPartialState;
   int *regRecord;
-  undefined1 auStack_40 [28];
+  undefined1 transferSwizzle [28];
   
   elementCopy = element;
-  uVar8 = 0;
+  zero = 0;
   foundRegister = 0;
   (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = opSwizzle;
   bestPartialState = 0;
@@ -3227,8 +3227,8 @@ int _PPCRuntimeCompilerLoadRegister(compiler, regIndex, opOffsets, opBank, opSwi
       swizzleDiffers = _memcmp(compiler + matchRegister * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)),4);
       if (swizzleDiffers != 0) {
         _PPCRuntimeCompilerBuildTransferSwizzle
-                  (auStack_40,compiler + matchRegister * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
-        _PPCRuntimeCompilerSwizzleRegisterAV(compiler,vectorRegIndex,auStack_40);
+                  (transferSwizzle,compiler + matchRegister * 0xe + 0x1c4,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
+        _PPCRuntimeCompilerSwizzleRegisterAV(compiler,vectorRegIndex,transferSwizzle);
       }
       ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,vectorRegIndex,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
                  (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,0,elementCopy);
@@ -3337,7 +3337,7 @@ LAB_97bd8640:
       emitCursorB[0xd] = (regIndex - 0x20) * 0x200000 | 0x7c0378ce;
       compiler[0x38c] = (int)(emitCursorB + 0xe);
 LAB_97bd877c:
-      uVar8 = 1;
+      zero = 1;
     }
   }
   if (opType - 3U < 2) {
@@ -3348,7 +3348,7 @@ LAB_97bd877c:
 LAB_97bd87b4:
   _PPCRuntimeCompilerSwizzleRegisterAV(compiler,regIndex - 0x20,&(*(unsigned int *)((unsigned char *)ghidra_home + 16)));
   ((int (*)())_PPCRuntimeCompilerSetRegister)(compiler,regIndex - 0x20,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
-             (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,uVar8,elementCopy);
+             (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType,opWord7,opWord8,zero,elementCopy);
   variableInfo = _PPCRuntimeCompilerFindVariableInfo
                     (compiler,(*(uint * *)((unsigned char *)ghidra_home + 8)),(*(unsigned int *)((unsigned char *)ghidra_home + 12)),(*(unsigned int *)((unsigned char *)ghidra_home + 16)),(*(unsigned int *)((unsigned char *)ghidra_home + 20)),
                      (*(unsigned int *)((unsigned char *)ghidra_home + 24)),(*(unsigned int *)((unsigned char *)ghidra_home + 28)),opType);
@@ -3690,16 +3690,16 @@ LAB_97bd9024:
 int _PPCRuntimeCompilerSaveAllTemporariesToMemory(compiler)
   int compiler;
 {
-  uint uVar1;
+  uint recordIndex;
   uint loopIndex;
   
   loopIndex = 0;
   do {
-    uVar1 = loopIndex;
+    recordIndex = loopIndex;
     if (*(int *)(compiler + 0xe4c) != 0) {
-      uVar1 = loopIndex + 0x20;
+      recordIndex = loopIndex + 0x20;
     }
-    if (*(short *)(uVar1 * 0x38 + compiler + 0x18) == 0) {
+    if (*(short *)(recordIndex * 0x38 + compiler + 0x18) == 0) {
       ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(compiler,loopIndex);
       ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,loopIndex);
     }
@@ -3890,33 +3890,33 @@ LAB_97bd994c:
 }
 
 /* _PPCRuntimeCompilerDirtyRegister @ 0x97bd9964 (112 bytes) */
-int _PPCRuntimeCompilerDirtyRegister(param_1, param_2)
-  int param_1;
-  int param_2;
+int _PPCRuntimeCompilerDirtyRegister(compiler, regIndex)
+  int compiler;
+  int regIndex;
 {
-  int iVar1;
+  int record;
   
-  if (*(int *)(param_1 + 0xe4c) != 0) {
-    param_2 = param_2 + 0x20;
+  if (*(int *)(compiler + 0xe4c) != 0) {
+    regIndex = regIndex + 0x20;
   }
-  iVar1 = param_2 * 0x38 + param_1;
-  *(undefined4 *)(param_2 * 0x38 + param_1) = 1;
-  *(undefined4 *)(iVar1 + 4) = 0;
-  *(undefined4 *)(iVar1 + 8) = 0;
-  *(undefined4 *)(iVar1 + 0x28) = 0;
-  *(undefined4 *)(iVar1 + 0xc) = 0;
-  *(undefined4 *)(iVar1 + 0x10) = 0;
-  *(undefined4 *)(iVar1 + 0x14) = 0;
-  *(undefined4 *)(iVar1 + 0x18) = 0;
-  *(undefined4 *)(iVar1 + 0x1c) = 0;
-  *(undefined4 *)(iVar1 + 0x20) = 0;
-  *(undefined4 *)(iVar1 + 0x24) = 0;
-  *(undefined4 *)(iVar1 + 0x34) = 0;
-  *(undefined1 *)(iVar1 + 0x13) = 0xff;
-  *(undefined1 *)(iVar1 + 0x10) = 0xff;
-  *(undefined1 *)(iVar1 + 0x11) = 0xff;
-  *(undefined1 *)(iVar1 + 0x12) = 0xff;
-  *(undefined4 *)(iVar1 + 0x30) = 0;
+  record = regIndex * 0x38 + compiler;
+  *(undefined4 *)(regIndex * 0x38 + compiler) = 1;
+  *(undefined4 *)(record + 4) = 0;
+  *(undefined4 *)(record + 8) = 0;
+  *(undefined4 *)(record + 0x28) = 0;
+  *(undefined4 *)(record + 0xc) = 0;
+  *(undefined4 *)(record + 0x10) = 0;
+  *(undefined4 *)(record + 0x14) = 0;
+  *(undefined4 *)(record + 0x18) = 0;
+  *(undefined4 *)(record + 0x1c) = 0;
+  *(undefined4 *)(record + 0x20) = 0;
+  *(undefined4 *)(record + 0x24) = 0;
+  *(undefined4 *)(record + 0x34) = 0;
+  *(undefined1 *)(record + 0x13) = 0xff;
+  *(undefined1 *)(record + 0x10) = 0xff;
+  *(undefined1 *)(record + 0x11) = 0xff;
+  *(undefined1 *)(record + 0x12) = 0xff;
+  *(undefined4 *)(record + 0x30) = 0;
   return;
 }
 
@@ -4001,103 +4001,103 @@ int _PPCRuntimeCompilerDirtyRegistersWithData(compiler, opOffsets, opBank, opSwi
 }
 
 /* _PPCRuntimeCompilerDirtyRegistersWithIndirectData @ 0x97bd9b88 (136 bytes) */
-int _PPCRuntimeCompilerDirtyRegistersWithIndirectData(param_1)
-  int param_1;
+int _PPCRuntimeCompilerDirtyRegistersWithIndirectData(compiler)
+  int compiler;
 {
-  int iVar1;
+  int recordOffset;
   uint loopIndex;
-  char *pcVar3;
+  char *indirectFlag;
   
-  iVar1 = 0;
-  if (*(int *)(param_1 + 0xe4c) != 0) {
-    iVar1 = 0x20;
+  recordOffset = 0;
+  if (*(int *)(compiler + 0xe4c) != 0) {
+    recordOffset = 0x20;
   }
-  iVar1 = iVar1 * 0x38;
+  recordOffset = recordOffset * 0x38;
   loopIndex = 0;
-  pcVar3 = (char *)(iVar1 + param_1 + 0x1b);
+  indirectFlag = (char *)(recordOffset + compiler + 0x1b);
   do {
-    if ((*(int *)(iVar1 + param_1) == 0) && (*pcVar3 != '\0')) {
-      ((int (*)())_PPCRuntimeCompilerDirtyRegister)(param_1,loopIndex);
+    if ((*(int *)(recordOffset + compiler) == 0) && (*indirectFlag != '\0')) {
+      ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,loopIndex);
     }
     loopIndex = loopIndex + 1;
-    iVar1 = iVar1 + 0x38;
-    pcVar3 = pcVar3 + 0x38;
+    recordOffset = recordOffset + 0x38;
+    indirectFlag = indirectFlag + 0x38;
   } while (loopIndex < 0x20);
   return;
 }
 
 /* _PPCRuntimeCompilerDirtyRegistersContainingAttributes @ 0x97bd9c10 (136 bytes) */
-int _PPCRuntimeCompilerDirtyRegistersContainingAttributes(param_1)
-  int param_1;
+int _PPCRuntimeCompilerDirtyRegistersContainingAttributes(compiler)
+  int compiler;
 {
-  int iVar1;
+  int recordOffset;
   uint loopIndex;
-  short *psVar3;
+  short *storageClass;
   
-  iVar1 = 0;
-  if (*(int *)(param_1 + 0xe4c) != 0) {
-    iVar1 = 0x20;
+  recordOffset = 0;
+  if (*(int *)(compiler + 0xe4c) != 0) {
+    recordOffset = 0x20;
   }
-  iVar1 = iVar1 * 0x38;
+  recordOffset = recordOffset * 0x38;
   loopIndex = 0;
-  psVar3 = (short *)(iVar1 + param_1 + 0x18);
+  storageClass = (short *)(recordOffset + compiler + 0x18);
   do {
-    if ((*(int *)(iVar1 + param_1) == 0) && (*psVar3 == 2)) {
-      ((int (*)())_PPCRuntimeCompilerDirtyRegister)(param_1,loopIndex);
+    if ((*(int *)(recordOffset + compiler) == 0) && (*storageClass == 2)) {
+      ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,loopIndex);
     }
     loopIndex = loopIndex + 1;
-    iVar1 = iVar1 + 0x38;
-    psVar3 = psVar3 + 0x1c;
+    recordOffset = recordOffset + 0x38;
+    storageClass = storageClass + 0x1c;
   } while (loopIndex < 0x20);
   return;
 }
 
 /* _PPCRuntimeCompilerDirtyRegistersContainingTemps @ 0x97bd9c98 (136 bytes) */
-int _PPCRuntimeCompilerDirtyRegistersContainingTemps(param_1)
-  int param_1;
+int _PPCRuntimeCompilerDirtyRegistersContainingTemps(compiler)
+  int compiler;
 {
-  int iVar1;
+  int recordOffset;
   uint loopIndex;
-  short *psVar3;
+  short *storageClass;
   
-  iVar1 = 0;
-  if (*(int *)(param_1 + 0xe4c) != 0) {
-    iVar1 = 0x20;
+  recordOffset = 0;
+  if (*(int *)(compiler + 0xe4c) != 0) {
+    recordOffset = 0x20;
   }
-  iVar1 = iVar1 * 0x38;
+  recordOffset = recordOffset * 0x38;
   loopIndex = 0;
-  psVar3 = (short *)(iVar1 + param_1 + 0x18);
+  storageClass = (short *)(recordOffset + compiler + 0x18);
   do {
-    if ((*(int *)(iVar1 + param_1) == 0) && (*psVar3 == 0)) {
-      ((int (*)())_PPCRuntimeCompilerDirtyRegister)(param_1,loopIndex);
+    if ((*(int *)(recordOffset + compiler) == 0) && (*storageClass == 0)) {
+      ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,loopIndex);
     }
     loopIndex = loopIndex + 1;
-    iVar1 = iVar1 + 0x38;
-    psVar3 = psVar3 + 0x1c;
+    recordOffset = recordOffset + 0x38;
+    storageClass = storageClass + 0x1c;
   } while (loopIndex < 0x20);
   return;
 }
 
 /* _PPCRuntimeCompilerDirtyRegistersContainingParams @ 0x97bd9d20 (136 bytes) */
-int _PPCRuntimeCompilerDirtyRegistersContainingParams(param_1)
-  int param_1;
+int _PPCRuntimeCompilerDirtyRegistersContainingParams(compiler)
+  int compiler;
 {
-  int iVar1;
+  int firstRegister;
   uint loopIndex;
-  int *piVar3;
+  int *record;
   
-  iVar1 = 0;
-  if (*(int *)(param_1 + 0xe4c) != 0) {
-    iVar1 = 0x20;
+  firstRegister = 0;
+  if (*(int *)(compiler + 0xe4c) != 0) {
+    firstRegister = 0x20;
   }
   loopIndex = 0;
-  piVar3 = (int *)(iVar1 * 0x38 + param_1);
+  record = (int *)(firstRegister * 0x38 + compiler);
   do {
-    if (((*piVar3 == 0) && (piVar3[3] == 3)) && (piVar3[0xd] == 0)) {
-      ((int (*)())_PPCRuntimeCompilerDirtyRegister)(param_1,loopIndex);
+    if (((*record == 0) && (record[3] == 3)) && (record[0xd] == 0)) {
+      ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,loopIndex);
     }
     loopIndex = loopIndex + 1;
-    piVar3 = piVar3 + 0xe;
+    record = record + 0xe;
   } while (loopIndex < 0x20);
   return;
 }
@@ -4119,23 +4119,23 @@ int _PPCRuntimeCompilerSetRegister(compiler, regIndex, opOffsets, opBank, opSwiz
   undefined4 element;
 {
   unsigned int ghidra_home[8] = { compiler, regIndex, opOffsets, opBank, opSwizzle, opIndexInfo, opStorage, opFlags5 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
-  int iVar1;
+  int record;
   
   if (*(int *)(compiler + 0xe4c) != 0) {
     regIndex = regIndex + 0x20;
   }
   *(undefined4 *)(regIndex * 0x38 + compiler) = 0;
-  iVar1 = regIndex * 0x38 + compiler;
-  *(undefined4 *)(iVar1 + 4) = element;
+  record = regIndex * 0x38 + compiler;
+  *(undefined4 *)(record + 4) = element;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = opOffsets;
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = opBank;
   (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = opSwizzle;
   (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = opIndexInfo;
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = opStorage;
   (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = opFlags5;
-  _memcpy(iVar1 + 8,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),0x24);
-  *(undefined4 *)(iVar1 + 0x34) = recordFlag;
-  *(undefined4 *)(iVar1 + 0x30) = *(undefined4 *)(compiler + 0xe44);
+  _memcpy(record + 8,&(*(unsigned int *)((unsigned char *)ghidra_home + 8)),0x24);
+  *(undefined4 *)(record + 0x34) = recordFlag;
+  *(undefined4 *)(record + 0x30) = *(undefined4 *)(compiler + 0xe44);
   *(int *)(compiler + 0xe44) = *(int *)(compiler + 0xe44) + 1;
   return;
 }
