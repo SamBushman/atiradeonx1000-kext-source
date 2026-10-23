@@ -993,10 +993,10 @@ int _CPPline(yylvalpp)
   int token;
   undefined4 r4Fwd;
   int lastToken;
-  undefined4 extraout_r4;
+  undefined4 extraOutA;
   undefined4 extraOut1;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
+  undefined4 extraOutB;
+  undefined4 extraOutC;
   undefined4 leftoverR5;
   undefined4 leftoverR6;
   undefined4 leftoverR7;
@@ -1013,7 +1013,7 @@ int _CPPline(yylvalpp)
     token = 10;
   }
   else {
-    r4Fwd = extraout_r4;
+    r4Fwd = extraOutA;
     if (token == 0x10f) {
       atoiResult = _atoi(yylvalpp + 3);
       *yylvalpp = atoiResult;
@@ -1027,11 +1027,11 @@ int _CPPline(yylvalpp)
         token = *(int *)(*(int *)cppRef + 0x20);
         lastToken = (**(code **)(token + 4))(token,yylvalpp);
         token = lastToken;
-        r4Fwd = extraout_r4_02;
+        r4Fwd = extraOutC;
       }
       else {
         lastToken = 10;
-        r4Fwd = extraout_r4_01;
+        r4Fwd = extraOutB;
       }
       if (token == 10) {
         return lastToken;
@@ -1100,9 +1100,9 @@ int _CPPpragma(yylvalpp)
   undefined4 *allTokens;
   int tokenCapacity;
   undefined4 extraOut1;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
+  undefined4 extraOutA;
+  undefined4 extraOutB;
+  undefined4 extraOutC;
   undefined4 leftoverR5;
   undefined4 leftoverR6;
   undefined4 leftoverR7;
@@ -1127,14 +1127,14 @@ int _CPPpragma(yylvalpp)
   else {
     allTokens = (undefined4 *)_malloc(0x28);
     atableRef = PTR__atable_a7b7c0ac;
-    r4Fwd = extraout_r4_00;
+    r4Fwd = extraOutA;
     tokenCapacity = 10;
     do {
       nextCapacity = tokenCapacity;
       if (tokenCapacity <= tokenCount) {
         nextCapacity = tokenCapacity << 1;
         allTokens = (undefined4 *)_realloc(allTokens,tokenCapacity << 3);
-        r4Fwd = extraout_r4_01;
+        r4Fwd = extraOutB;
       }
       if (token == 0x10b) {
 LAB_97b8758c:
@@ -1173,7 +1173,7 @@ LAB_97b875f0:
       cppRef = PTR__cpp_a7b7c0a4;
       token = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
                         (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),yylvalpp);
-      r4Fwd = extraout_r4_02;
+      r4Fwd = extraOutC;
       tokenCapacity = nextCapacity;
     } while (token != 10);
     currentInput = *(int *)(*(int *)cppRef + 0x20);
@@ -1203,8 +1203,8 @@ int _CPPversion(yylvalpp)
   undefined *cppRef;
   int token;
   int nextToken;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
+  undefined4 extraOutA;
+  undefined4 extraOutB;
   undefined4 r4Fwd;
   undefined4 extraOut1;
   undefined4 extraOut2;
@@ -1218,11 +1218,11 @@ int _CPPversion(yylvalpp)
   cppRef = PTR__cpp_a7b7c0a4;
   token = (**(code **)(*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20) + 4))
                     (*(int *)(*(int *)PTR__cpp_a7b7c0a4 + 0x20),yylvalpp);
-  r4Fwd = extraout_r4;
+  r4Fwd = extraOutA;
   if (*(int *)(*(int *)cppRef + 0x28) == 1) {
-    _CPPShInfoLogMsg("#version must occur before any other statement in the program",extraout_r4,
+    _CPPShInfoLogMsg("#version must occur before any other statement in the program",extraOutA,
                      leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
-    r4Fwd = extraout_r4_00;
+    r4Fwd = extraOutB;
   }
   if (token == 10) {
     _DecLineNumber();
@@ -1263,8 +1263,8 @@ int _CPPextension(yylvalpp)
   char *errorMessage;
   undefined4 extraOut1;
   undefined4 extraOut2;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
+  undefined4 extraOutA;
+  undefined4 extraOutB;
   undefined4 extraOut3;
   undefined4 leftoverR5;
   undefined4 leftoverR6;
@@ -1306,11 +1306,11 @@ int _CPPextension(yylvalpp)
         return token;
       }
       errorMessage = "behavior for extension not specified";
-      messageR4 = extraout_r4_02;
+      messageR4 = extraOutB;
     }
     else {
       errorMessage = "\':\' missing after extension name";
-      messageR4 = extraout_r4_01;
+      messageR4 = extraOutA;
     }
     _CPPShInfoLogMsg(errorMessage,messageR4,leftoverR5,leftoverR6,leftoverR7,leftoverR8,leftoverR9);
   }

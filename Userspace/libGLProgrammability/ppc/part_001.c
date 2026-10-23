@@ -1630,7 +1630,7 @@ int _PPEmulatorFree(emulator)
 int _PPStreamFree(stream)
   int stream;
 {
-  undefined4 extraout_r3;
+  undefined4 r3Out;
   
   ((int (*)())_PPStreamChunkListFree)(*(undefined4 *)(stream + 4));
   ((int (*)())_PPStreamChunkListFree)(*(undefined4 *)(stream + 8));
@@ -1645,7 +1645,7 @@ int _PPStreamFree(stream)
   ((int (*)())_PPStreamChunkListFree)(*(undefined4 *)(stream + 0x28));
   ((int (*)())_PPStreamChunkListFree)(*(undefined4 *)(stream + 0x30));
   _free(stream);
-  return extraout_r3;
+  return r3Out;
 }
 
 /* _PPEmulatorProgramFree @ 0x97b84cb4 (180 bytes) */
