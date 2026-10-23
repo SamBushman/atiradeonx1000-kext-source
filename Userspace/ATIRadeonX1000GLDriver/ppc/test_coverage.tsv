@@ -399,8 +399,8 @@
 0x46180	FUN_00046180	1528	no	calls an import (malloc); calls an import (realloc)
 0x467a0	FUN_000467a0	632	no	calls an import (malloc); calls an import (realloc)
 0x46a30	FUN_00046a30	1080	no	calls an import (malloc); calls an import (realloc)
-0x46e90	FUN_00046e90	7800	no	indirect call (driver context / vtable / callback)
-0x48da0	FUN_00048da0	6552	no	calls an import (malloc); calls an import (realloc)
+0x46e90	fragmentInstructionToIL	7800	no	indirect call (driver context / vtable / callback)
+0x48da0	fragmentProgramToIL	6552	no	calls an import (malloc); calls an import (realloc)
 0x4a7d0	FUN_0004a7d0	80	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x4a830	FUN_0004a830	40	no	tiny (40 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x4a860	FUN_0004a860	112	yes	
@@ -1091,8 +1091,8 @@
 0xc8aa0	FUN_000c8aa0	780	yes	
 0xc8de0	FUN_000c8de0	76	no	calls an import (malloc)
 0xc8e30	FUN_000c8e30	28	no	tiny (28 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xc8e50	FUN_000c8e50	7396	no	calls an import (exit); calls an import (free); calls an import (malloc)
-0xcae90	FUN_000cae90	7760	no	calls an import (exit); calls an import (free); calls an import (malloc)
+0xc8e50	ilAssembleProgram	7396	no	calls an import (exit); calls an import (free); calls an import (malloc)
+0xcae90	ilRewriteForTextureState	7760	no	calls an import (exit); calls an import (free); calls an import (malloc)
 0xcd05c	FUN_000cd05c	244	yes	
 0xcd154	FUN_000cd154	92	no	indirect call (driver context / vtable / callback)
 0xcd1b0	FUN_000cd1b0	20	yes	

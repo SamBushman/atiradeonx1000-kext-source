@@ -3632,9 +3632,9 @@ int FUN_00087e80(param_1, param_2, param_3, param_4)
   int iVar9;
   /* local_48/local_44/local_40/local_3c/local_38/local_34/local_30 are one contiguous 7-word array
    * (&local_48 passed to FUN_000b4400, which internally indexes it param_4[0]..param_4[6] - and that
-   * value flows straight through into FUN_000cae90 as its own param_4, where param_4[1] seeds a loop
+   * value flows straight through into ilRewriteForTextureState as its own param_4, where param_4[1] seeds a loop
    * counter). Declared as 7 separate scalars, they landed non-adjacent at -O0 (confirmed live: the
-   * value FUN_000cae90 read via param_4[1] was heap-garbage-sized, not the small local_44 value),
+   * value ilRewriteForTextureState read via param_4[1] was heap-garbage-sized, not the small local_44 value),
    * corrupting a command-stream interpreter loop's iteration count downstream and eventually walking
    * off the end into zeroed memory, hitting the interpreter's own out-of-range-opcode safety net
    * (_exit(0), confirmed present in stock too - not itself a bug). Merged into a real array, aliased

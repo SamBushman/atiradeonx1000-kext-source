@@ -9540,7 +9540,7 @@ int FUN_000c5e60(param_1)
   char *pcVar28;
   uint uVar29;
   int iVar30;
-  /* issue #64 live-repro (crash #8, past the FUN_000cae90 fixes): local_98/local_94/local_90/
+  /* issue #64 live-repro (crash #8, past the ilRewriteForTextureState fixes): local_98/local_94/local_90/
    * local_8c/local_88/local_84/local_80/local_7c were 8 separately-declared 4-byte locals,
    * each initialized to the same value below, that a later loop (`*(short*)((int)&local_98 +
    * iVar8) = ...`, iVar8 running 0..30) treats as one contiguous 32-byte/16-ushort array -

@@ -7532,7 +7532,7 @@ int FUN_000b4400(param_1, param_2, param_3, param_4, param_5)
     }
     iVar8 = param_1 + 0x186c;
   }
-  iVar8 = FUN_000cae90(param_1,param_2,param_3,param_4,iVar8);
+  iVar8 = ilRewriteForTextureState(param_1,param_2,param_3,param_4,iVar8);
   if (iVar8 != 0) {
     return 2;
   }
@@ -8079,7 +8079,7 @@ int FUN_000b57a0(param_1, param_2)
   puVar4[6] = uVar1 >> 7 & 1;
   if (*(char *)(param_1 + 0x1869) != '\0') {
     puVar7 = puVar4 + 9;
-    iVar5 = FUN_000c8e50(param_1,puVar4,puVar7);
+    iVar5 = ilAssembleProgram(param_1,puVar4,puVar7);
     if (iVar5 == 0) {
       iVar5 = puVar4[0x150b];
       *(undefined1 *)((int)puVar4 + 0x5497) = 0;
@@ -8594,11 +8594,11 @@ int FUN_000b6580(param_1, param_2)
   undefined8 uVar16;
   /* local_68/local_64/local_60/local_5c/local_58/local_54/local_50 are one contiguous 7-word
    * array - &local_68 is passed to FUN_000b4400, which internally indexes it param_4[0]..param_4[6],
-   * and that same pointer flows straight through into FUN_000cae90 as its own param_4, where
+   * and that same pointer flows straight through into ilRewriteForTextureState as its own param_4, where
    * param_4[0] is a buffer pointer and param_4[1] seeds a command-stream token-count loop bound
-   * (confirmed live: FUN_000cae90 read local_64's slot as heap-garbage, not the value this function
+   * (confirmed live: ilRewriteForTextureState read local_64's slot as heap-garbage, not the value this function
    * just stored, because the two locals landed non-adjacent at -O0). This is the exact same defect,
-   * same call chain (X -> FUN_000b4400 -> FUN_000cae90's param_4[0]/param_4[1]), already fixed once
+   * same call chain (X -> FUN_000b4400 -> ilRewriteForTextureState's param_4[0]/param_4[1]), already fixed once
    * for FUN_00087e80's own local_48 (part_012.c, issue #64) - declared as 7 separate scalars, they
    * are not guaranteed contiguous by the compiler, only by the caller's own struct convention.
    * Merged into a real array, aliased back to the original names so the rest of this function's
