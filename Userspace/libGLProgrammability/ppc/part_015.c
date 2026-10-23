@@ -5068,129 +5068,129 @@ int _PPCTextureSamplerSampleTexelRECTRTCNO(sampler, textureUnit, codeCursor)
 }
 
 /* _PPCTextureSamplerWrapCoordinates1DRTCAV @ 0x97be2084 (144 bytes) */
-int _PPCTextureSamplerWrapCoordinates1DRTCAV(param_1, param_2)
-  int param_1;
-  int param_2;
+int _PPCTextureSamplerWrapCoordinates1DRTCAV(sampler, codeCursor)
+  int sampler;
+  int codeCursor;
 {
-  short sVar1;
-  short sVar2;
-  undefined *puVar3;
-  int chunkIndex;
+  short minFilter;
+  short wrapModeS;
+  undefined *coordChunk;
+  int chunkWordCount;
   
-  sVar1 = *(short *)(**(int **)(param_1 + 4) + 0x16);
-  sVar2 = *(short *)(**(int **)(param_1 + 4) + 0x10);
-  if (((sVar1 == 0x2600) || (sVar1 == 0x2700)) && (sVar2 == 0x2900)) {
-    sVar2 = -0x7ed1;
+  minFilter = *(short *)(**(int **)(sampler + 4) + 0x16);
+  wrapModeS = *(short *)(**(int **)(sampler + 4) + 0x10);
+  if (((minFilter == 0x2600) || (minFilter == 0x2700)) && (wrapModeS == 0x2900)) {
+    wrapModeS = -0x7ed1;
   }
-  if (sVar2 == 0x2901) {
-    puVar3 = &_glpOpTexWrapCoordsRRRAVRTC;
+  if (wrapModeS == 0x2901) {
+    coordChunk = &_glpOpTexWrapCoordsRRRAVRTC;
   }
   else {
-    puVar3 = &_glpOpTexWrapCoordsCCCAVRTC;
+    coordChunk = &_glpOpTexWrapCoordsCCCAVRTC;
   }
-  chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(puVar3,param_2);
-  return param_2 + chunkIndex * 4;
+  chunkWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(coordChunk,codeCursor);
+  return codeCursor + chunkWordCount * 4;
 }
 
 /* _PPCTextureSamplerWrapCoordinates2DRTCAV @ 0x97be2114 (212 bytes) */
-int _PPCTextureSamplerWrapCoordinates2DRTCAV(param_1, param_2)
-  int param_1;
-  int param_2;
+int _PPCTextureSamplerWrapCoordinates2DRTCAV(sampler, codeCursor)
+  int sampler;
+  int codeCursor;
 {
-  int chunkIndex;
-  short sVar1;
-  undefined *puVar2;
-  int iVar3;
-  short sVar4;
+  int chunkWordCount;
+  short wrapModeS;
+  undefined *coordChunk;
+  int textureState;
+  short wrapModeT;
   
-  iVar3 = **(int **)(param_1 + 4);
-  sVar1 = *(short *)(iVar3 + 0x10);
-  sVar4 = *(short *)(iVar3 + 0x12);
-  if ((*(short *)(iVar3 + 0x16) == 0x2600) || (*(short *)(iVar3 + 0x16) == 0x2700)) {
-    if (sVar1 == 0x2900) {
-      sVar1 = -0x7ed1;
+  textureState = **(int **)(sampler + 4);
+  wrapModeS = *(short *)(textureState + 0x10);
+  wrapModeT = *(short *)(textureState + 0x12);
+  if ((*(short *)(textureState + 0x16) == 0x2600) || (*(short *)(textureState + 0x16) == 0x2700)) {
+    if (wrapModeS == 0x2900) {
+      wrapModeS = -0x7ed1;
     }
-    if (sVar4 == 0x2900) {
-      sVar4 = -0x7ed1;
+    if (wrapModeT == 0x2900) {
+      wrapModeT = -0x7ed1;
     }
   }
-  if (sVar1 == 0x2901) {
-    if (sVar4 == 0x2901) {
-      puVar2 = &_glpOpTexWrapCoordsRRRAVRTC;
+  if (wrapModeS == 0x2901) {
+    if (wrapModeT == 0x2901) {
+      coordChunk = &_glpOpTexWrapCoordsRRRAVRTC;
     }
     else {
-      puVar2 = &_glpOpTexWrapCoordsRCCAVRTC;
+      coordChunk = &_glpOpTexWrapCoordsRCCAVRTC;
     }
   }
-  else if (sVar4 == 0x2901) {
-    puVar2 = &_glpOpTexWrapCoordsCRRAVRTC;
+  else if (wrapModeT == 0x2901) {
+    coordChunk = &_glpOpTexWrapCoordsCRRAVRTC;
   }
   else {
-    puVar2 = &_glpOpTexWrapCoordsCCCAVRTC;
+    coordChunk = &_glpOpTexWrapCoordsCCCAVRTC;
   }
-  chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(puVar2,param_2);
-  return param_2 + chunkIndex * 4;
+  chunkWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(coordChunk,codeCursor);
+  return codeCursor + chunkWordCount * 4;
 }
 
 /* _PPCTextureSamplerWrapCoordinates3DRTCAV @ 0x97be21e8 (328 bytes) */
-int _PPCTextureSamplerWrapCoordinates3DRTCAV(param_1, param_2)
-  int param_1;
-  int param_2;
+int _PPCTextureSamplerWrapCoordinates3DRTCAV(sampler, codeCursor)
+  int sampler;
+  int codeCursor;
 {
-  int chunkIndex;
-  short sVar1;
-  undefined *puVar2;
-  int iVar3;
-  short sVar4;
-  short sVar5;
+  int chunkWordCount;
+  short wrapModeS;
+  undefined *coordChunk;
+  int textureState;
+  short wrapModeR;
+  short wrapModeT;
   
-  iVar3 = **(int **)(param_1 + 4);
-  sVar1 = *(short *)(iVar3 + 0x10);
-  sVar5 = *(short *)(iVar3 + 0x12);
-  sVar4 = *(short *)(iVar3 + 0x14);
-  if ((*(short *)(iVar3 + 0x16) == 0x2600) || (*(short *)(iVar3 + 0x16) == 0x2700)) {
-    if (sVar1 == 0x2900) {
-      sVar1 = -0x7ed1;
+  textureState = **(int **)(sampler + 4);
+  wrapModeS = *(short *)(textureState + 0x10);
+  wrapModeT = *(short *)(textureState + 0x12);
+  wrapModeR = *(short *)(textureState + 0x14);
+  if ((*(short *)(textureState + 0x16) == 0x2600) || (*(short *)(textureState + 0x16) == 0x2700)) {
+    if (wrapModeS == 0x2900) {
+      wrapModeS = -0x7ed1;
     }
-    if (sVar5 == 0x2900) {
-      sVar5 = -0x7ed1;
+    if (wrapModeT == 0x2900) {
+      wrapModeT = -0x7ed1;
     }
-    if (sVar4 == 0x2900) {
-      sVar4 = -0x7ed1;
+    if (wrapModeR == 0x2900) {
+      wrapModeR = -0x7ed1;
     }
   }
-  if (sVar1 == 0x2901) {
-    if (sVar5 == 0x2901) {
-      if (sVar4 == 0x2901) {
-        puVar2 = &_glpOpTexWrapCoordsRRRAVRTC;
+  if (wrapModeS == 0x2901) {
+    if (wrapModeT == 0x2901) {
+      if (wrapModeR == 0x2901) {
+        coordChunk = &_glpOpTexWrapCoordsRRRAVRTC;
       }
       else {
-        puVar2 = &_glpOpTexWrapCoordsRRCAVRTC;
+        coordChunk = &_glpOpTexWrapCoordsRRCAVRTC;
       }
     }
-    else if (sVar4 == 0x2901) {
-      puVar2 = &_glpOpTexWrapCoordsRCRAVRTC;
+    else if (wrapModeR == 0x2901) {
+      coordChunk = &_glpOpTexWrapCoordsRCRAVRTC;
     }
     else {
-      puVar2 = &_glpOpTexWrapCoordsRCCAVRTC;
+      coordChunk = &_glpOpTexWrapCoordsRCCAVRTC;
     }
   }
-  else if (sVar5 == 0x2901) {
-    if (sVar4 == 0x2901) {
-      puVar2 = &_glpOpTexWrapCoordsCRRAVRTC;
+  else if (wrapModeT == 0x2901) {
+    if (wrapModeR == 0x2901) {
+      coordChunk = &_glpOpTexWrapCoordsCRRAVRTC;
     }
     else {
-      puVar2 = &_glpOpTexWrapCoordsCRCAVRTC;
+      coordChunk = &_glpOpTexWrapCoordsCRCAVRTC;
     }
   }
-  else if (sVar4 == 0x2901) {
-    puVar2 = &_glpOpTexWrapCoordsCCRAVRTC;
+  else if (wrapModeR == 0x2901) {
+    coordChunk = &_glpOpTexWrapCoordsCCRAVRTC;
   }
   else {
-    puVar2 = &_glpOpTexWrapCoordsCCCAVRTC;
+    coordChunk = &_glpOpTexWrapCoordsCCCAVRTC;
   }
-  chunkIndex = ((int (*)())_glpRTCAddAChunk_97be1c2c)(puVar2,param_2);
-  return param_2 + chunkIndex * 4;
+  chunkWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(coordChunk,codeCursor);
+  return codeCursor + chunkWordCount * 4;
 }
 
 /* _PPCTextureSamplerSampleTexel1DRTCAV @ 0x97be2330 (780 bytes) */
@@ -6375,57 +6375,58 @@ int _PPCRasterOpMachineAttachRuntimeCompiler(param_1, param_2)
 }
 
 /* _PPCRasterOpMachine_DepthTestRTCAV @ 0x97be43cc (272 bytes) */
-int _PPCRasterOpMachine_DepthTestRTCAV(param_1, param_2)
-  int *param_1;
-  uint *param_2;
+int _PPCRasterOpMachine_DepthTestRTCAV(machine, codeCursor)
+  int *machine;
+  uint *codeCursor;
 {
-  uint ppcInstWord;
-  uint uVar1;
-  uint uVar2;
-  int iVar3;
+  uint skipWords;
+  uint branchWord;
+  uint depthFunc;
+  uint depthState;
+  int compiler;
   
-  iVar3 = param_1[1];
-  uVar2 = *(uint *)(*(int *)(*param_1 + 0xd80) + 0x50);
-  uVar1 = uVar2 & 7;
-  if ((uVar1 != 0) && (uVar1 != 7)) {
-    *param_2 = 0x81e30da8;
-    param_2[1] = 0xc10f0000;
-    param_2[2] = 0xfc0d4000;
-    param_2 = param_2 + 3;
+  compiler = machine[1];
+  depthState = *(uint *)(*(int *)(*machine + 0xd80) + 0x50);
+  depthFunc = depthState & 7;
+  if ((depthFunc != 0) && (depthFunc != 7)) {
+    *codeCursor = 0x81e30da8;
+    codeCursor[1] = 0xc10f0000;
+    codeCursor[2] = 0xfc0d4000;
+    codeCursor = codeCursor + 3;
   }
-  uVar1 = (uint)(*(int *)(iVar3 + 0xe3c) - (int)param_2) >> 2;
-  switch(uVar2 & 7) {
+  skipWords = (uint)(*(int *)(compiler + 0xe3c) - (int)codeCursor) >> 2;
+  switch(depthState & 7) {
   case 0:
-    *param_2 = (uVar1 & 0xffffff) << 2 | 0x48000000;
+    *codeCursor = (skipWords & 0xffffff) << 2 | 0x48000000;
     goto LAB_97be44f0;
   case 1:
-    ppcInstWord = 0x41800000;
+    branchWord = 0x41800000;
     break;
   case 2:
-    ppcInstWord = 0x41820000;
+    branchWord = 0x41820000;
     break;
   case 3:
-    ppcInstWord = 0x40810000;
+    branchWord = 0x40810000;
     break;
   case 4:
-    ppcInstWord = 0x41810000;
+    branchWord = 0x41810000;
     break;
   case 5:
-    ppcInstWord = 0x40820000;
+    branchWord = 0x40820000;
     break;
   case 6:
-    ppcInstWord = 0x40800000;
+    branchWord = 0x40800000;
     break;
   default:
     goto switchD_97be4464_caseD_7;
   }
-  *param_2 = ppcInstWord | 8;
-  param_2 = param_2 + 1;
-  *param_2 = (uVar1 - 1) * 4 & 0x3fffffc | 0x48000000;
+  *codeCursor = branchWord | 8;
+  codeCursor = codeCursor + 1;
+  *codeCursor = (skipWords - 1) * 4 & 0x3fffffc | 0x48000000;
 LAB_97be44f0:
-  param_2 = param_2 + 1;
+  codeCursor = codeCursor + 1;
 switchD_97be4464_caseD_7:
-  return param_2;
+  return codeCursor;
 }
 
 /* _PPCRasterOpMachine_DepthAndStencilTestRTCAV @ 0x97be44fc (1172 bytes) */
@@ -6606,93 +6607,93 @@ switchD_97be4784_default:
 }
 
 /* _PPCRasterOpMachine_AlphaTestRTCAV @ 0x97be49d0 (616 bytes) */
-int _PPCRasterOpMachine_AlphaTestRTCAV(param_1, param_2)
-  int *param_1;
-  uint *param_2;
+int _PPCRasterOpMachine_AlphaTestRTCAV(machine, codeCursor)
+  int *machine;
+  uint *codeCursor;
 {
-  uint ppcInstWord;
+  uint compareWord;
   uint framebufferFormat;
-  float fVar1;
-  uint uVar2;
-  float fVar3;
-  int iVar4;
-  uint uVar5;
-  uint uVar6;
-  double dVar7;
+  float clampBound;
+  uint alphaFunc;
+  float alphaRef;
+  int rasterState;
+  uint alphaState;
+  uint branchField;
+  double alphaRefScaled;
   
-  uVar6 = 0;
-  iVar4 = *(int *)(*param_1 + 0xd80);
-  uVar5 = *(uint *)(iVar4 + 0x40);
-  fVar3 = *(float *)(iVar4 + 0x44);
-  uVar2 = uVar5 & 7;
-  if ((uVar2 != 7) && (uVar2 != 0)) {
-    framebufferFormat = _PPEmulatorFramebufferFormat(*param_1);
+  branchField = 0;
+  rasterState = *(int *)(*machine + 0xd80);
+  alphaState = *(uint *)(rasterState + 0x40);
+  alphaRef = *(float *)(rasterState + 0x44);
+  alphaFunc = alphaState & 7;
+  if ((alphaFunc != 7) && (alphaFunc != 0)) {
+    framebufferFormat = _PPEmulatorFramebufferFormat(*machine);
     if ((framebufferFormat & 0x1c000) == 0) {
-      *param_2 = 0x3b000210;
-      param_2[1] = 0x7e63c1ce;
-      param_2[2] = 0xc123021c;
-      param_2[3] = (uint)(int)fVar3 >> 0x10 | 0x3de00000;
-      param_2[4] = (uint)(int)fVar3 & 0xffff | 0x61ef0000;
-      param_2[5] = 0x91e30210;
-      param_2[6] = 0xc1030210;
-      ppcInstWord = 0xfc094000;
+      *codeCursor = 0x3b000210;
+      codeCursor[1] = 0x7e63c1ce;
+      codeCursor[2] = 0xc123021c;
+      codeCursor[3] = (uint)(int)alphaRef >> 0x10 | 0x3de00000;
+      codeCursor[4] = (uint)(int)alphaRef & 0xffff | 0x61ef0000;
+      codeCursor[5] = 0x91e30210;
+      codeCursor[6] = 0xc1030210;
+      compareWord = 0xfc094000;
     }
     else {
-      fVar1 = TAllocation__guardBlockSize;
-      if ((fVar3 < TAllocation__guardBlockSize) || (fVar1 = FLOAT_97c3acd8, FLOAT_97c3acd8 < fVar3))
+      clampBound = TAllocation__guardBlockSize;
+      if ((alphaRef < TAllocation__guardBlockSize) || (clampBound = FLOAT_97c3acd8, FLOAT_97c3acd8 < alphaRef))
       {
-        fVar3 = fVar1;
+        alphaRef = clampBound;
       }
-      fVar3 = fVar3 * FLOAT_97c3acbc + FLOAT_97c3acc0;
-      dVar7 = (double)fVar3;
-      if (DOUBLE_97c30a78 <= dVar7) {
-        ppcInstWord = (uint)(int)(dVar7 - DOUBLE_97c30a78);
+      alphaRef = alphaRef * FLOAT_97c3acbc + FLOAT_97c3acc0;
+      alphaRefScaled = (double)alphaRef;
+      if (DOUBLE_97c30a78 <= alphaRefScaled) {
+        compareWord = (uint)(int)(alphaRefScaled - DOUBLE_97c30a78);
       }
       else {
-        ppcInstWord = (uint)(int)fVar3;
+        compareWord = (uint)(int)alphaRef;
       }
-      *param_2 = 0x10734c0a;
-      param_2[1] = 0x1063444a;
-      param_2[2] = 0x10635b2e;
-      param_2[3] = 0x10601b8a;
-      param_2[4] = 0x3b000210;
-      param_2[5] = 0x7c63c1ce;
-      ppcInstWord = ppcInstWord & 0xffff | 0x2c170000;
-      param_2[6] = 0x82e3021c;
+      *codeCursor = 0x10734c0a;
+      codeCursor[1] = 0x1063444a;
+      codeCursor[2] = 0x10635b2e;
+      codeCursor[3] = 0x10601b8a;
+      codeCursor[4] = 0x3b000210;
+      codeCursor[5] = 0x7c63c1ce;
+      compareWord = compareWord & 0xffff | 0x2c170000;
+      codeCursor[6] = 0x82e3021c;
     }
-    param_2[7] = ppcInstWord;
-    param_2 = param_2 + 8;
-    uVar6 = (uint)(*(int *)(param_1[1] + 0xe3c) - (int)param_2) >> 2;
+    codeCursor[7] = compareWord;
+    codeCursor = codeCursor + 8;
+    branchField = (uint)(*(int *)(machine[1] + 0xe3c) - (int)codeCursor) >> 2;
   }
-  switch(uVar5 & 7) {
+  switch(alphaState & 7) {
   case 0:
-    uVar6 = *(int *)(param_1[1] + 0xe3c) - (int)param_2 & 0x3fffffcU | 0x48000000;
+    branchField = *(int *)(machine[1] + 0xe3c) - (int)codeCursor & 0x3fffffcU | 0x48000000;
     break;
   case 1:
-    uVar6 = (uVar6 & 0x3fff) << 2 | 0x40800000;
+    branchField = (branchField & 0x3fff) << 2 | 0x40800000;
     break;
   case 2:
-    uVar6 = (uVar6 & 0x3fff) << 2 | 0x40820000;
+    branchField = (branchField & 0x3fff) << 2 | 0x40820000;
     break;
   case 3:
-    uVar6 = (uVar6 & 0x3fff) << 2 | 0x41810000;
+    branchField = (branchField & 0x3fff) << 2 | 0x41810000;
     break;
   case 4:
-    uVar6 = (uVar6 & 0x3fff) << 2 | 0x40810000;
+    branchField = (branchField & 0x3fff) << 2 | 0x40810000;
     break;
   case 5:
-    uVar6 = (uVar6 & 0x3fff) << 2 | 0x41820000;
+    branchField = (branchField & 0x3fff) << 2 | 0x41820000;
     break;
   case 6:
-    uVar6 = (uVar6 & 0x3fff) << 2 | 0x41800000;
+    branchField = (branchField & 0x3fff) << 2 | 0x41800000;
     break;
   default:
     goto switchD_97be4bb8_caseD_7;
   }
-  *param_2 = uVar6;
-  param_2 = param_2 + 1;
+  *codeCursor = branchField;
+  codeCursor = codeCursor + 1;
 switchD_97be4bb8_caseD_7:
-  return param_2;
+  return codeCursor;
 }
 
 /* _PPCRasterOpMachine_BlendingRTCAV @ 0x97be4c58 (888 bytes) */
@@ -6822,301 +6823,301 @@ switchD_97be4f38_default:
 }
 
 /* _PPCRasterOpMachine_LogicOpRTCAV @ 0x97be4ff8 (520 bytes) */
-int _PPCRasterOpMachine_LogicOpRTCAV(param_1, param_2)
-  int *param_1;
-  uint *param_2;
+int _PPCRasterOpMachine_LogicOpRTCAV(machine, codeCursor)
+  int *machine;
+  uint *codeCursor;
 {
-  uint vectorInstWord2;
-  uint vectorInstWord;
-  uint uVar1;
-  uint uVar2;
+  uint opWord2;
+  uint opWord;
+  uint logicOp;
+  uint logicOpState;
   
-  uVar2 = *(uint *)(*(int *)(*param_1 + 0xd80) + 0x68);
-  uVar1 = uVar2 & 0xf;
-  if ((uVar1 < 3) || (uVar1 == 4)) {
-    if (uVar1 == 1) {
-      vectorInstWord = 0x12684484;
+  logicOpState = *(uint *)(*(int *)(*machine + 0xd80) + 0x68);
+  logicOp = logicOpState & 0xf;
+  if ((logicOp < 3) || (logicOp == 4)) {
+    if (logicOp == 1) {
+      opWord = 0x12684484;
     }
-    else if (uVar1 < 2) {
-      if (uVar1 != 0) {
-        return param_2;
+    else if (logicOp < 2) {
+      if (logicOp != 0) {
+        return codeCursor;
       }
-      vectorInstWord = 0x12694c84;
+      opWord = 0x12694c84;
     }
     else {
-      if (uVar1 == 2) {
-        return param_2;
+      if (logicOp == 2) {
+        return codeCursor;
       }
-      if (uVar1 != 4) {
-        return param_2;
+      if (logicOp != 4) {
+        return codeCursor;
       }
-      vectorInstWord = 0x12621484;
+      opWord = 0x12621484;
     }
-    *param_2 = vectorInstWord;
+    *codeCursor = opWord;
     goto LAB_97be507c;
   }
-  if (uVar1 != 5) {
-    *param_2 = 0x10734b2e;
-    param_2[1] = 0x10601b8a;
-    param_2 = param_2 + 2;
+  if (logicOp != 5) {
+    *codeCursor = 0x10734b2e;
+    codeCursor[1] = 0x10601b8a;
+    codeCursor = codeCursor + 2;
   }
-  uVar2 = uVar2 & 0xf;
-  if (uVar2 != 3) {
-    *param_2 = 0x10824b2e;
-    param_2[1] = 0x1080238a;
-    param_2 = param_2 + 2;
+  logicOpState = logicOpState & 0xf;
+  if (logicOpState != 3) {
+    *codeCursor = 0x10824b2e;
+    codeCursor[1] = 0x1080238a;
+    codeCursor = codeCursor + 2;
   }
-  switch(uVar2) {
+  switch(logicOpState) {
   case 3:
-    vectorInstWord = 0x10c30000;
+    opWord = 0x10c30000;
     goto LAB_97be5148;
   default:
     goto switchD_97be5104_caseD_4;
   case 5:
-    vectorInstWord = 0x10c40000;
+    opWord = 0x10c40000;
 LAB_97be5148:
-    vectorInstWord = vectorInstWord | 0x4d04;
+    opWord = opWord | 0x4d04;
     break;
   case 6:
-    vectorInstWord = 0x10c32404;
+    opWord = 0x10c32404;
     break;
   case 7:
-    vectorInstWord = 0x10c32404;
+    opWord = 0x10c32404;
     goto LAB_97be51a0;
   case 8:
-    vectorInstWord = 0x10c32484;
+    opWord = 0x10c32484;
     break;
   case 9:
-    vectorInstWord = 0x10c32504;
+    opWord = 0x10c32504;
     break;
   case 10:
-    vectorInstWord = 0x10c324c4;
+    opWord = 0x10c324c4;
     break;
   case 0xb:
-    vectorInstWord = 0x10c324c4;
+    opWord = 0x10c324c4;
 LAB_97be51a0:
-    vectorInstWord2 = 0x10c64d04;
+    opWord2 = 0x10c64d04;
 LAB_97be51d8:
-    *param_2 = vectorInstWord;
-    param_2 = param_2 + 1;
-    *param_2 = vectorInstWord2;
+    *codeCursor = opWord;
+    codeCursor = codeCursor + 1;
+    *codeCursor = opWord2;
     goto LAB_97be51e0;
   case 0xc:
-    vectorInstWord = 0x10c32444;
+    opWord = 0x10c32444;
     break;
   case 0xd:
-    vectorInstWord = 0x10c41c44;
+    opWord = 0x10c41c44;
     break;
   case 0xe:
-    vectorInstWord = 0x10840000;
+    opWord = 0x10840000;
     goto LAB_97be51cc;
   case 0xf:
-    vectorInstWord = 0x10630000;
+    opWord = 0x10630000;
 LAB_97be51cc:
-    vectorInstWord = vectorInstWord | 0x4d04;
-    vectorInstWord2 = 0x10c32484;
+    opWord = opWord | 0x4d04;
+    opWord2 = 0x10c32484;
     goto LAB_97be51d8;
   }
-  *param_2 = vectorInstWord;
+  *codeCursor = opWord;
 LAB_97be51e0:
-  param_2 = param_2 + 1;
+  codeCursor = codeCursor + 1;
 switchD_97be5104_caseD_4:
-  *param_2 = 0x39e00020;
-  param_2[1] = 0x7c6378ce;
-  param_2[2] = 0x10c61c04;
-  param_2[3] = 0x10c0330a;
-  param_2[4] = 0x39e00070;
-  param_2[5] = 0x7c6378ce;
-  param_2 = param_2 + 6;
-  *param_2 = 0x126648ee;
+  *codeCursor = 0x39e00020;
+  codeCursor[1] = 0x7c6378ce;
+  codeCursor[2] = 0x10c61c04;
+  codeCursor[3] = 0x10c0330a;
+  codeCursor[4] = 0x39e00070;
+  codeCursor[5] = 0x7c6378ce;
+  codeCursor = codeCursor + 6;
+  *codeCursor = 0x126648ee;
 LAB_97be507c:
-  return param_2 + 1;
+  return codeCursor + 1;
 }
 
 /* _PPCRasterOpMachine_BufferMaskRTCAV @ 0x97be5234 (208 bytes) */
-int _PPCRasterOpMachine_BufferMaskRTCAV(param_1, param_2)
-  int *param_1;
-  undefined4 *param_2;
+int _PPCRasterOpMachine_BufferMaskRTCAV(machine, codeCursor)
+  int *machine;
+  undefined4 *codeCursor;
 {
-  uint uVar1;
-  undefined4 vectorInstWord;
+  uint writeMasks;
+  undefined4 colorMaskWord;
   
-  vectorInstWord = 0x1063492c;
-  uVar1 = *(uint *)(*(int *)(*param_1 + 0xd80) + 0x70);
-  *param_2 = 0x10836a8c;
-  if ((uVar1 & 0x20000) == 0) {
-    vectorInstWord = 0x1063212c;
+  colorMaskWord = 0x1063492c;
+  writeMasks = *(uint *)(*(int *)(*machine + 0xd80) + 0x70);
+  *codeCursor = 0x10836a8c;
+  if ((writeMasks & 0x20000) == 0) {
+    colorMaskWord = 0x1063212c;
   }
-  param_2[1] = vectorInstWord;
-  vectorInstWord = 0x1063492c;
-  if ((uVar1 & 0x40000) == 0) {
-    vectorInstWord = 0x1063212c;
+  codeCursor[1] = colorMaskWord;
+  colorMaskWord = 0x1063492c;
+  if ((writeMasks & 0x40000) == 0) {
+    colorMaskWord = 0x1063212c;
   }
-  param_2[2] = vectorInstWord;
-  vectorInstWord = 0x1063492c;
-  if ((uVar1 & 0x80000) == 0) {
-    vectorInstWord = 0x1063212c;
+  codeCursor[2] = colorMaskWord;
+  colorMaskWord = 0x1063492c;
+  if ((writeMasks & 0x80000) == 0) {
+    colorMaskWord = 0x1063212c;
   }
-  param_2[3] = vectorInstWord;
-  vectorInstWord = 0x1063492c;
-  if ((uVar1 & 0x100000) == 0) {
-    vectorInstWord = 0x1063212c;
+  codeCursor[3] = colorMaskWord;
+  colorMaskWord = 0x1063492c;
+  if ((writeMasks & 0x100000) == 0) {
+    colorMaskWord = 0x1063212c;
   }
-  param_2[4] = vectorInstWord;
-  param_2[5] = 0x127310ea;
-  return param_2 + 6;
+  codeCursor[4] = colorMaskWord;
+  codeCursor[5] = 0x127310ea;
+  return codeCursor + 6;
 }
 
 /* _PPCRasterOpMachineCalculateBlendingFactorsRTCAV @ 0x97be5304 (400 bytes) */
-int _PPCRasterOpMachineCalculateBlendingFactorsRTCAV(param_1, param_2, param_3)
-  uint *param_1;
-  int param_2;
-  undefined4 param_3;
+int _PPCRasterOpMachineCalculateBlendingFactorsRTCAV(codeCursor, vectorReg, blendFactor)
+  uint *codeCursor;
+  int vectorReg;
+  undefined4 blendFactor;
 {
-  uint vectorInstWord;
-  uint vectorInstWord2;
+  uint factorWord;
+  uint factorWord2;
   
-  switch(param_3) {
+  switch(blendFactor) {
   case 0:
-    vectorInstWord = param_2 << 0x15 | 0x10094c84;
+    factorWord = vectorReg << 0x15 | 0x10094c84;
     break;
   case 1:
-    vectorInstWord = param_2 << 0x15 | 0x10084484;
+    factorWord = vectorReg << 0x15 | 0x10084484;
     break;
   case 2:
-    vectorInstWord = param_2 << 0x15 | 0x10139c84;
+    factorWord = vectorReg << 0x15 | 0x10139c84;
     break;
   case 3:
-    vectorInstWord = param_2 << 0x15 | 0x1008984a;
+    factorWord = vectorReg << 0x15 | 0x1008984a;
     break;
   case 4:
-    vectorInstWord = param_2 << 0x15 | 0x10039a8c;
+    factorWord = vectorReg << 0x15 | 0x10039a8c;
     break;
   case 5:
-    vectorInstWord = param_2 << 0x15 | param_2 << 0xb | 0x10080000;
-    vectorInstWord2 = param_2 << 0x15 | 0x10039a8c;
+    factorWord = vectorReg << 0x15 | vectorReg << 0xb | 0x10080000;
+    factorWord2 = vectorReg << 0x15 | 0x10039a8c;
     goto LAB_97be545c;
   case 6:
-    vectorInstWord = param_2 << 0x15 | 0x1003128c;
+    factorWord = vectorReg << 0x15 | 0x1003128c;
     break;
   case 7:
-    vectorInstWord = param_2 << 0x15 | param_2 << 0xb | 0x10080000;
-    vectorInstWord2 = param_2 << 0x15 | 0x1003128c;
+    factorWord = vectorReg << 0x15 | vectorReg << 0xb | 0x10080000;
+    factorWord2 = vectorReg << 0x15 | 0x1003128c;
     goto LAB_97be545c;
   case 8:
-    vectorInstWord = param_2 << 0x15 | 0x10063484;
+    factorWord = vectorReg << 0x15 | 0x10063484;
     break;
   case 9:
-    vectorInstWord = param_2 << 0x15 | 0x1008304a;
+    factorWord = vectorReg << 0x15 | 0x1008304a;
     break;
   case 10:
-    vectorInstWord = param_2 << 0x15 | 0x1003328c;
+    factorWord = vectorReg << 0x15 | 0x1003328c;
     break;
   case 0xb:
-    vectorInstWord = param_2 << 0x15 | param_2 << 0xb | 0x10080000;
-    vectorInstWord2 = param_2 << 0x15 | 0x1003328c;
+    factorWord = vectorReg << 0x15 | vectorReg << 0xb | 0x10080000;
+    factorWord2 = vectorReg << 0x15 | 0x1003328c;
 LAB_97be545c:
-    *param_1 = vectorInstWord2;
-    param_1 = param_1 + 1;
-    *param_1 = vectorInstWord | 0x4a;
+    *codeCursor = factorWord2;
+    codeCursor = codeCursor + 1;
+    *codeCursor = factorWord | 0x4a;
     goto LAB_97be5394;
   case 0xc:
-    vectorInstWord = param_2 << 0x15 | 0x10021484;
+    factorWord = vectorReg << 0x15 | 0x10021484;
     break;
   case 0xd:
-    vectorInstWord = param_2 << 0x15 | 0x1008104a;
+    factorWord = vectorReg << 0x15 | 0x1008104a;
     break;
   case 0xe:
-    vectorInstWord = param_2 << 0x15;
-    vectorInstWord2 = vectorInstWord | param_2 << 0x10;
-    *param_1 = vectorInstWord | 0x1008104a;
-    param_1[1] = vectorInstWord2 | 0x10009c4a;
-    param_1[2] = vectorInstWord | param_2 << 0xb | 0x1003028c;
-    param_1 = param_1 + 3;
-    *param_1 = vectorInstWord2 | 0x1000436a;
+    factorWord = vectorReg << 0x15;
+    factorWord2 = factorWord | vectorReg << 0x10;
+    *codeCursor = factorWord | 0x1008104a;
+    codeCursor[1] = factorWord2 | 0x10009c4a;
+    codeCursor[2] = factorWord | vectorReg << 0xb | 0x1003028c;
+    codeCursor = codeCursor + 3;
+    *codeCursor = factorWord2 | 0x1000436a;
     goto LAB_97be5394;
   default:
-    return param_1;
+    return codeCursor;
   }
-  *param_1 = vectorInstWord;
+  *codeCursor = factorWord;
 LAB_97be5394:
-  return param_1 + 1;
+  return codeCursor + 1;
 }
 
 /* _PPCRasterOpMachineUpdateStencilBufferRTCAV @ 0x97be54d0 (468 bytes) */
-int _PPCRasterOpMachineUpdateStencilBufferRTCAV(param_1, param_2, param_3, param_4, param_5, param_6)
-  undefined4 param_1;
-  int param_2;
-  uint param_3;
-  uint param_4;
-  uint param_5;
-  uint *param_6;
+int _PPCRasterOpMachineUpdateStencilBufferRTCAV(stencilOp, stencilPtrReg, valueReg, stencilRef, writeMask, codeCursor)
+  undefined4 stencilOp;
+  int stencilPtrReg;
+  uint valueReg;
+  uint stencilRef;
+  uint writeMask;
+  uint *codeCursor;
 {
-  uint uVar1;
-  uint uVar2;
-  uint *puVar3;
+  uint clearBitsWord;
+  uint deltaLoadWord;
+  uint *emitPtr;
   
-  switch(param_1) {
+  switch(stencilOp) {
   case 0:
-    *param_6 = param_5 ^ 0xffff | param_3 << 0x15 | 0x701e0000;
-    puVar3 = param_6 + 1;
-    *puVar3 = param_2 << 0x10 | 0x9bc00000;
+    *codeCursor = writeMask ^ 0xffff | valueReg << 0x15 | 0x701e0000;
+    emitPtr = codeCursor + 1;
+    *emitPtr = stencilPtrReg << 0x10 | 0x9bc00000;
     goto LAB_97be5588;
   case 1:
-    return param_6;
+    return codeCursor;
   case 2:
-    *param_6 = param_5 ^ 0xffff | param_3 << 0x15 | 0x701e0000;
-    param_6[1] = param_4 & param_5 | 0x3be00000;
-    puVar3 = param_6 + 2;
-    *puVar3 = 0x7fdefb78;
+    *codeCursor = writeMask ^ 0xffff | valueReg << 0x15 | 0x701e0000;
+    codeCursor[1] = stencilRef & writeMask | 0x3be00000;
+    emitPtr = codeCursor + 2;
+    *emitPtr = 0x7fdefb78;
     goto LAB_97be5580;
   case 3:
-    *param_6 = (param_3 & 0x1f) << 0x10 | 0x2c0000ff;
-    param_6[1] = param_3 << 0x10 | 0x3be00000;
-    param_6[2] = 0x40800008;
-    uVar1 = param_5 ^ 0xffff | param_3 << 0x15;
-    uVar2 = param_3 << 0x10 | 0x3be00001;
+    *codeCursor = (valueReg & 0x1f) << 0x10 | 0x2c0000ff;
+    codeCursor[1] = valueReg << 0x10 | 0x3be00000;
+    codeCursor[2] = 0x40800008;
+    clearBitsWord = writeMask ^ 0xffff | valueReg << 0x15;
+    deltaLoadWord = valueReg << 0x10 | 0x3be00001;
     break;
   case 4:
-    *param_6 = (param_3 & 0x1f) << 0x10 | 0x2c000000;
-    param_6[1] = param_3 << 0x10 | 0x3be00000;
-    param_6[2] = 0x40810008;
-    uVar1 = param_5 ^ 0xffff | param_3 << 0x15;
-    uVar2 = param_3 << 0x10 | 0x3be0ffff;
+    *codeCursor = (valueReg & 0x1f) << 0x10 | 0x2c000000;
+    codeCursor[1] = valueReg << 0x10 | 0x3be00000;
+    codeCursor[2] = 0x40810008;
+    clearBitsWord = writeMask ^ 0xffff | valueReg << 0x15;
+    deltaLoadWord = valueReg << 0x10 | 0x3be0ffff;
     break;
   case 5:
-    *param_6 = param_5 ^ 0xffff | param_3 << 0x15 | 0x701e0000;
-    param_6[1] = param_3 << 0x15 | param_3 << 0xb | 0x7c1f00f8;
-    param_6[2] = param_5 | 0x73ff0000;
-    param_6[3] = 0x7fdefb78;
-    param_6[4] = param_2 << 0x10 | 0x9bc00000;
-    return param_6 + 5;
+    *codeCursor = writeMask ^ 0xffff | valueReg << 0x15 | 0x701e0000;
+    codeCursor[1] = valueReg << 0x15 | valueReg << 0xb | 0x7c1f00f8;
+    codeCursor[2] = writeMask | 0x73ff0000;
+    codeCursor[3] = 0x7fdefb78;
+    codeCursor[4] = stencilPtrReg << 0x10 | 0x9bc00000;
+    return codeCursor + 5;
   case 6:
-    uVar1 = param_5 ^ 0xffff | param_3 << 0x15;
-    uVar2 = param_3 << 0x10 | 0x3be00001;
+    clearBitsWord = writeMask ^ 0xffff | valueReg << 0x15;
+    deltaLoadWord = valueReg << 0x10 | 0x3be00001;
     goto LAB_97be55e8;
   case 7:
-    uVar1 = param_5 ^ 0xffff | param_3 << 0x15;
-    uVar2 = param_3 << 0x10 | 0x3be0ffff;
+    clearBitsWord = writeMask ^ 0xffff | valueReg << 0x15;
+    deltaLoadWord = valueReg << 0x10 | 0x3be0ffff;
 LAB_97be55e8:
-    *param_6 = uVar2;
-    puVar3 = param_6 + 1;
-    *puVar3 = 0x73ff00ff;
+    *codeCursor = deltaLoadWord;
+    emitPtr = codeCursor + 1;
+    *emitPtr = 0x73ff00ff;
     goto LAB_97be55f4;
   default:
-    return param_6;
+    return codeCursor;
   }
-  puVar3 = param_6 + 3;
-  *puVar3 = uVar2;
+  emitPtr = codeCursor + 3;
+  *emitPtr = deltaLoadWord;
 LAB_97be55f4:
-  puVar3[1] = uVar1 | 0x701e0000;
-  puVar3[2] = param_5 | 0x73ff0000;
-  puVar3 = puVar3 + 3;
-  *puVar3 = 0x7fdefb78;
+  emitPtr[1] = clearBitsWord | 0x701e0000;
+  emitPtr[2] = writeMask | 0x73ff0000;
+  emitPtr = emitPtr + 3;
+  *emitPtr = 0x7fdefb78;
 LAB_97be5580:
-  puVar3 = puVar3 + 1;
-  *puVar3 = param_2 << 0x10 | 0x9bc00000;
+  emitPtr = emitPtr + 1;
+  *emitPtr = stencilPtrReg << 0x10 | 0x9bc00000;
 LAB_97be5588:
-  return puVar3 + 1;
+  return emitPtr + 1;
 }
 

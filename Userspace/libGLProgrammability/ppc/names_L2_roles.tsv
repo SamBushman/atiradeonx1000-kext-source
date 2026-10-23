@@ -279,9 +279,9 @@ use	_PPCRuntimeCompilerCompileNO	iVar9	chunkIndex	INFERRED	every definition is t
 use	_PPCRuntimeCompilerCompileAV	iVar21	chunkIndex	INFERRED	every definition is the result of a call whose name says it returns this	#188	+78	all	all
 use	_PPCRuntimeCompilerCompileAV	uVar23	chunkIndex2	INFERRED	every definition is the result of a call whose name says it returns this	#1149	+2	all	all
 use	_PPCRuntimeCompilerCompileAV	uVar23	chunkIndex2	INFERRED	every definition is the result of a call whose name says it returns this	#2188	+135	all	all
-use	_PPCTextureSamplerWrapCoordinates1DRTCAV	iVar4	chunkIndex	INFERRED	every definition is the result of a call whose name says it returns this	#11	+1	all	all
-use	_PPCTextureSamplerWrapCoordinates2DRTCAV	iVar3	chunkIndex	INFERRED	every definition is the result of a call whose name says it returns this	#25	+1	all	all
-use	_PPCTextureSamplerWrapCoordinates3DRTCAV	iVar3	chunkIndex	INFERRED	every definition is the result of a call whose name says it returns this	#45	+1	all	all
+use	_PPCTextureSamplerWrapCoordinates1DRTCAV	iVar4	chunkWordCount	INFERRED	every definition is the result of a call whose name says it returns this	#11	+1	all	all
+use	_PPCTextureSamplerWrapCoordinates2DRTCAV	iVar3	chunkWordCount	INFERRED	every definition is the result of a call whose name says it returns this	#25	+1	all	all
+use	_PPCTextureSamplerWrapCoordinates3DRTCAV	iVar3	chunkWordCount	INFERRED	every definition is the result of a call whose name says it returns this	#45	+1	all	all
 use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	framebufferFormat	INFERRED	every definition is the result of a call whose name says it returns this	#6	+1	all	all
 use	_PPCConstantsAndScratchInitialise	dVar1	log2Result	INFERRED	every definition is the result of a call whose name says it returns this	#106	+21	all	all
 use	_glpWriteSizeTypePrecision	iVar3	copyEnd	INFERRED	every definition is the result of a call whose name says it returns this	#7	+0	all	all

@@ -216,3 +216,73 @@ local	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	bVar1	isLinearFilter	INFERRE
 local	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar5	lambdaComputed	CONFIRMED	sampler[10]: a level of detail was computed before this call
 local	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	sVar2	wrapModeS	CONFIRMED	texture wrap mode S (state +0x10); 0x812d is GL_CLAMP_TO_BORDER, 0x2900 GL_CLAMP, 0x2901 GL_REPEAT
 local	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	sVar3	wrapModeT	CONFIRMED	texture wrap mode T (state +0x12); 0x812d is GL_CLAMP_TO_BORDER, 0x2900 GL_CLAMP, 0x2901 GL_REPEAT
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	param_1	stencilOp	INFERRED	stencil update operation selector 0..7 (case 1 emits nothing: keep)
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	param_2	stencilPtrReg	INFERRED	register holding the stencil buffer address, the base of the emitted stb
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	param_3	valueReg	INFERRED	register holding the stencil value being updated
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	param_4	stencilRef	INFERRED	stencil reference value (low half of the replace / li words)
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	param_5	writeMask	INFERRED	stencil write mask; its complement selects the bits kept from the old value
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	param_6	codeCursor	CONFIRMED	write cursor: where the next PowerPC instruction word is emitted
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	uVar1	clearBitsWord	INFERRED	rlwinm-form instruction word that clears the masked bits of the stencil value (mask complement, value register)
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	uVar2	deltaLoadWord	INFERRED	li instruction word loading the +1 / -1 step used by the increment and decrement operations
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	puVar3	emitPtr	INFERRED	cursor over the emitted stencil update code
+local	_PPCRasterOpMachine_AlphaTestRTCAV	param_1	machine	CONFIRMED	raster-op machine: *machine is the emulator context (program info at +0xd80), machine[1] the runtime compiler (+0xe3c = the epilog branch target)
+local	_PPCRasterOpMachine_AlphaTestRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ 0;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \(uint\)\(\*\(int\ \*\)\(param_1\[1\]\ \+\ 0xe3c\)\ \-\ \(int\)param_2\)\ >>\ 2;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \*\(int\ \*\)\(param_1\[1\]\ \+\ 0xe3c\)\ \-\ \(int\)param_2\ \&\ 0x3fffffcU\ \|\ 0x48000000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \(uVar6\ \&\ 0x3fff\)\ <<\ 2\ \|\ 0x40800000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \(uVar6\ \&\ 0x3fff\)\ <<\ 2\ \|\ 0x40820000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \(uVar6\ \&\ 0x3fff\)\ <<\ 2\ \|\ 0x41810000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \(uVar6\ \&\ 0x3fff\)\ <<\ 2\ \|\ 0x40810000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \(uVar6\ \&\ 0x3fff\)\ <<\ 2\ \|\ 0x41820000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \(uVar6\ \&\ 0x3fff\)\ <<\ 2\ \|\ 0x41800000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*\*param_2\ =\ uVar6;$	+1
+local	_PPCRasterOpMachine_AlphaTestRTCAV	fVar1	clampBound	INFERRED	lower, then upper clamp bound applied to the alpha reference
+local	_PPCRasterOpMachine_AlphaTestRTCAV	fVar3	alphaRef	CONFIRMED	raster state +0x44: the alpha test reference value
+local	_PPCRasterOpMachine_AlphaTestRTCAV	dVar7	alphaRefScaled	INFERRED	alphaRef converted to double for the float-to-integer conversion
+local	_PPCRasterOpMachine_AlphaTestRTCAV	iVar4	rasterState	INFERRED	emulator +0xd80: program info with the folded raster state (+0x40 alpha function, +0x44 reference)
+local	_PPCRasterOpMachine_AlphaTestRTCAV	uVar5	alphaState	INFERRED	raster state +0x40: the alpha function in the low 3 bits
+local	_PPCRasterOpMachine_AlphaTestRTCAV	uVar2	alphaFunc	INFERRED	alphaState & 7: 0 never-skip, 7 always, 1..6 the comparison selecting the branch
+local	_PPCRasterOpMachine_LogicOpRTCAV	param_1	machine	CONFIRMED	raster-op machine: *machine is the emulator context (program info at +0xd80), machine[1] the runtime compiler (+0xe3c = the epilog branch target)
+local	_PPCRasterOpMachine_LogicOpRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar2	logicOpState	INFERRED	raster state +0x68: the logic operation in the low 4 bits	^\s*uVar2\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0xd80\)\ \+\ 0x68\);$	+2
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar2	logicOpState	INFERRED	raster state +0x68: the logic operation in the low 4 bits	^\s*uVar2\ =\ uVar2\ \&\ 0xf;$	+2
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar2	logicOpState	INFERRED	raster state +0x68: the logic operation in the low 4 bits	^\s*switch\(uVar2\)\ \{$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	logicOp	INFERRED	logicOpState & 0xf: the GL logic operation (0 CLEAR .. 15 SET order of the emitted cases)	^\s*uVar1\ =\ uVar2\ \&\ 0xf;$	+3
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	logicOp	INFERRED	logicOpState & 0xf: the GL logic operation (0 CLEAR .. 15 SET order of the emitted cases)	^\s*else\ if\ \(uVar1\ <\ 2\)\ \{$	+2
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	logicOp	INFERRED	logicOpState & 0xf: the GL logic operation (0 CLEAR .. 15 SET order of the emitted cases)	^\s*if\ \(uVar1\ ==\ 2\)\ \{$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	logicOp	INFERRED	logicOpState & 0xf: the GL logic operation (0 CLEAR .. 15 SET order of the emitted cases)	^\s*if\ \(uVar1\ !=\ 4\)\ \{$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	logicOp	INFERRED	logicOpState & 0xf: the GL logic operation (0 CLEAR .. 15 SET order of the emitted cases)	^\s*if\ \(uVar1\ !=\ 5\)\ \{$	+1
+local	_PPCRasterOpMachine_DepthTestRTCAV	param_1	machine	CONFIRMED	raster-op machine: *machine is the emulator context (program info at +0xd80), machine[1] the runtime compiler (+0xe3c = the epilog branch target)
+local	_PPCRasterOpMachine_DepthTestRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+local	_PPCRasterOpMachine_DepthTestRTCAV	iVar3	compiler	CONFIRMED	machine[1]: the runtime compiler, whose +0xe3c is the branch target of the emitted skip-to-epilog branch
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar2	depthState	INFERRED	raster state +0x50: the depth function in the low 3 bits	^\s*uVar2\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0xd80\)\ \+\ 0x50\);$	+2
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar2	depthState	INFERRED	raster state +0x50: the depth function in the low 3 bits	^\s*switch\(uVar2\ \&\ 7\)\ \{$	+1
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar1	depthFunc	INFERRED	depthState & 7: 0 never-pass skip, 7 always, 1..6 the comparison selecting the branch	^\s*uVar1\ =\ uVar2\ \&\ 7;$	+2
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar1	skipWords	INFERRED	distance in words from the cursor to the epilog branch target	^\s*uVar1\ =\ \(uint\)\(\*\(int\ \*\)\(iVar3\ \+\ 0xe3c\)\ \-\ \(int\)param_2\)\ >>\ 2;$	+1
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar1	skipWords	INFERRED	distance in words from the cursor to the epilog branch target	^\s*\*param_2\ =\ \(uVar1\ \&\ 0xffffff\)\ <<\ 2\ \|\ 0x48000000;$	+1
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar1	skipWords	INFERRED	distance in words from the cursor to the epilog branch target	^\s*\*param_2\ =\ \(uVar1\ \-\ 1\)\ \*\ 4\ \&\ 0x3fffffc\ \|\ 0x48000000;$	+1
+local	_PPCRasterOpMachine_BufferMaskRTCAV	param_1	machine	CONFIRMED	raster-op machine: *machine is the emulator context (program info at +0xd80), machine[1] the runtime compiler (+0xe3c = the epilog branch target)
+local	_PPCRasterOpMachine_BufferMaskRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+local	_PPCRasterOpMachine_BufferMaskRTCAV	uVar1	writeMasks	INFERRED	raster state +0x70: colour write-mask bits 17..20 (one per colour channel)
+local	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	param_1	codeCursor	CONFIRMED	write cursor: where the next AltiVec instruction word is emitted; returned advanced
+local	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	param_2	vectorReg	INFERRED	AltiVec register number the factor is computed into
+local	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	param_3	blendFactor	INFERRED	GL blend factor selector 0..14 (ZERO, ONE, the SRC/DST colour and alpha variants, constant colour and alpha, SRC_ALPHA_SATURATE)
+local	_PPCTextureSamplerWrapCoordinates1DRTCAV	param_1	sampler	CONFIRMED	texture sampler: *sampler is the 8-entry texture object table, sampler[1] the current object
+local	_PPCTextureSamplerWrapCoordinates1DRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+local	_PPCTextureSamplerWrapCoordinates1DRTCAV	sVar1	minFilter	CONFIRMED	texture minification filter (state +0x16)
+local	_PPCTextureSamplerWrapCoordinates1DRTCAV	sVar2	wrapModeS	CONFIRMED	texture wrap mode S (state +0x10)
+local	_PPCTextureSamplerWrapCoordinates1DRTCAV	puVar3	coordChunk	CONFIRMED	_glpOpTexWrapCoords* chunk descriptor chosen from the wrap mode
+local	_PPCTextureSamplerWrapCoordinates2DRTCAV	param_1	sampler	CONFIRMED	texture sampler: *sampler is the 8-entry texture object table, sampler[1] the current object
+local	_PPCTextureSamplerWrapCoordinates2DRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+use	_PPCTextureSamplerWrapCoordinates2DRTCAV	iVar3	textureState	CONFIRMED	*sampler->object: the sampler state record	^\s*iVar3\ =\ \*\*\(int\ \*\*\)\(param_1\ \+\ 4\);$	+4
+local	_PPCTextureSamplerWrapCoordinates2DRTCAV	sVar1	wrapModeS	CONFIRMED	texture wrap mode S (state +0x10)
+local	_PPCTextureSamplerWrapCoordinates2DRTCAV	sVar4	wrapModeT	CONFIRMED	texture wrap mode T (state +0x12)
+local	_PPCTextureSamplerWrapCoordinates2DRTCAV	puVar2	coordChunk	CONFIRMED	_glpOpTexWrapCoords* chunk descriptor chosen from the wrap modes
+local	_PPCTextureSamplerWrapCoordinates3DRTCAV	param_1	sampler	CONFIRMED	texture sampler: *sampler is the 8-entry texture object table, sampler[1] the current object
+local	_PPCTextureSamplerWrapCoordinates3DRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+use	_PPCTextureSamplerWrapCoordinates3DRTCAV	iVar3	textureState	CONFIRMED	*sampler->object: the sampler state record	^\s*iVar3\ =\ \*\*\(int\ \*\*\)\(param_1\ \+\ 4\);$	+5
+local	_PPCTextureSamplerWrapCoordinates3DRTCAV	sVar1	wrapModeS	CONFIRMED	texture wrap mode S (state +0x10)
+local	_PPCTextureSamplerWrapCoordinates3DRTCAV	sVar5	wrapModeT	CONFIRMED	texture wrap mode T (state +0x12)
+local	_PPCTextureSamplerWrapCoordinates3DRTCAV	sVar4	wrapModeR	CONFIRMED	texture wrap mode R (state +0x14)
+local	_PPCTextureSamplerWrapCoordinates3DRTCAV	puVar2	coordChunk	CONFIRMED	_glpOpTexWrapCoords* chunk descriptor chosen from the wrap modes
