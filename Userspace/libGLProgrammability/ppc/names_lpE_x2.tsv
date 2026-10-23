@@ -333,3 +333,43 @@ local	_PPCRuntimeCompilerTestConditionRegisterAV	param_6	condDescWord4	INFERRED	
 local	_PPCRuntimeCompilerTestConditionRegisterAV	param_7	condDescWord5	INFERRED	sixth descriptor word (spilled, unused)
 local	_PPCRuntimeCompilerTestConditionRegisterAV	param_8	condDescWord6	INFERRED	seventh descriptor word (spilled, unused)
 local	_PPCRuntimeCompilerTestConditionRegisterAV	param_9	conditionWord	CONFIRMED	last descriptor word: bits 16..23 select the condition (0..7), bytes at +2.. give the swizzle
+local	TPPStreamCompiler__newIndirectOperandFromConstant	a1	leftoverR4	INFERRED	register value left over from an earlier call, forwarded unchanged as an extra argument
+local	TPPStreamCompiler__newIndirectOperandFromConstant	a1_00	leftoverR4b	INFERRED	register value left over from an earlier call, forwarded unchanged as an extra argument
+local	TPPStreamCompiler__equalOperands	uVar14	leftoverArg7	INFERRED	register value left over from an earlier call, forwarded unchanged as an extra argument (zero)
+local	TPPStreamCompiler__equalOperands	uVar15	leftoverArg8	INFERRED	register value left over from an earlier call, forwarded unchanged as an extra argument (zero)
+local	TPPStreamCompiler__equalOperands	uVar19	callResultPair	INFERRED	64-bit r3:r4 pair returned by a call (the decompiler packs it); only its halves are used as leftover registers
+use	TPPStreamCompiler__equalOperands	uVar9	leftoverArgTmp	INFERRED	register value left over from an earlier call, forwarded unchanged as an extra argument	^\s*uVar9\ =\ 0;$	+1
+use	TPPStreamCompiler__equalOperands	uVar9	leftoverArgTmp	INFERRED	register value left over from an earlier call, forwarded unchanged as an extra argument	^\s*\(\(int\ \(\*\)\(\)\)TPPStreamCompiler__getOperandAsSourceVar\)\(\(unsigned\ char\ \*\)\&local_80,this,local_68\[1\],a3,iVar18,in_r8,local_80,uVar9\);$	+1
+use	TPPStreamCompiler__equalOperands	uVar9	leftoverArgTmp	INFERRED	register value left over from an earlier call, forwarded unchanged as an extra argument	^\s*uVar9\ =\ extraout_r4;$	+1
+use	TPPStreamCompiler__equalOperands	uVar9	leftoverArgTmp	INFERRED	register value left over from an earlier call, forwarded unchanged as an extra argument	^\s*uVar9\ =\ extraout_r4_00;$	+1
+use	TPPStreamCompiler__equalOperands	uVar9	leftoverArgTmp	INFERRED	register value left over from an earlier call, forwarded unchanged as an extra argument	^\s*uVar19\ =\ CONCAT44\(local_70\[0\],uVar9\);$	+1
+use	TPPStreamCompiler__assignOperands	iVar12	allowCopyPropagationArg	CONFIRMED	copy of allowCopyPropagation forwarded as the 4th argument of the getOperandAs*Var calls	^\s*iVar12\ =\ param_4;$	+1
+use	TPPStreamCompiler__assignOperands	iVar12	allowCopyPropagationArg	CONFIRMED	copy of allowCopyPropagation forwarded as the 4th argument of the getOperandAs*Var calls	^\s*\(a0,pPVar7,ppPVar9,iVar12,in_r7,in_r8,local_60\[iVar11\]\);$	+1
+use	TPPStreamCompiler__assignOperands	iVar12	allowCopyPropagationArg	CONFIRMED	copy of allowCopyPropagation forwarded as the 4th argument of the getOperandAs*Var calls	^\s*iVar12\ =\ a1;$	+1
+use	TPPStreamCompiler__assignOperands	iVar12	allowCopyPropagationArg	CONFIRMED	copy of allowCopyPropagation forwarded as the 4th argument of the getOperandAs*Var calls	^\s*iVar12\ =\ param_4;$@2	+1
+use	TPPStreamCompiler__assignOperands	iVar12	allowCopyPropagationArg	CONFIRMED	copy of allowCopyPropagation forwarded as the 4th argument of the getOperandAs*Var calls	^\s*\(\(int\ \(\*\)\(\)\)TPPStreamCompiler__getOperandAsDestVar\)\(\(unsigned\ char\ \*\)\&local_c0,this,\*param_2,iVar12,in_r7,in_r8\);$	+1
+use	TPPStreamCompiler__assignOperands	iVar12	allowCopyPropagationArg	CONFIRMED	copy of allowCopyPropagation forwarded as the 4th argument of the getOperandAs*Var calls	^\s*\(\(int\ \(\*\)\(\)\)TPPStreamCompiler__getOperandAsSourceVar\)\(\(unsigned\ char\ \*\)\&local_c0,this,\*param_3,iVar12,in_r7,in_r8,in_r9,in_r10\)$	+1
+use	TPPStreamCompiler__assignOperands	iVar12	destEqualsSourceResult	CONFIRMED	duplicateDestinationSource result: non-zero when the move is redundant and not emitted	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)TPPStreamCompiler__duplicateDestinationSource\)\(this,local_a8,local_a4,local_a0,local_9c\);$	+5
+use	TPPStreamCompiler__assignOperands	pPVar7	operandSlot0Arg	INFERRED	operandSlots[0] passed as the second argument of the field-name vtable call	^\s*pPVar7\ =\ local_60\[0\];$	+1
+use	TPPStreamCompiler__assignOperands	pPVar7	operandSlot0Arg	INFERRED	operandSlots[0] passed as the second argument of the field-name vtable call	^\s*\(a0,pPVar7,ppPVar9,iVar12,in_r7,in_r8,local_60\[iVar11\]\);$	+1
+use	TPPStreamCompiler__assignOperands	pPVar7	operandSlot0Arg	INFERRED	operandSlots[0] passed as the second argument of the field-name vtable call	^\s*pPVar7\ =\ extraout_r4;$	+1
+use	TPPStreamCompiler__assignOperands	pPVar7	operandSlot0Arg	INFERRED	operandSlots[0] passed as the second argument of the field-name vtable call	^\s*pPVar7\ =\ extraout_r4_00;$	+1
+use	TPPStreamCompiler__assignOperands	pPVar7	operandSlot0Arg	INFERRED	operandSlots[0] passed as the second argument of the field-name vtable call	^\s*pPVar7\ =\ extraout_r4_01;$	+1
+use	TPPStreamCompiler__assignOperands	pPVar7	operandSlot0Arg	INFERRED	operandSlots[0] passed as the second argument of the field-name vtable call	^\s*pPVar7\ =\ extraout_r4_02;$	+1
+use	TPPStreamCompiler__assignOperands	pPVar7	operandSlot0Arg	INFERRED	operandSlots[0] passed as the second argument of the field-name vtable call	^\s*pPVar7\ =\ extraout_r4_03;$	+1
+local	TPPStreamCompiler__assignOperands	ppPVar9	operandPtrArg	INFERRED	pointer forwarded as the 3rd call argument: parseOperand2 first, later the address of a child operand slot
+local	TPPStreamCompiler__constructReplicate	param_4	forwardedArg4	INFERRED	extra 4th register argument of the original call, forwarded unchanged to getOperandAs*Var
+local	TPPStreamCompiler__constructDiagonal	param_4	forwardedArg4	INFERRED	extra 4th register argument of the original call, forwarded to getOperandAs*Var and cleared before AddOperation
+local	TPPStreamCompiler__constructElement	param_4	argCountThenLeftover	INFERRED	number of constructor arguments on entry; later reused as a leftover register value (0x8b56, 0) forwarded to calls
+use	TPPStreamCompiler__constructElement	uVar7	leftoverCopy	INFERRED	copy of the leftover register in_r8 kept across the move path	^\s*uVar7\ =\ in_r8;$	+1
+use	TPPStreamCompiler__constructElement	uVar7	leftoverCopy	INFERRED	copy of the leftover register in_r8 kept across the move path	^\s*\(\(int\ \(\*\)\(\)\)TPPStreamCompiler__getOperandAsDestVar\)\(\(unsigned\ char\ \*\)\&local_70,this,\*param_2,param_4,in_r7,uVar7\);$	+1
+use	TPPStreamCompiler__constructElement	uVar7	leftoverCopy	INFERRED	copy of the leftover register in_r8 kept across the move path	^\s*\(\(int\ \(\*\)\(\)\)TPPStreamCompiler__getOperandAsSourceVar\)\(\(unsigned\ char\ \*\)\&local_70,this,\*\(undefined4\ \*\)\(iVar17\ \+\ \(int\)param_3\),param_4$	+2
+use	TPPStreamCompiler__constructElement	uVar7	leftoverCopy	INFERRED	copy of the leftover register in_r8 kept across the move path	^\s*in_r8\ =\ uVar7;$	+5
+use	TPPStreamCompiler__constructElement	uVar7	leftoverCopy	INFERRED	copy of the leftover register in_r8 kept across the move path	^\s*uVar7\ =\ in_r8;$@2	+1
+local	TPPStreamCompiler__constructElement	uVar8	leftoverArg7	INFERRED	register value left over from an earlier call, forwarded unchanged as an extra argument
+local	TPPStreamCompiler__constructFromOperand	local_54	terminatorGlobalBase	INFERRED	constant base (-0x58488c94) of the address of the global terminator character written after each field name
+use	TPPStreamCompiler__getOperandAsSourceVar	uVar5	leftoverArg7	INFERRED	register value left over from an earlier call, forwarded unchanged as an extra argument	^\s*uVar5\ =\ 4;$	+1
+use	TPPStreamCompiler__getOperandAsSourceVar	uVar5	leftoverArg7	INFERRED	register value left over from an earlier call, forwarded unchanged as an extra argument	^\s*error\(param_2,\(char\ \*\)0x1,\(char\ \*\)0x0,DAT_a7b7bd14,param_5,param_6,uVar5,param_8\);$	+1
+local	TPPStreamCompiler__copyPropagateCompilerTemp	puVar20	scratchPtrOrWord	INFERRED	register temp reused for the move destination w-mask bit, the move source stream type, move source word 0 and the pending-mask cursor (one def-use web, so the gate does not allow a split)
+local	TPPStreamCompiler__copyPropagateCompilerTemp	uVar19	streamOrLeftover	INFERRED	compiler +0x70 stream pointer, later reused as a leftover register value passed to the warning call (one web)
+local	TPPStreamCompiler__parseIntermediateTree	iVar1	queueSizeOrEmptyFlag	INFERRED	size() of the label queue while it is drained, then the ParseFunctionStack empty flag
