@@ -1247,327 +1247,332 @@ int _PPParserReturnCharacter(parser, outChar)
 int _PPParserParseStatement(parser)
   int parser;
 {
+  int keywordCompare;
+  int longShortMode;
+  int optionCompare;
+  int labelStatus;
+  int partLength;
   int ppParserExpandMacroResult;
   int ppParserScopeFindMacroResult;
   int ppParserParseOperationResult;
   int length;
   int compareResult;
-  int iVar1;
-  int iVar2;
+  int opcode;
+  int declStatusOrMnemonic;
   int length2;
-  undefined4 uVar4;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 uVar7;
+  undefined4 precision;
+  undefined4 updateCC;
+  undefined4 saturate;
+  undefined4 ccRegister;
   undefined4 leftoverR9;
   uint uVar8;
-  int iVar9;
+  int tableTier;
   int *opsList;
-  undefined1 auStack_140 [256];
-  char acStack_40 [20];
+  undefined1 partBuf [256];
+  char suffixedName [20];
   
-  iVar1 = ((int (*)())_PPParserGetPart)(parser,auStack_140,0);
-  iVar9 = 0;
-  if (iVar1 == 0) {
+  partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+  longShortMode = 0;
+  if (partLength == 0) {
     return 1;
   }
   if ((*(uint *)(parser + 0x48c) & 0x22) != 0) {
-    compareResult = _memcmp(auStack_140,"LONG",5);
+    compareResult = _memcmp(partBuf,"LONG",5);
     if (compareResult == 0) {
-      iVar9 = 1;
+      longShortMode = 1;
     }
     else {
-      compareResult = _memcmp(auStack_140,"SHORT",6);
+      compareResult = _memcmp(partBuf,"SHORT",6);
       if (compareResult != 0) goto LAB_97b7db80;
-      iVar9 = 2;
+      longShortMode = 2;
     }
-    iVar1 = ((int (*)())_PPParserGetPart)(parser,auStack_140,0);
-    if (iVar1 == 0) {
+    partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+    if (partLength == 0) {
       return 1;
     }
   }
 LAB_97b7db80:
-  compareResult = _memcmp(auStack_140,"TEMP",5);
+  compareResult = _memcmp(partBuf,"TEMP",5);
   if (compareResult == 0) {
-    iVar2 = _PPParserParseTempDeclaration(parser,iVar9);
+    declStatusOrMnemonic = _PPParserParseTempDeclaration(parser,longShortMode);
   }
   else {
-    compareResult = _memcmp(auStack_140,"OUTPUT",7);
+    compareResult = _memcmp(partBuf,"OUTPUT",7);
     if (compareResult == 0) {
-      iVar2 = ((int (*)())_PPParserParseOutputDeclaration)(parser,iVar9);
+      declStatusOrMnemonic = ((int (*)())_PPParserParseOutputDeclaration)(parser,longShortMode);
     }
     else {
-      iVar2 = 0x2a;
-      if (iVar9 == 0) {
+      declStatusOrMnemonic = 0x2a;
+      if (longShortMode == 0) {
         uVar8 = *(uint *)(parser + 0x48c);
-        if (((uVar8 & 2) == 0) && (iVar9 = _memcmp(auStack_140,"ADDRESS",8), iVar9 == 0)) {
-          iVar2 = _PPParserParseAddressDeclaration(parser);
+        if (((uVar8 & 2) == 0) && (keywordCompare = _memcmp(partBuf,"ADDRESS",8), keywordCompare == 0)) {
+          declStatusOrMnemonic = _PPParserParseAddressDeclaration(parser);
         }
         else {
-          iVar9 = _memcmp(auStack_140,"PARAM",6);
-          if (iVar9 == 0) {
-            iVar2 = ((int (*)())_PPParserParseParameterDeclaration)(parser);
+          keywordCompare = _memcmp(partBuf,"PARAM",6);
+          if (keywordCompare == 0) {
+            declStatusOrMnemonic = ((int (*)())_PPParserParseParameterDeclaration)(parser);
           }
           else {
-            iVar9 = _memcmp(auStack_140,"ATTRIB",7);
-            if (iVar9 == 0) {
-              iVar2 = ((int (*)())_PPParserParseAttributeDeclaration)(parser);
+            keywordCompare = _memcmp(partBuf,"ATTRIB",7);
+            if (keywordCompare == 0) {
+              declStatusOrMnemonic = ((int (*)())_PPParserParseAttributeDeclaration)(parser);
             }
             else {
-              iVar9 = _memcmp(auStack_140,"ALIAS",6);
-              if (iVar9 == 0) {
-                iVar2 = _PPParserParseAliasDeclaration(parser);
+              keywordCompare = _memcmp(partBuf,"ALIAS",6);
+              if (keywordCompare == 0) {
+                declStatusOrMnemonic = _PPParserParseAliasDeclaration(parser);
               }
               else {
-                iVar9 = _memcmp(auStack_140,"MACRO",6);
-                if (iVar9 == 0) {
-                  iVar2 = _PPParserParseMacroDeclaration(parser);
+                keywordCompare = _memcmp(partBuf,"MACRO",6);
+                if (keywordCompare == 0) {
+                  declStatusOrMnemonic = _PPParserParseMacroDeclaration(parser);
                 }
                 else {
-                  iVar9 = _memcmp(auStack_140,"BLOCK",6);
-                  if (iVar9 != 0) {
+                  keywordCompare = _memcmp(partBuf,"BLOCK",6);
+                  if (keywordCompare != 0) {
                     if ((uVar8 & 2) == 0) {
                       opsList = &_OpsList_ARBvp10;
                     }
                     else {
                       opsList = &_OpsList_ARBfp10;
                     }
-                    iVar9 = 0;
+                    tableTier = 0;
                     do {
-                      iVar2 = *opsList;
-                      if (iVar2 != 0) {
+                      declStatusOrMnemonic = *opsList;
+                      if (declStatusOrMnemonic != 0) {
                         do {
-                          compareResult = _strcmp(auStack_140,iVar2);
+                          compareResult = _strcmp(partBuf,declStatusOrMnemonic);
                           if (compareResult == 0) {
-                            iVar1 = opsList[1];
-                            uVar4 = 0;
+                            opcode = opsList[1];
+                            precision = 0;
                             goto LAB_97b7e2b0;
                           }
                           uVar8 = *(uint *)(parser + 0x48c);
                           if ((uVar8 & 0x10) != 0) {
-                            _sprintf(acStack_40,"%sC",*opsList);
-                            compareResult = _strcmp(auStack_140,acStack_40);
+                            _sprintf(suffixedName,"%sC",*opsList);
+                            compareResult = _strcmp(partBuf,suffixedName);
                             if (compareResult != 0) {
                               uVar8 = *(uint *)(parser + 0x48c);
                               if (uVar8 != 0x34) goto LAB_97b7ddc8;
-                              _sprintf(acStack_40,"%sC0",*opsList);
-                              compareResult = _strcmp(auStack_140,acStack_40);
+                              _sprintf(suffixedName,"%sC0",*opsList);
+                              compareResult = _strcmp(partBuf,suffixedName);
                               if (compareResult == 0) goto LAB_97b7e228;
-                              _sprintf(acStack_40,"%sC1",*opsList);
-                              compareResult = _strcmp(auStack_140,acStack_40);
+                              _sprintf(suffixedName,"%sC1",*opsList);
+                              compareResult = _strcmp(partBuf,suffixedName);
                               if (compareResult != 0) {
                                 uVar8 = *(uint *)(parser + 0x48c);
                                 goto LAB_97b7ddc8;
                               }
-                              iVar1 = opsList[1];
-                              uVar6 = 0;
+                              opcode = opsList[1];
+                              saturate = 0;
 LAB_97b7e28c:
-                              uVar5 = 1;
-                              uVar4 = 0;
-                              uVar7 = 1;
+                              updateCC = 1;
+                              precision = 0;
+                              ccRegister = 1;
                               goto LAB_97b7e334;
                             }
 LAB_97b7e228:
-                            iVar1 = opsList[1];
-                            uVar4 = 0;
+                            opcode = opsList[1];
+                            precision = 0;
                             goto LAB_97b7e234;
                           }
 LAB_97b7ddc8:
                           if ((uVar8 & 2) != 0) {
-                            _sprintf(acStack_40,"%s_SAT",*opsList);
-                            compareResult = _strcmp(auStack_140,acStack_40);
+                            _sprintf(suffixedName,"%s_SAT",*opsList);
+                            compareResult = _strcmp(partBuf,suffixedName);
                             if (compareResult == 0) {
-                              iVar1 = opsList[1];
-                              uVar4 = 0;
+                              opcode = opsList[1];
+                              precision = 0;
                               goto LAB_97b7e260;
                             }
                             if ((*(uint *)(parser + 0x48c) & 0x10) == 0) goto LAB_97b7e11c;
-                            _sprintf(acStack_40,"%sC_SAT",*opsList);
-                            compareResult = _strcmp(auStack_140,acStack_40);
+                            _sprintf(suffixedName,"%sC_SAT",*opsList);
+                            compareResult = _strcmp(partBuf,suffixedName);
                             if (compareResult == 0) {
 LAB_97b7e268:
-                              iVar1 = opsList[1];
-                              uVar4 = 0;
+                              opcode = opsList[1];
+                              precision = 0;
                               goto LAB_97b7e328;
                             }
                             if (*(int *)(parser + 0x48c) == 0x34) {
-                              _sprintf(acStack_40,"%sC0_SAT",*opsList);
-                              compareResult = _strcmp(auStack_140,acStack_40);
+                              _sprintf(suffixedName,"%sC0_SAT",*opsList);
+                              compareResult = _strcmp(partBuf,suffixedName);
                               if (compareResult == 0) goto LAB_97b7e268;
-                              _sprintf(acStack_40,"%sC1_SAT",*opsList);
-                              compareResult = _strcmp(auStack_140,acStack_40);
+                              _sprintf(suffixedName,"%sC1_SAT",*opsList);
+                              compareResult = _strcmp(partBuf,suffixedName);
                               if (compareResult == 0) {
-                                iVar1 = opsList[1];
-                                uVar6 = 1;
+                                opcode = opsList[1];
+                                saturate = 1;
                                 goto LAB_97b7e28c;
                               }
                             }
-                            length = _strlen(auStack_140);
+                            length = _strlen(partBuf);
                             length2 = _strlen(*opsList);
                             if (length == length2 + 1) {
-                              _sprintf(acStack_40,"%sR",*opsList);
-                              compareResult = _strcmp(auStack_140,acStack_40);
+                              _sprintf(suffixedName,"%sR",*opsList);
+                              compareResult = _strcmp(partBuf,suffixedName);
                               if (compareResult == 0) {
-                                iVar1 = opsList[1];
-                                uVar4 = 1;
+                                opcode = opsList[1];
+                                precision = 1;
                               }
                               else {
-                                _sprintf(acStack_40,"%sH",*opsList);
-                                compareResult = _strcmp(auStack_140,acStack_40);
+                                _sprintf(suffixedName,"%sH",*opsList);
+                                compareResult = _strcmp(partBuf,suffixedName);
                                 if (compareResult == 0) {
-                                  iVar1 = opsList[1];
-                                  uVar4 = 2;
+                                  opcode = opsList[1];
+                                  precision = 2;
                                 }
                                 else {
-                                  _sprintf(acStack_40,"%sX",*opsList);
-                                  compareResult = _strcmp(auStack_140,acStack_40);
+                                  _sprintf(suffixedName,"%sX",*opsList);
+                                  compareResult = _strcmp(partBuf,suffixedName);
                                   if (compareResult != 0) goto LAB_97b7e11c;
-                                  iVar1 = opsList[1];
-                                  uVar4 = 3;
+                                  opcode = opsList[1];
+                                  precision = 3;
                                 }
                               }
 LAB_97b7e2b0:
-                              uVar5 = 0;
+                              updateCC = 0;
 LAB_97b7e2b4:
-                              uVar6 = 0;
+                              saturate = 0;
                             }
                             else {
-                              length = _strlen(auStack_140);
+                              length = _strlen(partBuf);
                               length2 = _strlen(*opsList);
                               if (length == length2 + 2) {
-                                _sprintf(acStack_40,"%sRC",*opsList);
-                                compareResult = _strcmp(auStack_140,acStack_40);
+                                _sprintf(suffixedName,"%sRC",*opsList);
+                                compareResult = _strcmp(partBuf,suffixedName);
                                 if (compareResult == 0) {
-                                  iVar1 = opsList[1];
-                                  uVar4 = 1;
+                                  opcode = opsList[1];
+                                  precision = 1;
                                 }
                                 else {
-                                  _sprintf(acStack_40,"%sHC",*opsList);
-                                  compareResult = _strcmp(auStack_140,acStack_40);
+                                  _sprintf(suffixedName,"%sHC",*opsList);
+                                  compareResult = _strcmp(partBuf,suffixedName);
                                   if (compareResult == 0) {
-                                    iVar1 = opsList[1];
-                                    uVar4 = 2;
+                                    opcode = opsList[1];
+                                    precision = 2;
                                   }
                                   else {
-                                    _sprintf(acStack_40,"%sXC",*opsList);
-                                    compareResult = _strcmp(auStack_140,acStack_40);
+                                    _sprintf(suffixedName,"%sXC",*opsList);
+                                    compareResult = _strcmp(partBuf,suffixedName);
                                     if (compareResult != 0) goto LAB_97b7e11c;
-                                    iVar1 = opsList[1];
-                                    uVar4 = 3;
+                                    opcode = opsList[1];
+                                    precision = 3;
                                   }
                                 }
 LAB_97b7e234:
-                                uVar5 = 1;
+                                updateCC = 1;
                                 goto LAB_97b7e2b4;
                               }
-                              length = _strlen(auStack_140);
+                              length = _strlen(partBuf);
                               length2 = _strlen(*opsList);
                               if (length == length2 + 5) {
-                                _sprintf(acStack_40,"%sR_SAT",*opsList);
-                                compareResult = _strcmp(auStack_140,acStack_40);
+                                _sprintf(suffixedName,"%sR_SAT",*opsList);
+                                compareResult = _strcmp(partBuf,suffixedName);
                                 if (compareResult == 0) {
-                                  iVar1 = opsList[1];
-                                  uVar4 = 1;
+                                  opcode = opsList[1];
+                                  precision = 1;
                                 }
                                 else {
-                                  _sprintf(acStack_40,"%sH_SAT",*opsList);
-                                  compareResult = _strcmp(auStack_140,acStack_40);
+                                  _sprintf(suffixedName,"%sH_SAT",*opsList);
+                                  compareResult = _strcmp(partBuf,suffixedName);
                                   if (compareResult == 0) {
-                                    iVar1 = opsList[1];
-                                    uVar4 = 2;
+                                    opcode = opsList[1];
+                                    precision = 2;
                                   }
                                   else {
-                                    _sprintf(acStack_40,"%sX_SAT",*opsList);
-                                    compareResult = _strcmp(auStack_140,acStack_40);
+                                    _sprintf(suffixedName,"%sX_SAT",*opsList);
+                                    compareResult = _strcmp(partBuf,suffixedName);
                                     if (compareResult != 0) goto LAB_97b7e11c;
-                                    iVar1 = opsList[1];
-                                    uVar4 = 3;
+                                    opcode = opsList[1];
+                                    precision = 3;
                                   }
                                 }
 LAB_97b7e260:
-                                uVar5 = 0;
+                                updateCC = 0;
                               }
                               else {
-                                length = _strlen(auStack_140);
+                                length = _strlen(partBuf);
                                 length2 = _strlen(*opsList);
                                 if (length != length2 + 6) goto LAB_97b7e11c;
-                                _sprintf(acStack_40,"%sRC_SAT",*opsList);
-                                compareResult = _strcmp(auStack_140,acStack_40);
+                                _sprintf(suffixedName,"%sRC_SAT",*opsList);
+                                compareResult = _strcmp(partBuf,suffixedName);
                                 if (compareResult == 0) {
-                                  iVar1 = opsList[1];
-                                  uVar4 = 1;
+                                  opcode = opsList[1];
+                                  precision = 1;
                                 }
                                 else {
-                                  _sprintf(acStack_40,"%sHC_SAT",*opsList);
-                                  compareResult = _strcmp(auStack_140,acStack_40);
+                                  _sprintf(suffixedName,"%sHC_SAT",*opsList);
+                                  compareResult = _strcmp(partBuf,suffixedName);
                                   if (compareResult == 0) {
-                                    iVar1 = opsList[1];
-                                    uVar4 = 2;
+                                    opcode = opsList[1];
+                                    precision = 2;
                                   }
                                   else {
-                                    _sprintf(acStack_40,"%sXC_SAT",*opsList);
-                                    compareResult = _strcmp(auStack_140,acStack_40);
+                                    _sprintf(suffixedName,"%sXC_SAT",*opsList);
+                                    compareResult = _strcmp(partBuf,suffixedName);
                                     if (compareResult != 0) goto LAB_97b7e11c;
-                                    iVar1 = opsList[1];
-                                    uVar4 = 3;
+                                    opcode = opsList[1];
+                                    precision = 3;
                                   }
                                 }
 LAB_97b7e328:
-                                uVar5 = 1;
+                                updateCC = 1;
                               }
-                              uVar6 = 1;
+                              saturate = 1;
                             }
-                            uVar7 = 0;
+                            ccRegister = 0;
 LAB_97b7e334:
-                            ppParserParseOperationResult = ((int (*)())_PPParserParseOperation)(parser,iVar1,uVar4,uVar5,uVar6,uVar7,leftoverR9);
+                            ppParserParseOperationResult = ((int (*)())_PPParserParseOperation)(parser,opcode,precision,updateCC,saturate,ccRegister,leftoverR9);
                             return ppParserParseOperationResult;
                           }
 LAB_97b7e11c:
                           opsList = opsList + 2;
-                          iVar2 = *opsList;
-                        } while (iVar2 != 0);
+                          declStatusOrMnemonic = *opsList;
+                        } while (declStatusOrMnemonic != 0);
                         uVar8 = *(uint *)(parser + 0x48c);
                       }
                       if (uVar8 == 0x34) {
-                        if (iVar9 == 0) {
+                        if (tableTier == 0) {
 LAB_97b7e160:
                           opsList = (int *)&_OpsList_NVvp20;
                         }
                         else {
-                          if (iVar9 != 1) goto LAB_97b7e1b4;
+                          if (tableTier != 1) goto LAB_97b7e1b4;
                           opsList = &_OpsList_NVvp30;
                         }
                       }
                       else {
                         if (uVar8 == 0x31) {
-                          if (iVar9 == 0) goto LAB_97b7e160;
+                          if (tableTier == 0) goto LAB_97b7e160;
                           goto LAB_97b7e1b4;
                         }
                         if (uVar8 == 0x33) {
-                          if (iVar9 != 0) goto LAB_97b7e1b4;
+                          if (tableTier != 0) goto LAB_97b7e1b4;
                         }
                         else {
                           if (uVar8 != 0x36) {
 LAB_97b7e1b4:
                             if (((uVar8 & 0x10) != 0) &&
-                               (iVar1 = _PPParserParseLabel(parser,auStack_140,iVar1), iVar1 != 3))
+                               (labelStatus = _PPParserParseLabel(parser,partBuf,labelStatus), labelStatus != 3))
                             {
-                              return iVar1;
+                              return labelStatus;
                             }
-                            ppParserScopeFindMacroResult = ((int (*)())_PPParserScopeFindMacro)(*(undefined4 *)(parser + 0x44c),auStack_140);
+                            ppParserScopeFindMacroResult = ((int (*)())_PPParserScopeFindMacro)(*(undefined4 *)(parser + 0x44c),partBuf);
                             if (ppParserScopeFindMacroResult != 0) {
                               ppParserExpandMacroResult = _PPParserExpandMacro(parser,ppParserScopeFindMacroResult);
                               return ppParserExpandMacroResult;
                             }
-                            iVar1 = _memcmp(auStack_140,"OPTION",7);
-                            if (iVar1 == 0) {
+                            optionCompare = _memcmp(partBuf,"OPTION",7);
+                            if (optionCompare == 0) {
                               return 8;
                             }
                             ((int (*)())_PPParserReturnPart)(parser);
                             return 6;
                           }
-                          if (iVar9 != 0) {
-                            if (iVar9 == 1) {
+                          if (tableTier != 0) {
+                            if (tableTier == 1) {
                               opsList = (int *)&_OpsList_NVfp20;
                               goto LAB_97b7e1ac;
                             }
@@ -1577,10 +1582,10 @@ LAB_97b7e1b4:
                         opsList = (int *)&_OpsList_NVfp10;
                       }
 LAB_97b7e1ac:
-                      iVar9 = iVar9 + 1;
+                      tableTier = tableTier + 1;
                     } while( true );
                   }
-                  iVar2 = _PPParserParseBlock(parser);
+                  declStatusOrMnemonic = _PPParserParseBlock(parser);
                 }
               }
             }
@@ -1589,7 +1594,7 @@ LAB_97b7e1ac:
       }
     }
   }
-  return iVar2;
+  return declStatusOrMnemonic;
 }
 
 /* _PPParserParseParameterDeclaration @ 0x97b7e35c (372 bytes) */
@@ -1598,286 +1603,286 @@ int _PPParserParseParameterDeclaration(parser)
 {
   int ppParserParseDefaultArrayResult;
   int ppParserScopeAddIdentifierResult;
-  int ppParserIdentifierCreateResult;
+  int identifier;
   int part;
   int ppParserValidateNameResult;
-  int iVar2;
+  int status;
   int part2;
-  undefined4 uVar4;
-  char local_130 [256];
-  undefined4 local_30 [7];
+  undefined4 isArray;
+  char partBuf [256];
+  undefined4 paramBinding [7];
   
-  local_30[0] = 1;
-  part = ((int (*)())_PPParserGetPart)(parser,local_130,0);
-  uVar4 = 0;
-  iVar2 = 0x2d;
+  paramBinding[0] = 1;
+  part = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+  isArray = 0;
+  status = 0x2d;
   if (part != 0) {
-    ppParserValidateNameResult = ((int (*)())_PPParserValidateName)(parser,local_130);
-    iVar2 = 0x12;
+    ppParserValidateNameResult = ((int (*)())_PPParserValidateName)(parser,partBuf);
+    status = 0x12;
     if (ppParserValidateNameResult == 0) {
-      ppParserIdentifierCreateResult = ((int (*)())_PPParserIdentifierCreate)();
-      ((int (*)())_PPParserIdentifierSetName)(ppParserIdentifierCreateResult,local_130);
-      *(undefined4 *)(ppParserIdentifierCreateResult + 0xc) = 2;
-      ppParserScopeAddIdentifierResult = ((int (*)())_PPParserScopeAddIdentifier)(*(undefined4 *)(parser + 0x44c),ppParserIdentifierCreateResult);
+      identifier = ((int (*)())_PPParserIdentifierCreate)();
+      ((int (*)())_PPParserIdentifierSetName)(identifier,partBuf);
+      *(undefined4 *)(identifier + 0xc) = 2;
+      ppParserScopeAddIdentifierResult = ((int (*)())_PPParserScopeAddIdentifier)(*(undefined4 *)(parser + 0x44c),identifier);
       if (ppParserScopeAddIdentifierResult == 0) {
-        part2 = ((int (*)())_PPParserGetPart)(parser,local_130,0);
-        iVar2 = 0x2d;
+        part2 = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+        status = 0x2d;
         if (part2 != 0) {
-          if (local_130[0] == '[') {
+          if (partBuf[0] == '[') {
             ((int (*)())_PPParserReturnPart)(parser);
-            ppParserParseDefaultArrayResult = _PPParserParseDefaultArray(parser,local_30);
+            ppParserParseDefaultArrayResult = _PPParserParseDefaultArray(parser,paramBinding);
             if (ppParserParseDefaultArrayResult != 0) {
               return ppParserParseDefaultArrayResult;
             }
-            *(undefined1 *)(ppParserIdentifierCreateResult + 0x10) = 1;
-            iVar2 = ((int (*)())_PPParserGetPart)(parser,local_130,0);
-            if (iVar2 == 0) {
+            *(undefined1 *)(identifier + 0x10) = 1;
+            status = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+            if (status == 0) {
               return 0x2d;
             }
-            uVar4 = 1;
+            isArray = 1;
           }
-          iVar2 = 10;
-          if (local_130[0] == '=') {
-            *(undefined4 *)(ppParserIdentifierCreateResult + 8) = *(undefined4 *)(parser + 0x20);
-            iVar2 = ((int (*)())_PPParserParseParamBinding)(parser,uVar4,local_30);
-            if (iVar2 == 0) {
-              *(undefined4 *)(ppParserIdentifierCreateResult + 4) = local_30[0];
-              part = ((int (*)())_PPParserGetPart)(parser,local_130,0);
-              iVar2 = 0x2d;
-              if ((part != 0) && (iVar2 = 10, local_130[0] == ';')) {
-                iVar2 = 0;
+          status = 10;
+          if (partBuf[0] == '=') {
+            *(undefined4 *)(identifier + 8) = *(undefined4 *)(parser + 0x20);
+            status = ((int (*)())_PPParserParseParamBinding)(parser,isArray,paramBinding);
+            if (status == 0) {
+              *(undefined4 *)(identifier + 4) = paramBinding[0];
+              part = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+              status = 0x2d;
+              if ((part != 0) && (status = 10, partBuf[0] == ';')) {
+                status = 0;
               }
             }
           }
         }
       }
       else {
-        _PPParserIdentifierFree(ppParserIdentifierCreateResult);
-        iVar2 = 0x1c;
+        _PPParserIdentifierFree(identifier);
+        status = 0x1c;
       }
     }
   }
-  return iVar2;
+  return status;
 }
 
 /* _PPParserValidateName @ 0x97b7e4d0 (1360 bytes) */
-int _PPParserValidateName(parser, param_2)
+int _PPParserValidateName(parser, name)
   int parser;
-  undefined4 param_2;
+  undefined4 name;
 {
   int loopIndex;
   int length;
   int compareResult;
-  int length3;
+  int nameLength;
   int compareResult2;
-  int iVar1;
-  int iVar2;
-  uint uVar3;
+  int reservedWord;
+  int mnemonic;
+  uint profile;
   int length2;
-  char *pcVar5;
-  int *piVar6;
-  char acStack_30 [24];
+  char *suffixFormat;
+  int *tableEntry;
+  char suffixedName [24];
   
   if ((*(uint *)(parser + 0x48c) & 2) == 0) {
-    piVar6 = &_vpDclList;
+    tableEntry = &_vpDclList;
   }
   else {
-    piVar6 = &_fpDclList;
+    tableEntry = &_fpDclList;
   }
-  iVar1 = *piVar6;
-  while (iVar1 != 0) {
-    compareResult2 = _strcmp(param_2,iVar1);
+  reservedWord = *tableEntry;
+  while (reservedWord != 0) {
+    compareResult2 = _strcmp(name,reservedWord);
     if (compareResult2 == 0) {
       return 0x12;
     }
-    piVar6 = piVar6 + 2;
-    iVar1 = *piVar6;
+    tableEntry = tableEntry + 2;
+    reservedWord = *tableEntry;
   }
-  length3 = _strlen(param_2);
-  uVar3 = *(uint *)(parser + 0x48c);
-  if ((((uVar3 == 0) || (uVar3 == 2)) && (1 < length3 - 3U)) && ((length3 != 7 && (length3 != 8)))) {
+  nameLength = _strlen(name);
+  profile = *(uint *)(parser + 0x48c);
+  if ((((profile == 0) || (profile == 2)) && (1 < nameLength - 3U)) && ((nameLength != 7 && (nameLength != 8)))) {
     return 0;
   }
-  if ((uVar3 & 2) == 0) {
-    piVar6 = &_OpsList_ARBvp10;
+  if ((profile & 2) == 0) {
+    tableEntry = &_OpsList_ARBvp10;
   }
   else {
-    piVar6 = &_OpsList_ARBfp10;
+    tableEntry = &_OpsList_ARBfp10;
   }
   loopIndex = 0;
   do {
-    iVar2 = *piVar6;
-    if (iVar2 != 0) {
+    mnemonic = *tableEntry;
+    if (mnemonic != 0) {
       do {
-        compareResult = _strcmp(param_2,iVar2);
+        compareResult = _strcmp(name,mnemonic);
         if (compareResult == 0) {
           return 0x12;
         }
-        uVar3 = *(uint *)(parser + 0x48c);
-        if ((uVar3 & 0x10) != 0) {
-          _sprintf(acStack_30,"%sC",*piVar6);
-          compareResult = _strcmp(param_2,acStack_30);
+        profile = *(uint *)(parser + 0x48c);
+        if ((profile & 0x10) != 0) {
+          _sprintf(suffixedName,"%sC",*tableEntry);
+          compareResult = _strcmp(name,suffixedName);
           if (compareResult == 0) {
             return 0x12;
           }
-          uVar3 = *(uint *)(parser + 0x48c);
-          if (uVar3 == 0x34) {
-            _sprintf(acStack_30,"%sC0",*piVar6);
-            compareResult = _strcmp(param_2,acStack_30);
+          profile = *(uint *)(parser + 0x48c);
+          if (profile == 0x34) {
+            _sprintf(suffixedName,"%sC0",*tableEntry);
+            compareResult = _strcmp(name,suffixedName);
             if (compareResult == 0) {
               return 0x12;
             }
-            _sprintf(acStack_30,"%sC1",*piVar6);
-            compareResult = _strcmp(param_2,acStack_30);
+            _sprintf(suffixedName,"%sC1",*tableEntry);
+            compareResult = _strcmp(name,suffixedName);
             if (compareResult == 0) {
               return 0x12;
             }
-            uVar3 = *(uint *)(parser + 0x48c);
+            profile = *(uint *)(parser + 0x48c);
           }
         }
-        if ((uVar3 & 2) != 0) {
-          _sprintf(acStack_30,"%s_SAT",*piVar6);
-          compareResult = _strcmp(param_2,acStack_30);
+        if ((profile & 2) != 0) {
+          _sprintf(suffixedName,"%s_SAT",*tableEntry);
+          compareResult = _strcmp(name,suffixedName);
           if (compareResult == 0) {
             return 0x12;
           }
           if ((*(uint *)(parser + 0x48c) & 0x10) != 0) {
-            _sprintf(acStack_30,"%sC_SAT",*piVar6);
-            compareResult = _strcmp(param_2,acStack_30);
+            _sprintf(suffixedName,"%sC_SAT",*tableEntry);
+            compareResult = _strcmp(name,suffixedName);
             if (compareResult == 0) {
               return 0x12;
             }
             if (*(int *)(parser + 0x48c) == 0x34) {
-              _sprintf(acStack_30,"%sC0_SAT",*piVar6);
-              compareResult = _strcmp(param_2,acStack_30);
+              _sprintf(suffixedName,"%sC0_SAT",*tableEntry);
+              compareResult = _strcmp(name,suffixedName);
               if (compareResult == 0) {
                 return 0x12;
               }
-              _sprintf(acStack_30,"%sC1_SAT",*piVar6);
-              compareResult = _strcmp(param_2,acStack_30);
+              _sprintf(suffixedName,"%sC1_SAT",*tableEntry);
+              compareResult = _strcmp(name,suffixedName);
               if (compareResult == 0) {
                 return 0x12;
               }
             }
-            length = _strlen(param_2);
-            length2 = _strlen(*piVar6);
+            length = _strlen(name);
+            length2 = _strlen(*tableEntry);
             if (length == length2 + 1) {
-              _sprintf(acStack_30,"%sR",*piVar6);
-              compareResult = _strcmp(param_2,acStack_30);
+              _sprintf(suffixedName,"%sR",*tableEntry);
+              compareResult = _strcmp(name,suffixedName);
               if (compareResult == 0) {
                 return 0x12;
               }
-              _sprintf(acStack_30,"%sH",*piVar6);
-              compareResult = _strcmp(param_2,acStack_30);
+              _sprintf(suffixedName,"%sH",*tableEntry);
+              compareResult = _strcmp(name,suffixedName);
               if (compareResult == 0) {
                 return 0x12;
               }
-              iVar2 = *piVar6;
-              pcVar5 = "%sX";
+              mnemonic = *tableEntry;
+              suffixFormat = "%sX";
             }
             else {
-              length = _strlen(param_2);
-              length2 = _strlen(*piVar6);
+              length = _strlen(name);
+              length2 = _strlen(*tableEntry);
               if (length == length2 + 2) {
-                _sprintf(acStack_30,"%sRC",*piVar6);
-                compareResult = _strcmp(param_2,acStack_30);
+                _sprintf(suffixedName,"%sRC",*tableEntry);
+                compareResult = _strcmp(name,suffixedName);
                 if (compareResult == 0) {
                   return 0x12;
                 }
-                _sprintf(acStack_30,"%sHC",*piVar6);
-                compareResult = _strcmp(param_2,acStack_30);
+                _sprintf(suffixedName,"%sHC",*tableEntry);
+                compareResult = _strcmp(name,suffixedName);
                 if (compareResult == 0) {
                   return 0x12;
                 }
-                iVar2 = *piVar6;
-                pcVar5 = "%sXC";
+                mnemonic = *tableEntry;
+                suffixFormat = "%sXC";
               }
               else {
-                length = _strlen(param_2);
-                length2 = _strlen(*piVar6);
+                length = _strlen(name);
+                length2 = _strlen(*tableEntry);
                 if (length == length2 + 5) {
-                  _sprintf(acStack_30,"%sR_SAT",*piVar6);
-                  compareResult = _strcmp(param_2,acStack_30);
+                  _sprintf(suffixedName,"%sR_SAT",*tableEntry);
+                  compareResult = _strcmp(name,suffixedName);
                   if (compareResult == 0) {
                     return 0x12;
                   }
-                  _sprintf(acStack_30,"%sH_SAT",*piVar6);
-                  compareResult = _strcmp(param_2,acStack_30);
+                  _sprintf(suffixedName,"%sH_SAT",*tableEntry);
+                  compareResult = _strcmp(name,suffixedName);
                   if (compareResult == 0) {
                     return 0x12;
                   }
-                  iVar2 = *piVar6;
-                  pcVar5 = "%sX_SAT";
+                  mnemonic = *tableEntry;
+                  suffixFormat = "%sX_SAT";
                 }
                 else {
-                  length = _strlen(param_2);
-                  length2 = _strlen(*piVar6);
+                  length = _strlen(name);
+                  length2 = _strlen(*tableEntry);
                   if (length != length2 + 6) goto LAB_97b7e970;
-                  _sprintf(acStack_30,"%sRC_SAT",*piVar6);
-                  compareResult = _strcmp(param_2,acStack_30);
+                  _sprintf(suffixedName,"%sRC_SAT",*tableEntry);
+                  compareResult = _strcmp(name,suffixedName);
                   if (compareResult == 0) {
                     return 0x12;
                   }
-                  _sprintf(acStack_30,"%sHC_SAT",*piVar6);
-                  compareResult = _strcmp(param_2,acStack_30);
+                  _sprintf(suffixedName,"%sHC_SAT",*tableEntry);
+                  compareResult = _strcmp(name,suffixedName);
                   if (compareResult == 0) {
                     return 0x12;
                   }
-                  iVar2 = *piVar6;
-                  pcVar5 = "%sXC_SAT";
+                  mnemonic = *tableEntry;
+                  suffixFormat = "%sXC_SAT";
                 }
               }
             }
-            _sprintf(acStack_30,pcVar5,iVar2);
-            compareResult = _strcmp(param_2,acStack_30);
+            _sprintf(suffixedName,suffixFormat,mnemonic);
+            compareResult = _strcmp(name,suffixedName);
             if (compareResult == 0) {
               return 0x12;
             }
           }
         }
 LAB_97b7e970:
-        piVar6 = piVar6 + 2;
-        iVar2 = *piVar6;
-      } while (iVar2 != 0);
-      uVar3 = *(uint *)(parser + 0x48c);
+        tableEntry = tableEntry + 2;
+        mnemonic = *tableEntry;
+      } while (mnemonic != 0);
+      profile = *(uint *)(parser + 0x48c);
     }
-    if (uVar3 == 0x34) {
+    if (profile == 0x34) {
       if (loopIndex == 0) {
 LAB_97b7e9b4:
-        piVar6 = (int *)&_OpsList_NVvp20;
+        tableEntry = (int *)&_OpsList_NVvp20;
       }
       else {
         if (loopIndex != 1) {
           return 0;
         }
-        piVar6 = &_OpsList_NVvp30;
+        tableEntry = &_OpsList_NVvp30;
       }
     }
     else {
-      if (uVar3 == 0x31) {
+      if (profile == 0x31) {
         if (loopIndex != 0) {
           return 0;
         }
         goto LAB_97b7e9b4;
       }
-      if (uVar3 == 0x33) {
+      if (profile == 0x33) {
         if (loopIndex != 0) {
           return 0;
         }
       }
       else {
-        if (uVar3 != 0x36) {
+        if (profile != 0x36) {
           return 0;
         }
         if (loopIndex != 0) {
           if (loopIndex != 1) {
             return 0;
           }
-          piVar6 = (int *)&_OpsList_NVfp20;
+          tableEntry = (int *)&_OpsList_NVfp20;
           goto LAB_97b7ea00;
         }
       }
-      piVar6 = (int *)&_OpsList_NVfp10;
+      tableEntry = (int *)&_OpsList_NVfp10;
     }
 LAB_97b7ea00:
     loopIndex = loopIndex + 1;
@@ -1887,79 +1892,79 @@ LAB_97b7ea00:
 /* _PPParserIdentifierCreate @ 0x97b7ea20 (48 bytes) */
 int _PPParserIdentifierCreate()
 {
-  int allocation;
+  int identifier;
   
-  allocation = _calloc(0x24,1);
-  *(undefined4 *)(allocation + 4) = 1;
-  return allocation;
+  identifier = _calloc(0x24,1);
+  *(undefined4 *)(identifier + 4) = 1;
+  return identifier;
 }
 
 /* _PPParserIdentifierSetName @ 0x97b7ea50 (124 bytes) */
-int _PPParserIdentifierSetName(parser, param_2)
-  int *parser;
-  int param_2;
+int _PPParserIdentifierSetName(identifier, name)
+  int *identifier;
+  int name;
 {
   int length;
-  int allocation;
+  int nameCopy;
   
-  if (*parser != 0) {
-    _free(*parser);
-    *parser = 0;
+  if (*identifier != 0) {
+    _free(*identifier);
+    *identifier = 0;
   }
-  if (param_2 != 0) {
-    length = _strlen(param_2);
-    allocation = _calloc(length + 1,1);
-    *parser = allocation;
-    _memmove(allocation,param_2,length);
+  if (name != 0) {
+    length = _strlen(name);
+    nameCopy = _calloc(length + 1,1);
+    *identifier = nameCopy;
+    _memmove(nameCopy,name,length);
   }
-  return param_2 == 0;
+  return name == 0;
 }
 
 /* _PPParserScopeAddIdentifier @ 0x97b7eacc (124 bytes) */
-int _PPParserScopeAddIdentifier(parser, param_2)
-  int *parser;
-  undefined4 *param_2;
+int _PPParserScopeAddIdentifier(scope, identifier)
+  int *scope;
+  undefined4 *identifier;
 {
-  undefined4 *puVar1;
+  undefined4 *firstIdentifier;
   int ppParserScopeFindIdentifierResult;
-  undefined4 uVar3;
+  undefined4 status;
   
-  ppParserScopeFindIdentifierResult = ((int (*)())_PPParserScopeFindIdentifier)(parser,*param_2);
-  uVar3 = 1;
+  ppParserScopeFindIdentifierResult = ((int (*)())_PPParserScopeFindIdentifier)(scope,*identifier);
+  status = 1;
   if (ppParserScopeFindIdentifierResult == 0) {
-    puVar1 = (undefined4 *)*parser;
-    if ((undefined4 *)*parser == (undefined4 *)0x0) {
-      puVar1 = param_2;
+    firstIdentifier = (undefined4 *)*scope;
+    if ((undefined4 *)*scope == (undefined4 *)0x0) {
+      firstIdentifier = identifier;
     }
-    *parser = (int)puVar1;
-    if (parser[1] != 0) {
-      *(undefined4 **)(parser[1] + 0x20) = param_2;
-      param_2[7] = parser[1];
+    *scope = (int)firstIdentifier;
+    if (scope[1] != 0) {
+      *(undefined4 **)(scope[1] + 0x20) = identifier;
+      identifier[7] = scope[1];
     }
-    uVar3 = 0;
-    parser[1] = (int)param_2;
-    param_2[6] = parser[6];
+    status = 0;
+    scope[1] = (int)identifier;
+    identifier[6] = scope[6];
   }
-  return uVar3;
+  return status;
 }
 
 /* _PPParserScopeFindIdentifier @ 0x97b7eb48 (100 bytes) */
-int _PPParserScopeFindIdentifier(parser, param_2)
-  int *parser;
-  undefined4 param_2;
+int _PPParserScopeFindIdentifier(scope, name)
+  int *scope;
+  undefined4 name;
 {
   int iVar1;
-  int *piVar2;
+  int *identifier;
   
-  piVar2 = (int *)*parser;
+  identifier = (int *)*scope;
   while( true ) {
-    if (piVar2 == (int *)0x0) {
+    if (identifier == (int *)0x0) {
       return (int *)0x0;
     }
-    if ((*piVar2 != 0) && (iVar1 = _strcmp(*piVar2,param_2), iVar1 == 0)) break;
-    piVar2 = (int *)piVar2[8];
+    if ((*identifier != 0) && (iVar1 = _strcmp(*identifier,name), iVar1 == 0)) break;
+    identifier = (int *)identifier[8];
   }
-  return piVar2;
+  return identifier;
 }
 
 /* _PPParserParseParamBinding @ 0x97b7ebac (5900 bytes) */

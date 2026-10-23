@@ -36,7 +36,7 @@ use	_PPParserParseStatement	iVar2	compareResult	INFERRED	every definition is the
 use	_PPParserParseStatement	iVar3	length2	INFERRED	every definition is the result of a call whose name says it returns this	#140	+87	all	all
 use	_PPParserValidateName	iVar1	compareResult2	INFERRED	every definition is the result of a call whose name says it returns this	#10	+0	lhs	lhs
 use	_PPParserValidateName	iVar1	compareResult2	INFERRED	every definition is the result of a call whose name says it returns this	#11	+0	all	all
-use	_PPParserValidateName	iVar1	length3	INFERRED	every definition is the result of a call whose name says it returns this	#17	+2	all	all
+use	_PPParserValidateName	iVar1	nameLength	INFERRED	every definition is the result of a call whose name says it returns this	#17	+2	all	all
 use	_PPParserValidateName	iVar2	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#33	+0	lhs	lhs
 use	_PPParserValidateName	iVar2	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#34	+45	all	all
 use	_PPParserValidateName	iVar2	length	INFERRED	every definition is the result of a call whose name says it returns this	#83	+2	all	all
@@ -49,9 +49,9 @@ use	_PPParserValidateName	iVar2	length	INFERRED	every definition is the result o
 use	_PPParserValidateName	iVar2	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#138	+6	all	all
 use	_PPParserValidateName	iVar2	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#153	+1	all	all
 use	_PPParserValidateName	iVar4	length2	INFERRED	every definition is the result of a call whose name says it returns this	#84	+52	all	all
-use	_PPParserIdentifierCreate	iVar1	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+2	all	all
+use	_PPParserIdentifierCreate	iVar1	identifier	INFERRED	every definition is the result of a call whose name says it returns this	#0	+2	all	all
 use	_PPParserIdentifierSetName	iVar1	length	INFERRED	every definition is the result of a call whose name says it returns this	#5	+3	all	all
-use	_PPParserIdentifierSetName	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#6	+2	all	all
+use	_PPParserIdentifierSetName	iVar2	nameCopy	INFERRED	every definition is the result of a call whose name says it returns this	#6	+2	all	all
 use	_PPParserParseParamBinding	iVar5	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#43	+1	all	all
 use	_PPParserParseParamBinding	iVar5	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#59	+1	all	all
 use	_PPParserParseParamBinding	iVar5	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#88	+1	all	all

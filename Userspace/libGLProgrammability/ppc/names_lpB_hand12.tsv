@@ -1,0 +1,31 @@
+local	_PPParserParseStatement	auStack_140	partBuf	CONFIRMED	token text compared with TEMP/OUTPUT/ADDRESS/PARAM/ATTRIB/ALIAS/MACRO/BLOCK or an opcode mnemonic
+local	_PPParserParseStatement	acStack_40	suffixedName	CONFIRMED	sprintf of mnemonic + suffix (C, C0, C1, _SAT, R, H, X, ...)
+local	_PPParserParseStatement	uVar4	precision	INFERRED	instruction precision suffix: 0 none, 1 R, 2 H, 3 X; argument 3 of _PPParserParseOperation
+local	_PPParserParseStatement	uVar5	updateCC	INFERRED	condition-code update (C suffix) flag; argument 4 of _PPParserParseOperation
+local	_PPParserParseStatement	uVar6	saturate	INFERRED	_SAT suffix flag; argument 5 of _PPParserParseOperation
+local	_PPParserParseStatement	uVar7	ccRegister	INFERRED	condition-code register select (C1 suffix = 1); argument 6 of _PPParserParseOperation
+local	_PPParserParseStatement	iVar2	declStatusOrMnemonic	INFERRED	declaration-parser status code, then the mnemonic string of the current opcode-table entry
+use	_PPParserParseStatement	iVar1	partLength	INFERRED	_PPParserGetPart result: length of the statement keyword (0 = end of text)	#0	^LAB_97b7db80:	all	none
+use	_PPParserParseStatement	iVar1	labelStatus	INFERRED	_PPParserParseLabel result (3 = not a label)	iVar1\ =\ _PPParserParseLabel	+3	all	none
+use	_PPParserParseStatement	iVar1	optionCompare	INFERRED	memcmp result of the OPTION keyword check	iVar1\ =\ _memcmp\(auStack_140,"OPTION"	+2	all	none
+use	_PPParserParseStatement	iVar1	opcode	INFERRED	opcode number of the matched table entry (opsList[1]); argument 2 of _PPParserParseOperation	*		all	none
+use	_PPParserParseStatement	iVar9	longShortMode	INFERRED	LONG = 1, SHORT = 2, none = 0 (NV profiles)	#0	iVar9\ =\ _memcmp\(auStack_140,"ADDRESS"	all	none
+use	_PPParserParseStatement	iVar9	keywordCompare	INFERRED	memcmp result of the ADDRESS/PARAM/ATTRIB/ALIAS/MACRO/BLOCK keyword checks	iVar9\ =\ _memcmp\(auStack_140,"ADDRESS"	^\s*iVar9\ =\ 0;	all	none
+use	_PPParserParseStatement	iVar9	tableTier	INFERRED	index of the opcode table tier being searched (base list, then NV vp20/vp30 or fp10/fp20)	*		all	none
+local	_PPParserParseParameterDeclaration	local_130	partBuf	CONFIRMED	token text: the name, then [ or = or ;
+local	_PPParserParseParameterDeclaration	local_30	paramBinding	CONFIRMED	binding record filled by _PPParserParseDefaultArray/_PPParserParseParamBinding; stored at identifier+4
+local	_PPParserParseParameterDeclaration	uVar4	isArray	INFERRED	1 when the declaration has [] (array of bindings)
+local	_PPParserParseParameterDeclaration	iVar2	status	INFERRED	parser status code (0 ok, 10/0x12/0x1c/0x2d errors)
+local	_PPParserValidateName	param_2	name	CONFIRMED	identifier being validated: must not equal a reserved word or an opcode (with suffixes)
+local	_PPParserValidateName	piVar6	tableEntry	INFERRED	cursor over a {string, value} table (declaration keywords, then the opcode lists)
+local	_PPParserValidateName	iVar1	reservedWord	INFERRED	keyword of the current declaration-list entry
+local	_PPParserValidateName	iVar2	mnemonic	INFERRED	mnemonic of the current opcode-list entry
+local	_PPParserValidateName	uVar3	profile	INFERRED	parser->profile flags (+0x48c)
+local	_PPParserValidateName	acStack_30	suffixedName	CONFIRMED	sprintf of mnemonic + suffix compared with name
+local	_PPParserValidateName	pcVar5	suffixFormat	CONFIRMED	"%sX"/"%sXC"/"%sX_SAT"/"%sXC_SAT" format for the final suffix check
+local	_PPParserIdentifierSetName	param_2	name	CONFIRMED	new name (NULL clears)
+local	_PPParserScopeAddIdentifier	param_2	identifier	CONFIRMED	identifier appended to the scope (+0x1c prev, +0x20 next, +0x18 stream)
+local	_PPParserScopeAddIdentifier	puVar1	firstIdentifier	INFERRED	scope->first after the update
+local	_PPParserScopeAddIdentifier	uVar3	status	INFERRED	0 added, 1 an identifier with the same name exists
+local	_PPParserScopeFindIdentifier	param_2	name	CONFIRMED	identifier name searched for
+local	_PPParserScopeFindIdentifier	piVar2	identifier	INFERRED	identifier being compared (next at +0x20)
