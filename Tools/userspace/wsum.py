@@ -7,6 +7,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import find_webs as F
 PH = re.compile(r'\b([a-z]{0,3}Var\d+|local_[0-9a-f]+|param_\d+|in_[a-z0-9]+|[a-z]?Stack_[0-9a-f]+)\b')
 
+LIVE = os.environ.get('LIVE') == '1'
+
 def main():
     d, fn = sys.argv[1:3]
     body, brace = F.load(d, fn)
@@ -26,6 +28,7 @@ def main():
         print('== %s: %d webs%s' % (v, len(w), ' (+ENTRY)' if ent else ''))
         for k in range(len(w)):
             ls = w[k]
+            if LIVE and not any(re.search(r'\b%s\b' % v, F.CURRENT[x]) for x in ls): continue
             txt = [body[x].strip() for x in ls]
             tag = ''
             if any(re.match(r'^%s = 0;$' % v, t) for t in txt) and any(re.search(r'\b%s\b.*= cVar\d+;$' % v, t) for t in txt): tag = 'COPYIDX'

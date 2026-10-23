@@ -516,3 +516,457 @@ local	_PPStreamGetArray	iVar2	arrayNumber	CONFIRMED	position of arrayChunk in th
 local	_PPStreamFindDuplicateChunk	param_2	chunk	CONFIRMED	chunk to look for; its type byte selects the list (0 temps +4, 1 addresses +0xc, 2 attributes +0x18, 3 params +0x10, 4 outputs +0x1c, 5 param arrays +0x14, 6 temp arrays +8, 7 options +0x30, 8 operations +0x20, 9 raster ops +0x28, 10 +0x2c, 0xb labels +0x24)
 local	_PPStreamFindDuplicateChunk	piVar1	chunkList	CONFIRMED	the list selected by the chunk's type
 local	_PPStreamFindDuplicateChunk	iVar3	candidate	CONFIRMED	cursor over chunkList's chunks, returned when _PPStreamChunkCompare reports equality
+use	_glpPPDisassemble	iVar12	copyEnd7	CONFIRMED	character count returned by _ncpy_97be5f58 for the decimal number just written	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,puVar21\[iVar22\ \*\ 2\]\ \&\ 0xff\);$	+1
+use	_glpPPDisassemble	iVar12	copyEnd7	CONFIRMED	character count returned by _ncpy_97be5f58 for the decimal number just written	^\s*\*\(char\ \*\)\(\(int\)local_a8\ \+\ iVar10\ \+\ iVar12\)\ =\ cVar8;$@4	+1
+use	_glpPPDisassemble	iVar12	copyEnd7	CONFIRMED	character count returned by _ncpy_97be5f58 for the decimal number just written	^\s*local_a8\ =\ \(int\ \*\)\(\(int\)local_a8\ \+\ iVar13\ \+\ iVar12\);$@3	+1
+use	_glpPPDisassemble	bVar1	isLastOfArray	CONFIRMED	the current register equals registerId, the last register of the array that _isTempArrayStart reported: ends the array	^\s*bVar1\ =\ \*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar10\ \+\ 6\)\ ==\ local_a4;$	+1
+use	_glpPPDisassemble	bVar1	isLastOfArray	CONFIRMED	the current register equals registerId, the last register of the array that _isTempArrayStart reported: ends the array	^\s*if\ \(bVar1\)\ \{$	+1
+use	_glpPPDisassemble	bVar1	isLastOfArray	CONFIRMED	the current register equals registerId, the last register of the array that _isTempArrayStart reported: ends the array	^\s*bVar1\ =\ \*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ ==\ local_a4;$	+1
+use	_glpPPDisassemble	bVar1	paramNumbersMissing	CONFIRMED	paramNumbers == 0: the first malloc of the parameter tables failed	^\s*bVar1\ =\ local_88\ ==\ 0;$	+1
+use	_glpPPDisassemble	bVar1	paramNumbersMissing	CONFIRMED	paramNumbers == 0: the first malloc of the parameter tables failed	^\s*if\ \(\(bVar1\)\ \|\|\ \(bVar3\ =\ false,\ uVar16\ =\ extraout_r4_03,\ local_84\ ==\ 0\)\)\ \{$	+1
+use	_glpPPDisassemble	bVar1	paramNumbersMissing	CONFIRMED	paramNumbers == 0: the first malloc of the parameter tables failed	^\s*if\ \(!bVar1\)\ \{$	+1
+use	_glpPPDisassemble	bVar1	paramNumbersMissing	CONFIRMED	paramNumbers == 0: the first malloc of the parameter tables failed	^\s*bVar1\ =\ bVar3;$	+1
+use	_glpPPDisassemble	bVar1	paramNumbersMissing	CONFIRMED	paramNumbers == 0: the first malloc of the parameter tables failed	^\s*bVar1\ =\ bVar3;$@2	+1
+use	_glpPPDisassemble	bVar2	isArbProgram	CONFIRMED	printOptions == 0: the target is an ARB program (0x8804/0x8620), not a GLSL shader; shaders add blank lines, types and renumbered registers	^\s*bVar2\ =\ local_64\ ==\ 0;$	+2
+use	_glpPPDisassemble	bVar2	isArbProgram	CONFIRMED	printOptions == 0: the target is an ARB program (0x8804/0x8620), not a GLSL shader; shaders add blank lines, types and renumbered registers	^\s*if\ \(\(uVar20\ !=\ 0\)\ \&\&\ \(!bVar2\)\)\ \{$	+1
+use	_glpPPDisassemble	bVar2	isArbProgram	CONFIRMED	printOptions == 0: the target is an ARB program (0x8804/0x8620), not a GLSL shader; shaders add blank lines, types and renumbered registers	^\s*if\ \(!bVar2\)\ \{$@2	+1
+use	_glpPPDisassemble	bVar2	isArbProgram	CONFIRMED	printOptions == 0: the target is an ARB program (0x8804/0x8620), not a GLSL shader; shaders add blank lines, types and renumbered registers	^\s*if\ \(!bVar2\)\ \{$@3	+1
+use	_glpPPDisassemble	bVar2	isArbProgram	CONFIRMED	printOptions == 0: the target is an ARB program (0x8804/0x8620), not a GLSL shader; shaders add blank lines, types and renumbered registers	^\s*if\ \(bVar2\)\ \{$	+1
+use	_glpPPDisassemble	bVar2	isArbProgram	CONFIRMED	printOptions == 0: the target is an ARB program (0x8804/0x8620), not a GLSL shader; shaders add blank lines, types and renumbered registers	^\s*if\ \(\(uVar20\ !=\ 0\)\ \&\&\ \(!bVar2\)\)\ \{$@2	+1
+use	_glpPPDisassemble	bVar2	isArbProgram	CONFIRMED	printOptions == 0: the target is an ARB program (0x8804/0x8620), not a GLSL shader; shaders add blank lines, types and renumbered registers	^\s*if\ \(!bVar2\)\ \{$@4	+1
+use	_glpPPDisassemble	bVar2	isArbProgram	CONFIRMED	printOptions == 0: the target is an ARB program (0x8804/0x8620), not a GLSL shader; shaders add blank lines, types and renumbered registers	^\s*if\ \(\(uVar20\ !=\ 0\)\ \&\&\ \(!bVar2\)\)\ \{$@3	+1
+use	_glpPPDisassemble	bVar2	isArbProgram	CONFIRMED	printOptions == 0: the target is an ARB program (0x8804/0x8620), not a GLSL shader; shaders add blank lines, types and renumbered registers	^\s*if\ \(!bVar2\)\ \{$@5	+1
+use	_glpPPDisassemble	bVar2	isArbProgram	CONFIRMED	printOptions == 0: the target is an ARB program (0x8804/0x8620), not a GLSL shader; shaders add blank lines, types and renumbered registers	^\s*if\ \(!bVar2\)\ \{$@6	+1
+use	_glpPPDisassemble	bVar2	isArbProgram	CONFIRMED	printOptions == 0: the target is an ARB program (0x8804/0x8620), not a GLSL shader; shaders add blank lines, types and renumbered registers	^\s*if\ \(!bVar2\)\ \{$@7	+1
+use	_glpPPDisassemble	bVar2	isArbProgram	CONFIRMED	printOptions == 0: the target is an ARB program (0x8804/0x8620), not a GLSL shader; shaders add blank lines, types and renumbered registers	^\s*if\ \(\(uVar20\ !=\ 0\)\ \|\|\ \(bVar2\)\)\ \{$	+1
+use	_glpPPDisassemble	bVar2	isArbProgram	CONFIRMED	printOptions == 0: the target is an ARB program (0x8804/0x8620), not a GLSL shader; shaders add blank lines, types and renumbered registers	^\s*if\ \(\(\(param_1\[uVar6\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ \&\ 0x3ffff\)\ ==\ 0\)\ \&\&\ \(!bVar2\)\)\ \{$	+1
+use	_glpPPDisassemble	bVar3	startsNewDeclGroup	CONFIRMED	true at the start and after each ';' so the next TEMP declaration prints its "TEMP"/"LONG TEMP"/"SHORT TEMP" keyword	^\s*bVar3\ =\ true;$	+1
+use	_glpPPDisassemble	bVar3	startsNewDeclGroup	CONFIRMED	true at the start and after each ';' so the next TEMP declaration prints its "TEMP"/"LONG TEMP"/"SHORT TEMP" keyword	^\s*if\ \(bVar3\)\ \{$	+1
+use	_glpPPDisassemble	bVar3	startsNewDeclGroup	CONFIRMED	true at the start and after each ';' so the next TEMP declaration prints its "TEMP"/"LONG TEMP"/"SHORT TEMP" keyword	^\s*bVar3\ =\ false;$	+1
+use	_glpPPDisassemble	bVar3	startsNewDeclGroup	CONFIRMED	true at the start and after each ';' so the next TEMP declaration prints its "TEMP"/"LONG TEMP"/"SHORT TEMP" keyword	^\s*bVar3\ =\ true;$@2	+1
+use	_glpPPDisassemble	bVar3	paramArrayPosMissing	CONFIRMED	paramArrayPos == 0 (also set when there are no parameters): the second malloc of the parameter tables failed or nothing was allocated	^\s*bVar3\ =\ local_88\ ==\ 0;$	+1
+use	_glpPPDisassemble	bVar3	paramArrayPosMissing	CONFIRMED	paramArrayPos == 0 (also set when there are no parameters): the second malloc of the parameter tables failed or nothing was allocated	^\s*bVar3\ =\ local_88\ ==\ 0;$@2	+1
+use	_glpPPDisassemble	bVar3	paramArrayPosMissing	CONFIRMED	paramArrayPos == 0 (also set when there are no parameters): the second malloc of the parameter tables failed or nothing was allocated	^\s*if\ \(\(bVar1\)\ \|\|\ \(bVar3\ =\ false,\ uVar16\ =\ extraout_r4_03,\ local_84\ ==\ 0\)\)\ \{$	+2
+use	_glpPPDisassemble	bVar3	paramArrayPosMissing	CONFIRMED	paramArrayPos == 0 (also set when there are no parameters): the second malloc of the parameter tables failed or nothing was allocated	^\s*if\ \(!bVar3\)\ \{$	+1
+use	_glpPPDisassemble	bVar3	paramArrayPosMissing	CONFIRMED	paramArrayPos == 0 (also set when there are no parameters): the second malloc of the parameter tables failed or nothing was allocated	^\s*bVar1\ =\ bVar3;$	+1
+use	_glpPPDisassemble	bVar3	paramArrayPosMissing	CONFIRMED	paramArrayPos == 0 (also set when there are no parameters): the second malloc of the parameter tables failed or nothing was allocated	^\s*bVar1\ =\ bVar3;$@2	+1
+use	_glpPPDisassemble	bVar3	paramArrayPosMissing	CONFIRMED	paramArrayPos == 0 (also set when there are no parameters): the second malloc of the parameter tables failed or nothing was allocated	^\s*if\ \(!bVar3\)\ \{$@2	+1
+use	_glpPPDisassemble	bVar3	paramArrayPosMissing	CONFIRMED	paramArrayPos == 0 (also set when there are no parameters): the second malloc of the parameter tables failed or nothing was allocated	^\s*if\ \(!bVar3\)\ \{$@3	+1
+use	_glpPPDisassemble	bVar4	noLabels	CONFIRMED	labelCount == 0: no branch targets, so no labels are printed	^\s*bVar4\ =\ local_6c\ ==\ 0;$	+2
+use	_glpPPDisassemble	bVar4	noLabels	CONFIRMED	labelCount == 0: no branch targets, so no labels are printed	^\s*bVar4\ =\ true;$	+1
+use	_glpPPDisassemble	bVar4	noLabels	CONFIRMED	labelCount == 0: no branch targets, so no labels are printed	^\s*bVar4\ =\ local_6c\ ==\ 0;$@2	+1
+use	_glpPPDisassemble	bVar4	noLabels	CONFIRMED	labelCount == 0: no branch targets, so no labels are printed	^\s*if\ \(\(\(!bVar4\)\ \&\&\ \(local_68\ <\ local_6c\)\)\ \&\&$	+2
+use	_glpPPDisassemble	bVar4	noLabels	CONFIRMED	labelCount == 0: no branch targets, so no labels are printed	^\s*if\ \(bVar4\)\ goto\ LAB_97bf0cec;$	+1
+use	_glpPPDisassemble	bVar4	noLabels	CONFIRMED	labelCount == 0: no branch targets, so no labels are printed	^\s*if\ \(!bVar4\)\ \{$@2	+1
+use	_glpPPDisassemble	bVar5	cr0Byte	INFERRED	Ghidra's image of the condition register after the malloc null test; bit 5 is the EQ bit that decides whether tempNumbers must be freed	^\s*bVar5\ =\ \(byte\)\(\(uint\)local_5c\ >>\ 0x18\);$	+2
+use	_glpPPDisassemble	bVar5	cr0Byte	INFERRED	Ghidra's image of the condition register after the malloc null test; bit 5 is the EQ bit that decides whether tempNumbers must be freed	^\s*if\ \(!\(bool\)\(bVar5\ >>\ 5\ \&\ 1\)\)\ \{$@2	+1
+use	_glpPPDisassemble	bVar5	cr0Byte	INFERRED	Ghidra's image of the condition register after the malloc null test; bit 5 is the EQ bit that decides whether tempNumbers must be freed	^\s*bVar5\ =\ \(byte\)\(\(uint\)local_5c\ >>\ 0x18\);$@2	+1
+use	_glpPPDisassemble	uVar6	tempPrecisionClass	CONFIRMED	temp entry word0 >> 0x1d: 0 TEMP, 1 LONG TEMP, 2 SHORT TEMP; a change starts a new declaration	^\s*uVar6\ =\ 0;$	+1
+use	_glpPPDisassemble	uVar6	tempPrecisionClass	CONFIRMED	temp entry word0 >> 0x1d: 0 TEMP, 1 LONG TEMP, 2 SHORT TEMP; a change starts a new declaration	^\s*uVar6\ =\ puVar21\[uVar23\ \*\ 2\]\ >>\ 0x1d;$@2	+1
+use	_glpPPDisassemble	uVar6	tempPrecisionClass	CONFIRMED	temp entry word0 >> 0x1d: 0 TEMP, 1 LONG TEMP, 2 SHORT TEMP; a change starts a new declaration	^\s*if\ \(puVar21\[uVar23\ \*\ 2\ \+\ 2\]\ >>\ 0x1d\ !=\ uVar6\)\ \{$	+1
+use	_glpPPDisassemble	uVar6	tempPrecisionClass	CONFIRMED	temp entry word0 >> 0x1d: 0 TEMP, 1 LONG TEMP, 2 SHORT TEMP; a change starts a new declaration	^\s*uVar6\ =\ puVar21\[uVar23\ \*\ 2\]\ >>\ 0x1d;$	+2
+use	_glpPPDisassemble	uVar6	tempPrecisionClass	CONFIRMED	temp entry word0 >> 0x1d: 0 TEMP, 1 LONG TEMP, 2 SHORT TEMP; a change starts a new declaration	^\s*else\ if\ \(uVar6\ <\ 2\)\ \{$	+2
+use	_glpPPDisassemble	uVar6	tempPrecisionClass	CONFIRMED	temp entry word0 >> 0x1d: 0 TEMP, 1 LONG TEMP, 2 SHORT TEMP; a change starts a new declaration	^\s*else\ if\ \(uVar6\ ==\ 2\)\ \{$	+1
+use	_glpPPDisassemble	uVar7	registerWord1	CONFIRMED	second word of a table entry; its low 16 bits are the register number (the loop takes the maximum)	^\s*uVar7\ =\ \*puVar11;$	+1
+use	_glpPPDisassemble	uVar7	registerWord1	CONFIRMED	second word of a table entry; its low 16 bits are the register number (the loop takes the maximum)	^\s*if\ \(\(int\)uVar23\ <\ \(int\)\(uVar7\ \&\ 0xffff\)\)\ \{$	+2
+use	_glpPPDisassemble	puVar11	tempEntry	CONFIRMED	cursor over the 8-byte temp entries while numbering the temp registers	^\s*puVar11\ =\ puVar21;$	+1
+use	_glpPPDisassemble	puVar11	tempEntry	CONFIRMED	cursor over the 8-byte temp entries while numbering the temp registers	^\s*\*\(uint\ \*\)\(\(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ \*\ 4\ \+\ local_80\)\ =$	+3
+use	_glpPPDisassemble	puVar11	tempEntry	CONFIRMED	cursor over the 8-byte temp entries while numbering the temp registers	^\s*\*\(int\ \*\)\(local_7c\ \+\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ \*\ 4\)\ =\ iVar9;$	+1
+use	_glpPPDisassemble	puVar11	tempEntry	CONFIRMED	cursor over the 8-byte temp entries while numbering the temp registers	^\s*uVar23\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\);$	+1
+use	_glpPPDisassemble	puVar11	tempEntry	CONFIRMED	cursor over the 8-byte temp entries while numbering the temp registers	^\s*else\ if\ \(\(int\)\(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ <=\ \(int\)local_a4\)\ \{$	+3
+use	_glpPPDisassemble	puVar11	tempEntry	CONFIRMED	cursor over the 8-byte temp entries while numbering the temp registers	^\s*bVar1\ =\ \*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ ==\ local_a4;$	+1
+use	_glpPPDisassemble	puVar11	tempEntry	CONFIRMED	cursor over the 8-byte temp entries while numbering the temp registers	^\s*puVar11\ =\ puVar11\ \+\ 2;$	+1
+use	_glpPPDisassemble	puVar11	tempWord1Cursor	CONFIRMED	temp table + 1: walks the second words of the entries to find the highest register number	^\s*puVar11\ =\ puVar21\ \+\ 1;$	+1
+use	_glpPPDisassemble	puVar11	tempWord1Cursor	CONFIRMED	temp table + 1: walks the second words of the entries to find the highest register number	^\s*uVar7\ =\ \*puVar11;$	+2
+use	_glpPPDisassemble	puVar11	paramWord1Cursor	CONFIRMED	parameter table + 1: walks the second words of the entries to find the highest register number	^\s*puVar11\ =\ puVar21\ \+\ 1;$@2	+1
+use	_glpPPDisassemble	puVar11	paramWord1Cursor	CONFIRMED	parameter table + 1: walks the second words of the entries to find the highest register number	^\s*uVar25\ =\ \*puVar11;$	+2
+use	_glpPPDisassemble	puVar11	paramEntry	CONFIRMED	cursor over the 8-byte parameter entries while numbering the parameter registers	^\s*puVar11\ =\ puVar21;$@2	+1
+use	_glpPPDisassemble	puVar11	paramEntry	CONFIRMED	cursor over the 8-byte parameter entries while numbering the parameter registers	^\s*if\ \(\(\*puVar11\ \&\ 0x1f0000\)\ !=\ 0\)\ \{$	+1
+use	_glpPPDisassemble	puVar11	paramEntry	CONFIRMED	cursor over the 8-byte parameter entries while numbering the parameter registers	^\s*\*\(uint\ \*\)\(\(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ \*\ 4\ \+\ local_88\)\ =$	+3
+use	_glpPPDisassemble	puVar11	paramEntry	CONFIRMED	cursor over the 8-byte parameter entries while numbering the parameter registers	^\s*\*\(int\ \*\)\(local_84\ \+\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ \*\ 4\)\ =\ iVar9;$	+1
+use	_glpPPDisassemble	puVar11	paramEntry	CONFIRMED	cursor over the 8-byte parameter entries while numbering the parameter registers	^\s*uVar20\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\);$	+1
+use	_glpPPDisassemble	puVar11	paramEntry	CONFIRMED	cursor over the 8-byte parameter entries while numbering the parameter registers	^\s*if\ \(\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ ==\ local_a0\)\ \{$	+1
+use	_glpPPDisassemble	puVar11	paramEntry	CONFIRMED	cursor over the 8-byte parameter entries while numbering the parameter registers	^\s*else\ if\ \(\(int\)\(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ <=\ \(int\)local_a0\)\ \{$	+3
+use	_glpPPDisassemble	puVar11	paramEntry	CONFIRMED	cursor over the 8-byte parameter entries while numbering the parameter registers	^\s*if\ \(\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ ==\ local_a0\)\ goto\ LAB_97beb790;$	+1
+use	_glpPPDisassemble	puVar11	paramEntry	CONFIRMED	cursor over the 8-byte parameter entries while numbering the parameter registers	^\s*puVar11\ =\ puVar11\ \+\ 2;$@4	+1
+use	_glpPPDisassemble	piVar15	tempArraySizeOut	CONFIRMED	cursor into the arraySizes table receiving the length of each temp array	^\s*piVar15\ =\ local_78;$	+1
+use	_glpPPDisassemble	piVar15	tempArraySizeOut	CONFIRMED	cursor into the arraySizes table receiving the length of each temp array	^\s*\*piVar15\ =\ iVar9;$	+2
+use	_glpPPDisassemble	piVar15	paramArraySizeOut	CONFIRMED	cursor into the arraySizes table receiving the length of each parameter array	^\s*piVar15\ =\ local_78;$@2	+1
+use	_glpPPDisassemble	piVar15	paramArraySizeOut	CONFIRMED	cursor into the arraySizes table receiving the length of each parameter array	^\s*\*piVar15\ =\ iVar9;$@2	+1
+use	_glpPPDisassemble	piVar15	paramArraySizeOut	CONFIRMED	cursor into the arraySizes table receiving the length of each parameter array	^\s*piVar15\ =\ piVar15\ \+\ 1;$@2	+1
+use	_glpPPDisassemble	piVar15	nextOutCursor	INFERRED	outCursor + 1, after a one-character store	^\s*piVar15\ =\ \(int\ \*\)\(\(int\)local_a8\ \+\ 1\);$	+1
+use	_glpPPDisassemble	piVar15	nextOutCursor	INFERRED	outCursor + 1, after a one-character store	^\s*local_a8\ =\ piVar15;$	+1
+use	_glpPPDisassemble	uVar16	callResultLow	INFERRED	low half of the 64-bit result pair of the previous call (Ghidra's r4 extraout), carried along but unused	^\s*uVar16\ =\ \(undefined4\)uVar26;$	+1
+use	_glpPPDisassemble	uVar16	callResultLow	INFERRED	low half of the 64-bit result pair of the previous call (Ghidra's r4 extraout), carried along but unused	^\s*uVar16\ =\ extraout_r4_01;$	+1
+use	_glpPPDisassemble	uVar16	callResultLow	INFERRED	low half of the 64-bit result pair of the previous call (Ghidra's r4 extraout), carried along but unused	^\s*uVar26\ =\ CONCAT44\(local_78,uVar16\);$	+1
+use	_glpPPDisassemble	uVar16	callResultLow	INFERRED	low half of the 64-bit result pair of the previous call (Ghidra's r4 extraout), carried along but unused	^\s*uVar16\ =\ extraout_r4_00;$	+1
+use	_glpPPDisassemble	uVar16	callResultLow	INFERRED	low half of the 64-bit result pair of the previous call (Ghidra's r4 extraout), carried along but unused	^\s*uVar16\ =\ \(undefined4\)uVar26;$@2	+1
+use	_glpPPDisassemble	uVar16	callResultLow	INFERRED	low half of the 64-bit result pair of the previous call (Ghidra's r4 extraout), carried along but unused	^\s*if\ \(\(bVar1\)\ \|\|\ \(bVar3\ =\ false,\ uVar16\ =\ extraout_r4_03,\ local_84\ ==\ 0\)\)\ \{$	+1
+use	_glpPPDisassemble	uVar16	callResultLow	INFERRED	low half of the 64-bit result pair of the previous call (Ghidra's r4 extraout), carried along but unused	^\s*uVar16\ =\ extraout_r4_04;$	+1
+use	_glpPPDisassemble	uVar16	callResultLow	INFERRED	low half of the 64-bit result pair of the previous call (Ghidra's r4 extraout), carried along but unused	^\s*uVar26\ =\ CONCAT44\(local_78,uVar16\);$@2	+1
+use	_glpPPDisassemble	uVar19	instructionsLeft	CONFIRMED	counts the instructions down while scanning for branch opcodes	^\s*uVar19\ =\ uVar20;$	+1
+use	_glpPPDisassemble	uVar19	instructionsLeft	CONFIRMED	counts the instructions down while scanning for branch opcodes	^\s*uVar19\ =\ uVar19\ \-\ 1;$	+2
+use	_glpPPDisassemble	uVar19	instWord0	CONFIRMED	instruction word 0: bits 25..18 opcode, bits 31..29 source count	^\s*uVar19\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar10\ \*\ 2\];$	+4
+use	_glpPPDisassemble	uVar19	instWord0	CONFIRMED	instruction word 0: bits 25..18 opcode, bits 31..29 source count	^\s*uVar19\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar10\ \*\ 2\];$@2	+1
+use	_glpPPDisassemble	uVar19	instWord0	CONFIRMED	instruction word 0: bits 25..18 opcode, bits 31..29 source count	^\s*iVar10\ =\ iVar10\ \+\ \(uVar19\ >>\ 0x1d\)\ \+\ 2;$	+1
+use	_glpPPDisassemble	uVar19	branchOpcode	CONFIRMED	instruction word 0 >> 0x12 & 0xff, compared with the end-of-block opcodes 0x6b/0x58	^\s*uVar19\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar9\ \*\ 2\]\ >>\ 0x12\ \&\ 0xff;$	+3
+use	_glpPPDisassemble	uVar20	highestParamRegister	CONFIRMED	largest register number among the parameter entries (starts at -1); sizes the paramNumbers/paramArrayPos tables	^\s*uVar20\ =\ 0xffffffff;$	+1
+use	_glpPPDisassemble	uVar20	highestParamRegister	CONFIRMED	largest register number among the parameter entries (starts at -1); sizes the paramNumbers/paramArrayPos tables	^\s*if\ \(\(int\)uVar20\ <\ \(int\)\(uVar25\ \&\ 0xffff\)\)\ \{$	+2
+use	_glpPPDisassemble	uVar20	highestParamRegister	CONFIRMED	largest register number among the parameter entries (starts at -1); sizes the paramNumbers/paramArrayPos tables	^\s*if\ \(uVar20\ ==\ 0xffffffff\)\ goto\ LAB_97beb670;$	+2
+use	_glpPPDisassemble	uVar20	paramArrayStartRegister	CONFIRMED	register where the current parameter array starts (-1 outside an array)	^\s*uVar20\ =\ 0xffffffff;$@2	+1
+use	_glpPPDisassemble	uVar20	paramArrayStartRegister	CONFIRMED	register where the current parameter array starts (-1 outside an array)	^\s*if\ \(uVar20\ ==\ 0xffffffff\)\ \{$	+1
+use	_glpPPDisassemble	uVar20	paramArrayStartRegister	CONFIRMED	register where the current parameter array starts (-1 outside an array)	^\s*uVar20\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\);$	+2
+use	_glpPPDisassemble	uVar20	paramArrayStartRegister	CONFIRMED	register where the current parameter array starts (-1 outside an array)	^\s*uVar20\ =\ 0xffffffff;$@3	+1
+use	_glpPPDisassemble	uVar20	paramArrayStartRegister	CONFIRMED	register where the current parameter array starts (-1 outside an array)	^\s*\*\(uint\ \*\)\(\(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ \*\ 4\ \+\ local_88\)\ =\ uVar20;$	+1
+use	_glpPPDisassemble	uVar20	paramKind	CONFIRMED	parameter entry word0 >> 0x10 & 0x1f: 0 state, 1 program.local, 2 program.env, 3 light, 4 lightprod, 5 material/lightmodel, 6 lightmodel.ambient, 7/8 texgen, 9 texenv, 10 clip, 0xb..0xf fog/point/depth, 0x10 matrix, 0x11 constant, 0x12 normalscale	^\s*uVar20\ =\ puVar21\[iVar22\ \*\ 2\]\ >>\ 0x10\ \&\ 0x1f;$	+2
+use	_glpPPDisassemble	uVar20	paramKind	CONFIRMED	parameter entry word0 >> 0x10 & 0x1f: 0 state, 1 program.local, 2 program.env, 3 light, 4 lightprod, 5 material/lightmodel, 6 lightmodel.ambient, 7/8 texgen, 9 texenv, 10 clip, 0xb..0xf fog/point/depth, 0x10 matrix, 0x11 constant, 0x12 normalscale	^\s*if\ \(uVar20\ ==\ 0\)\ \{$	+1
+use	_glpPPDisassemble	uVar20	paramKind	CONFIRMED	parameter entry word0 >> 0x10 & 0x1f: 0 state, 1 program.local, 2 program.env, 3 light, 4 lightprod, 5 material/lightmodel, 6 lightmodel.ambient, 7/8 texgen, 9 texenv, 10 clip, 0xb..0xf fog/point/depth, 0x10 matrix, 0x11 constant, 0x12 normalscale	^\s*else\ if\ \(uVar20\ <\ 3\)\ \{$	+1
+use	_glpPPDisassemble	uVar20	paramKind	CONFIRMED	parameter entry word0 >> 0x10 & 0x1f: 0 state, 1 program.local, 2 program.env, 3 light, 4 lightprod, 5 material/lightmodel, 6 lightmodel.ambient, 7/8 texgen, 9 texenv, 10 clip, 0xb..0xf fog/point/depth, 0x10 matrix, 0x11 constant, 0x12 normalscale	^\s*if\ \(uVar20\ !=\ 0x11\)\ goto\ LAB_97bebb2c;$	+1
+use	_glpPPDisassemble	uVar20	paramKind	CONFIRMED	parameter entry word0 >> 0x10 & 0x1f: 0 state, 1 program.local, 2 program.env, 3 light, 4 lightprod, 5 material/lightmodel, 6 lightmodel.ambient, 7/8 texgen, 9 texenv, 10 clip, 0xb..0xf fog/point/depth, 0x10 matrix, 0x11 constant, 0x12 normalscale	^\s*switch\(uVar20\)\ \{$	+1
+use	_glpPPDisassemble	uVar20	isBackFace	CONFIRMED	word0 >> 8 & 1: 0 prints "front.", 1 prints "back." for lightprod	^\s*uVar20\ =\ puVar21\[iVar22\ \*\ 2\]\ >>\ 8\ \&\ 1;$	+2
+use	_glpPPDisassemble	uVar20	isBackFace	CONFIRMED	word0 >> 8 & 1: 0 prints "front.", 1 prints "back." for lightprod	^\s*else\ if\ \(uVar20\ ==\ 1\)\ \{$	+1
+use	_glpPPDisassemble	uVar20	lightProductTerm	CONFIRMED	word0 >> 9 & 3: 0 ambient, 1 diffuse, 2 specular for lightprod	^\s*uVar20\ =\ puVar21\[iVar22\ \*\ 2\]\ >>\ 9\ \&\ 3;$	+2
+use	_glpPPDisassemble	uVar20	lightProductTerm	CONFIRMED	word0 >> 9 & 3: 0 ambient, 1 diffuse, 2 specular for lightprod	^\s*if\ \(uVar20\ <\ 2\)\ \{$	+2
+use	_glpPPDisassemble	uVar20	lightProductTerm	CONFIRMED	word0 >> 9 & 3: 0 ambient, 1 diffuse, 2 specular for lightprod	^\s*else\ if\ \(uVar20\ ==\ 2\)\ \{$	+1
+use	_glpPPDisassemble	uVar20	texgenCoordinate	CONFIRMED	word0 >> 5 & 7: 0 s, 1 t, 2 r, 3 q for texgen eye/object planes	^\s*uVar20\ =\ puVar21\[iVar22\ \*\ 2\]\ >>\ 5\ \&\ 7;$	+2
+use	_glpPPDisassemble	uVar20	texgenCoordinate	CONFIRMED	word0 >> 5 & 7: 0 s, 1 t, 2 r, 3 q for texgen eye/object planes	^\s*else\ if\ \(uVar20\ <\ 2\)\ \{$	+2
+use	_glpPPDisassemble	uVar20	texgenCoordinate	CONFIRMED	word0 >> 5 & 7: 0 s, 1 t, 2 r, 3 q for texgen eye/object planes	^\s*else\ if\ \(uVar20\ ==\ 2\)\ \{$@2	+1
+use	_glpPPDisassemble	uVar20	texgenCoordinate	CONFIRMED	word0 >> 5 & 7: 0 s, 1 t, 2 r, 3 q for texgen eye/object planes	^\s*if\ \(uVar20\ !=\ 3\)\ goto\ switchD_97bebb8c_caseD_0;$	+1
+use	_glpPPDisassemble	uVar20	texgenCoordinate	CONFIRMED	word0 >> 5 & 7: 0 s, 1 t, 2 r, 3 q for texgen eye/object planes	^\s*uVar20\ =\ puVar21\[iVar22\ \*\ 2\]\ >>\ 5\ \&\ 7;$@2	+2
+use	_glpPPDisassemble	uVar20	texgenCoordinate	CONFIRMED	word0 >> 5 & 7: 0 s, 1 t, 2 r, 3 q for texgen eye/object planes	^\s*else\ if\ \(uVar20\ <\ 2\)\ \{$@2	+2
+use	_glpPPDisassemble	uVar20	texgenCoordinate	CONFIRMED	word0 >> 5 & 7: 0 s, 1 t, 2 r, 3 q for texgen eye/object planes	^\s*else\ if\ \(uVar20\ ==\ 2\)\ \{$@3	+1
+use	_glpPPDisassemble	uVar20	texgenCoordinate	CONFIRMED	word0 >> 5 & 7: 0 s, 1 t, 2 r, 3 q for texgen eye/object planes	^\s*if\ \(uVar20\ !=\ 3\)\ goto\ switchD_97bebb8c_caseD_0;$@2	+1
+use	_glpPPDisassemble	uVar20	matrixModifier	CONFIRMED	word0 >> 0xe & 3: 1 transpose, 2 inverse, 3 invtrans	^\s*uVar20\ =\ puVar21\[iVar22\ \*\ 2\]\ >>\ 0xe\ \&\ 3;$	+2
+use	_glpPPDisassemble	uVar20	matrixModifier	CONFIRMED	word0 >> 0xe & 3: 1 transpose, 2 inverse, 3 invtrans	^\s*else\ if\ \(1\ <\ uVar20\)\ \{$	+2
+use	_glpPPDisassemble	uVar20	matrixModifier	CONFIRMED	word0 >> 0xe & 3: 1 transpose, 2 inverse, 3 invtrans	^\s*if\ \(uVar20\ !=\ 3\)\ goto\ LAB_97becea8;$	+1
+use	_glpPPDisassemble	uVar20	rasterStateWord0	CONFIRMED	word0 of the current raster-state record; >> 0x18 & 7 selects the state printed	^\s*uVar20\ =\ param_1\[uVar19\ \*\ 2\ \+\ iVar9\ \*\ 2\];$	+1
+use	_glpPPDisassemble	uVar20	rasterStateWord0	CONFIRMED	word0 of the current raster-state record; >> 0x18 & 7 selects the state printed	^\s*switch\(uVar20\ >>\ 0x18\ \&\ 7\)\ \{$	+1
+use	_glpPPDisassemble	puVar21	tempTable	CONFIRMED	program + program[5] * 2: the 8-byte temp entries (header words 4/5)	^\s*puVar21\ =\ param_1\ \+\ param_1\[5\]\ \*\ 2;$	+1
+use	_glpPPDisassemble	puVar21	tempTable	CONFIRMED	program + program[5] * 2: the 8-byte temp entries (header words 4/5)	^\s*puVar11\ =\ puVar21;$	+1
+use	_glpPPDisassemble	puVar21	tempTable	CONFIRMED	program + program[5] * 2: the 8-byte temp entries (header words 4/5)	^\s*bVar1\ =\ \*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar10\ \+\ 6\)\ ==\ local_a4;$	+1
+use	_glpPPDisassemble	puVar21	tempTable	CONFIRMED	program + program[5] * 2: the 8-byte temp entries (header words 4/5)	^\s*puVar11\ =\ puVar21\ \+\ 1;$	+1
+use	_glpPPDisassemble	puVar21	tempTable	CONFIRMED	program + program[5] * 2: the 8-byte temp entries (header words 4/5)	^\s*uVar6\ =\ puVar21\[uVar23\ \*\ 2\]\ >>\ 0x1d;$	+1
+use	_glpPPDisassemble	puVar21	tempTable	CONFIRMED	program + program[5] * 2: the 8-byte temp entries (header words 4/5)	^\s*uVar6\ =\ puVar21\[uVar23\ \*\ 2\]\ >>\ 0x1d;$@2	+1
+use	_glpPPDisassemble	puVar21	tempTable	CONFIRMED	program + program[5] * 2: the 8-byte temp entries (header words 4/5)	^\s*iVar22\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,\(uint\)\*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar22\ \+\ 6\)\);$	+1
+use	_glpPPDisassemble	puVar21	tempTable	CONFIRMED	program + program[5] * 2: the 8-byte temp entries (header words 4/5)	^\s*iVar9\ =\ \*\(int\ \*\)\(local_7c\ \+\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar22\ \+\ 6\)\ \*\ 4\);$	+1
+use	_glpPPDisassemble	puVar21	tempTable	CONFIRMED	program + program[5] * 2: the 8-byte temp entries (header words 4/5)	^\s*iVar22\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,\*\(undefined4\ \*\)$	+3
+use	_glpPPDisassemble	puVar21	tempTable	CONFIRMED	program + program[5] * 2: the 8-byte temp entries (header words 4/5)	^\s*uVar25\ =\ puVar21\[uVar23\ \*\ 2\];$	+1
+use	_glpPPDisassemble	puVar21	tempTable	CONFIRMED	program + program[5] * 2: the 8-byte temp entries (header words 4/5)	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,\*\(undefined4\ \*\)$	+3
+use	_glpPPDisassemble	puVar21	tempTable	CONFIRMED	program + program[5] * 2: the 8-byte temp entries (header words 4/5)	^\s*uVar25\ =\ puVar21\[uVar23\ \*\ 2\];$@2	+1
+use	_glpPPDisassemble	puVar21	tempTable	CONFIRMED	program + program[5] * 2: the 8-byte temp entries (header words 4/5)	^\s*if\ \(puVar21\[uVar23\ \*\ 2\ \+\ 2\]\ >>\ 0x1d\ !=\ uVar6\)\ \{$	+1
+use	_glpPPDisassemble	puVar21	labelCursor	CONFIRMED	cursor over the sorted label array (labelIds + nextLabelNumber)	^\s*puVar21\ =\ \(uint\ \*\)\(local_68\ \*\ 4\ \+\ local_74\);$	+1
+use	_glpPPDisassemble	puVar21	labelCursor	CONFIRMED	cursor over the sorted label array (labelIds + nextLabelNumber)	^\s*if\ \(\(\(!bVar4\)\ \&\&\ \(local_68\ <\ local_6c\)\)\ \&\&$	+2
+use	_glpPPDisassemble	puVar21	labelCursor	CONFIRMED	cursor over the sorted label array (labelIds + nextLabelNumber)	^\s*puVar21\ =\ puVar21\ \+\ 1;$	+1
+use	_glpPPDisassemble	uVar23	highestTempRegister	CONFIRMED	largest register number among the temp entries (starts at -1); sizes the tempNumbers/tempArrayPos tables	^\s*uVar23\ =\ 0xffffffff;$	+1
+use	_glpPPDisassemble	uVar23	highestTempRegister	CONFIRMED	largest register number among the temp entries (starts at -1); sizes the tempNumbers/tempArrayPos tables	^\s*if\ \(\(int\)uVar23\ <\ \(int\)\(uVar7\ \&\ 0xffff\)\)\ \{$	+2
+use	_glpPPDisassemble	uVar23	highestTempRegister	CONFIRMED	largest register number among the temp entries (starts at -1); sizes the tempNumbers/tempArrayPos tables	^\s*if\ \(uVar23\ ==\ 0xffffffff\)\ goto\ LAB_97bea680;$	+2
+use	_glpPPDisassemble	uVar23	tempArrayStartRegister	CONFIRMED	register where the current temp array starts (-1 outside an array)	^\s*uVar23\ =\ 0xffffffff;$@2	+1
+use	_glpPPDisassemble	uVar23	tempArrayStartRegister	CONFIRMED	register where the current temp array starts (-1 outside an array)	^\s*if\ \(uVar23\ ==\ 0xffffffff\)\ \{$	+1
+use	_glpPPDisassemble	uVar23	tempArrayStartRegister	CONFIRMED	register where the current temp array starts (-1 outside an array)	^\s*uVar23\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\);$	+2
+use	_glpPPDisassemble	uVar23	tempArrayStartRegister	CONFIRMED	register where the current temp array starts (-1 outside an array)	^\s*uVar23\ =\ 0xffffffff;$@3	+1
+use	_glpPPDisassemble	uVar23	tempArrayStartRegister	CONFIRMED	register where the current temp array starts (-1 outside an array)	^\s*\*\(uint\ \*\)\(\(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ \*\ 4\ \+\ local_80\)\ =\ uVar23;$	+1
+use	_glpPPDisassemble	uVar23	attributeKind	CONFIRMED	attribute entry word0 >> 0x10 & 0xf: selects position/color/normal/texcoord/... ; 0 means unused	^\s*uVar23\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ >>\ 0x10\ \&\ 0xf;$	+2
+use	_glpPPDisassemble	uVar23	attributeKind	CONFIRMED	attribute entry word0 >> 0x10 & 0xf: selects position/color/normal/texcoord/... ; 0 means unused	^\s*switch\(uVar23\)\ \{$	+1
+use	_glpPPDisassemble	uVar23	paramEntriesLeft	CONFIRMED	counts the parameter entries down while finding the highest register number	^\s*uVar23\ =\ uVar6;$	+1
+use	_glpPPDisassemble	uVar23	paramEntriesLeft	CONFIRMED	counts the parameter entries down while finding the highest register number	^\s*uVar23\ =\ uVar23\ \-\ 1;$	+2
+use	_glpPPDisassemble	uVar23	declWord0	CONFIRMED	declaration word0 re-read to print its size, type and precision	^\s*uVar23\ =\ puVar21\[iVar22\ \*\ 2\];$	+2
+use	_glpPPDisassemble	uVar23	declWord0	CONFIRMED	declaration word0 re-read to print its size, type and precision	^\s*uVar23\ =\ puVar21\[iVar22\ \*\ 2\];$@2	+2
+use	_glpPPDisassemble	uVar23	outputKind	CONFIRMED	output entry word0 >> 0x10 & 0xf: selects result.position/fogcoord/pointsize/color/...; 0 means unused	^\s*uVar23\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ >>\ 0x10\ \&\ 0xf;$@2	+2
+use	_glpPPDisassemble	uVar23	outputKind	CONFIRMED	output entry word0 >> 0x10 & 0xf: selects result.position/fogcoord/pointsize/color/...; 0 means unused	^\s*switch\(uVar23\)\ \{$@2	+1
+use	_glpPPDisassemble	pfVar24	constantData	CONFIRMED	pointer to the 4 floats (or ints) of an inline constant: program + program[0x1b]*2 + (word0 & 0xffff)*4	^\s*pfVar24\ =\ \(float\ \*\)\(param_1\ \+\ param_1\[0x1b\]\ \*\ 2\ \+\ \(puVar21\[iVar22\ \*\ 2\]\ \&\ 0xffff\)\ \*\ 4\);$	+1
+use	_glpPPDisassemble	pfVar24	constantData	CONFIRMED	pointer to the 4 floats (or ints) of an inline constant: program + program[0x1b]*2 + (word0 & 0xffff)*4	^\s*uVar26\ =\ \(\(char\ \*\ \(\*\)\(\)\)_glp_dtostr\)\(\(int\)\(\(ulonglong\)uVar26\ >>\ 0x20\),\(int\)uVar26,local_a8,$	+5
+use	_glpPPDisassemble	pfVar24	constantData	CONFIRMED	pointer to the 4 floats (or ints) of an inline constant: program + program[0x1b]*2 + (word0 & 0xffff)*4	^\s*uVar26\ =\ \(\(char\ \*\ \(\*\)\(\)\)_glp_dtostr\)\(iVar12,\(int\)uVar26,local_a8,$	+5
+use	_glpPPDisassemble	pfVar24	constantData	CONFIRMED	pointer to the 4 floats (or ints) of an inline constant: program + program[0x1b]*2 + (word0 & 0xffff)*4	^\s*uVar26\ =\ \(\(char\ \*\ \(\*\)\(\)\)_glp_dtostr\)\(iVar12,\(int\)uVar26,local_a8,$@2	+5
+use	_glpPPDisassemble	pfVar24	constantData	CONFIRMED	pointer to the 4 floats (or ints) of an inline constant: program + program[0x1b]*2 + (word0 & 0xffff)*4	^\s*local_a8\ =\ \(int\ \*\)\(\(char\ \*\ \(\*\)\(\)\)_glp_dtostr\)\(iVar12,\(int\)uVar26,local_a8,$	+5
+use	_glpPPDisassemble	pfVar24	constantData	CONFIRMED	pointer to the 4 floats (or ints) of an inline constant: program + program[0x1b]*2 + (word0 & 0xffff)*4	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,\ \*\(unsigned\ int\ \*\)pfVar24\);$	+1
+use	_glpPPDisassemble	pfVar24	constantData	CONFIRMED	pointer to the 4 floats (or ints) of an inline constant: program + program[0x1b]*2 + (word0 & 0xffff)*4	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,\ \(\(unsigned\ int\ \*\)pfVar24\)\[1\]\);$	+1
+use	_glpPPDisassemble	pfVar24	constantData	CONFIRMED	pointer to the 4 floats (or ints) of an inline constant: program + program[0x1b]*2 + (word0 & 0xffff)*4	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,\ \(\(unsigned\ int\ \*\)pfVar24\)\[2\]\);$	+1
+use	_glpPPDisassemble	pfVar24	constantData	CONFIRMED	pointer to the 4 floats (or ints) of an inline constant: program + program[0x1b]*2 + (word0 & 0xffff)*4	^\s*iVar10\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,\ \(\(unsigned\ int\ \*\)pfVar24\)\[3\]\);$	+1
+use	_glpPPDisassemble	uVar25	entriesLeft	CONFIRMED	counts the temp entries down while finding the highest register number	^\s*uVar25\ =\ uVar20;$	+1
+use	_glpPPDisassemble	uVar25	entriesLeft	CONFIRMED	counts the temp entries down while finding the highest register number	^\s*uVar25\ =\ uVar25\ \-\ 1;$	+2
+use	_glpPPDisassemble	uVar25	tempWord0	CONFIRMED	temp entry word0, printed through _glpWriteSizeTypePrecision (bits 24-25 size, 26-28 type, 29-31 precision)	^\s*uVar25\ =\ puVar21\[uVar23\ \*\ 2\];$	+3
+use	_glpPPDisassemble	uVar25	tempWord0	CONFIRMED	temp entry word0, printed through _glpWriteSizeTypePrecision (bits 24-25 size, 26-28 type, 29-31 precision)	^\s*uVar25\ =\ puVar21\[uVar23\ \*\ 2\];$@2	+3
+use	_glpPPDisassemble	uVar25	nextTempIndex	CONFIRMED	loop index + 1 of the temp declaration loop	^\s*uVar25\ =\ uVar23\ \+\ 1;$	+2
+use	_glpPPDisassemble	uVar25	nextTempIndex	CONFIRMED	loop index + 1 of the temp declaration loop	^\s*uVar23\ =\ uVar25;$	+2
+use	_glpPPDisassemble	uVar25	attributeWord0	CONFIRMED	attribute entry word0, printed through _glpWriteSizeTypePrecision	^\s*uVar25\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\];$	+3
+use	_glpPPDisassemble	uVar25	vertexTarget	CONFIRMED	0x8620 or 0x8b31: the vertex program/shader target compared with programTarget	^\s*uVar25\ =\ 0x8620;$	+1
+use	_glpPPDisassemble	uVar25	vertexTarget	CONFIRMED	0x8620 or 0x8b31: the vertex program/shader target compared with programTarget	^\s*uVar25\ =\ 0x8b31;$	+1
+use	_glpPPDisassemble	uVar25	vertexTarget	CONFIRMED	0x8620 or 0x8b31: the vertex program/shader target compared with programTarget	^\s*if\ \(uVar19\ ==\ uVar25\)\ \{$	+1
+use	_glpPPDisassemble	uVar25	paramWord1	CONFIRMED	second word of a parameter entry; low 16 bits are the register number	^\s*uVar25\ =\ \*puVar11;$	+1
+use	_glpPPDisassemble	uVar25	paramWord1	CONFIRMED	second word of a parameter entry; low 16 bits are the register number	^\s*if\ \(\(int\)uVar20\ <\ \(int\)\(uVar25\ \&\ 0xffff\)\)\ \{$	+2
+use	_glpPPDisassemble	uVar25	outputPrecisionClass	CONFIRMED	output entry word0 >> 0x1d: 0 OUTPUT, 1 LONG OUTPUT, 2 SHORT OUTPUT	^\s*uVar25\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ >>\ 0x1d;$	+2
+use	_glpPPDisassemble	uVar25	outputPrecisionClass	CONFIRMED	output entry word0 >> 0x1d: 0 OUTPUT, 1 LONG OUTPUT, 2 SHORT OUTPUT	^\s*else\ if\ \(uVar25\ <\ 2\)\ \{$	+2
+use	_glpPPDisassemble	uVar25	outputPrecisionClass	CONFIRMED	output entry word0 >> 0x1d: 0 OUTPUT, 1 LONG OUTPUT, 2 SHORT OUTPUT	^\s*else\ if\ \(uVar25\ ==\ 2\)\ \{$	+1
+use	_glpPPDisassemble	uVar25	outputWord0	CONFIRMED	output entry word0, printed through _glpWriteSizeTypePrecision	^\s*uVar25\ =\ param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\];$@2	+3
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ CONCAT44\(local_ac,extraout_r4\);$	+1
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_adjustAllocation_97be9cb4\)\(\&local_b0,\&local_ac,\&local_a8\);$	+2
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_adjustAllocation_97be9cb4\)\(\&local_b0,\&local_ac,\&local_a8\);$@2	+2
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar16\ =\ \(undefined4\)uVar26;$	+1
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ CONCAT44\(local_78,uVar16\);$	+1
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_isTempArrayStart\)\(param_1,\(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\),\&local_a4\);$	+2
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_adjustAllocation_97be9cb4\)\(\&local_b0,\&local_ac,\&local_a8\);$@3	+2
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ CONCAT44\(extraout_r3,extraout_r4_02\);$	+1
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_adjustAllocation_97be9cb4\)\(\&local_b0,\&local_ac,\&local_a8\);$@4	+2
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar16\ =\ \(undefined4\)uVar26;$@2	+1
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ CONCAT44\(local_78,uVar16\);$@2	+1
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_isParamArrayStart_97be9b80\)\(param_1,\(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\),\&local_a0\);$	+2
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,\*\(undefined4\ \*\)$	+4
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_glpWriteSizeTypePrecision\)\(local_a8,uVar23\ >>\ 0x18\ \&\ 3,0,uVar23\ >>\ 0x1a\ \&\ 7,uVar23\ >>\ 0x1d\);$	+2
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,local_78\[local_90\]\);$	+1
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*puVar18\ =\ \(undefined1\ \*\)\(\(int\)local_a8\ \+\ \(int\)\(\(ulonglong\)uVar26\ >>\ 0x20\)\);$	+1
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_glpWriteSizeTypePrecision\)\(local_a8,uVar23\ >>\ 0x18\ \&\ 3,0,uVar23\ >>\ 0x1a\ \&\ 7,uVar23\ >>\ 0x1d\);$@2	+2
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(char\ \*\ \(\*\)\(\)\)_glp_dtostr\)\(\(int\)\(\(ulonglong\)uVar26\ >>\ 0x20\),\(int\)uVar26,local_a8,$	+6
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(char\ \*\ \(\*\)\(\)\)_glp_dtostr\)\(iVar12,\(int\)uVar26,local_a8,$	+6
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(char\ \*\ \(\*\)\(\)\)_glp_dtostr\)\(iVar12,\(int\)uVar26,local_a8,$@2	+6
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*local_a8\ =\ \(int\ \*\)\(\(char\ \*\ \(\*\)\(\)\)_glp_dtostr\)\(iVar12,\(int\)uVar26,local_a8,$	+5
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_adjustAllocation_97be9cb4\)\(\&local_b0,\&local_ac,\&local_a8\);$@5	+1
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*if\ \(\(int\)\(\(ulonglong\)uVar26\ >>\ 0x20\)\ ==\ 0\)\ goto\ joined_r0x97beb668;$	+1
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ CONCAT44\(extraout_r3_00,extraout_r4_05\);$	+1
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_adjustAllocation_97be9cb4\)\(\&local_b0,\&local_ac,\&local_a8\);$@6	+2
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ CONCAT44\(uVar16,extraout_r4_06\);$	+1
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_InsertLabel\)\(local_74,local_70,param_1\[uVar6\ \*\ 2\ \+\ iVar10\ \*\ 2\ \+\ 1\]\ \&\ 0x3ffff,$	+3
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_adjustAllocation_97be9cb4\)\(\&local_b0,\&local_ac,\&local_a8\);$@7	+2
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ CONCAT44\(extraout_r3_01,extraout_r4_07\);$	+1
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*local_a8\ =\ \(int\ \*\)\(\(char\ \*\ \(\*\)\(\)\)_glp_dtostr\)\(\(int\)\(\(ulonglong\)uVar26\ >>\ 0x20\),\(int\)uVar26,local_a8,$	+6
+use	_glpPPDisassemble	uVar26	callResultPair	INFERRED	Ghidra's 64-bit pair of a call's r3:r4 results (_adjustAllocation, _isTempArrayStart, _ncpy, _glp_dtostr); only the high word is used as a result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_adjustAllocation_97be9cb4\)\(\&local_b0,\&local_ac,\&local_a8\);$@8	+2
+use	_glpPPDisassemble	iVar9	arrayPos	CONFIRMED	position of the register in its array: -1 not in an array, 0 first element, k later elements (the value stored in tempArrayPos/paramArrayPos); counted up while scanning an array and stored as the array length at its end	^\s*iVar9\ =\ \-1;$	+1
+use	_glpPPDisassemble	iVar9	arrayPos	CONFIRMED	position of the register in its array: -1 not in an array, 0 first element, k later elements (the value stored in tempArrayPos/paramArrayPos); counted up while scanning an array and stored as the array length at its end	^\s*\*\(int\ \*\)\(local_7c\ \+\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ \*\ 4\)\ =\ iVar9;$	+1
+use	_glpPPDisassemble	iVar9	arrayPos	CONFIRMED	position of the register in its array: -1 not in an array, 0 first element, k later elements (the value stored in tempArrayPos/paramArrayPos); counted up while scanning an array and stored as the array length at its end	^\s*iVar9\ =\ 1;$	+1
+use	_glpPPDisassemble	iVar9	arrayPos	CONFIRMED	position of the register in its array: -1 not in an array, 0 first element, k later elements (the value stored in tempArrayPos/paramArrayPos); counted up while scanning an array and stored as the array length at its end	^\s*\*piVar15\ =\ iVar9;$	+1
+use	_glpPPDisassemble	iVar9	arrayPos	CONFIRMED	position of the register in its array: -1 not in an array, 0 first element, k later elements (the value stored in tempArrayPos/paramArrayPos); counted up while scanning an array and stored as the array length at its end	^\s*iVar9\ =\ \-1;$@2	+1
+use	_glpPPDisassemble	iVar9	arrayPos	CONFIRMED	position of the register in its array: -1 not in an array, 0 first element, k later elements (the value stored in tempArrayPos/paramArrayPos); counted up while scanning an array and stored as the array length at its end	^\s*\*\(int\ \*\)\(local_7c\ \+\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ \*\ 4\)\ =\ iVar9;$@2	+2
+use	_glpPPDisassemble	iVar9	arrayPos	CONFIRMED	position of the register in its array: -1 not in an array, 0 first element, k later elements (the value stored in tempArrayPos/paramArrayPos); counted up while scanning an array and stored as the array length at its end	^\s*iVar9\ =\ \*\(int\ \*\)\(local_7c\ \+\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar22\ \+\ 6\)\ \*\ 4\);$	+2
+use	_glpPPDisassemble	iVar9	arrayPos	CONFIRMED	position of the register in its array: -1 not in an array, 0 first element, k later elements (the value stored in tempArrayPos/paramArrayPos); counted up while scanning an array and stored as the array length at its end	^\s*if\ \(iVar9\ ==\ 0\)\ \{$	+1
+use	_glpPPDisassemble	iVar9	arrayPos	CONFIRMED	position of the register in its array: -1 not in an array, 0 first element, k later elements (the value stored in tempArrayPos/paramArrayPos); counted up while scanning an array and stored as the array length at its end	^\s*iVar9\ =\ \-1;$@3	+1
+use	_glpPPDisassemble	iVar9	arrayPos	CONFIRMED	position of the register in its array: -1 not in an array, 0 first element, k later elements (the value stored in tempArrayPos/paramArrayPos); counted up while scanning an array and stored as the array length at its end	^\s*\*\(int\ \*\)\(local_84\ \+\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ \*\ 4\)\ =\ iVar9;$	+1
+use	_glpPPDisassemble	iVar9	arrayPos	CONFIRMED	position of the register in its array: -1 not in an array, 0 first element, k later elements (the value stored in tempArrayPos/paramArrayPos); counted up while scanning an array and stored as the array length at its end	^\s*iVar9\ =\ 1;$@2	+1
+use	_glpPPDisassemble	iVar9	arrayPos	CONFIRMED	position of the register in its array: -1 not in an array, 0 first element, k later elements (the value stored in tempArrayPos/paramArrayPos); counted up while scanning an array and stored as the array length at its end	^\s*\*piVar15\ =\ iVar9;$@2	+1
+use	_glpPPDisassemble	iVar9	arrayPos	CONFIRMED	position of the register in its array: -1 not in an array, 0 first element, k later elements (the value stored in tempArrayPos/paramArrayPos); counted up while scanning an array and stored as the array length at its end	^\s*iVar9\ =\ \-1;$@4	+1
+use	_glpPPDisassemble	iVar9	arrayPos	CONFIRMED	position of the register in its array: -1 not in an array, 0 first element, k later elements (the value stored in tempArrayPos/paramArrayPos); counted up while scanning an array and stored as the array length at its end	^\s*\*\(int\ \*\)\(local_84\ \+\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar11\ \+\ 6\)\ \*\ 4\)\ =\ iVar9;$@2	+2
+use	_glpPPDisassemble	iVar9	paramEntryByteOffset	CONFIRMED	entry index * 8: byte offset of the 8-byte table entry (register number is the ushort at +6)	^\s*iVar9\ =\ iVar22\ \*\ 8;$	+1
+use	_glpPPDisassemble	iVar9	paramEntryByteOffset	CONFIRMED	entry index * 8: byte offset of the 8-byte table entry (register number is the ushort at +6)	^\s*iVar10\ =\ \*\(int\ \*\)\(local_84\ \+\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar9\ \+\ 6\)\ \*\ 4\);$	+1
+use	_glpPPDisassemble	iVar9	paramEntryByteOffset	CONFIRMED	entry index * 8: byte offset of the 8-byte table entry (register number is the ushort at +6)	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,\*\(undefined4\ \*\)$	+3
+use	_glpPPDisassemble	iVar9	paramEntryByteOffset	CONFIRMED	entry index * 8: byte offset of the 8-byte table entry (register number is the ushort at +6)	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,\*\(undefined4\ \*\)$	+3
+use	_glpPPDisassemble	iVar9	paramEntryByteOffset	CONFIRMED	entry index * 8: byte offset of the 8-byte table entry (register number is the ushort at +6)	^\s*if\ \(\*\(int\ \*\)\(local_84\ \+\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar9\ \+\ 6\)\ \*\ 4\)\ ==\ \-1\)\ \{$	+1
+use	_glpPPDisassemble	iVar10	scanByteOffset	CONFIRMED	byte offset of the current 8-byte temp entry, advanced by 8 per entry	^\s*iVar10\ =\ 0;$	+1
+use	_glpPPDisassemble	iVar10	scanByteOffset	CONFIRMED	byte offset of the current 8-byte temp entry, advanced by 8 per entry	^\s*bVar1\ =\ \*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar10\ \+\ 6\)\ ==\ local_a4;$	+1
+use	_glpPPDisassemble	iVar10	scanByteOffset	CONFIRMED	byte offset of the current 8-byte temp entry, advanced by 8 per entry	^\s*iVar10\ =\ iVar10\ \+\ 8;$	+1
+use	_glpPPDisassemble	iVar10	arrayPosLookup	CONFIRMED	tempArrayPos/paramArrayPos lookup for the register: -1 not in an array, 0 first element	^\s*iVar10\ =\ \*\(int\ \*\)\(local_84\ \+\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar9\ \+\ 6\)\ \*\ 4\);$	+2
+use	_glpPPDisassemble	iVar10	arrayPosLookup	CONFIRMED	tempArrayPos/paramArrayPos lookup for the register: -1 not in an array, 0 first element	^\s*else\ if\ \(iVar10\ ==\ 0\)\ \{$	+1
+use	_glpPPDisassemble	iVar12	numberEnd	CONFIRMED	end of the number text just written by _glp_dtostr (its returned position), where ", " or "}" is appended next	^\s*iVar12\ =\ \(int\)\(\(ulonglong\)uVar26\ >>\ 0x20\);$	+1
+use	_glpPPDisassemble	iVar12	numberEnd	CONFIRMED	end of the number text just written by _glp_dtostr (its returned position), where ", " or "}" is appended next	^\s*\*\(char\ \*\)\(iVar12\ \+\ iVar10\)\ =\ cVar8;$	+1
+use	_glpPPDisassemble	iVar12	numberEnd	CONFIRMED	end of the number text just written by _glp_dtostr (its returned position), where ", " or "}" is appended next	^\s*local_a8\ =\ \(int\ \*\)\(iVar12\ \+\ iVar13\);$	+6
+use	_glpPPDisassemble	iVar12	numberEnd	CONFIRMED	end of the number text just written by _glp_dtostr (its returned position), where ", " or "}" is appended next	^\s*iVar12\ =\ \(int\)\(\(ulonglong\)uVar26\ >>\ 0x20\);$@2	+1
+use	_glpPPDisassemble	iVar12	numberEnd	CONFIRMED	end of the number text just written by _glp_dtostr (its returned position), where ", " or "}" is appended next	^\s*\*\(char\ \*\)\(iVar12\ \+\ iVar10\)\ =\ cVar8;$@2	+1
+use	_glpPPDisassemble	iVar12	numberEnd	CONFIRMED	end of the number text just written by _glp_dtostr (its returned position), where ", " or "}" is appended next	^\s*local_a8\ =\ \(int\ \*\)\(iVar12\ \+\ iVar13\);$@2	+6
+use	_glpPPDisassemble	iVar12	numberEnd	CONFIRMED	end of the number text just written by _glp_dtostr (its returned position), where ", " or "}" is appended next	^\s*iVar12\ =\ \(int\)\(\(ulonglong\)uVar26\ >>\ 0x20\);$@3	+1
+use	_glpPPDisassemble	iVar12	numberEnd	CONFIRMED	end of the number text just written by _glp_dtostr (its returned position), where ", " or "}" is appended next	^\s*\*\(char\ \*\)\(iVar12\ \+\ iVar10\)\ =\ cVar8;$@3	+1
+use	_glpPPDisassemble	iVar12	numberEnd	CONFIRMED	end of the number text just written by _glp_dtostr (its returned position), where ", " or "}" is appended next	^\s*local_a8\ =\ \(int\ \*\)\(iVar12\ \+\ iVar13\);$@3	+6
+use	_glpPPDisassemble	iVar22	adrIndex	CONFIRMED	number of the address register being listed in "ADDRESS adr0, adr1, ..."	^\s*iVar22\ =\ 1;$	+1
+use	_glpPPDisassemble	iVar22	adrIndex	CONFIRMED	number of the address register being listed in "ADDRESS adr0, adr1, ..."	^\s*iVar9\ =\ iVar22\ \+\ 1;$@9	+4
+use	_glpPPDisassemble	iVar22	tableToFree	CONFIRMED	table pointer (tempNumbers/tempArrayPos) released with _free on the error path	^\s*iVar22\ =\ local_7c;$	+1
+use	_glpPPDisassemble	iVar22	tableToFree	CONFIRMED	table pointer (tempNumbers/tempArrayPos) released with _free on the error path	^\s*_free\(iVar22\);$	+1
+use	_glpPPDisassemble	iVar22	tableToFree	CONFIRMED	table pointer (tempNumbers/tempArrayPos) released with _free on the error path	^\s*iVar22\ =\ local_70;$	+1
+use	_glpPPDisassemble	iVar22	entryByteOffset	CONFIRMED	entry index * 8: byte offset of the 8-byte table entry	^\s*iVar22\ =\ uVar23\ \*\ 8;$	+1
+use	_glpPPDisassemble	iVar22	entryByteOffset	CONFIRMED	entry index * 8: byte offset of the 8-byte table entry	^\s*iVar22\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,\(uint\)\*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar22\ \+\ 6\)\);$	+2
+use	_glpPPDisassemble	iVar22	entryByteOffset	CONFIRMED	entry index * 8: byte offset of the 8-byte table entry	^\s*iVar9\ =\ \*\(int\ \*\)\(local_7c\ \+\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar21\ \+\ iVar22\ \+\ 6\)\ \*\ 4\);$	+1
+use	_glpPPDisassemble	iVar22	entryByteOffset	CONFIRMED	entry index * 8: byte offset of the 8-byte table entry	^\s*iVar22\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,\*\(undefined4\ \*\)$	+4
+use	_glpPPDisassemble	iVar22	entryByteOffset	CONFIRMED	entry index * 8: byte offset of the 8-byte table entry	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_ncpy_97be5f58\)\(local_a8,\*\(undefined4\ \*\)$	+3
+use	_glpPPDisassemble	iVar22	tableBytes	CONFIRMED	entry count * 4: byte size of a per-register table	^\s*iVar22\ =\ local_90\ \*\ 4;$	+1
+use	_glpPPDisassemble	iVar22	tableBytes	CONFIRMED	entry count * 4: byte size of a per-register table	^\s*iVar22\ =\ local_90\ <<\ 2;$	+1
+use	_glpPPDisassemble	iVar22	tableBytes	CONFIRMED	entry count * 4: byte size of a per-register table	^\s*if\ \(local_8c\ \+\ 1\ ==\ \*\(int\ \*\)\(iVar22\ \+\ \(int\)local_78\)\)\ \{$	+1
+use	_glpPPDisassemble	iVar22	instIndex	CONFIRMED	word index of the current instruction in the instruction scan (advanced by source count + 2)	^\s*iVar22\ =\ 0;$@25	+1
+use	_glpPPDisassemble	iVar22	instIndex	CONFIRMED	word index of the current instruction in the instruction scan (advanced by source count + 2)	^\s*if\ \(\(param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ >>\ 0x12\ \&\ 0xff\)\ \-\ 0x4b\ <\ 2\)\ \{$	+1
+use	_glpPPDisassemble	iVar22	instIndex	CONFIRMED	word index of the current instruction in the instruction scan (advanced by source count + 2)	^\s*iVar22\ =\ iVar22\ \+\ \(param_1\[uVar6\ \*\ 2\ \+\ iVar22\ \*\ 2\]\ >>\ 0x1d\)\ \+\ 2;$	+1
+local	_glpPPDisassemble	in_xer_so	xerSummaryOverflow	INFERRED	Ghidra artifact: the incoming XER summary-overflow bit folded into the condition-register image
+local	_glpPPDisassemble	in_f3	leftoverFpr3	INFERRED	Ghidra artifact: caller-saved f3 passed through unchanged as an extra argument of _glp_dtostr
+local	_glpPPDisassemble	in_f4	leftoverFpr4	INFERRED	Ghidra artifact: caller-saved f4 passed through unchanged to _glp_dtostr
+local	_glpPPDisassemble	in_f5	leftoverFpr5	INFERRED	Ghidra artifact: caller-saved f5 passed through unchanged to _glp_dtostr
+local	_glpPPDisassemble	in_f6	leftoverFpr6	INFERRED	Ghidra artifact: caller-saved f6 passed through unchanged to _glp_dtostr
+local	_glpPPDisassemble	in_f7	leftoverFpr7	INFERRED	Ghidra artifact: caller-saved f7 passed through unchanged to _glp_dtostr
+local	_glpPPDisassemble	in_f8	leftoverFpr8	INFERRED	Ghidra artifact: caller-saved f8 passed through unchanged to _glp_dtostr
+local	_glpPPDisassemble	in_stack_fffffd08	leftoverStackArg1	INFERRED	Ghidra artifact: stack argument slot passed through unchanged to _glp_dtostr
+local	_glpPPDisassemble	in_stack_fffffd10	leftoverStackArg2	INFERRED	Ghidra artifact: stack argument slot passed through unchanged to _glp_dtostr
+local	_glpPPDisassemble	in_stack_fffffd18	leftoverStackArg3	INFERRED	Ghidra artifact: stack argument slot passed through unchanged to _glp_dtostr
+local	_glpPPDisassemble	in_stack_fffffd20	leftoverStackArg4	INFERRED	Ghidra artifact: stack argument slot passed through unchanged to _glp_dtostr
+local	_glpPPDisassemble	in_stack_fffffd28	leftoverStackArg5	INFERRED	Ghidra artifact: stack argument slot passed through unchanged to _glp_dtostr
+local	_glpPPDisassemble	local_2b0	refMaskText	CONFIRMED	first byte of the buffer that _sprintf fills with "ref= %#x mask = %#x " (Ghidra split the 256-byte buffer into this byte and acStack_2af)
+local	_glpPPDisassemble	acStack_2af	refMaskTextTail	CONFIRMED	remaining 255 bytes of the "ref= %#x mask = %#x " text buffer, copied to the output after the first byte
+local	_glpPPDisassemble	local_1b0	stencilMaskText	CONFIRMED	256-byte buffer that _sprintf fills with "STENCIL MASK = %0x" before it is copied to the output
+local	_adjustAllocation_97bf27d4	param_1	capacityPtr	CONFIRMED	*param_1 is the buffer capacity: grown by 0x1000 when fewer than 0x800 bytes remain
+local	_adjustAllocation_97bf27d4	param_2	bufferPtr	CONFIRMED	*param_2 is the buffer base, passed to _realloc and replaced by the new allocation
+local	_adjustAllocation_97bf27d4	param_3	cursorPtr	CONFIRMED	*param_3 is the write cursor inside the buffer, rebased onto the new allocation (allocation + old offset)
+local	_adjustAllocation_97bf27d4	iVar1	oldBuffer	CONFIRMED	*param_2 before the realloc
+local	_adjustAllocation_97bf27d4	iVar2	newCapacity	CONFIRMED	old capacity + 0x1000, stored back to *param_1 and passed to _realloc
+local	_adjustAllocation_97bf27d4	iVar3	oldCursor	CONFIRMED	*param_3 before the realloc; (oldCursor - oldBuffer) is the used length
+local	_ncpy_97bf2850	param_1	out	CONFIRMED	destination buffer; the decimal digits (with a leading '-') are written here; return value is the number of characters written
+local	_ncpy_97bf2850	param_2	value	CONFIRMED	the integer printed in decimal (negated when negative)
+local	_ncpy_97bf2850	iVar1	leadingValue	CONFIRMED	value / 10: the digits before the last one, written recursively through _handleDigit; the last digit is value - leadingValue*10 + '0'
+local	_ncpy_97bf2850	local_20	writeCursor	CONFIRMED	address-taken pointer to the next char to write, advanced by _handleDigit
+local	_isParamArrayStart_97c017c0	param_1	program	CONFIRMED	packed program header: +0x38 parameter-array count, +0x3c offset (in 8-byte units) of the entries
+local	_isParamArrayStart_97c017c0	param_2	startRegister	INFERRED	compared with the low 16 bits of each entry's first word: the register where an array starts
+local	_isParamArrayStart_97c017c0	param_3	arraySize	INFERRED	receives the ushort at byte +6 of the matching table entry
+local	_isParamArrayStart_97c017c0	iVar1	arrayTable	CONFIRMED	program + word[0x3c/4] * 8: the table of 8-byte parameter-array entries
+local	_isParamArrayStart_97c017c0	iVar2	entryIndex	CONFIRMED	loop index over the table entries
+local	_isParamArrayStart_97c017c0	iVar3	arrayCount	CONFIRMED	program+0x38, the number of parameter-array entries
+local	_handleDigit_97c05b70	param_1	writeCursorPtr	CONFIRMED	pointer to the char* write cursor; one digit is stored through it and it is advanced
+local	_handleDigit_97c05b70	param_2	value	CONFIRMED	the number being printed; value/10 is printed first recursively
+local	_handleDigit_97c05b70	iVar1	leadingValue	CONFIRMED	value / 10, the digits that precede the last digit
+local	_PPStreamRemoveOperation	param_2	opChunk	CONFIRMED	operation chunk unlinked with _PPStreamChunkListRemoveChunk on stream+0x20; its index (word0 & 0x3ffff) is what labels and branches may refer to
+local	_PPStreamRemoveOperation	iVar5	nextChunk	CONFIRMED	opChunk's successor (+8): inherits the removed operation's bits 26..28 and takes over its branch targets; returned
+local	_PPStreamRemoveOperation	uVar1	removedFlagBits	INFERRED	opChunk word0 bits 26..28, kept in place and copied into the successor's word0
+local	_PPStreamRemoveOperation	uVar2	nextWord0	CONFIRMED	the successor's word0 before the update
+local	_PPStreamRemoveOperation	uVar3	oldTargetIndex	CONFIRMED	operation index that _renumberLabels/_renumberTargets replace: the removed operation's index (or the successor's when the removed one was index 0)
+local	_PPStreamRemoveOperation	uVar4	newTargetIndex	CONFIRMED	index the labels and branch targets are redirected to: the successor's index, or 0 when the removed operation had index 0
+local	_glpSourceSign	param_1	operands	CONFIRMED	array of 8-byte operand entries; word0 bit 27 (0x8000000) is the negate flag
+local	_glpSourceSign	param_2	out	CONFIRMED	output position; a '-' is appended when the effective sign is negative; end position returned
+local	_glpSourceSign	param_3	operandIndex	CONFIRMED	operand entry number (byte offset operandIndex * 8)
+local	_glpSourceSign	param_4	invert	CONFIRMED	bit 0 flips the sign test: with it set the '-' is printed when the negate bit is clear
+local	_glpSourceType	param_1	operands	CONFIRMED	array of 8-byte operand entries; word0 >> 0x17 & 7 is the register file, word1 (+8 of the instruction) holds the swizzle
+local	_glpSourceType	param_2	out	CONFIRMED	output position; "att", "tmp", "prm" or "res" plus the register number is appended; end position returned
+local	_glpSourceType	param_3	paramNumberMap	CONFIRMED	table indexed by register number giving the printed parameter number (prm file)
+local	_glpSourceType	param_4	paramArrayMap	CONFIRMED	table indexed by register number: -1 not in a parameter array, otherwise the array position/size printed in "[...]"
+local	_glpSourceType	param_5	operandIndex	CONFIRMED	operand entry number (byte offset operandIndex * 8)
+local	_glpSourceType	param_6	rowOffset	INFERRED	added to the register number, so a matrix source prints consecutive registers; with flag 0x10 it is replaced by the 2-bit swizzle component of the operand
+local	_glpSourceType	param_7	printFlags	INFERRED	bit 0x10 selects the swizzle component (from instruction word 2) as the row offset
+local	_glpSourceType	iVar3	textCursor	CONFIRMED	output position after the register name and number
+local	_glpSourceType	iVar4	bracketCursor	CONFIRMED	output position inside the "[...]" array or address-register suffix
+local	_glpSourceType	iVar6	operandByteOffset	CONFIRMED	operandIndex * 8
+use	_glpSourceType	uVar2	registerFile	CONFIRMED	operand word0 >> 0x17 & 7: 0 att, 1 tmp, 2 prm, 3 res (the printed register prefix)	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar6\ \+\ param_1\)\ >>\ 0x17\ \&\ 7;$	+2
+use	_glpSourceType	uVar2	registerFile	CONFIRMED	operand word0 >> 0x17 & 7: 0 att, 1 tmp, 2 prm, 3 res (the printed register prefix)	^\s*if\ \(uVar2\ <\ 2\)\ \{$	+2
+use	_glpSourceType	uVar2	registerFile	CONFIRMED	operand word0 >> 0x17 & 7: 0 att, 1 tmp, 2 prm, 3 res (the printed register prefix)	^\s*if\ \(uVar2\ !=\ 2\)\ \{$	+2
+use	_glpSourceType	uVar2	addressComponent	CONFIRMED	operand word0 >> 0x1c & 3: component of the address register printed as .x/.y/.z/.w in "[adrN.c]"	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar6\ \+\ param_1\)\ >>\ 0x1c\ \&\ 3;$	+2
+use	_glpSourceType	uVar2	addressComponent	CONFIRMED	operand word0 >> 0x1c & 3: component of the address register printed as .x/.y/.z/.w in "[adrN.c]"	^\s*if\ \(1\ <\ uVar2\)\ \{$	+2
+use	_glpSourceType	uVar2	addressComponent	CONFIRMED	operand word0 >> 0x1c & 3: component of the address register printed as .x/.y/.z/.w in "[adrN.c]"	^\s*if\ \(uVar2\ !=\ 3\)\ goto\ LAB_97bf2c88;$	+1
+use	_glpSourceType	uVar2	addressComponent	CONFIRMED	operand word0 >> 0x1c & 3: component of the address register printed as .x/.y/.z/.w in "[adrN.c]"	^\s*if\ \(uVar2\ ==\ 0\)\ \{$	+1
+local	_glpSourceComponents	param_1	inst	CONFIRMED	compact instruction: 8-byte operand entries from +0 (indexed by operandIndex * 8); word 2 (+8) holds the destination write-mask/swizzle bits
+local	_glpSourceComponents	param_2	out	CONFIRMED	output position; the component letters x/y/z/w are appended and the end position returned
+local	_glpSourceComponents	param_3	operandIndex	CONFIRMED	operand entry number whose swizzle fields (word0 bits 3.., 9.., 15.., 21..) are packed into sourceSwizzle
+local	_glpSourceComponents	param_4	destSwizzleOrComponent	INFERRED	with flag 4 set: a ready-made destination swizzle (identity 0x3210); with flag 2: the single component index 0..3 to print
+local	_glpSourceComponents	param_5	printFlags	INFERRED	0x40 = print identity source swizzle, 0xc = combine with the destination swizzle (4 = use param_4), 2 = print a single component
+use	_glpSourceComponents	uVar2	bitShift	CONFIRMED	nibbleShift & 0x3f: shift count for merging one 2-bit component	^\s*uVar2\ =\ uVar9\ \&\ 0x3f;$	+1
+use	_glpSourceComponents	uVar2	bitShift	CONFIRMED	nibbleShift & 0x3f: shift count for merging one 2-bit component	^\s*uVar8\ =\ uVar8\ \|\ uVar5\ \&\ 3\ <<\ uVar2;$	+1
+use	_glpSourceComponents	uVar4	destSwizzle	CONFIRMED	destination swizzle as four 4-bit fields (identity 0x3210), from param_4 or inst word 2 rearranged	^\s*uVar4\ =\ param_4;$	+1
+use	_glpSourceComponents	uVar4	destSwizzle	CONFIRMED	destination swizzle as four 4-bit fields (identity 0x3210), from param_4 or inst word 2 rearranged	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$	+2
+use	_glpSourceComponents	uVar4	destSwizzle	CONFIRMED	destination swizzle as four 4-bit fields (identity 0x3210), from param_4 or inst word 2 rearranged	^\s*if\ \(uVar4\ !=\ 0x3210\)\ \{$	+1
+use	_glpSourceComponents	uVar4	destSwizzle	CONFIRMED	destination swizzle as four 4-bit fields (identity 0x3210), from param_4 or inst word 2 rearranged	^\s*uVar5\ =\ \(uVar4\ \&\ 3\)\ \*\ 4\ \-\ uVar9;$	+1
+use	_glpSourceComponents	uVar4	destSwizzle	CONFIRMED	destination swizzle as four 4-bit fields (identity 0x3210), from param_4 or inst word 2 rearranged	^\s*uVar4\ =\ \(int\)uVar4\ >>\ 4;$	+1
+use	_glpSourceComponents	uVar5	shiftAmount	CONFIRMED	component selected by the destination swizzle * 4 minus the nibble position: how far the source swizzle is shifted	^\s*uVar5\ =\ \(uVar4\ \&\ 3\)\ \*\ 4\ \-\ uVar9;$	+3
+use	_glpSourceComponents	uVar5	shiftAmount	CONFIRMED	component selected by the destination swizzle * 4 minus the nibble position: how far the source swizzle is shifted	^\s*uVar5\ =\ \(int\)uVar7\ >>\ \(uVar5\ \&\ 0x3f\);$	+1
+use	_glpSourceComponents	uVar5	shiftAmount	CONFIRMED	component selected by the destination swizzle * 4 minus the nibble position: how far the source swizzle is shifted	^\s*uVar8\ =\ uVar8\ \|\ uVar5\ \&\ 3\ <<\ uVar2;$	+1
+use	_glpSourceComponents	pcVar6	textCursor	CONFIRMED	output position after the leading '.'	^\s*pcVar6\ =\ param_2\ \+\ iVar10;$	+1
+use	_glpSourceComponents	pcVar6	textCursor	CONFIRMED	output position after the leading '.'	^\s*return\ pcVar6;$	+1
+use	_glpSourceComponents	pcVar6	textCursor	CONFIRMED	output position after the leading '.'	^\s*return\ pcVar6;$@2	+1
+use	_glpSourceComponents	pcVar6	textCursor	CONFIRMED	output position after the leading '.'	^\s*param_2\ =\ pcVar6\ \+\ 1;$	+1
+use	_glpSourceComponents	uVar7	sourceSwizzle	CONFIRMED	operand swizzle packed as four 4-bit fields, identity 0x3210 unless taken from the operand's word0	^\s*uVar7\ =\ 0x3210;$	+1
+use	_glpSourceComponents	uVar7	sourceSwizzle	CONFIRMED	operand swizzle packed as four 4-bit fields, identity 0x3210 unless taken from the operand's word0	^\s*uVar7\ =\ \*\(uint\ \*\)\(param_1\ \+\ param_3\ \*\ 8\);$	+2
+use	_glpSourceComponents	uVar7	sourceSwizzle	CONFIRMED	operand swizzle packed as four 4-bit fields, identity 0x3210 unless taken from the operand's word0	^\s*uVar8\ =\ uVar7;$	+1
+use	_glpSourceComponents	uVar7	sourceSwizzle	CONFIRMED	operand swizzle packed as four 4-bit fields, identity 0x3210 unless taken from the operand's word0	^\s*uVar5\ =\ uVar7\ <<\ \(\-uVar5\ \&\ 0x3f\);$	+1
+use	_glpSourceComponents	uVar7	sourceSwizzle	CONFIRMED	operand swizzle packed as four 4-bit fields, identity 0x3210 unless taken from the operand's word0	^\s*uVar5\ =\ \(int\)uVar7\ >>\ \(uVar5\ \&\ 0x3f\);$	+1
+use	_glpSourceComponents	uVar8	finalSwizzle	CONFIRMED	source swizzle after the destination swizzle was applied; its nibbles + 1 & 3 give the printed letters ('x'+n)	^\s*uVar8\ =\ uVar7;$	+1
+use	_glpSourceComponents	uVar8	finalSwizzle	CONFIRMED	source swizzle after the destination swizzle was applied; its nibbles + 1 & 3 give the printed letters ('x'+n)	^\s*uVar8\ =\ 0;$	+1
+use	_glpSourceComponents	uVar8	finalSwizzle	CONFIRMED	source swizzle after the destination swizzle was applied; its nibbles + 1 & 3 give the printed letters ('x'+n)	^\s*uVar8\ =\ uVar8\ \|\ uVar5\ \&\ 3\ <<\ uVar2;$	+1
+use	_glpSourceComponents	uVar8	finalSwizzle	CONFIRMED	source swizzle after the destination swizzle was applied; its nibbles + 1 & 3 give the printed letters ('x'+n)	^\s*if\ \(uVar8\ !=\ 0x3210\)\ \{$	+1
+use	_glpSourceComponents	uVar8	finalSwizzle	CONFIRMED	source swizzle after the destination swizzle was applied; its nibbles + 1 & 3 give the printed letters ('x'+n)	^\s*cVar1\ =\ \(char\)uVar8;$	+2
+use	_glpSourceComponents	uVar8	finalSwizzle	CONFIRMED	source swizzle after the destination swizzle was applied; its nibbles + 1 & 3 give the printed letters ('x'+n)	^\s*uVar8\ =\ \(int\)uVar8\ >>\ 4;$@2	+1
+use	_glpSourceComponents	uVar8	finalSwizzle	CONFIRMED	source swizzle after the destination swizzle was applied; its nibbles + 1 & 3 give the printed letters ('x'+n)	^\s*uVar8\ =\ \(int\)uVar8\ >>\ 8;$	+1
+use	_glpSourceComponents	uVar8	finalSwizzle	CONFIRMED	source swizzle after the destination swizzle was applied; its nibbles + 1 & 3 give the printed letters ('x'+n)	^\s*uVar8\ =\ \(int\)uVar8\ >>\ 0xc;$	+1
+use	_glpSourceComponents	uVar8	finalSwizzle	CONFIRMED	source swizzle after the destination swizzle was applied; its nibbles + 1 & 3 give the printed letters ('x'+n)	^\s*param_2\[iVar10\]\ =\ \(\(char\)uVar8\ \+\ 1U\ \&\ 3\)\ \+\ 0x77;$	+1
+use	_glpSourceComponents	uVar9	nibbleShift	CONFIRMED	0,4,8,12: position of the component being merged	^\s*uVar9\ =\ 0;$	+1
+use	_glpSourceComponents	uVar9	nibbleShift	CONFIRMED	0,4,8,12: position of the component being merged	^\s*uVar2\ =\ uVar9\ \&\ 0x3f;$	+2
+use	_glpSourceComponents	uVar9	nibbleShift	CONFIRMED	0,4,8,12: position of the component being merged	^\s*uVar9\ =\ uVar9\ \+\ 4;$	+1
+use	_glpSourceComponents	iVar10	componentsLeft	CONFIRMED	counts the 4 swizzle components down	^\s*iVar10\ =\ 4;$	+1
+use	_glpSourceComponents	iVar10	componentsLeft	CONFIRMED	counts the 4 swizzle components down	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2
+use	_glpSourceComponents	iVar10	componentCount	CONFIRMED	4, or 1 when the operand's component-count bits (word0 & 0x3000) are zero: how many letters to print	^\s*iVar10\ =\ 4;$@2	+1
+use	_glpSourceComponents	iVar10	componentCount	CONFIRMED	4, or 1 when the operand's component-count bits (word0 & 0x3000) are zero: how many letters to print	^\s*iVar10\ =\ 1;$	+1
+use	_glpSourceComponents	iVar10	componentCount	CONFIRMED	4, or 1 when the operand's component-count bits (word0 & 0x3000) are zero: how many letters to print	^\s*for\ \(;\ iVar10\ !=\ 0;\ iVar10\ =\ iVar10\ \+\ \-1\)\ \{$	+1
+local	_glpWriteComponentsWithDestinationSwizzle	param_1	inst	CONFIRMED	compact instruction whose word 2 (+8) holds the destination swizzle bits
+local	_glpWriteComponentsWithDestinationSwizzle	param_2	out	CONFIRMED	output position; four component letters are appended and the end position returned
+use	_glpWriteComponentsWithDestinationSwizzle	uVar2	bitShift	CONFIRMED	nibbleShift & 0x3f: shift count for merging one 2-bit component	^\s*uVar2\ =\ uVar5\ \&\ 0x3f;$	+1
+use	_glpWriteComponentsWithDestinationSwizzle	uVar2	bitShift	CONFIRMED	nibbleShift & 0x3f: shift count for merging one 2-bit component	^\s*uVar6\ =\ uVar6\ \|\ uVar3\ \&\ 3\ <<\ uVar2;$	+1
+use	_glpWriteComponentsWithDestinationSwizzle	uVar3	shiftAmount	CONFIRMED	component selected by the destination swizzle * 4 minus the nibble position	^\s*uVar3\ =\ \(uVar7\ \&\ 3\)\ \*\ 4\ \-\ uVar5;$	+3
+use	_glpWriteComponentsWithDestinationSwizzle	uVar3	shiftAmount	CONFIRMED	component selected by the destination swizzle * 4 minus the nibble position	^\s*uVar3\ =\ 0x3210\ >>\ \(uVar3\ \&\ 0x3f\);$	+1
+use	_glpWriteComponentsWithDestinationSwizzle	uVar3	shiftAmount	CONFIRMED	component selected by the destination swizzle * 4 minus the nibble position	^\s*uVar6\ =\ uVar6\ \|\ uVar3\ \&\ 3\ <<\ uVar2;$	+1
+use	_glpWriteComponentsWithDestinationSwizzle	pcVar4	textCursor	CONFIRMED	output position after the leading '.'	^\s*pcVar4\ =\ param_2\ \+\ iVar8;$	+1
+use	_glpWriteComponentsWithDestinationSwizzle	pcVar4	textCursor	CONFIRMED	output position after the leading '.'	^\s*\*pcVar4\ =\ \(cVar1\ \+\ 1U\ \&\ 3\)\ \+\ 0x77;$	+2
+use	_glpWriteComponentsWithDestinationSwizzle	pcVar4	textCursor	CONFIRMED	output position after the leading '.'	^\s*return\ pcVar4;$	+1
+use	_glpWriteComponentsWithDestinationSwizzle	uVar5	nibbleShift	CONFIRMED	0,4,8,12: position of the component being merged	^\s*uVar5\ =\ 0;$	+1
+use	_glpWriteComponentsWithDestinationSwizzle	uVar5	nibbleShift	CONFIRMED	0,4,8,12: position of the component being merged	^\s*uVar2\ =\ uVar5\ \&\ 0x3f;$	+2
+use	_glpWriteComponentsWithDestinationSwizzle	uVar5	nibbleShift	CONFIRMED	0,4,8,12: position of the component being merged	^\s*uVar5\ =\ uVar5\ \+\ 4;$	+1
+use	_glpWriteComponentsWithDestinationSwizzle	uVar6	resultSwizzle	CONFIRMED	identity swizzle 0x3210 permuted by the destination swizzle; its nibbles + 1 & 3 give the printed letters	^\s*uVar6\ =\ 0;$	+1
+use	_glpWriteComponentsWithDestinationSwizzle	uVar6	resultSwizzle	CONFIRMED	identity swizzle 0x3210 permuted by the destination swizzle; its nibbles + 1 & 3 give the printed letters	^\s*uVar6\ =\ uVar6\ \|\ uVar3\ \&\ 3\ <<\ uVar2;$	+1
+use	_glpWriteComponentsWithDestinationSwizzle	uVar6	resultSwizzle	CONFIRMED	identity swizzle 0x3210 permuted by the destination swizzle; its nibbles + 1 & 3 give the printed letters	^\s*if\ \(uVar6\ !=\ 0x3210\)\ \{$	+1
+use	_glpWriteComponentsWithDestinationSwizzle	uVar6	resultSwizzle	CONFIRMED	identity swizzle 0x3210 permuted by the destination swizzle; its nibbles + 1 & 3 give the printed letters	^\s*cVar1\ =\ \(char\)uVar6;$	+2
+use	_glpWriteComponentsWithDestinationSwizzle	uVar7	destSwizzle	CONFIRMED	destination swizzle from inst word 2 rearranged into four 4-bit fields (identity 0x3210 prints nothing)	^\s*uVar7\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$	+3
+use	_glpWriteComponentsWithDestinationSwizzle	uVar7	destSwizzle	CONFIRMED	destination swizzle from inst word 2 rearranged into four 4-bit fields (identity 0x3210 prints nothing)	^\s*uVar3\ =\ \(uVar7\ \&\ 3\)\ \*\ 4\ \-\ uVar5;$	+1
+use	_glpWriteComponentsWithDestinationSwizzle	uVar7	destSwizzle	CONFIRMED	destination swizzle from inst word 2 rearranged into four 4-bit fields (identity 0x3210 prints nothing)	^\s*uVar7\ =\ \(int\)uVar7\ >>\ 4;$	+1
+use	_glpWriteComponentsWithDestinationSwizzle	iVar8	componentsLeft	CONFIRMED	counts the 4 swizzle components down	^\s*iVar8\ =\ 4;$	+1
+use	_glpWriteComponentsWithDestinationSwizzle	iVar8	componentsLeft	CONFIRMED	counts the 4 swizzle components down	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+2
+local	_glpWriteDestinationMask	param_1	inst	CONFIRMED	compact instruction whose word 2 (+8) holds the destination write mask bits 13..16 (x,y,z,w)
+local	_glpWriteDestinationMask	param_2	out	CONFIRMED	output position; ".xyzw" mask letters are appended and the end position returned
+local	_glpWriteDestinationMask	param_3	maskStyle	INFERRED	0 or 1 selects the abbreviated mask forms printed for the first enabled component; other values print nothing
+local	_glpWriteDestinationMask	param_4	printFlags	INFERRED	bit 2 selects the style of mask printing (full ".xyzw" letters when clear)
+use	_glpWriteDestinationMask	uVar1	maskWord	CONFIRMED	inst word 2 re-read after each copy: bits 0x2000/0x4000/0x8000/0x10000 enable x/y/z/w	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$	+2
+use	_glpWriteDestinationMask	uVar1	maskWord	CONFIRMED	inst word 2 re-read after each copy: bits 0x2000/0x4000/0x8000/0x10000 enable x/y/z/w	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$@2	+1
+use	_glpWriteDestinationMask	uVar1	maskWord	CONFIRMED	inst word 2 re-read after each copy: bits 0x2000/0x4000/0x8000/0x10000 enable x/y/z/w	^\s*if\ \(\(uVar1\ \&\ 0x2000\)\ !=\ 0\)\ \{$	+1
+use	_glpWriteDestinationMask	uVar1	maskWord	CONFIRMED	inst word 2 re-read after each copy: bits 0x2000/0x4000/0x8000/0x10000 enable x/y/z/w	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$@3	+1
+use	_glpWriteDestinationMask	uVar1	maskWord	CONFIRMED	inst word 2 re-read after each copy: bits 0x2000/0x4000/0x8000/0x10000 enable x/y/z/w	^\s*if\ \(\(uVar1\ \&\ 0x4000\)\ !=\ 0\)\ \{$	+1
+use	_glpWriteDestinationMask	uVar1	maskWord	CONFIRMED	inst word 2 re-read after each copy: bits 0x2000/0x4000/0x8000/0x10000 enable x/y/z/w	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$@4	+1
+use	_glpWriteDestinationMask	uVar1	maskWord	CONFIRMED	inst word 2 re-read after each copy: bits 0x2000/0x4000/0x8000/0x10000 enable x/y/z/w	^\s*if\ \(\(uVar1\ \&\ 0x8000\)\ !=\ 0\)\ \{$	+1
+use	_glpWriteDestinationMask	uVar1	maskWord	CONFIRMED	inst word 2 re-read after each copy: bits 0x2000/0x4000/0x8000/0x10000 enable x/y/z/w	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$@5	+1
+use	_glpWriteDestinationMask	uVar1	maskWord	CONFIRMED	inst word 2 re-read after each copy: bits 0x2000/0x4000/0x8000/0x10000 enable x/y/z/w	^\s*if\ \(\(uVar1\ \&\ 0x10000\)\ ==\ 0\)\ \{$	+1
+use	_glpWriteDestinationMask	uVar1	maskWord	CONFIRMED	inst word 2 re-read after each copy: bits 0x2000/0x4000/0x8000/0x10000 enable x/y/z/w	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$@6	+1
+use	_glpWriteDestinationMask	uVar1	maskWord	CONFIRMED	inst word 2 re-read after each copy: bits 0x2000/0x4000/0x8000/0x10000 enable x/y/z/w	^\s*if\ \(\(uVar1\ \&\ 0x4000\)\ ==\ 0\)\ \{$	+3
+use	_glpWriteDestinationMask	uVar1	maskWord	CONFIRMED	inst word 2 re-read after each copy: bits 0x2000/0x4000/0x8000/0x10000 enable x/y/z/w	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\ \+\ 8\);$@7	+1
+use	_glpWriteDestinationMask	uVar1	maskWord	CONFIRMED	inst word 2 re-read after each copy: bits 0x2000/0x4000/0x8000/0x10000 enable x/y/z/w	^\s*if\ \(\(uVar1\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+4
+use	_glpWriteDestinationMask	iVar3	copyLength	CONFIRMED	characters copied for the letter just written (copy loop result)	^\s*iVar3\ =\ 0;$	+2
+use	_glpWriteDestinationMask	iVar3	copyLength	CONFIRMED	characters copied for the letter just written (copy loop result)	^\s*iVar3\ =\ iVar4\ \+\ 1;$	+1
+use	_glpWriteDestinationMask	iVar3	copyLength	CONFIRMED	characters copied for the letter just written (copy loop result)	^\s*iVar4\ =\ iVar3;$@2	+1
+use	_glpWriteDestinationMask	iVar3	copyLength	CONFIRMED	characters copied for the letter just written (copy loop result)	^\s*iVar5\ =\ iVar5\ \+\ iVar3;$	+1
+use	_glpWriteDestinationMask	iVar3	copyLength	CONFIRMED	characters copied for the letter just written (copy loop result)	^\s*iVar3\ =\ 0;$@2	+2
+use	_glpWriteDestinationMask	iVar3	copyLength	CONFIRMED	characters copied for the letter just written (copy loop result)	^\s*iVar3\ =\ iVar4\ \+\ 1;$@2	+1
+use	_glpWriteDestinationMask	iVar3	copyLength	CONFIRMED	characters copied for the letter just written (copy loop result)	^\s*iVar4\ =\ iVar3;$@4	+1
+use	_glpWriteDestinationMask	iVar3	copyLength	CONFIRMED	characters copied for the letter just written (copy loop result)	^\s*iVar5\ =\ iVar5\ \+\ iVar3;$@2	+1
+use	_glpWriteDestinationMask	iVar3	copyLength	CONFIRMED	characters copied for the letter just written (copy loop result)	^\s*iVar3\ =\ 0;$@3	+2
+use	_glpWriteDestinationMask	iVar3	copyLength	CONFIRMED	characters copied for the letter just written (copy loop result)	^\s*iVar3\ =\ iVar4\ \+\ 1;$@3	+1
+use	_glpWriteDestinationMask	iVar3	copyLength	CONFIRMED	characters copied for the letter just written (copy loop result)	^\s*iVar4\ =\ iVar3;$@6	+1
+use	_glpWriteDestinationMask	iVar3	copyLength	CONFIRMED	characters copied for the letter just written (copy loop result)	^\s*iVar5\ =\ iVar5\ \+\ iVar3;$@3	+1
+use	_glpWriteDestinationMask	iVar4	copyIndex3	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar4\ =\ iVar5;$	+1
+use	_glpWriteDestinationMask	iVar4	copyIndex3	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(param_2\ \+\ iVar4\)\ =\ cVar2;$	+4
+use	_glpWriteDestinationMask	iVar4	copyIndex3	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar4\ =\ iVar3;$	+1
+use	_glpWriteDestinationMask	iVar4	copyIndex3	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$	+4
+use	_glpWriteDestinationMask	iVar4	copyIndex3	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar4\ =\ iVar3;$@3	+1
+use	_glpWriteDestinationMask	iVar4	copyIndex3	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$@2	+4
+use	_glpWriteDestinationMask	iVar4	copyIndex3	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*iVar4\ =\ iVar3;$@5	+1
+use	_glpWriteDestinationMask	iVar4	copyIndex3	CONFIRMED	index of the character copied from a string literal into the output (copy loop)	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$@3	+4
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*iVar5\ =\ 0;$	+2
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*iVar5\ =\ iVar4\ \+\ 1;$	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*iVar4\ =\ iVar5;$@2	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*iVar5\ =\ param_2\ \+\ iVar5;$	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*iVar5\ =\ iVar5\ \+\ iVar3;$	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$@2	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*iVar5\ =\ iVar5\ \+\ iVar3;$@2	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$@3	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*iVar5\ =\ iVar5\ \+\ iVar3;$@3	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*return\ iVar5;$	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$@4	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*iVar5\ =\ param_2\ \+\ iVar5;$@2	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*return\ iVar5;$@2	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$@5	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$@6	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$@7	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*iVar5\ =\ param_2\ \+\ iVar5;$@3	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*return\ iVar5;$@3	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$@8	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$@9	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$@10	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$@11	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*iVar5\ =\ param_2\ \+\ iVar5;$@4	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*return\ iVar5;$@4	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$@12	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$@13	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*iVar5\ =\ param_2\ \+\ iVar5;$@5	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*return\ iVar5;$@5	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*\*\(char\ \*\)\(iVar5\ \+\ iVar4\)\ =\ cVar2;$@14	+1
+use	_glpWriteDestinationMask	iVar5	writeCursor	CONFIRMED	output position: starts as the copy length of the '.' and becomes out + length, advancing past each mask letter	^\s*return\ iVar5\ \+\ iVar4;$	+1
