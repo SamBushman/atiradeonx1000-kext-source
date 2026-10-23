@@ -620,27 +620,27 @@ int __cxxabiv1____vmi_class_type_info____do_find_public_src(this, param_2, param
 }
 
 /* __ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE @ 0x97c1857c (128 bytes) */
-int __ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE(this, param_2, __sub_kind, __class_type_info1, param_5, __class_type_info2, param_7, __dyncast_result)
+int __ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE(this, src2dst, accessPath, dstType, objPtr, srcType, srcPtr, result)
   void *this;
-  int param_2;
-  int __sub_kind;
-  unsigned char * __class_type_info1;
-  int param_5;
-  unsigned char * __class_type_info2;
-  int param_7;
-  int *__dyncast_result;
+  int src2dst;
+  int accessPath;
+  unsigned char * dstType;
+  int objPtr;
+  unsigned char * srcType;
+  int srcPtr;
+  int *result;
 {
   int iVar1;
   
-  if ((param_5 == param_7) && (iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,__class_type_info2), iVar1 != 0)) {
-    __dyncast_result[2] = __sub_kind;
+  if ((objPtr == srcPtr) && (iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,srcType), iVar1 != 0)) {
+    result[2] = accessPath;
   }
   else {
-    iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,__class_type_info1);
+    iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,dstType);
     if (iVar1 != 0) {
-      *__dyncast_result = param_5;
-      __dyncast_result[3] = 1;
-      __dyncast_result[1] = __sub_kind;
+      *result = objPtr;
+      result[3] = 1;
+      result[1] = accessPath;
     }
   }
   return 0;

@@ -1,46 +1,46 @@
 #include "decls.h"
 
 /* __ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE @ 0x97c185fc (244 bytes) */
-int __ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE(this, param_2, __sub_kind, __class_type_info1, param_5, __class_type_info2, param_7, __dyncast_result)
+int __ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE(this, src2dst, accessPath, dstType, objPtr, srcType, srcPtr, result)
   void *this;
-  int param_2;
-  int __sub_kind;
-  unsigned char * __class_type_info1;
-  int param_5;
-  unsigned char * __class_type_info2;
-  int param_7;
-  int *__dyncast_result;
+  int src2dst;
+  int accessPath;
+  unsigned char * dstType;
+  int objPtr;
+  unsigned char * srcType;
+  int srcPtr;
+  int *result;
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = __ZNKSt9type_infoeqERKS_(this,__class_type_info1);
+  iVar1 = __ZNKSt9type_infoeqERKS_(this,dstType);
   if (iVar1 == 0) {
-    if ((param_5 == param_7) && (iVar1 = __ZNKSt9type_infoeqERKS_(this,__class_type_info2), iVar1 != 0)) {
-      __dyncast_result[2] = __sub_kind;
+    if ((objPtr == srcPtr) && (iVar1 = __ZNKSt9type_infoeqERKS_(this,srcType), iVar1 != 0)) {
+      result[2] = accessPath;
       return 0;
     }
                     
                     
     uVar2 = (**(code **)(**(int **)((int)this + 8) + 0x1c))
-                      (*(int **)((int)this + 8),param_2,__sub_kind,__class_type_info1,param_5,__class_type_info2,param_7,
-                       __dyncast_result);
+                      (*(int **)((int)this + 8),src2dst,accessPath,dstType,objPtr,srcType,srcPtr,
+                       result);
     return uVar2;
   }
-  __dyncast_result[1] = __sub_kind;
-  *__dyncast_result = param_5;
-  if (param_2 < 0) {
-    if (param_2 != -2) {
+  result[1] = accessPath;
+  *result = objPtr;
+  if (src2dst < 0) {
+    if (src2dst != -2) {
       return 0;
     }
   }
   else {
     iVar1 = 6;
-    if (param_5 + param_2 == param_7) goto LAB_97c1866c;
+    if (objPtr + src2dst == srcPtr) goto LAB_97c1866c;
   }
   iVar1 = 1;
 LAB_97c1866c:
-  __dyncast_result[3] = iVar1;
+  result[3] = iVar1;
   return 0;
 }
 
@@ -254,50 +254,50 @@ LAB_97c187a0:
 }
 
 /* __ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE @ 0x97c18b34 (84 bytes) */
-int __ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE(this, __class_type_info, param_3, __upcast_result)
+int __ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE(this, dstType, objPtr, result)
   void *this;
-  unsigned char * __class_type_info;
-  void *param_3;
-  unsigned char * __upcast_result;
+  unsigned char * dstType;
+  void *objPtr;
+  unsigned char * result;
 {
   int iVar1;
   
-  iVar1 = __ZNKSt9type_infoeqERKS_(this,(unsigned char *)__class_type_info);
+  iVar1 = __ZNKSt9type_infoeqERKS_(this,(unsigned char *)dstType);
   if (iVar1 != 0) {
-    *(void **)__upcast_result = param_3;
-    *(undefined4 *)(__upcast_result + 4) = 6;
-    *(undefined4 *)(__upcast_result + 0xc) = 8;
+    *(void **)result = objPtr;
+    *(undefined4 *)(result + 4) = 6;
+    *(undefined4 *)(result + 0xc) = 8;
   }
   return iVar1 != 0;
 }
 
 /* __ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_infoEPKvRNS1_15__upcast_resultE @ 0x97c18b88 (116 bytes) */
-int __ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_infoEPKvRNS1_15__upcast_resultE(this, __class_type_info, param_3, __upcast_result)
+int __ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_infoEPKvRNS1_15__upcast_resultE(this, dstType, objPtr, result)
   void *this;
-  unsigned char * __class_type_info;
-  void *param_3;
-  unsigned char * __upcast_result;
+  unsigned char * dstType;
+  void *objPtr;
+  unsigned char * result;
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = ((int (*)())__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE)(this,__class_type_info,param_3,__upcast_result);
+  iVar1 = ((int (*)())__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE)(this,dstType,objPtr,result);
   if (iVar1 == 0) {
                     
                     
     uVar2 = (**(code **)(**(int **)((int)this + 8) + 0x18))
-                      (*(int **)((int)this + 8),__class_type_info,param_3,__upcast_result);
+                      (*(int **)((int)this + 8),dstType,objPtr,result);
     return uVar2;
   }
   return 1;
 }
 
 /* __cxxabiv1____vmi_class_type_info____do_upcast @ 0x97c18bfc (556 bytes) */
-int __cxxabiv1____vmi_class_type_info____do_upcast(this, __class_type_info, param_3, __upcast_result)
+int __cxxabiv1____vmi_class_type_info____do_upcast(this, dstType, objPtr, result)
   unsigned char * this;
-  unsigned char * __class_type_info;
-  void *param_3;
-  unsigned char * __upcast_result;
+  unsigned char * dstType;
+  void *objPtr;
+  unsigned char * result;
 {
   uint uVar1;
   int iVar2;
@@ -312,10 +312,10 @@ int __cxxabiv1____vmi_class_type_info____do_upcast(this, __class_type_info, para
   uint local_38;
   void *local_34;
   
-  iVar3 = ((int (*)())__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE)(this,__class_type_info,param_3,__upcast_result);
+  iVar3 = ((int (*)())__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE)(this,dstType,objPtr,result);
   bVar7 = true;
   if (iVar3 == 0) {
-    uVar5 = *(uint *)(__upcast_result + 8);
+    uVar5 = *(uint *)(result + 8);
     if ((uVar5 & 0x10) != 0) {
       uVar5 = *(uint *)(this + 8);
     }
@@ -330,16 +330,16 @@ int __cxxabiv1____vmi_class_type_info____do_upcast(this, __class_type_info, para
         iVar2 = (int)uVar1 >> 8;
         local_34 = (void *)0x0;
         if ((bVar7) || (((uVar5 ^ 1) & 1) == 0)) {
-          r5In0 = param_3;
-          if (param_3 != (void *)0x0) {
+          r5In0 = objPtr;
+          if (objPtr != (void *)0x0) {
             if ((uVar1 & 1) != 0) {
-              iVar2 = *(int *)(*(int *)param_3 + iVar2);
+              iVar2 = *(int *)(*(int *)objPtr + iVar2);
             }
-            r5In0 = (void *)((int)param_3 + iVar2);
+            r5In0 = (void *)((int)objPtr + iVar2);
           }
           local_38 = uVar5;
           iVar2 = (**(code **)(**(int **)(p_Var6 + 0x10) + 0x18))
-                            (*(int **)(p_Var6 + 0x10),__class_type_info,r5In0,&local_40);
+                            (*(int **)(p_Var6 + 0x10),dstType,r5In0,&local_40);
           if (iVar2 != 0) {
             if ((local_34 == (void *)0x8) && ((uVar1 & 1) != 0)) {
               local_34 = *(void **)(p_Var6 + 0x10);
@@ -347,12 +347,12 @@ int __cxxabiv1____vmi_class_type_info____do_upcast(this, __class_type_info, para
             if ((3 < (int)local_3c) && (!bVar7)) {
               local_3c = local_3c & 0xfffffffd;
             }
-            ptVar4 = *(unsigned char **)(__upcast_result + 0xc);
+            ptVar4 = *(unsigned char **)(result + 0xc);
             if (ptVar4 == (unsigned char *)0x0) {
-              *(uint *)(__upcast_result + 8) = local_38;
-              *(int *)__upcast_result = local_40;
-              *(void **)(__upcast_result + 0xc) = local_34;
-              *(uint *)(__upcast_result + 4) = local_3c;
+              *(uint *)(result + 8) = local_38;
+              *(int *)result = local_40;
+              *(void **)(result + 0xc) = local_34;
+              *(uint *)(result + 4) = local_3c;
               if ((int)local_3c < 4) {
                 return true;
               }
@@ -369,18 +369,18 @@ int __cxxabiv1____vmi_class_type_info____do_upcast(this, __class_type_info, para
               }
             }
             else {
-              if (*(int *)__upcast_result != local_40) {
-                *(undefined4 *)(__upcast_result + 4) = 2;
-                *(undefined4 *)__upcast_result = 0;
+              if (*(int *)result != local_40) {
+                *(undefined4 *)(result + 4) = 2;
+                *(undefined4 *)result = 0;
                 return true;
               }
-              if ((*(int *)__upcast_result == 0) &&
+              if ((*(int *)result == 0) &&
                  (((local_34 == (void *)0x8 || (ptVar4 == (unsigned char *)0x8)) ||
                   (iVar2 = __ZNKSt9type_infoeqERKS_(local_34,ptVar4), iVar2 == 0)))) {
-                *(undefined4 *)(__upcast_result + 4) = 2;
+                *(undefined4 *)(result + 4) = 2;
                 return true;
               }
-              *(uint *)(__upcast_result + 4) = *(uint *)(__upcast_result + 4) | local_3c;
+              *(uint *)(result + 4) = *(uint *)(result + 4) | local_3c;
             }
           }
         }
@@ -389,7 +389,7 @@ int __cxxabiv1____vmi_class_type_info____do_upcast(this, __class_type_info, para
         iVar3 = iVar3 + -1;
       } while (bVar7);
     }
-    bVar7 = *(int *)(__upcast_result + 4) != 0;
+    bVar7 = *(int *)(result + 4) != 0;
   }
   return bVar7;
 }
