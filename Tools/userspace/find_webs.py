@@ -21,16 +21,18 @@ ASSIGN_OPS = r'(?:=|\+=|-=|\|=|&=|\^=|<<=|>>=|\*=|/=)'
 
 def load(d, fn):
     rows = A.load_rows(d)
+    roots = A.func_roots(A.load_funcs(d))            # rows may name the function by its Ghidra name or by any later func-row name
+    root = roots.get(fn, fn)
     back = {}
     for r in rows:
-        if r[2] == fn: back[r[4]] = r[3]
+        if roots.get(r[2], r[2]) == root: back[r[4]] = r[3]
     for pf in sorted(glob.glob(os.path.join(d, 'part_*.c'))):
         text = open(pf).read(); lines, fns = A.split_functions(text)
         for name, s, e in fns:
             if name == fn:
                 body = lines[s:e]
                 brace = next(i for i, l in enumerate(body) if l == '{')
-                norm = (lambda l: A.IDENT.sub(lambda m: back.get(m.group(0), m.group(0)), l)) if back else (lambda l: l)
+                norm = lambda l: A.IDENT.sub(lambda m: back.get(m.group(0), roots.get(m.group(0), m.group(0))), l)      # variable renames and callee func renames are taken back to Ghidra's text
                 global CURRENT
                 CURRENT = body
                 return [norm(l) for l in body], brace

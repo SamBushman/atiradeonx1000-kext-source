@@ -2466,7 +2466,7 @@
 0x131c10	100	FUN_00131c10	part_041	converted
 0x131c74	148	FUN_00131c74	part_041	converted
 0x131d08	1440	FUN_00131d08	part_041	converted
-0x1322a8	416	HwLimits__vslot82	part_041	converted
+0x1322a8	416	HwLimits__buildInterferenceGraph	part_041	converted
 0x1330f4	328	FUN_001330f4	part_041	converted
 0x13323c	3348	FUN_0013323c	part_041	converted
 0x133fe4	140	FUN_00133fe4	part_041	converted
@@ -2513,7 +2513,7 @@
 0x138240	120	FUN_00138240	part_041	converted
 0x1382b8	216	FUN_001382b8	part_041	converted
 0x138390	772	FUN_00138390	part_041	converted
-0x138694	2336	HwLimits__vslot81	part_041	converted
+0x138694	2336	HwLimits__computeBlockLiveness	part_041	converted
 0x138fb4	84	FUN_00138fb4	part_041	converted
 0x139008	44	FUN_00139008	part_041	converted
 0x139034	40	FUN_00139034	part_041	converted
@@ -2944,11 +2944,11 @@
 0x1875a8	1328	FUN_001875a8	part_049	converted
 0x187ad8	1996	FUN_00187ad8	part_049	converted
 0x1882a4	408	FUN_001882a4	part_049	converted
-0x18843c	1328	KhanPs__vslot28	part_049	converted
+0x18843c	1328	KhanPs__peepholeCombine	part_049	converted
 0x18896c	1208	FUN_0018896c	part_049	converted
 0x188e24	256	KhanPs__vslot27	part_049	converted
 0x188f24	200	KhanVs__vslot29	part_049	converted
-0x188fec	1280	KhanVs__vslot28	part_049	converted
+0x188fec	1280	KhanVs__peepholeCombine	part_049	converted
 0x1894ec	116	KhanVs__vslot27	part_049	converted
 0x189560	64	PackState__reset	part_049	converted
 0x1895a0	100	PackState__copy	part_049	converted
@@ -3011,7 +3011,7 @@
 0x191efc	448	FudoPs__ctor_191efc	part_050	converted
 0x1920e0	748	FudoPs__ctor_1920e0	part_050	converted
 0x1922c4	1016	FUN_001922c4	part_050	converted
-0x19286c	2512	FudoPs__vslot28	part_050	converted
+0x19286c	2512	FudoPs__peepholeCombine	part_050	converted
 0x193944	112	R520SchedModel__vslot21	part_050	converted
 0x1939b4	76	R520SchedModel__vslot22	part_050	converted
 0x193a00	140	FudoPs__vslot29	part_050	converted

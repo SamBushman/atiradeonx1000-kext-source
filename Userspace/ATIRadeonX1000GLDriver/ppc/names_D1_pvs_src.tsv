@@ -1,0 +1,197 @@
+local	R300VMachineAssembler__encodeSourceOperand	a0	srcDefInst	CONFIRMED	IRInst__getOperandSource(inst, sourceNumber): the instruction defining this source; +0x98 register class, +0x94 register id
+local	R300VMachineAssembler__encodeSourceOperand	bVar1	moreLanes	CONFIRMED	lane loop 0..3 continue flag
+local	R300VMachineAssembler__encodeSourceOperand	bVar2	laneSelectByte	CONFIRMED	byte of the original swizzle word for this lane (4 = unused lane)
+local	R300VMachineAssembler__encodeSourceOperand	bVar3	composedLaneByte	CONFIRMED	byte of the composed swizzle for this lane
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	instructionWordsAlias	CONFIRMED	copy of the instruction-words pointer (param_3), used in the FUN_000f2d18 chain	^\s*iVar10\ =\ param_3;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	instructionWordsAlias	CONFIRMED	copy of the instruction-words pointer (param_3), used in the FUN_000f2d18 chain	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x60\)\)\(a0,\(int\)uVar21,iVar10,iVar18,param_5,in_r8,uVar9\ \|\ 0x10\);$	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	sourceOperandRecord	CONFIRMED	IRInst__getOperandRecord(inst, sourceNumber): +0x10 swizzle word	^\s*iVar10\ =\ FUN_001054ec\(param_2,param_4\);$	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	sourceOperandRecord	CONFIRMED	IRInst__getOperandRecord(inst, sourceNumber): +0x10 swizzle word	^\s*iVar10\ =\ FUN_001054ec\(param_2,param_4\);$@2	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	vsFlagBit2	CONFIRMED	opcodeInfoIsVsFlagBit2(this+0x88, inst): the instruction uses the single-source form	^\s*iVar10\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a538\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x88\),param_2\);$	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	vsFlagBit2	CONFIRMED	opcodeInfoIsVsFlagBit2(this+0x88, inst): the instruction uses the single-source form	^\s*iVar10\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a538\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x88\),param_2\);$@2	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	defOperandRecord	CONFIRMED	operand record of the defining instruction (its source 1)	^\s*iVar10\ =\ FUN_001054ec\(a0,1\);$	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	defOperandRecord	CONFIRMED	operand record of the defining instruction (its source 1)	^\s*iVar10\ =\ FUN_001054ec\(uVar17,1\);$	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	defOperandRecord	CONFIRMED	operand record of the defining instruction (its source 1)	^\s*iVar10\ =\ FUN_001054ec\(a0,1\);$@2	+1
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	defOperandRecord	CONFIRMED	operand record of the defining instruction (its source 1)	^\s*FUN_000f2bdc\(\&local_58,\*\(undefined4\ \*\)\(iVar10\ \+\ 0x10\),local_88\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	swizzleMatchResult	CONFIRMED	FUN_000f2d18(swizzle, 0 / 0x01010101 / 0x02020202 / 0x03030303): the swizzle replicates one lane (xxxx/yyyy/zzzz/wwww)	^\s*iVar10\ =\ FUN_000f2d18\(uVar17,0\);$	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	swizzleMatchResult	CONFIRMED	FUN_000f2d18(swizzle, 0 / 0x01010101 / 0x02020202 / 0x03030303): the swizzle replicates one lane (xxxx/yyyy/zzzz/wwww)	^\s*iVar10\ =\ FUN_000f2d18\(uVar17,0x1010101\);$	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	swizzleMatchResult	CONFIRMED	FUN_000f2d18(swizzle, 0 / 0x01010101 / 0x02020202 / 0x03030303): the swizzle replicates one lane (xxxx/yyyy/zzzz/wwww)	^\s*iVar10\ =\ FUN_000f2d18\(uVar17,0x2020202\);$	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	swizzleMatchResult	CONFIRMED	FUN_000f2d18(swizzle, 0 / 0x01010101 / 0x02020202 / 0x03030303): the swizzle replicates one lane (xxxx/yyyy/zzzz/wwww)	^\s*iVar10\ =\ FUN_000f2d18\(uVar17,0x3030303\);$	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	isMixResult	CONFIRMED	IRInst vtable slot 24 isMix	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x60\)\)\(a0\);$	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	laneByteOff	CONFIRMED	byte offset (4 * lane) into laneSelect/laneNegate	^\s*iVar10\ =\ 0;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	laneByteOff	CONFIRMED	byte offset (4 * lane) into laneSelect/laneNegate	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ \(int\)local_54\)\ =\ uVar17;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	laneByteOff	CONFIRMED	byte offset (4 * lane) into laneSelect/laneNegate	^\s*\*\(uint\ \*\)\(\(int\)local_6c\ \+\ iVar10\)\ =\ uVar9;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	laneByteOff	CONFIRMED	byte offset (4 * lane) into laneSelect/laneNegate	^\s*\*\(uint\ \*\)\(\(int\)local_6c\ \+\ iVar10\)\ =\ uVar19;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar10	laneByteOff	CONFIRMED	byte offset (4 * lane) into laneSelect/laneNegate	^\s*iVar10\ =\ iVar10\ \+\ 4;$	+1
+local	R300VMachineAssembler__encodeSourceOperand	iVar13	srcRegClass	CONFIRMED	srcDefInst[0x26]: register class of the source; 0x33 = no register (immediate/none), 0x37, 1, 0x26, 0x28, 0x29 get special handling
+use	R300VMachineAssembler__encodeSourceOperand	iVar15	regBias	INFERRED	target description slot 0x138 value subtracted from the offset for class 1	^\s*iVar15\ =\ \(\*\*\(code\ \*\*\)\(\*piVar14\ \+\ 0x138\)\)\(piVar14,0\);$	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar15	isTempClass	INFERRED	FUN_00126708(class): register class property that raises the highest-used offset (this+0x4c)	^\s*iVar15\ =\ FUN_00126708\(a0\[0x26\]\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	iVar15	isTempClass	INFERRED	FUN_00126708(class): register class property that raises the highest-used offset (this+0x4c)	^\s*iVar15\ =\ a0\[0x2c\];$	+1
+use	R300VMachineAssembler__encodeSourceOperand	iVar15	isTempClass	INFERRED	FUN_00126708(class): register class property that raises the highest-used offset (this+0x4c)	^\s*iVar15\ =\ FUN_00105594\(a0,1\);$@2	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar15	isTempClass	INFERRED	FUN_00126708(class): register class property that raises the highest-used offset (this+0x4c)	^\s*iVar15\ =\ FUN_00126708\(iVar15\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	iVar15	isTempClass	INFERRED	FUN_00126708(class): register class property that raises the highest-used offset (this+0x4c)	^\s*if\ \(\(iVar15\ !=\ 0\)\ \&\&\ \(\*\(uint\ \*\)\(param_1\ \+\ 0x4c\)\ <\ uVar19\)\)\ \{$	+1
+use	R300VMachineAssembler__encodeSourceOperand	iVar15	src1DefForClass	CONFIRMED	source-1 definition of the mix instruction	^\s*iVar15\ =\ FUN_00105594\(a0,1\);$	+2
+use	R300VMachineAssembler__encodeSourceOperand	iVar15	laneOperandRecord	CONFIRMED	operand record of mix source n	^\s*iVar15\ =\ FUN_001054ec\(a0,iVar12\);$	+2
+local	R300VMachineAssembler__encodeSourceOperand	in_r8	passThroughR8	UNKNOWN	Ghidra input-register artifact of the indirect isMix call
+local	R300VMachineAssembler__encodeSourceOperand	local_54	laneSelectPtr	CONFIRMED	&laneSelect[0]
+local	R300VMachineAssembler__encodeSourceOperand	local_58	composedSwizzleOut	CONFIRMED	FUN_000f2bdc output: swizzle of the mix source composed with the instruction swizzle
+local	R300VMachineAssembler__encodeSourceOperand	local_6c	laneNegate	CONFIRMED	per-lane negate flag (one word per lane), becomes bits 25..28 of the source word
+local	R300VMachineAssembler__encodeSourceOperand	local_7c	laneSelect	CONFIRMED	per-lane 3-bit swizzle select (DAT_001b2be8 maps the IR lane byte), becomes bits 13..24
+local	R300VMachineAssembler__encodeSourceOperand	local_80	constNegated	CONFIRMED	vsSourceSelectForConstant output flag: the constant lane is the negated literal
+local	R300VMachineAssembler__encodeSourceOperand	local_84	origSwizzle	CONFIRMED	copy of the operand swizzle before composition with the mix source
+use	R300VMachineAssembler__encodeSourceOperand	piVar14	regDefInst	INFERRED	source definition passed to the register-offset helper	^\s*piVar14\ =\ a0;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	piVar14	regDefInst	INFERRED	source definition passed to the register-offset helper	^\s*uVar19\ =\ thunk_FUN_00134de8\(uVar17,piVar14\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	piVar14	regDefInst	INFERRED	source definition passed to the register-offset helper	^\s*piVar14\ =\ \(int\ \*\)FUN_00105594\(a0,1\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	piVar14	hwLimitsObj	CONFIRMED	compiler+0x30c target description; slot 0x138/4 is queried	^\s*piVar14\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xc\)\ \+\ 0x30c\);$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	addrMode1Copy	CONFIRMED	src1 word & 0x80000000 (ADDR_MODE_1) copied into a constant source	^\s*uVar11\ =\ \*\(uint\ \*\)\(param_3\ \+\ 4\)\ \&\ 0x80000000;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	addrMode1Copy	CONFIRMED	src1 word & 0x80000000 (ADDR_MODE_1) copied into a constant source	^\s*\*puVar20\ =\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar6\ \&\ 0x1fffffe8;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	addrMode1Copy	CONFIRMED	src1 word & 0x80000000 (ADDR_MODE_1) copied into a constant source	^\s*uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar6\ \&\ 0x1fffe008;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	constSelectBits	CONFIRMED	3-bit select returned by vsSourceSelectForConstant for one lane	^\s*uVar11\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a6f0\)\(a0,uVar19\ \&\ 0xff,\&local_80\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	constSelectBits	CONFIRMED	3-bit select returned by vsSourceSelectForConstant for one lane	^\s*uVar11\ =\ uVar11\ \&\ 7;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	constSelectBits	CONFIRMED	3-bit select returned by vsSourceSelectForConstant for one lane	^\s*uVar11\ <<\ 0x16\ \|$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	constSelectBits	CONFIRMED	3-bit select returned by vsSourceSelectForConstant for one lane	^\s*uVar11\ <<\ 0x13\ \|$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	constSelectBits	CONFIRMED	3-bit select returned by vsSourceSelectForConstant for one lane	^\s*uVar11\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a6f0\)\(a0,uVar19\ >>\ 0x18,\&local_80\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	constSelectBits	CONFIRMED	3-bit select returned by vsSourceSelectForConstant for one lane	^\s*uVar11\ =\ \(uVar11\ \&\ 7\)\ <<\ 0xd;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	constSelectBits	CONFIRMED	3-bit select returned by vsSourceSelectForConstant for one lane	^\s*\*puVar20\ =\ uVar8\ <<\ 0x19\ \|\ uVar11\ \|\ uVar6\ \&\ 0xfdff1fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	constSelectBits	CONFIRMED	3-bit select returned by vsSourceSelectForConstant for one lane	^\s*uVar11\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a6f0\)\(a0,uVar19\ >>\ 0x10\ \&\ 0xff,\&local_80\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	constSelectBits	CONFIRMED	3-bit select returned by vsSourceSelectForConstant for one lane	^\s*uVar11\ =\ \(uVar11\ \&\ 7\)\ <<\ 0x10;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	constSelectBits	CONFIRMED	3-bit select returned by vsSourceSelectForConstant for one lane	^\s*\*puVar20\ =\ uVar8\ <<\ 0x1a\ \|\ uVar11\ \|\ uVar6\ \&\ 0xfbf8ffff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	constSelectBits	CONFIRMED	3-bit select returned by vsSourceSelectForConstant for one lane	^\s*uVar11\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a6f0\)\(a0,uVar19\ >>\ 8\ \&\ 0xff,\&local_80\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	constSelectBits	CONFIRMED	3-bit select returned by vsSourceSelectForConstant for one lane	^\s*uVar11\ =\ \(uVar11\ \&\ 7\)\ <<\ 0x13;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	constSelectBits	CONFIRMED	3-bit select returned by vsSourceSelectForConstant for one lane	^\s*\*puVar20\ =\ uVar8\ <<\ 0x1b\ \|\ uVar11\ \|\ uVar6\ \&\ 0xf7c7ffff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	negateFlagInv	CONFIRMED	negateBase ^ 1	^\s*uVar11\ =\ uVar9\ \^\ 1;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	negateFlagInv	CONFIRMED	negateBase ^ 1	^\s*uVar11\ =\ uVar9;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	negateFlagInv	CONFIRMED	negateBase ^ 1	^\s*\*puVar20\ =\ uVar11\ <<\ 0x1c\ \|\ uVar19\ \|\ uVar8\ \&\ 0xee3fffff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	addrMode0Copy	CONFIRMED	src word & 0x10 (ADDR_MODE_0) copied between source words	^\s*uVar11\ =\ \*\(uint\ \*\)\(param_3\ \+\ 4\)\ \&\ 0x10;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	addrMode0Copy	CONFIRMED	src word & 0x10 (ADDR_MODE_0) copied between source words	^\s*\*puVar20\ =\ uVar11\ \|\ uVar9\ \|\ uVar6\ \&\ 0xffffffe8;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	addrMode0Copy	CONFIRMED	src word & 0x10 (ADDR_MODE_0) copied between source words	^\s*\*puVar20\ =\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar6\ \&\ 0x7fffffe8;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	addrMode0Copy	CONFIRMED	src word & 0x10 (ADDR_MODE_0) copied between source words	^\s*uVar11\ =\ \*puVar20\ \&\ 0x10;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	addrMode0Copy	CONFIRMED	src word & 0x10 (ADDR_MODE_0) copied between source words	^\s*\*\(uint\ \*\)\(param_3\ \+\ 4\)\ =\ uVar6\ \&\ 0x80000000\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar8\ \&\ 0x7fffe008;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	addrMode0Copy	CONFIRMED	src word & 0x10 (ADDR_MODE_0) copied between source words	^\s*\*puVar20\ \&\ 0x60000000\ \|\ uVar6\ \&\ 0x80000000\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar8\ \&\ 0x1fffe008;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	swizzleZField	CONFIRMED	(laneSelect[2] & 7) << 19	^\s*uVar11\ =\ \(local_7c\[2\]\ \&\ 7\)\ <<\ 0x13;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	swizzleZField	CONFIRMED	(laneSelect[2] & 7) << 19	^\s*\*puVar20\ =\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xfe001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	swizzleZField	CONFIRMED	(laneSelect[2] & 7) << 19	^\s*\*puVar20\ =\ uVar6\ \|\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xfc001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	swizzleZField	CONFIRMED	(laneSelect[2] & 7) << 19	^\s*\*puVar20\ =\ uVar4\ \|\ uVar6\ \|\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xf8001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	swizzleZField	CONFIRMED	(laneSelect[2] & 7) << 19	^\s*\*puVar20\ =\ uVar5\ \|\ uVar4\ \|\ uVar6\ \|\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xf0001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar11	swizzleZField	CONFIRMED	(laneSelect[2] & 7) << 19	^\s*uVar5\ \|\ uVar4\ \|\ uVar6\ \|\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xe0001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar17	allocTable	CONFIRMED	compiler+0x6c4	^\s*uVar17\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xc\)\ \+\ 0x6c4\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar17	allocTable	CONFIRMED	compiler+0x6c4	^\s*uVar19\ =\ thunk_FUN_00134de8\(uVar17,piVar14\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar17	allocTable	CONFIRMED	compiler+0x6c4	^\s*uVar17\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xc\)\ \+\ 0x6c4\);$@2	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar17	constSwizzle	CONFIRMED	operand swizzle of the constant source	^\s*uVar17\ =\ \*\(undefined4\ \*\)\(iVar10\ \+\ 0x10\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar17	constSwizzle	CONFIRMED	operand swizzle of the constant source	^\s*uVar17\ =\ \*\(undefined4\ \*\)\(iVar10\ \+\ 0x10\);$@2	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar17	constSwizzle	CONFIRMED	operand swizzle of the constant source	^\s*iVar10\ =\ FUN_000f2d18\(uVar17,0\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar17	constSwizzle	CONFIRMED	operand swizzle of the constant source	^\s*iVar10\ =\ FUN_000f2d18\(uVar17,0x1010101\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar17	constSwizzle	CONFIRMED	operand swizzle of the constant source	^\s*iVar10\ =\ FUN_000f2d18\(uVar17,0x2020202\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar17	constSwizzle	CONFIRMED	operand swizzle of the constant source	^\s*iVar10\ =\ FUN_000f2d18\(uVar17,0x3030303\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar17	src1DefInst	CONFIRMED	IRInst__getOperandDef(srcDef, 1)	^\s*uVar17\ =\ FUN_00105594\(a0,1\);$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar17	laneSrcInst	CONFIRMED	mix source n definition	^\s*uVar17\ =\ FUN_00105594\(a0,iVar12\);$	+3
+local	R300VMachineAssembler__encodeSourceOperand	uVar21	swizzlePair	UNKNOWN	FUN_00105c5c(inst, n) 64-bit result: high word is the register offset
+local	R300VMachineAssembler__encodeSourceOperand	uVar4	negYField	CONFIRMED	(laneNegate[1] & 1) << 26
+local	R300VMachineAssembler__encodeSourceOperand	uVar5	negZField	CONFIRMED	(laneNegate[2] & 1) << 27
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*uVar6\ =\ \*puVar20;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ =\ uVar19\ \|\ uVar6\ \&\ 0xfffffff8;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ =\ uVar9\ \|\ uVar19\ \|\ uVar6\ \&\ 0xffffffe8;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ =\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar6\ \&\ 0x7fffffe8;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ =\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar6\ \&\ 0x1fffffe8;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar6\ \&\ 0x1fffe008;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*uVar6\ =\ \*puVar20;$@2	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ =\ uVar19\ \|\ uVar6\ \&\ 0xffff1fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ =\ uVar8\ <<\ 0x19\ \|\ uVar19\ \|\ uVar6\ \&\ 0xfdff1fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*uVar8\ <<\ 0x1a\ \|\ uVar11\ <<\ 0x10\ \|\ uVar8\ <<\ 0x19\ \|\ uVar19\ \|\ uVar6\ \&\ 0xe0001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*uVar6\ =\ \*puVar20;$@3	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ =\ uVar11\ \|\ uVar6\ \&\ 0xffff1fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ =\ uVar8\ <<\ 0x19\ \|\ uVar11\ \|\ uVar6\ \&\ 0xfdff1fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*uVar6\ =\ \*puVar20;$@4	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ =\ uVar11\ \|\ uVar6\ \&\ 0xfff8ffff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ =\ uVar8\ <<\ 0x1a\ \|\ uVar11\ \|\ uVar6\ \&\ 0xfbf8ffff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*uVar6\ =\ \*puVar20;$@5	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ =\ uVar11\ \|\ uVar6\ \&\ 0xffc7ffff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ =\ uVar8\ <<\ 0x1b\ \|\ uVar11\ \|\ uVar6\ \&\ 0xf7c7ffff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*uVar6\ =\ \*puVar20;$@6	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ =\ uVar9\ \|\ uVar6\ \&\ 0xfffffff8;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ =\ uVar11\ \|\ uVar9\ \|\ uVar6\ \&\ 0xffffffe8;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ =\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar6\ \&\ 0x7fffffe8;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*uVar6\ =\ \*puVar20;$@7	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	savedSrcWord	CONFIRMED	snapshot of *sourceWord before a bit-field update	^\s*\*puVar20\ \&\ 0x60000000\ \|\ uVar6\ \&\ 0x80000000\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar8\ \&\ 0x1fffe008;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	negXField	CONFIRMED	(laneNegate[0] & 1) << 25	^\s*uVar6\ =\ \(local_6c\[0\]\ \&\ 1\)\ <<\ 0x19;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	negXField	CONFIRMED	(laneNegate[0] & 1) << 25	^\s*\*puVar20\ =\ uVar4\ \|\ uVar6\ \|\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xf8001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	negXField	CONFIRMED	(laneNegate[0] & 1) << 25	^\s*\*puVar20\ =\ uVar5\ \|\ uVar4\ \|\ uVar6\ \|\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xf0001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar6	negXField	CONFIRMED	(laneNegate[0] & 1) << 25	^\s*uVar5\ \|\ uVar4\ \|\ uVar6\ \|\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xe0001fff;$	+1
+local	R300VMachineAssembler__encodeSourceOperand	uVar7	savedSrcWord2	CONFIRMED	snapshot of *sourceWord before the swizzle/negate fields are rewritten
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	addrSelBits	CONFIRMED	bits 30:29 (ADDR_SEL) copied from source 0	^\s*uVar8\ =\ \*\(uint\ \*\)\(param_3\ \+\ 4\)\ \&\ 0x60000000;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	addrSelBits	CONFIRMED	bits 30:29 (ADDR_SEL) copied from source 0	^\s*uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar6\ \&\ 0x1fffe008;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	negateFlag	CONFIRMED	negateBase, or its inverse when the constant is the negated literal	^\s*uVar8\ =\ uVar9\ \^\ 1;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	negateFlag	CONFIRMED	negateBase, or its inverse when the constant is the negated literal	^\s*uVar8\ =\ uVar9;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	negateFlag	CONFIRMED	negateBase, or its inverse when the constant is the negated literal	^\s*\*puVar20\ =\ uVar8\ <<\ 0x19\ \|\ uVar19\ \|\ uVar6\ \&\ 0xfdff1fff;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	negateFlag	CONFIRMED	negateBase, or its inverse when the constant is the negated literal	^\s*uVar8\ <<\ 0x1b\ \|$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	negateFlag	CONFIRMED	negateBase, or its inverse when the constant is the negated literal	^\s*uVar8\ <<\ 0x1a\ \|\ uVar11\ <<\ 0x10\ \|\ uVar8\ <<\ 0x19\ \|\ uVar19\ \|\ uVar6\ \&\ 0xe0001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	negateFlag	CONFIRMED	negateBase, or its inverse when the constant is the negated literal	^\s*uVar8\ =\ uVar9\ \^\ 1;$@2	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	negateFlag	CONFIRMED	negateBase, or its inverse when the constant is the negated literal	^\s*uVar8\ =\ uVar9;$@2	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	negateFlag	CONFIRMED	negateBase, or its inverse when the constant is the negated literal	^\s*\*puVar20\ =\ uVar8\ <<\ 0x19\ \|\ uVar11\ \|\ uVar6\ \&\ 0xfdff1fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	negateFlag	CONFIRMED	negateBase, or its inverse when the constant is the negated literal	^\s*uVar8\ =\ uVar9\ \^\ 1;$@3	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	negateFlag	CONFIRMED	negateBase, or its inverse when the constant is the negated literal	^\s*uVar8\ =\ uVar9;$@3	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	negateFlag	CONFIRMED	negateBase, or its inverse when the constant is the negated literal	^\s*\*puVar20\ =\ uVar8\ <<\ 0x1a\ \|\ uVar11\ \|\ uVar6\ \&\ 0xfbf8ffff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	negateFlag	CONFIRMED	negateBase, or its inverse when the constant is the negated literal	^\s*uVar8\ =\ uVar9\ \^\ 1;$@4	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	negateFlag	CONFIRMED	negateBase, or its inverse when the constant is the negated literal	^\s*uVar8\ =\ uVar9;$@4	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	negateFlag	CONFIRMED	negateBase, or its inverse when the constant is the negated literal	^\s*\*puVar20\ =\ uVar8\ <<\ 0x1b\ \|\ uVar11\ \|\ uVar6\ \&\ 0xf7c7ffff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	savedSrcWord3	CONFIRMED	snapshot of *sourceWord	^\s*uVar8\ =\ \*puVar20;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	savedSrcWord3	CONFIRMED	snapshot of *sourceWord	^\s*\*puVar20\ =\ uVar19\ \|\ uVar8\ \&\ 0xfe3fffff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	savedSrcWord3	CONFIRMED	snapshot of *sourceWord	^\s*\*puVar20\ =\ uVar11\ <<\ 0x1c\ \|\ uVar19\ \|\ uVar8\ \&\ 0xee3fffff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	addrMode1Bit	CONFIRMED	bit 31 (ADDR_MODE_1)	^\s*uVar8\ =\ \*\(uint\ \*\)\(param_3\ \+\ 4\)\ \&\ 0x80000000;$	+3
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	swizzleWField	CONFIRMED	(laneSelect[3] & 7) << 22	^\s*uVar8\ =\ \(local_7c\[3\]\ \&\ 7\)\ <<\ 0x16;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	swizzleWField	CONFIRMED	(laneSelect[3] & 7) << 22	^\s*\*puVar20\ =\ uVar6\ \|\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xfc001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	swizzleWField	CONFIRMED	(laneSelect[3] & 7) << 22	^\s*\*puVar20\ =\ uVar4\ \|\ uVar6\ \|\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xf8001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	swizzleWField	CONFIRMED	(laneSelect[3] & 7) << 22	^\s*\*puVar20\ =\ uVar5\ \|\ uVar4\ \|\ uVar6\ \|\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xf0001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	swizzleWField	CONFIRMED	(laneSelect[3] & 7) << 22	^\s*uVar5\ \|\ uVar4\ \|\ uVar6\ \|\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xe0001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	oldWord4	CONFIRMED	instructionWords[1]	^\s*uVar8\ =\ \*\(uint\ \*\)\(param_3\ \+\ 4\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	oldWord4	CONFIRMED	instructionWords[1]	^\s*\*\(uint\ \*\)\(param_3\ \+\ 4\)\ =\ uVar19\ \|\ uVar8\ \&\ 0xfffffff8;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	oldWord4	CONFIRMED	instructionWords[1]	^\s*\*\(uint\ \*\)\(param_3\ \+\ 4\)\ =\ uVar9\ \|\ uVar19\ \|\ uVar8\ \&\ 0xffffe018;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	oldWord4	CONFIRMED	instructionWords[1]	^\s*\*\(uint\ \*\)\(param_3\ \+\ 4\)\ =\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar8\ \&\ 0xffffe008;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	oldWord4	CONFIRMED	instructionWords[1]	^\s*\*\(uint\ \*\)\(param_3\ \+\ 4\)\ =\ uVar6\ \&\ 0x80000000\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar8\ \&\ 0x7fffe008;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar8	oldWord4	CONFIRMED	instructionWords[1]	^\s*\*puVar20\ \&\ 0x60000000\ \|\ uVar6\ \&\ 0x80000000\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar8\ \&\ 0x1fffe008;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	addrMode0Bit	CONFIRMED	bit 4 (ADDR_MODE_0) of source 0	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_3\ \+\ 4\)\ \&\ 0x10;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	addrMode0Bit	CONFIRMED	bit 4 (ADDR_MODE_0) of source 0	^\s*\*puVar20\ =\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar6\ \&\ 0x7fffffe8;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	addrMode0Bit	CONFIRMED	bit 4 (ADDR_MODE_0) of source 0	^\s*\*puVar20\ =\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar6\ \&\ 0x1fffffe8;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	addrMode0Bit	CONFIRMED	bit 4 (ADDR_MODE_0) of source 0	^\s*uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar6\ \&\ 0x1fffe008;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	negateBase9	CONFIRMED	source modifier bit (inst+0xa0+n*0x18 & 1)	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_4\ \*\ 0x18\ \+\ param_2\ \+\ 0xa0\)\ \&\ 1;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	negateBase9	CONFIRMED	source modifier bit (inst+0xa0+n*0x18 & 1)	^\s*uVar8\ =\ uVar9\ \^\ 1;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	negateBase9	CONFIRMED	source modifier bit (inst+0xa0+n*0x18 & 1)	^\s*uVar8\ =\ uVar9;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	negateBase9	CONFIRMED	source modifier bit (inst+0xa0+n*0x18 & 1)	^\s*uVar8\ =\ uVar9\ \^\ 1;$@2	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	negateBase9	CONFIRMED	source modifier bit (inst+0xa0+n*0x18 & 1)	^\s*uVar8\ =\ uVar9;$@2	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	negateBase9	CONFIRMED	source modifier bit (inst+0xa0+n*0x18 & 1)	^\s*uVar8\ =\ uVar9\ \^\ 1;$@3	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	negateBase9	CONFIRMED	source modifier bit (inst+0xa0+n*0x18 & 1)	^\s*uVar8\ =\ uVar9;$@3	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	negateBase9	CONFIRMED	source modifier bit (inst+0xa0+n*0x18 & 1)	^\s*uVar8\ =\ uVar9\ \^\ 1;$@4	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	negateBase9	CONFIRMED	source modifier bit (inst+0xa0+n*0x18 & 1)	^\s*uVar8\ =\ uVar9;$@4	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	negateBase9	CONFIRMED	source modifier bit (inst+0xa0+n*0x18 & 1)	^\s*uVar11\ =\ uVar9\ \^\ 1;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	negateBase9	CONFIRMED	source modifier bit (inst+0xa0+n*0x18 & 1)	^\s*uVar11\ =\ uVar9;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	srcTypeBits9	CONFIRMED	source 0 word & 7	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_3\ \+\ 4\)\ \&\ 7;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	srcTypeBits9	CONFIRMED	source 0 word & 7	^\s*\*puVar20\ =\ uVar11\ \|\ uVar9\ \|\ uVar6\ \&\ 0xffffffe8;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	srcTypeBits9	CONFIRMED	source 0 word & 7	^\s*\*puVar20\ =\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar6\ \&\ 0x7fffffe8;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	savedSrcWord9	CONFIRMED	snapshot of *sourceWord	^\s*uVar9\ =\ \*puVar20;$	+3
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	savedSrcWord9	CONFIRMED	snapshot of *sourceWord	^\s*uVar9\ =\ \*puVar20;$@3	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	savedSrcWord9	CONFIRMED	snapshot of *sourceWord	^\s*\*puVar20\ =\ uVar19\ \|\ uVar9\ \&\ 0xffff1fff;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	savedSrcWord9	CONFIRMED	snapshot of *sourceWord	^\s*uVar9\ =\ \*puVar20;$@4	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	savedSrcWord9	CONFIRMED	snapshot of *sourceWord	^\s*\*puVar20\ =\ uVar19\ \|\ uVar9\ \&\ 0xffff1fff;$@2	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	addrSelCleared	CONFIRMED	*sourceWord & 0x9fffffff: ADDR_SEL cleared before it is set	^\s*uVar9\ =\ \*puVar20\ \&\ 0x9fffffff;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	addrSelCleared	CONFIRMED	*sourceWord & 0x9fffffff: ADDR_SEL cleared before it is set	^\s*uVar9\ =\ \*puVar20\ \&\ 0x9fffffff\ \|\ 0x20000000;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	addrSelCleared	CONFIRMED	*sourceWord & 0x9fffffff: ADDR_SEL cleared before it is set	^\s*uVar9\ =\ \*puVar20\ \&\ 0x9fffffff\ \|\ 0x40000000;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	addrSelCleared	CONFIRMED	*sourceWord & 0x9fffffff: ADDR_SEL cleared before it is set	^\s*uVar9\ =\ \*puVar20\ \&\ 0x9fffffff\ \|\ 0x60000000;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	addrSelCleared	CONFIRMED	*sourceWord & 0x9fffffff: ADDR_SEL cleared before it is set	^\s*uVar9\ =\ \*puVar20\ \&\ 0x9fffffff\ \|\ 0x80000000;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	addrSelCleared	CONFIRMED	*sourceWord & 0x9fffffff: ADDR_SEL cleared before it is set	^\s*uVar9\ =\ \*puVar20;$@2	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	addrSelCleared	CONFIRMED	*sourceWord & 0x9fffffff: ADDR_SEL cleared before it is set	^\s*\*puVar20\ =\ \(uVar19\ \&\ 0xff\)\ <<\ 5\ \|\ uVar9\ \&\ 0xffffe01f;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	laneByte	CONFIRMED	lane byte read from the mix source operand record	^\s*uVar9\ =\ \(uint\)\*\(byte\ \*\)\(\(uint\)bVar2\ \+\ iVar15\ \+\ 0x10\);$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	laneByte	CONFIRMED	lane byte read from the mix source operand record	^\s*uVar17\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a6f0\)\(uVar17,uVar9,\&local_80\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	laneNegateValue	CONFIRMED	negate flag for this lane (inverted for a negated constant)	^\s*uVar9\ =\ uVar19;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	laneNegateValue	CONFIRMED	negate flag for this lane (inverted for a negated constant)	^\s*uVar9\ =\ \(uint\)\(uVar19\ ==\ 0\);$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	laneNegateValue	CONFIRMED	negate flag for this lane (inverted for a negated constant)	^\s*\*\(uint\ \*\)\(\(int\)local_6c\ \+\ iVar10\)\ =\ uVar9;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	swizzleYField	CONFIRMED	(laneSelect[1] & 7) << 16	^\s*uVar9\ =\ \(local_7c\[1\]\ \&\ 7\)\ <<\ 0x10;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	swizzleYField	CONFIRMED	(laneSelect[1] & 7) << 16	^\s*\*puVar20\ =\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xffc01fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	swizzleYField	CONFIRMED	(laneSelect[1] & 7) << 16	^\s*\*puVar20\ =\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xfe001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	swizzleYField	CONFIRMED	(laneSelect[1] & 7) << 16	^\s*\*puVar20\ =\ uVar6\ \|\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xfc001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	swizzleYField	CONFIRMED	(laneSelect[1] & 7) << 16	^\s*\*puVar20\ =\ uVar4\ \|\ uVar6\ \|\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xf8001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	swizzleYField	CONFIRMED	(laneSelect[1] & 7) << 16	^\s*\*puVar20\ =\ uVar5\ \|\ uVar4\ \|\ uVar6\ \|\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xf0001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	swizzleYField	CONFIRMED	(laneSelect[1] & 7) << 16	^\s*uVar5\ \|\ uVar4\ \|\ uVar6\ \|\ uVar8\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar7\ \&\ 0xe0001fff;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	src2Word	CONFIRMED	instructionWords[3]	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_3\ \+\ 0xc\);$	+3
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	offsetBits	CONFIRMED	source word & 0x1fe0 (register offset field)	^\s*uVar9\ =\ \*puVar20\ \&\ 0x1fe0;$	+2
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	offsetBits	CONFIRMED	source word & 0x1fe0 (register offset field)	^\s*\*\(uint\ \*\)\(param_3\ \+\ 4\)\ =\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar8\ \&\ 0xffffe008;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	offsetBits	CONFIRMED	source word & 0x1fe0 (register offset field)	^\s*\*\(uint\ \*\)\(param_3\ \+\ 4\)\ =\ uVar6\ \&\ 0x80000000\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar8\ \&\ 0x7fffe008;$	+1
+use	R300VMachineAssembler__encodeSourceOperand	uVar9	offsetBits	CONFIRMED	source word & 0x1fe0 (register offset field)	^\s*\*puVar20\ \&\ 0x60000000\ \|\ uVar6\ \&\ 0x80000000\ \|\ uVar11\ \|\ uVar9\ \|\ uVar19\ \|\ uVar8\ \&\ 0x1fffe008;$	+1

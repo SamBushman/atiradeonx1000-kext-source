@@ -1,0 +1,80 @@
+use	R300VMachineAssembler__encodeDualMathOperands	bVar1	laneByte	CONFIRMED	lane byte of a mix source operand record (4 = unused lane)	^\s*bVar1\ =\ \*\(byte\ \*\)\(iVar6\ \+\ 0x13\);$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	bVar1	laneByte	CONFIRMED	lane byte of a mix source operand record (4 = unused lane)	^\s*uVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a6f0\)\(uVar12,\(uint\)bVar1,local_48\);$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	bVar1	laneByte	CONFIRMED	lane byte of a mix source operand record (4 = unused lane)	^\s*bVar1\ =\ \*\(byte\ \*\)\(iVar6\ \+\ 0x10\);$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	bVar1	laneByte	CONFIRMED	lane byte of a mix source operand record (4 = unused lane)	^\s*uVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a6f0\)\(uVar7,\(uint\)bVar1,local_48\);$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	iVar6	isMixResult2	CONFIRMED	IRInst vtable slot 24 isMix	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x60\)\)\(piVar5\);$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	iVar6	srcOffset	CONFIRMED	allocated register offset (high word of the thunk_FUN_00134de8 result)	^\s*iVar6\ =\ \(int\)\(\(ulonglong\)uVar13\ >>\ 0x20\);$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	iVar6	srcOffset	CONFIRMED	allocated register offset (high word of the thunk_FUN_00134de8 result)	^\s*uVar14\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a2e0\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x38\),iVar6\ \-\ iVar9\);$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	iVar6	srcOffset	CONFIRMED	allocated register offset (high word of the thunk_FUN_00134de8 result)	^\s*uVar14\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a2e0\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x34\),iVar6\);$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	iVar6	regBias	INFERRED	target description slot 0x138 value	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x138\)\)\(piVar5,0\);$	+2
+local	R300VMachineAssembler__encodeDualMathOperands	iVar9	regBias9	INFERRED	target description slot 0x138 value subtracted for class 1
+local	R300VMachineAssembler__encodeDualMathOperands	in_r6	passThroughR6	UNKNOWN	Ghidra input-register artifact of the indirect isMix call
+local	R300VMachineAssembler__encodeDualMathOperands	in_r7	passThroughR7	UNKNOWN	Ghidra input-register artifact
+local	R300VMachineAssembler__encodeDualMathOperands	in_r8	passThroughR8	UNKNOWN	Ghidra input-register artifact
+local	R300VMachineAssembler__encodeDualMathOperands	local_34	composedSwizzle2	CONFIRMED	FUN_000f2bdc output for source 2
+local	R300VMachineAssembler__encodeDualMathOperands	local_38	composedSwizzle1	CONFIRMED	FUN_000f2bdc output for source 1
+local	R300VMachineAssembler__encodeDualMathOperands	local_48	constNegated	CONFIRMED	vsSourceSelectForConstant output flag: the constant lane is negated
+use	R300VMachineAssembler__encodeDualMathOperands	piVar5	hwLimitsObj	CONFIRMED	compiler+0x30c target description object	^\s*piVar5\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xc\)\ \+\ 0x30c\);$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	piVar5	hwLimitsObj	CONFIRMED	compiler+0x30c target description object	^\s*piVar5\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xc\)\ \+\ 0x30c\);$@2	+2
+use	R300VMachineAssembler__encodeDualMathOperands	piVar5	hwLimitsObj	CONFIRMED	compiler+0x30c target description object	^\s*piVar5\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xc\)\ \+\ 0x30c\);$@3	+2
+local	R300VMachineAssembler__encodeDualMathOperands	piVar8	hwLimitsObj8	CONFIRMED	compiler+0x30c target description object
+use	R300VMachineAssembler__encodeDualMathOperands	uVar10	dualWordCur	CONFIRMED	*dualMathWord (PVS word 3) being assembled	^\s*uVar10\ =\ \*puVar11;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar10	dualWordCur	CONFIRMED	*dualMathWord (PVS word 3) being assembled	^\s*uVar10\ =\ \*puVar11\ \|\ 8;$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	uVar10	dualWordCur	CONFIRMED	*dualMathWord (PVS word 3) being assembled	^\s*uVar10\ =\ uVar10\ \|\ 0x2000000;$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	uVar10	dualWordCur	CONFIRMED	*dualMathWord (PVS word 3) being assembled	^\s*uVar10\ =\ uVar10\ \|\ 0x4000000;$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	uVar10	dualWordCur	CONFIRMED	*dualMathWord (PVS word 3) being assembled	^\s*\*puVar11\ =\ uVar2\ \&\ 3\ \|\ uVar10\ \&\ 0xfffffffc;$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	uVar10	dualWordCur	CONFIRMED	*dualMathWord (PVS word 3) being assembled	^\s*\*puVar11\ =\ uVar3\ \&\ 3\ \|\ uVar10\ \&\ 0xfffffffc;$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	uVar10	dualWordCur	CONFIRMED	*dualMathWord (PVS word 3) being assembled	^\s*\*puVar11\ =\ uVar10\ \&\ 0xffffe01c\ \|\ 2;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar10	dualWordCur	CONFIRMED	*dualMathWord (PVS word 3) being assembled	^\s*\*puVar11\ =\ uVar10\ \&\ 0xffffe01c;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar10	negateBit	CONFIRMED	bit 25/26 of the dual-math word (source 1/2 negate)	^\s*uVar10\ =\ uVar3\ >>\ 0x19\ \&\ 1;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar10	negateBit	CONFIRMED	bit 25/26 of the dual-math word (source 1/2 negate)	^\s*uVar10\ =\ 1\ \-\ uVar10;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar10	negateBit	CONFIRMED	bit 25/26 of the dual-math word (source 1/2 negate)	^\s*\*puVar11\ =\ \(uVar10\ \&\ 1\)\ <<\ 0x19\ \|\ uVar2\ \|\ uVar3\ \&\ 0xfdff1fff;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar10	negateBit	CONFIRMED	bit 25/26 of the dual-math word (source 1/2 negate)	^\s*uVar10\ =\ uVar3\ >>\ 0x1a\ \&\ 1;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar10	negateBit	CONFIRMED	bit 25/26 of the dual-math word (source 1/2 negate)	^\s*uVar10\ =\ 1\ \-\ uVar10;$@2	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar10	negateBit	CONFIRMED	bit 25/26 of the dual-math word (source 1/2 negate)	^\s*\*puVar11\ =\ \(uVar10\ \&\ 1\)\ <<\ 0x1a\ \|\ uVar2\ \|\ uVar3\ \&\ 0xfbf8ffff;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar12	allocTable	CONFIRMED	compiler+0x6c4	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xc\)\ \+\ 0x6c4\);$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar12	allocTable	CONFIRMED	compiler+0x6c4	^\s*uVar13\ =\ thunk_FUN_00134de8\(uVar12,uVar7\);$	+1
+local	R300VMachineAssembler__encodeDualMathOperands	uVar13	srcOffsetPair	INFERRED	64-bit thunk_FUN_00134de8 result: offset in the high word
+use	R300VMachineAssembler__encodeDualMathOperands	uVar14	maxResult	CONFIRMED	maxSigned(this+0x38 / this+0x34, offset): highest register offset used (64-bit pair)	^\s*uVar14\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a2e0\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x38\),iVar6\ \-\ iVar9\);$	+3
+use	R300VMachineAssembler__encodeDualMathOperands	uVar14	maxResult	CONFIRMED	maxSigned(this+0x38 / this+0x34, offset): highest register offset used (64-bit pair)	^\s*uVar14\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a2e0\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x34\),iVar6\);$	+3
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	srcModFlags	CONFIRMED	inst[0x2e]: modifier flags of source 1 (bit 1 abs, bit 0 negate)	^\s*uVar2\ =\ param_2\[0x2e\];$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	srcModFlags	CONFIRMED	inst[0x2e]: modifier flags of source 1 (bit 1 abs, bit 0 negate)	^\s*uVar2\ =\ param_2\[0x2e\];$@2	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	srcModFlags	CONFIRMED	inst[0x2e]: modifier flags of source 1 (bit 1 abs, bit 0 negate)	^\s*if\ \(\(uVar2\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	src0Word	CONFIRMED	instructionWords[1]	^\s*uVar2\ =\ param_3\[1\];$	+4
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	src0Word	CONFIRMED	instructionWords[1]	^\s*else\ if\ \(\(\(uVar2\ \&\ 7\)\ ==\ 0\)\ \&\&\ \(\(uVar3\ \&\ 7\)\ ==\ 0\)\)\ \{$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	constSelectField	CONFIRMED	3-bit select returned by vsSourceSelectForConstant shifted into place	^\s*uVar2\ =\ \(uVar2\ \&\ 7\)\ <<\ 0xd;$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	constSelectField	CONFIRMED	3-bit select returned by vsSourceSelectForConstant shifted into place	^\s*\*puVar11\ =\ \(uVar10\ \&\ 1\)\ <<\ 0x19\ \|\ uVar2\ \|\ uVar3\ \&\ 0xfdff1fff;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	constSelectField	CONFIRMED	3-bit select returned by vsSourceSelectForConstant shifted into place	^\s*uVar2\ =\ \(uVar2\ \&\ 7\)\ <<\ 0x10;$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	constSelectField	CONFIRMED	3-bit select returned by vsSourceSelectForConstant shifted into place	^\s*\*puVar11\ =\ \(uVar10\ \&\ 1\)\ <<\ 0x1a\ \|\ uVar2\ \|\ uVar3\ \&\ 0xfbf8ffff;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	swizzleSel2	CONFIRMED	source 2 swizzle word / select	^\s*uVar2\ =\ uVar3;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	swizzleSel2	CONFIRMED	source 2 swizzle word / select	^\s*uVar2\ =\ uVar3;$@2	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	swizzleSel2	CONFIRMED	source 2 swizzle word / select	^\s*uVar2\ =\ \*\(uint\ \*\)\(\&DAT_001b2be8\ \+\ \(uVar2\ >>\ 0x16\ \&\ 0x3fc\)\);$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	swizzleSel2	CONFIRMED	source 2 swizzle word / select	^\s*FUN_000f2bdc\(local_34,uVar7,uVar2\);$	+3
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	swizzleSel2	CONFIRMED	source 2 swizzle word / select	^\s*uVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a6f0\)\(uVar7,\(uint\)bVar1,local_48\);$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	swizzleSel2	CONFIRMED	source 2 swizzle word / select	^\s*uVar2\ =\ 0;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	swizzleSel2	CONFIRMED	source 2 swizzle word / select	^\s*\*puVar11\ =\ \(uVar2\ \&\ 7\)\ <<\ 0x10\ \|\ \(uVar3\ \&\ 7\)\ <<\ 0xd\ \|\ \*puVar11\ \&\ 0xfff81fff;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	mathOpcode	CONFIRMED	PVS math opcode from the opcode table entry (-1 = special case)	^\s*uVar3\ =\ \(uVar2\ \&\ 0xf\)\ <<\ 0x15\ \|\ \*puVar11\ \&\ 0xfe1fffff;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	mathOpcode	CONFIRMED	PVS math opcode from the opcode table entry (-1 = special case)	^\s*if\ \(0xf\ <\ \(int\)uVar2\)\ \{$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	srcOffset3	CONFIRMED	allocated register offset of source 1	^\s*uVar3\ =\ \(uint\)\(\(ulonglong\)uVar13\ >>\ 0x20\);$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	srcOffset3	CONFIRMED	allocated register offset of source 1	^\s*\*puVar11\ =\ \(uVar3\ \&\ 0xff\)\ <<\ 5\ \|\ \*puVar11\ \&\ 0xffffe01f;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	src1Word	CONFIRMED	instructionWords[2]	^\s*uVar3\ =\ param_3\[2\];$	+4
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	src1Word	CONFIRMED	instructionWords[2]	^\s*else\ if\ \(\(\(uVar2\ \&\ 7\)\ ==\ 0\)\ \&\&\ \(\(uVar3\ \&\ 7\)\ ==\ 0\)\)\ \{$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	dualWordSnapshot	CONFIRMED	*dualMathWord snapshot before the constant select is merged	^\s*uVar3\ =\ \*puVar11;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	dualWordSnapshot	CONFIRMED	*dualMathWord snapshot before the constant select is merged	^\s*\*puVar11\ =\ uVar2\ \|\ uVar3\ \&\ 0xffff1fff;$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	dualWordSnapshot	CONFIRMED	*dualMathWord snapshot before the constant select is merged	^\s*\*puVar11\ =\ \(uVar10\ \&\ 1\)\ <<\ 0x19\ \|\ uVar2\ \|\ uVar3\ \&\ 0xfdff1fff;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	dualWordSnapshot	CONFIRMED	*dualMathWord snapshot before the constant select is merged	^\s*uVar3\ =\ \*puVar11;$@2	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	dualWordSnapshot	CONFIRMED	*dualMathWord snapshot before the constant select is merged	^\s*\*puVar11\ =\ uVar2\ \|\ uVar3\ \&\ 0xfff8ffff;$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	dualWordSnapshot	CONFIRMED	*dualMathWord snapshot before the constant select is merged	^\s*\*puVar11\ =\ \(uVar10\ \&\ 1\)\ <<\ 0x1a\ \|\ uVar2\ \|\ uVar3\ \&\ 0xfbf8ffff;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	swizzleSel1	CONFIRMED	source 1 swizzle word / select	^\s*uVar2\ =\ uVar3;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	swizzleSel1	CONFIRMED	source 1 swizzle word / select	^\s*uVar3\ =\ \*\(uint\ \*\)\(\&DAT_001b2be8\ \+\ \(uVar3\ \&\ 0xff\)\ \*\ 4\);$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	swizzleSel1	CONFIRMED	source 1 swizzle word / select	^\s*uVar3\ =\ \*\(uint\ \*\)\(\&DAT_001b2be8\ \+\ \(uVar3\ \&\ 0xff\)\ \*\ 4\);$@2	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	swizzleSel1	CONFIRMED	source 1 swizzle word / select	^\s*FUN_000f2bdc\(\&local_38,uVar7,uVar3\);$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	swizzleSel1	CONFIRMED	source 1 swizzle word / select	^\s*uVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a6f0\)\(uVar12,\(uint\)bVar1,local_48\);$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	swizzleSel1	CONFIRMED	source 1 swizzle word / select	^\s*uVar3\ =\ 0;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	swizzleSel1	CONFIRMED	source 1 swizzle word / select	^\s*uVar3\ =\ \*\(uint\ \*\)\(\&DAT_001b2be8\ \+\ \(local_38\ \&\ 0xff\)\ \*\ 4\);$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	swizzleSel1	CONFIRMED	source 1 swizzle word / select	^\s*\*puVar11\ =\ \(uVar2\ \&\ 7\)\ <<\ 0x10\ \|\ \(uVar3\ \&\ 7\)\ <<\ 0xd\ \|\ \*puVar11\ \&\ 0xfff81fff;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	mathWordNew	CONFIRMED	dual-math word with the math opcode placed in bits 24:21	^\s*uVar3\ =\ \(uVar2\ \&\ 0xf\)\ <<\ 0x15\ \|\ \*puVar11\ \&\ 0xfe1fffff;$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	uVar3	mathWordNew	CONFIRMED	dual-math word with the math opcode placed in bits 24:21	^\s*\*puVar11\ =\ uVar3\ \|\ 4;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar7	src1Def	CONFIRMED	IRInst__getOperandDef(inst, 1)	^\s*uVar7\ =\ FUN_00105594\(piVar5,1\);$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	uVar7	src2Def	CONFIRMED	IRInst__getOperandDef(inst, 2)	^\s*uVar7\ =\ FUN_00105594\(param_2,2\);$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar7	mixSwizzleWord	CONFIRMED	operand record +0x10 of the mix source	^\s*FUN_000f2bdc\(local_34,uVar7,uVar2\);$	+1

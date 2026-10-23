@@ -65,11 +65,11 @@
 0x17f5a4	FUN_0017f5a4	0x17f6b0	IRInst__appendSource	r5	field at param_1+0x238: 2 stock site(s), 0 C call(s) carry it at argument 2 (2 C calls)	BENIGN-CALLEE-IGNORES
 0x180830	FUN_00180830	0x180fa0	IRInst__appendSource	r5	field at param_1+0x238: 1 stock site(s), 0 C call(s) carry it at argument 2 (1 C calls)	BENIGN-CALLEE-IGNORES
 0x186a88	FUN_00186a88	0x1874f0	IRInst__create	r3	0x9b not at argument 0 of any C call (5 C calls)	CHECK (C arg0: 0x9c; 0x99)
-0x18843c	KhanPs__vslot28	0x18885c	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
-0x18843c	KhanPs__vslot28	0x1888f8	FUN_001875a8	r7	field at param_5+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
-0x188fec	KhanVs__vslot28	0x189054	FUN_0014abdc	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	CHECK (C arg2: piVar4)
-0x188fec	KhanVs__vslot28	0x18927c	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (3 C calls)	CHECK (C arg4: piVar6; piVar6)
-0x188fec	KhanVs__vslot28	0x189418	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (3 C calls)	CHECK (C arg4: piVar6; piVar6)
+0x18843c	KhanPs__peepholeCombine	0x18885c	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (2 C calls)	BENIGN-ALIAS (the C argument is a copy / the same constant / an address)
+0x18843c	KhanPs__peepholeCombine	0x1888f8	FUN_001875a8	r7	field at param_5+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
+0x188fec	KhanVs__peepholeCombine	0x189054	FUN_0014abdc	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	CHECK (C arg2: piVar4)
+0x188fec	KhanVs__peepholeCombine	0x18927c	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (3 C calls)	CHECK (C arg4: piVar6; piVar6)
+0x188fec	KhanVs__peepholeCombine	0x189418	FUN_00160320	r7	r1+0x38 (a stack address) not at argument 4 of any C call (3 C calls)	CHECK (C arg4: piVar6; piVar6)
 0x1922c4	FUN_001922c4	0x192850	FUN_001875a8	r7	field at param_4+0x8: 1 stock site(s), 0 C call(s) carry it at argument 4 (1 C calls)	BENIGN-CALLEE-IGNORES
-0x19286c	FudoPs__vslot28	0x1934dc	FUN_001875a8	r7	field at param_5+0x8: 2 stock site(s), 0 C call(s) carry it at argument 4 (2 C calls)	BENIGN-CALLEE-IGNORES
+0x19286c	FudoPs__peepholeCombine	0x1934dc	FUN_001875a8	r7	field at param_5+0x8: 2 stock site(s), 0 C call(s) carry it at argument 4 (2 C calls)	BENIGN-CALLEE-IGNORES
 0x1a1338	R520MachineAssembler__create	0x1a135c	Arena__alloc	r4	0x10c4 printed as &UNK_000010c4 (symbolized-text-address)	BENIGN-SYMBOLIZED

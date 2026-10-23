@@ -528,10 +528,6 @@ local	FUN_00197de4	iVar4	loopRemaining	INFERRED	rule R1: decremented by 1 inside
 local	FUN_00197de4	iVar5	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00197ecc	iVar4	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_00197ecc	iVar5	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_001981ac	iVar26	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_001981ac	piVar16	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_001981ac	piVar17	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_001981ac	uVar21	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0019a484	iVar3	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0019a568	iVar1	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0019a568	iVar2	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
@@ -539,11 +535,9 @@ local	FUN_0019a80c	iVar1	callResult	INFERRED	rule R2: holds a call result that i
 local	FUN_0019aaf4	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_0019ab60	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_0019abc4	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
-local	FUN_0019baf4	iVar8	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_0019c130	iVar12	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0019c130	iVar16	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_0019c130	iVar18	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0019ca78	iVar4	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0019d858	iVar10	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0019e318	iVar4	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0019eb30	iVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop

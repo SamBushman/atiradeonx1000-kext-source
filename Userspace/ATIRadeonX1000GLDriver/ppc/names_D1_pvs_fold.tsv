@@ -1,0 +1,53 @@
+local	R300VMachineAssembler__findFoldableMovePair	bVar1	noMathHazard	INFERRED	true until a scalar-engine (math) instruction of the group that cannot share the group is seen
+local	R300VMachineAssembler__findFoldableMovePair	bVar2	groupContinues	CONFIRMED	set when an instruction of the group has flag bit 2 (more instructions follow in the group)
+use	R300VMachineAssembler__findFoldableMovePair	iVar12	vectorRegClass	CONFIRMED	register class (+0x98) of the vector-engine instruction	^\s*iVar12\ =\ piVar8\[0x26\];$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar12	vectorRegClass	CONFIRMED	register class (+0x98) of the vector-engine instruction	^\s*if\ \(iVar12\ ==\ \*\(int\ \*\)\(iVar6\ \+\ 0x98\)\)\ \{$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar12	mathSrcOffset	CONFIRMED	allocated register offset of the math instruction source	^\s*iVar12\ =\ thunk_FUN_00134de8\(uVar13,uVar7\);$	+2
+use	R300VMachineAssembler__findFoldableMovePair	iVar3	isMathEngine	CONFIRMED	opcodeInfoIsVsFlagBit2: the instruction runs on the scalar (math) engine	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)FUN_0019a538\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x88\),piVar10\);$	+2
+use	R300VMachineAssembler__findFoldableMovePair	iVar3	destOffset	CONFIRMED	allocated register offset of the instruction destination	^\s*iVar3\ =\ thunk_FUN_00134de8\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xc\)\ \+\ 0x6c4\),piVar10\);$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar3	destOffset	CONFIRMED	allocated register offset of the instruction destination	^\s*if\ \(\(uint\)\(iVar3\ \-\ iVar5\)\ <\ 4\)\ \{$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar3	numSources	CONFIRMED	IRInst vtable slot 5 getNumSources	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x14\)\)\(piVar10\);$	+2
+use	R300VMachineAssembler__findFoldableMovePair	iVar3	blockRef	CONFIRMED	groupHead[0x56]: the owning block (inst+0x158)	^\s*iVar3\ =\ param_3\[0x56\];$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar3	blockRef	CONFIRMED	groupHead[0x56]: the owning block (inst+0x158)	^\s*FUN_000e7738\(iVar3,piVar4,piVar9\);$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar3	blockRef	CONFIRMED	groupHead[0x56]: the owning block (inst+0x158)	^\s*FUN_000e7700\(iVar3,piVar8,piVar4\);$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar3	blockRef	CONFIRMED	groupHead[0x56]: the owning block (inst+0x158)	^\s*for\ \(;\ iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x14\)\)\(piVar9\),\ iVar6\ <=\ iVar3;$	+2
+use	R300VMachineAssembler__findFoldableMovePair	iVar3	blockRef	CONFIRMED	groupHead[0x56]: the owning block (inst+0x158)	^\s*iVar3\ =\ FUN_00105594\(piVar9,iVar6\);$	+4
+use	R300VMachineAssembler__findFoldableMovePair	iVar3	blockRef	CONFIRMED	groupHead[0x56]: the owning block (inst+0x158)	^\s*if\ \(iVar3\ ==\ iVar5\)\ \{$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar5	regBias	INFERRED	target description slot 0x138 value	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x138\)\)\(piVar4,0\);$	+2
+use	R300VMachineAssembler__findFoldableMovePair	iVar5	src1RegId	CONFIRMED	destination register id (+0x94) of source 1's definition	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x94\);$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar5	src1RegId	CONFIRMED	destination register id (+0x94) of source 1's definition	^\s*if\ \(iVar5\ !=\ \*\(int\ \*\)\(iVar3\ \+\ 0x94\)\)\ goto\ LAB_0019b168;$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar5	srcIdx	CONFIRMED	loop index over the math instruction sources	^\s*for\ \(iVar5\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x14\)\)\(piVar9\),\ piVar4\ =\ piVar8,$	+2
+use	R300VMachineAssembler__findFoldableMovePair	iVar5	srcIdx	CONFIRMED	loop index over the math instruction sources	^\s*iVar6\ =\ FUN_00105594\(piVar9,iVar5\);$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar5	srcIdx	CONFIRMED	loop index over the math instruction sources	^\s*uVar7\ =\ FUN_00105594\(piVar9,iVar5\);$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar5	vectorRegClass5	CONFIRMED	register class of the vector instruction	^\s*iVar5\ =\ piVar8\[0x26\];$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar5	vectorRegClass5	CONFIRMED	register class of the vector instruction	^\s*if\ \(iVar5\ ==\ \*\(int\ \*\)\(iVar3\ \+\ 0x98\)\)\ \{$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar5	mathSrcOffset5	CONFIRMED	allocated offset of the math instruction source	^\s*iVar5\ =\ thunk_FUN_00134de8\(uVar13,uVar7\);$	+2
+use	R300VMachineAssembler__findFoldableMovePair	iVar6	numSourcesLoopBound	CONFIRMED	getNumSources of the math instruction (loop bound)	^\s*for\ \(iVar5\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x14\)\)\(piVar9\),\ piVar4\ =\ piVar8,$	+2
+use	R300VMachineAssembler__findFoldableMovePair	iVar6	numSourcesLoopBound	CONFIRMED	getNumSources of the math instruction (loop bound)	^\s*iVar6\ =\ FUN_00105594\(piVar9,iVar5\);$	+3
+use	R300VMachineAssembler__findFoldableMovePair	iVar6	numSourcesLoopBound	CONFIRMED	getNumSources of the math instruction (loop bound)	^\s*if\ \(iVar6\ ==\ iVar12\)\ \{$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar6	srcIdx2	CONFIRMED	second loop index over the math instruction sources	^\s*iVar6\ =\ 1;$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar6	srcIdx2	CONFIRMED	second loop index over the math instruction sources	^\s*for\ \(;\ iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x14\)\)\(piVar9\),\ iVar6\ <=\ iVar3;$	+2
+use	R300VMachineAssembler__findFoldableMovePair	iVar6	srcIdx2	CONFIRMED	second loop index over the math instruction sources	^\s*iVar3\ =\ FUN_00105594\(piVar9,iVar6\);$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar6	srcIdx2	CONFIRMED	second loop index over the math instruction sources	^\s*uVar7\ =\ FUN_00105594\(piVar9,iVar6\);$	+1
+use	R300VMachineAssembler__findFoldableMovePair	iVar6	srcIdx2	CONFIRMED	second loop index over the math instruction sources	^\s*FUN_00106004\(piVar9,iVar6,piVar4,0,\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\)\);$	+1
+local	R300VMachineAssembler__findFoldableMovePair	piVar10	groupCursor	CONFIRMED	instruction cursor over the group starting at groupHead (inst+8 is next, flag bit 2 continues)
+use	R300VMachineAssembler__findFoldableMovePair	piVar4	resultInst	CONFIRMED	returned instruction: groupHead, or the inserted mov	^\s*piVar4\ =\ \(int\ \*\)0x0;$	+1
+use	R300VMachineAssembler__findFoldableMovePair	piVar4	resultInst	CONFIRMED	returned instruction: groupHead, or the inserted mov	^\s*piVar4\ =\ param_3;$	+1
+use	R300VMachineAssembler__findFoldableMovePair	piVar4	resultInst	CONFIRMED	returned instruction: groupHead, or the inserted mov	^\s*for\ \(iVar5\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 0x14\)\)\(piVar9\),\ piVar4\ =\ piVar8,$	+2
+use	R300VMachineAssembler__findFoldableMovePair	piVar4	resultInst	CONFIRMED	returned instruction: groupHead, or the inserted mov	^\s*return\ piVar4;$@2	+1
+use	R300VMachineAssembler__findFoldableMovePair	piVar4	hwLimitsObj	CONFIRMED	compiler+0x30c target description	^\s*piVar4\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xc\)\ \+\ 0x30c\);$	+2
+use	R300VMachineAssembler__findFoldableMovePair	piVar4	insertAfterInst	INFERRED	instruction after which the math instruction is re-inserted	^\s*piVar4\ =\ \(int\ \*\)piVar10\[1\];$	+1
+use	R300VMachineAssembler__findFoldableMovePair	piVar4	insertAfterInst	INFERRED	instruction after which the math instruction is re-inserted	^\s*if\ \(piVar4\ ==\ piVar9\)\ \{$	+1
+use	R300VMachineAssembler__findFoldableMovePair	piVar4	insertAfterInst	INFERRED	instruction after which the math instruction is re-inserted	^\s*FUN_000e7738\(iVar3,piVar4,piVar9\);$	+1
+use	R300VMachineAssembler__findFoldableMovePair	piVar4	movInst	CONFIRMED	IRInst__create(0x31 IrMovFloat): the inserted mov	^\s*piVar4\ =\ \(int\ \*\)FUN_001043f0\(0x31,\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\)\);$	+1
+use	R300VMachineAssembler__findFoldableMovePair	piVar4	movInst	CONFIRMED	IRInst__create(0x31 IrMovFloat): the inserted mov	^\s*iVar5\ =\ FUN_001054ec\(piVar4,0\);$	+1
+use	R300VMachineAssembler__findFoldableMovePair	piVar4	movInst	CONFIRMED	IRInst__create(0x31 IrMovFloat): the inserted mov	^\s*FUN_00106004\(piVar4,1,piVar8,0,\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\)\);$	+2
+use	R300VMachineAssembler__findFoldableMovePair	piVar4	movInst	CONFIRMED	IRInst__create(0x31 IrMovFloat): the inserted mov	^\s*if\ \(piVar4\ ==\ \(int\ \*\)0x0\)\ \{$	+1
+use	R300VMachineAssembler__findFoldableMovePair	piVar4	movInst	CONFIRMED	IRInst__create(0x31 IrMovFloat): the inserted mov	^\s*FUN_00106004\(piVar9,iVar6,piVar4,0,\*\(undefined4\ \*\)\(param_1\ \+\ 0xc\)\);$	+1
+use	R300VMachineAssembler__findFoldableMovePair	piVar4	movInst	CONFIRMED	IRInst__create(0x31 IrMovFloat): the inserted mov	^\s*return\ piVar4;$	+1
+local	R300VMachineAssembler__findFoldableMovePair	piVar8	vectorInst	INFERRED	last vector-engine instruction of the group (not on the math engine, no 0x10000 flag)
+local	R300VMachineAssembler__findFoldableMovePair	piVar9	mathInst	INFERRED	scalar (math-engine) instruction of the group
+local	R300VMachineAssembler__findFoldableMovePair	uVar11	instFlags	CONFIRMED	inst+0x14 flags
+local	R300VMachineAssembler__findFoldableMovePair	uVar13	allocTable	CONFIRMED	compiler+0x6c4
+use	R300VMachineAssembler__findFoldableMovePair	uVar7	tempRegId	INFERRED	FUN_00130690(allocTable, 0): a fresh temporary register id	^\s*uVar7\ =\ FUN_00130690\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xc\)\ \+\ 0x6c4\),0\);$	+1
+use	R300VMachineAssembler__findFoldableMovePair	uVar7	tempRegId	INFERRED	FUN_00130690(allocTable, 0): a fresh temporary register id	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 8\)\ =\ uVar7;$	+1

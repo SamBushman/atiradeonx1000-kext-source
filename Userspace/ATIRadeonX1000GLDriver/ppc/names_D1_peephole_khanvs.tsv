@@ -1,0 +1,8 @@
+local	KhanVs__peepholeCombine	local_38	foldStatus	UNKNOWN	zero-initialised words whose address is passed to the fold helper
+local	KhanVs__peepholeCombine	param_3	consumerOperandArg	UNKNOWN	consumer operand pointer passed to the rewrite helpers
+local	KhanVs__peepholeCombine	param_5	program	CONFIRMED	param_5[2] is the compiler; param_5 is the Program
+local	KhanVs__peepholeCombine	param_6	passThroughR8	UNKNOWN	Ghidra input-register artifact
+local	KhanVs__peepholeCombine	param_7	hwLimitsOrArg	INFERRED	loaded as **(program[2] + 0x30c) (target description) before use
+local	KhanVs__peepholeCombine	piVar5	producerAlias	INFERRED	copy of inst2
+local	KhanVs__peepholeCombine	piVar6	programAlias	CONFIRMED	copy of program kept as an extra call argument
+local	KhanVs__peepholeCombine	uVar7	changedFlag	INFERRED	set to 1 whenever a pattern fired; the result of the pass

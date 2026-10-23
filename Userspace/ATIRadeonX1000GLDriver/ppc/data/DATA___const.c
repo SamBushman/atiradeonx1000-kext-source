@@ -1385,8 +1385,8 @@ const unsigned int sectDATA___const[2670] = {
     0x001d0174, /* +0x1598 */
     0x001d017c, /* +0x159c */
     0x001d0184, /* +0x15a0 */
-    0x00138694, /* -> HwLimits__vslot81 */ /* +0x15a4 */
-    0x001322a8, /* -> HwLimits__vslot82 */ /* +0x15a8 */
+    0x00138694, /* -> HwLimits__computeBlockLiveness */ /* +0x15a4 */
+    0x001322a8, /* -> HwLimits__buildInterferenceGraph */ /* +0x15a8 */
     0x001d018c, /* +0x15ac */
     0x001d0190, /* +0x15b0 */
     0x00000000, /* +0x15b4 */
@@ -1834,7 +1834,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001d0054, /* +0x1c9c */
     0x00196d5c, /* -> R300MachineAssembler__create */ /* +0x1ca0 */
     0x00188e24, /* -> KhanPs__vslot27 */ /* +0x1ca4 */
-    0x0018843c, /* -> KhanPs__vslot28 */ /* +0x1ca8 */
+    0x0018843c, /* -> KhanPs__peepholeCombine */ /* +0x1ca8 */
     0x001d82c4, /* +0x1cac */
     0x001d82c8, /* +0x1cb0 */
     0x0018962c, /* -> KhanPs__vslot31 */ /* +0x1cb4 */
@@ -1887,8 +1887,8 @@ const unsigned int sectDATA___const[2670] = {
     0x00127ecc, /* -> KhanPs__vslot78 */ /* +0x1d70 */
     0x001d017c, /* +0x1d74 */
     0x001d0184, /* +0x1d78 */
-    0x00138694, /* -> HwLimits__vslot81 */ /* +0x1d7c */
-    0x001322a8, /* -> HwLimits__vslot82 */ /* +0x1d80 */
+    0x00138694, /* -> HwLimits__computeBlockLiveness */ /* +0x1d7c */
+    0x001322a8, /* -> HwLimits__buildInterferenceGraph */ /* +0x1d80 */
     0x001d018c, /* +0x1d84 */
     0x001d0190, /* +0x1d88 */
     0x00128430, /* -> KhanPs__vslot85 */ /* +0x1d8c */
@@ -1936,7 +1936,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001d0054, /* +0x1e34 */
     0x0019b8bc, /* -> R300VMachineAssembler__create */ /* +0x1e38 */
     0x001894ec, /* -> KhanVs__vslot27 */ /* +0x1e3c */
-    0x00188fec, /* -> KhanVs__vslot28 */ /* +0x1e40 */
+    0x00188fec, /* -> KhanVs__peepholeCombine */ /* +0x1e40 */
     0x00188f24, /* -> KhanVs__vslot29 */ /* +0x1e44 */
     0x001d8418, /* +0x1e48 */
     0x001d83e8, /* +0x1e4c */
@@ -1989,8 +1989,8 @@ const unsigned int sectDATA___const[2670] = {
     0x00129400, /* +0x1f08 */
     0x001d017c, /* +0x1f0c */
     0x001293f8, /* -> KhanVs__vslot80 */ /* +0x1f10 */
-    0x00138694, /* -> HwLimits__vslot81 */ /* +0x1f14 */
-    0x001322a8, /* -> HwLimits__vslot82 */ /* +0x1f18 */
+    0x00138694, /* -> HwLimits__computeBlockLiveness */ /* +0x1f14 */
+    0x001322a8, /* -> HwLimits__buildInterferenceGraph */ /* +0x1f18 */
     0x001d018c, /* +0x1f1c */
     0x001d0190, /* +0x1f20 */
     0x00129eb4, /* -> KhanVs__vslot85 */ /* +0x1f24 */
@@ -2040,7 +2040,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001d0054, /* +0x1fd4 */
     0x0019de50, /* -> R520VMachineAssembler__create */ /* +0x1fd8 */
     0x001894ec, /* -> KhanVs__vslot27 */ /* +0x1fdc */
-    0x00188fec, /* -> KhanVs__vslot28 */ /* +0x1fe0 */
+    0x00188fec, /* -> KhanVs__peepholeCombine */ /* +0x1fe0 */
     0x00188f24, /* -> KhanVs__vslot29 */ /* +0x1fe4 */
     0x001d8418, /* +0x1fe8 */
     0x001d83e8, /* +0x1fec */
@@ -2093,8 +2093,8 @@ const unsigned int sectDATA___const[2670] = {
     0x00129400, /* +0x20a8 */
     0x001d017c, /* +0x20ac */
     0x001293f8, /* -> KhanVs__vslot80 */ /* +0x20b0 */
-    0x00138694, /* -> HwLimits__vslot81 */ /* +0x20b4 */
-    0x001322a8, /* -> HwLimits__vslot82 */ /* +0x20b8 */
+    0x00138694, /* -> HwLimits__computeBlockLiveness */ /* +0x20b4 */
+    0x001322a8, /* -> HwLimits__buildInterferenceGraph */ /* +0x20b8 */
     0x001d018c, /* +0x20bc */
     0x001d0190, /* +0x20c0 */
     0x00129eb4, /* -> KhanVs__vslot85 */ /* +0x20c4 */
@@ -2268,7 +2268,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001d0054, /* +0x2364 */
     0x001a1338, /* -> R520MachineAssembler__create */ /* +0x2368 */
     0x00188e24, /* -> KhanPs__vslot27 */ /* +0x236c */
-    0x0019286c, /* -> FudoPs__vslot28 */ /* +0x2370 */
+    0x0019286c, /* -> FudoPs__peepholeCombine */ /* +0x2370 */
     0x00193a00, /* -> FudoPs__vslot29 */ /* +0x2374 */
     0x001d82c8, /* +0x2378 */
     0x001d8adc, /* +0x237c */
@@ -2321,8 +2321,8 @@ const unsigned int sectDATA___const[2670] = {
     0x00191708, /* +0x2438 */
     0x001d017c, /* +0x243c */
     0x001d0184, /* +0x2440 */
-    0x00138694, /* -> HwLimits__vslot81 */ /* +0x2444 */
-    0x001322a8, /* -> HwLimits__vslot82 */ /* +0x2448 */
+    0x00138694, /* -> HwLimits__computeBlockLiveness */ /* +0x2444 */
+    0x001322a8, /* -> HwLimits__buildInterferenceGraph */ /* +0x2448 */
     0x001d018c, /* +0x244c */
     0x001d0190, /* +0x2450 */
     0x001919d8, /* -> FudoPs__vslot85 */ /* +0x2454 */

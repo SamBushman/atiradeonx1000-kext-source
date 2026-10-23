@@ -2466,7 +2466,7 @@
 0x131c10	FUN_00131c10	100	yes	
 0x131c74	FUN_00131c74	148	yes	
 0x131d08	FUN_00131d08	1440	no	indirect call (driver context / vtable / callback)
-0x1322a8	HwLimits__vslot82	3608	no	indirect call (driver context / vtable / callback)
+0x1322a8	HwLimits__buildInterferenceGraph	3608	no	indirect call (driver context / vtable / callback)
 0x1330f4	FUN_001330f4	328	no	indirect call (driver context / vtable / callback)
 0x13323c	FUN_0013323c	3452	no	indirect call (driver context / vtable / callback)
 0x133fe4	FUN_00133fe4	1020	no	indirect call (driver context / vtable / callback)
@@ -2513,7 +2513,7 @@
 0x138240	FUN_00138240	120	yes	
 0x1382b8	FUN_001382b8	216	no	indirect call (driver context / vtable / callback)
 0x138390	FUN_00138390	772	no	indirect call (driver context / vtable / callback)
-0x138694	HwLimits__vslot81	2336	no	indirect call (driver context / vtable / callback)
+0x138694	HwLimits__computeBlockLiveness	2336	no	indirect call (driver context / vtable / callback)
 0x138fb4	FUN_00138fb4	84	no	indirect call (driver context / vtable / callback)
 0x139008	FUN_00139008	44	yes	
 0x139034	FUN_00139034	40	yes	
@@ -2944,11 +2944,11 @@
 0x1875a8	FUN_001875a8	1328	no	indirect call (driver context / vtable / callback)
 0x187ad8	FUN_00187ad8	1996	no	indirect call (driver context / vtable / callback)
 0x1882a4	FUN_001882a4	408	no	indirect call (driver context / vtable / callback)
-0x18843c	KhanPs__vslot28	1328	no	indirect call (driver context / vtable / callback)
+0x18843c	KhanPs__peepholeCombine	1328	no	indirect call (driver context / vtable / callback)
 0x18896c	FUN_0018896c	1208	no	indirect call (driver context / vtable / callback)
 0x188e24	KhanPs__vslot27	256	yes	
 0x188f24	KhanVs__vslot29	200	no	indirect call (driver context / vtable / callback)
-0x188fec	KhanVs__vslot28	1280	no	indirect call (driver context / vtable / callback)
+0x188fec	KhanVs__peepholeCombine	1280	no	indirect call (driver context / vtable / callback)
 0x1894ec	KhanVs__vslot27	116	yes	
 0x189560	PackState__reset	64	yes	
 0x1895a0	PackState__copy	100	yes	
@@ -3011,7 +3011,7 @@
 0x191efc	FudoPs__ctor_191efc	448	yes	
 0x1920e0	FudoPs__ctor_1920e0	748	yes	
 0x1922c4	FUN_001922c4	1220	no	indirect call (driver context / vtable / callback)
-0x19286c	FudoPs__vslot28	4308	no	indirect call (driver context / vtable / callback)
+0x19286c	FudoPs__peepholeCombine	4308	no	indirect call (driver context / vtable / callback)
 0x193944	R520SchedModel__vslot21	112	no	indirect call (driver context / vtable / callback)
 0x1939b4	R520SchedModel__vslot22	76	yes	
 0x193a00	FudoPs__vslot29	140	no	indirect call (driver context / vtable / callback)

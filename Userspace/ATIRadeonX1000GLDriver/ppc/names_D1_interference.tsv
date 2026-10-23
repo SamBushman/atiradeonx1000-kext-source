@@ -1,0 +1,185 @@
+local	HwLimits__buildInterferenceGraph	bVar1	hasGroup	INFERRED	piVar4 != 0: the group head exists; gates the two instruction scans
+use	HwLimits__buildInterferenceGraph	bVar2	moreComponents	CONFIRMED	component loop 0..3 continue flag	^\s*bVar2\ =\ iVar24\ !=\ 3;$	+1
+use	HwLimits__buildInterferenceGraph	bVar2	moreComponents	CONFIRMED	component loop 0..3 continue flag	^\s*\}\ while\ \(bVar2\);$	+1
+use	HwLimits__buildInterferenceGraph	bVar2	moreComponents	CONFIRMED	component loop 0..3 continue flag	^\s*bVar2\ =\ iVar23\ !=\ 3;$	+1
+use	HwLimits__buildInterferenceGraph	bVar2	moreComponents	CONFIRMED	component loop 0..3 continue flag	^\s*\}\ while\ \(bVar2\);$@2	+1
+use	HwLimits__buildInterferenceGraph	bVar2	moreComponents	CONFIRMED	component loop 0..3 continue flag	^\s*bVar2\ =\ iVar24\ !=\ 3;$@2	+1
+use	HwLimits__buildInterferenceGraph	bVar2	moreComponents	CONFIRMED	component loop 0..3 continue flag	^\s*\}\ while\ \(bVar2\);$@3	+1
+use	HwLimits__buildInterferenceGraph	bVar2	moreComponents	CONFIRMED	component loop 0..3 continue flag	^\s*bVar2\ =\ iVar17\ !=\ 3;$	+1
+use	HwLimits__buildInterferenceGraph	bVar2	moreComponents	CONFIRMED	component loop 0..3 continue flag	^\s*\}\ while\ \(bVar2\);$@4	+1
+local	HwLimits__buildInterferenceGraph	iVar14	allocCtxOrBlock	INFERRED	starts as compiler+0x6c4 (register-allocation context) and is then walked block to block (+900 first block, +8 next)
+use	HwLimits__buildInterferenceGraph	iVar17	rowIndex	CONFIRMED	outer index of the pairwise edge loop	^\s*iVar17\ =\ 0;$	+3
+use	HwLimits__buildInterferenceGraph	iVar17	rowIndex	CONFIRMED	outer index of the pairwise edge loop	^\s*\(\(int\ \(\*\)\(\)\)FUN_00135334\)\(param_2,iVar17,iVar24\);$	+1
+use	HwLimits__buildInterferenceGraph	iVar17	rowIndex	CONFIRMED	outer index of the pairwise edge loop	^\s*\}\ while\ \(iVar17\ !=\ iVar20\);$	+1
+use	HwLimits__buildInterferenceGraph	iVar17	nextBlock	CONFIRMED	block +8: next block; zero ends the walk	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar14\ \+\ 8\);$	+1
+use	HwLimits__buildInterferenceGraph	iVar17	nextBlock	CONFIRMED	block +8: next block; zero ends the walk	^\s*if\ \(iVar17\ ==\ 0\)\ \{$	+1
+use	HwLimits__buildInterferenceGraph	iVar17	nextBlock	CONFIRMED	block +8: next block; zero ends the walk	^\s*iVar17\ =\ 0;$@2	+1
+use	HwLimits__buildInterferenceGraph	iVar17	nextBlock	CONFIRMED	block +8: next block; zero ends the walk	^\s*if\ \(\(\*\(char\ \*\)\(iVar24\ \+\ iVar20\ \+\ 0x10\)\ !=\ '\\x01'\)\ \&\&$	+3
+use	HwLimits__buildInterferenceGraph	iVar17	nextBlock	CONFIRMED	block +8: next block; zero ends the walk	^\s*iVar20\ =\ FUN_00130958\(piVar15,iVar17,iVar23\);$	+6
+use	HwLimits__buildInterferenceGraph	iVar17	nextBlock	CONFIRMED	block +8: next block; zero ends the walk	^\s*if\ \(\(\(\(\*\(int\ \*\)\(piVar11\[0x22\]\ \+\ 8\)\ ==\ 0x32\)\ \&\&$	+5
+use	HwLimits__buildInterferenceGraph	iVar17	nextBlock	CONFIRMED	block +8: next block; zero ends the walk	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar14\ \+\ 8\);$@2	+1
+use	HwLimits__buildInterferenceGraph	iVar17	nextBlock	CONFIRMED	block +8: next block; zero ends the walk	^\s*iVar17\ =\ iVar17\ \+\ 1;$@3	+2
+use	HwLimits__buildInterferenceGraph	iVar17	wordsLeft	CONFIRMED	live bitset word count used as a down counter	^\s*iVar17\ =\ \*piVar15;$	+2
+use	HwLimits__buildInterferenceGraph	iVar17	wordsLeft	CONFIRMED	live bitset word count used as a down counter	^\s*iVar24\ =\ iVar17;$	+2
+use	HwLimits__buildInterferenceGraph	iVar17	wordsLeft	CONFIRMED	live bitset word count used as a down counter	^\s*if\ \(iVar17\ !=\ 0\)\ \{$@2	+1
+use	HwLimits__buildInterferenceGraph	iVar17	wordsLeft	CONFIRMED	live bitset word count used as a down counter	^\s*if\ \(iVar17\ ==\ 0\)\ \{$@3	+2
+use	HwLimits__buildInterferenceGraph	iVar17	wordsLeft	CONFIRMED	live bitset word count used as a down counter	^\s*iVar17\ =\ iVar17\ \+\ \-1;$	+2
+use	HwLimits__buildInterferenceGraph	iVar17	repReg	CONFIRMED	FUN_00134bf0(graph, reg, coalesced): disjoint-set representative of a register	^\s*iVar17\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134bf0\)\(param_2,iVar24,1\);$	+2
+use	HwLimits__buildInterferenceGraph	iVar17	repReg	CONFIRMED	FUN_00134bf0(graph, reg, coalesced): disjoint-set representative of a register	^\s*iVar17\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134bf0\)\(param_2,piVar13\[0x25\],param_5\);$	+2
+use	HwLimits__buildInterferenceGraph	iVar17	repReg	CONFIRMED	FUN_00134bf0(graph, reg, coalesced): disjoint-set representative of a register	^\s*iVar17\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134bf0\)\(param_2,piVar13\[0x25\],param_5\);$@2	+2
+use	HwLimits__buildInterferenceGraph	iVar17	isPhiResult	CONFIRMED	IRInst vtable slot 31 isPhi	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x7c\)\)\(piVar11\);$	+3
+use	HwLimits__buildInterferenceGraph	iVar17	isPhiResult	CONFIRMED	IRInst vtable slot 31 isPhi	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x7c\)\)\(piVar13\);$	+3
+use	HwLimits__buildInterferenceGraph	iVar17	isUndefinedResult	CONFIRMED	IRInst vtable slot 20 isUndefined	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x50\)\)\(piVar11\);$	+2
+use	HwLimits__buildInterferenceGraph	iVar17	isUndefinedResult	CONFIRMED	IRInst vtable slot 20 isUndefined	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x50\)\)\(piVar13\);$	+2
+use	HwLimits__buildInterferenceGraph	iVar17	isMovResult	CONFIRMED	IRInst vtable slot 25 isMov	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 100\)\)\(piVar11\);$	+2
+use	HwLimits__buildInterferenceGraph	iVar17	srcIndex	CONFIRMED	for-loop index 1..getNumSources	^\s*for\ \(iVar17\ =\ 1;\ iVar24\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x14\)\)\(piVar11\),$	+6
+use	HwLimits__buildInterferenceGraph	iVar17	srcIndex	CONFIRMED	for-loop index 1..getNumSources	^\s*if\ \(\(piVar11\[0x20\]\ !=\ 0\)\ \&\&$	+4
+use	HwLimits__buildInterferenceGraph	iVar17	byteLoopLeft	CONFIRMED	counts the 4 bytes of the instruction dest-mask scan	^\s*iVar17\ =\ 4;$	+1
+use	HwLimits__buildInterferenceGraph	iVar17	byteLoopLeft	CONFIRMED	counts the 4 bytes of the instruction dest-mask scan	^\s*iVar17\ =\ iVar17\ \+\ \-1;$@2	+2
+use	HwLimits__buildInterferenceGraph	iVar17	noSourceResult	UNKNOWN	FUN_00105dbc(inst, 0) result	^\s*iVar17\ =\ FUN_00105dbc\(piVar11,0\);$	+7
+use	HwLimits__buildInterferenceGraph	iVar17	anyComponentLive	CONFIRMED	FUN_0013097c(live, reg): any of the 4 component bits of the register is set	^\s*iVar17\ =\ FUN_0013097c\(piVar15,uVar22\);$	+2
+use	HwLimits__buildInterferenceGraph	iVar17	src1Inst	CONFIRMED	IRInst source 1 definition (FUN_00105594(inst, 1))	^\s*iVar17\ =\ FUN_00105594\(piVar11,1\);$	+2
+use	HwLimits__buildInterferenceGraph	iVar17	src1Inst	CONFIRMED	IRInst source 1 definition (FUN_00105594(inst, 1))	^\s*iVar17\ =\ FUN_00105594\(piVar11,1\);$@2	+2
+use	HwLimits__buildInterferenceGraph	iVar17	isVertexFetchResult	CONFIRMED	IRInst vtable slot 11 isVertexFetch	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x2c\)\)\(piVar11\);$	+2
+use	HwLimits__buildInterferenceGraph	iVar17	operandRecord	CONFIRMED	FUN_001054ec(inst, 0): destination operand record	^\s*iVar17\ =\ FUN_001054ec\(piVar13,0\);$	+2
+use	HwLimits__buildInterferenceGraph	iVar17	operandRecord	CONFIRMED	FUN_001054ec(inst, 0): destination operand record	^\s*if\ \(\(\(piVar11\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(piVar11\[0x20\]\ !=\ 0\)\)\ \&\&$	+4
+use	HwLimits__buildInterferenceGraph	iVar17	operandRecord	CONFIRMED	FUN_001054ec(inst, 0): destination operand record	^\s*iVar17\ =\ FUN_001054ec\(piVar11,0\);$	+7
+use	HwLimits__buildInterferenceGraph	iVar17	operandRecord	CONFIRMED	FUN_001054ec(inst, 0): destination operand record	^\s*iVar17\ =\ FUN_001054ec\(piVar11,0\);$@2	+3
+use	HwLimits__buildInterferenceGraph	iVar17	componentIdx	CONFIRMED	component 0..3	^\s*iVar17\ =\ 0;$@3	+1
+use	HwLimits__buildInterferenceGraph	iVar17	componentIdx	CONFIRMED	component 0..3	^\s*if\ \(\(\*\(char\ \*\)\(iVar17\ \+\ iVar24\ \+\ 0x10\)\ ==\ '\\x01'\)\ \&\&$	+2
+use	HwLimits__buildInterferenceGraph	iVar17	componentIdx	CONFIRMED	component 0..3	^\s*bVar2\ =\ iVar17\ !=\ 3;$	+1
+use	HwLimits__buildInterferenceGraph	iVar17	componentIdx	CONFIRMED	component 0..3	^\s*iVar17\ =\ iVar17\ \+\ 1;$	+1
+use	HwLimits__buildInterferenceGraph	iVar17	componentIdx	CONFIRMED	component 0..3	^\s*iVar17\ =\ 0;$@4	+1
+use	HwLimits__buildInterferenceGraph	iVar17	componentIdx	CONFIRMED	component 0..3	^\s*iVar24\ =\ FUN_0013097c\(piVar15,iVar17\);$	+1
+use	HwLimits__buildInterferenceGraph	iVar17	componentIdx	CONFIRMED	component 0..3	^\s*uVar18\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134bf0\)\(param_2,iVar17,param_5\);$	+1
+use	HwLimits__buildInterferenceGraph	iVar17	componentIdx	CONFIRMED	component 0..3	^\s*iVar17\ =\ iVar17\ \+\ 1;$@2	+2
+use	HwLimits__buildInterferenceGraph	iVar17	defWordAddr	CONFIRMED	address of the worklist-membership bitset word for the register	^\s*iVar17\ =\ \(uVar22\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ puVar7\[5\];$	+2
+use	HwLimits__buildInterferenceGraph	iVar17	defWordAddr	CONFIRMED	address of the worklist-membership bitset word for the register	^\s*\*\(uint\ \*\)\(iVar17\ \+\ 8\);$	+1
+use	HwLimits__buildInterferenceGraph	iVar17	srcCount	CONFIRMED	inst+0x84 numSources (minus one when flag 0x200)	^\s*iVar17\ =\ piVar11\[0x21\];$	+1
+use	HwLimits__buildInterferenceGraph	iVar17	srcCount	CONFIRMED	inst+0x84 numSources (minus one when flag 0x200)	^\s*iVar17\ =\ iVar17\ \+\ \-1;$@3	+1
+use	HwLimits__buildInterferenceGraph	iVar17	srcCount	CONFIRMED	inst+0x84 numSources (minus one when flag 0x200)	^\s*if\ \(0\ <\ iVar17\)\ \{$@2	+1
+use	HwLimits__buildInterferenceGraph	iVar17	srcCount	CONFIRMED	inst+0x84 numSources (minus one when flag 0x200)	^\s*\}\ while\ \(iVar24\ <=\ iVar17\);$	+1
+use	HwLimits__buildInterferenceGraph	iVar17	srcCount	CONFIRMED	inst+0x84 numSources (minus one when flag 0x200)	^\s*if\ \(\(\(\(piVar13\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(piVar13\[0x20\]\ !=\ 0\)\)\ \&\&$	+5
+use	HwLimits__buildInterferenceGraph	iVar20	nextRow	INFERRED	row + 1 in the pairwise loop; later reused as scratch	^\s*iVar20\ =\ iVar24\ \+\ 1;$	+1
+use	HwLimits__buildInterferenceGraph	iVar20	nextRow	INFERRED	row + 1 in the pairwise loop; later reused as scratch	^\s*iVar24\ =\ iVar20;$	+2
+use	HwLimits__buildInterferenceGraph	iVar20	nextRow	INFERRED	row + 1 in the pairwise loop; later reused as scratch	^\s*iVar20\ =\ FUN_001054ec\(piVar11,0\);$	+5
+use	HwLimits__buildInterferenceGraph	iVar20	nextRow	INFERRED	row + 1 in the pairwise loop; later reused as scratch	^\s*iVar20\ =\ FUN_00130958\(piVar15,iVar17,iVar23\);$	+6
+use	HwLimits__buildInterferenceGraph	iVar20	nextRow	INFERRED	row + 1 in the pairwise loop; later reused as scratch	^\s*if\ \(\(\(piVar13\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar20\ =\ FUN_00126760\(piVar13\[0x26\]\),\ iVar20\ !=\ 0\)\)$	+4
+use	HwLimits__buildInterferenceGraph	iVar20	nextRow	INFERRED	row + 1 in the pairwise loop; later reused as scratch	^\s*iVar20\ =\ 0;$	+1
+use	HwLimits__buildInterferenceGraph	iVar20	nextRow	INFERRED	row + 1 in the pairwise loop; later reused as scratch	^\s*if\ \(\*\(char\ \*\)\(\(int\)\&local_58\ \+\ iVar20\)\ !=\ '\\0'\)\ \{$	+1
+use	HwLimits__buildInterferenceGraph	iVar20	nextRow	INFERRED	row + 1 in the pairwise loop; later reused as scratch	^\s*iVar20\ =\ iVar20\ \+\ 1;$	+1
+use	HwLimits__buildInterferenceGraph	iVar20	nextRow	INFERRED	row + 1 in the pairwise loop; later reused as scratch	^\s*\(\(int\ \(\*\)\(\)\)FUN_00135334\)\(param_2,uVar22,iVar20\);$	+1
+use	HwLimits__buildInterferenceGraph	iVar20	srcOperandRecord	CONFIRMED	FUN_001054ec(inst, n): source operand record	^\s*iVar20\ =\ FUN_001054ec\(piVar11,iVar24\);$	+2
+use	HwLimits__buildInterferenceGraph	iVar20	repReg2	CONFIRMED	disjoint-set representative of the source register	^\s*iVar20\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134bf0\)\(param_2,piVar13\[0x25\],param_5\);$	+1
+use	HwLimits__buildInterferenceGraph	iVar20	repReg2	CONFIRMED	disjoint-set representative of the source register	^\s*uVar22\ =\ iVar20\ <<\ 2;$	+1
+use	HwLimits__buildInterferenceGraph	iVar23	containsResult	CONFIRMED	FUN_001303f4(rep, excluded[4]): register is one of four listed registers	^\s*iVar23\ =\ FUN_001303f4\(iVar20,\&local_58\);$	+2
+use	HwLimits__buildInterferenceGraph	iVar23	compCounter	CONFIRMED	component 0..3	^\s*iVar23\ =\ 0;$	+1
+use	HwLimits__buildInterferenceGraph	iVar23	compCounter	CONFIRMED	component 0..3	^\s*iVar20\ =\ FUN_00130958\(piVar15,iVar17,iVar23\);$	+8
+use	HwLimits__buildInterferenceGraph	iVar23	loopLeft4	CONFIRMED	counts the 4 components of the use scan	^\s*iVar23\ =\ 4;$	+1
+use	HwLimits__buildInterferenceGraph	iVar23	loopLeft4	CONFIRMED	counts the 4 components of the use scan	^\s*iVar23\ =\ iVar23\ \+\ \-1;$	+2
+local	HwLimits__buildInterferenceGraph	iVar24	innerIndexOrScratch	INFERRED	column index of the pairwise loop, then reused as a count/offset scratch
+local	HwLimits__buildInterferenceGraph	iVar9	compFlagResult	UNKNOWN	FUN_000f313c(inst, component) result
+local	HwLimits__buildInterferenceGraph	local_48	swizzleComponentUse	CONFIRMED	FUN_000f3398 output: byte per component read by the swizzle
+local	HwLimits__buildInterferenceGraph	local_58	excludedRegs0	INFERRED	first word of the 4-register array whose address FUN_001303f4 takes (copied from UNK_001affec..)
+local	HwLimits__buildInterferenceGraph	local_54	excludedRegs1	INFERRED	second word of the excluded-register array
+local	HwLimits__buildInterferenceGraph	local_50	excludedRegs2	INFERRED	third word of the excluded-register array
+local	HwLimits__buildInterferenceGraph	local_4c	excludedRegs3	INFERRED	fourth word of the excluded-register array
+local	HwLimits__buildInterferenceGraph	param_2	graph	CONFIRMED	passed to FUN_00135334 (add interference edge) and FUN_00134bf0 (representative): the ColorGraph
+local	HwLimits__buildInterferenceGraph	param_3	fixedRegCount	INFERRED	the first param_3 nodes are made pairwise interfering before the block walk
+local	HwLimits__buildInterferenceGraph	param_4	regCount	CONFIRMED	uVar3 = param_4 * 4 is the number of component bits
+local	HwLimits__buildInterferenceGraph	param_5	useCoalesced	CONFIRMED	non-zero maps every register through the disjoint-set representative
+use	HwLimits__buildInterferenceGraph	piVar11	liveWordPtr	CONFIRMED	cursor over the live-out words being copied	^\s*piVar11\ =\ \(int\ \*\)\(iVar24\ \+\ 8\);$	+1
+use	HwLimits__buildInterferenceGraph	piVar11	liveWordPtr	CONFIRMED	cursor over the live-out words being copied	^\s*piVar4\[2\]\ =\ \*piVar11;$	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*for\ \(piVar11\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar14\ \+\ 0xa0\)\)\[1\];\ piVar11\ !=\ \(int\ \*\)0x0;$	+3
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*piVar11\ =\ piVar4;$	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*uVar22\ =\ piVar11\[5\];$	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x7c\)\)\(piVar11\);$	+4
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x50\)\)\(piVar11\);$	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*uVar22\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134bf0\)\(param_2,piVar11\[0x25\],param_5\);$	+2
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*for\ \(iVar17\ =\ 1;\ iVar24\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x14\)\)\(piVar11\),$	+6
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*if\ \(\(piVar11\[0x48\]\ ==\ 0\)\ \&\&\ \(piVar11\[0x49\]\ ==\ 0\)\)\ \{$	+5
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*piVar13\ =\ piVar11;$	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*FUN_001054ec\(piVar11,0\);$	+8
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*uVar22\ =\ piVar11\[5\];$@3	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*if\ \(\(\(\(\(\(piVar11\[5\]\ \&\ 0x200U\)\ ==\ 0\)\ \|\|$	+6
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*iVar20\ =\ FUN_001054ec\(piVar11,0\);$	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*if\ \(\(\(iVar20\ !=\ 0\)\ \&\&$	+5
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*if\ \(\(\(\(\*\(int\ \*\)\(piVar11\[0x22\]\ \+\ 8\)\ ==\ 0x32\)\ \&\&$	+6
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x2c\)\)\(piVar11\);$	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*iVar17\ =\ FUN_00105594\(piVar11,1\);$@2	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*uVar22\ =\ piVar11\[5\];$@4	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*uVar22\ =\ piVar11\[5\];$@5	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*\}\ while\ \(\(\(int\ \*\)piVar11\[2\]\ !=\ \(int\ \*\)0x0\)\ \&\&$	+2
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*piVar11\ =\ \(int\ \*\)piVar4\[1\];$	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*piVar4\ =\ piVar11;$	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*while\ \(piVar11\ =\ piVar4,\ puVar7\[2\]\ !=\ 0\)\ \{$	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*uVar22\ =\ piVar11\[5\];$@6	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*iVar17\ =\ FUN_001054ec\(piVar11,0\);$	+9
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*piVar13\ =\ \(int\ \*\)FUN_00105594\(piVar11,iVar24\);$	+6
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*uVar22\ =\ piVar11\[5\];$@8	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*piVar13\ =\ \(int\ \*\)FUN_00105594\(piVar11,piVar11\[0x21\]\);$	+6
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*iVar17\ =\ FUN_001054ec\(piVar11,0\);$@2	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*uVar22\ =\ piVar11\[5\];$@9	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*if\ \(\(int\ \*\)piVar11\[2\]\ ==\ \(int\ \*\)0x0\)\ break;$	+1
+use	HwLimits__buildInterferenceGraph	piVar11	walkInst	CONFIRMED	instruction cursor of the backward scans	^\s*piVar11\ =\ \(int\ \*\)piVar11\[2\];$	+1
+use	HwLimits__buildInterferenceGraph	piVar11	sourceInst	CONFIRMED	definition of source operand n	^\s*piVar11\ =\ \(int\ \*\)FUN_00105594\(piVar13,piVar13\[0x21\]\);$	+5
+use	HwLimits__buildInterferenceGraph	piVar11	sourceInst	CONFIRMED	definition of source operand n	^\s*if\ \(\(\*\(char\ \*\)\(iVar17\ \+\ iVar24\ \+\ 0x10\)\ ==\ '\\x01'\)\ \&\&$	+2
+local	HwLimits__buildInterferenceGraph	piVar13	cursorInst	CONFIRMED	instruction cursor of the second scan
+local	HwLimits__buildInterferenceGraph	piVar15	liveWords	CONFIRMED	first word of the running live bitset
+use	HwLimits__buildInterferenceGraph	piVar4	bitsetWordPtr	CONFIRMED	cursor over a bitset's words	^\s*piVar4\ =\ piVar15;$	+1
+use	HwLimits__buildInterferenceGraph	piVar4	bitsetWordPtr	CONFIRMED	cursor over a bitset's words	^\s*piVar4\[2\]\ =\ 0;$	+2
+use	HwLimits__buildInterferenceGraph	piVar4	bitsetWordPtr	CONFIRMED	cursor over a bitset's words	^\s*piVar4\ =\ piVar15;$@2	+1
+use	HwLimits__buildInterferenceGraph	piVar4	bitsetWordPtr	CONFIRMED	cursor over a bitset's words	^\s*piVar4\[2\]\ =\ 0;$@2	+2
+use	HwLimits__buildInterferenceGraph	piVar4	bitsetWordPtr	CONFIRMED	cursor over a bitset's words	^\s*piVar4\ =\ piVar15;$@3	+1
+use	HwLimits__buildInterferenceGraph	piVar4	bitsetWordPtr	CONFIRMED	cursor over a bitset's words	^\s*piVar4\[2\]\ =\ \*piVar11;$	+2
+use	HwLimits__buildInterferenceGraph	piVar4	groupHead	CONFIRMED	head of the current instruction group (block +0xa0)	^\s*piVar4\ =\ \*\(int\ \*\*\)\(iVar14\ \+\ 0xa0\);$	+1
+use	HwLimits__buildInterferenceGraph	piVar4	groupHead	CONFIRMED	head of the current instruction group (block +0xa0)	^\s*if\ \(\(piVar4\ ==\ \*\(int\ \*\*\)\(iVar14\ \+\ 0x98\)\)\ \|\|\ \(\(piVar11\[5\]\ \&\ 4U\)\ ==\ 0\)\)\ \{$	+3
+use	HwLimits__buildInterferenceGraph	piVar4	groupHead	CONFIRMED	head of the current instruction group (block +0xa0)	^\s*piVar13\ =\ piVar4;$	+1
+use	HwLimits__buildInterferenceGraph	piVar4	groupHead	CONFIRMED	head of the current instruction group (block +0xa0)	^\s*while\ \(piVar11\ =\ piVar4,\ puVar7\[2\]\ !=\ 0\)\ \{$	+1
+use	HwLimits__buildInterferenceGraph	piVar4	groupHead	CONFIRMED	head of the current instruction group (block +0xa0)	^\s*piVar11\ =\ \(int\ \*\)piVar4\[1\];$	+1
+use	HwLimits__buildInterferenceGraph	piVar4	groupHead	CONFIRMED	head of the current instruction group (block +0xa0)	^\s*piVar4\ =\ piVar11;$	+1
+local	HwLimits__buildInterferenceGraph	puVar10	stackEntry	CONFIRMED	slot of the worklist vector read or written
+local	HwLimits__buildInterferenceGraph	puVar12	inWorklistWords	CONFIRMED	first word of the worklist-membership bitset
+local	HwLimits__buildInterferenceGraph	puVar16	worklistVecHeader	CONFIRMED	worklist+4: vector header (capacity, count, data)
+local	HwLimits__buildInterferenceGraph	puVar7	worklist	CONFIRMED	24-byte worklist object: arena, vector header, membership bitset at +0x14
+local	HwLimits__buildInterferenceGraph	puVar8	inWorklistAlloc	CONFIRMED	allocation of the membership bitset, then its word cursor
+local	HwLimits__buildInterferenceGraph	uVar19	allocArena	CONFIRMED	compiler+0x378 arena
+use	HwLimits__buildInterferenceGraph	uVar21	wordOff	CONFIRMED	byte offset of the bitset word holding a bit	^\s*uVar21\ =\ uVar5\ >>\ 3\ \&\ 0x1ffffffc;$	+3
+use	HwLimits__buildInterferenceGraph	uVar21	wordOff	CONFIRMED	byte offset of the bitset word holding a bit	^\s*uVar21\ =\ uVar22\ >>\ 3\ \&\ 0x1ffffffc;$	+3
+use	HwLimits__buildInterferenceGraph	uVar21	wordOff	CONFIRMED	byte offset of the bitset word holding a bit	^\s*uVar21\ =\ uVar22\ >>\ 3\ \&\ 0x1ffffffc;$@2	+3
+use	HwLimits__buildInterferenceGraph	uVar21	worklistCount	CONFIRMED	worklist element count	^\s*uVar21\ =\ puVar7\[2\];$	+5
+use	HwLimits__buildInterferenceGraph	uVar21	worklistCount	CONFIRMED	worklist element count	^\s*puVar10\ =\ \(uint\ \*\)FUN_0019423c\(puVar16,uVar21\);$	+1
+use	HwLimits__buildInterferenceGraph	uVar21	bitPos	CONFIRMED	reg*4 position	^\s*uVar21\ =\ iVar17\ <<\ 2;$	+2
+use	HwLimits__buildInterferenceGraph	uVar21	bitPos	CONFIRMED	reg*4 position	^\s*uVar22\ =\ uVar21\ >>\ 3\ \&\ 0x1ffffffc;$	+1
+use	HwLimits__buildInterferenceGraph	uVar21	bitPos	CONFIRMED	reg*4 position	^\s*\*\(uint\ \*\)\(\(int\)piVar15\ \+\ uVar22\ \+\ 8\)\ \&\ \~\(1\ <<\ \(uVar21\ \&\ 0x1f\)\);$	+1
+use	HwLimits__buildInterferenceGraph	uVar21	bitPos	CONFIRMED	reg*4 position	^\s*uVar21\ =\ uVar21\ \+\ 1;$	+1
+use	HwLimits__buildInterferenceGraph	uVar22	liveWordCount	CONFIRMED	(bitCount + 31) >> 5	^\s*uVar22\ =\ uVar3\ \+\ 0x1f\ >>\ 5;$	+2
+use	HwLimits__buildInterferenceGraph	uVar22	liveWordCount	CONFIRMED	(bitCount + 31) >> 5	^\s*puVar6\[1\]\ =\ uVar22;$	+1
+use	HwLimits__buildInterferenceGraph	uVar22	liveWordCount	CONFIRMED	(bitCount + 31) >> 5	^\s*if\ \(uVar22\ !=\ 0\)\ \{$	+1
+use	HwLimits__buildInterferenceGraph	uVar22	liveWordCount	CONFIRMED	(bitCount + 31) >> 5	^\s*if\ \(uVar22\ ==\ 0\)\ \{$	+2
+use	HwLimits__buildInterferenceGraph	uVar22	liveWordCount	CONFIRMED	(bitCount + 31) >> 5	^\s*uVar22\ =\ uVar22\ \-\ 1;$	+2
+use	HwLimits__buildInterferenceGraph	uVar22	instFlags	CONFIRMED	inst+0x14 flags	^\s*uVar22\ =\ piVar11\[5\];$	+2
+use	HwLimits__buildInterferenceGraph	uVar22	instFlags	CONFIRMED	inst+0x14 flags	^\s*uVar22\ =\ piVar11\[5\];$@2	+2
+use	HwLimits__buildInterferenceGraph	uVar22	instFlags	CONFIRMED	inst+0x14 flags	^\s*uVar22\ =\ piVar11\[5\];$@3	+1
+use	HwLimits__buildInterferenceGraph	uVar22	instFlags	CONFIRMED	inst+0x14 flags	^\s*uVar22\ =\ piVar11\[5\];$@4	+1
+use	HwLimits__buildInterferenceGraph	uVar22	instFlags	CONFIRMED	inst+0x14 flags	^\s*uVar22\ =\ piVar11\[5\];$@5	+1
+use	HwLimits__buildInterferenceGraph	uVar22	instFlags	CONFIRMED	inst+0x14 flags	^\s*\}\ while\ \(\(\(int\ \*\)piVar11\[2\]\ !=\ \(int\ \*\)0x0\)\ \&\&$	+2
+use	HwLimits__buildInterferenceGraph	uVar22	bitIndex	CONFIRMED	register*4 + component	^\s*uVar22\ =\ uVar21;$	+1
+use	HwLimits__buildInterferenceGraph	uVar22	bitIndex	CONFIRMED	register*4 + component	^\s*uVar5\ =\ uVar22\ >>\ 3\ \&\ 0x1ffffffc;$	+1
+use	HwLimits__buildInterferenceGraph	uVar22	bitIndex	CONFIRMED	register*4 + component	^\s*\*\(uint\ \*\)\(\(int\)piVar15\ \+\ uVar5\ \+\ 8\)\ \&\ \~\(1\ <<\ \(uVar22\ \&\ 0x1f\)\);$	+1
+use	HwLimits__buildInterferenceGraph	uVar22	bitIndex	CONFIRMED	register*4 + component	^\s*uVar22\ =\ uVar22\ \+\ 1;$@2	+1
+use	HwLimits__buildInterferenceGraph	uVar22	bitIndex	CONFIRMED	register*4 + component	^\s*uVar22\ =\ iVar20\ <<\ 2;$	+1
+use	HwLimits__buildInterferenceGraph	uVar22	bitIndex	CONFIRMED	register*4 + component	^\s*uVar21\ =\ uVar22\ >>\ 3\ \&\ 0x1ffffffc;$	+1
+use	HwLimits__buildInterferenceGraph	uVar22	bitIndex	CONFIRMED	register*4 + component	^\s*1\ <<\ \(uVar22\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(\(int\)piVar15\ \+\ uVar21\ \+\ 8\);$	+1
+use	HwLimits__buildInterferenceGraph	uVar22	bitIndex	CONFIRMED	register*4 + component	^\s*uVar22\ =\ uVar22\ \+\ 1;$@3	+1
+use	HwLimits__buildInterferenceGraph	uVar22	bitIndex	CONFIRMED	register*4 + component	^\s*uVar22\ =\ iVar17\ <<\ 2;$	+1
+use	HwLimits__buildInterferenceGraph	uVar22	bitIndex	CONFIRMED	register*4 + component	^\s*uVar21\ =\ uVar22\ >>\ 3\ \&\ 0x1ffffffc;$@2	+1
+use	HwLimits__buildInterferenceGraph	uVar22	bitIndex	CONFIRMED	register*4 + component	^\s*1\ <<\ \(uVar22\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(\(int\)piVar15\ \+\ uVar21\ \+\ 8\);$@2	+1
+use	HwLimits__buildInterferenceGraph	uVar22	bitIndex	CONFIRMED	register*4 + component	^\s*uVar22\ =\ uVar22\ \+\ 1;$@4	+1
+use	HwLimits__buildInterferenceGraph	uVar22	wordByteOff22	CONFIRMED	byte offset of a bitset word	^\s*uVar22\ =\ uVar21\ >>\ 3\ \&\ 0x1ffffffc;$	+3
+use	HwLimits__buildInterferenceGraph	uVar22	topIndex	CONFIRMED	worklist count - 1	^\s*uVar22\ =\ puVar7\[2\]\ \-\ 1;$	+1
+use	HwLimits__buildInterferenceGraph	uVar22	topIndex	CONFIRMED	worklist count - 1	^\s*if\ \(uVar22\ <\ \(uint\)puVar7\[2\]\)\ \{$	+2
+local	HwLimits__buildInterferenceGraph	uVar3	bitCount	CONFIRMED	param_4 * 4
+use	HwLimits__buildInterferenceGraph	uVar5	bitIdx5	CONFIRMED	component bit of the interference neighbour	^\s*uVar5\ =\ uVar22\ \+\ iVar24\ \*\ \-4\ \+\ iVar17\ \*\ 4;$	+2
+use	HwLimits__buildInterferenceGraph	uVar5	bitIdx5	CONFIRMED	component bit of the interference neighbour	^\s*1\ <<\ \(uVar5\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(\(int\)piVar15\ \+\ uVar21\ \+\ 8\);$	+1
+use	HwLimits__buildInterferenceGraph	uVar5	wordByteOff5	CONFIRMED	byte offset of a bitset word	^\s*uVar5\ =\ uVar22\ >>\ 3\ \&\ 0x1ffffffc;$	+3

@@ -1,0 +1,9 @@
+local	KhanPs__peepholeCombine	local_38	foldStatus	UNKNOWN	zero-initialised words whose address is passed to FUN_00160320
+local	KhanPs__peepholeCombine	param_3	consumerSrcIndex	INFERRED	source index of inst consumed from inst2: passed to FUN_00146610(inst, param_3, inst2)
+local	KhanPs__peepholeCombine	param_5	program	CONFIRMED	param_5[2] is the compiler (Compiler__isOptionEnabled(param_5[2], id))
+local	KhanPs__peepholeCombine	param_6	passThroughR8	UNKNOWN	Ghidra input-register artifact
+local	KhanPs__peepholeCombine	param_7	passThroughR9	UNKNOWN	Ghidra input-register artifact
+local	KhanPs__peepholeCombine	piVar2	curInst	CONFIRMED	current producer instruction, replaced after every committed rewrite
+local	KhanPs__peepholeCombine	puVar4	programAlias4	CONFIRMED	copy of program kept as an extra call argument
+local	KhanPs__peepholeCombine	puVar5	programAlias5	CONFIRMED	copy of program kept as an extra call argument
+local	KhanPs__peepholeCombine	uVar6	changedFlag	INFERRED	set to 1 whenever a pattern fired; the result of the pass

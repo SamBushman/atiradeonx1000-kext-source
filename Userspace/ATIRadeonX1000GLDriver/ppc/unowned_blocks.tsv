@@ -3290,7 +3290,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 131224	131244	eh-pad	FUN_001311cc	8	0x193cc0,__Unwind_Resume
 1313d8	1313f8	eh-pad	FUN_001312f4	8	0x193cc0,__Unwind_Resume
 131b68	131b88	eh-pad	FUN_00131a80	8	0x193cc0,__Unwind_Resume
-132448	13247c	eh-pad	HwLimits__vslot82	13	0x193cc0,__Unwind_Resume
+132448	13247c	eh-pad	HwLimits__buildInterferenceGraph	13	0x193cc0,__Unwind_Resume
 133f50	133f64	other	FUN_0013323c	5	0x193cc0
 133f84	133f9c	eh-pad	FUN_0013323c	6	0x193cc0,__Unwind_Resume
 134070	134090	eh-pad	FUN_00133fe4	8	0x193cc0,__Unwind_Resume
@@ -3448,7 +3448,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 1922a0	1922c4	eh-pad	FudoPs__ctor_191efc	9	__Unwind_Resume
 192358	192438	table	FUN_001922c4	56	
 19279c	1927a0	eh-pad	FUN_001922c4	1	__Unwind_Resume
-19323c	193240	eh-pad	FudoPs__vslot28	1	__Unwind_Resume
+19323c	193240	eh-pad	FudoPs__peepholeCombine	1	__Unwind_Resume
 193b88	193ba8	eh-pad	FUN_00193b3c	8	0x193cc0,__Unwind_Resume
 193bd0	193be8	other	FUN_00193b3c	6	
 193c74	193c94	eh-pad	FUN_00193c00	8	0x193cc0,__Unwind_Resume

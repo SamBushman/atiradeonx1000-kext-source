@@ -1085,10 +1085,10 @@ fd5c8	FUN_000fd5c8	103cf4	103cf8	-	no-handler
 131a80	FUN_00131a80	131b24	131b28	-	no-handler
 131a80	FUN_00131a80	131b48	131b4c	131b68	cleanup
 131a80	FUN_00131a80	131b84	131bd8	-	no-handler
-1322a8	HwLimits__vslot82	13230c	1323a0	-	no-handler
-1322a8	HwLimits__vslot82	1323c4	1323c8	13245c	cleanup
-1322a8	HwLimits__vslot82	1323e0	1323e4	132448	cleanup
-1322a8	HwLimits__vslot82	132478	1330c0	-	no-handler
+1322a8	HwLimits__buildInterferenceGraph	13230c	1323a0	-	no-handler
+1322a8	HwLimits__buildInterferenceGraph	1323c4	1323c8	13245c	cleanup
+1322a8	HwLimits__buildInterferenceGraph	1323e0	1323e4	132448	cleanup
+1322a8	HwLimits__buildInterferenceGraph	132478	1330c0	-	no-handler
 13323c	FUN_0013323c	133278	13327c	-	no-handler
 13323c	FUN_0013323c	13329c	1332a0	133f84	cleanup
 13323c	FUN_0013323c	1332a8	133f40	133f50	cleanup
@@ -1500,9 +1500,9 @@ fd5c8	FUN_000fd5c8	103cf4	103cf8	-	no-handler
 1922c4	FUN_001922c4	1924c8	1926ac	-	no-handler
 1922c4	FUN_001922c4	1926b8	1926bc	19279c	cleanup
 1922c4	FUN_001922c4	1926c4	192854	-	no-handler
-19286c	FudoPs__vslot28	1928b0	193228	-	no-handler
-19286c	FudoPs__vslot28	193234	193238	19323c	cleanup
-19286c	FudoPs__vslot28	19323c	193910	-	no-handler
+19286c	FudoPs__peepholeCombine	1928b0	193228	-	no-handler
+19286c	FudoPs__peepholeCombine	193234	193238	19323c	cleanup
+19286c	FudoPs__peepholeCombine	19323c	193910	-	no-handler
 193b3c	FUN_00193b3c	193b64	193b68	-	no-handler
 193b3c	FUN_00193b3c	193b80	193b84	193b88	cleanup
 193b3c	FUN_00193b3c	193ba4	193ba8	-	no-handler

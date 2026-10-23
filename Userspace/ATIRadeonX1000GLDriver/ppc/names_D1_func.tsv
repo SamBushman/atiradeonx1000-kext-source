@@ -1,0 +1,6 @@
+# func rows (round 3, fork D1)
+func	HwLimits__vslot81	HwLimits__computeBlockLiveness	INFERRED	builds per-block use/def bitsets (4 bits per register) and iterates live-in = use | (live-out & ~def) to a fixpoint; blocks at +0x100/+0x104/+0x108
+func	HwLimits__vslot82	HwLimits__buildInterferenceGraph	INFERRED	backward walk over every block from its live-out set; each definition gets an edge to everything live (ColorGraph add-edge FUN_00135334), with copy/coalescing exceptions; uses a worklist of registers
+func	FudoPs__vslot28	FudoPs__peepholeCombine	INFERRED	HwLimits vtable slot 28: tries ~30 option-gated pattern rewrites (Compiler__isOptionEnabled ids 0x1b/0x1c/0x1d/0x38/0x39/0x3c/0x3d) on a producer instruction and its consumer, committing each through FUN_00146610; returns whether anything changed
+func	KhanPs__vslot28	KhanPs__peepholeCombine	INFERRED	same slot in the Khan pixel-shader limits class: shorter chain of the same combine patterns
+func	KhanVs__vslot28	KhanVs__peepholeCombine	INFERRED	same slot in the Khan vertex-shader limits class

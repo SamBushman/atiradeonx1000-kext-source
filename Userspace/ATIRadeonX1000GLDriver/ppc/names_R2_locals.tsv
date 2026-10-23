@@ -234,7 +234,6 @@ local	FUN_00196e90	uVar7	operandVReg3	INFERRED	all 2 definition(s) of the variab
 local	FUN_00197de4	iVar3	operandVReg	INFERRED	all 1 definition(s) of the variable yield a VReg: FUN_00105594(inst,param_2)
 local	FUN_00197ecc	iVar3	operandVReg	INFERRED	all 1 definition(s) of the variable yield a VReg: FUN_00105594(inst,param_2)
 local	FUN_00197fb4	iVar2	operandRecord	INFERRED	all 2 definition(s) of the variable yield a OperandRecord: FUN_001054ec(inst,0); FUN_001054ec(inst,0)
-local	FUN_001981ac	uVar27	operandVReg	INFERRED	all 1 definition(s) of the variable yield a VReg: FUN_00105594(inst2,piVar22)
 local	FUN_0019d858	uVar7	operandVReg	INFERRED	all 3 definition(s) of the variable yield a VReg: FUN_00105594(iVar4,1); FUN_00105594(iVar4,2)
 local	FUN_0019e318	iVar6	operandRecord	INFERRED	all 1 definition(s) of the variable yield a OperandRecord: FUN_001054ec(a0,1)
 local	FUN_0019fa58	iVar4	operandRecord	INFERRED	all 1 definition(s) of the variable yield a OperandRecord: FUN_001054ec(inst,loopIndex)

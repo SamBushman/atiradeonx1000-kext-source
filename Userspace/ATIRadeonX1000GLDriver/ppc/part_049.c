@@ -1107,156 +1107,156 @@ int FUN_001882a4(inst, compiler)
   return;
 }
 
-/* KhanPs__vslot28 @ 0x18843c (1328 bytes) */
-int KhanPs__vslot28(this, inst, param_3, inst2, param_5, param_6, param_7)
+/* KhanPs__peepholeCombine @ 0x18843c (1328 bytes) */
+int KhanPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passThroughR8, passThroughR9)
   undefined4 this;
   int inst;
-  int param_3;
+  int consumerSrcIndex;
   int *inst2;
-  undefined4 *param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 *program;
+  undefined4 passThroughR8;
+  undefined4 passThroughR9;
 {
   int callResult;
-  int *piVar2;
+  int *curInst;
   int *inst3;
-  undefined4 *puVar4;
-  undefined4 *puVar5;
-  undefined4 uVar6;
-  undefined4 local_38 [7];
+  undefined4 *programAlias4;
+  undefined4 *programAlias5;
+  undefined4 changedFlag;
+  undefined4 foldStatus [7];
   
-  uVar6 = 0;
-  local_38[0] = 0;
-  puVar5 = param_5;
-  callResult = Compiler__isOptionEnabled(param_5[2],0x1b);
+  changedFlag = 0;
+  foldStatus[0] = 0;
+  programAlias5 = program;
+  callResult = Compiler__isOptionEnabled(program[2],0x1b);
   if (callResult == 0) {
 LAB_00188508:
-    callResult = Compiler__isOptionEnabled(param_5[2],0x1c);
+    callResult = Compiler__isOptionEnabled(program[2],0x1c);
     if (callResult != 0) {
-      callResult = FUN_00154dc0(inst2,param_5);
+      callResult = FUN_00154dc0(inst2,program);
       if (callResult != 0) {
-        inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+        inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
         if (inst2 == (int *)0x0) goto LAB_00188950;
       }
-      callResult = FUN_00162cc0(inst2,param_5);
+      callResult = FUN_00162cc0(inst2,program);
       if (callResult != 0) {
-        inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+        inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
         if (inst2 == (int *)0x0) goto LAB_00188950;
       }
       callResult = (**(code **)(*inst2 + 0x14))(inst2);
-      if ((param_3 <= callResult) && (callResult = FUN_00158264(inst,param_3,inst2,param_5), callResult != 0))
+      if ((consumerSrcIndex <= callResult) && (callResult = FUN_00158264(inst,consumerSrcIndex,inst2,program), callResult != 0))
       {
-        inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+        inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
         if (inst2 == (int *)0x0) goto LAB_00188950;
-        uVar6 = 1;
+        changedFlag = 1;
       }
-      callResult = FUN_00155a60(inst2,param_5);
+      callResult = FUN_00155a60(inst2,program);
       if (callResult != 0) {
-        inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+        inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_0014bdbc(inst2,param_5);
+      callResult = FUN_0014bdbc(inst2,program);
       if (callResult != 0) {
-        inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+        inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_0014caec(inst2,param_5);
+      callResult = FUN_0014caec(inst2,program);
       if (callResult != 0) {
-        inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+        inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_0014d8f8(inst2,param_5);
+      callResult = FUN_0014d8f8(inst2,program);
       if (callResult != 0) {
-        inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+        inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_00150d38(inst2,param_5);
+      callResult = FUN_00150d38(inst2,program);
       if (callResult != 0) {
-        inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+        inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_0014cec8(inst2,param_5);
+      callResult = FUN_0014cec8(inst2,program);
       if (callResult != 0) {
-        inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+        inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_0015df44(inst2,param_5);
+      callResult = FUN_0015df44(inst2,program);
       if (callResult != 0) {
-        inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+        inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_0015e494(inst2,param_5);
+      callResult = FUN_0015e494(inst2,program);
       if (callResult != 0) {
-        inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+        inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = Compiler__isOptionEnabled(param_5[2],0x3c);
-      if ((callResult != 0) && (callResult = FUN_00163478(inst,param_3,inst2,param_5), callResult != 0)) {
-        inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+      callResult = Compiler__isOptionEnabled(program[2],0x3c);
+      if ((callResult != 0) && (callResult = FUN_00163478(inst,consumerSrcIndex,inst2,program), callResult != 0)) {
+        inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_0014d274(inst2,param_5);
+      callResult = FUN_0014d274(inst2,program);
       if (callResult != 0) {
-        inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+        inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       }
-      callResult = FUN_00158c3c(inst2,param_5);
+      callResult = FUN_00158c3c(inst2,program);
       if (callResult != 0) {
-        uVar6 = 1;
+        changedFlag = 1;
       }
     }
-    callResult = FUN_0015546c(inst,param_3,inst2,(uint)param_5);
+    callResult = FUN_0015546c(inst,consumerSrcIndex,inst2,(uint)program);
     if (callResult != 0) {
-      uVar6 = 1;
-      inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+      changedFlag = 1;
+      inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     }
     inst3 = inst2;
-    puVar4 = param_5;
-    callResult = FUN_00155654(inst,param_3,inst2,param_5);
-    piVar2 = inst2;
+    programAlias4 = program;
+    callResult = FUN_00155654(inst,consumerSrcIndex,inst2,program);
+    curInst = inst2;
     if (callResult != 0) {
-      uVar6 = 1;
-      piVar2 = (int *)FUN_00146610(inst,param_3,inst2);
+      changedFlag = 1;
+      curInst = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
       inst3 = inst2;
     }
-    callResult = Compiler__isOptionEnabled(param_5[2],0x1d);
+    callResult = Compiler__isOptionEnabled(program[2],0x1d);
     if ((((callResult != 0) &&
-         (callResult = FUN_001633f8(piVar2,param_5,inst3,puVar4,puVar5,param_6,param_7), callResult != 0)) &&
-        (callResult = (**(code **)(*piVar2 + 100))(piVar2), callResult != 0)) &&
-       ((inst != 0 && (callResult = FUN_00160320(inst,param_3,piVar2,param_5,local_38), callResult != 0)
+         (callResult = FUN_001633f8(curInst,program,inst3,programAlias4,programAlias5,passThroughR8,passThroughR9), callResult != 0)) &&
+        (callResult = (**(code **)(*curInst + 100))(curInst), callResult != 0)) &&
+       ((inst != 0 && (callResult = FUN_00160320(inst,consumerSrcIndex,curInst,program,foldStatus), callResult != 0)
         ))) {
-      piVar2 = (int *)FUN_00146610(inst,param_3,piVar2);
-      if (piVar2 == (int *)0x0) goto LAB_00188950;
+      curInst = (int *)FUN_00146610(inst,consumerSrcIndex,curInst);
+      if (curInst == (int *)0x0) goto LAB_00188950;
     }
-    callResult = Compiler__isOptionEnabled(param_5[2],0x39);
+    callResult = Compiler__isOptionEnabled(program[2],0x39);
     if (callResult != 0) {
-      ((int (*)())FUN_001882a4)(piVar2,param_5[2]);
+      ((int (*)())FUN_001882a4)(curInst,program[2]);
     }
-    callResult = FUN_00159b58(piVar2,1,param_5);
+    callResult = FUN_00159b58(curInst,1,program);
     if (callResult != 0) {
-      piVar2 = (int *)FUN_00146610(inst,param_3,piVar2);
+      curInst = (int *)FUN_00146610(inst,consumerSrcIndex,curInst);
     }
-    callResult = Compiler__isOptionEnabled(param_5[2],0x39);
-    if ((callResult != 0) && (callResult = ((int (*)())FUN_001875a8)(inst,param_3,piVar2,param_5), callResult != 0)) {
-      uVar6 = 1;
-      piVar2 = (int *)FUN_00146610(inst,param_3,piVar2);
+    callResult = Compiler__isOptionEnabled(program[2],0x39);
+    if ((callResult != 0) && (callResult = ((int (*)())FUN_001875a8)(inst,consumerSrcIndex,curInst,program), callResult != 0)) {
+      changedFlag = 1;
+      curInst = (int *)FUN_00146610(inst,consumerSrcIndex,curInst);
     }
-    callResult = Compiler__isOptionEnabled(param_5[2],0x3b);
-    if ((callResult != 0) && ((piVar2[5] & 1U) != 0)) {
-      FUN_001859bc(piVar2,param_5,param_5[2]);
+    callResult = Compiler__isOptionEnabled(program[2],0x3b);
+    if ((callResult != 0) && ((curInst[5] & 1U) != 0)) {
+      FUN_001859bc(curInst,program,program[2]);
     }
   }
   else {
-    uVar6 = (**(code **)(*inst2 + 100))(inst2);
-    callResult = FUN_0014abdc(inst2,param_5,local_38);
+    changedFlag = (**(code **)(*inst2 + 100))(inst2);
+    callResult = FUN_0014abdc(inst2,program,foldStatus);
     if (callResult == 0) {
 LAB_001884c8:
       if (inst != 0) {
-        puVar5 = local_38;
-        callResult = FUN_00160320(inst,param_3,inst2,param_5,puVar5);
+        programAlias5 = foldStatus;
+        callResult = FUN_00160320(inst,consumerSrcIndex,inst2,program,programAlias5);
         if (callResult != 0) {
-          inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+          inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
           if (inst2 == (int *)0x0) goto LAB_00188950;
         }
       }
       goto LAB_00188508;
     }
-    inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+    inst2 = (int *)FUN_00146610(inst,consumerSrcIndex,inst2);
     if (inst2 != (int *)0x0) goto LAB_001884c8;
 LAB_00188950:
-    uVar6 = 1;
+    changedFlag = 1;
   }
-  return uVar6;
+  return changedFlag;
 }
 
 /* FUN_0018896c @ 0x18896c (1208 bytes) */
@@ -1505,175 +1505,175 @@ int KhanVs__vslot29(this, param_2)
   return;
 }
 
-/* KhanVs__vslot28 @ 0x188fec (1280 bytes) */
-int KhanVs__vslot28(this, inst, param_3, inst2, param_5, param_6, param_7)
+/* KhanVs__peepholeCombine @ 0x188fec (1280 bytes) */
+int KhanVs__peepholeCombine(this, inst, consumerOperandArg, inst2, program, passThroughR8, hwLimitsOrArg)
   undefined4 this;
   int inst;
-  int *param_3;
+  int *consumerOperandArg;
   int *inst2;
-  int *param_5;
-  undefined4 param_6;
-  int param_7;
+  int *program;
+  undefined4 passThroughR8;
+  int hwLimitsOrArg;
 {
   int callResult;
   int *piVar2;
   int *piVar3;
   int *piVar4;
-  int *piVar5;
-  int *piVar6;
-  undefined4 uVar7;
-  int local_38 [8];
+  int *producerAlias;
+  int *programAlias;
+  undefined4 changedFlag;
+  int foldStatus [8];
   
-  uVar7 = 0;
-  local_38[0] = 0;
-  piVar4 = param_3;
-  piVar5 = inst2;
-  piVar6 = param_5;
-  callResult = Compiler__isOptionEnabled(param_5[2],0x1b);
+  changedFlag = 0;
+  foldStatus[0] = 0;
+  piVar4 = consumerOperandArg;
+  producerAlias = inst2;
+  programAlias = program;
+  callResult = Compiler__isOptionEnabled(program[2],0x1b);
   if (callResult != 0) {
-    uVar7 = (**(code **)(*inst2 + 100))(inst2);
-    piVar4 = local_38;
-    callResult = FUN_0014abdc(inst2,param_5,piVar4);
+    changedFlag = (**(code **)(*inst2 + 100))(inst2);
+    piVar4 = foldStatus;
+    callResult = FUN_0014abdc(inst2,program,piVar4);
     piVar2 = inst2;
     if ((callResult != 0) &&
-       (piVar2 = (int *)FUN_00146610(inst,param_3,inst2), piVar4 = inst2,
+       (piVar2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2), piVar4 = inst2,
        piVar2 == (int *)0x0)) {
       return 1;
     }
     inst2 = piVar2;
     if (inst != 0) {
-      piVar6 = local_38;
+      programAlias = foldStatus;
       piVar4 = piVar2;
-      piVar5 = param_5;
-      callResult = FUN_00160320(inst,param_3,piVar2,param_5,piVar6);
+      producerAlias = program;
+      callResult = FUN_00160320(inst,consumerOperandArg,piVar2,program,programAlias);
       if ((callResult != 0) &&
-         (inst2 = (int *)FUN_00146610(inst,param_3,piVar2), piVar4 = piVar2,
+         (inst2 = (int *)FUN_00146610(inst,consumerOperandArg,piVar2), piVar4 = piVar2,
          inst2 == (int *)0x0)) {
         return 1;
       }
     }
   }
-  callResult = Compiler__isOptionEnabled(param_5[2],0x1c);
+  callResult = Compiler__isOptionEnabled(program[2],0x1c);
   if (callResult != 0) {
-    param_7 = **(int **)(param_5[2] + 0x30c);
-    callResult = (**(code **)(param_7 + 0x84))(*(int **)(param_5[2] + 0x30c));
-    if (((callResult != 0) && (callResult = FUN_00154dc0(inst2,param_5), callResult != 0)) &&
-       (inst2 = (int *)FUN_00146610(inst,param_3,inst2), inst2 == (int *)0x0)) {
+    hwLimitsOrArg = **(int **)(program[2] + 0x30c);
+    callResult = (**(code **)(hwLimitsOrArg + 0x84))(*(int **)(program[2] + 0x30c));
+    if (((callResult != 0) && (callResult = FUN_00154dc0(inst2,program), callResult != 0)) &&
+       (inst2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2), inst2 == (int *)0x0)) {
       return 1;
     }
-    callResult = FUN_00162cc0(inst2,param_5);
+    callResult = FUN_00162cc0(inst2,program);
     if ((callResult != 0) &&
-       (inst2 = (int *)FUN_00146610(inst,param_3,inst2), inst2 == (int *)0x0)) {
+       (inst2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2), inst2 == (int *)0x0)) {
       return 1;
     }
     callResult = (**(code **)(*inst2 + 0x14))(inst2);
-    if (((int)param_3 <= callResult) &&
-       (callResult = FUN_00158264(inst,param_3,inst2,param_5), callResult != 0)) {
-      inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+    if (((int)consumerOperandArg <= callResult) &&
+       (callResult = FUN_00158264(inst,consumerOperandArg,inst2,program), callResult != 0)) {
+      inst2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2);
       if (inst2 == (int *)0x0) {
         return 1;
       }
-      uVar7 = 1;
+      changedFlag = 1;
     }
-    callResult = FUN_00155a60(inst2,param_5);
+    callResult = FUN_00155a60(inst2,program);
     if (callResult != 0) {
-      inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+      inst2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2);
     }
-    callResult = FUN_0014bdbc(inst2,param_5);
+    callResult = FUN_0014bdbc(inst2,program);
     if (callResult != 0) {
-      inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+      inst2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2);
     }
     piVar4 = (int *)0x0;
-    piVar5 = (int *)((int)((unsigned char *)0x0) + 1);
-    callResult = FUN_0014b82c(inst2,param_5,0,1);
+    producerAlias = (int *)((int)((unsigned char *)0x0) + 1);
+    callResult = FUN_0014b82c(inst2,program,0,1);
     piVar2 = inst2;
     if (callResult != 0) {
-      piVar2 = (int *)FUN_00146610(inst,param_3,inst2);
+      piVar2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2);
       piVar4 = inst2;
     }
-    callResult = FUN_0014b150(piVar2,param_5);
+    callResult = FUN_0014b150(piVar2,program);
     piVar3 = piVar2;
     if (callResult != 0) {
       callResult = (**(code **)(*piVar2 + 100))(piVar2);
       if (((callResult != 0) && ((piVar2[5] & 0x200U) == 0)) && (inst != 0)) {
-        piVar6 = local_38;
-        piVar5 = param_5;
-        FUN_00160320(inst,param_3,piVar2,param_5,piVar6);
+        programAlias = foldStatus;
+        producerAlias = program;
+        FUN_00160320(inst,consumerOperandArg,piVar2,program,programAlias);
       }
-      piVar3 = (int *)FUN_00146610(inst,param_3,piVar2);
+      piVar3 = (int *)FUN_00146610(inst,consumerOperandArg,piVar2);
       if (piVar3 == (int *)0x0) {
         return 1;
       }
-      uVar7 = 1;
+      changedFlag = 1;
       piVar4 = piVar2;
     }
-    callResult = FUN_00150d38(piVar3,param_5);
+    callResult = FUN_00150d38(piVar3,program);
     piVar2 = piVar3;
     if (callResult != 0) {
-      piVar2 = (int *)FUN_00146610(inst,param_3,piVar3);
+      piVar2 = (int *)FUN_00146610(inst,consumerOperandArg,piVar3);
       piVar4 = piVar3;
     }
-    callResult = FUN_0015ceb0(piVar2,param_5);
+    callResult = FUN_0015ceb0(piVar2,program);
     piVar3 = piVar2;
     if (callResult != 0) {
-      piVar3 = (int *)FUN_00146610(inst,param_3,piVar2);
+      piVar3 = (int *)FUN_00146610(inst,consumerOperandArg,piVar2);
       piVar4 = piVar2;
     }
-    callResult = FUN_0015bd40(piVar3,param_5);
+    callResult = FUN_0015bd40(piVar3,program);
     piVar2 = piVar3;
     if (callResult != 0) {
-      piVar2 = (int *)FUN_00146610(inst,param_3,piVar3);
+      piVar2 = (int *)FUN_00146610(inst,consumerOperandArg,piVar3);
       piVar4 = piVar3;
     }
-    callResult = FUN_00163994(piVar2,param_5);
+    callResult = FUN_00163994(piVar2,program);
     piVar3 = piVar2;
     if (callResult != 0) {
-      piVar3 = (int *)FUN_00146610(inst,param_3,piVar2);
+      piVar3 = (int *)FUN_00146610(inst,consumerOperandArg,piVar2);
       piVar4 = piVar2;
     }
-    callResult = FUN_0015c6d4(piVar3,param_5);
+    callResult = FUN_0015c6d4(piVar3,program);
     piVar2 = piVar3;
     if (callResult != 0) {
-      piVar2 = (int *)FUN_00146610(inst,param_3,piVar3);
+      piVar2 = (int *)FUN_00146610(inst,consumerOperandArg,piVar3);
       piVar4 = piVar3;
     }
-    callResult = FUN_0014acb8(piVar2,param_5);
+    callResult = FUN_0014acb8(piVar2,program);
     piVar3 = piVar2;
     if (callResult != 0) {
-      piVar3 = (int *)FUN_00146610(inst,param_3,piVar2);
+      piVar3 = (int *)FUN_00146610(inst,consumerOperandArg,piVar2);
       piVar4 = piVar2;
     }
-    callResult = FUN_0015e494(piVar3,param_5);
+    callResult = FUN_0015e494(piVar3,program);
     inst2 = piVar3;
     if (callResult != 0) {
-      inst2 = (int *)FUN_00146610(inst,param_3,piVar3);
+      inst2 = (int *)FUN_00146610(inst,consumerOperandArg,piVar3);
       piVar4 = piVar3;
     }
   }
-  callResult = Compiler__isOptionEnabled(param_5[2],0x1d);
+  callResult = Compiler__isOptionEnabled(program[2],0x1d);
   if ((((callResult != 0) &&
-       (callResult = FUN_001633f8(inst2,param_5,piVar4,piVar5,piVar6,param_6,param_7), callResult != 0)) &&
+       (callResult = FUN_001633f8(inst2,program,piVar4,producerAlias,programAlias,passThroughR8,hwLimitsOrArg), callResult != 0)) &&
       ((callResult = (**(code **)(*inst2 + 100))(inst2), callResult != 0 &&
        ((inst != 0 &&
-        (callResult = FUN_00160320(inst,param_3,inst2,param_5,local_38), callResult != 0)))))) &&
-     (inst2 = (int *)FUN_00146610(inst,param_3,inst2), inst2 == (int *)0x0)) {
+        (callResult = FUN_00160320(inst,consumerOperandArg,inst2,program,foldStatus), callResult != 0)))))) &&
+     (inst2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2), inst2 == (int *)0x0)) {
     return 1;
   }
-  callResult = Compiler__isOptionEnabled(param_5[2],0x3a);
+  callResult = Compiler__isOptionEnabled(program[2],0x3a);
   if (callResult == 0) {
-    return uVar7;
+    return changedFlag;
   }
-  if ((param_5[0x8a] < *(int *)(param_5[2] + 0x664)) &&
-     (callResult = FUN_0015ea3c(inst,param_3,inst2,param_5), callResult != 0)) {
-    uVar7 = 1;
-    inst2 = (int *)FUN_00146610(inst,param_3,inst2);
+  if ((program[0x8a] < *(int *)(program[2] + 0x664)) &&
+     (callResult = FUN_0015ea3c(inst,consumerOperandArg,inst2,program), callResult != 0)) {
+    changedFlag = 1;
+    inst2 = (int *)FUN_00146610(inst,consumerOperandArg,inst2);
   }
-  callResult = FUN_0015f44c(inst,param_3,inst2,param_5);
+  callResult = FUN_0015f44c(inst,consumerOperandArg,inst2,program);
   if (callResult != 0) {
-    FUN_00146610(inst,param_3,inst2);
+    FUN_00146610(inst,consumerOperandArg,inst2);
     return 1;
   }
-  return uVar7;
+  return changedFlag;
 }
 
 /* KhanVs__vslot27 @ 0x1894ec (116 bytes) */
@@ -5946,13 +5946,13 @@ int R300VSchedModel__vslot19(this, inst)
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_0018843c");
-asm(".set FUN_0018843c, _KhanPs__vslot28");
+asm(".set FUN_0018843c, _KhanPs__peepholeCombine");
 asm(".globl FUN_00188e24");
 asm(".set FUN_00188e24, _KhanPs__vslot27");
 asm(".globl FUN_00188f24");
 asm(".set FUN_00188f24, _KhanVs__vslot29");
 asm(".globl FUN_00188fec");
-asm(".set FUN_00188fec, _KhanVs__vslot28");
+asm(".set FUN_00188fec, _KhanVs__peepholeCombine");
 asm(".globl FUN_001894ec");
 asm(".set FUN_001894ec, _KhanVs__vslot27");
 asm(".globl FUN_00189604");

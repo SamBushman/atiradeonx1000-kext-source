@@ -547,465 +547,496 @@ LAB_00131f98:
                param_2,param_4,in_r8,arena,in_r10);
 }
 
-/* HwLimits__vslot82 @ 0x1322a8 (416 bytes) */
-int HwLimits__vslot82(this, param_2, param_3, param_4, param_5, compiler)
+/* HwLimits__buildInterferenceGraph @ 0x1322a8 (416 bytes) */
+int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCoalesced, compiler)
   undefined4 this;
-  undefined4 param_2;
-  int param_3;
-  int param_4;
-  int param_5;
+  undefined4 graph;
+  int fixedRegCount;
+  int regCount;
+  int useCoalesced;
   int compiler;
 {
-  bool bVar1;
-  bool bVar2;
-  uint uVar3;
-  int *piVar4;
-  uint uVar5;
+  uint wordByteOff5;
+  uint topIndex;
+  uint wordByteOff22;
+  uint bitIndex;
+  uint instFlags;
+  uint liveWordCount;
+  uint bitPos;
+  uint worklistCount;
+  int *groupHead;
+  int *sourceInst;
+  int *walkInst;
+  int loopLeft4;
+  int compCounter;
+  int repReg2;
+  int srcOperandRecord;
+  int srcCount;
+  int defWordAddr;
+  int componentIdx;
+  int operandRecord;
+  int isVertexFetchResult;
+  int src1Inst;
+  int anyComponentLive;
+  int noSourceResult;
+  int byteLoopLeft;
+  int srcIndex;
+  int isMovResult;
+  int isUndefinedResult;
+  int isPhiResult;
+  int repReg;
+  int wordsLeft;
+  int nextBlock;
+  bool hasGroup;
+  bool moreComponents;
+  uint bitCount;
+  int *bitsetWordPtr;
+  uint bitIdx5;
   undefined4 *allocation;
-  undefined4 *puVar7;
-  undefined4 *puVar8;
-  int iVar9;
-  uint *puVar10;
-  int *piVar11;
-  undefined4 *puVar12;
-  int *piVar13;
-  int iVar14;
-  int *piVar15;
-  uint *puVar16;
-  int iVar17;
+  undefined4 *worklist;
+  undefined4 *inWorklistAlloc;
+  int compFlagResult;
+  uint *stackEntry;
+  int *liveWordPtr;
+  undefined4 *inWorklistWords;
+  int *cursorInst;
+  int allocCtxOrBlock;
+  int *liveWords;
+  uint *worklistVecHeader;
+  int rowIndex;
   undefined4 arena;
-  undefined4 uVar19;
-  int iVar20;
-  uint uVar21;
+  undefined4 allocArena;
+  int nextRow;
+  uint wordOff;
   uint uVar22;
-  int iVar23;
-  int iVar24;
-  int local_58;
-  undefined4 local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  int local_48 [2];
+  int containsResult;
+  int innerIndexOrScratch;
+  int excludedRegs0;
+  undefined4 excludedRegs1;
+  undefined4 excludedRegs2;
+  undefined4 excludedRegs3;
+  int swizzleComponentUse [2];
   
-  iVar14 = *(int *)(compiler + 0x6c4);
-  *(undefined4 *)(iVar14 + 0x244) = 0;
-  *(undefined4 *)(iVar14 + 0x240) = 0;
-  if (0 < param_3) {
-    iVar17 = 0;
-    while (iVar17 = iVar17 + 1, param_3 != iVar17) {
-      if (0 < iVar17) {
-        iVar24 = 0;
+  allocCtxOrBlock = *(int *)(compiler + 0x6c4);
+  *(undefined4 *)(allocCtxOrBlock + 0x244) = 0;
+  *(undefined4 *)(allocCtxOrBlock + 0x240) = 0;
+  if (0 < fixedRegCount) {
+    rowIndex = 0;
+    while (rowIndex = rowIndex + 1, fixedRegCount != rowIndex) {
+      if (0 < rowIndex) {
+        innerIndexOrScratch = 0;
         do {
-          iVar20 = iVar24 + 1;
-          ((int (*)())FUN_00135334)(param_2,iVar17,iVar24);
-          iVar24 = iVar20;
-        } while (iVar17 != iVar20);
+          nextRow = innerIndexOrScratch + 1;
+          ((int (*)())FUN_00135334)(graph,rowIndex,innerIndexOrScratch);
+          innerIndexOrScratch = nextRow;
+        } while (rowIndex != nextRow);
       }
     }
   }
-  uVar3 = param_4 * 4;
+  bitCount = regCount * 4;
   arena = *(undefined4 *)(compiler + 0x378);
-  uVar22 = uVar3 + 0x1f >> 5;
-  allocation = (undefined4 *)Arena__alloc(arena,uVar22 * 4 + 0xc);
-  piVar15 = allocation + 1;
+  liveWordCount = bitCount + 0x1f >> 5;
+  allocation = (undefined4 *)Arena__alloc(arena,liveWordCount * 4 + 0xc);
+  liveWords = allocation + 1;
   *allocation = arena;
-  allocation[1] = uVar22;
-  allocation[2] = uVar3;
+  allocation[1] = liveWordCount;
+  allocation[2] = bitCount;
+  if (liveWordCount != 0) {
+    bitsetWordPtr = liveWords;
+    if (liveWordCount == 0) {
+      liveWordCount = 1;
+    }
+    do {
+      bitsetWordPtr[2] = 0;
+      bitsetWordPtr = bitsetWordPtr + 1;
+      liveWordCount = liveWordCount - 1;
+    } while (liveWordCount != 0);
+  }
+  allocArena = *(undefined4 *)(compiler + 0x378);
+  worklist = (undefined4 *)Arena__alloc(allocArena,0x18);
+  worklistVecHeader = worklist + 1;
+  *worklist = allocArena;
+  worklist[1] = 2;
+  worklist[2] = 0;
+  worklist[4] = allocArena;
+  arena = Arena__alloc(allocArena,8);
+  worklist[3] = arena;
+  uVar22 = regCount + 0x1fU >> 5;
+  inWorklistAlloc = (undefined4 *)Arena__alloc(allocArena,uVar22 * 4 + 0xc);
+  inWorklistWords = inWorklistAlloc + 1;
+  *inWorklistAlloc = allocArena;
+  inWorklistAlloc[1] = uVar22;
+  inWorklistAlloc[2] = regCount;
   if (uVar22 != 0) {
-    piVar4 = piVar15;
+    inWorklistAlloc = inWorklistWords;
     if (uVar22 == 0) {
       uVar22 = 1;
     }
     do {
-      piVar4[2] = 0;
-      piVar4 = piVar4 + 1;
+      inWorklistAlloc[2] = 0;
+      inWorklistAlloc = inWorklistAlloc + 1;
       uVar22 = uVar22 - 1;
     } while (uVar22 != 0);
   }
-  uVar19 = *(undefined4 *)(compiler + 0x378);
-  puVar7 = (undefined4 *)Arena__alloc(uVar19,0x18);
-  puVar16 = puVar7 + 1;
-  *puVar7 = uVar19;
-  puVar7[1] = 2;
-  puVar7[2] = 0;
-  puVar7[4] = uVar19;
-  arena = Arena__alloc(uVar19,8);
-  puVar7[3] = arena;
-  uVar22 = param_4 + 0x1fU >> 5;
-  puVar8 = (undefined4 *)Arena__alloc(uVar19,uVar22 * 4 + 0xc);
-  puVar12 = puVar8 + 1;
-  *puVar8 = uVar19;
-  puVar8[1] = uVar22;
-  puVar8[2] = param_4;
-  if (uVar22 != 0) {
-    puVar8 = puVar12;
-    if (uVar22 == 0) {
-      uVar22 = 1;
-    }
-    do {
-      puVar8[2] = 0;
-      puVar8 = puVar8 + 1;
-      uVar22 = uVar22 - 1;
-    } while (uVar22 != 0);
-  }
-  puVar7[5] = puVar12;
-  iVar14 = *(int *)(iVar14 + 900);
-  iVar17 = *(int *)(iVar14 + 8);
+  worklist[5] = inWorklistWords;
+  allocCtxOrBlock = *(int *)(allocCtxOrBlock + 900);
+  nextBlock = *(int *)(allocCtxOrBlock + 8);
   do {
-    if (iVar17 == 0) {
-      if (piVar15 != (int *)0x0) {
+    if (nextBlock == 0) {
+      if (liveWords != (int *)0x0) {
         Arena__free(*allocation,allocation);
       }
       return;
     }
-    iVar17 = *piVar15;
-    if (iVar17 != 0) {
-      piVar4 = piVar15;
-      iVar24 = iVar17;
-      if (iVar17 == 0) {
-        iVar24 = 1;
+    wordsLeft = *liveWords;
+    if (wordsLeft != 0) {
+      bitsetWordPtr = liveWords;
+      innerIndexOrScratch = wordsLeft;
+      if (wordsLeft == 0) {
+        innerIndexOrScratch = 1;
       }
       do {
-        piVar4[2] = 0;
-        piVar4 = piVar4 + 1;
-        iVar24 = iVar24 + -1;
-      } while (iVar24 != 0);
+        bitsetWordPtr[2] = 0;
+        bitsetWordPtr = bitsetWordPtr + 1;
+        innerIndexOrScratch = innerIndexOrScratch + -1;
+      } while (innerIndexOrScratch != 0);
     }
-    if (param_5 == 0) {
-      iVar24 = *(int *)(iVar14 + 0x104);
-      if (iVar17 != 0) {
-        piVar4 = piVar15;
-        if (iVar17 == 0) {
-          iVar17 = 1;
+    if (useCoalesced == 0) {
+      innerIndexOrScratch = *(int *)(allocCtxOrBlock + 0x104);
+      if (wordsLeft != 0) {
+        bitsetWordPtr = liveWords;
+        if (wordsLeft == 0) {
+          wordsLeft = 1;
         }
         do {
-          piVar11 = (int *)(iVar24 + 8);
-          iVar24 = iVar24 + 4;
-          piVar4[2] = *piVar11;
-          piVar4 = piVar4 + 1;
-          iVar17 = iVar17 + -1;
-        } while (iVar17 != 0);
+          liveWordPtr = (int *)(innerIndexOrScratch + 8);
+          innerIndexOrScratch = innerIndexOrScratch + 4;
+          bitsetWordPtr[2] = *liveWordPtr;
+          bitsetWordPtr = bitsetWordPtr + 1;
+          wordsLeft = wordsLeft + -1;
+        } while (wordsLeft != 0);
       }
     }
-    else if (0 < (int)uVar3) {
+    else if (0 < (int)bitCount) {
       uVar22 = 0;
       do {
-        if ((*(uint *)((uVar22 >> 3 & 0x1ffffffc) + *(int *)(iVar14 + 0x104) + 8) >> (uVar22 & 0x1f)
+        if ((*(uint *)((uVar22 >> 3 & 0x1ffffffc) + *(int *)(allocCtxOrBlock + 0x104) + 8) >> (uVar22 & 0x1f)
             & 1) != 0) {
-          iVar24 = ((int)uVar22 >> 2) + (uint)((int)uVar22 < 0 && (uVar22 & 3) != 0);
-          iVar17 = ((int (*)())FUN_00134bf0)(param_2,iVar24,1);
-          uVar5 = uVar22 + iVar24 * -4 + iVar17 * 4;
-          uVar21 = uVar5 >> 3 & 0x1ffffffc;
-          *(uint *)((int)piVar15 + uVar21 + 8) =
-               1 << (uVar5 & 0x1f) | *(uint *)((int)piVar15 + uVar21 + 8);
+          innerIndexOrScratch = ((int)uVar22 >> 2) + (uint)((int)uVar22 < 0 && (uVar22 & 3) != 0);
+          repReg = ((int (*)())FUN_00134bf0)(graph,innerIndexOrScratch,1);
+          bitIdx5 = uVar22 + innerIndexOrScratch * -4 + repReg * 4;
+          wordOff = bitIdx5 >> 3 & 0x1ffffffc;
+          *(uint *)((int)liveWords + wordOff + 8) =
+               1 << (bitIdx5 & 0x1f) | *(uint *)((int)liveWords + wordOff + 8);
         }
         uVar22 = uVar22 + 1;
-      } while (uVar3 != uVar22);
+      } while (bitCount != uVar22);
     }
-    piVar4 = *(int **)(iVar14 + 0xa0);
-    for (piVar11 = (int *)(*(int **)(iVar14 + 0xa0))[1]; piVar11 != (int *)0x0;
-        piVar11 = (int *)piVar11[1]) {
-      if ((piVar4 == *(int **)(iVar14 + 0x98)) || ((piVar11[5] & 4U) == 0)) {
-        bVar1 = piVar4 != (int *)0x0;
-        piVar11 = piVar4;
-        if (bVar1) {
+    groupHead = *(int **)(allocCtxOrBlock + 0xa0);
+    for (walkInst = (int *)(*(int **)(allocCtxOrBlock + 0xa0))[1]; walkInst != (int *)0x0;
+        walkInst = (int *)walkInst[1]) {
+      if ((groupHead == *(int **)(allocCtxOrBlock + 0x98)) || ((walkInst[5] & 4U) == 0)) {
+        hasGroup = groupHead != (int *)0x0;
+        walkInst = groupHead;
+        if (hasGroup) {
           do {
-            uVar22 = piVar11[5];
-            if ((uVar22 & 1) != 0) {
-              iVar17 = (**(code **)(*piVar11 + 0x7c))(piVar11);
-              if (((iVar17 == 0) && (piVar11[0x20] != 0)) &&
-                 (iVar17 = RegKind__flagBit0(piVar11[0x26]), iVar17 != 0)) {
-                uVar22 = piVar11[5];
-                if ((uVar22 & 2) == 0) {
-                  iVar17 = (**(code **)(*piVar11 + 0x50))(piVar11);
-                  if (iVar17 != 0) goto code_r0x00132adc;
-                  local_58 = UNK_001affec;
-                  local_54 = UNK_001afff0;
-                  local_50 = UNK_001afff4;
-                  local_4c = UNK_001afff8;
-                  uVar22 = ((int (*)())FUN_00134bf0)(param_2,piVar11[0x25],param_5);
-                  iVar17 = (**(code **)(*piVar11 + 100))(piVar11);
-                  if (iVar17 != 0) {
-                    for (iVar17 = 1; iVar24 = (**(code **)(*piVar11 + 0x14))(piVar11),
-                        iVar17 <= iVar24; iVar17 = iVar17 + 1) {
-                      if ((((piVar11[iVar17 * 6 + 0x28] & 1U) != 0) ||
-                          ((piVar11[iVar17 * 6 + 0x28] & 2U) != 0)) ||
-                         (iVar24 = FUN_000f31e8(piVar11,iVar17), iVar24 == 0))
+            instFlags = walkInst[5];
+            if ((instFlags & 1) != 0) {
+              isPhiResult = (**(code **)(*walkInst + 0x7c))(walkInst);
+              if (((isPhiResult == 0) && (walkInst[0x20] != 0)) &&
+                 (isPhiResult = RegKind__flagBit0(walkInst[0x26]), isPhiResult != 0)) {
+                instFlags = walkInst[5];
+                if ((instFlags & 2) == 0) {
+                  isUndefinedResult = (**(code **)(*walkInst + 0x50))(walkInst);
+                  if (isUndefinedResult != 0) goto code_r0x00132adc;
+                  excludedRegs0 = UNK_001affec;
+                  excludedRegs1 = UNK_001afff0;
+                  excludedRegs2 = UNK_001afff4;
+                  excludedRegs3 = UNK_001afff8;
+                  uVar22 = ((int (*)())FUN_00134bf0)(graph,walkInst[0x25],useCoalesced);
+                  isMovResult = (**(code **)(*walkInst + 100))(walkInst);
+                  if (isMovResult != 0) {
+                    for (srcIndex = 1; innerIndexOrScratch = (**(code **)(*walkInst + 0x14))(walkInst),
+                        srcIndex <= innerIndexOrScratch; srcIndex = srcIndex + 1) {
+                      if ((((walkInst[srcIndex * 6 + 0x28] & 1U) != 0) ||
+                          ((walkInst[srcIndex * 6 + 0x28] & 2U) != 0)) ||
+                         (innerIndexOrScratch = FUN_000f31e8(walkInst,srcIndex), innerIndexOrScratch == 0))
                       goto code_r0x001327f0;
                     }
-                    if ((piVar11[0x48] == 0) && (piVar11[0x49] == 0)) {
-                      if ((piVar11[0x20] != 0) &&
-                         (((iVar17 = RegKind__flagBit0(piVar11[0x26]), iVar17 != 0 &&
-                           ((piVar11[5] & 2U) == 0)) &&
-                          (iVar17 = (**(code **)(*piVar11 + 0x50))(piVar11), iVar17 == 0)))) {
-                        iVar17 = 4;
-                        piVar13 = piVar11;
+                    if ((walkInst[0x48] == 0) && (walkInst[0x49] == 0)) {
+                      if ((walkInst[0x20] != 0) &&
+                         (((srcIndex = RegKind__flagBit0(walkInst[0x26]), srcIndex != 0 &&
+                           ((walkInst[5] & 2U) == 0)) &&
+                          (srcIndex = (**(code **)(*walkInst + 0x50))(walkInst), srcIndex == 0)))) {
+                        byteLoopLeft = 4;
+                        cursorInst = walkInst;
                         do {
-                          if ((uint)(*(byte *)(piVar13 + 0x27) - 2) < 2) goto code_r0x001327f0;
-                          piVar13 = (int *)((int)piVar13 + 1);
-                          iVar17 = iVar17 + -1;
-                        } while (iVar17 != 0);
+                          if ((uint)(*(byte *)(cursorInst + 0x27) - 2) < 2) goto code_r0x001327f0;
+                          cursorInst = (int *)((int)cursorInst + 1);
+                          byteLoopLeft = byteLoopLeft + -1;
+                        } while (byteLoopLeft != 0);
                       }
-                      IRInst__getOperandRecord(piVar11,0);
-                      iVar17 = FUN_00105dbc(piVar11,0);
-                      if (((iVar17 == 0) && ((piVar11[5] & 2U) == 0)) &&
-                         (((((piVar11[5] & 0x200U) == 0 &&
-                            ((piVar13 = (int *)IRInst__getOperandSource(piVar11,1), piVar13[0x20] != 0 &&
-                             (iVar17 = RegKind__flagBit0(piVar13[0x26]), iVar17 != 0)))) &&
-                           ((piVar13[5] & 2U) == 0)) &&
-                          (iVar17 = (**(code **)(*piVar13 + 0x50))(piVar13), iVar17 == 0)))) {
-                        local_58 = ((int (*)())FUN_00134bf0)(param_2,piVar13[0x25],param_5);
+                      IRInst__getOperandRecord(walkInst,0);
+                      noSourceResult = FUN_00105dbc(walkInst,0);
+                      if (((noSourceResult == 0) && ((walkInst[5] & 2U) == 0)) &&
+                         (((((walkInst[5] & 0x200U) == 0 &&
+                            ((cursorInst = (int *)IRInst__getOperandSource(walkInst,1), cursorInst[0x20] != 0 &&
+                             (noSourceResult = RegKind__flagBit0(cursorInst[0x26]), noSourceResult != 0)))) &&
+                           ((cursorInst[5] & 2U) == 0)) &&
+                          (noSourceResult = (**(code **)(*cursorInst + 0x50))(cursorInst), noSourceResult == 0)))) {
+                        excludedRegs0 = ((int (*)())FUN_00134bf0)(graph,cursorInst[0x25],useCoalesced);
                       }
                     }
                   }
 code_r0x001327f0:
-                  iVar17 = FUN_0013097c(piVar15,uVar22);
-                  if (iVar17 == 0) {
-                    if ((*(uint *)((uVar22 >> 3 & 0x1ffffffc) + puVar7[5] + 8) >> (uVar22 & 0x1f) &
+                  anyComponentLive = FUN_0013097c(liveWords,uVar22);
+                  if (anyComponentLive == 0) {
+                    if ((*(uint *)((uVar22 >> 3 & 0x1ffffffc) + worklist[5] + 8) >> (uVar22 & 0x1f) &
                         1) != 0) goto code_r0x00132adc;
-                    uVar21 = puVar7[2];
-                    if (uVar21 < *puVar16) {
-                      _memset((void *)(uVar21 * 4 + puVar7[3]),0,4);
-                      puVar10 = (uint *)(uVar21 * 4 + puVar7[3]);
-                      puVar7[2] = uVar21 + 1;
+                    worklistCount = worklist[2];
+                    if (worklistCount < *worklistVecHeader) {
+                      _memset((void *)(worklistCount * 4 + worklist[3]),0,4);
+                      stackEntry = (uint *)(worklistCount * 4 + worklist[3]);
+                      worklist[2] = worklistCount + 1;
                     }
                     else {
-                      puVar10 = (uint *)Vector__elementRefGrow(puVar16,uVar21);
+                      stackEntry = (uint *)Vector__elementRefGrow(worklistVecHeader,worklistCount);
                     }
-                    *puVar10 = uVar22;
-                    uVar22 = piVar11[5];
+                    *stackEntry = uVar22;
+                    instFlags = walkInst[5];
                   }
                   else {
-                    iVar17 = 0;
-                    if (0 < param_4) {
+                    nextBlock = 0;
+                    if (0 < regCount) {
 code_r0x00132828:
-                      if ((((((piVar11[5] & 0x200U) == 0) ||
-                            (piVar13 = (int *)IRInst__getOperandSource(piVar11,piVar11[0x21]),
-                            piVar13 == (int *)0x0)) || (piVar13[0x20] == 0)) ||
-                          ((iVar24 = RegKind__flagBit0(piVar13[0x26]), iVar24 == 0 ||
-                           ((piVar13[5] & 2U) != 0)))) ||
-                         (iVar24 = (**(code **)(*piVar13 + 0x50))(piVar13), iVar24 != 0)) {
-                        iVar24 = 0;
+                      if ((((((walkInst[5] & 0x200U) == 0) ||
+                            (cursorInst = (int *)IRInst__getOperandSource(walkInst,walkInst[0x21]),
+                            cursorInst == (int *)0x0)) || (cursorInst[0x20] == 0)) ||
+                          ((innerIndexOrScratch = RegKind__flagBit0(cursorInst[0x26]), innerIndexOrScratch == 0 ||
+                           ((cursorInst[5] & 2U) != 0)))) ||
+                         (innerIndexOrScratch = (**(code **)(*cursorInst + 0x50))(cursorInst), innerIndexOrScratch != 0)) {
+                        innerIndexOrScratch = 0;
                         do {
-                          iVar20 = IRInst__getOperandRecord(piVar11,0);
-                          if ((*(char *)(iVar24 + iVar20 + 0x10) != '\x01') &&
-                             (iVar20 = FUN_00130958(piVar15,iVar17,iVar24), iVar20 != 0)) {
-                            iVar20 = ((int (*)())FUN_00134bf0)(param_2,iVar17,param_5);
-                            iVar23 = FUN_001303f4(iVar20,&local_58);
-                            if (iVar23 == 0) goto code_r0x00132970;
+                          nextRow = IRInst__getOperandRecord(walkInst,0);
+                          if ((*(char *)(innerIndexOrScratch + nextRow + 0x10) != '\x01') &&
+                             (nextRow = FUN_00130958(liveWords,nextBlock,innerIndexOrScratch), nextRow != 0)) {
+                            nextRow = ((int (*)())FUN_00134bf0)(graph,nextBlock,useCoalesced);
+                            containsResult = FUN_001303f4(nextRow,&excludedRegs0);
+                            if (containsResult == 0) goto code_r0x00132970;
                           }
-                          bVar2 = iVar24 != 3;
-                          iVar24 = iVar24 + 1;
-                        } while (bVar2);
+                          moreComponents = innerIndexOrScratch != 3;
+                          innerIndexOrScratch = innerIndexOrScratch + 1;
+                        } while (moreComponents);
                       }
                       else {
-                        iVar23 = 0;
-                        iVar24 = ((int (*)())FUN_00134bf0)(param_2,piVar13[0x25],param_5);
+                        compCounter = 0;
+                        innerIndexOrScratch = ((int (*)())FUN_00134bf0)(graph,cursorInst[0x25],useCoalesced);
                         do {
-                          iVar20 = FUN_00130958(piVar15,iVar17,iVar23);
-                          if (((iVar20 != 0) &&
-                              (iVar20 = ((int (*)())FUN_00134bf0)(param_2,iVar17,param_5), iVar20 != local_58))
-                             && ((iVar24 != iVar20 ||
-                                 (iVar9 = FUN_000f313c(piVar11,iVar23), iVar9 != 0))))
+                          nextRow = FUN_00130958(liveWords,nextBlock,compCounter);
+                          if (((nextRow != 0) &&
+                              (nextRow = ((int (*)())FUN_00134bf0)(graph,nextBlock,useCoalesced), nextRow != excludedRegs0))
+                             && ((innerIndexOrScratch != nextRow ||
+                                 (compFlagResult = FUN_000f313c(walkInst,compCounter), compFlagResult != 0))))
                           goto code_r0x00132970;
-                          bVar2 = iVar23 != 3;
-                          iVar23 = iVar23 + 1;
-                        } while (bVar2);
+                          moreComponents = compCounter != 3;
+                          compCounter = compCounter + 1;
+                        } while (moreComponents);
                       }
                       goto code_r0x00132990;
                     }
 code_r0x0013299c:
-                    if ((((*(int *)(piVar11[0x22] + 8) == 0x32) &&
-                         (piVar13 = (int *)IRInst__getOperandSource(piVar11,1), piVar13[0x20] != 0)) &&
-                        (iVar17 = RegKind__flagBit0(piVar13[0x26]), iVar17 != 0)) &&
-                       (((piVar13[5] & 2U) == 0 &&
-                        (iVar17 = (**(code **)(*piVar13 + 0x50))(piVar13), iVar17 == 0)))) {
-                      iVar17 = IRInst__getOperandSource(piVar11,1);
-                      arena = ((int (*)())FUN_00134bf0)(param_2,*(undefined4 *)(iVar17 + 0x94),param_5);
-                      ((int (*)())FUN_00135334)(param_2,uVar22,arena);
+                    if ((((*(int *)(walkInst[0x22] + 8) == 0x32) &&
+                         (cursorInst = (int *)IRInst__getOperandSource(walkInst,1), cursorInst[0x20] != 0)) &&
+                        (nextBlock = RegKind__flagBit0(cursorInst[0x26]), nextBlock != 0)) &&
+                       (((cursorInst[5] & 2U) == 0 &&
+                        (nextBlock = (**(code **)(*cursorInst + 0x50))(cursorInst), nextBlock == 0)))) {
+                      src1Inst = IRInst__getOperandSource(walkInst,1);
+                      arena = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
+                      ((int (*)())FUN_00135334)(graph,uVar22,arena);
                     }
-                    iVar17 = (**(code **)(*piVar11 + 0x2c))(piVar11);
-                    if (iVar17 == 0) goto code_r0x00132adc;
-                    iVar17 = IRInst__getOperandSource(piVar11,1);
-                    arena = ((int (*)())FUN_00134bf0)(param_2,*(undefined4 *)(iVar17 + 0x94),param_5);
-                    ((int (*)())FUN_00135334)(param_2,uVar22,arena);
-                    uVar22 = piVar11[5];
+                    isVertexFetchResult = (**(code **)(*walkInst + 0x2c))(walkInst);
+                    if (isVertexFetchResult == 0) goto code_r0x00132adc;
+                    src1Inst = IRInst__getOperandSource(walkInst,1);
+                    arena = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
+                    ((int (*)())FUN_00135334)(graph,uVar22,arena);
+                    instFlags = walkInst[5];
                   }
                 }
               }
               else {
 code_r0x00132adc:
-                uVar22 = piVar11[5];
+                instFlags = walkInst[5];
               }
             }
-            piVar13 = piVar4;
-          } while (((int *)piVar11[2] != (int *)0x0) &&
-                  (piVar11 = (int *)piVar11[2], (uVar22 & 4) != 0));
+            cursorInst = groupHead;
+          } while (((int *)walkInst[2] != (int *)0x0) &&
+                  (walkInst = (int *)walkInst[2], (instFlags & 4) != 0));
           do {
-            uVar22 = piVar13[5];
+            uVar22 = cursorInst[5];
             if ((uVar22 & 1) != 0) {
-              iVar17 = (**(code **)(*piVar13 + 0x7c))(piVar13);
-              if (((iVar17 == 0) && (piVar13[0x20] != 0)) &&
-                 (iVar17 = RegKind__flagBit0(piVar13[0x26]), iVar17 != 0)) {
-                uVar22 = piVar13[5];
+              isPhiResult = (**(code **)(*cursorInst + 0x7c))(cursorInst);
+              if (((isPhiResult == 0) && (cursorInst[0x20] != 0)) &&
+                 (isPhiResult = RegKind__flagBit0(cursorInst[0x26]), isPhiResult != 0)) {
+                uVar22 = cursorInst[5];
                 if ((uVar22 & 2) != 0) goto code_r0x00132ca8;
-                iVar17 = (**(code **)(*piVar13 + 0x50))(piVar13);
-                if (iVar17 == 0) {
-                  iVar24 = 0;
-                  iVar17 = ((int (*)())FUN_00134bf0)(param_2,piVar13[0x25],param_5);
-                  uVar21 = iVar17 << 2;
-                  uVar22 = uVar21;
+                isUndefinedResult = (**(code **)(*cursorInst + 0x50))(cursorInst);
+                if (isUndefinedResult == 0) {
+                  innerIndexOrScratch = 0;
+                  repReg = ((int (*)())FUN_00134bf0)(graph,cursorInst[0x25],useCoalesced);
+                  bitPos = repReg << 2;
+                  bitIndex = bitPos;
                   do {
-                    iVar17 = IRInst__getOperandRecord(piVar13,0);
-                    if (*(char *)(iVar24 + iVar17 + 0x10) != '\x01') {
-                      uVar5 = uVar22 >> 3 & 0x1ffffffc;
-                      *(uint *)((int)piVar15 + uVar5 + 8) =
-                           *(uint *)((int)piVar15 + uVar5 + 8) & ~(1 << (uVar22 & 0x1f));
+                    operandRecord = IRInst__getOperandRecord(cursorInst,0);
+                    if (*(char *)(innerIndexOrScratch + operandRecord + 0x10) != '\x01') {
+                      wordByteOff5 = bitIndex >> 3 & 0x1ffffffc;
+                      *(uint *)((int)liveWords + wordByteOff5 + 8) =
+                           *(uint *)((int)liveWords + wordByteOff5 + 8) & ~(1 << (bitIndex & 0x1f));
                     }
-                    bVar2 = iVar24 != 3;
-                    uVar22 = uVar22 + 1;
-                    iVar24 = iVar24 + 1;
-                  } while (bVar2);
-                  uVar22 = piVar13[5];
+                    moreComponents = innerIndexOrScratch != 3;
+                    bitIndex = bitIndex + 1;
+                    innerIndexOrScratch = innerIndexOrScratch + 1;
+                  } while (moreComponents);
+                  uVar22 = cursorInst[5];
                   if ((uVar22 & 0x200) == 0) goto code_r0x00132ca8;
-                  piVar11 = (int *)IRInst__getOperandSource(piVar13,piVar13[0x21]);
-                  if (((piVar11 != (int *)0x0) && (piVar11[0x20] != 0)) &&
-                     ((iVar17 = RegKind__flagBit0(piVar11[0x26]), iVar17 != 0 &&
-                      (((piVar11[5] & 2U) == 0 &&
-                       (iVar17 = (**(code **)(*piVar11 + 0x50))(piVar11), iVar17 == 0)))))) {
-                    iVar17 = 0;
+                  sourceInst = (int *)IRInst__getOperandSource(cursorInst,cursorInst[0x21]);
+                  if (((sourceInst != (int *)0x0) && (sourceInst[0x20] != 0)) &&
+                     ((operandRecord = RegKind__flagBit0(sourceInst[0x26]), operandRecord != 0 &&
+                      (((sourceInst[5] & 2U) == 0 &&
+                       (operandRecord = (**(code **)(*sourceInst + 0x50))(sourceInst), operandRecord == 0)))))) {
+                    componentIdx = 0;
                     do {
-                      iVar24 = IRInst__getOperandRecord(piVar13,0);
-                      if ((*(char *)(iVar17 + iVar24 + 0x10) == '\x01') &&
-                         (iVar24 = ((int (*)())FUN_00138240)(piVar11,iVar17), iVar24 != 0)) {
-                        uVar22 = uVar21 >> 3 & 0x1ffffffc;
-                        *(uint *)((int)piVar15 + uVar22 + 8) =
-                             *(uint *)((int)piVar15 + uVar22 + 8) & ~(1 << (uVar21 & 0x1f));
+                      innerIndexOrScratch = IRInst__getOperandRecord(cursorInst,0);
+                      if ((*(char *)(componentIdx + innerIndexOrScratch + 0x10) == '\x01') &&
+                         (innerIndexOrScratch = ((int (*)())FUN_00138240)(sourceInst,componentIdx), innerIndexOrScratch != 0)) {
+                        wordByteOff22 = bitPos >> 3 & 0x1ffffffc;
+                        *(uint *)((int)liveWords + wordByteOff22 + 8) =
+                             *(uint *)((int)liveWords + wordByteOff22 + 8) & ~(1 << (bitPos & 0x1f));
                       }
-                      bVar2 = iVar17 != 3;
-                      uVar21 = uVar21 + 1;
-                      iVar17 = iVar17 + 1;
-                    } while (bVar2);
+                      moreComponents = componentIdx != 3;
+                      bitPos = bitPos + 1;
+                      componentIdx = componentIdx + 1;
+                    } while (moreComponents);
                   }
                 }
               }
-              uVar22 = piVar13[5];
+              uVar22 = cursorInst[5];
             }
 code_r0x00132ca8: ;
-          } while (((int *)piVar13[2] != (int *)0x0) &&
-                  (piVar13 = (int *)piVar13[2], (uVar22 & 4) != 0));
+          } while (((int *)cursorInst[2] != (int *)0x0) &&
+                  (cursorInst = (int *)cursorInst[2], (uVar22 & 4) != 0));
         }
-        while (piVar11 = piVar4, puVar7[2] != 0) {
-          uVar22 = puVar7[2] - 1;
-          puVar10 = (uint *)0x0;
-          if (uVar22 < (uint)puVar7[2]) {
-            puVar10 = (uint *)(uVar22 * 4 + puVar7[3]);
+        while (walkInst = groupHead, worklist[2] != 0) {
+          topIndex = worklist[2] - 1;
+          stackEntry = (uint *)0x0;
+          if (topIndex < (uint)worklist[2]) {
+            stackEntry = (uint *)(topIndex * 4 + worklist[3]);
           }
-          uVar22 = *puVar10;
-          Vector__removeAt(puVar16,puVar7[2] - 1);
-          iVar17 = (uVar22 >> 3 & 0x1ffffffc) + puVar7[5];
-          *(uint *)(iVar17 + 8) =
+          uVar22 = *stackEntry;
+          Vector__removeAt(worklistVecHeader,worklist[2] - 1);
+          defWordAddr = (uVar22 >> 3 & 0x1ffffffc) + worklist[5];
+          *(uint *)(defWordAddr + 8) =
                (-2 << (uVar22 & 0x1f) | 0xfffffffeU >> 0x20 - (uVar22 & 0x1f)) &
-               *(uint *)(iVar17 + 8);
-          if (0 < param_4) {
-            iVar17 = 0;
+               *(uint *)(defWordAddr + 8);
+          if (0 < regCount) {
+            componentIdx = 0;
             do {
-              iVar24 = FUN_0013097c(piVar15,iVar17);
-              if (iVar24 != 0) {
-                arena = ((int (*)())FUN_00134bf0)(param_2,iVar17,param_5);
-                ((int (*)())FUN_00135334)(param_2,uVar22,arena);
+              innerIndexOrScratch = FUN_0013097c(liveWords,componentIdx);
+              if (innerIndexOrScratch != 0) {
+                arena = ((int (*)())FUN_00134bf0)(graph,componentIdx,useCoalesced);
+                ((int (*)())FUN_00135334)(graph,uVar22,arena);
               }
-              iVar17 = iVar17 + 1;
-            } while (param_4 != iVar17);
+              componentIdx = componentIdx + 1;
+            } while (regCount != componentIdx);
           }
         }
-        while (bVar1) {
-          uVar22 = piVar11[5];
+        while (hasGroup) {
+          uVar22 = walkInst[5];
           if ((uVar22 & 1) != 0) {
-            iVar17 = IRInst__getOperandRecord(piVar11,0);
-            if (((((*(int *)(iVar17 + 0x10) != UNK_001affe8) &&
-                  (*(int *)(piVar11[0x22] + 8) != 0x8e)) &&
-                 (iVar17 = (**(code **)(*piVar11 + 0x34))(piVar11), iVar17 == 0)) &&
-                ((iVar17 = (**(code **)(*piVar11 + 0x38))(piVar11), iVar17 == 0 &&
-                 (iVar17 = (**(code **)(*piVar11 + 0x60))(piVar11), iVar17 == 0)))) &&
-               (iVar17 = (**(code **)(*piVar11 + 0x5c))(piVar11), iVar17 == 0)) {
-              uVar22 = piVar11[5];
-              iVar17 = piVar11[0x21];
+            operandRecord = IRInst__getOperandRecord(walkInst,0);
+            if (((((*(int *)(operandRecord + 0x10) != UNK_001affe8) &&
+                  (*(int *)(walkInst[0x22] + 8) != 0x8e)) &&
+                 (operandRecord = (**(code **)(*walkInst + 0x34))(walkInst), operandRecord == 0)) &&
+                ((operandRecord = (**(code **)(*walkInst + 0x38))(walkInst), operandRecord == 0 &&
+                 (operandRecord = (**(code **)(*walkInst + 0x60))(walkInst), operandRecord == 0)))) &&
+               (operandRecord = (**(code **)(*walkInst + 0x5c))(walkInst), operandRecord == 0)) {
+              uVar22 = walkInst[5];
+              srcCount = walkInst[0x21];
               if ((uVar22 & 0x200) != 0) {
-                iVar17 = iVar17 + -1;
+                srcCount = srcCount + -1;
               }
-              if (0 < iVar17) {
-                iVar24 = 1;
+              if (0 < srcCount) {
+                innerIndexOrScratch = 1;
                 do {
-                  piVar13 = (int *)IRInst__getOperandSource(piVar11,iVar24);
-                  if (((piVar13[0x20] != 0) && (iVar20 = RegKind__flagBit0(piVar13[0x26]), iVar20 != 0))
-                     && (((piVar13[5] & 2U) == 0 &&
-                         ((iVar20 = (**(code **)(*piVar13 + 0x50))(piVar13), iVar20 == 0 &&
-                          (iVar20 = ((int (*)())FUN_00137e98)(piVar11,iVar24,piVar11), iVar20 == 0)))))) {
-                    iVar20 = IRInst__getOperandRecord(piVar11,iVar24);
-                    FUN_000f3398(local_48,*(undefined4 *)(iVar20 + 0x10));
-                    local_58 = local_48[0];
-                    iVar20 = ((int (*)())FUN_00134bf0)(param_2,piVar13[0x25],param_5);
-                    iVar23 = 4;
-                    uVar22 = iVar20 << 2;
-                    iVar20 = 0;
+                  cursorInst = (int *)IRInst__getOperandSource(walkInst,innerIndexOrScratch);
+                  if (((cursorInst[0x20] != 0) && (nextRow = RegKind__flagBit0(cursorInst[0x26]), nextRow != 0))
+                     && (((cursorInst[5] & 2U) == 0 &&
+                         ((nextRow = (**(code **)(*cursorInst + 0x50))(cursorInst), nextRow == 0 &&
+                          (nextRow = ((int (*)())FUN_00137e98)(walkInst,innerIndexOrScratch,walkInst), nextRow == 0)))))) {
+                    srcOperandRecord = IRInst__getOperandRecord(walkInst,innerIndexOrScratch);
+                    FUN_000f3398(swizzleComponentUse,*(undefined4 *)(srcOperandRecord + 0x10));
+                    excludedRegs0 = swizzleComponentUse[0];
+                    repReg2 = ((int (*)())FUN_00134bf0)(graph,cursorInst[0x25],useCoalesced);
+                    loopLeft4 = 4;
+                    bitIndex = repReg2 << 2;
+                    nextRow = 0;
                     do {
-                      if (*(char *)((int)&local_58 + iVar20) != '\0') {
-                        uVar21 = uVar22 >> 3 & 0x1ffffffc;
-                        *(uint *)((int)piVar15 + uVar21 + 8) =
-                             1 << (uVar22 & 0x1f) | *(uint *)((int)piVar15 + uVar21 + 8);
+                      if (*(char *)((int)&excludedRegs0 + nextRow) != '\0') {
+                        wordOff = bitIndex >> 3 & 0x1ffffffc;
+                        *(uint *)((int)liveWords + wordOff + 8) =
+                             1 << (bitIndex & 0x1f) | *(uint *)((int)liveWords + wordOff + 8);
                       }
-                      iVar20 = iVar20 + 1;
-                      uVar22 = uVar22 + 1;
-                      iVar23 = iVar23 + -1;
-                    } while (iVar23 != 0);
+                      nextRow = nextRow + 1;
+                      bitIndex = bitIndex + 1;
+                      loopLeft4 = loopLeft4 + -1;
+                    } while (loopLeft4 != 0);
                   }
-                  iVar24 = iVar24 + 1;
-                } while (iVar24 <= iVar17);
-                uVar22 = piVar11[5];
+                  innerIndexOrScratch = innerIndexOrScratch + 1;
+                } while (innerIndexOrScratch <= srcCount);
+                uVar22 = walkInst[5];
               }
               if ((uVar22 & 0x200) == 0) goto code_r0x0013304c;
-              piVar13 = (int *)IRInst__getOperandSource(piVar11,piVar11[0x21]);
-              if ((((piVar13 != (int *)0x0) && (piVar13[0x20] != 0)) &&
-                  (iVar17 = RegKind__flagBit0(piVar13[0x26]), iVar17 != 0)) &&
-                 ((((piVar13[5] & 2U) == 0 &&
-                   (iVar17 = (**(code **)(*piVar13 + 0x50))(piVar13), iVar17 == 0)) &&
-                  (iVar17 = ((int (*)())FUN_00137e98)(piVar11,piVar11[0x21],piVar11), iVar17 == 0)))) {
-                iVar24 = 0;
-                iVar17 = ((int (*)())FUN_00134bf0)(param_2,piVar13[0x25],param_5);
-                uVar22 = iVar17 << 2;
+              cursorInst = (int *)IRInst__getOperandSource(walkInst,walkInst[0x21]);
+              if ((((cursorInst != (int *)0x0) && (cursorInst[0x20] != 0)) &&
+                  (srcCount = RegKind__flagBit0(cursorInst[0x26]), srcCount != 0)) &&
+                 ((((cursorInst[5] & 2U) == 0 &&
+                   (srcCount = (**(code **)(*cursorInst + 0x50))(cursorInst), srcCount == 0)) &&
+                  (srcCount = ((int (*)())FUN_00137e98)(walkInst,walkInst[0x21],walkInst), srcCount == 0)))) {
+                innerIndexOrScratch = 0;
+                repReg = ((int (*)())FUN_00134bf0)(graph,cursorInst[0x25],useCoalesced);
+                bitIndex = repReg << 2;
                 do {
-                  iVar17 = IRInst__getOperandRecord(piVar11,0);
-                  if ((*(char *)(iVar24 + iVar17 + 0x10) == '\x01') &&
-                     (iVar17 = ((int (*)())FUN_00138240)(piVar13,iVar24), iVar17 != 0)) {
-                    uVar21 = uVar22 >> 3 & 0x1ffffffc;
-                    *(uint *)((int)piVar15 + uVar21 + 8) =
-                         1 << (uVar22 & 0x1f) | *(uint *)((int)piVar15 + uVar21 + 8);
+                  operandRecord = IRInst__getOperandRecord(walkInst,0);
+                  if ((*(char *)(innerIndexOrScratch + operandRecord + 0x10) == '\x01') &&
+                     (operandRecord = ((int (*)())FUN_00138240)(cursorInst,innerIndexOrScratch), operandRecord != 0)) {
+                    wordOff = bitIndex >> 3 & 0x1ffffffc;
+                    *(uint *)((int)liveWords + wordOff + 8) =
+                         1 << (bitIndex & 0x1f) | *(uint *)((int)liveWords + wordOff + 8);
                   }
-                  bVar1 = iVar24 != 3;
-                  uVar22 = uVar22 + 1;
-                  iVar24 = iVar24 + 1;
-                } while (bVar1);
+                  hasGroup = innerIndexOrScratch != 3;
+                  bitIndex = bitIndex + 1;
+                  innerIndexOrScratch = innerIndexOrScratch + 1;
+                } while (hasGroup);
               }
             }
-            uVar22 = piVar11[5];
+            uVar22 = walkInst[5];
           }
 code_r0x0013304c:
-          if ((int *)piVar11[2] == (int *)0x0) break;
-          bVar1 = (uVar22 & 4) != 0;
-          piVar11 = (int *)piVar11[2];
+          if ((int *)walkInst[2] == (int *)0x0) break;
+          hasGroup = (uVar22 & 4) != 0;
+          walkInst = (int *)walkInst[2];
         }
-        piVar11 = (int *)piVar4[1];
+        walkInst = (int *)groupHead[1];
       }
-      piVar4 = piVar11;
+      groupHead = walkInst;
     }
-    iVar14 = *(int *)(iVar14 + 8);
-    iVar17 = *(int *)(iVar14 + 8);
+    allocCtxOrBlock = *(int *)(allocCtxOrBlock + 8);
+    nextBlock = *(int *)(allocCtxOrBlock + 8);
   } while( true );
 code_r0x00132970:
-  ((int (*)())FUN_00135334)(param_2,uVar22,iVar20);
+  ((int (*)())FUN_00135334)(graph,uVar22,nextRow);
 code_r0x00132990:
-  iVar17 = iVar17 + 1;
-  if (param_4 == iVar17) goto code_r0x0013299c;
+  nextBlock = nextBlock + 1;
+  if (regCount == nextBlock) goto code_r0x0013299c;
   goto code_r0x00132828;
 }
 
@@ -4393,352 +4424,387 @@ int FUN_00138390(param_1, param_2)
   } while( true );
 }
 
-/* HwLimits__vslot81 @ 0x138694 (2336 bytes) */
-int HwLimits__vslot81(this, param_2, param_3, compiler)
+/* HwLimits__computeBlockLiveness @ 0x138694 (2336 bytes) */
+int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
   undefined4 this;
-  int param_2;
-  int param_3;
+  int regCount;
+  int program;
   int compiler;
 {
-  uint *puVar1;
-  bool bVar2;
-  bool bVar3;
-  int *piVar4;
-  int iVar5;
-  int *piVar6;
-  int iVar7;
-  int iVar8;
-  int *piVar9;
-  int iVar10;
+  uint bitIndex;
+  uint instFlags;
+  uint newLiveIn;
+  uint successorOrdinal;
+  undefined4 *bitsetWords;
+  uint *flagsPtr;
+  int *nextInst;
+  int *lastSourceInst;
+  int *walkInst;
+  int *scanInst;
+  int *headInst;
+  int successorBlock;
+  int srcOperandRecord;
+  int liveInWordPtr;
+  int successorByteOffset;
+  int fillWordsLeft;
+  int blockSlot8Result;
+  int blockCountNow;
+  int blockOrdinal;
+  int unionWordsLeft;
+  int succLiveInWordPtr;
+  int defWordCursor;
+  int copyWordsLeft;
+  int defWordPtr;
+  int operandRecord;
+  int sourceRegId;
+  int componentIndex;
+  int sourceFoldedResult;
+  int sourceCount;
+  int predicateResult;
+  int isPhiResult;
+  int blockSlot6Result;
+  bool moreComponents;
+  bool blockLiveInChanged;
+  bool liveInChangedAny;
+  uint *srcWord;
+  bool bitsetHasWords;
+  bool isFirstSuccessor;
+  int *bitsetWordPtr;
+  int blockArray;
+  int *sourceInst;
+  int callResult;
+  int alreadyDefined;
+  int *srcWordPtr;
+  int blockCount;
   undefined4 *allocation;
-  undefined4 *puVar12;
-  uint uVar13;
-  int iVar14;
-  int iVar15;
-  int iVar16;
-  int iVar17;
-  int iVar18;
+  undefined4 *blockListCursor;
+  uint bitsetWordCount;
+  int sourceIndex;
+  int componentNo;
+  int blockIndex;
+  int bitsetAllocBytes;
+  int bitCount;
   undefined4 arena;
-  int *piVar20;
-  uint uVar21;
-  undefined4 local_68;
+  int *block;
+  uint zeroWordsLeft;
+  undefined4 usedComponents;
   int local_64;
-  undefined4 local_58 [3];
+  undefined4 swizzleComponentUse [3];
   
-  iVar18 = param_2 * 4;
-  iVar16 = 1;
-  *(uint *)(param_3 + 0x30) = *(uint *)(param_3 + 0x30) | 0x1000;
-  iVar5 = FUN_000ec4f0(param_3);
-  uVar13 = iVar18 + 0x1fU >> 5;
-  bVar2 = uVar13 != 0;
-  iVar17 = uVar13 * 4 + 0xc;
+  bitCount = regCount * 4;
+  blockIndex = 1;
+  *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 0x1000;
+  blockArray = FUN_000ec4f0(program);
+  bitsetWordCount = bitCount + 0x1fU >> 5;
+  bitsetHasWords = bitsetWordCount != 0;
+  bitsetAllocBytes = bitsetWordCount * 4 + 0xc;
   while( true ) {
-    iVar10 = DList__count(param_3 + 0x37c);
-    if (iVar10 < iVar16) {
-      allocation = (undefined4 *)FUN_000ec5b8(param_3);
+    blockCount = DList__count(program + 0x37c);
+    if (blockCount < blockIndex) {
+      allocation = (undefined4 *)FUN_000ec5b8(program);
       do {
-        bVar2 = false;
-        iVar18 = 1;
-        puVar12 = allocation;
+        liveInChangedAny = false;
+        blockOrdinal = 1;
+        blockListCursor = allocation;
         while( true ) {
-          puVar12 = puVar12 + 1;
-          iVar5 = DList__count(param_3 + 0x37c);
-          if (iVar5 < iVar18) break;
-          piVar20 = (int *)*puVar12;
-          iVar5 = (**(code **)(*piVar20 + 0x20))(piVar20);
-          if (iVar5 == 0) {
-            piVar4 = (int *)piVar20[0x41];
-            iVar5 = *piVar4;
-            if (iVar5 != 0) {
-              if (iVar5 == 0) {
-                iVar5 = 1;
+          blockListCursor = blockListCursor + 1;
+          blockCountNow = DList__count(program + 0x37c);
+          if (blockCountNow < blockOrdinal) break;
+          block = (int *)*blockListCursor;
+          blockSlot8Result = (**(code **)(*block + 0x20))(block);
+          if (blockSlot8Result == 0) {
+            bitsetWordPtr = (int *)block[0x41];
+            fillWordsLeft = *bitsetWordPtr;
+            if (fillWordsLeft != 0) {
+              if (fillWordsLeft == 0) {
+                fillWordsLeft = 1;
               }
               do {
-                piVar4[2] = 0;
-                piVar4 = piVar4 + 1;
-                iVar5 = iVar5 + -1;
-              } while (iVar5 != 0);
+                bitsetWordPtr[2] = 0;
+                bitsetWordPtr = bitsetWordPtr + 1;
+                fillWordsLeft = fillWordsLeft + -1;
+              } while (fillWordsLeft != 0);
             }
-            bVar3 = true;
-            iVar5 = 0;
+            isFirstSuccessor = true;
+            successorByteOffset = 0;
             local_64 = 0;
-            for (uVar13 = 1; uVar13 <= *(uint *)(piVar20[0x34] + 4); uVar13 = uVar13 + 1) {
-              local_64 = *(int *)(*(int *)(piVar20[0x34] + 8) + iVar5);
-              if (local_64 != 0) {
-                if (bVar3) {
-                  piVar4 = (int *)piVar20[0x41];
-                  iVar17 = *(int *)(local_64 + 0x100);
-                  iVar16 = *piVar4;
-                  if (iVar16 != 0) {
-                    if (iVar16 == 0) {
-                      iVar16 = 1;
+            for (successorOrdinal = 1; successorOrdinal <= *(uint *)(block[0x34] + 4); successorOrdinal = successorOrdinal + 1) {
+              successorBlock = *(int *)(*(int *)(block[0x34] + 8) + successorByteOffset);
+              if (successorBlock != 0) {
+                if (isFirstSuccessor) {
+                  bitsetWordPtr = (int *)block[0x41];
+                  succLiveInWordPtr = *(int *)(successorBlock + 0x100);
+                  copyWordsLeft = *bitsetWordPtr;
+                  if (copyWordsLeft != 0) {
+                    if (copyWordsLeft == 0) {
+                      copyWordsLeft = 1;
                     }
                     do {
-                      piVar9 = (int *)(iVar17 + 8);
-                      iVar17 = iVar17 + 4;
-                      piVar4[2] = *piVar9;
-                      piVar4 = piVar4 + 1;
-                      iVar16 = iVar16 + -1;
-                    } while (iVar16 != 0);
+                      srcWordPtr = (int *)(succLiveInWordPtr + 8);
+                      succLiveInWordPtr = succLiveInWordPtr + 4;
+                      bitsetWordPtr[2] = *srcWordPtr;
+                      bitsetWordPtr = bitsetWordPtr + 1;
+                      copyWordsLeft = copyWordsLeft + -1;
+                    } while (copyWordsLeft != 0);
                   }
                 }
                 else {
-                  piVar4 = (int *)piVar20[0x41];
-                  iVar17 = *(int *)(local_64 + 0x100);
-                  iVar16 = *piVar4;
-                  if (iVar16 != 0) {
-                    if (iVar16 == 0) {
-                      iVar16 = 1;
+                  bitsetWordPtr = (int *)block[0x41];
+                  succLiveInWordPtr = *(int *)(successorBlock + 0x100);
+                  copyWordsLeft = *bitsetWordPtr;
+                  if (copyWordsLeft != 0) {
+                    if (copyWordsLeft == 0) {
+                      copyWordsLeft = 1;
                     }
                     do {
-                      puVar1 = (uint *)(iVar17 + 8);
-                      iVar17 = iVar17 + 4;
-                      piVar4[2] = piVar4[2] | *puVar1;
-                      piVar4 = piVar4 + 1;
-                      iVar16 = iVar16 + -1;
-                    } while (iVar16 != 0);
+                      srcWord = (uint *)(succLiveInWordPtr + 8);
+                      succLiveInWordPtr = succLiveInWordPtr + 4;
+                      bitsetWordPtr[2] = bitsetWordPtr[2] | *srcWord;
+                      bitsetWordPtr = bitsetWordPtr + 1;
+                      copyWordsLeft = copyWordsLeft + -1;
+                    } while (copyWordsLeft != 0);
                   }
                 }
-                bVar3 = false;
+                isFirstSuccessor = false;
               }
-              iVar5 = iVar5 + 4;
+              successorByteOffset = successorByteOffset + 4;
             }
-            piVar4 = (int *)piVar20[0x41];
-            bVar3 = false;
-            iVar16 = piVar20[0x42];
-            iVar17 = *piVar4;
-            iVar5 = piVar20[0x40];
-            if (iVar17 != 0) {
-              bVar3 = false;
-              if (iVar17 == 0) {
-                iVar17 = 1;
+            bitsetWordPtr = (int *)block[0x41];
+            blockLiveInChanged = false;
+            defWordCursor = block[0x42];
+            unionWordsLeft = *bitsetWordPtr;
+            liveInWordPtr = block[0x40];
+            if (unionWordsLeft != 0) {
+              blockLiveInChanged = false;
+              if (unionWordsLeft == 0) {
+                unionWordsLeft = 1;
               }
               do {
-                uVar13 = piVar4[2] & ~*(uint *)(iVar16 + 8) | *(uint *)(iVar5 + 8);
-                if (*(uint *)(iVar5 + 8) != uVar13) {
-                  *(uint *)(iVar5 + 8) = uVar13;
-                  bVar3 = true;
+                newLiveIn = bitsetWordPtr[2] & ~*(uint *)(defWordCursor + 8) | *(uint *)(liveInWordPtr + 8);
+                if (*(uint *)(liveInWordPtr + 8) != newLiveIn) {
+                  *(uint *)(liveInWordPtr + 8) = newLiveIn;
+                  blockLiveInChanged = true;
                 }
-                piVar4 = piVar4 + 1;
-                iVar16 = iVar16 + 4;
-                iVar5 = iVar5 + 4;
-                iVar17 = iVar17 + -1;
-              } while (iVar17 != 0);
+                bitsetWordPtr = bitsetWordPtr + 1;
+                defWordCursor = defWordCursor + 4;
+                liveInWordPtr = liveInWordPtr + 4;
+                unionWordsLeft = unionWordsLeft + -1;
+              } while (unionWordsLeft != 0);
             }
-            bVar2 = bVar3 || bVar2;
+            liveInChangedAny = blockLiveInChanged || liveInChangedAny;
           }
-          iVar18 = iVar18 + 1;
+          blockOrdinal = blockOrdinal + 1;
         }
-      } while (bVar2);
+      } while (liveInChangedAny);
       return;
     }
     arena = *(undefined4 *)(compiler + 0x378);
-    piVar20 = *(int **)(iVar5 + iVar16 * 4);
-    allocation = (undefined4 *)Arena__alloc(arena,iVar17);
-    puVar12 = allocation + 1;
+    block = *(int **)(blockArray + blockIndex * 4);
+    allocation = (undefined4 *)Arena__alloc(arena,bitsetAllocBytes);
+    bitsetWords = allocation + 1;
     *allocation = arena;
-    allocation[1] = uVar13;
-    allocation[2] = iVar18;
-    if (bVar2) {
-      allocation = puVar12;
-      uVar21 = uVar13;
-      if (uVar13 == 0) {
-        uVar21 = 1;
+    allocation[1] = bitsetWordCount;
+    allocation[2] = bitCount;
+    if (bitsetHasWords) {
+      allocation = bitsetWords;
+      zeroWordsLeft = bitsetWordCount;
+      if (bitsetWordCount == 0) {
+        zeroWordsLeft = 1;
       }
       do {
         allocation[2] = 0;
         allocation = allocation + 1;
-        uVar21 = uVar21 - 1;
-      } while (uVar21 != 0);
+        zeroWordsLeft = zeroWordsLeft - 1;
+      } while (zeroWordsLeft != 0);
     }
-    piVar20[0x41] = (int)puVar12;
+    block[0x41] = (int)bitsetWords;
     arena = *(undefined4 *)(compiler + 0x378);
-    allocation = (undefined4 *)Arena__alloc(arena,iVar17);
-    puVar12 = allocation + 1;
+    allocation = (undefined4 *)Arena__alloc(arena,bitsetAllocBytes);
+    bitsetWords = allocation + 1;
     *allocation = arena;
-    allocation[1] = uVar13;
-    allocation[2] = iVar18;
-    if (bVar2) {
-      allocation = puVar12;
-      uVar21 = uVar13;
-      if (uVar13 == 0) {
-        uVar21 = 1;
+    allocation[1] = bitsetWordCount;
+    allocation[2] = bitCount;
+    if (bitsetHasWords) {
+      allocation = bitsetWords;
+      zeroWordsLeft = bitsetWordCount;
+      if (bitsetWordCount == 0) {
+        zeroWordsLeft = 1;
       }
       do {
         allocation[2] = 0;
         allocation = allocation + 1;
-        uVar21 = uVar21 - 1;
-      } while (uVar21 != 0);
+        zeroWordsLeft = zeroWordsLeft - 1;
+      } while (zeroWordsLeft != 0);
     }
-    piVar20[0x40] = (int)puVar12;
+    block[0x40] = (int)bitsetWords;
     arena = *(undefined4 *)(compiler + 0x378);
-    allocation = (undefined4 *)Arena__alloc(arena,iVar17);
-    puVar12 = allocation + 1;
+    allocation = (undefined4 *)Arena__alloc(arena,bitsetAllocBytes);
+    bitsetWords = allocation + 1;
     *allocation = arena;
-    allocation[1] = uVar13;
-    allocation[2] = iVar18;
-    if (bVar2) {
-      allocation = puVar12;
-      uVar21 = uVar13;
-      if (uVar13 == 0) {
-        uVar21 = 1;
+    allocation[1] = bitsetWordCount;
+    allocation[2] = bitCount;
+    if (bitsetHasWords) {
+      allocation = bitsetWords;
+      zeroWordsLeft = bitsetWordCount;
+      if (bitsetWordCount == 0) {
+        zeroWordsLeft = 1;
       }
       do {
         allocation[2] = 0;
         allocation = allocation + 1;
-        uVar21 = uVar21 - 1;
-      } while (uVar21 != 0);
+        zeroWordsLeft = zeroWordsLeft - 1;
+      } while (zeroWordsLeft != 0);
     }
-    piVar4 = (int *)piVar20[0x26];
-    piVar20[0x42] = (int)puVar12;
-    if (piVar4[2] != 0) break;
+    headInst = (int *)block[0x26];
+    block[0x42] = (int)bitsetWords;
+    if (headInst[2] != 0) break;
 LAB_00138d5c:
-    iVar10 = (**(code **)(*piVar20 + 0x18))(piVar20);
-    if (iVar10 != 0) {
-      ((int (*)())FUN_00138390)(piVar20,piVar20[0x40]);
+    blockSlot6Result = (**(code **)(*block + 0x18))(block);
+    if (blockSlot6Result != 0) {
+      ((int (*)())FUN_00138390)(block,block[0x40]);
     }
-    iVar16 = iVar16 + 1;
+    blockIndex = blockIndex + 1;
   }
   do {
-    iVar10 = (**(code **)(*piVar4 + 0x7c))(piVar4);
-    piVar9 = piVar4;
-    if (iVar10 == 0) {
+    isPhiResult = (**(code **)(*headInst + 0x7c))(headInst);
+    walkInst = headInst;
+    if (isPhiResult == 0) {
       do {
-        uVar21 = piVar9[5];
-        if (((uVar21 & 1) != 0) && (*(int *)(piVar9[0x22] + 8) != 0x8e)) {
-          iVar10 = (**(code **)(*piVar9 + 0x34))(piVar9);
-          if ((iVar10 == 0) &&
-             (((iVar10 = (**(code **)(*piVar9 + 0x38))(piVar9), iVar10 == 0 &&
-               (iVar10 = (**(code **)(*piVar9 + 0x60))(piVar9), iVar10 == 0)) &&
-              (iVar10 = (**(code **)(*piVar9 + 0x5c))(piVar9), iVar10 == 0)))) {
-            uVar21 = piVar9[5];
-            iVar10 = piVar9[0x21];
-            if ((uVar21 & 0x200) != 0) {
-              iVar10 = iVar10 + -1;
+        instFlags = walkInst[5];
+        if (((instFlags & 1) != 0) && (*(int *)(walkInst[0x22] + 8) != 0x8e)) {
+          predicateResult = (**(code **)(*walkInst + 0x34))(walkInst);
+          if ((predicateResult == 0) &&
+             (((predicateResult = (**(code **)(*walkInst + 0x38))(walkInst), predicateResult == 0 &&
+               (predicateResult = (**(code **)(*walkInst + 0x60))(walkInst), predicateResult == 0)) &&
+              (predicateResult = (**(code **)(*walkInst + 0x5c))(walkInst), predicateResult == 0)))) {
+            instFlags = walkInst[5];
+            sourceCount = walkInst[0x21];
+            if ((instFlags & 0x200) != 0) {
+              sourceCount = sourceCount + -1;
             }
-            if (0 < iVar10) {
-              iVar14 = 1;
+            if (0 < sourceCount) {
+              sourceIndex = 1;
               do {
-                piVar6 = (int *)IRInst__getOperandSource(piVar9,iVar14);
-                if (((piVar6[0x20] != 0) && (iVar7 = RegKind__flagBit0(piVar6[0x26]), iVar7 != 0)) &&
-                   (((piVar6[5] & 2U) == 0 &&
-                    ((iVar7 = (**(code **)(*piVar6 + 0x50))(piVar6), iVar7 == 0 &&
-                     (iVar7 = ((int (*)())FUN_00137e98)(piVar9,iVar14,piVar9), iVar7 == 0)))))) {
-                  iVar7 = IRInst__getOperandRecord(piVar9,iVar14);
-                  iVar15 = 0;
-                  FUN_000f3398(local_58,*(undefined4 *)(iVar7 + 0x10));
-                  local_68 = local_58[0];
-                  iVar7 = piVar6[0x25];
-                  uVar21 = iVar7 << 2;
+                sourceInst = (int *)IRInst__getOperandSource(walkInst,sourceIndex);
+                if (((sourceInst[0x20] != 0) && (callResult = RegKind__flagBit0(sourceInst[0x26]), callResult != 0)) &&
+                   (((sourceInst[5] & 2U) == 0 &&
+                    ((callResult = (**(code **)(*sourceInst + 0x50))(sourceInst), callResult == 0 &&
+                     (callResult = ((int (*)())FUN_00137e98)(walkInst,sourceIndex,walkInst), callResult == 0)))))) {
+                  srcOperandRecord = IRInst__getOperandRecord(walkInst,sourceIndex);
+                  componentNo = 0;
+                  FUN_000f3398(swizzleComponentUse,*(undefined4 *)(srcOperandRecord + 0x10));
+                  usedComponents = swizzleComponentUse[0];
+                  callResult = sourceInst[0x25];
+                  bitIndex = callResult << 2;
                   do {
-                    if ((*(char *)((int)&local_68 + iVar15) != '\0') &&
-                       (iVar8 = ((int (*)())FUN_00137e74)(piVar20[0x42],iVar7,iVar15), iVar8 == 0)) {
-                      iVar8 = (uVar21 >> 3 & 0x1ffffffc) + piVar20[0x40];
-                      *(uint *)(iVar8 + 8) = 1 << (uVar21 & 0x1f) | *(uint *)(iVar8 + 8);
+                    if ((*(char *)((int)&usedComponents + componentNo) != '\0') &&
+                       (alreadyDefined = ((int (*)())FUN_00137e74)(block[0x42],callResult,componentNo), alreadyDefined == 0)) {
+                      alreadyDefined = (bitIndex >> 3 & 0x1ffffffc) + block[0x40];
+                      *(uint *)(alreadyDefined + 8) = 1 << (bitIndex & 0x1f) | *(uint *)(alreadyDefined + 8);
                     }
-                    bVar3 = iVar15 != 3;
-                    uVar21 = uVar21 + 1;
-                    iVar15 = iVar15 + 1;
-                  } while (bVar3);
+                    moreComponents = componentNo != 3;
+                    bitIndex = bitIndex + 1;
+                    componentNo = componentNo + 1;
+                  } while (moreComponents);
                 }
-                iVar14 = iVar14 + 1;
-              } while (iVar14 <= iVar10);
-              uVar21 = piVar9[5];
+                sourceIndex = sourceIndex + 1;
+              } while (sourceIndex <= sourceCount);
+              instFlags = walkInst[5];
             }
-            if ((uVar21 & 0x200) == 0) goto LAB_00138af0;
-            piVar6 = (int *)IRInst__getOperandSource(piVar9,piVar9[0x21]);
-            if ((((piVar6[0x20] != 0) && (iVar10 = RegKind__flagBit0(piVar6[0x26]), iVar10 != 0)) &&
-                ((piVar6[5] & 2U) == 0)) &&
-               (iVar10 = (**(code **)(*piVar6 + 0x50))(piVar6), iVar10 == 0)) {
-              iVar14 = piVar6[0x25];
-              iVar10 = ((int (*)())FUN_00137e98)(piVar9,piVar9[0x21],piVar9);
-              if (iVar10 == 0) {
-                uVar21 = iVar14 << 2;
-                iVar10 = 0;
+            if ((instFlags & 0x200) == 0) goto LAB_00138af0;
+            sourceInst = (int *)IRInst__getOperandSource(walkInst,walkInst[0x21]);
+            if ((((sourceInst[0x20] != 0) && (sourceCount = RegKind__flagBit0(sourceInst[0x26]), sourceCount != 0)) &&
+                ((sourceInst[5] & 2U) == 0)) &&
+               (sourceCount = (**(code **)(*sourceInst + 0x50))(sourceInst), sourceCount == 0)) {
+              sourceRegId = sourceInst[0x25];
+              sourceFoldedResult = ((int (*)())FUN_00137e98)(walkInst,walkInst[0x21],walkInst);
+              if (sourceFoldedResult == 0) {
+                bitIndex = sourceRegId << 2;
+                componentIndex = 0;
                 do {
-                  iVar7 = IRInst__getOperandRecord(piVar9,0);
-                  if (((*(char *)(iVar10 + iVar7 + 0x10) == '\x01') &&
-                      (iVar7 = ((int (*)())FUN_00137e74)(piVar20[0x42],iVar14,iVar10), iVar7 == 0)) &&
-                     (iVar7 = ((int (*)())FUN_00138240)(piVar6,iVar10), iVar7 != 0)) {
-                    iVar7 = (uVar21 >> 3 & 0x1ffffffc) + piVar20[0x40];
-                    *(uint *)(iVar7 + 8) = 1 << (uVar21 & 0x1f) | *(uint *)(iVar7 + 8);
+                  callResult = IRInst__getOperandRecord(walkInst,0);
+                  if (((*(char *)(componentIndex + callResult + 0x10) == '\x01') &&
+                      (callResult = ((int (*)())FUN_00137e74)(block[0x42],sourceRegId,componentIndex), callResult == 0)) &&
+                     (callResult = ((int (*)())FUN_00138240)(sourceInst,componentIndex), callResult != 0)) {
+                    callResult = (bitIndex >> 3 & 0x1ffffffc) + block[0x40];
+                    *(uint *)(callResult + 8) = 1 << (bitIndex & 0x1f) | *(uint *)(callResult + 8);
                   }
-                  bVar3 = iVar10 != 3;
-                  uVar21 = uVar21 + 1;
-                  iVar10 = iVar10 + 1;
-                } while (bVar3);
+                  moreComponents = componentIndex != 3;
+                  bitIndex = bitIndex + 1;
+                  componentIndex = componentIndex + 1;
+                } while (moreComponents);
               }
             }
           }
-          uVar21 = piVar9[5];
+          instFlags = walkInst[5];
         }
 LAB_00138af0:
-        piVar6 = piVar4;
-      } while (((int *)piVar9[2] != (int *)0x0) && (piVar9 = (int *)piVar9[2], (uVar21 & 4) != 0));
+        scanInst = headInst;
+      } while (((int *)walkInst[2] != (int *)0x0) && (walkInst = (int *)walkInst[2], (instFlags & 4) != 0));
       do {
-        uVar21 = piVar6[5];
-        if (((uVar21 & 1) != 0) && (*(int *)(piVar6[0x22] + 8) != 0x8e)) {
-          iVar10 = (**(code **)(*piVar6 + 0x34))(piVar6);
-          if ((((iVar10 == 0) && (iVar10 = (**(code **)(*piVar6 + 0x38))(piVar6), iVar10 == 0)) &&
-              (iVar10 = (**(code **)(*piVar6 + 0x60))(piVar6), iVar10 == 0)) &&
-             (iVar10 = (**(code **)(*piVar6 + 0x5c))(piVar6), iVar10 == 0)) {
-            if ((piVar6[0x20] == 0) || (iVar10 = RegKind__flagBit0(piVar6[0x26]), iVar10 == 0)) {
+        instFlags = scanInst[5];
+        if (((instFlags & 1) != 0) && (*(int *)(scanInst[0x22] + 8) != 0x8e)) {
+          predicateResult = (**(code **)(*scanInst + 0x34))(scanInst);
+          if ((((predicateResult == 0) && (predicateResult = (**(code **)(*scanInst + 0x38))(scanInst), predicateResult == 0)) &&
+              (predicateResult = (**(code **)(*scanInst + 0x60))(scanInst), predicateResult == 0)) &&
+             (predicateResult = (**(code **)(*scanInst + 0x5c))(scanInst), predicateResult == 0)) {
+            if ((scanInst[0x20] == 0) || (predicateResult = RegKind__flagBit0(scanInst[0x26]), predicateResult == 0)) {
 LAB_00138c50:
-              uVar21 = piVar6[5];
+              instFlags = scanInst[5];
             }
             else {
-              uVar21 = piVar6[5];
-              if ((uVar21 & 2) == 0) {
-                iVar10 = (**(code **)(*piVar6 + 0x50))(piVar6);
-                if (iVar10 == 0) {
-                  iVar10 = 0;
+              instFlags = scanInst[5];
+              if ((instFlags & 2) == 0) {
+                predicateResult = (**(code **)(*scanInst + 0x50))(scanInst);
+                if (predicateResult == 0) {
+                  predicateResult = 0;
                   do {
-                    iVar14 = IRInst__getOperandRecord(piVar6,0);
-                    if (*(char *)(iVar10 + iVar14 + 0x10) != '\x01') {
-                      uVar21 = piVar6[0x25] * 4 + iVar10;
-                      iVar14 = (uVar21 >> 3 & 0x1ffffffc) + piVar20[0x42];
-                      *(uint *)(iVar14 + 8) = 1 << (uVar21 & 0x1f) | *(uint *)(iVar14 + 8);
+                    operandRecord = IRInst__getOperandRecord(scanInst,0);
+                    if (*(char *)(predicateResult + operandRecord + 0x10) != '\x01') {
+                      bitIndex = scanInst[0x25] * 4 + predicateResult;
+                      defWordPtr = (bitIndex >> 3 & 0x1ffffffc) + block[0x42];
+                      *(uint *)(defWordPtr + 8) = 1 << (bitIndex & 0x1f) | *(uint *)(defWordPtr + 8);
                     }
-                    bVar3 = iVar10 != 3;
-                    iVar10 = iVar10 + 1;
-                  } while (bVar3);
+                    moreComponents = predicateResult != 3;
+                    predicateResult = predicateResult + 1;
+                  } while (moreComponents);
                 }
                 goto LAB_00138c50;
               }
             }
-            if ((uVar21 & 0x200) == 0) goto LAB_00138d24;
-            piVar9 = (int *)IRInst__getOperandSource(piVar6,piVar6[0x21]);
-            if (((piVar9[0x20] != 0) && (iVar10 = RegKind__flagBit0(piVar9[0x26]), iVar10 != 0)) &&
-               (((piVar9[5] & 2U) == 0 &&
-                (iVar10 = (**(code **)(*piVar9 + 0x50))(piVar9), iVar10 == 0)))) {
-              iVar10 = 0;
+            if ((instFlags & 0x200) == 0) goto LAB_00138d24;
+            lastSourceInst = (int *)IRInst__getOperandSource(scanInst,scanInst[0x21]);
+            if (((lastSourceInst[0x20] != 0) && (predicateResult = RegKind__flagBit0(lastSourceInst[0x26]), predicateResult != 0)) &&
+               (((lastSourceInst[5] & 2U) == 0 &&
+                (predicateResult = (**(code **)(*lastSourceInst + 0x50))(lastSourceInst), predicateResult == 0)))) {
+              componentIndex = 0;
               do {
-                iVar14 = IRInst__getOperandRecord(piVar6,0);
-                if ((*(char *)(iVar10 + iVar14 + 0x10) == '\x01') &&
-                   (iVar14 = ((int (*)())FUN_00138240)(piVar9,iVar10), iVar14 != 0)) {
-                  uVar21 = piVar6[0x25] * 4 + iVar10;
-                  iVar14 = (uVar21 >> 3 & 0x1ffffffc) + piVar20[0x42];
-                  *(uint *)(iVar14 + 8) = 1 << (uVar21 & 0x1f) | *(uint *)(iVar14 + 8);
+                operandRecord = IRInst__getOperandRecord(scanInst,0);
+                if ((*(char *)(componentIndex + operandRecord + 0x10) == '\x01') &&
+                   (operandRecord = ((int (*)())FUN_00138240)(lastSourceInst,componentIndex), operandRecord != 0)) {
+                  bitIndex = scanInst[0x25] * 4 + componentIndex;
+                  defWordPtr = (bitIndex >> 3 & 0x1ffffffc) + block[0x42];
+                  *(uint *)(defWordPtr + 8) = 1 << (bitIndex & 0x1f) | *(uint *)(defWordPtr + 8);
                 }
-                bVar3 = iVar10 != 3;
-                iVar10 = iVar10 + 1;
-              } while (bVar3);
+                moreComponents = componentIndex != 3;
+                componentIndex = componentIndex + 1;
+              } while (moreComponents);
             }
           }
-          uVar21 = piVar6[5];
+          instFlags = scanInst[5];
         }
 LAB_00138d24: ;
-      } while (((int *)piVar6[2] != (int *)0x0) && (piVar6 = (int *)piVar6[2], (uVar21 & 4) != 0));
+      } while (((int *)scanInst[2] != (int *)0x0) && (scanInst = (int *)scanInst[2], (instFlags & 4) != 0));
     }
-    piVar9 = (int *)piVar4[2];
-    piVar6 = piVar4;
+    nextInst = (int *)headInst[2];
+    scanInst = headInst;
     do {
-      piVar4 = piVar9;
-      puVar1 = (uint *)(piVar6 + 5);
-      if ((int *)piVar4[2] == (int *)0x0) goto LAB_00138d5c;
-      piVar9 = (int *)piVar4[2];
-      piVar6 = piVar4;
-    } while ((*puVar1 & 4) != 0);
+      headInst = nextInst;
+      flagsPtr = (uint *)(scanInst + 5);
+      if ((int *)headInst[2] == (int *)0x0) goto LAB_00138d5c;
+      nextInst = (int *)headInst[2];
+      scanInst = headInst;
+    } while ((*flagsPtr & 4) != 0);
   } while( true );
 }
 
@@ -4872,9 +4938,9 @@ LAB_00139218:
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_001322a8");
-asm(".set FUN_001322a8, _HwLimits__vslot82");
+asm(".set FUN_001322a8, _HwLimits__buildInterferenceGraph");
 asm(".globl FUN_00138694");
-asm(".set FUN_00138694, _HwLimits__vslot81");
+asm(".set FUN_00138694, _HwLimits__computeBlockLiveness");
 
 /* issue #75 (follow-up #3): Ghidra recognized this as a THUNK - a pure trampoline stub that
  * just branches straight to the real function below, no different behavior or arguments - but

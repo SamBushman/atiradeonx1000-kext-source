@@ -633,3 +633,43 @@ Slot semantics recovered by the callers/callees (names carry the slot number whe
 * The 'opcode info' table `PTR_DAT_001e913c` (0x38-byte entries: +0xc hardware opcode, +0x34 instruction class) was only read through the assemblers that index it; its
   per-opcode contents were not extracted.
 * Opcodes `0xb6` and `0xef` have no object in the static initialiser.
+
+## Round 3: D1 (register-allocator liveness/interference, PVS encoders, visitAlu, peephole driver)
+
+Names are in `names_D1_*.tsv` (regenerate with the specs; every `use` row is a def-use web checked by the dataflow gate). Tiers: CONFIRMED = read from code / documented
+format; INFERRED = role clear from use.
+
+**Block liveness (`HwLimits__computeBlockLiveness`, was `HwLimits__vslot81`, 0x138694).** Bitsets hold 4 bits per register (`reg * 4 + component`), allocated in the
+compiler arena as `{arena, wordCount, bitCount, words...}` (words start at +0xc from the allocation, i.e. at `allocation + 1` is the word-count field). Per block
+(`program + 0x37c` DList; `FUN_000ec4f0(program)` returns the 1-based array of blocks): `+0x100` live-in (starts as the upward-exposed uses), `+0x104` live-out, `+0x108`
+defs. A first pass over each block's instruction groups (instruction `+8` = next, flag `0x4` of `+0x14` = the group continues) sets use bits for every source component
+(component set = `FUN_000f3398`: swizzle -> byte per component) that has not already been written in the block, and def bits for the destination components; a second pass
+iterates to a fixpoint: `liveIn |= (OR of successors' liveIn) & ~defs`. Program flag `+0x30 |= 0x1000` marks liveness as computed.
+
+**Interference graph (`HwLimits__buildInterferenceGraph`, was `HwLimits__vslot82`, 0x1322a8).** Walks each block backwards from its live-out set. Parameters: the
+`ColorGraph` (`FUN_00135334` adds a symmetric edge, `FUN_00134bf0` maps a register through the disjoint-set representative when `useCoalesced`), `fixedRegCount` (the first
+nodes are made pairwise interfering up front), `regCount`, `useCoalesced`. For each definition the destination components get edges to everything live (with exceptions for
+copies and for the registers listed in `excludedRegs0..3`); a worklist (`{arena, vector header, membership bitset}`) of registers is drained at group boundaries.
+
+**PVS encoders (R300VMachineAssembler).** `encodeSourceOperand`, `encodeDestinationWord`, `encodeDualMathOperands` build the 4-word PVS instruction exactly as
+section 4 describes; the new names label the fields: `swizzleXField..swizzleWField` (bits 13/16/19/22), `negXField..` (bits 25..28), `addrMode0Bit`/`addrMode1Bit`
+(bits 4/31), `addrSelBits` (30:29), `offsetBits` (12:5), `srcTypeBits` (1:0). `encodeDualMathOperands` writes word 3: bits 1:0 source register type, 12:5 offset, 15:13 and
+18:16 the two select fields, 25/26 the negates, 24:21 the math opcode (+ bit 2 for opcodes >= 16), 28:27 the destination component select derived from the write mask
+(`0x10101`, `0x1000101`, `0x1010001`, `0x1010100`), 20:19 the destination offset relative to the target bias. `findFoldableMovePair` finds, inside one instruction
+group, the vector-engine instruction and the math-engine instruction and, when the math source is the vector result, inserts a `IrMovFloat` (0x31) to a fresh temporary and
+rebinds the math source to it.
+
+**`R300MachineAssembler__assembleAluInstruction` (visitor slot 14, 0x1981ac).** `classifyAluOperation` returns bit 0 (has an rgb part), bit 1 (alpha part), bit 2 and
+bit 4 plus two pairs of output words; the per-source loop (`srcIdx` = 1..numSources) resolves each source: a source defined by a mix/mad is looked through (`defSrc1Inst`,
+`defSrc2Inst`), other sources are matched against the three source-address slots held in the assembler (`this[7..9]` rgb slot instructions, `this[10..12]` alpha slot
+instructions, `this[14..16]` / `this[18..20]` their register ids, `this[0x20]` / `this[0x21]` used-slot masks, searched with `slotNo` 1..3) and the visitor methods
+`0xec..0x100` (`rgbSelectFor...` / `alphaSelectFor...`) fill `rgbSelect` / `rgbMod` / `alphaSelect` / `alphaMod` per source; constant sources use slot 55 (`tryEncodeImmediateLiteral`).
+
+**Peephole combine (`FudoPs/KhanPs/KhanVs__peepholeCombine`, HwLimits vtable slot 28, was `vslotXX`).** Arguments `(this, inst, consumerSrcIndex, inst2, program, ...)`: `inst2` is the
+producer, `inst` its consumer through source `consumerSrcIndex`. The body tries a fixed sequence of pattern helpers (`FUN_0014abdc`, `FUN_00155a60`, ... each takes the producer and
+the program and returns non-zero when it rewrote it) gated by `Compiler__isOptionEnabled(program[2], id)` (ids 0x1b, 0x1c, 0x1d, 0x38, 0x39, 0x3c, 0x3d seen), commits each rewrite
+through `FUN_00146610`, bumps the use-count epoch `program[0x11e]` and returns whether anything changed. One explicit pattern is spelled out in FudoPs: an `IrFetchTextureMapKill` (0x77)
+whose source 1 is a single-use `IrAddFloat` of two identical-register terms is rewritten into a form with `IrMulFloat`-style operands (option 0x3d).
+
+**Gate finds worth remembering.** The dataflow gate rejected webs that cross loop-carried flag words (`uVar22 = piVar13[5]` flags re-read at the loop test), a split of
+`local_88` in `encodeSourceOperand` (changes the instruction count) and `uVar19` there (new -Wuninitialized warning): those variables keep their Ghidra names.
