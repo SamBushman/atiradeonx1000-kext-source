@@ -758,165 +758,167 @@ int _uw_frame_state_for(context, fs)
 }
 
 /* ___frame_state_for @ 0x97c1b52c (236 bytes) */
-int ___frame_state_for(context, fs)
-  int context;
-  int fs;
+int ___frame_state_for(pcTarget, stateIn)
+  int pcTarget;
+  int stateIn;
 {
-  char cVar1;
+  int regsLeft;
+  char savedKind;
   int uw_frame_state_forResult;
-  undefined1 *puVar3;
-  char *pcVar4;
-  undefined4 *puVar5;
-  int cie;
-  undefined1 auStack_5a0 [448];
-  int local_3e0;
-  undefined4 local_3cc;
-  undefined4 local_3c0;
-  char local_3b9 [885];
-  undefined4 local_44;
-  undefined2 local_3e;
-  int local_38;
-  byte local_24;
-  undefined4 local_20;
+  undefined1 *fsEntryCursor;
+  char *savedOut;
+  undefined4 *regOrOffsetOut;
+  int result;
+  undefined1 stackContext [448];
+  int contextRa;
+  undefined4 contextArgsSize;
+  undefined4 uwFrameState;
+  char fsBody [885];
+  undefined4 fsCfaOffset;
+  undefined2 fsCfaReg;
+  int fsCfaHow;
+  byte fsRetaddrColumn;
+  undefined4 fsEhPtr;
   
-  puVar3 = auStack_5a0;
-  _memset(puVar3,0,0x1d8);
-  local_3e0 = context + 1;
-  uw_frame_state_forResult = ((int (*)())_uw_frame_state_for)(puVar3,&local_3c0);
-  cie = 0;
-  if ((uw_frame_state_forResult == 0) && (local_38 != 2)) {
-    cie = 0x4e;
-    puVar5 = (undefined4 *)(fs + 0x10);
-    pcVar4 = (char *)(fs + 0x14c);
+  fsEntryCursor = stackContext;
+  _memset(fsEntryCursor,0,0x1d8);
+  contextRa = pcTarget + 1;
+  uw_frame_state_forResult = ((int (*)())_uw_frame_state_for)(fsEntryCursor,&uwFrameState);
+  result = 0;
+  if ((uw_frame_state_forResult == 0) && (fsCfaHow != 2)) {
+    regsLeft = 0x4e;
+    regOrOffsetOut = (undefined4 *)(stateIn + 0x10);
+    savedOut = (char *)(stateIn + 0x14c);
     do {
-      cVar1 = puVar3[0x1e7];
-      *pcVar4 = cVar1;
-      if ((cVar1 == '\x01') || (cVar1 == '\x02')) {
-        *puVar5 = *(undefined4 *)(puVar3 + 0x1e0);
+      savedKind = fsEntryCursor[0x1e7];
+      *savedOut = savedKind;
+      if ((savedKind == '\x01') || (savedKind == '\x02')) {
+        *regOrOffsetOut = *(undefined4 *)(fsEntryCursor + 0x1e0);
       }
       else {
-        *puVar5 = 0;
+        *regOrOffsetOut = 0;
       }
-      pcVar4 = pcVar4 + 1;
-      puVar3 = puVar3 + 8;
-      puVar5 = puVar5 + 1;
-      cie = cie + -1;
-    } while (cie != 0);
-    *(undefined2 *)(fs + 0x148) = local_3e;
-    *(undefined4 *)(fs + 8) = local_44;
-    *(ushort *)(fs + 0x14a) = (ushort)local_24;
-    *(undefined4 *)(fs + 0xc) = local_3cc;
-    *(undefined4 *)(fs + 4) = local_20;
-    cie = fs;
+      savedOut = savedOut + 1;
+      fsEntryCursor = fsEntryCursor + 8;
+      regOrOffsetOut = regOrOffsetOut + 1;
+      regsLeft = regsLeft + -1;
+    } while (regsLeft != 0);
+    *(undefined2 *)(stateIn + 0x148) = fsCfaReg;
+    *(undefined4 *)(stateIn + 8) = fsCfaOffset;
+    *(ushort *)(stateIn + 0x14a) = (ushort)fsRetaddrColumn;
+    *(undefined4 *)(stateIn + 0xc) = contextArgsSize;
+    *(undefined4 *)(stateIn + 4) = fsEhPtr;
+    result = stateIn;
   }
-  return cie;
+  return result;
 }
 
 /* _uw_update_context_1 @ 0x97c1b618 (320 bytes) */
-int _uw_update_context_1(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int _uw_update_context_1(context, fs)
+  int *context;
+  int *fs;
 {
-  int lebValue;
-  int iVar1;
-  int *piVar2;
-  int *piVar3;
-  int *piVar4;
-  int aiStack_210 [120];
-  int local_30;
-  int local_2c [5];
+  int regHow;
+  int exp;
+  int cfaRegValue;
+  int *regSlotOrExpResult;
+  int *cfa;
+  int *lastReg;
+  int origContext [120];
+  int cfaExpLen;
+  int regExpLen [5];
   
-  _memcpy(aiStack_210,param_1,0x1d8);
-  if (param_2[0xe2] == 1) {
-    piVar2 = (int *)param_1[param_2[0xe0]];
-    if (piVar2 == (int *)0x0) {
-      iVar1 = param_1[0x6f];
+  _memcpy(origContext,context,0x1d8);
+  if (fs[0xe2] == 1) {
+    regSlotOrExpResult = (int *)context[fs[0xe0]];
+    if (regSlotOrExpResult == (int *)0x0) {
+      cfaRegValue = context[0x6f];
     }
     else {
-      iVar1 = *piVar2;
+      cfaRegValue = *regSlotOrExpResult;
     }
-    piVar3 = (int *)(iVar1 + param_2[0xdf]);
+    cfa = (int *)(cfaRegValue + fs[0xdf]);
   }
   else {
-    if (param_2[0xe2] != 2) {
+    if (fs[0xe2] != 2) {
                     
       _abort();
     }
-    lebValue = _read_uleb128_97c1a3ec(param_2[0xe1],&local_30);
-    piVar2 = (int *)((int (*)())_execute_stack_op)(lebValue,lebValue + local_30,param_1,0);
-    piVar3 = piVar2;
+    exp = _read_uleb128_97c1a3ec(fs[0xe1],&cfaExpLen);
+    regSlotOrExpResult = (int *)((int (*)())_execute_stack_op)(exp,exp + cfaExpLen,context,0);
+    cfa = regSlotOrExpResult;
   }
-  param_1[0x6f] = (int)piVar3;
-  piVar4 = param_1 + 0x6e;
+  context[0x6f] = (int)cfa;
+  lastReg = context + 0x6e;
   do {
-    iVar1 = param_2[1];
-    if (iVar1 == 1) {
-      *param_1 = (int)piVar3 + *param_2;
+    regHow = fs[1];
+    if (regHow == 1) {
+      *context = (int)cfa + *fs;
     }
-    else if (iVar1 != 0) {
-      if (iVar1 == 2) {
-        *param_1 = aiStack_210[*param_2];
+    else if (regHow != 0) {
+      if (regHow == 2) {
+        *context = origContext[*fs];
       }
-      else if (iVar1 == 3) {
-        lebValue = _read_uleb128_97c1a3ec(*param_2,local_2c);
-        piVar2 = (int *)((int (*)())_execute_stack_op)(lebValue,lebValue + local_2c[0],aiStack_210,piVar3);
-        *param_1 = (int)piVar2;
+      else if (regHow == 3) {
+        exp = _read_uleb128_97c1a3ec(*fs,regExpLen);
+        regSlotOrExpResult = (int *)((int (*)())_execute_stack_op)(exp,exp + regExpLen[0],origContext,cfa);
+        *context = (int)regSlotOrExpResult;
       }
     }
-    param_1 = param_1 + 1;
-    param_2 = param_2 + 2;
-  } while ((int)param_1 <= (int)piVar4);
-  return piVar2;
+    context = context + 1;
+    fs = fs + 2;
+  } while ((int)context <= (int)lastReg);
+  return regSlotOrExpResult;
 }
 
 /* _uw_update_context @ 0x97c1b758 (68 bytes) */
-int _uw_update_context(param_1, param_2)
-  int param_1;
-  int param_2;
+int _uw_update_context(context, fs)
+  int context;
+  int fs;
 {
-  ((int (*)())_uw_update_context_1)(param_1,param_2);
-  *(undefined4 *)(param_1 + 0x1c0) =
-       **(undefined4 **)(param_1 + (uint)*(byte *)(param_2 + 0x39c) * 4);
+  ((int (*)())_uw_update_context_1)(context,fs);
+  *(undefined4 *)(context + 0x1c0) =
+       **(undefined4 **)(context + (uint)*(byte *)(fs + 0x39c) * 4);
   return;
 }
 
 /* _uw_init_context_1 @ 0x97c1b79c (132 bytes) */
-int _uw_init_context_1(context, param_2, param_3)
+int _uw_init_context_1(context, outerCfa, outerRa)
   int context;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 outerCfa;
+  undefined4 outerRa;
 {
-  undefined4 in_LR;
-  undefined1 auStack_3d0 [892];
-  int local_54;
-  int local_50;
-  undefined4 local_48;
+  undefined4 entryReturnAddress;
+  undefined1 fs [892];
+  int fsCfaOffset;
+  int fsCfaReg;
+  undefined4 fsCfaHow;
   
   _memset(context,0,0x1d8);
-  *(undefined4 *)(context + 0x1c0) = in_LR;
-  local_54 = ((int (*)())_uw_frame_state_for)(context,auStack_3d0);
-  if (local_54 != 0) {
+  *(undefined4 *)(context + 0x1c0) = entryReturnAddress;
+  fsCfaOffset = ((int (*)())_uw_frame_state_for)(context,fs);
+  if (fsCfaOffset != 0) {
                     
     _abort();
   }
-  *(undefined4 *)(context + 0x1bc) = param_2;
-  local_48 = 1;
-  local_50 = local_54;
-  ((int (*)())_uw_update_context_1)(context,auStack_3d0);
-  *(undefined4 *)(context + 0x1c0) = param_3;
+  *(undefined4 *)(context + 0x1bc) = outerCfa;
+  fsCfaHow = 1;
+  fsCfaReg = fsCfaOffset;
+  ((int (*)())_uw_update_context_1)(context,fs);
+  *(undefined4 *)(context + 0x1c0) = outerRa;
   return;
 }
 
 /* _uw_install_context_1 @ 0x97c1b820 (652 bytes) */
-int _uw_install_context_1(param_1, param_2)
-  int param_1;
-  int param_2;
+int _uw_install_context_1(current, target)
+  int current;
+  int target;
 {
   int pthread_onceResult;
-  byte *pbVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
+  byte *regSizePtr;
+  int regOffset;
+  int currentReg;
+  int targetReg;
   
   pthread_onceResult = _pthread_once((pthread_once_t *)&_once_regsizes_0,DAT_a7b7c084);
   if ((pthread_onceResult != 0) || (_dwarf_reg_size_table == '\0')) {
@@ -1031,18 +1033,18 @@ int _uw_install_context_1(param_1, param_2)
     DAT_a7b7eae6 = 0x10;
     DAT_a7b7eae7 = 0x10;
   }
-  iVar2 = 0;
-  pbVar1 = (byte *)&_dwarf_reg_size_table;
+  regOffset = 0;
+  regSizePtr = (byte *)&_dwarf_reg_size_table;
   do {
-    iVar4 = *(int *)(iVar2 + param_2);
-    iVar3 = *(int *)(iVar2 + param_1);
-    if (((iVar4 != 0) && (iVar3 != 0)) && (iVar4 != iVar3)) {
-      _memcpy(iVar3,iVar4,(uint)*pbVar1);
+    targetReg = *(int *)(regOffset + target);
+    currentReg = *(int *)(regOffset + current);
+    if (((targetReg != 0) && (currentReg != 0)) && (targetReg != currentReg)) {
+      _memcpy(currentReg,targetReg,(uint)*regSizePtr);
     }
-    pbVar1 = pbVar1 + 1;
-    iVar2 = iVar2 + 4;
-  } while ((int)pbVar1 < -0x58481516);
-  return (*(int *)(param_2 + 0x1bc) - *(int *)(param_1 + 0x1bc)) + *(int *)(param_2 + 0x1d4);
+    regSizePtr = regSizePtr + 1;
+    regOffset = regOffset + 4;
+  } while ((int)regSizePtr < -0x58481516);
+  return (*(int *)(target + 0x1bc) - *(int *)(current + 0x1bc)) + *(int *)(target + 0x1d4);
 }
 
 /* __Unwind_RaiseException_Phase2 @ 0x97c1baac (192 bytes) */
@@ -1152,14 +1154,14 @@ int __Unwind_ForcedUnwind_Phase2(exc, context)
 }
 
 /* __Unwind_ForcedUnwind @ 0x97c1bd8c (148 bytes) */
-int __Unwind_ForcedUnwind(exception_object, stop, stop_parameter, param_4, param_5, param_6, param_7)
+int __Unwind_ForcedUnwind(exception_object, stop, stop_parameter, unusedArg4, unusedArg5, unusedArg6, unusedArg7)
   _Unwind_Exception *exception_object;
   void *stop;
   void *stop_parameter;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
 {
   double this_context[0x1d8 / 8], cur_context[0x1d8 / 8];
   double fs[0x3d0 / 8];
@@ -1627,33 +1629,33 @@ int ___deregister_frame(fde)
 }
 
 /* _base_from_object @ 0x97c1c884 (120 bytes) */
-int _base_from_object(param_1, param_2)
-  uint param_1;
-  int param_2;
+int _base_from_object(encoding, ob)
+  uint encoding;
+  int ob;
 {
-  bool bVar1;
-  uint uVar2;
+  bool isPcrelOrAligned;
+  uint application;
   
-  if (param_1 == 0xff) {
+  if (encoding == 0xff) {
     return 0;
   }
-  uVar2 = param_1 & 0x70;
-  if (uVar2 == 0x20) {
-    return *(undefined4 *)(param_2 + 4);
+  application = encoding & 0x70;
+  if (application == 0x20) {
+    return *(undefined4 *)(ob + 4);
   }
-  if (uVar2 < 0x21) {
-    if (uVar2 == 0) {
+  if (application < 0x21) {
+    if (application == 0) {
       return 0;
     }
-    bVar1 = uVar2 == 0x10;
+    isPcrelOrAligned = application == 0x10;
   }
   else {
-    if (uVar2 == 0x30) {
-      return *(undefined4 *)(param_2 + 8);
+    if (application == 0x30) {
+      return *(undefined4 *)(ob + 8);
     }
-    bVar1 = uVar2 == 0x50;
+    isPcrelOrAligned = application == 0x50;
   }
-  if (bVar1) {
+  if (isPcrelOrAligned) {
     return 0;
   }
                     
@@ -2235,64 +2237,64 @@ LAB_97c1d4c0:
 }
 
 /* _live_image_destructor @ 0x97c1d52c (196 bytes) */
-int _live_image_destructor(param_1)
-  int param_1;
+int _live_image_destructor(image)
+  int image;
 {
-  undefined4 *puVar1;
+  undefined4 *objectState;
   
-  if (*(int *)(param_1 + 0x1c) != 0) {
-    puVar1 = (undefined4 *)__keymgr_get_and_lock_processwide_ptr(0x12e);
-    if (puVar1 != (undefined4 *)0x0) {
-      _seen_objects = *puVar1;
-      _unseen_objects = puVar1[1];
-      ((int (*)())___deregister_frame_info_bases)(*(void **)(param_1 + 0x18));
-      *puVar1 = _seen_objects;
-      puVar1[1] = _unseen_objects;
+  if (*(int *)(image + 0x1c) != 0) {
+    objectState = (undefined4 *)__keymgr_get_and_lock_processwide_ptr(0x12e);
+    if (objectState != (undefined4 *)0x0) {
+      _seen_objects = *objectState;
+      _unseen_objects = objectState[1];
+      ((int (*)())___deregister_frame_info_bases)(*(void **)(image + 0x18));
+      *objectState = _seen_objects;
+      objectState[1] = _unseen_objects;
     }
-    __keymgr_set_and_unlock_processwide_ptr(0x12e,puVar1);
-    _free(*(undefined4 *)(param_1 + 0x1c));
-    *(undefined4 *)(param_1 + 0x1c) = 0;
-    if ((*(uint *)(param_1 + 0x14) & 2) != 0) {
-      _free(*(undefined4 *)(param_1 + 0x18));
+    __keymgr_set_and_unlock_processwide_ptr(0x12e,objectState);
+    _free(*(undefined4 *)(image + 0x1c));
+    *(undefined4 *)(image + 0x1c) = 0;
+    if ((*(uint *)(image + 0x14) & 2) != 0) {
+      _free(*(undefined4 *)(image + 0x18));
     }
-    *(undefined4 *)(param_1 + 0x18) = 0;
+    *(undefined4 *)(image + 0x18) = 0;
   }
-  *(undefined4 *)(param_1 + 0xc) = 0;
-  *(undefined4 *)(param_1 + 0x14) = 0;
+  *(undefined4 *)(image + 0xc) = 0;
+  *(undefined4 *)(image + 0x14) = 0;
   return;
 }
 
 /* __Unwind_Find_FDE @ 0x97c1d5f0 (224 bytes) */
-int __Unwind_Find_FDE(pc, param_2)
+int __Unwind_Find_FDE(pc, bases)
   void *pc;
-  dwarf_eh_bases *param_2;
+  dwarf_eh_bases *bases;
 {
-  bool bVar1;
-  undefined4 *puVar2;
-  void *pvVar3;
+  bool dontAlloc;
+  undefined4 *objectState;
+  void *fde;
   
-  puVar2 = (undefined4 *)__keymgr_get_and_lock_processwide_ptr(0x12e);
-  bVar1 = puVar2 == (undefined4 *)0x0;
-  if (bVar1) {
-    puVar2 = (undefined4 *)_calloc(1,0x10);
-    bVar1 = puVar2 == (undefined4 *)0x0;
-    if (!bVar1) goto LAB_97c1d644;
+  objectState = (undefined4 *)__keymgr_get_and_lock_processwide_ptr(0x12e);
+  dontAlloc = objectState == (undefined4 *)0x0;
+  if (dontAlloc) {
+    objectState = (undefined4 *)_calloc(1,0x10);
+    dontAlloc = objectState == (undefined4 *)0x0;
+    if (!dontAlloc) goto LAB_97c1d644;
   }
   else {
 LAB_97c1d644:
-    _seen_objects = *puVar2;
-    _unseen_objects = puVar2[1];
-    pvVar3 = (void *)((int (*)())__Unwind_Find_registered_FDE)(pc,param_2);
-    if (pvVar3 != (void *)0x0) goto LAB_97c1d688;
+    _seen_objects = *objectState;
+    _unseen_objects = objectState[1];
+    fde = (void *)((int (*)())__Unwind_Find_registered_FDE)(pc,bases);
+    if (fde != (void *)0x0) goto LAB_97c1d688;
   }
-  pvVar3 = (void *)((int (*)())_examine_objects)(pc,param_2,(uint)bVar1);
+  fde = (void *)((int (*)())_examine_objects)(pc,bases,(uint)dontAlloc);
 LAB_97c1d688:
-  if (!bVar1) {
-    *puVar2 = _seen_objects;
-    puVar2[1] = _unseen_objects;
+  if (!dontAlloc) {
+    *objectState = _seen_objects;
+    objectState[1] = _unseen_objects;
   }
-  __keymgr_set_and_unlock_processwide_ptr(0x12e,puVar2);
-  return pvVar3;
+  __keymgr_set_and_unlock_processwide_ptr(0x12e,objectState);
+  return fde;
 }
 
 /* _init_object @ 0x97c1d6d0 (732 bytes) */
