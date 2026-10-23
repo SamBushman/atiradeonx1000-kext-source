@@ -1241,7 +1241,7 @@ int operator_new(param_1)
   undefined *puVar1;
   undefined *puVar2;
   void *allocation;
-  code *a0;
+  code *r3In0;
   undefined4 *puVar4;
   
   if (param_1 == 0) {
@@ -1252,9 +1252,9 @@ int operator_new(param_1)
     if (allocation != (void *)0x0) {
       return allocation;
     }
-    a0 = (code *)__keymgr_get_per_thread_data(2);
-    if (a0 == (code *)0x0) break;
-    (*a0)(a0);
+    r3In0 = (code *)__keymgr_get_per_thread_data(2);
+    if (r3In0 == (code *)0x0) break;
+    (*r3In0)(r3In0);
     allocation = (void *)_malloc(param_1);
   }
   puVar4 = (undefined4 *)___cxa_allocate_exception(4);

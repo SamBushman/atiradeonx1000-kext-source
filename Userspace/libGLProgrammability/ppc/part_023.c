@@ -4,13 +4,13 @@
 int __ZdlPv(param_1)
   void *param_1;
 {
-  undefined4 extraout_r3;
+  undefined4 r3Out0;
   undefined4 uVar1;
   
   uVar1 = 0;
   if (param_1 != (void *)0x0) {
     _free(param_1);
-    uVar1 = extraout_r3;
+    uVar1 = r3Out0;
   }
   return uVar1;
 }

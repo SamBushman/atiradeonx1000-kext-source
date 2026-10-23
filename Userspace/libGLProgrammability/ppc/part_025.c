@@ -296,7 +296,7 @@ int __cxxabiv1____vmi_class_type_info____do_upcast(this, __class_type_info, para
   int iVar2;
   int iVar3;
   unsigned char * ptVar4;
-  void *a2;
+  void *r5In0;
   uint uVar5;
   unsigned char * p_Var6;
   bool bVar7;
@@ -323,16 +323,16 @@ int __cxxabiv1____vmi_class_type_info____do_upcast(this, __class_type_info, para
         iVar2 = (int)uVar1 >> 8;
         local_34 = (void *)0x0;
         if ((bVar7) || (((uVar5 ^ 1) & 1) == 0)) {
-          a2 = param_3;
+          r5In0 = param_3;
           if (param_3 != (void *)0x0) {
             if ((uVar1 & 1) != 0) {
               iVar2 = *(int *)(*(int *)param_3 + iVar2);
             }
-            a2 = (void *)((int)param_3 + iVar2);
+            r5In0 = (void *)((int)param_3 + iVar2);
           }
           local_38 = uVar5;
           iVar2 = (**(code **)(**(int **)(p_Var6 + 0x10) + 0x18))
-                            (*(int **)(p_Var6 + 0x10),__class_type_info,a2,&local_40);
+                            (*(int **)(p_Var6 + 0x10),__class_type_info,r5In0,&local_40);
           if (iVar2 != 0) {
             if ((local_34 == (void *)0x8) && ((uVar1 & 1) != 0)) {
               local_34 = *(void **)(p_Var6 + 0x10);
@@ -394,7 +394,7 @@ int ___dynamic_cast(param_1, param_2, param_3, param_4)
   int *param_3;
   int param_4;
 {
-  int *a0;
+  int *r3In0;
   uint uVar1;
   int iVar2;
   int local_40;
@@ -403,14 +403,14 @@ int ___dynamic_cast(param_1, param_2, param_3, param_4)
   uint local_34;
   undefined4 local_30;
   
-  a0 = *(int **)(*param_1 + -4);
+  r3In0 = *(int **)(*param_1 + -4);
   local_38 = 0;
   local_34 = 0;
   local_30 = 0x10;
   local_40 = 0;
   local_3c = 0;
-  (**(code **)(*a0 + 0x1c))
-            (a0,param_4,6,param_3,(int)param_1 + *(int *)(*param_1 + -8),param_2,param_1,&local_40);
+  (**(code **)(*r3In0 + 0x1c))
+            (r3In0,param_4,6,param_3,(int)param_1 + *(int *)(*param_1 + -8),param_2,param_1,&local_40);
   iVar2 = 0;
   if ((((local_40 != 0) && (iVar2 = local_40, (local_34 & 6) != 6)) &&
       ((local_38 & local_3c & 6) != 6)) && (iVar2 = 0, (local_38 & 5) != 4)) {
@@ -617,13 +617,13 @@ int __gxx_exception_cleanup(_Unwind_Reason_Code, param_2)
   unsigned char _Unwind_Reason_Code;
   _Unwind_Exception *param_2;
 {
-  _Unwind_Exception *extraout_r4;
+  _Unwind_Exception *r4Out0;
   unsigned char * puVar1;
   
   puVar1 = &param_2[-2].private_2;
   if (_URC_FOREIGN_EXCEPTION_CAUGHT < _Unwind_Reason_Code) {
     ((int (*)())__cxxabiv1____terminate)((unsigned char *)param_2[-2].reserved[2]);
-    param_2 = extraout_r4;
+    param_2 = r4Out0;
   }
   if ((code *)puVar1[1] != (code *)0x0) {
     (*(code *)puVar1[1])(param_2 + 1);
@@ -1168,7 +1168,7 @@ int FUN_97c19d00(param_1)
   undefined4 __unexpectedResult;
   undefined4 *puVar4;
   int check_exception_specResult;
-  code *extraout_r3;
+  code *r3Out0;
   unsigned char * p_Var6;
   int iVar7;
   uchar *puVar8;
@@ -1202,7 +1202,7 @@ int FUN_97c19d00(param_1)
   ((int (*)())___cxa_end_catch)();
   ((int (*)())___cxa_end_catch)();
   __Unwind_Resume(__terminateResult);
-  (*extraout_r3)();
+  (*r3Out0)();
                     
   _abort();
 }
@@ -1332,7 +1332,7 @@ int ___cxa_end_catch()
 {
   int *cxa_get_globals_fastResult;
   int iVar2;
-  undefined4 extraout_r3;
+  undefined4 r3Out0;
   int iVar3;
   
   cxa_get_globals_fastResult = (int *)((int (*)())___cxa_get_globals_fast)();
@@ -1350,7 +1350,7 @@ int ___cxa_end_catch()
     if (iVar3 == 0) {
       *cxa_get_globals_fastResult = *(int *)(iVar2 + 0x10);
       __Unwind_DeleteException((_Unwind_Exception *)(iVar2 + 0x30));
-      return extraout_r3;
+      return r3Out0;
     }
     if (iVar3 < 0) {
                     

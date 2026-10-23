@@ -780,7 +780,7 @@ int TType__setStructSize(this, vector)
   unsigned char * vector;
 {
   int iVar1;
-  int *a0;
+  int *r3In0;
   int iVar2;
   int *piVar3;
   
@@ -806,12 +806,12 @@ int TType__setStructSize(this, vector)
       iVar2 = iVar2 + 1;
     }
     else {
-      a0 = (int *)*piVar3;
-      if ((unsigned char *)a0[2] == (unsigned char *)0x0) {
-        iVar1 = (**(code **)(*a0 + 0x30))(a0);
+      r3In0 = (int *)*piVar3;
+      if ((unsigned char *)r3In0[2] == (unsigned char *)0x0) {
+        iVar1 = (**(code **)(*r3In0 + 0x30))(r3In0);
       }
       else {
-        iVar1 = ((int (*)())TType__setStructSize)(this,(unsigned char *)a0[2]);
+        iVar1 = ((int (*)())TType__setStructSize)(this,(unsigned char *)r3In0[2]);
       }
       iVar1 = iVar1 * *(int *)(*piVar3 + 4);
 LAB_97c31d28:

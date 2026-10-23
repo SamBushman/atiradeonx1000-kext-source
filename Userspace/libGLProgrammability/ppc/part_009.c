@@ -1121,7 +1121,7 @@ int TGenericLinker__OptimizeFunctionIO(this)
 {
   bool bVar1;
   int iVar2;
-  int a0;
+  int r3In0;
   int iVar3;
   char *allocation;
   unsigned char * pPVar5;
@@ -1152,15 +1152,15 @@ int TGenericLinker__OptimizeFunctionIO(this)
     if ((*(int *)(this + iVar2 + 0x38) != 0) && (0 < *(int *)(*(int *)(this + iVar2 + 0x38) + 4))) {
       do {
         iVar13 = 0;
-        a0 = FunctionTable__getFunctionName(*(unsigned char **)(this + iVar2 + 0x38),iVar18);
-        iVar3 = _memcmp(a0,"main(",6);
+        r3In0 = FunctionTable__getFunctionName(*(unsigned char **)(this + iVar2 + 0x38),iVar18);
+        iVar3 = _memcmp(r3In0,"main(",6);
         if (iVar3 != 0) {
           for (; iVar3 = FunctionTable__getNumParams
                                    (*(unsigned char **)(this + iVar2 + 0x38),iVar18), iVar13 < iVar3
               ; iVar13 = iVar13 + 1) {
-            iVar3 = _strlen(a0);
+            iVar3 = _strlen(r3In0);
             allocation = (char *)_malloc(iVar3 + 9);
-            _sprintf(allocation,"%s_%i",a0,iVar13);
+            _sprintf(allocation,"%s_%i",r3In0,iVar13);
             for (pPVar5 = (unsigned char *)
                           ParseSymbolTable__FindNextParamSymbolByName
                                     (*(unsigned char **)(this + iVar2 + 0x28),(unsigned char *)0x0,
@@ -1189,10 +1189,10 @@ int TGenericLinker__OptimizeFunctionIO(this)
                     }
                     iVar7 = _strlen(DAT_a7b7baec);
                     iVar10 = _strlen((&_shaderString)[iVar12]);
-                    iVar11 = _strlen(a0);
+                    iVar11 = _strlen(r3In0);
                     p0 = (char *)_malloc(iVar7 + iVar10 + iVar11 + 9);
                     uVar8 = FunctionTable__getFirstOp(*(unsigned char **)(this + iVar2 + 0x38),iVar18);
-                    _sprintf(p0,DAT_a7b7baec,a0,(&_shaderString)[iVar12],uVar8);
+                    _sprintf(p0,DAT_a7b7baec,r3In0,(&_shaderString)[iVar12],uVar8);
                     this_00 = *(void **)(this + 0x84);
                     
                     __ZN13TInfoSinkBase6appendEPKc(this_00,"INTERNAL ERROR: ");
@@ -1228,7 +1228,7 @@ joined_r0x97bb44e4:
             p_Var17 = *(unsigned char **)(p_Var16 + 8);
             iVar3 = FunctionTable__getEmpty(*(unsigned char **)(this + iVar2 + 0x38),iVar18);
             if ((((iVar3 != 0) && ((*(uint *)(p_Var16 + 0xc) & 0x3fc0000) == 0x1300000)) &&
-                (*(int *)(p_Var16 + 0x40) != 0)) && (iVar3 = _strcmp(p_Var16 + 0x44,a0), iVar3 == 0)
+                (*(int *)(p_Var16 + 0x40) != 0)) && (iVar3 = _strcmp(p_Var16 + 0x44,r3In0), iVar3 == 0)
                ) {
               FunctionTable__updateForRemovingChunk
                         (*(unsigned char **)(this + iVar2 + 0x38),p_Var16);
@@ -1373,9 +1373,9 @@ int TGenericLinker__GetBindingTableString(this)
   int length;
   int length2;
   char *p0;
-  int a3;
-  int a4;
-  int a5;
+  int r6In0;
+  int r7In0;
+  int r8In0;
   undefined4 numActiveAttributeBindings2;
   undefined4 sizeActiveAttributes2;
   undefined4 sizeActiveUserAttributes;
@@ -1403,10 +1403,10 @@ int TGenericLinker__GetBindingTableString(this)
     *p0 = '\0';
     numActiveAttributeBindings = BindingTable__GetNumActiveAttributeBindings(*(unsigned char **)(this + 4));
     sizeActiveAttributes = BindingTable__GetSizeActiveAttributes(*(unsigned char **)(this + 4));
-    a3 = BindingTable__GetSizeActiveUserAttributes(*(unsigned char **)(this + 4));
-    a4 = BindingTable__GetNumActiveUniformBindings(*(unsigned char **)(this + 4));
-    a5 = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4));
-    _sprintf(p0,DAT_a7b7bb40,*(int *)(this + 0x74),numActiveAttributeBindings,sizeActiveAttributes,a3,a4,a5,string);
+    r6In0 = BindingTable__GetSizeActiveUserAttributes(*(unsigned char **)(this + 4));
+    r7In0 = BindingTable__GetNumActiveUniformBindings(*(unsigned char **)(this + 4));
+    r8In0 = BindingTable__GetSizeActiveUserUniforms(*(unsigned char **)(this + 4));
+    _sprintf(p0,DAT_a7b7bb40,*(int *)(this + 0x74),numActiveAttributeBindings,sizeActiveAttributes,r6In0,r7In0,r8In0,string);
   }
   _free(string);
   return p0;
@@ -3034,14 +3034,14 @@ int TGenericLinker__BuildSymbolTableList(this, param_2, param_3)
   size_t length;
   size_t length2;
   char *pcVar7;
-  void **extraout_r4;
-  void **extraout_r4_00;
-  void **a1;
+  void **r4Out0;
+  void **r4Out1;
+  void **r4In0;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
   unsigned char * pTVar8;
-  undefined4 a7;
+  undefined4 r10In0;
   int iVar9;
   int iVar10;
   int iVar11;
@@ -3053,13 +3053,13 @@ int TGenericLinker__BuildSymbolTableList(this, param_2, param_3)
   
   iVar10 = 0;
   pTVar8 = (unsigned char *)0x0;
-  a7 = 0;
+  r10In0 = 0;
   local_50[0] = 0;
   local_50[1] = 0;
   local_48 = DAT_97c38fb0;
   iVar12 = 1;
   local_40[0] = DAT_97c38fb8;
-  a1 = param_2;
+  r4In0 = param_2;
   iVar11 = param_3;
   if (param_3 < 1) {
 LAB_97bb7d6c:
@@ -3120,10 +3120,10 @@ override_jmp_97bb7c58_case_0:
         __ZN13TInfoSinkBase6appendEPKc(pvVar13,pcVar7);
         __ZN13TInfoSinkBase6appendEPKc(pvVar13,"\n");
         iVar12 = 0;
-        a1 = extraout_r4_00;
+        r4In0 = r4Out1;
       }
       else {
-        iVar4 = (**(code **)(*piVar3 + 8))(piVar3,a1,iVar11,in_r6,in_r7,in_r8,pTVar8,a7);
+        iVar4 = (**(code **)(*piVar3 + 8))(piVar3,r4In0,iVar11,in_r6,in_r7,in_r8,pTVar8,r10In0);
         if (iVar4 == 0) {
           pTVar8 = (unsigned char *)&_linkIntErrorString;
           pvVar13 = *(void **)(this + 0x84);
@@ -3147,7 +3147,7 @@ override_jmp_97bb7c58_case_0:
         }
         pTVar8 = this + iVar2 * 4;
         *(int *)(pTVar8 + 0x20) = *(int *)(pTVar8 + 0x20) + 1;
-        a1 = extraout_r4;
+        r4In0 = r4Out0;
       }
       iVar10 = iVar10 + 1;
       if (param_3 <= iVar10) goto LAB_97bb7d6c;
@@ -4382,7 +4382,7 @@ int getOpenGLTypeFromTType(type)
 {
   int iVar1;
   uint uVar2;
-  undefined4 a1;
+  undefined4 r4In0;
   undefined4 in_r5;
   undefined4 in_r6;
   undefined4 in_r7;
@@ -4396,7 +4396,7 @@ int getOpenGLTypeFromTType(type)
     if (uVar2 < 0x10) {
       switch(uVar2) {
       case 1:
-        iVar1 = (**(code **)(*(int *)type + 0x34))(type,a1,in_r5,in_r6,in_r7,in_r8,uVar2 * 4);
+        iVar1 = (**(code **)(*(int *)type + 0x34))(type,r4In0,in_r5,in_r6,in_r7,in_r8,uVar2 * 4);
         if (iVar1 == 0) {
           iVar1 = (**(code **)(*(int *)type + 0x2c))(type);
           if (iVar1 == 2) {

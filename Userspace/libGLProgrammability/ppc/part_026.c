@@ -1616,12 +1616,12 @@ int ___deregister_frame(fde)
   void *fde;
 {
   void *deregister_frame_infoResult;
-  undefined4 extraout_r3;
+  undefined4 r3Out0;
   
   if (*(int *)fde != 0) {
     deregister_frame_infoResult = ___deregister_frame_info(fde);
     _free(deregister_frame_infoResult);
-    return extraout_r3;
+    return r3Out0;
   }
   return fde;
 }
@@ -2300,7 +2300,7 @@ int _init_object(param_1)
   uint uVar5;
   uint uVar6;
   int iVar7;
-  undefined4 extraout_r3;
+  undefined4 r3Out0;
   undefined4 *puVar8;
   code *pcVar9;
   undefined4 *puVar10;
@@ -2416,7 +2416,7 @@ LAB_97c1d890:
         puVar3[1] = puVar3[1] + *(int *)(iVar4 + 4);
       }
       _free(local_4c);
-      uVar12 = extraout_r3;
+      uVar12 = r3Out0;
     }
     *local_50 = *(undefined4 *)(param_1 + 0xc);
     *(uint *)(param_1 + 0x10) = *(uint *)(param_1 + 0x10) | 0x80000000;

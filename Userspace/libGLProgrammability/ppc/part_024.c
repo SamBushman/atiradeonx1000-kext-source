@@ -498,15 +498,15 @@ int __ZNK10__cxxabiv117__class_type_info10__do_catchEPKSt9type_infoPPvj(this, ty
 {
   int iVar1;
   undefined4 uVar2;
-  uint a3;
+  uint r6In0;
   
-  a3 = param_4;
+  r6In0 = param_4;
   iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,type_info);
   uVar2 = 1;
   if ((iVar1 == 0) && (uVar2 = 0, param_4 < 4)) {
                     
                     
-    uVar2 = (**(code **)(*(int *)type_info + 0x14))(type_info,this,param_3,a3);
+    uVar2 = (**(code **)(*(int *)type_info + 0x14))(type_info,this,param_3,r6In0);
     return uVar2;
   }
   return uVar2;
