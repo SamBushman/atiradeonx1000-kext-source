@@ -4043,8 +4043,8 @@ int FUN_0009a910(param_1)
   return uVar1;
 }
 
-/* FUN_0009a990 @ 0x9a990 (104 bytes) */
-int FUN_0009a990(param_1, param_2)
+/* fpVariantProgramFree @ 0x9a990 (104 bytes) */
+int fpVariantProgramFree(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -5159,8 +5159,8 @@ LAB_0009bfa0:
   return;
 }
 
-/* FUN_0009c700 @ 0x9c700 (248 bytes) */
-int FUN_0009c700(param_1)
+/* fpVariantCacheFlush @ 0x9c700 (248 bytes) */
+int fpVariantCacheFlush(param_1)
   int param_1;
 {
   int iVar1;
@@ -5181,7 +5181,7 @@ int FUN_0009c700(param_1)
       a0 = *(int *)(iVar1 + iVar2);
       while (a0 != 0) {
         *(undefined4 *)(iVar1 + iVar2) = *(undefined4 *)(a0 + 0x5c);
-        ((int (*)())FUN_0009a990)(param_1,*(undefined4 *)(a0 + 0x54));
+        ((int (*)())fpVariantProgramFree)(param_1,*(undefined4 *)(a0 + 0x54));
         if (*(int *)(a0 + 0x4c) != 0) {
           (**(code **)(param_1 + 0x18))(*(int *)(a0 + 0x4c));
         }
@@ -5227,7 +5227,7 @@ int FUN_0009c800(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   ;
   uVar8 = *(uint *)(param_1 + 0x3c8);
   if (1000000 < uVar8) {
-    ((int (*)())FUN_0009c700)(param_1);
+    ((int (*)())fpVariantCacheFlush)(param_1);
     uVar8 = *(uint *)(param_1 + 0x3c8);
   }
   if (((unsigned char *)0x00001120)[param_1] == '\0') {
@@ -6398,8 +6398,8 @@ LAB_0009e8dc:
   return iVar7;
 }
 
-/* FUN_0009eb90 @ 0x9eb90 (560 bytes) */
-int FUN_0009eb90(param_1, param_2)
+/* fpVariantCacheGrow @ 0x9eb90 (560 bytes) */
+int fpVariantCacheGrow(param_1, param_2)
   int param_1;
   int param_2;
 {
@@ -6581,11 +6581,11 @@ LAB_0009f014:
       return 0;
     }
     if (bVar1) {
-      ((int (*)())FUN_0009eb90)(param_1,0x859);
+      ((int (*)())fpVariantCacheGrow)(param_1,0x859);
       return 0;
     }
   }
-  ((int (*)())FUN_0009eb90)(param_1,0);
+  ((int (*)())fpVariantCacheGrow)(param_1,0);
   ((unsigned char *)0x00001120)[param_1] = 0;
   return 0;
 }

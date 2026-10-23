@@ -348,10 +348,10 @@
 8fb70	FUN_0008fb70	r6	PASS-indirect	8fba0 bl 0x86840
 8fb70	FUN_0008fb70	r7	PASS-indirect	8fba0 bl 0x86840
 8fb70	FUN_0008fb70	r8	PASS-indirect	8fba0 bl 0x86840
-9c700	FUN_0009c700	r5	PASS-indirect	9c740 bl 0x9a990
-9c700	FUN_0009c700	r6	PASS-indirect	9c740 bl 0x9a990
-9c700	FUN_0009c700	r7	PASS-indirect	9c740 bl 0x9a990
-9c700	FUN_0009c700	r8	PASS-indirect	9c740 bl 0x9a990
+9c700	fpVariantCacheFlush	r5	PASS-indirect	9c740 bl 0x9a990
+9c700	fpVariantCacheFlush	r6	PASS-indirect	9c740 bl 0x9a990
+9c700	fpVariantCacheFlush	r7	PASS-indirect	9c740 bl 0x9a990
+9c700	fpVariantCacheFlush	r8	PASS-indirect	9c740 bl 0x9a990
 a0380	glBindProgramARB_impl	r10	PASS-no	a03c8 bl 0xa0290
 a0d70	glDeleteProgramsARB_impl	r6	PASS-no	a0dac bl 0xa0290
 a0d70	glDeleteProgramsARB_impl	r7	PASS-no	a0dac bl 0xa0290

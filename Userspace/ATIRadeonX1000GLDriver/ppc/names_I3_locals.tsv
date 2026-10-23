@@ -310,3 +310,47 @@ local	arbProgramTableRelease	param_1	ctx	INFERRED	context: program table at +0x1
 local	arbProgramTableRelease	iVar4	programTable	INFERRED	ctx+0x112c
 local	arbProgramTableRelease	iVar3	entryOffset	INFERRED	byte offset of the current 0x18-byte entry
 local	arbProgramTableRelease	iVar1	entry	INFERRED	address of the current entry
+local	copyIndices16Swapped_prefetch	puVar3	dstEnd	INFERRED	dst + (count & ~1) * 2: end of the bulk destination range
+local	copyIndices16Swapped_prefetch	auVar7	alignPermute	INFERRED	permute control vector loaded once from the table at PTR_DAT_001e88cc for the source misalignment
+local	copyIndices16Swapped_prefetch_entry	puVar3	dstEnd	INFERRED	dst + (count & ~1) * 2: end of the bulk destination range
+local	copyIndices16Swapped_prefetch_entry	auVar7	alignPermute	INFERRED	permute control vector loaded once from the table at PTR_DAT_001e88cc for the source misalignment
+local	copyIndices16Swapped_dcbz	puVar7	dstEnd	INFERRED	dst + (count & ~1) * 2: end of the bulk destination range
+local	copyIndices16Swapped_dcbz	puVar4	dstCursor	INFERRED	aligned destination write cursor
+local	copyIndices16Swapped_dcbz	puVar6	srcCursor	INFERRED	source read cursor, advanced in step with dstCursor
+local	copyIndices16Swapped_dcbz	auVar11	alignPermute	INFERRED	permute control vector for the source misalignment
+local	copyIndices16Swapped_dcbz_entry	puVar7	dstEnd	INFERRED	dst + (count & ~1) * 2: end of the bulk destination range
+local	copyIndices16Swapped_dcbz_entry	puVar4	dstCursor	INFERRED	aligned destination write cursor
+local	copyIndices16Swapped_dcbz_entry	puVar6	srcCursor	INFERRED	source read cursor, advanced in step with dstCursor
+local	copyIndices16Swapped_dcbz_entry	auVar11	alignPermute	INFERRED	permute control vector for the source misalignment
+local	chunkArenaAlloc	param_1	arena	CONFIRMED	allocator callback at [0], chunk count [0x102], current chunk [0x103], chunks [0x104]/[0x105] bytes left
+local	chunkArenaAlloc	param_2	size	CONFIRMED	bytes requested
+local	depListRemove	param_1	listHead	CONFIRMED	address of the list head pointer
+local	depListRemove	param_2	node	CONFIRMED	node to unlink (next pointer at +0x10)
+local	recordCountSourceRegisterFiles	param_1	ctx	INFERRED	context (program flag bits at *(ctx+0x34))
+local	recordCountSourceRegisterFiles	param_2	outCounts	INFERRED	four per-file counters
+local	recordCountSourceRegisterFiles	param_3	record	INFERRED	the record whose sources are examined
+local	regBindingSet	param_1	ctx	INFERRED	context holding the binding tables
+local	regBindingSet	param_2	valueId	INFERRED	value to bind
+local	regBindingSet	param_3	reg	INFERRED	register number
+local	regBindingSet	param_4	componentMask	INFERRED	components to bind
+local	regBindingSet	param_5	strict	INFERRED	nonzero: report a conflict
+local	regBindingClear	param_1	ctx	INFERRED	context holding the binding tables
+local	regBindingClear	param_2	reg	INFERRED	register number
+local	regBindingClear	param_3	compIndex	INFERRED	component 0..3
+local	recordFindFreeTempRegister	param_1	ctx	INFERRED	context
+local	recordFindFreeTempRegister	param_2	program	INFERRED	record array
+local	recordFindFreeTempRegister	param_3	usedValueMask	INFERRED	mask passed through to recordRegisterIsAssignable
+local	recordFindFreeTempRegister	param_4	recordIndex	INFERRED	record being placed
+local	recordFindFreeTempRegister	param_5	componentMask	INFERRED	destination components
+local	recordRegisterIsAssignable	param_1	ctx	INFERRED	context holding the binding tables
+local	recordRegisterIsAssignable	param_2	program	INFERRED	record array
+local	recordRegisterIsAssignable	param_3	reg	INFERRED	register id (file * 0x100 + index)
+local	recordRegisterIsAssignable	param_4	usedValueMask	INFERRED	mask of values in use
+local	recordRegisterIsAssignable	param_5	recordIndex	INFERRED	record being placed
+local	recordRegisterIsAssignable	param_6	componentMask	INFERRED	destination components
+local	recordAssignDestinationRegister	param_1	ctx	INFERRED	context
+local	recordAssignDestinationRegister	param_2	program	INFERRED	record array
+local	recordAssignDestinationRegister	param_3	recordIndex	INFERRED	record whose destination is assigned
+local	recordAssignDestinationRegister	param_4	keepFlag	INFERRED	out: 1 when the register changed
+local	recordAssignDestinationRegister	param_5	chosenReg	INFERRED	out: chosen register id
+local	gldFreeEngineState	param_1	ctx	INFERRED	context; the engine state lives at ctx+0x240

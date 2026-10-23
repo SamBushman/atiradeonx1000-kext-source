@@ -79,6 +79,20 @@ by the fixed-function vertex program generator.
 
 ## Left
 
-See the report: remaining unclassified functions, mostly the fixed-function vertex program register allocator (0x77500-0x7b0d0), the fragment
-program assembler pieces (0xa6500-0xaec40: FUN_000ac720 7.9 KB, FUN_000aec40 3.9 KB), the state validators 0x4c000-0x52300, and the 0x9be00 /
-0xbd9a0 / 0xbe460 state upload family.
+Of the 420 original targets, 254 are named (268 `func` rows: some rows name neighbours outside the 420) and 166 (about 75 KB) are not. What is
+left, by area (all have a subsystem label in `subsystem_map.tsv` unless listed under "no label"):
+
+* record-program optimizer / register allocator, 0x77500-0x7b0d0 (`vertex-program-regalloc`): FUN_0007b0d0 (5.6 KB, the optimizer driver:
+  rewrites record opcodes 4 -> 0x80 and 0xb -> 0x81, walks the dependency lists), FUN_00078f80, FUN_0007a4a0, FUN_0007aae0, FUN_0007a1a0,
+  FUN_00077860, FUN_00078b80; the helpers it uses are named (`recordGet*`, `depList*`, `regBinding*`, `record*Register*`).
+* fragment program assembler, 0xa6500-0xaec40 (`fragment-program-assembler`): FUN_000ac720 (7.9 KB) and FUN_000aec40 (3.9 KB) pack IL
+  instructions into hardware words (called by FUN_000afe40 per IL opcode group), FUN_000abd10, FUN_000a9070, FUN_000a8340, FUN_000a8a00.
+* state upload family (`command-ring` / `gl-state-and-hooks`): FUN_0009be00 / FUN_0009cc30 (dirty bit 0x20 of gldValidateState, through
+  FUN_000bd9a0), FUN_00027990, FUN_0002d2b0 (float clamp + half-float state words), FUN_00022eb0, FUN_00023700 and the per-unit texture state
+  helpers 0x4b520-0x4c720.
+* compiler support 0xbde70-0xbfcc0 (`compiler`): checks a magic word (0xABADF00D complement) in its argument, i.e. compiler IR objects.
+* no label: FUN_00007810, FUN_00018090, FUN_0001a010, FUN_0004b520, FUN_0004c720, FUN_0004fd80, FUN_000a64d0.
+
+Local variables: most large functions reuse scratch variables for several roles (evsAssignVertexInputs alone has 1100 placeholders in about
+25 variables with 5 to 60 distinct definitions each), so naming them needs `use` rows per segment; only single-role variables and parameters
+were named (names_I3_locals.tsv).

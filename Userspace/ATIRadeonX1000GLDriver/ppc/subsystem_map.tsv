@@ -234,19 +234,19 @@ address	name	size	subsystem	basis
 0x22eb0	FUN_00022eb0	536	kernel-interface	I3: neighbours (call graph majority, I3)
 0x230d0	FUN_000230d0	1544	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0x236f0	returnSecondArgument	8	gld-api	I3: trivial helper (I3)
-0x23700	FUN_00023700	360	gl-state-and-hooks	I3: neighbours (call graph majority, I3)
+0x23700	gldEmitCurrentAttributeRegisters	360	command-ring	I3: current vertex attribute register packets (0x8c8..)
 0x23870	FUN_00023870	420	gl-state-and-hooks	neighbours (round 1)
-0x243f0	FUN_000243f0	112	gl-state-and-hooks	I3: neighbours (call graph majority, I3)
-0x24470	FUN_00024470	112	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
-0x244f0	FUN_000244f0	112	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
-0x24570	FUN_00024570	112	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
-0x245f0	FUN_000245f0	108	gl-state-and-hooks	I3: neighbours (call graph majority, I3)
-0x24670	FUN_00024670	108	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
-0x246f0	FUN_000246f0	104	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
-0x24770	FUN_00024770	108	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
-0x247f0	FUN_000247f0	104	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
-0x24870	FUN_00024870	112	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
-0x248f0	FUN_000248f0	112	gld-api	I3: array-pointer style entry wrapper (I3): FUN_0002cc30(ctx,0,kind,...) then FUN_00023a24/FUN_00024190(ctx+0x240, slot, ...)
+0x243f0	gldPrimWrapperTriangleFan_23a24	112	command-ring	I3: draw wrapper per GL primitive mode: FUN_0002cc30 + FUN_00023a24/FUN_00024190 with the hardware primitive type
+0x24470	gldPrimWrapperQuads_23a24	112	command-ring	I3: draw wrapper per GL primitive mode: FUN_0002cc30 + FUN_00023a24/FUN_00024190 with the hardware primitive type
+0x244f0	gldPrimWrapperQuadStrip_23a24	112	command-ring	I3: draw wrapper per GL primitive mode: FUN_0002cc30 + FUN_00023a24/FUN_00024190 with the hardware primitive type
+0x24570	gldPrimWrapperPolygon_23a24	112	command-ring	I3: draw wrapper per GL primitive mode: FUN_0002cc30 + FUN_00023a24/FUN_00024190 with the hardware primitive type
+0x245f0	gldPrimWrapperPolygon_24190	108	command-ring	I3: draw wrapper per GL primitive mode: FUN_0002cc30 + FUN_00023a24/FUN_00024190 with the hardware primitive type
+0x24670	gldPrimWrapperPoints_23a24	108	command-ring	I3: draw wrapper per GL primitive mode: FUN_0002cc30 + FUN_00023a24/FUN_00024190 with the hardware primitive type
+0x246f0	gldPrimWrapperPoints_24190	104	command-ring	I3: draw wrapper per GL primitive mode: FUN_0002cc30 + FUN_00023a24/FUN_00024190 with the hardware primitive type
+0x24770	gldPrimWrapperLines_23a24	108	command-ring	I3: draw wrapper per GL primitive mode: FUN_0002cc30 + FUN_00023a24/FUN_00024190 with the hardware primitive type
+0x247f0	gldPrimWrapperLines_24190	104	command-ring	I3: draw wrapper per GL primitive mode: FUN_0002cc30 + FUN_00023a24/FUN_00024190 with the hardware primitive type
+0x24870	gldPrimWrapperLineLoop_23a24	112	command-ring	I3: draw wrapper per GL primitive mode: FUN_0002cc30 + FUN_00023a24/FUN_00024190 with the hardware primitive type
+0x248f0	gldPrimWrapperLineStrip_23a24	112	command-ring	I3: draw wrapper per GL primitive mode: FUN_0002cc30 + FUN_00023a24/FUN_00024190 with the hardware primitive type
 0x24970	FUN_00024970	1588	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0x24fb0	FUN_00024fb0	16	gld-api	neighbours (round 1)
 0x24fc0	noop_24fc0	4	trivial	name
@@ -306,7 +306,7 @@ address	name	size	subsystem	basis
 0x303d0	gldCompressedImageBytes	68	texture-compression	I3: S3TC/DXT block codec helpers
 0x30420	FUN_00030420	392	pixel-conversion	I3: neighbours (call graph majority, I3)
 0x305b0	FUN_000305b0	492	pixel-conversion	I3: neighbours (call graph majority, I3)
-0x307a0	FUN_000307a0	148	unclassified	
+0x307a0	FUN_000307a0	148	command-ring	I3: emits a 0x16000000 marker packet into the ring (I3)
 0x30840	FUN_00030840	124	command-ring	neighbours (round 1)
 0x308c0	FUN_000308c0	192	command-ring	neighbours (round 1)
 0x30990	floorLog2	40	gld-api	I3: pixel transfer size / cache helper (I3)
@@ -399,7 +399,7 @@ address	name	size	subsystem	basis
 0x48da0	FUN_00048da0	6552	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0x4a7d0	floatToFp24	80	math	I3: float format conversion (bit manipulation of GH_F2U)
 0x4a830	fp24ToFloat	40	math	I3: float format conversion (bit manipulation of GH_F2U)
-0x4a860	FUN_0004a860	112	unclassified	
+0x4a860	FUN_0004a860	112	gl-state-and-hooks	I3: calls the state hook at ctx+0x294c (I3)
 0x4a8f0	FUN_0004a8f0	140	command-ring	neighbours (round 2)
 0x4a990	FUN_0004a990	100	command-ring	I3: neighbours (call graph majority, I3)
 0x4aa00	FUN_0004aa00	136	command-ring	neighbours (round 5)
@@ -414,7 +414,7 @@ address	name	size	subsystem	basis
 0x4b7d0	FUN_0004b7d0	392	command-ring	I3: neighbours (call graph majority, I3)
 0x4b980	FUN_0004b980	616	command-ring	I3: neighbours (call graph majority, I3)
 0x4bbf0	FUN_0004bbf0	1244	command-ring	neighbours (round 2)
-0x4c100	FUN_0004c100	336	unclassified	
+0x4c100	FUN_0004c100	336	gl-state-and-hooks	I3: copies the per-unit state into the context register block (I3)
 0x4c260	FUN_0004c260	732	command-ring	I3: neighbours (call graph majority, I3)
 0x4c540	noop_4c540	4	trivial	name
 0x4c560	FUN_0004c560	440	command-ring	I3: neighbours (call graph majority, I3)
@@ -429,7 +429,7 @@ address	name	size	subsystem	basis
 0x4dc30	FUN_0004dc30	220	command-ring	neighbours (round 2)
 0x4dd10	FUN_0004dd10	40	command-ring	neighbours (round 1)
 0x4dd40	FUN_0004dd40	116	command-ring	I3: neighbours (call graph majority, I3)
-0x4ddc0	FUN_0004ddc0	104	unclassified	
+0x4ddc0	FUN_0004ddc0	104	command-ring	I3: emits register packet 0x1040 through the ring allocator ctx+0x2758 (I3)
 0x4de30	FUN_0004de30	180	command-ring	I3: neighbours (call graph majority, I3)
 0x4def0	FUN_0004def0	2428	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0x4e880	FUN_0004e880	252	command-ring	I3: neighbours (call graph majority, I3)
@@ -469,7 +469,7 @@ address	name	size	subsystem	basis
 0x53610	FUN_00053610	136	ext-vertex-shader	I3: glShaderOp*/glSwizzle style wrappers (extvsAppendInstruction)
 0x536a0	FUN_000536a0	144	ext-vertex-shader	I3: glShaderOp*/glSwizzle style wrappers (extvsAppendInstruction)
 0x53730	FUN_00053730	132	ext-vertex-shader	I3: glShaderOp*/glSwizzle style wrappers (extvsAppendInstruction)
-0x537c0	FUN_000537c0	276	ext-vertex-shader	I3: glShaderOp*/glSwizzle style wrappers (extvsAppendInstruction)
+0x537c0	glSwizzleEXT_impl	276	ext-vertex-shader	I3: GL_EXT_vertex_shader entry point
 0x538e0	FUN_000538e0	164	kernel-interface	neighbours (round 8)
 0x53990	FUN_00053990	244	kernel-interface	neighbours (round 8)
 0x53a90	FUN_00053a90	100	ext-vertex-shader	I3: EXT vertex shader module (0x538e0-0x62af0)
@@ -567,7 +567,7 @@ address	name	size	subsystem	basis
 0x62a60	noop_62a60	4	trivial	name
 0x62a70	extvsStateCacheInsert	116	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
 0x62af0	extvsBuildStreamDescriptors	5624	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
-0x640f0	FUN_000640f0	220	vertex-program-emit	I3: emitter/hook family installed by FUN_000a7050
+0x640f0	gldCurrentAttributePacketHeader	220	command-ring	I3: current vertex attribute register packets (0x8c8..)
 0x64230	FUN_00064230	1256	vertex-program-emit	I3: emitter/hook family installed by FUN_000a7050
 0x64720	FUN_00064720	304	gl-state-and-hooks	neighbours (round 2)
 0x64850	FUN_00064850	436	vertex-program-emit	I3: emitter/hook family installed by FUN_000a7050
@@ -664,40 +664,40 @@ address	name	size	subsystem	basis
 0x77430	vpStateSetConstantVector	132	ext-vertex-shader	I3: GL_EXT_vertex_shader implementation (EXT enumerants 0x8782..0x87e1)
 0x774c0	FUN_000774c0	156	kernel-interface	neighbours (round 3)
 0x77560	FUN_00077560	228	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
-0x77650	FUN_00077650	76	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x77650	depListRemove	76	vertex-program-regalloc	I3: record-program optimizer/register allocator (notes_gld_functions_e.md section 5)
 0x776b0	FUN_000776b0	176	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x77760	FUN_00077760	72	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x777b0	FUN_000777b0	56	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x77800	FUN_00077800	64	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x77850	recordGetWriteMask	12	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
 0x77860	FUN_00077860	792	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
-0x77ba0	FUN_00077ba0	140	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x77ba0	regBindingSet	140	vertex-program-regalloc	I3: record-program optimizer/register allocator (notes_gld_functions_e.md section 5)
 0x77c40	FUN_00077c40	124	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x77cd0	FUN_00077cd0	24	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x77cf0	FUN_00077cf0	20	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x77d10	FUN_00077d10	120	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
-0x77d90	FUN_00077d90	1176	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
-0x78250	FUN_00078250	132	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x77d90	recordRegisterIsAssignable	1176	vertex-program-regalloc	I3: record-program optimizer/register allocator (notes_gld_functions_e.md section 5)
+0x78250	recordFindFreeTempRegister	132	vertex-program-regalloc	I3: record-program optimizer/register allocator (notes_gld_functions_e.md section 5)
 0x782e0	FUN_000782e0	20	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
-0x78300	FUN_00078300	200	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78300	recordOpcodeSourceMask	200	vertex-program-regalloc	I3: record-program optimizer/register allocator (notes_gld_functions_e.md section 5)
 0x78700	FUN_00078700	84	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
-0x78760	FUN_00078760	448	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78760	recordAssignDestinationRegister	448	vertex-program-regalloc	I3: record-program optimizer/register allocator (notes_gld_functions_e.md section 5)
 0x78950	FUN_00078950	64	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x78990	FUN_00078990	56	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x789d0	FUN_000789d0	56	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
-0x78a10	FUN_00078a10	356	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78a10	recordCountSourceRegisterFiles	356	vertex-program-regalloc	I3: record-program optimizer/register allocator (notes_gld_functions_e.md section 5)
 0x78b80	FUN_00078b80	560	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
-0x78db0	FUN_00078db0	68	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
-0x78e00	FUN_00078e00	228	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x78db0	regBindingClear	68	vertex-program-regalloc	I3: record-program optimizer/register allocator (notes_gld_functions_e.md section 5)
+0x78e00	chunkArenaAlloc	228	vertex-program-regalloc	I3: record-program optimizer/register allocator (notes_gld_functions_e.md section 5)
 0x78ef0	FUN_00078ef0	24	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x78f10	recordGetWriteEnable	92	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
 0x78f80	FUN_00078f80	2340	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x798f0	recordSetWriteMask	28	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
-0x79910	FUN_00079910	248	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x79910	depListAddEdge	248	vertex-program-regalloc	I3: record-program optimizer/register allocator (notes_gld_functions_e.md section 5)
 0x79a20	recordGetSourceSelect	92	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
 0x79a90	recordSetSourceSelect	100	vertex-program-emit	I3: program assembler emitter (IL token or 0x10-byte record), arb_scope.txt
 0x79b00	FUN_00079b00	200	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
-0x79bd0	FUN_00079bd0	532	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
+0x79bd0	recordLinkSourceToDefinition	532	vertex-program-regalloc	I3: record-program optimizer/register allocator (notes_gld_functions_e.md section 5)
 0x79e10	FUN_00079e10	88	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x79e70	FUN_00079e70	488	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x7a060	FUN_0007a060	16	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
@@ -709,15 +709,15 @@ address	name	size	subsystem	basis
 0x7b0d0	FUN_0007b0d0	5660	vertex-program-regalloc	I3: record-program register allocation / dependency lists over the per-unit tables at +0x450/+0x2a87c/+0x3348c (I3: shares the record accessors recordGet*/recordSet*)
 0x7c760	FUN_0007c760	4940	kernel-interface	neighbours (round 4)
 0x7dcd0	FUN_0007dcd0	88	command-ring	neighbours (round 6)
-0x7dd30	FUN_0007dd30	160	unclassified	
+0x7dd30	FUN_0007dd30	160	ext-vertex-shader	I3: removes a node from the pending list at ctx+0x11b4+8 (I3)
 0x7dde0	FUN_0007dde0	3504	kernel-interface	neighbours (round 11)
 0x82900	FUN_00082900	812	command-ring	neighbours (round 5)
-0x82c50	FUN_00082c50	760	unclassified	
+0x82c50	FUN_00082c50	760	command-ring	I3: emits packets 0x8a1 and the program upload via FUN_0009f0b0 (I3)
 0x82f60	interpolatorMapInit	416	ext-vertex-shader	I3: vertex output -> interpolator map
 0x83100	noop_83100	4	trivial	name
 0x83110	FUN_00083110	856	command-ring	neighbours (round 3)
 0x83470	FUN_00083470	828	kernel-interface	neighbours (round 3)
-0x837b0	FUN_000837b0	188	unclassified	
+0x837b0	FUN_000837b0	188	command-ring	I3: emits register packet 0x861 and calls FUN_0004e880 (I3)
 0x83870	FUN_00083870	1012	kernel-interface	neighbours (round 2)
 0x83c80	FUN_00083c80	12	kernel-interface	I3: neighbours (call graph majority, I3)
 0x83c90	FUN_00083c90	372	command-ring	neighbours (round 1)
@@ -754,8 +754,8 @@ address	name	size	subsystem	basis
 0x879f0	FUN_000879f0	732	command-ring	neighbours (round 2)
 0x87cd0	FUN_00087cd0	188	command-ring	neighbours (round 2)
 0x87da0	FUN_00087da0	172	command-ring	neighbours (round 2)
-0x87e60	FUN_00087e60	8	unclassified	
-0x87e70	FUN_00087e70	8	unclassified	
+0x87e60	FUN_00087e60	8	gld-api	I3: returns a constant pointer (I3)
+0x87e70	FUN_00087e70	8	gld-api	I3: returns a constant pointer (I3)
 0x87e80	FUN_00087e80	764	command-ring	neighbours (round 2)
 0x88190	FUN_00088190	740	command-ring	neighbours (round 4)
 0x88480	arbfpLookupKeyword	268	arb-fragment-program	I3: ARB fragment program state (arbfp* family)
@@ -855,7 +855,7 @@ address	name	size	subsystem	basis
 0x99e50	FUN_00099e50	1796	kernel-interface	neighbours (round 7)
 0x9a590	FUN_0009a590	848	kernel-interface	neighbours (round 7)
 0x9a910	FUN_0009a910	120	kernel-interface	neighbours (round 4)
-0x9a990	FUN_0009a990	104	arb-fragment-program	I3: fragment program variant cache / draw-time program selection (I3: callers are arbfp* and gldValidateState)
+0x9a990	fpVariantProgramFree	104	arb-fragment-program	I3: fragment program variant cache (hash of an 11-word key)
 0x9aa00	FUN_0009aa00	1232	kernel-interface	neighbours (round 7)
 0x9af00	FUN_0009af00	172	arb-fragment-program	I3: fragment program variant cache / draw-time program selection (I3: callers are arbfp* and gldValidateState)
 0x9afc0	FUN_0009afc0	1084	kernel-interface	neighbours (round 7)
@@ -867,7 +867,7 @@ address	name	size	subsystem	basis
 0x9bd00	FUN_0009bd00	96	kernel-interface	neighbours (round 2)
 0x9bd60	FUN_0009bd60	160	gl-state-and-hooks	neighbours (round 2)
 0x9be00	FUN_0009be00	2216	arb-fragment-program	I3: fragment program variant cache / draw-time program selection (I3: callers are arbfp* and gldValidateState)
-0x9c700	FUN_0009c700	248	arb-fragment-program	I3: fragment program variant cache / draw-time program selection (I3: callers are arbfp* and gldValidateState)
+0x9c700	fpVariantCacheFlush	248	arb-fragment-program	I3: fragment program variant cache (hash of an 11-word key)
 0x9c800	FUN_0009c800	744	kernel-interface	neighbours (round 2)
 0x9cb10	FUN_0009cb10	280	kernel-interface	neighbours (round 3)
 0x9cc30	FUN_0009cc30	712	arb-fragment-program	I3: fragment program variant cache / draw-time program selection (I3: callers are arbfp* and gldValidateState)
@@ -877,7 +877,7 @@ address	name	size	subsystem	basis
 0x9d2e0	FUN_0009d2e0	184	command-ring	neighbours (round 3)
 0x9d3b0	FUN_0009d3b0	64	command-ring	neighbours (round 1)
 0x9d410	FUN_0009d410	5944	kernel-interface	neighbours (round 2)
-0x9eb90	FUN_0009eb90	560	arb-fragment-program	I3: fragment program variant cache / draw-time program selection (I3: callers are arbfp* and gldValidateState)
+0x9eb90	fpVariantCacheGrow	560	arb-fragment-program	I3: fragment program variant cache (hash of an 11-word key)
 0x9edd0	FUN_0009edd0	708	kernel-interface	neighbours (round 2)
 0x9f0b0	FUN_0009f0b0	4444	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0xa0290	arbProgramFindIndex	96	arb-program-api	I3: ARB_vertex/fragment_program object API (targets 0x8620/0x8804)
@@ -937,7 +937,7 @@ address	name	size	subsystem	basis
 0xa4490	FUN_000a4490	184	command-ring	neighbours (round 2)
 0xa4550	FUN_000a4550	372	command-ring	neighbours (round 4)
 0xa46d0	FUN_000a46d0	144	command-ring	neighbours (round 2)
-0xa4760	FUN_000a4760	8	unclassified	
+0xa4760	FUN_000a4760	8	gld-api	I3: getter of ctx+0x29ac (I3)
 0xa4770	FUN_000a4770	504	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
 0xa4980	FUN_000a4980	4768	gld-api	neighbours (round 2)
 0xa5c40	FUN_000a5c40	624	command-ring	ring cursor fields (+0x1d8/+0x1dc/+0x1e0) and 0xNN000000 packet header
@@ -951,9 +951,9 @@ address	name	size	subsystem	basis
 0xa6f80	noop_a6f80	4	trivial	name
 0xa6f90	FUN_000a6f90	168	math	calls libm
 0xa7050	FUN_000a7050	2324	gl-state-and-hooks	neighbours (round 1)
-0xa7970	FUN_000a7970	240	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
+0xa7970	gldFreeEngineState	240	gl-state-and-hooks	I3: engine state setup/teardown
 0xa7a60	FUN_000a7a60	496	gld-api	neighbours (round 2)
-0xa7c60	FUN_000a7c60	176	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
+0xa7c60	gldMarkAllStateDirty	176	gl-state-and-hooks	I3: engine state setup/teardown
 0xa7d10	FUN_000a7d10	344	kernel-interface	neighbours (round 1)
 0xa7e80	FUN_000a7e80	24	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40
 0xa7ea0	FUN_000a7ea0	48	fragment-program-assembler	I3: fragment program IL assembler pieces called by FUN_000afe40

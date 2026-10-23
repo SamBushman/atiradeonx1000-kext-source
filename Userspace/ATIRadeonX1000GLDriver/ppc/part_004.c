@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_000243f0 @ 0x243f0 (112 bytes) */
-void FUN_000243f0(int param_1,undefined4 param_2,int param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+/* gldPrimWrapperTriangleFan_23a24 @ 0x243f0 (112 bytes) */
+void gldPrimWrapperTriangleFan_23a24(int param_1,undefined4 param_2,int param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   uint uVar1;
   undefined4 in_r9;
@@ -13,8 +13,8 @@ void FUN_000243f0(int param_1,undefined4 param_2,int param_3,undefined4 param_4,
   return;
 }
 
-/* FUN_00024470 @ 0x24470 (112 bytes) */
-void FUN_00024470(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+/* gldPrimWrapperQuads_23a24 @ 0x24470 (112 bytes) */
+void gldPrimWrapperQuads_23a24(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   uint uVar1;
   undefined4 in_r9;
@@ -26,8 +26,8 @@ void FUN_00024470(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
   return;
 }
 
-/* FUN_000244f0 @ 0x244f0 (112 bytes) */
-void FUN_000244f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+/* gldPrimWrapperQuadStrip_23a24 @ 0x244f0 (112 bytes) */
+void gldPrimWrapperQuadStrip_23a24(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   uint uVar1;
   undefined4 in_r9;
@@ -39,8 +39,8 @@ void FUN_000244f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
   return;
 }
 
-/* FUN_00024570 @ 0x24570 (112 bytes) */
-void FUN_00024570(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+/* gldPrimWrapperPolygon_23a24 @ 0x24570 (112 bytes) */
+void gldPrimWrapperPolygon_23a24(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   uint uVar1;
   undefined4 in_r9;
@@ -52,8 +52,8 @@ void FUN_00024570(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
   return;
 }
 
-/* FUN_000245f0 @ 0x245f0 (108 bytes) */
-void FUN_000245f0(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+/* gldPrimWrapperPolygon_24190 @ 0x245f0 (108 bytes) */
+void gldPrimWrapperPolygon_24190(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   uint uVar1;
   undefined4 in_r9;
@@ -65,8 +65,8 @@ void FUN_000245f0(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 
   return;
 }
 
-/* FUN_00024670 @ 0x24670 (108 bytes) */
-void FUN_00024670(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+/* gldPrimWrapperPoints_23a24 @ 0x24670 (108 bytes) */
+void gldPrimWrapperPoints_23a24(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   uint uVar1;
   undefined4 in_r9;
@@ -78,8 +78,8 @@ void FUN_00024670(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
   return;
 }
 
-/* FUN_000246f0 @ 0x246f0 (104 bytes) */
-void FUN_000246f0(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+/* gldPrimWrapperPoints_24190 @ 0x246f0 (104 bytes) */
+void gldPrimWrapperPoints_24190(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   uint uVar1;
   undefined4 in_r9;
@@ -91,8 +91,8 @@ void FUN_000246f0(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 
   return;
 }
 
-/* FUN_00024770 @ 0x24770 (108 bytes) */
-void FUN_00024770(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+/* gldPrimWrapperLines_23a24 @ 0x24770 (108 bytes) */
+void gldPrimWrapperLines_23a24(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   uint uVar1;
   undefined4 in_r9;
@@ -104,8 +104,8 @@ void FUN_00024770(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
   return;
 }
 
-/* FUN_000247f0 @ 0x247f0 (104 bytes) */
-void FUN_000247f0(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+/* gldPrimWrapperLines_24190 @ 0x247f0 (104 bytes) */
+void gldPrimWrapperLines_24190(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   uint uVar1;
   undefined4 in_r9;
@@ -117,8 +117,8 @@ void FUN_000247f0(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 
   return;
 }
 
-/* FUN_00024870 @ 0x24870 (112 bytes) */
-void FUN_00024870(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+/* gldPrimWrapperLineLoop_23a24 @ 0x24870 (112 bytes) */
+void gldPrimWrapperLineLoop_23a24(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   uint uVar1;
   undefined4 in_r9;
@@ -130,8 +130,8 @@ void FUN_00024870(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
   return;
 }
 
-/* FUN_000248f0 @ 0x248f0 (112 bytes) */
-void FUN_000248f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
+/* gldPrimWrapperLineStrip_23a24 @ 0x248f0 (112 bytes) */
+void gldPrimWrapperLineStrip_23a24(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   uint uVar1;
   undefined4 in_r9;
@@ -6109,7 +6109,7 @@ int gldContextFreeResources(ctx)
   }
   thunk_FUN_00054a90(ctx + GLD_commandStream);
   thunk_FUN_000a2330(ctx + GLD_commandStream);
-  FUN_000a7970(ctx);
+  gldFreeEngineState(ctx);
   if (*(int *)(((unsigned char *)GLD_readScratchBuffer) + ctx) != 0) {
     _vfree(*(int *)(((unsigned char *)GLD_readScratchBuffer) + ctx));
   }
@@ -6719,27 +6719,27 @@ LAB_0002dcb4:
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_000243f0");
-asm(".set FUN_000243f0, _FUN_000243f0");
+asm(".set FUN_000243f0, _gldPrimWrapperTriangleFan_23a24");
 asm(".globl FUN_00024470");
-asm(".set FUN_00024470, _FUN_00024470");
+asm(".set FUN_00024470, _gldPrimWrapperQuads_23a24");
 asm(".globl FUN_000244f0");
-asm(".set FUN_000244f0, _FUN_000244f0");
+asm(".set FUN_000244f0, _gldPrimWrapperQuadStrip_23a24");
 asm(".globl FUN_00024570");
-asm(".set FUN_00024570, _FUN_00024570");
+asm(".set FUN_00024570, _gldPrimWrapperPolygon_23a24");
 asm(".globl FUN_000245f0");
-asm(".set FUN_000245f0, _FUN_000245f0");
+asm(".set FUN_000245f0, _gldPrimWrapperPolygon_24190");
 asm(".globl FUN_00024670");
-asm(".set FUN_00024670, _FUN_00024670");
+asm(".set FUN_00024670, _gldPrimWrapperPoints_23a24");
 asm(".globl FUN_000246f0");
-asm(".set FUN_000246f0, _FUN_000246f0");
+asm(".set FUN_000246f0, _gldPrimWrapperPoints_24190");
 asm(".globl FUN_00024770");
-asm(".set FUN_00024770, _FUN_00024770");
+asm(".set FUN_00024770, _gldPrimWrapperLines_23a24");
 asm(".globl FUN_000247f0");
-asm(".set FUN_000247f0, _FUN_000247f0");
+asm(".set FUN_000247f0, _gldPrimWrapperLines_24190");
 asm(".globl FUN_00024870");
-asm(".set FUN_00024870, _FUN_00024870");
+asm(".set FUN_00024870, _gldPrimWrapperLineLoop_23a24");
 asm(".globl FUN_000248f0");
-asm(".set FUN_000248f0, _FUN_000248f0");
+asm(".set FUN_000248f0, _gldPrimWrapperLineStrip_23a24");
 asm(".globl FUN_00024970");
 asm(".set FUN_00024970, _FUN_00024970");
 asm(".globl FUN_00026bf0");

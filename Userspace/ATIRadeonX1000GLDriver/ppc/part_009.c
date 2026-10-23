@@ -4455,8 +4455,8 @@ int extvsBuildStreamDescriptors(ctx, shader)
   return;
 }
 
-/* FUN_000640f0 @ 0x640f0 (220 bytes) */
-int FUN_000640f0(param_1, param_2, param_3)
+/* gldCurrentAttributePacketHeader @ 0x640f0 (220 bytes) */
+int gldCurrentAttributePacketHeader(param_1, param_2, param_3)
   undefined4 param_1;
   undefined4 param_2;
   int param_3;
@@ -9749,7 +9749,7 @@ asm(".set FUN_00062940, _FUN_00062940");
 asm(".globl FUN_00062af0");
 asm(".set FUN_00062af0, _extvsBuildStreamDescriptors");
 asm(".globl FUN_000640f0");
-asm(".set FUN_000640f0, _FUN_000640f0");
+asm(".set FUN_000640f0, _gldCurrentAttributePacketHeader");
 asm(".globl FUN_00064230");
 asm(".set FUN_00064230, _FUN_00064230");
 asm(".globl FUN_00064850");

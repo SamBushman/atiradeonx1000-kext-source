@@ -3915,36 +3915,36 @@ int FUN_000a7050(param_1)
   return;
 }
 
-/* FUN_000a7970 @ 0xa7970 (240 bytes) */
-int FUN_000a7970(param_1)
-  int param_1;
+/* gldFreeEngineState @ 0xa7970 (240 bytes) */
+int gldFreeEngineState(ctx)
+  int ctx;
 {
   int iVar1;
   
-  iVar1 = param_1 + 0x240;
+  iVar1 = ctx + 0x240;
   ((int (*)())FUN_000a4490)(iVar1);
   ((int (*)())FUN_000a43f0)(iVar1);
   FUN_000b5fb0(iVar1);
   FUN_0004b710(iVar1);
-  FUN_0009c700(iVar1);
-  if (*(int *)(((unsigned char *)0x00001358) + param_1) != 0) {
-    (**(code **)(param_1 + 600))(*(int *)(((unsigned char *)0x00001358) + param_1));
-    *(undefined4 *)(((unsigned char *)0x00001358) + param_1) = 0;
+  fpVariantCacheFlush(iVar1);
+  if (*(int *)(((unsigned char *)0x00001358) + ctx) != 0) {
+    (**(code **)(ctx + 600))(*(int *)(((unsigned char *)0x00001358) + ctx));
+    *(undefined4 *)(((unsigned char *)0x00001358) + ctx) = 0;
   }
-  if (*(int *)(((unsigned char *)0x00001354) + param_1) != 0) {
-    (**(code **)(param_1 + 600))(*(int *)(((unsigned char *)0x00001354) + param_1));
-    *(undefined4 *)(((unsigned char *)0x00001354) + param_1) = 0;
+  if (*(int *)(((unsigned char *)0x00001354) + ctx) != 0) {
+    (**(code **)(ctx + 600))(*(int *)(((unsigned char *)0x00001354) + ctx));
+    *(undefined4 *)(((unsigned char *)0x00001354) + ctx) = 0;
   }
-  if (*(int *)(param_1 + 0x20bc) != 0) {
-    (**(code **)(param_1 + 600))(*(int *)(param_1 + 0x20bc));
-    *(undefined4 *)(param_1 + 0x20b8) = 0;
-    *(undefined4 *)(param_1 + 0x20bc) = 0;
-    *(undefined4 *)(0x000020b4 + param_1) = 0;
+  if (*(int *)(ctx + 0x20bc) != 0) {
+    (**(code **)(ctx + 600))(*(int *)(ctx + 0x20bc));
+    *(undefined4 *)(ctx + 0x20b8) = 0;
+    *(undefined4 *)(ctx + 0x20bc) = 0;
+    *(undefined4 *)(0x000020b4 + ctx) = 0;
   }
   arbProgramTableRelease(iVar1);
-  if (*(int *)(param_1 + 0x1aa4) != 0) {
-    (**(code **)(param_1 + 600))(*(int *)(param_1 + 0x1aa4));
-    *(undefined4 *)(param_1 + 0x1aa4) = 0;
+  if (*(int *)(ctx + 0x1aa4) != 0) {
+    (**(code **)(ctx + 600))(*(int *)(ctx + 0x1aa4));
+    *(undefined4 *)(ctx + 0x1aa4) = 0;
   }
   return;
 }
@@ -4025,8 +4025,8 @@ int FUN_000a7a60(param_1)
   return;
 }
 
-/* FUN_000a7c60 @ 0xa7c60 (176 bytes) */
-int FUN_000a7c60(param_1)
+/* gldMarkAllStateDirty @ 0xa7c60 (176 bytes) */
+int gldMarkAllStateDirty(param_1)
   int param_1;
 {
   int iVar1;
