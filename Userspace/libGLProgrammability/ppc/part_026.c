@@ -2055,110 +2055,116 @@ int _linear_search_fdes(ob, thisFde, pc)
 }
 
 /* _search_object @ 0x97c1d158 (624 bytes) */
-int _search_object(param_1, param_2)
-  uint *param_1;
-  uint param_2;
+int _search_object(ob, pc)
+  uint *ob;
+  uint pc;
 {
+  uint mixedMid;
+  uint mixedLo;
+  uint singleHi;
+  uint mixedVec;
+  uint unencodedLo;
+  uint hi;
   uint get_cie_encodingResult;
   int linear_search_fdesResult;
   undefined4 baseAddress;
-  uint uVar1;
-  uint uVar2;
+  uint objectBits;
+  uint singleLo;
   undefined4 read_encoded_value_with_baseResult;
   undefined4 read_encoded_value_with_baseResult2;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
-  int *piVar9;
-  int iVar10;
-  uint local_40;
-  int local_3c;
-  uint local_38;
-  int local_34 [3];
+  uint encoding;
+  uint singleVec;
+  uint unencodedMid;
+  uint singleMid;
+  int *arrayCursor;
+  int f;
+  uint mixedPcBegin;
+  int mixedPcRange;
+  uint singlePcBegin;
+  int singlePcRange [3];
   
-  uVar1 = param_1[4];
-  if (-1 < (int)uVar1) {
-    ((int (*)())_init_object)(param_1);
-    if (param_2 < *param_1) {
+  objectBits = ob[4];
+  if (-1 < (int)objectBits) {
+    ((int (*)())_init_object)(ob);
+    if (pc < *ob) {
       return 0;
     }
-    uVar1 = param_1[4];
+    objectBits = ob[4];
   }
-  if ((int)uVar1 < 0) {
-    if ((uVar1 & 0x20000000) == 0) {
-      uVar5 = uVar1 >> 0x15 & 0xff;
-      if (uVar5 == 0) {
-        uVar5 = 0;
-        uVar1 = *(uint *)(param_1[3] + 4);
-        if (uVar1 != 0) {
+  if ((int)objectBits < 0) {
+    if ((objectBits & 0x20000000) == 0) {
+      encoding = objectBits >> 0x15 & 0xff;
+      if (encoding == 0) {
+        unencodedLo = 0;
+        hi = *(uint *)(ob[3] + 4);
+        if (hi != 0) {
           do {
-            uVar7 = uVar5 + uVar1 >> 1;
-            iVar10 = *(int *)(uVar7 * 4 + param_1[3] + 8);
-            if ((*(uint *)(iVar10 + 8) <= param_2) &&
-               (uVar5 = uVar7 + 1, uVar7 = uVar1,
-               param_2 < *(uint *)(iVar10 + 8) + *(int *)(iVar10 + 0xc))) {
-              return iVar10;
+            unencodedMid = unencodedLo + hi >> 1;
+            f = *(int *)(unencodedMid * 4 + ob[3] + 8);
+            if ((*(uint *)(f + 8) <= pc) &&
+               (unencodedLo = unencodedMid + 1, unencodedMid = hi,
+               pc < *(uint *)(f + 8) + *(int *)(f + 0xc))) {
+              return f;
             }
-            uVar1 = uVar7;
-          } while (uVar5 < uVar7);
+            hi = unencodedMid;
+          } while (unencodedLo < unencodedMid);
         }
       }
       else {
-        uVar6 = param_1[3];
-        baseAddress = ((int (*)())_base_from_object)(uVar5,param_1);
-        uVar7 = *(uint *)(uVar6 + 4);
-        uVar2 = 0;
-        if (uVar7 != 0) {
+        singleVec = ob[3];
+        baseAddress = ((int (*)())_base_from_object)(encoding,ob);
+        singleHi = *(uint *)(singleVec + 4);
+        singleLo = 0;
+        if (singleHi != 0) {
           do {
-            uVar8 = uVar2 + uVar7 >> 1;
-            iVar10 = *(int *)(uVar8 * 4 + uVar6 + 8);
-            read_encoded_value_with_baseResult2 = ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar5,baseAddress,iVar10 + 8,&local_38);
-            ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar1 >> 0x15 & 0xf,0,read_encoded_value_with_baseResult2,local_34);
-            if ((local_38 <= param_2) &&
-               (uVar2 = uVar8 + 1, uVar8 = uVar7, param_2 < local_38 + local_34[0])) {
-              return iVar10;
+            singleMid = singleLo + singleHi >> 1;
+            f = *(int *)(singleMid * 4 + singleVec + 8);
+            read_encoded_value_with_baseResult2 = ((int (*)())_read_encoded_value_with_base_97c1c498)(encoding,baseAddress,f + 8,&singlePcBegin);
+            ((int (*)())_read_encoded_value_with_base_97c1c498)(objectBits >> 0x15 & 0xf,0,read_encoded_value_with_baseResult2,singlePcRange);
+            if ((singlePcBegin <= pc) &&
+               (singleLo = singleMid + 1, singleMid = singleHi, pc < singlePcBegin + singlePcRange[0])) {
+              return f;
             }
-            uVar7 = uVar8;
-          } while (uVar2 < uVar8);
+            singleHi = singleMid;
+          } while (singleLo < singleMid);
         }
       }
     }
     else {
-      uVar5 = param_1[3];
-      uVar7 = 0;
-      uVar1 = *(uint *)(uVar5 + 4);
-      if (uVar1 != 0) {
+      mixedVec = ob[3];
+      mixedLo = 0;
+      hi = *(uint *)(mixedVec + 4);
+      if (hi != 0) {
         do {
-          uVar6 = uVar7 + uVar1 >> 1;
-          iVar10 = *(int *)(uVar6 * 4 + uVar5 + 8);
-          get_cie_encodingResult = ((int (*)())_get_cie_encoding)((iVar10 - *(int *)(iVar10 + 4)) + 4);
-          baseAddress = ((int (*)())_base_from_object)(get_cie_encodingResult & 0xff,param_1);
-          read_encoded_value_with_baseResult = ((int (*)())_read_encoded_value_with_base_97c1c498)(get_cie_encodingResult & 0xff,baseAddress,iVar10 + 8,&local_40);
-          ((int (*)())_read_encoded_value_with_base_97c1c498)(get_cie_encodingResult & 0xf,0,read_encoded_value_with_baseResult,&local_3c);
-          if ((local_40 <= param_2) &&
-             (uVar7 = uVar6 + 1, uVar6 = uVar1, param_2 < local_40 + local_3c)) {
-            return iVar10;
+          mixedMid = mixedLo + hi >> 1;
+          f = *(int *)(mixedMid * 4 + mixedVec + 8);
+          get_cie_encodingResult = ((int (*)())_get_cie_encoding)((f - *(int *)(f + 4)) + 4);
+          baseAddress = ((int (*)())_base_from_object)(get_cie_encodingResult & 0xff,ob);
+          read_encoded_value_with_baseResult = ((int (*)())_read_encoded_value_with_base_97c1c498)(get_cie_encodingResult & 0xff,baseAddress,f + 8,&mixedPcBegin);
+          ((int (*)())_read_encoded_value_with_base_97c1c498)(get_cie_encodingResult & 0xf,0,read_encoded_value_with_baseResult,&mixedPcRange);
+          if ((mixedPcBegin <= pc) &&
+             (mixedLo = mixedMid + 1, mixedMid = hi, pc < mixedPcBegin + mixedPcRange)) {
+            return f;
           }
-          uVar1 = uVar6;
-        } while (uVar7 < uVar6);
+          hi = mixedMid;
+        } while (mixedLo < mixedMid);
       }
     }
   }
   else {
-    if ((uVar1 & 0x40000000) == 0) {
-      linear_search_fdesResult = ((int (*)())_linear_search_fdes)(param_1,param_1[3],param_2);
+    if ((objectBits & 0x40000000) == 0) {
+      linear_search_fdesResult = ((int (*)())_linear_search_fdes)(ob,ob[3],pc);
       return linear_search_fdesResult;
     }
-    piVar9 = (int *)param_1[3];
-    iVar10 = *piVar9;
-    while (iVar10 != 0) {
-      linear_search_fdesResult = ((int (*)())_linear_search_fdes)(param_1,iVar10,param_2);
+    arrayCursor = (int *)ob[3];
+    f = *arrayCursor;
+    while (f != 0) {
+      linear_search_fdesResult = ((int (*)())_linear_search_fdes)(ob,f,pc);
       if (linear_search_fdesResult != 0) {
         return linear_search_fdesResult;
       }
-      piVar9 = piVar9 + 1;
-      iVar10 = *piVar9;
+      arrayCursor = arrayCursor + 1;
+      f = *arrayCursor;
     }
   }
   return 0;
@@ -2430,97 +2436,98 @@ LAB_97c1d890:
 }
 
 /* _examine_objects @ 0x97c1d9ac (556 bytes) */
-int _examine_objects(param_1, param_2, param_3)
-  undefined4 param_1;
-  uint *param_2;
-  uint param_3;
+int _examine_objects(pc, bases, dontAlloc)
+  undefined4 pc;
+  uint *bases;
+  uint dontAlloc;
 {
+  uint encoding;
   undefined4 baseAddress;
-  uint *puVar1;
-  uint *puVar2;
-  int iVar3;
+  uint *curNextLink;
+  uint *cur;
+  int image;
   int getsectdatafromheaderResult;
-  undefined4 uVar5;
-  uint *puVar6;
-  uint *puVar7;
-  int iVar8;
-  uint uVar9;
-  uint local_60 [8];
-  int local_40 [7];
+  undefined4 destructor;
+  uint *prevLink;
+  uint *ob;
+  int ret;
+  uint realFde;
+  uint panicob [8];
+  int sectionSize [7];
   
-  iVar3 = __keymgr_get_and_lock_processwide_ptr(0x12d);
-  uVar5 = DAT_a7b7c088;
-  iVar8 = 0;
+  image = __keymgr_get_and_lock_processwide_ptr(0x12d);
+  destructor = DAT_a7b7c088;
+  ret = 0;
   do {
-    if (iVar3 == 0) {
+    if (image == 0) {
 LAB_97c1dbb0:
       __keymgr_unlock_processwide_ptr(0x12d);
-      return iVar8;
+      return ret;
     }
-    if ((*(uint *)(iVar3 + 0x14) & 1) == 0) {
-      getsectdatafromheaderResult = _getsectdatafromheader(*(undefined4 *)(iVar3 + 4),"__DATA","__eh_frame",local_40);
+    if ((*(uint *)(image + 0x14) & 1) == 0) {
+      getsectdatafromheaderResult = _getsectdatafromheader(*(undefined4 *)(image + 4),"__DATA","__eh_frame",sectionSize);
       if (getsectdatafromheaderResult == 0) {
-        getsectdatafromheaderResult = _getsectdatafromheader(*(undefined4 *)(iVar3 + 4),"__TEXT","__eh_frame",local_40);
+        getsectdatafromheaderResult = _getsectdatafromheader(*(undefined4 *)(image + 4),"__TEXT","__eh_frame",sectionSize);
         if (getsectdatafromheaderResult != 0) {
-          *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) | 4;
+          *(uint *)(image + 0x14) = *(uint *)(image + 0x14) | 4;
           goto LAB_97c1da58;
         }
       }
       else {
 LAB_97c1da58:
-        if (local_40[0] != 0) {
-          puVar7 = (uint *)0x0;
-          uVar9 = getsectdatafromheaderResult + *(int *)(iVar3 + 8);
-          if (param_3 == 0) {
-            puVar7 = (uint *)_calloc(1,0x1c);
+        if (sectionSize[0] != 0) {
+          ob = (uint *)0x0;
+          realFde = getsectdatafromheaderResult + *(int *)(image + 8);
+          if (dontAlloc == 0) {
+            ob = (uint *)_calloc(1,0x1c);
           }
-          param_3 = param_3 | puVar7 == (uint *)0x0;
-          if (param_3 != 0) {
-            puVar7 = local_60;
+          dontAlloc = dontAlloc | ob == (uint *)0x0;
+          if (dontAlloc != 0) {
+            ob = panicob;
           }
-          puVar7[3] = uVar9;
-          *puVar7 = 0xffffffff;
-          puVar7[4] = 0x1fe00000;
-          puVar7[1] = 0;
-          puVar7[2] = 0;
-          puVar7[5] = uVar9 + local_40[0];
-          *(uint *)(iVar3 + 0x18) = uVar9;
-          iVar8 = ((int (*)())_search_object)(puVar7,param_1);
-          if (param_3 == 0) {
-            *(undefined4 *)(iVar3 + 0xc) = uVar5;
-            puVar6 = (uint *)&_seen_objects;
-            *(uint **)(iVar3 + 0x1c) = puVar7;
-            *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) | 9;
-            puVar2 = _seen_objects;
+          ob[3] = realFde;
+          *ob = 0xffffffff;
+          ob[4] = 0x1fe00000;
+          ob[1] = 0;
+          ob[2] = 0;
+          ob[5] = realFde + sectionSize[0];
+          *(uint *)(image + 0x18) = realFde;
+          ret = ((int (*)())_search_object)(ob,pc);
+          if (dontAlloc == 0) {
+            *(undefined4 *)(image + 0xc) = destructor;
+            prevLink = (uint *)&_seen_objects;
+            *(uint **)(image + 0x1c) = ob;
+            *(uint *)(image + 0x14) = *(uint *)(image + 0x14) | 9;
+            cur = _seen_objects;
             if (_seen_objects != (uint *)0x0) {
               do {
-                if (*puVar2 < *puVar7) goto LAB_97c1db30;
-                puVar1 = puVar2 + 6;
-                puVar6 = puVar2 + 6;
-                puVar2 = (uint *)*puVar1;
-              } while ((uint *)*puVar1 != (uint *)0x0);
-              puVar2 = (uint *)0x0;
+                if (*cur < *ob) goto LAB_97c1db30;
+                curNextLink = cur + 6;
+                prevLink = cur + 6;
+                cur = (uint *)*curNextLink;
+              } while ((uint *)*curNextLink != (uint *)0x0);
+              cur = (uint *)0x0;
             }
 LAB_97c1db30:
-            puVar7[6] = (uint)puVar2;
-            *puVar6 = (uint)puVar7;
+            ob[6] = (uint)cur;
+            *prevLink = (uint)ob;
           }
-          if (iVar8 == 0) goto LAB_97c1dba4;
-          *param_2 = puVar7[1];
-          param_2[1] = puVar7[2];
-          uVar9 = puVar7[4] >> 0x15 & 0xff;
-          if ((puVar7[4] & 0x20000000) != 0) {
-            uVar9 = ((int (*)())_get_cie_encoding)((iVar8 - *(int *)(iVar8 + 4)) + 4);
+          if (ret == 0) goto LAB_97c1dba4;
+          *bases = ob[1];
+          bases[1] = ob[2];
+          encoding = ob[4] >> 0x15 & 0xff;
+          if ((ob[4] & 0x20000000) != 0) {
+            encoding = ((int (*)())_get_cie_encoding)((ret - *(int *)(ret + 4)) + 4);
           }
-          baseAddress = ((int (*)())_base_from_object)(uVar9 & 0xff,puVar7);
-          ((int (*)())_read_encoded_value_with_base_97c1c498)(uVar9 & 0xff,baseAddress,iVar8 + 8,param_2 + 2);
+          baseAddress = ((int (*)())_base_from_object)(encoding & 0xff,ob);
+          ((int (*)())_read_encoded_value_with_base_97c1c498)(encoding & 0xff,baseAddress,ret + 8,bases + 2);
           goto LAB_97c1dbb0;
         }
       }
-      *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) | 1;
+      *(uint *)(image + 0x14) = *(uint *)(image + 0x14) | 1;
     }
 LAB_97c1dba4:
-    iVar3 = *(int *)(iVar3 + 0x10);
+    image = *(int *)(image + 0x10);
   } while( true );
 }
 
