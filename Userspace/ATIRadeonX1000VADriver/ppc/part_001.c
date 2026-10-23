@@ -2451,8 +2451,8 @@ int ava_end_picture(ctx)
   uint *lastHeader;
   int mapBaseOrPlaneWords;
   int programRingOrPitch;
-  int in_r6;
-  int in_r7;
+  int mapMemoryArg4;
+  int mapMemoryArg5;
   undefined4 *ringLimit;
   undefined4 regDefault;
   undefined4 *cmdWriteB;
@@ -2501,12 +2501,12 @@ int ava_end_picture(ctx)
     ringLimit = *(undefined4 **)(ctx + 0x38);
     if (ringLimit <= cmdWriteB + 2) {
       lastHeader = *(uint **)(ctx + 0x30);
-      in_r6 = ctx + 0x40;
-      in_r7 = ctx + 0x44;
+      mapMemoryArg4 = ctx + 0x40;
+      mapMemoryArg5 = ctx + 0x44;
       *lastHeader = (int)cmdWriteB - (int)lastHeader >> 2 | *lastHeader;
       *(undefined4 **)(ctx + 0x30) = *(undefined4 **)(ctx + 0x34);
       **(undefined4 **)(ctx + 0x34) = 0x1000000;
-      _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)taskPortPtr,in_r6,in_r7,1);
+      _IOConnectMapMemory(*(undefined4 *)(ctx + 0x14),1,*(undefined4 *)taskPortPtr,mapMemoryArg4,mapMemoryArg5,1);
       programRingOrPitch = *(int *)(ctx + 0x40);
       *(int *)(ctx + 0x34) = programRingOrPitch + 0x20;
       *(int *)(ctx + 0x30) = programRingOrPitch + 0x1c;
@@ -2535,8 +2535,8 @@ int ava_end_picture(ctx)
     *(int *)(ctx + 0x38) = mapBaseOrPlaneWords + 0x20 + *(int *)(mapBaseOrPlaneWords + 0x10) * 4;
     *(undefined4 *)(mapBaseOrPlaneWords + 0x1c) = 0;
     cmdWrite = *(undefined4 **)(ctx + 0x34);
-    in_r6 = programRingOrPitch;
-    in_r7 = planeIndex;
+    mapMemoryArg4 = programRingOrPitch;
+    mapMemoryArg5 = planeIndex;
   }
   *(undefined4 **)(ctx + 0x34) = cmdWrite + 4;
   *cmdWrite = 0x1393;
@@ -2551,10 +2551,10 @@ int ava_end_picture(ctx)
   mapBaseOrPlaneWords = (*(uint *)(ctx + 0x57c) >> 4) * programRingOrPitch;
   planeCursor = descTable + surfaceIndexOrScratch * 4 + 0x5326;
   do {
-    ((int (*)())ava_dcache_flush_range)(ctx,*planeCursor,mapBaseOrPlaneWords,in_r6,in_r7,regDefault,programRingOrPitch,regValue);
+    ((int (*)())ava_dcache_flush_range)(ctx,*planeCursor,mapBaseOrPlaneWords,mapMemoryArg4,mapMemoryArg5,regDefault,programRingOrPitch,regValue);
     chromaEntry = planeCursor + 0x14;
     planeCursor = planeCursor + 1;
-    ((int (*)())ava_dcache_flush_range)(ctx,*chromaEntry,mapBaseOrPlaneWords,in_r6,in_r7,regDefault,programRingOrPitch,regValue);
+    ((int (*)())ava_dcache_flush_range)(ctx,*chromaEntry,mapBaseOrPlaneWords,mapMemoryArg4,mapMemoryArg5,regDefault,programRingOrPitch,regValue);
     notLast = planeIndex != 3;
     planeIndex = planeIndex + 1;
   } while (notLast);
@@ -4317,7 +4317,7 @@ LAB_0000b2b8:
                                   (int)*(short *)(ctx + 0x110) -
                                   (int)*(short *)(ctx + 0x10c));
 LAB_0000b7d0:
-  ((int (*)())FUN_0000cfe8)(fpPassThrough);
+  ((int (*)())_restf24)(fpPassThrough);
   return;
 }
 
@@ -5072,26 +5072,26 @@ int ava_render_subpicture_pass(ctx, srcPosPacked, srcSizePacked, headerWord, sec
   return;
 }
 
-/* FUN_0000cf98 @ 0xcf98 (12 bytes) */
-int FUN_0000cf98()
+/* _savef24 @ 0xcf98 (12 bytes) */
+int _savef24()
 {
   return;
 }
 
-/* FUN_0000cfa4 @ 0xcfa4 (4 bytes) */
-int FUN_0000cfa4()
+/* _savef27 @ 0xcfa4 (4 bytes) */
+int _savef27()
 {
   return;
 }
 
-/* FUN_0000cfa8 @ 0xcfa8 (24 bytes) */
-int FUN_0000cfa8()
+/* _savef28 @ 0xcfa8 (24 bytes) */
+int _savef28()
 {
   return;
 }
 
-/* FUN_0000cfe8 @ 0xcfe8 (44 bytes) */
-int FUN_0000cfe8()
+/* _restf24 @ 0xcfe8 (44 bytes) */
+int _restf24()
 {
   return;
 }

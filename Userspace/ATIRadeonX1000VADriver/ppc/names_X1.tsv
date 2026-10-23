@@ -1,0 +1,7 @@
+# rows for ava_end_picture hidden register args and the FP save/restore millicode entry points (fork va1)
+local	ava_end_picture	in_r6	mapMemoryArg4	INFERRED	one variable shared by both ring-wrap paths: _IOConnectMapMemory arg 4 (&ctx->ringBase, ctx+0x40 in the first path, the old ring value in the second) and then forwarded unchanged to ava_dcache_flush_range (a split is NOT valid: the gate's dataflow check shows both stores reach the same loads)
+local	ava_end_picture	in_r7	mapMemoryArg5	INFERRED	same as mapMemoryArg4 for arg 5 (ctx+0x44 / planeIndex)
+func	FUN_0000cf98	_savef24	CONFIRMED	0xcf98 = `stfd f24,-64(r1)`; tail of the FPR save millicode (f14 at 0xcf70, 4 bytes each) continuing f25..f31 then `stw r0,8(r1); blr`
+func	FUN_0000cfa4	_savef27	CONFIRMED	0xcfa4 = `stfd f27,-40(r1)` (inner entry point of the same save run)
+func	FUN_0000cfa8	_savef28	CONFIRMED	0xcfa8 = `stfd f28,-32(r1)`, f29..f31, `stw r0,8(r1)`, `blr`
+func	FUN_0000cfe8	_restf24	CONFIRMED	0xcfe8 = `lfd f24,-64(r1)`; tail of the FPR restore millicode (f14 at 0xcfc0): lfd f24..f31, `lwz r0,8(r1)`, `mtlr r0`, `blr`

@@ -114,7 +114,7 @@
 0xc4b0	1508	ava_render_deinterlace_pass	part_001	converted
 0xcaa0	92	ava_deinterlace_frame	part_001	converted
 0xcb00	1136	ava_render_subpicture_pass	part_001	converted
-0xcf98	12	FUN_0000cf98	part_001	converted
-0xcfa4	4	FUN_0000cfa4	part_001	converted
-0xcfa8	24	FUN_0000cfa8	part_001	converted
-0xcfe8	44	FUN_0000cfe8	part_001	converted
+0xcf98	12	_savef24	part_001	converted
+0xcfa4	4	_savef27	part_001	converted
+0xcfa8	24	_savef28	part_001	converted
+0xcfe8	44	_restf24	part_001	converted

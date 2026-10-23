@@ -115,7 +115,7 @@
 0xc4b0	ava_render_deinterlace_pass	1508	no	calls an import (IOConnectMapMemory)
 0xcaa0	ava_deinterlace_frame	92	yes	
 0xcb00	ava_render_subpicture_pass	1136	no	calls an import (IOConnectMapMemory)
-0xcf98	FUN_0000cf98	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xcfa4	FUN_0000cfa4	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xcfa8	FUN_0000cfa8	24	no	tiny (24 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xcfe8	FUN_0000cfe8	44	no	tiny (44 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xcf98	_savef24	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xcfa4	_savef27	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xcfa8	_savef28	24	no	tiny (24 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xcfe8	_restf24	44	no	tiny (44 bytes) crt / thunk fragment: reached only through a caller no test exercises
