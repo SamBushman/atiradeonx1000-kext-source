@@ -330,10 +330,10 @@ local	newQueue	param_1	q	INFERRED	argument type Q* in the mangled symbol (__Z8ne
 local	size	param_1	q	INFERRED	argument type Q* in the mangled symbol (__Z4sizeP1Q); assumes no hidden struct-return argument
 local	store	param_1	q	INFERRED	argument type Q* in the mangled symbol (__Z5storeP1QPv); assumes no hidden struct-return argument
 local	fetch	param_1	q	INFERRED	argument type Q* in the mangled symbol (__Z5fetchP1Q); assumes no hidden struct-return argument
-local	ParseWhileLoopStack__push	param_2	str1	INFERRED	argument type char const* in the mangled symbol (__ZN19ParseWhileLoopStack4pushEPKcS1_); assumes no hidden struct-return argument
-local	ParseWhileLoopStack__push	param_3	str2	INFERRED	argument type char const* in the mangled symbol (__ZN19ParseWhileLoopStack4pushEPKcS1_); assumes no hidden struct-return argument
-local	ParseFunctionStack__push	param_2	str	INFERRED	argument type char const* in the mangled symbol (__ZN18ParseFunctionStack4pushEPKc); assumes no hidden struct-return argument
-local	ParseFunctionStack__setCurrentParamList	param_2	parseOperand	INFERRED	argument type ParseOperand** in the mangled symbol (__ZN18ParseFunctionStack19setCurrentParamListEPP12ParseOperand); assumes no hidden struct-return argument
+local	ParseWhileLoopStack__push	param_2	continueLabel	INFERRED	stored at node +0, which ParseWhileLoopStack__continueLabel returns
+local	ParseWhileLoopStack__push	param_3	breakLabel	INFERRED	stored at node +4, which ParseWhileLoopStack__breakLabel returns
+local	ParseFunctionStack__push	param_2	functionName	INFERRED	stored at node +0, which ParseFunctionStack__current returns
+local	ParseFunctionStack__setCurrentParamList	param_2	paramList	INFERRED	stored at top node +0xc
 local	TPPStreamCompiler__newNodeFromOperand	param_2	parseOperand	INFERRED	argument type ParseOperand* in the mangled symbol (__ZN17TPPStreamCompiler18newNodeFromOperandEP12ParseOperand); assumes no hidden struct-return argument
 local	TPPStreamCompiler__newTemporary	param_2	type	INFERRED	argument type TType* in the mangled symbol (__ZN17TPPStreamCompiler12newTemporaryEP5TType); assumes no hidden struct-return argument
 local	TPPStreamCompiler__newReturnValue	param_2	type	INFERRED	argument type TType* in the mangled symbol (__ZN17TPPStreamCompiler14newReturnValueEP5TTypePKc); assumes no hidden struct-return argument
