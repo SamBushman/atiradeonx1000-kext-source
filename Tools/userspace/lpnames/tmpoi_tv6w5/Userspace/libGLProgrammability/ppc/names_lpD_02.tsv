@@ -1,0 +1,41 @@
+local	TIntermUnary__compileNode	a1	r4In0	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermUnary__compileNode	a1_00	r4In1	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermUnary__compileNode	a1_01	r4In2	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermUnary__compileNode	param_3	unusedArg3	UNKNOWN	only forwarded to the virtual getLine call as an extra register argument
+local	TIntermUnary__compileNode	param_4	scratchArg4	UNKNOWN	register argument slot reused as scratch: 0/1 constants forwarded as extra call arguments
+local	TIntermUnary__compileNode	param_5	scratchArg5	UNKNOWN	register argument slot reused as scratch: holds the constant's GL type (0x1404 int, 0x1406 float, 0x8b56 bool) before getConstantAsSourceVar, else forwarded
+local	TIntermUnary__compileNode	param_6	scratchArg6	UNKNOWN	register argument slot reused as scratch: later holds _operatorToken[op]
+local	TIntermUnary__compileNode	uVar1	glType	CONFIRMED	OpenGL type enum (ushort) of an operand: ParseSymbol +0x2c / ParseOperand +0x18
+local	TIntermUnary__compileNode	bVar2	emitFinalOp	INFERRED	true when the generic tail emits the unary operation; false once the case (post increment/decrement) emitted its own instructions or for ops that need none
+local	TIntermUnary__compileNode	pTVar5	thisType	CONFIRMED	this->getTypePointer() (vtable +0x3c): the node's result type, for newTemporary
+local	TIntermUnary__compileNode	pPVar6	callArgOperand	UNKNOWN	operand/result pointer left in a register and forwarded as an extra call argument
+local	TIntermUnary__compileNode	a0	resultParseType	CONFIRMED	ParseSymbol +0xc parse-tree TType* of the result operand; its getQualifier (vtable +0x24) == 0xd sets compiler+0xa4
+local	TIntermUnary__compileNode	a2	recordPtrArg	UNKNOWN	address of the first operation record passed as the AddOperation argument and forwarded as an extra argument
+local	TIntermUnary__compileNode	a4	constGlType	INFERRED	GL type of the constant source (0x1404 GL_INT, 0x1406 GL_FLOAT, 0x8b56 GL_BOOL) passed to getConstantAsSourceVar; 0 where it is only a forwarded scratch value
+local	TIntermUnary__compileNode	local_18	constValue	INFERRED	the increment constant (integer 1 or float 1.0f = 0x3f800000) passed by address to getConstantAsSourceVar
+local	TIntermUnary__compileNode	local_60	op2Header	INFERRED	second _PPStreamOperation record (post increment/decrement add/sub): word 0 opcode header
+local	TIntermUnary__compileNode	local_5c	op2Flags	INFERRED	second record word 1: flags
+local	TIntermUnary__compileNode	local_58	op2Dest0	INFERRED	second record destination descriptor, first word
+local	TIntermUnary__compileNode	local_54	op2Dest1	INFERRED	second record destination descriptor, second word
+local	TIntermUnary__compileNode	local_50	op2Src0A	INFERRED	second record source 0 descriptor, first word
+local	TIntermUnary__compileNode	local_4c	op2Src0B	INFERRED	second record source 0 descriptor, second word
+local	TIntermUnary__compileNode	local_48	op2Src1A	INFERRED	second record source 1 descriptor (the constant 1), first word
+local	TIntermUnary__compileNode	local_44	op2Src1B	INFERRED	second record source 1 descriptor, second word
+local	TIntermUnary__compileNode	local_40	op2Src2A	INFERRED	second record source 2 descriptor, first word (zero)
+local	TIntermUnary__compileNode	local_3c	op2Src2B	INFERRED	second record source 2 descriptor, second word (zero)
+local	TIntermUnary__compileNode	local_38	op2AuxA	INFERRED	second record auxiliary operand, first word (zero)
+local	TIntermUnary__compileNode	local_34	op2AuxB	INFERRED	second record auxiliary operand, second word (zero)
+local	TIntermUnary__compileNode	local_30	op2Line	INFERRED	second record source line (this->getLine())
+local	TIntermUnary__compileNode	local_2c	op2Word13	INFERRED	second record word 13 (zero)
+use	TIntermUnary__compileNode	uVar3	currentLine	CONFIRMED	this->getLine() stored at compiler+0x90	^\s*uVar3\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$	^\s*uVar3\ =\ 0;$	all	none
+use	TIntermUnary__compileNode	uVar3	callArgScratch	UNKNOWN	0 or 1 left in the register and forwarded as an extra call argument (both defs reach the same uses)	^\s*uVar3\ =\ 0;$		all	none
+use	TIntermUnary__compileNode	pPVar7	scratchPtr7	UNKNOWN	scratch pointer: 0, the switch byte offset, an operand alias; only forwarded as an extra call argument	^\s*pPVar7\ =\ \(unsigned\ char\ \*\)0x0;$	+228
+use	TIntermUnary__compileNode	pPVar7	sizeOperand	CONFIRMED	operand whose logical size is queried for the flags field: the operand (inc/dec/length ops) or the result	^\s*uVar8\ =\ GetPPStreamTypeForGLType\(\(uint\)uVar1\);$@3	+20
+use	TIntermUnary__compileNode	pPVar7	operandToFree	INFERRED	copy of the operand pointer deleted after its destructor	^\s*pPVar7\ =\ local_1c;$@3	
+use	TIntermUnary__compileNode	iVar9	logicalSize	CONFIRMED	ParseOperand__GetLogicalSize(resultOperand)	^\s*iVar9\ =\ ParseOperand__GetLogicalSize\(local_20\);$	+2
+use	TIntermUnary__compileNode	iVar9	logicalSize	CONFIRMED	ParseOperand__GetLogicalSize(operand)	^\s*iVar9\ =\ ParseOperand__GetLogicalSize\(local_1c\);$	+2
+use	TIntermUnary__compileNode	iVar9	opReload	INFERRED	this->op (+0x30) re-read after the operand setup	^\s*iVar9\ =\ \*\(int\ \*\)\(this\ \+\ 0x30\);$	+7	all	rhs
+use	TIntermUnary__compileNode	iVar9	resultQualifier	CONFIRMED	resultParseType->getQualifier() (vtable +0x24); 0xd (uniform) sets compiler+0xa4	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x24\)\)\(a0,a1_01,pPVar6,param_4,param_5,param_6,pPVar7,iVar9\);$	+5	lhs
+use	TIntermUnary__compileNode	iVar9	opReload	INFERRED	this->op (+0x30) tested for 5 (logical not: flips operand+0x28) and 8 (bitwise not: unsupported)	^\s*iVar9\ =\ \*\(int\ \*\)\(this\ \+\ 0x30\);$@2	+36
+use	TIntermUnary__compileNode	iVar9	logicalSize	CONFIRMED	ParseOperand__GetLogicalSize(sizeOperand)	^\s*iVar9\ =\ ParseOperand__GetLogicalSize\(pPVar7\);$	+2
+local	TIntermUnary__compileNode	uVar8	opOrFormatWord	INFERRED	one slot, three roles reaching the same extra-argument uses: this->op (switch selector), the GetPPStreamTypeForGLType result, and the second record's header word; not split because all stores statically reach the forwarded use

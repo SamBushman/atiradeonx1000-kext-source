@@ -1,0 +1,142 @@
+local	_HashTableNew	param_1	bucketCount	CONFIRMED	HashTable is a 4-byte wrapper around a HashSet built with the same arguments
+local	_HashTableNew	param_2	hashFunction	CONFIRMED	HashTable is a 4-byte wrapper around a HashSet built with the same arguments
+local	_HashTableNew	param_3	equalsFunction	CONFIRMED	HashTable is a 4-byte wrapper around a HashSet built with the same arguments
+local	_HashTableFree	puVar1	hashSet	CONFIRMED	frees every {key,value} pair in every bucket, then the HashSet, then the wrapper
+local	_HashTableFree	iVar2	pair	CONFIRMED	frees every {key,value} pair in every bucket, then the HashSet, then the wrapper
+local	_HashTableFree	uVar3	bucketCount	CONFIRMED	frees every {key,value} pair in every bucket, then the HashSet, then the wrapper
+local	_HashTableFree	puVar5	bucket	CONFIRMED	frees every {key,value} pair in every bucket, then the HashSet, then the wrapper
+local	_HashTableAdd	param_2	key	CONFIRMED	hashes the key, overwrites the value of an equal pair or allocates a new {key,value} pair in a free slot (growing the bucket when full)
+local	_HashTableAdd	param_3	value	CONFIRMED	hashes the key, overwrites the value of an equal pair or allocates a new {key,value} pair in a free slot (growing the bucket when full)
+local	_HashTableAdd	puVar6	hashSet	CONFIRMED	hashes the key, overwrites the value of an equal pair or allocates a new {key,value} pair in a free slot (growing the bucket when full)
+local	_HashTableAdd	puVar8	bucket	CONFIRMED	hashes the key, overwrites the value of an equal pair or allocates a new {key,value} pair in a free slot (growing the bucket when full)
+local	_HashTableAdd	a6	buckets	CONFIRMED	hashes the key, overwrites the value of an equal pair or allocates a new {key,value} pair in a free slot (growing the bucket when full)
+local	_HashTableAdd	iVar3	equalsResult	CONFIRMED	hashes the key, overwrites the value of an equal pair or allocates a new {key,value} pair in a free slot (growing the bucket when full)
+local	_HashTableAdd	a2	unusedArg5	CONFIRMED	hashes the key, overwrites the value of an equal pair or allocates a new {key,value} pair in a free slot (growing the bucket when full)
+local	_HashTableAdd	in_r6	unusedArg6	CONFIRMED	hashes the key, overwrites the value of an equal pair or allocates a new {key,value} pair in a free slot (growing the bucket when full)
+local	_HashTableAdd	in_r7	unusedArg7	CONFIRMED	hashes the key, overwrites the value of an equal pair or allocates a new {key,value} pair in a free slot (growing the bucket when full)
+local	_HashTableAdd	in_r8	unusedArg8	CONFIRMED	hashes the key, overwrites the value of an equal pair or allocates a new {key,value} pair in a free slot (growing the bucket when full)
+use	_HashTableAdd	uVar2	hashCode	CONFIRMED	result of hashFunction(key)	^\s*uVar2\ =\ \(\*\(code\ \*\)puVar6\[2\]\)\(param_2,param_2,param_3\);$	^\s*if\ \(\*\(int\ \*\)\(a6\ \+\ iVar1\)\ ==\ 0\)\ \{$	all	none
+use	_HashTableAdd	uVar2	bucketEntries	CONFIRMED	bucket[1], the bucket's entries array	^\s*uVar2\ =\ puVar8\[1\];$		all	none
+use	_HashTableAdd	iVar1	bucketOffset	CONFIRMED	(hash % bucketCount) * 8	^\s*iVar1\ =\ \(uVar2\ \-\ \(uVar2\ /\ \*puVar6\)\ \*\ \*puVar6\)\ \*\ 8;$	^\s*iVar1\ =\ uVar7\ \*\ 4;$	all	none
+use	_HashTableAdd	iVar1	entryOffset	CONFIRMED	loopIndex * 4, byte offset of the entry	^\s*iVar1\ =\ uVar7\ \*\ 4;$	^\s*iVar1\ =\ uVar5\ \+\ \*puVar8\ \*\ 4;$	all	none
+use	_HashTableAdd	iVar1	entriesEnd	CONFIRMED	end of the grown entries array; the new pair goes in its last slot	^\s*iVar1\ =\ uVar5\ \+\ \*puVar8\ \*\ 4;$	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar1\ \+\ \-4\);$	all	rhs
+use	_HashTableAdd	iVar1	pair	CONFIRMED	the {key,value} pair the value is written into	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar1\ \+\ \-4\);$		lhs	none
+use	_HashTableAdd	uVar5	firstFreeSlot	CONFIRMED	index of the first free entry slot seen, 0xffffffff = none	^\s*uVar5\ =\ 0xffffffff;$	^\s*uVar5\ =\ \*puVar8;$	all	none
+use	_HashTableAdd	uVar5	oldEntryCount	CONFIRMED	bucket entry count before growing	^\s*uVar5\ =\ \*puVar8;$	^\s*uVar5\ =\ _realloc\(uVar2,\(uVar5\ \+\ 1\)\ \*\ 4\);$	all	rhs
+use	_HashTableAdd	uVar5	firstFreeSlot	CONFIRMED	free slot index used when the bucket did not need to grow	^\s*\*\(undefined4\ \*\*\)\(uVar2\ \+\ uVar5\ \*\ 4\)\ =\ puVar4;$		all	none
+local	_HashTableGet	param_2	key	CONFIRMED	hashes the key and returns the value of the pair whose key the equals callback matches, else 0
+local	_HashTableGet	puVar4	hashSet	CONFIRMED	hashes the key and returns the value of the pair whose key the equals callback matches, else 0
+local	_HashTableGet	puVar5	bucket	CONFIRMED	hashes the key and returns the value of the pair whose key the equals callback matches, else 0
+local	_HashTableGet	puVar2	pair	CONFIRMED	hashes the key and returns the value of the pair whose key the equals callback matches, else 0
+local	_HashTableGet	a6	buckets	CONFIRMED	hashes the key and returns the value of the pair whose key the equals callback matches, else 0
+local	_HashTableGet	in_r5	unusedArg5	CONFIRMED	hashes the key and returns the value of the pair whose key the equals callback matches, else 0
+local	_HashTableGet	in_r6	unusedArg6	CONFIRMED	hashes the key and returns the value of the pair whose key the equals callback matches, else 0
+local	_HashTableGet	in_r7	unusedArg7	CONFIRMED	hashes the key and returns the value of the pair whose key the equals callback matches, else 0
+local	_HashTableGet	in_r8	unusedArg8	CONFIRMED	hashes the key and returns the value of the pair whose key the equals callback matches, else 0
+use	_HashTableGet	uVar1	hashCode	CONFIRMED	result of hashFunction(key)	^\s*uVar1\ =\ \(\*\(code\ \*\)puVar4\[2\]\)\(param_2,param_2\);$	^\s*if\ \(\*\(int\ \*\)\(a6\ \+\ iVar3\)\ !=\ 0\)\ \{$	all	none
+use	_HashTableGet	uVar1	bucketEntries	CONFIRMED	bucket[1], the bucket's entries array	^\s*uVar1\ =\ puVar5\[1\];$		all	none
+use	_HashTableGet	iVar3	bucketOffset	CONFIRMED	(hash % bucketCount) * 8	^\s*iVar3\ =\ \(uVar1\ \-\ \(uVar1\ /\ \*puVar4\)\ \*\ \*puVar4\)\ \*\ 8;$	^\s*\(iVar3\ =\ \(\*\(code\ \*\)puVar4\[3\]\)\(\*puVar2,param_2,in_r5,in_r6,in_r7,in_r8,a6\),\ iVar3\ ==\ 0\)\)\ \{$	all	none
+use	_HashTableGet	iVar3	equalsResult	CONFIRMED	equalsFunction(pair->key, key): 0 = equal	^\s*\(iVar3\ =\ \(\*\(code\ \*\)puVar4\[3\]\)\(\*puVar2,param_2,in_r5,in_r6,in_r7,in_r8,a6\),\ iVar3\ ==\ 0\)\)\ \{$		all	none
+local	_HashTableRemove	param_2	key	CONFIRMED	hashes the key, frees and clears the matching pair and returns its value, else 0
+local	_HashTableRemove	param_3	unusedArg3	CONFIRMED	hashes the key, frees and clears the matching pair and returns its value, else 0
+local	_HashTableRemove	param_4	unusedArg4	CONFIRMED	hashes the key, frees and clears the matching pair and returns its value, else 0
+local	_HashTableRemove	param_5	unusedArg5	CONFIRMED	hashes the key, frees and clears the matching pair and returns its value, else 0
+local	_HashTableRemove	param_6	unusedArg6	CONFIRMED	hashes the key, frees and clears the matching pair and returns its value, else 0
+local	_HashTableRemove	puVar4	hashSet	CONFIRMED	hashes the key, frees and clears the matching pair and returns its value, else 0
+local	_HashTableRemove	puVar5	bucket	CONFIRMED	hashes the key, frees and clears the matching pair and returns its value, else 0
+local	_HashTableRemove	a6	buckets	CONFIRMED	hashes the key, frees and clears the matching pair and returns its value, else 0
+local	_HashTableRemove	iVar3	equalsResult	CONFIRMED	hashes the key, frees and clears the matching pair and returns its value, else 0
+local	_HashTableRemove	uVar7	removedValue	CONFIRMED	hashes the key, frees and clears the matching pair and returns its value, else 0
+use	_HashTableRemove	uVar2	hashCode	CONFIRMED	result of hashFunction(key)	^\s*uVar2\ =\ \(\*\(code\ \*\)puVar4\[2\]\)\(param_2,param_2,param_3,param_4,param_5,param_6\);$	^\s*if\ \(\*\(int\ \*\)\(a6\ \+\ iVar1\)\ !=\ 0\)\ \{$	all	none
+use	_HashTableRemove	uVar2	bucketEntries	CONFIRMED	bucket[1], the bucket's entries array	^\s*uVar2\ =\ puVar5\[1\];$		all	none
+use	_HashTableRemove	iVar1	bucketOffset	CONFIRMED	(hash % bucketCount) * 8	^\s*iVar1\ =\ \(uVar2\ \-\ \(uVar2\ /\ \*puVar4\)\ \*\ \*puVar4\)\ \*\ 8;$	^\s*iVar1\ =\ uVar6\ \*\ 4;$	all	none
+use	_HashTableRemove	iVar1	entryOffset	CONFIRMED	loopIndex * 4, byte offset of the entry	^\s*iVar1\ =\ uVar6\ \*\ 4;$		all	none
+local	_GetValidArgs	param_1	instruction	CONFIRMED	instruction word +0xc: bits 31..29 = source count, bits 25..18 = opcode; opcodes 0x42..0x45 have one source less
+local	_GetValidArgs	uVar1	sourceCount	CONFIRMED	instruction word +0xc: bits 31..29 = source count, bits 25..18 = opcode; opcodes 0x42..0x45 have one source less
+local	_GetStreamArray_97c08e40	param_1	listKind	CONFIRMED	walks the stream's temp-usage array list (+8, kind 1) or param-binding array list (+0x14, kind 2); chunk +0xe/+0x12 = first/last register of the array containing registerNumber; returns the array's index or -1
+local	_GetStreamArray_97c08e40	param_2	registerNumber	CONFIRMED	walks the stream's temp-usage array list (+8, kind 1) or param-binding array list (+0x14, kind 2); chunk +0xe/+0x12 = first/last register of the array containing registerNumber; returns the array's index or -1
+local	_GetStreamArray_97c08e40	param_3	stream	CONFIRMED	walks the stream's temp-usage array list (+8, kind 1) or param-binding array list (+0x14, kind 2); chunk +0xe/+0x12 = first/last register of the array containing registerNumber; returns the array's index or -1
+local	_GetStreamArray_97c08e40	param_4	outRangeStart	CONFIRMED	walks the stream's temp-usage array list (+8, kind 1) or param-binding array list (+0x14, kind 2); chunk +0xe/+0x12 = first/last register of the array containing registerNumber; returns the array's index or -1
+local	_GetStreamArray_97c08e40	param_5	outRangeEnd	CONFIRMED	walks the stream's temp-usage array list (+8, kind 1) or param-binding array list (+0x14, kind 2); chunk +0xe/+0x12 = first/last register of the array containing registerNumber; returns the array's index or -1
+local	_GetStreamArray_97c08e40	iVar1	arrayChunk	CONFIRMED	walks the stream's temp-usage array list (+8, kind 1) or param-binding array list (+0x14, kind 2); chunk +0xe/+0x12 = first/last register of the array containing registerNumber; returns the array's index or -1
+local	_GetStreamArray_97c08e40	iVar2	arrayIndex	CONFIRMED	walks the stream's temp-usage array list (+8, kind 1) or param-binding array list (+0x14, kind 2); chunk +0xe/+0x12 = first/last register of the array containing registerNumber; returns the array's index or -1
+local	_GetStreamArray_97c08e40	uVar3	rangeStart	CONFIRMED	walks the stream's temp-usage array list (+8, kind 1) or param-binding array list (+0x14, kind 2); chunk +0xe/+0x12 = first/last register of the array containing registerNumber; returns the array's index or -1
+local	_GetRegisterIndicies	param_1	stream	INFERRED	computes the first/last register index of the array containing registerNumber (via _GetStreamArray), else of the registerNumber + arrayExtent when isArray, else just registerNumber
+local	_GetRegisterIndicies	param_2	outFirstIndex	INFERRED	computes the first/last register index of the array containing registerNumber (via _GetStreamArray), else of the registerNumber + arrayExtent when isArray, else just registerNumber
+local	_GetRegisterIndicies	param_3	outLastIndex	INFERRED	computes the first/last register index of the array containing registerNumber (via _GetStreamArray), else of the registerNumber + arrayExtent when isArray, else just registerNumber
+local	_GetRegisterIndicies	param_4	listKind	INFERRED	computes the first/last register index of the array containing registerNumber (via _GetStreamArray), else of the registerNumber + arrayExtent when isArray, else just registerNumber
+local	_GetRegisterIndicies	param_5	registerNumber	INFERRED	computes the first/last register index of the array containing registerNumber (via _GetStreamArray), else of the registerNumber + arrayExtent when isArray, else just registerNumber
+local	_GetRegisterIndicies	param_6	isIndirect	INFERRED	computes the first/last register index of the array containing registerNumber (via _GetStreamArray), else of the registerNumber + arrayExtent when isArray, else just registerNumber
+local	_GetRegisterIndicies	param_7	isArray	INFERRED	computes the first/last register index of the array containing registerNumber (via _GetStreamArray), else of the registerNumber + arrayExtent when isArray, else just registerNumber
+local	_GetRegisterIndicies	param_8	arrayExtent	INFERRED	computes the first/last register index of the array containing registerNumber (via _GetStreamArray), else of the registerNumber + arrayExtent when isArray, else just registerNumber
+local	_GetRegisterIndicies	iVar1	lastIndex	INFERRED	computes the first/last register index of the array containing registerNumber (via _GetStreamArray), else of the registerNumber + arrayExtent when isArray, else just registerNumber
+local	_GetRegister	param_1	program	CONFIRMED	Program +0x1c..+0x2c = first register record per bank and +0x30..+0x40 = end index per bank; record index = bankFirst + registerIndex*4 + component; returns registers[recordIndex] (0x2c bytes) or 0 when past the bank
+local	_GetRegister	param_2	bank	CONFIRMED	Program +0x1c..+0x2c = first register record per bank and +0x30..+0x40 = end index per bank; record index = bankFirst + registerIndex*4 + component; returns registers[recordIndex] (0x2c bytes) or 0 when past the bank
+local	_GetRegister	param_3	registerIndex	CONFIRMED	Program +0x1c..+0x2c = first register record per bank and +0x30..+0x40 = end index per bank; record index = bankFirst + registerIndex*4 + component; returns registers[recordIndex] (0x2c bytes) or 0 when past the bank
+local	_GetRegister	param_4	component	CONFIRMED	Program +0x1c..+0x2c = first register record per bank and +0x30..+0x40 = end index per bank; record index = bankFirst + registerIndex*4 + component; returns registers[recordIndex] (0x2c bytes) or 0 when past the bank
+local	_GetRegister	iVar3	bankFirstRecord	CONFIRMED	Program +0x1c..+0x2c = first register record per bank and +0x30..+0x40 = end index per bank; record index = bankFirst + registerIndex*4 + component; returns registers[recordIndex] (0x2c bytes) or 0 when past the bank
+local	_GetRegister	uVar2	bankEndRecord	CONFIRMED	Program +0x1c..+0x2c = first register record per bank and +0x30..+0x40 = end index per bank; record index = bankFirst + registerIndex*4 + component; returns registers[recordIndex] (0x2c bytes) or 0 when past the bank
+local	_GetRegister	uVar1	recordIndex	CONFIRMED	Program +0x1c..+0x2c = first register record per bank and +0x30..+0x40 = end index per bank; record index = bankFirst + registerIndex*4 + component; returns registers[recordIndex] (0x2c bytes) or 0 when past the bank
+local	_RegisterIsMergeable	param_1	reg	CONFIRMED	register +0x14 = bank (1 = temporaries) and +0x18 = excluded flag
+local	_RegisterIsMergeable	uVar1	isMergeable	CONFIRMED	register +0x14 = bank (1 = temporaries) and +0x18 = excluded flag
+local	_RegisterCanMerge	param_1	registerA	CONFIRMED	same component (+0xc) and type bits (+0x10), both mergeable, not both fixed, and they do not interfere (bit of the other's id in +8)
+local	_RegisterCanMerge	param_2	registerB	CONFIRMED	same component (+0xc) and type bits (+0x10), both mergeable, not both fixed, and they do not interfere (bit of the other's id in +8)
+local	_RegisterCanMerge	iVar1	testResult	CONFIRMED	same component (+0xc) and type bits (+0x10), both mergeable, not both fixed, and they do not interfere (bit of the other's id in +8)
+local	_RegisterCanMerge	uVar2	canMerge	CONFIRMED	same component (+0xc) and type bits (+0x10), both mergeable, not both fixed, and they do not interfere (bit of the other's id in +8)
+local	_RegisterIsFixed	param_1	reg	CONFIRMED	register +0x1c or +0x20 set
+local	_RegisterIsFixed	uVar1	isFixed	CONFIRMED	register +0x1c or +0x20 set
+local	_RegisterVectorCanMerge	param_1	vectorA	CONFIRMED	all four component registers of the two vec4 groups can merge
+local	_RegisterVectorCanMerge	param_2	vectorB	CONFIRMED	all four component registers of the two vec4 groups can merge
+local	_RegisterVectorCanMerge	iVar1	componentCanMerge	CONFIRMED	all four component registers of the two vec4 groups can merge
+local	_RegisterVectorCanMerge	uVar2	canMerge	CONFIRMED	all four component registers of the two vec4 groups can merge
+local	_RegisterVectorIsFixed	param_1	vector	CONFIRMED	any of the four component registers is fixed
+local	_RegisterVectorIsFixed	iVar1	componentIsFixed	CONFIRMED	any of the four component registers is fixed
+local	_RegisterVectorIsFixed	uVar2	isFixed	CONFIRMED	any of the four component registers is fixed
+local	_RegisterAdd	param_1	program	CONFIRMED	grows Program.registers to hold four component records starting at baseIndex + registerNumber*4 and initialises them (+0 index, +4 stream register number, +8 interference set, +0xc component, +0x10 type bits, +0x14 bank, +0x28 stream chunk)
+local	_RegisterAdd	param_2	streamChunk	CONFIRMED	grows Program.registers to hold four component records starting at baseIndex + registerNumber*4 and initialises them (+0 index, +4 stream register number, +8 interference set, +0xc component, +0x10 type bits, +0x14 bank, +0x28 stream chunk)
+local	_RegisterAdd	param_3	bank	CONFIRMED	grows Program.registers to hold four component records starting at baseIndex + registerNumber*4 and initialises them (+0 index, +4 stream register number, +8 interference set, +0xc component, +0x10 type bits, +0x14 bank, +0x28 stream chunk)
+local	_RegisterAdd	param_4	bankFirstRecord	CONFIRMED	grows Program.registers to hold four component records starting at baseIndex + registerNumber*4 and initialises them (+0 index, +4 stream register number, +8 interference set, +0xc component, +0x10 type bits, +0x14 bank, +0x28 stream chunk)
+local	_RegisterAdd	param_5	streamRegisterNumber	CONFIRMED	grows Program.registers to hold four component records starting at baseIndex + registerNumber*4 and initialises them (+0 index, +4 stream register number, +8 interference set, +0xc component, +0x10 type bits, +0x14 bank, +0x28 stream chunk)
+local	_RegisterAdd	param_6	typeBits	CONFIRMED	grows Program.registers to hold four component records starting at baseIndex + registerNumber*4 and initialises them (+0 index, +4 stream register number, +8 interference set, +0xc component, +0x10 type bits, +0x14 bank, +0x28 stream chunk)
+local	_RegisterAdd	iVar4	firstRecordIndex	CONFIRMED	grows Program.registers to hold four component records starting at baseIndex + registerNumber*4 and initialises them (+0 index, +4 stream register number, +8 interference set, +0xc component, +0x10 type bits, +0x14 bank, +0x28 stream chunk)
+local	_RegisterAdd	iVar3	recordOffset	CONFIRMED	grows Program.registers to hold four component records starting at baseIndex + registerNumber*4 and initialises them (+0 index, +4 stream register number, +8 interference set, +0xc component, +0x10 type bits, +0x14 bank, +0x28 stream chunk)
+local	_RegisterAdd	iVar5	componentsLeft	CONFIRMED	grows Program.registers to hold four component records starting at baseIndex + registerNumber*4 and initialises them (+0 index, +4 stream register number, +8 interference set, +0xc component, +0x10 type bits, +0x14 bank, +0x28 stream chunk)
+local	_RegisterAdd	iVar1	component	CONFIRMED	grows Program.registers to hold four component records starting at baseIndex + registerNumber*4 and initialises them (+0 index, +4 stream register number, +8 interference set, +0xc component, +0x10 type bits, +0x14 bank, +0x28 stream chunk)
+local	_RegisterAdd	iVar2	record	CONFIRMED	grows Program.registers to hold four component records starting at baseIndex + registerNumber*4 and initialises them (+0 index, +4 stream register number, +8 interference set, +0xc component, +0x10 type bits, +0x14 bank, +0x28 stream chunk)
+local	_RegisterFree	param_1	reg	CONFIRMED	frees the interference BitSet (+8)
+local	_InstructionFree	param_1	instruction	CONFIRMED	Program instruction (0x1c bytes): frees the sources (+4) and dests (+0xc) arrays
+local	_BlockAdd	param_1	program	CONFIRMED	appends a zeroed 0x2c-byte block record: +4 instructions (room for one), +0xc predecessors, +0x14 successors
+use	_BlockAdd	iVar1	newBlockCount	CONFIRMED	Program.blockCount + 1	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 1;$	^\s*iVar1\ =\ iVar1\ \+\ \*\(int\ \*\)\(param_1\ \+\ 4\)\ \*\ 0x2c;$	all	none
+use	_BlockAdd	iVar1	blocksEnd	CONFIRMED	end of the grown block array; the new record is the last 0x2c bytes	^\s*iVar1\ =\ iVar1\ \+\ \*\(int\ \*\)\(param_1\ \+\ 4\)\ \*\ 0x2c;$		all	none
+local	_BlockFree	param_1	block	CONFIRMED	frees every instruction, the instruction/predecessor/successor arrays and the five BitSets (+0x18..+0x28)
+local	_BlockFree	iVar2	instructionOffset	CONFIRMED	frees every instruction, the instruction/predecessor/successor arrays and the five BitSets (+0x18..+0x28)
+local	_GetOrAddBlock	param_1	program	CONFIRMED	Program +0x14 = label slot count, +0x18 = Block* per label; grows the table and creates the block on first use
+local	_GetOrAddBlock	param_2	labelIndex	CONFIRMED	Program +0x14 = label slot count, +0x18 = Block* per label; grows the table and creates the block on first use
+local	_GetOrAddBlock	iVar1	slotOffset	CONFIRMED	Program +0x14 = label slot count, +0x18 = Block* per label; grows the table and creates the block on first use
+local	_GetBlockFrom	param_1	program	CONFIRMED	returns the block for a label, taking the next unused record of Program.blocks (*nextBlockIndex++) the first time
+local	_GetBlockFrom	param_2	labelIndex	CONFIRMED	returns the block for a label, taking the next unused record of Program.blocks (*nextBlockIndex++) the first time
+local	_GetBlockFrom	param_3	nextBlockIndex	CONFIRMED	returns the block for a label, taking the next unused record of Program.blocks (*nextBlockIndex++) the first time
+local	_GetBlockFrom	iVar1	slotOffset	CONFIRMED	returns the block for a label, taking the next unused record of Program.blocks (*nextBlockIndex++) the first time
+local	_GetBlockFrom	iVar2	blockByLabel	CONFIRMED	returns the block for a label, taking the next unused record of Program.blocks (*nextBlockIndex++) the first time
+local	_GetBlock	param_1	program	CONFIRMED	returns Program.blockByLabel[labelIndex], or 0 when out of range
+local	_GetBlock	param_2	labelIndex	CONFIRMED	returns Program.blockByLabel[labelIndex], or 0 when out of range
+local	_BlockAddSuccessor	param_1	fromBlock	CONFIRMED	appends toBlock to fromBlock's successors (+0x10/+0x14) and fromBlock to toBlock's predecessors (+8/+0xc)
+local	_BlockAddSuccessor	param_2	toBlock	CONFIRMED	appends toBlock to fromBlock's successors (+0x10/+0x14) and fromBlock to toBlock's predecessors (+8/+0xc)
+local	_BlockAddSuccessor	iVar1	newCount	CONFIRMED	appends toBlock to fromBlock's successors (+0x10/+0x14) and fromBlock to toBlock's predecessors (+8/+0xc)
+local	_BlockAddPredecessor	param_1	block	CONFIRMED	_BlockAddSuccessor(predecessor, block)
+local	_BlockAddPredecessor	param_2	predecessorBlock	CONFIRMED	_BlockAddSuccessor(predecessor, block)
+local	_BlocksFree	param_1	program	CONFIRMED	frees every block record, then the block array
+local	_BlocksFree	iVar1	block	CONFIRMED	frees every block record, then the block array
+local	_BlocksFree	iVar3	blockOffset	CONFIRMED	frees every block record, then the block array
+local	_RegistersFree	param_1	program	CONFIRMED	frees every register record's BitSet, then the register array
+local	_RegistersFree	iVar1	record	CONFIRMED	frees every register record's BitSet, then the register array
+local	_RegistersFree	iVar3	recordOffset	CONFIRMED	frees every register record's BitSet, then the register array
+local	_RegistersInitialize	param_1	program	CONFIRMED	gives every register record an interference BitSet (sized by registerCount) with its own bit set
+local	_RegistersInitialize	uVar1	registerCount	CONFIRMED	gives every register record an interference BitSet (sized by registerCount) with its own bit set
+local	_RegistersInitialize	iVar3	recordOffset	CONFIRMED	gives every register record an interference BitSet (sized by registerCount) with its own bit set
+use	_RegistersInitialize	iVar4	registers	CONFIRMED	Program.registers	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x10\);$	^\s*iVar4\ =\ iVar4\ \+\ iVar3;$	all	rhs
+use	_RegistersInitialize	iVar4	record	CONFIRMED	registers + recordOffset	^\s*iVar4\ =\ iVar4\ \+\ iVar3;$		lhs	none
+local	_ProgramNew	param_1	stream	CONFIRMED	Program is 0x44 bytes {stream, blockCount, blocks, registerCount, registers, labelCount, blockByLabel, per-bank first/end indices}
+local	_ProgramFree	param_1	program	CONFIRMED	frees blockByLabel, registers, blocks, then the program
+local	_regEqualsFunction	param_1	registerA	CONFIRMED	HashSet equality for register keys: compares +4 (stream register number) then +0 (index)
+local	_regEqualsFunction	param_2	registerB	CONFIRMED	HashSet equality for register keys: compares +4 (stream register number) then +0 (index)

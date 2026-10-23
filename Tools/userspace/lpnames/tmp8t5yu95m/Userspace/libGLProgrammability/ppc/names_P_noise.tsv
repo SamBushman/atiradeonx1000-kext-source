@@ -1,0 +1,154 @@
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	param_1	noise	CONFIRMED	noise generator state built by _InterpreterNoiseGeneratorInitialise: permutation bytes at +0, gradient floats at +0x210
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	param_2	point	CONFIRMED	sample point, float[3] (x,y,z; unused axes are still floored)
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_30	intCastScratch	UNKNOWN	8-byte store Ghidra shows for the (longlong)(int) casts; never read
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_28	i2dHi1	INFERRED	high word 0x43300000 of the int-to-double conversion scratch
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	uStack_24	i2dLo1	INFERRED	low word (cell ^ 0x80000000) of the int-to-double conversion scratch
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_80	fracX	INFERRED	fractional part of the sample point on that axis (point - floor(point))
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_7c	fracY	INFERRED	fractional part of the sample point on that axis (point - floor(point))
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_50	lerpA0	INFERRED	lane 0 of the first operand vector given to _InterpreterNoiseGeneratorInterpolate (4 floats); also receives the result
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_4c	lerpA1	INFERRED	lane 1 of the first operand vector given to _InterpreterNoiseGeneratorInterpolate (4 floats); also receives the result
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_48	lerpA2	INFERRED	lane 2 of the first operand vector given to _InterpreterNoiseGeneratorInterpolate (4 floats); also receives the result
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_44	lerpA3	INFERRED	lane 3 of the first operand vector given to _InterpreterNoiseGeneratorInterpolate (4 floats); also receives the result
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_40	lerpB0	INFERRED	lane 0 of the second operand vector given to Interpolate
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_3c	lerpB1	INFERRED	lane 1 of the second operand vector given to Interpolate
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_38	lerpB2	INFERRED	lane 2 of the second operand vector given to Interpolate
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_34	lerpB3	INFERRED	lane 3 of the second operand vector given to Interpolate
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_60	lerpWeight0	INFERRED	lane 0 of the weight vector (the smoothed fraction of the axis being interpolated, replicated)
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_5c	lerpWeight1	INFERRED	lane 1 of the weight vector (the smoothed fraction of the axis being interpolated, replicated)
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_58	lerpWeight2	INFERRED	lane 2 of the weight vector (the smoothed fraction of the axis being interpolated, replicated)
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_54	lerpWeight3	INFERRED	lane 3 of the weight vector (the smoothed fraction of the axis being interpolated, replicated)
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_78	fracZ	INFERRED	fractional part of z
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_74	fracPad	UNKNOWN	fourth lane of the fraction vector, 0
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_70	smoothX	INFERRED	SmoothHermiteCurve of fracX
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_6c	smoothY	INFERRED	SmoothHermiteCurve of fracY
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	local_68	smoothZ	INFERRED	SmoothHermiteCurve of fracZ
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar1	cellZ	INFERRED	floor(z), masked to 0..255
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar2	cellY0	INFERRED	y cell masked to 0..255
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar3	cellZ1	INFERRED	(z+1) & 0xff
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar4	permX0Y0	INFERRED	perm[perm[x] + y]
+local	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar6	permX0Y1	INFERRED	perm[perm[x] + y+1]
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar5	cellX	INFERRED	floor(x) as integer, lattice cell index	^\s*uVar5\ =\ \(uint\)\(int\)dVar9;$	+2
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar5	cellX	INFERRED	floor(x) as integer, lattice cell index	^\s*local_80\ =\ \*param_2\ \-\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar5\ \^\ 0x80000000\)\ \-\ DOUBLE_97c30a58\);$	+1
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar5	cellX	INFERRED	floor(x) as integer, lattice cell index	^\s*iVar8\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ \(uVar5\ \&\ 0xff\)\)\ \+\ param_1;$	+1
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar5	cellX	INFERRED	floor(x) as integer, lattice cell index	^\s*iVar8\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ \(\(uVar5\ \&\ 0xff\)\ \+\ 1\ \&\ 0xff\)\)\ \+\ param_1;$	+1
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar5	permX1Y0	INFERRED	perm[perm[x+1] + y]: hash of the lattice corner	^\s*uVar5\ =\ \(uint\)\*\(byte\ \*\)\(iVar8\ \+\ uVar2\);$	+1
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar5	permX1Y0	INFERRED	perm[perm[x+1] + y]: hash of the lattice corner	^\s*local_40\ =\ \*\(undefined4\ \*\)\(\(\(uVar5\ \+\ uVar1\)\ \*\ 4\ \&\ 0x3fc\)\ \+\ param_1\ \+\ 0x210\);$	+1
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar5	permX1Y0	INFERRED	perm[perm[x+1] + y]: hash of the lattice corner	^\s*local_38\ =\ \*\(float\ \*\)\(\(\(uVar5\ \+\ uVar3\)\ \*\ 4\ \&\ 0x3fc\)\ \+\ param_1\ \+\ 0x210\);$	+1
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY	INFERRED	floor(y) as integer	^\s*uVar7\ =\ \(uint\)\(int\)dVar9;$	+2
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY	INFERRED	floor(y) as integer	^\s*uVar2\ =\ uVar7\ \&\ 0xff;$	+1
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY	INFERRED	floor(y) as integer	^\s*local_7c\ =\ param_2\[1\]\ \-\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar7\ \^\ 0x80000000\)\ \-\ DOUBLE_97c30a58\)$	+1
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY1OrPermX1Y1	INFERRED	(y+1)&0xff, then reused for perm[perm[x+1] + y+1]	^\s*uVar7\ =\ uVar2\ \+\ 1\ \&\ 0xff;$	+1
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY1OrPermX1Y1	INFERRED	(y+1)&0xff, then reused for perm[perm[x+1] + y+1]	^\s*uVar6\ =\ \(uint\)\*\(byte\ \*\)\(iVar8\ \+\ uVar7\);$	+1
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY1OrPermX1Y1	INFERRED	(y+1)&0xff, then reused for perm[perm[x+1] + y+1]	^\s*uVar7\ =\ \(uint\)\*\(byte\ \*\)\(iVar8\ \+\ uVar7\);$	+1
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY1OrPermX1Y1	INFERRED	(y+1)&0xff, then reused for perm[perm[x+1] + y+1]	^\s*local_3c\ =\ \*\(undefined4\ \*\)\(\(\(uVar7\ \+\ uVar1\)\ \*\ 4\ \&\ 0x3fc\)\ \+\ param_1\ \+\ 0x210\);$	+1
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY1OrPermX1Y1	INFERRED	(y+1)&0xff, then reused for perm[perm[x+1] + y+1]	^\s*local_34\ =\ \*\(float\ \*\)\(\(\(uVar7\ \+\ uVar3\)\ \*\ 4\ \&\ 0x3fc\)\ \+\ param_1\ \+\ 0x210\);$	+1
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	iVar8	permRow0	INFERRED	noise + perm[x & 0xff]: row of the permutation table for x	^\s*iVar8\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ \(uVar5\ \&\ 0xff\)\)\ \+\ param_1;$	+3
+use	_InterpreterNoiseGeneratorInterpolatedNoise3D	iVar8	permRow1	INFERRED	noise + perm[(x+1) & 0xff]	^\s*iVar8\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ \(\(uVar5\ \&\ 0xff\)\ \+\ 1\ \&\ 0xff\)\)\ \+\ param_1;$	+3
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	param_1	noise	CONFIRMED	noise generator state built by _InterpreterNoiseGeneratorInitialise: permutation bytes at +0, gradient floats at +0x210
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	param_2	point	CONFIRMED	sample point, float[3] (x,y,z; unused axes are still floored)
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_30	intCastScratch	UNKNOWN	8-byte store Ghidra shows for the (longlong)(int) casts; never read
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_28	i2dHi1	INFERRED	high word 0x43300000 of the int-to-double conversion scratch
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	uStack_24	i2dLo1	INFERRED	low word (cell ^ 0x80000000) of the int-to-double conversion scratch
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_80	fracX	INFERRED	fractional part of the sample point on that axis (point - floor(point))
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_7c	fracY	INFERRED	fractional part of the sample point on that axis (point - floor(point))
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_50	lerpA0	INFERRED	lane 0 of the first operand vector given to _InterpreterNoiseGeneratorInterpolate (4 floats); also receives the result
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_4c	lerpA1	INFERRED	lane 1 of the first operand vector given to _InterpreterNoiseGeneratorInterpolate (4 floats); also receives the result
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_48	lerpA2	INFERRED	lane 2 of the first operand vector given to _InterpreterNoiseGeneratorInterpolate (4 floats); also receives the result
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_44	lerpA3	INFERRED	lane 3 of the first operand vector given to _InterpreterNoiseGeneratorInterpolate (4 floats); also receives the result
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_40	lerpB0	INFERRED	lane 0 of the second operand vector given to Interpolate
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_3c	lerpB1	INFERRED	lane 1 of the second operand vector given to Interpolate
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_38	lerpB2	INFERRED	lane 2 of the second operand vector given to Interpolate
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_34	lerpB3	INFERRED	lane 3 of the second operand vector given to Interpolate
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_60	lerpWeight0	INFERRED	lane 0 of the weight vector (the smoothed fraction of the axis being interpolated, replicated)
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_5c	lerpWeight1	INFERRED	lane 1 of the weight vector (the smoothed fraction of the axis being interpolated, replicated)
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_58	lerpWeight2	INFERRED	lane 2 of the weight vector (the smoothed fraction of the axis being interpolated, replicated)
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_54	lerpWeight3	INFERRED	lane 3 of the weight vector (the smoothed fraction of the axis being interpolated, replicated)
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_78	fracPad2	UNKNOWN	third lane of the fraction vector, 0
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_74	fracPad	UNKNOWN	fourth lane of the fraction vector, 0
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_70	smoothX	INFERRED	SmoothHermiteCurve of fracX
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	local_6c	smoothY	INFERRED	SmoothHermiteCurve of fracY
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	uVar2	cellY	INFERRED	floor(y), masked to 0..255
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	uVar3	permX0	INFERRED	perm[x & 0xff]
+local	_InterpreterNoiseGeneratorInterpolatedNoise2D	uVar4	permX1	INFERRED	perm[(x+1) & 0xff]
+use	_InterpreterNoiseGeneratorInterpolatedNoise2D	uVar1	cellX	INFERRED	floor(x) as integer, lattice cell index	^\s*uVar1\ =\ \(uint\)\(int\)dVar5;$	+2
+use	_InterpreterNoiseGeneratorInterpolatedNoise2D	uVar1	cellX	INFERRED	floor(x) as integer, lattice cell index	^\s*local_80\ =\ \*param_2\ \-\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar1\ \^\ 0x80000000\)\ \-\ DOUBLE_97c30a58\);$	+1
+use	_InterpreterNoiseGeneratorInterpolatedNoise2D	uVar1	cellX	INFERRED	floor(x) as integer, lattice cell index	^\s*uVar3\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ \(uVar1\ \&\ 0xff\)\);$	+2
+use	_InterpreterNoiseGeneratorInterpolatedNoise2D	uVar1	cellY1	INFERRED	(y+1) & 0xff	^\s*uVar1\ =\ uVar2\ \+\ 1\ \&\ 0xff;$	+1
+use	_InterpreterNoiseGeneratorInterpolatedNoise2D	uVar1	cellY1	INFERRED	(y+1) & 0xff	^\s*local_48\ =\ \*\(undefined4\ \*\)\(\(\(uVar3\ \+\ uVar1\)\ \*\ 4\ \&\ 0x3fc\)\ \+\ param_1\ \+\ 0x210\);$	+2
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	param_1	noise	CONFIRMED	noise generator state built by _InterpreterNoiseGeneratorInitialise: permutation bytes at +0, gradient floats at +0x210
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	param_2	point	CONFIRMED	sample point, float[3] (x,y,z; unused axes are still floored)
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_30	intCastScratch	UNKNOWN	8-byte store Ghidra shows for the (longlong)(int) casts; never read
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_28	i2dHi1	INFERRED	high word 0x43300000 of the int-to-double conversion scratch
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	uStack_24	i2dLo1	INFERRED	low word (cell ^ 0x80000000) of the int-to-double conversion scratch
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_80	fracX	INFERRED	fractional part of the sample point on that axis (point - floor(point))
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_7c	fracY	INFERRED	fractional part of the sample point on that axis (point - floor(point))
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_50	lerpA0	INFERRED	lane 0 of the first operand vector given to _InterpreterNoiseGeneratorInterpolate (4 floats); also receives the result
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_4c	lerpA1	INFERRED	lane 1 of the first operand vector given to _InterpreterNoiseGeneratorInterpolate (4 floats); also receives the result
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_48	lerpA2	INFERRED	lane 2 of the first operand vector given to _InterpreterNoiseGeneratorInterpolate (4 floats); also receives the result
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_44	lerpA3	INFERRED	lane 3 of the first operand vector given to _InterpreterNoiseGeneratorInterpolate (4 floats); also receives the result
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_40	lerpB0	INFERRED	lane 0 of the second operand vector given to Interpolate
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_3c	lerpB1	INFERRED	lane 1 of the second operand vector given to Interpolate
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_38	lerpB2	INFERRED	lane 2 of the second operand vector given to Interpolate
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_34	lerpB3	INFERRED	lane 3 of the second operand vector given to Interpolate
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_60	lerpWeight0	INFERRED	lane 0 of the weight vector (the smoothed fraction of the axis being interpolated, replicated)
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_5c	lerpWeight1	INFERRED	lane 1 of the weight vector (the smoothed fraction of the axis being interpolated, replicated)
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_58	lerpWeight2	INFERRED	lane 2 of the weight vector (the smoothed fraction of the axis being interpolated, replicated)
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_54	lerpWeight3	INFERRED	lane 3 of the weight vector (the smoothed fraction of the axis being interpolated, replicated)
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_78	fracZ	INFERRED	fractional part of z (computed even though unused by the 1D noise)
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_74	fracPad	UNKNOWN	fourth lane of the fraction vector, 0
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	local_70	smooth	INFERRED	SmoothHermiteCurve of the fraction vector (4 floats; lane 0 is the x curve)
+local	_InterpreterNoiseGeneratorInterpolatedNoise1D	uVar1	cellX	INFERRED	floor(x) as integer, lattice cell index
+local	_InterpreterNoiseGeneratorCalculate3D	param_1	noise	CONFIRMED	noise generator state (permutation bytes at +0, gradients at +0x210)
+local	_InterpreterNoiseGeneratorCalculate3D	param_2	point	CONFIRMED	input point (x[,y[,z]])
+local	_InterpreterNoiseGeneratorCalculate3D	param_3	result	CONFIRMED	receives the fractal sum replicated into all four components
+local	_InterpreterNoiseGeneratorCalculate3D	uVar4	nextOctave	INFERRED	loopIndex + 1
+local	_InterpreterNoiseGeneratorCalculate3D	fVar1	noiseSum	INFERRED	running sum of the octaves (starts at 0.0 via the global that aliases the float constant 0)
+local	_InterpreterNoiseGeneratorCalculate3D	dVar3	i2dBias	INFERRED	DOUBLE_97c30a68: 2^52 + 2^31 bias of the int-to-double conversion
+local	_InterpreterNoiseGeneratorCalculate3D	dVar6	octaveNoise	INFERRED	InterpolatedNoise3D at point*frequency
+local	_InterpreterNoiseGeneratorCalculate3D	local_60	samplePointX	INFERRED	x * frequency
+local	_InterpreterNoiseGeneratorCalculate3D	local_5c	samplePointY	INFERRED	y * frequency
+local	_InterpreterNoiseGeneratorCalculate3D	local_58	samplePointZ	INFERRED	z * frequency
+local	_InterpreterNoiseGeneratorCalculate3D	local_54	samplePointW	UNKNOWN	fourth lane, 0
+local	_InterpreterNoiseGeneratorCalculate3D	local_50	i2dHi1	INFERRED	high word 0x43300000 of the int-to-double conversion scratch
+local	_InterpreterNoiseGeneratorCalculate3D	uStack_4c	i2dLo1	INFERRED	low word of the int-to-double conversion scratch
+local	_InterpreterNoiseGeneratorCalculate2D	param_1	noise	CONFIRMED	noise generator state (permutation bytes at +0, gradients at +0x210)
+local	_InterpreterNoiseGeneratorCalculate2D	param_2	point	CONFIRMED	input point (x[,y[,z]])
+local	_InterpreterNoiseGeneratorCalculate2D	param_3	result	CONFIRMED	receives the fractal sum replicated into all four components
+local	_InterpreterNoiseGeneratorCalculate2D	uVar3	nextOctave	INFERRED	loopIndex + 1
+local	_InterpreterNoiseGeneratorCalculate2D	fVar1	noiseSum	INFERRED	running sum of the octaves (starts at 0.0 via the global that aliases the float constant 0)
+local	_InterpreterNoiseGeneratorCalculate2D	dVar2	i2dBias	INFERRED	DOUBLE_97c30a68: 2^52 + 2^31 bias of the int-to-double conversion
+local	_InterpreterNoiseGeneratorCalculate2D	dVar4	octaveNoise	INFERRED	InterpolatedNoise2D at point*frequency
+local	_InterpreterNoiseGeneratorCalculate2D	local_60	samplePointX	INFERRED	x * frequency
+local	_InterpreterNoiseGeneratorCalculate2D	local_5c	samplePointY	INFERRED	y * frequency
+local	_InterpreterNoiseGeneratorCalculate2D	local_58	samplePointZ	UNKNOWN	third lane, 0
+local	_InterpreterNoiseGeneratorCalculate2D	local_54	samplePointW	UNKNOWN	fourth lane, 0
+local	_InterpreterNoiseGeneratorCalculate2D	local_50	i2dHi1	INFERRED	high word 0x43300000 of the int-to-double conversion scratch
+local	_InterpreterNoiseGeneratorCalculate2D	uStack_4c	i2dLo1	INFERRED	low word of the int-to-double conversion scratch
+local	_InterpreterNoiseGeneratorCalculate1D	param_1	noise	CONFIRMED	noise generator state (permutation bytes at +0, gradients at +0x210)
+local	_InterpreterNoiseGeneratorCalculate1D	param_2	point	CONFIRMED	input point (x[,y[,z]])
+local	_InterpreterNoiseGeneratorCalculate1D	param_3	result	CONFIRMED	receives the fractal sum replicated into all four components
+local	_InterpreterNoiseGeneratorCalculate1D	uVar3	nextOctave	INFERRED	loopIndex + 1
+local	_InterpreterNoiseGeneratorCalculate1D	fVar1	noiseSum	INFERRED	running sum of the octaves (starts at 0.0 via the global that aliases the float constant 0)
+local	_InterpreterNoiseGeneratorCalculate1D	dVar2	i2dBias	INFERRED	DOUBLE_97c30a68: 2^52 + 2^31 bias of the int-to-double conversion
+local	_InterpreterNoiseGeneratorCalculate1D	dVar4	octaveNoise	INFERRED	InterpolatedNoise1D at x*frequency
+local	_InterpreterNoiseGeneratorCalculate1D	local_60	samplePoint	INFERRED	float[5]: x*frequency, three zero lanes, and the i2d scratch word the compiler placed after them
+local	_InterpreterNoiseGeneratorCalculate1D	uStack_4c	i2dLo1	INFERRED	low word of the int-to-double conversion scratch
+local	_InterpreterNoiseGeneratorSmoothHermiteCurve	param_1	noise	CONFIRMED	noise generator state (unused)
+local	_InterpreterNoiseGeneratorSmoothHermiteCurve	param_2	fraction	CONFIRMED	input fractions, float[4]
+local	_InterpreterNoiseGeneratorSmoothHermiteCurve	param_3	curve	CONFIRMED	output t*t*(3-2t) per lane (smoothstep / cubic Hermite)
+local	_InterpreterNoiseGeneratorSmoothHermiteCurve	dVar1	threeConst	INFERRED	constant 3.0 (DOUBLE_97c30a80)
+local	_InterpreterNoiseGeneratorSmoothHermiteCurve	dVar2	fractionD	INFERRED	one lane of the fraction as double
+local	_InterpreterNoiseGeneratorInterpolate	param_1	noise	CONFIRMED	noise generator state (unused)
+local	_InterpreterNoiseGeneratorInterpolate	param_2	vecA	CONFIRMED	first operand, float[4]
+local	_InterpreterNoiseGeneratorInterpolate	param_3	vecB	CONFIRMED	second operand, float[4]
+local	_InterpreterNoiseGeneratorInterpolate	param_4	weight	CONFIRMED	per-lane interpolation weight
+local	_InterpreterNoiseGeneratorInterpolate	param_5	result	CONFIRMED	weight*(B-A)+A per lane (linear interpolation)
+local	_InterpreterNoiseGeneratorInitialise	param_1	noise	CONFIRMED	generator state, 0xa20 bytes zeroed: permutation bytes +0..0x101, gradient floats +0x210 (0x100 entries, copied to +0x610 for the wrap-around)
+local	_InterpreterNoiseGeneratorInitialise	uVar1	swapTemp	INFERRED	permutation byte being swapped
+local	_InterpreterNoiseGeneratorInitialise	uVar2	gradientCopy	INFERRED	gradient word copied to the wrap-around area
+local	_InterpreterNoiseGeneratorInitialise	uVar3	randomValue	INFERRED	result of random() mapped to -0.5..0.5
+local	_InterpreterNoiseGeneratorInitialise	iVar4	swapIndex	INFERRED	random() mod 256 (during the shuffle), then the copy loop counter
+local	_InterpreterNoiseGeneratorInitialise	pfVar5	gradientPtr	INFERRED	next gradient float at noise+0x210
+local	_InterpreterNoiseGeneratorInitialise	uVar6	shuffleRandom	INFERRED	random() used to pick the swap partner
+local	_InterpreterNoiseGeneratorInitialise	puVar7	permPtr	INFERRED	permutation cursor (shuffle runs from the end down to the start; then walks the gradient copy)
+local	_InterpreterNoiseGeneratorCalculate3D	fVar2	frequencyF	INFERRED	frequency as float, multiplied into the point

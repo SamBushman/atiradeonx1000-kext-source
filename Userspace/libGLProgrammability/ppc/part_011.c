@@ -370,48 +370,54 @@ int ParseSymbolTable__InsertSingleSymbol(this, parseSymbol)
   unsigned char * this;
   unsigned char * parseSymbol;
 {
-  bool bVar1;
-  byte bVar2;
-  int iVar3;
-  short sVar4;
-  unsigned char * p_Var5;
+  uint arraySizeLimit;
+  uint registerClassBits;
+  int firstChunk;
+  int arrayTrackingMode;
+  int scalerWidth;
+  int chunkList;
+  bool isExtraVec4;
+  byte chunkKind;
+  int nextIndex;
+  short counterLow;
+  unsigned char * symbolChunk;
   int *r3In0;
-  int iVar6;
+  int typeKind;
   int *r3In1;
-  uint uVar7;
+  uint vec4Count;
   undefined4 r4In0;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  uint uVar8;
-  undefined4 uVar9;
-  uint uVar10;
-  byte *pbVar11;
-  uint local_40 [6];
+  undefined4 strayR5;
+  undefined4 strayR6;
+  undefined4 strayR7;
+  undefined4 strayR8;
+  uint registerSlot;
+  undefined4 needsRegisters;
+  uint vec4Index;
+  byte *curChunk;
+  uint usageEntry [6];
   
-  p_Var5 = (unsigned char *)GetChunkForSymbol(parseSymbol,*(int *)(this + 0x3c));
+  symbolChunk = (unsigned char *)GetChunkForSymbol(parseSymbol,*(int *)(this + 0x3c));
   *(undefined4 *)(parseSymbol + 4) = 0;
   *(undefined4 *)(parseSymbol + 8) = 0;
   ((int (*)())ParseSymbolTable__AddSymbol)(this,parseSymbol);
   *(undefined4 *)(parseSymbol + 0x50) = 1;
   if (*(int *)(parseSymbol + 0x38) == 0) {
-    uVar9 = 0;
+    needsRegisters = 0;
     if ((*(int *)(parseSymbol + 0x58) == 0) && (*(int *)(parseSymbol + 0x3c) == 0)) {
       r3In0 = *(int **)(parseSymbol + 0xc);
       r3In1 = (int *)0x0;
       if (r3In0 != (int *)0x0) {
-        iVar6 = (**(code **)(*r3In0 + 0x24))(r3In0);
-        if ((((iVar6 != 0) &&
-             (iVar6 = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc)),
-             iVar6 != 9)) &&
-            (iVar6 = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc)),
-            iVar6 != 10)) &&
-           ((iVar6 = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc)),
-            iVar6 != 0xb &&
-            (iVar6 = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc)),
-            iVar6 != 0xc)))) {
-          uVar9 = 1;
+        typeKind = (**(code **)(*r3In0 + 0x24))(r3In0);
+        if ((((typeKind != 0) &&
+             (typeKind = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc)),
+             typeKind != 9)) &&
+            (typeKind = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc)),
+            typeKind != 10)) &&
+           ((typeKind = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc)),
+            typeKind != 0xb &&
+            (typeKind = (**(code **)(**(int **)(parseSymbol + 0xc) + 0x24))(*(int **)(parseSymbol + 0xc)),
+            typeKind != 0xc)))) {
+          needsRegisters = 1;
         }
         goto LAB_97bbc61c;
       }
@@ -420,197 +426,197 @@ int ParseSymbolTable__InsertSingleSymbol(this, parseSymbol)
 LAB_97bbc61c:
       r3In1 = *(int **)(parseSymbol + 0xc);
     }
-    *(undefined4 *)(parseSymbol + 0x38) = uVar9;
+    *(undefined4 *)(parseSymbol + 0x38) = needsRegisters;
   }
   else {
     r3In1 = *(int **)(parseSymbol + 0xc);
   }
-  iVar6 = (**(code **)(*r3In1 + 0x24))(r3In1);
-  *(uint *)(parseSymbol + 0x60) = (uint)(iVar6 == 4);
-  iVar6 = **(int **)(parseSymbol + 0xc);
-  iVar6 = (**(code **)(iVar6 + 0x24))(*(int **)(parseSymbol + 0xc),r4In0,in_r5,in_r6,in_r7,in_r8,iVar6);
-  *(uint *)(parseSymbol + 0x5c) = (uint)(iVar6 == 5);
+  typeKind = (**(code **)(*r3In1 + 0x24))(r3In1);
+  *(uint *)(parseSymbol + 0x60) = (uint)(typeKind == 4);
+  typeKind = **(int **)(parseSymbol + 0xc);
+  typeKind = (**(code **)(typeKind + 0x24))(*(int **)(parseSymbol + 0xc),r4In0,strayR5,strayR6,strayR7,strayR8,typeKind);
+  *(uint *)(parseSymbol + 0x5c) = (uint)(typeKind == 5);
   *(undefined4 *)(parseSymbol + 0x54) = *(undefined4 *)(this + 0x50);
-  uVar7 = GetVec4sForType((uint)*(ushort *)(parseSymbol + 0x2c));
-  ParseSymbol__SetChunk(parseSymbol,p_Var5);
-  pbVar11 = *(byte **)parseSymbol;
+  vec4Count = GetVec4sForType((uint)*(ushort *)(parseSymbol + 0x2c));
+  ParseSymbol__SetChunk(parseSymbol,symbolChunk);
+  curChunk = *(byte **)parseSymbol;
   *(undefined4 *)(parseSymbol + 0x44) = 0;
-  if (pbVar11 == (byte *)0x0) {
+  if (curChunk == (byte *)0x0) {
     return parseSymbol;
   }
-  bVar2 = *pbVar11;
-  if (bVar2 == 2) {
-    iVar6 = *(int *)(*(int *)(this + 0xc) + 0x18);
+  chunkKind = *curChunk;
+  if (chunkKind == 2) {
+    chunkList = *(int *)(*(int *)(this + 0xc) + 0x18);
     goto LAB_97bbc70c;
   }
-  if (bVar2 < 3) {
-    if (bVar2 == 0) {
-      iVar6 = *(int *)(*(int *)(this + 0xc) + 4);
+  if (chunkKind < 3) {
+    if (chunkKind == 0) {
+      chunkList = *(int *)(*(int *)(this + 0xc) + 4);
       goto LAB_97bbc70c;
     }
   }
   else {
-    if (bVar2 == 3) {
-      iVar6 = *(int *)(*(int *)(this + 0xc) + 0x10);
+    if (chunkKind == 3) {
+      chunkList = *(int *)(*(int *)(this + 0xc) + 0x10);
       goto LAB_97bbc70c;
     }
-    if (bVar2 == 4) {
-      iVar6 = *(int *)(*(int *)(this + 0xc) + 0x1c);
+    if (chunkKind == 4) {
+      chunkList = *(int *)(*(int *)(this + 0xc) + 0x1c);
       goto LAB_97bbc70c;
     }
   }
-  iVar6 = 0;
+  chunkList = 0;
 LAB_97bbc70c:
-  uVar10 = 0;
-  if ((uVar7 != 0) && (iVar6 != 0)) {
+  vec4Index = 0;
+  if ((vec4Count != 0) && (chunkList != 0)) {
     do {
-      bVar1 = uVar10 != 0;
-      if (bVar1) {
-        pbVar11 = (byte *)_PPStreamChunkCreateFromChunk(pbVar11);
+      isExtraVec4 = vec4Index != 0;
+      if (isExtraVec4) {
+        curChunk = (byte *)_PPStreamChunkCreateFromChunk(curChunk);
       }
-      bVar2 = *pbVar11;
-      if (bVar2 == 2) {
-        iVar3 = *(int *)(this + 0x18);
-        *(short *)(pbVar11 + 0x12) = (short)iVar3;
-        *(int *)(this + 0x18) = iVar3 + 1;
-        if ((*(uint *)(pbVar11 + 0xc) & 0xf0000) == 0x90000) {
-          uVar8 = *(uint *)(this + 0x1c);
-          *(uint *)(pbVar11 + 0xc) = uVar8 & 0x1f | *(uint *)(pbVar11 + 0xc) & 0xffffffe0;
-          *(uint *)(this + 0x1c) = uVar8 + 1;
-          iVar3 = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
-          *(int *)(this + 0x20) = *(int *)(this + 0x20) + iVar3;
+      chunkKind = *curChunk;
+      if (chunkKind == 2) {
+        nextIndex = *(int *)(this + 0x18);
+        *(short *)(curChunk + 0x12) = (short)nextIndex;
+        *(int *)(this + 0x18) = nextIndex + 1;
+        if ((*(uint *)(curChunk + 0xc) & 0xf0000) == 0x90000) {
+          registerSlot = *(uint *)(this + 0x1c);
+          *(uint *)(curChunk + 0xc) = registerSlot & 0x1f | *(uint *)(curChunk + 0xc) & 0xffffffe0;
+          *(uint *)(this + 0x1c) = registerSlot + 1;
+          scalerWidth = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
+          *(int *)(this + 0x20) = *(int *)(this + 0x20) + scalerWidth;
         }
       }
-      else if (bVar2 < 3) {
-        if (bVar2 == 0) {
-          iVar3 = *(int *)(this + 0x38);
-          *(short *)(pbVar11 + 0x12) = (short)iVar3;
-          *(int *)(this + 0x38) = iVar3 + 1;
+      else if (chunkKind < 3) {
+        if (chunkKind == 0) {
+          nextIndex = *(int *)(this + 0x38);
+          *(short *)(curChunk + 0x12) = (short)nextIndex;
+          *(int *)(this + 0x38) = nextIndex + 1;
           if (*(int *)(parseSymbol + 0x60) == 0) {
             if (*(int *)(parseSymbol + 0x5c) != 0) {
-              uVar8 = *(uint *)(this + 0x34);
-              *(uint *)(pbVar11 + 0xc) = uVar8 & 0x1f | *(uint *)(pbVar11 + 0xc) & 0xffffffe0;
-              *(uint *)(this + 0x34) = uVar8 + 1;
+              registerSlot = *(uint *)(this + 0x34);
+              *(uint *)(curChunk + 0xc) = registerSlot & 0x1f | *(uint *)(curChunk + 0xc) & 0xffffffe0;
+              *(uint *)(this + 0x34) = registerSlot + 1;
             }
           }
           else {
-            uVar8 = *(uint *)(this + 0x1c);
-            *(uint *)(pbVar11 + 0xc) = uVar8 & 0x1f | *(uint *)(pbVar11 + 0xc) & 0xffffffe0;
-            *(uint *)(this + 0x1c) = uVar8 + 1;
-            iVar3 = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
-            *(int *)(this + 0x20) = *(int *)(this + 0x20) + iVar3;
+            registerSlot = *(uint *)(this + 0x1c);
+            *(uint *)(curChunk + 0xc) = registerSlot & 0x1f | *(uint *)(curChunk + 0xc) & 0xffffffe0;
+            *(uint *)(this + 0x1c) = registerSlot + 1;
+            scalerWidth = GetScalerWidthForType((uint)*(ushort *)(parseSymbol + 0x2c));
+            *(int *)(this + 0x20) = *(int *)(this + 0x20) + scalerWidth;
           }
           if (*(int *)(this + 0x50) != 0) {
-            pbVar11[0x14] = 0;
-            pbVar11[0x15] = 0;
-            pbVar11[0x16] = 0;
-            pbVar11[0x17] = 1;
+            curChunk[0x14] = 0;
+            curChunk[0x15] = 0;
+            curChunk[0x16] = 0;
+            curChunk[0x17] = 1;
           }
         }
       }
-      else if (bVar2 == 3) {
-        iVar3 = *(int *)(this + 0x24);
-        *(short *)(pbVar11 + 0x12) = (short)iVar3;
-        *(int *)(this + 0x24) = iVar3 + 1;
+      else if (chunkKind == 3) {
+        nextIndex = *(int *)(this + 0x24);
+        *(short *)(curChunk + 0x12) = (short)nextIndex;
+        *(int *)(this + 0x24) = nextIndex + 1;
         if (*(int *)(this + 0x50) != 0) {
-          pbVar11[0x14] = 0;
-          pbVar11[0x15] = 0;
-          pbVar11[0x16] = 0;
-          pbVar11[0x17] = 1;
+          curChunk[0x14] = 0;
+          curChunk[0x15] = 0;
+          curChunk[0x16] = 0;
+          curChunk[0x17] = 1;
         }
-        uVar8 = *(uint *)(pbVar11 + 0xc) & 0x1f0000;
-        if (uVar8 == 0x20000) {
-          iVar3 = *(int *)(this + 0x2c);
-          *(short *)(pbVar11 + 0xe) = (short)iVar3;
-          *(int *)(this + 0x2c) = iVar3 + 1;
+        registerClassBits = *(uint *)(curChunk + 0xc) & 0x1f0000;
+        if (registerClassBits == 0x20000) {
+          nextIndex = *(int *)(this + 0x2c);
+          *(short *)(curChunk + 0xe) = (short)nextIndex;
+          *(int *)(this + 0x2c) = nextIndex + 1;
         }
-        else if (uVar8 == 0x10000) {
-          iVar3 = *(int *)(this + 0x28);
-          *(short *)(pbVar11 + 0xe) = (short)iVar3;
-          *(int *)(this + 0x28) = iVar3 + 1;
+        else if (registerClassBits == 0x10000) {
+          nextIndex = *(int *)(this + 0x28);
+          *(short *)(curChunk + 0xe) = (short)nextIndex;
+          *(int *)(this + 0x28) = nextIndex + 1;
         }
-        else if (uVar8 == 0x100000) {
-          *(uint *)(pbVar11 + 0xc) = (uVar10 & 3) << 0xc | *(uint *)(pbVar11 + 0xc) & 0xffffcfff;
+        else if (registerClassBits == 0x100000) {
+          *(uint *)(curChunk + 0xc) = (vec4Index & 3) << 0xc | *(uint *)(curChunk + 0xc) & 0xffffcfff;
         }
       }
-      else if (bVar2 == 4) {
-        iVar3 = *(int *)(this + 0x30);
-        *(short *)(pbVar11 + 0x12) = (short)iVar3;
-        *(int *)(this + 0x30) = iVar3 + 1;
+      else if (chunkKind == 4) {
+        nextIndex = *(int *)(this + 0x30);
+        *(short *)(curChunk + 0x12) = (short)nextIndex;
+        *(int *)(this + 0x30) = nextIndex + 1;
       }
-      _PPStreamChunkListAddChunk(iVar6,pbVar11);
-      iVar3 = *(int *)(this + 0x50);
-      if (iVar3 == 0) {
+      _PPStreamChunkListAddChunk(chunkList,curChunk);
+      arrayTrackingMode = *(int *)(this + 0x50);
+      if (arrayTrackingMode == 0) {
 LAB_97bbc990:
-        if (1 < uVar7) {
-          if (((bVar1) || (iVar3 == 0)) || (*(int *)(this + 0x40) != 0)) {
-            if (((uVar10 == uVar7 - 1) && (iVar3 != 0)) && (*(int *)(this + 0x40) == 0)) {
-              bVar2 = **(byte **)(this + 0x48);
-              if (bVar2 != 2) {
-                if (bVar2 < 3) {
-                  if ((bVar2 == 0) &&
-                     (iVar3 = *(int *)(*(int *)(*(int *)(this + 0xc) + 8) + 4),
-                     *(short *)(iVar3 + 0x12) == 0)) {
-                    sVar4 = *(short *)(this + 0x3a);
+        if (1 < vec4Count) {
+          if (((isExtraVec4) || (arrayTrackingMode == 0)) || (*(int *)(this + 0x40) != 0)) {
+            if (((vec4Index == vec4Count - 1) && (arrayTrackingMode != 0)) && (*(int *)(this + 0x40) == 0)) {
+              chunkKind = **(byte **)(this + 0x48);
+              if (chunkKind != 2) {
+                if (chunkKind < 3) {
+                  if ((chunkKind == 0) &&
+                     (firstChunk = *(int *)(*(int *)(*(int *)(this + 0xc) + 8) + 4),
+                     *(short *)(firstChunk + 0x12) == 0)) {
+                    counterLow = *(short *)(this + 0x3a);
 LAB_97bbcab0:
-                    *(short *)(iVar3 + 0x12) = sVar4 + -1;
+                    *(short *)(firstChunk + 0x12) = counterLow + -1;
                   }
                 }
-                else if ((bVar2 == 3) &&
-                        (iVar3 = *(int *)(*(int *)(*(int *)(this + 0xc) + 0x14) + 4),
-                        *(short *)(iVar3 + 0x12) == 0)) {
-                  sVar4 = *(short *)(this + 0x26);
+                else if ((chunkKind == 3) &&
+                        (firstChunk = *(int *)(*(int *)(*(int *)(this + 0xc) + 0x14) + 4),
+                        *(short *)(firstChunk + 0x12) == 0)) {
+                  counterLow = *(short *)(this + 0x26);
                   goto LAB_97bbcab0;
                 }
               }
             }
           }
           else {
-            bVar2 = *pbVar11;
-            if (bVar2 != 2) {
-              if (bVar2 < 3) {
-                if (bVar2 == 0) {
-                  local_40[1] = 0;
-                  local_40[0] = (uint)(ushort)(*(short *)(this + 0x3a) - 1);
-                  _PPStreamAddTempUsageArray(*(undefined4 *)(this + 0xc),local_40);
+            chunkKind = *curChunk;
+            if (chunkKind != 2) {
+              if (chunkKind < 3) {
+                if (chunkKind == 0) {
+                  usageEntry[1] = 0;
+                  usageEntry[0] = (uint)(ushort)(*(short *)(this + 0x3a) - 1);
+                  _PPStreamAddTempUsageArray(*(undefined4 *)(this + 0xc),usageEntry);
                 }
               }
-              else if (bVar2 == 3) {
-                local_40[1] = 0;
-                local_40[0] = (uint)(ushort)(*(short *)(this + 0x26) - 1);
-                _PPStreamAddParamBindingArray(*(undefined4 *)(this + 0xc),local_40);
+              else if (chunkKind == 3) {
+                usageEntry[1] = 0;
+                usageEntry[0] = (uint)(ushort)(*(short *)(this + 0x26) - 1);
+                _PPStreamAddParamBindingArray(*(undefined4 *)(this + 0xc),usageEntry);
               }
             }
           }
         }
       }
       else {
-        uVar8 = *(uint *)(this + 0x40);
-        if (((uVar8 <= *(uint *)(this + 0x44)) || (*(uint *)(this + 0x44) != 0)) || (bVar1))
+        arraySizeLimit = *(uint *)(this + 0x40);
+        if (((arraySizeLimit <= *(uint *)(this + 0x44)) || (*(uint *)(this + 0x44) != 0)) || (isExtraVec4))
         goto LAB_97bbc990;
-        bVar2 = *pbVar11;
-        if (bVar2 != 2) {
-          if (bVar2 < 3) {
-            if (bVar2 == 0) {
-              local_40[1] = 0;
-              local_40[0] = (uint)(ushort)(*(short *)(this + 0x3a) - 1);
-              _PPStreamAddTempUsageArray(*(undefined4 *)(this + 0xc),local_40);
+        chunkKind = *curChunk;
+        if (chunkKind != 2) {
+          if (chunkKind < 3) {
+            if (chunkKind == 0) {
+              usageEntry[1] = 0;
+              usageEntry[0] = (uint)(ushort)(*(short *)(this + 0x3a) - 1);
+              _PPStreamAddTempUsageArray(*(undefined4 *)(this + 0xc),usageEntry);
 LAB_97bbc984:
-              uVar8 = *(uint *)(this + 0x40);
+              arraySizeLimit = *(uint *)(this + 0x40);
             }
           }
-          else if (bVar2 == 3) {
-            local_40[1] = 0;
-            local_40[0] = (uint)(ushort)(*(short *)(this + 0x26) - 1);
-            _PPStreamAddParamBindingArray(*(undefined4 *)(this + 0xc),local_40);
+          else if (chunkKind == 3) {
+            usageEntry[1] = 0;
+            usageEntry[0] = (uint)(ushort)(*(short *)(this + 0x26) - 1);
+            _PPStreamAddParamBindingArray(*(undefined4 *)(this + 0xc),usageEntry);
             goto LAB_97bbc984;
           }
         }
-        *(uint *)(this + 0x44) = uVar8;
+        *(uint *)(this + 0x44) = arraySizeLimit;
       }
-      uVar10 = uVar10 + 1;
-      *(byte **)(this + 0x48) = pbVar11;
-    } while (uVar10 < uVar7);
+      vec4Index = vec4Index + 1;
+      *(byte **)(this + 0x48) = curChunk;
+    } while (vec4Index < vec4Count);
   }
   return parseSymbol;
 }
@@ -715,169 +721,173 @@ int ParseSymbolTable__AddTempFromOutput(this, parseSymbol)
 }
 
 /* ParseSymbolTable__AddFromExternalSymbol @ 0x97bbcd08 (1028 bytes) */
-int ParseSymbolTable__AddFromExternalSymbol(this, parseSymbol, param_3, param_4)
+int ParseSymbolTable__AddFromExternalSymbol(this, parseSymbol, addFirstUsage, patchPrevIndex)
   unsigned char * this;
   unsigned char * parseSymbol;
-  int param_3;
-  int param_4;
+  int addFirstUsage;
+  int patchPrevIndex;
 {
-  byte bVar1;
-  int iVar2;
-  uint uVar3;
-  short sVar4;
-  unsigned char * this_00;
-  unsigned char * p_Var5;
-  uint uVar6;
-  int iVar7;
-  int iVar8;
-  uint uVar9;
-  byte *pbVar10;
-  uint local_50 [7];
+  uint registerClassBits;
+  int firstChunk;
+  int scalerWidth;
+  int nextIndex;
+  byte chunkKind;
+  int nextSrcChunk;
+  uint registerSlot;
+  short counterLow;
+  unsigned char * newSymbol;
+  unsigned char * symbolChunk;
+  uint vec4Count;
+  int srcChunk;
+  int chunkList;
+  uint vec4Index;
+  byte *curChunk;
+  uint usageEntry [7];
   
-  this_00 = operator_new(100);
-  __ZN11ParseSymbolC1Ev(this_00);
-  iVar7 = *(int *)parseSymbol;
-  iVar8 = 0;
-  p_Var5 = (unsigned char *)_PPStreamChunkCreateFromChunk(iVar7);
-  ParseSymbol__operator_(this_00,parseSymbol);
-  *(undefined4 *)(this_00 + 8) = 0;
-  *(undefined4 *)(this_00 + 4) = 0;
-  ((int (*)())ParseSymbolTable__AddSymbol)(this,this_00);
-  *(undefined4 *)(this_00 + 0x50) = 1;
-  uVar6 = GetVec4sForType((uint)*(ushort *)(this_00 + 0x2c));
-  ParseSymbol__SetChunk(this_00,p_Var5);
-  pbVar10 = *(byte **)this_00;
-  *(undefined4 *)(this_00 + 0x44) = 0;
-  if (pbVar10 != (byte *)0x0) {
-    bVar1 = *pbVar10;
-    if (bVar1 == 2) {
-      iVar8 = *(int *)(*(int *)(this + 0xc) + 0x18);
+  newSymbol = operator_new(100);
+  __ZN11ParseSymbolC1Ev(newSymbol);
+  srcChunk = *(int *)parseSymbol;
+  chunkList = 0;
+  symbolChunk = (unsigned char *)_PPStreamChunkCreateFromChunk(srcChunk);
+  ParseSymbol__operator_(newSymbol,parseSymbol);
+  *(undefined4 *)(newSymbol + 8) = 0;
+  *(undefined4 *)(newSymbol + 4) = 0;
+  ((int (*)())ParseSymbolTable__AddSymbol)(this,newSymbol);
+  *(undefined4 *)(newSymbol + 0x50) = 1;
+  vec4Count = GetVec4sForType((uint)*(ushort *)(newSymbol + 0x2c));
+  ParseSymbol__SetChunk(newSymbol,symbolChunk);
+  curChunk = *(byte **)newSymbol;
+  *(undefined4 *)(newSymbol + 0x44) = 0;
+  if (curChunk != (byte *)0x0) {
+    chunkKind = *curChunk;
+    if (chunkKind == 2) {
+      chunkList = *(int *)(*(int *)(this + 0xc) + 0x18);
     }
-    else if (bVar1 < 3) {
-      if (bVar1 == 0) {
-        iVar8 = *(int *)(*(int *)(this + 0xc) + 4);
+    else if (chunkKind < 3) {
+      if (chunkKind == 0) {
+        chunkList = *(int *)(*(int *)(this + 0xc) + 4);
       }
     }
-    else if (bVar1 == 3) {
-      iVar8 = *(int *)(*(int *)(this + 0xc) + 0x10);
+    else if (chunkKind == 3) {
+      chunkList = *(int *)(*(int *)(this + 0xc) + 0x10);
     }
-    else if (bVar1 == 4) {
-      iVar8 = *(int *)(*(int *)(this + 0xc) + 0x1c);
+    else if (chunkKind == 4) {
+      chunkList = *(int *)(*(int *)(this + 0xc) + 0x1c);
     }
-    uVar9 = 0;
-    if ((uVar6 != 0) && (iVar8 != 0)) {
+    vec4Index = 0;
+    if ((vec4Count != 0) && (chunkList != 0)) {
       do {
-        if ((uVar9 != 0) && (iVar2 = *(int *)(iVar7 + 8), iVar2 != 0)) {
-          pbVar10 = (byte *)_PPStreamChunkCreateFromChunk(iVar2);
-          iVar7 = iVar2;
+        if ((vec4Index != 0) && (nextSrcChunk = *(int *)(srcChunk + 8), nextSrcChunk != 0)) {
+          curChunk = (byte *)_PPStreamChunkCreateFromChunk(nextSrcChunk);
+          srcChunk = nextSrcChunk;
         }
-        bVar1 = *pbVar10;
-        if (bVar1 == 2) {
-          iVar2 = *(int *)(this + 0x18);
-          *(short *)(pbVar10 + 0x12) = (short)iVar2;
-          *(int *)(this + 0x18) = iVar2 + 1;
-          if ((*(uint *)(pbVar10 + 0xc) & 0xf0000) == 0x90000) {
-            uVar3 = *(uint *)(this + 0x1c);
-            *(uint *)(pbVar10 + 0xc) = uVar3 & 0x1f | *(uint *)(pbVar10 + 0xc) & 0xffffffe0;
-            *(uint *)(this + 0x1c) = uVar3 + 1;
-            iVar2 = GetScalerWidthForType((uint)*(ushort *)(this_00 + 0x2c));
-            *(int *)(this + 0x20) = *(int *)(this + 0x20) + iVar2;
+        chunkKind = *curChunk;
+        if (chunkKind == 2) {
+          nextIndex = *(int *)(this + 0x18);
+          *(short *)(curChunk + 0x12) = (short)nextIndex;
+          *(int *)(this + 0x18) = nextIndex + 1;
+          if ((*(uint *)(curChunk + 0xc) & 0xf0000) == 0x90000) {
+            registerSlot = *(uint *)(this + 0x1c);
+            *(uint *)(curChunk + 0xc) = registerSlot & 0x1f | *(uint *)(curChunk + 0xc) & 0xffffffe0;
+            *(uint *)(this + 0x1c) = registerSlot + 1;
+            scalerWidth = GetScalerWidthForType((uint)*(ushort *)(newSymbol + 0x2c));
+            *(int *)(this + 0x20) = *(int *)(this + 0x20) + scalerWidth;
           }
         }
-        else if (bVar1 < 3) {
-          if (bVar1 == 0) {
-            iVar2 = *(int *)(this + 0x38);
-            *(short *)(pbVar10 + 0x12) = (short)iVar2;
-            *(int *)(this + 0x38) = iVar2 + 1;
-            if (*(int *)(this_00 + 0x60) == 0) {
-              if (*(int *)(this_00 + 0x5c) != 0) {
-                uVar3 = *(uint *)(this + 0x34);
-                *(uint *)(pbVar10 + 0xc) = uVar3 & 0x1f | *(uint *)(pbVar10 + 0xc) & 0xffffffe0;
-                *(uint *)(this + 0x34) = uVar3 + 1;
+        else if (chunkKind < 3) {
+          if (chunkKind == 0) {
+            nextIndex = *(int *)(this + 0x38);
+            *(short *)(curChunk + 0x12) = (short)nextIndex;
+            *(int *)(this + 0x38) = nextIndex + 1;
+            if (*(int *)(newSymbol + 0x60) == 0) {
+              if (*(int *)(newSymbol + 0x5c) != 0) {
+                registerSlot = *(uint *)(this + 0x34);
+                *(uint *)(curChunk + 0xc) = registerSlot & 0x1f | *(uint *)(curChunk + 0xc) & 0xffffffe0;
+                *(uint *)(this + 0x34) = registerSlot + 1;
               }
             }
             else {
-              uVar3 = *(uint *)(this + 0x1c);
-              *(uint *)(pbVar10 + 0xc) = uVar3 & 0x1f | *(uint *)(pbVar10 + 0xc) & 0xffffffe0;
-              *(uint *)(this + 0x1c) = uVar3 + 1;
-              iVar2 = GetScalerWidthForType((uint)*(ushort *)(this_00 + 0x2c));
-              *(int *)(this + 0x20) = *(int *)(this + 0x20) + iVar2;
+              registerSlot = *(uint *)(this + 0x1c);
+              *(uint *)(curChunk + 0xc) = registerSlot & 0x1f | *(uint *)(curChunk + 0xc) & 0xffffffe0;
+              *(uint *)(this + 0x1c) = registerSlot + 1;
+              scalerWidth = GetScalerWidthForType((uint)*(ushort *)(newSymbol + 0x2c));
+              *(int *)(this + 0x20) = *(int *)(this + 0x20) + scalerWidth;
             }
             if (*(int *)(this + 0x50) != 0) {
-              pbVar10[0x14] = 0;
-              pbVar10[0x15] = 0;
-              pbVar10[0x16] = 0;
-              pbVar10[0x17] = 1;
+              curChunk[0x14] = 0;
+              curChunk[0x15] = 0;
+              curChunk[0x16] = 0;
+              curChunk[0x17] = 1;
             }
           }
         }
-        else if (bVar1 == 3) {
-          iVar2 = *(int *)(this + 0x24);
-          *(short *)(pbVar10 + 0x12) = (short)iVar2;
-          *(int *)(this + 0x24) = iVar2 + 1;
-          uVar3 = *(uint *)(pbVar10 + 0xc) & 0x1f0000;
-          if (uVar3 == 0x20000) {
-            iVar2 = *(int *)(this + 0x2c);
-            *(short *)(pbVar10 + 0xe) = (short)iVar2;
-            *(int *)(this + 0x2c) = iVar2 + 1;
+        else if (chunkKind == 3) {
+          nextIndex = *(int *)(this + 0x24);
+          *(short *)(curChunk + 0x12) = (short)nextIndex;
+          *(int *)(this + 0x24) = nextIndex + 1;
+          registerClassBits = *(uint *)(curChunk + 0xc) & 0x1f0000;
+          if (registerClassBits == 0x20000) {
+            nextIndex = *(int *)(this + 0x2c);
+            *(short *)(curChunk + 0xe) = (short)nextIndex;
+            *(int *)(this + 0x2c) = nextIndex + 1;
           }
-          else if (uVar3 == 0x10000) {
-            iVar2 = *(int *)(this + 0x28);
-            *(short *)(pbVar10 + 0xe) = (short)iVar2;
-            *(int *)(this + 0x28) = iVar2 + 1;
+          else if (registerClassBits == 0x10000) {
+            nextIndex = *(int *)(this + 0x28);
+            *(short *)(curChunk + 0xe) = (short)nextIndex;
+            *(int *)(this + 0x28) = nextIndex + 1;
           }
-          else if (uVar3 == 0x100000) {
-            *(uint *)(pbVar10 + 0xc) = (uVar9 & 3) << 0xc | *(uint *)(pbVar10 + 0xc) & 0xffffcfff;
+          else if (registerClassBits == 0x100000) {
+            *(uint *)(curChunk + 0xc) = (vec4Index & 3) << 0xc | *(uint *)(curChunk + 0xc) & 0xffffcfff;
           }
         }
-        else if (bVar1 == 4) {
-          iVar2 = *(int *)(this + 0x30);
-          *(short *)(pbVar10 + 0x12) = (short)iVar2;
-          *(int *)(this + 0x30) = iVar2 + 1;
+        else if (chunkKind == 4) {
+          nextIndex = *(int *)(this + 0x30);
+          *(short *)(curChunk + 0x12) = (short)nextIndex;
+          *(int *)(this + 0x30) = nextIndex + 1;
         }
-        _PPStreamChunkListAddChunk(iVar8,pbVar10);
-        if ((uVar9 == 0) && (param_3 != 0)) {
-          bVar1 = *pbVar10;
-          if (bVar1 != 2) {
-            if (bVar1 < 3) {
-              if (bVar1 == 0) {
-                local_50[1] = 0;
-                local_50[0] = (uint)(ushort)(*(short *)(this + 0x3a) - 1);
-                _PPStreamAddTempUsageArray(*(undefined4 *)(this + 0xc),local_50);
+        _PPStreamChunkListAddChunk(chunkList,curChunk);
+        if ((vec4Index == 0) && (addFirstUsage != 0)) {
+          chunkKind = *curChunk;
+          if (chunkKind != 2) {
+            if (chunkKind < 3) {
+              if (chunkKind == 0) {
+                usageEntry[1] = 0;
+                usageEntry[0] = (uint)(ushort)(*(short *)(this + 0x3a) - 1);
+                _PPStreamAddTempUsageArray(*(undefined4 *)(this + 0xc),usageEntry);
               }
             }
-            else if (bVar1 == 3) {
-              local_50[1] = 0;
-              local_50[0] = (uint)(ushort)(*(short *)(this + 0x26) - 1);
-              _PPStreamAddParamBindingArray(*(undefined4 *)(this + 0xc),local_50);
+            else if (chunkKind == 3) {
+              usageEntry[1] = 0;
+              usageEntry[0] = (uint)(ushort)(*(short *)(this + 0x26) - 1);
+              _PPStreamAddParamBindingArray(*(undefined4 *)(this + 0xc),usageEntry);
             }
           }
         }
-        if ((uVar9 == uVar6 - 1) && (param_4 != 0)) {
-          bVar1 = *pbVar10;
-          if (bVar1 != 2) {
-            if (bVar1 < 3) {
-              if ((bVar1 == 0) &&
-                 (iVar2 = *(int *)(*(int *)(*(int *)(this + 0xc) + 8) + 4),
-                 *(short *)(iVar2 + 0x12) == 0)) {
-                sVar4 = *(short *)(this + 0x3a);
+        if ((vec4Index == vec4Count - 1) && (patchPrevIndex != 0)) {
+          chunkKind = *curChunk;
+          if (chunkKind != 2) {
+            if (chunkKind < 3) {
+              if ((chunkKind == 0) &&
+                 (firstChunk = *(int *)(*(int *)(*(int *)(this + 0xc) + 8) + 4),
+                 *(short *)(firstChunk + 0x12) == 0)) {
+                counterLow = *(short *)(this + 0x3a);
 LAB_97bbd0d4:
-                *(short *)(iVar2 + 0x12) = sVar4 + -1;
+                *(short *)(firstChunk + 0x12) = counterLow + -1;
               }
             }
-            else if ((bVar1 == 3) &&
-                    (iVar2 = *(int *)(*(int *)(*(int *)(this + 0xc) + 0x14) + 4),
-                    *(short *)(iVar2 + 0x12) == 0)) {
-              sVar4 = *(short *)(this + 0x26);
+            else if ((chunkKind == 3) &&
+                    (firstChunk = *(int *)(*(int *)(*(int *)(this + 0xc) + 0x14) + 4),
+                    *(short *)(firstChunk + 0x12) == 0)) {
+              counterLow = *(short *)(this + 0x26);
               goto LAB_97bbd0d4;
             }
           }
         }
-        uVar9 = uVar9 + 1;
-      } while (uVar9 < uVar6);
+        vec4Index = vec4Index + 1;
+      } while (vec4Index < vec4Count);
     }
   }
-  return this_00;
+  return newSymbol;
 }
 
 /* ParseSymbolTable__InsertSymbol @ 0x97bbd10c (952 bytes) */
@@ -3204,7 +3214,7 @@ switchD_97bc03dc_caseD_0:
       *(byte *)(returnNameData + *(int *)(returnNameData + -0xc)) = *DAT_a7b7bd04;
       returnValueName = *(undefined4 *)(name + 4);
       nodeType = (char *)(**(code **)(*(int *)this + 0x3c))
-                                 (this,r4In7,opHeaderOrParamSlotPtr,nodeType,carriedR4,operatorCode,returnNameData,name);
+                                 (this,r4In7,opHeaderOrParamSlotPtr,functionNameData,carriedR4,operatorCode,returnNameData,name);
       resultOperand[0] = (unsigned char *)
                     TPPStreamCompiler__newReturnValue((unsigned char *)compiler,nodeType,returnValueName);
     }

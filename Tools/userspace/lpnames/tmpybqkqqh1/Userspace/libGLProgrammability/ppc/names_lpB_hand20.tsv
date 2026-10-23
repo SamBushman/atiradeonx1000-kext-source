@@ -1,0 +1,6 @@
+local	_PPStreamGetStream	param_2	packed	CONFIRMED	output buffer of 8-byte stream entries; NULL only computes the size
+local	_PPStreamGetStream	param_3	entryCountOut	CONFIRMED	receives the number of 8-byte entries needed
+local	_PPStreamGetStream	iVar2	entryPos	INFERRED	running entry index: total size while counting, then the write position of the next list
+local	_PPStreamGetStream	uVar1	chunkCount	INFERRED	number of chunks of the list (list[2]) stored in the packed header
+local	_PPStreamGetStream	uVar3	endPos	INFERRED	entry index after the last list, before the final alignment
+local	_PPStreamGetStream	local_30	listEntryCount	INFERRED	entries produced by the list just emitted (element 0)

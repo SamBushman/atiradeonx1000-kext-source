@@ -1,0 +1,64 @@
+# local rows, fork D6: stack frame of the inlined symbol-table insert of a TVariable
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_3b0	poolAllocatorArg	INFERRED	one-word array holding GetGlobalPoolAllocator(), the allocator argument of the TString constructor; frame slot at stack TType base local_3a0+0x10
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_370	insertResultCopy	INFERRED	copy of the iterator half of the symbol table level map insert result; frame slot at stack TType base local_3a0-0x30
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_36c	insertResultFlagCopy	INFERRED	copy of the inserted flag half of the insert result; frame slot at stack TType base local_3a0-0x34
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_360	insertResult	INFERRED	iterator half of the std::map insert result (hidden pair return); frame slot at stack TType base local_3a0-0x40
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_35c	insertResultFlag	INFERRED	inserted flag half of the std::map insert result; frame slot at stack TType base local_3a0-0x44
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_350	nameCopy	INFERRED	temporary TString copy of the variable name (key of the map insert); frame slot at stack TType base local_3a0-0x50
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_34c	nameCopyChars	INFERRED	character pointer of nameCopy (its refcount word is at -4); frame slot at stack TType base local_3a0-0x54
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_348	variableForInsert	INFERRED	the new TVariable stored as the map value; frame slot at stack TType base local_3a0-0x58
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_340	destroyAllocator	INFERRED	allocator argument array of the _Rep::_M_destroy call that releases nameCopy; frame slot at stack TType base local_3a0-0x60
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_330	poolAllocatorArgB	INFERRED	one-word array holding GetGlobalPoolAllocator(), the allocator argument of the TString constructor; frame slot at stack TType base local_320+0x10
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_2f0	insertResultCopyB	INFERRED	copy of the iterator half of the symbol table level map insert result; frame slot at stack TType base local_320-0x30
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_2ec	insertResultFlagCopyB	INFERRED	copy of the inserted flag half of the insert result; frame slot at stack TType base local_320-0x34
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_2e0	insertResultB	INFERRED	iterator half of the std::map insert result (hidden pair return); frame slot at stack TType base local_320-0x40
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_2dc	insertResultFlagB	INFERRED	inserted flag half of the std::map insert result; frame slot at stack TType base local_320-0x44
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_2d0	nameCopyB	INFERRED	temporary TString copy of the variable name (key of the map insert); frame slot at stack TType base local_320-0x50
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_2cc	nameCopyCharsB	INFERRED	character pointer of nameCopy (its refcount word is at -4); frame slot at stack TType base local_320-0x54
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_2c8	variableForInsertB	INFERRED	the new TVariable stored as the map value; frame slot at stack TType base local_320-0x58
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_2c0	destroyAllocatorB	INFERRED	allocator argument array of the _Rep::_M_destroy call that releases nameCopy; frame slot at stack TType base local_320-0x60
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_2b0	poolAllocatorArgC	INFERRED	one-word array holding GetGlobalPoolAllocator(), the allocator argument of the TString constructor; frame slot at stack TType base local_2a0+0x10
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_270	insertResultCopyC	INFERRED	copy of the iterator half of the symbol table level map insert result; frame slot at stack TType base local_2a0-0x30
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_26c	insertResultFlagCopyC	INFERRED	copy of the inserted flag half of the insert result; frame slot at stack TType base local_2a0-0x34
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_260	insertResultC	INFERRED	iterator half of the std::map insert result (hidden pair return); frame slot at stack TType base local_2a0-0x40
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_25c	insertResultFlagC	INFERRED	inserted flag half of the std::map insert result; frame slot at stack TType base local_2a0-0x44
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_250	nameCopyC	INFERRED	temporary TString copy of the variable name (key of the map insert); frame slot at stack TType base local_2a0-0x50
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_24c	nameCopyCharsC	INFERRED	character pointer of nameCopy (its refcount word is at -4); frame slot at stack TType base local_2a0-0x54
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_248	variableForInsertC	INFERRED	the new TVariable stored as the map value; frame slot at stack TType base local_2a0-0x58
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_240	destroyAllocatorC	INFERRED	allocator argument array of the _Rep::_M_destroy call that releases nameCopy; frame slot at stack TType base local_2a0-0x60
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_230	poolAllocatorArgD	INFERRED	one-word array holding GetGlobalPoolAllocator(), the allocator argument of the TString constructor; frame slot at stack TType base local_220+0x10
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_1f0	insertResultCopyD	INFERRED	copy of the iterator half of the symbol table level map insert result; frame slot at stack TType base local_220-0x30
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_1ec	insertResultFlagCopyD	INFERRED	copy of the inserted flag half of the insert result; frame slot at stack TType base local_220-0x34
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_1e0	insertResultD	INFERRED	iterator half of the std::map insert result (hidden pair return); frame slot at stack TType base local_220-0x40
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_1dc	insertResultFlagD	INFERRED	inserted flag half of the std::map insert result; frame slot at stack TType base local_220-0x44
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_1d0	nameCopyD	INFERRED	temporary TString copy of the variable name (key of the map insert); frame slot at stack TType base local_220-0x50
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_1cc	nameCopyCharsD	INFERRED	character pointer of nameCopy (its refcount word is at -4); frame slot at stack TType base local_220-0x54
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_1c8	variableForInsertD	INFERRED	the new TVariable stored as the map value; frame slot at stack TType base local_220-0x58
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_1c0	destroyAllocatorD	INFERRED	allocator argument array of the _Rep::_M_destroy call that releases nameCopy; frame slot at stack TType base local_220-0x60
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_1b0	poolAllocatorArgE	INFERRED	one-word array holding GetGlobalPoolAllocator(), the allocator argument of the TString constructor; frame slot at stack TType base local_1a0+0x10
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_170	insertResultCopyE	INFERRED	copy of the iterator half of the symbol table level map insert result; frame slot at stack TType base local_1a0-0x30
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_16c	insertResultFlagCopyE	INFERRED	copy of the inserted flag half of the insert result; frame slot at stack TType base local_1a0-0x34
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_160	insertResultE	INFERRED	iterator half of the std::map insert result (hidden pair return); frame slot at stack TType base local_1a0-0x40
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_15c	insertResultFlagE	INFERRED	inserted flag half of the std::map insert result; frame slot at stack TType base local_1a0-0x44
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_150	nameCopyE	INFERRED	temporary TString copy of the variable name (key of the map insert); frame slot at stack TType base local_1a0-0x50
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_14c	nameCopyCharsE	INFERRED	character pointer of nameCopy (its refcount word is at -4); frame slot at stack TType base local_1a0-0x54
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_148	variableForInsertE	INFERRED	the new TVariable stored as the map value; frame slot at stack TType base local_1a0-0x58
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_140	destroyAllocatorE	INFERRED	allocator argument array of the _Rep::_M_destroy call that releases nameCopy; frame slot at stack TType base local_1a0-0x60
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_130	poolAllocatorArgF	INFERRED	one-word array holding GetGlobalPoolAllocator(), the allocator argument of the TString constructor; frame slot at stack TType base local_120+0x10
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_f0	insertResultCopyF	INFERRED	copy of the iterator half of the symbol table level map insert result; frame slot at stack TType base local_120-0x30
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_ec	insertResultFlagCopyF	INFERRED	copy of the inserted flag half of the insert result; frame slot at stack TType base local_120-0x34
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_e0	insertResultF	INFERRED	iterator half of the std::map insert result (hidden pair return); frame slot at stack TType base local_120-0x40
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_dc	insertResultFlagF	INFERRED	inserted flag half of the std::map insert result; frame slot at stack TType base local_120-0x44
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_d0	nameCopyF	INFERRED	temporary TString copy of the variable name (key of the map insert); frame slot at stack TType base local_120-0x50
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_cc	nameCopyCharsF	INFERRED	character pointer of nameCopy (its refcount word is at -4); frame slot at stack TType base local_120-0x54
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_c8	variableForInsertF	INFERRED	the new TVariable stored as the map value; frame slot at stack TType base local_120-0x58
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_c0	destroyAllocatorF	INFERRED	allocator argument array of the _Rep::_M_destroy call that releases nameCopy; frame slot at stack TType base local_120-0x60
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_b0	poolAllocatorArgG	INFERRED	one-word array holding GetGlobalPoolAllocator(), the allocator argument of the TString constructor; frame slot at stack TType base local_a0+0x10
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_70	insertResultCopyG	INFERRED	copy of the iterator half of the symbol table level map insert result; frame slot at stack TType base local_a0-0x30
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_6c	insertResultFlagCopyG	INFERRED	copy of the inserted flag half of the insert result; frame slot at stack TType base local_a0-0x34
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_60	insertResultG	INFERRED	iterator half of the std::map insert result (hidden pair return); frame slot at stack TType base local_a0-0x40
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_5c	insertResultFlagG	INFERRED	inserted flag half of the std::map insert result; frame slot at stack TType base local_a0-0x44
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_50	nameCopyG	INFERRED	temporary TString copy of the variable name (key of the map insert); frame slot at stack TType base local_a0-0x50
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_4c	nameCopyCharsG	INFERRED	character pointer of nameCopy (its refcount word is at -4); frame slot at stack TType base local_a0-0x54
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_48	variableForInsertG	INFERRED	the new TVariable stored as the map value; frame slot at stack TType base local_a0-0x58
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	local_40	destroyAllocatorG	INFERRED	allocator argument array of the _Rep::_M_destroy call that releases nameCopy; frame slot at stack TType base local_a0-0x60

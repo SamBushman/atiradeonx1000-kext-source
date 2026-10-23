@@ -1,0 +1,8 @@
+local	TIntermediate__setAggregateOperator	pTStack0000001c	intermNodeSpill	INFERRED	home-slot copy of intermNode whose address is passed to vector::_M_insert_aux
+local	TIntermediate__growAggregate	pTStack0000001c	intermNode1Spill	INFERRED	home-slot copy of intermNode1 whose address is passed to vector::_M_insert_aux
+local	TIntermediate__growAggregate	pTStack00000020	intermNode2Spill	INFERRED	home-slot copy of intermNode2 whose address is passed to vector::_M_insert_aux
+local	TIntermediate__makeAggregate	pTStack0000001c	intermNodeSpill	INFERRED	home-slot copy of intermNode whose address is passed to vector::_M_insert_aux
+local	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	puStack00000020	trueBlockSpill	INFERRED	home-slot copy of the TIntermNodePair true block
+local	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	puStack00000024	falseBlockSpill	INFERRED	home-slot copy of the TIntermNodePair false block
+local	TIntermediate__addConversion	puStack_8c	i2dLo	INFERRED	low word of the int-to-double conversion constant (0x43300000 is the high word)
+local	ParseSymbol	appuStack_180	messageBuf	INFERRED	stack buffer for the "assigning non-constant to" message

@@ -1,0 +1,66 @@
+local	_PPStreamAddOperation_97b82078	param_1	stream	CONFIRMED	PPStream*: +0x20 is the operation chunk list
+local	_PPStreamAddOperation_97b82078	param_2	operationRecord	CONFIRMED	0x38-byte pp-stream operation record copied into the chunk
+local	_PPStreamAddOperation_97b82078	param_3	labelText	CONFIRMED	optional label/string (strlen at operation+0x34) copied after the record
+local	_PPStreamAddOperation_97b82078	param_4	keepIndex	CONFIRMED	nonzero: keep the operation's own index; zero: number it max index + 1
+local	_PPStreamAddOperation_97b82078	uVar1	indexWord	INFERRED	operation header word with the new index in the low 18 bits
+local	_PPStreamAddOperation_97b82078	iVar2	chunkSize	INFERRED	allocation size: 0x38 (+ label length + 1)
+local	_PPStreamAddOperation_97b82078	iVar4	labelLength	INFERRED	strlen of the label stored at operation+0x34
+local	_testAttribMatch	param_1	binding	CONFIRMED	attribute binding word being tested (class in bits 16..19)
+local	_testAttribMatch	param_2	generic	CONFIRMED	attribute binding word of a generic attrib[n] declaration (class 9)
+local	_testAttribMatch	bVar1	matches	INFERRED	the plain binding aliases the generic attribute index
+local	_testAttribMatch	uVar2	genericIndexWord	INFERRED	the generic attribute binding word whose low 5 bits pick the aliased attribute (0 position, 2 weight, 3 normal...)
+local	_testAttribMatch	uVar3	result	INFERRED	1 when the bindings alias, else 0
+local	_PPParserParseSwizzleSourceVar	param_2	operand	CONFIRMED	2-word source operand descriptor (negate bit 27, abs bit 26)
+local	_PPParserParseSwizzleSourceVar	param_3	opcode	CONFIRMED	opcode of the instruction, forwarded
+local	_PPParserParseSwizzleSourceVar	param_4	swizzleInfo	CONFIRMED	swizzle information, forwarded to the source/swizzle parsers
+local	_PPParserParseSwizzleSourceVar	local_120	partBuf	INFERRED	token text: -, +, |, ., ;
+local	_PPParserParseSwizzleSourceVar	iVar2	status	INFERRED	parser status code
+local	_PPStreamAddParamBinding	param_1	stream	CONFIRMED	PPStream*: +0x10 is the parameter-binding chunk list
+local	_PPStreamAddParamBinding	param_2	binding	CONFIRMED	4-word parameter binding record
+local	_PPStreamAddParamBinding	uVar2	bindingList	INFERRED	stream->parameter-binding chunk list
+local	_PPStreamAddParamBinding	uVar3	bindingWord3	INFERRED	binding[3]
+local	_PPStreamAddParamBinding	uVar4	bindingWord0	INFERRED	binding[0]
+local	_PPStreamAddParamBinding	uVar5	bindingWord2	INFERRED	binding[2]
+local	_PPStreamAddParamBinding	uVar6	bindingWord1	INFERRED	binding[1]
+local	_PPParserParseOutputDeclaration	param_2	outputMode	CONFIRMED	precision/mode of the OUTPUT declaration (LONG/SHORT)
+local	_PPParserParseOutputDeclaration	local_110	partBuf	INFERRED	token text: the name, then = or ;
+local	_PPParserParseOutputDeclaration	iVar2	status	INFERRED	parser status code
+local	_PPParserParseAttributeDeclaration	local_110	partBuf	INFERRED	token text: the name, then = or ;
+local	_PPParserParseAttributeDeclaration	iVar2	status	INFERRED	parser status code
+local	_PPParserParseArray	param_2	indexOut	CONFIRMED	receives the parsed non-negative [n] index
+local	_PPParserParseArray	local_110	partBuf	INFERRED	token text: [ and ]
+local	_PPParserParseArray	iVar2	status	INFERRED	parser status code (0 ok, 0xb bad bracket, 0x23 negative index)
+local	_PPParserScopeFindMacro	param_1	scope	CONFIRMED	scope: +8 first macro (+0x1c next)
+local	_PPParserScopeFindMacro	param_2	name	CONFIRMED	macro name searched for
+local	_PPParserScopeFindMacro	iVar1	compareResult	INFERRED	strcmp of the macro search string
+local	_PPParserScopeFindMacro	piVar2	macro	INFERRED	macro being compared
+local	_PPStreamAddOutputBinding	param_1	stream	CONFIRMED	PPStream*: +0x1c is the output-binding chunk list
+local	_PPStreamAddOutputBinding	param_2	binding	CONFIRMED	2-word output binding record
+local	_PPStreamAddOutputBinding	uVar2	bindingList	INFERRED	stream->output-binding chunk list
+local	_PPStreamAddOutputBinding	uVar3	bindingWord0	INFERRED	binding[0]
+local	_PPStreamAddOutputBinding	uVar4	bindingWord1	INFERRED	binding[1]
+local	_PPStreamAttribBindingIsEqual	param_2	probeBinding	CONFIRMED	the attribute binding being looked up
+local	_PPStreamAttribBindingIsEqual	local_30	chunkWord0	INFERRED	chunk binding word 0
+local	_PPStreamAttribBindingIsEqual	local_2c	chunkWord1Lo	INFERRED	low half of the compared word 1: the probe's low half
+local	_PPStreamAttribBindingIsEqual	uStack_2a	chunkWord1Hi	INFERRED	high half of the compared word 1: the chunk's high half
+local	_PPStreamAttribBindingIsEqual	local_20	probeWord0	INFERRED	probe binding word 0
+local	_PPStreamAttribBindingIsEqual	local_1c	probeWord1	INFERRED	probe binding word 1
+local	_PPStreamOutputBindingIsEqual	param_2	probeBinding	CONFIRMED	the output binding being looked up
+local	_PPStreamOutputBindingIsEqual	local_30	chunkWord0	INFERRED	chunk binding word 0
+local	_PPStreamOutputBindingIsEqual	local_2c	chunkWord1Lo	INFERRED	low half of the compared word 1: the probe's low half
+local	_PPStreamOutputBindingIsEqual	uStack_2a	chunkWord1Hi	INFERRED	high half of the compared word 1: the chunk's high half
+local	_PPStreamOutputBindingIsEqual	local_20	probeWord0	INFERRED	probe binding word 0
+local	_PPStreamOutputBindingIsEqual	local_1c	probeWord1	INFERRED	probe binding word 1
+local	_PPStreamParamBindingIsEqual	param_2	probeBinding	CONFIRMED	the parameter binding being looked up
+local	_PPStreamParamBindingIsEqual	local_30	chunkWord0	INFERRED	chunk binding word 0
+local	_PPStreamParamBindingIsEqual	local_2c	chunkWord1Lo	INFERRED	low half of the compared word 1: the probe's low half
+local	_PPStreamParamBindingIsEqual	uStack_2a	chunkWord1Hi	INFERRED	high half of the compared word 1: the chunk's high half
+local	_PPStreamParamBindingIsEqual	local_20	probeWord0	INFERRED	probe binding word 0
+local	_PPStreamParamBindingIsEqual	local_1c	probeWord1	INFERRED	probe binding word 1
+local	_PPParserGetInteger	param_2	valueOut	CONFIRMED	receives the parsed integer
+local	_PPParserGetInteger	uVar2	status	INFERRED	0 ok, 0x15 not fully numeric, 0x2d no token
+local	_PPParserGetInteger	local_20	intEnd	INFERRED	strtol end pointer
+local	_PPParserParseEnd	uVar2	status	INFERRED	0 ok, 6/9 unexpected token, 0x2d no token
+local	_PPStreamChunkCreateFromChunk	uVar4	extraWord	INFERRED	kind-specific extra word (kind 8: +0x40, kind 0xb: +0x10) passed to _GetChunkAllocationSize
+local	_PPStreamChunkListCreateFromChunkList	iVar3	sourceChunk	INFERRED	chunk of the source list (+8 next)
+local	dyld_stub_binding_helper	param_1	bindingInfo	CONFIRMED	lazy-symbol binding info word handed to the dyld binder

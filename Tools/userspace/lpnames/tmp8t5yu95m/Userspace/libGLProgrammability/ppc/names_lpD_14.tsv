@@ -1,0 +1,93 @@
+local	__ZNSs4_RepixEm	this	rep	CONFIRMED	the _Rep header; operator[] returns the character storage at rep + 0xc + pos
+local	__ZNSs4_Rep9_S_createEmRKSaIcE	param_2	alloc	CONFIRMED	const _Alloc& (unused empty allocator)
+local	__ZNSs4_Rep9_S_createEmRKSaIcE	uVar6	allocSize	CONFIRMED	(capacity + 1) * sizeof(char) + sizeof(_Rep) = capacity + 0xd: bytes to allocate
+local	__ZNSs4_Rep9_S_createEmRKSaIcE	puVar4	rep	CONFIRMED	the new _Rep (placement-new): _M_length +0, _M_capacity +4, _M_refcount +8
+local	__ZNSs4_Rep9_S_createEmRKSaIcE	iVar5	freeListIndex	CONFIRMED	index into the pool allocator's _S_free_list for this node size
+use	__ZNSs4_Rep9_S_createEmRKSaIcE	uVar3	adjSize	CONFIRMED	size + malloc header (16 bytes): decides the page/sub-page rounding	^\s*uVar3\ =\ param_1\ \+\ 0x1d;$	+4	all	rhs
+use	__ZNSs4_Rep9_S_createEmRKSaIcE	uVar3	extraBytes	CONFIRMED	bytes added to the capacity to round up to the next sub-page boundary	^\s*uVar3\ =\ 0x80\ \-\ \(uVar3\ \&\ 0x7f\)\ \&\ 0x7f;$	+3	lhs
+use	__ZNSs4_Rep9_S_createEmRKSaIcE	uVar3	adjSize	CONFIRMED	size + malloc header (16 bytes), read on the right-hand side of the page rounding	^\s*uVar3\ =\ 0x1000\ \-\ \(uVar3\ \&\ 0xfff\)\ \&\ 0xfff;$	+1	rhs
+use	__ZNSs4_Rep9_S_createEmRKSaIcE	uVar3	extraBytes	CONFIRMED	bytes added to the capacity to round up to the next page boundary	^\s*uVar3\ =\ 0x1000\ \-\ \(uVar3\ \&\ 0xfff\)\ \&\ 0xfff;$		lhs
+use	__ZNSs4_Rep9_S_createEmRKSaIcE	puVar2	forceNewPtr	CONFIRMED	address of _S_force_new (<0 until GLIBCPP_FORCE_NEW is looked up)	^\s*puVar2\ =\ PTR__S_force_new_a7b7c0e8;$	^\s*puVar2\ =\ PTR__S_free_list_a7b7c0e4;$	all	none
+use	__ZNSs4_Rep9_S_createEmRKSaIcE	puVar2	freeListBase	CONFIRMED	address of the pool allocator's _S_free_list	^\s*puVar2\ =\ PTR__S_free_list_a7b7c0e4;$		all	none
+local	__ZNSs4_Rep10_M_destroyERKSaIcE	puVar2	freeList	CONFIRMED	address of the pool allocator's _S_free_list
+local	__ZNSs4_Rep10_M_destroyERKSaIcE	puVar1	lockPtr	CONFIRMED	address of _S_node_allocator_lock
+local	__ZNSs4_Rep10_M_destroyERKSaIcE	iVar3	freeListIndex	CONFIRMED	index into _S_free_list for this node size ((capacity + 0x14) / 8 - 1)
+local	__ZNSs4_Rep8_M_cloneERKSaIcEm	this	rep	CONFIRMED	the _Rep being cloned (length +0, capacity +4)
+local	__ZNSs4_Rep8_M_cloneERKSaIcEm	param_3	res	CONFIRMED	size_type __res: extra capacity requested
+local	__ZNSs4_Rep8_M_cloneERKSaIcEm	uVar1	newLen	CONFIRMED	_M_length + __res
+local	__ZNSs4_Rep8_M_cloneERKSaIcEm	uVar3	newCapacity	CONFIRMED	new capacity: newLen, or doubled old capacity for large growth
+local	__ZNSs4_Rep8_M_cloneERKSaIcEm	puVar2	newRep	CONFIRMED	the new _Rep from _S_create
+local	__ZNSs4_Rep8_M_cloneERKSaIcEm	uVar4	copiedLength	CONFIRMED	_M_length stored in the new rep (0 when empty)
+local	__ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_EPKS3_RKS6_	local_30	resultBegin	CONFIRMED	__str.begin()/_M_iend(): iterator pair for the replace call
+local	__ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_EPKS3_RKS6_	local_2c	resultEnd	CONFIRMED	the end iterator
+local	__ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_ES3_RKS6_	param_2	lhsChar	CONFIRMED	_CharT __lhs
+local	std__string___M_replace___gnu_cxx____normal_iterator_char__std__string__	param_2	i1	CONFIRMED	iterator __i1: start of the replaced range
+local	std__string___M_replace___gnu_cxx____normal_iterator_char__std__string__	param_3	i2	CONFIRMED	iterator __i2: end of the replaced range
+local	std__string___M_replace___gnu_cxx____normal_iterator_char__std__string__	param_4	k1	CONFIRMED	iterator __k1: start of the replacement
+local	std__string___M_replace___gnu_cxx____normal_iterator_char__std__string__	param_5	k2	CONFIRMED	iterator __k2: end of the replacement
+local	std__string___M_replace___gnu_cxx____normal_iterator_char__std__string__	psVar1	result	CONFIRMED	basic_string& returned by _M_replace_safe
+local	std__string___M_replace___gnu_cxx____normal_iterator_char__std__string__	auStack_50	tmpStr	CONFIRMED	temporary basic_string(__k1, __k2)
+local	std__string___M_replace___gnu_cxx____normal_iterator_char__std__string__	auStack_40	tmpAlloc	CONFIRMED	temporary allocator object for the string constructor
+local	std__string___M_replace___gnu_cxx____normal_iterator_char__std__string__	local_30	tmpBegin	CONFIRMED	tmp._M_ibegin()
+local	std__string___M_replace___gnu_cxx____normal_iterator_char__std__string__	local_2c	tmpEnd	CONFIRMED	tmp._M_iend()
+local	std__string___M_replace___gnu_cxx____normal_iterator_char_const__std__string__	param_2	i1	CONFIRMED	iterator __i1: start of the replaced range
+local	std__string___M_replace___gnu_cxx____normal_iterator_char_const__std__string__	param_3	i2	CONFIRMED	iterator __i2: end of the replaced range
+local	std__string___M_replace___gnu_cxx____normal_iterator_char_const__std__string__	param_4	k1	CONFIRMED	iterator __k1: start of the replacement
+local	std__string___M_replace___gnu_cxx____normal_iterator_char_const__std__string__	param_5	k2	CONFIRMED	iterator __k2: end of the replacement
+local	std__string___M_replace___gnu_cxx____normal_iterator_char_const__std__string__	psVar1	result	CONFIRMED	basic_string& returned by _M_replace_safe
+local	std__string___M_replace___gnu_cxx____normal_iterator_char_const__std__string__	auStack_50	tmpStr	CONFIRMED	temporary basic_string(__k1, __k2)
+local	std__string___M_replace___gnu_cxx____normal_iterator_char_const__std__string__	auStack_40	tmpAlloc	CONFIRMED	temporary allocator object for the string constructor
+local	std__string___M_replace___gnu_cxx____normal_iterator_char_const__std__string__	local_30	tmpBegin	CONFIRMED	tmp._M_ibegin()
+local	std__string___M_replace___gnu_cxx____normal_iterator_char_const__std__string__	local_2c	tmpEnd	CONFIRMED	tmp._M_iend()
+local	std__string___M_replace_char__	param_2	i1	CONFIRMED	iterator __i1: start of the replaced range
+local	std__string___M_replace_char__	param_3	i2	CONFIRMED	iterator __i2: end of the replaced range
+local	std__string___M_replace_char__	psVar1	result	CONFIRMED	basic_string& returned by _M_replace_safe
+local	std__string___M_replace_char__	auStack_50	tmpStr	CONFIRMED	temporary basic_string(__k1, __k2)
+local	std__string___M_replace_char__	aaStack_40	tmpAlloc	CONFIRMED	temporary allocator object for the string constructor
+local	std__string___M_replace_char__	local_30	tmpBegin	CONFIRMED	tmp._M_ibegin()
+local	std__string___M_replace_char__	local_2c	tmpEnd	CONFIRMED	tmp._M_iend()
+local	__ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag	param_2	i1	CONFIRMED	iterator __i1: start of the replaced range
+local	__ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag	psVar1	result	CONFIRMED	basic_string& returned by _M_replace_safe
+local	__ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag	auStack_50	tmpStr	CONFIRMED	temporary basic_string(__k1, __k2)
+local	__ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag	aaStack_40	tmpAlloc	CONFIRMED	temporary allocator object for the string constructor
+local	__ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag	local_30	tmpBegin	CONFIRMED	tmp._M_ibegin()
+local	__ZNSs10_M_replaceIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_St18input_iterator_tag	local_2c	tmpEnd	CONFIRMED	tmp._M_iend()
+local	__ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_	param_2	i1	CONFIRMED	iterator __i1: start of the replaced range
+local	__ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_	param_3	i2	CONFIRMED	iterator __i2: end of the replaced range
+local	__ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_	param_5	k2	CONFIRMED	iterator __k2: end of the replacement
+local	__ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_	uVar1	dnew	CONFIRMED	size_type __n2 = distance(k1, k2): length of the replacement
+local	__ZNSs15_M_replace_safeIN9__gnu_cxx17__normal_iteratorIPcSsEEEERSsS3_S3_T_S5_	local_30	ibegin	CONFIRMED	this->_M_ibegin()
+local	std__string___M_replace_safe___gnu_cxx____normal_iterator_char_const__std__string__	param_2	i1	CONFIRMED	iterator __i1: start of the replaced range
+local	std__string___M_replace_safe___gnu_cxx____normal_iterator_char_const__std__string__	param_3	i2	CONFIRMED	iterator __i2: end of the replaced range
+local	std__string___M_replace_safe___gnu_cxx____normal_iterator_char_const__std__string__	param_5	k2	CONFIRMED	iterator __k2: end of the replacement
+local	std__string___M_replace_safe___gnu_cxx____normal_iterator_char_const__std__string__	uVar1	dnew	CONFIRMED	size_type __n2 = distance(k1, k2): length of the replacement
+local	std__string___M_replace_safe___gnu_cxx____normal_iterator_char_const__std__string__	local_30	ibegin	CONFIRMED	this->_M_ibegin()
+local	std__string___M_replace_safe_char__	param_2	i1	CONFIRMED	iterator __i1: start of the replaced range
+local	std__string___M_replace_safe_char__	param_3	i2	CONFIRMED	iterator __i2: end of the replaced range
+local	std__string___M_replace_safe_char__	uVar1	dnew	CONFIRMED	size_type __dnew = k2 - k1: length of the replacement
+local	std__string___M_replace_safe_char__	local_30	ibegin	CONFIRMED	this->_M_ibegin()
+local	__ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_	param_2	i1	CONFIRMED	iterator __i1: start of the replaced range
+local	__ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_	uVar1	dnew	CONFIRMED	size_type __dnew = k2 - k1: length of the replacement
+local	__ZNSs15_M_replace_safeIPKcEERSsN9__gnu_cxx17__normal_iteratorIPcSsEES6_T_S7_	local_30	ibegin	CONFIRMED	this->_M_ibegin()
+local	__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag	param_2	end	CONFIRMED	_InIter __end
+local	__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag	param_3	alloc	CONFIRMED	const _Alloc&
+local	__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag	puVar1	data	CONFIRMED	the new character data (rep + 0xc), or the shared empty rep's data
+local	__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag	puVar2	rep	CONFIRMED	the new _Rep from _S_create
+local	__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag	uVar3	dnew	CONFIRMED	size_type __dnew = distance(beg, end)
+local	std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__	param_2	end	CONFIRMED	_InIter __end
+local	std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__	param_3	alloc	CONFIRMED	const _Alloc&
+local	std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__	puVar1	data	CONFIRMED	the new character data (rep + 0xc), or the shared empty rep's data
+local	std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__	puVar2	rep	CONFIRMED	the new _Rep from _S_create
+local	std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__	uVar3	dnew	CONFIRMED	size_type __dnew = distance(beg, end)
+local	std__string___S_construct_char__	puVar1	data	CONFIRMED	the new character data (rep + 0xc), or the shared empty rep's data
+local	std__string___S_construct_char__	puVar2	rep	CONFIRMED	the new _Rep from _S_create
+local	std__string___S_construct_char__	uVar3	dnew	CONFIRMED	size_type __dnew = end - beg
+local	__ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag	puVar1	data	CONFIRMED	the new character data (rep + 0xc), or the shared empty rep's data
+local	__ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag	puVar2	rep	CONFIRMED	the new _Rep from _S_create
+local	__ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag	uVar3	dnew	CONFIRMED	size_type __dnew = end - beg
+local	__ZSt13__destroy_auxIPSsEvT_S1_12__false_type	psVar1	lastResult	CONFIRMED	value of the last ~basic_string call (returned as scratch)
+local	operator_new	param_1	sz	CONFIRMED	size_t sz: 0 is bumped to 1
+local	operator_new	puVar1	badAllocDtor	CONFIRMED	std::bad_alloc destructor passed to __cxa_throw
+local	operator_new	puVar2	badAllocTypeinfo	CONFIRMED	typeinfo for std::bad_alloc
+local	operator_new	puVar4	badAlloc	CONFIRMED	the new std::bad_alloc exception object
+local	___cxa_pure_virtual	pvVar1	terminateResult	UNKNOWN	value left in r3 after std::terminate (Ghidra merged the next function into this one)

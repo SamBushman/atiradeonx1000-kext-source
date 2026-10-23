@@ -1,0 +1,15 @@
+local	_PPCRuntimeCompilerDirtyRegistersWithIndirectData	param_1	compiler	CONFIRMED	PPCRuntimeCompiler*; every clean register holding indirectly addressed data is marked dirty
+local	_PPCRuntimeCompilerDirtyRegistersContainingAttributes	param_1	compiler	CONFIRMED	PPCRuntimeCompiler*; every clean register holding attributes (storage class 2) is marked dirty
+local	_PPCRuntimeCompilerDirtyRegistersContainingTemps	param_1	compiler	CONFIRMED	PPCRuntimeCompiler*; every clean register holding temporaries (storage class 0) is marked dirty
+local	_PPCRuntimeCompilerDirtyRegistersContainingParams	param_1	compiler	CONFIRMED	PPCRuntimeCompiler*; every clean register holding parameters (storage class 3) is marked dirty
+local	_PPCRuntimeCompilerDirtyRegistersWithIndirectData	iVar1	recordOffset	INFERRED	byte offset (index*0x38) of the register record
+local	_PPCRuntimeCompilerDirtyRegistersWithIndirectData	pcVar3	indirectFlag	INFERRED	record+0x1b: indirect-data flag byte
+local	_PPCRuntimeCompilerDirtyRegistersContainingAttributes	iVar1	recordOffset	INFERRED	byte offset (index*0x38) of the register record
+local	_PPCRuntimeCompilerDirtyRegistersContainingAttributes	psVar3	storageClass	INFERRED	record+0x18: storage class of the held operand
+local	_PPCRuntimeCompilerDirtyRegistersContainingTemps	iVar1	recordOffset	INFERRED	byte offset (index*0x38) of the register record
+local	_PPCRuntimeCompilerDirtyRegistersContainingTemps	psVar3	storageClass	INFERRED	record+0x18: storage class of the held operand
+local	_PPCRuntimeCompilerDirtyRegistersContainingParams	iVar1	firstRegister	INFERRED	0, or 0x20 in AltiVec mode
+local	_PPCRuntimeCompilerDirtyRegistersContainingParams	piVar3	record	INFERRED	register record being examined (stride 0xe words)
+local	_PPCRuntimeCompilerInitialiseVariableInfo	iVar6	programInfo	INFERRED	program info (compiler+0xe24); banks at +0x80 + 0xc*bank
+local	_PPCRuntimeCompilerInitialiseVariableInfo	piVar4	bankCountCursor	INFERRED	walks the per-bank element counts (stride 3 words)
+local	_PPCRuntimeCompilerInitialiseVariableInfo	iVar8	elementOffset	INFERRED	element index * 0x10: byte offset within the bank table

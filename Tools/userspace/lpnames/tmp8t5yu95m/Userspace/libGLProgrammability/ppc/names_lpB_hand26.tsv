@@ -1,0 +1,20 @@
+local	_PPCRuntimeCompilerBackupRegister	cVar1	selectByte	INFERRED	component-select byte of the register's swizzle (0..3 identity, -1 unused)
+local	_PPCRuntimeCompilerBackupRegister	bVar2	componentSelect	INFERRED	swizzle byte of the register: source component 0..3
+local	_PPCRuntimeCompilerBackupRegister	bVar3	foundCandidate	INFERRED	a least-recently-used clean register was found
+local	_PPCRuntimeCompilerBackupRegister	pbVar5	selectCursor	INFERRED	walks the 4 swizzle bytes of the register
+local	_PPCRuntimeCompilerBackupRegister	piVar13	usedFlags	INFERRED	cursor into componentUsedFlags
+local	_PPCRuntimeCompilerBackupRegister	local_60	componentUsedFlags	INFERRED	1 for every source component referenced by the register's swizzle
+local	_PPCRuntimeCompilerBackupRegister	piVar9	flagCursor	INFERRED	scans the following components' used flags
+local	_PPCRuntimeCompilerBackupRegister	uVar7	scanIndex	INFERRED	index of the component checked for being used
+local	_PPCRuntimeCompilerBackupRegister	iVar10	vectorModeOrCmp	INFERRED	0, then the memcmp of two descriptors, then the vector-mode flag (compiler+0xe4c)
+local	_PPCRuntimeCompilerBackupRegister	iVar15	regsLeft	INFERRED	down-counter of registers left to examine in the bank
+local	_PPCRuntimeCompilerBackupRegister	iVar18	recordOffset	INFERRED	register index * 0x38: byte offset of its record
+local	_PPCRuntimeCompilerBackupRegister	uVar20	bankIndex	INFERRED	0 = scalar bank, 1 = vector bank
+local	_PPCRuntimeCompilerBackupRegister	local_50	transferSel0	INFERRED	byte 0 of the transfer swizzle built by _PPCRuntimeCompilerBuildTransferSwizzle
+local	_PPCRuntimeCompilerBackupRegister	local_4f	transferSel1	INFERRED	byte 1 of the transfer swizzle
+local	_PPCRuntimeCompilerBackupRegister	local_4e	transferSel2	INFERRED	byte 2 of the transfer swizzle
+local	_PPCRuntimeCompilerBackupRegister	local_4d	transferSel3	INFERRED	byte 3 of the transfer swizzle
+local	_PPCRuntimeCompilerBackupRegister	local_4c	identitySwizzle	INFERRED	0x10203: the target swizzle bytes for the transfer
+local	_PPCRuntimeCompilerBackupRegister	local_48	newSwizzleWord	INFERRED	swizzle word rebuilt from the permuted component selects
+local	_PPCRuntimeCompilerBackupRegister	puVar6	codeCursor3	INFERRED	code write pointer for a single emitted AltiVec word
+local	_PPCRuntimeCompilerBackupRegister	puVar8	codeCursor4	INFERRED	code write pointer

@@ -1,0 +1,2 @@
+local	_PPParserScopeFree	iVar1	entry	INFERRED	first identifier / first macro of the scope, removed repeatedly
+local	_PPStreamChunkCreateFromChunk	uVar1	chunkKind	INFERRED	chunk kind byte (8: variable-size by +0x40, 0xb: by +0x10)

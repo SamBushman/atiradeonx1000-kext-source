@@ -1,0 +1,288 @@
+# use/local rows, fork D6 (round 3): TParseContext::executeInitializer
+local	TParseContext__executeInitializer	bVar1	stringTerminator	INFERRED	3Dlabs ParseHelper.cpp TParseContext::executeInitializer (same control flow here); byte *DAT_a7b7ba18 stored at data[length] before reading c_str() of a TString
+local	TParseContext__executeInitializer	bVar30	cr0Flags	INFERRED	Ghidra models the condition register: (x==0)<<1 / the lwarx-stwcx loop test
+local	TParseContext__executeInitializer	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store
+use	TParseContext__executeInitializer	uVar31	variableAllocation	CONFIRMED	result of TPoolAllocator__allocate(pool, 0x40): the new TVariable record (0x40 bytes, built field by field below)	^\s*uVar31\ =\ \(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar9,0x40\);$	+3
+use	TParseContext__executeInitializer	uVar31	structSizeResult	CONFIRMED	result of TType__setStructSize (stored to the stack TType +0x18 structure size)	^\s*uVar31\ =\ TType__setStructSize\(\(unsigned\ char\ \*\)\&local_150,\*\(unsigned\ char\ \*\*\)\(paVar15\ \+\ 8\)\);$	+2
+use	TParseContext__executeInitializer	uVar31	structSizeResult	CONFIRMED	result of TType__setStructSize (stored to the stack TType +0x18 structure size)	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,ppuVar20,\*\(int\ \*\)local_ec\);$	+1
+use	TParseContext__executeInitializer	uVar31	structSizeResult	CONFIRMED	result of TType__setStructSize (stored to the stack TType +0x18 structure size)	^\s*uVar31\ =\ TType__setStructSize\(\(unsigned\ char\ \*\)\&local_150,\*\(unsigned\ char\ \*\*\)\(paVar15\ \+\ 8\)\);$@2	+2
+use	TParseContext__executeInitializer	uVar31	structSizeResult	CONFIRMED	result of TType__setStructSize (stored to the stack TType +0x18 structure size)	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,uVar7,\*\(int\ \*\)local_ec\);$	+1
+use	TParseContext__executeInitializer	uVar31	structSizeResult	CONFIRMED	result of TType__setStructSize (stored to the stack TType +0x18 structure size)	^\s*uVar31\ =\ TType__setStructSize\(\(unsigned\ char\ \*\)\&local_150,\*\(unsigned\ char\ \*\*\)\(local_10c\ \+\ 8\)\);$	+2
+use	TParseContext__executeInitializer	uVar31	structSizeResult	CONFIRMED	result of TType__setStructSize (stored to the stack TType +0x18 structure size)	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,ppuVar20,\*\(int\ \*\)local_ec\);$@2	+1
+use	TParseContext__executeInitializer	uVar31	typeNameAllocation	CONFIRMED	result of TPoolAllocator__allocate(pool, 8): 8-byte TString for the struct type name	^\s*uVar31\ =\ \(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar9,8\);$	+3
+use	TParseContext__executeInitializer	uVar31	typeNameAllocation	CONFIRMED	result of TPoolAllocator__allocate(pool, 8): 8-byte TString for the struct type name	^\s*uVar31\ =\ \(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar9,8\);$@2	+3
+local	TParseContext__executeInitializer	uVar19	passThroughR4	UNKNOWN	Ghidra r4 pass-through of 64-bit return pairs and extraout values
+use	TParseContext__executeInitializer	uVar27	symbolTableLevel	INFERRED	last element of the symbol table level vector: *(levels.begin + ((end-begin)&~3) - 4)	^\s*uVar27\ =\ \*\(undefined4\ \*\)\(uVar7\ \+\ \(\(a6\[1\]\ \-\ uVar7\ \&\ 0xfffffffc\)\ \-\ 4\)\);$	+1
+use	TParseContext__executeInitializer	uVar27	symbolTableLevel	INFERRED	last element of the symbol table level vector: *(levels.begin + ((end-begin)&~3) - 4)	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique\(\(unsigned\ char\ \*\)\&local_140,uVar27,puVar24\);$	+1
+use	TParseContext__executeInitializer	uVar27	symbolTableArg	CONFIRMED	*(this+4): the TSymbolTable passed to parseConstTree	^\s*uVar27\ =\ \*\(undefined4\ \*\)\(this\ \+\ 4\);$	+1
+use	TParseContext__executeInitializer	uVar27	symbolTableArg	CONFIRMED	*(this+4): the TSymbolTable passed to parseConstTree	^\s*uVar27\ =\ \*\(undefined4\ \*\)\(this\ \+\ 4\);$@2	+1
+use	TParseContext__executeInitializer	uVar27	symbolTableArg	CONFIRMED	*(this+4): the TSymbolTable passed to parseConstTree	^\s*\(this_01,param_2,\(unsigned\ char\ \*\)param_5,pcVar25,uVar19,uVar27,$	+2
+local	TParseContext__executeInitializer	pTVar9	poolAllocator	CONFIRMED	GetGlobalPoolAllocator()
+use	TParseContext__executeInitializer	pTVar12	assignNode	CONFIRMED	TIntermediate::addAssign(this->intermediate, EOpAssign(0x76), symbol, initializer, line) result, stored to *intermNode	^\s*pTVar12\ =\ \(unsigned\ char\ \*\)$	+1
+use	TParseContext__executeInitializer	pTVar12	assignNode	CONFIRMED	TIntermediate::addAssign(this->intermediate, EOpAssign(0x76), symbol, initializer, line) result, stored to *intermNode	^\s*\*param_6\ =\ pTVar12;$	+2
+use	TParseContext__executeInitializer	psVar10	variableNameString	INFERRED	virtual call at slot +8 of the new TVariable (getName) returns the name TString that is copied into a temporary	^\s*psVar10\ =\ \(unsigned\ char\ \*\)$	+1
+use	TParseContext__executeInitializer	psVar10	variableNameString	INFERRED	virtual call at slot +8 of the new TVariable (getName) returns the name TString that is copied into a temporary	^\s*__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_\(puVar24,psVar10\);$	+1
+use	TParseContext__executeInitializer	ppuVar11	structTypeNameString	CONFIRMED	TString allocated (8 bytes) and constructed from the struct type name chars	^\s*ppuVar11\ =\ \(undefined\ \*\*\)\(\(ulonglong\)uVar31\ >>\ 0x20\);$	+1
+use	TParseContext__executeInitializer	ppuVar11	structTypeNameString	CONFIRMED	TString allocated (8 bytes) and constructed from the struct type name chars	^\s*bVar30\ =\ \(ppuVar11\ ==\ \(undefined\ \*\*\)0x0\)\ <<\ 1;$	+1
+use	TParseContext__executeInitializer	ppuVar11	structTypeNameString	CONFIRMED	TString allocated (8 bytes) and constructed from the struct type name chars	^\s*if\ \(ppuVar11\ !=\ \(undefined\ \*\*\)0x0\)\ \{$	+1
+use	TParseContext__executeInitializer	ppuVar11	structTypeNameString	CONFIRMED	TString allocated (8 bytes) and constructed from the struct type name chars	^\s*__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_\(ppuVar11,pcVar29,paVar15\);$	+1
+use	TParseContext__executeInitializer	ppuVar11	structTypeNameString	CONFIRMED	TString allocated (8 bytes) and constructed from the struct type name chars	^\s*ppuVar13\ =\ ppuVar11;$	+1
+use	TParseContext__executeInitializer	ppuVar11	structTypeNameString	CONFIRMED	TString allocated (8 bytes) and constructed from the struct type name chars	^\s*ppuVar11\ =\ \(undefined\ \*\*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar9,8\);$	+2
+use	TParseContext__executeInitializer	ppuVar11	structTypeNameString	CONFIRMED	TString allocated (8 bytes) and constructed from the struct type name chars	^\s*if\ \(ppuVar11\ !=\ \(undefined\ \*\*\)0x0\)\ \{$@2	+1
+use	TParseContext__executeInitializer	ppuVar11	structTypeNameString	CONFIRMED	TString allocated (8 bytes) and constructed from the struct type name chars	^\s*__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_\(ppuVar11,pcVar29,paVar15\);$@2	+2
+use	TParseContext__executeInitializer	ppuVar11	structTypeNameString	CONFIRMED	TString allocated (8 bytes) and constructed from the struct type name chars	^\s*ppuVar11\ =\ local_140;$	+1
+use	TParseContext__executeInitializer	ppuVar11	structTypeNameString	CONFIRMED	TString allocated (8 bytes) and constructed from the struct type name chars	^\s*ppuVar11\ =\ \(undefined\ \*\*\)0x0;$	+1
+use	TParseContext__executeInitializer	ppuVar11	structTypeNameString	CONFIRMED	TString allocated (8 bytes) and constructed from the struct type name chars	^\s*ppuVar11\ =\ this_00;$	+1
+use	TParseContext__executeInitializer	ppuVar11	structTypeNameString	CONFIRMED	TString allocated (8 bytes) and constructed from the struct type name chars	^\s*local_140\ =\ ppuVar11;$	+1
+use	TParseContext__executeInitializer	ppuVar13	structTypeName	CONFIRMED	TString* of the struct type name, or 0 when the type has no struct; stored at stack TType +0x10	^\s*ppuVar13\ =\ \(undefined\ \*\*\)0x0;$	+1
+use	TParseContext__executeInitializer	ppuVar13	structTypeName	CONFIRMED	TString* of the struct type name, or 0 when the type has no struct; stored at stack TType +0x10	^\s*ppuVar13\ =\ \(undefined\ \*\*\)0x0;$@2	+1
+use	TParseContext__executeInitializer	ppuVar13	structTypeName	CONFIRMED	TString* of the struct type name, or 0 when the type has no struct; stored at stack TType +0x10	^\s*ppuVar13\ =\ ppuVar11;$	+1
+use	TParseContext__executeInitializer	ppuVar13	structTypeName	CONFIRMED	TString* of the struct type name, or 0 when the type has no struct; stored at stack TType +0x10	^\s*local_140\ =\ ppuVar13;$	+1
+use	TParseContext__executeInitializer	ppuVar13	structTypeName	CONFIRMED	TString* of the struct type name, or 0 when the type has no struct; stored at stack TType +0x10	^\s*ppuVar13\ =\ \(undefined\ \*\*\)0x0;$@3	+1
+use	TParseContext__executeInitializer	ppuVar13	structTypeName	CONFIRMED	TString* of the struct type name, or 0 when the type has no struct; stored at stack TType +0x10	^\s*ppuVar13\ =\ \(undefined\ \*\*\)0x0;$@4	+1
+use	TParseContext__executeInitializer	ppuVar13	structTypeName	CONFIRMED	TString* of the struct type name, or 0 when the type has no struct; stored at stack TType +0x10	^\s*ppuVar13\ =\ ppuVar11;$@2	+1
+use	TParseContext__executeInitializer	ppuVar13	structTypeName	CONFIRMED	TString* of the struct type name, or 0 when the type has no struct; stored at stack TType +0x10	^\s*local_140\ =\ ppuVar13;$@2	+1
+use	TParseContext__executeInitializer	ppuVar13	ptSizeCopy	CONFIRMED	*(publicType+8): TPublicType.size	^\s*ppuVar13\ =\ \*\(undefined\ \*\*\*\)\(param_4\ \+\ 8\);$	+2
+use	TParseContext__executeInitializer	ppuVar13	ptSizeCopy	CONFIRMED	*(publicType+8): TPublicType.size	^\s*local_118\ =\ ppuVar13;$	+1
+use	TParseContext__executeInitializer	ppuVar13	ptSizeCopy	CONFIRMED	*(publicType+8): TPublicType.size	^\s*local_f8\ =\ ppuVar13;$	+1
+use	TParseContext__executeInitializer	ppuVar13	ptSizeCopy	CONFIRMED	*(publicType+8): TPublicType.size	^\s*ppuVar13\ =\ \(undefined\ \*\*\)uVar31;$	+1
+use	TParseContext__executeInitializer	ppuVar13	ptSizeCopy	CONFIRMED	*(publicType+8): TPublicType.size	^\s*ppuVar13\ =\ extraout_r4_02;$	+1
+use	TParseContext__executeInitializer	ppuVar13	ptSizeCopy	CONFIRMED	*(publicType+8): TPublicType.size	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x18\)\)\(param_5,ppuVar13,local_12c,1\);$	+1
+use	TParseContext__executeInitializer	ppuVar13	ptSizeCopy	CONFIRMED	*(publicType+8): TPublicType.size	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x18\)\)\(param_5,ppuVar13,paVar15,uVar17,uVar18\);$	+1
+use	TParseContext__executeInitializer	ppuVar20	ptSize	CONFIRMED	*(publicType+8): TPublicType.size	^\s*ppuVar20\ =\ \*\(undefined\ \*\*\*\)\(param_4\ \+\ 8\);$	+1
+use	TParseContext__executeInitializer	ppuVar20	ptSize	CONFIRMED	*(publicType+8): TPublicType.size	^\s*\(\(local_110\ \&\ 1\)\ <<\ 9\ \|$	+4
+use	TParseContext__executeInitializer	ppuVar20	ptSize	CONFIRMED	*(publicType+8): TPublicType.size	^\s*local_118\ =\ ppuVar20;$	+1
+use	TParseContext__executeInitializer	ppuVar20	ptSize	CONFIRMED	*(publicType+8): TPublicType.size	^\s*local_f8\ =\ ppuVar20;$	+1
+use	TParseContext__executeInitializer	ppuVar20	ptSize	CONFIRMED	*(publicType+8): TPublicType.size	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,ppuVar20,\*\(int\ \*\)local_ec\);$	+1
+use	TParseContext__executeInitializer	ppuVar20	ptSize	CONFIRMED	*(publicType+8): TPublicType.size	^\s*\(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 8\)\)\(piVar6,uVar19,paVar15,uVar17,uVar18,ppuVar20,a6,uVar7\);$	+1
+use	TParseContext__executeInitializer	ppuVar20	ptSize	CONFIRMED	*(publicType+8): TPublicType.size	^\s*uVar17\ =\ \(\*\*\(code\ \*\*\)\(piVar6\[3\]\ \+\ 0x24\)\)\(a0,uVar19,puVar24,uVar17,uVar18,ppuVar20,uVar21,uVar7\);$	+1
+use	TParseContext__executeInitializer	ppuVar20	ptSize	CONFIRMED	*(publicType+8): TPublicType.size	^\s*ppuVar20\ =\ \*\(undefined\ \*\*\*\)param_4;$@2	+1
+use	TParseContext__executeInitializer	ppuVar20	ptSize	CONFIRMED	*(publicType+8): TPublicType.size	^\s*\(\(local_110\ \&\ 1\)\ <<\ 9\ \|$@3	+3
+use	TParseContext__executeInitializer	ppuVar20	ptSize	CONFIRMED	*(publicType+8): TPublicType.size	^\s*local_120\ =\ ppuVar20;$@2	+1
+use	TParseContext__executeInitializer	ppuVar20	ptSize	CONFIRMED	*(publicType+8): TPublicType.size	^\s*local_100\ =\ ppuVar20;$@2	+1
+use	TParseContext__executeInitializer	ppuVar20	ptSize	CONFIRMED	*(publicType+8): TPublicType.size	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,ppuVar20,\*\(int\ \*\)local_ec\);$@2	+1
+use	TParseContext__executeInitializer	ppuVar20	ptSize	CONFIRMED	*(publicType+8): TPublicType.size	^\s*error\(\(int\)this,\(char\ \*\)param_2,pcVar16,pcVar29,"",ppuVar20,uVar21,uVar7\);$	+1
+use	TParseContext__executeInitializer	ppuVar20	ptType	CONFIRMED	*(publicType+0): TPublicType.type (TBasicType)	^\s*ppuVar20\ =\ \*\(undefined\ \*\*\*\)param_4;$	+1
+use	TParseContext__executeInitializer	ppuVar20	ptType	CONFIRMED	*(publicType+0): TPublicType.type (TBasicType)	^\s*\(\(local_110\ \&\ 1\)\ <<\ 9\ \|$@2	+4
+use	TParseContext__executeInitializer	ppuVar20	ptType	CONFIRMED	*(publicType+0): TPublicType.type (TBasicType)	^\s*local_120\ =\ ppuVar20;$	+1
+use	TParseContext__executeInitializer	ppuVar20	ptType	CONFIRMED	*(publicType+0): TPublicType.type (TBasicType)	^\s*local_100\ =\ ppuVar20;$	+1
+use	TParseContext__executeInitializer	ppuVar20	ptType	CONFIRMED	*(publicType+0): TPublicType.type (TBasicType)	^\s*error\(\(int\)this,\(char\ \*\)param_2,"\ non\-matching\ types\ for\ const\ param_5\ ",pcVar29,"",uVar7,$	+2
+use	TParseContext__executeInitializer	ppuVar20	ptType	CONFIRMED	*(publicType+0): TPublicType.type (TBasicType)	^\s*error\(\(int\)this,\(char\ \*\)param_2,"\ assigning\ non\-constant\ to","=","\\'%s\\'",local_14c,$	+2
+use	TParseContext__executeInitializer	uVar18	ptQualifier	CONFIRMED	*(publicType+4): TPublicType.qualifier	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_4\ \+\ 4\);$	+1
+use	TParseContext__executeInitializer	uVar18	ptQualifier	CONFIRMED	*(publicType+4): TPublicType.qualifier	^\s*\(\(local_110\ \&\ 1\)\ <<\ 9\ \|$	+4
+use	TParseContext__executeInitializer	uVar18	ptQualifier	CONFIRMED	*(publicType+4): TPublicType.qualifier	^\s*local_11c\ =\ uVar18;$	+1
+use	TParseContext__executeInitializer	uVar18	ptQualifier	CONFIRMED	*(publicType+4): TPublicType.qualifier	^\s*local_fc\ =\ uVar18;$	+1
+use	TParseContext__executeInitializer	uVar18	ptQualifier	CONFIRMED	*(publicType+4): TPublicType.qualifier	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,ppuVar20,\*\(int\ \*\)local_ec\);$	+1
+use	TParseContext__executeInitializer	uVar18	ptQualifier	CONFIRMED	*(publicType+4): TPublicType.qualifier	^\s*\(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 8\)\)\(piVar6,uVar19,paVar15,uVar17,uVar18,ppuVar20,a6,uVar7\);$	+1
+use	TParseContext__executeInitializer	uVar18	ptQualifier	CONFIRMED	*(publicType+4): TPublicType.qualifier	^\s*uVar17\ =\ \(\*\*\(code\ \*\*\)\(piVar6\[3\]\ \+\ 0x24\)\)\(a0,uVar19,puVar24,uVar17,uVar18,ppuVar20,uVar21,uVar7\);$	+1
+use	TParseContext__executeInitializer	uVar18	ptLine	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_4\ \+\ 0x18\);$	+1
+use	TParseContext__executeInitializer	uVar18	ptLine	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*local_108\ =\ uVar18;$	+1
+use	TParseContext__executeInitializer	uVar18	ptLine	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*local_e8\ =\ uVar18;$	+1
+use	TParseContext__executeInitializer	uVar18	ptLine	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,uVar7,\*\(int\ \*\)local_ec\);$	+1
+use	TParseContext__executeInitializer	uVar18	ptLine	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*\(\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar8\ \+\ 4\),a1,paVar15,uVar17,uVar18,$	+2
+use	TParseContext__executeInitializer	uVar18	ptLine	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_4\ \+\ 0xc\);$	+1
+use	TParseContext__executeInitializer	uVar18	ptLine	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*\(\(local_110\ \&\ 1\)\ <<\ 9\ \|$@3	+3
+use	TParseContext__executeInitializer	uVar18	ptLine	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*local_114\ =\ uVar18;$	+1
+use	TParseContext__executeInitializer	uVar18	ptLine	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*local_f4\ =\ uVar18;$	+1
+use	TParseContext__executeInitializer	uVar18	ptLine	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,ppuVar20,\*\(int\ \*\)local_ec\);$@2	+1
+use	TParseContext__executeInitializer	uVar18	ptLine	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x18\)\)\(param_5,ppuVar13,paVar15,uVar17,uVar18\);$	+1
+use	TParseContext__executeInitializer	uVar18	variableBasicTypeBits	CONFIRMED	((variable bit-field >> 0x13) & 0x3f) << 0x13: the basic type field of the TVariable TType bits	^\s*uVar18\ =\ \(\(uint\)piVar6\[0xc\]\ >>\ 0x13\ \&\ 0x3f\)\ <<\ 0x13;$	+1
+use	TParseContext__executeInitializer	uVar18	variableBasicTypeBits	CONFIRMED	((variable bit-field >> 0x13) & 0x3f) << 0x13: the basic type field of the TVariable TType bits	^\s*\(\(\(uint\)piVar6\[0xc\]\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|$@2	+3
+use	TParseContext__executeInitializer	uVar18	variableBasicTypeBits	CONFIRMED	((variable bit-field >> 0x13) & 0x3f) << 0x13: the basic type field of the TVariable TType bits	^\s*\(param_5,uVar19,$	+4
+use	TParseContext__executeInitializer	uVar7	typeSizeBits	CONFIRMED	stack TType bit-field & 0x7f800: the size field (bits 18..11)	^\s*uVar7\ =\ \(uint\)local_12c\ \&\ 0x7f800;$	+2
+use	TParseContext__executeInitializer	uVar7	typeSizeBits	CONFIRMED	stack TType bit-field & 0x7f800: the size field (bits 18..11)	^\s*piVar6\[0xc\]\ =\ uVar3\ \|\ uVar7\ \|\ uVar2\ \|\ uVar21\ \|\ uVar4\ \&\ 0x3ff;$	+2
+use	TParseContext__executeInitializer	uVar7	uniqueId	CONFIRMED	symbolTable.nextId (a6[3]) before the increment; stored as TVariable.uniqueId	^\s*uVar7\ =\ a6\[3\];$	+3
+use	TParseContext__executeInitializer	uVar7	levelsBegin	CONFIRMED	*symbolTable: begin of the symbol table level vector	^\s*uVar7\ =\ \*a6;$	+2
+use	TParseContext__executeInitializer	uVar7	levelsBegin	CONFIRMED	*symbolTable: begin of the symbol table level vector	^\s*\(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 8\)\)\(piVar6,uVar19,paVar15,uVar17,uVar18,ppuVar20,a6,uVar7\);$	+1
+use	TParseContext__executeInitializer	uVar7	levelsBegin	CONFIRMED	*symbolTable: begin of the symbol table level vector	^\s*uVar7\ =\ piVar6\[1\];$	+1
+use	TParseContext__executeInitializer	uVar7	levelsBegin	CONFIRMED	*symbolTable: begin of the symbol table level vector	^\s*\*\(byte\ \*\)\(\*\(int\ \*\)\(uVar7\ \+\ 4\)\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(uVar7\ \+\ 4\)\ \+\ \-0xc\)\)\ =\ \*DAT_a7b7ba18;$	+2
+use	TParseContext__executeInitializer	uVar7	levelsBegin	CONFIRMED	*symbolTable: begin of the symbol table level vector	^\s*uVar17\ =\ \(\*\*\(code\ \*\*\)\(piVar6\[3\]\ \+\ 0x24\)\)\(a0,uVar19,puVar24,uVar17,uVar18,ppuVar20,uVar21,uVar7\);$	+1
+use	TParseContext__executeInitializer	uVar7	levelsBegin	CONFIRMED	*symbolTable: begin of the symbol table level vector	^\s*error\(\(int\)this,\(char\ \*\)param_2,"\ assigning\ non\-constant\ to","=","\\'%s\\'",local_11c,\(uint\)bVar1,$	+2
+use	TParseContext__executeInitializer	uVar7	levelsBegin	CONFIRMED	*symbolTable: begin of the symbol table level vector	^\s*uVar7\ =\ \*\(uint\ \*\)\(param_4\ \+\ 4\);$@2	+1
+use	TParseContext__executeInitializer	uVar7	levelsBegin	CONFIRMED	*symbolTable: begin of the symbol table level vector	^\s*\(\(local_110\ \&\ 1\)\ <<\ 9\ \|$@3	+3
+use	TParseContext__executeInitializer	uVar7	levelsBegin	CONFIRMED	*symbolTable: begin of the symbol table level vector	^\s*local_11c\ =\ uVar7;$@2	+1
+use	TParseContext__executeInitializer	uVar7	levelsBegin	CONFIRMED	*symbolTable: begin of the symbol table level vector	^\s*local_fc\ =\ uVar7;$@2	+1
+use	TParseContext__executeInitializer	uVar7	levelsBegin	CONFIRMED	*symbolTable: begin of the symbol table level vector	^\s*error\(\(int\)this,\(char\ \*\)param_2,pcVar16,pcVar29,"",ppuVar20,uVar21,uVar7\);$	+1
+use	TParseContext__executeInitializer	uVar7	ptQualifierCopy	CONFIRMED	*(publicType+4): TPublicType.qualifier	^\s*uVar7\ =\ \*\(uint\ \*\)\(param_4\ \+\ 4\);$	+1
+use	TParseContext__executeInitializer	uVar7	ptQualifierCopy	CONFIRMED	*(publicType+4): TPublicType.qualifier	^\s*\(\(local_110\ \&\ 1\)\ <<\ 9\ \|$@2	+4
+use	TParseContext__executeInitializer	uVar7	ptQualifierCopy	CONFIRMED	*(publicType+4): TPublicType.qualifier	^\s*local_11c\ =\ uVar7;$	+1
+use	TParseContext__executeInitializer	uVar7	ptQualifierCopy	CONFIRMED	*(publicType+4): TPublicType.qualifier	^\s*local_fc\ =\ uVar7;$	+1
+use	TParseContext__executeInitializer	uVar7	ptQualifierCopy	CONFIRMED	*(publicType+4): TPublicType.qualifier	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,uVar7,\*\(int\ \*\)local_ec\);$	+1
+use	TParseContext__executeInitializer	uVar7	ptQualifierCopy	CONFIRMED	*(publicType+4): TPublicType.qualifier	^\s*error\(\(int\)this,\(char\ \*\)param_2,"\ non\-matching\ types\ for\ const\ param_5\ ",pcVar29,"",uVar7,$	+2
+use	TParseContext__executeInitializer	uVar7	ptQualifierCopy	CONFIRMED	*(publicType+4): TPublicType.qualifier	^\s*\(\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar8\ \+\ 4\),a1,paVar15,uVar17,uVar18,$	+2
+use	TParseContext__executeInitializer	uVar7	variableMatrixBits	CONFIRMED	((variable bits >> 10) & 1) << 10: matrix bit	^\s*uVar7\ =\ \(\(uint\)piVar6\[0xc\]\ >>\ 10\ \&\ 1\)\ <<\ 10;$	+1
+use	TParseContext__executeInitializer	uVar7	variableMatrixBits	CONFIRMED	((variable bits >> 10) & 1) << 10: matrix bit	^\s*\(\(\(uint\)piVar6\[0xc\]\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|$@2	+3
+use	TParseContext__executeInitializer	uVar7	variableMatrixBits	CONFIRMED	((variable bits >> 10) & 1) << 10: matrix bit	^\s*\(param_5,uVar19,$	+4
+use	TParseContext__executeInitializer	uVar7	variableBits	CONFIRMED	the TVariable TType bit-field word (variable + 0x30)	^\s*uVar7\ =\ piVar6\[0xc\];$	+3
+use	TParseContext__executeInitializer	uVar7	variableBits	CONFIRMED	the TVariable TType bit-field word (variable + 0x30)	^\s*iVar8\ =\ \(int\)\(uVar7\ <<\ 0xd\ \|\ uVar7\ >>\ 0x13\)\ >>\ 0x18;$@2	+1
+use	TParseContext__executeInitializer	uVar17	ptLineCopy	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*uVar17\ =\ \*\(uint\ \*\)\(param_4\ \+\ 0x18\);$	+1
+use	TParseContext__executeInitializer	uVar17	ptLineCopy	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*local_108\ =\ uVar17;$	+1
+use	TParseContext__executeInitializer	uVar17	ptLineCopy	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*local_e8\ =\ uVar17;$	+1
+use	TParseContext__executeInitializer	uVar17	ptLineCopy	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,ppuVar20,\*\(int\ \*\)local_ec\);$	+1
+use	TParseContext__executeInitializer	uVar17	ptLineCopy	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*\(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 8\)\)\(piVar6,uVar19,paVar15,uVar17,uVar18,ppuVar20,a6,uVar7\);$	+1
+use	TParseContext__executeInitializer	uVar17	ptLineCopy	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*uVar17\ =\ \(\*\*\(code\ \*\*\)\(piVar6\[3\]\ \+\ 0x24\)\)\(a0,uVar19,puVar24,uVar17,uVar18,ppuVar20,uVar21,uVar7\);$	+2
+use	TParseContext__executeInitializer	uVar17	ptLineCopy	CONFIRMED	*(publicType+0x18): TPublicType.line	^\s*if\ \(uVar17\ !=\ 2\)\ \{$	+1
+use	TParseContext__executeInitializer	uVar17	qualifierIsNotConst	CONFIRMED	-((-(qualifier ^ 2)) >> 31) == (stackTypeBits>>0x19 != EvqConst(2))	^\s*uVar17\ =\ \-\(\(int\)\-\(\(uint\)local_12c\ >>\ 0x19\ \^\ 2\)\ >>\ 0x1f\);$	+3
+use	TParseContext__executeInitializer	uVar17	qualifierIsNotConst	CONFIRMED	-((-(qualifier ^ 2)) >> 31) == (stackTypeBits>>0x19 != EvqConst(2))	^\s*local_14c\ =\ uVar17;$	+2
+use	TParseContext__executeInitializer	uVar17	qualifierIsNotConst	CONFIRMED	-((-(qualifier ^ 2)) >> 31) == (stackTypeBits>>0x19 != EvqConst(2))	^\s*local_13c\ =\ uVar17;$	+3
+use	TParseContext__executeInitializer	uVar17	qualifierIsNotConst	CONFIRMED	-((-(qualifier ^ 2)) >> 31) == (stackTypeBits>>0x19 != EvqConst(2))	^\s*local_140\ =\ \(undefined\ \*\*\)uVar17;$	+2
+use	TParseContext__executeInitializer	uVar17	qualifierIsNotConst	CONFIRMED	-((-(qualifier ^ 2)) >> 31) == (stackTypeBits>>0x19 != EvqConst(2))	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,uVar7,\*\(int\ \*\)local_ec\);$	+1
+use	TParseContext__executeInitializer	uVar17	qualifierIsNotConst	CONFIRMED	-((-(qualifier ^ 2)) >> 31) == (stackTypeBits>>0x19 != EvqConst(2))	^\s*\(\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar8\ \+\ 4\),a1,paVar15,uVar17,uVar18,$	+2
+use	TParseContext__executeInitializer	uVar17	qualifierIsNotConst	CONFIRMED	-((-(qualifier ^ 2)) >> 31) == (stackTypeBits>>0x19 != EvqConst(2))	^\s*uVar17\ =\ \*\(uint\ \*\)\(param_4\ \+\ 0x18\);$@2	+1
+use	TParseContext__executeInitializer	uVar17	qualifierIsNotConst	CONFIRMED	-((-(qualifier ^ 2)) >> 31) == (stackTypeBits>>0x19 != EvqConst(2))	^\s*local_108\ =\ uVar17;$@2	+1
+use	TParseContext__executeInitializer	uVar17	qualifierIsNotConst	CONFIRMED	-((-(qualifier ^ 2)) >> 31) == (stackTypeBits>>0x19 != EvqConst(2))	^\s*local_e8\ =\ uVar17;$@2	+1
+use	TParseContext__executeInitializer	uVar17	qualifierIsNotConst	CONFIRMED	-((-(qualifier ^ 2)) >> 31) == (stackTypeBits>>0x19 != EvqConst(2))	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,ppuVar20,\*\(int\ \*\)local_ec\);$@2	+1
+use	TParseContext__executeInitializer	uVar17	qualifierIsNotConst	CONFIRMED	-((-(qualifier ^ 2)) >> 31) == (stackTypeBits>>0x19 != EvqConst(2))	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x18\)\)\(param_5,ppuVar13,paVar15,uVar17,uVar18\);$	+1
+use	TParseContext__executeInitializer	uVar17	typeStringData	INFERRED	string data pointer of the getCompleteString result, later used for the _Rep refcount	^\s*uVar17\ =\ local_11c;$	+1
+use	TParseContext__executeInitializer	uVar17	typeStringData	INFERRED	string data pointer of the getCompleteString result, later used for the _Rep refcount	^\s*\(\(unsigned\ char\ \*\)\(uVar17\ \-\ 0xc\),pppuVar14\);$	+1
+use	TParseContext__executeInitializer	uVar17	typeStringData	INFERRED	string data pointer of the getCompleteString result, later used for the _Rep refcount	^\s*uVar17\ =\ local_14c;$	+1
+use	TParseContext__executeInitializer	uVar17	stackTypeLowBits	CONFIRMED	stack TType bits & 0x3ff (matrix/array bits and below)	^\s*uVar17\ =\ \(uint\)local_12c\ \&\ 0x3ff;$	+1
+use	TParseContext__executeInitializer	uVar17	stackTypeLowBits	CONFIRMED	stack TType bits & 0x3ff (matrix/array bits and below)	^\s*\(param_5,uVar19,$	+4
+use	TParseContext__executeInitializer	uVar21	qualifierBits	CONFIRMED	stack TType bits & 0xfe000000: the qualifier field (bits 31..25)	^\s*uVar21\ =\ \(uint\)local_12c\ \&\ 0xfe000000;$	+2
+use	TParseContext__executeInitializer	uVar21	qualifierBits	CONFIRMED	stack TType bits & 0xfe000000: the qualifier field (bits 31..25)	^\s*piVar6\[0xc\]\ =\ uVar2\ \|\ uVar21\ \|\ uVar4\ \&\ 0x7ffff;$	+1
+use	TParseContext__executeInitializer	uVar21	qualifierBits	CONFIRMED	stack TType bits & 0xfe000000: the qualifier field (bits 31..25)	^\s*piVar6\[0xc\]\ =\ uVar7\ \|\ uVar2\ \|\ uVar21\ \|\ uVar4\ \&\ 0x7ff;$	+1
+use	TParseContext__executeInitializer	uVar21	qualifierBits	CONFIRMED	stack TType bits & 0xfe000000: the qualifier field (bits 31..25)	^\s*piVar6\[0xc\]\ =\ uVar3\ \|\ uVar7\ \|\ uVar2\ \|\ uVar21\ \|\ uVar4\ \&\ 0x3ff;$	+2
+use	TParseContext__executeInitializer	uVar21	decrementedRefCount	INFERRED	old refcount - 1, passed to the conditional store (and left in the register for later calls)	^\s*uVar21\ =\ iVar8\ \-\ 1;$	+1
+use	TParseContext__executeInitializer	uVar21	decrementedRefCount	INFERRED	old refcount - 1, passed to the conditional store (and left in the register for later calls)	^\s*iVar22\ =\ storeWordConditionalIndexed\(uVar21,0,piVar5\);$	+1
+use	TParseContext__executeInitializer	uVar21	decrementedRefCount	INFERRED	old refcount - 1, passed to the conditional store (and left in the register for later calls)	^\s*uVar21\ =\ \(uint\)\*DAT_a7b7ba18;$	+1
+use	TParseContext__executeInitializer	uVar21	decrementedRefCount	INFERRED	old refcount - 1, passed to the conditional store (and left in the register for later calls)	^\s*uVar17\ =\ \(\*\*\(code\ \*\*\)\(piVar6\[3\]\ \+\ 0x24\)\)\(a0,uVar19,puVar24,uVar17,uVar18,ppuVar20,uVar21,uVar7\);$	+1
+use	TParseContext__executeInitializer	uVar21	decrementedRefCount	INFERRED	old refcount - 1, passed to the conditional store (and left in the register for later calls)	^\s*uVar21\ =\ 0;$	+1
+use	TParseContext__executeInitializer	uVar21	decrementedRefCount	INFERRED	old refcount - 1, passed to the conditional store (and left in the register for later calls)	^\s*uVar21\ =\ \(uint\)\*DAT_a7b7ba18;$@2	+1
+use	TParseContext__executeInitializer	uVar21	decrementedRefCount	INFERRED	old refcount - 1, passed to the conditional store (and left in the register for later calls)	^\s*error\(\(int\)this,\(char\ \*\)param_2,pcVar16,pcVar29,"",ppuVar20,uVar21,uVar7\);$	+1
+use	TParseContext__executeInitializer	uVar21	variableBitsCopy	CONFIRMED	the TVariable TType bit-field word	^\s*uVar21\ =\ piVar6\[0xc\];$	+3
+use	TParseContext__executeInitializer	uVar21	variableBitsCopy	CONFIRMED	the TVariable TType bit-field word	^\s*iVar8\ =\ \(int\)\(uVar21\ <<\ 0xd\ \|\ uVar21\ >>\ 0x13\)\ >>\ 0x18;$@2	+1
+local	TParseContext__executeInitializer	uVar4	oldVariableBits	CONFIRMED	old TVariable bit-field word (piVar6[0xc]) merged field by field
+local	TParseContext__executeInitializer	uVar2	basicTypeField	CONFIRMED	(stack bits >> 0x13 & 0x3f) << 0x13: basic type field
+local	TParseContext__executeInitializer	uVar3	matrixField	CONFIRMED	(stack bits >> 10 & 1) << 10: matrix bit
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*paVar15\ =\ \*\(unsigned\ char\ \*\*\)\(param_4\ \+\ 0x14\);$	+1
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*local_10c\ =\ paVar15;$	+1
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*local_ec\ =\ paVar15;$	+1
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*if\ \(paVar15\ !=\ \(unsigned\ char\ \*\)0x0\)\ \{$	+2
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*uVar31\ =\ TType__setStructSize\(\(unsigned\ char\ \*\)\&local_150,\*\(unsigned\ char\ \*\*\)\(paVar15\ \+\ 8\)\);$	+1
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,ppuVar20,\*\(int\ \*\)local_ec\);$	+1
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*paVar15\ =\ \(unsigned\ char\ \*\)local_e0;$	+2
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 8\)\)\(piVar6,uVar19,paVar15,uVar17,uVar18,ppuVar20,a6,uVar7\);$	+1
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*paVar15\ =\ \*\(unsigned\ char\ \*\*\)\(param_4\ \+\ 0x14\);$@2	+1
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*local_10c\ =\ paVar15;$@2	+1
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*local_ec\ =\ paVar15;$@2	+1
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*if\ \(paVar15\ !=\ \(unsigned\ char\ \*\)0x0\)\ \{$@2	+2
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*uVar31\ =\ TType__setStructSize\(\(unsigned\ char\ \*\)\&local_150,\*\(unsigned\ char\ \*\*\)\(paVar15\ \+\ 8\)\);$@2	+1
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,uVar7,\*\(int\ \*\)local_ec\);$	+1
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*paVar15\ =\ \(unsigned\ char\ \*\)local_a0;$	+2
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*\(\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar8\ \+\ 4\),a1,paVar15,uVar17,uVar18,$	+2
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*paVar15\ =\ local_12c;$	+1
+use	TParseContext__executeInitializer	paVar15	ptUserDef	CONFIRMED	*(publicType+0x14): TPublicType.userDef (TType* of a struct type)	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x18\)\)\(param_5,ppuVar13,paVar15,uVar17,uVar18\);$	+1
+use	TParseContext__executeInitializer	paVar15	stackTypeBitsCopy	CONFIRMED	the stack TType bit-field word being assembled from the public type	^\s*paVar15\ =\ \(unsigned\ char\ \*\)$	+1
+use	TParseContext__executeInitializer	paVar15	stackTypeBitsCopy	CONFIRMED	the stack TType bit-field word being assembled from the public type	^\s*local_12c\ =\ paVar15;$	+1
+use	TParseContext__executeInitializer	paVar15	stackTypeBitsCopy	CONFIRMED	the stack TType bit-field word being assembled from the public type	^\s*\(local_ec,\(int\)uVar31,paVar15,uVar17,uVar18,ppuVar20,\*\(int\ \*\)local_ec\);$@2	+1
+use	TParseContext__executeInitializer	pcVar29	typeNameChars	CONFIRMED	*(string+4): the character data (_M_p) of the struct type name TString, passed to the string constructor	^\s*pcVar29\ =\ \*\(char\ \*\*\)\(iVar8\ \+\ 4\);$	+1
+use	TParseContext__executeInitializer	pcVar29	typeNameChars	CONFIRMED	*(string+4): the character data (_M_p) of the struct type name TString, passed to the string constructor	^\s*__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_\(ppuVar11,pcVar29,paVar15\);$	+1
+use	TParseContext__executeInitializer	pcVar29	typeNameChars	CONFIRMED	*(string+4): the character data (_M_p) of the struct type name TString, passed to the string constructor	^\s*pcVar29\ =\ \*\(char\ \*\*\)\(iVar8\ \+\ 4\);$@2	+1
+use	TParseContext__executeInitializer	pcVar29	typeNameChars	CONFIRMED	*(string+4): the character data (_M_p) of the struct type name TString, passed to the string constructor	^\s*__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_\(ppuVar11,pcVar29,paVar15\);$@2	+1
+use	TParseContext__executeInitializer	pcVar29	typeNameChars	CONFIRMED	*(string+4): the character data (_M_p) of the struct type name TString, passed to the string constructor	^\s*pcVar29\ =\ \*\(char\ \*\*\)\(iVar8\ \+\ 4\);$@3	+1
+use	TParseContext__executeInitializer	pcVar29	typeNameChars	CONFIRMED	*(string+4): the character data (_M_p) of the struct type name TString, passed to the string constructor	^\s*\(this_00,pcVar29,\(unsigned\ char\ \*\)local_90\);$	+1
+use	TParseContext__executeInitializer	pcVar29	nameChars	CONFIRMED	*(identifier+4): characters of the variable name TString (newNode[1])	^\s*pcVar29\ =\ \*\(char\ \*\*\)\(uVar7\ \+\ 4\);$	+1
+use	TParseContext__executeInitializer	pcVar29	nameChars	CONFIRMED	*(identifier+4): characters of the variable name TString (newNode[1])	^\s*pcVar29\ =\ \(char\ \*\)getQualifierString\(\(uint\)piVar6\[0xc\]\ >>\ 0x19\);$	+1
+use	TParseContext__executeInitializer	pcVar29	nameChars	CONFIRMED	*(identifier+4): characters of the variable name TString (newNode[1])	^\s*pcVar29\ =\ "";$	+1
+use	TParseContext__executeInitializer	pcVar29	nameChars	CONFIRMED	*(identifier+4): characters of the variable name TString (newNode[1])	^\s*error\(\(int\)this,\(char\ \*\)param_2,pcVar16,pcVar29,"",ppuVar20,uVar21,uVar7\);$	+1
+use	TParseContext__executeInitializer	pcVar29	qualifierString	CONFIRMED	getQualifierString(variable.bits >> 0x19)	^\s*pcVar29\ =\ \(char\ \*\)getQualifierString\(\(uint\)piVar6\[0xc\]\ >>\ 0x19\);$@2	+3
+local	TParseContext__executeInitializer	pcVar16	errorReason	CONFIRMED	reason string passed to TParseContext::error: "redefinition", " cannot initialize this type of qualifier ", " cannot initialize constant of this type"
+use	TParseContext__executeInitializer	piVar5	aggregateNode	INFERRED	initializer slot +0x1c = getAsAggregate()	^\s*piVar5\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x1c\)\)\(param_5\);$	+2
+use	TParseContext__executeInitializer	piVar5	aggregateNode	INFERRED	initializer slot +0x1c = getAsAggregate()	^\s*piVar5\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x1c\)\)\(param_5\);$@2	+2
+use	TParseContext__executeInitializer	piVar5	childConstantUnion	INFERRED	first sequence element: getAsTyped()->getAsConstantUnion() (slot +0x18)	^\s*piVar5\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(iVar22\ \+\ 0x14\)\)$	+1
+use	TParseContext__executeInitializer	piVar5	childConstantUnion	INFERRED	first sequence element: getAsTyped()->getAsConstantUnion() (slot +0x18)	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x18\)\)\(piVar5\);$	+1
+use	TParseContext__executeInitializer	piVar5	symbolNode	INFERRED	initializer slot +0x28 = getAsSymbolNode()	^\s*piVar5\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x28\)\)\(param_5\);$	+2
+local	TParseContext__executeInitializer	piVar26	symbolTable	CONFIRMED	*(this+4): the TSymbolTable (its level vector begin/end at +0/+4)
+use	TParseContext__executeInitializer	iVar22	childVtable	INFERRED	vtable of the first sequence element	^\s*iVar22\ =\ \*\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar8\ \+\ 4\);$	+4
+use	TParseContext__executeInitializer	iVar22	levelIndex	CONFIRMED	index of the symbol table level, counted down from levels.size()-1	^\s*iVar22\ =\ \(piVar26\[1\]\ \-\ iVar8\ >>\ 2\)\ \+\ \-1;$	+1
+use	TParseContext__executeInitializer	iVar22	levelIndex	CONFIRMED	index of the symbol table level, counted down from levels.size()-1	^\s*iVar28\ =\ \*\(int\ \*\)\(iVar8\ \+\ iVar22\ \*\ 4\);$	+1
+use	TParseContext__executeInitializer	iVar22	levelIndex	CONFIRMED	index of the symbol table level, counted down from levels.size()-1	^\s*iVar22\ =\ iVar22\ \+\ \-1;$	+2
+use	TParseContext__executeInitializer	iVar28	currentLevel	CONFIRMED	*(levels.begin + levelIndex*4): TSymbolTableLevel searched for the symbol	^\s*iVar28\ =\ \*\(int\ \*\)\(iVar8\ \+\ iVar22\ \*\ 4\);$	+2
+use	TParseContext__executeInitializer	iVar28	currentLevel	CONFIRMED	*(levels.begin + levelIndex*4): TSymbolTableLevel searched for the symbol	^\s*if\ \(local_80\[0\]\ !=\ \*\(int\ \*\)\(iVar28\ \+\ 4\)\)\ \{$	+1
+use	TParseContext__executeInitializer	iVar8	structTypeNameStringRef	INFERRED	virtual slot +0x18 on the struct userDef TType returns the TString whose +4 is the character data	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)local_ec\ \+\ 0x18\)\)$	+1
+use	TParseContext__executeInitializer	iVar8	structTypeNameStringRef	INFERRED	virtual slot +0x18 on the struct userDef TType returns the TString whose +4 is the character data	^\s*\*\(byte\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 4\)\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 4\)\ \+\ \-0xc\)\)\ =\ \*DAT_a7b7ba18;$	+2
+use	TParseContext__executeInitializer	iVar8	structTypeNameStringRef	INFERRED	virtual slot +0x18 on the struct userDef TType returns the TString whose +4 is the character data	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)local_ec\ \+\ 0x18\)\)$@2	+1
+use	TParseContext__executeInitializer	iVar8	structTypeNameStringRef	INFERRED	virtual slot +0x18 on the struct userDef TType returns the TString whose +4 is the character data	^\s*\*\(byte\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 4\)\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 4\)\ \+\ \-0xc\)\)\ =\ \*DAT_a7b7ba18;$@2	+2
+use	TParseContext__executeInitializer	iVar8	structTypeNameStringRef	INFERRED	virtual slot +0x18 on the struct userDef TType returns the TString whose +4 is the character data	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)local_ec\ \+\ 0x18\)\)$@3	+1
+use	TParseContext__executeInitializer	iVar8	structTypeNameStringRef	INFERRED	virtual slot +0x18 on the struct userDef TType returns the TString whose +4 is the character data	^\s*\*\(byte\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 4\)\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 4\)\ \+\ \-0xc\)\)\ =\ \*DAT_a7b7ba18;$@3	+2
+use	TParseContext__executeInitializer	iVar8	variableSymbol	CONFIRMED	TIntermediate::addSymbol(id, name, type, line): the TIntermSymbol for the variable	^\s*iVar8\ =\ TIntermediate__addSymbol$	+1
+use	TParseContext__executeInitializer	iVar8	variableSymbol	CONFIRMED	TIntermediate::addSymbol(id, name, type, line): the TIntermSymbol for the variable	^\s*TIntermediate__addAssign\(\*\(unsigned\ char\ \*\*\)this,0x76,iVar8,param_5,param_2\);$	+1
+use	TParseContext__executeInitializer	iVar8	variableSymbol	CONFIRMED	TIntermediate::addSymbol(id, name, type, line): the TIntermSymbol for the variable	^\s*TType__getCompleteString\(\(unsigned\ char\ \*\)\&local_140,iVar8\ \+\ 8\);$	+1
+use	TParseContext__executeInitializer	iVar8	typesMatch	CONFIRMED	1 when (stack bits & 0x1fffe00) == (publicType copy bits) and the structure pointers are equal	^\s*iVar8\ =\ 0;$	+1
+use	TParseContext__executeInitializer	iVar8	typesMatch	CONFIRMED	1 when (stack bits & 0x1fffe00) == (publicType copy bits) and the structure pointers are equal	^\s*iVar8\ =\ 1;$	+1
+use	TParseContext__executeInitializer	iVar8	typesMatch	CONFIRMED	1 when (stack bits & 0x1fffe00) == (publicType copy bits) and the structure pointers are equal	^\s*if\ \(iVar8\ ==\ 0\)\ \{$	+1
+use	TParseContext__executeInitializer	iVar8	typesMatch	CONFIRMED	1 when (stack bits & 0x1fffe00) == (publicType copy bits) and the structure pointers are equal	^\s*error\(\(int\)this,\(char\ \*\)param_2,"\ non\-matching\ types\ for\ const\ param_5\ ",pcVar29,"",uVar7,$	+2
+use	TParseContext__executeInitializer	iVar8	constantUnionNode	INFERRED	initializer slot +0x18 = getAsConstantUnion()	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x18\)\)\(param_5\);$	+2
+use	TParseContext__executeInitializer	iVar8	aggregateNodeResult	INFERRED	initializer slot +0x1c = getAsAggregate()	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x1c\)\)\(param_5\);$	+2
+use	TParseContext__executeInitializer	iVar8	typeSize	CONFIRMED	nominal size (bits 18..11), squared when the matrix bit is set: element count of the constant array	^\s*iVar8\ =\ \(int\)\(uVar21\ <<\ 0xd\ \|\ uVar21\ >>\ 0x13\)\ >>\ 0x18;$	+1
+use	TParseContext__executeInitializer	iVar8	typeSize	CONFIRMED	nominal size (bits 18..11), squared when the matrix bit is set: element count of the constant array	^\s*iVar8\ =\ \(int\)\(uVar21\ <<\ 0xd\ \|\ uVar21\ >>\ 0x13\)\ >>\ 0x18;$@2	+2
+use	TParseContext__executeInitializer	iVar8	typeSize	CONFIRMED	nominal size (bits 18..11), squared when the matrix bit is set: element count of the constant array	^\s*iVar8\ =\ piVar6\[9\];$	+1
+use	TParseContext__executeInitializer	iVar8	typeSize	CONFIRMED	nominal size (bits 18..11), squared when the matrix bit is set: element count of the constant array	^\s*pcVar25\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar9,iVar8\ <<\ 2\);$	+1
+use	TParseContext__executeInitializer	iVar8	typeSize	CONFIRMED	nominal size (bits 18..11), squared when the matrix bit is set: element count of the constant array	^\s*iVar8\ =\ \(int\)\(uVar7\ <<\ 0xd\ \|\ uVar7\ >>\ 0x13\)\ >>\ 0x18;$	+1
+use	TParseContext__executeInitializer	iVar8	typeSize	CONFIRMED	nominal size (bits 18..11), squared when the matrix bit is set: element count of the constant array	^\s*iVar8\ =\ \(int\)\(uVar7\ <<\ 0xd\ \|\ uVar7\ >>\ 0x13\)\ >>\ 0x18;$@2	+2
+use	TParseContext__executeInitializer	iVar8	typeSize	CONFIRMED	nominal size (bits 18..11), squared when the matrix bit is set: element count of the constant array	^\s*iVar8\ =\ piVar6\[9\];$@2	+1
+use	TParseContext__executeInitializer	iVar8	typeSize	CONFIRMED	nominal size (bits 18..11), squared when the matrix bit is set: element count of the constant array	^\s*puVar24\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar9,iVar8\ <<\ 2\);$	+1
+use	TParseContext__executeInitializer	iVar8	sequence	CONFIRMED	aggregate slot +100 = getSequence(): vector with begin at +4 and end at +8	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 100\)\)\(piVar5\);$	+1
+use	TParseContext__executeInitializer	iVar8	sequence	CONFIRMED	aggregate slot +100 = getSequence(): vector with begin at +4 and end at +8	^\s*if\ \(\*\(int\ \*\)\(iVar8\ \+\ 8\)\ \-\ \*\(int\ \*\)\(iVar8\ \+\ 4\)\ >>\ 2\ ==\ 1\)\ \{$	+1
+use	TParseContext__executeInitializer	iVar8	sequence	CONFIRMED	aggregate slot +100 = getSequence(): vector with begin at +4 and end at +8	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 100\)\)\(piVar5\);$@2	+2
+use	TParseContext__executeInitializer	iVar8	sequence	CONFIRMED	aggregate slot +100 = getSequence(): vector with begin at +4 and end at +8	^\s*\(\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar8\ \+\ 4\),a1,paVar15,uVar17,uVar18,$	+2
+use	TParseContext__executeInitializer	iVar8	childConstantUnionResult	INFERRED	getAsConstantUnion() of the single sequence element	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x18\)\)\(piVar5\);$	+1
+use	TParseContext__executeInitializer	iVar8	childConstantUnionResult	INFERRED	getAsConstantUnion() of the single sequence element	^\s*if\ \(iVar8\ !=\ 0\)\ \{$@3	+1
+use	TParseContext__executeInitializer	iVar8	constantArrayPtr	INFERRED	aggregate slot +0x1c result; +0x30 holds the const union array pointer	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x1c\)\)$	+1
+use	TParseContext__executeInitializer	iVar8	constantArrayPtr	INFERRED	aggregate slot +0x1c result; +0x30 holds the const union array pointer	^\s*uVar19\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x30\);$	+1
+use	TParseContext__executeInitializer	iVar8	constantArrayPtr	INFERRED	aggregate slot +0x1c result; +0x30 holds the const union array pointer	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x1c\)\)$@2	+1
+use	TParseContext__executeInitializer	iVar8	constantArrayPtr	INFERRED	aggregate slot +0x1c result; +0x30 holds the const union array pointer	^\s*uVar19\ =\ \*\(undefined4\ \*\)\(iVar8\ \+\ 0x30\);$@2	+1
+use	TParseContext__executeInitializer	iVar8	parseResult	CONFIRMED	TIntermediate::parseConstTree result (error flag)	^\s*iVar8\ =\ TIntermediate__parseConstTree$	+1
+use	TParseContext__executeInitializer	iVar8	parseResult	CONFIRMED	TIntermediate::parseConstTree result (error flag)	^\s*if\ \(iVar8\ !=\ 0\)\ \{$@4	+1
+use	TParseContext__executeInitializer	iVar8	parseResult	CONFIRMED	TIntermediate::parseConstTree result (error flag)	^\s*return\ iVar8;$	+1
+use	TParseContext__executeInitializer	iVar8	symbolNodeResult	INFERRED	initializer slot +0x28 = getAsSymbolNode()	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x28\)\)\(param_5\);$	+2
+use	TParseContext__executeInitializer	iVar8	ptBasicType	CONFIRMED	*(publicType): TPublicType.type compared with 1/2/3 (float/int/bool)	^\s*iVar8\ =\ \*\(int\ \*\)param_4;$	+4
+use	TParseContext__executeInitializer	iVar8	ptBasicType	CONFIRMED	*(publicType): TPublicType.type compared with 1/2/3 (float/int/bool)	^\s*else\ if\ \(iVar8\ ==\ 3\)\ goto\ LAB_97b9e3bc;$	+1
+use	TParseContext__executeInitializer	iVar8	constantUnionNodeArray	INFERRED	getAsConstantUnion() result whose first union element is copied (+0x30 = union array)	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x18\)\)\(param_5,ppuVar13,local_12c,1\);$	+2
+use	TParseContext__executeInitializer	iVar8	constantUnionNodeArray	INFERRED	getAsConstantUnion() result whose first union element is copied (+0x30 = union array)	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_5\ \+\ 0x18\)\)\(param_5\);$@2	+2
+local	TParseContext__executeInitializer	local_150	stackType	CONFIRMED	stack TType object (vtable at +0; its first word is also reused as the TString slot of getCompleteString)
+local	TParseContext__executeInitializer	local_148	stackTypeStructure	CONFIRMED	stack TType +8: structure (TTypeList*), copied from userDef+8
+local	TParseContext__executeInitializer	local_144	stackTypeFieldName	INFERRED	stack TType +0xc (fieldName), zero here
+local	TParseContext__executeInitializer	local_140	stackTypeTypeName	CONFIRMED	stack TType +0x10: typeName TString* (also reused as getCompleteString output)
+local	TParseContext__executeInitializer	local_13c	stackTypeWord14	UNKNOWN	stack TType +0x14: copied to TVariable +0x20, zero here
+local	TParseContext__executeInitializer	local_138	stackTypeStructureSize	CONFIRMED	stack TType +0x18: structureSize, set by TType__setStructSize
+local	TParseContext__executeInitializer	local_134	stackTypeWord1c	UNKNOWN	stack TType +0x1c, zero here
+local	TParseContext__executeInitializer	local_130	stackTypeWord20	UNKNOWN	stack TType +0x20, zero here
+local	TParseContext__executeInitializer	local_12c	stackTypeBits	CONFIRMED	stack TType +0x24: bit-field word (qualifier 31..25, basic type 24..19, size 18..11, matrix 10, array 9)
+local	TParseContext__executeInitializer	local_120	ptCopyType	CONFIRMED	first TPublicType copy +0 (type); the same slot is reused as a getCompleteString output
+local	TParseContext__executeInitializer	local_11c	ptCopyQualifier	CONFIRMED	first TPublicType copy +4 (qualifier)
+local	TParseContext__executeInitializer	local_118	ptCopySize	CONFIRMED	first TPublicType copy +8 (size)
+local	TParseContext__executeInitializer	local_114	ptCopyMatrix	CONFIRMED	first TPublicType copy +0xc (matrix)
+local	TParseContext__executeInitializer	local_110	ptCopyArray	CONFIRMED	first TPublicType copy +0x10 (array)
+local	TParseContext__executeInitializer	local_10c	ptCopyUserDef	CONFIRMED	first TPublicType copy +0x14 (userDef)
+local	TParseContext__executeInitializer	local_108	ptCopyLine	CONFIRMED	first TPublicType copy +0x18 (line)
+local	TParseContext__executeInitializer	local_100	pt2CopyType	CONFIRMED	second TPublicType copy +0 (type)
+local	TParseContext__executeInitializer	local_fc	pt2CopyQualifier	CONFIRMED	second TPublicType copy +4 (qualifier)
+local	TParseContext__executeInitializer	local_f8	pt2CopySize	CONFIRMED	second TPublicType copy +8 (size)
+local	TParseContext__executeInitializer	local_f4	pt2CopyMatrix	CONFIRMED	second TPublicType copy +0xc (matrix)
+local	TParseContext__executeInitializer	local_f0	pt2CopyArray	CONFIRMED	second TPublicType copy +0x10 (array)
+local	TParseContext__executeInitializer	local_ec	pt2CopyUserDef	CONFIRMED	second TPublicType copy +0x14 (userDef)
+local	TParseContext__executeInitializer	local_e8	pt2CopyLine	CONFIRMED	second TPublicType copy +0x18 (line)
+local	TParseContext__executeInitializer	local_e0	poolAllocatorArg1	CONFIRMED	one-word array holding GetGlobalPoolAllocator(), passed by reference as the allocator of the TString constructor
+local	TParseContext__executeInitializer	local_a0	poolAllocatorArg2	CONFIRMED	same, second TString construction
+local	TParseContext__executeInitializer	local_90	poolAllocatorArg3	CONFIRMED	same, third TString construction
+local	TParseContext__executeInitializer	local_d0	nameCopy	INFERRED	temporary TString copy-constructed from the variable name
+local	TParseContext__executeInitializer	local_cc	nameCopyChars	INFERRED	character pointer of nameCopy (its refcount word is at -4)
+local	TParseContext__executeInitializer	local_c8	variableForInsert	INFERRED	the new TVariable passed to the symbol table insert
+local	TParseContext__executeInitializer	local_c0	destroyAllocator1	INFERRED	allocator argument array of the first _Rep::_M_destroy call
+local	TParseContext__executeInitializer	local_b0	destroyAllocator2	INFERRED	allocator argument array of the second _Rep::_M_destroy call
+local	TParseContext__executeInitializer	local_70	destroyAllocator3	INFERRED	allocator argument array of the third _Rep::_M_destroy call
+local	TParseContext__executeInitializer	local_60	destroyAllocator4	INFERRED	allocator argument array of the fourth _Rep::_M_destroy call
+local	TParseContext__executeInitializer	local_50	destroyAllocator5	INFERRED	allocator argument array of the fifth _Rep::_M_destroy call
+local	TParseContext__executeInitializer	local_80	levelFindResult	INFERRED	result of the symbol table level map find (std::_Rb_tree): local_80[0] is the found node
+local	TParseContext__executeInitializer	pppuVar14	destroyAllocatorArg	INFERRED	address of the allocator array passed to _M_destroy
+local	TParseContext__executeInitializer	uVar23	singleConstantParam	INFERRED	last argument of TIntermediate::parseConstTree: 1 when a single constant constructor argument is used
+local	TParseContext__executeInitializer	pcVar25	variableConstPointer	INFERRED	TVariable +0x38 (newNode[0xe]): the constant union array, allocated on first use
+use	TParseContext__executeInitializer	puVar24	tempName	INFERRED	address of the nameCopy temporary	^\s*puVar24\ =\ \&local_d0;$	+1
+use	TParseContext__executeInitializer	puVar24	tempName	INFERRED	address of the nameCopy temporary	^\s*__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_\(puVar24,psVar10\);$	+1
+use	TParseContext__executeInitializer	puVar24	tempName	INFERRED	address of the nameCopy temporary	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique\(\(unsigned\ char\ \*\)\&local_140,uVar27,puVar24\);$	+1
+use	TParseContext__executeInitializer	puVar24	tempName	INFERRED	address of the nameCopy temporary	^\s*uVar17\ =\ \(\*\*\(code\ \*\*\)\(piVar6\[3\]\ \+\ 0x24\)\)\(a0,uVar19,puVar24,uVar17,uVar18,ppuVar20,uVar21,uVar7\);$	+1
+use	TParseContext__executeInitializer	puVar24	variableConstArray	INFERRED	TVariable +0x38 (newNode[0xe]): the constant union array, allocated on first use	^\s*puVar24\ =\ \(undefined4\ \*\)piVar6\[0xe\];$	+2
+use	TParseContext__executeInitializer	puVar24	variableConstArray	INFERRED	TVariable +0x38 (newNode[0xe]): the constant union array, allocated on first use	^\s*puVar24\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar9,iVar8\ <<\ 2\);$	+2
+use	TParseContext__executeInitializer	puVar24	variableConstArray	INFERRED	TVariable +0x38 (newNode[0xe]): the constant union array, allocated on first use	^\s*\*puVar24\ =\ \*\*\(undefined4\ \*\*\)\(iVar8\ \+\ 0x30\);$	+1
+use	TParseContext__executeInitializer	puVar24	variableConstArray	INFERRED	TVariable +0x38 (newNode[0xe]): the constant union array, allocated on first use	^\s*\*puVar24\ =\ \*\*\(undefined4\ \*\*\)\(iVar8\ \+\ 0x30\);$@2	+1

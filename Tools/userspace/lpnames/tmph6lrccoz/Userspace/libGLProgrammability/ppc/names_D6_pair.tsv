@@ -1,0 +1,9 @@
+# local rows, fork D6: 2-word operand descriptors returned through a hidden pointer
+local	TIntermBinary__compileNode	local_80	operandDescOrSprintfBuffer	INFERRED	first word of the two-word operand descriptor (ParseOperand packed by getOperandAs{Dest,Source}Var / getConstantAsSourceVar through a hidden result pointer); the same stack area is also the _sprintf scratch buffer
+local	TIntermBinary__compileNode	local_7c	operandDescB	INFERRED	second word of the two-word operand descriptor (ParseOperand packed by getOperandAs{Dest,Source}Var / getConstantAsSourceVar through a hidden result pointer)
+local	TIntermUnary__compileNode	local_70	operandDesc	INFERRED	first word of the two-word operand descriptor (ParseOperand packed by getOperandAs{Dest,Source}Var / getConstantAsSourceVar through a hidden result pointer)
+local	TIntermUnary__compileNode	local_6c	operandDescB	INFERRED	second word of the two-word operand descriptor (ParseOperand packed by getOperandAs{Dest,Source}Var / getConstantAsSourceVar through a hidden result pointer)
+local	TIntermLoop__compileNode	local_70	operandDesc	INFERRED	first word of the two-word operand descriptor (ParseOperand packed by getOperandAs{Dest,Source}Var / getConstantAsSourceVar through a hidden result pointer)
+local	TIntermLoop__compileNode	local_6c	operandDescB	INFERRED	second word of the two-word operand descriptor (ParseOperand packed by getOperandAs{Dest,Source}Var / getConstantAsSourceVar through a hidden result pointer)
+local	TIntermBranch__compileNode	local_70	operandDesc	INFERRED	first word of the two-word operand descriptor (ParseOperand packed by getOperandAs{Dest,Source}Var / getConstantAsSourceVar through a hidden result pointer)
+local	TIntermBranch__compileNode	local_6c	operandDescB	INFERRED	second word of the two-word operand descriptor (ParseOperand packed by getOperandAs{Dest,Source}Var / getConstantAsSourceVar through a hidden result pointer)
