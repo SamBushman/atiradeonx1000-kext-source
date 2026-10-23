@@ -1,0 +1,52 @@
+local	TBuiltIns__getNumStringArrays	param_2	language	CONFIRMED	EShLanguage: 1 = fragment (5 arrays), otherwise vertex (6 arrays)
+local	TBuiltIns__getStringArray	param_2	language	CONFIRMED	EShLanguage: 1 = fragment, otherwise vertex
+local	TBuiltIns__getStringArray	param_3	arrayIndex	CONFIRMED	index into the language's list of built-in source strings
+local	TBuiltIns__getStringArray	puVar1	stringArray	CONFIRMED	selected built-in source string (_strBuiltInFunctions, ...Fragment/Vertex, Standard...)
+local	TBuiltIns__getStringSizeArray	param_2	language	CONFIRMED	EShLanguage: 1 = fragment, otherwise vertex
+local	TBuiltIns__getStringSizeArray	param_3	arrayIndex	CONFIRMED	index into the language's list of built-in source strings
+local	TBuiltIns__getStringSizeArray	puVar1	stringSizeArray	CONFIRMED	size table matching the selected string (_sizeBuiltInFunctions, ...)
+local	TBuiltIns__getNumStrings	param_2	language	CONFIRMED	EShLanguage: 1 = fragment, otherwise vertex
+local	TBuiltIns__getNumStrings	param_3	arrayIndex	CONFIRMED	index into the language's list of built-in source strings
+local	TBuiltIns__getNumStrings	uVar2	arrayBytes	CONFIRMED	byte size of the selected size table; the result is arrayBytes >> 2 entries
+local	TBuiltIns__getNumStrings	bVar1	isStandardUniforms	CONFIRMED	arrayIndex selects the last array (the standard uniforms, 0x174 bytes)
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	puVar5	levelArrayBegin	CONFIRMED	symbolTable->levels begin: *levelArrayBegin is the built-in TSymbolTableLevel
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	pcVar10	operatorName	CONFIRMED	built-in function name string related to the operator
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	uVar13	operatorCode	CONFIRMED	TOperator value passed to relateToOperator
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	in_r5	scratchR5	UNKNOWN	register leftover also loaded with the allocator argument for the string constructor
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	in_r6	scratchR6	UNKNOWN	register leftover forwarded to the TVariable vtable call
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	in_r7	scratchR7	UNKNOWN	register leftover forwarded to the TVariable vtable call
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	piVar6	variable	CONFIRMED	new 0x40-byte TVariable: +0 vtable, +4 name, +8 uniqueId, +0xc embedded TType
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	pcVar2	nameChars	CONFIRMED	C string of the variable name
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	pvVar3	nameString	CONFIRMED	pool-allocated TString holding the name
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	uVar4	oldTypeBits	CONFIRMED	TType bit-field word (+0x30) before each qualifier/type/size/matrix/array update
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	psVar7	variableNameRef	CONFIRMED	result of the TVariable vtable slot 2 call: the name string reference inserted into the level map
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	uVar9	symbolTableLevel	CONFIRMED	last TSymbolTableLevel of the table (the level the variable is inserted into)
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	uVar11	nameStringAllocationPair	CONFIRMED	TPoolAllocator__allocate 64-bit result pair
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	in_r6	scratchR6	UNKNOWN	register leftover forwarded to the TVariable vtable call
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	in_r7	scratchR7	UNKNOWN	register leftover forwarded to the TVariable vtable call
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	in_r8	scratchR8	UNKNOWN	register leftover forwarded to the TVariable vtable call
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	local_70	allocatorArg	CONFIRMED	pool_allocator argument for the TString constructor
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	local_60	insertResultFirst	CONFIRMED	copy of the map insert result (iterator word)
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	local_5c	insertResultSecond	CONFIRMED	copy of the map insert result (inserted flag word)
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	local_50	mapInsertFirst	CONFIRMED	std::pair<iterator,bool> returned by _Rb_tree::insert_unique: iterator
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	local_4c	mapInsertSecond	CONFIRMED	std::pair<iterator,bool> returned by _Rb_tree::insert_unique: flag
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	local_40	nameCopyAllocator	CONFIRMED	copy of the name TString used as the map key: allocator word
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	local_3c	nameCopyChars	CONFIRMED	copy of the name TString used as the map key: character pointer (refcount at -4)
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	local_38	mapEntryVariable	CONFIRMED	second member of the map entry pair: the TVariable
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	local_30	destroyAllocatorArg	CONFIRMED	allocator argument for _Rep::_M_destroy of the key string copy
+use	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	iVar8	uniqueId	CONFIRMED	symbolTable->nextId incremented for the new variable (+8)	^\s*iVar8\ =\ param_2\[3\];$@1		all	none
+use	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	iVar8	fragDataArraySize	INFERRED	builtInResource+0x2c (maxDrawBuffers): array size of gl_FragData	^\s*if\ \(param_1\ ==\ 1\)\ \{$@1	^\s*iVar8\ =\ param_2\[3\];$	all	none
+use	__ZN13TInfoSinkBase6appendEPKc	uVar1	capacity	CONFIRMED	std::string _Rep capacity (data-8)	^\s*uVar1\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)this\ \+\ \-8\);$@1	^\s*uVar1\ =\ \*\(uint\ \*\)\(\(int\)this\ \+\ 4\);$	all	none
+use	__ZN13TInfoSinkBase6appendEPKc	uVar1	targetFlags	CONFIRMED	this+4: bit 2 appends to the string, bit 1 prints to stdout	^\s*uVar1\ =\ \*\(uint\ \*\)\(\(int\)this\ \+\ 4\);$@1		all	none
+local	__ZN13TInfoSinkBase6appendEic	param_2	count	CONFIRMED	number of copies of the character appended
+local	__ZN13TInfoSinkBase6appendEic	param_3	ch	CONFIRMED	character appended (also printed with "%c")
+use	__ZN13TInfoSinkBase6appendEic	uVar1	capacity	CONFIRMED	std::string _Rep capacity (data-8)	^\s*uVar1\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)this\ \+\ \-8\);$@1	^\s*uVar1\ =\ \*\(uint\ \*\)\(\(int\)this\ \+\ 4\);$	all	none
+use	__ZN13TInfoSinkBase6appendEic	uVar1	targetFlags	CONFIRMED	this+4: bit 2 appends to the string, bit 1 prints to stdout	^\s*uVar1\ =\ \*\(uint\ \*\)\(\(int\)this\ \+\ 4\);$@1		all	none
+local	__ZN13TInfoSinkBase6appendERKSs	puVar1	stdFiles	INFERRED	PTR_DAT: C library file table; +0x58 is the FILE printed to
+use	__ZN13TInfoSinkBase6appendERKSs	uVar2	capacity	CONFIRMED	std::string _Rep capacity (data-8)	^\s*uVar2\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)this\ \+\ \-8\);$@1	^\s*uVar2\ =\ \*\(uint\ \*\)\(\(int\)this\ \+\ 4\);$	all	none
+use	__ZN13TInfoSinkBase6appendERKSs	uVar2	targetFlags	CONFIRMED	this+4: bit 2 appends to the string, bit 1 prints to stdout	^\s*uVar2\ =\ \*\(uint\ \*\)\(\(int\)this\ \+\ 4\);$@1		all	none
+local	__ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE	puVar1	stdFiles	INFERRED	PTR_DAT: C library file table; +0x58 is the FILE printed to
+local	__ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE	iVar4	textChars	CONFIRMED	character pointer of the TString argument (text+4), refcount header before it
+local	__ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE	pcVar5	textPtr	CONFIRMED	character pointer passed to _strlen and append
+use	__ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE	uVar2	capacity	CONFIRMED	std::string _Rep capacity (data-8)	^\s*uVar2\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)this\ \+\ \-8\);$@1	^\s*uVar2\ =\ \*\(uint\ \*\)\(\(int\)this\ \+\ 4\);$	all	none
+use	__ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE	uVar2	targetFlags	CONFIRMED	this+4: bit 2 appends to the string, bit 1 prints to stdout	^\s*uVar2\ =\ \*\(uint\ \*\)\(\(int\)this\ \+\ 4\);$@1		all	none

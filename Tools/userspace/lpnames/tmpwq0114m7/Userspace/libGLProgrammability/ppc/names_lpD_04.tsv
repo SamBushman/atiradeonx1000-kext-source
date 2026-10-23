@@ -1,0 +1,27 @@
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	param_2	src2dst	CONFIRMED	ptrdiff_t src2dst of __do_dyncast: >= 0 offset of src in dst, -1 no relationship, -2 src is not a public base of dst (libsupc++ tinfo.cc)
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	param_3	accessPath	CONFIRMED	__sub_kind access_path: bit0 reached through a virtual base, bit1 public path, bit2 contained (6 = __contained_public, 4 = __contained_private, 1 = __not_contained) (libsupc++ tinfo.cc)
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	param_4	dstType	CONFIRMED	const __class_type_info* dst_type compared with *this by type_info::operator==
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	param_5	objPtr	CONFIRMED	const void* obj_ptr: address of this subobject inside the most derived object
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	param_7	srcPtr	CONFIRMED	const void* src_ptr: the pointer being cast from
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	param_8	result	CONFIRMED	__dyncast_result& (dst_ptr +0, whole2dst +4, whole2src +8, dst2src +0xc, whole_details +0x10)
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	bVar1	src2dstNotNeg2	CONFIRMED	src2dst != -2 (src is possibly a public base of dst)
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	bVar2	isLastBase	CONFIRMED	the base-class loop index reached 0 before the decrement
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	uVar8	resultAmbig	CONFIRMED	running result_ambig of the base loop, returned by __do_dyncast
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	p_Var9	baseInfo	CONFIRMED	&__base_info[i] (base_type +0, offset_flags +4), walked downwards
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	local_60	result2DstPtr	CONFIRMED	__dyncast_result result2 for the recursive call: dst_ptr
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	local_5c	result2Whole2dst	CONFIRMED	result2.whole2dst
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	local_58	result2Whole2src	CONFIRMED	result2.whole2src
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	local_54	result2Dst2src	CONFIRMED	result2.dst2src
+local	__cxxabiv1____vmi_class_type_info____do_dyncast	local_50	result2WholeDetails	CONFIRMED	result2.whole_details (copied from result.whole_details)
+use	__cxxabiv1____vmi_class_type_info____do_dyncast	uVar3	baseOffsetFlags	CONFIRMED	__base_class_type_info::__offset_flags: bit0 virtual, bit1 public, offset in bits 8..	^\s*uVar3\ =\ \*\(uint\ \*\)\(p_Var9\ \+\ 4\);$	+8
+use	__cxxabiv1____vmi_class_type_info____do_dyncast	uVar3	iterResultAmbig	CONFIRMED	result_ambig of this iteration: the recursive __do_dyncast result, or the unchanged resultAmbig when the base is skipped	^\s*if\ \(\(bVar1\)\ \|\|\ \(uVar3\ =\ uVar8,\ \(local_50\ \&\ 3\)\ !=\ 0\)\)\ \{$	
+use	__cxxabiv1____vmi_class_type_info____do_dyncast	iVar4	baseOffset	CONFIRMED	base offset: offset_flags >> 8, replaced by the vbase offset read through the vtable for a virtual base	^\s*iVar4\ =\ \(int\)uVar3\ >>\ 8;$	+27
+use	__cxxabiv1____vmi_class_type_info____do_dyncast	iVar4	curDstPtr	CONFIRMED	result.dst_ptr found so far	^\s*iVar4\ =\ \*param_8;$	
+use	__cxxabiv1____vmi_class_type_info____do_dyncast	iVar6	srcMatch	INFERRED	*this == *src_type (type_info::operator==)	^\s*if\ \(\(param_5\ ==\ param_7\)\ \&\&\ \(iVar6\ =\ __ZNKSt9type_infoeqERKS_\(this,param_6\),\ iVar6\ !=\ 0\)\)\ \{$	+4
+use	__cxxabiv1____vmi_class_type_info____do_dyncast	iVar6	isDstType	CONFIRMED	*this == *dst_type	^\s*iVar6\ =\ __ZNKSt9type_infoeqERKS_\(this,param_4\);$	+2
+use	__cxxabiv1____vmi_class_type_info____do_dyncast	iVar6	baseIndex	CONFIRMED	i = __base_count - 1, counted down to 0	^\s*iVar6\ =\ \*\(int\ \*\)\(this\ \+\ 0xc\)\ \+\ \-1;$	+150
+use	__cxxabiv1____vmi_class_type_info____do_dyncast	iVar6	dst2srcKind	CONFIRMED	result.dst2src: __contained_public (6) when dst + src2dst == src_ptr, else __not_contained (1)	^\s*iVar6\ =\ 6;$	+7
+use	__cxxabiv1____vmi_class_type_info____do_dyncast	uVar5	oldWhole2src	CONFIRMED	result.whole2src before OR-ing in result2.whole2src	^\s*uVar5\ =\ param_8\[2\];$	+24
+use	__cxxabiv1____vmi_class_type_info____do_dyncast	uVar5	curDst2src	CONFIRMED	dst2src kind of the dst found so far (computed with the __contained_* rules)	^\s*uVar5\ =\ param_8\[3\];$	
+use	__cxxabiv1____vmi_class_type_info____do_dyncast	uVar7	baseAccess	CONFIRMED	access_path adjusted for this base: |1 for virtual, &~2 for non-public	^\s*uVar7\ =\ param_3;$	+16
+use	__cxxabiv1____vmi_class_type_info____do_dyncast	uVar7	newDst2src	CONFIRMED	dst2src kind of result2 (the new candidate)	^\s*uVar7\ =\ local_54;$	

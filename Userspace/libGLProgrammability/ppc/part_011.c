@@ -671,53 +671,54 @@ int ParseSymbolTable__AddTempFromOutput(this, parseSymbol)
   unsigned char * this;
   unsigned char * parseSymbol;
 {
-  ushort uVar1;
-  int iVar2;
-  unsigned char * this_00;
-  unsigned char * p_Var3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
-  int iVar7;
-  uint uVar8;
-  uint uVar9;
+  int curChunk;
+  ushort glType;
+  int nextTempIndex;
+  unsigned char *tempSymbol;
+  unsigned char * tempChunk;
+  uint vec4Count;
+  uint typeFieldBits;
+  int scalerWidth;
+  int tempChunkList;
+  uint vec4Index;
+  uint oldHeaderWord;
   
-  this_00 = operator_new(100);
-  __ZN11ParseSymbolC1Ev(this_00);
-  p_Var3 = (unsigned char *)_PPStreamChunkCreateWithType(0,0);
-  ParseSymbol__operator_(this_00,parseSymbol);
-  *(undefined4 *)(this_00 + 8) = 0;
-  *(undefined4 *)(this_00 + 4) = 0;
-  ((int (*)())ParseSymbolTable__AddSymbol)(this,this_00);
-  uVar1 = *(ushort *)(this_00 + 0x2c);
-  *(undefined4 *)(this_00 + 0x50) = 1;
-  uVar4 = GetVec4sForType((uint)uVar1);
-  *(undefined4 *)(this_00 + 0x28) = 0xffffffff;
-  *(undefined4 *)(this_00 + 0x38) = 1;
-  uVar5 = GetPPStreamTypeForGLType((uint)uVar1);
-  uVar9 = *(uint *)(p_Var3 + 0xc);
-  uVar5 = (uVar5 & 7) << 0x1a;
-  uVar8 = 0;
-  *(uint *)(p_Var3 + 0xc) = uVar5 | uVar9 & 0xe3ffffff;
-  iVar6 = GetScalerWidthForType((uint)*(ushort *)(this_00 + 0x2c));
-  *(uint *)(p_Var3 + 0xc) = (iVar6 + -1) * 0x1000000 & 0x3000000U | uVar5 | uVar9 & 0xffffff;
-  ParseSymbol__SetChunk(this_00,p_Var3);
-  *(undefined4 *)(this_00 + 0x44) = 0;
-  iVar6 = *(int *)this_00;
-  iVar7 = *(int *)(*(int *)(this + 0xc) + 4);
-  if ((uVar4 != 0) && (iVar7 != 0)) {
+  tempSymbol = operator_new(100);
+  __ZN11ParseSymbolC1Ev(tempSymbol);
+  tempChunk = (unsigned char *)_PPStreamChunkCreateWithType(0,0);
+  ParseSymbol__operator_(tempSymbol,parseSymbol);
+  *(undefined4 *)(tempSymbol + 8) = 0;
+  *(undefined4 *)(tempSymbol + 4) = 0;
+  ((int (*)())ParseSymbolTable__AddSymbol)(this,tempSymbol);
+  glType = *(ushort *)(tempSymbol + 0x2c);
+  *(undefined4 *)(tempSymbol + 0x50) = 1;
+  vec4Count = GetVec4sForType((uint)glType);
+  *(undefined4 *)(tempSymbol + 0x28) = 0xffffffff;
+  *(undefined4 *)(tempSymbol + 0x38) = 1;
+  typeFieldBits = GetPPStreamTypeForGLType((uint)glType);
+  oldHeaderWord = *(uint *)(tempChunk + 0xc);
+  typeFieldBits = (typeFieldBits & 7) << 0x1a;
+  vec4Index = 0;
+  *(uint *)(tempChunk + 0xc) = typeFieldBits | oldHeaderWord & 0xe3ffffff;
+  scalerWidth = GetScalerWidthForType((uint)*(ushort *)(tempSymbol + 0x2c));
+  *(uint *)(tempChunk + 0xc) = (scalerWidth + -1) * 0x1000000 & 0x3000000U | typeFieldBits | oldHeaderWord & 0xffffff;
+  ParseSymbol__SetChunk(tempSymbol,tempChunk);
+  *(undefined4 *)(tempSymbol + 0x44) = 0;
+  curChunk = *(int *)tempSymbol;
+  tempChunkList = *(int *)(*(int *)(this + 0xc) + 4);
+  if ((vec4Count != 0) && (tempChunkList != 0)) {
     do {
-      if (uVar8 != 0) {
-        iVar6 = _PPStreamChunkCreateFromChunk(iVar6);
+      if (vec4Index != 0) {
+        curChunk = _PPStreamChunkCreateFromChunk(curChunk);
       }
-      iVar2 = *(int *)(this + 0x38);
-      uVar8 = uVar8 + 1;
-      *(short *)(iVar6 + 0x12) = (short)iVar2;
-      *(int *)(this + 0x38) = iVar2 + 1;
-      _PPStreamChunkListAddChunk(iVar7,iVar6);
-    } while (uVar8 < uVar4);
+      nextTempIndex = *(int *)(this + 0x38);
+      vec4Index = vec4Index + 1;
+      *(short *)(curChunk + 0x12) = (short)nextTempIndex;
+      *(int *)(this + 0x38) = nextTempIndex + 1;
+      _PPStreamChunkListAddChunk(tempChunkList,curChunk);
+    } while (vec4Index < vec4Count);
   }
-  return this_00;
+  return tempSymbol;
 }
 
 /* ParseSymbolTable__AddFromExternalSymbol @ 0x97bbcd08 (1028 bytes) */
@@ -1843,72 +1844,72 @@ int TIntermSymbol__compileNode(this, pPStreamCompiler, param_3, param_4, param_5
 }
 
 /* TIntermConstantUnion__compileNode @ 0x97bbe69c (340 bytes) */
-int TIntermConstantUnion__compileNode(this, pPStreamCompiler, param_3, param_4, param_5, param_6, param_7, param_8)
+int TIntermConstantUnion__compileNode(this, pPStreamCompiler, strayArg3, strayArg4, strayArg5, strayArg6, strayArg7, strayArg8)
   unsigned char * this;
   unsigned char * pPStreamCompiler;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 strayArg3;
+  undefined4 strayArg4;
+  undefined4 strayArg5;
+  undefined4 strayArg6;
+  undefined4 strayArg7;
+  undefined4 strayArg8;
 {
-  int iVar1;
-  uint uVar2;
-  undefined2 uVar3;
-  void *this_00;
-  undefined4 uVar4;
-  undefined **local_50 [9];
-  uint local_2c;
+  int componentCount;
+  uint basicType;
+  undefined2 glTypeCode;
+  void *constantOperand;
+  undefined4 sourceLine;
+  undefined **stackType [9];
+  uint stackTypeBits;
   
-  this_00 = operator_new(0x38);
-  __ZN12ParseOperandC1Ev(this_00);
-  uVar4 = (*(code *)**(undefined4 **)this)(this);
-  *(undefined4 *)(pPStreamCompiler + 0x90) = uVar4;
-  (**(code **)(*(int *)this + 0x38))(local_50,this);
-  if ((local_2c & 0x400) == 0) {
-    iVar1 = (int)(local_2c << 0xd | local_2c >> 0x13) >> 0x18;
+  constantOperand = operator_new(0x38);
+  __ZN12ParseOperandC1Ev(constantOperand);
+  sourceLine = (*(code *)**(undefined4 **)this)(this);
+  *(undefined4 *)(pPStreamCompiler + 0x90) = sourceLine;
+  (**(code **)(*(int *)this + 0x38))(stackType,this);
+  if ((stackTypeBits & 0x400) == 0) {
+    componentCount = (int)(stackTypeBits << 0xd | stackTypeBits >> 0x13) >> 0x18;
   }
   else {
-    iVar1 = (int)(local_2c << 0xd | local_2c >> 0x13) >> 0x18;
-    iVar1 = iVar1 * iVar1;
+    componentCount = (int)(stackTypeBits << 0xd | stackTypeBits >> 0x13) >> 0x18;
+    componentCount = componentCount * componentCount;
   }
-  *(int *)((int)this_00 + 0x24) = iVar1;
-  local_50[0] = &PTR___ZN5TTypeD1Ev_a7b7d730;
-  *(undefined4 *)((int)this_00 + 4) = *(undefined4 *)(this + 0x30);
-  (**(code **)(*(int *)this + 0x38))(local_50,this);
-  local_50[0] = &PTR___ZN5TTypeD1Ev_a7b7d730;
-  uVar2 = local_2c >> 0x13 & 0x3f;
-  if (uVar2 == 2) {
-    uVar3 = 0x1404;
+  *(int *)((int)constantOperand + 0x24) = componentCount;
+  stackType[0] = &PTR___ZN5TTypeD1Ev_a7b7d730;
+  *(undefined4 *)((int)constantOperand + 4) = *(undefined4 *)(this + 0x30);
+  (**(code **)(*(int *)this + 0x38))(stackType,this);
+  stackType[0] = &PTR___ZN5TTypeD1Ev_a7b7d730;
+  basicType = stackTypeBits >> 0x13 & 0x3f;
+  if (basicType == 2) {
+    glTypeCode = 0x1404;
 LAB_97bbe7a0:
-    *(undefined2 *)((int)this_00 + 0x18) = uVar3;
+    *(undefined2 *)((int)constantOperand + 0x18) = glTypeCode;
   }
   else {
-    if (uVar2 < 3) {
-      if (uVar2 == 1) {
-        uVar3 = 0x1406;
+    if (basicType < 3) {
+      if (basicType == 1) {
+        glTypeCode = 0x1406;
         goto LAB_97bbe7a0;
       }
     }
     else {
-      if (uVar2 == 3) {
-        uVar3 = 0x8b56;
+      if (basicType == 3) {
+        glTypeCode = 0x8b56;
         goto LAB_97bbe7a0;
       }
-      if (uVar2 == 0xe) {
+      if (basicType == 0xe) {
         TPPStreamCompiler__error
                   (pPStreamCompiler,(char *)0x1,(char *)0x0,
                    "TIntermConstantUnion::compileNode: EbtStruct constant union type, investigate",
-                   param_5,param_6,param_7,param_8);
+                   strayArg5,strayArg6,strayArg7,strayArg8);
       }
     }
     TPPStreamCompiler__error
               (pPStreamCompiler,(char *)0x1,(char *)0x0,
-               "TIntermConstantUnion::compileNode: Unexpected constant union type",param_5,param_6,
-               param_7,param_8);
+               "TIntermConstantUnion::compileNode: Unexpected constant union type",strayArg5,strayArg6,
+               strayArg7,strayArg8);
   }
-  return this_00;
+  return constantOperand;
 }
 
 /* TIntermBinary__compileNode @ 0x97bbe7f0 (3444 bytes) */
@@ -4816,72 +4817,72 @@ int TIntermSymbol__indirectNode(this, pPStreamCompiler, param_3, param_4, param_
 }
 
 /* TIntermConstantUnion__indirectNode @ 0x97bc2e7c (340 bytes) */
-int TIntermConstantUnion__indirectNode(this, pPStreamCompiler, param_3, param_4, param_5, param_6, param_7, param_8)
+int TIntermConstantUnion__indirectNode(this, pPStreamCompiler, strayArg3, strayArg4, strayArg5, strayArg6, strayArg7, strayArg8)
   unsigned char * this;
   unsigned char * pPStreamCompiler;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 strayArg3;
+  undefined4 strayArg4;
+  undefined4 strayArg5;
+  undefined4 strayArg6;
+  undefined4 strayArg7;
+  undefined4 strayArg8;
 {
-  int iVar1;
-  uint uVar2;
-  undefined2 uVar3;
-  void *this_00;
-  undefined4 uVar4;
-  undefined **local_50 [9];
-  uint local_2c;
+  int componentCount;
+  uint basicType;
+  undefined2 glTypeCode;
+  void *constantOperand;
+  undefined4 sourceLine;
+  undefined **stackType [9];
+  uint stackTypeBits;
   
-  this_00 = operator_new(0x38);
-  __ZN12ParseOperandC1Ev(this_00);
-  uVar4 = (*(code *)**(undefined4 **)this)(this);
-  *(undefined4 *)(pPStreamCompiler + 0x90) = uVar4;
-  (**(code **)(*(int *)this + 0x38))(local_50,this);
-  if ((local_2c & 0x400) == 0) {
-    iVar1 = (int)(local_2c << 0xd | local_2c >> 0x13) >> 0x18;
+  constantOperand = operator_new(0x38);
+  __ZN12ParseOperandC1Ev(constantOperand);
+  sourceLine = (*(code *)**(undefined4 **)this)(this);
+  *(undefined4 *)(pPStreamCompiler + 0x90) = sourceLine;
+  (**(code **)(*(int *)this + 0x38))(stackType,this);
+  if ((stackTypeBits & 0x400) == 0) {
+    componentCount = (int)(stackTypeBits << 0xd | stackTypeBits >> 0x13) >> 0x18;
   }
   else {
-    iVar1 = (int)(local_2c << 0xd | local_2c >> 0x13) >> 0x18;
-    iVar1 = iVar1 * iVar1;
+    componentCount = (int)(stackTypeBits << 0xd | stackTypeBits >> 0x13) >> 0x18;
+    componentCount = componentCount * componentCount;
   }
-  *(int *)((int)this_00 + 0x24) = iVar1;
-  local_50[0] = &PTR___ZN5TTypeD1Ev_a7b7d778;
-  *(undefined4 *)((int)this_00 + 4) = *(undefined4 *)(this + 0x30);
-  (**(code **)(*(int *)this + 0x38))(local_50,this);
-  local_50[0] = &PTR___ZN5TTypeD1Ev_a7b7d778;
-  uVar2 = local_2c >> 0x13 & 0x3f;
-  if (uVar2 == 2) {
-    uVar3 = 0x1404;
+  *(int *)((int)constantOperand + 0x24) = componentCount;
+  stackType[0] = &PTR___ZN5TTypeD1Ev_a7b7d778;
+  *(undefined4 *)((int)constantOperand + 4) = *(undefined4 *)(this + 0x30);
+  (**(code **)(*(int *)this + 0x38))(stackType,this);
+  stackType[0] = &PTR___ZN5TTypeD1Ev_a7b7d778;
+  basicType = stackTypeBits >> 0x13 & 0x3f;
+  if (basicType == 2) {
+    glTypeCode = 0x1404;
 LAB_97bc2f80:
-    *(undefined2 *)((int)this_00 + 0x18) = uVar3;
+    *(undefined2 *)((int)constantOperand + 0x18) = glTypeCode;
   }
   else {
-    if (uVar2 < 3) {
-      if (uVar2 == 1) {
-        uVar3 = 0x1406;
+    if (basicType < 3) {
+      if (basicType == 1) {
+        glTypeCode = 0x1406;
         goto LAB_97bc2f80;
       }
     }
     else {
-      if (uVar2 == 3) {
-        uVar3 = 0x8b56;
+      if (basicType == 3) {
+        glTypeCode = 0x8b56;
         goto LAB_97bc2f80;
       }
-      if (uVar2 == 0xe) {
+      if (basicType == 0xe) {
         TPPStreamCompiler__error
                   (pPStreamCompiler,(char *)0x1,(char *)0x0,
                    "TIntermConstantUnion::indirectNode: EbtStruct constant union type, investigate",
-                   param_5,param_6,param_7,param_8);
+                   strayArg5,strayArg6,strayArg7,strayArg8);
       }
     }
     TPPStreamCompiler__error
               (pPStreamCompiler,(char *)0x1,(char *)0x0,
-               "TIntermConstantUnion::indirectNode: Unexpected constant union type",param_5,param_6,
-               param_7,param_8);
+               "TIntermConstantUnion::indirectNode: Unexpected constant union type",strayArg5,strayArg6,
+               strayArg7,strayArg8);
   }
-  return this_00;
+  return constantOperand;
 }
 
 /* TIntermBinary__indirectNode @ 0x97bc2fd0 (1000 bytes) */
@@ -5066,44 +5067,46 @@ int TIntermUnary__indirectNode(this, pPStreamCompiler, param_3, param_4, param_5
 }
 
 /* TIntermAggregate__indirectNode @ 0x97bc3428 (232 bytes) */
-int TIntermAggregate__indirectNode(this, pPStreamCompiler, param_3, param_4, param_5, param_6)
+int TIntermAggregate__indirectNode(this, pPStreamCompiler, strayArg3, strayArg4, strayArg5, strayArg6)
   unsigned char * this;
   unsigned char * pPStreamCompiler;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 strayArg3;
+  undefined4 strayArg4;
+  undefined4 strayArg5;
+  undefined4 strayArg6;
 {
-  undefined4 uVar1;
+  undefined4 *freeCursor;
+  undefined4 childResult;
+  undefined4 sourceLine;
   undefined4 *allocation;
-  int iVar3;
-  undefined4 *puVar4;
-  undefined4 *puVar5;
-  void *this_00;
+  int childCount;
+  undefined4 *resultCursor;
+  undefined4 *childCursor;
+  void *operandToFree;
   
-  iVar3 = *(int *)(this + 0x3c) - *(int *)(this + 0x38) >> 2;
-  uVar1 = (*(code *)**(undefined4 **)this)(this,pPStreamCompiler,param_3,param_4,param_5,param_6,this + 0x34)
+  childCount = *(int *)(this + 0x3c) - *(int *)(this + 0x38) >> 2;
+  sourceLine = (*(code *)**(undefined4 **)this)(this,pPStreamCompiler,strayArg3,strayArg4,strayArg5,strayArg6,this + 0x34)
   ;
-  *(undefined4 *)(pPStreamCompiler + 0x90) = uVar1;
-  allocation = (undefined4 *)_malloc(iVar3 << 2);
-  puVar4 = allocation;
-  for (puVar5 = *(undefined4 **)(this + 0x38); puVar5 != *(undefined4 **)(this + 0x3c);
-      puVar5 = puVar5 + 1) {
-    uVar1 = (**(code **)(*(int *)*puVar5 + 0x10))((int *)*puVar5,pPStreamCompiler);
-    *puVar4 = uVar1;
-    puVar4 = puVar4 + 1;
+  *(undefined4 *)(pPStreamCompiler + 0x90) = sourceLine;
+  allocation = (undefined4 *)_malloc(childCount << 2);
+  resultCursor = allocation;
+  for (childCursor = *(undefined4 **)(this + 0x38); childCursor != *(undefined4 **)(this + 0x3c);
+      childCursor = childCursor + 1) {
+    childResult = (**(code **)(*(int *)*childCursor + 0x10))((int *)*childCursor,pPStreamCompiler);
+    *resultCursor = childResult;
+    resultCursor = resultCursor + 1;
   }
-  puVar4 = allocation;
-  if (0 < iVar3) {
+  freeCursor = allocation;
+  if (0 < childCount) {
     do {
-      this_00 = (void *)*puVar4;
-      if (this_00 != (void *)0x0) {
-        __ZN12ParseOperandD1Ev(this_00);
-        __ZdlPv(this_00);
+      operandToFree = (void *)*freeCursor;
+      if (operandToFree != (void *)0x0) {
+        __ZN12ParseOperandD1Ev(operandToFree);
+        __ZdlPv(operandToFree);
       }
-      iVar3 = iVar3 + -1;
-      puVar4 = puVar4 + 1;
-    } while (iVar3 != 0);
+      childCount = childCount + -1;
+      freeCursor = freeCursor + 1;
+    } while (childCount != 0);
   }
   if (allocation != (undefined4 *)0x0) {
     _free(allocation);

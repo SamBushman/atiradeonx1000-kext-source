@@ -1,0 +1,107 @@
+local	TIntermediate__addUnaryMath	param_4	sourceLoc	INFERRED	source location (string number << 16 | line); printed as "%d:%d" in the internal error
+local	TIntermediate__addUnaryMath	param_6	scratchR8	UNKNOWN	register leftover forwarded through the vtable calls
+local	TIntermediate__addUnaryMath	param_7	scratchR9	UNKNOWN	register leftover forwarded through the vtable calls
+use	TIntermediate__addUnaryMath	bVar2	typeTemp4Live	INFERRED	stack TType temp constructed (needs its destructor store)	^\s*bVar2\ =\ false;$	+1
+use	TIntermediate__addUnaryMath	bVar2	typeTemp4Live	INFERRED	stack TType temp constructed (needs its destructor store)	^\s*bVar2\ =\ true;$	+1
+use	TIntermediate__addUnaryMath	bVar2	typeTemp4Live	INFERRED	stack TType temp constructed (needs its destructor store)	^\s*if\ \(bVar2\)\ goto\ LAB_97b8dd0c;$	+1
+use	TIntermediate__addUnaryMath	bVar2	typeTemp1Live	INFERRED	stack TType temp constructed (needs its destructor store)	^\s*bVar2\ =\ false;$@2	+1
+use	TIntermediate__addUnaryMath	bVar2	typeTemp1Live	INFERRED	stack TType temp constructed (needs its destructor store)	^\s*if\ \(bVar2\)\ goto\ LAB_97b8ddb4;$	+1
+use	TIntermediate__addUnaryMath	bVar2	typeTemp1Live	INFERRED	stack TType temp constructed (needs its destructor store)	^\s*bVar2\ =\ true;$@2	+1
+local	TIntermediate__addUnaryMath	bVar3	typeTemp3Live	INFERRED	stack TType temp typeTemp3 constructed
+local	TIntermediate__addUnaryMath	bVar4	typeTemp2Live	INFERRED	stack TType temp typeTemp2 constructed
+local	TIntermediate__addUnaryMath	bVar5	operandInvalid	INFERRED	operand type check failed: return 0
+use	TIntermediate__addUnaryMath	iVar11	targetBasicType	INFERRED	w1 basic type code for EOpConvXToY ops; w2/w4 getAsConstantUnion(); w3 getAsAggregate(); w5 promote() result	^\s*iVar11\ =\ 3;$	+1
+use	TIntermediate__addUnaryMath	iVar11	targetBasicType	INFERRED	w1 basic type code for EOpConvXToY ops; w2/w4 getAsConstantUnion(); w3 getAsAggregate(); w5 promote() result	^\s*iVar11\ =\ 2;$	+1
+use	TIntermediate__addUnaryMath	iVar11	targetBasicType	INFERRED	w1 basic type code for EOpConvXToY ops; w2/w4 getAsConstantUnion(); w3 getAsAggregate(); w5 promote() result	^\s*iVar11\ =\ 1;$	+1
+use	TIntermediate__addUnaryMath	iVar11	targetBasicType	INFERRED	w1 basic type code for EOpConvXToY ops; w2/w4 getAsConstantUnion(); w3 getAsAggregate(); w5 promote() result	^\s*\(uVar9\ \&\ 1\)\ <<\ 10\ \|\ \(uVar7\ \&\ 0xff\)\ <<\ 0xb\ \|\ iVar11\ <<\ 0x13\ \|\ local_fc\ \&\ 0x1ff;$	+1
+use	TIntermediate__addUnaryMath	iVar11	childConstantUnion	INFERRED	w1 basic type code for EOpConvXToY ops; w2/w4 getAsConstantUnion(); w3 getAsAggregate(); w5 promote() result	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*a1\ \+\ 0x18\)\)\(a1\);$	+2
+use	TIntermediate__addUnaryMath	iVar11	childAggregate	INFERRED	w1 basic type code for EOpConvXToY ops; w2/w4 getAsConstantUnion(); w3 getAsAggregate(); w5 promote() result	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*a1\ \+\ 0x1c\)\)\(a1\);$	+2
+use	TIntermediate__addUnaryMath	iVar11	constantUnionNode	INFERRED	w1 basic type code for EOpConvXToY ops; w2/w4 getAsConstantUnion(); w3 getAsAggregate(); w5 promote() result	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*a1\ \+\ 0x18\)\)\(a1\);$@2	+2
+use	TIntermediate__addUnaryMath	iVar11	promoteResult	INFERRED	w1 basic type code for EOpConvXToY ops; w2/w4 getAsConstantUnion(); w3 getAsAggregate(); w5 promote() result	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*a0_00\ \+\ 0x5c\)\)\(a0_00,\*\(undefined4\ \*\)this\);$	+1
+use	TIntermediate__addUnaryMath	iVar11	promoteResult	INFERRED	w1 basic type code for EOpConvXToY ops; w2/w4 getAsConstantUnion(); w3 getAsAggregate(); w5 promote() result	^\s*if\ \(\(iVar11\ !=\ 0\)\ \&\&$	+4
+local	TIntermediate__addUnaryMath	local_110	stackTypeTailBytes	INFERRED	bytes +0x10..0x23 of the stack TType, also reused as the sprintf buffer of the internal-error message
+local	TIntermediate__addUnaryMath	local_f0	typeTemp1	INFERRED	extra getType() temp
+local	TIntermediate__addUnaryMath	local_cc	typeTemp1Bits	INFERRED	bit-field word (+0x24) of typeTemp1
+local	TIntermediate__addUnaryMath	local_c0	typeTemp2	INFERRED	second getType() temp
+local	TIntermediate__addUnaryMath	local_9c	typeTemp2Bits	INFERRED	bit-field word (+0x24) of typeTemp2
+local	TIntermediate__addUnaryMath	local_90	typeTemp3	INFERRED	third getType() temp
+local	TIntermediate__addUnaryMath	local_6c	typeTemp3Bits	INFERRED	bit-field word (+0x24) of typeTemp3
+local	TIntermediate__addUnaryMath	local_60	typeTemp4	INFERRED	fourth getType() temp
+local	TIntermediate__addUnaryMath	local_3c	typeTemp4Bits	INFERRED	bit-field word (+0x24) of typeTemp4
+use	TIntermediate__addUnaryMath	ppuVar6	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*ppuVar6\ =\ local_120\ \+\ \-1;$	+1
+use	TIntermediate__addUnaryMath	ppuVar6	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar8\ =\ \*ppuVar6;$	+1
+use	TIntermediate__addUnaryMath	ppuVar6	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar1\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar6\);$	+2
+use	TIntermediate__addUnaryMath	puVar8	intermUnaryVtable	INFERRED	PTR_vtable: TIntermUnary vtable (+8 stored at a0_00[0])	^\s*puVar8\ =\ PTR_vtable_a7b7c0d4;$	+1
+use	TIntermediate__addUnaryMath	puVar8	intermUnaryVtable	INFERRED	PTR_vtable: TIntermUnary vtable (+8 stored at a0_00[0])	^\s*\*a0_00\ =\ \(int\)\(puVar8\ \+\ 8\);$	+1
+local	TIntermediate__addUnaryMath	uVar10	isArray	INFERRED	TIntermTyped::isArray() (vtable +0x54)
+local	TIntermediate__addUnaryMath	uVar9	isMatrix	INFERRED	TIntermTyped::isMatrix() (vtable +0x50)
+local	TIntermediate__addUnaryMath	uVar14	scratchR4	UNKNOWN	Ghidra extra-output register r4 forwarded through the vtable calls
+use	TIntermediate__addUnaryMath	uVar7	nominalSize	INFERRED	w1 getNominalSize() (vtable +0x48); w2 sourceLoc & 0xffff, the line within the string; w3 bit-field word of the new unary node's TType	^\s*uVar7\ =\ param_4;$	+1
+use	TIntermediate__addUnaryMath	uVar7	nominalSize	INFERRED	w1 getNominalSize() (vtable +0x48); w2 sourceLoc & 0xffff, the line within the string; w3 bit-field word of the new unary node's TType	^\s*uVar7\ =\ \(\*\*\(code\ \*\*\)\(\*a1\ \+\ 0x48\)\)\(a1,uVar14,param_3,uVar7,a4,param_6,param_7\);$	+1
+use	TIntermediate__addUnaryMath	uVar7	nominalSize	INFERRED	w1 getNominalSize() (vtable +0x48); w2 sourceLoc & 0xffff, the line within the string; w3 bit-field word of the new unary node's TType	^\s*\(uVar9\ \&\ 1\)\ <<\ 10\ \|\ \(uVar7\ \&\ 0xff\)\ <<\ 0xb\ \|\ iVar11\ <<\ 0x13\ \|\ local_fc\ \&\ 0x1ff;$	+1
+use	TIntermediate__addUnaryMath	uVar7	lineInString	INFERRED	w1 getNominalSize() (vtable +0x48); w2 sourceLoc & 0xffff, the line within the string; w3 bit-field word of the new unary node's TType	^\s*uVar7\ =\ param_4\ \&\ 0xffff;$	+3
+use	TIntermediate__addUnaryMath	uVar7	lineInString	INFERRED	w1 getNominalSize() (vtable +0x48); w2 sourceLoc & 0xffff, the line within the string; w3 bit-field word of the new unary node's TType	^\s*_sprintf\(local_110,"%d:%d",\(int\)param_4\ >>\ 0x10,uVar7\);$	+1
+use	TIntermediate__addUnaryMath	uVar7	oldTypeBits	INFERRED	w1 getNominalSize() (vtable +0x48); w2 sourceLoc & 0xffff, the line within the string; w3 bit-field word of the new unary node's TType	^\s*uVar7\ =\ a0_00\[0xb\];$	+5
+use	TIntermediate__addUnaryMath	uVar7	oldTypeBits	INFERRED	w1 getNominalSize() (vtable +0x48); w2 sourceLoc & 0xffff, the line within the string; w3 bit-field word of the new unary node's TType	^\s*a0_00\[0xb\]\ =\ uVar7\ \&\ 0x1ff\ \|\ 0x80800;$	+1
+local	TIntermediate__setAggregateOperator	param_4	line	INFERRED	source line; when 0 the intermNode line is used
+local	TIntermediate__setAggregateOperator	bVar1	noLine	INFERRED	no explicit line given: setLine is skipped
+use	TIntermediate__setAggregateOperator	iVar6	sequenceAllocator	INFERRED	inlined TIntermAggregate construction: allocator for the node sequence (+0x34), allocator for the name string (+0x44), the shared empty string rep (refcount at +8, chars at +0xc); w7 reloaded vector finish pointer	^\s*iVar6\ =\ GetGlobalPoolAllocator\(\);$	+1
+use	TIntermediate__setAggregateOperator	iVar6	sequenceAllocator	INFERRED	inlined TIntermAggregate construction: allocator for the node sequence (+0x34), allocator for the name string (+0x44), the shared empty string rep (refcount at +8, chars at +0xc); w7 reloaded vector finish pointer	^\s*a0\[0xd\]\ =\ iVar6;$	+1
+use	TIntermediate__setAggregateOperator	iVar6	nameAllocator	INFERRED	inlined TIntermAggregate construction: allocator for the node sequence (+0x34), allocator for the name string (+0x44), the shared empty string rep (refcount at +8, chars at +0xc); w7 reloaded vector finish pointer	^\s*iVar6\ =\ GetGlobalPoolAllocator\(\);$@2	+2
+use	TIntermediate__setAggregateOperator	iVar6	emptyStringRep	INFERRED	inlined TIntermAggregate construction: allocator for the node sequence (+0x34), allocator for the name string (+0x44), the shared empty string rep (refcount at +8, chars at +0xc); w7 reloaded vector finish pointer	^\s*iVar6\ =\ DAT_a7b7b9b8;$	+1
+use	TIntermediate__setAggregateOperator	iVar6	emptyStringRep	INFERRED	inlined TIntermAggregate construction: allocator for the node sequence (+0x34), allocator for the name string (+0x44), the shared empty string rep (refcount at +8, chars at +0xc); w7 reloaded vector finish pointer	^\s*piVar4\ =\ \(int\ \*\)\(iVar6\ \+\ 8\);$	+1
+use	TIntermediate__setAggregateOperator	iVar6	emptyStringRep	INFERRED	inlined TIntermAggregate construction: allocator for the node sequence (+0x34), allocator for the name string (+0x44), the shared empty string rep (refcount at +8, chars at +0xc); w7 reloaded vector finish pointer	^\s*a0\[0x16\]\ =\ iVar6\ \+\ 0xc;$	+1
+use	TIntermediate__setAggregateOperator	iVar6	sequenceAllocator	INFERRED	inlined TIntermAggregate construction: allocator for the node sequence (+0x34), allocator for the name string (+0x44), the shared empty string rep (refcount at +8, chars at +0xc); w7 reloaded vector finish pointer	^\s*iVar6\ =\ GetGlobalPoolAllocator\(\);$@3	+1
+use	TIntermediate__setAggregateOperator	iVar6	sequenceAllocator	INFERRED	inlined TIntermAggregate construction: allocator for the node sequence (+0x34), allocator for the name string (+0x44), the shared empty string rep (refcount at +8, chars at +0xc); w7 reloaded vector finish pointer	^\s*a0\[0xd\]\ =\ iVar6;$@2	+1
+use	TIntermediate__setAggregateOperator	iVar6	nameAllocator	INFERRED	inlined TIntermAggregate construction: allocator for the node sequence (+0x34), allocator for the name string (+0x44), the shared empty string rep (refcount at +8, chars at +0xc); w7 reloaded vector finish pointer	^\s*iVar6\ =\ GetGlobalPoolAllocator\(\);$@4	+2
+use	TIntermediate__setAggregateOperator	iVar6	emptyStringRep	INFERRED	inlined TIntermAggregate construction: allocator for the node sequence (+0x34), allocator for the name string (+0x44), the shared empty string rep (refcount at +8, chars at +0xc); w7 reloaded vector finish pointer	^\s*iVar6\ =\ DAT_a7b7b9b8;$@2	+1
+use	TIntermediate__setAggregateOperator	iVar6	emptyStringRep	INFERRED	inlined TIntermAggregate construction: allocator for the node sequence (+0x34), allocator for the name string (+0x44), the shared empty string rep (refcount at +8, chars at +0xc); w7 reloaded vector finish pointer	^\s*piVar4\ =\ \(int\ \*\)\(iVar6\ \+\ 8\);$@2	+1
+use	TIntermediate__setAggregateOperator	iVar6	emptyStringRep	INFERRED	inlined TIntermAggregate construction: allocator for the node sequence (+0x34), allocator for the name string (+0x44), the shared empty string rep (refcount at +8, chars at +0xc); w7 reloaded vector finish pointer	^\s*a0\[0x16\]\ =\ iVar6\ \+\ 0xc;$@2	+1
+use	TIntermediate__setAggregateOperator	iVar6	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction: allocator for the node sequence (+0x34), allocator for the name string (+0x44), the shared empty string rep (refcount at +8, chars at +0xc); w7 reloaded vector finish pointer	^\s*iVar6\ =\ 0;$	+1
+use	TIntermediate__setAggregateOperator	iVar6	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction: allocator for the node sequence (+0x34), allocator for the name string (+0x44), the shared empty string rep (refcount at +8, chars at +0xc); w7 reloaded vector finish pointer	^\s*iVar6\ =\ \*\(int\ \*\)\(this_00\ \+\ 8\);$	+1
+use	TIntermediate__setAggregateOperator	iVar6	sequenceFinishValue	INFERRED	inlined TIntermAggregate construction: allocator for the node sequence (+0x34), allocator for the name string (+0x44), the shared empty string rep (refcount at +8, chars at +0xc); w7 reloaded vector finish pointer	^\s*\*\(int\ \*\)\(this_00\ \+\ 8\)\ =\ iVar6\ \+\ 4;$	+1
+use	TIntermediate__setAggregateOperator	iVar7	atomicStore	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*iVar7\ =\ storeWordConditionalIndexed\(\*piVar4\ \+\ 1,0,piVar4\);$	+2
+use	TIntermediate__setAggregateOperator	iVar7	stringAllocator	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*iVar7\ =\ GetGlobalPoolAllocator\(\);$	+1
+use	TIntermediate__setAggregateOperator	iVar7	stringAllocator	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*a0\[0x15\]\ =\ iVar7;$	+1
+use	TIntermediate__setAggregateOperator	iVar7	atomicStore	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*iVar7\ =\ storeWordConditionalIndexed\(\*piVar4\ \+\ 1,0,piVar4\);$@2	+2
+use	TIntermediate__setAggregateOperator	iVar7	stringAllocator	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*iVar7\ =\ GetGlobalPoolAllocator\(\);$@2	+1
+use	TIntermediate__setAggregateOperator	iVar7	stringAllocator	INFERRED	atomic refcount store result; pool allocator stored at a0[0x15]	^\s*a0\[0x15\]\ =\ iVar7;$@2	+1
+local	TIntermediate__setAggregateOperator	pcVar9	getSequenceFn	INFERRED	TIntermAggregate::getSequence (vtable +100)
+use	TIntermediate__setAggregateOperator	piVar4	emptyRepRefCount	INFERRED	refcount of the shared empty string rep, atomically incremented	^\s*piVar4\ =\ \(int\ \*\)\(iVar6\ \+\ 8\);$	+1
+use	TIntermediate__setAggregateOperator	piVar4	emptyRepRefCount	INFERRED	refcount of the shared empty string rep, atomically incremented	^\s*iVar7\ =\ storeWordConditionalIndexed\(\*piVar4\ \+\ 1,0,piVar4\);$	+2
+use	TIntermediate__setAggregateOperator	piVar4	emptyRepRefCount	INFERRED	refcount of the shared empty string rep, atomically incremented	^\s*piVar4\ =\ \(int\ \*\)\(iVar6\ \+\ 8\);$@2	+1
+use	TIntermediate__setAggregateOperator	piVar4	emptyRepRefCount	INFERRED	refcount of the shared empty string rep, atomically incremented	^\s*iVar7\ =\ storeWordConditionalIndexed\(\*piVar4\ \+\ 1,0,piVar4\);$@2	+2
+use	TIntermediate__setAggregateOperator	puVar2	intermAggregateVtable	INFERRED	PTR_vtable: TIntermAggregate vtable (+8 stored at a0[0])	^\s*puVar2\ =\ PTR_vtable_a7b7c0d0;$	+1
+use	TIntermediate__setAggregateOperator	puVar2	intermAggregateVtable	INFERRED	PTR_vtable: TIntermAggregate vtable (+8 stored at a0[0])	^\s*\*a0\ =\ \(int\)\(puVar2\ \+\ 8\);$	+1
+use	TIntermediate__setAggregateOperator	puVar2	intermAggregateVtable	INFERRED	PTR_vtable: TIntermAggregate vtable (+8 stored at a0[0])	^\s*puVar2\ =\ PTR_vtable_a7b7c0d0;$@2	+1
+use	TIntermediate__setAggregateOperator	puVar2	intermAggregateVtable	INFERRED	PTR_vtable: TIntermAggregate vtable (+8 stored at a0[0])	^\s*\*a0\ =\ \(int\)\(puVar2\ \+\ 8\);$@2	+1
+local	TIntermediate__setAggregateOperator	puVar8	sequenceFinish	INFERRED	vector _M_finish of the aggregate sequence (+8)
+use	TIntermediate__setAggregateOperator	uVar3	oldTypeBits	INFERRED	bit-field word of the new aggregate's TType before the field-wise init	^\s*uVar3\ =\ a0\[0xb\];$	+5
+use	TIntermediate__setAggregateOperator	uVar3	oldTypeBits	INFERRED	bit-field word of the new aggregate's TType before the field-wise init	^\s*a0\[0xb\]\ =\ uVar3\ \&\ 0x1ff\ \|\ 0x80800;$	+1
+use	TIntermediate__setAggregateOperator	uVar3	oldTypeBits	INFERRED	bit-field word of the new aggregate's TType before the field-wise init	^\s*uVar3\ =\ a0\[0xb\];$@2	+5
+use	TIntermediate__setAggregateOperator	uVar3	oldTypeBits	INFERRED	bit-field word of the new aggregate's TType before the field-wise init	^\s*a0\[0xb\]\ =\ uVar3\ \&\ 0x1ff\ \|\ 0x80800;$@2	+1
+local	TIntermediate__addConversion	in_r7	scratchR7	UNKNOWN	register leftover forwarded through the vtable calls
+local	TIntermediate__addConversion	in_r8	scratchR8	UNKNOWN	register leftover forwarded through the vtable calls
+local	TIntermediate__addConversion	local_34	newNodeSlot	INFERRED	holds the converted constant node whose address is passed to vector::insert
+local	TIntermediate__addConversion	local_40	d2iScratch	INFERRED	float-to-int conversion scratch (fctiwz result)
+local	TIntermediate__addConversion	local_90	i2dHi	INFERRED	high word 0x43300000 of the int-to-double conversion constant
+use	TIntermediate__addConversion	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*ppuVar3\ =\ local_c0\ \+\ \-1;$	+1
+use	TIntermediate__addConversion	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar4\ =\ \*ppuVar3;$	+1
+use	TIntermediate__addConversion	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar1\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar4\ \+\ \-1,0,ppuVar3\);$	+2
+local	TIntermediate__addConversion	puVar18	childCursor	INFERRED	iterator over the aggregate's child sequence
+local	TIntermediate__addConversion	puVar4	intermUnaryVtable	INFERRED	PTR_vtable: TIntermUnary vtable (+8 stored in the new conversion node)
+use	TIntermediate__addConversion	uVar13	constantUnion	INFERRED	w1 getAsConstantUnion() passed to promoteConstantUnion; w2 extra-output register r4 forwarded; w3 node getLine()	^\s*uVar13\ =\ \(\*\*\(code\ \*\*\)\(\*param_4\ \+\ 0x18\)\)\(param_4\);$	+2
+use	TIntermediate__addConversion	uVar13	scratchR4	INFERRED	w1 getAsConstantUnion() passed to promoteConstantUnion; w2 extra-output register r4 forwarded; w3 node getLine()	^\s*uVar13\ =\ extraout_r4;$	+1
+use	TIntermediate__addConversion	uVar13	scratchR4	INFERRED	w1 getAsConstantUnion() passed to promoteConstantUnion; w2 extra-output register r4 forwarded; w3 node getLine()	^\s*uVar13\ =\ extraout_r4_00;$	+1
+use	TIntermediate__addConversion	uVar13	scratchR4	INFERRED	w1 getAsConstantUnion() passed to promoteConstantUnion; w2 extra-output register r4 forwarded; w3 node getLine()	^\s*uVar13\ =\ extraout_r4_01;$	+1
+use	TIntermediate__addConversion	uVar13	scratchR4	INFERRED	w1 getAsConstantUnion() passed to promoteConstantUnion; w2 extra-output register r4 forwarded; w3 node getLine()	^\s*uVar19\ =\ \(\*\*\(code\ \*\*\)\(\*param_4\ \+\ 0x48\)\)\(param_4,uVar13\);$	+1
+use	TIntermediate__addConversion	uVar13	line	INFERRED	w1 getAsConstantUnion() passed to promoteConstantUnion; w2 extra-output register r4 forwarded; w3 node getLine()	^\s*uVar13\ =\ \(\*\*\(code\ \*\*\)\*param_4\)\(param_4\);$	+2
+use	TIntermediate__addConversion	uVar14	isMatrix	INFERRED	w1 isMatrix() (vtable +0x50); w2 basic type field of the new node's bit-field word	^\s*uVar14\ =\ \(\*\*\(code\ \*\*\)\(\*param_4\ \+\ 0x50\)\)\(param_4\);$	+1
+use	TIntermediate__addConversion	uVar14	isMatrix	INFERRED	w1 isMatrix() (vtable +0x50); w2 basic type field of the new node's bit-field word	^\s*\(uVar14\ \&\ 1\)\ <<\ 10\ \|\ \(uVar19\ \&\ 0xff\)\ <<\ 0xb\ \|\ uVar7\ <<\ 0x13\ \|\ local_9c\ \&\ 0x1ff;$	+1
+use	TIntermediate__addConversion	uVar14	basicTypeBits	INFERRED	w1 isMatrix() (vtable +0x50); w2 basic type field of the new node's bit-field word	^\s*uVar14\ =\ \(local_9c\ >>\ 0x13\ \&\ 0x3f\)\ <<\ 0x13;$	+2
+use	TIntermediate__addConversion	uVar14	basicTypeBits	INFERRED	w1 isMatrix() (vtable +0x50); w2 basic type field of the new node's bit-field word	^\s*piVar12\[0xb\]\ =\ uVar7\ \|\ uVar14\ \|\ uVar19\ \|\ uVar5\ \&\ 0x7ff;$	+1
+use	TIntermediate__addConversion	uVar14	basicTypeBits	INFERRED	w1 isMatrix() (vtable +0x50); w2 basic type field of the new node's bit-field word	^\s*piVar12\[0xb\]\ =\ uVar15\ \|\ uVar7\ \|\ uVar14\ \|\ uVar19\ \|\ uVar5\ \&\ 0x3ff;$	+2
+use	TIntermediate__addConversion	uVar15	isArray	INFERRED	w1 isArray() (vtable +0x54); w2 matrix bit of the new node's bit-field word	^\s*uVar15\ =\ \(\*\*\(code\ \*\*\)\(\*param_4\ \+\ 0x54\)\)\(param_4\);$	+1
+use	TIntermediate__addConversion	uVar15	isArray	INFERRED	w1 isArray() (vtable +0x54); w2 matrix bit of the new node's bit-field word	^\s*local_9c\ =\ \(uVar15\ \&\ 1\)\ <<\ 9\ \|$	+1
+use	TIntermediate__addConversion	uVar15	matrixBit	INFERRED	w1 isArray() (vtable +0x54); w2 matrix bit of the new node's bit-field word	^\s*uVar15\ =\ \(local_9c\ >>\ 10\ \&\ 1\)\ <<\ 10;$	+3
+local	TIntermediate__addConversion	uVar5	oldTypeBits	INFERRED	bit-field word of the new node's TType before the field-wise init

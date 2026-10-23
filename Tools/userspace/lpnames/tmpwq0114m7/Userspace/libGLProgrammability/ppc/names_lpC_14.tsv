@@ -1,0 +1,213 @@
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar10	levelsBegin	INFERRED	w1 symbol table level vector start; w2 name length (for the error); w3 inlined TType copy of variable+0x10; w4 symbolTable->nextId incremented for the new variable (+8)	^\s*iVar10\ =\ \*piVar17;$	+2
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar10	levelsBegin	INFERRED	w1 symbol table level vector start; w2 name length (for the error); w3 inlined TType copy of variable+0x10; w4 symbolTable->nextId incremented for the new variable (+8)	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar10\ \+\ iVar13\ \*\ 4\);$	+2
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar10	levelsBegin	INFERRED	w1 symbol table level vector start; w2 name length (for the error); w3 inlined TType copy of variable+0x10; w4 symbolTable->nextId incremented for the new variable (+8)	^\s*if\ \(local_70\[0\]\ !=\ \*\(int\ \*\)\(iVar10\ \+\ 4\)\)\ \{$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar10	levelsBegin	INFERRED	w1 symbol table level vector start; w2 name length (for the error); w3 inlined TType copy of variable+0x10; w4 symbolTable->nextId incremented for the new variable (+8)	^\s*iVar10\ =\ \*piVar17;$@2	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar10	nameLength	INFERRED	w1 symbol table level vector start; w2 name length (for the error); w3 inlined TType copy of variable+0x10; w4 symbolTable->nextId incremented for the new variable (+8)	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar13\ \+\ \-0xc\);$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar10	nameLength	INFERRED	w1 symbol table level vector start; w2 name length (for the error); w3 inlined TType copy of variable+0x10; w4 symbolTable->nextId incremented for the new variable (+8)	^\s*\*\(byte\ \*\)\(iVar13\ \+\ iVar10\)\ =\ bVar18;$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar10	nameLength	INFERRED	w1 symbol table level vector start; w2 name length (for the error); w3 inlined TType copy of variable+0x10; w4 symbolTable->nextId incremented for the new variable (+8)	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar13\ \+\ \-0xc\);$@2	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar10	typeArraySize	INFERRED	w1 symbol table level vector start; w2 name length (for the error); w3 inlined TType copy of variable+0x10; w4 symbolTable->nextId incremented for the new variable (+8)	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar14\ \+\ 0x10\);$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar10	typeArraySize	INFERRED	w1 symbol table level vector start; w2 name length (for the error); w3 inlined TType copy of variable+0x10; w4 symbolTable->nextId incremented for the new variable (+8)	^\s*a0\[4\]\ =\ iVar10;$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar10	uniqueId	INFERRED	w1 symbol table level vector start; w2 name length (for the error); w3 inlined TType copy of variable+0x10; w4 symbolTable->nextId incremented for the new variable (+8)	^\s*iVar10\ =\ piVar17\[3\];$	+3
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar11	typeStructure	INFERRED	inlined TType copy of variable+0x14
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar13	levelIndex	INFERRED	w1 level searched, counted down; w2 character pointer of the name; w3 inlined TType copy of variable+0x28	^\s*iVar13\ =\ \(piVar17\[1\]\ \-\ iVar10\ >>\ 2\)\ \+\ \-1;$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar13	levelIndex	INFERRED	w1 level searched, counted down; w2 character pointer of the name; w3 inlined TType copy of variable+0x28	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar10\ \+\ iVar13\ \*\ 4\);$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar13	levelIndex	INFERRED	w1 level searched, counted down; w2 character pointer of the name; w3 inlined TType copy of variable+0x28	^\s*iVar13\ =\ iVar13\ \+\ \-1;$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar13	levelIndex	INFERRED	w1 level searched, counted down; w2 character pointer of the name; w3 inlined TType copy of variable+0x28	^\s*if\ \(iVar13\ <\ 0\)\ \{$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar13	nameChars	INFERRED	w1 level searched, counted down; w2 character pointer of the name; w3 inlined TType copy of variable+0x28	^\s*iVar13\ =\ \*\(int\ \*\)\(\(int\)pvVar12\ \+\ 4\);$	+2
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar13	nameChars	INFERRED	w1 level searched, counted down; w2 character pointer of the name; w3 inlined TType copy of variable+0x28	^\s*\*\(byte\ \*\)\(iVar13\ \+\ iVar10\)\ =\ bVar18;$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar13	nameChars	INFERRED	w1 level searched, counted down; w2 character pointer of the name; w3 inlined TType copy of variable+0x28	^\s*iVar13\ =\ \*\(int\ \*\)\(\(int\)pvVar12\ \+\ 4\);$@2	+2
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar13	typeWord1c	INFERRED	w1 level searched, counted down; w2 character pointer of the name; w3 inlined TType copy of variable+0x28	^\s*iVar13\ =\ \*\(int\ \*\)\(iVar14\ \+\ 0x28\);$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar13	typeWord1c	INFERRED	w1 level searched, counted down; w2 character pointer of the name; w3 inlined TType copy of variable+0x28	^\s*a0\[10\]\ =\ iVar13;$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar13	typeWord1c	INFERRED	w1 level searched, counted down; w2 character pointer of the name; w3 inlined TType copy of variable+0x28	^\s*psVar8\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 8\)\)\(a0,iVar13,a2,a3,a4,in_r8,piVar17,0\);$	+1
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar14	foundVariable	INFERRED	the existing built-in TVariable found by the level search
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	iVar15	typeWord20	INFERRED	inlined TType copy of variable+0x2c
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	in_r8	scratchR8	UNKNOWN	register r8, also carrying a TType word copy
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	local_30	destroyAllocatorArg	INFERRED	allocator argument for _Rep::_M_destroy of the key string copy
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	local_38	mapEntryVariable	INFERRED	second member of the map entry pair: the TVariable
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	local_3c	nameCopyChars	INFERRED	character pointer of the name copy used as the map key
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	local_40	nameCopy	INFERRED	copy of the name TString used as the map key
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	local_4c	mapInsertSecond	INFERRED	std::pair<iterator,bool> returned by insert_unique: flag
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	local_50	mapInsertFirst	INFERRED	std::pair<iterator,bool> returned by insert_unique: iterator
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	local_5c	insertResultSecond	INFERRED	copy of the map insert flag; 0 means the insert failed	^\s*local_5c\ =\ 0;$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	local_5c	insertResultSecond	INFERRED	copy of the map insert flag; 0 means the insert failed	^\s*local_5c\ =\ local_4c;$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	local_5c	insertResultSecond	INFERRED	copy of the map insert flag; 0 means the insert failed	^\s*if\ \(local_5c\ !=\ 0\)\ \{$	+1
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	local_60	insertResultFirst	INFERRED	copy of the map insert result iterator
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	local_70	findResult	INFERRED	std::pair<iterator,bool> returned by the level map find
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	local_80	allocatorArg	INFERRED	pool_allocator argument for the name string constructor
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	pcVar9	errorMessage	INFERRED	"INTERNAL ERROR finding symbol" / "INTERNAL ERROR inserting new symbol"
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	piVar17	symbolTable	INFERRED	this+4: the symbol table (level vector at +0, nextId at +0xc)	^\s*piVar17\ =\ \*\(int\ \*\*\)\(this\ \+\ 4\);$	+3
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	piVar17	symbolTable	INFERRED	this+4: the symbol table (level vector at +0, nextId at +0xc)	^\s*iVar10\ =\ \*piVar17;$@2	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	piVar17	symbolTable	INFERRED	this+4: the symbol table (level vector at +0, nextId at +0xc)	^\s*piVar17\ =\ \*\(int\ \*\*\)\(this\ \+\ 4\);$@2	+3
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	piVar17	symbolTable	INFERRED	this+4: the symbol table (level vector at +0, nextId at +0xc)	^\s*uVar16\ =\ \*\(undefined4\ \*\)\(\*piVar17\ \+\ \(\(piVar17\[1\]\ \-\ \*piVar17\ \&\ 0xfffffffcU\)\ \-\ 4\)\);$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	piVar17	symbolTable	INFERRED	this+4: the symbol table (level vector at +0, nextId at +0xc)	^\s*psVar8\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 8\)\)\(a0,iVar13,a2,a3,a4,in_r8,piVar17,0\);$	+1
+use	TParseContext__insertBuiltInArrayAtGlobalLevel	psVar8	variableNameRef	INFERRED	name string reference returned by the new variable's vtable slot 2	^\s*psVar8\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 8\)\)\(a0,iVar13,a2,a3,a4,in_r8,piVar17,0\);$	+2
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	puVar5	variableVtable	INFERRED	PTR_vtable: TVariable vtable (+8 stored at a0[0])
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	pvVar12	nameString	INFERRED	pool-allocated TString "gl_TexCoord"
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	uVar1	typeSizeBits	INFERRED	nominal-size field of the copied TType bit-field word
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	uVar2	typeQualifierBits	INFERRED	qualifier field of the copied TType bit-field word
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	uVar3	typeBasicTypeBits	INFERRED	basic type field of the copied TType bit-field word
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	uVar4	typeMatrixBit	INFERRED	matrix bit of the copied TType bit-field word
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	uVar6	oldTypeBits	INFERRED	bit-field word of the new variable's TType before the field-wise copy
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	uVar16	symbolTableLevel	INFERRED	last TSymbolTableLevel of the table (the global level the variable is inserted into)
+use	TParseContext__arrayErrorCheck	iVar17	atomicStore	INFERRED	atomic refcount store result	^\s*iVar17\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-1,0,piVar7\);$	+2
+use	TParseContext__arrayErrorCheck	iVar17	atomicStore	INFERRED	atomic refcount store result	^\s*iVar17\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-1,0,piVar7\);$@2	+2
+use	TParseContext__arrayErrorCheck	iVar9	oldRefCount	INFERRED	std::string rep refcount before the decrement	^\s*iVar9\ =\ \*piVar7;$	+1
+use	TParseContext__arrayErrorCheck	iVar9	oldRefCount	INFERRED	std::string rep refcount before the decrement	^\s*iVar17\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-1,0,piVar7\);$	+1
+use	TParseContext__arrayErrorCheck	iVar9	oldRefCount	INFERRED	std::string rep refcount before the decrement	^\s*if\ \(iVar9\ <\ 1\)\ \{$	+1
+use	TParseContext__arrayErrorCheck	iVar9	oldRefCount	INFERRED	std::string rep refcount before the decrement	^\s*iVar9\ =\ \*piVar7;$@2	+1
+use	TParseContext__arrayErrorCheck	iVar9	oldRefCount	INFERRED	std::string rep refcount before the decrement	^\s*iVar17\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-1,0,piVar7\);$@2	+1
+use	TParseContext__arrayErrorCheck	iVar9	oldRefCount	INFERRED	std::string rep refcount before the decrement	^\s*if\ \(iVar9\ <\ 1\)\ \{$@2	+1
+use	TParseContext__arrayErrorCheck	local_100	stackTypeBWord20	INFERRED	word +0x20 of the second stack TType, zero-initialised	^\s*local_100\ =\ 0;$	+1
+use	TParseContext__arrayErrorCheck	local_fc	stackTypeBBits	INFERRED	bit-field word of the second stack TType built from the TPublicType (array, matrix, size, basic type, qualifier)	^\s*local_fc\ =\ \(param_8\ \&\ 1\)\ <<\ 9\ \|$	+1
+use	TParseContext__arrayErrorCheck	local_fc	stackTypeBBits	INFERRED	bit-field word of the second stack TType built from the TPublicType (array, matrix, size, basic type, qualifier)	^\s*\(param_4\ \&\ 0x3f\)\ <<\ 0x13\ \|\ param_5\ <<\ 0x19\ \|\ local_fc\ \&\ 0x1ff;$	+1
+use	TParseContext__arrayErrorCheck	local_f0	pt3CopyType	INFERRED	third stack copy of the TPublicType: type	^\s*local_f0\ =\ param_4;$	+1
+use	TParseContext__arrayErrorCheck	local_ec	pt3CopyQualifier	INFERRED	third stack copy of the TPublicType: qualifier	^\s*local_ec\ =\ \(unsigned\ char\ \*\)param_5;$	+1
+use	TParseContext__arrayErrorCheck	local_e8	pt3CopySize	INFERRED	third stack copy of the TPublicType: size	^\s*local_e8\ =\ param_6;$	+1
+local	TParseContext__arrayErrorCheck	local_e4	pt3CopyMatrix	INFERRED	third stack copy of the TPublicType: matrix
+use	TParseContext__arrayErrorCheck	local_e0	pt3CopyArray	INFERRED	third stack copy of the TPublicType: array	^\s*local_e0\ =\ param_8;$	+1
+use	TParseContext__arrayErrorCheck	local_dc	pt3CopyUserDef	INFERRED	third stack copy of the TPublicType: userDef	^\s*local_dc\ =\ param_9;$	+1
+use	TParseContext__arrayErrorCheck	local_d8	pt3CopyLine	INFERRED	third stack copy of the TPublicType: line	^\s*local_d8\ =\ param_10;$	+1
+use	TParseContext__arrayErrorCheck	local_d0	pt4CopyType	INFERRED	fourth stack copy of the TPublicType: type	^\s*local_d0\ =\ param_4;$	+1
+use	TParseContext__arrayErrorCheck	local_cc	pt4CopyQualifier	INFERRED	fourth stack copy of the TPublicType: qualifier	^\s*local_cc\ =\ \(unsigned\ char\ \*\)param_5;$	+1
+use	TParseContext__arrayErrorCheck	local_c8	pt4CopySize	INFERRED	fourth stack copy of the TPublicType: size	^\s*local_c8\ =\ param_6;$	+1
+local	TParseContext__arrayErrorCheck	local_c4	pt4CopyMatrix	INFERRED	fourth stack copy of the TPublicType: matrix
+local	TParseContext__arrayErrorCheck	local_c0	pt4CopyArray	INFERRED	fourth stack copy of the TPublicType: array
+local	TParseContext__arrayErrorCheck	local_bc	pt4CopyUserDef	INFERRED	fourth stack copy of the TPublicType: userDef
+local	TParseContext__arrayErrorCheck	local_b8	pt4CopyLine	INFERRED	fourth stack copy of the TPublicType: line
+use	TParseContext__arrayErrorCheck	pcVar14	typeNameString	INFERRED	TString allocated for the type name of the struct TType (0 when not a struct)	^\s*pcVar14\ =\ local_110;$	+1
+use	TParseContext__arrayErrorCheck	pcVar14	typeNameString	INFERRED	TString allocated for the type name of the struct TType (0 when not a struct)	^\s*pcVar14\ =\ \(void\ \*\)0x0;$	+1
+use	TParseContext__arrayErrorCheck	pcVar14	typeNameString	INFERRED	TString allocated for the type name of the struct TType (0 when not a struct)	^\s*pcVar14\ =\ this;$	+1
+use	TParseContext__arrayErrorCheck	pcVar14	typeNameString	INFERRED	TString allocated for the type name of the struct TType (0 when not a struct)	^\s*local_110\ =\ pcVar14;$	+1
+use	TParseContext__arrayErrorCheck	piVar7	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the key copy is destroyed	^\s*piVar7\ =\ \(int\ \*\)\(local_6c\ \+\ \-4\);$	+1
+use	TParseContext__arrayErrorCheck	piVar7	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the key copy is destroyed	^\s*iVar9\ =\ \*piVar7;$	+1
+use	TParseContext__arrayErrorCheck	piVar7	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the key copy is destroyed	^\s*iVar17\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-1,0,piVar7\);$	+2
+use	TParseContext__arrayErrorCheck	piVar7	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the key copy is destroyed	^\s*piVar7\ =\ \(int\ \*\)\(local_12c\ \+\ \-4\);$	+1
+use	TParseContext__arrayErrorCheck	piVar7	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the key copy is destroyed	^\s*iVar9\ =\ \*piVar7;$@2	+1
+use	TParseContext__arrayErrorCheck	piVar7	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the key copy is destroyed	^\s*iVar17\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-1,0,piVar7\);$@2	+2
+local	TParseContext__arrayErrorCheck	psVar11	nameStringRef	INFERRED	variable name string reference
+use	TParseContext__arrayErrorCheck	uVar15	scratchR7	UNKNOWN	register leftover reloaded from the home slot	^\s*uVar15\ =\ \(\*\(uint\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 16\)\);$	+1
+use	TParseContext__arrayErrorCheck	uVar15	scratchR7	UNKNOWN	register leftover reloaded from the home slot	^\s*\(local_cc,\(int\)uVar23,uVar13,uVar16,uVar15,param_6,\*\(int\ \*\)local_cc\)$	+1
+use	TParseContext__arrayErrorCheck	uVar16	scratchR8	INFERRED	register leftover reloaded from the home slot	^\s*uVar16\ =\ \(\*\(uint\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 16\)\);$	+1
+use	TParseContext__arrayErrorCheck	uVar16	scratchR8	INFERRED	register leftover reloaded from the home slot	^\s*\(local_cc,\(int\)uVar23,a2,a3,uVar16,param_6,\*\(int\ \*\)local_cc\);$	+1
+use	TParseContext__arrayErrorCheck	uVar16	scratchR8	INFERRED	register leftover reloaded from the home slot	^\s*psVar11\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*piVar21\ \+\ 8\)\)\(piVar21,uVar13,a2,a3,uVar16,param_6,piVar7\);$	+1
+use	TParseContext__arrayErrorCheck	uVar16	scratchR8	INFERRED	register leftover reloaded from the home slot	^\s*uVar16\ =\ \(\*\(uint\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 20\)\);$	+1
+use	TParseContext__arrayErrorCheck	uVar16	scratchR8	INFERRED	register leftover reloaded from the home slot	^\s*\(local_cc,\(int\)uVar23,uVar13,uVar16,uVar15,param_6,\*\(int\ \*\)local_cc\)$	+1
+local	TParseContext__arraySetMaxSize	param_4	maxSize	INFERRED	new maximum array size; the TType array size becomes maxSize + 1
+local	TParseContext__arraySetMaxSize	param_5	updateFlag	INFERRED	when 0 only the lookup is done and the array size is not updated
+local	TParseContext__arraySetMaxSize	param_6	line	INFERRED	source line for error messages (string << 16 | line)
+use	TParseContext__arraySetMaxSize	iVar3	levelIndex	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*iVar3\ =\ \(piVar7\[1\]\ \-\ iVar6\ >>\ 2\)\ \+\ \-1;$	+1
+use	TParseContext__arraySetMaxSize	iVar3	levelIndex	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar6\ \+\ iVar3\ \*\ 4\);$	+1
+use	TParseContext__arraySetMaxSize	iVar3	levelIndex	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*if\ \(\(iVar6\ !=\ 0\)\ \|\|\ \(iVar3\ \+\ \-1\ <\ 0\)\)\ break;$	+1
+use	TParseContext__arraySetMaxSize	iVar3	levelIndex	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+1
+use	TParseContext__arraySetMaxSize	iVar3	levelIndex	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*local_50\ =\ \(uint\)\(iVar3\ ==\ 0\);$	+1
+use	TParseContext__arraySetMaxSize	iVar3	newArraySize	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*iVar3\ =\ param_4\ \+\ 1;$	+3
+use	TParseContext__arraySetMaxSize	iVar3	newArraySize	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*\*\(int\ \*\)\(iVar5\ \+\ 0x1c\)\ =\ iVar3;$	+1
+use	TParseContext__arraySetMaxSize	iVar3	levelsBeginOrVariable2	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*iVar3\ =\ \*piVar7;$	+2
+use	TParseContext__arraySetMaxSize	iVar3	levelsBeginOrVariable2	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar3\ \+\ iVar5\ \*\ 4\);$	+2
+use	TParseContext__arraySetMaxSize	iVar3	levelsBeginOrVariable2	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*iVar3\ =\ \*\(int\ \*\)\(local_e0\[0\]\ \+\ 0x18\);$	+1
+use	TParseContext__arraySetMaxSize	iVar3	levelsBeginOrVariable2	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*if\ \(\(iVar3\ !=\ 0\)\ \|\|\ \(iVar5\ \+\ \-1\ <\ 0\)\)\ break;$	+2
+use	TParseContext__arraySetMaxSize	iVar3	levelsBeginOrVariable2	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*if\ \(iVar3\ !=\ 0\)\ \{$	+2
+use	TParseContext__arraySetMaxSize	iVar3	levelsBeginOrVariable2	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*if\ \(\*\(int\ \*\)\(iVar3\ \+\ 0x14\)\ ==\ 0\)\ \{$	+2
+use	TParseContext__arraySetMaxSize	iVar3	levelsBeginOrVariable2	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x24\);$	+1
+use	TParseContext__arraySetMaxSize	iVar3	levelsBeginOrVariable2	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*\*\(int\ \*\*\)\(iVar3\ \+\ 0x38\)\ =\ piVar7;$	+1
+use	TParseContext__arraySetMaxSize	iVar3	undeclaredNameRef	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 0x60\)\)\(param_2\);$	+1
+use	TParseContext__arraySetMaxSize	iVar3	undeclaredNameRef	INFERRED	w0 symbol table level searched; w1 size + 1; w2 level vector start, then the variable found by the second search; w4 intermSymbol->getSymbol() TString	^\s*\*\(byte\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 4\)\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 4\)\ \+\ \-0xc\)\)\ =\ bVar9;$	+3
+use	TParseContext__arraySetMaxSize	iVar5	lineCopy	INFERRED	w1 name compare against "gl_TexCoord"; w2 type->next (+0x20) chain walked to update the sizes; w3 level of the gl_MaxTextureCoords search; w5 constant component count of gl_MaxTextureCoords	^\s*iVar5\ =\ param_6;$	+1
+use	TParseContext__arraySetMaxSize	iVar5	lineCopy	INFERRED	w1 name compare against "gl_TexCoord"; w2 type->next (+0x20) chain walked to update the sizes; w3 level of the gl_MaxTextureCoords search; w5 constant component count of gl_MaxTextureCoords	^\s*error\(\(int\)this,\(char\ \*\)param_6,"\ undeclared\ identifier",\*\(char\ \*\*\)\(iVar3\ \+\ 4\),"",iVar5,$	+2
+use	TParseContext__arraySetMaxSize	iVar5	compareResult	INFERRED	w1 name compare against "gl_TexCoord"; w2 type->next (+0x20) chain walked to update the sizes; w3 level of the gl_MaxTextureCoords search; w5 constant component count of gl_MaxTextureCoords	^\s*iVar5\ =\ __ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc\(pvVar4,"gl_TexCoord"\);$	+2
+use	TParseContext__arraySetMaxSize	iVar5	nextType	INFERRED	w1 name compare against "gl_TexCoord"; w2 type->next (+0x20) chain walked to update the sizes; w3 level of the gl_MaxTextureCoords search; w5 constant component count of gl_MaxTextureCoords	^\s*iVar5\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x20\);$	+1
+use	TParseContext__arraySetMaxSize	iVar5	nextType	INFERRED	w1 name compare against "gl_TexCoord"; w2 type->next (+0x20) chain walked to update the sizes; w3 level of the gl_MaxTextureCoords search; w5 constant component count of gl_MaxTextureCoords	^\s*while\ \(iVar5\ !=\ 0\)\ \{$	+3
+use	TParseContext__arraySetMaxSize	iVar5	levelIndex2	INFERRED	w1 name compare against "gl_TexCoord"; w2 type->next (+0x20) chain walked to update the sizes; w3 level of the gl_MaxTextureCoords search; w5 constant component count of gl_MaxTextureCoords	^\s*iVar5\ =\ \(piVar7\[1\]\ \-\ iVar3\ >>\ 2\)\ \+\ \-1;$	+1
+use	TParseContext__arraySetMaxSize	iVar5	levelIndex2	INFERRED	w1 name compare against "gl_TexCoord"; w2 type->next (+0x20) chain walked to update the sizes; w3 level of the gl_MaxTextureCoords search; w5 constant component count of gl_MaxTextureCoords	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar3\ \+\ iVar5\ \*\ 4\);$	+1
+use	TParseContext__arraySetMaxSize	iVar5	levelIndex2	INFERRED	w1 name compare against "gl_TexCoord"; w2 type->next (+0x20) chain walked to update the sizes; w3 level of the gl_MaxTextureCoords search; w5 constant component count of gl_MaxTextureCoords	^\s*if\ \(\(iVar3\ !=\ 0\)\ \|\|\ \(iVar5\ \+\ \-1\ <\ 0\)\)\ break;$	+1
+use	TParseContext__arraySetMaxSize	iVar5	levelIndex2	INFERRED	w1 name compare against "gl_TexCoord"; w2 type->next (+0x20) chain walked to update the sizes; w3 level of the gl_MaxTextureCoords search; w5 constant component count of gl_MaxTextureCoords	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+1
+use	TParseContext__arraySetMaxSize	iVar5	levelIndex2	INFERRED	w1 name compare against "gl_TexCoord"; w2 type->next (+0x20) chain walked to update the sizes; w3 level of the gl_MaxTextureCoords search; w5 constant component count of gl_MaxTextureCoords	^\s*local_50\ =\ \(uint\)\(iVar5\ ==\ 0\);$	+1
+use	TParseContext__arraySetMaxSize	iVar5	componentCount	INFERRED	w1 name compare against "gl_TexCoord"; w2 type->next (+0x20) chain walked to update the sizes; w3 level of the gl_MaxTextureCoords search; w5 constant component count of gl_MaxTextureCoords	^\s*iVar5\ =\ \(int\)\(uVar1\ <<\ 0xd\ \|\ uVar1\ >>\ 0x13\)\ >>\ 0x18;$	+1
+use	TParseContext__arraySetMaxSize	iVar5	componentCount	INFERRED	w1 name compare against "gl_TexCoord"; w2 type->next (+0x20) chain walked to update the sizes; w3 level of the gl_MaxTextureCoords search; w5 constant component count of gl_MaxTextureCoords	^\s*iVar5\ =\ \(int\)\(uVar1\ <<\ 0xd\ \|\ uVar1\ >>\ 0x13\)\ >>\ 0x18;$@2	+2
+use	TParseContext__arraySetMaxSize	iVar5	componentCount	INFERRED	w1 name compare against "gl_TexCoord"; w2 type->next (+0x20) chain walked to update the sizes; w3 level of the gl_MaxTextureCoords search; w5 constant component count of gl_MaxTextureCoords	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x24\);$	+1
+use	TParseContext__arraySetMaxSize	iVar5	componentCount	INFERRED	w1 name compare against "gl_TexCoord"; w2 type->next (+0x20) chain walked to update the sizes; w3 level of the gl_MaxTextureCoords search; w5 constant component count of gl_MaxTextureCoords	^\s*piVar7\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(this_00,iVar5\ <<\ 2\);$	+1
+local	TParseContext__arraySetMaxSize	iVar6	levelsBeginOrVariable	INFERRED	level vector start, then the variable found by the level search (same Ghidra variable)
+use	TParseContext__arraySetMaxSize	iVar8	level	INFERRED	symbol table level examined	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar6\ \+\ iVar3\ \*\ 4\);$	+1
+use	TParseContext__arraySetMaxSize	iVar8	level	INFERRED	symbol table level examined	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find\(\(unsigned\ char\ \*\)local_e0,iVar8,uVar2\);$	+2
+use	TParseContext__arraySetMaxSize	iVar8	level	INFERRED	symbol table level examined	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar3\ \+\ iVar5\ \*\ 4\);$	+1
+use	TParseContext__arraySetMaxSize	iVar8	level	INFERRED	symbol table level examined	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find\(\(unsigned\ char\ \*\)local_e0,iVar8,\&local_d0\);$	+2
+local	TParseContext__arraySetMaxSize	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__arraySetMaxSize	local_50	builtIn	INFERRED	find() output: the symbol was found in the built-in level (index 0)
+local	TParseContext__arraySetMaxSize	local_b0	destroyAllocatorArg	INFERRED	allocator argument for _Rep::_M_destroy of the "gl_MaxTextureCoords" string
+local	TParseContext__arraySetMaxSize	local_c0	allocatorArg	INFERRED	pool_allocator argument for the "gl_MaxTextureCoords" string constructor
+local	TParseContext__arraySetMaxSize	local_cc	maxTexCoordsNameChars	INFERRED	character pointer of the "gl_MaxTextureCoords" string
+local	TParseContext__arraySetMaxSize	local_d0	maxTexCoordsName	INFERRED	"gl_MaxTextureCoords" TString
+local	TParseContext__arraySetMaxSize	local_e0	findResult	INFERRED	std::pair<iterator,bool> returned by the level map find
+use	TParseContext__arraySetMaxSize	piVar7	symbolTable	INFERRED	this+4 symbol table; w4 constant union array of gl_MaxTextureCoords (first element is the maximum)	^\s*piVar7\ =\ \*\(int\ \*\*\)\(this\ \+\ 4\);$	+1
+use	TParseContext__arraySetMaxSize	piVar7	symbolTable	INFERRED	this+4 symbol table; w4 constant union array of gl_MaxTextureCoords (first element is the maximum)	^\s*iVar6\ =\ \*piVar7;$	+2
+use	TParseContext__arraySetMaxSize	piVar7	symbolTable	INFERRED	this+4 symbol table; w4 constant union array of gl_MaxTextureCoords (first element is the maximum)	^\s*iVar6\ =\ \*piVar7;$@2	+1
+use	TParseContext__arraySetMaxSize	piVar7	symbolTable	INFERRED	this+4 symbol table; w4 constant union array of gl_MaxTextureCoords (first element is the maximum)	^\s*piVar7\ =\ \*\(int\ \*\*\)\(this\ \+\ 4\);$@2	+1
+use	TParseContext__arraySetMaxSize	piVar7	symbolTable	INFERRED	this+4 symbol table; w4 constant union array of gl_MaxTextureCoords (first element is the maximum)	^\s*iVar3\ =\ \*piVar7;$	+2
+use	TParseContext__arraySetMaxSize	piVar7	symbolTable	INFERRED	this+4 symbol table; w4 constant union array of gl_MaxTextureCoords (first element is the maximum)	^\s*iVar3\ =\ \*piVar7;$@2	+1
+use	TParseContext__arraySetMaxSize	piVar7	constArray	INFERRED	this+4 symbol table; w4 constant union array of gl_MaxTextureCoords (first element is the maximum)	^\s*piVar7\ =\ \*\(int\ \*\*\)\(iVar3\ \+\ 0x38\);$	+2
+use	TParseContext__arraySetMaxSize	piVar7	constArray	INFERRED	this+4 symbol table; w4 constant union array of gl_MaxTextureCoords (first element is the maximum)	^\s*piVar7\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(this_00,iVar5\ <<\ 2\);$	+2
+use	TParseContext__arraySetMaxSize	piVar7	constArray	INFERRED	this+4 symbol table; w4 constant union array of gl_MaxTextureCoords (first element is the maximum)	^\s*if\ \(param_4\ <\ \*piVar7\)\ goto\ LAB_97b9cf8c;$	+1
+use	TParseContext__arraySetMaxSize	pvVar4	symbolNameString	INFERRED	w0 name of the symbol being resized; w1 info sink (this+8)	^\s*pvVar4\ =\ \(void\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 0x60\)\)\(param_2\);$	+2
+use	TParseContext__arraySetMaxSize	pvVar4	infoSink	INFERRED	w0 name of the symbol being resized; w1 info sink (this+8)	^\s*pvVar4\ =\ \*\(void\ \*\*\)\(this\ \+\ 8\);$	+1
+use	TParseContext__arraySetMaxSize	pvVar4	infoSink	INFERRED	w0 name of the symbol being resized; w1 info sink (this+8)	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar4,"INTERNAL\ ERROR:\ "\);$	+1
+use	TParseContext__arraySetMaxSize	pvVar4	infoSink	INFERRED	w0 name of the symbol being resized; w1 info sink (this+8)	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar4,local_d0\);$	+1
+use	TParseContext__arraySetMaxSize	pvVar4	infoSink	INFERRED	w0 name of the symbol being resized; w1 info sink (this+8)	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar4,":\ "\);$	+3
+use	TParseContext__arraySetMaxSize	uVar1	variableTypeBits	INFERRED	w0 TType bit-field word of gl_MaxTextureCoords; w1 line & 0xffff	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar3\ \+\ 0x30\);$	+3
+use	TParseContext__arraySetMaxSize	uVar1	variableTypeBits	INFERRED	w0 TType bit-field word of gl_MaxTextureCoords; w1 line & 0xffff	^\s*iVar5\ =\ \(int\)\(uVar1\ <<\ 0xd\ \|\ uVar1\ >>\ 0x13\)\ >>\ 0x18;$@2	+1
+use	TParseContext__arraySetMaxSize	uVar1	lineInString	INFERRED	w0 TType bit-field word of gl_MaxTextureCoords; w1 line & 0xffff	^\s*uVar1\ =\ param_6\ \&\ 0xffff;$	+3
+use	TParseContext__arraySetMaxSize	uVar1	lineInString	INFERRED	w0 TType bit-field word of gl_MaxTextureCoords; w1 line & 0xffff	^\s*_sprintf\(acStack_a0,"%d:%d",param_6\ >>\ 0x10,uVar1\);$	+1
+local	TParseContext__arraySetMaxSize	uVar2	firstSymbolNameRef	INFERRED	intermSymbol->getSymbol() (vtable +0x60), passed through the first level search
+local	TParseContext__nonInitErrorCheck	param_2	sourceLoc	INFERRED	source location
+use	TParseContext__nonInitErrorCheck	bVar1	terminalChar	INFERRED	std::string::_S_terminal byte stored after the name	^\s*bVar1\ =\ \*DAT_a7b7ba18;$	+3
+use	TParseContext__nonInitErrorCheck	bVar1	terminalChar	INFERRED	std::string::_S_terminal byte stored after the name	^\s*bVar1\ =\ \*DAT_a7b7ba18;$@2	+4
+use	TParseContext__nonInitErrorCheck	iVar11	structTypeNameRef	INFERRED	w1 userDef->getTypeName() TString (vtable +0x18); w2 symbolTable->nextId incremented for the new variable; w3 level vector start	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*local_6c\ \+\ 0x18\)\)\(local_6c,\(int\)uVar17,a2,iVar13,a4,a5,\*local_6c\);$	+3
+use	TParseContext__nonInitErrorCheck	iVar11	uniqueId	INFERRED	w1 userDef->getTypeName() TString (vtable +0x18); w2 symbolTable->nextId incremented for the new variable; w3 level vector start	^\s*iVar11\ =\ piVar14\[3\];$	+3
+use	TParseContext__nonInitErrorCheck	iVar11	levelsBegin	INFERRED	w1 userDef->getTypeName() TString (vtable +0x18); w2 symbolTable->nextId incremented for the new variable; w3 level vector start	^\s*iVar11\ =\ \*piVar14;$	+2
+use	TParseContext__nonInitErrorCheck	iVar11	levelsBegin	INFERRED	w1 userDef->getTypeName() TString (vtable +0x18); w2 symbolTable->nextId incremented for the new variable; w3 level vector start	^\s*psVar12\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 8\)\)\(a0,a1,a2,iVar13,a4,a5,piVar14,iVar11\);$	+1
+use	TParseContext__nonInitErrorCheck	iVar11	levelsBegin	INFERRED	w1 userDef->getTypeName() TString (vtable +0x18); w2 symbolTable->nextId incremented for the new variable; w3 level vector start	^\s*error\(\(int\)this,\(char\ \*\)param_2,"variables\ with\ qualifier\ \\'const\\'\ must\ be\ initialized",$	+2
+use	TParseContext__nonInitErrorCheck	iVar13	ptQualifier	INFERRED	publicType->qualifier (+4) used to build the new type bit-field word	^\s*iVar13\ =\ \*\(int\ \*\)\(param_4\ \+\ 4\);$	+1
+use	TParseContext__nonInitErrorCheck	iVar13	ptQualifier	INFERRED	publicType->qualifier (+4) used to build the new type bit-field word	^\s*\(a4\ \&\ 0xff\)\ <<\ 0xb\ \|\ \(a5\ \&\ 0x3f\)\ <<\ 0x13\ \|\ iVar13\ <<\ 0x19\ \|\ local_ac\ \&\ 0x1ff;$	+1
+use	TParseContext__nonInitErrorCheck	iVar13	ptQualifier	INFERRED	publicType->qualifier (+4) used to build the new type bit-field word	^\s*local_9c\ =\ iVar13;$	+1
+use	TParseContext__nonInitErrorCheck	iVar13	ptQualifier	INFERRED	publicType->qualifier (+4) used to build the new type bit-field word	^\s*local_7c\ =\ iVar13;$	+1
+use	TParseContext__nonInitErrorCheck	iVar13	ptQualifier	INFERRED	publicType->qualifier (+4) used to build the new type bit-field word	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*local_6c\ \+\ 0x18\)\)\(local_6c,\(int\)uVar17,a2,iVar13,a4,a5,\*local_6c\);$	+1
+use	TParseContext__nonInitErrorCheck	iVar13	ptQualifier	INFERRED	publicType->qualifier (+4) used to build the new type bit-field word	^\s*psVar12\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 8\)\)\(a0,a1,a2,iVar13,a4,a5,piVar14,iVar11\);$	+1
+use	TParseContext__nonInitErrorCheck	iVar9	declQualifier	INFERRED	w1 publicType->qualifier (+4), compared with const; w2 name of the variable already declared (for the redefinition error)	^\s*iVar9\ =\ \*\(int\ \*\)\(param_4\ \+\ 4\);$	+2
+use	TParseContext__nonInitErrorCheck	iVar9	declQualifier	INFERRED	w1 publicType->qualifier (+4), compared with const; w2 name of the variable already declared (for the redefinition error)	^\s*if\ \(iVar9\ !=\ 2\)\ \{$	+1
+use	TParseContext__nonInitErrorCheck	iVar9	existingNameRef	INFERRED	w1 publicType->qualifier (+4), compared with const; w2 name of the variable already declared (for the redefinition error)	^\s*iVar9\ =\ a0\[1\];$	+1
+use	TParseContext__nonInitErrorCheck	iVar9	existingNameRef	INFERRED	w1 publicType->qualifier (+4), compared with const; w2 name of the variable already declared (for the redefinition error)	^\s*\*\(byte\ \*\)\(\*\(int\ \*\)\(iVar9\ \+\ 4\)\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar9\ \+\ 4\)\ \+\ \-0xc\)\)\ =\ bVar1;$	+2
+local	TParseContext__nonInitErrorCheck	local_40	destroyAllocatorArg	INFERRED	allocator argument for _Rep::_M_destroy of the key string copy
+local	TParseContext__nonInitErrorCheck	local_48	mapEntryVariable	INFERRED	second member of the map entry pair: the TVariable
+local	TParseContext__nonInitErrorCheck	local_4c	nameCopyChars	INFERRED	character pointer of the name copy used as the map key
+local	TParseContext__nonInitErrorCheck	local_50	nameCopy	INFERRED	copy of the name TString used as the map key
+local	TParseContext__nonInitErrorCheck	local_60	allocatorArg	INFERRED	pool_allocator argument for the struct type name constructor
+local	TParseContext__nonInitErrorCheck	local_68	ptCopy2Line	INFERRED	second stack copy of the TPublicType: line
+local	TParseContext__nonInitErrorCheck	local_6c	ptCopy2UserDef	INFERRED	second stack copy of the TPublicType: userDef
+local	TParseContext__nonInitErrorCheck	local_70	ptCopy2Array	INFERRED	second stack copy of the TPublicType: array
+local	TParseContext__nonInitErrorCheck	local_74	ptCopy2Matrix	INFERRED	second stack copy of the TPublicType: matrix
+local	TParseContext__nonInitErrorCheck	local_78	ptCopy2Size	INFERRED	second stack copy of the TPublicType: size
+local	TParseContext__nonInitErrorCheck	local_7c	ptCopy2Qualifier	INFERRED	second stack copy of the TPublicType: qualifier
+local	TParseContext__nonInitErrorCheck	local_80	ptCopy2Type	INFERRED	second stack copy of the TPublicType: type
+local	TParseContext__nonInitErrorCheck	local_88	ptCopy1Line	INFERRED	first stack copy of the TPublicType: line
+local	TParseContext__nonInitErrorCheck	local_8c	ptCopy1UserDef	INFERRED	first stack copy of the TPublicType: userDef (struct TType, +8 is its field list)
+local	TParseContext__nonInitErrorCheck	local_90	ptCopy1Array	INFERRED	first stack copy of the TPublicType: array
+local	TParseContext__nonInitErrorCheck	local_94	ptCopy1Matrix	INFERRED	first stack copy of the TPublicType: matrix
+local	TParseContext__nonInitErrorCheck	local_98	ptCopy1Size	INFERRED	first stack copy of the TPublicType: size
+local	TParseContext__nonInitErrorCheck	local_9c	ptCopy1Qualifier	INFERRED	first stack copy of the TPublicType: qualifier
+local	TParseContext__nonInitErrorCheck	local_a0	ptCopy1Type	INFERRED	first stack copy of the TPublicType: type
+local	TParseContext__nonInitErrorCheck	pcVar15	structTypeNameChars	INFERRED	character pointer of the struct type name
+use	TParseContext__nonInitErrorCheck	piVar14	symbolTable	INFERRED	this+4: the symbol table (level vector at +0, nextId at +0xc)	^\s*piVar14\ =\ \*\(int\ \*\*\)\(this\ \+\ 4\);$	+1
+use	TParseContext__nonInitErrorCheck	piVar14	symbolTable	INFERRED	this+4: the symbol table (level vector at +0, nextId at +0xc)	^\s*iVar11\ =\ piVar14\[3\];$	+2
+use	TParseContext__nonInitErrorCheck	piVar14	symbolTable	INFERRED	this+4: the symbol table (level vector at +0, nextId at +0xc)	^\s*iVar11\ =\ \*piVar14;$	+2
+use	TParseContext__nonInitErrorCheck	piVar14	symbolTable	INFERRED	this+4: the symbol table (level vector at +0, nextId at +0xc)	^\s*psVar12\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 8\)\)\(a0,a1,a2,iVar13,a4,a5,piVar14,iVar11\);$	+1
+use	TParseContext__nonInitErrorCheck	psVar12	variableNameRef	INFERRED	name string reference returned by the new variable's vtable slot 2	^\s*psVar12\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 8\)\)\(a0,a1,a2,iVar13,a4,a5,piVar14,iVar11\);$	+2
+local	TParseContext__nonInitErrorCheck	pvVar7	typeNameString	INFERRED	TString allocated for the struct type name (0 for non-struct)
+local	TParseContext__nonInitErrorCheck	uVar16	symbolTableLevel	INFERRED	last TSymbolTableLevel of the table (the level the variable is inserted into)
+use	TParseContext__nonInitErrorCheck	uVar17	structSizeResult	INFERRED	w1 TType::setStructSize 64-bit result; w2 TPoolAllocator__allocate 64-bit result for the name TString	^\s*uVar17\ =\ TType__setStructSize\(\(unsigned\ char\ \*\)\&local_d0,\(unsigned\ char\ \*\)local_8c\[2\]\);$	+3
+use	TParseContext__nonInitErrorCheck	uVar17	typeNameAllocation	INFERRED	w1 TType::setStructSize 64-bit result; w2 TPoolAllocator__allocate 64-bit result for the name TString	^\s*uVar17\ =\ \(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar10,8\);$	+3
+local	TParseContext__nonInitErrorCheck	uVar3	typeSizeBits	INFERRED	nominal-size field of the copied TType bit-field word
+local	TParseContext__nonInitErrorCheck	uVar4	typeQualifierBits	INFERRED	qualifier field of the copied TType bit-field word
+local	TParseContext__nonInitErrorCheck	uVar5	typeBasicTypeBits	INFERRED	basic type field of the copied TType bit-field word
+local	TParseContext__nonInitErrorCheck	uVar6	typeMatrixBit	INFERRED	matrix bit of the copied TType bit-field word
+local	TParseContext__nonInitErrorCheck	uVar8	oldTypeBits	INFERRED	bit-field word of the new variable's TType before the field-wise copy
+use	TParseContext__arrayErrorCheck	iVar9	arraySizeBasicType	INFERRED	arraySize->getBasicType() (vtable +0x40): must be int	^\s*\(iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x40\)\)\(piVar7\),\ iVar9\ ==\ 2\)\)\ \&\&\ \(0\ <\ \*\(int\ \*\)piVar7\[0xc\]\)\)\)$@1	^\s*\)\ \{$	all	none

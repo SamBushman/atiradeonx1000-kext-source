@@ -1,0 +1,41 @@
+local	TPPStreamCompiler__assignOperands	param_4	allowCopyPropagation	INFERRED	when non-zero (and compiler +0xc4 >= 2) the finished move is first offered to copyPropagateCompilerTemp; callers pass 0 except one call that passes 1
+local	TPPStreamCompiler__assignOperands	local_60	operandSlots	CONFIRMED	pointer array: 0 / 1 = the two operands, 2 / 3 = struct field child operands, 4 / 5 = array element child operands, 6 = index operand slot
+local	TPPStreamCompiler__assignOperands	local_50	operandSlotsHigh	CONFIRMED	overlays operandSlots from index 4: the array element child operands, and slot 6 (local_50[2]) the pending index operand
+local	TPPStreamCompiler__assignOperands	bVar2	addressLoadsEmitted	CONFIRMED	generateAddressLoad emitted an address load for either operand; the indirect flags are cleared at the end when set
+local	TPPStreamCompiler__assignOperands	a0	fieldType	CONFIRMED	TType* of the struct field being copied (TTypeLine at fieldsBegin + index*8); vtable slot 0x1c = getFieldName
+local	TPPStreamCompiler__assignOperands	a0_00	parentName	CONFIRMED	name string (ParseSymbol +0x14) of operandSlots[side]'s symbol, prefix of the field symbol name
+local	TPPStreamCompiler__assignOperands	a1	fieldNameChars	CONFIRMED	character pointer (TString +4) of the field name
+local	TPPStreamCompiler__assignOperands	p0	fullName	CONFIRMED	malloc'd symbol name parentName.fieldName or fieldName, passed to ParseSymbol__SetName and freed
+local	TPPStreamCompiler__assignOperands	pPVar8	childSymbol	CONFIRMED	new ParseSymbol of a struct field or array element child
+local	TPPStreamCompiler__assignOperands	this_00	elemOperand	CONFIRMED	new ParseOperand for an array element child
+local	TPPStreamCompiler__assignOperands	pPVar13	operandToFree	CONFIRMED	operand destroyed and freed after use
+local	TPPStreamCompiler__assignOperands	iVar11	operandSide	CONFIRMED	0 = destination, 1 = source: selects operandSlots[side] and the child slot operandSlots[side+2]
+local	TPPStreamCompiler__assignOperands	uVar1	destGlType	CONFIRMED	OpenGL type of the destination: symbol +0x2c or operand +0x18
+local	TPPStreamCompiler__assignOperands	local_c0	scratchDescA	INFERRED	first word of a two-word stack buffer: the operand descriptor returned by getOperandAs{Dest,Source}Var, and in the array path the sprintf buffer for the [i] suffix
+local	TPPStreamCompiler__assignOperands	local_bc	scratchDescB	INFERRED	second word of the same buffer
+local	TPPStreamCompiler__assignOperands	local_70	savedDestA	INFERRED	copy of the destination descriptor word A kept for the duplicateDestinationSource call (write-only in the decompile)
+local	TPPStreamCompiler__assignOperands	local_6c	savedDestB	INFERRED	copy of destination descriptor word B (write-only in the decompile)
+use	TPPStreamCompiler__assignOperands	iVar5	fieldCountdown	CONFIRMED	starts at the number of struct fields, decremented to the index of the field being copied	iVar5 = \*\(int \*\)\(iVar4 \+ 8\) - iVar10 >> 3;	else if \(\*\(short \*\)\(iVar4 \+ 0x2c\) == 0x7fff\)
+use	TPPStreamCompiler__assignOperands	iVar5	elemSourceSymbol	CONFIRMED	ParseSymbol of operandSlots[side], source of the +0x28 temp index copied to the element symbol	iVar5 = \*\*\(int \*\*\)\(\(int\)local_60 \+ iVar4\);	ParseSymbol__ResolveOpenGLType\(pPVar8\)
+use	TPPStreamCompiler__assignOperands	iVar10	fieldsBegin	CONFIRMED	start of the struct's field entries (structFieldList +4)	iVar10 = \*\(int \*\)\(iVar4 \+ 4\);@1	iVar10 = \(\*\*\(code \*\*\)\(\*a0 \+ 0x1c\)\)
+use	TPPStreamCompiler__assignOperands	iVar10	fieldNameString	CONFIRMED	TString* from TType vtable slot 0x1c (getFieldName)	iVar10 = \(\*\*\(code \*\*\)\(\*a0 \+ 0x1c\)\)	iVar10 = _strlen\(a1\);
+use	TPPStreamCompiler__assignOperands	iVar10	nameBufferSize	CONFIRMED	strlen(field name) + 1 (+ strlen(parent name) + 1): size of the malloc'd symbol name	iVar10 = _strlen\(a1\);	pPVar7 = operator_new\(0x38\);
+use	TPPStreamCompiler__assignOperands	iVar10	fieldsBegin	CONFIRMED	start of the struct's field entries, reloaded for the next side	iVar10 = \*\(int \*\)\(iVar4 \+ 4\);@2	+1
+use	TPPStreamCompiler__assignOperands	iVar10	fieldsBegin	CONFIRMED	start of the struct's field entries, reloaded for the next field	iVar10 = \*\(int \*\)\(iVar4 \+ 4\);@3	+1
+use	TPPStreamCompiler__assignOperands	pPVar7	childOperand	CONFIRMED	new ParseOperand stored in operandSlots[side+2]	pPVar7 = operator_new\(0x38\);	pPVar7 = extraout_r4;
+use	TPPStreamCompiler__assignOperands	pPVar7	elemOperandToFree1	CONFIRMED	element operand destroyed and freed	pPVar7 = local_50\[0\];	+5
+use	TPPStreamCompiler__assignOperands	pPVar7	elemOperandToFree2	CONFIRMED	element operand destroyed and freed	pPVar7 = local_50\[1\];	+5
+use	TPPStreamCompiler__assignOperands	pPVar7	indexOperandToFree	CONFIRMED	index operand destroyed and freed	pPVar7 = local_50\[2\];	+5
+use	TPPStreamCompiler__assignOperands	uVar3	elemCountdown	CONFIRMED	array size (symbol +0x2e) decremented to the index of the element being copied	uVar3 = \(uint\)\*\(short \*\)\(iVar4 \+ 0x2e\);	
+use	TPPStreamCompiler__assignOperands	iVar4	destSymbol	CONFIRMED	ParseSymbol of the destination (operandSlots[0] +0): +0x2c OpenGL type 0x7ffe struct / 0x7fff array	iVar4 = \*\(int \*\)local_60\[0\];	iVar4 = \*\(int \*\)\(\*\(int \*\)\(iVar4 \+ 0xc\) \+ 8\);		rhs
+use	TPPStreamCompiler__assignOperands	iVar4	structFieldList	CONFIRMED	TTypeList* of the destination's struct type (parse-tree type +8): begin at +4, end at +8, 8-byte entries	iVar4 = \*\(int \*\)\(\*\(int \*\)\(iVar4 \+ 0xc\) \+ 8\);	else if \(\*\(short \*\)\(iVar4 \+ 0x2c\) == 0x7fff\)	lhs	
+use	TPPStreamCompiler__assignOperands	iVar4	destSymbol	CONFIRMED	ParseSymbol of the destination: +0x2e array size	else if \(\*\(short \*\)\(iVar4 \+ 0x2c\) == 0x7fff\)	iVar4 = 0;
+use	TPPStreamCompiler__assignOperands	iVar4	operandByteOffset	CONFIRMED	byte offset 0 / 4 of the destination / source in operandSlots while the element operands are built	iVar4 = 0;	\} while \(-1 < iVar12\);
+use	TPPStreamCompiler__assignOperands	iVar12	sideCountdown	CONFIRMED	1 then 0: builds the element operand for the source then the destination	iVar12 = 1;	\} while \(-1 < iVar12\);		all
+use	TPPStreamCompiler__assignOperands	iVar12	destSymbolForType	CONFIRMED	ParseSymbol of the destination	iVar12 = \*\(int \*\)\*param_2;@1	uVar3 = GetPPStreamTypeForGLType
+use	TPPStreamCompiler__assignOperands	iVar12	destLogicalSize	CONFIRMED	ParseOperand__GetLogicalSize of the destination: flags bits 26..27 store size-1	iVar12 = ParseOperand__GetLogicalSize\(\*param_2\);@1	+2
+use	TPPStreamCompiler__assignOperands	iVar12	destSymbolForType	CONFIRMED	ParseSymbol of the destination (indirect path)	iVar12 = \*\(int \*\)\*param_2;@2	uVar3 = GetPPStreamTypeForGLType
+use	TPPStreamCompiler__assignOperands	iVar12	destLogicalSize	CONFIRMED	ParseOperand__GetLogicalSize of the destination (indirect path)	iVar12 = ParseOperand__GetLogicalSize\(\*param_2\);@2	+2
+use	TPPStreamCompiler__assignOperands	iVar6	length	INFERRED	strlen(parentName): length of the parent name added to the buffer size	iVar6 = _strlen\(a0_00\);	+2
+use	TPPStreamCompiler__assignOperands	uVar3	streamType	INFERRED	GetPPStreamTypeForGLType result: bits 23..25 of the flags word	uVar3 = GetPPStreamTypeForGLType\(\(uint\)uVar1\);@1	+2
+use	TPPStreamCompiler__assignOperands	uVar3	streamType	INFERRED	GetPPStreamTypeForGLType result: bits 23..25 of the flags word (indirect path)	uVar3 = GetPPStreamTypeForGLType\(\(uint\)uVar1\);@2	+2
