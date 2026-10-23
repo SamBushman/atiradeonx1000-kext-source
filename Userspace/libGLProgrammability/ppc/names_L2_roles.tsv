@@ -435,8 +435,8 @@ use	_BitSetOrTest	uVar1	bitSetEquals	INFERRED	every definition is the result of 
 use	_BitSetOrTest	uVar2	bitSetEquals2	INFERRED	every definition is the result of a call whose name says it returns this	#9	+1	all	all
 use	_BitSetXorTest	uVar1	bitSetEquals	INFERRED	every definition is the result of a call whose name says it returns this	#7	+3	all	all
 use	_BitSetXorTest	uVar2	bitSetEquals2	INFERRED	every definition is the result of a call whose name says it returns this	#9	+1	all	all
-use	_BuildGenKill	iVar2	bitSetEquals	INFERRED	every definition is the result of a call whose name says it returns this	#24	+1	all	all
-use	_DeadCodeEliminationSimple	iVar3	bitSetEquals	INFERRED	every definition is the result of a call whose name says it returns this	#30	+1	all	all
+use	_BuildGenKill	iVar2	isKilled	INFERRED	every definition is the result of a call whose name says it returns this	#24	+1	all	all
+use	_DeadCodeEliminationSimple	iVar3	isLive	INFERRED	every definition is the result of a call whose name says it returns this	#30	+1	all	all
 use	_InstructionAdd	iVar10	registerValue	INFERRED	every definition is the result of a call whose name says it returns this	#142	+3	all	all
 use	_InstructionAdd	iVar8	registerValue3	INFERRED	every definition is the result of a call whose name says it returns this	#91	+3	all	all
 use	_InstructionAdd	uVar5	registerValue2	INFERRED	every definition is the result of a call whose name says it returns this	#161	+16	all	all

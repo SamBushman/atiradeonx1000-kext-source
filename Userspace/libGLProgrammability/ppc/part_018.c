@@ -460,537 +460,551 @@ int _HashSetIteratorNext(iterator)
 }
 
 /* _HashTableNew @ 0x97c08a60 (84 bytes) */
-int _HashTableNew(param_1, param_2, param_3)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int _HashTableNew(bucketCount, hashFunction, equalsFunction)
+  undefined4 bucketCount;
+  undefined4 hashFunction;
+  undefined4 equalsFunction;
 {
-  undefined4 *allocation;
-  undefined4 hashSetNewResult;
+  undefined4 *hashTable;
+  undefined4 hashSet;
   
-  allocation = (undefined4 *)_malloc(4);
-  hashSetNewResult = ((int (*)())_HashSetNew)(param_1,param_2,param_3);
-  *allocation = hashSetNewResult;
-  return allocation;
+  hashTable = (undefined4 *)_malloc(4);
+  hashSet = ((int (*)())_HashSetNew)(bucketCount,hashFunction,equalsFunction);
+  *hashTable = hashSet;
+  return hashTable;
 }
 
 /* _HashTableFree @ 0x97c08ab4 (160 bytes) */
 int _HashTableFree(hashTable)
   int *hashTable;
 {
-  uint *puVar1;
-  int iVar2;
-  uint uVar3;
-  uint loopIndex;
-  uint *puVar5;
-  uint loopIndex2;
+  uint *hashSet;
+  int pair;
+  uint bucketCount;
+  uint bucketIndex;
+  uint *bucket;
+  uint entryIndex;
   
-  loopIndex = 0;
-  puVar1 = (uint *)*hashTable;
-  uVar3 = *puVar1;
-  if (uVar3 != 0) {
+  bucketIndex = 0;
+  hashSet = (uint *)*hashTable;
+  bucketCount = *hashSet;
+  if (bucketCount != 0) {
     do {
-      loopIndex2 = 0;
-      puVar5 = (uint *)(puVar1[1] + loopIndex * 8);
-      if (*(int *)(puVar1[1] + loopIndex * 8) != 0) {
+      entryIndex = 0;
+      bucket = (uint *)(hashSet[1] + bucketIndex * 8);
+      if (*(int *)(hashSet[1] + bucketIndex * 8) != 0) {
         do {
-          iVar2 = *(int *)(puVar5[1] + loopIndex2 * 4);
-          if (iVar2 != 0) {
-            _free(iVar2);
+          pair = *(int *)(bucket[1] + entryIndex * 4);
+          if (pair != 0) {
+            _free(pair);
           }
-          loopIndex2 = loopIndex2 + 1;
-        } while (loopIndex2 < *puVar5);
-        uVar3 = *puVar1;
+          entryIndex = entryIndex + 1;
+        } while (entryIndex < *bucket);
+        bucketCount = *hashSet;
       }
-      loopIndex = loopIndex + 1;
-    } while (loopIndex < uVar3);
-    puVar1 = (uint *)*hashTable;
+      bucketIndex = bucketIndex + 1;
+    } while (bucketIndex < bucketCount);
+    hashSet = (uint *)*hashTable;
   }
-  ((int (*)())_HashSetFree)(puVar1);
+  ((int (*)())_HashSetFree)(hashSet);
   return _free(hashTable);
 }
 
 /* _HashTableAdd @ 0x97c08b54 (336 bytes) */
-int _HashTableAdd(hashTable, param_2, param_3)
+int _HashTableAdd(hashTable, key, value)
   undefined4 *hashTable;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 key;
+  undefined4 value;
 {
-  uint allocation2;
-  int iVar1;
-  uint uVar2;
-  int iVar3;
-  undefined4 *allocation;
-  undefined4 a2;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  uint a6;
-  uint uVar5;
-  uint *puVar6;
+  uint oldEntryCount;
+  int pair;
+  int entriesEnd;
+  int entryOffset;
+  uint bucketEntries;
+  uint grownEntries;
+  int bucketOffset;
+  uint hashCode;
+  int equalsResult;
+  undefined4 *newPair;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
+  uint buckets;
+  uint firstFreeSlot;
+  uint *hashSet;
   uint loopIndex;
-  uint *puVar8;
+  uint *bucket;
   
-  puVar6 = (uint *)*hashTable;
+  hashSet = (uint *)*hashTable;
   loopIndex = 0;
-  uVar5 = 0xffffffff;
-  a2 = param_3;
-  uVar2 = (*(code *)puVar6[2])(param_2,param_2,param_3);
-  a6 = puVar6[1];
-  iVar1 = (uVar2 - (uVar2 / *puVar6) * *puVar6) * 8;
-  puVar8 = (uint *)(a6 + iVar1);
-  if (*(int *)(a6 + iVar1) == 0) {
-    uVar2 = puVar8[1];
+  firstFreeSlot = 0xffffffff;
+  unusedArg5 = value;
+  hashCode = (*(code *)hashSet[2])(key,key,value);
+  buckets = hashSet[1];
+  bucketOffset = (hashCode - (hashCode / *hashSet) * *hashSet) * 8;
+  bucket = (uint *)(buckets + bucketOffset);
+  if (*(int *)(buckets + bucketOffset) == 0) {
+    bucketEntries = bucket[1];
   }
   else {
-    uVar2 = puVar8[1];
+    bucketEntries = bucket[1];
     do {
-      iVar1 = loopIndex * 4;
-      if (*(undefined4 **)(uVar2 + iVar1) == (undefined4 *)0x0) {
-        if (uVar5 == 0xffffffff) {
-          uVar5 = loopIndex;
+      entryOffset = loopIndex * 4;
+      if (*(undefined4 **)(bucketEntries + entryOffset) == (undefined4 *)0x0) {
+        if (firstFreeSlot == 0xffffffff) {
+          firstFreeSlot = loopIndex;
         }
       }
       else {
-        iVar3 = (*(code *)puVar6[3])
-                          (**(undefined4 **)(uVar2 + iVar1),param_2,a2,in_r6,in_r7,in_r8,a6);
-        if (iVar3 == 0) {
-          **(undefined4 **)(uVar2 + iVar1) = param_2;
-          *(undefined4 *)(*(int *)(uVar2 + iVar1) + 4) = param_3;
+        equalsResult = (*(code *)hashSet[3])
+                          (**(undefined4 **)(bucketEntries + entryOffset),key,unusedArg5,unusedArg6,unusedArg7,unusedArg8,buckets);
+        if (equalsResult == 0) {
+          **(undefined4 **)(bucketEntries + entryOffset) = key;
+          *(undefined4 *)(*(int *)(bucketEntries + entryOffset) + 4) = value;
           return hashTable;
         }
-        uVar2 = puVar8[1];
+        bucketEntries = bucket[1];
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex < *puVar8);
+    } while (loopIndex < *bucket);
   }
-  if (uVar5 == 0xffffffff) {
-    uVar5 = *puVar8;
-    *puVar8 = uVar5 + 1;
-    allocation2 = _realloc(uVar2,(uVar5 + 1) * 4);
-    puVar8[1] = allocation2;
-    iVar1 = allocation2 + *puVar8 * 4;
-    allocation = (undefined4 *)_malloc(8);
-    *(undefined4 **)(iVar1 + -4) = allocation;
-    *allocation = param_2;
-    iVar1 = *(int *)(iVar1 + -4);
+  if (firstFreeSlot == 0xffffffff) {
+    oldEntryCount = *bucket;
+    *bucket = oldEntryCount + 1;
+    grownEntries = _realloc(bucketEntries,(oldEntryCount + 1) * 4);
+    bucket[1] = grownEntries;
+    entriesEnd = grownEntries + *bucket * 4;
+    newPair = (undefined4 *)_malloc(8);
+    *(undefined4 **)(entriesEnd + -4) = newPair;
+    *newPair = key;
+    pair = *(int *)(entriesEnd + -4);
   }
   else {
-    allocation = (undefined4 *)_malloc(8);
-    *(undefined4 **)(uVar2 + uVar5 * 4) = allocation;
-    *allocation = param_2;
-    iVar1 = *(int *)(uVar2 + uVar5 * 4);
+    newPair = (undefined4 *)_malloc(8);
+    *(undefined4 **)(bucketEntries + firstFreeSlot * 4) = newPair;
+    *newPair = key;
+    pair = *(int *)(bucketEntries + firstFreeSlot * 4);
   }
-  *(undefined4 *)(iVar1 + 4) = param_3;
+  *(undefined4 *)(pair + 4) = value;
   return hashTable;
 }
 
 /* _HashTableGet @ 0x97c08ca4 (184 bytes) */
-int _HashTableGet(hashTable, param_2)
+int _HashTableGet(hashTable, key)
   undefined4 *hashTable;
-  undefined4 param_2;
+  undefined4 key;
 {
-  uint uVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  uint a6;
-  uint *puVar4;
-  uint *puVar5;
+  int equalsResult;
+  uint bucketEntries;
+  uint hashCode;
+  undefined4 *pair;
+  int bucketOffset;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
+  uint buckets;
+  uint *hashSet;
+  uint *bucket;
   uint loopIndex;
   
   loopIndex = 0;
-  puVar4 = (uint *)*hashTable;
-  uVar1 = (*(code *)puVar4[2])(param_2,param_2);
-  a6 = puVar4[1];
-  iVar3 = (uVar1 - (uVar1 / *puVar4) * *puVar4) * 8;
-  puVar5 = (uint *)(a6 + iVar3);
-  if (*(int *)(a6 + iVar3) != 0) {
+  hashSet = (uint *)*hashTable;
+  hashCode = (*(code *)hashSet[2])(key,key);
+  buckets = hashSet[1];
+  bucketOffset = (hashCode - (hashCode / *hashSet) * *hashSet) * 8;
+  bucket = (uint *)(buckets + bucketOffset);
+  if (*(int *)(buckets + bucketOffset) != 0) {
     do {
-      uVar1 = puVar5[1];
-      puVar2 = *(undefined4 **)(uVar1 + loopIndex * 4);
-      if ((puVar2 != (undefined4 *)0x0) &&
-         (iVar3 = (*(code *)puVar4[3])(*puVar2,param_2,in_r5,in_r6,in_r7,in_r8,a6), iVar3 == 0)) {
-        return *(undefined4 *)(*(int *)(uVar1 + loopIndex * 4) + 4);
+      bucketEntries = bucket[1];
+      pair = *(undefined4 **)(bucketEntries + loopIndex * 4);
+      if ((pair != (undefined4 *)0x0) &&
+         (equalsResult = (*(code *)hashSet[3])(*pair,key,unusedArg5,unusedArg6,unusedArg7,unusedArg8,buckets), equalsResult == 0)) {
+        return *(undefined4 *)(*(int *)(bucketEntries + loopIndex * 4) + 4);
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex < *puVar5);
+    } while (loopIndex < *bucket);
   }
   return 0;
 }
 
 /* _HashTableRemove @ 0x97c08d5c (196 bytes) */
-int _HashTableRemove(hashTable, param_2, param_3, param_4, param_5, param_6)
+int _HashTableRemove(hashTable, key, unusedArg3, unusedArg4, unusedArg5, unusedArg6)
   undefined4 *hashTable;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 key;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
 {
-  int iVar1;
-  uint uVar2;
-  int iVar3;
-  uint a6;
-  uint *puVar4;
-  uint *puVar5;
+  int entryOffset;
+  uint bucketEntries;
+  int bucketOffset;
+  uint hashCode;
+  int equalsResult;
+  uint buckets;
+  uint *hashSet;
+  uint *bucket;
   uint loopIndex;
-  undefined4 uVar7;
+  undefined4 removedValue;
   
   loopIndex = 0;
-  puVar4 = (uint *)*hashTable;
-  uVar2 = (*(code *)puVar4[2])(param_2,param_2,param_3,param_4,param_5,param_6);
-  a6 = puVar4[1];
-  iVar1 = (uVar2 - (uVar2 / *puVar4) * *puVar4) * 8;
-  puVar5 = (uint *)(a6 + iVar1);
-  if (*(int *)(a6 + iVar1) != 0) {
+  hashSet = (uint *)*hashTable;
+  hashCode = (*(code *)hashSet[2])(key,key,unusedArg3,unusedArg4,unusedArg5,unusedArg6);
+  buckets = hashSet[1];
+  bucketOffset = (hashCode - (hashCode / *hashSet) * *hashSet) * 8;
+  bucket = (uint *)(buckets + bucketOffset);
+  if (*(int *)(buckets + bucketOffset) != 0) {
     do {
-      uVar2 = puVar5[1];
-      iVar1 = loopIndex * 4;
-      if ((*(undefined4 **)(uVar2 + iVar1) != (undefined4 *)0x0) &&
-         (iVar3 = (*(code *)puVar4[3])
-                            (**(undefined4 **)(uVar2 + iVar1),param_2,param_3,param_4,param_5,
-                             param_6,a6), iVar3 == 0)) {
-        uVar7 = *(undefined4 *)(*(int *)(uVar2 + iVar1) + 4);
-        _free(*(int *)(uVar2 + iVar1));
-        *(undefined4 *)(uVar2 + iVar1) = 0;
-        return uVar7;
+      bucketEntries = bucket[1];
+      entryOffset = loopIndex * 4;
+      if ((*(undefined4 **)(bucketEntries + entryOffset) != (undefined4 *)0x0) &&
+         (equalsResult = (*(code *)hashSet[3])
+                            (**(undefined4 **)(bucketEntries + entryOffset),key,unusedArg3,unusedArg4,unusedArg5,
+                             unusedArg6,buckets), equalsResult == 0)) {
+        removedValue = *(undefined4 *)(*(int *)(bucketEntries + entryOffset) + 4);
+        _free(*(int *)(bucketEntries + entryOffset));
+        *(undefined4 *)(bucketEntries + entryOffset) = 0;
+        return removedValue;
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex < *puVar5);
+    } while (loopIndex < *bucket);
   }
   return 0;
 }
 
 /* _GetValidArgs @ 0x97c08e20 (32 bytes) */
-int _GetValidArgs(param_1)
-  int param_1;
+int _GetValidArgs(instruction)
+  int instruction;
 {
-  uint uVar1;
+  uint sourceCount;
   
-  uVar1 = *(uint *)(param_1 + 0xc) >> 0x1d;
-  if (3 < (*(uint *)(param_1 + 0xc) >> 0x12 & 0xff) - 0x42) {
-    return uVar1;
+  sourceCount = *(uint *)(instruction + 0xc) >> 0x1d;
+  if (3 < (*(uint *)(instruction + 0xc) >> 0x12 & 0xff) - 0x42) {
+    return sourceCount;
   }
-  return uVar1 - 1;
+  return sourceCount - 1;
 }
 
 /* _GetStreamArray_97c08e40 @ 0x97c08e40 (164 bytes) */
-int _GetStreamArray_97c08e40(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  uint param_2;
-  int param_3;
-  uint *param_4;
-  uint *param_5;
+int _GetStreamArray_97c08e40(listKind, registerNumber, stream, outRangeStart, outRangeEnd)
+  int listKind;
+  uint registerNumber;
+  int stream;
+  uint *outRangeStart;
+  uint *outRangeEnd;
 {
-  int iVar1;
-  int iVar2;
-  uint uVar3;
+  int arrayChunk;
+  int arrayIndex;
+  uint rangeStart;
   
-  iVar2 = 0;
-  if (param_1 == 1) {
-    for (iVar1 = **(int **)(param_3 + 8); iVar1 != 0; iVar1 = *(int *)(iVar1 + 8)) {
-      uVar3 = (uint)*(ushort *)(iVar1 + 0xe);
-      if ((uVar3 <= param_2) && (param_2 <= *(ushort *)(iVar1 + 0x12))) {
+  arrayIndex = 0;
+  if (listKind == 1) {
+    for (arrayChunk = **(int **)(stream + 8); arrayChunk != 0; arrayChunk = *(int *)(arrayChunk + 8)) {
+      rangeStart = (uint)*(ushort *)(arrayChunk + 0xe);
+      if ((rangeStart <= registerNumber) && (registerNumber <= *(ushort *)(arrayChunk + 0x12))) {
 LAB_97c08e8c:
-        *param_4 = uVar3;
-        *param_5 = (uint)*(ushort *)(iVar1 + 0x12);
-        return iVar2;
+        *outRangeStart = rangeStart;
+        *outRangeEnd = (uint)*(ushort *)(arrayChunk + 0x12);
+        return arrayIndex;
       }
-      iVar2 = iVar2 + 1;
+      arrayIndex = arrayIndex + 1;
     }
   }
-  else if (param_1 == 2) {
-    for (iVar1 = **(int **)(param_3 + 0x14); iVar1 != 0; iVar1 = *(int *)(iVar1 + 8)) {
-      uVar3 = (uint)*(ushort *)(iVar1 + 0xe);
-      if ((uVar3 <= param_2) && (param_2 <= *(ushort *)(iVar1 + 0x12))) goto LAB_97c08e8c;
-      iVar2 = iVar2 + 1;
+  else if (listKind == 2) {
+    for (arrayChunk = **(int **)(stream + 0x14); arrayChunk != 0; arrayChunk = *(int *)(arrayChunk + 8)) {
+      rangeStart = (uint)*(ushort *)(arrayChunk + 0xe);
+      if ((rangeStart <= registerNumber) && (registerNumber <= *(ushort *)(arrayChunk + 0x12))) goto LAB_97c08e8c;
+      arrayIndex = arrayIndex + 1;
     }
   }
   return -1;
 }
 
 /* _GetRegisterIndicies @ 0x97c08ee4 (168 bytes) */
-int _GetRegisterIndicies(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  int *param_2;
-  int *param_3;
-  undefined4 param_4;
-  int param_5;
-  int param_6;
-  int param_7;
-  int param_8;
+int _GetRegisterIndicies(stream, outFirstIndex, outLastIndex, listKind, registerNumber, lookUpArrays, isArray, arrayExtent)
+  undefined4 stream;
+  int *outFirstIndex;
+  int *outLastIndex;
+  undefined4 listKind;
+  int registerNumber;
+  int lookUpArrays;
+  int isArray;
+  int arrayExtent;
 {
-  int iVar1;
+  int lastIndex;
   
-  *param_2 = 0;
-  *param_3 = -1;
-  if (param_6 != 0) {
-    ((int (*)())_GetStreamArray_97c08e40)(param_4,param_5,param_1,param_2,param_3);
+  *outFirstIndex = 0;
+  *outLastIndex = -1;
+  if (lookUpArrays != 0) {
+    ((int (*)())_GetStreamArray_97c08e40)(listKind,registerNumber,stream,outFirstIndex,outLastIndex);
   }
-  iVar1 = *param_3;
-  if (((iVar1 == -1) && (param_7 != 0)) && (1 < param_8 + 1)) {
-    iVar1 = param_5 + param_8;
-    *param_2 = param_5;
-    *param_3 = iVar1;
+  lastIndex = *outLastIndex;
+  if (((lastIndex == -1) && (isArray != 0)) && (1 < arrayExtent + 1)) {
+    lastIndex = registerNumber + arrayExtent;
+    *outFirstIndex = registerNumber;
+    *outLastIndex = lastIndex;
   }
-  if (iVar1 == -1) {
-    *param_2 = param_5;
-    *param_3 = param_5;
+  if (lastIndex == -1) {
+    *outFirstIndex = registerNumber;
+    *outLastIndex = registerNumber;
   }
   return;
 }
 
 /* _GetRegister @ 0x97c08f8c (160 bytes) */
-int _GetRegister(param_1, param_2, param_3, param_4)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
-  int param_4;
+int _GetRegister(program, bank, registerIndex, component)
+  int program;
+  undefined4 bank;
+  int registerIndex;
+  int component;
 {
-  uint uVar1;
-  uint uVar2;
-  int iVar3;
+  uint recordIndex;
+  uint bankEndRecord;
+  int bankFirstRecord;
   
-  iVar3 = 0;
-  uVar2 = 0;
-  switch(param_2) {
+  bankFirstRecord = 0;
+  bankEndRecord = 0;
+  switch(bank) {
   case 0:
-    iVar3 = *(int *)(param_1 + 0x24);
-    uVar2 = *(uint *)(param_1 + 0x38);
+    bankFirstRecord = *(int *)(program + 0x24);
+    bankEndRecord = *(uint *)(program + 0x38);
     break;
   case 1:
-    iVar3 = *(int *)(param_1 + 0x20);
-    uVar2 = *(uint *)(param_1 + 0x34);
+    bankFirstRecord = *(int *)(program + 0x20);
+    bankEndRecord = *(uint *)(program + 0x34);
     break;
   case 2:
-    iVar3 = *(int *)(param_1 + 0x28);
-    uVar2 = *(uint *)(param_1 + 0x3c);
+    bankFirstRecord = *(int *)(program + 0x28);
+    bankEndRecord = *(uint *)(program + 0x3c);
     break;
   case 3:
-    iVar3 = *(int *)(param_1 + 0x1c);
-    uVar2 = *(uint *)(param_1 + 0x30);
+    bankFirstRecord = *(int *)(program + 0x1c);
+    bankEndRecord = *(uint *)(program + 0x30);
     break;
   case 4:
-    iVar3 = *(int *)(param_1 + 0x2c);
-    uVar2 = *(uint *)(param_1 + 0x40);
+    bankFirstRecord = *(int *)(program + 0x2c);
+    bankEndRecord = *(uint *)(program + 0x40);
   }
-  uVar1 = iVar3 + param_3 * 4 + param_4;
-  if (uVar1 < uVar2) {
-    return *(int *)(param_1 + 0x10) + uVar1 * 0x2c;
+  recordIndex = bankFirstRecord + registerIndex * 4 + component;
+  if (recordIndex < bankEndRecord) {
+    return *(int *)(program + 0x10) + recordIndex * 0x2c;
   }
   return 0;
 }
 
 /* _BuildGenKill @ 0x97c09040 (364 bytes) */
-int _BuildGenKill(param_1)
-  int param_1;
+int _BuildGenKill(program)
+  int program;
 {
+  int instructionOffset;
+  int blockInstructionCount;
   uint bitSetNewResult;
-  uint loopIndex;
-  uint uVar1;
-  int bitSetEquals;
-  uint loopIndex3;
-  int iVar4;
-  uint loopIndex4;
-  uint *puVar6;
-  uint *puVar7;
-  int iVar8;
-  undefined4 *puVar9;
-  uint loopIndex2;
+  uint sourceIndex;
+  uint destCount;
+  int isKilled;
+  uint blockIndex;
+  int blockOffset;
+  uint instructionIndex;
+  uint *block;
+  uint *instruction;
+  int blocks;
+  undefined4 *reg;
+  uint destIndex;
   
-  loopIndex3 = 0;
-  if (*(int *)(param_1 + 4) != 0) {
-    iVar4 = 0;
+  blockIndex = 0;
+  if (*(int *)(program + 4) != 0) {
+    blockOffset = 0;
     do {
-      iVar8 = *(int *)(param_1 + 8);
-      loopIndex4 = 0;
-      puVar6 = (uint *)(iVar8 + iVar4);
-      bitSetNewResult = _BitSetNew(*(undefined4 *)(param_1 + 0xc));
-      puVar6[9] = bitSetNewResult;
-      bitSetNewResult = _BitSetNew(*(undefined4 *)(param_1 + 0xc));
-      puVar6[10] = bitSetNewResult;
-      bitSetNewResult = _BitSetNew(*(undefined4 *)(param_1 + 0xc));
-      iVar8 = *(int *)(iVar8 + iVar4);
-      puVar6[6] = bitSetNewResult;
-      if (iVar8 != 0) {
-        iVar8 = 0;
+      blocks = *(int *)(program + 8);
+      instructionIndex = 0;
+      block = (uint *)(blocks + blockOffset);
+      bitSetNewResult = _BitSetNew(*(undefined4 *)(program + 0xc));
+      block[9] = bitSetNewResult;
+      bitSetNewResult = _BitSetNew(*(undefined4 *)(program + 0xc));
+      block[10] = bitSetNewResult;
+      bitSetNewResult = _BitSetNew(*(undefined4 *)(program + 0xc));
+      blockInstructionCount = *(int *)(blocks + blockOffset);
+      block[6] = bitSetNewResult;
+      if (blockInstructionCount != 0) {
+        instructionOffset = 0;
         do {
-          puVar7 = (uint *)(puVar6[1] + iVar8);
-          if (puVar7[5] == 0) {
-            loopIndex = 0;
-            if (*(int *)(puVar6[1] + iVar8) != 0) {
+          instruction = (uint *)(block[1] + instructionOffset);
+          if (instruction[5] == 0) {
+            sourceIndex = 0;
+            if (*(int *)(block[1] + instructionOffset) != 0) {
               do {
-                puVar9 = *(undefined4 **)(loopIndex * 4 + puVar7[1]);
-                if (puVar9[6] == 0) {
-                  bitSetEquals = _BitSetGetEquals(puVar6[10],*puVar9);
-                  if (bitSetEquals == 0) {
-                    _BitSetSetEquals(puVar6[9],*puVar9);
+                reg = *(undefined4 **)(sourceIndex * 4 + instruction[1]);
+                if (reg[6] == 0) {
+                  isKilled = _BitSetGetEquals(block[10],*reg);
+                  if (isKilled == 0) {
+                    _BitSetSetEquals(block[9],*reg);
                   }
-                  puVar9[9] = puVar9[9] + 1;
+                  reg[9] = reg[9] + 1;
                 }
-                loopIndex = loopIndex + 1;
-              } while (loopIndex < *puVar7);
+                sourceIndex = sourceIndex + 1;
+              } while (sourceIndex < *instruction);
             }
-            uVar1 = puVar7[2];
-            loopIndex2 = 0;
-            if (uVar1 != 0) {
+            destCount = instruction[2];
+            destIndex = 0;
+            if (destCount != 0) {
               do {
-                puVar9 = *(undefined4 **)(loopIndex2 * 4 + puVar7[3]);
-                if (puVar9[6] == 0) {
-                  _BitSetSetEquals(puVar6[10],*puVar9);
-                  puVar9[9] = puVar9[9] + 1;
-                  uVar1 = puVar7[2];
+                reg = *(undefined4 **)(destIndex * 4 + instruction[3]);
+                if (reg[6] == 0) {
+                  _BitSetSetEquals(block[10],*reg);
+                  reg[9] = reg[9] + 1;
+                  destCount = instruction[2];
                 }
-                loopIndex2 = loopIndex2 + 1;
-              } while (loopIndex2 < uVar1);
+                destIndex = destIndex + 1;
+              } while (destIndex < destCount);
             }
           }
-          loopIndex4 = loopIndex4 + 1;
-          iVar8 = iVar8 + 0x1c;
-        } while (loopIndex4 < *puVar6);
+          instructionIndex = instructionIndex + 1;
+          instructionOffset = instructionOffset + 0x1c;
+        } while (instructionIndex < *block);
       }
-      loopIndex3 = loopIndex3 + 1;
-      iVar4 = iVar4 + 0x2c;
-    } while (loopIndex3 < *(uint *)(param_1 + 4));
+      blockIndex = blockIndex + 1;
+      blockOffset = blockOffset + 0x2c;
+    } while (blockIndex < *(uint *)(program + 4));
   }
   return;
 }
 
 /* _BuildLiveOut @ 0x97c091ac (240 bytes) */
-int _BuildLiveOut(param_1)
-  int param_1;
+int _BuildLiveOut(program)
+  int program;
 {
-  int bitSetEqualsTestResult;
-  uint loopIndex;
-  bool bVar1;
-  uint uVar2;
-  undefined4 bitSetCloneResult2;
-  undefined4 bitSetCloneResult;
-  uint loopIndex2;
-  int iVar6;
-  int iVar7;
-  int iVar8;
+  int successor;
+  int liveOutUnchanged;
+  uint successorIndex;
+  bool anyChanged;
+  uint blockCount;
+  undefined4 oldLiveOut;
+  undefined4 successorLive;
+  uint blockIndex;
+  int blockOffset;
+  int successorOffset;
+  int block;
   
-  uVar2 = *(uint *)(param_1 + 4);
+  blockCount = *(uint *)(program + 4);
   do {
-    bVar1 = false;
-    loopIndex2 = 0;
-    if (uVar2 != 0) {
-      iVar6 = 0;
+    anyChanged = false;
+    blockIndex = 0;
+    if (blockCount != 0) {
+      blockOffset = 0;
       do {
-        loopIndex = 0;
-        iVar8 = *(int *)(param_1 + 8) + iVar6;
-        bitSetCloneResult2 = _BitSetClone(*(undefined4 *)(iVar8 + 0x18));
-        if (*(int *)(iVar8 + 0x10) != 0) {
+        successorIndex = 0;
+        block = *(int *)(program + 8) + blockOffset;
+        oldLiveOut = _BitSetClone(*(undefined4 *)(block + 0x18));
+        if (*(int *)(block + 0x10) != 0) {
           do {
-            iVar7 = loopIndex * 4;
-            loopIndex = loopIndex + 1;
-            iVar7 = *(int *)(iVar7 + *(int *)(iVar8 + 0x14));
-            bitSetCloneResult = _BitSetClone(*(undefined4 *)(iVar7 + 0x18));
-            _BitSetAndNotEquals(bitSetCloneResult,*(undefined4 *)(iVar7 + 0x28));
-            _BitSetOrEquals(bitSetCloneResult,*(undefined4 *)(iVar7 + 0x24));
-            _BitSetOrEquals(*(undefined4 *)(iVar8 + 0x18),bitSetCloneResult);
-            _BitSetFree(bitSetCloneResult);
-          } while (loopIndex < *(uint *)(iVar8 + 0x10));
+            successorOffset = successorIndex * 4;
+            successorIndex = successorIndex + 1;
+            successor = *(int *)(successorOffset + *(int *)(block + 0x14));
+            successorLive = _BitSetClone(*(undefined4 *)(successor + 0x18));
+            _BitSetAndNotEquals(successorLive,*(undefined4 *)(successor + 0x28));
+            _BitSetOrEquals(successorLive,*(undefined4 *)(successor + 0x24));
+            _BitSetOrEquals(*(undefined4 *)(block + 0x18),successorLive);
+            _BitSetFree(successorLive);
+          } while (successorIndex < *(uint *)(block + 0x10));
         }
-        loopIndex2 = loopIndex2 + 1;
-        iVar6 = iVar6 + 0x2c;
-        bitSetEqualsTestResult = ((int (*)())_BitSetEqualsTest)(bitSetCloneResult2,*(undefined4 *)(iVar8 + 0x18));
-        bVar1 = (bool)(bVar1 | bitSetEqualsTestResult == 0);
-        _BitSetFree(bitSetCloneResult2);
-        uVar2 = *(uint *)(param_1 + 4);
-      } while (loopIndex2 < uVar2);
+        blockIndex = blockIndex + 1;
+        blockOffset = blockOffset + 0x2c;
+        liveOutUnchanged = ((int (*)())_BitSetEqualsTest)(oldLiveOut,*(undefined4 *)(block + 0x18));
+        anyChanged = (bool)(anyChanged | liveOutUnchanged == 0);
+        _BitSetFree(oldLiveOut);
+        blockCount = *(uint *)(program + 4);
+      } while (blockIndex < blockCount);
     }
-  } while (bVar1);
+  } while (anyChanged);
   return;
 }
 
 /* _BuildInterferenceSets @ 0x97c0929c (436 bytes) */
-int _BuildInterferenceSets(param_1)
-  int param_1;
+int _BuildInterferenceSets(program)
+  int program;
 {
-  undefined4 bitSetCloneResult;
-  int iVar2;
-  uint uVar3;
-  uint loopIndex2;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  uint *puVar8;
-  undefined4 *puVar9;
+  uint sourceCount;
+  int instructionIndex;
+  undefined4 liveSet;
+  int liveRegisterId;
+  uint destCount;
+  uint blockIndex;
+  int blockOffset;
+  int block;
+  int instructionOffset;
+  uint *instruction;
+  undefined4 *reg;
   uint loopIndex;
-  int iVar11;
-  int iVar12;
+  int blocks;
+  int liveRegister;
   
-  loopIndex2 = 0;
-  if (*(int *)(param_1 + 4) != 0) {
-    iVar5 = 0;
+  blockIndex = 0;
+  if (*(int *)(program + 4) != 0) {
+    blockOffset = 0;
     do {
-      iVar11 = *(int *)(param_1 + 8);
-      iVar6 = iVar11 + iVar5;
-      bitSetCloneResult = _BitSetClone(*(undefined4 *)(iVar6 + 0x18));
-      iVar11 = *(int *)(iVar11 + iVar5) + -1;
-      if (-1 < iVar11) {
-        iVar7 = iVar11 * 0x1c;
+      blocks = *(int *)(program + 8);
+      block = blocks + blockOffset;
+      liveSet = _BitSetClone(*(undefined4 *)(block + 0x18));
+      instructionIndex = *(int *)(blocks + blockOffset) + -1;
+      if (-1 < instructionIndex) {
+        instructionOffset = instructionIndex * 0x1c;
         do {
-          puVar8 = (uint *)(*(int *)(iVar6 + 4) + iVar7);
-          if (puVar8[5] == 0) {
-            uVar3 = puVar8[2];
+          instruction = (uint *)(*(int *)(block + 4) + instructionOffset);
+          if (instruction[5] == 0) {
+            destCount = instruction[2];
             loopIndex = 0;
-            if (uVar3 != 0) {
+            if (destCount != 0) {
               do {
-                puVar9 = *(undefined4 **)(loopIndex * 4 + puVar8[3]);
-                if (puVar9[6] == 0) {
-                  for (iVar2 = _BitSetFirstSetBit(bitSetCloneResult); iVar2 != -1;
-                      iVar2 = _BitSetNextSetBit(bitSetCloneResult,iVar2)) {
-                    iVar12 = *(int *)(param_1 + 0x10) + iVar2 * 0x2c;
-                    if (*(int *)(iVar12 + 0x18) == 0) {
-                      _BitSetSetEquals(puVar9[2],
-                                       *(undefined4 *)(*(int *)(param_1 + 0x10) + iVar2 * 0x2c));
-                      _BitSetSetEquals(*(undefined4 *)(iVar12 + 8),*puVar9);
+                reg = *(undefined4 **)(loopIndex * 4 + instruction[3]);
+                if (reg[6] == 0) {
+                  for (liveRegisterId = _BitSetFirstSetBit(liveSet); liveRegisterId != -1;
+                      liveRegisterId = _BitSetNextSetBit(liveSet,liveRegisterId)) {
+                    liveRegister = *(int *)(program + 0x10) + liveRegisterId * 0x2c;
+                    if (*(int *)(liveRegister + 0x18) == 0) {
+                      _BitSetSetEquals(reg[2],
+                                       *(undefined4 *)(*(int *)(program + 0x10) + liveRegisterId * 0x2c));
+                      _BitSetSetEquals(*(undefined4 *)(liveRegister + 8),*reg);
                     }
                   }
-                  uVar3 = puVar8[2];
+                  destCount = instruction[2];
                 }
                 loopIndex = loopIndex + 1;
-              } while (loopIndex < uVar3);
+              } while (loopIndex < destCount);
             }
             loopIndex = 0;
-            if (uVar3 != 0) {
+            if (destCount != 0) {
               do {
-                puVar9 = *(undefined4 **)(loopIndex * 4 + puVar8[3]);
-                if (puVar9[6] == 0) {
-                  _BitSetClearEquals(bitSetCloneResult,*puVar9);
-                  uVar3 = puVar8[2];
+                reg = *(undefined4 **)(loopIndex * 4 + instruction[3]);
+                if (reg[6] == 0) {
+                  _BitSetClearEquals(liveSet,*reg);
+                  destCount = instruction[2];
                 }
                 loopIndex = loopIndex + 1;
-              } while (loopIndex < uVar3);
+              } while (loopIndex < destCount);
             }
-            uVar3 = *puVar8;
+            sourceCount = *instruction;
             loopIndex = 0;
-            if (uVar3 != 0) {
+            if (sourceCount != 0) {
               do {
-                puVar9 = *(undefined4 **)(loopIndex * 4 + puVar8[1]);
-                if (puVar9[6] == 0) {
-                  _BitSetSetEquals(bitSetCloneResult,*puVar9);
-                  uVar3 = *puVar8;
+                reg = *(undefined4 **)(loopIndex * 4 + instruction[1]);
+                if (reg[6] == 0) {
+                  _BitSetSetEquals(liveSet,*reg);
+                  sourceCount = *instruction;
                 }
                 loopIndex = loopIndex + 1;
-              } while (loopIndex < uVar3);
+              } while (loopIndex < sourceCount);
             }
           }
-          iVar11 = iVar11 + -1;
-          iVar7 = iVar7 + -0x1c;
-        } while (-1 < iVar11);
+          instructionIndex = instructionIndex + -1;
+          instructionOffset = instructionOffset + -0x1c;
+        } while (-1 < instructionIndex);
       }
-      loopIndex2 = loopIndex2 + 1;
-      _BitSetFree(bitSetCloneResult);
-      iVar5 = iVar5 + 0x2c;
-    } while (loopIndex2 < *(uint *)(param_1 + 4));
+      blockIndex = blockIndex + 1;
+      _BitSetFree(liveSet);
+      blockOffset = blockOffset + 0x2c;
+    } while (blockIndex < *(uint *)(program + 4));
   }
   return;
 }
@@ -1124,116 +1138,118 @@ LAB_97c09608:
 }
 
 /* _DeadCodeEliminationSimple @ 0x97c096b4 (440 bytes) */
-int _DeadCodeEliminationSimple(param_1)
-  undefined4 *param_1;
+int _DeadCodeEliminationSimple(program)
+  undefined4 *program;
 {
-  uint loopIndex;
-  bool bVar1;
-  undefined4 bitSetCloneResult;
-  int bitSetEquals;
-  undefined4 *puVar4;
-  uint uVar5;
-  uint loopIndex2;
-  int iVar7;
-  int iVar8;
-  int iVar9;
-  int iVar10;
-  uint uVar11;
-  uint *puVar12;
+  uint sourceCount;
+  int instructionIndex;
+  uint registerIndex;
+  bool isDead;
+  undefined4 liveSet;
+  int isLive;
+  undefined4 *reg;
+  uint destCount;
+  uint blockIndex;
+  int blockOffset;
+  int block;
+  int instructionOffset;
+  int blocks;
+  uint destIndex;
+  uint *instruction;
   
-  loopIndex2 = 0;
-  if (param_1[1] != 0) {
-    iVar7 = 0;
+  blockIndex = 0;
+  if (program[1] != 0) {
+    blockOffset = 0;
     do {
-      iVar10 = param_1[2];
-      iVar8 = iVar10 + iVar7;
-      bitSetCloneResult = _BitSetClone(*(undefined4 *)(iVar8 + 0x18));
-      iVar10 = *(int *)(iVar10 + iVar7) + -1;
-      if (-1 < iVar10) {
-        iVar9 = iVar10 * 0x1c;
+      blocks = program[2];
+      block = blocks + blockOffset;
+      liveSet = _BitSetClone(*(undefined4 *)(block + 0x18));
+      instructionIndex = *(int *)(blocks + blockOffset) + -1;
+      if (-1 < instructionIndex) {
+        instructionOffset = instructionIndex * 0x1c;
         do {
-          puVar12 = (uint *)(*(int *)(iVar8 + 4) + iVar9);
-          if (puVar12[5] == 0) {
-            uVar5 = puVar12[2];
-            uVar11 = 0;
-            if (uVar5 == 0) {
-              bVar1 = puVar12[4] == 0;
+          instruction = (uint *)(*(int *)(block + 4) + instructionOffset);
+          if (instruction[5] == 0) {
+            destCount = instruction[2];
+            destIndex = 0;
+            if (destCount == 0) {
+              isDead = instruction[4] == 0;
 LAB_97c0978c:
-              if (bVar1) {
-                _PPStreamRemoveOperation(*param_1,puVar12[6]);
-                puVar12[5] = 1;
+              if (isDead) {
+                _PPStreamRemoveOperation(*program,instruction[6]);
+                instruction[5] = 1;
                 goto LAB_97c09828;
               }
             }
             else {
-              bVar1 = puVar12[4] == 0;
-              if (bVar1) {
+              isDead = instruction[4] == 0;
+              if (isDead) {
                 do {
-                  puVar4 = *(undefined4 **)(uVar11 * 4 + puVar12[3]);
-                  if (puVar4[6] == 0) {
-                    bitSetEquals = _BitSetGetEquals(bitSetCloneResult,*puVar4);
-                    if (bitSetEquals != 0) {
-                      bVar1 = false;
+                  reg = *(undefined4 **)(destIndex * 4 + instruction[3]);
+                  if (reg[6] == 0) {
+                    isLive = _BitSetGetEquals(liveSet,*reg);
+                    if (isLive != 0) {
+                      isDead = false;
                     }
-                    uVar5 = puVar12[2];
+                    destCount = instruction[2];
                   }
-                  uVar11 = uVar11 + 1;
-                  if (uVar5 <= uVar11) goto LAB_97c0978c;
-                } while (bVar1);
+                  destIndex = destIndex + 1;
+                  if (destCount <= destIndex) goto LAB_97c0978c;
+                } while (isDead);
               }
             }
-            loopIndex = 0;
-            if (uVar5 != 0) {
+            registerIndex = 0;
+            if (destCount != 0) {
               do {
-                puVar4 = *(undefined4 **)(loopIndex * 4 + puVar12[3]);
-                if (puVar4[6] == 0) {
-                  _BitSetClearEquals(bitSetCloneResult,*puVar4);
-                  uVar5 = puVar12[2];
+                reg = *(undefined4 **)(registerIndex * 4 + instruction[3]);
+                if (reg[6] == 0) {
+                  _BitSetClearEquals(liveSet,*reg);
+                  destCount = instruction[2];
                 }
-                loopIndex = loopIndex + 1;
-              } while (loopIndex < uVar5);
+                registerIndex = registerIndex + 1;
+              } while (registerIndex < destCount);
             }
-            uVar5 = *puVar12;
-            loopIndex = 0;
-            if (uVar5 != 0) {
+            sourceCount = *instruction;
+            registerIndex = 0;
+            if (sourceCount != 0) {
               do {
-                puVar4 = *(undefined4 **)(loopIndex * 4 + puVar12[1]);
-                if (puVar4[6] == 0) {
-                  _BitSetSetEquals(bitSetCloneResult,*puVar4);
-                  uVar5 = *puVar12;
+                reg = *(undefined4 **)(registerIndex * 4 + instruction[1]);
+                if (reg[6] == 0) {
+                  _BitSetSetEquals(liveSet,*reg);
+                  sourceCount = *instruction;
                 }
-                loopIndex = loopIndex + 1;
-              } while (loopIndex < uVar5);
+                registerIndex = registerIndex + 1;
+              } while (registerIndex < sourceCount);
             }
           }
 LAB_97c09828:
-          iVar10 = iVar10 + -1;
-          iVar9 = iVar9 + -0x1c;
-        } while (-1 < iVar10);
+          instructionIndex = instructionIndex + -1;
+          instructionOffset = instructionOffset + -0x1c;
+        } while (-1 < instructionIndex);
       }
-      loopIndex2 = loopIndex2 + 1;
-      _BitSetFree(bitSetCloneResult);
-      iVar7 = iVar7 + 0x2c;
-    } while (loopIndex2 < (uint)param_1[1]);
+      blockIndex = blockIndex + 1;
+      _BitSetFree(liveSet);
+      blockOffset = blockOffset + 0x2c;
+    } while (blockIndex < (uint)program[1]);
   }
   return;
 }
 
 /* _RegistersReInterfere @ 0x97c0986c (140 bytes) */
-int _RegistersReInterfere(param_1, param_2, param_3)
-  int param_1;
-  undefined4 *param_2;
-  undefined4 *param_3;
+int _RegistersReInterfere(program, mergedRegister, keptRegister)
+  int program;
+  undefined4 *mergedRegister;
+  undefined4 *keptRegister;
 {
-  int iVar1;
-  int iVar2;
+  int interferingId;
+  int interferingRegister;
   
-  for (iVar1 = _BitSetFirstSetBit(param_2[2]); iVar1 != -1;
-      iVar1 = _BitSetNextSetBit(param_2[2],iVar1)) {
-    iVar2 = *(int *)(param_1 + 0x10) + iVar1 * 0x2c;
-    if (*(int *)(iVar2 + 0x18) == 0) {
-      _BitSetClearEquals(*(undefined4 *)(iVar2 + 8),*param_2);
-      _BitSetSetEquals(*(undefined4 *)(iVar2 + 8),*param_3);
+  for (interferingId = _BitSetFirstSetBit(mergedRegister[2]); interferingId != -1;
+      interferingId = _BitSetNextSetBit(mergedRegister[2],interferingId)) {
+    interferingRegister = *(int *)(program + 0x10) + interferingId * 0x2c;
+    if (*(int *)(interferingRegister + 0x18) == 0) {
+      _BitSetClearEquals(*(undefined4 *)(interferingRegister + 8),*mergedRegister);
+      _BitSetSetEquals(*(undefined4 *)(interferingRegister + 8),*keptRegister);
     }
   }
   return;
@@ -1464,140 +1480,140 @@ LAB_97c09d98:
 }
 
 /* _RegisterIsMergeable @ 0x97c09db8 (40 bytes) */
-int _RegisterIsMergeable(param_1)
-  int param_1;
+int _RegisterIsMergeable(reg)
+  int reg;
 {
-  undefined4 uVar1;
+  undefined4 isMergeable;
   
-  uVar1 = 0;
-  if ((*(int *)(param_1 + 0x14) == 1) && (*(int *)(param_1 + 0x18) == 0)) {
-    uVar1 = 1;
+  isMergeable = 0;
+  if ((*(int *)(reg + 0x14) == 1) && (*(int *)(reg + 0x18) == 0)) {
+    isMergeable = 1;
   }
-  return uVar1;
+  return isMergeable;
 }
 
 /* _RegisterCanMerge @ 0x97c09de0 (168 bytes) */
-int _RegisterCanMerge(param_1, param_2)
-  int param_1;
-  undefined4 *param_2;
+int _RegisterCanMerge(registerA, registerB)
+  int registerA;
+  undefined4 *registerB;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int testResult;
+  undefined4 canMerge;
   
-  uVar2 = 0;
-  if (((((*(int *)(param_1 + 0x10) == param_2[4]) && (*(int *)(param_1 + 0xc) == param_2[3])) &&
-       (iVar1 = ((int (*)())_RegisterIsMergeable)(param_1), iVar1 != 0)) &&
-      ((iVar1 = ((int (*)())_RegisterIsMergeable)(param_2), iVar1 != 0 &&
-       ((iVar1 = ((int (*)())_RegisterIsFixed)(param_1), iVar1 == 0 ||
-        (iVar1 = ((int (*)())_RegisterIsFixed)(param_2), iVar1 == 0)))))) &&
-     (iVar1 = _BitSetGetEquals(*(undefined4 *)(param_1 + 8),*param_2), iVar1 == 0)) {
-    uVar2 = 1;
+  canMerge = 0;
+  if (((((*(int *)(registerA + 0x10) == registerB[4]) && (*(int *)(registerA + 0xc) == registerB[3])) &&
+       (testResult = ((int (*)())_RegisterIsMergeable)(registerA), testResult != 0)) &&
+      ((testResult = ((int (*)())_RegisterIsMergeable)(registerB), testResult != 0 &&
+       ((testResult = ((int (*)())_RegisterIsFixed)(registerA), testResult == 0 ||
+        (testResult = ((int (*)())_RegisterIsFixed)(registerB), testResult == 0)))))) &&
+     (testResult = _BitSetGetEquals(*(undefined4 *)(registerA + 8),*registerB), testResult == 0)) {
+    canMerge = 1;
   }
-  return uVar2;
+  return canMerge;
 }
 
 /* _RegisterIsFixed @ 0x97c09e88 (40 bytes) */
-int _RegisterIsFixed(param_1)
-  int param_1;
+int _RegisterIsFixed(reg)
+  int reg;
 {
-  undefined4 uVar1;
+  undefined4 isFixed;
   
-  uVar1 = 0;
-  if ((*(int *)(param_1 + 0x1c) != 0) || (*(int *)(param_1 + 0x20) != 0)) {
-    uVar1 = 1;
+  isFixed = 0;
+  if ((*(int *)(reg + 0x1c) != 0) || (*(int *)(reg + 0x20) != 0)) {
+    isFixed = 1;
   }
-  return uVar1;
+  return isFixed;
 }
 
 /* _RegisterVectorCanMerge @ 0x97c09eb0 (136 bytes) */
-int _RegisterVectorCanMerge(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 *param_2;
+int _RegisterVectorCanMerge(vectorA, vectorB)
+  undefined4 *vectorA;
+  undefined4 *vectorB;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int componentCanMerge;
+  undefined4 canMerge;
   
-  uVar2 = 0;
-  iVar1 = ((int (*)())_RegisterCanMerge)(*param_1,*param_2);
-  if ((((iVar1 != 0) && (iVar1 = ((int (*)())_RegisterCanMerge)(param_1[1],param_2[1]), iVar1 != 0)) &&
-      (iVar1 = ((int (*)())_RegisterCanMerge)(param_1[2],param_2[2]), iVar1 != 0)) &&
-     (iVar1 = ((int (*)())_RegisterCanMerge)(param_1[3],param_2[3]), iVar1 != 0)) {
-    uVar2 = 1;
+  canMerge = 0;
+  componentCanMerge = ((int (*)())_RegisterCanMerge)(*vectorA,*vectorB);
+  if ((((componentCanMerge != 0) && (componentCanMerge = ((int (*)())_RegisterCanMerge)(vectorA[1],vectorB[1]), componentCanMerge != 0)) &&
+      (componentCanMerge = ((int (*)())_RegisterCanMerge)(vectorA[2],vectorB[2]), componentCanMerge != 0)) &&
+     (componentCanMerge = ((int (*)())_RegisterCanMerge)(vectorA[3],vectorB[3]), componentCanMerge != 0)) {
+    canMerge = 1;
   }
-  return uVar2;
+  return canMerge;
 }
 
 /* _RegisterVectorIsFixed @ 0x97c09f38 (116 bytes) */
-int _RegisterVectorIsFixed(param_1)
-  undefined4 *param_1;
+int _RegisterVectorIsFixed(vector)
+  undefined4 *vector;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int componentIsFixed;
+  undefined4 isFixed;
   
-  uVar2 = 0;
-  iVar1 = ((int (*)())_RegisterIsFixed)(*param_1);
-  if ((((iVar1 != 0) || (iVar1 = ((int (*)())_RegisterIsFixed)(param_1[1]), iVar1 != 0)) ||
-      (iVar1 = ((int (*)())_RegisterIsFixed)(param_1[2]), iVar1 != 0)) ||
-     (iVar1 = ((int (*)())_RegisterIsFixed)(param_1[3]), iVar1 != 0)) {
-    uVar2 = 1;
+  isFixed = 0;
+  componentIsFixed = ((int (*)())_RegisterIsFixed)(*vector);
+  if ((((componentIsFixed != 0) || (componentIsFixed = ((int (*)())_RegisterIsFixed)(vector[1]), componentIsFixed != 0)) ||
+      (componentIsFixed = ((int (*)())_RegisterIsFixed)(vector[2]), componentIsFixed != 0)) ||
+     (componentIsFixed = ((int (*)())_RegisterIsFixed)(vector[3]), componentIsFixed != 0)) {
+    isFixed = 1;
   }
-  return uVar2;
+  return isFixed;
 }
 
 /* _RegisterAdd @ 0x97c09fac (232 bytes) */
-int _RegisterAdd(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
-  undefined4 param_6;
+int _RegisterAdd(program, streamChunk, bank, bankFirstRecord, streamRegisterNumber, typeBits)
+  int program;
+  undefined4 streamChunk;
+  undefined4 bank;
+  int bankFirstRecord;
+  int streamRegisterNumber;
+  undefined4 typeBits;
 {
-  int allocation;
-  int iVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  int grownRegisters;
+  int component;
+  int record;
+  int recordOffset;
+  int firstRecordIndex;
+  int componentsLeft;
   
-  iVar4 = param_4 + param_5 * 4;
-  if (*(uint *)(param_1 + 0xc) < iVar4 + 4U) {
-    allocation = _realloc(*(undefined4 *)(param_1 + 0x10),iVar4 * 0x2c + 0xb0);
-    *(int *)(param_1 + 0x10) = allocation;
-    _memset(*(int *)(param_1 + 0xc) * 0x2c + allocation,0,(iVar4 - *(int *)(param_1 + 0xc)) * 0x2c + 0xb0
+  firstRecordIndex = bankFirstRecord + streamRegisterNumber * 4;
+  if (*(uint *)(program + 0xc) < firstRecordIndex + 4U) {
+    grownRegisters = _realloc(*(undefined4 *)(program + 0x10),firstRecordIndex * 0x2c + 0xb0);
+    *(int *)(program + 0x10) = grownRegisters;
+    _memset(*(int *)(program + 0xc) * 0x2c + grownRegisters,0,(firstRecordIndex - *(int *)(program + 0xc)) * 0x2c + 0xb0
            );
-    *(uint *)(param_1 + 0xc) = iVar4 + 4U;
+    *(uint *)(program + 0xc) = firstRecordIndex + 4U;
   }
-  iVar3 = iVar4 * 0x2c;
-  iVar5 = 4;
-  iVar1 = 0;
+  recordOffset = firstRecordIndex * 0x2c;
+  componentsLeft = 4;
+  component = 0;
   do {
-    iVar2 = *(int *)(param_1 + 0x10) + iVar3;
-    *(int *)(*(int *)(param_1 + 0x10) + iVar3) = iVar4 + iVar1;
-    *(int *)(iVar2 + 0xc) = iVar1;
-    iVar3 = iVar3 + 0x2c;
-    *(undefined4 *)(iVar2 + 0x28) = param_2;
-    iVar1 = iVar1 + 1;
-    *(undefined4 *)(iVar2 + 8) = 0;
-    *(undefined4 *)(iVar2 + 0x14) = param_3;
-    *(undefined4 *)(iVar2 + 0x10) = param_6;
-    *(int *)(iVar2 + 4) = param_5;
-    *(undefined4 *)(iVar2 + 0x18) = 0;
-    *(undefined4 *)(iVar2 + 0x1c) = 0;
-    *(undefined4 *)(iVar2 + 0x20) = 0;
-    iVar5 = iVar5 + -1;
-  } while (iVar5 != 0);
+    record = *(int *)(program + 0x10) + recordOffset;
+    *(int *)(*(int *)(program + 0x10) + recordOffset) = firstRecordIndex + component;
+    *(int *)(record + 0xc) = component;
+    recordOffset = recordOffset + 0x2c;
+    *(undefined4 *)(record + 0x28) = streamChunk;
+    component = component + 1;
+    *(undefined4 *)(record + 8) = 0;
+    *(undefined4 *)(record + 0x14) = bank;
+    *(undefined4 *)(record + 0x10) = typeBits;
+    *(int *)(record + 4) = streamRegisterNumber;
+    *(undefined4 *)(record + 0x18) = 0;
+    *(undefined4 *)(record + 0x1c) = 0;
+    *(undefined4 *)(record + 0x20) = 0;
+    componentsLeft = componentsLeft + -1;
+  } while (componentsLeft != 0);
   return 0;
 }
 
 /* _RegisterFree @ 0x97c0a094 (16 bytes) */
-int _RegisterFree(param_1)
-  int param_1;
+int _RegisterFree(reg)
+  int reg;
 {
-  if (*(int *)(param_1 + 8) == 0) {
+  if (*(int *)(reg + 8) == 0) {
     return;
   }
-  return _BitSetFree(*(int *)(param_1 + 8));
+  return _BitSetFree(*(int *)(reg + 8));
 }
 
 /* _InstructionAdd @ 0x97c0a0a4 (1324 bytes) */
@@ -1811,273 +1827,276 @@ LAB_97c0a29c:
 }
 
 /* _InstructionFree @ 0x97c0a65c (88 bytes) */
-int _InstructionFree(param_1)
-  int param_1;
+int _InstructionFree(instruction)
+  int instruction;
 {
-  if (*(int *)(param_1 + 4) != 0) {
-    _free(*(int *)(param_1 + 4));
+  if (*(int *)(instruction + 4) != 0) {
+    _free(*(int *)(instruction + 4));
   }
-  if (*(int *)(param_1 + 0xc) != 0) {
-    _free(*(int *)(param_1 + 0xc));
+  if (*(int *)(instruction + 0xc) != 0) {
+    _free(*(int *)(instruction + 0xc));
     return;
   }
   return;
 }
 
 /* _BlockAdd @ 0x97c0a6b4 (160 bytes) */
-int _BlockAdd(param_1)
-  int param_1;
+int _BlockAdd(program)
+  int program;
 {
-  int allocation2;
-  int iVar1;
-  undefined4 allocation;
+  int blocksEnd;
+  int grownBlocks;
+  int newBlockCount;
+  undefined4 newArray;
   
-  iVar1 = *(int *)(param_1 + 4) + 1;
-  *(int *)(param_1 + 4) = iVar1;
-  allocation2 = _realloc(*(undefined4 *)(param_1 + 8),iVar1 * 0x2c);
-  *(int *)(param_1 + 8) = allocation2;
-  iVar1 = allocation2 + *(int *)(param_1 + 4) * 0x2c;
-  *(undefined4 *)(iVar1 + -0x2c) = 0;
-  allocation = _malloc(0x1c);
-  *(undefined4 *)(iVar1 + -0x24) = 0;
-  *(undefined4 *)(iVar1 + -0x28) = allocation;
-  allocation = _malloc(4);
-  *(undefined4 *)(iVar1 + -0x1c) = 0;
-  *(undefined4 *)(iVar1 + -0x20) = allocation;
-  allocation = _malloc(4);
-  *(undefined4 *)(iVar1 + -4) = 0;
-  *(undefined4 *)(iVar1 + -0x18) = allocation;
-  *(undefined4 *)(iVar1 + -0x14) = 0;
-  *(undefined4 *)(iVar1 + -0x10) = 0;
-  *(undefined4 *)(iVar1 + -0xc) = 0;
-  *(undefined4 *)(iVar1 + -8) = 0;
-  return iVar1 + -0x2c;
+  newBlockCount = *(int *)(program + 4) + 1;
+  *(int *)(program + 4) = newBlockCount;
+  grownBlocks = _realloc(*(undefined4 *)(program + 8),newBlockCount * 0x2c);
+  *(int *)(program + 8) = grownBlocks;
+  blocksEnd = grownBlocks + *(int *)(program + 4) * 0x2c;
+  *(undefined4 *)(blocksEnd + -0x2c) = 0;
+  newArray = _malloc(0x1c);
+  *(undefined4 *)(blocksEnd + -0x24) = 0;
+  *(undefined4 *)(blocksEnd + -0x28) = newArray;
+  newArray = _malloc(4);
+  *(undefined4 *)(blocksEnd + -0x1c) = 0;
+  *(undefined4 *)(blocksEnd + -0x20) = newArray;
+  newArray = _malloc(4);
+  *(undefined4 *)(blocksEnd + -4) = 0;
+  *(undefined4 *)(blocksEnd + -0x18) = newArray;
+  *(undefined4 *)(blocksEnd + -0x14) = 0;
+  *(undefined4 *)(blocksEnd + -0x10) = 0;
+  *(undefined4 *)(blocksEnd + -0xc) = 0;
+  *(undefined4 *)(blocksEnd + -8) = 0;
+  return blocksEnd + -0x2c;
 }
 
 /* _BlockFree @ 0x97c0a754 (236 bytes) */
-int _BlockFree(param_1)
-  uint *param_1;
+int _BlockFree(block)
+  uint *block;
 {
-  uint loopIndex;
-  int iVar2;
+  uint instructionIndex;
+  int instructionOffset;
   
-  loopIndex = 0;
-  if (*param_1 != 0) {
-    iVar2 = 0;
+  instructionIndex = 0;
+  if (*block != 0) {
+    instructionOffset = 0;
     do {
-      loopIndex = loopIndex + 1;
-      ((int (*)())_InstructionFree)(param_1[1] + iVar2);
-      iVar2 = iVar2 + 0x1c;
-    } while (loopIndex < *param_1);
+      instructionIndex = instructionIndex + 1;
+      ((int (*)())_InstructionFree)(block[1] + instructionOffset);
+      instructionOffset = instructionOffset + 0x1c;
+    } while (instructionIndex < *block);
   }
-  if (param_1[1] != 0) {
-    _free(param_1[1]);
+  if (block[1] != 0) {
+    _free(block[1]);
   }
-  if (param_1[3] != 0) {
-    _free(param_1[3]);
+  if (block[3] != 0) {
+    _free(block[3]);
   }
-  if (param_1[5] != 0) {
-    _free(param_1[5]);
+  if (block[5] != 0) {
+    _free(block[5]);
   }
-  if (param_1[6] != 0) {
-    _BitSetFree(param_1[6]);
+  if (block[6] != 0) {
+    _BitSetFree(block[6]);
   }
-  if (param_1[7] != 0) {
-    _BitSetFree(param_1[7]);
+  if (block[7] != 0) {
+    _BitSetFree(block[7]);
   }
-  if (param_1[8] != 0) {
-    _BitSetFree(param_1[8]);
+  if (block[8] != 0) {
+    _BitSetFree(block[8]);
   }
-  if (param_1[9] != 0) {
-    _BitSetFree(param_1[9]);
+  if (block[9] != 0) {
+    _BitSetFree(block[9]);
   }
-  if (param_1[10] != 0) {
-    _BitSetFree(param_1[10]);
+  if (block[10] != 0) {
+    _BitSetFree(block[10]);
     return;
   }
   return;
 }
 
 /* _RegistersInitialize @ 0x97c0a840 (104 bytes) */
-int _RegistersInitialize(param_1)
-  int param_1;
+int _RegistersInitialize(program)
+  int program;
 {
-  uint uVar1;
+  int record;
+  int registers;
+  uint registerCount;
   undefined4 bitSetNewResult;
-  int iVar3;
-  int iVar4;
-  uint loopIndex;
+  int recordOffset;
+  uint recordIndex;
   
-  loopIndex = 0;
-  uVar1 = *(uint *)(param_1 + 0xc);
-  if (uVar1 != 0) {
-    iVar3 = 0;
+  recordIndex = 0;
+  registerCount = *(uint *)(program + 0xc);
+  if (registerCount != 0) {
+    recordOffset = 0;
     do {
-      iVar4 = *(int *)(param_1 + 0x10);
-      bitSetNewResult = _BitSetNew(uVar1);
-      iVar4 = iVar4 + iVar3;
-      iVar3 = iVar3 + 0x2c;
-      *(undefined4 *)(iVar4 + 8) = bitSetNewResult;
-      _BitSetSetEquals(bitSetNewResult,loopIndex);
-      uVar1 = *(uint *)(param_1 + 0xc);
-      loopIndex = loopIndex + 1;
-    } while (loopIndex < uVar1);
+      registers = *(int *)(program + 0x10);
+      bitSetNewResult = _BitSetNew(registerCount);
+      record = registers + recordOffset;
+      recordOffset = recordOffset + 0x2c;
+      *(undefined4 *)(record + 8) = bitSetNewResult;
+      _BitSetSetEquals(bitSetNewResult,recordIndex);
+      registerCount = *(uint *)(program + 0xc);
+      recordIndex = recordIndex + 1;
+    } while (recordIndex < registerCount);
   }
   return;
 }
 
 /* _Registerify @ 0x97c0a8a8 (424 bytes) */
-int _Registerify(param_1)
-  int *param_1;
+int _Registerify(program)
+  int *program;
 {
-  int iVar1;
+  int addressChunk;
+  int registerCount;
   undefined4 registersInitializeResult;
-  int iVar3;
-  int iVar4;
+  int stream;
+  int chunk;
   
-  iVar1 = param_1[3];
-  iVar3 = *param_1;
-  param_1[7] = iVar1;
-  iVar4 = **(int **)(iVar3 + 0x1c);
-  if (iVar4 != 0) {
+  registerCount = program[3];
+  stream = *program;
+  program[7] = registerCount;
+  chunk = **(int **)(stream + 0x1c);
+  if (chunk != 0) {
     do {
-      ((int (*)())_RegisterAdd)(param_1,iVar4,3,param_1[7],(uint)*(ushort *)(iVar4 + 0x12),
-                   *(uint *)(iVar4 + 0xc) >> 0x1a & 7);
-      iVar4 = *(int *)(iVar4 + 8);
-    } while (iVar4 != 0);
-    iVar1 = param_1[3];
-    iVar3 = *param_1;
+      ((int (*)())_RegisterAdd)(program,chunk,3,program[7],(uint)*(ushort *)(chunk + 0x12),
+                   *(uint *)(chunk + 0xc) >> 0x1a & 7);
+      chunk = *(int *)(chunk + 8);
+    } while (chunk != 0);
+    registerCount = program[3];
+    stream = *program;
   }
-  param_1[0xc] = iVar1;
-  param_1[8] = iVar1;
-  iVar4 = **(int **)(iVar3 + 4);
-  if (iVar4 != 0) {
+  program[0xc] = registerCount;
+  program[8] = registerCount;
+  chunk = **(int **)(stream + 4);
+  if (chunk != 0) {
     do {
-      ((int (*)())_RegisterAdd)(param_1,iVar4,1,param_1[8],(uint)*(ushort *)(iVar4 + 0x12),
-                   *(uint *)(iVar4 + 0xc) >> 0x1a & 7);
-      iVar4 = *(int *)(iVar4 + 8);
-    } while (iVar4 != 0);
-    iVar1 = param_1[3];
-    iVar3 = *param_1;
+      ((int (*)())_RegisterAdd)(program,chunk,1,program[8],(uint)*(ushort *)(chunk + 0x12),
+                   *(uint *)(chunk + 0xc) >> 0x1a & 7);
+      chunk = *(int *)(chunk + 8);
+    } while (chunk != 0);
+    registerCount = program[3];
+    stream = *program;
   }
-  param_1[0xd] = iVar1;
-  param_1[9] = iVar1;
-  iVar4 = **(int **)(iVar3 + 0x18);
-  if (iVar4 != 0) {
+  program[0xd] = registerCount;
+  program[9] = registerCount;
+  chunk = **(int **)(stream + 0x18);
+  if (chunk != 0) {
     do {
-      ((int (*)())_RegisterAdd)(param_1,iVar4,0,param_1[9],(uint)*(ushort *)(iVar4 + 0x12),
-                   *(uint *)(iVar4 + 0xc) >> 0x1a & 7);
-      iVar4 = *(int *)(iVar4 + 8);
-    } while (iVar4 != 0);
-    iVar1 = param_1[3];
-    iVar3 = *param_1;
+      ((int (*)())_RegisterAdd)(program,chunk,0,program[9],(uint)*(ushort *)(chunk + 0x12),
+                   *(uint *)(chunk + 0xc) >> 0x1a & 7);
+      chunk = *(int *)(chunk + 8);
+    } while (chunk != 0);
+    registerCount = program[3];
+    stream = *program;
   }
-  param_1[0xe] = iVar1;
-  param_1[10] = iVar1;
-  iVar4 = **(int **)(iVar3 + 0x10);
-  if (iVar4 != 0) {
+  program[0xe] = registerCount;
+  program[10] = registerCount;
+  chunk = **(int **)(stream + 0x10);
+  if (chunk != 0) {
     do {
-      ((int (*)())_RegisterAdd)(param_1,iVar4,2,param_1[10],(uint)*(ushort *)(iVar4 + 0x12),
-                   *(uint *)(iVar4 + 0xc) >> 0x1a & 7);
-      iVar4 = *(int *)(iVar4 + 8);
-    } while (iVar4 != 0);
-    iVar1 = param_1[3];
-    iVar3 = *param_1;
+      ((int (*)())_RegisterAdd)(program,chunk,2,program[10],(uint)*(ushort *)(chunk + 0x12),
+                   *(uint *)(chunk + 0xc) >> 0x1a & 7);
+      chunk = *(int *)(chunk + 8);
+    } while (chunk != 0);
+    registerCount = program[3];
+    stream = *program;
   }
-  param_1[0xf] = iVar1;
-  param_1[0xb] = iVar1;
-  iVar3 = **(int **)(iVar3 + 0xc);
-  if (iVar3 != 0) {
+  program[0xf] = registerCount;
+  program[0xb] = registerCount;
+  addressChunk = **(int **)(stream + 0xc);
+  if (addressChunk != 0) {
     do {
-      ((int (*)())_RegisterAdd)(param_1,iVar3,4,param_1[0xb],*(undefined4 *)(iVar3 + 0xc),3);
-      iVar3 = *(int *)(iVar3 + 8);
-    } while (iVar3 != 0);
-    iVar1 = param_1[3];
+      ((int (*)())_RegisterAdd)(program,addressChunk,4,program[0xb],*(undefined4 *)(addressChunk + 0xc),3);
+      addressChunk = *(int *)(addressChunk + 8);
+    } while (addressChunk != 0);
+    registerCount = program[3];
   }
-  param_1[0x10] = iVar1;
-  registersInitializeResult = ((int (*)())_RegistersInitialize)(param_1);
+  program[0x10] = registerCount;
+  registersInitializeResult = ((int (*)())_RegistersInitialize)(program);
   return registersInitializeResult;
 }
 
 /* _RegistersFree @ 0x97c0aa50 (124 bytes) */
-int _RegistersFree(param_1)
-  int param_1;
+int _RegistersFree(program)
+  int program;
 {
-  int iVar1;
-  uint loopIndex;
-  int iVar3;
+  int record;
+  uint recordIndex;
+  int recordOffset;
   
-  loopIndex = 0;
-  if (*(int *)(param_1 + 0xc) != 0) {
-    iVar3 = 0;
+  recordIndex = 0;
+  if (*(int *)(program + 0xc) != 0) {
+    recordOffset = 0;
     do {
-      loopIndex = loopIndex + 1;
-      iVar1 = *(int *)(param_1 + 0x10) + iVar3;
-      iVar3 = iVar3 + 0x2c;
-      ((int (*)())_RegisterFree)(iVar1);
-    } while (loopIndex < *(uint *)(param_1 + 0xc));
+      recordIndex = recordIndex + 1;
+      record = *(int *)(program + 0x10) + recordOffset;
+      recordOffset = recordOffset + 0x2c;
+      ((int (*)())_RegisterFree)(record);
+    } while (recordIndex < *(uint *)(program + 0xc));
   }
-  if (*(int *)(param_1 + 0x10) != 0) {
-    _free(*(int *)(param_1 + 0x10));
+  if (*(int *)(program + 0x10) != 0) {
+    _free(*(int *)(program + 0x10));
     return;
   }
   return;
 }
 
 /* _GetOrAddBlock @ 0x97c0aacc (148 bytes) */
-int _GetOrAddBlock(param_1, param_2)
-  int param_1;
-  int param_2;
+int _GetOrAddBlock(program, labelIndex)
+  int program;
+  int labelIndex;
 {
-  int iVar1;
-  int allocation;
+  int slotOffset;
+  int grownBlockByLabel;
   undefined4 blockAddResult;
   
-  iVar1 = param_2 * 4;
-  if (*(uint *)(param_1 + 0x14) < param_2 + 1U) {
-    allocation = _realloc(*(undefined4 *)(param_1 + 0x18),iVar1 + 4);
-    *(int *)(param_1 + 0x18) = allocation;
-    _memset(*(int *)(param_1 + 0x14) * 4 + allocation,0,(param_2 - *(int *)(param_1 + 0x14)) * 4 + 4);
-    *(uint *)(param_1 + 0x14) = param_2 + 1U;
+  slotOffset = labelIndex * 4;
+  if (*(uint *)(program + 0x14) < labelIndex + 1U) {
+    grownBlockByLabel = _realloc(*(undefined4 *)(program + 0x18),slotOffset + 4);
+    *(int *)(program + 0x18) = grownBlockByLabel;
+    _memset(*(int *)(program + 0x14) * 4 + grownBlockByLabel,0,(labelIndex - *(int *)(program + 0x14)) * 4 + 4);
+    *(uint *)(program + 0x14) = labelIndex + 1U;
   }
-  if (*(int *)(iVar1 + *(int *)(param_1 + 0x18)) == 0) {
-    blockAddResult = ((int (*)())_BlockAdd)(param_1);
-    *(undefined4 *)(iVar1 + *(int *)(param_1 + 0x18)) = blockAddResult;
+  if (*(int *)(slotOffset + *(int *)(program + 0x18)) == 0) {
+    blockAddResult = ((int (*)())_BlockAdd)(program);
+    *(undefined4 *)(slotOffset + *(int *)(program + 0x18)) = blockAddResult;
   }
   return;
 }
 
 /* _GetBlockFrom @ 0x97c0ab60 (84 bytes) */
-int _GetBlockFrom(param_1, param_2, param_3)
-  int param_1;
-  uint param_2;
-  int *param_3;
+int _GetBlockFrom(program, labelIndex, nextBlockIndex)
+  int program;
+  uint labelIndex;
+  int *nextBlockIndex;
 {
-  int iVar1;
-  int iVar2;
+  int slotOffset;
+  int blockByLabel;
   
-  if (*(uint *)(param_1 + 0x14) <= param_2) {
+  if (*(uint *)(program + 0x14) <= labelIndex) {
     return 0;
   }
-  iVar2 = *(int *)(param_1 + 0x18);
-  iVar1 = param_2 * 4;
-  if (*(int *)(iVar1 + iVar2) == 0) {
-    *(int *)(iVar1 + iVar2) = *(int *)(param_1 + 8) + *param_3 * 0x2c;
-    *param_3 = *param_3 + 1;
-    iVar2 = *(int *)(param_1 + 0x18);
+  blockByLabel = *(int *)(program + 0x18);
+  slotOffset = labelIndex * 4;
+  if (*(int *)(slotOffset + blockByLabel) == 0) {
+    *(int *)(slotOffset + blockByLabel) = *(int *)(program + 8) + *nextBlockIndex * 0x2c;
+    *nextBlockIndex = *nextBlockIndex + 1;
+    blockByLabel = *(int *)(program + 0x18);
   }
-  return *(undefined4 *)(iVar1 + iVar2);
+  return *(undefined4 *)(slotOffset + blockByLabel);
 }
 
 /* _GetBlock @ 0x97c0abb4 (36 bytes) */
-int _GetBlock(param_1, param_2)
-  int param_1;
-  uint param_2;
+int _GetBlock(program, labelIndex)
+  int program;
+  uint labelIndex;
 {
-  if (*(uint *)(param_1 + 0x14) <= param_2) {
+  if (*(uint *)(program + 0x14) <= labelIndex) {
     return 0;
   }
-  return *(undefined4 *)(param_2 * 4 + *(int *)(param_1 + 0x18));
+  return *(undefined4 *)(labelIndex * 4 + *(int *)(program + 0x18));
 }
 
 /* _Blockify @ 0x97c0abd8 (752 bytes) */
@@ -2232,102 +2251,102 @@ LAB_97c0b02c:
 }
 
 /* _BlockAddSuccessor @ 0x97c0b054 (144 bytes) */
-int _BlockAddSuccessor(param_1, param_2)
-  int param_1;
-  int param_2;
+int _BlockAddSuccessor(fromBlock, toBlock)
+  int fromBlock;
+  int toBlock;
 {
-  int allocation;
-  int iVar1;
+  int grownList;
+  int newCount;
   
-  if ((param_1 != 0) && (param_2 != 0)) {
-    iVar1 = *(int *)(param_2 + 8) + 1;
-    *(int *)(param_2 + 8) = iVar1;
-    allocation = _realloc(*(undefined4 *)(param_2 + 0xc),iVar1 * 4);
-    *(int *)(param_2 + 0xc) = allocation;
-    *(int *)(allocation + *(int *)(param_2 + 8) * 4 + -4) = param_1;
-    iVar1 = *(int *)(param_1 + 0x10) + 1;
-    *(int *)(param_1 + 0x10) = iVar1;
-    allocation = _realloc(*(undefined4 *)(param_1 + 0x14),iVar1 * 4);
-    *(int *)(param_1 + 0x14) = allocation;
-    *(int *)(allocation + *(int *)(param_1 + 0x10) * 4 + -4) = param_2;
+  if ((fromBlock != 0) && (toBlock != 0)) {
+    newCount = *(int *)(toBlock + 8) + 1;
+    *(int *)(toBlock + 8) = newCount;
+    grownList = _realloc(*(undefined4 *)(toBlock + 0xc),newCount * 4);
+    *(int *)(toBlock + 0xc) = grownList;
+    *(int *)(grownList + *(int *)(toBlock + 8) * 4 + -4) = fromBlock;
+    newCount = *(int *)(fromBlock + 0x10) + 1;
+    *(int *)(fromBlock + 0x10) = newCount;
+    grownList = _realloc(*(undefined4 *)(fromBlock + 0x14),newCount * 4);
+    *(int *)(fromBlock + 0x14) = grownList;
+    *(int *)(grownList + *(int *)(fromBlock + 0x10) * 4 + -4) = toBlock;
   }
   return;
 }
 
 /* _BlockAddPredecessor @ 0x97c0b0e4 (16 bytes) */
-int _BlockAddPredecessor(param_1, param_2)
-  undefined4 param_1;
-  undefined4 param_2;
+int _BlockAddPredecessor(block, predecessorBlock)
+  undefined4 block;
+  undefined4 predecessorBlock;
 {
-  return ((int (*)())_BlockAddSuccessor)(param_2,param_1);
+  return ((int (*)())_BlockAddSuccessor)(predecessorBlock,block);
 }
 
 /* _BlocksFree @ 0x97c0b0f4 (124 bytes) */
-int _BlocksFree(param_1)
-  int param_1;
+int _BlocksFree(program)
+  int program;
 {
-  int iVar1;
-  uint loopIndex;
-  int iVar3;
+  int block;
+  uint blockIndex;
+  int blockOffset;
   
-  loopIndex = 0;
-  if (*(int *)(param_1 + 4) != 0) {
-    iVar3 = 0;
+  blockIndex = 0;
+  if (*(int *)(program + 4) != 0) {
+    blockOffset = 0;
     do {
-      loopIndex = loopIndex + 1;
-      iVar1 = *(int *)(param_1 + 8) + iVar3;
-      iVar3 = iVar3 + 0x2c;
-      ((int (*)())_BlockFree)(iVar1);
-    } while (loopIndex < *(uint *)(param_1 + 4));
+      blockIndex = blockIndex + 1;
+      block = *(int *)(program + 8) + blockOffset;
+      blockOffset = blockOffset + 0x2c;
+      ((int (*)())_BlockFree)(block);
+    } while (blockIndex < *(uint *)(program + 4));
   }
-  if (*(int *)(param_1 + 8) != 0) {
-    _free(*(int *)(param_1 + 8));
+  if (*(int *)(program + 8) != 0) {
+    _free(*(int *)(program + 8));
     return;
   }
   return;
 }
 
 /* _ProgramNew @ 0x97c0b170 (152 bytes) */
-int _ProgramNew(param_1)
-  undefined4 param_1;
+int _ProgramNew(stream)
+  undefined4 stream;
 {
-  undefined4 *allocation;
-  undefined4 allocation2;
+  undefined4 *program;
+  undefined4 newArray;
   
-  allocation = (undefined4 *)_malloc(0x44);
-  *allocation = param_1;
-  allocation[1] = 0;
-  allocation2 = _malloc(0x2c);
-  allocation[2] = allocation2;
-  allocation[3] = 0;
-  allocation2 = _malloc(0x2c);
-  allocation[4] = allocation2;
-  allocation[5] = 0;
-  allocation2 = _malloc(4);
-  allocation[6] = allocation2;
-  allocation[0x10] = 0;
-  allocation[7] = 0;
-  allocation[8] = 0;
-  allocation[9] = 0;
-  allocation[10] = 0;
-  allocation[0xb] = 0;
-  allocation[0xc] = 0;
-  allocation[0xd] = 0;
-  allocation[0xe] = 0;
-  allocation[0xf] = 0;
-  return allocation;
+  program = (undefined4 *)_malloc(0x44);
+  *program = stream;
+  program[1] = 0;
+  newArray = _malloc(0x2c);
+  program[2] = newArray;
+  program[3] = 0;
+  newArray = _malloc(0x2c);
+  program[4] = newArray;
+  program[5] = 0;
+  newArray = _malloc(4);
+  program[6] = newArray;
+  program[0x10] = 0;
+  program[7] = 0;
+  program[8] = 0;
+  program[9] = 0;
+  program[10] = 0;
+  program[0xb] = 0;
+  program[0xc] = 0;
+  program[0xd] = 0;
+  program[0xe] = 0;
+  program[0xf] = 0;
+  return program;
 }
 
 /* _ProgramFree @ 0x97c0b208 (76 bytes) */
-int _ProgramFree(param_1)
-  int param_1;
+int _ProgramFree(program)
+  int program;
 {
-  if (*(int *)(param_1 + 0x18) != 0) {
-    _free(*(int *)(param_1 + 0x18));
+  if (*(int *)(program + 0x18) != 0) {
+    _free(*(int *)(program + 0x18));
   }
-  ((int (*)())_RegistersFree)(param_1);
-  ((int (*)())_BlocksFree)(param_1);
-  return _free(param_1);
+  ((int (*)())_RegistersFree)(program);
+  ((int (*)())_BlocksFree)(program);
+  return _free(program);
 }
 
 /* _FlattenIfs @ 0x97c0b254 (468 bytes) */
@@ -2423,14 +2442,14 @@ switchD_97c0b318_caseD_4c:
 }
 
 /* _regEqualsFunction @ 0x97c0b4ac (36 bytes) */
-int _regEqualsFunction(param_1, param_2)
-  int *param_1;
-  int *param_2;
+int _regEqualsFunction(registerA, registerB)
+  int *registerA;
+  int *registerB;
 {
-  if (param_1[1] - param_2[1] != 0) {
-    return param_1[1] - param_2[1];
+  if (registerA[1] - registerB[1] != 0) {
+    return registerA[1] - registerB[1];
   }
-  return *param_1 - *param_2;
+  return *registerA - *registerB;
 }
 
 /* _AddTempRegister @ 0x97c0b4d0 (128 bytes) */
