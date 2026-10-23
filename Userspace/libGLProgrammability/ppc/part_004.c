@@ -512,88 +512,90 @@ switchD_97b909e0_caseD_18:
 }
 
 /* compareStructure @ 0x97b915d4 (336 bytes) */
-int compareStructure(type, constUnion1, constUnion2, param_4)
+int compareStructure(type, constUnion1, constUnion2, constIndexPtr)
   unsigned char * type;
   unsigned char * constUnion1;
   unsigned char * constUnion2;
-  int *param_4;
+  int *constIndexPtr;
 {
-  int iVar1;
-  int iVar2;
+  int fieldSize;
+  int constIndex;
+  int fieldOffset;
+  int fieldsBegin;
   int *a0;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
-  undefined4 uVar3;
+  undefined4 scratchR4;
   unsigned char * a2;
   int *a3;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  int iVar4;
-  uint uVar5;
-  uint uVar6;
-  int iVar7;
-  int iVar8;
-  undefined8 uVar9;
+  undefined4 scratchR7;
+  undefined4 scratchR8;
+  int fieldVtableThenBasicType;
+  uint fieldCount;
+  uint fieldIndex;
+  int typeList;
+  int memberIndex;
+  undefined8 nestedResult;
   
-  uVar6 = 0;
-  iVar7 = *(int *)(type + 8);
-  iVar2 = *(int *)(iVar7 + 4);
-  uVar5 = *(int *)(iVar7 + 8) - iVar2 >> 3;
+  fieldIndex = 0;
+  typeList = *(int *)(type + 8);
+  fieldsBegin = *(int *)(typeList + 4);
+  fieldCount = *(int *)(typeList + 8) - fieldsBegin >> 3;
   a2 = constUnion2;
-  a3 = param_4;
-  if (uVar5 == 0) {
+  a3 = constIndexPtr;
+  if (fieldCount == 0) {
     return 1;
   }
   do {
-    iVar1 = uVar6 * 8;
-    iVar8 = 0;
-    iVar2 = (**(code **)(**(int **)(iVar2 + iVar1) + 0x30))(*(int **)(iVar2 + iVar1));
-    uVar3 = extraout_r4;
-    if (0 < iVar2) {
+    fieldOffset = fieldIndex * 8;
+    memberIndex = 0;
+    fieldSize = (**(code **)(**(int **)(fieldsBegin + fieldOffset) + 0x30))(*(int **)(fieldsBegin + fieldOffset));
+    scratchR4 = extraout_r4;
+    if (0 < fieldSize) {
       do {
-        a0 = *(int **)(*(int *)(iVar7 + 4) + iVar1);
-        iVar4 = *a0;
-        iVar4 = (**(code **)(iVar4 + 0x20))(a0,uVar3,a2,a3,in_r7,in_r8,iVar4);
-        uVar3 = extraout_r4_00;
-        if (iVar4 == 2) {
+        a0 = *(int **)(*(int *)(typeList + 4) + fieldOffset);
+        fieldVtableThenBasicType = *a0;
+        fieldVtableThenBasicType = (**(code **)(fieldVtableThenBasicType + 0x20))(a0,scratchR4,a2,a3,scratchR7,scratchR8,fieldVtableThenBasicType);
+        scratchR4 = extraout_r4_00;
+        if (fieldVtableThenBasicType == 2) {
 LAB_97b916a8:
-          iVar4 = *param_4;
-          if (*(int *)(constUnion2 + iVar4 * 4) != *(int *)(constUnion1 + iVar4 * 4)) {
+          constIndex = *constIndexPtr;
+          if (*(int *)(constUnion2 + constIndex * 4) != *(int *)(constUnion1 + constIndex * 4)) {
             return 0;
           }
 LAB_97b916c8:
-          *param_4 = iVar4 + 1;
+          *constIndexPtr = constIndex + 1;
         }
-        else if (iVar4 < 3) {
-          if (iVar4 == 1) {
-            iVar4 = *param_4;
-            if (*(float *)(constUnion2 + iVar4 * 4) != *(float *)(constUnion1 + iVar4 * 4)) {
+        else if (fieldVtableThenBasicType < 3) {
+          if (fieldVtableThenBasicType == 1) {
+            constIndex = *constIndexPtr;
+            if (*(float *)(constUnion2 + constIndex * 4) != *(float *)(constUnion1 + constIndex * 4)) {
               return 0;
             }
             goto LAB_97b916c8;
           }
         }
         else {
-          if (iVar4 == 3) goto LAB_97b916a8;
-          if (iVar4 == 0xe) {
+          if (fieldVtableThenBasicType == 3) goto LAB_97b916a8;
+          if (fieldVtableThenBasicType == 0xe) {
             a2 = constUnion2;
-            a3 = param_4;
-            uVar9 = ((int (*)())compareStructure)(*(unsigned char **)(*(int *)(iVar7 + 4) + iVar1),constUnion1,constUnion2,
-                                     param_4);
-            uVar3 = (undefined4)uVar9;
-            if ((int)((ulonglong)uVar9 >> 0x20) == 0) {
+            a3 = constIndexPtr;
+            nestedResult = ((int (*)())compareStructure)(*(unsigned char **)(*(int *)(typeList + 4) + fieldOffset),constUnion1,constUnion2,
+                                     constIndexPtr);
+            scratchR4 = (undefined4)nestedResult;
+            if ((int)((ulonglong)nestedResult >> 0x20) == 0) {
               return 0;
             }
           }
         }
-        iVar8 = iVar8 + 1;
-      } while (iVar8 < iVar2);
+        memberIndex = memberIndex + 1;
+      } while (memberIndex < fieldSize);
     }
-    uVar6 = uVar6 + 1;
-    if (uVar5 <= uVar6) {
+    fieldIndex = fieldIndex + 1;
+    if (fieldCount <= fieldIndex) {
       return 1;
     }
-    iVar2 = *(int *)(iVar7 + 4);
+    fieldsBegin = *(int *)(typeList + 4);
   } while( true );
 }
 
@@ -2603,68 +2605,72 @@ LAB_97b951c0:
 }
 
 /* TIntermediate__changeAggrToTempConst @ 0x97b95c0c (484 bytes) */
-int TIntermediate__changeAggrToTempConst(this, intermAggregate, symbolTable, param_4)
+int TIntermediate__changeAggrToTempConst(this, intermAggregate, symbolTable, line)
   unsigned char * this;
   unsigned char * intermAggregate;
   unsigned char * symbolTable;
-  int param_4;
+  int line;
 {
-  int iVar1;
+  int nodeLine;
+  int parseResult;
+  int childConstUnion;
+  int childSequence;
+  int objectSize;
   unsigned char * this_00;
   int *a0;
-  int iVar2;
-  undefined4 uVar3;
+  int lineCopy;
+  undefined4 constNode;
   undefined4 a1;
   unsigned char * a2;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 scratchR7;
+  undefined4 scratchR8;
   int a6;
-  unsigned char * pcVar4;
-  undefined8 uVar5;
-  undefined **local_60 [9];
-  uint local_3c;
+  unsigned char * constArray;
+  undefined8 constArrayAlloc;
+  undefined **typeTemp [9];
+  uint typeTempBits;
   
   a2 = symbolTable;
-  iVar2 = param_4;
-  (**(code **)(*(int *)intermAggregate + 0x38))(local_60,intermAggregate,symbolTable,param_4);
-  if ((local_3c & 0x400) == 0) {
-    iVar1 = (int)(local_3c << 0xd | local_3c >> 0x13) >> 0x18;
+  lineCopy = line;
+  (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate,symbolTable,line);
+  if ((typeTempBits & 0x400) == 0) {
+    objectSize = (int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18;
   }
   else {
-    iVar1 = (int)(local_3c << 0xd | local_3c >> 0x13) >> 0x18;
-    iVar1 = iVar1 * iVar1;
+    objectSize = (int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18;
+    objectSize = objectSize * objectSize;
   }
   this_00 = (unsigned char *)GetGlobalPoolAllocator();
-  uVar5 = TPoolAllocator__allocate(this_00,iVar1 << 2);
-  pcVar4 = (unsigned char *)((ulonglong)uVar5 >> 0x20);
-  local_60[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  iVar1 = (**(code **)(*(int *)intermAggregate + 100))
-                    (intermAggregate,(int)uVar5,a2,iVar2,in_r7,in_r8,*(int *)intermAggregate);
-  if (*(int *)(iVar1 + 8) - *(int *)(iVar1 + 4) >> 2 == 1) {
-    iVar1 = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
-    a6 = *(int *)**(undefined4 **)(iVar1 + 4);
+  constArrayAlloc = TPoolAllocator__allocate(this_00,objectSize << 2);
+  constArray = (unsigned char *)((ulonglong)constArrayAlloc >> 0x20);
+  typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  childSequence = (**(code **)(*(int *)intermAggregate + 100))
+                    (intermAggregate,(int)constArrayAlloc,a2,lineCopy,scratchR7,scratchR8,*(int *)intermAggregate);
+  if (*(int *)(childSequence + 8) - *(int *)(childSequence + 4) >> 2 == 1) {
+    childSequence = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
+    a6 = *(int *)**(undefined4 **)(childSequence + 4);
     a0 = (int *)(**(code **)(a6 + 0x14))
-                          ((int *)**(undefined4 **)(iVar1 + 4),a1,a2,iVar2,in_r7,in_r8,a6);
-    iVar2 = (**(code **)(*a0 + 0x18))(a0);
-    if (iVar2 != 0) {
-      (**(code **)(*(int *)intermAggregate + 0x38))(local_60,intermAggregate);
-      iVar2 = ((int (*)())TIntermediate__parseConstTree)(this,param_4,(unsigned char *)intermAggregate,pcVar4,*(undefined4 *)(intermAggregate + 0x30),
-                         symbolTable,local_60,1);
+                          ((int *)**(undefined4 **)(childSequence + 4),a1,a2,lineCopy,scratchR7,scratchR8,a6);
+    childConstUnion = (**(code **)(*a0 + 0x18))(a0);
+    if (childConstUnion != 0) {
+      (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate);
+      parseResult = ((int (*)())TIntermediate__parseConstTree)(this,line,(unsigned char *)intermAggregate,constArray,*(undefined4 *)(intermAggregate + 0x30),
+                         symbolTable,typeTemp,1);
       goto LAB_97b95d90;
     }
   }
-  (**(code **)(*(int *)intermAggregate + 0x38))(local_60,intermAggregate);
-  iVar2 = ((int (*)())TIntermediate__parseConstTree)(this,param_4,(unsigned char *)intermAggregate,pcVar4,*(undefined4 *)(intermAggregate + 0x30),
-                     symbolTable,local_60,0);
+  (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate);
+  parseResult = ((int (*)())TIntermediate__parseConstTree)(this,line,(unsigned char *)intermAggregate,constArray,*(undefined4 *)(intermAggregate + 0x30),
+                     symbolTable,typeTemp,0);
 LAB_97b95d90:
-  local_60[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  if (iVar2 != 0) {
-    pcVar4 = (unsigned char *)0x0;
+  typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  if (parseResult != 0) {
+    constArray = (unsigned char *)0x0;
   }
-  (**(code **)(*(int *)intermAggregate + 0x38))(local_60,intermAggregate);
-  iVar2 = (*(code *)**(undefined4 **)intermAggregate)(intermAggregate);
-  uVar3 = TIntermediate__addConstantUnion(this,pcVar4,(unsigned char *)local_60,iVar2);
-  return uVar3;
+  (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate);
+  nodeLine = (*(code *)**(undefined4 **)intermAggregate)(intermAggregate);
+  constNode = TIntermediate__addConstantUnion(this,constArray,(unsigned char *)typeTemp,nodeLine);
+  return constNode;
 }
 
 /* TIntermediate__copyConstUnion @ 0x97b95df0 (336 bytes) */
@@ -2672,54 +2678,54 @@ int TIntermediate__copyConstUnion(this, intermConstantUnion)
   unsigned char * this;
   unsigned char * intermConstantUnion;
 {
-  int iVar1;
-  int iVar2;
+  int byteOffset;
+  int objectSize;
   unsigned char * this_00;
-  int iVar3;
+  int newConstArray;
   unsigned char * pTVar4;
-  int iVar5;
-  int iVar6;
-  undefined **local_b0 [9];
-  uint local_8c;
-  undefined **local_80 [2];
-  unsigned char * local_78;
-  uint local_5c;
-  undefined **local_50 [14];
+  int componentIndex;
+  int oldConstArray;
+  undefined **typeTemp1 [9];
+  uint typeTemp1Bits;
+  undefined **typeTemp2 [2];
+  unsigned char * typeTemp2Structure;
+  uint typeTemp2Bits;
+  undefined **typeTemp3 [14];
   
-  iVar6 = *(int *)(intermConstantUnion + 0x30);
+  oldConstArray = *(int *)(intermConstantUnion + 0x30);
   pTVar4 = (unsigned char *)0x0;
-  if (iVar6 != 0) {
-    (**(code **)(*(int *)intermConstantUnion + 0x38))(local_b0);
-    local_b0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-    if ((local_8c >> 0x13 & 0x3f) == 0xe) {
-      (**(code **)(*(int *)intermConstantUnion + 0x38))(local_80,intermConstantUnion);
-      (**(code **)(*(int *)intermConstantUnion + 0x38))((unsigned char *)local_50,intermConstantUnion);
-      iVar2 = TType__setStructSize((unsigned char *)local_50,local_78);
-      local_50[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  if (oldConstArray != 0) {
+    (**(code **)(*(int *)intermConstantUnion + 0x38))(typeTemp1);
+    typeTemp1[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    if ((typeTemp1Bits >> 0x13 & 0x3f) == 0xe) {
+      (**(code **)(*(int *)intermConstantUnion + 0x38))(typeTemp2,intermConstantUnion);
+      (**(code **)(*(int *)intermConstantUnion + 0x38))((unsigned char *)typeTemp3,intermConstantUnion);
+      objectSize = TType__setStructSize((unsigned char *)typeTemp3,typeTemp2Structure);
+      typeTemp3[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     }
     else {
-      (**(code **)(*(int *)intermConstantUnion + 0x38))(local_80,intermConstantUnion);
-      if ((local_5c & 0x400) == 0) {
-        iVar2 = (int)(local_5c << 0xd | local_5c >> 0x13) >> 0x18;
+      (**(code **)(*(int *)intermConstantUnion + 0x38))(typeTemp2,intermConstantUnion);
+      if ((typeTemp2Bits & 0x400) == 0) {
+        objectSize = (int)(typeTemp2Bits << 0xd | typeTemp2Bits >> 0x13) >> 0x18;
       }
       else {
-        iVar2 = (int)(local_5c << 0xd | local_5c >> 0x13) >> 0x18;
-        iVar2 = iVar2 * iVar2;
+        objectSize = (int)(typeTemp2Bits << 0xd | typeTemp2Bits >> 0x13) >> 0x18;
+        objectSize = objectSize * objectSize;
       }
     }
-    local_80[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    typeTemp2[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
     this_00 = (unsigned char *)GetGlobalPoolAllocator();
-    iVar3 = TPoolAllocator__allocate(this_00,iVar2 << 2);
-    iVar5 = 0;
-    if (0 < iVar2) {
+    newConstArray = TPoolAllocator__allocate(this_00,objectSize << 2);
+    componentIndex = 0;
+    if (0 < objectSize) {
       do {
-        iVar1 = iVar5 * 4;
-        iVar5 = iVar5 + 1;
-        *(undefined4 *)(iVar3 + iVar1) = *(undefined4 *)(iVar6 + iVar1);
-        iVar2 = iVar2 + -1;
-      } while (iVar2 != 0);
+        byteOffset = componentIndex * 4;
+        componentIndex = componentIndex + 1;
+        *(undefined4 *)(newConstArray + byteOffset) = *(undefined4 *)(oldConstArray + byteOffset);
+        objectSize = objectSize + -1;
+      } while (objectSize != 0);
     }
-    *(int *)(intermConstantUnion + 0x30) = iVar3;
+    *(int *)(intermConstantUnion + 0x30) = newConstArray;
     pTVar4 = intermConstantUnion;
   }
   return pTVar4;
@@ -2731,35 +2737,38 @@ int TIntermediate__promoteConstantUnion(this, basicType, intermConstantUnion)
   uint basicType;
   int *intermConstantUnion;
 {
+  uint sourceLoc;
+  uint srcValue;
+  int line;
   undefined *atomicStore;
-  int iVar2;
-  undefined **ppuVar3;
+  int componentCount;
+  undefined **refCountPtr;
   undefined *oldRefCount;
   unsigned char * this_00;
-  unsigned char * pcVar5;
-  uint uVar6;
-  undefined4 uVar7;
+  unsigned char * newConstArray;
+  uint srcBasicType;
+  undefined4 constNode;
   undefined4 a1;
   undefined4 a1_00;
   undefined4 a1_01;
   int *a2;
-  undefined4 in_r6;
+  undefined4 scratchR6;
   uint a1_02;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined *in_r9;
-  int iVar8;
-  char *pcVar9;
-  int iVar10;
+  undefined4 scratchR7;
+  undefined4 scratchR8;
+  undefined *scratchR9;
+  int srcConstArray;
+  char *errorText;
+  int componentIndex;
   void *this_01;
   char reservation;
   byte cr0Flags;
-  double dVar12;
-  undefined **local_c0 [4];
+  double i2dBias;
+  undefined **typeTempOrTextBuf [4];
   unsigned char aaStack_b0 [20];
-  uint local_9c;
-  undefined4 local_90;
-  uint uStack_8c;
+  uint typeTempBits;
+  undefined4 i2dHi;
+  uint i2dLo;
   undefined **stackType;
   undefined4 stackTypeArraySize;
   undefined4 stackTypeStructure;
@@ -2770,149 +2779,149 @@ int TIntermediate__promoteConstantUnion(this, basicType, intermConstantUnion)
   undefined4 stackTypeWord1c;
   undefined4 stackTypeWord20;
   uint stackTypeBits;
-  longlong local_40;
+  longlong d2iScratch;
   
-  iVar8 = intermConstantUnion[0xc];
+  srcConstArray = intermConstantUnion[0xc];
   a2 = intermConstantUnion;
-  (**(code **)(*intermConstantUnion + 0x38))(local_c0,intermConstantUnion,intermConstantUnion);
-  if ((local_9c & 0x400) == 0) {
-    iVar2 = (int)(local_9c << 0xd | local_9c >> 0x13) >> 0x18;
+  (**(code **)(*intermConstantUnion + 0x38))(typeTempOrTextBuf,intermConstantUnion,intermConstantUnion);
+  if ((typeTempBits & 0x400) == 0) {
+    componentCount = (int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18;
   }
   else {
-    iVar2 = (int)(local_9c << 0xd | local_9c >> 0x13) >> 0x18;
-    iVar2 = iVar2 * iVar2;
+    componentCount = (int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18;
+    componentCount = componentCount * componentCount;
   }
-  local_c0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+  typeTempOrTextBuf[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   this_00 = (unsigned char *)GetGlobalPoolAllocator();
-  iVar10 = 0;
-  pcVar5 = (unsigned char *)TPoolAllocator__allocate(this_00,iVar2 << 2);
-  if (0 < iVar2) {
+  componentIndex = 0;
+  newConstArray = (unsigned char *)TPoolAllocator__allocate(this_00,componentCount << 2);
+  if (0 < componentCount) {
     do {
       if (basicType == 2) {
-        (**(code **)(*intermConstantUnion + 0x38))(local_c0,intermConstantUnion);
-        uVar6 = local_9c >> 0x13 & 0x3f;
-        local_c0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        if (uVar6 == 2) {
+        (**(code **)(*intermConstantUnion + 0x38))(typeTempOrTextBuf,intermConstantUnion);
+        srcBasicType = typeTempBits >> 0x13 & 0x3f;
+        typeTempOrTextBuf[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+        if (srcBasicType == 2) {
 LAB_97b96230:
-          uVar6 = *(uint *)(iVar10 * 4 + iVar8);
+          srcValue = *(uint *)(componentIndex * 4 + srcConstArray);
         }
         else {
-          if (2 < uVar6) {
-            if (uVar6 != 3) goto LAB_97b96174;
+          if (2 < srcBasicType) {
+            if (srcBasicType != 3) goto LAB_97b96174;
             goto LAB_97b96230;
           }
-          if (uVar6 != 1) {
+          if (srcBasicType != 1) {
 LAB_97b96174:
             this_01 = *(void **)this;
-            pcVar9 = "Cannot promote";
-            uVar6 = (**(code **)*intermConstantUnion)(intermConstantUnion);
+            errorText = "Cannot promote";
+            sourceLoc = (**(code **)*intermConstantUnion)(intermConstantUnion);
                     
             goto override_jmp_97b960f0_case_0;
           }
-          uVar6 = (uint)(int)*(float *)(iVar10 * 4 + iVar8);
-          local_40 = (longlong)(int)uVar6;
+          srcValue = (uint)(int)*(float *)(componentIndex * 4 + srcConstArray);
+          d2iScratch = (longlong)(int)srcValue;
         }
 LAB_97b9625c:
-        *(uint *)(pcVar5 + iVar10 * 4) = uVar6;
+        *(uint *)(newConstArray + componentIndex * 4) = srcValue;
       }
       else if ((int)basicType < 3) {
         if (basicType != 1) {
 LAB_97b962b8:
           this_01 = *(void **)this;
-          pcVar9 = "Incorrect data type found";
-          uVar6 = (**(code **)*intermConstantUnion)(intermConstantUnion);
+          errorText = "Incorrect data type found";
+          sourceLoc = (**(code **)*intermConstantUnion)(intermConstantUnion);
                     
 override_jmp_97b960f0_case_0:
           __ZN13TInfoSinkBase6appendEPKc(this_01,"INTERNAL ERROR: ");
-          a1_02 = uVar6 & 0xffff;
+          a1_02 = sourceLoc & 0xffff;
           cr0Flags = (a1_02 == 0) << 1;
           if (a1_02 == 0) {
-            _sprintf((char *)&stackType,"%d:? ",(int)uVar6 >> 0x10);
+            _sprintf((char *)&stackType,"%d:? ",(int)sourceLoc >> 0x10);
           }
           else {
-            _sprintf((char *)&stackType,"%d:%d",(int)uVar6 >> 0x10,a1_02);
+            _sprintf((char *)&stackType,"%d:%d",(int)sourceLoc >> 0x10,a1_02);
           }
-          __ZNSsC1EPKcRKSaIcE(local_c0,(char *)&stackType,aaStack_b0);
-          *(undefined *)((int)local_c0[0] + (int)local_c0[0][-3]) = *PTR__S_terminal_a7b7c0b8;
-          __ZN13TInfoSinkBase6appendEPKc(this_01,(char *)local_c0[0]);
-          ppuVar3 = local_c0[0] + -1;
+          __ZNSsC1EPKcRKSaIcE(typeTempOrTextBuf,(char *)&stackType,aaStack_b0);
+          *(undefined *)((int)typeTempOrTextBuf[0] + (int)typeTempOrTextBuf[0][-3]) = *PTR__S_terminal_a7b7c0b8;
+          __ZN13TInfoSinkBase6appendEPKc(this_01,(char *)typeTempOrTextBuf[0]);
+          refCountPtr = typeTempOrTextBuf[0] + -1;
           do {
-            oldRefCount = *ppuVar3;
+            oldRefCount = *refCountPtr;
             if (reservation != '\0') {
-              atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,ppuVar3);
-              *ppuVar3 = atomicStore;
+              atomicStore = (undefined *)storeWordConditionalIndexed(oldRefCount + -1,0,refCountPtr);
+              *refCountPtr = atomicStore;
               cr0Flags = 2;
             }
           } while (!(bool)(cr0Flags >> 1 & 1));
           if ((int)oldRefCount < 1) {
-            __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(local_c0[0] + -3),aaStack_b0);
+            __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(typeTempOrTextBuf[0] + -3),aaStack_b0);
           }
           __ZN13TInfoSinkBase6appendEPKc(this_01,": ");
-          __ZN13TInfoSinkBase6appendEPKc(this_01,pcVar9);
+          __ZN13TInfoSinkBase6appendEPKc(this_01,errorText);
           __ZN13TInfoSinkBase6appendEPKc(this_01,"\n");
           return 0;
         }
-        (**(code **)(*intermConstantUnion + 0x38))(local_c0,intermConstantUnion);
-        uVar6 = local_9c >> 0x13 & 0x3f;
-        local_c0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        if (uVar6 != 2) {
-          if (uVar6 < 3) {
-            if (uVar6 == 1) {
-              *(undefined4 *)(pcVar5 + iVar10 * 4) = *(undefined4 *)(iVar8 + iVar10 * 4);
+        (**(code **)(*intermConstantUnion + 0x38))(typeTempOrTextBuf,intermConstantUnion);
+        srcBasicType = typeTempBits >> 0x13 & 0x3f;
+        typeTempOrTextBuf[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+        if (srcBasicType != 2) {
+          if (srcBasicType < 3) {
+            if (srcBasicType == 1) {
+              *(undefined4 *)(newConstArray + componentIndex * 4) = *(undefined4 *)(srcConstArray + componentIndex * 4);
               goto LAB_97b9641c;
             }
           }
-          else if (uVar6 == 3) {
-            uStack_8c = *(uint *)(iVar10 * 4 + iVar8);
-            dVar12 = 4503599627370496.0;
+          else if (srcBasicType == 3) {
+            i2dLo = *(uint *)(componentIndex * 4 + srcConstArray);
+            i2dBias = 4503599627370496.0;
             goto LAB_97b96098;
           }
           this_01 = *(void **)this;
-          pcVar9 = "Cannot promote";
-          uVar6 = (**(code **)*intermConstantUnion)(intermConstantUnion,a1,a2,in_r6,in_r7,in_r8,in_r9);
+          errorText = "Cannot promote";
+          sourceLoc = (**(code **)*intermConstantUnion)(intermConstantUnion,a1,a2,scratchR6,scratchR7,scratchR8,scratchR9);
                     
           goto override_jmp_97b960f0_case_0;
         }
-        uStack_8c = *(uint *)(iVar10 * 4 + iVar8) ^ 0x80000000;
-        dVar12 = 4503601774854144.0;
+        i2dLo = *(uint *)(componentIndex * 4 + srcConstArray) ^ 0x80000000;
+        i2dBias = 4503601774854144.0;
 LAB_97b96098:
-        in_r9 = (undefined *)(iVar10 * 4);
-        local_90 = 0x43300000;
-        *(float *)(pcVar5 + (int)in_r9) = (float)((double)CONCAT44(0x43300000,uStack_8c) - dVar12);
+        scratchR9 = (undefined *)(componentIndex * 4);
+        i2dHi = 0x43300000;
+        *(float *)(newConstArray + (int)scratchR9) = (float)((double)CONCAT44(0x43300000,i2dLo) - i2dBias);
       }
       else {
         if (basicType != 3) goto LAB_97b962b8;
-        (**(code **)(*intermConstantUnion + 0x38))(local_c0,intermConstantUnion);
-        uVar6 = local_9c >> 0x13 & 0x3f;
-        local_c0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        if (uVar6 != 2) {
-          if (uVar6 < 3) {
-            if (uVar6 == 1) {
-              in_r9 = &DAT_97c35f58;
-              uVar6 = (uint)(*(float *)(iVar10 * 4 + iVar8) != 0.0);
+        (**(code **)(*intermConstantUnion + 0x38))(typeTempOrTextBuf,intermConstantUnion);
+        srcBasicType = typeTempBits >> 0x13 & 0x3f;
+        typeTempOrTextBuf[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+        if (srcBasicType != 2) {
+          if (srcBasicType < 3) {
+            if (srcBasicType == 1) {
+              scratchR9 = &DAT_97c35f58;
+              srcValue = (uint)(*(float *)(componentIndex * 4 + srcConstArray) != 0.0);
               goto LAB_97b9625c;
             }
           }
-          else if (uVar6 == 3) goto LAB_97b96230;
+          else if (srcBasicType == 3) goto LAB_97b96230;
           this_01 = *(void **)this;
-          pcVar9 = "Cannot promote";
-          uVar6 = (**(code **)*intermConstantUnion)(intermConstantUnion,a1_00,a2,in_r6,in_r7,in_r8,in_r9);
+          errorText = "Cannot promote";
+          sourceLoc = (**(code **)*intermConstantUnion)(intermConstantUnion,a1_00,a2,scratchR6,scratchR7,scratchR8,scratchR9);
                     
           goto override_jmp_97b960f0_case_0;
         }
-        in_r9 = (undefined *)(uint)(*(int *)(iVar8 + iVar10 * 4) != 0);
-        *(undefined **)(pcVar5 + iVar10 * 4) = in_r9;
+        scratchR9 = (undefined *)(uint)(*(int *)(srcConstArray + componentIndex * 4) != 0);
+        *(undefined **)(newConstArray + componentIndex * 4) = scratchR9;
       }
 LAB_97b9641c:
-      local_c0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-      iVar10 = iVar10 + 1;
-    } while (iVar10 < iVar2);
+      typeTempOrTextBuf[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+      componentIndex = componentIndex + 1;
+    } while (componentIndex < componentCount);
   }
-  (**(code **)(*intermConstantUnion + 0x38))(local_c0,intermConstantUnion);
-  stackTypeBits = (local_9c >> 9 & 1) << 9 |
-             (local_9c >> 10 & 1) << 10 |
-             local_9c & 0x7f800 |
-             (basicType & 0x3f) << 0x13 | local_9c & 0xfe000000 | stackTypeBits & 0x1ff;
+  (**(code **)(*intermConstantUnion + 0x38))(typeTempOrTextBuf,intermConstantUnion);
+  stackTypeBits = (typeTempBits >> 9 & 1) << 9 |
+             (typeTempBits >> 10 & 1) << 10 |
+             typeTempBits & 0x7f800 |
+             (basicType & 0x3f) << 0x13 | typeTempBits & 0xfe000000 | stackTypeBits & 0x1ff;
   stackTypeWord20 = 0;
   stackTypeArraySize = 0;
   stackTypeStructure = 0;
@@ -2922,32 +2931,36 @@ LAB_97b9641c:
   stackTypeStructureSize = 0;
   stackTypeWord1c = 0;
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  iVar8 = (**(code **)*intermConstantUnion)(intermConstantUnion,a1_01,a2,in_r6,in_r7,in_r8,(undefined4 *)*intermConstantUnion);
-  uVar7 = TIntermediate__addConstantUnion(this,pcVar5,(unsigned char *)&stackType,iVar8);
-  return uVar7;
+  line = (**(code **)*intermConstantUnion)(intermConstantUnion,a1_01,a2,scratchR6,scratchR7,scratchR8,(undefined4 *)*intermConstantUnion);
+  constNode = TIntermediate__addConstantUnion(this,newConstArray,(unsigned char *)&stackType,line);
+  return constNode;
 }
 
 /* __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate @ 0x97b964e8 (824 bytes) */
-int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate(this, vector, type, param_4, __normal_iterator, intermAggregate)
+int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate(this, vector, type, indexPtr, __normal_iterator, intermAggregate)
   void *this;
   unsigned char * vector;
   unsigned char * type;
-  int *param_4;
+  int *indexPtr;
   unsigned char * __normal_iterator;
   unsigned char * intermAggregate;
 {
+  int adjustedIndex;
+  int nodeVtable;
+  int childVtable;
+  int childConstUnion;
   int loopIndex;
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
+  uint typeSizeBits;
+  uint typeQualifierBits;
+  uint typeBasicTypeBits;
+  uint typeMatrixBit;
+  uint oldTypeBits;
+  int componentCount;
+  int oldSequenceBegin;
+  int aggregateSequence;
   int removeMatrixConstNodeResult;
   unsigned char * poolAllocator;
-  undefined4 *puVar11;
+  undefined4 *constValueSlot;
   int *a0;
   int *a1;
   undefined4 a1_00;
@@ -2955,11 +2968,11 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
   unsigned char * a3;
   int a4;
   unsigned char * a5;
-  int iVar12;
-  undefined *puVar13;
-  undefined8 uVar14;
-  undefined **local_b0 [9];
-  uint local_8c;
+  int oldSequenceEnd;
+  undefined *constantUnionVtable;
+  undefined8 newNodeAlloc;
+  undefined **typeTemp [9];
+  uint typeTempBits;
   undefined **stackType;
   int stackTypeArraySize;
   int stackTypeStructure;
@@ -2970,47 +2983,47 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
   int stackTypeWord1c;
   int stackTypeWord20;
   uint stackTypeBits;
-  undefined4 local_50;
-  int *local_4c [3];
+  undefined4 insertResult;
+  int *insertNodeSlot [3];
   
   if (intermAggregate != (unsigned char *)0x0) {
-    *(int *)__normal_iterator = *(int *)(vector + 4) + *param_4 * 4;
+    *(int *)__normal_iterator = *(int *)(vector + 4) + *indexPtr * 4;
     a5 = intermAggregate;
-    iVar8 = (**(code **)(*(int *)intermAggregate + 100))
-                      (intermAggregate,vector,type,param_4,__normal_iterator,intermAggregate,*(int *)intermAggregate);
-    iVar12 = *(int *)(vector + 8);
-    iVar7 = *(int *)(vector + 4);
-    if (*(int *)(iVar8 + 8) - *(int *)(iVar8 + 4) >> 2 == 1) {
-      a4 = *param_4;
+    aggregateSequence = (**(code **)(*(int *)intermAggregate + 100))
+                      (intermAggregate,vector,type,indexPtr,__normal_iterator,intermAggregate,*(int *)intermAggregate);
+    oldSequenceEnd = *(int *)(vector + 8);
+    oldSequenceBegin = *(int *)(vector + 4);
+    if (*(int *)(aggregateSequence + 8) - *(int *)(aggregateSequence + 4) >> 2 == 1) {
+      a4 = *indexPtr;
       a3 = intermAggregate;
       removeMatrixConstNodeResult = ((int (*)())TIntermediate__removeMatrixConstNode)(this,vector,type,intermAggregate,a4);
       if (removeMatrixConstNodeResult == 0) {
         loopIndex = 0;
-        puVar13 = PTR_vtable_a7b7c0c8 + 8;
+        constantUnionVtable = PTR_vtable_a7b7c0c8 + 8;
         while( true ) {
-          (**(code **)(*(int *)intermAggregate + 0x38))(local_b0,intermAggregate);
-          if ((local_8c & 0x400) == 0) {
-            iVar6 = (int)(local_8c << 0xd | local_8c >> 0x13) >> 0x18;
+          (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate);
+          if ((typeTempBits & 0x400) == 0) {
+            componentCount = (int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18;
           }
           else {
-            iVar6 = (int)(local_8c << 0xd | local_8c >> 0x13) >> 0x18;
-            iVar6 = iVar6 * iVar6;
+            componentCount = (int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18;
+            componentCount = componentCount * componentCount;
           }
-          local_b0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-          if (iVar6 <= loopIndex) break;
+          typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+          if (componentCount <= loopIndex) break;
           poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-          puVar11 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,4);
+          constValueSlot = (undefined4 *)TPoolAllocator__allocate(poolAllocator,4);
           loopIndex = loopIndex + 1;
-          iVar6 = (**(code **)(*(int *)**(undefined4 **)(iVar8 + 4) + 0x18))
-                            ((int *)**(undefined4 **)(iVar8 + 4));
-          *puVar11 = **(undefined4 **)(iVar6 + 0x30);
+          childConstUnion = (**(code **)(*(int *)**(undefined4 **)(aggregateSequence + 4) + 0x18))
+                            ((int *)**(undefined4 **)(aggregateSequence + 4));
+          *constValueSlot = **(undefined4 **)(childConstUnion + 0x30);
           poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-          uVar14 = TPoolAllocator__allocate(poolAllocator,0x34);
-          a0 = (int *)((ulonglong)uVar14 >> 0x20);
-          iVar6 = *(int *)**(undefined4 **)(iVar8 + 4);
-          a1 = (int *)(**(code **)(iVar6 + 0x18))
-                                ((int *)**(undefined4 **)(iVar8 + 4),(int)uVar14,type,a3,a4,a5,
-                                 iVar6);
+          newNodeAlloc = TPoolAllocator__allocate(poolAllocator,0x34);
+          a0 = (int *)((ulonglong)newNodeAlloc >> 0x20);
+          childVtable = *(int *)**(undefined4 **)(aggregateSequence + 4);
+          a1 = (int *)(**(code **)(childVtable + 0x18))
+                                ((int *)**(undefined4 **)(aggregateSequence + 4),(int)newNodeAlloc,type,a3,a4,a5,
+                                 childVtable);
           (**(code **)(*a1 + 0x38))(&stackType,a1);
           *a0 = (int)&PTR_getLine_a7b7cf90;
           a0[1] = 0;
@@ -3023,43 +3036,43 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
           a0[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
           a0[9] = stackTypeWord1c;
           a0[10] = stackTypeWord20;
-          uVar5 = a0[0xb];
-          uVar2 = stackTypeBits & 0xfe000000;
-          a0[0xb] = uVar2 | uVar5 & 0x1ffffff;
-          uVar3 = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
-          a0[0xb] = uVar3 | uVar2 | uVar5 & 0x7ffff;
-          uVar1 = stackTypeBits & 0x7f800;
-          a0[0xb] = uVar1 | uVar3 | uVar2 | uVar5 & 0x7ff;
-          uVar4 = (stackTypeBits >> 10 & 1) << 10;
-          a0[0xb] = uVar4 | uVar1 | uVar3 | uVar2 | uVar5 & 0x3ff;
-          a0[0xb] = (stackTypeBits >> 9 & 1) << 9 | uVar4 | uVar1 | uVar3 | uVar2 | uVar5 & 0x1ff;
-          a0[0xc] = (int)puVar11;
-          *a0 = (int)puVar13;
+          oldTypeBits = a0[0xb];
+          typeQualifierBits = stackTypeBits & 0xfe000000;
+          a0[0xb] = typeQualifierBits | oldTypeBits & 0x1ffffff;
+          typeBasicTypeBits = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
+          a0[0xb] = typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ffff;
+          typeSizeBits = stackTypeBits & 0x7f800;
+          a0[0xb] = typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ff;
+          typeMatrixBit = (stackTypeBits >> 10 & 1) << 10;
+          a0[0xb] = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
+          a0[0xb] = (stackTypeBits >> 9 & 1) << 9 | typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x1ff;
+          a0[0xc] = (int)constValueSlot;
+          *a0 = (int)constantUnionVtable;
           stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-          iVar6 = *a0;
+          nodeVtable = *a0;
           a1_00 = (*(code *)**(undefined4 **)intermAggregate)(intermAggregate,a1_01,type,a3,a4,a5,a0 + 2);
-          (**(code **)(iVar6 + 4))(a0,a1_00);
-          type = (unsigned char *)(*(int *)(vector + 4) + *param_4 * 4);
-          a3 = (unsigned char *)local_4c;
+          (**(code **)(nodeVtable + 4))(a0,a1_00);
+          type = (unsigned char *)(*(int *)(vector + 4) + *indexPtr * 4);
+          a3 = (unsigned char *)insertNodeSlot;
           *(unsigned char **)__normal_iterator = type;
-          local_4c[0] = a0;
+          insertNodeSlot[0] = a0;
           std__vector_TIntermNode__pool_allocator_TIntermNode_____insert
-                    (&local_50,vector,type,a3);
+                    (&insertResult,vector,type,a3);
         }
       }
     }
     else {
       std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gnu_cxx____normal_iterator_TIntermNode___std__vector_TIntermNode__pool_allocator_TIntermNode_____
-                (vector,*(undefined4 *)__normal_iterator,*(int *)(iVar8 + 4),*(int *)(iVar8 + 8));
+                (vector,*(undefined4 *)__normal_iterator,*(int *)(aggregateSequence + 4),*(int *)(aggregateSequence + 8));
     }
-    iVar7 = (*param_4 + (*(int *)(vector + 8) - *(int *)(vector + 4) >> 2)) -
-            (iVar12 - iVar7 >> 2);
-    *param_4 = iVar7;
-    iVar7 = *(int *)(vector + 4) + iVar7 * 4;
-    *(int *)__normal_iterator = iVar7;
-    std__vector_TIntermNode__pool_allocator_TIntermNode_____erase(&local_50,vector,iVar7);
-    *(undefined4 *)__normal_iterator = local_50;
-    *param_4 = *param_4 + -1;
+    adjustedIndex = (*indexPtr + (*(int *)(vector + 8) - *(int *)(vector + 4) >> 2)) -
+            (oldSequenceEnd - adjustedIndex >> 2);
+    *indexPtr = adjustedIndex;
+    adjustedIndex = *(int *)(vector + 4) + adjustedIndex * 4;
+    *(int *)__normal_iterator = adjustedIndex;
+    std__vector_TIntermNode__pool_allocator_TIntermNode_____erase(&insertResult,vector,adjustedIndex);
+    *(undefined4 *)__normal_iterator = insertResult;
+    *indexPtr = *indexPtr + -1;
     *(int *)__normal_iterator = *(int *)__normal_iterator + -4;
   }
   return;
@@ -3072,75 +3085,78 @@ int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggrega
   unsigned char * type;
   unsigned char * intermAggregate;
 {
+  int elementIndex;
+  int checkSequence;
+  int aggregateSequence;
   int removeMatrixConstNodeResult;
-  undefined4 *puVar1;
-  int iVar2;
-  int iVar3;
+  undefined4 *sequenceFinish;
+  int prevFinish;
+  int typeObjectSize;
   int *a0;
   unsigned char * this_00;
-  int iVar4;
-  int iVar5;
+  int firstChildVtable;
+  int elementSequence;
   undefined4 a1;
   unsigned char * a2;
   unsigned char * a3;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 scratchR7;
+  undefined4 scratchR8;
   undefined1 auStack_30 [20];
   
   a2 = type;
   a3 = intermAggregate;
-  iVar3 = (**(code **)(*(int *)type + 0x30))(type,intermTyped,type,intermAggregate);
-  if (iVar3 == 1) {
-    iVar3 = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
-    iVar4 = *(int *)**(undefined4 **)(iVar3 + 4);
+  typeObjectSize = (**(code **)(*(int *)type + 0x30))(type,intermTyped,type,intermAggregate);
+  if (typeObjectSize == 1) {
+    aggregateSequence = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
+    firstChildVtable = *(int *)**(undefined4 **)(aggregateSequence + 4);
     intermTyped = (unsigned char *)
-              (**(code **)(iVar4 + 0x14))
-                        ((int *)**(undefined4 **)(iVar3 + 4),a1,a2,a3,in_r7,in_r8,iVar4);
+              (**(code **)(firstChildVtable + 0x14))
+                        ((int *)**(undefined4 **)(aggregateSequence + 4),a1,a2,a3,scratchR7,scratchR8,firstChildVtable);
   }
   else {
-    iVar3 = (**(code **)(*(int *)type + 0x30))(type);
+    typeObjectSize = (**(code **)(*(int *)type + 0x30))(type);
     a0 = (int *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
     this_00 = (unsigned char *)(**(code **)(*a0 + 100))(a0);
-    iVar4 = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
-    if (*(int *)(iVar4 + 8) - *(int *)(iVar4 + 4) >> 2 == 1) {
+    checkSequence = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
+    if (*(int *)(checkSequence + 8) - *(int *)(checkSequence + 4) >> 2 == 1) {
       removeMatrixConstNodeResult = ((int (*)())TIntermediate__removeMatrixConstNode)(this,(unsigned char *)this_00,type,intermAggregate,1);
       if (removeMatrixConstNodeResult == 0) {
-        iVar3 = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
-        puVar1 = *(undefined4 **)(this_00 + 8);
-        if (puVar1 == *(undefined4 **)(this_00 + 0xc)) {
+        aggregateSequence = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
+        sequenceFinish = *(undefined4 **)(this_00 + 8);
+        if (sequenceFinish == *(undefined4 **)(this_00 + 0xc)) {
           std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
-                    (this_00,puVar1,*(undefined4 **)(iVar3 + 4));
+                    (this_00,sequenceFinish,*(undefined4 **)(aggregateSequence + 4));
         }
         else {
-          iVar4 = 0;
-          if (puVar1 != (undefined4 *)0x0) {
-            *puVar1 = **(undefined4 **)(iVar3 + 4);
-            iVar4 = *(int *)(this_00 + 8);
+          elementIndex = 0;
+          if (sequenceFinish != (undefined4 *)0x0) {
+            *sequenceFinish = **(undefined4 **)(aggregateSequence + 4);
+            elementIndex = *(int *)(this_00 + 8);
           }
-          *(int *)(this_00 + 8) = iVar4 + 4;
+          *(int *)(this_00 + 8) = elementIndex + 4;
         }
       }
     }
     else {
-      iVar4 = 0;
-      if (0 < iVar3) {
+      elementIndex = 0;
+      if (0 < typeObjectSize) {
         do {
-          iVar5 = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
-          puVar1 = *(undefined4 **)(this_00 + 8);
-          if (puVar1 == *(undefined4 **)(this_00 + 0xc)) {
+          elementSequence = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
+          sequenceFinish = *(undefined4 **)(this_00 + 8);
+          if (sequenceFinish == *(undefined4 **)(this_00 + 0xc)) {
             std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
-                      (this_00,puVar1,*(int *)(iVar5 + 4) + iVar4 * 4);
+                      (this_00,sequenceFinish,*(int *)(elementSequence + 4) + elementIndex * 4);
           }
           else {
-            iVar2 = 0;
-            if (puVar1 != (undefined4 *)0x0) {
-              *puVar1 = *(undefined4 *)(*(int *)(iVar5 + 4) + iVar4 * 4);
-              iVar2 = *(int *)(this_00 + 8);
+            prevFinish = 0;
+            if (sequenceFinish != (undefined4 *)0x0) {
+              *sequenceFinish = *(undefined4 *)(*(int *)(elementSequence + 4) + elementIndex * 4);
+              prevFinish = *(int *)(this_00 + 8);
             }
-            *(int *)(this_00 + 8) = iVar2 + 4;
+            *(int *)(this_00 + 8) = prevFinish + 4;
           }
-          iVar4 = iVar4 + 1;
-        } while (iVar4 < iVar3);
+          elementIndex = elementIndex + 1;
+        } while (elementIndex < typeObjectSize);
       }
     }
     std__vector_TIntermNode__pool_allocator_TIntermNode_____erase
@@ -3150,36 +3166,40 @@ int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggrega
 }
 
 /* TIntermediate__removeMatrixConstNode @ 0x97b96a10 (776 bytes) */
-int TIntermediate__removeMatrixConstNode(this, vector, type, intermAggregate, param_5)
+int TIntermediate__removeMatrixConstNode(this, vector, type, intermAggregate, index)
   unsigned char * this;
   unsigned char * vector;
   unsigned char * type;
   unsigned char * intermAggregate;
-  int param_5;
+  int index;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
-  undefined4 uVar7;
-  int iVar8;
+  int nodeVtable;
+  int typeBasicType;
+  int childVtable;
+  int diagonalStride;
+  uint typeSizeBits;
+  uint typeQualifierBits;
+  uint typeBasicTypeBits;
+  uint typeMatrixBit;
+  uint oldTypeBits;
+  int componentCount;
+  undefined4 result;
+  int aggregateSequence;
   unsigned char * poolAllocator;
-  undefined4 *puVar10;
+  undefined4 *constValueSlot;
   int *a0;
-  int *piVar11;
+  int *childNode;
   undefined4 a1;
   undefined4 a1_00;
   unsigned char * a2;
   unsigned char * a3;
   int a4;
-  undefined4 in_r8;
-  undefined *puVar12;
-  int iVar13;
-  undefined8 uVar14;
-  undefined **local_b0 [9];
-  uint local_8c;
+  undefined4 scratchR8;
+  undefined *constantUnionVtable;
+  int elementIndex;
+  undefined8 newNodeAlloc;
+  undefined **typeTemp [9];
+  uint typeTempBits;
   undefined **stackType;
   int stackTypeArraySize;
   int stackTypeStructure;
@@ -3191,61 +3211,61 @@ int TIntermediate__removeMatrixConstNode(this, vector, type, intermAggregate, pa
   int stackTypeWord20;
   uint stackTypeBits;
   undefined1 auStack_50 [4];
-  int *local_4c [3];
+  int *insertNodeSlot [3];
   
-  uVar7 = 0;
+  result = 0;
   if (intermAggregate != (unsigned char *)0x0) {
     a2 = type;
     a3 = intermAggregate;
-    a4 = param_5;
-    iVar8 = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
-    uVar7 = 0;
+    a4 = index;
+    aggregateSequence = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
+    result = 0;
     if (*(int *)(intermAggregate + 0x30) - 0x72U < 3) {
-      iVar13 = 0;
-      puVar12 = PTR_vtable_a7b7c0c8 + 8;
+      elementIndex = 0;
+      constantUnionVtable = PTR_vtable_a7b7c0c8 + 8;
       while( true ) {
-        (**(code **)(*(int *)intermAggregate + 0x38))(local_b0,intermAggregate);
-        if ((local_8c & 0x400) == 0) {
-          iVar6 = (int)(local_8c << 0xd | local_8c >> 0x13) >> 0x18;
+        (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate);
+        if ((typeTempBits & 0x400) == 0) {
+          componentCount = (int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18;
         }
         else {
-          iVar6 = (int)(local_8c << 0xd | local_8c >> 0x13) >> 0x18;
-          iVar6 = iVar6 * iVar6;
+          componentCount = (int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18;
+          componentCount = componentCount * componentCount;
         }
-        local_b0[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        uVar7 = 1;
-        if (iVar6 <= iVar13) break;
+        typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+        result = 1;
+        if (componentCount <= elementIndex) break;
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        puVar10 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,4);
+        constValueSlot = (undefined4 *)TPoolAllocator__allocate(poolAllocator,4);
         (**(code **)(*(int *)intermAggregate + 0x38))(&stackType,intermAggregate);
         stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        iVar6 = ((int)(stackTypeBits << 0xd | stackTypeBits >> 0x13) >> 0x18) + 1;
-        if (iVar13 == (iVar13 / iVar6) * iVar6) {
-          iVar6 = *(int *)**(undefined4 **)(iVar8 + 4);
-          iVar6 = (**(code **)(iVar6 + 0x18))
-                            ((int *)**(undefined4 **)(iVar8 + 4),a1,a2,a3,a4,in_r8,iVar6);
-          *puVar10 = **(undefined4 **)(iVar6 + 0x30);
+        diagonalStride = ((int)(stackTypeBits << 0xd | stackTypeBits >> 0x13) >> 0x18) + 1;
+        if (elementIndex == (elementIndex / diagonalStride) * diagonalStride) {
+          childVtable = *(int *)**(undefined4 **)(aggregateSequence + 4);
+          childVtable = (**(code **)(childVtable + 0x18))
+                            ((int *)**(undefined4 **)(aggregateSequence + 4),a1,a2,a3,a4,scratchR8,childVtable);
+          *constValueSlot = **(undefined4 **)(childVtable + 0x30);
         }
         else {
-          iVar6 = (**(code **)(*(int *)type + 0x20))(type);
-          if (iVar6 == 2) {
+          typeBasicType = (**(code **)(*(int *)type + 0x20))(type);
+          if (typeBasicType == 2) {
 LAB_97b96b5c:
-            *puVar10 = 0;
+            *constValueSlot = 0;
           }
-          else if (iVar6 < 3) {
-            if (iVar6 == 1) {
-              *puVar10 = 0;
+          else if (typeBasicType < 3) {
+            if (typeBasicType == 1) {
+              *constValueSlot = 0;
             }
           }
-          else if (iVar6 == 3) goto LAB_97b96b5c;
+          else if (typeBasicType == 3) goto LAB_97b96b5c;
         }
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-        uVar14 = TPoolAllocator__allocate(poolAllocator,0x34);
-        a0 = (int *)((ulonglong)uVar14 >> 0x20);
-        piVar11 = (int *)**(undefined4 **)(iVar8 + 4);
-        piVar11 = (int *)(**(code **)(*piVar11 + 0x18))
-                                   (piVar11,(int)uVar14,a2,a3,a4,in_r8,*(undefined4 **)(iVar8 + 4));
-        (**(code **)(*piVar11 + 0x38))(&stackType,piVar11);
+        newNodeAlloc = TPoolAllocator__allocate(poolAllocator,0x34);
+        a0 = (int *)((ulonglong)newNodeAlloc >> 0x20);
+        childNode = (int *)**(undefined4 **)(aggregateSequence + 4);
+        childNode = (int *)(**(code **)(*childNode + 0x18))
+                                   (childNode,(int)newNodeAlloc,a2,a3,a4,scratchR8,*(undefined4 **)(aggregateSequence + 4));
+        (**(code **)(*childNode + 0x38))(&stackType,childNode);
         *a0 = (int)&PTR_getLine_a7b7cf90;
         a0[1] = 0;
         a0[3] = stackTypeArraySize;
@@ -3257,31 +3277,31 @@ LAB_97b96b5c:
         a0[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
         a0[9] = stackTypeWord1c;
         a0[10] = stackTypeWord20;
-        uVar5 = a0[0xb];
-        uVar2 = stackTypeBits & 0xfe000000;
-        a0[0xb] = uVar2 | uVar5 & 0x1ffffff;
-        uVar3 = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
-        a0[0xb] = uVar3 | uVar2 | uVar5 & 0x7ffff;
-        uVar1 = stackTypeBits & 0x7f800;
-        a0[0xb] = uVar1 | uVar3 | uVar2 | uVar5 & 0x7ff;
-        uVar4 = (stackTypeBits >> 10 & 1) << 10;
-        a0[0xb] = uVar4 | uVar1 | uVar3 | uVar2 | uVar5 & 0x3ff;
-        a0[0xb] = (stackTypeBits >> 9 & 1) << 9 | uVar4 | uVar1 | uVar3 | uVar2 | uVar5 & 0x1ff;
-        a0[0xc] = (int)puVar10;
-        *a0 = (int)puVar12;
+        oldTypeBits = a0[0xb];
+        typeQualifierBits = stackTypeBits & 0xfe000000;
+        a0[0xb] = typeQualifierBits | oldTypeBits & 0x1ffffff;
+        typeBasicTypeBits = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
+        a0[0xb] = typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ffff;
+        typeSizeBits = stackTypeBits & 0x7f800;
+        a0[0xb] = typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ff;
+        typeMatrixBit = (stackTypeBits >> 10 & 1) << 10;
+        a0[0xb] = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
+        a0[0xb] = (stackTypeBits >> 9 & 1) << 9 | typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x1ff;
+        a0[0xc] = (int)constValueSlot;
+        *a0 = (int)constantUnionVtable;
         stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        iVar6 = *a0;
-        uVar7 = (*(code *)**(undefined4 **)intermAggregate)(intermAggregate,a1_00,a2,a3,a4,in_r8,a0 + 2);
-        (**(code **)(iVar6 + 4))(a0,uVar7);
-        a2 = (unsigned char *)(*(int *)(vector + 4) + param_5 * 4 + iVar13 * 4);
-        a3 = (unsigned char *)local_4c;
-        iVar13 = iVar13 + 1;
-        local_4c[0] = a0;
+        nodeVtable = *a0;
+        result = (*(code *)**(undefined4 **)intermAggregate)(intermAggregate,a1_00,a2,a3,a4,scratchR8,a0 + 2);
+        (**(code **)(nodeVtable + 4))(a0,result);
+        a2 = (unsigned char *)(*(int *)(vector + 4) + index * 4 + elementIndex * 4);
+        a3 = (unsigned char *)insertNodeSlot;
+        elementIndex = elementIndex + 1;
+        insertNodeSlot[0] = a0;
         std__vector_TIntermNode__pool_allocator_TIntermNode_____insert(auStack_50,vector,a2,a3);
       }
     }
   }
-  return uVar7;
+  return result;
 }
 
 /* TIntermAggregate__addToPragmaTable @ 0x97b96d18 (184 bytes) */
@@ -3291,11 +3311,11 @@ int TIntermAggregate__addToPragmaTable(this, map)
 {
   unsigned char * this_00;
   unsigned char * this_01;
-  int *piVar1;
-  int iVar2;
+  int *headerNode;
+  int existingPragmaTable;
   
-  iVar2 = *(int *)(this + 0x68);
-  if (iVar2 != 0) {
+  existingPragmaTable = *(int *)(this + 0x68);
+  if (existingPragmaTable != 0) {
     ___eprintf("%s:%u: failed assertion `%s\'\n",
                "/SourceCache/OpenGL/OpenGL-4.7.14/GLProgrammability/glslang/MachineIndependent/Intermediate.cpp"
                ,0x865,"!pragmaTable");
@@ -3303,12 +3323,12 @@ int TIntermAggregate__addToPragmaTable(this, map)
   this_00 = operator_new(0x10);
   this_01 = (unsigned char *)GetGlobalPoolAllocator();
   *(unsigned char **)this_00 = this_01;
-  *(int *)(this_00 + 4) = iVar2;
-  piVar1 = (int *)TPoolAllocator__allocate(this_01,0x20);
-  *(int *)(this_00 + 8) = iVar2;
-  *(int **)(this_00 + 4) = piVar1;
-  *piVar1 = iVar2;
-  *(int *)(*(int *)(this_00 + 4) + 4) = iVar2;
+  *(int *)(this_00 + 4) = existingPragmaTable;
+  headerNode = (int *)TPoolAllocator__allocate(this_01,0x20);
+  *(int *)(this_00 + 8) = existingPragmaTable;
+  *(int **)(this_00 + 4) = headerNode;
+  *headerNode = existingPragmaTable;
+  *(int *)(*(int *)(this_00 + 4) + 4) = existingPragmaTable;
   *(int *)(*(int *)(this_00 + 4) + 8) = *(int *)(this_00 + 4);
   *(int *)(*(int *)(this_00 + 4) + 0xc) = *(int *)(this_00 + 4);
   *(unsigned char
