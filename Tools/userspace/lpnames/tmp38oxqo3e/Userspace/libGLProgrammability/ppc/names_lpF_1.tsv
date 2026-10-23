@@ -1,0 +1,58 @@
+# lpF round 1: part_016 emulator setup, string writers
+local	_PPCConstantsAndScratchInitialise	param_1	constants	CONFIRMED	the constants-and-scratch block of the emulator: memset to 0xd80 bytes and filled with float constants (0.0039215686 = 1/255, 57.29578, 6.2831855, log2e ...); function name
+local	_PPEmulatorAttachProgram	param_1	emulator	CONFIRMED	stores param_2 at emulator+0xd80 (the program info pointer read by _PPEmulatorRun/Build)
+local	_PPEmulatorAttachProgram	param_2	programInfo	CONFIRMED	stored at emulator+0xd80, which _PPEmulatorRun reads as the program info (+0x38 target, +8/+0xc run entries)
+local	_PPEmulatorEmulateSingleOp	param_1	emulator	CONFIRMED	emulator+0xdf0 holds the interpreter context passed to _InterpreterEmulateOp
+local	_PPEmulatorRun	param_2	elementCount	CONFIRMED	forwarded as the second argument of the selected run entry; _InterpreterRun's second parameter is elementCount
+local	_PPEmulatorRun	param_3	runnerArg3	INFERRED	forwarded unchanged to the run entry selected from the program info (+8 or +0xc), third argument
+local	_PPEmulatorRun	param_4	runnerArg4	INFERRED	forwarded unchanged to the run entry, fourth argument
+local	_PPEmulatorRun	param_5	runnerArg5	INFERRED	forwarded unchanged to the run entry, fifth argument
+local	_PPEmulatorRun	iVar1	programInfo	CONFIRMED	emulator+0xd80 (set by _PPEmulatorAttachProgram); +0x38 is the target compared with 0x8804/0x8b30
+local	_PPEmulatorRun	UNRECOVERED_JUMPTABLE	runEntry	INFERRED	tail-called function pointer: programInfo+0xc (fragment) or +8 (vertex), the entries _PPEmulatorBuild stores
+local	_PPEmulatorBuild	param_2	elementCount	CONFIRMED	forwarded to the run entry like _PPEmulatorRun's second argument
+local	_PPEmulatorBuild	param_3	runnerArg3	INFERRED	forwarded unchanged to the run entry
+local	_PPEmulatorBuild	param_4	runnerArg4	INFERRED	forwarded unchanged to the run entry
+local	_PPEmulatorBuild	param_5	runnerArg5	INFERRED	forwarded unchanged to the run entry
+local	_PPEmulatorBuild	param_6	runnerArg6	INFERRED	forwarded unchanged to the run entry
+local	_PPEmulatorBuild	puVar2	selectedEntry	INFERRED	function pointer chosen among the interpreter (PTR__InterpreterRun) and the compiled code buffers; stored to programInfo+8 or +0xc
+local	_PPEmulatorBuild	iVar3	oldCodeBuffer	INFERRED	previously compiled code buffer (+0x14 AltiVec vertex/+0x18 AltiVec fragment) freed with _glpDCBFree before recompiling
+local	_PPEmulatorBuild	a6	isFragmentPath	CONFIRMED	1 when programInfo+0x38 is 0x8804/0x8b30 (fragment program/shader) and the float at *(emulator+0xda0)+0xc is non-zero; passed on as the sixth runner argument
+local	_PPEmulatorBuild	bVar1	isVertexPath	CONFIRMED	isFragmentPath == 0: selects the vertex code slots (+0x1c/+0x14, entry +8) instead of the fragment slots (+0x20/+0x18, entry +0xc)
+local	_PPEmulatorBuild	UNRECOVERED_JUMPTABLE	runEntry	INFERRED	tail-called function pointer: programInfo+8 (vertex) or +0xc (fragment)
+local	_PPEmulatorBuild	uVar6	compileFlags	CONFIRMED	programInfo+0x124: bit1 = compile to native, bit2 = data caching (option flags 7), bit3 = AltiVec; tested with &2, &4, &8
+local	_PPEmulatorBuild	iVar7	programInfo	CONFIRMED	emulator+0xd80, the program info (+0x38 target, +0x14..+0x20 compiled code buffers)
+local	_PPEmulatorVariableSwizzleFromMask	param_2	unusedArg2	INFERRED	never read
+local	_PPEmulatorVariableSwizzleFromMask	param_3	unusedArg3	INFERRED	never read
+local	_PPEmulatorVariableSwizzleFromMask	param_4	unusedArg4	INFERRED	never read
+local	_PPEmulatorVariableSwizzleFromMask	param_5	unusedArg5	INFERRED	never read
+local	_PPEmulatorVariableSwizzleFromMask	param_6	unusedArg6	INFERRED	never read
+local	_PPEmulatorVariableSwizzleFromMask	param_7	unusedArg7	INFERRED	never read
+local	_PPEmulatorVariableSwizzleFromMask	param_8	unusedArg8	INFERRED	never read
+local	_PPEmulatorVariableSwizzleFromMask	bVar1	writeMask	CONFIRMED	emulator+0x1c, the 4-bit component write mask; bit i set means component i is written (swizzle byte = i, else 0xff)
+local	_PPEmulatorVariableSwizzleFromMask	uVar2	componentIndex	CONFIRMED	0..3, the bit tested in the mask and the value stored in the swizzle byte
+local	_PPEmulatorVariableSwizzleFromMask	puVar3	swizzleByte	CONFIRMED	cursor over the four swizzle bytes at emulator+8..+0xb
+local	_PPEmulatorVariableSwizzleFromMask	iVar4	componentsLeft	CONFIRMED	counts 4 down to 0
+local	_PPEmulatorVariableMaskFromSwizzle	bVar1	swizzleByte	CONFIRMED	one of the four swizzle bytes at emulator+8..+0xb; 0xff means unused, else a component index shifted into the mask
+local	_PPEmulatorVariableMaskFromSwizzle	pbVar2	swizzleCursor	CONFIRMED	cursor over the four swizzle bytes
+local	_PPEmulatorVariableMaskFromSwizzle	iVar3	componentsLeft	CONFIRMED	counts 4 down to 0
+local	_ncpy_97be5f58	param_1	out	CONFIRMED	destination buffer; the decimal digits (with a leading '-') are written here; return value is the number of characters written
+local	_ncpy_97be5f58	param_2	value	CONFIRMED	the integer printed in decimal (negated when negative)
+local	_ncpy_97be5f58	iVar1	leadingValue	CONFIRMED	value / 10: the digits before the last one, written recursively through _handleDigit; the last digit is value - leadingValue*10 + '0'
+local	_ncpy_97be5f58	local_20	writeCursor	CONFIRMED	address-taken pointer to the next char to write, advanced by _handleDigit
+local	_glpWriteSizeTypePrecision	param_1	out	CONFIRMED	output string buffer; ":N" then type letter then precision are appended and the end pointer is returned
+local	_glpWriteSizeTypePrecision	param_2	sizeMinusOne	CONFIRMED	printed as param_2 + 1 through _ncpy after ':' (vector size field: compact word 2 bits 11..10 hold size - 1)
+local	_glpWriteSizeTypePrecision	param_3	isMatrix	INFERRED	when 1 a second ":N" with the same number is appended (":N:N")
+local	_glpWriteSizeTypePrecision	param_4	valueType	CONFIRMED	switch: 1 -> "F", 2 -> "X", 3 -> "I", 4 -> "B" (float, fixed, int, bool)
+local	_glpWriteSizeTypePrecision	param_5	precision	CONFIRMED	1 -> "32", 2 -> "16", 3 -> "12" appended last
+local	_glpWriteSizeTypePrecision	iVar3	writeCursor	CONFIRMED	end of the text written so far
+local	_glpWritePrecision	param_1	out	CONFIRMED	output buffer; the precision letter is appended, end pointer returned
+local	_glpWritePrecision	param_2	precision	CONFIRMED	1 -> "R", 2 -> "H", 3 -> "X"
+local	_glpWriteSizeType	param_1	out	CONFIRMED	output string buffer, end pointer returned
+local	_glpWriteSizeType	param_2	sizeMinusOne	CONFIRMED	printed as param_2 + 1 after ':'
+local	_glpWriteSizeType	param_3	isMatrix	INFERRED	non-zero appends a second ":N"
+local	_glpWriteSizeType	param_4	valueType	CONFIRMED	1 "F", 2 "X", 3 "I", 4 "B"
+local	_glpWriteSizeType	iVar3	writeCursor	CONFIRMED	end of the text written so far
+local	_glpWriteClampSat	param_1	outCursor	CONFIRMED	output position; advanced as "C", "1" and "_SAT" are appended, and returned
+local	_glpWriteClampSat	param_2	hasClamp	CONFIRMED	non-zero writes "C"
+local	_glpWriteClampSat	param_3	clampKind	INFERRED	> 0 writes "1" after the "C"
+local	_glpWriteClampSat	param_4	saturate	CONFIRMED	non-zero appends "_SAT"

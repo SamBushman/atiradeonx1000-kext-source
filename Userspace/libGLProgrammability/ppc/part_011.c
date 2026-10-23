@@ -1,11 +1,11 @@
 #include "decls.h"
 
 /* ParseOperand__GetSwizzle @ 0x97bbbfc0 (12 bytes) */
-int ParseOperand__GetSwizzle(this, param_2)
+int ParseOperand__GetSwizzle(this, index)
   unsigned char * this;
-  uint param_2;
+  uint index;
 {
-  return *(undefined1 *)(param_2 + *(int *)(this + 0x10));
+  return *(undefined1 *)(index + *(int *)(this + 0x10));
 }
 
 /* ParseOperand__ClearSwizzles @ 0x97bbbfcc (68 bytes) */
@@ -137,25 +137,25 @@ LAB_97bbc1ec:
 }
 
 /* __ZN16ParseSymbolTableC2Ej @ 0x97bbc258 (4 bytes) */
-int __ZN16ParseSymbolTableC2Ej(this, param_2)
+int __ZN16ParseSymbolTableC2Ej(this, bucketCount)
   void *this;
-  uint param_2;
+  uint bucketCount;
 {
-  int iVar1;
+  int bucketOffset;
   void *allocation;
   uint loopIndex;
   
-  *(uint *)((int)this + 0x10) = param_2;
-  allocation = operator_new__(param_2 << 2);
+  *(uint *)((int)this + 0x10) = bucketCount;
+  allocation = operator_new__(bucketCount << 2);
   loopIndex = 0;
   *(void **)((int)this + 8) = allocation;
   *(undefined4 *)((int)this + 4) = 0;
   *(undefined4 *)this = 0;
   if (*(int *)((int)this + 0x10) != 0) {
     do {
-      iVar1 = loopIndex * 4;
+      bucketOffset = loopIndex * 4;
       loopIndex = loopIndex + 1;
-      *(undefined4 *)(iVar1 + *(int *)((int)this + 8)) = 0;
+      *(undefined4 *)(bucketOffset + *(int *)((int)this + 8)) = 0;
     } while (loopIndex < *(uint *)((int)this + 0x10));
   }
   *(undefined4 *)((int)this + 0xc) = 0;
@@ -178,25 +178,25 @@ int __ZN16ParseSymbolTableC2Ej(this, param_2)
 }
 
 /* __ZN16ParseSymbolTableC1Ej @ 0x97bbc25c (4 bytes) */
-int __ZN16ParseSymbolTableC1Ej(this, param_2)
+int __ZN16ParseSymbolTableC1Ej(this, bucketCount)
   void *this;
-  uint param_2;
+  uint bucketCount;
 {
-  int iVar1;
+  int bucketOffset;
   void *allocation;
   uint loopIndex;
   
-  *(uint *)((int)this + 0x10) = param_2;
-  allocation = operator_new__(param_2 << 2);
+  *(uint *)((int)this + 0x10) = bucketCount;
+  allocation = operator_new__(bucketCount << 2);
   loopIndex = 0;
   *(void **)((int)this + 8) = allocation;
   *(undefined4 *)((int)this + 4) = 0;
   *(undefined4 *)this = 0;
   if (*(int *)((int)this + 0x10) != 0) {
     do {
-      iVar1 = loopIndex * 4;
+      bucketOffset = loopIndex * 4;
       loopIndex = loopIndex + 1;
-      *(undefined4 *)(iVar1 + *(int *)((int)this + 8)) = 0;
+      *(undefined4 *)(bucketOffset + *(int *)((int)this + 8)) = 0;
     } while (loopIndex < *(uint *)((int)this + 0x10));
   }
   *(undefined4 *)((int)this + 0xc) = 0;
@@ -219,25 +219,25 @@ int __ZN16ParseSymbolTableC1Ej(this, param_2)
 }
 
 /* __ZN16ParseSymbolTableC4Ej @ 0x97bbc260 (184 bytes) */
-int __ZN16ParseSymbolTableC4Ej(this, param_2)
+int __ZN16ParseSymbolTableC4Ej(this, bucketCount)
   void *this;
-  uint param_2;
+  uint bucketCount;
 {
-  int iVar1;
+  int bucketOffset;
   void *allocation;
   uint loopIndex;
   
-  *(uint *)((int)this + 0x10) = param_2;
-  allocation = operator_new__(param_2 << 2);
+  *(uint *)((int)this + 0x10) = bucketCount;
+  allocation = operator_new__(bucketCount << 2);
   loopIndex = 0;
   *(void **)((int)this + 8) = allocation;
   *(undefined4 *)((int)this + 4) = 0;
   *(undefined4 *)this = 0;
   if (*(int *)((int)this + 0x10) != 0) {
     do {
-      iVar1 = loopIndex * 4;
+      bucketOffset = loopIndex * 4;
       loopIndex = loopIndex + 1;
-      *(undefined4 *)(iVar1 + *(int *)((int)this + 8)) = 0;
+      *(undefined4 *)(bucketOffset + *(int *)((int)this + 8)) = 0;
     } while (loopIndex < *(uint *)((int)this + 0x10));
   }
   *(undefined4 *)((int)this + 0xc) = 0;
@@ -277,15 +277,15 @@ int __ZN16ParseSymbolTableD1Ev(this)
 int __ZN16ParseSymbolTableD4Ev(this)
   void *this;
 {
-  void *this_00;
-  void *pvVar1;
+  void *symbolCursor;
+  void *nextSymbol;
   
-  this_00 = *(void **)this;
-  while (this_00 != (void *)0x0) {
-    pvVar1 = *(void **)((int)this_00 + 8);
-    __ZN11ParseSymbolD1Ev(this_00);
-    __ZdlPv(this_00);
-    this_00 = pvVar1;
+  symbolCursor = *(void **)this;
+  while (symbolCursor != (void *)0x0) {
+    nextSymbol = *(void **)((int)symbolCursor + 8);
+    __ZN11ParseSymbolD1Ev(symbolCursor);
+    __ZdlPv(symbolCursor);
+    symbolCursor = nextSymbol;
   }
   return __ZdlPv(*(void **)((int)this + 8));
 }
@@ -1145,22 +1145,22 @@ int ParseSymbolTable__FindSymbol(this, parseSymbol)
   unsigned char * this;
   unsigned char * parseSymbol;
 {
-  int iVar1;
-  unsigned char * pPVar2;
+  int isEqual;
+  unsigned char *bucketSymbol;
   
-  pPVar2 = *(unsigned char **)
+  bucketSymbol = *(unsigned char **)
             ((*(uint *)(parseSymbol + 0x1c) -
              (*(uint *)(parseSymbol + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4 +
             *(int *)(this + 8));
   while( true ) {
-    if (pPVar2 == (unsigned char *)0x0) {
+    if (bucketSymbol == (unsigned char *)0x0) {
       return (unsigned char *)0x0;
     }
-    iVar1 = __ZeqRK11ParseSymbolS1_(pPVar2,parseSymbol);
-    if (iVar1 != 0) break;
-    pPVar2 = *(unsigned char **)(pPVar2 + 4);
+    isEqual = __ZeqRK11ParseSymbolS1_(bucketSymbol,parseSymbol);
+    if (isEqual != 0) break;
+    bucketSymbol = *(unsigned char **)(bucketSymbol + 4);
   }
-  return pPVar2;
+  return bucketSymbol;
 }
 
 /* ParseSymbolTable__NextSymbol @ 0x97bbd7ac (24 bytes) */
@@ -1186,12 +1186,12 @@ int ParseSymbolTable__NextSymbolInHash(this, parseSymbol)
 }
 
 /* ParseSymbolTable__FirstSymbolInHash @ 0x97bbd7d8 (32 bytes) */
-int ParseSymbolTable__FirstSymbolInHash(this, param_2)
+int ParseSymbolTable__FirstSymbolInHash(this, hash)
   unsigned char * this;
-  uint param_2;
+  uint hash;
 {
   return *(undefined4 *)
-          ((param_2 - (param_2 / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4 +
+          ((hash - (hash / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10)) * 4 +
           *(int *)(this + 8));
 }
 
@@ -1200,29 +1200,29 @@ int ParseSymbolTable__FindGlobalSymbolByName(this, str)
   unsigned char * this;
   char *str;
 {
-  unsigned char * this_00;
-  int iVar1;
-  unsigned char * pPVar2;
+  unsigned char *keySymbol;
+  int isEqual;
+  unsigned char *bucketSymbol;
   
   if (str != (char *)0x0) {
-    this_00 = operator_new(100);
-    __ZN11ParseSymbolC1Ev(this_00);
-    if (this_00 != (unsigned char *)0x0) {
-      ParseSymbol__SetName(this_00,str);
-      for (pPVar2 = *(unsigned char **)
-                     ((*(uint *)(this_00 + 0x1c) -
-                      (*(uint *)(this_00 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10))
-                      * 4 + *(int *)(this + 8)); pPVar2 != (unsigned char *)0x0;
-          pPVar2 = *(unsigned char **)(pPVar2 + 4)) {
-        if ((*(int *)(pPVar2 + 0x38) != 0) &&
-           (iVar1 = __ZeqRK11ParseSymbolS1_(pPVar2,this_00), iVar1 != 0)) {
-          __ZN11ParseSymbolD1Ev(this_00);
-          __ZdlPv(this_00);
-          return pPVar2;
+    keySymbol = operator_new(100);
+    __ZN11ParseSymbolC1Ev(keySymbol);
+    if (keySymbol != (unsigned char *)0x0) {
+      ParseSymbol__SetName(keySymbol,str);
+      for (bucketSymbol = *(unsigned char **)
+                     ((*(uint *)(keySymbol + 0x1c) -
+                      (*(uint *)(keySymbol + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10))
+                      * 4 + *(int *)(this + 8)); bucketSymbol != (unsigned char *)0x0;
+          bucketSymbol = *(unsigned char **)(bucketSymbol + 4)) {
+        if ((*(int *)(bucketSymbol + 0x38) != 0) &&
+           (isEqual = __ZeqRK11ParseSymbolS1_(bucketSymbol,keySymbol), isEqual != 0)) {
+          __ZN11ParseSymbolD1Ev(keySymbol);
+          __ZdlPv(keySymbol);
+          return bucketSymbol;
         }
       }
-      __ZN11ParseSymbolD1Ev(this_00);
-      __ZdlPv(this_00);
+      __ZN11ParseSymbolD1Ev(keySymbol);
+      __ZdlPv(keySymbol);
     }
   }
   return (unsigned char *)0x0;
@@ -1233,29 +1233,29 @@ int ParseSymbolTable__FindSymbolByName(this, str)
   unsigned char * this;
   char *str;
 {
-  unsigned char * this_00;
-  int iVar1;
-  unsigned char * pPVar2;
+  unsigned char *keySymbol;
+  int isEqual;
+  unsigned char *bucketSymbol;
   
   if (str != (char *)0x0) {
-    this_00 = operator_new(100);
-    __ZN11ParseSymbolC1Ev(this_00);
-    if (this_00 != (unsigned char *)0x0) {
-      ParseSymbol__SetName(this_00,str);
-      for (pPVar2 = *(unsigned char **)
-                     ((*(uint *)(this_00 + 0x1c) -
-                      (*(uint *)(this_00 + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10))
-                      * 4 + *(int *)(this + 8)); pPVar2 != (unsigned char *)0x0;
-          pPVar2 = *(unsigned char **)(pPVar2 + 4)) {
-        iVar1 = __ZeqRK11ParseSymbolS1_(pPVar2,this_00);
-        if (iVar1 != 0) {
-          __ZN11ParseSymbolD1Ev(this_00);
-          __ZdlPv(this_00);
-          return pPVar2;
+    keySymbol = operator_new(100);
+    __ZN11ParseSymbolC1Ev(keySymbol);
+    if (keySymbol != (unsigned char *)0x0) {
+      ParseSymbol__SetName(keySymbol,str);
+      for (bucketSymbol = *(unsigned char **)
+                     ((*(uint *)(keySymbol + 0x1c) -
+                      (*(uint *)(keySymbol + 0x1c) / *(uint *)(this + 0x10)) * *(uint *)(this + 0x10))
+                      * 4 + *(int *)(this + 8)); bucketSymbol != (unsigned char *)0x0;
+          bucketSymbol = *(unsigned char **)(bucketSymbol + 4)) {
+        isEqual = __ZeqRK11ParseSymbolS1_(bucketSymbol,keySymbol);
+        if (isEqual != 0) {
+          __ZN11ParseSymbolD1Ev(keySymbol);
+          __ZdlPv(keySymbol);
+          return bucketSymbol;
         }
       }
-      __ZN11ParseSymbolD1Ev(this_00);
-      __ZdlPv(this_00);
+      __ZN11ParseSymbolD1Ev(keySymbol);
+      __ZdlPv(keySymbol);
     }
   }
   return (unsigned char *)0x0;
@@ -1575,26 +1575,26 @@ int ParseSymbolTable__CopySymbolTable(this)
 }
 
 /* ParseSymbolTable__ChangeChunk @ 0x97bbe090 (128 bytes) */
-int ParseSymbolTable__ChangeChunk(this, _PPStreamChunk1, _PPStreamChunk2, param_4)
+int ParseSymbolTable__ChangeChunk(this, _PPStreamChunk1, _PPStreamChunk2, releaseOwnership)
   unsigned char * this;
   unsigned char * _PPStreamChunk1;
   unsigned char * _PPStreamChunk2;
-  int param_4;
+  int releaseOwnership;
 {
-  unsigned char * this_00;
+  unsigned char *symbolCursor;
   
-  this_00 = *(unsigned char **)this;
-  if (this_00 != (unsigned char *)0x0) {
+  symbolCursor = *(unsigned char **)this;
+  if (symbolCursor != (unsigned char *)0x0) {
     do {
-      if (*(unsigned char **)this_00 == _PPStreamChunk1) {
-        ParseSymbol__SetChunk(this_00,_PPStreamChunk2);
-        if (param_4 != 0) {
-          *(undefined4 *)(this_00 + 0x44) = 0;
+      if (*(unsigned char **)symbolCursor == _PPStreamChunk1) {
+        ParseSymbol__SetChunk(symbolCursor,_PPStreamChunk2);
+        if (releaseOwnership != 0) {
+          *(undefined4 *)(symbolCursor + 0x44) = 0;
         }
         return 1;
       }
-      this_00 = *(unsigned char **)(this_00 + 8);
-    } while (this_00 != (unsigned char *)0x0);
+      symbolCursor = *(unsigned char **)(symbolCursor + 8);
+    } while (symbolCursor != (unsigned char *)0x0);
   }
   return 0;
 }
@@ -1603,15 +1603,15 @@ int ParseSymbolTable__ChangeChunk(this, _PPStreamChunk1, _PPStreamChunk2, param_
 int ParseSymbolTable__ClearCompilerTempData(this)
   unsigned char * this;
 {
-  int iVar1;
+  int symbolCursor;
   
-  iVar1 = *(int *)this;
-  if (iVar1 != 0) {
+  symbolCursor = *(int *)this;
+  if (symbolCursor != 0) {
     do {
-      *(undefined4 *)(iVar1 + 0xc) = 0;
-      *(undefined4 *)(iVar1 + 0x10) = 0;
-      iVar1 = *(int *)(iVar1 + 8);
-    } while (iVar1 != 0);
+      *(undefined4 *)(symbolCursor + 0xc) = 0;
+      *(undefined4 *)(symbolCursor + 0x10) = 0;
+      symbolCursor = *(int *)(symbolCursor + 8);
+    } while (symbolCursor != 0);
     return;
   }
   return;
@@ -1621,12 +1621,12 @@ int ParseSymbolTable__ClearCompilerTempData(this)
 int ParseSymbolTable__Dump(this)
   unsigned char * this;
 {
-  undefined *puVar1;
-  int iVar2;
+  undefined *fileTable;
+  int symbolCursor;
   
-  puVar1 = PTR_DAT_a7b7c0bc;
-  for (iVar2 = *(int *)this; iVar2 != 0; iVar2 = *(int *)(iVar2 + 8)) {
-    _fflush(puVar1 + 0x58);
+  fileTable = PTR_DAT_a7b7c0bc;
+  for (symbolCursor = *(int *)this; symbolCursor != 0; symbolCursor = *(int *)(symbolCursor + 8)) {
+    _fflush(fileTable + 0x58);
   }
   return;
 }
@@ -5185,13 +5185,13 @@ int TIntermLoop__indirectNode(this, pPStreamCompiler)
 }
 
 /* TIntermBranch__indirectNode @ 0x97bc36a4 (88 bytes) */
-int TIntermBranch__indirectNode(param_1)
-  unsigned char * param_1;
+int TIntermBranch__indirectNode(thisNode)
+  unsigned char * thisNode;
 {
   int *r3In0;
   void *this;
   
-  r3In0 = *(int **)(param_1 + 0xc);
+  r3In0 = *(int **)(thisNode + 0xc);
   if ((r3In0 != (int *)0x0) && (this = (void *)(**(code **)(*r3In0 + 0x10))(r3In0), this != (void *)0x0)) {
     __ZN12ParseOperandD1Ev(this);
     __ZdlPv(this);

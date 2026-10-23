@@ -1,0 +1,342 @@
+local	TParseContext__extensionErrorCheck	param_2	sourceLoc	INFERRED	source location
+local	TParseContext__extensionErrorCheck	bVar1	isDisabled	INFERRED	the extension behavior is EBhDisable (3): "extension ... is disabled"
+local	TParseContext__extensionErrorCheck	iStack_12c	strCopyChars	INFERRED	character pointer of the copy of the extension name used to build the message
+local	TParseContext__extensionErrorCheck	iStack_19c	msgPrefixChars	INFERRED	character pointer of the "extension " + name message prefix
+use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ local_1b0;$	+1
+use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*local_180\[0\]\ =\ iVar10;$	+1
+use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ local_190\[0\];$	+1
+use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ local_1b0;$@2	+1
+use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x18\);$	+1
+use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*if\ \(iVar10\ ==\ 2\)\ \{$	+1
+use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ local_1c0\[0\];$	+1
+use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*local_190\[0\]\ =\ iVar10;$	+1
+use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ local_1a0;$	+1
+use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ local_1c0\[0\];$@2	+1
+use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x18\);$@2	+1
+use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*bVar1\ =\ iVar10\ ==\ 3;$	+1
+use	TParseContext__extensionErrorCheck	iVar5	compareResult	INFERRED	memcmp of the key against the node key, then the length difference	^\s*iVar5\ =\ _memcmp\(local_1cc,\*\(undefined4\ \*\)\(local_1b0\ \+\ 0x14\),\*puVar7\);$	+4
+use	TParseContext__extensionErrorCheck	iVar5	compareResult	INFERRED	memcmp of the key against the node key, then the length difference	^\s*if\ \(iVar5\ <\ 0\)\ goto\ LAB_97b9d574;$	+1
+use	TParseContext__extensionErrorCheck	iVar5	compareResult	INFERRED	memcmp of the key against the node key, then the length difference	^\s*iVar5\ =\ _memcmp\(local_1cc,\*\(undefined4\ \*\)\(local_1c0\[0\]\ \+\ 0x14\),\*puVar7\);$	+4
+use	TParseContext__extensionErrorCheck	iVar5	compareResult	INFERRED	memcmp of the key against the node key, then the length difference	^\s*if\ \(\-1\ <\ iVar5\)\ goto\ LAB_97b9d98c;$	+1
+local	TParseContext__extensionErrorCheck	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__extensionErrorCheck	in_r8	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__extensionErrorCheck	local_120	allocatorArg2	INFERRED	pool_allocator argument for the name copy used in the message
+local	TParseContext__extensionErrorCheck	local_140	keyDestroyArg	INFERRED	allocator argument for the destroy of the key string
+local	TParseContext__extensionErrorCheck	local_150	entryKeyDestroyArg	INFERRED	allocator argument for the destroy of the new entry key
+local	TParseContext__extensionErrorCheck	local_160	insertHint	INFERRED	insertion hint iterator for insert_unique
+local	TParseContext__extensionErrorCheck	local_168	entryBehavior	INFERRED	TBehavior stored in the new map entry (initially 0)
+local	TParseContext__extensionErrorCheck	local_16c	entryKeyChars	INFERRED	character pointer of the new entry key copy
+local	TParseContext__extensionErrorCheck	local_170	entryKey	INFERRED	copy of the key string used in the new map entry
+local	TParseContext__extensionErrorCheck	local_180	insertHintCopy	INFERRED	copy of the hint iterator
+local	TParseContext__extensionErrorCheck	local_190	insertIterator	INFERRED	iterator returned by insert_unique
+local	TParseContext__extensionErrorCheck	local_1a0	mapEndOrMsgPrefix	INFERRED	map end node (this+0x34), later the TString "extension " + name
+local	TParseContext__extensionErrorCheck	local_1ac	msgChars	INFERRED	character pointer of the assembled message string
+local	TParseContext__extensionErrorCheck	local_1b0	mapIterOrMsgString	INFERRED	lower_bound iterator, later the message TString (address taken)
+local	TParseContext__extensionErrorCheck	local_1c0	allocatorArgOrLowerBound	INFERRED	pool_allocator argument for the key string constructor, later the lower_bound iterator of the second lookup
+local	TParseContext__extensionErrorCheck	local_1cc	extensionKeyChars	INFERRED	character pointer of the extension name key copy
+local	TParseContext__extensionErrorCheck	local_1d0	extensionKey	INFERRED	copy of the extension name used as the TBehaviorMap key
+local	TParseContext__extensionErrorCheck	local_34	lenNodeB	INFERRED	length of the node key in the second compare (address taken: min() argument)
+local	TParseContext__extensionErrorCheck	local_38	lenKeyB	INFERRED	length of the lookup key in the second compare (address taken: min() argument)
+local	TParseContext__extensionErrorCheck	local_3c	lenNodeA	INFERRED	length of the node key in the first compare (address taken: min() argument)
+local	TParseContext__extensionErrorCheck	local_40	lenKeyA	INFERRED	length of the lookup key in the first compare (address taken: min() argument)
+local	TParseContext__extensionErrorCheck	local_50	keyDestroyArg2	INFERRED	allocator argument for the destroy of the key string (second path)
+local	TParseContext__extensionErrorCheck	local_60	entryKey2DestroyArg	INFERRED	allocator argument for the destroy of the second new entry key
+local	TParseContext__extensionErrorCheck	local_68	entryBehavior2	INFERRED	TBehavior stored in the second new map entry (initially 0)
+local	TParseContext__extensionErrorCheck	local_6c	entryKey2Chars	INFERRED	character pointer of the second new entry key copy
+local	TParseContext__extensionErrorCheck	local_70	entryKey2	INFERRED	second copy of the key string used in a new map entry
+local	TParseContext__extensionErrorCheck	local_80	allocatorArg3	INFERRED	pool_allocator argument for the key string constructor (second path)
+local	TParseContext__extensionErrorCheck	pcVar3	messageChars	INFERRED	characters of the "extension ... is being used" message
+use	TParseContext__extensionErrorCheck	puVar7	minLengthPtr	INFERRED	points at the smaller of the two compared lengths	^\s*puVar7\ =\ \&local_3c;$	+1
+use	TParseContext__extensionErrorCheck	puVar7	minLengthPtr	INFERRED	points at the smaller of the two compared lengths	^\s*puVar7\ =\ \&local_40;$	+1
+use	TParseContext__extensionErrorCheck	puVar7	minLengthPtr	INFERRED	points at the smaller of the two compared lengths	^\s*iVar5\ =\ _memcmp\(local_1cc,\*\(undefined4\ \*\)\(local_1b0\ \+\ 0x14\),\*puVar7\);$	+1
+use	TParseContext__extensionErrorCheck	puVar7	minLengthPtr	INFERRED	points at the smaller of the two compared lengths	^\s*puVar7\ =\ \&local_34;$	+1
+use	TParseContext__extensionErrorCheck	puVar7	minLengthPtr	INFERRED	points at the smaller of the two compared lengths	^\s*puVar7\ =\ \&local_38;$	+1
+use	TParseContext__extensionErrorCheck	puVar7	minLengthPtr	INFERRED	points at the smaller of the two compared lengths	^\s*iVar5\ =\ _memcmp\(local_1cc,\*\(undefined4\ \*\)\(local_1c0\[0\]\ \+\ 0x14\),\*puVar7\);$	+1
+local	TParseContext__extensionErrorCheck	uStack_130	strCopy	INFERRED	copy of the extension name appended to the message (address taken)
+use	TParseContext__extensionErrorCheck	uVar11	keyLength	INFERRED	length of the lookup key string	^\s*uVar11\ =\ \*\(uint\ \*\)\(local_1cc\ \+\ \-0xc\);$	+2
+use	TParseContext__extensionErrorCheck	uVar11	keyLength	INFERRED	length of the lookup key string	^\s*if\ \(uVar11\ <=\ uVar9\)\ \{$	+1
+use	TParseContext__extensionErrorCheck	uVar11	keyLength	INFERRED	length of the lookup key string	^\s*iVar5\ =\ uVar11\ \-\ uVar9;$	+1
+use	TParseContext__extensionErrorCheck	uVar11	keyLength	INFERRED	length of the lookup key string	^\s*uVar11\ =\ \*\(uint\ \*\)\(local_1cc\ \+\ \-0xc\);$@2	+2
+use	TParseContext__extensionErrorCheck	uVar11	keyLength	INFERRED	length of the lookup key string	^\s*if\ \(uVar11\ <=\ uVar9\)\ \{$@2	+1
+use	TParseContext__extensionErrorCheck	uVar11	keyLength	INFERRED	length of the lookup key string	^\s*iVar5\ =\ uVar11\ \-\ uVar9;$@2	+1
+use	TParseContext__extensionErrorCheck	uVar9	nodeKeyLength	INFERRED	w1/w3 length of the node key string; w2 line & 0xffff	^\s*uVar9\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(local_1b0\ \+\ 0x14\)\ \+\ \-0xc\);$	+3
+use	TParseContext__extensionErrorCheck	uVar9	nodeKeyLength	INFERRED	w1/w3 length of the node key string; w2 line & 0xffff	^\s*iVar5\ =\ uVar11\ \-\ uVar9;$	+1
+use	TParseContext__extensionErrorCheck	uVar9	lineInString	INFERRED	w1/w3 length of the node key string; w2 line & 0xffff	^\s*uVar9\ =\ param_2\ \&\ 0xffff;$	+3
+use	TParseContext__extensionErrorCheck	uVar9	lineInString	INFERRED	w1/w3 length of the node key string; w2 line & 0xffff	^\s*_sprintf\(acStack_100,"%d:%d",param_2\ >>\ 0x10,uVar9\);$	+1
+use	TParseContext__extensionErrorCheck	uVar9	nodeKeyLength	INFERRED	w1/w3 length of the node key string; w2 line & 0xffff	^\s*uVar9\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(local_1c0\[0\]\ \+\ 0x14\)\ \+\ \-0xc\);$	+3
+use	TParseContext__extensionErrorCheck	uVar9	nodeKeyLength	INFERRED	w1/w3 length of the node key string; w2 line & 0xffff	^\s*iVar5\ =\ uVar11\ \-\ uVar9;$@2	+1
+local	TParseContext__findFunction	param_2	sourceLoc	INFERRED	source location
+local	TParseContext__findFunction	param_4	builtInOut	INFERRED	output flag: set to 1 when the function was found in the built-in level (index 0)
+local	TParseContext__findFunction	param_5	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__findFunction	param_6	scratchR9	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__findFunction	bVar1	terminalChar	INFERRED	std::string::_S_terminal byte stored after the name
+use	TParseContext__findFunction	iVar2	levelIndex	INFERRED	w0 symbol table level searched, counted down; w1 symbol vtable slot 3 result (is it a function); w2 length of the function name	^\s*iVar2\ =\ \(piVar6\[1\]\ \-\ iVar5\ >>\ 2\)\ \+\ \-1;$	+1
+use	TParseContext__findFunction	iVar2	levelIndex	INFERRED	w0 symbol table level searched, counted down; w1 symbol vtable slot 3 result (is it a function); w2 length of the function name	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar5\ \+\ iVar2\ \*\ 4\);$	+1
+use	TParseContext__findFunction	iVar2	levelIndex	INFERRED	w0 symbol table level searched, counted down; w1 symbol vtable slot 3 result (is it a function); w2 length of the function name	^\s*if\ \(\(a0\ !=\ \(int\ \*\)0x0\)\ \|\|\ \(iVar2\ \+\ \-1\ <\ 0\)\)\ break;$	+1
+use	TParseContext__findFunction	iVar2	levelIndex	INFERRED	w0 symbol table level searched, counted down; w1 symbol vtable slot 3 result (is it a function); w2 length of the function name	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+1
+use	TParseContext__findFunction	iVar2	levelIndex	INFERRED	w0 symbol table level searched, counted down; w1 symbol vtable slot 3 result (is it a function); w2 length of the function name	^\s*\*\(uint\ \*\)param_4\ =\ \(uint\)\(iVar2\ ==\ 0\);$	+1
+use	TParseContext__findFunction	iVar2	isFunctionResult	INFERRED	w0 symbol table level searched, counted down; w1 symbol vtable slot 3 result (is it a function); w2 length of the function name	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0xc\)\)\(a0,a1,a2,a3,param_5,param_6,iVar5\);$	+2
+use	TParseContext__findFunction	iVar2	nameLength	INFERRED	w0 symbol table level searched, counted down; w1 symbol vtable slot 3 result (is it a function); w2 length of the function name	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar7\ \+\ \-0xc\);$	+1
+use	TParseContext__findFunction	iVar2	nameLength	INFERRED	w0 symbol table level searched, counted down; w1 symbol vtable slot 3 result (is it a function); w2 length of the function name	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar7\ \+\ \-0xc\);$@2	+1
+use	TParseContext__findFunction	iVar2	nameLength	INFERRED	w0 symbol table level searched, counted down; w1 symbol vtable slot 3 result (is it a function); w2 length of the function name	^\s*\*\(byte\ \*\)\(iVar7\ \+\ iVar2\)\ =\ bVar1;$	+1
+use	TParseContext__findFunction	iVar5	levelsBegin	INFERRED	w0 level vector start; w1 function->getName() TString (function+4)	^\s*iVar5\ =\ \*piVar6;$	+2
+use	TParseContext__findFunction	iVar5	levelsBegin	INFERRED	w0 level vector start; w1 function->getName() TString (function+4)	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar5\ \+\ iVar2\ \*\ 4\);$	+1
+use	TParseContext__findFunction	iVar5	levelsBegin	INFERRED	w0 level vector start; w1 function->getName() TString (function+4)	^\s*iVar5\ =\ \*piVar6;$@2	+1
+use	TParseContext__findFunction	iVar5	levelsBegin	INFERRED	w0 level vector start; w1 function->getName() TString (function+4)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0xc\)\)\(a0,a1,a2,a3,param_5,param_6,iVar5\);$	+1
+use	TParseContext__findFunction	iVar5	nameStringRef	INFERRED	w0 level vector start; w1 function->getName() TString (function+4)	^\s*iVar5\ =\ \*\(int\ \*\)\(param_3\ \+\ 4\);$	+2
+use	TParseContext__findFunction	iVar5	nameStringRef	INFERRED	w0 level vector start; w1 function->getName() TString (function+4)	^\s*iVar5\ =\ \*\(int\ \*\)\(param_3\ \+\ 4\);$@2	+2
+use	TParseContext__findFunction	iVar5	nameStringRef	INFERRED	w0 level vector start; w1 function->getName() TString (function+4)	^\s*error\(\(int\)this,\(char\ \*\)param_2,pcVar4,\*\(char\ \*\*\)\(iVar5\ \+\ 4\),"",param_6,\(uint\)bVar1,iVar5\);$	+1
+use	TParseContext__findFunction	iVar7	level	INFERRED	w0 level examined; w1 character pointer of the function name	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar5\ \+\ iVar2\ \*\ 4\);$	+1
+use	TParseContext__findFunction	iVar7	level	INFERRED	w0 level examined; w1 character pointer of the function name	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find\(\(unsigned\ char\ \*\)local_40,iVar7,uVar3\);$	+1
+use	TParseContext__findFunction	iVar7	level	INFERRED	w0 level examined; w1 character pointer of the function name	^\s*if\ \(local_40\[0\]\ !=\ \*\(int\ \*\)\(iVar7\ \+\ 4\)\)\ \{$	+1
+use	TParseContext__findFunction	iVar7	nameChars	INFERRED	w0 level examined; w1 character pointer of the function name	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar5\ \+\ 4\);$	+1
+use	TParseContext__findFunction	iVar7	nameChars	INFERRED	w0 level examined; w1 character pointer of the function name	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar7\ \+\ \-0xc\);$	+1
+use	TParseContext__findFunction	iVar7	nameChars	INFERRED	w0 level examined; w1 character pointer of the function name	^\s*iVar7\ =\ \*\(int\ \*\)\(iVar5\ \+\ 4\);$@2	+1
+use	TParseContext__findFunction	iVar7	nameChars	INFERRED	w0 level examined; w1 character pointer of the function name	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar7\ \+\ \-0xc\);$@2	+1
+use	TParseContext__findFunction	iVar7	nameChars	INFERRED	w0 level examined; w1 character pointer of the function name	^\s*\*\(byte\ \*\)\(iVar7\ \+\ iVar2\)\ =\ bVar1;$	+1
+local	TParseContext__findFunction	local_40	findResult	INFERRED	std::pair<iterator,bool> returned by the level map find
+local	TParseContext__findFunction	pcVar4	errorReason	INFERRED	"function name expected" / "no matching overloaded function found"
+local	TParseContext__findFunction	piVar6	symbolTable	INFERRED	this+4: the symbol table (level vector at +0)
+local	TParseContext__findFunction	uVar3	mangledName	INFERRED	function->getMangledName() (vtable +8)
+local	TParseContext__executeInitializer	iVar8	levelsBeginOrVariableOrConstArray	INFERRED	level vector start, then the variable found by the level search, then its constant array: one Ghidra variable reused as a temp
+use	TParseContext__executeInitializer	local_14c	voidErrorResult	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*local_14c\ =\ TParseContext__voidErrorCheck\(this,param_2,param_3,param_4\);$	+3
+use	TParseContext__executeInitializer	local_14c	voidErrorResult	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*local_144\ =\ local_14c;$	+1
+use	TParseContext__executeInitializer	local_14c	voidErrorResult	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*local_13c\ =\ local_14c;$	+3
+use	TParseContext__executeInitializer	local_14c	voidErrorResult	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*local_140\ =\ \(undefined\ \*\*\)local_14c;$	+2
+use	TParseContext__executeInitializer	local_14c	voidErrorResult	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*piVar6\[4\]\ =\ local_14c;$	+1
+use	TParseContext__executeInitializer	local_14c	zeroWord	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*local_14c\ =\ 0;$	+1
+use	TParseContext__executeInitializer	local_14c	nameStringChars	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*local_14c\ =\ local_13c;$	+1
+use	TParseContext__executeInitializer	local_14c	nameStringChars	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*if\ \(local_14c\ ==\ 0\)\ \{$	+1
+use	TParseContext__executeInitializer	local_14c	nameStringChars	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*piVar6\ =\ \(int\ \*\)\(local_14c\ \-\ 4\);$	+1
+use	TParseContext__executeInitializer	local_14c	nameStringChars	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*\(\(unsigned\ char\ \*\)\(local_14c\ \-\ 0xc\),local_50\);$	+1
+use	TParseContext__executeInitializer	local_14c	typeStringChars	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*local_14c\ =\ uVar17;$	+1
+use	TParseContext__executeInitializer	local_14c	typeStringChars	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*\*\(byte\ \*\)\(local_14c\ \+\ \*\(int\ \*\)\(local_14c\ \-\ 0xc\)\)\ =\ bVar1;$	+4
+use	TParseContext__executeInitializer	local_14c	typeStringChars	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*uVar17\ =\ local_14c;$	+1
+use	TParseContext__executeInitializer	local_14c	existingTypeWord	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*local_14c\ =\ piVar6\[4\];$	+1
+use	TParseContext__executeInitializer	local_14c	existingTypeWord	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*local_14c\ =\ piVar6\[4\];$@2	+1
+use	TParseContext__executeInitializer	local_14c	zeroWord	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*local_14c\ =\ 0;$@2	+1
+use	TParseContext__canNodeBeRemoved	iVar2	isConstructorResult	INFERRED	w1 TIntermOperator::isConstructor(); w2 aggregate->getSequence() (vtable +100)	^\s*iVar2\ =\ TIntermOperator__isConstructor\(this_00\);$	+2
+use	TParseContext__canNodeBeRemoved	iVar2	sequence	INFERRED	w1 TIntermOperator::isConstructor(); w2 aggregate->getSequence() (vtable +100)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this_00\ \+\ 100\)\)\(this_00\);$	+3
+local	TParseContext__canNodeBeRemoved	iVar3	constUnionTest	INFERRED	child getAsConstantUnion(): all children must be constants
+local	TParseContext__canNodeBeRemoved	puVar4	childCursor	INFERRED	iterator over the aggregate sequence
+local	TParseContext__canNodeBeRemoved	uVar1	result	INFERRED	1 when every constructor argument is constant
+local	TParseContext__addConstructor	param_6	line	INFERRED	source line for error messages
+local	TParseContext__addConstructor	bVar1	isNotStruct	INFERRED	constructor operator is not EOpConstructStruct (0x75)
+use	TParseContext__addConstructor	iVar10	structFieldList	INFERRED	w1 struct type field list (function return type +0x24); w2 node->getAsAggregate(); w3/w4 aggregate->getSequence() (vtable +100); w5 node getLine(); w6 copy of the argument counter; w7 canNodeBeRemoved result	^\s*iVar10\ =\ 0;$	+1
+use	TParseContext__addConstructor	iVar10	structFieldList	INFERRED	w1 struct type field list (function return type +0x24); w2 node->getAsAggregate(); w3/w4 aggregate->getSequence() (vtable +100); w5 node getLine(); w6 copy of the argument counter; w7 canNodeBeRemoved result	^\s*iVar10\ =\ \*\(int\ \*\)\(param_5\ \+\ 0x24\);$	+2
+use	TParseContext__addConstructor	iVar10	structFieldList	INFERRED	w1 struct type field list (function return type +0x24); w2 node->getAsAggregate(); w3/w4 aggregate->getSequence() (vtable +100); w5 node getLine(); w6 copy of the argument counter; w7 canNodeBeRemoved result	^\s*if\ \(\*\(int\ \*\)\(iVar10\ \+\ 8\)\ \-\ \*\(int\ \*\)\(iVar10\ \+\ 4\)\ >>\ 3\ ==\ 1\)\ \{$	+1
+use	TParseContext__addConstructor	iVar10	structFieldList	INFERRED	w1 struct type field list (function return type +0x24); w2 node->getAsAggregate(); w3/w4 aggregate->getSequence() (vtable +100); w5 node getLine(); w6 copy of the argument counter; w7 canNodeBeRemoved result	^\s*if\ \(\(bVar1\)\ \|\|$	+3
+use	TParseContext__addConstructor	iVar10	nodeAggregate	INFERRED	w1 struct type field list (function return type +0x24); w2 node->getAsAggregate(); w3/w4 aggregate->getSequence() (vtable +100); w5 node getLine(); w6 copy of the argument counter; w7 canNodeBeRemoved result	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)pTVar3\ \+\ 0x1c\)\)\(pTVar3\);$	+2
+use	TParseContext__addConstructor	iVar10	convertedSequence	INFERRED	w1 struct type field list (function return type +0x24); w2 node->getAsAggregate(); w3/w4 aggregate->getSequence() (vtable +100); w5 node getLine(); w6 copy of the argument counter; w7 canNodeBeRemoved result	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 100\)\)\(piVar5\);$	+3
+use	TParseContext__addConstructor	iVar10	convertedSequence	INFERRED	w1 struct type field list (function return type +0x24); w2 node->getAsAggregate(); w3/w4 aggregate->getSequence() (vtable +100); w5 node getLine(); w6 copy of the argument counter; w7 canNodeBeRemoved result	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 100\)\)\(piVar5\);$@2	+2
+use	TParseContext__addConstructor	iVar10	convertedSequence	INFERRED	w1 struct type field list (function return type +0x24); w2 node->getAsAggregate(); w3/w4 aggregate->getSequence() (vtable +100); w5 node getLine(); w6 copy of the argument counter; w7 canNodeBeRemoved result	^\s*\(\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar10\ \+\ 4\),a1,param_4,param_2,uVar4,a5,iVar2\);$	+1
+use	TParseContext__addConstructor	iVar10	nodeLine	INFERRED	w1 struct type field list (function return type +0x24); w2 node->getAsAggregate(); w3/w4 aggregate->getSequence() (vtable +100); w5 node getLine(); w6 copy of the argument counter; w7 canNodeBeRemoved result	^\s*iVar10\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)param_2\)\(param_2\);$	+2
+use	TParseContext__addConstructor	iVar10	argIndexCopy	INFERRED	w1 struct type field list (function return type +0x24); w2 node->getAsAggregate(); w3/w4 aggregate->getSequence() (vtable +100); w5 node getLine(); w6 copy of the argument counter; w7 canNodeBeRemoved result	^\s*iVar10\ =\ local_3c;$	+1
+use	TParseContext__addConstructor	iVar10	argIndexCopy	INFERRED	w1 struct type field list (function return type +0x24); w2 node->getAsAggregate(); w3/w4 aggregate->getSequence() (vtable +100); w5 node getLine(); w6 copy of the argument counter; w7 canNodeBeRemoved result	^\s*\(\(int\ \(\*\)\(\)\)TParseContext__constructStruct\)\(this,\(unsigned\ char\ \*\)\*puVar11,\(unsigned\ char\ \*\)puVar9\[iVar10\ \*\ 2\],$	+2
+use	TParseContext__addConstructor	iVar10	canBeRemoved	INFERRED	w1 struct type field list (function return type +0x24); w2 node->getAsAggregate(); w3/w4 aggregate->getSequence() (vtable +100); w5 node getLine(); w6 copy of the argument counter; w7 canNodeBeRemoved result	^\s*iVar10\ =\ \(\(int\ \(\*\)\(\)\)TParseContext__canNodeBeRemoved\)\(this,a0_00\);$	+2
+use	TParseContext__addConstructor	iVar2	firstChildVtable	INFERRED	w1 vtable of the first child; w2 node getLine()	^\s*iVar2\ =\ \*\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar10\ \+\ 4\);$	+1
+use	TParseContext__addConstructor	iVar2	firstChildVtable	INFERRED	w1 vtable of the first child; w2 node getLine()	^\s*\(\*\*\(code\ \*\*\)\(iVar2\ \+\ 0x1c\)\)$	+2
+use	TParseContext__addConstructor	iVar2	nodeLineB	INFERRED	w1 vtable of the first child; w2 node getLine()	^\s*iVar2\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)param_2\)\(param_2\);$	+1
+use	TParseContext__addConstructor	iVar2	nodeLineB	INFERRED	w1 vtable of the first child; w2 node getLine()	^\s*\(\(int\ \(\*\)\(\)\)TParseContext__constructStruct\)\(this,\(unsigned\ char\ \*\)\*puVar11,\(unsigned\ char\ \*\)puVar9\[iVar10\ \*\ 2\],$	+2
+local	TParseContext__addConstructor	in_r9	scratchR9	UNKNOWN	register r9, also reloaded with the sequence begin pointer
+local	TParseContext__addConstructor	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__addConstructor	local_34	replacementNode	INFERRED	converted constructor argument inserted into the sequence (address taken)
+local	TParseContext__addConstructor	local_38	iteratorSlot	INFERRED	iterator over the sequence passed by reference to removeChildNode
+local	TParseContext__addConstructor	local_3c	argIndex	INFERRED	index of the argument being converted (address taken)
+local	TParseContext__addConstructor	pcVar8	lineArg	INFERRED	copy of line carried through the vtable calls
+use	TParseContext__addConstructor	piVar5	convertedAggregate	INFERRED	converted node getAsAggregate()	^\s*piVar5\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)pTVar3\ \+\ 0x1c\)\)\(pTVar3\);$	+2
+use	TParseContext__addConstructor	piVar5	convertedAggregate	INFERRED	converted node getAsAggregate()	^\s*piVar5\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)pTVar3\ \+\ 0x1c\)\)\(pTVar3\);$@2	+2
+local	TParseContext__addConstructor	puVar11	childCursor	INFERRED	iterator over the argument sequence
+local	TParseContext__addConstructor	puVar9	structFieldBegin	INFERRED	start of the struct type field vector
+use	TParseContext__addConstructor	uVar4	nodeLineC	INFERRED	node getLine()	^\s*uVar4\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)param_2\)\(param_2\);$	+1
+use	TParseContext__addConstructor	uVar4	nodeLineC	INFERRED	node getLine()	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)TParseContext__constructBuiltIn\)\(this,param_3,param_4,param_2,uVar4,0\);$	+1
+use	TParseContext__addConstructor	uVar4	nodeLineC	INFERRED	node getLine()	^\s*\(\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar10\ \+\ 4\),a1,param_4,param_2,uVar4,a5,iVar2\);$	+1
+use	TParseContext__addConstructor	uVar4	nodeLineC	INFERRED	node getLine()	^\s*uVar4\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)param_2\)\(param_2\);$@2	+2
+local	TParseContext__constructBuiltIn	param_5	line	INFERRED	source line for error messages
+local	TParseContext__constructBuiltIn	param_6	subset	INFERRED	nonzero when constructing from a subset of the argument list
+local	TParseContext__constructBuiltIn	bVar1	sameType	INFERRED	converted node type matches the constructor type
+local	TParseContext__constructBuiltIn	iVar4	subsetCopy	INFERRED	copy of subset carried into error()
+local	TParseContext__constructBuiltIn	iVar6	switchOffset	INFERRED	constructor index * 4 carried into error()
+local	TParseContext__constructBuiltIn	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__constructBuiltIn	local_2c	typeTempBits	INFERRED	bit-field word (+0x24) of the TType temp at local_50
+local	TParseContext__constructBuiltIn	local_48	typeTempStructure	INFERRED	structure pointer (+8) of the TType temp at local_50
+local	TParseContext__constructBuiltIn	local_50	typeTemp	INFERRED	converted node getType() temp
+local	TParseContext__constructBuiltIn	uVar2	nodeLine	INFERRED	node getLine()
+local	TParseContext__constructBuiltIn	uVar5	ctorIndex	INFERRED	op - 0x66: index of the constructor operator (0xf entries)
+local	TParseContext__constructBuiltIn	uVar7	convertOp	INFERRED	unary conversion operator (0x66 / 0x67 / 0x68) used to convert the argument
+local	TParseContext__constructStruct	param_4	paramCount	INFERRED	1-based index of the parameter being converted (used in the error message)
+local	TParseContext__constructStruct	param_5	line	INFERRED	source line for error messages
+local	TParseContext__constructStruct	param_6	subset	INFERRED	nonzero when called from a subset conversion
+local	TParseContext__constructStruct	local_2c	typeTemp2Bits	INFERRED	bit-field word (+0x24) of the TType temp at local_50
+local	TParseContext__constructStruct	local_50	typeTemp2	INFERRED	argument getType() temp for the error message
+local	TParseContext__constructStruct	local_5c	typeTempBits	INFERRED	bit-field word (+0x24) of the TType temp at local_80
+local	TParseContext__constructStruct	local_78	typeTempStructure	INFERRED	structure pointer (+8) of the TType temp at local_80
+local	TParseContext__constructStruct	local_80	typeTemp	INFERRED	argument getType() temp for the type comparison
+use	TParseContext__constructStruct	piVar1	nodeTyped	INFERRED	node->getAsTyped()	^\s*piVar1\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 0x14\)\)$	+1
+use	TParseContext__constructStruct	piVar1	nodeTyped	INFERRED	node->getAsTyped()	^\s*\(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x38\)\)\(local_80,piVar1\);$	+1
+use	TParseContext__constructStruct	piVar1	nodeTyped	INFERRED	node->getAsTyped()	^\s*piVar1\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 0x14\)\)\(param_2\);$	+2
+use	TParseContext__constructStruct	uVar2	result	INFERRED	converted node, or 0 on failure	^\s*uVar2\ =\ 0;$	+1
+use	TParseContext__constructStruct	uVar2	result	INFERRED	converted node, or 0 on failure	^\s*uVar2\ =\ TIntermediate__setAggregateOperator\(\*\(unsigned\ char\ \*\*\)this,pTVar3,0x75,param_5\);$	+1
+use	TParseContext__constructStruct	uVar2	result	INFERRED	converted node, or 0 on failure	^\s*uVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 0x14\)\)\(param_2,a1,a2,a3,a4,a5,a6\);$	+1
+use	TParseContext__constructStruct	uVar2	result	INFERRED	converted node, or 0 on failure	^\s*return\ uVar2;$	+1
+local	TParseContext__constructStruct	uVar4	fromTypeName	INFERRED	basic type name of the argument, for the error message
+local	TParseContext__addConstVectorNode	param_4	line	INFERRED	source line for error messages and addConstantUnion
+local	TParseContext__addConstVectorNode	param_5	scratchR7	UNKNOWN	register leftover forwarded through the vtable calls
+local	TParseContext__addConstVectorNode	param_6	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__addConstVectorNode	in_r9	scratchR9	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__addConstVectorNode	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+use	TParseContext__addConstVectorNode	iVar11	lineCopy	INFERRED	w1 copy of the line argument; w2 child getAsConstantUnion(); w3 parseConstTree result; w4 number of swizzle fields (vectorFields+0x10); w5 byte offset of the current swizzle field	^\s*iVar11\ =\ param_4;$	+1
+use	TParseContext__addConstVectorNode	iVar11	lineCopy	INFERRED	w1 copy of the line argument; w2 child getAsConstantUnion(); w3 parseConstTree result; w4 number of swizzle fields (vectorFields+0x10); w5 byte offset of the current swizzle field	^\s*\(\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar5\ \+\ 4\),a1_00,pTVar9,iVar11,param_5,$	+2
+use	TParseContext__addConstVectorNode	iVar11	constUnionTest	INFERRED	w1 copy of the line argument; w2 child getAsConstantUnion(); w3 parseConstTree result; w4 number of swizzle fields (vectorFields+0x10); w5 byte offset of the current swizzle field	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x18\)\)\(piVar6\);$	+2
+use	TParseContext__addConstVectorNode	iVar11	parseResult	INFERRED	w1 copy of the line argument; w2 child getAsConstantUnion(); w3 parseConstTree result; w4 number of swizzle fields (vectorFields+0x10); w5 byte offset of the current swizzle field	^\s*iVar11\ =\ TIntermediate__parseConstTree$	+1
+use	TParseContext__addConstVectorNode	iVar11	parseResult	INFERRED	w1 copy of the line argument; w2 child getAsConstantUnion(); w3 parseConstTree result; w4 number of swizzle fields (vectorFields+0x10); w5 byte offset of the current swizzle field	^\s*iVar11\ =\ TIntermediate__parseConstTree$@2	+1
+use	TParseContext__addConstVectorNode	iVar11	parseResult	INFERRED	w1 copy of the line argument; w2 child getAsConstantUnion(); w3 parseConstTree result; w4 number of swizzle fields (vectorFields+0x10); w5 byte offset of the current swizzle field	^\s*if\ \(iVar11\ !=\ 0\)\ \{$	+1
+use	TParseContext__addConstVectorNode	iVar11	fieldCount	INFERRED	w1 copy of the line argument; w2 child getAsConstantUnion(); w3 parseConstTree result; w4 number of swizzle fields (vectorFields+0x10); w5 byte offset of the current swizzle field	^\s*iVar11\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x10\);$	+1
+use	TParseContext__addConstVectorNode	iVar11	fieldCount	INFERRED	w1 copy of the line argument; w2 child getAsConstantUnion(); w3 parseConstTree result; w4 number of swizzle fields (vectorFields+0x10); w5 byte offset of the current swizzle field	^\s*pcVar8\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar7,iVar11\ <<\ 2\);$	+1
+use	TParseContext__addConstVectorNode	iVar11	fieldByteOffset	INFERRED	w1 copy of the line argument; w2 child getAsConstantUnion(); w3 parseConstTree result; w4 number of swizzle fields (vectorFields+0x10); w5 byte offset of the current swizzle field	^\s*iVar11\ =\ 0;$	+1
+use	TParseContext__addConstVectorNode	iVar11	fieldByteOffset	INFERRED	w1 copy of the line argument; w2 child getAsConstantUnion(); w3 parseConstTree result; w4 number of swizzle fields (vectorFields+0x10); w5 byte offset of the current swizzle field	^\s*if\ \(iVar3\ <=\ \*\(int\ \*\)\(param_2\ \+\ iVar11\)\ !=\ 0\)\ \{$	+3
+use	TParseContext__addConstVectorNode	iVar11	fieldByteOffset	INFERRED	w1 copy of the line argument; w2 child getAsConstantUnion(); w3 parseConstTree result; w4 number of swizzle fields (vectorFields+0x10); w5 byte offset of the current swizzle field	^\s*\*\(undefined4\ \*\)\(param_2\ \+\ iVar11\)\ =\ 0;$	+1
+use	TParseContext__addConstVectorNode	iVar11	fieldByteOffset	INFERRED	w1 copy of the line argument; w2 child getAsConstantUnion(); w3 parseConstTree result; w4 number of swizzle fields (vectorFields+0x10); w5 byte offset of the current swizzle field	^\s*\*\(undefined4\ \*\)\(pcVar8\ \+\ iVar11\)\ =\ \*\(undefined4\ \*\)\(pcVar10\ \+\ \*\(int\ \*\)\(param_2\ \+\ iVar11\)\ \*\ 4\);$	+2
+use	TParseContext__addConstVectorNode	iVar3	firstChildVtable	INFERRED	w1 vtable of the first child; w2 constant component count of the node	^\s*iVar3\ =\ \*\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar5\ \+\ 4\);$	+4
+use	TParseContext__addConstVectorNode	iVar3	nodeComponentCount	INFERRED	w1 vtable of the first child; w2 constant component count of the node	^\s*iVar3\ =\ \(int\)\(local_6c\ <<\ 0xd\ \|\ local_6c\ >>\ 0x13\)\ >>\ 0x18;$	+1
+use	TParseContext__addConstVectorNode	iVar3	nodeComponentCount	INFERRED	w1 vtable of the first child; w2 constant component count of the node	^\s*iVar3\ =\ \(int\)\(local_6c\ <<\ 0xd\ \|\ local_6c\ >>\ 0x13\)\ >>\ 0x18;$@2	+2
+use	TParseContext__addConstVectorNode	iVar3	nodeComponentCount	INFERRED	w1 vtable of the first child; w2 constant component count of the node	^\s*if\ \(iVar3\ <=\ \*\(int\ \*\)\(param_2\ \+\ iVar11\)\ !=\ 0\)\ \{$	+3
+use	TParseContext__addConstVectorNode	iVar5	constUnionNode	INFERRED	w1 node getAsConstantUnion(); w2 constant component count; w3/w4 aggregate->getSequence() (vtable +100); w5 swizzle field loop counter	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_3\ \+\ 0x18\)\)\(param_3,param_2,param_3,param_4,param_5,param_6\);$	+1
+use	TParseContext__addConstVectorNode	iVar5	constUnionNode	INFERRED	w1 node getAsConstantUnion(); w2 constant component count; w3/w4 aggregate->getSequence() (vtable +100); w5 swizzle field loop counter	^\s*if\ \(iVar5\ !=\ 0\)\ \{$	+2
+use	TParseContext__addConstVectorNode	iVar5	objectSize	INFERRED	w1 node getAsConstantUnion(); w2 constant component count; w3/w4 aggregate->getSequence() (vtable +100); w5 swizzle field loop counter	^\s*iVar5\ =\ \(int\)\(local_6c\ <<\ 0xd\ \|\ local_6c\ >>\ 0x13\)\ >>\ 0x18;$	+1
+use	TParseContext__addConstVectorNode	iVar5	objectSize	INFERRED	w1 node getAsConstantUnion(); w2 constant component count; w3/w4 aggregate->getSequence() (vtable +100); w5 swizzle field loop counter	^\s*iVar5\ =\ \(int\)\(local_6c\ <<\ 0xd\ \|\ local_6c\ >>\ 0x13\)\ >>\ 0x18;$@2	+2
+use	TParseContext__addConstVectorNode	iVar5	objectSize	INFERRED	w1 node getAsConstantUnion(); w2 constant component count; w3/w4 aggregate->getSequence() (vtable +100); w5 swizzle field loop counter	^\s*pcVar10\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar7,iVar5\ <<\ 2\);$	+1
+use	TParseContext__addConstVectorNode	iVar5	sequence	INFERRED	w1 node getAsConstantUnion(); w2 constant component count; w3/w4 aggregate->getSequence() (vtable +100); w5 swizzle field loop counter	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 100\)\)\(piVar6\);$	+2
+use	TParseContext__addConstVectorNode	iVar5	sequence	INFERRED	w1 node getAsConstantUnion(); w2 constant component count; w3/w4 aggregate->getSequence() (vtable +100); w5 swizzle field loop counter	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 100\)\)\(piVar6\);$@2	+2
+use	TParseContext__addConstVectorNode	iVar5	sequence	INFERRED	w1 node getAsConstantUnion(); w2 constant component count; w3/w4 aggregate->getSequence() (vtable +100); w5 swizzle field loop counter	^\s*\(\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar5\ \+\ 4\),a1_00,pTVar9,iVar11,param_5,$	+2
+use	TParseContext__addConstVectorNode	iVar5	fieldIndex	INFERRED	w1 node getAsConstantUnion(); w2 constant component count; w3/w4 aggregate->getSequence() (vtable +100); w5 swizzle field loop counter	^\s*iVar5\ =\ 0;$	+1
+use	TParseContext__addConstVectorNode	iVar5	fieldIndex	INFERRED	w1 node getAsConstantUnion(); w2 constant component count; w3/w4 aggregate->getSequence() (vtable +100); w5 swizzle field loop counter	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	TParseContext__addConstVectorNode	iVar5	fieldIndex	INFERRED	w1 node getAsConstantUnion(); w2 constant component count; w3/w4 aggregate->getSequence() (vtable +100); w5 swizzle field loop counter	^\s*\}\ while\ \(iVar5\ <\ \*\(int\ \*\)\(param_2\ \+\ 0x10\)\);$	+1
+local	TParseContext__addConstVectorNode	local_6c	typeTempBits	INFERRED	bit-field word (+0x24) of the TType temp at local_90
+local	TParseContext__addConstVectorNode	local_90	typeTempOrTextBuf	INFERRED	stack area used as a getType() TType temp and as a text buffer
+use	TParseContext__addConstVectorNode	pcVar10	constArray	INFERRED	the node's constant array, or the array freshly filled by parseConstTree	^\s*pcVar10\ =\ \*\(unsigned\ char\ \*\*\)\(iVar5\ \+\ 0x30\);$	+2
+use	TParseContext__addConstVectorNode	pcVar10	constArray	INFERRED	the node's constant array, or the array freshly filled by parseConstTree	^\s*pcVar10\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar7,iVar5\ <<\ 2\);$	+1
+use	TParseContext__addConstVectorNode	pcVar10	constArray	INFERRED	the node's constant array, or the array freshly filled by parseConstTree	^\s*\(\*\(unsigned\ char\ \*\*\)this,param_4,a1,pcVar10,\*\(undefined4\ \*\)\(a1\ \+\ 0x30\),$	+2
+use	TParseContext__addConstVectorNode	pcVar10	constArray	INFERRED	the node's constant array, or the array freshly filled by parseConstTree	^\s*\(\*\(unsigned\ char\ \*\*\)this,param_4,a1,pcVar10,\*\(undefined4\ \*\)\(a1\ \+\ 0x30\),$@2	+2
+use	TParseContext__addConstVectorNode	pcVar10	constArray	INFERRED	the node's constant array, or the array freshly filled by parseConstTree	^\s*\*\(undefined4\ \*\)\(pcVar8\ \+\ iVar11\)\ =\ \*\(undefined4\ \*\)\(pcVar10\ \+\ \*\(int\ \*\)\(param_2\ \+\ iVar11\)\ \*\ 4\);$	+1
+use	TParseContext__addConstVectorNode	pcVar8	resultArray	INFERRED	newly allocated array holding the swizzled components	^\s*pcVar8\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar7,iVar11\ <<\ 2\);$	+1
+use	TParseContext__addConstVectorNode	pcVar8	resultArray	INFERRED	newly allocated array holding the swizzled components	^\s*\*\(undefined4\ \*\)\(pcVar8\ \+\ iVar11\)\ =\ \*\(undefined4\ \*\)\(pcVar10\ \+\ \*\(int\ \*\)\(param_2\ \+\ iVar11\)\ \*\ 4\);$	+1
+use	TParseContext__addConstVectorNode	pcVar8	resultArray	INFERRED	newly allocated array holding the swizzled components	^\s*TIntermediate__addConstantUnion\(\*\(unsigned\ char\ \*\*\)this,pcVar8,\(unsigned\ char\ \*\)local_90,param_4\)$	+1
+use	TParseContext__addConstVectorNode	piVar6	nodeAggregate	INFERRED	node->getAsAggregate(); first child getAsTyped()	^\s*piVar6\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)a1\ \+\ 0x1c\)\)\(a1\);$	+2
+use	TParseContext__addConstVectorNode	piVar6	nodeAggregate	INFERRED	node->getAsAggregate(); first child getAsTyped()	^\s*piVar6\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)a1\ \+\ 0x1c\)\)\(a1\);$@2	+2
+use	TParseContext__addConstVectorNode	piVar6	firstChildTyped	INFERRED	node->getAsAggregate(); first child getAsTyped()	^\s*piVar6\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(iVar3\ \+\ 0x14\)\)$	+1
+use	TParseContext__addConstVectorNode	piVar6	firstChildTyped	INFERRED	node->getAsAggregate(); first child getAsTyped()	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar6\ \+\ 0x18\)\)\(piVar6\);$	+1
+use	TParseContext__addConstVectorNode	ppuVar2	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*ppuVar2\ =\ local_90\[0\]\ \+\ \-1;$	+1
+use	TParseContext__addConstVectorNode	ppuVar2	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar4\ =\ \*ppuVar2;$	+1
+use	TParseContext__addConstVectorNode	ppuVar2	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar1\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar4\ \+\ \-1,0,ppuVar2\);$	+2
+local	TParseContext__addConstMatrixNode	param_2	columnIndex	INFERRED	matrix column selected (reset to 0 when out of range)
+local	TParseContext__addConstMatrixNode	param_4	line	INFERRED	source line for error messages and addConstantUnion
+local	TParseContext__addConstMatrixNode	iVar4	columnOffset	INFERRED	column index actually used (0 after an out-of-range error)
+use	TParseContext__addConstMatrixNode	iVar5	constArray	INFERRED	w1 the node's constant array (+0x30); w2 constant component count; w3/w4 aggregate->getSequence(); w5 child getAsConstantUnion(); w6 parseConstTree result	^\s*iVar5\ =\ piVar1\[0xc\];$	+1
+use	TParseContext__addConstMatrixNode	iVar5	constArray	INFERRED	w1 the node's constant array (+0x30); w2 constant component count; w3/w4 aggregate->getSequence(); w5 child getAsConstantUnion(); w6 parseConstTree result	^\s*\(\*\(unsigned\ char\ \*\*\)this,$	+4
+use	TParseContext__addConstMatrixNode	iVar5	objectSize	INFERRED	w1 the node's constant array (+0x30); w2 constant component count; w3/w4 aggregate->getSequence(); w5 child getAsConstantUnion(); w6 parseConstTree result	^\s*iVar5\ =\ \(int\)\(local_3c\ <<\ 0xd\ \|\ local_3c\ >>\ 0x13\)\ >>\ 0x18;$	+1
+use	TParseContext__addConstMatrixNode	iVar5	objectSize	INFERRED	w1 the node's constant array (+0x30); w2 constant component count; w3/w4 aggregate->getSequence(); w5 child getAsConstantUnion(); w6 parseConstTree result	^\s*iVar5\ =\ \(int\)\(local_3c\ <<\ 0xd\ \|\ local_3c\ >>\ 0x13\)\ >>\ 0x18;$@2	+2
+use	TParseContext__addConstMatrixNode	iVar5	objectSize	INFERRED	w1 the node's constant array (+0x30); w2 constant component count; w3/w4 aggregate->getSequence(); w5 child getAsConstantUnion(); w6 parseConstTree result	^\s*pcVar3\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(this_00,iVar5\ <<\ 2\);$	+1
+use	TParseContext__addConstMatrixNode	iVar5	sequence	INFERRED	w1 the node's constant array (+0x30); w2 constant component count; w3/w4 aggregate->getSequence(); w5 child getAsConstantUnion(); w6 parseConstTree result	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 100\)\)\(piVar1\);$	+2
+use	TParseContext__addConstMatrixNode	iVar5	sequence	INFERRED	w1 the node's constant array (+0x30); w2 constant component count; w3/w4 aggregate->getSequence(); w5 child getAsConstantUnion(); w6 parseConstTree result	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 100\)\)\(piVar1\);$@2	+2
+use	TParseContext__addConstMatrixNode	iVar5	sequence	INFERRED	w1 the node's constant array (+0x30); w2 constant component count; w3/w4 aggregate->getSequence(); w5 child getAsConstantUnion(); w6 parseConstTree result	^\s*\(\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar5\ \+\ 4\),a1_00,a2,a3,in_r7,in_r8,a6\);$	+1
+use	TParseContext__addConstMatrixNode	iVar5	constUnionTest	INFERRED	w1 the node's constant array (+0x30); w2 constant component count; w3/w4 aggregate->getSequence(); w5 child getAsConstantUnion(); w6 parseConstTree result	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x18\)\)\(piVar1\);$	+2
+use	TParseContext__addConstMatrixNode	iVar5	parseResult	INFERRED	w1 the node's constant array (+0x30); w2 constant component count; w3/w4 aggregate->getSequence(); w5 child getAsConstantUnion(); w6 parseConstTree result	^\s*iVar5\ =\ TIntermediate__parseConstTree$	+1
+use	TParseContext__addConstMatrixNode	iVar5	parseResult	INFERRED	w1 the node's constant array (+0x30); w2 constant component count; w3/w4 aggregate->getSequence(); w5 child getAsConstantUnion(); w6 parseConstTree result	^\s*iVar5\ =\ TIntermediate__parseConstTree$@2	+1
+use	TParseContext__addConstMatrixNode	iVar5	parseResult	INFERRED	w1 the node's constant array (+0x30); w2 constant component count; w3/w4 aggregate->getSequence(); w5 child getAsConstantUnion(); w6 parseConstTree result	^\s*if\ \(iVar5\ ==\ 0\)\ \{$	+1
+local	TParseContext__addConstMatrixNode	in_r7	scratchR7	UNKNOWN	register leftover forwarded through the vtable calls
+local	TParseContext__addConstMatrixNode	in_r8	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__addConstMatrixNode	in_r9	scratchR9	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__addConstMatrixNode	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__addConstMatrixNode	local_3c	typeTempBits	INFERRED	bit-field word (+0x24) of the TType temp at local_60
+local	TParseContext__addConstMatrixNode	local_60	typeTemp	INFERRED	getType() temp
+use	TParseContext__addConstMatrixNode	pcVar3	newConstArray	INFERRED	newly allocated constant array filled by parseConstTree	^\s*pcVar3\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(this_00,iVar5\ <<\ 2\);$	+1
+use	TParseContext__addConstMatrixNode	pcVar3	newConstArray	INFERRED	newly allocated constant array filled by parseConstTree	^\s*\(\*\(unsigned\ char\ \*\*\)this,param_4,a1,pcVar3,\*\(undefined4\ \*\)\(a1\ \+\ 0x30\),$	+2
+use	TParseContext__addConstMatrixNode	pcVar3	newConstArray	INFERRED	newly allocated constant array filled by parseConstTree	^\s*\(\*\(unsigned\ char\ \*\*\)this,param_4,a1,pcVar3,\*\(undefined4\ \*\)\(a1\ \+\ 0x30\),$@2	+2
+use	TParseContext__addConstMatrixNode	pcVar3	newConstArray	INFERRED	newly allocated constant array filled by parseConstTree	^\s*\(\*\(unsigned\ char\ \*\*\)this,$@2	+3
+use	TParseContext__addConstMatrixNode	piVar1	constUnionNode	INFERRED	node getAsConstantUnion(); aggregate; first child getAsTyped()	^\s*piVar1\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_3\ \+\ 0x18\)\)\(param_3,param_2,param_3,param_4\);$	+1
+use	TParseContext__addConstMatrixNode	piVar1	constUnionNode	INFERRED	node getAsConstantUnion(); aggregate; first child getAsTyped()	^\s*if\ \(piVar1\ !=\ \(int\ \*\)0x0\)\ \{$	+3
+use	TParseContext__addConstMatrixNode	piVar1	constUnionNode	INFERRED	node getAsConstantUnion(); aggregate; first child getAsTyped()	^\s*\(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x38\)\)\(\(unsigned\ char\ \*\)local_60,piVar1\);$@2	+1
+use	TParseContext__addConstMatrixNode	piVar1	nodeAggregate	INFERRED	node getAsConstantUnion(); aggregate; first child getAsTyped()	^\s*piVar1\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)a1\ \+\ 0x1c\)\)\(a1\);$	+2
+use	TParseContext__addConstMatrixNode	piVar1	nodeAggregate	INFERRED	node getAsConstantUnion(); aggregate; first child getAsTyped()	^\s*piVar1\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)a1\ \+\ 0x1c\)\)\(a1\);$@2	+2
+use	TParseContext__addConstMatrixNode	piVar1	firstChildTyped	INFERRED	node getAsConstantUnion(); aggregate; first child getAsTyped()	^\s*piVar1\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(a6\ \+\ 0x14\)\)$	+1
+use	TParseContext__addConstMatrixNode	piVar1	firstChildTyped	INFERRED	node getAsConstantUnion(); aggregate; first child getAsTyped()	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x18\)\)\(piVar1\);$	+1
+use	TParseContext__addConstMatrixNode	uVar2	resultNode	INFERRED	addConstantUnion result	^\s*uVar2\ =\ TIntermediate__addConstantUnion$	+1
+use	TParseContext__addConstMatrixNode	uVar2	resultNode	INFERRED	addConstantUnion result	^\s*return\ uVar2;$	+1
+use	TParseContext__addConstMatrixNode	uVar2	resultNode	INFERRED	addConstantUnion result	^\s*uVar2\ =\ 0;$	+1
+use	TParseContext__addConstMatrixNode	uVar2	resultNode	INFERRED	addConstantUnion result	^\s*uVar2\ =\ TIntermediate__addConstantUnion$@2	+1
+use	TParseContext__addConstMatrixNode	uVar2	resultNode	INFERRED	addConstantUnion result	^\s*return\ uVar2;$@2	+1
+local	TParseContext__addConstStruct	param_4	line	INFERRED	source line for error messages and addConstantUnion
+local	TParseContext__addConstStruct	param_5	scratchR7	UNKNOWN	register leftover forwarded through the vtable calls
+local	TParseContext__addConstStruct	param_6	scratchR8	UNKNOWN	register leftover forwarded to error()
+local	TParseContext__addConstStruct	in_r10	scratchR10	UNKNOWN	register leftover forwarded to error()
+use	TParseContext__addConstStruct	iVar1	lineCopy	INFERRED	w0 copy of the line argument; w1 vtable of the constant node; w2 child getAsConstantUnion(); w3 parseConstTree result	^\s*iVar1\ =\ param_4;$	+1
+use	TParseContext__addConstStruct	iVar1	lineCopy	INFERRED	w0 copy of the line argument; w1 vtable of the constant node; w2 child getAsConstantUnion(); w3 parseConstTree result	^\s*pTVar2\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(iVar6\ \+\ 0x18\)\)\(param_3,a1_00,a2,iVar1,param_5,param_6,iVar6\);$	+1
+use	TParseContext__addConstStruct	iVar1	lineCopy	INFERRED	w0 copy of the line argument; w1 vtable of the constant node; w2 child getAsConstantUnion(); w3 parseConstTree result	^\s*\(\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar6\ \+\ 4\),a1_01,a2,iVar1,param_5,param_6,$	+2
+use	TParseContext__addConstStruct	iVar1	nodeVtable	INFERRED	w0 copy of the line argument; w1 vtable of the constant node; w2 child getAsConstantUnion(); w3 parseConstTree result	^\s*iVar1\ =\ \*\(int\ \*\)pTVar2;$	+1
+use	TParseContext__addConstStruct	iVar1	nodeVtable	INFERRED	w0 copy of the line argument; w1 vtable of the constant node; w2 child getAsConstantUnion(); w3 parseConstTree result	^\s*iVar1\ =\ \*\(int\ \*\)a1;$	+1
+use	TParseContext__addConstStruct	iVar1	nodeVtable	INFERRED	w0 copy of the line argument; w1 vtable of the constant node; w2 child getAsConstantUnion(); w3 parseConstTree result	^\s*\(\*\*\(code\ \*\*\)\(iVar1\ \+\ 0x38\)\)\(local_80,a1\);$	+1
+use	TParseContext__addConstStruct	iVar1	constUnionTest	INFERRED	w0 copy of the line argument; w1 vtable of the constant node; w2 child getAsConstantUnion(); w3 parseConstTree result	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x18\)\)\(piVar3\);$	+2
+use	TParseContext__addConstStruct	iVar1	parseResult	INFERRED	w0 copy of the line argument; w1 vtable of the constant node; w2 child getAsConstantUnion(); w3 parseConstTree result	^\s*iVar1\ =\ TIntermediate__parseConstTree$	+1
+use	TParseContext__addConstStruct	iVar1	parseResult	INFERRED	w0 copy of the line argument; w1 vtable of the constant node; w2 child getAsConstantUnion(); w3 parseConstTree result	^\s*iVar1\ =\ TIntermediate__parseConstTree$@2	+1
+use	TParseContext__addConstStruct	iVar1	parseResult	INFERRED	w0 copy of the line argument; w1 vtable of the constant node; w2 child getAsConstantUnion(); w3 parseConstTree result	^\s*if\ \(iVar1\ !=\ 0\)\ \{$	+1
+use	TParseContext__addConstStruct	iVar6	nodeVtableB	INFERRED	w1 vtable of the node; w2/w3 aggregate->getSequence()	^\s*iVar6\ =\ \*\(int\ \*\)param_3;$	+1
+use	TParseContext__addConstStruct	iVar6	nodeVtableB	INFERRED	w1 vtable of the node; w2/w3 aggregate->getSequence()	^\s*pTVar2\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(iVar6\ \+\ 0x18\)\)\(param_3,a1_00,a2,iVar1,param_5,param_6,iVar6\);$	+1
+use	TParseContext__addConstStruct	iVar6	nodeVtableB	INFERRED	w1 vtable of the node; w2/w3 aggregate->getSequence()	^\s*error\(\(int\)this,\(char\ \*\)param_4,"No\ Aggregate\ or\ Constant\ Union\ node\ available","Internal\ Error"$	+2
+use	TParseContext__addConstStruct	iVar6	sequence	INFERRED	w1 vtable of the node; w2/w3 aggregate->getSequence()	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 100\)\)\(piVar3\);$	+2
+use	TParseContext__addConstStruct	iVar6	sequence	INFERRED	w1 vtable of the node; w2/w3 aggregate->getSequence()	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 100\)\)\(piVar3\);$@2	+2
+use	TParseContext__addConstStruct	iVar6	sequence	INFERRED	w1 vtable of the node; w2/w3 aggregate->getSequence()	^\s*\(\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar6\ \+\ 4\),a1_01,a2,iVar1,param_5,param_6,$	+2
+use	TParseContext__addConstStruct	iVar7	fieldTypeBegin	INFERRED	w1 start of the field name TString storage; w2 constant component count of a skipped field; w3 vtable of the first child	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x1c\)\)\(piVar3\);$	+2
+use	TParseContext__addConstStruct	iVar7	fieldTypeBegin	INFERRED	w1 start of the field name TString storage; w2 constant component count of a skipped field; w3 vtable of the first child	^\s*iVar7\ =\ _memcmp\(\*\(undefined4\ \*\)\(iVar7\ \+\ 4\),\*\(int\ \*\)\(param_2\ \+\ 4\),a2\);$	+3
+use	TParseContext__addConstStruct	iVar7	fieldTypeBegin	INFERRED	w1 start of the field name TString storage; w2 constant component count of a skipped field; w3 vtable of the first child	^\s*if\ \(iVar7\ ==\ 0\)\ break;$	+1
+use	TParseContext__addConstStruct	iVar7	fieldSize	INFERRED	w1 start of the field name TString storage; w2 constant component count of a skipped field; w3 vtable of the first child	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this_00\ \+\ 0x30\)\)\(this_00\);$	+1
+use	TParseContext__addConstStruct	iVar7	fieldSize	INFERRED	w1 start of the field name TString storage; w2 constant component count of a skipped field; w3 vtable of the first child	^\s*iVar7\ =\ TType__setStructSize\(this_00,\*\(unsigned\ char\ \*\*\)\(this_00\ \+\ 8\)\);$	+1
+use	TParseContext__addConstStruct	iVar7	fieldSize	INFERRED	w1 start of the field name TString storage; w2 constant component count of a skipped field; w3 vtable of the first child	^\s*iVar8\ =\ iVar8\ \+\ iVar7;$	+1
+use	TParseContext__addConstStruct	iVar7	firstChildVtable	INFERRED	w1 start of the field name TString storage; w2 constant component count of a skipped field; w3 vtable of the first child	^\s*iVar7\ =\ \*\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar6\ \+\ 4\);$	+4
+local	TParseContext__addConstStruct	iVar8	componentOffset	INFERRED	constant components of the fields before the selected one
+local	TParseContext__addConstStruct	local_4c	nameLengths	INFERRED	lengths compared: the second element is the selected field name length
+local	TParseContext__addConstStruct	local_50	fieldNameLength	INFERRED	length of the struct field name (address taken: min() argument)
+local	TParseContext__addConstStruct	local_68	typeTempStructureSize	INFERRED	structure size (+0x18) of the TType temp at local_80
+local	TParseContext__addConstStruct	local_78	typeTempStructure	INFERRED	structure pointer (+8) of the TType temp at local_80: the struct field list
+local	TParseContext__addConstStruct	local_80	typeTemp	INFERRED	node getType() temp
+use	TParseContext__addConstStruct	pcVar11	constArray	INFERRED	the node's constant array, or the array filled by parseConstTree	^\s*pcVar11\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar2\ \+\ 0x30\);$	+1
+use	TParseContext__addConstStruct	pcVar11	constArray	INFERRED	the node's constant array, or the array filled by parseConstTree	^\s*pcVar11\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(this_01,local_68\ <<\ 2\);$	+1
+use	TParseContext__addConstStruct	pcVar11	constArray	INFERRED	the node's constant array, or the array filled by parseConstTree	^\s*\(\*\(unsigned\ char\ \*\*\)this,param_4,a1,pcVar11,\*\(undefined4\ \*\)\(a1\ \+\ 0x30\),$	+2
+use	TParseContext__addConstStruct	pcVar11	constArray	INFERRED	the node's constant array, or the array filled by parseConstTree	^\s*\(\*\(unsigned\ char\ \*\*\)this,param_4,a1,pcVar11,\*\(undefined4\ \*\)\(a1\ \+\ 0x30\),$@2	+2
+use	TParseContext__addConstStruct	pcVar11	constArray	INFERRED	the node's constant array, or the array filled by parseConstTree	^\s*\(\*\(unsigned\ char\ \*\*\)this,pcVar11\ \+\ iVar8\ \*\ 4,\(unsigned\ char\ \*\)local_80,param_4\);$	+1
+use	TParseContext__addConstStruct	piVar3	fieldType	INFERRED	w1 TType of the current struct field; aggregate; first child getAsTyped()	^\s*piVar3\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(local_78\ \+\ 4\)\ \+\ uVar9\ \*\ 8\);$	+2
+use	TParseContext__addConstStruct	piVar3	nodeAggregate	INFERRED	w1 TType of the current struct field; aggregate; first child getAsTyped()	^\s*piVar3\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)a1\ \+\ 0x1c\)\)\(a1\);$	+2
+use	TParseContext__addConstStruct	piVar3	nodeAggregate	INFERRED	w1 TType of the current struct field; aggregate; first child getAsTyped()	^\s*piVar3\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)a1\ \+\ 0x1c\)\)\(a1\);$@2	+2
+use	TParseContext__addConstStruct	piVar3	firstChildTyped	INFERRED	w1 TType of the current struct field; aggregate; first child getAsTyped()	^\s*piVar3\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(iVar7\ \+\ 0x14\)\)$	+1
+use	TParseContext__addConstStruct	piVar3	firstChildTyped	INFERRED	w1 TType of the current struct field; aggregate; first child getAsTyped()	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x18\)\)\(piVar3\);$	+1
+local	TParseContext__addConstStruct	puVar5	minLengthPtr	INFERRED	points at the smaller of the two compared lengths
+local	TParseContext__addConstStruct	uVar10	nameLength	INFERRED	length of the requested field name
+local	TParseContext__addConstStruct	uVar12	fieldNameLen	INFERRED	length of the current struct field name
+local	TParseContext__addConstStruct	uVar4	resultNode	INFERRED	addConstantUnion result
+local	TParseContext__addConstStruct	uVar9	fieldIndex	INFERRED	struct field being examined
+use	TParseContext__initializeExtensionBehavior	iVar2	mapNode	INFERRED	TBehaviorMap node for GL_ARB_texture_rectangle	^\s*iVar2\ =\ local_b0\[0\];$	+1
+use	TParseContext__initializeExtensionBehavior	iVar2	mapNode	INFERRED	TBehaviorMap node for GL_ARB_texture_rectangle	^\s*local_80\ =\ iVar2;$	+1
+use	TParseContext__initializeExtensionBehavior	iVar2	mapNode	INFERRED	TBehaviorMap node for GL_ARB_texture_rectangle	^\s*iVar2\ =\ local_90\[0\];$	+1
+use	TParseContext__initializeExtensionBehavior	iVar2	mapNode	INFERRED	TBehaviorMap node for GL_ARB_texture_rectangle	^\s*iVar2\ =\ local_b0\[0\];$@2	+1
+use	TParseContext__initializeExtensionBehavior	iVar2	mapNode	INFERRED	TBehaviorMap node for GL_ARB_texture_rectangle	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x18\)\ =\ 1;$	+1
+use	TParseContext__initializeExtensionBehavior	iVar3	compareResult	INFERRED	memcmp of the key against the node key, then the length difference	^\s*iVar3\ =\ _memcmp\(local_cc,\*\(undefined4\ \*\)\(local_b0\[0\]\ \+\ 0x14\),\*puVar4\);$	+4
+use	TParseContext__initializeExtensionBehavior	iVar3	compareResult	INFERRED	memcmp of the key against the node key, then the length difference	^\s*if\ \(\-1\ <\ iVar3\)\ goto\ LAB_97b9fe04;$	+1
+local	TParseContext__initializeExtensionBehavior	local_2c	lenNode	INFERRED	length of the node key (min() argument)
+local	TParseContext__initializeExtensionBehavior	local_30	lenKey	INFERRED	length of the lookup key (min() argument)
+local	TParseContext__initializeExtensionBehavior	local_40	keyDestroyArg	INFERRED	allocator argument for the destroy of the key string
+local	TParseContext__initializeExtensionBehavior	local_50	entryKeyDestroyArg	INFERRED	allocator argument for the destroy of the new entry key
+local	TParseContext__initializeExtensionBehavior	local_60	insertHintCopy	INFERRED	copy of the hint iterator for insert_unique
+local	TParseContext__initializeExtensionBehavior	local_68	entryBehavior	INFERRED	TBehavior stored in the new map entry (initially 0)
+local	TParseContext__initializeExtensionBehavior	local_6c	entryKeyChars	INFERRED	character pointer of the new entry key copy
+local	TParseContext__initializeExtensionBehavior	local_70	entryKey	INFERRED	copy of the key string used in the new map entry
+local	TParseContext__initializeExtensionBehavior	local_80	insertHint	INFERRED	lower_bound iterator used as the insertion hint
+local	TParseContext__initializeExtensionBehavior	local_90	insertIterator	INFERRED	iterator returned by insert_unique
+local	TParseContext__initializeExtensionBehavior	local_a0	mapEnd	INFERRED	end node of the map (this+0x34)
+local	TParseContext__initializeExtensionBehavior	local_b0	lowerBound	INFERRED	lower_bound iterator of the key
+local	TParseContext__initializeExtensionBehavior	local_c0	allocatorArg	INFERRED	pool_allocator argument for the key string constructor
+local	TParseContext__initializeExtensionBehavior	local_cc	extensionKeyChars	INFERRED	character pointer of the "GL_ARB_texture_rectangle" key copy
+local	TParseContext__initializeExtensionBehavior	local_d0	extensionKey	INFERRED	TString key "GL_ARB_texture_rectangle"
+local	TParseContext__initializeExtensionBehavior	puVar4	minLengthPtr	INFERRED	points at the smaller of the two compared lengths
+local	TParseContext__initializeExtensionBehavior	uVar5	keyLength	INFERRED	length of the lookup key string
+local	TParseContext__initializeExtensionBehavior	uVar6	nodeKeyLength	INFERRED	length of the node key string
+use	TParseContext__addConstructor	iVar2	nodeSequence	INFERRED	node aggregate->getSequence() (vtable +100): its size is compared with 1	^\s*\(iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)a0\ \+\ 100\)\)\(a0\),$@1	^\s*if\ \(bVar1\)\ \{$	all	none

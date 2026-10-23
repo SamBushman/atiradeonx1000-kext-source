@@ -1,0 +1,78 @@
+local	TIntermConstantUnion__compileNode	iVar1	componentCount	INFERRED	TType size field (signed byte at bits 11..18 of the type word), squared when the matrix bit 0x400 is set
+local	TIntermConstantUnion__compileNode	uVar2	basicType	INFERRED	TType basic type (bits 19..24 of the type word): 1 float, 2 int, 3 bool, 0xe struct
+local	TIntermConstantUnion__compileNode	uVar3	glTypeCode	INFERRED	OpenGL type enum stored into the operand: 0x1404 int, 0x1406 float, 0x8b56 bool
+local	TIntermConstantUnion__compileNode	this_00	constantOperand	INFERRED	new ParseOperand (0x38 bytes) describing the constant
+local	TIntermConstantUnion__compileNode	uVar4	sourceLine	INFERRED	virtual slot 0 of the node (line), stored to compiler+0x90
+local	TIntermConstantUnion__compileNode	local_50	stackType	INFERRED	TType object written by the node virtual slot 0x38 (getType by value)
+local	TIntermConstantUnion__compileNode	local_2c	stackTypeBits	INFERRED	TType bitfield word (basic type, size, matrix flag, qualifier) at +0x24 of the by-value TType
+local	TIntermConstantUnion__compileNode	param_3	strayArg3	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermConstantUnion__compileNode	param_4	strayArg4	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermConstantUnion__compileNode	param_5	strayArg5	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermConstantUnion__compileNode	param_6	strayArg6	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermConstantUnion__compileNode	param_7	strayArg7	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermConstantUnion__compileNode	param_8	strayArg8	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermConstantUnion__indirectNode	iVar1	componentCount	INFERRED	TType size field (signed byte at bits 11..18 of the type word), squared when the matrix bit 0x400 is set
+local	TIntermConstantUnion__indirectNode	uVar2	basicType	INFERRED	TType basic type (bits 19..24 of the type word): 1 float, 2 int, 3 bool, 0xe struct
+local	TIntermConstantUnion__indirectNode	uVar3	glTypeCode	INFERRED	OpenGL type enum stored into the operand: 0x1404 int, 0x1406 float, 0x8b56 bool
+local	TIntermConstantUnion__indirectNode	this_00	constantOperand	INFERRED	new ParseOperand (0x38 bytes) describing the constant
+local	TIntermConstantUnion__indirectNode	uVar4	sourceLine	INFERRED	virtual slot 0 of the node (line), stored to compiler+0x90
+local	TIntermConstantUnion__indirectNode	local_50	stackType	INFERRED	TType object written by the node virtual slot 0x38 (getType by value)
+local	TIntermConstantUnion__indirectNode	local_2c	stackTypeBits	INFERRED	TType bitfield word (basic type, size, matrix flag, qualifier) at +0x24 of the by-value TType
+local	TIntermConstantUnion__indirectNode	param_3	strayArg3	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermConstantUnion__indirectNode	param_4	strayArg4	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermConstantUnion__indirectNode	param_5	strayArg5	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermConstantUnion__indirectNode	param_6	strayArg6	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermConstantUnion__indirectNode	param_7	strayArg7	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermConstantUnion__indirectNode	param_8	strayArg8	INFERRED	extra register-argument slot forwarded as a dead stray argument
+use	TIntermAggregate__indirectNode	uVar1	sourceLine	INFERRED	virtual slot 0 of the node (line), stored to compiler+0x90	^\s*uVar1\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,param_2,param_3,param_4,param_5,param_6,this\ \+\ 0x34\)$	+1
+use	TIntermAggregate__indirectNode	uVar1	sourceLine	INFERRED	virtual slot 0 of the node (line), stored to compiler+0x90	^\s*\*\(undefined4\ \*\)\(param_2\ \+\ 0x90\)\ =\ uVar1;$	+1
+use	TIntermAggregate__indirectNode	uVar1	childResult	INFERRED	operand returned by compiling one child via virtual slot 0x10 (indirectNode)	^\s*uVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\*puVar5\ \+\ 0x10\)\)\(\(int\ \*\)\*puVar5,param_2\);$	+2
+use	TIntermAggregate__indirectNode	iVar3	childCount	INFERRED	number of child nodes ((end - begin) >> 2 of the child vector at +0x38)	^\s*iVar3\ =\ \*\(int\ \*\)\(this\ \+\ 0x3c\)\ \-\ \*\(int\ \*\)\(this\ \+\ 0x38\)\ >>\ 2;$	+1
+use	TIntermAggregate__indirectNode	iVar3	childCount	INFERRED	number of child nodes ((end - begin) >> 2 of the child vector at +0x38)	^\s*puVar2\ =\ \(undefined4\ \*\)_malloc\(iVar3\ <<\ 2\);$	+1
+use	TIntermAggregate__indirectNode	iVar3	childCount	INFERRED	number of child nodes ((end - begin) >> 2 of the child vector at +0x38)	^\s*if\ \(0\ <\ iVar3\)\ \{$	+1
+use	TIntermAggregate__indirectNode	iVar3	childCount	INFERRED	number of child nodes ((end - begin) >> 2 of the child vector at +0x38)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+1
+use	TIntermAggregate__indirectNode	iVar3	childCount	INFERRED	number of child nodes ((end - begin) >> 2 of the child vector at +0x38)	^\s*\}\ while\ \(iVar3\ !=\ 0\);$	+1
+use	TIntermAggregate__indirectNode	puVar4	resultCursor	INFERRED	write cursor into the allocated child result array	^\s*puVar4\ =\ puVar2;$	+1
+use	TIntermAggregate__indirectNode	puVar4	resultCursor	INFERRED	write cursor into the allocated child result array	^\s*\*puVar4\ =\ uVar1;$	+2
+use	TIntermAggregate__indirectNode	puVar4	freeCursor	INFERRED	read cursor over the child result array while destroying them	^\s*puVar4\ =\ puVar2;$@2	+1
+use	TIntermAggregate__indirectNode	puVar4	freeCursor	INFERRED	read cursor over the child result array while destroying them	^\s*this_00\ =\ \(void\ \*\)\*puVar4;$	+1
+use	TIntermAggregate__indirectNode	puVar4	freeCursor	INFERRED	read cursor over the child result array while destroying them	^\s*puVar4\ =\ puVar4\ \+\ 1;$@2	+1
+use	TIntermAggregate__indirectNode	puVar5	childCursor	INFERRED	cursor over the child node vector	^\s*for\ \(puVar5\ =\ \*\(undefined4\ \*\*\)\(this\ \+\ 0x38\);\ puVar5\ !=\ \*\(undefined4\ \*\*\)\(this\ \+\ 0x3c\);$	+3
+use	TIntermAggregate__indirectNode	this_00	operandToFree	INFERRED	child ParseOperand to destroy	^\s*this_00\ =\ \(void\ \*\)\*puVar4;$	+4
+local	TIntermAggregate__indirectNode	param_3	strayArg3	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermAggregate__indirectNode	param_4	strayArg4	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermAggregate__indirectNode	param_5	strayArg5	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermAggregate__indirectNode	param_6	strayArg6	INFERRED	extra register-argument slot forwarded as a dead stray argument
+use	ParseSymbolTable__AddTempFromOutput	uVar1	glType	INFERRED	OpenGL type of the symbol (+0x2c)	^\s*uVar1\ =\ \*\(ushort\ \*\)\(this_00\ \+\ 0x2c\);$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar1	glType	INFERRED	OpenGL type of the symbol (+0x2c)	^\s*uVar4\ =\ GetVec4sForType\(\(uint\)uVar1\);$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar1	glType	INFERRED	OpenGL type of the symbol (+0x2c)	^\s*uVar5\ =\ GetPPStreamTypeForGLType\(\(uint\)uVar1\);$	+1
+use	ParseSymbolTable__AddTempFromOutput	iVar2	nextTempIndex	INFERRED	this+0x38: running temp index stored into each chunk and incremented	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 0x38\);$	+1
+use	ParseSymbolTable__AddTempFromOutput	iVar2	nextTempIndex	INFERRED	this+0x38: running temp index stored into each chunk and incremented	^\s*\*\(short\ \*\)\(iVar6\ \+\ 0x12\)\ =\ \(short\)iVar2;$	+2
+use	ParseSymbolTable__AddTempFromOutput	this_00	tempSymbol	INFERRED	new ParseSymbol copied from the output symbol	^\s*this_00\ =\ operator_new\(100\);$	+2
+use	ParseSymbolTable__AddTempFromOutput	this_00	tempSymbol	INFERRED	new ParseSymbol copied from the output symbol	^\s*ParseSymbol__operator_\(this_00,param_2\);$	+6
+use	ParseSymbolTable__AddTempFromOutput	this_00	tempSymbol	INFERRED	new ParseSymbol copied from the output symbol	^\s*\*\(undefined4\ \*\)\(this_00\ \+\ 0x28\)\ =\ 0xffffffff;$	+2
+use	ParseSymbolTable__AddTempFromOutput	this_00	tempSymbol	INFERRED	new ParseSymbol copied from the output symbol	^\s*iVar6\ =\ GetScalerWidthForType\(\(uint\)\*\(ushort\ \*\)\(this_00\ \+\ 0x2c\)\);$	+1
+use	ParseSymbolTable__AddTempFromOutput	this_00	tempSymbol	INFERRED	new ParseSymbol copied from the output symbol	^\s*ParseSymbol__SetChunk\(this_00,p_Var3\);$	+3
+use	ParseSymbolTable__AddTempFromOutput	this_00	tempSymbol	INFERRED	new ParseSymbol copied from the output symbol	^\s*return\ this_00;$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar4	vec4Count	INFERRED	GetVec4sForType of the symbol type: number of vec4 registers it occupies	^\s*uVar4\ =\ GetVec4sForType\(\(uint\)uVar1\);$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar4	vec4Count	INFERRED	GetVec4sForType of the symbol type: number of vec4 registers it occupies	^\s*if\ \(\(uVar4\ !=\ 0\)\ \&\&\ \(iVar7\ !=\ 0\)\)\ \{$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar4	vec4Count	INFERRED	GetVec4sForType of the symbol type: number of vec4 registers it occupies	^\s*\}\ while\ \(uVar8\ <\ uVar4\);$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar5	typeFieldBits	INFERRED	GetPPStreamTypeForGLType & 7 shifted into the chunk header type field (bit 26)	^\s*uVar5\ =\ GetPPStreamTypeForGLType\(\(uint\)uVar1\);$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar5	typeFieldBits	INFERRED	GetPPStreamTypeForGLType & 7 shifted into the chunk header type field (bit 26)	^\s*uVar5\ =\ \(uVar5\ \&\ 7\)\ <<\ 0x1a;$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar5	typeFieldBits	INFERRED	GetPPStreamTypeForGLType & 7 shifted into the chunk header type field (bit 26)	^\s*\*\(uint\ \*\)\(p_Var3\ \+\ 0xc\)\ =\ uVar5\ \|\ uVar9\ \&\ 0xe3ffffff;$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar5	typeFieldBits	INFERRED	GetPPStreamTypeForGLType & 7 shifted into the chunk header type field (bit 26)	^\s*\*\(uint\ \*\)\(p_Var3\ \+\ 0xc\)\ =\ \(iVar6\ \+\ \-1\)\ \*\ 0x1000000\ \&\ 0x3000000U\ \|\ uVar5\ \|\ uVar9\ \&\ 0xffffff;$	+1
+use	ParseSymbolTable__AddTempFromOutput	iVar6	scalerWidth	INFERRED	GetScalerWidthForType result; (width-1) goes into the chunk header width field	^\s*iVar6\ =\ GetScalerWidthForType\(\(uint\)\*\(ushort\ \*\)\(this_00\ \+\ 0x2c\)\);$	+2
+use	ParseSymbolTable__AddTempFromOutput	iVar6	curChunk	INFERRED	current chunk (the symbol chunk, then clones per extra vec4)	^\s*iVar6\ =\ \*\(int\ \*\)this_00;$	+1
+use	ParseSymbolTable__AddTempFromOutput	iVar6	curChunk	INFERRED	current chunk (the symbol chunk, then clones per extra vec4)	^\s*iVar6\ =\ _PPStreamChunkCreateFromChunk\(iVar6\);$	+1
+use	ParseSymbolTable__AddTempFromOutput	iVar6	curChunk	INFERRED	current chunk (the symbol chunk, then clones per extra vec4)	^\s*\*\(short\ \*\)\(iVar6\ \+\ 0x12\)\ =\ \(short\)iVar2;$	+1
+use	ParseSymbolTable__AddTempFromOutput	iVar6	curChunk	INFERRED	current chunk (the symbol chunk, then clones per extra vec4)	^\s*_PPStreamChunkListAddChunk\(iVar7,iVar6\);$	+1
+use	ParseSymbolTable__AddTempFromOutput	iVar7	tempChunkList	INFERRED	PPStream temp chunk list (stream+4)	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(this\ \+\ 0xc\)\ \+\ 4\);$	+2
+use	ParseSymbolTable__AddTempFromOutput	iVar7	tempChunkList	INFERRED	PPStream temp chunk list (stream+4)	^\s*_PPStreamChunkListAddChunk\(iVar7,iVar6\);$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar8	vec4Index	INFERRED	loop index over the symbol vec4 registers	^\s*uVar8\ =\ 0;$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar8	vec4Index	INFERRED	loop index over the symbol vec4 registers	^\s*if\ \(uVar8\ !=\ 0\)\ \{$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar8	vec4Index	INFERRED	loop index over the symbol vec4 registers	^\s*uVar8\ =\ uVar8\ \+\ 1;$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar8	vec4Index	INFERRED	loop index over the symbol vec4 registers	^\s*\}\ while\ \(uVar8\ <\ uVar4\);$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar9	oldHeaderWord	INFERRED	chunk header word (+0xc) before the type and width fields are rewritten	^\s*uVar9\ =\ \*\(uint\ \*\)\(p_Var3\ \+\ 0xc\);$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar9	oldHeaderWord	INFERRED	chunk header word (+0xc) before the type and width fields are rewritten	^\s*\*\(uint\ \*\)\(p_Var3\ \+\ 0xc\)\ =\ uVar5\ \|\ uVar9\ \&\ 0xe3ffffff;$	+1
+use	ParseSymbolTable__AddTempFromOutput	uVar9	oldHeaderWord	INFERRED	chunk header word (+0xc) before the type and width fields are rewritten	^\s*\*\(uint\ \*\)\(p_Var3\ \+\ 0xc\)\ =\ \(iVar6\ \+\ \-1\)\ \*\ 0x1000000\ \&\ 0x3000000U\ \|\ uVar5\ \|\ uVar9\ \&\ 0xffffff;$	+1
+local	ParseSymbolTable__AddTempFromOutput	p_Var3	tempChunk	INFERRED	new temp chunk (PPStreamChunk) created for the symbol

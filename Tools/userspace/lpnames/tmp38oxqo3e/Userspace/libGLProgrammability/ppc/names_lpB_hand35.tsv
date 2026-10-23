@@ -1,0 +1,11 @@
+local	_CPPline	extraout_r4	extraOutA	INFERRED	Ghidra extra-output of r4 after a scan/log call; copied into the forwarded r4 variable
+local	_CPPline	extraout_r4_01	extraOutB	INFERRED	Ghidra extra-output of r4 after a scan/log call; copied into the forwarded r4 variable
+local	_CPPline	extraout_r4_02	extraOutC	INFERRED	Ghidra extra-output of r4 after a scan/log call; copied into the forwarded r4 variable
+local	_CPPpragma	extraout_r4_00	extraOutA	INFERRED	Ghidra extra-output of r4 after a scan/log call; copied into the forwarded r4 variable
+local	_CPPpragma	extraout_r4_01	extraOutB	INFERRED	Ghidra extra-output of r4 after a scan/log call; copied into the forwarded r4 variable
+local	_CPPpragma	extraout_r4_02	extraOutC	INFERRED	Ghidra extra-output of r4 after a scan/log call; copied into the forwarded r4 variable
+local	_CPPversion	extraout_r4	extraOutA	INFERRED	Ghidra extra-output of r4 after a scan/log call; copied into the forwarded r4 variable
+local	_CPPversion	extraout_r4_00	extraOutB	INFERRED	Ghidra extra-output of r4 after a scan/log call; copied into the forwarded r4 variable
+local	_CPPextension	extraout_r4_01	extraOutA	INFERRED	Ghidra extra-output of r4 after a scan/log call; copied into the forwarded r4 variable
+local	_CPPextension	extraout_r4_02	extraOutB	INFERRED	Ghidra extra-output of r4 after a scan/log call; copied into the forwarded r4 variable
+local	_PPStreamFree	extraout_r3	r3Out	INFERRED	Ghidra extra-output of r3 after _free; returned
