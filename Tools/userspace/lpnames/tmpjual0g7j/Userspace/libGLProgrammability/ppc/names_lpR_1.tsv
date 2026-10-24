@@ -1,0 +1,39 @@
+local	TIntermediate__addSymbol	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TIntermediate__addBinaryMath	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TIntermediate__addAssign	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TIntermediate__addIndex	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TIntermediate__addUnaryMath	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TIntermediate__addUnaryMath	this_01	infoSink	CONFIRMED	the TInfoSinkBase the error text is appended to (TInfoSinkBase::append calls); loaded from *(this)
+local	TIntermediate__setAggregateOperator	this_00	sequence	CONFIRMED	the aggregate sequence vector (getSequence() result): +8 finish, +0xc end-of-storage, push_back/insert fast path
+local	TIntermediate__growAggregate	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TIntermediate__makeAggregate	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TIntermediate__makeAggregate	this_01	sequence	CONFIRMED	the aggregate sequence vector (getSequence() result): +8 finish, +0xc end-of-storage, push_back/insert fast path
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TIntermediate__addConstantUnion	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TIntermediate__addSwizzle	this_00	sequence	CONFIRMED	the aggregate sequence vector (getSequence() result): +8 finish, +0xc end-of-storage, push_back/insert fast path
+local	TIntermediate__addLoop	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	__ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TIntermediate__changeAggrToTempConst	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TIntermediate__copyConstUnion	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TIntermediate__promoteConstantUnion	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TIntermediate__promoteConstantUnion	this_01	infoSink	CONFIRMED	the TInfoSinkBase the error text is appended to (TInfoSinkBase::append calls); loaded from *(this)
+local	__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate	this_00	childSequence	CONFIRMED	the aggregate sequence vector (getSequence() result): +8 finish, +0xc end-of-storage, push_back/insert fast path; virtual call +100 on the child aggregate
+local	TIntermAggregate__addToPragmaTable	this_00	pragmaTable	INFERRED	operator_new(0x10) object: +4 rb-tree header node, +8 root, stored into the aggregate at +0x68
+local	TIntermAggregate__addToPragmaTable	this_01	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TParseContext__constructorErrorCheck	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TParseContext__constructorErrorCheck	this_01	newTypeNameString	CONFIRMED	high word of the 64-bit allocate() result: the pool-allocated std::string, constructed from the struct name chars then stored as the type name
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	this_00	newNameString	CONFIRMED	pool-allocated 8-byte std::string constructed from "gl_TexCoord", then stored as the name string
+local	TParseContext__arraySetMaxSize	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TParseContext__nonInitErrorCheck	this_00	newTypeNameString	CONFIRMED	high word of the allocate() result: pool-allocated std::string constructed from the struct type name chars, stored as typeNameString
+local	TParseContext__extensionErrorCheck	this_00	infoSink	CONFIRMED	the TInfoSinkBase the error text is appended to (TInfoSinkBase::append calls); loaded from *(this+8)
+local	TParseContext__executeInitializer	this_00	newStructTypeName	CONFIRMED	high word of the allocate() result: pool-allocated std::string constructed from the type name chars, stored as structTypeNameString
+local	TParseContext__executeInitializer	this_01	intermediate	CONFIRMED	*(this): the TIntermediate that TIntermediate::parseConstTree is called on
+local	TParseContext__canNodeBeRemoved	this_00	operatorNode	CONFIRMED	result of the virtual call at vtable +0x1c on the node (getAsOperator); tested for null, isConstructor, op at +0x30
+local	TParseContext__addConstVectorNode	this_00	infoSink	CONFIRMED	the TInfoSinkBase the error text is appended to (TInfoSinkBase::append calls); loaded from *(this+8)
+local	TParseContext__addConstMatrixNode	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	TParseContext__addConstStruct	this_00	structFieldType	CONFIRMED	struct field TType loaded from the structure field array (+4, stride 8); +8 is its struct pointer, passed to setStructSize
+local	TParseContext__addConstStruct	this_01	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	FreeGlobalPools	this_00	globalPoolAllocator	CONFIRMED	GetGlobalPoolAllocator() result, destroyed (TPoolAllocator::~TPoolAllocator) and freed with operator delete
+local	initializeSymbolTable	this_00	poolAllocator	CONFIRMED	the global TPoolAllocator, from GetGlobalPoolAllocator(); passed to TPoolAllocator::allocate
+local	_ShLink	this_00	infoSink	CONFIRMED	the TInfoSinkBase the error text is appended to (TInfoSinkBase::append calls); loaded from *(this+0x84)
+local	generateBuiltInSymbolTable	aTStack_30	builtIns	CONFIRMED	28-byte TBuiltIns object on the stack: TBuiltIns::initialize(resource) then passed as the first argument of initializeSymbolTable

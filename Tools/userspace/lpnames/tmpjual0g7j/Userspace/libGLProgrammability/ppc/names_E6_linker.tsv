@@ -1,0 +1,39 @@
+local	TGenericLinker__MergeCompilers	param_2	stage	CONFIRMED	0 selects GL_VERTEX_SHADER (0x8b31) for the merged stream type, otherwise 0x8b30; indexes the per-stage arrays this+stage*4+0x10/0x18/0x20/0x28/0x30
+local	TGenericLinker__MergeCompilers	iVar4	stageOffset	CONFIRMED	param_2 * 4: byte offset into the per-stage pointer arrays of the linker
+local	TGenericLinker__MergeCompilers	bVar22	success	CONFIRMED	starts as objectCount <= 10000, cleared on every error, returned; the merged stream/table are freed when it is false
+local	TGenericLinker__MergeCompilers	local_60	stageRequirementMet	INFERRED	0 for the vertex stage, 1 for the fragment stage, set to 1 when an object has its +0xa4 flag; an error is reported when it is still 0
+local	TGenericLinker__MergeCompilers	pTVar28	stageEntry	CONFIRMED	this + stageOffset: the base of the stage's per-array slots (+0x18 streams, +0x30 merged stream, +8 compilers)
+local	TGenericLinker__MergeCompilers	pTVar5	stageEntryCopy1	UNKNOWN	compiler-saved copy of stageEntry (pTVar28)
+local	TGenericLinker__MergeCompilers	pTVar6	stageEntryCopy2	UNKNOWN	compiler-saved copy of stageEntry (pTVar28)
+local	TGenericLinker__MergeCompilers	pTVar7	stageEntryCopy3	UNKNOWN	compiler-saved copy of stageEntry (pTVar28)
+local	TGenericLinker__MergeCompilers	local_5c	stageEntrySave1	UNKNOWN	spill slot of stageEntryCopy1
+local	TGenericLinker__MergeCompilers	local_58	stageEntrySave2	UNKNOWN	spill slot of stageEntryCopy2
+local	TGenericLinker__MergeCompilers	local_54	stageEntrySave3	UNKNOWN	spill slot of stageEntryCopy3
+local	TGenericLinker__MergeCompilers	iVar25	chunkLabelName	INFERRED	pointer to the label text inside a copied chunk (+0x44 operations, +0x14 other chunks), compared with the gl__While/gl__If prefixes
+local	TGenericLinker__MergeCompilers	pcVar16	labelDigitCursor	INFERRED	destination cursor of the 4-character object number written into the label text
+local	TGenericLinker__MergeCompilers	cVar2	labelDigit	CONFIRMED	one character of the %04d object number copied into the label
+local	TGenericLinker__MergeCompilers	local_70	labelNumberText	CONFIRMED	char[16] filled by sprintf("%04d", objectIndex): makes gl__While/gl__If labels unique per object
+local	TGenericLinker__MergeCompilers	this_00	objectFunctionTable	INFERRED	the shader object's FunctionTable (compiler+0x6c) whose function names are matched against the merged table
+local	TGenericLinker__MergeCompilers	pPVar18	parseSymbol	CONFIRMED	ParseSymbol cursor over the object's symbol table via ParseSymbolTable__NextSymbol
+local	TGenericLinker__MergeCompilers	puVar24	mergedSymbol	CONFIRMED	result of ParseSymbolTable__FindGlobalSymbolByName in the merged table (same name as parseSymbol)
+local	TGenericLinker__MergeCompilers	bVar1	symbolMissing	INFERRED	true when the merged table has no symbol of that name
+local	TGenericLinker__MergeCompilers	pbVar21	symbolChunk	INFERRED	the symbol's chunk (*parseSymbol, ParseSymbol+0)
+local	TGenericLinker__MergeCompilers	bVar3	chunkKind	INFERRED	first byte of the symbol's chunk (kind 0..3)
+local	TGenericLinker__MergeCompilers	uVar20	chunkWord	INFERRED	header word of a chunk (+0xc / +0x10): low 18 bits operation index, bits 16..20 register class (0x11 = constant)
+local	TGenericLinker__MergeCompilers	p_Var29	constantChunk	INFERRED	constant-list chunk being copied into the merged stream (class 0x11)
+local	TGenericLinker__MergeCompilers	p_Var19	newConstantChunk	INFERRED	copy of constantChunk added to the merged stream's constant list
+local	TGenericLinker__AllocateTextureUnitsForVaryings	pPVar7	parseSymbol	CONFIRMED	ParseSymbol cursor over a stage's symbol table (NextSymbol)
+local	TGenericLinker__AllocateTextureUnitsForVaryings	local_e0	slotPlan	INFERRED	14-word array: words 0..3 receive the row (texcoord set) and words 4..7 the component of each slot of the varying being placed
+local	TGenericLinker__AllocateTextureUnitsForVaryings	puVar5	slotPlanCursor	INFERRED	cursor into slotPlan while storing a varying's slots
+local	TGenericLinker__AllocateTextureUnitsForVaryings	piVar10	vertexSymbol	CONFIRMED	result of ParseSymbolTable__FindGlobalSymbolByName(vertex table, name): the vertex-side varying matching the fragment symbol
+local	TGenericLinker__AllocateTextureUnitsForVaryings	piVar20	slotMapCursor	INFERRED	pointer into the slot map while filling a varying's slots
+local	TGenericLinker__AllocateTextureUnitsForVaryings	bVar1	slotsFree	INFERRED	true while the tried component range of the slot map is free
+local	TGenericLinker__AllocateTextureUnitsForVaryings	pvVar28	infoSink	CONFIRMED	this+0x84 TInfoSinkBase receiving "ERROR: " messages
+local	TGenericLinker__AllocateTextureUnitsForVaryings	pcVar8	messageText	CONFIRMED	malloc'd sprintf buffer holding the error message
+local	TGenericLinker__AllocateTextureUnitsForVaryings	pcVar16	messagePrefix	CONFIRMED	"ERROR: " or "INTERNAL ERROR: " passed to TInfoSinkBase::append
+local	TGenericLinker__AllocateTextureUnitsForVaryings	pFVar11	functionTable	CONFIRMED	this+0x38 (vertex) / this+0x3c (fragment) FunctionTable searched for "main("
+local	TGenericLinker__AllocateTextureUnitsForVaryings	local_5c	insideMain	INFERRED	set to 1 once the walk reaches the first operation of main
+local	TGenericLinker__AllocateTextureUnitsForVaryings	local_60	vec4Index	INFERRED	index of the vec4 slot being placed for a matrix/array varying (compared with GetVec4sForType)
+local	TGenericLinker__AllocateTextureUnitsForVaryings	uVar23	bindingChunkIndex	INFERRED	ushort chunk index (+0x12) of the output binding found or created
+local	TGenericLinker__AllocateTextureUnitsForVaryings	local_80	outputBindingWord	INFERRED	output binding record built for _PPStreamAddOutputBinding: component mask<<24 | set index | 0x4060000
+local	TGenericLinker__AllocateTextureUnitsForVaryings	local_7c	outputBindingChunkIndex	INFERRED	second word of that record: highest chunk index + 1

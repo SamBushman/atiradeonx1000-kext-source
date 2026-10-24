@@ -2682,7 +2682,7 @@ int TIntermediate__copyConstUnion(this, intermConstantUnion)
   int objectSize;
   unsigned char * poolAllocator;
   int newConstArray;
-  unsigned char * pTVar4;
+  unsigned char * resultNode;
   int componentIndex;
   int oldConstArray;
   undefined **typeTemp1 [9];
@@ -2693,7 +2693,7 @@ int TIntermediate__copyConstUnion(this, intermConstantUnion)
   undefined **typeTemp3 [14];
   
   oldConstArray = *(int *)(intermConstantUnion + 0x30);
-  pTVar4 = (unsigned char *)0x0;
+  resultNode = (unsigned char *)0x0;
   if (oldConstArray != 0) {
     (**(code **)(*(int *)intermConstantUnion + 0x38))(typeTemp1);
     typeTemp1[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
@@ -2726,9 +2726,9 @@ int TIntermediate__copyConstUnion(this, intermConstantUnion)
       } while (objectSize != 0);
     }
     *(int *)(intermConstantUnion + 0x30) = newConstArray;
-    pTVar4 = intermConstantUnion;
+    resultNode = intermConstantUnion;
   }
-  return pTVar4;
+  return resultNode;
 }
 
 /* TIntermediate__promoteConstantUnion @ 0x97b95f40 (876 bytes) */
@@ -3495,32 +3495,33 @@ int OutputBinary(preVisit, intermBinary, intermTraverser)
   unsigned char * intermBinary;
   unsigned char * intermTraverser;
 {
+  unsigned char *debugSink;
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
   char *opName;
-  unsigned char * pTVar5;
+  unsigned char *infoSink;
   char reservation;
   byte cr0Reg;
   undefined4 typeString;
   int typeStringChars;
   undefined4 destroyAllocatorArg [5];
   
-  pTVar5 = *(unsigned char **)(intermTraverser + 0x30);
-  ((int (*)())OutputTreeText)(pTVar5,(unsigned char *)intermBinary,*(int *)(intermTraverser + 0x20));
+  infoSink = *(unsigned char **)(intermTraverser + 0x30);
+  ((int (*)())OutputTreeText)(infoSink,(unsigned char *)intermBinary,*(int *)(intermTraverser + 0x20));
   if (*(int *)(intermBinary + 0x30) == 0x15) {
     opName = "Multiply";
   }
   else {
     opName = *(char **)(PTR__operatorStrings_a7b7c0b0 + *(int *)(intermBinary + 0x30) * 4);
   }
-  pTVar5 = pTVar5 + 8;
-  __ZN13TInfoSinkBase6appendEPKc(pTVar5,opName);
-  __ZN13TInfoSinkBase6appendEPKc(pTVar5," (");
+  debugSink = infoSink + 8;
+  __ZN13TInfoSinkBase6appendEPKc(debugSink,opName);
+  __ZN13TInfoSinkBase6appendEPKc(debugSink," (");
   ((int (*)())TType__getCompleteString)(&typeString,intermBinary + 8);
   __ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE
-            (pTVar5,(unsigned char *)&typeString);
-  __ZN13TInfoSinkBase6appendEPKc(pTVar5,")");
+            (debugSink,(unsigned char *)&typeString);
+  __ZN13TInfoSinkBase6appendEPKc(debugSink,")");
   refCountPtr = (int *)(typeStringChars + -4);
   destroyAllocatorArg[0] = typeString;
   do {
@@ -3535,7 +3536,7 @@ int OutputBinary(preVisit, intermBinary, intermTraverser)
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(typeStringChars + -0xc),destroyAllocatorArg);
   }
-  __ZN13TInfoSinkBase6appendEPKc(pTVar5,"\n");
+  __ZN13TInfoSinkBase6appendEPKc(debugSink,"\n");
   return 1;
 }
 
@@ -3590,31 +3591,31 @@ int OutputAggregate(preVisit, intermAggregate, intermTraverser)
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  unsigned char * pTVar4;
-  unsigned char * this;
+  unsigned char * infoSink;
+  unsigned char * debugSink;
   char reservation;
   byte cr0Reg;
   undefined4 typeString;
   int typeStringChars;
   undefined4 destroyAllocatorArg [5];
   
-  pTVar4 = *(unsigned char **)(intermTraverser + 0x30);
+  infoSink = *(unsigned char **)(intermTraverser + 0x30);
   if (*(int *)(intermAggregate + 0x30) == 0) {
                     
-    __ZN13TInfoSinkBase6appendEPKc(pTVar4 + 8,"ERROR: ");
-    __ZN13TInfoSinkBase6appendEPKc(pTVar4 + 8,"node is still EOpNull!");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink + 8,"ERROR: ");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink + 8,"node is still EOpNull!");
   }
   else {
-    ((int (*)())OutputTreeText)(pTVar4,(unsigned char *)intermAggregate,*(int *)(intermTraverser + 0x20));
-    this = pTVar4 + 8;
+    ((int (*)())OutputTreeText)(infoSink,(unsigned char *)intermAggregate,*(int *)(intermTraverser + 0x20));
+    debugSink = infoSink + 8;
     __ZN13TInfoSinkBase6appendEPKc
-              (this,*(char **)(PTR__operatorStrings_a7b7c0b0 + *(int *)(intermAggregate + 0x30) * 4));
+              (debugSink,*(char **)(PTR__operatorStrings_a7b7c0b0 + *(int *)(intermAggregate + 0x30) * 4));
     if ((*(int *)(intermAggregate + 0x30) != 1) && (*(int *)(intermAggregate + 0x30) != 4)) {
-      __ZN13TInfoSinkBase6appendEPKc(this," (");
+      __ZN13TInfoSinkBase6appendEPKc(debugSink," (");
       ((int (*)())TType__getCompleteString)(&typeString,intermAggregate + 8);
       __ZN13TInfoSinkBase6appendERKSbIcSt11char_traitsIcE14pool_allocatorIcEE
-                (this,(unsigned char *)&typeString);
-      __ZN13TInfoSinkBase6appendEPKc(this,")");
+                (debugSink,(unsigned char *)&typeString);
+      __ZN13TInfoSinkBase6appendEPKc(debugSink,")");
       refCountPtr = (int *)(typeStringChars + -4);
       destroyAllocatorArg[0] = typeString;
       do {
@@ -3631,7 +3632,7 @@ int OutputAggregate(preVisit, intermAggregate, intermTraverser)
       }
     }
   }
-  __ZN13TInfoSinkBase6appendEPKc(pTVar4 + 8,"\n");
+  __ZN13TInfoSinkBase6appendEPKc(infoSink + 8,"\n");
   return 1;
 }
 
@@ -3719,11 +3720,11 @@ int OutputConstantUnion(intermConstantUnion, intermTraverser)
   undefined4 getTypeResult;
   undefined4 intermTraverserCopy;
   char *boolText;
-  undefined ***pppuVar8;
+  undefined ***appendText;
   uint sourceLine;
   int componentIndex;
-  unsigned char * pTVar10;
-  unsigned char * this;
+  unsigned char * lineSink;
+  unsigned char * infoSink;
   char reservation;
   byte cr0Flags;
   double scratchF3;
@@ -3746,7 +3747,7 @@ int OutputConstantUnion(intermConstantUnion, intermTraverser)
   uint typeTemp2Bits;
   char floatTextBuf [312];
   
-  this = *(unsigned char **)(intermTraverser + 0x30);
+  infoSink = *(unsigned char **)(intermTraverser + 0x30);
   (**(code **)(*(int *)intermConstantUnion + 0x38))(typeTemp1OrTextBuf,intermConstantUnion);
   typeTemp1OrTextBuf[0] = &PTR___ZN5TTypeD1Ev_a7b7d080;
   if ((typeTemp1Bits >> 0x13 & 0x3f) == 0xe) {
@@ -3767,18 +3768,18 @@ int OutputConstantUnion(intermConstantUnion, intermTraverser)
   componentIndex = 0;
   if (0 < componentCount) {
     do {
-      ((int (*)())OutputTreeText)(this,(unsigned char *)intermConstantUnion,*(int *)(intermTraverser + 0x20));
+      ((int (*)())OutputTreeText)(infoSink,(unsigned char *)intermConstantUnion,*(int *)(intermTraverser + 0x20));
       getTypeResult = (**(code **)(*(int *)intermConstantUnion + 0x38))(typeTemp1OrTextBuf,intermConstantUnion);
       componentBasicType = typeTemp1Bits >> 0x13 & 0x3f;
       typeTemp1OrTextBuf[0] = &PTR___ZN5TTypeD1Ev_a7b7d080;
       if (componentBasicType == 2) {
         _sprintf((char *)typeTemp1OrTextBuf,"%d (%s)",*(undefined4 *)(*(int *)(intermConstantUnion + 0x30) + componentIndex * 4),
                  "const int");
-        pppuVar8 = typeTemp1OrTextBuf;
+        appendText = typeTemp1OrTextBuf;
 LAB_97b977f0:
-        __ZN13TInfoSinkBase6appendEPKc(this + 8,(char *)pppuVar8);
+        __ZN13TInfoSinkBase6appendEPKc(infoSink + 8,(char *)appendText);
 LAB_97b977f8:
-        pTVar10 = this + 8;
+        lineSink = infoSink + 8;
       }
       else {
         if (componentBasicType < 3) {
@@ -3788,7 +3789,7 @@ LAB_97b977f8:
                         scratchF3,scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,in_stack_fffffe08,in_stack_fffffe10,
                         in_stack_fffffe18,in_stack_fffffe20,in_stack_fffffe28);
             _sprintf(floatTextBuf,"%s (%s)",floatTextBuf,"const float");
-            __ZN13TInfoSinkBase6appendEPKc(this + 8,floatTextBuf);
+            __ZN13TInfoSinkBase6appendEPKc(infoSink + 8,floatTextBuf);
             goto LAB_97b977f8;
           }
         }
@@ -3799,16 +3800,16 @@ LAB_97b977f8:
           else {
             boolText = "true";
           }
-          pTVar10 = this + 8;
-          __ZN13TInfoSinkBase6appendEPKc(pTVar10,boolText);
-          __ZN13TInfoSinkBase6appendEPKc(pTVar10," (");
-          __ZN13TInfoSinkBase6appendEPKc(pTVar10,"const bool");
-          pppuVar8 = (undefined ***)")";
+          lineSink = infoSink + 8;
+          __ZN13TInfoSinkBase6appendEPKc(lineSink,boolText);
+          __ZN13TInfoSinkBase6appendEPKc(lineSink," (");
+          __ZN13TInfoSinkBase6appendEPKc(lineSink,"const bool");
+          appendText = (undefined ***)")";
           goto LAB_97b977f0;
         }
         sourceLoc = (*(code *)**(undefined4 **)intermConstantUnion)(intermConstantUnion,intermTraverserCopy);
                     
-        __ZN13TInfoSinkBase6appendEPKc(this,"INTERNAL ERROR: ");
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
         sourceLine = sourceLoc & 0xffff;
         cr0Flags = (sourceLine == 0) << 1;
         if (sourceLine == 0) {
@@ -3819,7 +3820,7 @@ LAB_97b977f8:
         }
         __ZNSsC1EPKcRKSaIcE(typeTemp1OrTextBuf,locTextBuf,allocatorDummy);
         *(undefined *)((int)typeTemp1OrTextBuf[0] + (int)typeTemp1OrTextBuf[0][-3]) = *PTR__S_terminal_a7b7c0b8;
-        __ZN13TInfoSinkBase6appendEPKc(this,(char *)typeTemp1OrTextBuf[0]);
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)typeTemp1OrTextBuf[0]);
         refCountPtr = typeTemp1OrTextBuf[0] + -1;
         do {
           oldRefCount = *refCountPtr;
@@ -3832,12 +3833,12 @@ LAB_97b977f8:
         if ((int)oldRefCount < 1) {
           __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(typeTemp1OrTextBuf[0] + -3));
         }
-        __ZN13TInfoSinkBase6appendEPKc(this,": ");
-        __ZN13TInfoSinkBase6appendEPKc(this,"Unknown constant");
-        pTVar10 = this;
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
+        __ZN13TInfoSinkBase6appendEPKc(infoSink,"Unknown constant");
+        lineSink = infoSink;
       }
       componentIndex = componentIndex + 1;
-      __ZN13TInfoSinkBase6appendEPKc(pTVar10,"\n");
+      __ZN13TInfoSinkBase6appendEPKc(lineSink,"\n");
     } while (componentIndex < componentCount);
   }
   return;
@@ -4240,7 +4241,7 @@ int ParseSymbol(intermSymbol, intermTraverser)
   int componentSrcBasicType;
   undefined4 intermTraverserCopy;
   undefined4 r4Out0;
-  undefined ***pppuVar9;
+  undefined ***messageText;
   uint traverserTypeBits;
   int levelsBeginOrVariable;
   int variableType;
@@ -4484,13 +4485,13 @@ code_r0x97b98dd8:
         __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc));
       }
       __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
-      pppuVar9 = &stackType;
+      messageText = &stackType;
     }
     else {
       ((int (*)())TType__getCompleteString)(&stackType,intermTraverser + 0x3c);
-      pppuVar9 = messageBuf;
+      messageText = messageBuf;
       *(undefined1 *)(stackTypeArraySize + *(int *)(stackTypeArraySize + -0xc)) = *DAT_a7b7ba10;
-      _sprintf((char *)pppuVar9,"\'constructor\' : assigning non-constant to %s",stackTypeArraySize);
+      _sprintf((char *)messageText,"\'constructor\' : assigning non-constant to %s",stackTypeArraySize);
       refCountPtr = (int *)(stackTypeArraySize + -4);
       destroyAllocatorArg[0] = stackType;
       do {
@@ -4534,7 +4535,7 @@ code_r0x97b98dd8:
       }
       __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
     }
-    __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)pppuVar9);
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)messageText);
     __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
     *(undefined4 *)(intermTraverser + 0x74) = 1;
   }
@@ -5982,6 +5983,7 @@ int TParseContext__lValueErrorCheck(this, sourceLoc, str, intermTyped, scratchR7
   uint scratchR9;
   undefined4 scratchR10;
 {
+  unsigned char *leftOperand;
   int *swizzleElement;
   int *swizzleAggregate;
   char *errorReason;
@@ -5994,7 +5996,7 @@ int TParseContext__lValueErrorCheck(this, sourceLoc, str, intermTyped, scratchR7
   int symbolName;
   int *symbolNode;
   int *binaryNode;
-  unsigned char * pTVar5;
+  unsigned char *intermTypedCopy;
   int componentConstUnion;
   uint qualifier;
   undefined4 r4Out0;
@@ -6009,7 +6011,7 @@ int TParseContext__lValueErrorCheck(this, sourceLoc, str, intermTyped, scratchR7
   int componentSeen [4];
   
   tokenCopy = str;
-  pTVar5 = intermTyped;
+  intermTypedCopy = intermTyped;
   symbolNode = (int *)(**(code **)(*(int *)intermTyped + 0x28))(intermTyped);
   binaryNode = (int *)(**(code **)(*(int *)intermTyped + 0x20))(intermTyped);
   if (binaryNode == (int *)0x0) {
@@ -6024,7 +6026,7 @@ int TParseContext__lValueErrorCheck(this, sourceLoc, str, intermTyped, scratchR7
       staleR4 = r4Out1;
     }
     modifyReason = (char *)0x0;
-    qualifier = (**(code **)(*(int *)intermTyped + 0x44))(intermTyped,staleR4,tokenCopy,pTVar5,scratchR7,scratchR8,scratchR9);
+    qualifier = (**(code **)(*(int *)intermTyped + 0x44))(intermTyped,staleR4,tokenCopy,intermTypedCopy,scratchR7,scratchR8,scratchR9);
     if (qualifier < 0x12) {
       scratchR9 = qualifier * 4;
       switch(qualifier) {
@@ -6056,7 +6058,7 @@ int TParseContext__lValueErrorCheck(this, sourceLoc, str, intermTyped, scratchR7
     else {
 switchD_97b9ace4_caseD_0:
       basicType = (**(code **)(*(int *)intermTyped + 0x40))
-                        (intermTyped,sourceLocCopy,tokenCopy,pTVar5,scratchR7,scratchR8,scratchR9);
+                        (intermTyped,sourceLocCopy,tokenCopy,intermTypedCopy,scratchR7,scratchR8,scratchR9);
       if (basicType - 5U < 8) {
         modifyReason = "can\'t modify a sampler";
       }
@@ -6093,13 +6095,13 @@ LAB_97b9ae0c:
     binaryOp = binaryNode[0xc];
     if (binaryOp < 0x2d) goto LAB_97b9ae0c;
     if (binaryOp < 0x30) {
-      pTVar5 = (unsigned char *)(**(code **)(*binaryNode + 0x68))(binaryNode);
-      lValueErrorCheckResult = ((int (*)())TParseContext__lValueErrorCheck)(this,sourceLoc,str,pTVar5,scratchR7,scratchR8,scratchR9,scratchR10);
+      leftOperand = (unsigned char *)(**(code **)(*binaryNode + 0x68))(binaryNode);
+      lValueErrorCheckResult = ((int (*)())TParseContext__lValueErrorCheck)(this,sourceLoc,str,leftOperand,scratchR7,scratchR8,scratchR9,scratchR10);
       return lValueErrorCheckResult;
     }
     if (binaryOp != 0x30) goto LAB_97b9ae0c;
-    pTVar5 = (unsigned char *)(**(code **)(*binaryNode + 0x68))(binaryNode);
-    componentSeen[0] = ((int (*)())TParseContext__lValueErrorCheck)(this,sourceLoc,str,pTVar5,scratchR7,scratchR8,scratchR9,scratchR10);
+    leftOperand = (unsigned char *)(**(code **)(*binaryNode + 0x68))(binaryNode);
+    componentSeen[0] = ((int (*)())TParseContext__lValueErrorCheck)(this,sourceLoc,str,leftOperand,scratchR7,scratchR8,scratchR9,scratchR10);
     if (componentSeen[0] != 0) {
       return componentSeen[0];
     }
@@ -6316,9 +6318,9 @@ int TParseContext__constructorErrorCheck(this, sourceLoc, intermNode, function, 
   undefined4 sourceLocCopy3;
   undefined4 r4Out8;
   undefined4 scratchR4;
-  unsigned char * pTVar12;
+  unsigned char * scratchR5;
   char *structNameChars;
-  unsigned char * pTVar14;
+  unsigned char * functionCopy;
   char *errorToken;
   int opCopy;
   char *extraInfoFormat;
@@ -6327,7 +6329,7 @@ int TParseContext__constructorErrorCheck(this, sourceLoc, intermNode, function, 
   uint ctorTypeBits;
   int paramTypeVtableArg;
   int scratchR10;
-  unsigned char * pTVar20;
+  unsigned char * structFieldList;
   int paramIndex;
   char reservation;
   byte cr0Flags;
@@ -6352,8 +6354,8 @@ int TParseContext__constructorErrorCheck(this, sourceLoc, intermNode, function, 
   
   constructorScratch = op - 0x66;
   paramSizeOrScratchR4 = sourceLoc;
-  pTVar12 = intermNode;
-  pTVar14 = function;
+  scratchR5 = intermNode;
+  functionCopy = function;
   opCopy = op;
   typeCopy = type;
   switch(constructorScratch) {
@@ -6458,7 +6460,7 @@ LAB_97b9b4a0:
     stackTypeBits = constructorScratch;
     goto LAB_97b9b714;
   case 0xf:
-    pTVar20 = *(unsigned char **)(function + 0x24);
+    structFieldList = *(unsigned char **)(function + 0x24);
     functionName = (unsigned char *)
              (**(code **)(*(int *)(function + 0x1c) + 0x18))
                        (function + 0x1c,sourceLoc,intermNode,function,op,type,function + 0x1c);
@@ -6471,8 +6473,8 @@ LAB_97b9b4a0:
     stackTypeFieldName = 0;
     stackTypeWord14 = 0;
     stackTypeWord1c = 0;
-    stackTypeStructure = pTVar20;
-    stackTypeStructureSize = TType__setStructSize((unsigned char *)&stackType,pTVar20);
+    stackTypeStructure = structFieldList;
+    stackTypeStructureSize = TType__setStructSize((unsigned char *)&stackType,structFieldList);
     structNameChars = nameCopy2Chars;
     nameCopy2Chars[*(int *)(nameCopy2Chars + -0xc)] = *DAT_a7b7ba18;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
@@ -6483,9 +6485,9 @@ LAB_97b9b4a0:
     stackTypeTypeName = (void *)0x0;
     if (newTypeNameString != (void *)0x0) {
       allocatorArg[0] = GetGlobalPoolAllocator();
-      pTVar12 = (unsigned char *)allocatorArg;
+      scratchR5 = (unsigned char *)allocatorArg;
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                (newTypeNameString,structNameChars,(unsigned char *)pTVar12);
+                (newTypeNameString,structNameChars,(unsigned char *)scratchR5);
       stackTypeTypeName = newTypeNameString;
       paramSizeOrScratchR4 = r4Out0;
     }
@@ -6573,12 +6575,12 @@ LAB_97b9b714:
     paramOffset = paramIndex * 8;
     paramType = *(int **)(*(int *)(function + 0x10) + paramOffset + 4);
     paramTypeVtableArg = *paramType;
-    paramSizeOrScratchR4 = (**(code **)(paramTypeVtableArg + 0x30))(paramType,paramSizeOrScratchR4,pTVar12,pTVar14,opCopy,typeCopy,paramTypeVtableArg);
+    paramSizeOrScratchR4 = (**(code **)(paramTypeVtableArg + 0x30))(paramType,paramSizeOrScratchR4,scratchR5,functionCopy,opCopy,typeCopy,paramTypeVtableArg);
     totalSize = totalSize + paramSizeOrScratchR4;
     scratchR4 = sourceLocCopy;
     if ((op - 0x72U < 3) &&
        (paramType = *(int **)(*(int *)(function + 0x10) + paramOffset + 4), paramSizeOrScratchR4 = *paramType,
-       paramSizeOrScratchR4 = (**(code **)(paramSizeOrScratchR4 + 0x34))(paramType,sourceLocCopy,pTVar12,pTVar14,opCopy,typeCopy,paramSizeOrScratchR4),
+       paramSizeOrScratchR4 = (**(code **)(paramSizeOrScratchR4 + 0x34))(paramType,sourceLocCopy,scratchR5,functionCopy,opCopy,typeCopy,paramSizeOrScratchR4),
        scratchR4 = r4Out3, paramSizeOrScratchR4 != 0)) {
       matrixInMatrix = true;
     }
@@ -6592,13 +6594,13 @@ LAB_97b9b714:
     }
     paramType = *(int **)(*(int *)(function + 0x10) + paramOffset + 4);
     paramTypeVtable = *paramType;
-    paramTypeVtable = (**(code **)(paramTypeVtable + 0x24))(paramType,scratchR4,pTVar12,pTVar14,opCopy,typeCopy,paramTypeVtable);
+    paramTypeVtable = (**(code **)(paramTypeVtable + 0x24))(paramType,scratchR4,scratchR5,functionCopy,opCopy,typeCopy,paramTypeVtable);
     if (paramTypeVtable != 2) {
       constType = false;
     }
     functionParam = *(uint **)(*(int *)(function + 0x10) + paramOffset + 4);
     constructorScratch = *functionParam;
-    paramIsArray = (**(code **)(constructorScratch + 0x38))(functionParam,sourceLocCopy2,pTVar12,pTVar14,opCopy,typeCopy,constructorScratch);
+    paramIsArray = (**(code **)(constructorScratch + 0x38))(functionParam,sourceLocCopy2,scratchR5,functionCopy,opCopy,typeCopy,constructorScratch);
     if (paramIsArray != 0) {
       arrayArg = true;
     }
@@ -6622,18 +6624,18 @@ LAB_97b9b714:
       errorReason = "too many arguments";
     }
     else if (((totalSize == 1) ||
-             (paramIndex = (**(code **)(*type + 0x30))(type,paramSizeOrScratchR4,pTVar12,pTVar14,opCopy),
+             (paramIndex = (**(code **)(*type + 0x30))(type,paramSizeOrScratchR4,scratchR5,functionCopy,opCopy),
              paramSizeOrScratchR4 = r4Out7, paramIndex <= totalSize)) && ((0 < totalSize || (op != 0x75)))) {
-      argTyped = (int *)(**(code **)(*(int *)intermNode + 0x14))(intermNode,paramSizeOrScratchR4,pTVar12,pTVar14,opCopy);
+      argTyped = (int *)(**(code **)(*(int *)intermNode + 0x14))(intermNode,paramSizeOrScratchR4,scratchR5,functionCopy,opCopy);
       if (argTyped == (int *)0x0) {
         errorReason = "constructor argument does not have a type";
       }
       else {
         scratchR4 = sourceLocCopy3;
         if ((op == 0x75) ||
-           (paramSizeOrScratchR4 = (**(code **)(*argTyped + 0x40))(argTyped,sourceLocCopy3,pTVar12,pTVar14,opCopy),
+           (paramSizeOrScratchR4 = (**(code **)(*argTyped + 0x40))(argTyped,sourceLocCopy3,scratchR5,functionCopy,opCopy),
            scratchR4 = r4Out8, 7 < paramSizeOrScratchR4 - 5U)) {
-          argBasicType = (**(code **)(*argTyped + 0x40))(argTyped,scratchR4,pTVar12,pTVar14,opCopy);
+          argBasicType = (**(code **)(*argTyped + 0x40))(argTyped,scratchR4,scratchR5,functionCopy,opCopy);
           if (argBasicType != 0) {
             return 0;
           }

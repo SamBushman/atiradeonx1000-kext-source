@@ -1,0 +1,69 @@
+local	GetGLStringForType	param_1	glType	CONFIRMED	GL type enum (0x1404 GL_INT, 0x1406 GL_FLOAT, 0x8b50.. GL_FLOAT_VEC2.. sampler types, 0x7ffe/0x7fff markers) selecting the name string
+local	GetShaderStringForType	param_1	glType	CONFIRMED	GL type enum selecting the shader-language type name
+local	GetVec4sForType	param_1	glType	CONFIRMED	GL type enum; result = vec4 registers the type occupies (mat2 2, mat3 3, mat4 4)
+local	GetPPStreamTypeForGLType	param_1	glType	CONFIRMED	GL type enum mapped to the PP stream type code
+local	GetScalerWidthForType	param_1	glType	CONFIRMED	GL type enum; result = component count
+local	AddressTempAllocator__releaseTemporary	param_2	tempIndex	CONFIRMED	index of the temporary slot (4-byte entry of the table at this+0) cleared to free it
+local	__ZN18TemporaryAllocatorC2Ev	iVar1	slotsLeft	CONFIRMED	loop counter over the 25 slots (two parallel word tables, +0 and +100)
+local	__Unwind_FindEnclosingFunction	pvVar2	functionStart	CONFIRMED	start address of the enclosing function from dwarf_eh_bases, or null when no FDE covers pc-1
+local	__Unwind_FindEnclosingFunction	adStack_20	ehBases	CONFIRMED	struct dwarf_eh_bases[2] filled in by _Unwind_Find_FDE
+local	_execute_stack_op	local_38	regNumber	CONFIRMED	register number read by DW_OP_regx / DW_OP_bregx (uleb128), indexes the context's register table
+local	__Unwind_ForcedUnwind_Phase2	iVar1	personalityResult	CONFIRMED	return value of the personality routine (7 = install context, 8 = continue unwinding)
+local	__Unwind_SetIP	param_1	context	CONFIRMED	_Unwind_Context: +0x1c0 holds the return address that SetIP writes
+local	_read_uleb128_97c1c41c	bVar1	byteRead	CONFIRMED	current LEB128 byte (bit 7 = continuation)
+local	_read_sleb128_97c1c44c	bVar1	byteRead	CONFIRMED	current LEB128 byte (bit 7 = continuation, bit 6 = sign)
+local	___register_frame_table	param_2	unusedArg	INFERRED	extra argument Ghidra recovered; __register_frame_table(void* begin) ignores it
+local	_frame_heapsort	in_r6	r6Fwd	INFERRED	stray r6 forwarded to the fdeCompare callback (callback takes three args; Ghidra pass-through)
+local	_frame_heapsort	in_r7	r7Fwd	INFERRED	stray r7 forwarded to the fdeCompare callback
+local	_frame_heapsort	in_r8	r8Fwd	INFERRED	stray r8 forwarded to the fdeCompare callback
+local	save_world	in_r11	r11In	INFERRED	incoming r11 (frame base for the saved-world stores)
+local	save_world	iVar1	globalWord	INFERRED	word loaded from the data slot PTR_DAT_a7b7c100 and tested against 0
+local	eh_rest_world_r10	param_1	r3In	INFERRED	incoming r3 (Ghidra register parameter; the routine reloads r3-r10 from the saved world)
+local	eh_rest_world_r10	param_2	r4In	INFERRED	incoming r4
+local	eh_rest_world_r10	param_3	r5In	INFERRED	incoming r5
+local	eh_rest_world_r10	param_4	r6In	INFERRED	incoming r6
+local	eh_rest_world_r10	param_5	r7In	INFERRED	incoming r7
+local	eh_rest_world_r10	param_6	r8In	INFERRED	incoming r8
+local	eh_rest_world_r10	param_7	r9In	INFERRED	incoming r9, forwarded to the resumed call
+local	eh_rest_world_r10	param_8	r10In	INFERRED	incoming r10, the saved-world pointer register the routine is named for, forwarded to the resumed call
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_	uVar1	poolAlloc	CONFIRMED	the string's pool allocator (word at alloc ref) stored at this+0
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_	piVar2	refCountPtr	CONFIRMED	address of the shared rep's reference count (data - 4) incremented by the atomic loop
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_	uVar3	allocWord	CONFIRMED	the source string's pool allocator word copied to this+0
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_	iVar4	adoptedData	CONFIRMED	character data pointer the new string will hold: the source's (shared, refcount bumped) or a fresh clone's
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_	local_40	globalAlloc	CONFIRMED	temporary _Alloc object holding GetGlobalPoolAllocator(), passed to _Rep::_M_clone
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_	local_30	srcPool	CONFIRMED	the source string's pool allocator, compared with the global pool to decide share vs clone
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag	iVar1	emptyRep	CONFIRMED	address of the shared empty _Rep (DAT_a7b7b71c): +8 refcount, +0xc data
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag	piVar2	refCountPtr	CONFIRMED	address of the empty rep's reference count, incremented atomically
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag	puVar4	rep	CONFIRMED	newly created _Rep (length word at +0, data at +0xc)
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag	uVar5	length	CONFIRMED	character count last - first
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag	puVar6	newData	CONFIRMED	rep + 0xc: character data of the new rep
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep8_M_cloneERKS2_m	param_3	extra	CONFIRMED	__res: extra capacity to reserve beyond the current length
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep8_M_cloneERKS2_m	uVar1	requested	CONFIRMED	length + extra
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep8_M_cloneERKS2_m	uVar3	newCapacity	CONFIRMED	capacity passed to _S_create: requested, or double the old capacity when that is larger and requested > 0xfe3
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep8_M_cloneERKS2_m	puVar2	newRep	CONFIRMED	the _Rep created by _S_create
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep8_M_cloneERKS2_m	uVar4	copiedLength	CONFIRMED	length stored into the new rep (0 when the source is empty)
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_	param_2	alloc	CONFIRMED	const _Alloc& whose first word is the TPoolAllocator*
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_	uVar3	allocSize	CONFIRMED	bytes requested from the pool: capacity + 0xd (header 12 + terminator)
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_	piVar2	srcRefCountPtr	CONFIRMED	the source rep's reference count (data - 4), incremented when sharing
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_	iVar4	adoptedData	CONFIRMED	character data pointer the string will hold: the source's (shared, refcount bumped) or a fresh clone's
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_	iVar5	oldData	CONFIRMED	this string's previous character data, whose rep is released
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_	local_30	thisAlloc	CONFIRMED	temporary _Alloc object holding this string's pool, passed to _M_clone/_M_destroy
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_	local_20	srcPool	CONFIRMED	the source string's pool allocator, compared with this string's
+local	TType__getInstanceSize	uVar1	typeBits	CONFIRMED	TType bit-field word at +0x24 (bit 10 matrix, bits 18..11 nominal size)
+local	TType__getInstanceSize	iVar2	nominalSize	CONFIRMED	bits 18..11 of the type word (matrices have size*size elements)
+local	TType__isVector	uVar1	typeBits	CONFIRMED	TType bit-field word at +0x24
+local	TIntermTyped__getSize	uVar1	typeBits	CONFIRMED	embedded type's bit-field word at +0x2c (bit 10 matrix, bits 18..11 nominal size)
+local	TIntermTyped__getSize	iVar2	nominalSize	CONFIRMED	bits 18..11 of the type word (matrices have size*size elements)
+local	TIntermTyped__isVector	uVar1	typeBits	CONFIRMED	embedded type's bit-field word at +0x2c
+local	__ZN5TType7setTypeE10TBasicTypeibPS_	param_3	nominalSize	CONFIRMED	stored in bits 18..11
+local	__ZN5TType7setTypeE10TBasicTypeibPS_	param_4	matrixFlag	CONFIRMED	stored in bit 10
+local	TIntermNode__setLine	param_2	line	CONFIRMED	source line stored at +4
+local	TType__setFieldName	pvVar1	fieldName	CONFIRMED	pool-allocated TString (null if allocation failed) stored at this+0xc
+local	TType__setFieldName	pcVar2	textData	CONFIRMED	character data of the field-name string being copied
+local	TType__setFieldName	local_20	allocRef	CONFIRMED	temporary _Alloc object holding GetGlobalPoolAllocator() for the TString constructor
+local	std___Rb_tree_rotate_left	p_Var2	y	CONFIRMED	x's right child, which becomes the subtree root
+local	std___Rb_tree_rotate_right	p_Var2	y	CONFIRMED	x's left child, which becomes the subtree root
+local	std___Rb_tree_base_iterator___M_decrement	piVar3	node	CONFIRMED	the iterator's current node (+0 color, +4 parent, +8 left, +0xc right)
+local	std___Rb_tree_base_iterator___M_decrement	iVar1	rightChild	CONFIRMED	walking down the predecessor subtree's right spine
+local	TType__setFieldName	this_00	globalPool	CONFIRMED	GetGlobalPoolAllocator() result used for the TString allocation
+local	TType__setFieldName	this_01	stringObject	CONFIRMED	8-byte pool block holding the new TString

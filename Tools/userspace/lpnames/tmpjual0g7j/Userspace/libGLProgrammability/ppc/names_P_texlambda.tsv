@@ -1,0 +1,56 @@
+local	_InterpreterTextureSamplerCalculateLambda1D	param_1	sampler	CONFIRMED	texture sampler state: [0] texture object table, [3] neighbour-fragment coordinate block, [4] lod scale word
+local	_InterpreterTextureSamplerCalculateLambda1D	param_2	texCoord	CONFIRMED	current fragment texture coordinate (s,t,r,q)
+local	_InterpreterTextureSamplerCalculateLambda1D	param_3	textureUnit	CONFIRMED	texture unit: indexes the object table (*sampler)[unit] and the 0x10-byte neighbour records
+local	_InterpreterTextureSamplerCalculateLambda1D	iVar9	neighbourX	INFERRED	record of the +x neighbour fragment coordinates: sampler[3] + unit*0x10 (s at +0x40, t +0x44, r +0x48, q +0x4c)
+local	_InterpreterTextureSamplerCalculateLambda1D	iVar8	neighbourY	INFERRED	record of the +y neighbour fragment coordinates (+0xc0 after the x record)
+local	_InterpreterTextureSamplerCalculateLambda1D	fVar4	coordS	INFERRED	s texture coordinate
+local	_InterpreterTextureSamplerCalculateLambda1D	fVar5	neighbourXS	INFERRED	s of the +x neighbour
+local	_InterpreterTextureSamplerCalculateLambda1D	fVar6	neighbourYS	INFERRED	s of the +y neighbour
+local	_InterpreterTextureSamplerCalculateLambda1D	fVar2	neighbourXQOrDsdx	INFERRED	q of the +x neighbour, reused for ds/dx (x = f(x))
+local	_InterpreterTextureSamplerCalculateLambda1D	fVar3	neighbourYQOrDsdy	INFERRED	q of the +y neighbour, reused for ds/dy
+local	_InterpreterTextureSamplerCalculateLambda1D	fVar7	baseWidthOrDsdy	INFERRED	level-0 width as float (texture object +0x120), reused for ds/dy
+use	_InterpreterTextureSamplerCalculateLambda1D	fVar1	q	INFERRED	q (fourth texture coordinate)	^\s*fVar1\ =\ param_2\[3\];$	+1
+use	_InterpreterTextureSamplerCalculateLambda1D	fVar1	q	INFERRED	q (fourth texture coordinate)	^\s*fVar2\ =\ \-\(\(fVar4\ \-\ fVar5\)\ \*\ \(float\)\(DOUBLE_97c30a60\ /\ \(double\)\(fVar1\ \-\ fVar2\)\)\ \-$	+4
+use	_InterpreterTextureSamplerCalculateLambda1D	fVar1	maxGradientLength	INFERRED	larger of the x and y gradient lengths	^\s*fVar1\ =\ \(float\)dVar11;$	+1
+use	_InterpreterTextureSamplerCalculateLambda1D	fVar1	maxGradientLength	INFERRED	larger of the x and y gradient lengths	^\s*fVar1\ =\ \(float\)dVar10;$	+1
+use	_InterpreterTextureSamplerCalculateLambda1D	fVar1	maxGradientLength	INFERRED	larger of the x and y gradient lengths	^\s*dVar10\ =\ _log2\(\(double\)\(fVar1\ \*\ GH_U2F\(\(unsigned\ int\)\(param_1\[4\]\)\)\)\);$	+1
+local	_InterpreterTextureSamplerCalculateLambda2D	param_1	sampler	CONFIRMED	texture sampler state: [0] texture object table, [3] neighbour-fragment coordinate block, [4] lod scale word
+local	_InterpreterTextureSamplerCalculateLambda2D	param_2	texCoord	CONFIRMED	current fragment texture coordinate (s,t,r,q)
+local	_InterpreterTextureSamplerCalculateLambda2D	param_3	textureUnit	CONFIRMED	texture unit: indexes the object table (*sampler)[unit] and the 0x10-byte neighbour records
+local	_InterpreterTextureSamplerCalculateLambda2D	iVar10	textureObject	CONFIRMED	texture object (*sampler)[unit]; +0x120/+0x124 level-0 width/height as floats
+local	_InterpreterTextureSamplerCalculateLambda2D	iVar11	neighbourX	INFERRED	record of the +x neighbour fragment coordinates: sampler[3] + unit*0x10 (s at +0x40, t +0x44, r +0x48, q +0x4c)
+local	_InterpreterTextureSamplerCalculateLambda2D	iVar12	neighbourY	INFERRED	record of the +y neighbour fragment coordinates (+0xc0 after the x record)
+local	_InterpreterTextureSamplerCalculateLambda2D	fVar5	coordS	INFERRED	s texture coordinate
+local	_InterpreterTextureSamplerCalculateLambda2D	fVar6	coordT	INFERRED	t texture coordinate
+local	_InterpreterTextureSamplerCalculateLambda2D	fVar2	invQMinusX	INFERRED	1/(q - q of the +x neighbour)
+local	_InterpreterTextureSamplerCalculateLambda2D	fVar3	invQPlusY	INFERRED	1/(q + q of the +y neighbour)
+local	_InterpreterTextureSamplerCalculateLambda2D	fVar9	dtdx	INFERRED	scaled derivative of t along x
+local	_InterpreterTextureSamplerCalculateLambda2D	fVar4	qOrInvQMinusY	INFERRED	q, then reused for 1/(q - q of the +y neighbour)
+local	_InterpreterTextureSamplerCalculateLambda2D	fVar8	baseWidthOrDsdy	INFERRED	level-0 width as float (texture object +0x120), reused for ds/dy; first use is ds/dx
+local	_InterpreterTextureSamplerCalculateLambda2D	fVar7	baseHeightOrDtdy	INFERRED	level-0 height as float (texture object +0x124), reused for dt/dy
+use	_InterpreterTextureSamplerCalculateLambda2D	fVar1	invQPlusXOrDsdx	INFERRED	1/(q + q of the +x neighbour)	^\s*fVar1\ =\ \(float\)\(DOUBLE_97c30a60\ /\ \(double\)\(fVar4\ \+\ \*\(float\ \*\)\(iVar11\ \+\ 0x4c\)\)\);$	+1
+use	_InterpreterTextureSamplerCalculateLambda2D	fVar1	invQPlusXOrDsdx	INFERRED	1/(q + q of the +x neighbour)	^\s*fVar9\ =\ \-\(\(fVar6\ \-\ \*\(float\ \*\)\(iVar11\ \+\ 0x44\)\)\ \*\ fVar2\ \-$	+4
+use	_InterpreterTextureSamplerCalculateLambda2D	fVar1	invQPlusXOrDsdx	INFERRED	1/(q + q of the +x neighbour)	^\s*dVar13\ =\ _sqrt\(\(double\)\(fVar1\ \*\ fVar1\ \+\ fVar9\ \*\ fVar9\)\);$	+1
+use	_InterpreterTextureSamplerCalculateLambda2D	fVar1	maxGradientLength	INFERRED	larger of the x and y gradient lengths	^\s*fVar1\ =\ \(float\)dVar14;$	+1
+use	_InterpreterTextureSamplerCalculateLambda2D	fVar1	maxGradientLength	INFERRED	larger of the x and y gradient lengths	^\s*fVar1\ =\ \(float\)dVar13;$	+1
+use	_InterpreterTextureSamplerCalculateLambda2D	fVar1	maxGradientLength	INFERRED	larger of the x and y gradient lengths	^\s*dVar13\ =\ _log2\(\(double\)\(fVar1\ \*\ GH_U2F\(\(unsigned\ int\)\(param_1\[4\]\)\)\)\);$	+1
+local	_InterpreterTextureSamplerCalculateLambda3D	param_1	sampler	CONFIRMED	texture sampler state: [0] texture object table, [3] neighbour-fragment coordinate block, [4] lod scale word
+local	_InterpreterTextureSamplerCalculateLambda3D	param_2	texCoord	CONFIRMED	current fragment texture coordinate (s,t,r,q)
+local	_InterpreterTextureSamplerCalculateLambda3D	param_3	textureUnit	CONFIRMED	texture unit: indexes the object table (*sampler)[unit] and the 0x10-byte neighbour records
+local	_InterpreterTextureSamplerCalculateLambda3D	iVar9	textureObject	CONFIRMED	texture object (*sampler)[unit]; +0x120/+0x124/+0x128 level-0 width/height/depth as floats
+local	_InterpreterTextureSamplerCalculateLambda3D	iVar10	neighbourX	INFERRED	record of the +x neighbour fragment coordinates: sampler[3] + unit*0x10 (s at +0x40, t +0x44, r +0x48, q +0x4c)
+local	_InterpreterTextureSamplerCalculateLambda3D	iVar11	neighbourY	INFERRED	record of the +y neighbour fragment coordinates (+0xc0 after the x record)
+local	_InterpreterTextureSamplerCalculateLambda3D	fVar5	coordS	INFERRED	s texture coordinate
+local	_InterpreterTextureSamplerCalculateLambda3D	fVar6	coordT	INFERRED	t texture coordinate
+local	_InterpreterTextureSamplerCalculateLambda3D	fVar2	invQMinusXOrDsdx	INFERRED	1/(q - q of the +x neighbour), reused for the scaled ds/dx
+local	_InterpreterTextureSamplerCalculateLambda3D	fVar3	invQPlusYOrDsdy	INFERRED	1/(q + q of the +y neighbour), reused for ds/dy
+local	_InterpreterTextureSamplerCalculateLambda3D	fVar4	qOrInvQMinusY	INFERRED	q, then reused for 1/(q - q of the +y neighbour)
+local	_InterpreterTextureSamplerCalculateLambda3D	fVar7	dtdx	INFERRED	scaled derivative of t along x
+local	_InterpreterTextureSamplerCalculateLambda3D	fVar8	drdxOrDrdxSquared	INFERRED	scaled derivative of r along x, then its square
+use	_InterpreterTextureSamplerCalculateLambda3D	fVar1	invQPlusX	INFERRED	1/(q + q of the +x neighbour)	^\s*fVar1\ =\ \(float\)\(DOUBLE_97c30a60\ /\ \(double\)\(fVar4\ \+\ \*\(float\ \*\)\(iVar10\ \+\ 0x4c\)\)\);$	+1
+use	_InterpreterTextureSamplerCalculateLambda3D	fVar1	invQPlusX	INFERRED	1/(q + q of the +x neighbour)	^\s*fVar7\ =\ \-\(\(fVar6\ \-\ \*\(float\ \*\)\(iVar10\ \+\ 0x44\)\)\ \*\ fVar2\ \-$	+6
+use	_InterpreterTextureSamplerCalculateLambda3D	fVar1	dtdy	INFERRED	scaled derivative of t along y	^\s*fVar1\ =\ \-\(\(fVar6\ \-\ \*\(float\ \*\)\(iVar11\ \+\ 0x44\)\)\ \*\ fVar4\ \-$	+2
+use	_InterpreterTextureSamplerCalculateLambda3D	fVar1	dtdy	INFERRED	scaled derivative of t along y	^\s*dVar13\ =\ _sqrt\(\(double\)\(fVar3\ \*\ fVar3\ \+\ fVar1\ \*\ fVar1\ \+\ fVar8\)\);$	+1
+use	_InterpreterTextureSamplerCalculateLambda3D	fVar1	maxGradientLength	INFERRED	larger of the x and y gradient lengths	^\s*fVar1\ =\ \(float\)dVar13;$	+1
+use	_InterpreterTextureSamplerCalculateLambda3D	fVar1	maxGradientLength	INFERRED	larger of the x and y gradient lengths	^\s*fVar1\ =\ \(float\)dVar12;$	+1
+use	_InterpreterTextureSamplerCalculateLambda3D	fVar1	maxGradientLength	INFERRED	larger of the x and y gradient lengths	^\s*dVar12\ =\ _log2\(\(double\)\(fVar1\ \*\ GH_U2F\(\(unsigned\ int\)\(param_1\[4\]\)\)\)\);$	+1

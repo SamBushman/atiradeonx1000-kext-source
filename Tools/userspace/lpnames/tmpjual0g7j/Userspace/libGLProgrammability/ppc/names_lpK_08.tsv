@@ -1,0 +1,62 @@
+local	TGenericLinker__OptimizeFunctionIO	iVar12	stage	CONFIRMED	0 = vertex, 1 = fragment
+local	TGenericLinker__OptimizeFunctionIO	iVar2	stageByteOffset	CONFIRMED	stage * 4: offset into the per-stage arrays (+0x28 symbol table, +0x30 PP stream, +0x38 FunctionTable)
+local	TGenericLinker__OptimizeFunctionIO	iVar18	functionIndex	CONFIRMED	index of the function in the stage's FunctionTable
+local	TGenericLinker__OptimizeFunctionIO	iVar13	paramIndex	CONFIRMED	index of the parameter of the current function; the symbol is named "<function>_<index>"
+local	TGenericLinker__OptimizeFunctionIO	pPVar5	paramSymbol	CONFIRMED	parameter symbol found by FindNextParamSymbolByName
+local	TGenericLinker__OptimizeFunctionIO	uVar6	vec4Count	CONFIRMED	GetVec4sForType of the parameter symbol: vec4 elements to process
+local	TGenericLinker__OptimizeFunctionIO	uVar14	elementIndex	CONFIRMED	vec4 element of the parameter being forwarded
+local	TGenericLinker__OptimizeFunctionIO	iVar10	shaderNameLength	CONFIRMED	strlen of the stage name in the error text
+local	TGenericLinker__OptimizeFunctionIO	iVar11	functionNameLength	CONFIRMED	strlen of the function name in the error text
+local	TGenericLinker__OptimizeFunctionIO	this_00	infoSink	CONFIRMED	the linker's info sink (this+0x84)
+local	TGenericLinker__OptimizeFunctionIO	uVar15	opHeader	CONFIRMED	header word (+0xc) of an operation chunk: operation index in bits 0..17
+local	TGenericLinker__OptimizeFunctionIO	uVar9	ppStream	CONFIRMED	the stage's PP stream (this+stage*4+0x30), from which the operation is removed
+local	TGenericLinker__OptimizeFunctionIO	bVar1	scanEnded	CONFIRMED	the operation cursor ran off the end of the list
+local	TGenericLinker__OptimizeFunctionIO	local_60	inSourceWord0	INFERRED	first source-operand word of the op that copied the argument into the parameter register (removed)
+local	TGenericLinker__OptimizeFunctionIO	local_5c	inSourceWord1	INFERRED	second source-operand word of that copy-in op
+local	TGenericLinker__OptimizeFunctionIO	local_70	outDestWord0	INFERRED	first destination-operand word of the op that copied the parameter out (removed)
+local	TGenericLinker__OptimizeFunctionIO	local_6c	outDestWord1	INFERRED	second destination-operand word of that copy-out op
+use	TGenericLinker__OptimizeFunctionIO	iVar3	mainCompare	CONFIRMED	memcmp of the function name with "main(": main is skipped	^\s*iVar3\ =\ _memcmp\(a0,"main\(",6\);$	+2
+use	TGenericLinker__OptimizeFunctionIO	iVar3	numParams	CONFIRMED	FunctionTable__getNumParams: bound of the parameter loop	^\s*for\ \(;\ iVar3\ =\ FunctionTable__getNumParams$	+2
+use	TGenericLinker__OptimizeFunctionIO	iVar3	nameLength	CONFIRMED	strlen of the function name (sizes the "<name>_<i>" buffer)	^\s*iVar3\ =\ _strlen\(a0\);$	+2
+use	TGenericLinker__OptimizeFunctionIO	iVar3	paramChunk	CONFIRMED	the parameter symbol's first register chunk (symbol +0): +0x12 is the register index matched against operands	^\s*iVar3\ =\ \*\(int\ \*\)pPVar5;$	+1
+use	TGenericLinker__OptimizeFunctionIO	iVar3	paramChunk	CONFIRMED	the parameter symbol's first register chunk (symbol +0): +0x12 is the register index matched against operands	^\s*\(\(uint\)\*\(ushort\ \*\)\(p_Var16\ \+\ 0x22\)\ ==\ \*\(ushort\ \*\)\(iVar3\ \+\ 0x12\)\ \+\ uVar14\)\)$	+1
+use	TGenericLinker__OptimizeFunctionIO	iVar3	paramChunk	CONFIRMED	the parameter symbol's first register chunk (symbol +0): +0x12 is the register index matched against operands	^\s*\(\(uint\)\*\(ushort\ \*\)\(p_Var16\ \+\ 0x1a\)\ ==\ \*\(ushort\ \*\)\(iVar3\ \+\ 0x12\)\ \+\ uVar14\)\)\ \{$	+1
+use	TGenericLinker__OptimizeFunctionIO	iVar3	paramChunk	CONFIRMED	the parameter symbol's first register chunk (symbol +0): +0x12 is the register index matched against operands	^\s*\(\(uint\)\*\(ushort\ \*\)\(p_Var17\ \+\ 0x22\)\ ==\ \*\(ushort\ \*\)\(iVar3\ \+\ 0x12\)\ \+\ uVar14\)\)\ \{$	+1
+use	TGenericLinker__OptimizeFunctionIO	iVar3	paramChunk	CONFIRMED	the parameter symbol's first register chunk (symbol +0): +0x12 is the register index matched against operands	^\s*\(\(uint\)\*\(ushort\ \*\)\(p_Var17\ \+\ 0x1a\)\ !=\ \*\(ushort\ \*\)\(iVar3\ \+\ 0x12\)\ \+\ uVar14\)\)$	+1
+use	TGenericLinker__OptimizeFunctionIO	iVar3	paramChunk	CONFIRMED	the parameter symbol's first register chunk (symbol +0): +0x12 is the register index matched against operands	^\s*\(\(uint\)\*\(ushort\ \*\)\(p_Var16\ \+\ 0x22\)\ ==\ \*\(ushort\ \*\)\(iVar3\ \+\ 0x12\)\ \+\ uVar14\)\)\ \{$	+1
+use	TGenericLinker__OptimizeFunctionIO	iVar3	functionIsEmpty	CONFIRMED	FunctionTable__getEmpty: the function body was emptied	^\s*iVar3\ =\ FunctionTable__getEmpty\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ iVar2\ \+\ 0x38\),iVar18\);$	+2
+use	TGenericLinker__OptimizeFunctionIO	iVar3	nameCompare	CONFIRMED	strcmp of the call operand's name (+0x44) with the function name	^\s*\(\*\(int\ \*\)\(p_Var16\ \+\ 0x40\)\ !=\ 0\)\)\ \&\&\ \(iVar3\ =\ _strcmp\(p_Var16\ \+\ 0x44,a0\),\ iVar3\ ==\ 0\)$	+1
+use	TGenericLinker__OptimizeFunctionIO	iVar7	isEmptyFunction	CONFIRMED	FunctionTable__getEmpty of the function	^\s*iVar7\ =\ FunctionTable__getEmpty\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ iVar2\ \+\ 0x38\),iVar18\);$	+2
+use	TGenericLinker__OptimizeFunctionIO	iVar7	formatLength	CONFIRMED	strlen of the internal-error format string	^\s*iVar7\ =\ _strlen\(DAT_a7b7baec\);$	+1
+use	TGenericLinker__OptimizeFunctionIO	iVar7	formatLength	CONFIRMED	strlen of the internal-error format string	^\s*p0\ =\ \(char\ \*\)_malloc\(iVar7\ \+\ iVar10\ \+\ iVar11\ \+\ 9\);$	+1
+use	TGenericLinker__OptimizeFunctionIO	uVar8	firstOpIndex	CONFIRMED	FunctionTable__getFirstOp: operation index where the function body starts	^\s*uVar8\ =\ FunctionTable__getFirstOp$	+1
+use	TGenericLinker__OptimizeFunctionIO	uVar8	firstOpIndex	CONFIRMED	FunctionTable__getFirstOp: operation index where the function body starts	^\s*if\ \(\(uVar15\ \&\ 0x3ffff\)\ ==\ uVar8\)\ goto\ LAB_97bb43a0;$	+1
+use	TGenericLinker__OptimizeFunctionIO	uVar8	firstOpIndex	CONFIRMED	FunctionTable__getFirstOp: operation index where the function body starts	^\s*uVar8\ =\ FunctionTable__getFirstOp\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ iVar2\ \+\ 0x38\),iVar18\);$	+2
+use	TGenericLinker__OptimizeFunctionIO	uVar8	lastOpIndex	CONFIRMED	FunctionTable__getLastOp: operation index where the function body ends	^\s*uVar8\ =\ FunctionTable__getLastOp\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ iVar2\ \+\ 0x38\),iVar18\),$	+2
+use	TGenericLinker__OptimizeFunctionIO	uVar8	srcOperandWord	CONFIRMED	first source-operand word (+0x1c) of the operation under examination, kept as inSourceWord0 when removed	^\s*uVar8\ =\ \*\(uint\ \*\)\(p_Var17\ \+\ 0x1c\);$	+2
+use	TGenericLinker__OptimizeFunctionIO	uVar8	srcOperandWord	CONFIRMED	first source-operand word (+0x1c) of the operation under examination, kept as inSourceWord0 when removed	^\s*local_60\ =\ uVar8;$	+1
+use	TGenericLinker__OptimizeFunctionIO	p_Var17	bodyOp	CONFIRMED	operation chunk cursor over the function body (chunk +8 = next)	^\s*p_Var17\ =\ \(unsigned\ char\ \*\)\*\*\(int\ \*\*\)\(\*\(int\ \*\)\(this\ \+\ iVar2\ \+\ 0x30\)\ \+\ 0x20\);$	+1
+use	TGenericLinker__OptimizeFunctionIO	p_Var17	bodyOp	CONFIRMED	operation chunk cursor over the function body (chunk +8 = next)	^\s*for\ \(;\ bVar1\ =\ p_Var17\ ==\ \(unsigned\ char\ \*\)0x0,\ !bVar1;$	+3
+use	TGenericLinker__OptimizeFunctionIO	p_Var17	bodyOp	CONFIRMED	operation chunk cursor over the function body (chunk +8 = next)	^\s*\(uVar15\ =\ \*\(uint\ \*\)\(p_Var17\ \+\ 0xc\),$	+1
+use	TGenericLinker__OptimizeFunctionIO	p_Var17	bodyOp	CONFIRMED	operation chunk cursor over the function body (chunk +8 = next)	^\s*uVar8\ <\ \(uVar15\ \&\ 0x3ffff\)\)\)\ \|\|\ \(\(\*\(uint\ \*\)\(p_Var17\ \+\ 0xc\)\ \&\ 0x3ffff\)\ ==\ 0\)\)$	+1
+use	TGenericLinker__OptimizeFunctionIO	p_Var17	bodyOp	CONFIRMED	operation chunk cursor over the function body (chunk +8 = next)	^\s*p_Var16\ =\ \*\(unsigned\ char\ \*\*\)\(p_Var17\ \+\ 8\);$	+3
+use	TGenericLinker__OptimizeFunctionIO	p_Var17	bodyOp	CONFIRMED	operation chunk cursor over the function body (chunk +8 = next)	^\s*\(\(uint\)\*\(ushort\ \*\)\(p_Var17\ \+\ 0x22\)\ ==\ \*\(ushort\ \*\)\(iVar3\ \+\ 0x12\)\ \+\ uVar14\)\)\ \{$	+4
+use	TGenericLinker__OptimizeFunctionIO	p_Var17	bodyOp	CONFIRMED	operation chunk cursor over the function body (chunk +8 = next)	^\s*if\ \(\(\(\*\(uint\ \*\)\(p_Var17\ \+\ 0x14\)\ \&\ 0xe0000\)\ !=\ 0x20000\)\ \|\|$	+2
+use	TGenericLinker__OptimizeFunctionIO	p_Var17	bodyOp	CONFIRMED	operation chunk cursor over the function body (chunk +8 = next)	^\s*local_5c\ =\ \*\(int\ \*\)\(p_Var17\ \+\ 0x20\);$	+2
+use	TGenericLinker__OptimizeFunctionIO	p_Var17	bodyOp	CONFIRMED	operation chunk cursor over the function body (chunk +8 = next)	^\s*_PPStreamRemoveOperation\(uVar9,p_Var17\);$	+1
+use	TGenericLinker__OptimizeFunctionIO	p_Var17	bodyOp	CONFIRMED	operation chunk cursor over the function body (chunk +8 = next)	^\s*p_Var17\ =\ p_Var16;$	+1
+use	TGenericLinker__OptimizeFunctionIO	p_Var17	nextOp	CONFIRMED	the operation that follows opChunk (fetched before opChunk may be removed)	^\s*p_Var17\ =\ \(unsigned\ char\ \*\)$	+1
+use	TGenericLinker__OptimizeFunctionIO	p_Var17	nextOp	CONFIRMED	the operation that follows opChunk (fetched before opChunk may be removed)	^\s*while\ \(p_Var16\ =\ p_Var17,\ p_Var16\ !=\ \(unsigned\ char\ \*\)0x0\)\ \{$	+2
+use	TGenericLinker__OptimizeFunctionIO	p_Var17	nextOp	CONFIRMED	the operation that follows opChunk (fetched before opChunk may be removed)	^\s*p_Var17\ =\ \(unsigned\ char\ \*\)\*\*\(undefined4\ \*\*\)\(\*\(int\ \*\)\(this\ \+\ iVar2\ \+\ 0x30\)\ \+\ 0x20\);$	+3
+use	TGenericLinker__OptimizeFunctionIO	p_Var16	bodyNextOp	CONFIRMED	the operation following bodyOp	^\s*p_Var16\ =\ \*\(unsigned\ char\ \*\*\)\(p_Var17\ \+\ 8\);$	+1
+use	TGenericLinker__OptimizeFunctionIO	p_Var16	bodyNextOp	CONFIRMED	the operation following bodyOp	^\s*bVar1\ =\ p_Var16\ ==\ \(unsigned\ char\ \*\)0x0;$	+2
+use	TGenericLinker__OptimizeFunctionIO	p_Var16	opChunk	CONFIRMED	operation chunk being examined or rewritten	^\s*while\ \(p_Var16\ =\ p_Var17,\ p_Var16\ !=\ \(unsigned\ char\ \*\)0x0\)\ \{$	+5
+use	TGenericLinker__OptimizeFunctionIO	p_Var16	opChunk	CONFIRMED	operation chunk being examined or rewritten	^\s*if\ \(\(\(\*\(uint\ \*\)\(p_Var16\ \+\ 0x14\)\ \&\ 0xe0000\)\ ==\ 0x20000\)\ \&\&$	+2
+use	TGenericLinker__OptimizeFunctionIO	p_Var16	opChunk	CONFIRMED	operation chunk being examined or rewritten	^\s*\*\(int\ \*\)\(p_Var16\ \+\ 0x18\)\ =\ local_6c;$	+2
+use	TGenericLinker__OptimizeFunctionIO	p_Var16	opChunk	CONFIRMED	operation chunk being examined or rewritten	^\s*while\ \(p_Var16\ =\ p_Var17,\ p_Var16\ !=\ \(unsigned\ char\ \*\)0x0\)\ \{$@2	+2
+use	TGenericLinker__OptimizeFunctionIO	p_Var16	opChunk	CONFIRMED	operation chunk being examined or rewritten	^\s*if\ \(\(\(\(iVar3\ !=\ 0\)\ \&\&\ \(\(\*\(uint\ \*\)\(p_Var16\ \+\ 0xc\)\ \&\ 0x3fc0000\)\ ==\ 0x1300000\)\)\ \&\&$	+2
+use	TGenericLinker__OptimizeFunctionIO	p_Var16	opChunk	CONFIRMED	operation chunk being examined or rewritten	^\s*\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ iVar2\ \+\ 0x38\),p_Var16\);$	+2
+use	TGenericLinker__OptimizeFunctionIO	p_Var16	opChunk	CONFIRMED	operation chunk being examined or rewritten	^\s*if\ \(\(\(\(\*\(uint\ \*\)\(p_Var16\ \+\ 0xc\)\ \&\ 0x3fc0000\)\ ==\ 0x1b40000\)\ \&\&$	+3
+use	TGenericLinker__OptimizeFunctionIO	p_Var16	opChunk	CONFIRMED	operation chunk being examined or rewritten	^\s*FunctionTable__updateForRemovingChunk\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ iVar2\ \+\ 0x38\),p_Var16\);$	+2
+use	TGenericLinker__OptimizeFunctionIO	p_Var16	opChunk	CONFIRMED	operation chunk being examined or rewritten	^\s*\*\(int\ \*\)\(p_Var16\ \+\ 0x20\)\ =\ local_5c;$	+2
+local	TGenericLinker__OptimizeFunctionIO	p0	message	CONFIRMED	malloc-ed formatted internal-error text

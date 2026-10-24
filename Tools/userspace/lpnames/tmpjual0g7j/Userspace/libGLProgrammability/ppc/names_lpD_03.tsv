@@ -1,0 +1,84 @@
+local	TGenericLinker__OptimizeFunctionIO	a0	functionName	UNKNOWN	Ghidra input-register variable: r3 as left by the previous call, forwarded to the next call
+local	TGenericLinker__GetBindingTableString	a3	r6In0	UNKNOWN	Ghidra input-register variable: r6 as left by the previous call, forwarded to the next call
+local	TGenericLinker__GetBindingTableString	a4	r7In0	UNKNOWN	Ghidra input-register variable: r7 as left by the previous call, forwarded to the next call
+local	TGenericLinker__GetBindingTableString	a5	r8In0	UNKNOWN	Ghidra input-register variable: r8 as left by the previous call, forwarded to the next call
+local	TGenericLinker__BuildSymbolTableList	extraout_r4	r4Out0	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TGenericLinker__BuildSymbolTableList	extraout_r4_00	r4Out1	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TGenericLinker__BuildSymbolTableList	a1	r4In0	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TGenericLinker__BuildSymbolTableList	a7	r10In0	UNKNOWN	Ghidra input-register variable: r10 as left by the previous call, forwarded to the next call
+local	getOpenGLTypeFromTType	a1	r4In0	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	ParseOperand__GetString	extraout_r4	r4Out0	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	ParseSymbolTable__InsertSingleSymbol	a0	r3In0	UNKNOWN	Ghidra input-register variable: r3 as left by the previous call, forwarded to the next call
+local	ParseSymbolTable__InsertSingleSymbol	a0_00	r3In1	UNKNOWN	Ghidra input-register variable: r3 as left by the previous call, forwarded to the next call
+local	ParseSymbolTable__InsertSingleSymbol	a1	r4In0	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	ParseSymbolTable__InsertSymbol	a0	r3In0	UNKNOWN	Ghidra input-register variable: r3 as left by the previous call, forwarded to the next call
+local	ParseSymbolTable__FindFirstElement	a1	r4In0	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermSymbol__compileNode	a1	r4In0	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermSymbol__compileNode	a6	r9In0	UNKNOWN	Ghidra input-register variable: r9 as left by the previous call, forwarded to the next call
+local	TIntermAggregate__compileNode	extraout_r4	r4Out0	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermAggregate__compileNode	a1	r4In0	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermAggregate__compileNode	a1_00	r4In1	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermAggregate__compileNode	extraout_r4_00	r4Out1	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermAggregate__compileNode	extraout_r4_01	r4Out2	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermAggregate__compileNode	extraout_r4_02	r4Out3	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermAggregate__compileNode	extraout_r4_03	r4Out4	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermAggregate__compileNode	extraout_r4_04	r4Out5	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermAggregate__compileNode	a1_01	r4In2	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermAggregate__compileNode	extraout_r4_05	r4Out6	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermAggregate__compileNode	extraout_r4_06	r4Out7	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermAggregate__compileNode	extraout_r4_07	r4Out8	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermAggregate__compileNode	a1_02	r4In3	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermAggregate__compileNode	a1_03	r4In4	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermAggregate__compileNode	extraout_r4_08	r4Out9	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermAggregate__compileNode	extraout_r4_09	r4Out10	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermAggregate__compileNode	extraout_r4_10	r4Out11	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermAggregate__compileNode	extraout_r4_11	r4Out12	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermAggregate__compileNode	a1_04	r4In5	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermAggregate__compileNode	extraout_r4_12	r4Out13	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermAggregate__compileNode	a1_05	r4In6	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermAggregate__compileNode	a1_06	r4In7	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermAggregate__compileNode	a7	r10In0	UNKNOWN	Ghidra input-register variable: r10 as left by the previous call, forwarded to the next call
+local	TIntermSelection__compileNode	a1	r4In0	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermSelection__compileNode	a1_00	r4In1	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermSelection__compileNode	extraout_r4	r4Out0	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermSelection__compileNode	extraout_r4_00	r4Out1	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermSelection__compileNode	a1_01	r4In2	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermSelection__compileNode	extraout_r4_01	r4Out2	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermSelection__compileNode	extraout_r4_02	r4Out3	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermSelection__compileNode	extraout_r4_03	r4Out4	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermSelection__compileNode	extraout_r4_04	r4Out5	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermSelection__compileNode	a1_02	r4In3	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermSelection__compileNode	extraout_r4_05	r4Out6	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermSelection__compileNode	extraout_r4_06	r4Out7	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermSelection__compileNode	a6	r9In0	UNKNOWN	Ghidra input-register variable: r9 as left by the previous call, forwarded to the next call
+local	TIntermSelection__compileNode	a2	r5In0	UNKNOWN	Ghidra input-register variable: r5 as left by the previous call, forwarded to the next call
+local	TIntermLoop__compileNode	a1	r4In0	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermLoop__compileNode	a1_00	r4In1	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermLoop__compileNode	extraout_r4	r4Out0	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermLoop__compileNode	extraout_r4_00	r4Out1	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermLoop__compileNode	a1_01	r4In2	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermLoop__compileNode	a1_02	r4In3	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermLoop__compileNode	extraout_r4_01	r4Out2	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermLoop__compileNode	extraout_r4_02	r4Out3	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermLoop__compileNode	a1_03	r4In4	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermLoop__compileNode	a1_04	r4In5	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermBranch__compileNode	extraout_r4	r4Out0	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermBranch__compileNode	extraout_r4_00	r4Out1	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermBranch__compileNode	a1	r4In0	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermBranch__compileNode	extraout_r4_01	r4Out2	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermBranch__compileNode	extraout_r4_02	r4Out3	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermBranch__compileNode	extraout_r4_03	r4Out4	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	TIntermSymbol__indirectNode	a1	r4In0	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next call
+local	TIntermSymbol__indirectNode	a6	r9In0	UNKNOWN	Ghidra input-register variable: r9 as left by the previous call, forwarded to the next call
+local	TIntermBranch__indirectNode	a0	r3In0	UNKNOWN	Ghidra input-register variable: r3 as left by the previous call, forwarded to the next call
+local	operator_new	a0	newHandler	UNKNOWN	Ghidra input-register variable: r3 as left by the previous call, forwarded to the next call
+local	__ZdlPv	extraout_r3	r3Out0	UNKNOWN	Ghidra extra-output variable: value of r3 after a call; only forwarded
+local	__ZNK10__cxxabiv117__class_type_info10__do_catchEPKSt9type_infoPPvj	a3	outerArg	UNKNOWN	Ghidra input-register variable: r6 as left by the previous call, forwarded to the next call
+local	__cxxabiv1____vmi_class_type_info____do_upcast	a2	adjustedObjPtr	CONFIRMED	obj_ptr advanced by the (virtual) base offset for the recursive __do_upcast
+local	___dynamic_cast	a0	whole	CONFIRMED	whole_type = vtable[-1]: the type_info of the most derived object
+local	__gxx_exception_cleanup	extraout_r4	r4Out0	UNKNOWN	Ghidra extra-output variable: value of r4 after a call; only forwarded
+local	FUN_97c19d00	extraout_r3	r3Out0	UNKNOWN	Ghidra extra-output variable: value of r3 after a call; only forwarded
+local	___cxa_end_catch	extraout_r3	r3AfterDelete	UNKNOWN	Ghidra extra-output variable: value of r3 after a call; only forwarded
+local	___deregister_frame	extraout_r3	r3Out0	UNKNOWN	Ghidra extra-output variable: value of r3 after a call; only forwarded
+local	_init_object	extraout_r3	r3AfterFree	UNKNOWN	Ghidra extra-output variable: value of r3 after a call; only forwarded
+local	TType__setStructSize	a0	memberType	UNKNOWN	Ghidra input-register variable: r3 as left by the previous call, forwarded to the next call

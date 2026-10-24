@@ -1,0 +1,190 @@
+local	TGenericLinker__BuildUniformRemapTables	this_00	binding	CONFIRMED	the uniform Binding being mapped (name at +8)
+local	TGenericLinker__BuildUniformRemapTables	pTVar12	stageSlot	CONFIRMED	this + stage*4: base of the stage's remap table slots (+0x40 table, +0x48 expected count)
+local	TGenericLinker__BuildUniformRemapTables	uVar9	boundType	CONFIRMED	OpenGL type of the first stage's symbol for this uniform; the later stage must match
+local	TGenericLinker__BuildUniformRemapTables	bVar1	typeSeen	CONFIRMED	boundType has been taken from an earlier stage
+local	TGenericLinker__BuildUniformRemapTables	piVar5	symbol	CONFIRMED	the uniform's global ParseSymbol in the stage's table (*symbol = chunk, +0x2c type, +0x14 name)
+local	TGenericLinker__BuildUniformRemapTables	uVar8	bindingSlots	CONFIRMED	Binding__GetBindingSlots: location slots the uniform occupies
+local	TGenericLinker__BuildUniformRemapTables	uVar15	slotIndex	CONFIRMED	slot of the uniform being assigned a register
+local	TGenericLinker__BuildUniformRemapTables	uVar16	registerIndex	CONFIRMED	register index of the symbol's chunk (chunk +0xe), incremented per slot
+local	TGenericLinker__BuildUniformRemapTables	pvVar17	infoSink	CONFIRMED	the linker's info sink (this+0x84)
+use	TGenericLinker__BuildUniformRemapTables	iVar11	stageIndex	CONFIRMED	stage whose remap table is being allocated	^\s*iVar11\ =\ 0;$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar11	stageIndex	CONFIRMED	stage whose remap table is being allocated	^\s*iVar11\ =\ iVar11\ \+\ 1;$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar11	stageIndex	CONFIRMED	stage whose remap table is being allocated	^\s*\}\ while\ \(iVar11\ <\ 2\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar11	isBuiltIn	CONFIRMED	Binding__IsBuiltIn: built-in uniforms are skipped	^\s*iVar11\ =\ Binding__IsBuiltIn\(this_00\);$	+2
+use	TGenericLinker__BuildUniformRemapTables	iVar11	stageLoop	CONFIRMED	stage (0 vertex, 1 fragment) whose symbol table is searched	^\s*iVar11\ =\ 0;$@2	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar11	stageLoop	CONFIRMED	stage (0 vertex, 1 fragment) whose symbol table is searched	^\s*if\ \(\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ iVar11\ \*\ 4\ \+\ 0x28\)\ !=\ \(unsigned\ char\ \*\)0x0\)\ \&\&$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar11	stageLoop	CONFIRMED	stage (0 vertex, 1 fragment) whose symbol table is searched	^\s*\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ iVar11\ \*\ 4\ \+\ 0x28\),$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar11	stageLoop	CONFIRMED	stage (0 vertex, 1 fragment) whose symbol table is searched	^\s*\*\(uint\ \*\)\(\(iVar2\ \+\ uVar15\)\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ iVar11\ \*\ 4\ \+\ 0x40\)\)\ =\ uVar16;$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar11	stageLoop	CONFIRMED	stage (0 vertex, 1 fragment) whose symbol table is searched	^\s*iVar11\ =\ iVar11\ \+\ 1;$@2	+2
+use	TGenericLinker__BuildUniformRemapTables	iVar11	vertexMapped	CONFIRMED	number of vertex remap-table entries that are set (compared with the expected count at +0x48)	^\s*iVar11\ =\ 0;$@3	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar11	vertexMapped	CONFIRMED	number of vertex remap-table entries that are set (compared with the expected count at +0x48)	^\s*iVar11\ =\ iVar11\ \+\ 1;$@3	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar11	vertexMapped	CONFIRMED	number of vertex remap-table entries that are set (compared with the expected count at +0x48)	^\s*if\ \(\*\(int\ \*\)\(this\ \+\ 0x48\)\ !=\ iVar11\)\ \{$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar2	uniformCount	CONFIRMED	BindingTable__GetSizeActiveUserUniforms: sizes the remap table	^\s*iVar2\ =\ BindingTable__GetSizeActiveUserUniforms\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\);$	+2
+use	TGenericLinker__BuildUniformRemapTables	iVar2	initIndex	CONFIRMED	index while the remap table is filled with -1	^\s*for\ \(iVar2\ =\ 0;\ iVar4\ =\ BindingTable__GetSizeActiveUserUniforms\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\),$	+3
+use	TGenericLinker__BuildUniformRemapTables	iVar2	formatLength	CONFIRMED	strlen of the error format string	^\s*iVar2\ =\ _strlen\(DAT_a7b7bb74\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar2	formatLength	CONFIRMED	strlen of the error format string	^\s*pcVar6\ =\ \(char\ \*\)_malloc\(iVar2\ \+\ iVar4\ \+\ 1\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar2	formatLength	CONFIRMED	strlen of the error format string	^\s*iVar2\ =\ _strlen\(UNK_a7b7bae4\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar2	formatLength	CONFIRMED	strlen of the error format string	^\s*pcVar6\ =\ \(char\ \*\)_malloc\(iVar2\ \+\ iVar4\ \+\ iVar13\ \+\ iVar7\ \+\ 1\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar2	bindingLocation	CONFIRMED	Binding__GetLocation: first remap-table index of the uniform	^\s*iVar2\ =\ Binding__GetLocation\(this_00\);$	+2
+use	TGenericLinker__BuildUniformRemapTables	iVar2	fragmentMapped	CONFIRMED	number of fragment remap-table entries that are set (compared with the expected count at +0x4c)	^\s*iVar2\ =\ 0;$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar2	fragmentMapped	CONFIRMED	number of fragment remap-table entries that are set (compared with the expected count at +0x4c)	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar2	fragmentMapped	CONFIRMED	number of fragment remap-table entries that are set (compared with the expected count at +0x4c)	^\s*if\ \(\*\(int\ \*\)\(this\ \+\ 0x4c\)\ !=\ iVar2\)\ \{$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar4	uniformCountBound	CONFIRMED	BindingTable__GetSizeActiveUserUniforms: bound of the init loop	^\s*for\ \(iVar2\ =\ 0;\ iVar4\ =\ BindingTable__GetSizeActiveUserUniforms\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\),$	+2
+use	TGenericLinker__BuildUniformRemapTables	iVar4	nameLength	CONFIRMED	strlen of the uniform name	^\s*iVar4\ =\ _strlen\(iVar13\);$	+2
+use	TGenericLinker__BuildUniformRemapTables	iVar4	nameLength	CONFIRMED	strlen of the uniform name	^\s*iVar4\ =\ _strlen\(iVar14\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar4	nameLength	CONFIRMED	strlen of the uniform name	^\s*pcVar6\ =\ \(char\ \*\)_malloc\(iVar2\ \+\ iVar4\ \+\ iVar13\ \+\ iVar7\ \+\ 1\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar4	entryIndex	CONFIRMED	index over the remap tables when counting the entries that are set	^\s*for\ \(iVar4\ =\ 0;\ iVar13\ =\ BindingTable__GetSizeActiveUserUniforms\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\),$	+3
+use	TGenericLinker__BuildUniformRemapTables	iVar4	entryIndex	CONFIRMED	index over the remap tables when counting the entries that are set	^\s*if\ \(\*\(int\ \*\)\(iVar4\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ 0x44\)\)\ !=\ \-1\)\ \{$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar13	symbolName	CONFIRMED	symbol name (symbol +0x14) quoted in the internal error	^\s*iVar13\ =\ piVar5\[5\];$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar13	symbolName	CONFIRMED	symbol name (symbol +0x14) quoted in the internal error	^\s*iVar4\ =\ _strlen\(iVar13\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar13	symbolName	CONFIRMED	symbol name (symbol +0x14) quoted in the internal error	^\s*_sprintf\(pcVar6,DAT_a7b7bb74,iVar13\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar13	boundTypeNameLength	CONFIRMED	strlen of the name of the first stage's type	^\s*iVar13\ =\ _strlen\(uVar10\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar13	boundTypeNameLength	CONFIRMED	strlen of the name of the first stage's type	^\s*pcVar6\ =\ \(char\ \*\)_malloc\(iVar2\ \+\ iVar4\ \+\ iVar13\ \+\ iVar7\ \+\ 1\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar13	uniformCountNow	CONFIRMED	BindingTable__GetSizeActiveUserUniforms: bound of the counting loop	^\s*for\ \(iVar4\ =\ 0;\ iVar13\ =\ BindingTable__GetSizeActiveUserUniforms\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\),$	+2
+use	TGenericLinker__BuildUniformRemapTables	iVar14	symbolNameCopy	CONFIRMED	uniform name quoted in the type-mismatch error	^\s*iVar14\ =\ piVar5\[5\];$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar14	symbolNameCopy	CONFIRMED	uniform name quoted in the type-mismatch error	^\s*iVar4\ =\ _strlen\(iVar14\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar14	symbolNameCopy	CONFIRMED	uniform name quoted in the type-mismatch error	^\s*_sprintf\(pcVar6,UNK_a7b7bae4,iVar14,uVar3,uVar10\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	iVar7	symbolTypeNameLength	CONFIRMED	strlen of the name of this stage's type	^\s*iVar7\ =\ _strlen\(uVar10\);$	+2
+use	TGenericLinker__BuildUniformRemapTables	uVar3	remapTable	CONFIRMED	malloc'd remap table (one word per active user uniform) stored in the stage slot at +0x40	^\s*uVar3\ =\ _malloc\(iVar2\ \*\ 4\ \+\ 0xfU\ \&\ 0xfffffff0\);$	+2
+use	TGenericLinker__BuildUniformRemapTables	uVar3	boundTypeNameAgain	CONFIRMED	GetShaderStringForType of the first stage's type, passed to sprintf	^\s*uVar3\ =\ \(\(int\ \(\*\)\(\)\)GetShaderStringForType\)\(uVar9\);$	+2
+use	TGenericLinker__BuildUniformRemapTables	uVar10	status	CONFIRMED	1 while all uniforms map consistently, 0 after an error (returned)	^\s*uVar10\ =\ 1;$	+1
+use	TGenericLinker__BuildUniformRemapTables	uVar10	status	CONFIRMED	1 while all uniforms map consistently, 0 after an error (returned)	^\s*uVar10\ =\ 0;$	+1
+use	TGenericLinker__BuildUniformRemapTables	uVar10	status	CONFIRMED	1 while all uniforms map consistently, 0 after an error (returned)	^\s*uVar10\ =\ 0;$@2	+1
+use	TGenericLinker__BuildUniformRemapTables	uVar10	status	CONFIRMED	1 while all uniforms map consistently, 0 after an error (returned)	^\s*uVar10\ =\ 0;$@3	+1
+use	TGenericLinker__BuildUniformRemapTables	uVar10	status	CONFIRMED	1 while all uniforms map consistently, 0 after an error (returned)	^\s*uVar10\ =\ 0;$@4	+1
+use	TGenericLinker__BuildUniformRemapTables	uVar10	status	CONFIRMED	1 while all uniforms map consistently, 0 after an error (returned)	^\s*return\ uVar10;$	+1
+use	TGenericLinker__BuildUniformRemapTables	uVar10	boundTypeName	CONFIRMED	GetShaderStringForType of the first stage's type, for its length	^\s*uVar10\ =\ \(\(int\ \(\*\)\(\)\)GetShaderStringForType\)\(uVar9\);$	+2
+use	TGenericLinker__BuildUniformRemapTables	uVar10	symbolTypeName	CONFIRMED	GetShaderStringForType of this stage's type	^\s*uVar10\ =\ \(\(int\ \(\*\)\(\)\)GetShaderStringForType\)\(\(uint\)\*\(ushort\ \*\)\(piVar5\ \+\ 0xb\)\);$	+2
+use	TGenericLinker__BuildUniformRemapTables	uVar10	symbolTypeName	CONFIRMED	GetShaderStringForType of this stage's type	^\s*uVar10\ =\ \(\(int\ \(\*\)\(\)\)GetShaderStringForType\)\(\(uint\)\*\(ushort\ \*\)\(piVar5\ \+\ 0xb\)\);$@2	+1
+use	TGenericLinker__BuildUniformRemapTables	uVar10	symbolTypeName	CONFIRMED	GetShaderStringForType of this stage's type	^\s*_sprintf\(pcVar6,UNK_a7b7bae4,iVar14,uVar3,uVar10\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	pcVar6	message	CONFIRMED	malloc'd formatted error text	^\s*pcVar6\ =\ \(char\ \*\)_malloc\(iVar2\ \+\ iVar4\ \+\ 1\);$	+2
+use	TGenericLinker__BuildUniformRemapTables	pcVar6	message	CONFIRMED	malloc'd formatted error text	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar17,pcVar6\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	pcVar6	message	CONFIRMED	malloc'd formatted error text	^\s*_free\(pcVar6\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	pcVar6	message	CONFIRMED	malloc'd formatted error text	^\s*pcVar6\ =\ \(char\ \*\)_malloc\(iVar2\ \+\ iVar4\ \+\ iVar13\ \+\ iVar7\ \+\ 1\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	pcVar6	message	CONFIRMED	malloc'd formatted error text	^\s*_sprintf\(pcVar6,UNK_a7b7bae4,iVar14,uVar3,uVar10\);$	+1
+use	TGenericLinker__BuildUniformRemapTables	pcVar6	message	CONFIRMED	malloc'd formatted error text	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar17,pcVar6\);$@2	+1
+use	TGenericLinker__BuildUniformRemapTables	pcVar6	message	CONFIRMED	malloc'd formatted error text	^\s*_free\(pcVar6\);$@2	+1
+use	TGenericLinker__BuildUniformRemapTables	pcVar6	errorText	CONFIRMED	static internal-error text for a remap-count mismatch	^\s*pcVar6\ =\ UNK_a7b7bb04,\ iVar4\ <\ iVar13;\ iVar4\ =\ iVar4\ \+\ 1\)\ \{$	+1
+use	TGenericLinker__BuildUniformRemapTables	pcVar6	errorText	CONFIRMED	static internal-error text for a remap-count mismatch	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar17,pcVar6\);$@3	+1
+use	TGenericLinker__BuildUniformRemapTables	pcVar6	errorText	CONFIRMED	static internal-error text for a remap-count mismatch	^\s*pcVar6\ =\ UNK_a7b7bb08;$	+1
+use	TGenericLinker__BuildUniformRemapTables	pcVar6	errorText	CONFIRMED	static internal-error text for a remap-count mismatch	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar17,pcVar6\);$@4	+1
+local	TGenericLinker__GetRemapTableString	pcVar1	format	CONFIRMED	the remap-table header format string (_linkUtilString)
+local	TGenericLinker__GetRemapTableString	pTVar8	tableSlot	CONFIRMED	cursor over the per-stage remap-table pointers starting at this+0x40
+local	TGenericLinker__GetRemapTableString	puVar7	headerStrings	CONFIRMED	cursor over the table of per-stage header strings
+local	TGenericLinker__RemapVertexAttributes	this_00	binding	CONFIRMED	the attribute Binding being remapped (name at +8)
+local	TGenericLinker__RemapVertexAttributes	puVar3	symbol	CONFIRMED	the attribute's global ParseSymbol in the vertex symbol table (*symbol = chunk)
+local	TGenericLinker__RemapVertexAttributes	uVar5	glType	CONFIRMED	Binding__GetOpenGLType: sizes the register run
+local	TGenericLinker__RemapVertexAttributes	uVar9	elementIndex	CONFIRMED	vec4 element being assigned a new register
+local	TGenericLinker__RemapVertexAttributes	this_01	infoSink	CONFIRMED	the linker's info sink (this+0x84)
+local	TGenericLinker__RemapVertexAttributes	sVar1	inputIndex	CONFIRMED	the symbol chunk's input register (chunk +0x12) matched against the vertex-input chunks
+use	TGenericLinker__GetRemapTableString	iVar3	totalLength	CONFIRMED	running byte count of the dump string (header + per-stage lines)	^\s*iVar3\ =\ iVar3\ \+\ 2;$	+1
+use	TGenericLinker__GetRemapTableString	iVar3	totalLength	CONFIRMED	running byte count of the dump string (header + per-stage lines)	^\s*iVar3\ =\ iVar3\ \+\ iVar2;$	+1
+use	TGenericLinker__GetRemapTableString	iVar3	totalLength	CONFIRMED	running byte count of the dump string (header + per-stage lines)	^\s*iVar3\ =\ iVar3\ \+\ iVar2;$@2	+1
+use	TGenericLinker__GetRemapTableString	iVar3	totalLength	CONFIRMED	running byte count of the dump string (header + per-stage lines)	^\s*iVar3\ =\ iVar3\ \+\ iVar4\ \+\ 0x10;$	+1
+use	TGenericLinker__GetRemapTableString	iVar3	totalLength	CONFIRMED	running byte count of the dump string (header + per-stage lines)	^\s*pcVar5\ =\ \(char\ \*\)_malloc\(iVar3\);$	+1
+use	TGenericLinker__GetRemapTableString	iVar2	remapTable	CONFIRMED	the stage's remap table pointer (null when the stage has none)	^\s*iVar2\ =\ \*\(int\ \*\)pTVar8;$	+1
+use	TGenericLinker__GetRemapTableString	iVar2	remapTable	CONFIRMED	the stage's remap table pointer (null when the stage has none)	^\s*if\ \(\(iVar2\ ==\ 0\)\ \|\|$	+1
+use	TGenericLinker__GetRemapTableString	iVar2	uniformCount	CONFIRMED	BindingTable__GetSizeActiveUserUniforms	^\s*\(iVar2\ =\ BindingTable__GetSizeActiveUserUniforms\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\),\ iVar2\ ==\ 0\)\)$	+1
+use	TGenericLinker__GetRemapTableString	iVar2	lineLength	CONFIRMED	strlen of the stage's header string	^\s*iVar2\ =\ _strlen\(\*puVar7\);$	+2
+use	TGenericLinker__GetRemapTableString	iVar2	lineLength	CONFIRMED	strlen of the stage's header string	^\s*iVar2\ =\ _strlen\(puVar7\[\-3\]\);$	+2
+use	TGenericLinker__GetRemapTableString	iVar2	entryIndex	CONFIRMED	remap table entry being sized	^\s*for\ \(iVar2\ =\ 0;\ iVar4\ =\ BindingTable__GetSizeActiveUserUniforms\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\),$	+2
+use	TGenericLinker__GetRemapTableString	iVar4	uniformBound	CONFIRMED	BindingTable__GetSizeActiveUserUniforms: bound of the entry loop	^\s*for\ \(iVar2\ =\ 0;\ iVar4\ =\ BindingTable__GetSizeActiveUserUniforms\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\),$	+2
+use	TGenericLinker__GetRemapTableString	iVar4	entryLength	CONFIRMED	strlen of the per-entry format	^\s*iVar4\ =\ _strlen\(DAT_a7b7bb34\);$	+2
+use	TGenericLinker__GetRemapTableString	iVar3	tableByteOffset	CONFIRMED	stage * 4: offset of the stage's remap table pointer (this+0x40)	^\s*iVar3\ =\ 0;$	+1
+use	TGenericLinker__GetRemapTableString	iVar3	tableByteOffset	CONFIRMED	stage * 4: offset of the stage's remap table pointer (this+0x40)	^\s*\*\(undefined4\ \*\)\(iVar4\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ iVar3\ \+\ 0x40\)\)\);$	+1
+use	TGenericLinker__GetRemapTableString	iVar3	tableByteOffset	CONFIRMED	stage * 4: offset of the stage's remap table pointer (this+0x40)	^\s*iVar3\ =\ iVar3\ \+\ 4;$	+1
+use	TGenericLinker__GetRemapTableString	iVar2	stagesLeft	CONFIRMED	countdown over the two stages	^\s*iVar2\ =\ 1;$	+1
+use	TGenericLinker__GetRemapTableString	iVar2	stagesLeft	CONFIRMED	countdown over the two stages	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+1
+use	TGenericLinker__GetRemapTableString	iVar2	stagesLeft	CONFIRMED	countdown over the two stages	^\s*\}\ while\ \(\-1\ <\ iVar2\);$	+1
+use	TGenericLinker__GetRemapTableString	iVar4	remapTablePass2	CONFIRMED	the stage's remap table pointer (null when the stage has none)	^\s*iVar4\ =\ \*\(int\ \*\)pTVar8;$	+1
+use	TGenericLinker__GetRemapTableString	iVar4	remapTablePass2	CONFIRMED	the stage's remap table pointer (null when the stage has none)	^\s*if\ \(\(iVar4\ ==\ 0\)\ \|\|$	+1
+use	TGenericLinker__GetRemapTableString	iVar4	uniformCountPass2	CONFIRMED	BindingTable__GetSizeActiveUserUniforms	^\s*\(iVar4\ =\ BindingTable__GetSizeActiveUserUniforms\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\),\ iVar4\ ==\ 0\)\)$	+1
+use	TGenericLinker__GetRemapTableString	iVar4	entryIndexPass2	CONFIRMED	remap table entry being printed	^\s*for\ \(iVar4\ =\ 0;\ iVar6\ =\ BindingTable__GetSizeActiveUserUniforms\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\),$	+4
+use	TGenericLinker__GetRemapTableString	iVar6	uniformBoundPass2	CONFIRMED	BindingTable__GetSizeActiveUserUniforms: bound of the entry loop	^\s*for\ \(iVar4\ =\ 0;\ iVar6\ =\ BindingTable__GetSizeActiveUserUniforms\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\),$	+2
+use	TGenericLinker__RemapVertexAttributes	iVar2	isBuiltIn	CONFIRMED	Binding__IsBuiltIn: built-in attributes are not remapped	^\s*iVar2\ =\ Binding__IsBuiltIn\(this_00\);$	+2
+use	TGenericLinker__RemapVertexAttributes	iVar2	formatLength	CONFIRMED	strlen of the internal-error format string	^\s*iVar2\ =\ _strlen\(DAT_a7b7bb6c\);$	+1
+use	TGenericLinker__RemapVertexAttributes	iVar2	formatLength	CONFIRMED	strlen of the internal-error format string	^\s*pcVar7\ =\ \(char\ \*\)_malloc\(iVar2\ \+\ iVar4\ \+\ 1\);$	+1
+use	TGenericLinker__RemapVertexAttributes	iVar2	chunk	CONFIRMED	vertex-input register chunk cursor (chunk +8 = next, +0x12 = input index, +0xc low 5 bits = register)	^\s*for\ \(iVar2\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(this\ \+\ 0x30\)\ \+\ 0x18\);\ iVar2\ !=\ 0;\ iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\)$	+1
+use	TGenericLinker__RemapVertexAttributes	iVar2	chunk	CONFIRMED	vertex-input register chunk cursor (chunk +8 = next, +0x12 = input index, +0xc low 5 bits = register)	^\s*if\ \(\*\(short\ \*\)\(iVar2\ \+\ 0x12\)\ ==\ sVar1\)\ goto\ code_r0x97bb567c;$	+1
+use	TGenericLinker__RemapVertexAttributes	iVar2	chunk	CONFIRMED	vertex-input register chunk cursor (chunk +8 = next, +0x12 = input index, +0xc low 5 bits = register)	^\s*if\ \(\(uVar6\ <=\ uVar9\)\ \|\|\ \(iVar2\ ==\ 0\)\)\ break;$	+1
+use	TGenericLinker__RemapVertexAttributes	iVar2	chunk	CONFIRMED	vertex-input register chunk cursor (chunk +8 = next, +0x12 = input index, +0xc low 5 bits = register)	^\s*\*\(uint\ \*\)\(iVar2\ \+\ 0xc\)\ =\ uVar6\ \&\ 0x1f\ \|\ \*\(uint\ \*\)\(iVar2\ \+\ 0xc\)\ \&\ 0xffffffe0;$	+2
+use	TGenericLinker__RemapVertexAttributes	iVar4	nameLength	CONFIRMED	strlen of the symbol name	^\s*iVar4\ =\ _strlen\(uVar8\);$	+2
+use	TGenericLinker__RemapVertexAttributes	iVar4	attribLocation	CONFIRMED	Binding__GetLocation: first register of the attribute	^\s*iVar4\ =\ Binding__GetLocation\(this_00\);$	+1
+use	TGenericLinker__RemapVertexAttributes	iVar4	attribLocation	CONFIRMED	Binding__GetLocation: first register of the attribute	^\s*uVar6\ =\ iVar4\ \+\ uVar9;$	+1
+use	TGenericLinker__RemapVertexAttributes	uVar6	vec4Count	CONFIRMED	GetVec4sForType of the attribute type: registers to assign	^\s*uVar6\ =\ \(\(int\ \(\*\)\(\)\)GetVec4sForType\)\(uVar5\);$	+2
+use	TGenericLinker__RemapVertexAttributes	uVar6	registerValue	CONFIRMED	new register number (location + element) written into the chunk header	^\s*uVar6\ =\ iVar4\ \+\ uVar9;$	+1
+use	TGenericLinker__RemapVertexAttributes	uVar6	registerValue	CONFIRMED	new register number (location + element) written into the chunk header	^\s*\*\(uint\ \*\)\(iVar2\ \+\ 0xc\)\ =\ uVar6\ \&\ 0x1f\ \|\ \*\(uint\ \*\)\(iVar2\ \+\ 0xc\)\ \&\ 0xffffffe0;$	+1
+use	TGenericLinker__RemapVertexAttributes	pcVar7	symbolChunk	CONFIRMED	the symbol's register chunk (kind byte 2 = vertex input)	^\s*pcVar7\ =\ \(char\ \*\)\*puVar3;$	+2
+use	TGenericLinker__RemapVertexAttributes	pcVar7	symbolChunk	CONFIRMED	the symbol's register chunk (kind byte 2 = vertex input)	^\s*pcVar7\ =\ \(char\ \*\)\*puVar3;$@2	+1
+use	TGenericLinker__RemapVertexAttributes	pcVar7	symbolChunk	CONFIRMED	the symbol's register chunk (kind byte 2 = vertex input)	^\s*if\ \(\(\*pcVar7\ ==\ '\\x02'\)\ \&\&\ \(\(\*\(uint\ \*\)\(pcVar7\ \+\ 0xc\)\ \&\ 0xf0000\)\ ==\ 0x90000\)\)\ \{$	+2
+use	TGenericLinker__RemapVertexAttributes	pcVar7	message	CONFIRMED	malloc'd internal-error text	^\s*pcVar7\ =\ \(char\ \*\)_malloc\(iVar2\ \+\ iVar4\ \+\ 1\);$	+2
+use	TGenericLinker__RemapVertexAttributes	pcVar7	message	CONFIRMED	malloc'd internal-error text	^\s*__ZN13TInfoSinkBase6appendEPKc\(this_01,pcVar7\);$	+1
+use	TGenericLinker__RemapVertexAttributes	pcVar7	message	CONFIRMED	malloc'd internal-error text	^\s*_free\(pcVar7\);$	+1
+use	TGenericLinker__RemapVertexAttributes	uVar8	status	CONFIRMED	1 while OK, 0 after an error (returned)	^\s*uVar8\ =\ 1;$	+1
+use	TGenericLinker__RemapVertexAttributes	uVar8	status	CONFIRMED	1 while OK, 0 after an error (returned)	^\s*return\ uVar8;$	+1
+use	TGenericLinker__RemapVertexAttributes	uVar8	status	CONFIRMED	1 while OK, 0 after an error (returned)	^\s*uVar8\ =\ 0;$	+1
+use	TGenericLinker__RemapVertexAttributes	uVar8	symbolName	CONFIRMED	symbol name (symbol +0x14) quoted in the error	^\s*uVar8\ =\ puVar3\[5\];$	+1
+use	TGenericLinker__RemapVertexAttributes	uVar8	symbolName	CONFIRMED	symbol name (symbol +0x14) quoted in the error	^\s*iVar4\ =\ _strlen\(uVar8\);$	+1
+use	TGenericLinker__RemapVertexAttributes	uVar8	symbolName	CONFIRMED	symbol name (symbol +0x14) quoted in the error	^\s*_sprintf\(pcVar7,DAT_a7b7bb6c,uVar8\);$	+1
+local	TGenericLinker__CollectClientAttributeBindings	pBVar1	binding	CONFIRMED	client attribute-request Binding being resolved (name at +8)
+local	TGenericLinker__CollectClientAttributeBindings	iVar3	errorNameLength	CONFIRMED	strlen of the attribute name in the internal-error text
+local	TGenericLinker__CollectClientAttributeBindings	pcVar4	message	CONFIRMED	malloc'd formatted warning/error text
+local	TGenericLinker__CollectClientAttributeBindings	uVar6	bindingName	CONFIRMED	the request's attribute name (binding +8) quoted in the message
+local	TGenericLinker__CollectClientAttributeBindings	pvVar7	infoSink	CONFIRMED	the linker's info sink (this+0x84)
+local	TGenericLinker__CollectUniformBindings	pPVar1	symbolTable	CONFIRMED	the stage's ParseSymbolTable
+local	TGenericLinker__CollectUniformBindings	pPVar2	parseSymbol	CONFIRMED	uniform symbol being turned into a Binding (+0x34 = built-in flag)
+local	TGenericLinker__CollectUniformBindings	iVar3	insertOk	CONFIRMED	TGenericLinker__InsertUniformBindingFromSymbol result (0 = failed)
+local	TGenericLinker__CollectUniformBindings	uVar4	success	CONFIRMED	1 unless a uniform could not be inserted (returned)
+local	TGenericLinker__CollectUniformBindings	pTVar5	stageSlot	CONFIRMED	this + stage*4 (+0x28 = the stage's symbol table)
+local	TGenericLinker__CollectUniformBindings	iVar6	stage	CONFIRMED	0 = vertex, 1 = fragment (passed on as the isFragment flag)
+local	TGenericLinker__CollectUniformBindings	pTVar7	tableSlot	CONFIRMED	cursor over the per-stage symbol-table pointers starting at this+0x28
+use	TGenericLinker__CollectClientAttributeBindings	iVar2	formatLength	CONFIRMED	strlen of the warning format string	^\s*iVar2\ =\ _strlen\(UNK_a7b7bac8\);$	+1
+use	TGenericLinker__CollectClientAttributeBindings	iVar2	formatLength	CONFIRMED	strlen of the warning format string	^\s*pcVar4\ =\ \(char\ \*\)_malloc\(iVar2\ \+\ iVar5\ \+\ 1\);$	+1
+use	TGenericLinker__CollectClientAttributeBindings	iVar2	formatLength	CONFIRMED	strlen of the warning format string	^\s*iVar2\ =\ _strlen\(UNK_a7b7bac4\);$	+1
+use	TGenericLinker__CollectClientAttributeBindings	iVar2	formatLength	CONFIRMED	strlen of the warning format string	^\s*pcVar4\ =\ \(char\ \*\)_malloc\(iVar2\ \+\ iVar5\ \+\ 1\);$@2	+1
+use	TGenericLinker__CollectClientAttributeBindings	iVar2	symbol	CONFIRMED	the request's global ParseSymbol in the vertex symbol table, or null (+0x2c type, +0x34 built-in flag)	^\s*iVar2\ =\ ParseSymbolTable__FindGlobalSymbolByName$	+1
+use	TGenericLinker__CollectClientAttributeBindings	iVar2	symbol	CONFIRMED	the request's global ParseSymbol in the vertex symbol table, or null (+0x2c type, +0x34 built-in flag)	^\s*if\ \(iVar2\ ==\ 0\)\ \{$	+1
+use	TGenericLinker__CollectClientAttributeBindings	iVar2	symbol	CONFIRMED	the request's global ParseSymbol in the vertex symbol table, or null (+0x2c type, +0x34 built-in flag)	^\s*Binding__SetOpenGLType\(pBVar1,\*\(ushort\ \*\)\(iVar2\ \+\ 0x2c\)\);$	+1
+use	TGenericLinker__CollectClientAttributeBindings	iVar2	symbol	CONFIRMED	the request's global ParseSymbol in the vertex symbol table, or null (+0x2c type, +0x34 built-in flag)	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0x34\);$	+1
+use	TGenericLinker__CollectClientAttributeBindings	iVar2	symbol	CONFIRMED	the request's global ParseSymbol in the vertex symbol table, or null (+0x2c type, +0x34 built-in flag)	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0x34\);$@2	+1
+use	TGenericLinker__CollectClientAttributeBindings	iVar5	nameLength	CONFIRMED	strlen of the attribute name	^\s*iVar5\ =\ _strlen\(uVar6\);$	+2
+use	TGenericLinker__CollectClientAttributeBindings	iVar5	nameLength	CONFIRMED	strlen of the attribute name	^\s*iVar5\ =\ _strlen\(uVar6\);$@2	+2
+use	TGenericLinker__CollectClientAttributeBindings	iVar5	builtInFlag	CONFIRMED	symbol +0x34: 1 marks a gl_ built-in (not allowed for a client request), stored with Binding__SetBuiltIn	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0x34\);$	+2
+use	TGenericLinker__CollectClientAttributeBindings	iVar5	builtInFlag	CONFIRMED	symbol +0x34: 1 marks a gl_ built-in (not allowed for a client request), stored with Binding__SetBuiltIn	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0x34\);$@2	+1
+use	TGenericLinker__CollectClientAttributeBindings	iVar5	builtInFlag	CONFIRMED	symbol +0x34: 1 marks a gl_ built-in (not allowed for a client request), stored with Binding__SetBuiltIn	^\s*Binding__SetBuiltIn\(pBVar1,iVar5\);$	+1
+use	TGenericLinker__CollectClientAttributeBindings	iVar5	errorFormatLength	CONFIRMED	strlen of the internal-error format string	^\s*iVar5\ =\ _strlen\(DAT_a7b7bb68\);$	+1
+use	TGenericLinker__CollectClientAttributeBindings	iVar5	errorFormatLength	CONFIRMED	strlen of the internal-error format string	^\s*pcVar4\ =\ \(char\ \*\)_malloc\(iVar5\ \+\ iVar3\ \+\ 1\);$	+1
+local	TGenericLinker__CoalesceCommonUniforms	_Var1	chunkKind	CONFIRMED	kind byte of the symbol's chunk (3 = constant)
+local	TGenericLinker__CoalesceCommonUniforms	pPVar3	symbol	CONFIRMED	symbol being examined for duplicate constants
+local	TGenericLinker__CoalesceCommonUniforms	this_00	otherSymbol	CONFIRMED	later symbol whose constant chunk may duplicate symbol's
+local	TGenericLinker__CoalesceCommonUniforms	iVar4	existingArray	CONFIRMED	_PPStreamGetArray(constant array, other chunk's index): -1 = not part of an array
+local	TGenericLinker__CoalesceCommonUniforms	uVar5	keepWidth	CONFIRMED	component-count field (bits 25..24) of the kept chunk
+local	TGenericLinker__CoalesceCommonUniforms	iVar6	stageByteOffset	CONFIRMED	stage * 4: offset into the per-stage arrays (+0x28 symbol table, +0x30 PP stream)
+local	TGenericLinker__CoalesceCommonUniforms	iVar7	stage	CONFIRMED	0 = vertex, 1 = fragment
+local	TGenericLinker__CoalesceCommonUniforms	p_Var8	otherChunk	CONFIRMED	the other symbol's constant chunk (chunk +0xc header, +0x12 index)
+local	TGenericLinker__CoalesceCommonUniforms	pTVar9	stageSlot	CONFIRMED	this + stage*4
+local	TGenericLinker__CoalesceCommonUniforms	p_Var10	chunk	CONFIRMED	the kept constant chunk of symbol (register class 3..0x12 = parameter constants)
+local	TGenericLinker__CoalesceCommonUniforms	local_70	chunkKey	CONFIRMED	the chunk header with the width bits masked out: 64-bit key compared with the other chunk
+local	TGenericLinker__CoalesceCommonUniforms	local_60	otherKeyHi	CONFIRMED	high word of the other chunk's header, comparable part
+local	TGenericLinker__CoalesceCommonUniforms	uStack_5c	otherKeyLo	CONFIRMED	low word of the other chunk's header with the low 16 bits cleared
+use	TGenericLinker__CoalesceCommonUniforms	uVar2	registerClass	CONFIRMED	register-class field (header bits 20..16) of the symbol chunk: 3..0x12 are parameter-constant classes	^\s*uVar2\ =\ \(\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)\&\(local_70\)\ \+\ 0\)\)\ \&\ 0xfcffffff\)\ >>\ 0x10\ \&\ 0x1f;$	+1
+use	TGenericLinker__CoalesceCommonUniforms	uVar2	registerClass	CONFIRMED	register-class field (header bits 20..16) of the symbol chunk: 3..0x12 are parameter-constant classes	^\s*if\ \(\(2\ <\ uVar2\)\ \&\&$	+5
+use	TGenericLinker__CoalesceCommonUniforms	uVar2	mergedWidth	CONFIRMED	component-count field (bits 25..24) of the duplicate chunk, raised to the kept chunk width when that is larger	^\s*uVar2\ =\ \*\(uint\ \*\)\(p_Var8\ \+\ 0xc\)\ >>\ 0x18\ \&\ 3;$	+3
+use	TGenericLinker__CoalesceCommonUniforms	uVar2	mergedWidth	CONFIRMED	component-count field (bits 25..24) of the duplicate chunk, raised to the kept chunk width when that is larger	^\s*\*\(uint\ \*\)\(p_Var10\ \+\ 0xc\)\ =\ uVar2\ <<\ 0x18\ \|\ \*\(uint\ \*\)\(p_Var10\ \+\ 0xc\)\ \&\ 0xfcffffff;$	+1
+local	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	puVar2	newStream	CONFIRMED	the copy of the PP stream (_PPStreamCreate), returned; null if the comparison with the source fails
+local	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	p_Var5	symbolChunk	CONFIRMED	source chunk of a list whose chunks are referenced by symbols (ParseSymbolTable__ChangeChunk repoints them to the copy)
+local	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	p_Var3	symbolChunkCopy	CONFIRMED	copy of symbolChunk added to the new stream's list
+local	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	uVar4	plainChunkCopy	CONFIRMED	copy of plainChunk added to the new stream's list
+local	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	pcVar1	errorText	CONFIRMED	static internal-error text printed when the copy does not compare equal
+local	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	this_00	infoSink	CONFIRMED	the linker's info sink (this+0x84)
+use	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	iVar6	plainChunk	CONFIRMED	source chunk of a list that no symbol points into (chunk +8 = next)	^\s*for\ \(iVar6\ =\ \*\*\(int\ \*\*\)\(param_2\ \+\ 8\);\ iVar6\ !=\ 0;\ iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\)\)\ \{$	+2
+use	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	iVar6	plainChunk	CONFIRMED	source chunk of a list that no symbol points into (chunk +8 = next)	^\s*for\ \(iVar6\ =\ \*\*\(int\ \*\*\)\(param_2\ \+\ 0xc\);\ iVar6\ !=\ 0;\ iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\)\)\ \{$	+2
+use	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	iVar6	plainChunk	CONFIRMED	source chunk of a list that no symbol points into (chunk +8 = next)	^\s*for\ \(iVar6\ =\ \*\*\(int\ \*\*\)\(param_2\ \+\ 0x14\);\ iVar6\ !=\ 0;\ iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\)\)\ \{$	+2
+use	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	iVar6	plainChunk	CONFIRMED	source chunk of a list that no symbol points into (chunk +8 = next)	^\s*for\ \(iVar6\ =\ \*\*\(int\ \*\*\)\(param_2\ \+\ 0x20\);\ iVar6\ !=\ 0;\ iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\)\)\ \{$	+2
+use	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	iVar6	plainChunk	CONFIRMED	source chunk of a list that no symbol points into (chunk +8 = next)	^\s*for\ \(iVar6\ =\ \*\*\(int\ \*\*\)\(param_2\ \+\ 0x24\);\ iVar6\ !=\ 0;\ iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\)\)\ \{$	+2
+use	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	iVar6	plainChunk	CONFIRMED	source chunk of a list that no symbol points into (chunk +8 = next)	^\s*for\ \(iVar6\ =\ \*\*\(int\ \*\*\)\(param_2\ \+\ 0x2c\);\ iVar6\ !=\ 0;\ iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\)\)\ \{$	+2
+use	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	iVar6	plainChunk	CONFIRMED	source chunk of a list that no symbol points into (chunk +8 = next)	^\s*for\ \(iVar6\ =\ \*\*\(int\ \*\*\)\(param_2\ \+\ 0x28\);\ iVar6\ !=\ 0;\ iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\)\)\ \{$	+2
+use	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	iVar6	plainChunk	CONFIRMED	source chunk of a list that no symbol points into (chunk +8 = next)	^\s*for\ \(iVar6\ =\ \*\*\(int\ \*\*\)\(param_2\ \+\ 0x30\);\ iVar6\ !=\ 0;\ iVar6\ =\ \*\(int\ \*\)\(iVar6\ \+\ 8\)\)\ \{$	+2
+use	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	iVar6	compareResult	CONFIRMED	_PPStreamCompare of the source and the copy: 1 = differ	^\s*iVar6\ =\ _PPStreamCompare\(param_2,puVar2\);$	+1
+use	TGenericLinker__CreateFromStreamWithSymbolTableUpdate	iVar6	compareResult	CONFIRMED	_PPStreamCompare of the source and the copy: 1 = differ	^\s*if\ \(iVar6\ ==\ 1\)\ \{$	+1
+local	__ZN14TGenericLinkerD4Ev	param_2	deleteFlag	CONFIRMED	in-charge deleting flag: bit 0 set => also operator delete(this)

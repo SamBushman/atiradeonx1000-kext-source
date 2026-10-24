@@ -1,0 +1,392 @@
+use	_ShGetInfoLog	iVar2	compilerObj	INFERRED	object behind the shader handle: vtable slot 2 is the compiler	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 8\)\)\(param_1\);$	+2
+use	_ShGetInfoLog	iVar2	linkerObj	INFERRED	object behind the shader handle: vtable slot 3 is the linker	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0xc\)\)\(param_1\);$	+2
+use	_ShGetInfoLog	iVar2	linkerObj	INFERRED	object behind the shader handle: vtable slot 3 is the linker	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0xc\)\)\(param_1\);$@2	+2
+local	_ShGetUniformTypeInfo	param_3	sizeOut	INFERRED	TGenericLinker::getUniformTypeInfo writes the remaining element count (actual size minus offset) through this pointer
+local	_ShGetUniformTypeInfo	param_4	typeOut	INFERRED	receives the OpenGL type of the uniform binding
+local	_ShGetUniformTypeInfo	param_5	stageUseOut	INFERRED	receives the vertex-use (+0x34) and fragment-use (+0x35) flag bytes
+use	TVariable__dump	this_00	sinkBase	INFERRED	TInfoSinkBase part of the info sink (infoSink+8)	^\s*this_00\ =\ param_2\ \+\ 8;$	+1
+use	TVariable__dump	this_00	sinkBase	INFERRED	TInfoSinkBase part of the info sink (infoSink+8)	^\s*__ZN13TInfoSinkBase6appendEPKc\(this_00,\*\(char\ \*\*\)\(iVar2\ \+\ 4\)\);$	+2
+use	TVariable__dump	this_00	sinkBase	INFERRED	TInfoSinkBase part of the info sink (infoSink+8)	^\s*__ZN13TInfoSinkBase6appendEPKc\(this_00,pcVar1\);$	+2
+use	TVariable__dump	this_00	sinkBase	INFERRED	TInfoSinkBase part of the info sink (infoSink+8)	^\s*__ZN13TInfoSinkBase6appendEPKc\(this_00,pcVar1\);$@2	+1
+use	TVariable__dump	this_00	sinkBase	INFERRED	TInfoSinkBase part of the info sink (infoSink+8)	^\s*__ZN13TInfoSinkBase6appendEPKc\(this_00,"\[0\]"\);$	+1
+use	TVariable__dump	this_00	sinkBase	INFERRED	TInfoSinkBase part of the info sink (infoSink+8)	^\s*return\ __ZN13TInfoSinkBase6appendEPKc\(this_00,"\\n"\);$	+1
+use	TFunction__dump	this_00	sinkBase	INFERRED	TInfoSinkBase part of the info sink (infoSink+8)	^\s*this_00\ =\ param_2\ \+\ 8;$	+1
+use	TFunction__dump	this_00	sinkBase	INFERRED	TInfoSinkBase part of the info sink (infoSink+8)	^\s*__ZN13TInfoSinkBase6appendEPKc\(this_00,\*\(char\ \*\*\)\(iVar4\ \+\ 4\)\);$	+2
+use	TFunction__dump	this_00	sinkBase	INFERRED	TInfoSinkBase part of the info sink (infoSink+8)	^\s*__ZN13TInfoSinkBase6appendEPKc\(this_00,pcVar3\);$	+2
+use	TFunction__dump	this_00	sinkBase	INFERRED	TInfoSinkBase part of the info sink (infoSink+8)	^\s*__ZN13TInfoSinkBase6appendEPKc\(this_00,\*\(char\ \*\*\)\(iVar2\ \+\ 4\)\);$	+2
+use	__ZN17TSymbolTableLevelD4Ev	extraout_r4	r4Out0	INFERRED	extra-output register artifact: r4 left by the previous call	^\s*param_2\ =\ extraout_r4;$	+1
+use	TSymbolTableLevel__relateToOperator	iVar1	isFunction	INFERRED	TSymbol::isFunction() (vtable slot 3) of the map entry	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(local_40\[0\]\ \+\ 0x18\)\ \+\ 0xc\)\)\(\*\(int\ \*\*\)\(local_40\[0\]\ \+\ 0x18\)\);$	+2
+use	TSymbolTableLevel__relateToOperator	iVar1	nameCompare	INFERRED	std::string::compare(name) result	^\s*iVar1\ =\ __ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc$	+1
+use	TSymbolTableLevel__relateToOperator	iVar1	nameCompare	INFERRED	std::string::compare(name) result	^\s*if\ \(iVar1\ ==\ 0\)\ \{$	+1
+local	__ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar1	copyScratch	INFERRED	scratch word carrying copyOf.userType, struct pointer, size/basic-type bits and finally the unionArray pointer (one flow-joined web)
+use	__ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar2	arrayInformationType	INFERRED	copyOf.arrayInformationType (+0x3c), must be 0	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x3c\);$	+1
+use	__ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar2	arrayInformationType	INFERRED	copyOf.arrayInformationType (+0x3c), must be 0	^\s*if\ \(iVar2\ ==\ 0\)\ \{$	+1
+use	__ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar2	srcUnionArray	INFERRED	copyOf.unionArray (+0x38)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x38\);$	+1
+use	__ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar2	srcUnionArray	INFERRED	copyOf.unionArray (+0x38)	^\s*if\ \(iVar2\ ==\ 0\)\ goto\ LAB_97ba314c;$	+1
+use	__ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar2	nominalSize	INFERRED	type nominal size taken from the bit-field	^\s*iVar2\ =\ \(int\)\(uVar1\ <<\ 0xd\ \|\ uVar1\ >>\ 0x13\)\ >>\ 0x18;$	+2
+local	__ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar1	copyScratch	INFERRED	scratch word carrying copyOf.userType, struct pointer, size/basic-type bits and finally the unionArray pointer (one flow-joined web)
+use	__ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar2	arrayInformationType	INFERRED	copyOf.arrayInformationType (+0x3c), must be 0	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x3c\);$	+1
+use	__ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar2	arrayInformationType	INFERRED	copyOf.arrayInformationType (+0x3c), must be 0	^\s*if\ \(iVar2\ ==\ 0\)\ \{$	+1
+use	__ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar2	srcUnionArray	INFERRED	copyOf.unionArray (+0x38)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x38\);$	+1
+use	__ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar2	srcUnionArray	INFERRED	copyOf.unionArray (+0x38)	^\s*if\ \(iVar2\ ==\ 0\)\ goto\ LAB_97ba314c;$	+1
+use	__ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar2	nominalSize	INFERRED	type nominal size taken from the bit-field	^\s*iVar2\ =\ \(int\)\(uVar1\ <<\ 0xd\ \|\ uVar1\ >>\ 0x13\)\ >>\ 0x18;$	+2
+local	__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar1	copyScratch	INFERRED	scratch word carrying copyOf.userType, struct pointer, size/basic-type bits and finally the unionArray pointer (one flow-joined web)
+use	__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar2	arrayInformationType	INFERRED	copyOf.arrayInformationType (+0x3c), must be 0	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x3c\);$	+1
+use	__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar2	arrayInformationType	INFERRED	copyOf.arrayInformationType (+0x3c), must be 0	^\s*if\ \(iVar2\ ==\ 0\)\ \{$	+1
+use	__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar2	srcUnionArray	INFERRED	copyOf.unionArray (+0x38)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x38\);$	+1
+use	__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar2	srcUnionArray	INFERRED	copyOf.unionArray (+0x38)	^\s*if\ \(iVar2\ ==\ 0\)\ goto\ LAB_97ba314c;$	+1
+use	__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar2	nominalSize	INFERRED	type nominal size taken from the bit-field	^\s*iVar2\ =\ \(int\)\(uVar1\ <<\ 0xd\ \|\ uVar1\ >>\ 0x13\)\ >>\ 0x18;$	+2
+use	TVariable__clone	this_00	poolAllocator	INFERRED	global pool allocator	^\s*this_00\ =\ \(unsigned\ char\ \*\)GetGlobalPoolAllocator\(\);$	+2
+use	TVariable__clone	this_01	clone	INFERRED	pool-allocated TVariable copy	^\s*this_01\ =\ \(void\ \*\)TPoolAllocator__allocate\(this_00,0x40\);$	+3
+use	TFunction__clone	this_00	poolAllocator	INFERRED	global pool allocator	^\s*this_00\ =\ \(unsigned\ char\ \*\)GetGlobalPoolAllocator\(\);$	+2
+use	TFunction__clone	this_01	clone	INFERRED	pool-allocated TFunction copy	^\s*this_01\ =\ \(void\ \*\)TPoolAllocator__allocate\(this_00,0x54\);$	+3
+use	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar4	field4c	INFERRED	copied word at +0x4c	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x4c\);$	+1
+use	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar4	field4c	INFERRED	copied word at +0x4c	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x4c\)\ =\ uVar4;$	+1
+use	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	emptyRep	INFERRED	shared empty string rep (rep+8 refcount, rep+0xc data)	^\s*iVar8\ =\ DAT_a7b7ba74;$	+1
+use	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	emptyRep	INFERRED	shared empty string rep (rep+8 refcount, rep+0xc data)	^\s*piVar2\ =\ \(int\ \*\)\(iVar8\ \+\ 8\);$	+1
+use	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	emptyRep	INFERRED	shared empty string rep (rep+8 refcount, rep+0xc data)	^\s*\*\(int\ \*\)\(\(int\)this\ \+\ 0x48\)\ =\ iVar8\ \+\ 0xc;$	+1
+use	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	newFinish	INFERRED	vector finish pointer after the push	^\s*iVar8\ =\ 0;$	+1
+use	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	newFinish	INFERRED	vector finish pointer after the push	^\s*iVar8\ =\ \*\(int\ \*\)\(\(int\)this\ \+\ 0x14\);$	+1
+use	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	newFinish	INFERRED	vector finish pointer after the push	^\s*\*\(int\ \*\)\(\(int\)this\ \+\ 0x14\)\ =\ iVar8\ \+\ 8;$	+1
+use	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	finishPtr	INFERRED	vector finish pointer; the last pushed TParameter is at finish-8	^\s*iVar8\ =\ \*\(int\ \*\)\(\(int\)this\ \+\ 0x14\);$@2	+1
+use	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	finishPtr	INFERRED	vector finish pointer; the last pushed TParameter is at finish-8	^\s*\*\(void\ \*\*\)\(iVar8\ \+\ \-8\)\ =\ pvVar3;$	+1
+use	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	finishPtr	INFERRED	vector finish pointer; the last pushed TParameter is at finish-8	^\s*\*\(unsigned\ char\ \*\*\)\(iVar8\ \+\ \-4\)\ =\ this_01;$	+1
+use	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar4	field4c	INFERRED	copied word at +0x4c	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x4c\);$	+1
+use	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar4	field4c	INFERRED	copied word at +0x4c	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x4c\)\ =\ uVar4;$	+1
+use	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	emptyRep	INFERRED	shared empty string rep (rep+8 refcount, rep+0xc data)	^\s*iVar8\ =\ DAT_a7b7ba74;$	+1
+use	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	emptyRep	INFERRED	shared empty string rep (rep+8 refcount, rep+0xc data)	^\s*piVar2\ =\ \(int\ \*\)\(iVar8\ \+\ 8\);$	+1
+use	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	emptyRep	INFERRED	shared empty string rep (rep+8 refcount, rep+0xc data)	^\s*\*\(int\ \*\)\(\(int\)this\ \+\ 0x48\)\ =\ iVar8\ \+\ 0xc;$	+1
+use	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	newFinish	INFERRED	vector finish pointer after the push	^\s*iVar8\ =\ 0;$	+1
+use	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	newFinish	INFERRED	vector finish pointer after the push	^\s*iVar8\ =\ \*\(int\ \*\)\(\(int\)this\ \+\ 0x14\);$	+1
+use	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	newFinish	INFERRED	vector finish pointer after the push	^\s*\*\(int\ \*\)\(\(int\)this\ \+\ 0x14\)\ =\ iVar8\ \+\ 8;$	+1
+use	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	finishPtr	INFERRED	vector finish pointer; the last pushed TParameter is at finish-8	^\s*iVar8\ =\ \*\(int\ \*\)\(\(int\)this\ \+\ 0x14\);$@2	+1
+use	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	finishPtr	INFERRED	vector finish pointer; the last pushed TParameter is at finish-8	^\s*\*\(void\ \*\*\)\(iVar8\ \+\ \-8\)\ =\ pvVar3;$	+1
+use	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	finishPtr	INFERRED	vector finish pointer; the last pushed TParameter is at finish-8	^\s*\*\(unsigned\ char\ \*\*\)\(iVar8\ \+\ \-4\)\ =\ this_01;$	+1
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uStack_60	emptyParamName	INFERRED	name word of the empty TParameter pushed with _M_insert_aux
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uStack_5c	emptyParamType	INFERRED	type word of the empty TParameter pushed with _M_insert_aux
+use	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar4	field4c	INFERRED	copied word at +0x4c	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x4c\);$	+1
+use	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar4	field4c	INFERRED	copied word at +0x4c	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x4c\)\ =\ uVar4;$	+1
+use	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	emptyRep	INFERRED	shared empty string rep (rep+8 refcount, rep+0xc data)	^\s*iVar8\ =\ DAT_a7b7ba74;$	+1
+use	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	emptyRep	INFERRED	shared empty string rep (rep+8 refcount, rep+0xc data)	^\s*piVar2\ =\ \(int\ \*\)\(iVar8\ \+\ 8\);$	+1
+use	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	emptyRep	INFERRED	shared empty string rep (rep+8 refcount, rep+0xc data)	^\s*\*\(int\ \*\)\(\(int\)this\ \+\ 0x48\)\ =\ iVar8\ \+\ 0xc;$	+1
+use	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	newFinish	INFERRED	vector finish pointer after the push	^\s*iVar8\ =\ 0;$	+1
+use	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	newFinish	INFERRED	vector finish pointer after the push	^\s*iVar8\ =\ \*\(int\ \*\)\(\(int\)this\ \+\ 0x14\);$	+1
+use	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	newFinish	INFERRED	vector finish pointer after the push	^\s*\*\(int\ \*\)\(\(int\)this\ \+\ 0x14\)\ =\ iVar8\ \+\ 8;$	+1
+use	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	finishPtr	INFERRED	vector finish pointer; the last pushed TParameter is at finish-8	^\s*iVar8\ =\ \*\(int\ \*\)\(\(int\)this\ \+\ 0x14\);$@2	+1
+use	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	finishPtr	INFERRED	vector finish pointer; the last pushed TParameter is at finish-8	^\s*\*\(void\ \*\*\)\(iVar8\ \+\ \-8\)\ =\ pvVar3;$	+1
+use	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar8	finishPtr	INFERRED	vector finish pointer; the last pushed TParameter is at finish-8	^\s*\*\(unsigned\ char\ \*\*\)\(iVar8\ \+\ \-4\)\ =\ this_01;$	+1
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uStack_60	emptyParamName	INFERRED	name word of the empty TParameter pushed with _M_insert_aux
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uStack_5c	emptyParamType	INFERRED	type word of the empty TParameter pushed with _M_insert_aux
+use	TSymbolTableLevel__clone	iVar2	oldRefCount	INFERRED	refcount of the key string before the decrement	^\s*iVar2\ =\ \*piVar6;$	+2
+use	TSymbolTableLevel__clone	iVar2	oldRefCount	INFERRED	refcount of the key string before the decrement	^\s*if\ \(iVar2\ <\ 1\)\ \{$	+1
+local	TSymbolTableLevel__clone	in_r5	insertKeyPtr	INFERRED	pointer to the key/value pair passed to the tree insert
+use	TSymbolTableLevel__clone	local_6c	unusedInsertWord	INFERRED	word stored (0 then the insert result) and never read	^\s*local_6c\ =\ 0;$	+1
+use	TSymbolTableLevel__clone	local_6c	unusedInsertWord	INFERRED	word stored (0 then the insert result) and never read	^\s*local_6c\ =\ local_5c;$	+1
+use	TSymbolTable__copyTable	iVar3	vecFinish	INFERRED	vector finish pointer after the push_back of the cloned level	^\s*iVar3\ =\ 0;$	+1
+use	TSymbolTable__copyTable	iVar3	vecFinish	INFERRED	vector finish pointer after the push_back of the cloned level	^\s*iVar3\ =\ \*\(int\ \*\)\(this\ \+\ 4\);$	+1
+use	TSymbolTable__copyTable	iVar3	vecFinish	INFERRED	vector finish pointer after the push_back of the cloned level	^\s*\*\(int\ \*\)\(this\ \+\ 4\)\ =\ iVar3\ \+\ 4;$	+1
+use	yylex	iVar12	yyCurrentState	INFERRED	flex yy_current_state (also receives yy_get_previous_state())	^\s*iVar12\ =\ _yy_start;$	+1
+use	yylex	iVar12	yyCurrentState	INFERRED	flex yy_current_state (also receives yy_get_previous_state())	^\s*iVar8\ =\ iVar12\ <<\ 1;$	+1
+use	yylex	iVar12	yyCurrentState	INFERRED	flex yy_current_state (also receives yy_get_previous_state())	^\s*_yy_last_accepting_state\ =\ iVar12;$	+1
+use	yylex	iVar12	yyCurrentState	INFERRED	flex yy_current_state (also receives yy_get_previous_state())	^\s*while\ \(iVar1\ =\ \(\(int\)\*\(short\ \*\)\(\&_yy_base\ \+\ iVar8\)\ \+\ uVar9\)\ \*\ 2,$	+5
+use	yylex	iVar12	yyCurrentState	INFERRED	flex yy_current_state (also receives yy_get_previous_state())	^\s*iVar12\ =\ \(int\)\*\(short\ \*\)\(\&_yy_nxt\ \+\ iVar1\);$	+1
+use	yylex	iVar12	yyCurrentState	INFERRED	flex yy_current_state (also receives yy_get_previous_state())	^\s*iVar8\ =\ iVar12\ \*\ 2;$	+1
+use	yylex	iVar12	yyCurrentState	INFERRED	flex yy_current_state (also receives yy_get_previous_state())	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)yy_try_NUL_trans\)\(iVar8\);$	+2
+use	yylex	iVar12	yyCurrentState	INFERRED	flex yy_current_state (also receives yy_get_previous_state())	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)yy_get_previous_state\)\(\);$	+1
+use	yylex	iVar12	commentResult	INFERRED	PaParseComment() result	^\s*iVar12\ =\ PaParseComment\(\(int\ \*\)param_1,param_2\);$	+1
+use	yylex	iVar12	commentResult	INFERRED	PaParseComment() result	^\s*if\ \(iVar12\ !=\ 0\)\ goto\ switchD_97bac34c_caseD_1;$	+1
+use	yylex	iVar12	nextBufferAction	INFERRED	yy_get_next_buffer() action code (EOB_ACT_*)	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)yy_get_next_buffer\)\(\);$	+4
+use	yylex	iVar12	nextBufferAction	INFERRED	yy_get_next_buffer() action code (EOB_ACT_*)	^\s*if\ \(iVar12\ !=\ 0\)\ goto\ switchD_97bac34c_caseD_1;$@2	+1
+use	yylex	pvVar13	tokenString	INFERRED	pool-allocated TString for the token, stored in yylval+4	^\s*pvVar13\ =\ \(void\ \*\)0x0;$	+1
+use	yylex	pvVar13	tokenString	INFERRED	pool-allocated TString for the token, stored in yylval+4	^\s*pvVar13\ =\ this_00;$	+1
+use	yylex	pvVar13	tokenString	INFERRED	pool-allocated TString for the token, stored in yylval+4	^\s*\*\(void\ \*\*\)\(param_1\ \+\ 4\)\ =\ pvVar13;$	+1
+use	yylex	pvVar13	infoSinkBase	INFERRED	info sink of the parse context (+8) for the "FLEX: Unknown char" message	^\s*pvVar13\ =\ \*\(void\ \*\*\)\(\(int\)param_2\ \+\ 8\);$	+4
+use	yy_get_next_buffer	iVar3	retVal	INFERRED	flex ret_val (EOB_ACT code)	^\s*iVar3\ =\ 2\ \-\ \(uint\)\(\(int\)_yy_c_buf_p\ \-\ \(int\)_yytext\ ==\ 1\);$	+1
+use	yy_get_next_buffer	iVar3	retVal	INFERRED	flex ret_val (EOB_ACT code)	^\s*iVar3\ =\ 0;$	+1
+use	yy_get_next_buffer	iVar3	retVal	INFERRED	flex ret_val (EOB_ACT code)	^\s*iVar3\ =\ 1;$	+1
+use	yy_get_next_buffer	iVar3	retVal	INFERRED	flex ret_val (EOB_ACT code)	^\s*iVar3\ =\ 2;$	+1
+use	yy_get_next_buffer	iVar3	retVal	INFERRED	flex ret_val (EOB_ACT code)	^\s*return\ iVar3;$	+1
+use	yy_get_next_buffer	iVar3	numToRead	INFERRED	flex num_to_read	^\s*iVar3\ =\ \*\(int\ \*\)\(_yy_current_buffer\ \+\ 0xc\)\ \-\ \(int\)puVar7;$	+1
+use	yy_get_next_buffer	iVar3	numToRead	INFERRED	flex num_to_read	^\s*while\ \(iVar3\ =\ iVar3\ \+\ \-1,\ _yy_current_buffer\ =\ iVar2,\ _yy_c_buf_p\ =\ puVar9,\ iVar3\ <\ 1\)\ \{$	+1
+use	yy_get_next_buffer	iVar3	numToRead	INFERRED	flex num_to_read	^\s*iVar3\ =\ \*\(int\ \*\)\(_yy_current_buffer\ \+\ 0xc\)\ \-\ \(int\)puVar7;$@2	+1
+use	yy_get_next_buffer	iVar3	numToRead	INFERRED	flex num_to_read	^\s*if\ \(0x2000\ <\ iVar3\)\ \{$	+2
+use	yy_get_next_buffer	iVar3	numToRead	INFERRED	flex num_to_read	^\s*_yy_n_chars\ =\ \(undefined1\ \*\)_yylex_CPP\(puVar7\ \+\ \*\(int\ \*\)\(iVar2\ \+\ 4\),iVar3\);$	+1
+use	yy_get_next_buffer	iVar3	numToRead	INFERRED	flex num_to_read	^\s*if\ \(iVar3\ <=\ \(int\)_yy_n_chars\)\ \{$	+1
+use	yy_get_next_buffer	iVar3	newSize	INFERRED	new buffer size	^\s*iVar3\ =\ uVar6\ <<\ 1;$	+3
+use	yy_get_next_buffer	iVar3	newSize	INFERRED	new buffer size	^\s*\*\(int\ \*\)\(iVar2\ \+\ 0xc\)\ =\ iVar3;$	+1
+use	yy_get_next_buffer	iVar3	newChBuf	INFERRED	reallocated character buffer pointer	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar2\ \+\ 4\);$	+2
+use	yy_get_next_buffer	iVar3	newChBuf	INFERRED	reallocated character buffer pointer	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar2\ \+\ 4\);$@2	+1
+use	yy_get_next_buffer	iVar3	newChBuf	INFERRED	reallocated character buffer pointer	^\s*puVar9\ =\ puVar9\ \+\ \(iVar3\ \-\ \(int\)pvVar4\);$	+1
+use	PaIdentOrType	iVar2	symbolLevelOrFlag	INFERRED	flow-joined web: levels begin pointer, current symbol-table level, then the isVariable() result	^\s*iVar2\ =\ \*piVar3;$	+2
+use	PaIdentOrType	iVar2	symbolLevelOrFlag	INFERRED	flow-joined web: levels begin pointer, current symbol-table level, then the isVariable() result	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ iVar4\ \*\ 4\);$	+2
+use	PaIdentOrType	iVar2	symbolLevelOrFlag	INFERRED	flow-joined web: levels begin pointer, current symbol-table level, then the isVariable() result	^\s*if\ \(local_30\[0\]\ !=\ \*\(int\ \*\)\(iVar2\ \+\ 4\)\)\ \{$	+1
+use	PaIdentOrType	iVar2	symbolLevelOrFlag	INFERRED	flow-joined web: levels begin pointer, current symbol-table level, then the isVariable() result	^\s*iVar2\ =\ \*piVar3;$@2	+1
+use	PaIdentOrType	iVar2	symbolLevelOrFlag	INFERRED	flow-joined web: levels begin pointer, current symbol-table level, then the isVariable() result	^\s*if\ \(\(\(\(\*\(int\ \*\)\(param_2\ \+\ 0x1c\)\ !=\ 0\)\ \|\|\ \(a0\ ==\ \(unsigned\ char\ \*\)0x0\)\)\ \|\|$	+3
+local	_CPPWarningToInfoLog	uVar2	lineNo	INFERRED	_yylineno: source string number in the high 16 bits, line in the low 16
+local	_CPPWarningToInfoLog	a1	lineInString	INFERRED	low 16 bits of _yylineno
+local	_CPPWarningToInfoLog	iVar4	stringNo	INFERRED	high 16 bits of _yylineno
+local	_CPPWarningToInfoLog	local_70	lineStr	INFERRED	std::string "<string>:<line>" built from lineBuf
+local	_CPPWarningToInfoLog	acStack_60	lineBuf	INFERRED	sprintf buffer for the position text
+local	_CPPWarningToInfoLog	aaStack_20	lineStrAlloc	INFERRED	allocator temporary for the std::string constructor
+local	_HandlePragma	in_r9	cppState	INFERRED	preprocessor state pointer (*PTR__cpp), later also passed as a stale argument
+local	_HandlePragma	uVar4	tokenTextOrStale	INFERRED	token text pointer compared with memcmp, and (flow-joined) the stale r4 value forwarded to _CPPShInfoLogMsg
+local	_GetBehavior	in_r6	staleR6	INFERRED	stale argument register forwarded to _CPPShInfoLogMsg
+local	_GetBehavior	in_r7	staleR7	INFERRED	stale argument register forwarded to _CPPShInfoLogMsg
+local	_GetBehavior	in_r8	staleR8	INFERRED	stale argument register forwarded to _CPPShInfoLogMsg
+use	_updateExtensionBehavior	iVar7	emptyRep	INFERRED	shared empty string rep (data at +0xc)	^\s*iVar7\ =\ DAT_a7b7baa8;$	+1
+use	_updateExtensionBehavior	iVar7	emptyRep	INFERRED	shared empty string rep (data at +0xc)	^\s*local_1dc\ =\ \(char\ \*\)\(iVar7\ \+\ 0xc\);$	+1
+use	_updateExtensionBehavior	iVar7	parseContextState	INFERRED	parse context (the cpp state's +0x2c) holding the extension map	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)PTR__cpp_a7b7c0a4\ \+\ 0x2c\);$	+1
+use	_updateExtensionBehavior	iVar7	parseContextState	INFERRED	parse context (the cpp state's +0x2c) holding the extension map	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior_____find\(\(unsigned\ char\ \*\)local_1a0,iVar7\ \+\ 0x30,\&local_190\);$	+1
+use	_updateExtensionBehavior	iVar7	stringNo	INFERRED	high 16 bits of _yylineno	^\s*iVar7\ =\ \(int\)uVar6\ >>\ 0x10;$	+1
+use	_updateExtensionBehavior	iVar7	stringNo	INFERRED	high 16 bits of _yylineno	^\s*_sprintf\(acStack_90,"%d:\?\ ",iVar7\);$	+1
+use	_updateExtensionBehavior	iVar7	stringNo	INFERRED	high 16 bits of _yylineno	^\s*_sprintf\(acStack_90,"%d:%d",iVar7,a1\);$	+1
+local	_updateExtensionBehavior	uVar10	cmpLen	INFERRED	length argument of the memcmp against "all"
+local	_updateExtensionBehavior	in_r6	staleR6	INFERRED	stale argument register forwarded to the info-log call
+local	_updateExtensionBehavior	in_r7	staleR7	INFERRED	stale argument register forwarded to the info-log call
+local	_updateExtensionBehavior	in_r8	staleR8	INFERRED	stale argument register forwarded to the info-log call
+local	_updateExtensionBehavior	in_r9	staleR9	INFERRED	stale argument register forwarded to the info-log call
+use	PrintParam	uVar4	bindingBits9	INFERRED	binding word bits 9..10	^\s*uVar4\ =\ uStack00000018\ >>\ 9\ \&\ 3;$	+2
+use	PrintParam	uVar4	bindingBits9	INFERRED	binding word bits 9..10	^\s*else\ if\ \(uVar4\ ==\ 0\)\ \{$	+1
+use	PrintParam	uVar4	bindingBits9	INFERRED	binding word bits 9..10	^\s*if\ \(uVar4\ !=\ 2\)\ goto\ switchD_97bafb24_default;$	+1
+use	PrintParam	uVar4	bindingBits5	INFERRED	binding word bits 5..7	^\s*uVar4\ =\ uStack00000018\ >>\ 5\ \&\ 7;$	+2
+use	PrintParam	uVar4	bindingBits5	INFERRED	binding word bits 5..7	^\s*if\ \(uVar4\ ==\ 0\)\ \{$	+1
+use	PrintParam	uVar4	bindingBits5	INFERRED	binding word bits 5..7	^\s*if\ \(uVar4\ ==\ 2\)\ \{$	+1
+use	PrintParam	uVar4	bindingBits5	INFERRED	binding word bits 5..7	^\s*if\ \(uVar4\ ==\ 3\)\ \{$	+1
+use	PrintParam	uVar4	bindingIndex	INFERRED	index/ordinal bits of the binding word printed with ncpy	^\s*uVar4\ =\ uStack00000018\ \&\ 0x1f;$	+1
+use	PrintParam	uVar4	bindingIndex	INFERRED	index/ordinal bits of the binding word printed with ncpy	^\s*uVar4\ =\ uStack00000018\ \&\ 0xff;$	+1
+use	PrintParam	uVar4	bindingIndex	INFERRED	index/ordinal bits of the binding word printed with ncpy	^\s*uVar4\ =\ uStack00000018\ \&\ 0xffff;$	+1
+use	PrintParam	uVar4	bindingIndex	INFERRED	index/ordinal bits of the binding word printed with ncpy	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)ncpy\)\(pcVar6,uVar4\);$	+1
+use	PrintParam	uVar4	bindingBits14	INFERRED	binding word bits 14..15	^\s*uVar4\ =\ uStack00000018\ >>\ 0xe\ \&\ 3;$	+2
+use	PrintParam	uVar4	bindingBits14	INFERRED	binding word bits 14..15	^\s*if\ \(uVar4\ ==\ 0\)\ \{$@2	+1
+use	PrintParam	uVar4	bindingBits14	INFERRED	binding word bits 14..15	^\s*if\ \(uVar4\ ==\ 2\)\ \{$@2	+1
+use	PrintParam	uVar4	bindingBits14	INFERRED	binding word bits 14..15	^\s*if\ \(uVar4\ ==\ 3\)\ \{$@2	+1
+use	__ZN7BindingC2ERKS_	bVar4	isBuiltIn	INFERRED	Binding::IsBuiltIn() of the source	^\s*bVar4\ =\ \(bool\)\(\(int\ \(\*\)\(\)\)Binding__IsBuiltIn\)\(param_2\);$	+2
+use	__ZN7BindingC1ERKS_	bVar4	isBuiltIn	INFERRED	Binding::IsBuiltIn() of the source	^\s*bVar4\ =\ \(bool\)\(\(int\ \(\*\)\(\)\)Binding__IsBuiltIn\)\(param_2\);$	+2
+use	Binding__SetNameFromArrayName	iVar2	nameLen	INFERRED	strlen of the new name	^\s*if\ \(\(param_2\ !=\ \(char\ \*\)0x0\)\ \&\&\ \(iVar2\ =\ _strlen\(param_2\),\ 0\ <\ iVar2\)\)\ \{$	+3
+use	Binding__SetNameFromArrayName	iVar2	lenOrBracketPos	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 0x10\);$	+2
+use	Binding__SetNameFromArrayName	iVar2	lenOrBracketPos	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar6\ =\ iVar2\ \+\ \-1;$	+1
+use	Binding__SetNameFromArrayName	iVar2	lenOrBracketPos	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar2\ =\ iVar6;$@2	+1
+use	Binding__SetNameFromArrayName	iVar2	lenOrBracketPos	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*if\ \(iVar2\ !=\ 0\)\ \{$	+1
+use	Binding__SetNameFromArrayName	iVar2	lenOrBracketPos	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+use	Binding__SetNameFromArrayName	iVar2	clearIdx	INFERRED	index while clearing the name tail	^\s*iVar2\ =\ iVar6;$	+1
+use	Binding__SetNameFromArrayName	iVar2	clearIdx	INFERRED	index while clearing the name tail	^\s*\*\(undefined1\ \*\)\(\*\(int\ \*\)\(this\ \+\ 8\)\ \+\ iVar2\)\ =\ 0;$	+3
+use	Binding__SetNameFromArrayName	iVar4	nameData	INFERRED	copied name (+8)	^\s*iVar4\ =\ \*\(int\ \*\)\(this\ \+\ 8\);$	+1
+use	Binding__SetNameFromArrayName	iVar4	nameData	INFERRED	copied name (+8)	^\s*if\ \(\*\(char\ \*\)\(iVar4\ \+\ iVar2\ \+\ \-1\)\ ==\ '\]'\)\ \{$	+1
+use	Binding__SetNameFromArrayName	iVar4	nameData	INFERRED	copied name (+8)	^\s*if\ \(\*\(char\ \*\)\(iVar4\ \+\ iVar6\)\ ==\ '\['\)\ \{$	+1
+use	Binding__SetNameFromArrayName	iVar4	nameData	INFERRED	copied name (+8)	^\s*uVar5\ =\ _atoi\(iVar4\ \+\ iVar6\ \+\ 1\);$	+1
+use	Binding__SetNameFromArrayName	iVar4	charIdx	INFERRED	index in the hash loop	^\s*iVar4\ =\ 0;$	+1
+use	Binding__SetNameFromArrayName	iVar4	charIdx	INFERRED	index in the hash loop	^\s*pcVar3\ =\ \(char\ \*\)\(\*\(int\ \*\)\(this\ \+\ 8\)\ \+\ iVar4\);$	+2
+use	BindingTable__InsertAttribRequestBinding	pBVar1	existing	INFERRED	request binding already present (BindingTable::FindAttribRequestBinding)	^\s*pBVar1\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)BindingTable__FindAttribRequestBinding\)\(this,param_2\);$	+2
+use	BindingTable__InsertAttribRequestBinding	pBVar1	existing	INFERRED	request binding already present (BindingTable::FindAttribRequestBinding)	^\s*\(\(int\ \(\*\)\(\)\)Binding__SetLocation\)\(pBVar1,iVar2\);$	+1
+use	BindingTable__InsertAttribRequestBinding	pBVar1	nextNode	INFERRED	next node while walking the request list	^\s*pBVar1\ =\ \*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\);$	+1
+use	BindingTable__InsertAttribRequestBinding	pBVar1	nextNode	INFERRED	next node while walking the request list	^\s*pBVar3\ =\ pBVar1;$	+3
+use	BindingTable__InsertAttribRequestBinding	pBVar1	nextNode	INFERRED	next node while walking the hash bucket	^\s*pBVar1\ =\ \*\(unsigned\ char\ \*\*\)\(iVar2\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ 8\)\);$	+2
+use	BindingTable__InsertAttribRequestBinding	pBVar1	nextNode	INFERRED	next node while walking the hash bucket	^\s*pBVar3\ =\ pBVar1;$@2	+3
+use	BindingTable__FindAttribRequestBinding	this_00	entry	INFERRED	bucket entry being compared	^\s*this_00\ =\ \*\(unsigned\ char\ \*\*\)\(iVar1\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ 8\)\);$	+3
+use	BindingTable__FindAttribRequestBinding	this_00	entry	INFERRED	bucket entry being compared	^\s*return\ this_00;$	+1
+use	BindingTable__FindAttribBinding	this_00	entry	INFERRED	bucket entry being compared	^\s*this_00\ =\ \*\(unsigned\ char\ \*\*\)\(iVar1\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ 0x10\)\);$	+3
+use	BindingTable__FindAttribBinding	this_00	entry	INFERRED	bucket entry being compared	^\s*return\ this_00;$	+1
+use	BindingTable__FindUniformBinding	this_00	entry	INFERRED	bucket entry being compared	^\s*this_00\ =\ \*\(unsigned\ char\ \*\*\)\(iVar1\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ 0x18\)\);$	+3
+use	BindingTable__FindUniformBinding	this_00	entry	INFERRED	bucket entry being compared	^\s*return\ this_00;$	+1
+use	BindingTable__FindUniformBindingByName	this_00	probe	INFERRED	temporary Binding holding the name	^\s*this_00\ =\ operator_new\(0x38\);$	+7
+use	BindingTable__InsertClientAttribBinding	pBVar4	nextBinding	INFERRED	next binding while walking the sorted list	^\s*pBVar4\ =\ \*\(unsigned\ char\ \*\*\)\(this\ \+\ 0xc\);$	+2
+use	BindingTable__InsertClientAttribBinding	pBVar4	nextBinding	INFERRED	next binding while walking the sorted list	^\s*this_01\ =\ pBVar4;$	+1
+use	BindingTable__InsertClientAttribBinding	pBVar4	nextBinding	INFERRED	next binding while walking the sorted list	^\s*pBVar4\ =\ this_01;$	+1
+use	BindingTable__InsertClientAttribBinding	pBVar4	nextBinding	INFERRED	next binding while walking the sorted list	^\s*pBVar4\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)Binding__GetNextBinding\)\(this_01\);$	+1
+use	BindingTable__InsertClientAttribBinding	pBVar4	nextBinding	INFERRED	next binding while walking the sorted list	^\s*this_01\ =\ pBVar4;$@2	+2
+use	BindingTable__InsertClientAttribBinding	pBVar4	nextBinding	INFERRED	next binding while walking the sorted list	^\s*\(\(int\ \(\*\)\(\)\)Binding__SetNextBinding\)\(this_00,pBVar4\);$	+1
+use	BindingTable__InsertClientAttribBinding	pBVar4	nextNode	INFERRED	next node while walking the hash bucket	^\s*pBVar4\ =\ \*\(unsigned\ char\ \*\*\)\(iVar1\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ 0x10\)\);$	+2
+use	BindingTable__InsertClientAttribBinding	pBVar4	nextNode	INFERRED	next node while walking the hash bucket	^\s*pBVar3\ =\ pBVar4;$	+3
+local	BindingTable__InsertAttribBinding	iVar3	prevLocation	INFERRED	location of the previous binding in the list
+local	BindingTable__InsertAttribBinding	iVar4	newLocation	INFERRED	first-fit location candidate for the new binding
+local	BindingTable__InsertAttribBinding	uVar1	result	INFERRED	1 when the binding was inserted
+use	BindingTable__InsertAttribBinding	iVar2	builtInOrCmp	INFERRED	flow-joined: IsBuiltIn flag, memcmp against "gl_Vertex" and the first binding's location	^\s*iVar2\ =\ Binding__IsBuiltIn\(param_2\);$	+1
+use	BindingTable__InsertAttribBinding	iVar2	builtInOrCmp	INFERRED	flow-joined: IsBuiltIn flag, memcmp against "gl_Vertex" and the first binding's location	^\s*if\ \(\(iVar2\ !=\ 0\)\ \&\&\ \(iVar2\ =\ _memcmp\(\*\(undefined4\ \*\)\(param_2\ \+\ 8\),"gl_Vertex",10\),\ iVar2\ ==\ 0\)\)$	+1
+use	BindingTable__InsertAttribBinding	iVar2	builtInOrCmp	INFERRED	flow-joined: IsBuiltIn flag, memcmp against "gl_Vertex" and the first binding's location	^\s*if\ \(\(pBVar6\ !=\ \(unsigned\ char\ \*\)0x0\)\ \&\&\ \(iVar2\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetLocation\)\(pBVar6\),\ iVar2\ ==\ 0\)\)\ \{$	+1
+use	BindingTable__InsertAttribBinding	iVar2	curLocation	INFERRED	location of the binding being compared	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetLocation\)\(this_00\);$	+1
+use	BindingTable__InsertAttribBinding	iVar2	curLocation	INFERRED	location of the binding being compared	^\s*if\ \(iVar4\ \+\ iVar3\ <=\ iVar2\)\ goto\ LAB_97bb0db4;$	+1
+use	BindingTable__InsertAttribBinding	iVar2	hashIdx	INFERRED	hash bucket index	^\s*iVar2\ =\ Binding__GetHash\(param_2,\*\(uint\ \*\)this\);$	+2
+use	BindingTable__InsertAttribBinding	iVar2	hashIdx	INFERRED	hash bucket index	^\s*\*\(unsigned\ char\ \*\*\)\(iVar2\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ 0x10\)\)\ =\ param_2;$	+1
+use	BindingTable__InsertAttribBinding	iVar2	activeIndex	INFERRED	running active-attribute count	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 0x1c\);$	+3
+use	BindingTable__InsertAttribBinding	iVar2	isBuiltIn	INFERRED	Binding::IsBuiltIn()	^\s*iVar2\ =\ Binding__IsBuiltIn\(param_2\);$@2	+2
+use	BindingTable__InsertAttribBinding	iVar2	bindingSlots	INFERRED	slot count of the binding	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetBindingSlots\)\(param_2\);$	+2
+use	BindingTable__InsertAttribBinding	iVar2	bindingSlots	INFERRED	slot count of the binding	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetBindingSlots\)\(param_2\);$@2	+2
+use	BindingTable__InsertAttribBinding	pBVar5	prevBinding	INFERRED	previous binding in the list	^\s*pBVar5\ =\ \(unsigned\ char\ \*\)0x0;$	+1
+use	BindingTable__InsertAttribBinding	pBVar5	prevBinding	INFERRED	previous binding in the list	^\s*pBVar5\ =\ this_00;$	+1
+use	BindingTable__InsertAttribBinding	pBVar5	prevBinding	INFERRED	previous binding in the list	^\s*if\ \(pBVar5\ ==\ \(unsigned\ char\ \*\)0x0\)\ \{$	+1
+use	BindingTable__InsertAttribBinding	pBVar5	prevBinding	INFERRED	previous binding in the list	^\s*\(\(int\ \(\*\)\(\)\)Binding__SetNextBinding\)\(pBVar5,param_2\);$	+1
+use	BindingTable__InsertAttribBinding	pBVar5	curNode	INFERRED	bucket node being walked	^\s*pBVar5\ =\ pBVar6;$	+2
+use	BindingTable__InsertAttribBinding	pBVar5	curNode	INFERRED	bucket node being walked	^\s*\(\(int\ \(\*\)\(\)\)Binding__SetNextBindingInHash\)\(pBVar5,param_2\);$	+1
+use	BindingTable__InsertAttribBinding	pBVar6	nextBinding	INFERRED	next binding in the list	^\s*pBVar6\ =\ \*\(unsigned\ char\ \*\*\)\(this\ \+\ 0xc\);$	+1
+use	BindingTable__InsertAttribBinding	pBVar6	nextBinding	INFERRED	next binding in the list	^\s*if\ \(\(pBVar6\ !=\ \(unsigned\ char\ \*\)0x0\)\ \&\&\ \(iVar2\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetLocation\)\(pBVar6\),\ iVar2\ ==\ 0\)\)\ \{$	+1
+use	BindingTable__InsertAttribBinding	pBVar6	nextBinding	INFERRED	next binding in the list	^\s*if\ \(pBVar6\ !=\ \(unsigned\ char\ \*\)0x0\)\ \{$	+1
+use	BindingTable__InsertAttribBinding	pBVar6	nextBinding	INFERRED	next binding in the list	^\s*this_00\ =\ pBVar6;$	+1
+use	BindingTable__InsertAttribBinding	pBVar6	nextBinding	INFERRED	next binding in the list	^\s*pBVar6\ =\ this_00;$	+1
+use	BindingTable__InsertAttribBinding	pBVar6	nextBinding	INFERRED	next binding in the list	^\s*pBVar6\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)Binding__GetNextBinding\)\(this_00\);$	+1
+use	BindingTable__InsertAttribBinding	pBVar6	nextBinding	INFERRED	next binding in the list	^\s*\}\ while\ \(pBVar6\ !=\ \(unsigned\ char\ \*\)0x0\);$	+1
+use	BindingTable__InsertAttribBinding	pBVar6	nextBinding	INFERRED	next binding in the list	^\s*\(\(int\ \(\*\)\(\)\)Binding__SetNextBinding\)\(param_2,pBVar6\);$	+1
+use	BindingTable__InsertAttribBinding	pBVar6	nextNode	INFERRED	next bucket node	^\s*pBVar6\ =\ \*\(unsigned\ char\ \*\*\)\(iVar2\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ 0x10\)\);$	+2
+use	BindingTable__InsertAttribBinding	pBVar6	nextNode	INFERRED	next bucket node	^\s*pBVar5\ =\ pBVar6;$	+3
+local	BindingTable__InsertSingleUniform	uVar1	result	INFERRED	1 when the binding was inserted
+local	BindingTable__InsertUniformArray	bVar1	keepElement	INFERRED	false when a built-in element is not referenced by any stage and is discarded
+use	BindingTable__InsertUniformArray	iVar3	elementIdxDown	INFERRED	array element index counting down	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetDecSize\)\(param_2\);$	+2
+use	BindingTable__InsertUniformArray	iVar3	elementIdxDown	INFERRED	array element index counting down	^\s*_sprintf\(acStack_90,"\[%d\]",iVar3\);$	+1
+use	BindingTable__InsertUniformArray	iVar3	elementIdxDown	INFERRED	array element index counting down	^\s*if\ \(\(\(param_6\[iVar11\]\ !=\ \(unsigned\ char\ \*\)0x0\)\ \&\&$	+4
+use	BindingTable__InsertUniformArray	iVar3	lastIndex	INFERRED	highest element index referenced by either stage	^\s*iVar3\ =\ \(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)\&\(local_50\)\ \+\ 4\)\);$	+1
+use	BindingTable__InsertUniformArray	iVar3	lastIndex	INFERRED	highest element index referenced by either stage	^\s*iVar3\ =\ \(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)\&\(local_50\)\ \+\ 0\)\);$	+1
+use	BindingTable__InsertUniformArray	iVar3	lastIndex	INFERRED	highest element index referenced by either stage	^\s*if\ \(\-1\ <\ iVar3\)\ \{$	+2
+use	BindingTable__InsertUniformArray	iVar3	lastIndex	INFERRED	highest element index referenced by either stage	^\s*\}\ while\ \(iVar11\ <=\ iVar3\);$	+1
+use	BindingTable__InsertUniformArray	iVar4	symbolFound	INFERRED	ParseSymbolTable::FindSymbolByName result	^\s*if\ \(\(\(param_6\[iVar11\]\ !=\ \(unsigned\ char\ \*\)0x0\)\ \&\&$	+3
+use	BindingTable__InsertUniformArray	iVar4	isBuiltIn	INFERRED	Binding::IsBuiltIn()	^\s*iVar4\ =\ Binding__IsBuiltIn\(param_2\);$	+2
+use	BindingTable__InsertUniformArray	iVar4	probeIdx	INFERRED	stage table index while probing a built-in element	^\s*iVar4\ =\ param_4;$	+1
+use	BindingTable__InsertUniformArray	iVar4	probeIdx	INFERRED	stage table index while probing a built-in element	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+2
+use	BindingTable__InsertUniformArray	iVar4	location	INFERRED	location of the new element binding	^\s*iVar4\ =\ 0;$	+1
+use	BindingTable__InsertUniformArray	iVar4	location	INFERRED	location of the new element binding	^\s*iVar4\ =\ iVar6;$	+1
+use	BindingTable__InsertUniformArray	iVar4	location	INFERRED	location of the new element binding	^\s*\(\(int\ \(\*\)\(\)\)Binding__SetLocation\)\(this_00,iVar4\ \+\ iVar5\);$	+1
+use	BindingTable__InsertUniformArray	iVar4	hashIdx	INFERRED	hash bucket index	^\s*iVar4\ =\ Binding__GetHash\(this_00,\*\(uint\ \*\)this\);$	+2
+use	BindingTable__InsertUniformArray	iVar4	hashIdx	INFERRED	hash bucket index	^\s*\*\(unsigned\ char\ \*\*\)\(iVar4\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ 0x18\)\)\ =\ this_00;$	+1
+use	BindingTable__InsertUniformArray	iVar4	activeIndex	INFERRED	running active-uniform count	^\s*iVar4\ =\ \*\(int\ \*\)\(this\ \+\ 0x20\);$	+3
+use	BindingTable__InsertUniformArray	iVar4	isBuiltIn	INFERRED	Binding::IsBuiltIn() of the element	^\s*iVar4\ =\ Binding__IsBuiltIn\(this_00\);$	+2
+use	BindingTable__InsertUniformArray	iVar4	bindingSlots	INFERRED	slot count of the binding	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetBindingSlots\)\(this_00\);$	+2
+use	BindingTable__InsertUniformArray	iVar4	bindingSlots	INFERRED	slot count of the binding	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetBindingSlots\)\(this_00\);$@2	+2
+use	BindingTable__InsertUniformArray	iVar4	bindingSlots	INFERRED	slot count of the binding	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetBindingSlots\)\(param_2\);$	+2
+local	BindingTable__InsertUniformArray	iVar5	slotsOrFound	INFERRED	flow-joined: FindSymbolByName result, then the slot count of the last located binding
+use	BindingTable__InsertUniformArray	iVar6	curLocation	INFERRED	location of the list entry being examined	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetLocation\)\(pBVar8\);$	+2
+use	BindingTable__InsertUniformArray	iVar6	curLocation	INFERRED	location of the list entry being examined	^\s*iVar4\ =\ iVar6;$	+1
+use	BindingTable__InsertUniformArray	iVar11	stageIdx	INFERRED	stage table index	^\s*for\ \(iVar11\ =\ param_4;\ iVar11\ <\ param_5;\ iVar11\ =\ iVar11\ \+\ 1\)\ \{$	+5
+use	BindingTable__InsertUniformArray	iVar11	elementIdx	INFERRED	element index counting up	^\s*iVar11\ =\ 0;$	+1
+use	BindingTable__InsertUniformArray	iVar11	elementIdx	INFERRED	element index counting up	^\s*_sprintf\(acStack_70,"\[%d\]",iVar11\);$	+1
+use	BindingTable__InsertUniformArray	iVar11	elementIdx	INFERRED	element index counting up	^\s*if\ \(iVar11\ ==\ 0\)\ \{$	+1
+use	BindingTable__InsertUniformArray	iVar11	elementIdx	INFERRED	element index counting up	^\s*if\ \(iVar11\ <=\ \(\*\(int\ \*\)\(\(unsigned\ char\ \*\)\&\(local_50\)\ \+\ 0\)\)\)\ \{$	+1
+use	BindingTable__InsertUniformArray	iVar11	elementIdx	INFERRED	element index counting up	^\s*if\ \(iVar11\ <=\ \(\*\(int\ \*\)\(\(unsigned\ char\ \*\)\&\(local_50\)\ \+\ 4\)\)\)\ \{$	+1
+use	BindingTable__InsertUniformArray	iVar11	elementIdx	INFERRED	element index counting up	^\s*iVar11\ =\ iVar11\ \+\ 1;$	+1
+use	BindingTable__InsertUniformArray	iVar11	elementIdx	INFERRED	element index counting up	^\s*\}\ while\ \(iVar11\ <=\ iVar3\);$	+1
+local	ConstructLinker	param_1	linkerArg	INFERRED	integer argument forwarded to the TGenericLinker constructor
+use	UpdateOperations	iVar8	operandIdx	INFERRED	operand index within the chunk	^\s*iVar8\ =\ 0;$	+1
+use	UpdateOperations	iVar8	operandIdx	INFERRED	operand index within the chunk	^\s*\*\(short\ \*\)\(p_Var6\ \+\ iVar8\ \*\ 8\ \+\ 0x22\)\ =$	+2
+use	UpdateOperations	iVar8	operandIdx	INFERRED	operand index within the chunk	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+1
+use	UpdateOperations	iVar8	operandIdx	INFERRED	operand index within the chunk	^\s*\}\ while\ \(iVar8\ <\ \(int\)\(uVar9\ >>\ 0x1d\)\);$	+1
+use	UpdateOperations	iVar8	newWalkIdx	INFERRED	new position in the chunk list walk	^\s*iVar8\ =\ iVar2;$	+1
+use	UpdateOperations	iVar8	newWalkIdx	INFERRED	new position in the chunk list walk	^\s*if\ \(\(iVar2\ !=\ iVar5\)\ \&\&\ \(iVar8\ =\ iVar5,\ iVar2\ <\ iVar5\)\)\ \{$	+1
+use	UpdateOperations	iVar8	newWalkIdx	INFERRED	new position in the chunk list walk	^\s*iVar2\ =\ iVar8;$	+1
+use	TemporaryAllocator__getTemporary	iVar3	slotValue	INFERRED	in-use word of the slot	^\s*iVar3\ =\ \*piVar4;$	+2
+use	TemporaryAllocator__getTemporary	iVar3	slotValue	INFERRED	in-use word of the slot	^\s*iVar3\ =\ \*piVar4;$@2	+1
+use	TemporaryAllocator__getTemporary	iVar3	slotValue	INFERRED	in-use word of the slot	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar9\ \+\ iVar6\);$	+2
+use	TemporaryAllocator__getTemporary	iVar3	slotValue	INFERRED	in-use word of the slot	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar9\ \+\ \*\(int\ \*\)\(this\ \+\ iVar2\)\);$	+1
+use	TemporaryAllocator__getTemporary	iVar3	remaining	INFERRED	copy loop counter	^\s*iVar3\ =\ \*\(int\ \*\)\(this\ \+\ iVar2\ \+\ 100\);$	+1
+use	TemporaryAllocator__getTemporary	iVar3	remaining	INFERRED	copy loop counter	^\s*if\ \(iVar3\ !=\ 0\)\ \{$	+1
+use	TemporaryAllocator__getTemporary	iVar3	remaining	INFERRED	copy loop counter	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
+use	__ZN11ParseSymbolC4ERKS_	uVar11	field28	INFERRED	copied word at +0x28	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x28\);$	+1
+use	__ZN11ParseSymbolC4ERKS_	uVar11	field28	INFERRED	copied word at +0x28	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x28\)\ =\ uVar11;$	+1
+use	__ZN11ParseSymbolC4ERKS_	uVar11	field48	INFERRED	copied word at +0x48	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x48\);$	+1
+use	__ZN11ParseSymbolC4ERKS_	uVar11	field48	INFERRED	copied word at +0x48	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x48\)\ =\ uVar11;$	+1
+use	__ZN11ParseSymbolC4ERKS_	uVar11	field34	INFERRED	copied word at +0x34	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x34\);$	+1
+use	__ZN11ParseSymbolC4ERKS_	uVar11	field34	INFERRED	copied word at +0x34	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x34\)\ =\ uVar11;$	+1
+use	__ZN11ParseSymbolC4ERKS_	uVar11	field54	INFERRED	copied word at +0x54	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x54\);$	+1
+use	__ZN11ParseSymbolC4ERKS_	uVar11	field54	INFERRED	copied word at +0x54	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x54\)\ =\ uVar11;$	+1
+use	__ZN11ParseSymbolC2ERKS_	uVar11	field28	INFERRED	copied word at +0x28	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x28\);$	+1
+use	__ZN11ParseSymbolC2ERKS_	uVar11	field28	INFERRED	copied word at +0x28	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x28\)\ =\ uVar11;$	+1
+use	__ZN11ParseSymbolC2ERKS_	uVar11	field48	INFERRED	copied word at +0x48	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x48\);$	+1
+use	__ZN11ParseSymbolC2ERKS_	uVar11	field48	INFERRED	copied word at +0x48	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x48\)\ =\ uVar11;$	+1
+use	__ZN11ParseSymbolC2ERKS_	uVar11	field34	INFERRED	copied word at +0x34	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x34\);$	+1
+use	__ZN11ParseSymbolC2ERKS_	uVar11	field34	INFERRED	copied word at +0x34	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x34\)\ =\ uVar11;$	+1
+use	__ZN11ParseSymbolC2ERKS_	uVar11	field54	INFERRED	copied word at +0x54	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x54\);$	+1
+use	__ZN11ParseSymbolC2ERKS_	uVar11	field54	INFERRED	copied word at +0x54	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x54\)\ =\ uVar11;$	+1
+use	__ZN11ParseSymbolC1ERKS_	uVar11	field28	INFERRED	copied word at +0x28	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x28\);$	+1
+use	__ZN11ParseSymbolC1ERKS_	uVar11	field28	INFERRED	copied word at +0x28	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x28\)\ =\ uVar11;$	+1
+use	__ZN11ParseSymbolC1ERKS_	uVar11	field48	INFERRED	copied word at +0x48	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x48\);$	+1
+use	__ZN11ParseSymbolC1ERKS_	uVar11	field48	INFERRED	copied word at +0x48	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x48\)\ =\ uVar11;$	+1
+use	__ZN11ParseSymbolC1ERKS_	uVar11	field34	INFERRED	copied word at +0x34	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x34\);$	+1
+use	__ZN11ParseSymbolC1ERKS_	uVar11	field34	INFERRED	copied word at +0x34	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x34\)\ =\ uVar11;$	+1
+use	__ZN11ParseSymbolC1ERKS_	uVar11	field54	INFERRED	copied word at +0x54	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x54\);$	+1
+use	__ZN11ParseSymbolC1ERKS_	uVar11	field54	INFERRED	copied word at +0x54	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x54\)\ =\ uVar11;$	+1
+use	ParseSymbol__operator_	uVar3	field48	INFERRED	copied word at +0x48	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x48\);$	+1
+use	ParseSymbol__operator_	uVar3	field48	INFERRED	copied word at +0x48	^\s*\*\(undefined4\ \*\)\(this\ \+\ 0x48\)\ =\ uVar3;$	+1
+use	ParseSymbol__operator_	uVar3	field54	INFERRED	copied word at +0x54	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x54\);$	+1
+use	ParseSymbol__operator_	uVar3	field54	INFERRED	copied word at +0x54	^\s*\*\(undefined4\ \*\)\(this\ \+\ 0x54\)\ =\ uVar3;$	+1
+use	ParseSymbol__ChangeArrayNameForArrayIndex	pcVar6	srcName	INFERRED	old name (+0x14) being copied	^\s*pcVar6\ =\ \*\(char\ \*\*\)\(param_1\ \+\ 0x14\);$	+2
+use	ParseSymbol__ChangeArrayNameForArrayIndex	pcVar6	srcName	INFERRED	old name (+0x14) being copied	^\s*cVar1\ =\ pcVar6\[iVar3\];$	+1
+use	ParseSymbol__ChangeArrayNameForArrayIndex	pcVar6	charPtr	INFERRED	name character in the hash loop	^\s*pcVar6\ =\ \(char\ \*\)\(iVar4\ \+\ iVar3\);$	+1
+use	ParseSymbol__ChangeArrayNameForArrayIndex	pcVar6	charPtr	INFERRED	name character in the hash loop	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x1c\)\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1c\)\ \+\ \(int\)\*pcVar6;$	+1
+use	__ZN12ParseOperandC2ERKS_	uVar3	field04	INFERRED	copied word at +4	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 4\);$	+1
+use	__ZN12ParseOperandC2ERKS_	uVar3	field04	INFERRED	copied word at +4	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 4\)\ =\ uVar3;$	+1
+use	__ZN12ParseOperandC2ERKS_	uVar3	field28	INFERRED	copied word at +0x28	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x28\);$	+1
+use	__ZN12ParseOperandC2ERKS_	uVar3	field28	INFERRED	copied word at +0x28	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x28\)\ =\ uVar3;$	+1
+use	__ZN12ParseOperandC4ERKS_	uVar3	field04	INFERRED	copied word at +4	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 4\);$	+1
+use	__ZN12ParseOperandC4ERKS_	uVar3	field04	INFERRED	copied word at +4	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 4\)\ =\ uVar3;$	+1
+use	__ZN12ParseOperandC4ERKS_	uVar3	field28	INFERRED	copied word at +0x28	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x28\);$	+1
+use	__ZN12ParseOperandC4ERKS_	uVar3	field28	INFERRED	copied word at +0x28	^\s*\*\(undefined4\ \*\)\(\(int\)this\ \+\ 0x28\)\ =\ uVar3;$	+1
+use	ParseOperand__operator_	uVar2	field04	INFERRED	copied word at +4	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 4\);$	+1
+use	ParseOperand__operator_	uVar2	field04	INFERRED	copied word at +4	^\s*\*\(undefined4\ \*\)\(this\ \+\ 4\)\ =\ uVar2;$	+1
+use	ParseOperand__operator_	uVar2	field28	INFERRED	copied word at +0x28	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x28\);$	+1
+use	ParseOperand__operator_	uVar2	field28	INFERRED	copied word at +0x28	^\s*\*\(undefined4\ \*\)\(this\ \+\ 0x28\)\ =\ uVar2;$	+1
+local	__ZN12ParseOperandD4Ev	this_00	symbol	INFERRED	the operand's ParseSymbol (+0) being released
+use	ParseOperand__GetAsDestVar	uVar1	directCount	INFERRED	direct-index count (operand+0x20)	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x20\);$	+1
+use	ParseOperand__GetAsDestVar	uVar1	directCount	INFERRED	direct-index count (operand+0x20)	^\s*uVar1\ =\ 0;$	+1
+use	ParseOperand__GetAsDestVar	uVar1	directCount	INFERRED	direct-index count (operand+0x20)	^\s*if\ \(uVar5\ ==\ uVar1\)\ \{$	+1
+use	ParseOperand__GetAsDestVar	uVar1	directCount	INFERRED	direct-index count (operand+0x20)	^\s*if\ \(uVar5\ <\ uVar1\)\ \{$	+1
+use	ParseOperand__GetAsDestVar	uVar1	directCount	INFERRED	direct-index count (operand+0x20)	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x20\);$@2	+1
+use	ParseOperand__GetAsDestVar	uVar1	directCount	INFERRED	direct-index count (operand+0x20)	^\s*\}\ while\ \(uVar6\ <\ uVar1\);$	+1
+use	ParseOperand__GetAsDestVar	uVar1	descWord	INFERRED	destination descriptor word 0 being updated	^\s*uVar1\ =\ \*param_1;$	+2
+use	ParseOperand__GetAsDestVar	uVar1	descWord	INFERRED	destination descriptor word 0 being updated	^\s*uVar1\ =\ uVar1\ \|\ 0x4000;$	+2
+use	ParseOperand__GetAsDestVar	uVar1	descWord	INFERRED	destination descriptor word 0 being updated	^\s*uVar1\ =\ uVar1\ \|\ 0x10000;$	+2
+use	ParseOperand__GetAsDestVar	uVar1	descWord	INFERRED	destination descriptor word 0 being updated	^\s*uVar1\ =\ uVar1\ \|\ 0x8000;$	+2
+use	ParseOperand__GetAsDestVar	uVar1	descWord	INFERRED	destination descriptor word 0 being updated	^\s*\*param_1\ =\ uVar1\ \|\ 0x2000;$	+1
+use	ParseOperand__GetAsDestVar	uVar1	descWord	INFERRED	destination descriptor word 0 being updated	^\s*uVar1\ =\ \*param_1;$@2	+1
+use	ParseOperand__GetAsDestVar	uVar1	descWord	INFERRED	destination descriptor word 0 being updated	^\s*uVar1\ =\ \*param_1;$@3	+1
+use	ParseOperand__GetAsDestVar	uVar1	descWord	INFERRED	destination descriptor word 0 being updated	^\s*\*param_1\ =\ iVar2\ <<\ 0x11\ \|\ uVar1\ \&\ 0xfff1ffff;$	+1
+use	ParseOperand__GetAsDestVar	uVar1	newWord	INFERRED	rebuilt descriptor word with the swizzle field	^\s*uVar1\ =\ \(uVar6\ \-\ uVar5\)\ \*\ 0x40\ \&\ 0xc0\ \|\ \*param_1\ \&\ 0xffffff3f\ \|\ 0x4000;$	+1
+use	ParseOperand__GetAsDestVar	uVar1	newWord	INFERRED	rebuilt descriptor word with the swizzle field	^\s*\*param_1\ =\ uVar1;$@4	+1
+use	ParseOperand__GetAsDestVar	uVar1	newWord	INFERRED	rebuilt descriptor word with the swizzle field	^\s*uVar1\ =\ \(uVar6\ \-\ uVar5\)\ \*\ 0x100\ \&\ 0x300\ \|\ \*param_1\ \&\ 0xfffffcff\ \|\ 0x2000;$	+1
+use	ParseOperand__GetAsDestVar	uVar1	newWord	INFERRED	rebuilt descriptor word with the swizzle field	^\s*uVar1\ =\ \(uVar6\ \-\ uVar5\)\ \*\ 0x10\ \&\ 0x30\ \|\ \*param_1\ \&\ 0xffffffcf\ \|\ 0x8000;$	+1
+use	ParseOperand__GetAsDestVar	uVar1	newWord	INFERRED	rebuilt descriptor word with the swizzle field	^\s*uVar1\ =\ \(uVar6\ \-\ uVar5\)\ \*\ 4\ \&\ 0xc\ \|\ \*param_1\ \&\ 0xfffffff3\ \|\ 0x10000;$	+1
+use	ParseOperand__GetAsSourceVar	iVar3	directCount	INFERRED	direct-index count (operand+0x20)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x20\);$	+2
+use	ParseOperand__GetAsSourceVar	iVar3	directCount	INFERRED	direct-index count (operand+0x20)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x20\);$@2	+1
+use	ParseOperand__GetAsSourceVar	iVar3	directCount	INFERRED	direct-index count (operand+0x20)	^\s*iVar9\ =\ iVar3;$	+2
+use	ParseOperand__GetAsSourceVar	iVar3	directCount	INFERRED	direct-index count (operand+0x20)	^\s*uVar2\ =\ GetDirectIndex\(param_2,iVar3\ \-\ iVar9\);$	+1
+use	ParseOperand__GetAsSourceVar	iVar3	directCount	INFERRED	direct-index count (operand+0x20)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x20\);$@3	+1
+use	ParseOperand__GetAsSourceVar	iVar3	classBits	INFERRED	register class code (1 temp, 2 attribute, 3 ...)	^\s*iVar3\ =\ 1;$	+1
+use	ParseOperand__GetAsSourceVar	iVar3	classBits	INFERRED	register class code (1 temp, 2 attribute, 3 ...)	^\s*iVar3\ =\ 2;$	+1
+use	ParseOperand__GetAsSourceVar	iVar3	classBits	INFERRED	register class code (1 temp, 2 attribute, 3 ...)	^\s*iVar3\ =\ 3;$	+1
+use	ParseOperand__GetAsSourceVar	iVar3	classBits	INFERRED	register class code (1 temp, 2 attribute, 3 ...)	^\s*uVar5\ =\ iVar3\ <<\ 0x17\ \|\ uVar5\ \&\ 0xfc7fffff;$	+1
+use	ParseOperand__GetAsSourceVar	uVar2	swizzleCount	INFERRED	swizzle count (operand+0x14)	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x14\);$	+2
+use	ParseOperand__GetAsSourceVar	uVar2	swizzleCount	INFERRED	swizzle count (operand+0x14)	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x14\);$@2	+1
+use	ParseOperand__GetAsSourceVar	uVar2	swizzleCount	INFERRED	swizzle count (operand+0x14)	^\s*\}\ while\ \(uVar8\ <\ uVar2\);$	+1
+use	ParseOperand__GetAsSourceVar	uVar2	swizzleWord	INFERRED	descriptor word with a swizzle field replaced	^\s*uVar2\ =\ ParseOperand__GetSwizzle\(param_2,1\);$	+2
+use	ParseOperand__GetAsSourceVar	uVar2	swizzleWord	INFERRED	descriptor word with a swizzle field replaced	^\s*\*param_1\ =\ uVar2;$	+1
+use	ParseOperand__GetAsSourceVar	uVar2	swizzleWord	INFERRED	descriptor word with a swizzle field replaced	^\s*uVar2\ =\ ParseOperand__GetSwizzle\(param_2,0\);$	+2
+use	ParseOperand__GetAsSourceVar	uVar2	swizzleWord	INFERRED	descriptor word with a swizzle field replaced	^\s*uVar2\ =\ ParseOperand__GetSwizzle\(param_2,2\);$	+2
+use	ParseOperand__GetAsSourceVar	uVar2	swizzleWord	INFERRED	descriptor word with a swizzle field replaced	^\s*uVar2\ =\ ParseOperand__GetSwizzle\(param_2,3\);$	+2
+use	ParseOperand__GetAsSourceVar	uVar2	swizzle0	INFERRED	swizzle field replicated for a scalar source	^\s*uVar2\ =\ \*param_1\ >>\ 0x15\ \&\ 3;$	+2
+use	ParseOperand__GetAsSourceVar	uVar2	directIndex	INFERRED	direct index of the operand	^\s*uVar2\ =\ GetDirectIndex\(param_2,iVar3\ \-\ iVar9\);$	+1
+use	ParseOperand__GetAsSourceVar	uVar2	directIndex	INFERRED	direct index of the operand	^\s*\*param_1\ =\ \(uVar2\ \&\ 3\)\ <<\ 0x15\ \|$	+4
+use	ParseOperand__GetAsSourceVar	uVar2	directIndex	INFERRED	direct index of the operand	^\s*sVar6\ =\ \(short\)uVar2;$	+1
+use	ParseOperand__GetAsSourceVar	uVar2	directIndex	INFERRED	direct index of the operand	^\s*uVar5\ =\ uVar2;$	+1
+use	ParseOperand__GetAsSourceVar	uVar2	flagBits	INFERRED	operand flag bits (operand+0x28 bit 0) positioned for the descriptor	^\s*uVar2\ =\ \(\*\(uint\ \*\)\(param_2\ \+\ 0x28\)\ \&\ 1\)\ <<\ 0x1b;$	+2
+use	ParseOperand__GetAsSourceVar	uVar2	flagBits	INFERRED	operand flag bits (operand+0x28 bit 0) positioned for the descriptor	^\s*\*param_1\ =\ uVar2\ \|\ uVar5\ \|\ uVar8\ \&\ 0x87ffcfff\ \|\ 0x80000000;$	+1
+use	ParseOperand__GetAsSourceVar	uVar5	regOffsetCarry	INFERRED	register offset carried through the direct-index loop	^\s*uVar5\ =\ 0;$	+1
+use	ParseOperand__GetAsSourceVar	uVar5	regOffsetCarry	INFERRED	register offset carried through the direct-index loop	^\s*uVar2\ =\ uVar5;$	+1
+use	ParseOperand__GetAsSourceVar	uVar5	regOffsetCarry	INFERRED	register offset carried through the direct-index loop	^\s*uVar5\ =\ uVar2;$	+1
+use	ParseOperand__GetAsSourceVar	uVar5	descWord	INFERRED	descriptor word 0 being updated	^\s*uVar5\ =\ \*param_1\ \&\ 0xfc7fffff;$	+1
+use	ParseOperand__GetAsSourceVar	uVar5	descWord	INFERRED	descriptor word 0 being updated	^\s*uVar5\ =\ \*param_1;$	+1
+use	ParseOperand__GetAsSourceVar	uVar5	descWord	INFERRED	descriptor word 0 being updated	^\s*uVar5\ =\ \*param_1;$@2	+1
+use	ParseOperand__GetAsSourceVar	uVar5	descWord	INFERRED	descriptor word 0 being updated	^\s*uVar5\ =\ \*param_1;$@3	+1
+use	ParseOperand__GetAsSourceVar	uVar5	descWord	INFERRED	descriptor word 0 being updated	^\s*uVar5\ =\ iVar3\ <<\ 0x17\ \|\ uVar5\ \&\ 0xfc7fffff;$	+1
+use	ParseOperand__GetAsSourceVar	uVar5	descWord	INFERRED	descriptor word 0 being updated	^\s*\*param_1\ =\ uVar5;$	+1
+use	ParseOperand__GetAsSourceVar	uVar5	sizeBits	INFERRED	logical size field	^\s*uVar5\ =\ \(iVar3\ \+\ \-1\)\ \*\ 0x1000\ \&\ 0x3000;$	+2
+use	ParseOperand__GetAsSourceVar	uVar5	sizeBits	INFERRED	logical size field	^\s*\*param_1\ =\ uVar2\ \|\ uVar5\ \|\ uVar8\ \&\ 0xf7ffcfff;$	+1
+use	ParseOperand__GetAsSourceVar	uVar5	sizeBits	INFERRED	logical size field	^\s*\*param_1\ =\ uVar2\ \|\ uVar5\ \|\ uVar8\ \&\ 0x87ffcfff\ \|\ 0x80000000;$	+1
+use	ParseOperand__isWriteable	uVar1	result	INFERRED	1 for writable qualifiers	^\s*uVar1\ =\ 0;$	+1
+use	ParseOperand__isWriteable	uVar1	result	INFERRED	1 for writable qualifiers	^\s*uVar1\ =\ 1;$	+1
+use	ParseOperand__isWriteable	uVar1	result	INFERRED	1 for writable qualifiers	^\s*uVar1\ =\ 0;$@2	+1
+use	ParseOperand__isWriteable	uVar1	result	INFERRED	1 for writable qualifiers	^\s*return\ uVar1;$	+1
+use	ParseOperand__isWriteable	uVar1	qualifier	INFERRED	TType::getQualifier() of the symbol's type	^\s*uVar1\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x24\)\)\(a0\);$	+2
+local	ParseOperand__isWriteable	a0	parseTreeType	INFERRED	the symbol's TType (+0xc)
+use	UpdateOperations	iVar8	walkIdxNext	INFERRED	new position in the chunk list walk	^\s*iVar8\ =\ iVar2;$@2	+1
+use	UpdateOperations	iVar8	walkIdxNext	INFERRED	new position in the chunk list walk	^\s*if\ \(\(iVar2\ !=\ iVar5\)\ \&\&\ \(iVar8\ =\ iVar5,\ iVar2\ <\ iVar5\)\)\ \{$@2	+1
+use	UpdateOperations	iVar8	walkIdxNext	INFERRED	new position in the chunk list walk	^\s*iVar2\ =\ iVar8;$@2	+1
+local	UpdateOperations	param_3	unusedArg3	INFERRED	third argument is not used by the function
+local	BindingTable__InsertUniformArray	param_3	unusedArg3	INFERRED	third argument is not used by the function
+local	_updateExtensionBehavior	local_1c0	firstExtNode	INFERRED	copy of the first node of the extension map (begin iterator) kept in a local and never read
+local	TSymbolTableLevel__clone	a6	headerOrNewRefCount	INFERRED	flow-joined: the new map's header node (also forwarded as stale seventh argument), later the decremented refcount
+local	TSymbolTableLevel__dump	a6	treeEnd	INFERRED	the map's header node (end iterator), also forwarded as stale seventh argument

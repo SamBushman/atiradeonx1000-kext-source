@@ -1,0 +1,105 @@
+use	TIntermLoop__compileNode	uVar4	startLabelLength	INFERRED	_strlen(startLabel) passed to _PPStreamAddLabel	^\s*uVar4\ =\ _strlen\(acStack_f0\);$	+2
+use	TIntermLoop__compileNode	uVar4	startLabelLength	INFERRED	_strlen(startLabel) passed to _PPStreamAddLabel	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,\(int\)uVar18,uVar4,pcVar11,uVar12,a5,0,0\);$	+1
+use	TIntermLoop__compileNode	uVar4	endIfLabelLength	INFERRED	_strlen(endIfLabel) passed to _PPStreamAddLabel	^\s*uVar4\ =\ _strlen\(acStack_d0\);$	+2
+use	TIntermLoop__compileNode	uVar4	bodyLabelLength	INFERRED	_strlen(bodyLabel) passed to _PPStreamAddLabel	^\s*uVar4\ =\ _strlen\(acStack_130\);$	+2
+use	TIntermLoop__compileNode	uVar4	bodyLabelLength	INFERRED	_strlen(bodyLabel) passed to _PPStreamAddLabel	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,\(int\)uVar18,uVar4,pcVar11,uVar12,a5,0,0\);$@2	+1
+use	TIntermLoop__compileNode	uVar4	bodyLabelLength	INFERRED	_strlen(bodyLabel) passed to _PPStreamAddLabel	^\s*uVar4\ =\ _strlen\(acStack_d0\);$@2	+2
+use	TIntermLoop__compileNode	uVar4	bodyLabelLength	INFERRED	_strlen(bodyLabel) passed to _PPStreamAddLabel	^\s*\(this,a1_04,uVar4,pcVar11,uVar12,a5,0x1ac0000,\*\(undefined4\ \*\*\)this\);$	+1
+use	TIntermLoop__compileNode	uVar4	strayZero4	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar4\ =\ 0;$	+1
+use	TIntermLoop__compileNode	uVar4	strayZero4	INFERRED	constant 0 forwarded as a dead register argument	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_00,p_Var10,uVar12,uVar4,a5,0,0\);$	+1
+use	TIntermLoop__compileNode	uVar4	strayZero4	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_60,uVar12,uVar4,a5,uVar13,uVar14\);$	+1
+use	TIntermLoop__compileNode	uVar4	strayZero4	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar4\ =\ 0;$@2	+1
+use	TIntermLoop__compileNode	uVar4	strayZero4	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(this,uVar12,p_Var10,pcVar11,uVar4,a5,\*\(undefined4\ \*\*\)this\);$	+1
+use	TIntermLoop__compileNode	uVar4	strayZero4	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar4\ =\ 0;$@3	+1
+use	TIntermLoop__compileNode	uVar4	strayZero4	INFERRED	constant 0 forwarded as a dead register argument	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_02,p_Var10,uVar12,uVar4,a5,0,0\);$	+1
+use	TIntermLoop__compileNode	uVar4	strayZero4	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_60,uVar12,uVar4,a5,uVar13,uVar14\);$@2	+1
+use	TIntermLoop__compileNode	uVar4	strayZero4	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar4\ =\ 0;$@4	+1
+use	TIntermLoop__compileNode	uVar4	strayZero4	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(this,uVar12,p_Var10,pcVar11,uVar4,a5,\*\(undefined4\ \*\*\)this\);$@2	+1
+use	TIntermLoop__compileNode	pPVar3	operandToFree	INFERRED	ParseOperand to destroy	^\s*pPVar3\ =\ local_60;$	+1
+use	TIntermLoop__compileNode	pPVar3	operandToFree	INFERRED	ParseOperand to destroy	^\s*__ZdlPv\(pPVar3\);$	+1
+use	TIntermLoop__compileNode	pPVar3	operandToFree	INFERRED	ParseOperand to destroy	^\s*pPVar3\ =\ local_5c\[0\];$	+1
+use	TIntermLoop__compileNode	pPVar3	operandToFree	INFERRED	ParseOperand to destroy	^\s*__ZdlPv\(pPVar3\);$@2	+1
+use	TIntermLoop__compileNode	pPVar3	operandToFree	INFERRED	ParseOperand to destroy	^\s*pPVar3\ =\ local_60;$@2	+1
+use	TIntermLoop__compileNode	pPVar3	operandToFree	INFERRED	ParseOperand to destroy	^\s*__ZdlPv\(pPVar3\);$@3	+1
+use	TIntermLoop__compileNode	pPVar3	operandToFree	INFERRED	ParseOperand to destroy	^\s*pPVar3\ =\ local_5c\[0\];$@2	+1
+use	TIntermLoop__compileNode	pPVar3	operandToFree	INFERRED	ParseOperand to destroy	^\s*__ZdlPv\(pPVar3\);$@4	+1
+use	TIntermLoop__compileNode	piVar5	bodyNode	INFERRED	this+8: the loop body node	^\s*piVar5\ =\ \*\(int\ \*\*\)\(this\ \+\ 8\);$	+3
+use	TIntermLoop__compileNode	piVar5	terminalNode	INFERRED	this+0x10: the loop terminal (increment) expression node	^\s*piVar5\ =\ \*\(int\ \*\*\)\(this\ \+\ 0x10\);$	+3
+use	TIntermLoop__compileNode	pTVar6	testType	INFERRED	type of the test expression node (virtual slot 0x3c)	^\s*pTVar6\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0xc\)\ \+\ 0x3c\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0xc\)\);$	+2
+use	TIntermLoop__compileNode	pTVar6	testType	INFERRED	type of the test expression node (virtual slot 0x3c)	^\s*pTVar6\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0xc\)\ \+\ 0x3c\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0xc\)\);$@2	+2
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*pcVar11\ =\ acStack_110;$	+1
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1,pcVar11,iVar17,param_5,a5,0x1a80000\);$	+1
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*pcVar11\ =\ acStack_110;$@2	+1
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,\(int\)uVar18,uVar4,pcVar11,uVar12,a5,0,0\);$	+1
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_60,pcVar11,uVar12,a5\);$	+1
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_5c\[0\],pcVar11,uVar12,a5,uVar13,uVar14\);$	+1
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*pcVar11\ =\ \(char\ \*\)0x0;$	+1
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,\(int\)uVar18,uVar4,pcVar11,uVar12,a5,0,0\);$@2	+1
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_60,pcVar11,uVar12,a5\);$@2	+1
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_5c\[0\],pcVar11,uVar12,a5,uVar13,uVar14\);$@2	+1
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*pcVar11\ =\ \(char\ \*\)0x0;$@2	+1
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*\(this,a1_04,uVar4,pcVar11,uVar12,a5,0x1ac0000,\*\(undefined4\ \*\*\)this\);$	+1
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*pcVar11\ =\ acStack_110;$@3	+1
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*\(this,a1_01,p_Var10,pcVar11,uVar12,a5,\*\(undefined4\ \*\*\)this\);$	+1
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*pcVar11\ =\ acStack_110;$@4	+1
+use	TIntermLoop__compileNode	pcVar11	endLabelArg	INFERRED	pointer to the endLabel text forwarded as the label argument	^\s*\(this,a1_03,p_Var10,pcVar11,uVar12,a5,\*\(undefined4\ \*\*\)this\);$	+1
+use	TIntermLoop__compileNode	pcVar11	endIfLabelArg	INFERRED	pointer to the endIfLabel text forwarded as the label argument	^\s*pcVar11\ =\ acStack_d0;$	+1
+use	TIntermLoop__compileNode	pcVar11	endIfLabelArg	INFERRED	pointer to the endIfLabel text forwarded as the label argument	^\s*\(this,uVar12,p_Var10,pcVar11,uVar4,a5,\*\(undefined4\ \*\*\)this\);$	+1
+use	TIntermLoop__compileNode	pcVar11	endIfLabelArg	INFERRED	pointer to the endIfLabel text forwarded as the label argument	^\s*pcVar11\ =\ acStack_d0;$@2	+1
+use	TIntermLoop__compileNode	pcVar11	endIfLabelArg	INFERRED	pointer to the endIfLabel text forwarded as the label argument	^\s*\(this,uVar12,p_Var10,pcVar11,uVar4,a5,\*\(undefined4\ \*\*\)this\);$@2	+1
+use	TIntermLoop__compileNode	uVar12	carriedR4	INFERRED	r4 carried through and forwarded as a stray register argument	^\s*uVar12\ =\ extraout_r4;$	+1
+use	TIntermLoop__compileNode	uVar12	carriedR4	INFERRED	r4 carried through and forwarded as a stray register argument	^\s*uVar12\ =\ extraout_r4_00;$	+1
+use	TIntermLoop__compileNode	uVar12	carriedR4	INFERRED	r4 carried through and forwarded as a stray register argument	^\s*\(this,uVar12,p_Var10,pcVar11,uVar4,a5,\*\(undefined4\ \*\*\)this\);$	+1
+use	TIntermLoop__compileNode	uVar12	carriedR4	INFERRED	r4 carried through and forwarded as a stray register argument	^\s*uVar12\ =\ extraout_r4_01;$	+1
+use	TIntermLoop__compileNode	uVar12	carriedR4	INFERRED	r4 carried through and forwarded as a stray register argument	^\s*uVar12\ =\ extraout_r4_02;$	+1
+use	TIntermLoop__compileNode	uVar12	carriedR4	INFERRED	r4 carried through and forwarded as a stray register argument	^\s*\(this,uVar12,p_Var10,pcVar11,uVar4,a5,\*\(undefined4\ \*\*\)this\);$@2	+1
+use	TIntermLoop__compileNode	uVar12	endLabelLength	INFERRED	_strlen(endLabel) passed to _PPStreamAddLabel	^\s*uVar12\ =\ _strlen\(acStack_110\);$	+2
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar12\ =\ 0;$	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,\(int\)uVar18,uVar4,pcVar11,uVar12,a5,0,0\);$	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_60,pcVar11,uVar12,a5\);$	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_5c\[0\],pcVar11,uVar12,a5,uVar13,uVar14\);$	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar12\ =\ 0;$@4	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,\(int\)uVar18,uVar4,pcVar11,uVar12,a5,0,0\);$@2	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_60,pcVar11,uVar12,a5\);$@2	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_5c\[0\],pcVar11,uVar12,a5,uVar13,uVar14\);$@2	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar12\ =\ 0;$@7	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(this,a1_04,uVar4,pcVar11,uVar12,a5,0x1ac0000,\*\(undefined4\ \*\*\)this\);$	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar12\ =\ 0;$@2	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_00,p_Var10,uVar12,uVar4,a5,0,0\);$	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_60,uVar12,uVar4,a5,uVar13,uVar14\);$	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar12\ =\ 0;$@3	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(this,a1_01,p_Var10,pcVar11,uVar12,a5,\*\(undefined4\ \*\*\)this\);$	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar12\ =\ 0;$@5	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_02,p_Var10,uVar12,uVar4,a5,0,0\);$	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_60,uVar12,uVar4,a5,uVar13,uVar14\);$@2	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar12\ =\ 0;$@6	+1
+use	TIntermLoop__compileNode	uVar12	strayZero12	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(this,a1_03,p_Var10,pcVar11,uVar12,a5,\*\(undefined4\ \*\*\)this\);$	+1
+use	TIntermLoop__compileNode	uVar13	strayZero13	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar13\ =\ 0;$	+1
+use	TIntermLoop__compileNode	uVar13	strayZero13	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_5c\[0\],pcVar11,uVar12,a5,uVar13,uVar14\);$	+1
+use	TIntermLoop__compileNode	uVar13	strayZero13	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar13\ =\ 0;$@2	+1
+use	TIntermLoop__compileNode	uVar13	strayZero13	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_60,uVar12,uVar4,a5,uVar13,uVar14\);$	+1
+use	TIntermLoop__compileNode	uVar13	strayZero13	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar13\ =\ 0;$@3	+1
+use	TIntermLoop__compileNode	uVar13	strayZero13	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_5c\[0\],pcVar11,uVar12,a5,uVar13,uVar14\);$@2	+1
+use	TIntermLoop__compileNode	uVar13	strayZero13	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar13\ =\ 0;$@4	+1
+use	TIntermLoop__compileNode	uVar13	strayZero13	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_60,uVar12,uVar4,a5,uVar13,uVar14\);$@2	+1
+use	TIntermLoop__compileNode	uVar14	strayZero14	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar14\ =\ 0;$	+1
+use	TIntermLoop__compileNode	uVar14	strayZero14	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_5c\[0\],pcVar11,uVar12,a5,uVar13,uVar14\);$	+1
+use	TIntermLoop__compileNode	uVar14	strayZero14	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar14\ =\ 0;$@2	+1
+use	TIntermLoop__compileNode	uVar14	strayZero14	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_60,uVar12,uVar4,a5,uVar13,uVar14\);$	+1
+use	TIntermLoop__compileNode	uVar14	strayZero14	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar14\ =\ 0;$@3	+1
+use	TIntermLoop__compileNode	uVar14	strayZero14	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_5c\[0\],pcVar11,uVar12,a5,uVar13,uVar14\);$@2	+1
+use	TIntermLoop__compileNode	uVar14	strayZero14	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar14\ =\ 0;$@4	+1
+use	TIntermLoop__compileNode	uVar14	strayZero14	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_60,uVar12,uVar4,a5,uVar13,uVar14\);$@2	+1
+use	TIntermLoop__compileNode	uVar18	tempPair	INFERRED	64-bit pair returned by TPPStreamCompiler__newTemporary (high word = the temporary operand)	^\s*uVar18\ =\ TPPStreamCompiler__newTemporary\(param_2,pTVar6\);$	+2
+use	TIntermLoop__compileNode	uVar18	tempPair	INFERRED	64-bit pair returned by TPPStreamCompiler__newTemporary (high word = the temporary operand)	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,\(int\)uVar18,uVar4,pcVar11,uVar12,a5,0,0\);$	+1
+use	TIntermLoop__compileNode	uVar18	tempPair	INFERRED	64-bit pair returned by TPPStreamCompiler__newTemporary (high word = the temporary operand)	^\s*uVar18\ =\ TPPStreamCompiler__newTemporary\(param_2,pTVar6\);$@2	+2
+use	TIntermLoop__compileNode	uVar18	tempPair	INFERRED	64-bit pair returned by TPPStreamCompiler__newTemporary (high word = the temporary operand)	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,\(int\)uVar18,uVar4,pcVar11,uVar12,a5,0,0\);$@2	+1
+local	TIntermLoop__compileNode	iVar2	scanCursor	INFERRED	cursor walking the operation list from the saved tail to the new last record
+local	TIntermLoop__compileNode	pvVar9	discardedResult	INFERRED	operand returned by compiling a child node, destroyed immediately
+local	TIntermLoop__compileNode	p_Var10	opRecordPtr	INFERRED	pointer to the on-stack operation record (&opHeader)
+local	TIntermLoop__compileNode	param_3	strayArg3	INFERRED	extra register-argument slot (r5) forwarded as a dead stray argument
+local	TIntermLoop__compileNode	param_4	strayArg4	INFERRED	extra register-argument slot (r6) forwarded as a dead stray argument
+local	TIntermLoop__compileNode	param_5	strayArg5	INFERRED	extra register-argument slot (r7) forwarded as a dead stray argument
+local	TIntermLoop__compileNode	param_6	strayArg6	INFERRED	extra register-argument slot (r8) forwarded as a dead stray argument
+use	TIntermLoop__compileNode	piVar5	testNode	INFERRED	this+0xc: the loop test expression node	^\s*if\ \(\(\*\(int\ \*\)\(this\ \+\ 0x14\)\ !=\ 0\)\ \&\&\ \(piVar5\ =\ \*\(int\ \*\*\)\(this\ \+\ 0xc\),\ piVar5\ !=\ \(int\ \*\)0x0\)\)\ \{$	+2
+use	TIntermLoop__compileNode	piVar5	testNode	INFERRED	this+0xc: the loop test expression node	^\s*if\ \(\(iVar8\ ==\ 0\)\ \&\&\ \(piVar5\ =\ \*\(int\ \*\*\)\(this\ \+\ 0xc\),\ piVar5\ !=\ \(int\ \*\)0x0\)\)\ \{$	+2

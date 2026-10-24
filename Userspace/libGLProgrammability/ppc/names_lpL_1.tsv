@@ -1,0 +1,74 @@
+local	TIntermediate__addBinaryMath	pTVar10	leftConstNode	INFERRED	TIntermConstantUnion of the left operand: getAsConstantUnion of intermTyped1, replaced by the constant of its copyConstUnion copy or of the changeAggrToTempConst result
+local	TIntermediate__addBinaryMath	pTVar12	rightConstNode	INFERRED	TIntermConstantUnion of the right operand (copy / temp const), or a copy of the left one when the right is absent; passed to promote and setRight
+local	TIntermediate__addBinaryMath	pTVar13	aggregateToConvert	INFERRED	getAsAggregate (vtable +0x1c) of an operand, passed to changeAggrToTempConst
+local	TIntermediate__addUnaryMath	pTVar12	constantUnionToCopy	INFERRED	getAsConstantUnion (vtable +0x18) of the operand, passed to copyConstUnion
+local	TIntermediate__addUnaryMath	pTVar13	aggregateToConvert	INFERRED	getAsAggregate (vtable +0x1c) of the operand, passed to changeAggrToTempConst
+use	TIntermediate__addComma	pTVar2	operand2Copy	INFERRED	intermTyped2 copied in r5 and forwarded as an outgoing argument of the vtable +0x38 (getType) calls	^\s*pTVar2\ =\ param_3;$	+1
+use	TIntermediate__addComma	pTVar2	operand2Copy	INFERRED	intermTyped2 copied in r5 and forwarded as an outgoing argument of the vtable +0x38 (getType) calls	^\s*\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_3\ \+\ 0x38\)\)\(local_80,param_3,pTVar2,a3,in_r7,in_r8,0xa7b7faf0\);$	+1
+use	TIntermediate__addComma	pTVar2	resultNode	INFERRED	the node returned: intermTyped2 when both are constant, else the growAggregate result	^\s*pTVar2\ =\ param_3;$@2	+1
+use	TIntermediate__addComma	pTVar2	resultNode	INFERRED	the node returned: intermTyped2 when both are constant, else the growAggregate result	^\s*pTVar2\ =\ \(unsigned\ char\ \*\)$	+1
+use	TIntermediate__addComma	pTVar2	resultNode	INFERRED	the node returned: intermTyped2 when both are constant, else the growAggregate result	^\s*piVar3\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)pTVar2\ \+\ 0x1c\)\)\(pTVar2\);$	+1
+use	TIntermediate__addComma	pTVar2	resultNode	INFERRED	the node returned: intermTyped2 when both are constant, else the growAggregate result	^\s*\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)pTVar2\ \+\ 0x34\)\)\(pTVar2,local_50\);$	+1
+use	TIntermediate__addComma	pTVar2	resultNode	INFERRED	the node returned: intermTyped2 when both are constant, else the growAggregate result	^\s*piVar3\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)pTVar2\ \+\ 0x3c\)\)\(pTVar2\);$	+1
+use	TIntermediate__addComma	pTVar2	resultNode	INFERRED	the node returned: intermTyped2 when both are constant, else the growAggregate result	^\s*return\ pTVar2;$	+1
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	pTVar9	convertedTrueOperand	INFERRED	addConversion result: the true operand converted to the false operand's type, stored back into intermTyped2	^\s*pTVar9\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)TIntermediate__addConversion\)\(this,1,a0,param_3\);$	+1
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	pTVar9	convertedTrueOperand	INFERRED	addConversion result: the true operand converted to the false operand's type, stored back into intermTyped2	^\s*param_3\ =\ pTVar9;$	+2
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	pTVar9	resultNode	INFERRED	the node returned: the new TIntermSelection (0x3c bytes), or the true/false operand when the condition is a constant	^\s*pTVar9\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(this_00,0x3c\);$	+1
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	pTVar9	resultNode	INFERRED	the node returned: the new TIntermSelection (0x3c bytes), or the true/false operand when the condition is a constant	^\s*\*\(int\ \*\)\(pTVar9\ \+\ 4\)\ =\ 0;$	+12
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	pTVar9	resultNode	INFERRED	the node returned: the new TIntermSelection (0x3c bytes), or the true/false operand when the condition is a constant	^\s*\*\(uint\ \*\)\(pTVar9\ \+\ 0x2c\)\ =\ uVar2\ \|\ uVar6\ \&\ 0x1ffffff;$	+1
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	pTVar9	resultNode	INFERRED	the node returned: the new TIntermSelection (0x3c bytes), or the true/false operand when the condition is a constant	^\s*\*\(uint\ \*\)\(pTVar9\ \+\ 0x2c\)\ =\ uVar3\ \|\ uVar2\ \|\ uVar6\ \&\ 0x7ffff;$	+1
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	pTVar9	resultNode	INFERRED	the node returned: the new TIntermSelection (0x3c bytes), or the true/false operand when the condition is a constant	^\s*\*\(uint\ \*\)\(pTVar9\ \+\ 0x2c\)\ =\ uVar1\ \|\ uVar3\ \|\ uVar2\ \|\ uVar6\ \&\ 0x7ff;$	+1
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	pTVar9	resultNode	INFERRED	the node returned: the new TIntermSelection (0x3c bytes), or the true/false operand when the condition is a constant	^\s*\*\(uint\ \*\)\(pTVar9\ \+\ 0x2c\)\ =\ uVar4\ \|\ uVar1\ \|\ uVar3\ \|\ uVar2\ \|\ uVar6\ \&\ 0x3ff;$	+1
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	pTVar9	resultNode	INFERRED	the node returned: the new TIntermSelection (0x3c bytes), or the true/false operand when the condition is a constant	^\s*\*\(uint\ \*\)\(pTVar9\ \+\ 0x2c\)\ =$	+1
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	pTVar9	resultNode	INFERRED	the node returned: the new TIntermSelection (0x3c bytes), or the true/false operand when the condition is a constant	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar9\ \+\ 0x30\)\ =\ param_2;$	+4
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	pTVar9	resultNode	INFERRED	the node returned: the new TIntermSelection (0x3c bytes), or the true/false operand when the condition is a constant	^\s*\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)pTVar9\ \+\ 4\)\)\(pTVar9,param_5,a2,a3,iVar8,in_r8,pTVar9\ \+\ 8\);$	+1
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	pTVar9	resultNode	INFERRED	the node returned: the new TIntermSelection (0x3c bytes), or the true/false operand when the condition is a constant	^\s*pTVar9\ =\ param_3;$	+1
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	pTVar9	resultNode	INFERRED	the node returned: the new TIntermSelection (0x3c bytes), or the true/false operand when the condition is a constant	^\s*pTVar9\ =\ a0_00;$	+1
+use	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	pTVar9	resultNode	INFERRED	the node returned: the new TIntermSelection (0x3c bytes), or the true/false operand when the condition is a constant	^\s*return\ pTVar9;$	+1
+local	TIntermediate__addSwizzle	pTVar10	fieldCursor	INFERRED	pointer walking the swizzle field array (vectorFields +4 per element) while the constant nodes are built
+local	TIntermediate__copyConstUnion	pTVar4	resultNode	INFERRED	the node returned: intermConstantUnion after its constant array is replaced by a copy, or null when it has no array
+use	OutputBinary	pTVar5	infoSink	INFERRED	TInfoSink loaded from intermTraverser+0x30, passed to OutputTreeText	^\s*pTVar5\ =\ \*\(unsigned\ char\ \*\*\)\(param_3\ \+\ 0x30\);$	+2
+use	OutputBinary	pTVar5	infoSink	INFERRED	right side of infoSink + 8	^\s*pTVar5\ =\ pTVar5\ \+\ 8;$	+1	rhs	none
+use	OutputBinary	pTVar5	debugSink	INFERRED	infoSink + 8: the TInfoSink debug TInfoSinkBase (OutputTreeText appends to infoSink+8)	^\s*pTVar5\ =\ pTVar5\ \+\ 8;$	+1	lhs	none
+use	OutputBinary	pTVar5	debugSink	INFERRED	TInfoSinkBase every append of the tree line goes to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pTVar5,pcVar4\);$	+2
+use	OutputBinary	pTVar5	debugSink	INFERRED	TInfoSinkBase every append of the tree line goes to	^\s*\(pTVar5,\(unsigned\ char\ \*\)\&local_30\);$	+2
+use	OutputBinary	pTVar5	debugSink	INFERRED	TInfoSinkBase every append of the tree line goes to	^\s*__ZN13TInfoSinkBase6appendEPKc\(pTVar5,"\\n"\);$	+1
+local	OutputAggregate	pTVar4	infoSink	INFERRED	TInfoSink loaded from intermTraverser+0x30; appends go to infoSink+8
+local	OutputAggregate	this	debugSink	INFERRED	infoSink + 8: the debug TInfoSinkBase receiving the tree line
+local	OutputConstantUnion	pppuVar8	appendText	INFERRED	text appended to the sink: the sprintf buffer or a literal
+local	OutputConstantUnion	pTVar10	lineSink	INFERRED	sink the line's trailing newline is appended to: the debug sink, or the info sink after an error
+local	OutputConstantUnion	this	infoSink	INFERRED	TInfoSink loaded from intermTraverser+0x30
+local	ParseSymbol	pppuVar9	messageText	INFERRED	message text appended to the info sink: the sprintf buffer or a type string
+use	TParseContext__lValueErrorCheck	pTVar5	intermTypedCopy	INFERRED	intermTyped copied in r6 and forwarded unchanged as an outgoing call argument	^\s*pTVar5\ =\ param_4;$	+1
+use	TParseContext__lValueErrorCheck	pTVar5	intermTypedCopy	INFERRED	intermTyped copied in r6 and forwarded unchanged as an outgoing call argument	^\s*uVar7\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_4\ \+\ 0x44\)\)\(param_4,a1,pcVar8,pTVar5,param_5,param_6,param_7\);$	+1
+use	TParseContext__lValueErrorCheck	pTVar5	intermTypedCopy	INFERRED	intermTyped copied in r6 and forwarded unchanged as an outgoing call argument	^\s*\(param_4,a1_00,pcVar8,pTVar5,param_5,param_6,param_7\);$	+1
+use	TParseContext__lValueErrorCheck	pTVar5	leftOperand	INFERRED	left child (vtable +0x68 getLeft) of the binary node, checked recursively	^\s*pTVar5\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x68\)\)\(piVar4\);$	+2
+use	TParseContext__lValueErrorCheck	pTVar5	leftOperand	INFERRED	left child (vtable +0x68 getLeft) of the binary node, checked recursively	^\s*pTVar5\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x68\)\)\(piVar4\);$@2	+2
+local	TParseContext__constructorErrorCheck	pTVar12	scratchR5	INFERRED	r5 forwarded as an outgoing argument: intermNode at entry, the allocator argument pointer after the struct name is built (the two defs reach the same forwarded uses)
+local	TParseContext__constructorErrorCheck	pTVar14	functionCopy	INFERRED	function copied in r6 and forwarded unchanged as an outgoing call argument
+local	TParseContext__constructorErrorCheck	pTVar20	structFieldList	INFERRED	function+0x24: the TTypeList of the struct being constructed
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	pTVar7	poolAllocator	INFERRED	result of GetGlobalPoolAllocator, receiver of TPoolAllocator::allocate
+local	TParseContext__nonInitErrorCheck	pTVar10	poolAllocator	INFERRED	result of GetGlobalPoolAllocator, receiver of TPoolAllocator::allocate
+local	TParseContext__extensionErrorCheck	pTVar8	behaviorMap	INFERRED	this + 0x30: the extension behavior map (std::map<TString,TBehavior>) that insert_unique is called on
+local	TParseContext__addConstructor	pTVar3	resultNode	INFERRED	the node returned: constructBuiltIn / constructStruct / removeChildNode / setAggregateOperator result
+use	TParseContext__addConstructor	pTVar6	firstChildAggregate	INFERRED	getAsAggregate (vtable +0x1c) of the first child, passed to removeChildNode	^\s*pTVar6\ =\ \(unsigned\ char\ \*\)$	+1
+use	TParseContext__addConstructor	pTVar6	firstChildAggregate	INFERRED	getAsAggregate (vtable +0x1c) of the first child, passed to removeChildNode	^\s*\(\*\(void\ \*\*\)this,pTVar3,param_3,pTVar6\);$	+1
+use	TParseContext__addConstructor	pTVar6	builtInAggregate	INFERRED	getAsAggregate (vtable +0x1c) of builtInNode, passed to removeChildNode	^\s*pTVar6\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)a0_00\ \+\ 0x1c\)\)\(a0_00\);$	+1
+use	TParseContext__addConstructor	pTVar6	builtInAggregate	INFERRED	getAsAggregate (vtable +0x1c) of builtInNode, passed to removeChildNode	^\s*\(\*\(void\ \*\*\)this,pTVar7,param_3,\&local_3c,\(unsigned\ char\ \*\)\&local_38,pTVar6$	+1
+local	TParseContext__addConstructor	pTVar7	argSequence	INFERRED	getSequence (vtable +0x64) of intermAggregate: the vector of constructor arguments
+local	TParseContext__constructBuiltIn	pTVar3	constructedNode	INFERRED	the node being built and returned: the addUnaryMath result, wrapped by setAggregateOperator
+local	TParseContext__constructStruct	pTVar3	intermTyped	INFERRED	getAsTyped (vtable +0x14) of intermNode, passed to setAggregateOperator
+local	TParseContext__addConstVectorNode	pTVar7	poolAllocator	INFERRED	result of GetGlobalPoolAllocator, receiver of TPoolAllocator::allocate
+use	TParseContext__addConstVectorNode	pTVar9	intermTypedCopy	INFERRED	intermTyped copied and forwarded as an outgoing call argument	^\s*pTVar9\ =\ param_3;$	+1
+use	TParseContext__addConstVectorNode	pTVar9	intermTypedCopy	INFERRED	intermTyped copied and forwarded as an outgoing call argument	^\s*\(\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar5\ \+\ 4\),a1_00,pTVar9,iVar11,param_5,$	+1
+use	TParseContext__addConstVectorNode	pTVar9	constantNode	INFERRED	addConstantUnion result, returned	^\s*pTVar9\ =\ \(unsigned\ char\ \*\)$	+1
+use	TParseContext__addConstVectorNode	pTVar9	constantNode	INFERRED	addConstantUnion result, returned	^\s*return\ pTVar9;$	+1
+local	TParseContext__addConstStruct	pTVar2	intermConstantUnion	INFERRED	getAsConstantUnion (vtable +0x18) of intermTyped
+local	_ShInitialize	pTVar4	savedPoolAllocator	INFERRED	the previous global pool allocator, restored by SetGlobalPoolAllocatorPtr
+local	_ShInitialize	pTVar5	builtInResources	INFERRED	result of GetResources: the TBuiltInResource passed to generateBuiltInSymbolTable
+local	_ShInitialize	this	perProcessAllocator	INFERRED	the new TPoolAllocator (operator_new 0x34) stored in _PerProcessGPA
+local	_ShDestruct	pTVar2	compilerToDelete	INFERRED	handle->getAsCompiler (vtable +8) passed to DeleteCompiler
+local	_ShDestruct	pTVar3	linkerToDelete	INFERRED	handle->getAsLinker (vtable +0xc) passed to DeleteLinker
+local	_ShFinalize	pTVar1	perProcessAllocator	INFERRED	_PerProcessGPA, kept for the delete after its destructor
+local	_ShCompile	pTVar7	poolAllocator	INFERRED	result of GetGlobalPoolAllocator, receiver of push / allocate / pop
+local	yyparse	ppTVar24	destroyAllocArg	INFERRED	pointer to a destroyAllocN slot: the allocator argument of the _Rep::_M_destroy call

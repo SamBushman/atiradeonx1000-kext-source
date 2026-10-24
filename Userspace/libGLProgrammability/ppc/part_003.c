@@ -2874,10 +2874,10 @@ int TIntermediate__addBinaryMath(this, op, intermTyped1, intermTyped2, line, sym
   int *newBinaryNode;
   int promoteResult;
   int rightConstantUnion;
-  unsigned char * pTVar10;
+  unsigned char * leftConstNode;
   int *leftConstCopy;
-  unsigned char * pTVar12;
-  unsigned char * pTVar13;
+  unsigned char * rightConstNode;
+  unsigned char * aggregateToConvert;
   unsigned char * promoteReceiver;
   unsigned char * promoteOperand;
   undefined4 intermediateField0;
@@ -3086,17 +3086,17 @@ LAB_97b8d098:
   }
   leftConstantUnion = (**(code **)(*intermTyped1 + 0x18))(intermTyped1);
   rightConstantUnion = (**(code **)(*rightOperand + 0x18))(rightOperand);
-  pTVar10 = (unsigned char *)0x0;
+  leftConstNode = (unsigned char *)0x0;
   if (leftConstantUnion != 0) {
-    pTVar10 = (unsigned char *)(**(code **)(*intermTyped1 + 0x18))(intermTyped1);
-    leftConstCopy = (int *)TIntermediate__copyConstUnion(this,pTVar10);
-    pTVar10 = (unsigned char *)(**(code **)(*leftConstCopy + 0x18))(leftConstCopy);
+    leftConstNode = (unsigned char *)(**(code **)(*intermTyped1 + 0x18))(intermTyped1);
+    leftConstCopy = (int *)TIntermediate__copyConstUnion(this,leftConstNode);
+    leftConstNode = (unsigned char *)(**(code **)(*leftConstCopy + 0x18))(leftConstCopy);
   }
-  pTVar12 = (unsigned char *)0x0;
+  rightConstNode = (unsigned char *)0x0;
   if (rightConstantUnion != 0) {
-    pTVar12 = (unsigned char *)(**(code **)(*rightOperand + 0x18))(rightOperand);
-    rightConstCopy = (int *)TIntermediate__copyConstUnion(this,pTVar12);
-    pTVar12 = (unsigned char *)(**(code **)(*rightConstCopy + 0x18))(rightConstCopy);
+    rightConstNode = (unsigned char *)(**(code **)(*rightOperand + 0x18))(rightOperand);
+    rightConstCopy = (int *)TIntermediate__copyConstUnion(this,rightConstNode);
+    rightConstNode = (unsigned char *)(**(code **)(*rightConstCopy + 0x18))(rightConstCopy);
   }
   bothOperandsConst = false;
   (**(code **)(*rightOperand + 0x38))(&stackType,rightOperand);
@@ -3109,57 +3109,57 @@ LAB_97b8d098:
   if (bothOperandsConst) {
     rightAggregate = (**(code **)(*rightOperand + 0x1c))(rightOperand);
     if (rightAggregate != 0) {
-      pTVar13 = (unsigned char *)(**(code **)(*rightOperand + 0x1c))(rightOperand);
-      pTVar12 = (unsigned char *)TIntermediate__changeAggrToTempConst(this,pTVar13,symbolTable,line);
-      if (*(int *)(pTVar12 + 0x30) == 0) {
+      aggregateToConvert = (unsigned char *)(**(code **)(*rightOperand + 0x1c))(rightOperand);
+      rightConstNode = (unsigned char *)TIntermediate__changeAggrToTempConst(this,aggregateToConvert,symbolTable,line);
+      if (*(int *)(rightConstNode + 0x30) == 0) {
         return (int *)0x0;
       }
     }
     leftAggregate = (**(code **)(*intermTyped1 + 0x1c))(intermTyped1);
     if (leftAggregate != 0) {
-      pTVar13 = (unsigned char *)(**(code **)(*intermTyped1 + 0x1c))(intermTyped1);
-      pTVar10 = (unsigned char *)TIntermediate__changeAggrToTempConst(this,pTVar13,symbolTable,line);
-      if (*(int *)(pTVar10 + 0x30) == 0) {
+      aggregateToConvert = (unsigned char *)(**(code **)(*intermTyped1 + 0x1c))(intermTyped1);
+      leftConstNode = (unsigned char *)TIntermediate__changeAggrToTempConst(this,aggregateToConvert,symbolTable,line);
+      if (*(int *)(leftConstNode + 0x30) == 0) {
         return (int *)0x0;
       }
     }
   }
-  if (pTVar10 == (unsigned char *)0x0) {
-    if (pTVar12 == (unsigned char *)0x0) {
+  if (leftConstNode == (unsigned char *)0x0) {
+    if (rightConstNode == (unsigned char *)0x0) {
       return newBinaryNode;
     }
   }
   else {
-    if (pTVar12 == (unsigned char *)0x0) {
+    if (rightConstNode == (unsigned char *)0x0) {
       nodeVtable = *newBinaryNode;
-      pTVar12 = (unsigned char *)TIntermediate__copyConstUnion(this,pTVar10);
+      rightConstNode = (unsigned char *)TIntermediate__copyConstUnion(this,leftConstNode);
       setOperandFn = *(code **)(nodeVtable + 0x60);
       goto LAB_97b8d618;
     }
-    constantSize = (**(code **)(*(int *)pTVar10 + 0x4c))(pTVar10);
-    if ((constantSize == 1) && (constantSize = (**(code **)(*(int *)pTVar12 + 0x4c))(pTVar12), 1 < constantSize)) {
+    constantSize = (**(code **)(*(int *)leftConstNode + 0x4c))(leftConstNode);
+    if ((constantSize == 1) && (constantSize = (**(code **)(*(int *)rightConstNode + 0x4c))(rightConstNode), 1 < constantSize)) {
       intermediateField0 = *(undefined4 *)this;
-      foldFn = *(code **)(*(int *)pTVar12 + 0x5c);
+      foldFn = *(code **)(*(int *)rightConstNode + 0x5c);
       promoteSwapFlag = 0;
-      promoteReceiver = pTVar12;
-      promoteOperand = pTVar10;
+      promoteReceiver = rightConstNode;
+      promoteOperand = leftConstNode;
     }
     else {
       intermediateField0 = *(undefined4 *)this;
-      foldFn = *(code **)(*(int *)pTVar10 + 0x5c);
+      foldFn = *(code **)(*(int *)leftConstNode + 0x5c);
       promoteSwapFlag = 1;
-      promoteReceiver = pTVar10;
-      promoteOperand = pTVar12;
+      promoteReceiver = leftConstNode;
+      promoteOperand = rightConstNode;
     }
     foldResult = (int *)(*foldFn)(promoteReceiver,newBinaryNode[0xc],promoteOperand,intermediateField0,promoteSwapFlag);
     if (foldResult != (int *)0x0) {
       return foldResult;
     }
-    (**(code **)(*newBinaryNode + 0x60))(newBinaryNode,pTVar10);
+    (**(code **)(*newBinaryNode + 0x60))(newBinaryNode,leftConstNode);
   }
   setOperandFn = *(code **)(*newBinaryNode + 100);
 LAB_97b8d618:
-  (*setOperandFn)(newBinaryNode,pTVar12);
+  (*setOperandFn)(newBinaryNode,rightConstNode);
   return newBinaryNode;
 }
 
@@ -3325,8 +3325,8 @@ int TIntermediate__addUnaryMath(this, op, intermNode, sourceLoc, symbolTable, sc
   uint isMatrix;
   uint isArray;
   int targetBasicType;
-  unsigned char * pTVar12;
-  unsigned char * pTVar13;
+  unsigned char * constantUnionToCopy;
+  unsigned char * aggregateToConvert;
   int *constantOperand;
   unsigned char * poolAllocator;
   int *newUnaryNode;
@@ -3512,16 +3512,16 @@ LAB_97b8decc:
   if (2 < op - 0x66U) {
     childConstantUnion = (**(code **)(*operandNode + 0x18))(operandNode);
     if (childConstantUnion != 0) {
-      pTVar12 = (unsigned char *)(**(code **)(*operandNode + 0x18))(operandNode);
-      operandNode = (int *)TIntermediate__copyConstUnion(this,pTVar12);
+      constantUnionToCopy = (unsigned char *)(**(code **)(*operandNode + 0x18))(operandNode);
+      operandNode = (int *)TIntermediate__copyConstUnion(this,constantUnionToCopy);
     }
     childAggregate = (**(code **)(*operandNode + 0x1c))(operandNode);
     if (childAggregate != 0) {
       (**(code **)(*operandNode + 0x38))(&stackType,operandNode);
       stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
       if (stackTypeBits >> 0x19 == 2) {
-        pTVar13 = (unsigned char *)(**(code **)(*operandNode + 0x1c))(operandNode);
-        operandNode = (int *)TIntermediate__changeAggrToTempConst(this,pTVar13,symbolTable,sourceLoc);
+        aggregateToConvert = (unsigned char *)(**(code **)(*operandNode + 0x1c))(operandNode);
+        operandNode = (int *)TIntermediate__changeAggrToTempConst(this,aggregateToConvert,symbolTable,sourceLoc);
         constantUnionNode = (**(code **)(*operandNode + 0x18))(operandNode);
         if (*(int *)(constantUnionNode + 0x30) == 0) {
           return (int *)0x0;
@@ -4461,9 +4461,10 @@ int TIntermediate__addComma(this, intermTyped1, intermTyped2, line)
   unsigned char * intermTyped2;
   int line;
 {
+  unsigned char *resultNode;
   int *nodeType;
   bool bothConst;
-  unsigned char * pTVar2;
+  unsigned char *operand2Copy;
   int *aggregate;
   int lineCopy;
   undefined4 scratchR7;
@@ -4475,28 +4476,28 @@ int TIntermediate__addComma(this, intermTyped1, intermTyped2, line)
   undefined **typeTemp3 [13];
   
   bothConst = false;
-  pTVar2 = intermTyped2;
+  operand2Copy = intermTyped2;
   lineCopy = line;
   (**(code **)(*(int *)intermTyped1 + 0x38))(typeTemp1,intermTyped1,intermTyped2,line);
   if (typeTemp1Bits >> 0x19 == 2) {
-    (**(code **)(*(int *)intermTyped2 + 0x38))(typeTemp2,intermTyped2,pTVar2,lineCopy,scratchR7,scratchR8,0xa7b7faf0);
+    (**(code **)(*(int *)intermTyped2 + 0x38))(typeTemp2,intermTyped2,operand2Copy,lineCopy,scratchR7,scratchR8,0xa7b7faf0);
     bothConst = typeTemp2Bits >> 0x19 == 2;
     typeTemp2[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   }
   typeTemp1[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  pTVar2 = intermTyped2;
+  resultNode = intermTyped2;
   if (!bothConst) {
-    pTVar2 = (unsigned char *)
+    resultNode = (unsigned char *)
              ((int (*)())TIntermediate__growAggregate)(this,(unsigned char *)intermTyped1,(unsigned char *)intermTyped2,line);
-    aggregate = (int *)(**(code **)(*(int *)pTVar2 + 0x1c))(pTVar2);
+    aggregate = (int *)(**(code **)(*(int *)resultNode + 0x1c))(resultNode);
     (**(code **)(*aggregate + 0x60))(aggregate,0x25);
     (**(code **)(*(int *)intermTyped2 + 0x38))(typeTemp3,intermTyped2);
-    (**(code **)(*(int *)pTVar2 + 0x34))(pTVar2,typeTemp3);
+    (**(code **)(*(int *)resultNode + 0x34))(resultNode,typeTemp3);
     typeTemp3[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-    nodeType = (int *)(**(code **)(*(int *)pTVar2 + 0x3c))(pTVar2);
+    nodeType = (int *)(**(code **)(*(int *)resultNode + 0x3c))(resultNode);
     (**(code **)(*nodeType + 0x28))(nodeType,0);
   }
-  return pTVar2;
+  return resultNode;
 }
 
 /* __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i @ 0x97b8fc3c (628 bytes) */
@@ -4507,6 +4508,7 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1,
   unsigned char * intermTyped3;
   int line;
 {
+  unsigned char *resultNode;
   int condConstUnion;
   uint typeSizeBits;
   uint typeQualifierBits;
@@ -4517,7 +4519,7 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1,
   int constantUnionTest;
   int lineCopy;
   unsigned char * poolAllocator;
-  unsigned char * pTVar9;
+  unsigned char *convertedTrueOperand;
   undefined4 staleR4;
   undefined ***conversionType;
   undefined ***stackTypePtr;
@@ -4547,13 +4549,13 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1,
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   if (convertedOperand3 == (unsigned char *)0x0) {
     (**(code **)(*(int *)intermTyped3 + 0x38))(stackTypePtr,intermTyped3);
-    pTVar9 = (unsigned char *)((int (*)())TIntermediate__addConversion)(this,1,stackTypePtr,intermTyped2);
+    convertedTrueOperand = (unsigned char *)((int (*)())TIntermediate__addConversion)(this,1,stackTypePtr,intermTyped2);
     staleR4 = 0;
     conversionType = stackTypePtr;
     conversionOperand = intermTyped2;
     convertedOperand3 = intermTyped3;
-    intermTyped2 = pTVar9;
-    if (pTVar9 == (unsigned char *)0x0) {
+    intermTyped2 = convertedTrueOperand;
+    if (convertedTrueOperand == (unsigned char *)0x0) {
       return (unsigned char *)0x0;
     }
   }
@@ -4562,46 +4564,46 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1,
   if (((constantUnionTest == 0) || (constantUnionTest = (**(code **)(*(int *)intermTyped2 + 0x18))(intermTyped2), constantUnionTest == 0)) ||
      (constantUnionTest = (**(code **)(*(int *)convertedOperand3 + 0x18))(convertedOperand3), constantUnionTest == 0)) {
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar9 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x3c);
+    resultNode = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x3c);
     (**(code **)(*(int *)intermTyped2 + 0x38))(&stackType,intermTyped2);
-    *(int *)(pTVar9 + 4) = 0;
-    *(undefined ***)pTVar9 = &PTR_getLine_a7b7cf90;
-    *(int *)(pTVar9 + 0xc) = stackTypeArraySize;
-    *(int *)(pTVar9 + 0x10) = stackTypeStructure;
-    *(int *)(pTVar9 + 0x14) = stackTypeFieldName;
-    *(int *)(pTVar9 + 0x18) = stackTypeTypeName;
-    *(int *)(pTVar9 + 0x1c) = stackTypeWord14;
-    *(int *)(pTVar9 + 0x20) = stackTypeStructureSize;
-    *(undefined ***)(pTVar9 + 8) = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-    *(int *)(pTVar9 + 0x24) = stackTypeWord1c;
-    *(int *)(pTVar9 + 0x28) = stackTypeWord20;
-    oldTypeBits = *(uint *)(pTVar9 + 0x2c);
+    *(int *)(resultNode + 4) = 0;
+    *(undefined ***)resultNode = &PTR_getLine_a7b7cf90;
+    *(int *)(resultNode + 0xc) = stackTypeArraySize;
+    *(int *)(resultNode + 0x10) = stackTypeStructure;
+    *(int *)(resultNode + 0x14) = stackTypeFieldName;
+    *(int *)(resultNode + 0x18) = stackTypeTypeName;
+    *(int *)(resultNode + 0x1c) = stackTypeWord14;
+    *(int *)(resultNode + 0x20) = stackTypeStructureSize;
+    *(undefined ***)(resultNode + 8) = &PTR___ZN5TTypeD1Ev_a7b7cff8;
+    *(int *)(resultNode + 0x24) = stackTypeWord1c;
+    *(int *)(resultNode + 0x28) = stackTypeWord20;
+    oldTypeBits = *(uint *)(resultNode + 0x2c);
     typeQualifierBits = stackTypeBits & 0xfe000000;
-    *(uint *)(pTVar9 + 0x2c) = typeQualifierBits | oldTypeBits & 0x1ffffff;
+    *(uint *)(resultNode + 0x2c) = typeQualifierBits | oldTypeBits & 0x1ffffff;
     typeBasicTypeBits = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
-    *(uint *)(pTVar9 + 0x2c) = typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ffff;
+    *(uint *)(resultNode + 0x2c) = typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ffff;
     typeSizeBits = stackTypeBits & 0x7f800;
-    *(uint *)(pTVar9 + 0x2c) = typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ff;
+    *(uint *)(resultNode + 0x2c) = typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ff;
     typeMatrixBit = (stackTypeBits >> 10 & 1) << 10;
-    *(uint *)(pTVar9 + 0x2c) = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
+    *(uint *)(resultNode + 0x2c) = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
     intermSelectionVtable = PTR_vtable_a7b7c0cc;
-    *(uint *)(pTVar9 + 0x2c) =
+    *(uint *)(resultNode + 0x2c) =
          (stackTypeBits >> 9 & 1) << 9 | typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x1ff;
-    *(unsigned char **)(pTVar9 + 0x30) = intermTyped1;
-    *(undefined **)pTVar9 = intermSelectionVtable + 8;
-    *(unsigned char **)(pTVar9 + 0x34) = intermTyped2;
-    *(unsigned char **)(pTVar9 + 0x38) = convertedOperand3;
+    *(unsigned char **)(resultNode + 0x30) = intermTyped1;
+    *(undefined **)resultNode = intermSelectionVtable + 8;
+    *(unsigned char **)(resultNode + 0x34) = intermTyped2;
+    *(unsigned char **)(resultNode + 0x38) = convertedOperand3;
     stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-    (**(code **)(*(int *)pTVar9 + 4))(pTVar9,line,conversionType,conversionOperand,lineCopy,scratchR8,pTVar9 + 8);
+    (**(code **)(*(int *)resultNode + 4))(resultNode,line,conversionType,conversionOperand,lineCopy,scratchR8,resultNode + 8);
   }
   else {
     condConstUnion = (**(code **)(*(int *)intermTyped1 + 0x18))(intermTyped1);
-    pTVar9 = intermTyped2;
+    resultNode = intermTyped2;
     if (**(int **)(condConstUnion + 0x30) == 0) {
-      pTVar9 = convertedOperand3;
+      resultNode = convertedOperand3;
     }
   }
-  return pTVar9;
+  return resultNode;
 }
 
 /* TIntermediate__addConstantUnion @ 0x97b8feb0 (300 bytes) */
@@ -4689,7 +4691,7 @@ int TIntermediate__addSwizzle(this, vectorFields, line)
   undefined4 *sequenceFinish;
   code *setLineFn;
   int emptyStringRep;
-  unsigned char * pTVar10;
+  unsigned char * fieldCursor;
   char reservation;
   byte cr0Reg;
   undefined **stackType;
@@ -4767,13 +4769,13 @@ int TIntermediate__addSwizzle(this, vectorFields, line)
   (*setLineFn)(newAggregateNode,line);
   sequence = (unsigned char *)(**(code **)(*newAggregateNode + 100))(newAggregateNode);
   if (0 < *(int *)(vectorFields + 0x10)) {
-    pTVar10 = vectorFields;
+    fieldCursor = vectorFields;
     do {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       constUnionValue = (unsigned char *)TPoolAllocator__allocate(poolAllocator,4);
-      *(undefined4 *)constUnionValue = *(undefined4 *)pTVar10;
+      *(undefined4 *)constUnionValue = *(undefined4 *)fieldCursor;
       stackTypeBits = stackTypeBits & 0x1ff | 0x4100800;
-      pTVar10 = pTVar10 + 4;
+      fieldCursor = fieldCursor + 4;
       stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
       stackTypeArraySize = 0;
       stackTypeStructure = 0;

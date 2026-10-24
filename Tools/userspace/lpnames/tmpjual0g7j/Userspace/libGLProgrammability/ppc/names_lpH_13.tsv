@@ -1,0 +1,92 @@
+use	ConstantAllocationList__getConstantUsage	iVar1	entryId	INFERRED	constant id (+0) of the list entry being compared	^\s*iVar1\ =\ \*piVar3;$	+1
+use	ConstantAllocationList__getConstantUsage	iVar1	entryId	INFERRED	constant id (+0) of the list entry being compared	^\s*if\ \(param_2\ ==\ iVar1\)\ break;$	+1
+use	ConstantAllocationList__getConstantUsage	iVar1	wordsLeft	INFERRED	down-counter over the 4 value words copied out	^\s*iVar1\ =\ 4;$	+1
+use	ConstantAllocationList__getConstantUsage	iVar1	wordsLeft	INFERRED	down-counter over the 4 value words copied out	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+2
+use	ConstantAllocationList__getConstantUsage	piVar3	entryCursor	INFERRED	cursor over the 0x18-byte list entries	^\s*piVar3\ =\ \*\(int\ \*\*\)this;$	+1
+use	ConstantAllocationList__getConstantUsage	piVar3	entryCursor	INFERRED	cursor over the 0x18-byte list entries	^\s*iVar1\ =\ \*piVar3;$	+2
+use	ConstantAllocationList__getConstantUsage	uVar4	found	INFERRED	1 when the constant was found and its 4 value words copied	^\s*uVar4\ =\ 0;$	+1
+use	ConstantAllocationList__getConstantUsage	uVar4	found	INFERRED	1 when the constant was found and its 4 value words copied	^\s*uVar4\ =\ 1;$	+1
+use	ConstantAllocationList__getConstantUsage	uVar4	found	INFERRED	1 when the constant was found and its 4 value words copied	^\s*return\ uVar4;$	+1
+use	ConstantAllocationList__getConstantUsage	iVar5	entryCount	INFERRED	this+4: number of entries	^\s*iVar5\ =\ \*\(int\ \*\)\(this\ \+\ 4\);$	+1
+use	ConstantAllocationList__getConstantUsage	iVar5	entryCount	INFERRED	this+4: number of entries	^\s*if\ \(0\ <\ iVar5\)\ \{$	+1
+use	ConstantAllocationList__getConstantUsage	iVar5	entryCount	INFERRED	this+4: number of entries	^\s*\}\ while\ \(iVar2\ <\ iVar5\);$	+1
+use	ConstantAllocationList__getConstantUsage	iVar5	entryCount	INFERRED	this+4: number of entries	^\s*if\ \(iVar2\ <\ iVar5\)\ \{$	+1
+use	ConstantAllocationList__getConstantUsage	iVar5	byteOffset	INFERRED	byte offset of the value word being copied	^\s*iVar5\ =\ 0;$	+1
+use	ConstantAllocationList__getConstantUsage	iVar5	byteOffset	INFERRED	byte offset of the value word being copied	^\s*\*\(undefined4\ \*\)\(param_3\ \+\ iVar5\)\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ iVar2\ \*\ 0x18\ \+\ \*\(int\ \*\)this\ \+\ 4\);$	+2
+local	ConstantAllocationList__getConstantUsage	param_2	constantId	INFERRED	constant id looked up in the list
+local	ConstantAllocationList__getConstantUsage	param_3	outValues	INFERRED	receives the 4 value words of the entry
+local	ConstantAllocationList__getConstantUsage	param_4	outUsage	INFERRED	receives the usage mask (ushort at entry+0x14)
+use	ConstantAllocationList__updateConstant	iVar2	entryId	INFERRED	constant id (+0) of the list entry being compared	^\s*iVar2\ =\ \*piVar4;$	+1
+use	ConstantAllocationList__updateConstant	iVar2	entryId	INFERRED	constant id (+0) of the list entry being compared	^\s*if\ \(param_2\ ==\ iVar2\)\ break;$	+1
+use	ConstantAllocationList__updateConstant	iVar1	byteOffset	INFERRED	byte offset of the value word being stored	^\s*iVar1\ =\ iVar2\ \*\ 4;$	+1
+use	ConstantAllocationList__updateConstant	iVar1	byteOffset	INFERRED	byte offset of the value word being stored	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ iVar3\ \*\ 0x18\ \+\ iVar5\ \+\ 4\)\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ iVar1\);$	+1
+use	ConstantAllocationList__updateConstant	piVar4	entryCursor	INFERRED	cursor over the 0x18-byte list entries	^\s*piVar4\ =\ \*\(int\ \*\*\)this;$	+1
+use	ConstantAllocationList__updateConstant	piVar4	entryCursor	INFERRED	cursor over the 0x18-byte list entries	^\s*iVar2\ =\ \*piVar4;$	+2
+use	ConstantAllocationList__updateConstant	iVar5	entryCount	INFERRED	this+4: number of entries	^\s*iVar5\ =\ \*\(int\ \*\)\(this\ \+\ 4\);$	+1
+use	ConstantAllocationList__updateConstant	iVar5	entryCount	INFERRED	this+4: number of entries	^\s*if\ \(0\ <\ iVar5\)\ \{$	+1
+use	ConstantAllocationList__updateConstant	iVar5	entryCount	INFERRED	this+4: number of entries	^\s*\}\ while\ \(iVar3\ <\ iVar5\);$	+1
+use	ConstantAllocationList__updateConstant	iVar5	entryCount	INFERRED	this+4: number of entries	^\s*if\ \(iVar5\ <=\ iVar3\)\ \{$	+1
+use	ConstantAllocationList__updateConstant	iVar5	entries	INFERRED	this+0: base of the entry array	^\s*iVar5\ =\ \*\(int\ \*\)this;$	+1
+use	ConstantAllocationList__updateConstant	iVar5	entries	INFERRED	this+0: base of the entry array	^\s*if\ \(\*\(ushort\ \*\)\(iVar3\ \*\ 0x18\ \+\ iVar5\ \+\ 0x14\)\ ==\ param_4\)\ \{$	+1
+use	ConstantAllocationList__updateConstant	iVar5	entries	INFERRED	this+0: base of the entry array	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ iVar3\ \*\ 0x18\ \+\ iVar5\ \+\ 4\)\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ iVar1\);$	+1
+use	ConstantAllocationList__updateConstant	iVar5	entries	INFERRED	this+0: base of the entry array	^\s*iVar5\ =\ \*\(int\ \*\)this;$@2	+1
+local	ConstantAllocationList__updateConstant	param_2	constantId	INFERRED	constant id looked up in the list
+local	ConstantAllocationList__updateConstant	param_3	newValues	INFERRED	the 4 value words written into the entry
+local	ConstantAllocationList__updateConstant	param_4	expectedUsage	INFERRED	the entry is updated only when its usage mask (ushort at +0x14) equals this
+use	ParseSymbolTable__RemoveSymbol	bVar1	chunkKind	INFERRED	kind byte of the chunk: 0 temp/uniform, 2 fragment varying, 3 constant/param, 4 vertex varying	^\s*bVar1\ =\ \*pbVar8;$	+2
+use	ParseSymbolTable__RemoveSymbol	bVar1	chunkKind	INFERRED	kind byte of the chunk: 0 temp/uniform, 2 fragment varying, 3 constant/param, 4 vertex varying	^\s*else\ if\ \(bVar1\ <\ 3\)\ \{$	+2
+use	ParseSymbolTable__RemoveSymbol	bVar1	chunkKind	INFERRED	kind byte of the chunk: 0 temp/uniform, 2 fragment varying, 3 constant/param, 4 vertex varying	^\s*else\ if\ \(bVar1\ ==\ 3\)\ \{$	+1
+use	ParseSymbolTable__RemoveSymbol	bVar1	chunkKind	INFERRED	kind byte of the chunk: 0 temp/uniform, 2 fragment varying, 3 constant/param, 4 vertex varying	^\s*else\ if\ \(bVar1\ ==\ 4\)\ \{$	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar2	prevSymbol	INFERRED	previous symbol while walking the hash bucket / the symbol list (null at the head)	^\s*pPVar2\ =\ \(unsigned\ char\ \*\)0x0;$	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar2	prevSymbol	INFERRED	previous symbol while walking the hash bucket / the symbol list (null at the head)	^\s*if\ \(pPVar2\ ==\ \(unsigned\ char\ \*\)0x0\)\ \{$	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar2	prevSymbol	INFERRED	previous symbol while walking the hash bucket / the symbol list (null at the head)	^\s*\*\(undefined4\ \*\)\(pPVar2\ \+\ 4\)\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 4\);$	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar2	prevSymbol	INFERRED	previous symbol while walking the hash bucket / the symbol list (null at the head)	^\s*pPVar2\ =\ pPVar3;$	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar2	prevSymbol	INFERRED	previous symbol while walking the hash bucket / the symbol list (null at the head)	^\s*pPVar2\ =\ \(unsigned\ char\ \*\)0x0;$@2	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar2	prevSymbol	INFERRED	previous symbol while walking the hash bucket / the symbol list (null at the head)	^\s*if\ \(pPVar2\ ==\ \(unsigned\ char\ \*\)0x0\)\ \{$@2	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar2	prevSymbol	INFERRED	previous symbol while walking the hash bucket / the symbol list (null at the head)	^\s*\*\(undefined4\ \*\)\(pPVar2\ \+\ 8\)\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 8\);$	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar2	prevSymbol	INFERRED	previous symbol while walking the hash bucket / the symbol list (null at the head)	^\s*\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\ =\ pPVar2;$	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar2	prevSymbol	INFERRED	previous symbol while walking the hash bucket / the symbol list (null at the head)	^\s*pPVar2\ =\ pPVar4;$	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar3	cursorSymbol	INFERRED	symbol being examined while walking the hash bucket / the symbol list	^\s*for\ \(pPVar3\ =\ \*\(unsigned\ char\ \*\*\)$	+6
+use	ParseSymbolTable__RemoveSymbol	pPVar3	cursorSymbol	INFERRED	symbol being examined while walking the hash bucket / the symbol list	^\s*pPVar2\ =\ pPVar3;$	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar3	cursorSymbol	INFERRED	symbol being examined while walking the hash bucket / the symbol list	^\s*pPVar3\ =\ \*\(unsigned\ char\ \*\*\)this;$	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar3	cursorSymbol	INFERRED	symbol being examined while walking the hash bucket / the symbol list	^\s*pPVar4\ =\ pPVar3;$	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar3	cursorSymbol	INFERRED	symbol being examined while walking the hash bucket / the symbol list	^\s*pPVar3\ =\ \*\(unsigned\ char\ \*\*\)\(pPVar4\ \+\ 8\);$	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar4	curSymbol	INFERRED	symbol being examined (copy of cursorSymbol) in the list walk	^\s*pPVar4\ =\ pPVar3;$	+2
+use	ParseSymbolTable__RemoveSymbol	pPVar4	curSymbol	INFERRED	symbol being examined (copy of cursorSymbol) in the list walk	^\s*if\ \(pPVar4\ ==\ param_2\)\ \{$	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar4	curSymbol	INFERRED	symbol being examined (copy of cursorSymbol) in the list walk	^\s*if\ \(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\ ==\ pPVar4\)\ \{$	+1
+use	ParseSymbolTable__RemoveSymbol	pPVar4	curSymbol	INFERRED	symbol being examined (copy of cursorSymbol) in the list walk	^\s*pPVar3\ =\ \*\(unsigned\ char\ \*\*\)\(pPVar4\ \+\ 8\);$	+2
+use	ParseSymbolTable__RemoveSymbol	uVar5	vec4Count	INFERRED	GetVec4sForType of the symbol type: number of vec4 registers it occupied	^\s*uVar5\ =\ GetVec4sForType\(\(uint\)\*\(ushort\ \*\)\(param_2\ \+\ 0x2c\)\);$	+1
+use	ParseSymbolTable__RemoveSymbol	uVar5	vec4Count	INFERRED	GetVec4sForType of the symbol type: number of vec4 registers it occupied	^\s*if\ \(uVar5\ !=\ 0\)\ \{$	+1
+use	ParseSymbolTable__RemoveSymbol	uVar5	vec4Count	INFERRED	GetVec4sForType of the symbol type: number of vec4 registers it occupied	^\s*\}\ while\ \(uVar7\ <\ uVar5\);$	+1
+use	ParseSymbolTable__RemoveSymbol	iVar6	scalerWidth	INFERRED	GetScalerWidthForType result subtracted from the register-width counter (this+0x20)	^\s*iVar6\ =\ GetScalerWidthForType\(\(uint\)\*\(ushort\ \*\)\(param_2\ \+\ 0x2c\)\);$	+2
+use	ParseSymbolTable__RemoveSymbol	iVar6	scalerWidth	INFERRED	GetScalerWidthForType result subtracted from the register-width counter (this+0x20)	^\s*iVar6\ =\ GetScalerWidthForType\(\(uint\)\*\(ushort\ \*\)\(param_2\ \+\ 0x2c\)\);$@2	+2
+use	ParseSymbolTable__RemoveSymbol	uVar7	vec4Index	INFERRED	loop index over the symbol vec4 registers	^\s*uVar7\ =\ 0;$	+1
+use	ParseSymbolTable__RemoveSymbol	uVar7	vec4Index	INFERRED	loop index over the symbol vec4 registers	^\s*uVar7\ =\ uVar7\ \+\ 1;$	+2
+use	ParseSymbolTable__RemoveSymbol	pbVar8	chunk	INFERRED	chunk of the symbol whose counters are released	^\s*pbVar8\ =\ \*\(byte\ \*\*\)param_2;$	+1
+use	ParseSymbolTable__RemoveSymbol	pbVar8	chunk	INFERRED	chunk of the symbol whose counters are released	^\s*bVar1\ =\ \*pbVar8;$	+1
+use	ParseSymbolTable__RemoveSymbol	pbVar8	chunk	INFERRED	chunk of the symbol whose counters are released	^\s*if\ \(\(\*\(uint\ \*\)\(pbVar8\ \+\ 0xc\)\ \&\ 0xf0000\)\ ==\ 0x90000\)\ \{$	+1
+use	ParseSymbolTable__RemoveSymbol	pbVar8	chunk	INFERRED	chunk of the symbol whose counters are released	^\s*if\ \(\(\*\(uint\ \*\)\(pbVar8\ \+\ 0xc\)\ \&\ 0x1f0000\)\ ==\ 0x20000\)\ \{$	+1
+use	ParseSymbolTable__RemoveSymbol	pbVar8	chunk	INFERRED	chunk of the symbol whose counters are released	^\s*else\ if\ \(\(\*\(uint\ \*\)\(pbVar8\ \+\ 0xc\)\ \&\ 0x1f0000\)\ ==\ 0x10000\)\ \{$	+1
+local	ParseSymbolTable__CopySymbolTable	uVar1	counter1c	INFERRED	this+0x1c register-slot counter copied to the new table
+use	ParseSymbolTable__CopySymbolTable	uVar2	counter3c	INFERRED	this+0x3c counter copied to the new table	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(this\ \+\ 0x3c\);$	+1
+use	ParseSymbolTable__CopySymbolTable	uVar2	counter3c	INFERRED	this+0x3c counter copied to the new table	^\s*\*\(undefined4\ \*\)\(this_00\ \+\ 0x3c\)\ =\ uVar2;$	+1
+use	ParseSymbolTable__CopySymbolTable	uVar3	counter38	INFERRED	this+0x38 temp counter copied to the new table	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(this\ \+\ 0x38\);$	+1
+use	ParseSymbolTable__CopySymbolTable	uVar3	counter38	INFERRED	this+0x38 temp counter copied to the new table	^\s*\*\(undefined4\ \*\)\(this_00\ \+\ 0x38\)\ =\ uVar3;$	+1
+use	ParseSymbolTable__CopySymbolTable	uVar4	counter34	INFERRED	this+0x34 counter copied to the new table	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(this\ \+\ 0x34\);$	+1
+use	ParseSymbolTable__CopySymbolTable	uVar4	counter34	INFERRED	this+0x34 counter copied to the new table	^\s*\*\(undefined4\ \*\)\(this_00\ \+\ 0x34\)\ =\ uVar4;$	+1
+use	ParseSymbolTable__CopySymbolTable	uVar5	counter30	INFERRED	this+0x30 vertex-varying counter copied to the new table	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(this\ \+\ 0x30\);$	+1
+use	ParseSymbolTable__CopySymbolTable	uVar5	counter30	INFERRED	this+0x30 vertex-varying counter copied to the new table	^\s*\*\(undefined4\ \*\)\(this_00\ \+\ 0x30\)\ =\ uVar5;$	+1
+use	ParseSymbolTable__CopySymbolTable	uVar6	counter2c	INFERRED	this+0x2c counter copied to the new table	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(this\ \+\ 0x2c\);$	+1
+use	ParseSymbolTable__CopySymbolTable	uVar6	counter2c	INFERRED	this+0x2c counter copied to the new table	^\s*\*\(undefined4\ \*\)\(this_00\ \+\ 0x2c\)\ =\ uVar6;$	+1
+use	ParseSymbolTable__CopySymbolTable	uVar7	counter20	INFERRED	this+0x20 register-width counter copied to the new table	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(this\ \+\ 0x20\);$	+1
+use	ParseSymbolTable__CopySymbolTable	uVar7	counter20	INFERRED	this+0x20 register-width counter copied to the new table	^\s*\*\(undefined4\ \*\)\(this_00\ \+\ 0x20\)\ =\ uVar7;$	+1
+use	ParseSymbolTable__CopySymbolTable	uVar8	counter28	INFERRED	this+0x28 counter copied to the new table	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(this\ \+\ 0x28\);$	+1
+use	ParseSymbolTable__CopySymbolTable	uVar8	counter28	INFERRED	this+0x28 counter copied to the new table	^\s*\*\(undefined4\ \*\)\(this_00\ \+\ 0x28\)\ =\ uVar8;$	+1
+use	ParseSymbolTable__CopySymbolTable	uVar9	counter24	INFERRED	this+0x24 constant counter copied to the new table	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(this\ \+\ 0x24\);$	+1
+use	ParseSymbolTable__CopySymbolTable	uVar9	counter24	INFERRED	this+0x24 constant counter copied to the new table	^\s*\*\(undefined4\ \*\)\(this_00\ \+\ 0x24\)\ =\ uVar9;$	+1
+use	ParseSymbolTable__CopySymbolTable	this_00	newTable	INFERRED	the copied ParseSymbolTable (operator_new(0x54), 0x80 buckets)	^\s*this_00\ =\ operator_new\(0x54\);$	+2
+use	ParseSymbolTable__CopySymbolTable	this_00	newTable	INFERRED	the copied ParseSymbolTable (operator_new(0x54), 0x80 buckets)	^\s*\(\(int\ \(\*\)\(\)\)ParseSymbolTable__AddSymbol\)\(this_00,this_01\);$	+1
+use	ParseSymbolTable__CopySymbolTable	this_00	newTable	INFERRED	the copied ParseSymbolTable (operator_new(0x54), 0x80 buckets)	^\s*\*\(undefined4\ \*\)\(this_00\ \+\ 0x18\)\ =\ \*\(undefined4\ \*\)\(this\ \+\ 0x18\);$	+11
+use	ParseSymbolTable__CopySymbolTable	this_01	newSymbol	INFERRED	copy of one symbol added to the new table	^\s*this_01\ =\ operator_new\(100\);$	+6
+use	ParseSymbolTable__CopySymbolTable	pPVar10	srcSymbol	INFERRED	cursor over the source symbol list (next at +8)	^\s*for\ \(pPVar10\ =\ \*\(unsigned\ char\ \*\*\)this;\ pPVar10\ !=\ \(unsigned\ char\ \*\)0x0;$	+2
+use	ParseSymbolTable__CopySymbolTable	pPVar10	srcSymbol	INFERRED	cursor over the source symbol list (next at +8)	^\s*ParseSymbol__operator_\(this_01,pPVar10\);$	+2

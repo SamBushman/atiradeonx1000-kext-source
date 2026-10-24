@@ -1,0 +1,65 @@
+use	__ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE	iVar1	isDstType	CONFIRMED	*this == *dst_type	^\s*iVar1\ =\ __ZNKSt9type_infoeqERKS_\(this,param_4\);$	^\s*if\ \(\(param_5\ ==\ param_7\)\ \&\&\ \(iVar1\ =\ __ZNKSt9type_infoeqERKS_\(this,param_6\),\ iVar1\ !=\ 0\)\)\ \{$	all	none
+use	__ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE	iVar1	isSrcType	CONFIRMED	obj_ptr == src_ptr && *this == *src_type	^\s*if\ \(\(param_5\ ==\ param_7\)\ \&\&\ \(iVar1\ =\ __ZNKSt9type_infoeqERKS_\(this,param_6\),\ iVar1\ !=\ 0\)\)\ \{$	^\s*iVar1\ =\ 6;$	all	none
+use	__ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE	iVar1	dst2srcKind	CONFIRMED	result.dst2src: __contained_public (6) when dst + src2dst == src_ptr else __not_contained (1)	^\s*iVar1\ =\ 6;$		all	none
+local	__ZNK10__cxxabiv120__si_class_type_info12__do_dyncastEiNS_17__class_type_info10__sub_kindEPKS1_PKvS4_S6_RNS1_16__dyncast_resultE	uVar2	baseDyncastResult	CONFIRMED	result_ambig returned by the base class's __do_dyncast (vtable +0x1c)
+local	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PKvRNS0_15__upcast_resultE	iVar1	isDstType	CONFIRMED	*this == *dst_type
+local	__ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_infoEPKvRNS1_15__upcast_resultE	iVar1	classUpcastOk	CONFIRMED	__class_type_info::__do_upcast(dst, obj_ptr, result)
+local	__ZNK10__cxxabiv120__si_class_type_info11__do_upcastEPKNS_17__class_type_infoEPKvRNS1_15__upcast_resultE	uVar2	baseUpcastResult	CONFIRMED	the base class's __do_upcast result (vtable +0x18)
+local	__ZNSt9exceptionD4Ev	param_2	deleteFlags	INFERRED	bit 0 set: operator delete(this) after the destructor body (deleting-destructor flag)
+local	__ZNSt13bad_exceptionD4Ev	param_2	deleteFlags	INFERRED	bit 0 set: operator delete(this) after the destructor body (deleting-destructor flag)
+local	__ZNSt9bad_allocD4Ev	param_2	deleteFlags	INFERRED	bit 0 set: operator delete(this) after the destructor body (deleting-destructor flag)
+local	std__set_new_handler	param_1	newHandler	CONFIRMED	std::new_handler h
+local	std__set_new_handler	iVar1	oldHandler	CONFIRMED	previous handler: per-thread keymgr data 2, or the global ___new_handler when unset
+local	FUN_97c1913c	param_1	thrownSize	CONFIRMED	size of the thrown object: malloc(thrown_size + sizeof(__cxa_exception) = 0x50), result block cleared and offset by 0x50 (__cxa_allocate_exception)
+local	FUN_97c1913c	uVar2	emergencyBits	CONFIRMED	emergency_used shifted right per slot while searching for a free emergency buffer
+local	FUN_97c1913c	puVar3	exceptionBlock	CONFIRMED	malloc'd block or the free emergency buffer slot
+local	FUN_97c1913c	bVar1	allocFailed	CONFIRMED	true until an emergency slot was found; std::terminate when still true
+local	___cxa_free_exception	param_1	thrownObject	CONFIRMED	thrown object pointer; emergency buffers are recognised by address, others are free()d at -0x50
+local	___cxa_free_exception	uVar1	emergencySlot	CONFIRMED	index of the emergency buffer being released
+local	__gxx_exception_cleanup	param_2	exception	CONFIRMED	_Unwind_Exception* being destroyed; the __cxa_exception header precedes it
+local	__gxx_exception_cleanup	puVar1	header	INFERRED	pointer into the __cxa_exception header before the exception (exceptionDestructor at +4)
+local	___cxa_throw	param_1	thrownObject	CONFIRMED	void* obj: the thrown object, __cxa_exception header at obj - 0x50
+local	___cxa_throw	param_2	tinfo	CONFIRMED	std::type_info* stored at header->exceptionType
+local	___cxa_throw	param_3	dest	CONFIRMED	destructor stored at header->exceptionDestructor
+local	___cxa_throw	puVar1	terminateHandlerSlot	CONFIRMED	address of the global terminate handler, copied into the header
+local	___cxa_throw	puVar2	unexpectedHandlerSlot	CONFIRMED	address of the global unexpected handler, copied into the header
+local	___cxa_throw	uVar3	terminateHandler	CONFIRMED	current terminate handler stored at header->terminateHandler
+local	___cxa_throw	iVar5	caughtException	CONFIRMED	globals->caughtExceptions (the exception being rethrown)
+use	___cxa_throw	uVar4	exceptionCleanup	CONFIRMED	__gxx_exception_cleanup pointer stored at unwindHeader.exception_cleanup	^\s*uVar4\ =\ DAT_a7b7c06c;$	^\s*uVar4\ =\ 0;$	all	none
+use	___cxa_throw	uVar4	valueSize	CONFIRMED	size_of_encoded_value result (merged tail)	^\s*uVar4\ =\ 0;$		all	none
+local	FUN_97c19d00	param_1	excObj	CONFIRMED	void* exc_obj_in of __cxa_call_unexpected
+local	FUN_97c19d00	uStack_38	savedTTypeBase	INFERRED	header field at excObj-0xc (catchTemp / ttype base) restored for the info parse
+local	FUN_97c19d00	puVar8	languageSpecificData	CONFIRMED	header->languageSpecificData (excObj - 0x10)
+local	FUN_97c19d00	iVar7	handlerSwitchValue	CONFIRMED	header->handlerSwitchValue (excObj - 0x18): negative filter selecting the exception spec
+local	FUN_97c19d00	p_Var6	terminateHandler	CONFIRMED	header->terminateHandler (excObj - 0x24)
+local	FUN_97c19d00	puVar1	badExceptionDtor	CONFIRMED	bad_exception destructor (the dest argument of the throw)
+local	FUN_97c19d00	puVar2	badExceptionTypeinfo	CONFIRMED	typeinfo for std::bad_exception
+use	FUN_97c19d00	puVar4	currentException	CONFIRMED	globals->caughtExceptions: the exception being handled (type at +0, thrown object at +0x50)	^\s*puVar4\ =\ \(undefined4\ \*\)\*puVar4;$	^\s*puVar4\ =\ \(undefined4\ \*\)___cxa_allocate_exception\(4\);$	all	none
+use	FUN_97c19d00	puVar4	badException	CONFIRMED	new bad_exception object from __cxa_allocate_exception(4)	^\s*puVar4\ =\ \(undefined4\ \*\)___cxa_allocate_exception\(4\);$		all	none
+func	FUN_97c19d00	___cxa_call_unexpected_97c19d00	INFERRED	calls the unexpected handler, matches the thrown type against the exception specification (check_exception_spec), rethrows it, or throws std::bad_exception: libsupc++ __cxa_call_unexpected
+func	FUN_97c1913c	___cxa_allocate_exception_97c1913c	INFERRED	statically linked copy of __cxa_allocate_exception: malloc(size + 0x50) with the emergency-buffer fallback under emergency_mutex
+local	std__unexpected	uVar2	newTerminateHandler	UNKNOWN	set_terminate's incoming handler argument (r3): Ghidra merged the next function's body after the noreturn unexpected call
+local	std__unexpected	iVar3	oldTerminateHandler	UNKNOWN	previous terminate handler returned by the merged set_terminate body
+local	__cxxabiv1____unexpected	param_1	handler	CONFIRMED	the unexpected handler called by __unexpected
+local	__cxxabiv1____unexpected	uVar2	newTerminateHandler	UNKNOWN	set_terminate's incoming handler argument (r3): merged function body
+local	__cxxabiv1____unexpected	iVar3	oldTerminateHandler	UNKNOWN	previous terminate handler returned by the merged set_terminate body
+local	__cxxabiv1____terminate	param_1	handler	CONFIRMED	the terminate handler called by __terminate
+local	std__set_terminate	param_1	newHandler	CONFIRMED	terminate_handler to install
+local	std__set_terminate	iVar1	oldHandler	CONFIRMED	previous terminate handler (keymgr per-thread data 4, else the global)
+local	std__set_unexpected	param_1	newHandler	CONFIRMED	unexpected_handler to install
+local	std__set_unexpected	iVar1	oldHandler	CONFIRMED	previous unexpected handler (keymgr per-thread data 3, else the global)
+local	___cxa_begin_catch	param_1	exceptionObject	CONFIRMED	_Unwind_Exception* of the exception being caught; header at -0x30
+local	___cxa_begin_catch	iVar1	oldCaughtExceptions	CONFIRMED	globals->caughtExceptions before this catch
+local	___cxa_begin_catch	iVar2	handlerCount	CONFIRMED	header->handlerCount (-0x1c): made positive then incremented
+local	___cxa_end_catch	iVar2	header	CONFIRMED	globals->caughtExceptions: the __cxa_exception header being finished
+local	___cxa_end_catch	iVar3	handlerCount	CONFIRMED	header->handlerCount (+0x14); the exception is deleted when it reaches 0
+local	__Z12read_uleb128PKhPj	bVar1	leb128Byte	CONFIRMED	current LEB128 byte (low 7 bits payload, bit 7 continuation)
+local	__Z12read_sleb128PKhPi	bVar1	leb128Byte	CONFIRMED	current LEB128 byte (low 7 bits payload, bit 7 continuation, bit 6 sign)
+local	_read_uleb128_97c1a3ec	bVar1	leb128Byte	CONFIRMED	current LEB128 byte
+local	_read_sleb128_97c1a41c	bVar1	leb128Byte	CONFIRMED	current LEB128 byte (bit 6 sign)
+local	___eprintf	param_1	format	CONFIRMED	printf format string
+local	___eprintf	param_2	arg1	CONFIRMED	first format argument
+local	___eprintf	param_3	arg2	CONFIRMED	second format argument
+local	___eprintf	param_4	arg3	CONFIRMED	third format argument
+local	___eprintf	puVar1	stderrBase	CONFIRMED	base of the C library data (stderr FILE at +0xb0)
+use	___cxa_throw	uVar7	format	CONFIRMED	encoding & 7: the DW_EH_PE data format (the size_of_encoded_value code Ghidra merged into this function)	^\s*uVar7\ =\ uVar7\ \&\ 7;$	

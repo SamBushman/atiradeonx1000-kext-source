@@ -1993,7 +1993,7 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   int *r4Out11;
   undefined4 r4In8;
   int *r4Out12;
-  unsigned char ** ppTVar24;
+  unsigned char ** destroyAllocArg;
   undefined4 r4Out13;
   undefined4 r4Out14;
   undefined4 r4In9;
@@ -3231,7 +3231,7 @@ LAB_97ba50cc:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
-    ppTVar24 = destroyAlloc3;
+    destroyAllocArg = destroyAlloc3;
     typeTmp3VtableOrPub3Array = typeVtable2;
     goto LAB_97ba869c;
   case 0xb:
@@ -3265,10 +3265,10 @@ LAB_97ba50cc:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
-      ppTVar24 = destroyAlloc4;
+      destroyAllocArg = destroyAlloc4;
 LAB_97ba5844:
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc),ppTVar24);
+                ((unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc),destroyAllocArg);
     }
     goto LAB_97ba5848;
   case 0xc:
@@ -3301,7 +3301,7 @@ LAB_97ba5844:
         cr0 = 2;
       }
     } while (!(bool)(cr0 >> 1 & 1));
-    ppTVar24 = destroyAlloc5;
+    destroyAllocArg = destroyAlloc5;
     if ((int)oldRefCount2 < 1) goto LAB_97ba5844;
 LAB_97ba5848:
     TParseContext__recover(parseContext);
@@ -3776,7 +3776,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount3;
-    ppTVar24 = destroyAlloc9;
+    destroyAllocArg = destroyAlloc9;
     yyvalTypeOrFunction = newFunction;
     goto LAB_97ba869c;
   case 0x17:
@@ -4053,7 +4053,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
-    ppTVar24 = destroyAlloc10;
+    destroyAllocArg = destroyAlloc10;
     goto LAB_97ba82d4;
   case 0x2a:
     lValueError = TParseContext__lValueErrorCheck
@@ -4087,7 +4087,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount2 < 1) {
-      ppTVar24 = destroyAlloc11;
+      destroyAllocArg = destroyAlloc11;
       goto LAB_97ba69a8;
     }
     goto LAB_97ba82f0;
@@ -4131,7 +4131,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
-    ppTVar24 = destroyAlloc12;
+    destroyAllocArg = destroyAlloc12;
     goto LAB_97ba82d4;
   case 0x2c:
     yyval = *(uint *)yyvsp;
@@ -4208,7 +4208,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
-    ppTVar24 = destroyAlloc14;
+    destroyAllocArg = destroyAlloc14;
     goto LAB_97ba7a00;
   case 0x32:
     if (1 < *(uint *)((int)parseContext + 0xc)) {
@@ -4258,7 +4258,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
-    ppTVar24 = destroyAlloc16;
+    destroyAllocArg = destroyAlloc16;
     goto LAB_97ba7a00;
   case 0x33:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
@@ -4308,7 +4308,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
-    ppTVar24 = destroyAlloc18;
+    destroyAllocArg = destroyAlloc18;
     goto LAB_97ba7a00;
   case 0x35:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4352,7 +4352,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
-    ppTVar24 = destroyAlloc20;
+    destroyAllocArg = destroyAlloc20;
     goto LAB_97ba7a00;
   case 0x36:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4396,7 +4396,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
-    ppTVar24 = destroyAlloc22;
+    destroyAllocArg = destroyAlloc22;
     goto LAB_97ba7a00;
   case 0x38:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
@@ -4446,7 +4446,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
-    ppTVar24 = destroyAlloc24;
+    destroyAllocArg = destroyAlloc24;
     goto LAB_97ba7a00;
   case 0x39:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
@@ -4496,7 +4496,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
-    ppTVar24 = destroyAlloc26;
+    destroyAllocArg = destroyAlloc26;
     goto LAB_97ba7a00;
   case 0x3b:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4539,7 +4539,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
-    ppTVar24 = destroyAlloc28;
+    destroyAllocArg = destroyAlloc28;
     goto LAB_97ba7bac;
   case 0x3c:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4582,7 +4582,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
-    ppTVar24 = destroyAlloc30;
+    destroyAllocArg = destroyAlloc30;
     goto LAB_97ba7bac;
   case 0x3d:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4625,7 +4625,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
-    ppTVar24 = destroyAlloc32;
+    destroyAllocArg = destroyAlloc32;
     goto LAB_97ba7bac;
   case 0x3e:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4668,7 +4668,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
-    ppTVar24 = destroyAlloc34;
+    destroyAllocArg = destroyAlloc34;
     goto LAB_97ba7bac;
   case 0x40:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4711,7 +4711,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
-    ppTVar24 = destroyAlloc36;
+    destroyAllocArg = destroyAlloc36;
     goto LAB_97ba7bac;
   case 0x41:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -4754,7 +4754,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
-    ppTVar24 = destroyAlloc38;
+    destroyAllocArg = destroyAlloc38;
     goto LAB_97ba7bac;
   case 0x43:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
@@ -4804,7 +4804,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
-    ppTVar24 = destroyAlloc40;
+    destroyAllocArg = destroyAlloc40;
     goto LAB_97ba7a00;
   case 0x45:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
@@ -4854,7 +4854,7 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
-    ppTVar24 = destroyAlloc42;
+    destroyAllocArg = destroyAlloc42;
     goto LAB_97ba7a00;
   case 0x47:
     if (1 < *(int *)((int)parseContext + 0xc) - 2U) {
@@ -4904,11 +4904,11 @@ LAB_97ba97d8:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
-    ppTVar24 = destroyAlloc44;
+    destroyAllocArg = destroyAlloc44;
 LAB_97ba7a00:
     if (!stillShared) {
 LAB_97ba7f84:
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(destroyRep,ppTVar24);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(destroyRep,destroyAllocArg);
     }
 LAB_97ba5554:
     TParseContext__recover(parseContext);
@@ -4957,7 +4957,7 @@ LAB_97ba5554:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
-    ppTVar24 = destroyAlloc46;
+    destroyAllocArg = destroyAlloc46;
     goto LAB_97ba7bac;
   case 0x4b:
     scratchR6 = *(char **)(yyvsp + 8);
@@ -5000,11 +5000,11 @@ LAB_97ba5554:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount;
-    ppTVar24 = destroyAlloc48;
+    destroyAllocArg = destroyAlloc48;
 LAB_97ba7bac:
     if (!stillShared) {
 LAB_97ba7c88:
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(destroyRep,ppTVar24);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(destroyRep,destroyAllocArg);
     }
 LAB_97ba7c8c:
     nullWord = (unsigned char *)0x0;
@@ -5073,7 +5073,7 @@ LAB_97ba7d0c:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     if ((int)oldRefCount < 1) {
-      ppTVar24 = destroyAlloc50;
+      destroyAllocArg = destroyAlloc50;
       goto LAB_97ba7c88;
     }
     goto LAB_97ba7c8c;
@@ -5139,7 +5139,7 @@ LAB_97ba7d0c:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount3;
-    ppTVar24 = destroyAlloc52;
+    destroyAllocArg = destroyAlloc52;
     scratchR7 = (char *)typeTmp1VtableAddr;
     goto LAB_97ba82d4;
   case 0x51:
@@ -5190,7 +5190,7 @@ LAB_97ba7d0c:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     if (0 < (int)oldRefCount2) goto LAB_97ba5554;
-    ppTVar24 = destroyAlloc54;
+    destroyAllocArg = destroyAlloc54;
     goto LAB_97ba7f84;
   case 0x52:
     yyval = *(uint *)yyvsp;
@@ -5365,11 +5365,11 @@ LAB_97ba7d0c:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
-    ppTVar24 = destroyAlloc56;
+    destroyAllocArg = destroyAlloc56;
 LAB_97ba82d4:
     if (!stillShared) {
 LAB_97ba69a8:
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(destroyRep,ppTVar24);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(destroyRep,destroyAllocArg);
     }
 LAB_97ba82f0:
     TParseContext__recover(parseContext);
@@ -5476,14 +5476,14 @@ LAB_97ba86ec:
       }
     } while (!(bool)(cr0 >> 1 & 1));
     stillShared = 0 < (int)oldRefCount2;
-    ppTVar24 = destroyAlloc58;
+    destroyAllocArg = destroyAlloc58;
 LAB_97ba869c:
     yyvalNodeReg = yyvalNode;
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
     typeTmp7VtableReg = typeTmp7Vtable[0];
     if (!stillShared) {
 LAB_97ba8824:
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(destroyRep,ppTVar24);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(destroyRep,destroyAllocArg);
       yyvalNodeReg = yyvalNode;
       typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
       typeTmp7VtableReg = typeTmp7Vtable[0];
@@ -5556,7 +5556,7 @@ LAB_97ba8824:
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
     typeTmp7VtableReg = typeTmp7Vtable[0];
     if (0 < (int)oldRefCount2) break;
-    ppTVar24 = destroyAlloc59;
+    destroyAllocArg = destroyAlloc59;
     goto LAB_97ba8824;
   case 0x67:
     if (1 < *(uint *)(yyvsp + -0x44)) {
@@ -8096,7 +8096,7 @@ LAB_97ba84b0:
     }
   } while (!(bool)(cr0 >> 1 & 1));
   stillShared = 0 < oldRefCount4;
-  ppTVar24 = destroyAlloc57;
+  destroyAllocArg = destroyAlloc57;
   goto LAB_97ba869c;
 switchD_97ba39c8_caseD_60:
   scratchR6 = (char *)slotArg;

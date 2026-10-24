@@ -1,0 +1,131 @@
+local	yyparse	local_720	ctorAlloc1	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_710	destroyAlloc1	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_700	destroyAlloc2	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_6f0	destroyAlloc3	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_6e0	destroyAlloc4	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_6d0	destroyAlloc5	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_6c0	destroyAlloc6	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_6b0	ctorAlloc2	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_6a0	destroyAlloc7	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_690	ctorAlloc3	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_680	destroyAlloc8	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_670	ctorAlloc4	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_650	destroyAlloc9	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_610	destroyAlloc10	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_600	destroyAlloc11	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_5f0	destroyAlloc12	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_5e0	destroyAlloc13	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_5d0	destroyAlloc14	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_5c0	destroyAlloc15	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_5b0	destroyAlloc16	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_5a0	destroyAlloc17	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_590	destroyAlloc18	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_580	destroyAlloc19	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_570	destroyAlloc20	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_560	destroyAlloc21	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_550	destroyAlloc22	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_540	destroyAlloc23	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_530	destroyAlloc24	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_520	destroyAlloc25	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_510	destroyAlloc26	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_500	destroyAlloc27	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_4f0	destroyAlloc28	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_4e0	destroyAlloc29	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_4d0	destroyAlloc30	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_4c0	destroyAlloc31	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_4b0	destroyAlloc32	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_4a0	destroyAlloc33	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_490	destroyAlloc34	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_480	destroyAlloc35	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_470	destroyAlloc36	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_460	destroyAlloc37	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_450	destroyAlloc38	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_440	destroyAlloc39	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_430	destroyAlloc40	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_420	destroyAlloc41	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_410	destroyAlloc42	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_400	destroyAlloc43	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_3f0	destroyAlloc44	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_3e0	destroyAlloc45	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_3d0	destroyAlloc46	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_3c0	destroyAlloc47	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_3b0	destroyAlloc48	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_3a0	destroyAlloc49	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_390	destroyAlloc50	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_380	destroyAlloc51	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_370	destroyAlloc52	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_360	destroyAlloc53	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_350	destroyAlloc54	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_340	destroyAlloc55	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_330	destroyAlloc56	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_300	destroyAlloc57	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_2f0	ctorAlloc5	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_2e0	destroyAlloc58	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_2d0	ctorAlloc6	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_2c0	destroyAlloc59	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_2b0	ctorAlloc7	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_290	ctorAlloc8	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_280	ctorAlloc9	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_270	destroyAlloc60	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_260	ctorAlloc10	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_250	ctorAlloc11	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_240	ctorAlloc12	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_230	destroyAlloc61	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_220	ctorAlloc13	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_210	ctorAlloc14	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_200	destroyAlloc62	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_1f0	destroyAlloc63	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_1d0	destroyAlloc64	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_1c0	ctorAlloc15	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_1b0	ctorAlloc16	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_1a0	destroyAlloc65	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_190	destroyAlloc66	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_160	destroyAlloc67	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_e0	destroyAlloc68	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_d0	ctorAlloc17	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_c0	destroyAlloc69	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_b0	ctorAlloc18	INFERRED	pool-allocator argument (copy of GetGlobalPoolAllocator()) passed to a std::basic_string<char,..,pool_allocator> constructor
+local	yyparse	local_a0	destroyAlloc70	INFERRED	copy of the std::string allocator word passed to _Rep::_M_destroy(rep,alloc) in the inlined refcount-release idiom
+local	yyparse	local_850	typeTmp1VtableOrStr1Alloc	INFERRED	frame area A (0x850..0x82c): TType temporary #1 (vtable; getType()/TType(TPublicType) target) and, in the binary-operator error paths, the std::string TType::getCompleteString() of the right operand (allocator word)
+local	yyparse	local_84c	typeTmp1ArraySizeOrStr1Data	INFERRED	frame area A: TType temporary #1 arraySize (+4) / data pointer of the first complete-type string
+local	yyparse	local_848	typeTmp1StructureOrPubSize	INFERRED	frame area A: TType temporary #1 structure (+8) / size of the TPublicType copy at 0x850
+local	yyparse	local_844	typeTmp1Word0cOrPubMatrix	INFERRED	frame area A: TType temporary #1 word +0xc / matrix flag of the TPublicType copy at 0x850
+local	yyparse	local_840	typeTmp1TypeNameOrStr2Alloc	INFERRED	frame area A: TType temporary #1 typeName (+0x10) / allocator word of the left operand's complete-type string
+local	yyparse	local_83c	typeTmp1Word14OrStr2Data	INFERRED	frame area A: TType temporary #1 word +0x14 / data pointer of the left operand's complete-type string
+local	yyparse	local_838	typeTmp1Word18OrPubLine	INFERRED	frame area A: TType temporary #1 word +0x18 / line of the TPublicType copy at 0x850
+local	yyparse	local_834	typeTmp1MaxArraySize	INFERRED	frame area A: TType temporary #1 maxArraySize (+0x1c)
+local	yyparse	local_830	typeTmp1Word20OrPubType	INFERRED	frame area A: TType temporary #1 word +0x20 / basic type of the TPublicType at 0x830
+local	yyparse	local_82c	typeTmp1BitsOrPubQualifier	INFERRED	frame area A: TType temporary #1 bit-field word (+0x24: qualifier, basic type, size, matrix, array) / qualifier of the TPublicType at 0x830
+local	yyparse	local_828	pubSize	INFERRED	size of the TPublicType at 0x830 (stack temporary used by the type_specifier rules)
+local	yyparse	local_824	pubMatrix	INFERRED	matrix flag of the TPublicType at 0x830
+local	yyparse	local_820	typeTmp2VtableOrPubArray	INFERRED	frame area B (0x820..0x7fc): TType temporary #2 vtable / array flag of the TPublicType at 0x830 / basic type of the TPublicType copy at 0x820
+local	yyparse	local_81c	typeTmp2ArraySizeOrPubUserDef	INFERRED	frame area B: TType temporary #2 arraySize / userDef of the TPublicType at 0x830 / qualifier of the copy at 0x820
+local	yyparse	local_818	typeTmp2StructureOrPubLine	INFERRED	frame area B: TType temporary #2 structure / line of the TPublicType at 0x830 / size of the copy at 0x820
+local	yyparse	local_814	typeTmp2Word0cOrPubMatrix2	INFERRED	frame area B: TType temporary #2 word +0xc / matrix flag of the TPublicType copy at 0x820
+local	yyparse	local_810	typeTmp2TypeNameOrPubArray2	INFERRED	frame area B: TType temporary #2 typeName / array flag of the TPublicType copy at 0x820
+local	yyparse	local_80c	typeTmp2Word14OrPubUserDef2	INFERRED	frame area B: TType temporary #2 word +0x14 / userDef of the TPublicType copy at 0x820
+local	yyparse	local_808	typeTmp2Word18OrPubLine2	INFERRED	frame area B: TType temporary #2 word +0x18 / line of the TPublicType copy at 0x820
+local	yyparse	local_804	typeTmp2MaxArraySize	INFERRED	frame area B: TType temporary #2 maxArraySize (+0x1c)
+local	yyparse	local_800	typeTmp2Word20OrPub3Type	INFERRED	frame area B: TType temporary #2 word +0x20 / basic type of the second TPublicType copy at 0x800
+local	yyparse	local_7fc	typeTmp2BitsOrPub3Qualifier	INFERRED	frame area B: TType temporary #2 bit-field word / qualifier of the TPublicType copy at 0x800
+local	yyparse	local_7f8	pub3Size	INFERRED	size of the TPublicType copy at 0x800
+local	yyparse	local_7f4	pub3Matrix	INFERRED	matrix flag of the TPublicType copy at 0x800
+local	yyparse	local_7f0	typeTmp3VtableOrPub3Array	INFERRED	frame area C (0x7f0..0x7cc): TType temporary #3 vtable (setType argument) / array flag of the TPublicType copy at 0x800
+local	yyparse	local_7ec	typeTmp3ArraySizeOrPub3UserDef	INFERRED	frame area C: TType temporary #3 arraySize / userDef of the TPublicType copy at 0x800
+local	yyparse	local_7e8	typeTmp3StructureOrPub3Line	INFERRED	frame area C: TType temporary #3 structure / line of the TPublicType copy at 0x800
+local	yyparse	local_7e4	typeTmp3Word0c	INFERRED	frame area C: TType temporary #3 word +0xc
+local	yyparse	local_7e0	typeTmp3TypeNameOrTypeTmp4Vtable	INFERRED	frame area C: TType temporary #3 typeName / vtable of the getType() temporary #4 at 0x7e0
+local	yyparse	local_7dc	typeTmp3Word14OrTypeTmp4ArraySize	INFERRED	frame area C: TType temporary #3 word +0x14 / temporary #4 arraySize
+local	yyparse	local_7d8	typeTmp3Word18OrTypeTmp4Structure	INFERRED	frame area C: TType temporary #3 word +0x18 / temporary #4 structure
+local	yyparse	local_7d4	typeTmp3MaxArraySizeOrTypeTmp4Word0c	INFERRED	frame area C: TType temporary #3 maxArraySize / temporary #4 word +0xc
+local	yyparse	local_7d0	typeTmp3Word20OrTypeTmp4TypeName	INFERRED	frame area C: TType temporary #3 word +0x20 / temporary #4 typeName
+local	yyparse	local_7cc	typeTmp3BitsOrTypeTmp4Word14	INFERRED	frame area C: TType temporary #3 bit-field word / temporary #4 word +0x14
+local	yyparse	local_7c0	typeStr3Alloc	INFERRED	allocator word of the std::string copy of a struct type name (copy-constructed from the getType() temporary's typeName)
+local	yyparse	local_7bc	typeTmp4BitsOrStr3Data	INFERRED	frame area D: TType temporary #4 bit-field word (+0x24) / data pointer of the type-name string copy
+local	yyparse	local_7b0	typeTmp5VtableOrStr4Alloc	INFERRED	frame area E: TType temporary #5 vtable (getType() target) / allocator word of the second type-name string copy
+local	yyparse	local_7ac	typeTmp5ArraySizeOrStr4Data	INFERRED	frame area E: TType temporary #5 arraySize / data pointer of the second type-name string copy
+local	yyparse	local_780	typeTmp6Vtable	INFERRED	frame area F: TType temporary #6 vtable (getType() target)
+local	yyparse	local_77c	typeTmp6ArraySize	INFERRED	TType temporary #6 arraySize
+local	yyparse	local_764	typeTmp6MaxArraySize	INFERRED	TType temporary #6 maxArraySize (+0x1c)
+local	yyparse	local_750	typeTmp7Vtable	INFERRED	frame area G: TType temporary #7 (getType() target for struct types); element [0] is its vtable word
+local	yyparse	local_740	typeTmp7TypeName	INFERRED	TType temporary #7 typeName (+0x10)

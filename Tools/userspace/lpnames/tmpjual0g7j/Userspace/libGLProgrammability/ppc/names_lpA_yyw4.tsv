@@ -1,0 +1,26 @@
+use	yyparse	iVar6	paramArrayBegin	INFERRED	begin pointer of the parameter array (paramList+4)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar60\ \+\ 4\);$	+2
+use	yyparse	iVar6	paramArrayBegin	INFERRED	begin pointer of the parameter array (paramList+4)	^\s*\(piVar61,a1_07,pcVar62,param_4,param_5,pTVar33,iVar6\);$	+1
+use	yyparse	iVar6	paramArrayBegin	INFERRED	begin pointer of the parameter array (paramList+4)	^\s*\(param_1,iVar60,"assign",\(unsigned\ char\ \*\)param_4,param_5,pTVar33,iVar6,$	+2
+use	yyparse	iVar6	paramArrayBegin	INFERRED	begin pointer of the parameter array (paramList+4)	^\s*\(\(int\)param_1,pcVar29,$	+3
+use	yyparse	iVar6	srcEntryWord04	INFERRED	word +4 of the built-in entry	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar36\ \+\ 4\);$	+1
+use	yyparse	iVar6	srcEntryWord04	INFERRED	word +4 of the built-in entry	^\s*a0_00\[4\]\ =\ iVar6;$	+1
+use	yyparse	iVar26	srcEntryWord20	INFERRED	word +0x20 of the built-in entry	^\s*iVar26\ =\ \*\(int\ \*\)\(iVar36\ \+\ 0x20\);$	+1
+use	yyparse	iVar26	srcEntryWord20	INFERRED	word +0x20 of the built-in entry	^\s*a0_00\[0xb\]\ =\ iVar26;$	+1
+use	yyparse	iVar26	srcEntryWord20	INFERRED	word +0x20 of the built-in entry	^\s*psVar21\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*a0_00\ \+\ 8\)\)\(a0_00,iVar26,iVar30,a3,a4_00,a5,piVar50\);$	+1
+use	yyparse	iVar30	srcEntryWord1c	INFERRED	word +0x1c of the built-in entry	^\s*iVar30\ =\ \*\(int\ \*\)\(iVar36\ \+\ 0x1c\);$	+1
+use	yyparse	iVar30	srcEntryWord1c	INFERRED	word +0x1c of the built-in entry	^\s*a0_00\[10\]\ =\ iVar30;$	+1
+use	yyparse	iVar30	srcEntryWord1c	INFERRED	word +0x1c of the built-in entry	^\s*psVar21\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*a0_00\ \+\ 8\)\)\(a0_00,iVar26,iVar30,a3,a4_00,a5,piVar50\);$	+1
+use	yyparse	iVar38	srcEntryWord0c	INFERRED	word +0xc of the built-in entry	^\s*iVar38\ =\ \*\(int\ \*\)\(iVar36\ \+\ 0xc\);$	+1
+use	yyparse	iVar38	srcEntryWord0c	INFERRED	word +0xc of the built-in entry	^\s*a0_00\[6\]\ =\ iVar38;$	+1
+use	yyparse	iVar39	srcEntryWord08	INFERRED	word +8 of the built-in entry	^\s*iVar39\ =\ \*\(int\ \*\)\(iVar36\ \+\ 8\);$	+1
+use	yyparse	iVar39	srcEntryWord08	INFERRED	word +8 of the built-in entry	^\s*a0_00\[5\]\ =\ iVar39;$	+1
+use	yyparse	pTVar27	valueSlot	INFERRED	value-stack slot address passed as an argument	^\s*pTVar27\ =\ \(unsigned\ char\ \*\)\(pTVar56\ \+\ \-0x48\);$	+1
+use	yyparse	pTVar27	valueSlot	INFERRED	value-stack slot address passed as an argument	^\s*pTVar27\ =\ \(unsigned\ char\ \*\)\(pTVar56\ \+\ \-0xcc\);$	+1
+use	yyparse	pTVar27	valueSlot	INFERRED	value-stack slot address passed as an argument	^\s*pTVar27\ =\ \(unsigned\ char\ \*\)\(pTVar56\ \+\ \-0x1c\);$	+1
+use	yyparse	pTVar27	valueSlot	INFERRED	value-stack slot address passed as an argument	^\s*\(param_1,uVar57,pTVar27,param_4,param_5,pTVar33,pTVar34\);$	+1
+use	yyparse	pTVar27	valueSlot	INFERRED	value-stack slot address passed as an argument	^\s*pTVar27\ =\ \(unsigned\ char\ \*\)\(pTVar56\ \+\ \-0xa0\);$	+1
+use	yyparse	pTVar27	valueSlot	INFERRED	value-stack slot address passed as an argument	^\s*\(param_1,uVar57,pTVar27,param_4,param_5,pTVar33,pTVar34\);$@2	+1
+use	yyparse	puVar5	methodArg	INFERRED	argument of the node's virtual method (token value, 2 or a vtable entry)	^\s*puVar5\ =\ \*\(undefined\ \*\*\)\(pTVar56\ \+\ 4\);$	+1
+use	yyparse	puVar5	methodArg	INFERRED	argument of the node's virtual method (token value, 2 or a vtable entry)	^\s*puVar5\ =\ \(undefined\ \*\)0x2;$	+1
+use	yyparse	puVar5	methodArg	INFERRED	argument of the node's virtual method (token value, 2 or a vtable entry)	^\s*puVar5\ =\ ppuVar35\[uVar57\ \*\ 2\];$	+1
+use	yyparse	puVar5	methodArg	INFERRED	argument of the node's virtual method (token value, 2 or a vtable entry)	^\s*\(\*pcVar40\)\(pTVar33,puVar5,param_3,param_4,param_5,pTVar3,ppuVar35\);$	+1

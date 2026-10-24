@@ -1,0 +1,32 @@
+local	_PPParserGetInteger	acStack_120	partText	CONFIRMED	256-byte buffer filled by _PPParserGetPart then parsed with strtol
+local	_PPParserParseOperation	auStack_190	branchLabelText	CONFIRMED	256-byte buffer filled by _PPParserParseBranchLabel, then passed to _PPStreamAddOperation
+local	_PPParserParseEnd	auStack_110	partText	CONFIRMED	264-byte buffer filled by _PPParserGetPart, then memcmp against "END"
+local	__ZN7TSymbolC2ERKS_	auStack_30	stringAllocator	CONFIRMED	allocator object passed by address to the std::string constructor/destroy call (holds GetGlobalPoolAllocator() / the string allocator)
+local	__ZN7TSymbolC1ERKS_	auStack_30	stringAllocator	CONFIRMED	allocator object passed by address to the std::string constructor/destroy call (holds GetGlobalPoolAllocator() / the string allocator)
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	auStack_50	stringAllocator	CONFIRMED	allocator object passed by address to the std::string constructor/destroy call (holds GetGlobalPoolAllocator() / the string allocator)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	auStack_50	stringAllocator	CONFIRMED	allocator object passed by address to the std::string constructor/destroy call (holds GetGlobalPoolAllocator() / the string allocator)
+local	yyparse	aTStack_2ca2	yyssBeforeInit	INFERRED	the 2-byte state-stack slot just below yyssInit: yyssp starts at yyss-1 (pre-increment push) and yyss is set to yyssInit afterwards
+local	yyparse	pTStack_70	initializerNodeOut	CONFIRMED	address passed as the output (TIntermTyped **) parameter of TParseContext::executeInitializer
+local	__ZN17TPPStreamCompilerD4Ev	auStack_30	stringAllocator	CONFIRMED	allocator object passed by address to std::string::_Rep::_M_destroy
+local	_InterpreterRasterOpMachine_Blending	auStack_40	factorScratchRGB	INFERRED	12-byte RGB part of the 4-float output of CalculateBlendingFactors, called again only to recompute alpha; only factorAlphaScratch (the float after it) is read back
+local	_PPCRuntimeCompilerGetOffsetInRegister	abStack_38	descriptorCopyTail	INFERRED	bytes 8.. of the 0x24-byte register descriptor copy (the memcpy overruns descriptorCopy[2] into it); indexed by the component number at registerRecord+4 to pick the offset word
+local	_PPCConstantsAndScratchInitialise	extraout_f1	f1AfterNoiseInit	CONFIRMED	floating-point return register left over after the void _PPCNoiseGeneratorInitialise call, returned by Ghidra as the double result
+local	_glpPPDisassemble	extraout_r3	r3AfterFreeArraySizes	CONFIRMED	r3 left over after _free(arraySizes) (first free of the temp array sizes)
+local	_glpPPDisassemble	extraout_r3_00	r3AfterFreeParamArraySizes	CONFIRMED	r3 left over after the second _free(arraySizes) (param array sizes)
+local	_glpPPDisassemble	extraout_r3_01	r3AfterFreeLabelValues	CONFIRMED	r3 left over after _free(labelValues)
+local	_glpPPDisassemble	extraout_r4	r4AfterOutBufMalloc	CONFIRMED	r4 left over after _malloc(0x800) for the output buffer
+local	_glpPPDisassemble	extraout_r4_00	r4AfterTempArrayPosMalloc	CONFIRMED	r4 left over after the second malloc (tempArrayPos)
+local	_glpPPDisassemble	extraout_r4_01	r4AfterTempArraySizesMalloc	CONFIRMED	r4 left over after _malloc(program[0x10] << 2)
+local	_glpPPDisassemble	extraout_r4_02	r4AfterFreeArraySizes	CONFIRMED	r4 left over after _free(arraySizes)
+local	_glpPPDisassemble	extraout_r4_03	r4AfterParamArrayPosMalloc	CONFIRMED	r4 left over after the second param malloc (paramArrayPos)
+local	_glpPPDisassemble	extraout_r4_04	r4AfterParamArraySizesMalloc	CONFIRMED	r4 left over after _malloc(program[0xe] << 2)
+local	_glpPPDisassemble	extraout_r4_05	r4AfterFreeParamArraySizes	CONFIRMED	r4 left over after the second _free(arraySizes)
+local	_glpPPDisassemble	extraout_r4_06	r4AfterLabelValuesMemset	CONFIRMED	r4 left over after _memset(labelValues,0,labelCount)
+local	_glpPPDisassemble	extraout_r4_07	r4AfterFreeLabelValues	CONFIRMED	r4 left over after _free(labelValues)
+local	_glpPPShaderToProgramString	extraout_r4	r4AfterOutBufferMalloc	CONFIRMED	r4 left over after _malloc(0x1000) for the output buffer
+local	_glpPPShaderToProgramString	extraout_r4_00	r4AfterParamArrayPosMalloc	CONFIRMED	r4 left over after the second param malloc (allocation10)
+local	_glpPPShaderToProgramString	extraout_r4_01	r4AfterArraySizesMalloc	CONFIRMED	r4 left over after _malloc(shader[0xe] << 2)
+local	_InlineFunctionsBranch	extraout_r3	r3AfterFreeFuncInfos	CONFIRMED	r3 left over after _free(funcInfos[0])
+local	_BitSetFree	extraout_r3	r3AfterFreeBitSet	CONFIRMED	r3 left over after _free(bitSet), returned as the function result
+local	__ZNSsC4Ev	aaStack_20	stringAllocator	CONFIRMED	allocator object passed by address to the std::string constructor/destroy call (holds GetGlobalPoolAllocator() / the string allocator)
+local	__ZNSsD4Ev	auStack_20	stringAllocator	CONFIRMED	allocator object passed by address to the std::string constructor/destroy call (holds GetGlobalPoolAllocator() / the string allocator)

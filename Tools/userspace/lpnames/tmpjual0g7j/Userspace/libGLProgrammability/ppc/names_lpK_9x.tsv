@@ -1,0 +1,71 @@
+local	TGenericLinker__BuildSymbolTableList	param_2	shaderHandles	CONFIRMED	array of shader handles to link (advanced by the last loop, which walks it a second time)
+local	TGenericLinker__BuildSymbolTableList	param_3	numShaders	CONFIRMED	number of shader handles
+local	TGenericLinker__BuildSymbolTableList	bVar1	linkOk	CONFIRMED	the first-pass checks found no error
+local	TGenericLinker__BuildSymbolTableList	local_50	mainCount	CONFIRMED	per stage: number of shader objects that define main (compiler +0xac != 0)
+local	TGenericLinker__BuildSymbolTableList	local_40	fillIndex	CONFIRMED	per stage: next free slot while the per-stage object arrays are filled
+local	TGenericLinker__BuildSymbolTableList	iVar12	status	CONFIRMED	1 while all shaders are acceptable, 0 after an error (returned)
+local	TGenericLinker__BuildSymbolTableList	in_r6	r6Fwd	INFERRED	stray r6 forwarded to the shader handle's virtual call
+local	TGenericLinker__BuildSymbolTableList	in_r7	r7Fwd	INFERRED	stray r7 forwarded to the shader handle's virtual call
+local	TGenericLinker__BuildSymbolTableList	in_r8	r8Fwd	INFERRED	stray r8 forwarded to the shader handle's virtual call
+local	TGenericLinker__BuildSymbolTableList	local_48	mainShaderIndex	CONFIRMED	per stage: index of the shader object that defines main (initialised to -1, written with the shader index)
+use	TGenericLinker__BuildSymbolTableList	pcVar7	errorText	CONFIRMED	static link error text appended to the info sink	^\s*pcVar7\ =\ DAT_a7b7bb64;$	+1
+use	TGenericLinker__BuildSymbolTableList	pcVar7	errorText	CONFIRMED	static link error text appended to the info sink	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar13,pcVar7\);$@2	+1
+use	TGenericLinker__BuildSymbolTableList	pcVar7	errorText	CONFIRMED	static link error text appended to the info sink	^\s*pcVar7\ =\ DAT_a7b7bb64;$@2	+1
+use	TGenericLinker__BuildSymbolTableList	pcVar7	errorText	CONFIRMED	static link error text appended to the info sink	^\s*pcVar7\ =\ _linkIntErrorString;$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar2	stage	CONFIRMED	the shader's language: 0 vertex, 1 fragment (compiler +8)	^\s*iVar2\ =\ 0;$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar2	stage	CONFIRMED	the shader's language: 0 vertex, 1 fragment (compiler +8)	^\s*iVar2\ =\ 1;$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar2	stage	CONFIRMED	the shader's language: 0 vertex, 1 fragment (compiler +8)	^\s*local_50\[iVar2\]\ =\ local_50\[iVar2\]\ \+\ 1;$	+2
+use	TGenericLinker__BuildSymbolTableList	iVar2	stage	CONFIRMED	the shader's language: 0 vertex, 1 fragment (compiler +8)	^\s*pTVar8\ =\ this\ \+\ iVar2\ \*\ 4;$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar2	fillSlot	CONFIRMED	fill index of the stage before it is incremented	^\s*iVar2\ =\ \*\(int\ \*\)\(\(int\)local_40\ \+\ iVar4\);$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar2	fillSlot	CONFIRMED	fill index of the stage before it is incremented	^\s*\*\(int\ \*\)\(\(int\)local_40\ \+\ iVar4\)\ =\ iVar2\ \+\ 1;$	+2
+use	TGenericLinker__BuildSymbolTableList	piVar3	shaderHandle	CONFIRMED	shader handle (vtable +8 returns its compiler object)	^\s*piVar3\ =\ param_2\[iVar10\];$	+2
+use	TGenericLinker__BuildSymbolTableList	piVar3	shaderHandle	CONFIRMED	shader handle (vtable +8 returns its compiler object)	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 8\)\)\(piVar3,a1,iVar11,in_r6,in_r7,in_r8,pTVar8,a7\);$	+1
+use	TGenericLinker__BuildSymbolTableList	piVar3	shaderHandle	CONFIRMED	shader handle (vtable +8 returns its compiler object)	^\s*piVar3\ =\ \*param_2;$	+1
+use	TGenericLinker__BuildSymbolTableList	piVar3	shaderHandle	CONFIRMED	shader handle (vtable +8 returns its compiler object)	^\s*if\ \(\(piVar3\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 8\)\)\(piVar3\),\ iVar10\ !=\ 0\)\)\ \{$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar4	compiler	CONFIRMED	the shader handle's compiler object (+8 language, +0xac has-main flag, +0x68 symbol table, +0x70 PP stream)	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 8\)\)\(piVar3,a1,iVar11,in_r6,in_r7,in_r8,pTVar8,a7\);$	+2
+use	TGenericLinker__BuildSymbolTableList	iVar4	compiler	CONFIRMED	the shader handle's compiler object (+8 language, +0xac has-main flag, +0x68 symbol table, +0x70 PP stream)	^\s*if\ \(\*\(int\ \*\)\(iVar4\ \+\ 8\)\ !=\ 0\)\ \{$	+2
+use	TGenericLinker__BuildSymbolTableList	iVar4	compiler	CONFIRMED	the shader handle's compiler object (+8 language, +0xac has-main flag, +0x68 symbol table, +0x70 PP stream)	^\s*if\ \(\*\(int\ \*\)\(iVar4\ \+\ 0xac\)\ !=\ 0\)\ \{$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar4	stageByteOffset	CONFIRMED	stage * 4: offset into the per-stage arrays	^\s*iVar4\ =\ \(uint\)\(\*\(int\ \*\)\(iVar10\ \+\ 8\)\ !=\ 0\)\ \*\ 4;$	+5
+use	TGenericLinker__BuildSymbolTableList	iVar4	stageByteOffset	CONFIRMED	stage * 4: offset into the per-stage arrays	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(\(int\)local_40\ \+\ iVar4\)\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 8\)\)\ =\ iVar10;$	+2
+use	TGenericLinker__BuildSymbolTableList	iVar4	stageByteOffset	CONFIRMED	stage * 4: offset into the per-stage arrays	^\s*iVar2\ =\ \*\(int\ \*\)\(\(int\)local_40\ \+\ iVar4\);$	+3
+use	TGenericLinker__BuildSymbolTableList	pTVar8	r9Fwd	INFERRED	stray r9 forwarded to the shader handle's virtual call	^\s*pTVar8\ =\ \(unsigned\ char\ \*\)0x0;$	+1
+use	TGenericLinker__BuildSymbolTableList	pTVar8	r9Fwd	INFERRED	stray r9 forwarded to the shader handle's virtual call	^\s*pTVar8\ =\ \(unsigned\ char\ \*\)\&_linkIntErrorString;$	+1
+use	TGenericLinker__BuildSymbolTableList	pTVar8	r9Fwd	INFERRED	stray r9 forwarded to the shader handle's virtual call	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 8\)\)\(piVar3,a1,iVar11,in_r6,in_r7,in_r8,pTVar8,a7\);$	+1
+use	TGenericLinker__BuildSymbolTableList	pTVar8	r9Fwd	INFERRED	stray r9 forwarded to the shader handle's virtual call	^\s*pTVar8\ =\ \(unsigned\ char\ \*\)\&_linkIntErrorString;$@2	+1
+use	TGenericLinker__BuildSymbolTableList	pTVar8	r9Fwd	INFERRED	stray r9 forwarded to the shader handle's virtual call	^\s*pTVar8\ =\ this\ \+\ iVar2\ \*\ 4;$	+2
+use	TGenericLinker__BuildSymbolTableList	pTVar8	stageSlot	CONFIRMED	this + stage*4 while the per-stage arrays are allocated	^\s*pTVar8\ =\ this;$	+1
+use	TGenericLinker__BuildSymbolTableList	pTVar8	stageSlot	CONFIRMED	this + stage*4 while the per-stage arrays are allocated	^\s*pvVar13\ =\ _malloc\(\*\(int\ \*\)\(pTVar8\ \+\ 0x20\)\ <<\ 2\);$	+8
+use	TGenericLinker__BuildSymbolTableList	iVar9	ppStreamArray	CONFIRMED	the stage's PP stream array (this + stage*4 + 0x18)	^\s*iVar9\ =\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x18\);$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar9	ppStreamArray	CONFIRMED	the stage's PP stream array (this + stage*4 + 0x18)	^\s*\*\(undefined4\ \*\)\(iVar2\ \*\ 4\ \+\ iVar9\)\ =\ \*\(undefined4\ \*\)\(iVar10\ \+\ 0x70\);$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar11	r5Fwd	INFERRED	stray r5 (a copy of numShaders) forwarded to the shader handle's virtual call	^\s*iVar11\ =\ param_3;$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar11	r5Fwd	INFERRED	stray r5 (a copy of numShaders) forwarded to the shader handle's virtual call	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 8\)\)\(piVar3,a1,iVar11,in_r6,in_r7,in_r8,pTVar8,a7\);$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar11	checkStage	CONFIRMED	stage index in the per-stage sanity checks	^\s*iVar11\ =\ 0;$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar11	checkStage	CONFIRMED	stage index in the per-stage sanity checks	^\s*if\ \(\(local_50\[iVar11\]\ ==\ 0\)\ \&\&\ \(0\ <\ \*\(int\ \*\)\(this\ \+\ iVar11\ \*\ 4\ \+\ 0x20\)\)\)\ \{$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar11	checkStage	CONFIRMED	stage index in the per-stage sanity checks	^\s*sVar6\ =\ _strlen\(\(char\ \*\)\(\&_shaderString\)\[iVar11\]\);$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar11	checkStage	CONFIRMED	stage index in the per-stage sanity checks	^\s*_sprintf\(pcVar7,UNK_a7b7bab8,\(\&_shaderString\)\[iVar11\]\);$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar11	checkStage	CONFIRMED	stage index in the per-stage sanity checks	^\s*else\ if\ \(1\ <\ local_50\[iVar11\]\)\ \{$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar11	checkStage	CONFIRMED	stage index in the per-stage sanity checks	^\s*sVar6\ =\ _strlen\(\(char\ \*\)\(\&_shaderString\)\[iVar11\]\);$@2	+1
+use	TGenericLinker__BuildSymbolTableList	iVar11	checkStage	CONFIRMED	stage index in the per-stage sanity checks	^\s*_sprintf\(pcVar7,UNK_a7b7babc,local_50\[iVar11\],\(\&_shaderString\)\[iVar11\]\);$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar11	checkStage	CONFIRMED	stage index in the per-stage sanity checks	^\s*iVar11\ =\ iVar11\ \+\ 1;$	+2
+use	TGenericLinker__BuildSymbolTableList	iVar11	shaderCursor	CONFIRMED	index of the shader being placed into the per-stage arrays	^\s*iVar11\ =\ 0;$@2	+1
+use	TGenericLinker__BuildSymbolTableList	iVar11	shaderCursor	CONFIRMED	index of the shader being placed into the per-stage arrays	^\s*if\ \(\*\(int\ \*\)\(\(int\)local_40\ \+\ iVar4\ \+\ \-8\)\ ==\ iVar11\)\ \{$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar11	shaderCursor	CONFIRMED	index of the shader being placed into the per-stage arrays	^\s*iVar11\ =\ iVar11\ \+\ 1;$@2	+2
+use	TGenericLinker__BuildSymbolTableList	pvVar13	infoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*pvVar13\ =\ \*\(void\ \*\*\)\(this\ \+\ 0x84\);$	+1
+use	TGenericLinker__BuildSymbolTableList	pvVar13	infoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar13,"ERROR:\ "\);$	+3
+use	TGenericLinker__BuildSymbolTableList	pvVar13	infoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*pvVar13\ =\ \*\(void\ \*\*\)\(this\ \+\ 0x84\);$@2	+1
+use	TGenericLinker__BuildSymbolTableList	pvVar13	compilerArray	CONFIRMED	malloc'd per-stage compiler-object array (stage slot +8)	^\s*pvVar13\ =\ _malloc\(\*\(int\ \*\)\(pTVar8\ \+\ 0x20\)\ <<\ 2\);$	+2
+use	TGenericLinker__BuildSymbolTableList	pvVar13	symbolTableArray	CONFIRMED	malloc'd per-stage symbol-table array (stage slot +0x10)	^\s*pvVar13\ =\ _malloc\(\*\(int\ \*\)\(pTVar8\ \+\ 0x20\)\ <<\ 2\);$@2	+2
+use	TGenericLinker__BuildSymbolTableList	pvVar13	newPpStreamArray	CONFIRMED	malloc'd per-stage PP stream array (stage slot +0x18)	^\s*pvVar13\ =\ _malloc\(\*\(int\ \*\)\(pTVar8\ \+\ 0x20\)\ <<\ 2\);$@3	+2
+use	TGenericLinker__BuildSymbolTableList	pvVar13	loopInfoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*pvVar13\ =\ \*\(void\ \*\*\)\(this\ \+\ 0x84\);$@3	+1
+use	TGenericLinker__BuildSymbolTableList	pvVar13	loopInfoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar13,"INTERNAL\ ERROR:\ "\);$	+3
+use	TGenericLinker__BuildSymbolTableList	pvVar13	loopInfoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*pvVar13\ =\ \*\(void\ \*\*\)\(this\ \+\ 0x84\);$@4	+1
+use	TGenericLinker__BuildSymbolTableList	pvVar13	loopInfoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*pvVar13\ =\ \*\(void\ \*\*\)\(this\ \+\ 0x84\);$@5	+1
+use	TGenericLinker__BuildSymbolTableList	iVar10	shaderIndex	CONFIRMED	index of the shader handle being classified	^\s*iVar10\ =\ 0;$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar10	shaderIndex	CONFIRMED	index of the shader handle being classified	^\s*piVar3\ =\ param_2\[iVar10\];$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar10	shaderIndex	CONFIRMED	index of the shader handle being classified	^\s*\*\(int\ \*\)\(\(int\)local_40\ \+\ iVar2\ \*\ 4\ \+\ \-8\)\ =\ iVar10;$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar10	shaderIndex	CONFIRMED	index of the shader handle being classified	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+2
+use	TGenericLinker__BuildSymbolTableList	iVar10	shaderCompiler	CONFIRMED	the shader handle's compiler object (+8 language, +0x68 symbol table, +0x70 PP stream)	^\s*if\ \(\(piVar3\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 8\)\)\(piVar3\),\ iVar10\ !=\ 0\)\)\ \{$	+2
+use	TGenericLinker__BuildSymbolTableList	iVar10	shaderCompiler	CONFIRMED	the shader handle's compiler object (+8 language, +0x68 symbol table, +0x70 PP stream)	^\s*\*\*\(int\ \*\*\)\(this\ \+\ iVar4\ \+\ 8\)\ =\ iVar10;$	+3
+use	TGenericLinker__BuildSymbolTableList	iVar10	shaderCompiler	CONFIRMED	the shader handle's compiler object (+8 language, +0x68 symbol table, +0x70 PP stream)	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(\(int\)local_40\ \+\ iVar4\)\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 8\)\)\ =\ iVar10;$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar10	shaderCompiler	CONFIRMED	the shader handle's compiler object (+8 language, +0x68 symbol table, +0x70 PP stream)	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ 0x68\);$	+1
+use	TGenericLinker__BuildSymbolTableList	iVar10	shaderCompiler	CONFIRMED	the shader handle's compiler object (+8 language, +0x68 symbol table, +0x70 PP stream)	^\s*\*\(undefined4\ \*\)\(iVar2\ \*\ 4\ \+\ iVar9\)\ =\ \*\(undefined4\ \*\)\(iVar10\ \+\ 0x70\);$	+1

@@ -1,0 +1,31 @@
+local	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	param_1	machine	CONFIRMED	raster-op machine: *machine is the emulator context (program info at +0xd80), machine[1] the runtime compiler (+0xe3c = the epilog branch target)
+local	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC instruction word is emitted; returned advanced
+local	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	iVar11	emulator	CONFIRMED	*machine: the emulator context
+local	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	iVar13	compiler	CONFIRMED	machine[1]: the runtime compiler, whose +0xe3c is the branch target of the emitted skip-to-epilog branches
+local	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	iVar4	rasterState	INFERRED	emulator +0xd80: program info with the folded raster state (+0x3c stage flags, +0x48 stencil function and ops, +0x4c reference and mask, +0x50 depth function, +0x70 write masks)
+local	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar10	stageFlags	CONFIRMED	raster state +0x3c: bit 1 stencil test, bit 2 depth test, bit 6 buffer mask
+local	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar5	stencilState	INFERRED	raster state +0x48: stencil function in bits 12..14, then the stencil fail / depth-fail / pass operations in three 3-bit fields
+local	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar2	stencilRef	INFERRED	raster state +0x4c >> 24: the stencil reference value
+local	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar9	writeMasks	INFERRED	raster state +0x70: stencil write mask in bits 8..15, depth write enable bit 16
+local	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar14	stencilWriteMask	INFERRED	stencil write mask: 0xff when the buffer mask stage is disabled, else writeMasks bits 8..15
+local	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	bVar1	bufferMaskDisabled	INFERRED	stageFlags bit 6 clear: no buffer mask stage
+local	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	bVar3	stencilEnabled	INFERRED	stageFlags bit 1: the stencil test is active
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar12	stencilValueMask	INFERRED	raster state +0x4c bits 8..15: the stencil compare mask	^\s*uVar12\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0x4c\)\ >>\ 8\ \&\ 0xff;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar12	stencilValueMask	INFERRED	raster state +0x4c bits 8..15: the stencil compare mask	^\s*\*puVar7\ =\ uVar2\ \&\ uVar12\ \|\ 0x3ba00000;$	+2
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar12	stencilValueMask	INFERRED	raster state +0x4c bits 8..15: the stencil compare mask	^\s*\*puVar7\ =\ uVar2\ \&\ uVar12\ \|\ 0x3ba00000;$@2	+2
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar12	stencilValueMask	INFERRED	raster state +0x4c bits 8..15: the stencil compare mask	^\s*\*puVar7\ =\ uVar2\ \&\ uVar12\ \|\ 0x3ba00000;$@3	+2
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar12	stencilValueMask	INFERRED	raster state +0x4c bits 8..15: the stencil compare mask	^\s*\*puVar7\ =\ uVar2\ \&\ uVar12\ \|\ 0x3ba00000;$@4	+2
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar12	stencilValueMask	INFERRED	raster state +0x4c bits 8..15: the stencil compare mask	^\s*\*puVar7\ =\ uVar2\ \&\ uVar12\ \|\ 0x3ba00000;$@5	+2
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar12	stencilValueMask	INFERRED	raster state +0x4c bits 8..15: the stencil compare mask	^\s*\*puVar7\ =\ uVar2\ \&\ uVar12\ \|\ 0x3ba00000;$@6	+2
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar8	depthFunc	INFERRED	raster state +0x50: the depth function (0..7)	^\s*uVar8\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar11\ \+\ 0xd80\)\ \+\ 0x50\);$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	uVar8	depthFunc	INFERRED	raster state +0x50: the depth function (0..7)	^\s*switch\(uVar8\ \&\ 7\)\ \{$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar15	branchFixupPtr	INFERRED	branch instruction word whose displacement is patched once the skipped code is emitted	^\s*puVar15\ =\ \(uint\ \*\)0x0;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar15	branchFixupPtr	INFERRED	branch instruction word whose displacement is patched once the skipped code is emitted	^\s*puVar15\ =\ puVar7;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar15	branchFixupPtr	INFERRED	branch instruction word whose displacement is patched once the skipped code is emitted	^\s*puVar15\ =\ param_2\ \+\ 5;$	+2
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar15	branchFixupPtr	INFERRED	branch instruction word whose displacement is patched once the skipped code is emitted	^\s*\*puVar15\ =\ \*puVar15\ \|\ \(int\)param_2\ \-\ \(int\)puVar15\ \&\ 0xfffcU;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar15	branchFixupPtr	INFERRED	branch instruction word whose displacement is patched once the skipped code is emitted	^\s*puVar15\ =\ param_2\ \+\ 1;$	+2
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar15	branchFixupPtr	INFERRED	branch instruction word whose displacement is patched once the skipped code is emitted	^\s*\*puVar15\ =\ \*puVar15\ \|\ \(int\)puVar6\ \-\ \(int\)puVar15\ \&\ 0xfffcU;$	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar6	emitPtr	INFERRED	cursor over the emitted code between the stencil and depth tests	puVar6 = puVar7;	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar6	emitPtr	INFERRED	cursor over the emitted code between the stencil and depth tests	puVar6 = param_2 \+ 3;	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar6	emitPtr	INFERRED	cursor over the emitted code between the stencil and depth tests	puVar6 = param_2 \+ 6;	+1
+use	_PPCRasterOpMachine_DepthAndStencilTestRTCAV	puVar6	emitPtr	INFERRED	cursor over the emitted code between the stencil and depth tests (argument of the stencil-buffer update emitter)	puVar6 = \(uint \*\)\(\(int \(\*\)\(\)\)_PPCRasterOpMachineUpdateStencilBufferRTCAV\)\(uVar5 >> 0xf & 7,0x1a,0x19,uVar2,uVar14,puVar6\);	+1	rhs

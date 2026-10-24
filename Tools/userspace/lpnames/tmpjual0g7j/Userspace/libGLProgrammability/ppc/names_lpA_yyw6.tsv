@@ -1,0 +1,2 @@
+use	yyparse	uVar16	staleR4Pass	INFERRED	r4 value left by the previous call forwarded to the virtual call	^\s*uVar16\ =\ extraout_r4_03;$	+4
+use	yyparse	uVar16	staleR4Pass	INFERRED	r4 value left by the previous call forwarded to the virtual call	^\s*\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x24\),uVar16,param_3,param_4,param_5,local_5c\);$	+1

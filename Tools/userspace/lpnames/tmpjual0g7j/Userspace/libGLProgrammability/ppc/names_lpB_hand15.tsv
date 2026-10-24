@@ -1,0 +1,17 @@
+local	_PPParserParseOperation	param_2	opcode	CONFIRMED	opcode number (index into the pp-stream opcode table); stored in bits 18..25 of the operation header
+local	_PPParserParseOperation	param_3	precision	CONFIRMED	precision suffix: 0 none, 1 R, 2 H, 3 X (bits 18..19 of the flags word)
+local	_PPParserParseOperation	param_4	updateCC	CONFIRMED	condition-code update (C suffix) flag (bit 22)
+local	_PPParserParseOperation	param_5	saturate	CONFIRMED	_SAT suffix flag (bit 20)
+local	_PPParserParseOperation	param_6	ccRegister	CONFIRMED	condition-code register select (bit 21)
+local	_PPParserParseOperation	param_7	unusedArg7	INFERRED	never read; forwarded register
+local	_PPParserParseOperation	bVar1	hasDestination	INFERRED	the instruction writes a destination operand (false for branches/KIL)
+local	_PPParserParseOperation	bVar2	addressDestination	INFERRED	destination is an address register (ARL/ARR/ARA)
+local	_PPParserParseOperation	bVar3	requireScalarSwizzle	INFERRED	source must be a scalar (single-component swizzle): checked after the source is parsed
+local	_PPParserParseOperation	iVar4	status	INFERRED	parser status code from the operand parsers (0 ok)
+local	_PPParserParseOperation	iVar5	resultOrLastOp	INFERRED	final status code, or the last pp-stream operation chunk
+local	_PPParserParseOperation	uVar7	sourceCount	INFERRED	number of source operands the opcode takes
+local	_PPParserParseOperation	puVar6	sourceTarget	INFERRED	destination record of the texture-source parse (opAuxA or opSrc1A)
+local	_PPParserParseOperation	puVar8	sourceCursor	INFERRED	walks the source operand records (2 words each)
+local	_PPParserParseOperation	local_290	partBuf	INFERRED	token text: , or ; after each operand
+local	_PPParserParseOperation	local_50	branchTarget	INFERRED	branch label index parsed by _PPParserParseBranchLabel; stored in the operation record (word 13)
+local	_PPParserParseOperation	local_4c	sourceSwizzleInfo	INFERRED	swizzle information returned by the source parsers; [0] nonzero when a swizzle was given

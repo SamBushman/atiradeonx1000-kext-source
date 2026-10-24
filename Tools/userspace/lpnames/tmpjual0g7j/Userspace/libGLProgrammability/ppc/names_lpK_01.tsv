@@ -1,0 +1,46 @@
+local	__ZN9__gnu_cxxeqIPcSsEEbRKNS_17__normal_iteratorIT_T0_EES7_	param_2	rhs	CONFIRMED	right operand iterator
+local	__ZN9__gnu_cxxeqIPKcSsEEbRKNS_17__normal_iteratorIT_T0_EES8_	param_2	rhs	CONFIRMED	right operand iterator
+local	__ZNSsC2IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE	param_2	first	CONFIRMED	basic_string(InputIt first, InputIt last, const Alloc&): range start forwarded to _S_construct
+local	__ZNSsC1IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE	param_2	first	CONFIRMED	basic_string(InputIt first, InputIt last, const Alloc&): range start forwarded to _S_construct
+local	__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE	param_2	first	CONFIRMED	basic_string(InputIt first, InputIt last, const Alloc&): range start forwarded to _S_construct
+local	__ZNSsC2IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE	param_2	first	CONFIRMED	basic_string(InputIt first, InputIt last, const Alloc&): range start forwarded to _S_construct
+local	__ZNSsC1IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE	param_2	first	CONFIRMED	basic_string(InputIt first, InputIt last, const Alloc&): range start forwarded to _S_construct
+local	__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE	param_2	first	CONFIRMED	basic_string(InputIt first, InputIt last, const Alloc&): range start forwarded to _S_construct
+local	__ZNSsC2IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE	param_3	last	CONFIRMED	range end forwarded to _S_construct
+local	__ZNSsC1IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE	param_3	last	CONFIRMED	range end forwarded to _S_construct
+local	__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE	param_3	last	CONFIRMED	range end forwarded to _S_construct
+local	__ZNSsC2IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE	param_3	last	CONFIRMED	range end forwarded to _S_construct
+local	__ZNSsC1IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE	param_3	last	CONFIRMED	range end forwarded to _S_construct
+local	__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE	param_3	last	CONFIRMED	range end forwarded to _S_construct
+local	__ZNSsC1IPKcEET_S2_RKSaIcE	pcVar1	newData	CONFIRMED	character buffer returned by _S_construct and stored by _Alloc_hider
+local	__ZNSsC4IPKcEET_S2_RKSaIcE	pcVar1	newData	CONFIRMED	character buffer returned by _S_construct and stored by _Alloc_hider
+local	__ZNSsC1IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE	pcVar1	newData	CONFIRMED	character buffer returned by _S_construct and stored by _Alloc_hider
+local	__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE	pcVar1	newData	CONFIRMED	character buffer returned by _S_construct and stored by _Alloc_hider
+local	__ZdlPv	param_1	block	CONFIRMED	operator delete(void*): freed unless null
+local	__ZdlPv	uVar1	result	INFERRED	0, or r3 as left by free (Ghidra return pass-through)
+local	__ZNKSaIcE7addressERc	param_2	ref	CONFIRMED	allocator::address(reference): returned unchanged
+local	__ZNSaIcE9constructEPcRKc	param_2	slot	CONFIRMED	allocator::construct(pointer p, const char& value): destination (null-checked placement new)
+local	__ZdaPv	param_1	block	CONFIRMED	operator delete[](void*) forwards to operator delete
+local	__ZdaPv	uVar1	result	INFERRED	return value of operator delete
+local	operator_new__	param_1	byteCount	CONFIRMED	operator new[](size_t) forwards to operator new
+local	__ZNSt11logic_errorD4Ev	param_2	deleteFlag	CONFIRMED	in-charge deleting flag: bit 0 set => also operator delete(this)
+local	__ZNSt13runtime_errorD4Ev	param_2	deleteFlag	CONFIRMED	in-charge deleting flag: bit 0 set => also operator delete(this)
+local	__ZNSt11logic_errorD4Ev	iVar4	stringData	CONFIRMED	the message string's character data (this+4); its _Rep header lies 0xc bytes before
+local	__ZNSt13runtime_errorD4Ev	iVar4	stringData	CONFIRMED	the message string's character data (this+4); its _Rep header lies 0xc bytes before
+local	__ZNSt11logic_errorD4Ev	auStack_20	allocScratch	INFERRED	empty allocator temporary passed to _Rep::_M_destroy
+local	__ZNSt13runtime_errorD4Ev	auStack_20	allocScratch	INFERRED	empty allocator temporary passed to _Rep::_M_destroy
+local	__ZNSt9type_infoD4Ev	param_2	deleteFlag	CONFIRMED	in-charge deleting flag
+local	__ZNSt8bad_castD4Ev	param_2	deleteFlag	CONFIRMED	in-charge deleting flag
+local	__ZNSt10bad_typeidD4Ev	param_2	deleteFlag	CONFIRMED	in-charge deleting flag
+local	__ZN10__cxxabiv117__class_type_infoD4Ev	param_2	deleteFlag	CONFIRMED	in-charge deleting flag
+local	__ZN10__cxxabiv120__si_class_type_infoD4Ev	param_2	deleteFlag	CONFIRMED	in-charge deleting flag
+local	__ZN10__cxxabiv121__vmi_class_type_infoD4Ev	param_2	deleteFlag	CONFIRMED	in-charge deleting flag
+local	__ZNKSt9type_infoeqERKS_	iVar1	nameCompare	CONFIRMED	strcmp of the two mangled-name strings (this+4 / other+4)
+local	__ZNKSt9type_infoeqERKS_	uVar2	equal	CONFIRMED	1 when same object or same name, else 0
+local	__ZNKSt9type_info10__do_catchEPKS_PPvj	param_3	outer	INFERRED	pointer-nesting level (unused by the base class)
+local	__ZNKSt9type_info11__do_upcastEPKN10__cxxabiv117__class_type_infoEPPv	param_2	target	INFERRED	__do_upcast(const class_type_info* target, void** obj_ptr): ignored, the base type_info never upcasts (returns 0)
+local	___cxa_call_unexpected_97c19d00	alStack_40	lsdaHeader	CONFIRMED	lsda_header_info filled by parse_lsda_header and read by check_exception_spec
+local	FUN_97c1a23c	in_r3	r3In	INFERRED	incoming r3, returned unchanged
+local	FUN_97c1a25c	in_r3	r3In	INFERRED	incoming r3, returned unchanged
+use	__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE	iVar1	thisIsSrcType	CONFIRMED	type_info::operator== of this against src_type (src_ptr == obj_ptr case of __do_dyncast)	^\s*if\ \(\(param_5\ ==\ param_7\)\ \&\&\ \(iVar1\ =\ \(\(int\ \(\*\)\(\)\)__ZNKSt9type_infoeqERKS_\)\(this,param_6\),\ iVar1\ !=\ 0\)\)\ \{$	+1
+use	__ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PKvS3_S5_RNS0_16__dyncast_resultE	iVar1	thisIsDstType	CONFIRMED	type_info::operator== of this against dst_type	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)__ZNKSt9type_infoeqERKS_\)\(this,param_4\);$	+2

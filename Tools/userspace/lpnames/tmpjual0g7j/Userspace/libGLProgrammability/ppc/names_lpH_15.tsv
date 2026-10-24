@@ -1,0 +1,42 @@
+use	ParseSymbolTable__ClearCompilerTempData	iVar1	symbolCursor	INFERRED	cursor over the table symbol list (next at +8)	^\s*iVar1\ =\ \*\(int\ \*\)this;$	+2
+use	ParseSymbolTable__ClearCompilerTempData	iVar1	symbolCursor	INFERRED	cursor over the table symbol list (next at +8)	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ 0xc\)\ =\ 0;$	+4
+local	ParseSymbolTable__Dump	puVar1	fileTable	INFERRED	stdio FILE table base (__sF); +0x58 is the second entry (stdout)
+local	ParseSymbolTable__Dump	iVar2	symbolCursor	INFERRED	cursor over the table symbol list (next at +8)
+use	__ZN16ParseSymbolTableC1Ej	iVar1	bucketOffset	INFERRED	bucket index * 4: byte offset of the bucket being cleared	^\s*iVar1\ =\ uVar3\ \*\ 4;$	+1
+use	__ZN16ParseSymbolTableC1Ej	iVar1	bucketOffset	INFERRED	bucket index * 4: byte offset of the bucket being cleared	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ \*\(int\ \*\)\(\(int\)this\ \+\ 8\)\)\ =\ 0;$	+1
+local	__ZN16ParseSymbolTableC1Ej	param_2	bucketCount	INFERRED	number of hash buckets (stored at this+0x10)
+use	__ZN16ParseSymbolTableC2Ej	iVar1	bucketOffset	INFERRED	bucket index * 4: byte offset of the bucket being cleared	^\s*iVar1\ =\ uVar3\ \*\ 4;$	+1
+use	__ZN16ParseSymbolTableC2Ej	iVar1	bucketOffset	INFERRED	bucket index * 4: byte offset of the bucket being cleared	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ \*\(int\ \*\)\(\(int\)this\ \+\ 8\)\)\ =\ 0;$	+1
+local	__ZN16ParseSymbolTableC2Ej	param_2	bucketCount	INFERRED	number of hash buckets (stored at this+0x10)
+use	__ZN16ParseSymbolTableC4Ej	iVar1	bucketOffset	INFERRED	bucket index * 4: byte offset of the bucket being cleared	^\s*iVar1\ =\ uVar3\ \*\ 4;$	+1
+use	__ZN16ParseSymbolTableC4Ej	iVar1	bucketOffset	INFERRED	bucket index * 4: byte offset of the bucket being cleared	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ \*\(int\ \*\)\(\(int\)this\ \+\ 8\)\)\ =\ 0;$	+1
+local	__ZN16ParseSymbolTableC4Ej	param_2	bucketCount	INFERRED	number of hash buckets (stored at this+0x10)
+local	ParseSymbolTable__FirstSymbolInHash	param_2	hash	INFERRED	symbol name hash; hash % bucket count selects the bucket
+local	ParseOperand__GetSwizzle	param_2	index	INFERRED	swizzle component index into the swizzle byte array (operand+0x10)
+use	__ZN16ParseSymbolTableD4Ev	this_00	symbolCursor	INFERRED	cursor over the table symbol list (next at +8)	^\s*this_00\ =\ \*\(void\ \*\*\)this;$	+6
+use	__ZN16ParseSymbolTableD4Ev	pvVar1	nextSymbol	INFERRED	next symbol saved before the current one is destroyed	^\s*pvVar1\ =\ \*\(void\ \*\*\)\(\(int\)this_00\ \+\ 8\);$	+1
+use	__ZN16ParseSymbolTableD4Ev	pvVar1	nextSymbol	INFERRED	next symbol saved before the current one is destroyed	^\s*this_00\ =\ pvVar1;$	+1
+use	ParseSymbolTable__FindSymbol	iVar1	isEqual	INFERRED	ParseSymbol operator== result	^\s*iVar1\ =\ __ZeqRK11ParseSymbolS1_\(pPVar2,param_2\);$	+2
+use	ParseSymbolTable__FindSymbol	pPVar2	bucketSymbol	INFERRED	symbol in the hash bucket chain being compared (next at +4)	^\s*pPVar2\ =\ \*\(unsigned\ char\ \*\*\)$	+1
+use	ParseSymbolTable__FindSymbol	pPVar2	bucketSymbol	INFERRED	symbol in the hash bucket chain being compared (next at +4)	^\s*if\ \(pPVar2\ ==\ \(unsigned\ char\ \*\)0x0\)\ \{$	+1
+use	ParseSymbolTable__FindSymbol	pPVar2	bucketSymbol	INFERRED	symbol in the hash bucket chain being compared (next at +4)	^\s*iVar1\ =\ __ZeqRK11ParseSymbolS1_\(pPVar2,param_2\);$	+1
+use	ParseSymbolTable__FindSymbol	pPVar2	bucketSymbol	INFERRED	symbol in the hash bucket chain being compared (next at +4)	^\s*pPVar2\ =\ \*\(unsigned\ char\ \*\*\)\(pPVar2\ \+\ 4\);$	+1
+use	ParseSymbolTable__FindSymbol	pPVar2	bucketSymbol	INFERRED	symbol in the hash bucket chain being compared (next at +4)	^\s*return\ pPVar2;$	+1
+use	ParseSymbolTable__FindSymbolByName	this_00	keySymbol	INFERRED	temporary ParseSymbol carrying the searched name	^\s*this_00\ =\ operator_new\(100\);$	+10
+use	ParseSymbolTable__FindSymbolByName	this_00	keySymbol	INFERRED	temporary ParseSymbol carrying the searched name	^\s*__ZN11ParseSymbolD1Ev\(this_00\);$	+2
+use	ParseSymbolTable__FindSymbolByName	this_00	keySymbol	INFERRED	temporary ParseSymbol carrying the searched name	^\s*__ZN11ParseSymbolD1Ev\(this_00\);$@2	+2
+use	ParseSymbolTable__FindSymbolByName	iVar1	isEqual	INFERRED	ParseSymbol operator== result	^\s*iVar1\ =\ __ZeqRK11ParseSymbolS1_\(pPVar2,this_00\);$	+2
+use	ParseSymbolTable__FindSymbolByName	pPVar2	bucketSymbol	INFERRED	symbol in the hash bucket chain being compared (next at +4)	^\s*for\ \(pPVar2\ =\ \*\(unsigned\ char\ \*\*\)$	+6
+use	ParseSymbolTable__FindSymbolByName	pPVar2	bucketSymbol	INFERRED	symbol in the hash bucket chain being compared (next at +4)	^\s*return\ pPVar2;$	+1
+use	ParseSymbolTable__ChangeChunk	this_00	symbolCursor	INFERRED	cursor over the table symbol list (next at +8)	^\s*this_00\ =\ \*\(unsigned\ char\ \*\*\)this;$	+2
+use	ParseSymbolTable__ChangeChunk	this_00	symbolCursor	INFERRED	cursor over the table symbol list (next at +8)	^\s*if\ \(\*\(unsigned\ char\ \*\*\)this_00\ ==\ param_2\)\ \{$	+2
+use	ParseSymbolTable__ChangeChunk	this_00	symbolCursor	INFERRED	cursor over the table symbol list (next at +8)	^\s*\*\(undefined4\ \*\)\(this_00\ \+\ 0x44\)\ =\ 0;$	+1
+use	ParseSymbolTable__ChangeChunk	this_00	symbolCursor	INFERRED	cursor over the table symbol list (next at +8)	^\s*this_00\ =\ \*\(unsigned\ char\ \*\*\)\(this_00\ \+\ 8\);$	+2
+local	ParseSymbolTable__ChangeChunk	param_4	releaseOwnership	INFERRED	non-zero: clear the symbol owns-chunk flag (+0x44) after replacing the chunk
+local	TIntermBranch__indirectNode	param_1	thisNode	INFERRED	the TIntermBranch node (this); +0xc is its expression
+use	ParseSymbolTable__FindGlobalSymbolByName	this_00	keySymbol	INFERRED	temporary ParseSymbol carrying the searched name	^\s*this_00\ =\ operator_new\(100\);$	+13
+use	ParseSymbolTable__FindGlobalSymbolByName	this_00	keySymbol	INFERRED	temporary ParseSymbol carrying the searched name	^\s*__ZN11ParseSymbolD1Ev\(this_00\);$@2	+2
+use	ParseSymbolTable__FindGlobalSymbolByName	iVar1	isEqual	INFERRED	ParseSymbol operator== result	^\s*int\ iVar1;$	+1
+use	ParseSymbolTable__FindGlobalSymbolByName	iVar1	isEqual	INFERRED	ParseSymbol operator== result	^\s*if\ \(\(\*\(int\ \*\)\(pPVar2\ \+\ 0x38\)\ !=\ 0\)\ \&\&$	+2
+use	ParseSymbolTable__FindGlobalSymbolByName	pPVar2	bucketSymbol	INFERRED	symbol in the hash bucket chain being compared (next at +4)	^\s*for\ \(pPVar2\ =\ \*\(unsigned\ char\ \*\*\)$	+7
+use	ParseSymbolTable__FindGlobalSymbolByName	pPVar2	bucketSymbol	INFERRED	symbol in the hash bucket chain being compared (next at +4)	^\s*return\ pPVar2;$	+1
