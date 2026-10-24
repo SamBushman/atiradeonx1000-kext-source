@@ -498,9 +498,9 @@ code_r0x97bb2f70: ;
 }
 
 /* TGenericLinker__CreateFromStreamWithSymbolTableUpdate @ 0x97bb2ff0 (820 bytes) */
-int TGenericLinker__CreateFromStreamWithSymbolTableUpdate(this, _PPStream, parseSymbolTable)
+int TGenericLinker__CreateFromStreamWithSymbolTableUpdate(this, sourceStream, parseSymbolTable)
   unsigned char * this;
-  unsigned char * _PPStream;
+  unsigned char * sourceStream;
   unsigned char * parseSymbolTable;
 {
   int compareResult;
@@ -513,65 +513,65 @@ int TGenericLinker__CreateFromStreamWithSymbolTableUpdate(this, _PPStream, parse
   void *infoSink;
   
   newStream = (undefined4 *)_PPStreamCreate();
-  *newStream = *(undefined4 *)_PPStream;
+  *newStream = *(undefined4 *)sourceStream;
   *(undefined4 **)(parseSymbolTable + 0xc) = newStream;
-  for (symbolChunk = (unsigned char *)**(undefined4 **)(_PPStream + 4); symbolChunk != (unsigned char *)0x0;
+  for (symbolChunk = (unsigned char *)**(undefined4 **)(sourceStream + 4); symbolChunk != (unsigned char *)0x0;
       symbolChunk = *(unsigned char **)(symbolChunk + 8)) {
     symbolChunkCopy = (unsigned char *)_PPStreamChunkCreateFromChunk(symbolChunk);
     _PPStreamChunkListAddChunk(newStream[1],symbolChunkCopy);
     ParseSymbolTable__ChangeChunk(parseSymbolTable,symbolChunk,symbolChunkCopy,1);
   }
-  for (plainChunk = **(int **)(_PPStream + 8); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
+  for (plainChunk = **(int **)(sourceStream + 8); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
     plainChunkCopy = _PPStreamChunkCreateFromChunk(plainChunk);
     _PPStreamChunkListAddChunk(newStream[2],plainChunkCopy);
   }
-  for (plainChunk = **(int **)(_PPStream + 0xc); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
+  for (plainChunk = **(int **)(sourceStream + 0xc); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
     plainChunkCopy = _PPStreamChunkCreateFromChunk(plainChunk);
     _PPStreamChunkListAddChunk(newStream[3],plainChunkCopy);
   }
-  for (symbolChunk = (unsigned char *)**(undefined4 **)(_PPStream + 0x10); symbolChunk != (unsigned char *)0x0
+  for (symbolChunk = (unsigned char *)**(undefined4 **)(sourceStream + 0x10); symbolChunk != (unsigned char *)0x0
       ; symbolChunk = *(unsigned char **)(symbolChunk + 8)) {
     symbolChunkCopy = (unsigned char *)_PPStreamChunkCreateFromChunk(symbolChunk);
     _PPStreamChunkListAddChunk(newStream[4],symbolChunkCopy);
     ParseSymbolTable__ChangeChunk(parseSymbolTable,symbolChunk,symbolChunkCopy,1);
   }
-  for (plainChunk = **(int **)(_PPStream + 0x14); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
+  for (plainChunk = **(int **)(sourceStream + 0x14); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
     plainChunkCopy = _PPStreamChunkCreateFromChunk(plainChunk);
     _PPStreamChunkListAddChunk(newStream[5],plainChunkCopy);
   }
-  for (symbolChunk = (unsigned char *)**(undefined4 **)(_PPStream + 0x18); symbolChunk != (unsigned char *)0x0
+  for (symbolChunk = (unsigned char *)**(undefined4 **)(sourceStream + 0x18); symbolChunk != (unsigned char *)0x0
       ; symbolChunk = *(unsigned char **)(symbolChunk + 8)) {
     symbolChunkCopy = (unsigned char *)_PPStreamChunkCreateFromChunk(symbolChunk);
     _PPStreamChunkListAddChunk(newStream[6],symbolChunkCopy);
     ParseSymbolTable__ChangeChunk(parseSymbolTable,symbolChunk,symbolChunkCopy,1);
   }
-  for (symbolChunk = (unsigned char *)**(undefined4 **)(_PPStream + 0x1c); symbolChunk != (unsigned char *)0x0
+  for (symbolChunk = (unsigned char *)**(undefined4 **)(sourceStream + 0x1c); symbolChunk != (unsigned char *)0x0
       ; symbolChunk = *(unsigned char **)(symbolChunk + 8)) {
     symbolChunkCopy = (unsigned char *)_PPStreamChunkCreateFromChunk(symbolChunk);
     _PPStreamChunkListAddChunk(newStream[7],symbolChunkCopy);
     ParseSymbolTable__ChangeChunk(parseSymbolTable,symbolChunk,symbolChunkCopy,1);
   }
-  for (plainChunk = **(int **)(_PPStream + 0x20); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
+  for (plainChunk = **(int **)(sourceStream + 0x20); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
     plainChunkCopy = _PPStreamChunkCreateFromChunk(plainChunk);
     _PPStreamChunkListAddChunk(newStream[8],plainChunkCopy);
   }
-  for (plainChunk = **(int **)(_PPStream + 0x24); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
+  for (plainChunk = **(int **)(sourceStream + 0x24); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
     plainChunkCopy = _PPStreamChunkCreateFromChunk(plainChunk);
     _PPStreamChunkListAddChunk(newStream[9],plainChunkCopy);
   }
-  for (plainChunk = **(int **)(_PPStream + 0x2c); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
+  for (plainChunk = **(int **)(sourceStream + 0x2c); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
     plainChunkCopy = _PPStreamChunkCreateFromChunk(plainChunk);
     _PPStreamChunkListAddChunk(newStream[0xb],plainChunkCopy);
   }
-  for (plainChunk = **(int **)(_PPStream + 0x28); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
+  for (plainChunk = **(int **)(sourceStream + 0x28); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
     plainChunkCopy = _PPStreamChunkCreateFromChunk(plainChunk);
     _PPStreamChunkListAddChunk(newStream[10],plainChunkCopy);
   }
-  for (plainChunk = **(int **)(_PPStream + 0x30); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
+  for (plainChunk = **(int **)(sourceStream + 0x30); plainChunk != 0; plainChunk = *(int *)(plainChunk + 8)) {
     plainChunkCopy = _PPStreamChunkCreateFromChunk(plainChunk);
     _PPStreamChunkListAddChunk(newStream[0xc],plainChunkCopy);
   }
-  compareResult = _PPStreamCompare(_PPStream,newStream);
+  compareResult = _PPStreamCompare(sourceStream,newStream);
   errorText = DAT_a7b7bb88;
   if (compareResult == 1) {
     infoSink = *(void **)(this + 0x84);

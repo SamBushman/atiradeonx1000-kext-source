@@ -627,15 +627,15 @@ int ___cxa_free_exception(thrownObject)
 }
 
 /* __gxx_exception_cleanup @ 0x97c192b0 (88 bytes) */
-int __gxx_exception_cleanup(_Unwind_Reason_Code, exception)
-  unsigned char _Unwind_Reason_Code;
+int __gxx_exception_cleanup(reasonCode, exception)
+  unsigned char reasonCode;
   _Unwind_Exception *exception;
 {
   _Unwind_Exception *r4Out0;
   unsigned char * header;
   
   header = &exception[-2].private_2;
-  if (_URC_FOREIGN_EXCEPTION_CAUGHT < _Unwind_Reason_Code) {
+  if (_URC_FOREIGN_EXCEPTION_CAUGHT < reasonCode) {
     ((int (*)())__cxxabiv1____terminate)((unsigned char *)exception[-2].reserved[2]);
     exception = r4Out0;
   }
@@ -744,9 +744,9 @@ LAB_97c19440:
 }
 
 /* __Z21base_of_encoded_valuehP15_Unwind_Context @ 0x97c19458 (172 bytes) */
-int __Z21base_of_encoded_valuehP15_Unwind_Context(encoding, _Unwind_Context)
+int __Z21base_of_encoded_valuehP15_Unwind_Context(encoding, context)
   uint encoding;
-  unsigned char * _Unwind_Context;
+  unsigned char * context;
 {
   unsigned char dataRelBase;
   unsigned char textRelBase;
@@ -757,7 +757,7 @@ int __Z21base_of_encoded_valuehP15_Unwind_Context(encoding, _Unwind_Context)
   if (encoding != 0xff) {
     application = encoding & 0x70;
     if (application == 0x20) {
-      textRelBase = __Unwind_GetTextRelBase(_Unwind_Context);
+      textRelBase = __Unwind_GetTextRelBase(context);
       return textRelBase;
     }
     if (application < 0x21) {
@@ -768,12 +768,12 @@ int __Z21base_of_encoded_valuehP15_Unwind_Context(encoding, _Unwind_Context)
     }
     else {
       if (application == 0x40) {
-        regionStart = ((int (*)())__Unwind_GetRegionStart)(_Unwind_Context);
+        regionStart = ((int (*)())__Unwind_GetRegionStart)(context);
         return regionStart;
       }
       if (application < 0x41) {
         if (application == 0x30) {
-          dataRelBase = __Unwind_GetDataRelBase(_Unwind_Context);
+          dataRelBase = __Unwind_GetDataRelBase(context);
           return dataRelBase;
         }
         goto LAB_97c194ec;

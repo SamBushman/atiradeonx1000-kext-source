@@ -698,7 +698,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
   int rightChild;
   int leftChild;
   int leftmostNode;
-  undefined4 _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult;
+  undefined4 copiedRoot;
   
   if (this != (unsigned char
                *)source) {
@@ -716,9 +716,9 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
       *(int *)(*(int *)(this + 4) + 0xc) = *(int *)(this + 4);
     }
     else {
-      _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult = ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy)(this,*(unsigned char **)(*(int *)(source + 4) + 4),
+      copiedRoot = ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy)(this,*(unsigned char **)(*(int *)(source + 4) + 4),
                         *(unsigned char **)(this + 4));
-      *(undefined4 *)(*(int *)(this + 4) + 4) = _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult;
+      *(undefined4 *)(*(int *)(this + 4) + 4) = copiedRoot;
       leftmostNode = *(int *)(*(int *)(this + 4) + 4);
       for (leftChild = *(int *)(leftmostNode + 8); leftChild != 0; leftChild = *(int *)(leftChild + 8)) {
         leftmostNode = leftChild;
@@ -740,7 +740,7 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
           *this, unsigned char *srcRoot, unsigned char *parentNode)
 
 {
-  undefined4 _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult;
+  undefined4 copiedSubtree;
   undefined4 nodeColor;
   unsigned char * newRoot;
   unsigned char * newNode;
@@ -762,8 +762,8 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
   *(unsigned char **)(newRoot + 4) = parentNode;
   *(undefined4 *)(newRoot + 8) = 0;
   if (prevNode != (unsigned char *)0x0) {
-    _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult = ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy)(this,prevNode,newRoot);
-    *(undefined4 *)(newRoot + 0xc) = _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult;
+    copiedSubtree = ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy)(this,prevNode,newRoot);
+    *(undefined4 *)(newRoot + 0xc) = copiedSubtree;
   }
   prevNode = newRoot;
   for (srcNode = *(undefined4 **)(srcRoot + 8); srcNode != (undefined4 *)0x0;
@@ -781,8 +781,8 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
     *(unsigned char **)(newNode + 4) = prevNode;
     *(unsigned char **)(prevNode + 8) = newNode;
     if (srcRight != (unsigned char *)0x0) {
-      _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult = ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy)(this,srcRight,newNode);
-      *(undefined4 *)(newNode + 0xc) = _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult;
+      copiedSubtree = ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy)(this,srcRight,newNode);
+      *(undefined4 *)(newNode + 0xc) = copiedSubtree;
     }
     prevNode = newNode;
   }
