@@ -1979,6 +1979,7 @@ int _PPParserParseParamBinding(parser, isBraceList, bindingCountOut)
   int lightProperty;
   int materialProperty;
   int stateClass;
+  int nextOrdinal;
   int arrayResult;
   int part;
   int compareResult2;
@@ -1988,7 +1989,7 @@ int _PPParserParseParamBinding(parser, isBraceList, bindingCountOut)
   bool isFragmentProgram;
   uint profile;
   char savedChar;
-  int nextOrdinal;
+  int arrayStatus;
   undefined4 ppStream;
   int part2;
   undefined4 *constantValues;
@@ -2056,14 +2057,14 @@ int _PPParserParseParamBinding(parser, isBraceList, bindingCountOut)
       if (compareResult == 0) {
         bindingWord = bindingWord & 0xffe0ffff | 0x20000;
         if (singleBinding) {
-          arrayResult = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
+          arrayStatus = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
           arrayEnd[0] = arrayStart;
         }
         else {
-          arrayResult = _PPParserParseRangeArray(parser,&arrayStart,arrayEnd);
+          arrayStatus = _PPParserParseRangeArray(parser,&arrayStart,arrayEnd);
         }
-        if (arrayResult != 0) {
-          return arrayResult;
+        if (arrayStatus != 0) {
+          return arrayStatus;
         }
         rangeIndex = arrayStart;
         while( true ) {
@@ -2085,14 +2086,14 @@ int _PPParserParseParamBinding(parser, isBraceList, bindingCountOut)
         if (compareResult == 0) {
           bindingWord = bindingWord & 0xffe0ffff | 0x10000;
           if (singleBinding) {
-            arrayResult = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
+            arrayStatus = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
             arrayEnd[0] = arrayStart;
           }
           else {
-            arrayResult = _PPParserParseRangeArray(parser,&arrayStart,arrayEnd);
+            arrayStatus = _PPParserParseRangeArray(parser,&arrayStart,arrayEnd);
           }
-          if (arrayResult != 0) {
-            return arrayResult;
+          if (arrayStatus != 0) {
+            return arrayStatus;
           }
           rangeIndex = arrayStart;
           while( true ) {
@@ -2711,14 +2712,14 @@ LAB_97b7ffd8:
                         return 10;
                       }
                       if (singleBinding) {
-                        arrayResult = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
+                        arrayStatus = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
                         arrayEnd[0] = arrayStart;
                       }
                       else {
-                        arrayResult = _PPParserParseRangeArray(parser,&arrayStart,arrayEnd);
+                        arrayStatus = _PPParserParseRangeArray(parser,&arrayStart,arrayEnd);
                       }
-                      if (arrayResult != 0) {
-                        return arrayResult;
+                      if (arrayStatus != 0) {
+                        return arrayStatus;
                       }
                     }
                     else {
