@@ -2853,326 +2853,424 @@ int FUN_0007aae0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   return -1;
 }
 
-/* FUN_0007b0d0 @ 0x7b0d0 (5660 bytes) */
-int FUN_0007b0d0(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
-  undefined4 param_2;
-  code *param_3;
-  code *param_4;
-  int *param_5;
-  code *param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+/* recordProgramAllocateAndEmit @ 0x7b0d0 (5660 bytes) */
+int recordProgramAllocateAndEmit(alloc, unusedArg2, scratchArg3, scratchArg4, scratchArg5, scratchArg6, unusedArg7, unusedArg8)
+  int alloc;
+  undefined4 unusedArg2;
+  code *scratchArg3;
+  code *scratchArg4;
+  int *scratchArg5;
+  code *scratchArg6;
+  undefined4 unusedArg7;
+  undefined4 unusedArg8;
 {
-  bool bVar1;
-  unsigned char cVar2;
-  uint uVar3;
+  undefined4 *retiredMoveCursor;
+  uint opcodeRewriteIndex;
+  uint retiredScanIndex;
+  uint componentsSeen;
+  uint componentCounter;
+  bool moreComponents;
+  bool haveChainHead;
+  bool moreWords;
+  bool moreSlots;
+  bool moreComponentsB;
+  int retiredIndexOffset;
+  int retiredCountSnapshot;
+  int componentsLeft;
+  int calleeStatus;
+  int recordIsFixed;
+  int srcRegisterIndex;
+  int flagOffset;
+  int loopIndex;
+  int opcodeInfoOffsetB;
+  int retiredCount;
+  int emittedCount;
+  int recordFlagsBase;
+  uint outWord3B;
+  uint sourceLoop;
+  uint componentBit;
+  uint outWord0;
+  uint partnerSourceUsedMask;
+  uint sourceOperandIndex;
+  uint secondRecordWord0;
+  uint sourceUsedMask;
+  uint writeMaskB;
+  unsigned char *liveListPtrB;
+  unsigned char *sourceWordPtr;
+  unsigned char *registerSlot;
+  unsigned char *chainCursor;
+  unsigned char *chainNext;
+  unsigned char *partnerRecordPtr;
+  unsigned char *liveIndexByteB;
+  unsigned char *scanPosition;
+  unsigned char *liveIndexByte;
+  unsigned char *liveListPtr;
+  unsigned char *chainNodeLast;
+  unsigned char *chainNode;
+  unsigned char *recordCursorB;
+  unsigned char *recordCursor;
+  int status;
+  int nodeRecordIndex;
+  int recordOffset4;
+  int retiredRecord;
+  int allocPlus30000;
+  code *word3Ptr;
+  uint *depNode;
+  undefined4 *dependencyNodeB;
+  undefined4 *bindingEntryPtr;
+  unsigned char *emitRecord;
+  int recordFlagOffset;
+  int *dependencyNode;
+  uint *recordPtr;
+  uint outRecordCount;
+  uint componentIndex;
+  uint sourceSelectMask;
+  code *combinedRecord;
+  code *recordA;
+  int *bindingListSlot;
+  int outRecordPtrB;
+  undefined4 outWord3;
+  undefined4 bindingChainLink;
+  undefined4 componentMask;
+  undefined4 bindingValue;
+  byte sourceFileIs1B;
+  byte hasFile1SourceFirstB;
+  byte hasFile1SourceSecond;
+  int *newChainNode;
+  bool destIsFile8;
+  bool moreSourceSlots;
+  uint opcodeFlagBit;
+  uint opcodeBits;
+  uint destModeBits;
+  uint srcBit14;
+  uint srcFileBit4;
+  uint srcFileBits;
+  uint srcIndexBits;
+  uint lastFile1SourceSlot;
+  uint recordFlagsOld;
+  uint configFlagsB;
+  uint sourceSlot;
+  uint recordWord0;
+  uint writeMask;
+  uint opcodeSourceMask;
+  uint configBit6;
+  uint lastFile8Slot;
+  uint dependentRecordIndex;
+  uint srcIndexField;
+  uint configFlags;
+  int config;
+  int retiredSlotPtr;
+  uint *maxRegisterOut;
+  uint *outRecordPtr;
+  bool hasLiveRecords;
+  unsigned char opcodeByte;
+  uint srcTopBits;
   uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  undefined4 *puVar8;
-  int *piVar9;
-  byte bVar10;
-  byte bVar11;
+  uint word3Before;
+  uint word3BeforeB;
+  uint outWord1B;
+  undefined4 *newBindingNode;
+  int *bindingChainHead;
+  byte sourceFileIs1;
+  byte hasFile1SourceFirst;
   undefined4 extraout_r4;
   undefined4 extraout_r4_00;
   undefined4 extraout_r4_01;
   undefined4 extraout_r4_02;
-  undefined4 uVar12;
-  int iVar13;
-  int *piVar14;
-  code *pcVar15;
-  uint *puVar16;
-  uint uVar17;
-  undefined4 uVar18;
-  uint *puVar19;
-  int iVar20;
-  code *pcVar21;
-  uint uVar22;
-  uint *puVar23;
-  int *piVar24;
-  char cVar25;
+  undefined4 outWord2;
+  int opcodeInfoOffset;
+  int *dependencyListHead;
+  code *configBit6Arg;
+  uint *bestRecordSlot;
+  uint outWord2B;
+  undefined4 outWord1;
+  uint *configPtr;
+  int allocPlus38;
+  code *records;
+  uint recordFlagsBefore;
+  uint *recordSlotPtr;
+  int *dependencyListCursor;
+  char emitToSecondList;
   undefined4 uVar26;
   int iVar27;
-  int iVar28;
-  uint uVar29;
+  int recordCount;
+  uint srcBit13;
   bool bVar31;
   int iVar30;
-  int *piVar32;
-  uint uVar33;
-  uint uVar34;
-  uint *puVar35;
-  int *piVar36;
-  code *pcVar37;
-  int iVar38;
-  unsigned char *pcVar39;
-  undefined4 *puVar40;
-  unsigned char *pcVar41;
-  undefined8 uVar42;
-  char local_b8 [4];
-  undefined4 local_b4;
-  char local_b0;
-  char local_af;
-  char local_ae;
-  char local_ad;
-  char local_ac;
-  char local_ab;
-  char local_aa;
-  char local_a9;
+  int *lastChainNode;
+  uint componentLoopB;
+  uint componentLoop;
+  uint *configPtrB;
+  int *chainSource;
+  code *lastChainNodeB;
+  int secondListOffset;
+  unsigned char *recordPtrB;
+  undefined4 *bestRecordCursor;
+  unsigned char *partnerRecord;
+  undefined8 statusAndValue;
+  char pickedNeedsRetarget [4];
+  undefined4 pickedRegister;
+  char recordAFileCount0;
+  char recordAFileCount1;
+  char recordAFileCount2;
+  char recordAFileCount3;
+  char recordBFileCount0;
+  char recordBFileCount1;
+  char recordBFileCount2;
+  char recordBFileCount3;
   undefined1 local_a8 [12];
   uint local_9c [5];
-  uint local_88;
-  int local_84;
-  int local_80;
-  uint local_7c;
-  uint local_78;
-  uint local_74;
-  int local_70;
+  uint liveCountSnapshot;
+  int partnerIndex;
+  int combinedPairCount;
+  uint emitLoopIndex;
+  uint destRegisterCount;
+  uint lastOutputSlot;
+  int secondListCount;
   code *local_6c;
   uint local_68;
   uint local_64;
   unsigned char *local_60;
   
-  iVar20 = param_1 + 0x38;
+  allocPlus38 = alloc + 0x38;
   local_64 = 0xe;
-  puVar19 = *(uint **)(param_1 + 0x34);
-  uVar33 = *puVar19;
-  uVar4 = uVar33 >> 6 & 1;
-  if (uVar4 == 0) {
+  configPtr = *(uint **)(alloc + 0x34);
+  configFlags = *configPtr;
+  configBit6 = configFlags >> 6 & 1;
+  if (configBit6 == 0) {
     local_64 = 0xc;
   }
-  iVar28 = *(int *)(param_1 + 0x2286c);
-  pcVar21 = (code *)(param_1 + 0x1286c);
-  if (((uVar4 != 0) && ((uVar33 & 0x400) != 0)) && (iVar28 != 0)) {
-    piVar24 = (int *)(param_1 + 0xc450);
-    iVar27 = 0;
-    iVar30 = 0;
+  recordCount = *(int *)(alloc + 0x2286c);
+  records = (code *)(alloc + 0x1286c);
+  if (((configBit6 != 0) && ((configFlags & 0x400) != 0)) && (recordCount != 0)) {
+    dependencyListCursor = (int *)(alloc + 0xc450);
+    loopIndex = 0;
+    flagOffset = 0;
     do {
-      pcVar39 = pcVar21 + iVar27 * 0x10;
-      param_3 = pcVar39;
-      ((int (*)())recordCountSourceRegisterFiles)(param_1,iVar30 + param_1 + 0x3148c,pcVar39);
-      if (((byte)pcVar39[3] & 0x40) == 0) {
-        iVar38 = param_1 + 0x3348c;
-        uVar22 = *(uint *)(iVar30 + iVar38);
-        *(uint *)(iVar30 + iVar38) = uVar22 | 0x10;
-        uVar4 = ((int (*)())recordOpcodeSourceMask)(pcVar39,1);
-        if ((uVar4 & 4) == 0) {
-          *(uint *)(iVar30 + iVar38) = uVar22 | 0x30;
+      recordPtrB = records + loopIndex * 0x10;
+      scratchArg3 = recordPtrB;
+      ((int (*)())recordCountSourceRegisterFiles)(alloc,flagOffset + alloc + 0x3148c,recordPtrB);
+      if (((byte)recordPtrB[3] & 0x40) == 0) {
+        recordFlagsBase = alloc + 0x3348c;
+        recordFlagsBefore = *(uint *)(flagOffset + recordFlagsBase);
+        *(uint *)(flagOffset + recordFlagsBase) = recordFlagsBefore | 0x10;
+        opcodeSourceMask = ((int (*)())recordOpcodeSourceMask)(recordPtrB,1);
+        if ((opcodeSourceMask & 4) == 0) {
+          *(uint *)(flagOffset + recordFlagsBase) = recordFlagsBefore | 0x30;
         }
       }
       else {
-        iVar38 = param_1 + 0x3348c;
-        uVar22 = *(uint *)(iVar30 + iVar38);
-        *(uint *)(iVar30 + iVar38) = uVar22 | 1;
-        uVar4 = ((int (*)())recordGetWriteMask)(pcVar39);
-        if ((((((uVar4 - 1 & uVar4) == 0) &&
-              (iVar13 = ((byte)pcVar39[3] & 0xffffffbf) * 0x14,
-              *(int *)(&DAT_001aa5f0 + iVar13) != 0)) &&
-             (((DAT_001aa600)[iVar13] == '\0' || ((uVar33 >> 0xd & 1) != 0)))) &&
-            (((*(uint *)(pcVar21 + iVar27 * 0x10) & 0xf00) != 0x200 &&
-             ((*(uint *)(pcVar21 + iVar27 * 0x10) & 0xf00) != 0x300)))) &&
-           ((*(int *)(&DAT_001aa5f4 + iVar13) == 1 ||
-            ((*(int *)(&DAT_001aa5f4 + iVar13) == 2 &&
-             (param_6 = pcVar39 + 4,
-             (*(uint *)(param_6 + *(int *)(&DAT_001aa5f8 + iVar13) * 4) & 0x60001fff) ==
-             (*(uint *)(param_6 + *(int *)(&DAT_001aa5fc + iVar13) * 4) & 0x60001fff))))))) {
-          *(uint *)(iVar30 + iVar38) = uVar22 | 3;
-          piVar14 = (int *)*piVar24;
-          *(uint *)(iVar30 + iVar38) = uVar22 | 0x1003;
-          for (; piVar14 != (int *)0x0; piVar14 = (int *)piVar14[4]) {
-            *(uint *)(iVar38 + *piVar14 * 4) = *(uint *)(iVar38 + *piVar14 * 4) | 0x1000;
+        recordFlagsBase = alloc + 0x3348c;
+        recordFlagsBefore = *(uint *)(flagOffset + recordFlagsBase);
+        *(uint *)(flagOffset + recordFlagsBase) = recordFlagsBefore | 1;
+        writeMask = ((int (*)())recordGetWriteMask)(recordPtrB);
+        if ((((((writeMask - 1 & writeMask) == 0) &&
+              (opcodeInfoOffset = ((byte)recordPtrB[3] & 0xffffffbf) * 0x14,
+              *(int *)(&DAT_001aa5f0 + opcodeInfoOffset) != 0)) &&
+             (((DAT_001aa600)[opcodeInfoOffset] == '\0' || ((configFlags >> 0xd & 1) != 0)))) &&
+            (((*(uint *)(records + loopIndex * 0x10) & 0xf00) != 0x200 &&
+             ((*(uint *)(records + loopIndex * 0x10) & 0xf00) != 0x300)))) &&
+           ((*(int *)(&DAT_001aa5f4 + opcodeInfoOffset) == 1 ||
+            ((*(int *)(&DAT_001aa5f4 + opcodeInfoOffset) == 2 &&
+             (scratchArg6 = recordPtrB + 4,
+             (*(uint *)(scratchArg6 + *(int *)(&DAT_001aa5f8 + opcodeInfoOffset) * 4) & 0x60001fff) ==
+             (*(uint *)(scratchArg6 + *(int *)(&DAT_001aa5fc + opcodeInfoOffset) * 4) & 0x60001fff))))))) {
+          *(uint *)(flagOffset + recordFlagsBase) = recordFlagsBefore | 3;
+          dependencyListHead = (int *)*dependencyListCursor;
+          *(uint *)(flagOffset + recordFlagsBase) = recordFlagsBefore | 0x1003;
+          for (; dependencyListHead != (int *)0x0; dependencyListHead = (int *)dependencyListHead[4]) {
+            *(uint *)(recordFlagsBase + *dependencyListHead * 4) = *(uint *)(recordFlagsBase + *dependencyListHead * 4) | 0x1000;
           }
         }
       }
-      iVar27 = iVar27 + 1;
-      iVar30 = iVar30 + 4;
-      piVar24 = piVar24 + 1;
-    } while (iVar28 != iVar27);
-    uVar33 = *puVar19;
+      loopIndex = loopIndex + 1;
+      flagOffset = flagOffset + 4;
+      dependencyListCursor = dependencyListCursor + 1;
+    } while (recordCount != loopIndex);
+    configFlags = *configPtr;
   }
-  pcVar15 = (code *)(uVar33 >> 6 & 1);
-  pcVar39 = pcVar21;
-  if ((uVar33 & 2) != 0) {
-    for (; iVar28 != 0; iVar28 = iVar28 + -1) {
-      if (pcVar39[3] == (code *)0x4) {
-        pcVar39[3] = (code *)0x80;
+  configBit6Arg = (code *)(configFlags >> 6 & 1);
+  recordCursor = records;
+  if ((configFlags & 2) != 0) {
+    for (; recordCount != 0; recordCount = recordCount + -1) {
+      if (recordCursor[3] == (code *)0x4) {
+        recordCursor[3] = (code *)0x80;
       }
-      else if ((pcVar15 != (code *)0x0) && (pcVar39[3] == (code *)0xb)) {
-        pcVar39[3] = (code *)0x81;
+      else if ((configBit6Arg != (code *)0x0) && (recordCursor[3] == (code *)0xb)) {
+        recordCursor[3] = (code *)0x81;
       }
-      pcVar39 = pcVar39 + 0x10;
+      recordCursor = recordCursor + 0x10;
     }
   }
-  pcVar39 = *(code **)(param_1 + 0x10450);
-  if (*(code **)(param_1 + 0x10450) != (code *)0x0) {
+  chainNode = *(code **)(alloc + 0x10450);
+  if (*(code **)(alloc + 0x10450) != (code *)0x0) {
     do {
-      pcVar41 = pcVar39 + 0x10;
-      pcVar37 = pcVar39;
-      pcVar39 = *(code **)pcVar41;
-    } while (*(code **)pcVar41 != (code *)0x0);
+      chainNext = chainNode + 0x10;
+      lastChainNodeB = chainNode;
+      chainNode = *(code **)chainNext;
+    } while (*(code **)chainNext != (code *)0x0);
     while( true ) {
-      pcVar39 = pcVar37;
-      param_3 = (code *)0x0;
-      ((int (*)())FUN_00077560)(param_1,*(undefined4 *)pcVar39,0,param_4,param_5,param_6,pcVar15);
-      pcVar15 = *(code **)(param_1 + 0x10450);
-      if ((pcVar15 == (code *)0x0) || (pcVar39 == pcVar15)) break;
-      pcVar37 = pcVar15;
-      for (pcVar41 = *(code **)(pcVar15 + 0x10); pcVar39 != pcVar41;
-          pcVar41 = *(code **)(pcVar41 + 0x10)) {
-        if (pcVar41 == (code *)0x0) goto LAB_0007b378;
-        pcVar37 = pcVar41;
+      chainNodeLast = lastChainNodeB;
+      scratchArg3 = (code *)0x0;
+      ((int (*)())FUN_00077560)(alloc,*(undefined4 *)chainNodeLast,0,scratchArg4,scratchArg5,scratchArg6,configBit6Arg);
+      configBit6Arg = *(code **)(alloc + 0x10450);
+      if ((configBit6Arg == (code *)0x0) || (chainNodeLast == configBit6Arg)) break;
+      lastChainNodeB = configBit6Arg;
+      for (chainCursor = *(code **)(configBit6Arg + 0x10); chainNodeLast != chainCursor;
+          chainCursor = *(code **)(chainCursor + 0x10)) {
+        if (chainCursor == (code *)0x0) goto LAB_0007b378;
+        lastChainNodeB = chainCursor;
       }
     }
   }
 LAB_0007b378:
-  local_88 = *(uint *)(param_1 + 0x26870);
-  bVar1 = local_88 != 0;
-  if (bVar1) {
-    pcVar39 = 0x00024870 + param_1;
+  liveCountSnapshot = *(uint *)(alloc + 0x26870);
+  hasLiveRecords = liveCountSnapshot != 0;
+  if (hasLiveRecords) {
+    liveListPtr = 0x00024870 + alloc;
     uVar4 = 0;
     do {
-      iVar28 = *(int *)pcVar39;
-      for (piVar24 = *(int **)(iVar28 * 4 + iVar20 + 0xa418); piVar24 != (int *)0x0;
-          piVar24 = (int *)piVar24[4]) {
-        if ((*(uint *)(*piVar24 * 4 + param_1 + 0x3348c) & 0x10000) == 0) {
-          ((int (*)())depListRemove)(param_1 + 0xa450 + iVar28 * 4,piVar24);
-          iVar28 = *(int *)pcVar39;
+      recordCount = *(int *)liveListPtr;
+      for (dependencyNode = *(int **)(recordCount * 4 + allocPlus38 + 0xa418); dependencyNode != (int *)0x0;
+          dependencyNode = (int *)dependencyNode[4]) {
+        if ((*(uint *)(*dependencyNode * 4 + alloc + 0x3348c) & 0x10000) == 0) {
+          ((int (*)())depListRemove)(alloc + 0xa450 + recordCount * 4,dependencyNode);
+          recordCount = *(int *)liveListPtr;
         }
       }
-      for (piVar24 = *(int **)(iVar28 * 4 + iVar20 + 0xc418); piVar24 != (int *)0x0;
-          piVar24 = (int *)piVar24[4]) {
-        if ((*(uint *)(*piVar24 * 4 + param_1 + 0x3348c) & 0x10000) == 0) {
-          ((int (*)())depListRemove)(param_1 + 0xc450 + iVar28 * 4,piVar24);
-          iVar28 = *(int *)pcVar39;
+      for (dependencyNode = *(int **)(recordCount * 4 + allocPlus38 + 0xc418); dependencyNode != (int *)0x0;
+          dependencyNode = (int *)dependencyNode[4]) {
+        if ((*(uint *)(*dependencyNode * 4 + alloc + 0x3348c) & 0x10000) == 0) {
+          ((int (*)())depListRemove)(alloc + 0xc450 + recordCount * 4,dependencyNode);
+          recordCount = *(int *)liveListPtr;
         }
       }
-      for (piVar24 = *(int **)(iVar28 * 4 + iVar20 + 0xe418); piVar24 != (int *)0x0;
-          piVar24 = (int *)piVar24[4]) {
-        if ((*(uint *)(*piVar24 * 4 + param_1 + 0x3348c) & 0x10000) == 0) {
-          ((int (*)())depListRemove)(param_1 + 0xe450 + *(int *)pcVar39 * 4,piVar24);
+      for (dependencyNode = *(int **)(recordCount * 4 + allocPlus38 + 0xe418); dependencyNode != (int *)0x0;
+          dependencyNode = (int *)dependencyNode[4]) {
+        if ((*(uint *)(*dependencyNode * 4 + alloc + 0x3348c) & 0x10000) == 0) {
+          ((int (*)())depListRemove)(alloc + 0xe450 + *(int *)liveListPtr * 4,dependencyNode);
         }
       }
       uVar4 = uVar4 + 1;
-      pcVar39 = pcVar39 + 4;
-    } while (uVar4 < *(uint *)(param_1 + 0x26870));
+      liveListPtr = liveListPtr + 4;
+    } while (uVar4 < *(uint *)(alloc + 0x26870));
   }
-  if ((((**(uint **)(param_1 + 0x34) & 0x40) != 0) && (bVar1)) &&
-     (iVar28 = local_88 - 1, iVar28 != 0)) {
-    iVar27 = 0;
-    pcVar39 = pcVar21 + iVar28 * 0x10;
-    puVar23 = (uint *)(iVar28 * 4 + param_1 + 0x6450);
+  if ((((**(uint **)(alloc + 0x34) & 0x40) != 0) && (hasLiveRecords)) &&
+     (recordCount = liveCountSnapshot - 1, recordCount != 0)) {
+    loopIndex = 0;
+    recordPtrB = records + recordCount * 0x10;
+    recordSlotPtr = (uint *)(recordCount * 4 + alloc + 0x6450);
     do {
-      pcVar15 = (code *)(iVar28 - iVar27);
-      local_6c = pcVar15;
-      if ((puVar23[0xb40f] & 0x10000) != 0) {
-        uVar4 = *(uint *)pcVar39;
-        local_68 = *puVar23;
-        if ((uVar4 & 0xf00) == 0x500) {
-          pcVar15 = (code *)(uVar4 >> 0xd & 0x7f);
-          pcVar41 = pcVar15 + (char)(DAT_001aa758)[uVar4 >> 8 & 0xf] * 0x100;
-          if ((uVar4 & 0x100000) != 0) {
-            param_3 = (code *)0x0;
-            ((int (*)())regBindingClear)(param_1,pcVar41,0);
-            uVar4 = *(uint *)pcVar39;
+      configBit6Arg = (code *)(recordCount - loopIndex);
+      local_6c = configBit6Arg;
+      if ((recordSlotPtr[0xb40f] & 0x10000) != 0) {
+        recordWord0 = *(uint *)recordPtrB;
+        local_68 = *recordSlotPtr;
+        if ((recordWord0 & 0xf00) == 0x500) {
+          configBit6Arg = (code *)(recordWord0 >> 0xd & 0x7f);
+          registerSlot = configBit6Arg + (char)(DAT_001aa758)[recordWord0 >> 8 & 0xf] * 0x100;
+          if ((recordWord0 & 0x100000) != 0) {
+            scratchArg3 = (code *)0x0;
+            ((int (*)())regBindingClear)(alloc,registerSlot,0);
+            recordWord0 = *(uint *)recordPtrB;
           }
-          if ((uVar4 & 0x200000) != 0) {
-            param_3 = (code *)((int)((unsigned char *)0x0) + 1);
-            ((int (*)())regBindingClear)(param_1,pcVar41,1);
-            uVar4 = *(uint *)pcVar39;
+          if ((recordWord0 & 0x200000) != 0) {
+            scratchArg3 = (code *)((int)((unsigned char *)0x0) + 1);
+            ((int (*)())regBindingClear)(alloc,registerSlot,1);
+            recordWord0 = *(uint *)recordPtrB;
           }
-          if ((uVar4 & 0x400000) != 0) {
-            param_3 = (code *)((int)((unsigned char *)0x0) + 2);
-            ((int (*)())regBindingClear)(param_1,pcVar41,2);
-            uVar4 = *(uint *)pcVar39;
+          if ((recordWord0 & 0x400000) != 0) {
+            scratchArg3 = (code *)((int)((unsigned char *)0x0) + 2);
+            ((int (*)())regBindingClear)(alloc,registerSlot,2);
+            recordWord0 = *(uint *)recordPtrB;
           }
-          if ((uVar4 & 0x800000) != 0) {
-            param_3 = (code *)((int)((unsigned char *)0x0) + 3);
-            ((int (*)())regBindingClear)(param_1,pcVar41,3);
+          if ((recordWord0 & 0x800000) != 0) {
+            scratchArg3 = (code *)((int)((unsigned char *)0x0) + 3);
+            ((int (*)())regBindingClear)(alloc,registerSlot,3);
           }
         }
-        uVar4 = 0;
-        pcVar41 = pcVar39;
+        sourceSlot = 0;
+        sourceWordPtr = recordPtrB;
         do {
-          pcVar41 = pcVar41 + 4;
-          if ((local_68 & 1 << (uVar4 & 0x3f)) != 0) {
-            param_6 = *(code **)pcVar41;
-            param_5 = (int *)((uint)param_6 & 0xf);
-            if (param_5 == (int *)((int)((unsigned char *)0x0) + 1U)) {
-              uVar34 = 0;
-              uVar33 = (uint)param_6 >> 0xd;
-              pcVar15 = (code *)(1 << ((uint)param_6 >> 0x10 & 7));
-              uVar22 = 1 << ((uint)param_6 >> 0x16 & 7) | 1 << ((uint)param_6 >> 0x13 & 7) |
-                       (uint)pcVar15;
-              iVar30 = DAT_001aa761 * 0x100 + ((uint)param_6 >> 5 & 0xff);
-              local_60 = (code *)(iVar30 + param_1 + 0x30870);
-              puVar40 = (undefined4 *)(iVar30 * 0x10 + param_1 + 0x2a87c);
+          sourceWordPtr = sourceWordPtr + 4;
+          if ((local_68 & 1 << (sourceSlot & 0x3f)) != 0) {
+            scratchArg6 = *(code **)sourceWordPtr;
+            scratchArg5 = (int *)((uint)scratchArg6 & 0xf);
+            if (scratchArg5 == (int *)((int)((unsigned char *)0x0) + 1U)) {
+              componentLoop = 0;
+              srcIndexField = (uint)scratchArg6 >> 0xd;
+              configBit6Arg = (code *)(1 << ((uint)scratchArg6 >> 0x10 & 7));
+              sourceSelectMask = 1 << ((uint)scratchArg6 >> 0x16 & 7) | 1 << ((uint)scratchArg6 >> 0x13 & 7) |
+                       (uint)configBit6Arg;
+              srcRegisterIndex = DAT_001aa761 * 0x100 + ((uint)scratchArg6 >> 5 & 0xff);
+              local_60 = (code *)(srcRegisterIndex + alloc + 0x30870);
+              bindingEntryPtr = (undefined4 *)(srcRegisterIndex * 0x10 + alloc + 0x2a87c);
               do {
-                uVar29 = 1 << (uVar34 & 0x3f);
-                if (((uVar22 | 1 << (uVar33 & 7)) & uVar29) != 0) {
-                  uVar26 = *puVar40;
-                  puVar8 = (undefined4 *)((int (*)())chunkArenaAlloc)(param_1 + 0x12454,8);
-                  if (puVar8 != (undefined4 *)0x0) {
-                    puVar8[1] = uVar26;
-                    *puVar8 = local_6c;
-                    *puVar40 = puVar8;
-                    puVar40[0xc00] = 0xffffffff;
-                    local_60[0xc] = (code *)((byte)uVar29 | (byte)local_60[0xc]);
-                    pcVar15 = local_60;
+                componentBit = 1 << (componentLoop & 0x3f);
+                if (((sourceSelectMask | 1 << (srcIndexField & 7)) & componentBit) != 0) {
+                  bindingValue = *bindingEntryPtr;
+                  newBindingNode = (undefined4 *)((int (*)())chunkArenaAlloc)(alloc + 0x12454,8);
+                  if (newBindingNode != (undefined4 *)0x0) {
+                    newBindingNode[1] = bindingValue;
+                    *newBindingNode = local_6c;
+                    *bindingEntryPtr = newBindingNode;
+                    bindingEntryPtr[0xc00] = 0xffffffff;
+                    local_60[0xc] = (code *)((byte)componentBit | (byte)local_60[0xc]);
+                    configBit6Arg = local_60;
                   }
                 }
-                bVar31 = uVar34 != 3;
-                puVar40 = puVar40 + 1;
-                uVar34 = uVar34 + 1;
-              } while (bVar31);
+                moreComponentsB = componentLoop != 3;
+                bindingEntryPtr = bindingEntryPtr + 1;
+                componentLoop = componentLoop + 1;
+              } while (moreComponentsB);
             }
           }
-          bVar31 = uVar4 != 2;
-          uVar4 = uVar4 + 1;
-        } while (bVar31);
+          moreSlots = sourceSlot != 2;
+          sourceSlot = sourceSlot + 1;
+        } while (moreSlots);
       }
-      iVar27 = iVar27 + 1;
-      pcVar39 = pcVar39 + -0x10;
-      puVar23 = puVar23 + -1;
-    } while (iVar27 != iVar28);
+      loopIndex = loopIndex + 1;
+      recordPtrB = recordPtrB + -0x10;
+      recordSlotPtr = recordSlotPtr + -1;
+    } while (loopIndex != recordCount);
   }
-  pcVar39 = (code *)0x0;
-  ((int (*)())FUN_000776b0)(param_1);
-  pcVar41 = 0x00024870 + param_1;
+  liveIndexByte = (code *)0x0;
+  ((int (*)())FUN_000776b0)(alloc);
+  liveListPtrB = 0x00024870 + alloc;
   uVar26 = extraout_r4;
-  while (pcVar39 < *(code **)(param_1 + 0x26870)) {
-    param_4 = (code *)(**(uint **)(param_1 + 0x34) >> 6 & 1);
-    param_3 = pcVar39;
-    uVar42 = ((int (*)())FUN_00077860)(param_1,pcVar21,pcVar39,param_4);
-    uVar26 = (undefined4)uVar42;
-    if ((int)((ulonglong)uVar42 >> 0x20) == 0) {
-      pcVar39 = pcVar39 + 1;
-      pcVar41 = pcVar41 + 4;
+  while (liveIndexByte < *(code **)(alloc + 0x26870)) {
+    scratchArg4 = (code *)(**(uint **)(alloc + 0x34) >> 6 & 1);
+    scratchArg3 = liveIndexByte;
+    statusAndValue = ((int (*)())FUN_00077860)(alloc,records,liveIndexByte,scratchArg4);
+    uVar26 = (undefined4)statusAndValue;
+    if ((int)((ulonglong)statusAndValue >> 0x20) == 0) {
+      liveIndexByte = liveIndexByte + 1;
+      liveListPtrB = liveListPtrB + 4;
     }
     else {
-      iVar27 = *(int *)pcVar41;
-      param_3 = 0x00024870 + param_1;
-      pcVar15 = (code *)(*(int *)(param_1 + 0x28874) + 1);
-      iVar28 = *(int *)(param_1 + 0x28874) * 4 + param_1;
-      *(code **)(param_1 + 0x28874) = pcVar15;
-      *(int *)(iVar28 + 0x26874) = iVar27;
-      *(undefined4 *)(iVar28 + 0x22870) = 0;
-      iVar28 = iVar27 * 4 + param_1;
-      ((int (*)())arrayRemoveAt)(pcVar39,param_1 + 0x26870,param_3);
-      *(uint *)(iVar28 + 0x3348c) = *(uint *)(iVar28 + 0x3348c) & 0xfffeffff | 0x20000;
+      retiredRecord = *(int *)liveListPtrB;
+      scratchArg3 = 0x00024870 + alloc;
+      configBit6Arg = (code *)(*(int *)(alloc + 0x28874) + 1);
+      retiredSlotPtr = *(int *)(alloc + 0x28874) * 4 + alloc;
+      *(code **)(alloc + 0x28874) = configBit6Arg;
+      *(int *)(retiredSlotPtr + 0x26874) = retiredRecord;
+      *(undefined4 *)(retiredSlotPtr + 0x22870) = 0;
+      recordCount = retiredRecord * 4 + alloc;
+      ((int (*)())arrayRemoveAt)(liveIndexByte,alloc + 0x26870,scratchArg3);
+      *(uint *)(recordCount + 0x3348c) = *(uint *)(recordCount + 0x3348c) & 0xfffeffff | 0x20000;
       uVar26 = extraout_r4_00;
     }
   }
-  while (*(uint *)(param_1 + 0x2a878) < local_88) {
-    if (*(int *)(param_1 + 0x28874) == 0) {
+  while (*(uint *)(alloc + 0x2a878) < liveCountSnapshot) {
+    if (*(int *)(alloc + 0x28874) == 0) {
       return 2;
     }
-    param_6 = pcVar21;
-    iVar28 = ((int (*)())FUN_0007aae0)(param_1,local_64,9,local_b8,&local_b4,pcVar21,*puVar19,*puVar19 >> 6 & 1);
-    if (iVar28 < 0) {
-      uVar4 = **(uint **)(param_1 + 0x34);
+    scratchArg6 = records;
+    recordCount = ((int (*)())FUN_0007aae0)(alloc,local_64,9,pickedNeedsRetarget,&pickedRegister,records,*configPtr,*configPtr >> 6 & 1);
+    if (recordCount < 0) {
+      configFlagsB = **(uint **)(alloc + 0x34);
       bVar31 = true;
-      while ((uVar4 = uVar4 >> 6 & 1, uVar4 != 0 && (local_64 < 0x20))) {
+      while ((configFlagsB = configFlagsB >> 6 & 1, configFlagsB != 0 && (local_64 < 0x20))) {
         if (local_64 == 0x12) {
           local_64 = 0x18;
         }
@@ -3182,567 +3280,567 @@ LAB_0007b378:
         else if (local_64 == 0xe) {
           local_64 = 0x12;
         }
-        param_6 = pcVar21;
-        iVar28 = ((int (*)())FUN_0007aae0)(param_1,local_64,9,local_b8,&local_b4,pcVar21,*puVar19,uVar4);
-        bVar31 = iVar28 < 0;
+        scratchArg6 = records;
+        recordCount = ((int (*)())FUN_0007aae0)(alloc,local_64,9,pickedNeedsRetarget,&pickedRegister,records,*configPtr,configFlagsB);
+        bVar31 = recordCount < 0;
         if (!bVar31) goto LAB_0007b894;
-        uVar4 = **(uint **)(param_1 + 0x34);
+        configFlagsB = **(uint **)(alloc + 0x34);
       }
       if (bVar31) {
         return 3;
       }
     }
 LAB_0007b894:
-    iVar27 = 0;
-    param_3 = (code *)local_a8;
-    pcVar39 = pcVar21 + iVar28 * 0x10;
-    puVar23 = (uint *)(param_1 + 0x1286c + iVar28 * 0x10);
+    loopIndex = 0;
+    scratchArg3 = (code *)local_a8;
+    recordPtrB = records + recordCount * 0x10;
+    recordPtr = (uint *)(alloc + 0x1286c + recordCount * 0x10);
     do {
-      pcVar39 = pcVar39 + 4;
-      bVar31 = iVar27 != 8;
-      *(code **)(param_3 + iVar27) = pcVar39;
-      iVar27 = iVar27 + 4;
-    } while (bVar31);
-    if (local_b8[0] == '\0') {
-      puVar35 = *(uint **)(param_1 + 0x34);
+      recordPtrB = recordPtrB + 4;
+      moreWords = loopIndex != 8;
+      *(code **)(scratchArg3 + loopIndex) = recordPtrB;
+      loopIndex = loopIndex + 4;
+    } while (moreWords);
+    if (pickedNeedsRetarget[0] == '\0') {
+      configPtrB = *(uint **)(alloc + 0x34);
     }
     else {
-      puVar35 = *(uint **)(param_1 + 0x34);
-      uVar4 = *puVar35 >> 6 & 1;
-      iVar27 = ((int (*)())FUN_000777b0)(puVar23,uVar4);
+      configPtrB = *(uint **)(alloc + 0x34);
+      configBit6 = *configPtrB >> 6 & 1;
+      iVar27 = ((int (*)())FUN_000777b0)(recordPtr,configBit6);
       if (iVar27 == 0) {
-        iVar27 = ((int (*)())FUN_00077800)(puVar23,uVar4);
+        iVar27 = ((int (*)())FUN_00077800)(recordPtr,configBit6);
         if (iVar27 != 0) {
-          ((int (*)())FUN_0007a1a0)(param_1,iVar28,local_b4);
-          puVar35 = *(uint **)(param_1 + 0x34);
+          ((int (*)())FUN_0007a1a0)(alloc,recordCount,pickedRegister);
+          configPtrB = *(uint **)(alloc + 0x34);
         }
       }
       else {
-        ((int (*)())recordRetargetDestination)(param_1,iVar28,local_b4);
-        puVar35 = *(uint **)(param_1 + 0x34);
+        ((int (*)())recordRetargetDestination)(alloc,recordCount,pickedRegister);
+        configPtrB = *(uint **)(alloc + 0x34);
       }
     }
-    param_5 = (int *)(*puVar35 >> 6 & 1);
-    param_4 = pcVar21;
-    iVar27 = ((int (*)())FUN_00078f80)(param_1,iVar28,param_3,pcVar21,param_5);
-    if (iVar27 != 0) {
-      return iVar27;
+    scratchArg5 = (int *)(*configPtrB >> 6 & 1);
+    scratchArg4 = records;
+    status = ((int (*)())FUN_00078f80)(alloc,recordCount,scratchArg3,records,scratchArg5);
+    if (status != 0) {
+      return status;
     }
-    iVar27 = ((int (*)())FUN_000777b0)(puVar23,**(uint **)(param_1 + 0x34) >> 6 & 1);
+    iVar27 = ((int (*)())FUN_000777b0)(recordPtr,**(uint **)(alloc + 0x34) >> 6 & 1);
     if (iVar27 == 0) {
-      iVar27 = iVar28 * 4;
-      iVar30 = ((int (*)())FUN_00077800)(puVar23,*puVar19 >> 6 & 1);
-      if (iVar30 != 0) {
-        param_3 = (code *)((int (*)())recordGetWriteMask)(puVar23);
-        param_4 = (code *)((int)((unsigned char *)0x0) + 1);
-        iVar30 = ((int (*)())regBindingSetFixedRegister)(param_1,iVar28,param_3,1,param_5);
-        if (iVar30 != 0) {
-          return iVar30;
+      recordOffset4 = recordCount * 4;
+      recordIsFixed = ((int (*)())FUN_00077800)(recordPtr,*configPtr >> 6 & 1);
+      if (recordIsFixed != 0) {
+        scratchArg3 = (code *)((int (*)())recordGetWriteMask)(recordPtr);
+        scratchArg4 = (code *)((int)((unsigned char *)0x0) + 1);
+        calleeStatus = ((int (*)())regBindingSetFixedRegister)(alloc,recordCount,scratchArg3,1,scratchArg5);
+        if (calleeStatus != 0) {
+          return calleeStatus;
         }
-        for (puVar40 = *(undefined4 **)(iVar27 + iVar20 + 0xc418); puVar40 != (undefined4 *)0x0;
-            puVar40 = (undefined4 *)puVar40[4]) {
-          param_3 = (code *)puVar40[1];
-          param_4 = (code *)((int)((unsigned char *)0x0) + 1);
-          iVar30 = ((int (*)())regBindingSetFixedRegister)(param_1,*puVar40,param_3,1,param_5);
-          if (iVar30 != 0) {
-            return iVar30;
+        for (dependencyNodeB = *(undefined4 **)(recordOffset4 + allocPlus38 + 0xc418); dependencyNodeB != (undefined4 *)0x0;
+            dependencyNodeB = (undefined4 *)dependencyNodeB[4]) {
+          scratchArg3 = (code *)dependencyNodeB[1];
+          scratchArg4 = (code *)((int)((unsigned char *)0x0) + 1);
+          calleeStatus = ((int (*)())regBindingSetFixedRegister)(alloc,*dependencyNodeB,scratchArg3,1,scratchArg5);
+          if (calleeStatus != 0) {
+            return calleeStatus;
           }
         }
-        for (puVar40 = *(undefined4 **)(iVar27 + iVar20 + 0xe418); puVar40 != (undefined4 *)0x0;
-            puVar40 = (undefined4 *)puVar40[4]) {
-          param_3 = (code *)puVar40[1];
-          param_4 = (code *)((int)((unsigned char *)0x0) + 1);
-          ((int (*)())regBindingSetFixedRegister)(param_1,*puVar40,param_3,1,param_5);
+        for (dependencyNodeB = *(undefined4 **)(recordOffset4 + allocPlus38 + 0xe418); dependencyNodeB != (undefined4 *)0x0;
+            dependencyNodeB = (undefined4 *)dependencyNodeB[4]) {
+          scratchArg3 = (code *)dependencyNodeB[1];
+          scratchArg4 = (code *)((int)((unsigned char *)0x0) + 1);
+          ((int (*)())regBindingSetFixedRegister)(alloc,*dependencyNodeB,scratchArg3,1,scratchArg5);
         }
-        piVar14 = (int *)(param_1 + 0x30b7c);
-        uVar4 = 0;
-        piVar24 = *(int **)(iVar27 + iVar20 + 0xa418);
+        bindingListSlot = (int *)(alloc + 0x30b7c);
+        componentCounter = 0;
+        dependencyNode = *(int **)(recordOffset4 + allocPlus38 + 0xa418);
         do {
-          if (piVar24 != (int *)0x0) {
-            bVar31 = false;
-            piVar36 = piVar24;
+          if (dependencyNode != (int *)0x0) {
+            haveChainHead = false;
+            chainSource = dependencyNode;
             do {
-              if ((1 << (uVar4 & 0x3f) & piVar36[1]) != 0) {
-                if (bVar31) {
-                  piVar9 = (int *)*piVar14;
+              if ((1 << (componentCounter & 0x3f) & chainSource[1]) != 0) {
+                if (haveChainHead) {
+                  bindingChainHead = (int *)*bindingListSlot;
                   do {
-                    piVar32 = piVar9;
-                    if (*piVar32 == *piVar36) goto LAB_0007bdf0;
-                    piVar9 = (int *)piVar32[1];
-                  } while ((int *)piVar32[1] != (int *)0x0);
-                  piVar9 = (int *)((int (*)())chunkArenaAlloc)(param_1 + 0x12454,8);
-                  piVar32[1] = (int)piVar9;
-                  if (piVar9 == (int *)0x0) {
+                    lastChainNode = bindingChainHead;
+                    if (*lastChainNode == *chainSource) goto LAB_0007bdf0;
+                    bindingChainHead = (int *)lastChainNode[1];
+                  } while ((int *)lastChainNode[1] != (int *)0x0);
+                  newChainNode = (int *)((int (*)())chunkArenaAlloc)(alloc + 0x12454,8);
+                  lastChainNode[1] = (int)newChainNode;
+                  if (newChainNode == (int *)0x0) {
                     return 7;
                   }
-                  iVar27 = *piVar36;
-                  piVar9[1] = 0;
-                  *piVar9 = iVar27;
+                  nodeRecordIndex = *chainSource;
+                  newChainNode[1] = 0;
+                  *newChainNode = nodeRecordIndex;
                 }
                 else {
-                  if (*piVar14 != 0) {
+                  if (*bindingListSlot != 0) {
                     return 6;
                   }
-                  piVar9 = (int *)((int (*)())chunkArenaAlloc)(param_1 + 0x12454,8);
-                  *piVar14 = (int)piVar9;
-                  if (piVar9 == (int *)0x0) {
+                  newChainNode = (int *)((int (*)())chunkArenaAlloc)(alloc + 0x12454,8);
+                  *bindingListSlot = (int)newChainNode;
+                  if (newChainNode == (int *)0x0) {
                     return 7;
                   }
-                  *piVar9 = *piVar36;
-                  *(undefined4 *)(*piVar14 + 4) = 0;
-                  bVar31 = true;
+                  *newChainNode = *chainSource;
+                  *(undefined4 *)(*bindingListSlot + 4) = 0;
+                  haveChainHead = true;
                 }
               }
 LAB_0007bdf0:
-              piVar36 = (int *)piVar36[4];
-            } while (piVar36 != (int *)0x0);
+              chainSource = (int *)chainSource[4];
+            } while (chainSource != (int *)0x0);
           }
-          bVar31 = uVar4 != 3;
-          piVar14 = piVar14 + 1;
-          uVar4 = uVar4 + 1;
-        } while (bVar31);
+          moreComponents = componentCounter != 3;
+          bindingListSlot = bindingListSlot + 1;
+          componentCounter = componentCounter + 1;
+        } while (moreComponents);
       }
     }
     else {
-      param_3 = (code *)((char)(DAT_001aa758)[*puVar23 >> 8 & 0xf] * 0x100 +
-                        (*puVar23 >> 0xd & 0x7f));
-      uVar26 = ((int (*)())recordGetWriteMask)(puVar23);
-      param_5 = (int *)((int)((unsigned char *)0x0) + 1);
-      iVar27 = ((int (*)())regBindingSet)(param_1,iVar28,param_3,uVar26,1);
-      if (iVar27 != 0) {
-        return iVar27;
+      scratchArg3 = (code *)((char)(DAT_001aa758)[*recordPtr >> 8 & 0xf] * 0x100 +
+                        (*recordPtr >> 0xd & 0x7f));
+      componentMask = ((int (*)())recordGetWriteMask)(recordPtr);
+      scratchArg5 = (int *)((int)((unsigned char *)0x0) + 1);
+      status = ((int (*)())regBindingSet)(alloc,recordCount,scratchArg3,componentMask,1);
+      if (status != 0) {
+        return status;
       }
-      iVar27 = iVar28 * 4;
-      uVar4 = 0;
-      for (puVar35 = *(uint **)(iVar27 + iVar20 + 0xc418); puVar35 != (uint *)0x0;
-          puVar35 = (uint *)puVar35[4]) {
-        uVar33 = *puVar35;
-        if ((*(uint *)(uVar33 * 4 + param_1 + 0x3348c) & 0x40000) == 0) {
-          uVar34 = ((int (*)())recordGetWriteMask)(param_1 + 0x1286c + uVar33 * 0x10);
-          uVar22 = 0;
-          puVar16 = (uint *)(local_a8 + 0xc);
-          iVar30 = 4;
+      recordOffset4 = recordCount * 4;
+      componentsSeen = 0;
+      for (depNode = *(uint **)(recordOffset4 + allocPlus38 + 0xc418); depNode != (uint *)0x0;
+          depNode = (uint *)depNode[4]) {
+        dependentRecordIndex = *depNode;
+        if ((*(uint *)(dependentRecordIndex * 4 + alloc + 0x3348c) & 0x40000) == 0) {
+          writeMaskB = ((int (*)())recordGetWriteMask)(alloc + 0x1286c + dependentRecordIndex * 0x10);
+          componentIndex = 0;
+          bestRecordSlot = (uint *)(local_a8 + 0xc);
+          componentsLeft = 4;
           do {
-            uVar29 = 1 << (uVar22 & 0x3f);
-            if ((uVar34 & uVar29) != 0) {
-              if ((uVar29 & uVar4) == 0) {
-                *puVar16 = uVar33;
-                uVar4 = uVar4 | uVar29;
+            componentBit = 1 << (componentIndex & 0x3f);
+            if ((writeMaskB & componentBit) != 0) {
+              if ((componentBit & componentsSeen) == 0) {
+                *bestRecordSlot = dependentRecordIndex;
+                componentsSeen = componentsSeen | componentBit;
               }
-              else if (uVar33 < *puVar16) {
-                *puVar16 = uVar33;
+              else if (dependentRecordIndex < *bestRecordSlot) {
+                *bestRecordSlot = dependentRecordIndex;
               }
             }
-            uVar22 = uVar22 + 1;
-            puVar16 = puVar16 + 1;
-            iVar30 = iVar30 + -1;
-          } while (iVar30 != 0);
+            componentIndex = componentIndex + 1;
+            bestRecordSlot = bestRecordSlot + 1;
+            componentsLeft = componentsLeft + -1;
+          } while (componentsLeft != 0);
         }
       }
-      uVar33 = 0;
-      puVar40 = (undefined4 *)(local_a8 + 0xc);
+      componentLoopB = 0;
+      bestRecordCursor = (undefined4 *)(local_a8 + 0xc);
       do {
-        param_4 = (code *)(1 << (uVar33 & 0x3f));
-        if ((uVar4 & (uint)param_4) != 0) {
-          param_5 = (int *)0x0;
-          param_3 = (code *)((char)(DAT_001aa758)[*puVar23 >> 8 & 0xf] * 0x100 +
-                            (*puVar23 >> 0xd & 0x7f));
-          iVar30 = ((int (*)())regBindingSet)(param_1,*puVar40,param_3,param_4,0);
-          if (iVar30 != 0) {
-            return iVar30;
+        scratchArg4 = (code *)(1 << (componentLoopB & 0x3f));
+        if ((componentsSeen & (uint)scratchArg4) != 0) {
+          scratchArg5 = (int *)0x0;
+          scratchArg3 = (code *)((char)(DAT_001aa758)[*recordPtr >> 8 & 0xf] * 0x100 +
+                            (*recordPtr >> 0xd & 0x7f));
+          calleeStatus = ((int (*)())regBindingSet)(alloc,*bestRecordCursor,scratchArg3,scratchArg4,0);
+          if (calleeStatus != 0) {
+            return calleeStatus;
           }
         }
-        bVar31 = uVar33 != 3;
-        puVar40 = puVar40 + 1;
-        uVar33 = uVar33 + 1;
-      } while (bVar31);
-      for (puVar40 = *(undefined4 **)(iVar27 + iVar20 + 0xe418); puVar40 != (undefined4 *)0x0;
-          puVar40 = (undefined4 *)puVar40[4]) {
-        param_5 = (int *)0x0;
-        param_4 = (code *)puVar40[1];
-        param_3 = (code *)((char)(DAT_001aa758)[*puVar23 >> 8 & 0xf] * 0x100 +
-                          (*puVar23 >> 0xd & 0x7f));
-        ((int (*)())regBindingSet)(param_1,*puVar40,param_3,param_4,0);
+        moreComponents = componentLoopB != 3;
+        bestRecordCursor = bestRecordCursor + 1;
+        componentLoopB = componentLoopB + 1;
+      } while (moreComponents);
+      for (dependencyNodeB = *(undefined4 **)(recordOffset4 + allocPlus38 + 0xe418); dependencyNodeB != (undefined4 *)0x0;
+          dependencyNodeB = (undefined4 *)dependencyNodeB[4]) {
+        scratchArg5 = (int *)0x0;
+        scratchArg4 = (code *)dependencyNodeB[1];
+        scratchArg3 = (code *)((char)(DAT_001aa758)[*recordPtr >> 8 & 0xf] * 0x100 +
+                          (*recordPtr >> 0xd & 0x7f));
+        ((int (*)())regBindingSet)(alloc,*dependencyNodeB,scratchArg3,scratchArg4,0);
       }
-      uVar4 = 0;
-      piVar24 = *(int **)(iVar27 + iVar20 + 0xa418);
-      piVar14 = (int *)(((char)(DAT_001aa758)[*puVar23 >> 8 & 0xf] * 0x100 +
-                        (*puVar23 >> 0xd & 0x7f)) * 0x10 + param_1 + 0x2a87c);
+      componentCounter = 0;
+      dependencyNode = *(int **)(recordOffset4 + allocPlus38 + 0xa418);
+      bindingListSlot = (int *)(((char)(DAT_001aa758)[*recordPtr >> 8 & 0xf] * 0x100 +
+                        (*recordPtr >> 0xd & 0x7f)) * 0x10 + alloc + 0x2a87c);
       do {
-        if (piVar24 != (int *)0x0) {
-          bVar31 = false;
-          piVar36 = piVar24;
+        if (dependencyNode != (int *)0x0) {
+          haveChainHead = false;
+          chainSource = dependencyNode;
           do {
-            if ((1 << (uVar4 & 0x3f) & piVar36[1]) != 0) {
-              if (bVar31) {
-                piVar9 = (int *)*piVar14;
+            if ((1 << (componentCounter & 0x3f) & chainSource[1]) != 0) {
+              if (haveChainHead) {
+                bindingChainHead = (int *)*bindingListSlot;
                 do {
-                  piVar32 = piVar9;
-                  if (*piVar32 == *piVar36) goto LAB_0007bc50;
-                  piVar9 = (int *)piVar32[1];
-                } while ((int *)piVar32[1] != (int *)0x0);
-                piVar9 = (int *)((int (*)())chunkArenaAlloc)(param_1 + 0x12454,8);
-                piVar32[1] = (int)piVar9;
-                if (piVar9 == (int *)0x0) {
+                  lastChainNode = bindingChainHead;
+                  if (*lastChainNode == *chainSource) goto LAB_0007bc50;
+                  bindingChainHead = (int *)lastChainNode[1];
+                } while ((int *)lastChainNode[1] != (int *)0x0);
+                newChainNode = (int *)((int (*)())chunkArenaAlloc)(alloc + 0x12454,8);
+                lastChainNode[1] = (int)newChainNode;
+                if (newChainNode == (int *)0x0) {
                   return 7;
                 }
-                iVar27 = *piVar36;
-                piVar9[1] = 0;
-                *piVar9 = iVar27;
+                nodeRecordIndex = *chainSource;
+                newChainNode[1] = 0;
+                *newChainNode = nodeRecordIndex;
               }
               else {
-                if (*piVar14 != 0) {
+                if (*bindingListSlot != 0) {
                   return 6;
                 }
-                piVar9 = (int *)((int (*)())chunkArenaAlloc)(param_1 + 0x12454,8);
-                *piVar14 = (int)piVar9;
-                if (piVar9 == (int *)0x0) {
+                newChainNode = (int *)((int (*)())chunkArenaAlloc)(alloc + 0x12454,8);
+                *bindingListSlot = (int)newChainNode;
+                if (newChainNode == (int *)0x0) {
                   return 7;
                 }
-                *piVar9 = *piVar36;
-                *(undefined4 *)(*piVar14 + 4) = 0;
-                bVar31 = true;
+                *newChainNode = *chainSource;
+                *(undefined4 *)(*bindingListSlot + 4) = 0;
+                haveChainHead = true;
               }
             }
 LAB_0007bc50:
-            piVar36 = (int *)piVar36[4];
-          } while (piVar36 != (int *)0x0);
+            chainSource = (int *)chainSource[4];
+          } while (chainSource != (int *)0x0);
         }
-        bVar31 = uVar4 != 3;
-        piVar14 = piVar14 + 1;
-        uVar4 = uVar4 + 1;
-      } while (bVar31);
+        moreComponents = componentCounter != 3;
+        bindingListSlot = bindingListSlot + 1;
+        componentCounter = componentCounter + 1;
+      } while (moreComponents);
     }
-    iVar27 = iVar28 * 4 + param_1;
-    iVar38 = *(int *)(param_1 + 0x2a878);
-    iVar30 = *(int *)(param_1 + 0x28874);
-    pcVar15 = (code *)(iVar27 + 0x30000);
-    uVar4 = *(uint *)(iVar27 + 0x3348c);
-    *(int *)(param_1 + 0x2a878) = iVar38 + 1;
-    *(int *)(iVar38 * 4 + param_1 + 0x28878) = iVar28;
-    *(uint *)(iVar27 + 0x3348c) = uVar4 & 0xfffdffff | 0x40000;
-    pcVar39 = (code *)0x0;
-    if (iVar30 != 0) {
-      param_5 = (int *)(param_1 + 0x26874);
-      param_3 = (code *)0x0;
-      iVar27 = 1;
-      iVar30 = 0x22874;
+    iVar27 = recordCount * 4 + alloc;
+    emittedCount = *(int *)(alloc + 0x2a878);
+    retiredCountSnapshot = *(int *)(alloc + 0x28874);
+    configBit6Arg = (code *)(iVar27 + 0x30000);
+    recordFlagsOld = *(uint *)(iVar27 + 0x3348c);
+    *(int *)(alloc + 0x2a878) = emittedCount + 1;
+    *(int *)(emittedCount * 4 + alloc + 0x28878) = recordCount;
+    *(uint *)(iVar27 + 0x3348c) = recordFlagsOld & 0xfffdffff | 0x40000;
+    scanPosition = (code *)0x0;
+    if (retiredCountSnapshot != 0) {
+      scratchArg5 = (int *)(alloc + 0x26874);
+      scratchArg3 = (code *)0x0;
+      loopIndex = 1;
+      retiredIndexOffset = 0x22874;
       do {
-        if ((iVar28 == *param_5) && (param_3 < (code *)(*(int *)(param_1 + 0x28874) + -1))) {
-          puVar40 = (undefined4 *)(param_1 + iVar30);
-          param_4 = (code *)((int)param_3 * 4);
-          param_6 = param_3;
+        if ((recordCount == *scratchArg5) && (scratchArg3 < (code *)(*(int *)(alloc + 0x28874) + -1))) {
+          retiredMoveCursor = (undefined4 *)(alloc + retiredIndexOffset);
+          scratchArg4 = (code *)((int)scratchArg3 * 4);
+          scratchArg6 = scratchArg3;
           do {
-            iVar38 = *(int *)(param_1 + 0x28874);
-            param_6 = param_6 + 1;
-            pcVar15 = param_4 + iVar27 * -4;
-            uVar26 = puVar40[0x1001];
-            *(undefined4 *)((int)puVar40 + (int)pcVar15) = *puVar40;
-            puVar40[0x1000] = uVar26;
-            puVar40 = puVar40 + 1;
-          } while (param_6 < (code *)(iVar38 + -1));
+            retiredCount = *(int *)(alloc + 0x28874);
+            scratchArg6 = scratchArg6 + 1;
+            configBit6Arg = scratchArg4 + loopIndex * -4;
+            bindingChainLink = retiredMoveCursor[0x1001];
+            *(undefined4 *)((int)retiredMoveCursor + (int)configBit6Arg) = *retiredMoveCursor;
+            retiredMoveCursor[0x1000] = bindingChainLink;
+            retiredMoveCursor = retiredMoveCursor + 1;
+          } while (scratchArg6 < (code *)(retiredCount + -1));
         }
-        pcVar39 = *(code **)(param_1 + 0x28874);
-        param_3 = param_3 + 1;
-        iVar27 = iVar27 + 1;
-        iVar30 = iVar30 + 4;
-        param_5 = param_5 + 1;
-      } while (param_3 < pcVar39);
+        scanPosition = *(code **)(alloc + 0x28874);
+        scratchArg3 = scratchArg3 + 1;
+        loopIndex = loopIndex + 1;
+        retiredIndexOffset = retiredIndexOffset + 4;
+        scratchArg5 = scratchArg5 + 1;
+      } while (scratchArg3 < scanPosition);
     }
-    *(code **)(param_1 + 0x28874) = pcVar39 + -1;
-    if ((*(int *)(param_1 + 0x35490) != 3) && (pcVar39 + -1 != (code *)0x0)) {
-      pcVar15 = (code *)(param_1 + 0x22870);
-      uVar4 = 0;
+    *(code **)(alloc + 0x28874) = scanPosition + -1;
+    if ((*(int *)(alloc + 0x35490) != 3) && (scanPosition + -1 != (code *)0x0)) {
+      configBit6Arg = (code *)(alloc + 0x22870);
+      retiredScanIndex = 0;
       do {
-        if (*(int *)pcVar15 != 0) {
-          *(int *)pcVar15 = *(int *)pcVar15 + -1;
+        if (*(int *)configBit6Arg != 0) {
+          *(int *)configBit6Arg = *(int *)configBit6Arg + -1;
         }
-        uVar4 = uVar4 + 1;
-        pcVar15 = pcVar15 + 4;
-      } while (uVar4 < *(uint *)(param_1 + 0x28874));
+        retiredScanIndex = retiredScanIndex + 1;
+        configBit6Arg = configBit6Arg + 4;
+      } while (retiredScanIndex < *(uint *)(alloc + 0x28874));
     }
-    pcVar39 = (code *)0x0;
-    ((int (*)())FUN_000776b0)(param_1);
-    pcVar41 = 0x00024870 + param_1;
+    liveIndexByteB = (code *)0x0;
+    ((int (*)())FUN_000776b0)(alloc);
+    liveListPtrB = 0x00024870 + alloc;
     uVar26 = extraout_r4_01;
-    while (pcVar39 < *(code **)(param_1 + 0x26870)) {
-      param_4 = (code *)(**(uint **)(param_1 + 0x34) >> 6 & 1);
-      param_3 = pcVar39;
-      uVar42 = ((int (*)())FUN_00077860)(param_1,pcVar21,pcVar39,param_4);
-      uVar26 = (undefined4)uVar42;
-      if ((int)((ulonglong)uVar42 >> 0x20) == 0) {
-        pcVar39 = pcVar39 + 1;
-        pcVar41 = pcVar41 + 4;
+    while (liveIndexByteB < *(code **)(alloc + 0x26870)) {
+      scratchArg4 = (code *)(**(uint **)(alloc + 0x34) >> 6 & 1);
+      scratchArg3 = liveIndexByteB;
+      statusAndValue = ((int (*)())FUN_00077860)(alloc,records,liveIndexByteB,scratchArg4);
+      uVar26 = (undefined4)statusAndValue;
+      if ((int)((ulonglong)statusAndValue >> 0x20) == 0) {
+        liveIndexByteB = liveIndexByteB + 1;
+        liveListPtrB = liveListPtrB + 4;
       }
       else {
-        iVar27 = *(int *)pcVar41;
-        param_3 = 0x00024870 + param_1;
-        pcVar15 = (code *)(*(int *)(param_1 + 0x28874) + 1);
-        iVar28 = *(int *)(param_1 + 0x28874) * 4 + param_1;
-        *(code **)(param_1 + 0x28874) = pcVar15;
-        *(int *)(iVar28 + 0x26874) = iVar27;
-        *(undefined4 *)(iVar28 + 0x22870) = 9;
-        iVar28 = iVar27 * 4 + param_1;
-        ((int (*)())arrayRemoveAt)(pcVar39,param_1 + 0x26870,param_3);
-        *(uint *)(iVar28 + 0x3348c) = *(uint *)(iVar28 + 0x3348c) & 0xfffeffff | 0x20000;
+        retiredRecord = *(int *)liveListPtrB;
+        scratchArg3 = 0x00024870 + alloc;
+        configBit6Arg = (code *)(*(int *)(alloc + 0x28874) + 1);
+        retiredSlotPtr = *(int *)(alloc + 0x28874) * 4 + alloc;
+        *(code **)(alloc + 0x28874) = configBit6Arg;
+        *(int *)(retiredSlotPtr + 0x26874) = retiredRecord;
+        *(undefined4 *)(retiredSlotPtr + 0x22870) = 9;
+        recordCount = retiredRecord * 4 + alloc;
+        ((int (*)())arrayRemoveAt)(liveIndexByteB,alloc + 0x26870,scratchArg3);
+        *(uint *)(recordCount + 0x3348c) = *(uint *)(recordCount + 0x3348c) & 0xfffeffff | 0x20000;
         uVar26 = extraout_r4_02;
       }
     }
-    if ((*puVar19 & 0x10) != 0) {
-      uVar42 = ((int (*)())FUN_00079e70)(param_1,0);
-      iVar28 = (int)((ulonglong)uVar42 >> 0x20);
-      uVar26 = (undefined4)uVar42;
-      if (iVar28 != 0) {
-        return iVar28;
+    if ((*configPtr & 0x10) != 0) {
+      statusAndValue = ((int (*)())FUN_00079e70)(alloc,0);
+      recordCount = (int)((ulonglong)statusAndValue >> 0x20);
+      uVar26 = (undefined4)statusAndValue;
+      if (recordCount != 0) {
+        return recordCount;
       }
     }
   }
-  uVar4 = **(uint **)(param_1 + 0x34);
-  if (bVar1) {
-    uVar33 = 0;
-    pcVar39 = pcVar21;
+  configFlagsB = **(uint **)(alloc + 0x34);
+  if (hasLiveRecords) {
+    opcodeRewriteIndex = 0;
+    recordCursorB = records;
     do {
-      uVar42 = ((int (*)())FUN_00079e10)(pcVar39,uVar26,param_3,param_4,param_5,param_6,pcVar15);
-      uVar26 = (undefined4)uVar42;
-      if ((int)((ulonglong)uVar42 >> 0x20) != 0) {
-        if (pcVar39[3] == (code *)0x4) {
-          pcVar39[3] = (code *)0x80;
+      statusAndValue = ((int (*)())FUN_00079e10)(recordCursorB,uVar26,scratchArg3,scratchArg4,scratchArg5,scratchArg6,configBit6Arg);
+      uVar26 = (undefined4)statusAndValue;
+      if ((int)((ulonglong)statusAndValue >> 0x20) != 0) {
+        if (recordCursorB[3] == (code *)0x4) {
+          recordCursorB[3] = (code *)0x80;
         }
-        else if (((uVar4 >> 6 & 1) != 0) && (pcVar39[3] == (code *)0xb)) {
-          pcVar39[3] = (code *)0x81;
+        else if (((configFlagsB >> 6 & 1) != 0) && (recordCursorB[3] == (code *)0xb)) {
+          recordCursorB[3] = (code *)0x81;
         }
       }
-      uVar33 = uVar33 + 1;
-      pcVar39 = pcVar39 + 0x10;
-    } while (local_88 != uVar33);
+      opcodeRewriteIndex = opcodeRewriteIndex + 1;
+      recordCursorB = recordCursorB + 0x10;
+    } while (liveCountSnapshot != opcodeRewriteIndex);
   }
-  if (((*puVar19 & 0x20) != 0) && (iVar28 = ((int (*)())FUN_00079e70)(param_1,1), iVar28 != 0)) {
-    return iVar28;
+  if (((*configPtr & 0x20) != 0) && (recordCount = ((int (*)())FUN_00079e70)(alloc,1), recordCount != 0)) {
+    return recordCount;
   }
-  iVar28 = *(int *)(param_1 + 0x34);
-  if (*(int *)(param_1 + 0x2a878) == 0) {
-    uVar22 = 0;
-    uVar4 = 0;
-    uVar33 = 0;
-    local_70 = 0;
-    local_74 = 0;
-    local_78 = 0;
-    local_80 = 0;
+  config = *(int *)(alloc + 0x34);
+  if (*(int *)(alloc + 0x2a878) == 0) {
+    outRecordCount = 0;
+    lastFile1SourceSlot = 0;
+    lastFile8Slot = 0;
+    secondListCount = 0;
+    lastOutputSlot = 0;
+    destRegisterCount = 0;
+    combinedPairCount = 0;
   }
   else {
-    uVar4 = 0;
-    local_7c = 0;
-    local_70 = 0;
-    uVar33 = 0;
-    uVar22 = 0;
-    local_74 = 0;
-    local_78 = 0;
-    local_80 = 0;
-    iVar27 = param_1 + 0x30000;
+    lastFile1SourceSlot = 0;
+    emitLoopIndex = 0;
+    secondListCount = 0;
+    lastFile8Slot = 0;
+    outRecordCount = 0;
+    lastOutputSlot = 0;
+    destRegisterCount = 0;
+    combinedPairCount = 0;
+    allocPlus30000 = alloc + 0x30000;
     do {
-      iVar30 = *(int *)(iVar27 + -0x7788) * 4;
-      puVar19 = (uint *)(uVar22 * 0x10 + *(int *)(iVar28 + 0x18));
-      pcVar39 = pcVar21 + *(int *)(iVar27 + -0x7788) * 0x10;
-      if ((*(uint *)(iVar30 + param_1 + 0x3348c) & 0x100) == 0) {
+      recordFlagOffset = *(int *)(allocPlus30000 + -0x7788) * 4;
+      outRecordPtr = (uint *)(outRecordCount * 0x10 + *(int *)(config + 0x18));
+      emitRecord = records + *(int *)(allocPlus30000 + -0x7788) * 0x10;
+      if ((*(uint *)(recordFlagOffset + alloc + 0x3348c) & 0x100) == 0) {
 LAB_0007c4b0:
-        bVar11 = 0;
-        uVar34 = *(uint *)(iVar30 + iVar20 + 0x6418);
-        uVar29 = 0;
-        cVar25 = *(char *)(iVar30 + iVar20 + 0x841b);
-        pcVar15 = pcVar39;
+        hasFile1SourceFirst = 0;
+        sourceUsedMask = *(uint *)(recordFlagOffset + allocPlus38 + 0x6418);
+        sourceLoop = 0;
+        emitToSecondList = *(char *)(recordFlagOffset + allocPlus38 + 0x841b);
+        recordA = emitRecord;
         do {
-          pcVar15 = pcVar15 + 4;
-          if ((uVar34 & 1 << (uVar29 & 0x3f)) != 0) {
-            bVar10 = ((int (*)())recordSourceFileIs1)(pcVar15);
-            bVar11 = bVar10 | bVar11;
+          recordA = recordA + 4;
+          if ((sourceUsedMask & 1 << (sourceLoop & 0x3f)) != 0) {
+            sourceFileIs1 = ((int (*)())recordSourceFileIs1)(recordA);
+            hasFile1SourceFirst = sourceFileIs1 | hasFile1SourceFirst;
           }
-          bVar1 = uVar29 != 2;
-          uVar29 = uVar29 + 1;
-        } while (bVar1);
+          moreSourceSlots = sourceLoop != 2;
+          sourceLoop = sourceLoop + 1;
+        } while (moreSourceSlots);
       }
       else {
-        local_84 = *(int *)(iVar27 + -0x7784);
-        pcVar15 = pcVar21 + local_84 * 0x10;
-        pcVar41 = pcVar39;
-        if (((byte)pcVar39[3] & 0x40) == 0) {
-          pcVar15 = pcVar39;
-          pcVar41 = pcVar21 + local_84 * 0x10;
+        partnerIndex = *(int *)(allocPlus30000 + -0x7784);
+        combinedRecord = records + partnerIndex * 0x10;
+        partnerRecord = emitRecord;
+        if (((byte)emitRecord[3] & 0x40) == 0) {
+          combinedRecord = emitRecord;
+          partnerRecord = records + partnerIndex * 0x10;
         }
-        cVar2 = pcVar41[3];
-        uVar34 = *(uint *)pcVar41;
-        *(undefined4 *)(pcVar15 + 0xc) = 0;
-        pcVar37 = pcVar15 + 0xc;
-        uVar34 = uVar34 >> 0x14 & 0xf;
-        ((int (*)())recordCountSourceRegisterFiles)(param_1,&local_b0,pcVar15);
-        ((int (*)())recordCountSourceRegisterFiles)(param_1,&local_ac,pcVar41);
-        if ((((2 < (int)local_b0 + (int)local_ac) || (1 < (int)local_af + (int)local_ab)) ||
-            (1 < (int)local_ae + (int)local_aa)) ||
-           ((1 < (int)local_ad + (int)local_a9 || ((*(uint *)pcVar15 & 0xf00) == 0x400))))
+        opcodeByte = partnerRecord[3];
+        secondRecordWord0 = *(uint *)partnerRecord;
+        *(undefined4 *)(combinedRecord + 0xc) = 0;
+        word3Ptr = combinedRecord + 0xc;
+        secondRecordWord0 = secondRecordWord0 >> 0x14 & 0xf;
+        ((int (*)())recordCountSourceRegisterFiles)(alloc,&recordAFileCount0,combinedRecord);
+        ((int (*)())recordCountSourceRegisterFiles)(alloc,&recordBFileCount0,partnerRecord);
+        if ((((2 < (int)recordAFileCount0 + (int)recordBFileCount0) || (1 < (int)recordAFileCount1 + (int)recordBFileCount1)) ||
+            (1 < (int)recordAFileCount2 + (int)recordBFileCount2)) ||
+           ((1 < (int)recordAFileCount3 + (int)recordBFileCount3 || ((*(uint *)combinedRecord & 0xf00) == 0x400))))
         goto LAB_0007c4b0;
-        uVar5 = *(uint *)(pcVar15 + 0xc);
-        uVar29 = (*(uint *)pcVar41 & 0x6000) << 6;
-        *(uint *)(pcVar15 + 0xc) = uVar29 | uVar5 & 0xffe7ffff;
-        uVar17 = ((byte)pcVar41[3] & 0xf) << 0x15;
-        *(uint *)(pcVar15 + 0xc) = uVar17 | uVar29 | uVar5 & 0xfe07ffff;
-        uVar7 = (byte)pcVar41[3] >> 2 & 4;
-        *(uint *)(pcVar15 + 0xc) = uVar7 | uVar17 | uVar29 | uVar5 & 0xfe07fffb;
-        if (uVar34 == 2) {
-          *(uint *)(pcVar15 + 0xc) = uVar7 | uVar17 | uVar29 | uVar5 & 0xe607fffb | 0x8000000;
+        word3Before = *(uint *)(combinedRecord + 0xc);
+        destModeBits = (*(uint *)partnerRecord & 0x6000) << 6;
+        *(uint *)(combinedRecord + 0xc) = destModeBits | word3Before & 0xffe7ffff;
+        opcodeBits = ((byte)partnerRecord[3] & 0xf) << 0x15;
+        *(uint *)(combinedRecord + 0xc) = opcodeBits | destModeBits | word3Before & 0xfe07ffff;
+        opcodeFlagBit = (byte)partnerRecord[3] >> 2 & 4;
+        *(uint *)(combinedRecord + 0xc) = opcodeFlagBit | opcodeBits | destModeBits | word3Before & 0xfe07fffb;
+        if (secondRecordWord0 == 2) {
+          *(uint *)(combinedRecord + 0xc) = opcodeFlagBit | opcodeBits | destModeBits | word3Before & 0xe607fffb | 0x8000000;
         }
-        else if (uVar34 < 3) {
-          if (uVar34 == 1) {
-            *(uint *)pcVar37 = uVar7 | uVar17 | uVar29 | uVar5 & 0xe607fffb;
+        else if (secondRecordWord0 < 3) {
+          if (secondRecordWord0 == 1) {
+            *(uint *)word3Ptr = opcodeFlagBit | opcodeBits | destModeBits | word3Before & 0xe607fffb;
           }
         }
-        else if (uVar34 == 4) {
-          *(uint *)(pcVar15 + 0xc) = uVar7 | uVar17 | uVar29 | uVar5 & 0xe607fffb | 0x10000000;
+        else if (secondRecordWord0 == 4) {
+          *(uint *)(combinedRecord + 0xc) = opcodeFlagBit | opcodeBits | destModeBits | word3Before & 0xe607fffb | 0x10000000;
         }
-        else if (uVar34 == 8) {
-          *(uint *)pcVar37 = uVar7 | uVar17 | uVar29 | uVar5 & 0xe607fffb | 0x18000000;
+        else if (secondRecordWord0 == 8) {
+          *(uint *)word3Ptr = opcodeFlagBit | opcodeBits | destModeBits | word3Before & 0xe607fffb | 0x18000000;
         }
-        iVar38 = ((byte)cVar2 & 0x1f) * 0x14;
-        uVar34 = *(uint *)(&DAT_001aa5f8 + iVar38);
-        if (uVar34 < 3) {
-          uVar6 = *(uint *)pcVar37;
-          uVar7 = *(uint *)(pcVar41 + (uVar34 + 1) * 4) & 3;
-          *(uint *)pcVar37 = uVar7 | uVar6 & 0xfffffffc;
-          uVar17 = *(uint *)(pcVar41 + (uVar34 + 1) * 4) & 0x10;
-          *(uint *)pcVar37 = uVar17 | uVar7 | uVar6 & 0xffffffec;
-          uVar5 = *(uint *)(pcVar41 + (uVar34 + 1) * 4) & 0x1fe0;
-          *(uint *)pcVar37 = uVar5 | uVar17 | uVar7 | uVar6 & 0xffffe00c;
-          uVar3 = *(uint *)(pcVar41 + (uVar34 + 1) * 4) & 0x60000000;
-          *(uint *)pcVar37 = uVar3 | uVar5 | uVar17 | uVar7 | uVar6 & 0x9fffe00c;
-          uVar29 = *(uint *)(pcVar41 + (uVar34 + 1) * 4) >> 3 & 0x2000000;
-          *(uint *)pcVar37 = uVar29 | uVar3 | uVar5 | uVar17 | uVar7 | uVar6 & 0x9dffe00c;
-          *(uint *)pcVar37 =
-               *(uint *)(pcVar41 + (uVar34 + 1) * 4) >> 9 & 0xe000 |
-               uVar29 | uVar3 | uVar5 | uVar17 | uVar7 | uVar6 & 0x9dff000c;
+        opcodeInfoOffsetB = ((byte)opcodeByte & 0x1f) * 0x14;
+        sourceOperandIndex = *(uint *)(&DAT_001aa5f8 + opcodeInfoOffsetB);
+        if (sourceOperandIndex < 3) {
+          word3BeforeB = *(uint *)word3Ptr;
+          srcFileBits = *(uint *)(partnerRecord + (sourceOperandIndex + 1) * 4) & 3;
+          *(uint *)word3Ptr = srcFileBits | word3BeforeB & 0xfffffffc;
+          srcFileBit4 = *(uint *)(partnerRecord + (sourceOperandIndex + 1) * 4) & 0x10;
+          *(uint *)word3Ptr = srcFileBit4 | srcFileBits | word3BeforeB & 0xffffffec;
+          srcIndexBits = *(uint *)(partnerRecord + (sourceOperandIndex + 1) * 4) & 0x1fe0;
+          *(uint *)word3Ptr = srcIndexBits | srcFileBit4 | srcFileBits | word3BeforeB & 0xffffe00c;
+          srcTopBits = *(uint *)(partnerRecord + (sourceOperandIndex + 1) * 4) & 0x60000000;
+          *(uint *)word3Ptr = srcTopBits | srcIndexBits | srcFileBit4 | srcFileBits | word3BeforeB & 0x9fffe00c;
+          srcBit13 = *(uint *)(partnerRecord + (sourceOperandIndex + 1) * 4) >> 3 & 0x2000000;
+          *(uint *)word3Ptr = srcBit13 | srcTopBits | srcIndexBits | srcFileBit4 | srcFileBits | word3BeforeB & 0x9dffe00c;
+          *(uint *)word3Ptr =
+               *(uint *)(partnerRecord + (sourceOperandIndex + 1) * 4) >> 9 & 0xe000 |
+               srcBit13 | srcTopBits | srcIndexBits | srcFileBit4 | srcFileBits | word3BeforeB & 0x9dff000c;
         }
-        uVar34 = *(uint *)(&DAT_001aa5fc + iVar38);
-        if (uVar34 < 3) {
-          uVar6 = *(uint *)pcVar37;
-          uVar7 = *(uint *)(pcVar41 + (uVar34 + 1) * 4) & 3;
-          *(uint *)pcVar37 = uVar7 | uVar6 & 0xfffffffc;
-          uVar17 = *(uint *)(pcVar41 + (uVar34 + 1) * 4) & 0x10;
-          *(uint *)pcVar37 = uVar17 | uVar7 | uVar6 & 0xffffffec;
-          uVar5 = *(uint *)(pcVar41 + (uVar34 + 1) * 4) & 0x1fe0;
-          *(uint *)pcVar37 = uVar5 | uVar17 | uVar7 | uVar6 & 0xffffe00c;
-          uVar3 = *(uint *)(pcVar41 + (uVar34 + 1) * 4) & 0x60000000;
-          *(uint *)pcVar37 = uVar3 | uVar5 | uVar17 | uVar7 | uVar6 & 0x9fffe00c;
-          uVar29 = *(uint *)(pcVar41 + (uVar34 + 1) * 4) >> 2 & 0x4000000;
-          *(uint *)pcVar37 = uVar29 | uVar3 | uVar5 | uVar17 | uVar7 | uVar6 & 0x9bffe00c;
-          *(uint *)pcVar37 =
-               *(uint *)(pcVar41 + (uVar34 + 1) * 4) >> 6 & 0x70000 |
-               uVar29 | uVar3 | uVar5 | uVar17 | uVar7 | uVar6 & 0x9bf8e00c;
+        sourceOperandIndex = *(uint *)(&DAT_001aa5fc + opcodeInfoOffsetB);
+        if (sourceOperandIndex < 3) {
+          word3BeforeB = *(uint *)word3Ptr;
+          srcFileBits = *(uint *)(partnerRecord + (sourceOperandIndex + 1) * 4) & 3;
+          *(uint *)word3Ptr = srcFileBits | word3BeforeB & 0xfffffffc;
+          srcFileBit4 = *(uint *)(partnerRecord + (sourceOperandIndex + 1) * 4) & 0x10;
+          *(uint *)word3Ptr = srcFileBit4 | srcFileBits | word3BeforeB & 0xffffffec;
+          srcIndexBits = *(uint *)(partnerRecord + (sourceOperandIndex + 1) * 4) & 0x1fe0;
+          *(uint *)word3Ptr = srcIndexBits | srcFileBit4 | srcFileBits | word3BeforeB & 0xffffe00c;
+          srcTopBits = *(uint *)(partnerRecord + (sourceOperandIndex + 1) * 4) & 0x60000000;
+          *(uint *)word3Ptr = srcTopBits | srcIndexBits | srcFileBit4 | srcFileBits | word3BeforeB & 0x9fffe00c;
+          srcBit14 = *(uint *)(partnerRecord + (sourceOperandIndex + 1) * 4) >> 2 & 0x4000000;
+          *(uint *)word3Ptr = srcBit14 | srcTopBits | srcIndexBits | srcFileBit4 | srcFileBits | word3BeforeB & 0x9bffe00c;
+          *(uint *)word3Ptr =
+               *(uint *)(partnerRecord + (sourceOperandIndex + 1) * 4) >> 6 & 0x70000 |
+               srcBit14 | srcTopBits | srcIndexBits | srcFileBit4 | srcFileBits | word3BeforeB & 0x9bf8e00c;
         }
-        *(uint *)pcVar15 = *(uint *)pcVar15 | 0x10000000;
-        if ((*(int *)(iVar30 + iVar20 + 0x8418) != 0) ||
-           (cVar25 = '\0', *(int *)(local_84 * 4 + iVar20 + 0x8418) != 0)) {
-          cVar25 = '\x01';
+        *(uint *)combinedRecord = *(uint *)combinedRecord | 0x10000000;
+        if ((*(int *)(recordFlagOffset + allocPlus38 + 0x8418) != 0) ||
+           (emitToSecondList = '\0', *(int *)(partnerIndex * 4 + allocPlus38 + 0x8418) != 0)) {
+          emitToSecondList = '\x01';
         }
-        bVar11 = 0;
-        uVar29 = 0;
-        uVar34 = *(uint *)(iVar30 + iVar20 + 0x6418);
+        hasFile1SourceFirstB = 0;
+        sourceLoop = 0;
+        sourceUsedMask = *(uint *)(recordFlagOffset + allocPlus38 + 0x6418);
         do {
-          pcVar39 = pcVar39 + 4;
-          if ((uVar34 & 1 << (uVar29 & 0x3f)) != 0) {
-            bVar10 = ((int (*)())recordSourceFileIs1)(pcVar39);
-            bVar11 = bVar10 | bVar11;
+          emitRecord = emitRecord + 4;
+          if ((sourceUsedMask & 1 << (sourceLoop & 0x3f)) != 0) {
+            sourceFileIs1 = ((int (*)())recordSourceFileIs1)(emitRecord);
+            hasFile1SourceFirstB = sourceFileIs1 | hasFile1SourceFirstB;
           }
-          bVar1 = uVar29 != 2;
-          uVar29 = uVar29 + 1;
-        } while (bVar1);
-        if (bVar11 == 0) {
-          uVar29 = 0;
-          pcVar39 = pcVar21 + local_84 * 0x10;
-          uVar34 = *(uint *)(local_84 * 4 + iVar20 + 0x6418);
-          bVar10 = 0;
+          moreSourceSlots = sourceLoop != 2;
+          sourceLoop = sourceLoop + 1;
+        } while (moreSourceSlots);
+        if (hasFile1SourceFirstB == 0) {
+          sourceLoop = 0;
+          partnerRecordPtr = records + partnerIndex * 0x10;
+          partnerSourceUsedMask = *(uint *)(partnerIndex * 4 + allocPlus38 + 0x6418);
+          hasFile1SourceSecond = 0;
           do {
-            pcVar39 = pcVar39 + 4;
-            if ((uVar34 & 1 << (uVar29 & 0x3f)) != 0) {
-              bVar11 = ((int (*)())recordSourceFileIs1)(pcVar39);
-              bVar10 = bVar11 | bVar10;
+            partnerRecordPtr = partnerRecordPtr + 4;
+            if ((partnerSourceUsedMask & 1 << (sourceLoop & 0x3f)) != 0) {
+              sourceFileIs1B = ((int (*)())recordSourceFileIs1)(partnerRecordPtr);
+              hasFile1SourceSecond = sourceFileIs1B | hasFile1SourceSecond;
             }
-            bVar1 = uVar29 != 2;
-            uVar29 = uVar29 + 1;
-          } while (bVar1);
-          bVar11 = 0;
-          if (bVar10 != 0) goto LAB_0007c484;
+            moreSourceSlots = sourceLoop != 2;
+            sourceLoop = sourceLoop + 1;
+          } while (moreSourceSlots);
+          hasFile1SourceFirst = 0;
+          if (hasFile1SourceSecond != 0) goto LAB_0007c484;
         }
         else {
 LAB_0007c484:
-          bVar11 = 1;
+          hasFile1SourceFirst = 1;
         }
-        iVar27 = iVar27 + 4;
-        local_80 = local_80 + 1;
-        local_7c = local_7c + 1;
-        pcVar39 = pcVar15;
+        allocPlus30000 = allocPlus30000 + 4;
+        combinedPairCount = combinedPairCount + 1;
+        emitLoopIndex = emitLoopIndex + 1;
+        emitRecord = combinedRecord;
       }
-      if ((cVar25 != '\0') && (iVar30 = *(int *)(iVar28 + 0x20), local_74 = uVar22, iVar30 != 0)) {
-        uVar18 = *(undefined4 *)(pcVar39 + 4);
-        uVar12 = *(undefined4 *)(pcVar39 + 8);
-        uVar26 = *(undefined4 *)(pcVar39 + 0xc);
-        iVar38 = local_70 * 0x10;
-        local_70 = local_70 + 1;
-        iVar13 = iVar30 + iVar38;
-        *(undefined4 *)(iVar30 + iVar38) = *(undefined4 *)pcVar39;
-        *(undefined4 *)(iVar13 + 0xc) = uVar26;
-        *(undefined4 *)(iVar13 + 4) = uVar18;
-        *(undefined4 *)(iVar13 + 8) = uVar12;
+      if ((emitToSecondList != '\0') && (recordFlagOffset = *(int *)(config + 0x20), lastOutputSlot = outRecordCount, recordFlagOffset != 0)) {
+        outWord1 = *(undefined4 *)(emitRecord + 4);
+        outWord2 = *(undefined4 *)(emitRecord + 8);
+        outWord3 = *(undefined4 *)(emitRecord + 0xc);
+        secondListOffset = secondListCount * 0x10;
+        secondListCount = secondListCount + 1;
+        outRecordPtrB = recordFlagOffset + secondListOffset;
+        *(undefined4 *)(recordFlagOffset + secondListOffset) = *(undefined4 *)emitRecord;
+        *(undefined4 *)(outRecordPtrB + 0xc) = outWord3;
+        *(undefined4 *)(outRecordPtrB + 4) = outWord1;
+        *(undefined4 *)(outRecordPtrB + 8) = outWord2;
       }
-      uVar34 = *(uint *)pcVar39;
-      if (((uVar34 & 0xf00) != 0x800) || (bVar1 = true, (**(uint **)(param_1 + 0x34) >> 6 & 1) != 0)
+      outWord0 = *(uint *)emitRecord;
+      if (((outWord0 & 0xf00) != 0x800) || (destIsFile8 = true, (**(uint **)(alloc + 0x34) >> 6 & 1) != 0)
          ) {
-        bVar1 = false;
+        destIsFile8 = false;
       }
-      if (bVar1) {
-        uVar33 = uVar22;
+      if (destIsFile8) {
+        lastFile8Slot = outRecordCount;
       }
-      if (bVar11 != 0) {
-        uVar4 = uVar22;
+      if (hasFile1SourceFirst != 0) {
+        lastFile1SourceSlot = outRecordCount;
       }
-      iVar30 = ((int (*)())recordDestFileIs0)(pcVar39);
-      if ((iVar30 != 0) && (uVar29 = (uVar34 >> 0xd & 0x7f) + 1, local_78 < uVar29)) {
-        local_78 = uVar29;
+      iVar30 = ((int (*)())recordDestFileIs0)(emitRecord);
+      if ((iVar30 != 0) && (sourceLoop = (outWord0 >> 0xd & 0x7f) + 1, destRegisterCount < sourceLoop)) {
+        destRegisterCount = sourceLoop;
       }
-      if (uVar22 == 0x400) {
+      if (outRecordCount == 0x400) {
         return 10;
       }
-      uVar29 = *(uint *)(pcVar39 + 0xc);
-      uVar7 = *(uint *)(pcVar39 + 4);
-      uVar22 = uVar22 + 1;
-      iVar27 = iVar27 + 4;
-      uVar17 = *(uint *)(pcVar39 + 8);
-      *puVar19 = uVar34;
-      puVar19[3] = uVar29;
-      puVar19[1] = uVar7;
-      puVar19[2] = uVar17;
-      local_7c = local_7c + 1;
-    } while (local_7c < *(uint *)(param_1 + 0x2a878));
+      outWord3B = *(uint *)(emitRecord + 0xc);
+      outWord1B = *(uint *)(emitRecord + 4);
+      outRecordCount = outRecordCount + 1;
+      allocPlus30000 = allocPlus30000 + 4;
+      outWord2B = *(uint *)(emitRecord + 8);
+      *outRecordPtr = outWord0;
+      outRecordPtr[3] = outWord3B;
+      outRecordPtr[1] = outWord1B;
+      outRecordPtr[2] = outWord2B;
+      emitLoopIndex = emitLoopIndex + 1;
+    } while (emitLoopIndex < *(uint *)(alloc + 0x2a878));
   }
-  **(uint **)(iVar28 + 0x1c) = uVar22;
-  puVar19 = *(uint **)(iVar28 + 0x28);
-  if (puVar19 != (uint *)0x0) {
-    if ((**(uint **)(param_1 + 0x34) & 0x40) == 0) {
-      if (local_74 < uVar33) {
-        local_74 = uVar33;
+  **(uint **)(config + 0x1c) = outRecordCount;
+  maxRegisterOut = *(uint **)(config + 0x28);
+  if (maxRegisterOut != (uint *)0x0) {
+    if ((**(uint **)(alloc + 0x34) & 0x40) == 0) {
+      if (lastOutputSlot < lastFile8Slot) {
+        lastOutputSlot = lastFile8Slot;
       }
-      *puVar19 = local_74;
+      *maxRegisterOut = lastOutputSlot;
     }
     else {
-      *puVar19 = local_74;
+      *maxRegisterOut = lastOutputSlot;
     }
   }
-  if (*(uint **)(iVar28 + 0x2c) != (uint *)0x0) {
-    **(uint **)(iVar28 + 0x2c) = uVar4;
+  if (*(uint **)(config + 0x2c) != (uint *)0x0) {
+    **(uint **)(config + 0x2c) = lastFile1SourceSlot;
   }
-  if (*(uint **)(iVar28 + 0x30) != (uint *)0x0) {
-    **(uint **)(iVar28 + 0x30) = local_78;
+  if (*(uint **)(config + 0x30) != (uint *)0x0) {
+    **(uint **)(config + 0x30) = destRegisterCount;
   }
-  if (*(int *)(iVar28 + 0x20) != 0) {
-    **(int **)(iVar28 + 0x24) = local_70;
+  if (*(int *)(config + 0x20) != 0) {
+    **(int **)(config + 0x24) = secondListCount;
   }
-  *(int *)(param_1 + 0x3548c) = local_80;
+  *(int *)(alloc + 0x3548c) = combinedPairCount;
   return 0;
 }
 
@@ -4645,7 +4743,7 @@ LAB_0007da08:
     } while (pdVar20 != local_78);
   }
   if ((*param_1 & 0x100) == 0) {
-    iVar19 = ((int (*)())FUN_0007b0d0)(param_1,puVar27,pdVar15,in_r6,piVar31,piVar32,pdVar14,pdVar20);
+    iVar19 = ((int (*)())recordProgramAllocateAndEmit)(param_1,puVar27,pdVar15,in_r6,piVar31,piVar32,pdVar14,pdVar20);
     return iVar19;
   }
   return 0;

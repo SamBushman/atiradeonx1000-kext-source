@@ -1,0 +1,144 @@
+local	recordProgramAllocateAndEmit	param_1	alloc	INFERRED	the vertex program register allocator object: records at +0x1286c (count +0x2286c), config pointer +0x34, per-record flags +0x3348c, dependency lists +0xa450.., binding tables +0x2a87c.., chunk arena +0x12454
+local	recordProgramAllocateAndEmit	param_2	unusedArg2	INFERRED	never read
+local	recordProgramAllocateAndEmit	param_3	scratchArg3	INFERRED	incoming argument register reused as scratch for call arguments (never read as an argument)
+local	recordProgramAllocateAndEmit	param_4	scratchArg4	INFERRED	incoming argument register reused as scratch for call arguments
+local	recordProgramAllocateAndEmit	param_5	scratchArg5	INFERRED	incoming argument register reused as scratch for call arguments
+local	recordProgramAllocateAndEmit	param_6	scratchArg6	INFERRED	incoming argument register reused as scratch for call arguments
+local	recordProgramAllocateAndEmit	param_7	unusedArg7	INFERRED	never read
+local	recordProgramAllocateAndEmit	param_8	unusedArg8	INFERRED	never read
+use	recordProgramAllocateAndEmit	pcVar39	recordCursor	INFERRED	pointer into the records, advanced 0x10 per record in the opcode rewrite loop	^\s*pcVar39\ =\ pcVar21;$	+1
+use	recordProgramAllocateAndEmit	pcVar39	recordCursor	INFERRED	pointer into the records, advanced 0x10 per record in the opcode rewrite loop	^\s*if\ \(pcVar39\[3\]\ ==\ \(code\ \*\)0x4\)\ \{$	+2
+use	recordProgramAllocateAndEmit	pcVar39	recordCursor	INFERRED	pointer into the records, advanced 0x10 per record in the opcode rewrite loop	^\s*else\ if\ \(\(pcVar15\ !=\ \(code\ \*\)0x0\)\ \&\&\ \(pcVar39\[3\]\ ==\ \(code\ \*\)0xb\)\)\ \{$	+2
+use	recordProgramAllocateAndEmit	pcVar39	recordCursor	INFERRED	pointer into the records, advanced 0x10 per record in the opcode rewrite loop	^\s*pcVar39\ =\ pcVar39\ \+\ 0x10;$	+1
+use	recordProgramAllocateAndEmit	pcVar39	recordCursorB	INFERRED	pointer into the records for the final opcode rewrite	^\s*pcVar39\ =\ pcVar21;$@2	+1
+use	recordProgramAllocateAndEmit	pcVar39	recordCursorB	INFERRED	pointer into the records for the final opcode rewrite	^\s*uVar42\ =\ \(\(int\ \(\*\)\(\)\)FUN_00079e10\)\(pcVar39,uVar26,param_3,param_4,param_5,param_6,pcVar15\);$	+1
+use	recordProgramAllocateAndEmit	pcVar39	recordCursorB	INFERRED	pointer into the records for the final opcode rewrite	^\s*if\ \(pcVar39\[3\]\ ==\ \(code\ \*\)0x4\)\ \{$@2	+2
+use	recordProgramAllocateAndEmit	pcVar39	recordCursorB	INFERRED	pointer into the records for the final opcode rewrite	^\s*else\ if\ \(\(\(uVar4\ >>\ 6\ \&\ 1\)\ !=\ 0\)\ \&\&\ \(pcVar39\[3\]\ ==\ \(code\ \*\)0xb\)\)\ \{$	+2
+use	recordProgramAllocateAndEmit	pcVar39	recordCursorB	INFERRED	pointer into the records for the final opcode rewrite	^\s*pcVar39\ =\ pcVar39\ \+\ 0x10;$@2	+1
+use	recordProgramAllocateAndEmit	pcVar39	chainNode	INFERRED	first node of the chain at alloc+0x10450	^\s*pcVar39\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x10450\);$	+1
+use	recordProgramAllocateAndEmit	pcVar39	chainNode	INFERRED	first node of the chain at alloc+0x10450	^\s*pcVar41\ =\ pcVar39\ \+\ 0x10;$	+3
+use	recordProgramAllocateAndEmit	pcVar39	chainNodeLast	INFERRED	last node of the chain (pcVar37)	^\s*pcVar39\ =\ pcVar37;$	+1
+use	recordProgramAllocateAndEmit	pcVar39	chainNodeLast	INFERRED	last node of the chain (pcVar37)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00077560\)\(param_1,\*\(undefined4\ \*\)pcVar39,0,param_4,param_5,param_6,pcVar15\);$	+1
+use	recordProgramAllocateAndEmit	pcVar39	chainNodeLast	INFERRED	last node of the chain (pcVar37)	^\s*if\ \(\(pcVar15\ ==\ \(code\ \*\)0x0\)\ \|\|\ \(pcVar39\ ==\ pcVar15\)\)\ break;$	+1
+use	recordProgramAllocateAndEmit	pcVar39	chainNodeLast	INFERRED	last node of the chain (pcVar37)	^\s*for\ \(pcVar41\ =\ \*\(code\ \*\*\)\(pcVar15\ \+\ 0x10\);\ pcVar39\ !=\ pcVar41;$	+2
+use	recordProgramAllocateAndEmit	pcVar39	liveListPtr	INFERRED	alloc+0x24870: live record list cursor	^\s*pcVar39\ =\ 0x00024870\ \+\ param_1;$	+1
+use	recordProgramAllocateAndEmit	pcVar39	liveListPtr	INFERRED	alloc+0x24870: live record list cursor	^\s*iVar28\ =\ \*\(int\ \*\)pcVar39;$	+1
+use	recordProgramAllocateAndEmit	pcVar39	liveListPtr	INFERRED	alloc+0x24870: live record list cursor	^\s*iVar28\ =\ \*\(int\ \*\)pcVar39;$@2	+1
+use	recordProgramAllocateAndEmit	pcVar39	liveListPtr	INFERRED	alloc+0x24870: live record list cursor	^\s*iVar28\ =\ \*\(int\ \*\)pcVar39;$@3	+1
+use	recordProgramAllocateAndEmit	pcVar39	liveListPtr	INFERRED	alloc+0x24870: live record list cursor	^\s*\(\(int\ \(\*\)\(\)\)FUN_00077650\)\(param_1\ \+\ 0xe450\ \+\ \*\(int\ \*\)pcVar39\ \*\ 4,piVar24\);$	+1
+use	recordProgramAllocateAndEmit	pcVar39	liveListPtr	INFERRED	alloc+0x24870: live record list cursor	^\s*pcVar39\ =\ pcVar39\ \+\ 4;$	+1
+use	recordProgramAllocateAndEmit	pcVar39	liveIndexByte	INFERRED	0-based live list position	^\s*pcVar39\ =\ \(code\ \*\)0x0;$	+1
+use	recordProgramAllocateAndEmit	pcVar39	liveIndexByte	INFERRED	0-based live list position	^\s*while\ \(pcVar39\ <\ \*\(code\ \*\*\)\(param_1\ \+\ 0x26870\)\)\ \{$	+1
+use	recordProgramAllocateAndEmit	pcVar39	liveIndexByte	INFERRED	0-based live list position	^\s*param_3\ =\ pcVar39;$@2	+2
+use	recordProgramAllocateAndEmit	pcVar39	liveIndexByte	INFERRED	0-based live list position	^\s*pcVar39\ =\ pcVar39\ \+\ 1;$	+1
+use	recordProgramAllocateAndEmit	pcVar39	liveIndexByte	INFERRED	0-based live list position	^\s*\(\(int\ \(\*\)\(\)\)FUN_00077760\)\(pcVar39,param_1\ \+\ 0x26870,param_3\);$	+1
+use	recordProgramAllocateAndEmit	pcVar39	scanPosition	INFERRED	scan position in the retired-list compaction	^\s*pcVar39\ =\ \(code\ \*\)0x0;$@2	+1
+use	recordProgramAllocateAndEmit	pcVar39	scanPosition	INFERRED	scan position in the retired-list compaction	^\s*pcVar39\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x28874\);$	+1
+use	recordProgramAllocateAndEmit	pcVar39	scanPosition	INFERRED	scan position in the retired-list compaction	^\s*\}\ while\ \(param_3\ <\ pcVar39\);$	+1
+use	recordProgramAllocateAndEmit	pcVar39	scanPosition	INFERRED	scan position in the retired-list compaction	^\s*\*\(code\ \*\*\)\(param_1\ \+\ 0x28874\)\ =\ pcVar39\ \+\ \-1;$	+2
+use	recordProgramAllocateAndEmit	pcVar39	liveIndexByteB	INFERRED	0-based live list position of the second pass	^\s*pcVar39\ =\ \(code\ \*\)0x0;$@3	+1
+use	recordProgramAllocateAndEmit	pcVar39	liveIndexByteB	INFERRED	0-based live list position of the second pass	^\s*while\ \(pcVar39\ <\ \*\(code\ \*\*\)\(param_1\ \+\ 0x26870\)\)\ \{$@2	+1
+use	recordProgramAllocateAndEmit	pcVar39	liveIndexByteB	INFERRED	0-based live list position of the second pass	^\s*param_3\ =\ pcVar39;$@3	+2
+use	recordProgramAllocateAndEmit	pcVar39	liveIndexByteB	INFERRED	0-based live list position of the second pass	^\s*pcVar39\ =\ pcVar39\ \+\ 1;$@2	+1
+use	recordProgramAllocateAndEmit	pcVar39	liveIndexByteB	INFERRED	0-based live list position of the second pass	^\s*\(\(int\ \(\*\)\(\)\)FUN_00077760\)\(pcVar39,param_1\ \+\ 0x26870,param_3\);$@2	+1
+use	recordProgramAllocateAndEmit	pcVar39	partnerRecordPtr	INFERRED	partner record (pcVar21 + local_84*0x10)	^\s*pcVar39\ =\ pcVar21\ \+\ local_84\ \*\ 0x10;$	+1
+use	recordProgramAllocateAndEmit	pcVar39	partnerRecordPtr	INFERRED	partner record (pcVar21 + local_84*0x10)	^\s*pcVar39\ =\ pcVar39\ \+\ 4;$@4	+1
+use	recordProgramAllocateAndEmit	pcVar39	partnerRecordPtr	INFERRED	partner record (pcVar21 + local_84*0x10)	^\s*bVar11\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077cd0\)\(pcVar39\);$	+1
+use	recordProgramAllocateAndEmit	pcVar41	chainNext	INFERRED	pcVar39 + 0x10: next node address	^\s*pcVar41\ =\ pcVar39\ \+\ 0x10;$	+1
+use	recordProgramAllocateAndEmit	pcVar41	chainNext	INFERRED	pcVar39 + 0x10: next node address	^\s*pcVar39\ =\ \*\(code\ \*\*\)pcVar41;$	+2
+use	recordProgramAllocateAndEmit	pcVar41	chainCursor	INFERRED	cursor while following the chain	^\s*for\ \(pcVar41\ =\ \*\(code\ \*\*\)\(pcVar15\ \+\ 0x10\);\ pcVar39\ !=\ pcVar41;$	+4
+use	recordProgramAllocateAndEmit	pcVar41	registerSlot	INFERRED	register id: dest index + file table (DAT_001aa758) * 0x100	^\s*pcVar41\ =\ pcVar15\ \+\ \(char\)\(DAT_001aa758\)\[uVar4\ >>\ 8\ \&\ 0xf\]\ \*\ 0x100;$	+1
+use	recordProgramAllocateAndEmit	pcVar41	registerSlot	INFERRED	register id: dest index + file table (DAT_001aa758) * 0x100	^\s*\(\(int\ \(\*\)\(\)\)FUN_00078db0\)\(param_1,pcVar41,0\);$	+1
+use	recordProgramAllocateAndEmit	pcVar41	registerSlot	INFERRED	register id: dest index + file table (DAT_001aa758) * 0x100	^\s*\(\(int\ \(\*\)\(\)\)FUN_00078db0\)\(param_1,pcVar41,1\);$	+1
+use	recordProgramAllocateAndEmit	pcVar41	registerSlot	INFERRED	register id: dest index + file table (DAT_001aa758) * 0x100	^\s*\(\(int\ \(\*\)\(\)\)FUN_00078db0\)\(param_1,pcVar41,2\);$	+1
+use	recordProgramAllocateAndEmit	pcVar41	registerSlot	INFERRED	register id: dest index + file table (DAT_001aa758) * 0x100	^\s*\(\(int\ \(\*\)\(\)\)FUN_00078db0\)\(param_1,pcVar41,3\);$	+1
+use	recordProgramAllocateAndEmit	pcVar41	sourceWordPtr	INFERRED	pointer to the source words of the record being bound	^\s*pcVar41\ =\ pcVar39;$	+1
+use	recordProgramAllocateAndEmit	pcVar41	sourceWordPtr	INFERRED	pointer to the source words of the record being bound	^\s*pcVar41\ =\ pcVar41\ \+\ 4;$	+1
+use	recordProgramAllocateAndEmit	pcVar41	sourceWordPtr	INFERRED	pointer to the source words of the record being bound	^\s*param_6\ =\ \*\(code\ \*\*\)pcVar41;$	+1
+use	recordProgramAllocateAndEmit	pcVar41	liveListPtrB	INFERRED	alloc+0x24870 live list cursor	^\s*pcVar41\ =\ 0x00024870\ \+\ param_1;$	+1
+use	recordProgramAllocateAndEmit	pcVar41	liveListPtrB	INFERRED	alloc+0x24870 live list cursor	^\s*pcVar41\ =\ pcVar41\ \+\ 4;$@2	+1
+use	recordProgramAllocateAndEmit	pcVar41	liveListPtrB	INFERRED	alloc+0x24870 live list cursor	^\s*iVar27\ =\ \*\(int\ \*\)pcVar41;$	+1
+use	recordProgramAllocateAndEmit	pcVar41	liveListPtrB	INFERRED	alloc+0x24870 live list cursor	^\s*pcVar41\ =\ 0x00024870\ \+\ param_1;$@2	+1
+use	recordProgramAllocateAndEmit	pcVar41	liveListPtrB	INFERRED	alloc+0x24870 live list cursor	^\s*pcVar41\ =\ pcVar41\ \+\ 4;$@3	+1
+use	recordProgramAllocateAndEmit	pcVar41	liveListPtrB	INFERRED	alloc+0x24870 live list cursor	^\s*iVar27\ =\ \*\(int\ \*\)pcVar41;$@2	+1
+use	recordProgramAllocateAndEmit	uVar34	componentLoop	INFERRED	component loop counter 0..3	^\s*uVar34\ =\ 0;$	+1
+use	recordProgramAllocateAndEmit	uVar34	componentLoop	INFERRED	component loop counter 0..3	^\s*uVar29\ =\ 1\ <<\ \(uVar34\ \&\ 0x3f\);$	+1
+use	recordProgramAllocateAndEmit	uVar34	componentLoop	INFERRED	component loop counter 0..3	^\s*bVar31\ =\ uVar34\ !=\ 3;$	+1
+use	recordProgramAllocateAndEmit	uVar34	componentLoop	INFERRED	component loop counter 0..3	^\s*uVar34\ =\ uVar34\ \+\ 1;$	+1
+use	recordProgramAllocateAndEmit	uVar34	writeMaskB	INFERRED	recordGetWriteMask result	^\s*uVar34\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077850\)\(param_1\ \+\ 0x1286c\ \+\ uVar33\ \*\ 0x10\);$	+1
+use	recordProgramAllocateAndEmit	uVar34	writeMaskB	INFERRED	recordGetWriteMask result	^\s*if\ \(\(uVar34\ \&\ uVar29\)\ !=\ 0\)\ \{$	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceUsedMask	INFERRED	alloc+0x38+0x6418 per-record word: which sources are used	^\s*uVar34\ =\ \*\(uint\ \*\)\(iVar30\ \+\ iVar20\ \+\ 0x6418\);$	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceUsedMask	INFERRED	alloc+0x38+0x6418 per-record word: which sources are used	^\s*if\ \(\(uVar34\ \&\ 1\ <<\ \(uVar29\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceUsedMask	INFERRED	alloc+0x38+0x6418 per-record word: which sources are used	^\s*uVar34\ =\ \*\(uint\ \*\)\(iVar30\ \+\ iVar20\ \+\ 0x6418\);$@2	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceUsedMask	INFERRED	alloc+0x38+0x6418 per-record word: which sources are used	^\s*if\ \(\(uVar34\ \&\ 1\ <<\ \(uVar29\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$@2	+1
+use	recordProgramAllocateAndEmit	uVar34	secondRecordWord0	INFERRED	word 0 of the second record of the pair	^\s*uVar34\ =\ \*\(uint\ \*\)pcVar41;$	+1
+use	recordProgramAllocateAndEmit	uVar34	secondRecordWord0	INFERRED	word 0 of the second record of the pair	^\s*uVar34\ =\ uVar34\ >>\ 0x14\ \&\ 0xf;$	+1
+use	recordProgramAllocateAndEmit	uVar34	secondRecordWord0	INFERRED	word 0 of the second record of the pair	^\s*if\ \(uVar34\ ==\ 2\)\ \{$	+1
+use	recordProgramAllocateAndEmit	uVar34	secondRecordWord0	INFERRED	word 0 of the second record of the pair	^\s*else\ if\ \(uVar34\ <\ 3\)\ \{$	+2
+use	recordProgramAllocateAndEmit	uVar34	secondRecordWord0	INFERRED	word 0 of the second record of the pair	^\s*else\ if\ \(uVar34\ ==\ 4\)\ \{$	+1
+use	recordProgramAllocateAndEmit	uVar34	secondRecordWord0	INFERRED	word 0 of the second record of the pair	^\s*else\ if\ \(uVar34\ ==\ 8\)\ \{$	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceOperandIndex	INFERRED	operand index from the opcode info table (DAT_001aa5f8 / DAT_001aa5fc)	^\s*uVar34\ =\ \*\(uint\ \*\)\(\&DAT_001aa5f8\ \+\ iVar38\);$	+2
+use	recordProgramAllocateAndEmit	uVar34	sourceOperandIndex	INFERRED	operand index from the opcode info table (DAT_001aa5f8 / DAT_001aa5fc)	^\s*uVar7\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 3;$	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceOperandIndex	INFERRED	operand index from the opcode info table (DAT_001aa5f8 / DAT_001aa5fc)	^\s*uVar17\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x10;$	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceOperandIndex	INFERRED	operand index from the opcode info table (DAT_001aa5f8 / DAT_001aa5fc)	^\s*uVar5\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x1fe0;$	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceOperandIndex	INFERRED	operand index from the opcode info table (DAT_001aa5f8 / DAT_001aa5fc)	^\s*uVar3\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x60000000;$	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceOperandIndex	INFERRED	operand index from the opcode info table (DAT_001aa5f8 / DAT_001aa5fc)	^\s*uVar29\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ >>\ 3\ \&\ 0x2000000;$	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceOperandIndex	INFERRED	operand index from the opcode info table (DAT_001aa5f8 / DAT_001aa5fc)	^\s*\*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ >>\ 9\ \&\ 0xe000\ \|$	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceOperandIndex	INFERRED	operand index from the opcode info table (DAT_001aa5f8 / DAT_001aa5fc)	^\s*uVar34\ =\ \*\(uint\ \*\)\(\&DAT_001aa5fc\ \+\ iVar38\);$	+2
+use	recordProgramAllocateAndEmit	uVar34	sourceOperandIndex	INFERRED	operand index from the opcode info table (DAT_001aa5f8 / DAT_001aa5fc)	^\s*uVar7\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 3;$@2	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceOperandIndex	INFERRED	operand index from the opcode info table (DAT_001aa5f8 / DAT_001aa5fc)	^\s*uVar17\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x10;$@2	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceOperandIndex	INFERRED	operand index from the opcode info table (DAT_001aa5f8 / DAT_001aa5fc)	^\s*uVar5\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x1fe0;$@2	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceOperandIndex	INFERRED	operand index from the opcode info table (DAT_001aa5f8 / DAT_001aa5fc)	^\s*uVar3\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x60000000;$@2	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceOperandIndex	INFERRED	operand index from the opcode info table (DAT_001aa5f8 / DAT_001aa5fc)	^\s*uVar29\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ >>\ 2\ \&\ 0x4000000;$	+1
+use	recordProgramAllocateAndEmit	uVar34	sourceOperandIndex	INFERRED	operand index from the opcode info table (DAT_001aa5f8 / DAT_001aa5fc)	^\s*\*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ >>\ 6\ \&\ 0x70000\ \|$	+1
+use	recordProgramAllocateAndEmit	uVar34	partnerSourceUsedMask	INFERRED	per-record used-sources word of the partner record	^\s*uVar34\ =\ \*\(uint\ \*\)\(local_84\ \*\ 4\ \+\ iVar20\ \+\ 0x6418\);$	+1
+use	recordProgramAllocateAndEmit	uVar34	partnerSourceUsedMask	INFERRED	per-record used-sources word of the partner record	^\s*if\ \(\(uVar34\ \&\ 1\ <<\ \(uVar29\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$@3	+1
+use	recordProgramAllocateAndEmit	uVar34	outWord0	INFERRED	record word 0 copied to the output list	^\s*uVar34\ =\ \*\(uint\ \*\)pcVar39;$	+3
+use	recordProgramAllocateAndEmit	uVar34	outWord0	INFERRED	record word 0 copied to the output list	^\s*if\ \(\(iVar30\ !=\ 0\)\ \&\&\ \(uVar29\ =\ \(uVar34\ >>\ 0xd\ \&\ 0x7f\)\ \+\ 1,\ local_78\ <\ uVar29\)\)\ \{$	+1
+use	recordProgramAllocateAndEmit	uVar34	outWord0	INFERRED	record word 0 copied to the output list	^\s*\*puVar19\ =\ uVar34;$	+1
+use	recordProgramAllocateAndEmit	uVar29	componentBit	INFERRED	1 << component	^\s*uVar29\ =\ 1\ <<\ \(uVar34\ \&\ 0x3f\);$	+2
+use	recordProgramAllocateAndEmit	uVar29	componentBit	INFERRED	1 << component	^\s*local_60\[0xc\]\ =\ \(code\ \*\)\(\(byte\)uVar29\ \|\ \(byte\)local_60\[0xc\]\);$	+1
+use	recordProgramAllocateAndEmit	uVar29	componentBit	INFERRED	1 << component	^\s*uVar29\ =\ 1\ <<\ \(uVar22\ \&\ 0x3f\);$	+3
+use	recordProgramAllocateAndEmit	uVar29	componentBit	INFERRED	1 << component	^\s*uVar4\ =\ uVar4\ \|\ uVar29;$	+1
+use	recordProgramAllocateAndEmit	uVar29	sourceLoop	INFERRED	source slot loop counter	^\s*uVar29\ =\ 0;$	+1
+use	recordProgramAllocateAndEmit	uVar29	sourceLoop	INFERRED	source slot loop counter	^\s*if\ \(\(uVar34\ \&\ 1\ <<\ \(uVar29\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
+use	recordProgramAllocateAndEmit	uVar29	sourceLoop	INFERRED	source slot loop counter	^\s*bVar1\ =\ uVar29\ !=\ 2;$	+2
+use	recordProgramAllocateAndEmit	uVar29	sourceLoop	INFERRED	source slot loop counter	^\s*uVar29\ =\ 0;$@2	+1
+use	recordProgramAllocateAndEmit	uVar29	sourceLoop	INFERRED	source slot loop counter	^\s*if\ \(\(uVar34\ \&\ 1\ <<\ \(uVar29\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$@2	+1
+use	recordProgramAllocateAndEmit	uVar29	sourceLoop	INFERRED	source slot loop counter	^\s*bVar1\ =\ uVar29\ !=\ 2;$@2	+2
+use	recordProgramAllocateAndEmit	uVar29	sourceLoop	INFERRED	source slot loop counter	^\s*uVar29\ =\ 0;$@3	+1
+use	recordProgramAllocateAndEmit	uVar29	sourceLoop	INFERRED	source slot loop counter	^\s*if\ \(\(uVar34\ \&\ 1\ <<\ \(uVar29\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$@3	+1
+use	recordProgramAllocateAndEmit	uVar29	sourceLoop	INFERRED	source slot loop counter	^\s*bVar1\ =\ uVar29\ !=\ 2;$@3	+2
+use	recordProgramAllocateAndEmit	uVar29	sourceLoop	INFERRED	source slot loop counter	^\s*if\ \(\(iVar30\ !=\ 0\)\ \&\&\ \(uVar29\ =\ \(uVar34\ >>\ 0xd\ \&\ 0x7f\)\ \+\ 1,\ local_78\ <\ uVar29\)\)\ \{$	+2
+use	recordProgramAllocateAndEmit	uVar29	outWord3B	INFERRED	record word 3 copied to the output list	^\s*uVar29\ =\ \*\(uint\ \*\)\(pcVar39\ \+\ 0xc\);$	+1
+use	recordProgramAllocateAndEmit	uVar29	outWord3B	INFERRED	record word 3 copied to the output list	^\s*puVar19\[3\]\ =\ uVar29;$	+1
+use	recordProgramAllocateAndEmit	iVar38	recordFlagsBase	INFERRED	alloc+0x3348c: per-record flag words	^\s*iVar38\ =\ param_1\ \+\ 0x3348c;$	+3
+use	recordProgramAllocateAndEmit	iVar38	recordFlagsBase	INFERRED	alloc+0x3348c: per-record flag words	^\s*\*\(uint\ \*\)\(iVar30\ \+\ iVar38\)\ =\ uVar22\ \|\ 0x30;$	+1
+use	recordProgramAllocateAndEmit	iVar38	recordFlagsBase	INFERRED	alloc+0x3348c: per-record flag words	^\s*iVar38\ =\ param_1\ \+\ 0x3348c;$@2	+3
+use	recordProgramAllocateAndEmit	iVar38	recordFlagsBase	INFERRED	alloc+0x3348c: per-record flag words	^\s*\*\(uint\ \*\)\(iVar30\ \+\ iVar38\)\ =\ uVar22\ \|\ 3;$	+1
+use	recordProgramAllocateAndEmit	iVar38	recordFlagsBase	INFERRED	alloc+0x3348c: per-record flag words	^\s*\*\(uint\ \*\)\(iVar30\ \+\ iVar38\)\ =\ uVar22\ \|\ 0x1003;$	+1
+use	recordProgramAllocateAndEmit	iVar38	recordFlagsBase	INFERRED	alloc+0x3348c: per-record flag words	^\s*\*\(uint\ \*\)\(iVar38\ \+\ \*piVar14\ \*\ 4\)\ =\ \*\(uint\ \*\)\(iVar38\ \+\ \*piVar14\ \*\ 4\)\ \|\ 0x1000;$	+1
+use	recordProgramAllocateAndEmit	iVar38	emittedCount	INFERRED	alloc+0x2a878: records emitted so far	^\s*iVar38\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2a878\);$	+1
+use	recordProgramAllocateAndEmit	iVar38	emittedCount	INFERRED	alloc+0x2a878: records emitted so far	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x2a878\)\ =\ iVar38\ \+\ 1;$	+2
+use	recordProgramAllocateAndEmit	iVar38	retiredCount	INFERRED	alloc+0x28874: retired records	^\s*iVar38\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x28874\);$	+1
+use	recordProgramAllocateAndEmit	iVar38	retiredCount	INFERRED	alloc+0x28874: retired records	^\s*\}\ while\ \(param_6\ <\ \(code\ \*\)\(iVar38\ \+\ \-1\)\);$	+1
+use	recordProgramAllocateAndEmit	iVar38	opcodeInfoOffsetB	INFERRED	(opcode & 0x1f) * 0x14: opcode info table index	^\s*iVar38\ =\ \(\(byte\)cVar2\ \&\ 0x1f\)\ \*\ 0x14;$	+2
+use	recordProgramAllocateAndEmit	iVar38	opcodeInfoOffsetB	INFERRED	(opcode & 0x1f) * 0x14: opcode info table index	^\s*uVar34\ =\ \*\(uint\ \*\)\(\&DAT_001aa5fc\ \+\ iVar38\);$	+1
+use	recordProgramAllocateAndEmit	iVar27	loopIndex	INFERRED	loop counter	^\s*iVar27\ =\ 0;$	+1
+use	recordProgramAllocateAndEmit	iVar27	loopIndex	INFERRED	loop counter	^\s*pcVar39\ =\ pcVar21\ \+\ iVar27\ \*\ 0x10;$	+1
+use	recordProgramAllocateAndEmit	iVar27	loopIndex	INFERRED	loop counter	^\s*if\ \(\(\(\(\(\(uVar4\ \-\ 1\ \&\ uVar4\)\ ==\ 0\)\ \&\&$	+11
+use	recordProgramAllocateAndEmit	iVar27	loopIndex	INFERRED	loop counter	^\s*iVar27\ =\ iVar27\ \+\ 1;$	+1
+use	recordProgramAllocateAndEmit	iVar27	loopIndex	INFERRED	loop counter	^\s*\}\ while\ \(iVar28\ !=\ iVar27\);$	+1
+use	recordProgramAllocateAndEmit	iVar27	loopIndex	INFERRED	loop counter	^\s*iVar27\ =\ 0;$@2	+1
+use	recordProgramAllocateAndEmit	iVar27	loopIndex	INFERRED	loop counter	^\s*pcVar15\ =\ \(code\ \*\)\(iVar28\ \-\ iVar27\);$	+1
+use	recordProgramAllocateAndEmit	iVar27	loopIndex	INFERRED	loop counter	^\s*iVar27\ =\ iVar27\ \+\ 1;$@2	+1
+use	recordProgramAllocateAndEmit	iVar27	loopIndex	INFERRED	loop counter	^\s*\}\ while\ \(iVar27\ !=\ iVar28\);$	+1
+use	recordProgramAllocateAndEmit	iVar27	loopIndex	INFERRED	loop counter	^\s*iVar27\ =\ 0;$@3	+1
+use	recordProgramAllocateAndEmit	iVar27	loopIndex	INFERRED	loop counter	^\s*bVar31\ =\ iVar27\ !=\ 8;$	+3
+use	recordProgramAllocateAndEmit	iVar27	loopIndex	INFERRED	loop counter	^\s*iVar27\ =\ 1;$	+1
+use	recordProgramAllocateAndEmit	iVar27	loopIndex	INFERRED	loop counter	^\s*pcVar15\ =\ param_4\ \+\ iVar27\ \*\ \-4;$	+1
+use	recordProgramAllocateAndEmit	iVar27	loopIndex	INFERRED	loop counter	^\s*iVar27\ =\ iVar27\ \+\ 1;$@3	+1
+use	recordProgramAllocateAndEmit	uVar42	statusAndValue	INFERRED	64-bit return (status in the high word) of a callee	^\s*uVar42\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077860\)\(param_1,pcVar21,pcVar39,param_4\);$	+3
+use	recordProgramAllocateAndEmit	uVar42	statusAndValue	INFERRED	64-bit return (status in the high word) of a callee	^\s*uVar42\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077860\)\(param_1,pcVar21,pcVar39,param_4\);$@2	+3
+use	recordProgramAllocateAndEmit	uVar42	statusAndValue	INFERRED	64-bit return (status in the high word) of a callee	^\s*uVar42\ =\ \(\(int\ \(\*\)\(\)\)FUN_00079e70\)\(param_1,0\);$	+3
+use	recordProgramAllocateAndEmit	uVar42	statusAndValue	INFERRED	64-bit return (status in the high word) of a callee	^\s*uVar42\ =\ \(\(int\ \(\*\)\(\)\)FUN_00079e10\)\(pcVar39,uVar26,param_3,param_4,param_5,param_6,pcVar15\);$	+3
