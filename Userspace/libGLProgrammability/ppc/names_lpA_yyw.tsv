@@ -1,0 +1,461 @@
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*uVar57\ =\ \(uint\)local_82c\ \&\ 0x7f800;$	+2
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*\*\(uint\ \*\)\(pTVar7\ \+\ 0x30\)\ =\ uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x3ff;$	+1
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*\(\(uint\)local_82c\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|\ uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x1ff;$	+1
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*uVar57\ =\ \*\(uint\ \*\)\(uVar2\ \+\ 0x24\)\ \&\ 0x7f800;$	+1
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*\(unsigned\ char\ \*\)\(uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ \(uint\)pTVar3\ \&\ 0x7ff\);$	+1
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*\(unsigned\ char\ \*\)\(uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ \(uint\)pTVar3\ \&\ 0x3ff\);$	+1
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*\(\(\*\(uint\ \*\)\(uVar2\ \+\ 0x24\)\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|$	+2
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*uVar57\ =\ \(uint\)local_82c\ \&\ 0x7f800;$@2	+2
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*\*\(uint\ \*\)\(pTVar7\ \+\ 0x40\)\ =\ uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x3ff;$	+1
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*\(\(uint\)local_82c\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|\ uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x1ff;$@2	+1
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*uVar57\ =\ \(uint\)local_82c\ \&\ 0x7f800;$@3	+2
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*\*\(uint\ \*\)\(pTVar7\ \+\ 0x40\)\ =\ uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x3ff;$@2	+1
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*\(\(uint\)local_82c\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|\ uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x1ff;$@3	+1
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*uVar57\ =\ \*\(uint\ \*\)\(pTVar12\ \+\ 0x24\)\ \&\ 0x7f800;$	+2
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*piVar61\[0xc\]\ =\ uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x3ff;$	+1
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x1ff;$	+1
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*uVar57\ =\ \*\(uint\ \*\)\(iVar36\ \+\ 0x24\)\ \&\ 0x7f800;$	+2
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*a0_00\[0xc\]\ =\ uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x3ff;$	+1
+use	yyparse	uVar57	sizeFieldBits	INFERRED	TType size field of the bit-field word (mask 0x7f800) being copied	^\s*uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x1ff;$@2	+1
+use	yyparse	uVar57	signMask	INFERRED	sign of the int constant (x >> 31)	^\s*uVar57\ =\ \(int\)\*\(uint\ \*\)\(pTVar56\ \+\ 4\)\ >>\ 0x1f;$	+2
+use	yyparse	uVar57	signMask	INFERRED	sign of the int constant (x >> 31)	^\s*\(\(int\)param_1,\*\(char\ \*\*\)pTVar56,"\ integer\ constant\ overflow","","",uVar57,iVar55,$	+2
+use	yyparse	uVar57	constTypeBits	INFERRED	bit-field word of the const int/float/bool TType being built	^\s*uVar57\ =\ \(uint\)local_82c\ \&\ 0x7ff\ \|\ 0x4080000;$	+1
+use	yyparse	uVar57	constTypeBits	INFERRED	bit-field word of the const int/float/bool TType being built	^\s*uVar57\ =\ \(uint\)local_82c\ \&\ 0x1807ff\ \|\ 0x4180000;$	+1
+use	yyparse	uVar57	constTypeBits	INFERRED	bit-field word of the const int/float/bool TType being built	^\s*local_82c\ =\ \(unsigned\ char\ \*\)\(uVar57\ \&\ 0xfffff9ff\ \|\ 0x800\);$	+1
+use	yyparse	uVar57	shiftedTypeBits	INFERRED	TType bit-field word shifted to isolate the size/matrix bits	^\s*uVar57\ =\ local_7bc\ <<\ 0xd;$	+1
+use	yyparse	uVar57	shiftedTypeBits	INFERRED	TType bit-field word shifted to isolate the size/matrix bits	^\s*if\ \(\(\(int\)\(uVar57\ \|\ uVar28\)\ >>\ 0x18\ <=\ \*\*\(int\ \*\*\)\(iVar55\ \+\ 0x30\)\)\ \&\&$	+3
+use	yyparse	uVar57	clearedTypeBits	INFERRED	TType bit-field word with the matrix/array bits cleared	^\s*uVar57\ =\ \*\(uint\ \*\)\(pTVar7\ \+\ 0x40\)\ \&\ 0x9ff\ \|\ 0x800;$	+2
+use	yyparse	uVar57	clearedTypeBits	INFERRED	TType bit-field word with the matrix/array bits cleared	^\s*\*\(uint\ \*\)\(pTVar7\ \+\ 0x40\)\ =\ uVar57;$	+1
+use	yyparse	uVar57	aggregateLine	INFERRED	source line passed to TIntermediate::makeAggregate	^\s*uVar57\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ \-0x2c\);$	+1
+use	yyparse	uVar57	aggregateLine	INFERRED	source line passed to TIntermediate::makeAggregate	^\s*uVar57\ =\ 0;$@2	+1
+use	yyparse	uVar57	aggregateLine	INFERRED	source line passed to TIntermediate::makeAggregate	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)TIntermediate__makeAggregate\(pTVar15,pTVar20,uVar57\);$	+1
+use	yyparse	uVar57	symbolTypeBits	INFERRED	TType bit-field word (+0x2c) of the new symbol node	^\s*uVar57\ =\ \*\(uint\ \*\)\(pTVar20\ \+\ 0x2c\);$	+5
+use	yyparse	uVar57	symbolTypeBits	INFERRED	TType bit-field word (+0x2c) of the new symbol node	^\s*\*\(uint\ \*\)\(pTVar20\ \+\ 0x2c\)\ =\ uVar57\ \&\ 0x1ff\ \|\ 0x80800;$	+1
+use	yyparse	uVar57	yytableIndex	INFERRED	index into _yytable (yypact/yypgoto + state)	^\s*uVar57\ =\ \(int\)\*\(short\ \*\)\(\&DAT_97c36138\ \+\ param_8\)\ \+\ \(int\)\*\(short\ \*\)pTVar46;$	+1
+use	yyparse	uVar57	yytableIndex	INFERRED	index into _yytable (yypact/yypgoto + state)	^\s*if\ \(\(uVar57\ <\ 0x4f0\)\ \&\&$	+3
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*uVar58\ =\ \(\(uint\)local_82c\ >>\ 10\ \&\ 1\)\ <<\ 10;$	+2
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*\(\(uint\)local_82c\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|\ uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x1ff;$	+1
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*uVar58\ =\ \(\*\(uint\ \*\)\(uVar2\ \+\ 0x24\)\ >>\ 10\ \&\ 1\)\ <<\ 10;$	+1
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*\(unsigned\ char\ \*\)\(uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ \(uint\)pTVar3\ \&\ 0x3ff\);$	+1
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*\(\(\*\(uint\ \*\)\(uVar2\ \+\ 0x24\)\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|$	+2
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*uVar58\ =\ \(\(uint\)local_82c\ >>\ 10\ \&\ 1\)\ <<\ 10;$@2	+2
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*\(\(uint\)local_82c\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|\ uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x1ff;$@2	+1
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*uVar58\ =\ \(\(uint\)local_82c\ >>\ 10\ \&\ 1\)\ <<\ 10;$@3	+2
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*\(\(uint\)local_82c\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|\ uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x1ff;$@3	+1
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*uVar58\ =\ \(\(uint\)local_824\ \&\ 1\)\ <<\ 10;$	+2
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*\(\(uint\)param_5\ \&\ 1\)\ <<\ 9\ \|\ uVar58\ \|\ uVar53\ \|\ uVar28\ \|\ uVar57\ \|\ uVar2\ \&\ 0x1ff;$	+1
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*uVar58\ =\ \(\(uint\)local_844\ \&\ 1\)\ <<\ 10;$	+2
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*\(\(uint\)param_5\ \&\ 1\)\ <<\ 9\ \|\ uVar58\ \|\ uVar53\ \|\ uVar28\ \|\ uVar57\ \|\ uVar2\ \&\ 0x1ff;$@2	+1
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*uVar58\ =\ \(\(uint\)local_824\ \&\ 1\)\ <<\ 10;$@2	+2
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*\(\(uint\)local_820\ \&\ 1\)\ <<\ 9\ \|\ uVar58\ \|\ uVar53\ \|\ uVar28\ \|\ uVar57\ \|\ uVar2\ \&\ 0x1ff;$	+1
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*uVar58\ =\ \(\(uint\)local_844\ \&\ 1\)\ <<\ 10;$@2	+2
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*\(\(uint\)param_5\ \&\ 1\)\ <<\ 9\ \|\ uVar58\ \|\ uVar53\ \|\ uVar28\ \|\ uVar57\ \|\ uVar2\ \&\ 0x1ff;$@3	+1
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*uVar58\ =\ \(\*\(uint\ \*\)\(pTVar12\ \+\ 0x24\)\ >>\ 10\ \&\ 1\)\ <<\ 10;$	+2
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x1ff;$	+1
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*uVar58\ =\ \(\*\(uint\ \*\)\(iVar36\ \+\ 0x24\)\ >>\ 10\ \&\ 1\)\ <<\ 10;$	+2
+use	yyparse	uVar58	matrixBit	INFERRED	matrix bit (bit 10) of the TType bit-field being rebuilt	^\s*uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x1ff;$@2	+1
+use	yyparse	uVar58	secondNameLen	INFERRED	length of the second string compared with memcmp	^\s*uVar58\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar60\ \+\ 4\)\ \+\ \-0xc\);$	+2
+use	yyparse	uVar58	secondNameLen	INFERRED	length of the second string compared with memcmp	^\s*if\ \(uVar53\ <=\ uVar58\)\ \{$	+1
+use	yyparse	uVar58	secondNameLen	INFERRED	length of the second string compared with memcmp	^\s*iVar54\ =\ uVar53\ \-\ uVar58;$	+1
+use	yyparse	pTVar59	slotArg	INFERRED	value-stack slot pointer or stale r6 forwarded as an argument	^\s*pTVar59\ =\ \(unsigned\ char\ \*\)param_4;$	+1
+use	yyparse	pTVar59	slotArg	INFERRED	value-stack slot pointer or stale r6 forwarded as an argument	^\s*pTVar59\ =\ pTVar56\ \+\ \-0xa0;$	+1
+use	yyparse	pTVar59	slotArg	INFERRED	value-stack slot pointer or stale r6 forwarded as an argument	^\s*\(param_1,\*\(uint\ \*\)\(pTVar56\ \+\ \-0x58\),\(unsigned\ char\ \*\)pTVar59,param_4,param_5,$	+2
+use	yyparse	pTVar59	slotArg	INFERRED	value-stack slot pointer or stale r6 forwarded as an argument	^\s*\(param_1,\*\(uint\ \*\)\(pTVar56\ \+\ \-0x58\),\*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ \-0x54\),$	+2
+use	yyparse	pTVar59	slotArg	INFERRED	value-stack slot pointer or stale r6 forwarded as an argument	^\s*param_4\ =\ \(char\ \*\)pTVar59;$	+1
+use	yyparse	pTVar59	slotArg	INFERRED	value-stack slot pointer or stale r6 forwarded as an argument	^\s*pTVar59\ =\ pTVar56\ \+\ \-0x74;$	+1
+use	yyparse	pTVar59	slotArg	INFERRED	value-stack slot pointer or stale r6 forwarded as an argument	^\s*\(param_1,\*\(uint\ \*\)\(pTVar56\ \+\ \-0x58\),\(unsigned\ char\ \*\)pTVar59,param_4,param_5,$@2	+2
+use	yyparse	pTVar59	slotArg	INFERRED	value-stack slot pointer or stale r6 forwarded as an argument	^\s*\(param_1,\*\(uint\ \*\)\(pTVar56\ \+\ \-0x58\),\*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ \-0x54\),$@2	+2
+use	yyparse	pTVar59	slotArg	INFERRED	value-stack slot pointer or stale r6 forwarded as an argument	^\s*param_4\ =\ \(char\ \*\)pTVar59;$@2	+1
+use	yyparse	pTVar59	slotArg	INFERRED	value-stack slot pointer or stale r6 forwarded as an argument	^\s*pTVar59\ =\ pTVar56\ \+\ \-0x74;$@2	+1
+use	yyparse	pTVar59	slotArg	INFERRED	value-stack slot pointer or stale r6 forwarded as an argument	^\s*\(param_1,\*\(uint\ \*\)\(pTVar56\ \+\ \-0x58\),\(unsigned\ char\ \*\)pTVar59,param_4,param_5,$@3	+2
+use	yyparse	pTVar59	slotArg	INFERRED	value-stack slot pointer or stale r6 forwarded as an argument	^\s*\(param_1,\*\(uint\ \*\)\(pTVar56\ \+\ \-0x58\),\(unsigned\ char\ \*\)pTVar59\);$	+1
+use	yyparse	pTVar59	slotArg	INFERRED	value-stack slot pointer or stale r6 forwarded as an argument	^\s*\(param_1,\*\(uint\ \*\)\(pTVar56\ \+\ \-0x58\),\*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ \-0x54\),$@3	+3
+use	yyparse	pTVar59	slotArg	INFERRED	value-stack slot pointer or stale r6 forwarded as an argument	^\s*param_4\ =\ \(char\ \*\)pTVar59;$@4	+1
+use	yyparse	pTVar59	slotArg	INFERRED	value-stack slot pointer or stale r6 forwarded as an argument	^\s*param_4\ =\ \(char\ \*\)pTVar59;$@5	+1
+use	yyparse	iVar60	paramList	INFERRED	TParameter list pointer returned by the virtual call	^\s*iVar60\ =\ \(\*\*\(code\ \*\*\)\(\*piVar61\ \+\ 100\)\)\(piVar61\);$	+2
+use	yyparse	iVar60	nodeLine	INFERRED	TIntermNode::getLine() of the node	^\s*iVar60\ =\ \(\*\*\(code\ \*\*\)\*\(unsigned\ char\ \*\*\)local_878\)\(local_878\);$	+1
+use	yyparse	iVar60	nodeLine	INFERRED	TIntermNode::getLine() of the node	^\s*\(param_1,iVar60,"assign",\(unsigned\ char\ \*\)param_4,param_5,pTVar33,iVar6,$	+2
+use	yyparse	iVar60	finishPtr	INFERRED	std::vector finish pointer before the push_back	^\s*iVar60\ =\ 0;$	+1
+use	yyparse	iVar60	finishPtr	INFERRED	std::vector finish pointer before the push_back	^\s*iVar60\ =\ \*\(int\ \*\)\(this\ \+\ 8\);$	+1
+use	yyparse	iVar60	finishPtr	INFERRED	std::vector finish pointer before the push_back	^\s*\*\(int\ \*\)\(this\ \+\ 8\)\ =\ iVar60\ \+\ 4;$	+1
+use	yyparse	iVar60	fieldNameStr	INFERRED	name string of the struct field	^\s*iVar60\ =\ \(\*\*\(code\ \*\*\)\(\*piVar61\ \+\ 0x1c\)\)$	+1
+use	yyparse	iVar60	fieldNameStr	INFERRED	name string of the struct field	^\s*uVar58\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar60\ \+\ 4\)\ \+\ \-0xc\);$	+1
+use	yyparse	iVar60	fieldNameStr	INFERRED	name string of the struct field	^\s*iVar54\ =\ _memcmp\(\*\(undefined4\ \*\)\(iVar54\ \+\ 4\),\*\(undefined4\ \*\)\(iVar60\ \+\ 4\),param_3\);$	+1
+use	yyparse	iVar60	levelEntry	INFERRED	symbol table level selected by the loop index	^\s*iVar60\ =\ \*\(int\ \*\)\(iVar55\ \+\ iVar54\ \*\ 4\);$	+1
+use	yyparse	iVar60	levelEntry	INFERRED	symbol table level selected by the loop index	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find\(\(unsigned\ char\ \*\)local_320,iVar60,uVar16\);$	+2
+use	yyparse	iVar60	levelEntry	INFERRED	symbol table level selected by the loop index	^\s*iVar60\ =\ \*\(int\ \*\)\(iVar55\ \+\ iVar54\ \*\ 4\);$@2	+1
+use	yyparse	iVar60	levelEntry	INFERRED	symbol table level selected by the loop index	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find\(\(unsigned\ char\ \*\)local_320,iVar60,pcVar62\);$	+2
+use	yyparse	iVar60	nameString	INFERRED	name TString* of the function symbol	^\s*iVar60\ =\ piVar61\[1\];$	+1
+use	yyparse	iVar60	nameString	INFERRED	name TString* of the function symbol	^\s*iVar54\ =\ \*\(int\ \*\)\(iVar60\ \+\ 4\);$	+1
+use	yyparse	iVar60	nameString	INFERRED	name TString* of the function symbol	^\s*\(\(int\)param_1,\*\(char\ \*\*\)pTVar56,"function\ already\ has\ a\ body",\*\(char\ \*\*\)\(iVar60\ \+\ 4\)$	+2
+use	yyparse	iVar60	nameString	INFERRED	name TString* of the function symbol	^\s*iVar60\ =\ piVar61\[1\];$@2	+2
+use	yyparse	iVar60	nameString	INFERRED	name TString* of the function symbol	^\s*\(\(int\)param_1,\*\(char\ \*\*\)pTVar56,"function\ cannot\ take\ any\ parameter\(s\)",$	+2
+use	yyparse	iVar60	nameString	INFERRED	name TString* of the function symbol	^\s*iVar60\ =\ piVar61\[1\];$@3	+1
+use	yyparse	iVar60	nameString	INFERRED	name TString* of the function symbol	^\s*iVar54\ =\ \*\(int\ \*\)\(iVar60\ \+\ 4\);$@3	+1
+use	yyparse	iVar60	nameString	INFERRED	name TString* of the function symbol	^\s*\(\(int\)param_1,\*\(char\ \*\*\)pTVar56,"function\ cannot\ return\ a\ value",$	+2
+use	yyparse	iVar60	paramArray	INFERRED	function parameter array (+0x10)	^\s*iVar60\ =\ piVar61\[4\];$	+1
+use	yyparse	iVar60	paramArray	INFERRED	function parameter array (+0x10)	^\s*if\ \(\*\(int\ \*\)\(iVar60\ \+\ iVar54\)\ ==\ 0\)\ \{$	+1
+use	yyparse	iVar60	paramArray	INFERRED	function parameter array (+0x10)	^\s*\(\*\(unsigned\ char\ \*\*\)param_1,0,\(unsigned\ char\ \*\)\&local_850,$	+2
+use	yyparse	iVar60	paramArray	INFERRED	function parameter array (+0x10)	^\s*iVar36\ =\ \*\(int\ \*\)\(iVar60\ \+\ iVar54\ \+\ 4\);$	+2
+use	yyparse	iVar60	paramArray	INFERRED	function parameter array (+0x10)	^\s*\*\(undefined4\ \*\)\(iVar60\ \+\ iVar54\)\ =\ 0;$	+1
+use	yyparse	iVar60	fieldByteOffset	INFERRED	byte offset of the TParameter (loop index * 8)	^\s*iVar60\ =\ iVar54\ \*\ 8;$	+2
+use	yyparse	iVar60	fieldByteOffset	INFERRED	byte offset of the TParameter (loop index * 8)	^\s*piVar61\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(\*\(uint\ \*\)\(pTVar56\ \+\ \-0x1c\)\ \+\ 0x10\)\ \+\ iVar60\ \+\ 4\);$	+1
+use	yyparse	iVar60	fieldByteOffset	INFERRED	byte offset of the TParameter (loop index * 8)	^\s*iVar60\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(uint\ \*\)\(pTVar56\ \+\ \-0x1c\)\ \+\ 0x10\)\ \+\ iVar60\ \+\ 4\);$	+2
+use	yyparse	iVar60	fieldByteOffset	INFERRED	byte offset of the TParameter (loop index * 8)	^\s*\(\(int\)param_1,\*\(char\ \*\*\)pTVar56,$@2	+3
+use	yyparse	piVar61	symbolNode	INFERRED	TIntermNode::getAsSymbolNode() of the operand	^\s*piVar61\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x28\)\)$	+1
+use	yyparse	piVar61	symbolNode	INFERRED	TIntermNode::getAsSymbolNode() of the operand	^\s*iVar55\ =\ \(\*\*\(code\ \*\*\)\(\*piVar61\ \+\ 0x60\)\)\(piVar61\);$	+1
+use	yyparse	piVar61	constUnionArray	INFERRED	constUnion array (+0x30) of the constant index node	^\s*piVar61\ =\ \*\(int\ \*\*\)\(iVar55\ \+\ 0x30\);$	+1
+use	yyparse	piVar61	constUnionArray	INFERRED	constUnion array (+0x30) of the constant index node	^\s*iVar55\ =\ \*piVar61;$	+1
+use	yyparse	piVar61	constUnionArray	INFERRED	constUnion array (+0x30) of the constant index node	^\s*piVar61\ =\ \*\(int\ \*\*\)\(iVar55\ \+\ 0x30\);$@2	+1
+use	yyparse	piVar61	constUnionArray	INFERRED	constUnion array (+0x30) of the constant index node	^\s*pTVar34\ =\ \(unsigned\ char\ \*\)\(uint\)\(local_77c\ <=\ \*piVar61\);$	+1
+use	yyparse	piVar61	aggregateNode	INFERRED	TIntermNode::getAsAggregate() of the node	^\s*piVar61\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(unsigned\ char\ \*\*\)local_878\ \+\ 0x1c\)\)\(local_878\);$	+2
+use	yyparse	piVar61	aggregateNode	INFERRED	TIntermNode::getAsAggregate() of the node	^\s*piVar61\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(unsigned\ char\ \*\*\)local_878\ \+\ 0x1c\)\)\(local_878\);$@2	+2
+use	yyparse	piVar61	aggregateNode	INFERRED	TIntermNode::getAsAggregate() of the node	^\s*\(\*\*\(code\ \*\*\)\(iVar55\ \+\ 0x68\)\)\(piVar61,uVar16\);$	+3
+use	yyparse	piVar61	aggregateNode	INFERRED	TIntermNode::getAsAggregate() of the node	^\s*piVar61\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(unsigned\ char\ \*\*\)local_878\ \+\ 0x1c\)\)\(local_878\);$@4	+2
+use	yyparse	piVar61	aggregateNode	INFERRED	TIntermNode::getAsAggregate() of the node	^\s*piVar61\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(unsigned\ char\ \*\*\)local_878\ \+\ 0x1c\)\)\(local_878\);$@5	+2
+use	yyparse	piVar61	aggregateNode	INFERRED	TIntermNode::getAsAggregate() of the node	^\s*piVar61\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(uint\ \*\)local_878\ \+\ 0x1c\)\)\(local_878\);$	+2
+use	yyparse	piVar61	aggregateNode	INFERRED	TIntermNode::getAsAggregate() of the node	^\s*piVar61\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(uint\ \*\)local_878\ \+\ 0x1c\)\)\(local_878\);$@2	+2
+use	yyparse	piVar61	argType	INFERRED	argument type from the parameter list	^\s*piVar61\ =\ \*\(int\ \*\*\)\(iVar6\ \+\ iVar55\ \*\ 4\);$	+3
+use	yyparse	piVar61	emptyRepRefCount	INFERRED	refcount word (rep+8) of the shared empty string rep	^\s*piVar61\ =\ \(int\ \*\)\(iVar55\ \+\ 8\);$	+1
+use	yyparse	piVar61	emptyRepRefCount	INFERRED	refcount word (rep+8) of the shared empty string rep	^\s*iVar54\ =\ storeWordConditionalIndexed\(\*piVar61\ \+\ 1,0,piVar61\);$	+2
+use	yyparse	piVar61	fieldType	INFERRED	TType pointer of a struct field (TTypeLine entry)	^\s*piVar61\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(local_870\ \+\ 4\)\ \+\ uVar28\ \*\ 8\);$	+2
+use	yyparse	piVar61	fieldType	INFERRED	TType pointer of a struct field (TTypeLine entry)	^\s*\(piVar61,puVar18,param_3,param_4,param_5,pTVar33,iVar54\);$	+5
+use	yyparse	piVar61	fieldType	INFERRED	TType pointer of a struct field (TTypeLine entry)	^\s*piVar61\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(\*\(uint\ \*\)\(pTVar56\ \+\ 0x10\)\ \+\ 4\)\ \+\ iVar55\);$@2	+2
+use	yyparse	piVar61	fieldType	INFERRED	TType pointer of a struct field (TTypeLine entry)	^\s*\(piVar61,a1_10,param_3,param_4,param_5,pTVar33,iVar54\);$	+1
+use	yyparse	piVar61	fieldType	INFERRED	TType pointer of a struct field (TTypeLine entry)	^\s*piVar61\ =\ \(int\ \*\)\*\*\(undefined4\ \*\*\)\(\*\(uint\ \*\)\(pTVar56\ \+\ \-0x1c\)\ \+\ 4\);$	+1
+use	yyparse	piVar61	fieldType	INFERRED	TType pointer of a struct field (TTypeLine entry)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar61\ \+\ 0x1c\)\)$	+3
+use	yyparse	piVar61	fieldType	INFERRED	TType pointer of a struct field (TTypeLine entry)	^\s*piVar61\ =\ \*\(int\ \*\*\)\(\*\(uint\ \*\)\(local_870\ \+\ 4\)\ \+\ uVar57\ \*\ 8\);$	+1
+use	yyparse	piVar61	fieldType	INFERRED	TType pointer of a struct field (TTypeLine entry)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar61\ \+\ 0xc\)\)\(piVar61,\*\(uint\ \*\)\(pTVar56\ \+\ \-0x48\),uVar28,param_4,param_5\);$	+1
+use	yyparse	piVar61	fieldType	INFERRED	TType pointer of a struct field (TTypeLine entry)	^\s*piVar61\ =\ \*\(int\ \*\*\)\(\*\(uint\ \*\)\(pTVar7\ \+\ 4\)\ \+\ uVar57\ \*\ 8\);$	+3
+use	yyparse	piVar61	functionSymbol	INFERRED	function symbol being defined or called	^\s*piVar61\ =\ \*\(int\ \*\*\)\(pTVar56\ \+\ 0x10\);$	+1
+use	yyparse	piVar61	functionSymbol	INFERRED	function symbol being defined or called	^\s*uVar16\ =\ \(\*\*\(code\ \*\*\)\(\*piVar61\ \+\ 8\)\)\(piVar61\);$	+1
+use	yyparse	piVar61	functionSymbol	INFERRED	function symbol being defined or called	^\s*iVar60\ =\ piVar61\[1\];$	+1
+use	yyparse	piVar61	functionSymbol	INFERRED	function symbol being defined or called	^\s*iVar54\ =\ __ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc\(\(void\ \*\)piVar61\[1\],"main"\);$	+2
+use	yyparse	piVar61	functionSymbol	INFERRED	function symbol being defined or called	^\s*iVar54\ =\ piVar61\[5\]\ \-\ piVar61\[4\]\ >>\ 3;$	+1
+use	yyparse	piVar61	functionSymbol	INFERRED	function symbol being defined or called	^\s*iVar60\ =\ piVar61\[1\];$@2	+1
+use	yyparse	piVar61	functionSymbol	INFERRED	function symbol being defined or called	^\s*iVar54\ =\ \(\*\*\(code\ \*\*\)\(piVar61\[7\]\ \+\ 0x20\)\)\(piVar61\ \+\ 7\);$	+1
+use	yyparse	piVar61	functionSymbol	INFERRED	function symbol being defined or called	^\s*iVar60\ =\ piVar61\[1\];$@3	+1
+use	yyparse	piVar61	functionSymbol	INFERRED	function symbol being defined or called	^\s*iVar60\ =\ piVar61\[4\];$	+1
+use	yyparse	piVar61	paramType	INFERRED	TType of a function parameter	^\s*piVar61\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar55\ \+\ 0x10\)\ \+\ iVar60\ \+\ 4\);$	+6
+use	yyparse	pcVar62	opName	INFERRED	operator name string ("assign") or error code	^\s*pcVar62\ =\ \(char\ \*\)0x2;$	+1
+use	yyparse	pcVar62	opName	INFERRED	operator name string ("assign") or error code	^\s*\(piVar50,piVar61,pcVar62,param_4,param_5,pTVar33,iVar54\);$	+1
+use	yyparse	pcVar62	opName	INFERRED	operator name string ("assign") or error code	^\s*\(piVar61,a1_07,pcVar62,param_4,param_5,pTVar33,iVar6\);$	+1
+use	yyparse	pcVar62	opName	INFERRED	operator name string ("assign") or error code	^\s*pcVar62\ =\ "assign";$	+1
+use	yyparse	pcVar62	opName	INFERRED	operator name string ("assign") or error code	^\s*pcVar62\ =\ "Constant\ value\ cannot\ be\ passed\ for\ \\'out\\'\ or\ \\'inout\\'\ parameters\.";$	+1
+use	yyparse	pcVar62	opName	INFERRED	operator name string ("assign") or error code	^\s*pcVar62\ =\ \(char\ \*\)\&local_84;$	+2
+use	yyparse	pcVar62	typeNameText	INFERRED	type name text of the node	^\s*pcVar62\ =\ \(char\ \*\)\(\*\*\(code\ \*\*\)\*\*\(undefined4\ \*\*\)\(pTVar56\ \+\ 8\)\)$	+1
+use	yyparse	pcVar62	typeNameText	INFERRED	type name text of the node	^\s*\(\(int\)param_1,pcVar62,"\ wrong\ operand\ type","Internal\ Error",$	+2
+use	yyparse	pcVar62	functionNameText	INFERRED	name text of the function symbol	^\s*pcVar62\ =\ \(char\ \*\)\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x1c\)\ \+\ 8\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x1c\)\);$	+1
+use	yyparse	pcVar62	functionNameText	INFERRED	name text of the function symbol	^\s*pcVar29\ =\ pcVar62;$	+2
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*pcVar62\ =\ \*\(char\ \*\*\)\(iVar55\ \+\ 4\);$	+1
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*\(pTVar7,pcVar62,\(unsigned\ char\ \*\)local_2b0\);$	+1
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*pcVar62\ =\ \*\(char\ \*\*\)\(iVar55\ \+\ 4\);$@2	+1
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*\(pvVar13,pcVar62,\(unsigned\ char\ \*\)local_290\);$	+1
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*pcVar62\ =\ \*\(char\ \*\*\)\(iVar55\ \+\ 4\);$@3	+1
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*\(pTVar7,pcVar62,\(unsigned\ char\ \*\)local_280\);$	+1
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*pcVar62\ =\ \*\(char\ \*\*\)\(iVar55\ \+\ 4\);$@4	+1
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*\(pvVar13,pcVar62,\(unsigned\ char\ \*\)local_260\);$	+1
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*pcVar62\ =\ \*\(char\ \*\*\)\(iVar55\ \+\ 4\);$@5	+1
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*\(pvVar13,pcVar62,\(unsigned\ char\ \*\)local_250\);$	+1
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*pcVar62\ =\ \*\(char\ \*\*\)\(iVar55\ \+\ 4\);$@6	+1
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*\(pTVar7,pcVar62,\(unsigned\ char\ \*\)local_240\);$	+1
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*pcVar62\ =\ \*\(char\ \*\*\)\(iVar55\ \+\ 4\);$@7	+1
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*\(pvVar13,pcVar62,\(unsigned\ char\ \*\)local_220\);$	+1
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*pcVar62\ =\ \*\(char\ \*\*\)\(iVar55\ \+\ 4\);$@8	+1
+use	yyparse	pcVar62	typeNameData	INFERRED	character data of a type-name string	^\s*\(\&local_850,pcVar62,\(unsigned\ char\ \*\)local_b0\);$	+1
+use	yyparse	pcVar62	errorLine	INFERRED	source line of the token used for the error message	^\s*pcVar62\ =\ \*\(char\ \*\*\)\(pTVar56\ \+\ \-0x58\);$@3	+1
+use	yyparse	pcVar62	errorLine	INFERRED	source line of the token used for the error message	^\s*pcVar62\ =\ \*\(char\ \*\*\)\(pTVar56\ \+\ \-0x2c\);$	+1
+use	yyparse	pcVar62	errorLine	INFERRED	source line of the token used for the error message	^\s*pcVar62\ =\ \*\(char\ \*\*\)\(pTVar56\ \+\ \-0x58\);$@4	+1
+use	yyparse	pcVar62	errorLine	INFERRED	source line of the token used for the error message	^\s*pcVar62\ =\ \*\(char\ \*\*\)\(pTVar56\ \+\ \-0x58\);$@5	+1
+use	yyparse	pcVar62	errorLine	INFERRED	source line of the token used for the error message	^\s*TParseContext__error\(\(int\)param_1,pcVar62,pcVar29,param_4,"",pTVar33,piVar61,param_8\);$	+1
+use	yyparse	uVar64	nodePair	INFERRED	node returned (with the r4 half) by the const vector/matrix builders	^\s*uVar64\ =\ CONCAT44\(local_878,extraout_r4_02\);$	+1
+use	yyparse	uVar64	nodePair	INFERRED	node returned (with the r4 half) by the const vector/matrix builders	^\s*uVar64\ =\ TParseContext__addConstMatrixNode$	+1
+use	yyparse	uVar64	nodePair	INFERRED	node returned (with the r4 half) by the const vector/matrix builders	^\s*uVar64\ =\ TParseContext__addConstVectorNode$	+1
+use	yyparse	uVar64	nodePair	INFERRED	node returned (with the r4 half) by the const vector/matrix builders	^\s*uVar64\ =\ CONCAT44\(local_878,extraout_r4_05\);$	+1
+use	yyparse	uVar64	nodePair	INFERRED	node returned (with the r4 half) by the const vector/matrix builders	^\s*uVar64\ =\ TIntermediate__addIndex\(pTVar15,uVar16,param_3,param_4,param_5\);$	+1
+use	yyparse	uVar64	nodePair	INFERRED	node returned (with the r4 half) by the const vector/matrix builders	^\s*local_878\ =\ \(unsigned\ char\ \*\)\(\(ulonglong\)uVar64\ >>\ 0x20\);$	+1
+use	yyparse	uVar64	nodePair	INFERRED	node returned (with the r4 half) by the const vector/matrix builders	^\s*\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\),\(int\)uVar64,param_3,param_4,param_5,pTVar33,$	+2
+use	yyparse	bVar37	foundMatch	INFERRED	flag set when a matching entry was found	^\s*bVar37\ =\ false;$	+1
+use	yyparse	bVar37	foundMatch	INFERRED	flag set when a matching entry was found	^\s*bVar37\ =\ true;$	+1
+use	yyparse	bVar37	foundMatch	INFERRED	flag set when a matching entry was found	^\s*if\ \(bVar37\)\ \{$	+1
+use	yyparse	bVar37	foundMatch	INFERRED	flag set when a matching entry was found	^\s*bVar37\ =\ false;$@2	+1
+use	yyparse	bVar37	foundMatch	INFERRED	flag set when a matching entry was found	^\s*bVar37\ =\ true;$@2	+1
+use	yyparse	bVar37	foundMatch	INFERRED	flag set when a matching entry was found	^\s*if\ \(bVar37\)\ \{$@2	+1
+use	yyparse	bVar37	foundMatch	INFERRED	flag set when a matching entry was found	^\s*bVar37\ =\ false;$@3	+1
+use	yyparse	bVar37	foundMatch	INFERRED	flag set when a matching entry was found	^\s*bVar37\ =\ true;$@3	+1
+use	yyparse	bVar37	foundMatch	INFERRED	flag set when a matching entry was found	^\s*if\ \(!bVar37\)\ \{$@3	+1
+use	yyparse	bVar37	foundMatch	INFERRED	flag set when a matching entry was found	^\s*bVar37\ =\ false;$@4	+1
+use	yyparse	bVar37	foundMatch	INFERRED	flag set when a matching entry was found	^\s*bVar37\ =\ true;$@4	+1
+use	yyparse	bVar37	foundMatch	INFERRED	flag set when a matching entry was found	^\s*if\ \(bVar37\)\ break;$	+1
+use	yyparse	bVar37	isNullSize	INFERRED	true when the array size operand is absent	^\s*bVar37\ =\ pTVar34\ ==\ \(unsigned\ char\ \*\)0x0;$	+2
+use	yyparse	bVar37	isNullSize	INFERRED	true when the array size operand is absent	^\s*\(param_1,pTVar8,pTVar12,iVar55,\(uint\)!bVar37,\(int\)pTVar33\);$	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)uVar57;$	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar33;$	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$@2	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$@3	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$@4	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$@5	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$@6	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$@7	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$@8	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$@9	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)uVar57;$@2	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)uVar57;$@3	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)uVar57;$@4	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)uVar57;$@5	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)uVar57;$@6	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)uVar57;$@7	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$@10	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$@11	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$@12	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*if\ \(!bVar37\)\ \{$	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)uVar57;$@8	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)uVar57;$@9	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*if\ \(!bVar37\)\ \{$@2	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar33;$@2	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$@13	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*if\ \(!bVar37\)\ \{$@4	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ \(int\)pTVar7;$@14	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*if\ \(!bVar37\)\ \{$@5	+1
+use	yyparse	bVar37	stillShared	INFERRED	string rep refcount stayed positive after the decrement (rep is not destroyed here)	^\s*bVar37\ =\ 0\ <\ iVar55;$	+1
+use	yyparse	pTVar3	isMatrix2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)$@2	+1
+use	yyparse	pTVar3	isMatrix2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*in_cr0\ =\ \(pTVar3\ ==\ \(unsigned\ char\ \*\)0x0\)\ <<\ 1;$	+2
+use	yyparse	pTVar3	isMatrix2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_7ec\ =\ pTVar3;$	+8
+use	yyparse	pTVar3	typeTmp1StructureCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ local_848;$	+1
+use	yyparse	pTVar3	typeTmp1StructureCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_800\ =\ pTVar3;$	+1
+use	yyparse	pTVar3	typeTmp3StructureCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ local_7e8;$	+1
+use	yyparse	pTVar3	typeTmp3StructureCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_818\ =\ pTVar3;$	+1
+use	yyparse	pTVar3	typeTmp3StructureCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_808\ =\ \(unsigned\ char\ \*\)TType__setStructSize\(\(unsigned\ char\ \*\)\&local_820,\(unsigned\ char\ \*\)pTVar3\);$	+1
+use	yyparse	pTVar3	isVector2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)$@3	+1
+use	yyparse	pTVar3	isVector2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*in_cr0\ =\ \(pTVar3\ ==\ \(unsigned\ char\ \*\)0x0\)\ <<\ 1;$@2	+2
+use	yyparse	pTVar3	isVector2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_850\ =\ pTVar3;$	+4
+use	yyparse	pTVar3	isVector2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_83c\ =\ pTVar3;$@3	+8
+use	yyparse	pTVar3	isVector2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_83c\ =\ pTVar3;$@4	+8
+use	yyparse	pTVar3	picBase2Copy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ local_5c;$	+1
+use	yyparse	pTVar3	picBase2Copy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\*\(code\ \*\)pTVar32\)\(local_878,\&local_800,pTVar33,param_4,param_5,pTVar3,pTVar31\);$	+1
+use	yyparse	pTVar3	picBase2Copy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(local_878,\&local_7f0,uVar28,param_4,param_5,pTVar3,\*\(uint\ \*\)\(local_7fc\ \+\ \-0xc\)\);$	+1
+use	yyparse	pTVar3	typeTmp1ArraySizeCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ local_84c;$	+1
+use	yyparse	pTVar3	typeTmp1ArraySizeCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(int\)param_1,pcVar62,"\ wrong\ operand\ type","Internal\ Error",$	+2
+use	yyparse	pTVar3	typeTmp1ArraySizeCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ local_84c;$@2	+1
+use	yyparse	pTVar3	typeTmp1ArraySizeCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar3\ \+\ 0x14\)\ =\ psVar21;$	+4
+use	yyparse	pTVar3	typeTmp1ArraySizeCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ local_84c;$@3	+1
+use	yyparse	pTVar3	typeTmp1ArraySizeCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar3\ \+\ 0x14\)\ =\ psVar21;$@2	+4
+use	yyparse	pTVar3	typeMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,0x28\);$	+2
+use	yyparse	pTVar3	typeMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_84c\ =\ pTVar3;$@5	+2
+use	yyparse	pTVar3	typeMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*puVar18\[1\]\ =\ pTVar3;$	+1
+use	yyparse	pTVar3	typeMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,0x28\);$@2	+2
+use	yyparse	pTVar3	typeMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_84c\ =\ pTVar3;$@6	+2
+use	yyparse	pTVar3	typeMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*puVar18\[1\]\ =\ pTVar3;$@2	+1
+use	yyparse	pTVar3	typeTmp1Word14Copy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ local_83c;$	+1
+use	yyparse	pTVar3	typeTmp1Word14Copy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pvVar13,\(char\ \*\)pTVar3,\(unsigned\ char\ \*\)local_210\);$	+1
+use	yyparse	pTVar3	typeTmp1Word14Copy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar3\ =\ local_83c;$@2	+1
+use	yyparse	pTVar3	typeTmp1Word14Copy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pvVar13,\(char\ \*\)pTVar3,\(unsigned\ char\ \*\)local_1b0\);$	+1
+use	yyparse	pTVar3	yyvalTypeCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*if\ \(\(iVar55\ ==\ 2\)\ \&\&$	+3
+use	yyparse	pTVar3	yyvalTypeCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar3\ \+\ 0x24\)\ =$	+3
+use	yyparse	iVar6	newTypeWord1c	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar6\ =\ \*\(int\ \*\)\(pTVar12\ \+\ 0x1c\);$	+1
+use	yyparse	iVar6	newTypeWord1c	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*piVar61\[10\]\ =\ iVar6;$	+1
+use	yyparse	iVar6	newTypeWord1c	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar61\ \+\ 8\)\)\(piVar61,iVar60,iVar6,param_4,param_5,iVar26,piVar50\);$	+1
+use	yyparse	pTVar7	picBase2Copy2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar7\ =\ local_5c;$	+1
+use	yyparse	pTVar7	picBase2Copy2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\),a1_00,param_3,param_4,param_5,pTVar7\);$	+1
+use	yyparse	pTVar7	picBase2Copy2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x24\),a1_00,param_3,param_4,param_5,pTVar7,$	+2
+use	yyparse	pTVar7	picBase2Copy2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\*\(undefined4\ \*\*\)\(pTVar56\ \+\ \-0x7c\),a1_01,param_3,param_4,param_5,$	+2
+use	yyparse	pTVar7	stringMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar7\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,8\);$	+2
+use	yyparse	pTVar7	stringMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*if\ \(pTVar7\ !=\ \(unsigned\ char\ \*\)0x0\)\ \{$	+1
+use	yyparse	pTVar7	stringMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pTVar7,pcVar62,\(unsigned\ char\ \*\)local_720\);$	+2
+use	yyparse	pTVar7	stringMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar7\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,8\);$@2	+2
+use	yyparse	pTVar7	stringMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*if\ \(pTVar7\ !=\ \(unsigned\ char\ \*\)0x0\)\ \{$@2	+1
+use	yyparse	pTVar7	stringMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pTVar7,pcVar62,\(unsigned\ char\ \*\)local_2b0\);$	+2
+use	yyparse	pTVar7	stringMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar7\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,8\);$@3	+2
+use	yyparse	pTVar7	stringMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*if\ \(pTVar7\ !=\ \(unsigned\ char\ \*\)0x0\)\ \{$@3	+1
+use	yyparse	pTVar7	stringMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pTVar7,pcVar62,\(unsigned\ char\ \*\)local_280\);$	+2
+use	yyparse	pTVar7	stringMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar7\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,8\);$@4	+2
+use	yyparse	pTVar7	stringMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*if\ \(pTVar7\ !=\ \(unsigned\ char\ \*\)0x0\)\ \{$@4	+1
+use	yyparse	pTVar7	stringMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pTVar7,pcVar62,\(unsigned\ char\ \*\)local_240\);$	+2
+use	yyparse	pTVar7	typeTmp1StructureCopy2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar7\ =\ local_848;$	+1
+use	yyparse	pTVar7	typeTmp1StructureCopy2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*if\ \(\(uint\)\(\(int\)\(\*\(uint\ \*\)\(pTVar7\ \+\ 8\)\ \-\ \*\(uint\ \*\)\(pTVar7\ \+\ 4\)\)\ >>\ 3\)\ <=\ uVar57\)$	+3
+use	yyparse	pTVar7	typeTmp1StructureCopy2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*ppuVar35\ =\ \*\(undefined\ \*\*\*\)\(pTVar7\ \+\ 4\);$	+1
+use	yyparse	pTVar7	typeTmp1StructureCopy2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*ppuVar35\ =\ \*\(undefined\ \*\*\*\)\(pTVar7\ \+\ 4\);$@2	+1
+use	yyparse	pTVar7	typeTmp1ArraySizeCopy2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar7\ =\ local_84c;$	+1
+use	yyparse	pTVar7	typeTmp1ArraySizeCopy2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_83c\ =\ pTVar7;$	+8
+use	yyparse	pTVar7	typeTmp1ArraySizeCopy2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_83c\ =\ pTVar7;$@2	+8
+use	yyparse	pTVar7	typeTmp1VtableCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar7\ =\ local_850;$	+1
+use	yyparse	pTVar7	typeTmp1VtableCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_850\ =\ pTVar7;$@3	+1
+use	yyparse	pTVar7	typeTmp1VtableAddr	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar7\ =\ \(unsigned\ char\ \*\)\&local_850;$	+1
+use	yyparse	pTVar7	typeTmp1VtableAddr	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x50\)\ \+\ 0x38\)\)\(pTVar7,\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x50\)\);$	+1
+use	yyparse	pTVar7	typeTmp1VtableAddr	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*TType__getCompleteString\(pTVar7,\*\(uint\ \*\)\(pTVar56\ \+\ 8\)\ \+\ 8\);$	+1
+use	yyparse	pTVar7	typeTmp1VtableAddr	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*TParseContext__binaryOpError\(param_1,\*\(uint\ \*\)\(pTVar56\ \+\ \-0x84\),":",param_4,pTVar7\);$	+1
+use	yyparse	pTVar7	typeTmp1VtableAddr	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*param_5\ =\ \(char\ \*\)pTVar7;$	+1
+use	yyparse	pTVar12	parameterDeclarationWord14	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar12\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ 0x14\);$	+2
+use	yyparse	pTVar12	parameterDeclarationWord14	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar12\ \+\ 0x14\)\ =\ psVar21;$	+4
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pvVar13\ =\ \(void\ \*\)TPoolAllocator__allocate\(pTVar17,8\);$	+2
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*if\ \(pvVar13\ !=\ \(void\ \*\)0x0\)\ \{$	+1
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pvVar13,pcVar62,\(unsigned\ char\ \*\)local_290\);$	+2
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pvVar13\ =\ \(void\ \*\)TPoolAllocator__allocate\(pTVar17,8\);$@2	+2
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*if\ \(pvVar13\ !=\ \(void\ \*\)0x0\)\ \{$@2	+1
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pvVar13,pcVar62,\(unsigned\ char\ \*\)local_260\);$	+2
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pvVar13\ =\ \(void\ \*\)TPoolAllocator__allocate\(pTVar17,8\);$@3	+2
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*if\ \(pvVar13\ !=\ \(void\ \*\)0x0\)\ \{$@3	+1
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pvVar13,pcVar62,\(unsigned\ char\ \*\)local_250\);$	+2
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pvVar13\ =\ \(void\ \*\)TPoolAllocator__allocate\(pTVar17,8\);$@4	+2
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*if\ \(pvVar13\ !=\ \(void\ \*\)0x0\)\ \{$@4	+1
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pvVar13,pcVar62,\(unsigned\ char\ \*\)local_220\);$	+2
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pvVar13\ =\ \(void\ \*\)TPoolAllocator__allocate\(pTVar17,8\);$@5	+2
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*if\ \(pvVar13\ !=\ \(void\ \*\)0x0\)\ \{$@5	+1
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pvVar13,\(char\ \*\)pTVar3,\(unsigned\ char\ \*\)local_210\);$	+2
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pvVar13\ =\ \(void\ \*\)TPoolAllocator__allocate\(pTVar17,8\);$@6	+2
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*if\ \(pvVar13\ !=\ \(void\ \*\)0x0\)\ \{$@6	+1
+use	yyparse	pvVar13	stringMem2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pvVar13,\(char\ \*\)pTVar3,\(unsigned\ char\ \*\)local_1b0\);$	+2
+use	yyparse	uVar16	scratchR5Word4	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar16\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 4\);$	+1
+use	yyparse	uVar16	scratchR5Word4	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*puVar18\[1\]\ =\ uVar16;$	+1
+use	yyparse	psVar21	leftBracketLine2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*psVar21\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ \-0x2c\);$	+1
+use	yyparse	psVar21	leftBracketLine2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*psVar21\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ \-0x2c\);$@2	+1
+use	yyparse	psVar21	leftBracketLine2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*psVar21\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ \-0x58\);$	+1
+use	yyparse	psVar21	leftBracketLine2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(int\)param_1,psVar21,uVar57,local_850,local_84c,local_848,local_844,$	+2
+use	yyparse	this_00	aggregateNode2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*this_00\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\(uint\ \*\)local_878\ \+\ 0x1c\)\)\(local_878\);$	+2
+use	yyparse	iVar26	newTypeWord10	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar26\ =\ \*\(int\ \*\)\(pTVar12\ \+\ 0x10\);$	+1
+use	yyparse	iVar26	newTypeWord10	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*piVar61\[7\]\ =\ iVar26;$	+1
+use	yyparse	iVar26	newTypeWord10	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar61\ \+\ 8\)\)\(piVar61,iVar60,iVar6,param_4,param_5,iVar26,piVar50\);$	+1
+use	yyparse	iVar26	newTypeWord10	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(int\)param_1,\*\(char\ \*\*\)\(pTVar56\ \+\ \-0x84\),"redefinition",param_4,"struct",iVar26,$	+2
+use	yyparse	iVar26	newNodeWord4	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar26\ =\ a0_00\[1\];$	+2
+use	yyparse	iVar26	newNodeWord4	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(int\)param_1,\*\(char\ \*\*\)pTVar56,"redefinition",\*\(char\ \*\*\)\(iVar26\ \+\ 4\),"",$	+2
+use	yyparse	uVar28	nominalSize3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x48\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\);$	+1
+use	yyparse	uVar28	nominalSize3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(uVar28\ \&\ 0xff\)\ <<\ 0xb\ \|$	+2
+use	yyparse	uVar28	nominalSize3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x48\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\);$@2	+1
+use	yyparse	uVar28	nominalSize3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(uVar28\ \&\ 0xff\)\ <<\ 0xb\ \|\ \(uVar57\ \&\ 0x3f\)\ <<\ 0x13\ \|\ \(uint\)local_7fc\ \&\ 0x1ff\);$	+1
+use	yyparse	uVar28	nominalSize3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x48\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\);$@3	+1
+use	yyparse	uVar28	nominalSize3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(uVar53\ \&\ 1\)\ <<\ 10\ \|$	+2
+use	yyparse	uVar28	postfixExpressionNode	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar28\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ \-0x50\);$	+1
+use	yyparse	uVar28	postfixExpressionNode	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*TIntermediate__addIndex\(\*\(unsigned\ char\ \*\*\)param_1,0x30,uVar28,param_4,param_5\);$	+1
+use	yyparse	uVar28	postfixExpressionNode	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(local_878,\&local_7f0,uVar28,param_4,param_5,pTVar3,\*\(uint\ \*\)\(local_7fc\ \+\ \-0xc\)\);$	+1
+use	yyparse	uVar28	parameterDeclarationWord142	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar28\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ 0x14\);$	+1
+use	yyparse	uVar28	parameterDeclarationWord142	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*puVar25\[1\]\ =\ uVar28;$	+1
+use	yyparse	pcVar29	identifierStringWord4	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pcVar29\ =\ \*\(char\ \*\*\)\(uVar57\ \+\ 4\);$	+1
+use	yyparse	pcVar29	identifierStringWord4	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(int\)param_1,\*\(char\ \*\*\)pTVar56,"undeclared\ identifier",pcVar29,"",pTVar33,iVar55,$	+2
+use	yyparse	pcVar29	identifierStringWord4	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pTVar7,\(int\)uVar64,pcVar62,pcVar29,a4,pTVar33,piVar61\);$	+1
+use	yyparse	pcVar29	msgText	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pcVar29\ =\ "structure\ field\ array\ size\ must\ be\ a\ positive\ integer";$	+1
+use	yyparse	pcVar29	msgText	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pcVar29\ =\ "non\-void\ function\ must\ return\ a\ value";$	+1
+use	yyparse	pcVar29	msgText	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pcVar29\ =\ "void\ function\ cannot\ return\ a\ value";$	+1
+use	yyparse	pcVar29	msgText	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pcVar29\ =\ "function\ return\ is\ not\ matching\ type:";$	+1
+use	yyparse	pcVar29	msgText	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*TParseContext__error\(\(int\)param_1,pcVar62,pcVar29,param_4,"",pTVar33,piVar61,param_8\);$	+1
+use	yyparse	iVar30	newTypeWordc	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar30\ =\ \*\(int\ \*\)\(pTVar12\ \+\ 0xc\);$	+1
+use	yyparse	iVar30	newTypeWordc	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*piVar61\[6\]\ =\ iVar30;$	+1
+use	yyparse	pTVar31	constructorIdentifierUserDefWord1c	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar31\ =\ \*\(unsigned\ char\ \*\*\)\(uVar2\ \+\ 0x1c\);$	+1
+use	yyparse	pTVar31	constructorIdentifierUserDefWord1c	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar7\ \+\ 0x38\)\ =\ pTVar31;$	+1
+use	yyparse	pTVar32	constructorIdentifierUserDefWord10	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar32\ =\ \*\(unsigned\ char\ \*\*\)\(uVar2\ \+\ 0x10\);$	+1
+use	yyparse	pTVar32	constructorIdentifierUserDefWord10	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar7\ \+\ 0x2c\)\ =\ pTVar32;$	+1
+use	yyparse	pTVar33	postfixExpressionNode2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar33\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ \-0x50\);$	+1
+use	yyparse	pTVar33	postfixExpressionNode2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(param_1,\(unsigned\ char\ \*\)\&local_850,pTVar33,\(int\)param_4,param_5,$	+2
+use	yyparse	pTVar33	postfixExpressionNode2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\*\(code\ \*\)pTVar32\)\(local_878,\&local_800,pTVar33,param_4,param_5,pTVar3,pTVar31\);$	+1
+use	yyparse	pTVar33	postfixExpressionNode2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar33\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ \-0x50\);$@2	+1
+use	yyparse	pTVar33	postfixExpressionNode2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*TIntermediate__addIndex\(\*\(unsigned\ char\ \*\*\)param_1,0x2d,pTVar33,param_4,param_5\);$	+1
+use	yyparse	pTVar33	constructorIdentifierUserDefWord20	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar33\ =\ \*\(unsigned\ char\ \*\*\)\(uVar2\ \+\ 0x20\);$	+1
+use	yyparse	pTVar33	constructorIdentifierUserDefWord20	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar7\ \+\ 0x3c\)\ =\ pTVar33;$	+1
+use	yyparse	pTVar34	constructorIdentifierUserDefWordc	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar34\ =\ \*\(unsigned\ char\ \*\*\)\(uVar2\ \+\ 0xc\);$	+1
+use	yyparse	pTVar34	constructorIdentifierUserDefWordc	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar7\ \+\ 0x28\)\ =\ pTVar34;$	+1
+use	yyparse	uVar53	isMatrix22	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar53\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x50\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\);$	+1
+use	yyparse	uVar53	isMatrix22	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(uVar53\ \&\ 1\)\ <<\ 10\ \|$	+2
+use	yyparse	iVar54	storeWordConditionalIndexedResult	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar54\ =\ storeWordConditionalIndexed\(\*piVar61\ \+\ 1,0,piVar61\);$	+2
+use	yyparse	iVar54	storeWordConditionalIndexedResult	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar54\ =\ storeWordConditionalIndexed\(\*piVar50\ \+\ 1,0,piVar50\);$	+2
+use	yyparse	iVar54	newTypeWord8	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar54\ =\ \*\(int\ \*\)\(pTVar12\ \+\ 8\);$	+1
+use	yyparse	iVar54	newTypeWord8	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*piVar61\[5\]\ =\ iVar54;$	+1
+use	yyparse	iVar55	constantUnionNode	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar55\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x24\)\ \+\ 0x18\)\)$@3	+1
+use	yyparse	iVar55	constantUnionNode	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar33\ =\ \(unsigned\ char\ \*\)\*\*\(uint\ \*\*\)\(iVar55\ \+\ 0x30\);$@2	+1
+use	yyparse	iVar55	isArray2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar55\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x54\)\)$@2	+1
+use	yyparse	iVar55	isArray2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*in_cr0\ =\ \(iVar55\ ==\ 0\)\ <<\ 1;$	+2
+use	yyparse	iVar55	isMatrix3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar55\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x58\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\);$@3	+2
+use	yyparse	iVar55	isVector22	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar55\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x58\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\);$@4	+2
+use	yyparse	iVar55	aggregateNode22	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar55\ =\ \(\*\*\(code\ \*\*\)\(\*\(uint\ \*\)local_878\ \+\ 0x1c\)\)\(local_878\);$@2	+2
+use	yyparse	iVar55	aggregateNode22	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar55\ =\ 0;$@10	+1
+use	yyparse	iVar55	aggregateNode22	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar55\ =\ \*\(int\ \*\)\(local_320\[0\]\ \+\ 0x18\);$@2	+1
+use	yyparse	iVar55	aggregateNode22	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*if\ \(iVar55\ ==\ 0\)\ \{$@17	+1
+use	yyparse	iVar55	aggregateNode22	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar54\ =\ iVar55\ \+\ 0x1c;$	+1
+use	yyparse	iVar55	aggregateNode22	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*if\ \(\(\(\*\(uint\ \*\)\(iVar55\ \+\ 0x40\)\ \&\ 0x1fffe00\)\ ==\ \(\*\(uint\ \*\)\(uVar57\ \+\ 0x40\)\ \&\ 0x1fffe00\)\)\ \&\&$	+2
+use	yyparse	iVar55	aggregateNode22	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*for\ \(iVar54\ =\ 0;\ iVar54\ <\ \*\(int\ \*\)\(iVar55\ \+\ 0x14\)\ \-\ \*\(int\ \*\)\(iVar55\ \+\ 0x10\)\ >>\ 3;$	+2
+use	yyparse	iVar55	aggregateNode22	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*piVar61\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar55\ \+\ 0x10\)\ \+\ iVar60\ \+\ 4\);$	+1
+use	yyparse	uVar57	basicType3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x40\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\);$	+1
+use	yyparse	uVar57	basicType3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(uVar28\ \&\ 0xff\)\ <<\ 0xb\ \|\ \(uVar57\ \&\ 0x3f\)\ <<\ 0x13\ \|\ \(uint\)local_7fc\ \&\ 0x1ff\);$	+1
+use	yyparse	uVar57	basicType3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x40\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\);$@2	+1
+use	yyparse	uVar57	basicType3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*local_7cc\ =\ \(uVar57\ \&\ 0x3f\)\ <<\ 0x13\ \|\ local_7cc\ \&\ 0x9ff\ \|\ 0x800;$	+1
+use	yyparse	uVar57	basicType3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x40\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\);$@3	+1
+use	yyparse	uVar57	basicType3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(uVar53\ \&\ 1\)\ <<\ 10\ \|$	+2
+use	yyparse	uVar57	basicType3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x50\)\ \+\ 0x40\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x50\)\);$@4	+2
+use	yyparse	uVar57	basicType3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x50\)\ \+\ 0x40\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x50\)\);$@5	+1
+use	yyparse	uVar57	basicType3	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(uVar57\ \&\ 0x3f\)\ <<\ 0x13\ \|\ local_7cc\ \&\ 0x1ff;$	+1
+use	yyparse	uVar57	findFunctionResultWord4c	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \*\(uint\ \*\)\(pTVar3\ \+\ 0x4c\);$	+2
+use	yyparse	uVar57	findFunctionResultWord4c	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\*\(unsigned\ char\ \*\*\)param_1,uVar57,uVar28,0,param_5,pTVar33,$	+2
+use	yyparse	uVar57	findFunctionResultWord4c	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\*\(unsigned\ char\ \*\*\)param_1,\*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ 8\),uVar57,$	+2
+use	yyparse	uVar57	functionHeaderWord10	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ \-0x1c\);$@2	+3
+use	yyparse	uVar57	functionHeaderWord10	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(unsigned\ char\ \*\)\(uVar57\ \+\ 0xc\),$@3	+2
+use	yyparse	uVar57	functionHeaderWord10	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar55\ =\ \*\(int\ \*\)\(uVar57\ \+\ 0x14\);$@3	+1
+use	yyparse	uVar57	functionHeaderWord10	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\*\(int\ \*\)\(uVar57\ \+\ 0x14\)\ =\ iVar55\ \+\ 8;$@3	+1
+use	yyparse	uVar57	functionHeaderWord10	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(unsigned\ char\ \*\)\&local_850,\(unsigned\ char\ \*\)\(uVar57\ \+\ 0x44\),iVar55\);$	+1
+use	yyparse	uVar57	functionHeaderWord10	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(unsigned\ char\ \*\)\(uVar57\ \+\ 0x44\),\(unsigned\ char\ \*\)\&local_850\);$	+1
+use	yyparse	uVar57	parameterTypeSpecifierLine	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \*\(uint\ \*\)pTVar56;$	+1
+use	yyparse	uVar57	parameterTypeSpecifierLine	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \*\(uint\ \*\)pTVar56;$@2	+1
+use	yyparse	uVar57	parameterTypeSpecifierLine	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar55\ =\ TParseContext__paramErrorCheck\(param_1,uVar57,uVar28,param_4,local_86c\);$	+1
+use	yyparse	uVar57	identifierLine	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \*\(uint\ \*\)pTVar56;$@3	+1
+use	yyparse	uVar57	identifierLine	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ \-0x84\);$	+1
+use	yyparse	uVar57	identifierLine	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \*\(uint\ \*\)pTVar56;$@4	+1
+use	yyparse	uVar57	identifierLine	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(param_1,uVar57,pTVar27,param_4,param_5,pTVar33,pTVar34\);$	+1
+use	yyparse	uVar57	identifierLine	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ \-0x84\);$@2	+1
+use	yyparse	uVar57	identifierLine	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(param_1,uVar57,pTVar27,param_4,param_5,pTVar33,pTVar34\);$@2	+1
+use	yyparse	uVar57	identifierValue	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ \-0x54\);$	+1
+use	yyparse	uVar57	identifierValue	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ \-0x54\);$@2	+1
+use	yyparse	uVar57	identifierValue	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ \-0x80\);$	+1
+use	yyparse	uVar57	identifierValue	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\(int\)param_1,psVar21,uVar57,local_850,local_84c,local_848,local_844,$	+2
+use	yyparse	uVar57	structDeclaratorWord14	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ 0x14\);$	+1
+use	yyparse	uVar57	structDeclaratorWord14	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*puVar25\[1\]\ =\ uVar57;$	+1
+use	yyparse	uVar57	whileLine	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ \-0xdc\);$	+1
+use	yyparse	uVar57	whileLine	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar57\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ \-0xb0\);$	+1
+use	yyparse	uVar57	whileLine	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*TIntermediate__addLoop\(pTVar15,pTVar20,pTVar3,\(unsigned\ char\ \*\)0x0,param_5,uVar57\);$	+1
+use	yyparse	pTVar59	constructorIdentifierUserDefWord8	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pTVar59\ =\ \*\(unsigned\ char\ \*\*\)\(uVar2\ \+\ 8\);$	+1
+use	yyparse	pTVar59	constructorIdentifierUserDefWord8	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar7\ \+\ 0x24\)\ =\ pTVar59;$	+1
+use	yyparse	iVar60	newTypeWord20	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar60\ =\ \*\(int\ \*\)\(pTVar12\ \+\ 0x20\);$	+1
+use	yyparse	iVar60	newTypeWord20	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*piVar61\[0xb\]\ =\ iVar60;$	+1
+use	yyparse	iVar60	newTypeWord20	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar61\ \+\ 8\)\)\(piVar61,iVar60,iVar6,param_4,param_5,iVar26,piVar50\);$	+1
+use	yyparse	piVar61	statementListNode2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*piVar61\ =\ \*\(int\ \*\*\)\(pTVar56\ \+\ \-0x24\);$	+1
+use	yyparse	piVar61	statementListNode2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*if\ \(piVar61\ !=\ \(int\ \*\)0x0\)\ \{$@2	+2
+use	yyparse	piVar61	constantUnionNode2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*piVar61\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x24\)\ \+\ 0x18\)\)\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x24\)\)$	+1
+use	yyparse	piVar61	constantUnionNode2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*iVar55\ =\ \(\*\*\(code\ \*\*\)\(\*piVar61\ \+\ 0x40\)\)\(piVar61\);$	+1
+use	yyparse	pcVar62	msgText2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pcVar62\ =\ "undeclared\ identifier";$	+1
+use	yyparse	pcVar62	msgText2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pTVar7,\(int\)uVar64,pcVar62,pcVar29,a4,pTVar33,piVar61\);$	+1
+use	yyparse	pcVar62	msgText2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pcVar62\ =\ "\ field\ selection\ requires\ structure,\ vector,\ or\ matrix\ on\ left\ hand\ side";$	+1
+use	yyparse	pcVar62	msgText2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pcVar62\ =\ "structure\ has\ no\ fields";$	+1
+use	yyparse	pcVar62	msgText2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pcVar62\ =\ "";$	+1
+use	yyparse	pcVar62	msgText2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pcVar62\ =\ "!";$	+1
+use	yyparse	pcVar62	msgText2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pcVar62\ =\ "\-";$	+1
+use	yyparse	pcVar62	msgText2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pcVar62\ =\ "\~";$	+1
+use	yyparse	pcVar62	msgText2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*TParseContext__unaryOpError\(param_1,\*\(uint\ \*\)\(pTVar56\ \+\ \-0x2c\),pcVar62,param_4\);$	+1
+use	yyparse	pcVar62	msgText2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pcVar62\ =\ "\ no\ such\ field\ in\ structure";$	+1
+use	yyparse	pcVar62	msgText2	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*TParseContext__error\(\(int\)param_1,pcVar29,pcVar62,param_4,"",pTVar33,pTVar34,param_8\);$	+1
+use	yyparse	pcVar62	typeTmp5ArraySizeCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*pcVar62\ =\ local_7ac;$	+1
+use	yyparse	pcVar62	typeTmp5ArraySizeCopy	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pTVar7,pcVar62,\(unsigned\ char\ \*\)local_720\);$	+1
+use	yyparse	uVar64	variableMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*uVar64\ =\ TPoolAllocator__allocate\(pTVar17,0x40\);$	+2
+use	yyparse	uVar64	variableMem	INFERRED	named after the shape of its definition (call result, field load, copy or allocation)	^\s*\(pTVar7,\(int\)uVar64,pcVar62,pcVar29,a4,pTVar33,piVar61\);$	+1
+local	yyparse	local_320	levelFindIter	INFERRED	std::map::find result iterator for the function name in a symbol table level
+local	yyparse	local_310	symbolKeyStrAlloc	INFERRED	allocator word of the key std::string of the symbol inserted into the symbol table level
+local	yyparse	local_30c	symbolKeyStrData	INFERRED	data pointer of the key std::string of the inserted symbol
+local	yyparse	local_308	symbolValue	INFERRED	TSymbol* stored in the inserted map pair
+local	yyparse	local_1e0	variableKeyStrAlloc	INFERRED	allocator word of the key std::string of the new TVariable inserted into the symbol table
+local	yyparse	local_1dc	variableKeyStrData	INFERRED	data pointer of the key std::string of the new TVariable
+local	yyparse	local_1d8	variableValue	INFERRED	new TVariable stored in the inserted map pair
+local	yyparse	local_f0	nodeKeyStrAlloc	INFERRED	allocator word of the key std::string of the built-in node inserted into the symbol table
+local	yyparse	local_ec	nodeKeyStrData	INFERRED	data pointer of the key std::string of the built-in node
+local	yyparse	local_e8	nodeValue	INFERRED	new node stored in the inserted map pair
+local	yyparse	local_90	declaredNameLen	INFERRED	length of the first name string (compared with the second via memcmp on the shorter length)
+local	yyparse	local_8c	existingNameLen	INFERRED	length of the second name string
+local	yyparse	local_78	leftTextLen	INFERRED	length of the first string compared in the struct field check
+local	yyparse	local_74	rightTextLen	INFERRED	length of the second string compared in the struct field check
+local	yyparse	local_88	outFlag	INFERRED	bool out-parameter of the parse-context check, tested right after
+local	yyparse	local_84	callArgSlot	INFERRED	stack slot whose address is passed as an argument
+local	yyparse	local_80	operandOut1	INFERRED	out-parameter filled by the callee with a node pointer
+local	yyparse	local_7c	operandOut2	INFERRED	out-parameter filled by the callee with a node pointer
+local	yyparse	local_68	typeVtableAddr	INFERRED	address of the TType vtable (&TType__vtable)
+local	yyparse	local_58	paramVectorPtr	INFERRED	pointer to the function's parameter std::vector (symbol+0xc)
+local	yyparse	local_54	picBaseConst	INFERRED	PIC base constant used to reach the string terminal character
+local	yyparse	local_660	functionPool	INFERRED	global pool allocator stored into the new TFunction (+0xc)
+local	yyparse	local_170	levelPool	INFERRED	global pool allocator used for the new symbol table level
+local	yyparse	local_150	loopPoolCopy	INFERRED	copy of the pool allocator pointer
+local	yyparse	local_140	switchPoolCopy	INFERRED	copy of the pool allocator pointer
+local	yyparse	local_130	nodePool	INFERRED	global pool allocator used for the new node's level
