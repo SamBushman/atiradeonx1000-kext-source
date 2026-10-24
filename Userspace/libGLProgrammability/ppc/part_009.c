@@ -1906,7 +1906,6 @@ int TGenericLinker__AllocateTextureUnitsForVaryings(this)
   uint texCoordSet;
   int totalSlots;
   int ppStreamManager;
-  uint uVar2;
   bool slotsFree;
   uint setNo;
   unsigned char * fragmentSymbolTable;
