@@ -1554,22 +1554,23 @@ undefined8 ___lshrdi3(valueHi, valueLo, shift)
   uint valueLo;
   uint shift;
 {
-  uint complementOrResultHi;
-  undefined4 resultLo;
+  uint resultLo;
+  uint complementShift;
+  undefined4 resultHi;
   
   if (shift == 0) {
     return CONCAT44(valueLo,valueHi);
   }
-  complementOrResultHi = 0x20 - shift;
-  if ((int)complementOrResultHi < 1) {
-    complementOrResultHi = valueHi >> (-complementOrResultHi & 0x3f);
-    resultLo = 0;
+  complementShift = 0x20 - shift;
+  if ((int)complementShift < 1) {
+    resultLo = valueHi >> (-complementShift & 0x3f);
+    resultHi = 0;
   }
   else {
-    resultLo = valueHi >> (shift & 0x3f);
-    complementOrResultHi = valueLo >> (shift & 0x3f) | valueHi << (complementOrResultHi & 0x3f);
+    resultHi = valueHi >> (shift & 0x3f);
+    resultLo = valueLo >> (shift & 0x3f) | valueHi << (complementShift & 0x3f);
   }
-  return CONCAT44(complementOrResultHi,resultLo);
+  return CONCAT44(resultLo,resultHi);
 }
 
 /* ___ashldi3 @ 0x97b84b50 (96 bytes) */
@@ -1578,22 +1579,23 @@ undefined8 ___ashldi3(valueHi, valueLo, shift)
   uint valueLo;
   uint shift;
 {
-  uint complementOrResultHi;
+  uint resultHi;
+  uint complementShift;
   undefined4 resultLo;
   
   if (shift == 0) {
     return CONCAT44(valueLo,valueHi);
   }
-  complementOrResultHi = 0x20 - shift;
-  if ((int)complementOrResultHi < 1) {
-    complementOrResultHi = valueLo << (-complementOrResultHi & 0x3f);
+  complementShift = 0x20 - shift;
+  if ((int)complementShift < 1) {
+    resultHi = valueLo << (-complementShift & 0x3f);
     resultLo = 0;
   }
   else {
     resultLo = valueLo << (shift & 0x3f);
-    complementOrResultHi = valueHi << (shift & 0x3f) | valueLo >> (complementOrResultHi & 0x3f);
+    resultHi = valueHi << (shift & 0x3f) | valueLo >> (complementShift & 0x3f);
   }
-  return CONCAT44(resultLo,complementOrResultHi);
+  return CONCAT44(resultLo,resultHi);
 }
 
 /* _PPStreamGetTexOperationCount @ 0x97b84bb0 (60 bytes) */

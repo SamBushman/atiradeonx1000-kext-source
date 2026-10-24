@@ -1,0 +1,246 @@
+# lp14: split the partLenCmpOrClass hybrid of the parser binding parsers into per-role names
+use	_PPParserParseAttributeBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,local_140,0\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,local_140,0\);$@2	+2
+use	_PPParserParseAttributeBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*if\ \(iVar3\ !=\ 1\)\ \{$	+1
+use	_PPParserParseAttributeBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,local_140,0\);$@4	+2
+use	_PPParserParseAttributeBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*if\ \(\(local_140\[0\]\ ==\ '\.'\)\ \&\&\ \(iVar3\ ==\ 1\)\)\ \{$	+1
+use	_PPParserParseAttributeBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,local_140,0\);$@5	+2
+use	_PPParserParseAttributeBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,local_140,0\);$@6	+2
+use	_PPParserParseAttributeBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,local_140,0\);$@7	+2
+use	_PPParserParseAttributeBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,local_140,0\);$@8	+2
+use	_PPParserParseAttributeBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*if\ \(iVar3\ !=\ 1\)\ \{$@2	+1
+use	_PPParserParseAttributeBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,local_140,0\);$@9	+2
+use	_PPParserParseAttributeBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,local_140,0\);$@10	+2
+use	_PPParserParseAttributeBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*if\ \(\(local_140\[0\]\ !=\ '\.'\)\ \|\|\ \(iVar3\ !=\ 1\)\)\ \{$	+1
+use	_PPParserParseAttributeBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,local_140,0\);$@11	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"fragment",9\);$	+1
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"vertex",7\);$	+1
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*if\ \(iVar3\ !=\ 0\)\ \{$	+1
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"position",9\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*if\ \(\(bVar1\)\ \|\|\ \(iVar3\ =\ _memcmp\(local_140,"normal",7\),\ iVar3\ !=\ 0\)\)\ \{$	+1
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"color",6\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"secondary",10\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"primary",8\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"fogcoord",9\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"texcoord",9\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"facing",7\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"weight",7\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"material",9\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"front",6\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"back",5\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"ambient",8\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"diffuse",8\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"specular",9\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"emission",9\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(local_140,"shininess",10\);$	+2
+use	_PPParserParseAttributeBinding	iVar3	arrayStatus	INFERRED	error code from _PPParserParseArray (0 = ok)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserParseArray\)\(param_1,local_30\);$	+3
+use	_PPParserParseAttributeBinding	iVar3	arrayStatus	INFERRED	error code from _PPParserParseArray (0 = ok)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserParseArray\)\(param_1,local_30\);$@2	+3
+use	_PPParserParseAttributeBinding	iVar3	arrayStatus	INFERRED	error code from _PPParserParseArray (0 = ok)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserParseArray\)\(param_1,local_30\);$@3	+3
+use	_PPParserParseAttributeBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,local_140,0\);$@3	+2
+use	_PPParserParseAttributeBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against "attrib"	^\s*if\ \(\(!bVar1\)\ \&\&\ \(iVar3\ =\ _memcmp\(local_140,"attrib",7\),\ iVar3\ ==\ 0\)\)\ \{$	+1
+use	_PPParserParseAttributeBinding	iVar3	bindingClass	INFERRED	attribute class number or-ed into binding bits 16..19 (position 1, color 3.., fogcoord 5, texcoord 0x38, weight 0x39, generic 0x3d)	^\s*iVar3\ =\ 0x3d;$	+1
+use	_PPParserParseAttributeBinding	iVar3	bindingClass	INFERRED	attribute class number or-ed into binding bits 16..19 (position 1, color 3.., fogcoord 5, texcoord 0x38, weight 0x39, generic 0x3d)	^\s*iVar3\ =\ 0x38;$	+1
+use	_PPParserParseAttributeBinding	iVar3	bindingClass	INFERRED	attribute class number or-ed into binding bits 16..19 (position 1, color 3.., fogcoord 5, texcoord 0x38, weight 0x39, generic 0x3d)	^\s*return\ iVar3;$@3	+1
+use	_PPParserParseAttributeBinding	iVar3	bindingClass	INFERRED	attribute class number or-ed into binding bits 16..19 (position 1, color 3.., fogcoord 5, texcoord 0x38, weight 0x39, generic 0x3d)	^\s*iVar3\ =\ 0x39;$	+1
+use	_PPParserParseAttributeBinding	iVar3	bindingClass	INFERRED	attribute class number or-ed into binding bits 16..19 (position 1, color 3.., fogcoord 5, texcoord 0x38, weight 0x39, generic 0x3d)	^\s*iVar3\ =\ 1;$	+1
+use	_PPParserParseAttributeBinding	iVar3	bindingClass	INFERRED	attribute class number or-ed into binding bits 16..19 (position 1, color 3.., fogcoord 5, texcoord 0x38, weight 0x39, generic 0x3d)	^\s*iVar3\ =\ 3;$	+1
+use	_PPParserParseAttributeBinding	iVar3	bindingClass	INFERRED	attribute class number or-ed into binding bits 16..19 (position 1, color 3.., fogcoord 5, texcoord 0x38, weight 0x39, generic 0x3d)	^\s*iVar3\ =\ 5;$	+1
+use	_PPParserParseAttributeBinding	iVar3	bindingClass	INFERRED	attribute class number or-ed into binding bits 16..19 (position 1, color 3.., fogcoord 5, texcoord 0x38, weight 0x39, generic 0x3d)	^\s*iVar3\ =\ 0xb;$	+1
+use	_PPParserParseAttributeBinding	iVar3	bindingClass	INFERRED	attribute class number or-ed into binding bits 16..19 (position 1, color 3.., fogcoord 5, texcoord 0x38, weight 0x39, generic 0x3d)	^\s*iVar3\ =\ 4;$@2	+1
+use	_PPParserParseAttributeBinding	iVar3	bindingClass	INFERRED	attribute class number or-ed into binding bits 16..19 (position 1, color 3.., fogcoord 5, texcoord 0x38, weight 0x39, generic 0x3d)	^\s*local_40\ =\ iVar3\ <<\ 0x10\ \|\ local_40\ \&\ 0xfff0ffff;$	+1
+use	_PPParserParseAttributeBinding	iVar3	materialProperty	INFERRED	material property index (ambient 0, diffuse 1, specular 2, emission 3, shininess 4) or-ed into binding bits 12..15	^\s*iVar3\ =\ 1;$@2	+1
+use	_PPParserParseAttributeBinding	iVar3	materialProperty	INFERRED	material property index (ambient 0, diffuse 1, specular 2, emission 3, shininess 4) or-ed into binding bits 12..15	^\s*iVar3\ =\ 2;$	+1
+use	_PPParserParseAttributeBinding	iVar3	materialProperty	INFERRED	material property index (ambient 0, diffuse 1, specular 2, emission 3, shininess 4) or-ed into binding bits 12..15	^\s*iVar3\ =\ 3;$@2	+1
+use	_PPParserParseAttributeBinding	iVar3	materialProperty	INFERRED	material property index (ambient 0, diffuse 1, specular 2, emission 3, shininess 4) or-ed into binding bits 12..15	^\s*iVar3\ =\ 4;$	+1
+use	_PPParserParseAttributeBinding	iVar3	materialProperty	INFERRED	material property index (ambient 0, diffuse 1, specular 2, emission 3, shininess 4) or-ed into binding bits 12..15	^\s*local_40\ =\ iVar3\ <<\ 0xc\ \|\ local_40\ \&\ 0xffff0fff;$	+1
+use	_PPParserParseAttributeBinding	iVar3	stream	CONFIRMED	parser +0x1c: the PPStream the binding is added to (_PPStreamAddAttribBinding first argument)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1c\);$	+1
+use	_PPParserParseAttributeBinding	iVar3	stream	CONFIRMED	parser +0x1c: the PPStream the binding is added to (_PPStreamAddAttribBinding first argument)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1c\);$@2	+2
+use	_PPParserParseAttributeBinding	iVar3	stream	CONFIRMED	parser +0x1c: the PPStream the binding is added to (_PPStreamAddAttribBinding first argument)	^\s*\(\(int\ \(\*\)\(\)\)_PPStreamAddAttribBinding\)\(iVar3,\&local_40\);$	+1
+use	_PPParserParseAttributeBinding	iVar3	resultCode	CONFIRMED	return value: 0x35 when the stream has too many attribute bindings, else 0	^\s*iVar3\ =\ 0x35;$	+1
+use	_PPParserParseAttributeBinding	iVar3	resultCode	CONFIRMED	return value: 0x35 when the stream has too many attribute bindings, else 0	^\s*iVar3\ =\ 0;$	+1
+use	_PPParserParseAttributeBinding	iVar3	resultCode	CONFIRMED	return value: 0x35 when the stream has too many attribute bindings, else 0	^\s*return\ iVar3;$@5	+1
+use	_PPParserParseOutputBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,\&local_140,0\);$	+2
+use	_PPParserParseOutputBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,\&local_140,0\);$@2	+2
+use	_PPParserParseOutputBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*if\ \(\(local_140\ !=\ '\.'\)\ \|\|\ \(iVar3\ !=\ 1\)\)\ \{$	+1
+use	_PPParserParseOutputBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,\&local_140,0\);$@4	+2
+use	_PPParserParseOutputBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,\&local_140,0\);$@5	+2
+use	_PPParserParseOutputBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*if\ \(\(local_140\ ==\ '\.'\)\ \&\&\ \(iVar3\ ==\ 1\)\)\ \{$	+1
+use	_PPParserParseOutputBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,\&local_140,0\);$@6	+2
+use	_PPParserParseOutputBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*if\ \(\(local_140\ ==\ '\.'\)\ \&\&\ \(iVar3\ ==\ 1\)\)\ \{$@2	+1
+use	_PPParserParseOutputBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,\&local_140,0\);$@7	+2
+use	_PPParserParseOutputBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,\&local_140,0\);$@8	+2
+use	_PPParserParseOutputBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(\&local_140,"result",7\);$	+2
+use	_PPParserParseOutputBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(\&local_140,"color",6\);$	+2
+use	_PPParserParseOutputBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(\&local_140,"secondary",10\);$	+2
+use	_PPParserParseOutputBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(\&local_140,"primary",8\);$	+2
+use	_PPParserParseOutputBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(\&local_140,"depth",6\);$	+2
+use	_PPParserParseOutputBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(\&local_140,"fogcoord",9\);$	+2
+use	_PPParserParseOutputBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(\&local_140,"pointsize",10\);$	+2
+use	_PPParserParseOutputBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(\&local_140,"texcoord",9\);$	+2
+use	_PPParserParseOutputBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against a keyword	^\s*iVar3\ =\ _memcmp\(\&local_140,"clip",5\);$	+2
+use	_PPParserParseOutputBinding	iVar3	arrayStatus	INFERRED	error code from _PPParserParseArray (0 = ok)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserParseArray\)\(param_1,local_30\);$	+3
+use	_PPParserParseOutputBinding	iVar3	arrayStatus	INFERRED	error code from _PPParserParseArray (0 = ok)	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserParseArray\)\(param_1,local_30\);$@2	+3
+use	_PPParserParseOutputBinding	iVar3	partLength	INFERRED	length returned by _PPParserGetPart for the part just read	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetPart\)\(param_1,\&local_140,0\);$@3	+2
+use	_PPParserParseOutputBinding	iVar3	keywordCompare	INFERRED	_memcmp result of the part text against "position"	^\s*if\ \(\(!bVar1\)\ \&\&\ \(iVar3\ =\ _memcmp\(\&local_140,"position",9\),\ iVar3\ ==\ 0\)\)\ \{$	+1
+use	_PPParserParseOutputBinding	iVar3	outputClass	INFERRED	output class number or-ed into binding bits 16..19 (position 0.., fogcoord 5, pointsize 7, clip 9..)	^\s*iVar3\ =\ 5;$	+1
+use	_PPParserParseOutputBinding	iVar3	outputClass	INFERRED	output class number or-ed into binding bits 16..19 (position 0.., fogcoord 5, pointsize 7, clip 9..)	^\s*iVar3\ =\ 7;$	+1
+use	_PPParserParseOutputBinding	iVar3	outputClass	INFERRED	output class number or-ed into binding bits 16..19 (position 0.., fogcoord 5, pointsize 7, clip 9..)	^\s*iVar3\ =\ 2;$	+1
+use	_PPParserParseOutputBinding	iVar3	outputClass	INFERRED	output class number or-ed into binding bits 16..19 (position 0.., fogcoord 5, pointsize 7, clip 9..)	^\s*iVar3\ =\ 3;$	+1
+use	_PPParserParseOutputBinding	iVar3	outputClass	INFERRED	output class number or-ed into binding bits 16..19 (position 0.., fogcoord 5, pointsize 7, clip 9..)	^\s*iVar3\ =\ 9;$	+1
+use	_PPParserParseOutputBinding	iVar3	outputClass	INFERRED	output class number or-ed into binding bits 16..19 (position 0.., fogcoord 5, pointsize 7, clip 9..)	^\s*local_40\ =\ iVar3\ <<\ 0x10\ \|\ local_40\ \&\ 0xfff0ffff;$	+1
+use	_PPParserParseOutputBinding	iVar3	resultCode	CONFIRMED	return value: 0x36 when the stream has too many output bindings, else 0	^\s*iVar3\ =\ 0x36;$	+1
+use	_PPParserParseOutputBinding	iVar3	resultCode	CONFIRMED	return value: 0x36 when the stream has too many output bindings, else 0	^\s*iVar3\ =\ 0;$	+1
+use	_PPParserParseOutputBinding	iVar3	resultCode	CONFIRMED	return value: 0x36 when the stream has too many output bindings, else 0	^\s*return\ iVar3;$@3	+1
+use	_PPParserParseParamBinding	iVar5	arrayStatus	INFERRED	error code from _PPParserParseArray / ParseRangeArray (0 = ok)	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)_PPParserParseArray\)\(param_1,\&local_40\);$	+1
+use	_PPParserParseParamBinding	iVar5	arrayStatus	INFERRED	error code from _PPParserParseArray / ParseRangeArray (0 = ok)	^\s*iVar5\ =\ _PPParserParseRangeArray\(param_1,\&local_40,local_3c\);$	+1
+use	_PPParserParseParamBinding	iVar5	arrayStatus	INFERRED	error code from _PPParserParseArray / ParseRangeArray (0 = ok)	^\s*if\ \(iVar5\ !=\ 0\)\ \{$	+2
+use	_PPParserParseParamBinding	iVar5	arrayStatus	INFERRED	error code from _PPParserParseArray / ParseRangeArray (0 = ok)	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)_PPParserParseArray\)\(param_1,\&local_40\);$@2	+1
+use	_PPParserParseParamBinding	iVar5	arrayStatus	INFERRED	error code from _PPParserParseArray / ParseRangeArray (0 = ok)	^\s*iVar5\ =\ _PPParserParseRangeArray\(param_1,\&local_40,local_3c\);$@2	+1
+use	_PPParserParseParamBinding	iVar5	arrayStatus	INFERRED	error code from _PPParserParseArray / ParseRangeArray (0 = ok)	^\s*if\ \(iVar5\ !=\ 0\)\ \{$@2	+2
+use	_PPParserParseParamBinding	iVar5	arrayStatus	INFERRED	error code from _PPParserParseArray / ParseRangeArray (0 = ok)	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)_PPParserParseArray\)\(param_1,\&local_40\);$@9	+1
+use	_PPParserParseParamBinding	iVar5	arrayStatus	INFERRED	error code from _PPParserParseArray / ParseRangeArray (0 = ok)	^\s*iVar5\ =\ _PPParserParseRangeArray\(param_1,\&local_40,local_3c\);$@3	+1
+use	_PPParserParseParamBinding	iVar5	arrayStatus	INFERRED	error code from _PPParserParseArray / ParseRangeArray (0 = ok)	^\s*if\ \(iVar5\ !=\ 0\)\ \{$@25	+2
+use	_PPParserParseParamBinding	iVar5	nextOrdinal	INFERRED	the parser binding counter +1 (parser+0x20), stored into the binding ordinal and back	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x20\)\ \+\ 1;$	+3
+use	_PPParserParseParamBinding	iVar5	nextOrdinal	INFERRED	the parser binding counter +1 (parser+0x20), stored into the binding ordinal and back	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x20\)\ \+\ 1;$@2	+3
+use	_PPParserParseParamBinding	iVar5	nextOrdinal	INFERRED	the parser binding counter +1 (parser+0x20), stored into the binding ordinal and back	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x20\)\ \+\ 1;$@3	+3
+use	_PPParserParseParamBinding	iVar5	stateClass	INFERRED	state binding class number or-ed into binding bits 16..20	^\s*iVar5\ =\ 0x12;$	+1
+use	_PPParserParseParamBinding	iVar5	stateClass	INFERRED	state binding class number or-ed into binding bits 16..20	^\s*local_80\ =\ iVar5\ <<\ 0x10\ \|\ local_80\ \&\ 0xffe0ffff;$	+1
+use	_PPParserParseParamBinding	iVar5	stateClass	INFERRED	state binding class number or-ed into binding bits 16..20	^\s*iVar5\ =\ 10;$	+1
+use	_PPParserParseParamBinding	iVar5	stateClass	INFERRED	state binding class number or-ed into binding bits 16..20	^\s*iVar5\ =\ 6;$@2	+1
+use	_PPParserParseParamBinding	iVar5	stateClass	INFERRED	state binding class number or-ed into binding bits 16..20	^\s*iVar5\ =\ 0xb;$	+1
+use	_PPParserParseParamBinding	iVar5	stateClass	INFERRED	state binding class number or-ed into binding bits 16..20	^\s*iVar5\ =\ 0xc;$	+1
+use	_PPParserParseParamBinding	iVar5	stateClass	INFERRED	state binding class number or-ed into binding bits 16..20	^\s*iVar5\ =\ 0xd;$	+1
+use	_PPParserParseParamBinding	iVar5	stateClass	INFERRED	state binding class number or-ed into binding bits 16..20	^\s*iVar5\ =\ 0xe;$	+1
+use	_PPParserParseParamBinding	iVar5	stateClass	INFERRED	state binding class number or-ed into binding bits 16..20	^\s*local_80\ =\ iVar5\ <<\ 0x10\ \|\ local_80\ \&\ 0xffe0ffff;$@3	+1
+use	_PPParserParseParamBinding	iVar5	stateClass	INFERRED	state binding class number or-ed into binding bits 16..20	^\s*iVar5\ =\ 7;$@2	+1
+use	_PPParserParseParamBinding	iVar5	stateClass	INFERRED	state binding class number or-ed into binding bits 16..20	^\s*iVar5\ =\ 8;$	+1
+use	_PPParserParseParamBinding	iVar5	stateClass	INFERRED	state binding class number or-ed into binding bits 16..20	^\s*local_80\ =\ iVar5\ <<\ 0x10\ \|\ local_80\ \&\ 0xffe0ffff;$@2	+1
+use	_PPParserParseParamBinding	iVar5	materialProperty	INFERRED	material property index (ambient..shininess) or-ed into binding bits 1..3	^\s*iVar5\ =\ 1;$	+1
+use	_PPParserParseParamBinding	iVar5	materialProperty	INFERRED	material property index (ambient..shininess) or-ed into binding bits 1..3	^\s*local_80\ =\ iVar5\ <<\ 1\ \|\ local_80\ \&\ 0xfffffff1;$	+1
+use	_PPParserParseParamBinding	iVar5	materialProperty	INFERRED	material property index (ambient..shininess) or-ed into binding bits 1..3	^\s*iVar5\ =\ 4;$	+1
+use	_PPParserParseParamBinding	iVar5	lightProperty	INFERRED	light property selector or-ed into binding bits 8..11	^\s*iVar5\ =\ 4;$@2	+1
+use	_PPParserParseParamBinding	iVar5	lightProperty	INFERRED	light property selector or-ed into binding bits 8..11	^\s*iVar5\ =\ 6;$	+1
+use	_PPParserParseParamBinding	iVar5	lightProperty	INFERRED	light property selector or-ed into binding bits 8..11	^\s*iVar5\ =\ 7;$	+1
+use	_PPParserParseParamBinding	iVar5	lightProperty	INFERRED	light property selector or-ed into binding bits 8..11	^\s*local_80\ =\ iVar5\ <<\ 8\ \|\ local_80\ \&\ 0xfffff0ff;$	+1
+use	_PPParserParseParamBinding	iVar5	resultCode	CONFIRMED	return value: 10 or 0x34 when the binding table is full (parser+0x20 > limit), else 0	^\s*iVar5\ =\ 10;$@2	+1
+use	_PPParserParseParamBinding	iVar5	resultCode	CONFIRMED	return value: 10 or 0x34 when the binding table is full (parser+0x20 > limit), else 0	^\s*iVar5\ =\ 0x34;$	+1
+use	_PPParserParseParamBinding	iVar5	resultCode	CONFIRMED	return value: 10 or 0x34 when the binding table is full (parser+0x20 > limit), else 0	^\s*iVar5\ =\ 0x34;$@2	+1
+use	_PPParserParseParamBinding	iVar5	resultCode	CONFIRMED	return value: 10 or 0x34 when the binding table is full (parser+0x20 > limit), else 0	^\s*iVar5\ =\ 0;$	+1
+use	_PPParserParseParamBinding	iVar5	resultCode	CONFIRMED	return value: 10 or 0x34 when the binding table is full (parser+0x20 > limit), else 0	^\s*return\ iVar5;$@12	+1
+use	_PPParserParseParamBinding	uVar3	profile	INFERRED	parser->profile flags (+0x48c); bit 1 selects the fragment program	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x48c\);$	+1
+use	_PPParserParseParamBinding	uVar3	profile	INFERRED	parser->profile flags (+0x48c); bit 1 selects the fragment program	^\s*bVar2\ =\ \(\(uVar3\ \^\ 2\)\ >>\ 1\ \&\ 1\)\ ==\ 0;$	+1
+use	_PPParserParseParamBinding	uVar3	rangeIndex	INFERRED	running index through the array range start..end while bindings are added	^\s*uVar3\ =\ local_40;$	+1
+use	_PPParserParseParamBinding	uVar3	rangeIndex	INFERRED	running index through the array range start..end while bindings are added	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ 0x450\)\ <=\ uVar3\)\ \{$	+1
+use	_PPParserParseParamBinding	uVar3	rangeIndex	INFERRED	running index through the array range start..end while bindings are added	^\s*local_80\ =\ CONCAT22\(\(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_80\)\ \+\ 0\)\),\(short\)uVar3\);$	+1
+use	_PPParserParseParamBinding	uVar3	rangeIndex	INFERRED	running index through the array range start..end while bindings are added	^\s*if\ \(uVar3\ ==\ local_3c\[0\]\)\ break;$	+1
+use	_PPParserParseParamBinding	uVar3	rangeIndex	INFERRED	running index through the array range start..end while bindings are added	^\s*uVar3\ =\ uVar3\ \+\ 1;$	+1
+use	_PPParserParseParamBinding	uVar3	rangeIndex	INFERRED	running index through the array range start..end while bindings are added	^\s*uVar3\ =\ local_40;$@2	+1
+use	_PPParserParseParamBinding	uVar3	rangeIndex	INFERRED	running index through the array range start..end while bindings are added	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ 0x454\)\ <=\ uVar3\)\ \{$	+1
+use	_PPParserParseParamBinding	uVar3	rangeIndex	INFERRED	running index through the array range start..end while bindings are added	^\s*local_80\ =\ CONCAT22\(\(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_80\)\ \+\ 0\)\),\(short\)uVar3\);$@2	+1
+use	_PPParserParseParamBinding	uVar3	rangeIndex	INFERRED	running index through the array range start..end while bindings are added	^\s*if\ \(uVar3\ ==\ local_3c\[0\]\)\ break;$@2	+1
+use	_PPParserParseParamBinding	uVar3	rangeIndex	INFERRED	running index through the array range start..end while bindings are added	^\s*uVar3\ =\ uVar3\ \+\ 1;$@2	+1
+use	_PPParserParseParamBinding	uVar3	rangeIndex	INFERRED	running index through the array range start..end while bindings are added	^\s*uVar3\ =\ local_40;$@3	+1
+use	_PPParserParseParamBinding	uVar3	rangeIndex	INFERRED	running index through the array range start..end while bindings are added	^\s*local_80\ =\ \(uVar3\ \&\ 3\)\ <<\ 0xc\ \|\ local_80\ \&\ 0xffffcfff;$	+1
+use	_PPParserParseParamBinding	uVar3	rangeIndex	INFERRED	running index through the array range start..end while bindings are added	^\s*if\ \(uVar3\ ==\ local_3c\[0\]\)\ break;$@3	+1
+use	_PPParserParseParamBinding	uVar3	rangeIndex	INFERRED	running index through the array range start..end while bindings are added	^\s*uVar3\ =\ uVar3\ \+\ 1;$@3	+1
+use	_PPParserParseParamBinding	uVar3	bindingCount	INFERRED	parser binding counter (+0x20) compared with the limit at +0x464	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x20\);$	+1
+use	_PPParserParseParamBinding	uVar3	bindingCount	INFERRED	parser binding counter (+0x20) compared with the limit at +0x464	^\s*if\ \(uVar3\ <=\ \*\(uint\ \*\)\(param_1\ \+\ 0x464\)\)\ \{$	+1
+use	_PPParserParseParamBinding	uVar3	bindingCount	INFERRED	parser binding counter (+0x20) compared with the limit at +0x464	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x20\);$@2	+1
+use	_PPParserParseParamBinding	uVar3	bindingCount	INFERRED	parser binding counter (+0x20) compared with the limit at +0x464	^\s*if\ \(uVar3\ <\ 0x101\)\ \{$	+1
+use	_PPParserParseOperation	iVar5	resultCode	CONFIRMED	return value: 0x2d no more tokens, 0x1e not terminated by ;, 0x32 operation list full, 0 ok	^\s*iVar5\ =\ 0x2d;$	+1
+use	_PPParserParseOperation	iVar5	resultCode	CONFIRMED	return value: 0x2d no more tokens, 0x1e not terminated by ;, 0x32 operation list full, 0 ok	^\s*if\ \(\(iVar4\ !=\ 0\)\ \&\&\ \(iVar5\ =\ 0x1e,\ local_290\[0\]\ ==\ ';'\)\)\ \{$	+1
+use	_PPParserParseOperation	iVar5	resultCode	CONFIRMED	return value: 0x2d no more tokens, 0x1e not terminated by ;, 0x32 operation list full, 0 ok	^\s*iVar5\ =\ 0x32;$	+1
+use	_PPParserParseOperation	iVar5	resultCode	CONFIRMED	return value: 0x2d no more tokens, 0x1e not terminated by ;, 0x32 operation list full, 0 ok	^\s*iVar5\ =\ 0;$	+1
+use	_PPParserParseOperation	iVar5	resultCode	CONFIRMED	return value: 0x2d no more tokens, 0x1e not terminated by ;, 0x32 operation list full, 0 ok	^\s*return\ iVar5;$	+1
+use	_PPParserParseOperation	iVar5	lastOpChunk	INFERRED	tail chunk of the stream operation list (list +4), tested for NULL	^\s*iVar5\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ 0x20\)\ \+\ 4\);$	+2
+use	_PPParserParseOperation	iVar5	lastOpChunk	INFERRED	tail chunk of the stream operation list (list +4), tested for NULL	^\s*local_90\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 0xc\)\ >>\ 3\ \&\ 0x1c000000\ \|\ uVar7\ <<\ 0x1d\ \|\ local_90\ \&\ 0x3ffffff;$	+1
+use	_PPParserParseStatement	iVar2	declStatus	INFERRED	status returned by the declaration parser selected by the keyword (TEMP/OUTPUT/ADDRESS/PARAM/ATTRIB/ALIAS/MACRO) or 0x2a; the function returns it	^\s*iVar2\ =\ _PPParserParseTempDeclaration\(param_1,iVar9\);$	+1
+use	_PPParserParseStatement	iVar2	declStatus	INFERRED	status returned by the declaration parser selected by the keyword (TEMP/OUTPUT/ADDRESS/PARAM/ATTRIB/ALIAS/MACRO) or 0x2a; the function returns it	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)_PPParserParseOutputDeclaration\)\(param_1,iVar9\);$	+1
+use	_PPParserParseStatement	iVar2	declStatus	INFERRED	status returned by the declaration parser selected by the keyword (TEMP/OUTPUT/ADDRESS/PARAM/ATTRIB/ALIAS/MACRO) or 0x2a; the function returns it	^\s*iVar2\ =\ 0x2a;$	+1
+use	_PPParserParseStatement	iVar2	declStatus	INFERRED	status returned by the declaration parser selected by the keyword (TEMP/OUTPUT/ADDRESS/PARAM/ATTRIB/ALIAS/MACRO) or 0x2a; the function returns it	^\s*iVar2\ =\ _PPParserParseAddressDeclaration\(param_1\);$	+1
+use	_PPParserParseStatement	iVar2	declStatus	INFERRED	status returned by the declaration parser selected by the keyword (TEMP/OUTPUT/ADDRESS/PARAM/ATTRIB/ALIAS/MACRO) or 0x2a; the function returns it	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)_PPParserParseParameterDeclaration\)\(param_1\);$	+1
+use	_PPParserParseStatement	iVar2	declStatus	INFERRED	status returned by the declaration parser selected by the keyword (TEMP/OUTPUT/ADDRESS/PARAM/ATTRIB/ALIAS/MACRO) or 0x2a; the function returns it	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)_PPParserParseAttributeDeclaration\)\(param_1\);$	+1
+use	_PPParserParseStatement	iVar2	declStatus	INFERRED	status returned by the declaration parser selected by the keyword (TEMP/OUTPUT/ADDRESS/PARAM/ATTRIB/ALIAS/MACRO) or 0x2a; the function returns it	^\s*iVar2\ =\ _PPParserParseAliasDeclaration\(param_1\);$	+1
+use	_PPParserParseStatement	iVar2	declStatus	INFERRED	status returned by the declaration parser selected by the keyword (TEMP/OUTPUT/ADDRESS/PARAM/ATTRIB/ALIAS/MACRO) or 0x2a; the function returns it	^\s*iVar2\ =\ _PPParserParseMacroDeclaration\(param_1\);$	+1
+use	_PPParserParseStatement	iVar2	declStatus	INFERRED	status returned by the declaration parser selected by the keyword (TEMP/OUTPUT/ADDRESS/PARAM/ATTRIB/ALIAS/MACRO) or 0x2a; the function returns it	^\s*iVar2\ =\ _PPParserParseBlock\(param_1\);$	+1
+use	_PPParserParseStatement	iVar2	declStatus	INFERRED	status returned by the declaration parser selected by the keyword (TEMP/OUTPUT/ADDRESS/PARAM/ATTRIB/ALIAS/MACRO) or 0x2a; the function returns it	^\s*return\ iVar2;$	+1
+use	_PPParserParseStatement	iVar2	mnemonic	INFERRED	mnemonic string pointer read from the opcode table entry (*opsList) and compared with the token	^\s*iVar2\ =\ \*piVar10;$	+2
+use	_PPParserParseStatement	iVar2	mnemonic	INFERRED	mnemonic string pointer read from the opcode table entry (*opsList) and compared with the token	^\s*iVar2\ =\ _strcmp\(auStack_140,iVar2\);$	+2
+use	_PPParserParseStatement	iVar2	mnemonic	INFERRED	mnemonic string pointer read from the opcode table entry (*opsList) and compared with the token	^\s*iVar2\ =\ \*piVar10;$@2	+2
+use	___lshrdi3	uVar1	complementShift	INFERRED	32 - shift, the left-shift amount of the carried bits (<= 0 when shift >= 32)	^\s*uVar1\ =\ 0x20\ \-\ param_3;$	+1	lhs	none
+use	___lshrdi3	uVar1	complementShift	INFERRED	32 - shift, the left-shift amount of the carried bits (<= 0 when shift >= 32)	^\s*if\ \(\(int\)uVar1\ <\ 1\)\ \{$	+1
+use	___lshrdi3	uVar1	complementShift	INFERRED	-(32 - shift) = shift - 32, the right-shift amount for shift >= 32	^\s*uVar1\ =\ param_1\ >>\ \(\-uVar1\ \&\ 0x3f\);$	+1	rhs	none
+use	___lshrdi3	uVar1	complementShift	INFERRED	32 - shift, left-shift amount of the bits carried from the high word	^\s*uVar1\ =\ param_2\ >>\ \(param_3\ \&\ 0x3f\)\ \|\ param_1\ <<\ \(uVar1\ \&\ 0x3f\);$	+1	rhs	none
+use	___lshrdi3	uVar1	resultLo	INFERRED	low word of the result: valueHi >> (shift - 32)	^\s*uVar1\ =\ param_1\ >>\ \(\-uVar1\ \&\ 0x3f\);$	+1	lhs	none
+use	___lshrdi3	uVar1	resultLo	INFERRED	low word of the result: valueLo >> shift | valueHi << (32 - shift)	^\s*uVar1\ =\ param_2\ >>\ \(param_3\ \&\ 0x3f\)\ \|\ param_1\ <<\ \(uVar1\ \&\ 0x3f\);$	+1	lhs	none
+use	___lshrdi3	uVar1	resultLo	INFERRED	low word of the result, returned with the high word	^\s*return\ CONCAT44\(uVar1,uStack_30\);$	+1
+use	___ashldi3	uVar1	complementShift	INFERRED	32 - shift, the right-shift amount of the carried bits (<= 0 when shift >= 32)	^\s*uVar1\ =\ 0x20\ \-\ param_3;$	+1	lhs	none
+use	___ashldi3	uVar1	complementShift	INFERRED	32 - shift	^\s*if\ \(\(int\)uVar1\ <\ 1\)\ \{$	+1
+use	___ashldi3	uVar1	complementShift	INFERRED	-(32 - shift) = shift - 32, the left-shift amount for shift >= 32	^\s*uVar1\ =\ param_2\ <<\ \(\-uVar1\ \&\ 0x3f\);$	+1	rhs	none
+use	___ashldi3	uVar1	complementShift	INFERRED	32 - shift, right-shift amount of the bits carried from the low word	^\s*uVar1\ =\ param_1\ <<\ \(param_3\ \&\ 0x3f\)\ \|\ param_2\ >>\ \(uVar1\ \&\ 0x3f\);$	+1	rhs	none
+use	___ashldi3	uVar1	resultHi	INFERRED	high word of the result: valueLo << (shift - 32)	^\s*uVar1\ =\ param_2\ <<\ \(\-uVar1\ \&\ 0x3f\);$	+1	lhs	none
+use	___ashldi3	uVar1	resultHi	INFERRED	high word of the result: valueHi << shift | valueLo >> (32 - shift)	^\s*uVar1\ =\ param_1\ <<\ \(param_3\ \&\ 0x3f\)\ \|\ param_2\ >>\ \(uVar1\ \&\ 0x3f\);$	+1	lhs	none
+use	___ashldi3	uVar1	resultHi	INFERRED	high word of the result, returned with the low word	^\s*return\ CONCAT44\(uStack_2c,uVar1\);$	+1
+local	_MacroExpand	uVar7	expansionNumber	CONFIRMED	the number a __LINE__ (_GetLineNumber) or __FILE__ (_GetStringNumber) macro expands to; stored in yylval and printed with %d
+use	TIntermediate__addConversion	iVar6	sourceBasicType	INFERRED	getBasicType (TIntermTyped vtable +0x40) of the source node	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_4\ \+\ 0x40\)\)\(param_4,param_2,param_3,param_4\);$	+2
+use	TIntermediate__addConversion	iVar6	sourceBasicType	INFERRED	getBasicType (TIntermTyped vtable +0x40) of the source node	^\s*if\ \(\(\-1\ <\ iVar6\)\ \&\&\ \(iVar6\ \-\ 5U\ <\ 8\)\)\ \{$	+1
+use	TIntermediate__addConversion	iVar6	sourceBasicType	INFERRED	getBasicType (TIntermTyped vtable +0x40) of the source node	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_4\ \+\ 0x40\)\)\(param_4\);$	+1
+use	TIntermediate__addConversion	iVar6	sourceBasicType	INFERRED	getBasicType (TIntermTyped vtable +0x40) of the source node	^\s*if\ \(iVar6\ ==\ 2\)\ \{$	+1
+use	TIntermediate__addConversion	iVar6	sourceBasicType	INFERRED	getBasicType (TIntermTyped vtable +0x40) of the source node	^\s*if\ \(iVar6\ !=\ 3\)\ \{$	+1
+use	TIntermediate__addConversion	iVar6	sourceBasicType	INFERRED	getBasicType (TIntermTyped vtable +0x40) of the source node	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_4\ \+\ 0x40\)\)\(param_4\);$@2	+1
+use	TIntermediate__addConversion	iVar6	sourceBasicType	INFERRED	getBasicType (TIntermTyped vtable +0x40) of the source node	^\s*if\ \(iVar6\ ==\ 1\)\ \{$	+1
+use	TIntermediate__addConversion	iVar6	sourceBasicType	INFERRED	getBasicType (TIntermTyped vtable +0x40) of the source node	^\s*if\ \(iVar6\ !=\ 2\)\ \{$	+1
+use	TIntermediate__addConversion	iVar6	sourceBasicType	INFERRED	getBasicType (TIntermTyped vtable +0x40) of the source node	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_4\ \+\ 0x40\)\)\(param_4\);$@3	+1
+use	TIntermediate__addConversion	iVar6	sourceBasicType	INFERRED	getBasicType (TIntermTyped vtable +0x40) of the source node	^\s*if\ \(iVar6\ ==\ 1\)\ \{$@2	+1
+use	TIntermediate__addConversion	iVar6	sourceBasicType	INFERRED	getBasicType (TIntermTyped vtable +0x40) of the source node	^\s*if\ \(iVar6\ !=\ 3\)\ \{$@2	+1
+use	TIntermediate__addConversion	iVar6	targetIsArray	INFERRED	TType::isArray (vtable slot 14, +0x38) of the target type	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_3\ \+\ 0x38\)\)\(param_3\);$	+2
+use	TIntermediate__addConversion	iVar6	intermAggregate	INFERRED	getAsAggregate (vtable +0x1c) of the source node	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_4\ \+\ 0x1c\)\)\(param_4\);$	+2
+use	TIntermediate__addConversion	iVar6	intermAggregate	INFERRED	getAsAggregate (vtable +0x1c) of the source node	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_4\ \+\ 0x1c\)\)\(param_4\);$@2	+2
+use	TIntermediate__addConversion	iVar6	intermAggregate	INFERRED	getAsAggregate (vtable +0x1c) of the source node	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_4\ \+\ 0x1c\)\)\(param_4\);$@3	+2
+use	TIntermediate__addConversion	iVar6	sequenceVector	INFERRED	TIntermAggregate::getSequence (vtable +0x64): the pool vector of children	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 100\)\)\(piVar8\);$	+2
+use	TIntermediate__addConversion	iVar6	sequenceVector	INFERRED	TIntermAggregate::getSequence (vtable +0x64): the pool vector of children	^\s*if\ \(pTVar16\ ==\ \*\(unsigned\ char\ \*\*\)\(iVar6\ \+\ 8\)\)\ \{$	+1
+use	TIntermediate__addConversion	iVar6	sequenceVector	INFERRED	TIntermAggregate::getSequence (vtable +0x64): the pool vector of children	^\s*std__vector_TIntermNode__pool_allocator_TIntermNode_____erase\(auStack_38,iVar6,pTVar16\);$	+1
+use	TIntermediate__addConversion	iVar6	sequenceVector	INFERRED	TIntermAggregate::getSequence (vtable +0x64): the pool vector of children	^\s*\(auStack_38,iVar6,pTVar16,piVar12\);$	+1
+use	TIntermediate__addConversion	iVar6	sequenceVector	INFERRED	TIntermAggregate::getSequence (vtable +0x64): the pool vector of children	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 100\)\)\(piVar8\);$@2	+3
+use	TIntermediate__addConversion	iVar6	constantUnionNode	INFERRED	getAsConstantUnion (vtable +0x18) of the source node	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*param_4\ \+\ 0x18\)\)\(param_4\);$	+2
+use	TIntermediate__addConversion	iVar11	childConstantUnion	INFERRED	getAsConstantUnion (vtable +0x18) of the child being converted	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x18\)\)\(piVar12\);$	+3
+use	TIntermediate__addConversion	iVar11	childConstantUnion	INFERRED	getAsConstantUnion (vtable +0x18) of the child being converted	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x18\)\)\(piVar12\);$@2	+2
+use	TIntermediate__addConversion	iVar11	childConstantUnion	INFERRED	getAsConstantUnion (vtable +0x18) of the child being converted	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x18\)\)\(piVar12\);$@3	+2
+use	TIntermediate__addConversion	iVar11	childConstantUnion	INFERRED	getAsConstantUnion (vtable +0x18) of the child being converted	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x18\)\)\(piVar12\);$@4	+2
+use	TIntermediate__addConversion	iVar11	childConstantUnion	INFERRED	getAsConstantUnion (vtable +0x18) of the child being converted	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x18\)\)\(piVar12\);$@5	+2
+use	TIntermediate__addConversion	iVar11	childConstantUnion	INFERRED	getAsConstantUnion (vtable +0x18) of the child being converted	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x18\)\)\(piVar8\);$	+2
+use	TIntermediate__addConversion	iVar11	newConstantNode	INFERRED	result of TIntermediate::addConstantUnion: the converted constant node	^\s*iVar11\ =\ \(\(int\ \(\*\)\(\)\)TIntermediate__addConstantUnion\)\(this,pcVar10,\(unsigned\ char\ \*\)\&local_c0,\(int\)piVar12\);$	+1
+use	TIntermediate__addConversion	iVar11	newConstantNode	INFERRED	result of TIntermediate::addConstantUnion: the converted constant node	^\s*if\ \(iVar11\ !=\ 0\)\ \{$	+1
+use	TIntermediate__addConversion	iVar11	newConstantNode	INFERRED	result of TIntermediate::addConstantUnion: the converted constant node	^\s*local_34\ =\ iVar11;$	+1
+use	TIntermediate__addConversion	iVar11	conversionOp	INFERRED	TOperator value (EOpConv...) chosen from the source/target basic types; stored at node+0x30 (the new unary node op)	^\s*iVar11\ =\ 0x10;$	+1
+use	TIntermediate__addConversion	iVar11	conversionOp	INFERRED	TOperator value (EOpConv...) chosen from the source/target basic types; stored at node+0x30 (the new unary node op)	^\s*iVar11\ =\ 0xf;$	+1
+use	TIntermediate__addConversion	iVar11	conversionOp	INFERRED	TOperator value (EOpConv...) chosen from the source/target basic types; stored at node+0x30 (the new unary node op)	^\s*iVar11\ =\ 0xe;$	+1
+use	TIntermediate__addConversion	iVar11	conversionOp	INFERRED	TOperator value (EOpConv...) chosen from the source/target basic types; stored at node+0x30 (the new unary node op)	^\s*iVar11\ =\ 0xd;$	+1
+use	TIntermediate__addConversion	iVar11	conversionOp	INFERRED	TOperator value (EOpConv...) chosen from the source/target basic types; stored at node+0x30 (the new unary node op)	^\s*iVar11\ =\ 0x11;$	+1
+use	TIntermediate__addConversion	iVar11	conversionOp	INFERRED	TOperator value (EOpConv...) chosen from the source/target basic types; stored at node+0x30 (the new unary node op)	^\s*iVar11\ =\ 0x12;$	+1
+use	TIntermediate__addConversion	iVar11	conversionOp	INFERRED	TOperator value (EOpConv...) chosen from the source/target basic types; stored at node+0x30 (the new unary node op)	^\s*piVar12\[0xc\]\ =\ iVar11;$	+1
+use	TIntermediate__addConversion	iVar11	childConstantUnion	INFERRED	getAsConstantUnion (vtable +0x18) of the child being converted	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x18\)\)\(piVar12\);$@6	+1
+use	TIntermediate__addConversion	iVar11	childConstantUnion	INFERRED	constant node whose value pointer (+0x30) is read	^\s*iVar11\ =\ \*\*\(int\ \*\*\)\(iVar11\ \+\ 0x30\);$	+1	rhs	none
+use	TIntermediate__addConversion	iVar11	constantInt	INFERRED	the integer constant value read from the node (first entry of the constant array)	^\s*iVar11\ =\ \*\*\(int\ \*\*\)\(iVar11\ \+\ 0x30\);$	+1	lhs	none
+use	TIntermediate__addConversion	iVar11	constantInt	INFERRED	the integer constant value being converted to bool/float	^\s*a6\ =\ \(undefined4\ \*\)\(iVar11\ \+\ \-1\);$	+2
+local	_byte_scan	iVar3	inputChar	CONFIRMED	the current input character (-1 = EOF); for single-character tokens it is also the token code returned
+local	TPPStreamCompiler__constructFromOperand	a6	scratchR9	INFERRED	scratch register (7th argument, r9): staged constant 0xa7b7736c, then the field-name string length (chars[-0xc]), then the terminator character loaded from the global; forwarded as a dead vararg (one def-use web, cannot be split)
+use	TPPStreamCompiler__parseIntermediateTree	iVar1	labelQueueSize	INFERRED	size() of the label queue while it is drained	^\s*iVar1\ =\ size\(pQVar3\);$	+2
+use	TPPStreamCompiler__parseIntermediateTree	iVar1	functionStackEmpty	INFERRED	ParseFunctionStack::empty() of the function stack at this+0x58 (0 = not empty)	^\s*while\ \(iVar1\ =\ \(\(int\ \(\*\)\(\)\)ParseFunctionStack__empty\)\(\(unsigned\ char\ \*\)\(this\ \+\ 0x58\)\),\ iVar1\ ==\ 0\)\ \{$	+1
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*iVar48\ =\ 0;$	+1
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*\*\(short\ \*\)pTVar46\ =\ \(short\)iVar48;$	+1
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*iVar55\ =\ iVar48\ \*\ 2;$	+2
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*iVar48\ =\ \(int\)\*\(short\ \*\)\(\&_yytable\ \+\ \(int\)param_7\);$	+3
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*else\ if\ \(iVar48\ !=\ 0\)\ \{$	+2
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*iVar48\ =\ \(int\)\*\(short\ \*\)\(\&_yytable\ \+\ \(int\)param_7\);$@2	+3
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*if\ \(iVar48\ ==\ 0\)\ goto\ LAB_97bac03c;$	+2
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*uVar57\ =\ \-iVar48;$	+1
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*iVar48\ =\ \(int\)\*\(short\ \*\)\(\&_yytable\ \+\ \(int\)param_7\);$@3	+1
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*iVar48\ =\ \(int\)\*\(short\ \*\)\(\&DAT_97c35e08\ \+\ param_8\);$	+1
+use	yyparse	iVar48	yytoken	INFERRED	bison yytoken: the translated lookahead token (yytranslate[yychar]; 0 at EOF, 0xa9 undefined token)	^\s*iVar48\ =\ 0;$@2	+1
+use	yyparse	iVar48	yytoken	INFERRED	bison yytoken: the translated lookahead token (yytranslate[yychar]; 0 at EOF, 0xa9 undefined token)	^\s*iVar48\ =\ 0xa9;$	+1
+use	yyparse	iVar48	yytoken	INFERRED	bison yytoken: the translated lookahead token (yytranslate[yychar]; 0 at EOF, 0xa9 undefined token)	^\s*iVar48\ =\ \(int\)\(char\)\(\&_yytranslate\)\[iVar44\];$	+1
+use	yyparse	iVar48	yytoken	INFERRED	bison yytoken: the translated lookahead token (yytranslate[yychar]; 0 at EOF, 0xa9 undefined token)	^\s*uVar57\ =\ sVar1\ \+\ iVar48;$	+4
+use	yyparse	iVar48	yylen	INFERRED	bison yylen = yyr2[yyn]: the length of the rule being reduced (number of value-stack entries popped)	^\s*iVar48\ =\ \(int\)\*\(short\ \*\)\(\&_yyr2\ \+\ local_6c\);$	+2
+use	yyparse	iVar48	yylen	INFERRED	bison yylen = yyr2[yyn]: the length of the rule being reduced (number of value-stack entries popped)	^\s*_memcpy\(\&local_880,pTVar56\ \+\ \(1\ \-\ iVar48\)\ \*\ 0x2c,0x2c\);$	+1
+use	yyparse	iVar48	yylen	INFERRED	bison yylen = yyr2[yyn]: the length of the rule being reduced (number of value-stack entries popped)	^\s*pTVar46\ =\ pTVar46\ \+\ iVar48\ \*\ \-2;$	+2

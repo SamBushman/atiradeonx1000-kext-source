@@ -8,7 +8,6 @@ local	_PPParserParseOperation	bVar1	hasDestination	INFERRED	the instruction writ
 local	_PPParserParseOperation	bVar2	addressDestination	INFERRED	destination is an address register (ARL/ARR/ARA)
 local	_PPParserParseOperation	bVar3	requireScalarSwizzle	INFERRED	source must be a scalar (single-component swizzle): checked after the source is parsed
 local	_PPParserParseOperation	iVar4	status	INFERRED	parser status code from the operand parsers (0 ok)
-local	_PPParserParseOperation	iVar5	resultOrLastOp	INFERRED	final status code, or the last pp-stream operation chunk
 local	_PPParserParseOperation	uVar7	sourceCount	INFERRED	number of source operands the opcode takes
 local	_PPParserParseOperation	puVar6	sourceTarget	INFERRED	destination record of the texture-source parse (opAuxA or opSrc1A)
 local	_PPParserParseOperation	puVar8	sourceCursor	INFERRED	walks the source operand records (2 words each)

@@ -136,7 +136,7 @@ int _byte_scan(unusedArg1, token, scratchR5, scratchR6, scratchR7, scratchR8)
   int loopIndex;
   bool overflowReported;
   char digitChar;
-  int charOrTokenCode;
+  int inputChar;
   int currentChar;
   undefined4 r4Out0;
   undefined4 r4Out1;
@@ -165,22 +165,22 @@ int _byte_scan(unusedArg1, token, scratchR5, scratchR6, scratchR7, scratchR8)
   cppContext = *(int *)PTR__cpp_a7b7c0a4;
 LAB_97b88f18:
   *token = 0;
-  charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-  while (((charOrTokenCode == 0x20 || (charOrTokenCode == 9)) || (charOrTokenCode == 0xd))) {
+  inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+  while (((inputChar == 0x20 || (inputChar == 9)) || (inputChar == 0xd))) {
     *token = 1;
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
   }
-  if (charOrTokenCode != -1) {
+  if (inputChar != -1) {
     *(undefined2 *)(cppContext + 0x30) = *(undefined2 *)(*(int *)(cppContext + 0x20) + 0x12);
     *(undefined2 *)(cppContext + 0x32) = *(undefined2 *)(*(int *)(cppContext + 0x20) + 0x16);
   }
   lexemeLength = 0;
-  if (0x7d < charOrTokenCode + 1U) {
+  if (0x7d < inputChar + 1U) {
 LAB_97b89cb4:
-    return charOrTokenCode;
+    return inputChar;
   }
-  digitValue = (charOrTokenCode + 1U) * 4;
-  switch(charOrTokenCode) {
+  digitValue = (inputChar + 1U) * 4;
+  switch(inputChar) {
   case 0:
   case 1:
   case 2:
@@ -230,92 +230,92 @@ LAB_97b89cb4:
   case 0x7b:
     goto LAB_97b89cb4;
   case 0x21:
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    if (charOrTokenCode != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (inputChar != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
       return 0x21;
     }
     return 0x113;
   case 0x22:
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    overflowReported = charOrTokenCode == 0x22;
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    overflowReported = inputChar == 0x22;
     scratchR4 = r4Out9;
-    if (((overflowReported) || (charOrTokenCode == 10)) || (charOrTokenCode == -1)) goto LAB_97b89c74;
+    if (((overflowReported) || (inputChar == 10)) || (inputChar == -1)) goto LAB_97b89c74;
     lexemeCursor = stringLiteralText;
     goto LAB_97b89bf4;
   case 0x25:
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    if (charOrTokenCode == 0x3d) {
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (inputChar == 0x3d) {
       return 0x104;
     }
-    if (charOrTokenCode != 0x3e) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    if (inputChar != 0x3e) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
       return 0x25;
     }
     return 0x120;
   case 0x26:
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    if (charOrTokenCode == 0x26) {
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (inputChar == 0x26) {
       return 0x101;
     }
-    if (charOrTokenCode != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    if (inputChar != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
       return 0x26;
     }
     return 0x11a;
   case 0x2a:
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    if (charOrTokenCode != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (inputChar != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
       return 0x2a;
     }
     return 0x107;
   case 0x2b:
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    if (charOrTokenCode == 0x2b) {
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (inputChar == 0x2b) {
       return 0x115;
     }
-    if (charOrTokenCode != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    if (inputChar != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
       return 0x2b;
     }
     return 0x105;
   case 0x2d:
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    if (charOrTokenCode == 0x2d) {
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (inputChar == 0x2d) {
       return 0x112;
     }
-    if (charOrTokenCode != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    if (inputChar != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
       return 0x2d;
     }
     return 0x103;
   case 0x2e:
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    if (9 < charOrTokenCode - 0x30U) {
-      if (charOrTokenCode != 0x2e) {
-        (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (9 < inputChar - 0x30U) {
+      if (inputChar != 0x2e) {
+        (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
         return 0x2e;
       }
       return -1;
     }
-    (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
     lexemeLength = 0;
     currentChar = 0x2e;
     goto LAB_97b89a54;
   case 0x2f:
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    if (charOrTokenCode != 0x2f) break;
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (inputChar != 0x2f) break;
     do {
-      charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-      if (charOrTokenCode == 10) {
+      inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+      if (inputChar == 10) {
         return 10;
       }
-    } while (charOrTokenCode != -1);
+    } while (inputChar != -1);
 switchD_97b88fcc_caseD_ffffffff:
     return -1;
   case 0x30:
-    *(char *)(token + 3) = (char)charOrTokenCode;
+    *(char *)(token + 3) = (char)inputChar;
     lexemeLength = 1;
     currentChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
     if ((currentChar == 0x78) || (currentChar == 0x58)) {
@@ -388,11 +388,11 @@ LAB_97b89458:
       *token = constantValue;
       return 0x10f;
     }
-    charOrTokenCode = 0x30;
+    inputChar = 0x30;
     (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),currentChar,token);
 switchD_97b88fcc_caseD_31:
     lexemeCursor = (undefined1 *)((int)token + lexemeLength + 0xc);
-    currentChar = charOrTokenCode;
+    currentChar = inputChar;
     do {
       if (lexemeLength < 0x80) {
         if ((0 < lexemeLength) || (currentChar != 0x30)) {
@@ -448,52 +448,52 @@ LAB_97b89a54:
   case 0x39:
     goto switchD_97b88fcc_caseD_31;
   case 0x3a:
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    if (charOrTokenCode != 0x3e) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (inputChar != 0x3e) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
       return 0x3a;
     }
     return 0x11e;
   case 0x3c:
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    if (charOrTokenCode == 0x3c) {
-      charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-      if (charOrTokenCode != 0x3d) {
-        (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (inputChar == 0x3c) {
+      inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+      if (inputChar != 0x3d) {
+        (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
         return 0x111;
       }
       return 0x119;
     }
-    if (charOrTokenCode == 0x3d) {
+    if (inputChar == 0x3d) {
       return 0x110;
     }
-    if (charOrTokenCode == 0x25) {
+    if (inputChar == 0x25) {
       return 0x11f;
     }
-    if (charOrTokenCode != 0x3a) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    if (inputChar != 0x3a) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
       return 0x3c;
     }
     return 0x11d;
   case 0x3d:
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    if (charOrTokenCode != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (inputChar != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
       return 0x3d;
     }
     return 0x108;
   case 0x3e:
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    if (charOrTokenCode != 0x3e) {
-      if (charOrTokenCode != 0x3d) {
-        (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (inputChar != 0x3e) {
+      if (inputChar != 0x3d) {
+        (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
         return 0x3e;
       }
       return 0x10c;
     }
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    if (charOrTokenCode != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (inputChar != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
       return 0x10d;
     }
     return 0x118;
@@ -501,48 +501,48 @@ LAB_97b89a54:
     overflowReported = false;
     do {
       if (!overflowReported) {
-        identifierText[lexemeLength] = (char)charOrTokenCode;
+        identifierText[lexemeLength] = (char)inputChar;
         lexemeLength = lexemeLength + 1;
         overflowReported = 0x7f < lexemeLength;
       }
-      charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))
+      inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))
                         (*(int *)(cppContext + 0x20),token,scratchR5,scratchR6,scratchR7,scratchR8,digitValue);
-    } while (((charOrTokenCode - 0x61U < 0x1a) || (charOrTokenCode - 0x41U < 0x1a)) ||
-            ((charOrTokenCode - 0x30U < 10 || (charOrTokenCode == 0x5f))));
+    } while (((inputChar - 0x61U < 0x1a) || (inputChar - 0x41U < 0x1a)) ||
+            ((inputChar - 0x30U < 10 || (inputChar == 0x5f))));
     if (overflowReported) {
       lexemeLength = 0x7f;
     }
     identifierText[lexemeLength] = 0;
-    (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
     lookUpAddStringResult = _LookUpAddString(*(undefined4 *)PTR__atable_a7b7c0ac,identifierText);
     token[2] = lookUpAddStringResult;
     return 0x10e;
   case 0x5e:
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    if (charOrTokenCode == 0x5e) {
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (inputChar == 0x5e) {
       return 0x109;
     }
-    if (charOrTokenCode != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    if (inputChar != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
       return 0x5e;
     }
     return 0x11c;
   case 0x7c:
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    if (charOrTokenCode == 0x7c) {
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    if (inputChar == 0x7c) {
       return 0x114;
     }
-    if (charOrTokenCode != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+    if (inputChar != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
       return 0x7c;
     }
     return 0x11b;
   case -1:
     goto switchD_97b88fcc_caseD_ffffffff;
   }
-  if (charOrTokenCode != 0x2a) {
-    if (charOrTokenCode != 0x3d) {
-      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),charOrTokenCode,token);
+  if (inputChar != 0x2a) {
+    if (inputChar != 0x3d) {
+      (**(code **)(*(int *)(cppContext + 0x20) + 0xc))(*(int *)(cppContext + 0x20),inputChar,token);
       return 0x2f;
     }
     return 0x106;
@@ -572,11 +572,11 @@ LAB_97b89b60:
   }
   goto LAB_97b88f18;
 LAB_97b89bf4:
-  if (charOrTokenCode == 0x5c) {
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
-    overflowReported = charOrTokenCode == 0x22;
+  if (inputChar == 0x5c) {
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    overflowReported = inputChar == 0x22;
     scratchR4 = r4Out10;
-    if ((charOrTokenCode == 10) || (charOrTokenCode == -1)) {
+    if ((inputChar == 10) || (inputChar == -1)) {
 LAB_97b89c74:
       stringLiteralText[lexemeLength] = 0;
       if (!overflowReported) {
@@ -589,14 +589,14 @@ LAB_97b89c74:
     }
   }
   if (lexemeLength < 0x200) {
-    *lexemeCursor = (char)charOrTokenCode;
+    *lexemeCursor = (char)inputChar;
     lexemeLength = lexemeLength + 1;
     lexemeCursor = lexemeCursor + 1;
-    charOrTokenCode = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
+    inputChar = (**(code **)(*(int *)(cppContext + 0x20) + 8))(*(int *)(cppContext + 0x20),token);
     scratchR4 = r4Out11;
   }
-  overflowReported = charOrTokenCode == 0x22;
-  if (((overflowReported) || (charOrTokenCode == 10)) || (charOrTokenCode == -1)) goto LAB_97b89c74;
+  overflowReported = inputChar == 0x22;
+  if (((overflowReported) || (inputChar == 10)) || (inputChar == -1)) goto LAB_97b89c74;
   goto LAB_97b89bf4;
 }
 
@@ -3758,6 +3758,13 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   unsigned char * type;
   int *intermTyped;
 {
+  int constantInt;
+  int conversionOp;
+  int newConstantNode;
+  int constantUnionNode;
+  int sequenceVector;
+  int intermAggregate;
+  int targetIsArray;
   uint matrixBit;
   uint basicTypeBits;
   undefined4 line;
@@ -3768,12 +3775,12 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   undefined **refCountPtr;
   undefined *intermUnaryVtable;
   uint oldTypeBits;
-  int sourceBasicTypeOrSequence;
+  int sourceBasicType;
   uint targetBasicType;
   int *typedNodeTemp;
   unsigned char * poolAllocator;
   unsigned char * convertedValue;
-  int constantUnionOrNewNode;
+  int childConstantUnion;
   int *nodeTemp;
   undefined4 constantUnion;
   uint isMatrix;
@@ -3814,11 +3821,11 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   
   fwdR5 = type;
   nodeTemp = intermTyped;
-  sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x40))(intermTyped,op,type,intermTyped);
-  if (sourceBasicTypeOrSequence == 0) {
+  sourceBasicType = (**(code **)(*intermTyped + 0x40))(intermTyped,op,type,intermTyped);
+  if (sourceBasicType == 0) {
     return (int *)0x0;
   }
-  if ((-1 < sourceBasicTypeOrSequence) && (sourceBasicTypeOrSequence - 5U < 8)) {
+  if ((-1 < sourceBasicType) && (sourceBasicType - 5U < 8)) {
     return (int *)0x0;
   }
   (**(code **)(*intermTyped + 0x38))(&stackType,intermTyped);
@@ -3839,8 +3846,8 @@ int TIntermediate__addConversion(this, op, type, intermTyped)
   if (stackTypeStructure != 0) {
     return (int *)0x0;
   }
-  sourceBasicTypeOrSequence = (**(code **)(*(int *)type + 0x38))(type);
-  if (sourceBasicTypeOrSequence != 0) {
+  targetIsArray = (**(code **)(*(int *)type + 0x38))(type);
+  if (targetIsArray != 0) {
     return (int *)0x0;
   }
   (**(code **)(*intermTyped + 0x38))((unsigned char *)&stackType,intermTyped);
@@ -3868,16 +3875,16 @@ LAB_97b8e794:
     targetBasicType = 1;
   }
   isAggregateOnly = true;
-  sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x1c))(intermTyped);
-  if (sourceBasicTypeOrSequence == 0) {
+  intermAggregate = (**(code **)(*intermTyped + 0x1c))(intermTyped);
+  if (intermAggregate == 0) {
 LAB_97b8e8ac:
-    sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x1c))(intermTyped);
-    if (sourceBasicTypeOrSequence != 0) {
+    intermAggregate = (**(code **)(*intermTyped + 0x1c))(intermTyped);
+    if (intermAggregate != 0) {
       typedNodeTemp = (int *)(**(code **)(*intermTyped + 0x1c))(intermTyped);
-      sourceBasicTypeOrSequence = (**(code **)(*typedNodeTemp + 100))(typedNodeTemp);
-      sequenceCursor = *(unsigned char **)(sourceBasicTypeOrSequence + 4);
+      sequenceVector = (**(code **)(*typedNodeTemp + 100))(typedNodeTemp);
+      sequenceCursor = *(unsigned char **)(sequenceVector + 4);
       while( true ) {
-        if (sequenceCursor == *(unsigned char **)(sourceBasicTypeOrSequence + 8)) {
+        if (sequenceCursor == *(unsigned char **)(sequenceVector + 8)) {
           nodeTemp = (int *)(**(code **)(*intermTyped + 0x1c))(intermTyped);
           return nodeTemp;
         }
@@ -3890,9 +3897,9 @@ LAB_97b8e8ac:
         stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
         if (childBasicType == 1) {
           nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
-          constantUnionOrNewNode = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
-          d2iScratch = (longlong)(int)**(float **)(constantUnionOrNewNode + 0x30);
-          *(int *)convertedValue = (int)**(float **)(constantUnionOrNewNode + 0x30);
+          childConstantUnion = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
+          d2iScratch = (longlong)(int)**(float **)(childConstantUnion + 0x30);
+          *(int *)convertedValue = (int)**(float **)(childConstantUnion + 0x30);
 LAB_97b8ec88:
           stackTypeBits = targetBasicType << 0x13 | stackTypeBits & 0x7ff | 0x4000000 | 0x800;
         }
@@ -3905,8 +3912,8 @@ LAB_97b8ec88:
             goto override_jmp_97b8ea8c_case_0;
           }
           nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
-          constantUnionOrNewNode = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
-          constValueScratch = *(undefined4 **)(constantUnionOrNewNode + 0x30);
+          childConstantUnion = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
+          constValueScratch = *(undefined4 **)(childConstantUnion + 0x30);
           *(undefined4 *)convertedValue = *constValueScratch;
 LAB_97b8ecd8:
           stackTypeBits = targetBasicType << 0x13 | stackTypeBits & 0xfff | 0x4000000 | 0x800;
@@ -3924,15 +3931,15 @@ LAB_97b8ed90:
         stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
         nodeTemp = (int *)(**(code **)*intermTyped)(intermTyped);
         fwdR5 = (unsigned char *)&stackType;
-        constantUnionOrNewNode = ((int (*)())TIntermediate__addConstantUnion)(this,convertedValue,(unsigned char *)&stackType,(int)nodeTemp);
+        newConstantNode = ((int (*)())TIntermediate__addConstantUnion)(this,convertedValue,(unsigned char *)&stackType,(int)nodeTemp);
         stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        if (constantUnionOrNewNode != 0) {
-          std__vector_TIntermNode__pool_allocator_TIntermNode_____erase(eraseResultSlot,sourceBasicTypeOrSequence,sequenceCursor);
+        if (newConstantNode != 0) {
+          std__vector_TIntermNode__pool_allocator_TIntermNode_____erase(eraseResultSlot,sequenceVector,sequenceCursor);
           nodeTemp = &newNodeSlot;
           fwdR5 = sequenceCursor;
-          newNodeSlot = constantUnionOrNewNode;
+          newNodeSlot = newConstantNode;
           std__vector_TIntermNode__pool_allocator_TIntermNode_____insert
-                    (eraseResultSlot,sourceBasicTypeOrSequence,sequenceCursor,nodeTemp);
+                    (eraseResultSlot,sequenceVector,sequenceCursor,nodeTemp);
         }
         sequenceCursor = sequenceCursor + 4;
       }
@@ -3944,8 +3951,8 @@ LAB_97b8ed90:
           stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
           if (childBasicType == 2) {
             nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
-            constantUnionOrNewNode = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
-            constValueScratch = (undefined4 *)(**(uint **)(constantUnionOrNewNode + 0x30) ^ 0x80000000);
+            childConstantUnion = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
+            constValueScratch = (undefined4 *)(**(uint **)(childConstantUnion + 0x30) ^ 0x80000000);
             *(float *)convertedValue = (float)((double)CONCAT44(0x43300000,constValueScratch) - 4503601774854144.0);
           }
           else {
@@ -3958,8 +3965,8 @@ LAB_97b8ed90:
             }
             nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))
                                        (*(int **)sequenceCursor,opCopy,fwdR5,nodeTemp,scratchR7,scratchR8,constValueScratch);
-            constantUnionOrNewNode = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
-            constValueScratch = (undefined4 *)**(undefined4 **)(constantUnionOrNewNode + 0x30);
+            childConstantUnion = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
+            constValueScratch = (undefined4 *)**(undefined4 **)(childConstantUnion + 0x30);
             *(float *)convertedValue = (float)((double)CONCAT44(0x43300000,constValueScratch) - 4503599627370496.0);
           }
           i2dHi = 0x43300000;
@@ -3975,16 +3982,16 @@ LAB_97b8ed90:
         stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
         if (childBasicType == 1) {
           nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
-          constantUnionOrNewNode = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
-          *(uint *)convertedValue = (uint)(**(float **)(constantUnionOrNewNode + 0x30) != 0.0);
+          childConstantUnion = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
+          *(uint *)convertedValue = (uint)(**(float **)(childConstantUnion + 0x30) != 0.0);
           goto LAB_97b8ec88;
         }
         if (childBasicType == 2) {
           nodeTemp = (int *)(**(code **)(**(int **)sequenceCursor + 0x14))(*(int **)sequenceCursor);
-          constantUnionOrNewNode = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
-          constantUnionOrNewNode = **(int **)(constantUnionOrNewNode + 0x30);
-          constValueScratch = (undefined4 *)(constantUnionOrNewNode + -1);
-          *(uint *)convertedValue = constantUnionOrNewNode - ((int)constValueScratch + (uint)(constantUnionOrNewNode == 0));
+          childConstantUnion = (**(code **)(*nodeTemp + 0x18))(nodeTemp);
+          constantInt = **(int **)(childConstantUnion + 0x30);
+          constValueScratch = (undefined4 *)(constantInt + -1);
+          *(uint *)convertedValue = constantInt - ((int)constValueScratch + (uint)(constantInt == 0));
           goto LAB_97b8ecd8;
         }
         infoSink = *(void **)this;
@@ -4001,26 +4008,26 @@ LAB_97b8ed90:
     }
   }
   else {
-    sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x1c))(intermTyped);
-    if (*(int *)(sourceBasicTypeOrSequence + 0x30) == 2) {
+    intermAggregate = (**(code **)(*intermTyped + 0x1c))(intermTyped);
+    if (*(int *)(intermAggregate + 0x30) == 2) {
       isAggregateOnly = false;
     }
     else {
       typedNodeTemp = (int *)(**(code **)(*intermTyped + 0x1c))(intermTyped);
-      sourceBasicTypeOrSequence = (**(code **)(*typedNodeTemp + 100))(typedNodeTemp);
-      for (childCursor = *(undefined4 **)(sourceBasicTypeOrSequence + 4); childCursor != *(undefined4 **)(sourceBasicTypeOrSequence + 8);
+      sequenceVector = (**(code **)(*typedNodeTemp + 100))(typedNodeTemp);
+      for (childCursor = *(undefined4 **)(sequenceVector + 4); childCursor != *(undefined4 **)(sequenceVector + 8);
           childCursor = childCursor + 1) {
         typedNodeTemp = (int *)(**(code **)(*(int *)*childCursor + 0x14))((int *)*childCursor);
-        constantUnionOrNewNode = (**(code **)(*typedNodeTemp + 0x18))(typedNodeTemp);
-        if (constantUnionOrNewNode == 0) {
+        childConstantUnion = (**(code **)(*typedNodeTemp + 0x18))(typedNodeTemp);
+        if (childConstantUnion == 0) {
           isAggregateOnly = false;
         }
       }
     }
     if (isAggregateOnly) goto LAB_97b8e8ac;
   }
-  sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x18))(intermTyped);
-  if (sourceBasicTypeOrSequence != 0) {
+  constantUnionNode = (**(code **)(*intermTyped + 0x18))(intermTyped);
+  if (constantUnionNode != 0) {
     constantUnion = (**(code **)(*intermTyped + 0x18))(intermTyped);
     nodeTemp = (int *)TIntermediate__promoteConstantUnion(this,targetBasicType,constantUnion);
     return nodeTemp;
@@ -4028,14 +4035,14 @@ LAB_97b8ed90:
   if (targetBasicType != 2) {
     if (targetBasicType < 3) {
       if (targetBasicType == 1) {
-        sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x40))(intermTyped);
+        sourceBasicType = (**(code **)(*intermTyped + 0x40))(intermTyped);
         scratchR4 = r4Out0;
-        if (sourceBasicTypeOrSequence == 2) {
-          constantUnionOrNewNode = 0x10;
+        if (sourceBasicType == 2) {
+          conversionOp = 0x10;
         }
         else {
-          constantUnionOrNewNode = 0xf;
-          if (sourceBasicTypeOrSequence != 3) {
+          conversionOp = 0xf;
+          if (sourceBasicType != 3) {
             infoSink = *(void **)this;
             errorText = "Bad promotion node";
             targetBasicType = (**(code **)*intermTyped)(intermTyped);
@@ -4047,14 +4054,14 @@ LAB_97b8ed90:
       }
     }
     else if (targetBasicType == 3) {
-      sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x40))(intermTyped);
+      sourceBasicType = (**(code **)(*intermTyped + 0x40))(intermTyped);
       scratchR4 = r4Out1;
-      if (sourceBasicTypeOrSequence == 1) {
-        constantUnionOrNewNode = 0xe;
+      if (sourceBasicType == 1) {
+        conversionOp = 0xe;
       }
       else {
-        constantUnionOrNewNode = 0xd;
-        if (sourceBasicTypeOrSequence != 2) {
+        conversionOp = 0xd;
+        if (sourceBasicType != 2) {
           infoSink = *(void **)this;
           errorText = "Bad promotion node";
           targetBasicType = (**(code **)*intermTyped)(intermTyped);
@@ -4098,14 +4105,14 @@ override_jmp_97b8ea8c_case_0:
     ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,"\n");
     return (int *)0x0;
   }
-  sourceBasicTypeOrSequence = (**(code **)(*intermTyped + 0x40))(intermTyped);
+  sourceBasicType = (**(code **)(*intermTyped + 0x40))(intermTyped);
   scratchR4 = r4Out2;
-  if (sourceBasicTypeOrSequence == 1) {
-    constantUnionOrNewNode = 0x11;
+  if (sourceBasicType == 1) {
+    conversionOp = 0x11;
   }
   else {
-    constantUnionOrNewNode = 0x12;
-    if (sourceBasicTypeOrSequence != 3) {
+    conversionOp = 0x12;
+    if (sourceBasicType != 3) {
       infoSink = *(void **)this;
       errorText = "Bad promotion node";
       targetBasicType = (**(code **)*intermTyped)(intermTyped);
@@ -4152,7 +4159,7 @@ LAB_97b8f1ac:
   matrixBit = (stackTypeBits >> 10 & 1) << 10;
   nodeTemp[0xb] = matrixBit | targetBasicType | basicTypeBits | childBasicType | oldTypeBits & 0x3ff;
   nodeTemp[0xb] = (stackTypeBits >> 9 & 1) << 9 | matrixBit | targetBasicType | basicTypeBits | childBasicType | oldTypeBits & 0x1ff;
-  nodeTemp[0xc] = constantUnionOrNewNode;
+  nodeTemp[0xc] = conversionOp;
   *nodeTemp = (int)(intermUnaryVtable + 8);
   nodeTemp[0xd] = 0;
   line = (**(code **)*intermTyped)(intermTyped);

@@ -372,7 +372,6 @@ use	TPPStreamCompiler__getOperandAsSourceVar	uVar5	leftoverArg7	INFERRED	registe
 use	TPPStreamCompiler__getOperandAsSourceVar	uVar5	leftoverArg7	INFERRED	register value left over from an earlier call, forwarded unchanged as an extra argument	^\s*error\(param_2,\(char\ \*\)0x1,\(char\ \*\)0x0,DAT_a7b7bd14,param_5,param_6,uVar5,param_8\);$	+1
 local	TPPStreamCompiler__copyPropagateCompilerTemp	puVar20	scratchPtrOrWord	INFERRED	register temp reused for the move destination w-mask bit, the move source stream type, move source word 0 and the pending-mask cursor (one def-use web, so the gate does not allow a split)
 local	TPPStreamCompiler__copyPropagateCompilerTemp	uVar19	streamOrLeftover	INFERRED	compiler +0x70 stream pointer, later reused as a leftover register value passed to the warning call (one web)
-local	TPPStreamCompiler__parseIntermediateTree	iVar1	queueSizeOrEmptyFlag	INFERRED	size() of the label queue while it is drained, then the ParseFunctionStack empty flag
 local	_PPCRuntimeCompilerCompileNO	puVar21	currentInst	CONFIRMED	instruction record at compiler+0xe28 (opcode word 0, saturate byte at +4, dest base index +0x1c, dest register record +0xc, sources from +0x34 in 0x24-byte records)
 local	_PPCRuntimeCompilerCompileNO	uVar18	opcode	CONFIRMED	instruction opcode, word 0 of the instruction record; selects the op chunk in the switch
 local	_PPCRuntimeCompilerCompileNO	cVar1	saturate	CONFIRMED	saturate flag byte at instruction+4; emits _glpOpSaturateRTC after the op

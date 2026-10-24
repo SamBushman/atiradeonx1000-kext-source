@@ -91,11 +91,8 @@ local	yyparse	local_84c	typeTmp1ArraySizeOrStr1Data	INFERRED	frame area A: TType
 local	yyparse	local_848	typeTmp1StructureOrPubSize	INFERRED	frame area A: TType temporary #1 structure (+8) / size of the TPublicType copy at 0x850
 local	yyparse	local_844	typeTmp1Word0cOrPubMatrix	INFERRED	frame area A: TType temporary #1 word +0xc / matrix flag of the TPublicType copy at 0x850
 local	yyparse	local_840	typeTmp1TypeNameOrStr2Alloc	INFERRED	frame area A: TType temporary #1 typeName (+0x10) / allocator word of the left operand's complete-type string
-local	yyparse	local_83c	typeTmp1Word14OrStr2Data	INFERRED	frame area A: TType temporary #1 word +0x14 / data pointer of the left operand's complete-type string
-local	yyparse	local_838	typeTmp1Word18OrPubLine	INFERRED	frame area A: TType temporary #1 word +0x18 / line of the TPublicType copy at 0x850
 local	yyparse	local_834	typeTmp1MaxArraySize	INFERRED	frame area A: TType temporary #1 maxArraySize (+0x1c)
 local	yyparse	local_830	typeTmp1Word20OrPubType	INFERRED	frame area A: TType temporary #1 word +0x20 / basic type of the TPublicType at 0x830
-local	yyparse	local_82c	typeTmp1BitsOrPubQualifier	INFERRED	frame area A: TType temporary #1 bit-field word (+0x24: qualifier, basic type, size, matrix, array) / qualifier of the TPublicType at 0x830
 local	yyparse	local_828	pubSize	INFERRED	size of the TPublicType at 0x830 (stack temporary used by the type_specifier rules)
 local	yyparse	local_824	pubMatrix	INFERRED	matrix flag of the TPublicType at 0x830
 local	yyparse	local_820	typeTmp2VtableOrPubArray	INFERRED	frame area B (0x820..0x7fc): TType temporary #2 vtable / array flag of the TPublicType at 0x830 / basic type of the TPublicType copy at 0x820

@@ -8,7 +8,6 @@ local	yyparse	pTVar41	yystacksize	CONFIRMED	bison skeleton: starts at 200 (YYINI
 local	yyparse	local_60	yyssBytes	INFERRED	yystacksize * sizeof(short): the size passed to the alloca/memcpy of the state stack
 local	yyparse	iVar43	yyerrstatus	CONFIRMED	bison skeleton: 0, set to 3 after an error, decremented per shifted token
 local	yyparse	iVar44	yychar	CONFIRMED	bison skeleton: lookahead token, -2 (YYEMPTY) until yylex is called
-local	yyparse	iVar48	yystateOrYylen	INFERRED	the state number (indexes yypact/yydefact) and, after a reduce, yylen = yyr2[yyn]; gcc shared one register
 local	yyparse	sVar1	yypactEntry	CONFIRMED	yypact[yystate]; -0x8000 (YYFLAG) means default reduction
 local	yyparse	aYStack_8b0	yylval	CONFIRMED	target of yylex(&yylval, ...) and memcpy-ed to the new yyvsp slot
 local	yyparse	local_880	yyval	CONFIRMED	default $$ copy of the 0x2c-byte value at yyvsp[1-yylen]; assigned by every reduction action

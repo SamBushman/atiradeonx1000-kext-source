@@ -1,5 +1,4 @@
 local	_byte_scan	param_2	token	INFERRED	token record being filled: [0] = whitespace-before flag, text from +0xc (digits / hex prefix), integer value; line/column copied from the input stream into cppContext+0x30/+0x32
-local	_byte_scan	iVar3	charOrTokenCode	CONFIRMED	input character read through the cpp input stream (cppContext+0x20, vtable slot 2 = get char, slot 3 = unget char); returned unchanged for single-character tokens and replaced by the multi-character token codes (0x101 &&, 0x113 !=, 0x115 ++, 0x112 --, ...)
 local	_byte_scan	iVar10	lexemeLength	INFERRED	number of characters of the current lexeme (identifier / number / string) copied so far
 local	_byte_scan	uVar6	digitValue	INFERRED	numeric value of the current digit character (c - 0x30, c - 0x37, c - 0x57)
 local	_byte_scan	bVar1	overflowReported	CONFIRMED	set after ERROR___HEX_CONST_OVERFLOW / ERROR___INTEGER_CONST_OVERFLOW has been logged once
@@ -16,8 +15,6 @@ local	_PPParserParseParamBinding	local_80	bindingWord	CONFIRMED	first word of th
 local	_PPParserParseParamBinding	local_7c	bindingOrdinalWord	INFERRED	second word of that record: parser parameter ordinal (parser+0x20) in the low 16 bits
 local	_PPParserParseParamBinding	local_40	arrayStart	CONFIRMED	first index written by _PPParserParseArray / _PPParserParseRangeArray (env[N], local[N], light[N] or a range)
 local	_PPParserParseParamBinding	local_3c	arrayEnd	CONFIRMED	last index of the parsed range (element 0)
-local	_PPParserParseParamBinding	uVar3	programTypeOrIndex	INFERRED	parser+0x48c (program type) at entry; reused as the running array index while adding bindings
 local	_PPParserParseParamBinding	uVar6	ppStream	CONFIRMED	parser+0x1c: the PPStream receiving bindings and constants (_PPStreamAddConstant(ppStream, ...))
-local	_PPParserParseParamBinding	iVar5	parseResultOrBindingClass	INFERRED	result of _PPParserParseArray / ParseRangeArray (error code), later the state-binding class number (4..0xe) or-ed into the binding word
 local	_PPParserParseParamBinding	puVar8	constantValues	CONFIRMED	pointer to the parsed literal scalars passed to _PPStreamAddConstant (local_60 for four values, local_50 for one replicated)
 local	_PPParserParseParamBinding	cVar4	savedChar	INFERRED	saved first character of partText while re-reading the next part

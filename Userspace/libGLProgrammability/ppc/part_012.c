@@ -2786,7 +2786,7 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
   undefined4 leftoverR7;
   undefined4 leftoverR8;
   unsigned char *destOperand;
-  uint fieldNameLengthOrConst;
+  uint scratchR9;
   uint fieldCount;
   uint fieldIndex;
   int argIndex;
@@ -2817,16 +2817,16 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
         fieldsBegin = *(int *)(structFieldList + 4);
         fieldCount = *(int *)(structFieldList + 8) - fieldsBegin >> 3;
         if (fieldCount != 0) {
-          fieldNameLengthOrConst = 0xa7b7736c;
+          scratchR9 = 0xa7b7736c;
           noParentName = parentName == 0;
           terminatorGlobalBase = -0x58488c94;
           argCursor = argOperands;
           remainingArgs = argCount;
           while( true ) {
             fieldType = *(int **)(fieldsBegin + fieldIndex * 8);
-            fieldNameString = (**(code **)(*fieldType + 0x1c))(fieldType,destOperandPtr,argCursor,remainingArgs,leftoverR7,leftoverR8,fieldNameLengthOrConst);
-            fieldNameLengthOrConst = *(uint *)(*(int *)(fieldNameString + 4) + -0xc);
-            *(undefined1 *)(*(int *)(fieldNameString + 4) + fieldNameLengthOrConst) = **(undefined1 **)(terminatorGlobalBase + 0x4a30);
+            fieldNameString = (**(code **)(*fieldType + 0x1c))(fieldType,destOperandPtr,argCursor,remainingArgs,leftoverR7,leftoverR8,scratchR9);
+            scratchR9 = *(uint *)(*(int *)(fieldNameString + 4) + -0xc);
+            *(undefined1 *)(*(int *)(fieldNameString + 4) + scratchR9) = **(undefined1 **)(terminatorGlobalBase + 0x4a30);
             fieldNameChars = *(uint *)(fieldNameString + 4);
             length = _strlen(fieldNameChars);
             nameBufferSize = length + 1;
@@ -2866,7 +2866,7 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
                     do {
                       fieldType = *(int **)(*(int *)(argStructFieldList + 4) + argFieldIndex * 8);
                       argFieldNameString = (**(code **)(*fieldType + 0x1c))(fieldType);
-                      fieldNameLengthOrConst = (uint)*DAT_a7b7bd9c;
+                      scratchR9 = (uint)*DAT_a7b7bd9c;
                       *(byte *)(*(int *)(argFieldNameString + 4) + *(int *)(*(int *)(argFieldNameString + 4) + -0xc)) =
                            *DAT_a7b7bd9c;
                       argFieldNameChars = *(undefined4 *)(argFieldNameString + 4);
@@ -4328,11 +4328,12 @@ int TPPStreamCompiler__parseIntermediateTree(this, root)
   unsigned char * this;
   unsigned char * root;
 {
+  int functionStackEmpty;
   void *rootOperand;
   void *oldAddressTempAllocator;
   void *position;
   void *allocation;
-  int queueSizeOrEmptyFlag;
+  int labelQueueSize;
   undefined4 leftoverR5;
   undefined4 leftoverR6;
   undefined4 leftoverR7;
@@ -4369,14 +4370,14 @@ int TPPStreamCompiler__parseIntermediateTree(this, root)
     *(void **)PTR_addressTempAllocator_a7b7c0f8 = allocation;
     labelQueue = (unsigned char *)(this + 0x4c);
     while( true ) {
-      queueSizeOrEmptyFlag = size(labelQueue);
-      if (queueSizeOrEmptyFlag == 0) break;
+      labelQueueSize = size(labelQueue);
+      if (labelQueueSize == 0) break;
       ((int (*)())fetch)(labelQueue);
     }
     newQueue(labelQueue);
     *(undefined4 *)(this + 0x98) = 0;
     ConstantAllocationList__clear((unsigned char *)(this + 0x44));
-    while (queueSizeOrEmptyFlag = ((int (*)())ParseFunctionStack__empty)((unsigned char *)(this + 0x58)), queueSizeOrEmptyFlag == 0) {
+    while (functionStackEmpty = ((int (*)())ParseFunctionStack__empty)((unsigned char *)(this + 0x58)), functionStackEmpty == 0) {
       ((int (*)())ParseFunctionStack__pop)((unsigned char *)(this + 0x58));
     }
     if (*(int *)(this + 8) == 0) {

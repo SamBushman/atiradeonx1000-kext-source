@@ -1648,7 +1648,7 @@ int _MacroExpand(atom, yylvalpp)
   undefined *cppRef;
   undefined *cppRefCopy;
   int lookUpSymbolResult;
-  undefined4 lineOrFileNumber;
+  undefined4 expansionNumber;
   undefined4 *macroInput;
   int skipToken;
   char *errorMessage;
@@ -1664,7 +1664,7 @@ int _MacroExpand(atom, yylvalpp)
   
   lookUpSymbolResult = _LookUpSymbol(_macros,atom);
   if (atom == ___LINE__Atom) {
-    lineOrFileNumber = _GetLineNumber();
+    expansionNumber = _GetLineNumber();
   }
   else {
     if (atom != ___FILE__Atom) {
@@ -1751,10 +1751,10 @@ LAB_97b881d8:
       *yylvalpp = atoiResult;
       goto LAB_97b88078;
     }
-    lineOrFileNumber = _GetStringNumber();
+    expansionNumber = _GetStringNumber();
   }
-  *yylvalpp = lineOrFileNumber;
-  _sprintf((char *)(yylvalpp + 3),"%d",lineOrFileNumber);
+  *yylvalpp = expansionNumber;
+  _sprintf((char *)(yylvalpp + 3),"%d",expansionNumber);
 LAB_97b88078:
   _UngetToken(0x10f,yylvalpp);
   return 1;
