@@ -4318,14 +4318,14 @@ int noop_172fb4()
 }
 
 /* FUN_00172fb8 @ 0x172fb8 (96 bytes) */
-int FUN_00172fb8(param_1)
-  int param_1;
+int FUN_00172fb8(valueKey)
+  int valueKey;
 {
   int iVar1;
   undefined4 uVar2;
   
-  iVar1 = (**(code **)(**(int **)(param_1 + 0xb0) + 0x54))(*(int **)(param_1 + 0xb0));
-  if ((iVar1 == 0) || (uVar2 = 1, *(int *)(*(int *)(param_1 + 0xb0) + 0xb0) != 0x2a)) {
+  iVar1 = (**(code **)(**(int **)(valueKey + 0xb0) + 0x54))(*(int **)(valueKey + 0xb0));
+  if ((iVar1 == 0) || (uVar2 = 1, *(int *)(*(int *)(valueKey + 0xb0) + 0xb0) != 0x2a)) {
     uVar2 = 0;
   }
   return uVar2;

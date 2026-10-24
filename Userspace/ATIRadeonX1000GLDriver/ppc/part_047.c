@@ -769,9 +769,9 @@ int FUN_00178024(ctx, operandIndex, param_3, param_4)
 }
 
 /* FUN_001781a4 @ 0x1781a4 (404 bytes) */
-int FUN_001781a4(param_1, param_2, param_3)
+int FUN_001781a4(param_1, valueKey, param_3)
   float *param_1;
-  int param_2;
+  int valueKey;
   undefined4 *param_3;
 {
   int instFlagBit2Result;
@@ -796,9 +796,9 @@ int FUN_001781a4(param_1, param_2, param_3)
   loopPtr = local_50;
   iVar4 = 4;
   for (loopRemaining = 1;
-      iVar2 = (**(code **)(**(int **)(param_2 + 0xb0) + 0x14))(*(int **)(param_2 + 0xb0)),
+      iVar2 = (**(code **)(**(int **)(valueKey + 0xb0) + 0x14))(*(int **)(valueKey + 0xb0)),
       loopRemaining <= iVar2; loopRemaining = loopRemaining + 1) {
-    instFlagBit2Result = OpcodeTraits__instFlagBit2(*(undefined4 *)(param_2 + 0x238),*(undefined4 *)(param_2 + 0xb0));
+    instFlagBit2Result = OpcodeTraits__instFlagBit2(*(undefined4 *)(valueKey + 0x238),*(undefined4 *)(valueKey + 0xb0));
     if (instFlagBit2Result == 0) {
       *loopPtr = 0;
     }
@@ -814,17 +814,17 @@ int FUN_001781a4(param_1, param_2, param_3)
     iVar2 = *loopPtr;
     loopPtr = loopPtr + 1;
     loopPtr2 = (undefined4 *)
-             Compiler__exprRecordForValueNumber(*(undefined4 *)(param_2 + 0x238),
-                          *(undefined4 *)((iVar4 + iVar2) * 4 + param_2 + 0x168));
+             Compiler__exprRecordForValueNumber(*(undefined4 *)(valueKey + 0x238),
+                          *(undefined4 *)((iVar4 + iVar2) * 4 + valueKey + 0x168));
     *(undefined4 *)(iVar4 + (int)local_68) = *loopPtr2;
     iVar4 = iVar4 + 4;
   }
-  loopPtr = *(int **)(*(int *)(param_2 + 0xb0) + 0x88);
-  (**(code **)(*loopPtr + 4))(loopPtr,param_1,local_68,*(undefined4 *)(param_2 + 0x238));
+  loopPtr = *(int **)(*(int *)(valueKey + 0xb0) + 0x88);
+  (**(code **)(*loopPtr + 4))(loopPtr,param_1,local_68,*(undefined4 *)(valueKey + 0x238));
   if (*param_1 != 2.1474836e+09) {
-    FUN_0010aee8(&local_38,*(undefined4 *)(param_2 + 0xb0),*param_1);
+    FUN_0010aee8(&local_38,*(undefined4 *)(valueKey + 0xb0),*param_1);
     *param_1 = local_38;
-    FUN_0010b118(local_34,*(undefined4 *)(param_2 + 0xb0),local_38);
+    FUN_0010b118(local_34,*(undefined4 *)(valueKey + 0xb0),local_38);
     if (local_34[0] != *param_1) {
       *param_3 = 1;
       *param_1 = local_34[0];

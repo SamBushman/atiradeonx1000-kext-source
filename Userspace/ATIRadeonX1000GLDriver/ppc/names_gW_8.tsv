@@ -1,0 +1,6 @@
+local	FUN_00172fb8	param_1	valueKey	INFERRED	+0xb0 is the key's instruction (Program__valueNumberInst: *(*keyRef + 0xb0) is the instruction passed to the eliminators)
+local	FUN_00174e0c	param_1	valueKey	INFERRED	[0..3] per-lane value numbers, [0x2c] (+0xb0) the instruction, [0x8e] the program; the function fills the lane value numbers
+local	FUN_00175b40	param_1	valueKey	INFERRED	+0xb0/[0x2c] is the key's instruction (13 reads)
+local	FUN_00176a94	param_2	valueKey	INFERRED	+0xb0/[0x2c] is the key's instruction
+local	FUN_00176c40	param_2	valueKey	INFERRED	+0xb0/[0x2c] is the key's instruction
+local	FUN_001781a4	param_2	valueKey	INFERRED	+0xb0/[0x2c] is the key's instruction
