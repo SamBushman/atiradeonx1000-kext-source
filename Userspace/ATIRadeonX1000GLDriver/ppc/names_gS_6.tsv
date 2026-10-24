@@ -21,7 +21,9 @@ use	FUN_000840d0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: sour
 use	FUN_000840d0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xfc000000;$	+1
 use	FUN_000840d0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf8000000;$	+1
 use	FUN_000840d0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf0000000$	+1
-use	FUN_000840d0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+4
+use	FUN_000840d0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+1
+use	FUN_000840d0	uVar1	src1SelectXBits	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11;$	+1
+use	FUN_000840d0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*\*\(uint\ \*\)\(iVar15\ \+\ 0xc\)\ =\ uVar1;$	+2
 use	FUN_000840d0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*uVar2\ =\ \(param_3\ \&\ 0x7f\)\ <<\ 0xd;$	+2
 use	FUN_000840d0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffe010ff;$	+1
 use	FUN_000840d0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar4\ \|\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffc010ff;$	+1
@@ -152,7 +154,9 @@ use	FUN_000844e0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: sour
 use	FUN_000844e0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xfc000000;$	+1
 use	FUN_000844e0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf8000000;$	+1
 use	FUN_000844e0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf0000000$	+1
-use	FUN_000844e0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+4
+use	FUN_000844e0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+1
+use	FUN_000844e0	uVar1	src1SelectXBits	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11;$	+1
+use	FUN_000844e0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*\*\(uint\ \*\)\(iVar15\ \+\ 0xc\)\ =\ uVar1;$	+2
 use	FUN_000844e0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*uVar2\ =\ \(param_3\ \&\ 0x7f\)\ <<\ 0xd;$	+2
 use	FUN_000844e0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffe010ff;$	+1
 use	FUN_000844e0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar4\ \|\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffc010ff;$	+1
@@ -283,7 +287,9 @@ use	FUN_00084710	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: sour
 use	FUN_00084710	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xfc000000;$	+1
 use	FUN_00084710	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf8000000;$	+1
 use	FUN_00084710	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf0000000$	+1
-use	FUN_00084710	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+4
+use	FUN_00084710	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+1
+use	FUN_00084710	uVar1	src1SelectXBits	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11;$	+1
+use	FUN_00084710	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*\*\(uint\ \*\)\(iVar15\ \+\ 0xc\)\ =\ uVar1;$	+2
 use	FUN_00084710	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*uVar2\ =\ \(param_3\ \&\ 0x7f\)\ <<\ 0xd;$	+2
 use	FUN_00084710	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffe010ff;$	+1
 use	FUN_00084710	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar4\ \|\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffc010ff;$	+1
@@ -414,7 +420,9 @@ use	FUN_00085180	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: sour
 use	FUN_00085180	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xfc000000;$	+1
 use	FUN_00085180	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf8000000;$	+1
 use	FUN_00085180	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf0000000$	+1
-use	FUN_00085180	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+4
+use	FUN_00085180	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+1
+use	FUN_00085180	uVar1	src1SelectXBits	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11;$	+1
+use	FUN_00085180	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*\*\(uint\ \*\)\(iVar15\ \+\ 0xc\)\ =\ uVar1;$	+2
 use	FUN_00085180	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*uVar2\ =\ \(param_3\ \&\ 0x7f\)\ <<\ 0xd;$	+2
 use	FUN_00085180	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffe010ff;$	+1
 use	FUN_00085180	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar4\ \|\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffc010ff;$	+1
@@ -545,7 +553,9 @@ use	FUN_000853b0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: sour
 use	FUN_000853b0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xfc000000;$	+1
 use	FUN_000853b0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf8000000;$	+1
 use	FUN_000853b0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf0000000$	+1
-use	FUN_000853b0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+4
+use	FUN_000853b0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+1
+use	FUN_000853b0	uVar1	src1SelectXBits	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11;$	+1
+use	FUN_000853b0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*\*\(uint\ \*\)\(iVar15\ \+\ 0xc\)\ =\ uVar1;$	+2
 use	FUN_000853b0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*uVar2\ =\ \(param_3\ \&\ 0x7f\)\ <<\ 0xd;$	+2
 use	FUN_000853b0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffe010ff;$	+1
 use	FUN_000853b0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar4\ \|\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffc010ff;$	+1
@@ -676,7 +686,9 @@ use	FUN_000855e0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: sour
 use	FUN_000855e0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xfc000000;$	+1
 use	FUN_000855e0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf8000000;$	+1
 use	FUN_000855e0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf0000000$	+1
-use	FUN_000855e0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+4
+use	FUN_000855e0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+1
+use	FUN_000855e0	uVar1	src1SelectXBits	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11;$	+1
+use	FUN_000855e0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*\*\(uint\ \*\)\(iVar15\ \+\ 0xc\)\ =\ uVar1;$	+2
 use	FUN_000855e0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*uVar2\ =\ \(param_3\ \&\ 0x7f\)\ <<\ 0xd;$	+2
 use	FUN_000855e0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffe010ff;$	+1
 use	FUN_000855e0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar4\ \|\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffc010ff;$	+1
@@ -807,7 +819,9 @@ use	FUN_00085810	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: sour
 use	FUN_00085810	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xfc000000;$	+1
 use	FUN_00085810	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf8000000;$	+1
 use	FUN_00085810	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf0000000$	+1
-use	FUN_00085810	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+4
+use	FUN_00085810	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+1
+use	FUN_00085810	uVar1	src1SelectXBits	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11;$	+1
+use	FUN_00085810	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*\*\(uint\ \*\)\(iVar15\ \+\ 0xc\)\ =\ uVar1;$	+2
 use	FUN_00085810	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*uVar2\ =\ \(param_3\ \&\ 0x7f\)\ <<\ 0xd;$	+2
 use	FUN_00085810	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffe010ff;$	+1
 use	FUN_00085810	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar4\ \|\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffc010ff;$	+1
@@ -938,7 +952,9 @@ use	FUN_000862b0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: sour
 use	FUN_000862b0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xfc000000;$	+1
 use	FUN_000862b0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf8000000;$	+1
 use	FUN_000862b0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf0000000$	+1
-use	FUN_000862b0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+4
+use	FUN_000862b0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+1
+use	FUN_000862b0	uVar1	src1SelectXBits	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11;$	+1
+use	FUN_000862b0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*\*\(uint\ \*\)\(iVar15\ \+\ 0xc\)\ =\ uVar1;$	+2
 use	FUN_000862b0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*uVar2\ =\ \(param_3\ \&\ 0x7f\)\ <<\ 0xd;$	+2
 use	FUN_000862b0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffe010ff;$	+1
 use	FUN_000862b0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar4\ \|\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffc010ff;$	+1
@@ -1069,7 +1085,9 @@ use	FUN_000864e0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: sour
 use	FUN_000864e0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xfc000000;$	+1
 use	FUN_000864e0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf8000000;$	+1
 use	FUN_000864e0	uVar1	src1SelectXBits	INFERRED	(src1Select[0] & 7) << 0xd: source 1 X swizzle field of word 2	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11\ \|\ uVar17\ \&\ 0xf0000000$	+1
-use	FUN_000864e0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+4
+use	FUN_000864e0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar1\ =\ \(param_12\[3\]\ \&\ 1\)\ <<\ 0x1c\ \|$	+1
+use	FUN_000864e0	uVar1	src1SelectXBits	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*uVar7\ \|\ uVar6\ \|\ uVar13\ \|\ uVar5\ \|\ uVar4\ \|\ uVar3\ \|\ uVar1\ \|\ uVar2\ \|\ uVar11;$	+1
+use	FUN_000864e0	uVar1	src1Word	INFERRED	the completed source-1 word (all fields OR-ed), stored to word 2 and word 3	^\s*\*\(uint\ \*\)\(iVar15\ \+\ 0xc\)\ =\ uVar1;$	+2
 use	FUN_000864e0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*uVar2\ =\ \(param_3\ \&\ 0x7f\)\ <<\ 0xd;$	+2
 use	FUN_000864e0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffe010ff;$	+1
 use	FUN_000864e0	uVar2	dstIndexBits	INFERRED	(dstIndex & 0x7f) << 0xd: destination register index field of word 0	^\s*\*\(uint\ \*\)\(iVar9\ \+\ iVar16\)\ =\ uVar4\ \|\ uVar3\ \|\ uVar2\ \|\ uVar1\ \|\ uVar13\ \&\ 0xffc010ff;$	+1

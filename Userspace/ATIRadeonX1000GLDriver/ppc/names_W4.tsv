@@ -840,7 +840,6 @@ local	FUN_000840d0	param_9	src1File	INFERRED	&0xf, low bits of word 2
 local	FUN_000840d0	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2
 local	FUN_000840d0	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2
 local	FUN_000840d0	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2
-local	FUN_000840d0	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc)
 local	FUN_000840d0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array
 local	FUN_000840d0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry
 local	FUN_000840d0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across
@@ -859,7 +858,6 @@ local	FUN_000844e0	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code
 local	FUN_000844e0	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
 local	FUN_000844e0	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
 local	FUN_000844e0	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
-local	FUN_000844e0	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
 local	FUN_000844e0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_000844e0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_000844e0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
@@ -878,7 +876,6 @@ local	FUN_00084710	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code
 local	FUN_00084710	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
 local	FUN_00084710	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
 local	FUN_00084710	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
-local	FUN_00084710	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
 local	FUN_00084710	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_00084710	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_00084710	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
@@ -897,7 +894,6 @@ local	FUN_00085180	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code
 local	FUN_00085180	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
 local	FUN_00085180	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
 local	FUN_00085180	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
-local	FUN_00085180	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
 local	FUN_00085180	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_00085180	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_00085180	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
@@ -916,7 +912,6 @@ local	FUN_000853b0	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code
 local	FUN_000853b0	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
 local	FUN_000853b0	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
 local	FUN_000853b0	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
-local	FUN_000853b0	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
 local	FUN_000853b0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_000853b0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_000853b0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
@@ -935,7 +930,6 @@ local	FUN_000855e0	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code
 local	FUN_000855e0	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
 local	FUN_000855e0	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
 local	FUN_000855e0	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
-local	FUN_000855e0	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
 local	FUN_000855e0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_000855e0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_000855e0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
@@ -954,7 +948,6 @@ local	FUN_00085810	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code
 local	FUN_00085810	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
 local	FUN_00085810	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
 local	FUN_00085810	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
-local	FUN_00085810	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
 local	FUN_00085810	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_00085810	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_00085810	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
@@ -973,7 +966,6 @@ local	FUN_000862b0	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code
 local	FUN_000862b0	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
 local	FUN_000862b0	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
 local	FUN_000862b0	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
-local	FUN_000862b0	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
 local	FUN_000862b0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_000862b0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_000862b0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
@@ -992,7 +984,6 @@ local	FUN_000864e0	param_9	src1File	INFERRED	&0xf, low bits of word 2 (same code
 local	FUN_000864e0	param_10	src1Index	INFERRED	(&0xff)<<5 into word 2 (same code shape as FUN_000840d0)
 local	FUN_000864e0	param_11	src1Select	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 2 (same code shape as FUN_000840d0)
 local	FUN_000864e0	param_12	src1Negate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 2 (same code shape as FUN_000840d0)
-local	FUN_000864e0	iVar15	instr	INFERRED	instruction count on entry, then the pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_000840d0)
 local	FUN_000864e0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_000864e0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_000864e0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
@@ -1015,16 +1006,9 @@ local	FUN_00083e10	param_13	src2File	INFERRED	&0xf, low bits of word 3
 local	FUN_00083e10	param_14	src2Index	INFERRED	(&0xff)<<5 into word 3
 local	FUN_00083e10	param_15	src2Select	INFERRED	uint[4]: 3-bit selects of word 3
 local	FUN_00083e10	param_16	src2Negate	INFERRED	uint[4]: 1-bit negates of word 3
-local	FUN_00083e10	iVar18	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc)
 local	FUN_00083e10	iVar15	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array
 local	FUN_00083e10	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry
 local	FUN_00083e10	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across
-local	FUN_00083e10	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field
-local	FUN_00083e10	uVar12	oldWord1	INFERRED	word 1 as read before packing
-local	FUN_00083e10	uVar16	oldWord2	INFERRED	word 2 as read before packing
-local	FUN_00083e10	uVar17	oldWord3	INFERRED	word 3 as read before packing
-local	FUN_00083e10	uVar10	src0FileField	INFERRED	src0File & 0xf; later reused for src2File & 0xf
-local	FUN_00083e10	uVar11	src1FileField	INFERRED	src1File & 0xf
 local	FUN_00084940	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_00083e10)
 local	FUN_00084940	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction (same code shape as FUN_00083e10)
 local	FUN_00084940	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_00083e10)
@@ -1041,16 +1025,9 @@ local	FUN_00084940	param_13	src2File	INFERRED	&0xf, low bits of word 3 (same cod
 local	FUN_00084940	param_14	src2Index	INFERRED	(&0xff)<<5 into word 3 (same code shape as FUN_00083e10)
 local	FUN_00084940	param_15	src2Select	INFERRED	uint[4]: 3-bit selects of word 3 (same code shape as FUN_00083e10)
 local	FUN_00084940	param_16	src2Negate	INFERRED	uint[4]: 1-bit negates of word 3 (same code shape as FUN_00083e10)
-local	FUN_00084940	iVar18	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_00083e10)
 local	FUN_00084940	iVar15	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_00083e10)
 local	FUN_00084940	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_00083e10)
 local	FUN_00084940	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_00083e10)
-local	FUN_00084940	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_00083e10)
-local	FUN_00084940	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_00083e10)
-local	FUN_00084940	uVar16	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_00083e10)
-local	FUN_00084940	uVar17	oldWord3	INFERRED	word 3 as read before packing (same code shape as FUN_00083e10)
-local	FUN_00084940	uVar10	src0FileField	INFERRED	src0File & 0xf; later reused for src2File & 0xf (same code shape as FUN_00083e10)
-local	FUN_00084940	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_00083e10)
 local	FUN_00084c00	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_00083e10)
 local	FUN_00084c00	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction (same code shape as FUN_00083e10)
 local	FUN_00084c00	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_00083e10)
@@ -1067,16 +1044,9 @@ local	FUN_00084c00	param_13	src2File	INFERRED	&0xf, low bits of word 3 (same cod
 local	FUN_00084c00	param_14	src2Index	INFERRED	(&0xff)<<5 into word 3 (same code shape as FUN_00083e10)
 local	FUN_00084c00	param_15	src2Select	INFERRED	uint[4]: 3-bit selects of word 3 (same code shape as FUN_00083e10)
 local	FUN_00084c00	param_16	src2Negate	INFERRED	uint[4]: 1-bit negates of word 3 (same code shape as FUN_00083e10)
-local	FUN_00084c00	iVar18	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_00083e10)
 local	FUN_00084c00	iVar15	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_00083e10)
 local	FUN_00084c00	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_00083e10)
 local	FUN_00084c00	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_00083e10)
-local	FUN_00084c00	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_00083e10)
-local	FUN_00084c00	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_00083e10)
-local	FUN_00084c00	uVar16	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_00083e10)
-local	FUN_00084c00	uVar17	oldWord3	INFERRED	word 3 as read before packing (same code shape as FUN_00083e10)
-local	FUN_00084c00	uVar10	src0FileField	INFERRED	src0File & 0xf; later reused for src2File & 0xf (same code shape as FUN_00083e10)
-local	FUN_00084c00	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_00083e10)
 local	FUN_00084ec0	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_00083e10)
 local	FUN_00084ec0	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0 of the 0x10-byte instruction (same code shape as FUN_00083e10)
 local	FUN_00084ec0	param_3	dstIndex	INFERRED	(&0x7f)<<13 into word 0 (same code shape as FUN_00083e10)
@@ -1093,16 +1063,9 @@ local	FUN_00084ec0	param_13	src2File	INFERRED	&0xf, low bits of word 3 (same cod
 local	FUN_00084ec0	param_14	src2Index	INFERRED	(&0xff)<<5 into word 3 (same code shape as FUN_00083e10)
 local	FUN_00084ec0	param_15	src2Select	INFERRED	uint[4]: 3-bit selects of word 3 (same code shape as FUN_00083e10)
 local	FUN_00084ec0	param_16	src2Negate	INFERRED	uint[4]: 1-bit negates of word 3 (same code shape as FUN_00083e10)
-local	FUN_00084ec0	iVar18	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_00083e10)
 local	FUN_00084ec0	iVar15	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_00083e10)
 local	FUN_00084ec0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_00083e10)
 local	FUN_00084ec0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_00083e10)
-local	FUN_00084ec0	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_00083e10)
-local	FUN_00084ec0	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_00083e10)
-local	FUN_00084ec0	uVar16	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_00083e10)
-local	FUN_00084ec0	uVar17	oldWord3	INFERRED	word 3 as read before packing (same code shape as FUN_00083e10)
-local	FUN_00084ec0	uVar10	src0FileField	INFERRED	src0File & 0xf; later reused for src2File & 0xf (same code shape as FUN_00083e10)
-local	FUN_00084ec0	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_00083e10)
 local	FUN_00066640	param_1	ctx	CONFIRMED	token stream: count at ctx+0x754, capacity +0x758 (grows by 0x80 words), data +0x75c; allocator vtable at *(ctx+0x3d4) (+0xc allocate, +0x18 free)
 local	FUN_00066640	param_2	dstFile	INFERRED	low 6 bits of the destination operand header word (<<16); 0x12/0x13 force the extended-word flag
 local	FUN_00066640	param_3	dstIndex	INFERRED	low 16 bits of the destination operand header word
@@ -1186,12 +1149,9 @@ local	FUN_00085a40	param_5	srcFile	INFERRED	&0xf, low bits of word 1 (also repli
 local	FUN_00085a40	param_6	srcIndex	INFERRED	(&0xff)<<5 into word 1
 local	FUN_00085a40	param_7	srcSelect	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1
 local	FUN_00085a40	param_8	srcNegate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1
-local	FUN_00085a40	iVar13	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc)
 local	FUN_00085a40	iVar14	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array
 local	FUN_00085a40	iVar8	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry
 local	FUN_00085a40	uVar12	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across
-local	FUN_00085a40	uVar11	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed negate field
-local	FUN_00085a40	uVar10	oldWord1	INFERRED	word 1 as read before packing
 local	FUN_00085a40	uVar9	srcFileField	INFERRED	srcFile & 0xf
 local	FUN_00085bf0	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_00085a40)
 local	FUN_00085bf0	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0; byte 3 of word 0 is the opcode constant stored first (same code shape as FUN_00085a40)
@@ -1201,12 +1161,9 @@ local	FUN_00085bf0	param_5	srcFile	INFERRED	&0xf, low bits of word 1 (also repli
 local	FUN_00085bf0	param_6	srcIndex	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_00085a40)
 local	FUN_00085bf0	param_7	srcSelect	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_00085a40)
 local	FUN_00085bf0	param_8	srcNegate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_00085a40)
-local	FUN_00085bf0	iVar13	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_00085a40)
 local	FUN_00085bf0	iVar14	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_00085a40)
 local	FUN_00085bf0	iVar8	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_00085a40)
 local	FUN_00085bf0	uVar12	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_00085a40)
-local	FUN_00085bf0	uVar11	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed negate field (same code shape as FUN_00085a40)
-local	FUN_00085bf0	uVar10	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_00085a40)
 local	FUN_00085bf0	uVar9	srcFileField	INFERRED	srcFile & 0xf (same code shape as FUN_00085a40)
 local	FUN_00085da0	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_00085a40)
 local	FUN_00085da0	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0; byte 3 of word 0 is the opcode constant stored first (same code shape as FUN_00085a40)
@@ -1216,12 +1173,9 @@ local	FUN_00085da0	param_5	srcFile	INFERRED	&0xf, low bits of word 1 (also repli
 local	FUN_00085da0	param_6	srcIndex	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_00085a40)
 local	FUN_00085da0	param_7	srcSelect	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_00085a40)
 local	FUN_00085da0	param_8	srcNegate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_00085a40)
-local	FUN_00085da0	iVar13	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_00085a40)
 local	FUN_00085da0	iVar14	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_00085a40)
 local	FUN_00085da0	iVar8	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_00085a40)
 local	FUN_00085da0	uVar12	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_00085a40)
-local	FUN_00085da0	uVar11	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed negate field (same code shape as FUN_00085a40)
-local	FUN_00085da0	uVar10	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_00085a40)
 local	FUN_00085da0	uVar9	srcFileField	INFERRED	srcFile & 0xf (same code shape as FUN_00085a40)
 local	FUN_00085f50	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_00085a40)
 local	FUN_00085f50	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0; byte 3 of word 0 is the opcode constant stored first (same code shape as FUN_00085a40)
@@ -1231,12 +1185,9 @@ local	FUN_00085f50	param_5	srcFile	INFERRED	&0xf, low bits of word 1 (also repli
 local	FUN_00085f50	param_6	srcIndex	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_00085a40)
 local	FUN_00085f50	param_7	srcSelect	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_00085a40)
 local	FUN_00085f50	param_8	srcNegate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_00085a40)
-local	FUN_00085f50	iVar13	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_00085a40)
 local	FUN_00085f50	iVar14	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_00085a40)
 local	FUN_00085f50	iVar8	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_00085a40)
 local	FUN_00085f50	uVar12	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_00085a40)
-local	FUN_00085f50	uVar11	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed negate field (same code shape as FUN_00085a40)
-local	FUN_00085f50	uVar10	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_00085a40)
 local	FUN_00085f50	uVar9	srcFileField	INFERRED	srcFile & 0xf (same code shape as FUN_00085a40)
 local	FUN_00086100	param_1	ctx	CONFIRMED	instruction array: data +0x3c8, count +0x3cc, capacity +0x3e0 (grows by 0x20 entries of 0x10 bytes), current entry pointer +0x3dc (same code shape as FUN_00085a40)
 local	FUN_00086100	param_2	dstFile	INFERRED	(&0xf)<<8 into word 0; byte 3 of word 0 is the opcode constant stored first (same code shape as FUN_00085a40)
@@ -1246,12 +1197,9 @@ local	FUN_00086100	param_5	srcFile	INFERRED	&0xf, low bits of word 1 (also repli
 local	FUN_00086100	param_6	srcIndex	INFERRED	(&0xff)<<5 into word 1 (same code shape as FUN_00085a40)
 local	FUN_00086100	param_7	srcSelect	INFERRED	uint[4]: 3-bit selects at bits 13,16,19,22 of word 1 (same code shape as FUN_00085a40)
 local	FUN_00086100	param_8	srcNegate	INFERRED	uint[4]: 1-bit negates at bits 25..28 of word 1 (same code shape as FUN_00085a40)
-local	FUN_00086100	iVar13	instr	INFERRED	instruction count on entry, then pointer to the new 0x10-byte entry (stored at ctx+0x3dc) (same code shape as FUN_00085a40)
 local	FUN_00086100	iVar14	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_00085a40)
 local	FUN_00086100	iVar8	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_00085a40)
 local	FUN_00086100	uVar12	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_00085a40)
-local	FUN_00086100	uVar11	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed negate field (same code shape as FUN_00085a40)
-local	FUN_00086100	uVar10	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_00085a40)
 local	FUN_00086100	uVar9	srcFileField	INFERRED	srcFile & 0xf (same code shape as FUN_00085a40)
 local	FUN_00074cc0	param_1	compiler	INFERRED	compiler/driver context threaded through the shader IR emitters
 local	FUN_00074cc0	param_2	program	INFERRED	program being assembled; its code buffer is at program+4
