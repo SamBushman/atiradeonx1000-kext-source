@@ -3868,6 +3868,14 @@ double FUN_000520c0(int glContext,double fparam_1,double fparam_2,double fparam_
 int FUN_00052280(glContext)
   int glContext;
 {
+  uint padCountdown;
+  uint padWords;
+  undefined4 *nextPacket;
+  undefined4 *packet;
+  undefined4 unitShadowValue5;
+  undefined4 unitShadowValue3;
+  undefined4 unitShadowValue2;
+  undefined4 unitShadowValue1;
   int glState;
   int glContextWord1938;
   uint registerDirty;
@@ -3896,391 +3904,391 @@ int FUN_00052280(glContext)
   undefined4 rb3dAblendcntl;
   undefined4 gaFogOffset;
   undefined4 fgFogColorB;
-  undefined *puVar1;
-  undefined4 uVar2;
+  undefined *engineCapsEntry;
+  undefined4 unitShadowValue0;
   code *streamSetCurrent;
-  uint uVar4;
+  uint dirtyUnitMask;
   uint *puVar5;
   undefined4 *puVar6;
-  undefined4 *puVar7;
-  undefined4 *puVar8;
+  undefined4 *texUnitShadowPtr4;
+  undefined4 *texUnitShadowPtr5;
   int iVar9;
   int iVar10;
-  undefined4 *puVar11;
-  uint uVar12;
-  undefined4 *puVar13;
-  undefined4 *puVar14;
-  undefined4 *puVar15;
+  undefined4 *texUnitShadowPtr3;
+  uint dirtyBits;
+  undefined4 *texUnitShadowPtr0;
+  undefined4 *texUnitShadowPtr1;
+  undefined4 *texUnitShadowPtr2;
   int iVar16;
   
-  uVar12 = *(uint *)(glContext + 0x1930);
-  uVar4 = *(uint *)(glContext + 0x1934) & *(uint *)(glContext + 0x27b0);
-  uVar4 = uVar4 | (uVar4 & *(uint *)(glContext + 0x27b4)) << 8;
-  if (uVar4 != 0) {
-    puVar13 = (undefined4 *)(glContext + 0x1cdc);
-    puVar14 = (undefined4 *)(glContext + 0x1d1c);
-    puVar15 = (undefined4 *)(glContext + 0x1d5c);
-    puVar6 = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,0xe0);
+  dirtyBits = *(uint *)(glContext + 0x1930);
+  dirtyUnitMask = *(uint *)(glContext + 0x1934) & *(uint *)(glContext + 0x27b0);
+  dirtyUnitMask = dirtyUnitMask | (dirtyUnitMask & *(uint *)(glContext + 0x27b4)) << 8;
+  if (dirtyUnitMask != 0) {
+    texUnitShadowPtr0 = (undefined4 *)(glContext + 0x1cdc);
+    texUnitShadowPtr1 = (undefined4 *)(glContext + 0x1d1c);
+    texUnitShadowPtr2 = (undefined4 *)(glContext + 0x1d5c);
+    packet = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,0xe0);
     iVar9 = *(int *)(glContext + 0x1938);
-    puVar11 = (undefined4 *)(glContext + 0x1d9c);
-    puVar7 = (undefined4 *)(glContext + 0x1ddc);
-    *(undefined4 **)(0x00002748 + glContext + 4) = puVar6;
-    puVar8 = (undefined4 *)(glContext + 0x1e1c);
+    texUnitShadowPtr3 = (undefined4 *)(glContext + 0x1d9c);
+    texUnitShadowPtr4 = (undefined4 *)(glContext + 0x1ddc);
+    *(undefined4 **)(0x00002748 + glContext + 4) = packet;
+    texUnitShadowPtr5 = (undefined4 *)(glContext + 0x1e1c);
     do {
-      if ((uVar4 & 1) != 0) {
-        *puVar6 = ((unsigned char *)0x00001100) + iVar9;
-        uVar2 = *puVar13;
-        puVar6[2] = ((unsigned char *)0x00001110) + iVar9;
-        puVar6[1] = uVar2;
-        uVar2 = *puVar14;
-        puVar6[4] = ((unsigned char *)0x00001120U) + iVar9;
-        puVar6[3] = uVar2;
-        uVar2 = *puVar15;
-        puVar6[6] = ((unsigned char *)0x00001130) + iVar9;
-        puVar6[5] = uVar2;
-        uVar2 = *puVar11;
-        puVar6[8] = ((unsigned char *)0x00001170U) + iVar9;
-        puVar6[7] = uVar2;
-        uVar2 = *puVar8;
-        puVar6[10] = ((unsigned char *)0x00001160) + iVar9;
-        puVar6[0xc] = ((unsigned char *)0x00001140) + iVar9;
-        puVar6[0xb] = 0;
-        puVar6[9] = uVar2;
-        puVar6[0xd] = *puVar7;
-        puVar6 = puVar6 + 0xe;
+      if ((dirtyUnitMask & 1) != 0) {
+        *packet = ((unsigned char *)0x00001100) + iVar9;
+        unitShadowValue0 = *texUnitShadowPtr0;
+        packet[2] = ((unsigned char *)0x00001110) + iVar9;
+        packet[1] = unitShadowValue0;
+        unitShadowValue1 = *texUnitShadowPtr1;
+        packet[4] = ((unsigned char *)0x00001120U) + iVar9;
+        packet[3] = unitShadowValue1;
+        unitShadowValue2 = *texUnitShadowPtr2;
+        packet[6] = ((unsigned char *)0x00001130) + iVar9;
+        packet[5] = unitShadowValue2;
+        unitShadowValue3 = *texUnitShadowPtr3;
+        packet[8] = ((unsigned char *)0x00001170U) + iVar9;
+        packet[7] = unitShadowValue3;
+        unitShadowValue5 = *texUnitShadowPtr5;
+        packet[10] = ((unsigned char *)0x00001160) + iVar9;
+        packet[0xc] = ((unsigned char *)0x00001140) + iVar9;
+        packet[0xb] = 0;
+        packet[9] = unitShadowValue5;
+        packet[0xd] = *texUnitShadowPtr4;
+        packet = packet + 0xe;
       }
-      uVar4 = uVar4 >> 1;
+      dirtyUnitMask = dirtyUnitMask >> 1;
       iVar9 = iVar9 + 1;
-      puVar13 = puVar13 + 1;
-      puVar14 = puVar14 + 1;
-      puVar15 = puVar15 + 1;
-      puVar11 = puVar11 + 1;
-      puVar8 = puVar8 + 1;
-      puVar7 = puVar7 + 1;
-    } while (uVar4 != 0);
+      texUnitShadowPtr0 = texUnitShadowPtr0 + 1;
+      texUnitShadowPtr1 = texUnitShadowPtr1 + 1;
+      texUnitShadowPtr2 = texUnitShadowPtr2 + 1;
+      texUnitShadowPtr3 = texUnitShadowPtr3 + 1;
+      texUnitShadowPtr5 = texUnitShadowPtr5 + 1;
+      texUnitShadowPtr4 = texUnitShadowPtr4 + 1;
+    } while (dirtyUnitMask != 0);
     streamSetCurrent = *(code **)(glContext + 0x275c);
-    *(undefined4 **)(0x00002748 + glContext + 4) = puVar6;
-    (*streamSetCurrent)(glContext,puVar6);
+    *(undefined4 **)(0x00002748 + glContext + 4) = packet;
+    (*streamSetCurrent)(glContext,packet);
   }
   if (((*(uint *)(glContext + 0x44) & 0x100) == 0) || ((*(uint *)(glContext + 0x27b0) & 1) != 0)) {
-    puVar6 = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,2);
-    puVar7 = puVar6 + 2;
-    *puVar6 = ((unsigned char *)0x00001041U);
-    puVar6[1] = *(int *)(glContext + 0x27b0) << (*(uint *)(glContext + 0x1938) & 0x3f);
+    packet = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,2);
+    nextPacket = packet + 2;
+    *packet = ((unsigned char *)0x00001041U);
+    packet[1] = *(int *)(glContext + 0x27b0) << (*(uint *)(glContext + 0x1938) & 0x3f);
   }
   else {
-    puVar6 = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,4);
-    puVar7 = puVar6 + 4;
-    *puVar6 = ((unsigned char *)0x00001041U);
-    puVar6[1] = (*(uint *)(glContext + 0x27b0) | 1) << (*(uint *)(glContext + 0x1938) & 0x3f);
+    packet = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,4);
+    nextPacket = packet + 4;
+    *packet = ((unsigned char *)0x00001041U);
+    packet[1] = (*(uint *)(glContext + 0x27b0) | 1) << (*(uint *)(glContext + 0x1938) & 0x3f);
     glContextWord1938 = *(int *)(glContext + 0x1938);
-    puVar6[3] = 0;
-    puVar6[2] = ((unsigned char *)0x00001100) + glContextWord1938;
+    packet[3] = 0;
+    packet[2] = ((unsigned char *)0x00001100) + glContextWord1938;
   }
   streamSetCurrent = *(code **)(glContext + 0x275c);
-  *(undefined4 **)(0x00002748 + glContext + 4) = puVar7;
-  (*streamSetCurrent)(glContext,puVar7);
-  if (uVar12 == 0) {
+  *(undefined4 **)(0x00002748 + glContext + 4) = nextPacket;
+  (*streamSetCurrent)(glContext,nextPacket);
+  if (dirtyBits == 0) {
     *(undefined4 *)(glContext + 0x1934) = 0;
   }
   else {
-    puVar7 = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,0xde);
-    *(undefined4 **)(0x00002748 + glContext + 4) = puVar7;
-    puVar6 = puVar7;
-    if ((uVar12 & 0x100) != 0) {
-      puVar6 = puVar7 + 2;
-      *puVar7 = ((unsigned char *)0x00001393U);
-      puVar7[1] = 10;
+    nextPacket = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,0xde);
+    *(undefined4 **)(0x00002748 + glContext + 4) = nextPacket;
+    packet = nextPacket;
+    if ((dirtyBits & 0x100) != 0) {
+      packet = nextPacket + 2;
+      *nextPacket = ((unsigned char *)0x00001393U);
+      nextPacket[1] = 10;
     }
-    if ((uVar12 & 0x2000000) != 0) {
-      *puVar6 = ((unsigned char *)0x000013c6U);
-      puVar6[1] = 3;
-      puVar6 = puVar6 + 2;
+    if ((dirtyBits & 0x2000000) != 0) {
+      *packet = ((unsigned char *)0x000013c6U);
+      packet[1] = 3;
+      packet = packet + 2;
     }
-    if ((uVar12 & 1) != 0) {
-      *puVar6 = 0x212f2;
-      puVar6[1] = *(undefined4 *)(glContext + 0x1a54);
-      puVar6[2] = *(undefined4 *)(glContext + 0x1a58);
-      puVar1 = PTR_DAT_001e88c8;
+    if ((dirtyBits & 1) != 0) {
+      *packet = 0x212f2;
+      packet[1] = *(undefined4 *)(glContext + 0x1a54);
+      packet[2] = *(undefined4 *)(glContext + 0x1a58);
+      engineCapsEntry = PTR_DAT_001e88c8;
       fgFogColorB = *(undefined4 *)(glContext + 0x1a5c);
-      puVar6[4] = ((unsigned char *)0x000012f0U);
-      puVar6[3] = fgFogColorB;
+      packet[4] = ((unsigned char *)0x000012f0U);
+      packet[3] = fgFogColorB;
       fgFogBlend = *(uint *)(glContext + 0x1aec);
-      puVar6[5] = fgFogBlend;
-      if ((*(uint *)(puVar1 + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x8000) == 0) {
-        puVar6[5] = fgFogBlend & 0xfffffffe;
+      packet[5] = fgFogBlend;
+      if ((*(uint *)(engineCapsEntry + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x8000) == 0) {
+        packet[5] = fgFogBlend & 0xfffffffe;
       }
-      puVar6[6] = 0x110a5;
-      puVar6[7] = *(undefined4 *)(glContext + 0x1a7c);
+      packet[6] = 0x110a5;
+      packet[7] = *(undefined4 *)(glContext + 0x1a7c);
       gaFogOffset = *(undefined4 *)(glContext + 0x1a78);
-      puVar6[9] = ((unsigned char *)0x00001007U);
-      puVar6[8] = gaFogOffset;
-      puVar6[10] = *(undefined4 *)(glContext + 0x1a64);
-      puVar6 = puVar6 + 0xb;
+      packet[9] = ((unsigned char *)0x00001007U);
+      packet[8] = gaFogOffset;
+      packet[10] = *(undefined4 *)(glContext + 0x1a64);
+      packet = packet + 0xb;
     }
-    puVar1 = PTR_DAT_001e88c8;
-    if ((uVar12 & 4) != 0) {
-      *puVar6 = 0x11381;
+    engineCapsEntry = PTR_DAT_001e88c8;
+    if ((dirtyBits & 4) != 0) {
+      *packet = 0x11381;
       rb3dBlendcntl = *(uint *)(glContext + 0x1a80);
-      puVar6[1] = rb3dBlendcntl;
-      if ((*(uint *)(puVar1 + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x4000) == 0) {
-        puVar6[1] = rb3dBlendcntl & 0xfffffffc;
+      packet[1] = rb3dBlendcntl;
+      if ((*(uint *)(engineCapsEntry + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x4000) == 0) {
+        packet[1] = rb3dBlendcntl & 0xfffffffc;
       }
       rb3dAblendcntl = *(undefined4 *)(glContext + 0x1a84);
-      puVar6[3] = ((unsigned char *)0x00001384U);
-      puVar6[2] = rb3dAblendcntl;
+      packet[3] = ((unsigned char *)0x00001384U);
+      packet[2] = rb3dAblendcntl;
       rb3dConstantColor = *(undefined4 *)(glContext + 0x1a88);
-      puVar6[5] = ((unsigned char *)0x00001394U);
-      puVar6[4] = rb3dConstantColor;
+      packet[5] = ((unsigned char *)0x00001394U);
+      packet[4] = rb3dConstantColor;
       rb3dDitherCtl = *(undefined4 *)(glContext + 0x1af0);
-      puVar6[7] = ((unsigned char *)0x000013beU);
-      puVar6[6] = rb3dDitherCtl;
+      packet[7] = ((unsigned char *)0x000013beU);
+      packet[6] = rb3dDitherCtl;
       rb3dConstantColorAr = *(undefined4 *)(glContext + 0x1a8c);
-      puVar6[9] = ((unsigned char *)0x000013bfU);
-      puVar6[8] = rb3dConstantColorAr;
-      puVar6[10] = *(undefined4 *)(glContext + 0x1a90);
-      puVar6 = puVar6 + 0xb;
+      packet[9] = ((unsigned char *)0x000013bfU);
+      packet[8] = rb3dConstantColorAr;
+      packet[10] = *(undefined4 *)(glContext + 0x1a90);
+      packet = packet + 0xb;
     }
-    if ((uVar12 & 0x10000) != 0) {
-      *puVar6 = ((unsigned char *)0x00001386U);
-      puVar6[1] = *(undefined4 *)(glContext + 0x1af8);
-      puVar6 = puVar6 + 2;
+    if ((dirtyBits & 0x10000) != 0) {
+      *packet = ((unsigned char *)0x00001386U);
+      packet[1] = *(undefined4 *)(glContext + 0x1af8);
+      packet = packet + 2;
     }
-    if ((uVar12 & 0x200) != 0) {
-      *puVar6 = ((unsigned char *)0x000012f5U);
-      puVar1 = PTR_DAT_001e88c8;
+    if ((dirtyBits & 0x200) != 0) {
+      *packet = ((unsigned char *)0x000012f5U);
+      engineCapsEntry = PTR_DAT_001e88c8;
       fgAlphaFunc = *(uint *)(glContext + 0x1a4c);
-      puVar6[1] = fgAlphaFunc;
-      if ((*(uint *)(puVar1 + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x8000) == 0) {
-        puVar6[1] = fgAlphaFunc & 0xfffff7ff;
+      packet[1] = fgAlphaFunc;
+      if ((*(uint *)(engineCapsEntry + (uint)*(byte *)(glContext + 0x293f) * 0x24 + 0x18) & 0x8000) == 0) {
+        packet[1] = fgAlphaFunc & 0xfffff7ff;
       }
-      puVar6[2] = ((unsigned char *)0x000012f8U);
-      puVar6[3] = *(undefined4 *)(glContext + 0x1bdc);
-      puVar6 = puVar6 + 4;
+      packet[2] = ((unsigned char *)0x000012f8U);
+      packet[3] = *(undefined4 *)(glContext + 0x1bdc);
+      packet = packet + 4;
     }
-    if ((uVar12 & 0x8000000) != 0) {
-      *puVar6 = ((unsigned char *)0x000012f6U);
-      puVar6[1] = *(undefined4 *)(glContext + 0x1a50);
-      puVar6 = puVar6 + 2;
+    if ((dirtyBits & 0x8000000) != 0) {
+      *packet = ((unsigned char *)0x000012f6U);
+      packet[1] = *(undefined4 *)(glContext + 0x1a50);
+      packet = packet + 2;
     }
-    puVar7 = puVar6;
-    if ((uVar12 & 0x20000) != 0) {
-      puVar7 = puVar6 + 2;
-      *puVar6 = ((unsigned char *)0x000013c5U);
-      puVar6[1] = *(undefined4 *)(glContext + 0x1ab8);
+    nextPacket = packet;
+    if ((dirtyBits & 0x20000) != 0) {
+      nextPacket = packet + 2;
+      *packet = ((unsigned char *)0x000013c5U);
+      packet[1] = *(undefined4 *)(glContext + 0x1ab8);
       if (1 < *(int *)(glContext + 0x23dc)) {
-        puVar7 = puVar6 + 4;
-        puVar6[2] = ((unsigned char *)0x000010e6U);
-        puVar6[3] = *(undefined4 *)(glContext + 0x1bd4);
+        nextPacket = packet + 4;
+        packet[2] = ((unsigned char *)0x000010e6U);
+        packet[3] = *(undefined4 *)(glContext + 0x1bd4);
       }
     }
-    if ((uVar12 & 0x800) != 0) {
-      *puVar7 = 0x113c0;
-      puVar7[1] = *(undefined4 *)(glContext + 0x1aa0);
-      puVar7[2] = *(undefined4 *)(glContext + 0x1aa4);
-      puVar7 = puVar7 + 3;
+    if ((dirtyBits & 0x800) != 0) {
+      *nextPacket = 0x113c0;
+      nextPacket[1] = *(undefined4 *)(glContext + 0x1aa0);
+      nextPacket[2] = *(undefined4 *)(glContext + 0x1aa4);
+      nextPacket = nextPacket + 3;
     }
-    if ((uVar12 & 8) != 0) {
-      *puVar7 = ((unsigned char *)0x000013c2U);
-      puVar7[1] = *(undefined4 *)(glContext + 0x1aa8);
-      puVar7 = puVar7 + 2;
+    if ((dirtyBits & 8) != 0) {
+      *nextPacket = ((unsigned char *)0x000013c2U);
+      nextPacket[1] = *(undefined4 *)(glContext + 0x1aa8);
+      nextPacket = nextPacket + 2;
     }
-    if ((uVar12 & 0x1000) != 0) {
+    if ((dirtyBits & 0x1000) != 0) {
       glState = *(int *)(glContext + 4);
       puVar5 = *(uint **)(glState + 0x1d8);
-      *puVar5 = (int)puVar7 - (int)puVar5 >> 2 | *puVar5;
-      *(undefined4 **)(glState + 0x1d8) = puVar7;
-      *puVar7 = 0x2f000000;
-      puVar7[1] = ((unsigned char *)0x000010e9U);
+      *puVar5 = (int)nextPacket - (int)puVar5 >> 2 | *puVar5;
+      *(undefined4 **)(glState + 0x1d8) = nextPacket;
+      *nextPacket = 0x2f000000;
+      nextPacket[1] = ((unsigned char *)0x000010e9U);
       scHyperzEn = *(undefined4 *)(glContext + 0x1ae0);
-      puVar7[3] = ((unsigned char *)0x000013c7U);
-      puVar7[2] = scHyperzEn;
-      puVar7[4] = *(undefined4 *)(glContext + 0x1ab0);
-      puVar7 = puVar7 + 5;
+      nextPacket[3] = ((unsigned char *)0x000013c7U);
+      nextPacket[2] = scHyperzEn;
+      nextPacket[4] = *(undefined4 *)(glContext + 0x1ab0);
+      nextPacket = nextPacket + 5;
     }
-    if ((uVar12 & 0x20) != 0) {
-      *puVar7 = 0x410a9;
-      puVar7[1] = *(undefined4 *)(glContext + 0x1b1c);
-      puVar7[2] = *(undefined4 *)(glContext + 0x1b18);
-      puVar7[3] = *(undefined4 *)(glContext + 0x1b24);
-      puVar7[4] = *(undefined4 *)(glContext + 0x1b20);
-      puVar7[5] = *(undefined4 *)(0x00001b14 + glContext);
-      puVar7 = puVar7 + 6;
+    if ((dirtyBits & 0x20) != 0) {
+      *nextPacket = 0x410a9;
+      nextPacket[1] = *(undefined4 *)(glContext + 0x1b1c);
+      nextPacket[2] = *(undefined4 *)(glContext + 0x1b18);
+      nextPacket[3] = *(undefined4 *)(glContext + 0x1b24);
+      nextPacket[4] = *(undefined4 *)(glContext + 0x1b20);
+      nextPacket[5] = *(undefined4 *)(0x00001b14 + glContext);
+      nextPacket = nextPacket + 6;
     }
-    if ((uVar12 & 0x2000) != 0) {
-      *puVar7 = ((unsigned char *)0x000010a2U);
+    if ((dirtyBits & 0x2000) != 0) {
+      *nextPacket = ((unsigned char *)0x000010a2U);
       gaPolyMode = *(undefined4 *)(glContext + 0x1b3c);
-      puVar7[2] = ((unsigned char *)0x00001002U);
-      puVar7[1] = gaPolyMode;
+      nextPacket[2] = ((unsigned char *)0x00001002U);
+      nextPacket[1] = gaPolyMode;
       gbEnable = *(undefined4 *)(glContext + 0x1b50);
-      puVar7[4] = ((unsigned char *)0x00001007U);
-      puVar7[3] = gbEnable;
+      nextPacket[4] = ((unsigned char *)0x00001007U);
+      nextPacket[3] = gbEnable;
       gbSelect = *(undefined4 *)(glContext + 0x1a64);
-      puVar7[6] = 0x825;
-      puVar7[5] = gbSelect;
+      nextPacket[6] = 0x825;
+      nextPacket[5] = gbSelect;
       vapOutVtxFmt1 = *(undefined4 *)(glContext + 0x1ba0);
-      puVar7[8] = ((unsigned char *)0x00001048U);
-      puVar7[7] = vapOutVtxFmt1;
-      puVar7[9] = *(undefined4 *)(glContext + 0x1bc0);
-      puVar7 = puVar7 + 10;
+      nextPacket[8] = ((unsigned char *)0x00001048U);
+      nextPacket[7] = vapOutVtxFmt1;
+      nextPacket[9] = *(undefined4 *)(glContext + 0x1bc0);
+      nextPacket = nextPacket + 10;
     }
-    if ((uVar12 & 0x8000) != 0) {
-      *puVar7 = ((unsigned char *)0x00001087U);
+    if ((dirtyBits & 0x8000) != 0) {
+      *nextPacket = ((unsigned char *)0x00001087U);
       gaPointSize = *(undefined4 *)(glContext + 0x1ccc);
-      puVar7[2] = 0x31080;
-      puVar7[1] = gaPointSize;
-      puVar7[3] = *(undefined4 *)(glContext + 0x1cbc);
-      puVar7[4] = *(undefined4 *)(glContext + 0x1cc4);
-      puVar7[5] = *(undefined4 *)(glContext + 0x1cc0);
+      nextPacket[2] = 0x31080;
+      nextPacket[1] = gaPointSize;
+      nextPacket[3] = *(undefined4 *)(glContext + 0x1cbc);
+      nextPacket[4] = *(undefined4 *)(glContext + 0x1cc4);
+      nextPacket[5] = *(undefined4 *)(glContext + 0x1cc0);
       gaPointT1 = *(undefined4 *)(glContext + 0x1cc8);
-      puVar7[7] = ((unsigned char *)0x0000108cU);
-      puVar7[6] = gaPointT1;
-      puVar7[8] = *(undefined4 *)(glContext + 0x1cd0);
-      puVar7 = puVar7 + 9;
+      nextPacket[7] = ((unsigned char *)0x0000108cU);
+      nextPacket[6] = gaPointT1;
+      nextPacket[8] = *(undefined4 *)(glContext + 0x1cd0);
+      nextPacket = nextPacket + 9;
     }
-    if ((uVar12 & 0x4000) != 0) {
-      *puVar7 = 0x1108d;
-      puVar7[1] = *(undefined4 *)(glContext + 0x1b40);
+    if ((dirtyBits & 0x4000) != 0) {
+      *nextPacket = 0x1108d;
+      nextPacket[1] = *(undefined4 *)(glContext + 0x1b40);
       gaLineStippleConfig = *(undefined4 *)(glContext + 0x1b64);
-      puVar7[3] = ((unsigned char *)0x0000109aU);
-      puVar7[2] = gaLineStippleConfig;
-      puVar7[4] = *(undefined4 *)(glContext + 0x1b70);
-      puVar7 = puVar7 + 5;
+      nextPacket[3] = ((unsigned char *)0x0000109aU);
+      nextPacket[2] = gaLineStippleConfig;
+      nextPacket[4] = *(undefined4 *)(glContext + 0x1b70);
+      nextPacket = nextPacket + 5;
     }
-    if ((uVar12 & 0x10) != 0) {
-      *puVar7 = ((unsigned char *)0x00001383U);
+    if ((dirtyBits & 0x10) != 0) {
+      *nextPacket = ((unsigned char *)0x00001383U);
       rb3dColorChannelMask = *(undefined4 *)(0x00001af4 + glContext);
-      puVar7[2] = ((unsigned char *)0x0000109eU);
-      puVar7[1] = rb3dColorChannelMask;
-      puVar7[3] = *(undefined4 *)(glContext + 0x1b2c);
-      puVar7 = puVar7 + 4;
+      nextPacket[2] = ((unsigned char *)0x0000109eU);
+      nextPacket[1] = rb3dColorChannelMask;
+      nextPacket[3] = *(undefined4 *)(glContext + 0x1b2c);
+      nextPacket = nextPacket + 4;
     }
-    if ((uVar12 & 0x40) != 0) {
-      *puVar7 = 0x311a9;
-      puVar7[1] = *(undefined4 *)(glContext + 0x233c);
-      puVar7[2] = *(undefined4 *)(glContext + 0x2340);
-      puVar7[3] = *(undefined4 *)(glContext + 0x2344);
+    if ((dirtyBits & 0x40) != 0) {
+      *nextPacket = 0x311a9;
+      nextPacket[1] = *(undefined4 *)(glContext + 0x233c);
+      nextPacket[2] = *(undefined4 *)(glContext + 0x2340);
+      nextPacket[3] = *(undefined4 *)(glContext + 0x2344);
       usOutFmt3 = *(undefined4 *)(0x00002348 + glContext);
-      puVar7[5] = ((unsigned char *)0x000010b1U);
-      puVar7[4] = usOutFmt3;
+      nextPacket[5] = ((unsigned char *)0x000010b1U);
+      nextPacket[4] = usOutFmt3;
       suDepthOffset = *(undefined4 *)(0x00001b34 + glContext);
-      puVar7[7] = ((unsigned char *)0x000010b0U);
-      puVar7[6] = suDepthOffset;
-      puVar7[8] = *(undefined4 *)(glContext + 0x1b38);
-      puVar7 = puVar7 + 9;
+      nextPacket[7] = ((unsigned char *)0x000010b0U);
+      nextPacket[6] = suDepthOffset;
+      nextPacket[8] = *(undefined4 *)(glContext + 0x1b38);
+      nextPacket = nextPacket + 9;
     }
-    if ((uVar12 & 0x400) != 0) {
-      *puVar7 = ((unsigned char *)0x000010aeU);
-      puVar7[1] = *(undefined4 *)(glContext + 0x1b30);
-      puVar7 = puVar7 + 2;
+    if ((dirtyBits & 0x400) != 0) {
+      *nextPacket = ((unsigned char *)0x000010aeU);
+      nextPacket[1] = *(undefined4 *)(glContext + 0x1b30);
+      nextPacket = nextPacket + 2;
     }
-    if ((uVar12 & 0x80000) != 0) {
-      *puVar7 = ((unsigned char *)0x00001008U);
+    if ((dirtyBits & 0x80000) != 0) {
+      *nextPacket = ((unsigned char *)0x00001008U);
       gbAaConfig = *(undefined4 *)(glContext + 0x1a60);
-      puVar7[2] = 0x11004;
-      puVar7[1] = gbAaConfig;
-      puVar7[3] = *(undefined4 *)(glContext + 0x1a68);
+      nextPacket[2] = 0x11004;
+      nextPacket[1] = gbAaConfig;
+      nextPacket[3] = *(undefined4 *)(glContext + 0x1a68);
       gbMspos1 = *(undefined4 *)(glContext + 0x1a6c);
-      puVar7[5] = ((unsigned char *)0x000010faU);
-      puVar7[4] = gbMspos1;
-      puVar7[6] = *(undefined4 *)(glContext + 0x1b60);
-      puVar7 = puVar7 + 7;
+      nextPacket[5] = ((unsigned char *)0x000010faU);
+      nextPacket[4] = gbMspos1;
+      nextPacket[6] = *(undefined4 *)(glContext + 0x1b60);
+      nextPacket = nextPacket + 7;
     }
-    if ((uVar12 & 2) != 0) {
-      puVar7 = (undefined4 *)((int (*)())FUN_0004dd10)(glContext,puVar7);
+    if ((dirtyBits & 2) != 0) {
+      nextPacket = (undefined4 *)((int (*)())FUN_0004dd10)(glContext,nextPacket);
     }
-    if ((uVar12 & 0x80) != 0) {
-      puVar7 = (undefined4 *)((int (*)())FUN_0004dd40)(glContext,puVar7);
+    if ((dirtyBits & 0x80) != 0) {
+      nextPacket = (undefined4 *)((int (*)())FUN_0004dd40)(glContext,nextPacket);
     }
-    puVar6 = puVar7;
-    if ((uVar12 & 0x40000) != 0) {
-      puVar6 = puVar7 + 10;
-      *puVar7 = 0x10860;
-      puVar7[1] = *(undefined4 *)(glContext + 0x1b78);
+    packet = nextPacket;
+    if ((dirtyBits & 0x40000) != 0) {
+      packet = nextPacket + 10;
+      *nextPacket = 0x10860;
+      nextPacket[1] = *(undefined4 *)(glContext + 0x1b78);
       glContextWord1ca0 = *(undefined4 *)(glContext + 0x1ca0);
-      puVar7[3] = 0x82d;
-      puVar7[2] = glContextWord1ca0;
+      nextPacket[3] = 0x82d;
+      nextPacket[2] = glContextWord1ca0;
       vapVtxSize = *(undefined4 *)(glContext + 0x1ca4);
-      puVar7[5] = 0x10824;
-      puVar7[4] = vapVtxSize;
-      puVar7[6] = *(undefined4 *)(glContext + 0x1b9c);
+      nextPacket[5] = 0x10824;
+      nextPacket[4] = vapVtxSize;
+      nextPacket[6] = *(undefined4 *)(glContext + 0x1b9c);
       vapOutVtxFmt1 = *(undefined4 *)(glContext + 0x1ba0);
-      puVar7[8] = ((unsigned char *)0x00001047U);
-      puVar7[7] = vapOutVtxFmt1;
-      puVar7[9] = *(undefined4 *)(glContext + 0x1bb0);
-      if ((-1 < (int)uVar12) || (*(char *)(glContext + 0x1868) != '\0')) {
+      nextPacket[8] = ((unsigned char *)0x00001047U);
+      nextPacket[7] = vapOutVtxFmt1;
+      nextPacket[9] = *(undefined4 *)(glContext + 0x1bb0);
+      if ((-1 < (int)dirtyBits) || (*(char *)(glContext + 0x1868) != '\0')) {
         iVar16 = 8;
-        puVar7[10] = ((unsigned char *)0x000010c0U);
+        nextPacket[10] = ((unsigned char *)0x000010c0U);
         iVar10 = 0;
-        puVar7[0xb] = *(undefined4 *)(glContext + 0x1f2c);
-        puVar7[0xc] = *(uint *)(glContext + 0x1f28) | 0x70000;
+        nextPacket[0xb] = *(undefined4 *)(glContext + 0x1f2c);
+        nextPacket[0xc] = *(uint *)(glContext + 0x1f28) | 0x70000;
         iVar9 = glContext;
         do {
           puVar6 = (undefined4 *)(iVar9 + 0x1ee8);
           iVar9 = iVar9 + 4;
-          *(undefined4 *)((int)puVar7 + iVar10 + 0x34) = *puVar6;
+          *(undefined4 *)((int)nextPacket + iVar10 + 0x34) = *puVar6;
           iVar10 = iVar10 + 4;
           iVar16 = iVar16 + -1;
         } while (iVar16 != 0);
-        puVar6 = puVar7 + 0x15;
+        packet = nextPacket + 0x15;
       }
     }
-    if ((uVar12 & 0x400000) != 0) {
-      *puVar6 = 0x887;
-      puVar6[1] = *(undefined4 *)(glContext + 0x1b74);
-      puVar6 = puVar6 + 2;
+    if ((dirtyBits & 0x400000) != 0) {
+      *packet = 0x887;
+      packet[1] = *(undefined4 *)(glContext + 0x1b74);
+      packet = packet + 2;
     }
-    if ((uVar12 & 0x800000) != 0) {
-      *puVar6 = ((unsigned char *)0x00001002U);
+    if ((dirtyBits & 0x800000) != 0) {
+      *packet = ((unsigned char *)0x00001002U);
       gbEnable = *(undefined4 *)(glContext + 0x1b50);
-      puVar6[2] = 0x825;
-      puVar6[1] = gbEnable;
+      packet[2] = 0x825;
+      packet[1] = gbEnable;
       vapOutVtxFmt1 = *(undefined4 *)(glContext + 0x1ba0);
-      puVar6[4] = ((unsigned char *)0x00001048U);
-      puVar6[3] = vapOutVtxFmt1;
-      puVar6[5] = *(undefined4 *)(glContext + 0x1bc0);
-      puVar6 = puVar6 + 6;
+      packet[4] = ((unsigned char *)0x00001048U);
+      packet[3] = vapOutVtxFmt1;
+      packet[5] = *(undefined4 *)(glContext + 0x1bc0);
+      packet = packet + 6;
     }
-    if ((uVar12 & 0x4000000) != 0) {
+    if ((dirtyBits & 0x4000000) != 0) {
       *(undefined4 *)(glContext + 0x1e68) = 0;
     }
-    if ((uVar12 & 0x10000000) != 0) {
-      *puVar6 = 0x413de;
-      puVar6[1] = *(undefined4 *)(glContext + 0x2360);
-      puVar6[2] = *(undefined4 *)(glContext + 0x2364);
-      puVar6[3] = *(undefined4 *)(0x00002368 + glContext);
-      puVar6[4] = *(undefined4 *)(glContext + 0x236c);
+    if ((dirtyBits & 0x10000000) != 0) {
+      *packet = 0x413de;
+      packet[1] = *(undefined4 *)(glContext + 0x2360);
+      packet[2] = *(undefined4 *)(glContext + 0x2364);
+      packet[3] = *(undefined4 *)(0x00002368 + glContext);
+      packet[4] = *(undefined4 *)(glContext + 0x236c);
       glContextWord2370 = *(undefined4 *)(glContext + 0x2370);
-      puVar6[6] = 0x313e9;
-      puVar6[5] = glContextWord2370;
-      puVar6[7] = *(undefined4 *)(glContext + 0x2374);
-      puVar6[8] = *(undefined4 *)(glContext + 0x2378);
-      puVar6[9] = *(undefined4 *)(glContext + 0x237c);
-      puVar6[10] = *(undefined4 *)(glContext + 0x2380);
-      puVar6 = puVar6 + 0xb;
+      packet[6] = 0x313e9;
+      packet[5] = glContextWord2370;
+      packet[7] = *(undefined4 *)(glContext + 0x2374);
+      packet[8] = *(undefined4 *)(glContext + 0x2378);
+      packet[9] = *(undefined4 *)(glContext + 0x237c);
+      packet[10] = *(undefined4 *)(glContext + 0x2380);
+      packet = packet + 0xb;
     }
-    if ((uVar12 & 0x20000000) != 0) {
-      *puVar6 = ((unsigned char *)0x000813adU);
-      puVar6[1] = *(undefined4 *)(glContext + 0x2384);
-      puVar6[2] = *(undefined4 *)(0x00002388 + glContext);
-      puVar6[3] = *(undefined4 *)(glContext + 0x238c);
-      puVar6[4] = *(undefined4 *)(glContext + 0x2390);
-      puVar6[5] = *(undefined4 *)(glContext + 0x2394);
-      puVar6[6] = *(undefined4 *)(glContext + 0x2398);
-      puVar6[7] = *(undefined4 *)(glContext + 0x239c);
-      puVar6[8] = *(undefined4 *)(glContext + 0x23a0);
-      puVar6[9] = *(undefined4 *)(glContext + 0x23a4);
-      puVar6 = puVar6 + 10;
+    if ((dirtyBits & 0x20000000) != 0) {
+      *packet = ((unsigned char *)0x000813adU);
+      packet[1] = *(undefined4 *)(glContext + 0x2384);
+      packet[2] = *(undefined4 *)(0x00002388 + glContext);
+      packet[3] = *(undefined4 *)(glContext + 0x238c);
+      packet[4] = *(undefined4 *)(glContext + 0x2390);
+      packet[5] = *(undefined4 *)(glContext + 0x2394);
+      packet[6] = *(undefined4 *)(glContext + 0x2398);
+      packet[7] = *(undefined4 *)(glContext + 0x239c);
+      packet[8] = *(undefined4 *)(glContext + 0x23a0);
+      packet[9] = *(undefined4 *)(glContext + 0x23a4);
+      packet = packet + 10;
     }
-    uVar12 = (uint)-(int)puVar6 >> 2 & 0xf;
-    puVar7 = puVar6;
-    for (uVar4 = uVar12; uVar4 != 0; uVar4 = uVar4 - 1) {
-      *puVar7 = 0x80000000;
-      puVar7 = puVar7 + 1;
+    padWords = (uint)-(int)packet >> 2 & 0xf;
+    nextPacket = packet;
+    for (padCountdown = padWords; padCountdown != 0; padCountdown = padCountdown - 1) {
+      *nextPacket = 0x80000000;
+      nextPacket = nextPacket + 1;
     }
     streamSetCurrent = *(code **)(glContext + 0x275c);
-    *(undefined4 **)(0x00002748 + glContext + 4) = puVar6 + uVar12;
-    (*streamSetCurrent)(glContext,puVar6 + uVar12);
+    *(undefined4 **)(0x00002748 + glContext + 4) = packet + padWords;
+    (*streamSetCurrent)(glContext,packet + padWords);
     registerDirty = *(uint *)(glContext + 0x1930);
     if ((registerDirty & 0xc0100000) != 0) {
       (**(code **)(((unsigned char *)0x00001330) + glContext))(glContext,0xc0100000);
