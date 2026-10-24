@@ -3059,37 +3059,37 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 107b14	107b34	eh-pad	IRLoadConst__vslot41	8	0x193cc0,__Unwind_Resume
 107c38	107c58	eh-pad	IRZeroary__new	8	0x193cc0,__Unwind_Resume
 107cb4	107cd4	eh-pad	IRLoadConst__vslot51	8	0x193cc0,__Unwind_Resume
-107e38	107e58	eh-pad	FUN_00107df4	8	0x193cc0,__Unwind_Resume
+107e38	107e58	eh-pad	IRUnary__new_107df4	8	0x193cc0,__Unwind_Resume
 107eb4	107ed4	eh-pad	IRLoadConst__vslot43	8	0x193cc0,__Unwind_Resume
 107f98	107fbc	eh-pad	FUN_00107f38	9	__Unwind_Resume
-10802c	108050	eh-pad	FUN_00107fd0	9	__Unwind_Resume
+10802c	108050	eh-pad	IRCmp2__ctor_107fd0	9	__Unwind_Resume
 1080a8	1080c8	eh-pad	IRLoadConst__vslot55	8	0x193cc0,__Unwind_Resume
-10813c	108160	eh-pad	FUN_001080e0	9	__Unwind_Resume
-108204	108224	eh-pad	FUN_001081c0	8	0x193cc0,__Unwind_Resume
+10813c	108160	eh-pad	IRCmp2__ctor_1080e0	9	__Unwind_Resume
+108204	108224	eh-pad	IRBinary__new_1081c0	8	0x193cc0,__Unwind_Resume
 108280	1082a0	eh-pad	IRLoadConst__vslot47	8	0x193cc0,__Unwind_Resume
-108394	1083b4	eh-pad	FUN_00108350	8	0x193cc0,__Unwind_Resume
+108394	1083b4	eh-pad	IRTrinary__new_108350	8	0x193cc0,__Unwind_Resume
 108410	108430	eh-pad	IRLoadConst__vslot49	8	0x193cc0,__Unwind_Resume
-1084fc	10851c	eh-pad	FUN_001084b8	8	0x193cc0,__Unwind_Resume
+1084fc	10851c	eh-pad	IRMov__new_1084b8	8	0x193cc0,__Unwind_Resume
 108578	108598	eh-pad	IRLoadConst__vslot45	8	0x193cc0,__Unwind_Resume
 1086c4	1086e8	eh-pad	IRExport__ctor_1085b0	9	__Unwind_Resume
-10874c	108770	eh-pad	FUN_001086e8	9	__Unwind_Resume
-1087cc	1087f0	eh-pad	FUN_00108770	9	__Unwind_Resume
-10884c	108870	eh-pad	FUN_001087f0	9	__Unwind_Resume
+10874c	108770	eh-pad	IRGeomExport__ctor_1086e8	9	__Unwind_Resume
+1087cc	1087f0	eh-pad	IRGeomExport__ctor_108770	9	__Unwind_Resume
+10884c	108870	eh-pad	IRGeomExport__ctor_1087f0	9	__Unwind_Resume
 108a2c	108a50	eh-pad	IRExport__ctor_108918	9	__Unwind_Resume
-108ab4	108ad8	eh-pad	FUN_00108a50	9	__Unwind_Resume
+108ab4	108ad8	eh-pad	IRGeomExport__ctor_108a50	9	__Unwind_Resume
 108b1c	108b3c	eh-pad	IRLoadConst__vslot77	8	0x193cc0,__Unwind_Resume
 108bb4	108bd8	eh-pad	FUN_00108b54	9	__Unwind_Resume
 108c30	108c50	eh-pad	IRLoadConst__vslot53	8	0x193cc0,__Unwind_Resume
 108f24	108f44	eh-pad	IRLoadConst__vslot63	8	0x193cc0,__Unwind_Resume
-1094c4	1094e4	eh-pad	FUN_00109480	8	0x193cc0,__Unwind_Resume
+1094c4	1094e4	eh-pad	IRLoadTemp__new_109480	8	0x193cc0,__Unwind_Resume
 109684	1096a8	eh-pad	IRLoadConst__ctor_109614	9	__Unwind_Resume
 10972c	109750	eh-pad	IRLoadConst__ctor_1096bc	9	__Unwind_Resume
-1097d8	1097fc	eh-pad	FUN_00109764	9	__Unwind_Resume
-109854	109874	eh-pad	FUN_00109810	8	0x193cc0,__Unwind_Resume
-109900	109924	eh-pad	FUN_0010988c	9	__Unwind_Resume
+1097d8	1097fc	eh-pad	IRLoadVertex__ctor_109764	9	__Unwind_Resume
+109854	109874	eh-pad	IRLoadVertex__new_109810	8	0x193cc0,__Unwind_Resume
+109900	109924	eh-pad	IRLoadVertex__ctor_10988c	9	__Unwind_Resume
 1099a4	1099c8	eh-pad	IRLoadConst__ctor_109938	9	__Unwind_Resume
 109a48	109a6c	eh-pad	IRLoadConst__ctor_1099dc	9	__Unwind_Resume
-109bb8	109bd8	eh-pad	FUN_00109b74	8	0x193cc0,__Unwind_Resume
+109bb8	109bd8	eh-pad	IRImmedConstBuff__new_109b74	8	0x193cc0,__Unwind_Resume
 109d94	109db4	eh-pad	IRLoadConst__vslot79	8	0x193cc0,__Unwind_Resume
 109ec8	109ee8	eh-pad	IRLoadConst__vslot61	8	0x193cc0,__Unwind_Resume
 109fe4	10a004	eh-pad	IRLoadConst__vslot67	8	0x193cc0,__Unwind_Resume
@@ -3097,8 +3097,8 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 10a284	10a2a4	eh-pad	IRLoadConst__vslot73	8	0x193cc0,__Unwind_Resume
 10a374	10a398	eh-pad	IRPhiNode__ctor_10a2bc	9	__Unwind_Resume
 10a450	10a474	eh-pad	IRPhiNode__ctor_10a398	9	__Unwind_Resume
-10a4d4	10a4f8	eh-pad	FUN_0010a474	9	__Unwind_Resume
-10a56c	10a590	eh-pad	FUN_0010a50c	9	__Unwind_Resume
+10a4d4	10a4f8	eh-pad	IRLoopStart__ctor_10a474	9	__Unwind_Resume
+10a56c	10a590	eh-pad	IRLoopStart__ctor_10a50c	9	__Unwind_Resume
 10a5e8	10a608	eh-pad	IRLoadConst__vslot65	8	0x193cc0,__Unwind_Resume
 10a684	10a6a8	eh-pad	FUN_0010a620	9	__Unwind_Resume
 10a720	10a744	eh-pad	FUN_0010a6bc	9	__Unwind_Resume
@@ -3123,10 +3123,10 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 10e100	10e114	eh-pad	KhanChip__ctor_10e050	5	__Unwind_Resume
 10e194	10e198	millicode	KhanChip__ctor_10e114	1	
 10e1c4	10e1d8	eh-pad	KhanChip__ctor_10e114	5	__Unwind_Resume
-10e25c	10e260	millicode	FUN_0010e1d8	1	
-10e28c	10e2a0	eh-pad	FUN_0010e1d8	5	__Unwind_Resume
-10e324	10e328	millicode	FUN_0010e2a0	1	
-10e354	10e368	eh-pad	FUN_0010e2a0	5	__Unwind_Resume
+10e25c	10e260	millicode	FudoChip__ctor_10e1d8	1	
+10e28c	10e2a0	eh-pad	FudoChip__ctor_10e1d8	5	__Unwind_Resume
+10e324	10e328	millicode	FudoChip__ctor_10e2a0	1	
+10e354	10e368	eh-pad	FudoChip__ctor_10e2a0	5	__Unwind_Resume
 10f384	10f38c	millicode	FUN_0010ef68	2	
 1100ec	11010c	eh-pad	FUN_00110020	8	0x193cc0,__Unwind_Resume
 11035c	110378	other	FUN_001102e0	7	0x193cc0
@@ -3169,10 +3169,10 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 123178	123194	other	ImmedConstBuffer__clone	7	0x193cc0
 12320c	12322c	eh-pad	ImmedConstBuffer__clone	8	0x193cc0,__Unwind_Resume
 12331c	12333c	eh-pad	VertexRegister__clone	8	0x193cc0,__Unwind_Resume
-1238a8	1238ac	millicode	FUN_0012379c	1	
-1238c8	1238e8	eh-pad	FUN_0012379c	8	0x193cc0,__Unwind_Resume
-1239f4	1239f8	millicode	FUN_001238e8	1	
-123a14	123a34	eh-pad	FUN_001238e8	8	0x193cc0,__Unwind_Resume
+1238a8	1238ac	millicode	VRegInfo__ctor_12379c	1	
+1238c8	1238e8	eh-pad	VRegInfo__ctor_12379c	8	0x193cc0,__Unwind_Resume
+1239f4	1239f8	millicode	VRegInfo__ctor_1238e8	1	
+123a14	123a34	eh-pad	VRegInfo__ctor_1238e8	8	0x193cc0,__Unwind_Resume
 123b5c	123b7c	eh-pad	Interpolator__vslot10	8	0x193cc0,__Unwind_Resume
 123d84	123d88	millicode	FUN_00123c08	1	
 123e78	123e94	other	FUN_00123c08	7	0x193cc0
@@ -3225,7 +3225,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 126c94	126cb4	eh-pad	ImmedConstBuffer__vslot35	8	0x193cc0,__Unwind_Resume
 126d20	126d40	eh-pad	ImmedConstBuffer__vslot167	8	0x193cc0,__Unwind_Resume
 126dac	126dcc	eh-pad	ImmedConstBuffer__vslot171	8	0x193cc0,__Unwind_Resume
-126e40	126e60	eh-pad	FUN_00126de4	8	0x193cc0,__Unwind_Resume
+126e40	126e60	eh-pad	LoopIndexedSet__ctor_126de4	8	0x193cc0,__Unwind_Resume
 126ee4	126f04	eh-pad	ImmedConstBuffer__vslot183	8	0x193cc0,__Unwind_Resume
 126f70	126f90	eh-pad	ImmedConstBuffer__vslot179	8	0x193cc0,__Unwind_Resume
 126ffc	12701c	eh-pad	ImmedConstBuffer__vslot175	8	0x193cc0,__Unwind_Resume
@@ -3234,13 +3234,13 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 1271a0	1271c0	eh-pad	ImmedConstBuffer__vslot79	8	0x193cc0,__Unwind_Resume
 12722c	12724c	eh-pad	ImmedConstBuffer__vslot39	8	0x193cc0,__Unwind_Resume
 1272c4	1272cc	millicode	FUN_001272b4	2	
-127abc	127ac0	millicode	FUN_00127994	1	
-127b50	127b54	millicode	FUN_00127994	1	
-127be4	127be8	millicode	FUN_00127994	1	
-127c78	127c7c	millicode	FUN_00127994	1	
-127d2c	127d30	millicode	FUN_00127994	1	
-127d78	127d7c	millicode	FUN_00127994	1	
-127dac	127de8	eh-pad	FUN_00127994	15	0x193cc0,__Unwind_Resume
+127abc	127ac0	millicode	VRegInfo__new_127994	1	
+127b50	127b54	millicode	VRegInfo__new_127994	1	
+127be4	127be8	millicode	VRegInfo__new_127994	1	
+127c78	127c7c	millicode	VRegInfo__new_127994	1	
+127d2c	127d30	millicode	VRegInfo__new_127994	1	
+127d78	127d7c	millicode	VRegInfo__new_127994	1	
+127dac	127de8	eh-pad	VRegInfo__new_127994	15	0x193cc0,__Unwind_Resume
 1281e8	1281f0	millicode	KhanPs__vslot8_failNotSupported	2	
 12841c	128430	other	KhanPs__vslot74_seedConstantValueNumbers	5	
 129108	12911c	eh-pad	KhanPs__ctor_128fd0	5	__Unwind_Resume
@@ -3268,12 +3268,12 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 12df58	12df70	eh-pad	FUN_0012dd58	6	0x193cc0,__Unwind_Resume
 12e450	12e468	eh-pad	Program__foldConstantIfRegion	6	0x193cc0,__Unwind_Resume
 12e534	12e554	eh-pad	FUN_0012e488	8	0x193cc0,__Unwind_Resume
-12e658	12e674	other	FUN_0012e56c	7	0x193cc0
-12e6cc	12e6e8	other	FUN_0012e56c	7	0x193cc0
-12e718	12e734	other	FUN_0012e56c	7	0x193cc0
-12e768	12e784	other	FUN_0012e56c	7	0x193cc0
-12e7ac	12e7c8	other	FUN_0012e56c	7	0x193cc0
-12e88c	12e8ac	eh-pad	FUN_0012e56c	8	0x193cc0,__Unwind_Resume
+12e658	12e674	other	IfFooter__ctor_12e56c	7	0x193cc0
+12e6cc	12e6e8	other	IfFooter__ctor_12e56c	7	0x193cc0
+12e718	12e734	other	IfFooter__ctor_12e56c	7	0x193cc0
+12e768	12e784	other	IfFooter__ctor_12e56c	7	0x193cc0
+12e7ac	12e7c8	other	IfFooter__ctor_12e56c	7	0x193cc0
+12e88c	12e8ac	eh-pad	IfFooter__ctor_12e56c	8	0x193cc0,__Unwind_Resume
 12e9f0	12e9f4	millicode	FUN_0012e8c0	1	
 12ea90	12eab0	eh-pad	FUN_0012e8c0	8	0x193cc0,__Unwind_Resume
 12ec10	12ec2c	other	FUN_0012eacc	7	0x193cc0

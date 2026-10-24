@@ -1,55 +1,55 @@
 #include "decls.h"
 
-/* FUN_00109a80 @ 0x109a80 (76 bytes) */
-int FUN_00109a80(this, kind, compiler)
+/* IRLoad__ctor_109a80 @ 0x109a80 (76 bytes) */
+int IRLoad__ctor_109a80(this, kind, compiler)
   undefined4 *this;
   undefined4 kind;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   IRPseudo__ctor(this,kind,compiler);
-  puVar1 = PTR_DAT_001e8c54;
+  vtable = PTR_DAT_001e8c54;
   this[0x20] = 1;
-  *this = puVar1 + 8;
+  *this = vtable + 8;
   return;
 }
 
-/* FUN_00109acc @ 0x109acc (84 bytes) */
-int FUN_00109acc(this, kind, compiler)
+/* IRImmedConstBuff__ctor_109acc @ 0x109acc (84 bytes) */
+int IRImmedConstBuff__ctor_109acc(this, kind, compiler)
   undefined4 *this;
   undefined4 kind;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   IRPseudo__ctor(this,kind,compiler);
-  puVar1 = PTR_DAT_001e8c04;
+  vtable = PTR_DAT_001e8c04;
   this[0x21] = 0;
   this[0x20] = 1;
-  *this = puVar1 + 8;
+  *this = vtable + 8;
   return;
 }
 
-/* FUN_00109b20 @ 0x109b20 (84 bytes) */
-int FUN_00109b20(this, kind, compiler)
+/* IRImmedConstBuff__ctor_109b20 @ 0x109b20 (84 bytes) */
+int IRImmedConstBuff__ctor_109b20(this, kind, compiler)
   undefined4 *this;
   undefined4 kind;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   IRPseudo__ctor(this,kind,compiler);
-  puVar1 = PTR_DAT_001e8c04;
+  vtable = PTR_DAT_001e8c04;
   this[0x21] = 0;
   this[0x20] = 1;
-  *this = puVar1 + 8;
+  *this = vtable + 8;
   return;
 }
 
-/* FUN_00109b74 @ 0x109b74 (68 bytes) */
-int FUN_00109b74(param_1, compiler)
-  undefined4 param_1;
+/* IRImmedConstBuff__new_109b74 @ 0x109b74 (68 bytes) */
+int IRImmedConstBuff__new_109b74(opcode, compiler)
+  undefined4 opcode;
   int compiler;
 {
   undefined4 *allocation;
@@ -58,69 +58,69 @@ int FUN_00109b74(param_1, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00109b20)(allocation + 1,param_1,compiler);
+  ((int (*)())IRImmedConstBuff__ctor_109b20)(allocation + 1,opcode,compiler);
   return allocation + 1;
 }
 
-/* FUN_00109bf0 @ 0x109bf0 (92 bytes) */
-int FUN_00109bf0(this, compiler)
+/* IRMerge__ctor_109bf0 @ 0x109bf0 (92 bytes) */
+int IRMerge__ctor_109bf0(this, compiler)
   undefined4 *this;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   IRPseudo__ctor(this,0x83,compiler);
-  puVar1 = PTR_DAT_001e8c1c;
+  vtable = PTR_DAT_001e8c1c;
   this[0x21] = 0;
   this[0x20] = 1;
-  *this = puVar1 + 8;
+  *this = vtable + 8;
   return;
 }
 
-/* FUN_00109c4c @ 0x109c4c (92 bytes) */
-int FUN_00109c4c(this, compiler)
+/* IRMerge__ctor_109c4c @ 0x109c4c (92 bytes) */
+int IRMerge__ctor_109c4c(this, compiler)
   undefined4 *this;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   IRPseudo__ctor(this,0x83,compiler);
-  puVar1 = PTR_DAT_001e8c1c;
+  vtable = PTR_DAT_001e8c1c;
   this[0x21] = 0;
   this[0x20] = 1;
-  *this = puVar1 + 8;
+  *this = vtable + 8;
   return;
 }
 
-/* FUN_00109ca8 @ 0x109ca8 (84 bytes) */
-int FUN_00109ca8(this, kind, compiler)
+/* IRMerge__ctor_109ca8 @ 0x109ca8 (84 bytes) */
+int IRMerge__ctor_109ca8(this, kind, compiler)
   undefined4 *this;
   undefined4 kind;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   IRPseudo__ctor(this,kind,compiler);
-  puVar1 = PTR_DAT_001e8c1c;
+  vtable = PTR_DAT_001e8c1c;
   this[0x21] = 0;
   this[0x20] = 1;
-  *this = puVar1 + 8;
+  *this = vtable + 8;
   return;
 }
 
-/* FUN_00109cfc @ 0x109cfc (84 bytes) */
-int FUN_00109cfc(this, kind, compiler)
+/* IRMerge__ctor_109cfc @ 0x109cfc (84 bytes) */
+int IRMerge__ctor_109cfc(this, kind, compiler)
   undefined4 *this;
   undefined4 kind;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   IRPseudo__ctor(this,kind,compiler);
-  puVar1 = PTR_DAT_001e8c1c;
+  vtable = PTR_DAT_001e8c1c;
   this[0x21] = 0;
   this[0x20] = 1;
-  *this = puVar1 + 8;
+  *this = vtable + 8;
   return;
 }
 
@@ -135,7 +135,7 @@ int IRLoadConst__vslot79(this, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00109cfc)(allocation + 1,this,compiler);
+  ((int (*)())IRMerge__ctor_109cfc)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -405,36 +405,36 @@ int IRPhiNode__ctor_10a398(this, compiler)
   return;
 }
 
-/* FUN_0010a474 @ 0x10a474 (96 bytes) */
-int FUN_0010a474(this, param_2, compiler)
+/* IRLoopStart__ctor_10a474 @ 0x10a474 (96 bytes) */
+int IRLoopStart__ctor_10a474(this, param_2, compiler)
   undefined4 *this;
   undefined4 param_2;
   int compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   IRPseudo__ctor(this,0x81,compiler);
-  puVar1 = PTR_DAT_001e8c38;
+  vtable = PTR_DAT_001e8c38;
   this[0x21] = 1;
   this[5] = this[5] | 0x18;
-  *this = puVar1 + 8;
+  *this = vtable + 8;
   this[0x20] = 1;
   return Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),this);
 }
 
-/* FUN_0010a50c @ 0x10a50c (96 bytes) */
-int FUN_0010a50c(this, param_2, compiler)
+/* IRLoopStart__ctor_10a50c @ 0x10a50c (96 bytes) */
+int IRLoopStart__ctor_10a50c(this, param_2, compiler)
   undefined4 *this;
   undefined4 param_2;
   int compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   IRPseudo__ctor(this,0x81,compiler);
-  puVar1 = PTR_DAT_001e8c38;
+  vtable = PTR_DAT_001e8c38;
   this[0x21] = 1;
   this[5] = this[5] | 0x18;
-  *this = puVar1 + 8;
+  *this = vtable + 8;
   this[0x20] = 1;
   return Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),this);
 }
@@ -450,7 +450,7 @@ int IRLoadConst__vslot65(this, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_0010a50c)(allocation + 1,this,compiler);
+  ((int (*)())IRLoopStart__ctor_10a50c)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -503,74 +503,74 @@ int IRLoadConst__vslot57(this, compiler)
   return allocation + 1;
 }
 
-/* FUN_0010a7d4 @ 0x10a7d4 (104 bytes) */
-int FUN_0010a7d4(this, param_2, param_3, compiler)
+/* IRStartMakeCall__ctor_10a7d4 @ 0x10a7d4 (104 bytes) */
+int IRStartMakeCall__ctor_10a7d4(this, param_2, param_3, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   IRPseudo__ctor(this,0x90,compiler);
-  puVar1 = PTR_DAT_001e8c18;
+  vtable = PTR_DAT_001e8c18;
   this[0x4b] = param_2;
   this[5] = this[5] | 0x100;
-  *this = puVar1 + 8;
+  *this = vtable + 8;
   this[0x4c] = param_3;
   return;
 }
 
-/* FUN_0010a83c @ 0x10a83c (104 bytes) */
-int FUN_0010a83c(this, param_2, param_3, compiler)
+/* IRStartMakeCall__ctor_10a83c @ 0x10a83c (104 bytes) */
+int IRStartMakeCall__ctor_10a83c(this, param_2, param_3, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   IRPseudo__ctor(this,0x90,compiler);
-  puVar1 = PTR_DAT_001e8c18;
+  vtable = PTR_DAT_001e8c18;
   this[0x4b] = param_2;
   this[5] = this[5] | 0x100;
-  *this = puVar1 + 8;
+  *this = vtable + 8;
   this[0x4c] = param_3;
   return;
 }
 
-/* FUN_0010a8a4 @ 0x10a8a4 (104 bytes) */
-int FUN_0010a8a4(this, param_2, param_3, compiler)
+/* IRStartCallRoutine__ctor_10a8a4 @ 0x10a8a4 (104 bytes) */
+int IRStartCallRoutine__ctor_10a8a4(this, param_2, param_3, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   IRPseudo__ctor(this,0x8f,compiler);
-  puVar1 = PTR_DAT_001e8c4c;
+  vtable = PTR_DAT_001e8c4c;
   this[0x4b] = param_2;
   this[5] = this[5] | 0x100;
-  *this = puVar1 + 8;
+  *this = vtable + 8;
   this[0x4c] = param_3;
   return;
 }
 
-/* FUN_0010a90c @ 0x10a90c (104 bytes) */
-int FUN_0010a90c(this, param_2, param_3, compiler)
+/* IRStartCallRoutine__ctor_10a90c @ 0x10a90c (104 bytes) */
+int IRStartCallRoutine__ctor_10a90c(this, param_2, param_3, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   IRPseudo__ctor(this,0x8f,compiler);
-  puVar1 = PTR_DAT_001e8c4c;
+  vtable = PTR_DAT_001e8c4c;
   this[0x4b] = param_2;
   this[5] = this[5] | 0x100;
-  *this = puVar1 + 8;
+  *this = vtable + 8;
   this[0x4c] = param_3;
   return;
 }

@@ -638,7 +638,7 @@ int R520VMachineAssembler__vslot24_assembleWithPredicateSet(this, node, block, c
           predSlot = 0;
         }
       }
-      saveMovInst = FUN_001084b8(0x66,compiler);
+      saveMovInst = IRMov__new_1084b8(0x66,compiler);
       *(undefined4 *)(saveMovInst + 0x9c) = DAT_001b2d54;
       *(undefined1 *)(predSlot + saveMovInst + 0x9c) = 0;
       *(undefined4 *)(saveMovInst + 0x98) = 0;

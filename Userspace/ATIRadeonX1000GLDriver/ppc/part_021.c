@@ -344,7 +344,7 @@ int FUN_000e1b70(param_1, param_2)
     else if (param_2 == 4) {
       iVar1 = FUN_000e1564(param_1,0x10);
       if (iVar1 != 0) {
-        FUN_0010e1d8(iVar1,param_1);
+        FudoChip__ctor_10e1d8(iVar1,param_1);
       }
       *(int *)(param_1 + 0x310) = iVar1;
     }

@@ -1053,7 +1053,7 @@ PTR_DAT_001e8c6c	0x1e8c6c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_DAT_001e8c70	0x1e8c70	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8c70 asm("PTR_DAT_001e8c70");	pointer -> LD_1dc800	data.s
 PTR_DAT_001e8c74	0x1e8c74	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8c74 asm("PTR_DAT_001e8c74");	pointer -> LD_1ead60	data.s
 PTR_DAT_001e8c78	0x1e8c78	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8c78 asm("PTR_DAT_001e8c78");	pointer -> LD_1ab838	data.s
-PTR_FUN_001e8c7c	0x1e8c7c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8c7c asm("PTR_FUN_001e8c7c");	pointer -> FUN_00107df4	data.s
+PTR_FUN_001e8c7c	0x1e8c7c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8c7c asm("PTR_FUN_001e8c7c");	pointer -> IRUnary__new_107df4	data.s
 PTR_DAT_001e8c80	0x1e8c80	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8c80 asm("PTR_DAT_001e8c80");	pointer -> LD_1eb5e0	data.s
 PTR_DAT_001e8c84	0x1e8c84	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8c84 asm("PTR_DAT_001e8c84");	pointer -> LD_1af390	data.s
 PTR_DAT_001e8c88	0x1e8c88	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8c88 asm("PTR_DAT_001e8c88");	pointer -> LD_1f2890	data.s

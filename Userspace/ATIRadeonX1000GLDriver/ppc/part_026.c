@@ -2819,7 +2819,7 @@ int FUN_000f94dc(compiler, param_2, param_3, param_4, param_5, param_6, param_7)
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     *allocation = arena;
     puVar12 = allocation + 1;
-    FUN_00109cfc(puVar12,0x83,*(undefined4 *)(compiler + 8));
+    IRMerge__ctor_109cfc(puVar12,0x83,*(undefined4 *)(compiler + 8));
     operandRecord2 = IRInst__getOperandRecord(puVar12,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0x39;
     *(undefined4 *)(operandRecord2 + 8) = 0;
@@ -2870,7 +2870,7 @@ int FUN_000f94dc(compiler, param_2, param_3, param_4, param_5, param_6, param_7)
             instAlloc = (undefined4 *)Arena__alloc(arena,0x168);
             *instAlloc = arena;
             puVar10 = instAlloc + 1;
-            FUN_00109cfc(puVar10,0x83,*(undefined4 *)(compiler + 8));
+            IRMerge__ctor_109cfc(puVar10,0x83,*(undefined4 *)(compiler + 8));
             operandRecord = IRInst__getOperandRecord(puVar10,0);
             *(undefined4 *)(operandRecord + 0xc) = 0x39;
             arena = 4;
@@ -2893,7 +2893,7 @@ int FUN_000f94dc(compiler, param_2, param_3, param_4, param_5, param_6, param_7)
         instAlloc = (undefined4 *)Arena__alloc(arena,0x168);
         *instAlloc = arena;
         puVar8 = instAlloc + 1;
-        FUN_00109428(puVar8,0x7a,*(undefined4 *)(compiler + 8));
+        IRLoadTemp__ctor_109428(puVar8,0x7a,*(undefined4 *)(compiler + 8));
         operandRecord = IRInst__getOperandRecord(puVar8,0);
         *(undefined4 *)(operandRecord + 0xc) = 0x10;
         loopIndex = loopIndex + 1;
@@ -3255,7 +3255,7 @@ LAB_000f9f08:
       allocation = (undefined4 *)Arena__alloc(arena,0x168);
       *allocation = arena;
       puVar21 = allocation + 1;
-      FUN_00108a50(puVar21,0xf9,*(undefined4 *)(pass + 8));
+      IRGeomExport__ctor_108a50(puVar21,0xf9,*(undefined4 *)(pass + 8));
       allocation[0x28] = uVar14;
       allocation[0x22] = 2;
       if ((*param_3 & 0x4000000) != 0) {
@@ -3294,7 +3294,7 @@ LAB_000fa1bc:
       allocation = (undefined4 *)Arena__alloc(arena,0x168);
       *allocation = arena;
       puVar21 = allocation + 1;
-      FUN_00108770(puVar21,*(undefined4 *)(pass + 8));
+      IRGeomExport__ctor_108770(puVar21,*(undefined4 *)(pass + 8));
       allocation[0x28] = uVar14;
       allocation[0x50] = 0x24;
       allocation[0x51] = uVar12;
@@ -4417,7 +4417,7 @@ LAB_000fc3f4:
         }
         arena = (undefined4)uVar39;
         if (*(int *)((ulonglong)uVar39 >> 0x20) == 0) {
-          iVar6 = FUN_00109810(0xa4,*(undefined4 *)(param_1 + 8));
+          iVar6 = IRLoadVertex__new_109810(0xa4,*(undefined4 *)(param_1 + 8));
           *(uint *)(iVar6 + 0x14) = *(uint *)(iVar6 + 0x14) & 0xffff7fff;
           iVar38 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
           *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar38;
@@ -5713,7 +5713,7 @@ code_r0x000fed00:
       }
       IRInst__setHardwareRegisterAndAdd(piVar18,param_1,0x2b,0);
       piVar18[0x20] = 1;
-      piVar18 = (int *)FUN_001084b8(0x31,*(undefined4 *)(param_1 + 8));
+      piVar18 = (int *)IRMov__new_1084b8(0x31,*(undefined4 *)(param_1 + 8));
       iVar43 = IRInst__getOperandRecord(piVar18,0);
       *(uint *******)(iVar43 + 8) = in_r6;
       *(undefined4 *)(iVar43 + 0xc) = 0x2c;
@@ -5849,7 +5849,7 @@ code_r0x000fed00:
         in_r6 = (uint ******)0x0;
         pppppuVar15 = param_2[(int)param_2[0x16] + 0x23];
         arena = FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),0x43,0xffffffff,0);
-        iVar34 = FUN_00109b74(0x10a,*(undefined4 *)(param_1 + 8));
+        iVar34 = IRImmedConstBuff__new_109b74(0x10a,*(undefined4 *)(param_1 + 8));
         *(int *)(param_1 + 0x354) = iVar34;
         IRInst__setOperandRef(iVar34,0,arena);
         *(uint ******)(iVar34 + 300) = pppppuVar52 + (int)pppppuVar15;
@@ -5914,7 +5914,7 @@ code_r0x000fed00:
           puVar14 = (undefined4 *)Arena__alloc(arena,0x168);
           *puVar14 = arena;
           puVar24 = puVar14 + 1;
-          FUN_00109a80(puVar24,0xfa,*(undefined4 *)(param_1 + 8));
+          IRLoad__ctor_109a80(puVar24,0xfa,*(undefined4 *)(param_1 + 8));
           arena = FUN_000ec208(param_1,uVar10);
           iVar34 = IRInst__getOperandRecord(puVar24,0);
           *(undefined4 *)(iVar34 + 0xc) = arena;

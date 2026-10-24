@@ -1879,15 +1879,15 @@ int FUN_0012e488(param_1, param_2)
   return puVar4;
 }
 
-/* FUN_0012e56c @ 0x12e56c (660 bytes) */
-int FUN_0012e56c(param_1, param_2, compiler)
+/* IfFooter__ctor_12e56c @ 0x12e56c (660 bytes) */
+int IfFooter__ctor_12e56c(param_1, param_2, compiler)
   undefined4 param_1;
   int *param_2;
   int compiler;
 {
   int operandRecord;
   undefined4 arenaAt3742;
-  undefined *puVar1;
+  undefined *vtable;
   int iVar2;
   undefined4 *allocation;
   undefined4 *puVar4;
@@ -1914,9 +1914,9 @@ int FUN_0012e56c(param_1, param_2, compiler)
     IRInst__ctor_10502c(puVar6,0x8c,compiler);
     allocation[0x4c] = 6;
     operandRecord = IRInst__getOperandRecord(puVar6,1);
-    puVar1 = PTR_DAT_001e8b8c;
+    vtable = PTR_DAT_001e8b8c;
     *(undefined4 *)(operandRecord + 0xc) = 0;
-    arena = *(undefined4 *)puVar1;
+    arena = *(undefined4 *)vtable;
     *(undefined4 *)(operandRecord + 8) = param_1;
     operandRecord = IRInst__getOperandRecord(puVar6,1);
     *(undefined4 *)(operandRecord + 0x10) = arena;
@@ -2216,7 +2216,7 @@ LAB_0012ed24:
         iVar24 = FUN_0012afe8(uVar11,uVar15,iVar23,uVar16);
         uVar20 = FUN_0012b140(iVar23);
         if (iVar23 != iVar24) break;
-        ((int (*)())FUN_0012e56c)(uVar17,iVar23,*(undefined4 *)(param_1 + 8));
+        ((int (*)())IfFooter__ctor_12e56c)(uVar17,iVar23,*(undefined4 *)(param_1 + 8));
         uVar20 = FUN_0012ae1c(iVar23);
       }
       if (iVar24 == 0) break;
@@ -2270,7 +2270,7 @@ LAB_0012ed24:
       FUN_000e977c(predecessor2,iVar24,uVar20);
       Block__connect(uVar20,iVar24);
       FUN_000ed63c(param_1,puVar18);
-      ((int (*)())FUN_0012e56c)(uVar17,iVar24,*(undefined4 *)(param_1 + 8));
+      ((int (*)())IfFooter__ctor_12e56c)(uVar17,iVar24,*(undefined4 *)(param_1 + 8));
       uVar20 = FUN_0012ae1c(iVar24);
     }
   } while( true );
@@ -3537,7 +3537,7 @@ int FUN_00130ec0(param_1, param_2, compiler)
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar3 = allocation + 1;
   *allocation = arena;
-  FUN_00109a80(puVar3,0xfa,compiler);
+  IRLoad__ctor_109a80(puVar3,0xfa,compiler);
   allocation[0x4d] = param_1;
   allocation[0x27] = 0x3b;
   allocation[0x4e] = param_2;
@@ -3560,7 +3560,7 @@ int FUN_00130f64(param_1, param_2, compiler)
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar3 = allocation + 1;
   *allocation = arena;
-  FUN_00109a80(puVar3,0x79,compiler);
+  IRLoad__ctor_109a80(puVar3,0x79,compiler);
   allocation[0x4d] = param_1;
   allocation[0x27] = 0x3c;
   allocation[0x50] = param_2;

@@ -1177,7 +1177,7 @@ int HwLimits__vslot20_createInstWithOwner(this, param_2, param_3)
 {
   int iVar1;
   
-  iVar1 = FUN_00109810(0xa4,param_3);
+  iVar1 = IRLoadVertex__new_109810(0xa4,param_3);
   *(undefined4 *)(iVar1 + 300) = param_2;
   *(uint *)(iVar1 + 0x14) = *(uint *)(iVar1 + 0x14) & 0xffff7fff;
   return;
@@ -1282,7 +1282,7 @@ int FUN_0010de6c(param_1, param_2, param_3, param_4, param_5, param_6)
   uVar4 = *(undefined4 *)(param_2 + 8);
   uVar2 = FUN_000ec208(param_2,*param_4 >> 0x10 & 0x3f);
   uVar2 = FUN_00127608(uVar5,uVar2,(int)(short)uVar1,0);
-  iVar3 = FUN_00109810(0xa4,uVar4);
+  iVar3 = IRLoadVertex__new_109810(0xa4,uVar4);
   IRInst__setOperandRef(iVar3,0,uVar2);
   *(int *)(iVar3 + 300) = (int)(short)uVar1;
   return FUN_000f92fc(param_2,iVar3,param_6);
@@ -1335,108 +1335,108 @@ int FUN_0010defc(param_1, param_2)
 }
 
 /* KhanChip__ctor_10e050 @ 0x10e050 (172 bytes) */
-int KhanChip__ctor_10e050(this, param_2)
+int KhanChip__ctor_10e050(this, opcode)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 opcode;
 {
-  undefined *puVar1;
+  undefined *vtable;
   int iVar2;
   
   this[2] = 0;
-  puVar1 = PTR_DAT_001e8c88;
+  vtable = PTR_DAT_001e8c88;
   this[1] = 0;
-  *this = puVar1 + 8;
+  *this = vtable + 8;
   *this = PTR_DAT_001e8c74 + 8;
-  iVar2 = FUN_000e1564(param_2,0x1740);
+  iVar2 = FUN_000e1564(opcode,0x1740);
   if (iVar2 != 0) {
-    KhanVs__ctor_12a578(iVar2,param_2,1);
+    KhanVs__ctor_12a578(iVar2,opcode,1);
   }
   this[1] = iVar2;
-  iVar2 = FUN_000e1564(param_2,0x1744);
+  iVar2 = FUN_000e1564(opcode,0x1744);
   if (iVar2 != 0) {
-    KhanPs__ctor_129130(iVar2,param_2,1);
+    KhanPs__ctor_129130(iVar2,opcode,1);
   }
   this[2] = iVar2;
   return;
 }
 
 /* KhanChip__ctor_10e114 @ 0x10e114 (172 bytes) */
-int KhanChip__ctor_10e114(this, param_2)
+int KhanChip__ctor_10e114(this, opcode)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 opcode;
 {
-  undefined *puVar1;
+  undefined *vtable;
   int iVar2;
   
   this[2] = 0;
-  puVar1 = PTR_DAT_001e8c88;
+  vtable = PTR_DAT_001e8c88;
   this[1] = 0;
-  *this = puVar1 + 8;
+  *this = vtable + 8;
   *this = PTR_DAT_001e8c74 + 8;
-  iVar2 = FUN_000e1564(param_2,0x1740);
+  iVar2 = FUN_000e1564(opcode,0x1740);
   if (iVar2 != 0) {
-    KhanVs__ctor_12a578(iVar2,param_2,1);
+    KhanVs__ctor_12a578(iVar2,opcode,1);
   }
   this[1] = iVar2;
-  iVar2 = FUN_000e1564(param_2,0x1744);
+  iVar2 = FUN_000e1564(opcode,0x1744);
   if (iVar2 != 0) {
-    KhanPs__ctor_129130(iVar2,param_2,1);
+    KhanPs__ctor_129130(iVar2,opcode,1);
   }
   this[2] = iVar2;
   return;
 }
 
-/* FUN_0010e1d8 @ 0x10e1d8 (176 bytes) */
-int FUN_0010e1d8(this, param_2)
+/* FudoChip__ctor_10e1d8 @ 0x10e1d8 (176 bytes) */
+int FudoChip__ctor_10e1d8(this, opcode)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 opcode;
 {
-  undefined *puVar1;
+  undefined *vtable;
   int iVar2;
   undefined *puVar3;
   
-  puVar1 = PTR_DAT_001e8c80;
+  vtable = PTR_DAT_001e8c80;
   puVar3 = PTR_DAT_001e8c74 + 8;
   this[2] = 0;
   *this = puVar3;
   this[1] = 0;
-  *this = puVar1 + 8;
-  iVar2 = FUN_000e1564(param_2,0x1740);
+  *this = vtable + 8;
+  iVar2 = FUN_000e1564(opcode,0x1740);
   if (iVar2 != 0) {
-    FudoVs__ctor_12a8bc(iVar2,param_2,1);
+    FudoVs__ctor_12a8bc(iVar2,opcode,1);
   }
   this[1] = iVar2;
-  iVar2 = FUN_000e1564(param_2,0x1944);
+  iVar2 = FUN_000e1564(opcode,0x1944);
   if (iVar2 != 0) {
-    FudoPs__ctor_1920e0(iVar2,param_2,1);
+    FudoPs__ctor_1920e0(iVar2,opcode,1);
   }
   this[2] = iVar2;
   return;
 }
 
-/* FUN_0010e2a0 @ 0x10e2a0 (176 bytes) */
-int FUN_0010e2a0(this, param_2)
+/* FudoChip__ctor_10e2a0 @ 0x10e2a0 (176 bytes) */
+int FudoChip__ctor_10e2a0(this, opcode)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 opcode;
 {
-  undefined *puVar1;
+  undefined *vtable;
   int iVar2;
   undefined *puVar3;
   
-  puVar1 = PTR_DAT_001e8c80;
+  vtable = PTR_DAT_001e8c80;
   puVar3 = PTR_DAT_001e8c74 + 8;
   this[2] = 0;
   *this = puVar3;
   this[1] = 0;
-  *this = puVar1 + 8;
-  iVar2 = FUN_000e1564(param_2,0x1740);
+  *this = vtable + 8;
+  iVar2 = FUN_000e1564(opcode,0x1740);
   if (iVar2 != 0) {
-    FudoVs__ctor_12a8bc(iVar2,param_2,1);
+    FudoVs__ctor_12a8bc(iVar2,opcode,1);
   }
   this[1] = iVar2;
-  iVar2 = FUN_000e1564(param_2,0x1944);
+  iVar2 = FUN_000e1564(opcode,0x1944);
   if (iVar2 != 0) {
-    FudoPs__ctor_1920e0(iVar2,param_2,1);
+    FudoPs__ctor_1920e0(iVar2,opcode,1);
   }
   this[2] = iVar2;
   return;

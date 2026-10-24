@@ -809,7 +809,7 @@ LAB_0016ddd8:
           allocation = (undefined4 *)Arena__alloc(arena,0x168);
           *allocation = arena;
           newLoadInst = allocation + 1;
-          FUN_00109a80(newLoadInst,0xfa,*scheduler);
+          IRLoad__ctor_109a80(newLoadInst,0xfa,*scheduler);
           requestedIndex2 = IRInst__getDefiningField128(inst,0);
           allocation[0x27] = 0x45;
           allocation[0x26] = loopIndex;
@@ -4377,7 +4377,7 @@ LAB_001730b4:
       iVar7 = iVar7 + 4;
       iVar4 = iVar4 + -1;
       if (iVar4 == 0) {
-        uVar5 = FUN_001084b8(0x31,*(undefined4 *)(ctx + 0x238));
+        uVar5 = IRMov__new_1084b8(0x31,*(undefined4 *)(ctx + 0x238));
         IRInst__setOperandRef(uVar5,0,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
         IRInst__setOperandRef(uVar5,1,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
         uVar2 = local_28;

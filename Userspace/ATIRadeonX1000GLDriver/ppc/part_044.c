@@ -3864,7 +3864,7 @@ int FUN_0015f44c(inst, param_2, node, pass)
     if ((inst != 0) &&
        (((node != (int *)0x0 && (*(int *)(*(int *)(inst + 0x88) + 8) == 0x8e)) &&
         (iVar6 = (**(code **)(*node + 0x60))(node), iVar6 != 0)))) {
-      iVar11 = FUN_001084b8(0x31,*(undefined4 *)(pass + 8));
+      iVar11 = IRMov__new_1084b8(0x31,*(undefined4 *)(pass + 8));
       iVar6 = *(int *)(pass + 0x478);
       *(undefined4 *)(iVar11 + 0x98) = 0;
       *(int *)(iVar11 + 0x160) = iVar6 + 1;
@@ -4145,7 +4145,7 @@ LAB_0015fa2c:
   }
   if ((piVar17[0x26] != 0x33) ||
      (iVar6 = IRInst__getOperandSource(node,node[0x21]), *(int *)(iVar6 + 300) == 3)) {
-    iVar11 = FUN_001084b8(0x31,*(undefined4 *)(pass + 8));
+    iVar11 = IRMov__new_1084b8(0x31,*(undefined4 *)(pass + 8));
     iVar6 = *(int *)(pass + 0x478);
     *(undefined4 *)(iVar11 + 0x98) = 0;
     *(int *)(iVar11 + 0x160) = iVar6 + 1;

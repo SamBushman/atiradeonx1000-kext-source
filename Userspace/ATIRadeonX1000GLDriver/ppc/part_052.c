@@ -3183,7 +3183,7 @@ int R520VMachineAssembler__getOrCreateConstantZeroInst(this)
     arenaAt378 = *(undefined4 *)(*(int *)(this + 0xc) + 0x378);
     instAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x168);
     *instAlloc = arenaAt378;
-    FUN_00109554(instAlloc + 1,*(undefined4 *)(this + 0xc));
+    IRLoadTemp__ctor_109554(instAlloc + 1,*(undefined4 *)(this + 0xc));
     *(undefined4 **)(this + 0x90) = instAlloc + 1;
     instAlloc[0x27] = 0;
     instAlloc[0x26] = zeroRegister;

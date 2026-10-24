@@ -570,7 +570,7 @@ int FUN_000ecd28(param_1, param_2, param_3, param_4, param_5, param_6)
   int *piVar4;
   int local_28 [2];
   
-  piVar2 = (int *)FUN_001084b8(0x31,*(undefined4 *)(param_1 + 8));
+  piVar2 = (int *)IRMov__new_1084b8(0x31,*(undefined4 *)(param_1 + 8));
   IRInst__setOperandSource(piVar2,1,param_2,0,*(undefined4 *)(param_1 + 8));
   IRInst__setHardwareRegisterAndAdd(piVar2,param_1,param_4,param_5);
   (**(code **)(*piVar2 + 0x94))(piVar2,param_3,*(undefined4 *)(param_1 + 8));
@@ -2236,7 +2236,7 @@ int FUN_000ef498(param_1, param_2)
   ExitBlock__ctor_eaae8(allocation,*(undefined4 *)(param_1 + 8));
   *(undefined4 **)(param_1 + 0x3a8) = allocation;
   ((int (*)())FUN_000ec42c)(param_1,allocation);
-  FUN_00127994(*(undefined4 *)(param_1 + 0x3ac),*(uint *)(param_1 + 0x30) & 1);
+  VRegInfo__new_127994(*(undefined4 *)(param_1 + 0x3ac),*(uint *)(param_1 + 0x30) & 1);
   piVar8 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
   (**(code **)(*piVar8 + 0x10))(piVar8,*(int *)(param_1 + 8));
   FUN_000fd5c8(param_1,param_2);
@@ -3321,7 +3321,7 @@ code_r0x000e76c4:
              (((iVar6 != operandVReg[0x56] ||
                (iVar12 = (**(code **)(*operandVReg + 0x28))(operandVReg), iVar12 != 0)) || (operandVReg[0x21] == 0)
               ))) {
-            piVar8 = (int *)FUN_001084b8(0x31,*(undefined4 *)(param_1 + 8));
+            piVar8 = (int *)IRMov__new_1084b8(0x31,*(undefined4 *)(param_1 + 8));
             IRInst__setOperandSource(piVar8,1,operandVReg,0,*(undefined4 *)(param_1 + 8));
             (**(code **)(*piVar8 + 0x94))
                       (piVar8,*(undefined4 *)(param_1 + 0x340),*(undefined4 *)(param_1 + 8));
@@ -3387,7 +3387,7 @@ code_r0x000e76c4:
                  || (((iVar6 != operandVReg2[0x56] ||
                       (iVar9 = (**(code **)(*operandVReg2 + 0x28))(operandVReg2), iVar9 != 0)) ||
                      (operandVReg2[0x21] == 0)))) {
-                piVar10 = (int *)FUN_001084b8(0x31,*(undefined4 *)(param_1 + 8));
+                piVar10 = (int *)IRMov__new_1084b8(0x31,*(undefined4 *)(param_1 + 8));
                 IRInst__setOperandSource(piVar10,1,operandVReg2,0,*(undefined4 *)(param_1 + 8));
                 IRInst__setHardwareRegisterAndAdd(piVar10,param_1,arena,0);
                 (**(code **)(*piVar10 + 0x94))
@@ -3568,7 +3568,7 @@ LAB_000f26b0:
           if (((dword *)operandVReg[0x26] != pdVar11) &&
              (iVar5 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar5 == 0)) {
             uVar8 = operandVReg[3];
-            iVar5 = FUN_001084b8(0x31,*(undefined4 *)(param_1 + 8));
+            iVar5 = IRMov__new_1084b8(0x31,*(undefined4 *)(param_1 + 8));
             IRInst__setOperandSource(iVar5,1,operandVReg,0,*(undefined4 *)(param_1 + 8));
             IRInst__setHardwareRegisterAndAdd(iVar5,param_1,pdVar11,dVar10);
             SelectWord__selectWhereMasked(&local_3c,0,local_40 & uVar8);
