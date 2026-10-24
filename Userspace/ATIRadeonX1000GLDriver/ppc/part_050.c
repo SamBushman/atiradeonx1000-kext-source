@@ -369,7 +369,7 @@ int FudoPs__createSchedModels(this, compiler)
   undefined4 *modelAllocation;
   undefined *puVar3;
   
-  modelAllocation = (undefined4 *)FUN_000e1564(compiler,0x6c);
+  modelAllocation = (undefined4 *)Compiler__allocateOrFail(compiler,0x6c);
   puVar1 = PTR_DAT_001e90f4;
   puVar3 = PTR_DAT_001e90fc + 8;
   modelAllocation[2] = compiler;
@@ -381,7 +381,7 @@ int FudoPs__createSchedModels(this, compiler)
   modelAllocation[0x1a] = 0;
   *modelAllocation = PTR_DAT_001e9148 + 8;
   *(undefined4 **)(this + 0x60) = modelAllocation;
-  modelAllocation = (undefined4 *)FUN_000e1564(compiler,0xc);
+  modelAllocation = (undefined4 *)Compiler__allocateOrFail(compiler,0xc);
   puVar1 = PTR_DAT_001e9100;
   modelAllocation[1] = 1;
   modelAllocation[2] = 0;
@@ -1428,7 +1428,7 @@ int Arena__grow(arena, param_2)
     puVar4 = puVar1;
   }
   uVar5 = arena[1];
-  puVar2 = (undefined4 *)FUN_000e1564(*arena,(uint)(puVar4 + 8));
+  puVar2 = (undefined4 *)Compiler__allocateOrFail(*arena,(uint)(puVar4 + 8));
   arena[1] = puVar2;
   *puVar2 = uVar5;
   *(undefined **)(arena[1] + 4) = puVar4 + 8;

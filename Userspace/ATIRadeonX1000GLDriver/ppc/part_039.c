@@ -21,7 +21,7 @@ int KhanPs__createSchedModels(this, param_2)
   undefined4 *puVar2;
   undefined *puVar3;
   
-  puVar2 = (undefined4 *)FUN_000e1564(param_2,0x6c);
+  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0x6c);
   puVar1 = PTR_DAT_001e90f4;
   puVar3 = PTR_DAT_001e90fc + 8;
   puVar2[2] = param_2;
@@ -32,7 +32,7 @@ int KhanPs__createSchedModels(this, param_2)
   R520SchedModel__vslot2_reset(puVar2);
   puVar2[0x1a] = 0;
   *(undefined4 **)(this + 0x60) = puVar2;
-  puVar2 = (undefined4 *)FUN_000e1564(param_2,0xc);
+  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0xc);
   puVar1 = PTR_DAT_001e9100;
   puVar2[1] = 1;
   puVar2[2] = 0;
@@ -789,7 +789,7 @@ int FudoVs__createSchedModels(this, param_2)
   undefined4 *puVar2;
   undefined *puVar3;
   
-  puVar2 = (undefined4 *)FUN_000e1564(param_2,0x3c);
+  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0x3c);
   puVar1 = PTR_DAT_001e9110;
   puVar3 = PTR_DAT_001e90fc + 8;
   puVar2[2] = param_2;
@@ -800,7 +800,7 @@ int FudoVs__createSchedModels(this, param_2)
   SchedModel__resetCounters(puVar2);
   puVar2[0xe] = 0;
   *(undefined4 **)(this + 0x60) = puVar2;
-  puVar2 = (undefined4 *)FUN_000e1564(param_2,0xc);
+  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0xc);
   puVar1 = PTR_DAT_001e9100;
   puVar2[1] = 1;
   puVar2[2] = 0;
@@ -1707,7 +1707,7 @@ int KhanVs__createSchedModels(this, param_2)
   undefined4 *puVar2;
   undefined *puVar3;
   
-  puVar2 = (undefined4 *)FUN_000e1564(param_2,0x3c);
+  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0x3c);
   puVar1 = PTR_DAT_001e9110;
   puVar3 = PTR_DAT_001e90fc + 8;
   puVar2[2] = param_2;
@@ -1718,7 +1718,7 @@ int KhanVs__createSchedModels(this, param_2)
   SchedModel__resetCounters(puVar2);
   puVar2[0xe] = 0;
   *(undefined4 **)(this + 0x60) = puVar2;
-  puVar2 = (undefined4 *)FUN_000e1564(param_2,0xc);
+  puVar2 = (undefined4 *)Compiler__allocateOrFail(param_2,0xc);
   puVar1 = PTR_DAT_001e9100;
   puVar2[1] = 1;
   puVar2[2] = 0;

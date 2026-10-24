@@ -4673,9 +4673,9 @@ LAB_0014edd0:
               (*(int *)((int)local_b8 + iVar2 + 8) == *(int *)((int)local_b8 + iVar15 + 0x44))) &&
              (local_b8[iVar14 + 2] == local_b8[iVar11 + 0x11])))) &&
            ((iVar12 = iVar11,
-            iVar5 = FUN_000f2da8(*(undefined4 *)((int)local_b8 + iVar2),
+            iVar5 = SelectWord__matches(*(undefined4 *)((int)local_b8 + iVar2),
                                  *(undefined4 *)((int)local_b8 + iVar15 + 0x38)), iVar5 != 0 &&
-            (iVar11 = FUN_000f2da8(local_b8[iVar14],local_b8[iVar11 + 0xe]), iVar11 != 0)))) {
+            (iVar11 = SelectWord__matches(local_b8[iVar14],local_b8[iVar11 + 0xe]), iVar11 != 0)))) {
           if (param_4 != 0) {
             if (iVar16 == 2) {
               sourceDef2 = IRInst__getOperandSource(*param_2,param_2[1]);
@@ -5031,13 +5031,13 @@ LAB_0014f980:
       else {
         iVar7 = iVar18 << 2;
       }
-      iVar6 = FUN_000f2da8(*(undefined4 *)((int)local_f8 + iVar7 + 0xc),
+      iVar6 = SelectWord__matches(*(undefined4 *)((int)local_f8 + iVar7 + 0xc),
                            *(undefined4 *)(iVar3 + (int)local_54));
       if (((iVar6 != 0) &&
-          (iVar6 = FUN_000f2da8(local_f8[iVar15 + 3],local_f8[iVar13 + 0xf]), iVar6 != 0)) ||
-         ((iVar7 = FUN_000f2da8(*(undefined4 *)(iVar3 + (int)local_54),
+          (iVar6 = SelectWord__matches(local_f8[iVar15 + 3],local_f8[iVar13 + 0xf]), iVar6 != 0)) ||
+         ((iVar7 = SelectWord__matches(*(undefined4 *)(iVar3 + (int)local_54),
                                 *(undefined4 *)((int)local_f8 + iVar7 + 0xc)), iVar7 != 0 &&
-          (iVar7 = FUN_000f2da8(local_f8[iVar13 + 0xf],local_f8[iVar15 + 3]), iVar7 != 0)))) {
+          (iVar7 = SelectWord__matches(local_f8[iVar13 + 0xf],local_f8[iVar15 + 3]), iVar7 != 0)))) {
         if (local_64 != 0) {
           iVar14 = iVar15;
           iVar15 = iVar18;
@@ -5318,13 +5318,13 @@ LAB_0014fad0:
     return 1;
   }
   puVar16 = local_68;
-  iVar18 = FUN_000f2da8(local_f8[iVar3 + 3],local_f8[(int)((int)local_68 + 0xf)]);
+  iVar18 = SelectWord__matches(local_f8[iVar3 + 3],local_f8[(int)((int)local_68 + 0xf)]);
   if (iVar18 == 0) {
 LAB_00150568:
-    iVar3 = FUN_000f2da8(local_f8[(int)((int)puVar17 + 0xf)],local_f8[iVar3 + 3]);
+    iVar3 = SelectWord__matches(local_f8[(int)((int)puVar17 + 0xf)],local_f8[iVar3 + 3]);
     if (iVar3 != 0) {
       puVar16 = local_f8 + iVar15;
-      iVar3 = FUN_000f2da8(local_f8[iVar13 + 0xf],local_f8[iVar15 + 3]);
+      iVar3 = SelectWord__matches(local_f8[iVar13 + 0xf],local_f8[iVar15 + 3]);
       if (iVar3 != 0) {
         piVar8 = (int *)IRInst__getOperandSource(*param_1,param_1[1]);
         iVar13 = *param_1;
@@ -5344,7 +5344,7 @@ LAB_00150568:
   }
   else {
     puVar16 = local_f8 + iVar13;
-    iVar18 = FUN_000f2da8(local_f8[iVar15 + 3],local_f8[iVar13 + 0xf]);
+    iVar18 = SelectWord__matches(local_f8[iVar15 + 3],local_f8[iVar13 + 0xf]);
     if (iVar18 == 0) goto LAB_00150568;
     piVar8 = (int *)IRInst__getOperandSource(*param_2,param_2[1]);
     iVar13 = *param_2;

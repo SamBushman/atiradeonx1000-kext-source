@@ -1347,12 +1347,12 @@ int KhanChip__ctor_10e050(this, param_2)
   this[1] = 0;
   *this = puVar1 + 8;
   *this = PTR_DAT_001e8c74 + 8;
-  iVar2 = FUN_000e1564(param_2,0x1740);
+  iVar2 = Compiler__allocateOrFail(param_2,0x1740);
   if (iVar2 != 0) {
     KhanVs__ctor_12a578(iVar2,param_2,1);
   }
   this[1] = iVar2;
-  iVar2 = FUN_000e1564(param_2,0x1744);
+  iVar2 = Compiler__allocateOrFail(param_2,0x1744);
   if (iVar2 != 0) {
     KhanPs__ctor_129130(iVar2,param_2,1);
   }
@@ -1373,12 +1373,12 @@ int KhanChip__ctor_10e114(this, param_2)
   this[1] = 0;
   *this = puVar1 + 8;
   *this = PTR_DAT_001e8c74 + 8;
-  iVar2 = FUN_000e1564(param_2,0x1740);
+  iVar2 = Compiler__allocateOrFail(param_2,0x1740);
   if (iVar2 != 0) {
     KhanVs__ctor_12a578(iVar2,param_2,1);
   }
   this[1] = iVar2;
-  iVar2 = FUN_000e1564(param_2,0x1744);
+  iVar2 = Compiler__allocateOrFail(param_2,0x1744);
   if (iVar2 != 0) {
     KhanPs__ctor_129130(iVar2,param_2,1);
   }
@@ -1401,12 +1401,12 @@ int FUN_0010e1d8(this, param_2)
   *this = puVar3;
   this[1] = 0;
   *this = puVar1 + 8;
-  iVar2 = FUN_000e1564(param_2,0x1740);
+  iVar2 = Compiler__allocateOrFail(param_2,0x1740);
   if (iVar2 != 0) {
     FudoVs__ctor_12a8bc(iVar2,param_2,1);
   }
   this[1] = iVar2;
-  iVar2 = FUN_000e1564(param_2,0x1944);
+  iVar2 = Compiler__allocateOrFail(param_2,0x1944);
   if (iVar2 != 0) {
     FudoPs__ctor_1920e0(iVar2,param_2,1);
   }
@@ -1429,12 +1429,12 @@ int FUN_0010e2a0(this, param_2)
   *this = puVar3;
   this[1] = 0;
   *this = puVar1 + 8;
-  iVar2 = FUN_000e1564(param_2,0x1740);
+  iVar2 = Compiler__allocateOrFail(param_2,0x1740);
   if (iVar2 != 0) {
     FudoVs__ctor_12a8bc(iVar2,param_2,1);
   }
   this[1] = iVar2;
-  iVar2 = FUN_000e1564(param_2,0x1944);
+  iVar2 = Compiler__allocateOrFail(param_2,0x1944);
   if (iVar2 != 0) {
     FudoPs__ctor_1920e0(iVar2,param_2,1);
   }

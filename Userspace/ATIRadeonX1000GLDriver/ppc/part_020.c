@@ -1729,43 +1729,43 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       goto switchD_000ddc1c_caseD_0;
     case 1:
       mnemonic = "abs";
-      FUN_000da9fc(disassembler,disassembler[0x87],"abs",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"abs",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_01,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 2:
       mnemonic = "acos";
-      FUN_000da9fc(disassembler,disassembler[0x87],"acos",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"acos",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_02,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 3:
       mnemonic = "add";
-      FUN_000da9fc(disassembler,disassembler[0x87],"add",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"add",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_44,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 4:
       mnemonic = "asin";
-      FUN_000da9fc(disassembler,disassembler[0x87],"asin",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"asin",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_04,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 5:
       mnemonic = "atan";
-      FUN_000da9fc(disassembler,disassembler[0x87],"atan",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"atan",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_05,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 6:
       mnemonic = "break";
-      FUN_000da9fc(disassembler,disassembler[0x87],"break",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"break",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00111,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 7:
       mnemonic = "breakc";
-      FUN_000da9fc(disassembler,disassembler[0x87],"breakc",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"breakc",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintRelop)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00112,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
@@ -1776,7 +1776,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 8:
       mnemonic = "call";
-      FUN_000da9fc(disassembler,disassembler[0x87],"call",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"call",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisPrintUnsigned(disassembler,extraout_r4_x00119,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00120,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -1784,7 +1784,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 9:
       mnemonic = "callnz";
-      FUN_000da9fc(disassembler,disassembler[0x87],"callnz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"callnz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00121,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ildisAppendf(disassembler,", ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -1794,25 +1794,25 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 10:
       mnemonic = "clamp";
-      FUN_000da9fc(disassembler,disassembler[0x87],"clamp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"clamp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd3Sources)(disassembler,extraout_r4_56,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xb:
       mnemonic = "clg";
-      FUN_000da9fc(disassembler,disassembler[0x87],"clg",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"clg",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_06,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xc:
       mnemonic = "cmov";
-      FUN_000da9fc(disassembler,disassembler[0x87],"cmov",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"cmov",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_07,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xd:
       mnemonic = "cmp";
-      FUN_000da9fc(disassembler,disassembler[0x87],"cmp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"cmp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintRelop)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisPrintCmpVal(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd3Sources)(disassembler,extraout_r4_57,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -1820,7 +1820,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0xe:
       mnemonic = "colorclamp";
-      FUN_000da9fc(disassembler,disassembler[0x87],"colorclamp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"colorclamp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_09,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
@@ -1829,7 +1829,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       disassembler[2] = (int)(instructionPtr + 2);
       commentBytes = (commentWordCount & 0xffff) * 4;
       commentChar = " ); ";
-      FUN_000da9fc(disassembler,disassembler[0x87]," ); ",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87]," ); ",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       mnemonic = (char *)disassembler[2];
       copiedCount = 0;
       lastReturnR4 = extraout_r4_x00241;
@@ -1862,13 +1862,13 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x10:
       mnemonic = "continue";
-      FUN_000da9fc(disassembler,disassembler[0x87],"continue",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"continue",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00130,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x11:
       mnemonic = "continuec";
-      FUN_000da9fc(disassembler,disassembler[0x87],"continuec",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"continuec",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintRelop)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00131,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
@@ -1879,19 +1879,19 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x12:
       mnemonic = "cos";
-      FUN_000da9fc(disassembler,disassembler[0x87],"cos",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"cos",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_10,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x13:
       mnemonic = "crs";
-      FUN_000da9fc(disassembler,disassembler[0x87],"crs",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"crs",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_45,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x14:
       mnemonic = "dclarray";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dclarray",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dclarray",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00180,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ildisAppendf(disassembler,", ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -1901,7 +1901,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x15:
       scratchText = instructionToken;
-      FUN_000da9fc(disassembler,disassembler[0x87],"dcldef",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dcldef",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDcldefComponents)(disassembler,scratchText,scratchTextWord1,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestinationOperand)(disassembler,extraout_r4_x00202,scratchTextWord1,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00203,scratchTextWord1,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -1909,7 +1909,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x16:
       mnemonic = "dclpi";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dclpi",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dclpi",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDclpiOperands)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestinationOperand)(disassembler,extraout_r4_x00191,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00192,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -1917,15 +1917,15 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x17:
       mnemonic = "dclpin";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dclpin",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dclpin",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDclpinOperands)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestinationOperand)(disassembler,extraout_r4_x00193,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00194,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x18:
-      FUN_000da9fc(disassembler,disassembler[0x87],"dclpp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
-      FUN_000da9fc(disassembler,disassembler[0x87],"dclv",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dclpp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dclv",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       paramNumber = instructionToken >> 0x10 & 0xff;
       printf_LDBLStub_1a32d0(&scratchText,"_param(%d)",paramNumber,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler,&scratchText,paramNumber,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -1935,7 +1935,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x19:
       mnemonic = "dclpt";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dclpt",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dclpt",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDclptCoordMode)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ((int (*)())ildisPrintStage)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00201,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -1943,7 +1943,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x1a:
       mnemonic = "dclv";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dclv",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dclv",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDclvOperands)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestinationOperand)(disassembler,extraout_r4_x00197,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00198,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -1951,7 +1951,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x1b:
       mnemonic = "dclvout";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dclvout",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dclvout",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDclvoutOperands)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestinationOperand)(disassembler,extraout_r4_x00199,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00200,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -1959,7 +1959,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x1c:
       mnemonic = "def";
-      FUN_000da9fc(disassembler,disassembler[0x87],"def",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"def",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       if ((*(uint *)disassembler[2] & 0x3f0000) == 0x10000) {
         fmtArgR5 = &scratchText;
         declResult = ((int (*)())ildisPrintDestinationOperand)(disassembler,extraout_r4_x00204,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
@@ -2010,7 +2010,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x1d:
       mnemonic = "defb";
-      FUN_000da9fc(disassembler,disassembler[0x87],"defb",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"defb",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestinationOperand)(disassembler,extraout_r4_x00206,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       immediateWord = *(undefined4 *)disassembler[2];
       disassembler[2] = (int)((undefined4 *)disassembler[2] + 1);
@@ -2021,57 +2021,57 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x1e:
       mnemonic = "det";
-      FUN_000da9fc(disassembler,disassembler[0x87],"det",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"det",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_x00104,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x1f:
       mnemonic = "dist";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dist",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dist",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_46,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x20:
       mnemonic = "div";
-      FUN_000da9fc(disassembler,disassembler[0x87],"div",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"div",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintZeroOp)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_58,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x21:
       mnemonic = "dp2add";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dp2add",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dp2add",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd3Sources)(disassembler,extraout_r4_60,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x22:
       mnemonic = "dp3";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dp3",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dp3",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_47,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x23:
       mnemonic = "dp4";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dp4",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dp4",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_48,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x24:
       mnemonic = "dst";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dst",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dst",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_49,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x25:
       mnemonic = "dsx";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dsx",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dsx",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintCentroidFlag)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_61,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x26:
       mnemonic = "dsy";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dsy",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dsy",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintCentroidFlag)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_62,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
@@ -2079,76 +2079,76 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
     case 0x27:
       ildisSetIndent(disassembler,disassembler[0x87] + -1);
       mnemonic = "else";
-      FUN_000da9fc(disassembler,disassembler[0x87],"else",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"else",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisSetIndent(disassembler,disassembler[0x87] + 1);
       ildisFlushLine(disassembler,extraout_r4_x00138,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x28:
       mnemonic = "end";
-      FUN_000da9fc(disassembler,disassembler[0x87],"end",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"end",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00150,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 0;
       break;
     case 0x29:
       ildisSetIndent(disassembler,disassembler[0x87] + -1);
       mnemonic = "endif";
-      FUN_000da9fc(disassembler,disassembler[0x87],"endif",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"endif",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00152,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x2a:
       ildisSetIndent(disassembler,disassembler[0x87] + -1);
       mnemonic = "endloop";
-      FUN_000da9fc(disassembler,disassembler[0x87],"endloop",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"endloop",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00153,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x2b:
       mnemonic = "endmain";
-      FUN_000da9fc(disassembler,disassembler[0x87],"endmain",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"endmain",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00139,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x2c:
       mnemonic = "exn";
-      FUN_000da9fc(disassembler,disassembler[0x87],"exn",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"exn",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_13,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x2d:
       mnemonic = "exp";
-      FUN_000da9fc(disassembler,disassembler[0x87],"exp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"exp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_15,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x2e:
       mnemonic = "expp";
-      FUN_000da9fc(disassembler,disassembler[0x87],"expp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"expp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_16,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x2f:
       mnemonic = "faceforward";
-      FUN_000da9fc(disassembler,disassembler[0x87],"faceforward",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"faceforward",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd3Sources)(disassembler,extraout_r4_63,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x30:
       mnemonic = "flr";
-      FUN_000da9fc(disassembler,disassembler[0x87],"flr",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"flr",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_17,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x31:
       mnemonic = "frc";
-      FUN_000da9fc(disassembler,disassembler[0x87],"frc",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"frc",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_18,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x32:
       mnemonic = "func";
-      FUN_000da9fc(disassembler,disassembler[0x87],"func",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"func",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisSetIndent(disassembler,disassembler[0x87] + 1);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisPrintUnsigned(disassembler,extraout_r4_x00154,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2157,13 +2157,13 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x33:
       mnemonic = "fwidth";
-      FUN_000da9fc(disassembler,disassembler[0x87],"fwidth",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"fwidth",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_19,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x34:
       mnemonic = "ifc";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ifc",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ifc",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisSetIndent(disassembler,disassembler[0x87] + 1);
       ((int (*)())ildisPrintRelop)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2175,7 +2175,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x35:
       mnemonic = "ifnz ";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ifnz ",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ifnz ",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisSetIndent(disassembler,disassembler[0x87] + 1);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00164,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ildisFlushLine(disassembler,extraout_r4_x00165,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2183,7 +2183,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x36:
     case 0x43:
-      FUN_000da9fc(disassembler,disassembler[0x87],"memimport",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"memimport",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       memimportElement = instructionToken >> 0x10 & 0x3f;
       printf_LDBLStub_1a32d0(&scratchText,"_elem(%d)",memimportElement,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler,&scratchText,memimportElement,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2192,7 +2192,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x37:
       mnemonic = "kill";
-      FUN_000da9fc(disassembler,disassembler[0x87],"kill",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"kill",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintStage)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSampleFlag)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2202,47 +2202,47 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x38:
       mnemonic = "len";
-      FUN_000da9fc(disassembler,disassembler[0x87],"len",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"len",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_21,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x39:
       mnemonic = "lit";
-      FUN_000da9fc(disassembler,disassembler[0x87],"lit",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"lit",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_22,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x3a:
       mnemonic = "ln";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ln",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ln",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintZeroOp)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_64,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x3b:
       mnemonic = "lod";
-      FUN_000da9fc(disassembler,disassembler[0x87],"lod",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"lod",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintStage)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_x00231,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x3c:
       mnemonic = "log";
-      FUN_000da9fc(disassembler,disassembler[0x87],"log",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"log",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintZeroOp)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_65,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x3d:
       mnemonic = "logp";
-      FUN_000da9fc(disassembler,disassembler[0x87],"logp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"logp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintZeroOp)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_66,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x3e:
       mnemonic = "loop";
-      FUN_000da9fc(disassembler,disassembler[0x87],"loop",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"loop",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       if ((instructionToken & 0x10000) == 0) {
         repSuffix = " ";
       }
@@ -2257,24 +2257,24 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x3f:
       mnemonic = "lrp";
-      FUN_000da9fc(disassembler,disassembler[0x87],"lrp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"lrp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd3Sources)(disassembler,extraout_r4_67,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x40:
       mnemonic = "mad";
-      FUN_000da9fc(disassembler,disassembler[0x87],"mad",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"mad",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd3Sources)(disassembler,extraout_r4_68,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x41:
       mnemonic = "max";
-      FUN_000da9fc(disassembler,disassembler[0x87],"max",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"max",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_50,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x42:
-      FUN_000da9fc(disassembler,disassembler[0x87],"memexport",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"memexport",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       memexportElemOffset = instructionToken >> 0x17 & 0x3f;
       exportStreamId = instructionToken >> 0x10 & 0x3f;
       instructionToken = instructionToken >> 0x16 & 1;
@@ -2286,57 +2286,57 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x44:
       mnemonic = "min";
-      FUN_000da9fc(disassembler,disassembler[0x87],"min",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"min",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_51,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x45:
       mnemonic = "mmul";
-      FUN_000da9fc(disassembler,disassembler[0x87],"mmul",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"mmul",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintMatrixMode)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_95,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x46:
       mnemonic = "mod";
-      FUN_000da9fc(disassembler,disassembler[0x87],"mod",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"mod",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_52,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x47:
       mnemonic = "mov";
-      FUN_000da9fc(disassembler,disassembler[0x87],"mov",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"mov",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_25,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x48:
       mnemonic = "mova";
-      FUN_000da9fc(disassembler,disassembler[0x87],"mova",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"mova",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintRoundFlag)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_96,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x49:
       mnemonic = "mul";
-      FUN_000da9fc(disassembler,disassembler[0x87],"mul",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"mul",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_53,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x4a:
       mnemonic = "noise";
-      FUN_000da9fc(disassembler,disassembler[0x87],"noise",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"noise",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_26,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x4b:
       mnemonic = "nop";
-      FUN_000da9fc(disassembler,disassembler[0x87],"nop",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"nop",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00173,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x4c:
       mnemonic = "nrm";
-      FUN_000da9fc(disassembler,disassembler[0x87],"nrm",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"nrm",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       if ((instructionToken & 0x40000) != 0) {
         ildisAppendf(disassembler,"_nrm4",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       }
@@ -2346,33 +2346,33 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x4d:
       mnemonic = "pireduce";
-      FUN_000da9fc(disassembler,disassembler[0x87],"pireduce",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"pireduce",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_28,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x4e:
       mnemonic = "pow";
-      FUN_000da9fc(disassembler,disassembler[0x87],"pow",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"pow",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_54,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x50:
       mnemonic = "project";
-      FUN_000da9fc(disassembler,disassembler[0x87],"project",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"project",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintStage)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_98,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x51:
       mnemonic = "rcp";
-      FUN_000da9fc(disassembler,disassembler[0x87],"rcp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"rcp",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintZeroOp)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_99,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x52:
       mnemonic = "reflect";
-      FUN_000da9fc(disassembler,disassembler[0x87],"reflect",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"reflect",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintNormalizeFlag)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_x00100,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
@@ -2380,97 +2380,97 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
     case 0x53:
       ildisSetIndent(disassembler,disassembler[0x87] + -1);
       mnemonic = "ret";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ret",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ret",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00174,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x54:
       mnemonic = "rnd";
-      FUN_000da9fc(disassembler,disassembler[0x87],"rnd",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"rnd",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_29,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x55:
       mnemonic = "rsq";
-      FUN_000da9fc(disassembler,disassembler[0x87],"rsq",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"rsq",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintZeroOp)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_x00101,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x56:
       mnemonic = "set";
-      FUN_000da9fc(disassembler,disassembler[0x87],"set",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"set",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintRelop)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_x00102,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x57:
       mnemonic = "sgn";
-      FUN_000da9fc(disassembler,disassembler[0x87],"sgn",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"sgn",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_38,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x58:
       mnemonic = "sin";
-      FUN_000da9fc(disassembler,disassembler[0x87],"sin",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"sin",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_39,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x59:
       mnemonic = "sincos";
-      FUN_000da9fc(disassembler,disassembler[0x87],"sincos",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"sincos",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_40,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x5a:
       mnemonic = "sqrt";
-      FUN_000da9fc(disassembler,disassembler[0x87],"sqrt",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"sqrt",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_41,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x5b:
       mnemonic = "sub";
-      FUN_000da9fc(disassembler,disassembler[0x87],"sub",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"sub",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_55,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x5c:
       mnemonic = "tan";
-      FUN_000da9fc(disassembler,disassembler[0x87],"tan",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"tan",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_42,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x5d:
       mnemonic = "texld";
-      FUN_000da9fc(disassembler,disassembler[0x87],"texld",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"texld",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintLoadModifiers)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_x00232,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x5e:
       mnemonic = "texldb";
-      FUN_000da9fc(disassembler,disassembler[0x87],"texldb",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"texldb",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSampleModifiers)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_x00233,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x5f:
       mnemonic = "texldd";
-      FUN_000da9fc(disassembler,disassembler[0x87],"texldd",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"texldd",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintLoadModifiers)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd3Sources)(disassembler,extraout_r4_x00234,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x60:
       mnemonic = "texldms";
-      FUN_000da9fc(disassembler,disassembler[0x87],"texldms",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"texldms",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintTexldmsModifiers)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_x00235,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x61:
       mnemonic = "texweight";
-      FUN_000da9fc(disassembler,disassembler[0x87],"texweight",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"texweight",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintStage)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintCentroidFlag)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_x00236,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2478,25 +2478,25 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x62:
       mnemonic = "transpose";
-      FUN_000da9fc(disassembler,disassembler[0x87],"transpose",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"transpose",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_x00103,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 99:
       mnemonic = "trc";
-      FUN_000da9fc(disassembler,disassembler[0x87],"trc",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"trc",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_43,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 100:
       mnemonic = "dxsincos";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dxsincos",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dxsincos",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd3Sources)(disassembler,extraout_r4_11,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x65:
       mnemonic = "break_logicalz";
-      FUN_000da9fc(disassembler,disassembler[0x87],"break_logicalz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"break_logicalz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00115,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ildisFlushLine(disassembler,extraout_r4_x00116,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2504,7 +2504,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x66:
       mnemonic = "break_logicalnz";
-      FUN_000da9fc(disassembler,disassembler[0x87],"break_logicalnz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"break_logicalnz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00117,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ildisFlushLine(disassembler,extraout_r4_x00118,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2512,7 +2512,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x67:
       mnemonic = "call_logicalz";
-      FUN_000da9fc(disassembler,disassembler[0x87],"call_logicalz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"call_logicalz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00124,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ildisAppendf(disassembler,", ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2522,7 +2522,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x68:
       mnemonic = "call_logicalnz";
-      FUN_000da9fc(disassembler,disassembler[0x87],"call_logicalnz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"call_logicalnz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00127,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ildisAppendf(disassembler,", ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2532,7 +2532,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x69:
       mnemonic = "case ";
-      FUN_000da9fc(disassembler,disassembler[0x87],"case ",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"case ",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       immediateWord = *(undefined4 *)disassembler[2];
       disassembler[2] = (int)((undefined4 *)disassembler[2] + 1);
@@ -2543,7 +2543,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x6a:
       mnemonic = "continue_logicalz";
-      FUN_000da9fc(disassembler,disassembler[0x87],"continue_logicalz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"continue_logicalz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr
                   );
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00134,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
@@ -2552,7 +2552,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x6b:
       mnemonic = "continue_logicalnz";
-      FUN_000da9fc(disassembler,disassembler[0x87],"continue_logicalnz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"continue_logicalnz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
                    nextWordPtr);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00136,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
@@ -2561,25 +2561,25 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x6c:
       mnemonic = "default";
-      FUN_000da9fc(disassembler,disassembler[0x87],"default",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"default",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00162,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x6d:
       mnemonic = "endswitch";
-      FUN_000da9fc(disassembler,disassembler[0x87],"endswitch",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"endswitch",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00161,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x6e:
       mnemonic = "endfunc";
-      FUN_000da9fc(disassembler,disassembler[0x87],"endfunc",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"endfunc",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00151,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x6f:
       mnemonic = "if_logicalz ";
-      FUN_000da9fc(disassembler,disassembler[0x87],"if_logicalz ",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"if_logicalz ",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisSetIndent(disassembler,disassembler[0x87] + 1);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00166,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ildisFlushLine(disassembler,extraout_r4_x00167,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2587,7 +2587,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x70:
       mnemonic = "if_logicalnz ";
-      FUN_000da9fc(disassembler,disassembler[0x87],"if_logicalnz ",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"if_logicalnz ",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisSetIndent(disassembler,disassembler[0x87] + 1);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00168,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ildisFlushLine(disassembler,extraout_r4_x00169,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2595,14 +2595,14 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x71:
       mnemonic = "whileloop";
-      FUN_000da9fc(disassembler,disassembler[0x87],"whileloop",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"whileloop",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00172,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisSetIndent(disassembler,disassembler[0x87] + 1);
       result = 1;
       break;
     case 0x72:
       mnemonic = "switch";
-      FUN_000da9fc(disassembler,disassembler[0x87],"switch",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"switch",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00159,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ildisFlushLine(disassembler,extraout_r4_x00160,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2610,27 +2610,27 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x73:
       mnemonic = "ret_dyn";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ret_dyn",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ret_dyn",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00175,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x74:
       mnemonic = "ret_logicalz ";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ret_logicalz ",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ret_logicalz ",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00176,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ildisFlushLine(disassembler,extraout_r4_x00177,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x75:
       mnemonic = "ret_logicalnz ";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ret_logicalnz ",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ret_logicalnz ",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00178,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ildisFlushLine(disassembler,extraout_r4_x00179,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x76:
       if ((int)instructionToken < 0) {
-        FUN_000da9fc(disassembler,disassembler[0x87],"dcl_immed_cb",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+        ildisAppendIndentedf(disassembler,disassembler[0x87],"dcl_immed_cb",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
         literalCount = *(int *)disassembler[2];
         disassembler[2] = (int)((int *)disassembler[2] + 1);
         literalCountCopy = literalCount;
@@ -2645,7 +2645,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
             disassembler[2] = (int)((undefined4 *)disassembler[2] + 1);
             printf_LDBLStub_1a32d0(&scratchText," 0x%x ",immediateWord,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
             fmtArgR5 = &scratchText;
-            FUN_000da9fc(disassembler,disassembler[0x87] + 1,&scratchText,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
+            ildisAppendIndentedf(disassembler,disassembler[0x87] + 1,&scratchText,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
                          nextWordPtr);
             ildisFlushLine(disassembler,extraout_r4_x00186,fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr)
             ;
@@ -2655,7 +2655,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       }
       else {
         mnemonic = "dcl_cb";
-        FUN_000da9fc(disassembler,disassembler[0x87],"dcl_cb",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+        ildisAppendIndentedf(disassembler,disassembler[0x87],"dcl_cb",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
         ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
         ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00187,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
         ildisFlushLine(disassembler,extraout_r4_x00188,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2664,7 +2664,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x77:
       mnemonic = "dcl_indexed_temp_array";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_indexed_temp_array",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dcl_indexed_temp_array",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
                    nextWordPtr);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00183,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
@@ -2673,7 +2673,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x78:
       mnemonic = "dcl_input_primitive";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_input_primitive",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dcl_input_primitive",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
                    nextWordPtr);
       ((int (*)())ildisPrintInputPrimitive)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00222,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2681,7 +2681,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x79:
       mnemonic = "dcl_literal";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_literal",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dcl_literal",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00189,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       ildisAppendf(disassembler,",",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2702,7 +2702,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       result = 1;
       break;
     case 0x7a:
-      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_max_output_vertex_count",fmtArgR6,fmtArgR7,fmtArgR8,
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dcl_max_output_vertex_count",fmtArgR6,fmtArgR7,fmtArgR8,
                    fmtArgR9,nextWordPtr);
       maxOutputVertexCount = instructionToken >> 0x10 & 0x3fff;
       printf_LDBLStub_1a32d0(&scratchText,"(%d)",maxOutputVertexCount,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2712,13 +2712,13 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x7b:
       mnemonic = "dcl_odepth";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_odepth",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dcl_odepth",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00224,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x7c:
       mnemonic = "dcl_output_topology";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_output_topology",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dcl_output_topology",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
                    nextWordPtr);
       ((int (*)())ildisPrintOutputTopology)(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00209,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2726,7 +2726,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x7d:
       mnemonic = "dcl_output";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_output",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dcl_output",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       outputSemantic = instructionToken >> 0x10 & 0x3fff;
       lastReturnR4 = extraout_r4_x00210;
       if (outputSemantic < 0x13) {
@@ -2740,7 +2740,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x7e:
       mnemonic = "dcl_input";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_input",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dcl_input",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       lastReturnR4 = extraout_r4_x00213;
       if ((instructionToken & 0x7c000) != 0x14000) {
         ildisAppendf(disassembler,*(undefined4 *)
@@ -2788,12 +2788,12 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x7f:
       mnemonic = "dcl_vprim";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_vprim",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dcl_vprim",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00223,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x80:
-      FUN_000da9fc(disassembler,disassembler[0x87],"dcl_resource",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dcl_resource",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       resourceId = instructionToken >> 0x10 & 0xff;
       printf_LDBLStub_1a32d0(&textBuffer,"_id(%d)",resourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler,&textBuffer,resourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2804,13 +2804,13 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x81:
       mnemonic = "cut";
-      FUN_000da9fc(disassembler,disassembler[0x87],"cut",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"cut",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00141,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x82:
       mnemonic = "discard_logicalz";
-      FUN_000da9fc(disassembler,disassembler[0x87],"discard_logicalz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr)
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"discard_logicalz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr)
       ;
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00227,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
@@ -2819,7 +2819,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x83:
       mnemonic = "discard_logicalnz";
-      FUN_000da9fc(disassembler,disassembler[0x87],"discard_logicalnz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"discard_logicalnz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr
                   );
       ildisAppendf(disassembler," ",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4_x00229,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
@@ -2828,18 +2828,18 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x84:
       mnemonic = "emit";
-      FUN_000da9fc(disassembler,disassembler[0x87],"emit",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"emit",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00140,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x85:
       mnemonic = "emitcut";
-      FUN_000da9fc(disassembler,disassembler[0x87],"emitcut",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"emitcut",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisFlushLine(disassembler,extraout_r4_x00142,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x86:
-      FUN_000da9fc(disassembler,disassembler[0x87],"load",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"load",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       loadResourceId = instructionToken >> 0x10 & 0x1fff;
       printf_LDBLStub_1a32d0(&textBuffer,"_id(%d)",loadResourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler,&textBuffer,loadResourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2848,7 +2848,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       result = 1;
       break;
     case 0x87:
-      FUN_000da9fc(disassembler,disassembler[0x87],"resinfo",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"resinfo",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       resinfoResourceId = instructionToken >> 0x10 & 0xfff;
       printf_LDBLStub_1a32d0(&textBuffer,"_id(%d)",resinfoResourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisAppendf(disassembler,&textBuffer,resinfoResourceId,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2862,7 +2862,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x88:
       mnemonic = "sample";
-      FUN_000da9fc(disassembler,disassembler[0x87],"sample",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"sample",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisPrintResourceSampler(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisPrintAddressOffsetImmediate(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_x00144,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2870,7 +2870,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x89:
       mnemonic = "sample_b";
-      FUN_000da9fc(disassembler,disassembler[0x87],"sample_b",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"sample_b",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisPrintResourceSampler(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisPrintAddressOffsetImmediate(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_x00146,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2878,7 +2878,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x8a:
       mnemonic = "sample_g";
-      FUN_000da9fc(disassembler,disassembler[0x87],"sample_g",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"sample_g",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisPrintResourceSampler(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisPrintAddressOffsetImmediate(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd3Sources)(disassembler,extraout_r4_x00145,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2886,7 +2886,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x8b:
       mnemonic = "sample_l";
-      FUN_000da9fc(disassembler,disassembler[0x87],"sample_l",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"sample_l",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisPrintResourceSampler(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisPrintAddressOffsetImmediate(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_x00147,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2894,7 +2894,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x8c:
       mnemonic = "sample_c";
-      FUN_000da9fc(disassembler,disassembler[0x87],"sample_c",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"sample_c",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisPrintResourceSampler(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisPrintAddressOffsetImmediate(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_x00148,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2902,7 +2902,7 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x8d:
       mnemonic = "sample_c_lz";
-      FUN_000da9fc(disassembler,disassembler[0x87],"sample_c_lz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"sample_c_lz",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisPrintResourceSampler(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ildisPrintAddressOffsetImmediate(disassembler,instructionToken,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_x00149,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
@@ -2910,289 +2910,289 @@ int ildisPrintInstruction(disassembler, passThroughR4, passThroughR5, fmtArgR6, 
       break;
     case 0x8e:
       mnemonic = "inot";
-      FUN_000da9fc(disassembler,disassembler[0x87],"inot",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"inot",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_x00105,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x8f:
       mnemonic = "ior";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ior",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ior",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_x00106,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x90:
       mnemonic = "ixor";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ixor",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ixor",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_x00107,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x91:
       mnemonic = "iadd";
-      FUN_000da9fc(disassembler,disassembler[0x87],"iadd",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"iadd",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_x00108,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x92:
       mnemonic = "imad";
-      FUN_000da9fc(disassembler,disassembler[0x87],"imad",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"imad",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd3Sources)(disassembler,extraout_r4_69,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x93:
       mnemonic = "imax";
-      FUN_000da9fc(disassembler,disassembler[0x87],"imax",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"imax",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_70,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x94:
       mnemonic = "imin";
-      FUN_000da9fc(disassembler,disassembler[0x87],"imin",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"imin",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_71,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x95:
       mnemonic = "imul";
-      FUN_000da9fc(disassembler,disassembler[0x87],"imul",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"imul",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_72,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x96:
       mnemonic = "imul_high";
-      FUN_000da9fc(disassembler,disassembler[0x87],"imul_high",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"imul_high",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_73,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x97:
       mnemonic = "ieq";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ieq",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ieq",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_74,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x98:
       mnemonic = "ige";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ige",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ige",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_75,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x99:
       mnemonic = "ilt";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ilt",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ilt",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_76,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x9a:
       mnemonic = "inegate";
-      FUN_000da9fc(disassembler,disassembler[0x87],"inegate",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"inegate",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_77,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x9b:
       mnemonic = "ine";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ine",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ine",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_78,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x9c:
       mnemonic = "ishl";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ishl",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ishl",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_79,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x9d:
       mnemonic = "ishr";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ishr",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ishr",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_80,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x9e:
       mnemonic = "ushr";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ushr",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ushr",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_81,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0x9f:
       mnemonic = "udiv";
-      FUN_000da9fc(disassembler,disassembler[0x87],"udiv",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"udiv",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_82,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xa0:
       mnemonic = "umod";
-      FUN_000da9fc(disassembler,disassembler[0x87],"umod",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"umod",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_83,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xa1:
       mnemonic = "umad";
-      FUN_000da9fc(disassembler,disassembler[0x87],"umad",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"umad",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd3Sources)(disassembler,extraout_r4_84,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xa2:
       mnemonic = "umax";
-      FUN_000da9fc(disassembler,disassembler[0x87],"umax",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"umax",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_85,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xa3:
       mnemonic = "umin";
-      FUN_000da9fc(disassembler,disassembler[0x87],"umin",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"umin",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_86,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xa4:
       mnemonic = "ult";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ult",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ult",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_87,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xa5:
       mnemonic = "uge";
-      FUN_000da9fc(disassembler,disassembler[0x87],"uge",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"uge",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_88,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xa6:
       mnemonic = "umul";
-      FUN_000da9fc(disassembler,disassembler[0x87],"umul",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"umul",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_89,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xa7:
       mnemonic = "umul_high";
-      FUN_000da9fc(disassembler,disassembler[0x87],"umul_high",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"umul_high",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_90,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xa8:
       mnemonic = "ftoi";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ftoi",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ftoi",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_91,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xa9:
       mnemonic = "ftou";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ftou",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ftou",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_92,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xaa:
       mnemonic = "itof";
-      FUN_000da9fc(disassembler,disassembler[0x87],"itof",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"itof",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_93,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xab:
       mnemonic = "utof";
-      FUN_000da9fc(disassembler,disassembler[0x87],"utof",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"utof",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_94,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xac:
       mnemonic = "and";
-      FUN_000da9fc(disassembler,disassembler[0x87],"and",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"and",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_03,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xad:
       mnemonic = "cmov_logical";
-      FUN_000da9fc(disassembler,disassembler[0x87],"cmov_logical",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"cmov_logical",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd3Sources)(disassembler,extraout_r4_08,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xae:
       mnemonic = "eq";
-      FUN_000da9fc(disassembler,disassembler[0x87],"eq",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"eq",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_12,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xaf:
       mnemonic = "exp_vec";
-      FUN_000da9fc(disassembler,disassembler[0x87],"exp_vec",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"exp_vec",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_14,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xb0:
       mnemonic = "ge";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ge",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ge",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_20,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xb1:
       mnemonic = "log_vec";
-      FUN_000da9fc(disassembler,disassembler[0x87],"log_vec",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"log_vec",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_23,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xb2:
       mnemonic = "lt";
-      FUN_000da9fc(disassembler,disassembler[0x87],"lt",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"lt",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_24,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xb3:
       mnemonic = "ne";
-      FUN_000da9fc(disassembler,disassembler[0x87],"ne",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"ne",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_27,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xb4:
       mnemonic = "round_nearest";
-      FUN_000da9fc(disassembler,disassembler[0x87],"round_nearest",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"round_nearest",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_30,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xb5:
       mnemonic = "round_neginf";
-      FUN_000da9fc(disassembler,disassembler[0x87],"round_neginf",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"round_neginf",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_31,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xb6:
       mnemonic = "round_plusinf";
-      FUN_000da9fc(disassembler,disassembler[0x87],"round_plusinf",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"round_plusinf",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_32,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xb7:
       mnemonic = "round_zero";
-      FUN_000da9fc(disassembler,disassembler[0x87],"round_zero",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"round_zero",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_33,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xb8:
       mnemonic = "rsq_vec";
-      FUN_000da9fc(disassembler,disassembler[0x87],"rsq_vec",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"rsq_vec",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_34,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xb9:
       mnemonic = "sin_vec";
-      FUN_000da9fc(disassembler,disassembler[0x87],"sin_vec",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"sin_vec",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_35,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xba:
       mnemonic = "cos_vec";
-      FUN_000da9fc(disassembler,disassembler[0x87],"cos_vec",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"cos_vec",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_36,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xbb:
       mnemonic = "sqrt_vec";
-      FUN_000da9fc(disassembler,disassembler[0x87],"sqrt_vec",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"sqrt_vec",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd1Source)(disassembler,extraout_r4_37,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xbc:
       mnemonic = "dp2";
-      FUN_000da9fc(disassembler,disassembler[0x87],"dp2",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"dp2",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       ((int (*)())ildisPrintDestAnd2Sources)(disassembler,extraout_r4_59,mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       result = 1;
       break;
     case 0xbe:
       mnemonic = "scatter";
-      FUN_000da9fc(disassembler,disassembler[0x87],"scatter",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
+      ildisAppendIndentedf(disassembler,disassembler[0x87],"scatter",fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       if ((instructionToken & 0x3fff0000) != 0) {
         ildisAppendf(disassembler,"_quad",mnemonic,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,nextWordPtr);
       }
@@ -3920,14 +3920,14 @@ int Compiler__fail(compiler, errorCode)
   _longjmp(*(undefined4 *)(compiler + 4),1);
 }
 
-/* FUN_000e1564 @ 0xe1564 (84 bytes) */
-int FUN_000e1564(compiler, param_2)
+/* Compiler__allocateOrFail @ 0xe1564 (84 bytes) */
+int Compiler__allocateOrFail(compiler, size)
   int compiler;
-  uint param_2;
+  uint size;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(compiler + 0x350))(*(undefined4 *)(compiler + 0x354),param_2);
+  iVar1 = (**(code **)(compiler + 0x350))(*(undefined4 *)(compiler + 0x354),size);
   if (iVar1 == 0) {
     ((int (*)())Compiler__fail)(compiler,2);
   }

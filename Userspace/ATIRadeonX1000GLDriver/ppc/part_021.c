@@ -144,7 +144,7 @@ int FUN_000e180c(compiler, param_2)
   
   iVar2 = param_2 * 4 + compiler;
   if (*(int *)(iVar2 + 0x370) == 0) {
-    piVar1 = (int *)FUN_000e1564(compiler,0x2c);
+    piVar1 = (int *)Compiler__allocateOrFail(compiler,0x2c);
     if (piVar1 != (int *)0x0) {
       piVar1[10] = 0;
       *piVar1 = compiler;
@@ -331,7 +331,7 @@ int FUN_000e1b70(compiler, param_2)
   }
   if (0 < param_2) {
     if (param_2 < 4) {
-      iVar1 = FUN_000e1564(compiler,0x10);
+      iVar1 = Compiler__allocateOrFail(compiler,0x10);
       if (iVar1 != 0) {
         KhanChip__ctor_10e114(iVar1,compiler);
       }
@@ -342,7 +342,7 @@ int FUN_000e1b70(compiler, param_2)
       }
     }
     else if (param_2 == 4) {
-      iVar1 = FUN_000e1564(compiler,0x10);
+      iVar1 = Compiler__allocateOrFail(compiler,0x10);
       if (iVar1 != 0) {
         FUN_0010e1d8(iVar1,compiler);
       }

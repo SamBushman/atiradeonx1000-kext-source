@@ -3012,18 +3012,18 @@ int ildisFlushLine(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR
   return;
 }
 
-/* FUN_000da9fc @ 0xda9fc (180 bytes) */
-int FUN_000da9fc(disassembler, param_2, param_3, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+/* ildisAppendIndentedf @ 0xda9fc (180 bytes) */
+int ildisAppendIndentedf(disassembler, indentLevel, format, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
   int disassembler;
-  int param_2;
-  undefined4 param_3;
+  int indentLevel;
+  undefined4 format;
   undefined4 fmtArgR6;
   undefined4 fmtArgR7;
   undefined4 fmtArgR8;
   undefined4 fmtArgR9;
   undefined4 fmtArgR10;
 {
-  unsigned int ghidra_home[8] = { disassembler, param_2, param_3, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { disassembler, indentLevel, format, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint uVar1;
   undefined4 uVar2;
   int iVar3;
@@ -3034,15 +3034,15 @@ int FUN_000da9fc(disassembler, param_2, param_3, fmtArgR6, fmtArgR7, fmtArgR8, f
   (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = fmtArgR8;
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = fmtArgR9;
   (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = fmtArgR10;
-  if (0 < param_2) {
+  if (0 < indentLevel) {
     iVar3 = 0;
-    uVar2 = param_3;
+    uVar2 = format;
     do {
       iVar3 = iVar3 + 1;
       ((int (*)())ildisAppendf)(disassembler,"    ",uVar2,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
-    } while (param_2 != iVar3);
+    } while (indentLevel != iVar3);
   }
-  printf_LDBLStub_1a3428(auStack_234,0x200,param_3,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)),fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  printf_LDBLStub_1a3428(auStack_234,0x200,format,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)),fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   uVar1 = _strlen(disassembler + 0x10);
   if (uVar1 <= 0x1ff - uVar1) {
     _strcat(disassembler + 0x10,auStack_234);

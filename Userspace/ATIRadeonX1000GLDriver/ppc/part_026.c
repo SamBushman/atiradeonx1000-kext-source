@@ -2598,10 +2598,10 @@ int FUN_000f8d50(param_1, param_2, param_3, descriptor, param_5, inst, param_7)
   return;
 }
 
-/* FUN_000f8f88 @ 0xf8f88 (176 bytes) */
-int FUN_000f8f88(descriptor, param_2)
+/* IRInst__applyDescriptorSwizzle @ 0xf8f88 (176 bytes) */
+int IRInst__applyDescriptorSwizzle(descriptor, inst)
   uint *descriptor;
-  int *param_2;
+  int *inst;
 {
   bool bVar1;
   undefined *puVar2;
@@ -2612,7 +2612,7 @@ int FUN_000f8f88(descriptor, param_2)
   iVar4 = 0;
   do {
     psnPackedLaneSourceResult = psnPackedLaneSource(descriptor,iVar4);
-    (**(code **)(*param_2 + 0x88))(param_2,1,iVar4,*(undefined4 *)(puVar2 + psnPackedLaneSourceResult * 4));
+    (**(code **)(*inst + 0x88))(inst,1,iVar4,*(undefined4 *)(puVar2 + psnPackedLaneSourceResult * 4));
     bVar1 = iVar4 != 3;
     iVar4 = iVar4 + 1;
   } while (bVar1);
@@ -4673,7 +4673,7 @@ LAB_000fc74c:
     *(dword **)(operandRecord2 + 8) = pdVar26;
     IROperand__setModifierBits((int)inst + 0xa4,1,1);
     if (!bVar2) {
-      ((int (*)())FUN_000f8f88)(descriptor,inst);
+      ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,inst);
     }
     pdVar17 = (dword *)((int)((unsigned char *)0x0) + 2);
     uVar24 = 4;
@@ -4701,7 +4701,7 @@ LAB_000fc74c:
       *(undefined4 *)(operandRecord2 + 0xc) = arena;
       *(dword **)(operandRecord2 + 8) = pdVar31;
       if (!bVar2) {
-        ((int (*)())FUN_000f8f88)(descriptor,inst);
+        ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,inst);
       }
       pdVar17 = (dword *)((int)((unsigned char *)0x0) + 2);
       ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,2,2.0,2.0,2.0,2.0);
@@ -4722,7 +4722,7 @@ LAB_000fc74c:
       *(undefined4 *)(operandRecord2 + 0xc) = arena;
       *(dword **)(operandRecord2 + 8) = pdVar31;
       if (!bVar2) {
-        ((int (*)())FUN_000f8f88)(descriptor,inst);
+        ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,inst);
       }
       ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,2,0.5,0.5,0.5,0.5);
       pdVar17 = (dword *)((int)((unsigned char *)0x0) + 1);
@@ -4751,7 +4751,7 @@ LAB_000fc74c:
     *(undefined4 *)(operandRecord2 + 0xc) = arena;
     *(dword **)(operandRecord2 + 8) = pdVar31;
     if (!bVar2) {
-      ((int (*)())FUN_000f8f88)(descriptor,inst);
+      ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,inst);
     }
     uVar24 = 4;
     bVar2 = true;
@@ -4784,7 +4784,7 @@ code_r0x000fcda8:
     *(undefined4 *)(operandRecord2 + 0xc) = arena;
     *(dword **)(operandRecord2 + 8) = pdVar31;
     if (!bVar2) {
-      ((int (*)())FUN_000f8f88)(descriptor,inst);
+      ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,inst);
       operandRecord2 = IRInst__getOperandRecord(inst,1);
       arena = *(undefined4 *)(operandRecord2 + 0x10);
       operandRecord2 = IRInst__getOperandRecord(inst,3);
@@ -4869,7 +4869,7 @@ code_r0x000fd284:
         *(undefined4 *)(operandRecord3 + 0xc) = uVar12;
         *(dword **)(operandRecord3 + 8) = pdVar26;
         if (!bVar2) {
-          ((int (*)())FUN_000f8f88)(descriptor,newInst);
+          ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,newInst);
           operandRecord3 = IRInst__getOperandRecord(newInst,1);
           uVar12 = *(undefined4 *)(operandRecord3 + 0x10);
           operandRecord3 = IRInst__getOperandRecord(inst2,1);
@@ -4919,7 +4919,7 @@ code_r0x000fd284:
       operandRecord2 = IRInst__getOperandRecord(newInst3,1);
       *(undefined4 *)(operandRecord2 + 0xc) = arena;
       *(dword **)(operandRecord2 + 8) = pdVar26;
-      ((int (*)())FUN_000f8f88)(descriptor,newInst3);
+      ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,newInst3);
       pcVar36 = *(code **)(*newInst3 + 0x88);
       operandRecord2 = IRInst__getOperandRecord(newInst3,1);
       pdVar18 = (dword *)(uint)*(byte *)(operandRecord2 + 0x12);
@@ -4950,7 +4950,7 @@ code_r0x000fd284:
     *(undefined4 *)(operandRecord2 + 0xc) = arena;
     *(dword **)(operandRecord2 + 8) = pdVar27;
     if (!bVar2) {
-      ((int (*)())FUN_000f8f88)(descriptor,inst);
+      ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,inst);
     }
     if (((*descriptor & 0x400000) != 0) && ((*pdVar29 & 0x100000) != 0)) {
       IROperand__setModifierBits((int)inst + 0xa4,2,1);
