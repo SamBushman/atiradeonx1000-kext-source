@@ -1868,7 +1868,7 @@ int Program__packPsInputs(param_1)
                 puVar13 = (undefined4 *)Arena__alloc(uVar12,0x168);
                 *puVar13 = uVar12;
                 piVar6 = puVar13 + 1;
-                FUN_00109198(piVar6,*(undefined4 *)(param_1 + 8));
+                IRLoadInterp__ctor_109198(piVar6,*(undefined4 *)(param_1 + 8));
                 puVar13[0x51] = iVar22;
                 puVar13[0x50] = iVar7;
                 puVar13[0x26] = uVar8;

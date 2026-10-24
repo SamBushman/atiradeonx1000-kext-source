@@ -1,5 +1,5 @@
-10b184	FUN_0010b184	r6	PASS-indirect	10b1b8 bctrl 
-10b184	FUN_0010b184	r7	PASS-indirect	10b1b8 bctrl 
+10b184	IRInst__findConstantOperandWithValue	r6	PASS-indirect	10b1b8 bctrl 
+10b184	IRInst__findConstantOperandWithValue	r7	PASS-indirect	10b1b8 bctrl 
 10c47c	FUN_0010c47c	r5	PASS-indirect	10c4ac bctrl 
 10c47c	FUN_0010c47c	r6	PASS-indirect	10c4ac bctrl 
 10c47c	FUN_0010c47c	r7	PASS-indirect	10c4ac bctrl 

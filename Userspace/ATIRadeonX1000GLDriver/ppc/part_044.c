@@ -709,10 +709,10 @@ int FUN_00159b58(node, param_2, pass)
                 } while (iVar8 <= piVar4[0x21]);
               }
             }
-            FUN_0010aee8(&local_88,iVar2,local_114);
-            FUN_0010aee8(&local_84,iVar2,local_fc);
-            FUN_0010b118(&local_80,iVar2,local_88);
-            FUN_0010b118(&local_7c,iVar2,local_84);
+            IRInst__scaleByOutputScale(&local_88,iVar2,local_114);
+            IRInst__scaleByOutputScale(&local_84,iVar2,local_fc);
+            IRInst__clampOutputValue(&local_80,iVar2,local_88);
+            IRInst__clampOutputValue(&local_7c,iVar2,local_84);
             IRInst__applyAbsModifier(&local_78,node,1,local_80);
             IRInst__applyAbsModifier(&local_74,node,1,local_7c);
             IRInst__applyNegateModifier(&local_70,node,1,local_78);

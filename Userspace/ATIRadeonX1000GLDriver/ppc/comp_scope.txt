@@ -53,7 +53,7 @@ IRLoadConst__vslot45 compiler
 IRExport__ctor_1085b0 compiler
 IRExport__ctor_108918 compiler
 IRLoadConst__vslot77 compiler
-FUN_00108b54 compiler
+IRKill2__ctor_108b54 compiler
 IRLoadConst__vslot53 compiler
 IRLoadConst__vslot63 compiler
 IRLoadTemp__new_109480 compiler
@@ -69,10 +69,10 @@ IRPhiNode__ctor_10a398 compiler
 IRLoopStart__ctor_10a474 compiler
 IRLoopStart__ctor_10a50c compiler
 IRLoadConst__vslot65 compiler
-FUN_0010a620 compiler
-FUN_0010a6bc compiler
+IRCmp1S__ctor_10a620 compiler
+IRCmp1S__ctor_10a6bc compiler
 IRLoadConst__vslot57 compiler
-FUN_0010ad68 compiler
+IRInst__newOpcode8c compiler
 FUN_0010f704 compiler
 OpcodeTraits__flagBit0 compiler
 OpcodeTraits__flagBit2 compiler

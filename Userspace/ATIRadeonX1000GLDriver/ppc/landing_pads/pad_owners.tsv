@@ -182,7 +182,7 @@
 0x107cb4	IRLoadConst__vslot51
 0x107e38	IRUnary__new_107df4
 0x107eb4	IRLoadConst__vslot43
-0x107f98	FUN_00107f38
+0x107f98	IRKill2__ctor_107f38
 0x10802c	IRCmp2__ctor_107fd0
 0x1080a8	IRLoadConst__vslot55
 0x10813c	IRCmp2__ctor_1080e0
@@ -199,7 +199,7 @@
 0x108a2c	IRExport__ctor_108918
 0x108ab4	IRGeomExport__ctor_108a50
 0x108b1c	IRLoadConst__vslot77
-0x108bb4	FUN_00108b54
+0x108bb4	IRKill2__ctor_108b54
 0x108c30	IRLoadConst__vslot53
 0x108f24	IRLoadConst__vslot63
 0x1094c4	IRLoadTemp__new_109480
@@ -221,12 +221,12 @@
 0x10a4d4	IRLoopStart__ctor_10a474
 0x10a56c	IRLoopStart__ctor_10a50c
 0x10a5e8	IRLoadConst__vslot65
-0x10a684	FUN_0010a620
-0x10a720	FUN_0010a6bc
+0x10a684	IRCmp1S__ctor_10a620
+0x10a720	IRCmp1S__ctor_10a6bc
 0x10a79c	IRLoadConst__vslot57
-0x10adb4	FUN_0010ad68
+0x10adb4	IRInst__newOpcode8c
 0x10b000	IRInst__cloneIfPresub
-0x10be9c	FUN_0010bd50
+0x10be9c	IRInst__setLiteralOperandAndSource
 0x10c268	FUN_0010c010
 0x10d31c	IRInst__replaceWithMovOfSource
 0x10d5e4	FUN_0010d4cc

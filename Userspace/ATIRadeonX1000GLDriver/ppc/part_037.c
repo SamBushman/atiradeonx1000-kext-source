@@ -4071,7 +4071,7 @@ int Interpolator__ctor_125350(this, indexValue, param_3, param_4, compiler)
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     puVar9 = allocation + 1;
     *allocation = arena;
-    FUN_00109198(puVar9,compiler);
+    IRLoadInterp__ctor_109198(puVar9,compiler);
     this[0xe] = puVar9;
     (**(code **)(**(int **)(iVar7 + 0x3a0) + 0xc))(*(int **)(iVar7 + 0x3a0),puVar9);
     IRInst__setOperandRef(this[0xe],0,this);
@@ -4205,7 +4205,7 @@ int Interpolator__ctor_1257b0(this, indexValue, param_3, param_4, compiler)
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     puVar9 = allocation + 1;
     *allocation = arena;
-    FUN_00109198(puVar9,compiler);
+    IRLoadInterp__ctor_109198(puVar9,compiler);
     this[0xe] = puVar9;
     (**(code **)(**(int **)(iVar7 + 0x3a0) + 0xc))(*(int **)(iVar7 + 0x3a0),puVar9);
     IRInst__setOperandRef(this[0xe],0,this);

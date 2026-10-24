@@ -45,18 +45,18 @@ int IRBinary__ctor_107eec(inst, opcode, compiler)
   return;
 }
 
-/* FUN_00107f38 @ 0x107f38 (96 bytes) */
-int FUN_00107f38(this, opcode, compiler)
+/* IRKill2__ctor_107f38 @ 0x107f38 (96 bytes) */
+int IRKill2__ctor_107f38(this, opcode, compiler)
   undefined4 *this;
   undefined4 opcode;
   int compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   ((int (*)())IRBinary__ctor_107eec)(this,opcode,compiler);
-  puVar1 = PTR_DAT_001e8c30 + 8;
+  vtable = PTR_DAT_001e8c30 + 8;
   this[0x20] = 1;
-  *this = puVar1;
+  *this = vtable;
   this[5] = this[5] | 0x18;
   this[0x4b] = 0;
   return Program__addInst(*(undefined4 *)(compiler + 0x6c4),this);
@@ -450,18 +450,18 @@ int IRLoadConst__vslot77(this, compiler)
   return allocation + 1;
 }
 
-/* FUN_00108b54 @ 0x108b54 (96 bytes) */
-int FUN_00108b54(this, opcode, compiler)
+/* IRKill2__ctor_108b54 @ 0x108b54 (96 bytes) */
+int IRKill2__ctor_108b54(this, opcode, compiler)
   undefined4 *this;
   undefined4 opcode;
   int compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   ((int (*)())IRBinary__ctor_107eec)(this,opcode,compiler);
-  puVar1 = PTR_DAT_001e8c30 + 8;
+  vtable = PTR_DAT_001e8c30 + 8;
   this[0x20] = 1;
-  *this = puVar1;
+  *this = vtable;
   this[5] = this[5] | 0x18;
   this[0x4b] = 0;
   return Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),this);
@@ -478,7 +478,7 @@ int IRLoadConst__vslot53(this, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_00108b54)(allocation + 1,this,compiler);
+  ((int (*)())IRKill2__ctor_108b54)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
@@ -682,17 +682,17 @@ int IRLoadMemBuffer__ctor_10914c(this, compiler)
   return;
 }
 
-/* FUN_00109198 @ 0x109198 (216 bytes) */
-int FUN_00109198(this, compiler)
+/* IRLoadInterp__ctor_109198 @ 0x109198 (216 bytes) */
+int IRLoadInterp__ctor_109198(this, compiler)
   undefined4 *this;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x7e,compiler);
-  puVar1 = PTR_DAT_001e8c3c + 8;
+  vtable = PTR_DAT_001e8c3c + 8;
   this[0x20] = 1;
-  *this = puVar1;
+  *this = vtable;
   this[5] = this[5] | 0x40;
   this[0x51] = 0x32;
   this[0x52] = 0;
@@ -705,17 +705,17 @@ int FUN_00109198(this, compiler)
   return IRLoadInterp__setLane(this,3,0,5,0);
 }
 
-/* FUN_00109270 @ 0x109270 (216 bytes) */
-int FUN_00109270(this, compiler)
+/* IRLoadInterp__ctor_109270 @ 0x109270 (216 bytes) */
+int IRLoadInterp__ctor_109270(this, compiler)
   undefined4 *this;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   ((int (*)())IRLoad__ctor_108e40)(this,0x7e,compiler);
-  puVar1 = PTR_DAT_001e8c3c + 8;
+  vtable = PTR_DAT_001e8c3c + 8;
   this[0x20] = 1;
-  *this = puVar1;
+  *this = vtable;
   this[5] = this[5] | 0x40;
   this[0x51] = 0x32;
   this[0x52] = 0;

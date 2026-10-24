@@ -1742,7 +1742,7 @@
 0x107df4	IRUnary__new_107df4	92	yes	
 0x107e70	IRLoadConst__vslot43	92	yes	
 0x107eec	IRBinary__ctor_107eec	76	yes	
-0x107f38	FUN_00107f38	116	yes	
+0x107f38	IRKill2__ctor_107f38	116	yes	
 0x107fd0	IRCmp2__ctor_107fd0	112	yes	
 0x108064	IRLoadConst__vslot55	92	yes	
 0x1080e0	IRCmp2__ctor_1080e0	112	yes	
@@ -1765,7 +1765,7 @@
 0x108918	IRExport__ctor_108918	276	no	indirect call (driver context / vtable / callback)
 0x108a50	IRGeomExport__ctor_108a50	100	yes	
 0x108ad8	IRLoadConst__vslot77	92	yes	
-0x108b54	FUN_00108b54	116	yes	
+0x108b54	IRKill2__ctor_108b54	116	yes	
 0x108bec	IRLoadConst__vslot53	92	yes	
 0x108c68	IRHeader__ctor_108c68	84	yes	
 0x108cbc	IRHeader__ctor_108cbc	84	yes	
@@ -1783,8 +1783,8 @@
 0x1090b4	IRLoadMemBufferIndex__ctor_1090b4	76	yes	
 0x109100	IRLoadMemBuffer__ctor_109100	76	yes	
 0x10914c	IRLoadMemBuffer__ctor_10914c	76	yes	
-0x109198	FUN_00109198	216	yes	
-0x109270	FUN_00109270	216	yes	
+0x109198	IRLoadInterp__ctor_109198	216	yes	
+0x109270	IRLoadInterp__ctor_109270	216	yes	
 0x109348	IRLoadTemp__ctor_109348	112	yes	
 0x1093b8	IRLoadTemp__ctor_1093b8	112	yes	
 0x109428	IRLoadTemp__ctor_109428	88	yes	
@@ -1825,40 +1825,40 @@
 0x10a474	IRLoopStart__ctor_10a474	116	yes	
 0x10a50c	IRLoopStart__ctor_10a50c	116	yes	
 0x10a5a4	IRLoadConst__vslot65	92	yes	
-0x10a620	FUN_0010a620	120	yes	
-0x10a6bc	FUN_0010a6bc	120	yes	
+0x10a620	IRCmp1S__ctor_10a620	120	yes	
+0x10a6bc	IRCmp1S__ctor_10a6bc	120	yes	
 0x10a758	IRLoadConst__vslot57	92	yes	
 0x10a7d4	IRStartMakeCall__ctor_10a7d4	104	yes	
 0x10a83c	IRStartMakeCall__ctor_10a83c	104	yes	
 0x10a8a4	IRStartCallRoutine__ctor_10a8a4	104	yes	
 0x10a90c	IRStartCallRoutine__ctor_10a90c	104	yes	
-0x10a974	FUN_0010a974	88	yes	
-0x10a9cc	FUN_0010a9cc	88	yes	
-0x10aa24	FUN_0010aa24	88	yes	
-0x10aa7c	FUN_0010aa7c	88	yes	
+0x10a974	IREndMakeCall__ctor_10a974	88	yes	
+0x10a9cc	IREndMakeCall__ctor_10a9cc	88	yes	
+0x10aa24	IREndCallRoutine__ctor_10aa24	88	yes	
+0x10aa7c	IREndCallRoutine__ctor_10aa7c	88	yes	
 0x10aad4	outputScaleFromExponent	40	yes	
 0x10aafc	isOutputScaleValue	68	yes	
 0x10ab40	outputScaleExponent	76	yes	
 0x10ab8c	tryOutputScaleExponent	172	yes	
 0x10ac38	IRInst__swapOperands	304	no	indirect call (driver context / vtable / callback)
-0x10ad68	FUN_0010ad68	152	yes	
-0x10ae20	FUN_0010ae20	200	no	indirect call (driver context / vtable / callback)
-0x10aee8	FUN_0010aee8	80	yes	
+0x10ad68	IRInst__newOpcode8c	152	yes	
+0x10ae20	IRInst__replaceBodyKeepLinks	200	no	indirect call (driver context / vtable / callback)
+0x10aee8	IRInst__scaleByOutputScale	80	yes	
 0x10af38	IRInst__cloneIfPresub	448	no	indirect call (driver context / vtable / callback)
-0x10b118	FUN_0010b118	108	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x10b184	FUN_0010b184	256	no	indirect call (driver context / vtable / callback)
+0x10b118	IRInst__clampOutputValue	108	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x10b184	IRInst__findConstantOperandWithValue	256	no	indirect call (driver context / vtable / callback)
 0x10b284	IRInst__applyNegateModifier	88	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x10b2dc	IRInst__applyAbsModifier	80	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x10b32c	FUN_0010b32c	340	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x10b32c	IRInst__createCompareConstInst	340	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x10b498	IRInst__isOperandConstZero	352	no	indirect call (driver context / vtable / callback)
 0x10b5f8	IRInst__getCompareCondition	112	yes	
 0x10b820	evaluateCompareFloats	220	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x10b914	IRInst__setCompareCondition	40	yes	
-0x10b93c	FUN_0010b93c	344	no	indirect call (driver context / vtable / callback)
-0x10bb14	FUN_0010bb14	136	yes	
-0x10bb9c	FUN_0010bb9c	220	no	indirect call (driver context / vtable / callback)
-0x10bc78	FUN_0010bc78	216	no	indirect call (driver context / vtable / callback)
-0x10bd50	FUN_0010bd50	352	yes	
+0x10b93c	IRInst__foldCompareConstResult	344	no	indirect call (driver context / vtable / callback)
+0x10bb14	IRInst__compareResultIsConstant	136	yes	
+0x10bb9c	IRInst__retargetOpcode	220	no	indirect call (driver context / vtable / callback)
+0x10bc78	IRInst__retargetOpcodeFromOperands	216	no	indirect call (driver context / vtable / callback)
+0x10bd50	IRInst__setLiteralOperandAndSource	352	yes	
 0x10bed0	FUN_0010bed0	320	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x10c010	FUN_0010c010	872	yes	
 0x10c37c	FUN_0010c37c	256	yes	

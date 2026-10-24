@@ -704,14 +704,14 @@ int KhanPs__ctor_128fd0(this, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   HwLimits__dtor_10dad8(this);
   this[7] = 0;
-  puVar1 = PTR_DAT_001e9104;
+  vtable = PTR_DAT_001e9104;
   this[0xe] = 9;
   this[0x10] = 0x60;
-  this[1] = puVar1;
+  this[1] = vtable;
   this[0x15] = 4;
   *this = &PTR_FUN_001ead88;
   this[8] = 0x7fffffff;
@@ -745,14 +745,14 @@ int KhanPs__ctor_129130(this, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   HwLimits__dtor_10dad8(this);
   this[7] = 0;
-  puVar1 = PTR_DAT_001e9104;
+  vtable = PTR_DAT_001e9104;
   this[0xe] = 9;
   this[0x10] = 0x60;
-  this[1] = puVar1;
+  this[1] = vtable;
   this[0x15] = 4;
   *this = &PTR_FUN_001ead88;
   this[8] = 0x7fffffff;
@@ -1733,12 +1733,12 @@ int KhanVs__ctor_12a578(this, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   HwLimits__dtor_10dad8(this);
-  puVar1 = PTR_DAT_001e9114;
+  vtable = PTR_DAT_001e9114;
   this[4] = 5;
-  this[1] = puVar1;
+  this[1] = vtable;
   this[6] = 0x48;
   this[5] = 2;
   this[0x12] = 0x3ff;
@@ -1776,12 +1776,12 @@ int KhanVs__ctor_12a6c0(this, param_2, param_3)
   undefined4 param_2;
   int param_3;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
   HwLimits__dtor_10dad8(this);
-  puVar1 = PTR_DAT_001e9114;
+  vtable = PTR_DAT_001e9114;
   this[4] = 5;
-  this[1] = puVar1;
+  this[1] = vtable;
   this[6] = 0x48;
   this[5] = 2;
   this[0x12] = 0x3ff;
@@ -1814,37 +1814,37 @@ int KhanVs__ctor_12a6c0(this, param_2, param_3)
 }
 
 /* FudoVs__ctor_12a808 @ 0x12a808 (124 bytes) */
-int FudoVs__ctor_12a808(this, param_2, param_3)
+int FudoVs__ctor_12a808(this, opcode, param_3)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 opcode;
   int param_3;
 {
-  ((int (*)())KhanVs__ctor_12a6c0)(this,param_2,0);
+  ((int (*)())KhanVs__ctor_12a6c0)(this,opcode,0);
   *this = &PTR_FUN_001eb0c0;
   this[6] = 0x80;
   this[0x10] = 0x400;
   this[2] = this[2] | 0x10100;
   ((int (*)())FudoVs__vslot96_installHardwareTables)(this);
   if (param_3 != 0) {
-    ((int (*)())FudoVs__createSchedModels)(this,param_2);
+    ((int (*)())FudoVs__createSchedModels)(this,opcode);
   }
   return;
 }
 
 /* FudoVs__ctor_12a8bc @ 0x12a8bc (124 bytes) */
-int FudoVs__ctor_12a8bc(this, param_2, param_3)
+int FudoVs__ctor_12a8bc(this, opcode, param_3)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 opcode;
   int param_3;
 {
-  ((int (*)())KhanVs__ctor_12a6c0)(this,param_2,0);
+  ((int (*)())KhanVs__ctor_12a6c0)(this,opcode,0);
   *this = &PTR_FUN_001eb0c0;
   this[6] = 0x80;
   this[0x10] = 0x400;
   this[2] = this[2] | 0x10100;
   ((int (*)())FudoVs__vslot96_installHardwareTables)(this);
   if (param_3 != 0) {
-    ((int (*)())FudoVs__createSchedModels)(this,param_2);
+    ((int (*)())FudoVs__createSchedModels)(this,opcode);
   }
   return;
 }

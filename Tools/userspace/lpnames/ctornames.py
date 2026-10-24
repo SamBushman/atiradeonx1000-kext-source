@@ -32,7 +32,13 @@ def ctor_class(body):
     a = None
     if m and re.search(r'\*\w+ = %s \+ 8;' % m.group(1), t): a = int(m.group(2), 16)
     elif mm: a = int(mm.group(2), 16)
-    if a is None: return None, None
+    if a is None:
+        # `v = PTR_DAT_x + 8; ... *this = v;`  or  `*this = &PTR_FUN_y;` (y = vtable + 8)
+        m3 = re.search(r'(\w+) = PTR_DAT_([0-9a-f]+) \+ 8;', t)
+        if m3 and re.search(r'\*\w+ = %s;' % m3.group(1), t): return vt.get(nl.get(int(m3.group(2), 16))), m3.group(1)
+        m4 = re.search(r'\*\w+ = &PTR_FUN_([0-9a-f]+);', t)
+        if m4: return vt.get(int(m4.group(1), 16) - 8), None
+        return None, None
     return vt.get(nl.get(a)), (m.group(1) if m else None)
 for fn in order:
     addr, body = funcs[fn]
@@ -43,7 +49,7 @@ for fn in order:
     c = cls.get(fn)
     if c:
         if fn.startswith('FUN_'): rows.append('F|%s|%s__ctor_%s|constructor: stores the %s vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this|INFERRED' % (fn, c, addr, c))
-        m = re.search(r'(\w+) = PTR_DAT_[0-9a-f]+;', t)
+        m = re.search(r'(\w+) = PTR_DAT_[0-9a-f]+(?: \+ 8)?;', t)
         if m and re.match(r'(puVar|pcVar|uVar)\d+$', m.group(1)): rows.append('L|%s|%s|vtable|PTR_DAT_ entry holding the %s vtable address' % (fn, m.group(1), c))
         # roles from the base constructor call
         mc = re.search(r'(?:\(\(int \(\*\)\(\)\))?(\w+)\)?\((\w+),([^,)]+),(\w+)\);', t)

@@ -1354,9 +1354,9 @@ LAB_00174efc:
                 loopRemaining = param_1[loopIndex2 * 4 + loopIndex + 0x5a];
                 if (loopRemaining < 0) {
                   puVar4 = (undefined4 *)Compiler__exprRecordForValueNumber(param_1[0x8e],loopRemaining);
-                  FUN_0010aee8(&local_40,param_1[0x2c],*puVar4);
+                  IRInst__scaleByOutputScale(&local_40,param_1[0x2c],*puVar4);
                   loopIndex2 = local_40;
-                  FUN_0010b118(local_3c,param_1[0x2c],local_40);
+                  IRInst__clampOutputValue(local_3c,param_1[0x2c],local_40);
                   loopRemaining = local_3c[0];
                   if (local_3c[0] != loopIndex2) goto LAB_001756e4;
                   goto LAB_001756ec;
@@ -1378,9 +1378,9 @@ LAB_001757a0:
               loopRemaining = loopIndex3[0x5e];
               if (loopRemaining < 0) {
                 puVar4 = (undefined4 *)Compiler__exprRecordForValueNumber(param_1[0x8e],loopRemaining);
-                FUN_0010aee8(&local_48,param_1[0x2c],*puVar4);
+                IRInst__scaleByOutputScale(&local_48,param_1[0x2c],*puVar4);
                 loopIndex2 = local_48;
-                FUN_0010b118(&local_44,param_1[0x2c],local_48);
+                IRInst__clampOutputValue(&local_44,param_1[0x2c],local_48);
                 loopRemaining = local_44;
                 if (local_44 != loopIndex2) {
 LAB_001756e4:
@@ -1466,8 +1466,8 @@ LAB_0017547c:
         if (loopIndex < 0) {
           bVar8 = false;
           puVar4 = (undefined4 *)Compiler__exprRecordForValueNumber(param_1[0x8e],loopIndex);
-          FUN_0010aee8(&local_50,param_1[0x2c],*puVar4);
-          FUN_0010b118(&local_4c,param_1[0x2c],local_50);
+          IRInst__scaleByOutputScale(&local_50,param_1[0x2c],*puVar4);
+          IRInst__clampOutputValue(&local_4c,param_1[0x2c],local_50);
           local_54 = local_4c;
           if (local_4c != local_50) goto LAB_00175348;
           goto LAB_00175350;
@@ -1516,8 +1516,8 @@ LAB_0017547c:
     if (loopIndex < 0) {
       bVar8 = false;
       puVar4 = (undefined4 *)Compiler__exprRecordForValueNumber(param_1[0x8e],loopIndex);
-      FUN_0010aee8(local_68 + 4,param_1[0x2c],*puVar4);
-      FUN_0010b118(&local_54,param_1[0x2c],local_68[4]);
+      IRInst__scaleByOutputScale(local_68 + 4,param_1[0x2c],*puVar4);
+      IRInst__clampOutputValue(&local_54,param_1[0x2c],local_68[4]);
       local_50 = local_68[4];
       if (local_54 != local_68[4]) {
 LAB_00175348:
@@ -2464,9 +2464,9 @@ int FUN_00176a94(param_1, param_2, param_3)
             (piVar4,param_1,local_78,local_68,local_58,*(undefined4 *)(param_2 + 0x238));
   local_40 = *param_1;
   if (local_40 != FLOAT_001aa1d0) {
-    FUN_0010aee8(&local_48,*(undefined4 *)(param_2 + 0xb0),local_40);
+    IRInst__scaleByOutputScale(&local_48,*(undefined4 *)(param_2 + 0xb0),local_40);
     *param_1 = local_48;
-    FUN_0010b118(&local_44,*(undefined4 *)(param_2 + 0xb0),local_48);
+    IRInst__clampOutputValue(&local_44,*(undefined4 *)(param_2 + 0xb0),local_48);
     if (local_44 != *param_1) {
       *param_3 = 1;
       *param_1 = local_44;
@@ -2519,9 +2519,9 @@ int FUN_00176c40(param_1, param_2, param_3, param_4)
   a6 = *(code **)(*a0 + 4);
   (*a6)(a0,param_1,local_48,*(undefined4 *)(param_2 + 0x238),in_r7,in_r8,a6);
   if (*param_1 != 0x7ffffffe) {
-    FUN_0010aee8(&local_28,*(undefined4 *)(param_2 + 0xb0),*param_1);
+    IRInst__scaleByOutputScale(&local_28,*(undefined4 *)(param_2 + 0xb0),*param_1);
     *param_1 = local_28;
-    FUN_0010b118(local_24,*(undefined4 *)(param_2 + 0xb0),local_28);
+    IRInst__clampOutputValue(local_24,*(undefined4 *)(param_2 + 0xb0),local_28);
     if (local_24[0] != *param_1) {
       *param_4 = 1;
       *param_1 = local_24[0];

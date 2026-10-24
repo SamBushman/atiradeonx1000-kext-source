@@ -268,7 +268,7 @@ int FUN_0010c47c(inst, param_2)
         uVar9 = uVar9 + 1;
       } while (bVar1);
     }
-    if ((!bVar2) && (iVar3 = FUN_0010bb14(a0), iVar3 == 0)) {
+    if ((!bVar2) && (iVar3 = IRInst__compareResultIsConstant(a0), iVar3 == 0)) {
       return 0;
     }
     uVar5 = 1;
@@ -379,12 +379,12 @@ int FUN_0010c670(inst, inst2, param_3)
               if (uVar9 != 4) {
                 sourceDef2 = IRInst__getOperandSource(inst,iVar8);
                 dVar11 = (double)*(float *)(uVar9 * 0x18 + (int)((ulonglong)sourceDef2 >> 0x20) + 0x20);
-                uVar12 = ((int (*)())FUN_0010b184)(inst2,(int)sourceDef2,local_44,dVar11);
+                uVar12 = ((int (*)())IRInst__findConstantOperandWithValue)(inst2,(int)sourceDef2,local_44,dVar11);
                 iVar8 = local_44[0];
                 iVar7 = (int)((ulonglong)uVar12 >> 0x20);
                 if (iVar7 == 0) {
                   iVar8 = inst2[0x21];
-                  ((void (*)())FUN_0010bd50)(inst2,(int)uVar12,iVar8 + 1,param_3,dVar11);
+                  ((void (*)())IRInst__setLiteralOperandAndSource)(inst2,(int)uVar12,iVar8 + 1,param_3,dVar11);
                   (**(code **)(*inst2 + 0x88))(inst2,iVar8 + 1,iVar2,iVar2);
                 }
                 else if (local_44[0] != iVar2) {
@@ -445,12 +445,12 @@ int FUN_0010c670(inst, inst2, param_3)
           if (uVar9 != 4) {
             sourceDef2 = IRInst__getOperandSource(inst,loopIndex2);
             dVar11 = (double)*(float *)(uVar9 * 0x18 + (int)((ulonglong)sourceDef2 >> 0x20) + 0x20);
-            uVar12 = ((int (*)())FUN_0010b184)(inst2,(int)sourceDef2,local_44,dVar11);
+            uVar12 = ((int (*)())IRInst__findConstantOperandWithValue)(inst2,(int)sourceDef2,local_44,dVar11);
             iVar8 = local_44[0];
             iVar7 = (int)((ulonglong)uVar12 >> 0x20);
             if (iVar7 == 0) {
               iVar8 = inst2[0x21];
-              ((void (*)())FUN_0010bd50)(inst2,(int)uVar12,iVar8 + 1,param_3,dVar11);
+              ((void (*)())IRInst__setLiteralOperandAndSource)(inst2,(int)uVar12,iVar8 + 1,param_3,dVar11);
               (**(code **)(*inst2 + 0x88))(inst2,iVar8 + 1,iVar2,iVar2);
             }
             else if (local_44[0] != iVar2) {
@@ -594,15 +594,15 @@ LAB_0010ce20:
       puVar8 = local_5c;
       for (iVar11 = 1; iVar5 = (**(code **)(*operandVReg + 0x14))(operandVReg), iVar11 <= iVar5;
           iVar11 = iVar11 + 1) {
-        FUN_0010b93c(local_48,operandVReg,iVar11,uVar7,param_2);
+        IRInst__foldCompareConstResult(local_48,operandVReg,iVar11,uVar7,param_2);
         fparam_1 = (double)local_48[0];
         piVar10 = (int *)*puVar8;
-        uVar12 = ((int (*)())FUN_0010b184)(piVar10,extraout_r4,local_64,fparam_1);
+        uVar12 = ((int (*)())IRInst__findConstantOperandWithValue)(piVar10,extraout_r4,local_64,fparam_1);
         iVar5 = local_64[0];
         iVar4 = (int)((ulonglong)uVar12 >> 0x20);
         if (iVar4 == 0) {
           iVar5 = piVar10[0x21];
-          ((void (*)())FUN_0010bd50)(piVar10,(int)uVar12,iVar5 + 1,param_2,fparam_1);
+          ((void (*)())IRInst__setLiteralOperandAndSource)(piVar10,(int)uVar12,iVar5 + 1,param_2,fparam_1);
           (**(code **)(*piVar10 + 0x88))(piVar10,iVar5 + 1,iVar2,iVar2);
         }
         else {

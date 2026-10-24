@@ -818,9 +818,9 @@ int FUN_001781a4(param_1, param_2, param_3)
   loopIndex = *(int **)(*(int *)(param_2 + 0xb0) + 0x88);
   (**(code **)(*loopIndex + 4))(loopIndex,param_1,local_68,*(undefined4 *)(param_2 + 0x238));
   if (*param_1 != 2.1474836e+09) {
-    FUN_0010aee8(&local_38,*(undefined4 *)(param_2 + 0xb0),*param_1);
+    IRInst__scaleByOutputScale(&local_38,*(undefined4 *)(param_2 + 0xb0),*param_1);
     *param_1 = local_38;
-    FUN_0010b118(local_34,*(undefined4 *)(param_2 + 0xb0),local_38);
+    IRInst__clampOutputValue(local_34,*(undefined4 *)(param_2 + 0xb0),local_38);
     if (local_34[0] != *param_1) {
       *param_3 = 1;
       *param_1 = local_34[0];
@@ -2837,7 +2837,7 @@ int ValueKey__mixLiteralSources(key)
                 uVar22 = ((int (*)())ValueKey__findOrInsertLiteral)(iVar6,local_70,iVar15,(double)*literalRecord);
                 iVar6 = (int)((ulonglong)uVar22 >> 0x20);
                 if (*loopIndex6 < iVar6) {
-                  ((void (*)())FUN_0010bd50)(*loopIndex7,(int)uVar22,iVar6,*(undefined4 *)(key + 0x238),
+                  ((void (*)())IRInst__setLiteralOperandAndSource)(*loopIndex7,(int)uVar22,iVar6,*(undefined4 *)(key + 0x238),
                                (double)*literalRecord);
                   *loopIndex6 = iVar6;
                 }
@@ -2938,12 +2938,12 @@ int ValueKey__mixLiteralSources(key)
                   else {
                     iVar15 = iVar14 << 2;
                   }
-                  uVar4 = FUN_0010b93c(&local_88, *(undefined4 *)(key + 0xb0), iVar14, *(unsigned int *)literalRecord, *(undefined4 *)(key + 0x238));
+                  uVar4 = IRInst__foldCompareConstResult(&local_88, *(undefined4 *)(key + 0xb0), iVar14, *(unsigned int *)literalRecord, *(undefined4 *)(key + 0x238));
                   fparam_1 = (double)local_88;
                   uVar22 = ((int (*)())ValueKey__findOrInsertLiteral)(uVar4,local_70,iVar14,fparam_1);
                   loopIndex3 = (int)((ulonglong)uVar22 >> 0x20);
                   if (*loopIndex6 < loopIndex3) {
-                    ((void (*)())FUN_0010bd50)(*loopIndex7,(int)uVar22,loopIndex3,*(undefined4 *)(key + 0x238),fparam_1
+                    ((void (*)())IRInst__setLiteralOperandAndSource)(*loopIndex7,(int)uVar22,loopIndex3,*(undefined4 *)(key + 0x238),fparam_1
                                 );
                     *loopIndex6 = loopIndex3;
                   }

@@ -3061,7 +3061,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 107cb4	107cd4	eh-pad	IRLoadConst__vslot51	8	0x193cc0,__Unwind_Resume
 107e38	107e58	eh-pad	IRUnary__new_107df4	8	0x193cc0,__Unwind_Resume
 107eb4	107ed4	eh-pad	IRLoadConst__vslot43	8	0x193cc0,__Unwind_Resume
-107f98	107fbc	eh-pad	FUN_00107f38	9	__Unwind_Resume
+107f98	107fbc	eh-pad	IRKill2__ctor_107f38	9	__Unwind_Resume
 10802c	108050	eh-pad	IRCmp2__ctor_107fd0	9	__Unwind_Resume
 1080a8	1080c8	eh-pad	IRLoadConst__vslot55	8	0x193cc0,__Unwind_Resume
 10813c	108160	eh-pad	IRCmp2__ctor_1080e0	9	__Unwind_Resume
@@ -3078,7 +3078,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 108a2c	108a50	eh-pad	IRExport__ctor_108918	9	__Unwind_Resume
 108ab4	108ad8	eh-pad	IRGeomExport__ctor_108a50	9	__Unwind_Resume
 108b1c	108b3c	eh-pad	IRLoadConst__vslot77	8	0x193cc0,__Unwind_Resume
-108bb4	108bd8	eh-pad	FUN_00108b54	9	__Unwind_Resume
+108bb4	108bd8	eh-pad	IRKill2__ctor_108b54	9	__Unwind_Resume
 108c30	108c50	eh-pad	IRLoadConst__vslot53	8	0x193cc0,__Unwind_Resume
 108f24	108f44	eh-pad	IRLoadConst__vslot63	8	0x193cc0,__Unwind_Resume
 1094c4	1094e4	eh-pad	IRLoadTemp__new_109480	8	0x193cc0,__Unwind_Resume
@@ -3100,16 +3100,16 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 10a4d4	10a4f8	eh-pad	IRLoopStart__ctor_10a474	9	__Unwind_Resume
 10a56c	10a590	eh-pad	IRLoopStart__ctor_10a50c	9	__Unwind_Resume
 10a5e8	10a608	eh-pad	IRLoadConst__vslot65	8	0x193cc0,__Unwind_Resume
-10a684	10a6a8	eh-pad	FUN_0010a620	9	__Unwind_Resume
-10a720	10a744	eh-pad	FUN_0010a6bc	9	__Unwind_Resume
+10a684	10a6a8	eh-pad	IRCmp1S__ctor_10a620	9	__Unwind_Resume
+10a720	10a744	eh-pad	IRCmp1S__ctor_10a6bc	9	__Unwind_Resume
 10a79c	10a7bc	eh-pad	IRLoadConst__vslot57	8	0x193cc0,__Unwind_Resume
-10adb4	10add4	eh-pad	FUN_0010ad68	8	0x193cc0,__Unwind_Resume
+10adb4	10add4	eh-pad	IRInst__newOpcode8c	8	0x193cc0,__Unwind_Resume
 10b000	10b020	eh-pad	IRInst__cloneIfPresub	8	0x193cc0,__Unwind_Resume
-10b384	10b39c	table	FUN_0010b32c	6	
+10b384	10b39c	table	IRInst__createCompareConstInst	6	
 10b638	10b7f0	table	IRInst__getCompareCondition	110	
 10b874	10b88c	table	evaluateCompareFloats	6	
-10b9c0	10ba40	table	FUN_0010b93c	32	
-10be9c	10bebc	eh-pad	FUN_0010bd50	8	0x193cc0,__Unwind_Resume
+10b9c0	10ba40	table	IRInst__foldCompareConstResult	32	
+10be9c	10bebc	eh-pad	IRInst__setLiteralOperandAndSource	8	0x193cc0,__Unwind_Resume
 10c268	10c26c	eh-pad	FUN_0010c010	1	__Unwind_Resume
 10d31c	10d320	eh-pad	IRInst__replaceWithMovOfSource	1	__Unwind_Resume
 10d5e4	10d5e8	eh-pad	FUN_0010d4cc	1	__Unwind_Resume

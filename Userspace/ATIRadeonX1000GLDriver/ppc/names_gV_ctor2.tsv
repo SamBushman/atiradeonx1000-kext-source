@@ -1,0 +1,26 @@
+func	FUN_00107f38	IRKill2__ctor_107f38	INFERRED	constructor: stores the IRKill2 vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00107f38	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRKill2 vtable address
+func	FUN_00108b54	IRKill2__ctor_108b54	INFERRED	constructor: stores the IRKill2 vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00108b54	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRKill2 vtable address
+func	FUN_00109198	IRLoadInterp__ctor_109198	INFERRED	constructor: stores the IRLoadInterp vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00109198	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRLoadInterp vtable address
+func	FUN_00109270	IRLoadInterp__ctor_109270	INFERRED	constructor: stores the IRLoadInterp vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00109270	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRLoadInterp vtable address
+func	FUN_0010a620	IRCmp1S__ctor_10a620	INFERRED	constructor: stores the IRCmp1S vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0010a620	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRCmp1S vtable address
+func	FUN_0010a6bc	IRCmp1S__ctor_10a6bc	INFERRED	constructor: stores the IRCmp1S vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0010a6bc	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRCmp1S vtable address
+func	FUN_0010a974	IREndMakeCall__ctor_10a974	INFERRED	constructor: stores the IREndMakeCall vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0010a974	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IREndMakeCall vtable address
+func	FUN_0010a9cc	IREndMakeCall__ctor_10a9cc	INFERRED	constructor: stores the IREndMakeCall vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0010a9cc	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IREndMakeCall vtable address
+func	FUN_0010aa24	IREndCallRoutine__ctor_10aa24	INFERRED	constructor: stores the IREndCallRoutine vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0010aa24	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IREndCallRoutine vtable address
+func	FUN_0010aa7c	IREndCallRoutine__ctor_10aa7c	INFERRED	constructor: stores the IREndCallRoutine vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0010aa7c	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IREndCallRoutine vtable address
+local	KhanPs__ctor_128fd0	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the KhanPs vtable address
+local	KhanPs__ctor_129130	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the KhanPs vtable address
+local	KhanVs__ctor_12a578	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the KhanVs vtable address
+local	KhanVs__ctor_12a6c0	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the KhanVs vtable address
+local	FudoVs__ctor_12a808	param_2	opcode	INFERRED	argument opcode of the base constructor call
+local	FudoVs__ctor_12a8bc	param_2	opcode	INFERRED	argument opcode of the base constructor call

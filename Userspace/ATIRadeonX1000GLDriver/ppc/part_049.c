@@ -5255,7 +5255,7 @@ LAB_0018fa5c:
               moreComponents = loopIndex != 3;
               loopIndex = loopIndex + 1;
             } while (moreComponents);
-            FUN_0010bb9c(inst2,source1Select,source2Select,0,0,this[2]);
+            IRInst__retargetOpcode(inst2,source1Select,source2Select,0,0,this[2]);
             opcodeInfo = inst2[0x22];
           }
         }
@@ -5294,7 +5294,7 @@ int R300VSchedModel__vslot14(this, node)
   nodeInst = *(int **)(node + 0x38);
   opcode = *(int *)(nodeInst[0x22] + 8);
   if ((opcode == 0x66) || (opcode == 0x36)) {
-    FUN_0010bc78(nodeInst,this[2]);
+    IRInst__retargetOpcodeFromOperands(nodeInst,this[2]);
     nodeInst[0x26] = 0;
   }
   else if ((opcode == 0x31) || (*(int *)(nodeInst[0x22] + 8) == 0x13)) {
@@ -5315,7 +5315,7 @@ int R300VSchedModel__vslot14(this, node)
       moreComponents = loopIndex != 3;
       loopIndex = loopIndex + 1;
     } while (moreComponents);
-    FUN_0010bb9c(nodeInst,source1Select,source2Select,0,0,this[2]);
+    IRInst__retargetOpcode(nodeInst,source1Select,source2Select,0,0,this[2]);
     nodeInst[0x26] = 1;
   }
   resourceClass = (**(code **)(*this + 0x4c))(this,nodeInst);
