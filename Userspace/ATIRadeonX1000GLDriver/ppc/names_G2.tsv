@@ -132,7 +132,6 @@ local	FUN_0006ec10	param_12	src1Flags	INFERRED	companion flags of param_11, test
 local	FUN_0006ec10	param_15	src2Words	INFERRED	four-word operand record, same layout as param_7
 local	FUN_0006ec10	param_16	src2Flags	INFERRED	companion flags of param_15
 local	FUN_00069330	uVar4	newBuffer	INFERRED	allocation of capacity*4+0x200 bytes that receives the old instruction words
-local	FUN_00069330	uVar5	instrWord	INFERRED	uStack_84 & 0xffff (halfword result of the ctx+0x748 callback) or-ed into every emitted word (0x40000 flag)
 local	FUN_00069330	param_7	src0Words	INFERRED	four-word operand record; param_8 holds its companion flags
 local	FUN_00069330	param_8	src0Flags	INFERRED	four words tested one by one for non-zero before the matching param_7 words are used
 local	FUN_00069330	param_11	src1Words	INFERRED	four-word operand record, same layout as param_7
@@ -140,7 +139,6 @@ local	FUN_00069330	param_12	src1Flags	INFERRED	companion flags of param_11
 local	FUN_00069330	param_15	src2Words	INFERRED	four-word operand record, same layout as param_7
 local	FUN_00069330	param_16	src2Flags	INFERRED	companion flags of param_15
 local	FUN_000684c0	uVar4	newBuffer	INFERRED	allocation of capacity*4+0x200 bytes that receives the old instruction words
-local	FUN_000684c0	uVar11	instrWord	INFERRED	uStack_84 & 0xffff (halfword result of the ctx+0x748 callback)
 local	FUN_000684c0	param_7	src0Words	INFERRED	four-word operand record; param_8 holds its companion flags
 local	FUN_000684c0	param_8	src0Flags	INFERRED	companion flags of param_7
 local	FUN_000684c0	param_11	src1Words	INFERRED	four-word operand record, same layout as param_7
