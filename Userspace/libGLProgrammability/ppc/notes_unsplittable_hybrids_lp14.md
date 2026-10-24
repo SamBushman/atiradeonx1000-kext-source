@@ -22,7 +22,7 @@ token character (`"%c"` path) or the atom string (`"%s "` paths): both definitio
 ## part_012
 * `TPPStreamCompiler::constructElement` `argByteOffsetOrCopyResult` (iVar17): one web (`lw2.py`: w2 lines 143-290); `argCountThenLeftover` is `param_4` (a parameter).
 * `TPPStreamCompiler::copyPropagateCompilerTemp` `scratchPtrOrWord` (puVar20), `streamOrLeftover` (uVar19): one def-use web each (see the rows' evidence).
-* `constructFromOperand` `a6` and `TSymbolTableLevel::clone` `a6` were split / renamed (`scratchR9`, `mapHeader` / `newRefCount`).
+* `constructFromOperand` `a6` is renamed `scratchR9` (one web, forwarded dead vararg). `TSymbolTableLevel::clone` `headerOrNewRefCount` (a6): a split at the refcount definition fails the gate (DATAFLOW "1 loads reached by different stores", lpN4) - the stale 7th-argument use is reached by both definitions.
 
 ## part_006 `yyparse`
 yyparse keeps the yacc value stack in a union (`YYSTYPE`): a stack slot is a TPublicType (type, qualifier, ...) in one rule and a TParameter / TFunction in

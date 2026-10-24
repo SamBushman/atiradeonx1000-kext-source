@@ -1486,7 +1486,7 @@ int TSymbolTableLevel__clone(this, map)
   unsigned char * this;
   unsigned char * map;
 {
-  int newRefCount;
+  int headerOrNewRefCount;
   int *refCountPtr;
   int atomicStore;
   int oldRefCount;
@@ -1499,7 +1499,6 @@ int TSymbolTableLevel__clone(this, map)
   undefined4 staleR6;
   undefined4 staleR7;
   undefined4 staleR8;
-  int mapHeader;
   char reservation;
   byte cr0Reg;
   int iter [4];
@@ -1524,14 +1523,14 @@ int TSymbolTableLevel__clone(this, map)
   *headerNode = 0;
   *(undefined4 *)(newLevel[1] + 4) = 0;
   *(undefined4 *)(newLevel[1] + 8) = newLevel[1];
-  mapHeader = newLevel[1];
-  *(int *)(mapHeader + 0xc) = mapHeader;
+  headerOrNewRefCount = newLevel[1];
+  *(int *)(headerOrNewRefCount + 0xc) = headerOrNewRefCount;
   treeEnd = *(int *)(this + 4);
   iter[0] = *(int *)(treeEnd + 8);
   if (iter[0] != treeEnd) {
     do {
       clonedSymbol = (int *)(**(code **)(**(int **)(iter[0] + 0x18) + 0x18))
-                                (*(int **)(iter[0] + 0x18),map,insertKeyPtr,staleR6,staleR7,staleR8,mapHeader);
+                                (*(int **)(iter[0] + 0x18),map,insertKeyPtr,staleR6,staleR7,staleR8,headerOrNewRefCount);
       unusedInsertWord = 0;
       symbolName = (unsigned char *)(**(code **)(*clonedSymbol + 8))(clonedSymbol);
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&nameCopyAlloc,symbolName);
@@ -1544,9 +1543,9 @@ int TSymbolTableLevel__clone(this, map)
       destroyAlloc[0] = nameCopyAlloc;
       do {
         oldRefCount = *refCountPtr;
-        newRefCount = oldRefCount + -1;
+        headerOrNewRefCount = oldRefCount + -1;
         if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(newRefCount,0,refCountPtr);
+          atomicStore = storeWordConditionalIndexed(headerOrNewRefCount,0,refCountPtr);
           *refCountPtr = atomicStore;
           cr0Reg = 2;
         }
