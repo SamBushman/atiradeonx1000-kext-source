@@ -20,7 +20,7 @@ HwLimits__vslot43_prependDefaultMov compiler
 Compiler__getOrCreateLoadConstN compiler
 FUN_000f94dc compiler
 IRInst__clone compiler
-FUN_001044e0 compiler
+IRInst__replaceExtraData compiler
 IRLoadConst__removeFromListEx compiler
 IRInst__ctor_10502c compiler
 IRInst__ctor_1051b0 compiler

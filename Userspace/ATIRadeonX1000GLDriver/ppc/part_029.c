@@ -292,10 +292,10 @@ int IRExport__ctor_1085b0(this, compiler)
   this[0x22] = opcodeInfo;
   this[0x20] = 0;
   this[0x50] = 0;
-  FUN_00104104(this,0,5,0);
-  FUN_00104104(this,1,5,0);
-  FUN_00104104(this,2,5,0);
-  FUN_00104104(this,3,5,0);
+  IRLoadInterp__setLaneKindAndIndex(this,0,5,0);
+  IRLoadInterp__setLaneKindAndIndex(this,1,5,0);
+  IRLoadInterp__setLaneKindAndIndex(this,2,5,0);
+  IRLoadInterp__setLaneKindAndIndex(this,3,5,0);
   this[0x51] = 0;
   return;
 }
@@ -408,10 +408,10 @@ int IRExport__ctor_108918(this, compiler)
   this[0x22] = opcodeInfo;
   this[0x20] = 0;
   this[0x50] = 0;
-  FUN_00104104(this,0,5,0);
-  FUN_00104104(this,1,5,0);
-  FUN_00104104(this,2,5,0);
-  FUN_00104104(this,3,5,0);
+  IRLoadInterp__setLaneKindAndIndex(this,0,5,0);
+  IRLoadInterp__setLaneKindAndIndex(this,1,5,0);
+  IRLoadInterp__setLaneKindAndIndex(this,2,5,0);
+  IRLoadInterp__setLaneKindAndIndex(this,3,5,0);
   this[0x51] = 0;
   return;
 }
@@ -699,10 +699,10 @@ int FUN_00109198(this, param_2)
   this[0x21] = 0;
   this[0x50] = 0;
   this[0x4f] = 0;
-  FUN_001041d0(this,0,0,5,0);
-  FUN_001041d0(this,1,0,5,0);
-  FUN_001041d0(this,2,0,5,0);
-  return FUN_001041d0(this,3,0,5,0);
+  IRLoadInterp__setLane(this,0,0,5,0);
+  IRLoadInterp__setLane(this,1,0,5,0);
+  IRLoadInterp__setLane(this,2,0,5,0);
+  return IRLoadInterp__setLane(this,3,0,5,0);
 }
 
 /* FUN_00109270 @ 0x109270 (216 bytes) */
@@ -722,10 +722,10 @@ int FUN_00109270(this, param_2)
   this[0x21] = 0;
   this[0x50] = 0;
   this[0x4f] = 0;
-  FUN_001041d0(this,0,0,5,0);
-  FUN_001041d0(this,1,0,5,0);
-  FUN_001041d0(this,2,0,5,0);
-  return FUN_001041d0(this,3,0,5,0);
+  IRLoadInterp__setLane(this,0,0,5,0);
+  IRLoadInterp__setLane(this,1,0,5,0);
+  IRLoadInterp__setLane(this,2,0,5,0);
+  return IRLoadInterp__setLane(this,3,0,5,0);
 }
 
 /* FUN_00109348 @ 0x109348 (112 bytes) */

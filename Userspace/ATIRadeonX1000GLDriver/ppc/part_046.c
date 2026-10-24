@@ -1194,7 +1194,7 @@ int FUN_00174e0c(param_1)
     if (loopIndex2 == 0) goto LAB_00174efc;
     loopIndex3 = (int *)param_1[0x2c];
   }
-  loopIndex2 = FUN_001055cc(loopIndex3);
+  loopIndex2 = IRInst__isProjectionOfOpcode2a(loopIndex3);
   if ((((loopIndex2 != 0) || (loopIndex2 = IRInst__isProjectionOfClass26or3a(param_1[0x2c]), loopIndex2 != 0)) ||
       (loopIndex3 = (int *)param_1[0x2c], *(int *)(loopIndex3[0x22] + 8) == 0xb4)) ||
      ((loopIndex2 = (**(code **)(*loopIndex3 + 0x6c))(loopIndex3), loopIndex2 != 0 ||
@@ -1772,7 +1772,7 @@ LAB_00175ce8:
       loopIndex2 = loopIndex2 + 1;
     } while (bVar1);
     loopRemaining = FUN_000f3154(param_1[0x2c]);
-    if ((loopRemaining == 0) && (loopRemaining = FUN_001055cc(param_1[0x2c]), loopRemaining == 0)) {
+    if ((loopRemaining == 0) && (loopRemaining = IRInst__isProjectionOfOpcode2a(param_1[0x2c]), loopRemaining == 0)) {
       *(int *)(*(int *)(param_1[0x8e] + 0x6c4) + 0xa8) =
            *(int *)(*(int *)(param_1[0x8e] + 0x6c4) + 0xa8) + 1;
       loopRemaining = param_1[0x2c];

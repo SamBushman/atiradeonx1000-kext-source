@@ -127,7 +127,7 @@ int Program__moveInterpFetchesOutOfIfs(param_1)
                       (**(code **)(*a0 + 0x2c))(a0);
                     }
                   }
-                  FUN_0010401c(iVar7);
+                  IRInst__unlinkAndClearFlag0(iVar7);
                   *(uint *)(iVar7 + 0x14) = *(uint *)(iVar7 + 0x14) | 1;
                   Block__appendInst(a0,iVar7);
                   break;
@@ -1439,7 +1439,7 @@ LAB_0013b588:
                     piVar8 = (int *)Vector__elementRefGrow(puVar14,uVar24);
                   }
                   *piVar8 = iVar3;
-                  FUN_0010401c(iVar3);
+                  IRInst__unlinkAndClearFlag0(iVar3);
                   *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) | 1;
                   Block__prependInst(iVar6,iVar3);
                 }
@@ -1635,7 +1635,7 @@ code_r0x0013ba08:
               if ((piVar22 != *(int **)(*piVar12 + 0x158)) &&
                  (piVar8 != *(int **)(*piVar12 + 0x158))) goto code_r0x0013bd34;
             }
-            FUN_0010401c(piVar20);
+            IRInst__unlinkAndClearFlag0(piVar20);
             piVar20[5] = piVar20[5] | 1;
             Block__prependInst(piVar22,piVar20);
             for (iVar23 = 1; iVar4 = (**(code **)(*piVar20 + 0x14))(piVar20), iVar23 < iVar4;
@@ -3609,7 +3609,7 @@ code_r0x0013e0ac:
               *allocation = operandVReg;
             }
             if (bVar1) break;
-            iVar23 = FUN_001055cc(operandVReg);
+            iVar23 = IRInst__isProjectionOfOpcode2a(operandVReg);
             if (iVar23 == 0) {
               local_c4 = uVar6 & vec2Capacity;
               uVar6 = (vec2Capacity << 0x18 | (vec2Capacity >> 8 & 0xff) << 0x10 |
@@ -4955,9 +4955,9 @@ int FUN_001416b4(param_1, inst, inst2, param_4)
   uint loopIndex2;
   uint *puVar8;
   
-  iVar1 = FUN_00104800(inst,inst2);
+  iVar1 = Inst__isBeforeOrSame(inst,inst2);
   if (iVar1 == 0) {
-    iVar1 = FUN_00104800(inst2,inst);
+    iVar1 = Inst__isBeforeOrSame(inst2,inst);
     if (iVar1 == 0) {
       return 0;
     }
@@ -4995,7 +4995,7 @@ int FUN_001416b4(param_1, inst, inst2, param_4)
         else {
           piVar5 = (int *)Vector__elementRefGrow(puVar8,loopIndex2);
         }
-        if ((*piVar5 != 0) && (iVar1 = FUN_00104800(inst,*piVar5), iVar1 == 0)) {
+        if ((*piVar5 != 0) && (iVar1 = Inst__isBeforeOrSame(inst,*piVar5), iVar1 == 0)) {
           return 0;
         }
         puVar8 = *(uint **)(inst2 + 0x10);
@@ -5028,7 +5028,7 @@ int FUN_001416b4(param_1, inst, inst2, param_4)
       iVar1 = 1;
       do {
         operandVReg2 = IRInst__getOperandSource(inst2,iVar1);
-        iVar6 = FUN_00104800(operandVReg2,inst);
+        iVar6 = Inst__isBeforeOrSame(operandVReg2,inst);
         if (iVar6 == 0) {
           return 0;
         }
@@ -7035,29 +7035,29 @@ LAB_00144334:
 LAB_00144264:
   iVar27 = *(int *)(iVar24 + 8);
   piVar20 = *(int **)(iVar27 + 0x158);
-  iVar7 = FUN_00104800(iVar27,iVar25);
+  iVar7 = Inst__isBeforeOrSame(iVar27,iVar25);
   if (iVar7 != 0) {
     iVar27 = *(int *)(iVar25 + 8);
     piVar20 = *(int **)(iVar27 + 0x158);
   }
   if (!bVar1) {
-    iVar7 = FUN_00104800(iVar27,iVar26);
+    iVar7 = Inst__isBeforeOrSame(iVar27,iVar26);
     if (iVar7 != 0) {
       iVar27 = *(int *)(iVar26 + 8);
       piVar20 = *(int **)(iVar27 + 0x158);
     }
-    if ((!bVar2) && (iVar7 = FUN_00104800(iVar27,local_8c), iVar7 != 0)) {
+    if ((!bVar2) && (iVar7 = Inst__isBeforeOrSame(iVar27,local_8c), iVar7 != 0)) {
       iVar27 = *(int *)(local_8c + 8);
       piVar20 = *(int **)(iVar27 + 0x158);
     }
   }
-  FUN_00104800(iVar24,iVar27);
-  FUN_00104800(iVar25,iVar27);
+  Inst__isBeforeOrSame(iVar24,iVar27);
+  Inst__isBeforeOrSame(iVar25,iVar27);
   if (!bVar1) {
-    FUN_00104800(iVar26,iVar27);
+    Inst__isBeforeOrSame(iVar26,iVar27);
   }
   if (!bVar2) {
-    FUN_00104800(local_8c,iVar27);
+    Inst__isBeforeOrSame(local_8c,iVar27);
   }
   iVar7 = *(int *)(*(int *)(iVar27 + 0x88) + 8);
   while (iVar7 == 0x8e) {

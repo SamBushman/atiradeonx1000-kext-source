@@ -3786,7 +3786,7 @@ int ResourceModel__vslot32(this, inst, param_3)
     IRInst__ctor_10502c(inst,uVar2,*(undefined4 *)(this + 8));
   }
   else {
-    FUN_00104f34(inst,param_3);
+    IRInst__switchOpcodeVariant(inst,param_3);
   }
   return inst;
 }

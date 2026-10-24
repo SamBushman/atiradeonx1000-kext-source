@@ -1505,7 +1505,7 @@ int pass_flatten_ifs(flattenPass)
         pcVar12 = *(code **)(*piVar23 + 0xc);
         uVar13 = *(undefined4 *)(flattenPass + 8);
         (*pcVar12)(piVar23,*(uint *)(flattenPass + 0x30) >> 7 & 1);
-        iVar5 = FUN_001049c4(conditionSource,flattenPass,uVar13,in_r6,in_r7,in_r8,pcVar12);
+        iVar5 = IRInst__hasNoUses(conditionSource,flattenPass,uVar13,in_r6,in_r7,in_r8,pcVar12);
         if (iVar5 != 0) {
           (**(code **)(*conditionSource + 0xc))
                     (conditionSource,*(uint *)(flattenPass + 0x30) >> 7 & 1,*(undefined4 *)(flattenPass + 8));

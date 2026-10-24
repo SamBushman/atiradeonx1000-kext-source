@@ -3043,7 +3043,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 103840	1038ec	table	FUN_000fd5c8	43	
 103cec	103cf8	eh-pad	FUN_000fd5c8	3	__Unwind_Resume
 103e80	103e84	millicode	isLessThan2	1	
-10451c	10453c	other	FUN_001044e0	8	
+10451c	10453c	other	IRInst__replaceExtraData	8	
 105164	10519c	eh-pad	IRInst__ctor_10502c	14	0x193cc0,__Unwind_Resume
 1052e8	105320	eh-pad	IRInst__ctor_1051b0	14	0x193cc0,__Unwind_Resume
 1053cc	1053ec	eh-pad	IRInst__setOperandSourceRaw	8	0x193cc0,__Unwind_Resume

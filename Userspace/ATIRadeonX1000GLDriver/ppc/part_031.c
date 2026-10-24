@@ -184,7 +184,7 @@ int FUN_0010c37c(inst, param_2)
             IRInst__setOperandSource(inst,iVar5,operandVReg,0,param_2);
           }
           else {
-            FUN_00104be8(inst,iVar5);
+            IRInst__initOperandRecord(inst,iVar5);
             IRInst__setOperandSource(inst,iVar5,0,0,param_2);
           }
           iVar5 = iVar5 + 1;
@@ -318,7 +318,7 @@ int FUN_0010c670(inst, inst2, param_3)
   a0 = (int *)IRInst__getOperandSource(inst,1);
   operandRecord2 = IRInst__getOperandRecord(inst,1);
   uVar6 = *(undefined4 *)(operandRecord2 + 0x10);
-  uVar12 = FUN_0010453c(a0,param_3,uVar6,in_r6,in_r7,in_r8,in_r9);
+  uVar12 = IRInst__allSelectsAreHwConstants(a0,param_3,uVar6,in_r6,in_r7,in_r8,in_r9);
   if ((int)((ulonglong)uVar12 >> 0x20) == 0) {
     iVar8 = *(int *)(*(int *)(param_3 + 0x6c4) + 0x478);
     iVar2 = (**(code **)(*a0 + 0x5c))
@@ -680,7 +680,7 @@ int FUN_0010cfcc(param_1, inst, param_3, param_4)
         uVar6 = *(undefined4 *)(param_4 + 8);
         uVar5 = 1;
         IRInst__setOperandSource(inst,param_3,sourceDef,1,uVar6);
-        iVar3 = FUN_001049c4(a0,param_4,sourceDef,uVar5,uVar6,in_r8,in_r9);
+        iVar3 = IRInst__hasNoUses(a0,param_4,sourceDef,uVar5,uVar6,in_r8,in_r9);
         if (iVar3 != 0) {
           (**(code **)(*a0 + 0xc))(a0,1,*(undefined4 *)(param_4 + 8));
         }
@@ -1451,7 +1451,7 @@ int FUN_0010e368(param_1)
   
   iVar1 = 3;
   if (param_1 != 0x18) {
-    iVar2 = FUN_0010406c(param_1);
+    iVar2 = RegKind__vectorWidthKind(param_1);
     iVar1 = 1;
     if (iVar2 != 0x15) {
       iVar1 = (uint)(iVar2 == 0x16) << 1;
@@ -1886,9 +1886,9 @@ LAB_0010ebe0:
         piVar2 = (int *)piVar8[2];
       }
       else {
-        iVar3 = FUN_00104ee4(piVar8,0);
-        if (((iVar3 == 0xb) || (iVar3 = FUN_00104ee4(piVar8,0), iVar3 == 0xc)) ||
-           (iVar3 = FUN_00104ee4(piVar8,0), iVar3 == 1)) {
+        iVar3 = IRLoadInterp__laneKind_104ee4(piVar8,0);
+        if (((iVar3 == 0xb) || (iVar3 = IRLoadInterp__laneKind_104ee4(piVar8,0), iVar3 == 0xc)) ||
+           (iVar3 = IRLoadInterp__laneKind_104ee4(piVar8,0), iVar3 == 1)) {
           *(undefined4 *)(param_1 + 0x17c8) = 1;
         }
         iVar3 = piVar8[0x4f];
@@ -2205,7 +2205,7 @@ LAB_0010f168:
                   } while (bVar1);
                 }
                 if (uVar9 != 0) {
-                  FUN_00104ae4(local_58,iVar18);
+                  IRLoadInterp__laneSelects(local_58,iVar18);
                   pcVar15 = *(code **)(*param_1 + 0x54);
                   uVar11 = uVar11 - uVar9;
                   uVar5 = Table__interpolatorKindToCode(param_2,iVar14);

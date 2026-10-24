@@ -1936,7 +1936,7 @@ int FUN_000eee4c(param_1)
               ((int (*)())Program__addInst)(param_1,piVar12);
             }
           }
-          else if ((((piVar12[5] & 2U) != 0) && (iVar3 = FUN_0010406c(piVar12[0x26]), iVar3 == 9))
+          else if ((((piVar12[5] & 2U) != 0) && (iVar3 = RegKind__vectorWidthKind(piVar12[0x26]), iVar3 == 9))
                   && (iVar3 = FUN_00127534(*(undefined4 *)(param_1 + 0x3ac),0x21,0,0), iVar3 != 0))
           {
             IRInst__appendSource(piVar12,iVar3);
@@ -3574,7 +3574,7 @@ LAB_000f26b0:
             SelectWord__selectWhereMasked(&local_3c,0,local_40 & uVar8);
             *(undefined4 *)(iVar5 + 0x9c) = local_3c;
             FUN_000f4698(iVar5,1,param_1);
-            iVar6 = FUN_001055cc(piVar12);
+            iVar6 = IRInst__isProjectionOfOpcode2a(piVar12);
             if (iVar6 == 0) {
               iVar6 = (**(code **)(*piVar12 + 0x7c))(piVar12);
               if (iVar6 == 0) {
@@ -3632,7 +3632,7 @@ LAB_000f26a4:
                           (piVar3,a1,a2,in_r6,in_r7,in_r8,*(code **)(*piVar3 + 0x7c));
         uVar8 = vec4Count;
         if (iVar4 == 0) {
-          iVar4 = FUN_00104fd0(piVar3);
+          iVar4 = IRInst__opcodeIsInSet(piVar3);
           uVar8 = vec4Count;
           if (iVar4 == 0) {
             if ((piVar3[5] & 0x200U) == 0) goto LAB_000f26a4;
@@ -3761,11 +3761,11 @@ LAB_000f2690:
     operandRecord = IRInst__getOperandRecord(piVar3,0);
     WriteMask__fromSelectWord(&local_44,*(undefined4 *)(operandRecord + 0x10));
     uVar8 = local_44;
-    iVar4 = FUN_001055cc(piVar3);
+    iVar4 = IRInst__isProjectionOfOpcode2a(piVar3);
     if (iVar4 == 0) {
       iVar4 = (**(code **)(*piVar3 + 0x7c))(piVar3);
       if (iVar4 == 0) {
-        iVar4 = FUN_00104fd0(piVar3);
+        iVar4 = IRInst__opcodeIsInSet(piVar3);
         if (iVar4 != 0) {
           sourceDef = IRInst__getOperandSource(piVar3,2);
           iVar5 = IRInst__getOperandSource(piVar3,3);

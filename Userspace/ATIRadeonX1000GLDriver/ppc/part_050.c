@@ -986,7 +986,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
               if (((loopIndex3 == loopRemaining) &&
                   (((uVar11 != (addSrcDef[0x34] & 1U) && ((addSrcDef[0x2e] & 2U) == 0)) &&
                    ((addSrcDef[0x34] & 2U) == 0)))) &&
-                 (loopRemaining = FUN_001049a0(loopRemaining,program), loopRemaining != 0)) {
+                 (loopRemaining = IRInst__hasTwoUses(loopRemaining,program), loopRemaining != 0)) {
                 loopRemaining = IRInst__getOperandRecord(addSrcDef,1);
                 uVar20 = (uint)*(byte *)(uVar17 + loopRemaining + 0x10);
                 loopRemaining = IRInst__getOperandRecord(addSrcDef,2);

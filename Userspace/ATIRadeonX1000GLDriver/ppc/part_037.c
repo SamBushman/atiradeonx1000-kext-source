@@ -1631,7 +1631,7 @@ LAB_00121318:
           } while (loopIndex < vec2Count);
         }
         if ((piVar11 != (int *)piVar9[0x56]) && (piVar11[0x45] < ((int *)piVar9[0x56])[0x45])) {
-          FUN_0010401c(piVar9);
+          IRInst__unlinkAndClearFlag0(piVar9);
           piVar9[5] = piVar9[5] | 1;
           Block__appendInst(piVar11,piVar9);
           iVar6 = *(int *)(*(int *)(param_1 + 8) + 0x6c4);
@@ -3915,16 +3915,16 @@ int ExportValue__ctor_124e68(this, param_2, param_3, param_4, compiler)
   allocation[0x51] = param_2;
   arena = FUN_000ec258(iVar4,param_3);
   arena = FUN_000ec2a0(iVar4,arena);
-  FUN_00104104(puVar5,0,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar5,0,arena,param_2);
   arena = FUN_000ec258(iVar4,param_3);
   arena = FUN_000ec2a0(iVar4,arena);
-  FUN_00104104(puVar5,1,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar5,1,arena,param_2);
   arena = FUN_000ec258(iVar4,param_3);
   arena = FUN_000ec2a0(iVar4,arena);
-  FUN_00104104(puVar5,2,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar5,2,arena,param_2);
   arena = FUN_000ec258(iVar4,param_3);
   arena = FUN_000ec2a0(iVar4,arena);
-  FUN_00104104(puVar5,3,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar5,3,arena,param_2);
   arena = *(undefined4 *)(iVar4 + 0x3ac);
   iVar2 = *(int *)(compiler + 0x3ac) + -1;
   *(int *)(compiler + 0x3ac) = iVar2;
@@ -3989,16 +3989,16 @@ int ExportValue__ctor_1250dc(this, param_2, param_3, param_4, compiler)
   allocation[0x51] = param_2;
   arena = FUN_000ec258(iVar4,param_3);
   arena = FUN_000ec2a0(iVar4,arena);
-  FUN_00104104(puVar5,0,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar5,0,arena,param_2);
   arena = FUN_000ec258(iVar4,param_3);
   arena = FUN_000ec2a0(iVar4,arena);
-  FUN_00104104(puVar5,1,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar5,1,arena,param_2);
   arena = FUN_000ec258(iVar4,param_3);
   arena = FUN_000ec2a0(iVar4,arena);
-  FUN_00104104(puVar5,2,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar5,2,arena,param_2);
   arena = FUN_000ec258(iVar4,param_3);
   arena = FUN_000ec2a0(iVar4,arena);
-  FUN_00104104(puVar5,3,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar5,3,arena,param_2);
   arena = *(undefined4 *)(iVar4 + 0x3ac);
   iVar2 = *(int *)(compiler + 0x3ac) + -1;
   *(int *)(compiler + 0x3ac) = iVar2;
@@ -4132,7 +4132,7 @@ LAB_00125578:
   ((int (*)())FUN_0012306c)(uVar4,this[0xd]);
   iVar2 = 0;
   do {
-    FUN_00104104(this[0xd],iVar2,arena,local_44[0]);
+    IRLoadInterp__setLaneKindAndIndex(this[0xd],iVar2,arena,local_44[0]);
     bVar1 = iVar2 != 3;
     iVar2 = iVar2 + 1;
   } while (bVar1);
@@ -4143,16 +4143,16 @@ LAB_00125660:
   allocation[0x51] = param_2;
   arena = FUN_000ec258(iVar7,param_3);
   arena = FUN_000ec2a0(iVar7,arena);
-  FUN_00104104(puVar9,0,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar9,0,arena,param_2);
   arena = FUN_000ec258(iVar7,param_3);
   arena = FUN_000ec2a0(iVar7,arena);
-  FUN_00104104(puVar9,1,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar9,1,arena,param_2);
   arena = FUN_000ec258(iVar7,param_3);
   arena = FUN_000ec2a0(iVar7,arena);
-  FUN_00104104(puVar9,2,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar9,2,arena,param_2);
   arena = FUN_000ec258(iVar7,param_3);
   arena = FUN_000ec2a0(iVar7,arena);
-  FUN_00104104(puVar9,3,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar9,3,arena,param_2);
   arena = DAT_001afeec;
   if (param_3 == 0x18) {
     operandRecord = IRInst__getOperandRecord(puVar9,1);
@@ -4266,7 +4266,7 @@ LAB_001259d8:
   ((int (*)())FUN_0012306c)(uVar4,this[0xd]);
   iVar2 = 0;
   do {
-    FUN_00104104(this[0xd],iVar2,arena,local_44[0]);
+    IRLoadInterp__setLaneKindAndIndex(this[0xd],iVar2,arena,local_44[0]);
     bVar1 = iVar2 != 3;
     iVar2 = iVar2 + 1;
   } while (bVar1);
@@ -4277,16 +4277,16 @@ LAB_00125ac0:
   allocation[0x51] = param_2;
   arena = FUN_000ec258(iVar7,param_3);
   arena = FUN_000ec2a0(iVar7,arena);
-  FUN_00104104(puVar9,0,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar9,0,arena,param_2);
   arena = FUN_000ec258(iVar7,param_3);
   arena = FUN_000ec2a0(iVar7,arena);
-  FUN_00104104(puVar9,1,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar9,1,arena,param_2);
   arena = FUN_000ec258(iVar7,param_3);
   arena = FUN_000ec2a0(iVar7,arena);
-  FUN_00104104(puVar9,2,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar9,2,arena,param_2);
   arena = FUN_000ec258(iVar7,param_3);
   arena = FUN_000ec2a0(iVar7,arena);
-  FUN_00104104(puVar9,3,arena,param_2);
+  IRLoadInterp__setLaneKindAndIndex(puVar9,3,arena,param_2);
   arena = DAT_001afeec;
   if (param_3 == 0x18) {
     operandRecord = IRInst__getOperandRecord(puVar9,1);

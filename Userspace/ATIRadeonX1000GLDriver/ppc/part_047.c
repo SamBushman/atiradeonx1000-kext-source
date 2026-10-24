@@ -2092,12 +2092,12 @@ int FUN_0017a294(ctx, param_2, param_3)
   member0xb0 = *(int *)(ctx + 0xb0);
   iVar1 = *(int *)(*(int *)(member0xb0 + 0x88) + 8);
   if (iVar1 == 0x8b) {
-    FUN_00104be8(member0xb0,1);
+    IRInst__initOperandRecord(member0xb0,1);
     uVar3 = ((int (*)())FUN_0017a130)(1,param_2,*(undefined4 *)(ctx + 0xb0),param_3);
     *(undefined4 *)(ctx + 0x214) = uVar3;
     ((void (*)())IRInst__makeLiteralVec4Float)(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(param_3 + 0x6c4),1,(double)*param_2
                  ,(double)param_2[1],(double)param_2[2],(double)param_2[3]);
-    FUN_00104be8(*(undefined4 *)(ctx + 0xb0),2);
+    IRInst__initOperandRecord(*(undefined4 *)(ctx + 0xb0),2);
     local_24 = DAT_001b01ec;
     local_28 = DAT_001b01e8;
     local_20 = DAT_001b01f0;
@@ -2107,7 +2107,7 @@ int FUN_0017a294(ctx, param_2, param_3)
     *(undefined4 *)(*(int *)(ctx + 0xb0) + 300) = 0;
   }
   else if (iVar1 == 0x8c) {
-    FUN_00104be8(member0xb0,1);
+    IRInst__initOperandRecord(member0xb0,1);
     uVar3 = ((int (*)())FUN_0017a130)(1,param_2,*(undefined4 *)(ctx + 0xb0),param_3);
     *(undefined4 *)(ctx + 0x214) = uVar3;
     ((void (*)())IRInst__makeLiteralVec4Float)(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(param_3 + 0x6c4),1,(double)*param_2

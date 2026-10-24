@@ -542,7 +542,7 @@ int KhanPs__vslot5_materializeSpecialRegister(this, registerKind, compiler)
     program = *(int *)(compiler + COMP_currentProgram);
     callResult = FUN_00127534(*(undefined4 *)(program + 0x3ac),0x1b,0,0);
     if (callResult != 0) {
-      FUN_001041d0(*(undefined4 *)(callResult + 0x38),3,3,8,0);
+      IRLoadInterp__setLane(*(undefined4 *)(callResult + 0x38),3,3,8,0);
       constantPool = *(undefined4 *)(program + 0x3ac);
       nextRegNumber = *(int *)(compiler + 0x3ac) + -1;
       *(int *)(compiler + 0x3ac) = nextRegNumber;

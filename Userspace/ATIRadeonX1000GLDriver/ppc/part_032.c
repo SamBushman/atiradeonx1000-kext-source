@@ -129,9 +129,9 @@ int FUN_0010f87c(param_1, param_2, vector)
               }
               iVar13 = *piVar5;
               iVar12 = *(int *)(iVar13 + 4);
-              iVar4 = FUN_00104ee4(iVar9,iVar8);
+              iVar4 = IRLoadInterp__laneKind_104ee4(iVar9,iVar8);
               if (((iVar12 == iVar4) &&
-                  (iVar12 = *(int *)(iVar13 + 8), iVar4 = FUN_00104180(iVar9,iVar8), iVar12 == iVar4
+                  (iVar12 = *(int *)(iVar13 + 8), iVar4 = IRLoadInterp__laneIndex_104180(iVar9,iVar8), iVar12 == iVar4
                   )) && (*(int *)(iVar13 + 0x18) == iVar8)) {
                 *(uint *)(iVar13 + 0xc) = uVar7;
                 *(uint *)(iVar13 + 0x14) = uVar7;
@@ -526,8 +526,8 @@ LAB_001101ac:
     operandRecord = IRInst__getOperandRecord(*piVar8,0);
     if (*(char *)(iVar2 + operandRecord + 0x10) != '\x01') {
       uVar9 = *(undefined4 *)(param_2 + 0x20);
-      arena = FUN_00104ee4(*piVar8,iVar2);
-      uVar5 = FUN_00104180(*piVar8,iVar2);
+      arena = IRLoadInterp__laneKind_104ee4(*piVar8,iVar2);
+      uVar5 = IRLoadInterp__laneIndex_104180(*piVar8,iVar2);
       uVar11 = *(undefined4 *)(*piVar8 + 0x94);
       uVar6 = FUN_0010e368(*(undefined4 *)(*piVar8 + 0x13c));
       arenaAt374 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
@@ -1407,7 +1407,7 @@ LAB_001116f4: ;
         puVar11 = (undefined4 *)*puVar11;
         iVar8 = 0;
         do {
-          FUN_00104104(*puVar11,iVar8,0,0);
+          IRLoadInterp__setLaneKindAndIndex(*puVar11,iVar8,0,0);
           bVar1 = iVar8 != 3;
           iVar8 = iVar8 + 1;
         } while (bVar1);
@@ -1887,7 +1887,7 @@ int Program__packPsInputs(param_1)
                     puVar3 = (undefined4 *)((int)local_80 + iVar22);
                     iVar7 = arena + 1;
                     iVar22 = iVar22 + 4;
-                    FUN_001041d0(piVar6,arena,3,*puVar2,*puVar3);
+                    IRLoadInterp__setLane(piVar6,arena,3,*puVar2,*puVar3);
                     arena = iVar7;
                   } while (iVar19 != iVar7);
                 }
@@ -2047,9 +2047,9 @@ LAB_0011293c:
     piVar17[0x26] = 5;
     local_58 = 1;
     pcVar14 = *(code **)(*this + 0x54);
-    uVar2 = FUN_00104180(piVar17,0);
+    uVar2 = IRLoadInterp__laneIndex_104180(piVar17,0);
     uVar4 = DAT_001afa0c;
-    FUN_00104180(piVar17,0);
+    IRLoadInterp__laneIndex_104180(piVar17,0);
     (*pcVar14)(this,0,0,uVar2,uVar4,0,0,0);
   }
   if (piVar11 != (int *)0x0) {
@@ -2057,9 +2057,9 @@ LAB_0011293c:
     piVar11[0x26] = 5;
     local_58 = local_58 + 1;
     pcVar14 = *(code **)(*this + 0x54);
-    uVar2 = FUN_00104180(piVar11,0);
+    uVar2 = IRLoadInterp__laneIndex_104180(piVar11,0);
     uVar4 = DAT_001afa0c;
-    FUN_00104180(piVar11,0);
+    IRLoadInterp__laneIndex_104180(piVar11,0);
     (*pcVar14)(this,1,1,uVar2,uVar4,0,0,0);
   }
   iVar1 = FUN_0010f4d4(param_2);

@@ -1620,65 +1620,65 @@
 0xfd50c	FUN_000fd50c	188	yes	
 0xfd5c8	FUN_000fd5c8	24388	no	indirect call (driver context / vtable / callback)
 0x103d50	IROperand__setModifierBits	40	yes	
-0x103d78	FUN_00103d78	220	yes	
+0x103d78	floatToFixedSaturate	220	yes	
 0x103e54	constantZeroFloat	28	yes	
 0x103e70	isLessThan2	16	yes	
-0x103e84	FUN_00103e84	56	yes	
+0x103e84	setSelectedConstantWord	56	yes	
 0x103ebc	IRInst__cloneInto	92	yes	
 0x103f18	IRInst__saveCounters	44	yes	
 0x103f44	IRInst__restoreCounters	64	yes	
 0x103f84	IRInst__copyBodyFrom	100	yes	
 0x103fe8	operandsHaveSameConstant	52	yes	
-0x10401c	FUN_0010401c	56	yes	
+0x10401c	IRInst__unlinkAndClearFlag0	56	yes	
 0x104054	IRInst__useCount	24	yes	
-0x10406c	FUN_0010406c	68	yes	
+0x10406c	RegKind__vectorWidthKind	68	yes	
 0x1040b0	RegKind__laneCount	84	yes	
-0x104104	FUN_00104104	124	yes	
-0x104180	FUN_00104180	80	yes	
-0x1041d0	FUN_001041d0	156	yes	
+0x104104	IRLoadInterp__setLaneKindAndIndex	124	yes	
+0x104180	IRLoadInterp__laneIndex_104180	80	yes	
+0x1041d0	IRLoadInterp__setLane	156	yes	
 0x10426c	IRLoadInterp__laneIndex	80	yes	
-0x1042bc	FUN_001042bc	116	no	indirect call (driver context / vtable / callback)
+0x1042bc	IRInst__firstOperandWithSelectNot4	116	no	indirect call (driver context / vtable / callback)
 0x104330	IRVertexFetch__initSemantics	52	yes	
 0x104364	FUN_00104364	24	yes	
 0x10437c	IRInst__vslot28_hasFlag0x4000AndClass0x24	36	yes	
-0x1043a0	FUN_001043a0	80	yes	
+0x1043a0	instClassTableIsIdentity	80	yes	
 0x1043f0	IRInst__create	108	yes	
 0x10445c	IRInst__clone	132	yes	
-0x1044e0	FUN_001044e0	60	yes	
-0x10453c	FUN_0010453c	168	no	indirect call (driver context / vtable / callback)
+0x1044e0	IRInst__replaceExtraData	60	yes	
+0x10453c	IRInst__allSelectsAreHwConstants	168	no	indirect call (driver context / vtable / callback)
 0x1045e4	IRInst__isProjectionOfClass26or3a	96	yes	
 0x104644	IRInst__isProjectionOfClass44	88	no	indirect call (driver context / vtable / callback)
 0x10469c	IRInst__setHardwareRegisterAndAdd	44	yes	
 0x1046c8	IRInst__setOperandRef	104	no	indirect call (driver context / vtable / callback)
 0x104730	IROperand__copyFrom	120	yes	
 0x1047a8	IROperand__copyModifiersAndSelect	88	yes	
-0x104800	FUN_00104800	92	yes	
+0x104800	Inst__isBeforeOrSame	92	yes	
 0x10485c	Inst__nearestCommonAncestorBlock	120	yes	
-0x1048d4	FUN_001048d4	56	yes	
-0x10490c	FUN_0010490c	56	yes	
-0x104944	FUN_00104944	56	yes	
+0x1048d4	IRInst__setExtraFixed3_4_1048d4	56	yes	
+0x10490c	IRInst__setExtraFixed3_4_10490c	56	yes	
+0x104944	IRInst__setExtraFixed3_4_104944	56	yes	
 0x10497c	IRInst__hasSingleUse	36	yes	
-0x1049a0	FUN_001049a0	36	yes	
-0x1049c4	FUN_001049c4	36	yes	
+0x1049a0	IRInst__hasTwoUses	36	yes	
+0x1049c4	IRInst__hasNoUses	36	yes	
 0x1049e8	IRInst__appendSource	172	no	indirect call (driver context / vtable / callback)
 0x104a94	IRLoadInterp__laneUsed	80	yes	
-0x104ae4	FUN_00104ae4	136	yes	
+0x104ae4	IRLoadInterp__laneSelects	136	yes	
 0x104b6c	IRLoadInterp__laneKind	80	yes	
 0x104bbc	IROperand__init	44	yes	
-0x104be8	FUN_00104be8	16	yes	
-0x104bf8	FUN_00104bf8	324	yes	
+0x104be8	IRInst__initOperandRecord	16	yes	
+0x104bf8	IRInst__resetFields	324	yes	
 0x104d3c	IRInst__readLastOperand	44	yes	
-0x104d68	FUN_00104d68	184	no	indirect call (driver context / vtable / callback)
+0x104d68	IRInst__applyChannelMask	184	no	indirect call (driver context / vtable / callback)
 0x104e20	IRLoadConst__removeFromListEx	196	yes	
-0x104ee4	FUN_00104ee4	80	yes	
-0x104f34	FUN_00104f34	156	yes	
-0x104fd0	FUN_00104fd0	92	yes	
+0x104ee4	IRLoadInterp__laneKind_104ee4	80	yes	
+0x104f34	IRInst__switchOpcodeVariant	156	yes	
+0x104fd0	IRInst__opcodeIsInSet	92	yes	
 0x10502c	IRInst__ctor_10502c	332	no	indirect call (driver context / vtable / callback)
 0x1051b0	IRInst__ctor_1051b0	332	yes	
 0x105334	IRInst__setOperandSourceRaw	408	yes	
 0x1054ec	IRInst__getOperandRecord	168	yes	
 0x105594	IRInst__getOperandSource	56	yes	
-0x1055cc	FUN_001055cc	128	yes	
+0x1055cc	IRInst__isProjectionOfOpcode2a	128	yes	
 0x10564c	IRInst__deleteIfUnused	584	yes	
 0x105894	IRInst__dropCounterAndDeleteIfUnused	20	yes	
 0x1058a8	FUN_001058a8	136	yes	

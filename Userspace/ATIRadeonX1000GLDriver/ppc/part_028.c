@@ -544,7 +544,7 @@ int IRInst__getOrCreateOperandRecord(inst, operandIndex, srcRecord, compiler)
         newSlot = (int *)Vector__elementRefGrow(extraVector,pushIndex);
       }
       *newSlot = (int)(allocation + 1);
-      FUN_00103e84(allocation + 1,operandIndex);
+      setSelectedConstantWord(allocation + 1,operandIndex);
       extraVector = *(uint **)(inst + 0x118);
     }
     extraIndex = operandIndex - 5;
@@ -917,7 +917,7 @@ int IRMix__validate(inst, compiler, param_3, param_4, param_5, param_6, param_7)
           if (loopIndex != 1) {
             operandVReg = IRInst__getOperandSource(inst,loopIndex);
             operandRecord = IRInst__getOperandRecord(inst,loopIndex);
-            FUN_0010453c(operandVReg,compiler,*(undefined4 *)(operandRecord + 0x10),param_4,param_5,param_6,param_7
+            IRInst__allSelectsAreHwConstants(operandVReg,compiler,*(undefined4 *)(operandRecord + 0x10),param_4,param_5,param_6,param_7
                         );
           }
           a0 = (int *)IRInst__getOperandSource(inst,loopIndex);

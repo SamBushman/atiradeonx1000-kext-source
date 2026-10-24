@@ -455,7 +455,7 @@ LAB_0015977c:
         a0 = (int *)IRInst__getOperandSource(inst,1);
         isMix = (**(code **)(*a0 + 0x60))(a0);
         if (isMix != 0) {
-          mixSourceIndex = FUN_001042bc(a0,laneComponent);
+          mixSourceIndex = IRInst__firstOperandWithSelectNot4(a0,laneComponent);
           operandRecord3 = IRInst__getOperandRecord(a0,mixSourceIndex);
           laneComponent = (uint)*(byte *)(laneComponent + operandRecord3 + 0x10);
           a0 = (int *)IRInst__getOperandSource(a0,mixSourceIndex);
@@ -2753,7 +2753,7 @@ LAB_0015d5cc:
                   }
                 }
                 else {
-                  FUN_001049a0(operandVReg,pass);
+                  IRInst__hasTwoUses(operandVReg,pass);
                   uVar17 = *(uint *)(pass + 0x30) >> 7 & 1;
                   iVar7 = IRInst__cloneIfPresub(operandVReg,pass,uVar17);
                   IRInst__setOperandSource(a0,iVar24,iVar7,0,*(undefined4 *)(pass + 8));
@@ -4175,7 +4175,7 @@ LAB_0015fd14:
   node[0x21] = node[0x21] + -1;
   node[5] = node[5] & 0xfffffdff;
   piVar17[0x58] = iVar6 + -1;
-  iVar6 = FUN_001049c4(piVar17,pass,uVar15,uVar13,uVar12,in_r8,iVar6 + -1);
+  iVar6 = IRInst__hasNoUses(piVar17,pass,uVar15,uVar13,uVar12,in_r8,iVar6 + -1);
   bVar1 = iVar6 != 0;
   if (bVar1) {
     (**(code **)(*piVar17 + 0xc))(piVar17,0,*(undefined4 *)(pass + 8));
@@ -5031,12 +5031,12 @@ int FUN_00161748(inst, inst2, pass)
         sourceDef = IRInst__getOperandSource(inst,1);
         uVar9 = *(undefined4 *)(pass + 8);
         operandRecord2 = IRInst__getOperandRecord(inst,1);
-        iVar7 = FUN_0010453c(sourceDef,uVar9,*(undefined4 *)(operandRecord2 + 0x10),in_r6,in_r7,in_r8,in_r9);
+        iVar7 = IRInst__allSelectsAreHwConstants(sourceDef,uVar9,*(undefined4 *)(operandRecord2 + 0x10),in_r6,in_r7,in_r8,in_r9);
         sourceDef = IRInst__getOperandSource(inst2,1);
         uVar9 = *(undefined4 *)(pass + 8);
         bVar1 = iVar7 == 0;
         operandRecord2 = IRInst__getOperandRecord(inst2,1);
-        iVar7 = FUN_0010453c(sourceDef,uVar9,*(undefined4 *)(operandRecord2 + 0x10),in_r6,in_r7,in_r8,in_r9);
+        iVar7 = IRInst__allSelectsAreHwConstants(sourceDef,uVar9,*(undefined4 *)(operandRecord2 + 0x10),in_r6,in_r7,in_r8,in_r9);
         if ((!bVar1) || (iVar7 != 0)) {
           if (((inst[0x2e] & 1U) != (inst2[0x2e] & 1U)) &&
              ((iVar7 == 0 || (iVar10 = FUN_00151318(inst2), iVar10 == 0)))) {

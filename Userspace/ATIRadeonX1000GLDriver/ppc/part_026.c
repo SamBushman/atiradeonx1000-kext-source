@@ -5413,11 +5413,11 @@ code_r0x000fed00:
         in_r6 = (uint ******)FUN_000ec2a0(param_1,uVar10);
         iVar34 = FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),arena,ppppppuVar19,0);
         iVar34 = *(int *)(iVar34 + 0x38);
-        FUN_001041d0(iVar34,0,(uint)*ppppppuVar49 >> 0x10 & 3,in_r6,ppppppuVar19);
-        FUN_001041d0(iVar34,1,(uint)*ppppppuVar49 >> 0x12 & 3,in_r6,ppppppuVar19);
-        FUN_001041d0(iVar34,2,(uint)*ppppppuVar49 >> 0x14 & 3,in_r6,ppppppuVar19);
+        IRLoadInterp__setLane(iVar34,0,(uint)*ppppppuVar49 >> 0x10 & 3,in_r6,ppppppuVar19);
+        IRLoadInterp__setLane(iVar34,1,(uint)*ppppppuVar49 >> 0x12 & 3,in_r6,ppppppuVar19);
+        IRLoadInterp__setLane(iVar34,2,(uint)*ppppppuVar49 >> 0x14 & 3,in_r6,ppppppuVar19);
         in_r7 = ppppppuVar19;
-        FUN_001041d0(iVar34,3,(uint)*ppppppuVar49 >> 0x16 & 3,in_r6,ppppppuVar19);
+        IRLoadInterp__setLane(iVar34,3,(uint)*ppppppuVar49 >> 0x16 & 3,in_r6,ppppppuVar19);
         pppppuVar15 = *ppppppuVar49;
         if (((uint)pppppuVar15 & 0x1000000) != 0) {
           *(uint *)(iVar34 + 0x13c) = *(uint *)(iVar34 + 0x13c) | 1;
@@ -5478,7 +5478,7 @@ code_r0x000fed00:
         if (*(byte *)(iVar43 + (int)local_70) != 0) {
           in_r6 = ppppppuVar19;
           in_r7 = ppppppuVar38;
-          FUN_001041d0(iVar34,iVar43,(uint)*(byte *)(iVar43 + (int)local_70),ppppppuVar19,
+          IRLoadInterp__setLane(iVar34,iVar43,(uint)*(byte *)(iVar43 + (int)local_70),ppppppuVar19,
                        ppppppuVar38);
         }
         bVar1 = iVar43 != 3;
@@ -5624,7 +5624,7 @@ code_r0x000fed00:
       do {
         if (*(char *)(iVar43 + (int)local_70) == '\0') {
           in_r6 = ppppppuVar19;
-          FUN_00104104(arena,iVar43,iVar34,ppppppuVar19);
+          IRLoadInterp__setLaneKindAndIndex(arena,iVar43,iVar34,ppppppuVar19);
         }
         bVar1 = iVar43 != 3;
         iVar43 = iVar43 + 1;
@@ -5994,7 +5994,7 @@ code_r0x000fed00:
           do {
             if (*(char *)(iVar47 + (int)local_70) == '\0') {
               in_r6 = ppppppuVar19;
-              FUN_00104104(iVar43,iVar47,iVar34,ppppppuVar19);
+              IRLoadInterp__setLaneKindAndIndex(iVar43,iVar47,iVar34,ppppppuVar19);
             }
             bVar1 = iVar47 != 3;
             iVar47 = iVar47 + 1;
@@ -6120,7 +6120,7 @@ code_r0x000feeb8:
           do {
             in_r6 = ppppppuVar19;
             in_r7 = ppppppuVar48;
-            FUN_001041d0(iVar34,iVar43,1,ppppppuVar19,ppppppuVar48);
+            IRLoadInterp__setLane(iVar34,iVar43,1,ppppppuVar19,ppppppuVar48);
             bVar1 = iVar43 != 3;
             iVar43 = iVar43 + 1;
           } while (bVar1);
@@ -7791,11 +7791,11 @@ code_r0x001022b4:
       goto code_r0x00101f74;
     case 0x4f:
       local_17c = (int *)((int)local_17c + 1);
-      ((void (*)())FUN_001048d4)(ppppppuVar38,(double)*(float *)(iVar47 + (int)local_17c * 4));
+      ((void (*)())IRInst__setExtraFixed3_4_1048d4)(ppppppuVar38,(double)*(float *)(iVar47 + (int)local_17c * 4));
       goto code_r0x00101d1c;
     case 0x50:
       local_17c = (int *)((int)local_17c + 1);
-      ((void (*)())FUN_0010490c)(ppppppuVar38,(double)*(float *)(iVar47 + (int)local_17c * 4));
+      ((void (*)())IRInst__setExtraFixed3_4_10490c)(ppppppuVar38,(double)*(float *)(iVar47 + (int)local_17c * 4));
       goto code_r0x00101d1c;
     case 0x51:
       bVar4 = *(byte *)((int)param_2 + 0x8d);
