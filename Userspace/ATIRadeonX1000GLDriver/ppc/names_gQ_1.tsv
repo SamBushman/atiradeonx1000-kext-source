@@ -1408,3 +1408,402 @@ use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performe
 use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*bVar13\ =\ CARRY4\(uVar5,uVar8\);$@2	+1
 use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*uVar4\ =\ uVar4\ \+\ iVar6\ \+\ \(uint\)bVar13;$	+1
 func	FUN_0002b3c0	gld_sumQueryCounters	INFERRED	adds the per-pipe counters of one query slot (lanes at words 0,4,2,3 up to pipeCount, plus word 1) and, when the pool's pending flag is set, the 16 pool entries, as a 64-bit sum; returns 0xffffffff when the high word is non-zero
+local	gldPackColorForSurfaceFormat	param_1	surface	INFERRED	colour state record: byte +0x37 is the surface format code that selects the packing, the packed colour is stored as a float-typed word at +0x28
+local	gldPackColorForSurfaceFormat	fparam_1	red	CONFIRMED	red component in [0,1] (clamped below)
+local	gldPackColorForSurfaceFormat	fparam_2	green	CONFIRMED	green component in [0,1]
+local	gldPackColorForSurfaceFormat	fparam_3	blue	CONFIRMED	blue component in [0,1]
+local	gldPackColorForSurfaceFormat	fparam_4	alpha	CONFIRMED	alpha component in [0,1]
+local	gldPackColorForSurfaceFormat	fparam_1_00	alphaD	INFERRED	alpha as a double (the stack copy alphaF widened)
+local	gldPackColorForSurfaceFormat	fStack0000001c	redF	INFERRED	red component stored as float for the formats that pass it through unchanged
+local	gldPackColorForSurfaceFormat	fStack00000028	alphaF	INFERRED	alpha component stored as float for the formats that pass it through unchanged
+local	gldPackColorForSurfaceFormat	dVar8	greenClamped	INFERRED	green clamped to [0,1] (0.0 below, 1.0 above)
+local	gldPackColorForSurfaceFormat	dVar9	blueClamped	INFERRED	blue clamped to [0,1]
+local	gldPackColorForSurfaceFormat	dVar10	alphaClamped	INFERRED	alpha clamped to [0,1]
+use	gldPackColorForSurfaceFormat	dVar11	redChannelD	INFERRED	red component (clamped), then multiplied by the 8-bit scale in place	^\s*dVar11\ =\ DOUBLE_001aa228;$	+1
+use	gldPackColorForSurfaceFormat	dVar11	redChannelD	INFERRED	red component (clamped), then multiplied by the 8-bit scale in place	^\s*if\ \(\(dVar7\ <=\ fparam_1\)\ \&\&$	+2
+use	gldPackColorForSurfaceFormat	dVar11	redChannelD	INFERRED	red component (clamped), then multiplied by the 8-bit scale in place	^\s*dVar11\ =\ DOUBLE_001aa200;$	+1
+use	gldPackColorForSurfaceFormat	dVar11	redChannelD	INFERRED	red component (clamped), then multiplied by the 8-bit scale in place	^\s*dVar11\ =\ dVar11\ \*\ DOUBLE_001aa258;$	+3
+use	gldPackColorForSurfaceFormat	dVar11	redChannelD	INFERRED	red component (clamped), then multiplied by the 8-bit scale in place	^\s*fVar2\ =\ GH_U2F\(\(unsigned\ int\)\(\(int\)dVar11\)\);$	+1
+use	gldPackColorForSurfaceFormat	dVar12	greenChannelD	INFERRED	green component (clamped), then multiplied by the 8-bit scale in place	^\s*dVar12\ =\ DOUBLE_001aa228;$	+1
+use	gldPackColorForSurfaceFormat	dVar12	greenChannelD	INFERRED	green component (clamped), then multiplied by the 8-bit scale in place	^\s*if\ \(\(dVar8\ <=\ fparam_2\)\ \&\&$	+2
+use	gldPackColorForSurfaceFormat	dVar12	greenChannelD	INFERRED	green component (clamped), then multiplied by the 8-bit scale in place	^\s*dVar12\ =\ DOUBLE_001aa200;$	+1
+use	gldPackColorForSurfaceFormat	dVar12	greenChannelD	INFERRED	green component (clamped), then multiplied by the 8-bit scale in place	^\s*dVar12\ =\ dVar12\ \*\ DOUBLE_001aa258;$	+3
+use	gldPackColorForSurfaceFormat	dVar12	greenChannelD	INFERRED	green component (clamped), then multiplied by the 8-bit scale in place	^\s*uVar3\ =\ \(uint\)\(int\)dVar12;$	+1
+local	gldPackColorForSurfaceFormat	dVar13	blueChannelD	INFERRED	blue component (clamped), then multiplied by the 8-bit scale in place
+local	gldPackColorForSurfaceFormat	dVar14	alphaChannelD	INFERRED	alpha component (clamped), then multiplied by the 8-bit scale in place
+use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the scaled-and-rounded channel value, tested against 2^31 for the unsigned conversion	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$	+3
+use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the scaled-and-rounded channel value, tested against 2^31 for the unsigned conversion	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@2	+3
+use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the scaled-and-rounded channel value, tested against 2^31 for the unsigned conversion	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@3	+3
+use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the scaled-and-rounded channel value, tested against 2^31 for the unsigned conversion	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@4	+3
+use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the scaled-and-rounded channel value, tested against 2^31 for the unsigned conversion	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@5	+3
+use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the scaled-and-rounded channel value, tested against 2^31 for the unsigned conversion	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@6	+3
+use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the scaled-and-rounded channel value, tested against 2^31 for the unsigned conversion	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@7	+3
+use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the scaled-and-rounded channel value, tested against 2^31 for the unsigned conversion	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@8	+3
+use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the scaled-and-rounded channel value, tested against 2^31 for the unsigned conversion	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@9	+3
+use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the scaled-and-rounded channel value, tested against 2^31 for the unsigned conversion	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@10	+3
+use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the scaled-and-rounded channel value, tested against 2^31 for the unsigned conversion	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@11	+3
+use	gldPackColorForSurfaceFormat	dVar11	roundedD	INFERRED	(double)(float) of the scaled-and-rounded channel value, tested against 2^31 for the unsigned conversion	^\s*dVar11\ =\ \(double\)\(float\)dVar7;$@12	+3
+use	gldPackColorForSurfaceFormat	dVar11	blueScaledD	INFERRED	blueClamped * scale + 0.5 (10-bit packing)	^\s*dVar11\ =\ dVar9\ \*\ \(double\)FLOAT_001aa154\ \+\ \(double\)FLOAT_001aa10c;$	+2
+use	gldPackColorForSurfaceFormat	dVar11	blueScaledD	INFERRED	blueClamped * scale + 0.5 (10-bit packing)	^\s*uVar3\ =\ \(uint\)\(int\)dVar11;$	+1
+use	gldPackColorForSurfaceFormat	dVar11	alphaScaledD	INFERRED	alphaClamped * scale + 0.5 (2-bit alpha packing)	^\s*dVar11\ =\ dVar10\ \*\ \(double\)FLOAT_001aa158\ \+\ \(double\)FLOAT_001aa10c;$	+2
+use	gldPackColorForSurfaceFormat	dVar11	alphaScaledD	INFERRED	alphaClamped * scale + 0.5 (2-bit alpha packing)	^\s*iVar1\ =\ \(int\)dVar11;$	+1
+use	gldPackColorForSurfaceFormat	dVar12	roundedBlueD	INFERRED	(double)(float) of blueScaledD	^\s*dVar12\ =\ \(double\)\(float\)dVar11;$	+3
+use	gldPackColorForSurfaceFormat	dVar12	roundedAlphaD	INFERRED	(double)(float) of alphaScaledD	^\s*dVar12\ =\ \(double\)\(float\)dVar11;$@2	+3
+use	gldPackColorForSurfaceFormat	dVar7	alphaScaled	INFERRED	alphaClamped * scale + 0.5	^\s*dVar7\ =\ dVar10\ \*\ \(double\)FLOAT_001aa14c\ \+\ \(double\)FLOAT_001aa10c;$	+2
+use	gldPackColorForSurfaceFormat	dVar7	alphaScaled	INFERRED	alphaClamped * scale + 0.5	^\s*uVar3\ =\ \(uint\)\(int\)dVar7;$@3	+1
+use	gldPackColorForSurfaceFormat	dVar7	alphaScaled	INFERRED	alphaClamped * scale + 0.5	^\s*dVar7\ =\ dVar10\ \*\ \(double\)FLOAT_001aa14c\ \+\ \(double\)FLOAT_001aa10c;$@2	+2
+use	gldPackColorForSurfaceFormat	dVar7	alphaScaled	INFERRED	alphaClamped * scale + 0.5	^\s*iVar1\ =\ \(int\)dVar7;$	+1
+use	gldPackColorForSurfaceFormat	dVar7	alphaScaled	INFERRED	alphaClamped * scale + 0.5	^\s*dVar7\ =\ dVar10\ \*\ \(double\)FLOAT_001aa158\ \+\ \(double\)FLOAT_001aa10c;$	+2
+use	gldPackColorForSurfaceFormat	dVar7	alphaScaled	INFERRED	alphaClamped * scale + 0.5	^\s*iVar1\ =\ \(int\)dVar7;$@2	+1
+use	gldPackColorForSurfaceFormat	dVar7	blueScaled	INFERRED	blueClamped * scale + 0.5	^\s*dVar7\ =\ dVar9\ \*\ \(double\)FLOAT_001aa154\ \+\ \(double\)FLOAT_001aa10c;$	+2
+use	gldPackColorForSurfaceFormat	dVar7	blueScaled	INFERRED	blueClamped * scale + 0.5	^\s*uVar4\ =\ \(uint\)\(int\)dVar7;$	+1
+use	gldPackColorForSurfaceFormat	dVar7	greenScaled	INFERRED	greenClamped * scale + 0.5	^\s*dVar7\ =\ dVar8\ \*\ \(double\)FLOAT_001aa154\ \+\ \(double\)FLOAT_001aa10c;$	+2
+use	gldPackColorForSurfaceFormat	dVar7	greenScaled	INFERRED	greenClamped * scale + 0.5	^\s*uVar5\ =\ \(uint\)\(int\)dVar7;$	+1
+use	gldPackColorForSurfaceFormat	dVar7	greenScaled	INFERRED	greenClamped * scale + 0.5	^\s*dVar7\ =\ dVar8\ \*\ \(double\)FLOAT_001aa154\ \+\ \(double\)FLOAT_001aa10c;$@2	+2
+use	gldPackColorForSurfaceFormat	dVar7	greenScaled	INFERRED	greenClamped * scale + 0.5	^\s*uVar5\ =\ \(uint\)\(int\)dVar7;$@2	+1
+local	gldPackColorForSurfaceFormat	fVar2	redByteBits	INFERRED	8-bit red (channelD scaled and converted) as raw float bits
+use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*uVar3\ =\ \(int\)\(dVar12\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$	+1
+use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*uVar3\ =\ \(uint\)\(int\)dVar12;$	+1
+use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar2\ \&\ 0xf8\)\ <<\ 8\ \|\ \(uVar3\ \&\ 0xfc\)\ <<\ 3\ \|\ uVar4\ >>\ 3\)\)\);$	+1
+use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar6\ \&\ 0xf0\)\ <<\ 8\ \|\ \(\(uint\)\(int\)fVar2\ \&\ 0xf0\)\ <<\ 4\ \|\ uVar3\ \&\ 0xf0\ \|$	+2
+use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar6\ \&\ 0x80\)\ <<\ 8\ \|\ \(\(uint\)\(int\)fVar2\ \&\ 0xf8\)\ <<\ 7\ \|\ \(uVar3\ \&\ 0xf8\)\ <<\ 2\ \|$	+2
+use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*fVar6\ =\ \(float\)\(uVar4\ \|\ \(int\)GH_F2U\(fVar6\)\ <<\ 0x18\ \|\ \(int\)GH_F2U\(fVar2\)\ <<\ 0x10\ \|\ uVar3\ <<\ 8\);$	+1
+use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(uint\)\(int\)fVar2\ \|\ uVar3\ <<\ 8\ \|\ \(int\)fVar6\ <<\ 0x18\ \|\ uVar4\ <<\ 0x10\)\)\);$	+1
+use	gldPackColorForSurfaceFormat	uVar3	greenByte	INFERRED	8-bit green	^\s*case\ '\(':$	+4
+use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*uVar4\ =\ \(int\)\(dVar13\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$	+1
+use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*uVar4\ =\ \(uint\)\(int\)dVar13;$	+1
+use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar2\ \&\ 0xf8\)\ <<\ 8\ \|\ \(uVar3\ \&\ 0xfc\)\ <<\ 3\ \|\ uVar4\ >>\ 3\)\)\);$	+1
+use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar6\ \&\ 0xf0\)\ <<\ 8\ \|\ \(\(uint\)\(int\)fVar2\ \&\ 0xf0\)\ <<\ 4\ \|\ uVar3\ \&\ 0xf0\ \|$	+2
+use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(\(uint\)\(int\)fVar6\ \&\ 0x80\)\ <<\ 8\ \|\ \(\(uint\)\(int\)fVar2\ \&\ 0xf8\)\ <<\ 7\ \|\ \(uVar3\ \&\ 0xf8\)\ <<\ 2\ \|$	+2
+use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*fVar6\ =\ \(float\)\(uVar4\ \|\ \(int\)GH_F2U\(fVar6\)\ <<\ 0x18\ \|\ \(int\)GH_F2U\(fVar2\)\ <<\ 0x10\ \|\ uVar3\ <<\ 8\);$	+1
+use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(uint\)\(int\)fVar2\ \|\ uVar3\ <<\ 8\ \|\ \(int\)fVar6\ <<\ 0x18\ \|\ uVar4\ <<\ 0x10\)\)\);$	+1
+use	gldPackColorForSurfaceFormat	uVar4	blueByte	INFERRED	8-bit blue	^\s*case\ '\(':$	+4
+use	gldPackColorForSurfaceFormat	uVar3	halfRed	INFERRED	floatToHalfBits(red)	^\s*uVar3\ =\ \(\(uint\ \(\*\)\(\)\)FUN_0001d7c0\)\(fparam_1\);$	+2
+use	gldPackColorForSurfaceFormat	uVar3	halfRed	INFERRED	floatToHalfBits(red)	^\s*uVar3\ =\ \(\(uint\ \(\*\)\(\)\)FUN_0001d7c0\)\(fparam_1\);$@2	+1
+use	gldPackColorForSurfaceFormat	uVar3	halfRed	INFERRED	floatToHalfBits(red)	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \|\ iVar1\ <<\ 0x10\)\)\);$	+1
+use	gldPackColorForSurfaceFormat	uVar3	halfAlpha	INFERRED	floatToHalfBits(alpha)	^\s*uVar3\ =\ \(\(uint\ \(\*\)\(\)\)FUN_0001d7c0\)\(fparam_1_00\);$	+2
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(uint\)\(int\)dVar7;$	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$@2	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(uint\)\(int\)dVar7;$@2	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$@3	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(uint\)\(int\)dVar7;$@3	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ uVar3\ \&\ 0xffff;$	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \|\ uVar3\ <<\ 0x10\)\)\);$	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$@4	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(uint\)\(int\)dVar7;$@4	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \&\ 0xffff\ \|\ iVar1\ <<\ 0x10\)\)\);$	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$@5	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(uint\)\(int\)dVar7;$@5	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ uVar3\ \&\ 0x3ff;$	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(int\)\(dVar12\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$@2	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ \(uint\)\(int\)dVar11;$	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar3\ =\ uVar3\ \&\ 0x3ff;$@2	+1
+use	gldPackColorForSurfaceFormat	uVar3	channelInt	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \|\ uVar4\ \|\ \(uVar5\ \&\ 0x3ff\)\ <<\ 10\)\)\);$	+1
+use	gldPackColorForSurfaceFormat	uVar4	channelInt2	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar4\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$	+1
+use	gldPackColorForSurfaceFormat	uVar4	channelInt2	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar4\ =\ \(uint\)\(int\)dVar7;$	+1
+use	gldPackColorForSurfaceFormat	uVar4	channelInt2	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar4\ =\ iVar1\ <<\ 0x1e\ \|\ \(uVar4\ \&\ 0x3ff\)\ <<\ 0x14;$	+1
+use	gldPackColorForSurfaceFormat	uVar4	channelInt2	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar4\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ 0x80000000;$@2	+1
+use	gldPackColorForSurfaceFormat	uVar4	channelInt2	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar4\ =\ \(uint\)\(int\)dVar7;$@2	+1
+use	gldPackColorForSurfaceFormat	uVar4	channelInt2	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*uVar4\ =\ iVar1\ <<\ 0x1e\ \|\ \(uVar4\ \&\ 0x3ff\)\ <<\ 0x14;$@2	+1
+use	gldPackColorForSurfaceFormat	uVar4	channelInt2	INFERRED	scaled and rounded channel converted to an unsigned integer	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \|\ uVar4\ \|\ \(uVar5\ \&\ 0x3ff\)\ <<\ 10\)\)\);$	+1
+local	gldPackColorForSurfaceFormat	uVar5	channelInt3	INFERRED	scaled and rounded channel converted to an unsigned integer
+use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*iVar1\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ \-0x80000000;$	+1
+use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*iVar1\ =\ \(int\)dVar7;$	+1
+use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar3\ \&\ 0xffff\ \|\ iVar1\ <<\ 0x10\)\)\);$	+1
+use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*iVar1\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ \-0x80000000;$@2	+1
+use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*iVar1\ =\ \(int\)dVar7;$@2	+1
+use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*uVar4\ =\ iVar1\ <<\ 0x1e\ \|\ \(uVar4\ \&\ 0x3ff\)\ <<\ 0x14;$	+1
+use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*iVar1\ =\ \(int\)\(dVar12\ \-\ DOUBLE_001aa1e8\)\ \+\ \-0x80000000;$	+1
+use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*iVar1\ =\ \(int\)dVar11;$	+1
+use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*uVar4\ =\ iVar1\ <<\ 0x1e\ \|\ \(uVar4\ \&\ 0x3ff\)\ <<\ 0x14;$@2	+1
+use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*iVar1\ =\ \(int\)\(dVar11\ \-\ DOUBLE_001aa1e8\)\ \+\ \-0x80000000;$@3	+1
+use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*iVar1\ =\ \(int\)dVar7;$@3	+1
+use	gldPackColorForSurfaceFormat	iVar1	channelIntB	INFERRED	scaled and rounded channel converted to an integer	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(iVar1\ <<\ 8\)\)\);$	+1
+use	gldPackColorForSurfaceFormat	iVar1	halfAlphaB	INFERRED	floatToHalfBits(alpha)	^\s*iVar1\ =\ \(\(uint\ \(\*\)\(\)\)FUN_0001d7c0\)\(\(double\)fStack00000028\);$	+2
+local	gld_setBufferNewTextureBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
+local	gld_setBufferNewTextureBacking	param_2	buffer	INFERRED	buffer object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
+local	gld_setBufferNewTextureBacking	param_3	requestArg0	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setBufferNewTextureBacking	param_4	requestArg1	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setBufferNewTextureBacking	param_5	requestArg2	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setBufferNewTextureBacking	param_6	requestArg3	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setBufferNewTextureBacking	local_48	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
+local	gld_setBufferNewTextureBacking	local_44	outHandle	INFERRED	output word 0: backing handle stored in the object
+local	gld_setBufferNewTextureBacking	local_40	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
+local	gld_setBufferNewTextureBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
+use	gld_setBufferNewTextureBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*iVar3\ =\ _io_connect_method_structureI_structureO$	+1
+use	gld_setBufferNewTextureBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
+use	gld_setBufferNewTextureBacking	iVar3	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
+use	gld_setBufferNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar3\ =\ \*piVar2;$	+1
+use	gld_setBufferNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+1
+use	gld_setBufferNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*if\ \(iVar3\ ==\ 0x10000\)\ \{$	+1
+local	gld_setBufferNewTextureBacking	iVar5	oldBacking	INFERRED	backing record that was attached before; released at the end
+use	gld_setBufferNewTextureBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*piVar2\ =\ \*\(int\ \*\*\)\(param_2\ \+\ 8\);$	+2
+use	gld_setBufferNewTextureBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*piVar2\ =\ \(int\ \*\)_malloc\(8\);$	+2
+use	gld_setBufferNewTextureBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*iVar5\ =\ \*piVar2;$	+1
+use	gld_setBufferNewTextureBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*\*piVar2\ =\ 0;$	+1
+use	gld_setBufferNewTextureBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar2\ =\ \(int\ \*\)\(local_40\ \+\ 0x10\);$	+1
+use	gld_setBufferNewTextureBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
+use	gld_setBufferNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar2\ =\ \(int\ \*\)\(iVar5\ \+\ 0x10\);$	+1
+use	gld_setBufferNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar3\ =\ \*piVar2;$	+1
+use	gld_setBufferNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+2
+local	gld_setBufferNewTextureBacking	uVar4	succeeded	INFERRED	1 when the new backing was obtained
+local	gld_setBufferNewTextureBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
+local	gld_setTextureNewTextureBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
+local	gld_setTextureNewTextureBacking	param_2	texture	INFERRED	texture object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
+local	gld_setTextureNewTextureBacking	param_3	requestArg0	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setTextureNewTextureBacking	param_4	requestArg1	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setTextureNewTextureBacking	param_5	requestArg2	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setTextureNewTextureBacking	param_6	requestArg3	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setTextureNewTextureBacking	local_38	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
+local	gld_setTextureNewTextureBacking	local_34	outHandle	INFERRED	output word 0: backing handle stored in the object
+local	gld_setTextureNewTextureBacking	local_30	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
+local	gld_setTextureNewTextureBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
+use	gld_setTextureNewTextureBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*iVar3\ =\ _io_connect_method_structureI_structureO$	+1
+use	gld_setTextureNewTextureBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
+use	gld_setTextureNewTextureBacking	iVar3	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
+use	gld_setTextureNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar3\ =\ \*piVar2;$	+1
+use	gld_setTextureNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+1
+use	gld_setTextureNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*if\ \(iVar3\ ==\ 0x10000\)\ \{$	+1
+local	gld_setTextureNewTextureBacking	iVar5	oldBacking	INFERRED	backing record that was attached before; released at the end
+use	gld_setTextureNewTextureBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar2\ =\ \(int\ \*\)\(local_30\ \+\ 0x10\);$	+1
+use	gld_setTextureNewTextureBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
+use	gld_setTextureNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar2\ =\ \(int\ \*\)\(iVar5\ \+\ 0x10\);$	+1
+use	gld_setTextureNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar3\ =\ \*piVar2;$	+1
+use	gld_setTextureNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+2
+local	gld_setTextureNewTextureBacking	uVar4	succeeded	INFERRED	1 when the new backing was obtained
+local	gld_setTextureNewTextureBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
+local	gld_setBufferAgpRefBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
+local	gld_setBufferAgpRefBacking	param_2	buffer	INFERRED	buffer object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
+local	gld_setBufferAgpRefBacking	param_3	requestArg0	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setBufferAgpRefBacking	param_4	requestArg1	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setBufferAgpRefBacking	param_5	requestArg2	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setBufferAgpRefBacking	local_38	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
+local	gld_setBufferAgpRefBacking	auStack_34	outHandleUnused	INFERRED	output word 0 (handle), not used by this variant
+local	gld_setBufferAgpRefBacking	local_30	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
+local	gld_setBufferAgpRefBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
+use	gld_setBufferAgpRefBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*iVar3\ =\ _io_connect_method_structureI_structureO$	+1
+use	gld_setBufferAgpRefBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
+use	gld_setBufferAgpRefBacking	iVar3	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
+use	gld_setBufferAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar3\ =\ \*piVar2;$	+1
+use	gld_setBufferAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+1
+use	gld_setBufferAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*if\ \(iVar3\ ==\ 0x10000\)\ \{$	+1
+local	gld_setBufferAgpRefBacking	iVar5	oldBacking	INFERRED	backing record that was attached before; released at the end
+use	gld_setBufferAgpRefBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*piVar2\ =\ \*\(int\ \*\*\)\(param_2\ \+\ 8\);$	+2
+use	gld_setBufferAgpRefBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*piVar2\ =\ \(int\ \*\)_malloc\(8\);$	+2
+use	gld_setBufferAgpRefBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*iVar5\ =\ \*piVar2;$	+1
+use	gld_setBufferAgpRefBacking	piVar2	backingRecord	INFERRED	object+8: the {backing, handle} record, allocated on first use	^\s*\*piVar2\ =\ 0;$	+1
+use	gld_setBufferAgpRefBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar2\ =\ \(int\ \*\)\(local_30\ \+\ 0x10\);$	+1
+use	gld_setBufferAgpRefBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
+use	gld_setBufferAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar2\ =\ \(int\ \*\)\(iVar5\ \+\ 0x10\);$	+1
+use	gld_setBufferAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar3\ =\ \*piVar2;$	+1
+use	gld_setBufferAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+2
+local	gld_setBufferAgpRefBacking	uVar4	succeeded	INFERRED	1 when the new backing was obtained
+local	gld_setBufferAgpRefBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
+local	gld_setVertexArrayNewTextureBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
+local	gld_setVertexArrayNewTextureBacking	param_2	vertexArray	INFERRED	vertexArray object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
+local	gld_setVertexArrayNewTextureBacking	param_3	requestArg0	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setVertexArrayNewTextureBacking	param_4	requestArg1	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setVertexArrayNewTextureBacking	param_5	requestArg2	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setVertexArrayNewTextureBacking	param_6	requestArg3	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setVertexArrayNewTextureBacking	local_38	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
+local	gld_setVertexArrayNewTextureBacking	local_34	outHandle	INFERRED	output word 0: backing handle stored in the object
+local	gld_setVertexArrayNewTextureBacking	local_30	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
+local	gld_setVertexArrayNewTextureBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
+use	gld_setVertexArrayNewTextureBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*iVar3\ =\ _io_connect_method_structureI_structureO$	+1
+use	gld_setVertexArrayNewTextureBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
+use	gld_setVertexArrayNewTextureBacking	iVar3	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
+use	gld_setVertexArrayNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar3\ =\ \*piVar2;$	+1
+use	gld_setVertexArrayNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+1
+use	gld_setVertexArrayNewTextureBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*if\ \(iVar3\ ==\ 0x10000\)\ \{$	+1
+local	gld_setVertexArrayNewTextureBacking	iVar5	oldBacking	INFERRED	backing record that was attached before; released at the end
+use	gld_setVertexArrayNewTextureBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar2\ =\ \(int\ \*\)\(local_30\ \+\ 0x10\);$	+1
+use	gld_setVertexArrayNewTextureBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
+use	gld_setVertexArrayNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar2\ =\ \(int\ \*\)\(iVar5\ \+\ 0x10\);$	+1
+use	gld_setVertexArrayNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar3\ =\ \*piVar2;$	+1
+use	gld_setVertexArrayNewTextureBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+2
+local	gld_setVertexArrayNewTextureBacking	uVar4	succeeded	INFERRED	1 when the new backing was obtained
+local	gld_setVertexArrayNewTextureBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
+local	gld_setTextureAgpRefBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
+local	gld_setTextureAgpRefBacking	param_2	texture	INFERRED	texture object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
+local	gld_setTextureAgpRefBacking	param_3	requestArg0	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setTextureAgpRefBacking	param_4	requestArg1	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setTextureAgpRefBacking	param_5	requestArg2	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setTextureAgpRefBacking	local_38	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
+local	gld_setTextureAgpRefBacking	auStack_34	outHandleUnused	INFERRED	output word 0 (handle), not used by this variant
+local	gld_setTextureAgpRefBacking	local_30	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
+local	gld_setTextureAgpRefBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
+use	gld_setTextureAgpRefBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*iVar3\ =\ _io_connect_method_structureI_structureO$	+1
+use	gld_setTextureAgpRefBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
+use	gld_setTextureAgpRefBacking	iVar3	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
+use	gld_setTextureAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar3\ =\ \*piVar2;$	+1
+use	gld_setTextureAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+1
+use	gld_setTextureAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*if\ \(iVar3\ ==\ 0x10000\)\ \{$	+1
+local	gld_setTextureAgpRefBacking	iVar5	oldBacking	INFERRED	backing record that was attached before; released at the end
+use	gld_setTextureAgpRefBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar2\ =\ \(int\ \*\)\(local_30\ \+\ 0x10\);$	+1
+use	gld_setTextureAgpRefBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
+use	gld_setTextureAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar2\ =\ \(int\ \*\)\(iVar5\ \+\ 0x10\);$	+1
+use	gld_setTextureAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar3\ =\ \*piVar2;$	+1
+use	gld_setTextureAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+2
+local	gld_setTextureAgpRefBacking	uVar4	succeeded	INFERRED	1 when the new backing was obtained
+local	gld_setTextureAgpRefBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
+local	gld_setVertexArrayAgpRefBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
+local	gld_setVertexArrayAgpRefBacking	param_2	vertexArray	INFERRED	vertexArray object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
+local	gld_setVertexArrayAgpRefBacking	param_3	requestArg0	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setVertexArrayAgpRefBacking	param_4	requestArg1	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setVertexArrayAgpRefBacking	param_5	requestArg2	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_setVertexArrayAgpRefBacking	local_38	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
+local	gld_setVertexArrayAgpRefBacking	auStack_34	outHandleUnused	INFERRED	output word 0 (handle), not used by this variant
+local	gld_setVertexArrayAgpRefBacking	local_30	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
+local	gld_setVertexArrayAgpRefBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
+use	gld_setVertexArrayAgpRefBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*iVar3\ =\ _io_connect_method_structureI_structureO$	+1
+use	gld_setVertexArrayAgpRefBacking	iVar3	status	INFERRED	result of the kernel selector-10 call (0 = success)	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
+use	gld_setVertexArrayAgpRefBacking	iVar3	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
+use	gld_setVertexArrayAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar3\ =\ \*piVar2;$	+1
+use	gld_setVertexArrayAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+1
+use	gld_setVertexArrayAgpRefBacking	iVar3	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 means this was the last reference	^\s*if\ \(iVar3\ ==\ 0x10000\)\ \{$	+1
+local	gld_setVertexArrayAgpRefBacking	iVar5	oldBacking	INFERRED	backing record that was attached before; released at the end
+use	gld_setVertexArrayAgpRefBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar2\ =\ \(int\ \*\)\(local_30\ \+\ 0x10\);$	+1
+use	gld_setVertexArrayAgpRefBacking	piVar2	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar3\ =\ storeWordConditionalIndexed\(\*piVar2\ \+\ 0x10000,0,piVar2\);$	+2
+use	gld_setVertexArrayAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar2\ =\ \(int\ \*\)\(iVar5\ \+\ 0x10\);$	+1
+use	gld_setVertexArrayAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar3\ =\ \*piVar2;$	+1
+use	gld_setVertexArrayAgpRefBacking	piVar2	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-0x10000,0,piVar2\);$	+2
+local	gld_setVertexArrayAgpRefBacking	uVar4	succeeded	INFERRED	1 when the new backing was obtained
+local	gld_setVertexArrayAgpRefBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
+local	gld_ensureTextureSurfaceBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
+local	gld_ensureTextureSurfaceBacking	param_2	texture	INFERRED	texture object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
+local	gld_ensureTextureSurfaceBacking	param_3	requestArg0	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_ensureTextureSurfaceBacking	param_4	requestArg1	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_ensureTextureSurfaceBacking	param_5	requestArg2	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_ensureTextureSurfaceBacking	local_38	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
+local	gld_ensureTextureSurfaceBacking	auStack_34	outHandleUnused	INFERRED	output word 0 (handle), not used by this variant
+local	gld_ensureTextureSurfaceBacking	local_30	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
+local	gld_ensureTextureSurfaceBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
+use	gld_ensureTextureSurfaceBacking	iVar4	currentBacking	INFERRED	ensure-backing logic: currentBacking	^\s*iVar4\ =\ param_2\[0xd\];$	+3
+use	gld_ensureTextureSurfaceBacking	iVar4	currentBacking	INFERRED	ensure-backing logic: currentBacking	^\s*if\ \(iVar4\ !=\ 0\)\ \{$	+2
+use	gld_ensureTextureSurfaceBacking	iVar4	currentBacking	INFERRED	ensure-backing logic: currentBacking	^\s*_io_connect_method_scalarI_structureI\(\*\(undefined4\ \*\)\(param_1\ \+\ 4\),0xb,iVar4,1,0,0\);$	+1
+use	gld_ensureTextureSurfaceBacking	iVar4	status	INFERRED	ensure-backing logic: status	^\s*iVar4\ =\ _io_connect_method_structureI_structureO$	+1
+use	gld_ensureTextureSurfaceBacking	iVar4	status	INFERRED	ensure-backing logic: status	^\s*if\ \(iVar4\ ==\ 0\)\ \{$	+1
+use	gld_ensureTextureSurfaceBacking	iVar4	newRefCountStored	INFERRED	ensure-backing logic: newRefCountStored	^\s*iVar4\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+2
+use	gld_ensureTextureSurfaceBacking	iVar5	oldRefCountValue	INFERRED	ensure-backing logic: oldRefCountValue	^\s*iVar5\ =\ \*piVar3;$	+1
+use	gld_ensureTextureSurfaceBacking	iVar5	oldRefCountValue	INFERRED	ensure-backing logic: oldRefCountValue	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar5\ \+\ \-0x10000,0,piVar3\);$	+1
+use	gld_ensureTextureSurfaceBacking	iVar5	oldRefCountValue	INFERRED	ensure-backing logic: oldRefCountValue	^\s*if\ \(iVar5\ ==\ 0x10000\)\ \{$	+1
+use	gld_ensureTextureSurfaceBacking	piVar3	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar3\ =\ \(int\ \*\)\(iVar4\ \+\ 0x10\);$	+1
+use	gld_ensureTextureSurfaceBacking	piVar3	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar5\ =\ \*piVar3;$	+1
+use	gld_ensureTextureSurfaceBacking	piVar3	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar5\ \+\ \-0x10000,0,piVar3\);$	+2
+use	gld_ensureTextureSurfaceBacking	piVar3	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar3\ =\ \(int\ \*\)\(local_30\ \+\ 0x10\);$	+1
+use	gld_ensureTextureSurfaceBacking	piVar3	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar4\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+2
+use	gld_ensureTextureSurfaceBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*if\ \(\(\(\(iVar4\ ==\ 0\)\ \|\|\ \(\*\(char\ \*\)\(iVar4\ \+\ 0x16\)\ !=\ '\\0'\)\)\ \|\|\ \(param_3\ !=\ param_2\[2\]\)\)\ \|\|$	+2
+use	gld_ensureTextureSurfaceBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*uVar2\ =\ 0;$	+1
+use	gld_ensureTextureSurfaceBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*uVar2\ =\ 1;$	+1
+use	gld_ensureTextureSurfaceBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*return\ uVar2;$	+1
+local	gld_ensureTextureSurfaceBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
+local	gld_ensureTextureGlobalBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4 (_io_connect_method_* first argument)
+local	gld_ensureTextureGlobalBacking	param_2	texture	INFERRED	texture object whose backing is replaced: request words from +0x10 (or +4 words) and the backing pointer slot
+local	gld_ensureTextureGlobalBacking	param_3	requestArg0	INFERRED	value stored into the 0x14-byte request structure sent with selector 10
+local	gld_ensureTextureGlobalBacking	local_28	outSize	INFERRED	in/out size of the output structure (8 bytes: handle and backing pointer)
+local	gld_ensureTextureGlobalBacking	auStack_24	outHandleUnused	INFERRED	output word 0 (handle), not used by this variant
+local	gld_ensureTextureGlobalBacking	local_20	newBacking	INFERRED	output word 1: new shared backing record; its refcount is at +0x10 and byte +0x14 is set to 1
+local	gld_ensureTextureGlobalBacking	iVar1	oldRefCountStored	INFERRED	value written by the store-conditional decrement of the old backing refcount
+use	gld_ensureTextureGlobalBacking	iVar4	currentBacking	INFERRED	ensure-backing logic: currentBacking	^\s*iVar4\ =\ param_2\[0xd\];$	+2
+use	gld_ensureTextureGlobalBacking	iVar4	currentBacking	INFERRED	ensure-backing logic: currentBacking	^\s*if\ \(iVar4\ !=\ 0\)\ \{$	+2
+use	gld_ensureTextureGlobalBacking	iVar4	currentBacking	INFERRED	ensure-backing logic: currentBacking	^\s*_io_connect_method_scalarI_structureI\(\*\(undefined4\ \*\)\(param_1\ \+\ 4\),0xb,iVar4,1,0,0\);$	+1
+use	gld_ensureTextureGlobalBacking	iVar4	status	INFERRED	ensure-backing logic: status	^\s*iVar4\ =\ _io_connect_method_structureI_structureO$	+1
+use	gld_ensureTextureGlobalBacking	iVar4	status	INFERRED	ensure-backing logic: status	^\s*if\ \(iVar4\ ==\ 0\)\ \{$	+1
+use	gld_ensureTextureGlobalBacking	iVar4	newRefCountStored	INFERRED	ensure-backing logic: newRefCountStored	^\s*iVar4\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+2
+use	gld_ensureTextureGlobalBacking	iVar5	oldRefCountValue	INFERRED	ensure-backing logic: oldRefCountValue	^\s*iVar5\ =\ \*piVar3;$	+1
+use	gld_ensureTextureGlobalBacking	iVar5	oldRefCountValue	INFERRED	ensure-backing logic: oldRefCountValue	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar5\ \+\ \-0x10000,0,piVar3\);$	+1
+use	gld_ensureTextureGlobalBacking	iVar5	oldRefCountValue	INFERRED	ensure-backing logic: oldRefCountValue	^\s*if\ \(iVar5\ ==\ 0x10000\)\ \{$	+1
+use	gld_ensureTextureGlobalBacking	piVar3	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*piVar3\ =\ \(int\ \*\)\(iVar4\ \+\ 0x10\);$	+1
+use	gld_ensureTextureGlobalBacking	piVar3	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar5\ =\ \*piVar3;$	+1
+use	gld_ensureTextureGlobalBacking	piVar3	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10): decremented by 0x10000	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar5\ \+\ \-0x10000,0,piVar3\);$	+2
+use	gld_ensureTextureGlobalBacking	piVar3	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*piVar3\ =\ \(int\ \*\)\(local_20\ \+\ 0x10\);$	+1
+use	gld_ensureTextureGlobalBacking	piVar3	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10): incremented by 0x10000 with a load-reserve/store-conditional loop	^\s*iVar4\ =\ storeWordConditionalIndexed\(\*piVar3\ \+\ 0x10000,0,piVar3\);$	+2
+use	gld_ensureTextureGlobalBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*if\ \(\(\(iVar4\ ==\ 0\)\ \|\|\ \(\*\(char\ \*\)\(iVar4\ \+\ 0x16\)\ !=\ '\\x01'\)\)\ \|\|\ \(uVar2\ =\ 1,\ param_3\ !=\ param_2\[2\]\)\)\ \{$	+1
+use	gld_ensureTextureGlobalBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*uVar2\ =\ 0;$	+1
+use	gld_ensureTextureGlobalBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*uVar2\ =\ 1;$	+1
+use	gld_ensureTextureGlobalBacking	uVar2	backingStillValid	INFERRED	ensure-backing logic: backingStillValid	^\s*return\ uVar2;$	+1
+local	gld_ensureTextureGlobalBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
+local	gld_ensureTextureBackingSized2	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4
+local	gld_ensureTextureBackingSized2	param_2	texture	INFERRED	texture object whose backing is checked and replaced if needed
+local	gld_ensureTextureBackingSized2	param_3	requestArg0	INFERRED	compared with / stored into the request structure sent with selector 10 (request word 0)
+local	gld_ensureTextureBackingSized2	param_4	requestArg1	INFERRED	compared with / stored into the request structure sent with selector 10 (request word 1)
+local	gld_ensureTextureBackingSized2	local_38	outSize	INFERRED	in/out size of the output structure
+local	gld_ensureTextureBackingSized2	local_34	outHandle	INFERRED	output word 0: backing handle stored in the texture
+local	gld_ensureTextureBackingSized2	local_30	newBacking	INFERRED	output word 1: new shared backing record (refcount at +0x10)
+use	gld_ensureTextureBackingSized2	iVar9	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 = last reference	^\s*iVar9\ =\ \*piVar5;$	+1
+use	gld_ensureTextureBackingSized2	iVar9	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 = last reference	^\s*iVar7\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-0x10000,0,piVar5\);$	+1
+use	gld_ensureTextureBackingSized2	iVar9	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 = last reference	^\s*if\ \(iVar9\ ==\ 0x10000\)\ \{$	+1
+use	gld_ensureTextureBackingSized2	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*iVar9\ =\ param_2\[0xc\];$	+1
+use	gld_ensureTextureBackingSized2	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*uVar6\ =\ \(uint\)\*\(byte\ \*\)\(iVar9\ \+\ 0x6c\);$	+1
+use	gld_ensureTextureBackingSized2	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*if\ \(\(ushort\)\(\(\*\(ushort\ \*\)\(iVar10\ \+\ 0x1c\)\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ 0x28\)\)\ \&$	+2
+use	gld_ensureTextureBackingSized2	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*puVar4\ =\ \(ushort\ \*\)\(iVar9\ \+\ 0x7e\);$	+2
+use	gld_ensureTextureBackingSized2	iVar7	oldRefCountStored	INFERRED	value written by the store-conditional decrement	^\s*iVar7\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-0x10000,0,piVar5\);$	+2
+use	gld_ensureTextureBackingSized2	iVar7	backingCursor	INFERRED	walks the backing record in 2-byte steps while the mask arrays are compared	^\s*iVar7\ =\ iVar10;$	+1
+use	gld_ensureTextureBackingSized2	iVar7	backingCursor	INFERRED	walks the backing record in 2-byte steps while the mask arrays are compared	^\s*puVar2\ =\ \(ushort\ \*\)\(iVar7\ \+\ 0x2a\);$	+3
+use	gld_ensureTextureBackingSized2	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*iVar10\ =\ param_2\[0xd\];$	+3
+use	gld_ensureTextureBackingSized2	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*if\ \(iVar10\ !=\ 0\)\ \{$	+2
+use	gld_ensureTextureBackingSized2	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*_io_connect_method_scalarI_structureI\(\*\(undefined4\ \*\)\(param_1\ \+\ 4\),0xb,iVar10,1,0,0\);$	+1
+use	gld_ensureTextureBackingSized2	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*if\ \(0x1ffff\ <\ \*\(int\ \*\)\(iVar10\ \+\ 0x10\)\)\ \{$	+1
+use	gld_ensureTextureBackingSized2	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*iVar9\ =\ FUN_0001a0d0\(param_1,\*\(undefined4\ \*\)\(iVar10\ \+\ 0xc\)\);$	+1
+use	gld_ensureTextureBackingSized2	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*if\ \(\(ushort\)\(\(\*\(ushort\ \*\)\(iVar10\ \+\ 0x1c\)\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ 0x28\)\)\ \&$	+2
+use	gld_ensureTextureBackingSized2	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*iVar7\ =\ iVar10;$	+1
+use	gld_ensureTextureBackingSized2	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*iVar9\ =\ FUN_0001a0d0\(param_1,\*\(undefined4\ \*\)\(iVar10\ \+\ 0xc\)\);$@2	+1
+use	gld_ensureTextureBackingSized2	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*_io_connect_method_scalarI_structureI\(\*\(undefined4\ \*\)\(param_1\ \+\ 4\),9,iVar10\ \+\ 0xc,1,0,0\);$	+1
+use	gld_ensureTextureBackingSized2	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*\*\(undefined1\ \*\)\(iVar10\ \+\ 0x14\)\ =\ 1;$	+1
+use	gld_ensureTextureBackingSized2	iVar10	status	INFERRED	result of the kernel selector-10 call	^\s*iVar10\ =\ _io_connect_method_structureI_structureO$	+1
+use	gld_ensureTextureBackingSized2	iVar10	status	INFERRED	result of the kernel selector-10 call	^\s*if\ \(iVar10\ ==\ 0\)\ \{$	+1
+use	gld_ensureTextureBackingSized2	iVar10	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar10\ =\ storeWordConditionalIndexed\(\*piVar5\ \+\ 0x10000,0,piVar5\);$	+2
+use	gld_ensureTextureBackingSized2	piVar5	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10)	^\s*piVar5\ =\ \(int\ \*\)\(iVar10\ \+\ 0x10\);$	+1
+use	gld_ensureTextureBackingSized2	piVar5	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10)	^\s*iVar9\ =\ \*piVar5;$	+1
+use	gld_ensureTextureBackingSized2	piVar5	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10)	^\s*iVar7\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-0x10000,0,piVar5\);$	+2
+use	gld_ensureTextureBackingSized2	piVar5	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10)	^\s*piVar5\ =\ \(int\ \*\)\(local_30\ \+\ 0x10\);$	+1
+use	gld_ensureTextureBackingSized2	piVar5	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10)	^\s*iVar10\ =\ storeWordConditionalIndexed\(\*piVar5\ \+\ 0x10000,0,piVar5\);$	+2
+local	gld_ensureTextureBackingSized2	puVar2	backingMaskPtrB	INFERRED	ushort at backing+0x2a (+2 per step)
+local	gld_ensureTextureBackingSized2	puVar3	backingMaskPtrA	INFERRED	ushort at backing+0x1e (+2 per step)
+local	gld_ensureTextureBackingSized2	puVar4	texImagesMaskPtr	INFERRED	ushort at texImages+0x7e (+2 per step)
+local	gld_ensureTextureBackingSized2	bVar1	masksCovered	INFERRED	(A | B) & ~texImagesMask == 0 for the current mask pair
+local	gld_ensureTextureBackingSized2	uVar6	maskCount	INFERRED	byte at texImages+0x6c: number of mask pairs to compare
+local	gld_ensureTextureBackingSized2	uVar8	succeeded	INFERRED	1 when the backing is usable / was replaced
+local	gld_ensureTextureBackingSized2	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
+local	gld_ensureTextureAgpRefBacking	param_1	ctx	INFERRED	kernel connection holder: connect handle at +4
+local	gld_ensureTextureAgpRefBacking	param_2	texture	INFERRED	texture object whose backing is checked and replaced if needed
+local	gld_ensureTextureAgpRefBacking	param_3	requestArg2	INFERRED	compared with / stored into the request structure sent with selector 10 (request word 2)
+local	gld_ensureTextureAgpRefBacking	uStack_38	outSize	INFERRED	in/out size of the output structure
+local	gld_ensureTextureAgpRefBacking	uStack_34	outHandle	INFERRED	output word 0: backing handle stored in the texture
+local	gld_ensureTextureAgpRefBacking	iStack_30	newBacking	INFERRED	output word 1: new shared backing record (refcount at +0x10)
+use	gld_ensureTextureAgpRefBacking	iVar9	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 = last reference	^\s*iVar9\ =\ \*piVar5;$	+1
+use	gld_ensureTextureAgpRefBacking	iVar9	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 = last reference	^\s*iVar7\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-0x10000,0,piVar5\);$	+1
+use	gld_ensureTextureAgpRefBacking	iVar9	oldRefCountValue	INFERRED	old backing refcount read before the decrement; 0x10000 = last reference	^\s*if\ \(iVar9\ ==\ 0x10000\)\ \{$	+1
+use	gld_ensureTextureAgpRefBacking	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*iVar9\ =\ param_2\[0xc\];$	+1
+use	gld_ensureTextureAgpRefBacking	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*uVar6\ =\ \(uint\)\*\(byte\ \*\)\(iVar9\ \+\ 0x6c\);$	+1
+use	gld_ensureTextureAgpRefBacking	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*if\ \(\(ushort\)\(\(\*\(ushort\ \*\)\(iVar10\ \+\ 0x1c\)\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ 0x28\)\)\ \&$	+2
+use	gld_ensureTextureAgpRefBacking	iVar9	texImages	INFERRED	texture[0xc]: image/level header block	^\s*puVar4\ =\ \(ushort\ \*\)\(iVar9\ \+\ 0x7e\);$	+2
+use	gld_ensureTextureAgpRefBacking	iVar7	oldRefCountStored	INFERRED	value written by the store-conditional decrement	^\s*iVar7\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-0x10000,0,piVar5\);$	+2
+use	gld_ensureTextureAgpRefBacking	iVar7	backingCursor	INFERRED	walks the backing record in 2-byte steps while the mask arrays are compared	^\s*iVar7\ =\ iVar10;$	+1
+use	gld_ensureTextureAgpRefBacking	iVar7	backingCursor	INFERRED	walks the backing record in 2-byte steps while the mask arrays are compared	^\s*puVar2\ =\ \(ushort\ \*\)\(iVar7\ \+\ 0x2a\);$	+3
+use	gld_ensureTextureAgpRefBacking	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*iVar10\ =\ param_2\[0xd\];$	+3
+use	gld_ensureTextureAgpRefBacking	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*if\ \(iVar10\ !=\ 0\)\ \{$	+2
+use	gld_ensureTextureAgpRefBacking	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*_io_connect_method_scalarI_structureI\(\*\(undefined4\ \*\)\(param_1\ \+\ 4\),0xb,iVar10,1,0,0\);$	+1
+use	gld_ensureTextureAgpRefBacking	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*if\ \(0x1ffff\ <\ \*\(int\ \*\)\(iVar10\ \+\ 0x10\)\)\ \{$	+1
+use	gld_ensureTextureAgpRefBacking	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*iVar9\ =\ FUN_0001a0d0\(param_1,\*\(undefined4\ \*\)\(iVar10\ \+\ 8\)\);$	+1
+use	gld_ensureTextureAgpRefBacking	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*if\ \(\(ushort\)\(\(\*\(ushort\ \*\)\(iVar10\ \+\ 0x1c\)\ \|\ \*\(ushort\ \*\)\(iVar10\ \+\ 0x28\)\)\ \&$	+2
+use	gld_ensureTextureAgpRefBacking	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*iVar7\ =\ iVar10;$	+1
+use	gld_ensureTextureAgpRefBacking	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*iVar9\ =\ FUN_0001a0d0\(param_1,\*\(undefined4\ \*\)\(iVar10\ \+\ 8\)\);$@2	+1
+use	gld_ensureTextureAgpRefBacking	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*_io_connect_method_scalarI_structureI\(\*\(undefined4\ \*\)\(param_1\ \+\ 4\),9,iVar10\ \+\ 8,1,0,0\);$	+1
+use	gld_ensureTextureAgpRefBacking	iVar10	currentBacking	INFERRED	texture[0xd]: the backing record attached now	^\s*\*\(undefined1\ \*\)\(iVar10\ \+\ 0x14\)\ =\ 1;$	+1
+use	gld_ensureTextureAgpRefBacking	iVar10	status	INFERRED	result of the kernel selector-10 call	^\s*iVar10\ =\ _io_connect_method_structureI_structureO$	+1
+use	gld_ensureTextureAgpRefBacking	iVar10	status	INFERRED	result of the kernel selector-10 call	^\s*if\ \(iVar10\ ==\ 0\)\ \{$	+1
+use	gld_ensureTextureAgpRefBacking	iVar10	newRefCountStored	INFERRED	value written by the store-conditional increment of the new refcount	^\s*iVar10\ =\ storeWordConditionalIndexed\(\*piVar5\ \+\ 0x10000,0,piVar5\);$	+2
+use	gld_ensureTextureAgpRefBacking	piVar5	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10)	^\s*piVar5\ =\ \(int\ \*\)\(iVar10\ \+\ 0x10\);$	+1
+use	gld_ensureTextureAgpRefBacking	piVar5	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10)	^\s*iVar9\ =\ \*piVar5;$	+1
+use	gld_ensureTextureAgpRefBacking	piVar5	oldRefCountPtr	INFERRED	refcount word of the old backing (+0x10)	^\s*iVar7\ =\ storeWordConditionalIndexed\(iVar9\ \+\ \-0x10000,0,piVar5\);$	+2
+use	gld_ensureTextureAgpRefBacking	piVar5	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10)	^\s*piVar5\ =\ \(int\ \*\)\(iStack_30\ \+\ 0x10\);$	+1
+use	gld_ensureTextureAgpRefBacking	piVar5	newRefCountPtr	INFERRED	refcount word of the new backing (+0x10)	^\s*iVar10\ =\ storeWordConditionalIndexed\(\*piVar5\ \+\ 0x10000,0,piVar5\);$	+2
+local	gld_ensureTextureAgpRefBacking	puVar2	backingMaskPtrB	INFERRED	ushort at backing+0x2a (+2 per step)
+local	gld_ensureTextureAgpRefBacking	puVar3	backingMaskPtrA	INFERRED	ushort at backing+0x1e (+2 per step)
+local	gld_ensureTextureAgpRefBacking	puVar4	texImagesMaskPtr	INFERRED	ushort at texImages+0x7e (+2 per step)
+local	gld_ensureTextureAgpRefBacking	bVar1	masksCovered	INFERRED	(A | B) & ~texImagesMask == 0 for the current mask pair
+local	gld_ensureTextureAgpRefBacking	uVar6	maskCount	INFERRED	byte at texImages+0x6c: number of mask pairs to compare
+local	gld_ensureTextureAgpRefBacking	uVar8	succeeded	INFERRED	1 when the backing is usable / was replaced
+local	gld_ensureTextureAgpRefBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test

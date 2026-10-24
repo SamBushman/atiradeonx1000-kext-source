@@ -474,463 +474,485 @@ int FUN_0000abf0(ctx, texture)
 }
 
 /* gld_ensureTextureBackingSized2 @ 0xacb0 (568 bytes) */
-int gld_ensureTextureBackingSized2(param_1, param_2, param_3, param_4)
-  int param_1;
-  undefined4 *param_2;
-  int param_3;
-  int param_4;
+int gld_ensureTextureBackingSized2(ctx, texture, requestArg0, requestArg1)
+  int ctx;
+  undefined4 *texture;
+  int requestArg0;
+  int requestArg1;
 {
+  int *newRefCountPtr;
+  int newRefCountStored;
+  int status;
+  int backingCursor;
+  int texImages;
   int gld_isStampRetiredResult;
-  bool bVar1;
-  ushort *puVar2;
-  ushort *puVar3;
-  ushort *puVar4;
-  int *piVar5;
-  uint uVar6;
-  int iVar7;
-  undefined4 uVar8;
-  int iVar9;
-  int iVar10;
+  bool masksCovered;
+  ushort *backingMaskPtrB;
+  ushort *backingMaskPtrA;
+  ushort *texImagesMaskPtr;
+  int *oldRefCountPtr;
+  uint maskCount;
+  int oldRefCountStored;
+  undefined4 succeeded;
+  int oldRefCountValue;
+  int currentBacking;
   char in_RESERVE;
-  byte in_cr0;
-  undefined4 local_38;
-  undefined4 local_34;
-  int local_30;
+  byte cr0Bits;
+  undefined4 outSize;
+  undefined4 outHandle;
+  int newBacking;
   
-  iVar10 = param_2[0xd];
-  if ((((iVar10 == 0) || (*(char *)(iVar10 + 0x16) != '\x03')) || (param_3 != param_2[2])) ||
-     (param_4 != param_2[3])) {
+  currentBacking = texture[0xd];
+  if ((((currentBacking == 0) || (*(char *)(currentBacking + 0x16) != '\x03')) || (requestArg0 != texture[2])) ||
+     (requestArg1 != texture[3])) {
 LAB_0000adc0:
-    *(byte *)((int)param_2 + 0x39) = *(byte *)((int)param_2 + 0x39) | 1;
-    if (iVar10 != 0) {
-      piVar5 = (int *)(iVar10 + 0x10);
+    *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) | 1;
+    if (currentBacking != 0) {
+      oldRefCountPtr = (int *)(currentBacking + 0x10);
       do {
-        iVar9 = *piVar5;
+        oldRefCountValue = *oldRefCountPtr;
         if (in_RESERVE != '\0') {
-          iVar7 = storeWordConditionalIndexed(iVar9 + -0x10000,0,piVar5);
-          *piVar5 = iVar7;
-          in_cr0 = 2;
+          oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
+          *oldRefCountPtr = oldRefCountStored;
+          cr0Bits = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-      if (iVar9 == 0x10000) {
-        _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar10,1,0,0);
+      } while (!(bool)(cr0Bits >> 1 & 1));
+      if (oldRefCountValue == 0x10000) {
+        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,currentBacking,1,0,0);
       }
-      param_2[0xd] = 0;
+      texture[0xd] = 0;
     }
-    param_2[2] = param_3;
-    param_2[3] = param_4;
-    param_2[1] = 3;
-    local_38 = 8;
-    iVar10 = _io_connect_method_structureI_structureO
-                       (*(undefined4 *)(param_1 + 4),10,param_2 + 1,0x14,&local_34,&local_38);
-    uVar8 = 0;
-    if (iVar10 == 0) {
-      param_2[0xd] = local_30;
-      piVar5 = (int *)(local_30 + 0x10);
+    texture[2] = requestArg0;
+    texture[3] = requestArg1;
+    texture[1] = 3;
+    outSize = 8;
+    status = _io_connect_method_structureI_structureO
+                       (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,&outHandle,&outSize);
+    succeeded = 0;
+    if (status == 0) {
+      texture[0xd] = newBacking;
+      newRefCountPtr = (int *)(newBacking + 0x10);
       do {
         if (in_RESERVE != '\0') {
-          iVar10 = storeWordConditionalIndexed(*piVar5 + 0x10000,0,piVar5);
-          *piVar5 = iVar10;
-          in_cr0 = 2;
+          newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
+          *newRefCountPtr = newRefCountStored;
+          cr0Bits = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-      uVar8 = 1;
-      *param_2 = local_34;
-      *(undefined1 *)(local_30 + 0x14) = 1;
+      } while (!(bool)(cr0Bits >> 1 & 1));
+      succeeded = 1;
+      *texture = outHandle;
+      *(undefined1 *)(newBacking + 0x14) = 1;
     }
   }
   else {
-    iVar9 = param_2[0xc];
-    if (0x1ffff < *(int *)(iVar10 + 0x10)) {
-      _gldFlush(param_1);
+    texImages = texture[0xc];
+    if (0x1ffff < *(int *)(currentBacking + 0x10)) {
+      _gldFlush(ctx);
     }
-    uVar6 = (uint)*(byte *)(iVar9 + 0x6c);
-    if (uVar6 == 0) {
+    maskCount = (uint)*(byte *)(texImages + 0x6c);
+    if (maskCount == 0) {
 LAB_0000ad38:
-      gld_isStampRetiredResult = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 0xc));
+      gld_isStampRetiredResult = gld_isStampRetired(ctx,*(undefined4 *)(currentBacking + 0xc));
       if (gld_isStampRetiredResult == 0) goto LAB_0000adc0;
     }
     else {
-      if ((ushort)((*(ushort *)(iVar10 + 0x1c) | *(ushort *)(iVar10 + 0x28)) &
-                  ~*(ushort *)(iVar9 + 0x7c)) == 0) {
-        in_cr0 = 2;
-        iVar7 = iVar10;
-        if (uVar6 == 0) {
-          uVar6 = 1;
+      if ((ushort)((*(ushort *)(currentBacking + 0x1c) | *(ushort *)(currentBacking + 0x28)) &
+                  ~*(ushort *)(texImages + 0x7c)) == 0) {
+        cr0Bits = 2;
+        backingCursor = currentBacking;
+        if (maskCount == 0) {
+          maskCount = 1;
         }
         do {
-          uVar6 = uVar6 - 1;
-          if (uVar6 == 0) goto LAB_0000ad38;
-          puVar2 = (ushort *)(iVar7 + 0x2a);
-          puVar3 = (ushort *)(iVar7 + 0x1e);
-          iVar7 = iVar7 + 2;
-          puVar4 = (ushort *)(iVar9 + 0x7e);
-          iVar9 = iVar9 + 2;
-          bVar1 = (ushort)((*puVar3 | *puVar2) & ~*puVar4) == 0;
-          in_cr0 = bVar1 << 1;
-        } while (bVar1);
+          maskCount = maskCount - 1;
+          if (maskCount == 0) goto LAB_0000ad38;
+          backingMaskPtrB = (ushort *)(backingCursor + 0x2a);
+          backingMaskPtrA = (ushort *)(backingCursor + 0x1e);
+          backingCursor = backingCursor + 2;
+          texImagesMaskPtr = (ushort *)(texImages + 0x7e);
+          texImages = texImages + 2;
+          masksCovered = (ushort)((*backingMaskPtrA | *backingMaskPtrB) & ~*texImagesMaskPtr) == 0;
+          cr0Bits = masksCovered << 1;
+        } while (masksCovered);
       }
-      gld_isStampRetiredResult = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 0xc));
+      gld_isStampRetiredResult = gld_isStampRetired(ctx,*(undefined4 *)(currentBacking + 0xc));
       if (gld_isStampRetiredResult == 0) {
-        _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),9,iVar10 + 0xc,1,0,0);
+        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),9,currentBacking + 0xc,1,0,0);
       }
     }
-    uVar8 = 1;
-    *(undefined1 *)(iVar10 + 0x14) = 1;
+    succeeded = 1;
+    *(undefined1 *)(currentBacking + 0x14) = 1;
   }
-  return uVar8;
+  return succeeded;
 }
 
 /* gld_ensureTextureAgpRefBacking @ 0xaef4 (580 bytes) */
-int gld_ensureTextureAgpRefBacking(param_1, param_2, param_3)
-  int param_1;
-  undefined4 *param_2;
-  int param_3;
+int gld_ensureTextureAgpRefBacking(ctx, texture, requestArg2)
+  int ctx;
+  undefined4 *texture;
+  int requestArg2;
 {
+  int *newRefCountPtr;
+  int newRefCountStored;
+  int status;
+  int backingCursor;
+  int texImages;
   int gld_isStampRetiredResult;
-  bool bVar1;
-  ushort *puVar2;
-  ushort *puVar3;
-  ushort *puVar4;
-  int *piVar5;
-  uint uVar6;
-  int iVar7;
-  undefined4 uVar8;
-  int iVar9;
-  int iVar10;
+  bool masksCovered;
+  ushort *backingMaskPtrB;
+  ushort *backingMaskPtrA;
+  ushort *texImagesMaskPtr;
+  int *oldRefCountPtr;
+  uint maskCount;
+  int oldRefCountStored;
+  undefined4 succeeded;
+  int oldRefCountValue;
+  int currentBacking;
   char in_RESERVE;
-  byte in_cr0;
-  undefined4 uStack_38;
-  undefined4 uStack_34;
-  int iStack_30;
+  byte cr0Bits;
+  undefined4 outSize;
+  undefined4 outHandle;
+  int newBacking;
   
-  iVar10 = param_2[0xd];
-  if ((((iVar10 == 0) || (*(char *)(iVar10 + 0x16) != '\x06')) || (param_2[2] != 0)) ||
-     ((param_2[3] != 0 || (param_3 != param_2[4])))) {
+  currentBacking = texture[0xd];
+  if ((((currentBacking == 0) || (*(char *)(currentBacking + 0x16) != '\x06')) || (texture[2] != 0)) ||
+     ((texture[3] != 0 || (requestArg2 != texture[4])))) {
 LAB_0000b010:
-    *(byte *)((int)param_2 + 0x39) = *(byte *)((int)param_2 + 0x39) | 1;
-    if (iVar10 != 0) {
-      piVar5 = (int *)(iVar10 + 0x10);
+    *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) | 1;
+    if (currentBacking != 0) {
+      oldRefCountPtr = (int *)(currentBacking + 0x10);
       do {
-        iVar9 = *piVar5;
+        oldRefCountValue = *oldRefCountPtr;
         if (in_RESERVE != '\0') {
-          iVar7 = storeWordConditionalIndexed(iVar9 + -0x10000,0,piVar5);
-          *piVar5 = iVar7;
-          in_cr0 = 2;
+          oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
+          *oldRefCountPtr = oldRefCountStored;
+          cr0Bits = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-      if (iVar9 == 0x10000) {
-        _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar10,1,0,0);
+      } while (!(bool)(cr0Bits >> 1 & 1));
+      if (oldRefCountValue == 0x10000) {
+        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,currentBacking,1,0,0);
       }
-      param_2[0xd] = 0;
+      texture[0xd] = 0;
     }
-    param_2[4] = param_3;
-    param_2[1] = 6;
-    param_2[3] = 0;
-    param_2[2] = 0;
-    uStack_38 = 8;
-    iVar10 = _io_connect_method_structureI_structureO
-                       (*(undefined4 *)(param_1 + 4),10,param_2 + 1,0x14,&uStack_34,&uStack_38);
-    uVar8 = 0;
-    if (iVar10 == 0) {
-      param_2[0xd] = iStack_30;
-      piVar5 = (int *)(iStack_30 + 0x10);
+    texture[4] = requestArg2;
+    texture[1] = 6;
+    texture[3] = 0;
+    texture[2] = 0;
+    outSize = 8;
+    status = _io_connect_method_structureI_structureO
+                       (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,&outHandle,&outSize);
+    succeeded = 0;
+    if (status == 0) {
+      texture[0xd] = newBacking;
+      newRefCountPtr = (int *)(newBacking + 0x10);
       do {
         if (in_RESERVE != '\0') {
-          iVar10 = storeWordConditionalIndexed(*piVar5 + 0x10000,0,piVar5);
-          *piVar5 = iVar10;
-          in_cr0 = 2;
+          newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
+          *newRefCountPtr = newRefCountStored;
+          cr0Bits = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-      uVar8 = 1;
-      *param_2 = uStack_34;
-      *(undefined1 *)(iStack_30 + 0x14) = 1;
+      } while (!(bool)(cr0Bits >> 1 & 1));
+      succeeded = 1;
+      *texture = outHandle;
+      *(undefined1 *)(newBacking + 0x14) = 1;
     }
   }
   else {
-    iVar9 = param_2[0xc];
-    if (0x1ffff < *(int *)(iVar10 + 0x10)) {
-      _gldFlush(param_1);
+    texImages = texture[0xc];
+    if (0x1ffff < *(int *)(currentBacking + 0x10)) {
+      _gldFlush(ctx);
     }
-    uVar6 = (uint)*(byte *)(iVar9 + 0x6c);
-    if (uVar6 == 0) {
+    maskCount = (uint)*(byte *)(texImages + 0x6c);
+    if (maskCount == 0) {
 LAB_0000af80:
-      gld_isStampRetiredResult = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 8));
+      gld_isStampRetiredResult = gld_isStampRetired(ctx,*(undefined4 *)(currentBacking + 8));
       if (gld_isStampRetiredResult == 0) goto LAB_0000b010;
     }
     else {
-      if ((ushort)((*(ushort *)(iVar10 + 0x1c) | *(ushort *)(iVar10 + 0x28)) &
-                  ~*(ushort *)(iVar9 + 0x7c)) == 0) {
-        in_cr0 = 2;
-        iVar7 = iVar10;
-        if (uVar6 == 0) {
-          uVar6 = 1;
+      if ((ushort)((*(ushort *)(currentBacking + 0x1c) | *(ushort *)(currentBacking + 0x28)) &
+                  ~*(ushort *)(texImages + 0x7c)) == 0) {
+        cr0Bits = 2;
+        backingCursor = currentBacking;
+        if (maskCount == 0) {
+          maskCount = 1;
         }
         do {
-          uVar6 = uVar6 - 1;
-          if (uVar6 == 0) goto LAB_0000af80;
-          puVar2 = (ushort *)(iVar7 + 0x2a);
-          puVar3 = (ushort *)(iVar7 + 0x1e);
-          iVar7 = iVar7 + 2;
-          puVar4 = (ushort *)(iVar9 + 0x7e);
-          iVar9 = iVar9 + 2;
-          bVar1 = (ushort)((*puVar3 | *puVar2) & ~*puVar4) == 0;
-          in_cr0 = bVar1 << 1;
-        } while (bVar1);
+          maskCount = maskCount - 1;
+          if (maskCount == 0) goto LAB_0000af80;
+          backingMaskPtrB = (ushort *)(backingCursor + 0x2a);
+          backingMaskPtrA = (ushort *)(backingCursor + 0x1e);
+          backingCursor = backingCursor + 2;
+          texImagesMaskPtr = (ushort *)(texImages + 0x7e);
+          texImages = texImages + 2;
+          masksCovered = (ushort)((*backingMaskPtrA | *backingMaskPtrB) & ~*texImagesMaskPtr) == 0;
+          cr0Bits = masksCovered << 1;
+        } while (masksCovered);
       }
-      gld_isStampRetiredResult = gld_isStampRetired(param_1,*(undefined4 *)(iVar10 + 8));
+      gld_isStampRetiredResult = gld_isStampRetired(ctx,*(undefined4 *)(currentBacking + 8));
       if (gld_isStampRetiredResult == 0) {
-        _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),9,iVar10 + 8,1,0,0);
+        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),9,currentBacking + 8,1,0,0);
       }
     }
-    uVar8 = 1;
-    *(undefined1 *)(iVar10 + 0x14) = 1;
+    succeeded = 1;
+    *(undefined1 *)(currentBacking + 0x14) = 1;
   }
-  return uVar8;
+  return succeeded;
 }
 
 /* gld_setTextureAgpRefBacking @ 0xb150 (280 bytes) */
-int gld_setTextureAgpRefBacking(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  undefined4 *param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+int gld_setTextureAgpRefBacking(ctx, texture, requestArg0, requestArg1, requestArg2)
+  int ctx;
+  undefined4 *texture;
+  undefined4 requestArg0;
+  undefined4 requestArg1;
+  undefined4 requestArg2;
 {
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int iVar5;
+  int *oldRefCountPtr;
+  int oldRefCountValue;
+  int newRefCountStored;
+  int oldRefCountStored;
+  int *newRefCountPtr;
+  int status;
+  undefined4 succeeded;
+  int oldBacking;
   char in_RESERVE;
-  byte in_cr0;
-  undefined4 local_38;
-  undefined1 auStack_34 [4];
-  int local_30;
+  byte cr0Bits;
+  undefined4 outSize;
+  undefined1 outHandleUnused [4];
+  int newBacking;
   
-  uVar4 = 0;
-  param_2[2] = param_3;
-  param_2[3] = param_4;
-  param_2[1] = 6;
-  param_2[4] = param_5;
-  *param_2 = 0;
-  iVar5 = param_2[0xd];
-  param_2[0xd] = 0;
-  local_38 = 8;
-  iVar3 = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(param_1 + 4),10,param_2 + 1,0x14,auStack_34,&local_38);
-  if (iVar3 == 0) {
-    param_2[0xd] = local_30;
-    piVar2 = (int *)(local_30 + 0x10);
+  succeeded = 0;
+  texture[2] = requestArg0;
+  texture[3] = requestArg1;
+  texture[1] = 6;
+  texture[4] = requestArg2;
+  *texture = 0;
+  oldBacking = texture[0xd];
+  texture[0xd] = 0;
+  outSize = 8;
+  status = _io_connect_method_structureI_structureO
+                    (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,outHandleUnused,&outSize);
+  if (status == 0) {
+    texture[0xd] = newBacking;
+    newRefCountPtr = (int *)(newBacking + 0x10);
     do {
       if (in_RESERVE != '\0') {
-        iVar3 = storeWordConditionalIndexed(*piVar2 + 0x10000,0,piVar2);
-        *piVar2 = iVar3;
-        in_cr0 = 2;
+        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
+        *newRefCountPtr = newRefCountStored;
+        cr0Bits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    uVar4 = 1;
-    *(undefined1 *)(local_30 + 0x14) = 1;
-    if (iVar5 != local_30) {
-      *(byte *)((int)param_2 + 0x39) = *(byte *)((int)param_2 + 0x39) | 1;
+    } while (!(bool)(cr0Bits >> 1 & 1));
+    succeeded = 1;
+    *(undefined1 *)(newBacking + 0x14) = 1;
+    if (oldBacking != newBacking) {
+      *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) | 1;
     }
   }
-  if (iVar5 != 0) {
-    piVar2 = (int *)(iVar5 + 0x10);
+  if (oldBacking != 0) {
+    oldRefCountPtr = (int *)(oldBacking + 0x10);
     do {
-      iVar3 = *piVar2;
+      oldRefCountValue = *oldRefCountPtr;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -0x10000,0,piVar2);
-        *piVar2 = iVar1;
-        in_cr0 = 2;
+        oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
+        *oldRefCountPtr = oldRefCountStored;
+        cr0Bits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    if (iVar3 == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar5,1,0,0);
+    } while (!(bool)(cr0Bits >> 1 & 1));
+    if (oldRefCountValue == 0x10000) {
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,oldBacking,1,0,0);
     }
   }
-  return uVar4;
+  return succeeded;
 }
 
 /* gld_setTextureNewTextureBacking @ 0xb270 (296 bytes) */
-int gld_setTextureNewTextureBacking(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  undefined4 *param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+int gld_setTextureNewTextureBacking(ctx, texture, requestArg0, requestArg1, requestArg2, requestArg3)
+  int ctx;
+  undefined4 *texture;
+  undefined4 requestArg0;
+  undefined4 requestArg1;
+  undefined4 requestArg2;
+  undefined4 requestArg3;
 {
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int iVar5;
+  int *oldRefCountPtr;
+  int oldRefCountValue;
+  int newRefCountStored;
+  int oldRefCountStored;
+  int *newRefCountPtr;
+  int status;
+  undefined4 succeeded;
+  int oldBacking;
   char in_RESERVE;
-  byte in_cr0;
-  undefined4 local_38;
-  undefined4 local_34;
-  int local_30;
+  byte cr0Bits;
+  undefined4 outSize;
+  undefined4 outHandle;
+  int newBacking;
   
-  uVar4 = 0;
-  param_2[2] = param_3;
-  param_2[3] = param_4;
-  param_2[1] = 7;
-  param_2[4] = param_5;
-  param_2[5] = param_6;
-  *param_2 = 0;
-  iVar5 = param_2[0xd];
-  param_2[0xd] = 0;
-  local_38 = 8;
-  iVar3 = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(param_1 + 4),10,param_2 + 1,0x14,&local_34,&local_38);
-  if (iVar3 == 0) {
-    param_2[0xd] = local_30;
-    piVar2 = (int *)(local_30 + 0x10);
+  succeeded = 0;
+  texture[2] = requestArg0;
+  texture[3] = requestArg1;
+  texture[1] = 7;
+  texture[4] = requestArg2;
+  texture[5] = requestArg3;
+  *texture = 0;
+  oldBacking = texture[0xd];
+  texture[0xd] = 0;
+  outSize = 8;
+  status = _io_connect_method_structureI_structureO
+                    (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,&outHandle,&outSize);
+  if (status == 0) {
+    texture[0xd] = newBacking;
+    newRefCountPtr = (int *)(newBacking + 0x10);
     do {
       if (in_RESERVE != '\0') {
-        iVar3 = storeWordConditionalIndexed(*piVar2 + 0x10000,0,piVar2);
-        *piVar2 = iVar3;
-        in_cr0 = 2;
+        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
+        *newRefCountPtr = newRefCountStored;
+        cr0Bits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    uVar4 = 1;
-    *(byte *)(local_30 + 0x14) = *(byte *)(local_30 + 0x14) | 1;
-    *param_2 = local_34;
-    if (iVar5 != local_30) {
-      *(byte *)((int)param_2 + 0x39) = *(byte *)((int)param_2 + 0x39) | 1;
+    } while (!(bool)(cr0Bits >> 1 & 1));
+    succeeded = 1;
+    *(byte *)(newBacking + 0x14) = *(byte *)(newBacking + 0x14) | 1;
+    *texture = outHandle;
+    if (oldBacking != newBacking) {
+      *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) | 1;
     }
   }
-  if (iVar5 != 0) {
-    piVar2 = (int *)(iVar5 + 0x10);
+  if (oldBacking != 0) {
+    oldRefCountPtr = (int *)(oldBacking + 0x10);
     do {
-      iVar3 = *piVar2;
+      oldRefCountValue = *oldRefCountPtr;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -0x10000,0,piVar2);
-        *piVar2 = iVar1;
-        in_cr0 = 2;
+        oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
+        *oldRefCountPtr = oldRefCountStored;
+        cr0Bits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    if (iVar3 == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar5,1,0,0);
+    } while (!(bool)(cr0Bits >> 1 & 1));
+    if (oldRefCountValue == 0x10000) {
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,oldBacking,1,0,0);
     }
   }
-  return uVar4;
+  return succeeded;
 }
 
 /* gld_ensureTextureSurfaceBacking @ 0xb3a0 (332 bytes) */
-int gld_ensureTextureSurfaceBacking(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  undefined4 *param_2;
-  int param_3;
-  int param_4;
-  int param_5;
+int gld_ensureTextureSurfaceBacking(ctx, texture, requestArg0, requestArg1, requestArg2)
+  int ctx;
+  undefined4 *texture;
+  int requestArg0;
+  int requestArg1;
+  int requestArg2;
 {
-  int iVar1;
-  undefined4 uVar2;
-  int *piVar3;
-  int iVar4;
-  int iVar5;
+  int *newRefCountPtr;
+  int newRefCountStored;
+  int status;
+  int oldRefCountStored;
+  undefined4 backingStillValid;
+  int *oldRefCountPtr;
+  int currentBacking;
+  int oldRefCountValue;
   char in_RESERVE;
-  byte in_cr0;
-  undefined4 local_38;
-  undefined1 auStack_34 [4];
-  int local_30;
+  byte cr0Bits;
+  undefined4 outSize;
+  undefined1 outHandleUnused [4];
+  int newBacking;
   
-  iVar4 = param_2[0xd];
-  if ((((iVar4 == 0) || (*(char *)(iVar4 + 0x16) != '\0')) || (param_3 != param_2[2])) ||
-     ((param_4 != param_2[3] || (uVar2 = 1, param_5 != param_2[4])))) {
-    *(byte *)((int)param_2 + 0x39) = *(byte *)((int)param_2 + 0x39) | 1;
-    if (iVar4 != 0) {
-      piVar3 = (int *)(iVar4 + 0x10);
+  currentBacking = texture[0xd];
+  if ((((currentBacking == 0) || (*(char *)(currentBacking + 0x16) != '\0')) || (requestArg0 != texture[2])) ||
+     ((requestArg1 != texture[3] || (backingStillValid = 1, requestArg2 != texture[4])))) {
+    *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) | 1;
+    if (currentBacking != 0) {
+      oldRefCountPtr = (int *)(currentBacking + 0x10);
       do {
-        iVar5 = *piVar3;
+        oldRefCountValue = *oldRefCountPtr;
         if (in_RESERVE != '\0') {
-          iVar1 = storeWordConditionalIndexed(iVar5 + -0x10000,0,piVar3);
-          *piVar3 = iVar1;
-          in_cr0 = 2;
+          oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
+          *oldRefCountPtr = oldRefCountStored;
+          cr0Bits = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-      if (iVar5 == 0x10000) {
-        _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar4,1,0,0);
+      } while (!(bool)(cr0Bits >> 1 & 1));
+      if (oldRefCountValue == 0x10000) {
+        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,currentBacking,1,0,0);
       }
-      param_2[0xd] = 0;
+      texture[0xd] = 0;
     }
-    param_2[2] = param_3;
-    param_2[3] = param_4;
-    param_2[4] = param_5;
-    param_2[1] = 0;
-    local_38 = 8;
-    iVar4 = _io_connect_method_structureI_structureO
-                      (*(undefined4 *)(param_1 + 4),10,param_2 + 1,0x14,auStack_34,&local_38);
-    uVar2 = 0;
-    if (iVar4 == 0) {
-      param_2[0xd] = local_30;
-      piVar3 = (int *)(local_30 + 0x10);
+    texture[2] = requestArg0;
+    texture[3] = requestArg1;
+    texture[4] = requestArg2;
+    texture[1] = 0;
+    outSize = 8;
+    status = _io_connect_method_structureI_structureO
+                      (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,outHandleUnused,&outSize);
+    backingStillValid = 0;
+    if (status == 0) {
+      texture[0xd] = newBacking;
+      newRefCountPtr = (int *)(newBacking + 0x10);
       if (in_RESERVE != '\0') {
-        iVar4 = storeWordConditionalIndexed(*piVar3 + 0x10000,0,piVar3);
-        *piVar3 = iVar4;
+        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
+        *newRefCountPtr = newRefCountStored;
       }
-      *param_2 = 0;
-      uVar2 = 1;
+      *texture = 0;
+      backingStillValid = 1;
     }
   }
-  return uVar2;
+  return backingStillValid;
 }
 
 /* gld_ensureTextureGlobalBacking @ 0xb4f0 (292 bytes) */
-int gld_ensureTextureGlobalBacking(param_1, param_2, param_3)
-  int param_1;
-  undefined4 *param_2;
-  int param_3;
+int gld_ensureTextureGlobalBacking(ctx, texture, requestArg0)
+  int ctx;
+  undefined4 *texture;
+  int requestArg0;
 {
-  int iVar1;
-  undefined4 uVar2;
-  int *piVar3;
-  int iVar4;
-  int iVar5;
+  int *newRefCountPtr;
+  int newRefCountStored;
+  int status;
+  int oldRefCountStored;
+  undefined4 backingStillValid;
+  int *oldRefCountPtr;
+  int currentBacking;
+  int oldRefCountValue;
   char in_RESERVE;
-  byte in_cr0;
-  undefined4 local_28;
-  undefined1 auStack_24 [4];
-  int local_20;
+  byte cr0Bits;
+  undefined4 outSize;
+  undefined1 outHandleUnused [4];
+  int newBacking;
   
-  iVar4 = param_2[0xd];
-  if (((iVar4 == 0) || (*(char *)(iVar4 + 0x16) != '\x01')) || (uVar2 = 1, param_3 != param_2[2])) {
-    *(byte *)((int)param_2 + 0x39) = *(byte *)((int)param_2 + 0x39) | 1;
-    if (iVar4 != 0) {
-      piVar3 = (int *)(iVar4 + 0x10);
+  currentBacking = texture[0xd];
+  if (((currentBacking == 0) || (*(char *)(currentBacking + 0x16) != '\x01')) || (backingStillValid = 1, requestArg0 != texture[2])) {
+    *(byte *)((int)texture + 0x39) = *(byte *)((int)texture + 0x39) | 1;
+    if (currentBacking != 0) {
+      oldRefCountPtr = (int *)(currentBacking + 0x10);
       do {
-        iVar5 = *piVar3;
+        oldRefCountValue = *oldRefCountPtr;
         if (in_RESERVE != '\0') {
-          iVar1 = storeWordConditionalIndexed(iVar5 + -0x10000,0,piVar3);
-          *piVar3 = iVar1;
-          in_cr0 = 2;
+          oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
+          *oldRefCountPtr = oldRefCountStored;
+          cr0Bits = 2;
         }
-      } while (!(bool)(in_cr0 >> 1 & 1));
-      if (iVar5 == 0x10000) {
-        _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar4,1,0,0);
+      } while (!(bool)(cr0Bits >> 1 & 1));
+      if (oldRefCountValue == 0x10000) {
+        _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,currentBacking,1,0,0);
       }
-      param_2[0xd] = 0;
+      texture[0xd] = 0;
     }
-    param_2[2] = param_3;
-    param_2[1] = 1;
-    local_28 = 8;
-    iVar4 = _io_connect_method_structureI_structureO
-                      (*(undefined4 *)(param_1 + 4),10,param_2 + 1,0x14,auStack_24,&local_28);
-    uVar2 = 0;
-    if (iVar4 == 0) {
-      param_2[0xd] = local_20;
-      piVar3 = (int *)(local_20 + 0x10);
+    texture[2] = requestArg0;
+    texture[1] = 1;
+    outSize = 8;
+    status = _io_connect_method_structureI_structureO
+                      (*(undefined4 *)(ctx + 4),10,texture + 1,0x14,outHandleUnused,&outSize);
+    backingStillValid = 0;
+    if (status == 0) {
+      texture[0xd] = newBacking;
+      newRefCountPtr = (int *)(newBacking + 0x10);
       if (in_RESERVE != '\0') {
-        iVar4 = storeWordConditionalIndexed(*piVar3 + 0x10000,0,piVar3);
-        *piVar3 = iVar4;
+        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
+        *newRefCountPtr = newRefCountStored;
       }
-      *param_2 = 0;
-      uVar2 = 1;
+      *texture = 0;
+      backingStillValid = 1;
     }
   }
-  return uVar2;
+  return backingStillValid;
 }
 
 /* gldFlushDataCacheRange @ 0xb620 (72 bytes) */
@@ -1222,126 +1244,132 @@ int _gldDestroyVertexArray(ctx, vertexArray)
 }
 
 /* gld_setVertexArrayAgpRefBacking @ 0xbc60 (248 bytes) */
-int gld_setVertexArrayAgpRefBacking(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+int gld_setVertexArrayAgpRefBacking(ctx, vertexArray, requestArg0, requestArg1, requestArg2)
+  int ctx;
+  int vertexArray;
+  undefined4 requestArg0;
+  undefined4 requestArg1;
+  undefined4 requestArg2;
 {
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int iVar5;
+  int *oldRefCountPtr;
+  int oldRefCountValue;
+  int newRefCountStored;
+  int oldRefCountStored;
+  int *newRefCountPtr;
+  int status;
+  undefined4 succeeded;
+  int oldBacking;
   char in_RESERVE;
-  byte in_cr0;
-  undefined4 local_38;
-  undefined1 auStack_34 [4];
-  int local_30;
+  byte cr0Bits;
+  undefined4 outSize;
+  undefined1 outHandleUnused [4];
+  int newBacking;
   
-  uVar4 = 0;
-  *(undefined4 *)(param_2 + 0x234) = param_3;
-  *(undefined4 *)(param_2 + 0x238) = param_4;
-  *(undefined4 *)(param_2 + 0x230) = 6;
-  *(undefined4 *)(param_2 + 0x23c) = param_5;
-  *(undefined4 *)(param_2 + 0x22c) = 0;
-  iVar5 = *(int *)(param_2 + 0x228);
-  *(undefined4 *)(param_2 + 0x228) = 0;
-  local_38 = 8;
-  iVar3 = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(param_1 + 4),10,param_2 + 0x230,0x14,auStack_34,&local_38);
-  if (iVar3 == 0) {
-    *(int *)(param_2 + 0x228) = local_30;
-    piVar2 = (int *)(local_30 + 0x10);
+  succeeded = 0;
+  *(undefined4 *)(vertexArray + 0x234) = requestArg0;
+  *(undefined4 *)(vertexArray + 0x238) = requestArg1;
+  *(undefined4 *)(vertexArray + 0x230) = 6;
+  *(undefined4 *)(vertexArray + 0x23c) = requestArg2;
+  *(undefined4 *)(vertexArray + 0x22c) = 0;
+  oldBacking = *(int *)(vertexArray + 0x228);
+  *(undefined4 *)(vertexArray + 0x228) = 0;
+  outSize = 8;
+  status = _io_connect_method_structureI_structureO
+                    (*(undefined4 *)(ctx + 4),10,vertexArray + 0x230,0x14,outHandleUnused,&outSize);
+  if (status == 0) {
+    *(int *)(vertexArray + 0x228) = newBacking;
+    newRefCountPtr = (int *)(newBacking + 0x10);
     do {
       if (in_RESERVE != '\0') {
-        iVar3 = storeWordConditionalIndexed(*piVar2 + 0x10000,0,piVar2);
-        *piVar2 = iVar3;
-        in_cr0 = 2;
+        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
+        *newRefCountPtr = newRefCountStored;
+        cr0Bits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    uVar4 = 1;
-    *(undefined1 *)(local_30 + 0x14) = 1;
+    } while (!(bool)(cr0Bits >> 1 & 1));
+    succeeded = 1;
+    *(undefined1 *)(newBacking + 0x14) = 1;
   }
-  if (iVar5 != 0) {
-    piVar2 = (int *)(iVar5 + 0x10);
+  if (oldBacking != 0) {
+    oldRefCountPtr = (int *)(oldBacking + 0x10);
     do {
-      iVar3 = *piVar2;
+      oldRefCountValue = *oldRefCountPtr;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -0x10000,0,piVar2);
-        *piVar2 = iVar1;
-        in_cr0 = 2;
+        oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
+        *oldRefCountPtr = oldRefCountStored;
+        cr0Bits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    if (iVar3 == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar5,1,0,0);
+    } while (!(bool)(cr0Bits >> 1 & 1));
+    if (oldRefCountValue == 0x10000) {
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,oldBacking,1,0,0);
     }
   }
-  return uVar4;
+  return succeeded;
 }
 
 /* gld_setVertexArrayNewTextureBacking @ 0xbd60 (264 bytes) */
-int gld_setVertexArrayNewTextureBacking(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+int gld_setVertexArrayNewTextureBacking(ctx, vertexArray, requestArg0, requestArg1, requestArg2, requestArg3)
+  int ctx;
+  int vertexArray;
+  undefined4 requestArg0;
+  undefined4 requestArg1;
+  undefined4 requestArg2;
+  undefined4 requestArg3;
 {
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int iVar5;
+  int *oldRefCountPtr;
+  int oldRefCountValue;
+  int newRefCountStored;
+  int oldRefCountStored;
+  int *newRefCountPtr;
+  int status;
+  undefined4 succeeded;
+  int oldBacking;
   char in_RESERVE;
-  byte in_cr0;
-  undefined4 local_38;
-  undefined4 local_34;
-  int local_30;
+  byte cr0Bits;
+  undefined4 outSize;
+  undefined4 outHandle;
+  int newBacking;
   
-  uVar4 = 0;
-  *(undefined4 *)(param_2 + 0x234) = param_3;
-  *(undefined4 *)(param_2 + 0x238) = param_4;
-  *(undefined4 *)(param_2 + 0x230) = 7;
-  *(undefined4 *)(param_2 + 0x23c) = param_5;
-  *(undefined4 *)(param_2 + 0x240) = param_6;
-  *(undefined4 *)(param_2 + 0x22c) = 0;
-  iVar5 = *(int *)(param_2 + 0x228);
-  *(undefined4 *)(param_2 + 0x228) = 0;
-  local_38 = 8;
-  iVar3 = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(param_1 + 4),10,param_2 + 0x230,0x14,&local_34,&local_38);
-  if (iVar3 == 0) {
-    *(int *)(param_2 + 0x228) = local_30;
-    piVar2 = (int *)(local_30 + 0x10);
+  succeeded = 0;
+  *(undefined4 *)(vertexArray + 0x234) = requestArg0;
+  *(undefined4 *)(vertexArray + 0x238) = requestArg1;
+  *(undefined4 *)(vertexArray + 0x230) = 7;
+  *(undefined4 *)(vertexArray + 0x23c) = requestArg2;
+  *(undefined4 *)(vertexArray + 0x240) = requestArg3;
+  *(undefined4 *)(vertexArray + 0x22c) = 0;
+  oldBacking = *(int *)(vertexArray + 0x228);
+  *(undefined4 *)(vertexArray + 0x228) = 0;
+  outSize = 8;
+  status = _io_connect_method_structureI_structureO
+                    (*(undefined4 *)(ctx + 4),10,vertexArray + 0x230,0x14,&outHandle,&outSize);
+  if (status == 0) {
+    *(int *)(vertexArray + 0x228) = newBacking;
+    newRefCountPtr = (int *)(newBacking + 0x10);
     do {
       if (in_RESERVE != '\0') {
-        iVar3 = storeWordConditionalIndexed(*piVar2 + 0x10000,0,piVar2);
-        *piVar2 = iVar3;
-        in_cr0 = 2;
+        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
+        *newRefCountPtr = newRefCountStored;
+        cr0Bits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    uVar4 = 1;
-    *(undefined1 *)(local_30 + 0x14) = 1;
-    *(undefined4 *)(param_2 + 0x22c) = local_34;
+    } while (!(bool)(cr0Bits >> 1 & 1));
+    succeeded = 1;
+    *(undefined1 *)(newBacking + 0x14) = 1;
+    *(undefined4 *)(vertexArray + 0x22c) = outHandle;
   }
-  if (iVar5 != 0) {
-    piVar2 = (int *)(iVar5 + 0x10);
+  if (oldBacking != 0) {
+    oldRefCountPtr = (int *)(oldBacking + 0x10);
     do {
-      iVar3 = *piVar2;
+      oldRefCountValue = *oldRefCountPtr;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -0x10000,0,piVar2);
-        *piVar2 = iVar1;
-        in_cr0 = 2;
+        oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
+        *oldRefCountPtr = oldRefCountStored;
+        cr0Bits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    if (iVar3 == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar5,1,0,0);
+    } while (!(bool)(cr0Bits >> 1 & 1));
+    if (oldRefCountValue == 0x10000) {
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,oldBacking,1,0,0);
     }
   }
-  return uVar4;
+  return succeeded;
 }
 
 /* powerOfTenDouble @ 0xbe70 (272 bytes) */

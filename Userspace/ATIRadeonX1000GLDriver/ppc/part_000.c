@@ -3203,142 +3203,150 @@ int _gldDestroyBuffer(ctx, buffer)
 }
 
 /* gld_setBufferAgpRefBacking @ 0x6470 (312 bytes) */
-int gld_setBufferAgpRefBacking(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+int gld_setBufferAgpRefBacking(ctx, buffer, requestArg0, requestArg1, requestArg2)
+  int ctx;
+  int buffer;
+  undefined4 requestArg0;
+  undefined4 requestArg1;
+  undefined4 requestArg2;
 {
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int iVar5;
+  int *oldRefCountPtr;
+  int *newRefCountPtr;
+  int oldRefCountValue;
+  int newRefCountStored;
+  int oldRefCountStored;
+  int *backingRecord;
+  int status;
+  undefined4 succeeded;
+  int oldBacking;
   char in_RESERVE;
-  byte in_cr0;
-  undefined4 local_38;
-  undefined1 auStack_34 [4];
-  int local_30;
+  byte cr0Bits;
+  undefined4 outSize;
+  undefined1 outHandleUnused [4];
+  int newBacking;
   
-  piVar2 = *(int **)(param_2 + 8);
-  if (piVar2 == (int *)0x0) {
-    iVar5 = 0;
-    piVar2 = (int *)_malloc(8);
-    *(int **)(param_2 + 8) = piVar2;
+  backingRecord = *(int **)(buffer + 8);
+  if (backingRecord == (int *)0x0) {
+    oldBacking = 0;
+    backingRecord = (int *)_malloc(8);
+    *(int **)(buffer + 8) = backingRecord;
   }
   else {
-    iVar5 = *piVar2;
+    oldBacking = *backingRecord;
   }
-  *piVar2 = 0;
-  uVar4 = 0;
-  *(undefined4 *)(*(int *)(param_2 + 8) + 4) = 0;
-  *(undefined4 *)(param_2 + 0x10) = 6;
-  *(undefined4 *)(param_2 + 0x14) = param_3;
-  *(undefined4 *)(param_2 + 0x18) = param_4;
-  *(undefined4 *)(param_2 + 0x1c) = param_5;
-  local_38 = 8;
-  iVar3 = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(param_1 + 4),10,param_2 + 0x10,0x14,auStack_34,&local_38);
-  if (iVar3 == 0) {
-    **(int **)(param_2 + 8) = local_30;
-    piVar2 = (int *)(local_30 + 0x10);
+  *backingRecord = 0;
+  succeeded = 0;
+  *(undefined4 *)(*(int *)(buffer + 8) + 4) = 0;
+  *(undefined4 *)(buffer + 0x10) = 6;
+  *(undefined4 *)(buffer + 0x14) = requestArg0;
+  *(undefined4 *)(buffer + 0x18) = requestArg1;
+  *(undefined4 *)(buffer + 0x1c) = requestArg2;
+  outSize = 8;
+  status = _io_connect_method_structureI_structureO
+                    (*(undefined4 *)(ctx + 4),10,buffer + 0x10,0x14,outHandleUnused,&outSize);
+  if (status == 0) {
+    **(int **)(buffer + 8) = newBacking;
+    newRefCountPtr = (int *)(newBacking + 0x10);
     do {
       if (in_RESERVE != '\0') {
-        iVar3 = storeWordConditionalIndexed(*piVar2 + 0x10000,0,piVar2);
-        *piVar2 = iVar3;
-        in_cr0 = 2;
+        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
+        *newRefCountPtr = newRefCountStored;
+        cr0Bits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    uVar4 = 1;
-    *(undefined1 *)(local_30 + 0x14) = 1;
+    } while (!(bool)(cr0Bits >> 1 & 1));
+    succeeded = 1;
+    *(undefined1 *)(newBacking + 0x14) = 1;
   }
-  if (iVar5 != 0) {
-    piVar2 = (int *)(iVar5 + 0x10);
+  if (oldBacking != 0) {
+    oldRefCountPtr = (int *)(oldBacking + 0x10);
     do {
-      iVar3 = *piVar2;
+      oldRefCountValue = *oldRefCountPtr;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -0x10000,0,piVar2);
-        *piVar2 = iVar1;
-        in_cr0 = 2;
+        oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
+        *oldRefCountPtr = oldRefCountStored;
+        cr0Bits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    if (iVar3 == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar5,1,0,0);
+    } while (!(bool)(cr0Bits >> 1 & 1));
+    if (oldRefCountValue == 0x10000) {
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,oldBacking,1,0,0);
     }
   }
-  return uVar4;
+  return succeeded;
 }
 
 /* gld_setBufferNewTextureBacking @ 0x65b0 (328 bytes) */
-int gld_setBufferNewTextureBacking(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+int gld_setBufferNewTextureBacking(ctx, buffer, requestArg0, requestArg1, requestArg2, requestArg3)
+  int ctx;
+  int buffer;
+  undefined4 requestArg0;
+  undefined4 requestArg1;
+  undefined4 requestArg2;
+  undefined4 requestArg3;
 {
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int iVar5;
+  int *oldRefCountPtr;
+  int *newRefCountPtr;
+  int oldRefCountValue;
+  int newRefCountStored;
+  int oldRefCountStored;
+  int *backingRecord;
+  int status;
+  undefined4 succeeded;
+  int oldBacking;
   char in_RESERVE;
-  byte in_cr0;
-  undefined4 local_48;
-  undefined4 local_44;
-  int local_40;
+  byte cr0Bits;
+  undefined4 outSize;
+  undefined4 outHandle;
+  int newBacking;
   
-  piVar2 = *(int **)(param_2 + 8);
-  if (piVar2 == (int *)0x0) {
-    iVar5 = 0;
-    piVar2 = (int *)_malloc(8);
-    *(int **)(param_2 + 8) = piVar2;
+  backingRecord = *(int **)(buffer + 8);
+  if (backingRecord == (int *)0x0) {
+    oldBacking = 0;
+    backingRecord = (int *)_malloc(8);
+    *(int **)(buffer + 8) = backingRecord;
   }
   else {
-    iVar5 = *piVar2;
+    oldBacking = *backingRecord;
   }
-  *piVar2 = 0;
-  uVar4 = 0;
-  *(undefined4 *)(*(int *)(param_2 + 8) + 4) = 0;
-  *(undefined4 *)(param_2 + 0x10) = 7;
-  *(undefined4 *)(param_2 + 0x14) = param_3;
-  *(undefined4 *)(param_2 + 0x18) = param_4;
-  *(undefined4 *)(param_2 + 0x1c) = param_5;
-  *(undefined4 *)(param_2 + 0x20) = param_6;
-  local_48 = 8;
-  iVar3 = _io_connect_method_structureI_structureO
-                    (*(undefined4 *)(param_1 + 4),10,param_2 + 0x10,0x14,&local_44,&local_48);
-  if (iVar3 == 0) {
-    piVar2 = (int *)(local_40 + 0x10);
-    **(int **)(param_2 + 8) = local_40;
+  *backingRecord = 0;
+  succeeded = 0;
+  *(undefined4 *)(*(int *)(buffer + 8) + 4) = 0;
+  *(undefined4 *)(buffer + 0x10) = 7;
+  *(undefined4 *)(buffer + 0x14) = requestArg0;
+  *(undefined4 *)(buffer + 0x18) = requestArg1;
+  *(undefined4 *)(buffer + 0x1c) = requestArg2;
+  *(undefined4 *)(buffer + 0x20) = requestArg3;
+  outSize = 8;
+  status = _io_connect_method_structureI_structureO
+                    (*(undefined4 *)(ctx + 4),10,buffer + 0x10,0x14,&outHandle,&outSize);
+  if (status == 0) {
+    newRefCountPtr = (int *)(newBacking + 0x10);
+    **(int **)(buffer + 8) = newBacking;
     do {
       if (in_RESERVE != '\0') {
-        iVar3 = storeWordConditionalIndexed(*piVar2 + 0x10000,0,piVar2);
-        *piVar2 = iVar3;
-        in_cr0 = 2;
+        newRefCountStored = storeWordConditionalIndexed(*newRefCountPtr + 0x10000,0,newRefCountPtr);
+        *newRefCountPtr = newRefCountStored;
+        cr0Bits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    uVar4 = 1;
-    *(undefined1 *)(local_40 + 0x14) = 1;
-    *(undefined4 *)(*(int *)(param_2 + 8) + 4) = local_44;
+    } while (!(bool)(cr0Bits >> 1 & 1));
+    succeeded = 1;
+    *(undefined1 *)(newBacking + 0x14) = 1;
+    *(undefined4 *)(*(int *)(buffer + 8) + 4) = outHandle;
   }
-  if (iVar5 != 0) {
-    piVar2 = (int *)(iVar5 + 0x10);
+  if (oldBacking != 0) {
+    oldRefCountPtr = (int *)(oldBacking + 0x10);
     do {
-      iVar3 = *piVar2;
+      oldRefCountValue = *oldRefCountPtr;
       if (in_RESERVE != '\0') {
-        iVar1 = storeWordConditionalIndexed(iVar3 + -0x10000,0,piVar2);
-        *piVar2 = iVar1;
-        in_cr0 = 2;
+        oldRefCountStored = storeWordConditionalIndexed(oldRefCountValue + -0x10000,0,oldRefCountPtr);
+        *oldRefCountPtr = oldRefCountStored;
+        cr0Bits = 2;
       }
-    } while (!(bool)(in_cr0 >> 1 & 1));
-    if (iVar3 == 0x10000) {
-      _io_connect_method_scalarI_structureI(*(undefined4 *)(param_1 + 4),0xb,iVar5,1,0,0);
+    } while (!(bool)(cr0Bits >> 1 & 1));
+    if (oldRefCountValue == 0x10000) {
+      _io_connect_method_scalarI_structureI(*(undefined4 *)(ctx + 4),0xb,oldBacking,1,0,0);
     }
   }
-  return uVar4;
+  return succeeded;
 }
 
 /* _gldCreateContext @ 0x6700 (1696 bytes) */

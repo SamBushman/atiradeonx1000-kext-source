@@ -6425,113 +6425,126 @@ int FUN_0002d210(param_1, param_2)
 }
 
 /* gldPackColorForSurfaceFormat @ 0x2d2b0 (2388 bytes) */
-void gldPackColorForSurfaceFormat(int param_1,double fparam_1,double fparam_2,double fparam_3,double fparam_4)
+void gldPackColorForSurfaceFormat(int surface,double red,double green,double blue,double alpha)
 {
-  int iVar1;
-  float fVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
+  int halfAlphaB;
+  uint channelInt2;
+  uint channelInt;
+  uint halfAlpha;
+  uint halfRed;
+  double greenScaled;
+  double blueScaled;
+  double alphaScaled;
+  double roundedAlphaD;
+  double roundedBlueD;
+  double alphaScaledD;
+  double blueScaledD;
+  double roundedD;
+  int channelIntB;
+  float redByteBits;
+  uint greenByte;
+  uint blueByte;
+  uint channelInt3;
   float fVar6;
   double dVar7;
-  double dVar8;
-  double dVar9;
-  double dVar10;
-  double dVar11;
-  double dVar12;
-  double dVar13;
-  double dVar14;
-  double fparam_1_00;
-  float fStack0000001c;
-  float fStack00000028;
+  double greenClamped;
+  double blueClamped;
+  double alphaClamped;
+  double redChannelD;
+  double greenChannelD;
+  double blueChannelD;
+  double alphaChannelD;
+  double alphaD;
+  float redF;
+  float alphaF;
   
-  fStack00000028 = (float)fparam_4;
-  fStack0000001c = (float)fparam_1;
-  if (*(char *)(param_1 + 0x37) == '\0') {
+  alphaF = (float)alpha;
+  redF = (float)red;
+  if (*(char *)(surface + 0x37) == '\0') {
     return;
   }
   dVar7 = (double)FLOAT_001aa0d4;
-  dVar11 = DOUBLE_001aa228;
-  if ((dVar7 <= fparam_1) &&
-     (dVar7 = fparam_1, dVar11 = fparam_1, (double)FLOAT_001aa0e8 < fparam_1)) {
+  redChannelD = DOUBLE_001aa228;
+  if ((dVar7 <= red) &&
+     (dVar7 = red, redChannelD = red, (double)FLOAT_001aa0e8 < red)) {
     dVar7 = (double)FLOAT_001aa0e8;
-    dVar11 = DOUBLE_001aa200;
+    redChannelD = DOUBLE_001aa200;
   }
-  dVar8 = (double)FLOAT_001aa0d4;
-  dVar12 = DOUBLE_001aa228;
-  if ((dVar8 <= fparam_2) &&
-     (dVar8 = fparam_2, dVar12 = fparam_2, (double)FLOAT_001aa0e8 < fparam_2)) {
-    dVar8 = (double)FLOAT_001aa0e8;
-    dVar12 = DOUBLE_001aa200;
+  greenClamped = (double)FLOAT_001aa0d4;
+  greenChannelD = DOUBLE_001aa228;
+  if ((greenClamped <= green) &&
+     (greenClamped = green, greenChannelD = green, (double)FLOAT_001aa0e8 < green)) {
+    greenClamped = (double)FLOAT_001aa0e8;
+    greenChannelD = DOUBLE_001aa200;
   }
-  dVar9 = (double)FLOAT_001aa0d4;
-  dVar13 = DOUBLE_001aa228;
-  if ((dVar9 <= fparam_3) &&
-     (dVar9 = fparam_3, dVar13 = fparam_3, (double)FLOAT_001aa0e8 < fparam_3)) {
-    dVar9 = (double)FLOAT_001aa0e8;
-    dVar13 = DOUBLE_001aa200;
+  blueClamped = (double)FLOAT_001aa0d4;
+  blueChannelD = DOUBLE_001aa228;
+  if ((blueClamped <= blue) &&
+     (blueClamped = blue, blueChannelD = blue, (double)FLOAT_001aa0e8 < blue)) {
+    blueClamped = (double)FLOAT_001aa0e8;
+    blueChannelD = DOUBLE_001aa200;
   }
-  fparam_1_00 = (double)fStack00000028;
-  dVar10 = (double)FLOAT_001aa0d4;
-  dVar14 = DOUBLE_001aa228;
-  if ((dVar10 <= fparam_1_00) &&
-     (dVar10 = fparam_1_00, dVar14 = fparam_1_00, (double)FLOAT_001aa0e8 < fparam_1_00)) {
-    dVar10 = (double)FLOAT_001aa0e8;
-    dVar14 = DOUBLE_001aa200;
+  alphaD = (double)alphaF;
+  alphaClamped = (double)FLOAT_001aa0d4;
+  alphaChannelD = DOUBLE_001aa228;
+  if ((alphaClamped <= alphaD) &&
+     (alphaClamped = alphaD, alphaChannelD = alphaD, (double)FLOAT_001aa0e8 < alphaD)) {
+    alphaClamped = (double)FLOAT_001aa0e8;
+    alphaChannelD = DOUBLE_001aa200;
   }
-  dVar11 = dVar11 * DOUBLE_001aa258;
-  if (DOUBLE_001aa1e8 <= dVar11) {
-    fVar2 = GH_U2F((unsigned int)(((int)(dVar11 - DOUBLE_001aa1e8) + -0x80000000)));
-  }
-  else {
-    fVar2 = GH_U2F((unsigned int)((int)dVar11));
-  }
-  dVar12 = dVar12 * DOUBLE_001aa258;
-  if (DOUBLE_001aa1e8 <= dVar12) {
-    uVar3 = (int)(dVar12 - DOUBLE_001aa1e8) + 0x80000000;
+  redChannelD = redChannelD * DOUBLE_001aa258;
+  if (DOUBLE_001aa1e8 <= redChannelD) {
+    redByteBits = GH_U2F((unsigned int)(((int)(redChannelD - DOUBLE_001aa1e8) + -0x80000000)));
   }
   else {
-    uVar3 = (uint)(int)dVar12;
+    redByteBits = GH_U2F((unsigned int)((int)redChannelD));
   }
-  dVar13 = dVar13 * DOUBLE_001aa258;
-  if (DOUBLE_001aa1e8 <= dVar13) {
-    uVar4 = (int)(dVar13 - DOUBLE_001aa1e8) + 0x80000000;
-  }
-  else {
-    uVar4 = (uint)(int)dVar13;
-  }
-  dVar14 = dVar14 * DOUBLE_001aa258;
-  if (DOUBLE_001aa1e8 <= dVar14) {
-    fVar6 = GH_U2F((unsigned int)(((int)(dVar14 - DOUBLE_001aa1e8) + -0x80000000)));
+  greenChannelD = greenChannelD * DOUBLE_001aa258;
+  if (DOUBLE_001aa1e8 <= greenChannelD) {
+    greenByte = (int)(greenChannelD - DOUBLE_001aa1e8) + 0x80000000;
   }
   else {
-    fVar6 = GH_U2F((unsigned int)((int)dVar14));
+    greenByte = (uint)(int)greenChannelD;
   }
-  switch(*(char *)(param_1 + 0x37)) {
+  blueChannelD = blueChannelD * DOUBLE_001aa258;
+  if (DOUBLE_001aa1e8 <= blueChannelD) {
+    blueByte = (int)(blueChannelD - DOUBLE_001aa1e8) + 0x80000000;
+  }
+  else {
+    blueByte = (uint)(int)blueChannelD;
+  }
+  alphaChannelD = alphaChannelD * DOUBLE_001aa258;
+  if (DOUBLE_001aa1e8 <= alphaChannelD) {
+    fVar6 = GH_U2F((unsigned int)(((int)(alphaChannelD - DOUBLE_001aa1e8) + -0x80000000)));
+  }
+  else {
+    fVar6 = GH_U2F((unsigned int)((int)alphaChannelD));
+  }
+  switch(*(char *)(surface + 0x37)) {
   default:
     fVar6 = 0.0;
     break;
   case '\x01':
   case '\x03':
-    fVar6 = fVar2;
+    fVar6 = redByteBits;
     break;
   case '\x02':
     break;
   case '\x04':
   case '\x0f':
   case '\x16':
-    fVar6 = GH_U2F((unsigned int)(((uint)(int)fVar2 | (int)fVar6 << 8)));
+    fVar6 = GH_U2F((unsigned int)(((uint)(int)redByteBits | (int)fVar6 << 8)));
     break;
   case '\x05':
-    fVar6 = GH_U2F((unsigned int)((((uint)(int)fVar2 & 0xf8) << 8 | (uVar3 & 0xfc) << 3 | uVar4 >> 3)));
+    fVar6 = GH_U2F((unsigned int)((((uint)(int)redByteBits & 0xf8) << 8 | (greenByte & 0xfc) << 3 | blueByte >> 3)));
     break;
   case '\x06':
-    fVar6 = GH_U2F((unsigned int)((((uint)(int)fVar6 & 0xf0) << 8 | ((uint)(int)fVar2 & 0xf0) << 4 | uVar3 & 0xf0 |
-                   uVar4 >> 4)));
+    fVar6 = GH_U2F((unsigned int)((((uint)(int)fVar6 & 0xf0) << 8 | ((uint)(int)redByteBits & 0xf0) << 4 | greenByte & 0xf0 |
+                   blueByte >> 4)));
     break;
   case '\a':
-    fVar6 = GH_U2F((unsigned int)((((uint)(int)fVar6 & 0x80) << 8 | ((uint)(int)fVar2 & 0xf8) << 7 | (uVar3 & 0xf8) << 2 |
-                   uVar4 >> 3)));
+    fVar6 = GH_U2F((unsigned int)((((uint)(int)fVar6 & 0x80) << 8 | ((uint)(int)redByteBits & 0xf8) << 7 | (greenByte & 0xf8) << 2 |
+                   blueByte >> 3)));
     break;
   case '\b':
   case '\v':
@@ -6543,179 +6556,179 @@ void gldPackColorForSurfaceFormat(int param_1,double fparam_1,double fparam_2,do
   case '\x1d':
   case '&':
   case '\'':
-    fVar6 = (float)(uVar4 | (int)GH_F2U(fVar6) << 0x18 | (int)GH_F2U(fVar2) << 0x10 | uVar3 << 8);
+    fVar6 = (float)(blueByte | (int)GH_F2U(fVar6) << 0x18 | (int)GH_F2U(redByteBits) << 0x10 | greenByte << 8);
     break;
   case '\t':
   case '\n':
   case '\x12':
   case '\x18':
   case '\x1e':
-    fVar6 = GH_U2F((unsigned int)(((uint)(int)fVar2 | uVar3 << 8 | (int)fVar6 << 0x18 | uVar4 << 0x10)));
+    fVar6 = GH_U2F((unsigned int)(((uint)(int)redByteBits | greenByte << 8 | (int)fVar6 << 0x18 | blueByte << 0x10)));
     break;
   case '\x10':
     dVar7 = dVar7 * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
-    dVar11 = (double)(float)dVar7;
-    if (DOUBLE_001aa1e8 <= dVar11) {
-      uVar3 = (int)(dVar11 - DOUBLE_001aa1e8) + 0x80000000;
+    roundedD = (double)(float)dVar7;
+    if (DOUBLE_001aa1e8 <= roundedD) {
+      channelInt = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
     }
     else {
-      uVar3 = (uint)(int)dVar7;
+      channelInt = (uint)(int)dVar7;
     }
     goto LAB_0002d9d4;
   case '\x13':
   case '\x15':
-    fVar6 = fStack0000001c;
+    fVar6 = redF;
     break;
   case '\x14':
-    fVar6 = fStack00000028;
+    fVar6 = alphaF;
     break;
   case '\x19':
   case '\x1b':
     dVar7 = dVar7 * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
-    dVar11 = (double)(float)dVar7;
-    if (DOUBLE_001aa1e8 <= dVar11) {
-      uVar3 = (int)(dVar11 - DOUBLE_001aa1e8) + 0x80000000;
+    roundedD = (double)(float)dVar7;
+    if (DOUBLE_001aa1e8 <= roundedD) {
+      channelInt = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
     }
     else {
-      uVar3 = (uint)(int)dVar7;
+      channelInt = (uint)(int)dVar7;
     }
     goto LAB_0002d9d0;
   case '\x1a':
-    dVar7 = dVar10 * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
-    dVar11 = (double)(float)dVar7;
-    if (DOUBLE_001aa1e8 <= dVar11) {
-      uVar3 = (int)(dVar11 - DOUBLE_001aa1e8) + 0x80000000;
+    alphaScaled = alphaClamped * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
+    roundedD = (double)(float)alphaScaled;
+    if (DOUBLE_001aa1e8 <= roundedD) {
+      channelInt = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
     }
     else {
-      uVar3 = (uint)(int)dVar7;
+      channelInt = (uint)(int)alphaScaled;
     }
 LAB_0002d9d0:
-    uVar3 = uVar3 & 0xffff;
+    channelInt = channelInt & 0xffff;
 LAB_0002d9d4:
-    fVar6 = GH_U2F((unsigned int)((uVar3 | uVar3 << 0x10)));
+    fVar6 = GH_U2F((unsigned int)((channelInt | channelInt << 0x10)));
     break;
   case '\x1c':
     dVar7 = dVar7 * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
-    dVar11 = (double)(float)dVar7;
-    if (DOUBLE_001aa1e8 <= dVar11) {
-      uVar3 = (int)(dVar11 - DOUBLE_001aa1e8) + 0x80000000;
+    roundedD = (double)(float)dVar7;
+    if (DOUBLE_001aa1e8 <= roundedD) {
+      channelInt = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
     }
     else {
-      uVar3 = (uint)(int)dVar7;
+      channelInt = (uint)(int)dVar7;
     }
-    dVar7 = dVar10 * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
-    dVar11 = (double)(float)dVar7;
-    if (DOUBLE_001aa1e8 <= dVar11) {
-      iVar1 = (int)(dVar11 - DOUBLE_001aa1e8) + -0x80000000;
+    alphaScaled = alphaClamped * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
+    roundedD = (double)(float)alphaScaled;
+    if (DOUBLE_001aa1e8 <= roundedD) {
+      channelIntB = (int)(roundedD - DOUBLE_001aa1e8) + -0x80000000;
     }
     else {
-      iVar1 = (int)dVar7;
+      channelIntB = (int)alphaScaled;
     }
-    fVar6 = GH_U2F((unsigned int)((uVar3 & 0xffff | iVar1 << 0x10)));
+    fVar6 = GH_U2F((unsigned int)((channelInt & 0xffff | channelIntB << 0x10)));
     break;
   case '\x1f':
   case '!':
-    uVar3 = ((uint (*)())floatToHalfBits)(fparam_1);
-    fVar6 = GH_U2F((unsigned int)((uVar3 << 0x10 | uVar3)));
+    halfRed = ((uint (*)())floatToHalfBits)(red);
+    fVar6 = GH_U2F((unsigned int)((halfRed << 0x10 | halfRed)));
     break;
   case ' ':
-    uVar3 = ((uint (*)())floatToHalfBits)(fparam_1_00);
-    fVar6 = GH_U2F((unsigned int)((uVar3 << 0x10 | uVar3)));
+    halfAlpha = ((uint (*)())floatToHalfBits)(alphaD);
+    fVar6 = GH_U2F((unsigned int)((halfAlpha << 0x10 | halfAlpha)));
     break;
   case '\"':
-    uVar3 = ((uint (*)())floatToHalfBits)(fparam_1);
-    iVar1 = ((uint (*)())floatToHalfBits)((double)fStack00000028);
-    fVar6 = GH_U2F((unsigned int)((uVar3 | iVar1 << 0x10)));
+    halfRed = ((uint (*)())floatToHalfBits)(red);
+    halfAlphaB = ((uint (*)())floatToHalfBits)((double)alphaF);
+    fVar6 = GH_U2F((unsigned int)((halfRed | halfAlphaB << 0x10)));
     break;
   case '#':
     dVar7 = dVar7 * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
-    dVar11 = (double)(float)dVar7;
-    if (DOUBLE_001aa1e8 <= dVar11) {
-      uVar3 = (int)(dVar11 - DOUBLE_001aa1e8) + 0x80000000;
+    roundedD = (double)(float)dVar7;
+    if (DOUBLE_001aa1e8 <= roundedD) {
+      channelInt = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
     }
     else {
-      uVar3 = (uint)(int)dVar7;
+      channelInt = (uint)(int)dVar7;
     }
-    uVar3 = uVar3 & 0x3ff;
-    dVar7 = dVar10 * (double)FLOAT_001aa158 + (double)FLOAT_001aa10c;
-    dVar11 = (double)(float)dVar7;
-    if (DOUBLE_001aa1e8 <= dVar11) {
-      iVar1 = (int)(dVar11 - DOUBLE_001aa1e8) + -0x80000000;
-    }
-    else {
-      iVar1 = (int)dVar7;
-    }
-    dVar7 = dVar9 * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
-    dVar11 = (double)(float)dVar7;
-    if (DOUBLE_001aa1e8 <= dVar11) {
-      uVar4 = (int)(dVar11 - DOUBLE_001aa1e8) + 0x80000000;
+    channelInt = channelInt & 0x3ff;
+    alphaScaled = alphaClamped * (double)FLOAT_001aa158 + (double)FLOAT_001aa10c;
+    roundedD = (double)(float)alphaScaled;
+    if (DOUBLE_001aa1e8 <= roundedD) {
+      channelIntB = (int)(roundedD - DOUBLE_001aa1e8) + -0x80000000;
     }
     else {
-      uVar4 = (uint)(int)dVar7;
+      channelIntB = (int)alphaScaled;
     }
-    uVar4 = iVar1 << 0x1e | (uVar4 & 0x3ff) << 0x14;
-    dVar7 = dVar8 * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
-    dVar11 = (double)(float)dVar7;
-    if (DOUBLE_001aa1e8 <= dVar11) {
-      uVar5 = (int)(dVar11 - DOUBLE_001aa1e8) + 0x80000000;
+    blueScaled = blueClamped * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
+    roundedD = (double)(float)blueScaled;
+    if (DOUBLE_001aa1e8 <= roundedD) {
+      channelInt2 = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
     }
     else {
-      uVar5 = (uint)(int)dVar7;
+      channelInt2 = (uint)(int)blueScaled;
+    }
+    channelInt2 = channelIntB << 0x1e | (channelInt2 & 0x3ff) << 0x14;
+    greenScaled = greenClamped * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
+    roundedD = (double)(float)greenScaled;
+    if (DOUBLE_001aa1e8 <= roundedD) {
+      channelInt3 = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
+    }
+    else {
+      channelInt3 = (uint)(int)greenScaled;
     }
     goto LAB_0002dcb4;
   case '$':
-    dVar11 = dVar9 * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
-    dVar12 = (double)(float)dVar11;
-    if (DOUBLE_001aa1e8 <= dVar12) {
-      uVar3 = (int)(dVar12 - DOUBLE_001aa1e8) + 0x80000000;
+    blueScaledD = blueClamped * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
+    roundedBlueD = (double)(float)blueScaledD;
+    if (DOUBLE_001aa1e8 <= roundedBlueD) {
+      channelInt = (int)(roundedBlueD - DOUBLE_001aa1e8) + 0x80000000;
     }
     else {
-      uVar3 = (uint)(int)dVar11;
+      channelInt = (uint)(int)blueScaledD;
     }
-    uVar3 = uVar3 & 0x3ff;
-    dVar11 = dVar10 * (double)FLOAT_001aa158 + (double)FLOAT_001aa10c;
-    dVar12 = (double)(float)dVar11;
-    if (DOUBLE_001aa1e8 <= dVar12) {
-      iVar1 = (int)(dVar12 - DOUBLE_001aa1e8) + -0x80000000;
+    channelInt = channelInt & 0x3ff;
+    alphaScaledD = alphaClamped * (double)FLOAT_001aa158 + (double)FLOAT_001aa10c;
+    roundedAlphaD = (double)(float)alphaScaledD;
+    if (DOUBLE_001aa1e8 <= roundedAlphaD) {
+      channelIntB = (int)(roundedAlphaD - DOUBLE_001aa1e8) + -0x80000000;
     }
     else {
-      iVar1 = (int)dVar11;
+      channelIntB = (int)alphaScaledD;
     }
     dVar7 = dVar7 * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
-    dVar11 = (double)(float)dVar7;
-    if (DOUBLE_001aa1e8 <= dVar11) {
-      uVar4 = (int)(dVar11 - DOUBLE_001aa1e8) + 0x80000000;
+    roundedD = (double)(float)dVar7;
+    if (DOUBLE_001aa1e8 <= roundedD) {
+      channelInt2 = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
     }
     else {
-      uVar4 = (uint)(int)dVar7;
+      channelInt2 = (uint)(int)dVar7;
     }
-    uVar4 = iVar1 << 0x1e | (uVar4 & 0x3ff) << 0x14;
-    dVar7 = dVar8 * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
-    dVar11 = (double)(float)dVar7;
-    if (DOUBLE_001aa1e8 <= dVar11) {
-      uVar5 = (int)(dVar11 - DOUBLE_001aa1e8) + 0x80000000;
+    channelInt2 = channelIntB << 0x1e | (channelInt2 & 0x3ff) << 0x14;
+    greenScaled = greenClamped * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
+    roundedD = (double)(float)greenScaled;
+    if (DOUBLE_001aa1e8 <= roundedD) {
+      channelInt3 = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
     }
     else {
-      uVar5 = (uint)(int)dVar7;
+      channelInt3 = (uint)(int)greenScaled;
     }
 LAB_0002dcb4:
-    fVar6 = GH_U2F((unsigned int)((uVar3 | uVar4 | (uVar5 & 0x3ff) << 10)));
+    fVar6 = GH_U2F((unsigned int)((channelInt | channelInt2 | (channelInt3 & 0x3ff) << 10)));
     break;
   case '(':
-    fVar6 = GH_U2F((unsigned int)(((uint)(int)fVar2 & 0xe0 | uVar3 >> 3 & 0x1c | uVar4 >> 6)));
+    fVar6 = GH_U2F((unsigned int)(((uint)(int)redByteBits & 0xe0 | greenByte >> 3 & 0x1c | blueByte >> 6)));
     break;
   case ')':
     dVar7 = dVar7 * (double)FLOAT_001aa150 + (double)FLOAT_001aa10c;
-    dVar11 = (double)(float)dVar7;
-    if (DOUBLE_001aa1e8 <= dVar11) {
-      iVar1 = (int)(dVar11 - DOUBLE_001aa1e8) + -0x80000000;
+    roundedD = (double)(float)dVar7;
+    if (DOUBLE_001aa1e8 <= roundedD) {
+      channelIntB = (int)(roundedD - DOUBLE_001aa1e8) + -0x80000000;
     }
     else {
-      iVar1 = (int)dVar7;
+      channelIntB = (int)dVar7;
     }
-    fVar6 = GH_U2F((unsigned int)((iVar1 << 8)));
+    fVar6 = GH_U2F((unsigned int)((channelIntB << 8)));
   }
-  *(float *)(param_1 + 0x28) = fVar6;
+  *(float *)(surface + 0x28) = fVar6;
   return;
 }
 
