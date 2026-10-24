@@ -814,7 +814,7 @@
 0x90840	FUN_00090840	264	no	indirect call (driver context / vtable / callback)
 0x90960	FUN_00090960	48	yes	
 0x90990	FUN_00090990	772	yes	
-0x90ca0	FUN_00090ca0	1240	yes	
+0x90ca0	ffvpAllocTempRegister	1240	yes	
 0x911a0	FUN_000911a0	316	yes	
 0x912f0	FUN_000912f0	208	yes	
 0x913e0	FUN_000913e0	224	no	no static blocker: a test could reach it (needs arguments / state no test builds)

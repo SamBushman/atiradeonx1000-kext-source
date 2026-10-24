@@ -1969,11 +1969,11 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 908b4	908c0	padding	FUN_00090840	3	
 90954	90960	padding	FUN_00090840	3	
 90c94	90ca0	padding	FUN_00090990	3	
-90d94	90da0	padding	FUN_00090ca0	3	
-91144	91150	padding	FUN_00090ca0	3	
-9116c	91170	padding	FUN_00090ca0	1	
-9118c	91190	padding	FUN_00090ca0	1	
-91198	911a0	padding	FUN_00090ca0	2	
+90d94	90da0	padding	ffvpAllocTempRegister	3	
+91144	91150	padding	ffvpAllocTempRegister	3	
+9116c	91170	padding	ffvpAllocTempRegister	1	
+9118c	91190	padding	ffvpAllocTempRegister	1	
+91198	911a0	padding	ffvpAllocTempRegister	2	
 91214	91220	padding	FUN_000911a0	3	
 912e8	912f0	padding	FUN_000911a0	2	
 91338	91340	padding	FUN_000912f0	2	

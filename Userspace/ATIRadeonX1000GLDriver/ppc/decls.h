@@ -1020,7 +1020,7 @@ extern void gldValidateState(int param_1,undefined4 param_2,undefined4 param_3,u
 extern int FUN_00090840();
 extern int FUN_00090960();
 extern int FUN_00090990();
-extern int FUN_00090ca0();
+extern int ffvpAllocTempRegister();
 extern int FUN_000911a0();
 extern int FUN_000912f0();
 extern int FUN_000913e0();

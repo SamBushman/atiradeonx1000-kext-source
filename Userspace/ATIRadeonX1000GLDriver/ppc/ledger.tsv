@@ -813,7 +813,7 @@
 0x90840	264	FUN_00090840	part_013	converted
 0x90960	48	FUN_00090960	part_013	converted
 0x90990	772	FUN_00090990	part_013	converted
-0x90ca0	1240	FUN_00090ca0	part_013	converted
+0x90ca0	1240	ffvpAllocTempRegister	part_013	converted
 0x911a0	316	FUN_000911a0	part_013	converted
 0x912f0	208	FUN_000912f0	part_013	converted
 0x913e0	224	FUN_000913e0	part_013	converted
