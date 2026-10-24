@@ -24,7 +24,6 @@ local	FUN_000fadc4	iVar4	operandRecord	INFERRED	all 1 definition(s) of the varia
 local	FUN_000fb3d4	pvVar10	inst	INFERRED	all 22 definition(s) of the variable yield a Inst: FUN_001043f0(0xc6,*(undefined4 *)(param_1 + 8)); FUN_001043f0(0x31,*(undefined4 *)(param_1 + 8))
 local	FUN_000fb3d4	iVar11	operandRecord	INFERRED	all 1 definition(s) of the variable yield a OperandRecord: FUN_001054ec(iVar6,0)
 local	FUN_000fb3d4	pvVar16	inst2	INFERRED	all 1 definition(s) of the variable yield a Inst: FUN_001043f0(0x31,*(undefined4 *)(param_1 + 8))
-local	FUN_000fd5c8	iVar23	operandRecord	INFERRED	all 2 definition(s) of the variable yield a OperandRecord: FUN_001054ec(iVar22,ppppppuVar48); FUN_001054ec(iVar22,ppppppuVar48)
 local	FUN_001043f0	uVar2	opcodeInfo	INFERRED	all 1 definition(s) of the variable yield a OpcodeInfo: FUN_00112f54(param_1)
 local	FUN_00104f34	uVar2	opcodeInfo	INFERRED	all 4 definition(s) of the variable yield a OpcodeInfo: FUN_00112f54(0xa6); FUN_00112f54(100)
 local	FUN_0010564c	iVar4	operandVReg	INFERRED	all 1 definition(s) of the variable yield a VReg: FUN_00105594(a0_00,iVar3)

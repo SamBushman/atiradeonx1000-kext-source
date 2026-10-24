@@ -1,0 +1,2 @@
+local	FUN_000e1888	param_1	compiler	INFERRED	every call of a named callee that receives param_1 passes it as the parameter that callee names compiler (1 call sites)
+local	FUN_000f1d7c	param_2	afterInst	INFERRED	every call of a named callee that receives param_2 passes it as the parameter that callee names afterInst (1 call sites)

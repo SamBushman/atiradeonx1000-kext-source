@@ -1,0 +1,6 @@
+local	FUN_000fd5c8	param_1	program	INFERRED	notes_compiler_ir.md 5.1: *(program+8) is the Compiler, +0x3a0 the entry block, +0x384 the block list; this IL-to-IR translator builds Entry/Exit blocks around it (see its caller in part_024)
+local	FUN_000fd5c8	param_2	ilReader	INFERRED	state of the IL token decoder: FUN_000e5e70(param_2) decodes the next IL instruction into it (opcode at +0x8e via FUN_000e4408, register byte +0x8d, token words from +0x8c, operand arrays [0x19]/[0x1b])
+local	FUN_000fd5c8	local_180	currentBlock	INFERRED	the Block that translated instructions are appended to (FUN_000f92fc(program, inst, local_180)); replaced by each newly created and connected block
+local	FUN_000fd5c8	local_184	previousBlock	INFERRED	the block before currentBlock: Block__connect(local_184, new) then local_184 = new
+local	FUN_000fd5c8	local_a8	ifStack	INFERRED	stack (vector header: capacity, count, data) pushed with the IfHeader created for if/ifc/ifnz, read by else (0x27) and popped by endif (0x29)
+local	FUN_000fd5c8	local_b0	conditionStack	INFERRED	stack of 3-word records {condition register, use count, 0} pushed at case 0x72 and read at 0x6f when the IfHeader condition is built

@@ -1,0 +1,7 @@
+local	FUN_000e2094	in_r6	argR6	INFERRED	staging variable of the Nth argument register that the next call receives (never read before it is assigned); callee signature not recovered
+local	FUN_000e5e70	in_r7	argR7	INFERRED	staging variable of the Nth argument register that the next call receives (never read before it is assigned); callee signature not recovered
+local	FUN_000f1d7c	in_r6	argR6	INFERRED	staging variable of the Nth argument register that the next call receives (never read before it is assigned); callee signature not recovered
+local	FUN_000f1d7c	in_r7	argR7	INFERRED	staging variable of the Nth argument register that the next call receives (never read before it is assigned); callee signature not recovered
+local	FUN_000fd5c8	in_r6	argR6	INFERRED	staging variable of the Nth argument register that the next call receives (never read before it is assigned); callee signature not recovered
+local	FUN_000fd5c8	in_r7	argR7	INFERRED	staging variable of the Nth argument register that the next call receives (never read before it is assigned); callee signature not recovered
+local	FUN_000fd5c8	in_r8	argR8	INFERRED	staging variable of the Nth argument register that the next call receives (never read before it is assigned); callee signature not recovered

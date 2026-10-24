@@ -138,8 +138,6 @@ local	FUN_000fb3d4	uVar8	arena	CONFIRMED	argument 1 of the bump allocator FUN_00
 local	FUN_000fb3d4	puVar9	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_000fd50c	uVar4	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
 local	FUN_000fd50c	puVar1	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
-local	FUN_000fd5c8	uVar46	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
-local	FUN_000fd5c8	puVar13	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_0010502c	param_1	this	CONFIRMED	constructor/initializer: stores a vtable pointer at *param_1 (offset 0)
 local	FUN_0010502c	uVar2	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
 local	FUN_0010502c	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1

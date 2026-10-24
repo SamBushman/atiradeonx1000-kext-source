@@ -781,7 +781,7 @@ int FUN_000e5e70(param_1)
   undefined4 uVar8;
   undefined4 *puVar9;
   undefined4 *puVar10;
-  int in_r7;
+  int argR7;
   undefined4 in_r8;
   uint uVar11;
   uint uVar12;
@@ -961,7 +961,7 @@ LAB_000e6ac4:
     goto switchD_000e61ac_caseD_a;
   case 7:
     local_64 = 6;
-    ((int (*)())FUN_000e547c)(param_1,0x34,local_68,6,in_r7,in_r8);
+    ((int (*)())FUN_000e547c)(param_1,0x34,local_68,6,argR7,in_r8);
     break;
   case 8:
     puVar15 = (uint *)param_1[0x22];
@@ -1060,9 +1060,9 @@ LAB_000e6ac4:
   case 9:
     local_64 = 8;
     iVar4 = local_68 + -1;
-    in_r7 = param_1[local_68 + 0x22];
+    argR7 = param_1[local_68 + 0x22];
     local_68 = iVar4;
-    ((int (*)())FUN_000e5384)(param_1,0x35,iVar4,8,in_r7,in_r8);
+    ((int (*)())FUN_000e5384)(param_1,0x35,iVar4,8,argR7,in_r8);
     break;
   default:
     goto switchD_000e61ac_caseD_a;
@@ -1296,25 +1296,25 @@ LAB_000e6870:
     goto switchD_000e61ac_caseD_53;
   case 0x65:
     local_64 = 6;
-    ((int (*)())FUN_000e547c)(param_1,0x6f,local_68,6,in_r7,in_r8);
+    ((int (*)())FUN_000e547c)(param_1,0x6f,local_68,6,argR7,in_r8);
     break;
   case 0x66:
     local_64 = 6;
-    ((int (*)())FUN_000e547c)(param_1,0x70,local_68,6,in_r7,in_r8);
+    ((int (*)())FUN_000e547c)(param_1,0x70,local_68,6,argR7,in_r8);
     break;
   case 0x67:
     local_64 = 8;
     iVar4 = local_68 + -1;
-    in_r7 = param_1[local_68 + 0x22];
+    argR7 = param_1[local_68 + 0x22];
     local_68 = iVar4;
-    ((int (*)())FUN_000e5384)(param_1,0x6f,iVar4,8,in_r7,in_r8);
+    ((int (*)())FUN_000e5384)(param_1,0x6f,iVar4,8,argR7,in_r8);
     break;
   case 0x68:
     local_64 = 8;
     iVar4 = local_68 + -1;
-    in_r7 = param_1[local_68 + 0x22];
+    argR7 = param_1[local_68 + 0x22];
     local_68 = iVar4;
-    ((int (*)())FUN_000e5384)(param_1,0x70,iVar4,8,in_r7,in_r8);
+    ((int (*)())FUN_000e5384)(param_1,0x70,iVar4,8,argR7,in_r8);
     break;
   case 0x69:
     piVar16 = (int *)0x0;
@@ -1599,11 +1599,11 @@ switchD_000e61ac_caseD_53:
     break;
   case 0x74:
     local_64 = 0x73;
-    ((int (*)())FUN_000e547c)(param_1,0x6f,local_68,0x73,in_r7,in_r8);
+    ((int (*)())FUN_000e547c)(param_1,0x6f,local_68,0x73,argR7,in_r8);
     break;
   case 0x75:
     local_64 = 0x73;
-    ((int (*)())FUN_000e547c)(param_1,0x70,local_68,0x73,in_r7,in_r8);
+    ((int (*)())FUN_000e547c)(param_1,0x70,local_68,0x73,argR7,in_r8);
   }
   goto LAB_000e5e9c;
 LAB_000e7400:
@@ -2340,22 +2340,22 @@ int FUN_000e83bc(param_1)
 }
 
 /* FUN_000e8424 @ 0xe8424 (216 bytes) */
-int FUN_000e8424(param_1, param_2)
-  int param_1;
+int FUN_000e8424(block, param_2)
+  int block;
   int param_2;
 {
   int *piVar1;
   int iVar2;
   int *piVar3;
   
-  if (*(int *)(*(int *)(*(int *)(*(int *)(param_1 + 200) + 8) + 0x88) + 8) == 0x8e) {
-    piVar1 = *(int **)(param_1 + 0x98);
-    for (piVar3 = (int *)(*(int **)(param_1 + 0x98))[2]; piVar3 != (int *)0x0;
+  if (*(int *)(*(int *)(*(int *)(*(int *)(block + 200) + 8) + 0x88) + 8) == 0x8e) {
+    piVar1 = *(int **)(block + 0x98);
+    for (piVar3 = (int *)(*(int **)(block + 0x98))[2]; piVar3 != (int *)0x0;
         piVar3 = (int *)piVar3[2]) {
       if (((piVar1[5] & 1U) != 0) && (*(int *)(piVar1[0x22] + 8) != 0x8e)) {
         iVar2 = (**(code **)(*piVar1 + 0x34))(piVar1);
         if (iVar2 == 0) {
-          ((int (*)())Block__insertInstBefore)(param_1,piVar1,param_2);
+          ((int (*)())Block__insertInstBefore)(block,piVar1,param_2);
           return;
         }
         piVar3 = (int *)piVar1[2];
@@ -2364,8 +2364,8 @@ int FUN_000e8424(param_1, param_2)
     }
   }
   else {
-    DList__insertAfter(param_2,*(int *)(param_1 + 200));
-    *(int *)(param_2 + 0x158) = param_1;
+    DList__insertAfter(param_2,*(int *)(block + 200));
+    *(int *)(param_2 + 0x158) = block;
   }
   return;
 }

@@ -42,6 +42,9 @@ for l in open(spec):
             if not (brace < k < len(body)): sys.exit('line out of body: %s %s' % (fn, rgi))
         rx, nth = anchor(body, brace, ia, ia)
         frm = rx + ('@%d' % nth if nth > 1 else '')
+        if ia == ib and (fp != 'all' or lp != 'all'):       # one line taken only on one side: from-anchor + '+1', the side is the `first` column
+            mode = fp if fp != 'all' else lp
+            print('\t'.join(['use', fn, var, new, tier, ev, frm, '+1', mode, 'none'])); continue
         # end: if the last line is taken whole, `to` = the next line (taken not at all); with a partial last line, `to` = the last line itself
         if lp == 'all':
             vre = re.compile(r'\b%s\b' % re.escape(var))

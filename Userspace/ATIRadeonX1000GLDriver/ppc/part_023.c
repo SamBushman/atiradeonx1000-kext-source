@@ -89,14 +89,14 @@ LAB_000e9874:
 }
 
 /* FUN_000e9910 @ 0xe9910 (56 bytes) */
-int FUN_000e9910(param_1, param_2, param_3, param_4)
+int FUN_000e9910(param_1, toBlock, param_3, fromBlock)
   undefined4 param_1;
-  undefined4 param_2;
+  undefined4 toBlock;
   undefined4 param_3;
-  undefined4 param_4;
+  undefined4 fromBlock;
 {
-  ((int (*)())FUN_000e977c)(param_1,param_2,param_3);
-  return Block__connect(param_4,param_2);
+  ((int (*)())FUN_000e977c)(param_1,toBlock,param_3);
+  return Block__connect(fromBlock,toBlock);
 }
 
 /* FUN_000e9948 @ 0xe9948 (404 bytes) */
@@ -778,42 +778,42 @@ int PostLoopFooter__ctor_ea828(this, param_2, param_3, param_4, compiler)
 }
 
 /* ExitBlock__ctor_eaae8 @ 0xeaae8 (68 bytes) */
-int ExitBlock__ctor_eaae8(this, param_2)
+int ExitBlock__ctor_eaae8(this, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
-  ((int (*)())Block__ctor_ea148)(this,param_2);
+  ((int (*)())Block__ctor_ea148)(this,compiler);
   *this = &PTR_FUN_001e9ed0;
   return;
 }
 
 /* ExitBlock__ctor_eab2c @ 0xeab2c (68 bytes) */
-int ExitBlock__ctor_eab2c(this, param_2)
+int ExitBlock__ctor_eab2c(this, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
-  ((int (*)())Block__ctor_ea148)(this,param_2);
+  ((int (*)())Block__ctor_ea148)(this,compiler);
   *this = &PTR_FUN_001e9ed0;
   return;
 }
 
 /* EntryBlock__ctor_eab70 @ 0xeab70 (76 bytes) */
-int EntryBlock__ctor_eab70(this, param_2)
+int EntryBlock__ctor_eab70(this, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
-  ((int (*)())Block__ctor_ea148)(this,param_2);
+  ((int (*)())Block__ctor_ea148)(this,compiler);
   this[0x4b] = this[0x32];
   *this = &PTR_FUN_001e9f28;
   return;
 }
 
 /* EntryBlock__ctor_eabbc @ 0xeabbc (76 bytes) */
-int EntryBlock__ctor_eabbc(this, param_2)
+int EntryBlock__ctor_eabbc(this, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 compiler;
 {
-  ((int (*)())Block__ctor_ea148)(this,param_2);
+  ((int (*)())Block__ctor_ea148)(this,compiler);
   this[0x4b] = this[0x32];
   *this = &PTR_FUN_001e9f28;
   return;
@@ -1316,9 +1316,9 @@ int IfHeaderStatic__clone(this)
 }
 
 /* IfHeaderStatic__ctor_eb9e0 @ 0xeb9e0 (168 bytes) */
-int IfHeaderStatic__ctor_eb9e0(this, param_2, param_3, compiler)
+int IfHeaderStatic__ctor_eb9e0(this, inst, param_3, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 inst;
   undefined4 param_3;
   int compiler;
 {
@@ -1326,9 +1326,9 @@ int IfHeaderStatic__ctor_eb9e0(this, param_2, param_3, compiler)
   undefined4 arena;
   
   ((int (*)())IfHeader__ctor_ea600)(this,compiler);
-  this[0x4c] = param_2;
+  this[0x4c] = inst;
   *this = &PTR_FUN_001e9d18;
-  Block__appendInst(this,param_2);
+  Block__appendInst(this,inst);
   this[0x50] = param_3;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
@@ -1341,9 +1341,9 @@ int IfHeaderStatic__ctor_eb9e0(this, param_2, param_3, compiler)
 }
 
 /* IfHeaderStatic__ctor_ebac8 @ 0xebac8 (168 bytes) */
-int IfHeaderStatic__ctor_ebac8(this, param_2, param_3, compiler)
+int IfHeaderStatic__ctor_ebac8(this, inst, param_3, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 inst;
   undefined4 param_3;
   int compiler;
 {
@@ -1351,9 +1351,9 @@ int IfHeaderStatic__ctor_ebac8(this, param_2, param_3, compiler)
   undefined4 arena;
   
   ((int (*)())IfHeader__ctor_ea600)(this,compiler);
-  this[0x4c] = param_2;
+  this[0x4c] = inst;
   *this = &PTR_FUN_001e9d18;
-  Block__appendInst(this,param_2);
+  Block__appendInst(this,inst);
   this[0x50] = param_3;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);

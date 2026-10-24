@@ -215,8 +215,8 @@ int Compiler__getOrCreateLoadConstN(compiler, param_2, param_3, param_4, param_5
 #undef local_8c
 
 /* FUN_000f5248 @ 0xf5248 (376 bytes) */
-int FUN_000f5248(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
+int FUN_000f5248(compiler, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+  undefined4 compiler;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
@@ -241,7 +241,7 @@ int FUN_000f5248(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
   uStack0000002c = param_6;
   uStack00000030 = param_7;
   uStack00000034 = param_8;
-  uVar1 = ((int (*)())Compiler__getOrCreateLoadConstN)(param_1,4,param_2,param_3,param_4,param_5,param_6,param_7);
+  uVar1 = ((int (*)())Compiler__getOrCreateLoadConstN)(compiler,4,param_2,param_3,param_4,param_5,param_6,param_7);
   return uVar1;
 }
 
@@ -425,9 +425,9 @@ LAB_000f59bc:
 }
 
 /* FUN_000f5a0c @ 0xf5a0c (512 bytes) */
-int FUN_000f5a0c(inst, param_2, inst2, param_4)
+int FUN_000f5a0c(inst, operandIndex, inst2, param_4)
   int inst;
-  int param_2;
+  int operandIndex;
   undefined4 inst2;
   int param_4;
 {
@@ -445,19 +445,19 @@ int FUN_000f5a0c(inst, param_2, inst2, param_4)
   
   iVar3 = FUN_0011379c(*(undefined4 *)(param_4 + 8),inst2);
   if (iVar3 == 0) goto LAB_000f5a8c;
-  uVar2 = *(uint *)(param_2 * 0x18 + inst + 0xa0) & 1;
+  uVar2 = *(uint *)(operandIndex * 0x18 + inst + 0xa0) & 1;
   IRInst__getOperandRecord(inst2,0);
-  sourceDef = IRInst__getOperandSource(inst,param_2);
+  sourceDef = IRInst__getOperandSource(inst,operandIndex);
   iVar3 = *(int *)(sourceDef + 0x98);
   if (iVar3 == 0xc) {
 LAB_000f5b30:
-    sourceDef = IRInst__getOperandSource(inst,param_2);
+    sourceDef = IRInst__getOperandSource(inst,operandIndex);
     piVar7 = *(int **)(*(int *)(param_4 + 8) + 0x30c);
     iVar8 = 0;
     do {
       operandRecord = IRInst__getOperandRecord(inst2,0);
       if (*(char *)(iVar8 + operandRecord + 0x10) != '\x01') {
-        operandRecord = IRInst__getOperandRecord(inst,param_2);
+        operandRecord = IRInst__getOperandRecord(inst,operandIndex);
         uVar6 = (uint)*(byte *)(iVar8 + operandRecord + 0x10);
         if (uVar6 != 4) {
           if (((int)*(char *)(sourceDef + 0x15c) >> (uVar6 & 0x3f) & 1U) == 0) goto LAB_000f5a8c;
@@ -480,13 +480,13 @@ LAB_000f5b28:
   else {
     if (iVar3 == 0x33) {
       if (uVar2 == 0) {
-        sourceDef = IRInst__getOperandSource(inst,param_2);
+        sourceDef = IRInst__getOperandSource(inst,operandIndex);
         iVar8 = 0;
         piVar7 = *(int **)(*(int *)(param_4 + 8) + 0x30c);
         do {
           operandRecord = IRInst__getOperandRecord(inst2,0);
           if (*(char *)(iVar8 + operandRecord + 0x10) != '\x01') {
-            iVar5 = IRInst__getOperandRecord(inst,param_2);
+            iVar5 = IRInst__getOperandRecord(inst,operandIndex);
             uVar2 = (uint)*(byte *)(iVar8 + iVar5 + 0x10);
             if ((uVar2 != 4) &&
                (iVar5 = (**(code **)(*piVar7 + 0xf0))
@@ -507,13 +507,13 @@ LAB_000f5a8c:
 }
 
 /* IRInst__sourceMatchesConstant @ 0xf5c0c (228 bytes) */
-int IRInst__sourceMatchesConstant(inst, param_2, param_3, param_4)
+int IRInst__sourceMatchesConstant(inst, operandIndex, param_3, param_4)
   undefined4 inst;
-  undefined4 param_2;
+  undefined4 operandIndex;
   undefined4 param_3;
   int *param_4;
 {
-  unsigned int ghidra_home[8] = { inst, param_2, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { inst, operandIndex, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint uVar1;
   int *a0;
   int iVar2;
@@ -523,14 +523,14 @@ int IRInst__sourceMatchesConstant(inst, param_2, param_3, param_4)
   undefined4 local_38 [9];
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
-  a0 = (int *)IRInst__getOperandSource(inst,param_2);
+  a0 = (int *)IRInst__getOperandSource(inst,operandIndex);
   iVar2 = (**(code **)(*a0 + 0x48))(a0);
   if (iVar2 == 0) {
 LAB_000f5cd8:
     uVar3 = 0;
   }
   else {
-    iVar2 = IRInst__getOperandRecord(inst,param_2);
+    iVar2 = IRInst__getOperandRecord(inst,operandIndex);
     iVar4 = 0;
     pcVar5 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
     local_38[0] = *(undefined4 *)(iVar2 + 0x10);
@@ -631,9 +631,9 @@ int IRInst__getUniformSourceConstant(inst, srcIndex, laneMask, outConst)
 }
 
 /* FUN_000f5e8c @ 0xf5e8c (264 bytes) */
-int FUN_000f5e8c(inst, param_2)
+int FUN_000f5e8c(inst, operandIndex)
   undefined4 inst;
-  undefined4 param_2;
+  undefined4 operandIndex;
 {
   int operandRecord;
   int *a0;
@@ -649,14 +649,14 @@ int FUN_000f5e8c(inst, param_2)
   int local_24;
   int local_20;
   
-  a0 = (int *)IRInst__getOperandSource(inst,param_2);
+  a0 = (int *)IRInst__getOperandSource(inst,operandIndex);
   iVar1 = (**(code **)(*a0 + 0x48))(a0);
   if (iVar1 == 0) {
 LAB_000f5f7c:
     uVar2 = 0;
   }
   else {
-    operandRecord = IRInst__getOperandRecord(inst,param_2);
+    operandRecord = IRInst__getOperandRecord(inst,operandIndex);
     iVar3 = 0;
     local_38 = *(undefined4 *)(operandRecord + 0x10);
     iVar1 = 4;
@@ -2405,10 +2405,10 @@ double FUN_000f8a30(int param_1,int param_2,int param_3,int param_4)
 }
 
 /* FUN_000f8aa0 @ 0xf8aa0 (488 bytes) */
-int FUN_000f8aa0(param_1, param_2, param_3, param_4, param_5)
+int FUN_000f8aa0(param_1, param_2, descriptor, param_4, param_5)
   undefined4 param_1;
   uint *param_2;
-  uint *param_3;
+  uint *descriptor;
   int param_4;
   int *param_5;
 {
@@ -2425,22 +2425,22 @@ int FUN_000f8aa0(param_1, param_2, param_3, param_4, param_5)
   local_38[3] = 3;
   uVar3 = *param_2;
   a4 = param_5;
-  if (param_3 != (uint *)0x0) {
-    uVar2 = *param_3;
+  if (descriptor != (uint *)0x0) {
+    uVar2 = *descriptor;
     if ((uVar2 & 0x400000) != 0) {
-      uVar1 = param_3[1];
+      uVar1 = descriptor[1];
       if ((uVar1 >> 3 & 1 & uVar1 >> 7 & 1 & uVar1 >> 0xb & 1 & uVar1 >> 0xf & 1) != 0) {
         IROperand__setModifierBits(param_5 + param_4 * 6 + 0x23,1,param_5[param_4 * 6 + 0x28] & 1U ^ 1);
-        uVar2 = *param_3;
+        uVar2 = *descriptor;
       }
     }
-    if (((uVar2 & 0x400000) != 0) && ((param_3[1] & 0x100000) != 0)) {
+    if (((uVar2 & 0x400000) != 0) && ((descriptor[1] & 0x100000) != 0)) {
       IROperand__setModifierBits(param_5 + param_4 * 6 + 0x23,2,1);
     }
-    local_38[0] = psnPackedLaneSource(param_3,0);
-    local_38[1] = psnPackedLaneSource(param_3,1);
-    local_38[2] = psnPackedLaneSource(param_3,2);
-    local_38[3] = psnPackedLaneSource(param_3,3);
+    local_38[0] = psnPackedLaneSource(descriptor,0);
+    local_38[1] = psnPackedLaneSource(descriptor,1);
+    local_38[2] = psnPackedLaneSource(descriptor,2);
+    local_38[3] = psnPackedLaneSource(descriptor,3);
   }
   (**(code **)(*param_5 + 0x88))
             (param_5,param_4,0,(int)local_38[uVar3 >> 0x18],a4,in_r8,*(code **)(*param_5 + 0x88));
@@ -2493,16 +2493,16 @@ int FUN_000f8ccc(param_1, param_2, param_3)
 }
 
 /* FUN_000f8d50 @ 0xf8d50 (568 bytes) */
-int FUN_000f8d50(param_1, param_2, param_3, param_4, param_5, inst, param_7)
+int FUN_000f8d50(param_1, param_2, param_3, descriptor, param_5, inst, param_7)
   int param_1;
   undefined4 param_2;
   undefined4 param_3;
-  uint *param_4;
+  uint *descriptor;
   undefined4 param_5;
   int inst;
   int param_7;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, inst, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { param_1, param_2, param_3, descriptor, param_5, inst, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined *puVar1;
   undefined1 uVar2;
   char cVar3;
@@ -2522,8 +2522,8 @@ int FUN_000f8d50(param_1, param_2, param_3, param_4, param_5, inst, param_7)
   local_38[1] = '\0';
   local_38[2] = '\0';
   local_38[3] = '\0';
-  if (param_4 != (uint *)0x0) {
-    uVar6 = *param_4;
+  if (descriptor != (uint *)0x0) {
+    uVar6 = *descriptor;
     if ((uVar6 & 0x1800000) == 0x800000) {
       if (*(int *)(param_1 + 0x3e4) == 0) {
         *(undefined4 *)(param_1 + 0x3f4) = *(undefined4 *)(inst + 0x98);
@@ -2536,31 +2536,31 @@ int FUN_000f8d50(param_1, param_2, param_3, param_4, param_5, inst, param_7)
       iVar4 = FUN_00127608(uVar5,0x2a,iVar4,0);
       *(undefined4 *)(iVar4 + 0x30) = uVar10;
       IRInst__setOperandRef(inst,0,iVar4);
-      uVar6 = *param_4;
+      uVar6 = *descriptor;
     }
-    if (((uVar6 & 0x400000) != 0) && ((param_4[1] & 0x100) != 0)) {
+    if (((uVar6 & 0x400000) != 0) && ((descriptor[1] & 0x100) != 0)) {
       piVar11 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
       pcVar9 = *(code **)(*piVar11 + 0x78);
       uVar5 = FUN_000ec208(param_1,uVar6 >> 0x10 & 0x3f);
       iVar4 = (*pcVar9)(piVar11,uVar5);
       if (iVar4 == 0) {
-        iVar4 = FUN_000ec208(param_1,*param_4 >> 0x10 & 0x3f);
+        iVar4 = FUN_000ec208(param_1,*descriptor >> 0x10 & 0x3f);
         if (iVar4 != 9) {
-          FUN_000ec208(param_1,*param_4 >> 0x10 & 0x3f);
+          FUN_000ec208(param_1,*descriptor >> 0x10 & 0x3f);
         }
       }
       else {
         *(undefined4 *)(inst + 0x120) = 1;
       }
     }
-    iVar4 = psnPackedLaneComponent(param_4,0);
+    iVar4 = psnPackedLaneComponent(descriptor,0);
     puVar1 = PTR_DAT_001e8bc8;
     local_38[0] = (char)*(undefined4 *)(PTR_DAT_001e8bc8 + iVar4 * 4);
-    iVar4 = psnPackedLaneComponent(param_4,1);
+    iVar4 = psnPackedLaneComponent(descriptor,1);
     local_38[1] = (char)*(undefined4 *)(puVar1 + iVar4 * 4);
-    iVar4 = psnPackedLaneComponent(param_4,2);
+    iVar4 = psnPackedLaneComponent(descriptor,2);
     local_38[2] = (char)*(undefined4 *)(puVar1 + iVar4 * 4);
-    iVar4 = psnPackedLaneComponent(param_4,3);
+    iVar4 = psnPackedLaneComponent(descriptor,3);
     local_38[3] = (char)*(undefined4 *)(puVar1 + iVar4 * 4);
   }
   if (param_7 == 0) {
@@ -2599,8 +2599,8 @@ int FUN_000f8d50(param_1, param_2, param_3, param_4, param_5, inst, param_7)
 }
 
 /* FUN_000f8f88 @ 0xf8f88 (176 bytes) */
-int FUN_000f8f88(param_1, param_2)
-  uint *param_1;
+int FUN_000f8f88(descriptor, param_2)
+  uint *descriptor;
   int *param_2;
 {
   bool bVar1;
@@ -2611,22 +2611,22 @@ int FUN_000f8f88(param_1, param_2)
   puVar2 = PTR_DAT_001e8bb8;
   iVar4 = 0;
   do {
-    psnPackedLaneSourceResult = psnPackedLaneSource(param_1,iVar4);
+    psnPackedLaneSourceResult = psnPackedLaneSource(descriptor,iVar4);
     (**(code **)(*param_2 + 0x88))(param_2,1,iVar4,*(undefined4 *)(puVar2 + psnPackedLaneSourceResult * 4));
     bVar1 = iVar4 != 3;
     iVar4 = iVar4 + 1;
   } while (bVar1);
-  if ((*param_1 & 0x400000) != 0) {
-    param_1[1] = param_1[1] & 0xffff8888 | 0x3210;
+  if ((*descriptor & 0x400000) != 0) {
+    descriptor[1] = descriptor[1] & 0xffff8888 | 0x3210;
   }
   return;
 }
 
 /* FUN_000f9038 @ 0xf9038 (264 bytes) */
-int FUN_000f9038(param_1, param_2, param_3)
+int FUN_000f9038(param_1, param_2, list)
   int param_1;
   undefined4 param_2;
-  undefined4 param_3;
+  undefined4 list;
 {
   undefined4 inst;
   int operandRecord;
@@ -2641,7 +2641,7 @@ int FUN_000f9038(param_1, param_2, param_3)
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(undefined4 *)(operandRecord + 8) = param_2;
   ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,dVar3,dVar3,dVar3,dVar3);
-  DList__pushBack(param_3,inst);
+  DList__pushBack(list,inst);
   inst = IRInst__create(0x19,*(undefined4 *)(param_1 + 8));
   operandRecord = IRInst__getOperandRecord(inst,0);
   *(undefined4 *)(operandRecord + 0xc) = 0;
@@ -2651,7 +2651,7 @@ int FUN_000f9038(param_1, param_2, param_3)
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(undefined4 *)(operandRecord + 8) = param_2;
   ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,dVar3,dVar3,dVar3,dVar3);
-  DList__pushBack(param_3,inst);
+  DList__pushBack(list,inst);
   return inst;
 }
 
@@ -2706,10 +2706,10 @@ int FUN_000f9140(param_1, param_2, param_3)
 }
 
 /* FUN_000f92fc @ 0xf92fc (480 bytes) */
-int FUN_000f92fc(param_1, inst, param_3)
+int FUN_000f92fc(param_1, inst, block)
   int param_1;
   int *inst;
-  undefined4 param_3;
+  undefined4 block;
 {
   int operandRecord;
   uint uVar1;
@@ -2720,7 +2720,7 @@ int FUN_000f92fc(param_1, inst, param_3)
   int iVar6;
   int iVar7;
   
-  iVar2 = (**(code **)(*inst + 0x30))(inst,inst,param_3);
+  iVar2 = (**(code **)(*inst + 0x30))(inst,inst,block);
   if ((iVar2 != 0) &&
      (piVar3 = *(int **)(*(int *)(param_1 + 8) + 0x30c),
      iVar2 = (**(code **)(*piVar3 + 0x168))(piVar3,param_1,inst), iVar2 != 0)) {
@@ -2738,7 +2738,7 @@ int FUN_000f92fc(param_1, inst, param_3)
     operandRecord = IRInst__getOperandRecord(inst2,2);
     *(int *)(operandRecord + 0xc) = iVar7;
     *(int *)(operandRecord + 8) = iVar6;
-    ((int (*)())FUN_000f92fc)(param_1,inst2,param_3);
+    ((int (*)())FUN_000f92fc)(param_1,inst2,block);
     inst2 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
     operandRecord = IRInst__getOperandRecord(inst2,0);
     *(undefined4 *)(operandRecord + 0xc) = 0;
@@ -2749,12 +2749,12 @@ int FUN_000f92fc(param_1, inst, param_3)
     operandRecord = IRInst__getOperandRecord(inst2,1);
     *(int *)(operandRecord + 8) = iVar6;
     *(int *)(operandRecord + 0xc) = iVar7;
-    ((int (*)())FUN_000f92fc)(param_1,inst2,param_3);
+    ((int (*)())FUN_000f92fc)(param_1,inst2,block);
     operandRecord = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(operandRecord + 0xc) = 0;
     *(int *)(operandRecord + 8) = iVar5;
   }
-  Block__appendInst(param_3,inst);
+  Block__appendInst(block,inst);
   FUN_000ed63c(param_1,inst);
                     
                     
@@ -2763,10 +2763,10 @@ int FUN_000f92fc(param_1, inst, param_3)
 }
 
 /* FUN_000f94dc @ 0xf94dc (968 bytes) */
-int FUN_000f94dc(compiler, param_2, param_3, param_4, param_5, param_6, param_7)
+int FUN_000f94dc(compiler, list, descriptor, param_4, param_5, param_6, param_7)
   int compiler;
-  undefined4 param_2;
-  uint *param_3;
+  undefined4 list;
+  uint *descriptor;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
@@ -2927,15 +2927,15 @@ int FUN_000f94dc(compiler, param_2, param_3, param_4, param_5, param_6, param_7)
   iVar4 = FUN_00127608(*(undefined4 *)(compiler + 0x3ac),0x3a,iVar11,0);
   *(undefined4 *)(iVar4 + 0x30) = 2;
   IRInst__setOperandRef(puVar12,0,iVar4);
-  uVar9 = *param_3;
-  uVar2 = FUN_000ec208(compiler,*param_3 >> 0x10 & 0x3f);
+  uVar9 = *descriptor;
+  uVar2 = FUN_000ec208(compiler,*descriptor >> 0x10 & 0x3f);
   operandRecord2 = IRInst__getOperandRecord(puVar12,1);
   *(undefined4 *)(operandRecord2 + 0xc) = uVar2;
   *(uint *)(operandRecord2 + 8) = (uint)(ushort)uVar9;
   local_68[0] = 0x10203;
-  ((int (*)())FUN_000f8aa0)(compiler,local_68,param_3,1,puVar12);
+  ((int (*)())FUN_000f8aa0)(compiler,local_68,descriptor,1,puVar12);
   allocation[0x4d] = 1;
-  DList__pushBack(param_2,puVar12);
+  DList__pushBack(list,puVar12);
   inst = IRInst__create(0x31,*(undefined4 *)(compiler + 8));
   uVar2 = FUN_000ec208(compiler,param_6);
   operandRecord2 = IRInst__getOperandRecord(inst,0);
@@ -2946,15 +2946,15 @@ int FUN_000f94dc(compiler, param_2, param_3, param_4, param_5, param_6, param_7)
   *(undefined4 *)(operandRecord2 + 0xc) = 0x3a;
   *(int *)(operandRecord2 + 8) = iVar11;
   IRInst__appendSource(inst,*(undefined4 *)(*(int *)(compiler + COMP_arenaA) + 0x8c));
-  DList__pushBack(param_2,inst);
+  DList__pushBack(list,inst);
   return;
 }
 
 /* FUN_000f9a58 @ 0xf9a58 (2736 bytes) */
-int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
+int FUN_000f9a58(pass, list, descriptor, param_4, param_5)
   int pass;
-  undefined4 param_2;
-  uint *param_3;
+  undefined4 list;
+  uint *descriptor;
   undefined4 param_4;
   int param_5;
 {
@@ -2988,17 +2988,17 @@ int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
   undefined4 local_68;
   undefined4 local_64 [7];
   
-  iVar8 = (int)(short)*param_3;
-  uVar10 = *param_3 >> 0x10 & 0x3f;
-  if (((*param_3 & 0x400000) == 0) || (uVar14 = param_3[1] >> 9 & 0xf, uVar14 == 0)) {
+  iVar8 = (int)(short)*descriptor;
+  uVar10 = *descriptor >> 0x10 & 0x3f;
+  if (((*descriptor & 0x400000) == 0) || (uVar14 = descriptor[1] >> 9 & 0xf, uVar14 == 0)) {
     pvVar4 = (void *)0x0;
     iVar20 = 0;
   }
   else {
     iVar20 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
     *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar20;
-    *(short *)((int)param_3 + 2) = (short)iVar20;
-    *param_3 = *param_3 & 0xffc0ffff | 0x40000;
+    *(short *)((int)descriptor + 2) = (short)iVar20;
+    *descriptor = *descriptor & 0xffc0ffff | 0x40000;
     pvVar4 = IRInst__create(0x13,*(undefined4 *)(pass + 8));
     operandRecord2 = IRInst__getOperandRecord(pvVar4,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
@@ -3008,12 +3008,12 @@ int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
     fparam_1 = (double)*(float *)(&DAT_001aa9fc + uVar14 * 4);
     *(int *)(operandRecord2 + 8) = iVar20;
     ((void (*)())IRInst__makeLiteralVec4Float)(pvVar4,pass,2,fparam_1,fparam_1,fparam_1,fparam_1);
-    DList__pushBack(param_2,pvVar4);
+    DList__pushBack(list,pvVar4);
   }
   uVar14 = 0;
   uVar17 = 0;
   do {
-    psnPackedLaneComponentResult = psnPackedLaneComponent(param_3,uVar17);
+    psnPackedLaneComponentResult = psnPackedLaneComponent(descriptor,uVar17);
     bVar1 = uVar17 != 3;
     uVar14 = uVar14 | (uint)(psnPackedLaneComponentResult == 2) << (uVar17 & 0x3f);
     uVar17 = uVar17 + 1;
@@ -3022,8 +3022,8 @@ int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
     if (pvVar4 == (void *)0x0) {
       iVar20 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
       *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar20;
-      *(short *)((int)param_3 + 2) = (short)iVar20;
-      *param_3 = *param_3 & 0xffc0ffff | 0x40000;
+      *(short *)((int)descriptor + 2) = (short)iVar20;
+      *descriptor = *descriptor & 0xffc0ffff | 0x40000;
     }
     pvVar4 = IRInst__create(0x31,*(undefined4 *)(pass + 8));
     operandRecord2 = IRInst__getOperandRecord(pvVar4,0);
@@ -3044,12 +3044,12 @@ int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
       pvVar3 = (void *)((int)pvVar3 + 1);
       iVar5 = iVar5 + -1;
     } while (iVar5 != 0);
-    DList__pushBack(param_2,pvVar4);
+    DList__pushBack(list,pvVar4);
   }
   uVar14 = 0;
   uVar17 = 0;
   do {
-    psnPackedLaneComponentResult = psnPackedLaneComponent(param_3,uVar17);
+    psnPackedLaneComponentResult = psnPackedLaneComponent(descriptor,uVar17);
     bVar1 = uVar17 != 3;
     uVar14 = uVar14 | (uint)(psnPackedLaneComponentResult == 3) << (uVar17 & 0x3f);
     uVar17 = uVar17 + 1;
@@ -3058,8 +3058,8 @@ int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
     if (pvVar4 == (void *)0x0) {
       iVar20 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
       *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar20;
-      *(short *)((int)param_3 + 2) = (short)iVar20;
-      *param_3 = *param_3 & 0xffc0ffff | 0x40000;
+      *(short *)((int)descriptor + 2) = (short)iVar20;
+      *descriptor = *descriptor & 0xffc0ffff | 0x40000;
     }
     pvVar4 = IRInst__create(0x31,*(undefined4 *)(pass + 8));
     operandRecord2 = IRInst__getOperandRecord(pvVar4,0);
@@ -3080,16 +3080,16 @@ int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
       pvVar3 = (void *)((int)pvVar3 + 1);
       iVar5 = iVar5 + -1;
     } while (iVar5 != 0);
-    DList__pushBack(param_2,pvVar4);
+    DList__pushBack(list,pvVar4);
   }
   uVar14 = 0;
-  if ((*param_3 & 0x400000) != 0) {
-    uVar14 = param_3[1];
+  if ((*descriptor & 0x400000) != 0) {
+    uVar14 = descriptor[1];
     uVar14 = (uint)((uVar14 & 0xc0) == 0) |
              (uint)((uVar14 & 0x30) == 0) << 8 |
              (uint)((uVar14 & 0xc) == 0) << 0x10 | (uint)((uVar14 & 3) == 0) << 0x18;
   }
-  iVar5 = FUN_0019eb30(param_3);
+  iVar5 = FUN_0019eb30(descriptor);
   if (iVar5 != 0) {
     pvVar4 = IRInst__create(0x31,*(undefined4 *)(pass + 8));
     operandRecord2 = IRInst__getOperandRecord(pvVar4,0);
@@ -3098,10 +3098,10 @@ int FUN_000f9a58(pass, param_2, param_3, param_4, param_5)
     operandRecord2 = IRInst__getOperandRecord(pvVar4,1);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     *(int *)(operandRecord2 + 8) = iVar20;
-    DList__pushBack(param_2,pvVar4);
+    DList__pushBack(list,pvVar4);
   }
-  uVar17 = *param_3;
-  if (((uVar17 & 0x400000) == 0) || ((param_3[1] & 0x100) == 0)) {
+  uVar17 = *descriptor;
+  if (((uVar17 & 0x400000) == 0) || ((descriptor[1] & 0x100) == 0)) {
 LAB_000f9f08:
     bVar1 = false;
   }
@@ -3111,13 +3111,13 @@ LAB_000f9f08:
     arena = FUN_000ec208(pass,uVar10);
     iVar5 = (*pcVar15)(piVar18,arena);
     if (iVar5 == 0) {
-      iVar20 = FUN_000ec208(pass,*param_3 >> 0x10 & 0x3f);
+      iVar20 = FUN_000ec208(pass,*descriptor >> 0x10 & 0x3f);
       if (iVar20 == 9) {
-        uVar17 = *param_3;
+        uVar17 = *descriptor;
         goto LAB_000f9f08;
       }
-      FUN_000ec208(pass,*param_3 >> 0x10 & 0x3f);
-      uVar17 = *param_3;
+      FUN_000ec208(pass,*descriptor >> 0x10 & 0x3f);
+      uVar17 = *descriptor;
       bVar1 = false;
     }
     else {
@@ -3127,17 +3127,17 @@ LAB_000f9f08:
         if (pvVar4 == (void *)0x0) {
           iVar20 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
           *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar20;
-          *(short *)((int)param_3 + 2) = (short)iVar20;
-          *param_3 = *param_3 & 0xffc0ffff | 0x40000;
+          *(short *)((int)descriptor + 2) = (short)iVar20;
+          *descriptor = *descriptor & 0xffc0ffff | 0x40000;
         }
-        pvVar4 = (void *)((int (*)())FUN_000f9038)(pass,iVar20,param_2);
-        uVar17 = *param_3;
+        pvVar4 = (void *)((int (*)())FUN_000f9038)(pass,iVar20,list);
+        uVar17 = *descriptor;
         if ((uVar17 & 0x400000) == 0) goto LAB_000f9f08;
         bVar1 = false;
-        param_3[1] = param_3[1] & 0xfffffeff;
+        descriptor[1] = descriptor[1] & 0xfffffeff;
       }
       else {
-        uVar17 = *param_3;
+        uVar17 = *descriptor;
         bVar1 = true;
       }
     }
@@ -3158,7 +3158,7 @@ LAB_000f9f08:
       iVar20 = FUN_00127608(arena,0x2a,iVar20,0);
       *(int *)(iVar20 + 0x30) = iVar8;
       IRInst__setOperandRef(pvVar4,0,iVar20);
-      *param_3 = *param_3 & 0xfe7fffff;
+      *descriptor = *descriptor & 0xfe7fffff;
     }
     else {
       arena = FUN_000ec208(pass,uVar10);
@@ -3169,12 +3169,12 @@ LAB_000f9f08:
     if (bVar1) {
       *(undefined4 *)((int)pvVar4 + 0x120) = 1;
     }
-    if ((*param_3 & 0x400000) != 0) {
-      param_3[1] = param_3[1] & 0xfffffeff;
+    if ((*descriptor & 0x400000) != 0) {
+      descriptor[1] = descriptor[1] & 0xfffffeff;
     }
     iVar20 = 0;
     do {
-      psnPackedLaneComponentResult = psnPackedLaneComponent(param_3,iVar20);
+      psnPackedLaneComponentResult = psnPackedLaneComponent(descriptor,iVar20);
       if (psnPackedLaneComponentResult == 0) {
         *(undefined1 *)((int)pvVar4 + 0x9c) = 1;
       }
@@ -3185,9 +3185,9 @@ LAB_000f9f08:
       pvVar4 = (void *)((int)pvVar4 + 1);
       iVar20 = iVar20 + 1;
     } while (bVar1);
-    uVar17 = *param_3;
+    uVar17 = *descriptor;
     if ((uVar17 & 0x400000) != 0) {
-      param_3[1] = param_3[1] & 0xffffff00 | 0x55;
+      descriptor[1] = descriptor[1] & 0xffffff00 | 0x55;
     }
   }
   if ((uVar10 != 0x1f) || ((*(uint *)(pass + 0x30) & 0x4000) == 0)) {
@@ -3202,18 +3202,18 @@ LAB_000f9f08:
   iVar20 = 1;
   iVar5 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar5;
-  uVar17 = *param_3;
-  uVar12 = (uint)(ushort)*param_3;
+  uVar17 = *descriptor;
+  uVar12 = (uint)(ushort)*descriptor;
   uVar11 = uVar17 >> 0x10 & 0x3f;
   if ((int)uVar17 < 0) {
     iVar20 = 2;
-    uVar12 = uVar12 | param_3[1] << 0x10;
+    uVar12 = uVar12 | descriptor[1] << 0x10;
   }
   if ((uVar17 & 0x400000) != 0) {
     iVar20 = iVar20 + 1;
   }
   if ((uVar17 & 0x1800000) == 0x1000000) {
-    puVar9 = param_3 + iVar20;
+    puVar9 = descriptor + iVar20;
     if (!bVar2) {
       arena = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
       allocation = (undefined4 *)Arena__alloc(arena,0x168);
@@ -3229,10 +3229,10 @@ LAB_000f9f08:
       allocation[0x28] = uVar14;
       *(undefined4 *)(operandRecord3 + 0xc) = arena;
       *(int *)(operandRecord3 + 8) = iVar5;
-      if ((*param_3 & 0x4000000) == 0) goto LAB_000fa1bc;
+      if ((*descriptor & 0x4000000) == 0) goto LAB_000fa1bc;
       iVar13 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
       *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar13;
-      uVar17 = param_3[iVar20 + 2];
+      uVar17 = descriptor[iVar20 + 2];
       newInst = IRInst__create(0xc6,*(undefined4 *)(pass + 8));
       arena = FUN_000ec208(pass,4);
       operandRecord = IRInst__getOperandRecord(newInst,0);
@@ -3244,7 +3244,7 @@ LAB_000f9f08:
       *(undefined4 *)(operandRecord + 0xc) = arena;
       *(uint *)(operandRecord + 8) = (uint)(ushort)uVar14;
       ((int (*)())FUN_000f7870)(newInst,pass,2,uVar17,uVar17,uVar17,uVar17);
-      DList__pushBack(param_2,newInst);
+      DList__pushBack(list,newInst);
       arena = FUN_000ec208(pass,4);
       operandRecord = IRInst__getOperandRecord(puVar21,2);
       *(undefined4 *)(operandRecord + 0xc) = arena;
@@ -3258,8 +3258,8 @@ LAB_000f9f08:
       FUN_00108a50(puVar21,0xf9,*(undefined4 *)(pass + 8));
       allocation[0x28] = uVar14;
       allocation[0x22] = 2;
-      if ((*param_3 & 0x4000000) != 0) {
-        uVar12 = uVar12 + param_3[iVar20 + 2];
+      if ((*descriptor & 0x4000000) != 0) {
+        uVar12 = uVar12 + descriptor[iVar20 + 2];
       }
       allocation[0x51] = uVar12;
       allocation[0x50] = 0x24;
@@ -3287,7 +3287,7 @@ LAB_000fa1bc:
   else if ((uVar17 & 0x1800000) == 0) {
     uVar16 = 0;
     if ((uVar17 & 0x4000000) != 0) {
-      uVar16 = param_3[iVar20];
+      uVar16 = descriptor[iVar20];
     }
     if (bVar2) {
       arena = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
@@ -3348,7 +3348,7 @@ LAB_000fa4f8:
     arena = *(undefined4 *)(operandRecord + 0x10);
     operandRecord = IRInst__getOperandRecord(newInst,1);
     *(undefined4 *)(operandRecord + 0x10) = arena;
-    DList__pushBack(param_2,newInst);
+    DList__pushBack(list,newInst);
     arena = FUN_000ec208(pass,4);
     operandRecord = IRInst__getOperandRecord(puVar21,2);
     *(undefined4 *)(operandRecord + 0xc) = arena;
@@ -3375,7 +3375,7 @@ LAB_000fa4f8:
     arena = *(undefined4 *)(operandRecord + 0x10);
     operandRecord = IRInst__getOperandRecord(newInst,1);
     *(undefined4 *)(operandRecord + 0x10) = arena;
-    DList__pushBack(param_2,newInst);
+    DList__pushBack(list,newInst);
     arena = FUN_000ec208(pass,4);
     operandRecord = IRInst__getOperandRecord(puVar21,1);
     *(undefined4 *)(operandRecord + 0xc) = arena;
@@ -3383,9 +3383,9 @@ LAB_000fa4f8:
     operandRecord = IRInst__getOperandRecord(puVar21,1);
     *(undefined4 *)(operandRecord + 0x10) = 0x10203;
   }
-  DList__pushBack(param_2,puVar21);
-  *param_3 = *param_3 & 0xffc0ffff | 0x40000;
-  *(short *)((int)param_3 + 2) = (short)iVar5;
+  DList__pushBack(list,puVar21);
+  *descriptor = *descriptor & 0xffc0ffff | 0x40000;
+  *(short *)((int)descriptor + 2) = (short)iVar5;
 LAB_000fa744:
   if ((uVar10 == 0x1f) && ((*(uint *)(pass + 0x30) & 0x200000) != 0)) {
     iVar5 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
@@ -3415,7 +3415,7 @@ LAB_000fa744:
     else if (param_5 == 3) {
       ((int (*)())FUN_000f7870)(newInst,pass,2,3,3,3,3);
     }
-    DList__pushBack(param_2,newInst);
+    DList__pushBack(list,newInst);
     newInst = IRInst__create(0x24,*(undefined4 *)(pass + 8));
     arena = FUN_000ec208(pass,0x1f);
     operandRecord = IRInst__getOperandRecord(newInst,0);
@@ -3432,18 +3432,18 @@ LAB_000fa744:
     operandRecord = IRInst__getOperandRecord(newInst,3);
     *(undefined4 *)(operandRecord + 0xc) = arena;
     *(int *)(operandRecord + 8) = iVar8;
-    DList__pushBack(param_2,newInst);
-    *param_3 = *param_3 & 0xffc0ffff | 0x40000;
-    *(short *)((int)param_3 + 2) = (short)iVar5;
+    DList__pushBack(list,newInst);
+    *descriptor = *descriptor & 0xffc0ffff | 0x40000;
+    *(short *)((int)descriptor + 2) = (short)iVar5;
   }
   return;
 }
 
 /* FUN_000fa958 @ 0xfa958 (1132 bytes) */
-int FUN_000fa958(param_1, param_2, param_3, param_4, inst, param_6, param_7, param_8, param_9, param_10, param_11)
+int FUN_000fa958(param_1, param_2, operandIndex, param_4, inst, param_6, param_7, param_8, param_9, param_10, block)
   int param_1;
   int param_2;
-  int param_3;
+  int operandIndex;
   int param_4;
   int inst;
   undefined4 param_6;
@@ -3451,7 +3451,7 @@ int FUN_000fa958(param_1, param_2, param_3, param_4, inst, param_6, param_7, par
   undefined4 param_8;
   undefined4 param_9;
   undefined4 param_10;
-  undefined4 param_11;
+  undefined4 block;
 {
   undefined4 newInst2;
   int operandRecord2;
@@ -3475,7 +3475,7 @@ int FUN_000fa958(param_1, param_2, param_3, param_4, inst, param_6, param_7, par
   undefined4 local_44;
   
   uVar11 = *(uint *)(PTR_DAT_001e8b88 + param_2 * 4);
-  if (param_3 != 0) {
+  if (operandIndex != 0) {
     uVar8 = uVar11 >> 0x1c & 1;
 LAB_000fabd8:
     if (uVar8 == 0) {
@@ -3515,8 +3515,8 @@ LAB_000fabd8:
       operandRecord = IRInst__getOperandRecord(newInst2,1);
       *(undefined4 *)(operandRecord + 0xc) = uVar9;
       *(int *)(operandRecord + 8) = iVar7;
-      ((int (*)())FUN_000f8aa0)(param_1,param_8,puVar10,param_3,newInst2);
-      ((int (*)())FUN_000f92fc)(param_1,newInst2,param_11);
+      ((int (*)())FUN_000f8aa0)(param_1,param_8,puVar10,operandIndex,newInst2);
+      ((int (*)())FUN_000f92fc)(param_1,newInst2,block);
       uVar8 = 4;
       *puVar10 = *puVar10 & 0xfe3fffff;
       *(short *)((int)puVar10 + 2) = (short)iVar1;
@@ -3524,10 +3524,10 @@ LAB_000fabd8:
       iVar7 = iVar1;
     }
     else {
-      ((int (*)())FUN_000f8aa0)(param_1,param_8,puVar5,param_3,inst);
+      ((int (*)())FUN_000f8aa0)(param_1,param_8,puVar5,operandIndex,inst);
     }
     uVar2 = FUN_000ec208(param_1,uVar8);
-    operandRecord = IRInst__getOperandRecord(inst,param_3);
+    operandRecord = IRInst__getOperandRecord(inst,operandIndex);
     *(undefined4 *)(operandRecord + 0xc) = uVar2;
     *(int *)(operandRecord + 8) = iVar7;
     return 0;
@@ -3861,11 +3861,11 @@ int FUN_000fb230(param_1, param_2)
 }
 
 /* FUN_000fb3d4 @ 0xfb3d4 (2560 bytes) */
-int FUN_000fb3d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+int FUN_000fb3d4(param_1, list, param_3, descriptor, param_5, param_6, param_7)
   int param_1;
-  undefined4 param_2;
+  undefined4 list;
   dword *param_3;
-  dword *param_4;
+  dword *descriptor;
   dword *param_5;
   dword *param_6;
   int param_7;
@@ -3947,7 +3947,7 @@ int FUN_000fb3d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   undefined4 local_84;
   undefined4 local_80;
   
-  uVar22 = *param_4;
+  uVar22 = *descriptor;
   uVar23 = uVar22 >> 0x16 & 1;
   iVar20 = *(int *)(param_1 + 8);
   if ((((uVar22 & 0x3f0000) == 0x100000) && (iVar20 != 0)) &&
@@ -3955,12 +3955,12 @@ int FUN_000fb3d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     pdVar25 = (dword *)((int)((unsigned char *)0xc) + 3);
   }
   else {
-    pdVar25 = (dword *)(int)(short)*param_4;
+    pdVar25 = (dword *)(int)(short)*descriptor;
   }
   uVar24 = uVar22 >> 0x10 & 0x3f;
-  arena = param_2;
+  arena = list;
   pdVar17 = param_3;
-  pdVar18 = param_4;
+  pdVar18 = descriptor;
   pdVar32 = param_6;
   pdVar31 = pdVar25;
   if ((uVar22 & 0x1800000) == 0x800000) {
@@ -3968,8 +3968,8 @@ int FUN_000fb3d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
     if (uVar23 == 0) {
       iVar6 = 4;
     }
-    uVar22 = *(uint *)(iVar6 + (int)param_4);
-    uVar1 = *(ushort *)((int)param_4 + iVar6 + 2);
+    uVar22 = *(uint *)(iVar6 + (int)descriptor);
+    uVar1 = *(ushort *)((int)descriptor + iVar6 + 2);
     if ((uVar22 & 0x10000) == 0) {
       pdVar31 = (dword *)(*(int *)(iVar20 + 0x3b4) + 1);
       *(dword **)(iVar20 + 0x3b4) = pdVar31;
@@ -3990,7 +3990,7 @@ int FUN_000fb3d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
       operandRecord2 = IRInst__getOperandRecord(puVar33,1);
       *(undefined4 *)(operandRecord2 + 0x10) = arena;
       allocation[0x4c] = pdVar25[0xc];
-      DList__pushBack(param_2,puVar33);
+      DList__pushBack(list,puVar33);
       arena = extraout_r4_01;
     }
     else {
@@ -4059,20 +4059,20 @@ int FUN_000fb3d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
         arena = extraout_r4_00;
       }
     }
-    uVar22 = *param_4 & 0xfe7fffff;
-    *param_4 = uVar22;
+    uVar22 = *descriptor & 0xfe7fffff;
+    *descriptor = uVar22;
   }
   if (((uVar22 & 0x3f0000) == 0x1c0000) &&
      ((*(uint *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 8) & 8) == 0)) {
-    *param_4 = uVar22 & 0xffc0ffff | 0x10000;
-    pdVar25 = param_4;
+    *descriptor = uVar22 & 0xffc0ffff | 0x10000;
+    pdVar25 = descriptor;
     if ((uVar22 & 0x400000) != 0) {
-      pdVar25 = param_4 + 1;
+      pdVar25 = descriptor + 1;
     }
     bVar3 = false;
-    *(short *)((int)param_4 + 2) = (short)pdVar25[1];
-    uVar22 = *param_4 & 0xfbffffff;
-    *param_4 = uVar22;
+    *(short *)((int)descriptor + 2) = (short)pdVar25[1];
+    uVar22 = *descriptor & 0xfbffffff;
+    *descriptor = uVar22;
   }
   else {
     bVar3 = true;
@@ -4081,7 +4081,7 @@ int FUN_000fb3d4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 LAB_000fb800:
     pdVar25 = (dword *)(*(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1);
     *(dword **)(*(int *)(param_1 + 8) + 0x3ac) = pdVar25;
-    uVar22 = *param_4;
+    uVar22 = *descriptor;
     uVar34 = uVar22 >> 0x10 & 0x3f;
     if (!bVar2) {
       arena = 0xfe;
@@ -4096,13 +4096,13 @@ LAB_000fb800:
     pdVar18 = pdVar31;
     if ((int)uVar22 < 0) {
       iVar20 = 2;
-      pdVar18 = (dword *)((uint)pdVar31 | param_4[1] << 0x10);
+      pdVar18 = (dword *)((uint)pdVar31 | descriptor[1] << 0x10);
     }
     if ((uVar22 & 0x400000) != 0) {
       iVar20 = iVar20 + 1;
     }
     if ((uVar22 & 0x1800000) == 0x1000000) {
-      pdVar29 = param_4 + iVar20;
+      pdVar29 = descriptor + iVar20;
       if (!bVar2) {
         arenaAt374 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
         allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
@@ -4130,7 +4130,7 @@ LAB_000fb800:
       operandRecord3 = IRInst__getOperandRecord(allocation,0);
       *(undefined4 *)(operandRecord3 + 0xc) = arena;
       *(dword **)(operandRecord3 + 8) = pdVar25;
-      if ((*param_4 & 0x4000000) == 0) {
+      if ((*descriptor & 0x4000000) == 0) {
         dVar4 = *pdVar29;
         arena = FUN_000ec208(param_1,*pdVar29 >> 0x10 & 0x3f);
         operandRecord2 = IRInst__getOperandRecord(allocation,pdVar17);
@@ -4138,7 +4138,7 @@ LAB_000fb800:
         *(uint *)(operandRecord2 + 8) = (uint)GH_F2U((float)((ushort)dVar4));
       }
       else {
-        pdVar32 = (dword *)param_4[iVar20 + 2];
+        pdVar32 = (dword *)descriptor[iVar20 + 2];
         inst = IRInst__create(0xc6,*(undefined4 *)(param_1 + 8));
         arena = FUN_000ec208(param_1,4);
         operandRecord2 = IRInst__getOperandRecord(inst,0);
@@ -4150,7 +4150,7 @@ LAB_000fb800:
         *(undefined4 *)(operandRecord2 + 0xc) = arena;
         *(uint *)(operandRecord2 + 8) = (uint)GH_F2U((float)((ushort)dVar4));
         ((int (*)())FUN_000f7870)(inst,param_1,2,pdVar32,pdVar32,pdVar32,pdVar32);
-        DList__pushBack(param_2,inst);
+        DList__pushBack(list,inst);
         arena = FUN_000ec208(param_1,4);
         operandRecord2 = IRInst__getOperandRecord(allocation,pdVar17);
         *(undefined4 *)(operandRecord2 + 0xc) = arena;
@@ -4160,7 +4160,7 @@ LAB_000fb800:
       ((int (*)())FUN_000f8aa0)(param_1,&local_98,pdVar29,pdVar17,allocation);
     }
     else if ((uVar22 & 0x1800000) == 0) {
-      pdVar32 = (dword *)param_4[iVar20];
+      pdVar32 = (dword *)descriptor[iVar20];
       arenaAt374 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
       allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
       *allocation = arenaAt374;
@@ -4204,7 +4204,7 @@ LAB_000fb800:
       arena = *(undefined4 *)(operandRecord2 + 0x10);
       operandRecord2 = IRInst__getOperandRecord(inst,1);
       *(undefined4 *)(operandRecord2 + 0x10) = arena;
-      DList__pushBack(param_2,inst);
+      DList__pushBack(list,inst);
       arena = FUN_000ec208(param_1,4);
       operandRecord2 = IRInst__getOperandRecord(allocation,2);
       *(undefined4 *)(operandRecord2 + 0xc) = arena;
@@ -4212,10 +4212,10 @@ LAB_000fb800:
       operandRecord2 = IRInst__getOperandRecord(allocation,2);
       *(undefined4 *)(operandRecord2 + 0x10) = 0;
     }
-    DList__pushBack(param_2,allocation);
+    DList__pushBack(list,allocation);
     bVar3 = false;
-    *param_4 = *param_4 & 0xffc0ffff | 0x40000;
-    *(short *)((int)param_4 + 2) = (short)pdVar25;
+    *descriptor = *descriptor & 0xffc0ffff | 0x40000;
+    *(short *)((int)descriptor + 2) = (short)pdVar25;
     arena = extraout_r4_02;
   }
   else {
@@ -4228,7 +4228,7 @@ LAB_000fb800:
     if ((uVar22 & 0x2000000) != 0) {
       pdVar25 = (dword *)(*(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1);
       *(dword **)(*(int *)(param_1 + 8) + 0x3ac) = pdVar25;
-      uVar22 = *param_4;
+      uVar22 = *descriptor;
       if ((uVar22 & 0x400000) == 0) {
         pdVar32 = (dword *)((int)((unsigned char *)0x0) + 1);
         pdVar29 = (dword *)((int)((unsigned char *)0x0) + 1);
@@ -4240,8 +4240,8 @@ LAB_000fb800:
         param_5 = (dword *)((int)((unsigned char *)0x0) + 3);
       }
       if ((uVar22 & 0x1800000) == 0x1000000) {
-        pdVar17 = param_4 + (int)pdVar29;
-        pdVar18 = param_4 + (int)param_5;
+        pdVar17 = descriptor + (int)pdVar29;
+        pdVar18 = descriptor + (int)param_5;
         pdVar29 = (dword *)((int)pdVar32 + 2);
         if ((uVar22 & 0x4000000) == 0) {
           param_5 = (dword *)((int)pdVar32 + 3);
@@ -4258,12 +4258,12 @@ LAB_000fb800:
         pdVar18 = (dword *)0x0;
         pdVar26 = pdVar32;
       }
-      if ((param_4[(int)pdVar29] & 0x1800000) == 0x1000000) {
-        pdVar30 = param_4 + (int)param_5;
+      if ((descriptor[(int)pdVar29] & 0x1800000) == 0x1000000) {
+        pdVar30 = descriptor + (int)param_5;
         pdVar28 = (dword *)0x0;
-        pdVar27 = param_4 + (int)((int)pdVar26 + 2);
-        if ((param_4[(int)pdVar29] & 0x4000000) != 0) {
-          pdVar28 = param_4 + (int)((int)pdVar26 + 3);
+        pdVar27 = descriptor + (int)((int)pdVar26 + 2);
+        if ((descriptor[(int)pdVar29] & 0x4000000) != 0) {
+          pdVar28 = descriptor + (int)((int)pdVar26 + 3);
         }
       }
       else {
@@ -4275,7 +4275,7 @@ LAB_000fb800:
         if (pdVar30 != (dword *)0x0) {
           if ((pdVar18 != (dword *)0x0) || (pdVar27 == (dword *)0x0)) goto LAB_000fc43c;
           newInst4 = IRInst__create(0xe6,*(undefined4 *)(param_1 + 8));
-          dVar4 = *param_4;
+          dVar4 = *descriptor;
           piVar7 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
           arena = (**(code **)(*piVar7 + 0x9c))(piVar7,(short)dVar4);
           piVar7 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
@@ -4295,7 +4295,7 @@ LAB_000fb800:
           local_98 = 0x10203;
           param_5 = newInst4;
           ((int (*)())FUN_000f8aa0)(param_1,&local_98,pdVar30,2,newInst4);
-          DList__pushBack(param_2,newInst4);
+          DList__pushBack(list,newInst4);
           if ((pdVar28 != (dword *)0x0) && (*pdVar28 != 0)) {
             inst = IRInst__create(0xc6,*(undefined4 *)(param_1 + 8));
             uVar35 = FUN_000ec208(param_1,4);
@@ -4313,7 +4313,7 @@ LAB_000fb800:
             ((int (*)())FUN_000f7870)(inst,param_1,2,pdVar18,pdVar18,pdVar18,pdVar18);
             operandRecord2 = IRInst__getOperandRecord(inst,2);
             *(undefined4 *)(operandRecord2 + 0x10) = local_84;
-            DList__pushBack(param_2,inst);
+            DList__pushBack(list,inst);
           }
           inst = IRInst__create(0xc6,*(undefined4 *)(param_1 + 8));
           uVar35 = FUN_000ec208(param_1,4);
@@ -4329,7 +4329,7 @@ LAB_000fb800:
           *(undefined4 *)(operandRecord2 + 8) = arena;
           operandRecord2 = IRInst__getOperandRecord(inst,2);
           *(undefined4 *)(operandRecord2 + 0x10) = local_84;
-          DList__pushBack(param_2,inst);
+          DList__pushBack(list,inst);
           inst = IRInst__create(0x68,*(undefined4 *)(param_1 + 8));
           arena = FUN_000ec208(param_1,4);
           operandRecord2 = IRInst__getOperandRecord(inst,0);
@@ -4348,8 +4348,8 @@ LAB_000fc3f4:
           *(undefined4 *)(operandRecord2 + 0x10) = 0;
           goto LAB_000fc74c;
         }
-        uVar22 = (uint)*(ushort *)((int)param_4 + (int)pdVar29 * 4 + 2);
-        pdVar29 = (dword *)(uint)(ushort)*param_4;
+        uVar22 = (uint)*(ushort *)((int)descriptor + (int)pdVar29 * 4 + 2);
+        pdVar29 = (dword *)(uint)(ushort)*descriptor;
         if ((*(uint *)(param_1 + 0x30) & 0x40000) == 0) {
           pvVar15 = (void *)0x0;
           inst = IRInst__create(0x68,*(undefined4 *)(param_1 + 8));
@@ -4467,8 +4467,8 @@ LAB_000fc3f4:
         if (((pdVar18 != (dword *)0x0) && (pdVar30 == (dword *)0x0)) && (pdVar27 == (dword *)0x0)) {
           pdVar32 = ((unsigned char *)0x4);
           param_5 = pdVar25;
-          ((int (*)())FUN_000f94dc)(param_1,param_2,pdVar17,pdVar18,pdVar25,4,*(undefined4 *)(param_1 + 0x400));
-          uVar1 = *(ushort *)((int)param_4 + (int)pdVar29 * 4 + 2);
+          ((int (*)())FUN_000f94dc)(param_1,list,pdVar17,pdVar18,pdVar25,4,*(undefined4 *)(param_1 + 0x400));
+          uVar1 = *(ushort *)((int)descriptor + (int)pdVar29 * 4 + 2);
           inst = IRInst__create(0x68,*(undefined4 *)(param_1 + 8));
           arena = FUN_000ec208(param_1,4);
           operandRecord2 = IRInst__getOperandRecord(inst,0);
@@ -4478,7 +4478,7 @@ LAB_000fc3f4:
           goto LAB_000fc3f4;
         }
 LAB_000fc43c:
-        ((int (*)())FUN_000f94dc)(param_1,param_2,pdVar17,pdVar18,pdVar25,4,*(undefined4 *)(param_1 + 0x400));
+        ((int (*)())FUN_000f94dc)(param_1,list,pdVar17,pdVar18,pdVar25,4,*(undefined4 *)(param_1 + 0x400));
         uVar34 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) - 1;
         *(uint *)(*(int *)(param_1 + 8) + 0x3ac) = uVar34;
         uVar22 = (uint)(ushort)*pdVar30;
@@ -4497,7 +4497,7 @@ LAB_000fc43c:
           *(uint *)(operandRecord2 + 8) = uVar22;
           local_94[0] = 0x10203;
           ((int (*)())FUN_000f8aa0)(param_1,local_94,pdVar30,2,inst);
-          DList__pushBack(param_2,inst);
+          DList__pushBack(list,inst);
           *pdVar30 = *pdVar30 & 0xffc0ffff | 0x40000;
           uVar22 = uVar34;
         }
@@ -4527,7 +4527,7 @@ LAB_000fc43c:
           operandRecord2 = IRInst__getOperandRecord(newInst2,2);
           *(undefined4 *)(operandRecord2 + 0x10) = 0;
         }
-        DList__pushBack(param_2,newInst2);
+        DList__pushBack(list,newInst2);
         inst = IRInst__create(0xc6,*(undefined4 *)(param_1 + 8));
         *(undefined4 *)((int)inst + 0x9c) = 0x10101;
         arena = FUN_000ec208(param_1,4);
@@ -4547,7 +4547,7 @@ LAB_000fc43c:
         *(undefined4 *)(operandRecord2 + 0x10) = 0;
         operandRecord2 = IRInst__getOperandRecord(inst,2);
         *(undefined4 *)(operandRecord2 + 0x10) = 0;
-        DList__pushBack(param_2,inst);
+        DList__pushBack(list,inst);
         inst = IRInst__create(0x68,*(undefined4 *)(param_1 + 8));
         arena = FUN_000ec208(param_1,4);
         operandRecord2 = IRInst__getOperandRecord(inst,0);
@@ -4562,28 +4562,28 @@ LAB_000fc43c:
         operandRecord2 = IRInst__getOperandRecord(inst,1);
         *(undefined4 *)(operandRecord2 + 0x10) = 0;
 LAB_000fc74c:
-        DList__pushBack(param_2,inst);
+        DList__pushBack(list,inst);
         arena = extraout_r4_08;
         if (pvVar15 != (void *)0x0) {
-          DList__pushBack(param_2,pvVar15);
+          DList__pushBack(list,pvVar15);
           arena = extraout_r4_09;
         }
       }
       bVar3 = false;
-      *param_4 = *param_4 & 0xffc0ffff | 0x40000;
-      *(short *)((int)param_4 + 2) = (short)pdVar25;
+      *descriptor = *descriptor & 0xffc0ffff | 0x40000;
+      *(short *)((int)descriptor + 2) = (short)pdVar25;
     }
   }
   if (uVar23 == 0) goto code_r0x000fd490;
-  uVar22 = *param_4;
-  if (((uVar22 & 0x400000) == 0) || ((param_4[1] & 0x4444) == 0)) {
+  uVar22 = *descriptor;
+  if (((uVar22 & 0x400000) == 0) || ((descriptor[1] & 0x4444) == 0)) {
     bVar2 = false;
   }
   else {
-    arena = psnPackedLaneSource(param_4,0);
-    psnPackedLaneSourceResult = psnPackedLaneSource(param_4,1);
-    psnPackedLaneSourceResult2 = psnPackedLaneSource(param_4,2);
-    psnPackedLaneSourceResult3 = psnPackedLaneSource(param_4,3);
+    arena = psnPackedLaneSource(descriptor,0);
+    psnPackedLaneSourceResult = psnPackedLaneSource(descriptor,1);
+    psnPackedLaneSourceResult2 = psnPackedLaneSource(descriptor,2);
+    psnPackedLaneSourceResult3 = psnPackedLaneSource(descriptor,3);
     pdVar18 = local_94;
     pdVar25 = (dword *)(*(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1);
     *(dword **)(*(int *)(param_1 + 8) + 0x3ac) = pdVar25;
@@ -4603,7 +4603,7 @@ LAB_000fc74c:
     dVar4 = local_94[0];
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     *(dword *)(operandRecord2 + 0x10) = dVar4;
-    DList__pushBack(param_2,inst);
+    DList__pushBack(list,inst);
     inst = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
     operandRecord2 = IRInst__getOperandRecord(inst,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
@@ -4611,8 +4611,8 @@ LAB_000fc74c:
     pdVar17 = (dword *)((int)((unsigned char *)0x0) + 1);
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,1,fparam_1,fparam_2,fparam_3,fparam_4);
     *(undefined4 *)((int)inst + 0x9c) = local_98;
-    DList__pushBack(param_2,inst);
-    uVar22 = *param_4;
+    DList__pushBack(list,inst);
+    uVar22 = *descriptor;
     arena = extraout_r4_10;
     pdVar31 = pdVar25;
     if ((uVar22 & 0x400000) == 0) {
@@ -4622,16 +4622,16 @@ LAB_000fc74c:
     else {
       uVar24 = 4;
       bVar2 = true;
-      param_4[1] = param_4[1] & 0xffff8888 | 0x3210;
+      descriptor[1] = descriptor[1] & 0xffff8888 | 0x3210;
     }
   }
   if ((uVar22 & 0x400000) == 0) goto code_r0x000fd490;
-  puVar21 = (undefined1 *)param_4[1];
-  pdVar29 = param_4 + 1;
+  puVar21 = (undefined1 *)descriptor[1];
+  pdVar29 = descriptor + 1;
   if (((uint)puVar21 & 0xffff8888) == 0) goto code_r0x000fd490;
   pdVar26 = pdVar31;
   if (((ushort)*param_3 - 0x8e < 0x10) && (((uint)puVar21 & 0x8888) != 0)) {
-    param_4[1] = (uint)puVar21 & 0xffff7777;
+    descriptor[1] = (uint)puVar21 & 0xffff7777;
     pdVar26 = pdVar25;
     if (!bVar2) {
       puVar21 = *(undefined1 **)(param_1 + 8);
@@ -4649,8 +4649,8 @@ LAB_000fc74c:
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     *(dword **)(operandRecord2 + 8) = pdVar31;
     *(undefined4 *)(operandRecord2 + 0xc) = arena;
-    DList__pushBack(param_2,inst);
-    uVar22 = *param_4;
+    DList__pushBack(list,inst);
+    uVar22 = *descriptor;
     arena = extraout_r4_11;
     uVar24 = 4;
     pdVar25 = pdVar26;
@@ -4673,14 +4673,14 @@ LAB_000fc74c:
     *(dword **)(operandRecord2 + 8) = pdVar26;
     IROperand__setModifierBits((int)inst + 0xa4,1,1);
     if (!bVar2) {
-      ((int (*)())FUN_000f8f88)(param_4,inst);
+      ((int (*)())FUN_000f8f88)(descriptor,inst);
     }
     pdVar17 = (dword *)((int)((unsigned char *)0x0) + 2);
     uVar24 = 4;
     bVar2 = true;
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,1.0,1.0,1.0,1.0);
-    DList__pushBack(param_2,inst);
-    uVar22 = *param_4;
+    DList__pushBack(list,inst);
+    uVar22 = *descriptor;
     arena = extraout_r4_12;
     pdVar25 = pdVar31;
   }
@@ -4701,7 +4701,7 @@ LAB_000fc74c:
       *(undefined4 *)(operandRecord2 + 0xc) = arena;
       *(dword **)(operandRecord2 + 8) = pdVar31;
       if (!bVar2) {
-        ((int (*)())FUN_000f8f88)(param_4,inst);
+        ((int (*)())FUN_000f8f88)(descriptor,inst);
       }
       pdVar17 = (dword *)((int)((unsigned char *)0x0) + 2);
       ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,2.0,2.0,2.0,2.0);
@@ -4722,15 +4722,15 @@ LAB_000fc74c:
       *(undefined4 *)(operandRecord2 + 0xc) = arena;
       *(dword **)(operandRecord2 + 8) = pdVar31;
       if (!bVar2) {
-        ((int (*)())FUN_000f8f88)(param_4,inst);
+        ((int (*)())FUN_000f8f88)(descriptor,inst);
       }
       ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,2,0.5,0.5,0.5,0.5);
       pdVar17 = (dword *)((int)((unsigned char *)0x0) + 1);
       IROperand__setModifierBits((int)inst + 0xbc,1,1);
       pdVar31 = pdVar25;
     }
-    DList__pushBack(param_2,inst);
-    uVar22 = *param_4;
+    DList__pushBack(list,inst);
+    uVar22 = *descriptor;
     uVar24 = 4;
     bVar2 = true;
     arena = extraout_r4_14;
@@ -4751,7 +4751,7 @@ LAB_000fc74c:
     *(undefined4 *)(operandRecord2 + 0xc) = arena;
     *(dword **)(operandRecord2 + 8) = pdVar31;
     if (!bVar2) {
-      ((int (*)())FUN_000f8f88)(param_4,inst);
+      ((int (*)())FUN_000f8f88)(descriptor,inst);
     }
     uVar24 = 4;
     bVar2 = true;
@@ -4759,8 +4759,8 @@ LAB_000fc74c:
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,3,1.0,1.0,1.0,1.0);
     pdVar17 = (dword *)((int)((unsigned char *)0x0) + 1);
     IROperand__setModifierBits((int)inst + 0xd4,1,1);
-    DList__pushBack(param_2,inst);
-    uVar22 = *param_4;
+    DList__pushBack(list,inst);
+    uVar22 = *descriptor;
     arena = extraout_r4_13;
     pdVar31 = pdVar25;
   }
@@ -4784,13 +4784,13 @@ code_r0x000fcda8:
     *(undefined4 *)(operandRecord2 + 0xc) = arena;
     *(dword **)(operandRecord2 + 8) = pdVar31;
     if (!bVar2) {
-      ((int (*)())FUN_000f8f88)(param_4,inst);
+      ((int (*)())FUN_000f8f88)(descriptor,inst);
       operandRecord2 = IRInst__getOperandRecord(inst,1);
       arena = *(undefined4 *)(operandRecord2 + 0x10);
       operandRecord2 = IRInst__getOperandRecord(inst,3);
       *(undefined4 *)(operandRecord2 + 0x10) = arena;
     }
-    DList__pushBack(param_2,inst);
+    DList__pushBack(list,inst);
     inst = IRInst__create(0x25,*(undefined4 *)(param_1 + 8));
     operandRecord2 = IRInst__getOperandRecord(inst,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
@@ -4806,8 +4806,8 @@ code_r0x000fcda8:
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_1,3,1.0,1.0,1.0,1.0);
     pdVar17 = (dword *)((int)((unsigned char *)0x0) + 1);
     IROperand__setModifierBits((int)inst + 0xd4,1,1);
-    DList__pushBack(param_2,inst);
-    uVar22 = *param_4;
+    DList__pushBack(list,inst);
+    uVar22 = *descriptor;
     arena = extraout_r4_15;
     pdVar25 = pdVar26;
   }
@@ -4822,7 +4822,7 @@ code_r0x000fcda8:
         (pdVar17 != (dword *)((*(GhidraMachOSection *)0x00000054).sectname + 9))))) {
       if (uVar23 == 4) {
 code_r0x000fd284:
-        uVar22 = *param_4;
+        uVar22 = *descriptor;
       }
       else {
         if (uVar23 == 1) {
@@ -4869,7 +4869,7 @@ code_r0x000fd284:
         *(undefined4 *)(operandRecord3 + 0xc) = uVar12;
         *(dword **)(operandRecord3 + 8) = pdVar26;
         if (!bVar2) {
-          ((int (*)())FUN_000f8f88)(param_4,newInst);
+          ((int (*)())FUN_000f8f88)(descriptor,newInst);
           operandRecord3 = IRInst__getOperandRecord(newInst,1);
           uVar12 = *(undefined4 *)(operandRecord3 + 0x10);
           operandRecord3 = IRInst__getOperandRecord(inst2,1);
@@ -4892,17 +4892,17 @@ code_r0x000fd284:
         *(undefined4 *)(operandRecord2 + 0x10) = uVar12;
         *(undefined4 *)((int)newInst + 0x9c) = uVar35;
         *(undefined4 *)((int)inst2 + 0x9c) = arena;
-        DList__pushBack(param_2,inst);
-        DList__pushBack(param_2,newInst);
-        DList__pushBack(param_2,inst2);
-        uVar22 = *param_4;
+        DList__pushBack(list,inst);
+        DList__pushBack(list,newInst);
+        DList__pushBack(list,inst2);
+        uVar22 = *descriptor;
         arena = extraout_r4_17;
         pdVar25 = pdVar27;
       }
     }
     else if (uVar23 == 3) {
       *(undefined4 *)(param_1 + 0x47c) = 1;
-      uVar22 = *param_4;
+      uVar22 = *descriptor;
     }
     else {
       if (uVar23 != 2) goto code_r0x000fd284;
@@ -4919,14 +4919,14 @@ code_r0x000fd284:
       operandRecord2 = IRInst__getOperandRecord(newInst3,1);
       *(undefined4 *)(operandRecord2 + 0xc) = arena;
       *(dword **)(operandRecord2 + 8) = pdVar26;
-      ((int (*)())FUN_000f8f88)(param_4,newInst3);
+      ((int (*)())FUN_000f8f88)(descriptor,newInst3);
       pcVar36 = *(code **)(*newInst3 + 0x88);
       operandRecord2 = IRInst__getOperandRecord(newInst3,1);
       pdVar18 = (dword *)(uint)*(byte *)(operandRecord2 + 0x12);
       pdVar17 = (dword *)((int)((unsigned char *)0x0) + 3);
       (*pcVar36)(newInst3,1);
-      DList__pushBack(param_2,newInst3);
-      uVar22 = *param_4;
+      DList__pushBack(list,newInst3);
+      uVar22 = *descriptor;
       arena = extraout_r4_16;
       uVar24 = 4;
       pdVar25 = pdVar27;
@@ -4934,7 +4934,7 @@ code_r0x000fd284:
   }
   pdVar31 = pdVar27;
   if (((((uVar22 & 0x400000) != 0) && ((*pdVar29 & 0x8888) != 0)) &&
-      (uVar22 = psnPackedNegateMask(param_4,arena,pdVar17,pdVar18,param_5,pdVar32,puVar21), uVar22 != 0))
+      (uVar22 = psnPackedNegateMask(descriptor,arena,pdVar17,pdVar18,param_5,pdVar32,puVar21), uVar22 != 0))
      && (uVar22 != 0x8888)) {
     pdVar31 = pdVar25;
     if (!bVar2) {
@@ -4950,12 +4950,12 @@ code_r0x000fd284:
     *(undefined4 *)(operandRecord2 + 0xc) = arena;
     *(dword **)(operandRecord2 + 8) = pdVar27;
     if (!bVar2) {
-      ((int (*)())FUN_000f8f88)(param_4,inst);
+      ((int (*)())FUN_000f8f88)(descriptor,inst);
     }
-    if (((*param_4 & 0x400000) != 0) && ((*pdVar29 & 0x100000) != 0)) {
+    if (((*descriptor & 0x400000) != 0) && ((*pdVar29 & 0x100000) != 0)) {
       IROperand__setModifierBits((int)inst + 0xa4,2,1);
     }
-    DList__pushBack(param_2,inst);
+    DList__pushBack(list,inst);
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     uVar35 = *(undefined4 *)(operandRecord2 + 0x10);
     inst = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
@@ -4971,24 +4971,24 @@ code_r0x000fd284:
       *(undefined4 *)(operandRecord2 + 0x10) = uVar35;
     }
     IROperand__setModifierBits((int)inst + 0xa4,1,1);
-    if ((((*param_4 & 0x400000) != 0) && ((*pdVar29 & 0x100000) != 0)) &&
-       (IROperand__setModifierBits((int)inst + 0xa4,2,1), (*param_4 & 0x400000) != 0)) {
+    if ((((*descriptor & 0x400000) != 0) && ((*pdVar29 & 0x100000) != 0)) &&
+       (IROperand__setModifierBits((int)inst + 0xa4,2,1), (*descriptor & 0x400000) != 0)) {
       *pdVar29 = *pdVar29 & 0xffefffff;
     }
     *(uint *)((int)inst + 0x9c) =
          uVar22 >> 0xf & 1 ^ 1 |
          (uVar22 >> 0xb & 1 ^ 1) << 8 |
          (uVar22 >> 7 & 1 ^ 1) << 0x10 | (uVar22 >> 3 & 1 ^ 1) << 0x18;
-    DList__pushBack(param_2,inst);
-    if ((*param_4 & 0x400000) != 0) {
+    DList__pushBack(list,inst);
+    if ((*descriptor & 0x400000) != 0) {
       *pdVar29 = *pdVar29 & 0xffff7777;
     }
     uVar24 = 4;
   }
 code_r0x000fd490:
   if (bVar3) {
-    *(short *)((int)param_4 + 2) = (short)pdVar31;
-    *param_4 = uVar24 << 0x10 | *param_4 & 0xffc0ffff;
+    *(short *)((int)descriptor + 2) = (short)pdVar31;
+    *descriptor = uVar24 << 0x10 | *descriptor & 0xffc0ffff;
   }
   return;
 }
@@ -5029,24 +5029,95 @@ int FUN_000fd50c(param_1, param_2, param_3, param_4, param_5, vector)
 }
 
 /* FUN_000fd5c8 @ 0xfd5c8 (408 bytes) */
-int FUN_000fd5c8(param_1, param_2)
-  int param_1;
-  uint ******param_2;
+int FUN_000fd5c8(program, ilReader)
+  int program;
+  uint ******ilReader;
 {
+  bool constantFlag;
+  bool notLastIteration;
+  uint bitmapByteOffset2;
+  uint sourceRegisterIndex;
+  uint conditionStackTopIndex;
+  uint templateToken;
+  uint ilRegisterIndex2;
+  uint conditionStackCount;
+  uint bitmapByteOffset;
+  uint ilRegisterType;
+  uint *swizzleTable;
+  uint *****ifStackTopIndex;
+  uint *****ifStackCount;
+  uint *****trailingToken;
+  uint *****modifierTokenWord;
+  uint *****firstTokenWord;
+  uint ******destinationToken;
+  uint ******tokenWords;
+  void *cmp1SInst;
+  void *fetchTextureMapGradientsInst;
+  void *mulFloatInst;
+  void *roundNearestEvenInst;
+  void *ldBufferInst;
+  void *setGradientsVInst;
+  void *mulAddFloatInst;
+  void *recipIEEEInst;
+  void *cubeInst;
+  void *int2FInst;
+  void *getResourceInst;
+  void *movFloatInst;
+  undefined4 *vectorElementSlot3;
+  undefined4 *blockAllocation4;
+  undefined4 *blockAllocation3;
+  undefined4 *blockAllocation2;
+  undefined4 *vectorAllocation2;
+  undefined4 *instObject;
+  undefined4 *instAllocation;
+  undefined4 *vectorElementSlot;
+  undefined4 *blockAllocation;
+  int *setGradientsHInst;
+  int *stackElement;
+  int *movInst;
+  int *mulAddInst;
+  int *virtualRegister2;
+  int *hwDescription;
+  int registerMap2;
+  int newTempIndex2;
+  int operandRecord2;
+  int registerIndex;
+  int compiler;
+  int newTempIndex;
+  int operandRecord;
+  int laneSelect;
+  int registerFile2;
+  int ilOpcode;
   bool bVar1;
+  undefined4 irOpcode;
+  undefined4 enclosingLoopHeader;
+  undefined4 ifConditionInst;
+  undefined4 comparisonKind;
+  undefined4 selectWord;
+  undefined4 remappedSelect;
+  undefined4 continueTargetBlock;
+  undefined4 breakTargetBlock;
+  undefined4 opcodeRecordTable;
+  undefined4 registerMap;
+  undefined4 virtualRegister;
+  undefined4 registerInfo;
+  undefined4 registerFile;
+  undefined4 translationKind;
+  undefined4 compilerArenaA;
+  undefined4 vectorStorage;
   bool bVar2;
   bool bVar3;
-  byte bVar4;
+  byte ilRegisterIndex;
   float fVar5;
-  short sVar6;
-  ushort uVar7;
-  undefined *puVar8;
+  short registerIndex2;
+  ushort saturateBit;
+  undefined *remapTable;
   undefined *puVar9;
   uint uVar10;
   uint *****pppppuVar11;
   uint *puVar12;
-  undefined4 *allocation;
-  undefined4 *puVar14;
+  undefined4 *puVar13;
+  undefined4 *vectorAllocation;
   uint *****pppppuVar15;
   void *pvVar16;
   uint uVar17;
@@ -5055,24 +5126,24 @@ int FUN_000fd5c8(param_1, param_2)
   int iVar20;
   int iVar21;
   int iVar22;
-  int operandRecord;
+  int iVar23;
   undefined4 *puVar24;
   int iVar25;
   undefined2 *puVar26;
   undefined4 uVar27;
   undefined2 uVar31;
-  undefined4 *puVar28;
-  undefined4 *puVar29;
+  undefined4 *vectorElementSlot2;
+  undefined4 *blockObject;
   uint ****ppppuVar30;
   undefined4 *puVar32;
-  uint ******in_r6;
-  uint ******in_r7;
-  uint ******in_r8;
+  uint ******argR6;
+  uint ******argR7;
+  uint ******argR8;
   uint ***pppuVar33;
   int iVar34;
   uint *puVar35;
   int *piVar36;
-  uint ******ppppppuVar37;
+  uint ******loopStackData;
   uint ******ppppppuVar38;
   uint ******ppppppuVar39;
   uint ******ppppppuVar40;
@@ -5081,7 +5152,7 @@ int FUN_000fd5c8(param_1, param_2)
   int iVar43;
   uint uVar44;
   uint ****ppppuVar45;
-  undefined4 arena;
+  undefined4 compilerArenaB;
   int iVar47;
   uint ******ppppppuVar48;
   uint ******ppppppuVar49;
@@ -5091,8 +5162,8 @@ int FUN_000fd5c8(param_1, param_2)
   undefined1 *puVar53;
   double dVar54;
   uint ****local_188;
-  uint *****local_184;
-  uint *****local_180;
+  uint *****previousBlock;
+  uint *****currentBlock;
   int *local_17c;
   undefined4 local_178;
   uint ****local_174;
@@ -5100,17 +5171,17 @@ int FUN_000fd5c8(param_1, param_2)
   /* issue #64 live-repro (2nd instance, same function): DListNode__init(local_6c=auStack_16c), two lines
    * below DListNode__init(local_68=auStack_154) which already got this fix, writes the same 6-word/0x18-byte
    * sentinel-list header (see the comment on auStack_154 just below) - word[2] (self-referential "next",
-   * param_1[2] = param_1+3) is what `local_164`'s four loops read as the list head, same shape as
+   * program[2] = program+3) is what `local_164`'s four loops read as the list head, same shape as
    * local_14c's. auStack_16c was declared only 8 bytes with local_164 as a separate scalar 8 bytes in;
    * live-confirmed the pointer this yields (local_164, still holding the list head's own address) is a
-   * real allocation but reads back as MallocPreScribble's 0xAA fill - i.e. never received the init write,
+   * real puVar13 but reads back as MallocPreScribble's 0xAA fill - i.e. never received the init write,
    * same root cause as local_14c's, just missed by that fix since it's a second, independent instance.
    * Merged into one 0x18-byte buffer the same way, aliased back to the original name. */
   unsigned char auStack_16c [0x18];
 #define local_164 (*(int *)(auStack_16c + 0x08))
-  /* issue #64 live-repro: DListNode__init (called below via local_68=auStack_154) writes param_1[0]
-   * through param_1[5] - 6 words, 0x18 bytes - into whatever auStack_154 points to, including a
-   * self-referential empty-list-head init at param_1[2] (offset 8: *(auStack_154+8) = auStack_154+12).
+  /* issue #64 live-repro: DListNode__init (called below via local_68=auStack_154) writes program[0]
+   * through program[5] - 6 words, 0x18 bytes - into whatever auStack_154 points to, including a
+   * self-referential empty-list-head init at program[2] (offset 8: *(auStack_154+8) = auStack_154+12).
    * auStack_154 was declared only 8 bytes; local_14c (used as a list head in four separate loops
    * later in this function) sits exactly at that offset-8 slot by its own hex name (0x154-0x14c=8),
    * and the 12 bytes after it (up to local_13c, 0x154-0x13c=0x18) are the same buffer's remaining
@@ -5141,9 +5212,9 @@ int FUN_000fd5c8(param_1, param_2)
   int local_bc;
   int local_b8;
   undefined4 local_b4;
-  uint *local_b0;
+  uint *conditionStack;
   int local_ac;
-  uint *****local_a8;
+  uint *****ifStack;
   uint *****local_a4;
   undefined4 *local_a0;
   uint local_9c;
@@ -5165,82 +5236,82 @@ int FUN_000fd5c8(param_1, param_2)
   undefined *local_5c;
   uint ****local_58;
   
-  iVar34 = *(int *)(*(int *)(param_1 + 8) + 0x30c);
+  iVar34 = *(int *)(*(int *)(program + 8) + 0x30c);
   local_9c = 0;
   local_98 = 0;
   *(uint *)(iVar34 + 8) = *(uint *)(iVar34 + 8) & 0xffffffdf;
   local_94 = 0;
-  arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
-  iVar34 = *(int *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 0x50);
+  compilerArenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  iVar34 = *(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0x50);
   uVar10 = iVar34 + 0x1fU >> 5;
-  allocation = (undefined4 *)Arena__alloc(arena,uVar10 * 4 + 0xc);
-  local_a0 = allocation + 1;
-  *allocation = arena;
-  allocation[1] = uVar10;
-  allocation[2] = iVar34;
+  puVar13 = (undefined4 *)Arena__alloc(compilerArenaB,uVar10 * 4 + 0xc);
+  local_a0 = puVar13 + 1;
+  *puVar13 = compilerArenaB;
+  puVar13[1] = uVar10;
+  puVar13[2] = iVar34;
   local_90 = 0;
   local_8c = 0;
   local_88 = (uint *****)0x0;
   local_84 = (uint *****)0x0;
   local_80 = 0;
   if (uVar10 != 0) {
-    allocation = local_a0;
+    puVar13 = local_a0;
     if (uVar10 == 0) {
       uVar10 = 1;
     }
     do {
       uVar10 = uVar10 - 1;
-      allocation[2] = 0;
-      allocation = allocation + 1;
+      puVar13[2] = 0;
+      puVar13 = puVar13 + 1;
     } while (uVar10 != 0);
   }
-  arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
-  allocation = (undefined4 *)Arena__alloc(arena,0x14);
-  ppppppuVar37 = (uint ******)(allocation + 1);
-  *allocation = arena;
-  allocation[1] = 2;
-  allocation[4] = arena;
-  allocation[2] = 0;
-  arena = Arena__alloc(arena,8);
-  allocation[3] = arena;
+  compilerArenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  puVar13 = (undefined4 *)Arena__alloc(compilerArenaB,0x14);
+  loopStackData = (uint ******)(puVar13 + 1);
+  *puVar13 = compilerArenaB;
+  puVar13[1] = 2;
+  puVar13[4] = compilerArenaB;
+  puVar13[2] = 0;
+  vectorStorage = Arena__alloc(compilerArenaB,8);
+  puVar13[3] = vectorStorage;
   local_188 = (uint ****)0x0;
-  arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
-  puVar14 = (undefined4 *)Arena__alloc(arena,0x14);
-  local_a8 = (uint *****)(puVar14 + 1);
-  *puVar14 = arena;
-  puVar14[1] = 2;
-  puVar14[4] = arena;
-  puVar14[2] = 0;
-  pppppuVar15 = (uint *****)Arena__alloc(arena,8);
-  local_a8[2] = (uint ****)pppppuVar15;
-  arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
-  puVar14 = (undefined4 *)Arena__alloc(arena,0x14);
-  local_b0 = puVar14 + 1;
-  *puVar14 = arena;
-  puVar14[1] = 2;
-  puVar14[2] = 0;
-  puVar14[4] = arena;
-  uVar10 = Arena__alloc(arena,8);
-  local_b0[2] = uVar10;
-  arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
-  puVar14 = (undefined4 *)Arena__alloc(arena,0x14);
-  puVar14[1] = 2;
-  *puVar14 = arena;
-  puVar14[2] = 0;
-  puVar14[4] = arena;
-  arena = Arena__alloc(arena,8);
-  puVar14[3] = arena;
-  *(undefined4 **)(param_1 + 0x414) = puVar14 + 1;
-  arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
-  puVar14 = (undefined4 *)Arena__alloc(arena,0x14);
-  puVar14[1] = 2;
-  *puVar14 = arena;
-  puVar14[2] = 0;
-  puVar14[4] = arena;
-  arena = Arena__alloc(arena,8);
-  puVar14[3] = arena;
+  compilerArenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  vectorAllocation = (undefined4 *)Arena__alloc(compilerArenaB,0x14);
+  ifStack = (uint *****)(vectorAllocation + 1);
+  *vectorAllocation = compilerArenaB;
+  vectorAllocation[1] = 2;
+  vectorAllocation[4] = compilerArenaB;
+  vectorAllocation[2] = 0;
+  pppppuVar15 = (uint *****)Arena__alloc(compilerArenaB,8);
+  ifStack[2] = (uint ****)pppppuVar15;
+  compilerArenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  vectorAllocation = (undefined4 *)Arena__alloc(compilerArenaB,0x14);
+  conditionStack = vectorAllocation + 1;
+  *vectorAllocation = compilerArenaB;
+  vectorAllocation[1] = 2;
+  vectorAllocation[2] = 0;
+  vectorAllocation[4] = compilerArenaB;
+  uVar10 = Arena__alloc(compilerArenaB,8);
+  conditionStack[2] = uVar10;
+  compilerArenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  vectorAllocation = (undefined4 *)Arena__alloc(compilerArenaB,0x14);
+  vectorAllocation[1] = 2;
+  *vectorAllocation = compilerArenaB;
+  vectorAllocation[2] = 0;
+  vectorAllocation[4] = compilerArenaB;
+  vectorStorage = Arena__alloc(compilerArenaB,8);
+  vectorAllocation[3] = vectorStorage;
+  *(undefined4 **)(program + 0x414) = vectorAllocation + 1;
+  compilerArenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  vectorAllocation = (undefined4 *)Arena__alloc(compilerArenaB,0x14);
+  vectorAllocation[1] = 2;
+  *vectorAllocation = compilerArenaB;
+  vectorAllocation[2] = 0;
+  vectorAllocation[4] = compilerArenaB;
+  vectorStorage = Arena__alloc(compilerArenaB,8);
+  vectorAllocation[3] = vectorStorage;
   local_5c = &DAT_001ad5d8;
-  local_184 = *(uint ******)(param_1 + 0x3a0);
+  previousBlock = *(uint ******)(program + 0x3a0);
   local_128 = 0;
   local_170 = (uint *****)0x1010101;
   local_174 = (uint ****)0xffffffff;
@@ -5248,51 +5319,51 @@ int FUN_000fd5c8(param_1, param_2)
   local_134 = 0;
   local_130 = 0;
   local_12c = 0;
-  arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-  local_13c = puVar14 + 1;
-  puVar14 = (undefined4 *)Arena__alloc(arena,0x130);
-  *puVar14 = arena;
-  ppppppuVar49 = (uint ******)(puVar14 + 1);
-  Block__ctor_ea020(ppppppuVar49,*(undefined4 *)(param_1 + 8));
-  local_180 = (uint *****)ppppppuVar49;
-  FUN_000ec3ac(param_1,local_184,ppppppuVar49);
+  compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+  local_13c = vectorAllocation + 1;
+  blockAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x130);
+  *blockAllocation = compilerArenaA;
+  ppppppuVar49 = (uint ******)(blockAllocation + 1);
+  Block__ctor_ea020(ppppppuVar49,*(undefined4 *)(program + 8));
+  currentBlock = (uint *****)ppppppuVar49;
+  FUN_000ec3ac(program,previousBlock,ppppppuVar49);
   local_6c = auStack_16c;
-  Block__connect(local_184,local_180);
+  Block__connect(previousBlock,currentBlock);
   local_68 = auStack_154;
-  local_184 = local_180;
+  previousBlock = currentBlock;
   DListNode__init(local_6c);
   DListNode__init(local_68);
-  *(undefined4 *)(param_1 + 0x3d4) = 0;
-  *(undefined4 *)(param_1 + 0x3e4) = 0;
-  ((int (*)())FUN_000fb230)(param_1,param_2);
+  *(undefined4 *)(program + 0x3d4) = 0;
+  *(undefined4 *)(program + 0x3e4) = 0;
+  ((int (*)())FUN_000fb230)(program,ilReader);
   local_a4 = (uint *****)0x0;
   local_ac = 0;
 switchD_000fdaf0_caseD_2:
-  iVar34 = FUN_000e5e70(param_2);
+  iVar34 = FUN_000e5e70(ilReader);
   if (iVar34 == 0) {
 code_r0x00103c40:
-    FUN_000ec728(param_1);
-    Block__connect(local_180,*(undefined4 *)(param_1 + 0x3a8));
-    *(uint *)(param_1 + 0x30) = *(uint *)(param_1 + 0x30) | 2;
-    FUN_0012e8c0(param_1,*(undefined4 *)(param_1 + 0x3a0),*(undefined4 *)(param_1 + 0x3a8));
-    if ((uint ******)local_a8 != (uint ******)0x0) {
-      Arena__free(local_a8[3],local_a8[2]);
-      Arena__free(local_a8[-1],local_a8 + -1);
+    FUN_000ec728(program);
+    Block__connect(currentBlock,*(undefined4 *)(program + 0x3a8));
+    *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 2;
+    FUN_0012e8c0(program,*(undefined4 *)(program + 0x3a0),*(undefined4 *)(program + 0x3a8));
+    if ((uint ******)ifStack != (uint ******)0x0) {
+      Arena__free(ifStack[3],ifStack[2]);
+      Arena__free(ifStack[-1],ifStack + -1);
     }
-    if (ppppppuVar37 != (uint ******)0x0) {
-      Arena__free(allocation[4],allocation[3]);
-      Arena__free(*allocation,allocation);
+    if (loopStackData != (uint ******)0x0) {
+      Arena__free(puVar13[4],puVar13[3]);
+      Arena__free(*puVar13,puVar13);
     }
     if (local_a0 != (undefined4 *)0x0) {
       Arena__free(local_a0[-1],local_a0 + -1);
     }
-    Arena__free(*(undefined4 *)(*(int *)(param_1 + 8) + 0x378),*(undefined4 *)(param_1 + 0x78));
-    FUN_0011e894(param_1);
+    Arena__free(*(undefined4 *)(*(int *)(program + 8) + 0x378),*(undefined4 *)(program + 0x78));
+    FUN_0011e894(program);
     return;
   }
-  iVar34 = FUN_000e43ec(param_2);
+  iVar34 = FUN_000e43ec(ilReader);
   if (iVar34 != 0) {
-    iVar34 = *(int *)(param_1 + 0x3c4);
+    iVar34 = *(int *)(program + 0x3c4);
     iVar43 = 0;
     local_17c = (int *)0x0;
     for (uVar10 = 1; uVar10 <= *(uint *)(iVar34 + 4); uVar10 = uVar10 + 1) {
@@ -5300,8 +5371,8 @@ code_r0x00103c40:
       if ((local_17c[5] & 1U) != 0) {
         (**(code **)(*local_17c + 0x68))(local_17c);
         piVar18 = local_17c;
-        pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-        IRInst__setOperandRef(pvVar16,1,local_17c[0x29]);
+        movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+        IRInst__setOperandRef(movFloatInst,1,local_17c[0x29]);
         puVar12 = local_13c;
         uVar44 = piVar18[0x50];
         if (uVar44 < *local_13c) {
@@ -5310,136 +5381,136 @@ code_r0x00103c40:
             _memset(uVar17 * 4 + local_13c[2],0,(uVar44 - uVar17) * 4 + 4);
             puVar12[1] = uVar44 + 1;
           }
-          puVar14 = (undefined4 *)(uVar44 * 4 + puVar12[2]);
+          vectorElementSlot = (undefined4 *)(uVar44 * 4 + puVar12[2]);
         }
         else {
-          puVar14 = (undefined4 *)Vector__elementRefGrow(local_13c,uVar44);
+          vectorElementSlot = (undefined4 *)Vector__elementRefGrow(local_13c,uVar44);
         }
-        *puVar14 = pvVar16;
-        iVar34 = *(int *)(param_1 + 0x3c4);
+        *vectorElementSlot = movFloatInst;
+        iVar34 = *(int *)(program + 0x3c4);
       }
       iVar43 = iVar43 + 4;
     }
-    piVar18 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
-    (**(code **)(*piVar18 + 0x17c))(piVar18,param_1);
-    FUN_000e5e70(param_2);
+    hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
+    (**(code **)(*hwDescription + 0x17c))(hwDescription,program);
+    FUN_000e5e70(ilReader);
   }
-  ppppppuVar49 = param_2 + 0x23;
-  *(undefined4 *)(param_1 + 0x47c) = 0;
-  iVar34 = FUN_000e4408(param_2);
-  if (iVar34 == 0x52) {
-    *(uint *)(param_1 + 0x30) = *(uint *)(param_1 + 0x30) | 0x100;
+  tokenWords = ilReader + 0x23;
+  *(undefined4 *)(program + 0x47c) = 0;
+  ilOpcode = FUN_000e4408(ilReader);
+  if (ilOpcode == 0x52) {
+    *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 0x100;
   }
-  else if (((iVar34 == 0x84) && ((*(uint *)(param_1 + 0x30) & 0x40000) != 0)) &&
-          ((*(uint *)(param_1 + 0x30) & 0x200000) == 0)) goto code_r0x00103c40;
-  iVar43 = *(int *)(param_1 + 8);
-  piVar18 = *(int **)(iVar43 + 0x30c);
-  iVar47 = piVar18[3];
-  arena = ((int (*)())FUN_000f89a4)(iVar34,iVar47);
-  switch(arena) {
+  else if (((ilOpcode == 0x84) && ((*(uint *)(program + 0x30) & 0x40000) != 0)) &&
+          ((*(uint *)(program + 0x30) & 0x200000) == 0)) goto code_r0x00103c40;
+  compiler = *(int *)(program + 8);
+  hwDescription = *(int **)(compiler + 0x30c);
+  iVar47 = hwDescription[3];
+  translationKind = ((int (*)())FUN_000f89a4)(ilOpcode,iVar47);
+  switch(translationKind) {
   case 0:
   case 1:
-    switch(iVar34) {
+    switch(ilOpcode) {
     case 0x14:
-      if ((*(uint *)(param_1 + 0x30) & 0x4000) == 0) {
-        ppppuVar45 = *param_2[0x1b];
-        iVar34 = FUN_000ec208(param_1,(uint)*ppppuVar45 >> 0x10 & 0x3f);
-        iVar43 = *(int *)(param_1 + 8);
-        if (((((uint)*ppppuVar45 & 0x3f0000) == 0x100000) && (iVar43 != 0)) &&
-           ((*(uint *)(*(int *)(iVar43 + 0x30c) + 8) & 0x80) != 0)) {
+      if ((*(uint *)(program + 0x30) & 0x4000) == 0) {
+        ppppuVar45 = *ilReader[0x1b];
+        registerFile2 = FUN_000ec208(program,(uint)*ppppuVar45 >> 0x10 & 0x3f);
+        compiler = *(int *)(program + 8);
+        if (((((uint)*ppppuVar45 & 0x3f0000) == 0x100000) && (compiler != 0)) &&
+           ((*(uint *)(*(int *)(compiler + 0x30c) + 8) & 0x80) != 0)) {
           iVar47 = 0xf;
         }
         else {
           iVar47 = (int)*(short *)((int)ppppuVar45 + 2);
         }
-        if (((((uint)*param_2[0x1b][1] & 0x3f0000) == 0x100000) && (iVar43 != 0)) &&
-           ((*(uint *)(*(int *)(iVar43 + 0x30c) + 8) & 0x80) != 0)) {
-          iVar43 = 0xf;
+        if (((((uint)*ilReader[0x1b][1] & 0x3f0000) == 0x100000) && (compiler != 0)) &&
+           ((*(uint *)(*(int *)(compiler + 0x30c) + 8) & 0x80) != 0)) {
+          registerIndex = 0xf;
         }
         else {
-          iVar43 = (int)*(short *)((int)param_2[0x1b][1] + 2);
+          registerIndex = (int)*(short *)((int)ilReader[0x1b][1] + 2);
         }
-        if (iVar34 == 0x15) {
+        if (registerFile2 == 0x15) {
 code_r0x000fed00:
-          if ((*(uint *)(param_1 + 0x30) & 0x4000) == 0) {
-            *(int *)(param_1 + 1000) = iVar47;
-            *(undefined4 *)(param_1 + 0x3e4) = 1;
-            *(int *)(param_1 + 0x3ec) = iVar43 + 1;
-            *(int *)(param_1 + 0x3f4) = iVar34;
-            if (((*(uint *)(param_1 + 0x30) & 1) != 0) && (iVar47 < iVar43 + 1)) {
+          if ((*(uint *)(program + 0x30) & 0x4000) == 0) {
+            *(int *)(program + 1000) = iVar47;
+            *(undefined4 *)(program + 0x3e4) = 1;
+            *(int *)(program + 0x3ec) = registerIndex + 1;
+            *(int *)(program + 0x3f4) = registerFile2;
+            if (((*(uint *)(program + 0x30) & 1) != 0) && (iVar47 < registerIndex + 1)) {
               do {
-                in_r6 = (uint ******)0x0;
-                FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),iVar34,iVar47,0);
+                argR6 = (uint ******)0x0;
+                FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile2,iVar47,0);
                 iVar47 = iVar47 + 1;
-              } while (iVar47 < *(int *)(param_1 + 0x3ec));
+              } while (iVar47 < *(int *)(program + 0x3ec));
             }
           }
           goto switchD_000fdaf0_caseD_2;
         }
-        if (iVar34 < 0x16) {
-          if (iVar34 != 0x14) goto switchD_000fdaf0_caseD_2;
+        if (registerFile2 < 0x16) {
+          if (registerFile2 != 0x14) goto switchD_000fdaf0_caseD_2;
         }
-        else if (iVar34 != 0x1a) {
-          if (iVar34 == 0x24) goto code_r0x000fed00;
+        else if (registerFile2 != 0x1a) {
+          if (registerFile2 == 0x24) goto code_r0x000fed00;
           goto switchD_000fdaf0_caseD_2;
         }
-        *(int *)(param_1 + 1000) = iVar47;
-        *(undefined4 *)(param_1 + 0x3e4) = 1;
-        *(int *)(param_1 + 0x3ec) = iVar43 + 1;
-        *(int *)(param_1 + 0x3f4) = iVar34;
-        if (((*(uint *)(param_1 + 0x30) & 1) != 0) && (iVar47 < iVar43 + 1)) {
+        *(int *)(program + 1000) = iVar47;
+        *(undefined4 *)(program + 0x3e4) = 1;
+        *(int *)(program + 0x3ec) = registerIndex + 1;
+        *(int *)(program + 0x3f4) = registerFile2;
+        if (((*(uint *)(program + 0x30) & 1) != 0) && (iVar47 < registerIndex + 1)) {
           do {
-            in_r6 = (uint ******)0x0;
-            FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),iVar34,iVar47,0);
+            argR6 = (uint ******)0x0;
+            FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile2,iVar47,0);
             iVar47 = iVar47 + 1;
-          } while (iVar47 < *(int *)(param_1 + 0x3ec));
+          } while (iVar47 < *(int *)(program + 0x3ec));
         }
       }
     default:
       goto switchD_000fdaf0_caseD_2;
     case 0x16:
     case 0x18:
-      if ((*(uint *)(*(int *)(iVar43 + 0x6c4) + 0x30) & 0x2000) != 0) {
-        pppuVar42 = **param_2[0x19];
-        uVar10 = (uint)pppuVar42 >> 0x10 & 0x3f;
-        if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (iVar43 != 0)) &&
-           ((piVar18[2] & 0x80U) != 0)) {
+      if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0x2000) != 0) {
+        pppuVar42 = **ilReader[0x19];
+        ilRegisterType = (uint)pppuVar42 >> 0x10 & 0x3f;
+        if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (compiler != 0)) &&
+           ((hwDescription[2] & 0x80U) != 0)) {
           ppppppuVar19 = (uint ******)((int)((unsigned char *)0xc) + 3);
         }
         else {
-          ppppppuVar19 = (uint ******)(int)*(short *)((int)*param_2[0x19] + 2);
+          ppppppuVar19 = (uint ******)(int)*(short *)((int)*ilReader[0x19] + 2);
         }
-        arena = FUN_000ec208(param_1,uVar10);
-        in_r6 = (uint ******)FUN_000ec2a0(param_1,uVar10);
-        iVar34 = FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),arena,ppppppuVar19,0);
+        registerFile = FUN_000ec208(program,ilRegisterType);
+        argR6 = (uint ******)FUN_000ec2a0(program,ilRegisterType);
+        iVar34 = FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile,ppppppuVar19,0);
         iVar34 = *(int *)(iVar34 + 0x38);
-        FUN_001041d0(iVar34,0,(uint)*ppppppuVar49 >> 0x10 & 3,in_r6,ppppppuVar19);
-        FUN_001041d0(iVar34,1,(uint)*ppppppuVar49 >> 0x12 & 3,in_r6,ppppppuVar19);
-        FUN_001041d0(iVar34,2,(uint)*ppppppuVar49 >> 0x14 & 3,in_r6,ppppppuVar19);
-        in_r7 = ppppppuVar19;
-        FUN_001041d0(iVar34,3,(uint)*ppppppuVar49 >> 0x16 & 3,in_r6,ppppppuVar19);
-        pppppuVar15 = *ppppppuVar49;
-        if (((uint)pppppuVar15 & 0x1000000) != 0) {
+        FUN_001041d0(iVar34,0,(uint)*tokenWords >> 0x10 & 3,argR6,ppppppuVar19);
+        FUN_001041d0(iVar34,1,(uint)*tokenWords >> 0x12 & 3,argR6,ppppppuVar19);
+        FUN_001041d0(iVar34,2,(uint)*tokenWords >> 0x14 & 3,argR6,ppppppuVar19);
+        argR7 = ppppppuVar19;
+        FUN_001041d0(iVar34,3,(uint)*tokenWords >> 0x16 & 3,argR6,ppppppuVar19);
+        firstTokenWord = *tokenWords;
+        if (((uint)firstTokenWord & 0x1000000) != 0) {
           *(uint *)(iVar34 + 0x13c) = *(uint *)(iVar34 + 0x13c) | 1;
-          pppppuVar15 = *ppppppuVar49;
+          firstTokenWord = *tokenWords;
         }
         *(uint *******)(iVar34 + 0x148) = ppppppuVar19;
-        *(uint *)(iVar34 + 0x140) = (uint)pppppuVar15 >> 0x19 & 1;
-        *(undefined4 *)(iVar34 + 0x144) = arena;
+        *(uint *)(iVar34 + 0x140) = (uint)firstTokenWord >> 0x19 & 1;
+        *(undefined4 *)(iVar34 + 0x144) = registerFile;
       }
       goto switchD_000fdaf0_caseD_2;
     case 0x17:
-      ppppppuVar19 = (uint ******)FUN_000ec27c(param_1,(uint)*ppppppuVar49 >> 0x10 & 0x1f);
-      ppppppuVar38 = (uint ******)((uint)*ppppppuVar49 >> 0x15 & 0xff);
-      if ((int)*ppppppuVar49 < 0) {
-        pppppuVar15 = param_2[0x24];
-        uVar17 = (uint)pppppuVar15 >> 9 & 1;
-        uVar10 = (uint)pppppuVar15 >> 8 & 1;
-        uVar44 = (uint)pppppuVar15 >> 10 & 1;
+      ppppppuVar19 = (uint ******)FUN_000ec27c(program,(uint)*tokenWords >> 0x10 & 0x1f);
+      ppppppuVar38 = (uint ******)((uint)*tokenWords >> 0x15 & 0xff);
+      if ((int)*tokenWords < 0) {
+        modifierTokenWord = ilReader[0x24];
+        uVar17 = (uint)modifierTokenWord >> 9 & 1;
+        uVar10 = (uint)modifierTokenWord >> 8 & 1;
+        uVar44 = (uint)modifierTokenWord >> 10 & 1;
         local_178 = (uint ******)
-                    (CONCAT31(CONCAT21(CONCAT11((char)pppppuVar15,(char)((uint)pppppuVar15 >> 2)),
-                                       (char)((uint)pppppuVar15 >> 4)),
-                              (char)((uint)pppppuVar15 >> 6)) & 0x3030303);
+                    (CONCAT31(CONCAT21(CONCAT11((char)modifierTokenWord,(char)((uint)modifierTokenWord >> 2)),
+                                       (char)((uint)modifierTokenWord >> 4)),
+                              (char)((uint)modifierTokenWord >> 6)) & 0x3030303);
       }
       else {
         uVar10 = 0;
@@ -5447,21 +5518,21 @@ code_r0x000fed00:
         uVar17 = 0;
         local_178 = (uint ******)0x3030303;
       }
-      iVar43 = (int)*(short *)((int)*param_2[0x19] + 2);
-      arena = FUN_000ec208(param_1,(uint)**param_2[0x19] >> 0x10 & 0x3f);
-      iVar34 = *(int *)(param_1 + 1000);
-      if (iVar43 <= *(int *)(param_1 + 1000)) {
-        iVar34 = iVar43;
+      registerIndex = (int)*(short *)((int)*ilReader[0x19] + 2);
+      registerFile = FUN_000ec208(program,(uint)**ilReader[0x19] >> 0x10 & 0x3f);
+      iVar34 = *(int *)(program + 1000);
+      if (registerIndex <= *(int *)(program + 1000)) {
+        iVar34 = registerIndex;
       }
-      iVar47 = *(int *)(param_1 + 0x3ec);
-      *(int *)(param_1 + 1000) = iVar34;
-      if (iVar47 <= iVar43) {
-        iVar47 = iVar43 + 1;
+      iVar47 = *(int *)(program + 0x3ec);
+      *(int *)(program + 1000) = iVar34;
+      if (iVar47 <= registerIndex) {
+        iVar47 = registerIndex + 1;
       }
-      *(int *)(param_1 + 0x3ec) = iVar47;
-      *(undefined4 *)(param_1 + 0x3f4) = 0x24;
-      in_r6 = (uint ******)0x0;
-      iVar34 = FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),arena,iVar43,0);
+      *(int *)(program + 0x3ec) = iVar47;
+      *(undefined4 *)(program + 0x3f4) = 0x24;
+      argR6 = (uint ******)0x0;
+      iVar34 = FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile,registerIndex,0);
       iVar34 = *(int *)(iVar34 + 0x38);
       if (uVar10 == 0) {
         *(uint *)(iVar34 + 0x13c) = *(uint *)(iVar34 + 0x13c) | 1;
@@ -5476,108 +5547,108 @@ code_r0x000fed00:
       iVar43 = 0;
       do {
         if (*(byte *)(iVar43 + (int)local_70) != 0) {
-          in_r6 = ppppppuVar19;
-          in_r7 = ppppppuVar38;
+          argR6 = ppppppuVar19;
+          argR7 = ppppppuVar38;
           FUN_001041d0(iVar34,iVar43,(uint)*(byte *)(iVar43 + (int)local_70),ppppppuVar19,
                        ppppppuVar38);
         }
-        bVar1 = iVar43 != 3;
+        notLastIteration = iVar43 != 3;
         iVar43 = iVar43 + 1;
-      } while (bVar1);
+      } while (notLastIteration);
       goto switchD_000fdaf0_caseD_2;
     case 0x19:
-      bVar4 = *(byte *)((int)param_2 + 0x8d);
-      pppppuVar15 = *ppppppuVar49;
-      iVar34 = (uint)bVar4 * 0xc;
-      *(uint *)(*(int *)(param_1 + 0x78) + iVar34) = (uint)pppppuVar15 >> 0x1b & 3;
-      if (*(int *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 0x50) < (int)(uint)bVar4) {
-        Compiler__fail(*(int *)(param_1 + 8),7);
+      ilRegisterIndex = *(byte *)((int)ilReader + 0x8d);
+      firstTokenWord = *tokenWords;
+      iVar34 = (uint)ilRegisterIndex * 0xc;
+      *(uint *)(*(int *)(program + 0x78) + iVar34) = (uint)firstTokenWord >> 0x1b & 3;
+      if (*(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0x50) < (int)(uint)ilRegisterIndex) {
+        Compiler__fail(*(int *)(program + 8),7);
       }
-      uVar10 = bVar4 >> 3 & 0x1c;
-      *(uint *)((int)local_a0 + uVar10 + 8) =
-           1 << (bVar4 & 0x1f) | *(uint *)((int)local_a0 + uVar10 + 8);
-      *(uint *)(iVar34 + *(int *)(param_1 + 0x78) + 8) = (uint)*ppppppuVar49 >> 0x1d & 1;
-      piVar18 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
-      iVar43 = (**(code **)(*piVar18 + 0x48))(piVar18,param_1,(uint)pppppuVar15 >> 0x18 & 7);
+      bitmapByteOffset = ilRegisterIndex >> 3 & 0x1c;
+      *(uint *)((int)local_a0 + bitmapByteOffset + 8) =
+           1 << (ilRegisterIndex & 0x1f) | *(uint *)((int)local_a0 + bitmapByteOffset + 8);
+      *(uint *)(iVar34 + *(int *)(program + 0x78) + 8) = (uint)*tokenWords >> 0x1d & 1;
+      hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
+      iVar43 = (**(code **)(*hwDescription + 0x48))(hwDescription,program,(uint)firstTokenWord >> 0x18 & 7);
       if (iVar43 != 0) {
-        *(int *)(iVar34 + *(int *)(param_1 + 0x78) + 4) = iVar43;
+        *(int *)(iVar34 + *(int *)(program + 0x78) + 4) = iVar43;
       }
       goto switchD_000fdaf0_caseD_2;
     case 0x1a:
       DListNode__init(&local_124);
-      pppppuVar15 = *ppppppuVar49;
-      in_r7 = (uint ******)0x4050607;
+      firstTokenWord = *tokenWords;
+      argR7 = (uint ******)0x4050607;
       uVar10 = 0;
-      if ((int)pppppuVar15 < 0) {
-        pppppuVar52 = param_2[0x24];
+      if ((int)firstTokenWord < 0) {
+        pppppuVar52 = ilReader[0x24];
         bVar1 = ((uint)pppppuVar52 & 3) != 0;
-        in_r7 = *(uint *******)(local_5c + -0x2bf8);
+        argR7 = *(uint *******)(local_5c + -0x2bf8);
         if (bVar1) {
-          in_r7 = (uint ******)((uint)in_r7 & 0xffffff | 0x4000000);
+          argR7 = (uint ******)((uint)argR7 & 0xffffff | 0x4000000);
         }
         uVar10 = (uint)bVar1;
         if (((uint)pppppuVar52 & 0xc) != 0) {
           iVar34 = uVar10 + 4;
           uVar10 = uVar10 + 1;
-          in_r7 = (uint ******)(iVar34 * 0x10000 | (uint)in_r7 & 0xff00ffff);
+          argR7 = (uint ******)(iVar34 * 0x10000 | (uint)argR7 & 0xff00ffff);
         }
         if (((uint)pppppuVar52 & 0x30) != 0) {
           iVar34 = uVar10 + 4;
           uVar10 = uVar10 + 1;
-          in_r7 = (uint ******)(iVar34 * 0x100 | (uint)in_r7 & 0xffff00ff);
+          argR7 = (uint ******)(iVar34 * 0x100 | (uint)argR7 & 0xffff00ff);
         }
         if (((uint)pppppuVar52 & 0xc0) != 0) {
           uVar44 = uVar10 + 4;
           uVar10 = uVar10 + 1;
-          in_r7 = (uint ******)(uVar44 | (uint)in_r7 & 0xffffff00);
+          argR7 = (uint ******)(uVar44 | (uint)argR7 & 0xffffff00);
         }
       }
-      in_r6 = (uint ******)*param_2[0x19];
-      if (((uint)*in_r6 & 0x400000) != 0) {
-        in_r7 = *(uint *******)(local_5c + -0x2bf8);
-        iVar34 = psnPackedLaneComponent(in_r6,0);
-        puVar8 = PTR_DAT_001e8bc8;
-        if (*(int *)(PTR_DAT_001e8bc8 + iVar34 * 4) == 0) {
+      argR6 = (uint ******)*ilReader[0x19];
+      if (((uint)*argR6 & 0x400000) != 0) {
+        argR7 = *(uint *******)(local_5c + -0x2bf8);
+        laneSelect = psnPackedLaneComponent(argR6,0);
+        remapTable = PTR_DAT_001e8bc8;
+        if (*(int *)(PTR_DAT_001e8bc8 + laneSelect * 4) == 0) {
           iVar34 = uVar10 + 4;
           uVar10 = uVar10 + 1;
-          in_r7 = (uint ******)(iVar34 * 0x1000000 | (uint)in_r7 & 0xffffff);
+          argR7 = (uint ******)(iVar34 * 0x1000000 | (uint)argR7 & 0xffffff);
         }
-        iVar34 = psnPackedLaneComponent(in_r6,1);
-        if (*(int *)(puVar8 + iVar34 * 4) == 0) {
+        laneSelect = psnPackedLaneComponent(argR6,1);
+        if (*(int *)(remapTable + laneSelect * 4) == 0) {
           iVar34 = uVar10 + 4;
           uVar10 = uVar10 + 1;
-          in_r7 = (uint ******)(iVar34 * 0x10000 | (uint)in_r7 & 0xff00ffff);
+          argR7 = (uint ******)(iVar34 * 0x10000 | (uint)argR7 & 0xff00ffff);
         }
-        iVar34 = psnPackedLaneComponent(in_r6,2);
-        if (*(int *)(puVar8 + iVar34 * 4) == 0) {
+        laneSelect = psnPackedLaneComponent(argR6,2);
+        if (*(int *)(remapTable + laneSelect * 4) == 0) {
           iVar34 = uVar10 + 4;
           uVar10 = uVar10 + 1;
-          in_r7 = (uint ******)(iVar34 * 0x100 | (uint)in_r7 & 0xffff00ff);
+          argR7 = (uint ******)(iVar34 * 0x100 | (uint)argR7 & 0xffff00ff);
         }
-        iVar34 = psnPackedLaneComponent(in_r6,3);
-        if (*(int *)(puVar8 + iVar34 * 4) == 0) {
-          in_r7 = (uint ******)(uVar10 + 4 | (uint)in_r7 & 0xffffff00);
+        laneSelect = psnPackedLaneComponent(argR6,3);
+        if (*(int *)(remapTable + laneSelect * 4) == 0) {
+          argR7 = (uint ******)(uVar10 + 4 | (uint)argR7 & 0xffffff00);
         }
       }
-      iVar43 = (int)*(short *)((int)in_r6 + 2);
-      iVar34 = *(int *)(param_1 + 0x3d8);
-      if (iVar43 <= *(int *)(param_1 + 0x3d8)) {
-        iVar34 = iVar43;
+      registerIndex = (int)*(short *)((int)argR6 + 2);
+      iVar34 = *(int *)(program + 0x3d8);
+      if (registerIndex <= *(int *)(program + 0x3d8)) {
+        iVar34 = registerIndex;
       }
-      iVar47 = *(int *)(param_1 + 0x3dc);
-      *(int *)(param_1 + 0x3d8) = iVar34;
-      if (iVar47 <= iVar43) {
-        iVar47 = iVar43 + 1;
+      iVar47 = *(int *)(program + 0x3dc);
+      *(int *)(program + 0x3d8) = iVar34;
+      if (iVar47 <= registerIndex) {
+        iVar47 = registerIndex + 1;
       }
-      *(int *)(param_1 + 0x3dc) = iVar47;
-      piVar18 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
-      in_r8 = *(uint *******)(param_1 + 0x3a0);
-      (**(code **)(*piVar18 + 0x4c))(piVar18,param_1,(uint)pppppuVar15 >> 0x10 & 0x3f);
+      *(int *)(program + 0x3dc) = iVar47;
+      hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
+      argR8 = *(uint *******)(program + 0x3a0);
+      (**(code **)(*hwDescription + 0x4c))(hwDescription,program,(uint)firstTokenWord >> 0x10 & 0x3f);
       iVar43 = *(int *)(local_11c + 8);
       iVar34 = local_11c;
       while (iVar47 = iVar43, iVar47 != 0) {
         DList__unlink(iVar34);
-        ((int (*)())FUN_000f92fc)(param_1,iVar34,local_180);
+        ((int (*)())FUN_000f92fc)(program,iVar34,currentBlock);
         iVar34 = iVar47;
         iVar43 = *(int *)(iVar47 + 8);
       }
@@ -5585,64 +5656,64 @@ code_r0x000fed00:
       local_118 = (uint ****)local_124;
       goto switchD_000fdaf0_caseD_2;
     case 0x1b:
-      iVar34 = FUN_000ec27c(param_1,(uint)*ppppppuVar49 >> 0x10 & 0x1f);
-      ppppppuVar19 = (uint ******)((uint)*ppppppuVar49 >> 0x15 & 0xff);
+      iVar34 = FUN_000ec27c(program,(uint)*tokenWords >> 0x10 & 0x1f);
+      ppppppuVar19 = (uint ******)((uint)*tokenWords >> 0x15 & 0xff);
       local_178 = (uint ******)0x0;
-      if ((int)*ppppppuVar49 < 0) {
-        pppppuVar15 = param_2[0x24];
+      if ((int)*tokenWords < 0) {
+        modifierTokenWord = ilReader[0x24];
         (*(unsigned short *)((unsigned char *)&(local_178) + 2)) =
-             (ushort)(((uint)(byte)((((uint)pppppuVar15 & 0xc0) == 0) << 1) << 0x14) >> 0x15);
+             (ushort)(((uint)(byte)((((uint)modifierTokenWord & 0xc0) == 0) << 1) << 0x14) >> 0x15);
         local_178 = (uint ******)
-                    CONCAT13(((uint)pppppuVar15 & 3) == 0,
-                             CONCAT12(((uint)pppppuVar15 & 0xc) == 0,(*(unsigned short *)((unsigned char *)&(local_178) + 2))));
-        (*(unsigned short *)((unsigned char *)&(local_178) + 2)) = CONCAT11(((uint)pppppuVar15 & 0x30) == 0,(undefined1)local_178);
+                    CONCAT13(((uint)modifierTokenWord & 3) == 0,
+                             CONCAT12(((uint)modifierTokenWord & 0xc) == 0,(*(unsigned short *)((unsigned char *)&(local_178) + 2))));
+        (*(unsigned short *)((unsigned char *)&(local_178) + 2)) = CONCAT11(((uint)modifierTokenWord & 0x30) == 0,(undefined1)local_178);
       }
-      iVar43 = (int)*(short *)((int)*param_2[0x19] + 2);
-      arena = FUN_000ec208(param_1,(uint)**param_2[0x19] >> 0x10 & 0x3f);
+      registerIndex = (int)*(short *)((int)*ilReader[0x19] + 2);
+      registerFile = FUN_000ec208(program,(uint)**ilReader[0x19] >> 0x10 & 0x3f);
       if (iVar34 == 0) {
-        *(int *)(*(int *)(param_1 + 0x3ac) + 0x44) = iVar43;
+        *(int *)(*(int *)(program + 0x3ac) + 0x44) = registerIndex;
       }
       else if (iVar34 == 1) {
-        *(int *)(*(int *)(param_1 + 0x3ac) + 0x48) = iVar43;
+        *(int *)(*(int *)(program + 0x3ac) + 0x48) = registerIndex;
       }
-      iVar47 = *(int *)(param_1 + 1000);
-      if (iVar43 <= *(int *)(param_1 + 1000)) {
-        iVar47 = iVar43;
+      iVar47 = *(int *)(program + 1000);
+      if (registerIndex <= *(int *)(program + 1000)) {
+        iVar47 = registerIndex;
       }
-      iVar20 = *(int *)(param_1 + 0x3ec);
-      *(int *)(param_1 + 1000) = iVar47;
-      if (iVar20 <= iVar43) {
-        iVar20 = iVar43 + 1;
+      iVar20 = *(int *)(program + 0x3ec);
+      *(int *)(program + 1000) = iVar47;
+      if (iVar20 <= registerIndex) {
+        iVar20 = registerIndex + 1;
       }
-      *(int *)(param_1 + 0x3ec) = iVar20;
-      *(undefined4 *)(param_1 + 0x3f4) = 0x24;
-      in_r6 = (uint ******)0x0;
-      piVar18 = (int *)FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),arena,iVar43,0);
-      arena = (**(code **)(*piVar18 + 0x2c))();
+      *(int *)(program + 0x3ec) = iVar20;
+      *(undefined4 *)(program + 0x3f4) = 0x24;
+      argR6 = (uint ******)0x0;
+      virtualRegister2 = (int *)FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile,registerIndex,0);
+      registerInfo = (**(code **)(*virtualRegister2 + 0x2c))();
       local_70 = &local_178;
       iVar43 = 0;
       do {
         if (*(char *)(iVar43 + (int)local_70) == '\0') {
-          in_r6 = ppppppuVar19;
-          FUN_00104104(arena,iVar43,iVar34,ppppppuVar19);
+          argR6 = ppppppuVar19;
+          FUN_00104104(registerInfo,iVar43,iVar34,ppppppuVar19);
         }
-        bVar1 = iVar43 != 3;
+        notLastIteration = iVar43 != 3;
         iVar43 = iVar43 + 1;
-      } while (bVar1);
+      } while (notLastIteration);
       goto switchD_000fdaf0_caseD_2;
     case 0x1c:
     case 0x1d:
     case 0x79:
-      in_r6 = (uint ******)param_2[0x17];
-      pppuVar42 = **param_2[0x19];
-      sVar6 = *(short *)((int)*param_2[0x19] + 2);
-      if ((int)in_r6 < 1) {
-        in_r6 = (uint ******)0x0;
+      argR6 = (uint ******)ilReader[0x17];
+      pppuVar42 = **ilReader[0x19];
+      registerIndex2 = *(short *)((int)*ilReader[0x19] + 2);
+      if ((int)argR6 < 1) {
+        argR6 = (uint ******)0x0;
       }
       else {
         puVar12 = &local_124;
-        ppppppuVar19 = param_2 + (int)param_2[0x16] + 0x23;
-        ppppppuVar49 = in_r6;
+        ppppppuVar19 = ilReader + (int)ilReader[0x16] + 0x23;
+        ppppppuVar49 = argR6;
         do {
           pppppuVar15 = *ppppppuVar19;
           ppppppuVar19 = ppppppuVar19 + 1;
@@ -5651,416 +5722,416 @@ code_r0x000fed00:
           ppppppuVar49 = (uint ******)((int)ppppppuVar49 - 1);
         } while (ppppppuVar49 != (uint ******)0x0);
       }
-      in_r7 = (uint ******)&local_124;
-      ((int (*)())FUN_000fafa4)(param_1,(uint)pppuVar42 >> 0x10 & 0x3f,(int)sVar6,in_r6,in_r7);
+      argR7 = (uint ******)&local_124;
+      ((int (*)())FUN_000fafa4)(program,(uint)pppuVar42 >> 0x10 & 0x3f,(int)registerIndex2,argR6,argR7);
       goto switchD_000fdaf0_caseD_2;
     case 0x42:
-      arena = *(undefined4 *)(iVar43 + 0x374);
-      puVar14 = (undefined4 *)Arena__alloc(arena,0x168);
-      *puVar14 = arena;
-      piVar18 = puVar14 + 1;
-      IRInst__ctor_10502c(piVar18,0x94,*(undefined4 *)(param_1 + 8));
-      arena = FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),0x2f,0,0);
-      IRInst__setOperandRef(piVar18,0,arena);
-      puVar14[0x4c] = 0;
-      ((int (*)())FUN_000f92fc)(param_1,piVar18,local_180);
+      compilerArenaA = *(undefined4 *)(compiler + 0x374);
+      instAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
+      *instAllocation = compilerArenaA;
+      piVar18 = instAllocation + 1;
+      IRInst__ctor_10502c(piVar18,0x94,*(undefined4 *)(program + 8));
+      virtualRegister = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x2f,0,0);
+      IRInst__setOperandRef(piVar18,0,virtualRegister);
+      instAllocation[0x4c] = 0;
+      ((int (*)())FUN_000f92fc)(program,piVar18,currentBlock);
       bVar1 = local_ac != 0;
       if (bVar1) {
-        (**(code **)(*piVar18 + 0x90))(piVar18,arena);
+        (**(code **)(*piVar18 + 0x90))(piVar18,virtualRegister);
       }
-      pppppuVar15 = *ppppppuVar49;
-      in_r6 = (uint ******)((uint)pppppuVar15 >> 0x17 & 0x3f);
-      if (((unsigned char *)0x4) < in_r6) {
-        in_r6 = (uint ******)0x0;
+      firstTokenWord = *tokenWords;
+      argR6 = (uint ******)((uint)firstTokenWord >> 0x17 & 0x3f);
+      if (((unsigned char *)0x4) < argR6) {
+        argR6 = (uint ******)0x0;
       }
-      ppppuVar45 = *param_2[0x1b];
-      sVar6 = *(short *)((int)ppppuVar45 + 2);
-      uVar50 = FUN_000ec208(param_1,(uint)*ppppuVar45 >> 0x10 & 0x3f);
-      pppuVar42 = *param_2[0x1b][1];
-      if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(param_1 + 8) != 0)) &&
-         ((*(uint *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 8) & 0x80) != 0)) {
+      ppppuVar45 = *ilReader[0x1b];
+      registerIndex2 = *(short *)((int)ppppuVar45 + 2);
+      uVar50 = FUN_000ec208(program,(uint)*ppppuVar45 >> 0x10 & 0x3f);
+      pppuVar42 = *ilReader[0x1b][1];
+      if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
+         ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
         iVar34 = 0xf;
       }
       else {
-        iVar34 = (int)*(short *)((int)param_2[0x1b][1] + 2);
+        iVar34 = (int)*(short *)((int)ilReader[0x1b][1] + 2);
       }
-      uVar27 = FUN_000ec208(param_1,(uint)pppuVar42 >> 0x10 & 0x3f);
-      uVar41 = FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),0x2b,0,0);
-      piVar18 = IRInst__create(0x14,*(undefined4 *)(param_1 + 8));
-      iVar43 = IRInst__getOperandRecord(piVar18,1);
-      *(undefined4 *)(iVar43 + 0xc) = uVar50;
-      *(int *)(iVar43 + 8) = (int)sVar6;
+      uVar27 = FUN_000ec208(program,(uint)pppuVar42 >> 0x10 & 0x3f);
+      uVar41 = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x2b,0,0);
+      mulAddInst = IRInst__create(0x14,*(undefined4 *)(program + 8));
+      operandRecord2 = IRInst__getOperandRecord(mulAddInst,1);
+      *(undefined4 *)(operandRecord2 + 0xc) = uVar50;
+      *(int *)(operandRecord2 + 8) = (int)registerIndex2;
       local_178 = (uint ******)0x10203;
-      ((int (*)())FUN_000f8aa0)(param_1,&local_178,ppppuVar45,1,piVar18);
-      iVar43 = IRInst__getOperandRecord(piVar18,1);
-      *(undefined4 *)(iVar43 + 0x10) = 0;
-      ((void (*)())IRInst__makeLiteralVec4Float)(piVar18,param_1,2,0.0,1.0,0.0,0.0);
-      local_8c = (uint)(short)((ushort)((uint)pppppuVar15 >> 0x10) & 0x3f);
+      ((int (*)())FUN_000f8aa0)(program,&local_178,ppppuVar45,1,mulAddInst);
+      operandRecord2 = IRInst__getOperandRecord(mulAddInst,1);
+      *(undefined4 *)(operandRecord2 + 0x10) = 0;
+      ((void (*)())IRInst__makeLiteralVec4Float)(mulAddInst,program,2,0.0,1.0,0.0,0.0);
+      local_8c = (uint)(short)((ushort)((uint)firstTokenWord >> 0x10) & 0x3f);
       local_80 = local_8c | 0x120000;
-      in_r8 = (uint ******)(local_8c | 0x100000);
-      in_r7 = (uint ******)(local_8c | 0x110000);
+      argR8 = (uint ******)(local_8c | 0x100000);
+      argR7 = (uint ******)(local_8c | 0x110000);
       local_8c = local_8c | 0xf0000;
-      local_88 = (uint *****)in_r8;
-      local_84 = (uint *****)in_r7;
-      ((int (*)())IRInst__makeLiteralVec4Int)(piVar18,param_1,3,local_80,in_r7,in_r8,local_8c);
-      iVar43 = IRInst__getOperandRecord(piVar18,0);
-      *(undefined4 *)(iVar43 + 0xc) = 0x2b;
-      *(undefined4 *)(iVar43 + 8) = 0;
-      ((int (*)())FUN_000f92fc)(param_1,piVar18,local_180);
-      (**(code **)(*piVar18 + 0x90))(piVar18,arena);
+      local_88 = (uint *****)argR8;
+      local_84 = (uint *****)argR7;
+      ((int (*)())IRInst__makeLiteralVec4Int)(mulAddInst,program,3,local_80,argR7,argR8,local_8c);
+      operandRecord2 = IRInst__getOperandRecord(mulAddInst,0);
+      *(undefined4 *)(operandRecord2 + 0xc) = 0x2b;
+      *(undefined4 *)(operandRecord2 + 8) = 0;
+      ((int (*)())FUN_000f92fc)(program,mulAddInst,currentBlock);
+      (**(code **)(*mulAddInst + 0x90))(mulAddInst,virtualRegister);
       if (bVar1) {
-        (**(code **)(*piVar18 + 0x90))(piVar18,uVar41);
+        (**(code **)(*mulAddInst + 0x90))(mulAddInst,uVar41);
       }
-      IRInst__setHardwareRegisterAndAdd(piVar18,param_1,0x2b,0);
-      piVar18[0x20] = 1;
-      piVar18 = (int *)FUN_001084b8(0x31,*(undefined4 *)(param_1 + 8));
-      iVar43 = IRInst__getOperandRecord(piVar18,0);
-      *(uint *******)(iVar43 + 8) = in_r6;
-      *(undefined4 *)(iVar43 + 0xc) = 0x2c;
-      iVar43 = IRInst__getOperandRecord(piVar18,1);
-      *(undefined4 *)(iVar43 + 0xc) = uVar27;
-      *(int *)(iVar43 + 8) = iVar34;
-      (**(code **)(*piVar18 + 0x90))(piVar18,uVar41);
-      ((int (*)())FUN_000f92fc)(param_1,piVar18,local_180);
-      IRInst__setHardwareRegisterAndAdd(piVar18,param_1,0x2c,in_r6);
+      IRInst__setHardwareRegisterAndAdd(mulAddInst,program,0x2b,0);
+      mulAddInst[0x20] = 1;
+      movInst = (int *)FUN_001084b8(0x31,*(undefined4 *)(program + 8));
+      operandRecord2 = IRInst__getOperandRecord(movInst,0);
+      *(uint *******)(operandRecord2 + 8) = argR6;
+      *(undefined4 *)(operandRecord2 + 0xc) = 0x2c;
+      operandRecord2 = IRInst__getOperandRecord(movInst,1);
+      *(undefined4 *)(operandRecord2 + 0xc) = uVar27;
+      *(int *)(operandRecord2 + 8) = iVar34;
+      (**(code **)(*movInst + 0x90))(movInst,uVar41);
+      ((int (*)())FUN_000f92fc)(program,movInst,currentBlock);
+      IRInst__setHardwareRegisterAndAdd(movInst,program,0x2c,argR6);
       local_ac = 1;
       goto switchD_000fdaf0_caseD_2;
     case 0x43:
-      pppppuVar15 = *ppppppuVar49;
-      in_r6 = (uint ******)*param_2[0x19];
-      in_r7 = (uint ******)0x4050607;
-      if (((uint)*in_r6 & 0x400000) != 0) {
-        in_r7 = *(uint *******)(local_5c + -0x2bf8);
-        iVar34 = psnPackedLaneComponent(in_r6,0);
-        if (*(int *)(PTR_DAT_001e8bc8 + iVar34 * 4) == 0) {
-          in_r7 = (uint ******)((uint)in_r7 & 0xffffff | 0x4000000);
+      firstTokenWord = *tokenWords;
+      argR6 = (uint ******)*ilReader[0x19];
+      argR7 = (uint ******)0x4050607;
+      if (((uint)*argR6 & 0x400000) != 0) {
+        argR7 = *(uint *******)(local_5c + -0x2bf8);
+        laneSelect = psnPackedLaneComponent(argR6,0);
+        if (*(int *)(PTR_DAT_001e8bc8 + laneSelect * 4) == 0) {
+          argR7 = (uint ******)((uint)argR7 & 0xffffff | 0x4000000);
         }
-        uVar10 = (uint)(*(int *)(PTR_DAT_001e8bc8 + iVar34 * 4) == 0);
-        iVar34 = psnPackedLaneComponent(in_r6,1);
-        puVar8 = PTR_DAT_001e8bc8;
-        if (*(int *)(PTR_DAT_001e8bc8 + iVar34 * 4) == 0) {
+        uVar10 = (uint)(*(int *)(PTR_DAT_001e8bc8 + laneSelect * 4) == 0);
+        laneSelect = psnPackedLaneComponent(argR6,1);
+        remapTable = PTR_DAT_001e8bc8;
+        if (*(int *)(PTR_DAT_001e8bc8 + laneSelect * 4) == 0) {
           iVar34 = uVar10 + 4;
           uVar10 = uVar10 + 1;
-          in_r7 = (uint ******)(iVar34 * 0x10000 | (uint)in_r7 & 0xff00ffff);
+          argR7 = (uint ******)(iVar34 * 0x10000 | (uint)argR7 & 0xff00ffff);
         }
-        iVar34 = psnPackedLaneComponent(in_r6,2);
-        if (*(int *)(puVar8 + iVar34 * 4) == 0) {
+        laneSelect = psnPackedLaneComponent(argR6,2);
+        if (*(int *)(remapTable + laneSelect * 4) == 0) {
           iVar34 = uVar10 + 4;
           uVar10 = uVar10 + 1;
-          in_r7 = (uint ******)(iVar34 * 0x100 | (uint)in_r7 & 0xffff00ff);
+          argR7 = (uint ******)(iVar34 * 0x100 | (uint)argR7 & 0xffff00ff);
         }
-        iVar34 = psnPackedLaneComponent(in_r6,3);
-        if (*(int *)(puVar8 + iVar34 * 4) == 0) {
-          iVar43 = *(int *)(param_1 + 8);
-          in_r7 = (uint ******)(uVar10 + 4 | (uint)in_r7 & 0xffffff00);
+        laneSelect = psnPackedLaneComponent(argR6,3);
+        if (*(int *)(remapTable + laneSelect * 4) == 0) {
+          compiler = *(int *)(program + 8);
+          argR7 = (uint ******)(uVar10 + 4 | (uint)argR7 & 0xffffff00);
         }
         else {
-          iVar43 = *(int *)(param_1 + 8);
+          compiler = *(int *)(program + 8);
         }
       }
-      in_r8 = (uint ******)local_180;
-      (**(code **)(**(int **)(iVar43 + 0x30c) + 0x4c))
-                (*(int **)(iVar43 + 0x30c),param_1,(uint)pppppuVar15 >> 0x10 & 0x3f);
+      argR8 = (uint ******)currentBlock;
+      (**(code **)(**(int **)(compiler + 0x30c) + 0x4c))
+                (*(int **)(compiler + 0x30c),program,(uint)firstTokenWord >> 0x10 & 0x3f);
       goto switchD_000fdaf0_caseD_2;
     case 0x6e:
-      arena = *(undefined4 *)(iVar43 + 0x374);
-      pppppuVar15 = param_2[(int)param_2[0x16] + 0x23];
-      puVar14 = (undefined4 *)Arena__alloc(arena,0x134);
-      *puVar14 = arena;
-      pppppuVar52 = (uint *****)(puVar14 + 1);
-      Block__ctor_ea148(pppppuVar52,*(undefined4 *)(param_1 + 8));
-      puVar14[0x4c] = pppppuVar15;
-      puVar14[1] = PTR_DAT_001e8bd0 + 8;
-      local_180 = pppppuVar52;
-      FUN_000ec3ac(param_1,local_184,pppppuVar52);
-      Block__connect(local_184,local_180);
-      local_184 = local_180;
-      arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-      puVar14 = (undefined4 *)Arena__alloc(arena,0x130);
-      *puVar14 = arena;
-      ppppppuVar49 = (uint ******)(puVar14 + 1);
-      Block__ctor_ea020(ppppppuVar49,*(undefined4 *)(param_1 + 8));
-      local_180 = (uint *****)ppppppuVar49;
-      FUN_000ec3ac(param_1,local_184,ppppppuVar49);
-      Block__connect(local_184,local_180);
-      local_184 = local_180;
+      compilerArenaA = *(undefined4 *)(compiler + 0x374);
+      trailingToken = ilReader[(int)ilReader[0x16] + 0x23];
+      blockAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x134);
+      *blockAllocation = compilerArenaA;
+      pppppuVar52 = (uint *****)(blockAllocation + 1);
+      Block__ctor_ea148(pppppuVar52,*(undefined4 *)(program + 8));
+      blockAllocation[0x4c] = trailingToken;
+      blockAllocation[1] = PTR_DAT_001e8bd0 + 8;
+      currentBlock = pppppuVar52;
+      FUN_000ec3ac(program,previousBlock,pppppuVar52);
+      Block__connect(previousBlock,currentBlock);
+      previousBlock = currentBlock;
+      compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+      blockAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x130);
+      *blockAllocation = compilerArenaA;
+      ppppppuVar49 = (uint ******)(blockAllocation + 1);
+      Block__ctor_ea020(ppppppuVar49,*(undefined4 *)(program + 8));
+      currentBlock = (uint *****)ppppppuVar49;
+      FUN_000ec3ac(program,previousBlock,ppppppuVar49);
+      Block__connect(previousBlock,currentBlock);
+      previousBlock = currentBlock;
       goto switchD_000fdaf0_caseD_2;
     case 0x72:
-      piVar18 = (int *)Arena__alloc(*(undefined4 *)(iVar43 + 0x378),0xc);
+      piVar18 = (int *)Arena__alloc(*(undefined4 *)(compiler + 0x378),0xc);
       piVar18[1] = 0;
       piVar18[2] = 0;
-      ppppppuVar19 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-      iVar43 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-      *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar43;
-      *piVar18 = iVar43;
-      iVar34 = IRInst__getOperandRecord(ppppppuVar19,0);
-      *(undefined4 *)(iVar34 + 0xc) = 0;
-      *(int *)(iVar34 + 8) = iVar43;
+      ppppppuVar19 = IRInst__create(0x31,*(undefined4 *)(program + 8));
+      newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+      *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
+      *piVar18 = newTempIndex2;
+      operandRecord = IRInst__getOperandRecord(ppppppuVar19,0);
+      *(undefined4 *)(operandRecord + 0xc) = 0;
+      *(int *)(operandRecord + 8) = newTempIndex2;
       local_178 = (uint ******)0x10203;
-      in_r8 = (uint ******)&local_174;
-      ((int (*)())FUN_000fb3d4)(param_1,local_68,ppppppuVar49,*param_2[0x1b],ppppppuVar37,in_r8,&local_13c);
-      pppuVar42 = **param_2[0x1b];
-      if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(param_1 + 8) != 0)) &&
-         ((*(uint *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 8) & 0x80) != 0)) {
+      argR8 = (uint ******)&local_174;
+      ((int (*)())FUN_000fb3d4)(program,local_68,tokenWords,*ilReader[0x1b],loopStackData,argR8,&local_13c);
+      pppuVar42 = **ilReader[0x1b];
+      if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
+         ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
         iVar34 = 0xf;
       }
       else {
-        iVar34 = (int)*(short *)((int)*param_2[0x1b] + 2);
+        iVar34 = (int)*(short *)((int)*ilReader[0x1b] + 2);
       }
-      arena = FUN_000ec208(param_1,(uint)pppuVar42 >> 0x10 & 0x3f);
-      iVar43 = IRInst__getOperandRecord(ppppppuVar19,1);
-      *(undefined4 *)(iVar43 + 0xc) = arena;
-      *(int *)(iVar43 + 8) = iVar34;
-      in_r6 = (uint ******)((int)((unsigned char *)0x0) + 1);
-      in_r7 = ppppppuVar19;
-      ((int (*)())FUN_000f8aa0)(param_1,&local_178,*param_2[0x1b],1,ppppppuVar19);
+      registerFile = FUN_000ec208(program,(uint)pppuVar42 >> 0x10 & 0x3f);
+      operandRecord2 = IRInst__getOperandRecord(ppppppuVar19,1);
+      *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
+      *(int *)(operandRecord2 + 8) = iVar34;
+      argR6 = (uint ******)((int)((unsigned char *)0x0) + 1);
+      argR7 = ppppppuVar19;
+      ((int (*)())FUN_000f8aa0)(program,&local_178,*ilReader[0x1b],1,ppppppuVar19);
       iVar43 = *(int *)(local_14c + 8);
       iVar34 = local_14c;
       while (iVar47 = iVar43, iVar47 != 0) {
         DList__unlink(iVar34);
-        ((int (*)())FUN_000f92fc)(param_1,iVar34,local_180);
+        ((int (*)())FUN_000f92fc)(program,iVar34,currentBlock);
         iVar34 = iVar47;
         iVar43 = *(int *)(iVar47 + 8);
       }
-      ((int (*)())FUN_000f92fc)(param_1,ppppppuVar19,local_180);
-      uVar10 = local_b0[1];
-      if (uVar10 < *local_b0) {
-        _memset(uVar10 * 4 + local_b0[2],0,4);
-        local_b0[1] = uVar10 + 1;
-        piVar36 = (int *)(uVar10 * 4 + local_b0[2]);
+      ((int (*)())FUN_000f92fc)(program,ppppppuVar19,currentBlock);
+      conditionStackCount = conditionStack[1];
+      if (conditionStackCount < *conditionStack) {
+        _memset(conditionStackCount * 4 + conditionStack[2],0,4);
+        conditionStack[1] = conditionStackCount + 1;
+        piVar36 = (int *)(conditionStackCount * 4 + conditionStack[2]);
       }
       else {
-        piVar36 = (int *)Vector__elementRefGrow(local_b0,uVar10);
+        piVar36 = (int *)Vector__elementRefGrow(conditionStack,conditionStackCount);
       }
       goto code_r0x000febe0;
     case 0x73:
-      arena = *(undefined4 *)(iVar43 + 0x374);
-      puVar14 = (undefined4 *)Arena__alloc(arena,0x168);
-      *puVar14 = arena;
-      piVar18 = puVar14 + 1;
-      IRInst__ctor_10502c(piVar18,0xf8,*(undefined4 *)(param_1 + 8));
-      puVar14[0x4c] = param_2[(int)param_2[0x16] + 0x23];
-      ((int (*)())FUN_000f92fc)(param_1,piVar18,local_180);
+      compilerArenaA = *(undefined4 *)(compiler + 0x374);
+      instAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
+      *instAllocation = compilerArenaA;
+      piVar18 = instAllocation + 1;
+      IRInst__ctor_10502c(piVar18,0xf8,*(undefined4 *)(program + 8));
+      instAllocation[0x4c] = ilReader[(int)ilReader[0x16] + 0x23];
+      ((int (*)())FUN_000f92fc)(program,piVar18,currentBlock);
       break;
     case 0x76:
     case 0x77:
-      if ((iVar34 == 0x76) && ((int)*ppppppuVar49 < 0)) {
-        pppppuVar52 = param_2[10];
-        in_r6 = (uint ******)0x0;
-        pppppuVar15 = param_2[(int)param_2[0x16] + 0x23];
-        arena = FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),0x43,0xffffffff,0);
-        iVar34 = FUN_00109b74(0x10a,*(undefined4 *)(param_1 + 8));
-        *(int *)(param_1 + 0x354) = iVar34;
-        IRInst__setOperandRef(iVar34,0,arena);
-        *(uint ******)(iVar34 + 300) = pppppuVar52 + (int)pppppuVar15;
-        Block__appendInst(*(undefined4 *)(param_1 + 0x3a0),iVar34);
+      if ((ilOpcode == 0x76) && ((int)*tokenWords < 0)) {
+        pppppuVar52 = ilReader[10];
+        argR6 = (uint ******)0x0;
+        trailingToken = ilReader[(int)ilReader[0x16] + 0x23];
+        virtualRegister = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x43,0xffffffff,0);
+        iVar34 = FUN_00109b74(0x10a,*(undefined4 *)(program + 8));
+        *(int *)(program + 0x354) = iVar34;
+        IRInst__setOperandRef(iVar34,0,virtualRegister);
+        *(uint ******)(iVar34 + 300) = pppppuVar52 + (int)trailingToken;
+        Block__appendInst(*(undefined4 *)(program + 0x3a0),iVar34);
       }
       else {
         iVar34 = 1;
-        ppppuVar45 = *param_2[0x1b];
-        uVar44 = (uint)*(ushort *)((int)ppppuVar45 + 2);
-        uVar10 = (uint)*ppppuVar45 >> 0x10 & 0x3f;
+        ppppuVar45 = *ilReader[0x1b];
+        sourceRegisterIndex = (uint)*(ushort *)((int)ppppuVar45 + 2);
+        ilRegisterType = (uint)*ppppuVar45 >> 0x10 & 0x3f;
         if ((int)*ppppuVar45 < 0) {
           iVar34 = 2;
-          uVar44 = uVar44 | (int)ppppuVar45[1] << 0x10;
+          sourceRegisterIndex = sourceRegisterIndex | (int)ppppuVar45[1] << 0x10;
         }
         pppuVar42 = ppppuVar45[iVar34];
-        if (uVar10 == 0x1c) {
-          puVar12 = *(uint **)(param_1 + 0x90);
+        if (ilRegisterType == 0x1c) {
+          puVar12 = *(uint **)(program + 0x90);
           if (puVar12 == (uint *)0x0) {
-            arena = *(undefined4 *)(iVar43 + 0x374);
-            puVar14 = (undefined4 *)Arena__alloc(arena,0x14);
-            puVar12 = puVar14 + 1;
-            *puVar14 = arena;
-            puVar14[1] = 2;
-            puVar14[2] = 0;
-            puVar14[4] = arena;
-            arena = Arena__alloc(arena,8);
-            puVar14[3] = arena;
-            *(uint **)(param_1 + 0x90) = puVar12;
+            compilerArenaA = *(undefined4 *)(compiler + 0x374);
+            vectorAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x14);
+            puVar12 = vectorAllocation + 1;
+            *vectorAllocation = compilerArenaA;
+            vectorAllocation[1] = 2;
+            vectorAllocation[2] = 0;
+            vectorAllocation[4] = compilerArenaA;
+            vectorStorage = Arena__alloc(compilerArenaA,8);
+            vectorAllocation[3] = vectorStorage;
+            *(uint **)(program + 0x90) = puVar12;
           }
         }
         else {
-          puVar12 = *(uint **)(param_1 + 0x8c);
+          puVar12 = *(uint **)(program + 0x8c);
           if (puVar12 == (uint *)0x0) {
-            arena = *(undefined4 *)(iVar43 + 0x374);
-            puVar14 = (undefined4 *)Arena__alloc(arena,0x14);
-            puVar12 = puVar14 + 1;
-            *puVar14 = arena;
-            puVar14[1] = 2;
-            puVar14[2] = 0;
-            puVar14[4] = arena;
-            arena = Arena__alloc(arena,8);
-            puVar14[3] = arena;
-            *(uint **)(param_1 + 0x8c) = puVar12;
+            compilerArenaA = *(undefined4 *)(compiler + 0x374);
+            vectorAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x14);
+            puVar12 = vectorAllocation + 1;
+            *vectorAllocation = compilerArenaA;
+            vectorAllocation[1] = 2;
+            vectorAllocation[2] = 0;
+            vectorAllocation[4] = compilerArenaA;
+            vectorStorage = Arena__alloc(compilerArenaA,8);
+            vectorAllocation[3] = vectorStorage;
+            *(uint **)(program + 0x8c) = puVar12;
           }
         }
-        if (uVar44 < *puVar12) {
+        if (sourceRegisterIndex < *puVar12) {
           uVar17 = puVar12[1];
-          if (uVar17 <= uVar44) {
-            _memset(uVar17 * 4 + puVar12[2],0,(uVar44 - uVar17) * 4 + 4);
-            puVar12[1] = uVar44 + 1;
+          if (uVar17 <= sourceRegisterIndex) {
+            _memset(uVar17 * 4 + puVar12[2],0,(sourceRegisterIndex - uVar17) * 4 + 4);
+            puVar12[1] = sourceRegisterIndex + 1;
           }
-          puVar12 = (uint *)(uVar44 * 4 + puVar12[2]);
+          puVar12 = (uint *)(sourceRegisterIndex * 4 + puVar12[2]);
         }
         else {
-          puVar12 = (uint *)Vector__elementRefGrow(puVar12,uVar44);
+          puVar12 = (uint *)Vector__elementRefGrow(puVar12,sourceRegisterIndex);
         }
         *puVar12 = (uint)pppuVar42;
-        iVar34 = (uVar44 >> 3 & 0x1ffffffc) + *(int *)(param_1 + 0x434);
-        *(uint *)(iVar34 + 8) = 1 << (uVar44 & 0x1f) | *(uint *)(iVar34 + 8);
-        if ((*(uint *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 8) & 8) != 0) {
-          arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-          puVar14 = (undefined4 *)Arena__alloc(arena,0x168);
-          *puVar14 = arena;
-          puVar24 = puVar14 + 1;
-          FUN_00109a80(puVar24,0xfa,*(undefined4 *)(param_1 + 8));
-          arena = FUN_000ec208(param_1,uVar10);
-          iVar34 = IRInst__getOperandRecord(puVar24,0);
-          *(undefined4 *)(iVar34 + 0xc) = arena;
-          *(uint *)(iVar34 + 8) = uVar44;
-          puVar14[0x4c] = pppuVar42;
-          ((int (*)())FUN_000f92fc)(param_1,puVar24,*(undefined4 *)(param_1 + 0x3a0));
+        iVar34 = (sourceRegisterIndex >> 3 & 0x1ffffffc) + *(int *)(program + 0x434);
+        *(uint *)(iVar34 + 8) = 1 << (sourceRegisterIndex & 0x1f) | *(uint *)(iVar34 + 8);
+        if ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 8) != 0) {
+          compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+          instAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
+          *instAllocation = compilerArenaA;
+          instObject = instAllocation + 1;
+          FUN_00109a80(instObject,0xfa,*(undefined4 *)(program + 8));
+          registerFile = FUN_000ec208(program,ilRegisterType);
+          operandRecord = IRInst__getOperandRecord(instObject,0);
+          *(undefined4 *)(operandRecord + 0xc) = registerFile;
+          *(uint *)(operandRecord + 8) = sourceRegisterIndex;
+          instAllocation[0x4c] = pppuVar42;
+          ((int (*)())FUN_000f92fc)(program,instObject,*(undefined4 *)(program + 0x3a0));
         }
       }
       goto switchD_000fdaf0_caseD_2;
     case 0x78:
-      *(uint *)(param_1 + 0x400) = (uint)*ppppppuVar49 >> 0x10 & 0x3fff;
+      *(uint *)(program + 0x400) = (uint)*tokenWords >> 0x10 & 0x3fff;
       goto switchD_000fdaf0_caseD_2;
     case 0x7a:
-      *(uint *)(param_1 + 0x3f8) = (uint)*ppppppuVar49 >> 0x10 & 0x3fff;
+      *(uint *)(program + 0x3f8) = (uint)*tokenWords >> 0x10 & 0x3fff;
       goto switchD_000fdaf0_caseD_2;
     case 0x7c:
-      *(uint *)(param_1 + 0x3fc) = (uint)*ppppppuVar49 >> 0x10 & 0x3fff;
+      *(uint *)(program + 0x3fc) = (uint)*tokenWords >> 0x10 & 0x3fff;
       goto switchD_000fdaf0_caseD_2;
     case 0x7d:
-      ppppuVar45 = *param_2[0x19];
-      if ((*(uint *)(param_1 + 0x30) & 0x4000) == 0) {
-        if ((*(uint *)(param_1 + 0x30) & 1) != 0) {
+      ppppuVar45 = *ilReader[0x19];
+      if ((*(uint *)(program + 0x30) & 0x4000) == 0) {
+        if ((*(uint *)(program + 0x30) & 1) != 0) {
           local_178 = (uint ******)0x0;
           ppppppuVar19 = (uint ******)(int)*(short *)((int)ppppuVar45 + 2);
-          arena = FUN_000ec208(param_1,(uint)*ppppuVar45 >> 0x10 & 0x3f);
-          iVar34 = FUN_000ec27c(param_1,(uint)*ppppppuVar49 >> 0x10 & 0x3fff);
+          registerFile = FUN_000ec208(program,(uint)*ppppuVar45 >> 0x10 & 0x3f);
+          iVar34 = FUN_000ec27c(program,(uint)*tokenWords >> 0x10 & 0x3fff);
           if (iVar34 == 0) {
-            *(uint *******)(*(int *)(param_1 + 0x3ac) + 0x44) = ppppppuVar19;
+            *(uint *******)(*(int *)(program + 0x3ac) + 0x44) = ppppppuVar19;
           }
           else if (iVar34 == 1) {
-            *(uint *******)(*(int *)(param_1 + 0x3ac) + 0x48) = ppppppuVar19;
+            *(uint *******)(*(int *)(program + 0x3ac) + 0x48) = ppppppuVar19;
           }
-          ppppppuVar49 = *(uint *******)(param_1 + 1000);
-          if ((int)ppppppuVar19 <= (int)*(uint *******)(param_1 + 1000)) {
+          ppppppuVar49 = *(uint *******)(program + 1000);
+          if ((int)ppppppuVar19 <= (int)*(uint *******)(program + 1000)) {
             ppppppuVar49 = ppppppuVar19;
           }
-          puVar53 = *(undefined1 **)(param_1 + 0x3ec);
-          *(uint *******)(param_1 + 1000) = ppppppuVar49;
+          puVar53 = *(undefined1 **)(program + 0x3ec);
+          *(uint *******)(program + 1000) = ppppppuVar49;
           if ((int)puVar53 <= (int)ppppppuVar19) {
             puVar53 = (undefined1 *)((int)ppppppuVar19 + 1);
           }
-          *(undefined1 **)(param_1 + 0x3ec) = puVar53;
-          *(undefined4 *)(param_1 + 0x3f4) = 0x24;
+          *(undefined1 **)(program + 0x3ec) = puVar53;
+          *(undefined4 *)(program + 0x3f4) = 0x24;
           if (iVar34 == 0xd) {
-            iVar43 = *(int *)(param_1 + 0x3ac);
-            if (*(int *)(iVar43 + 0x4c) == -1) {
-              *(uint *******)(iVar43 + 0x4c) = ppppppuVar19;
+            registerMap2 = *(int *)(program + 0x3ac);
+            if (*(int *)(registerMap2 + 0x4c) == -1) {
+              *(uint *******)(registerMap2 + 0x4c) = ppppppuVar19;
             }
             else {
-              *(uint *******)(iVar43 + 0x54) = ppppppuVar19;
+              *(uint *******)(registerMap2 + 0x54) = ppppppuVar19;
             }
           }
           else if (iVar34 == 0xe) {
-            iVar43 = *(int *)(param_1 + 0x3ac);
-            if (*(int *)(iVar43 + 0x50) == -1) {
-              *(uint *******)(iVar43 + 0x50) = ppppppuVar19;
+            registerMap2 = *(int *)(program + 0x3ac);
+            if (*(int *)(registerMap2 + 0x50) == -1) {
+              *(uint *******)(registerMap2 + 0x50) = ppppppuVar19;
             }
             else {
-              *(uint *******)(iVar43 + 0x58) = ppppppuVar19;
+              *(uint *******)(registerMap2 + 0x58) = ppppppuVar19;
             }
           }
           else if (iVar34 == 0xb) {
-            *(uint *******)(*(int *)(param_1 + 0x3ac) + 0x5c) = ppppppuVar19;
+            *(uint *******)(*(int *)(program + 0x3ac) + 0x5c) = ppppppuVar19;
           }
           else if (iVar34 == 0xc) {
-            *(uint *******)(*(int *)(param_1 + 0x3ac) + 0x60) = ppppppuVar19;
+            *(uint *******)(*(int *)(program + 0x3ac) + 0x60) = ppppppuVar19;
           }
           else if (iVar34 == 0xf) {
-            *(uint *******)(*(int *)(param_1 + 0x3ac) + 100) = ppppppuVar19;
+            *(uint *******)(*(int *)(program + 0x3ac) + 100) = ppppppuVar19;
           }
-          in_r6 = (uint ******)0x0;
-          piVar18 = (int *)FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),arena,ppppppuVar19,0);
-          iVar43 = (**(code **)(*piVar18 + 0x2c))();
+          argR6 = (uint ******)0x0;
+          virtualRegister2 = (int *)FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile,ppppppuVar19,0);
+          iVar43 = (**(code **)(*virtualRegister2 + 0x2c))();
           local_70 = &local_178;
           *(uint *******)(iVar43 + 0x140) = ppppppuVar19;
           iVar47 = 0;
           do {
             if (*(char *)(iVar47 + (int)local_70) == '\0') {
-              in_r6 = ppppppuVar19;
+              argR6 = ppppppuVar19;
               FUN_00104104(iVar43,iVar47,iVar34,ppppppuVar19);
             }
-            bVar1 = iVar47 != 3;
+            notLastIteration = iVar47 != 3;
             iVar47 = iVar47 + 1;
-          } while (bVar1);
+          } while (notLastIteration);
         }
       }
       else {
-        in_r7 = (uint ******)0x10203;
-        in_r6 = (uint ******)(uint)*(ushort *)((int)ppppuVar45 + 2);
-        in_r8 = (uint ******)0x0;
-        (**(code **)(*piVar18 + 0x54))(piVar18,in_r6,(uint)*ppppppuVar49 >> 0x10 & 0x3fff);
+        argR7 = (uint ******)0x10203;
+        argR6 = (uint ******)(uint)*(ushort *)((int)ppppuVar45 + 2);
+        argR8 = (uint ******)0x0;
+        (**(code **)(*hwDescription + 0x54))(hwDescription,argR6,(uint)*tokenWords >> 0x10 & 0x3fff);
       }
       goto switchD_000fdaf0_caseD_2;
     case 0x7e:
-      uVar44 = (uint)*ppppppuVar49 >> 0xe & 0x1f;
-      ppppppuVar19 = (uint ******)FUN_000ec27c(param_1,uVar44);
-      uVar10 = (uint)*ppppppuVar49 >> 0x13 & 7;
+      uVar44 = (uint)*tokenWords >> 0xe & 0x1f;
+      ppppppuVar19 = (uint ******)FUN_000ec27c(program,uVar44);
+      uVar10 = (uint)*tokenWords >> 0x13 & 7;
       if (uVar10 == 3) {
-        bVar1 = true;
+        constantFlag = true;
         bVar3 = false;
         bVar2 = false;
       }
       else if (uVar10 < 4) {
         if (uVar10 == 1) {
-          bVar1 = false;
+          constantFlag = false;
           bVar3 = false;
           bVar2 = true;
         }
         else {
 code_r0x000feeb8:
-          bVar1 = false;
+          constantFlag = false;
           bVar3 = false;
           bVar2 = false;
         }
       }
       else if (uVar10 == 4) {
-        bVar1 = false;
+        constantFlag = false;
         bVar3 = true;
         bVar2 = false;
       }
       else {
         if (uVar10 != 5) goto code_r0x000feeb8;
-        bVar1 = true;
+        constantFlag = true;
         bVar3 = true;
         bVar2 = false;
       }
-      ppppppuVar49 = (uint ******)*param_2[0x19];
-      pppppuVar15 = *ppppppuVar49;
-      if (((uint)pppppuVar15 & 0x400000) == 0) {
-        if (((uint)pppppuVar15 & 0x2000000) == 0) {
+      destinationToken = (uint ******)*ilReader[0x19];
+      firstTokenWord = *destinationToken;
+      if (((uint)firstTokenWord & 0x400000) == 0) {
+        if (((uint)firstTokenWord & 0x2000000) == 0) {
           ppppppuVar40 = (uint ******)0x0;
           ppppppuVar38 = (uint ******)0x0;
         }
         else {
-          ppppppuVar40 = ppppppuVar49 + 1;
+          ppppppuVar40 = destinationToken + 1;
           ppppppuVar38 = (uint ******)0x0;
         }
       }
       else {
-        ppppppuVar38 = ppppppuVar49 + 1;
+        ppppppuVar38 = destinationToken + 1;
         ppppppuVar40 = (uint ******)0x0;
-        if (((uint)pppppuVar15 & 0x2000000) != 0) {
-          ppppppuVar40 = ppppppuVar49 + 2;
+        if (((uint)firstTokenWord & 0x2000000) != 0) {
+          ppppppuVar40 = destinationToken + 2;
         }
       }
-      if (((*(uint *)(param_1 + 0x30) & 1) == 0) && ((*(uint *)(param_1 + 0x30) & 0x2000) == 0)) {
+      if (((*(uint *)(program + 0x30) & 1) == 0) && ((*(uint *)(program + 0x30) & 0x2000) == 0)) {
         if (uVar44 == 10) {
           local_174 = (uint ****)(uint)*(ushort *)((int)ppppppuVar40 + 2);
           local_178 = (uint ******)0x10101;
@@ -6068,46 +6139,46 @@ code_r0x000feeb8:
           if (((uint)*ppppppuVar38 & 3) == 1) {
             puVar12 = &DAT_001aa9d0;
           }
-          puVar35 = &local_178;
+          swizzleTable = &local_178;
           local_178 = (uint ******)*puVar12;
           if (((uint)*ppppppuVar38 & 0xc) == 4) {
-            puVar35 = &UNK_001aa9c4;
+            swizzleTable = &UNK_001aa9c4;
           }
           puVar12 = &local_178;
-          local_178 = (uint ******)*puVar35;
+          local_178 = (uint ******)*swizzleTable;
           if (((uint)*ppppppuVar38 & 0x30) == 0x10) {
             puVar12 = &UNK_001aa9c0;
           }
-          puVar35 = &local_178;
+          swizzleTable = &local_178;
           local_178 = (uint ******)*puVar12;
           if (((uint)*ppppppuVar38 & 0xc0) == 0x40) {
-            puVar35 = &UNK_001aa9bc;
+            swizzleTable = &UNK_001aa9bc;
           }
-          local_178 = (uint ******)*puVar35;
+          local_178 = (uint ******)*swizzleTable;
           local_170 = (uint *****)local_178;
         }
       }
       else {
-        uVar10 = (uint)pppppuVar15 >> 0x10 & 0x3f;
-        ppppppuVar48 = (uint ******)(uint)*(ushort *)((int)ppppppuVar49 + 2);
-        arena = FUN_000ec208(param_1,uVar10);
+        ilRegisterType = (uint)firstTokenWord >> 0x10 & 0x3f;
+        ppppppuVar48 = (uint ******)(uint)*(ushort *)((int)destinationToken + 2);
+        registerFile = FUN_000ec208(program,ilRegisterType);
         puVar12 = local_13c;
-        ppppppuVar38 = *(uint *******)(param_1 + 1000);
-        if ((int)ppppppuVar48 <= (int)*(uint *******)(param_1 + 1000)) {
+        ppppppuVar38 = *(uint *******)(program + 1000);
+        if ((int)ppppppuVar48 <= (int)*(uint *******)(program + 1000)) {
           ppppppuVar38 = ppppppuVar48;
         }
-        puVar53 = *(undefined1 **)(param_1 + 0x3ec);
-        *(uint *******)(param_1 + 1000) = ppppppuVar38;
+        puVar53 = *(undefined1 **)(program + 0x3ec);
+        *(uint *******)(program + 1000) = ppppppuVar38;
         if ((int)puVar53 <= (int)ppppppuVar48) {
           puVar53 = (undefined1 *)((int)ppppppuVar48 + 1);
         }
-        *(undefined1 **)(param_1 + 0x3ec) = puVar53;
-        *(undefined4 *)(param_1 + 0x3f4) = 0x24;
-        in_r7 = (uint ******)0x4050607;
-        if ((*(uint *)(param_1 + 0x30) & 1) == 0) {
-          iVar34 = FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),arena,ppppppuVar48,0);
+        *(undefined1 **)(program + 0x3ec) = puVar53;
+        *(undefined4 *)(program + 0x3f4) = 0x24;
+        argR7 = (uint ******)0x4050607;
+        if ((*(uint *)(program + 0x30) & 1) == 0) {
+          iVar34 = FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile,ppppppuVar48,0);
           iVar34 = *(int *)(iVar34 + 0x38);
-          if (!bVar1) {
+          if (!constantFlag) {
             *(uint *)(iVar34 + 0x13c) = *(uint *)(iVar34 + 0x13c) | 1;
           }
           if (bVar3) {
@@ -6118,20 +6189,20 @@ code_r0x000feeb8:
           }
           iVar43 = 0;
           do {
-            in_r6 = ppppppuVar19;
-            in_r7 = ppppppuVar48;
+            argR6 = ppppppuVar19;
+            argR7 = ppppppuVar48;
             FUN_001041d0(iVar34,iVar43,1,ppppppuVar19,ppppppuVar48);
-            bVar1 = iVar43 != 3;
+            notLastIteration = iVar43 != 3;
             iVar43 = iVar43 + 1;
-          } while (bVar1);
+          } while (notLastIteration);
         }
-        else if ((*(uint *)(param_1 + 0x30) & 0x40000) == 0) {
-          in_r8 = *(uint *******)(param_1 + 0x3a0);
-          piVar18 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
-          (**(code **)(*piVar18 + 0x4c))(piVar18,param_1,ppppppuVar48);
-          in_r6 = ppppppuVar49;
+        else if ((*(uint *)(program + 0x30) & 0x40000) == 0) {
+          argR8 = *(uint *******)(program + 0x3a0);
+          hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
+          (**(code **)(*hwDescription + 0x4c))(hwDescription,program,ppppppuVar48);
+          argR6 = destinationToken;
         }
-        else if (uVar10 != 9) {
+        else if (ilRegisterType != 9) {
           uVar10 = (uint)*(ushort *)((int)ppppppuVar40 + 2);
           if (uVar10 < *local_13c) {
             uVar44 = local_13c[1];
@@ -6139,194 +6210,194 @@ code_r0x000feeb8:
               _memset(uVar44 * 4 + local_13c[2],0,(uVar10 - uVar44) * 4 + 4);
               puVar12[1] = uVar10 + 1;
             }
-            puVar14 = (undefined4 *)(uVar10 * 4 + puVar12[2]);
+            vectorElementSlot = (undefined4 *)(uVar10 * 4 + puVar12[2]);
           }
           else {
-            puVar14 = (undefined4 *)Vector__elementRefGrow(local_13c,uVar10);
+            vectorElementSlot = (undefined4 *)Vector__elementRefGrow(local_13c,uVar10);
           }
-          ppppppuVar49 = (uint ******)*puVar14;
-          in_r6 = (uint ******)0x0;
-          iVar34 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-          *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar34;
-          arena = FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),0,iVar34,0);
-          IRInst__setOperandRef(ppppppuVar49,0,arena);
+          ppppppuVar49 = (uint ******)*vectorElementSlot;
+          argR6 = (uint ******)0x0;
+          newTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+          *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex;
+          virtualRegister = FUN_00127608(*(undefined4 *)(program + 0x3ac),0,newTempIndex,0);
+          IRInst__setOperandRef(ppppppuVar49,0,virtualRegister);
           goto code_r0x000ff070;
         }
       }
       goto switchD_000fdaf0_caseD_2;
     case 0x80:
-      bVar4 = *(byte *)((int)param_2 + 0x8d);
-      uVar10 = (uint)*ppppppuVar49 >> 0x18 & 0xf;
-      if (piVar18[0x14] < (int)(uint)bVar4) {
-        Compiler__fail(iVar43,7);
+      ilRegisterIndex = *(byte *)((int)ilReader + 0x8d);
+      uVar10 = (uint)*tokenWords >> 0x18 & 0xf;
+      if (hwDescription[0x14] < (int)(uint)ilRegisterIndex) {
+        Compiler__fail(compiler,7);
       }
-      uVar44 = bVar4 >> 3 & 0x1c;
-      iVar34 = (uint)bVar4 * 0xc;
-      *(uint *)((int)local_a0 + uVar44 + 8) =
-           1 << (bVar4 & 0x1f) | *(uint *)((int)local_a0 + uVar44 + 8);
-      *(undefined4 *)(*(int *)(param_1 + 0x78) + iVar34) = 1;
+      bitmapByteOffset2 = ilRegisterIndex >> 3 & 0x1c;
+      iVar34 = (uint)ilRegisterIndex * 0xc;
+      *(uint *)((int)local_a0 + bitmapByteOffset2 + 8) =
+           1 << (ilRegisterIndex & 0x1f) | *(uint *)((int)local_a0 + bitmapByteOffset2 + 8);
+      *(undefined4 *)(*(int *)(program + 0x78) + iVar34) = 1;
       if (uVar10 != 0) {
-        *(uint *)(iVar34 + *(int *)(param_1 + 0x78) + 4) = uVar10;
+        *(uint *)(iVar34 + *(int *)(program + 0x78) + 4) = uVar10;
       }
       goto switchD_000fdaf0_caseD_2;
     case 0x81:
     case 0x84:
     case 0x85:
       local_a4 = (uint *****)((int)local_a4 + 1);
-      if ((*(uint *)(param_1 + 0x30) & 0x40000) == 0) {
-        if (allocation[2] != 0) {
-          *(uint *)(param_1 + 0x30) = *(uint *)(param_1 + 0x30) | 0x180000;
+      if ((*(uint *)(program + 0x30) & 0x40000) == 0) {
+        if (puVar13[2] != 0) {
+          *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 0x180000;
         }
-        if ((uint *****)local_a8[1] != (uint *****)0x0) {
-          *(uint *)(param_1 + 0x30) = *(uint *)(param_1 + 0x30) | 0x80000;
+        if ((uint *****)ifStack[1] != (uint *****)0x0) {
+          *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 0x80000;
         }
         pvVar16 = IRInst__create(*(undefined4 *)
-                                (iVar34 * 0x24 + *(int *)(*(int *)(iVar43 + 0x30c) + 0xc)),iVar43);
-        iVar34 = IRInst__getOperandRecord(pvVar16,0);
-        *(undefined4 *)(iVar34 + 0xc) = 0x2c;
-        *(undefined4 *)(iVar34 + 8) = 0;
+                                (ilOpcode * 0x24 + *(int *)(*(int *)(compiler + 0x30c) + 0xc)),compiler);
+        operandRecord = IRInst__getOperandRecord(pvVar16,0);
+        *(undefined4 *)(operandRecord + 0xc) = 0x2c;
+        *(undefined4 *)(operandRecord + 8) = 0;
         *(undefined4 *)((int)pvVar16 + 0x9c) = 0x10101;
-        iVar34 = IRInst__getOperandRecord(pvVar16,1);
-        *(undefined4 *)(iVar34 + 0xc) = 0x2c;
-        *(undefined4 *)(iVar34 + 8) = 0;
-        iVar34 = IRInst__getOperandRecord(pvVar16,1);
-        *(undefined4 *)(iVar34 + 0x10) = 0;
-        ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
+        operandRecord = IRInst__getOperandRecord(pvVar16,1);
+        *(undefined4 *)(operandRecord + 0xc) = 0x2c;
+        *(undefined4 *)(operandRecord + 8) = 0;
+        operandRecord = IRInst__getOperandRecord(pvVar16,1);
+        *(undefined4 *)(operandRecord + 0x10) = 0;
+        ((int (*)())FUN_000f92fc)(program,pvVar16,currentBlock);
       }
       goto switchD_000fdaf0_caseD_2;
     case 0x87:
-      uVar10 = (uint)*(byte *)((int)param_2 + 0x8d);
-      pppppuVar15 = *ppppppuVar49;
-      if (*(int *)(param_1 + 0x7c) < (int)uVar10) {
-        *(uint *)(param_1 + 0x7c) = uVar10;
+      ilRegisterIndex2 = (uint)*(byte *)((int)ilReader + 0x8d);
+      firstTokenWord = *tokenWords;
+      if (*(int *)(program + 0x7c) < (int)ilRegisterIndex2) {
+        *(uint *)(program + 0x7c) = ilRegisterIndex2;
       }
-      *(uint *)(param_1 + 0x84) = 1 << (uVar10 & 0x3f) | *(uint *)(param_1 + 0x84);
+      *(uint *)(program + 0x84) = 1 << (ilRegisterIndex2 & 0x3f) | *(uint *)(program + 0x84);
       local_178 = (uint ******)0x10203;
-      arena = *(undefined4 *)(param_1 + 0x3ac);
-      iVar34 = *(int *)(iVar43 + 0x3ac) + -1;
-      *(int *)(iVar43 + 0x3ac) = iVar34;
-      arena = FUN_00127608(arena,0,iVar34,0);
-      uVar50 = *(undefined4 *)(param_1 + 0x3ac);
-      iVar34 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-      *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar34;
-      uVar50 = FUN_00127608(uVar50,0,iVar34,0);
-      pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-      IRInst__setOperandRef(pvVar16,0,uVar50);
+      registerMap = *(undefined4 *)(program + 0x3ac);
+      newTempIndex = *(int *)(compiler + 0x3ac) + -1;
+      *(int *)(compiler + 0x3ac) = newTempIndex;
+      virtualRegister = FUN_00127608(registerMap,0,newTempIndex,0);
+      uVar50 = *(undefined4 *)(program + 0x3ac);
+      newTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+      *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex;
+      uVar50 = FUN_00127608(uVar50,0,newTempIndex,0);
+      movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+      IRInst__setOperandRef(movFloatInst,0,uVar50);
       local_70 = &local_178;
-      ((int (*)())FUN_000fa958)(param_1,5,1,param_2,pvVar16,1,0,local_70,ppppppuVar37,1,local_180);
-      ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
-      pvVar16 = IRInst__create(0x109,*(undefined4 *)(param_1 + 8));
-      *(uint *)((int)pvVar16 + 0x134) = uVar10;
-      IRInst__setOperandRef(pvVar16,0,arena);
-      IRInst__setOperandRef(pvVar16,1,uVar50);
-      ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
+      ((int (*)())FUN_000fa958)(program,5,1,ilReader,movFloatInst,1,0,local_70,loopStackData,1,currentBlock);
+      ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
+      getResourceInst = IRInst__create(0x109,*(undefined4 *)(program + 8));
+      *(uint *)((int)getResourceInst + 0x134) = ilRegisterIndex2;
+      IRInst__setOperandRef(getResourceInst,0,virtualRegister);
+      IRInst__setOperandRef(getResourceInst,1,uVar50);
+      ((int (*)())FUN_000f92fc)(program,getResourceInst,currentBlock);
       puVar9 = PTR_DAT_001e8b8c;
-      puVar8 = PTR_DAT_001e8b64;
+      remapTable = PTR_DAT_001e8b64;
       local_178 = (uint ******)0x10203;
-      if (((uint)pppppuVar15 & 0x1f000000) != 0x1000000) {
+      if (((uint)firstTokenWord & 0x1f000000) != 0x1000000) {
         iVar34 = 0;
         do {
-          pvVar16 = IRInst__create(0xe1,*(undefined4 *)(param_1 + 8));
-          IRInst__setOperandRef(pvVar16,0,arena);
-          IRInst__setOperandRef(pvVar16,1,arena);
+          int2FInst = IRInst__create(0xe1,*(undefined4 *)(program + 8));
+          IRInst__setOperandRef(int2FInst,0,virtualRegister);
+          IRInst__setOperandRef(int2FInst,1,virtualRegister);
           uVar50 = *(undefined4 *)(puVar9 + iVar34);
-          *(undefined4 *)((int)pvVar16 + 0x9c) = *(undefined4 *)(puVar8 + iVar34);
-          iVar43 = IRInst__getOperandRecord(pvVar16,1);
-          *(undefined4 *)(iVar43 + 0x10) = uVar50;
-          ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
-          bVar1 = iVar34 != 0xc;
+          *(undefined4 *)((int)int2FInst + 0x9c) = *(undefined4 *)(remapTable + iVar34);
+          operandRecord2 = IRInst__getOperandRecord(int2FInst,1);
+          *(undefined4 *)(operandRecord2 + 0x10) = uVar50;
+          ((int (*)())FUN_000f92fc)(program,int2FInst,currentBlock);
+          notLastIteration = iVar34 != 0xc;
           iVar34 = iVar34 + 4;
-        } while (bVar1);
+        } while (notLastIteration);
       }
-      ppppppuVar49 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-      in_r8 = (uint ******)((int)((unsigned char *)0x0) + 1);
-      in_r6 = param_2;
-      in_r7 = ppppppuVar49;
-      ((int (*)())FUN_000fa958)(param_1,0,0,param_2,ppppppuVar49,1,0,local_70,ppppppuVar37,1,local_180);
-      IRInst__setOperandRef(ppppppuVar49,1,arena);
+      ppppppuVar49 = IRInst__create(0x31,*(undefined4 *)(program + 8));
+      argR8 = (uint ******)((int)((unsigned char *)0x0) + 1);
+      argR6 = ilReader;
+      argR7 = ppppppuVar49;
+      ((int (*)())FUN_000fa958)(program,0,0,ilReader,ppppppuVar49,1,0,local_70,loopStackData,1,currentBlock);
+      IRInst__setOperandRef(ppppppuVar49,1,virtualRegister);
 code_r0x000ff070:
-      ((int (*)())FUN_000f92fc)(param_1,ppppppuVar49,local_180);
+      ((int (*)())FUN_000f92fc)(program,ppppppuVar49,currentBlock);
       goto switchD_000fdaf0_caseD_2;
     case 0xbe:
-      arena = *(undefined4 *)(iVar43 + 0x374);
-      puVar14 = (undefined4 *)Arena__alloc(arena,0x168);
-      *puVar14 = arena;
-      ppppppuVar19 = (uint ******)(puVar14 + 1);
-      IRInst__ctor_10502c(ppppppuVar19,0xb4,*(undefined4 *)(param_1 + 8));
-      if (((uint)*ppppppuVar49 & 0x3fff0000) != 0) {
-        puVar14[0x4c] = 1;
+      compilerArenaA = *(undefined4 *)(compiler + 0x374);
+      instAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
+      *instAllocation = compilerArenaA;
+      ppppppuVar19 = (uint ******)(instAllocation + 1);
+      IRInst__ctor_10502c(ppppppuVar19,0xb4,*(undefined4 *)(program + 8));
+      if (((uint)*tokenWords & 0x3fff0000) != 0) {
+        instAllocation[0x4c] = 1;
       }
-      in_r8 = (uint ******)&local_174;
-      ((int (*)())FUN_000fb3d4)(param_1,local_68,ppppppuVar49,*param_2[0x1b],ppppppuVar37,in_r8,&local_13c);
-      pppuVar42 = **param_2[0x1b];
-      if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(param_1 + 8) != 0)) &&
-         ((*(uint *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 8) & 0x80) != 0)) {
+      argR8 = (uint ******)&local_174;
+      ((int (*)())FUN_000fb3d4)(program,local_68,tokenWords,*ilReader[0x1b],loopStackData,argR8,&local_13c);
+      pppuVar42 = **ilReader[0x1b];
+      if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
+         ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
         iVar34 = 0xf;
       }
       else {
-        iVar34 = (int)*(short *)((int)*param_2[0x1b] + 2);
+        iVar34 = (int)*(short *)((int)*ilReader[0x1b] + 2);
       }
-      uVar10 = (uint)pppuVar42 >> 0x10 & 0x3f;
-      iVar43 = FUN_00127534(*(undefined4 *)(param_1 + 0x3ac),0x2c,0,0);
+      ilRegisterType = (uint)pppuVar42 >> 0x10 & 0x3f;
+      iVar43 = FUN_00127534(*(undefined4 *)(program + 0x3ac),0x2c,0,0);
       if (iVar43 == 0) {
-        arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-        puVar14 = (undefined4 *)Arena__alloc(arena,0x168);
-        *puVar14 = arena;
-        puVar24 = puVar14 + 1;
-        IRExport__ctor_108918(puVar24,*(undefined4 *)(param_1 + 8));
-        puVar14[6] = puVar14[6] | 0x10000;
-        *(undefined4 **)(param_1 + 0x350) = puVar24;
-        puVar14[0x28] = 0;
-        iVar43 = FUN_001275a0(*(undefined4 *)(param_1 + 0x3ac),0x2c,0,0);
+        compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+        instAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
+        *instAllocation = compilerArenaA;
+        puVar24 = instAllocation + 1;
+        IRExport__ctor_108918(puVar24,*(undefined4 *)(program + 8));
+        instAllocation[6] = instAllocation[6] | 0x10000;
+        *(undefined4 **)(program + 0x350) = puVar24;
+        instAllocation[0x28] = 0;
+        iVar43 = FUN_001275a0(*(undefined4 *)(program + 0x3ac),0x2c,0,0);
         IRInst__setOperandRef(puVar24,0,iVar43);
         IRInst__setOperandRef(puVar24,1,iVar43);
         iVar47 = IRInst__getOperandRecord(puVar24,1);
         *(undefined4 *)(iVar47 + 0x10) = 0x10203;
-        Block__appendInst(*(undefined4 *)(param_1 + 0x3a8),puVar24);
+        Block__appendInst(*(undefined4 *)(program + 0x3a8),puVar24);
         FUN_0012306c(iVar43,puVar24);
         VReg__addUse(iVar43,1,puVar24);
       }
       IRInst__setOperandRef(ppppppuVar19,0,iVar43);
-      arena = FUN_000ec208(param_1,uVar10);
-      iVar43 = IRInst__getOperandRecord(ppppppuVar19,1);
-      *(undefined4 *)(iVar43 + 0xc) = arena;
-      *(int *)(iVar43 + 8) = iVar34;
-      arena = FUN_000ec208(param_1,uVar10);
-      iVar43 = IRInst__getOperandRecord(ppppppuVar19,2);
-      *(undefined4 *)(iVar43 + 0xc) = arena;
-      *(int *)(iVar43 + 8) = iVar34;
-      arena = FUN_000ec208(param_1,uVar10);
-      iVar43 = IRInst__getOperandRecord(ppppppuVar19,3);
-      *(undefined4 *)(iVar43 + 0xc) = arena;
+      registerFile = FUN_000ec208(program,ilRegisterType);
+      operandRecord2 = IRInst__getOperandRecord(ppppppuVar19,1);
+      *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
+      *(int *)(operandRecord2 + 8) = iVar34;
+      registerFile = FUN_000ec208(program,ilRegisterType);
+      operandRecord2 = IRInst__getOperandRecord(ppppppuVar19,2);
+      *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
+      *(int *)(operandRecord2 + 8) = iVar34;
+      registerFile = FUN_000ec208(program,ilRegisterType);
+      operandRecord2 = IRInst__getOperandRecord(ppppppuVar19,3);
+      *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
       local_70 = &local_178;
-      *(int *)(iVar43 + 8) = iVar34;
+      *(int *)(operandRecord2 + 8) = iVar34;
       local_178 = (uint ******)0x10101;
-      ((int (*)())FUN_000f8aa0)(param_1,local_70,*param_2[0x1b],1,ppppppuVar19);
+      ((int (*)())FUN_000f8aa0)(program,local_70,*ilReader[0x1b],1,ppppppuVar19);
       local_178 = (uint ******)0x2020202;
-      ((int (*)())FUN_000f8aa0)(param_1,local_70,*param_2[0x1b],2,ppppppuVar19);
-      in_r6 = (uint ******)((int)((unsigned char *)0x0) + 3);
+      ((int (*)())FUN_000f8aa0)(program,local_70,*ilReader[0x1b],2,ppppppuVar19);
+      argR6 = (uint ******)((int)((unsigned char *)0x0) + 3);
       local_178 = (uint ******)0x3030303;
-      in_r7 = ppppppuVar19;
-      ((int (*)())FUN_000f8aa0)(param_1,local_70,*param_2[0x1b],3,ppppppuVar19);
+      argR7 = ppppppuVar19;
+      ((int (*)())FUN_000f8aa0)(program,local_70,*ilReader[0x1b],3,ppppppuVar19);
       iVar43 = *(int *)(local_14c + 8);
       iVar34 = local_14c;
       while (iVar47 = iVar43, iVar47 != 0) {
         DList__unlink(iVar34);
-        ((int (*)())FUN_000f92fc)(param_1,iVar34,local_180);
+        ((int (*)())FUN_000f92fc)(program,iVar34,currentBlock);
         iVar34 = iVar47;
         iVar43 = *(int *)(iVar47 + 8);
       }
-      ((int (*)())FUN_000f92fc)(param_1,ppppppuVar19,local_180);
+      ((int (*)())FUN_000f92fc)(program,ppppppuVar19,currentBlock);
       goto switchD_000fdaf0_caseD_2;
     case 0xe3:
-      arena = *(undefined4 *)(iVar43 + 0x374);
-      puVar14 = (undefined4 *)Arena__alloc(arena,0x168);
-      *puVar14 = arena;
-      piVar18 = puVar14 + 1;
-      IRInst__ctor_10502c(piVar18,0x106,*(undefined4 *)(param_1 + 8));
-      ((int (*)())FUN_000f92fc)(param_1,piVar18,local_180);
+      compilerArenaA = *(undefined4 *)(compiler + 0x374);
+      instAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
+      *instAllocation = compilerArenaA;
+      piVar18 = instAllocation + 1;
+      IRInst__ctor_10502c(piVar18,0x106,*(undefined4 *)(program + 8));
+      ((int (*)())FUN_000f92fc)(program,piVar18,currentBlock);
     }
-    puVar12 = *(uint **)(param_1 + 0x414);
+    puVar12 = *(uint **)(program + 0x414);
     uVar10 = puVar12[1];
     if (uVar10 < *puVar12) {
       _memset(uVar10 * 4 + puVar12[2],0,4);
@@ -6342,51 +6413,51 @@ code_r0x000febe0:
   default:
     goto switchD_000fdaf0_caseD_2;
   case 4:
-    bVar1 = false;
+    constantFlag = false;
     break;
   case 5:
     local_78 = &DAT_001ad5d8;
     local_60 = &DAT_001ad5d8;
-    iVar47 = *(int *)(iVar34 * 0x24 + iVar47 + 0x18);
+    iVar47 = *(int *)(ilOpcode * 0x24 + iVar47 + 0x18);
     local_124 = (uint *****)0x0;
     local_178 = (uint ******)0x10203;
-    arena = *(undefined4 *)(iVar43 + 0x378);
-    puVar14 = (undefined4 *)Arena__alloc(arena,0x14);
-    puVar12 = puVar14 + 1;
-    *puVar14 = arena;
-    puVar14[1] = 2;
-    puVar14[2] = 0;
-    puVar14[4] = arena;
-    arena = Arena__alloc(arena,8);
-    puVar14[3] = arena;
-    arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
-    puVar24 = (undefined4 *)Arena__alloc(arena,0x14);
-    ppppppuVar19 = (uint ******)(puVar24 + 1);
-    *puVar24 = arena;
-    puVar24[1] = 2;
-    puVar24[2] = 0;
-    puVar24[4] = arena;
-    arena = Arena__alloc(arena,8);
-    puVar24[3] = arena;
+    compilerArenaB = *(undefined4 *)(compiler + 0x378);
+    vectorAllocation = (undefined4 *)Arena__alloc(compilerArenaB,0x14);
+    puVar12 = vectorAllocation + 1;
+    *vectorAllocation = compilerArenaB;
+    vectorAllocation[1] = 2;
+    vectorAllocation[2] = 0;
+    vectorAllocation[4] = compilerArenaB;
+    vectorStorage = Arena__alloc(compilerArenaB,8);
+    vectorAllocation[3] = vectorStorage;
+    compilerArenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+    vectorAllocation2 = (undefined4 *)Arena__alloc(compilerArenaB,0x14);
+    ppppppuVar19 = (uint ******)(vectorAllocation2 + 1);
+    *vectorAllocation2 = compilerArenaB;
+    vectorAllocation2[1] = 2;
+    vectorAllocation2[2] = 0;
+    vectorAllocation2[4] = compilerArenaB;
+    vectorStorage = Arena__alloc(compilerArenaB,8);
+    vectorAllocation2[3] = vectorStorage;
     local_17c = (int *)0x0;
     _memcpy(&local_104,&UNK_001aaa2c,0x24);
-    iVar20 = *(int *)(param_1 + 8);
+    iVar20 = *(int *)(program + 8);
     ppppppuVar38 = (uint ******)0x0;
-    arena = *(undefined4 *)(*(int *)(iVar20 + 0x30c) + 0xc);
-    local_c0 = (uint *****)((int (*)())FUN_000f8960)(iVar34,arena);
-    iVar43 = ((int (*)())FUN_000f8970)(iVar34,arena);
+    opcodeRecordTable = *(undefined4 *)(*(int *)(iVar20 + 0x30c) + 0xc);
+    local_c0 = (uint *****)((int (*)())FUN_000f8960)(ilOpcode,opcodeRecordTable);
+    iVar43 = ((int (*)())FUN_000f8970)(ilOpcode,opcodeRecordTable);
     if (0 < (int)local_c0) {
       do {
         iVar21 = (int)ppppppuVar38 << 2;
         for (iVar22 = 0;
-            operandRecord = ((int (*)())FUN_000f8980)(iVar34,ppppppuVar38,
-                                  *(undefined4 *)(*(int *)(iVar20 + 0x30c) + 0xc)), iVar22 <= operandRecord
+            iVar23 = ((int (*)())FUN_000f8980)(ilOpcode,ppppppuVar38,
+                                  *(undefined4 *)(*(int *)(iVar20 + 0x30c) + 0xc)), iVar22 <= iVar23
             ; iVar22 = iVar22 + 1) {
-          in_r6 = ppppppuVar37;
-          in_r7 = (uint ******)local_a4;
-          ((int (*)())FUN_000f9a58)(param_1,local_6c,*(undefined4 *)((int)param_2[0x19] + iVar21),ppppppuVar37,
+          argR6 = loopStackData;
+          argR7 = (uint ******)local_a4;
+          ((int (*)())FUN_000f9a58)(program,local_6c,*(undefined4 *)((int)ilReader[0x19] + iVar21),loopStackData,
                        local_a4);
-          iVar20 = *(int *)(param_1 + 8);
+          iVar20 = *(int *)(program + 8);
           iVar21 = iVar21 + 0x14;
         }
         ppppppuVar38 = (uint ******)((int)ppppppuVar38 + 1);
@@ -6397,14 +6468,14 @@ code_r0x000febe0:
       do {
         iVar22 = iVar21 << 2;
         puVar53 = (undefined1 *)((int)local_c0 + iVar21);
-        for (operandRecord = 0;
-            iVar25 = ((int (*)())FUN_000f8980)(iVar34,puVar53,*(undefined4 *)(*(int *)(iVar20 + 0x30c) + 0xc)),
-            operandRecord <= iVar25; operandRecord = operandRecord + 1) {
-          in_r6 = *(uint *******)((int)param_2[0x1b] + iVar22);
-          in_r8 = (uint ******)&local_174;
-          in_r7 = ppppppuVar37;
-          ((int (*)())FUN_000fb3d4)(param_1,local_68,ppppppuVar49,in_r6,ppppppuVar37,in_r8,&local_13c);
-          iVar20 = *(int *)(param_1 + 8);
+        for (iVar23 = 0;
+            iVar25 = ((int (*)())FUN_000f8980)(ilOpcode,puVar53,*(undefined4 *)(*(int *)(iVar20 + 0x30c) + 0xc)),
+            iVar23 <= iVar25; iVar23 = iVar23 + 1) {
+          argR6 = *(uint *******)((int)ilReader[0x1b] + iVar22);
+          argR8 = (uint ******)&local_174;
+          argR7 = loopStackData;
+          ((int (*)())FUN_000fb3d4)(program,local_68,tokenWords,argR6,loopStackData,argR8,&local_13c);
+          iVar20 = *(int *)(program + 8);
           iVar22 = iVar22 + 0x14;
         }
         iVar21 = iVar21 + 1;
@@ -6414,7 +6485,7 @@ code_r0x000febe0:
     iVar43 = local_14c;
     while (iVar21 = iVar20, iVar21 != 0) {
       DList__unlink(iVar43);
-      ((int (*)())FUN_000f92fc)(param_1,iVar43,local_180);
+      ((int (*)())FUN_000f92fc)(program,iVar43,currentBlock);
       iVar43 = iVar21;
       iVar20 = *(int *)(iVar21 + 8);
     }
@@ -6422,11 +6493,11 @@ code_r0x000febe0:
     ppppppuVar38 = (uint ******)0x0;
     ppppppuVar40 = (uint ******)0x0;
 code_r0x001005f4:
-    ppppppuVar39 = (uint ******)local_180;
+    ppppppuVar39 = (uint ******)currentBlock;
     ppppppuVar48 = (uint ******)PTR_DAT_001e8bd4;
-    uVar10 = *(uint *)(iVar47 + (int)local_17c * 4);
-    if (0x71 < uVar10) goto switchD_0010061c_caseD_0;
-    switch(uVar10) {
+    templateToken = *(uint *)(iVar47 + (int)local_17c * 4);
+    if (0x71 < templateToken) goto switchD_0010061c_caseD_0;
+    switch(templateToken) {
     default:
       goto switchD_0010061c_caseD_0;
     case 1:
@@ -6456,11 +6527,11 @@ code_r0x001005f4:
     case 0xf:
     case 0x10:
     case 0x11:
-      in_r6 = param_2;
-      in_r7 = ppppppuVar38;
-      in_r8 = (uint ******)local_c0;
-      iVar43 = ((int (*)())FUN_000fa958)(param_1,uVar10 - 2,ppppppuVar40,param_2,ppppppuVar38,local_c0,local_124,
-                            &local_178,ppppppuVar37,local_b4,local_180);
+      argR6 = ilReader;
+      argR7 = ppppppuVar38;
+      argR8 = (uint ******)local_c0;
+      iVar43 = ((int (*)())FUN_000fa958)(program,templateToken - 2,ppppppuVar40,ilReader,ppppppuVar38,local_c0,local_124,
+                            &local_178,loopStackData,local_b4,currentBlock);
       if (iVar43 != 0) {
         DList__pushFront(local_6c,iVar43);
       }
@@ -6471,49 +6542,49 @@ code_r0x001005f4:
     case 0x14:
     case 0x15:
     case 0x16:
-      uVar44 = (uint)*ppppppuVar49 >> 0x10 & 0x3fff;
-      if (uVar10 == 0x14) {
-        in_r7 = (uint ******)(PTR_DAT_001dc78c)[uVar44];
+      uVar44 = (uint)*tokenWords >> 0x10 & 0x3fff;
+      if (templateToken == 0x14) {
+        argR7 = (uint ******)(PTR_DAT_001dc78c)[uVar44];
       }
-      else if (uVar10 == 0x15) {
-        in_r7 = (uint ******)(PTR_DAT_001dc77c)[uVar44];
+      else if (templateToken == 0x15) {
+        argR7 = (uint ******)(PTR_DAT_001dc77c)[uVar44];
       }
       else {
-        in_r7 = (uint ******)(PTR_DAT_001dc76c)[uVar44];
+        argR7 = (uint ******)(PTR_DAT_001dc76c)[uVar44];
       }
       goto code_r0x001022b4;
     case 0x17:
-      iVar43 = FUN_000e47f4(param_2);
-      if ((iVar43 == 0x3e) || (iVar43 = FUN_000e47f4(param_2), iVar43 == 0x71)) {
-        uVar10 = allocation[2];
+      iVar43 = FUN_000e47f4(ilReader);
+      if ((iVar43 == 0x3e) || (iVar43 = FUN_000e47f4(ilReader), iVar43 == 0x71)) {
+        uVar10 = puVar13[2];
         if (uVar10 != 0) {
-          piVar18 = (int *)0x0;
+          stackElement = (int *)0x0;
           if (uVar10 - 1 < uVar10) {
-            piVar18 = (int *)((uVar10 - 1) * 4 + allocation[3]);
+            stackElement = (int *)((uVar10 - 1) * 4 + puVar13[3]);
           }
-          iVar43 = *piVar18;
-          pppppuVar15 = (uint *****)local_a8[1];
+          iVar43 = *stackElement;
+          ifStackCount = (uint *****)ifStack[1];
           ppppppuVar48 = (uint ******)PTR_DAT_001e8bbc;
-          if (pppppuVar15 != (uint *****)0x0) {
+          if (ifStackCount != (uint *****)0x0) {
             pppppuVar52 = (uint *****)0x0;
-            if ((uint *****)((int)pppppuVar15 - 1U) < pppppuVar15) {
-              pppppuVar52 = (uint *****)(local_a8[2] + (int)((int)pppppuVar15 - 1U));
+            if ((uint *****)((int)ifStackCount - 1U) < ifStackCount) {
+              pppppuVar52 = (uint *****)(ifStack[2] + (int)((int)ifStackCount - 1U));
             }
             if ((int)local_188 <= (int)(*pppppuVar52)[0x2e]) {
-              arena = *(undefined4 *)(iVar43 + 0x154);
-              uVar50 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-              puVar32 = (undefined4 *)Arena__alloc(uVar50,0x138);
-              *puVar32 = uVar50;
-              ppppppuVar48 = (uint ******)(puVar32 + 1);
-              in_r6 = *(uint *******)(param_1 + 8);
-              BreakBlock__ctor_ec0c8(ppppppuVar48,iVar43,*(undefined4 *)(iVar43 + 300),in_r6);
-              puVar32[0x2f] = local_188;
-              FUN_000ec3ac(param_1,local_184,ppppppuVar48);
-              Block__connect(local_184,ppppppuVar48);
-              Block__connect(ppppppuVar48,arena);
+              breakTargetBlock = *(undefined4 *)(iVar43 + 0x154);
+              uVar50 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+              blockAllocation4 = (undefined4 *)Arena__alloc(uVar50,0x138);
+              *blockAllocation4 = uVar50;
+              ppppppuVar48 = (uint ******)(blockAllocation4 + 1);
+              argR6 = *(uint *******)(program + 8);
+              BreakBlock__ctor_ec0c8(ppppppuVar48,iVar43,*(undefined4 *)(iVar43 + 300),argR6);
+              blockAllocation4[0x2f] = local_188;
+              FUN_000ec3ac(program,previousBlock,ppppppuVar48);
+              Block__connect(previousBlock,ppppppuVar48);
+              Block__connect(ppppppuVar48,breakTargetBlock);
               local_bc = 0;
               *(int *)(iVar43 + 0x138) = *(int *)(iVar43 + 0x138) + 1;
-              local_184 = (uint *****)ppppppuVar48;
+              previousBlock = (uint *****)ppppppuVar48;
               break;
             }
           }
@@ -6521,42 +6592,42 @@ code_r0x001005f4:
         }
       }
       else {
-        iVar43 = FUN_000e47f4(param_2);
+        iVar43 = FUN_000e47f4(ilReader);
         ppppppuVar48 = (uint ******)PTR_DAT_001e8bb4;
         if (iVar43 == 0x72) {
-          piVar18 = (int *)0x0;
-          uVar10 = local_b0[1] - 1;
-          if (uVar10 < local_b0[1]) {
-            piVar18 = (int *)(uVar10 * 4 + local_b0[2]);
+          stackElement = (int *)0x0;
+          conditionStackTopIndex = conditionStack[1] - 1;
+          if (conditionStackTopIndex < conditionStack[1]) {
+            stackElement = (int *)(conditionStackTopIndex * 4 + conditionStack[2]);
           }
-          *(int *)(*piVar18 + 4) = *(int *)(*piVar18 + 4) + 1;
+          *(int *)(*stackElement + 4) = *(int *)(*stackElement + 4) + 1;
 code_r0x00103718:
-          in_r6 = (uint ******)0x0;
-          in_r8 = ppppppuVar19;
-          iVar47 = ((int (*)())FUN_000fd50c)(param_1,iVar47,&local_17c,0,ppppppuVar48,ppppppuVar19);
-          in_r7 = ppppppuVar48;
+          argR6 = (uint ******)0x0;
+          argR8 = ppppppuVar19;
+          iVar47 = ((int (*)())FUN_000fd50c)(program,iVar47,&local_17c,0,ppppppuVar48,ppppppuVar19);
+          argR7 = ppppppuVar48;
           goto code_r0x0010372c;
         }
       }
       goto switchD_0010061c_caseD_1;
     case 0x1f:
       local_17c = (int *)((int)local_17c + 1);
-      uVar10 = *(uint *)(iVar47 + (int)local_17c * 4);
+      templateToken = *(uint *)(iVar47 + (int)local_17c * 4);
       local_178 = (uint ******)
-                  (uVar10 << 0x18 | (uVar10 & 0xff00) << 8 | uVar10 >> 8 & 0xff00 | uVar10 >> 0x18);
+                  (templateToken << 0x18 | (templateToken & 0xff00) << 8 | templateToken >> 8 & 0xff00 | templateToken >> 0x18);
       local_bc = 0;
       break;
     case 0x20:
       local_17c = (int *)((int)local_17c + 1);
-      uVar10 = *(uint *)(iVar47 + (int)local_17c * 4);
-      in_r7 = (uint ******)&local_124;
+      templateToken = *(uint *)(iVar47 + (int)local_17c * 4);
+      argR7 = (uint ******)&local_124;
       local_124 = (uint *****)
-                  (uVar10 << 0x18 | (uVar10 & 0xff00) << 8 | uVar10 >> 8 & 0xff00 | uVar10 >> 0x18);
+                  (templateToken << 0x18 | (templateToken & 0xff00) << 8 | templateToken >> 8 & 0xff00 | templateToken >> 0x18);
       local_bc = 0;
       break;
     case 0x21:
       ppppppuVar48 = (uint ******)0x0;
-      switch((uint)*ppppppuVar49 >> 0x10 & 7) {
+      switch((uint)*tokenWords >> 0x10 & 7) {
       case 0:
         ppppppuVar48 = (uint ******)PTR_DAT_001e8b80;
         break;
@@ -6577,37 +6648,37 @@ code_r0x00103718:
       }
       goto switchD_00102044_default;
     case 0x22:
-      uVar10 = (uint)*ppppppuVar49 >> 0x16 & 7;
+      uVar10 = (uint)*tokenWords >> 0x16 & 7;
       if (uVar10 == 0) goto switchD_0010061c_caseD_1;
-      ppppppuVar48 = IRInst__create(0x12,*(undefined4 *)(param_1 + 8));
+      ppppppuVar48 = IRInst__create(0x12,*(undefined4 *)(program + 8));
       if (local_100 == 0) {
-        local_100 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-        *(int *)(*(int *)(param_1 + 8) + 0x3ac) = local_100;
+        local_100 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+        *(int *)(*(int *)(program + 8) + 0x3ac) = local_100;
       }
       iVar43 = local_100;
       iVar20 = IRInst__getOperandRecord(ppppppuVar48,0);
       *(int *)(iVar20 + 8) = iVar43;
       *(undefined4 *)(iVar20 + 0xc) = 0;
-      pppuVar42 = **param_2[0x1b];
-      if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(param_1 + 8) != 0)) &&
-         ((*(uint *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 8) & 0x80) != 0)) {
+      pppuVar42 = **ilReader[0x1b];
+      if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
+         ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
         iVar20 = 0xf;
       }
       else {
-        iVar20 = (int)*(short *)((int)*param_2[0x1b] + 2);
+        iVar20 = (int)*(short *)((int)*ilReader[0x1b] + 2);
       }
-      arena = FUN_000ec208(param_1,(uint)pppuVar42 >> 0x10 & 0x3f);
+      registerFile = FUN_000ec208(program,(uint)pppuVar42 >> 0x10 & 0x3f);
       iVar21 = IRInst__getOperandRecord(ppppppuVar48,1);
-      *(undefined4 *)(iVar21 + 0xc) = arena;
+      *(undefined4 *)(iVar21 + 0xc) = registerFile;
       *(int *)(iVar21 + 8) = iVar20;
-      in_r6 = ppppppuVar40;
-      in_r7 = ppppppuVar48;
-      ((int (*)())FUN_000f8aa0)(param_1,&local_178,*param_2[0x1b],ppppppuVar40,ppppppuVar48);
+      argR6 = ppppppuVar40;
+      argR7 = ppppppuVar48;
+      ((int (*)())FUN_000f8aa0)(program,&local_178,*ilReader[0x1b],ppppppuVar40,ppppppuVar48);
       if (uVar10 == 2) {
         fVar5 = 1.0;
 code_r0x001021c0:
         dVar54 = (double)fVar5;
-        ((void (*)())IRInst__makeLiteralVec4Float)(ppppppuVar48,param_1,2,dVar54,dVar54,dVar54,dVar54);
+        ((void (*)())IRInst__makeLiteralVec4Float)(ppppppuVar48,program,2,dVar54,dVar54,dVar54,dVar54);
         IROperand__setModifierBits(ppppppuVar48 + 0x2f,1,1);
       }
       else if (uVar10 < 3) {
@@ -6625,10 +6696,10 @@ code_r0x001021c0:
           fVar5 = 1.0;
         }
         dVar54 = (double)fVar5;
-        ((void (*)())IRInst__makeLiteralVec4Float)(ppppppuVar48,param_1,2,dVar54,dVar54,dVar54,dVar54);
+        ((void (*)())IRInst__makeLiteralVec4Float)(ppppppuVar48,program,2,dVar54,dVar54,dVar54,dVar54);
       }
 code_r0x00102220:
-      ((int (*)())FUN_000f92fc)(param_1,ppppppuVar48,local_180);
+      ((int (*)())FUN_000f92fc)(program,ppppppuVar48,currentBlock);
       iVar20 = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
       *(int *)(iVar20 + 8) = iVar43;
       *(undefined4 *)(iVar20 + 0xc) = 0;
@@ -6638,7 +6709,7 @@ code_r0x00102220:
       break;
     case 0x23:
       ppppppuVar48 = (uint ******)0x0;
-      switch((uint)*ppppppuVar49 >> 0x10 & 7) {
+      switch((uint)*tokenWords >> 0x10 & 7) {
       case 0:
         ppppppuVar48 = (uint ******)PTR_DAT_001e8bc0;
         break;
@@ -6659,35 +6730,35 @@ code_r0x00102220:
       }
       goto switchD_00102044_default;
     case 0x24:
-      if (allocation[2] != 0) {
-        pppppuVar15 = (uint *****)local_a8[1];
+      if (puVar13[2] != 0) {
+        ifStackCount = (uint *****)ifStack[1];
         ppppppuVar48 = (uint ******)PTR_DAT_001e8b78;
-        if (pppppuVar15 != (uint *****)0x0) {
+        if (ifStackCount != (uint *****)0x0) {
           pppppuVar52 = (uint *****)0x0;
-          if ((uint *****)((int)pppppuVar15 - 1U) < pppppuVar15) {
-            pppppuVar52 = (uint *****)(local_a8[2] + (int)((int)pppppuVar15 - 1U));
+          if ((uint *****)((int)ifStackCount - 1U) < ifStackCount) {
+            pppppuVar52 = (uint *****)(ifStack[2] + (int)((int)ifStackCount - 1U));
           }
           if ((int)local_188 <= (int)(*pppppuVar52)[0x2e]) {
-            uVar10 = allocation[2] - 1;
-            piVar18 = (int *)0x0;
-            if (uVar10 < (uint)allocation[2]) {
-              piVar18 = (int *)(uVar10 * 4 + allocation[3]);
+            uVar10 = puVar13[2] - 1;
+            stackElement = (int *)0x0;
+            if (uVar10 < (uint)puVar13[2]) {
+              stackElement = (int *)(uVar10 * 4 + puVar13[3]);
             }
-            iVar43 = *piVar18;
-            uVar50 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-            arena = *(undefined4 *)(iVar43 + 0x150);
-            puVar32 = (undefined4 *)Arena__alloc(uVar50,0x138);
-            *puVar32 = uVar50;
-            ppppppuVar48 = (uint ******)(puVar32 + 1);
-            in_r6 = *(uint *******)(param_1 + 8);
-            ContinueBlock__ctor_ec178(ppppppuVar48,iVar43,*(undefined4 *)(iVar43 + 300),in_r6);
-            puVar32[0x2f] = local_188;
-            FUN_000ec3ac(param_1,local_184,ppppppuVar48);
-            Block__connect(local_184,ppppppuVar48);
-            Block__connect(ppppppuVar48,arena);
+            iVar43 = *stackElement;
+            uVar50 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+            continueTargetBlock = *(undefined4 *)(iVar43 + 0x150);
+            blockAllocation4 = (undefined4 *)Arena__alloc(uVar50,0x138);
+            *blockAllocation4 = uVar50;
+            ppppppuVar48 = (uint ******)(blockAllocation4 + 1);
+            argR6 = *(uint *******)(program + 8);
+            ContinueBlock__ctor_ec178(ppppppuVar48,iVar43,*(undefined4 *)(iVar43 + 300),argR6);
+            blockAllocation4[0x2f] = local_188;
+            FUN_000ec3ac(program,previousBlock,ppppppuVar48);
+            Block__connect(previousBlock,ppppppuVar48);
+            Block__connect(ppppppuVar48,continueTargetBlock);
             local_bc = 0;
             *(undefined4 *)(iVar43 + 0x13c) = 1;
-            local_184 = (uint *****)ppppppuVar48;
+            previousBlock = (uint *****)ppppppuVar48;
             break;
           }
         }
@@ -6695,12 +6766,12 @@ code_r0x00102220:
       }
       goto switchD_0010061c_caseD_1;
     case 0x26:
-      puVar32 = (undefined4 *)0x0;
-      uVar10 = puVar14[2] - 1;
-      if (uVar10 < (uint)puVar14[2]) {
-        puVar32 = (undefined4 *)(uVar10 * 4 + puVar14[3]);
+      vectorElementSlot3 = (undefined4 *)0x0;
+      uVar10 = vectorAllocation[2] - 1;
+      if (uVar10 < (uint)vectorAllocation[2]) {
+        vectorElementSlot3 = (undefined4 *)(uVar10 * 4 + vectorAllocation[3]);
       }
-      if (*(int *)*puVar32 == 0) goto switchD_0010061c_caseD_1;
+      if (*(int *)*vectorElementSlot3 == 0) goto switchD_0010061c_caseD_1;
       piVar18 = (int *)((int)local_17c * 4 + iVar47);
       do {
         piVar36 = local_17c;
@@ -6716,46 +6787,46 @@ code_r0x00102220:
       break;
     case 0x27:
       pppppuVar52 = (uint *****)0x0;
-      pppppuVar15 = (uint *****)((int)local_a8[1] - 1);
-      if (pppppuVar15 < local_a8[1]) {
-        pppppuVar52 = (uint *****)(local_a8[2] + (int)pppppuVar15);
+      ifStackTopIndex = (uint *****)((int)ifStack[1] - 1);
+      if (ifStackTopIndex < ifStack[1]) {
+        pppppuVar52 = (uint *****)(ifStack[2] + (int)ifStackTopIndex);
       }
       ppppuVar45 = *pppppuVar52;
-      arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-      puVar32 = (undefined4 *)Arena__alloc(arena,0x130);
-      *puVar32 = arena;
-      ppppppuVar48 = (uint ******)(puVar32 + 1);
-      Block__ctor_ea020(ppppppuVar48,*(undefined4 *)(param_1 + 8));
-      puVar32[0x2f] = local_188;
+      compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+      blockAllocation4 = (undefined4 *)Arena__alloc(compilerArenaA,0x130);
+      *blockAllocation4 = compilerArenaA;
+      ppppppuVar48 = (uint ******)(blockAllocation4 + 1);
+      Block__ctor_ea020(ppppppuVar48,*(undefined4 *)(program + 8));
+      blockAllocation4[0x2f] = local_188;
       ppppuVar45[0x4e] = (uint ***)ppppppuVar48;
-      local_180 = (uint *****)ppppppuVar48;
+      currentBlock = (uint *****)ppppppuVar48;
       Block__connect(ppppuVar45,ppppppuVar48);
-      FUN_000ec3ac(param_1,local_184,local_180);
+      FUN_000ec3ac(program,previousBlock,currentBlock);
       goto code_r0x00103300;
     case 0x28:
-      uVar10 = puVar14[2];
-      piVar18 = (int *)0x0;
+      uVar10 = vectorAllocation[2];
+      stackElement = (int *)0x0;
       if (uVar10 - 1 < uVar10) {
-        piVar18 = (int *)((uVar10 - 1) * 4 + puVar14[3]);
+        stackElement = (int *)((uVar10 - 1) * 4 + vectorAllocation[3]);
       }
-      piVar18 = (int *)*piVar18;
+      stackElement = (int *)*stackElement;
       Vector__removeAt(puVar12,uVar10 - 1);
 joined_r0x00103afc:
-      if (piVar18 != (int *)0x0) {
-        Arena__free(piVar18[-1],piVar18 + -1);
+      if (stackElement != (int *)0x0) {
+        Arena__free(stackElement[-1],stackElement + -1);
         goto code_r0x00101d1c;
       }
       goto switchD_0010061c_caseD_1;
     case 0x29:
       pppppuVar52 = (uint *****)0x0;
-      pppppuVar15 = (uint *****)((int)local_a8[1] - 1);
-      if (pppppuVar15 < local_a8[1]) {
-        pppppuVar52 = (uint *****)(local_a8[2] + (int)pppppuVar15);
+      ifStackTopIndex = (uint *****)((int)ifStack[1] - 1);
+      if (ifStackTopIndex < ifStack[1]) {
+        pppppuVar52 = (uint *****)(ifStack[2] + (int)ifStackTopIndex);
       }
       ppppuVar45 = *pppppuVar52;
       pppuVar42 = ppppuVar45[0x4f];
       pppuVar42[0x2e] = (uint **)local_188;
-      FUN_000ec3ac(param_1,local_184,pppuVar42);
+      FUN_000ec3ac(program,previousBlock,pppuVar42);
       piVar18 = (int *)FUN_000e7b9c(ppppuVar45);
       piVar18[0x2e] = (int)local_188;
       iVar43 = (**(code **)(*piVar18 + 0x38))();
@@ -6766,60 +6837,60 @@ joined_r0x00103afc:
       ppppuVar30[0x2e] = (uint ***)local_188;
       ppppuVar51 = ppppuVar30;
       if (ppppuVar30 == ppppuVar45) {
-        arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-        puVar32 = (undefined4 *)Arena__alloc(arena,0x130);
-        *puVar32 = arena;
-        ppppuVar51 = (uint ****)(puVar32 + 1);
-        Block__ctor_ea020(ppppuVar51,*(undefined4 *)(param_1 + 8));
-        puVar32[0x2f] = local_188;
+        compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+        blockAllocation4 = (undefined4 *)Arena__alloc(compilerArenaA,0x130);
+        *blockAllocation4 = compilerArenaA;
+        ppppuVar51 = (uint ****)(blockAllocation4 + 1);
+        Block__ctor_ea020(ppppuVar51,*(undefined4 *)(program + 8));
+        blockAllocation4[0x2f] = local_188;
         ppppuVar30[0x4e] = (uint ***)ppppuVar51;
         Block__connect(ppppuVar30,ppppuVar51);
-        FUN_000ec3ac(param_1,local_184,ppppuVar51);
+        FUN_000ec3ac(program,previousBlock,ppppuVar51);
       }
       iVar43 = (*(code *)(*ppppuVar51)[0xe])(ppppuVar51);
       if ((iVar43 == 0) && (iVar43 = (*(code *)(*ppppuVar51)[0xf])(ppppuVar51), iVar43 == 0)) {
         Block__connect(ppppuVar51,pppuVar42);
       }
-      arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-      puVar32 = (undefined4 *)Arena__alloc(arena,0x130);
-      *puVar32 = arena;
-      ppppppuVar48 = (uint ******)(puVar32 + 1);
-      Block__ctor_ea020(ppppppuVar48,*(undefined4 *)(param_1 + 8));
-      puVar32[0x2f] = local_188;
-      local_180 = (uint *****)ppppppuVar48;
-      FUN_000ec3ac(param_1,pppuVar42,ppppppuVar48);
-      Block__connect(pppuVar42,local_180);
-      local_184 = local_180;
-      Vector__removeAt(local_a8,(int)local_a8[1] - 1);
-      uVar10 = allocation[2];
+      compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+      blockAllocation4 = (undefined4 *)Arena__alloc(compilerArenaA,0x130);
+      *blockAllocation4 = compilerArenaA;
+      ppppppuVar48 = (uint ******)(blockAllocation4 + 1);
+      Block__ctor_ea020(ppppppuVar48,*(undefined4 *)(program + 8));
+      blockAllocation4[0x2f] = local_188;
+      currentBlock = (uint *****)ppppppuVar48;
+      FUN_000ec3ac(program,pppuVar42,ppppppuVar48);
+      Block__connect(pppuVar42,currentBlock);
+      previousBlock = currentBlock;
+      Vector__removeAt(ifStack,(int)ifStack[1] - 1);
+      uVar10 = puVar13[2];
       if (uVar10 == 0) goto switchD_0010061c_caseD_1;
-      piVar18 = (int *)0x0;
+      stackElement = (int *)0x0;
       if (uVar10 - 1 < uVar10) {
-        piVar18 = (int *)((uVar10 - 1) * 4 + allocation[3]);
+        stackElement = (int *)((uVar10 - 1) * 4 + puVar13[3]);
       }
       local_bc = 0;
-      *(int *)(*piVar18 + 300) = *(int *)(*piVar18 + 300) + -1;
+      *(int *)(*stackElement + 300) = *(int *)(*stackElement + 300) + -1;
       break;
     case 0x2a:
-      uVar10 = puVar24[2];
+      uVar10 = vectorAllocation2[2];
       if (uVar10 != 0) {
-        puVar32 = (undefined4 *)0x0;
+        vectorElementSlot3 = (undefined4 *)0x0;
         if (uVar10 - 1 < uVar10) {
-          puVar32 = (undefined4 *)((uVar10 - 1) * 4 + puVar24[3]);
+          vectorElementSlot3 = (undefined4 *)((uVar10 - 1) * 4 + vectorAllocation2[3]);
         }
-        piVar18 = (int *)*puVar32;
+        stackElement = (int *)*vectorElementSlot3;
         Vector__removeAt(ppppppuVar19,uVar10 - 1);
-        if ((uint ******)piVar18[2] != (uint ******)0x0) {
-          local_180 = (uint *****)piVar18[2];
+        if ((uint ******)stackElement[2] != (uint ******)0x0) {
+          currentBlock = (uint *****)stackElement[2];
         }
-        local_17c = (int *)piVar18[1];
-        iVar47 = *piVar18;
+        local_17c = (int *)stackElement[1];
+        iVar47 = *stackElement;
         goto joined_r0x00103afc;
       }
       goto switchD_0010061c_caseD_0;
     case 0x2c:
       local_74 = 0x1dd5d8;
-      if ((UNK_001dc660 == 0) || (iVar34 == UNK_001dc660)) {
+      if ((UNK_001dc660 == 0) || (ilOpcode == UNK_001dc660)) {
 code_r0x00101020:
         local_64 = 0;
       }
@@ -6831,23 +6902,23 @@ code_r0x00101020:
           local_64 = local_64 + 1;
           if (iVar43 == 0) goto code_r0x00101020;
           piVar18 = piVar18 + 3;
-        } while (iVar34 != iVar43);
+        } while (ilOpcode != iVar43);
       }
       local_64 = local_64 * 0xc;
       uVar10 = *(uint *)(local_64 + 0x1dc664);
       if ((uVar10 & 0x80) == 0) {
-        uVar17 = (uint)*(byte *)((int)param_2 + 0x8d);
+        uVar17 = (uint)*(byte *)((int)ilReader + 0x8d);
         uVar44 = uVar17;
       }
       else {
-        uVar17 = (uint)*ppppppuVar49 >> 0x18 & 0x1f;
-        uVar44 = (uint)*(byte *)((int)param_2 + 0x8d);
+        uVar17 = (uint)*tokenWords >> 0x18 & 0x1f;
+        uVar44 = (uint)*(byte *)((int)ilReader + 0x8d);
       }
-      if (*(int *)(param_1 + 0x7c) < (int)uVar44) {
-        *(uint *)(param_1 + 0x7c) = uVar44;
+      if (*(int *)(program + 0x7c) < (int)uVar44) {
+        *(uint *)(program + 0x7c) = uVar44;
       }
-      *(uint *)(param_1 + 0x84) = 1 << (uVar44 & 0x3f) | *(uint *)(param_1 + 0x84);
-      puVar26 = (undefined2 *)Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),0x24);
+      *(uint *)(program + 0x84) = 1 << (uVar44 & 0x3f) | *(uint *)(program + 0x84);
+      puVar26 = (undefined2 *)Arena__alloc(*(undefined4 *)(*(int *)(program + 8) + 0x374),0x24);
       _memset(puVar26,0,0x24);
       puVar26[6] = 3;
       puVar26[4] = 7;
@@ -6865,181 +6936,181 @@ code_r0x00101020:
       puVar26[0xc] = 0;
       puVar26[0xd] = 0;
       puVar26[0xe] = 0;
-      if ((int)*ppppppuVar49 < 0) {
-        uVar31 = ((int (*)())remapSelectSmall)((uint)param_2[0x25] & 7);
+      if ((int)*tokenWords < 0) {
+        uVar31 = ((int (*)())remapSelectSmall)((uint)ilReader[0x25] & 7);
         *puVar26 = uVar31;
-        uVar31 = ((int (*)())remapSelectSmall)((uint)param_2[0x25] >> 3 & 7);
+        uVar31 = ((int (*)())remapSelectSmall)((uint)ilReader[0x25] >> 3 & 7);
         puVar26[1] = uVar31;
-        uVar31 = ((int (*)())remapSelectSmall)((uint)param_2[0x25] >> 0xc & 7);
+        uVar31 = ((int (*)())remapSelectSmall)((uint)ilReader[0x25] >> 0xc & 7);
         puVar26[2] = uVar31;
-        uVar31 = ((int (*)())remapSelectSmall)((uint)param_2[0x25] >> 6 & 7);
+        uVar31 = ((int (*)())remapSelectSmall)((uint)ilReader[0x25] >> 6 & 7);
         puVar26[5] = uVar31;
-        uVar31 = ((int (*)())remapSelectSmall)((uint)param_2[0x25] >> 9 & 7);
+        uVar31 = ((int (*)())remapSelectSmall)((uint)ilReader[0x25] >> 9 & 7);
         puVar26[6] = uVar31;
-        uVar31 = ((int (*)())remapSelectSmall)((uint)param_2[0x25] >> 0xf & 7);
+        uVar31 = ((int (*)())remapSelectSmall)((uint)ilReader[0x25] >> 0xf & 7);
         puVar26[3] = uVar31;
-        puVar26[0xb] = (ushort)((uint)param_2[0x25] >> 0x12) & 0x7f;
+        puVar26[0xb] = (ushort)((uint)ilReader[0x25] >> 0x12) & 0x7f;
         if ((uVar10 & 4) != 0) {
-          puVar26[8] = ((ushort)((uint)param_2[0x25] >> 0x19) & 1) + 1;
+          puVar26[8] = ((ushort)((uint)ilReader[0x25] >> 0x19) & 1) + 1;
         }
       }
-      if (param_2[0x18] != (uint *****)0x0) {
-        pppppuVar15 = param_2[0x24];
-        puVar26[0xc] = (ushort)pppppuVar15 & 0xff;
-        puVar26[0xd] = (ushort)((uint)pppppuVar15 >> 8) & 0xff;
-        puVar26[0xe] = (ushort)((uint)pppppuVar15 >> 0x10) & 0xff;
+      if (ilReader[0x18] != (uint *****)0x0) {
+        modifierTokenWord = ilReader[0x24];
+        puVar26[0xc] = (ushort)modifierTokenWord & 0xff;
+        puVar26[0xd] = (ushort)((uint)modifierTokenWord >> 8) & 0xff;
+        puVar26[0xe] = (ushort)((uint)modifierTokenWord >> 0x10) & 0xff;
       }
       bVar3 = (uVar10 & 1) != 0;
-      local_c4 = (uint)*ppppppuVar49 >> 0x18 & 1;
+      local_c4 = (uint)*tokenWords >> 0x18 & 1;
       puVar26[9] = (ushort)local_c4 ^ 1;
-      bVar1 = ((uint)*ppppppuVar49 >> 0x19 & 1) == 0;
+      bVar1 = ((uint)*tokenWords >> 0x19 & 1) == 0;
       puVar26[7] = (ushort)bVar1;
       if (bVar3) {
-        puVar26[8] = (ushort)(iVar34 != 0x5f);
+        puVar26[8] = (ushort)(ilOpcode != 0x5f);
       }
-      arena = *(undefined4 *)(param_1 + 0x3ac);
-      iVar43 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-      *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar43;
-      local_c8 = FUN_00127608(arena,0,iVar43,0);
+      registerMap = *(undefined4 *)(program + 0x3ac);
+      newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+      *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
+      local_c8 = FUN_00127608(registerMap,0,newTempIndex2,0);
       local_178 = *(uint *******)(local_60 + -0x2c30);
       local_124 = *(uint ******)(local_78 + -0x2bfc);
-      arena = *(undefined4 *)(param_1 + 0x3ac);
-      iVar43 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-      *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar43;
-      arena = FUN_00127608(arena,0,iVar43,0);
-      pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-      IRInst__setOperandRef(pvVar16,0,arena);
+      registerMap = *(undefined4 *)(program + 0x3ac);
+      newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+      *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
+      virtualRegister = FUN_00127608(registerMap,0,newTempIndex2,0);
+      movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+      IRInst__setOperandRef(movFloatInst,0,virtualRegister);
       local_70 = &local_178;
-      ((int (*)())FUN_000fa958)(param_1,5,1,param_2,pvVar16,1,local_124,local_70,ppppppuVar37,1,local_180);
-      ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
+      ((int (*)())FUN_000fa958)(program,5,1,ilReader,movFloatInst,1,local_124,local_70,loopStackData,1,currentBlock);
+      ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
       if (bVar3) {
-        uVar50 = *(undefined4 *)(param_1 + 0x3ac);
-        iVar43 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-        *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar43;
-        local_cc = FUN_00127608(uVar50,0,iVar43,0);
-        pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-        IRInst__setOperandRef(pvVar16,0,local_cc);
-        ((int (*)())FUN_000fa958)(param_1,10,1,param_2,pvVar16,1,local_124,local_70,ppppppuVar37,1,local_180);
-        ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
+        uVar50 = *(undefined4 *)(program + 0x3ac);
+        newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+        *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
+        local_cc = FUN_00127608(uVar50,0,newTempIndex2,0);
+        movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+        IRInst__setOperandRef(movFloatInst,0,local_cc);
+        ((int (*)())FUN_000fa958)(program,10,1,ilReader,movFloatInst,1,local_124,local_70,loopStackData,1,currentBlock);
+        ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
       }
       else {
         local_cc = 0;
       }
       bVar2 = (uVar10 >> 3 & 1) != 0;
       if (bVar2) {
-        uVar50 = *(undefined4 *)(param_1 + 0x3ac);
-        iVar43 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-        *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar43;
-        local_d0 = FUN_00127608(uVar50,0,iVar43,0);
-        pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-        IRInst__setOperandRef(pvVar16,0,local_d0);
-        ((int (*)())FUN_000fa958)(param_1,0xe,1,param_2,pvVar16,1,local_124,local_70,ppppppuVar37,1,local_180);
-        ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
+        uVar50 = *(undefined4 *)(program + 0x3ac);
+        newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+        *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
+        local_d0 = FUN_00127608(uVar50,0,newTempIndex2,0);
+        movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+        IRInst__setOperandRef(movFloatInst,0,local_d0);
+        ((int (*)())FUN_000fa958)(program,0xe,1,ilReader,movFloatInst,1,local_124,local_70,loopStackData,1,currentBlock);
+        ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
       }
       else {
         local_d0 = 0;
       }
       if ((uVar10 & 0x40) != 0) {
-        pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-        IRInst__setOperandRef(pvVar16,0,arena);
-        IRInst__setOperandRef(pvVar16,1,local_cc);
-        iVar43 = IRInst__getOperandRecord(pvVar16,1);
-        *(undefined4 *)(iVar43 + 0x10) = 0;
-        *(undefined4 *)((int)pvVar16 + 0x9c) = 0x1010100;
-        ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
+        movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+        IRInst__setOperandRef(movFloatInst,0,virtualRegister);
+        IRInst__setOperandRef(movFloatInst,1,local_cc);
+        operandRecord2 = IRInst__getOperandRecord(movFloatInst,1);
+        *(undefined4 *)(operandRecord2 + 0x10) = 0;
+        *(undefined4 *)((int)movFloatInst + 0x9c) = 0x1010100;
+        ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
       }
       iVar20 = uVar44 * 0xc;
-      iVar43 = *(int *)(*(int *)(param_1 + 0x78) + iVar20 + 4);
-      if ((iVar43 == 4) || (uVar50 = arena, iVar43 == 0xb)) {
-        uVar50 = *(undefined4 *)(param_1 + 0x3ac);
-        iVar43 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-        *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar43;
-        uVar50 = FUN_00127608(uVar50,0,iVar43,0);
-        pvVar16 = IRInst__create(0x1b,*(undefined4 *)(param_1 + 8));
-        IRInst__setOperandRef(pvVar16,0,uVar50);
-        IRInst__setOperandRef(pvVar16,1,arena);
+      iVar43 = *(int *)(*(int *)(program + 0x78) + iVar20 + 4);
+      if ((iVar43 == 4) || (uVar50 = virtualRegister, iVar43 == 0xb)) {
+        uVar50 = *(undefined4 *)(program + 0x3ac);
+        newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+        *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
+        uVar50 = FUN_00127608(uVar50,0,newTempIndex2,0);
+        cubeInst = IRInst__create(0x1b,*(undefined4 *)(program + 8));
+        IRInst__setOperandRef(cubeInst,0,uVar50);
+        IRInst__setOperandRef(cubeInst,1,virtualRegister);
         local_178 = (uint ******)0x2020001;
-        iVar43 = IRInst__getOperandRecord(pvVar16,1);
-        *(undefined4 *)(iVar43 + 0x10) = 0x2020001;
-        IRInst__setOperandRef(pvVar16,2,arena);
+        operandRecord2 = IRInst__getOperandRecord(cubeInst,1);
+        *(undefined4 *)(operandRecord2 + 0x10) = 0x2020001;
+        IRInst__setOperandRef(cubeInst,2,virtualRegister);
         local_178 = (uint ******)0x1000202;
-        iVar43 = IRInst__getOperandRecord(pvVar16,2);
-        *(undefined4 *)(iVar43 + 0x10) = 0x1000202;
-        ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
-        pvVar16 = IRInst__create(0x40,*(undefined4 *)(param_1 + 8));
-        IRInst__setOperandRef(pvVar16,0,uVar50);
-        *(undefined4 *)((int)pvVar16 + 0x9c) = 0x1010001;
-        IRInst__setOperandRef(pvVar16,1,uVar50);
-        IROperand__setModifierBits((int)pvVar16 + 0xa4,2,1);
-        iVar43 = IRInst__getOperandRecord(pvVar16,1);
-        *(undefined4 *)(iVar43 + 0x10) = 0x2020202;
-        ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
-        pvVar16 = IRInst__create(0x14,*(undefined4 *)(param_1 + 8));
-        IRInst__setOperandRef(pvVar16,0,uVar50);
-        *(undefined1 *)((int)pvVar16 + 0x9c) = 0;
-        *(undefined1 *)((int)pvVar16 + 0x9d) = 0;
-        *(undefined1 *)((int)pvVar16 + 0x9e) = 1;
-        *(undefined1 *)((int)pvVar16 + 0x9f) = 1;
-        IRInst__setOperandRef(pvVar16,1,uVar50);
-        IRInst__setOperandRef(pvVar16,2,uVar50);
-        iVar43 = IRInst__getOperandRecord(pvVar16,2);
-        *(undefined4 *)(iVar43 + 0x10) = 0x2020202;
-        ((void (*)())IRInst__makeLiteralVec4Float)(pvVar16,param_1,3,1.5,1.5,1.5,1.5);
-        ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
-        piVar18 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-        IRInst__setOperandRef(piVar18,0,uVar50);
-        IRInst__setOperandRef(piVar18,1,uVar50);
-        (**(code **)(*piVar18 + 0x88))(piVar18,1,0,1);
-        (**(code **)(*piVar18 + 0x88))(piVar18,1,1,0);
-        (**(code **)(*piVar18 + 0x88))(piVar18,1,2,3);
-        (**(code **)(*piVar18 + 0x88))(piVar18,1,3,0);
-        ((int (*)())FUN_000f92fc)(param_1,piVar18,local_180);
-        if (iVar34 == 0x8b) {
-          pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-          IRInst__setOperandRef(pvVar16,0,uVar50);
-          *(undefined1 *)((int)pvVar16 + 0x9e) = 1;
-          *(undefined1 *)((int)pvVar16 + 0x9f) = 0;
-          *(undefined1 *)((int)pvVar16 + 0x9c) = 1;
-          *(undefined1 *)((int)pvVar16 + 0x9d) = 1;
-          IRInst__setOperandRef(pvVar16,1,arena);
-          ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
+        operandRecord2 = IRInst__getOperandRecord(cubeInst,2);
+        *(undefined4 *)(operandRecord2 + 0x10) = 0x1000202;
+        ((int (*)())FUN_000f92fc)(program,cubeInst,currentBlock);
+        recipIEEEInst = IRInst__create(0x40,*(undefined4 *)(program + 8));
+        IRInst__setOperandRef(recipIEEEInst,0,uVar50);
+        *(undefined4 *)((int)recipIEEEInst + 0x9c) = 0x1010001;
+        IRInst__setOperandRef(recipIEEEInst,1,uVar50);
+        IROperand__setModifierBits((int)recipIEEEInst + 0xa4,2,1);
+        operandRecord2 = IRInst__getOperandRecord(recipIEEEInst,1);
+        *(undefined4 *)(operandRecord2 + 0x10) = 0x2020202;
+        ((int (*)())FUN_000f92fc)(program,recipIEEEInst,currentBlock);
+        mulAddFloatInst = IRInst__create(0x14,*(undefined4 *)(program + 8));
+        IRInst__setOperandRef(mulAddFloatInst,0,uVar50);
+        *(undefined1 *)((int)mulAddFloatInst + 0x9c) = 0;
+        *(undefined1 *)((int)mulAddFloatInst + 0x9d) = 0;
+        *(undefined1 *)((int)mulAddFloatInst + 0x9e) = 1;
+        *(undefined1 *)((int)mulAddFloatInst + 0x9f) = 1;
+        IRInst__setOperandRef(mulAddFloatInst,1,uVar50);
+        IRInst__setOperandRef(mulAddFloatInst,2,uVar50);
+        operandRecord2 = IRInst__getOperandRecord(mulAddFloatInst,2);
+        *(undefined4 *)(operandRecord2 + 0x10) = 0x2020202;
+        ((void (*)())IRInst__makeLiteralVec4Float)(mulAddFloatInst,program,3,1.5,1.5,1.5,1.5);
+        ((int (*)())FUN_000f92fc)(program,mulAddFloatInst,currentBlock);
+        movInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+        IRInst__setOperandRef(movInst,0,uVar50);
+        IRInst__setOperandRef(movInst,1,uVar50);
+        (**(code **)(*movInst + 0x88))(movInst,1,0,1);
+        (**(code **)(*movInst + 0x88))(movInst,1,1,0);
+        (**(code **)(*movInst + 0x88))(movInst,1,2,3);
+        (**(code **)(*movInst + 0x88))(movInst,1,3,0);
+        ((int (*)())FUN_000f92fc)(program,movInst,currentBlock);
+        if (ilOpcode == 0x8b) {
+          movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+          IRInst__setOperandRef(movFloatInst,0,uVar50);
+          *(undefined1 *)((int)movFloatInst + 0x9e) = 1;
+          *(undefined1 *)((int)movFloatInst + 0x9f) = 0;
+          *(undefined1 *)((int)movFloatInst + 0x9c) = 1;
+          *(undefined1 *)((int)movFloatInst + 0x9d) = 1;
+          IRInst__setOperandRef(movFloatInst,1,virtualRegister);
+          ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
         }
-        piVar18 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
-        (**(code **)(*piVar18 + 0x5c))(piVar18,uVar44);
+        hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
+        (**(code **)(*hwDescription + 0x5c))(hwDescription,uVar44);
       }
       if (bVar2) {
-        pvVar16 = IRInst__create(0x73,*(undefined4 *)(param_1 + 8));
-        piVar18 = IRInst__create(0x72,*(undefined4 *)(param_1 + 8));
-        arena = FUN_00127608(*(undefined4 *)(param_1 + 0x3ac),0x1e,0,0);
-        IRInst__setOperandRef(pvVar16,0,arena);
-        IRInst__setOperandRef(pvVar16,1,local_cc);
-        IRInst__setOperandRef(piVar18,0,arena);
-        IRInst__setOperandRef(piVar18,1,local_d0);
-        (**(code **)(*piVar18 + 0x90))(piVar18,arena);
-        ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
-        ((int (*)())FUN_000f92fc)(param_1,piVar18,local_180);
+        setGradientsVInst = IRInst__create(0x73,*(undefined4 *)(program + 8));
+        setGradientsHInst = IRInst__create(0x72,*(undefined4 *)(program + 8));
+        virtualRegister = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x1e,0,0);
+        IRInst__setOperandRef(setGradientsVInst,0,virtualRegister);
+        IRInst__setOperandRef(setGradientsVInst,1,local_cc);
+        IRInst__setOperandRef(setGradientsHInst,0,virtualRegister);
+        IRInst__setOperandRef(setGradientsHInst,1,local_d0);
+        (**(code **)(*setGradientsHInst + 0x90))(setGradientsHInst,virtualRegister);
+        ((int (*)())FUN_000f92fc)(program,setGradientsVInst,currentBlock);
+        ((int (*)())FUN_000f92fc)(program,setGradientsHInst,currentBlock);
       }
       else {
-        arena = 0;
+        virtualRegister = 0;
       }
       uVar27 = uVar50;
       if (bVar3) {
         bVar3 = (uVar10 >> 2 & 1) == 0;
         if (!bVar3) {
-          uVar27 = *(undefined4 *)(param_1 + 0x3ac);
-          iVar43 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-          *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar43;
-          uVar27 = FUN_00127608(uVar27,0,iVar43,0);
-          pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-          IRInst__setOperandRef(pvVar16,0,uVar27);
-          *(undefined4 *)((int)pvVar16 + 0x9c) = 1;
-          IRInst__setOperandRef(pvVar16,1,uVar50);
-          ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
-          pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-          IRInst__setOperandRef(pvVar16,0,uVar27);
-          *(undefined4 *)((int)pvVar16 + 0x9c) = 0x1010100;
-          IRInst__setOperandRef(pvVar16,1,local_cc);
-          ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
+          uVar27 = *(undefined4 *)(program + 0x3ac);
+          newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+          *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
+          uVar27 = FUN_00127608(uVar27,0,newTempIndex2,0);
+          movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+          IRInst__setOperandRef(movFloatInst,0,uVar27);
+          *(undefined4 *)((int)movFloatInst + 0x9c) = 1;
+          IRInst__setOperandRef(movFloatInst,1,uVar50);
+          ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
+          movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+          IRInst__setOperandRef(movFloatInst,0,uVar27);
+          *(undefined4 *)((int)movFloatInst + 0x9c) = 0x1010100;
+          IRInst__setOperandRef(movFloatInst,1,local_cc);
+          ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
         }
       }
       else {
@@ -7047,102 +7118,102 @@ code_r0x00101020:
       }
       iVar43 = *(int *)(local_64 + local_74 + -0xf70);
       if ((bVar3) || (bVar1)) {
-        if ((iVar43 != 0xff) || (*(int *)(iVar20 + *(int *)(param_1 + 0x78) + 4) != 7))
+        if ((iVar43 != 0xff) || (*(int *)(iVar20 + *(int *)(program + 0x78) + 4) != 7))
         goto code_r0x001019bc;
-        pvVar16 = IRInst__create(0x104,*(undefined4 *)(param_1 + 8));
-        *(uint *)((int)pvVar16 + 0x130) = uVar44;
-        *(undefined4 *)((int)pvVar16 + 0x140) = *(undefined4 *)(local_60 + -0x2c30);
-        IRInst__setOperandRef(pvVar16,0,local_c8);
-        IRInst__setOperandRef(pvVar16,1,uVar27);
-        ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
+        ldBufferInst = IRInst__create(0x104,*(undefined4 *)(program + 8));
+        *(uint *)((int)ldBufferInst + 0x130) = uVar44;
+        *(undefined4 *)((int)ldBufferInst + 0x140) = *(undefined4 *)(local_60 + -0x2c30);
+        IRInst__setOperandRef(ldBufferInst,0,local_c8);
+        IRInst__setOperandRef(ldBufferInst,1,uVar27);
+        ((int (*)())FUN_000f92fc)(program,ldBufferInst,currentBlock);
       }
       else {
         iVar43 = 0xae;
 code_r0x001019bc:
-        piVar18 = IRInst__create(iVar43,*(undefined4 *)(param_1 + 8));
+        piVar18 = IRInst__create(iVar43,*(undefined4 *)(program + 8));
         piVar18[0x4f] = (int)puVar26;
         piVar18[0x4d] = uVar44;
         IRInst__setOperandRef(piVar18,0,local_c8);
         IRInst__setOperandRef(piVar18,1,uVar27);
         if (bVar2) {
-          (**(code **)(*piVar18 + 0x90))(piVar18,arena);
+          (**(code **)(*piVar18 + 0x90))(piVar18,virtualRegister);
         }
-        iVar43 = *(int *)(param_1 + 0x78);
+        iVar43 = *(int *)(program + 0x78);
         if (*(int *)(iVar20 + iVar43 + 4) == 8) {
           (**(code **)(*piVar18 + 0x88))(piVar18,1,2,1);
-          pvVar16 = IRInst__create(0xbe,*(undefined4 *)(param_1 + 8));
+          roundNearestEvenInst = IRInst__create(0xbe,*(undefined4 *)(program + 8));
           iVar21 = piVar18[0x2b];
           iVar22 = piVar18[0x2c];
-          iVar43 = IRInst__getOperandRecord(pvVar16,0);
-          *(int *)(iVar43 + 0xc) = iVar22;
-          *(int *)(iVar43 + 8) = iVar21;
+          operandRecord2 = IRInst__getOperandRecord(roundNearestEvenInst,0);
+          *(int *)(operandRecord2 + 0xc) = iVar22;
+          *(int *)(operandRecord2 + 8) = iVar21;
           iVar21 = piVar18[0x2b];
           iVar22 = piVar18[0x2c];
-          iVar43 = IRInst__getOperandRecord(pvVar16,1);
-          *(int *)(iVar43 + 0xc) = iVar22;
-          *(int *)(iVar43 + 8) = iVar21;
-          iVar43 = IRInst__getOperandRecord(pvVar16,1);
-          *(undefined4 *)(iVar43 + 0x10) = 0x1010101;
-          *(undefined4 *)((int)pvVar16 + 0x9c) = 0x1000101;
-          ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
-          iVar43 = *(int *)(param_1 + 0x78);
+          operandRecord2 = IRInst__getOperandRecord(roundNearestEvenInst,1);
+          *(int *)(operandRecord2 + 0xc) = iVar22;
+          *(int *)(operandRecord2 + 8) = iVar21;
+          operandRecord2 = IRInst__getOperandRecord(roundNearestEvenInst,1);
+          *(undefined4 *)(operandRecord2 + 0x10) = 0x1010101;
+          *(undefined4 *)((int)roundNearestEvenInst + 0x9c) = 0x1000101;
+          ((int (*)())FUN_000f92fc)(program,roundNearestEvenInst,currentBlock);
+          iVar43 = *(int *)(program + 0x78);
         }
         if (*(int *)(iVar20 + iVar43 + 4) == 9) {
-          pvVar16 = IRInst__create(0xbe,*(undefined4 *)(param_1 + 8));
+          roundNearestEvenInst = IRInst__create(0xbe,*(undefined4 *)(program + 8));
           iVar21 = piVar18[0x2b];
           iVar22 = piVar18[0x2c];
-          iVar43 = IRInst__getOperandRecord(pvVar16,0);
-          *(int *)(iVar43 + 0xc) = iVar22;
-          *(int *)(iVar43 + 8) = iVar21;
+          operandRecord2 = IRInst__getOperandRecord(roundNearestEvenInst,0);
+          *(int *)(operandRecord2 + 0xc) = iVar22;
+          *(int *)(operandRecord2 + 8) = iVar21;
           iVar21 = piVar18[0x2b];
           iVar22 = piVar18[0x2c];
-          iVar43 = IRInst__getOperandRecord(pvVar16,1);
-          *(int *)(iVar43 + 0xc) = iVar22;
-          *(int *)(iVar43 + 8) = iVar21;
-          iVar43 = IRInst__getOperandRecord(pvVar16,1);
-          *(undefined4 *)(iVar43 + 0x10) = 0x2020202;
-          *(undefined4 *)((int)pvVar16 + 0x9c) = 0x1010001;
-          ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
-          iVar43 = *(int *)(param_1 + 0x78);
+          operandRecord2 = IRInst__getOperandRecord(roundNearestEvenInst,1);
+          *(int *)(operandRecord2 + 0xc) = iVar22;
+          *(int *)(operandRecord2 + 8) = iVar21;
+          operandRecord2 = IRInst__getOperandRecord(roundNearestEvenInst,1);
+          *(undefined4 *)(operandRecord2 + 0x10) = 0x2020202;
+          *(undefined4 *)((int)roundNearestEvenInst + 0x9c) = 0x1010001;
+          ((int (*)())FUN_000f92fc)(program,roundNearestEvenInst,currentBlock);
+          iVar43 = *(int *)(program + 0x78);
         }
         iVar43 = ((int (*)())remapSelect1To0)(*(undefined4 *)(iVar20 + iVar43));
         piVar18[0x4e] = iVar43;
         *(short *)(piVar18[0x4f] + 0x12) = (short)local_c4;
-        ((int (*)())FUN_000f92fc)(param_1,piVar18,local_180);
-        if (*(int *)(iVar20 + *(int *)(param_1 + 0x78) + 8) != 0) {
-          pvVar16 = IRInst__create(0x13,*(undefined4 *)(param_1 + 8));
+        ((int (*)())FUN_000f92fc)(program,piVar18,currentBlock);
+        if (*(int *)(iVar20 + *(int *)(program + 0x78) + 8) != 0) {
+          mulFloatInst = IRInst__create(0x13,*(undefined4 *)(program + 8));
           iVar20 = piVar18[0x25];
           iVar21 = piVar18[0x26];
-          iVar43 = IRInst__getOperandRecord(pvVar16,0);
-          *(int *)(iVar43 + 0xc) = iVar21;
-          *(int *)(iVar43 + 8) = iVar20;
+          operandRecord2 = IRInst__getOperandRecord(mulFloatInst,0);
+          *(int *)(operandRecord2 + 0xc) = iVar21;
+          *(int *)(operandRecord2 + 8) = iVar20;
           iVar20 = piVar18[0x26];
           iVar21 = piVar18[0x25];
-          iVar43 = IRInst__getOperandRecord(pvVar16,1);
+          operandRecord2 = IRInst__getOperandRecord(mulFloatInst,1);
           local_98 = (uint)(short)uVar44;
-          *(int *)(iVar43 + 0xc) = iVar20;
+          *(int *)(operandRecord2 + 0xc) = iVar20;
           local_90 = local_98 | 0x130000;
           local_94 = local_98 | 0x130000;
           local_9c = local_98 | 0x130000;
           local_98 = local_98 | 0x130000;
-          *(int *)(iVar43 + 8) = iVar21;
-          ((int (*)())IRInst__makeLiteralVec4Int)(pvVar16,param_1,2,local_90,local_94,local_98,local_9c);
-          ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
+          *(int *)(operandRecord2 + 8) = iVar21;
+          ((int (*)())IRInst__makeLiteralVec4Int)(mulFloatInst,program,2,local_90,local_94,local_98,local_9c);
+          ((int (*)())FUN_000f92fc)(program,mulFloatInst,currentBlock);
         }
       }
       local_178 = *(uint *******)(local_60 + -0x2c30);
       local_124 = *(uint ******)(local_78 + -0x2bfc);
-      ppppppuVar38 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-      in_r8 = (uint ******)((int)((unsigned char *)0x0) + 1);
-      in_r6 = param_2;
-      in_r7 = ppppppuVar38;
-      ((int (*)())FUN_000fa958)(param_1,0,0,param_2,ppppppuVar38,1,local_124,local_70,ppppppuVar37,1,local_180);
+      ppppppuVar38 = IRInst__create(0x31,*(undefined4 *)(program + 8));
+      argR8 = (uint ******)((int)((unsigned char *)0x0) + 1);
+      argR6 = ilReader;
+      argR7 = ppppppuVar38;
+      ((int (*)())FUN_000fa958)(program,0,0,ilReader,ppppppuVar38,1,local_124,local_70,loopStackData,1,currentBlock);
       IRInst__setOperandRef(ppppppuVar38,1,local_c8);
       goto code_r0x00101cbc;
     case 0x2d:
     case 0x2e:
-      pppppuVar11 = (uint *****)(uint)*(byte *)((int)param_2 + 0x8d);
-      pppppuVar15 = (uint *****)Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),0x24);
+      pppppuVar11 = (uint *****)(uint)*(byte *)((int)ilReader + 0x8d);
+      pppppuVar15 = (uint *****)Arena__alloc(*(undefined4 *)(*(int *)(program + 8) + 0x374),0x24);
       _memset(pppppuVar15,0,0x24);
       *(undefined2 *)((int)pppppuVar15 + 0x12) = 1;
       *(undefined2 *)((int)pppppuVar15 + 0xe) = 1;
@@ -7160,74 +7231,74 @@ code_r0x001019bc:
       *(undefined2 *)((int)pppppuVar15 + 6) = 7;
       *(undefined2 *)((int)pppppuVar15 + 10) = 3;
       *(ushort *)((int)pppppuVar15 + 0x12) =
-           (ushort)(((uint)(byte)((((uint)*ppppppuVar49 & 0x1000000) == 0) << 1) << 0x1c) >> 0x1d);
-      bVar1 = ((uint)*ppppppuVar49 >> 0x19 & 1) == 0;
+           (ushort)(((uint)(byte)((((uint)*tokenWords & 0x1000000) == 0) << 1) << 0x1c) >> 0x1d);
+      bVar1 = ((uint)*tokenWords >> 0x19 & 1) == 0;
       *(ushort *)((int)pppppuVar15 + 0xe) = (ushort)bVar1;
-      arena = *(undefined4 *)(param_1 + 0x3ac);
-      iVar43 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-      *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar43;
-      arena = FUN_00127608(arena,0,iVar43,0);
+      registerMap = *(undefined4 *)(program + 0x3ac);
+      newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+      *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
+      virtualRegister = FUN_00127608(registerMap,0,newTempIndex2,0);
       local_124 = (uint *****)0x1;
       pppppuVar52 = *(uint ******)(local_60 + -0x2c30);
       local_178 = (uint ******)pppppuVar52;
-      pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-      IRInst__setOperandRef(pvVar16,0,arena);
-      *(undefined4 *)((int)pvVar16 + 0x9c) = 1;
+      movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+      IRInst__setOperandRef(movFloatInst,0,virtualRegister);
+      *(undefined4 *)((int)movFloatInst + 0x9c) = 1;
       local_70 = &local_178;
-      ((int (*)())FUN_000fa958)(param_1,5,1,param_2,pvVar16,1,local_124,local_70,ppppppuVar37,1,local_180);
-      ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
+      ((int (*)())FUN_000fa958)(program,5,1,ilReader,movFloatInst,1,local_124,local_70,loopStackData,1,currentBlock);
+      ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
       local_124 = (uint *****)0x1010100;
       local_178 = (uint ******)pppppuVar52;
-      ppppppuVar38 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-      IRInst__setOperandRef(ppppppuVar38,0,arena);
+      ppppppuVar38 = IRInst__create(0x31,*(undefined4 *)(program + 8));
+      IRInst__setOperandRef(ppppppuVar38,0,virtualRegister);
       ppppppuVar38[0x27] = (uint *****)0x1010100;
-      ((int (*)())FUN_000fa958)(param_1,10,1,param_2,ppppppuVar38,1,local_124,local_70,ppppppuVar37,1,local_180);
-      ((int (*)())FUN_000f92fc)(param_1,ppppppuVar38,local_180);
+      ((int (*)())FUN_000fa958)(program,10,1,ilReader,ppppppuVar38,1,local_124,local_70,loopStackData,1,currentBlock);
+      ((int (*)())FUN_000f92fc)(program,ppppppuVar38,currentBlock);
       if (bVar1) {
         uVar50 = 0x76;
       }
       else {
         uVar50 = 0xae;
-        if (uVar10 == 0x2d) {
-          Compiler__fail(*(undefined4 *)(param_1 + 8),0xf);
+        if (templateToken == 0x2d) {
+          Compiler__fail(*(undefined4 *)(program + 8),0xf);
           uVar50 = 0xae;
         }
       }
       local_124 = *(uint ******)(local_78 + -0x2bfc);
       ppppppuVar39 = *(uint *******)(local_60 + -0x2c30);
       local_178 = ppppppuVar39;
-      ppppppuVar48 = IRInst__create(uVar50,*(undefined4 *)(param_1 + 8));
+      ppppppuVar48 = IRInst__create(uVar50,*(undefined4 *)(program + 8));
       ppppppuVar48[0x4f] = pppppuVar15;
       ppppppuVar48[0x4d] = pppppuVar11;
-      if (*(int *)(param_1 + 0x7c) < (int)pppppuVar11) {
-        *(uint ******)(param_1 + 0x7c) = pppppuVar11;
+      if (*(int *)(program + 0x7c) < (int)pppppuVar11) {
+        *(uint ******)(program + 0x7c) = pppppuVar11;
       }
-      *(uint *)(param_1 + 0x84) = 1 << ((uint)pppppuVar11 & 0x3f) | *(uint *)(param_1 + 0x84);
+      *(uint *)(program + 0x84) = 1 << ((uint)pppppuVar11 & 0x3f) | *(uint *)(program + 0x84);
       pppppuVar15 = (uint *****)
-                    ((int (*)())remapSelect1To0)(*(undefined4 *)(*(int *)(param_1 + 0x78) + (int)pppppuVar11 * 0xc))
+                    ((int (*)())remapSelect1To0)(*(undefined4 *)(*(int *)(program + 0x78) + (int)pppppuVar11 * 0xc))
       ;
       ppppppuVar48[0x4c] = pppppuVar11;
       ppppppuVar48[0x4e] = pppppuVar15;
-      in_r8 = (uint ******)((int)((unsigned char *)0x0) + 1);
-      in_r6 = param_2;
-      in_r7 = ppppppuVar48;
-      iVar43 = ((int (*)())FUN_000fa958)(param_1,4,0,param_2,ppppppuVar48,1,local_124,local_70,ppppppuVar37,1,
-                            local_180);
+      argR8 = (uint ******)((int)((unsigned char *)0x0) + 1);
+      argR6 = ilReader;
+      argR7 = ppppppuVar48;
+      iVar43 = ((int (*)())FUN_000fa958)(program,4,0,ilReader,ppppppuVar48,1,local_124,local_70,loopStackData,1,
+                            currentBlock);
       if (iVar43 != 0) {
         DList__pushFront(local_6c,iVar43);
       }
-      IRInst__setOperandRef(ppppppuVar48,1,arena);
-      iVar43 = IRInst__getOperandRecord(ppppppuVar48,1);
-      *(uint *******)(iVar43 + 0x10) = ppppppuVar39;
+      IRInst__setOperandRef(ppppppuVar48,1,virtualRegister);
+      operandRecord2 = IRInst__getOperandRecord(ppppppuVar48,1);
+      *(uint *******)(operandRecord2 + 0x10) = ppppppuVar39;
       pppppuVar15 = (uint *****)
-                    ((int (*)())remapSelect1To0)(*(undefined4 *)((int)pppppuVar11 * 0xc + *(int *)(param_1 + 0x78)))
+                    ((int (*)())remapSelect1To0)(*(undefined4 *)((int)pppppuVar11 * 0xc + *(int *)(program + 0x78)))
       ;
       ppppppuVar48[0x4e] = pppppuVar15;
-      ((int (*)())FUN_000f92fc)(param_1,ppppppuVar48,local_180);
+      ((int (*)())FUN_000f92fc)(program,ppppppuVar48,currentBlock);
       goto code_r0x00101d1c;
     case 0x2f:
-      uVar10 = (uint)*(byte *)((int)param_2 + 0x8d);
-      puVar26 = (undefined2 *)Arena__alloc(*(undefined4 *)(*(int *)(param_1 + 8) + 0x374),0x24);
+      ilRegisterIndex2 = (uint)*(byte *)((int)ilReader + 0x8d);
+      puVar26 = (undefined2 *)Arena__alloc(*(undefined4 *)(*(int *)(program + 8) + 0x374),0x24);
       _memset(puVar26,0,0x24);
       puVar26[9] = 1;
       puVar26[6] = 3;
@@ -7244,128 +7315,128 @@ code_r0x001019bc:
       puVar26[0xc] = 0;
       puVar26[0xd] = 0;
       puVar26[0xe] = 0;
-      uVar7 = (byte)((uint)*ppppppuVar49 >> 0x18) & 1;
-      puVar26[9] = uVar7 ^ 1;
-      puVar26[7] = (ushort)(((uint)(byte)((((uint)*ppppppuVar49 & 0x2000000) == 0) << 1) << 0x1c) >>
+      saturateBit = (byte)((uint)*tokenWords >> 0x18) & 1;
+      puVar26[9] = saturateBit ^ 1;
+      puVar26[7] = (ushort)(((uint)(byte)((((uint)*tokenWords & 0x2000000) == 0) << 1) << 0x1c) >>
                            0x1d);
-      arena = *(undefined4 *)(param_1 + 0x3ac);
-      iVar43 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-      *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar43;
-      uVar50 = FUN_00127608(arena,0,iVar43,0);
+      registerMap = *(undefined4 *)(program + 0x3ac);
+      newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+      *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
+      uVar50 = FUN_00127608(registerMap,0,newTempIndex2,0);
       local_178 = *(uint *******)(local_60 + -0x2c30);
       local_124 = *(uint ******)(local_78 + -0x2bfc);
-      arena = *(undefined4 *)(param_1 + 0x3ac);
-      iVar43 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-      *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar43;
-      uVar27 = FUN_00127608(arena,0,iVar43,0);
-      pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-      IRInst__setOperandRef(pvVar16,0,uVar27);
+      registerMap = *(undefined4 *)(program + 0x3ac);
+      newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+      *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
+      uVar27 = FUN_00127608(registerMap,0,newTempIndex2,0);
+      movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+      IRInst__setOperandRef(movFloatInst,0,uVar27);
       local_70 = &local_178;
-      ((int (*)())FUN_000fa958)(param_1,5,1,param_2,pvVar16,1,local_124,local_70,ppppppuVar37,1,local_180);
-      ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
-      arena = 0;
-      if (iVar34 == 0x5f) {
-        arena = *(undefined4 *)(param_1 + 0x3ac);
-        iVar43 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-        *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar43;
-        arena = FUN_00127608(arena,0,iVar43,0);
-        pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-        IRInst__setOperandRef(pvVar16,0,arena);
-        ((int (*)())FUN_000fa958)(param_1,10,1,param_2,pvVar16,1,local_124,local_70,ppppppuVar37,1,local_180);
-        ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
-        uVar41 = *(undefined4 *)(param_1 + 0x3ac);
-        iVar43 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-        *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar43;
-        uVar41 = FUN_00127608(uVar41,0,iVar43,0);
-        pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-        IRInst__setOperandRef(pvVar16,0,uVar41);
-        ((int (*)())FUN_000fa958)(param_1,0xe,1,param_2,pvVar16,1,local_124,local_70,ppppppuVar37,1,local_180);
-        ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
+      ((int (*)())FUN_000fa958)(program,5,1,ilReader,movFloatInst,1,local_124,local_70,loopStackData,1,currentBlock);
+      ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
+      virtualRegister = 0;
+      if (ilOpcode == 0x5f) {
+        registerMap = *(undefined4 *)(program + 0x3ac);
+        newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+        *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
+        virtualRegister = FUN_00127608(registerMap,0,newTempIndex2,0);
+        movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+        IRInst__setOperandRef(movFloatInst,0,virtualRegister);
+        ((int (*)())FUN_000fa958)(program,10,1,ilReader,movFloatInst,1,local_124,local_70,loopStackData,1,currentBlock);
+        ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
+        uVar41 = *(undefined4 *)(program + 0x3ac);
+        newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+        *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
+        uVar41 = FUN_00127608(uVar41,0,newTempIndex2,0);
+        movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+        IRInst__setOperandRef(movFloatInst,0,uVar41);
+        ((int (*)())FUN_000fa958)(program,0xe,1,ilReader,movFloatInst,1,local_124,local_70,loopStackData,1,currentBlock);
+        ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
       }
       else {
         uVar41 = 0;
       }
-      pvVar16 = IRInst__create(0x78,*(undefined4 *)(param_1 + 8));
-      *(undefined2 **)((int)pvVar16 + 0x13c) = puVar26;
-      IRInst__setOperandRef(pvVar16,0,uVar50);
-      IRInst__setOperandRef(pvVar16,1,uVar27);
-      if (iVar34 == 0x5f) {
-        IRInst__setOperandRef(pvVar16,2,arena);
-        IRInst__setOperandRef(pvVar16,3,uVar41);
+      fetchTextureMapGradientsInst = IRInst__create(0x78,*(undefined4 *)(program + 8));
+      *(undefined2 **)((int)fetchTextureMapGradientsInst + 0x13c) = puVar26;
+      IRInst__setOperandRef(fetchTextureMapGradientsInst,0,uVar50);
+      IRInst__setOperandRef(fetchTextureMapGradientsInst,1,uVar27);
+      if (ilOpcode == 0x5f) {
+        IRInst__setOperandRef(fetchTextureMapGradientsInst,2,virtualRegister);
+        IRInst__setOperandRef(fetchTextureMapGradientsInst,3,uVar41);
       }
-      *(uint *)((int)pvVar16 + 0x134) = uVar10;
-      if (*(int *)(param_1 + 0x7c) < (int)uVar10) {
-        *(uint *)(param_1 + 0x7c) = uVar10;
+      *(uint *)((int)fetchTextureMapGradientsInst + 0x134) = ilRegisterIndex2;
+      if (*(int *)(program + 0x7c) < (int)ilRegisterIndex2) {
+        *(uint *)(program + 0x7c) = ilRegisterIndex2;
       }
-      *(uint *)(param_1 + 0x84) = 1 << (uVar10 & 0x3f) | *(uint *)(param_1 + 0x84);
-      arena = ((int (*)())remapSelect1To0)(*(undefined4 *)(uVar10 * 0xc + *(int *)(param_1 + 0x78)));
-      *(undefined4 *)((int)pvVar16 + 0x138) = arena;
-      *(uint *)((int)pvVar16 + 0x130) = uVar10;
-      *(ushort *)(*(int *)((int)pvVar16 + 0x13c) + 0x12) = uVar7;
-      ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
+      *(uint *)(program + 0x84) = 1 << (ilRegisterIndex2 & 0x3f) | *(uint *)(program + 0x84);
+      remappedSelect = ((int (*)())remapSelect1To0)(*(undefined4 *)(ilRegisterIndex2 * 0xc + *(int *)(program + 0x78)));
+      *(undefined4 *)((int)fetchTextureMapGradientsInst + 0x138) = remappedSelect;
+      *(uint *)((int)fetchTextureMapGradientsInst + 0x130) = ilRegisterIndex2;
+      *(ushort *)(*(int *)((int)fetchTextureMapGradientsInst + 0x13c) + 0x12) = saturateBit;
+      ((int (*)())FUN_000f92fc)(program,fetchTextureMapGradientsInst,currentBlock);
       local_178 = *(uint *******)(local_60 + -0x2c30);
       local_124 = *(uint ******)(local_78 + -0x2bfc);
-      ppppppuVar38 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-      in_r8 = (uint ******)((int)((unsigned char *)0x0) + 1);
-      in_r6 = param_2;
-      in_r7 = ppppppuVar38;
-      ((int (*)())FUN_000fa958)(param_1,0,0,param_2,ppppppuVar38,1,local_124,local_70,ppppppuVar37,1,local_180);
+      ppppppuVar38 = IRInst__create(0x31,*(undefined4 *)(program + 8));
+      argR8 = (uint ******)((int)((unsigned char *)0x0) + 1);
+      argR6 = ilReader;
+      argR7 = ppppppuVar38;
+      ((int (*)())FUN_000fa958)(program,0,0,ilReader,ppppppuVar38,1,local_124,local_70,loopStackData,1,currentBlock);
       IRInst__setOperandRef(ppppppuVar38,1,uVar50);
 code_r0x00101cbc:
-      ((int (*)())FUN_000f92fc)(param_1,ppppppuVar38,local_180);
+      ((int (*)())FUN_000f92fc)(program,ppppppuVar38,currentBlock);
       goto code_r0x00101d1c;
     case 0x30:
       iVar43 = iVar47 + (int)local_17c * 4;
-      ((void (*)())IRInst__makeLiteralVec4Float)(ppppppuVar38,param_1,ppppppuVar40,(double)*(float *)(iVar43 + 4),
+      ((void (*)())IRInst__makeLiteralVec4Float)(ppppppuVar38,program,ppppppuVar40,(double)*(float *)(iVar43 + 4),
                    (double)*(float *)(iVar43 + 8),(double)*(float *)(iVar43 + 0xc),
                    (double)*(float *)(iVar43 + 0x10));
-      iVar43 = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
-      SelectWord__compose(&local_d8,*(undefined4 *)(iVar43 + 0x10),local_178);
-      arena = local_d8;
-      iVar43 = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
-      *(undefined4 *)(iVar43 + 0x10) = arena;
+      operandRecord2 = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
+      SelectWord__compose(&local_d8,*(undefined4 *)(operandRecord2 + 0x10),local_178);
+      selectWord = local_d8;
+      operandRecord2 = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
+      *(undefined4 *)(operandRecord2 + 0x10) = selectWord;
       ppppppuVar40 = (uint ******)((int)ppppppuVar40 + 1);
       local_bc = 0;
       local_17c = local_17c + 1;
       break;
     case 0x31:
-      arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
-      puVar32 = (undefined4 *)Arena__alloc(arena,0x10);
-      *puVar32 = arena;
+      compilerArenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+      puVar32 = (undefined4 *)Arena__alloc(compilerArenaB,0x10);
+      *puVar32 = compilerArenaB;
       puVar35 = puVar32 + 1;
       local_17c = (int *)((int)local_17c + 1);
       switch(*(undefined4 *)(iVar47 + (int)local_17c * 4)) {
       case 0x3f:
-        *puVar35 = (uint)*ppppppuVar49 >> 0x12 & 1;
+        *puVar35 = (uint)*tokenWords >> 0x12 & 1;
         break;
       default:
         *puVar35 = 0;
         break;
       case 0x5f:
-        *puVar35 = (uint)*ppppppuVar49 >> 0x18 & 1;
+        *puVar35 = (uint)*tokenWords >> 0x18 & 1;
         break;
       case 0x67:
         *puVar35 = 1;
       }
-      uVar10 = puVar14[2];
+      uVar10 = vectorAllocation[2];
       if (uVar10 < *puVar12) {
-        _memset(uVar10 * 4 + puVar14[3],0,4);
-        puVar14[2] = uVar10 + 1;
-        puVar32 = (undefined4 *)(uVar10 * 4 + puVar14[3]);
+        _memset(uVar10 * 4 + vectorAllocation[3],0,4);
+        vectorAllocation[2] = uVar10 + 1;
+        vectorElementSlot3 = (undefined4 *)(uVar10 * 4 + vectorAllocation[3]);
       }
       else {
-        puVar32 = (undefined4 *)Vector__elementRefGrow(puVar12,uVar10);
+        vectorElementSlot3 = (undefined4 *)Vector__elementRefGrow(puVar12,uVar10);
       }
       local_bc = 0;
-      *puVar32 = puVar35;
+      *vectorElementSlot3 = puVar35;
       break;
     case 0x32:
       ppppppuVar48 = (uint ******)0x0;
-      pppppuVar15 = (uint *****)local_a8[1];
-      if (pppppuVar15 != (uint *****)0x0) {
+      ifStackCount = (uint *****)ifStack[1];
+      if (ifStackCount != (uint *****)0x0) {
         pppppuVar52 = (uint *****)0x0;
-        if ((uint *****)((int)pppppuVar15 - 1U) < pppppuVar15) {
-          pppppuVar52 = (uint *****)(local_a8[2] + (int)((int)pppppuVar15 - 1U));
+        if ((uint *****)((int)ifStackCount - 1U) < ifStackCount) {
+          pppppuVar52 = (uint *****)(ifStack[2] + (int)((int)ifStackCount - 1U));
         }
         ppppppuVar48 = (uint ******)*pppppuVar52;
         ppppppuVar48[0x51] = (uint *****)0x0;
@@ -7373,282 +7444,282 @@ code_r0x00101cbc:
       local_17c = (int *)((int)local_17c + 1);
       switch(*(undefined4 *)(iVar47 + (int)local_17c * 4)) {
       case 0x62:
-        pvVar16 = IRInst__create(0x8b,*(undefined4 *)(param_1 + 8));
-        ((void (*)())IRInst__makeLiteralVec4Float)(pvVar16,param_1,1,1.0,1.0,1.0,1.0);
-        ((void (*)())IRInst__makeLiteralVec4Float)(pvVar16,param_1,2,1.0,1.0,1.0,1.0);
+        pvVar16 = IRInst__create(0x8b,*(undefined4 *)(program + 8));
+        ((void (*)())IRInst__makeLiteralVec4Float)(pvVar16,program,1,1.0,1.0,1.0,1.0);
+        ((void (*)())IRInst__makeLiteralVec4Float)(pvVar16,program,2,1.0,1.0,1.0,1.0);
         *(undefined4 *)((int)pvVar16 + 300) = 0;
-        arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-        puVar32 = (undefined4 *)Arena__alloc(arena,0x15c);
-        *puVar32 = arena;
-        pppppuVar15 = (uint *****)(puVar32 + 1);
-        in_r6 = (uint ******)0x0;
-        in_r7 = *(uint *******)(param_1 + 8);
-        IfHeader__ctor_ea6d0(pppppuVar15,pvVar16,ppppppuVar48,0,in_r7);
+        compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+        blockAllocation4 = (undefined4 *)Arena__alloc(compilerArenaA,0x15c);
+        *blockAllocation4 = compilerArenaA;
+        pppppuVar15 = (uint *****)(blockAllocation4 + 1);
+        argR6 = (uint ******)0x0;
+        argR7 = *(uint *******)(program + 8);
+        IfHeader__ctor_ea6d0(pppppuVar15,pvVar16,ppppppuVar48,0,argR7);
         break;
       case 99:
-        iVar43 = *(int *)(param_1 + 8);
-        pppuVar42 = **param_2[0x1b];
-        if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (iVar43 != 0)) &&
-           ((*(uint *)(*(int *)(iVar43 + 0x30c) + 8) & 0x80) != 0)) {
+        compiler = *(int *)(program + 8);
+        pppuVar42 = **ilReader[0x1b];
+        if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (compiler != 0)) &&
+           ((*(uint *)(*(int *)(compiler + 0x30c) + 8) & 0x80) != 0)) {
           iVar20 = 0xf;
         }
         else {
-          iVar20 = (int)*(short *)((int)*param_2[0x1b] + 2);
+          iVar20 = (int)*(short *)((int)*ilReader[0x1b] + 2);
         }
-        pvVar16 = IRInst__create(0x8d,iVar43);
-        arena = FUN_000ec208(param_1,(uint)pppuVar42 >> 0x10 & 0x3f);
-        iVar43 = IRInst__getOperandRecord(pvVar16,1);
-        *(undefined4 *)(iVar43 + 0xc) = arena;
-        puVar8 = PTR_DAT_001e8b84;
-        *(int *)(iVar43 + 8) = iVar20;
-        *(undefined4 *)((int)pvVar16 + 300) = *(undefined4 *)puVar8;
-        arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-        puVar32 = (undefined4 *)Arena__alloc(arena,0x15c);
-        *puVar32 = arena;
-        pppppuVar15 = (uint *****)(puVar32 + 1);
-        in_r6 = *(uint *******)(param_1 + 8);
-        IfHeaderStatic__ctor_ebac8(pppppuVar15,pvVar16,ppppppuVar48,in_r6);
+        cmp1SInst = IRInst__create(0x8d,compiler);
+        registerFile = FUN_000ec208(program,(uint)pppuVar42 >> 0x10 & 0x3f);
+        operandRecord2 = IRInst__getOperandRecord(cmp1SInst,1);
+        *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
+        remapTable = PTR_DAT_001e8b84;
+        *(int *)(operandRecord2 + 8) = iVar20;
+        *(undefined4 *)((int)cmp1SInst + 300) = *(undefined4 *)remapTable;
+        compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+        blockAllocation4 = (undefined4 *)Arena__alloc(compilerArenaA,0x15c);
+        *blockAllocation4 = compilerArenaA;
+        pppppuVar15 = (uint *****)(blockAllocation4 + 1);
+        argR6 = *(uint *******)(program + 8);
+        IfHeaderStatic__ctor_ebac8(pppppuVar15,cmp1SInst,ppppppuVar48,argR6);
         FUN_000e78c0(pppppuVar15,local_188);
-        FUN_000ed63c(param_1,pvVar16);
+        FUN_000ed63c(program,cmp1SInst);
         pppppuVar52 = (uint *****)0x0;
-        if ((uint *****)local_a8[1] != (uint *****)0x0) {
-          puVar32[0x53] = 0;
-          pppppuVar52 = (uint *****)local_a8[1];
+        if ((uint *****)ifStack[1] != (uint *****)0x0) {
+          blockAllocation4[0x53] = 0;
+          pppppuVar52 = (uint *****)ifStack[1];
         }
-        if (pppppuVar52 < *local_a8) {
-          _memset(local_a8[2] + (int)pppppuVar52,0,4);
-          local_a8[1] = (uint ****)((int)pppppuVar52 + 1);
-          pppppuVar52 = (uint *****)(local_a8[2] + (int)pppppuVar52);
+        if (pppppuVar52 < *ifStack) {
+          _memset(ifStack[2] + (int)pppppuVar52,0,4);
+          ifStack[1] = (uint ****)((int)pppppuVar52 + 1);
+          pppppuVar52 = (uint *****)(ifStack[2] + (int)pppppuVar52);
         }
         else {
-          pppppuVar52 = (uint *****)Vector__elementRefGrow(local_a8,pppppuVar52);
+          pppppuVar52 = (uint *****)Vector__elementRefGrow(ifStack,pppppuVar52);
         }
         *pppppuVar52 = (uint ****)pppppuVar15;
-        uVar10 = allocation[2];
+        uVar10 = puVar13[2];
         if (uVar10 == 0) goto code_r0x00103240;
         goto code_r0x00103214;
       case 100:
-        ppppuVar45 = *param_2[0x1b];
+        ppppuVar45 = *ilReader[0x1b];
         pppuVar42 = *ppppuVar45;
-        iVar43 = *(int *)(param_1 + 8);
-        if ((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (iVar43 != 0)) {
-          piVar18 = *(int **)(iVar43 + 0x30c);
-          if ((piVar18[2] & 0x80U) == 0) goto code_r0x00100810;
+        compiler = *(int *)(program + 8);
+        if ((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (compiler != 0)) {
+          hwDescription = *(int **)(compiler + 0x30c);
+          if ((hwDescription[2] & 0x80U) == 0) goto code_r0x00100810;
           iVar20 = 0xf;
         }
         else {
-          piVar18 = *(int **)(iVar43 + 0x30c);
+          hwDescription = *(int **)(compiler + 0x30c);
 code_r0x00100810:
           iVar20 = (int)*(short *)((int)ppppuVar45 + 2);
         }
-        ppppuVar45 = param_2[0x1b][1];
+        ppppuVar45 = ilReader[0x1b][1];
         pppuVar33 = *ppppuVar45;
-        if (((((uint)pppuVar33 & 0x3f0000) == 0x100000) && (iVar43 != 0)) &&
-           ((piVar18[2] & 0x80U) != 0)) {
-          iVar43 = 0xf;
+        if (((((uint)pppuVar33 & 0x3f0000) == 0x100000) && (compiler != 0)) &&
+           ((hwDescription[2] & 0x80U) != 0)) {
+          registerIndex = 0xf;
         }
         else {
-          iVar43 = (int)*(short *)((int)ppppuVar45 + 2);
+          registerIndex = (int)*(short *)((int)ppppuVar45 + 2);
         }
-        in_r8 = (uint ******)((uint)pppuVar33 >> 0x10 & 0x3f);
-        pvVar16 = (void *)(**(code **)(*piVar18 + 0x24))
-                                    (piVar18,(uint)*ppppppuVar49 >> 0x10 & 7,iVar20,
-                                     (uint)pppuVar42 >> 0x10 & 0x3f,iVar43,in_r8,local_178,param_2);
-        arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-        puVar32 = (undefined4 *)Arena__alloc(arena,0x15c);
-        *puVar32 = arena;
-        pppppuVar15 = (uint *****)(puVar32 + 1);
-        in_r6 = (uint ******)0x0;
-        in_r7 = *(uint *******)(param_1 + 8);
-        IfHeader__ctor_ea6d0(pppppuVar15,pvVar16,ppppppuVar48,0,in_r7);
+        argR8 = (uint ******)((uint)pppuVar33 >> 0x10 & 0x3f);
+        pvVar16 = (void *)(**(code **)(*hwDescription + 0x24))
+                                    (hwDescription,(uint)*tokenWords >> 0x10 & 7,iVar20,
+                                     (uint)pppuVar42 >> 0x10 & 0x3f,registerIndex,argR8,local_178,ilReader);
+        compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+        blockAllocation4 = (undefined4 *)Arena__alloc(compilerArenaA,0x15c);
+        *blockAllocation4 = compilerArenaA;
+        pppppuVar15 = (uint *****)(blockAllocation4 + 1);
+        argR6 = (uint ******)0x0;
+        argR7 = *(uint *******)(program + 8);
+        IfHeader__ctor_ea6d0(pppppuVar15,pvVar16,ppppppuVar48,0,argR7);
         break;
       case 0x65:
-        arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-        puVar32 = (undefined4 *)Arena__alloc(arena,0x168);
-        *puVar32 = arena;
+        compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+        puVar32 = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
+        *puVar32 = compilerArenaA;
         puVar32 = puVar32 + 1;
-        IRInst__ctor_10502c(puVar32,0x8c,*(undefined4 *)(param_1 + 8));
-        arena = 6;
+        IRInst__ctor_10502c(puVar32,0x8c,*(undefined4 *)(program + 8));
+        comparisonKind = 6;
         goto code_r0x00102c90;
       case 0x66:
-        arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-        puVar32 = (undefined4 *)Arena__alloc(arena,0x168);
-        *puVar32 = arena;
+        compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+        puVar32 = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
+        *puVar32 = compilerArenaA;
         puVar32 = puVar32 + 1;
-        IRInst__ctor_10502c(puVar32,0x8c,*(undefined4 *)(param_1 + 8));
-        arena = 7;
+        IRInst__ctor_10502c(puVar32,0x8c,*(undefined4 *)(program + 8));
+        comparisonKind = 7;
 code_r0x00102c90:
-        puVar32[0x4b] = arena;
-        in_r7 = (uint ******)local_a8;
-        in_r8 = ppppppuVar37;
+        puVar32[0x4b] = comparisonKind;
+        argR7 = (uint ******)ifStack;
+        argR8 = loopStackData;
         pppppuVar15 = (uint *****)
-                      ((int (*)())FUN_000fadc4)(param_1,puVar32,local_188,ppppppuVar48,local_a8,ppppppuVar37,
-                                   param_2);
-        in_r6 = ppppppuVar48;
+                      ((int (*)())FUN_000fadc4)(program,puVar32,local_188,ppppppuVar48,ifStack,loopStackData,
+                                   ilReader);
+        argR6 = ppppppuVar48;
         goto code_r0x00103240;
       default:
         pppppuVar15 = (uint *****)0x0;
         goto code_r0x00103240;
       case 0x6f:
-        uVar10 = local_b0[1] - 1;
-        puVar32 = (undefined4 *)0x0;
-        if (uVar10 < local_b0[1]) {
-          puVar32 = (undefined4 *)(uVar10 * 4 + local_b0[2]);
+        conditionStackTopIndex = conditionStack[1] - 1;
+        vectorElementSlot3 = (undefined4 *)0x0;
+        if (conditionStackTopIndex < conditionStack[1]) {
+          vectorElementSlot3 = (undefined4 *)(conditionStackTopIndex * 4 + conditionStack[2]);
         }
-        piVar18 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
-        in_r8 = local_178;
-        arena = (**(code **)(*piVar18 + 0x28))
-                           (piVar18,1,*(undefined4 *)*puVar32,4,param_2[(int)param_2[0x16] + 0x23],
-                            local_178,param_2,local_180);
-        uVar50 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-        puVar32 = (undefined4 *)Arena__alloc(uVar50,0x15c);
-        *puVar32 = uVar50;
-        pppppuVar15 = (uint *****)(puVar32 + 1);
-        in_r6 = (uint ******)0x0;
-        in_r7 = *(uint *******)(param_1 + 8);
-        IfHeader__ctor_ea6d0(pppppuVar15,arena,ppppppuVar48,0,in_r7);
-        uVar10 = local_b0[1] - 1;
-        if (uVar10 < local_b0[1]) {
-          piVar18 = (int *)(uVar10 * 4 + local_b0[2]);
+        hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
+        argR8 = local_178;
+        ifConditionInst = (**(code **)(*hwDescription + 0x28))
+                           (hwDescription,1,*(undefined4 *)*vectorElementSlot3,4,ilReader[(int)ilReader[0x16] + 0x23],
+                            local_178,ilReader,currentBlock);
+        uVar50 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+        blockAllocation4 = (undefined4 *)Arena__alloc(uVar50,0x15c);
+        *blockAllocation4 = uVar50;
+        pppppuVar15 = (uint *****)(blockAllocation4 + 1);
+        argR6 = (uint ******)0x0;
+        argR7 = *(uint *******)(program + 8);
+        IfHeader__ctor_ea6d0(pppppuVar15,ifConditionInst,ppppppuVar48,0,argR7);
+        conditionStackTopIndex = conditionStack[1] - 1;
+        if (conditionStackTopIndex < conditionStack[1]) {
+          stackElement = (int *)(conditionStackTopIndex * 4 + conditionStack[2]);
         }
         else {
-          piVar18 = (int *)0x0;
+          stackElement = (int *)0x0;
         }
-        iVar43 = *piVar18;
+        iVar43 = *stackElement;
         FUN_000e77f4(pppppuVar15,*(undefined4 *)(iVar43 + 8));
         *(uint ******)(iVar43 + 8) = pppppuVar15;
         FUN_000e78c0(pppppuVar15,local_188);
-        FUN_000ed63c(param_1,arena);
+        FUN_000ed63c(program,ifConditionInst);
         goto code_r0x0010319c;
       case 0x72:
-        iVar43 = *(int *)(param_1 + 8);
-        pppuVar42 = **param_2[0x1b];
-        if ((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (iVar43 != 0)) {
-          piVar18 = *(int **)(iVar43 + 0x30c);
-          if ((piVar18[2] & 0x80U) == 0) goto code_r0x0010082c;
-          iVar43 = 0xf;
+        compiler = *(int *)(program + 8);
+        pppuVar42 = **ilReader[0x1b];
+        if ((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (compiler != 0)) {
+          hwDescription = *(int **)(compiler + 0x30c);
+          if ((hwDescription[2] & 0x80U) == 0) goto code_r0x0010082c;
+          registerIndex = 0xf;
         }
         else {
-          piVar18 = *(int **)(iVar43 + 0x30c);
+          hwDescription = *(int **)(compiler + 0x30c);
 code_r0x0010082c:
-          iVar43 = (int)*(short *)((int)*param_2[0x1b] + 2);
+          registerIndex = (int)*(short *)((int)*ilReader[0x1b] + 2);
         }
-        in_r8 = local_178;
-        pvVar16 = (void *)(**(code **)(*piVar18 + 0x28))
-                                    (piVar18,iVar34 == 0x6f,iVar43,(uint)pppuVar42 >> 0x10 & 0x3f,0,
-                                     local_178,param_2,local_180);
-        arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-        puVar32 = (undefined4 *)Arena__alloc(arena,0x15c);
-        *puVar32 = arena;
-        pppppuVar15 = (uint *****)(puVar32 + 1);
-        in_r6 = (uint ******)0x0;
-        in_r7 = *(uint *******)(param_1 + 8);
-        IfHeader__ctor_ea6d0(pppppuVar15,pvVar16,ppppppuVar48,0,in_r7);
+        argR8 = local_178;
+        pvVar16 = (void *)(**(code **)(*hwDescription + 0x28))
+                                    (hwDescription,ilOpcode == 0x6f,registerIndex,(uint)pppuVar42 >> 0x10 & 0x3f,0,
+                                     local_178,ilReader,currentBlock);
+        compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+        blockAllocation4 = (undefined4 *)Arena__alloc(compilerArenaA,0x15c);
+        *blockAllocation4 = compilerArenaA;
+        pppppuVar15 = (uint *****)(blockAllocation4 + 1);
+        argR6 = (uint ******)0x0;
+        argR7 = *(uint *******)(program + 8);
+        IfHeader__ctor_ea6d0(pppppuVar15,pvVar16,ppppppuVar48,0,argR7);
       }
       FUN_000e78c0(pppppuVar15,local_188);
-      FUN_000ed63c(param_1,pvVar16);
+      FUN_000ed63c(program,pvVar16);
 code_r0x0010319c:
       pppppuVar52 = (uint *****)0x0;
-      if ((uint *****)local_a8[1] != (uint *****)0x0) {
+      if ((uint *****)ifStack[1] != (uint *****)0x0) {
         pppppuVar15[0x52] = (uint ****)0x0;
-        pppppuVar52 = (uint *****)local_a8[1];
+        pppppuVar52 = (uint *****)ifStack[1];
       }
-      if (pppppuVar52 < *local_a8) {
-        _memset(local_a8[2] + (int)pppppuVar52,0,4);
-        local_a8[1] = (uint ****)((int)pppppuVar52 + 1);
-        pppppuVar52 = (uint *****)(local_a8[2] + (int)pppppuVar52);
+      if (pppppuVar52 < *ifStack) {
+        _memset(ifStack[2] + (int)pppppuVar52,0,4);
+        ifStack[1] = (uint ****)((int)pppppuVar52 + 1);
+        pppppuVar52 = (uint *****)(ifStack[2] + (int)pppppuVar52);
       }
       else {
-        pppppuVar52 = (uint *****)Vector__elementRefGrow(local_a8,pppppuVar52);
+        pppppuVar52 = (uint *****)Vector__elementRefGrow(ifStack,pppppuVar52);
       }
       *pppppuVar52 = (uint ****)pppppuVar15;
-      uVar10 = allocation[2];
+      uVar10 = puVar13[2];
       if (uVar10 != 0) {
 code_r0x00103214:
-        piVar18 = (int *)0x0;
+        stackElement = (int *)0x0;
         if (uVar10 - 1 < uVar10) {
-          piVar18 = (int *)((uVar10 - 1) * 4 + allocation[3]);
+          stackElement = (int *)((uVar10 - 1) * 4 + puVar13[3]);
         }
-        *(int *)(*piVar18 + 300) = *(int *)(*piVar18 + 300) + 1;
+        *(int *)(*stackElement + 300) = *(int *)(*stackElement + 300) + 1;
       }
 code_r0x00103240:
-      FUN_000ec3ac(param_1,local_184,pppppuVar15);
-      Block__connect(local_184,pppppuVar15);
-      local_180 = (uint *****)pppppuVar15[0x4d];
-      local_184 = pppppuVar15;
-      FUN_000ec3ac(param_1,pppppuVar15,local_180);
+      FUN_000ec3ac(program,previousBlock,pppppuVar15);
+      Block__connect(previousBlock,pppppuVar15);
+      currentBlock = (uint *****)pppppuVar15[0x4d];
+      previousBlock = pppppuVar15;
+      FUN_000ec3ac(program,pppppuVar15,currentBlock);
 code_r0x00103300:
       local_bc = 0;
-      local_184 = local_180;
+      previousBlock = currentBlock;
       break;
     case 0x34:
-      iVar43 = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
+      operandRecord2 = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
       local_bc = 0;
       ppppppuVar40 = (uint ******)((int)ppppppuVar40 + 1);
-      *(undefined4 *)(iVar43 + 8) = 0;
-      *(undefined4 *)(iVar43 + 0xc) = 0x21;
+      *(undefined4 *)(operandRecord2 + 8) = 0;
+      *(undefined4 *)(operandRecord2 + 0xc) = 0x21;
       break;
     case 0x35:
-      piVar18 = (int *)0x0;
-      uVar10 = allocation[2] - 1;
-      if (uVar10 < (uint)allocation[2]) {
-        piVar18 = (int *)(uVar10 * 4 + allocation[3]);
+      stackElement = (int *)0x0;
+      uVar10 = puVar13[2] - 1;
+      if (uVar10 < (uint)puVar13[2]) {
+        stackElement = (int *)(uVar10 * 4 + puVar13[3]);
       }
-      iVar20 = *piVar18;
-      iVar43 = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 8),3);
-      if ((iVar43 == 0) || (iVar43 = FUN_0012c2dc(param_1,iVar20), iVar43 == 0)) {
-        in_r6 = &local_184;
-        in_r7 = &local_180;
-        in_r8 = (uint ******)&local_188;
-        iVar43 = FUN_0012f0f8(param_1,ppppppuVar37,iVar20,in_r6,in_r7,in_r8);
+      iVar20 = *stackElement;
+      iVar43 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),3);
+      if ((iVar43 == 0) || (iVar43 = FUN_0012c2dc(program,iVar20), iVar43 == 0)) {
+        argR6 = &previousBlock;
+        argR7 = &currentBlock;
+        argR8 = (uint ******)&local_188;
+        iVar43 = FUN_0012f0f8(program,loopStackData,iVar20,argR6,argR7,argR8);
         if (iVar43 != 0) goto switchD_0010061c_caseD_1;
-        if (*(int *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 0x4c) < (int)local_188) {
-          Compiler__fail(*(int *)(param_1 + 8),8);
+        if (*(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0x4c) < (int)local_188) {
+          Compiler__fail(*(int *)(program + 8),8);
         }
         iVar21 = *(int *)(iVar20 + 0x150);
-        FUN_000ec3ac(param_1,local_184,iVar21);
-        iVar43 = (*(code *)(*local_184)[0xe])();
-        if ((iVar43 == 0) && (iVar43 = (*(code *)(*local_184)[0xf])(), iVar43 == 0)) {
-          Block__connect(local_184,iVar21);
+        FUN_000ec3ac(program,previousBlock,iVar21);
+        iVar43 = (*(code *)(*previousBlock)[0xe])();
+        if ((iVar43 == 0) && (iVar43 = (*(code *)(*previousBlock)[0xf])(), iVar43 == 0)) {
+          Block__connect(previousBlock,iVar21);
         }
-        arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-        puVar32 = (undefined4 *)Arena__alloc(arena,0x130);
-        *puVar32 = arena;
-        puVar29 = puVar32 + 1;
-        Block__ctor_ea020(puVar29,*(undefined4 *)(param_1 + 8));
-        Block__connect(iVar20,puVar29);
-        FUN_000ec3ac(param_1,iVar21,puVar29);
+        compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+        blockAllocation4 = (undefined4 *)Arena__alloc(compilerArenaA,0x130);
+        *blockAllocation4 = compilerArenaA;
+        blockObject = blockAllocation4 + 1;
+        Block__ctor_ea020(blockObject,*(undefined4 *)(program + 8));
+        Block__connect(iVar20,blockObject);
+        FUN_000ec3ac(program,iVar21,blockObject);
         iVar43 = *(int *)(iVar20 + 0x154);
-        Block__connect(puVar29,iVar43);
-        FUN_000ec3ac(param_1,puVar29,iVar43);
-        arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-        puVar29 = (undefined4 *)Arena__alloc(arena,0x130);
-        *puVar29 = arena;
-        ppppppuVar48 = (uint ******)(puVar29 + 1);
-        Block__ctor_ea020(ppppppuVar48,*(undefined4 *)(param_1 + 8));
-        local_180 = (uint *****)ppppppuVar48;
-        FUN_000ec3ac(param_1,iVar43,ppppppuVar48);
-        Block__connect(iVar43,local_180);
-        local_184 = local_180;
-        Vector__removeAt(ppppppuVar37,allocation[2] + -1);
+        Block__connect(blockObject,iVar43);
+        FUN_000ec3ac(program,blockObject,iVar43);
+        compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+        blockAllocation3 = (undefined4 *)Arena__alloc(compilerArenaA,0x130);
+        *blockAllocation3 = compilerArenaA;
+        ppppppuVar48 = (uint ******)(blockAllocation3 + 1);
+        Block__ctor_ea020(ppppppuVar48,*(undefined4 *)(program + 8));
+        currentBlock = (uint *****)ppppppuVar48;
+        FUN_000ec3ac(program,iVar43,ppppppuVar48);
+        Block__connect(iVar43,currentBlock);
+        previousBlock = currentBlock;
+        Vector__removeAt(loopStackData,puVar13[2] + -1);
         local_bc = 0;
         *(uint *****)(iVar21 + 0xb8) = local_188;
         local_188 = (uint ****)((int)local_188 - 1);
         *(uint *****)(iVar43 + 0xb8) = local_188;
-        puVar32[0x2f] = local_188;
-        local_180[0x2e] = local_188;
+        blockAllocation4[0x2f] = local_188;
+        currentBlock[0x2e] = local_188;
       }
       else {
-        local_184 = (uint *****)Block__findSimplePredecessor(iVar20);
+        previousBlock = (uint *****)Block__findSimplePredecessor(iVar20);
         if (*(int **)(iVar20 + 0x150) != (int *)0x0) {
           (**(code **)(**(int **)(iVar20 + 0x150) + 4))();
         }
         if (*(int **)(iVar20 + 0x154) != (int *)0x0) {
           (**(code **)(**(int **)(iVar20 + 0x154) + 4))();
         }
-        Vector__removeValue(local_184[0x34],iVar20);
+        Vector__removeValue(previousBlock[0x34],iVar20);
         do {
-          ppppppuVar48 = (uint ******)local_184[2];
+          ppppppuVar48 = (uint ******)previousBlock[2];
           pppppuVar15 = ppppppuVar48[0x26];
           for (pppppuVar52 = (uint *****)ppppppuVar48[0x26][2]; pppppuVar52 != (uint *****)0x0;
               pppppuVar52 = (uint *****)pppppuVar52[2]) {
@@ -7662,73 +7733,73 @@ code_r0x00103300:
           if (ppppppuVar48 != (uint ******)0x0) {
             (*(code *)(*ppppppuVar48)[1])(ppppppuVar48);
           }
-        } while (ppppppuVar48 != (uint ******)local_180);
+        } while (ppppppuVar48 != (uint ******)currentBlock);
         local_bc = 0;
         local_188 = (uint ****)((int)local_188 - 1);
-        local_180 = local_184;
+        currentBlock = previousBlock;
       }
       break;
     case 0x36:
-      uVar10 = allocation[2];
-      arena = 0;
+      uVar10 = puVar13[2];
+      enclosingLoopHeader = 0;
       if (uVar10 != 0) {
-        puVar32 = (undefined4 *)0x0;
+        vectorElementSlot3 = (undefined4 *)0x0;
         if (uVar10 - 1 < uVar10) {
-          puVar32 = (undefined4 *)((uVar10 - 1) * 4 + allocation[3]);
+          vectorElementSlot3 = (undefined4 *)((uVar10 - 1) * 4 + puVar13[3]);
         }
-        arena = *puVar32;
+        enclosingLoopHeader = *vectorElementSlot3;
       }
-      in_r6 = (uint ******)(uint)(iVar34 == 0x71);
-      if (in_r6 == (uint ******)0x0) {
-        uVar10 = (uint)*(ushort *)((int)*param_2[0x1b] + 2);
+      argR6 = (uint ******)(uint)(ilOpcode == 0x71);
+      if (argR6 == (uint ******)0x0) {
+        uVar10 = (uint)*(ushort *)((int)*ilReader[0x1b] + 2);
       }
       else {
         uVar10 = 0;
       }
-      uVar50 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-      puVar32 = (undefined4 *)Arena__alloc(uVar50,0x15c);
-      *puVar32 = uVar50;
-      puVar29 = puVar32 + 1;
-      in_r7 = *(uint *******)(param_1 + 8);
-      PostLoopFooter__ctor_ea828(puVar29,uVar10,arena,in_r6,in_r7);
-      puVar32[0x2f] = local_188;
-      if (((uint)*ppppppuVar49 & 0x10000) != 0) {
-        puVar32[0x4e] = 1;
+      uVar50 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+      blockAllocation4 = (undefined4 *)Arena__alloc(uVar50,0x15c);
+      *blockAllocation4 = uVar50;
+      blockObject = blockAllocation4 + 1;
+      argR7 = *(uint *******)(program + 8);
+      PostLoopFooter__ctor_ea828(blockObject,uVar10,enclosingLoopHeader,argR6,argR7);
+      blockAllocation4[0x2f] = local_188;
+      if (((uint)*tokenWords & 0x10000) != 0) {
+        blockAllocation4[0x4e] = 1;
       }
-      FUN_000ed63c(param_1,puVar32[0x53]);
-      pppppuVar15 = (uint *****)allocation[2];
-      if (pppppuVar15 < *ppppppuVar37) {
-        _memset((int)pppppuVar15 * 4 + allocation[3],0,4);
-        allocation[2] = (int)pppppuVar15 + 1;
-        puVar28 = (undefined4 *)((int)pppppuVar15 * 4 + allocation[3]);
+      FUN_000ed63c(program,blockAllocation4[0x53]);
+      pppppuVar15 = (uint *****)puVar13[2];
+      if (pppppuVar15 < *loopStackData) {
+        _memset((int)pppppuVar15 * 4 + puVar13[3],0,4);
+        puVar13[2] = (int)pppppuVar15 + 1;
+        vectorElementSlot2 = (undefined4 *)((int)pppppuVar15 * 4 + puVar13[3]);
       }
       else {
-        puVar28 = (undefined4 *)Vector__elementRefGrow(ppppppuVar37,pppppuVar15);
+        vectorElementSlot2 = (undefined4 *)Vector__elementRefGrow(loopStackData,pppppuVar15);
       }
-      *puVar28 = puVar29;
+      *vectorElementSlot2 = blockObject;
       local_188 = (uint ****)((int)local_188 + 1);
-      FUN_000ec3ac(param_1,local_184,puVar29);
-      Block__connect(local_184,puVar29);
-      arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
-      puVar28 = (undefined4 *)Arena__alloc(arena,0x130);
-      *puVar28 = arena;
-      ppppppuVar48 = (uint ******)(puVar28 + 1);
-      Block__ctor_ea020(ppppppuVar48,*(undefined4 *)(param_1 + 8));
-      puVar28[0x2f] = local_188;
-      local_180 = (uint *****)ppppppuVar48;
-      FUN_000ec3ac(param_1,puVar29,ppppppuVar48);
-      Block__connect(puVar29,local_180);
-      local_184 = local_180;
+      FUN_000ec3ac(program,previousBlock,blockObject);
+      Block__connect(previousBlock,blockObject);
+      compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+      blockAllocation2 = (undefined4 *)Arena__alloc(compilerArenaA,0x130);
+      *blockAllocation2 = compilerArenaA;
+      ppppppuVar48 = (uint ******)(blockAllocation2 + 1);
+      Block__ctor_ea020(ppppppuVar48,*(undefined4 *)(program + 8));
+      blockAllocation2[0x2f] = local_188;
+      currentBlock = (uint *****)ppppppuVar48;
+      FUN_000ec3ac(program,blockObject,ppppppuVar48);
+      Block__connect(blockObject,currentBlock);
+      previousBlock = currentBlock;
       local_bc = 0;
-      puVar32[0x4d] = *(undefined4 *)(*(int *)(param_1 + 8) + 0x324);
+      blockAllocation4[0x4d] = *(undefined4 *)(*(int *)(program + 8) + 0x324);
       break;
     case 0x37:
       local_17c = (int *)((int)local_17c + 1);
-      arena = *(undefined4 *)(iVar47 + (int)local_17c * 4);
-      if (*(int *)(param_1 + 0x47c) != 0) {
-        arena = 0x75;
+      irOpcode = *(undefined4 *)(iVar47 + (int)local_17c * 4);
+      if (*(int *)(program + 0x47c) != 0) {
+        irOpcode = 0x75;
       }
-      ppppppuVar38 = IRInst__create(arena,*(undefined4 *)(param_1 + 8));
+      ppppppuVar38 = IRInst__create(irOpcode,*(undefined4 *)(program + 8));
       local_bc = 0;
       break;
     case 0x38:
@@ -7745,7 +7816,7 @@ code_r0x00103300:
     case 0x42:
       local_17c = (int *)((int)local_17c + 1);
       dVar54 = (double)*(float *)(iVar47 + (int)local_17c * 4);
-      ((void (*)())IRInst__makeLiteralVec4Float)(ppppppuVar38,param_1,ppppppuVar40,dVar54,dVar54,dVar54,dVar54);
+      ((void (*)())IRInst__makeLiteralVec4Float)(ppppppuVar38,program,ppppppuVar40,dVar54,dVar54,dVar54,dVar54);
       goto code_r0x001025c0;
     case 0x43:
     case 0x44:
@@ -7755,39 +7826,39 @@ code_r0x00103300:
     case 0x48:
     case 0x49:
       ppppppuVar48 = (uint ******)
-                     (PTR_s_IF_b_001dc2cc)[uVar10 * 4 + ((uint)*ppppppuVar49 >> 0x10 & 0x3fff)];
+                     (PTR_s_IF_b_001dc2cc)[templateToken * 4 + ((uint)*tokenWords >> 0x10 & 0x3fff)];
       goto switchD_00102044_default;
     case 0x4a:
-      ppppppuVar48 = *(uint *******)((int)&PTR_DAT_001dc75c + ((uint)*ppppppuVar49 >> 0xe & 0xc));
+      ppppppuVar48 = *(uint *******)((int)&PTR_DAT_001dc75c + ((uint)*tokenWords >> 0xe & 0xc));
 switchD_00102044_default:
-      in_r6 = (uint ******)local_180;
-      in_r8 = ppppppuVar19;
-      iVar47 = ((int (*)())FUN_000fd50c)(param_1,iVar47,&local_17c,local_180,ppppppuVar48,ppppppuVar19);
-      in_r7 = ppppppuVar48;
+      argR6 = (uint ******)currentBlock;
+      argR8 = ppppppuVar19;
+      iVar47 = ((int (*)())FUN_000fd50c)(program,iVar47,&local_17c,currentBlock,ppppppuVar48,ppppppuVar19);
+      argR7 = ppppppuVar48;
 code_r0x0010372c:
       local_bc = 0;
       break;
     case 0x4b:
-      if ((((uint)*ppppppuVar49 & 0x10000) == 0) ||
-         (bVar1 = true, (*(uint *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 8) & 0x40) != 0)) {
+      if ((((uint)*tokenWords & 0x10000) == 0) ||
+         (bVar1 = true, (*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x40) != 0)) {
         bVar1 = false;
       }
-      in_r7 = (uint ******)PTR_DAT_001e8b98;
+      argR7 = (uint ******)PTR_DAT_001e8b98;
       if (bVar1) {
-        in_r7 = (uint ******)PTR_DAT_001e8b9c;
+        argR7 = (uint ******)PTR_DAT_001e8b9c;
       }
 code_r0x001022b4:
-      in_r6 = (uint ******)local_180;
-      in_r8 = ppppppuVar19;
-      iVar47 = ((int (*)())FUN_000fd50c)(param_1,iVar47,&local_17c,local_180,in_r7,ppppppuVar19);
+      argR6 = (uint ******)currentBlock;
+      argR8 = ppppppuVar19;
+      iVar47 = ((int (*)())FUN_000fd50c)(program,iVar47,&local_17c,currentBlock,argR7,ppppppuVar19);
       goto code_r0x0010372c;
     case 0x4d:
       local_bc = 0;
-      *(ushort *)((int)ppppppuVar38[0x4f] + 0x12) = (byte)((uint)*ppppppuVar49 >> 0x18) & 1;
+      *(ushort *)((int)ppppppuVar38[0x4f] + 0x12) = (byte)((uint)*tokenWords >> 0x18) & 1;
       break;
     case 0x4e:
       ppppppuVar48 = (uint ******)
-                     ((int (*)())FUN_000f8ccc)((uint)*ppppppuVar49 >> 0x10 & 7,*(undefined4 *)(param_1 + 8),0);
+                     ((int (*)())FUN_000f8ccc)((uint)*tokenWords >> 0x10 & 7,*(undefined4 *)(program + 8),0);
       goto code_r0x00101f74;
     case 0x4f:
       local_17c = (int *)((int)local_17c + 1);
@@ -7798,47 +7869,47 @@ code_r0x001022b4:
       ((void (*)())FUN_0010490c)(ppppppuVar38,(double)*(float *)(iVar47 + (int)local_17c * 4));
       goto code_r0x00101d1c;
     case 0x51:
-      bVar4 = *(byte *)((int)param_2 + 0x8d);
-      pppppuVar15 = (uint *****)(uint)bVar4;
-      if ((*(uint *)((int)local_a0 + (bVar4 >> 3 & 0x1c) + 8) >> (bVar4 & 0x1f) & 1) == 0) {
-        Compiler__logf(*(undefined4 *)(param_1 + 8),"TextureStage %d misses DCLPT\n",pppppuVar15,in_r6
-                     ,in_r7,in_r8,bVar4 & 0x1f,0);
+      ilRegisterIndex = *(byte *)((int)ilReader + 0x8d);
+      pppppuVar15 = (uint *****)(uint)ilRegisterIndex;
+      if ((*(uint *)((int)local_a0 + (ilRegisterIndex >> 3 & 0x1c) + 8) >> (ilRegisterIndex & 0x1f) & 1) == 0) {
+        Compiler__logf(*(undefined4 *)(program + 8),"TextureStage %d misses DCLPT\n",pppppuVar15,argR6
+                     ,argR7,argR8,ilRegisterIndex & 0x1f,0);
       }
-      pppppuVar52 = *(uint ******)(param_1 + 0x7c);
-      if ((int)*(uint ******)(param_1 + 0x7c) < (int)pppppuVar15) {
+      pppppuVar52 = *(uint ******)(program + 0x7c);
+      if ((int)*(uint ******)(program + 0x7c) < (int)pppppuVar15) {
         pppppuVar52 = pppppuVar15;
       }
-      *(uint ******)(param_1 + 0x7c) = pppppuVar52;
-      *(uint *)(param_1 + 0x84) = 1 << ((uint)pppppuVar15 & 0x3f) | *(uint *)(param_1 + 0x84);
+      *(uint ******)(program + 0x7c) = pppppuVar52;
+      *(uint *)(program + 0x84) = 1 << ((uint)pppppuVar15 & 0x3f) | *(uint *)(program + 0x84);
       ppppppuVar38[0x4d] = pppppuVar15;
       ppppppuVar38[0x4c] = pppppuVar15;
       local_bc = 0;
       pppppuVar15 = (uint *****)
-                    ((int (*)())remapSelect1To0)(*(undefined4 *)((int)pppppuVar15 * 0xc + *(int *)(param_1 + 0x78)))
+                    ((int (*)())remapSelect1To0)(*(undefined4 *)((int)pppppuVar15 * 0xc + *(int *)(program + 0x78)))
       ;
       ppppppuVar38[0x4e] = pppppuVar15;
       break;
     case 0x52:
       local_bc = 0;
-      ppppppuVar38[0x4d] = (uint *****)(uint)*(byte *)((int)param_2 + 0x8d);
-      ppppppuVar38[0x4c] = (uint *****)(uint)*(byte *)((int)param_2 + 0x8d);
+      ppppppuVar38[0x4d] = (uint *****)(uint)*(byte *)((int)ilReader + 0x8d);
+      ppppppuVar38[0x4c] = (uint *****)(uint)*(byte *)((int)ilReader + 0x8d);
       break;
     case 0x53:
       ppppppuVar48 = (uint ******)
-                     ((int (*)())FUN_000f8ccc)((uint)*ppppppuVar49 >> 0x10 & 7,*(undefined4 *)(param_1 + 8),1);
+                     ((int (*)())FUN_000f8ccc)((uint)*tokenWords >> 0x10 & 7,*(undefined4 *)(program + 8),1);
 code_r0x00101f74:
       if (ppppppuVar48 != (uint ******)0x0) goto switchD_00102044_default;
       goto switchD_0010061c_caseD_1;
     case 0x54:
-      pppppuVar15 = *ppppppuVar49;
-      sVar6 = *(short *)((int)*param_2[0x19] + 2);
-      uVar10 = (uint)**param_2[0x19] >> 0x10 & 0x3f;
-      FUN_000ec208(param_1,uVar10);
-      uVar50 = *(undefined4 *)(param_1 + 0x3ac);
-      arena = FUN_000ec208(param_1,uVar10);
-      in_r6 = (uint ******)0x0;
-      iVar43 = FUN_00127608(uVar50,arena,(int)sVar6,0);
-      if (((uint)pppppuVar15 >> 0x10 & 0x3fff) == 0) goto switchD_0010061c_caseD_1;
+      firstTokenWord = *tokenWords;
+      registerIndex2 = *(short *)((int)*ilReader[0x19] + 2);
+      ilRegisterType = (uint)**ilReader[0x19] >> 0x10 & 0x3f;
+      FUN_000ec208(program,ilRegisterType);
+      uVar50 = *(undefined4 *)(program + 0x3ac);
+      registerFile = FUN_000ec208(program,ilRegisterType);
+      argR6 = (uint ******)0x0;
+      iVar43 = FUN_00127608(uVar50,registerFile,(int)registerIndex2,0);
+      if (((uint)firstTokenWord >> 0x10 & 0x3fff) == 0) goto switchD_0010061c_caseD_1;
       local_bc = 0;
       *(undefined4 *)(iVar43 + 0x30) = 1;
       break;
@@ -7851,34 +7922,34 @@ code_r0x00101f74:
     case 0x5b:
     case 0x5c:
     case 0x5d:
-      iVar43 = (&local_104)[uVar10 - 0x55];
+      iVar43 = (&local_104)[templateToken - 0x55];
       if (iVar43 == 0) {
-        iVar43 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-        *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar43;
-        (&local_104)[uVar10 - 0x55] = iVar43;
+        iVar43 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+        *(int *)(*(int *)(program + 8) + 0x3ac) = iVar43;
+        (&local_104)[templateToken - 0x55] = iVar43;
       }
       iVar20 = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
       *(undefined4 *)(iVar20 + 0xc) = 0;
       *(int *)(iVar20 + 8) = iVar43;
       if (ppppppuVar40 == (uint ******)0x0) {
-        in_r6 = (uint ******)0x0;
-        in_r7 = (uint ******)0x0;
-        in_r8 = ppppppuVar38;
-        ((int (*)())FUN_000f8d50)(param_1,ppppppuVar37,local_124,0,0,ppppppuVar38,0);
+        argR6 = (uint ******)0x0;
+        argR7 = (uint ******)0x0;
+        argR8 = ppppppuVar38;
+        ((int (*)())FUN_000f8d50)(program,loopStackData,local_124,0,0,ppppppuVar38,0);
       }
       else {
-        in_r6 = ppppppuVar40;
-        in_r7 = ppppppuVar38;
-        ((int (*)())FUN_000f8aa0)(param_1,&local_178,0,ppppppuVar40,ppppppuVar38);
+        argR6 = ppppppuVar40;
+        argR7 = ppppppuVar38;
+        ((int (*)())FUN_000f8aa0)(program,&local_178,0,ppppppuVar40,ppppppuVar38);
       }
       goto code_r0x001025c0;
     case 0x60:
-      puVar32 = (undefined4 *)0x0;
-      uVar10 = puVar14[2] - 1;
-      if (uVar10 < (uint)puVar14[2]) {
-        puVar32 = (undefined4 *)(uVar10 * 4 + puVar14[3]);
+      vectorElementSlot3 = (undefined4 *)0x0;
+      uVar10 = vectorAllocation[2] - 1;
+      if (uVar10 < (uint)vectorAllocation[2]) {
+        vectorElementSlot3 = (undefined4 *)(uVar10 * 4 + vectorAllocation[3]);
       }
-      if (*(int *)*puVar32 != 0) goto switchD_0010061c_caseD_1;
+      if (*(int *)*vectorElementSlot3 != 0) goto switchD_0010061c_caseD_1;
       piVar18 = (int *)((int)local_17c * 4 + iVar47);
       do {
         piVar36 = local_17c;
@@ -7893,17 +7964,17 @@ code_r0x00101f74:
       local_17c = piVar36;
       break;
     case 0x6a:
-      Compiler__fail(*(undefined4 *)(param_1 + 8),0xf);
+      Compiler__fail(*(undefined4 *)(program + 8),0xf);
       goto code_r0x00101d1c;
     case 0x6b:
-      iVar43 = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 8),4);
-      in_r7 = (uint ******)PTR_DAT_001e8bd8;
+      iVar43 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),4);
+      argR7 = (uint ******)PTR_DAT_001e8bd8;
       if (iVar43 != 0) {
-        in_r7 = (uint ******)PTR_DAT_001e8bb0;
+        argR7 = (uint ******)PTR_DAT_001e8bb0;
       }
-      in_r8 = ppppppuVar19;
-      iVar47 = ((int (*)())FUN_000fd50c)(param_1,iVar47,&local_17c,ppppppuVar39,in_r7,ppppppuVar19);
-      in_r6 = ppppppuVar39;
+      argR8 = ppppppuVar19;
+      iVar47 = ((int (*)())FUN_000fd50c)(program,iVar47,&local_17c,ppppppuVar39,argR7,ppppppuVar19);
+      argR6 = ppppppuVar39;
       goto code_r0x0010372c;
     case 0x6c:
       (*(code *)(*ppppppuVar38)[9])(ppppppuVar38);
@@ -7911,32 +7982,32 @@ code_r0x00101f74:
       ppppppuVar38[0x4b] = (uint *****)0x1;
       goto code_r0x00103b3c;
     case 0x6d:
-      iVar43 = IRInst__getOperandRecord(ppppppuVar38,1);
-      iVar20 = *(int *)(iVar43 + 0x10);
+      operandRecord2 = IRInst__getOperandRecord(ppppppuVar38,1);
+      iVar20 = *(int *)(operandRecord2 + 0x10);
       iVar43 = *(int *)(local_60 + -0x2c30);
       if (iVar20 != iVar43) {
-        arena = *(undefined4 *)(param_1 + 0x3ac);
-        in_r6 = (uint ******)0x0;
-        iVar21 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-        *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar21;
-        arena = FUN_00127608(arena,0,iVar21,0);
-        pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-        IRInst__setOperandRef(pvVar16,1,arena);
+        registerMap = *(undefined4 *)(program + 0x3ac);
+        argR6 = (uint ******)0x0;
+        iVar21 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+        *(int *)(*(int *)(program + 8) + 0x3ac) = iVar21;
+        virtualRegister = FUN_00127608(registerMap,0,iVar21,0);
+        movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+        IRInst__setOperandRef(movFloatInst,1,virtualRegister);
         pppppuVar52 = ppppppuVar38[0x25];
         pppppuVar15 = ppppppuVar38[0x26];
-        iVar21 = IRInst__getOperandRecord(pvVar16,0);
+        iVar21 = IRInst__getOperandRecord(movFloatInst,0);
         *(uint ******)(iVar21 + 0xc) = pppppuVar15;
         *(uint ******)(iVar21 + 8) = pppppuVar52;
-        iVar21 = IRInst__getOperandRecord(pvVar16,1);
+        iVar21 = IRInst__getOperandRecord(movFloatInst,1);
         *(int *)(iVar21 + 0x10) = iVar20;
         iVar21 = IRInst__getOperandRecord(ppppppuVar38,0);
-        *(undefined4 *)((int)pvVar16 + 0x9c) = *(undefined4 *)(iVar21 + 0x10);
-        IRInst__setOperandRef(ppppppuVar38,0,arena);
+        *(undefined4 *)((int)movFloatInst + 0x9c) = *(undefined4 *)(iVar21 + 0x10);
+        IRInst__setOperandRef(ppppppuVar38,0,virtualRegister);
         FUN_000f32cc(&local_d4,iVar20);
         ppppppuVar38[0x27] = (uint *****)local_d4;
         iVar20 = IRInst__getOperandRecord(ppppppuVar38,1);
         *(int *)(iVar20 + 0x10) = iVar43;
-        DList__pushFront(local_6c,pvVar16);
+        DList__pushFront(local_6c,movFloatInst);
         goto code_r0x00101d1c;
       }
 switchD_0010061c_caseD_1:
@@ -7944,41 +8015,41 @@ switchD_0010061c_caseD_1:
       break;
     case 0x6e:
       local_17c = (int *)((int)local_17c + 1);
-      in_r6 = *(uint *******)(iVar47 + (int)local_17c * 4);
-      in_r7 = in_r6;
-      in_r8 = in_r6;
-      ((int (*)())FUN_000f7870)(ppppppuVar38,param_1,ppppppuVar40,in_r6,in_r6,in_r6,in_r6);
+      argR6 = *(uint *******)(iVar47 + (int)local_17c * 4);
+      argR7 = argR6;
+      argR8 = argR6;
+      ((int (*)())FUN_000f7870)(ppppppuVar38,program,ppppppuVar40,argR6,argR6,argR6,argR6);
 code_r0x001025c0:
       ppppppuVar40 = (uint ******)((int)ppppppuVar40 + 1);
       local_bc = 0;
       break;
     case 0x70:
-      uVar10 = local_b0[1];
-      piVar18 = (int *)0x0;
-      if (uVar10 - 1 < uVar10) {
-        piVar18 = (int *)((uVar10 - 1) * 4 + local_b0[2]);
+      conditionStackCount = conditionStack[1];
+      stackElement = (int *)0x0;
+      if (conditionStackCount - 1 < conditionStackCount) {
+        stackElement = (int *)((conditionStackCount - 1) * 4 + conditionStack[2]);
       }
-      if (*(int *)(*piVar18 + 4) == 0) {
-        puVar32 = (undefined4 *)0x0;
-        arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
-        if (uVar10 - 1 < local_b0[1]) {
-          puVar32 = (undefined4 *)((uVar10 - 1) * 4 + local_b0[2]);
+      if (*(int *)(*stackElement + 4) == 0) {
+        vectorElementSlot3 = (undefined4 *)0x0;
+        compilerArenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+        if (conditionStackCount - 1 < conditionStack[1]) {
+          vectorElementSlot3 = (undefined4 *)((conditionStackCount - 1) * 4 + conditionStack[2]);
         }
-        uVar50 = *puVar32;
-        Vector__removeAt(local_b0,local_b0[1] - 1);
-        Arena__free(arena,uVar50);
+        uVar50 = *vectorElementSlot3;
+        Vector__removeAt(conditionStack,conditionStack[1] - 1);
+        Arena__free(compilerArenaB,uVar50);
       }
       else {
-        piVar18 = (int *)0x0;
-        if (uVar10 - 1 < local_b0[1]) {
-          piVar18 = (int *)((uVar10 - 1) * 4 + local_b0[2]);
+        stackElement = (int *)0x0;
+        if (conditionStackCount - 1 < conditionStack[1]) {
+          stackElement = (int *)((conditionStackCount - 1) * 4 + conditionStack[2]);
         }
-        in_r6 = (uint ******)0x0;
-        *(int *)(*piVar18 + 4) = *(int *)(*piVar18 + 4) + -1;
+        argR6 = (uint ******)0x0;
+        *(int *)(*stackElement + 4) = *(int *)(*stackElement + 4) + -1;
         local_17c = (int *)((int)local_17c + -1);
-        in_r8 = ppppppuVar19;
-        iVar47 = ((int (*)())FUN_000fd50c)(param_1,iVar47,&local_17c,0,ppppppuVar48,ppppppuVar19);
-        in_r7 = ppppppuVar48;
+        argR8 = ppppppuVar19;
+        iVar47 = ((int (*)())FUN_000fd50c)(program,iVar47,&local_17c,0,ppppppuVar48,ppppppuVar19);
+        argR7 = ppppppuVar48;
       }
 code_r0x00101d1c:
       local_bc = 0;
@@ -7990,20 +8061,20 @@ code_r0x00101d1c:
     }
     goto code_r0x00103b34;
   case 7:
-    bVar1 = true;
+    constantFlag = true;
   }
-  ppppppuVar19 = (uint ******)((int (*)())FUN_000f9140)(param_1,iVar34,(uint)*ppppppuVar49 >> 0x10 & 0x3fff);
-  ((int (*)())FUN_000f9a58)(param_1,local_6c,*param_2[0x19],ppppppuVar37,local_a4);
-  sVar6 = *(short *)((int)*param_2[0x19] + 2);
-  arena = FUN_000ec208(param_1,(uint)**param_2[0x19] >> 0x10 & 0x3f);
-  iVar43 = IRInst__getOperandRecord(ppppppuVar19,0);
-  *(undefined4 *)(iVar43 + 0xc) = arena;
-  *(int *)(iVar43 + 8) = (int)sVar6;
-  in_r7 = (uint ******)0x0;
-  in_r6 = (uint ******)*param_2[0x19];
-  in_r8 = ppppppuVar19;
-  ((int (*)())FUN_000f8d50)(param_1,ppppppuVar37,0,in_r6,0,ppppppuVar19,0);
-  iVar43 = ((int (*)())FUN_000f8970)(iVar34,*(undefined4 *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 0xc));
+  ppppppuVar19 = (uint ******)((int (*)())FUN_000f9140)(program,ilOpcode,(uint)*tokenWords >> 0x10 & 0x3fff);
+  ((int (*)())FUN_000f9a58)(program,local_6c,*ilReader[0x19],loopStackData,local_a4);
+  registerIndex2 = *(short *)((int)*ilReader[0x19] + 2);
+  registerFile = FUN_000ec208(program,(uint)**ilReader[0x19] >> 0x10 & 0x3f);
+  operandRecord2 = IRInst__getOperandRecord(ppppppuVar19,0);
+  *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
+  *(int *)(operandRecord2 + 8) = (int)registerIndex2;
+  argR7 = (uint ******)0x0;
+  argR6 = (uint ******)*ilReader[0x19];
+  argR8 = ppppppuVar19;
+  ((int (*)())FUN_000f8d50)(program,loopStackData,0,argR6,0,ppppppuVar19,0);
+  iVar43 = ((int (*)())FUN_000f8970)(ilOpcode,*(undefined4 *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0xc));
   ppppppuVar38 = (uint ******)(iVar43 + 1);
   if (1 < (int)ppppppuVar38) {
     ppppppuVar40 = (uint ******)((int)((unsigned char *)0x0) + 1);
@@ -8011,23 +8082,23 @@ code_r0x00101d1c:
     local_60 = &DAT_001ad5d8;
     do {
       local_178 = *(uint *******)(local_60 + -0x2c30);
-      in_r8 = (uint ******)&local_174;
-      ((int (*)())FUN_000fb3d4)(param_1,local_68,ppppppuVar49,*(undefined4 *)(iVar43 + (int)param_2[0x1b]),
-                   ppppppuVar37,&local_174,&local_13c);
-      uVar10 = **(uint **)(iVar43 + (int)param_2[0x1b]);
-      if ((((uVar10 & 0x3f0000) == 0x100000) && (*(int *)(param_1 + 8) != 0)) &&
-         ((*(uint *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 8) & 0x80) != 0)) {
+      argR8 = (uint ******)&local_174;
+      ((int (*)())FUN_000fb3d4)(program,local_68,tokenWords,*(undefined4 *)(iVar43 + (int)ilReader[0x1b]),
+                   loopStackData,&local_174,&local_13c);
+      uVar10 = **(uint **)(iVar43 + (int)ilReader[0x1b]);
+      if ((((uVar10 & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
+         ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
         iVar47 = 0xf;
       }
       else {
-        iVar47 = (int)(short)**(uint **)(iVar43 + (int)param_2[0x1b]);
+        iVar47 = (int)(short)**(uint **)(iVar43 + (int)ilReader[0x1b]);
       }
-      arena = FUN_000ec208(param_1,uVar10 >> 0x10 & 0x3f);
+      registerFile = FUN_000ec208(program,uVar10 >> 0x10 & 0x3f);
       iVar20 = IRInst__getOperandRecord(ppppppuVar19,ppppppuVar40);
-      *(undefined4 *)(iVar20 + 0xc) = arena;
+      *(undefined4 *)(iVar20 + 0xc) = registerFile;
       *(int *)(iVar20 + 8) = iVar47;
-      if ((!bVar1) &&
-         (iVar47 = OpcodeTraits__instFlagBit2(*(undefined4 *)(param_1 + 8),ppppppuVar19), iVar47 != 0)) {
+      if ((!constantFlag) &&
+         (iVar47 = OpcodeTraits__instFlagBit2(*(undefined4 *)(program + 8),ppppppuVar19), iVar47 != 0)) {
         if (ppppppuVar40 == (uint ******)((int)((unsigned char *)0x0) + 1U)) {
           puVar12 = &UNK_001aa9d4;
         }
@@ -8036,24 +8107,24 @@ code_r0x00101d1c:
         }
         local_178 = (uint ******)*puVar12;
       }
-      in_r6 = ppppppuVar40;
-      in_r7 = ppppppuVar19;
-      ((int (*)())FUN_000f8aa0)(param_1,&local_178,*(undefined4 *)(iVar43 + (int)param_2[0x1b]),ppppppuVar40,
+      argR6 = ppppppuVar40;
+      argR7 = ppppppuVar19;
+      ((int (*)())FUN_000f8aa0)(program,&local_178,*(undefined4 *)(iVar43 + (int)ilReader[0x1b]),ppppppuVar40,
                    ppppppuVar19);
       ppppppuVar40 = (uint ******)((int)ppppppuVar40 + 1);
       iVar43 = iVar43 + 4;
     } while (ppppppuVar38 != ppppppuVar40);
   }
   local_b8 = IRInst__countWrittenComponents(ppppppuVar19);
-  if (bVar1) {
-    iVar20 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-    *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar20;
+  if (constantFlag) {
+    iVar20 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+    *(int *)(*(int *)(program + 8) + 0x3ac) = iVar20;
     pppppuVar52 = ppppppuVar19[0x25];
     pppppuVar15 = ppppppuVar19[0x26];
-    iVar43 = IRInst__getOperandRecord(ppppppuVar19,0);
-    *(int *)(iVar43 + 8) = iVar20;
-    *(undefined4 *)(iVar43 + 0xc) = 0;
-    iVar43 = OpcodeTraits__instFlagBit2(*(undefined4 *)(param_1 + 8),ppppppuVar19);
+    operandRecord2 = IRInst__getOperandRecord(ppppppuVar19,0);
+    *(int *)(operandRecord2 + 8) = iVar20;
+    *(undefined4 *)(operandRecord2 + 0xc) = 0;
+    iVar43 = OpcodeTraits__instFlagBit2(*(undefined4 *)(program + 8),ppppppuVar19);
     iVar47 = IRInst__getOperandRecord(ppppppuVar19,0);
     ppppppuVar40 = *(uint *******)(iVar47 + 0x10);
     local_178 = ppppppuVar40;
@@ -8063,16 +8134,16 @@ code_r0x00101d1c:
       local_58 = local_7c;
       do {
         iVar21 = SelectWord__firstWrittenComponent(local_178);
-        iVar22 = ((int (*)())FUN_000f9140)(param_1,iVar34,(uint)*ppppppuVar49 >> 0x10 & 0x3fff);
+        iVar22 = ((int (*)())FUN_000f9140)(program,ilOpcode,(uint)*tokenWords >> 0x10 & 0x3fff);
         ppppuVar45 = local_58;
         if (0 < (int)ppppppuVar38) {
           ppppppuVar48 = (uint ******)0x0;
           do {
-            in_r6 = ppppppuVar48;
+            argR6 = ppppppuVar48;
             IRInst__copyOperandFrom(iVar22,ppppppuVar48,ppppppuVar19,ppppppuVar48);
             if (iVar43 != 0) {
-              operandRecord = IRInst__getOperandRecord(iVar22,ppppppuVar48);
-              pppppuVar11 = *(uint ******)(operandRecord + 0x10);
+              iVar23 = IRInst__getOperandRecord(iVar22,ppppppuVar48);
+              pppppuVar11 = *(uint ******)(iVar23 + 0x10);
               if (ppppppuVar48 == (uint ******)((int)((unsigned char *)0x0) + 1U)) {
                 local_124 = (uint *****)
                             CONCAT31((int3)((uint)pppppuVar11 >> 8),
@@ -8092,8 +8163,8 @@ code_r0x00101d1c:
                 }
               }
               pppppuVar11 = local_124;
-              operandRecord = IRInst__getOperandRecord(iVar22,ppppppuVar48);
-              *(uint ******)(operandRecord + 0x10) = pppppuVar11;
+              iVar23 = IRInst__getOperandRecord(iVar22,ppppppuVar48);
+              *(uint ******)(iVar23 + 0x10) = pppppuVar11;
             }
             ppppppuVar48 = (uint ******)((int)ppppppuVar48 + 1);
           } while (ppppppuVar38 != ppppppuVar48);
@@ -8109,8 +8180,8 @@ code_r0x00101d1c:
     if ((iVar43 != 0) && (iVar34 = SelectWord__firstWrittenComponent(local_178), 1 < (int)ppppppuVar38)) {
       ppppppuVar49 = (uint ******)((int)((unsigned char *)0x0) + 1);
       do {
-        iVar43 = IRInst__getOperandRecord(ppppppuVar19,ppppppuVar49);
-        ppppppuVar48 = *(uint *******)(iVar43 + 0x10);
+        operandRecord2 = IRInst__getOperandRecord(ppppppuVar19,ppppppuVar49);
+        ppppppuVar48 = *(uint *******)(operandRecord2 + 0x10);
         local_104 = ppppppuVar48;
         if (ppppppuVar49 == (uint ******)((int)((unsigned char *)0x0) + 1U)) {
           local_104 = (uint ******)
@@ -8126,43 +8197,43 @@ code_r0x00101d1c:
           (*(unsigned short *)((unsigned char *)&(local_104) + 2)) = CONCAT11(*(undefined1 *)((int)&local_104 + iVar34),(char)ppppppuVar48);
         }
         ppppppuVar48 = local_104;
-        iVar43 = IRInst__getOperandRecord(ppppppuVar19,ppppppuVar49);
+        operandRecord2 = IRInst__getOperandRecord(ppppppuVar19,ppppppuVar49);
         ppppppuVar49 = (uint ******)((int)ppppppuVar49 + 1);
-        *(uint *******)(iVar43 + 0x10) = ppppppuVar48;
+        *(uint *******)(operandRecord2 + 0x10) = ppppppuVar48;
       } while (ppppppuVar38 != ppppppuVar49);
     }
-    pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-    iVar34 = IRInst__getOperandRecord(pvVar16,0);
-    *(uint ******)(iVar34 + 0xc) = pppppuVar15;
-    *(uint ******)(iVar34 + 8) = pppppuVar52;
-    *(uint *******)((int)pvVar16 + 0x9c) = ppppppuVar40;
-    iVar34 = IRInst__getOperandRecord(pvVar16,1);
-    *(int *)(iVar34 + 8) = iVar20;
-    *(undefined4 *)(iVar34 + 0xc) = 0;
-    DList__pushFront(local_6c,pvVar16);
+    movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+    operandRecord = IRInst__getOperandRecord(movFloatInst,0);
+    *(uint ******)(operandRecord + 0xc) = pppppuVar15;
+    *(uint ******)(operandRecord + 8) = pppppuVar52;
+    *(uint *******)((int)movFloatInst + 0x9c) = ppppppuVar40;
+    operandRecord = IRInst__getOperandRecord(movFloatInst,1);
+    *(int *)(operandRecord + 8) = iVar20;
+    *(undefined4 *)(operandRecord + 0xc) = 0;
+    DList__pushFront(local_6c,movFloatInst);
   }
-  piVar18 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
-  iVar34 = (**(code **)(*piVar18 + 0x34))(piVar18,ppppppuVar19);
+  hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
+  iVar34 = (**(code **)(*hwDescription + 0x34))(hwDescription,ppppppuVar19);
   if (iVar34 == 0) {
 code_r0x001002dc:
-    pvVar16 = (void *)0x0;
+    movFloatInst = (void *)0x0;
   }
   else {
-    iVar34 = IRInst__getOperandRecord(ppppppuVar19,0);
+    operandRecord = IRInst__getOperandRecord(ppppppuVar19,0);
     iVar47 = 0;
     iVar43 = 0;
-    local_178 = *(uint *******)(iVar34 + 0x10);
-    in_r8 = (uint ******)&local_104;
-    local_104 = *(uint *******)(iVar34 + 0x10);
+    local_178 = *(uint *******)(operandRecord + 0x10);
+    argR8 = (uint ******)&local_104;
+    local_104 = *(uint *******)(operandRecord + 0x10);
     iVar20 = 4;
-    in_r7 = (uint ******)&local_178;
+    argR7 = (uint ******)&local_178;
     iVar34 = -1;
     do {
       iVar21 = iVar34;
-      if (*(char *)(iVar43 + (int)in_r8) == '\0') {
+      if (*(char *)(iVar43 + (int)argR8) == '\0') {
         iVar21 = iVar43;
         if ((iVar47 != 0) && (iVar21 = iVar34, 0 < iVar47)) {
-          *(undefined1 *)(iVar43 + (int)in_r7) = 1;
+          *(undefined1 *)(iVar43 + (int)argR7) = 1;
         }
         iVar47 = iVar47 + 1;
       }
@@ -8174,45 +8245,45 @@ code_r0x001002dc:
     iVar43 = 4;
     ppppppuVar19[0x27] = (uint *****)local_178;
     iVar34 = 0;
-    in_r7 = (uint ******)&local_124;
+    argR7 = (uint ******)&local_124;
     do {
-      *(char *)(iVar34 + (int)in_r7) = (char)iVar21;
+      *(char *)(iVar34 + (int)argR7) = (char)iVar21;
       iVar34 = iVar34 + 1;
       iVar43 = iVar43 + -1;
     } while (iVar43 != 0);
-    pvVar16 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
+    movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
     pppppuVar15 = ppppppuVar19[0x25];
     pppppuVar52 = ppppppuVar19[0x26];
-    iVar34 = IRInst__getOperandRecord(pvVar16,0);
-    *(uint ******)(iVar34 + 0xc) = pppppuVar52;
-    *(uint ******)(iVar34 + 8) = pppppuVar15;
+    operandRecord = IRInst__getOperandRecord(movFloatInst,0);
+    *(uint ******)(operandRecord + 0xc) = pppppuVar52;
+    *(uint ******)(operandRecord + 8) = pppppuVar15;
     pppppuVar52 = ppppppuVar19[0x25];
-    *(uint *******)((int)pvVar16 + 0x9c) = local_104;
+    *(uint *******)((int)movFloatInst + 0x9c) = local_104;
     pppppuVar11 = ppppppuVar19[0x26];
-    iVar34 = IRInst__getOperandRecord(pvVar16,1);
+    operandRecord = IRInst__getOperandRecord(movFloatInst,1);
     pppppuVar15 = local_124;
-    *(uint ******)(iVar34 + 0xc) = pppppuVar11;
-    *(uint ******)(iVar34 + 8) = pppppuVar52;
-    iVar34 = IRInst__getOperandRecord(pvVar16,1);
-    *(uint ******)(iVar34 + 0x10) = pppppuVar15;
+    *(uint ******)(operandRecord + 0xc) = pppppuVar11;
+    *(uint ******)(operandRecord + 8) = pppppuVar52;
+    operandRecord = IRInst__getOperandRecord(movFloatInst,1);
+    *(uint ******)(operandRecord + 0x10) = pppppuVar15;
   }
   iVar43 = *(int *)(local_14c + 8);
   iVar34 = local_14c;
   while (iVar47 = iVar43, iVar47 != 0) {
     DList__unlink(iVar34);
-    ((int (*)())FUN_000f92fc)(param_1,iVar34,local_180);
+    ((int (*)())FUN_000f92fc)(program,iVar34,currentBlock);
     iVar34 = iVar47;
     iVar43 = *(int *)(iVar47 + 8);
   }
-  ((int (*)())FUN_000f92fc)(param_1,ppppppuVar19,local_180);
-  if (pvVar16 != (void *)0x0) {
-    ((int (*)())FUN_000f92fc)(param_1,pvVar16,local_180);
+  ((int (*)())FUN_000f92fc)(program,ppppppuVar19,currentBlock);
+  if (movFloatInst != (void *)0x0) {
+    ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
   }
   iVar43 = *(int *)(local_164 + 8);
   iVar34 = local_164;
   while (iVar47 = iVar43, iVar47 != 0) {
     DList__unlink(iVar34);
-    ((int (*)())FUN_000f92fc)(param_1,iVar34,local_180);
+    ((int (*)())FUN_000f92fc)(program,iVar34,currentBlock);
     iVar34 = iVar47;
     iVar43 = *(int *)(iVar47 + 8);
   }
@@ -8224,7 +8295,7 @@ code_r0x00103b34:
 code_r0x00103b3c:
     iVar43 = (*(code *)(*ppppppuVar38)[5])(ppppppuVar38);
     if ((uint ******)(iVar43 + 1U) == ppppppuVar40) {
-      ((int (*)())FUN_000f92fc)(param_1,ppppppuVar38,local_180);
+      ((int (*)())FUN_000f92fc)(program,ppppppuVar38,currentBlock);
       ppppppuVar38 = (uint ******)0x0;
       ppppppuVar40 = (uint ******)0x0;
       local_178 = *(uint *******)(local_60 + -0x2c30);
@@ -8239,17 +8310,17 @@ code_r0x00103bb0:
   iVar34 = local_164;
   while (iVar47 = iVar43, iVar47 != 0) {
     DList__unlink(iVar34);
-    ((int (*)())FUN_000f92fc)(param_1,iVar34,local_180);
+    ((int (*)())FUN_000f92fc)(program,iVar34,currentBlock);
     iVar34 = iVar47;
     iVar43 = *(int *)(iVar47 + 8);
   }
   if (puVar12 != (uint *)0x0) {
-    Arena__free(puVar14[4],puVar14[3]);
-    Arena__free(*puVar14,puVar14);
+    Arena__free(vectorAllocation[4],vectorAllocation[3]);
+    Arena__free(*vectorAllocation,vectorAllocation);
   }
   if (ppppppuVar19 != (uint ******)0x0) {
-    Arena__free(puVar24[4],puVar24[3]);
-    Arena__free(*puVar24,puVar24);
+    Arena__free(vectorAllocation2[4],vectorAllocation2[3]);
+    Arena__free(*vectorAllocation2,vectorAllocation2);
   }
   goto switchD_000fdaf0_caseD_2;
 }
