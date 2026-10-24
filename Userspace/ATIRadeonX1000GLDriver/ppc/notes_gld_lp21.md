@@ -31,5 +31,5 @@ Caller (part_024, after building the Entry/Exit blocks) passes `program` (the Pr
 ## Pitfalls met (also in Tools/userspace/lpnames/README.md)
 * `arena`-style whole-function names on reused variables hide behind the placeholder counters; check names that cover 20+ webs (`lw2.py`).
 * `webspec.py` (new): rule-classified webs -> seg.py specs; chain webs (`x = f(x)`) are split at the chain line with lhs/rhs; weak rules (`~name`) for
-  default defs; use rules (`@name`) classify a web by any of its lines (constructor called on it). `uniq.py` makes names unique per function (also against
+  default defs; use rules (`@name`) classify a web by any of its lines (constructor called on it). `uniq_names.py` makes names unique per function (also against
   names already applied). `seg.py` now handles a single line taken on one side only.

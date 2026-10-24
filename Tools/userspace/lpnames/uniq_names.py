@@ -1,5 +1,5 @@
 import sys,collections,re,glob
-# uniq.py SPEC [DIR] : make each new name unique inside its function: not an identifier already in the function's current text (applied earlier), and one name per original variable
+# uniq_names.py SPEC [DIR] : make each new name unique inside its function: not an identifier already in the function's current text (applied earlier), and one name per original variable
 D=sys.argv[2] if len(sys.argv)>2 else 'Userspace/ATIRadeonX1000GLDriver/ppc'
 lines=[l.rstrip('\n').split('\t') for l in open(sys.argv[1]) if l.strip() and not l.startswith('#')]
 H=re.compile(r'^/\* (\S+) @ 0x')
