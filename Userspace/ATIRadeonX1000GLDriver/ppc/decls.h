@@ -656,7 +656,7 @@ extern int FUN_0004fc80();
 extern int FUN_0004fd80();
 extern int gldValidateAlphaTest();
 extern int FUN_00050140();
-extern int FUN_00050300();
+extern int gldEmitHardwareState();
 extern int FUN_00050ef0();
 extern int gldValidateStencil();
 extern int gldValidateBlend();
