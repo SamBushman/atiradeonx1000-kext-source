@@ -1,0 +1,3 @@
+local	ffpsEmitTexEnvLegacy	uVar1	unitTempRegister	INFERRED	unit index + textureUnitCount, masked 16 bits: the temp register that receives this unit result
+local	ffpsEmitTexEnvLegacy	uVar3	grownTokenBuffer	INFERRED	result of the context allocator callback (ctx+0xc) when the token buffer is full
+local	ffpsEmitTexEnvLegacy	uVar12	unitDestToken	INFERRED	destination operand token: unitTempRegister | 0x40000 (register type 4 = temp), 0x440000 adds the write-mask flag
