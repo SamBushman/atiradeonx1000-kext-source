@@ -1,18 +1,20 @@
 #include "decls.h"
 
 /* extvsEmitSub @ 0x5bbc0 (928 bytes) */
-int extvsEmitSub(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int extvsEmitSub(ctx, shader, instRecord)
+  int ctx;
+  int *shader;
+  int instRecord;
 {
+  int instSlot;
+  int hwProgram;
   uint uVar1;
-  int iVar2;
+  int conflict;
   undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
-  int iVar7;
+  int src1Operand;
+  int src0Operand;
+  int *symbolList;
+  int instCount;
   undefined4 local_78;
   undefined4 local_74;
   undefined4 local_70;
@@ -28,57 +30,57 @@ int extvsEmitSub(param_1, param_2, param_3)
   undefined4 local_48;
   undefined1 local_44;
   
-  iVar5 = param_3 + 0x20;
-  piVar6 = param_2 + 7;
-  iVar4 = param_3 + 0x3c;
-  iVar2 = extvsOperandsConflictInBank(piVar6,iVar5,iVar4);
-  if (iVar2 == 0) {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 1U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 1U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+  src0Operand = instRecord + 0x20;
+  symbolList = shader + 7;
+  src1Operand = instRecord + 0x3c;
+  conflict = extvsOperandsConflictInBank(symbolList,src0Operand,src1Operand);
+  if (conflict == 0) {
+    hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+    instCount = *(int *)(hwProgram + 0x18);
+    if (0x100 < instCount + 1U) {
+      *(undefined1 *)(shader + 4) = 0;
+      instCount = *(int *)(hwProgram + 0x18);
+      if (*(uint *)(hwProgram + 0x20) < instCount + 1U) {
+        uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + ctx))
+                  (uVar3,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+        (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+        *(undefined4 *)(hwProgram + 0x1c) = uVar3;
+        instCount = *(int *)(hwProgram + 0x18);
+        *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar2,3,0,0);
-    extvsEncodeSourceSwizzle(param_2,piVar6,iVar5,iVar2 + 4,0);
-    extvsEncodeSourceSwizzle(param_2,piVar6,iVar4,iVar2 + 8,0);
-    uVar1 = *(uint *)(iVar2 + 8);
+    instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+    extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot,3,0,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,instSlot + 4,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,instSlot + 8,0);
+    uVar1 = *(uint *)(instSlot + 8);
     uVar3 = 1;
     uVar1 = (uVar1 & 0xf1ffffff ^ 0x10000000) & 0x10000000 |
             (uVar1 & 0xf9ffffff ^ 0x8000000) & 0x8000000 |
             (uVar1 & 0xfdffffff ^ 0x4000000) & 0x4000000 |
             (uVar1 ^ 0x2000000) & 0x2000000 | uVar1 & 0xe1ffffff;
-    *(uint *)(iVar2 + 0xc) = uVar1;
-    *(uint *)(iVar2 + 8) = uVar1;
+    *(uint *)(instSlot + 0xc) = uVar1;
+    *(uint *)(instSlot + 8) = uVar1;
   }
   else {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 2U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 2U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+    hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+    instCount = *(int *)(hwProgram + 0x18);
+    if (0x100 < instCount + 2U) {
+      *(undefined1 *)(shader + 4) = 0;
+      instCount = *(int *)(hwProgram + 0x18);
+      if (*(uint *)(hwProgram + 0x20) < instCount + 2U) {
+        uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + ctx))
+                  (uVar3,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+        (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+        *(undefined4 *)(hwProgram + 0x1c) = uVar3;
+        instCount = *(int *)(hwProgram + 0x18);
+        *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    uVar3 = extvsAllocTempSlot(param_1,param_2);
+    instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+    uVar3 = extvsAllocTempSlot(ctx,shader);
     local_78 = 3;
     local_60 = 0;
     local_64 = 1;
@@ -86,12 +88,12 @@ int extvsEmitSub(param_1, param_2, param_3)
     local_6c = 1;
     local_68 = 1;
     local_74 = uVar3;
-    extvsEncodeSourceOperand(param_1,param_2,&local_78,iVar2,3,0,0);
-    extvsEncodeSourceSwizzle(param_2,piVar6,iVar5,iVar2 + 4,0);
-    uVar1 = *(uint *)(iVar2 + 4) & 0xfe001fff | 0x1248000;
-    *(uint *)(iVar2 + 0xc) = uVar1;
-    *(uint *)(iVar2 + 8) = uVar1;
-    extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar2 + 0x10,3,0,0);
+    extvsEncodeSourceOperand(ctx,shader,&local_78,instSlot,3,0,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,instSlot + 4,0);
+    uVar1 = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
+    *(uint *)(instSlot + 0xc) = uVar1;
+    *(uint *)(instSlot + 8) = uVar1;
+    extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot + 0x10,3,0,0);
     local_5c = 3;
     local_44 = 0;
     local_54 = 0x87d5;
@@ -99,35 +101,37 @@ int extvsEmitSub(param_1, param_2, param_3)
     local_4c = 0x87d7;
     local_48 = 0x87d8;
     local_58 = uVar3;
-    extvsEncodeSourceSwizzle(param_2,piVar6,&local_5c,iVar2 + 0x14,0);
-    extvsEncodeSourceSwizzle(param_2,piVar6,iVar4,iVar2 + 0x18,0);
-    uVar1 = *(uint *)(iVar2 + 0x18);
+    extvsEncodeSourceSwizzle(shader,symbolList,&local_5c,instSlot + 0x14,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,instSlot + 0x18,0);
+    uVar1 = *(uint *)(instSlot + 0x18);
     uVar3 = 2;
     uVar1 = (uVar1 & 0xf1ffffff ^ 0x10000000) & 0x10000000 |
             (uVar1 & 0xf9ffffff ^ 0x8000000) & 0x8000000 |
             (uVar1 & 0xfdffffff ^ 0x4000000) & 0x4000000 |
             (uVar1 ^ 0x2000000) & 0x2000000 | uVar1 & 0xe1ffffff;
-    *(uint *)(iVar2 + 0x1c) = uVar1;
-    *(uint *)(iVar2 + 0x18) = uVar1;
+    *(uint *)(instSlot + 0x1c) = uVar1;
+    *(uint *)(instSlot + 0x18) = uVar1;
   }
   return uVar3;
 }
 
 /* extvsEmitCrs @ 0x5bf60 (1672 bytes) */
-int extvsEmitCrs(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int extvsEmitCrs(ctx, shader, instRecord)
+  int ctx;
+  int *shader;
+  int instRecord;
 {
+  int tempIndex;
+  int instCount;
   undefined1 uVar1;
   uint uVar2;
   int iVar3;
   undefined4 uVar4;
-  int *piVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
+  int *symbolList;
+  int src0Operand;
+  int src1Operand;
+  int hwProgram;
+  int instSlot;
   int iVar10;
   int iStack00000020;
   undefined4 local_98;
@@ -146,29 +150,29 @@ int extvsEmitCrs(param_1, param_2, param_3)
   undefined1 local_64;
   undefined4 *local_58;
   
-  iVar6 = param_3 + 0x20;
-  piVar5 = param_2 + 7;
-  iVar7 = param_3 + 0x3c;
-  iStack00000020 = param_3;
-  iVar3 = extvsOperandsConflictInBank(piVar5,iVar6,iVar7);
+  src0Operand = instRecord + 0x20;
+  symbolList = shader + 7;
+  src1Operand = instRecord + 0x3c;
+  iStack00000020 = instRecord;
+  iVar3 = extvsOperandsConflictInBank(symbolList,src0Operand,src1Operand);
   if (iVar3 == 0) {
-    iVar3 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar10 = *(int *)(iVar3 + 0x18);
-    if (0x100 < iVar10 + 2U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar10 = *(int *)(iVar3 + 0x18);
-      if (*(uint *)(iVar3 + 0x20) < iVar10 + 2U) {
-        uVar4 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar3 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
+    iVar3 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+    instCount = *(int *)(iVar3 + 0x18);
+    if (0x100 < instCount + 2U) {
+      *(undefined1 *)(shader + 4) = 0;
+      instCount = *(int *)(iVar3 + 0x18);
+      if (*(uint *)(iVar3 + 0x20) < instCount + 2U) {
+        uVar4 = (**(code **)(ctx + 0xc))(*(uint *)(iVar3 + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + ctx))
                   (uVar4,*(undefined4 *)(iVar3 + 0x1c),*(int *)(iVar3 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar3 + 0x1c));
+        (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar3 + 0x1c));
         *(undefined4 *)(iVar3 + 0x1c) = uVar4;
-        iVar10 = *(int *)(iVar3 + 0x18);
+        instCount = *(int *)(iVar3 + 0x18);
         *(int *)(iVar3 + 0x20) = *(int *)(iVar3 + 0x20) + 0x10;
       }
     }
-    iVar3 = iVar10 * 0x10 + *(int *)(iVar3 + 0x1c);
-    uVar4 = extvsAllocTempSlot(param_1,param_2);
+    iVar3 = instCount * 0x10 + *(int *)(iVar3 + 0x1c);
+    uVar4 = extvsAllocTempSlot(ctx,shader);
     local_98 = 3;
     local_80 = 0;
     local_84 = 1;
@@ -176,8 +180,8 @@ int extvsEmitCrs(param_1, param_2, param_3)
     local_8c = 1;
     local_88 = 1;
     local_94 = uVar4;
-    extvsEncodeSourceOperand(param_1,param_2,&local_98,iVar3,2,0,0);
-    extvsEncodeSourceSwizzle(param_2,piVar5,iVar6,iVar3 + 4,0);
+    extvsEncodeSourceOperand(ctx,shader,&local_98,iVar3,2,0,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,iVar3 + 4,0);
     uVar2 = *(uint *)(iVar3 + 4);
     *(uint *)(iVar3 + 4) =
          (uVar2 & 0x4000000) << 1 |
@@ -185,7 +189,7 @@ int extvsEmitCrs(param_1, param_2, param_3)
          uVar2 >> 2 & 0x2000000 |
          (uVar2 & 0x70000) << 3 | (uVar2 & 0xe000) << 3 | uVar2 >> 6 & 0xe000 | uVar2 & 0xe0001fff |
          0x1000000;
-    extvsEncodeSourceSwizzle(param_2,piVar5,iVar7,iVar3 + 8,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,iVar3 + 8,0);
     uVar2 = *(uint *)(iVar3 + 8);
     uVar2 = (uVar2 & 0x2000000) << 2 |
             uVar2 >> 1 & 0x4000000 |
@@ -194,8 +198,8 @@ int extvsEmitCrs(param_1, param_2, param_3)
             | 0x1000000;
     *(uint *)(iVar3 + 0xc) = uVar2;
     *(uint *)(iVar3 + 8) = uVar2;
-    extvsEncodeSourceOperand(param_1,param_2,iStack00000020 + 4,iVar3 + 0x10,4,0,0);
-    extvsEncodeSourceSwizzle(param_2,piVar5,iVar6,iVar3 + 0x14,0);
+    extvsEncodeSourceOperand(ctx,shader,iStack00000020 + 4,iVar3 + 0x10,4,0,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,iVar3 + 0x14,0);
     uVar2 = *(uint *)(iVar3 + 0x14);
     *(uint *)(iVar3 + 0x14) =
          (uVar2 & 0x2000000) << 2 |
@@ -203,7 +207,7 @@ int extvsEmitCrs(param_1, param_2, param_3)
          uVar2 >> 1 & 0x2000000 |
          (uVar2 & 0xe000) << 6 | uVar2 >> 3 & 0x70000 | uVar2 >> 3 & 0xe000 | uVar2 & 0xe0001fff |
          0x1400000;
-    extvsEncodeSourceSwizzle(param_2,piVar5,iVar7,iVar3 + 0x18,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,iVar3 + 0x18,0);
     uVar2 = *(uint *)(iVar3 + 0x18);
     *(uint *)(iVar3 + 0x18) =
          (uVar2 & 0x4000000) << 1 |
@@ -218,46 +222,46 @@ int extvsEmitCrs(param_1, param_2, param_3)
     local_68 = 0x87dc;
     local_64 = 0;
     local_78 = uVar4;
-    extvsEncodeSourceSwizzle(param_2,piVar5,&local_7c,iVar3 + 0x1c,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,&local_7c,iVar3 + 0x1c,0);
     uVar4 = 2;
   }
   else {
-    iVar10 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
+    iVar10 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
     iVar3 = *(int *)(iVar10 + 0x18);
     if (0x100 < iVar3 + 3U) {
-      *(undefined1 *)(param_2 + 4) = 0;
+      *(undefined1 *)(shader + 4) = 0;
       iVar3 = *(int *)(iVar10 + 0x18);
       if (*(uint *)(iVar10 + 0x20) < iVar3 + 3U) {
-        uVar4 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar10 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
+        uVar4 = (**(code **)(ctx + 0xc))(*(uint *)(iVar10 + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + ctx))
                   (uVar4,*(undefined4 *)(iVar10 + 0x1c),*(int *)(iVar10 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar10 + 0x1c));
+        (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar10 + 0x1c));
         *(undefined4 *)(iVar10 + 0x1c) = uVar4;
         iVar3 = *(int *)(iVar10 + 0x18);
         *(int *)(iVar10 + 0x20) = *(int *)(iVar10 + 0x20) + 0x10;
       }
     }
-    iVar9 = iVar3 * 0x10 + *(int *)(iVar10 + 0x1c);
-    iVar10 = extvsAllocTempSlot(param_1,param_2);
+    instSlot = iVar3 * 0x10 + *(int *)(iVar10 + 0x1c);
+    tempIndex = extvsAllocTempSlot(ctx,shader);
     local_58 = &local_7c;
-    iVar8 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar3 = iVar10 * 0x28 + *(int *)(iVar8 + 0x4c);
+    hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+    iVar3 = tempIndex * 0x28 + *(int *)(hwProgram + 0x4c);
     uVar1 = *(undefined1 *)(iVar3 + 0x10);
     *(undefined1 *)(iVar3 + 0x10) = 1;
-    uVar4 = extvsAllocTempSlot(param_1,param_2);
-    *(undefined1 *)(iVar10 * 0x28 + *(int *)(iVar8 + 0x4c) + 0x10) = uVar1;
+    uVar4 = extvsAllocTempSlot(ctx,shader);
+    *(undefined1 *)(tempIndex * 0x28 + *(int *)(hwProgram + 0x4c) + 0x10) = uVar1;
     local_80 = 0;
     local_98 = 3;
     local_90 = 1;
     local_8c = 1;
     local_88 = 1;
     local_84 = 1;
-    local_94 = iVar10;
-    extvsEncodeSourceOperand(param_1,param_2,&local_98,iVar9,3,0,0);
-    extvsEncodeSourceSwizzle(param_2,piVar5,iVar6,iVar9 + 4,0);
-    uVar2 = *(uint *)(iVar9 + 4) & 0xfe001fff | 0x1248000;
-    *(uint *)(iVar9 + 0xc) = uVar2;
-    *(uint *)(iVar9 + 8) = uVar2;
+    local_94 = tempIndex;
+    extvsEncodeSourceOperand(ctx,shader,&local_98,instSlot,3,0,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,instSlot + 4,0);
+    uVar2 = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
+    *(uint *)(instSlot + 0xc) = uVar2;
+    *(uint *)(instSlot + 8) = uVar2;
     local_80 = 0;
     local_84 = 1;
     local_98 = 3;
@@ -265,36 +269,36 @@ int extvsEmitCrs(param_1, param_2, param_3)
     local_8c = 1;
     local_88 = 1;
     local_94 = uVar4;
-    extvsEncodeSourceOperand(param_1,param_2,&local_98,iVar9 + 0x10,2,0,0);
+    extvsEncodeSourceOperand(ctx,shader,&local_98,instSlot + 0x10,2,0,0);
     local_74 = 0x87d7;
     local_70 = 0x87d5;
     local_64 = 0;
     local_6c = 0x87d6;
     local_68 = 0x87dd;
     local_7c = 3;
-    local_78 = iVar10;
-    extvsEncodeSourceSwizzle(param_2,piVar5,local_58,iVar9 + 0x14,0);
-    extvsEncodeSourceSwizzle(param_2,piVar5,iVar7,iVar9 + 0x18,0);
-    uVar2 = *(uint *)(iVar9 + 0x18);
+    local_78 = tempIndex;
+    extvsEncodeSourceSwizzle(shader,symbolList,local_58,instSlot + 0x14,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,instSlot + 0x18,0);
+    uVar2 = *(uint *)(instSlot + 0x18);
     uVar2 = (uVar2 & 0x2000000) << 2 |
             uVar2 >> 1 & 0x4000000 |
             uVar2 >> 1 & 0x2000000 |
             (uVar2 & 0xe000) << 6 | uVar2 >> 3 & 0x70000 | uVar2 >> 3 & 0xe000 | uVar2 & 0xe0001fff
             | 0x1000000;
-    *(uint *)(iVar9 + 0x1c) = uVar2;
-    *(uint *)(iVar9 + 0x18) = uVar2;
-    extvsEncodeSourceOperand(param_1,param_2,iStack00000020 + 4,iVar9 + 0x20,4,0,0);
+    *(uint *)(instSlot + 0x1c) = uVar2;
+    *(uint *)(instSlot + 0x18) = uVar2;
+    extvsEncodeSourceOperand(ctx,shader,iStack00000020 + 4,instSlot + 0x20,4,0,0);
     local_74 = 0x87d6;
     local_70 = 0x87d7;
     local_64 = 0;
     local_6c = 0x87d5;
     local_68 = 0x87de;
     local_7c = 3;
-    local_78 = iVar10;
-    extvsEncodeSourceSwizzle(param_2,piVar5,local_58,iVar9 + 0x24,0);
-    extvsEncodeSourceSwizzle(param_2,piVar5,iVar7,iVar9 + 0x28,0);
-    uVar2 = *(uint *)(iVar9 + 0x28);
-    *(uint *)(iVar9 + 0x28) =
+    local_78 = tempIndex;
+    extvsEncodeSourceSwizzle(shader,symbolList,local_58,instSlot + 0x24,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,instSlot + 0x28,0);
+    uVar2 = *(uint *)(instSlot + 0x28);
+    *(uint *)(instSlot + 0x28) =
          (uVar2 & 0x4000000) << 1 |
          (uVar2 & 0x2000000) << 1 |
          uVar2 >> 2 & 0x2000000 |
@@ -307,24 +311,28 @@ int extvsEmitCrs(param_1, param_2, param_3)
     local_68 = 0x87dc;
     local_64 = 0;
     local_78 = uVar4;
-    extvsEncodeSourceSwizzle(param_2,piVar5,local_58,iVar9 + 0x2c,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,local_58,instSlot + 0x2c,0);
     uVar4 = 3;
   }
   return uVar4;
 }
 
 /* extvsEmitMmul @ 0x5c600 (1552 bytes) */
-int extvsEmitMmul(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int extvsEmitMmul(ctx, shader, instRecord)
+  int ctx;
+  int *shader;
+  int instRecord;
 {
+  int instCount;
+  int instSlot;
+  int hwProgram;
+  undefined4 tempIndex;
   uint uVar1;
   int iVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int *piVar5;
-  int iVar6;
+  undefined4 newInstArray;
+  int src0Operand;
+  int *symbolList;
+  int src1Operand;
   int iVar7;
   int iVar8;
   int iVar9;
@@ -343,216 +351,218 @@ int extvsEmitMmul(param_1, param_2, param_3)
   undefined4 uStack_58;
   undefined1 uStack_54;
   
-  if ((*(int *)(param_3 + 4) != *(int *)(param_3 + 0x3c)) ||
-     (*(int *)(param_3 + 8) != *(int *)(param_3 + 0x40))) {
-    piVar5 = param_2 + 7;
-    iVar4 = param_3 + 0x20;
-    iVar6 = param_3 + 0x3c;
-    iVar2 = extvsOperandsConflictInBank(piVar5,iVar4,iVar6);
+  if ((*(int *)(instRecord + 4) != *(int *)(instRecord + 0x3c)) ||
+     (*(int *)(instRecord + 8) != *(int *)(instRecord + 0x40))) {
+    symbolList = shader + 7;
+    src0Operand = instRecord + 0x20;
+    src1Operand = instRecord + 0x3c;
+    iVar2 = extvsOperandsConflictInBank(symbolList,src0Operand,src1Operand);
     if (iVar2 == 0) {
-      iVar7 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
+      iVar7 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
       iVar2 = *(int *)(iVar7 + 0x18);
       if (0x100 < iVar2 + 4U) {
-        *(undefined1 *)(param_2 + 4) = 0;
+        *(undefined1 *)(shader + 4) = 0;
         iVar2 = *(int *)(iVar7 + 0x18);
         if (*(uint *)(iVar7 + 0x20) < iVar2 + 4U) {
-          uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar7 + 0x20) * 0x10 + 0x100);
-          (**(code **)(((unsigned char *)0x00001344) + param_1))
-                    (uVar3,*(undefined4 *)(iVar7 + 0x1c),*(int *)(iVar7 + 0x20) << 4);
-          (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar7 + 0x1c));
-          *(undefined4 *)(iVar7 + 0x1c) = uVar3;
+          newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(iVar7 + 0x20) * 0x10 + 0x100);
+          (**(code **)(((unsigned char *)0x00001344) + ctx))
+                    (newInstArray,*(undefined4 *)(iVar7 + 0x1c),*(int *)(iVar7 + 0x20) << 4);
+          (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar7 + 0x1c));
+          *(undefined4 *)(iVar7 + 0x1c) = newInstArray;
           iVar2 = *(int *)(iVar7 + 0x18);
           *(int *)(iVar7 + 0x20) = *(int *)(iVar7 + 0x20) + 0x10;
         }
       }
       iVar8 = *(int *)(iVar7 + 0x1c);
       iVar2 = iVar2 * 0x10;
-      iVar7 = param_3 + 4;
+      iVar7 = instRecord + 4;
       iVar9 = iVar2 + iVar8;
-      extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar9,1,0,0);
+      extvsEncodeSourceOperand(ctx,shader,iVar7,iVar9,1,0,0);
       *(uint *)(iVar2 + iVar8) = *(uint *)(iVar2 + iVar8) & 0xff1fffff;
-      extvsEncodeSourceSwizzle(param_2,piVar5,iVar4,iVar9 + 4,0);
-      extvsEncodeSourceSwizzle(param_2,piVar5,iVar6,iVar9 + 8,0);
+      extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,iVar9 + 4,0);
+      extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,iVar9 + 8,0);
       *(undefined4 *)(iVar9 + 0xc) = *(undefined4 *)(iVar9 + 8);
-      extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar9 + 0x10,1,0,0);
+      extvsEncodeSourceOperand(ctx,shader,iVar7,iVar9 + 0x10,1,0,0);
       *(uint *)(iVar9 + 0x10) = *(uint *)(iVar9 + 0x10) & 0xff2fffff;
-      extvsEncodeSourceSwizzle(param_2,piVar5,iVar4,iVar9 + 0x14,1);
-      extvsEncodeSourceSwizzle(param_2,piVar5,iVar6,iVar9 + 0x18,0);
+      extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,iVar9 + 0x14,1);
+      extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,iVar9 + 0x18,0);
       *(undefined4 *)(iVar9 + 0x1c) = *(undefined4 *)(iVar9 + 0x18);
-      extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar9 + 0x20,1,0,0);
+      extvsEncodeSourceOperand(ctx,shader,iVar7,iVar9 + 0x20,1,0,0);
       *(uint *)(iVar9 + 0x20) = *(uint *)(iVar9 + 0x20) & 0xff4fffff;
-      extvsEncodeSourceSwizzle(param_2,piVar5,iVar4,iVar9 + 0x24,2);
-      extvsEncodeSourceSwizzle(param_2,piVar5,iVar6,iVar9 + 0x28,0);
+      extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,iVar9 + 0x24,2);
+      extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,iVar9 + 0x28,0);
       *(undefined4 *)(iVar9 + 0x2c) = *(undefined4 *)(iVar9 + 0x28);
-      extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar9 + 0x30,1,0,0);
+      extvsEncodeSourceOperand(ctx,shader,iVar7,iVar9 + 0x30,1,0,0);
       *(uint *)(iVar9 + 0x30) = *(uint *)(iVar9 + 0x30) & 0xff8fffff;
-      extvsEncodeSourceSwizzle(param_2,piVar5,iVar4,iVar9 + 0x34,3);
-      extvsEncodeSourceSwizzle(param_2,piVar5,iVar6,iVar9 + 0x38,0);
+      extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,iVar9 + 0x34,3);
+      extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,iVar9 + 0x38,0);
       *(undefined4 *)(iVar9 + 0x3c) = *(undefined4 *)(iVar9 + 0x38);
       return 4;
     }
   }
-  piVar5 = param_2 + 7;
-  iVar2 = param_3 + 0x20;
-  iVar4 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-  iVar6 = *(int *)(iVar4 + 0x18);
-  if (0x100 < iVar6 + 5U) {
-    *(undefined1 *)(param_2 + 4) = 0;
-    iVar6 = *(int *)(iVar4 + 0x18);
-    if (*(uint *)(iVar4 + 0x20) < iVar6 + 5U) {
-      uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar4 + 0x20) * 0x10 + 0x100);
-      (**(code **)(((unsigned char *)0x00001344) + param_1))
-                (uVar3,*(undefined4 *)(iVar4 + 0x1c),*(int *)(iVar4 + 0x20) << 4);
-      (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar4 + 0x1c));
-      *(undefined4 *)(iVar4 + 0x1c) = uVar3;
-      iVar6 = *(int *)(iVar4 + 0x18);
-      *(int *)(iVar4 + 0x20) = *(int *)(iVar4 + 0x20) + 0x10;
+  symbolList = shader + 7;
+  iVar2 = instRecord + 0x20;
+  hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  instCount = *(int *)(hwProgram + 0x18);
+  if (0x100 < instCount + 5U) {
+    *(undefined1 *)(shader + 4) = 0;
+    instCount = *(int *)(hwProgram + 0x18);
+    if (*(uint *)(hwProgram + 0x20) < instCount + 5U) {
+      newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+      (**(code **)(((unsigned char *)0x00001344) + ctx))
+                (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+      (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+      *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
+      instCount = *(int *)(hwProgram + 0x18);
+      *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
   }
-  iVar7 = param_3 + 4;
-  iVar4 = iVar6 * 0x10 + *(int *)(iVar4 + 0x1c);
-  uVar3 = extvsAllocTempSlot(param_1,param_2);
+  iVar7 = instRecord + 4;
+  instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+  tempIndex = extvsAllocTempSlot(ctx,shader);
   uStack_88 = 3;
   uStack_70 = 0;
   uStack_74 = 1;
   uStack_80 = 1;
   uStack_7c = 1;
   uStack_78 = 1;
-  uStack_84 = uVar3;
-  extvsEncodeSourceOperand(param_1,param_2,&uStack_88,iVar4,3,0,0);
-  extvsEncodeSourceSwizzle(param_2,piVar5,param_3 + 0x3c,iVar4 + 4,0);
-  uVar1 = *(uint *)(iVar4 + 4) & 0xfe001fff | 0x1248000;
-  *(uint *)(iVar4 + 0xc) = uVar1;
-  *(uint *)(iVar4 + 8) = uVar1;
-  extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar4 + 0x10,1,0,0);
-  *(uint *)(iVar4 + 0x10) = *(uint *)(iVar4 + 0x10) & 0xff1fffff;
-  extvsEncodeSourceSwizzle(param_2,piVar5,iVar2,iVar4 + 0x14,0);
+  uStack_84 = tempIndex;
+  extvsEncodeSourceOperand(ctx,shader,&uStack_88,instSlot,3,0,0);
+  extvsEncodeSourceSwizzle(shader,symbolList,instRecord + 0x3c,instSlot + 4,0);
+  uVar1 = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
+  *(uint *)(instSlot + 0xc) = uVar1;
+  *(uint *)(instSlot + 8) = uVar1;
+  extvsEncodeSourceOperand(ctx,shader,iVar7,instSlot + 0x10,1,0,0);
+  *(uint *)(instSlot + 0x10) = *(uint *)(instSlot + 0x10) & 0xff1fffff;
+  extvsEncodeSourceSwizzle(shader,symbolList,iVar2,instSlot + 0x14,0);
   uStack_6c = 3;
   uStack_54 = 0;
   uStack_60 = 0x87d6;
   uStack_64 = 0x87d5;
   uStack_5c = 0x87d7;
   uStack_58 = 0x87d8;
-  uStack_68 = uVar3;
-  extvsEncodeSourceSwizzle(param_2,piVar5,&uStack_6c,iVar4 + 0x18,0);
-  *(undefined4 *)(iVar4 + 0x1c) = *(undefined4 *)(iVar4 + 0x18);
-  extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar4 + 0x20,1,0,0);
-  *(uint *)(iVar4 + 0x20) = *(uint *)(iVar4 + 0x20) & 0xff2fffff;
-  extvsEncodeSourceSwizzle(param_2,piVar5,iVar2,iVar4 + 0x24,1);
-  extvsEncodeSourceSwizzle(param_2,piVar5,&uStack_6c,iVar4 + 0x28,0);
-  *(undefined4 *)(iVar4 + 0x2c) = *(undefined4 *)(iVar4 + 0x28);
-  extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar4 + 0x30,1,0,0);
-  *(uint *)(iVar4 + 0x30) = *(uint *)(iVar4 + 0x30) & 0xff4fffff;
-  extvsEncodeSourceSwizzle(param_2,piVar5,iVar2,iVar4 + 0x34,2);
-  extvsEncodeSourceSwizzle(param_2,piVar5,&uStack_6c,iVar4 + 0x38,0);
-  *(undefined4 *)(iVar4 + 0x3c) = *(undefined4 *)(iVar4 + 0x38);
-  extvsEncodeSourceOperand(param_1,param_2,iVar7,iVar4 + 0x40,1,0,0);
-  *(uint *)(iVar4 + 0x40) = *(uint *)(iVar4 + 0x40) & 0xff8fffff;
-  extvsEncodeSourceSwizzle(param_2,piVar5,iVar2,iVar4 + 0x44,3);
-  extvsEncodeSourceSwizzle(param_2,piVar5,&uStack_6c,iVar4 + 0x48,0);
-  *(undefined4 *)(iVar4 + 0x4c) = *(undefined4 *)(iVar4 + 0x48);
+  uStack_68 = tempIndex;
+  extvsEncodeSourceSwizzle(shader,symbolList,&uStack_6c,instSlot + 0x18,0);
+  *(undefined4 *)(instSlot + 0x1c) = *(undefined4 *)(instSlot + 0x18);
+  extvsEncodeSourceOperand(ctx,shader,iVar7,instSlot + 0x20,1,0,0);
+  *(uint *)(instSlot + 0x20) = *(uint *)(instSlot + 0x20) & 0xff2fffff;
+  extvsEncodeSourceSwizzle(shader,symbolList,iVar2,instSlot + 0x24,1);
+  extvsEncodeSourceSwizzle(shader,symbolList,&uStack_6c,instSlot + 0x28,0);
+  *(undefined4 *)(instSlot + 0x2c) = *(undefined4 *)(instSlot + 0x28);
+  extvsEncodeSourceOperand(ctx,shader,iVar7,instSlot + 0x30,1,0,0);
+  *(uint *)(instSlot + 0x30) = *(uint *)(instSlot + 0x30) & 0xff4fffff;
+  extvsEncodeSourceSwizzle(shader,symbolList,iVar2,instSlot + 0x34,2);
+  extvsEncodeSourceSwizzle(shader,symbolList,&uStack_6c,instSlot + 0x38,0);
+  *(undefined4 *)(instSlot + 0x3c) = *(undefined4 *)(instSlot + 0x38);
+  extvsEncodeSourceOperand(ctx,shader,iVar7,instSlot + 0x40,1,0,0);
+  *(uint *)(instSlot + 0x40) = *(uint *)(instSlot + 0x40) & 0xff8fffff;
+  extvsEncodeSourceSwizzle(shader,symbolList,iVar2,instSlot + 0x44,3);
+  extvsEncodeSourceSwizzle(shader,symbolList,&uStack_6c,instSlot + 0x48,0);
+  *(undefined4 *)(instSlot + 0x4c) = *(undefined4 *)(instSlot + 0x48);
   return 5;
 }
 
 /* extvsEmitMov @ 0x5cc20 (320 bytes) */
-int extvsEmitMov(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int extvsEmitMov(ctx, shader, instRecord)
+  int ctx;
+  int *shader;
+  int instRecord;
 {
+  int instSlot;
   uint uVar1;
-  undefined4 uVar2;
-  int iVar3;
-  int iVar4;
+  undefined4 newInstArray;
+  int instCount;
+  int hwProgram;
   
-  iVar4 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-  iVar3 = *(int *)(iVar4 + 0x18);
-  if (0x100 < iVar3 + 1U) {
-    *(undefined1 *)(param_2 + 4) = 0;
-    iVar3 = *(int *)(iVar4 + 0x18);
-    if (*(uint *)(iVar4 + 0x20) < iVar3 + 1U) {
-      uVar2 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar4 + 0x20) * 0x10 + 0x100);
-      (**(code **)(((unsigned char *)0x00001344) + param_1))
-                (uVar2,*(undefined4 *)(iVar4 + 0x1c),*(int *)(iVar4 + 0x20) << 4);
-      (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar4 + 0x1c));
-      *(undefined4 *)(iVar4 + 0x1c) = uVar2;
-      iVar3 = *(int *)(iVar4 + 0x18);
-      *(int *)(iVar4 + 0x20) = *(int *)(iVar4 + 0x20) + 0x10;
+  hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  instCount = *(int *)(hwProgram + 0x18);
+  if (0x100 < instCount + 1U) {
+    *(undefined1 *)(shader + 4) = 0;
+    instCount = *(int *)(hwProgram + 0x18);
+    if (*(uint *)(hwProgram + 0x20) < instCount + 1U) {
+      newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+      (**(code **)(((unsigned char *)0x00001344) + ctx))
+                (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+      (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+      *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
+      instCount = *(int *)(hwProgram + 0x18);
+      *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
   }
-  iVar3 = iVar3 * 0x10 + *(int *)(iVar4 + 0x1c);
-  extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar3,3,0,0);
-  extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar3 + 4,0);
-  uVar1 = *(uint *)(iVar3 + 4) & 0xfe001fff | 0x1248000;
-  *(uint *)(iVar3 + 0xc) = uVar1;
-  *(uint *)(iVar3 + 8) = uVar1;
+  instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+  extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot,3,0,0);
+  extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,instSlot + 4,0);
+  uVar1 = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
+  *(uint *)(instSlot + 0xc) = uVar1;
+  *(uint *)(instSlot + 8) = uVar1;
   return 1;
 }
 
 /* extvsEmitSwizzle @ 0x5cd60 (1228 bytes) */
-int extvsEmitSwizzle(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int extvsEmitSwizzle(ctx, shader, instRecord)
+  int ctx;
+  int *shader;
+  int instRecord;
 {
+  int instSlot;
   uint uVar1;
   uint uVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int iVar5;
+  undefined4 newInstArray;
+  int instCount;
+  int hwProgram;
   
-  iVar5 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-  iVar4 = *(int *)(iVar5 + 0x18);
-  if (0x100 < iVar4 + 1U) {
-    *(undefined1 *)(param_2 + 4) = 0;
-    iVar4 = *(int *)(iVar5 + 0x18);
-    if (*(uint *)(iVar5 + 0x20) < iVar4 + 1U) {
-      uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar5 + 0x20) * 0x10 + 0x100);
-      (**(code **)(((unsigned char *)0x00001344) + param_1))
-                (uVar3,*(undefined4 *)(iVar5 + 0x1c),*(int *)(iVar5 + 0x20) << 4);
-      (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar5 + 0x1c));
-      *(undefined4 *)(iVar5 + 0x1c) = uVar3;
-      iVar4 = *(int *)(iVar5 + 0x18);
-      *(int *)(iVar5 + 0x20) = *(int *)(iVar5 + 0x20) + 0x10;
+  hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  instCount = *(int *)(hwProgram + 0x18);
+  if (0x100 < instCount + 1U) {
+    *(undefined1 *)(shader + 4) = 0;
+    instCount = *(int *)(hwProgram + 0x18);
+    if (*(uint *)(hwProgram + 0x20) < instCount + 1U) {
+      newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+      (**(code **)(((unsigned char *)0x00001344) + ctx))
+                (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+      (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+      *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
+      instCount = *(int *)(hwProgram + 0x18);
+      *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
   }
-  iVar4 = iVar4 * 0x10 + *(int *)(iVar5 + 0x1c);
-  extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar4,3,0,0);
-  extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar4 + 4,0);
-  switch(*(undefined4 *)(param_3 + 0x28)) {
+  instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+  extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot,3,0,0);
+  extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,instSlot + 4,0);
+  switch(*(undefined4 *)(instRecord + 0x28)) {
   case 0x87d5:
   case 0x87d9:
-    uVar1 = *(uint *)(iVar4 + 4) & 0xffff1fff;
-    *(uint *)(iVar4 + 4) = uVar1;
+    uVar1 = *(uint *)(instSlot + 4) & 0xffff1fff;
+    *(uint *)(instSlot + 4) = uVar1;
     break;
   case 0x87d6:
   case 0x87da:
-    uVar1 = *(uint *)(iVar4 + 4) & 0xffff1fff | 0x2000;
-    *(uint *)(iVar4 + 4) = uVar1;
+    uVar1 = *(uint *)(instSlot + 4) & 0xffff1fff | 0x2000;
+    *(uint *)(instSlot + 4) = uVar1;
     break;
   case 0x87d7:
   case 0x87db:
-    uVar1 = *(uint *)(iVar4 + 4) & 0xffff1fff | 0x4000;
-    *(uint *)(iVar4 + 4) = uVar1;
+    uVar1 = *(uint *)(instSlot + 4) & 0xffff1fff | 0x4000;
+    *(uint *)(instSlot + 4) = uVar1;
     break;
   case 0x87d8:
   case 0x87dc:
-    uVar1 = *(uint *)(iVar4 + 4) & 0xffff1fff | 0x6000;
-    *(uint *)(iVar4 + 4) = uVar1;
+    uVar1 = *(uint *)(instSlot + 4) & 0xffff1fff | 0x6000;
+    *(uint *)(instSlot + 4) = uVar1;
     break;
   case 0x87dd:
-    uVar1 = *(uint *)(iVar4 + 4) & 0xffff1fff | 0x8000;
-    *(uint *)(iVar4 + 4) = uVar1;
+    uVar1 = *(uint *)(instSlot + 4) & 0xffff1fff | 0x8000;
+    *(uint *)(instSlot + 4) = uVar1;
     break;
   case 0x87de:
   case 0x87df:
-    uVar1 = *(uint *)(iVar4 + 4) & 0xffff1fff | 0xa000;
-    *(uint *)(iVar4 + 4) = uVar1;
+    uVar1 = *(uint *)(instSlot + 4) & 0xffff1fff | 0xa000;
+    *(uint *)(instSlot + 4) = uVar1;
     break;
   default:
     goto LAB_0005d2d0;
   }
-  uVar2 = *(int *)(param_3 + 0x28) - 0x87d5;
+  uVar2 = *(int *)(instRecord + 0x28) - 0x87d5;
   if (uVar2 < 0xb) {
     uVar2 = 1 << (uVar2 & 0x3f);
     if ((uVar2 & 0x30f) == 0) {
@@ -560,46 +570,46 @@ int extvsEmitSwizzle(param_1, param_2, param_3)
         return 0;
       }
       uVar1 = uVar1 | 0x2000000;
-      *(uint *)(iVar4 + 4) = uVar1;
+      *(uint *)(instSlot + 4) = uVar1;
     }
     else {
       uVar1 = uVar1 & 0xfdffffff;
-      *(uint *)(iVar4 + 4) = uVar1;
+      *(uint *)(instSlot + 4) = uVar1;
     }
-    switch(*(undefined4 *)(param_3 + 0x2c)) {
+    switch(*(undefined4 *)(instRecord + 0x2c)) {
     case 0x87d5:
     case 0x87d9:
       uVar1 = uVar1 & 0xfff8ffff;
-      *(uint *)(iVar4 + 4) = uVar1;
+      *(uint *)(instSlot + 4) = uVar1;
       break;
     case 0x87d6:
     case 0x87da:
       uVar1 = uVar1 & 0xfff8ffff | 0x10000;
-      *(uint *)(iVar4 + 4) = uVar1;
+      *(uint *)(instSlot + 4) = uVar1;
       break;
     case 0x87d7:
     case 0x87db:
       uVar1 = uVar1 & 0xfff8ffff | 0x20000;
-      *(uint *)(iVar4 + 4) = uVar1;
+      *(uint *)(instSlot + 4) = uVar1;
       break;
     case 0x87d8:
     case 0x87dc:
       uVar1 = uVar1 & 0xfff8ffff | 0x30000;
-      *(uint *)(iVar4 + 4) = uVar1;
+      *(uint *)(instSlot + 4) = uVar1;
       break;
     case 0x87dd:
       uVar1 = uVar1 & 0xfff8ffff | 0x40000;
-      *(uint *)(iVar4 + 4) = uVar1;
+      *(uint *)(instSlot + 4) = uVar1;
       break;
     case 0x87de:
     case 0x87df:
       uVar1 = uVar1 & 0xfff8ffff | 0x50000;
-      *(uint *)(iVar4 + 4) = uVar1;
+      *(uint *)(instSlot + 4) = uVar1;
       break;
     default:
       goto LAB_0005d2d0;
     }
-    uVar2 = *(int *)(param_3 + 0x2c) - 0x87d5;
+    uVar2 = *(int *)(instRecord + 0x2c) - 0x87d5;
     if (uVar2 < 0xb) {
       uVar2 = 1 << (uVar2 & 0x3f);
       if ((uVar2 & 0x30f) == 0) {
@@ -607,46 +617,46 @@ int extvsEmitSwizzle(param_1, param_2, param_3)
           return 0;
         }
         uVar1 = uVar1 | 0x4000000;
-        *(uint *)(iVar4 + 4) = uVar1;
+        *(uint *)(instSlot + 4) = uVar1;
       }
       else {
         uVar1 = uVar1 & 0xfbffffff;
-        *(uint *)(iVar4 + 4) = uVar1;
+        *(uint *)(instSlot + 4) = uVar1;
       }
-      switch(*(undefined4 *)(param_3 + 0x30)) {
+      switch(*(undefined4 *)(instRecord + 0x30)) {
       case 0x87d5:
       case 0x87d9:
         uVar1 = uVar1 & 0xffc7ffff;
-        *(uint *)(iVar4 + 4) = uVar1;
+        *(uint *)(instSlot + 4) = uVar1;
         break;
       case 0x87d6:
       case 0x87da:
         uVar1 = uVar1 & 0xffc7ffff | 0x80000;
-        *(uint *)(iVar4 + 4) = uVar1;
+        *(uint *)(instSlot + 4) = uVar1;
         break;
       case 0x87d7:
       case 0x87db:
         uVar1 = uVar1 & 0xffc7ffff | 0x100000;
-        *(uint *)(iVar4 + 4) = uVar1;
+        *(uint *)(instSlot + 4) = uVar1;
         break;
       case 0x87d8:
       case 0x87dc:
         uVar1 = uVar1 & 0xffc7ffff | 0x180000;
-        *(uint *)(iVar4 + 4) = uVar1;
+        *(uint *)(instSlot + 4) = uVar1;
         break;
       case 0x87dd:
         uVar1 = uVar1 & 0xffc7ffff | 0x200000;
-        *(uint *)(iVar4 + 4) = uVar1;
+        *(uint *)(instSlot + 4) = uVar1;
         break;
       case 0x87de:
       case 0x87df:
         uVar1 = uVar1 & 0xffc7ffff | 0x280000;
-        *(uint *)(iVar4 + 4) = uVar1;
+        *(uint *)(instSlot + 4) = uVar1;
         break;
       default:
         goto LAB_0005d2d0;
       }
-      uVar2 = *(int *)(param_3 + 0x30) - 0x87d5;
+      uVar2 = *(int *)(instRecord + 0x30) - 0x87d5;
       if (uVar2 < 0xb) {
         uVar2 = 1 << (uVar2 & 0x3f);
         if ((uVar2 & 0x30f) == 0) {
@@ -654,46 +664,46 @@ int extvsEmitSwizzle(param_1, param_2, param_3)
             return 0;
           }
           uVar1 = uVar1 | 0x8000000;
-          *(uint *)(iVar4 + 4) = uVar1;
+          *(uint *)(instSlot + 4) = uVar1;
         }
         else {
           uVar1 = uVar1 & 0xf7ffffff;
-          *(uint *)(iVar4 + 4) = uVar1;
+          *(uint *)(instSlot + 4) = uVar1;
         }
-        switch(*(undefined4 *)(param_3 + 0x34)) {
+        switch(*(undefined4 *)(instRecord + 0x34)) {
         case 0x87d5:
         case 0x87d9:
           uVar1 = uVar1 & 0xfe3fffff;
-          *(uint *)(iVar4 + 4) = uVar1;
+          *(uint *)(instSlot + 4) = uVar1;
           break;
         case 0x87d6:
         case 0x87da:
           uVar1 = uVar1 & 0xfe3fffff | 0x400000;
-          *(uint *)(iVar4 + 4) = uVar1;
+          *(uint *)(instSlot + 4) = uVar1;
           break;
         case 0x87d7:
         case 0x87db:
           uVar1 = uVar1 & 0xfe3fffff | 0x800000;
-          *(uint *)(iVar4 + 4) = uVar1;
+          *(uint *)(instSlot + 4) = uVar1;
           break;
         case 0x87d8:
         case 0x87dc:
           uVar1 = uVar1 & 0xfe3fffff | 0xc00000;
-          *(uint *)(iVar4 + 4) = uVar1;
+          *(uint *)(instSlot + 4) = uVar1;
           break;
         case 0x87dd:
           uVar1 = uVar1 & 0xfe3fffff | 0x1000000;
-          *(uint *)(iVar4 + 4) = uVar1;
+          *(uint *)(instSlot + 4) = uVar1;
           break;
         case 0x87de:
         case 0x87df:
           uVar1 = uVar1 & 0xfe3fffff | 0x1400000;
-          *(uint *)(iVar4 + 4) = uVar1;
+          *(uint *)(instSlot + 4) = uVar1;
           break;
         default:
           goto LAB_0005d2d0;
         }
-        uVar2 = *(int *)(param_3 + 0x34) - 0x87d5;
+        uVar2 = *(int *)(instRecord + 0x34) - 0x87d5;
         if (uVar2 < 0xb) {
           uVar2 = 1 << (uVar2 & 0x3f);
           if ((uVar2 & 0x30f) == 0) {
@@ -701,15 +711,15 @@ int extvsEmitSwizzle(param_1, param_2, param_3)
               return 0;
             }
             uVar1 = uVar1 | 0x10000000;
-            *(uint *)(iVar4 + 4) = uVar1;
+            *(uint *)(instSlot + 4) = uVar1;
           }
           else {
             uVar1 = uVar1 & 0xefffffff;
-            *(uint *)(iVar4 + 4) = uVar1;
+            *(uint *)(instSlot + 4) = uVar1;
           }
           uVar1 = uVar1 & 0xe0001fff | 0x1248000;
-          *(uint *)(iVar4 + 0xc) = uVar1;
-          *(uint *)(iVar4 + 8) = uVar1;
+          *(uint *)(instSlot + 0xc) = uVar1;
+          *(uint *)(instSlot + 8) = uVar1;
           return 1;
         }
       }
@@ -720,31 +730,31 @@ LAB_0005d2d0:
 }
 
 /* extvsEmitWriteMask @ 0x5d2f0 (372 bytes) */
-int extvsEmitWriteMask(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int extvsEmitWriteMask(ctx, shader, instRecord)
+  int ctx;
+  int *shader;
+  int instRecord;
 {
   uint uVar1;
   uint uVar2;
   uint uVar3;
   uint uVar4;
-  undefined4 uVar5;
+  undefined4 newInstArray;
   int iVar6;
   int iVar7;
   int iVar8;
   
-  iVar6 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
+  iVar6 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
   iVar8 = *(int *)(iVar6 + 0x18);
   if (0x100 < iVar8 + 1U) {
-    *(undefined1 *)(param_2 + 4) = 0;
+    *(undefined1 *)(shader + 4) = 0;
     iVar8 = *(int *)(iVar6 + 0x18);
     if (*(uint *)(iVar6 + 0x20) < iVar8 + 1U) {
-      uVar5 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar6 + 0x20) * 0x10 + 0x100);
-      (**(code **)(((unsigned char *)0x00001344) + param_1))
-                (uVar5,*(undefined4 *)(iVar6 + 0x1c),*(int *)(iVar6 + 0x20) << 4);
-      (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar6 + 0x1c));
-      *(undefined4 *)(iVar6 + 0x1c) = uVar5;
+      newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(iVar6 + 0x20) * 0x10 + 0x100);
+      (**(code **)(((unsigned char *)0x00001344) + ctx))
+                (newInstArray,*(undefined4 *)(iVar6 + 0x1c),*(int *)(iVar6 + 0x20) << 4);
+      (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar6 + 0x1c));
+      *(undefined4 *)(iVar6 + 0x1c) = newInstArray;
       iVar8 = *(int *)(iVar6 + 0x18);
       *(int *)(iVar6 + 0x20) = *(int *)(iVar6 + 0x20) + 0x10;
     }
@@ -752,17 +762,17 @@ int extvsEmitWriteMask(param_1, param_2, param_3)
   iVar7 = *(int *)(iVar6 + 0x1c);
   iVar8 = iVar8 * 0x10;
   iVar6 = iVar8 + iVar7;
-  extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar6,3,0,0);
+  extvsEncodeSourceOperand(ctx,shader,instRecord + 4,iVar6,3,0,0);
   uVar3 = *(uint *)(iVar8 + iVar7);
-  uVar4 = (*(uint *)(param_3 + 0xc) & 1) << 0x14;
+  uVar4 = (*(uint *)(instRecord + 0xc) & 1) << 0x14;
   *(uint *)(iVar8 + iVar7) = uVar4 | uVar3 & 0xffefffff;
-  uVar1 = (*(uint *)(param_3 + 0x10) & 1) << 0x15;
+  uVar1 = (*(uint *)(instRecord + 0x10) & 1) << 0x15;
   *(uint *)(iVar8 + iVar7) = uVar1 | uVar4 | uVar3 & 0xffcfffff;
-  uVar2 = (*(uint *)(param_3 + 0x14) & 1) << 0x16;
+  uVar2 = (*(uint *)(instRecord + 0x14) & 1) << 0x16;
   *(uint *)(iVar8 + iVar7) = uVar2 | uVar1 | uVar4 | uVar3 & 0xff8fffff;
   *(uint *)(iVar8 + iVar7) =
-       (*(uint *)(param_3 + 0x18) & 1) << 0x17 | uVar2 | uVar1 | uVar4 | uVar3 & 0xff0fffff;
-  extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar6 + 4,0);
+       (*(uint *)(instRecord + 0x18) & 1) << 0x17 | uVar2 | uVar1 | uVar4 | uVar3 & 0xff0fffff;
+  extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,iVar6 + 4,0);
   uVar4 = *(uint *)(iVar6 + 4) & 0xfe001fff | 0x1248000;
   *(uint *)(iVar6 + 0xc) = uVar4;
   *(uint *)(iVar6 + 8) = uVar4;
@@ -770,49 +780,50 @@ int extvsEmitWriteMask(param_1, param_2, param_3)
 }
 
 /* extvsEmitOp879c @ 0x5d470 (424 bytes) */
-int extvsEmitOp879c(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int extvsEmitOp879c(ctx, shader, instRecord)
+  int ctx;
+  int *shader;
+  int instRecord;
 {
+  int instSlot;
   int extvsOperandDataTypeResult;
   uint uVar1;
   undefined4 uVar2;
   int iVar3;
-  int iVar4;
+  int hwProgram;
   int iVar5;
   
-  iVar4 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-  iVar3 = *(int *)(iVar4 + 0x18);
+  hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  iVar3 = *(int *)(hwProgram + 0x18);
   if (0x100 < iVar3 + 1U) {
-    *(undefined1 *)(param_2 + 4) = 0;
-    iVar3 = *(int *)(iVar4 + 0x18);
-    if (*(uint *)(iVar4 + 0x20) < iVar3 + 1U) {
-      uVar2 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar4 + 0x20) * 0x10 + 0x100);
-      (**(code **)(((unsigned char *)0x00001344) + param_1))
-                (uVar2,*(undefined4 *)(iVar4 + 0x1c),*(int *)(iVar4 + 0x20) << 4);
-      (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar4 + 0x1c));
-      *(undefined4 *)(iVar4 + 0x1c) = uVar2;
-      iVar3 = *(int *)(iVar4 + 0x18);
-      *(int *)(iVar4 + 0x20) = *(int *)(iVar4 + 0x20) + 0x10;
+    *(undefined1 *)(shader + 4) = 0;
+    iVar3 = *(int *)(hwProgram + 0x18);
+    if (*(uint *)(hwProgram + 0x20) < iVar3 + 1U) {
+      uVar2 = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+      (**(code **)(((unsigned char *)0x00001344) + ctx))
+                (uVar2,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+      (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+      *(undefined4 *)(hwProgram + 0x1c) = uVar2;
+      iVar3 = *(int *)(hwProgram + 0x18);
+      *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
   }
-  iVar5 = param_3 + 4;
-  iVar4 = iVar3 * 0x10 + *(int *)(iVar4 + 0x1c);
-  extvsOperandDataTypeResult = extvsOperandDataType(param_2 + 7,iVar5);
-  if (*(uint *)(param_3 + 0x40) < 4) {
+  iVar5 = instRecord + 4;
+  instSlot = iVar3 * 0x10 + *(int *)(hwProgram + 0x1c);
+  extvsOperandDataTypeResult = extvsOperandDataType(shader + 7,iVar5);
+  if (*(uint *)(instRecord + 0x40) < 4) {
     if (extvsOperandDataTypeResult == 0x87bf) {
-      extvsEncodeSourceOperand(param_1,param_2,iVar5,iVar4,3,0,0);
+      extvsEncodeSourceOperand(ctx,shader,iVar5,instSlot,3,0,0);
     }
     else {
       if (extvsOperandDataTypeResult != 0x87c0) goto LAB_0005d600;
-      extvsEncodeSourceOperand(param_1,param_2,iVar5,iVar4,3,0,*(uint *)(param_3 + 0x40));
+      extvsEncodeSourceOperand(ctx,shader,iVar5,instSlot,3,0,*(uint *)(instRecord + 0x40));
     }
-    extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar4 + 4,0);
+    extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,instSlot + 4,0);
     uVar2 = 1;
-    uVar1 = *(uint *)(iVar4 + 4) & 0xfe001fff | 0x1248000;
-    *(uint *)(iVar4 + 0xc) = uVar1;
-    *(uint *)(iVar4 + 8) = uVar1;
+    uVar1 = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
+    *(uint *)(instSlot + 0xc) = uVar1;
+    *(uint *)(instSlot + 8) = uVar1;
   }
   else {
 LAB_0005d600:
@@ -822,75 +833,76 @@ LAB_0005d600:
 }
 
 /* extvsEmitOp879d @ 0x5d620 (568 bytes) */
-int extvsEmitOp879d(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int extvsEmitOp879d(ctx, shader, instRecord)
+  int ctx;
+  int *shader;
+  int instRecord;
 {
+  int instSlot;
   int extvsOperandDataTypeResult;
   undefined4 uVar1;
   int iVar2;
-  int iVar3;
-  int *piVar4;
-  int iVar5;
+  int src0Operand;
+  int *symbolList;
+  int hwProgram;
   uint uVar6;
   
-  iVar5 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-  iVar2 = *(int *)(iVar5 + 0x18);
+  hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  iVar2 = *(int *)(hwProgram + 0x18);
   if (0x100 < iVar2 + 1U) {
-    *(undefined1 *)(param_2 + 4) = 0;
-    iVar2 = *(int *)(iVar5 + 0x18);
-    if (*(uint *)(iVar5 + 0x20) < iVar2 + 1U) {
-      uVar1 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar5 + 0x20) * 0x10 + 0x100);
-      (**(code **)(((unsigned char *)0x00001344) + param_1))
-                (uVar1,*(undefined4 *)(iVar5 + 0x1c),*(int *)(iVar5 + 0x20) << 4);
-      (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar5 + 0x1c));
-      *(undefined4 *)(iVar5 + 0x1c) = uVar1;
-      iVar2 = *(int *)(iVar5 + 0x18);
-      *(int *)(iVar5 + 0x20) = *(int *)(iVar5 + 0x20) + 0x10;
+    *(undefined1 *)(shader + 4) = 0;
+    iVar2 = *(int *)(hwProgram + 0x18);
+    if (*(uint *)(hwProgram + 0x20) < iVar2 + 1U) {
+      uVar1 = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+      (**(code **)(((unsigned char *)0x00001344) + ctx))
+                (uVar1,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+      (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+      *(undefined4 *)(hwProgram + 0x1c) = uVar1;
+      iVar2 = *(int *)(hwProgram + 0x18);
+      *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
   }
-  piVar4 = param_2 + 7;
-  iVar3 = param_3 + 0x20;
-  iVar5 = iVar2 * 0x10 + *(int *)(iVar5 + 0x1c);
-  extvsOperandDataTypeResult = extvsOperandDataType(piVar4,iVar3);
-  uVar6 = *(uint *)(param_3 + 0x40);
+  symbolList = shader + 7;
+  src0Operand = instRecord + 0x20;
+  instSlot = iVar2 * 0x10 + *(int *)(hwProgram + 0x1c);
+  extvsOperandDataTypeResult = extvsOperandDataType(symbolList,src0Operand);
+  uVar6 = *(uint *)(instRecord + 0x40);
   if (uVar6 < 4) {
-    extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar5,3,0,0);
+    extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot,3,0,0);
     if (extvsOperandDataTypeResult == 0x87bf) {
-      extvsEncodeSourceSwizzle(param_2,piVar4,iVar3,iVar5 + 4,0);
+      extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,instSlot + 4,0);
       if (uVar6 == 1) {
-        uVar6 = *(uint *)(iVar5 + 4) >> 0x10 & 7;
-        uVar6 = uVar6 << 0x16 | uVar6 << 0x13 | uVar6 << 0xd | *(uint *)(iVar5 + 4) & 0xfe071fff;
-        *(uint *)(iVar5 + 4) = uVar6;
+        uVar6 = *(uint *)(instSlot + 4) >> 0x10 & 7;
+        uVar6 = uVar6 << 0x16 | uVar6 << 0x13 | uVar6 << 0xd | *(uint *)(instSlot + 4) & 0xfe071fff;
+        *(uint *)(instSlot + 4) = uVar6;
       }
       else if (uVar6 == 0) {
-        uVar6 = *(uint *)(iVar5 + 4) >> 0xd & 7;
-        uVar6 = uVar6 << 0x16 | uVar6 << 0x13 | uVar6 << 0x10 | *(uint *)(iVar5 + 4) & 0xfe00ffff;
-        *(uint *)(iVar5 + 4) = uVar6;
+        uVar6 = *(uint *)(instSlot + 4) >> 0xd & 7;
+        uVar6 = uVar6 << 0x16 | uVar6 << 0x13 | uVar6 << 0x10 | *(uint *)(instSlot + 4) & 0xfe00ffff;
+        *(uint *)(instSlot + 4) = uVar6;
       }
       else if (uVar6 == 2) {
-        uVar6 = *(uint *)(iVar5 + 4) >> 0x13 & 7;
-        uVar6 = uVar6 << 0x16 | uVar6 << 0x10 | uVar6 << 0xd | *(uint *)(iVar5 + 4) & 0xfe381fff;
-        *(uint *)(iVar5 + 4) = uVar6;
+        uVar6 = *(uint *)(instSlot + 4) >> 0x13 & 7;
+        uVar6 = uVar6 << 0x16 | uVar6 << 0x10 | uVar6 << 0xd | *(uint *)(instSlot + 4) & 0xfe381fff;
+        *(uint *)(instSlot + 4) = uVar6;
       }
       else {
         if (uVar6 != 3) goto LAB_0005d81c;
-        uVar6 = *(uint *)(iVar5 + 4) >> 0x16 & 7;
-        uVar6 = uVar6 << 0x13 | uVar6 << 0x10 | uVar6 << 0xd | *(uint *)(iVar5 + 4) & 0xffc01fff;
-        *(uint *)(iVar5 + 4) = uVar6;
+        uVar6 = *(uint *)(instSlot + 4) >> 0x16 & 7;
+        uVar6 = uVar6 << 0x13 | uVar6 << 0x10 | uVar6 << 0xd | *(uint *)(instSlot + 4) & 0xffc01fff;
+        *(uint *)(instSlot + 4) = uVar6;
       }
     }
     else {
       if (extvsOperandDataTypeResult != 0x87c0) goto LAB_0005d850;
-      extvsEncodeSourceSwizzle(param_2,piVar4,iVar3,iVar5 + 4,uVar6);
+      extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,instSlot + 4,uVar6);
 LAB_0005d81c:
-      uVar6 = *(uint *)(iVar5 + 4);
+      uVar6 = *(uint *)(instSlot + 4);
     }
     uVar1 = 1;
     uVar6 = uVar6 & 0xfe001fff | 0x1248000;
-    *(uint *)(iVar5 + 0xc) = uVar6;
-    *(uint *)(iVar5 + 8) = uVar6;
+    *(uint *)(instSlot + 0xc) = uVar6;
+    *(uint *)(instSlot + 8) = uVar6;
   }
   else {
 LAB_0005d850:
@@ -900,54 +912,57 @@ LAB_0005d850:
 }
 
 /* extvsEmitLit @ 0x5d870 (336 bytes) */
-int extvsEmitLit(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int extvsEmitLit(ctx, shader, instRecord)
+  int ctx;
+  int *shader;
+  int instRecord;
 {
+  int instSlot;
   uint uVar1;
-  undefined4 uVar2;
-  int iVar3;
-  int iVar4;
+  undefined4 newInstArray;
+  int instCount;
+  int hwProgram;
   
-  iVar4 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-  iVar3 = *(int *)(iVar4 + 0x18);
-  if (0x100 < iVar3 + 1U) {
-    *(undefined1 *)(param_2 + 4) = 0;
-    iVar3 = *(int *)(iVar4 + 0x18);
-    if (*(uint *)(iVar4 + 0x20) < iVar3 + 1U) {
-      uVar2 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar4 + 0x20) * 0x10 + 0x100);
-      (**(code **)(((unsigned char *)0x00001344) + param_1))
-                (uVar2,*(undefined4 *)(iVar4 + 0x1c),*(int *)(iVar4 + 0x20) << 4);
-      (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar4 + 0x1c));
-      *(undefined4 *)(iVar4 + 0x1c) = uVar2;
-      iVar3 = *(int *)(iVar4 + 0x18);
-      *(int *)(iVar4 + 0x20) = *(int *)(iVar4 + 0x20) + 0x10;
+  hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  instCount = *(int *)(hwProgram + 0x18);
+  if (0x100 < instCount + 1U) {
+    *(undefined1 *)(shader + 4) = 0;
+    instCount = *(int *)(hwProgram + 0x18);
+    if (*(uint *)(hwProgram + 0x20) < instCount + 1U) {
+      newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+      (**(code **)(((unsigned char *)0x00001344) + ctx))
+                (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+      (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+      *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
+      instCount = *(int *)(hwProgram + 0x18);
+      *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
   }
-  iVar3 = iVar3 * 0x10 + *(int *)(iVar4 + 0x1c);
-  extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar3,4,1,0);
-  extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar3 + 4,0);
-  uVar1 = *(uint *)(iVar3 + 4);
-  *(uint *)(iVar3 + 0xc) = uVar1;
-  *(uint *)(iVar3 + 4) = (uVar1 & 0x4000000) << 2 | (uVar1 & 0x70000) << 6 | uVar1 & 0xee3fffff;
-  *(uint *)(iVar3 + 8) = (uVar1 & 0x2000000) << 3 | (uVar1 & 0xe000) << 9 | uVar1 & 0xee3fffff;
+  instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+  extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot,4,1,0);
+  extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,instSlot + 4,0);
+  uVar1 = *(uint *)(instSlot + 4);
+  *(uint *)(instSlot + 0xc) = uVar1;
+  *(uint *)(instSlot + 4) = (uVar1 & 0x4000000) << 2 | (uVar1 & 0x70000) << 6 | uVar1 & 0xee3fffff;
+  *(uint *)(instSlot + 8) = (uVar1 & 0x2000000) << 3 | (uVar1 & 0xe000) << 9 | uVar1 & 0xee3fffff;
   return 1;
 }
 
 /* extvsEmitDst @ 0x5d9c0 (824 bytes) */
-int extvsEmitDst(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int extvsEmitDst(ctx, shader, instRecord)
+  int ctx;
+  int *shader;
+  int instRecord;
 {
+  int instSlot;
+  int hwProgram;
   uint uVar1;
-  int iVar2;
+  int conflict;
   undefined4 uVar3;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
-  int iVar7;
+  int src1Operand;
+  int src0Operand;
+  int *symbolList;
+  int instCount;
   undefined4 local_78;
   undefined4 local_74;
   undefined4 local_70;
@@ -963,51 +978,51 @@ int extvsEmitDst(param_1, param_2, param_3)
   undefined4 local_48;
   undefined1 local_44;
   
-  iVar5 = param_3 + 0x20;
-  piVar6 = param_2 + 7;
-  iVar4 = param_3 + 0x3c;
-  iVar2 = extvsOperandsConflictInBank(piVar6,iVar5,iVar4);
-  if (iVar2 == 0) {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 1U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 1U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+  src0Operand = instRecord + 0x20;
+  symbolList = shader + 7;
+  src1Operand = instRecord + 0x3c;
+  conflict = extvsOperandsConflictInBank(symbolList,src0Operand,src1Operand);
+  if (conflict == 0) {
+    hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+    instCount = *(int *)(hwProgram + 0x18);
+    if (0x100 < instCount + 1U) {
+      *(undefined1 *)(shader + 4) = 0;
+      instCount = *(int *)(hwProgram + 0x18);
+      if (*(uint *)(hwProgram + 0x20) < instCount + 1U) {
+        uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + ctx))
+                  (uVar3,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+        (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+        *(undefined4 *)(hwProgram + 0x1c) = uVar3;
+        instCount = *(int *)(hwProgram + 0x18);
+        *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar2,5,0,0);
-    extvsEncodeSourceSwizzle(param_2,piVar6,iVar5,iVar2 + 4,0);
-    extvsEncodeSourceSwizzle(param_2,piVar6,iVar4,iVar2 + 8,0);
+    instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+    extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot,5,0,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,instSlot + 4,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,instSlot + 8,0);
     uVar3 = 1;
-    *(undefined4 *)(iVar2 + 0xc) = *(undefined4 *)(iVar2 + 8);
+    *(undefined4 *)(instSlot + 0xc) = *(undefined4 *)(instSlot + 8);
   }
   else {
-    iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar7 = *(int *)(iVar2 + 0x18);
-    if (0x100 < iVar7 + 2U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (*(uint *)(iVar2 + 0x20) < iVar7 + 2U) {
-        uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-        *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+    hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+    instCount = *(int *)(hwProgram + 0x18);
+    if (0x100 < instCount + 2U) {
+      *(undefined1 *)(shader + 4) = 0;
+      instCount = *(int *)(hwProgram + 0x18);
+      if (*(uint *)(hwProgram + 0x20) < instCount + 2U) {
+        uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + ctx))
+                  (uVar3,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+        (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+        *(undefined4 *)(hwProgram + 0x1c) = uVar3;
+        instCount = *(int *)(hwProgram + 0x18);
+        *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
       }
     }
-    iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-    uVar3 = extvsAllocTempSlot(param_1,param_2);
+    instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+    uVar3 = extvsAllocTempSlot(ctx,shader);
     local_78 = 3;
     local_60 = 0;
     local_64 = 1;
@@ -1015,12 +1030,12 @@ int extvsEmitDst(param_1, param_2, param_3)
     local_6c = 1;
     local_68 = 1;
     local_74 = uVar3;
-    extvsEncodeSourceOperand(param_1,param_2,&local_78,iVar2,3,0,0);
-    extvsEncodeSourceSwizzle(param_2,piVar6,iVar5,iVar2 + 4,0);
-    uVar1 = *(uint *)(iVar2 + 4) & 0xfe001fff | 0x1248000;
-    *(uint *)(iVar2 + 0xc) = uVar1;
-    *(uint *)(iVar2 + 8) = uVar1;
-    extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar2 + 0x10,5,0,0);
+    extvsEncodeSourceOperand(ctx,shader,&local_78,instSlot,3,0,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,src0Operand,instSlot + 4,0);
+    uVar1 = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
+    *(uint *)(instSlot + 0xc) = uVar1;
+    *(uint *)(instSlot + 8) = uVar1;
+    extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot + 0x10,5,0,0);
     local_5c = 3;
     local_44 = 0;
     local_54 = 0x87d5;
@@ -1028,133 +1043,136 @@ int extvsEmitDst(param_1, param_2, param_3)
     local_4c = 0x87d7;
     local_48 = 0x87d8;
     local_58 = uVar3;
-    extvsEncodeSourceSwizzle(param_2,piVar6,&local_5c,iVar2 + 0x14,0);
-    extvsEncodeSourceSwizzle(param_2,piVar6,iVar4,iVar2 + 0x18,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,&local_5c,instSlot + 0x14,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,src1Operand,instSlot + 0x18,0);
     uVar3 = 2;
-    *(undefined4 *)(iVar2 + 0x1c) = *(undefined4 *)(iVar2 + 0x18);
+    *(undefined4 *)(instSlot + 0x1c) = *(undefined4 *)(instSlot + 0x18);
   }
   return uVar3;
 }
 
 /* extvsEmitExpp @ 0x5dd00 (324 bytes) */
-int extvsEmitExpp(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int extvsEmitExpp(ctx, shader, instRecord)
+  int ctx;
+  int *shader;
+  int instRecord;
 {
-  undefined4 uVar1;
+  int instSlot;
+  undefined4 newInstArray;
   uint uVar2;
-  int iVar3;
-  int iVar4;
+  int instCount;
+  int hwProgram;
   
-  iVar4 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-  iVar3 = *(int *)(iVar4 + 0x18);
-  if (0x100 < iVar3 + 1U) {
-    *(undefined1 *)(param_2 + 4) = 0;
-    iVar3 = *(int *)(iVar4 + 0x18);
-    if (*(uint *)(iVar4 + 0x20) < iVar3 + 1U) {
-      uVar1 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar4 + 0x20) * 0x10 + 0x100);
-      (**(code **)(((unsigned char *)0x00001344) + param_1))
-                (uVar1,*(undefined4 *)(iVar4 + 0x1c),*(int *)(iVar4 + 0x20) << 4);
-      (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar4 + 0x1c));
-      *(undefined4 *)(iVar4 + 0x1c) = uVar1;
-      iVar3 = *(int *)(iVar4 + 0x18);
-      *(int *)(iVar4 + 0x20) = *(int *)(iVar4 + 0x20) + 0x10;
+  hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  instCount = *(int *)(hwProgram + 0x18);
+  if (0x100 < instCount + 1U) {
+    *(undefined1 *)(shader + 4) = 0;
+    instCount = *(int *)(hwProgram + 0x18);
+    if (*(uint *)(hwProgram + 0x20) < instCount + 1U) {
+      newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+      (**(code **)(((unsigned char *)0x00001344) + ctx))
+                (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+      (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+      *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
+      instCount = *(int *)(hwProgram + 0x18);
+      *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
   }
-  iVar3 = iVar3 * 0x10 + *(int *)(iVar4 + 0x1c);
-  extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar3,1,1,0);
-  extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar3 + 4,0);
-  uVar2 = *(uint *)(iVar3 + 4);
+  instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+  extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot,1,1,0);
+  extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,instSlot + 4,0);
+  uVar2 = *(uint *)(instSlot + 4);
   uVar2 = (uVar2 & 0x2000000) << 3 | (uVar2 & 0xe000) << 9 | uVar2 & 0xee3fffff;
-  *(uint *)(iVar3 + 0xc) = uVar2;
-  *(uint *)(iVar3 + 4) = uVar2;
-  *(uint *)(iVar3 + 8) = uVar2;
+  *(uint *)(instSlot + 0xc) = uVar2;
+  *(uint *)(instSlot + 4) = uVar2;
+  *(uint *)(instSlot + 8) = uVar2;
   return 1;
 }
 
 /* extvsEmitLogp @ 0x5de50 (324 bytes) */
-int extvsEmitLogp(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int extvsEmitLogp(ctx, shader, instRecord)
+  int ctx;
+  int *shader;
+  int instRecord;
 {
-  undefined4 uVar1;
+  int instSlot;
+  undefined4 newInstArray;
   uint uVar2;
-  int iVar3;
-  int iVar4;
+  int instCount;
+  int hwProgram;
   
-  iVar4 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-  iVar3 = *(int *)(iVar4 + 0x18);
-  if (0x100 < iVar3 + 1U) {
-    *(undefined1 *)(param_2 + 4) = 0;
-    iVar3 = *(int *)(iVar4 + 0x18);
-    if (*(uint *)(iVar4 + 0x20) < iVar3 + 1U) {
-      uVar1 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar4 + 0x20) * 0x10 + 0x100);
-      (**(code **)(((unsigned char *)0x00001344) + param_1))
-                (uVar1,*(undefined4 *)(iVar4 + 0x1c),*(int *)(iVar4 + 0x20) << 4);
-      (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar4 + 0x1c));
-      *(undefined4 *)(iVar4 + 0x1c) = uVar1;
-      iVar3 = *(int *)(iVar4 + 0x18);
-      *(int *)(iVar4 + 0x20) = *(int *)(iVar4 + 0x20) + 0x10;
+  hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  instCount = *(int *)(hwProgram + 0x18);
+  if (0x100 < instCount + 1U) {
+    *(undefined1 *)(shader + 4) = 0;
+    instCount = *(int *)(hwProgram + 0x18);
+    if (*(uint *)(hwProgram + 0x20) < instCount + 1U) {
+      newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+      (**(code **)(((unsigned char *)0x00001344) + ctx))
+                (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+      (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+      *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
+      instCount = *(int *)(hwProgram + 0x18);
+      *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
   }
-  iVar3 = iVar3 * 0x10 + *(int *)(iVar4 + 0x1c);
-  extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar3,2,1,0);
-  extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar3 + 4,0);
-  uVar2 = *(uint *)(iVar3 + 4);
+  instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+  extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot,2,1,0);
+  extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,instSlot + 4,0);
+  uVar2 = *(uint *)(instSlot + 4);
   uVar2 = (uVar2 & 0x2000000) << 3 | (uVar2 & 0xe000) << 9 | uVar2 & 0xee3fffff;
-  *(uint *)(iVar3 + 0xc) = uVar2;
-  *(uint *)(iVar3 + 4) = uVar2;
-  *(uint *)(iVar3 + 8) = uVar2;
+  *(uint *)(instSlot + 0xc) = uVar2;
+  *(uint *)(instSlot + 4) = uVar2;
+  *(uint *)(instSlot + 8) = uVar2;
   return 1;
 }
 
 /* extvsEmitMova @ 0x5dfa0 (304 bytes) */
-int extvsEmitMova(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int extvsEmitMova(ctx, shader, instRecord)
+  int ctx;
+  int *shader;
+  int instRecord;
 {
-  undefined4 uVar1;
-  int iVar2;
-  int iVar3;
+  int instSlot;
+  undefined4 newInstArray;
+  int instCount;
+  int hwProgram;
   
-  iVar3 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-  iVar2 = *(int *)(iVar3 + 0x18);
-  if (0x100 < iVar2 + 1U) {
-    *(undefined1 *)(param_2 + 4) = 0;
-    iVar2 = *(int *)(iVar3 + 0x18);
-    if (*(uint *)(iVar3 + 0x20) < iVar2 + 1U) {
-      uVar1 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar3 + 0x20) * 0x10 + 0x100);
-      (**(code **)(((unsigned char *)0x00001344) + param_1))
-                (uVar1,*(undefined4 *)(iVar3 + 0x1c),*(int *)(iVar3 + 0x20) << 4);
-      (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar3 + 0x1c));
-      *(undefined4 *)(iVar3 + 0x1c) = uVar1;
-      iVar2 = *(int *)(iVar3 + 0x18);
-      *(int *)(iVar3 + 0x20) = *(int *)(iVar3 + 0x20) + 0x10;
+  hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  instCount = *(int *)(hwProgram + 0x18);
+  if (0x100 < instCount + 1U) {
+    *(undefined1 *)(shader + 4) = 0;
+    instCount = *(int *)(hwProgram + 0x18);
+    if (*(uint *)(hwProgram + 0x20) < instCount + 1U) {
+      newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+      (**(code **)(((unsigned char *)0x00001344) + ctx))
+                (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+      (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+      *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
+      instCount = *(int *)(hwProgram + 0x18);
+      *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
   }
-  iVar2 = iVar2 * 0x10 + *(int *)(iVar3 + 0x1c);
-  extvsEncodeSourceOperand(param_1,param_2,param_3 + 4,iVar2,0xd,0,0);
-  extvsEncodeSourceSwizzle(param_2,param_2 + 7,param_3 + 0x20,iVar2 + 4,0);
-  *(undefined4 *)(iVar2 + 0xc) = *(undefined4 *)(iVar2 + 4);
-  *(undefined4 *)(iVar2 + 8) = *(undefined4 *)(iVar2 + 4);
+  instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+  extvsEncodeSourceOperand(ctx,shader,instRecord + 4,instSlot,0xd,0,0);
+  extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,instSlot + 4,0);
+  *(undefined4 *)(instSlot + 0xc) = *(undefined4 *)(instSlot + 4);
+  *(undefined4 *)(instSlot + 8) = *(undefined4 *)(instSlot + 4);
   return 1;
 }
 
 /* extvsEmitFogOutput @ 0x5e0d0 (1676 bytes) */
-int extvsEmitFogOutput(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  uint *param_3;
+int extvsEmitFogOutput(ctx, shader, instRecord)
+  int ctx;
+  int *shader;
+  uint *instRecord;
 {
   short sVar1;
   undefined4 uVar2;
-  int iVar3;
-  int *piVar4;
+  int hwProgram;
+  int *symbolList;
   int iVar5;
-  int iVar6;
+  int instCount;
   undefined4 local_a8;
   uint local_a4;
   undefined4 local_a0;
@@ -1177,27 +1195,27 @@ int extvsEmitFogOutput(param_1, param_2, param_3)
   undefined4 local_5c;
   undefined1 local_58;
   
-  iVar5 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-  iVar3 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-  uVar2 = *(undefined4 *)(iVar3 + 0x60);
-  local_a4 = extvsAllocTempSlot(param_1,param_2);
-  *param_3 = (local_a4 & 0x7f) << 0xd | *param_3 & 0xfff010ff | 0x100000;
+  iVar5 = *(int *)(*(int *)(ctx + 4) + 0x10);
+  hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  uVar2 = *(undefined4 *)(hwProgram + 0x60);
+  local_a4 = extvsAllocTempSlot(ctx,shader);
+  *instRecord = (local_a4 & 0x7f) << 0xd | *instRecord & 0xfff010ff | 0x100000;
   sVar1 = *(short *)(((unsigned char *)0x00002e04) + iVar5);
   local_88 = local_a4;
   local_6c = uVar2;
   if (sVar1 == 0x801) {
-    iVar5 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar6 = *(int *)(iVar5 + 0x18);
-    if (0x100 < iVar6 + 3U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar6 = *(int *)(iVar5 + 0x18);
-      if (*(uint *)(iVar5 + 0x20) < iVar6 + 3U) {
-        uVar2 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar5 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
+    iVar5 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+    instCount = *(int *)(iVar5 + 0x18);
+    if (0x100 < instCount + 3U) {
+      *(undefined1 *)(shader + 4) = 0;
+      instCount = *(int *)(iVar5 + 0x18);
+      if (*(uint *)(iVar5 + 0x20) < instCount + 3U) {
+        uVar2 = (**(code **)(ctx + 0xc))(*(uint *)(iVar5 + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + ctx))
                   (uVar2,*(undefined4 *)(iVar5 + 0x1c),*(int *)(iVar5 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar5 + 0x1c));
+        (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar5 + 0x1c));
         *(undefined4 *)(iVar5 + 0x1c) = uVar2;
-        iVar6 = *(int *)(iVar5 + 0x18);
+        instCount = *(int *)(iVar5 + 0x18);
         *(int *)(iVar5 + 0x20) = *(int *)(iVar5 + 0x20) + 0x10;
       }
     }
@@ -1206,55 +1224,55 @@ int extvsEmitFogOutput(param_1, param_2, param_3)
     local_94 = 0;
     local_90 = 0;
     local_a8 = 3;
-    iVar5 = iVar6 * 0x10 + *(int *)(iVar5 + 0x1c);
+    iVar5 = instCount * 0x10 + *(int *)(iVar5 + 0x1c);
     local_a0 = 1;
-    piVar4 = param_2 + 7;
-    extvsEncodeSourceOperand(param_1,param_2,&local_a8,iVar5,2,0,0);
+    symbolList = shader + 7;
+    extvsEncodeSourceOperand(ctx,shader,&local_a8,iVar5,2,0,0);
     local_8c = 3;
     local_74 = 0;
     local_78 = 0x87d5;
     local_84 = 0x87d5;
     local_80 = 0x87d5;
     local_7c = 0x87d5;
-    extvsEncodeSourceSwizzle(param_2,piVar4,&local_8c,iVar5 + 4,0);
-    extvsEncodeSourceSwizzle(param_2,piVar4,&local_8c,iVar5 + 8,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,&local_8c,iVar5 + 4,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,&local_8c,iVar5 + 8,0);
     *(undefined4 *)(iVar5 + 0xc) = *(undefined4 *)(iVar5 + 8);
-    extvsEncodeSourceOperand(param_1,param_2,&local_a8,iVar5 + 0x10,2,0,0);
-    extvsEncodeSourceSwizzle(param_2,piVar4,&local_8c,iVar5 + 0x14,0);
+    extvsEncodeSourceOperand(ctx,shader,&local_a8,iVar5 + 0x10,2,0,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,&local_8c,iVar5 + 0x14,0);
     local_58 = 0;
     local_70 = 4;
     local_5c = 0x87d7;
     local_68 = 0x87d7;
     local_64 = 0x87d7;
     local_60 = 0x87d7;
-    extvsEncodeSourceSwizzle(param_2,piVar4,&local_70,iVar5 + 0x18,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,&local_70,iVar5 + 0x18,0);
     *(undefined4 *)(iVar5 + 0x1c) = *(undefined4 *)(iVar5 + 0x18);
     local_a8 = 1;
     local_a4 = 0x87bd;
     local_a0 = 0;
     local_9c = 0;
     local_98 = 0;
-    local_94 = (uint)*(byte *)(iVar3 + 0x42);
+    local_94 = (uint)*(byte *)(hwProgram + 0x42);
     local_90 = 0;
-    extvsEncodeSourceOperand(param_1,param_2,&local_a8,iVar5 + 0x20,3,1,0);
-    extvsEncodeSourceSwizzle(param_2,piVar4,&local_8c,iVar5 + 0x24,0);
+    extvsEncodeSourceOperand(ctx,shader,&local_a8,iVar5 + 0x20,3,1,0);
+    extvsEncodeSourceSwizzle(shader,symbolList,&local_8c,iVar5 + 0x24,0);
     uVar2 = 3;
     *(undefined4 *)(iVar5 + 0x2c) = *(undefined4 *)(iVar5 + 0x24);
     *(undefined4 *)(iVar5 + 0x28) = *(undefined4 *)(iVar5 + 0x24);
   }
   else if (sVar1 == 0x2601) {
-    iVar5 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-    iVar6 = *(int *)(iVar5 + 0x18);
-    if (0x100 < iVar6 + 1U) {
-      *(undefined1 *)(param_2 + 4) = 0;
-      iVar6 = *(int *)(iVar5 + 0x18);
-      if (*(uint *)(iVar5 + 0x20) < iVar6 + 1U) {
-        uVar2 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar5 + 0x20) * 0x10 + 0x100);
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
+    iVar5 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+    instCount = *(int *)(iVar5 + 0x18);
+    if (0x100 < instCount + 1U) {
+      *(undefined1 *)(shader + 4) = 0;
+      instCount = *(int *)(iVar5 + 0x18);
+      if (*(uint *)(iVar5 + 0x20) < instCount + 1U) {
+        uVar2 = (**(code **)(ctx + 0xc))(*(uint *)(iVar5 + 0x20) * 0x10 + 0x100);
+        (**(code **)(((unsigned char *)0x00001344) + ctx))
                   (uVar2,*(undefined4 *)(iVar5 + 0x1c),*(int *)(iVar5 + 0x20) << 4);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar5 + 0x1c));
+        (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar5 + 0x1c));
         *(undefined4 *)(iVar5 + 0x1c) = uVar2;
-        iVar6 = *(int *)(iVar5 + 0x18);
+        instCount = *(int *)(iVar5 + 0x18);
         *(int *)(iVar5 + 0x20) = *(int *)(iVar5 + 0x20) + 0x10;
       }
     }
@@ -1263,42 +1281,42 @@ int extvsEmitFogOutput(param_1, param_2, param_3)
     local_a8 = 1;
     local_98 = 0;
     local_a4 = 0x87bd;
-    iVar5 = iVar6 * 0x10 + *(int *)(iVar5 + 0x1c);
-    local_94 = (uint)*(byte *)(iVar3 + 0x42);
+    iVar5 = instCount * 0x10 + *(int *)(iVar5 + 0x1c);
+    local_94 = (uint)*(byte *)(hwProgram + 0x42);
     local_90 = 0;
-    extvsEncodeSourceOperand(param_1,param_2,&local_a8,iVar5,1,0,0);
+    extvsEncodeSourceOperand(ctx,shader,&local_a8,iVar5,1,0,0);
     local_84 = 0x87dd;
     local_78 = 0x87dd;
     local_74 = 0;
     local_80 = 0x87de;
     local_8c = 3;
     local_7c = 0x87d5;
-    extvsEncodeSourceSwizzle(param_2,param_2 + 7,&local_8c,iVar5 + 4,0);
+    extvsEncodeSourceSwizzle(shader,shader + 7,&local_8c,iVar5 + 4,0);
     local_5c = 0x87dd;
     local_58 = 0;
     local_68 = 0x87dd;
     local_64 = 0x87d6;
     local_60 = 0x87d7;
     local_70 = 4;
-    extvsEncodeSourceSwizzle(param_2,param_2 + 7,&local_70,iVar5 + 8,0);
+    extvsEncodeSourceSwizzle(shader,shader + 7,&local_70,iVar5 + 8,0);
     uVar2 = 1;
     *(undefined4 *)(iVar5 + 0xc) = *(undefined4 *)(iVar5 + 8);
   }
   else {
     uVar2 = 0;
     if (sVar1 == 0x800) {
-      iVar5 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-      iVar6 = *(int *)(iVar5 + 0x18);
-      if (0x100 < iVar6 + 2U) {
-        *(undefined1 *)(param_2 + 4) = 0;
-        iVar6 = *(int *)(iVar5 + 0x18);
-        if (*(uint *)(iVar5 + 0x20) < iVar6 + 2U) {
-          uVar2 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar5 + 0x20) * 0x10 + 0x100);
-          (**(code **)(((unsigned char *)0x00001344) + param_1))
+      iVar5 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+      instCount = *(int *)(iVar5 + 0x18);
+      if (0x100 < instCount + 2U) {
+        *(undefined1 *)(shader + 4) = 0;
+        instCount = *(int *)(iVar5 + 0x18);
+        if (*(uint *)(iVar5 + 0x20) < instCount + 2U) {
+          uVar2 = (**(code **)(ctx + 0xc))(*(uint *)(iVar5 + 0x20) * 0x10 + 0x100);
+          (**(code **)(((unsigned char *)0x00001344) + ctx))
                     (uVar2,*(undefined4 *)(iVar5 + 0x1c),*(int *)(iVar5 + 0x20) << 4);
-          (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar5 + 0x1c));
+          (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar5 + 0x1c));
           *(undefined4 *)(iVar5 + 0x1c) = uVar2;
-          iVar6 = *(int *)(iVar5 + 0x18);
+          instCount = *(int *)(iVar5 + 0x18);
           *(int *)(iVar5 + 0x20) = *(int *)(iVar5 + 0x20) + 0x10;
         }
       }
@@ -1307,34 +1325,34 @@ int extvsEmitFogOutput(param_1, param_2, param_3)
       local_94 = 0;
       local_90 = 0;
       local_a8 = 3;
-      iVar5 = iVar6 * 0x10 + *(int *)(iVar5 + 0x1c);
+      iVar5 = instCount * 0x10 + *(int *)(iVar5 + 0x1c);
       local_a0 = 1;
-      piVar4 = param_2 + 7;
-      extvsEncodeSourceOperand(param_1,param_2,&local_a8,iVar5,2,0,0);
+      symbolList = shader + 7;
+      extvsEncodeSourceOperand(ctx,shader,&local_a8,iVar5,2,0,0);
       local_8c = 3;
       local_74 = 0;
       local_78 = 0x87d5;
       local_84 = 0x87d5;
       local_80 = 0x87d5;
       local_7c = 0x87d5;
-      extvsEncodeSourceSwizzle(param_2,piVar4,&local_8c,iVar5 + 4,0);
+      extvsEncodeSourceSwizzle(shader,symbolList,&local_8c,iVar5 + 4,0);
       local_58 = 0;
       local_70 = 4;
       local_5c = 0x87d7;
       local_68 = 0x87d7;
       local_64 = 0x87d7;
       local_60 = 0x87d7;
-      extvsEncodeSourceSwizzle(param_2,piVar4,&local_70,iVar5 + 8,0);
+      extvsEncodeSourceSwizzle(shader,symbolList,&local_70,iVar5 + 8,0);
       *(undefined4 *)(iVar5 + 0xc) = *(undefined4 *)(iVar5 + 8);
       local_a8 = 1;
       local_a4 = 0x87bd;
       local_a0 = 0;
       local_9c = 0;
       local_98 = 0;
-      local_94 = (uint)*(byte *)(iVar3 + 0x42);
+      local_94 = (uint)*(byte *)(hwProgram + 0x42);
       local_90 = 0;
-      extvsEncodeSourceOperand(param_1,param_2,&local_a8,iVar5 + 0x10,3,1,0);
-      extvsEncodeSourceSwizzle(param_2,piVar4,&local_8c,iVar5 + 0x14,0);
+      extvsEncodeSourceOperand(ctx,shader,&local_a8,iVar5 + 0x10,3,1,0);
+      extvsEncodeSourceSwizzle(shader,symbolList,&local_8c,iVar5 + 0x14,0);
       uVar2 = 2;
       *(undefined4 *)(iVar5 + 0x1c) = *(undefined4 *)(iVar5 + 0x14);
       *(undefined4 *)(iVar5 + 0x18) = *(undefined4 *)(iVar5 + 0x14);

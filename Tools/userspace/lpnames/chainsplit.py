@@ -35,7 +35,7 @@ for k, ls in enumerate(ws):
         if x <= brace: continue
         m = DEF.search(body[x])
         if m:
-            rhs = m.group(1)
+            rhs = m.group(1).rstrip().rstrip(';').strip()
             hit = [n for n, rx, ev in roles if rx.search(rhs)]
             if not hit:
                 print('web %d line %d: definition matches no role: %s' % (k, first + x, body[x].strip()[:90])); ok = False; continue
