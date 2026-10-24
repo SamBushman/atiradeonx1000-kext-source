@@ -694,11 +694,11 @@ int IfHeader__ctor_ea6d0(this, param_2, param_3, param_4, compiler)
 }
 
 /* PostLoopFooter__ctor_ea828 @ 0xea828 (580 bytes) */
-int PostLoopFooter__ctor_ea828(this, param_2, param_3, param_4, compiler)
+int PostLoopFooter__ctor_ea828(this, param_2, enclosingLoopHeader, argR6, compiler)
   undefined4 *this;
   undefined4 param_2;
-  undefined4 param_3;
-  int param_4;
+  undefined4 enclosingLoopHeader;
+  int argR6;
   int compiler;
 {
   undefined4 *allocation;
@@ -711,12 +711,12 @@ int PostLoopFooter__ctor_ea828(this, param_2, param_3, param_4, compiler)
   ((int (*)())Block__ctor_ea148)(this,compiler);
   this[0x50] = 0;
   *this = &PTR_FUN_001e9bb8;
-  this[0x53] = param_3;
+  this[0x53] = enclosingLoopHeader;
   this[0x4b] = 0;
   this[0x4d] = 0;
   this[0x4e] = 0;
   this[0x4f] = 0;
-  this[0x51] = param_4;
+  this[0x51] = argR6;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x134);
   *allocation = arena;
@@ -733,7 +733,7 @@ int PostLoopFooter__ctor_ea828(this, param_2, param_3, param_4, compiler)
   *puVar6 = &PTR_FUN_001e9c68;
   this[0x55] = puVar6;
   Block__connect(this[0x54],this);
-  if (param_4 == 0) {
+  if (argR6 == 0) {
     arena = IRInst__create(0x81,compiler);
     this[0x52] = arena;
     iVar2 = IRInst__getOperandRecord(arena,0);

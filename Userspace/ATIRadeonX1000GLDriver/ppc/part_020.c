@@ -391,9 +391,9 @@ int ildisPrintZeroOp(disassembler, zeroOpWord, passThroughR5, fmtArgR6, fmtArgR7
 }
 
 /* ildisPrintOutputTopology @ 0xdc658 (196 bytes) */
-int ildisPrintOutputTopology(disassembler, param_2, fmtArgR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+int ildisPrintOutputTopology(disassembler, instructionToken, fmtArgR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
   undefined4 disassembler;
-  uint param_2;
+  uint instructionToken;
   undefined4 fmtArgR5;
   undefined4 fmtArgR6;
   undefined4 fmtArgR7;
@@ -407,7 +407,7 @@ int ildisPrintOutputTopology(disassembler, param_2, fmtArgR5, fmtArgR6, fmtArgR7
   char local_30 [4];
   char local_2c [40];
   
-  uVar1 = param_2 >> 0x10 & 0x3fff;
+  uVar1 = instructionToken >> 0x10 & 0x3fff;
   if (uVar1 == 1) {
     fmtArgR9 = "_line_strip";
     *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_strip_001a82c4) + 0));
@@ -432,9 +432,9 @@ int ildisPrintOutputTopology(disassembler, param_2, fmtArgR5, fmtArgR6, fmtArgR7
 }
 
 /* ildisPrintInputPrimitive @ 0xdc71c (268 bytes) */
-int ildisPrintInputPrimitive(disassembler, param_2, fmtArgR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+int ildisPrintInputPrimitive(disassembler, instructionToken, fmtArgR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
   undefined4 disassembler;
-  uint param_2;
+  uint instructionToken;
   undefined4 fmtArgR5;
   undefined4 fmtArgR6;
   undefined4 fmtArgR7;
@@ -448,7 +448,7 @@ int ildisPrintInputPrimitive(disassembler, param_2, fmtArgR5, fmtArgR6, fmtArgR7
   char local_30 [4];
   char local_2c [40];
   
-  switch(param_2 >> 0x10 & 0x3fff) {
+  switch(instructionToken >> 0x10 & 0x3fff) {
   case 0:
     fmtArgR9 = "_point";
     *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_001a82e0) + 0));

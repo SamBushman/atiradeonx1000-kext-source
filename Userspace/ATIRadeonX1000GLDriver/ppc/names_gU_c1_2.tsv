@@ -1,0 +1,8 @@
+local	FUN_000e4c40	param_1	ilReader	INFERRED	every one of the 1 call site(s) passes a value its caller names ilReader
+local	FUN_000e547c	param_1	ilReader	INFERRED	every one of the 5 call site(s) passes a value its caller names ilReader
+local	FUN_000e5384	param_1	ilReader	INFERRED	every one of the 3 call site(s) passes a value its caller names ilReader
+local	FUN_000e4450	param_1	ilReader	INFERRED	every one of the 2 call site(s) passes a value its caller names ilReader
+local	FUN_000e4724	param_1	ilReader	INFERRED	every one of the 2 call site(s) passes a value its caller names ilReader
+local	FUN_000e44c4	param_1	ilReader	INFERRED	every one of the 2 call site(s) passes a value its caller names ilReader
+local	FUN_000e4410	param_1	ilReader	INFERRED	every one of the 2 call site(s) passes a value its caller names ilReader
+local	FUN_000fafa4	param_1	program	INFERRED	every one of the 4 call site(s) passes a value its caller names program

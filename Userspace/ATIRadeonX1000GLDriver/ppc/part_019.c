@@ -1,10 +1,10 @@
 #include "decls.h"
 
 /* scDumpPixelProgramPsn @ 0xd4e08 (92 bytes) */
-int scDumpPixelProgramPsn(sinkRecord, shaderState, param_3, argR6, argR7, argR8, param_7, argR10)
+int scDumpPixelProgramPsn(sinkRecord, shaderState, optionsArg, argR6, argR7, argR8, param_7, argR10)
   undefined4 *sinkRecord;
   int shaderState;
-  undefined4 param_3;
+  undefined4 optionsArg;
   undefined4 argR6;
   undefined4 argR7;
   undefined4 argR8;
