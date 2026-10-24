@@ -19,6 +19,7 @@ ROLES = [
  ('src0Operand', r'^param_3 \+ 0x20$', 'instRecord + 0x20: first source operand of the instruction record'),
  ('src1Operand', r'^\(undefined4 \*\)\(param_3 \+ 0x3c\)$|^param_3 \+ 0x3c$', 'instRecord + 0x3c: second source operand of the instruction record'),
  ('src2Operand', r'^param_3 \+ 0x58$', 'instRecord + 0x58: third source operand of the instruction record'),
+ ('dstOperand', r'^param_3 \+ 4$', 'instRecord + 4: destination operand of the instruction record'),
  ('symbolList', r'^param_2 \+ 7$', 'shader + 7 words (shader[7]): the shader symbol list'),
 ]
 rf = tempfile.NamedTemporaryFile('w', suffix='.tsv', delete=False)
@@ -46,7 +47,9 @@ for fn in sys.argv[3:]:
         role = c[3]; var = c[2]
         if role in seen and seen[role] != var: left.append(var + '(dup role ' + role + ')'); continue
         seen[role] = var; keep.append(row)
-    base = ['local\t%s\tparam_1\tctx\tINFERRED\tfirst argument of the extvs* instruction emitters: the GL context (+0x118c indexes the shader table, +0xc/+0x18 allocator callbacks)' % fn,
+    cur = open(d + '/part_006.c', errors='replace').read() + open(d + '/part_007.c', errors='replace').read() + open(d + '/part_008.c', errors='replace').read() + open(d + '/part_009.c', errors='replace').read()
+    hdr = re.search(r'/\* %s @ 0x[0-9a-f]+ \(\d+ bytes\) \*/\nint %s\(([^)]*)\)' % (fn, fn), cur)
+    base = [] if (hdr and 'param_1' not in hdr.group(1)) else ['local\t%s\tparam_1\tctx\tINFERRED\tfirst argument of the extvs* instruction emitters: the GL context (+0x118c indexes the shader table, +0xc/+0x18 allocator callbacks)' % fn,
             'local\t%s\tparam_2\tshader\tINFERRED\tEXT_vertex_shader object: *shader is the program table, shader[7] the symbol list' % fn,
             'local\t%s\tparam_3\tinstRecord\tINFERRED\tEXT_vertex_shader IL instruction record: destination operand at +4, source operands at +0x20/+0x3c/+0x58' % fn]
     open(out, 'a').write('\n'.join(base + keep) + '\n')

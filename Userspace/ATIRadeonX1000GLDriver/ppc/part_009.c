@@ -791,7 +791,7 @@ int extvsEmitOp879c(ctx, shader, instRecord)
   undefined4 uVar2;
   int iVar3;
   int hwProgram;
-  int iVar5;
+  int dstOperand;
   
   hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
   iVar3 = *(int *)(hwProgram + 0x18);
@@ -808,16 +808,16 @@ int extvsEmitOp879c(ctx, shader, instRecord)
       *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
     }
   }
-  iVar5 = instRecord + 4;
+  dstOperand = instRecord + 4;
   instSlot = iVar3 * 0x10 + *(int *)(hwProgram + 0x1c);
-  extvsOperandDataTypeResult = extvsOperandDataType(shader + 7,iVar5);
+  extvsOperandDataTypeResult = extvsOperandDataType(shader + 7,dstOperand);
   if (*(uint *)(instRecord + 0x40) < 4) {
     if (extvsOperandDataTypeResult == 0x87bf) {
-      extvsEncodeSourceOperand(ctx,shader,iVar5,instSlot,3,0,0);
+      extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot,3,0,0);
     }
     else {
       if (extvsOperandDataTypeResult != 0x87c0) goto LAB_0005d600;
-      extvsEncodeSourceOperand(ctx,shader,iVar5,instSlot,3,0,*(uint *)(instRecord + 0x40));
+      extvsEncodeSourceOperand(ctx,shader,dstOperand,instSlot,3,0,*(uint *)(instRecord + 0x40));
     }
     extvsEncodeSourceSwizzle(shader,shader + 7,instRecord + 0x20,instSlot + 4,0);
     uVar2 = 1;

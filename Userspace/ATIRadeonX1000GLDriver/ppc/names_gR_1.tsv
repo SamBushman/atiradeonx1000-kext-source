@@ -1182,3 +1182,137 @@ use	extvsEmitFogOutput	iVar6	instCount	INFERRED	hwProgram +0x18: number of hardw
 use	extvsEmitFogOutput	iVar6	instCount	INFERRED	hwProgram +0x18: number of hardware instruction slots used	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x18\);$@8	+2
 use	extvsEmitFogOutput	iVar6	instCount	INFERRED	hwProgram +0x18: number of hardware instruction slots used	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x18\);$@9	+1
 use	extvsEmitFogOutput	iVar6	instCount	INFERRED	hwProgram +0x18: number of hardware instruction slots used	^\s*iVar5\ =\ iVar6\ \*\ 0x10\ \+\ \*\(int\ \*\)\(iVar5\ \+\ 0x1c\);$@3	+1
+use	extvsEmitIndex	iVar4	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*iVar4\ =\ param_3\ \+\ 4;$	+2
+use	extvsEmitIndex	iVar4	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*\(\(int\ \(\*\)\(\)\)FUN_00056f20\)\(param_1,param_2,iVar4,iVar3\ \+\ 0x10,3,0,0\);$	+1
+use	extvsEmitIndex	iVar4	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*\(\(int\ \(\*\)\(\)\)FUN_00056f20\)\(param_1,param_2,iVar4,iVar6\ \+\ 0x30,3,0,0\);$	+1
+use	extvsEmitIndex	iVar4	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*\(\(int\ \(\*\)\(\)\)FUN_00056f20\)\(param_1,param_2,iVar4,iVar6\ \+\ 0x40,3,0,1\);$	+1
+use	extvsEmitIndex	iVar4	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*\(\(int\ \(\*\)\(\)\)FUN_00056f20\)\(param_1,param_2,iVar4,iVar6\ \+\ 0x50,3,0,2\);$	+1
+use	extvsEmitIndex	iVar4	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*\(\(int\ \(\*\)\(\)\)FUN_00056f20\)\(param_1,param_2,iVar4,iVar6\ \+\ 0x60,3,0,3\);$	+1
+use	extvsEmitDot3	iVar5	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*iVar5\ =\ param_3\ \+\ 4;$	+1
+use	extvsEmitDot3	iVar5	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*\(\(int\ \(\*\)\(\)\)FUN_000550e0\)\(piVar8,iVar5\);$	+1
+use	extvsEmitDot3	iVar5	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*\(\(int\ \(\*\)\(\)\)FUN_00056f20\)\(param_1,param_2,iVar5,iVar2,1,0,0\);$	+1
+use	extvsEmitDot3	iVar5	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*\(\(int\ \(\*\)\(\)\)FUN_00056f20\)\(param_1,param_2,iVar5,iVar2\ \+\ 0x10,1,0,0\);$	+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+use	extvsEmitOp879c	iVar5	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*iVar5\ =\ param_3\ \+\ 4;$	+1
+use	extvsEmitOp879c	iVar5	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*iVar3\ =\ FUN_000550e0\(param_2\ \+\ 7,iVar5\);$	+1
+use	extvsEmitOp879c	iVar5	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*FUN_00056f20\(param_1,param_2,iVar5,iVar4,3,0,0\);$	+1
+use	extvsEmitOp879c	iVar5	dstOperand	INFERRED	instRecord + 4: destination operand of the instruction record	^\s*FUN_00056f20\(param_1,param_2,iVar5,iVar4,3,0,\*\(uint\ \*\)\(param_3\ \+\ 0x40\)\);$	+1
+
+
+
+
+
+
+
+
+local	extvsEmitIndex	uStack_98	tmpOperand0Kind	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 0
+local	extvsEmitIndex	uStack_94	tmpOperand0Index	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 1
+local	extvsEmitIndex	uStack_90	tmpOperand0Comp0	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 2
+local	extvsEmitIndex	uStack_8c	tmpOperand0Comp1	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 3
+local	extvsEmitIndex	uStack_88	tmpOperand0Comp2	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 4
+local	extvsEmitIndex	uStack_84	tmpOperand0Comp3	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 5
+local	extvsEmitIndex	uStack_80	tmpOperand0Flag	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 6
+local	extvsEmitIndex	uStack_7c	tmpOperand1Kind	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 0
+local	extvsEmitIndex	uStack_78	tmpOperand1Index	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 1
+local	extvsEmitIndex	uStack_74	tmpOperand1Comp0	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 2
+local	extvsEmitIndex	uStack_70	tmpOperand1Comp1	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 3
+local	extvsEmitIndex	uStack_6c	tmpOperand1Comp2	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 4
+local	extvsEmitIndex	uStack_68	tmpOperand1Comp3	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 5
+local	extvsEmitIndex	uStack_64	tmpOperand1Flag	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 6
+local	extvsEmitDot3	uStack_78	tmpOperand0Kind	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 0
+local	extvsEmitDot3	uStack_74	tmpOperand0Index	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 1
+local	extvsEmitDot3	uStack_70	tmpOperand0Comp0	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 2
+local	extvsEmitDot3	uStack_6c	tmpOperand0Comp1	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 3
+local	extvsEmitDot3	uStack_68	tmpOperand0Comp2	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 4
+local	extvsEmitDot3	uStack_64	tmpOperand0Comp3	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 5
+local	extvsEmitDot3	uStack_60	tmpOperand0Flag	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 6
+local	extvsEmitDot3	uStack_5c	tmpOperand1Kind	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 0
+local	extvsEmitDot3	uStack_58	tmpOperand1Index	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 1
+local	extvsEmitDot3	uStack_54	tmpOperand1Comp0	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 2
+local	extvsEmitDot3	uStack_50	tmpOperand1Comp1	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 3
+local	extvsEmitDot3	uStack_4c	tmpOperand1Comp2	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 4
+local	extvsEmitDot3	uStack_48	tmpOperand1Comp3	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 5
+local	extvsEmitDot3	uStack_44	tmpOperand1Flag	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 6
+local	extvsEmitMax	local_78	tmpOperand0Kind	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 0
+local	extvsEmitMax	local_74	tmpOperand0Index	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 1
+local	extvsEmitMax	local_70	tmpOperand0Comp0	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 2
+local	extvsEmitMax	local_6c	tmpOperand0Comp1	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 3
+local	extvsEmitMax	local_68	tmpOperand0Comp2	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 4
+local	extvsEmitMax	local_64	tmpOperand0Comp3	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 5
+local	extvsEmitMax	local_60	tmpOperand0Flag	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 6
+local	extvsEmitMax	local_5c	tmpOperand1Kind	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 0
+local	extvsEmitMax	local_58	tmpOperand1Index	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 1
+local	extvsEmitMax	local_54	tmpOperand1Comp0	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 2
+local	extvsEmitMax	local_50	tmpOperand1Comp1	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 3
+local	extvsEmitMax	local_4c	tmpOperand1Comp2	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 4
+local	extvsEmitMax	local_48	tmpOperand1Comp3	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 5
+local	extvsEmitMax	local_44	tmpOperand1Flag	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 6
+local	extvsEmitClamp	uStack_88	tmpOperand0Kind	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 0
+local	extvsEmitClamp	uStack_84	tmpOperand0Index	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 1
+local	extvsEmitClamp	uStack_80	tmpOperand0Comp0	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 2
+local	extvsEmitClamp	uStack_7c	tmpOperand0Comp1	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 3
+local	extvsEmitClamp	uStack_78	tmpOperand0Comp2	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 4
+local	extvsEmitClamp	uStack_74	tmpOperand0Comp3	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 5
+local	extvsEmitClamp	uStack_70	tmpOperand0Flag	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 6
+local	extvsEmitClamp	uStack_6c	tmpOperand1Kind	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 0
+local	extvsEmitClamp	uStack_68	tmpOperand1Index	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 1
+local	extvsEmitClamp	uStack_64	tmpOperand1Comp0	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 2
+local	extvsEmitClamp	uStack_60	tmpOperand1Comp1	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 3
+local	extvsEmitClamp	uStack_5c	tmpOperand1Comp2	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 4
+local	extvsEmitClamp	uStack_58	tmpOperand1Comp3	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 5
+local	extvsEmitClamp	uStack_54	tmpOperand1Flag	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 6
+local	extvsEmitFlr	uStack_78	tmpOperand0Kind	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 0
+local	extvsEmitFlr	uStack_74	tmpOperand0Index	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 1
+local	extvsEmitFlr	uStack_70	tmpOperand0Comp0	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 2
+local	extvsEmitFlr	uStack_6c	tmpOperand0Comp1	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 3
+local	extvsEmitFlr	uStack_68	tmpOperand0Comp2	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 4
+local	extvsEmitFlr	uStack_64	tmpOperand0Comp3	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 5
+local	extvsEmitFlr	uStack_60	tmpOperand0Flag	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 6
+local	extvsEmitFlr	uStack_5c	tmpOperand1Kind	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 0
+local	extvsEmitFlr	uStack_58	tmpOperand1Index	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 1
+local	extvsEmitFlr	uStack_54	tmpOperand1Comp0	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 2
+local	extvsEmitFlr	uStack_50	tmpOperand1Comp1	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 3
+local	extvsEmitFlr	uStack_4c	tmpOperand1Comp2	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 4
+local	extvsEmitFlr	uStack_48	tmpOperand1Comp3	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 5
+local	extvsEmitFlr	uStack_44	tmpOperand1Flag	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 6
+local	extvsEmitRnd	local_98	tmpOperand0Kind	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 0
+local	extvsEmitRnd	local_94	tmpOperand0Index	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 1
+local	extvsEmitRnd	local_90	tmpOperand0Comp0	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 2
+local	extvsEmitRnd	local_8c	tmpOperand0Comp1	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 3
+local	extvsEmitRnd	local_88	tmpOperand0Comp2	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 4
+local	extvsEmitRnd	local_84	tmpOperand0Comp3	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 5
+local	extvsEmitRnd	local_80	tmpOperand0Flag	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 6
+local	extvsEmitRnd	local_7c	tmpOperand1Kind	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 0
+local	extvsEmitRnd	local_78	tmpOperand1Index	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 1
+local	extvsEmitRnd	local_74	tmpOperand1Comp0	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 2
+local	extvsEmitRnd	local_70	tmpOperand1Comp1	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 3
+local	extvsEmitRnd	local_6c	tmpOperand1Comp2	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 4
+local	extvsEmitRnd	local_68	tmpOperand1Comp3	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 5
+local	extvsEmitRnd	local_64	tmpOperand1Flag	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 6
+local	extvsEmitPow	local_78	tmpOperand0Kind	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 0
+local	extvsEmitPow	local_74	tmpOperand0Index	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 1
+local	extvsEmitPow	local_70	tmpOperand0Comp0	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 2
+local	extvsEmitPow	local_6c	tmpOperand0Comp1	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 3
+local	extvsEmitPow	local_68	tmpOperand0Comp2	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 4
+local	extvsEmitPow	local_64	tmpOperand0Comp3	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 5
+local	extvsEmitPow	local_60	tmpOperand0Flag	INFERRED	stack copy 0 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 6
+local	extvsEmitPow	local_5c	tmpOperand1Kind	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 0
+local	extvsEmitPow	local_58	tmpOperand1Index	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 1
+local	extvsEmitPow	local_54	tmpOperand1Comp0	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 2
+local	extvsEmitPow	local_50	tmpOperand1Comp1	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 3
+local	extvsEmitPow	local_4c	tmpOperand1Comp2	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 4
+local	extvsEmitPow	local_48	tmpOperand1Comp3	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 5
+local	extvsEmitPow	local_44	tmpOperand1Flag	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 6
+
