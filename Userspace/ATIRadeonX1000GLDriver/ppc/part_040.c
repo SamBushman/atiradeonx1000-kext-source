@@ -34,36 +34,36 @@ int LoopInfo__setCounterPhi(loopInfo, inst)
 }
 
 /* FUN_0012b3f8 @ 0x12b3f8 (272 bytes) */
-int FUN_0012b3f8(param_1, param_2, compiler)
+int FUN_0012b3f8(param_1, inst, compiler)
   int param_1;
-  int param_2;
+  int inst;
   uint compiler;
 {
   uint uVar1;
   
   switch(*(undefined4 *)(param_1 + 300)) {
   case 0:
-    IROperand__setModifierBits(param_2 + 0xa4,2,1);
-    uVar1 = *(uint *)(param_2 + 0xb8);
+    IROperand__setModifierBits(inst + 0xa4,2,1);
+    uVar1 = *(uint *)(inst + 0xb8);
     goto LAB_0012b4b0;
   case 1:
-    IROperand__setModifierBits(param_2 + 0xa4,2,1);
-    IROperand__setModifierBits(param_2 + 0xa4,1,*(uint *)(param_2 + 0xb8) & 1 ^ 1);
+    IROperand__setModifierBits(inst + 0xa4,2,1);
+    IROperand__setModifierBits(inst + 0xa4,1,*(uint *)(inst + 0xb8) & 1 ^ 1);
     break;
   case 2:
-    IROperand__setModifierBits(param_2 + 0xa4,1,*(uint *)(param_2 + 0xb8) & 1 ^ 1);
+    IROperand__setModifierBits(inst + 0xa4,1,*(uint *)(inst + 0xb8) & 1 ^ 1);
     break;
   default:
     return;
   case 4:
     break;
   case 5:
-    uVar1 = *(uint *)(param_2 + 0xb8);
+    uVar1 = *(uint *)(inst + 0xb8);
 LAB_0012b4b0:
-    IROperand__setModifierBits(param_2 + 0xa4,1,uVar1 & 1 ^ 1);
+    IROperand__setModifierBits(inst + 0xa4,1,uVar1 & 1 ^ 1);
     return;
   }
-  IRInst__swapOperands(param_2,2,3,compiler);
+  IRInst__swapOperands(inst,2,3,compiler);
   return;
 }
 
