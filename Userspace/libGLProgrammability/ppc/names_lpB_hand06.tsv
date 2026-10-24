@@ -9,7 +9,6 @@ local	_MacroExpand	in_r5	scratchR5	INFERRED	register r5: a dead vararg of the sc
 use	_MacroExpand	bVar3	argHasTokens	INFERRED	current macro argument has received at least one token	^\s*bVar3\ =\ false;@1	^\s*if\ \(-1\ <\ iVar12\)\ \{	all	none
 use	_MacroExpand	bVar3	prevWasCloseParen	INFERRED	previous skipped token was ')' (extra-argument skipping)	*		all	none
 use	_MacroExpand	uVar7	scanFunc	INFERRED	DAT_a7b7b008: the macro input's scan function stored in macroInput[1]	^\s*uVar7\ =\ DAT_a7b7b008;	^\s*puVar8\[5\]\ =\ \*\(undefined4	all	none
-use	_MacroExpand	uVar7	lineOrFileNumber	CONFIRMED	_GetLineNumber()/_GetStringNumber() result for __LINE__/__FILE__	*		all	none
 use	_MacroExpand	iVar11	cppState	INFERRED	*cpp: the cpp state whose +0x20 is currentInput	^\s*iVar11\ =\ \*\(int\ \*\)PTR__cpp_a7b7c0a4;	^\s*iVar11\ =\ \(\*\*\(code	all	none
 use	_MacroExpand	iVar11	cppState	INFERRED	*cpp: the cpp state whose +0x20 is currentInput	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\(iVar11\ \+\ 0x20\)\ \+\ 4\)\)$	+2	rhs	none
 use	_MacroExpand	iVar11	token	CONFIRMED	token after the macro name; '(' expected, otherwise ungotten	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\(iVar11\ \+\ 0x20\)\ \+\ 4\)\)$	^\s*uVar7\ =\ _malloc\(\*\(int\ \*\)puVar8\[6\]\ <<\ 2\);	lhs	none

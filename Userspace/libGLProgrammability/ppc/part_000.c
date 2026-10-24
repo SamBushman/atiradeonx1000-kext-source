@@ -1247,17 +1247,19 @@ int _PPParserReturnCharacter(parser, outChar)
 int _PPParserParseStatement(parser)
   int parser;
 {
+  int mnemonic;
+  int partLengthThenLabelStatus;
   int keywordCompare;
   int longShortMode;
   int optionCompare;
-  int partLengthOrStatus;
+  int opcode;
   int ppParserExpandMacroResult;
   int ppParserScopeFindMacroResult;
   int ppParserParseOperationResult;
   int length;
   int compareResult;
   int opcode;
-  int declStatusOrMnemonic;
+  int declStatus;
   int length2;
   undefined4 precision;
   undefined4 updateCC;
@@ -1270,9 +1272,9 @@ int _PPParserParseStatement(parser)
   undefined1 partBuf [256];
   char suffixedName [20];
   
-  partLengthOrStatus = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+  partLengthThenLabelStatus = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
   longShortMode = 0;
-  if (partLengthOrStatus == 0) {
+  if (partLengthThenLabelStatus == 0) {
     return 1;
   }
   if ((*(uint *)(parser + 0x48c) & 0x22) != 0) {
@@ -1285,47 +1287,47 @@ int _PPParserParseStatement(parser)
       if (compareResult != 0) goto LAB_97b7db80;
       longShortMode = 2;
     }
-    partLengthOrStatus = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
-    if (partLengthOrStatus == 0) {
+    partLengthThenLabelStatus = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+    if (partLengthThenLabelStatus == 0) {
       return 1;
     }
   }
 LAB_97b7db80:
   compareResult = _memcmp(partBuf,"TEMP",5);
   if (compareResult == 0) {
-    declStatusOrMnemonic = _PPParserParseTempDeclaration(parser,longShortMode);
+    declStatus = _PPParserParseTempDeclaration(parser,longShortMode);
   }
   else {
     compareResult = _memcmp(partBuf,"OUTPUT",7);
     if (compareResult == 0) {
-      declStatusOrMnemonic = ((int (*)())_PPParserParseOutputDeclaration)(parser,longShortMode);
+      declStatus = ((int (*)())_PPParserParseOutputDeclaration)(parser,longShortMode);
     }
     else {
-      declStatusOrMnemonic = 0x2a;
+      declStatus = 0x2a;
       if (longShortMode == 0) {
         profile = *(uint *)(parser + 0x48c);
         if (((profile & 2) == 0) && (keywordCompare = _memcmp(partBuf,"ADDRESS",8), keywordCompare == 0)) {
-          declStatusOrMnemonic = _PPParserParseAddressDeclaration(parser);
+          declStatus = _PPParserParseAddressDeclaration(parser);
         }
         else {
           keywordCompare = _memcmp(partBuf,"PARAM",6);
           if (keywordCompare == 0) {
-            declStatusOrMnemonic = ((int (*)())_PPParserParseParameterDeclaration)(parser);
+            declStatus = ((int (*)())_PPParserParseParameterDeclaration)(parser);
           }
           else {
             keywordCompare = _memcmp(partBuf,"ATTRIB",7);
             if (keywordCompare == 0) {
-              declStatusOrMnemonic = ((int (*)())_PPParserParseAttributeDeclaration)(parser);
+              declStatus = ((int (*)())_PPParserParseAttributeDeclaration)(parser);
             }
             else {
               keywordCompare = _memcmp(partBuf,"ALIAS",6);
               if (keywordCompare == 0) {
-                declStatusOrMnemonic = _PPParserParseAliasDeclaration(parser);
+                declStatus = _PPParserParseAliasDeclaration(parser);
               }
               else {
                 keywordCompare = _memcmp(partBuf,"MACRO",6);
                 if (keywordCompare == 0) {
-                  declStatusOrMnemonic = _PPParserParseMacroDeclaration(parser);
+                  declStatus = _PPParserParseMacroDeclaration(parser);
                 }
                 else {
                   keywordCompare = _memcmp(partBuf,"BLOCK",6);
@@ -1338,10 +1340,10 @@ LAB_97b7db80:
                     }
                     tableTier = 0;
                     do {
-                      declStatusOrMnemonic = *opsList;
-                      if (declStatusOrMnemonic != 0) {
+                      mnemonic = *opsList;
+                      if (mnemonic != 0) {
                         do {
-                          compareResult = _strcmp(partBuf,declStatusOrMnemonic);
+                          compareResult = _strcmp(partBuf,mnemonic);
                           if (compareResult == 0) {
                             opcode = opsList[1];
                             precision = 0;
@@ -1528,8 +1530,8 @@ LAB_97b7e334:
                           }
 LAB_97b7e11c:
                           opsList = opsList + 2;
-                          declStatusOrMnemonic = *opsList;
-                        } while (declStatusOrMnemonic != 0);
+                          mnemonic = *opsList;
+                        } while (mnemonic != 0);
                         profile = *(uint *)(parser + 0x48c);
                       }
                       if (profile == 0x34) {
@@ -1554,9 +1556,9 @@ LAB_97b7e160:
                           if (profile != 0x36) {
 LAB_97b7e1b4:
                             if (((profile & 0x10) != 0) &&
-                               (partLengthOrStatus = _PPParserParseLabel(parser,partBuf,partLengthOrStatus), partLengthOrStatus != 3))
+                               (partLengthThenLabelStatus = _PPParserParseLabel(parser,partBuf,partLengthThenLabelStatus), partLengthThenLabelStatus != 3))
                             {
-                              return partLengthOrStatus;
+                              return partLengthThenLabelStatus;
                             }
                             ppParserScopeFindMacroResult = ((int (*)())_PPParserScopeFindMacro)(*(undefined4 *)(parser + 0x44c),partBuf);
                             if (ppParserScopeFindMacroResult != 0) {
@@ -1584,7 +1586,7 @@ LAB_97b7e1ac:
                       tableTier = tableTier + 1;
                     } while( true );
                   }
-                  declStatusOrMnemonic = _PPParserParseBlock(parser);
+                  declStatus = _PPParserParseBlock(parser);
                 }
               }
             }
@@ -1593,7 +1595,7 @@ LAB_97b7e1ac:
       }
     }
   }
-  return declStatusOrMnemonic;
+  return declStatus;
 }
 
 /* _PPParserParseParameterDeclaration @ 0x97b7e35c (372 bytes) */
@@ -1972,6 +1974,12 @@ int _PPParserParseParamBinding(parser, isBraceList, bindingCountOut)
   int isBraceList;
   int *bindingCountOut;
 {
+  uint bindingCount;
+  uint rangeIndex;
+  int resultCode;
+  int lightProperty;
+  int materialProperty;
+  int stateClass;
   int arrayResult;
   int part;
   int compareResult2;
@@ -1979,9 +1987,9 @@ int _PPParserParseParamBinding(parser, isBraceList, bindingCountOut)
   int compareResult;
   bool singleBinding;
   bool isFragmentProgram;
-  uint programTypeOrIndex;
+  uint profile;
   char savedChar;
-  int parseResultOrBindingClass;
+  int nextOrdinal;
   undefined4 ppStream;
   int part2;
   undefined4 *constantValues;
@@ -2006,7 +2014,7 @@ int _PPParserParseParamBinding(parser, isBraceList, bindingCountOut)
   uint arrayEnd [4];
   
   singleBinding = isBraceList == 0;
-  programTypeOrIndex = *(uint *)(parser + 0x48c);
+  profile = *(uint *)(parser + 0x48c);
   loopIndex = 0;
   if (!singleBinding) {
     part = ((int (*)())_PPParserGetPart)(parser,partText,0);
@@ -2017,7 +2025,7 @@ int _PPParserParseParamBinding(parser, isBraceList, bindingCountOut)
       return 10;
     }
   }
-  isFragmentProgram = ((programTypeOrIndex ^ 2) >> 1 & 1) == 0;
+  isFragmentProgram = ((profile ^ 2) >> 1 & 1) == 0;
   arrayLastOrdinalLo = 0;
   arrayFirstOrdinal = (uint)*(ushort *)(parser + 0x22);
   do {
@@ -2049,28 +2057,28 @@ int _PPParserParseParamBinding(parser, isBraceList, bindingCountOut)
       if (compareResult == 0) {
         bindingWord = bindingWord & 0xffe0ffff | 0x20000;
         if (singleBinding) {
-          parseResultOrBindingClass = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
+          arrayResult = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
           arrayEnd[0] = arrayStart;
         }
         else {
-          parseResultOrBindingClass = _PPParserParseRangeArray(parser,&arrayStart,arrayEnd);
+          arrayResult = _PPParserParseRangeArray(parser,&arrayStart,arrayEnd);
         }
-        if (parseResultOrBindingClass != 0) {
-          return parseResultOrBindingClass;
+        if (arrayResult != 0) {
+          return arrayResult;
         }
-        programTypeOrIndex = arrayStart;
+        rangeIndex = arrayStart;
         while( true ) {
-          if (*(uint *)(parser + 0x450) <= programTypeOrIndex) {
+          if (*(uint *)(parser + 0x450) <= rangeIndex) {
             return 0x2e;
           }
-          bindingWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingWord) + 0)),(short)programTypeOrIndex);
+          bindingWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingWord) + 0)),(short)rangeIndex);
           ((int (*)())_PPStreamAddParamBinding)(*(undefined4 *)(parser + 0x1c),&bindingWord);
-          if (programTypeOrIndex == arrayEnd[0]) break;
+          if (rangeIndex == arrayEnd[0]) break;
           loopIndex = loopIndex + 1;
-          programTypeOrIndex = programTypeOrIndex + 1;
-          parseResultOrBindingClass = *(int *)(parser + 0x20) + 1;
-          bindingOrdinalWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingOrdinalWord) + 0)),(short)parseResultOrBindingClass);
-          *(int *)(parser + 0x20) = parseResultOrBindingClass;
+          rangeIndex = rangeIndex + 1;
+          nextOrdinal = *(int *)(parser + 0x20) + 1;
+          bindingOrdinalWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingOrdinalWord) + 0)),(short)nextOrdinal);
+          *(int *)(parser + 0x20) = nextOrdinal;
         }
       }
       else {
@@ -2078,28 +2086,28 @@ int _PPParserParseParamBinding(parser, isBraceList, bindingCountOut)
         if (compareResult == 0) {
           bindingWord = bindingWord & 0xffe0ffff | 0x10000;
           if (singleBinding) {
-            parseResultOrBindingClass = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
+            arrayResult = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
             arrayEnd[0] = arrayStart;
           }
           else {
-            parseResultOrBindingClass = _PPParserParseRangeArray(parser,&arrayStart,arrayEnd);
+            arrayResult = _PPParserParseRangeArray(parser,&arrayStart,arrayEnd);
           }
-          if (parseResultOrBindingClass != 0) {
-            return parseResultOrBindingClass;
+          if (arrayResult != 0) {
+            return arrayResult;
           }
-          programTypeOrIndex = arrayStart;
+          rangeIndex = arrayStart;
           while( true ) {
-            if (*(uint *)(parser + 0x454) <= programTypeOrIndex) {
+            if (*(uint *)(parser + 0x454) <= rangeIndex) {
               return 0x2f;
             }
-            bindingWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingWord) + 0)),(short)programTypeOrIndex);
+            bindingWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingWord) + 0)),(short)rangeIndex);
             ((int (*)())_PPStreamAddParamBinding)(*(undefined4 *)(parser + 0x1c),&bindingWord);
-            if (programTypeOrIndex == arrayEnd[0]) break;
+            if (rangeIndex == arrayEnd[0]) break;
             loopIndex = loopIndex + 1;
-            programTypeOrIndex = programTypeOrIndex + 1;
-            parseResultOrBindingClass = *(int *)(parser + 0x20) + 1;
-            bindingOrdinalWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingOrdinalWord) + 0)),(short)parseResultOrBindingClass);
-            *(int *)(parser + 0x20) = parseResultOrBindingClass;
+            rangeIndex = rangeIndex + 1;
+            nextOrdinal = *(int *)(parser + 0x20) + 1;
+            bindingOrdinalWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingOrdinalWord) + 0)),(short)nextOrdinal);
+            *(int *)(parser + 0x20) = nextOrdinal;
           }
         }
       }
@@ -2167,9 +2175,9 @@ LAB_97b7ef9c:
           else {
             compareResult = _memcmp(partText,"diffuse",8);
             if (compareResult == 0) {
-              parseResultOrBindingClass = 1;
+              materialProperty = 1;
 LAB_97b7f0a8:
-              bindingWord = parseResultOrBindingClass << 1 | bindingWord & 0xfffffff1;
+              bindingWord = materialProperty << 1 | bindingWord & 0xfffffff1;
             }
             else {
               compareResult = _memcmp(partText,"specular",9);
@@ -2183,7 +2191,7 @@ LAB_97b7f0a8:
                   if (compareResult != 0) {
                     return 10;
                   }
-                  parseResultOrBindingClass = 4;
+                  materialProperty = 4;
                   goto LAB_97b7f0a8;
                 }
                 bindingWord = bindingWord & 0xfffffff1 | 6;
@@ -2195,9 +2203,9 @@ LAB_97b7f0a8:
           compareResult = _memcmp(partText,"normalscale",0xc);
           if (compareResult == 0) {
             ppStream = *(undefined4 *)(parser + 0x1c);
-            parseResultOrBindingClass = 0x12;
+            stateClass = 0x12;
 LAB_97b7fbb8:
-            bindingWord = parseResultOrBindingClass << 0x10 | bindingWord & 0xffe0ffff;
+            bindingWord = stateClass << 0x10 | bindingWord & 0xffe0ffff;
             goto LAB_97b801d0;
           }
           compareResult = _memcmp(partText,"light",6);
@@ -2270,22 +2278,22 @@ LAB_97b7fbb8:
                         if (compareResult != 0) {
                           return 10;
                         }
-                        parseResultOrBindingClass = 4;
+                        lightProperty = 4;
                       }
                       else {
                         compareResult = _memcmp(partText,"half",5);
                         if (compareResult == 0) {
-                          parseResultOrBindingClass = 6;
+                          lightProperty = 6;
                         }
                         else {
                           compareResult = _memcmp(partText,"spotcutoff",0xb);
                           if (compareResult != 0) {
                             return 10;
                           }
-                          parseResultOrBindingClass = 7;
+                          lightProperty = 7;
                         }
                       }
-                      bindingWord = parseResultOrBindingClass << 8 | bindingWord & 0xfffff0ff;
+                      bindingWord = lightProperty << 8 | bindingWord & 0xfffff0ff;
                     }
                   }
                 }
@@ -2344,7 +2352,7 @@ LAB_97b7f420:
                 bindingWord = bindingWord & 0xffe0fff1 | 0x5000a;
                 goto LAB_97b7fa44;
               }
-              parseResultOrBindingClass = 6;
+              stateClass = 6;
               goto LAB_97b7fa3c;
             }
             compareResult = _memcmp(partText,"lightprod",10);
@@ -2486,16 +2494,16 @@ LAB_97b7fae0:
                 }
                 compareResult = _memcmp(partText,"eye",4);
                 if (compareResult == 0) {
-                  parseResultOrBindingClass = 7;
+                  stateClass = 7;
                 }
                 else {
                   compareResult = _memcmp(partText,"object",7);
                   if (compareResult != 0) {
                     return 10;
                   }
-                  parseResultOrBindingClass = 8;
+                  stateClass = 8;
                 }
-                bindingWord = parseResultOrBindingClass << 0x10 | bindingWord & 0xffe0ffff;
+                bindingWord = stateClass << 0x10 | bindingWord & 0xffe0ffff;
                 part = ((int (*)())_PPParserGetPart)(parser,partText,0);
                 if (part == 0) {
                   return 0x2d;
@@ -2554,14 +2562,14 @@ LAB_97b7f980:
                 }
                 compareResult = _memcmp(partText,"color",6);
                 if (compareResult == 0) {
-                  parseResultOrBindingClass = 0xb;
+                  stateClass = 0xb;
                 }
                 else {
                   compareResult = _memcmp(partText,"params",7);
                   if (compareResult != 0) {
                     return 10;
                   }
-                  parseResultOrBindingClass = 0xc;
+                  stateClass = 0xc;
                 }
               }
               else {
@@ -2704,14 +2712,14 @@ LAB_97b7ffd8:
                         return 10;
                       }
                       if (singleBinding) {
-                        parseResultOrBindingClass = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
+                        arrayResult = ((int (*)())_PPParserParseArray)(parser,&arrayStart);
                         arrayEnd[0] = arrayStart;
                       }
                       else {
-                        parseResultOrBindingClass = _PPParserParseRangeArray(parser,&arrayStart,arrayEnd);
+                        arrayResult = _PPParserParseRangeArray(parser,&arrayStart,arrayEnd);
                       }
-                      if (parseResultOrBindingClass != 0) {
-                        return parseResultOrBindingClass;
+                      if (arrayResult != 0) {
+                        return arrayResult;
                       }
                     }
                     else {
@@ -2726,16 +2734,16 @@ LAB_97b7ffd8:
                     if (3 < (int)arrayEnd[0]) {
                       return 10;
                     }
-                    programTypeOrIndex = arrayStart;
+                    rangeIndex = arrayStart;
                     while( true ) {
-                      bindingWord = (programTypeOrIndex & 3) << 0xc | bindingWord & 0xffffcfff;
+                      bindingWord = (rangeIndex & 3) << 0xc | bindingWord & 0xffffcfff;
                       ((int (*)())_PPStreamAddParamBinding)(*(undefined4 *)(parser + 0x1c),&bindingWord);
-                      if (programTypeOrIndex == arrayEnd[0]) break;
+                      if (rangeIndex == arrayEnd[0]) break;
                       loopIndex = loopIndex + 1;
-                      programTypeOrIndex = programTypeOrIndex + 1;
-                      parseResultOrBindingClass = *(int *)(parser + 0x20) + 1;
-                      bindingOrdinalWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingOrdinalWord) + 0)),(short)parseResultOrBindingClass);
-                      *(int *)(parser + 0x20) = parseResultOrBindingClass;
+                      rangeIndex = rangeIndex + 1;
+                      nextOrdinal = *(int *)(parser + 0x20) + 1;
+                      bindingOrdinalWord = CONCAT22((*(unsigned short *)((unsigned char *)&(bindingOrdinalWord) + 0)),(short)nextOrdinal);
+                      *(int *)(parser + 0x20) = nextOrdinal;
                     }
                     goto LAB_97b801d4;
                   }
@@ -2786,7 +2794,7 @@ LAB_97b7ffd8:
                     return 10;
                   }
                   ppStream = *(undefined4 *)(parser + 0x1c);
-                  parseResultOrBindingClass = 10;
+                  stateClass = 10;
                   goto LAB_97b7fbb8;
                 }
                 compareResult = _memcmp(partText,"point",6);
@@ -2807,18 +2815,18 @@ LAB_97b7ffd8:
                 }
                 compareResult = _memcmp(partText,"size",5);
                 if (compareResult == 0) {
-                  parseResultOrBindingClass = 0xd;
+                  stateClass = 0xd;
                 }
                 else {
                   compareResult = _memcmp(partText,"attenuation",0xc);
                   if (compareResult != 0) {
                     return 10;
                   }
-                  parseResultOrBindingClass = 0xe;
+                  stateClass = 0xe;
                 }
               }
 LAB_97b7fa3c:
-              bindingWord = parseResultOrBindingClass << 0x10 | bindingWord & 0xffe0ffff;
+              bindingWord = stateClass << 0x10 | bindingWord & 0xffe0ffff;
             }
           }
         }
@@ -2876,7 +2884,7 @@ LAB_97b801d4:
       return 0x2d;
     }
   } while (partText[0] == ',');
-  parseResultOrBindingClass = 10;
+  resultCode = 10;
   if (partText[0] == '}') {
 LAB_97b80220:
     if (*bindingCountOut == 0) {
@@ -2885,21 +2893,21 @@ LAB_97b80220:
     else if (*bindingCountOut != loopIndex) {
       return 0x25;
     }
-    programTypeOrIndex = *(uint *)(parser + 0x20);
-    parseResultOrBindingClass = 0x34;
-    if (programTypeOrIndex <= *(uint *)(parser + 0x464)) {
+    bindingCount = *(uint *)(parser + 0x20);
+    resultCode = 0x34;
+    if (bindingCount <= *(uint *)(parser + 0x464)) {
       arrayLastOrdinalLo = CONCAT22(arrayLastOrdinalLo,*(short *)(parser + 0x22) + -1);
       if (1 < loopIndex) {
         _PPStreamAddParamBindingArray(*(undefined4 *)(parser + 0x1c),&arrayFirstOrdinal);
-        programTypeOrIndex = *(uint *)(parser + 0x20);
+        bindingCount = *(uint *)(parser + 0x20);
       }
-      parseResultOrBindingClass = 0x34;
-      if (programTypeOrIndex < 0x101) {
-        parseResultOrBindingClass = 0;
+      resultCode = 0x34;
+      if (bindingCount < 0x101) {
+        resultCode = 0;
       }
     }
   }
-  return parseResultOrBindingClass;
+  return resultCode;
 }
 
 /* _PPParserScopeFindMacro @ 0x97b802b8 (100 bytes) */
@@ -3044,10 +3052,16 @@ int _PPParserParseAttributeDeclaration(parser)
 int _PPParserParseAttributeBinding(parser)
   int parser;
 {
+  int resultCode;
+  int stream;
+  int materialProperty;
+  int bindingClass;
+  int arrayStatus;
+  int keywordCompare;
   uint profile;
   bool isFragmentProgram;
   uint indexLimit;
-  int partLenCmpOrClass;
+  int partLength;
   int testAttribMatchResult;
   int bindingChunk;
   char partBuf [256];
@@ -3057,86 +3071,86 @@ int _PPParserParseAttributeBinding(parser)
   uint arrayIndex [7];
   
   profile = *(uint *)(parser + 0x48c);
-  partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
-  if (partLenCmpOrClass == 0) {
+  partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+  if (partLength == 0) {
     return 0x2d;
   }
   isFragmentProgram = ((profile ^ 2) >> 1 & 1) == 0;
   bindingOrdinal = 0;
   binding = 0;
   if (isFragmentProgram) {
-    partLenCmpOrClass = _memcmp(partBuf,"fragment",9);
+    keywordCompare = _memcmp(partBuf,"fragment",9);
   }
   else {
-    partLenCmpOrClass = _memcmp(partBuf,"vertex",7);
+    keywordCompare = _memcmp(partBuf,"vertex",7);
   }
-  if (partLenCmpOrClass != 0) {
+  if (keywordCompare != 0) {
     return 10;
   }
-  partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
-  if (partLenCmpOrClass == 0) {
+  partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+  if (partLength == 0) {
     return 0x2d;
   }
   if (partBuf[0] != '.') {
     return 10;
   }
-  if (partLenCmpOrClass != 1) {
+  if (partLength != 1) {
     return 10;
   }
-  partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
-  if (partLenCmpOrClass == 0) {
+  partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+  if (partLength == 0) {
     return 0x2d;
   }
-  if ((!isFragmentProgram) && (partLenCmpOrClass = _memcmp(partBuf,"attrib",7), partLenCmpOrClass == 0)) {
+  if ((!isFragmentProgram) && (keywordCompare = _memcmp(partBuf,"attrib",7), keywordCompare == 0)) {
     binding = binding & 0xfff0ffff | 0x90000;
-    partLenCmpOrClass = ((int (*)())_PPParserParseArray)(parser,arrayIndex);
-    if (partLenCmpOrClass != 0) {
-      return partLenCmpOrClass;
+    arrayStatus = ((int (*)())_PPParserParseArray)(parser,arrayIndex);
+    if (arrayStatus != 0) {
+      return arrayStatus;
     }
-    partLenCmpOrClass = 0x3d;
+    bindingClass = 0x3d;
     indexLimit = *(uint *)(parser + 0x488);
     goto LAB_97b80948;
   }
-  partLenCmpOrClass = _memcmp(partBuf,"position",9);
-  if (partLenCmpOrClass == 0) {
-    partLenCmpOrClass = 1;
+  keywordCompare = _memcmp(partBuf,"position",9);
+  if (keywordCompare == 0) {
+    bindingClass = 1;
   }
   else {
-    if ((isFragmentProgram) || (partLenCmpOrClass = _memcmp(partBuf,"normal",7), partLenCmpOrClass != 0)) {
-      partLenCmpOrClass = _memcmp(partBuf,"color",6);
-      if (partLenCmpOrClass == 0) {
+    if ((isFragmentProgram) || (keywordCompare = _memcmp(partBuf,"normal",7), keywordCompare != 0)) {
+      keywordCompare = _memcmp(partBuf,"color",6);
+      if (keywordCompare == 0) {
         binding = binding & 0xfff0ffff | 0x20000;
-        partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
-        if (partLenCmpOrClass == 0) {
+        partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+        if (partLength == 0) {
           return 0x2d;
         }
-        if ((partBuf[0] == '.') && (partLenCmpOrClass == 1)) {
-          partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
-          if (partLenCmpOrClass == 0) {
+        if ((partBuf[0] == '.') && (partLength == 1)) {
+          partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+          if (partLength == 0) {
             return 0x2d;
           }
-          partLenCmpOrClass = _memcmp(partBuf,"secondary",10);
-          if (partLenCmpOrClass == 0) {
-            partLenCmpOrClass = 3;
+          keywordCompare = _memcmp(partBuf,"secondary",10);
+          if (keywordCompare == 0) {
+            bindingClass = 3;
             goto LAB_97b80b98;
           }
-          partLenCmpOrClass = _memcmp(partBuf,"primary",8);
-          if (partLenCmpOrClass == 0) goto LAB_97b80bac;
+          keywordCompare = _memcmp(partBuf,"primary",8);
+          if (keywordCompare == 0) goto LAB_97b80bac;
           ((int (*)())_PPParserReturnPart)(parser);
         }
         ((int (*)())_PPParserReturnPart)(parser);
         goto LAB_97b80bac;
       }
-      partLenCmpOrClass = _memcmp(partBuf,"fogcoord",9);
-      if (partLenCmpOrClass == 0) {
-        partLenCmpOrClass = 5;
+      keywordCompare = _memcmp(partBuf,"fogcoord",9);
+      if (keywordCompare == 0) {
+        bindingClass = 5;
         goto LAB_97b80b98;
       }
-      partLenCmpOrClass = _memcmp(partBuf,"texcoord",9);
-      if (partLenCmpOrClass == 0) {
+      keywordCompare = _memcmp(partBuf,"texcoord",9);
+      if (keywordCompare == 0) {
         binding = binding & 0xfff0ffff | 0x70000;
-        partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
-        if (partLenCmpOrClass == 0) {
+        partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+        if (partLength == 0) {
           return 0x2d;
         }
         ((int (*)())_PPParserReturnPart)(parser);
@@ -3145,131 +3159,131 @@ LAB_97b8095c:
           binding = binding & 0xffffffe0;
           goto LAB_97b80bac;
         }
-        partLenCmpOrClass = ((int (*)())_PPParserParseArray)(parser,arrayIndex);
-        if (partLenCmpOrClass != 0) {
-          return partLenCmpOrClass;
+        arrayStatus = ((int (*)())_PPParserParseArray)(parser,arrayIndex);
+        if (arrayStatus != 0) {
+          return arrayStatus;
         }
-        partLenCmpOrClass = 0x38;
+        bindingClass = 0x38;
         indexLimit = *(uint *)(parser + 0x470);
 LAB_97b80948:
         if (indexLimit <= arrayIndex[0]) {
-          return partLenCmpOrClass;
+          return bindingClass;
         }
         binding = arrayIndex[0] & 0x1f | binding & 0xffffffe0;
         goto LAB_97b80bac;
       }
       if (isFragmentProgram) {
-        partLenCmpOrClass = _memcmp(partBuf,"facing",7);
-        if (partLenCmpOrClass != 0) {
+        keywordCompare = _memcmp(partBuf,"facing",7);
+        if (keywordCompare != 0) {
           return 10;
         }
         if (*(int *)(parser + 0x48c) != 0x36) {
           return 10;
         }
-        partLenCmpOrClass = 0xb;
+        bindingClass = 0xb;
         goto LAB_97b80b98;
       }
-      partLenCmpOrClass = _memcmp(partBuf,"weight",7);
-      if (partLenCmpOrClass == 0) {
+      keywordCompare = _memcmp(partBuf,"weight",7);
+      if (keywordCompare == 0) {
         binding = binding & 0xfff0ffff | 0x60000;
-        partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
-        if (partLenCmpOrClass == 0) {
+        partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+        if (partLength == 0) {
           return 0x2d;
         }
         ((int (*)())_PPParserReturnPart)(parser);
         if (partBuf[0] != '[') goto LAB_97b8095c;
-        partLenCmpOrClass = ((int (*)())_PPParserParseArray)(parser,arrayIndex);
-        if (partLenCmpOrClass != 0) {
-          return partLenCmpOrClass;
+        arrayStatus = ((int (*)())_PPParserParseArray)(parser,arrayIndex);
+        if (arrayStatus != 0) {
+          return arrayStatus;
         }
-        partLenCmpOrClass = 0x39;
+        bindingClass = 0x39;
         indexLimit = *(uint *)(parser + 0x478);
         goto LAB_97b80948;
       }
-      partLenCmpOrClass = _memcmp(partBuf,"material",9);
-      if (partLenCmpOrClass != 0) {
+      keywordCompare = _memcmp(partBuf,"material",9);
+      if (keywordCompare != 0) {
         return 10;
       }
       binding = binding & 0xfff0fffe | 0xa0000;
-      partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
-      if (partLenCmpOrClass == 0) {
+      partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+      if (partLength == 0) {
         return 0x2d;
       }
       if (partBuf[0] != '.') {
         return 10;
       }
-      if (partLenCmpOrClass != 1) {
+      if (partLength != 1) {
         return 10;
       }
-      partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
-      if (partLenCmpOrClass == 0) {
+      partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+      if (partLength == 0) {
         return 0x2d;
       }
-      partLenCmpOrClass = _memcmp(partBuf,"front",6);
-      if (partLenCmpOrClass == 0) {
+      keywordCompare = _memcmp(partBuf,"front",6);
+      if (keywordCompare == 0) {
 LAB_97b80a4c:
-        partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
-        if (partLenCmpOrClass == 0) {
+        partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+        if (partLength == 0) {
           return 0x2d;
         }
-        if ((partBuf[0] != '.') || (partLenCmpOrClass != 1)) {
+        if ((partBuf[0] != '.') || (partLength != 1)) {
           return 10;
         }
-        partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
-        if (partLenCmpOrClass == 0) {
+        partLength = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
+        if (partLength == 0) {
           return 0x2d;
         }
       }
       else {
-        partLenCmpOrClass = _memcmp(partBuf,"back",5);
-        if (partLenCmpOrClass == 0) {
+        keywordCompare = _memcmp(partBuf,"back",5);
+        if (keywordCompare == 0) {
           binding = binding | 1;
           goto LAB_97b80a4c;
         }
       }
-      partLenCmpOrClass = _memcmp(partBuf,"ambient",8);
-      if (partLenCmpOrClass == 0) {
+      keywordCompare = _memcmp(partBuf,"ambient",8);
+      if (keywordCompare == 0) {
         binding = binding & 0xffff0fff;
       }
       else {
-        partLenCmpOrClass = _memcmp(partBuf,"diffuse",8);
-        if (partLenCmpOrClass == 0) {
-          partLenCmpOrClass = 1;
+        keywordCompare = _memcmp(partBuf,"diffuse",8);
+        if (keywordCompare == 0) {
+          materialProperty = 1;
         }
         else {
-          partLenCmpOrClass = _memcmp(partBuf,"specular",9);
-          if (partLenCmpOrClass == 0) {
-            partLenCmpOrClass = 2;
+          keywordCompare = _memcmp(partBuf,"specular",9);
+          if (keywordCompare == 0) {
+            materialProperty = 2;
           }
           else {
-            partLenCmpOrClass = _memcmp(partBuf,"emission",9);
-            if (partLenCmpOrClass == 0) {
-              partLenCmpOrClass = 3;
+            keywordCompare = _memcmp(partBuf,"emission",9);
+            if (keywordCompare == 0) {
+              materialProperty = 3;
             }
             else {
-              partLenCmpOrClass = _memcmp(partBuf,"shininess",10);
-              if (partLenCmpOrClass != 0) {
+              keywordCompare = _memcmp(partBuf,"shininess",10);
+              if (keywordCompare != 0) {
                 return 10;
               }
-              partLenCmpOrClass = 4;
+              materialProperty = 4;
             }
           }
         }
-        binding = partLenCmpOrClass << 0xc | binding & 0xffff0fff;
+        binding = materialProperty << 0xc | binding & 0xffff0fff;
       }
       goto LAB_97b80bac;
     }
-    partLenCmpOrClass = 4;
+    bindingClass = 4;
   }
 LAB_97b80b98:
-  binding = partLenCmpOrClass << 0x10 | binding & 0xfff0ffff;
+  binding = bindingClass << 0x10 | binding & 0xfff0ffff;
 LAB_97b80bac:
   if (isFragmentProgram) {
-    partLenCmpOrClass = *(int *)(parser + 0x1c);
+    stream = *(int *)(parser + 0x1c);
   }
   else {
-    partLenCmpOrClass = *(int *)(parser + 0x1c);
-    bindingChunk = **(int **)(partLenCmpOrClass + 0x18);
+    stream = *(int *)(parser + 0x1c);
+    bindingChunk = **(int **)(stream + 0x18);
     if (bindingChunk != 0) {
       do {
         testAttribMatchResult = ((int (*)())_testAttribMatch)(&binding,bindingChunk + 0xc);
@@ -3282,12 +3296,12 @@ LAB_97b80bac:
   }
   bindingOrdinal = CONCAT22(bindingOrdinal,(short)*(int *)(parser + 0x24));
   *(int *)(parser + 0x24) = *(int *)(parser + 0x24) + 1;
-  ((int (*)())_PPStreamAddAttribBinding)(partLenCmpOrClass,&binding);
-  partLenCmpOrClass = 0x35;
+  ((int (*)())_PPStreamAddAttribBinding)(stream,&binding);
+  resultCode = 0x35;
   if (*(uint *)(parser + 0x24) < 0x101) {
-    partLenCmpOrClass = 0;
+    resultCode = 0;
   }
-  return partLenCmpOrClass;
+  return resultCode;
 }
 
 /* _testAttribMatch @ 0x97b80c48 (300 bytes) */
@@ -3402,10 +3416,14 @@ int _PPParserParseOutputBinding(parser, outputMode)
   int parser;
   int outputMode;
 {
+  int resultCode;
+  int outputClass;
+  int arrayStatus;
+  int keywordCompare;
   int compareResult;
   bool isFragmentProgram;
   uint profile;
-  int partLenCmpOrClass;
+  int partLength;
   int part;
   char partBuf;
   undefined1 partBuf1;
@@ -3415,49 +3433,49 @@ int _PPParserParseOutputBinding(parser, outputMode)
   uint arrayIndex [7];
   
   profile = *(uint *)(parser + 0x48c);
-  partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
-  if (partLenCmpOrClass == 0) {
+  partLength = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
+  if (partLength == 0) {
     return 0x2d;
   }
   binding = outputMode << 0x1d;
   bindingOrdinal = 0;
-  partLenCmpOrClass = _memcmp(&partBuf,"result",7);
-  if (partLenCmpOrClass != 0) {
+  keywordCompare = _memcmp(&partBuf,"result",7);
+  if (keywordCompare != 0) {
     return 10;
   }
-  partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
-  if (partLenCmpOrClass == 0) {
+  partLength = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
+  if (partLength == 0) {
     return 0x2d;
   }
-  if ((partBuf != '.') || (partLenCmpOrClass != 1)) {
+  if ((partBuf != '.') || (partLength != 1)) {
     return 10;
   }
-  partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
-  if (partLenCmpOrClass == 0) {
+  partLength = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
+  if (partLength == 0) {
     return 0x2d;
   }
   isFragmentProgram = ((profile ^ 2) >> 1 & 1) == 0;
-  if ((!isFragmentProgram) && (partLenCmpOrClass = _memcmp(&partBuf,"position",9), partLenCmpOrClass == 0)) {
+  if ((!isFragmentProgram) && (keywordCompare = _memcmp(&partBuf,"position",9), keywordCompare == 0)) {
     if ((*(byte *)(parser + 0x442) & 1) != 0) {
       return 0x22;
     }
     binding = binding & 0xfff0ffff | 0x10000;
     goto LAB_97b81320;
   }
-  partLenCmpOrClass = _memcmp(&partBuf,"color",6);
-  if (partLenCmpOrClass == 0) {
+  keywordCompare = _memcmp(&partBuf,"color",6);
+  if (keywordCompare == 0) {
     binding = binding & 0xfff0fffe | 0x40000;
     if (isFragmentProgram) {
       if (*(char *)(parser + 0x445) != '\0') {
-        partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
-        if (partLenCmpOrClass == 0) {
+        partLength = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
+        if (partLength == 0) {
           return 0x2d;
         }
         ((int (*)())_PPParserReturnPart)(parser);
         if (partBuf == '[') {
-          partLenCmpOrClass = ((int (*)())_PPParserParseArray)(parser,arrayIndex);
-          if (partLenCmpOrClass != 0) {
-            return partLenCmpOrClass;
+          arrayStatus = ((int (*)())_PPParserParseArray)(parser,arrayIndex);
+          if (arrayStatus != 0) {
+            return arrayStatus;
           }
           binding = (arrayIndex[0] & 7) << 1 | binding & 0xfffffff1;
         }
@@ -3467,11 +3485,11 @@ int _PPParserParseOutputBinding(parser, outputMode)
       }
       goto LAB_97b81320;
     }
-    partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
-    if (partLenCmpOrClass == 0) {
+    partLength = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
+    if (partLength == 0) {
       return 0x2d;
     }
-    if ((partBuf == '.') && (partLenCmpOrClass == 1)) {
+    if ((partBuf == '.') && (partLength == 1)) {
       part = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
       if (part == 0) {
         return 0x2d;
@@ -3489,59 +3507,59 @@ int _PPParserParseOutputBinding(parser, outputMode)
           goto LAB_97b810c0;
         }
       }
-      partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
-      if (partLenCmpOrClass == 0) {
+      partLength = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
+      if (partLength == 0) {
         return 0x2d;
       }
     }
 LAB_97b810c0:
-    if ((partBuf == '.') && (partLenCmpOrClass == 1)) {
-      partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
-      if (partLenCmpOrClass == 0) {
+    if ((partBuf == '.') && (partLength == 1)) {
+      partLength = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
+      if (partLength == 0) {
         return 0x2d;
       }
-      partLenCmpOrClass = _memcmp(&partBuf,"secondary",10);
-      if (partLenCmpOrClass == 0) {
-        partLenCmpOrClass = 5;
+      keywordCompare = _memcmp(&partBuf,"secondary",10);
+      if (keywordCompare == 0) {
+        outputClass = 5;
         goto LAB_97b8130c;
       }
-      partLenCmpOrClass = _memcmp(&partBuf,"primary",8);
-      if (partLenCmpOrClass == 0) goto LAB_97b81320;
+      keywordCompare = _memcmp(&partBuf,"primary",8);
+      if (keywordCompare == 0) goto LAB_97b81320;
       ((int (*)())_PPParserReturnPart)(parser);
     }
     ((int (*)())_PPParserReturnPart)(parser);
   }
   else {
     if (isFragmentProgram) {
-      partLenCmpOrClass = _memcmp(&partBuf,"depth",6);
-      if (partLenCmpOrClass != 0) {
+      keywordCompare = _memcmp(&partBuf,"depth",6);
+      if (keywordCompare != 0) {
         return 10;
       }
-      partLenCmpOrClass = 7;
+      outputClass = 7;
     }
     else {
-      partLenCmpOrClass = _memcmp(&partBuf,"fogcoord",9);
-      if (partLenCmpOrClass == 0) {
-        partLenCmpOrClass = 2;
+      keywordCompare = _memcmp(&partBuf,"fogcoord",9);
+      if (keywordCompare == 0) {
+        outputClass = 2;
       }
       else {
-        partLenCmpOrClass = _memcmp(&partBuf,"pointsize",10);
-        if (partLenCmpOrClass == 0) {
-          partLenCmpOrClass = 3;
+        keywordCompare = _memcmp(&partBuf,"pointsize",10);
+        if (keywordCompare == 0) {
+          outputClass = 3;
         }
         else {
-          partLenCmpOrClass = _memcmp(&partBuf,"texcoord",9);
-          if (partLenCmpOrClass == 0) {
+          keywordCompare = _memcmp(&partBuf,"texcoord",9);
+          if (keywordCompare == 0) {
             binding = binding & 0xfff0ffff | 0x60000;
-            partLenCmpOrClass = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
-            if (partLenCmpOrClass == 0) {
+            partLength = ((int (*)())_PPParserGetPart)(parser,&partBuf,0);
+            if (partLength == 0) {
               return 0x2d;
             }
             ((int (*)())_PPParserReturnPart)(parser);
             if (partBuf == '[') {
-              partLenCmpOrClass = ((int (*)())_PPParserParseArray)(parser,arrayIndex);
-              if (partLenCmpOrClass != 0) {
-                return partLenCmpOrClass;
+              arrayStatus = ((int (*)())_PPParserParseArray)(parser,arrayIndex);
+              if (arrayStatus != 0) {
+                return arrayStatus;
               }
               binding = arrayIndex[0] & 0x1f | binding & 0xffffffe0;
             }
@@ -3550,29 +3568,29 @@ LAB_97b810c0:
             }
             goto LAB_97b81320;
           }
-          partLenCmpOrClass = _memcmp(&partBuf,"clip",5);
-          if (partLenCmpOrClass != 0) {
+          keywordCompare = _memcmp(&partBuf,"clip",5);
+          if (keywordCompare != 0) {
             return 10;
           }
           if ((*(int *)(parser + 0x48c) != 0x31) && (*(int *)(parser + 0x48c) != 0x34)) {
             return 10;
           }
-          partLenCmpOrClass = 9;
+          outputClass = 9;
         }
       }
     }
 LAB_97b8130c:
-    binding = partLenCmpOrClass << 0x10 | binding & 0xfff0ffff;
+    binding = outputClass << 0x10 | binding & 0xfff0ffff;
   }
 LAB_97b81320:
   bindingOrdinal = CONCAT22(bindingOrdinal,(short)*(int *)(parser + 0x28));
   *(int *)(parser + 0x28) = *(int *)(parser + 0x28) + 1;
   ((int (*)())_PPStreamAddOutputBinding)(*(undefined4 *)(parser + 0x1c),&binding);
-  partLenCmpOrClass = 0x36;
+  resultCode = 0x36;
   if (*(uint *)(parser + 0x28) < 0x101) {
-    partLenCmpOrClass = 0;
+    resultCode = 0;
   }
-  return partLenCmpOrClass;
+  return resultCode;
 }
 
 /* _PPStreamAddOutputBinding @ 0x97b8136c (92 bytes) */
@@ -3605,13 +3623,14 @@ int _PPParserParseOperation(parser, opcode, precision, updateCC, saturate, ccReg
   uint ccRegister;
   undefined4 unusedArg7;
 {
+  int lastOpChunk;
   int ppParserParseBranchLabelResult;
   int part;
   bool hasDestination;
   bool addressDestination;
   bool requireScalarSwizzle;
   int status;
-  int resultOrLastOp;
+  int resultCode;
   undefined4 *sourceTarget;
   uint sourceCount;
   undefined4 *sourceCursor;
@@ -3839,25 +3858,25 @@ LAB_97b818a8:
     } while (loopIndex < sourceCount);
   }
   part = ((int (*)())_PPParserGetPart)(parser,partBuf,0);
-  resultOrLastOp = 0x2d;
-  if ((part != 0) && (resultOrLastOp = 0x1e, partBuf[0] == ';')) {
+  resultCode = 0x2d;
+  if ((part != 0) && (resultCode = 0x1e, partBuf[0] == ';')) {
     status = *(int *)(parser + 0x1c);
-    resultOrLastOp = 0x32;
+    resultCode = 0x32;
     if (*(uint *)(*(int *)(status + 0x20) + 8) < *(uint *)(parser + 0x45c)) {
-      resultOrLastOp = *(int *)(*(int *)(status + 0x20) + 4);
-      if (resultOrLastOp == 0) {
+      lastOpChunk = *(int *)(*(int *)(status + 0x20) + 4);
+      if (lastOpChunk == 0) {
         opHeader = sourceCount << 0x1d | opHeader & 0x3ffffff;
       }
       else {
-        opHeader = *(uint *)(resultOrLastOp + 0xc) >> 3 & 0x1c000000 | sourceCount << 0x1d | opHeader & 0x3ffffff;
+        opHeader = *(uint *)(lastOpChunk + 0xc) >> 3 & 0x1c000000 | sourceCount << 0x1d | opHeader & 0x3ffffff;
       }
       opWord13 = branchTarget;
       _PPStreamAddOperation(status,&opHeader,branchLabelText,*(undefined1 *)(parser + 0x440));
       *(undefined1 *)(parser + 0x440) = 0;
-      resultOrLastOp = 0;
+      resultCode = 0;
     }
   }
-  return resultOrLastOp;
+  return resultCode;
 }
 
 /* _PPParserParseDestination @ 0x97b81994 (604 bytes) */

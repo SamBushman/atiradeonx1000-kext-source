@@ -47,12 +47,10 @@ local	_PPParserParseAliasDeclaration	uVar1	status	INFERRED	parser status code
 local	___lshrdi3	param_1	valueHi	CONFIRMED	high word of the 64-bit value
 local	___lshrdi3	param_2	valueLo	CONFIRMED	low word of the 64-bit value
 local	___lshrdi3	param_3	shift	CONFIRMED	shift count 0..63
-local	___lshrdi3	uVar1	complementOrResultHi	INFERRED	32-shift, then the high word of the result
-local	___lshrdi3	uStack_30	resultLo	INFERRED	low word of the result
+local	___lshrdi3	uStack_30	resultHi	INFERRED	high word of the result (valueHi >> shift, or 0 for shift >= 32)
 local	___ashldi3	param_1	valueHi	CONFIRMED	high word of the 64-bit value
 local	___ashldi3	param_2	valueLo	CONFIRMED	low word of the 64-bit value
 local	___ashldi3	param_3	shift	CONFIRMED	shift count 0..63
-local	___ashldi3	uVar1	complementOrResultHi	INFERRED	32-shift, then the high word of the result
 local	___ashldi3	uStack_2c	resultLo	INFERRED	low word of the result
 local	_GrowAtomTable	param_1	atable	CONFIRMED	AtomTable* (+0x28 atom map, +0x2c reverse map, +0x34 size)
 local	_GrowAtomTable	param_2	newSize	CONFIRMED	new capacity in atoms

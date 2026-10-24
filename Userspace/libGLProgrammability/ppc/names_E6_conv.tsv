@@ -1,9 +1,7 @@
 local	TIntermediate__addConversion	uVar7	targetBasicType	CONFIRMED	basic type derived from the constructor operator (0x68 -> 1, 0x66 -> 2, 0x67 -> 3) and compared with the operand's basic type (stackTypeBits >> 19 & 0x3f)
-local	TIntermediate__addConversion	iVar6	sourceBasicTypeOrSequence	INFERRED	operand's getBasicType (vtable +0x40) at first; later the aggregate's sequence vector (vtable +100 getSequence) being converted element by element
 local	TIntermediate__addConversion	pTVar16	sequenceCursor	CONFIRMED	iterator over the sequence's 4-byte TIntermNode* entries, advanced by 4
 local	TIntermediate__addConversion	pcVar10	convertedValue	CONFIRMED	TPoolAllocator__allocate(pool, 4): the converted scalar stored for the new constant union
 local	TIntermediate__addConversion	uVar19	childBasicType	CONFIRMED	basic type of the current element (stackTypeBits >> 19 & 0x3f): 1 float, 2 int, 3 bool
-local	TIntermediate__addConversion	iVar11	constantUnionOrNewNode	INFERRED	the element's getAsConstantUnion result (value array at +0x30), later the new TIntermConstantUnion from addConstantUnion
 local	TIntermediate__addConversion	piVar12	nodeTemp	INFERRED	intermTyped alias at entry, then the element node and its typed/constant interpretations
 local	TIntermediate__addConversion	piVar8	typedNodeTemp	INFERRED	result of getAsTyped / getAsAggregate on the current node
 local	TIntermediate__addConversion	this_00	infoSink	CONFIRMED	*(TIntermediate+0): TInfoSinkBase receiving the "Bad promotion node" message

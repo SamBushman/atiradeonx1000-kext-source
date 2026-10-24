@@ -4,9 +4,8 @@ local	_PPParserParseStatement	uVar4	precision	INFERRED	instruction precision suf
 local	_PPParserParseStatement	uVar5	updateCC	INFERRED	condition-code update (C suffix) flag; argument 4 of _PPParserParseOperation
 local	_PPParserParseStatement	uVar6	saturate	INFERRED	_SAT suffix flag; argument 5 of _PPParserParseOperation
 local	_PPParserParseStatement	uVar7	ccRegister	INFERRED	condition-code register select (C1 suffix = 1); argument 6 of _PPParserParseOperation
-local	_PPParserParseStatement	iVar2	declStatusOrMnemonic	INFERRED	declaration-parser status code, then the mnemonic string of the current opcode-table entry
-use	_PPParserParseStatement	iVar1	partLengthOrStatus	INFERRED	_PPParserGetPart result (statement keyword length, 0 = end of text); also the length argument of and the result of _PPParserParseLabel	#0	^LAB_97b7db80:	all	none
-use	_PPParserParseStatement	iVar1	partLengthOrStatus	INFERRED	same variable: keyword length passed to, then status returned by _PPParserParseLabel (3 = not a label)	iVar1\ =\ _PPParserParseLabel	+3	all	none
+use	_PPParserParseStatement	iVar1	partLengthThenLabelStatus	INFERRED	_PPParserGetPart result (statement keyword length, 0 = end of text); also the length argument of and the result of _PPParserParseLabel	#0	^LAB_97b7db80:	all	none
+use	_PPParserParseStatement	iVar1	partLengthThenLabelStatus	INFERRED	same variable: keyword length passed to, then status returned by _PPParserParseLabel (3 = not a label)	iVar1\ =\ _PPParserParseLabel	+3	all	none
 use	_PPParserParseStatement	iVar1	optionCompare	INFERRED	memcmp result of the OPTION keyword check	iVar1\ =\ _memcmp\(auStack_140,"OPTION"	+2	all	none
 use	_PPParserParseStatement	iVar1	opcode	INFERRED	opcode number of the matched table entry (opsList[1]); argument 2 of _PPParserParseOperation	*		all	none
 use	_PPParserParseStatement	iVar9	longShortMode	INFERRED	LONG = 1, SHORT = 2, none = 0 (NV profiles)	#0	iVar9\ =\ _memcmp\(auStack_140,"ADDRESS"	all	none
