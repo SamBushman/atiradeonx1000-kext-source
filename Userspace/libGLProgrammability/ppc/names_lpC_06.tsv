@@ -38,7 +38,7 @@ use	TIntermBinary__promote	iVar11	resultIsMatrix	INFERRED	left = this+0x34, righ
 use	TIntermBinary__promote	iVar11	resultIsMatrix	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*local_7c\ =\ iVar11\ <<\ 10\ \|\ \(uVar6\ \&\ 0xff\)\ <<\ 0xb\ \|\ \(uVar8\ \&\ 0x3f\)\ <<\ 0x13\ \|\ local_7c\ \&\ 0x1ff;$	+1
 local	TIntermBinary__promote	local_4c	typeTempBits	INFERRED	bit-field word (+0x24) of the TType temp at local_70
 local	TIntermBinary__promote	local_68	typeTempStructure	INFERRED	structure pointer (+8) of the TType temp at local_70
-local	TIntermBinary__promote	local_70	typeTempOrTextBuf	INFERRED	stack area used both as the sprintf buffer of the internal error and as a getType() TType temp
+local	TIntermBinary__promote	local_70	typeTempOverlay	INFERRED	address-taken frame array: the getType() TType temporary and the sprintf/text buffer occupy the same slot in different lifetimes; apply_names cannot split address-taken locals
 local	TIntermBinary__promote	pcVar12	setTypeFn	INFERRED	TIntermTyped::setType (vtable +0x34)
 use	TIntermBinary__promote	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*ppuVar3\ =\ local_a0\ \+\ \-1;$	+1
 use	TIntermBinary__promote	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar5\ =\ \*ppuVar3;$	+1
@@ -139,7 +139,7 @@ local	OutputConstantUnion	in_f5	scratchF5	UNKNOWN	register leftover forwarded to
 local	OutputConstantUnion	in_f6	scratchF6	UNKNOWN	register leftover forwarded to _glp_dtostr
 local	OutputConstantUnion	in_f7	scratchF7	UNKNOWN	register leftover forwarded to _glp_dtostr
 local	OutputConstantUnion	in_f8	scratchF8	UNKNOWN	register leftover forwarded to _glp_dtostr
-local	OutputConstantUnion	local_1c0	typeTemp1OrTextBuf	INFERRED	stack area used as a getType() TType temp and as the sprintf buffer
+local	OutputConstantUnion	local_1c0	typeTemp1Overlay	INFERRED	address-taken frame array: the getType() TType temporary and the sprintf/text buffer occupy the same slot in different lifetimes; apply_names cannot split address-taken locals
 local	OutputConstantUnion	local_19c	typeTemp1Bits	INFERRED	bit-field word (+0x24) of the TType temp at local_1c0
 local	OutputConstantUnion	local_190	typeTemp2	INFERRED	second getType() temp
 local	OutputConstantUnion	local_178	typeTemp2Structure	INFERRED	structure pointer (+8) of typeTemp2

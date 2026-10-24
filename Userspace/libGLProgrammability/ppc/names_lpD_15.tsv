@@ -168,7 +168,7 @@ local	TGenericLinker__FixOutputReads	uVar1	outputReg	INFERRED	register index of 
 local	TGenericLinker__FixOutputReads	local_a0	tempUsageFlags	INFERRED	first word of the temp-usage record passed to _PPStreamAddTempUsage: component/type bits copied from the output symbol
 local	TGenericLinker__FixOutputReads	local_98	tempUsageWord2	UNKNOWN	third word of the temp-usage record (zero)
 local	TGenericLinker__FixOutputReads	local_94	tempUsageWord3	UNKNOWN	fourth word of the temp-usage record (zero)
-local	TGenericLinker__FixOutputReads	local_9c	opChunkOrTempIndex	INFERRED	first the op chunk cursor of the read scan (ends at 0), then the new temp register index (maxIndex + 1) in the low half of the temp-usage record's second word; one slot because the null cursor's high half reaches the packed word
+local	TGenericLinker__FixOutputReads	local_9c	opChunkScratchWord	INFERRED	stack word (address-taken, halfwords read via &) holding the op chunk cursor in the scan loop and later the packed (register, index) halfword pair: one frame slot, cannot be split
 local	TGenericLinker__FixOutputReads	local_90	opHeader	INFERRED	MOV record inserted at the end of main: word 0 header
 local	TGenericLinker__FixOutputReads	local_8c	opFlags	INFERRED	inserted record word 1: flags
 local	TGenericLinker__FixOutputReads	local_88	opDest0	INFERRED	inserted record destination descriptor, first word

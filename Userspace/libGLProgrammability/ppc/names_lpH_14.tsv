@@ -13,9 +13,6 @@ use	ParseSymbolTable__FinishArrayAddition	iVar3	arrayTrackingMode	INFERRED	this+
 use	ParseSymbolTable__FinishArrayAddition	iVar4	firstChunk	INFERRED	first chunk of the PPStream list whose index word is patched	^\s*if\ \(\(bVar1\ !=\ 0\)\ \|\|$	+3
 use	ParseSymbolTable__FinishArrayAddition	iVar4	firstChunk	INFERRED	first chunk of the PPStream list whose index word is patched	^\s*if\ \(\(bVar1\ !=\ 3\)\ \|\|$	+3
 use	ParseSymbolTable__FinishArrayAddition	iVar4	firstChunk	INFERRED	first chunk of the PPStream list whose index word is patched	^\s*\*\(short\ \*\)\(iVar4\ \+\ 0x12\)\ =\ sVar2\ \+\ \-1;$	+1
-use	ParseSymbolTable__FindNextParamSymbolByName	iVar2	foundOrCompare	INFERRED	return value: the matching symbol, or 0; also holds the _strncmp result during the scan	^\s*iVar2\ =\ 0;$	+1
-use	ParseSymbolTable__FindNextParamSymbolByName	iVar2	foundOrCompare	INFERRED	return value: the matching symbol, or 0; also holds the _strncmp result during the scan	^\s*while\ \(\(iVar2\ =\ 0,\ iVar4\ !=\ 0\ \&\&$	+5
-use	ParseSymbolTable__FindNextParamSymbolByName	iVar2	foundOrCompare	INFERRED	return value: the matching symbol, or 0; also holds the _strncmp result during the scan	^\s*return\ iVar2;$	+1
 use	ParseSymbolTable__FindNextParamSymbolByName	iVar3	symbolName	INFERRED	symbol name (+0x14) compared with the searched prefix	^\s*while\ \(\(iVar2\ =\ 0,\ iVar4\ !=\ 0\ \&\&$	+5
 use	ParseSymbolTable__FindNextParamSymbolByName	iVar4	symbolCursor	INFERRED	cursor over the table symbol list (next at +8)	^\s*iVar4\ =\ \*\(int\ \*\)this;$	+1
 use	ParseSymbolTable__FindNextParamSymbolByName	iVar4	symbolCursor	INFERRED	cursor over the table symbol list (next at +8)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_2\ \+\ 8\);$	+1

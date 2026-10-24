@@ -117,11 +117,6 @@ use	yy_get_next_buffer	iVar3	newSize	INFERRED	new buffer size	^\s*\*\(int\ \*\)\
 use	yy_get_next_buffer	iVar3	newChBuf	INFERRED	reallocated character buffer pointer	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar2\ \+\ 4\);$	+2
 use	yy_get_next_buffer	iVar3	newChBuf	INFERRED	reallocated character buffer pointer	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar2\ \+\ 4\);$@2	+1
 use	yy_get_next_buffer	iVar3	newChBuf	INFERRED	reallocated character buffer pointer	^\s*puVar9\ =\ puVar9\ \+\ \(iVar3\ \-\ \(int\)pvVar4\);$	+1
-use	PaIdentOrType	iVar2	symbolLevelOrFlag	INFERRED	flow-joined web: levels begin pointer, current symbol-table level, then the isVariable() result	^\s*iVar2\ =\ \*piVar3;$	+2
-use	PaIdentOrType	iVar2	symbolLevelOrFlag	INFERRED	flow-joined web: levels begin pointer, current symbol-table level, then the isVariable() result	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ iVar4\ \*\ 4\);$	+2
-use	PaIdentOrType	iVar2	symbolLevelOrFlag	INFERRED	flow-joined web: levels begin pointer, current symbol-table level, then the isVariable() result	^\s*if\ \(local_30\[0\]\ !=\ \*\(int\ \*\)\(iVar2\ \+\ 4\)\)\ \{$	+1
-use	PaIdentOrType	iVar2	symbolLevelOrFlag	INFERRED	flow-joined web: levels begin pointer, current symbol-table level, then the isVariable() result	^\s*iVar2\ =\ \*piVar3;$@2	+1
-use	PaIdentOrType	iVar2	symbolLevelOrFlag	INFERRED	flow-joined web: levels begin pointer, current symbol-table level, then the isVariable() result	^\s*if\ \(\(\(\(\*\(int\ \*\)\(param_2\ \+\ 0x1c\)\ !=\ 0\)\ \|\|\ \(a0\ ==\ \(unsigned\ char\ \*\)0x0\)\)\ \|\|$	+3
 local	_CPPWarningToInfoLog	uVar2	lineNo	INFERRED	_yylineno: source string number in the high 16 bits, line in the low 16
 local	_CPPWarningToInfoLog	a1	lineInString	INFERRED	low 16 bits of _yylineno
 local	_CPPWarningToInfoLog	iVar4	stringNo	INFERRED	high 16 bits of _yylineno
@@ -129,7 +124,6 @@ local	_CPPWarningToInfoLog	local_70	lineStr	INFERRED	std::string "<string>:<line
 local	_CPPWarningToInfoLog	acStack_60	lineBuf	INFERRED	sprintf buffer for the position text
 local	_CPPWarningToInfoLog	aaStack_20	lineStrAlloc	INFERRED	allocator temporary for the std::string constructor
 local	_HandlePragma	in_r9	cppState	INFERRED	preprocessor state pointer (*PTR__cpp), later also passed as a stale argument
-local	_HandlePragma	uVar4	tokenTextOrStale	INFERRED	token text pointer compared with memcmp, and (flow-joined) the stale r4 value forwarded to _CPPShInfoLogMsg
 local	_GetBehavior	in_r6	staleR6	INFERRED	stale argument register forwarded to _CPPShInfoLogMsg
 local	_GetBehavior	in_r7	staleR7	INFERRED	stale argument register forwarded to _CPPShInfoLogMsg
 local	_GetBehavior	in_r8	staleR8	INFERRED	stale argument register forwarded to _CPPShInfoLogMsg
@@ -163,11 +157,11 @@ use	PrintParam	uVar4	bindingBits14	INFERRED	binding word bits 14..15	^\s*if\ \(u
 use	__ZN7BindingC2ERKS_	bVar4	isBuiltIn	INFERRED	Binding::IsBuiltIn() of the source	^\s*bVar4\ =\ \(bool\)\(\(int\ \(\*\)\(\)\)Binding__IsBuiltIn\)\(param_2\);$	+2
 use	__ZN7BindingC1ERKS_	bVar4	isBuiltIn	INFERRED	Binding::IsBuiltIn() of the source	^\s*bVar4\ =\ \(bool\)\(\(int\ \(\*\)\(\)\)Binding__IsBuiltIn\)\(param_2\);$	+2
 use	Binding__SetNameFromArrayName	iVar2	nameLen	INFERRED	strlen of the new name	^\s*if\ \(\(param_2\ !=\ \(char\ \*\)0x0\)\ \&\&\ \(iVar2\ =\ _strlen\(param_2\),\ 0\ <\ iVar2\)\)\ \{$	+3
-use	Binding__SetNameFromArrayName	iVar2	lenOrBracketPos	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 0x10\);$	+2
-use	Binding__SetNameFromArrayName	iVar2	lenOrBracketPos	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar6\ =\ iVar2\ \+\ \-1;$	+1
-use	Binding__SetNameFromArrayName	iVar2	lenOrBracketPos	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar2\ =\ iVar6;$@2	+1
-use	Binding__SetNameFromArrayName	iVar2	lenOrBracketPos	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*if\ \(iVar2\ !=\ 0\)\ \{$	+1
-use	Binding__SetNameFromArrayName	iVar2	lenOrBracketPos	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+use	Binding__SetNameFromArrayName	iVar2	nameLengthCountdown	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 0x10\);$	+2
+use	Binding__SetNameFromArrayName	iVar2	nameLengthCountdown	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar6\ =\ iVar2\ \+\ \-1;$	+1
+use	Binding__SetNameFromArrayName	iVar2	nameLengthCountdown	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar2\ =\ iVar6;$@2	+1
+use	Binding__SetNameFromArrayName	iVar2	nameLengthCountdown	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*if\ \(iVar2\ !=\ 0\)\ \{$	+1
+use	Binding__SetNameFromArrayName	iVar2	nameLengthCountdown	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
 use	Binding__SetNameFromArrayName	iVar2	clearIdx	INFERRED	index while clearing the name tail	^\s*iVar2\ =\ iVar6;$	+1
 use	Binding__SetNameFromArrayName	iVar2	clearIdx	INFERRED	index while clearing the name tail	^\s*\*\(undefined1\ \*\)\(\*\(int\ \*\)\(this\ \+\ 8\)\ \+\ iVar2\)\ =\ 0;$	+3
 use	Binding__SetNameFromArrayName	iVar4	nameData	INFERRED	copied name (+8)	^\s*iVar4\ =\ \*\(int\ \*\)\(this\ \+\ 8\);$	+1
@@ -200,17 +194,6 @@ use	BindingTable__InsertClientAttribBinding	pBVar4	nextNode	INFERRED	next node w
 local	BindingTable__InsertAttribBinding	iVar3	prevLocation	INFERRED	location of the previous binding in the list
 local	BindingTable__InsertAttribBinding	iVar4	newLocation	INFERRED	first-fit location candidate for the new binding
 local	BindingTable__InsertAttribBinding	uVar1	result	INFERRED	1 when the binding was inserted
-use	BindingTable__InsertAttribBinding	iVar2	builtInOrCmp	INFERRED	flow-joined: IsBuiltIn flag, memcmp against "gl_Vertex" and the first binding's location	^\s*iVar2\ =\ Binding__IsBuiltIn\(param_2\);$	+1
-use	BindingTable__InsertAttribBinding	iVar2	builtInOrCmp	INFERRED	flow-joined: IsBuiltIn flag, memcmp against "gl_Vertex" and the first binding's location	^\s*if\ \(\(iVar2\ !=\ 0\)\ \&\&\ \(iVar2\ =\ _memcmp\(\*\(undefined4\ \*\)\(param_2\ \+\ 8\),"gl_Vertex",10\),\ iVar2\ ==\ 0\)\)$	+1
-use	BindingTable__InsertAttribBinding	iVar2	builtInOrCmp	INFERRED	flow-joined: IsBuiltIn flag, memcmp against "gl_Vertex" and the first binding's location	^\s*if\ \(\(pBVar6\ !=\ \(unsigned\ char\ \*\)0x0\)\ \&\&\ \(iVar2\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetLocation\)\(pBVar6\),\ iVar2\ ==\ 0\)\)\ \{$	+1
-use	BindingTable__InsertAttribBinding	iVar2	curLocation	INFERRED	location of the binding being compared	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetLocation\)\(this_00\);$	+1
-use	BindingTable__InsertAttribBinding	iVar2	curLocation	INFERRED	location of the binding being compared	^\s*if\ \(iVar4\ \+\ iVar3\ <=\ iVar2\)\ goto\ LAB_97bb0db4;$	+1
-use	BindingTable__InsertAttribBinding	iVar2	hashIdx	INFERRED	hash bucket index	^\s*iVar2\ =\ Binding__GetHash\(param_2,\*\(uint\ \*\)this\);$	+2
-use	BindingTable__InsertAttribBinding	iVar2	hashIdx	INFERRED	hash bucket index	^\s*\*\(unsigned\ char\ \*\*\)\(iVar2\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ 0x10\)\)\ =\ param_2;$	+1
-use	BindingTable__InsertAttribBinding	iVar2	activeIndex	INFERRED	running active-attribute count	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 0x1c\);$	+3
-use	BindingTable__InsertAttribBinding	iVar2	isBuiltIn	INFERRED	Binding::IsBuiltIn()	^\s*iVar2\ =\ Binding__IsBuiltIn\(param_2\);$@2	+2
-use	BindingTable__InsertAttribBinding	iVar2	bindingSlots	INFERRED	slot count of the binding	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetBindingSlots\)\(param_2\);$	+2
-use	BindingTable__InsertAttribBinding	iVar2	bindingSlots	INFERRED	slot count of the binding	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetBindingSlots\)\(param_2\);$@2	+2
 use	BindingTable__InsertAttribBinding	pBVar5	prevBinding	INFERRED	previous binding in the list	^\s*pBVar5\ =\ \(unsigned\ char\ \*\)0x0;$	+1
 use	BindingTable__InsertAttribBinding	pBVar5	prevBinding	INFERRED	previous binding in the list	^\s*pBVar5\ =\ this_00;$	+1
 use	BindingTable__InsertAttribBinding	pBVar5	prevBinding	INFERRED	previous binding in the list	^\s*if\ \(pBVar5\ ==\ \(unsigned\ char\ \*\)0x0\)\ \{$	+1
@@ -250,7 +233,6 @@ use	BindingTable__InsertUniformArray	iVar4	isBuiltIn	INFERRED	Binding::IsBuiltIn
 use	BindingTable__InsertUniformArray	iVar4	bindingSlots	INFERRED	slot count of the binding	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetBindingSlots\)\(this_00\);$	+2
 use	BindingTable__InsertUniformArray	iVar4	bindingSlots	INFERRED	slot count of the binding	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetBindingSlots\)\(this_00\);$@2	+2
 use	BindingTable__InsertUniformArray	iVar4	bindingSlots	INFERRED	slot count of the binding	^\s*iVar4\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetBindingSlots\)\(param_2\);$	+2
-local	BindingTable__InsertUniformArray	iVar5	slotsOrFound	INFERRED	flow-joined: FindSymbolByName result, then the slot count of the last located binding
 use	BindingTable__InsertUniformArray	iVar6	curLocation	INFERRED	location of the list entry being examined	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)Binding__GetLocation\)\(pBVar8\);$	+2
 use	BindingTable__InsertUniformArray	iVar6	curLocation	INFERRED	location of the list entry being examined	^\s*iVar4\ =\ iVar6;$	+1
 use	BindingTable__InsertUniformArray	iVar11	stageIdx	INFERRED	stage table index	^\s*for\ \(iVar11\ =\ param_4;\ iVar11\ <\ param_5;\ iVar11\ =\ iVar11\ \+\ 1\)\ \{$	+5

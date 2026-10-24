@@ -108,7 +108,6 @@ use	ParseBranch	iVar1	atomicStore	INFERRED	every definition is the result of a c
 use	FUN_97b9a04c	iVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#16	+1	all	all
 use	FUN_97b9a844	iVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#17	+1	all	all
 use	TParseContext__reservedErrorCheck	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#30	+15	all	all
-use	TParseContext__arraySetMaxSize	iVar3	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#135	+1	all	all
 use	TParseContext__nonInitErrorCheck	iVar2	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#154	+1	all	all
 use	TParseContext__extensionErrorCheck	iVar2	atomicStore2	INFERRED	every definition is the result of a call whose name says it returns this	#98	+148	all	all
 use	TParseContext__extensionErrorCheck	iVar5	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#138	+45	all	all

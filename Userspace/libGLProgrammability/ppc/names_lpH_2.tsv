@@ -103,7 +103,7 @@ use	TIntermAggregate__compileNode	pTVar10	paramType	INFERRED	type of the child (
 use	TIntermAggregate__compileNode	pTVar10	constructedType	INFERRED	node type passed to TPPStreamCompiler__construct	^\s*pTVar10\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x3c\)\)\(this\);$	+2
 local	TIntermAggregate__compileNode	this_00	functionTable	INFERRED	compiler+0x6c: the FunctionTable
 local	TIntermAggregate__compileNode	this_01	operandCopy	INFERRED	new ParseOperand (0x38 bytes) copy-constructed from the child
-local	TIntermAggregate__compileNode	a2	opHeaderOrParamSlotPtr	INFERRED	pointer to the op header (3118) or to the parameter slot (3131); later only a stray register argument
+local	TIntermAggregate__compileNode	a2	lastCallArg3Ptr	INFERRED	3rd argument of the most recent AddOperation (op header) / assignOperands (param slot) call; both defs reach the later stale-r5 forwards (compileNode vtable +0x6c/+0x3c calls): one web
 local	TIntermAggregate__compileNode	puVar21	paramListCursor	INFERRED	cursor over the saved parameter list while freeing the entries
 local	TIntermAggregate__compileNode	pPVar22	functionStack	INFERRED	compiler+0x58: the ParseFunctionStack
 local	TIntermAggregate__compileNode	uVar23	returnValueName	INFERRED	name string data of the node, passed to newReturnValue

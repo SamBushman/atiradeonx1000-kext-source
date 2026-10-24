@@ -69,7 +69,7 @@ use	TIntermBinary__indirectNode	uVar10	constIndex	INFERRED	constant array index 
 use	TIntermBinary__indirectNode	uVar10	fieldIndex	INFERRED	structure field index (first word of the right operand constant)	^\s*uVar10\ =\ \*puVar9;$	+1
 use	TIntermBinary__indirectNode	uVar10	fieldIndex	INFERRED	structure field index (first word of the right operand constant)	^\s*if\ \(\(uint\)\(\*\(int\ \*\)\(local_58\ \+\ 8\)\ \-\ \*\(int\ \*\)\(local_58\ \+\ 4\)\ >>\ 3\)\ <=\ uVar10\)\ \{$	+1
 use	TIntermBinary__indirectNode	uVar10	fieldIndex	INFERRED	structure field index (first word of the right operand constant)	^\s*iVar2\ =\ uVar10\ \*\ 8;$	+1
-local	TIntermBinary__indirectNode	local_60	typeOrIndexBuf	INFERRED	address-taken scratch: "[%d]" index text buffer and the TType object written by the left type virtual call
+local	TIntermBinary__indirectNode	local_60	typeTempOverlay	INFERRED	address-taken frame array: the getType() TType temporary and the sprintf/text buffer occupy the same slot in different lifetimes; apply_names cannot split address-taken locals
 local	TIntermBinary__indirectNode	local_58	typeStructFields	INFERRED	structure field list of the TType object overlaid at local_60 (+8)
 local	TIntermBinary__indirectNode	param_3	strayArg3	INFERRED	extra register-argument slot forwarded as a dead stray argument
 local	TIntermBinary__indirectNode	param_4	strayArg4	INFERRED	extra register-argument slot forwarded as a dead stray argument

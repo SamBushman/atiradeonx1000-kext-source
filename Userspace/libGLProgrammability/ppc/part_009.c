@@ -1007,7 +1007,7 @@ int TGenericLinker__FixOutputReads(this)
   int outputSymbol;
   uint operandIdx;
   uint tempUsageFlags;
-  undefined4 opChunkOrTempIndex;
+  undefined4 opChunkScratchWord;
   int tempUsageWord2;
   int tempUsageWord3;
   undefined4 opHeader;
@@ -1034,19 +1034,19 @@ int TGenericLinker__FixOutputReads(this)
           outputSymbol = *(int *)(outputSymbol + 8)) {
         outputIsRead = false;
         outputReg = *(ushort *)(outputSymbol + 0x12);
-        opChunkOrTempIndex = **(int **)(*(int *)(stageEntry + 0x30) + 0x20);
-        if (opChunkOrTempIndex != 0) {
+        opChunkScratchWord = **(int **)(*(int *)(stageEntry + 0x30) + 0x20);
+        if (opChunkScratchWord != 0) {
           do {
             operandIdx = 0;
-            operandCount = *(uint *)(opChunkOrTempIndex + 0xc) >> 0x1d;
+            operandCount = *(uint *)(opChunkScratchWord + 0xc) >> 0x1d;
             if (operandCount != 0) {
-              operandCursor = opChunkOrTempIndex + 0x10;
+              operandCursor = opChunkScratchWord + 0x10;
               do {
                 if ((((*(uint *)(operandCursor + 0xc) >> 0x17 & 7) == 3) &&
                     (*(ushort *)(operandCursor + 0x12) == outputReg)) ||
-                   (((*(uint *)(opChunkOrTempIndex + 0xc) & 0x3fc0000) == 0x1b40000 &&
-                    (((*(uint *)(opChunkOrTempIndex + 0x14) & 0xe0000) == 0x60000 &&
-                     (*(ushort *)(opChunkOrTempIndex + 0x1a) == outputReg)))))) {
+                   (((*(uint *)(opChunkScratchWord + 0xc) & 0x3fc0000) == 0x1b40000 &&
+                    (((*(uint *)(opChunkScratchWord + 0x14) & 0xe0000) == 0x60000 &&
+                     (*(ushort *)(opChunkScratchWord + 0x1a) == outputReg)))))) {
                   outputIsRead = true;
                   break;
                 }
@@ -1055,14 +1055,14 @@ int TGenericLinker__FixOutputReads(this)
                 operandCursor = operandCursor + 8;
               } while (operandIdx < operandCount);
             }
-            opChunkOrTempIndex = *(int *)(opChunkOrTempIndex + 8);
-          } while (opChunkOrTempIndex != 0);
+            opChunkScratchWord = *(int *)(opChunkScratchWord + 8);
+          } while (opChunkScratchWord != 0);
           if (outputIsRead) {
             tempUsageFlags = 0;
-            tempUsageWord2 = opChunkOrTempIndex;
-            tempUsageWord3 = opChunkOrTempIndex;
+            tempUsageWord2 = opChunkScratchWord;
+            tempUsageWord3 = opChunkScratchWord;
             maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(*(int *)(stageEntry + 0x30) + 4));
-            opChunkOrTempIndex = CONCAT22((*(unsigned short *)((unsigned char *)&(opChunkOrTempIndex) + 0)),(short)maxIndex + 1);
+            opChunkScratchWord = CONCAT22((*(unsigned short *)((unsigned char *)&(opChunkScratchWord) + 0)),(short)maxIndex + 1);
             tempUsageFlags = (*(uint *)(outputSymbol + 0xc) >> 0x18 & 3) << 0x18 |
                        (*(uint *)(outputSymbol + 0xc) >> 0x1a & 7) << 0x1a |
                        *(uint *)(outputSymbol + 0xc) & 0xe0000000 | tempUsageFlags & 0xffffff;
@@ -1072,7 +1072,7 @@ int TGenericLinker__FixOutputReads(this)
               if (((*(uint *)(opChunk + 0x14) & 0xe0000) == 0x60000) &&
                  (*(ushort *)(opChunk + 0x1a) == outputReg)) {
                 *(uint *)(opChunk + 0x14) = *(uint *)(opChunk + 0x14) & 0xfff1ffff | 0x20000;
-                *(undefined2 *)(opChunk + 0x1a) = (*(unsigned short *)((unsigned char *)&(opChunkOrTempIndex) + 2));
+                *(undefined2 *)(opChunk + 0x1a) = (*(unsigned short *)((unsigned char *)&(opChunkScratchWord) + 2));
               }
               chunkHeaderWord = *(uint *)(opChunk + 0xc);
               operandIdx = 0;
@@ -1082,7 +1082,7 @@ int TGenericLinker__FixOutputReads(this)
                   if (((*(uint *)(operandCursor2 + 0xc) >> 0x17 & 7) == 3) &&
                      (*(ushort *)(operandCursor2 + 0x12) == outputReg)) {
                     *(uint *)(operandCursor2 + 0xc) = *(uint *)(operandCursor2 + 0xc) & 0xfc7fffff | 0x800000;
-                    *(undefined2 *)(operandCursor2 + 0x12) = (*(unsigned short *)((unsigned char *)&(opChunkOrTempIndex) + 2));
+                    *(undefined2 *)(operandCursor2 + 0x12) = (*(unsigned short *)((unsigned char *)&(opChunkScratchWord) + 2));
                     chunkHeaderWord = *(uint *)(opChunk + 0xc);
                   }
                   operandIdx = operandIdx + 1;
@@ -1145,7 +1145,7 @@ LAB_97bb40a4:
                            componentCount << 0x1a | (tempUsageFlags >> 0x1a & 7) << 0x17;
                 opDest0 = opDest0 | 0x60000;
                 opSrc0A = componentCount << 0xc | 0x8d8000;
-                opSrc0B = opChunkOrTempIndex & 0xffff;
+                opSrc0B = opChunkScratchWord & 0xffff;
                 opDest1 = (uint)outputReg;
                 insertedOp = _PPStreamInsertOperationAfterChunk
                                   (*(undefined4 *)(this + stageOffset + 0x30),&opHeader,0,0,

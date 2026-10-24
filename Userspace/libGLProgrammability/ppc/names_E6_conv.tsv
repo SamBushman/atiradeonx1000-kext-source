@@ -13,5 +13,4 @@ local	TIntermBinary__promote	uVar6	resultNominalSize	CONFIRMED	max of the left (
 local	TIntermBinary__promote	uVar8	leftBasicType	CONFIRMED	left operand's getBasicType (vtable +0x40), stored in bits 19..24 of the result type
 local	TIntermBinary__promote	uVar9	leftNominalSize	CONFIRMED	left operand's getNominalSize, stored in bits 11..18 of the result type
 local	TIntermBinary__promote	uVar10	leftIsMatrix	CONFIRMED	left operand's isMatrix (vtable +0x50) & 1, stored as bit 10 of the result type
-local	TIntermBinary__promote	iVar7	queryResultOrOperator	INFERRED	results of the operand type queries (isArray, getBasicType, isMatrix) and the binary operator code *(this+0x30) tested in the switch
 local	TIntermBinary__promote	bVar1	operandTypesMatch	INFERRED	result of comparing the left and right operand basic types for the comparison/logical operators

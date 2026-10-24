@@ -1,6 +1,5 @@
 local	ParseSymbol	bVar1	isNotMatrix	INFERRED	type is not a matrix (bit 10 clear): component count is the nominal size, not its square
 local	ParseSymbol	dVar19	i2dBias	INFERRED	magic double (2^52 or 2^52 + 2^31) subtracted in the int-to-float conversion
-local	ParseSymbol	iVar11	levelsBeginOrVariable	INFERRED	symbol table level vector start, then the TVariable found by the level search (same Ghidra variable)
 use	ParseSymbol	iVar12	resultArray	INFERRED	w1 traverser unionArray (+0x34) being filled; w2 symbol->getSymbol() TString (vtable +0x60)	^\s*iVar12\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x34\);$	+1
 use	ParseSymbol	iVar12	resultArray	INFERRED	w1 traverser unionArray (+0x34) being filled; w2 symbol->getSymbol() TString (vtable +0x60)	^\s*\*\(undefined4\ \*\)\(iVar12\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x30\)\ \*\ 4\)\ =$	+1
 use	ParseSymbol	iVar12	resultArray	INFERRED	w1 traverser unionArray (+0x34) being filled; w2 symbol->getSymbol() TString (vtable +0x60)	^\s*\*\(float\ \*\)\(iVar12\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x30\)\ \*\ 4\)\ =$	+1
