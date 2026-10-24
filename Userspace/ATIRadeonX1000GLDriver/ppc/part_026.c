@@ -5033,6 +5033,22 @@ int FUN_000fd5c8(program, ilReader)
   int program;
   uint ******ilReader;
 {
+  uint bitmapByteOffset2;
+  uint sourceRegisterIndex;
+  uint conditionStackTopIndex;
+  uint templateToken;
+  uint ilRegisterIndex2;
+  uint conditionStackCount;
+  uint bitmapByteOffset;
+  uint ilRegisterType;
+  uint *swizzleTable;
+  uint *****ifStackTopIndex;
+  uint *****ifStackCount;
+  uint *****trailingToken;
+  uint *****modifierTokenWord;
+  uint *****firstTokenWord;
+  uint ******destinationToken;
+  uint ******tokenWords;
   void *cmp1SInst;
   void *fetchTextureMapGradientsInst;
   void *mulFloatInst;
@@ -5127,7 +5143,7 @@ int FUN_000fd5c8(program, ilReader)
   int iVar34;
   uint *puVar35;
   int *piVar36;
-  uint ******ppppppuVar37;
+  uint ******loopStackData;
   uint ******ppppppuVar38;
   uint ******ppppppuVar39;
   uint ******ppppppuVar40;
@@ -5251,7 +5267,7 @@ int FUN_000fd5c8(program, ilReader)
   }
   compilerArenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
   puVar13 = (undefined4 *)Arena__alloc(compilerArenaB,0x14);
-  ppppppuVar37 = (uint ******)(puVar13 + 1);
+  loopStackData = (uint ******)(puVar13 + 1);
   *puVar13 = compilerArenaB;
   puVar13[1] = 2;
   puVar13[4] = compilerArenaB;
@@ -5334,7 +5350,7 @@ code_r0x00103c40:
       Arena__free(ifStack[3],ifStack[2]);
       Arena__free(ifStack[-1],ifStack + -1);
     }
-    if (ppppppuVar37 != (uint ******)0x0) {
+    if (loopStackData != (uint ******)0x0) {
       Arena__free(puVar13[4],puVar13[3]);
       Arena__free(*puVar13,puVar13);
     }
@@ -5379,7 +5395,7 @@ code_r0x00103c40:
     (**(code **)(*hwDescription + 0x17c))(hwDescription,program);
     FUN_000e5e70(ilReader);
   }
-  ppppppuVar49 = ilReader + 0x23;
+  tokenWords = ilReader + 0x23;
   *(undefined4 *)(program + 0x47c) = 0;
   ilOpcode = FUN_000e4408(ilReader);
   if (ilOpcode == 0x52) {
@@ -5456,7 +5472,7 @@ code_r0x000fed00:
     case 0x18:
       if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 0x2000) != 0) {
         pppuVar42 = **ilReader[0x19];
-        uVar10 = (uint)pppuVar42 >> 0x10 & 0x3f;
+        ilRegisterType = (uint)pppuVar42 >> 0x10 & 0x3f;
         if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (compiler != 0)) &&
            ((hwDescription[2] & 0x80U) != 0)) {
           ppppppuVar19 = (uint ******)((int)((unsigned char *)0xc) + 3);
@@ -5464,37 +5480,37 @@ code_r0x000fed00:
         else {
           ppppppuVar19 = (uint ******)(int)*(short *)((int)*ilReader[0x19] + 2);
         }
-        registerFile = FUN_000ec208(program,uVar10);
-        in_r6 = (uint ******)FUN_000ec2a0(program,uVar10);
+        registerFile = FUN_000ec208(program,ilRegisterType);
+        in_r6 = (uint ******)FUN_000ec2a0(program,ilRegisterType);
         iVar34 = FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile,ppppppuVar19,0);
         iVar34 = *(int *)(iVar34 + 0x38);
-        FUN_001041d0(iVar34,0,(uint)*ppppppuVar49 >> 0x10 & 3,in_r6,ppppppuVar19);
-        FUN_001041d0(iVar34,1,(uint)*ppppppuVar49 >> 0x12 & 3,in_r6,ppppppuVar19);
-        FUN_001041d0(iVar34,2,(uint)*ppppppuVar49 >> 0x14 & 3,in_r6,ppppppuVar19);
+        FUN_001041d0(iVar34,0,(uint)*tokenWords >> 0x10 & 3,in_r6,ppppppuVar19);
+        FUN_001041d0(iVar34,1,(uint)*tokenWords >> 0x12 & 3,in_r6,ppppppuVar19);
+        FUN_001041d0(iVar34,2,(uint)*tokenWords >> 0x14 & 3,in_r6,ppppppuVar19);
         in_r7 = ppppppuVar19;
-        FUN_001041d0(iVar34,3,(uint)*ppppppuVar49 >> 0x16 & 3,in_r6,ppppppuVar19);
-        pppppuVar15 = *ppppppuVar49;
-        if (((uint)pppppuVar15 & 0x1000000) != 0) {
+        FUN_001041d0(iVar34,3,(uint)*tokenWords >> 0x16 & 3,in_r6,ppppppuVar19);
+        firstTokenWord = *tokenWords;
+        if (((uint)firstTokenWord & 0x1000000) != 0) {
           *(uint *)(iVar34 + 0x13c) = *(uint *)(iVar34 + 0x13c) | 1;
-          pppppuVar15 = *ppppppuVar49;
+          firstTokenWord = *tokenWords;
         }
         *(uint *******)(iVar34 + 0x148) = ppppppuVar19;
-        *(uint *)(iVar34 + 0x140) = (uint)pppppuVar15 >> 0x19 & 1;
+        *(uint *)(iVar34 + 0x140) = (uint)firstTokenWord >> 0x19 & 1;
         *(undefined4 *)(iVar34 + 0x144) = registerFile;
       }
       goto switchD_000fdaf0_caseD_2;
     case 0x17:
-      ppppppuVar19 = (uint ******)FUN_000ec27c(program,(uint)*ppppppuVar49 >> 0x10 & 0x1f);
-      ppppppuVar38 = (uint ******)((uint)*ppppppuVar49 >> 0x15 & 0xff);
-      if ((int)*ppppppuVar49 < 0) {
-        pppppuVar15 = ilReader[0x24];
-        uVar17 = (uint)pppppuVar15 >> 9 & 1;
-        uVar10 = (uint)pppppuVar15 >> 8 & 1;
-        uVar44 = (uint)pppppuVar15 >> 10 & 1;
+      ppppppuVar19 = (uint ******)FUN_000ec27c(program,(uint)*tokenWords >> 0x10 & 0x1f);
+      ppppppuVar38 = (uint ******)((uint)*tokenWords >> 0x15 & 0xff);
+      if ((int)*tokenWords < 0) {
+        modifierTokenWord = ilReader[0x24];
+        uVar17 = (uint)modifierTokenWord >> 9 & 1;
+        uVar10 = (uint)modifierTokenWord >> 8 & 1;
+        uVar44 = (uint)modifierTokenWord >> 10 & 1;
         local_178 = (uint ******)
-                    (CONCAT31(CONCAT21(CONCAT11((char)pppppuVar15,(char)((uint)pppppuVar15 >> 2)),
-                                       (char)((uint)pppppuVar15 >> 4)),
-                              (char)((uint)pppppuVar15 >> 6)) & 0x3030303);
+                    (CONCAT31(CONCAT21(CONCAT11((char)modifierTokenWord,(char)((uint)modifierTokenWord >> 2)),
+                                       (char)((uint)modifierTokenWord >> 4)),
+                              (char)((uint)modifierTokenWord >> 6)) & 0x3030303);
       }
       else {
         uVar10 = 0;
@@ -5542,28 +5558,28 @@ code_r0x000fed00:
       goto switchD_000fdaf0_caseD_2;
     case 0x19:
       ilRegisterIndex = *(byte *)((int)ilReader + 0x8d);
-      pppppuVar15 = *ppppppuVar49;
+      firstTokenWord = *tokenWords;
       iVar34 = (uint)ilRegisterIndex * 0xc;
-      *(uint *)(*(int *)(program + 0x78) + iVar34) = (uint)pppppuVar15 >> 0x1b & 3;
+      *(uint *)(*(int *)(program + 0x78) + iVar34) = (uint)firstTokenWord >> 0x1b & 3;
       if (*(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0x50) < (int)(uint)ilRegisterIndex) {
         Compiler__fail(*(int *)(program + 8),7);
       }
-      uVar10 = ilRegisterIndex >> 3 & 0x1c;
-      *(uint *)((int)local_a0 + uVar10 + 8) =
-           1 << (ilRegisterIndex & 0x1f) | *(uint *)((int)local_a0 + uVar10 + 8);
-      *(uint *)(iVar34 + *(int *)(program + 0x78) + 8) = (uint)*ppppppuVar49 >> 0x1d & 1;
+      bitmapByteOffset = ilRegisterIndex >> 3 & 0x1c;
+      *(uint *)((int)local_a0 + bitmapByteOffset + 8) =
+           1 << (ilRegisterIndex & 0x1f) | *(uint *)((int)local_a0 + bitmapByteOffset + 8);
+      *(uint *)(iVar34 + *(int *)(program + 0x78) + 8) = (uint)*tokenWords >> 0x1d & 1;
       hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
-      iVar43 = (**(code **)(*hwDescription + 0x48))(hwDescription,program,(uint)pppppuVar15 >> 0x18 & 7);
+      iVar43 = (**(code **)(*hwDescription + 0x48))(hwDescription,program,(uint)firstTokenWord >> 0x18 & 7);
       if (iVar43 != 0) {
         *(int *)(iVar34 + *(int *)(program + 0x78) + 4) = iVar43;
       }
       goto switchD_000fdaf0_caseD_2;
     case 0x1a:
       DListNode__init(&local_124);
-      pppppuVar15 = *ppppppuVar49;
+      firstTokenWord = *tokenWords;
       in_r7 = (uint ******)0x4050607;
       uVar10 = 0;
-      if ((int)pppppuVar15 < 0) {
+      if ((int)firstTokenWord < 0) {
         pppppuVar52 = ilReader[0x24];
         bVar1 = ((uint)pppppuVar52 & 3) != 0;
         in_r7 = *(uint *******)(local_5c + -0x2bf8);
@@ -5627,7 +5643,7 @@ code_r0x000fed00:
       *(int *)(program + 0x3dc) = iVar47;
       hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
       in_r8 = *(uint *******)(program + 0x3a0);
-      (**(code **)(*hwDescription + 0x4c))(hwDescription,program,(uint)pppppuVar15 >> 0x10 & 0x3f);
+      (**(code **)(*hwDescription + 0x4c))(hwDescription,program,(uint)firstTokenWord >> 0x10 & 0x3f);
       iVar43 = *(int *)(local_11c + 8);
       iVar34 = local_11c;
       while (iVar47 = iVar43, iVar47 != 0) {
@@ -5640,17 +5656,17 @@ code_r0x000fed00:
       local_118 = (uint ****)local_124;
       goto switchD_000fdaf0_caseD_2;
     case 0x1b:
-      iVar34 = FUN_000ec27c(program,(uint)*ppppppuVar49 >> 0x10 & 0x1f);
-      ppppppuVar19 = (uint ******)((uint)*ppppppuVar49 >> 0x15 & 0xff);
+      iVar34 = FUN_000ec27c(program,(uint)*tokenWords >> 0x10 & 0x1f);
+      ppppppuVar19 = (uint ******)((uint)*tokenWords >> 0x15 & 0xff);
       local_178 = (uint ******)0x0;
-      if ((int)*ppppppuVar49 < 0) {
-        pppppuVar15 = ilReader[0x24];
+      if ((int)*tokenWords < 0) {
+        modifierTokenWord = ilReader[0x24];
         (*(unsigned short *)((unsigned char *)&(local_178) + 2)) =
-             (ushort)(((uint)(byte)((((uint)pppppuVar15 & 0xc0) == 0) << 1) << 0x14) >> 0x15);
+             (ushort)(((uint)(byte)((((uint)modifierTokenWord & 0xc0) == 0) << 1) << 0x14) >> 0x15);
         local_178 = (uint ******)
-                    CONCAT13(((uint)pppppuVar15 & 3) == 0,
-                             CONCAT12(((uint)pppppuVar15 & 0xc) == 0,(*(unsigned short *)((unsigned char *)&(local_178) + 2))));
-        (*(unsigned short *)((unsigned char *)&(local_178) + 2)) = CONCAT11(((uint)pppppuVar15 & 0x30) == 0,(undefined1)local_178);
+                    CONCAT13(((uint)modifierTokenWord & 3) == 0,
+                             CONCAT12(((uint)modifierTokenWord & 0xc) == 0,(*(unsigned short *)((unsigned char *)&(local_178) + 2))));
+        (*(unsigned short *)((unsigned char *)&(local_178) + 2)) = CONCAT11(((uint)modifierTokenWord & 0x30) == 0,(undefined1)local_178);
       }
       registerIndex = (int)*(short *)((int)*ilReader[0x19] + 2);
       registerFile = FUN_000ec208(program,(uint)**ilReader[0x19] >> 0x10 & 0x3f);
@@ -5723,8 +5739,8 @@ code_r0x000fed00:
       if (bVar1) {
         (**(code **)(*piVar18 + 0x90))(piVar18,virtualRegister);
       }
-      pppppuVar15 = *ppppppuVar49;
-      in_r6 = (uint ******)((uint)pppppuVar15 >> 0x17 & 0x3f);
+      firstTokenWord = *tokenWords;
+      in_r6 = (uint ******)((uint)firstTokenWord >> 0x17 & 0x3f);
       if (((unsigned char *)0x4) < in_r6) {
         in_r6 = (uint ******)0x0;
       }
@@ -5750,7 +5766,7 @@ code_r0x000fed00:
       operandRecord2 = IRInst__getOperandRecord(mulAddInst,1);
       *(undefined4 *)(operandRecord2 + 0x10) = 0;
       ((void (*)())IRInst__makeLiteralVec4Float)(mulAddInst,program,2,0.0,1.0,0.0,0.0);
-      local_8c = (uint)(short)((ushort)((uint)pppppuVar15 >> 0x10) & 0x3f);
+      local_8c = (uint)(short)((ushort)((uint)firstTokenWord >> 0x10) & 0x3f);
       local_80 = local_8c | 0x120000;
       in_r8 = (uint ******)(local_8c | 0x100000);
       in_r7 = (uint ******)(local_8c | 0x110000);
@@ -5781,7 +5797,7 @@ code_r0x000fed00:
       local_ac = 1;
       goto switchD_000fdaf0_caseD_2;
     case 0x43:
-      pppppuVar15 = *ppppppuVar49;
+      firstTokenWord = *tokenWords;
       in_r6 = (uint ******)*ilReader[0x19];
       in_r7 = (uint ******)0x4050607;
       if (((uint)*in_r6 & 0x400000) != 0) {
@@ -5815,16 +5831,16 @@ code_r0x000fed00:
       }
       in_r8 = (uint ******)currentBlock;
       (**(code **)(**(int **)(compiler + 0x30c) + 0x4c))
-                (*(int **)(compiler + 0x30c),program,(uint)pppppuVar15 >> 0x10 & 0x3f);
+                (*(int **)(compiler + 0x30c),program,(uint)firstTokenWord >> 0x10 & 0x3f);
       goto switchD_000fdaf0_caseD_2;
     case 0x6e:
       compilerArenaA = *(undefined4 *)(compiler + 0x374);
-      pppppuVar15 = ilReader[(int)ilReader[0x16] + 0x23];
+      trailingToken = ilReader[(int)ilReader[0x16] + 0x23];
       blockAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x134);
       *blockAllocation = compilerArenaA;
       pppppuVar52 = (uint *****)(blockAllocation + 1);
       Block__ctor_ea148(pppppuVar52,*(undefined4 *)(program + 8));
-      blockAllocation[0x4c] = pppppuVar15;
+      blockAllocation[0x4c] = trailingToken;
       blockAllocation[1] = PTR_DAT_001e8bd0 + 8;
       currentBlock = pppppuVar52;
       FUN_000ec3ac(program,previousBlock,pppppuVar52);
@@ -5853,7 +5869,7 @@ code_r0x000fed00:
       *(int *)(operandRecord + 8) = newTempIndex2;
       local_178 = (uint ******)0x10203;
       in_r8 = (uint ******)&local_174;
-      ((int (*)())FUN_000fb3d4)(program,local_68,ppppppuVar49,*ilReader[0x1b],ppppppuVar37,in_r8,&local_13c);
+      ((int (*)())FUN_000fb3d4)(program,local_68,tokenWords,*ilReader[0x1b],loopStackData,in_r8,&local_13c);
       pppuVar42 = **ilReader[0x1b];
       if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
          ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
@@ -5878,14 +5894,14 @@ code_r0x000fed00:
         iVar43 = *(int *)(iVar47 + 8);
       }
       ((int (*)())FUN_000f92fc)(program,ppppppuVar19,currentBlock);
-      uVar10 = conditionStack[1];
-      if (uVar10 < *conditionStack) {
-        _memset(uVar10 * 4 + conditionStack[2],0,4);
-        conditionStack[1] = uVar10 + 1;
-        piVar36 = (int *)(uVar10 * 4 + conditionStack[2]);
+      conditionStackCount = conditionStack[1];
+      if (conditionStackCount < *conditionStack) {
+        _memset(conditionStackCount * 4 + conditionStack[2],0,4);
+        conditionStack[1] = conditionStackCount + 1;
+        piVar36 = (int *)(conditionStackCount * 4 + conditionStack[2]);
       }
       else {
-        piVar36 = (int *)Vector__elementRefGrow(conditionStack,uVar10);
+        piVar36 = (int *)Vector__elementRefGrow(conditionStack,conditionStackCount);
       }
       goto code_r0x000febe0;
     case 0x73:
@@ -5899,28 +5915,28 @@ code_r0x000fed00:
       break;
     case 0x76:
     case 0x77:
-      if ((ilOpcode == 0x76) && ((int)*ppppppuVar49 < 0)) {
+      if ((ilOpcode == 0x76) && ((int)*tokenWords < 0)) {
         pppppuVar52 = ilReader[10];
         in_r6 = (uint ******)0x0;
-        pppppuVar15 = ilReader[(int)ilReader[0x16] + 0x23];
+        trailingToken = ilReader[(int)ilReader[0x16] + 0x23];
         virtualRegister = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x43,0xffffffff,0);
         iVar34 = FUN_00109b74(0x10a,*(undefined4 *)(program + 8));
         *(int *)(program + 0x354) = iVar34;
         IRInst__setOperandRef(iVar34,0,virtualRegister);
-        *(uint ******)(iVar34 + 300) = pppppuVar52 + (int)pppppuVar15;
+        *(uint ******)(iVar34 + 300) = pppppuVar52 + (int)trailingToken;
         Block__appendInst(*(undefined4 *)(program + 0x3a0),iVar34);
       }
       else {
         iVar34 = 1;
         ppppuVar45 = *ilReader[0x1b];
-        uVar44 = (uint)*(ushort *)((int)ppppuVar45 + 2);
-        uVar10 = (uint)*ppppuVar45 >> 0x10 & 0x3f;
+        sourceRegisterIndex = (uint)*(ushort *)((int)ppppuVar45 + 2);
+        ilRegisterType = (uint)*ppppuVar45 >> 0x10 & 0x3f;
         if ((int)*ppppuVar45 < 0) {
           iVar34 = 2;
-          uVar44 = uVar44 | (int)ppppuVar45[1] << 0x10;
+          sourceRegisterIndex = sourceRegisterIndex | (int)ppppuVar45[1] << 0x10;
         }
         pppuVar42 = ppppuVar45[iVar34];
-        if (uVar10 == 0x1c) {
+        if (ilRegisterType == 0x1c) {
           puVar12 = *(uint **)(program + 0x90);
           if (puVar12 == (uint *)0x0) {
             compilerArenaA = *(undefined4 *)(compiler + 0x374);
@@ -5950,43 +5966,43 @@ code_r0x000fed00:
             *(uint **)(program + 0x8c) = puVar12;
           }
         }
-        if (uVar44 < *puVar12) {
+        if (sourceRegisterIndex < *puVar12) {
           uVar17 = puVar12[1];
-          if (uVar17 <= uVar44) {
-            _memset(uVar17 * 4 + puVar12[2],0,(uVar44 - uVar17) * 4 + 4);
-            puVar12[1] = uVar44 + 1;
+          if (uVar17 <= sourceRegisterIndex) {
+            _memset(uVar17 * 4 + puVar12[2],0,(sourceRegisterIndex - uVar17) * 4 + 4);
+            puVar12[1] = sourceRegisterIndex + 1;
           }
-          puVar12 = (uint *)(uVar44 * 4 + puVar12[2]);
+          puVar12 = (uint *)(sourceRegisterIndex * 4 + puVar12[2]);
         }
         else {
-          puVar12 = (uint *)Vector__elementRefGrow(puVar12,uVar44);
+          puVar12 = (uint *)Vector__elementRefGrow(puVar12,sourceRegisterIndex);
         }
         *puVar12 = (uint)pppuVar42;
-        iVar34 = (uVar44 >> 3 & 0x1ffffffc) + *(int *)(program + 0x434);
-        *(uint *)(iVar34 + 8) = 1 << (uVar44 & 0x1f) | *(uint *)(iVar34 + 8);
+        iVar34 = (sourceRegisterIndex >> 3 & 0x1ffffffc) + *(int *)(program + 0x434);
+        *(uint *)(iVar34 + 8) = 1 << (sourceRegisterIndex & 0x1f) | *(uint *)(iVar34 + 8);
         if ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 8) != 0) {
           compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
           instAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
           *instAllocation = compilerArenaA;
           instObject = instAllocation + 1;
           FUN_00109a80(instObject,0xfa,*(undefined4 *)(program + 8));
-          registerFile = FUN_000ec208(program,uVar10);
+          registerFile = FUN_000ec208(program,ilRegisterType);
           operandRecord = IRInst__getOperandRecord(instObject,0);
           *(undefined4 *)(operandRecord + 0xc) = registerFile;
-          *(uint *)(operandRecord + 8) = uVar44;
+          *(uint *)(operandRecord + 8) = sourceRegisterIndex;
           instAllocation[0x4c] = pppuVar42;
           ((int (*)())FUN_000f92fc)(program,instObject,*(undefined4 *)(program + 0x3a0));
         }
       }
       goto switchD_000fdaf0_caseD_2;
     case 0x78:
-      *(uint *)(program + 0x400) = (uint)*ppppppuVar49 >> 0x10 & 0x3fff;
+      *(uint *)(program + 0x400) = (uint)*tokenWords >> 0x10 & 0x3fff;
       goto switchD_000fdaf0_caseD_2;
     case 0x7a:
-      *(uint *)(program + 0x3f8) = (uint)*ppppppuVar49 >> 0x10 & 0x3fff;
+      *(uint *)(program + 0x3f8) = (uint)*tokenWords >> 0x10 & 0x3fff;
       goto switchD_000fdaf0_caseD_2;
     case 0x7c:
-      *(uint *)(program + 0x3fc) = (uint)*ppppppuVar49 >> 0x10 & 0x3fff;
+      *(uint *)(program + 0x3fc) = (uint)*tokenWords >> 0x10 & 0x3fff;
       goto switchD_000fdaf0_caseD_2;
     case 0x7d:
       ppppuVar45 = *ilReader[0x19];
@@ -5995,7 +6011,7 @@ code_r0x000fed00:
           local_178 = (uint ******)0x0;
           ppppppuVar19 = (uint ******)(int)*(short *)((int)ppppuVar45 + 2);
           registerFile = FUN_000ec208(program,(uint)*ppppuVar45 >> 0x10 & 0x3f);
-          iVar34 = FUN_000ec27c(program,(uint)*ppppppuVar49 >> 0x10 & 0x3fff);
+          iVar34 = FUN_000ec27c(program,(uint)*tokenWords >> 0x10 & 0x3fff);
           if (iVar34 == 0) {
             *(uint *******)(*(int *)(program + 0x3ac) + 0x44) = ppppppuVar19;
           }
@@ -6060,13 +6076,13 @@ code_r0x000fed00:
         in_r7 = (uint ******)0x10203;
         in_r6 = (uint ******)(uint)*(ushort *)((int)ppppuVar45 + 2);
         in_r8 = (uint ******)0x0;
-        (**(code **)(*hwDescription + 0x54))(hwDescription,in_r6,(uint)*ppppppuVar49 >> 0x10 & 0x3fff);
+        (**(code **)(*hwDescription + 0x54))(hwDescription,in_r6,(uint)*tokenWords >> 0x10 & 0x3fff);
       }
       goto switchD_000fdaf0_caseD_2;
     case 0x7e:
-      uVar44 = (uint)*ppppppuVar49 >> 0xe & 0x1f;
+      uVar44 = (uint)*tokenWords >> 0xe & 0x1f;
       ppppppuVar19 = (uint ******)FUN_000ec27c(program,uVar44);
-      uVar10 = (uint)*ppppppuVar49 >> 0x13 & 7;
+      uVar10 = (uint)*tokenWords >> 0x13 & 7;
       if (uVar10 == 3) {
         constantFlag = true;
         bVar3 = false;
@@ -6096,23 +6112,23 @@ code_r0x000feeb8:
         bVar3 = true;
         bVar2 = false;
       }
-      ppppppuVar49 = (uint ******)*ilReader[0x19];
-      pppppuVar15 = *ppppppuVar49;
-      if (((uint)pppppuVar15 & 0x400000) == 0) {
-        if (((uint)pppppuVar15 & 0x2000000) == 0) {
+      destinationToken = (uint ******)*ilReader[0x19];
+      firstTokenWord = *destinationToken;
+      if (((uint)firstTokenWord & 0x400000) == 0) {
+        if (((uint)firstTokenWord & 0x2000000) == 0) {
           ppppppuVar40 = (uint ******)0x0;
           ppppppuVar38 = (uint ******)0x0;
         }
         else {
-          ppppppuVar40 = ppppppuVar49 + 1;
+          ppppppuVar40 = destinationToken + 1;
           ppppppuVar38 = (uint ******)0x0;
         }
       }
       else {
-        ppppppuVar38 = ppppppuVar49 + 1;
+        ppppppuVar38 = destinationToken + 1;
         ppppppuVar40 = (uint ******)0x0;
-        if (((uint)pppppuVar15 & 0x2000000) != 0) {
-          ppppppuVar40 = ppppppuVar49 + 2;
+        if (((uint)firstTokenWord & 0x2000000) != 0) {
+          ppppppuVar40 = destinationToken + 2;
         }
       }
       if (((*(uint *)(program + 0x30) & 1) == 0) && ((*(uint *)(program + 0x30) & 0x2000) == 0)) {
@@ -6123,29 +6139,29 @@ code_r0x000feeb8:
           if (((uint)*ppppppuVar38 & 3) == 1) {
             puVar12 = &DAT_001aa9d0;
           }
-          puVar35 = &local_178;
+          swizzleTable = &local_178;
           local_178 = (uint ******)*puVar12;
           if (((uint)*ppppppuVar38 & 0xc) == 4) {
-            puVar35 = &UNK_001aa9c4;
+            swizzleTable = &UNK_001aa9c4;
           }
           puVar12 = &local_178;
-          local_178 = (uint ******)*puVar35;
+          local_178 = (uint ******)*swizzleTable;
           if (((uint)*ppppppuVar38 & 0x30) == 0x10) {
             puVar12 = &UNK_001aa9c0;
           }
-          puVar35 = &local_178;
+          swizzleTable = &local_178;
           local_178 = (uint ******)*puVar12;
           if (((uint)*ppppppuVar38 & 0xc0) == 0x40) {
-            puVar35 = &UNK_001aa9bc;
+            swizzleTable = &UNK_001aa9bc;
           }
-          local_178 = (uint ******)*puVar35;
+          local_178 = (uint ******)*swizzleTable;
           local_170 = (uint *****)local_178;
         }
       }
       else {
-        uVar10 = (uint)pppppuVar15 >> 0x10 & 0x3f;
-        ppppppuVar48 = (uint ******)(uint)*(ushort *)((int)ppppppuVar49 + 2);
-        registerFile = FUN_000ec208(program,uVar10);
+        ilRegisterType = (uint)firstTokenWord >> 0x10 & 0x3f;
+        ppppppuVar48 = (uint ******)(uint)*(ushort *)((int)destinationToken + 2);
+        registerFile = FUN_000ec208(program,ilRegisterType);
         puVar12 = local_13c;
         ppppppuVar38 = *(uint *******)(program + 1000);
         if ((int)ppppppuVar48 <= (int)*(uint *******)(program + 1000)) {
@@ -6184,9 +6200,9 @@ code_r0x000feeb8:
           in_r8 = *(uint *******)(program + 0x3a0);
           hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
           (**(code **)(*hwDescription + 0x4c))(hwDescription,program,ppppppuVar48);
-          in_r6 = ppppppuVar49;
+          in_r6 = destinationToken;
         }
-        else if (uVar10 != 9) {
+        else if (ilRegisterType != 9) {
           uVar10 = (uint)*(ushort *)((int)ppppppuVar40 + 2);
           if (uVar10 < *local_13c) {
             uVar44 = local_13c[1];
@@ -6211,14 +6227,14 @@ code_r0x000feeb8:
       goto switchD_000fdaf0_caseD_2;
     case 0x80:
       ilRegisterIndex = *(byte *)((int)ilReader + 0x8d);
-      uVar10 = (uint)*ppppppuVar49 >> 0x18 & 0xf;
+      uVar10 = (uint)*tokenWords >> 0x18 & 0xf;
       if (hwDescription[0x14] < (int)(uint)ilRegisterIndex) {
         Compiler__fail(compiler,7);
       }
-      uVar44 = ilRegisterIndex >> 3 & 0x1c;
+      bitmapByteOffset2 = ilRegisterIndex >> 3 & 0x1c;
       iVar34 = (uint)ilRegisterIndex * 0xc;
-      *(uint *)((int)local_a0 + uVar44 + 8) =
-           1 << (ilRegisterIndex & 0x1f) | *(uint *)((int)local_a0 + uVar44 + 8);
+      *(uint *)((int)local_a0 + bitmapByteOffset2 + 8) =
+           1 << (ilRegisterIndex & 0x1f) | *(uint *)((int)local_a0 + bitmapByteOffset2 + 8);
       *(undefined4 *)(*(int *)(program + 0x78) + iVar34) = 1;
       if (uVar10 != 0) {
         *(uint *)(iVar34 + *(int *)(program + 0x78) + 4) = uVar10;
@@ -6250,12 +6266,12 @@ code_r0x000feeb8:
       }
       goto switchD_000fdaf0_caseD_2;
     case 0x87:
-      uVar10 = (uint)*(byte *)((int)ilReader + 0x8d);
-      pppppuVar15 = *ppppppuVar49;
-      if (*(int *)(program + 0x7c) < (int)uVar10) {
-        *(uint *)(program + 0x7c) = uVar10;
+      ilRegisterIndex2 = (uint)*(byte *)((int)ilReader + 0x8d);
+      firstTokenWord = *tokenWords;
+      if (*(int *)(program + 0x7c) < (int)ilRegisterIndex2) {
+        *(uint *)(program + 0x7c) = ilRegisterIndex2;
       }
-      *(uint *)(program + 0x84) = 1 << (uVar10 & 0x3f) | *(uint *)(program + 0x84);
+      *(uint *)(program + 0x84) = 1 << (ilRegisterIndex2 & 0x3f) | *(uint *)(program + 0x84);
       local_178 = (uint ******)0x10203;
       registerMap = *(undefined4 *)(program + 0x3ac);
       newTempIndex = *(int *)(compiler + 0x3ac) + -1;
@@ -6268,17 +6284,17 @@ code_r0x000feeb8:
       movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
       IRInst__setOperandRef(movFloatInst,0,uVar50);
       local_70 = &local_178;
-      ((int (*)())FUN_000fa958)(program,5,1,ilReader,movFloatInst,1,0,local_70,ppppppuVar37,1,currentBlock);
+      ((int (*)())FUN_000fa958)(program,5,1,ilReader,movFloatInst,1,0,local_70,loopStackData,1,currentBlock);
       ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
       getResourceInst = IRInst__create(0x109,*(undefined4 *)(program + 8));
-      *(uint *)((int)getResourceInst + 0x134) = uVar10;
+      *(uint *)((int)getResourceInst + 0x134) = ilRegisterIndex2;
       IRInst__setOperandRef(getResourceInst,0,virtualRegister);
       IRInst__setOperandRef(getResourceInst,1,uVar50);
       ((int (*)())FUN_000f92fc)(program,getResourceInst,currentBlock);
       puVar9 = PTR_DAT_001e8b8c;
       remapTable = PTR_DAT_001e8b64;
       local_178 = (uint ******)0x10203;
-      if (((uint)pppppuVar15 & 0x1f000000) != 0x1000000) {
+      if (((uint)firstTokenWord & 0x1f000000) != 0x1000000) {
         iVar34 = 0;
         do {
           int2FInst = IRInst__create(0xe1,*(undefined4 *)(program + 8));
@@ -6297,7 +6313,7 @@ code_r0x000feeb8:
       in_r8 = (uint ******)((int)((unsigned char *)0x0) + 1);
       in_r6 = ilReader;
       in_r7 = ppppppuVar49;
-      ((int (*)())FUN_000fa958)(program,0,0,ilReader,ppppppuVar49,1,0,local_70,ppppppuVar37,1,currentBlock);
+      ((int (*)())FUN_000fa958)(program,0,0,ilReader,ppppppuVar49,1,0,local_70,loopStackData,1,currentBlock);
       IRInst__setOperandRef(ppppppuVar49,1,virtualRegister);
 code_r0x000ff070:
       ((int (*)())FUN_000f92fc)(program,ppppppuVar49,currentBlock);
@@ -6308,11 +6324,11 @@ code_r0x000ff070:
       *instAllocation = compilerArenaA;
       ppppppuVar19 = (uint ******)(instAllocation + 1);
       IRInst__ctor_10502c(ppppppuVar19,0xb4,*(undefined4 *)(program + 8));
-      if (((uint)*ppppppuVar49 & 0x3fff0000) != 0) {
+      if (((uint)*tokenWords & 0x3fff0000) != 0) {
         instAllocation[0x4c] = 1;
       }
       in_r8 = (uint ******)&local_174;
-      ((int (*)())FUN_000fb3d4)(program,local_68,ppppppuVar49,*ilReader[0x1b],ppppppuVar37,in_r8,&local_13c);
+      ((int (*)())FUN_000fb3d4)(program,local_68,tokenWords,*ilReader[0x1b],loopStackData,in_r8,&local_13c);
       pppuVar42 = **ilReader[0x1b];
       if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
          ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
@@ -6321,7 +6337,7 @@ code_r0x000ff070:
       else {
         iVar34 = (int)*(short *)((int)*ilReader[0x1b] + 2);
       }
-      uVar10 = (uint)pppuVar42 >> 0x10 & 0x3f;
+      ilRegisterType = (uint)pppuVar42 >> 0x10 & 0x3f;
       iVar43 = FUN_00127534(*(undefined4 *)(program + 0x3ac),0x2c,0,0);
       if (iVar43 == 0) {
         compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
@@ -6342,15 +6358,15 @@ code_r0x000ff070:
         VReg__addUse(iVar43,1,puVar24);
       }
       IRInst__setOperandRef(ppppppuVar19,0,iVar43);
-      registerFile = FUN_000ec208(program,uVar10);
+      registerFile = FUN_000ec208(program,ilRegisterType);
       operandRecord2 = IRInst__getOperandRecord(ppppppuVar19,1);
       *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
       *(int *)(operandRecord2 + 8) = iVar34;
-      registerFile = FUN_000ec208(program,uVar10);
+      registerFile = FUN_000ec208(program,ilRegisterType);
       operandRecord2 = IRInst__getOperandRecord(ppppppuVar19,2);
       *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
       *(int *)(operandRecord2 + 8) = iVar34;
-      registerFile = FUN_000ec208(program,uVar10);
+      registerFile = FUN_000ec208(program,ilRegisterType);
       operandRecord2 = IRInst__getOperandRecord(ppppppuVar19,3);
       *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
       local_70 = &local_178;
@@ -6437,9 +6453,9 @@ code_r0x000febe0:
             iVar23 = ((int (*)())FUN_000f8980)(ilOpcode,ppppppuVar38,
                                   *(undefined4 *)(*(int *)(iVar20 + 0x30c) + 0xc)), iVar22 <= iVar23
             ; iVar22 = iVar22 + 1) {
-          in_r6 = ppppppuVar37;
+          in_r6 = loopStackData;
           in_r7 = (uint ******)local_a4;
-          ((int (*)())FUN_000f9a58)(program,local_6c,*(undefined4 *)((int)ilReader[0x19] + iVar21),ppppppuVar37,
+          ((int (*)())FUN_000f9a58)(program,local_6c,*(undefined4 *)((int)ilReader[0x19] + iVar21),loopStackData,
                        local_a4);
           iVar20 = *(int *)(program + 8);
           iVar21 = iVar21 + 0x14;
@@ -6457,8 +6473,8 @@ code_r0x000febe0:
             iVar23 <= iVar25; iVar23 = iVar23 + 1) {
           in_r6 = *(uint *******)((int)ilReader[0x1b] + iVar22);
           in_r8 = (uint ******)&local_174;
-          in_r7 = ppppppuVar37;
-          ((int (*)())FUN_000fb3d4)(program,local_68,ppppppuVar49,in_r6,ppppppuVar37,in_r8,&local_13c);
+          in_r7 = loopStackData;
+          ((int (*)())FUN_000fb3d4)(program,local_68,tokenWords,in_r6,loopStackData,in_r8,&local_13c);
           iVar20 = *(int *)(program + 8);
           iVar22 = iVar22 + 0x14;
         }
@@ -6479,9 +6495,9 @@ code_r0x000febe0:
 code_r0x001005f4:
     ppppppuVar39 = (uint ******)currentBlock;
     ppppppuVar48 = (uint ******)PTR_DAT_001e8bd4;
-    uVar10 = *(uint *)(iVar47 + (int)local_17c * 4);
-    if (0x71 < uVar10) goto switchD_0010061c_caseD_0;
-    switch(uVar10) {
+    templateToken = *(uint *)(iVar47 + (int)local_17c * 4);
+    if (0x71 < templateToken) goto switchD_0010061c_caseD_0;
+    switch(templateToken) {
     default:
       goto switchD_0010061c_caseD_0;
     case 1:
@@ -6514,8 +6530,8 @@ code_r0x001005f4:
       in_r6 = ilReader;
       in_r7 = ppppppuVar38;
       in_r8 = (uint ******)local_c0;
-      iVar43 = ((int (*)())FUN_000fa958)(program,uVar10 - 2,ppppppuVar40,ilReader,ppppppuVar38,local_c0,local_124,
-                            &local_178,ppppppuVar37,local_b4,currentBlock);
+      iVar43 = ((int (*)())FUN_000fa958)(program,templateToken - 2,ppppppuVar40,ilReader,ppppppuVar38,local_c0,local_124,
+                            &local_178,loopStackData,local_b4,currentBlock);
       if (iVar43 != 0) {
         DList__pushFront(local_6c,iVar43);
       }
@@ -6526,11 +6542,11 @@ code_r0x001005f4:
     case 0x14:
     case 0x15:
     case 0x16:
-      uVar44 = (uint)*ppppppuVar49 >> 0x10 & 0x3fff;
-      if (uVar10 == 0x14) {
+      uVar44 = (uint)*tokenWords >> 0x10 & 0x3fff;
+      if (templateToken == 0x14) {
         in_r7 = (uint ******)(PTR_DAT_001dc78c)[uVar44];
       }
-      else if (uVar10 == 0x15) {
+      else if (templateToken == 0x15) {
         in_r7 = (uint ******)(PTR_DAT_001dc77c)[uVar44];
       }
       else {
@@ -6547,12 +6563,12 @@ code_r0x001005f4:
             stackElement = (int *)((uVar10 - 1) * 4 + puVar13[3]);
           }
           iVar43 = *stackElement;
-          pppppuVar15 = (uint *****)ifStack[1];
+          ifStackCount = (uint *****)ifStack[1];
           ppppppuVar48 = (uint ******)PTR_DAT_001e8bbc;
-          if (pppppuVar15 != (uint *****)0x0) {
+          if (ifStackCount != (uint *****)0x0) {
             pppppuVar52 = (uint *****)0x0;
-            if ((uint *****)((int)pppppuVar15 - 1U) < pppppuVar15) {
-              pppppuVar52 = (uint *****)(ifStack[2] + (int)((int)pppppuVar15 - 1U));
+            if ((uint *****)((int)ifStackCount - 1U) < ifStackCount) {
+              pppppuVar52 = (uint *****)(ifStack[2] + (int)((int)ifStackCount - 1U));
             }
             if ((int)local_188 <= (int)(*pppppuVar52)[0x2e]) {
               breakTargetBlock = *(undefined4 *)(iVar43 + 0x154);
@@ -6580,9 +6596,9 @@ code_r0x001005f4:
         ppppppuVar48 = (uint ******)PTR_DAT_001e8bb4;
         if (iVar43 == 0x72) {
           stackElement = (int *)0x0;
-          uVar10 = conditionStack[1] - 1;
-          if (uVar10 < conditionStack[1]) {
-            stackElement = (int *)(uVar10 * 4 + conditionStack[2]);
+          conditionStackTopIndex = conditionStack[1] - 1;
+          if (conditionStackTopIndex < conditionStack[1]) {
+            stackElement = (int *)(conditionStackTopIndex * 4 + conditionStack[2]);
           }
           *(int *)(*stackElement + 4) = *(int *)(*stackElement + 4) + 1;
 code_r0x00103718:
@@ -6596,22 +6612,22 @@ code_r0x00103718:
       goto switchD_0010061c_caseD_1;
     case 0x1f:
       local_17c = (int *)((int)local_17c + 1);
-      uVar10 = *(uint *)(iVar47 + (int)local_17c * 4);
+      templateToken = *(uint *)(iVar47 + (int)local_17c * 4);
       local_178 = (uint ******)
-                  (uVar10 << 0x18 | (uVar10 & 0xff00) << 8 | uVar10 >> 8 & 0xff00 | uVar10 >> 0x18);
+                  (templateToken << 0x18 | (templateToken & 0xff00) << 8 | templateToken >> 8 & 0xff00 | templateToken >> 0x18);
       local_bc = 0;
       break;
     case 0x20:
       local_17c = (int *)((int)local_17c + 1);
-      uVar10 = *(uint *)(iVar47 + (int)local_17c * 4);
+      templateToken = *(uint *)(iVar47 + (int)local_17c * 4);
       in_r7 = (uint ******)&local_124;
       local_124 = (uint *****)
-                  (uVar10 << 0x18 | (uVar10 & 0xff00) << 8 | uVar10 >> 8 & 0xff00 | uVar10 >> 0x18);
+                  (templateToken << 0x18 | (templateToken & 0xff00) << 8 | templateToken >> 8 & 0xff00 | templateToken >> 0x18);
       local_bc = 0;
       break;
     case 0x21:
       ppppppuVar48 = (uint ******)0x0;
-      switch((uint)*ppppppuVar49 >> 0x10 & 7) {
+      switch((uint)*tokenWords >> 0x10 & 7) {
       case 0:
         ppppppuVar48 = (uint ******)PTR_DAT_001e8b80;
         break;
@@ -6632,7 +6648,7 @@ code_r0x00103718:
       }
       goto switchD_00102044_default;
     case 0x22:
-      uVar10 = (uint)*ppppppuVar49 >> 0x16 & 7;
+      uVar10 = (uint)*tokenWords >> 0x16 & 7;
       if (uVar10 == 0) goto switchD_0010061c_caseD_1;
       ppppppuVar48 = IRInst__create(0x12,*(undefined4 *)(program + 8));
       if (local_100 == 0) {
@@ -6693,7 +6709,7 @@ code_r0x00102220:
       break;
     case 0x23:
       ppppppuVar48 = (uint ******)0x0;
-      switch((uint)*ppppppuVar49 >> 0x10 & 7) {
+      switch((uint)*tokenWords >> 0x10 & 7) {
       case 0:
         ppppppuVar48 = (uint ******)PTR_DAT_001e8bc0;
         break;
@@ -6715,12 +6731,12 @@ code_r0x00102220:
       goto switchD_00102044_default;
     case 0x24:
       if (puVar13[2] != 0) {
-        pppppuVar15 = (uint *****)ifStack[1];
+        ifStackCount = (uint *****)ifStack[1];
         ppppppuVar48 = (uint ******)PTR_DAT_001e8b78;
-        if (pppppuVar15 != (uint *****)0x0) {
+        if (ifStackCount != (uint *****)0x0) {
           pppppuVar52 = (uint *****)0x0;
-          if ((uint *****)((int)pppppuVar15 - 1U) < pppppuVar15) {
-            pppppuVar52 = (uint *****)(ifStack[2] + (int)((int)pppppuVar15 - 1U));
+          if ((uint *****)((int)ifStackCount - 1U) < ifStackCount) {
+            pppppuVar52 = (uint *****)(ifStack[2] + (int)((int)ifStackCount - 1U));
           }
           if ((int)local_188 <= (int)(*pppppuVar52)[0x2e]) {
             uVar10 = puVar13[2] - 1;
@@ -6771,9 +6787,9 @@ code_r0x00102220:
       break;
     case 0x27:
       pppppuVar52 = (uint *****)0x0;
-      pppppuVar15 = (uint *****)((int)ifStack[1] - 1);
-      if (pppppuVar15 < ifStack[1]) {
-        pppppuVar52 = (uint *****)(ifStack[2] + (int)pppppuVar15);
+      ifStackTopIndex = (uint *****)((int)ifStack[1] - 1);
+      if (ifStackTopIndex < ifStack[1]) {
+        pppppuVar52 = (uint *****)(ifStack[2] + (int)ifStackTopIndex);
       }
       ppppuVar45 = *pppppuVar52;
       compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
@@ -6803,9 +6819,9 @@ joined_r0x00103afc:
       goto switchD_0010061c_caseD_1;
     case 0x29:
       pppppuVar52 = (uint *****)0x0;
-      pppppuVar15 = (uint *****)((int)ifStack[1] - 1);
-      if (pppppuVar15 < ifStack[1]) {
-        pppppuVar52 = (uint *****)(ifStack[2] + (int)pppppuVar15);
+      ifStackTopIndex = (uint *****)((int)ifStack[1] - 1);
+      if (ifStackTopIndex < ifStack[1]) {
+        pppppuVar52 = (uint *****)(ifStack[2] + (int)ifStackTopIndex);
       }
       ppppuVar45 = *pppppuVar52;
       pppuVar42 = ppppuVar45[0x4f];
@@ -6895,7 +6911,7 @@ code_r0x00101020:
         uVar44 = uVar17;
       }
       else {
-        uVar17 = (uint)*ppppppuVar49 >> 0x18 & 0x1f;
+        uVar17 = (uint)*tokenWords >> 0x18 & 0x1f;
         uVar44 = (uint)*(byte *)((int)ilReader + 0x8d);
       }
       if (*(int *)(program + 0x7c) < (int)uVar44) {
@@ -6920,7 +6936,7 @@ code_r0x00101020:
       puVar26[0xc] = 0;
       puVar26[0xd] = 0;
       puVar26[0xe] = 0;
-      if ((int)*ppppppuVar49 < 0) {
+      if ((int)*tokenWords < 0) {
         uVar31 = ((int (*)())remapSelectSmall)((uint)ilReader[0x25] & 7);
         *puVar26 = uVar31;
         uVar31 = ((int (*)())remapSelectSmall)((uint)ilReader[0x25] >> 3 & 7);
@@ -6939,15 +6955,15 @@ code_r0x00101020:
         }
       }
       if (ilReader[0x18] != (uint *****)0x0) {
-        pppppuVar15 = ilReader[0x24];
-        puVar26[0xc] = (ushort)pppppuVar15 & 0xff;
-        puVar26[0xd] = (ushort)((uint)pppppuVar15 >> 8) & 0xff;
-        puVar26[0xe] = (ushort)((uint)pppppuVar15 >> 0x10) & 0xff;
+        modifierTokenWord = ilReader[0x24];
+        puVar26[0xc] = (ushort)modifierTokenWord & 0xff;
+        puVar26[0xd] = (ushort)((uint)modifierTokenWord >> 8) & 0xff;
+        puVar26[0xe] = (ushort)((uint)modifierTokenWord >> 0x10) & 0xff;
       }
       bVar3 = (uVar10 & 1) != 0;
-      local_c4 = (uint)*ppppppuVar49 >> 0x18 & 1;
+      local_c4 = (uint)*tokenWords >> 0x18 & 1;
       puVar26[9] = (ushort)local_c4 ^ 1;
-      bVar1 = ((uint)*ppppppuVar49 >> 0x19 & 1) == 0;
+      bVar1 = ((uint)*tokenWords >> 0x19 & 1) == 0;
       puVar26[7] = (ushort)bVar1;
       if (bVar3) {
         puVar26[8] = (ushort)(ilOpcode != 0x5f);
@@ -6965,7 +6981,7 @@ code_r0x00101020:
       movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
       IRInst__setOperandRef(movFloatInst,0,virtualRegister);
       local_70 = &local_178;
-      ((int (*)())FUN_000fa958)(program,5,1,ilReader,movFloatInst,1,local_124,local_70,ppppppuVar37,1,currentBlock);
+      ((int (*)())FUN_000fa958)(program,5,1,ilReader,movFloatInst,1,local_124,local_70,loopStackData,1,currentBlock);
       ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
       if (bVar3) {
         uVar50 = *(undefined4 *)(program + 0x3ac);
@@ -6974,7 +6990,7 @@ code_r0x00101020:
         local_cc = FUN_00127608(uVar50,0,newTempIndex2,0);
         movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
         IRInst__setOperandRef(movFloatInst,0,local_cc);
-        ((int (*)())FUN_000fa958)(program,10,1,ilReader,movFloatInst,1,local_124,local_70,ppppppuVar37,1,currentBlock);
+        ((int (*)())FUN_000fa958)(program,10,1,ilReader,movFloatInst,1,local_124,local_70,loopStackData,1,currentBlock);
         ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
       }
       else {
@@ -6988,7 +7004,7 @@ code_r0x00101020:
         local_d0 = FUN_00127608(uVar50,0,newTempIndex2,0);
         movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
         IRInst__setOperandRef(movFloatInst,0,local_d0);
-        ((int (*)())FUN_000fa958)(program,0xe,1,ilReader,movFloatInst,1,local_124,local_70,ppppppuVar37,1,currentBlock);
+        ((int (*)())FUN_000fa958)(program,0xe,1,ilReader,movFloatInst,1,local_124,local_70,loopStackData,1,currentBlock);
         ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
       }
       else {
@@ -7191,7 +7207,7 @@ code_r0x001019bc:
       in_r8 = (uint ******)((int)((unsigned char *)0x0) + 1);
       in_r6 = ilReader;
       in_r7 = ppppppuVar38;
-      ((int (*)())FUN_000fa958)(program,0,0,ilReader,ppppppuVar38,1,local_124,local_70,ppppppuVar37,1,currentBlock);
+      ((int (*)())FUN_000fa958)(program,0,0,ilReader,ppppppuVar38,1,local_124,local_70,loopStackData,1,currentBlock);
       IRInst__setOperandRef(ppppppuVar38,1,local_c8);
       goto code_r0x00101cbc;
     case 0x2d:
@@ -7215,8 +7231,8 @@ code_r0x001019bc:
       *(undefined2 *)((int)pppppuVar15 + 6) = 7;
       *(undefined2 *)((int)pppppuVar15 + 10) = 3;
       *(ushort *)((int)pppppuVar15 + 0x12) =
-           (ushort)(((uint)(byte)((((uint)*ppppppuVar49 & 0x1000000) == 0) << 1) << 0x1c) >> 0x1d);
-      bVar1 = ((uint)*ppppppuVar49 >> 0x19 & 1) == 0;
+           (ushort)(((uint)(byte)((((uint)*tokenWords & 0x1000000) == 0) << 1) << 0x1c) >> 0x1d);
+      bVar1 = ((uint)*tokenWords >> 0x19 & 1) == 0;
       *(ushort *)((int)pppppuVar15 + 0xe) = (ushort)bVar1;
       registerMap = *(undefined4 *)(program + 0x3ac);
       newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
@@ -7229,21 +7245,21 @@ code_r0x001019bc:
       IRInst__setOperandRef(movFloatInst,0,virtualRegister);
       *(undefined4 *)((int)movFloatInst + 0x9c) = 1;
       local_70 = &local_178;
-      ((int (*)())FUN_000fa958)(program,5,1,ilReader,movFloatInst,1,local_124,local_70,ppppppuVar37,1,currentBlock);
+      ((int (*)())FUN_000fa958)(program,5,1,ilReader,movFloatInst,1,local_124,local_70,loopStackData,1,currentBlock);
       ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
       local_124 = (uint *****)0x1010100;
       local_178 = (uint ******)pppppuVar52;
       ppppppuVar38 = IRInst__create(0x31,*(undefined4 *)(program + 8));
       IRInst__setOperandRef(ppppppuVar38,0,virtualRegister);
       ppppppuVar38[0x27] = (uint *****)0x1010100;
-      ((int (*)())FUN_000fa958)(program,10,1,ilReader,ppppppuVar38,1,local_124,local_70,ppppppuVar37,1,currentBlock);
+      ((int (*)())FUN_000fa958)(program,10,1,ilReader,ppppppuVar38,1,local_124,local_70,loopStackData,1,currentBlock);
       ((int (*)())FUN_000f92fc)(program,ppppppuVar38,currentBlock);
       if (bVar1) {
         uVar50 = 0x76;
       }
       else {
         uVar50 = 0xae;
-        if (uVar10 == 0x2d) {
+        if (templateToken == 0x2d) {
           Compiler__fail(*(undefined4 *)(program + 8),0xf);
           uVar50 = 0xae;
         }
@@ -7266,7 +7282,7 @@ code_r0x001019bc:
       in_r8 = (uint ******)((int)((unsigned char *)0x0) + 1);
       in_r6 = ilReader;
       in_r7 = ppppppuVar48;
-      iVar43 = ((int (*)())FUN_000fa958)(program,4,0,ilReader,ppppppuVar48,1,local_124,local_70,ppppppuVar37,1,
+      iVar43 = ((int (*)())FUN_000fa958)(program,4,0,ilReader,ppppppuVar48,1,local_124,local_70,loopStackData,1,
                             currentBlock);
       if (iVar43 != 0) {
         DList__pushFront(local_6c,iVar43);
@@ -7281,7 +7297,7 @@ code_r0x001019bc:
       ((int (*)())FUN_000f92fc)(program,ppppppuVar48,currentBlock);
       goto code_r0x00101d1c;
     case 0x2f:
-      uVar10 = (uint)*(byte *)((int)ilReader + 0x8d);
+      ilRegisterIndex2 = (uint)*(byte *)((int)ilReader + 0x8d);
       puVar26 = (undefined2 *)Arena__alloc(*(undefined4 *)(*(int *)(program + 8) + 0x374),0x24);
       _memset(puVar26,0,0x24);
       puVar26[9] = 1;
@@ -7299,9 +7315,9 @@ code_r0x001019bc:
       puVar26[0xc] = 0;
       puVar26[0xd] = 0;
       puVar26[0xe] = 0;
-      saturateBit = (byte)((uint)*ppppppuVar49 >> 0x18) & 1;
+      saturateBit = (byte)((uint)*tokenWords >> 0x18) & 1;
       puVar26[9] = saturateBit ^ 1;
-      puVar26[7] = (ushort)(((uint)(byte)((((uint)*ppppppuVar49 & 0x2000000) == 0) << 1) << 0x1c) >>
+      puVar26[7] = (ushort)(((uint)(byte)((((uint)*tokenWords & 0x2000000) == 0) << 1) << 0x1c) >>
                            0x1d);
       registerMap = *(undefined4 *)(program + 0x3ac);
       newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
@@ -7316,7 +7332,7 @@ code_r0x001019bc:
       movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
       IRInst__setOperandRef(movFloatInst,0,uVar27);
       local_70 = &local_178;
-      ((int (*)())FUN_000fa958)(program,5,1,ilReader,movFloatInst,1,local_124,local_70,ppppppuVar37,1,currentBlock);
+      ((int (*)())FUN_000fa958)(program,5,1,ilReader,movFloatInst,1,local_124,local_70,loopStackData,1,currentBlock);
       ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
       virtualRegister = 0;
       if (ilOpcode == 0x5f) {
@@ -7326,7 +7342,7 @@ code_r0x001019bc:
         virtualRegister = FUN_00127608(registerMap,0,newTempIndex2,0);
         movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
         IRInst__setOperandRef(movFloatInst,0,virtualRegister);
-        ((int (*)())FUN_000fa958)(program,10,1,ilReader,movFloatInst,1,local_124,local_70,ppppppuVar37,1,currentBlock);
+        ((int (*)())FUN_000fa958)(program,10,1,ilReader,movFloatInst,1,local_124,local_70,loopStackData,1,currentBlock);
         ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
         uVar41 = *(undefined4 *)(program + 0x3ac);
         newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
@@ -7334,7 +7350,7 @@ code_r0x001019bc:
         uVar41 = FUN_00127608(uVar41,0,newTempIndex2,0);
         movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
         IRInst__setOperandRef(movFloatInst,0,uVar41);
-        ((int (*)())FUN_000fa958)(program,0xe,1,ilReader,movFloatInst,1,local_124,local_70,ppppppuVar37,1,currentBlock);
+        ((int (*)())FUN_000fa958)(program,0xe,1,ilReader,movFloatInst,1,local_124,local_70,loopStackData,1,currentBlock);
         ((int (*)())FUN_000f92fc)(program,movFloatInst,currentBlock);
       }
       else {
@@ -7348,14 +7364,14 @@ code_r0x001019bc:
         IRInst__setOperandRef(fetchTextureMapGradientsInst,2,virtualRegister);
         IRInst__setOperandRef(fetchTextureMapGradientsInst,3,uVar41);
       }
-      *(uint *)((int)fetchTextureMapGradientsInst + 0x134) = uVar10;
-      if (*(int *)(program + 0x7c) < (int)uVar10) {
-        *(uint *)(program + 0x7c) = uVar10;
+      *(uint *)((int)fetchTextureMapGradientsInst + 0x134) = ilRegisterIndex2;
+      if (*(int *)(program + 0x7c) < (int)ilRegisterIndex2) {
+        *(uint *)(program + 0x7c) = ilRegisterIndex2;
       }
-      *(uint *)(program + 0x84) = 1 << (uVar10 & 0x3f) | *(uint *)(program + 0x84);
-      remappedSelect = ((int (*)())remapSelect1To0)(*(undefined4 *)(uVar10 * 0xc + *(int *)(program + 0x78)));
+      *(uint *)(program + 0x84) = 1 << (ilRegisterIndex2 & 0x3f) | *(uint *)(program + 0x84);
+      remappedSelect = ((int (*)())remapSelect1To0)(*(undefined4 *)(ilRegisterIndex2 * 0xc + *(int *)(program + 0x78)));
       *(undefined4 *)((int)fetchTextureMapGradientsInst + 0x138) = remappedSelect;
-      *(uint *)((int)fetchTextureMapGradientsInst + 0x130) = uVar10;
+      *(uint *)((int)fetchTextureMapGradientsInst + 0x130) = ilRegisterIndex2;
       *(ushort *)(*(int *)((int)fetchTextureMapGradientsInst + 0x13c) + 0x12) = saturateBit;
       ((int (*)())FUN_000f92fc)(program,fetchTextureMapGradientsInst,currentBlock);
       local_178 = *(uint *******)(local_60 + -0x2c30);
@@ -7364,7 +7380,7 @@ code_r0x001019bc:
       in_r8 = (uint ******)((int)((unsigned char *)0x0) + 1);
       in_r6 = ilReader;
       in_r7 = ppppppuVar38;
-      ((int (*)())FUN_000fa958)(program,0,0,ilReader,ppppppuVar38,1,local_124,local_70,ppppppuVar37,1,currentBlock);
+      ((int (*)())FUN_000fa958)(program,0,0,ilReader,ppppppuVar38,1,local_124,local_70,loopStackData,1,currentBlock);
       IRInst__setOperandRef(ppppppuVar38,1,uVar50);
 code_r0x00101cbc:
       ((int (*)())FUN_000f92fc)(program,ppppppuVar38,currentBlock);
@@ -7391,13 +7407,13 @@ code_r0x00101cbc:
       local_17c = (int *)((int)local_17c + 1);
       switch(*(undefined4 *)(iVar47 + (int)local_17c * 4)) {
       case 0x3f:
-        *puVar35 = (uint)*ppppppuVar49 >> 0x12 & 1;
+        *puVar35 = (uint)*tokenWords >> 0x12 & 1;
         break;
       default:
         *puVar35 = 0;
         break;
       case 0x5f:
-        *puVar35 = (uint)*ppppppuVar49 >> 0x18 & 1;
+        *puVar35 = (uint)*tokenWords >> 0x18 & 1;
         break;
       case 0x67:
         *puVar35 = 1;
@@ -7416,11 +7432,11 @@ code_r0x00101cbc:
       break;
     case 0x32:
       ppppppuVar48 = (uint ******)0x0;
-      pppppuVar15 = (uint *****)ifStack[1];
-      if (pppppuVar15 != (uint *****)0x0) {
+      ifStackCount = (uint *****)ifStack[1];
+      if (ifStackCount != (uint *****)0x0) {
         pppppuVar52 = (uint *****)0x0;
-        if ((uint *****)((int)pppppuVar15 - 1U) < pppppuVar15) {
-          pppppuVar52 = (uint *****)(ifStack[2] + (int)((int)pppppuVar15 - 1U));
+        if ((uint *****)((int)ifStackCount - 1U) < ifStackCount) {
+          pppppuVar52 = (uint *****)(ifStack[2] + (int)((int)ifStackCount - 1U));
         }
         ppppppuVar48 = (uint ******)*pppppuVar52;
         ppppppuVar48[0x51] = (uint *****)0x0;
@@ -7507,7 +7523,7 @@ code_r0x00100810:
         }
         in_r8 = (uint ******)((uint)pppuVar33 >> 0x10 & 0x3f);
         pvVar16 = (void *)(**(code **)(*hwDescription + 0x24))
-                                    (hwDescription,(uint)*ppppppuVar49 >> 0x10 & 7,iVar20,
+                                    (hwDescription,(uint)*tokenWords >> 0x10 & 7,iVar20,
                                      (uint)pppuVar42 >> 0x10 & 0x3f,registerIndex,in_r8,local_178,ilReader);
         compilerArenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         blockAllocation4 = (undefined4 *)Arena__alloc(compilerArenaA,0x15c);
@@ -7535,9 +7551,9 @@ code_r0x00100810:
 code_r0x00102c90:
         puVar32[0x4b] = comparisonKind;
         in_r7 = (uint ******)ifStack;
-        in_r8 = ppppppuVar37;
+        in_r8 = loopStackData;
         pppppuVar15 = (uint *****)
-                      ((int (*)())FUN_000fadc4)(program,puVar32,local_188,ppppppuVar48,ifStack,ppppppuVar37,
+                      ((int (*)())FUN_000fadc4)(program,puVar32,local_188,ppppppuVar48,ifStack,loopStackData,
                                    ilReader);
         in_r6 = ppppppuVar48;
         goto code_r0x00103240;
@@ -7545,10 +7561,10 @@ code_r0x00102c90:
         pppppuVar15 = (uint *****)0x0;
         goto code_r0x00103240;
       case 0x6f:
-        uVar10 = conditionStack[1] - 1;
+        conditionStackTopIndex = conditionStack[1] - 1;
         vectorElementSlot3 = (undefined4 *)0x0;
-        if (uVar10 < conditionStack[1]) {
-          vectorElementSlot3 = (undefined4 *)(uVar10 * 4 + conditionStack[2]);
+        if (conditionStackTopIndex < conditionStack[1]) {
+          vectorElementSlot3 = (undefined4 *)(conditionStackTopIndex * 4 + conditionStack[2]);
         }
         hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
         in_r8 = local_178;
@@ -7562,9 +7578,9 @@ code_r0x00102c90:
         in_r6 = (uint ******)0x0;
         in_r7 = *(uint *******)(program + 8);
         IfHeader__ctor_ea6d0(pppppuVar15,ifConditionInst,ppppppuVar48,0,in_r7);
-        uVar10 = conditionStack[1] - 1;
-        if (uVar10 < conditionStack[1]) {
-          stackElement = (int *)(uVar10 * 4 + conditionStack[2]);
+        conditionStackTopIndex = conditionStack[1] - 1;
+        if (conditionStackTopIndex < conditionStack[1]) {
+          stackElement = (int *)(conditionStackTopIndex * 4 + conditionStack[2]);
         }
         else {
           stackElement = (int *)0x0;
@@ -7655,7 +7671,7 @@ code_r0x00103300:
         in_r6 = &previousBlock;
         in_r7 = &currentBlock;
         in_r8 = (uint ******)&local_188;
-        iVar43 = FUN_0012f0f8(program,ppppppuVar37,iVar20,in_r6,in_r7,in_r8);
+        iVar43 = FUN_0012f0f8(program,loopStackData,iVar20,in_r6,in_r7,in_r8);
         if (iVar43 != 0) goto switchD_0010061c_caseD_1;
         if (*(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0x4c) < (int)local_188) {
           Compiler__fail(*(int *)(program + 8),8);
@@ -7685,7 +7701,7 @@ code_r0x00103300:
         FUN_000ec3ac(program,iVar43,ppppppuVar48);
         Block__connect(iVar43,currentBlock);
         previousBlock = currentBlock;
-        Vector__removeAt(ppppppuVar37,puVar13[2] + -1);
+        Vector__removeAt(loopStackData,puVar13[2] + -1);
         local_bc = 0;
         *(uint *****)(iVar21 + 0xb8) = local_188;
         local_188 = (uint ****)((int)local_188 - 1);
@@ -7747,18 +7763,18 @@ code_r0x00103300:
       in_r7 = *(uint *******)(program + 8);
       PostLoopFooter__ctor_ea828(blockObject,uVar10,enclosingLoopHeader,in_r6,in_r7);
       blockAllocation4[0x2f] = local_188;
-      if (((uint)*ppppppuVar49 & 0x10000) != 0) {
+      if (((uint)*tokenWords & 0x10000) != 0) {
         blockAllocation4[0x4e] = 1;
       }
       FUN_000ed63c(program,blockAllocation4[0x53]);
       pppppuVar15 = (uint *****)puVar13[2];
-      if (pppppuVar15 < *ppppppuVar37) {
+      if (pppppuVar15 < *loopStackData) {
         _memset((int)pppppuVar15 * 4 + puVar13[3],0,4);
         puVar13[2] = (int)pppppuVar15 + 1;
         vectorElementSlot2 = (undefined4 *)((int)pppppuVar15 * 4 + puVar13[3]);
       }
       else {
-        vectorElementSlot2 = (undefined4 *)Vector__elementRefGrow(ppppppuVar37,pppppuVar15);
+        vectorElementSlot2 = (undefined4 *)Vector__elementRefGrow(loopStackData,pppppuVar15);
       }
       *vectorElementSlot2 = blockObject;
       local_188 = (uint ****)((int)local_188 + 1);
@@ -7810,10 +7826,10 @@ code_r0x00103300:
     case 0x48:
     case 0x49:
       ppppppuVar48 = (uint ******)
-                     (PTR_s_IF_b_001dc2cc)[uVar10 * 4 + ((uint)*ppppppuVar49 >> 0x10 & 0x3fff)];
+                     (PTR_s_IF_b_001dc2cc)[templateToken * 4 + ((uint)*tokenWords >> 0x10 & 0x3fff)];
       goto switchD_00102044_default;
     case 0x4a:
-      ppppppuVar48 = *(uint *******)((int)&PTR_DAT_001dc75c + ((uint)*ppppppuVar49 >> 0xe & 0xc));
+      ppppppuVar48 = *(uint *******)((int)&PTR_DAT_001dc75c + ((uint)*tokenWords >> 0xe & 0xc));
 switchD_00102044_default:
       in_r6 = (uint ******)currentBlock;
       in_r8 = ppppppuVar19;
@@ -7823,7 +7839,7 @@ code_r0x0010372c:
       local_bc = 0;
       break;
     case 0x4b:
-      if ((((uint)*ppppppuVar49 & 0x10000) == 0) ||
+      if ((((uint)*tokenWords & 0x10000) == 0) ||
          (bVar1 = true, (*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x40) != 0)) {
         bVar1 = false;
       }
@@ -7838,11 +7854,11 @@ code_r0x001022b4:
       goto code_r0x0010372c;
     case 0x4d:
       local_bc = 0;
-      *(ushort *)((int)ppppppuVar38[0x4f] + 0x12) = (byte)((uint)*ppppppuVar49 >> 0x18) & 1;
+      *(ushort *)((int)ppppppuVar38[0x4f] + 0x12) = (byte)((uint)*tokenWords >> 0x18) & 1;
       break;
     case 0x4e:
       ppppppuVar48 = (uint ******)
-                     ((int (*)())FUN_000f8ccc)((uint)*ppppppuVar49 >> 0x10 & 7,*(undefined4 *)(program + 8),0);
+                     ((int (*)())FUN_000f8ccc)((uint)*tokenWords >> 0x10 & 7,*(undefined4 *)(program + 8),0);
       goto code_r0x00101f74;
     case 0x4f:
       local_17c = (int *)((int)local_17c + 1);
@@ -7880,20 +7896,20 @@ code_r0x001022b4:
       break;
     case 0x53:
       ppppppuVar48 = (uint ******)
-                     ((int (*)())FUN_000f8ccc)((uint)*ppppppuVar49 >> 0x10 & 7,*(undefined4 *)(program + 8),1);
+                     ((int (*)())FUN_000f8ccc)((uint)*tokenWords >> 0x10 & 7,*(undefined4 *)(program + 8),1);
 code_r0x00101f74:
       if (ppppppuVar48 != (uint ******)0x0) goto switchD_00102044_default;
       goto switchD_0010061c_caseD_1;
     case 0x54:
-      pppppuVar15 = *ppppppuVar49;
+      firstTokenWord = *tokenWords;
       registerIndex2 = *(short *)((int)*ilReader[0x19] + 2);
-      uVar10 = (uint)**ilReader[0x19] >> 0x10 & 0x3f;
-      FUN_000ec208(program,uVar10);
+      ilRegisterType = (uint)**ilReader[0x19] >> 0x10 & 0x3f;
+      FUN_000ec208(program,ilRegisterType);
       uVar50 = *(undefined4 *)(program + 0x3ac);
-      registerFile = FUN_000ec208(program,uVar10);
+      registerFile = FUN_000ec208(program,ilRegisterType);
       in_r6 = (uint ******)0x0;
       iVar43 = FUN_00127608(uVar50,registerFile,(int)registerIndex2,0);
-      if (((uint)pppppuVar15 >> 0x10 & 0x3fff) == 0) goto switchD_0010061c_caseD_1;
+      if (((uint)firstTokenWord >> 0x10 & 0x3fff) == 0) goto switchD_0010061c_caseD_1;
       local_bc = 0;
       *(undefined4 *)(iVar43 + 0x30) = 1;
       break;
@@ -7906,11 +7922,11 @@ code_r0x00101f74:
     case 0x5b:
     case 0x5c:
     case 0x5d:
-      iVar43 = (&local_104)[uVar10 - 0x55];
+      iVar43 = (&local_104)[templateToken - 0x55];
       if (iVar43 == 0) {
         iVar43 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
         *(int *)(*(int *)(program + 8) + 0x3ac) = iVar43;
-        (&local_104)[uVar10 - 0x55] = iVar43;
+        (&local_104)[templateToken - 0x55] = iVar43;
       }
       iVar20 = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
       *(undefined4 *)(iVar20 + 0xc) = 0;
@@ -7919,7 +7935,7 @@ code_r0x00101f74:
         in_r6 = (uint ******)0x0;
         in_r7 = (uint ******)0x0;
         in_r8 = ppppppuVar38;
-        ((int (*)())FUN_000f8d50)(program,ppppppuVar37,local_124,0,0,ppppppuVar38,0);
+        ((int (*)())FUN_000f8d50)(program,loopStackData,local_124,0,0,ppppppuVar38,0);
       }
       else {
         in_r6 = ppppppuVar40;
@@ -8008,16 +8024,16 @@ code_r0x001025c0:
       local_bc = 0;
       break;
     case 0x70:
-      uVar10 = conditionStack[1];
+      conditionStackCount = conditionStack[1];
       stackElement = (int *)0x0;
-      if (uVar10 - 1 < uVar10) {
-        stackElement = (int *)((uVar10 - 1) * 4 + conditionStack[2]);
+      if (conditionStackCount - 1 < conditionStackCount) {
+        stackElement = (int *)((conditionStackCount - 1) * 4 + conditionStack[2]);
       }
       if (*(int *)(*stackElement + 4) == 0) {
         vectorElementSlot3 = (undefined4 *)0x0;
         compilerArenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
-        if (uVar10 - 1 < conditionStack[1]) {
-          vectorElementSlot3 = (undefined4 *)((uVar10 - 1) * 4 + conditionStack[2]);
+        if (conditionStackCount - 1 < conditionStack[1]) {
+          vectorElementSlot3 = (undefined4 *)((conditionStackCount - 1) * 4 + conditionStack[2]);
         }
         uVar50 = *vectorElementSlot3;
         Vector__removeAt(conditionStack,conditionStack[1] - 1);
@@ -8025,8 +8041,8 @@ code_r0x001025c0:
       }
       else {
         stackElement = (int *)0x0;
-        if (uVar10 - 1 < conditionStack[1]) {
-          stackElement = (int *)((uVar10 - 1) * 4 + conditionStack[2]);
+        if (conditionStackCount - 1 < conditionStack[1]) {
+          stackElement = (int *)((conditionStackCount - 1) * 4 + conditionStack[2]);
         }
         in_r6 = (uint ******)0x0;
         *(int *)(*stackElement + 4) = *(int *)(*stackElement + 4) + -1;
@@ -8047,8 +8063,8 @@ code_r0x00101d1c:
   case 7:
     constantFlag = true;
   }
-  ppppppuVar19 = (uint ******)((int (*)())FUN_000f9140)(program,ilOpcode,(uint)*ppppppuVar49 >> 0x10 & 0x3fff);
-  ((int (*)())FUN_000f9a58)(program,local_6c,*ilReader[0x19],ppppppuVar37,local_a4);
+  ppppppuVar19 = (uint ******)((int (*)())FUN_000f9140)(program,ilOpcode,(uint)*tokenWords >> 0x10 & 0x3fff);
+  ((int (*)())FUN_000f9a58)(program,local_6c,*ilReader[0x19],loopStackData,local_a4);
   registerIndex2 = *(short *)((int)*ilReader[0x19] + 2);
   registerFile = FUN_000ec208(program,(uint)**ilReader[0x19] >> 0x10 & 0x3f);
   operandRecord2 = IRInst__getOperandRecord(ppppppuVar19,0);
@@ -8057,7 +8073,7 @@ code_r0x00101d1c:
   in_r7 = (uint ******)0x0;
   in_r6 = (uint ******)*ilReader[0x19];
   in_r8 = ppppppuVar19;
-  ((int (*)())FUN_000f8d50)(program,ppppppuVar37,0,in_r6,0,ppppppuVar19,0);
+  ((int (*)())FUN_000f8d50)(program,loopStackData,0,in_r6,0,ppppppuVar19,0);
   iVar43 = ((int (*)())FUN_000f8970)(ilOpcode,*(undefined4 *)(*(int *)(*(int *)(program + 8) + 0x30c) + 0xc));
   ppppppuVar38 = (uint ******)(iVar43 + 1);
   if (1 < (int)ppppppuVar38) {
@@ -8067,8 +8083,8 @@ code_r0x00101d1c:
     do {
       local_178 = *(uint *******)(local_60 + -0x2c30);
       in_r8 = (uint ******)&local_174;
-      ((int (*)())FUN_000fb3d4)(program,local_68,ppppppuVar49,*(undefined4 *)(iVar43 + (int)ilReader[0x1b]),
-                   ppppppuVar37,&local_174,&local_13c);
+      ((int (*)())FUN_000fb3d4)(program,local_68,tokenWords,*(undefined4 *)(iVar43 + (int)ilReader[0x1b]),
+                   loopStackData,&local_174,&local_13c);
       uVar10 = **(uint **)(iVar43 + (int)ilReader[0x1b]);
       if ((((uVar10 & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
          ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
@@ -8118,7 +8134,7 @@ code_r0x00101d1c:
       local_58 = local_7c;
       do {
         iVar21 = SelectWord__firstWrittenComponent(local_178);
-        iVar22 = ((int (*)())FUN_000f9140)(program,ilOpcode,(uint)*ppppppuVar49 >> 0x10 & 0x3fff);
+        iVar22 = ((int (*)())FUN_000f9140)(program,ilOpcode,(uint)*tokenWords >> 0x10 & 0x3fff);
         ppppuVar45 = local_58;
         if (0 < (int)ppppppuVar38) {
           ppppppuVar48 = (uint ******)0x0;
