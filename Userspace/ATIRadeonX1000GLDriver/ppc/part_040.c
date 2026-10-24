@@ -662,7 +662,7 @@ int FUN_0012c3d0(inst, param_2, param_3)
           uVar6 = 0x24;
         }
         else {
-          uVar6 = FUN_000ec208(param_3,5);
+          uVar6 = Program__registerFileOfIlType(param_3,5);
           uVar1 = *(undefined4 *)(param_3 + 0x3ac);
         }
       }
@@ -1872,7 +1872,7 @@ int FUN_0012e488(param_1, param_2)
     puVar4 = allocation + 1;
     Block__ctor_ea020(puVar4,*(undefined4 *)(param_1 + 8));
     allocation[0x2f] = *(undefined4 *)(param_2 + 0xb8);
-    FUN_000ec3ac(param_1,param_2,puVar4);
+    Program__insertBlockAfter(param_1,param_2,puVar4);
     FUN_000e977c(param_2,successor,puVar4);
     Block__connect(puVar4,successor);
   }
@@ -1928,7 +1928,7 @@ int FUN_0012e56c(param_1, param_2, compiler)
     *allocation = arenaAt374;
     Block__ctor_ea020(puVar8,compiler);
     allocation[0x2f] = uVar11;
-    FUN_000ec3ac(uVar5,iVar7,puVar8);
+    Program__insertBlockAfter(uVar5,iVar7,puVar8);
     FUN_000e977c(iVar7,arena,puVar8);
     uVar11 = FUN_0012b140(iVar7);
     arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
@@ -1956,10 +1956,10 @@ int FUN_0012e56c(param_1, param_2, compiler)
     allocation[0x4e] = puVar10;
     allocation[0x4f] = puVar9;
     allocation[0x50] = puVar15;
-    FUN_000ec3ac(uVar5,puVar8,puVar12);
-    FUN_000ec3ac(uVar5,puVar12,puVar10);
-    FUN_000ec3ac(uVar5,puVar10,puVar9);
-    FUN_000ec3ac(uVar5,puVar9,puVar15);
+    Program__insertBlockAfter(uVar5,puVar8,puVar12);
+    Program__insertBlockAfter(uVar5,puVar12,puVar10);
+    Program__insertBlockAfter(uVar5,puVar10,puVar9);
+    Program__insertBlockAfter(uVar5,puVar9,puVar15);
     Block__connect(puVar8,puVar12);
     Block__connect(puVar12,puVar10);
     Block__connect(puVar12,puVar9);
@@ -2006,7 +2006,7 @@ int FUN_0012e8c0(param_1, param_2, param_3)
       puVar6 = allocation + 1;
       Block__ctor_ea020(puVar6,*(undefined4 *)(param_1 + 8));
       allocation[0x2f] = param_2[0x2e];
-      FUN_000ec3ac(param_1,param_2,puVar6);
+      Program__insertBlockAfter(param_1,param_2,puVar6);
       FUN_000e9adc(param_2,successor,puVar6);
     }
     iVar2 = (**(code **)(*param_2 + 0x24))(param_2);
@@ -2091,7 +2091,7 @@ int FUN_0012eacc(param_1)
   fparam_1 = (double)FLOAT_001aa0d4;
   *(undefined4 *)(operandRecord3 + 0xc) = 0;
   ((void (*)())IRInst__makeLiteralVec4Float)(arena,param_1,1,fparam_1,fparam_1,fparam_1,fparam_1);
-  FUN_000f92fc(param_1,arena,*(undefined4 *)(param_1 + 0x3a0));
+  Program__appendInst(param_1,arena,*(undefined4 *)(param_1 + 0x3a0));
   iVar24 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar24;
   newInst = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
@@ -2099,7 +2099,7 @@ int FUN_0012eacc(param_1)
   *(undefined4 *)(operandRecord2 + 0xc) = 0;
   *(int *)(operandRecord2 + 8) = iVar24;
   FUN_000f7870(newInst,param_1,1,0xffffffff,0xffffffff,0xffffffff,0xffffffff);
-  FUN_000f92fc(param_1,newInst,*(undefined4 *)(param_1 + 0x3a0));
+  Program__appendInst(param_1,newInst,*(undefined4 *)(param_1 + 0x3a0));
   do {
     iVar23 = *(int *)(param_1 + 0x414);
     uVar11 = *(uint *)(iVar23 + 4);
@@ -2126,7 +2126,7 @@ int FUN_0012eacc(param_1)
           puVar8 = allocation + 1;
           Block__ctor_ea020(puVar8,*(undefined4 *)(param_1 + 8));
           allocation[0x2f] = piVar12[0x2e];
-          FUN_000ec3ac(param_1,piVar12,puVar8);
+          Program__insertBlockAfter(param_1,piVar12,puVar8);
           FUN_000e9adc(piVar12,arena,puVar8);
         }
         iVar5 = (**(code **)(*piVar12 + 0x24))(piVar12);
@@ -2251,18 +2251,18 @@ LAB_0012ed24:
         Block__ctor_ea020(puVar8,*(undefined4 *)(param_1 + 8));
         FUN_000e977c(predecessor,iVar23,puVar8);
         FUN_000e9948(puVar21,iVar23,puVar8);
-        FUN_000ec3ac(param_1,predecessor,puVar8);
+        Program__insertBlockAfter(param_1,predecessor,puVar8);
       }
-      FUN_000ec3ac(param_1,puVar8,puVar21);
+      Program__insertBlockAfter(param_1,puVar8,puVar21);
       arenaAt374 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
       blockAlloc2 = (undefined4 *)Arena__alloc(arenaAt374,0x130);
       *blockAlloc2 = arenaAt374;
       puVar9 = blockAlloc2 + 1;
       Block__ctor_ea020(puVar9,*(undefined4 *)(param_1 + 8));
       puVar10[0x4f] = puVar9;
-      FUN_000ec3ac(param_1,predecessor2,puVar9);
+      Program__insertBlockAfter(param_1,predecessor2,puVar9);
       uVar20 = puVar10[0x50];
-      FUN_000ec3ac(param_1,puVar9,uVar20);
+      Program__insertBlockAfter(param_1,puVar9,uVar20);
       FUN_000e78c0(puVar21,uVar7);
       Block__connect(puVar21,puVar9);
       FUN_000e977c(puVar8,iVar23,puVar21);
@@ -2459,7 +2459,7 @@ int FUN_0012f0f8(pass, param_2, param_3, param_4, param_5, param_6)
                       if ((isLoopHeader != 0) && (piVar18 == (int *)piVar27[0x52])) {
                         *(int *)(iVar11 + 0x148) = cloneResult;
                       }
-                      FUN_000f92fc(pass,cloneResult,iVar11);
+                      Program__appendInst(pass,cloneResult,iVar11);
                       piVar14 = (int *)piVar18[2];
                     }
                     else {
@@ -2468,7 +2468,7 @@ int FUN_0012f0f8(pass, param_2, param_3, param_4, param_5, param_6)
                   }
                   piVar18 = piVar14;
                 }
-                FUN_000ec3ac(pass,*param_4,iVar11);
+                Program__insertBlockAfter(pass,*param_4,iVar11);
                 *param_4 = iVar11;
                 iVar23 = *(int *)(iVar23 + 8);
                 uVar24 = uVar21 + 1;
@@ -2729,7 +2729,7 @@ LAB_0012fafc:
           Block__ctor_ea020(allocation + 1,*(undefined4 *)(pass + 8));
           *param_5 = (int)(allocation + 1);
           allocation[0x2f] = *param_6;
-          FUN_000ec3ac(pass,*param_4,*param_5);
+          Program__insertBlockAfter(pass,*param_4,*param_5);
           Block__connect(*param_4,*param_5);
           ((int (*)())FUN_0012e8c0)(pass,findSimplePredecessorResult,*param_4);
           *param_4 = *param_5;

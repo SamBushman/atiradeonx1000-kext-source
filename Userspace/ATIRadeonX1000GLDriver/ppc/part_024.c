@@ -99,16 +99,16 @@ int callTargetSlot25(param_1)
   return;
 }
 
-/* FUN_000ec208 @ 0xec208 (80 bytes) */
-int FUN_000ec208(param_1, param_2)
-  int param_1;
-  int param_2;
+/* Program__registerFileOfIlType @ 0xec208 (80 bytes) */
+int Program__registerFileOfIlType(program, ilRegisterType)
+  int program;
+  int ilRegisterType;
 {
   int iVar1;
   
-  iVar1 = *(int *)(param_2 * 8 + *(int *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 4) + 4);
+  iVar1 = *(int *)(ilRegisterType * 8 + *(int *)(*(int *)(*(int *)(program + 8) + 0x30c) + 4) + 4);
   if (iVar1 == -1) {
-    Compiler__fail(*(int *)(param_1 + 8),0xf);
+    Compiler__fail(*(int *)(program + 8),0xf);
   }
   return iVar1;
 }
@@ -175,8 +175,8 @@ int FUN_000ec370(program, ref, node)
   return ((int (*)())Program__freeWorkArrays)(program);
 }
 
-/* FUN_000ec3ac @ 0xec3ac (60 bytes) */
-int FUN_000ec3ac(program, ref, node)
+/* Program__insertBlockAfter @ 0xec3ac (60 bytes) */
+int Program__insertBlockAfter(program, ref, node)
   undefined4 program;
   undefined4 ref;
   int node;
@@ -1719,7 +1719,7 @@ int FUN_000eea24(program)
       if (iVar3 < *(int *)(program + 0x3dc)) {
         do {
           uVar7 = *(undefined4 *)(program + 0x3ac);
-          uVar4 = ((int (*)())FUN_000ec208)(program,5);
+          uVar4 = ((int (*)())Program__registerFileOfIlType)(program,5);
           iVar1 = FUN_00127534(uVar7,uVar4,iVar3,0);
           if (iVar1 != 0) {
             iVar5 = 0;
@@ -1745,7 +1745,7 @@ int FUN_000eea24(program)
       if (iVar3 < *(int *)(program + 0x3dc)) {
         do {
           uVar7 = *(undefined4 *)(program + 0x3ac);
-          uVar4 = ((int (*)())FUN_000ec208)(program,5);
+          uVar4 = ((int (*)())Program__registerFileOfIlType)(program,5);
           iVar1 = FUN_00127534(uVar7,uVar4,iVar3,0);
           if (iVar1 != 0) {
             iVar5 = 0;
@@ -1829,7 +1829,7 @@ LAB_000eed14:
     *(undefined4 *)(operandRecord4 + 8) = 0;
     allocation[0x28] = arena;
     ((void (*)())IRInst__makeLiteralVec4Float)(puVar11,param_1,1,dVar13,dVar13,dVar13,dVar13);
-    FUN_000f92fc(param_1,puVar11,*(undefined4 *)(param_1 + 0x3a8));
+    Program__appendInst(param_1,puVar11,*(undefined4 *)(param_1 + 0x3a8));
   }
   iVar7 = *(int *)(param_1 + 0x34c);
   if (iVar7 == 0) {

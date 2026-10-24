@@ -1446,14 +1446,14 @@
 0xec178	ContinueBlock__ctor_ec178	88	yes	
 0xec1d0	FUN_000ec1d0	20	yes	
 0xec1ec	callTargetSlot25	28	yes	
-0xec208	FUN_000ec208	80	yes	
+0xec208	Program__registerFileOfIlType	80	yes	
 0xec258	FUN_000ec258	36	yes	
 0xec27c	FUN_000ec27c	36	yes	
 0xec2a0	FUN_000ec2a0	36	yes	
 0xec2c4	Table__interpolatorKindToCode	36	yes	
 0xec2e8	Program__freeWorkArrays	136	yes	
 0xec370	FUN_000ec370	60	yes	
-0xec3ac	FUN_000ec3ac	60	yes	
+0xec3ac	Program__insertBlockAfter	60	yes	
 0xec3e8	FUN_000ec3e8	68	yes	
 0xec42c	FUN_000ec42c	60	yes	
 0xec468	FUN_000ec468	136	yes	
@@ -1602,14 +1602,14 @@
 0xf89e8	remapSelect1To0	36	yes	
 0xf8a0c	remapSelectSmall	36	yes	
 0xf8a30	FUN_000f8a30	112	yes	
-0xf8aa0	FUN_000f8aa0	488	no	indirect call (driver context / vtable / callback)
+0xf8aa0	Program__applySourceTokenToOperand	488	no	indirect call (driver context / vtable / callback)
 0xf8c88	FUN_000f8c88	64	yes	
 0xf8ccc	FUN_000f8ccc	132	no	indirect call (driver context / vtable / callback)
 0xf8d50	FUN_000f8d50	568	no	indirect call (driver context / vtable / callback)
 0xf8f88	FUN_000f8f88	176	no	indirect call (driver context / vtable / callback)
 0xf9038	FUN_000f9038	264	yes	
 0xf9140	FUN_000f9140	284	no	indirect call (driver context / vtable / callback)
-0xf92fc	FUN_000f92fc	480	no	indirect call (driver context / vtable / callback)
+0xf92fc	Program__appendInst	480	no	indirect call (driver context / vtable / callback)
 0xf94dc	FUN_000f94dc	1268	no	indirect call (driver context / vtable / callback)
 0xf9a58	FUN_000f9a58	3748	no	indirect call (driver context / vtable / callback)
 0xfa958	FUN_000fa958	1132	no	no static blocker: a test could reach it (needs arguments / state no test builds)
