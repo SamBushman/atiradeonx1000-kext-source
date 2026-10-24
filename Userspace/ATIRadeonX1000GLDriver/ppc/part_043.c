@@ -4941,23 +4941,23 @@ int Inst__swapMatchedOperandsBetweenUses(useA, useB, program, allowRewrite, allo
   uint absOp2A;
   uint absOtherA;
   uint termInstsB [4];
-  undefined4 local_b8;
-  undefined4 local_b4;
+  undefined4 selectWordOp2B;
+  undefined4 selectWordOtherB;
   uint negateOp1B;
   uint negateOp2B;
   uint negateOtherB;
   uint termInstsA [4];
-  undefined4 local_94;
-  undefined4 local_90;
-  undefined4 local_8c;
-  undefined4 local_88;
-  undefined4 local_84;
-  undefined4 local_80;
-  undefined4 local_7c;
-  undefined4 local_78;
-  undefined4 local_74;
-  undefined4 local_70;
-  undefined4 local_6c;
+  undefined4 composedSelectB2;
+  undefined4 destWriteMaskB2;
+  undefined4 maskedDestSelectB2;
+  undefined4 destWriteMaskB1;
+  undefined4 maskedDestSelectB1;
+  undefined4 destWriteMaskA2;
+  undefined4 maskedDestSelectA2;
+  undefined4 destWriteMaskA1;
+  undefined4 maskedDestSelectA1;
+  undefined4 composedSelectA1;
+  undefined4 composedSelectA2;
   uint *termIndexB;
   int crossedMatch;
   uint absOtherAHome;
@@ -5002,12 +5002,12 @@ int Inst__swapMatchedOperandsBetweenUses(useA, useB, program, allowRewrite, allo
   savedSelectWordA = matchFrame[3];
   matchFrame[5] = *(undefined4 *)(operandRecord + 0x10);
   operandRecord = IRInst__getOperandRecord(*useA,useA[1]);
-  SelectWord__compose(&local_70,savedSelectWordA,*(undefined4 *)(operandRecord + 0x10));
+  SelectWord__compose(&composedSelectA1,savedSelectWordA,*(undefined4 *)(operandRecord + 0x10));
   savedSelectWordA = matchFrame[4];
-  matchFrame[3] = local_70;
+  matchFrame[3] = composedSelectA1;
   operandRecord = IRInst__getOperandRecord(*useA,useA[1]);
-  SelectWord__compose(&local_6c,savedSelectWordA,*(undefined4 *)(operandRecord + 0x10));
-  matchFrame[4] = local_6c;
+  SelectWord__compose(&composedSelectA2,savedSelectWordA,*(undefined4 *)(operandRecord + 0x10));
+  matchFrame[4] = composedSelectA2;
   sourceDef2 = IRInst__getOperandSource(*useA,useA[1]);
   matchFrame[6] = *(uint *)(sourceDef2 + 0xb8) & 1;
   sourceDef2 = IRInst__getOperandSource(*useA,useA[1]);
@@ -5043,18 +5043,18 @@ int Inst__swapMatchedOperandsBetweenUses(useA, useB, program, allowRewrite, allo
   sourceDef = IRInst__getOperandSource(*useB,useB[1]);
   operandRecord = IRInst__getOperandRecord(sourceDef,2);
   useOperandIndexB = useB[1];
-  local_b8 = *(undefined4 *)(operandRecord + 0x10);
+  selectWordOp2B = *(undefined4 *)(operandRecord + 0x10);
   operandRecord = IRInst__getOperandRecord(*useB,useOperandIndexB + (((int)useOperandIndexB >> 1) +
                                          (uint)((int)useOperandIndexB < 0 && (useOperandIndexB & 1) != 0)) * -2 + 1);
   savedSelectWordB2 = termInstsB[3];
-  local_b4 = *(undefined4 *)(operandRecord + 0x10);
+  selectWordOtherB = *(undefined4 *)(operandRecord + 0x10);
   operandRecord = IRInst__getOperandRecord(*useB,useB[1]);
   SelectWord__compose(matchFrame + 0x18,savedSelectWordB2,*(undefined4 *)(operandRecord + 0x10));
-  savedSelectWordB = local_b8;
+  savedSelectWordB = selectWordOp2B;
   termInstsB[3] = termInstsA[3];
   operandRecord = IRInst__getOperandRecord(*useB,useB[1]);
-  SelectWord__compose(&local_94,savedSelectWordB,*(undefined4 *)(operandRecord + 0x10));
-  local_b8 = local_94;
+  SelectWord__compose(&composedSelectB2,savedSelectWordB,*(undefined4 *)(operandRecord + 0x10));
+  selectWordOp2B = composedSelectB2;
   sourceDef2 = IRInst__getOperandSource(*useB,useB[1]);
   negateOp1B = *(uint *)(sourceDef2 + 0xb8) & 1;
   sourceDef2 = IRInst__getOperandSource(*useB,useB[1]);
@@ -5158,7 +5158,7 @@ LAB_0014fad0:
     sourceDef2 = IRInst__getOperandSource(*useB,useB[1]);
     IROperand__setModifierBits(sourceDef2 + 0xbc,2,set9);
     operandVReg = IRInst__getOperandSource(*useB,useB[1]);
-    savedSelectWordB = local_b4;
+    savedSelectWordB = selectWordOtherB;
     operandRecord = IRInst__getOperandRecord(operandVReg,2);
     *(undefined4 *)(operandRecord + 0x10) = savedSelectWordB;
     sourceDef2 = IRInst__getOperandSource(*useB,useB[1]);
@@ -5174,7 +5174,7 @@ LAB_0014fad0:
     compilerCtx = *(int *)(programHome + 8);
     IRInst__setOperandSource(*useB,useOperandIndexB + (((int)useOperandIndexB >> 1) + (uint)((int)useOperandIndexB < 0 && (useOperandIndexB & 1) != 0)) *
                                   -2 + 1,termInstsB[1],1,compilerCtx);
-    savedSelectWordB = local_b8;
+    savedSelectWordB = selectWordOp2B;
     useOperandIndexB = useB[1];
     operandRecord = IRInst__getOperandRecord(*useB,useOperandIndexB + (((int)useOperandIndexB >> 1) +
                                            (uint)((int)useOperandIndexB < 0 && (useOperandIndexB & 1) != 0)) * -2 + 1);
@@ -5191,10 +5191,10 @@ LAB_0014fad0:
     inst4 = *useB;
     operandIndex3 = useB[1];
     operandRecord = IRInst__getOperandRecord(inst4,0);
-    WriteMask__fromSelectWord(&local_90,*(undefined4 *)(operandRecord + 0x10));
-    SelectWord__maskUnused(&local_8c,0x10203,local_90);
+    WriteMask__fromSelectWord(&destWriteMaskB2,*(undefined4 *)(operandRecord + 0x10));
+    SelectWord__maskUnused(&maskedDestSelectB2,0x10203,destWriteMaskB2);
     operandRecord = IRInst__getOperandRecord(inst4,operandIndex3);
-    *(undefined4 *)(operandRecord + 0x10) = local_8c;
+    *(undefined4 *)(operandRecord + 0x10) = maskedDestSelectB2;
   }
   else if (termIndexB == (uint *)((int)((unsigned char *)0x0) + 1)) {
     sourceDef = IRInst__getOperandSource(*useB,useB[1]);
@@ -5204,7 +5204,7 @@ LAB_0014fad0:
     sourceDef2 = IRInst__getOperandSource(*useB,useB[1]);
     IROperand__setModifierBits(sourceDef2 + 0xa4,2,set9);
     operandVReg = IRInst__getOperandSource(*useB,useB[1]);
-    savedSelectWordB = local_b4;
+    savedSelectWordB = selectWordOtherB;
     operandRecord = IRInst__getOperandRecord(operandVReg,1);
     *(undefined4 *)(operandRecord + 0x10) = savedSelectWordB;
     sourceDef2 = IRInst__getOperandSource(*useB,useB[1]);
@@ -5212,7 +5212,7 @@ LAB_0014fad0:
     sourceDef2 = IRInst__getOperandSource(*useB,useB[1]);
     IROperand__setModifierBits(sourceDef2 + 0xbc,2,matchFrame[1]);
     operandVReg = IRInst__getOperandSource(*useB,useB[1]);
-    savedSelectWordB = local_b8;
+    savedSelectWordB = selectWordOp2B;
     operandRecord = IRInst__getOperandRecord(operandVReg,2);
     allowRewrite = 1;
     *(undefined4 *)(operandRecord + 0x10) = savedSelectWordB;
@@ -5237,10 +5237,10 @@ LAB_0014fad0:
     inst5 = *useB;
     operandIndex4 = useB[1];
     operandRecord = IRInst__getOperandRecord(inst5,0);
-    WriteMask__fromSelectWord(&local_88,*(undefined4 *)(operandRecord + 0x10));
-    SelectWord__maskUnused(&local_84,0x10203,local_88);
+    WriteMask__fromSelectWord(&destWriteMaskB1,*(undefined4 *)(operandRecord + 0x10));
+    SelectWord__maskUnused(&maskedDestSelectB1,0x10203,destWriteMaskB1);
     operandRecord = IRInst__getOperandRecord(inst5,operandIndex4);
-    *(undefined4 *)(operandRecord + 0x10) = local_84;
+    *(undefined4 *)(operandRecord + 0x10) = maskedDestSelectB1;
   }
   if (matchedIndexA == 2) {
     sourceDef = IRInst__getOperandSource(*useA,useA[1]);
@@ -5283,10 +5283,10 @@ LAB_0014fad0:
     inst6 = *useA;
     operandIndex5 = useA[1];
     operandRecord = IRInst__getOperandRecord(inst6,0);
-    WriteMask__fromSelectWord(&local_80,*(undefined4 *)(operandRecord + 0x10));
-    SelectWord__maskUnused(&local_7c,0x10203,local_80);
+    WriteMask__fromSelectWord(&destWriteMaskA2,*(undefined4 *)(operandRecord + 0x10));
+    SelectWord__maskUnused(&maskedDestSelectA2,0x10203,destWriteMaskA2);
     operandRecord = IRInst__getOperandRecord(inst6,operandIndex5);
-    *(undefined4 *)(operandRecord + 0x10) = local_7c;
+    *(undefined4 *)(operandRecord + 0x10) = maskedDestSelectA2;
   }
   else if (matchedIndexA == 1) {
     sourceDef = IRInst__getOperandSource(*useA,useA[1]);
@@ -5329,10 +5329,10 @@ LAB_0014fad0:
     inst7 = *useA;
     operandIndex6 = useA[1];
     operandRecord = IRInst__getOperandRecord(inst7,0);
-    WriteMask__fromSelectWord(&local_78,*(undefined4 *)(operandRecord + 0x10));
-    SelectWord__maskUnused(&local_74,0x10203,local_78);
+    WriteMask__fromSelectWord(&destWriteMaskA1,*(undefined4 *)(operandRecord + 0x10));
+    SelectWord__maskUnused(&maskedDestSelectA1,0x10203,destWriteMaskA1);
     operandRecord = IRInst__getOperandRecord(inst7,operandIndex6);
-    *(undefined4 *)(operandRecord + 0x10) = local_74;
+    *(undefined4 *)(operandRecord + 0x10) = maskedDestSelectA1;
   }
   sourceDef = IRInst__getOperandSource(*useA,useA[1]);
   operandRecord = IRInst__getOperandRecord(sourceDef,1);
