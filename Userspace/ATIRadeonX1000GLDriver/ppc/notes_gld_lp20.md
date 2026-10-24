@@ -51,3 +51,5 @@ destination; `scanState+0` / `+4` is a [low, high] range updated with each desti
 a non-zero 0x48 destination is seen. Frame names in ilAssembleProgram: `scanState` (local_23e8), `usedTexcoordMask` (local_23e0), `srcCursor` (local_2bb4),
 `dstCursor` (local_2bb8). The texture opcodes 0x5d / 0x5e are rewritten around a projective divide (`ilEmitProjectiveDivide`) and a shadow compare
 (`ilEmitShadowCompare`) using the per-unit masks at local_2374 (projective) and local_2378 (shadow).
+
+* `ilAssembleProgram` `uVar33`: webs 1-5 look like the running output size (bytes) and a def-record index, but splitting any of them (gates gT13 and gT14, DATAFLOW "2 loads reached by different stores" at the load of the `local_` slot read through r30+372) fails; the variable also carries the pass-1 scan word (web 0) and the final `size >> 2` word count. Left as `uVar33` until the pass-1/pass-2 handoff is decoded.

@@ -1,0 +1,122 @@
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*uVar32\ =\ \(uint\)pppppppuVar18\ >>\ 0x1b\ \&\ 3;$	+1
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*if\ \(\(uVar32\ ==\ 2\)\ \|\|\ \(\(uVar32\ ==\ 0\ \&\&\ \(auStack_130\[uVar33\]\ ==\ 2\)\)\)\)\ \{$	+1
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*uVar32\ =\ puVar29\[1\];$	+2
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*FUN_000c7290\(\&local_23e8,uVar32\ \&\ 0xffff,pppppppuVar18\);$	+1
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*FUN_000c72f0\(\&local_23e8,uVar32\ \&\ 0xffff,pppppppuVar18\);$	+1
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*uVar32\ =\ \*puVar29;$	+5
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*uVar32\ =\ \*puVar29;$@2	+1
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*if\ \(\(int\)uVar32\ <\ 0\)\ \{$	+1
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*uVar32\ =\ \*puVar29;$@3	+1
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*if\ \(\(uVar32\ \&\ 0x40000000\)\ !=\ 0\)\ \{$	+1
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*uVar32\ =\ \*puVar29;$@4	+5
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*uVar32\ =\ \*puVar29;$@5	+1
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*if\ \(\(int\)uVar32\ <\ 0\)\ \{$@2	+1
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*uVar32\ =\ \*puVar29;$@6	+1
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*if\ \(\(uVar32\ \&\ 0x40000000\)\ !=\ 0\)\ \{$@2	+1
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*uVar32\ =\ \(uint\)ppppppuVar10\ \&\ 0xffff;$	+2
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*iVar39\ =\ uVar32\ \*\ 4;$	+1
+use	ilAssembleProgram	uVar32	scanTokenCopy	INFERRED	pass 1: field or copy of the current instruction word (addressing bits >> 0x1b, texture word)	^\s*switch\(uVar32\)\ \{$	+1
+use	ilAssembleProgram	uVar32	sizeBytes2	CONFIRMED	running size in bytes of the rewritten program (second of three alternating accumulators of the chained size ifs: +0xc, or +0x24 when local_218 is set)	^\s*uVar32\ =\ uVar33;$	+1
+use	ilAssembleProgram	uVar32	sizeBytes2	CONFIRMED	running size in bytes of the rewritten program (second of three alternating accumulators of the chained size ifs: +0xc, or +0x24 when local_218 is set)	^\s*if\ \(\(local_1f8\[0\]\ !=\ 0\)\ \&\&\ \(uVar32\ =\ uVar33\ \+\ 0xc,\ bVar4\)\)\ \{$	+2
+use	ilAssembleProgram	uVar32	sizeBytes2	CONFIRMED	running size in bytes of the rewritten program (second of three alternating accumulators of the chained size ifs: +0xc, or +0x24 when local_218 is set)	^\s*uVar33\ =\ uVar32;$	+3
+use	ilAssembleProgram	uVar32	sizeBytes2	CONFIRMED	running size in bytes of the rewritten program (second of three alternating accumulators of the chained size ifs: +0xc, or +0x24 when local_218 is set)	^\s*uVar32\ =\ uVar33;$@2	+1
+use	ilAssembleProgram	uVar32	sizeBytes2	CONFIRMED	running size in bytes of the rewritten program (second of three alternating accumulators of the chained size ifs: +0xc, or +0x24 when local_218 is set)	^\s*if\ \(\(local_1f8\[2\]\ !=\ 0\)\ \&\&\ \(uVar32\ =\ uVar33\ \+\ 0xc,\ bVar4\)\)\ \{$	+2
+use	ilAssembleProgram	uVar32	sizeBytes2	CONFIRMED	running size in bytes of the rewritten program (second of three alternating accumulators of the chained size ifs: +0xc, or +0x24 when local_218 is set)	^\s*uVar22\ =\ uVar32;$	+3
+use	ilAssembleProgram	uVar32	dclRegisterIndex	CONFIRMED	dcl record +0x10: register number tested against the bit mask local_2260 (word = index >> 5)	^\s*uVar32\ =\ \*\(uint\ \*\)\(iVar36\ \+\ 0x10\);$	+1
+use	ilAssembleProgram	uVar32	dclRegisterIndex	CONFIRMED	dcl record +0x10: register number tested against the bit mask local_2260 (word = index >> 5)	^\s*iVar17\ =\ \(\(int\)uVar32\ >>\ 5\)\ \+\ \(uint\)\(\(int\)uVar32\ <\ 0\ \&\&\ \(uVar32\ \&\ 0x1f\)\ !=\ 0\);$	+2
+use	ilAssembleProgram	uVar32	dclRegisterIndex	CONFIRMED	dcl record +0x10: register number tested against the bit mask local_2260 (word = index >> 5)	^\s*local_78\ =\ \(longlong\)\(int\)local_2240\[uVar32\ \*\ 4\ \+\ iVar36\];$	+2
+use	ilAssembleProgram	uVar32	copyWordCount	CONFIRMED	opcode 0xf: number of extra words (ushort at token+6) copied after the two header words	^\s*for\ \(uVar32\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)puVar19\ \+\ 6\);\ puVar26\ =\ local_2bb4,\ uVar32\ !=\ 0;$	+2
+use	ilAssembleProgram	uVar32	inputKind	INFERRED	auStack_130[semantic]: kind of the input register (2 = special, otherwise normalised to 1) for opcode 0x19	^\s*uVar32\ =\ \*\(uint\ \*\)\(\(int\)auStack_130\ \+\ \(\(uint\)ppppppuVar10\ >>\ 0xe\ \&\ 0x3fc\)\);$	+3
+use	ilAssembleProgram	uVar32	inputKind	INFERRED	auStack_130[semantic]: kind of the input register (2 = special, otherwise normalised to 1) for opcode 0x19	^\s*ppppppuVar10\ =\ \(uint\ \*\*\*\*\*\*\)\(\(uVar32\ \&\ 3\)\ <<\ 0x1b\ \|\ \(uint\)ppppppuVar10\ \&\ 0xe7ffffff\);$	+1
+use	ilAssembleProgram	uVar32	tokenUpper	CONFIRMED	texture token >> 16: low byte = sampler/texture unit, bit 31 / 30 select the optional words	^\s*uVar32\ =\ \(uint\)ppppppuVar10\ >>\ 0x10;$	+2
+use	ilAssembleProgram	uVar32	tokenUpper	CONFIRMED	texture token >> 16: low byte = sampler/texture unit, bit 31 / 30 select the optional words	^\s*if\ \(local_2378\ <<\ \(uVar32\ \&\ 0x3f\)\ ==\ 0\)\ \{$	+1
+use	ilAssembleProgram	uVar32	tokenUpper	CONFIRMED	texture token >> 16: low byte = sampler/texture unit, bit 31 / 30 select the optional words	^\s*uVar34\ =\ 1\ <<\ \(uVar32\ \&\ 0x3f\);$	+1
+use	ilAssembleProgram	uVar32	tokenUpper	CONFIRMED	texture token >> 16: low byte = sampler/texture unit, bit 31 / 30 select the optional words	^\s*uVar34\ =\ 1\ <<\ \(uVar32\ \&\ 0x3f\);$@2	+1
+use	ilAssembleProgram	uVar32	tokenUpper	CONFIRMED	texture token >> 16: low byte = sampler/texture unit, bit 31 / 30 select the optional words	^\s*uVar34\ =\ 1\ <<\ \(uVar32\ \&\ 0x3f\);$@3	+1
+use	ilAssembleProgram	uVar32	tokenUpper	CONFIRMED	texture token >> 16: low byte = sampler/texture unit, bit 31 / 30 select the optional words	^\s*uVar34\ =\ 1\ <<\ \(uVar32\ \&\ 0x3f\);$@4	+1
+use	ilAssembleProgram	uVar32	tokenUpper	CONFIRMED	texture token >> 16: low byte = sampler/texture unit, bit 31 / 30 select the optional words	^\s*uVar34\ =\ 1\ <<\ \(uVar32\ \&\ 0x3f\);$@5	+1
+use	ilAssembleProgram	uVar32	tokenUpper	CONFIRMED	texture token >> 16: low byte = sampler/texture unit, bit 31 / 30 select the optional words	^\s*if\ \(\(\(uVar7\ ==\ 0x4000000\)\ \|\|\ \(\(uVar7\ ==\ 0x8000000\ \&\&\ \(\(uVar34\ \&\ local_2374\)\ !=\ 0\)\)\)\)\ \&\&$	+2
+use	ilAssembleProgram	uVar32	tokenUpper	CONFIRMED	texture token >> 16: low byte = sampler/texture unit, bit 31 / 30 select the optional words	^\s*uVar32\ =\ \(uint\)ppppppuVar10\ >>\ 0x10;$@2	+2
+use	ilAssembleProgram	uVar32	tokenUpper	CONFIRMED	texture token >> 16: low byte = sampler/texture unit, bit 31 / 30 select the optional words	^\s*if\ \(local_2378\ <<\ \(uVar32\ \&\ 0x3f\)\ !=\ 0\)\ \{$	+1
+use	ilAssembleProgram	uVar32	tokenUpper	CONFIRMED	texture token >> 16: low byte = sampler/texture unit, bit 31 / 30 select the optional words	^\s*uVar34\ =\ 1\ <<\ \(uVar32\ \&\ 0x3f\);$@6	+1
+use	ilAssembleProgram	uVar32	tokenUpper	CONFIRMED	texture token >> 16: low byte = sampler/texture unit, bit 31 / 30 select the optional words	^\s*uVar34\ =\ 1\ <<\ \(uVar32\ \&\ 0x3f\);$@7	+1
+use	ilAssembleProgram	uVar32	tokenUpper	CONFIRMED	texture token >> 16: low byte = sampler/texture unit, bit 31 / 30 select the optional words	^\s*uVar34\ =\ 1\ <<\ \(uVar32\ \&\ 0x3f\);$@8	+1
+use	ilAssembleProgram	uVar32	tokenUpper	CONFIRMED	texture token >> 16: low byte = sampler/texture unit, bit 31 / 30 select the optional words	^\s*if\ \(\(\(uVar7\ ==\ 0x4000000\)\ \|\|\ \(\(uVar7\ ==\ 0x8000000\ \&\&\ \(\(uVar34\ \&\ local_2374\)\ !=\ 0\)\)\)\)\ \&\&$@2	+3
+use	ilAssembleProgram	uVar22	sizeBytes3	CONFIRMED	running size in bytes (third accumulator), after the last of the four local_1f8 flags	^\s*uVar22\ =\ uVar32;$	+1
+use	ilAssembleProgram	uVar22	sizeBytes3	CONFIRMED	running size in bytes (third accumulator), after the last of the four local_1f8 flags	^\s*if\ \(\(local_1f8\[3\]\ !=\ 0\)\ \&\&\ \(uVar22\ =\ uVar32\ \+\ 0xc,\ bVar4\)\)\ \{$	+2
+use	ilAssembleProgram	uVar22	sizeBytes3	CONFIRMED	running size in bytes (third accumulator), after the last of the four local_1f8 flags	^\s*uVar22\ =\ uVar22\ \+\ 0x14;$	+1
+use	ilAssembleProgram	uVar22	sizeBytes3	CONFIRMED	running size in bytes (third accumulator), after the last of the four local_1f8 flags	^\s*uVar22\ =\ uVar22\ \+\ 0x24;$	+1
+use	ilAssembleProgram	uVar22	sizeBytes3	CONFIRMED	running size in bytes (third accumulator), after the last of the four local_1f8 flags	^\s*uVar22\ =\ uVar22\ \+\ 0x30;$	+1
+use	ilAssembleProgram	uVar22	sizeBytes3	CONFIRMED	running size in bytes (third accumulator), after the last of the four local_1f8 flags	^\s*uVar22\ =\ uVar22\ \+\ 0x40;$	+1
+use	ilAssembleProgram	uVar22	sizeBytes3	CONFIRMED	running size in bytes (third accumulator), after the last of the four local_1f8 flags	^\s*uVar22\ =\ uVar22\ \+\ 8;$	+1
+use	ilAssembleProgram	uVar22	sizeBytes3	CONFIRMED	running size in bytes (third accumulator), after the last of the four local_1f8 flags	^\s*uVar22\ =\ uVar22\ \+\ 0x2c;$	+1
+use	ilAssembleProgram	uVar22	sizeBytes3	CONFIRMED	running size in bytes (third accumulator), after the last of the four local_1f8 flags	^\s*if\ \(\(\(local_1d0\ !=\ 0\)\ \|\|\ \(local_1c8\ !=\ 0\)\)\ \|\|\ \(uVar33\ =\ uVar22,\ local_1b4\ ==\ \(uint\ \*\*\*\*\*\*\*\)0x0\)\)\ \{$	+1
+use	ilAssembleProgram	uVar22	sizeBytes3	CONFIRMED	running size in bytes (third accumulator), after the last of the four local_1f8 flags	^\s*uVar22\ =\ uVar22\ \+\ 0xc;$	+1
+use	ilAssembleProgram	uVar22	sizeBytes3	CONFIRMED	running size in bytes (third accumulator), after the last of the four local_1f8 flags	^\s*uVar33\ =\ uVar22;$	+3
+use	ilAssembleProgram	uVar22	texUnit	CONFIRMED	texture token (word >> 16) & 0xff: sampler/texture unit; indexes the per-unit masks and the target table aiStack_22f0	^\s*uVar22\ =\ uVar32\ \&\ 0xff;$	+1
+use	ilAssembleProgram	uVar22	texUnit	CONFIRMED	texture token (word >> 16) & 0xff: sampler/texture unit; indexes the per-unit masks and the target table aiStack_22f0	^\s*local_2bb8\ =\ \(uint\ \*\*\*\*\*\*\*\)\(\(int\ \(\*\)\(\)\)FUN_000c7460\)\(\&local_23e8,local_70,local_60,uVar22,local_2bb8\);$	+1
+use	ilAssembleProgram	uVar22	texUnit	CONFIRMED	texture token (word >> 16) & 0xff: sampler/texture unit; indexes the per-unit masks and the target table aiStack_22f0	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c7650\)\(\&local_23e8,local_70,pppppppuVar18,\&local_2bb0,uVar22,pppppppuVar30,$	+2
+use	ilAssembleProgram	uVar22	texUnit	CONFIRMED	texture token (word >> 16) & 0xff: sampler/texture unit; indexes the per-unit masks and the target table aiStack_22f0	^\s*uVar22\ =\ uVar32\ \&\ 0xff;$@2	+1
+use	ilAssembleProgram	uVar22	texUnit	CONFIRMED	texture token (word >> 16) & 0xff: sampler/texture unit; indexes the per-unit masks and the target table aiStack_22f0	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c7460\)\(\&local_23e8,\&local_2b98,pppppppuVar18,uVar22,local_2bb8\);$	+1
+use	ilAssembleProgram	uVar22	texUnit	CONFIRMED	texture token (word >> 16) & 0xff: sampler/texture unit; indexes the per-unit masks and the target table aiStack_22f0	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c7650\)\(\&local_23e8,\&local_2b98,pppppppuVar18,\&local_2bb0,uVar22,$	+2
+use	ilAssembleProgram	uVar22	texUnit	CONFIRMED	texture token (word >> 16) & 0xff: sampler/texture unit; indexes the per-unit masks and the target table aiStack_22f0	^\s*if\ \(aiStack_22f0\[uVar22\]\ ==\ 0x1906\)\ \{$	+1
+use	ilAssembleProgram	uVar22	texUnit	CONFIRMED	texture token (word >> 16) & 0xff: sampler/texture unit; indexes the per-unit masks and the target table aiStack_22f0	^\s*else\ if\ \(\(aiStack_22f0\[uVar22\]\ ==\ 0x1909\)\ \&\&\ \(\(\(uint\)ppppppuVar10\ \&\ 0xc0\)\ ==\ 0x40\)\)\ \{$	+1
+use	ilAssembleProgram	iVar17	maskWordIndex	CONFIRMED	register index >> 5: word of the bit mask local_2260	^\s*iVar17\ =\ \(\(int\)uVar32\ >>\ 5\)\ \+\ \(uint\)\(\(int\)uVar32\ <\ 0\ \&\&\ \(uVar32\ \&\ 0x1f\)\ !=\ 0\);$	+2
+use	ilAssembleProgram	iVar17	selectorSlot	CONFIRMED	ilSelectorOneToThreeOrZero(record+4): component slot 0..3 of the record	^\s*iVar17\ =\ FUN_000c7240\(\*\(undefined4\ \*\)\(iVar36\ \+\ 4\)\);$	+1
+use	ilAssembleProgram	iVar17	selectorSlot	CONFIRMED	ilSelectorOneToThreeOrZero(record+4): component slot 0..3 of the record	^\s*aiStack_1220\[iVar35\ \*\ 4\ \+\ iVar17\]\ =\ \(int\)local_2240\[uVar32\ \*\ 4\ \+\ iVar36\];$	+1
+use	ilAssembleProgram	iVar17	selectorSlot	CONFIRMED	ilSelectorOneToThreeOrZero(record+4): component slot 0..3 of the record	^\s*iVar17\ =\ FUN_000c7240\(\*\(undefined4\ \*\)\(iVar36\ \+\ 4\)\);$@2	+1
+use	ilAssembleProgram	iVar17	selectorSlot	CONFIRMED	ilSelectorOneToThreeOrZero(record+4): component slot 0..3 of the record	^\s*param_3\[\(int\)\(\(\(unsigned\ char\ \*\)0x00001001\)\ \+\ \(int\)ppppppuVar15\ \*\ 5\ \+\ iVar17\)\]\ =\ ppppppuVar10;$	+1
+use	ilAssembleProgram	iVar35	recordRegister	CONFIRMED	dcl record +0: register number	^\s*iVar35\ =\ \*\(int\ \*\)\(iVar39\ \+\ local_29f8\);$	+1
+use	ilAssembleProgram	iVar35	recordRegister	CONFIRMED	dcl record +0: register number	^\s*aiStack_1220\[iVar35\ \*\ 4\ \+\ iVar17\]\ =\ \(int\)local_2240\[uVar32\ \*\ 4\ \+\ iVar36\];$	+1
+use	ilAssembleProgram	iVar36	extraWords	CONFIRMED	pass 1: number of words the rewrite adds (e.g. +5 for opcode 0x24); later converted to the byte size	^\s*iVar36\ =\ 0;$	+1
+use	ilAssembleProgram	iVar36	extraWords	CONFIRMED	pass 1: number of words the rewrite adds (e.g. +5 for opcode 0x24); later converted to the byte size	^\s*iVar36\ =\ \(iVar36\ \+\ iVar38\)\ \*\ 4;$	+1
+use	ilAssembleProgram	iVar36	extraWords	CONFIRMED	pass 1: number of words the rewrite adds (e.g. +5 for opcode 0x24); later converted to the byte size	^\s*iVar36\ =\ iVar36\ \+\ 0x48;$	+1
+use	ilAssembleProgram	iVar36	extraWords	CONFIRMED	pass 1: number of words the rewrite adds (e.g. +5 for opcode 0x24); later converted to the byte size	^\s*uVar33\ =\ iVar36\ \+\ iVar39\ \*\ 4;$	+1
+use	ilAssembleProgram	iVar36	extraWords	CONFIRMED	pass 1: number of words the rewrite adds (e.g. +5 for opcode 0x24); later converted to the byte size	^\s*iVar36\ =\ iVar36\ \+\ 5;$	+1
+use	ilAssembleProgram	iVar36	dclRecord	CONFIRMED	current 0x24-byte dcl record: local_29f8 + offset (type at +8: 0x16 or 0x18)	^\s*iVar36\ =\ iVar39\ \+\ local_29f8;$	+3
+use	ilAssembleProgram	iVar36	dclRecord	CONFIRMED	current 0x24-byte dcl record: local_29f8 + offset (type at +8: 0x16 or 0x18)	^\s*iVar17\ =\ FUN_000c7240\(\*\(undefined4\ \*\)\(iVar36\ \+\ 4\)\);$	+4
+use	ilAssembleProgram	iVar36	dclRecord	CONFIRMED	current 0x24-byte dcl record: local_29f8 + offset (type at +8: 0x16 or 0x18)	^\s*else\ if\ \(\*\(int\ \*\)\(iVar36\ \+\ 8\)\ ==\ 0x18\)\ \{$	+1
+use	ilAssembleProgram	iVar36	dclRecord	CONFIRMED	current 0x24-byte dcl record: local_29f8 + offset (type at +8: 0x16 or 0x18)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8de0\)\(param_3\ \+\ 0x1589,iVar36\);$	+1
+use	ilAssembleProgram	iVar36	defRecord	CONFIRMED	current 0x24-byte def record: local_29fc + offset (type at +8: 1)	^\s*iVar36\ =\ iVar39\ \+\ local_29fc;$	+2
+use	ilAssembleProgram	iVar36	defRecord	CONFIRMED	current 0x24-byte def record: local_29fc + offset (type at +8: 1)	^\s*iVar17\ =\ FUN_000c7240\(\*\(undefined4\ \*\)\(iVar36\ \+\ 4\)\);$@2	+2
+use	ilAssembleProgram	iVar39	texExtraWords	CONFIRMED	pass 1: words added by the texture rewrite (+0x1b for a projective/shadow sample, +4 for a shadow compare); size accounted as iVar39 * 4	^\s*iVar39\ =\ 0;$	+1
+use	ilAssembleProgram	iVar39	texExtraWords	CONFIRMED	pass 1: words added by the texture rewrite (+0x1b for a projective/shadow sample, +4 for a shadow compare); size accounted as iVar39 * 4	^\s*uVar33\ =\ iVar36\ \+\ iVar39\ \*\ 4;$	+1
+use	ilAssembleProgram	iVar39	texExtraWords	CONFIRMED	pass 1: words added by the texture rewrite (+0x1b for a projective/shadow sample, +4 for a shadow compare); size accounted as iVar39 * 4	^\s*iVar39\ =\ iVar39\ \+\ 0x1b;$	+1
+use	ilAssembleProgram	iVar39	texExtraWords	CONFIRMED	pass 1: words added by the texture rewrite (+0x1b for a projective/shadow sample, +4 for a shadow compare); size accounted as iVar39 * 4	^\s*iVar39\ =\ iVar39\ \+\ 4;$	+1
+use	ilAssembleProgram	iVar39	texExtraWords	CONFIRMED	pass 1: words added by the texture rewrite (+0x1b for a projective/shadow sample, +4 for a shadow compare); size accounted as iVar39 * 4	^\s*iVar39\ =\ iVar39\ \+\ 0x1b;$@2	+1
+use	ilAssembleProgram	iVar39	texExtraWords	CONFIRMED	pass 1: words added by the texture rewrite (+0x1b for a projective/shadow sample, +4 for a shadow compare); size accounted as iVar39 * 4	^\s*iVar39\ =\ iVar39\ \+\ 4;$@2	+1
+use	ilAssembleProgram	iVar39	countdown	INFERRED	loop countdown (8, 0x10, 4, 0x20, 8, 0x40 or 0x16 iterations)	^\s*iVar39\ =\ 8;$	+1
+use	ilAssembleProgram	iVar39	countdown	INFERRED	loop countdown (8, 0x10, 4, 0x20, 8, 0x40 or 0x16 iterations)	^\s*iVar39\ =\ iVar39\ \+\ \-1;$	+2
+use	ilAssembleProgram	iVar39	countdown	INFERRED	loop countdown (8, 0x10, 4, 0x20, 8, 0x40 or 0x16 iterations)	^\s*iVar39\ =\ 0x10;$	+1
+use	ilAssembleProgram	iVar39	countdown	INFERRED	loop countdown (8, 0x10, 4, 0x20, 8, 0x40 or 0x16 iterations)	^\s*iVar39\ =\ iVar39\ \+\ \-1;$@2	+2
+use	ilAssembleProgram	iVar39	countdown	INFERRED	loop countdown (8, 0x10, 4, 0x20, 8, 0x40 or 0x16 iterations)	^\s*iVar39\ =\ 4;$	+1
+use	ilAssembleProgram	iVar39	countdown	INFERRED	loop countdown (8, 0x10, 4, 0x20, 8, 0x40 or 0x16 iterations)	^\s*iVar39\ =\ iVar39\ \+\ \-1;$@3	+2
+use	ilAssembleProgram	iVar39	countdown	INFERRED	loop countdown (8, 0x10, 4, 0x20, 8, 0x40 or 0x16 iterations)	^\s*iVar39\ =\ 0x20;$	+1
+use	ilAssembleProgram	iVar39	countdown	INFERRED	loop countdown (8, 0x10, 4, 0x20, 8, 0x40 or 0x16 iterations)	^\s*iVar39\ =\ iVar39\ \+\ \-1;$@4	+2
+use	ilAssembleProgram	iVar39	countdown	INFERRED	loop countdown (8, 0x10, 4, 0x20, 8, 0x40 or 0x16 iterations)	^\s*iVar39\ =\ 8;$@2	+1
+use	ilAssembleProgram	iVar39	countdown	INFERRED	loop countdown (8, 0x10, 4, 0x20, 8, 0x40 or 0x16 iterations)	^\s*iVar39\ =\ iVar39\ \+\ \-1;$@5	+2
+use	ilAssembleProgram	iVar39	countdown	INFERRED	loop countdown (8, 0x10, 4, 0x20, 8, 0x40 or 0x16 iterations)	^\s*iVar39\ =\ 0x40;$	+1
+use	ilAssembleProgram	iVar39	countdown	INFERRED	loop countdown (8, 0x10, 4, 0x20, 8, 0x40 or 0x16 iterations)	^\s*iVar39\ =\ iVar39\ \+\ \-1;$@6	+2
+use	ilAssembleProgram	iVar39	countdown	INFERRED	loop countdown (8, 0x10, 4, 0x20, 8, 0x40 or 0x16 iterations)	^\s*iVar39\ =\ 0x16;$	+1
+use	ilAssembleProgram	iVar39	countdown	INFERRED	loop countdown (8, 0x10, 4, 0x20, 8, 0x40 or 0x16 iterations)	^\s*iVar39\ =\ iVar39\ \+\ \-1;$@7	+2
+use	ilAssembleProgram	iVar39	compilerHandle	CONFIRMED	*(ctx+0x186c): handle passed to FUN_000cd1b0 with the two output tables	^\s*iVar39\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x186c\);$	+2
+use	ilAssembleProgram	iVar39	compilerHandle	CONFIRMED	*(ctx+0x186c): handle passed to FUN_000cd1b0 with the two output tables	^\s*iVar39\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x186c\);$@2	+1
+use	ilAssembleProgram	iVar39	compilerHandle	CONFIRMED	*(ctx+0x186c): handle passed to FUN_000cd1b0 with the two output tables	^\s*iVar39\ =\ \(\(int\ \(\*\)\(\)\)FUN_000cd1b0\)\(iVar39,auStack_2b18,auStack_2a5c\);$	+2
+use	ilAssembleProgram	iVar39	recordOffset	CONFIRMED	byte offset (stride 0x24) of the current dcl / def record	^\s*iVar39\ =\ 0;$@2	+1
+use	ilAssembleProgram	iVar39	recordOffset	CONFIRMED	byte offset (stride 0x24) of the current dcl / def record	^\s*iVar36\ =\ iVar39\ \+\ local_29f8;$	+1
+use	ilAssembleProgram	iVar39	recordOffset	CONFIRMED	byte offset (stride 0x24) of the current dcl / def record	^\s*iVar35\ =\ \*\(int\ \*\)\(iVar39\ \+\ local_29f8\);$	+1
+use	ilAssembleProgram	iVar39	recordOffset	CONFIRMED	byte offset (stride 0x24) of the current dcl / def record	^\s*iVar39\ =\ iVar39\ \+\ 0x24;$	+1
+use	ilAssembleProgram	iVar39	recordOffset	CONFIRMED	byte offset (stride 0x24) of the current dcl / def record	^\s*iVar39\ =\ 0;$@3	+1
+use	ilAssembleProgram	iVar39	recordOffset	CONFIRMED	byte offset (stride 0x24) of the current dcl / def record	^\s*iVar36\ =\ iVar39\ \+\ local_29fc;$	+1
+use	ilAssembleProgram	iVar39	recordOffset	CONFIRMED	byte offset (stride 0x24) of the current dcl / def record	^\s*ppppppuVar15\ =\ \*\(uint\ \*\*\*\*\*\*\*\)\(iVar39\ \+\ local_29fc\);$	+1
+use	ilAssembleProgram	iVar39	recordOffset	CONFIRMED	byte offset (stride 0x24) of the current dcl / def record	^\s*iVar39\ =\ iVar39\ \+\ 0x24;$@2	+1
+use	ilAssembleProgram	iVar39	mapEntryCount	CONFIRMED	*local_2408: number of 7-word map entries	^\s*iVar39\ =\ \*local_2408;$	+1
+use	ilAssembleProgram	iVar39	mapEntryCount	CONFIRMED	*local_2408: number of 7-word map entries	^\s*param_3\[0x151f\]\ =\ \(uint\ \*\*\*\*\*\*\)\(uint\)\(iVar39\ !=\ 0\);$	+3
+use	ilAssembleProgram	iVar39	mapEntryCount	CONFIRMED	*local_2408: number of 7-word map entries	^\s*iVar39\ =\ iVar39\ \+\ \-1;$@8	+2
+use	ilAssembleProgram	iVar39	opcodeTimes4	INFERRED	opcode * 4, forwarded as a dead argument of ilEmitPrologue	^\s*iVar39\ =\ uVar32\ \*\ 4;$	+1
+use	ilAssembleProgram	iVar39	opcodeTimes4	INFERRED	opcode * 4, forwarded as a dead argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$	+2
+use	ilAssembleProgram	iVar39	opcodeTimes4	INFERRED	opcode * 4, forwarded as a dead argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@2	+2
+use	ilAssembleProgram	iVar39	opcodeTimes4	INFERRED	opcode * 4, forwarded as a dead argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@3	+2
+use	ilAssembleProgram	iVar39	opcodeTimes4	INFERRED	opcode * 4, forwarded as a dead argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c7930\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,local_2bb4,pppppppuVar20,$	+2
+use	ilAssembleProgram	iVar39	opcodeTimes4	INFERRED	opcode * 4, forwarded as a dead argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@4	+2
+use	ilAssembleProgram	iVar39	opcodeTimes4	INFERRED	opcode * 4, forwarded as a dead argument of ilEmitPrologue	^\s*\(\(int\ \(\*\)\(\)\)FUN_000c8110\)\(local_2bb8,\&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,$@5	+2
