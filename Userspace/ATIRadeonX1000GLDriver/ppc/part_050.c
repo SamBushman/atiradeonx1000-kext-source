@@ -598,8 +598,8 @@ int FUN_001922c4(param_1, param_2, inst, program)
   undefined4 uVar4;
   int loopIndex;
   int iVar6;
-  undefined4 set;
-  undefined4 set2;
+  undefined4 absFlag;
+  undefined4 negateFlag;
   undefined4 uVar9;
   undefined4 uVar10;
   undefined4 uVar11;
@@ -621,8 +621,8 @@ int FUN_001922c4(param_1, param_2, inst, program)
       operandIndex2 = 2;
       uVar9 = 3;
       uVar10 = 2;
-      set2 = 1;
-      set = 1;
+      negateFlag = 1;
+      absFlag = 1;
       break;
     case 0x28:
     case 0x5c:
@@ -630,8 +630,8 @@ int FUN_001922c4(param_1, param_2, inst, program)
       operandIndex2 = 1;
       uVar9 = 2;
       uVar10 = 3;
-      set2 = 0;
-      set = 0;
+      negateFlag = 0;
+      absFlag = 0;
       break;
     case 0x29:
     case 0x5d:
@@ -639,8 +639,8 @@ int FUN_001922c4(param_1, param_2, inst, program)
       operandIndex2 = 2;
       uVar9 = 3;
       uVar10 = 2;
-      set2 = 0;
-      set = 0;
+      negateFlag = 0;
+      absFlag = 0;
       break;
     case 0x2a:
     case 0x5e:
@@ -648,16 +648,16 @@ int FUN_001922c4(param_1, param_2, inst, program)
       operandIndex2 = 2;
       uVar9 = 2;
       uVar10 = 3;
-      set2 = 1;
-      set = 1;
+      negateFlag = 1;
+      absFlag = 1;
       break;
     default:
       operandIndex = 0;
       operandIndex2 = 0;
       uVar9 = 0;
       uVar10 = 0;
-      set2 = 0;
-      set = 0;
+      negateFlag = 0;
+      absFlag = 0;
     }
     inst2 = IRInst__create(0x12,uVar11);
     sourceDef = IRInst__getOperandSource(inst,operandIndex);
@@ -705,8 +705,8 @@ int FUN_001922c4(param_1, param_2, inst, program)
     inst[4] = iVar12;
     IRInst__setOperandSource(inst,1,inst2,*(uint *)(program + 0x30) >> 7 & 1,uVar11);
     loopIndex = 0;
-    IROperand__setModifierBits(inst + 0x29,1,set2);
-    IROperand__setModifierBits(inst + 0x29,2,set);
+    IROperand__setModifierBits(inst + 0x29,1,negateFlag);
+    IROperand__setModifierBits(inst + 0x29,2,absFlag);
     dVar13 = (double)FLOAT_001aa0e8;
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,uVar10,dVar13,dVar13,dVar13,dVar13);
     dVar13 = (double)FLOAT_001aa0d4;

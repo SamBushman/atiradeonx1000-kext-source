@@ -913,11 +913,11 @@ int FUN_0017ce7c(ctx, param_2)
 }
 
 /* FUN_0017d06c @ 0x17d06c (368 bytes) */
-int FUN_0017d06c(ctx, param_2, param_3, set)
+int FUN_0017d06c(ctx, param_2, param_3, negateFlag)
   int ctx;
   int param_2;
   undefined4 *param_3;
-  undefined4 set;
+  undefined4 negateFlag;
 {
   int operandRef;
   int operandRecord;
@@ -976,7 +976,7 @@ int FUN_0017d06c(ctx, param_2, param_3, set)
   uVar9 = *param_3;
   operandRecord = IRInst__getOperandRecord(member0xb0,1);
   *(undefined4 *)(operandRecord + 0x10) = uVar9;
-  IROperand__setModifierBits(member0xb0 + 0xa4,1,set);
+  IROperand__setModifierBits(member0xb0 + 0xa4,1,negateFlag);
   *(int *)(ctx + 0x214) = param_2;
   if (bVar1) {
     *(undefined4 *)(ctx + 0x218) = 0;
@@ -1974,7 +1974,7 @@ int FUN_0017e7e0(ctx)
   undefined4 local_74 [3];
   undefined4 local_68;
   undefined4 operandRef;
-  uint set;
+  uint absFlag;
   int local_5c;
   int local_58;
   
@@ -2005,7 +2005,7 @@ int FUN_0017e7e0(ctx)
   local_68 = *(undefined4 *)(loopIndex + 0x10);
   uVar5 = *(uint *)(loopRemaining + 0xe8);
   bVar1 = (*(uint *)(loopRemaining + 0x14) >> 9 & 1) != 0;
-  set = uVar5 >> 1 & 1;
+  absFlag = uVar5 >> 1 & 1;
   if (bVar1) {
     operandRef = *(undefined4 *)(*(int *)(loopRemaining + 0x84) * 0x18 + loopRemaining + 0x8c);
   }
@@ -2058,7 +2058,7 @@ int FUN_0017e7e0(ctx)
   loopIndex = IRInst__getOperandRecord(newInst,2);
   *(undefined4 *)(loopIndex + 0x10) = local_68;
   IROperand__setModifierBits(newInst + 0x2f,1,uVar5 & 1);
-  IROperand__setModifierBits(newInst + 0x2f,2,set);
+  IROperand__setModifierBits(newInst + 0x2f,2,absFlag);
   newInst[0x48] = local_58;
   newInst[0x49] = local_5c;
   FUN_0012306c(operandRef4,newInst);
@@ -2085,11 +2085,11 @@ int FUN_0017e7e0(ctx)
 }
 
 /* FUN_0017ebb0 @ 0x17ebb0 (508 bytes) */
-int FUN_0017ebb0(ctx, param_2, param_3, set)
+int FUN_0017ebb0(ctx, param_2, param_3, negateFlag)
   int ctx;
   int param_2;
   undefined4 param_3;
-  undefined4 set;
+  undefined4 negateFlag;
 {
   int operandRef;
   int node;
@@ -2168,7 +2168,7 @@ int FUN_0017ebb0(ctx, param_2, param_3, set)
   IRInst__setOperandRef(inst3,1,operandRef);
   operandRecord = IRInst__getOperandRecord(inst3,1);
   *(undefined4 *)(operandRecord + 0x10) = param_3;
-  IROperand__setModifierBits(inst3 + 0xa4,1,set);
+  IROperand__setModifierBits(inst3 + 0xa4,1,negateFlag);
   IRInst__setOperandRef(inst3,2,operandRef3);
   operandRecord = IRInst__getOperandRecord(inst3,2);
   *(undefined4 *)(operandRecord + 0x10) = uVar7;
@@ -4161,7 +4161,7 @@ int FUN_00181f00(compiler, block, inst)
   undefined4 inst5;
   undefined4 inst4;
   undefined4 inst3;
-  uint set;
+  uint negateFlag;
   uint *vector8;
   uint *vector7;
   uint *vector6;
@@ -4996,13 +4996,13 @@ int FUN_00181f00(compiler, block, inst)
       operandRecord3 = IRInst__getOperandRecord(inst1,operandIndex);
       *(undefined4 *)(operandRecord3 + 0x10) = uVar21;
       if ((*(uint *)(operandIndex * 0x18 + inst1 + 0xa0) & 1) == 0) {
-        set = inst2[loopIndex3 * 6 + 0x28] & 1;
+        negateFlag = inst2[loopIndex3 * 6 + 0x28] & 1;
       }
       else {
-        set = inst2[loopIndex3 * 6 + 0x28] & 1U ^ 1;
+        negateFlag = inst2[loopIndex3 * 6 + 0x28] & 1U ^ 1;
       }
       operandRecord1 = operandIndex * 0x18 + inst1 + 0x8c;
-      IROperand__setModifierBits(operandRecord1,1,set);
+      IROperand__setModifierBits(operandRecord1,1,negateFlag);
       IROperand__setModifierBits(operandRecord1,2,(uint)inst2[loopIndex3 * 6 + 0x28] >> 1 & 1);
       (**(code **)(*inst2 + 0xc))(inst2,0,*compiler);
       loopIndex = loopIndex + 1;

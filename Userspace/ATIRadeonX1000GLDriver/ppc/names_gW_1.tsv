@@ -48,10 +48,10 @@ use	FUN_00147f54	iVar4	program	INFERRED	web passed only as callee parameter prog
 use	FUN_00147f54	iVar4	program	INFERRED	web passed only as callee parameter program (1 uses, unanimous)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x478\);$	+1
 use	FUN_00147f54	iVar8	afterInst	INFERRED	web passed only as callee parameter afterInst (1 uses, unanimous)	^\s*iVar8\ =\ param_1\[1\];$	+1
 use	FUN_00147f54	iVar8	afterInst	INFERRED	web passed only as callee parameter afterInst (1 uses, unanimous)	^\s*FUN_000e7738\(\*\(undefined4\ \*\)\(iVar8\ \+\ 0x158\),iVar8,param_1\);$	+1
-use	FUN_00147f54	uVar15	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar15\ =\ \(uint\)\(local_90\ <\ FLOAT_001aa0d4\)\ \^\ param_1\[iVar2\ \*\ 6\ \+\ 0x28\]\ \&\ 1U;$	+1
-use	FUN_00147f54	uVar15	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar15\ =\ param_1\[iVar2\ \*\ 6\ \+\ 0x28\]\ \&\ 1;$	+1
-use	FUN_00147f54	uVar15	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar15\ =\ 0;$	+1
-use	FUN_00147f54	uVar15	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(param_1\ \+\ 0x29,1,uVar15\);$	+1
+use	FUN_00147f54	uVar15	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*uVar15\ =\ \(uint\)\(local_90\ <\ FLOAT_001aa0d4\)\ \^\ param_1\[iVar2\ \*\ 6\ \+\ 0x28\]\ \&\ 1U;$	+1
+use	FUN_00147f54	uVar15	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*uVar15\ =\ param_1\[iVar2\ \*\ 6\ \+\ 0x28\]\ \&\ 1;$	+1
+use	FUN_00147f54	uVar15	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*uVar15\ =\ 0;$	+1
+use	FUN_00147f54	uVar15	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*FUN_00103d50\(param_1\ \+\ 0x29,1,uVar15\);$	+1
 use	FUN_0014846c	piVar12	inst1	INFERRED	web passed only as callee parameter inst (2 uses, unanimous)	^\s*piVar12\ =\ \(int\ \*\)\*puVar5;$	+2
 use	FUN_0014846c	piVar12	inst1	INFERRED	web passed only as callee parameter inst (2 uses, unanimous)	^\s*iVar3\ =\ FUN_001054ec\(piVar12,0\);$	+1
 use	FUN_0014846c	piVar12	inst1	INFERRED	web passed only as callee parameter inst (2 uses, unanimous)	^\s*iVar8\ =\ FUN_001054ec\(piVar12,1\);$	+1
@@ -209,15 +209,15 @@ use	FUN_00149de4	uVar11	set	INFERRED	web passed only as callee parameter set (1 
 use	FUN_00149de4	uVar11	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(param_1\ \+\ param_2\ \*\ 6\ \+\ 0x23,2,uVar11\);$	+1
 use	FUN_00149de4	uVar11	set2	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*if\ \(\(\(param_1\[param_2\ \*\ 6\ \+\ 0x28\]\ \&\ 2U\)\ !=\ 0\)\ \|\|\ \(uVar11\ =\ 0,\ \(param_3\[0x2e\]\ \&\ 2U\)\ !=\ 0\)$@2	+3
 use	FUN_00149de4	uVar11	set2	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(param_1\ \+\ param_2\ \*\ 6\ \+\ 0x23,2,uVar11\);$@2	+1
-use	FUN_00149de4	uVar13	set3	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar13\ =\ \-\(uint\)\(param_3\[0x2e\]\ \&\ 2U\)\ >>\ 0x1f;$	+1
-use	FUN_00149de4	uVar13	set3	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar13\ =\ 1;$	+1
-use	FUN_00149de4	uVar13	set3	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*\(\*\(int\ \*\*\)\(param_5\ \+\ COMP_target\),param_1,param_2,piVar18,uVar13,uVar16,$	+2
-use	FUN_00149de4	uVar13	set3	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(param_1\ \+\ param_2\ \*\ 6\ \+\ 0x23,2,uVar13\);$	+1
-use	FUN_00149de4	uVar16	set4	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar16\ =\ param_3\[0x2e\]\ \&\ 1;$	+1
-use	FUN_00149de4	uVar16	set4	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar16\ =\ 0;$	+1
-use	FUN_00149de4	uVar16	set4	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar16\ =\ param_1\[param_2\ \*\ 6\ \+\ 0x28\]\ \&\ 1U\ \^\ uVar16;$	+1
-use	FUN_00149de4	uVar16	set4	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*\(\*\(int\ \*\*\)\(param_5\ \+\ COMP_target\),param_1,param_2,piVar18,uVar13,uVar16,$	+2
-use	FUN_00149de4	uVar16	set4	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(param_1\ \+\ param_2\ \*\ 6\ \+\ 0x23,1,uVar16\);$	+1
+use	FUN_00149de4	uVar13	absFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*uVar13\ =\ \-\(uint\)\(param_3\[0x2e\]\ \&\ 2U\)\ >>\ 0x1f;$	+1
+use	FUN_00149de4	uVar13	absFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*uVar13\ =\ 1;$	+1
+use	FUN_00149de4	uVar13	absFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*\(\*\(int\ \*\*\)\(param_5\ \+\ COMP_target\),param_1,param_2,piVar18,uVar13,uVar16,$	+2
+use	FUN_00149de4	uVar13	absFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*FUN_00103d50\(param_1\ \+\ param_2\ \*\ 6\ \+\ 0x23,2,uVar13\);$	+1
+use	FUN_00149de4	uVar16	negateFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*uVar16\ =\ param_3\[0x2e\]\ \&\ 1;$	+1
+use	FUN_00149de4	uVar16	negateFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*uVar16\ =\ 0;$	+1
+use	FUN_00149de4	uVar16	negateFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*uVar16\ =\ param_1\[param_2\ \*\ 6\ \+\ 0x28\]\ \&\ 1U\ \^\ uVar16;$	+1
+use	FUN_00149de4	uVar16	negateFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*\(\*\(int\ \*\*\)\(param_5\ \+\ COMP_target\),param_1,param_2,piVar18,uVar13,uVar16,$	+2
+use	FUN_00149de4	uVar16	negateFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*FUN_00103d50\(param_1\ \+\ param_2\ \*\ 6\ \+\ 0x23,1,uVar16\);$	+1
 local	Inst__swizzleTextureFetchOutput	param_2	operandIndex	INFERRED	passed as parameter operandIndex of callees (4 uses, unanimous)
 local	Inst__swizzleTextureFetchOutput	param_3	program	INFERRED	passed as parameter program of callees (2 uses, unanimous)
 use	Inst__swizzleTextureFetchOutput	iVar3	beforeInst	INFERRED	web passed only as callee parameter beforeInst (1 uses, unanimous)	^\s*iVar3\ =\ param_1\[2\];$	+1
@@ -280,10 +280,11 @@ use	FUN_0014e9e4	uVar7	operandIndex4	INFERRED	web passed only as callee paramete
 use	FUN_0014e9e4	uVar7	operandIndex4	INFERRED	web passed only as callee parameter operandIndex (1 uses, unanimous)	^\s*\*\(uint\ \*\)\(\(uVar7\ \+\ \(\(\(int\)uVar7\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar7\ <\ 0\ \&\&\ \(uVar7\ \&\ 1\)\ !=\ 0\)\)\ \*\ \-2\)\ \*$	+2
 use	FUN_0014e9e4	uVar7	operandIndex4	INFERRED	web passed only as callee parameter operandIndex (1 uses, unanimous)	^\s*iVar16\ =\ iVar2\ \+\ uVar7\ \*\ 0x18\ \+\ 0x80;$	+1
 use	FUN_0014e9e4	uVar7	operandIndex4	INFERRED	web passed only as callee parameter operandIndex (1 uses, unanimous)	^\s*iVar16\ =\ FUN_00105594\(iVar2,uVar7\);$	+1
-use	FUN_0014e9e4	uVar7	set	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*uVar7\ =\ param_2\[1\];$@4	+1
-use	FUN_0014e9e4	uVar7	set	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*uVar7\ =\ \*\(uint\ \*\)\(\(uVar7\ \+\ \(\(\(int\)uVar7\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar7\ <\ 0\ \&\&\ \(uVar7\ \&\ 1\)\ !=\ 0\)\)\ \*\ \-2$	+3
-use	FUN_0014e9e4	uVar7	set	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*FUN_00103d50\(iVar16\ \+\ 0xbc,2,uVar7\);$	+1
-use	FUN_0014e9e4	uVar7	set	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*FUN_00103d50\(iVar16\ \+\ 0xa4,2,uVar7\);$	+1
+use	FUN_0014e9e4	uVar7	useOperandIndexBTmp	INFERRED	copy of useB[1], the operand index of use B, used to find the consumer other operand	^\s*uVar7\ =\ param_2\[1\];$@4	+1
+use	FUN_0014e9e4	uVar7	useOperandIndexBTmp	INFERRED	the operand index inside the expression computing the other operand index (idx%2)+1 offset	^\s*uVar7\ =\ \*\(uint\ \*\)\(\(uVar7\ \+\ \(\(\(int\)uVar7\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar7\ <\ 0\ \&\&\ \(uVar7\ \&\ 1\)\ !=\ 0\)\)\ \*\ \-2$	+1	rhs	none
+use	FUN_0014e9e4	uVar7	absOtherB	INFERRED	bit 1 (abs) of the flags of the consumer other operand of use B; stored into matchFrame[10] and set into the operands	^\s*uVar7\ =\ \*\(uint\ \*\)\(\(uVar7\ \+\ \(\(\(int\)uVar7\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar7\ <\ 0\ \&\&\ \(uVar7\ \&\ 1\)\ !=\ 0\)\)\ \*\ \-2$	+3	lhs	none
+use	FUN_0014e9e4	uVar7	absOtherB	INFERRED	bit 1 (abs) of the flags of the consumer other operand of use B	^\s*FUN_00103d50\(iVar16\ \+\ 0xbc,2,uVar7\);$	+1
+use	FUN_0014e9e4	uVar7	absOtherB	INFERRED	bit 1 (abs) of the flags of the consumer other operand of use B	^\s*FUN_00103d50\(iVar16\ \+\ 0xa4,2,uVar7\);$	+1
 use	FUN_0014f420	iVar11	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (2 uses, unanimous)	^\s*iVar11\ =\ iVar19;$	+2
 use	FUN_0014f420	iVar11	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (2 uses, unanimous)	^\s*iVar18\ =\ iVar11;$	+1
 use	FUN_0014f420	iVar11	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (2 uses, unanimous)	^\s*iVar15\ =\ iVar11;$	+1
@@ -597,12 +598,12 @@ use	Inst__collapseAlgebraic_00155a60	iVar26	operandIndex5	INFERRED	web passed on
 use	Inst__collapseAlgebraic_00155a60	iVar26	afterInst3	INFERRED	web passed only as callee parameter afterInst (2 uses, unanimous)	^\s*iVar26\ =\ \*\(int\ \*\)\(\(int\)param_1\ \+\ 4\);$	+1
 use	Inst__collapseAlgebraic_00155a60	iVar26	afterInst3	INFERRED	web passed only as callee parameter afterInst (2 uses, unanimous)	^\s*FUN_000e7738\(\*\(undefined4\ \*\)\(iVar26\ \+\ 0x158\),iVar26,param_1\);$	+1
 use	Inst__collapseAlgebraic_00155a60	iVar26	afterInst3	INFERRED	web passed only as callee parameter afterInst (2 uses, unanimous)	^\s*FUN_000e7738\(\*\(undefined4\ \*\)\(iVar26\ \+\ 0x158\),iVar26,iVar22\);$	+1
-use	Inst__collapseAlgebraic_00155a60	local_64	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_64\ =\ uVar4\ >>\ 1\ \&\ 1;$	+1
-use	Inst__collapseAlgebraic_00155a60	local_64	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*iVar14\ =\ FUN_00106230\(pvVar15,3,local_60,local_64,local_68,\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\);$	+1
-use	Inst__collapseAlgebraic_00155a60	local_64	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(\(int\)pvVar15\ \+\ 0xd4,2,local_64\);$	+1
-use	Inst__collapseAlgebraic_00155a60	local_68	set2	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_68\ =\ uVar4\ \&\ 1;$	+1
-use	Inst__collapseAlgebraic_00155a60	local_68	set2	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*iVar14\ =\ FUN_00106230\(pvVar15,3,local_60,local_64,local_68,\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\);$	+1
-use	Inst__collapseAlgebraic_00155a60	local_68	set2	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(\(int\)pvVar15\ \+\ 0xd4,1,local_68\);$	+1
+use	Inst__collapseAlgebraic_00155a60	local_64	absOperand3	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*local_64\ =\ uVar4\ >>\ 1\ \&\ 1;$	+1
+use	Inst__collapseAlgebraic_00155a60	local_64	absOperand3	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*iVar14\ =\ FUN_00106230\(pvVar15,3,local_60,local_64,local_68,\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\);$	+1
+use	Inst__collapseAlgebraic_00155a60	local_64	absOperand3	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*FUN_00103d50\(\(int\)pvVar15\ \+\ 0xd4,2,local_64\);$	+1
+use	Inst__collapseAlgebraic_00155a60	local_68	negateOperand3	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*local_68\ =\ uVar4\ \&\ 1;$	+1
+use	Inst__collapseAlgebraic_00155a60	local_68	negateOperand3	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*iVar14\ =\ FUN_00106230\(pvVar15,3,local_60,local_64,local_68,\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\);$	+1
+use	Inst__collapseAlgebraic_00155a60	local_68	negateOperand3	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*FUN_00103d50\(\(int\)pvVar15\ \+\ 0xd4,1,local_68\);$	+1
 use	Inst__collapseAlgebraic_00155a60	piVar27	inst1	INFERRED	web passed only as callee parameter inst (3 uses, unanimous)	^\s*if\ \(\(iVar3\ !=\ 1\)\ \|\|\ \(piVar27\ =\ piVar9,\ \*\(int\ \*\)\(piVar9\[0x22\]\ \+\ 8\)\ !=\ 0x13\)\)\ \{$	+2
 use	Inst__collapseAlgebraic_00155a60	piVar27	inst1	INFERRED	web passed only as callee parameter inst (3 uses, unanimous)	^\s*if\ \(piVar27\ ==\ \(int\ \*\)0x0\)\ \{$	+1
 use	Inst__collapseAlgebraic_00155a60	piVar27	inst1	INFERRED	web passed only as callee parameter inst (3 uses, unanimous)	^\s*iVar26\ =\ piVar27\[0x58\]\ \-\ \*\(int\ \*\)\(param_2\ \+\ 0x478\);$	+1
@@ -659,13 +660,13 @@ use	Inst__collapseAlgebraic_00155a60	piVar8	inst3	INFERRED	web passed only as ca
 use	Inst__collapseAlgebraic_00155a60	piVar8	inst3	INFERRED	web passed only as callee parameter inst (11 uses, unanimous)	^\s*piVar9\ =\ \(int\ \*\)FUN_00105594\(piVar8,iVar3\);$	+1
 use	Inst__collapseAlgebraic_00155a60	uVar11	block	INFERRED	web passed only as callee parameter block (1 uses, unanimous)	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(iVar21\ \+\ 0x158\);$	+1
 use	Inst__collapseAlgebraic_00155a60	uVar11	block	INFERRED	web passed only as callee parameter block (1 uses, unanimous)	^\s*FUN_000e7738\(uVar11,iVar21,param_1\);$	+1
-use	Inst__collapseAlgebraic_00155a60	uVar4	set3	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar4\ =\ uVar5\ \&\ 1;$	+1
-use	Inst__collapseAlgebraic_00155a60	uVar4	set3	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*iVar3\ =\ FUN_00106230\(pvVar15,1,uVar11,1,uVar4,\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\);$	+1
-use	Inst__collapseAlgebraic_00155a60	uVar4	set3	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*if\ \(uVar4\ ==\ 0\)\ \{$	+1
-use	Inst__collapseAlgebraic_00155a60	uVar4	set3	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(\(int\)pvVar15\ \+\ 0xa4,1,uVar4\);$@2	+1
-use	Inst__collapseAlgebraic_00155a60	uVar4	set4	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar4\ =\ piVar8\[0x2e\]\ \&\ 1;$	+1
-use	Inst__collapseAlgebraic_00155a60	uVar4	set4	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar4\ =\ piVar8\[0x2e\]\ \&\ 1U\ \^\ 1;$	+1
-use	Inst__collapseAlgebraic_00155a60	uVar4	set4	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(\(int\)pvVar15\ \+\ 0xa4,1,uVar4\);$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar4	negateOperand1	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*uVar4\ =\ uVar5\ \&\ 1;$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar4	negateOperand1	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*iVar3\ =\ FUN_00106230\(pvVar15,1,uVar11,1,uVar4,\*\(undefined4\ \*\)\(param_2\ \+\ 8\)\);$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar4	negateOperand1	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*if\ \(uVar4\ ==\ 0\)\ \{$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar4	negateOperand1	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*FUN_00103d50\(\(int\)pvVar15\ \+\ 0xa4,1,uVar4\);$@2	+1
+use	Inst__collapseAlgebraic_00155a60	uVar4	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*uVar4\ =\ piVar8\[0x2e\]\ \&\ 1;$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar4	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*uVar4\ =\ piVar8\[0x2e\]\ \&\ 1U\ \^\ 1;$	+1
+use	Inst__collapseAlgebraic_00155a60	uVar4	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*FUN_00103d50\(\(int\)pvVar15\ \+\ 0xa4,1,uVar4\);$	+1
 use	FUN_00156d48	iVar15	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (4 uses, unanimous)	^\s*iVar15\ =\ \*\(int\ \*\)\(param_2\ \+\ 8\);$	+1
 use	FUN_00156d48	iVar15	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (4 uses, unanimous)	^\s*if\ \(\*\(int\ \*\)\(iVar15\ \+\ 0x6ac\)\ <=\ local_c4\)\ \{$	+1
 use	FUN_00156d48	iVar15	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (4 uses, unanimous)	^\s*FUN_00106004\(piVar9,\(\(uint\)piVar9\[5\]\ >>\ 0xe\ \&\ 1\)\ \+\ 1,piVar10,0,iVar15\);$	+1
@@ -731,11 +732,11 @@ use	FUN_00157b78	uVar2	operandIndex3	INFERRED	web passed only as callee paramete
 use	FUN_00157b78	uVar2	operandIndex3	INFERRED	web passed only as callee parameter operandIndex (3 uses, unanimous)	^\s*iVar11\ =\ param_1\ \+\ uVar2\ \*\ 0x18\ \+\ 0x80;$	+1
 use	FUN_00157b78	uVar2	operandIndex3	INFERRED	web passed only as callee parameter operandIndex (3 uses, unanimous)	^\s*iVar10\ =\ FUN_00106230\(param_1,uVar2,piVar7,1,uVar3,\*\(undefined4\ \*\)\(param_3\ \+\ 8\)\);$	+1
 use	FUN_00157b78	uVar2	operandIndex3	INFERRED	web passed only as callee parameter operandIndex (3 uses, unanimous)	^\s*iVar11\ =\ FUN_001054ec\(param_1,uVar2\);$	+1
-use	FUN_00157b78	uVar3	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar3\ =\ \*\(uint\ \*\)\(uVar16\ \*\ 0x18\ \+\ iVar6\ \+\ 0xa0\)\ \&\ 1;$	+1
-use	FUN_00157b78	uVar3	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*iVar10\ =\ FUN_00106230\(param_1,uVar2,piVar7,1,uVar3,\*\(undefined4\ \*\)\(param_3\ \+\ 8\)\);$	+1
-use	FUN_00157b78	uVar3	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(iVar11\ \+\ 0xc,1,uVar3\);$	+1
-use	FUN_00157b78	uVar4	set2	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar11\ \+\ 0x20\)\ \&\ 1;$	+1
-use	FUN_00157b78	uVar4	set2	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*iVar11\ =\ FUN_00106230\(iVar6,uVar16,piVar9,1,uVar4,\*\(undefined4\ \*\)\(param_3\ \+\ 8\)\);$	+2
+use	FUN_00157b78	uVar3	negateFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*uVar3\ =\ \*\(uint\ \*\)\(uVar16\ \*\ 0x18\ \+\ iVar6\ \+\ 0xa0\)\ \&\ 1;$	+1
+use	FUN_00157b78	uVar3	negateFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*iVar10\ =\ FUN_00106230\(param_1,uVar2,piVar7,1,uVar3,\*\(undefined4\ \*\)\(param_3\ \+\ 8\)\);$	+1
+use	FUN_00157b78	uVar3	negateFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*FUN_00103d50\(iVar11\ \+\ 0xc,1,uVar3\);$	+1
+use	FUN_00157b78	uVar4	negateFlag2	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar11\ \+\ 0x20\)\ \&\ 1;$	+1
+use	FUN_00157b78	uVar4	negateFlag2	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*iVar11\ =\ FUN_00106230\(iVar6,uVar16,piVar9,1,uVar4,\*\(undefined4\ \*\)\(param_3\ \+\ 8\)\);$	+2
 local	FUN_0015800c	param_6	program	INFERRED	passed as parameter program of callees (2 uses, unanimous)
 local	Inst__collapseAlgebraic_00158264	param_2	operandIndex3	INFERRED	passed as parameter operandIndex of callees (2 uses, unanimous)
 local	Inst__collapseAlgebraic_00158264	param_4	program	INFERRED	passed as parameter program of callees (6 uses, unanimous)
@@ -748,12 +749,12 @@ use	Inst__collapseAlgebraic_00158264	iVar2	afterInst	INFERRED	web passed only as
 use	Inst__collapseAlgebraic_00158264	iVar2	afterInst	INFERRED	web passed only as callee parameter afterInst (1 uses, unanimous)	^\s*FUN_000e7738\(\*\(undefined4\ \*\)\(iVar2\ \+\ 0x158\),iVar2,param_3\);$	+1
 use	Inst__collapseAlgebraic_00158264	local_54	newSource	INFERRED	web passed only as callee parameter newSource (1 uses, unanimous)	^\s*local_54\ =\ FUN_00105594\(param_3,3\);$	+1
 use	Inst__collapseAlgebraic_00158264	local_54	newSource	INFERRED	web passed only as callee parameter newSource (1 uses, unanimous)	^\s*FUN_00106004\(param_3,2,local_54,0,uVar15\);$	+1
-use	Inst__collapseAlgebraic_00158264	local_58	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_58\ =\ \*\(uint\ \*\)\(param_3\ \+\ 0xb8\)\ >>\ 1\ \&\ 1;$	+1
-use	Inst__collapseAlgebraic_00158264	local_58	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(param_3\ \+\ 0xa4,2,local_58\);$	+1
-use	Inst__collapseAlgebraic_00158264	local_5c	set2	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_5c\ =\ uVar7\ >>\ 1\ \&\ 1;$	+1
-use	Inst__collapseAlgebraic_00158264	local_5c	set2	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(param_3\ \+\ 0xbc,2,local_5c\);$	+1
-use	Inst__collapseAlgebraic_00158264	local_60	set3	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_60\ =\ \(uint\)bVar18\ \^\ \*\(uint\ \*\)\(param_3\ \+\ 0xb8\)\ \&\ 1;$	+1
-use	Inst__collapseAlgebraic_00158264	local_60	set3	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(param_3\ \+\ 0xa4,1,local_60\);$	+1
+use	Inst__collapseAlgebraic_00158264	local_58	absFlag	INFERRED	bit 1 (abs) of the operand flags (set by IROperand__setModifierBits with modifier bit 2)	^\s*local_58\ =\ \*\(uint\ \*\)\(param_3\ \+\ 0xb8\)\ >>\ 1\ \&\ 1;$	+1
+use	Inst__collapseAlgebraic_00158264	local_58	absFlag	INFERRED	bit 1 (abs) of the operand flags (set by IROperand__setModifierBits with modifier bit 2)	^\s*FUN_00103d50\(param_3\ \+\ 0xa4,2,local_58\);$	+1
+use	Inst__collapseAlgebraic_00158264	local_5c	absFlag2	INFERRED	bit 1 (abs) of the operand flags (set by IROperand__setModifierBits with modifier bit 2)	^\s*local_5c\ =\ uVar7\ >>\ 1\ \&\ 1;$	+1
+use	Inst__collapseAlgebraic_00158264	local_5c	absFlag2	INFERRED	bit 1 (abs) of the operand flags (set by IROperand__setModifierBits with modifier bit 2)	^\s*FUN_00103d50\(param_3\ \+\ 0xbc,2,local_5c\);$	+1
+use	Inst__collapseAlgebraic_00158264	local_60	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*local_60\ =\ \(uint\)bVar18\ \^\ \*\(uint\ \*\)\(param_3\ \+\ 0xb8\)\ \&\ 1;$	+1
+use	Inst__collapseAlgebraic_00158264	local_60	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*FUN_00103d50\(param_3\ \+\ 0xa4,1,local_60\);$	+1
 use	Inst__collapseAlgebraic_00158264	uVar15	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (5 uses, unanimous)	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 8\);$	+1
 use	Inst__collapseAlgebraic_00158264	uVar15	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (5 uses, unanimous)	^\s*FUN_00106004\(param_3,iVar17,0,0,uVar15\);$	+1
 use	Inst__collapseAlgebraic_00158264	uVar15	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (5 uses, unanimous)	^\s*FUN_00106004\(param_3,1,piVar3,0,uVar15\);$	+2
@@ -780,9 +781,9 @@ use	FUN_00159b58	iVar8	operandIndex2	INFERRED	web passed only as callee paramete
 use	FUN_00159b58	iVar8	operandIndex3	INFERRED	web passed only as callee parameter operandIndex (1 uses, unanimous)	^\s*for\ \(iVar8\ =\ 1;\ iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar3\ \+\ 0x14\)\)\(piVar3\),\ iVar8\ <=\ iVar10;$	+3
 use	FUN_00159b58	local_114	param_3_w	INFERRED	web passed only as callee parameter param_3_w (1 uses, unanimous)	^\s*FUN_0010aee8\(\&local_88,iVar2,local_114\);$	+1
 use	FUN_00159b58	local_fc	param_3_w2	INFERRED	web passed only as callee parameter param_3_w (1 uses, unanimous)	^\s*FUN_0010aee8\(\&local_84,iVar2,local_fc\);$	+1
-use	FUN_00159b58	uVar7	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar7\ =\ uVar11;$	+1
-use	FUN_00159b58	uVar7	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar7\ =\ uVar11\ \^\ 1;$	+1
-use	FUN_00159b58	uVar7	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(param_1\ \+\ 0xa4,1,uVar7\);$	+1
+use	FUN_00159b58	uVar7	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*uVar7\ =\ uVar11;$	+1
+use	FUN_00159b58	uVar7	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*uVar7\ =\ uVar11\ \^\ 1;$	+1
+use	FUN_00159b58	uVar7	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*FUN_00103d50\(param_1\ \+\ 0xa4,1,uVar7\);$	+1
 local	Inst__takeOutCommonFactor	in_r7	compilerCtx	INFERRED	passed as parameter compilerCtx of callees (3 uses, unanimous)
 use	Inst__takeOutCommonFactor	iVar14	operandIndex	INFERRED	web passed only as callee parameter operandIndex (2 uses, unanimous)	^\s*iVar14\ =\ 1;$	+1
 use	Inst__takeOutCommonFactor	iVar14	operandIndex	INFERRED	web passed only as callee parameter operandIndex (2 uses, unanimous)	^\s*iVar15\ =\ FUN_00105594\(iVar17,iVar14\);$	+1
@@ -843,11 +844,11 @@ use	Inst__takeOutCommonFactor	iVar9	operandIndex9	INFERRED	web passed only as ca
 use	Inst__takeOutCommonFactor	local_64	operandIndex10	INFERRED	web passed only as callee parameter operandIndex (2 uses, unanimous)	^\s*local_64\ =\ 3\ \-\ local_68;$	+1
 use	Inst__takeOutCommonFactor	local_64	operandIndex10	INFERRED	web passed only as callee parameter operandIndex (2 uses, unanimous)	^\s*local_54\ =\ local_64\ \*\ 0x18\ \+\ 0x80;$	+1
 use	Inst__takeOutCommonFactor	local_64	operandIndex10	INFERRED	web passed only as callee parameter operandIndex (2 uses, unanimous)	^\s*local_78\ =\ FUN_00105594\(iVar17,local_64\);$	+2
-use	Inst__takeOutCommonFactor	local_6c	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_6c\ =\ \*\(uint\ \*\)\(iVar9\ \*\ 0x18\ \+\ \*piVar21\ \+\ 0xa0\)\ >>\ 1\ \&\ 1;$	+1
-use	Inst__takeOutCommonFactor	local_6c	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_6c\ =\ 0;$	+1
-use	Inst__takeOutCommonFactor	local_6c	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*if\ \(\(local_58\ ==\ local_5c\)\ \&\&\ \(uVar6\ =\ local_6c,\ local_6c\ ==\ uVar24\)\)$	+2
-use	Inst__takeOutCommonFactor	local_6c	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*if\ \(\(local_58\ ==\ local_5c\)\ \&\&\ \(local_6c\ ==\ uVar6\)\)\ \{$	+1
-use	Inst__takeOutCommonFactor	local_6c	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(piVar11\ \+\ 0x29,2,local_6c\);$	+1
+use	Inst__takeOutCommonFactor	local_6c	absOperand1	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*local_6c\ =\ \*\(uint\ \*\)\(iVar9\ \*\ 0x18\ \+\ \*piVar21\ \+\ 0xa0\)\ >>\ 1\ \&\ 1;$	+1
+use	Inst__takeOutCommonFactor	local_6c	absOperand1	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*local_6c\ =\ 0;$	+1
+use	Inst__takeOutCommonFactor	local_6c	absOperand1	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*if\ \(\(local_58\ ==\ local_5c\)\ \&\&\ \(uVar6\ =\ local_6c,\ local_6c\ ==\ uVar24\)\)$	+2
+use	Inst__takeOutCommonFactor	local_6c	absOperand1	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*if\ \(\(local_58\ ==\ local_5c\)\ \&\&\ \(local_6c\ ==\ uVar6\)\)\ \{$	+1
+use	Inst__takeOutCommonFactor	local_6c	absOperand1	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)	^\s*FUN_00103d50\(piVar11\ \+\ 0x29,2,local_6c\);$	+1
 use	Inst__takeOutCommonFactor	local_78	newSource	INFERRED	web passed only as callee parameter newSource (1 uses, unanimous)	^\s*local_78\ =\ FUN_00105594\(iVar17,local_64\);$	+1
 use	Inst__takeOutCommonFactor	local_78	newSource	INFERRED	web passed only as callee parameter newSource (1 uses, unanimous)	^\s*FUN_00106004\(piVar26,iVar8,local_78,1,in_r7\);$	+1
 use	Inst__takeOutCommonFactor	local_7c	newSource2	INFERRED	web passed only as callee parameter newSource (1 uses, unanimous)	^\s*local_7c\ =\ FUN_00105594\(iVar17,iVar8\);$	+1
@@ -1434,8 +1435,8 @@ use	FUN_0017a8a4	iVar8	inst	INFERRED	web passed only as callee parameter inst (1
 use	FUN_0017ad24	uVar4	block	INFERRED	web passed only as callee parameter block (1 uses, unanimous)	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ 0x158\);$	+1
 use	FUN_0017ad24	uVar4	block	INFERRED	web passed only as callee parameter block (1 uses, unanimous)	^\s*FUN_000e7738\(uVar4,iVar1,iVar2\);$	+1
 local	FUN_0017ae28	param_2	operandIndex	INFERRED	passed as parameter operandIndex of callees (2 uses, unanimous)
-local	FUN_0017ae28	param_5	set	INFERRED	passed as parameter set of callees (1 uses, unanimous)
-local	FUN_0017ae28	param_6	set2	INFERRED	passed as parameter set of callees (1 uses, unanimous)
+local	FUN_0017ae28	param_5	negateFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)
+local	FUN_0017ae28	param_6	absFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)
 use	FUN_0017ae28	iVar3	operandRef	INFERRED	web passed only as callee parameter operandRef (1 uses, unanimous)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x8c\);$	+2
 use	FUN_0017ae28	iVar3	operandRef	INFERRED	web passed only as callee parameter operandRef (1 uses, unanimous)	^\s*FUN_00123424\(iVar3,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_3\ \+\ 0x158\)\ \+\ 0xb0\),puVar4\);$	+1
 use	FUN_0017ae28	iVar3	operandRef	INFERRED	web passed only as callee parameter operandRef (1 uses, unanimous)	^\s*FUN_001046c8\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xb0\),param_2,iVar3\);$	+1
@@ -1565,7 +1566,7 @@ use	FUN_0017ce7c	uVar8	afterInst	INFERRED	web passed only as callee parameter af
 use	FUN_0017ce7c	uVar8	afterInst	INFERRED	web passed only as callee parameter afterInst (1 uses, unanimous)	^\s*FUN_000e7738\(uVar9,uVar8,iVar16\);$	+1
 use	FUN_0017ce7c	uVar9	block	INFERRED	web passed only as callee parameter block (1 uses, unanimous)	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x158\);$	+1
 use	FUN_0017ce7c	uVar9	block	INFERRED	web passed only as callee parameter block (1 uses, unanimous)	^\s*FUN_000e7738\(uVar9,uVar8,iVar16\);$	+1
-local	FUN_0017d06c	param_4	set	INFERRED	passed as parameter set of callees (1 uses, unanimous)
+local	FUN_0017d06c	param_4	negateFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)
 use	FUN_0017d06c	iVar3	node	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$	+4
 use	FUN_0017d06c	iVar3	operandRef	INFERRED	web passed only as callee parameter operandRef (1 uses, unanimous)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x8c\);$	+1
 use	FUN_0017d06c	iVar3	operandRef	INFERRED	web passed only as callee parameter operandRef (1 uses, unanimous)	^\s*if\ \(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x2c\)\ \+\ 4\)\ ==\ 0\)\ \{$	+1
@@ -1629,8 +1630,8 @@ use	FUN_0017e3f4	uVar21	operandRef3	INFERRED	web passed only as callee parameter
 use	FUN_0017e3f4	uVar21	operandRef3	INFERRED	web passed only as callee parameter operandRef (1 uses, unanimous)	^\s*FUN_001049e8\(iVar5,uVar21\);$	+1
 use	FUN_0017e3f4	uVar6	operandRef4	INFERRED	web passed only as callee parameter operandRef (1 uses, unanimous)	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(param_4\ \*\ 0x18\ \+\ iVar5\ \+\ 0x8c\);$	+1
 use	FUN_0017e3f4	uVar6	operandRef4	INFERRED	web passed only as callee parameter operandRef (1 uses, unanimous)	^\s*FUN_001046c8\(iVar5,2,uVar6\);$	+1
-use	FUN_0017e7e0	local_60	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_60\ =\ uVar5\ >>\ 1\ \&\ 1;$	+1
-use	FUN_0017e7e0	local_60	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(piVar7\ \+\ 0x2f,2,local_60\);$	+1
+use	FUN_0017e7e0	local_60	absFlag	INFERRED	bit 1 (abs) of the operand flags (set by IROperand__setModifierBits with modifier bit 2)	^\s*local_60\ =\ uVar5\ >>\ 1\ \&\ 1;$	+1
+use	FUN_0017e7e0	local_60	absFlag	INFERRED	bit 1 (abs) of the operand flags (set by IROperand__setModifierBits with modifier bit 2)	^\s*FUN_00103d50\(piVar7\ \+\ 0x2f,2,local_60\);$	+1
 use	FUN_0017e7e0	local_64	operandRef	INFERRED	web passed only as callee parameter operandRef (1 uses, unanimous)	^\s*local_64\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0x84\)\ \*\ 0x18\ \+\ iVar6\ \+\ 0x8c\);$	+1
 use	FUN_0017e7e0	local_64	operandRef	INFERRED	web passed only as callee parameter operandRef (1 uses, unanimous)	^\s*local_64\ =\ 0;$	+1
 use	FUN_0017e7e0	local_64	operandRef	INFERRED	web passed only as callee parameter operandRef (1 uses, unanimous)	^\s*FUN_001049e8\(iVar16,local_64\);$	+1
@@ -1655,7 +1656,7 @@ use	FUN_0017e7e0	uVar19	block	INFERRED	web passed only as callee parameter block
 use	FUN_0017e7e0	uVar19	block	INFERRED	web passed only as callee parameter block (2 uses, unanimous)	^\s*FUN_000e7738\(uVar19,\*\(undefined4\ \*\)\(param_1\ \+\ 0xb0\),piVar7\);$	+1
 use	FUN_0017e7e0	uVar8	operandRef6	INFERRED	web passed only as callee parameter operandRef (1 uses, unanimous)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0xd4\);$	+1
 use	FUN_0017e7e0	uVar8	operandRef6	INFERRED	web passed only as callee parameter operandRef (1 uses, unanimous)	^\s*FUN_001046c8\(piVar7,2,uVar8\);$	+1
-local	FUN_0017ebb0	param_4	set	INFERRED	passed as parameter set of callees (1 uses, unanimous)
+local	FUN_0017ebb0	param_4	negateFlag	INFERRED	bit of the operand flags passed to IROperand__setModifierBits (modifier bit 1 = negate, bit 2 = abs)
 use	FUN_0017ebb0	iVar3	inst	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$	+7
 use	FUN_0017ebb0	iVar3	inst2	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$@2	+1
 use	FUN_0017ebb0	iVar3	inst2	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*uVar17\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x124\);$	+1
@@ -1953,9 +1954,9 @@ use	FUN_00181f00	puVar24	vector8	INFERRED	web passed only as callee parameter ve
 use	FUN_00181f00	puVar24	vector8	INFERRED	web passed only as callee parameter vector (1 uses, unanimous)	^\s*_memset\(\(void\ \*\)\(uVar26\ \*\ 4\ \+\ puVar24\[2\]\),0,\(uVar2\ \-\ uVar26\)\ \*\ 4\ \+\ 4\);$	+2
 use	FUN_00181f00	puVar24	vector8	INFERRED	web passed only as callee parameter vector (1 uses, unanimous)	^\s*piVar12\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar24\[2\]\);$	+1
 use	FUN_00181f00	puVar24	vector8	INFERRED	web passed only as callee parameter vector (1 uses, unanimous)	^\s*piVar12\ =\ \(int\ \*\)FUN_0019423c\(puVar24,uVar2\);$	+1
-use	FUN_00181f00	uVar2	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar2\ =\ piVar8\[iVar4\ \*\ 6\ \+\ 0x28\]\ \&\ 1;$	+1
-use	FUN_00181f00	uVar2	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar2\ =\ piVar8\[iVar4\ \*\ 6\ \+\ 0x28\]\ \&\ 1U\ \^\ 1;$	+1
-use	FUN_00181f00	uVar2	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(iVar13,1,uVar2\);$	+1
+use	FUN_00181f00	uVar2	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*uVar2\ =\ piVar8\[iVar4\ \*\ 6\ \+\ 0x28\]\ \&\ 1;$	+1
+use	FUN_00181f00	uVar2	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*uVar2\ =\ piVar8\[iVar4\ \*\ 6\ \+\ 0x28\]\ \&\ 1U\ \^\ 1;$	+1
+use	FUN_00181f00	uVar2	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*FUN_00103d50\(iVar13,1,uVar2\);$	+1
 use	FUN_00181f00	uVar21	inst3	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*uVar21\ =\ \*puVar11;$	+1
 use	FUN_00181f00	uVar21	inst3	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*uVar21\ =\ FUN_00105594\(uVar21,\*puVar11\);$	+2
 use	FUN_00181f00	uVar21	inst4	INFERRED	web passed only as callee parameter inst (1 uses, unanimous)	^\s*uVar21\ =\ \*puVar11;$@2	+1
@@ -2316,18 +2317,18 @@ use	FUN_001922c4	iVar2	operandIndex2	INFERRED	web passed only as callee paramete
 use	FUN_001922c4	iVar2	newSource	INFERRED	web passed only as callee parameter newSource (1 uses, unanimous)	^\s*iVar2\ =\ 0;$@2	+1
 use	FUN_001922c4	iVar2	newSource	INFERRED	web passed only as callee parameter newSource (1 uses, unanimous)	^\s*iVar2\ =\ FUN_00105594\(param_3,param_3\[0x21\]\);$	+1
 use	FUN_001922c4	iVar2	newSource	INFERRED	web passed only as callee parameter newSource (1 uses, unanimous)	^\s*if\ \(iVar2\ !=\ 0\)\ \{$	+2
-use	FUN_001922c4	uVar7	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar7\ =\ 1;$	+1
-use	FUN_001922c4	uVar7	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar7\ =\ 0;$	+1
-use	FUN_001922c4	uVar7	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar7\ =\ 0;$@2	+1
-use	FUN_001922c4	uVar7	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar7\ =\ 1;$@2	+1
-use	FUN_001922c4	uVar7	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar7\ =\ 0;$@3	+1
-use	FUN_001922c4	uVar7	set	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(param_3\ \+\ 0x29,2,uVar7\);$	+1
-use	FUN_001922c4	uVar8	set2	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar8\ =\ 1;$	+1
-use	FUN_001922c4	uVar8	set2	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar8\ =\ 0;$	+1
-use	FUN_001922c4	uVar8	set2	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar8\ =\ 0;$@2	+1
-use	FUN_001922c4	uVar8	set2	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar8\ =\ 1;$@2	+1
-use	FUN_001922c4	uVar8	set2	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*uVar8\ =\ 0;$@3	+1
-use	FUN_001922c4	uVar8	set2	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(param_3\ \+\ 0x29,1,uVar8\);$	+1
+use	FUN_001922c4	uVar7	absFlag	INFERRED	bit 1 (abs) of the operand flags (set by IROperand__setModifierBits with modifier bit 2)	^\s*uVar7\ =\ 1;$	+1
+use	FUN_001922c4	uVar7	absFlag	INFERRED	bit 1 (abs) of the operand flags (set by IROperand__setModifierBits with modifier bit 2)	^\s*uVar7\ =\ 0;$	+1
+use	FUN_001922c4	uVar7	absFlag	INFERRED	bit 1 (abs) of the operand flags (set by IROperand__setModifierBits with modifier bit 2)	^\s*uVar7\ =\ 0;$@2	+1
+use	FUN_001922c4	uVar7	absFlag	INFERRED	bit 1 (abs) of the operand flags (set by IROperand__setModifierBits with modifier bit 2)	^\s*uVar7\ =\ 1;$@2	+1
+use	FUN_001922c4	uVar7	absFlag	INFERRED	bit 1 (abs) of the operand flags (set by IROperand__setModifierBits with modifier bit 2)	^\s*uVar7\ =\ 0;$@3	+1
+use	FUN_001922c4	uVar7	absFlag	INFERRED	bit 1 (abs) of the operand flags (set by IROperand__setModifierBits with modifier bit 2)	^\s*FUN_00103d50\(param_3\ \+\ 0x29,2,uVar7\);$	+1
+use	FUN_001922c4	uVar8	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*uVar8\ =\ 1;$	+1
+use	FUN_001922c4	uVar8	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*uVar8\ =\ 0;$	+1
+use	FUN_001922c4	uVar8	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*uVar8\ =\ 0;$@2	+1
+use	FUN_001922c4	uVar8	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*uVar8\ =\ 1;$@2	+1
+use	FUN_001922c4	uVar8	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*uVar8\ =\ 0;$@3	+1
+use	FUN_001922c4	uVar8	negateFlag	INFERRED	bit 0 (negate) of the operand flags (set by IROperand__setModifierBits with modifier bit 1)	^\s*FUN_00103d50\(param_3\ \+\ 0x29,1,uVar8\);$	+1
 use	FudoPs__peepholeCombine	uVar21	inst21	INFERRED	web passed only as callee parameter inst2 (1 uses, unanimous)	^\s*uVar21\ =\ FUN_00105594\(piVar6,iVar3\);$	+2
 use	FudoPs__peepholeCombine	uVar21	newSource	INFERRED	web passed only as callee parameter newSource (1 uses, unanimous)	^\s*uVar21\ =\ FUN_00105594\(iVar9,\*\(undefined4\ \*\)\(iVar9\ \+\ 0x84\)\);$@2	+1
 use	FudoPs__peepholeCombine	uVar21	newSource	INFERRED	web passed only as callee parameter newSource (1 uses, unanimous)	^\s*iVar13\ =\ FUN_000f313c\(uVar21,uVar17\);$	+1
