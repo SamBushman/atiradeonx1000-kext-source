@@ -268,7 +268,6 @@ local	FUN_00110020	uVar12	arena	CONFIRMED	argument 1 of the bump allocator FUN_0
 local	FUN_00110020	puVar3	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_001102e0	uVar25	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
 local	FUN_001102e0	puVar6	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
-local	FUN_001121b4	iVar26	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
 local	FUN_001121b4	piVar4	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
 local	FUN_0011eaa0	uVar16	arena	CONFIRMED	argument 1 of the bump allocator FUN_00193e18 (cursor +8, limit +0x10, last +0x14); also stored in the header word before the object
 local	FUN_0011eaa0	puVar4	allocation	INFERRED	result of FUN_00193e18; *allocation holds the arena, the object starts at allocation+1
