@@ -5053,7 +5053,8 @@ int FUN_000fd5c8(program, ilReader)
   uint samplerIndex;
   uint resourceId;
   uint sampleFlags;
-  bool constantFlag;
+  bool clearsInfoFlag1;
+  bool isTranslationKind7;
   bool notLastIteration;
   uint bitmapByteOffset2;
   uint sourceRegisterIndex;
@@ -6104,31 +6105,31 @@ code_r0x000fed00:
       ppppppuVar19 = (uint ******)FUN_000ec27c(program,uVar44);
       uVar10 = (uint)*tokenWords >> 0x13 & 7;
       if (uVar10 == 3) {
-        constantFlag = true;
+        clearsInfoFlag1 = true;
         bVar3 = false;
         bVar2 = false;
       }
       else if (uVar10 < 4) {
         if (uVar10 == 1) {
-          constantFlag = false;
+          clearsInfoFlag1 = false;
           bVar3 = false;
           bVar2 = true;
         }
         else {
 code_r0x000feeb8:
-          constantFlag = false;
+          clearsInfoFlag1 = false;
           bVar3 = false;
           bVar2 = false;
         }
       }
       else if (uVar10 == 4) {
-        constantFlag = false;
+        clearsInfoFlag1 = false;
         bVar3 = true;
         bVar2 = false;
       }
       else {
         if (uVar10 != 5) goto code_r0x000feeb8;
-        constantFlag = true;
+        clearsInfoFlag1 = true;
         bVar3 = true;
         bVar2 = false;
       }
@@ -6198,7 +6199,7 @@ code_r0x000feeb8:
         if ((*(uint *)(program + 0x30) & 1) == 0) {
           iVar34 = FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile,ppppppuVar48,0);
           iVar34 = *(int *)(iVar34 + 0x38);
-          if (!constantFlag) {
+          if (!clearsInfoFlag1) {
             *(uint *)(iVar34 + 0x13c) = *(uint *)(iVar34 + 0x13c) | 1;
           }
           if (bVar3) {
@@ -6433,7 +6434,7 @@ code_r0x000febe0:
   default:
     goto switchD_000fdaf0_caseD_2;
   case 4:
-    constantFlag = false;
+    isTranslationKind7 = false;
     break;
   case 5:
     local_78 = &DAT_001ad5d8;
@@ -8081,7 +8082,7 @@ code_r0x00101d1c:
     }
     goto code_r0x00103b34;
   case 7:
-    constantFlag = true;
+    isTranslationKind7 = true;
   }
   ppppppuVar19 = (uint ******)((int (*)())FUN_000f9140)(program,ilOpcode,(uint)*tokenWords >> 0x10 & 0x3fff);
   ((int (*)())FUN_000f9a58)(program,local_6c,*ilReader[0x19],loopStackData,local_a4);
@@ -8117,7 +8118,7 @@ code_r0x00101d1c:
       iVar20 = IRInst__getOperandRecord(ppppppuVar19,ppppppuVar40);
       *(undefined4 *)(iVar20 + 0xc) = registerFile;
       *(int *)(iVar20 + 8) = iVar47;
-      if ((!constantFlag) &&
+      if ((!isTranslationKind7) &&
          (iVar47 = OpcodeTraits__instFlagBit2(*(undefined4 *)(program + 8),ppppppuVar19), iVar47 != 0)) {
         if (ppppppuVar40 == (uint ******)((int)((unsigned char *)0x0) + 1U)) {
           puVar12 = &UNK_001aa9d4;
@@ -8136,7 +8137,7 @@ code_r0x00101d1c:
     } while (ppppppuVar38 != ppppppuVar40);
   }
   local_b8 = IRInst__countWrittenComponents(ppppppuVar19);
-  if (constantFlag) {
+  if (isTranslationKind7) {
     iVar20 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
     *(int *)(*(int *)(program + 8) + 0x3ac) = iVar20;
     pppppuVar52 = ppppppuVar19[0x25];
