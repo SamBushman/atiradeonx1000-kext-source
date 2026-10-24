@@ -20,5 +20,3 @@ func	FUN_000c8e50	ilAssembleProgram	INFERRED	walks an IL token stream and fills 
 local	FUN_000c8e50	param_1	ctx	CONFIRMED	GL context (ctx+0x44 flags, ctx+0x186c/0x1870 buffers)
 local	FUN_000c8e50	param_2	programHeader	CONFIRMED	program record header: [0] IL token pointer, [1] word count (copied from the IL source), [6] ctx flag bit 7
 local	FUN_000c8e50	param_3	programBody	CONFIRMED	programHeader + 9 words (FUN_000b57a0 passes puVar4 + 9): array of 5-word entries from word 0x1000, counters at 0x1502/0x1587
-local	FUN_000c8e50	puVar31	ilTokens	CONFIRMED	= *param_2: IL token pointer
-local	FUN_000c8e50	iVar38	ilWordCount	CONFIRMED	= param_2[1]: word count (added to ctx flags for the instruction limit)

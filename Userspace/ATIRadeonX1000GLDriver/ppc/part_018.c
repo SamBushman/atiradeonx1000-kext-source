@@ -981,6 +981,11 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   undefined4 *programHeader;
   uint *******programBody;
 {
+  int scratchAllocation;
+  int inputMaskBase;
+  int ilWordCount;
+  uint *hwWordSource;
+  uint *inputMaskCursor;
   bool bVar1;
   byte *pbVar2;
   bool bVar3;
@@ -1022,10 +1027,10 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   int iVar35;
   int iVar36;
   undefined1 *puVar37;
-  int ilWordCount;
+  int zeroFillCount;
   int iVar39;
-  uint *******local_2bb8;
-  uint *local_2bb4;
+  uint *******dstCursor;
+  uint *srcCursor;
   uint ******local_2bb0;
   uint local_2bac [2];
   uint *******local_2ba4;
@@ -1080,9 +1085,9 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   uint ******local_2400;
   uint ******local_23fc;
   uint ******local_23ec;
-  uint ******local_23e8;
+  uint ******scanState;
   undefined4 local_23e4;
-  uint local_23e0;
+  uint usedTexcoordMask;
   undefined4 local_23dc [4];
   undefined4 local_23cc;
   undefined4 local_23c8;
@@ -1135,14 +1140,14 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   uint *local_6c;
   uint ******local_60;
   
-  ilWordCount = 8;
+  zeroFillCount = 8;
   iVar11 = 0;
   do {
     *(undefined4 *)((int)local_2b38 + iVar11) = 0xffffffff;
     *(undefined4 *)((int)local_2b58 + iVar11) = 0xffffffff;
     iVar11 = iVar11 + 4;
-    ilWordCount = ilWordCount + -1;
-  } while (ilWordCount != 0);
+    zeroFillCount = zeroFillCount + -1;
+  } while (zeroFillCount != 0);
   pppppppuVar18 = programBody;
   iVar11 = _malloc(0x400);
   uVar21 = *(uint *)(ctx + 0x44);
@@ -1176,7 +1181,7 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   local_7c = 0;
   local_23cc = local_2b28;
   local_23dc[3] = local_2b38[3];
-  local_23e8 = (uint ******)0x0;
+  scanState = (uint ******)0x0;
   local_239c = 0;
   local_2384 = 0;
   local_23dc[2] = local_2b38[2];
@@ -1185,7 +1190,7 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   local_23a0 = local_2b3c;
   local_2270 = 0;
   local_1b8 = 0;
-  local_23e0 = 0;
+  usedTexcoordMask = 0;
   local_220 = (uint *******)0x0;
   local_1f8[0] = 0;
   local_23a8 = local_2b44;
@@ -1227,8 +1232,8 @@ int ilAssembleProgram(ctx, programHeader, programBody)
   uVar21 = 0;
   puVar29 = ilTokens;
 switchD_000c90cc_caseD_15:
-  local_2bb4 = puVar29 + 2;
-  puVar26 = local_2bb4;
+  srcCursor = puVar29 + 2;
+  puVar26 = srcCursor;
 switchD_000c90cc_caseD_18:
   puVar29 = puVar26;
   if (puVar29 < ilTokens + ilWordCount) goto code_r0x000c90a4;
@@ -1238,7 +1243,7 @@ switchD_000c90cc_caseD_18:
     goto LAB_000ca6bc;
   }
   iVar36 = (iVar36 + ilWordCount) * 4;
-  local_2398 = local_23e8;
+  local_2398 = scanState;
   if (local_239c != 0) {
     iVar36 = iVar36 + 0x48;
   }
@@ -1301,9 +1306,9 @@ LAB_000c99d4:
   pppppppuVar25 = local_220;
   puVar29 = (uint *)_malloc(uVar33 + 0x10);
   *puVar29 = *ilTokens;
-  local_2bb4 = ilTokens + 2;
+  srcCursor = ilTokens + 2;
   puVar29[1] = ilTokens[1];
-  puVar26 = local_2bb4;
+  puVar26 = srcCursor;
   pppppppuVar30 = (uint *******)(puVar29 + 2);
   goto switchD_000c9ab8_caseD_18;
 code_r0x000c90a4:
@@ -1379,8 +1384,8 @@ code_r0x000c90a4:
   case 0x2b:
   case 0x4b:
   case 0x53:
-    local_2bb4 = puVar29 + 1;
-    puVar26 = local_2bb4;
+    srcCursor = puVar29 + 1;
+    puVar26 = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 7:
   case 0x11:
@@ -1388,18 +1393,18 @@ code_r0x000c90a4:
     uVar9 = 0;
 LAB_000c9340:
     pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 2);
-    local_2bb4 = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,uVar9,2,&local_23e8);
-    puVar26 = local_2bb4;
+    srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,uVar9,2,&scanState);
+    puVar26 = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 8:
   case 0x32:
-    local_2bb4 = puVar29 + 2;
-    puVar26 = local_2bb4;
+    srcCursor = puVar29 + 2;
+    puVar26 = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 9:
   case 0x1d:
-    local_2bb4 = puVar29 + 3;
-    puVar26 = local_2bb4;
+    srcCursor = puVar29 + 3;
+    puVar26 = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 10:
   case 0xd:
@@ -1409,22 +1414,22 @@ LAB_000c9340:
   case 0x40:
   case 100:
     pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 3);
-    local_2bb4 = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,1,3,&local_23e8);
-    puVar26 = local_2bb4;
+    srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,1,3,&scanState);
+    puVar26 = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0xf:
-    local_2bb4 = puVar29 + *(ushort *)((int)puVar29 + 6) + 2;
-    puVar26 = local_2bb4;
+    srcCursor = puVar29 + *(ushort *)((int)puVar29 + 6) + 2;
+    puVar26 = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x14:
-    local_2bb4 = puVar29 + 3;
-    puVar26 = local_2bb4;
+    srcCursor = puVar29 + 3;
+    puVar26 = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x15:
     goto switchD_000c90cc_caseD_15;
   case 0x16:
-    local_2bb4 = puVar29 + 1;
-    pppppppuVar18 = &local_23e8;
+    srcCursor = puVar29 + 1;
+    pppppppuVar18 = &scanState;
     uVar33 = puVar29[1];
     puVar6 = (undefined *)(uVar33 & 0x3f0000);
     ((int (*)())FUN_000c8600)(uVar33 & 0xffff,uVar33 >> 0x10 & 0x3f,pppppppuVar18,0,0);
@@ -1432,7 +1437,7 @@ LAB_000c9340:
       local_239c = 1;
     }
     else if (puVar6 == (undefined *)0x110000) {
-      local_23e0 = 1 << (uVar33 & 0x3f) | local_23e0;
+      usedTexcoordMask = 1 << (uVar33 & 0x3f) | usedTexcoordMask;
     }
     else if (puVar6 == (undefined *)0xf0000) {
       uVar21 = uVar21 | 1 << (uVar33 & 0x3f);
@@ -1450,21 +1455,21 @@ LAB_000c9340:
       local_2270 = 1 << ((uint)pppppppuVar18 >> 0x10 & 0x3f) | local_2270;
     }
     pppppppuVar18 = (uint *******)((uint)pppppppuVar18 >> 0x18 & 7);
-    ilRecordInputSemantic(&local_23e8,uVar33,pppppppuVar18);
-    local_2bb4 = local_2bb4 + 1;
-    puVar26 = local_2bb4;
+    ilRecordInputSemantic(&scanState,uVar33,pppppppuVar18);
+    srcCursor = srcCursor + 1;
+    puVar26 = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x1a:
-    local_2bb4 = puVar29 + 1;
+    srcCursor = puVar29 + 1;
     if ((int)pppppppuVar18 < 0) {
-      local_2bb4 = puVar29 + 2;
+      srcCursor = puVar29 + 2;
     }
 LAB_000c9564:
-    local_2bb4 = local_2bb4 + 1;
-    puVar26 = local_2bb4;
+    srcCursor = srcCursor + 1;
+    puVar26 = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x1c:
-    local_2bb4 = puVar29 + 1;
+    srcCursor = puVar29 + 1;
     uVar32 = puVar29[1];
     uVar33 = uVar32 >> 0x10 & 0x3f;
     if (uVar33 == 1) {
@@ -1472,49 +1477,49 @@ LAB_000c9564:
       local_2b68 = (uint ******)puVar29[2];
       local_2b64 = puVar29[3];
       local_2b60 = puVar29[4];
-      local_2bb4 = puVar29 + 6;
+      srcCursor = puVar29 + 6;
       local_2b5c = puVar29[5];
-      ilRecordDefinedConstantPrimary(&local_23e8,uVar32 & 0xffff,pppppppuVar18);
-      puVar26 = local_2bb4;
+      ilRecordDefinedConstantPrimary(&scanState,uVar32 & 0xffff,pppppppuVar18);
+      puVar26 = srcCursor;
     }
     else {
-      puVar26 = local_2bb4;
+      puVar26 = srcCursor;
       if (uVar33 == 2) {
         pppppppuVar18 = &local_2b68;
         local_2b68 = (uint ******)puVar29[2];
         local_2b64 = puVar29[3];
         local_2b60 = puVar29[4];
-        local_2bb4 = puVar29 + 6;
+        srcCursor = puVar29 + 6;
         local_2b5c = puVar29[5];
-        ilRecordDefinedConstantSecondary(&local_23e8,uVar32 & 0xffff,pppppppuVar18);
-        puVar26 = local_2bb4;
+        ilRecordDefinedConstantSecondary(&scanState,uVar32 & 0xffff,pppppppuVar18);
+        puVar26 = srcCursor;
       }
     }
     goto switchD_000c90cc_caseD_18;
   case 0x24:
     pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 2);
     iVar36 = iVar36 + 5;
-    local_2bb4 = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,1,2,&local_23e8);
-    puVar26 = local_2bb4;
+    srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,1,2,&scanState);
+    puVar26 = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x35:
-    pppppppuVar18 = &local_23e8;
-    local_2bb4 = puVar29 + 2;
+    pppppppuVar18 = &scanState;
+    srcCursor = puVar29 + 2;
     local_2b8c[0] = (uint ******)puVar29[1];
     ((int (*)())ilMarkOperandRegisterUsed)(local_2b8c,auStack_2b80,pppppppuVar18);
-    puVar26 = local_2bb4;
+    puVar26 = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x37:
     pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    local_2bb4 = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,0,1,&local_23e8);
+    srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,0,1,&scanState);
     local_1bc = 1;
-    puVar26 = local_2bb4;
+    puVar26 = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x3e:
     uVar9 = 0;
     break;
   case 0x5d:
-    local_2bb4 = puVar29 + 2;
+    srcCursor = puVar29 + 2;
     local_c8 = local_c8 + 1;
     uVar33 = puVar29[1];
     uVar32 = *puVar29;
@@ -1527,33 +1532,33 @@ LAB_000c9564:
       uVar32 = *puVar29;
     }
     if ((int)uVar32 < 0) {
-      local_2bb4 = puVar29 + 3;
+      srcCursor = puVar29 + 3;
       uVar32 = *puVar29;
     }
     if ((uVar32 & 0x40000000) != 0) {
-      local_2bb4 = local_2bb4 + 1;
+      srcCursor = srcCursor + 1;
     }
     if ((uVar33 & 0x400000) != 0) {
-      unaff_r21 = *local_2bb4;
-      local_2bb4 = local_2bb4 + 1;
+      unaff_r21 = *srcCursor;
+      srcCursor = srcCursor + 1;
     }
-    pppppppuVar18 = &local_23e8;
+    pppppppuVar18 = &scanState;
     ((int (*)())FUN_000c8600)(uVar33 & 0xffff,uVar33 >> 0x10 & 0x3f,pppppppuVar18,unaff_r21,uVar33 >> 0x16 & 1);
     if ((1 << (*(byte *)((int)puVar29 + 1) & 0x3f) & local_2378) != 0) {
       iVar39 = iVar39 + 4;
     }
-    local_2b74 = (uint ******)*local_2bb4;
-    puVar29 = local_2bb4 + 1;
+    local_2b74 = (uint ******)*srcCursor;
+    puVar29 = srcCursor + 1;
     if (((uint)local_2b74 & 0x400000) != 0) {
-      local_2bb0 = (uint ******)local_2bb4[1];
-      puVar29 = local_2bb4 + 2;
+      local_2bb0 = (uint ******)srcCursor[1];
+      puVar29 = srcCursor + 2;
     }
-    local_2bb4 = puVar29;
+    srcCursor = puVar29;
     ((int (*)())ilMarkOperandRegisterUsed)(&local_2b74,&local_2bb0,pppppppuVar18);
-    puVar26 = local_2bb4;
+    puVar26 = srcCursor;
     goto switchD_000c90cc_caseD_18;
   case 0x5e:
-    local_2bb4 = puVar29 + 2;
+    srcCursor = puVar29 + 2;
     local_c8 = local_c8 + 1;
     uVar33 = puVar29[1];
     uVar32 = *puVar29;
@@ -1566,61 +1571,61 @@ LAB_000c9564:
       uVar32 = *puVar29;
     }
     if ((int)uVar32 < 0) {
-      local_2bb4 = puVar29 + 3;
+      srcCursor = puVar29 + 3;
       uVar32 = *puVar29;
     }
     if ((uVar32 & 0x40000000) != 0) {
-      local_2bb4 = local_2bb4 + 1;
+      srcCursor = srcCursor + 1;
     }
     if ((uVar33 & 0x400000) != 0) {
-      unaff_r20 = *local_2bb4;
-      local_2bb4 = local_2bb4 + 1;
+      unaff_r20 = *srcCursor;
+      srcCursor = srcCursor + 1;
     }
-    pppppppuVar18 = &local_23e8;
+    pppppppuVar18 = &scanState;
     ((int (*)())FUN_000c8600)(uVar33 & 0xffff,uVar33 >> 0x10 & 0x3f,pppppppuVar18,unaff_r20,uVar33 >> 0x16 & 1);
     if ((1 << (*(byte *)((int)puVar29 + 1) & 0x3f) & local_2378) != 0) {
       iVar39 = iVar39 + 4;
     }
-    local_2bb0 = (uint ******)*local_2bb4;
-    puVar29 = local_2bb4 + 1;
+    local_2bb0 = (uint ******)*srcCursor;
+    puVar29 = srcCursor + 1;
     if (((uint)local_2bb0 & 0x400000) != 0) {
-      local_2ba4 = (uint *******)local_2bb4[1];
-      puVar29 = local_2bb4 + 2;
+      local_2ba4 = (uint *******)srcCursor[1];
+      puVar29 = srcCursor + 2;
     }
     local_2bac[0] = *puVar29;
-    local_2bb4 = puVar29 + 1;
+    srcCursor = puVar29 + 1;
     if ((local_2bac[0] & 0x400000) != 0) {
       local_2ba0[0] = puVar29[1];
-      local_2bb4 = puVar29 + 2;
+      srcCursor = puVar29 + 2;
     }
     ((int (*)())ilMarkOperandRegisterUsed)(&local_2bb0,&local_2ba4,pppppppuVar18);
     ((int (*)())ilMarkOperandRegisterUsed)(local_2bac,local_2ba0,pppppppuVar18);
-    puVar26 = local_2bb4;
+    puVar26 = srcCursor;
     goto switchD_000c90cc_caseD_18;
   }
   pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 1);
-  local_2bb4 = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,uVar9,1,&local_23e8);
-  puVar26 = local_2bb4;
+  srcCursor = (uint *)((int (*)())ilMarkInstructionRegistersUsed)(puVar29,uVar9,1,&scanState);
+  puVar26 = srcCursor;
   goto switchD_000c90cc_caseD_18;
 switchD_000c9ab8_caseD_18:
-  local_2bb8 = pppppppuVar30;
+  dstCursor = pppppppuVar30;
   puVar19 = puVar26;
-  pppppppuVar30 = local_2bb8;
+  pppppppuVar30 = dstCursor;
   if (ilTokens + ilWordCount <= puVar19) {
     uVar33 = uVar33 >> 2;
-    local_23e0 = uVar21 | local_23e0;
+    usedTexcoordMask = uVar21 | usedTexcoordMask;
 LAB_000ca6bc:
     if (local_220 != (uint *******)0x0) {
       return local_220;
     }
     programBody[0x1587] = (uint ******)0x0;
-    ilWordCount = 0;
+    inputMaskBase = 0;
     programBody[0x1589] = (uint ******)0x0;
     programBody[0x1502] = (uint ******)0x0;
     pppppppuVar18 = programBody + 0x1000;
     puVar37 = auStack_2248;
     pppppppuVar20 = programBody + 0x1004;
-    ilTokens = local_6c;
+    inputMaskCursor = local_6c;
     do {
       pppppppuVar30 = pppppppuVar20 + 1;
       puVar26 = (uint *)(puVar37 + 8);
@@ -1628,7 +1633,7 @@ LAB_000ca6bc:
       iVar39 = 0x20;
       uVar21 = 0;
       do {
-        if ((1 << (uVar21 & 0x3f) & *ilTokens) == 0) {
+        if ((1 << (uVar21 & 0x3f) & *inputMaskCursor) == 0) {
           *(undefined1 *)pppppppuVar30 = 0;
         }
         else {
@@ -1638,8 +1643,8 @@ LAB_000ca6bc:
           ppppppuVar10 = (uint ******)puVar26[3];
           *(undefined1 *)(pppppppuVar25 + 4) = 1;
           pppppppuVar25[3] = ppppppuVar10;
-          if (programBody[0x1502] < (uint ******)(ilWordCount + uVar21)) {
-            programBody[0x1502] = (uint ******)(ilWordCount + uVar21);
+          if (programBody[0x1502] < (uint ******)(inputMaskBase + uVar21)) {
+            programBody[0x1502] = (uint ******)(inputMaskBase + uVar21);
           }
         }
         uVar21 = uVar21 + 1;
@@ -1648,24 +1653,24 @@ LAB_000ca6bc:
         pppppppuVar25 = pppppppuVar25 + 5;
         iVar39 = iVar39 + -1;
       } while (iVar39 != 0);
-      bVar4 = ilWordCount != 0xe0;
+      bVar4 = inputMaskBase != 0xe0;
       pppppppuVar20 = pppppppuVar20 + 0xa0;
       puVar37 = puVar37 + 0x200;
       pppppppuVar18 = pppppppuVar18 + 0xa0;
-      ilTokens = ilTokens + 1;
-      ilWordCount = ilWordCount + 0x20;
+      inputMaskCursor = inputMaskCursor + 1;
+      inputMaskBase = inputMaskBase + 0x20;
     } while (bVar4);
     if ((int)programBody[0x1587] < (int)programBody[0x1502]) {
       programBody[0x1587] = programBody[0x1502];
     }
     _memset(auStack_2b18,0,0xbc);
     _memset(auStack_2a5c,0,0x674);
-    ilWordCount = (**(code **)(ctx + 0xc))(*(undefined4 *)(ctx + 0x1870));
+    scratchAllocation = (**(code **)(ctx + 0xc))(*(undefined4 *)(ctx + 0x1870));
     local_2ac8 = uVar33 << 2;
     puVar27 = local_23dc;
     puVar16 = local_2ac0;
     iVar39 = 8;
-    local_2a60 = ilWordCount;
+    local_2a60 = scratchAllocation;
     do {
       uVar9 = *puVar27;
       uVar13 = puVar27[8];
@@ -1703,17 +1708,17 @@ LAB_000ca6bc:
     }
     programBody[0x1000] = local_2400;
     if (local_2400 != (uint ******)0x0) {
-      ilTokens = local_240c;
+      hwWordSource = local_240c;
       pppppppuVar18 = programBody;
       if (local_2400 == (uint ******)0x0) {
         local_2400 = (uint ******)0x1;
       }
       do {
-        ppppppuVar10 = (uint ******)*ilTokens;
-        ppppppuVar15 = (uint ******)ilTokens[1];
-        ppppppuVar23 = (uint ******)ilTokens[2];
-        ppppppuVar28 = (uint ******)ilTokens[3];
-        ilTokens = ilTokens + 4;
+        ppppppuVar10 = (uint ******)*hwWordSource;
+        ppppppuVar15 = (uint ******)hwWordSource[1];
+        ppppppuVar23 = (uint ******)hwWordSource[2];
+        ppppppuVar28 = (uint ******)hwWordSource[3];
+        hwWordSource = hwWordSource + 4;
         *pppppppuVar18 = ppppppuVar10;
         pppppppuVar18[1] = ppppppuVar15;
         pppppppuVar18[2] = ppppppuVar23;
@@ -1922,8 +1927,8 @@ LAB_000caa4c:
         if (puVar29 != (uint *)0x0) {
           _free(puVar29);
         }
-        if (ilWordCount != 0) {
-          _free(ilWordCount);
+        if (scratchAllocation != 0) {
+          _free(scratchAllocation);
         }
         if (local_29f8 != 0) {
           _free(local_29f8);
@@ -1959,14 +1964,14 @@ switchD_000c90cc_caseD_0:
   default:
     if (bVar4) {
       bVar4 = false;
-      local_2bb8 = (uint *******)
-                   ((int (*)())ilEmitPrologue)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
+      dstCursor = (uint *******)
+                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
                                 iVar39,pppppppuVar25);
     }
     pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    local_2bb4 = (uint *)((int (*)())ilCopyInstructionRemapped)(&local_2bb8,&local_2bb4,1,1,&local_23e8);
-    puVar26 = local_2bb4;
-    pppppppuVar30 = local_2bb8;
+    srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,1,1,&scanState);
+    puVar26 = srcCursor;
+    pppppppuVar30 = dstCursor;
     goto switchD_000c9ab8_caseD_18;
   case 3:
   case 0xc:
@@ -1987,14 +1992,14 @@ switchD_000c90cc_caseD_0:
   case 0x5b:
     if (bVar4) {
       bVar4 = false;
-      local_2bb8 = (uint *******)
-                   ((int (*)())ilEmitPrologue)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
+      dstCursor = (uint *******)
+                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
                                 iVar39,pppppppuVar25);
     }
     pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    local_2bb4 = (uint *)((int (*)())ilCopyInstructionRemapped)(&local_2bb8,&local_2bb4,1,2,&local_23e8);
-    puVar26 = local_2bb4;
-    pppppppuVar30 = local_2bb8;
+    srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,1,2,&scanState);
+    puVar26 = srcCursor;
+    pppppppuVar30 = dstCursor;
     goto switchD_000c9ab8_caseD_18;
   case 6:
   case 0x10:
@@ -2004,39 +2009,39 @@ switchD_000c90cc_caseD_0:
   case 0x2b:
   case 0x4b:
   case 0x53:
-    local_2bb4 = puVar19 + 1;
-    *local_2bb8 = ppppppuVar10;
-    puVar26 = local_2bb4;
-    pppppppuVar30 = local_2bb8 + 1;
+    srcCursor = puVar19 + 1;
+    *dstCursor = ppppppuVar10;
+    puVar26 = srcCursor;
+    pppppppuVar30 = dstCursor + 1;
     goto switchD_000c9ab8_caseD_18;
   case 7:
   case 0x11:
   case 0x34:
     pppppppuVar18 = (uint *******)0x0;
-    local_2bb4 = (uint *)((int (*)())ilCopyInstructionRemapped)(&local_2bb8,&local_2bb4,0,2,&local_23e8);
-    puVar26 = local_2bb4;
-    pppppppuVar30 = local_2bb8;
+    srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,0,2,&scanState);
+    puVar26 = srcCursor;
+    pppppppuVar30 = dstCursor;
     goto switchD_000c9ab8_caseD_18;
   case 8:
   case 0x15:
   case 0x16:
   case 0x32:
-    *local_2bb8 = ppppppuVar10;
-    local_2bb4 = puVar19 + 2;
-    local_2bb8[1] = (uint ******)puVar19[1];
-    puVar26 = local_2bb4;
-    pppppppuVar30 = local_2bb8 + 2;
+    *dstCursor = ppppppuVar10;
+    srcCursor = puVar19 + 2;
+    dstCursor[1] = (uint ******)puVar19[1];
+    puVar26 = srcCursor;
+    pppppppuVar30 = dstCursor + 2;
     goto switchD_000c9ab8_caseD_18;
   case 9:
   case 0x14:
   case 0x1d:
-    *local_2bb8 = ppppppuVar10;
-    local_2bb8[1] = (uint ******)puVar19[1];
-    local_2bb4 = puVar19 + 3;
-    local_2bb8[2] = (uint ******)puVar19[2];
-    puVar26 = local_2bb4;
-    pppppppuVar25 = local_2bb8 + 3;
-    pppppppuVar30 = local_2bb8 + 3;
+    *dstCursor = ppppppuVar10;
+    dstCursor[1] = (uint ******)puVar19[1];
+    srcCursor = puVar19 + 3;
+    dstCursor[2] = (uint ******)puVar19[2];
+    puVar26 = srcCursor;
+    pppppppuVar25 = dstCursor + 3;
+    pppppppuVar30 = dstCursor + 3;
     goto switchD_000c9ab8_caseD_18;
   case 10:
   case 0xd:
@@ -2047,31 +2052,31 @@ switchD_000c90cc_caseD_0:
   case 100:
     if (bVar4) {
       bVar4 = false;
-      local_2bb8 = (uint *******)
-                   ((int (*)())ilEmitPrologue)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
+      dstCursor = (uint *******)
+                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
                                 iVar39,pppppppuVar25);
     }
     pppppppuVar18 = (uint *******)((int)((unsigned char *)0x0) + 1);
-    local_2bb4 = (uint *)((int (*)())ilCopyInstructionRemapped)(&local_2bb8,&local_2bb4,1,3,&local_23e8);
-    puVar26 = local_2bb4;
-    pppppppuVar30 = local_2bb8;
+    srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,1,3,&scanState);
+    puVar26 = srcCursor;
+    pppppppuVar30 = dstCursor;
     goto switchD_000c9ab8_caseD_18;
   case 0xf:
-    local_2bb4 = puVar19 + 2;
-    *local_2bb8 = ppppppuVar10;
-    local_2bb8[1] = (uint ******)puVar19[1];
-    pppppppuVar30 = local_2bb8 + 2;
-    for (uVar32 = (uint)*(ushort *)((int)puVar19 + 6); puVar26 = local_2bb4, uVar32 != 0;
+    srcCursor = puVar19 + 2;
+    *dstCursor = ppppppuVar10;
+    dstCursor[1] = (uint ******)puVar19[1];
+    pppppppuVar30 = dstCursor + 2;
+    for (uVar32 = (uint)*(ushort *)((int)puVar19 + 6); puVar26 = srcCursor, uVar32 != 0;
         uVar32 = uVar32 - 1) {
-      ppppppuVar10 = (uint ******)*local_2bb4;
-      local_2bb4 = local_2bb4 + 1;
+      ppppppuVar10 = (uint ******)*srcCursor;
+      srcCursor = srcCursor + 1;
       *pppppppuVar30 = ppppppuVar10;
       pppppppuVar30 = pppppppuVar30 + 1;
     }
   case 0x18:
     goto switchD_000c9ab8_caseD_18;
   case 0x19:
-    local_2bb4 = puVar19 + 1;
+    srcCursor = puVar19 + 1;
     if (((uint)ppppppuVar10 & 0x18000000) == 0) {
       uVar32 = *(uint *)((int)auStack_130 + ((uint)ppppppuVar10 >> 0xe & 0x3fc));
       if (uVar32 != 2) {
@@ -2079,66 +2084,66 @@ switchD_000c90cc_caseD_0:
       }
       ppppppuVar10 = (uint ******)((uVar32 & 3) << 0x1b | (uint)ppppppuVar10 & 0xe7ffffff);
     }
-    *local_2bb8 = ppppppuVar10;
-    puVar26 = local_2bb4;
-    pppppppuVar30 = local_2bb8 + 1;
+    *dstCursor = ppppppuVar10;
+    puVar26 = srcCursor;
+    pppppppuVar30 = dstCursor + 1;
     goto switchD_000c9ab8_caseD_18;
   case 0x1a:
-    local_2bb4 = puVar19 + 1;
-    *local_2bb8 = ppppppuVar10;
-    pppppppuVar25 = local_2bb8 + 1;
+    srcCursor = puVar19 + 1;
+    *dstCursor = ppppppuVar10;
+    pppppppuVar25 = dstCursor + 1;
     if ((int)ppppppuVar10 < 0) {
-      ppppppuVar10 = (uint ******)*local_2bb4;
-      local_2bb4 = puVar19 + 2;
-      local_2bb8[1] = ppppppuVar10;
-      pppppppuVar25 = local_2bb8 + 2;
+      ppppppuVar10 = (uint ******)*srcCursor;
+      srcCursor = puVar19 + 2;
+      dstCursor[1] = ppppppuVar10;
+      pppppppuVar25 = dstCursor + 2;
     }
-    local_2bb8 = pppppppuVar25;
-    ppppppuVar10 = (uint ******)*local_2bb4;
-    local_2bb4 = local_2bb4 + 1;
-    *local_2bb8 = ppppppuVar10;
-    puVar26 = local_2bb4;
+    dstCursor = pppppppuVar25;
+    ppppppuVar10 = (uint ******)*srcCursor;
+    srcCursor = srcCursor + 1;
+    *dstCursor = ppppppuVar10;
+    puVar26 = srcCursor;
     pppppppuVar25 = pppppppuVar30;
-    pppppppuVar30 = local_2bb8 + 1;
+    pppppppuVar30 = dstCursor + 1;
     goto switchD_000c9ab8_caseD_18;
   case 0x1c:
-    local_2bb4 = puVar19 + 1;
-    pppppppuVar18 = local_2bb8 + 1;
-    *local_2bb8 = ppppppuVar10;
-    puVar26 = local_2bb4;
+    srcCursor = puVar19 + 1;
+    pppppppuVar18 = dstCursor + 1;
+    *dstCursor = ppppppuVar10;
+    puVar26 = srcCursor;
     pppppppuVar30 = pppppppuVar18;
     if ((puVar19[1] >> 0x10 & 0x3f) - 1 < 2) {
-      local_2bb8[1] = (uint ******)puVar19[1];
-      pppppppuVar20 = local_2bb8 + 6;
-      local_2bb8[2] = (uint ******)puVar19[2];
-      local_2bb8[3] = (uint ******)puVar19[3];
-      local_2bb8[4] = (uint ******)puVar19[4];
-      local_2bb4 = puVar19 + 6;
-      local_2bb8[5] = (uint ******)puVar19[5];
-      puVar26 = local_2bb4;
-      pppppppuVar25 = local_2bb8 + 5;
+      dstCursor[1] = (uint ******)puVar19[1];
+      pppppppuVar20 = dstCursor + 6;
+      dstCursor[2] = (uint ******)puVar19[2];
+      dstCursor[3] = (uint ******)puVar19[3];
+      dstCursor[4] = (uint ******)puVar19[4];
+      srcCursor = puVar19 + 6;
+      dstCursor[5] = (uint ******)puVar19[5];
+      puVar26 = srcCursor;
+      pppppppuVar25 = dstCursor + 5;
       pppppppuVar30 = pppppppuVar20;
     }
     goto switchD_000c9ab8_caseD_18;
   case 0x28:
-    local_2bb4 = puVar19 + 1;
+    srcCursor = puVar19 + 1;
     puVar16 = (undefined4 *)
-              ((int (*)())FUN_000c7930)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,local_2bb4,pppppppuVar20,
+              ((int (*)())FUN_000c7930)(dstCursor,&scanState,pppppppuVar18,puVar19,srcCursor,pppppppuVar20,
                            iVar39);
     *puVar16 = ppppppuVar10;
-    puVar26 = local_2bb4;
+    puVar26 = srcCursor;
     pppppppuVar30 = (uint *******)(puVar16 + 1);
     goto switchD_000c9ab8_caseD_18;
   case 0x35:
-    pppppppuVar18 = &local_23e8;
-    *local_2bb8 = ppppppuVar10;
-    local_2bb4 = puVar19 + 2;
+    pppppppuVar18 = &scanState;
+    *dstCursor = ppppppuVar10;
+    srcCursor = puVar19 + 2;
     local_2b8c[0] = (uint ******)puVar19[1];
-    local_2bb8 = local_2bb8 + 1;
+    dstCursor = dstCursor + 1;
     ((int (*)())ilRemapSourceOperandRegister)(local_2b8c,auStack_2b80,pppppppuVar18);
-    *local_2bb8 = local_2b8c[0];
-    puVar26 = local_2bb4;
-    pppppppuVar30 = local_2bb8 + 1;
+    *dstCursor = local_2b8c[0];
+    puVar26 = srcCursor;
+    pppppppuVar30 = dstCursor + 1;
     goto switchD_000c9ab8_caseD_18;
   case 0x37:
   case 0x3e:
@@ -2150,10 +2155,10 @@ switchD_000c90cc_caseD_0:
   case 0x5d:
     if (bVar4) {
       bVar4 = false;
-      local_2bb8 = (uint *******)
-                   ((int (*)())ilEmitPrologue)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
+      dstCursor = (uint *******)
+                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
                                 iVar39,pppppppuVar25);
-      puVar19 = local_2bb4;
+      puVar19 = srcCursor;
     }
     ppppppuVar10 = (uint ******)*puVar19;
     puVar26 = puVar19 + 1;
@@ -2182,10 +2187,10 @@ switchD_000c90cc_caseD_0:
       unaff_r15 = (uint ******)puVar26[1];
     }
     local_2b74 = (uint ******)*puVar19;
-    local_2bb4 = puVar19 + 1;
+    srcCursor = puVar19 + 1;
     if (((uint)local_2b74 & 0x400000) != 0) {
       local_2b98 = (uint ******)puVar19[1];
-      local_2bb4 = puVar19 + 2;
+      srcCursor = puVar19 + 2;
     }
     uVar7 = (uint)ppppppuVar10 & 0xc000000;
     if (uVar7 == 0x4000000) {
@@ -2199,7 +2204,7 @@ LAB_000ca0e4:
       else {
         local_60 = (uint ******)&local_2b98;
         local_70 = (uint ******)&local_2b74;
-        local_2bb8 = (uint *******)((int (*)())ilEmitProjectiveDivide)(&local_23e8,local_70,local_60,uVar22,local_2bb8);
+        dstCursor = (uint *******)((int (*)())ilEmitProjectiveDivide)(&scanState,local_70,local_60,uVar22,dstCursor);
         ppppppuVar28 = local_60;
         if (((uint)local_2ba4 & 0x400000) == 0) {
           pppppppuVar30 = (uint *******)0x0;
@@ -2226,40 +2231,40 @@ LAB_000ca0e4:
       local_70 = (uint ******)&local_2b74;
       ppppppuVar28 = (uint ******)&local_2b98;
     }
-    pppppppuVar18 = &local_23e8;
-    ((int (*)())ilRemapSourceOperandRegister)(local_70,ppppppuVar28,&local_23e8);
-    *local_2bb8 = ppppppuVar10;
-    pppppppuVar25 = local_2bb8 + 1;
+    pppppppuVar18 = &scanState;
+    ((int (*)())ilRemapSourceOperandRegister)(local_70,ppppppuVar28,&scanState);
+    *dstCursor = ppppppuVar10;
+    pppppppuVar25 = dstCursor + 1;
     if (bVar3) {
-      local_2bb8[1] = ppppppuVar15;
-      pppppppuVar25 = local_2bb8 + 2;
+      dstCursor[1] = ppppppuVar15;
+      pppppppuVar25 = dstCursor + 2;
     }
-    local_2bb8 = pppppppuVar25;
+    dstCursor = pppppppuVar25;
     if (bVar1) {
-      *local_2bb8 = ppppppuVar23;
-      local_2bb8 = local_2bb8 + 1;
+      *dstCursor = ppppppuVar23;
+      dstCursor = dstCursor + 1;
     }
-    *local_2bb8 = (uint ******)local_2ba4;
-    pppppppuVar25 = local_2bb8 + 1;
+    *dstCursor = (uint ******)local_2ba4;
+    pppppppuVar25 = dstCursor + 1;
     if (((uint)local_2ba4 & 0x400000) != 0) {
-      local_2bb8[1] = unaff_r15;
-      pppppppuVar25 = local_2bb8 + 2;
+      dstCursor[1] = unaff_r15;
+      pppppppuVar25 = dstCursor + 2;
     }
-    local_2bb8 = pppppppuVar25;
-    *local_2bb8 = local_2b74;
+    dstCursor = pppppppuVar25;
+    *dstCursor = local_2b74;
     pppppppuVar25 = (uint *******)((uint)local_2b74 & 0x400000);
-    pppppppuVar8 = local_2bb8 + 1;
+    pppppppuVar8 = dstCursor + 1;
     if (pppppppuVar25 != (uint *******)0x0) {
-      local_2bb8[1] = local_2b98;
-      pppppppuVar8 = local_2bb8 + 2;
+      dstCursor[1] = local_2b98;
+      pppppppuVar8 = dstCursor + 2;
     }
-    local_2bb8 = pppppppuVar8;
+    dstCursor = pppppppuVar8;
     if (((uVar7 == 0x4000000) || ((uVar7 == 0x8000000 && ((uVar34 & local_2374) != 0)))) &&
        (local_2378 << (uVar32 & 0x3f) != 0)) {
       pppppppuVar18 = (uint *******)&local_2ba4;
-      local_2bb8 = (uint *******)
-                   ((int (*)())ilEmitShadowCompare)(&local_23e8,local_70,pppppppuVar18,&local_2bb0,uVar22,pppppppuVar30,
-                                local_2bb8,pppppppuVar25);
+      dstCursor = (uint *******)
+                   ((int (*)())ilEmitShadowCompare)(&scanState,local_70,pppppppuVar18,&local_2bb0,uVar22,pppppppuVar30,
+                                dstCursor,pppppppuVar25);
       pppppppuVar20 = pppppppuVar30;
     }
     uVar34 = uVar34 & local_2378;
@@ -2268,10 +2273,10 @@ LAB_000ca0e4:
   case 0x5e:
     if (bVar4) {
       bVar4 = false;
-      local_2bb8 = (uint *******)
-                   ((int (*)())ilEmitPrologue)(local_2bb8,&local_23e8,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
+      dstCursor = (uint *******)
+                   ((int (*)())ilEmitPrologue)(dstCursor,&scanState,pppppppuVar18,puVar19,puVar19,pppppppuVar20,
                                 iVar39,pppppppuVar25);
-      puVar19 = local_2bb4;
+      puVar19 = srcCursor;
     }
     ppppppuVar10 = (uint ******)*puVar19;
     puVar26 = puVar19 + 1;
@@ -2306,18 +2311,18 @@ LAB_000ca0e4:
       puVar26 = puVar19 + 2;
     }
     local_2b94 = (uint ******)*puVar26;
-    local_2bb4 = puVar26 + 1;
+    srcCursor = puVar26 + 1;
     if (((uint)local_2b94 & 0x400000) != 0) {
       local_2b70 = (uint ******)puVar26[1];
-      local_2bb4 = puVar26 + 2;
+      srcCursor = puVar26 + 2;
     }
     uVar7 = (uint)ppppppuVar10 & 0xc000000;
     if (uVar7 == 0x4000000) {
 LAB_000ca3b8:
       if (local_2378 << (uVar32 & 0x3f) != 0) {
         pppppppuVar18 = &local_2b74;
-        local_2bb8 = (uint *******)
-                     ((int (*)())ilEmitProjectiveDivide)(&local_23e8,&local_2b98,pppppppuVar18,uVar22,local_2bb8);
+        dstCursor = (uint *******)
+                     ((int (*)())ilEmitProjectiveDivide)(&scanState,&local_2b98,pppppppuVar18,uVar22,dstCursor);
         if (((uint)local_2ba4 & 0x400000) != 0) {
           local_2ba4 = (uint *******)((uint)local_2ba4 & 0xffbfffff);
           pppppppuVar20 = (uint *******)((int)((unsigned char *)0x0) + 1);
@@ -2337,55 +2342,55 @@ LAB_000ca3ec:
       if ((uVar34 & local_2374) != 0) goto LAB_000ca3b8;
     }
 LAB_000ca414:
-    *local_2bb8 = ppppppuVar10;
-    pppppppuVar25 = local_2bb8 + 1;
+    *dstCursor = ppppppuVar10;
+    pppppppuVar25 = dstCursor + 1;
     if (bVar3) {
-      local_2bb8[1] = ppppppuVar15;
-      pppppppuVar25 = local_2bb8 + 2;
+      dstCursor[1] = ppppppuVar15;
+      pppppppuVar25 = dstCursor + 2;
     }
-    local_2bb8 = pppppppuVar25;
+    dstCursor = pppppppuVar25;
     if (bVar1) {
-      *local_2bb8 = ppppppuVar23;
-      local_2bb8 = local_2bb8 + 1;
+      *dstCursor = ppppppuVar23;
+      dstCursor = dstCursor + 1;
     }
-    *local_2bb8 = (uint ******)local_2ba4;
-    pppppppuVar25 = local_2bb8 + 1;
+    *dstCursor = (uint ******)local_2ba4;
+    pppppppuVar25 = dstCursor + 1;
     if (((uint)local_2ba4 & 0x400000) != 0) {
-      local_2bb8[1] = unaff_r14;
-      pppppppuVar25 = local_2bb8 + 2;
+      dstCursor[1] = unaff_r14;
+      pppppppuVar25 = dstCursor + 2;
     }
-    local_2bb8 = pppppppuVar25;
-    *local_2bb8 = local_2b98;
+    dstCursor = pppppppuVar25;
+    *dstCursor = local_2b98;
     pppppppuVar25 = (uint *******)((uint)local_2b98 & 0x400000);
-    pppppppuVar30 = local_2bb8 + 1;
+    pppppppuVar30 = dstCursor + 1;
     if (pppppppuVar25 != (uint *******)0x0) {
-      local_2bb8[1] = local_2b74;
-      pppppppuVar30 = local_2bb8 + 2;
+      dstCursor[1] = local_2b74;
+      pppppppuVar30 = dstCursor + 2;
     }
-    local_2bb8 = pppppppuVar30;
-    *local_2bb8 = local_2b94;
-    pppppppuVar30 = local_2bb8 + 1;
+    dstCursor = pppppppuVar30;
+    *dstCursor = local_2b94;
+    pppppppuVar30 = dstCursor + 1;
     if (((uint)local_2b94 & 0x400000) != 0) {
-      local_2bb8[1] = local_2b70;
-      pppppppuVar30 = local_2bb8 + 2;
+      dstCursor[1] = local_2b70;
+      pppppppuVar30 = dstCursor + 2;
     }
-    local_2bb8 = pppppppuVar30;
+    dstCursor = pppppppuVar30;
     if (((uVar7 == 0x4000000) || ((uVar7 == 0x8000000 && ((uVar34 & local_2374) != 0)))) &&
        (pppppppuVar25 = (uint *******)(local_2378 << (uVar32 & 0x3f)),
        pppppppuVar25 != (uint *******)0x0)) {
       pppppppuVar18 = (uint *******)&local_2ba4;
-      local_2bb8 = (uint *******)
-                   ((int (*)())ilEmitShadowCompare)(&local_23e8,&local_2b98,pppppppuVar18,&local_2bb0,uVar22,
-                                pppppppuVar20,local_2bb8,pppppppuVar25);
+      dstCursor = (uint *******)
+                   ((int (*)())ilEmitShadowCompare)(&scanState,&local_2b98,pppppppuVar18,&local_2bb0,uVar22,
+                                pppppppuVar20,dstCursor,pppppppuVar25);
     }
     uVar34 = uVar34 & local_2378;
     ppppppuVar10 = unaff_r14;
 joined_r0x000ca538:
-    puVar26 = local_2bb4;
-    pppppppuVar30 = local_2bb8;
+    puVar26 = srcCursor;
+    pppppppuVar30 = dstCursor;
     if (uVar34 != 0) {
-      pppppppuVar20 = local_2bb8 + 1;
-      *local_2bb8 = (uint ******)0x47;
+      pppppppuVar20 = dstCursor + 1;
+      *dstCursor = (uint ******)0x47;
       pppppppuVar25 = local_2ba4;
       if (((uint)local_2ba4 & 0x400000) == 0) {
         pppppppuVar25 = (uint *******)((uint)local_2ba4 | 0x400000);
@@ -2406,15 +2411,15 @@ joined_r0x000ca538:
         ppppppuVar10 = (uint ******)((uint)ppppppuVar10 & 0xffffff3f | 0xc0);
       }
       *pppppppuVar20 = (uint ******)pppppppuVar25;
-      local_2bb8[2] = ppppppuVar10;
-      local_2bb8[3] = (uint ******)((uint)pppppppuVar25 & 0x3fffff);
-      pppppppuVar30 = local_2bb8 + 4;
+      dstCursor[2] = ppppppuVar10;
+      dstCursor[3] = (uint ******)((uint)pppppppuVar25 & 0x3fffff);
+      pppppppuVar30 = dstCursor + 4;
     }
     goto switchD_000c9ab8_caseD_18;
   }
-  local_2bb4 = (uint *)((int (*)())ilCopyInstructionRemapped)(&local_2bb8,&local_2bb4,pppppppuVar18,1,&local_23e8);
-  puVar26 = local_2bb4;
-  pppppppuVar30 = local_2bb8;
+  srcCursor = (uint *)((int (*)())ilCopyInstructionRemapped)(&dstCursor,&srcCursor,pppppppuVar18,1,&scanState);
+  puVar26 = srcCursor;
+  pppppppuVar30 = dstCursor;
   goto switchD_000c9ab8_caseD_18;
 }
 

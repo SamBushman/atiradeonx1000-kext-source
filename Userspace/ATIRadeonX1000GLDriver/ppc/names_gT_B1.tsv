@@ -1,0 +1,27 @@
+local	ilAssembleProgram	local_2bb4	srcCursor	CONFIRMED	IL token read cursor of both passes: advanced past each instruction and passed by address to ilCopyInstructionRemapped as the source cursor pointer
+local	ilAssembleProgram	local_2bb8	dstCursor	CONFIRMED	write cursor of the rewritten token buffer: passed by address to ilCopyInstructionRemapped / FUN_000c7930 as the destination cursor pointer
+local	ilAssembleProgram	local_23e8	scanState	CONFIRMED	base of the scan-state record whose address is passed as programRecord to ilMarkInstructionRegistersUsed, ilMarkOperandRegisterUsed, ilRemapSourceOperandRegister and FUN_000c8600
+local	ilAssembleProgram	local_23e0	usedTexcoordMask	CONFIRMED	scanState+8: bit i set when texcoord input i (register type 0x11) is read (FUN_000c8600: param_3[2] |= 1 << index)
+use	ilAssembleProgram	puVar31	ilTokens	CONFIRMED	programHeader[0]: start of the IL token stream; end = ilTokens + ilWordCount	^\s*puVar31\ =\ \(uint\ \*\)\*param_2;$	+1
+use	ilAssembleProgram	puVar31	ilTokens	CONFIRMED	programHeader[0]: start of the IL token stream; end = ilTokens + ilWordCount	^\s*puVar29\ =\ puVar31;$	+1
+use	ilAssembleProgram	puVar31	ilTokens	CONFIRMED	programHeader[0]: start of the IL token stream; end = ilTokens + ilWordCount	^\s*if\ \(puVar29\ <\ puVar31\ \+\ iVar38\)\ goto\ code_r0x000c90a4;$	+1
+use	ilAssembleProgram	puVar31	ilTokens	CONFIRMED	programHeader[0]: start of the IL token stream; end = ilTokens + ilWordCount	^\s*\*puVar29\ =\ \*puVar31;$	+3
+use	ilAssembleProgram	puVar31	ilTokens	CONFIRMED	programHeader[0]: start of the IL token stream; end = ilTokens + ilWordCount	^\s*if\ \(puVar31\ \+\ iVar38\ <=\ puVar19\)\ \{$	+1
+use	ilAssembleProgram	puVar31	inputMaskCursor	INFERRED	walks the 8 words of the used-input-register bit mask (local_2260 area), one word per 32 input registers	^\s*puVar31\ =\ local_6c;$	+1
+use	ilAssembleProgram	puVar31	inputMaskCursor	INFERRED	walks the 8 words of the used-input-register bit mask (local_2260 area), one word per 32 input registers	^\s*if\ \(\(1\ <<\ \(uVar21\ \&\ 0x3f\)\ \&\ \*puVar31\)\ ==\ 0\)\ \{$	+1
+use	ilAssembleProgram	puVar31	inputMaskCursor	INFERRED	walks the 8 words of the used-input-register bit mask (local_2260 area), one word per 32 input registers	^\s*puVar31\ =\ puVar31\ \+\ 1;$	+1
+use	ilAssembleProgram	puVar31	hwWordSource	CONFIRMED	reads the 4-word groups of the assembled hardware program buffer (local_240c, malloc 0x40000) that are copied into programBody	^\s*puVar31\ =\ local_240c;$	+1
+use	ilAssembleProgram	puVar31	hwWordSource	CONFIRMED	reads the 4-word groups of the assembled hardware program buffer (local_240c, malloc 0x40000) that are copied into programBody	^\s*ppppppuVar10\ =\ \(uint\ \*\*\*\*\*\*\)\*puVar31;$	+5
+use	ilAssembleProgram	iVar38	zeroFillCount	INFERRED	countdown that sets the 8 words of two bit-mask arrays to 0xffffffff	^\s*iVar38\ =\ 8;$	+1
+use	ilAssembleProgram	iVar38	zeroFillCount	INFERRED	countdown that sets the 8 words of two bit-mask arrays to 0xffffffff	^\s*iVar38\ =\ iVar38\ \+\ \-1;$	+2
+use	ilAssembleProgram	iVar38	ilWordCount	CONFIRMED	programHeader[1]: number of 32-bit words in the IL token stream	^\s*iVar38\ =\ param_2\[1\];$	+1
+use	ilAssembleProgram	iVar38	ilWordCount	CONFIRMED	programHeader[1]: number of 32-bit words in the IL token stream	^\s*if\ \(puVar29\ <\ puVar31\ \+\ iVar38\)\ goto\ code_r0x000c90a4;$	+1
+use	ilAssembleProgram	iVar38	ilWordCount	CONFIRMED	programHeader[1]: number of 32-bit words in the IL token stream	^\s*iVar36\ =\ \(iVar36\ \+\ iVar38\)\ \*\ 4;$	+1
+use	ilAssembleProgram	iVar38	ilWordCount	CONFIRMED	programHeader[1]: number of 32-bit words in the IL token stream	^\s*if\ \(puVar31\ \+\ iVar38\ <=\ puVar19\)\ \{$	+1
+use	ilAssembleProgram	iVar38	inputMaskBase	INFERRED	index of the first input register of the current 32-register mask word: 0, 0x20 ... 0xe0	^\s*iVar38\ =\ 0;$	+1
+use	ilAssembleProgram	iVar38	inputMaskBase	INFERRED	index of the first input register of the current 32-register mask word: 0, 0x20 ... 0xe0	^\s*if\ \(param_3\[0x1502\]\ <\ \(uint\ \*\*\*\*\*\*\)\(iVar38\ \+\ uVar21\)\)\ \{$	+2
+use	ilAssembleProgram	iVar38	inputMaskBase	INFERRED	index of the first input register of the current 32-register mask word: 0, 0x20 ... 0xe0	^\s*bVar4\ =\ iVar38\ !=\ 0xe0;$	+1
+use	ilAssembleProgram	iVar38	inputMaskBase	INFERRED	index of the first input register of the current 32-register mask word: 0, 0x20 ... 0xe0	^\s*iVar38\ =\ iVar38\ \+\ 0x20;$	+1
+use	ilAssembleProgram	iVar38	scratchAllocation	CONFIRMED	block returned by the ctx+0xc allocation hook (size ctx[0x1870]), stored in local_2a60 and freed on exit	^\s*iVar38\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x1870\)\);$	+1
+use	ilAssembleProgram	iVar38	scratchAllocation	CONFIRMED	block returned by the ctx+0xc allocation hook (size ctx[0x1870]), stored in local_2a60 and freed on exit	^\s*local_2a60\ =\ iVar38;$	+1
+use	ilAssembleProgram	iVar38	scratchAllocation	CONFIRMED	block returned by the ctx+0xc allocation hook (size ctx[0x1870]), stored in local_2a60 and freed on exit	^\s*if\ \(iVar38\ !=\ 0\)\ \{$	+2
