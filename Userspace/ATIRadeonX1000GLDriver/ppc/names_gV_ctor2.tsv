@@ -22,5 +22,5 @@ local	KhanPs__ctor_128fd0	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the Khan
 local	KhanPs__ctor_129130	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the KhanPs vtable address
 local	KhanVs__ctor_12a578	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the KhanVs vtable address
 local	KhanVs__ctor_12a6c0	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the KhanVs vtable address
-local	FudoVs__ctor_12a808	param_2	opcode	INFERRED	argument opcode of the base constructor call
-local	FudoVs__ctor_12a8bc	param_2	opcode	INFERRED	argument opcode of the base constructor call
+local	FudoVs__ctor_12a808	param_2	allocContext	INFERRED	allocation context passed to the member allocator FUN_000e1564 (Khan/Fudo chip and shader-limit constructors)
+local	FudoVs__ctor_12a8bc	param_2	allocContext	INFERRED	allocation context passed to the member allocator FUN_000e1564 (Khan/Fudo chip and shader-limit constructors)

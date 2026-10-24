@@ -1339,9 +1339,9 @@ int FUN_0010defc(param_1, param_2)
 }
 
 /* KhanChip__ctor_10e050 @ 0x10e050 (172 bytes) */
-int KhanChip__ctor_10e050(this, opcode)
+int KhanChip__ctor_10e050(this, allocContext)
   undefined4 *this;
-  undefined4 opcode;
+  undefined4 allocContext;
 {
   undefined *vtable;
   int iVar2;
@@ -1351,23 +1351,23 @@ int KhanChip__ctor_10e050(this, opcode)
   this[1] = 0;
   *this = vtable + 8;
   *this = PTR_DAT_001e8c74 + 8;
-  iVar2 = FUN_000e1564(opcode,0x1740);
+  iVar2 = FUN_000e1564(allocContext,0x1740);
   if (iVar2 != 0) {
-    KhanVs__ctor_12a578(iVar2,opcode,1);
+    KhanVs__ctor_12a578(iVar2,allocContext,1);
   }
   this[1] = iVar2;
-  iVar2 = FUN_000e1564(opcode,0x1744);
+  iVar2 = FUN_000e1564(allocContext,0x1744);
   if (iVar2 != 0) {
-    KhanPs__ctor_129130(iVar2,opcode,1);
+    KhanPs__ctor_129130(iVar2,allocContext,1);
   }
   this[2] = iVar2;
   return;
 }
 
 /* KhanChip__ctor_10e114 @ 0x10e114 (172 bytes) */
-int KhanChip__ctor_10e114(this, opcode)
+int KhanChip__ctor_10e114(this, allocContext)
   undefined4 *this;
-  undefined4 opcode;
+  undefined4 allocContext;
 {
   undefined *vtable;
   int iVar2;
@@ -1377,23 +1377,23 @@ int KhanChip__ctor_10e114(this, opcode)
   this[1] = 0;
   *this = vtable + 8;
   *this = PTR_DAT_001e8c74 + 8;
-  iVar2 = FUN_000e1564(opcode,0x1740);
+  iVar2 = FUN_000e1564(allocContext,0x1740);
   if (iVar2 != 0) {
-    KhanVs__ctor_12a578(iVar2,opcode,1);
+    KhanVs__ctor_12a578(iVar2,allocContext,1);
   }
   this[1] = iVar2;
-  iVar2 = FUN_000e1564(opcode,0x1744);
+  iVar2 = FUN_000e1564(allocContext,0x1744);
   if (iVar2 != 0) {
-    KhanPs__ctor_129130(iVar2,opcode,1);
+    KhanPs__ctor_129130(iVar2,allocContext,1);
   }
   this[2] = iVar2;
   return;
 }
 
 /* FudoChip__ctor_10e1d8 @ 0x10e1d8 (176 bytes) */
-int FudoChip__ctor_10e1d8(this, opcode)
+int FudoChip__ctor_10e1d8(this, allocContext)
   undefined4 *this;
-  undefined4 opcode;
+  undefined4 allocContext;
 {
   undefined *vtable;
   int iVar2;
@@ -1405,23 +1405,23 @@ int FudoChip__ctor_10e1d8(this, opcode)
   *this = puVar3;
   this[1] = 0;
   *this = vtable + 8;
-  iVar2 = FUN_000e1564(opcode,0x1740);
+  iVar2 = FUN_000e1564(allocContext,0x1740);
   if (iVar2 != 0) {
-    FudoVs__ctor_12a8bc(iVar2,opcode,1);
+    FudoVs__ctor_12a8bc(iVar2,allocContext,1);
   }
   this[1] = iVar2;
-  iVar2 = FUN_000e1564(opcode,0x1944);
+  iVar2 = FUN_000e1564(allocContext,0x1944);
   if (iVar2 != 0) {
-    FudoPs__ctor_1920e0(iVar2,opcode,1);
+    FudoPs__ctor_1920e0(iVar2,allocContext,1);
   }
   this[2] = iVar2;
   return;
 }
 
 /* FudoChip__ctor_10e2a0 @ 0x10e2a0 (176 bytes) */
-int FudoChip__ctor_10e2a0(this, opcode)
+int FudoChip__ctor_10e2a0(this, allocContext)
   undefined4 *this;
-  undefined4 opcode;
+  undefined4 allocContext;
 {
   undefined *vtable;
   int iVar2;
@@ -1433,14 +1433,14 @@ int FudoChip__ctor_10e2a0(this, opcode)
   *this = puVar3;
   this[1] = 0;
   *this = vtable + 8;
-  iVar2 = FUN_000e1564(opcode,0x1740);
+  iVar2 = FUN_000e1564(allocContext,0x1740);
   if (iVar2 != 0) {
-    FudoVs__ctor_12a8bc(iVar2,opcode,1);
+    FudoVs__ctor_12a8bc(iVar2,allocContext,1);
   }
   this[1] = iVar2;
-  iVar2 = FUN_000e1564(opcode,0x1944);
+  iVar2 = FUN_000e1564(allocContext,0x1944);
   if (iVar2 != 0) {
-    FudoPs__ctor_1920e0(iVar2,opcode,1);
+    FudoPs__ctor_1920e0(iVar2,allocContext,1);
   }
   this[2] = iVar2;
   return;

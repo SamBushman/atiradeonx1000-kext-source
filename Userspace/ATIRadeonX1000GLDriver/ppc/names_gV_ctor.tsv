@@ -124,15 +124,15 @@ local	FUN_0010a8a4	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRStartCall
 func	FUN_0010a90c	IRStartCallRoutine__ctor_10a90c	INFERRED	constructor: stores the IRStartCallRoutine vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
 local	FUN_0010a90c	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRStartCallRoutine vtable address
 local	KhanChip__ctor_10e050	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the HwChip vtable address
-local	KhanChip__ctor_10e050	param_2	opcode	INFERRED	argument opcode of the base constructor call
+local	KhanChip__ctor_10e050	param_2	allocContext	INFERRED	allocation context passed to the member allocator FUN_000e1564 (Khan/Fudo chip and shader-limit constructors)
 local	KhanChip__ctor_10e114	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the HwChip vtable address
-local	KhanChip__ctor_10e114	param_2	opcode	INFERRED	argument opcode of the base constructor call
+local	KhanChip__ctor_10e114	param_2	allocContext	INFERRED	allocation context passed to the member allocator FUN_000e1564 (Khan/Fudo chip and shader-limit constructors)
 func	FUN_0010e1d8	FudoChip__ctor_10e1d8	INFERRED	constructor: stores the FudoChip vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
 local	FUN_0010e1d8	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the FudoChip vtable address
-local	FUN_0010e1d8	param_2	opcode	INFERRED	argument opcode of the base constructor call
+local	FUN_0010e1d8	param_2	allocContext	INFERRED	allocation context passed to the member allocator FUN_000e1564 (Khan/Fudo chip and shader-limit constructors)
 func	FUN_0010e2a0	FudoChip__ctor_10e2a0	INFERRED	constructor: stores the FudoChip vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
 local	FUN_0010e2a0	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the FudoChip vtable address
-local	FUN_0010e2a0	param_2	opcode	INFERRED	argument opcode of the base constructor call
+local	FUN_0010e2a0	param_2	allocContext	INFERRED	allocation context passed to the member allocator FUN_000e1564 (Khan/Fudo chip and shader-limit constructors)
 func	FUN_0012379c	VRegInfo__ctor_12379c	INFERRED	constructor: stores the VRegInfo vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
 local	FUN_0012379c	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the VRegInfo vtable address
 func	FUN_001238e8	VRegInfo__ctor_1238e8	INFERRED	constructor: stores the VRegInfo vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this

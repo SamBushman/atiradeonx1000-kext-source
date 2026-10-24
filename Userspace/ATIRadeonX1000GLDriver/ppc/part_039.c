@@ -1814,37 +1814,37 @@ int KhanVs__ctor_12a6c0(this, param_2, param_3)
 }
 
 /* FudoVs__ctor_12a808 @ 0x12a808 (124 bytes) */
-int FudoVs__ctor_12a808(this, opcode, param_3)
+int FudoVs__ctor_12a808(this, allocContext, param_3)
   undefined4 *this;
-  undefined4 opcode;
+  undefined4 allocContext;
   int param_3;
 {
-  ((int (*)())KhanVs__ctor_12a6c0)(this,opcode,0);
+  ((int (*)())KhanVs__ctor_12a6c0)(this,allocContext,0);
   *this = &PTR_FUN_001eb0c0;
   this[6] = 0x80;
   this[0x10] = 0x400;
   this[2] = this[2] | 0x10100;
   ((int (*)())FudoVs__vslot96_installHardwareTables)(this);
   if (param_3 != 0) {
-    ((int (*)())FudoVs__createSchedModels)(this,opcode);
+    ((int (*)())FudoVs__createSchedModels)(this,allocContext);
   }
   return;
 }
 
 /* FudoVs__ctor_12a8bc @ 0x12a8bc (124 bytes) */
-int FudoVs__ctor_12a8bc(this, opcode, param_3)
+int FudoVs__ctor_12a8bc(this, allocContext, param_3)
   undefined4 *this;
-  undefined4 opcode;
+  undefined4 allocContext;
   int param_3;
 {
-  ((int (*)())KhanVs__ctor_12a6c0)(this,opcode,0);
+  ((int (*)())KhanVs__ctor_12a6c0)(this,allocContext,0);
   *this = &PTR_FUN_001eb0c0;
   this[6] = 0x80;
   this[0x10] = 0x400;
   this[2] = this[2] | 0x10100;
   ((int (*)())FudoVs__vslot96_installHardwareTables)(this);
   if (param_3 != 0) {
-    ((int (*)())FudoVs__createSchedModels)(this,opcode);
+    ((int (*)())FudoVs__createSchedModels)(this,allocContext);
   }
   return;
 }

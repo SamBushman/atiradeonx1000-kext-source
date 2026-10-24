@@ -51,9 +51,9 @@ for fn in order:
         if fn.startswith('FUN_'): rows.append('F|%s|%s__ctor_%s|constructor: stores the %s vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this|INFERRED' % (fn, c, addr, c))
         m = re.search(r'(\w+) = PTR_DAT_[0-9a-f]+(?: \+ 8)?;', t)
         if m and re.match(r'(puVar|pcVar|uVar)\d+$', m.group(1)): rows.append('L|%s|%s|vtable|PTR_DAT_ entry holding the %s vtable address' % (fn, m.group(1), c))
-        # roles from the base constructor call
+        # roles from the base constructor call (IR constructors only: Khan/Fudo constructors take an allocation context)
         mc = re.search(r'(?:\(\(int \(\*\)\(\)\))?(\w+)\)?\((\w+),([^,)]+),(\w+)\);', t)
-        if mc and ('ctor' in mc.group(1) or mc.group(1).startswith(('FUN_', 'IRInst__reinit', 'IRPseudo', 'IRAlu', 'IRFetch', 'IRUnary', 'IRExport'))):
+        if mc and c.startswith('IR') and ('ctor' in mc.group(1) or mc.group(1).startswith(('FUN_', 'IRInst__reinit', 'IRPseudo', 'IRAlu', 'IRFetch', 'IRUnary', 'IRExport'))):
             a1, a2, a3 = mc.group(2), mc.group(3), mc.group(4)
             for a, role in ((a1, 'this'), (a2, 'opcode'), (a3, 'compiler')):
                 if re.match(r'param_\d+$', a): rows.append('L|%s|%s|%s|argument %s of the base constructor call' % (fn, a, role, role))
