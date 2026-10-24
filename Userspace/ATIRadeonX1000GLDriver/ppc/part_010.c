@@ -3025,39 +3025,95 @@ int evsAssignVertexInputs(ctx, shader)
   int ctx;
   int *shader;
 {
-  bool bVar1;
-  byte bVar2;
-  byte bVar3;
-  byte bVar4;
-  byte bVar5;
-  byte bVar6;
-  byte bVar7;
-  byte bVar8;
-  byte bVar9;
-  int iVar10;
-  uint uVar11;
-  undefined4 uVar12;
-  uint uVar13;
-  int iVar14;
-  int iVar15;
-  int in_r7;
-  int iVar16;
-  int iVar17;
-  int iVar18;
-  int iVar19;
-  uint uVar20;
-  int iVar21;
-  int iVar22;
-  uint uVar23;
-  uint uVar24;
-  bool bVar25;
-  int iVar26;
-  uint uStack_58;
+  int usedListOffset;
+  int emitResult;
+  int symbolRecordC;
+  int curProgramStateB;
+  int nextInputRegCandidateB;
+  int symbolDataTypeC;
+  int instOffsetC;
+  uint tempSlotCount;
+  uint symbolIndex;
+  uint tokenCounter;
+  int fogOutputReg;
+  int instOffsetB;
+  int symbolOffsetC;
+  int allocStatus;
+  int slotComponentX;
+  int symbolOffsetB;
+  int symbolRecordsB;
+  int sharedInputRegB;
+  int stateIndexB;
+  int inputRecOffsetB;
+  int destSymbolIndex;
+  int usesTempSlot;
+  int sharedInputReg;
+  int stateIndex;
+  int tempSlotRecord;
+  int symbolRecordB;
+  int instArray;
+  int inputRecOffset;
+  int nextInputRegCandidate;
+  int symbolDataTypeB;
+  int tempSlotOffset;
+  int symbolDataType;
+  int symbolRecords;
+  int freeOutputReg01;
+  int programTable;
+  int nextInst;
+  int freeOutputReg2;
+  uint hwRegisterRow3;
+  uint hwRegisterRow2;
+  uint hwRegisterRow1;
+  uint hwRegisterRow0;
+  uint hwRegister;
+  uint symbolCount;
+  uint inputIndex16;
+  uint tokenValue;
+  undefined4 vec4Table;
+  undefined4 usedSymbolList;
+  undefined4 fogWriteMode;
+  undefined4 allocatedHandle;
+  undefined4 tempSlotB;
+  bool fogFlagsNotBothSet;
+  int usedSymbolCount;
+  int tokenBuffer;
+  int slotCursor;
+  int instOffset;
+  int nextInputReg;
+  bool slotReleasable;
+  byte destCoversX;
+  byte destCoversY;
+  byte destCoversZ;
+  byte destCoversW;
+  byte coveredX;
+  byte coveredY;
+  byte coveredZ;
+  byte coveredW;
+  int inputSlotCursor;
+  uint instCount;
+  undefined4 tempSlotA;
+  uint instIndex;
+  int symbolRecord;
+  int curProgramState;
+  int activeProgramIndexOrSymbolRecord;
+  int programTableB;
+  int symbolOffset;
+  int instArrayB;
+  int emitState;
+  uint tempSlotIndex;
+  int programState;
+  int programStateAlias;
+  uint scanInstIndex;
+  uint inputMask;
+  bool scanDone;
+  int slotCountdown;
+  uint maxTempCount;
   
-  iVar21 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
-  iVar19 = iVar21 + 0x13c;
-  *(undefined4 *)(((unsigned char *)0x0000137c) + iVar21) = 0;
-  ((unsigned char *)0x000013d0)[iVar21] = 0;
+  programState = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  emitState = programState + 0x13c;
+  *(undefined4 *)(((unsigned char *)0x0000137c) + programState) = 0;
+  ((unsigned char *)0x000013d0)[programState] = 0;
   if ((shader[6] == 0) || (shader[5] == 0)) {
     shader[0x19] = 0;
     shader[0xc] = 0;
@@ -3068,701 +3124,701 @@ int evsAssignVertexInputs(ctx, shader)
     return 1;
   }
   *(undefined1 *)(shader + 4) = 1;
-  uVar12 = ((int (*)())evsAllocTempSlot)(iVar21);
-  *(undefined4 *)(((unsigned char *)0x000013c0) + iVar21) = uVar12;
-  uVar12 = ((int (*)())evsAllocTempSlot)(iVar21);
-  *(undefined4 *)(((unsigned char *)0x000013cc) + iVar21) = uVar12;
-  iVar26 = 0x16;
-  iVar22 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
-  iVar10 = iVar22;
+  tempSlotA = ((int (*)())evsAllocTempSlot)(programState);
+  *(undefined4 *)(((unsigned char *)0x000013c0) + programState) = tempSlotA;
+  tempSlotB = ((int (*)())evsAllocTempSlot)(programState);
+  *(undefined4 *)(((unsigned char *)0x000013cc) + programState) = tempSlotB;
+  slotCountdown = 0x16;
+  programStateAlias = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  inputSlotCursor = programStateAlias;
   do {
-    *(undefined4 *)(iVar10 + 0x60) = 0xffffffff;
-    *(undefined4 *)(iVar10 + 0xb8) = 0xffffffff;
-    iVar10 = iVar10 + 4;
-    iVar26 = iVar26 + -1;
-  } while (iVar26 != 0);
-  iVar10 = 1;
-  *(undefined4 *)(((unsigned char *)0x00001398) + iVar22) = 0;
-  *(undefined4 *)(iVar22 + 0x110) = 0;
+    *(undefined4 *)(inputSlotCursor + 0x60) = 0xffffffff;
+    *(undefined4 *)(inputSlotCursor + 0xb8) = 0xffffffff;
+    inputSlotCursor = inputSlotCursor + 4;
+    slotCountdown = slotCountdown + -1;
+  } while (slotCountdown != 0);
+  nextInputReg = 1;
+  *(undefined4 *)(((unsigned char *)0x00001398) + programStateAlias) = 0;
+  *(undefined4 *)(programStateAlias + 0x110) = 0;
   if (shader[5] != 0) {
-    uVar13 = 0;
+    instIndex = 0;
     do {
-      iVar26 = uVar13 * 0x74;
-      iVar18 = shader[6];
-      in_r7 = *(int *)(((unsigned char *)0x0000118c) + ctx);
-      iVar16 = *shader;
-      iVar15 = **(int **)(in_r7 * 4 + iVar16);
-      if (*(int *)(iVar26 + iVar18 + 0x20) == 2) {
-        iVar17 = *(int *)(iVar26 + iVar18 + 0x24) * 0x54;
-        iVar14 = iVar17 + shader[8];
-        if ((*(int *)(iVar14 + 0x28) == 0x87c1) && (*(char *)(iVar14 + 0x3d) == '\0')) {
-          *(undefined4 *)(iVar17 + shader[8]) = 0;
-          *(undefined1 *)(iVar14 + 0x3d) = 1;
+      instOffsetC = instIndex * 0x74;
+      instArrayB = shader[6];
+      activeProgramIndexOrSymbolRecord = *(int *)(((unsigned char *)0x0000118c) + ctx);
+      programTableB = *shader;
+      curProgramState = **(int **)(activeProgramIndexOrSymbolRecord * 4 + programTableB);
+      if (*(int *)(instOffsetC + instArrayB + 0x20) == 2) {
+        symbolOffset = *(int *)(instOffsetC + instArrayB + 0x24) * 0x54;
+        symbolRecord = symbolOffset + shader[8];
+        if ((*(int *)(symbolRecord + 0x28) == 0x87c1) && (*(char *)(symbolRecord + 0x3d) == '\0')) {
+          *(undefined4 *)(symbolOffset + shader[8]) = 0;
+          *(undefined1 *)(symbolRecord + 0x3d) = 1;
           shader[0x16] = shader[0x16] + 1;
-          if ((*(char *)(iVar14 + 0x44) == '\0') || (*(int *)(iVar14 + 0x48) == 0x12)) {
-            iVar16 = *(int *)(iVar14 + 0x24);
-            if (iVar16 == 0x87bf) {
+          if ((*(char *)(symbolRecord + 0x44) == '\0') || (*(int *)(symbolRecord + 0x48) == 0x12)) {
+            symbolDataTypeB = *(int *)(symbolRecord + 0x24);
+            if (symbolDataTypeB == 0x87bf) {
 LAB_0007209c:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar14 + 4) = iVar10;
-              iVar10 = iVar10 + 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(symbolRecord + 4) = nextInputReg;
+              nextInputReg = nextInputReg + 1;
             }
-            else if (iVar16 == 0x87c0) {
-              *(int *)(iVar14 + 0x1c) = iVar10;
-              *(int *)(iVar14 + 0x10) = iVar10;
-              *(int *)(iVar14 + 0x14) = iVar10;
-              *(int *)(iVar14 + 0x18) = iVar10;
-              iVar18 = iVar10 * 0x28;
-              iVar10 = iVar10 + 4;
+            else if (symbolDataTypeB == 0x87c0) {
+              *(int *)(symbolRecord + 0x1c) = nextInputReg;
+              *(int *)(symbolRecord + 0x10) = nextInputReg;
+              *(int *)(symbolRecord + 0x14) = nextInputReg;
+              *(int *)(symbolRecord + 0x18) = nextInputReg;
+              inputRecOffsetB = nextInputReg * 0x28;
+              nextInputReg = nextInputReg + 4;
             }
             else {
-              iVar18 = 0;
-              if (iVar16 == 0x87be) goto LAB_0007209c;
+              inputRecOffsetB = 0;
+              if (symbolDataTypeB == 0x87be) goto LAB_0007209c;
             }
-            iVar18 = *(int *)(iVar15 + 0x10) + iVar18;
+            inputRecOffsetB = *(int *)(curProgramState + 0x10) + inputRecOffsetB;
           }
           else {
-            iVar16 = iVar10;
-            switch(*(int *)(iVar14 + 0x48)) {
+            nextInputRegCandidate = nextInputReg;
+            switch(*(int *)(symbolRecord + 0x48)) {
             case 0:
-              iVar16 = iVar10 + 1;
-              iVar10 = 0;
-              iVar18 = 0;
-              *(undefined1 *)(iVar15 + 0x18) = 1;
-              *(undefined4 *)(iVar15 + 0x60) = 1;
-              *(undefined4 *)(iVar15 + 0xb8) = 0;
+              nextInputRegCandidate = nextInputReg + 1;
+              nextInputReg = 0;
+              inputRecOffsetB = 0;
+              *(undefined1 *)(curProgramState + 0x18) = 1;
+              *(undefined4 *)(curProgramState + 0x60) = 1;
+              *(undefined4 *)(curProgramState + 0xb8) = 0;
               break;
             case 1:
-              iVar18 = iVar10 * 0x28;
-              iVar16 = iVar10 + 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              nextInputRegCandidate = nextInputReg + 1;
               shader[0xc] = shader[0xc] | 8;
-              *(undefined4 *)(iVar15 + 100) = 1;
-              *(int *)(((unsigned char *)0x0000139c) + iVar15) = iVar10;
-              *(int *)(iVar15 + 0xbc) = iVar10;
+              *(undefined4 *)(curProgramState + 100) = 1;
+              *(int *)(((unsigned char *)0x0000139c) + curProgramState) = nextInputReg;
+              *(int *)(curProgramState + 0xbc) = nextInputReg;
               break;
             case 2:
-              iVar17 = *(int *)(iVar14 + 0x4c);
-              uVar24 = shader[0xc];
-              iVar18 = iVar10 * 0x28;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)((int)shader + iVar17 + 0x34) = 1;
-              shader[0xc] = uVar24 | 4;
-              *(int *)(((unsigned char *)0x000013a0) + iVar17 * 4 + iVar15) = iVar10;
-              iVar17 = (iVar17 + 10) * 4 + iVar15;
-              *(undefined4 *)(iVar17 + 0x60) = 1;
-              *(int *)(iVar17 + 0xb8) = iVar10;
+              stateIndex = *(int *)(symbolRecord + 0x4c);
+              inputMask = shader[0xc];
+              inputRecOffsetB = nextInputReg * 0x28;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)((int)shader + stateIndex + 0x34) = 1;
+              shader[0xc] = inputMask | 4;
+              *(int *)(((unsigned char *)0x000013a0) + stateIndex * 4 + curProgramState) = nextInputReg;
+              stateIndex = (stateIndex + 10) * 4 + curProgramState;
+              *(undefined4 *)(stateIndex + 0x60) = 1;
+              *(int *)(stateIndex + 0xb8) = nextInputReg;
               break;
             case 3:
-              iVar18 = iVar10 * 0x28;
-              iVar16 = iVar10 + 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              nextInputRegCandidate = nextInputReg + 1;
               shader[0xc] = shader[0xc] | 1;
-              *(undefined4 *)(iVar15 + 0x68) = 1;
-              *(int *)(((unsigned char *)0x00001388) + iVar15) = iVar10;
-              *(int *)(iVar15 + 0xc0) = iVar10;
+              *(undefined4 *)(curProgramState + 0x68) = 1;
+              *(int *)(((unsigned char *)0x00001388) + curProgramState) = nextInputReg;
+              *(int *)(curProgramState + 0xc0) = nextInputReg;
               break;
             case 4:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xc4) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x23) = 1;
-              *(undefined4 *)(iVar15 + 0x6c) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xc4) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x23) = 1;
+              *(undefined4 *)(curProgramState + 0x6c) = 1;
               break;
             case 5:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 200) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x24) = 1;
-              *(undefined4 *)(iVar15 + 0x70) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 200) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x24) = 1;
+              *(undefined4 *)(curProgramState + 0x70) = 1;
               break;
             case 6:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xcc) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x25) = 1;
-              *(undefined4 *)(iVar15 + 0x74) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xcc) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x25) = 1;
+              *(undefined4 *)(curProgramState + 0x74) = 1;
               break;
             case 7:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xd0) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x22) = 1;
-              *(undefined4 *)(iVar15 + 0x78) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xd0) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x22) = 1;
+              *(undefined4 *)(curProgramState + 0x78) = 1;
               break;
             case 8:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xd4) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x27) = 1;
-              *(undefined4 *)(iVar15 + 0x7c) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xd4) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x27) = 1;
+              *(undefined4 *)(curProgramState + 0x7c) = 1;
               break;
             case 9:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xd8) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x28) = 1;
-              *(undefined4 *)(iVar15 + 0x80) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xd8) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x28) = 1;
+              *(undefined4 *)(curProgramState + 0x80) = 1;
               break;
             case 10:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xdc) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x29) = 1;
-              *(undefined4 *)(iVar15 + 0x84) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xdc) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x29) = 1;
+              *(undefined4 *)(curProgramState + 0x84) = 1;
               break;
             case 0xb:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xd0) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x26) = 1;
-              *(undefined4 *)(iVar15 + 0x78) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xd0) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x26) = 1;
+              *(undefined4 *)(curProgramState + 0x78) = 1;
               break;
             case 0xc:
-              iVar17 = *(int *)(((unsigned char *)0x00001398) + iVar15);
-              if (*(int *)(((unsigned char *)0x00001398) + iVar15) == 0) {
-                *(int *)(((unsigned char *)0x00001398) + iVar15) = iVar10;
-                iVar16 = iVar10 + 1;
-                iVar17 = iVar10;
+              sharedInputReg = *(int *)(((unsigned char *)0x00001398) + curProgramState);
+              if (*(int *)(((unsigned char *)0x00001398) + curProgramState) == 0) {
+                *(int *)(((unsigned char *)0x00001398) + curProgramState) = nextInputReg;
+                nextInputRegCandidate = nextInputReg + 1;
+                sharedInputReg = nextInputReg;
               }
-              iVar18 = iVar17 * 0x28;
-              *(undefined4 *)(iVar14 + 8) = 2;
-              *(undefined4 *)(iVar15 + 0xa8) = 1;
-              *(int *)(iVar15 + 0x100) = iVar17;
-              iVar10 = iVar17;
+              inputRecOffsetB = sharedInputReg * 0x28;
+              *(undefined4 *)(symbolRecord + 8) = 2;
+              *(undefined4 *)(curProgramState + 0xa8) = 1;
+              *(int *)(curProgramState + 0x100) = sharedInputReg;
+              nextInputReg = sharedInputReg;
               break;
             case 0xd:
-              iVar17 = *(int *)(((unsigned char *)0x00001398) + iVar15);
-              if (*(int *)(((unsigned char *)0x00001398) + iVar15) == 0) {
-                *(int *)(((unsigned char *)0x00001398) + iVar15) = iVar10;
-                iVar16 = iVar10 + 1;
-                iVar17 = iVar10;
+              sharedInputReg = *(int *)(((unsigned char *)0x00001398) + curProgramState);
+              if (*(int *)(((unsigned char *)0x00001398) + curProgramState) == 0) {
+                *(int *)(((unsigned char *)0x00001398) + curProgramState) = nextInputReg;
+                nextInputRegCandidate = nextInputReg + 1;
+                sharedInputReg = nextInputReg;
               }
-              iVar18 = iVar17 * 0x28;
-              *(undefined4 *)(iVar14 + 8) = 3;
-              *(undefined4 *)(iVar15 + 0xa8) = 1;
-              *(int *)(iVar15 + 0x100) = iVar17;
-              iVar10 = iVar17;
+              inputRecOffsetB = sharedInputReg * 0x28;
+              *(undefined4 *)(symbolRecord + 8) = 3;
+              *(undefined4 *)(curProgramState + 0xa8) = 1;
+              *(int *)(curProgramState + 0x100) = sharedInputReg;
+              nextInputReg = sharedInputReg;
               break;
             case 0xe:
-              iVar18 = iVar10 * 0x28;
-              iVar16 = iVar10 + 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              nextInputRegCandidate = nextInputReg + 1;
               shader[0xc] = shader[0xc] | 2;
-              *(undefined4 *)(iVar15 + 0x6c) = 1;
-              *(int *)(((unsigned char *)0x0000138c) + iVar15) = iVar10;
-              *(int *)(iVar15 + 0xc4) = iVar10;
+              *(undefined4 *)(curProgramState + 0x6c) = 1;
+              *(int *)(((unsigned char *)0x0000138c) + curProgramState) = nextInputReg;
+              *(int *)(curProgramState + 0xc4) = nextInputReg;
               break;
             case 0xf:
-              iVar18 = iVar10 * 0x28;
-              iVar16 = iVar10 + 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              nextInputRegCandidate = nextInputReg + 1;
               shader[0xc] = shader[0xc] | 0x40;
-              *(int *)(((unsigned char *)0x00001390U) + iVar15) = iVar10;
-              *(int *)(iVar15 + 0x100) = iVar10;
-              *(undefined4 *)(iVar15 + 0xa8) = 1;
-              *(undefined4 *)(iVar14 + 8) = 1;
+              *(int *)(((unsigned char *)0x00001390U) + curProgramState) = nextInputReg;
+              *(int *)(curProgramState + 0x100) = nextInputReg;
+              *(undefined4 *)(curProgramState + 0xa8) = 1;
+              *(undefined4 *)(symbolRecord + 8) = 1;
               break;
             case 0x10:
-              iVar18 = iVar10 * 0x28;
-              iVar16 = iVar10 + 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              nextInputRegCandidate = nextInputReg + 1;
               shader[0xc] = shader[0xc] | 0x80;
-              *(undefined4 *)(iVar15 + 0xac) = 1;
-              *(int *)(((unsigned char *)0x00001394) + iVar15) = iVar10;
-              *(int *)(iVar15 + 0x104) = iVar10;
+              *(undefined4 *)(curProgramState + 0xac) = 1;
+              *(int *)(((unsigned char *)0x00001394) + curProgramState) = nextInputReg;
+              *(int *)(curProgramState + 0x104) = nextInputReg;
               break;
             default:
-              iVar18 = 0;
-              iVar10 = 0;
+              inputRecOffsetB = 0;
+              nextInputReg = 0;
             }
-            *(int *)(iVar14 + 4) = iVar10;
-            iVar18 = *(int *)(iVar15 + 0x10) + iVar18;
-            iVar10 = iVar16;
+            *(int *)(symbolRecord + 4) = nextInputReg;
+            inputRecOffsetB = *(int *)(curProgramState + 0x10) + inputRecOffsetB;
+            nextInputReg = nextInputRegCandidate;
           }
-          *(undefined1 *)(iVar18 + 0x10) = 1;
-          in_r7 = *(int *)(((unsigned char *)0x0000118c) + ctx);
-          iVar16 = *shader;
-          iVar18 = shader[6];
+          *(undefined1 *)(inputRecOffsetB + 0x10) = 1;
+          activeProgramIndexOrSymbolRecord = *(int *)(((unsigned char *)0x0000118c) + ctx);
+          programTableB = *shader;
+          instArrayB = shader[6];
         }
       }
-      iVar15 = **(int **)(in_r7 * 4 + iVar16);
-      if (*(int *)(iVar26 + iVar18 + 0x3c) == 2) {
-        iVar17 = *(int *)(iVar26 + iVar18 + 0x40) * 0x54;
-        iVar14 = iVar17 + shader[8];
-        if ((*(int *)(iVar14 + 0x28) == 0x87c1) && (*(char *)(iVar14 + 0x3d) == '\0')) {
-          *(undefined4 *)(iVar17 + shader[8]) = 0;
-          *(undefined1 *)(iVar14 + 0x3d) = 1;
+      curProgramState = **(int **)(activeProgramIndexOrSymbolRecord * 4 + programTableB);
+      if (*(int *)(instOffsetC + instArrayB + 0x3c) == 2) {
+        symbolOffset = *(int *)(instOffsetC + instArrayB + 0x40) * 0x54;
+        symbolRecord = symbolOffset + shader[8];
+        if ((*(int *)(symbolRecord + 0x28) == 0x87c1) && (*(char *)(symbolRecord + 0x3d) == '\0')) {
+          *(undefined4 *)(symbolOffset + shader[8]) = 0;
+          *(undefined1 *)(symbolRecord + 0x3d) = 1;
           shader[0x16] = shader[0x16] + 1;
-          if ((*(char *)(iVar14 + 0x44) == '\0') || (*(int *)(iVar14 + 0x48) == 0x12)) {
-            iVar16 = *(int *)(iVar14 + 0x24);
-            if (iVar16 == 0x87bf) {
+          if ((*(char *)(symbolRecord + 0x44) == '\0') || (*(int *)(symbolRecord + 0x48) == 0x12)) {
+            symbolDataTypeB = *(int *)(symbolRecord + 0x24);
+            if (symbolDataTypeB == 0x87bf) {
 LAB_000724bc:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar14 + 4) = iVar10;
-              iVar10 = iVar10 + 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(symbolRecord + 4) = nextInputReg;
+              nextInputReg = nextInputReg + 1;
             }
-            else if (iVar16 == 0x87c0) {
-              *(int *)(iVar14 + 0x1c) = iVar10;
-              *(int *)(iVar14 + 0x10) = iVar10;
-              *(int *)(iVar14 + 0x14) = iVar10;
-              *(int *)(iVar14 + 0x18) = iVar10;
-              iVar18 = iVar10 * 0x28;
-              iVar10 = iVar10 + 4;
+            else if (symbolDataTypeB == 0x87c0) {
+              *(int *)(symbolRecord + 0x1c) = nextInputReg;
+              *(int *)(symbolRecord + 0x10) = nextInputReg;
+              *(int *)(symbolRecord + 0x14) = nextInputReg;
+              *(int *)(symbolRecord + 0x18) = nextInputReg;
+              inputRecOffsetB = nextInputReg * 0x28;
+              nextInputReg = nextInputReg + 4;
             }
             else {
-              iVar18 = 0;
-              if (iVar16 == 0x87be) goto LAB_000724bc;
+              inputRecOffsetB = 0;
+              if (symbolDataTypeB == 0x87be) goto LAB_000724bc;
             }
-            iVar18 = *(int *)(iVar15 + 0x10) + iVar18;
+            inputRecOffsetB = *(int *)(curProgramState + 0x10) + inputRecOffsetB;
           }
           else {
-            iVar16 = iVar10;
-            switch(*(int *)(iVar14 + 0x48)) {
+            nextInputRegCandidate = nextInputReg;
+            switch(*(int *)(symbolRecord + 0x48)) {
             case 0:
-              iVar16 = iVar10 + 1;
-              iVar10 = 0;
-              iVar18 = 0;
-              *(undefined1 *)(iVar15 + 0x18) = 1;
-              *(undefined4 *)(iVar15 + 0x60) = 1;
-              *(undefined4 *)(iVar15 + 0xb8) = 0;
+              nextInputRegCandidate = nextInputReg + 1;
+              nextInputReg = 0;
+              inputRecOffsetB = 0;
+              *(undefined1 *)(curProgramState + 0x18) = 1;
+              *(undefined4 *)(curProgramState + 0x60) = 1;
+              *(undefined4 *)(curProgramState + 0xb8) = 0;
               break;
             case 1:
-              iVar18 = iVar10 * 0x28;
-              iVar16 = iVar10 + 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              nextInputRegCandidate = nextInputReg + 1;
               shader[0xc] = shader[0xc] | 8;
-              *(undefined4 *)(iVar15 + 100) = 1;
-              *(int *)(((unsigned char *)0x0000139c) + iVar15) = iVar10;
-              *(int *)(iVar15 + 0xbc) = iVar10;
+              *(undefined4 *)(curProgramState + 100) = 1;
+              *(int *)(((unsigned char *)0x0000139c) + curProgramState) = nextInputReg;
+              *(int *)(curProgramState + 0xbc) = nextInputReg;
               break;
             case 2:
-              iVar17 = *(int *)(iVar14 + 0x4c);
-              uVar24 = shader[0xc];
-              iVar18 = iVar10 * 0x28;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)((int)shader + iVar17 + 0x34) = 1;
-              shader[0xc] = uVar24 | 4;
-              *(int *)(((unsigned char *)0x000013a0) + iVar17 * 4 + iVar15) = iVar10;
-              iVar17 = (iVar17 + 10) * 4 + iVar15;
-              *(undefined4 *)(iVar17 + 0x60) = 1;
-              *(int *)(iVar17 + 0xb8) = iVar10;
+              stateIndex = *(int *)(symbolRecord + 0x4c);
+              inputMask = shader[0xc];
+              inputRecOffsetB = nextInputReg * 0x28;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)((int)shader + stateIndex + 0x34) = 1;
+              shader[0xc] = inputMask | 4;
+              *(int *)(((unsigned char *)0x000013a0) + stateIndex * 4 + curProgramState) = nextInputReg;
+              stateIndex = (stateIndex + 10) * 4 + curProgramState;
+              *(undefined4 *)(stateIndex + 0x60) = 1;
+              *(int *)(stateIndex + 0xb8) = nextInputReg;
               break;
             case 3:
-              iVar18 = iVar10 * 0x28;
-              iVar16 = iVar10 + 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              nextInputRegCandidate = nextInputReg + 1;
               shader[0xc] = shader[0xc] | 1;
-              *(undefined4 *)(iVar15 + 0x68) = 1;
-              *(int *)(((unsigned char *)0x00001388) + iVar15) = iVar10;
-              *(int *)(iVar15 + 0xc0) = iVar10;
+              *(undefined4 *)(curProgramState + 0x68) = 1;
+              *(int *)(((unsigned char *)0x00001388) + curProgramState) = nextInputReg;
+              *(int *)(curProgramState + 0xc0) = nextInputReg;
               break;
             case 4:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xc4) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x23) = 1;
-              *(undefined4 *)(iVar15 + 0x6c) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xc4) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x23) = 1;
+              *(undefined4 *)(curProgramState + 0x6c) = 1;
               break;
             case 5:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 200) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x24) = 1;
-              *(undefined4 *)(iVar15 + 0x70) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 200) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x24) = 1;
+              *(undefined4 *)(curProgramState + 0x70) = 1;
               break;
             case 6:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xcc) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x25) = 1;
-              *(undefined4 *)(iVar15 + 0x74) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xcc) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x25) = 1;
+              *(undefined4 *)(curProgramState + 0x74) = 1;
               break;
             case 7:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xd0) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x22) = 1;
-              *(undefined4 *)(iVar15 + 0x78) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xd0) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x22) = 1;
+              *(undefined4 *)(curProgramState + 0x78) = 1;
               break;
             case 8:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xd4) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x27) = 1;
-              *(undefined4 *)(iVar15 + 0x7c) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xd4) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x27) = 1;
+              *(undefined4 *)(curProgramState + 0x7c) = 1;
               break;
             case 9:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xd8) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x28) = 1;
-              *(undefined4 *)(iVar15 + 0x80) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xd8) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x28) = 1;
+              *(undefined4 *)(curProgramState + 0x80) = 1;
               break;
             case 10:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xdc) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x29) = 1;
-              *(undefined4 *)(iVar15 + 0x84) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xdc) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x29) = 1;
+              *(undefined4 *)(curProgramState + 0x84) = 1;
               break;
             case 0xb:
-              iVar18 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xd0) = iVar10;
-              iVar16 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x26) = 1;
-              *(undefined4 *)(iVar15 + 0x78) = 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xd0) = nextInputReg;
+              nextInputRegCandidate = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x26) = 1;
+              *(undefined4 *)(curProgramState + 0x78) = 1;
               break;
             case 0xc:
-              iVar17 = *(int *)(((unsigned char *)0x00001398) + iVar15);
-              if (*(int *)(((unsigned char *)0x00001398) + iVar15) == 0) {
-                *(int *)(((unsigned char *)0x00001398) + iVar15) = iVar10;
-                iVar16 = iVar10 + 1;
-                iVar17 = iVar10;
+              sharedInputReg = *(int *)(((unsigned char *)0x00001398) + curProgramState);
+              if (*(int *)(((unsigned char *)0x00001398) + curProgramState) == 0) {
+                *(int *)(((unsigned char *)0x00001398) + curProgramState) = nextInputReg;
+                nextInputRegCandidate = nextInputReg + 1;
+                sharedInputReg = nextInputReg;
               }
-              iVar18 = iVar17 * 0x28;
-              *(undefined4 *)(iVar14 + 8) = 2;
-              *(undefined4 *)(iVar15 + 0xa8) = 1;
-              *(int *)(iVar15 + 0x100) = iVar17;
-              iVar10 = iVar17;
+              inputRecOffsetB = sharedInputReg * 0x28;
+              *(undefined4 *)(symbolRecord + 8) = 2;
+              *(undefined4 *)(curProgramState + 0xa8) = 1;
+              *(int *)(curProgramState + 0x100) = sharedInputReg;
+              nextInputReg = sharedInputReg;
               break;
             case 0xd:
-              iVar17 = *(int *)(((unsigned char *)0x00001398) + iVar15);
-              if (*(int *)(((unsigned char *)0x00001398) + iVar15) == 0) {
-                *(int *)(((unsigned char *)0x00001398) + iVar15) = iVar10;
-                iVar16 = iVar10 + 1;
-                iVar17 = iVar10;
+              sharedInputReg = *(int *)(((unsigned char *)0x00001398) + curProgramState);
+              if (*(int *)(((unsigned char *)0x00001398) + curProgramState) == 0) {
+                *(int *)(((unsigned char *)0x00001398) + curProgramState) = nextInputReg;
+                nextInputRegCandidate = nextInputReg + 1;
+                sharedInputReg = nextInputReg;
               }
-              iVar18 = iVar17 * 0x28;
-              *(undefined4 *)(iVar14 + 8) = 3;
-              *(undefined4 *)(iVar15 + 0xa8) = 1;
-              *(int *)(iVar15 + 0x100) = iVar17;
-              iVar10 = iVar17;
+              inputRecOffsetB = sharedInputReg * 0x28;
+              *(undefined4 *)(symbolRecord + 8) = 3;
+              *(undefined4 *)(curProgramState + 0xa8) = 1;
+              *(int *)(curProgramState + 0x100) = sharedInputReg;
+              nextInputReg = sharedInputReg;
               break;
             case 0xe:
-              iVar18 = iVar10 * 0x28;
-              iVar16 = iVar10 + 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              nextInputRegCandidate = nextInputReg + 1;
               shader[0xc] = shader[0xc] | 2;
-              *(undefined4 *)(iVar15 + 0x6c) = 1;
-              *(int *)(((unsigned char *)0x0000138c) + iVar15) = iVar10;
-              *(int *)(iVar15 + 0xc4) = iVar10;
+              *(undefined4 *)(curProgramState + 0x6c) = 1;
+              *(int *)(((unsigned char *)0x0000138c) + curProgramState) = nextInputReg;
+              *(int *)(curProgramState + 0xc4) = nextInputReg;
               break;
             case 0xf:
-              iVar18 = iVar10 * 0x28;
-              iVar16 = iVar10 + 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              nextInputRegCandidate = nextInputReg + 1;
               shader[0xc] = shader[0xc] | 0x40;
-              *(int *)(((unsigned char *)0x00001390U) + iVar15) = iVar10;
-              *(int *)(iVar15 + 0x100) = iVar10;
-              *(undefined4 *)(iVar15 + 0xa8) = 1;
-              *(undefined4 *)(iVar14 + 8) = 1;
+              *(int *)(((unsigned char *)0x00001390U) + curProgramState) = nextInputReg;
+              *(int *)(curProgramState + 0x100) = nextInputReg;
+              *(undefined4 *)(curProgramState + 0xa8) = 1;
+              *(undefined4 *)(symbolRecord + 8) = 1;
               break;
             case 0x10:
-              iVar18 = iVar10 * 0x28;
-              iVar16 = iVar10 + 1;
+              inputRecOffsetB = nextInputReg * 0x28;
+              nextInputRegCandidate = nextInputReg + 1;
               shader[0xc] = shader[0xc] | 0x80;
-              *(undefined4 *)(iVar15 + 0xac) = 1;
-              *(int *)(((unsigned char *)0x00001394) + iVar15) = iVar10;
-              *(int *)(iVar15 + 0x104) = iVar10;
+              *(undefined4 *)(curProgramState + 0xac) = 1;
+              *(int *)(((unsigned char *)0x00001394) + curProgramState) = nextInputReg;
+              *(int *)(curProgramState + 0x104) = nextInputReg;
               break;
             default:
-              iVar18 = 0;
-              iVar10 = 0;
+              inputRecOffsetB = 0;
+              nextInputReg = 0;
             }
-            *(int *)(iVar14 + 4) = iVar10;
-            iVar18 = *(int *)(iVar15 + 0x10) + iVar18;
-            iVar10 = iVar16;
+            *(int *)(symbolRecord + 4) = nextInputReg;
+            inputRecOffsetB = *(int *)(curProgramState + 0x10) + inputRecOffsetB;
+            nextInputReg = nextInputRegCandidate;
           }
-          *(undefined1 *)(iVar18 + 0x10) = 1;
-          in_r7 = *(int *)(((unsigned char *)0x0000118c) + ctx);
-          iVar16 = *shader;
-          iVar18 = shader[6];
+          *(undefined1 *)(inputRecOffsetB + 0x10) = 1;
+          activeProgramIndexOrSymbolRecord = *(int *)(((unsigned char *)0x0000118c) + ctx);
+          programTableB = *shader;
+          instArrayB = shader[6];
         }
       }
-      iVar15 = **(int **)(in_r7 * 4 + iVar16);
-      if (*(int *)(iVar26 + iVar18 + 0x58) == 2) {
-        iVar26 = *(int *)(iVar26 + iVar18 + 0x5c) * 0x54;
-        in_r7 = iVar26 + shader[8];
-        if ((*(int *)(in_r7 + 0x28) == 0x87c1) && (*(char *)(in_r7 + 0x3d) == '\0')) {
-          *(undefined4 *)(iVar26 + shader[8]) = 0;
-          *(undefined1 *)(in_r7 + 0x3d) = 1;
+      curProgramState = **(int **)(activeProgramIndexOrSymbolRecord * 4 + programTableB);
+      if (*(int *)(instOffsetC + instArrayB + 0x58) == 2) {
+        instOffsetC = *(int *)(instOffsetC + instArrayB + 0x5c) * 0x54;
+        activeProgramIndexOrSymbolRecord = instOffsetC + shader[8];
+        if ((*(int *)(activeProgramIndexOrSymbolRecord + 0x28) == 0x87c1) && (*(char *)(activeProgramIndexOrSymbolRecord + 0x3d) == '\0')) {
+          *(undefined4 *)(instOffsetC + shader[8]) = 0;
+          *(undefined1 *)(activeProgramIndexOrSymbolRecord + 0x3d) = 1;
           shader[0x16] = shader[0x16] + 1;
-          if ((*(char *)(in_r7 + 0x44) == '\0') || (*(int *)(in_r7 + 0x48) == 0x12)) {
-            iVar26 = *(int *)(in_r7 + 0x24);
-            if (iVar26 == 0x87bf) {
+          if ((*(char *)(activeProgramIndexOrSymbolRecord + 0x44) == '\0') || (*(int *)(activeProgramIndexOrSymbolRecord + 0x48) == 0x12)) {
+            symbolDataTypeC = *(int *)(activeProgramIndexOrSymbolRecord + 0x24);
+            if (symbolDataTypeC == 0x87bf) {
 LAB_000728e4:
-              iVar16 = iVar10 * 0x28;
-              *(int *)(in_r7 + 4) = iVar10;
-              iVar10 = iVar10 + 1;
+              inputRecOffset = nextInputReg * 0x28;
+              *(int *)(activeProgramIndexOrSymbolRecord + 4) = nextInputReg;
+              nextInputReg = nextInputReg + 1;
             }
-            else if (iVar26 == 0x87c0) {
-              *(int *)(in_r7 + 0x1c) = iVar10;
-              *(int *)(in_r7 + 0x10) = iVar10;
-              *(int *)(in_r7 + 0x14) = iVar10;
-              *(int *)(in_r7 + 0x18) = iVar10;
-              iVar16 = iVar10 * 0x28;
-              iVar10 = iVar10 + 4;
+            else if (symbolDataTypeC == 0x87c0) {
+              *(int *)(activeProgramIndexOrSymbolRecord + 0x1c) = nextInputReg;
+              *(int *)(activeProgramIndexOrSymbolRecord + 0x10) = nextInputReg;
+              *(int *)(activeProgramIndexOrSymbolRecord + 0x14) = nextInputReg;
+              *(int *)(activeProgramIndexOrSymbolRecord + 0x18) = nextInputReg;
+              inputRecOffset = nextInputReg * 0x28;
+              nextInputReg = nextInputReg + 4;
             }
             else {
-              iVar16 = 0;
-              if (iVar26 == 0x87be) goto LAB_000728e4;
+              inputRecOffset = 0;
+              if (symbolDataTypeC == 0x87be) goto LAB_000728e4;
             }
-            *(undefined1 *)(*(int *)(iVar15 + 0x10) + iVar16 + 0x10) = 1;
+            *(undefined1 *)(*(int *)(curProgramState + 0x10) + inputRecOffset + 0x10) = 1;
           }
           else {
-            iVar26 = iVar10;
-            switch(*(int *)(in_r7 + 0x48)) {
+            nextInputRegCandidateB = nextInputReg;
+            switch(*(int *)(activeProgramIndexOrSymbolRecord + 0x48)) {
             case 0:
-              iVar26 = iVar10 + 1;
-              iVar10 = 0;
-              iVar16 = 0;
-              *(undefined1 *)(iVar15 + 0x18) = 1;
-              *(undefined4 *)(iVar15 + 0x60) = 1;
-              *(undefined4 *)(iVar15 + 0xb8) = 0;
+              nextInputRegCandidateB = nextInputReg + 1;
+              nextInputReg = 0;
+              inputRecOffset = 0;
+              *(undefined1 *)(curProgramState + 0x18) = 1;
+              *(undefined4 *)(curProgramState + 0x60) = 1;
+              *(undefined4 *)(curProgramState + 0xb8) = 0;
               break;
             case 1:
-              iVar16 = iVar10 * 0x28;
-              iVar26 = iVar10 + 1;
+              inputRecOffset = nextInputReg * 0x28;
+              nextInputRegCandidateB = nextInputReg + 1;
               shader[0xc] = shader[0xc] | 8;
-              *(undefined4 *)(iVar15 + 100) = 1;
-              *(int *)(((unsigned char *)0x0000139c) + iVar15) = iVar10;
-              *(int *)(iVar15 + 0xbc) = iVar10;
+              *(undefined4 *)(curProgramState + 100) = 1;
+              *(int *)(((unsigned char *)0x0000139c) + curProgramState) = nextInputReg;
+              *(int *)(curProgramState + 0xbc) = nextInputReg;
               break;
             case 2:
-              iVar18 = *(int *)(in_r7 + 0x4c);
-              uVar24 = shader[0xc];
-              iVar16 = iVar10 * 0x28;
-              iVar26 = iVar10 + 1;
-              *(undefined1 *)((int)shader + iVar18 + 0x34) = 1;
-              shader[0xc] = uVar24 | 4;
-              *(int *)(((unsigned char *)0x000013a0) + iVar18 * 4 + iVar15) = iVar10;
-              iVar18 = (iVar18 + 10) * 4 + iVar15;
-              *(undefined4 *)(iVar18 + 0x60) = 1;
-              *(int *)(iVar18 + 0xb8) = iVar10;
+              stateIndexB = *(int *)(activeProgramIndexOrSymbolRecord + 0x4c);
+              inputMask = shader[0xc];
+              inputRecOffset = nextInputReg * 0x28;
+              nextInputRegCandidateB = nextInputReg + 1;
+              *(undefined1 *)((int)shader + stateIndexB + 0x34) = 1;
+              shader[0xc] = inputMask | 4;
+              *(int *)(((unsigned char *)0x000013a0) + stateIndexB * 4 + curProgramState) = nextInputReg;
+              stateIndexB = (stateIndexB + 10) * 4 + curProgramState;
+              *(undefined4 *)(stateIndexB + 0x60) = 1;
+              *(int *)(stateIndexB + 0xb8) = nextInputReg;
               break;
             case 3:
-              iVar16 = iVar10 * 0x28;
-              iVar26 = iVar10 + 1;
+              inputRecOffset = nextInputReg * 0x28;
+              nextInputRegCandidateB = nextInputReg + 1;
               shader[0xc] = shader[0xc] | 1;
-              *(undefined4 *)(iVar15 + 0x68) = 1;
-              *(int *)(((unsigned char *)0x00001388) + iVar15) = iVar10;
-              *(int *)(iVar15 + 0xc0) = iVar10;
+              *(undefined4 *)(curProgramState + 0x68) = 1;
+              *(int *)(((unsigned char *)0x00001388) + curProgramState) = nextInputReg;
+              *(int *)(curProgramState + 0xc0) = nextInputReg;
               break;
             case 4:
-              iVar16 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xc4) = iVar10;
-              iVar26 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x23) = 1;
-              *(undefined4 *)(iVar15 + 0x6c) = 1;
+              inputRecOffset = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xc4) = nextInputReg;
+              nextInputRegCandidateB = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x23) = 1;
+              *(undefined4 *)(curProgramState + 0x6c) = 1;
               break;
             case 5:
-              iVar16 = iVar10 * 0x28;
-              *(int *)(iVar15 + 200) = iVar10;
-              iVar26 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x24) = 1;
-              *(undefined4 *)(iVar15 + 0x70) = 1;
+              inputRecOffset = nextInputReg * 0x28;
+              *(int *)(curProgramState + 200) = nextInputReg;
+              nextInputRegCandidateB = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x24) = 1;
+              *(undefined4 *)(curProgramState + 0x70) = 1;
               break;
             case 6:
-              iVar16 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xcc) = iVar10;
-              iVar26 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x25) = 1;
-              *(undefined4 *)(iVar15 + 0x74) = 1;
+              inputRecOffset = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xcc) = nextInputReg;
+              nextInputRegCandidateB = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x25) = 1;
+              *(undefined4 *)(curProgramState + 0x74) = 1;
               break;
             case 7:
-              iVar16 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xd0) = iVar10;
-              iVar26 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x22) = 1;
-              *(undefined4 *)(iVar15 + 0x78) = 1;
+              inputRecOffset = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xd0) = nextInputReg;
+              nextInputRegCandidateB = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x22) = 1;
+              *(undefined4 *)(curProgramState + 0x78) = 1;
               break;
             case 8:
-              iVar16 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xd4) = iVar10;
-              iVar26 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x27) = 1;
-              *(undefined4 *)(iVar15 + 0x7c) = 1;
+              inputRecOffset = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xd4) = nextInputReg;
+              nextInputRegCandidateB = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x27) = 1;
+              *(undefined4 *)(curProgramState + 0x7c) = 1;
               break;
             case 9:
-              iVar16 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xd8) = iVar10;
-              iVar26 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x28) = 1;
-              *(undefined4 *)(iVar15 + 0x80) = 1;
+              inputRecOffset = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xd8) = nextInputReg;
+              nextInputRegCandidateB = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x28) = 1;
+              *(undefined4 *)(curProgramState + 0x80) = 1;
               break;
             case 10:
-              iVar16 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xdc) = iVar10;
-              iVar26 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x29) = 1;
-              *(undefined4 *)(iVar15 + 0x84) = 1;
+              inputRecOffset = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xdc) = nextInputReg;
+              nextInputRegCandidateB = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x29) = 1;
+              *(undefined4 *)(curProgramState + 0x84) = 1;
               break;
             case 0xb:
-              iVar16 = iVar10 * 0x28;
-              *(int *)(iVar15 + 0xd0) = iVar10;
-              iVar26 = iVar10 + 1;
-              *(undefined1 *)(iVar15 + 0x26) = 1;
-              *(undefined4 *)(iVar15 + 0x78) = 1;
+              inputRecOffset = nextInputReg * 0x28;
+              *(int *)(curProgramState + 0xd0) = nextInputReg;
+              nextInputRegCandidateB = nextInputReg + 1;
+              *(undefined1 *)(curProgramState + 0x26) = 1;
+              *(undefined4 *)(curProgramState + 0x78) = 1;
               break;
             case 0xc:
-              iVar18 = *(int *)(((unsigned char *)0x00001398) + iVar15);
-              if (*(int *)(((unsigned char *)0x00001398) + iVar15) == 0) {
-                *(int *)(((unsigned char *)0x00001398) + iVar15) = iVar10;
-                iVar26 = iVar10 + 1;
-                iVar18 = iVar10;
+              sharedInputRegB = *(int *)(((unsigned char *)0x00001398) + curProgramState);
+              if (*(int *)(((unsigned char *)0x00001398) + curProgramState) == 0) {
+                *(int *)(((unsigned char *)0x00001398) + curProgramState) = nextInputReg;
+                nextInputRegCandidateB = nextInputReg + 1;
+                sharedInputRegB = nextInputReg;
               }
-              iVar16 = iVar18 * 0x28;
-              *(undefined4 *)(in_r7 + 8) = 2;
-              *(undefined4 *)(iVar15 + 0xa8) = 1;
-              *(int *)(iVar15 + 0x100) = iVar18;
-              iVar10 = iVar18;
+              inputRecOffset = sharedInputRegB * 0x28;
+              *(undefined4 *)(activeProgramIndexOrSymbolRecord + 8) = 2;
+              *(undefined4 *)(curProgramState + 0xa8) = 1;
+              *(int *)(curProgramState + 0x100) = sharedInputRegB;
+              nextInputReg = sharedInputRegB;
               break;
             case 0xd:
-              iVar18 = *(int *)(((unsigned char *)0x00001398) + iVar15);
-              if (*(int *)(((unsigned char *)0x00001398) + iVar15) == 0) {
-                *(int *)(((unsigned char *)0x00001398) + iVar15) = iVar10;
-                iVar26 = iVar10 + 1;
-                iVar18 = iVar10;
+              sharedInputRegB = *(int *)(((unsigned char *)0x00001398) + curProgramState);
+              if (*(int *)(((unsigned char *)0x00001398) + curProgramState) == 0) {
+                *(int *)(((unsigned char *)0x00001398) + curProgramState) = nextInputReg;
+                nextInputRegCandidateB = nextInputReg + 1;
+                sharedInputRegB = nextInputReg;
               }
-              iVar16 = iVar18 * 0x28;
-              *(undefined4 *)(in_r7 + 8) = 3;
-              *(undefined4 *)(iVar15 + 0xa8) = 1;
-              *(int *)(iVar15 + 0x100) = iVar18;
-              iVar10 = iVar18;
+              inputRecOffset = sharedInputRegB * 0x28;
+              *(undefined4 *)(activeProgramIndexOrSymbolRecord + 8) = 3;
+              *(undefined4 *)(curProgramState + 0xa8) = 1;
+              *(int *)(curProgramState + 0x100) = sharedInputRegB;
+              nextInputReg = sharedInputRegB;
               break;
             case 0xe:
-              iVar16 = iVar10 * 0x28;
-              iVar26 = iVar10 + 1;
+              inputRecOffset = nextInputReg * 0x28;
+              nextInputRegCandidateB = nextInputReg + 1;
               shader[0xc] = shader[0xc] | 2;
-              *(undefined4 *)(iVar15 + 0x6c) = 1;
-              *(int *)(((unsigned char *)0x0000138c) + iVar15) = iVar10;
-              *(int *)(iVar15 + 0xc4) = iVar10;
+              *(undefined4 *)(curProgramState + 0x6c) = 1;
+              *(int *)(((unsigned char *)0x0000138c) + curProgramState) = nextInputReg;
+              *(int *)(curProgramState + 0xc4) = nextInputReg;
               break;
             case 0xf:
-              iVar16 = iVar10 * 0x28;
-              iVar26 = iVar10 + 1;
+              inputRecOffset = nextInputReg * 0x28;
+              nextInputRegCandidateB = nextInputReg + 1;
               shader[0xc] = shader[0xc] | 0x40;
-              *(int *)(((unsigned char *)0x00001390U) + iVar15) = iVar10;
-              *(int *)(iVar15 + 0x100) = iVar10;
-              *(undefined4 *)(iVar15 + 0xa8) = 1;
-              *(undefined4 *)(in_r7 + 8) = 1;
+              *(int *)(((unsigned char *)0x00001390U) + curProgramState) = nextInputReg;
+              *(int *)(curProgramState + 0x100) = nextInputReg;
+              *(undefined4 *)(curProgramState + 0xa8) = 1;
+              *(undefined4 *)(activeProgramIndexOrSymbolRecord + 8) = 1;
               break;
             case 0x10:
-              iVar16 = iVar10 * 0x28;
-              iVar26 = iVar10 + 1;
+              inputRecOffset = nextInputReg * 0x28;
+              nextInputRegCandidateB = nextInputReg + 1;
               shader[0xc] = shader[0xc] | 0x80;
-              *(undefined4 *)(iVar15 + 0xac) = 1;
-              *(int *)(((unsigned char *)0x00001394) + iVar15) = iVar10;
-              *(int *)(iVar15 + 0x104) = iVar10;
+              *(undefined4 *)(curProgramState + 0xac) = 1;
+              *(int *)(((unsigned char *)0x00001394) + curProgramState) = nextInputReg;
+              *(int *)(curProgramState + 0x104) = nextInputReg;
               break;
             default:
-              iVar16 = 0;
-              iVar10 = 0;
+              inputRecOffset = 0;
+              nextInputReg = 0;
             }
-            *(int *)(in_r7 + 4) = iVar10;
-            *(undefined1 *)(*(int *)(iVar15 + 0x10) + iVar16 + 0x10) = 1;
-            iVar10 = iVar26;
+            *(int *)(activeProgramIndexOrSymbolRecord + 4) = nextInputReg;
+            *(undefined1 *)(*(int *)(curProgramState + 0x10) + inputRecOffset + 0x10) = 1;
+            nextInputReg = nextInputRegCandidateB;
           }
         }
       }
-      uVar13 = uVar13 + 1;
-    } while (uVar13 < (uint)shader[5]);
+      instIndex = instIndex + 1;
+    } while (instIndex < (uint)shader[5]);
   }
-  *(int *)(iVar22 + 0x130) = iVar10;
+  *(int *)(programStateAlias + 0x130) = nextInputReg;
   if (shader[5] != 0) {
-    uVar13 = 0;
-    iVar10 = 0;
+    instIndex = 0;
+    instOffset = 0;
     do {
-      iVar16 = shader[6];
-      in_r7 = *(int *)(((unsigned char *)0x0000118c) + ctx);
-      iVar15 = *shader;
-      iVar26 = **(int **)(in_r7 * 4 + iVar15);
-      if (*(int *)(iVar10 + iVar16 + 0x20) == 2) {
-        iVar18 = shader[8];
-        iVar17 = *(int *)(iVar10 + iVar16 + 0x24) * 0x54;
-        iVar14 = iVar17 + iVar18;
-        if ((*(int *)(iVar14 + 0x28) == 0x87c1) &&
-           ((((*(char *)(iVar14 + 0x44) == '\0' || (*(int *)(iVar14 + 0x48) == 0x12)) &&
-             (iVar14 != 0)) && (*(int *)(iVar17 + iVar18) == 0)))) {
-          *(undefined1 *)(iVar14 + 0x3d) = 1;
-          if (*(int *)(iVar14 + 0x24) == 0x87bf) {
-            iVar15 = ((int (*)())evsFindFreeOutputRegister)(iVar26);
-            iVar26 = iVar15 * 4 + iVar26;
-            *(undefined4 *)(iVar26 + 0xb8) = *(undefined4 *)(iVar14 + 4);
-            *(undefined4 *)(iVar26 + 0x60) = 1;
-            uVar12 = (**(code **)(((unsigned char *)0x000012a8) + ctx))(ctx,iVar15,4);
-            *(undefined4 *)(iVar17 + iVar18) = uVar12;
-            in_r7 = *(int *)(((unsigned char *)0x0000118c) + ctx);
-            iVar15 = *shader;
-            iVar16 = shader[6];
+      instArray = shader[6];
+      activeProgramIndexOrSymbolRecord = *(int *)(((unsigned char *)0x0000118c) + ctx);
+      programTable = *shader;
+      curProgramStateB = **(int **)(activeProgramIndexOrSymbolRecord * 4 + programTable);
+      if (*(int *)(instOffset + instArray + 0x20) == 2) {
+        symbolRecordsB = shader[8];
+        symbolOffset = *(int *)(instOffset + instArray + 0x24) * 0x54;
+        symbolRecord = symbolOffset + symbolRecordsB;
+        if ((*(int *)(symbolRecord + 0x28) == 0x87c1) &&
+           ((((*(char *)(symbolRecord + 0x44) == '\0' || (*(int *)(symbolRecord + 0x48) == 0x12)) &&
+             (symbolRecord != 0)) && (*(int *)(symbolOffset + symbolRecordsB) == 0)))) {
+          *(undefined1 *)(symbolRecord + 0x3d) = 1;
+          if (*(int *)(symbolRecord + 0x24) == 0x87bf) {
+            freeOutputReg01 = ((int (*)())evsFindFreeOutputRegister)(curProgramStateB);
+            curProgramStateB = freeOutputReg01 * 4 + curProgramStateB;
+            *(undefined4 *)(curProgramStateB + 0xb8) = *(undefined4 *)(symbolRecord + 4);
+            *(undefined4 *)(curProgramStateB + 0x60) = 1;
+            allocatedHandle = (**(code **)(((unsigned char *)0x000012a8) + ctx))(ctx,freeOutputReg01,4);
+            *(undefined4 *)(symbolOffset + symbolRecordsB) = allocatedHandle;
+            activeProgramIndexOrSymbolRecord = *(int *)(((unsigned char *)0x0000118c) + ctx);
+            programTable = *shader;
+            instArray = shader[6];
           }
           else {
-            in_r7 = *(int *)(((unsigned char *)0x0000118c) + ctx);
-            iVar15 = *shader;
-            iVar16 = shader[6];
+            activeProgramIndexOrSymbolRecord = *(int *)(((unsigned char *)0x0000118c) + ctx);
+            programTable = *shader;
+            instArray = shader[6];
           }
         }
       }
-      iVar26 = **(int **)(in_r7 * 4 + iVar15);
-      if (*(int *)(iVar10 + iVar16 + 0x3c) == 2) {
-        iVar18 = shader[8];
-        iVar17 = *(int *)(iVar10 + iVar16 + 0x40) * 0x54;
-        iVar14 = iVar17 + iVar18;
-        if ((((*(int *)(iVar14 + 0x28) == 0x87c1) &&
-             ((*(char *)(iVar14 + 0x44) == '\0' || (*(int *)(iVar14 + 0x48) == 0x12)))) &&
-            (iVar14 != 0)) && (*(int *)(iVar17 + iVar18) == 0)) {
-          *(undefined1 *)(iVar14 + 0x3d) = 1;
-          if (*(int *)(iVar14 + 0x24) == 0x87bf) {
-            iVar15 = ((int (*)())evsFindFreeOutputRegister)(iVar26);
-            iVar26 = iVar15 * 4 + iVar26;
-            *(undefined4 *)(iVar26 + 0xb8) = *(undefined4 *)(iVar14 + 4);
-            *(undefined4 *)(iVar26 + 0x60) = 1;
-            uVar12 = (**(code **)(((unsigned char *)0x000012a8) + ctx))(ctx,iVar15,4);
-            *(undefined4 *)(iVar17 + iVar18) = uVar12;
-            in_r7 = *(int *)(((unsigned char *)0x0000118c) + ctx);
-            iVar15 = *shader;
-            iVar16 = shader[6];
+      curProgramStateB = **(int **)(activeProgramIndexOrSymbolRecord * 4 + programTable);
+      if (*(int *)(instOffset + instArray + 0x3c) == 2) {
+        symbolRecordsB = shader[8];
+        symbolOffset = *(int *)(instOffset + instArray + 0x40) * 0x54;
+        symbolRecord = symbolOffset + symbolRecordsB;
+        if ((((*(int *)(symbolRecord + 0x28) == 0x87c1) &&
+             ((*(char *)(symbolRecord + 0x44) == '\0' || (*(int *)(symbolRecord + 0x48) == 0x12)))) &&
+            (symbolRecord != 0)) && (*(int *)(symbolOffset + symbolRecordsB) == 0)) {
+          *(undefined1 *)(symbolRecord + 0x3d) = 1;
+          if (*(int *)(symbolRecord + 0x24) == 0x87bf) {
+            freeOutputReg01 = ((int (*)())evsFindFreeOutputRegister)(curProgramStateB);
+            curProgramStateB = freeOutputReg01 * 4 + curProgramStateB;
+            *(undefined4 *)(curProgramStateB + 0xb8) = *(undefined4 *)(symbolRecord + 4);
+            *(undefined4 *)(curProgramStateB + 0x60) = 1;
+            allocatedHandle = (**(code **)(((unsigned char *)0x000012a8) + ctx))(ctx,freeOutputReg01,4);
+            *(undefined4 *)(symbolOffset + symbolRecordsB) = allocatedHandle;
+            activeProgramIndexOrSymbolRecord = *(int *)(((unsigned char *)0x0000118c) + ctx);
+            programTable = *shader;
+            instArray = shader[6];
           }
           else {
-            in_r7 = *(int *)(((unsigned char *)0x0000118c) + ctx);
-            iVar15 = *shader;
-            iVar16 = shader[6];
+            activeProgramIndexOrSymbolRecord = *(int *)(((unsigned char *)0x0000118c) + ctx);
+            programTable = *shader;
+            instArray = shader[6];
           }
         }
       }
-      iVar26 = **(int **)(in_r7 * 4 + iVar15);
-      if (*(int *)(iVar10 + iVar16 + 0x58) == 2) {
-        iVar15 = shader[8];
-        iVar18 = *(int *)(iVar10 + iVar16 + 0x5c) * 0x54;
-        iVar16 = iVar18 + iVar15;
-        if (((*(int *)(iVar16 + 0x28) == 0x87c1) &&
-            ((*(char *)(iVar16 + 0x44) == '\0' || (*(int *)(iVar16 + 0x48) == 0x12)))) &&
-           ((iVar16 != 0 &&
-            ((*(int *)(iVar18 + iVar15) == 0 &&
-             (*(undefined1 *)(iVar16 + 0x3d) = 1, *(int *)(iVar16 + 0x24) == 0x87bf)))))) {
-          iVar14 = ((int (*)())evsFindFreeOutputRegister)(iVar26);
-          iVar26 = iVar14 * 4 + iVar26;
-          *(undefined4 *)(iVar26 + 0xb8) = *(undefined4 *)(iVar16 + 4);
-          *(undefined4 *)(iVar26 + 0x60) = 1;
-          uVar12 = (**(code **)(((unsigned char *)0x000012a8) + ctx))(ctx,iVar14,4);
-          *(undefined4 *)(iVar18 + iVar15) = uVar12;
+      curProgramStateB = **(int **)(activeProgramIndexOrSymbolRecord * 4 + programTable);
+      if (*(int *)(instOffset + instArray + 0x58) == 2) {
+        symbolRecords = shader[8];
+        symbolOffsetB = *(int *)(instOffset + instArray + 0x5c) * 0x54;
+        symbolRecordB = symbolOffsetB + symbolRecords;
+        if (((*(int *)(symbolRecordB + 0x28) == 0x87c1) &&
+            ((*(char *)(symbolRecordB + 0x44) == '\0' || (*(int *)(symbolRecordB + 0x48) == 0x12)))) &&
+           ((symbolRecordB != 0 &&
+            ((*(int *)(symbolOffsetB + symbolRecords) == 0 &&
+             (*(undefined1 *)(symbolRecordB + 0x3d) = 1, *(int *)(symbolRecordB + 0x24) == 0x87bf)))))) {
+          freeOutputReg2 = ((int (*)())evsFindFreeOutputRegister)(curProgramStateB);
+          curProgramStateB = freeOutputReg2 * 4 + curProgramStateB;
+          *(undefined4 *)(curProgramStateB + 0xb8) = *(undefined4 *)(symbolRecordB + 4);
+          *(undefined4 *)(curProgramStateB + 0x60) = 1;
+          allocatedHandle = (**(code **)(((unsigned char *)0x000012a8) + ctx))(ctx,freeOutputReg2,4);
+          *(undefined4 *)(symbolOffsetB + symbolRecords) = allocatedHandle;
         }
       }
-      uVar13 = uVar13 + 1;
-      iVar10 = iVar10 + 0x74;
-    } while (uVar13 < (uint)shader[5]);
+      instIndex = instIndex + 1;
+      instOffset = instOffset + 0x74;
+    } while (instIndex < (uint)shader[5]);
   }
-  iVar26 = 0x16;
-  iVar10 = iVar22;
+  slotCountdown = 0x16;
+  slotCursor = programStateAlias;
   do {
-    if (*(int *)(iVar10 + 0x60) != -1) {
-      *(int *)(iVar22 + 0x110) = *(int *)(iVar22 + 0x110) + 1;
+    if (*(int *)(slotCursor + 0x60) != -1) {
+      *(int *)(programStateAlias + 0x110) = *(int *)(programStateAlias + 0x110) + 1;
     }
-    iVar10 = iVar10 + 4;
-    iVar26 = iVar26 + -1;
-  } while (iVar26 != 0);
-  *(undefined4 *)(iVar21 + 0x118) = 0;
-  *(undefined4 *)(iVar21 + 0x120) = 0;
+    slotCursor = slotCursor + 4;
+    slotCountdown = slotCountdown + -1;
+  } while (slotCountdown != 0);
+  *(undefined4 *)(programState + 0x118) = 0;
+  *(undefined4 *)(programState + 0x120) = 0;
   if (shader[5] != 0) {
-    uVar13 = 0;
-    iVar10 = 0;
+    instIndex = 0;
+    instOffset = 0;
     do {
-      iVar22 = ((int (*)())evsAllocConstantsForOperand)(ctx,shader,iVar21,iVar10 + shader[6] + 0x20);
-      if (((iVar22 == 1) ||
-          (iVar22 = ((int (*)())evsAllocConstantsForOperand)(ctx,shader,iVar21,iVar10 + shader[6] + 0x3c), iVar22 == 1))
-         || (iVar22 = ((int (*)())evsAllocConstantsForOperand)(ctx,shader,iVar21,iVar10 + shader[6] + 0x58), iVar22 == 1))
+      allocStatus = ((int (*)())evsAllocConstantsForOperand)(ctx,shader,programState,instOffset + shader[6] + 0x20);
+      if (((allocStatus == 1) ||
+          (allocStatus = ((int (*)())evsAllocConstantsForOperand)(ctx,shader,programState,instOffset + shader[6] + 0x3c), allocStatus == 1))
+         || (allocStatus = ((int (*)())evsAllocConstantsForOperand)(ctx,shader,programState,instOffset + shader[6] + 0x58), allocStatus == 1))
       {
         shader[0x19] = 0;
         shader[0xc] = 0;
@@ -3772,96 +3828,96 @@ LAB_000728e4:
         shader[0x18] = 0;
         return 0;
       }
-      uVar13 = uVar13 + 1;
-      iVar10 = iVar10 + 0x74;
-    } while (uVar13 < (uint)shader[5]);
+      instIndex = instIndex + 1;
+      instOffset = instOffset + 0x74;
+    } while (instIndex < (uint)shader[5]);
   }
-  uVar24 = 0;
-  iVar10 = iVar21 + 0x140;
-  *(undefined4 *)(iVar21 + 4) = 0;
-  ((int (*)())evsTokenBufPush)(ctx,iVar10,1);
-  ((int (*)())evsTokenBufPush)(ctx,iVar10,0x200);
-  uVar13 = 0;
-  if (*(int *)(iVar21 + 0x130) != 0) {
+  tokenCounter = 0;
+  tokenBuffer = programState + 0x140;
+  *(undefined4 *)(programState + 4) = 0;
+  ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,1);
+  ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,0x200);
+  tokenValue = 0;
+  if (*(int *)(programState + 0x130) != 0) {
     do {
-      ((int (*)())evsTokenBufPush)(ctx,iVar10,(uVar24 & 0x3fff) << 0x10 | 0x1a);
-      uVar13 = uVar24 & 0xffff;
-      uVar24 = uVar24 + 1;
-      ((int (*)())evsTokenBufPush)(ctx,iVar10,uVar13 | 0x50000);
-      uVar13 = *(uint *)(iVar21 + 0x130);
-    } while (uVar24 < uVar13);
+      ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,(tokenCounter & 0x3fff) << 0x10 | 0x1a);
+      inputIndex16 = tokenCounter & 0xffff;
+      tokenCounter = tokenCounter + 1;
+      ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,inputIndex16 | 0x50000);
+      tokenValue = *(uint *)(programState + 0x130);
+    } while (tokenCounter < tokenValue);
   }
-  *(uint *)(((unsigned char *)0x00001178) + iVar21) = uVar13;
-  uVar13 = shader[7];
-  if (uVar13 != 0) {
-    uVar24 = 0;
-    iVar22 = 0;
+  *(uint *)(((unsigned char *)0x00001178) + programState) = tokenValue;
+  symbolCount = shader[7];
+  if (symbolCount != 0) {
+    symbolIndex = 0;
+    symbolOffsetC = 0;
     do {
-      iVar26 = iVar22 + shader[8];
-      if ((iVar26 != 0) && (*(int *)(iVar26 + 0x28) == 0x87c3)) {
-        iVar15 = *(int *)(iVar26 + 0x24);
-        if (iVar15 == 0x87bf) {
-          uVar13 = *(uint *)(iVar26 + 4);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,0x1c);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,uVar13 & 0xffff | 0x10000);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,**(undefined4 **)(iVar22 + shader[8] + 0x38));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(iVar22 + shader[8] + 0x38) + 4));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(iVar22 + shader[8] + 0x38) + 8));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(iVar22 + shader[8] + 0x38) + 0xc));
-          uVar13 = shader[7];
+      symbolRecordC = symbolOffsetC + shader[8];
+      if ((symbolRecordC != 0) && (*(int *)(symbolRecordC + 0x28) == 0x87c3)) {
+        symbolDataType = *(int *)(symbolRecordC + 0x24);
+        if (symbolDataType == 0x87bf) {
+          hwRegister = *(uint *)(symbolRecordC + 4);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,0x1c);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,hwRegister & 0xffff | 0x10000);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,**(undefined4 **)(symbolOffsetC + shader[8] + 0x38));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(symbolOffsetC + shader[8] + 0x38) + 4));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(symbolOffsetC + shader[8] + 0x38) + 8));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(symbolOffsetC + shader[8] + 0x38) + 0xc));
+          symbolCount = shader[7];
         }
-        else if (iVar15 == 0x87c0) {
-          uVar13 = *(uint *)(iVar26 + 0x10);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,0x1c);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,uVar13 & 0xffff | 0x10000);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,**(undefined4 **)(shader[8] + iVar22 + 0x38));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(shader[8] + iVar22 + 0x38) + 4));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(shader[8] + iVar22 + 0x38) + 8));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(shader[8] + iVar22 + 0x38) + 0xc));
-          uVar13 = *(uint *)(iVar26 + 0x14);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,0x1c);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,uVar13 & 0xffff | 0x10000);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(shader[8] + iVar22 + 0x38) + 0x10));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(shader[8] + iVar22 + 0x38) + 0x14));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(shader[8] + iVar22 + 0x38) + 0x18));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(shader[8] + iVar22 + 0x38) + 0x1c));
-          uVar13 = *(uint *)(iVar26 + 0x18);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,0x1c);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,uVar13 & 0xffff | 0x10000);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(shader[8] + iVar22 + 0x38) + 0x20));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(iVar22 + shader[8] + 0x38) + 0x24));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(iVar22 + shader[8] + 0x38) + 0x28));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(iVar22 + shader[8] + 0x38) + 0x2c));
-          uVar13 = *(uint *)(iVar26 + 0x1c);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,0x1c);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,uVar13 & 0xffff | 0x10000);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(iVar22 + shader[8] + 0x38) + 0x30));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(iVar22 + shader[8] + 0x38) + 0x34));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(iVar22 + shader[8] + 0x38) + 0x38));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,*(undefined4 *)(*(int *)(iVar22 + shader[8] + 0x38) + 0x3c));
-          uVar13 = shader[7];
+        else if (symbolDataType == 0x87c0) {
+          hwRegisterRow0 = *(uint *)(symbolRecordC + 0x10);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,0x1c);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,hwRegisterRow0 & 0xffff | 0x10000);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,**(undefined4 **)(shader[8] + symbolOffsetC + 0x38));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(shader[8] + symbolOffsetC + 0x38) + 4));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(shader[8] + symbolOffsetC + 0x38) + 8));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(shader[8] + symbolOffsetC + 0x38) + 0xc));
+          hwRegisterRow1 = *(uint *)(symbolRecordC + 0x14);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,0x1c);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,hwRegisterRow1 & 0xffff | 0x10000);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(shader[8] + symbolOffsetC + 0x38) + 0x10));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(shader[8] + symbolOffsetC + 0x38) + 0x14));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(shader[8] + symbolOffsetC + 0x38) + 0x18));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(shader[8] + symbolOffsetC + 0x38) + 0x1c));
+          hwRegisterRow2 = *(uint *)(symbolRecordC + 0x18);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,0x1c);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,hwRegisterRow2 & 0xffff | 0x10000);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(shader[8] + symbolOffsetC + 0x38) + 0x20));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(symbolOffsetC + shader[8] + 0x38) + 0x24));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(symbolOffsetC + shader[8] + 0x38) + 0x28));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(symbolOffsetC + shader[8] + 0x38) + 0x2c));
+          hwRegisterRow3 = *(uint *)(symbolRecordC + 0x1c);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,0x1c);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,hwRegisterRow3 & 0xffff | 0x10000);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(symbolOffsetC + shader[8] + 0x38) + 0x30));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(symbolOffsetC + shader[8] + 0x38) + 0x34));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(symbolOffsetC + shader[8] + 0x38) + 0x38));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,*(undefined4 *)(*(int *)(symbolOffsetC + shader[8] + 0x38) + 0x3c));
+          symbolCount = shader[7];
         }
-        else if (iVar15 == 0x87be) {
-          uVar13 = *(uint *)(iVar26 + 4);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,0x1c);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,uVar13 & 0xffff | 0x10000);
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,**(undefined4 **)(iVar22 + shader[8] + 0x38));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,**(undefined4 **)(iVar22 + shader[8] + 0x38));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,**(undefined4 **)(iVar22 + shader[8] + 0x38));
-          ((int (*)())evsTokenBufPush)(ctx,iVar10,**(undefined4 **)(iVar22 + shader[8] + 0x38));
-          uVar13 = shader[7];
+        else if (symbolDataType == 0x87be) {
+          hwRegister = *(uint *)(symbolRecordC + 4);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,0x1c);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,hwRegister & 0xffff | 0x10000);
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,**(undefined4 **)(symbolOffsetC + shader[8] + 0x38));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,**(undefined4 **)(symbolOffsetC + shader[8] + 0x38));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,**(undefined4 **)(symbolOffsetC + shader[8] + 0x38));
+          ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,**(undefined4 **)(symbolOffsetC + shader[8] + 0x38));
+          symbolCount = shader[7];
         }
       }
-      uVar24 = uVar24 + 1;
-      iVar22 = iVar22 + 0x54;
-    } while (uVar24 < uVar13);
+      symbolIndex = symbolIndex + 1;
+      symbolOffsetC = symbolOffsetC + 0x54;
+    } while (symbolIndex < symbolCount);
   }
-  uStack_58 = 0;
+  maxTempCount = 0;
   if (shader[5] != 0) {
-    uVar13 = 0;
-    iVar22 = 0;
+    instIndex = 0;
+    instOffsetB = 0;
     do {
-      if (0x20 < *(int *)(iVar22 + shader[6]) - 0x8782U) {
+      if (0x20 < *(int *)(instOffsetB + shader[6]) - 0x8782U) {
         shader[0x19] = 0;
         shader[0xc] = 0;
         shader[0x15] = 0;
@@ -3870,16 +3926,16 @@ LAB_000728e4:
         shader[0x18] = 0;
         return 0;
       }
-      ((int (*)())evsAllocLocalRegisters)(ctx,shader,iVar21,iVar22 + shader[6] + 4);
-      ((int (*)())evsAllocLocalRegisters)(ctx,shader,iVar21,iVar22 + shader[6] + 0x20);
-      ((int (*)())evsAllocLocalRegisters)(ctx,shader,iVar21,iVar22 + shader[6] + 0x3c);
-      ((int (*)())evsAllocLocalRegisters)(ctx,shader,iVar21,iVar22 + shader[6] + 0x58);
-      if (uStack_58 < (uint)shader[0x19]) {
-        uStack_58 = shader[0x19];
+      ((int (*)())evsAllocLocalRegisters)(ctx,shader,programState,instOffsetB + shader[6] + 4);
+      ((int (*)())evsAllocLocalRegisters)(ctx,shader,programState,instOffsetB + shader[6] + 0x20);
+      ((int (*)())evsAllocLocalRegisters)(ctx,shader,programState,instOffsetB + shader[6] + 0x3c);
+      ((int (*)())evsAllocLocalRegisters)(ctx,shader,programState,instOffsetB + shader[6] + 0x58);
+      if (maxTempCount < (uint)shader[0x19]) {
+        maxTempCount = shader[0x19];
       }
-      iVar26 = (**(code **)(&DAT_001b9d04 + *(int *)(iVar22 + shader[6]) * 4))
-                         (ctx,iVar19,shader,iVar22 + shader[6],in_r7,&PTR_FUN_001dbb0c);
-      if (iVar26 < 0) {
+      emitResult = (**(code **)(&DAT_001b9d04 + *(int *)(instOffsetB + shader[6]) * 4))
+                         (ctx,emitState,shader,instOffsetB + shader[6],activeProgramIndexOrSymbolRecord,&PTR_FUN_001dbb0c);
+      if (emitResult < 0) {
         *(undefined1 *)(shader + 4) = 0;
         shader[0xc] = 0;
         shader[0x15] = 0;
@@ -3889,169 +3945,169 @@ LAB_000728e4:
         shader[0x19] = 0;
         return 0;
       }
-      *(int *)(iVar21 + 4) = iVar26 + *(int *)(iVar21 + 4);
+      *(int *)(programState + 4) = emitResult + *(int *)(programState + 4);
       if (*(char *)((int)shader + 0x7b) == '\0') {
-        iVar26 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
-        uVar24 = *(uint *)(iVar26 + 0x40);
-        if (uVar24 != 0) {
-          uVar20 = 0;
-          iVar15 = 0;
+        curProgramStateB = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+        tempSlotCount = *(uint *)(curProgramStateB + 0x40);
+        if (tempSlotCount != 0) {
+          tempSlotIndex = 0;
+          tempSlotOffset = 0;
           do {
-            iVar16 = iVar15 + *(int *)(iVar26 + 0x3c);
-            if (*(char *)(iVar16 + 0x10) != '\0') {
-              iVar18 = *(int *)(iVar16 + 0x18);
-              if ((((iVar18 == 0) && (*(int *)(iVar16 + 0x1c) == 0)) &&
-                  ((*(int *)(iVar16 + 0x20) == 0 && (*(int *)(iVar16 + 0x24) == 0)))) ||
-                 (uVar11 = shader[5], uVar11 <= uVar13 + 1)) {
-                bVar1 = true;
+            tempSlotRecord = tempSlotOffset + *(int *)(curProgramStateB + 0x3c);
+            if (*(char *)(tempSlotRecord + 0x10) != '\0') {
+              slotComponentX = *(int *)(tempSlotRecord + 0x18);
+              if ((((slotComponentX == 0) && (*(int *)(tempSlotRecord + 0x1c) == 0)) &&
+                  ((*(int *)(tempSlotRecord + 0x20) == 0 && (*(int *)(tempSlotRecord + 0x24) == 0)))) ||
+                 (instCount = shader[5], instCount <= instIndex + 1)) {
+                slotReleasable = true;
               }
               else {
-                bVar1 = true;
-                iVar14 = iVar22 + 0x74 + shader[6];
-                bVar6 = 0;
-                bVar7 = 0;
-                bVar8 = 0;
-                bVar9 = 0;
-                uVar23 = uVar13 + 1;
+                slotReleasable = true;
+                nextInst = instOffsetB + 0x74 + shader[6];
+                coveredX = 0;
+                coveredY = 0;
+                coveredZ = 0;
+                coveredW = 0;
+                scanInstIndex = instIndex + 1;
                 do {
-                  iVar17 = ((int (*)())evsOperandUsesTempSlot)(iVar14 + 0x20,iVar16);
-                  if (((iVar17 == 0) && (iVar17 = ((int (*)())evsOperandUsesTempSlot)(iVar14 + 0x3c,iVar16), iVar17 == 0))
-                     && (iVar17 = ((int (*)())evsOperandUsesTempSlot)(iVar14 + 0x58,iVar16), iVar17 == 0)) {
-                    iVar17 = ((int (*)())evsOperandUsesTempSlot)(iVar14 + 4,iVar16);
-                    if (iVar17 != 0) {
-                      iVar17 = *(int *)(iVar14 + 8);
-                      if (*(int *)(iVar17 * 0x54 + shader[8] + 0x24) == 0x87be) {
-                        bVar2 = iVar18 == iVar17;
-                        bVar3 = iVar17 == *(int *)(iVar16 + 0x1c);
-                        bVar4 = iVar17 == *(int *)(iVar16 + 0x20);
-                        bVar5 = iVar17 == *(int *)(iVar16 + 0x24);
+                  usesTempSlot = ((int (*)())evsOperandUsesTempSlot)(nextInst + 0x20,tempSlotRecord);
+                  if (((usesTempSlot == 0) && (usesTempSlot = ((int (*)())evsOperandUsesTempSlot)(nextInst + 0x3c,tempSlotRecord), usesTempSlot == 0))
+                     && (usesTempSlot = ((int (*)())evsOperandUsesTempSlot)(nextInst + 0x58,tempSlotRecord), usesTempSlot == 0)) {
+                    usesTempSlot = ((int (*)())evsOperandUsesTempSlot)(nextInst + 4,tempSlotRecord);
+                    if (usesTempSlot != 0) {
+                      destSymbolIndex = *(int *)(nextInst + 8);
+                      if (*(int *)(destSymbolIndex * 0x54 + shader[8] + 0x24) == 0x87be) {
+                        destCoversX = slotComponentX == destSymbolIndex;
+                        destCoversY = destSymbolIndex == *(int *)(tempSlotRecord + 0x1c);
+                        destCoversZ = destSymbolIndex == *(int *)(tempSlotRecord + 0x20);
+                        destCoversW = destSymbolIndex == *(int *)(tempSlotRecord + 0x24);
                       }
                       else {
-                        bVar2 = *(byte *)(iVar14 + 0xf);
-                        bVar3 = *(byte *)(iVar14 + 0x13);
-                        bVar4 = *(byte *)(iVar14 + 0x17);
-                        bVar5 = *(byte *)(iVar14 + 0x1b);
+                        destCoversX = *(byte *)(nextInst + 0xf);
+                        destCoversY = *(byte *)(nextInst + 0x13);
+                        destCoversZ = *(byte *)(nextInst + 0x17);
+                        destCoversW = *(byte *)(nextInst + 0x1b);
                       }
-                      bVar6 = bVar6 | bVar2;
-                      bVar7 = bVar7 | bVar3;
-                      bVar8 = bVar8 | bVar4;
-                      bVar9 = bVar9 | bVar5;
-                      if (((bVar6 != 0) && (bVar7 != 0)) && (bVar8 != 0)) {
-                        bVar25 = bVar9 != 0;
+                      coveredX = coveredX | destCoversX;
+                      coveredY = coveredY | destCoversY;
+                      coveredZ = coveredZ | destCoversZ;
+                      coveredW = coveredW | destCoversW;
+                      if (((coveredX != 0) && (coveredY != 0)) && (coveredZ != 0)) {
+                        scanDone = coveredW != 0;
                         goto LAB_000734d0;
                       }
                     }
-                    bVar25 = false;
+                    scanDone = false;
                   }
                   else {
-                    bVar1 = false;
-                    bVar25 = true;
+                    slotReleasable = false;
+                    scanDone = true;
                   }
 LAB_000734d0:
-                  uVar23 = uVar23 + 1;
-                } while ((uVar11 != uVar23) && (iVar14 = iVar14 + 0x74, !bVar25));
+                  scanInstIndex = scanInstIndex + 1;
+                } while ((instCount != scanInstIndex) && (nextInst = nextInst + 0x74, !scanDone));
               }
-              if (uVar20 == *(uint *)(((unsigned char *)0x000013c0) + iVar26)) {
-                bVar1 = false;
+              if (tempSlotIndex == *(uint *)(((unsigned char *)0x000013c0) + curProgramStateB)) {
+                slotReleasable = false;
               }
-              if ((uVar20 != *(uint *)(((unsigned char *)0x000013cc) + iVar26)) && (bVar1)) {
-                *(undefined1 *)(iVar18 * 0x54 + shader[8] + 0x3d) = 0;
+              if ((tempSlotIndex != *(uint *)(((unsigned char *)0x000013cc) + curProgramStateB)) && (slotReleasable)) {
+                *(undefined1 *)(slotComponentX * 0x54 + shader[8] + 0x3d) = 0;
                 *(undefined1 *)
-                 (*(int *)(*(int *)(iVar26 + 0x3c) + iVar15 + 0x1c) * 0x54 + shader[8] + 0x3d) = 0;
+                 (*(int *)(*(int *)(curProgramStateB + 0x3c) + tempSlotOffset + 0x1c) * 0x54 + shader[8] + 0x3d) = 0;
                 *(undefined1 *)
-                 (*(int *)(*(int *)(iVar26 + 0x3c) + iVar15 + 0x20) * 0x54 + shader[8] + 0x3d) = 0;
+                 (*(int *)(*(int *)(curProgramStateB + 0x3c) + tempSlotOffset + 0x20) * 0x54 + shader[8] + 0x3d) = 0;
                 *(undefined1 *)
-                 (*(int *)(*(int *)(iVar26 + 0x3c) + iVar15 + 0x24) * 0x54 + shader[8] + 0x3d) = 0;
-                *(undefined1 *)(*(int *)(iVar26 + 0x3c) + iVar15 + 0x10) = 0;
-                *(undefined4 *)(*(int *)(iVar26 + 0x3c) + iVar15 + 0x14) = 0;
-                *(undefined4 *)(*(int *)(iVar26 + 0x3c) + iVar15 + 0x18) = 0;
-                *(undefined4 *)(*(int *)(iVar26 + 0x3c) + iVar15 + 0x1c) = 0;
-                *(undefined4 *)(*(int *)(iVar26 + 0x3c) + iVar15 + 0x20) = 0;
-                *(undefined4 *)(*(int *)(iVar26 + 0x3c) + iVar15 + 0x24) = 0;
+                 (*(int *)(*(int *)(curProgramStateB + 0x3c) + tempSlotOffset + 0x24) * 0x54 + shader[8] + 0x3d) = 0;
+                *(undefined1 *)(*(int *)(curProgramStateB + 0x3c) + tempSlotOffset + 0x10) = 0;
+                *(undefined4 *)(*(int *)(curProgramStateB + 0x3c) + tempSlotOffset + 0x14) = 0;
+                *(undefined4 *)(*(int *)(curProgramStateB + 0x3c) + tempSlotOffset + 0x18) = 0;
+                *(undefined4 *)(*(int *)(curProgramStateB + 0x3c) + tempSlotOffset + 0x1c) = 0;
+                *(undefined4 *)(*(int *)(curProgramStateB + 0x3c) + tempSlotOffset + 0x20) = 0;
+                *(undefined4 *)(*(int *)(curProgramStateB + 0x3c) + tempSlotOffset + 0x24) = 0;
                 shader[0x19] = shader[0x19] + -1;
-                uVar24 = *(uint *)(iVar26 + 0x40);
+                tempSlotCount = *(uint *)(curProgramStateB + 0x40);
               }
             }
-            uVar20 = uVar20 + 1;
-            iVar15 = iVar15 + 0x28;
-          } while (uVar20 < uVar24);
+            tempSlotIndex = tempSlotIndex + 1;
+            tempSlotOffset = tempSlotOffset + 0x28;
+          } while (tempSlotIndex < tempSlotCount);
         }
       }
-      uVar13 = uVar13 + 1;
-      iVar22 = iVar22 + 0x74;
-    } while (uVar13 < (uint)shader[5]);
+      instIndex = instIndex + 1;
+      instOffsetB = instOffsetB + 0x74;
+    } while (instIndex < (uint)shader[5]);
   }
   if (*(char *)((int)shader + 0x7a) != '\0') {
-    bVar1 = (*(uint *)(ctx + 0x44) & 0x2800) != 0x2800;
-    if (bVar1) {
-      ((unsigned char *)0x000013c8)[iVar21] = 1;
+    fogFlagsNotBothSet = (*(uint *)(ctx + 0x44) & 0x2800) != 0x2800;
+    if (fogFlagsNotBothSet) {
+      ((unsigned char *)0x000013c8)[programState] = 1;
     }
     else {
-      ((unsigned char *)0x000013c9)[iVar21] = ((unsigned char *)0x000011d1)[ctx];
+      ((unsigned char *)0x000013c9)[programState] = ((unsigned char *)0x000011d1)[ctx];
       *(byte *)((int)shader + (byte)((unsigned char *)0x000011d1)[ctx] + 0x71) =
            *(byte *)((int)shader + (byte)((unsigned char *)0x000011d1)[ctx] + 0x71) | 1;
-      ((unsigned char *)0x000013c8)[iVar21] = 0;
+      ((unsigned char *)0x000013c8)[programState] = 0;
     }
     if ((*(uint *)(ctx + 0x44) & 0x2000) == 0) {
-      uVar12 = 1;
+      fogWriteMode = 1;
     }
     else {
-      uVar12 = 0;
-      if (bVar1) goto LAB_000736b0;
+      fogWriteMode = 0;
+      if (fogFlagsNotBothSet) goto LAB_000736b0;
     }
-    iVar22 = *(int *)(iVar21 + 0x4c);
-    *(int *)(((unsigned char *)0x000013c4) + iVar21) = iVar22;
-    *(int *)(iVar21 + 0x4c) = iVar22 + 1;
-    ((int (*)())evsEmitFogOutput)(ctx,iVar19,iVar21,uVar12);
+    fogOutputReg = *(int *)(programState + 0x4c);
+    *(int *)(((unsigned char *)0x000013c4) + programState) = fogOutputReg;
+    *(int *)(programState + 0x4c) = fogOutputReg + 1;
+    ((int (*)())evsEmitFogOutput)(ctx,emitState,programState,fogWriteMode);
   }
 LAB_000736b0:
-  ((int (*)())evsTokenBufPush)(ctx,iVar10,0x28);
-  shader[0x15] = *(int *)(iVar21 + 4);
-  shader[0x19] = uStack_58;
-  if (*(int *)(iVar21 + 0x118) != 0) {
-    uVar12 = (**(code **)(ctx + 0xc))(*(int *)(iVar21 + 0x118) << 2);
-    *(undefined4 *)(iVar21 + 0x114) = uVar12;
-    uVar13 = shader[7];
-    if (uVar13 != 0) {
-      uVar24 = 0;
-      iVar10 = 0;
-      iVar22 = 0;
+  ((int (*)())evsTokenBufPush)(ctx,tokenBuffer,0x28);
+  shader[0x15] = *(int *)(programState + 4);
+  shader[0x19] = maxTempCount;
+  if (*(int *)(programState + 0x118) != 0) {
+    usedSymbolList = (**(code **)(ctx + 0xc))(*(int *)(programState + 0x118) << 2);
+    *(undefined4 *)(programState + 0x114) = usedSymbolList;
+    symbolCount = shader[7];
+    if (symbolCount != 0) {
+      symbolIndex = 0;
+      usedSymbolCount = 0;
+      symbolOffsetC = 0;
       do {
-        iVar26 = iVar22 + shader[8];
-        if (*(char *)(iVar26 + 0x3d) != '\0') {
-          if (*(int *)(iVar26 + 0x28) == 0x87c2) {
-            if (*(char *)(iVar26 + 0x44) == '\0') {
+        symbolRecordC = symbolOffsetC + shader[8];
+        if (*(char *)(symbolRecordC + 0x3d) != '\0') {
+          if (*(int *)(symbolRecordC + 0x28) == 0x87c2) {
+            if (*(char *)(symbolRecordC + 0x44) == '\0') {
 LAB_00073754:
-              iVar26 = iVar10 * 4;
-              iVar10 = iVar10 + 1;
-              *(uint *)(iVar26 + *(int *)(iVar21 + 0x114)) = uVar24;
-              uVar13 = shader[7];
+              usedListOffset = usedSymbolCount * 4;
+              usedSymbolCount = usedSymbolCount + 1;
+              *(uint *)(usedListOffset + *(int *)(programState + 0x114)) = symbolIndex;
+              symbolCount = shader[7];
             }
           }
-          else if (*(int *)(iVar26 + 0x28) == 0x87c3) goto LAB_00073754;
+          else if (*(int *)(symbolRecordC + 0x28) == 0x87c3) goto LAB_00073754;
         }
-        uVar24 = uVar24 + 1;
-        iVar22 = iVar22 + 0x54;
-      } while (uVar24 < uVar13);
+        symbolIndex = symbolIndex + 1;
+        symbolOffsetC = symbolOffsetC + 0x54;
+      } while (symbolIndex < symbolCount);
     }
   }
-  if (*(int *)(iVar21 + 0x4c) != 0) {
-    uVar12 = (**(code **)(ctx + 0xc))(*(int *)(iVar21 + 0x4c) * 0x10 + 0x10);
-    *(undefined4 *)(iVar21 + 0x124) = uVar12;
-    *(undefined4 *)(((unsigned char *)0x00001174) + iVar21) = *(undefined4 *)(iVar21 + 0x4c);
+  if (*(int *)(programState + 0x4c) != 0) {
+    vec4Table = (**(code **)(ctx + 0xc))(*(int *)(programState + 0x4c) * 0x10 + 0x10);
+    *(undefined4 *)(programState + 0x124) = vec4Table;
+    *(undefined4 *)(((unsigned char *)0x00001174) + programState) = *(undefined4 *)(programState + 0x4c);
   }
-  *(undefined1 *)(iVar21 + 0x36) = *(undefined1 *)((int)shader + 0x79);
-  iVar19 = (**(code **)(((unsigned char *)0x0000128c) + ctx))(ctx,iVar19);
-  if (iVar19 != 0) {
+  *(undefined1 *)(programState + 0x36) = *(undefined1 *)((int)shader + 0x79);
+  emitState = (**(code **)(((unsigned char *)0x0000128c) + ctx))(ctx,emitState);
+  if (emitState != 0) {
     *(undefined1 *)(shader + 4) = 0;
   }
   (**(code **)(((unsigned char *)0x000012b8) + ctx))(ctx,shader);
   *(undefined1 *)(ctx + 0x29) = 1;
   ((int (*)())vpStateCacheInsert)(ctx,shader);
   *(undefined1 *)(shader[1] + *(int *)(((unsigned char *)0x0000118c) + ctx)) = 0;
-  if (*(int *)(((unsigned char *)0x000013d8) + iVar21) != 0) {
-    (**(code **)(ctx + 0x18))(*(int *)(((unsigned char *)0x000013d8) + iVar21));
-    *(undefined4 *)(((unsigned char *)0x000013d8) + iVar21) = 0;
+  if (*(int *)(((unsigned char *)0x000013d8) + programState) != 0) {
+    (**(code **)(ctx + 0x18))(*(int *)(((unsigned char *)0x000013d8) + programState));
+    *(undefined4 *)(((unsigned char *)0x000013d8) + programState) = 0;
   }
   return *(undefined1 *)(shader + 4);
 }

@@ -1,0 +1,645 @@
+local	evsAssignVertexInputs	iVar21	programState	INFERRED	per-program-instance state: **(table[ctx+0x118c]*4 + shader[0]); holds token buffer +0x140, symbol counts +0x130, input table +0x114
+local	evsAssignVertexInputs	iVar19	emitState	INFERRED	programState+0x13c, passed as the emitter context to the per-opcode emitters and evsEmitFogOutput; reused for the final hook status
+use	evsAssignVertexInputs	iVar10	inputSlotCursor	INFERRED	walks the two 0x16-entry tables at +0x60/+0xb8 setting each to -1	^\s*iVar10\ =\ iVar22;$	+1
+use	evsAssignVertexInputs	iVar10	inputSlotCursor	INFERRED	walks the two 0x16-entry tables at +0x60/+0xb8 setting each to -1	^\s*\*\(undefined4\ \*\)\(iVar10\ \+\ 0x60\)\ =\ 0xffffffff;$	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar10\ =\ 1;$	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(iVar14\ \+\ 0x1c\)\ =\ iVar10;$	+6
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \+\ 1;$	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@3	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000139c\)\ \+\ iVar15\)\ =\ iVar10;$	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@4	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013a0\)\ \+\ iVar17\ \*\ 4\ \+\ iVar15\)\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(iVar17\ \+\ 0xb8\)\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@5	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001388\)\ \+\ iVar15\)\ =\ iVar10;$	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@6	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@7	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@8	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@9	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@10	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@11	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@12	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@13	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\)\ =\ iVar10;$	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar10\ =\ iVar17;$	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\)\ =\ iVar10;$@2	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar10\ =\ iVar17;$@2	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@14	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000138c\)\ \+\ iVar15\)\ =\ iVar10;$	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@15	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001390U\)\ \+\ iVar15\)\ =\ iVar10;$	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@16	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001394\)\ \+\ iVar15\)\ =\ iVar10;$	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar10\ =\ 0;$@2	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(iVar14\ \+\ 4\)\ =\ iVar10;$@2	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar10\ =\ iVar16;$	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@17	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(iVar14\ \+\ 0x1c\)\ =\ iVar10;$@2	+6
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10;$@2	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \+\ 1;$@18	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@19	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000139c\)\ \+\ iVar15\)\ =\ iVar10;$@2	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@20	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013a0\)\ \+\ iVar17\ \*\ 4\ \+\ iVar15\)\ =\ iVar10;$@2	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(iVar17\ \+\ 0xb8\)\ =\ iVar10;$@2	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@21	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001388\)\ \+\ iVar15\)\ =\ iVar10;$@2	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@22	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@23	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@24	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@25	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@26	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@27	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@28	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@29	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\)\ =\ iVar10;$@3	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar10\ =\ iVar17;$@3	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\)\ =\ iVar10;$@4	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar10\ =\ iVar17;$@4	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@30	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000138c\)\ \+\ iVar15\)\ =\ iVar10;$@2	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@31	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001390U\)\ \+\ iVar15\)\ =\ iVar10;$@2	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@32	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001394\)\ \+\ iVar15\)\ =\ iVar10;$@2	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar10\ =\ 0;$@4	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(iVar14\ \+\ 4\)\ =\ iVar10;$@4	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar10\ =\ iVar16;$@2	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(in_r7\ \+\ 0x1c\)\ =\ iVar10;$	+6
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar26\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar26\ =\ iVar10\ \+\ 1;$	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@3	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000139c\)\ \+\ iVar15\)\ =\ iVar10;$@3	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@4	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013a0\)\ \+\ iVar18\ \*\ 4\ \+\ iVar15\)\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(iVar18\ \+\ 0xb8\)\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@5	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001388\)\ \+\ iVar15\)\ =\ iVar10;$@3	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@6	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@7	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@8	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@9	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@10	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@11	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@12	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@13	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\)\ =\ iVar10;$@5	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar10\ =\ iVar18;$	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\)\ =\ iVar10;$@6	+3
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar10\ =\ iVar18;$@2	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@14	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000138c\)\ \+\ iVar15\)\ =\ iVar10;$@3	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@15	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001390U\)\ \+\ iVar15\)\ =\ iVar10;$@3	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@16	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001394\)\ \+\ iVar15\)\ =\ iVar10;$@3	+2
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar10\ =\ 0;$@6	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(in_r7\ \+\ 4\)\ =\ iVar10;$@2	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*iVar10\ =\ iVar26;$	+1
+use	evsAssignVertexInputs	iVar10	nextInputReg	INFERRED	next free hardware input register, starts at 1; incremented per allocated vector input	^\s*\*\(int\ \*\)\(iVar22\ \+\ 0x130\)\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar10	instOffset	INFERRED	byte offset of the current instruction (+0x74 per instruction)	^\s*iVar10\ =\ 0;$@7	+1
+use	evsAssignVertexInputs	iVar10	instOffset	INFERRED	byte offset of the current instruction (+0x74 per instruction)	^\s*if\ \(\*\(int\ \*\)\(iVar10\ \+\ iVar16\ \+\ 0x20\)\ ==\ 2\)\ \{$	+1
+use	evsAssignVertexInputs	iVar10	instOffset	INFERRED	byte offset of the current instruction (+0x74 per instruction)	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar10\ \+\ iVar16\ \+\ 0x24\)\ \*\ 0x54;$	+1
+use	evsAssignVertexInputs	iVar10	instOffset	INFERRED	byte offset of the current instruction (+0x74 per instruction)	^\s*if\ \(\*\(int\ \*\)\(iVar10\ \+\ iVar16\ \+\ 0x3c\)\ ==\ 2\)\ \{$	+1
+use	evsAssignVertexInputs	iVar10	instOffset	INFERRED	byte offset of the current instruction (+0x74 per instruction)	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar10\ \+\ iVar16\ \+\ 0x40\)\ \*\ 0x54;$	+1
+use	evsAssignVertexInputs	iVar10	instOffset	INFERRED	byte offset of the current instruction (+0x74 per instruction)	^\s*if\ \(\*\(int\ \*\)\(iVar10\ \+\ iVar16\ \+\ 0x58\)\ ==\ 2\)\ \{$	+1
+use	evsAssignVertexInputs	iVar10	instOffset	INFERRED	byte offset of the current instruction (+0x74 per instruction)	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar10\ \+\ iVar16\ \+\ 0x5c\)\ \*\ 0x54;$	+1
+use	evsAssignVertexInputs	iVar10	instOffset	INFERRED	byte offset of the current instruction (+0x74 per instruction)	^\s*iVar10\ =\ iVar10\ \+\ 0x74;$	+1
+use	evsAssignVertexInputs	iVar10	instOffset	INFERRED	byte offset of the current instruction (+0x74 per instruction)	^\s*iVar10\ =\ 0;$@8	+1
+use	evsAssignVertexInputs	iVar10	instOffset	INFERRED	byte offset of the current instruction (+0x74 per instruction)	^\s*iVar22\ =\ \(\(int\ \(\*\)\(\)\)FUN_00070520\)\(param_1,param_2,iVar21,iVar10\ \+\ param_2\[6\]\ \+\ 0x20\);$	+4
+use	evsAssignVertexInputs	iVar10	instOffset	INFERRED	byte offset of the current instruction (+0x74 per instruction)	^\s*iVar10\ =\ iVar10\ \+\ 0x74;$@2	+1
+use	evsAssignVertexInputs	iVar10	slotCursor	INFERRED	walks the 0x16-entry table at +0x60 counting used entries into +0x110	^\s*iVar10\ =\ iVar22;$@2	+1
+use	evsAssignVertexInputs	iVar10	slotCursor	INFERRED	walks the 0x16-entry table at +0x60 counting used entries into +0x110	^\s*if\ \(\*\(int\ \*\)\(iVar10\ \+\ 0x60\)\ !=\ \-1\)\ \{$	+1
+use	evsAssignVertexInputs	iVar10	slotCursor	INFERRED	walks the 0x16-entry table at +0x60 counting used entries into +0x110	^\s*iVar10\ =\ iVar10\ \+\ 4;$@5	+1
+use	evsAssignVertexInputs	iVar10	tokenBuffer	INFERRED	programState+0x140, the token buffer evsTokenBufPush appends to	^\s*iVar10\ =\ iVar21\ \+\ 0x140;$	+1
+use	evsAssignVertexInputs	iVar10	tokenBuffer	INFERRED	programState+0x140, the token buffer evsTokenBufPush appends to	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,1\);$	+2
+use	evsAssignVertexInputs	iVar10	tokenBuffer	INFERRED	programState+0x140, the token buffer evsTokenBufPush appends to	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,\(uVar24\ \&\ 0x3fff\)\ <<\ 0x10\ \|\ 0x1a\);$	+1
+use	evsAssignVertexInputs	iVar10	tokenBuffer	INFERRED	programState+0x140, the token buffer evsTokenBufPush appends to	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,uVar13\ \|\ 0x50000\);$	+1
+use	evsAssignVertexInputs	iVar10	tokenBuffer	INFERRED	programState+0x140, the token buffer evsTokenBufPush appends to	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,0x1c\);$	+6
+use	evsAssignVertexInputs	iVar10	tokenBuffer	INFERRED	programState+0x140, the token buffer evsTokenBufPush appends to	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,0x1c\);$@2	+6
+use	evsAssignVertexInputs	iVar10	tokenBuffer	INFERRED	programState+0x140, the token buffer evsTokenBufPush appends to	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,0x1c\);$@3	+6
+use	evsAssignVertexInputs	iVar10	tokenBuffer	INFERRED	programState+0x140, the token buffer evsTokenBufPush appends to	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,0x1c\);$@4	+6
+use	evsAssignVertexInputs	iVar10	tokenBuffer	INFERRED	programState+0x140, the token buffer evsTokenBufPush appends to	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,0x1c\);$@5	+6
+use	evsAssignVertexInputs	iVar10	tokenBuffer	INFERRED	programState+0x140, the token buffer evsTokenBufPush appends to	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,0x1c\);$@6	+6
+use	evsAssignVertexInputs	iVar10	tokenBuffer	INFERRED	programState+0x140, the token buffer evsTokenBufPush appends to	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,0x28\);$	+1
+use	evsAssignVertexInputs	iVar10	usedSymbolCount	INFERRED	count of symbols written into the used-symbol list at programState+0x114	^\s*iVar10\ =\ 0;$@9	+1
+use	evsAssignVertexInputs	iVar10	usedSymbolCount	INFERRED	count of symbols written into the used-symbol list at programState+0x114	^\s*iVar26\ =\ iVar10\ \*\ 4;$	+2
+use	evsAssignVertexInputs	bVar1	slotReleasable	INFERRED	cleared when a later instruction reads the temp slot or it is a reserved slot; the slot is released when still set	^\s*bVar1\ =\ true;$	+1
+use	evsAssignVertexInputs	bVar1	slotReleasable	INFERRED	cleared when a later instruction reads the temp slot or it is a reserved slot; the slot is released when still set	^\s*bVar1\ =\ true;$@2	+1
+use	evsAssignVertexInputs	bVar1	slotReleasable	INFERRED	cleared when a later instruction reads the temp slot or it is a reserved slot; the slot is released when still set	^\s*bVar1\ =\ false;$	+1
+use	evsAssignVertexInputs	bVar1	slotReleasable	INFERRED	cleared when a later instruction reads the temp slot or it is a reserved slot; the slot is released when still set	^\s*bVar1\ =\ false;$@2	+1
+use	evsAssignVertexInputs	bVar1	slotReleasable	INFERRED	cleared when a later instruction reads the temp slot or it is a reserved slot; the slot is released when still set	^\s*if\ \(\(uVar20\ !=\ \*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x000013cc\)\ \+\ iVar26\)\)\ \&\&\ \(bVar1\)\)\ \{$	+1
+use	evsAssignVertexInputs	bVar1	fogFlagsNotBothSet	INFERRED	(ctx+0x44 & 0x2800) != 0x2800	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ \&\ 0x2800\)\ !=\ 0x2800;$	+2
+use	evsAssignVertexInputs	bVar1	fogFlagsNotBothSet	INFERRED	(ctx+0x44 & 0x2800) != 0x2800	^\s*if\ \(bVar1\)\ goto\ LAB_000736b0;$	+1
+local	evsAssignVertexInputs	bVar2	destCoversX	INFERRED	destination symbol equals the slot's X component symbol (or the instruction write-enable for X)
+local	evsAssignVertexInputs	bVar3	destCoversY	INFERRED	same for Y
+local	evsAssignVertexInputs	bVar4	destCoversZ	INFERRED	same for Z
+local	evsAssignVertexInputs	bVar5	destCoversW	INFERRED	same for W
+local	evsAssignVertexInputs	bVar6	coveredX	INFERRED	X written by some later instruction (accumulated OR of destCoversX)
+local	evsAssignVertexInputs	bVar7	coveredY	INFERRED	accumulated Y
+local	evsAssignVertexInputs	bVar8	coveredZ	INFERRED	accumulated Z
+local	evsAssignVertexInputs	bVar9	coveredW	INFERRED	accumulated W
+local	evsAssignVertexInputs	bVar25	scanDone	INFERRED	later-instruction scan stops: slot read, or all four components overwritten
+local	evsAssignVertexInputs	uVar11	instCount	INFERRED	shader[5], the instruction count, loop bound of the slot scan
+use	evsAssignVertexInputs	uVar12	tempSlotA	INFERRED	evsAllocTempSlot result stored at programState+0x13c0	^\s*uVar12\ =\ \(\(int\ \(\*\)\(\)\)FUN_00070cd0\)\(iVar21\);$	+2
+use	evsAssignVertexInputs	uVar12	tempSlotB	INFERRED	evsAllocTempSlot result stored at programState+0x13cc	^\s*uVar12\ =\ \(\(int\ \(\*\)\(\)\)FUN_00070cd0\)\(iVar21\);$@2	+2
+use	evsAssignVertexInputs	uVar12	allocatedHandle	INFERRED	ctx hook +0x12a8 (ctx, outputReg, 4) result, stored in the symbol record word 0	^\s*uVar12\ =\ \(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x000012a8\)\ \+\ param_1\)\)\(param_1,iVar15,4\);$	+2
+use	evsAssignVertexInputs	uVar12	allocatedHandle	INFERRED	ctx hook +0x12a8 (ctx, outputReg, 4) result, stored in the symbol record word 0	^\s*uVar12\ =\ \(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x000012a8\)\ \+\ param_1\)\)\(param_1,iVar15,4\);$@2	+2
+use	evsAssignVertexInputs	uVar12	allocatedHandle	INFERRED	ctx hook +0x12a8 (ctx, outputReg, 4) result, stored in the symbol record word 0	^\s*uVar12\ =\ \(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x000012a8\)\ \+\ param_1\)\)\(param_1,iVar14,4\);$	+2
+use	evsAssignVertexInputs	uVar12	fogWriteMode	INFERRED	1 when (ctx+0x44 & 0x2000)==0, else 0; passed to evsEmitFogOutput	^\s*uVar12\ =\ 1;$	+1
+use	evsAssignVertexInputs	uVar12	fogWriteMode	INFERRED	1 when (ctx+0x44 & 0x2000)==0, else 0; passed to evsEmitFogOutput	^\s*uVar12\ =\ 0;$	+1
+use	evsAssignVertexInputs	uVar12	fogWriteMode	INFERRED	1 when (ctx+0x44 & 0x2000)==0, else 0; passed to evsEmitFogOutput	^\s*\(\(int\ \(\*\)\(\)\)FUN_00070d80\)\(param_1,iVar19,iVar21,uVar12\);$	+1
+use	evsAssignVertexInputs	uVar12	usedSymbolList	INFERRED	ctx allocator +0xc result (count*4) stored at programState+0x114	^\s*uVar12\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(\*\(int\ \*\)\(iVar21\ \+\ 0x118\)\ <<\ 2\);$	+2
+use	evsAssignVertexInputs	uVar12	vec4Table	INFERRED	ctx allocator +0xc result (count*0x10+0x10) stored at programState+0x124	^\s*uVar12\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(\*\(int\ \*\)\(iVar21\ \+\ 0x4c\)\ \*\ 0x10\ \+\ 0x10\);$	+2
+use	evsAssignVertexInputs	uVar13	instIndex	INFERRED	instruction loop counter	^\s*uVar13\ =\ 0;$	+1
+use	evsAssignVertexInputs	uVar13	instIndex	INFERRED	instruction loop counter	^\s*iVar26\ =\ uVar13\ \*\ 0x74;$	+1
+use	evsAssignVertexInputs	uVar13	instIndex	INFERRED	instruction loop counter	^\s*uVar13\ =\ uVar13\ \+\ 1;$	+2
+use	evsAssignVertexInputs	uVar13	instIndex	INFERRED	instruction loop counter	^\s*uVar13\ =\ 0;$@2	+1
+use	evsAssignVertexInputs	uVar13	instIndex	INFERRED	instruction loop counter	^\s*uVar13\ =\ uVar13\ \+\ 1;$@2	+1
+use	evsAssignVertexInputs	uVar13	instIndex	INFERRED	instruction loop counter	^\s*\}\ while\ \(uVar13\ <\ \(uint\)param_2\[5\]\);$@2	+1
+use	evsAssignVertexInputs	uVar13	instIndex	INFERRED	instruction loop counter	^\s*uVar13\ =\ 0;$@3	+1
+use	evsAssignVertexInputs	uVar13	instIndex	INFERRED	instruction loop counter	^\s*uVar13\ =\ uVar13\ \+\ 1;$@3	+1
+use	evsAssignVertexInputs	uVar13	instIndex	INFERRED	instruction loop counter	^\s*\}\ while\ \(uVar13\ <\ \(uint\)param_2\[5\]\);$@3	+1
+use	evsAssignVertexInputs	uVar13	tokenValue	INFERRED	last value computed in the input-index token loop / programState+0x130 reload	^\s*uVar13\ =\ 0;$@4	+1
+use	evsAssignVertexInputs	uVar13	tokenValue	INFERRED	last value computed in the input-index token loop / programState+0x130 reload	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar21\ \+\ 0x130\);$	+2
+use	evsAssignVertexInputs	uVar13	tokenValue	INFERRED	last value computed in the input-index token loop / programState+0x130 reload	^\s*\*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x00001178\)\ \+\ iVar21\)\ =\ uVar13;$	+1
+use	evsAssignVertexInputs	uVar13	inputIndex16	INFERRED	input index masked to 16 bits for the token word	^\s*uVar13\ =\ uVar24\ \&\ 0xffff;$	+1
+use	evsAssignVertexInputs	uVar13	inputIndex16	INFERRED	input index masked to 16 bits for the token word	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,uVar13\ \|\ 0x50000\);$	+1
+use	evsAssignVertexInputs	uVar13	symbolCount	INFERRED	shader[7], number of symbol records	^\s*uVar13\ =\ param_2\[7\];$	+2
+use	evsAssignVertexInputs	uVar13	symbolCount	INFERRED	shader[7], number of symbol records	^\s*uVar13\ =\ param_2\[7\];$@2	+1
+use	evsAssignVertexInputs	uVar13	symbolCount	INFERRED	shader[7], number of symbol records	^\s*uVar13\ =\ param_2\[7\];$@3	+1
+use	evsAssignVertexInputs	uVar13	symbolCount	INFERRED	shader[7], number of symbol records	^\s*uVar13\ =\ param_2\[7\];$@4	+1
+use	evsAssignVertexInputs	uVar13	symbolCount	INFERRED	shader[7], number of symbol records	^\s*\}\ while\ \(uVar24\ <\ uVar13\);$@2	+1
+use	evsAssignVertexInputs	uVar13	symbolCount	INFERRED	shader[7], number of symbol records	^\s*uVar13\ =\ param_2\[7\];$@5	+2
+use	evsAssignVertexInputs	uVar13	symbolCount	INFERRED	shader[7], number of symbol records	^\s*uVar13\ =\ param_2\[7\];$@6	+1
+use	evsAssignVertexInputs	uVar13	symbolCount	INFERRED	shader[7], number of symbol records	^\s*\}\ while\ \(uVar24\ <\ uVar13\);$@3	+1
+use	evsAssignVertexInputs	uVar13	hwRegister	INFERRED	symbol record +4: hardware register of a scalar/vector constant	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 4\);$	+1
+use	evsAssignVertexInputs	uVar13	hwRegister	INFERRED	symbol record +4: hardware register of a scalar/vector constant	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,uVar13\ \&\ 0xffff\ \|\ 0x10000\);$	+1
+use	evsAssignVertexInputs	uVar13	hwRegister	INFERRED	symbol record +4: hardware register of a scalar/vector constant	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 4\);$@2	+1
+use	evsAssignVertexInputs	uVar13	hwRegister	INFERRED	symbol record +4: hardware register of a scalar/vector constant	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,uVar13\ \&\ 0xffff\ \|\ 0x10000\);$@6	+1
+use	evsAssignVertexInputs	uVar13	hwRegisterRow0	INFERRED	symbol record +0x10: register of matrix row 0	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 0x10\);$	+1
+use	evsAssignVertexInputs	uVar13	hwRegisterRow0	INFERRED	symbol record +0x10: register of matrix row 0	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,uVar13\ \&\ 0xffff\ \|\ 0x10000\);$@2	+1
+use	evsAssignVertexInputs	uVar13	hwRegisterRow1	INFERRED	symbol record +0x14	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 0x14\);$	+1
+use	evsAssignVertexInputs	uVar13	hwRegisterRow1	INFERRED	symbol record +0x14	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,uVar13\ \&\ 0xffff\ \|\ 0x10000\);$@3	+1
+use	evsAssignVertexInputs	uVar13	hwRegisterRow2	INFERRED	symbol record +0x18	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 0x18\);$	+1
+use	evsAssignVertexInputs	uVar13	hwRegisterRow2	INFERRED	symbol record +0x18	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,uVar13\ \&\ 0xffff\ \|\ 0x10000\);$@4	+1
+use	evsAssignVertexInputs	uVar13	hwRegisterRow3	INFERRED	symbol record +0x1c	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 0x1c\);$	+1
+use	evsAssignVertexInputs	uVar13	hwRegisterRow3	INFERRED	symbol record +0x1c	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,uVar13\ \&\ 0xffff\ \|\ 0x10000\);$@5	+1
+use	evsAssignVertexInputs	uVar13	instIndex	INFERRED	instruction loop counter	^\s*uVar13\ =\ 0;$@5	+1
+use	evsAssignVertexInputs	uVar13	instIndex	INFERRED	instruction loop counter	^\s*if\ \(\(\(\(iVar18\ ==\ 0\)\ \&\&\ \(\*\(int\ \*\)\(iVar16\ \+\ 0x1c\)\ ==\ 0\)\)\ \&\&$	+3
+use	evsAssignVertexInputs	uVar13	instIndex	INFERRED	instruction loop counter	^\s*uVar23\ =\ uVar13\ \+\ 1;$	+1
+use	evsAssignVertexInputs	uVar13	instIndex	INFERRED	instruction loop counter	^\s*uVar13\ =\ uVar13\ \+\ 1;$@4	+1
+use	evsAssignVertexInputs	uVar13	instIndex	INFERRED	instruction loop counter	^\s*\}\ while\ \(uVar13\ <\ \(uint\)param_2\[5\]\);$@4	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*iVar14\ =\ iVar17\ \+\ param_2\[8\];$	+2
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(undefined1\ \*\)\(iVar14\ \+\ 0x3d\)\ =\ 1;$	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*if\ \(\(\*\(char\ \*\)\(iVar14\ \+\ 0x44\)\ ==\ '\\0'\)\ \|\|\ \(\*\(int\ \*\)\(iVar14\ \+\ 0x48\)\ ==\ 0x12\)\)\ \{$	+2
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(int\ \*\)\(iVar14\ \+\ 4\)\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(int\ \*\)\(iVar14\ \+\ 0x1c\)\ =\ iVar10;$	+4
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*switch\(\*\(int\ \*\)\(iVar14\ \+\ 0x48\)\)\ \{$	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar14\ \+\ 0x4c\);$	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(undefined4\ \*\)\(iVar14\ \+\ 8\)\ =\ 2;$	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(undefined4\ \*\)\(iVar14\ \+\ 8\)\ =\ 3;$	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(undefined4\ \*\)\(iVar14\ \+\ 8\)\ =\ 1;$	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(int\ \*\)\(iVar14\ \+\ 4\)\ =\ iVar10;$@2	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*iVar14\ =\ iVar17\ \+\ param_2\[8\];$@2	+2
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(undefined1\ \*\)\(iVar14\ \+\ 0x3d\)\ =\ 1;$@2	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*if\ \(\(\*\(char\ \*\)\(iVar14\ \+\ 0x44\)\ ==\ '\\0'\)\ \|\|\ \(\*\(int\ \*\)\(iVar14\ \+\ 0x48\)\ ==\ 0x12\)\)\ \{$@2	+2
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(int\ \*\)\(iVar14\ \+\ 4\)\ =\ iVar10;$@3	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(int\ \*\)\(iVar14\ \+\ 0x1c\)\ =\ iVar10;$@2	+4
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*switch\(\*\(int\ \*\)\(iVar14\ \+\ 0x48\)\)\ \{$@2	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar14\ \+\ 0x4c\);$@2	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(undefined4\ \*\)\(iVar14\ \+\ 8\)\ =\ 2;$@2	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(undefined4\ \*\)\(iVar14\ \+\ 8\)\ =\ 3;$@2	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(undefined4\ \*\)\(iVar14\ \+\ 8\)\ =\ 1;$@2	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(int\ \*\)\(iVar14\ \+\ 4\)\ =\ iVar10;$@4	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*iVar14\ =\ iVar17\ \+\ iVar18;$	+6
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(undefined4\ \*\)\(iVar26\ \+\ 0xb8\)\ =\ \*\(undefined4\ \*\)\(iVar14\ \+\ 4\);$	+1
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*iVar14\ =\ iVar17\ \+\ iVar18;$@2	+6
+use	evsAssignVertexInputs	iVar14	symbolRecord	INFERRED	0x54-byte symbol record: symbol table shader[8] + symbolOffset	^\s*\*\(undefined4\ \*\)\(iVar26\ \+\ 0xb8\)\ =\ \*\(undefined4\ \*\)\(iVar14\ \+\ 4\);$@2	+1
+use	evsAssignVertexInputs	iVar14	freeOutputReg2	INFERRED	evsFindFreeOutputRegister(programState) result	^\s*iVar14\ =\ \(\(int\ \(\*\)\(\)\)FUN_00070c70\)\(iVar26\);$	+2
+use	evsAssignVertexInputs	iVar14	freeOutputReg2	INFERRED	evsFindFreeOutputRegister(programState) result	^\s*uVar12\ =\ \(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x000012a8\)\ \+\ param_1\)\)\(param_1,iVar14,4\);$	+1
+use	evsAssignVertexInputs	iVar14	nextInst	INFERRED	pointer to the instruction following the current one (+0x74)	^\s*iVar14\ =\ iVar22\ \+\ 0x74\ \+\ param_2\[6\];$	+1
+use	evsAssignVertexInputs	iVar14	nextInst	INFERRED	pointer to the instruction following the current one (+0x74)	^\s*iVar17\ =\ \(\(int\ \(\*\)\(\)\)FUN_00070bf0\)\(iVar14\ \+\ 0x20,iVar16\);$	+4
+use	evsAssignVertexInputs	iVar14	nextInst	INFERRED	pointer to the instruction following the current one (+0x74)	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar14\ \+\ 8\);$	+1
+use	evsAssignVertexInputs	iVar14	nextInst	INFERRED	pointer to the instruction following the current one (+0x74)	^\s*bVar2\ =\ \*\(byte\ \*\)\(iVar14\ \+\ 0xf\);$	+4
+use	evsAssignVertexInputs	iVar14	nextInst	INFERRED	pointer to the instruction following the current one (+0x74)	^\s*\}\ while\ \(\(uVar11\ !=\ uVar23\)\ \&\&\ \(iVar14\ =\ iVar14\ \+\ 0x74,\ !bVar25\)\);$	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*iVar15\ =\ \*\*\(int\ \*\*\)\(in_r7\ \*\ 4\ \+\ iVar16\);$	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar15\ \+\ 0x10\)\ \+\ iVar18;$	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x18\)\ =\ 1;$	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 100\)\ =\ 1;$	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013a0\)\ \+\ iVar17\ \*\ 4\ \+\ iVar15\)\ =\ iVar10;$	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0x68\)\ =\ 1;$	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xc4\)\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x23\)\ =\ 1;$	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 200\)\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x24\)\ =\ 1;$	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xcc\)\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x25\)\ =\ 1;$	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xd0\)\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x22\)\ =\ 1;$	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xd4\)\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x27\)\ =\ 1;$	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xd8\)\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x28\)\ =\ 1;$	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xdc\)\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x29\)\ =\ 1;$	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xd0\)\ =\ iVar10;$@2	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x26\)\ =\ 1;$	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*iVar17\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\);$	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0xa8\)\ =\ 1;$	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*iVar17\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\);$@2	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0xa8\)\ =\ 1;$@2	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0x6c\)\ =\ 1;$@2	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001390U\)\ \+\ iVar15\)\ =\ iVar10;$	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0xac\)\ =\ 1;$	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar15\ \+\ 0x10\)\ \+\ iVar18;$@2	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*iVar15\ =\ \*\*\(int\ \*\*\)\(in_r7\ \*\ 4\ \+\ iVar16\);$@2	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar15\ \+\ 0x10\)\ \+\ iVar18;$@3	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x18\)\ =\ 1;$@2	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 100\)\ =\ 1;$@2	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013a0\)\ \+\ iVar17\ \*\ 4\ \+\ iVar15\)\ =\ iVar10;$@2	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0x68\)\ =\ 1;$@2	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xc4\)\ =\ iVar10;$@3	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x23\)\ =\ 1;$@2	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 200\)\ =\ iVar10;$@2	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x24\)\ =\ 1;$@2	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xcc\)\ =\ iVar10;$@2	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x25\)\ =\ 1;$@2	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xd0\)\ =\ iVar10;$@3	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x22\)\ =\ 1;$@2	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xd4\)\ =\ iVar10;$@2	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x27\)\ =\ 1;$@2	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xd8\)\ =\ iVar10;$@2	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x28\)\ =\ 1;$@2	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xdc\)\ =\ iVar10;$@2	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x29\)\ =\ 1;$@2	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xd0\)\ =\ iVar10;$@4	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x26\)\ =\ 1;$@2	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*iVar17\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\);$@3	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0xa8\)\ =\ 1;$@4	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*iVar17\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\);$@4	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0xa8\)\ =\ 1;$@5	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0x6c\)\ =\ 1;$@4	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001390U\)\ \+\ iVar15\)\ =\ iVar10;$@2	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0xac\)\ =\ 1;$@2	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar15\ \+\ 0x10\)\ \+\ iVar18;$@4	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*iVar15\ =\ \*\*\(int\ \*\*\)\(in_r7\ \*\ 4\ \+\ iVar16\);$@3	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(\*\(int\ \*\)\(iVar15\ \+\ 0x10\)\ \+\ iVar16\ \+\ 0x10\)\ =\ 1;$	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x18\)\ =\ 1;$@3	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 100\)\ =\ 1;$@3	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013a0\)\ \+\ iVar18\ \*\ 4\ \+\ iVar15\)\ =\ iVar10;$	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0x68\)\ =\ 1;$@3	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xc4\)\ =\ iVar10;$@5	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x23\)\ =\ 1;$@3	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 200\)\ =\ iVar10;$@3	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x24\)\ =\ 1;$@3	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xcc\)\ =\ iVar10;$@3	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x25\)\ =\ 1;$@3	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xd0\)\ =\ iVar10;$@5	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x22\)\ =\ 1;$@3	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xd4\)\ =\ iVar10;$@3	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x27\)\ =\ 1;$@3	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xd8\)\ =\ iVar10;$@3	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x28\)\ =\ 1;$@3	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xdc\)\ =\ iVar10;$@3	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x29\)\ =\ 1;$@3	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0xd0\)\ =\ iVar10;$@6	+1
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(iVar15\ \+\ 0x26\)\ =\ 1;$@3	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*iVar18\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\);$	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0xa8\)\ =\ 1;$@7	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*iVar18\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\);$@2	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0xa8\)\ =\ 1;$@8	+2
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0x6c\)\ =\ 1;$@6	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001390U\)\ \+\ iVar15\)\ =\ iVar10;$@3	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined4\ \*\)\(iVar15\ \+\ 0xac\)\ =\ 1;$@3	+3
+use	evsAssignVertexInputs	iVar15	curProgramState	INFERRED	**(table[ctx+0x118c]*4 + shader[0]) re-read each instruction	^\s*\*\(undefined1\ \*\)\(\*\(int\ \*\)\(iVar15\ \+\ 0x10\)\ \+\ iVar16\ \+\ 0x10\)\ =\ 1;$@2	+1
+use	evsAssignVertexInputs	iVar15	programTable	INFERRED	*shader: per-context table of program-state pointers	^\s*iVar15\ =\ \*param_2;$	+2
+use	evsAssignVertexInputs	iVar15	programTable	INFERRED	*shader: per-context table of program-state pointers	^\s*iVar15\ =\ \*param_2;$@2	+1
+use	evsAssignVertexInputs	iVar15	programTable	INFERRED	*shader: per-context table of program-state pointers	^\s*iVar15\ =\ \*param_2;$@3	+1
+use	evsAssignVertexInputs	iVar15	programTable	INFERRED	*shader: per-context table of program-state pointers	^\s*iVar26\ =\ \*\*\(int\ \*\*\)\(in_r7\ \*\ 4\ \+\ iVar15\);$@2	+1
+use	evsAssignVertexInputs	iVar15	programTable	INFERRED	*shader: per-context table of program-state pointers	^\s*iVar15\ =\ \*param_2;$@4	+1
+use	evsAssignVertexInputs	iVar15	programTable	INFERRED	*shader: per-context table of program-state pointers	^\s*iVar15\ =\ \*param_2;$@5	+1
+use	evsAssignVertexInputs	iVar15	programTable	INFERRED	*shader: per-context table of program-state pointers	^\s*iVar26\ =\ \*\*\(int\ \*\*\)\(in_r7\ \*\ 4\ \+\ iVar15\);$@3	+1
+use	evsAssignVertexInputs	iVar15	freeOutputReg01	INFERRED	evsFindFreeOutputRegister(curProgramState) result	^\s*iVar15\ =\ \(\(int\ \(\*\)\(\)\)FUN_00070c70\)\(iVar26\);$	+2
+use	evsAssignVertexInputs	iVar15	freeOutputReg01	INFERRED	evsFindFreeOutputRegister(curProgramState) result	^\s*uVar12\ =\ \(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x000012a8\)\ \+\ param_1\)\)\(param_1,iVar15,4\);$	+1
+use	evsAssignVertexInputs	iVar15	freeOutputReg01	INFERRED	evsFindFreeOutputRegister(curProgramState) result	^\s*iVar15\ =\ \(\(int\ \(\*\)\(\)\)FUN_00070c70\)\(iVar26\);$@2	+2
+use	evsAssignVertexInputs	iVar15	freeOutputReg01	INFERRED	evsFindFreeOutputRegister(curProgramState) result	^\s*uVar12\ =\ \(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x000012a8\)\ \+\ param_1\)\)\(param_1,iVar15,4\);$@2	+1
+use	evsAssignVertexInputs	iVar15	symbolRecords	INFERRED	shader[8], the symbol record array	^\s*iVar15\ =\ param_2\[8\];$	+1
+use	evsAssignVertexInputs	iVar15	symbolRecords	INFERRED	shader[8], the symbol record array	^\s*iVar16\ =\ iVar18\ \+\ iVar15;$	+6
+use	evsAssignVertexInputs	iVar15	symbolRecords	INFERRED	shader[8], the symbol record array	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ iVar15\)\ =\ uVar12;$	+1
+use	evsAssignVertexInputs	iVar15	symbolDataType	INFERRED	symbol record +0x24: GL_SCALAR/VECTOR/MATRIX_EXT	^\s*iVar15\ =\ \*\(int\ \*\)\(iVar26\ \+\ 0x24\);$	+2
+use	evsAssignVertexInputs	iVar15	symbolDataType	INFERRED	symbol record +0x24: GL_SCALAR/VECTOR/MATRIX_EXT	^\s*else\ if\ \(iVar15\ ==\ 0x87c0\)\ \{$	+1
+use	evsAssignVertexInputs	iVar15	symbolDataType	INFERRED	symbol record +0x24: GL_SCALAR/VECTOR/MATRIX_EXT	^\s*else\ if\ \(iVar15\ ==\ 0x87be\)\ \{$	+1
+use	evsAssignVertexInputs	iVar15	tempSlotOffset	INFERRED	byte offset (0x28 per entry) into the temp-slot table programState+0x3c	^\s*iVar15\ =\ 0;$	+1
+use	evsAssignVertexInputs	iVar15	tempSlotOffset	INFERRED	byte offset (0x28 per entry) into the temp-slot table programState+0x3c	^\s*iVar16\ =\ iVar15\ \+\ \*\(int\ \*\)\(iVar26\ \+\ 0x3c\);$	+1
+use	evsAssignVertexInputs	iVar15	tempSlotOffset	INFERRED	byte offset (0x28 per entry) into the temp-slot table programState+0x3c	^\s*\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar26\ \+\ 0x3c\)\ \+\ iVar15\ \+\ 0x1c\)\ \*\ 0x54\ \+\ param_2\[8\]\ \+\ 0x3d\)\ =\ 0;$	+1
+use	evsAssignVertexInputs	iVar15	tempSlotOffset	INFERRED	byte offset (0x28 per entry) into the temp-slot table programState+0x3c	^\s*\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar26\ \+\ 0x3c\)\ \+\ iVar15\ \+\ 0x20\)\ \*\ 0x54\ \+\ param_2\[8\]\ \+\ 0x3d\)\ =\ 0;$	+1
+use	evsAssignVertexInputs	iVar15	tempSlotOffset	INFERRED	byte offset (0x28 per entry) into the temp-slot table programState+0x3c	^\s*\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar26\ \+\ 0x3c\)\ \+\ iVar15\ \+\ 0x24\)\ \*\ 0x54\ \+\ param_2\[8\]\ \+\ 0x3d\)\ =\ 0;$	+7
+use	evsAssignVertexInputs	iVar15	tempSlotOffset	INFERRED	byte offset (0x28 per entry) into the temp-slot table programState+0x3c	^\s*iVar15\ =\ iVar15\ \+\ 0x28;$	+1
+local	evsAssignVertexInputs	in_r7	activeProgramIndexOrSymbolRecord	INFERRED	ctx+0x118c active program index, reused as the symbol record pointer in the third operand block (one web: also passed on to the opcode emitters)
+use	evsAssignVertexInputs	iVar16	programTableB	INFERRED	*shader	^\s*iVar16\ =\ \*param_2;$	+2
+use	evsAssignVertexInputs	iVar16	programTableB	INFERRED	*shader	^\s*iVar16\ =\ \*param_2;$@2	+1
+use	evsAssignVertexInputs	iVar16	programTableB	INFERRED	*shader	^\s*iVar15\ =\ \*\*\(int\ \*\*\)\(in_r7\ \*\ 4\ \+\ iVar16\);$@2	+1
+use	evsAssignVertexInputs	iVar16	programTableB	INFERRED	*shader	^\s*iVar16\ =\ \*param_2;$@3	+1
+use	evsAssignVertexInputs	iVar16	programTableB	INFERRED	*shader	^\s*iVar15\ =\ \*\*\(int\ \*\*\)\(in_r7\ \*\ 4\ \+\ iVar16\);$@3	+1
+use	evsAssignVertexInputs	iVar16	symbolDataTypeB	INFERRED	symbol record +0x24	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar14\ \+\ 0x24\);$	+2
+use	evsAssignVertexInputs	iVar16	symbolDataTypeB	INFERRED	symbol record +0x24	^\s*else\ if\ \(iVar16\ ==\ 0x87c0\)\ \{$	+1
+use	evsAssignVertexInputs	iVar16	symbolDataTypeB	INFERRED	symbol record +0x24	^\s*if\ \(iVar16\ ==\ 0x87be\)\ goto\ LAB_0007209c;$	+1
+use	evsAssignVertexInputs	iVar16	symbolDataTypeB	INFERRED	symbol record +0x24	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar14\ \+\ 0x24\);$@2	+2
+use	evsAssignVertexInputs	iVar16	symbolDataTypeB	INFERRED	symbol record +0x24	^\s*else\ if\ \(iVar16\ ==\ 0x87c0\)\ \{$@2	+1
+use	evsAssignVertexInputs	iVar16	symbolDataTypeB	INFERRED	symbol record +0x24	^\s*if\ \(iVar16\ ==\ 0x87be\)\ goto\ LAB_000724bc;$	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@2	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@3	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@4	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@5	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@6	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@7	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@8	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@9	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@10	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@11	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@12	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@13	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@14	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@15	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@16	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@17	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar10\ =\ iVar16;$	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10;$@2	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@18	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@19	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@20	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@21	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@22	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@23	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@24	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@25	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@26	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@27	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@28	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@29	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@30	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@31	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@32	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@33	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar16\ =\ iVar10\ \+\ 1;$@34	+1
+use	evsAssignVertexInputs	iVar16	nextInputRegCandidate	INFERRED	the cursor value after this symbol's registers are allocated	^\s*iVar10\ =\ iVar16;$@2	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@2	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ 0;$	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*\*\(undefined1\ \*\)\(\*\(int\ \*\)\(iVar15\ \+\ 0x10\)\ \+\ iVar16\ \+\ 0x10\)\ =\ 1;$	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ 0;$@2	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@3	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@4	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@5	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@6	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@7	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@8	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@9	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@10	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@11	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@12	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@13	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar18\ \*\ 0x28;$	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar18\ \*\ 0x28;$@2	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@14	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@15	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ iVar10\ \*\ 0x28;$@16	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar16\ =\ 0;$@3	+1
+use	evsAssignVertexInputs	iVar16	inputRecOffset	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*\*\(undefined1\ \*\)\(\*\(int\ \*\)\(iVar15\ \+\ 0x10\)\ \+\ iVar16\ \+\ 0x10\)\ =\ 1;$@2	+1
+use	evsAssignVertexInputs	iVar16	instArray	INFERRED	shader[6], the 0x74-byte instruction array	^\s*iVar16\ =\ param_2\[6\];$	+1
+use	evsAssignVertexInputs	iVar16	instArray	INFERRED	shader[6], the 0x74-byte instruction array	^\s*if\ \(\*\(int\ \*\)\(iVar10\ \+\ iVar16\ \+\ 0x20\)\ ==\ 2\)\ \{$	+1
+use	evsAssignVertexInputs	iVar16	instArray	INFERRED	shader[6], the 0x74-byte instruction array	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar10\ \+\ iVar16\ \+\ 0x24\)\ \*\ 0x54;$	+1
+use	evsAssignVertexInputs	iVar16	instArray	INFERRED	shader[6], the 0x74-byte instruction array	^\s*iVar16\ =\ param_2\[6\];$@2	+1
+use	evsAssignVertexInputs	iVar16	instArray	INFERRED	shader[6], the 0x74-byte instruction array	^\s*iVar16\ =\ param_2\[6\];$@3	+1
+use	evsAssignVertexInputs	iVar16	instArray	INFERRED	shader[6], the 0x74-byte instruction array	^\s*if\ \(\*\(int\ \*\)\(iVar10\ \+\ iVar16\ \+\ 0x3c\)\ ==\ 2\)\ \{$	+1
+use	evsAssignVertexInputs	iVar16	instArray	INFERRED	shader[6], the 0x74-byte instruction array	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar10\ \+\ iVar16\ \+\ 0x40\)\ \*\ 0x54;$	+1
+use	evsAssignVertexInputs	iVar16	instArray	INFERRED	shader[6], the 0x74-byte instruction array	^\s*iVar16\ =\ param_2\[6\];$@4	+1
+use	evsAssignVertexInputs	iVar16	instArray	INFERRED	shader[6], the 0x74-byte instruction array	^\s*iVar16\ =\ param_2\[6\];$@5	+1
+use	evsAssignVertexInputs	iVar16	instArray	INFERRED	shader[6], the 0x74-byte instruction array	^\s*if\ \(\*\(int\ \*\)\(iVar10\ \+\ iVar16\ \+\ 0x58\)\ ==\ 2\)\ \{$	+1
+use	evsAssignVertexInputs	iVar16	instArray	INFERRED	shader[6], the 0x74-byte instruction array	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar10\ \+\ iVar16\ \+\ 0x5c\)\ \*\ 0x54;$	+1
+use	evsAssignVertexInputs	iVar16	symbolRecordB	INFERRED	symbol record: symbolRecords + symbolOffset	^\s*iVar16\ =\ iVar18\ \+\ iVar15;$	+6
+use	evsAssignVertexInputs	iVar16	symbolRecordB	INFERRED	symbol record: symbolRecords + symbolOffset	^\s*\*\(undefined4\ \*\)\(iVar26\ \+\ 0xb8\)\ =\ \*\(undefined4\ \*\)\(iVar16\ \+\ 4\);$	+1
+use	evsAssignVertexInputs	iVar16	tempSlotRecord	INFERRED	0x28-byte temp-slot record: programState+0x3c table + offset	^\s*iVar16\ =\ iVar15\ \+\ \*\(int\ \*\)\(iVar26\ \+\ 0x3c\);$	+6
+use	evsAssignVertexInputs	iVar16	tempSlotRecord	INFERRED	0x28-byte temp-slot record: programState+0x3c table + offset	^\s*iVar17\ =\ \(\(int\ \(\*\)\(\)\)FUN_00070bf0\)\(iVar14\ \+\ 0x20,iVar16\);$	+4
+use	evsAssignVertexInputs	iVar16	tempSlotRecord	INFERRED	0x28-byte temp-slot record: programState+0x3c table + offset	^\s*bVar3\ =\ iVar17\ ==\ \*\(int\ \*\)\(iVar16\ \+\ 0x1c\);$	+3
+use	evsAssignVertexInputs	iVar17	symbolOffset	INFERRED	symbol index * 0x54, offset into the symbol record array	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar26\ \+\ iVar18\ \+\ 0x24\)\ \*\ 0x54;$	+2
+use	evsAssignVertexInputs	iVar17	symbolOffset	INFERRED	symbol index * 0x54, offset into the symbol record array	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ param_2\[8\]\)\ =\ 0;$	+1
+use	evsAssignVertexInputs	iVar17	symbolOffset	INFERRED	symbol index * 0x54, offset into the symbol record array	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar26\ \+\ iVar18\ \+\ 0x40\)\ \*\ 0x54;$	+2
+use	evsAssignVertexInputs	iVar17	symbolOffset	INFERRED	symbol index * 0x54, offset into the symbol record array	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ param_2\[8\]\)\ =\ 0;$@2	+1
+use	evsAssignVertexInputs	iVar17	symbolOffset	INFERRED	symbol index * 0x54, offset into the symbol record array	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar10\ \+\ iVar16\ \+\ 0x24\)\ \*\ 0x54;$	+5
+use	evsAssignVertexInputs	iVar17	symbolOffset	INFERRED	symbol index * 0x54, offset into the symbol record array	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ iVar18\)\ =\ uVar12;$	+1
+use	evsAssignVertexInputs	iVar17	symbolOffset	INFERRED	symbol index * 0x54, offset into the symbol record array	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar10\ \+\ iVar16\ \+\ 0x40\)\ \*\ 0x54;$	+5
+use	evsAssignVertexInputs	iVar17	symbolOffset	INFERRED	symbol index * 0x54, offset into the symbol record array	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ iVar18\)\ =\ uVar12;$@2	+1
+use	evsAssignVertexInputs	iVar17	stateIndex	INFERRED	symbol record +0x4c: index of the bound state (texture unit / light)	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar14\ \+\ 0x4c\);$	+1
+use	evsAssignVertexInputs	iVar17	stateIndex	INFERRED	symbol record +0x4c: index of the bound state (texture unit / light)	^\s*\*\(undefined1\ \*\)\(\(int\)param_2\ \+\ iVar17\ \+\ 0x34\)\ =\ 1;$	+1
+use	evsAssignVertexInputs	iVar17	stateIndex	INFERRED	symbol record +0x4c: index of the bound state (texture unit / light)	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013a0\)\ \+\ iVar17\ \*\ 4\ \+\ iVar15\)\ =\ iVar10;$	+4
+use	evsAssignVertexInputs	iVar17	stateIndex	INFERRED	symbol record +0x4c: index of the bound state (texture unit / light)	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar14\ \+\ 0x4c\);$@2	+1
+use	evsAssignVertexInputs	iVar17	stateIndex	INFERRED	symbol record +0x4c: index of the bound state (texture unit / light)	^\s*\*\(undefined1\ \*\)\(\(int\)param_2\ \+\ iVar17\ \+\ 0x34\)\ =\ 1;$@2	+1
+use	evsAssignVertexInputs	iVar17	stateIndex	INFERRED	symbol record +0x4c: index of the bound state (texture unit / light)	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013a0\)\ \+\ iVar17\ \*\ 4\ \+\ iVar15\)\ =\ iVar10;$@2	+4
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*iVar17\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\);$	+1
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*iVar17\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*iVar18\ =\ iVar17\ \*\ 0x28;$	+1
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0x100\)\ =\ iVar17;$	+2
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*iVar17\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\);$@2	+1
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*iVar17\ =\ iVar10;$@2	+1
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*iVar18\ =\ iVar17\ \*\ 0x28;$@2	+1
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0x100\)\ =\ iVar17;$@2	+2
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*iVar17\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\);$@3	+1
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*iVar17\ =\ iVar10;$@3	+1
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*iVar18\ =\ iVar17\ \*\ 0x28;$@3	+1
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0x100\)\ =\ iVar17;$@3	+2
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*iVar17\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\);$@4	+1
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*iVar17\ =\ iVar10;$@4	+1
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*iVar18\ =\ iVar17\ \*\ 0x28;$@4	+1
+use	evsAssignVertexInputs	iVar17	sharedInputReg	INFERRED	programState+0x1398: input register shared by the two state cases 0xc/0xd	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0x100\)\ =\ iVar17;$@4	+2
+use	evsAssignVertexInputs	iVar17	usesTempSlot	INFERRED	evsOperandUsesTempSlot result for the instruction operand	^\s*iVar17\ =\ \(\(int\ \(\*\)\(\)\)FUN_00070bf0\)\(iVar14\ \+\ 0x20,iVar16\);$	+3
+use	evsAssignVertexInputs	iVar17	usesTempSlot	INFERRED	evsOperandUsesTempSlot result for the instruction operand	^\s*iVar17\ =\ \(\(int\ \(\*\)\(\)\)FUN_00070bf0\)\(iVar14\ \+\ 4,iVar16\);$	+2
+use	evsAssignVertexInputs	iVar17	destSymbolIndex	INFERRED	instruction destination symbol index (inst +8)	^\s*iVar17\ =\ \*\(int\ \*\)\(iVar14\ \+\ 8\);$	+6
+use	evsAssignVertexInputs	iVar18	instArrayB	INFERRED	shader[6]	^\s*iVar18\ =\ param_2\[6\];$	+1
+use	evsAssignVertexInputs	iVar18	instArrayB	INFERRED	shader[6]	^\s*if\ \(\*\(int\ \*\)\(iVar26\ \+\ iVar18\ \+\ 0x20\)\ ==\ 2\)\ \{$	+2
+use	evsAssignVertexInputs	iVar18	instArrayB	INFERRED	shader[6]	^\s*iVar18\ =\ param_2\[6\];$@2	+1
+use	evsAssignVertexInputs	iVar18	instArrayB	INFERRED	shader[6]	^\s*if\ \(\*\(int\ \*\)\(iVar26\ \+\ iVar18\ \+\ 0x3c\)\ ==\ 2\)\ \{$	+2
+use	evsAssignVertexInputs	iVar18	instArrayB	INFERRED	shader[6]	^\s*iVar18\ =\ param_2\[6\];$@3	+1
+use	evsAssignVertexInputs	iVar18	instArrayB	INFERRED	shader[6]	^\s*if\ \(\*\(int\ \*\)\(iVar26\ \+\ iVar18\ \+\ 0x58\)\ ==\ 2\)\ \{$	+2
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@2	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ 0;$	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar15\ \+\ 0x10\)\ \+\ iVar18;$	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ 0;$@2	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@3	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@4	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@5	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@6	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@7	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@8	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@9	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@10	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@11	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@12	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@13	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar17\ \*\ 0x28;$	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar17\ \*\ 0x28;$@2	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@14	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@15	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@16	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ 0;$@3	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar15\ \+\ 0x10\)\ \+\ iVar18;$@2	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*\*\(undefined1\ \*\)\(iVar18\ \+\ 0x10\)\ =\ 1;$	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@17	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@18	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ 0;$@4	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar15\ \+\ 0x10\)\ \+\ iVar18;$@3	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ 0;$@5	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@19	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@20	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@21	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@22	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@23	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@24	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@25	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@26	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@27	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@28	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@29	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar17\ \*\ 0x28;$@3	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar17\ \*\ 0x28;$@4	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@30	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@31	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ iVar10\ \*\ 0x28;$@32	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ 0;$@6	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar15\ \+\ 0x10\)\ \+\ iVar18;$@4	+1
+use	evsAssignVertexInputs	iVar18	inputRecOffsetB	INFERRED	byte offset (0x28 per entry) of the hardware input record	^\s*\*\(undefined1\ \*\)\(iVar18\ \+\ 0x10\)\ =\ 1;$@2	+1
+use	evsAssignVertexInputs	iVar18	stateIndexB	INFERRED	symbol record +0x4c	^\s*iVar18\ =\ \*\(int\ \*\)\(in_r7\ \+\ 0x4c\);$	+1
+use	evsAssignVertexInputs	iVar18	stateIndexB	INFERRED	symbol record +0x4c	^\s*\*\(undefined1\ \*\)\(\(int\)param_2\ \+\ iVar18\ \+\ 0x34\)\ =\ 1;$	+1
+use	evsAssignVertexInputs	iVar18	stateIndexB	INFERRED	symbol record +0x4c	^\s*\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013a0\)\ \+\ iVar18\ \*\ 4\ \+\ iVar15\)\ =\ iVar10;$	+4
+use	evsAssignVertexInputs	iVar18	sharedInputRegB	INFERRED	programState+0x1398 shared input register	^\s*iVar18\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\);$	+1
+use	evsAssignVertexInputs	iVar18	sharedInputRegB	INFERRED	programState+0x1398 shared input register	^\s*iVar18\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar18	sharedInputRegB	INFERRED	programState+0x1398 shared input register	^\s*iVar16\ =\ iVar18\ \*\ 0x28;$	+1
+use	evsAssignVertexInputs	iVar18	sharedInputRegB	INFERRED	programState+0x1398 shared input register	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0x100\)\ =\ iVar18;$	+2
+use	evsAssignVertexInputs	iVar18	sharedInputRegB	INFERRED	programState+0x1398 shared input register	^\s*iVar18\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar15\);$@2	+1
+use	evsAssignVertexInputs	iVar18	sharedInputRegB	INFERRED	programState+0x1398 shared input register	^\s*iVar18\ =\ iVar10;$@2	+1
+use	evsAssignVertexInputs	iVar18	sharedInputRegB	INFERRED	programState+0x1398 shared input register	^\s*iVar16\ =\ iVar18\ \*\ 0x28;$@2	+1
+use	evsAssignVertexInputs	iVar18	sharedInputRegB	INFERRED	programState+0x1398 shared input register	^\s*\*\(int\ \*\)\(iVar15\ \+\ 0x100\)\ =\ iVar18;$@2	+2
+use	evsAssignVertexInputs	iVar18	symbolRecordsB	INFERRED	shader[8]	^\s*iVar18\ =\ param_2\[8\];$	+1
+use	evsAssignVertexInputs	iVar18	symbolRecordsB	INFERRED	shader[8]	^\s*iVar14\ =\ iVar17\ \+\ iVar18;$	+4
+use	evsAssignVertexInputs	iVar18	symbolRecordsB	INFERRED	shader[8]	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ iVar18\)\ =\ uVar12;$	+1
+use	evsAssignVertexInputs	iVar18	symbolRecordsB	INFERRED	shader[8]	^\s*iVar18\ =\ param_2\[8\];$@2	+1
+use	evsAssignVertexInputs	iVar18	symbolRecordsB	INFERRED	shader[8]	^\s*iVar14\ =\ iVar17\ \+\ iVar18;$@2	+4
+use	evsAssignVertexInputs	iVar18	symbolRecordsB	INFERRED	shader[8]	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ iVar18\)\ =\ uVar12;$@2	+1
+use	evsAssignVertexInputs	iVar18	symbolOffsetB	INFERRED	source symbol index * 0x54	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar10\ \+\ iVar16\ \+\ 0x5c\)\ \*\ 0x54;$	+7
+use	evsAssignVertexInputs	iVar18	symbolOffsetB	INFERRED	source symbol index * 0x54	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ iVar15\)\ =\ uVar12;$	+1
+use	evsAssignVertexInputs	iVar18	slotComponentX	INFERRED	temp-slot record +0x18: symbol index of the X component	^\s*iVar18\ =\ \*\(int\ \*\)\(iVar16\ \+\ 0x18\);$	+4
+use	evsAssignVertexInputs	iVar18	slotComponentX	INFERRED	temp-slot record +0x18: symbol index of the X component	^\s*bVar2\ =\ iVar18\ ==\ iVar17;$	+1
+use	evsAssignVertexInputs	iVar18	slotComponentX	INFERRED	temp-slot record +0x18: symbol index of the X component	^\s*\*\(undefined1\ \*\)\(iVar18\ \*\ 0x54\ \+\ param_2\[8\]\ \+\ 0x3d\)\ =\ 0;$	+1
+use	evsAssignVertexInputs	iVar22	programStateAlias	INFERRED	same expression as programState, reloaded	^\s*iVar22\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000118c\)\ \+\ param_1\)\ \*\ 4\ \+\ \*param_2\);$	+2
+use	evsAssignVertexInputs	iVar22	programStateAlias	INFERRED	same expression as programState, reloaded	^\s*\*\(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x00001398\)\ \+\ iVar22\)\ =\ 0;$	+2
+use	evsAssignVertexInputs	iVar22	programStateAlias	INFERRED	same expression as programState, reloaded	^\s*\*\(int\ \*\)\(iVar22\ \+\ 0x130\)\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar22	programStateAlias	INFERRED	same expression as programState, reloaded	^\s*iVar10\ =\ iVar22;$@2	+1
+use	evsAssignVertexInputs	iVar22	programStateAlias	INFERRED	same expression as programState, reloaded	^\s*\*\(int\ \*\)\(iVar22\ \+\ 0x110\)\ =\ \*\(int\ \*\)\(iVar22\ \+\ 0x110\)\ \+\ 1;$	+1
+use	evsAssignVertexInputs	iVar22	allocStatus	INFERRED	evsAllocConstantsForOperand result	^\s*iVar22\ =\ \(\(int\ \(\*\)\(\)\)FUN_00070520\)\(param_1,param_2,iVar21,iVar10\ \+\ param_2\[6\]\ \+\ 0x20\);$	+4
+use	evsAssignVertexInputs	iVar22	symbolOffsetC	INFERRED	byte offset (0x54 per symbol) in the symbol loop	^\s*iVar22\ =\ 0;$	+1
+use	evsAssignVertexInputs	iVar22	symbolOffsetC	INFERRED	byte offset (0x54 per symbol) in the symbol loop	^\s*iVar26\ =\ iVar22\ \+\ param_2\[8\];$	+1
+use	evsAssignVertexInputs	iVar22	symbolOffsetC	INFERRED	byte offset (0x54 per symbol) in the symbol loop	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,\*\*\(undefined4\ \*\*\)\(iVar22\ \+\ param_2\[8\]\ \+\ 0x38\)\);$	+4
+use	evsAssignVertexInputs	iVar22	symbolOffsetC	INFERRED	byte offset (0x54 per symbol) in the symbol loop	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,\*\*\(undefined4\ \*\*\)\(param_2\[8\]\ \+\ iVar22\ \+\ 0x38\)\);$	+4
+use	evsAssignVertexInputs	iVar22	symbolOffsetC	INFERRED	byte offset (0x54 per symbol) in the symbol loop	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_2\[8\]\ \+\ iVar22\ \+\ 0x38\)\ \+\ 0x10\)\);$	+4
+use	evsAssignVertexInputs	iVar22	symbolOffsetC	INFERRED	byte offset (0x54 per symbol) in the symbol loop	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_2\[8\]\ \+\ iVar22\ \+\ 0x38\)\ \+\ 0x20\)\);$	+4
+use	evsAssignVertexInputs	iVar22	symbolOffsetC	INFERRED	byte offset (0x54 per symbol) in the symbol loop	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar22\ \+\ param_2\[8\]\ \+\ 0x38\)\ \+\ 0x30\)\);$	+4
+use	evsAssignVertexInputs	iVar22	symbolOffsetC	INFERRED	byte offset (0x54 per symbol) in the symbol loop	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,\*\*\(undefined4\ \*\*\)\(iVar22\ \+\ param_2\[8\]\ \+\ 0x38\)\);$@2	+4
+use	evsAssignVertexInputs	iVar22	symbolOffsetC	INFERRED	byte offset (0x54 per symbol) in the symbol loop	^\s*iVar22\ =\ iVar22\ \+\ 0x54;$	+1
+use	evsAssignVertexInputs	iVar22	symbolOffsetC	INFERRED	byte offset (0x54 per symbol) in the symbol loop	^\s*iVar22\ =\ 0;$@3	+1
+use	evsAssignVertexInputs	iVar22	symbolOffsetC	INFERRED	byte offset (0x54 per symbol) in the symbol loop	^\s*iVar26\ =\ iVar22\ \+\ param_2\[8\];$@2	+1
+use	evsAssignVertexInputs	iVar22	symbolOffsetC	INFERRED	byte offset (0x54 per symbol) in the symbol loop	^\s*iVar22\ =\ iVar22\ \+\ 0x54;$@2	+1
+use	evsAssignVertexInputs	iVar22	instOffsetB	INFERRED	byte offset (0x74 per instruction)	^\s*iVar22\ =\ 0;$@2	+1
+use	evsAssignVertexInputs	iVar22	instOffsetB	INFERRED	byte offset (0x74 per instruction)	^\s*if\ \(0x20\ <\ \*\(int\ \*\)\(iVar22\ \+\ param_2\[6\]\)\ \-\ 0x8782U\)\ \{$	+1
+use	evsAssignVertexInputs	iVar22	instOffsetB	INFERRED	byte offset (0x74 per instruction)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00070630\)\(param_1,param_2,iVar21,iVar22\ \+\ param_2\[6\]\ \+\ 4\);$	+4
+use	evsAssignVertexInputs	iVar22	instOffsetB	INFERRED	byte offset (0x74 per instruction)	^\s*iVar26\ =\ \(\*\*\(code\ \*\*\)\(\&DAT_001b9d04\ \+\ \*\(int\ \*\)\(iVar22\ \+\ param_2\[6\]\)\ \*\ 4\)\)$	+2
+use	evsAssignVertexInputs	iVar22	instOffsetB	INFERRED	byte offset (0x74 per instruction)	^\s*iVar14\ =\ iVar22\ \+\ 0x74\ \+\ param_2\[6\];$	+1
+use	evsAssignVertexInputs	iVar22	instOffsetB	INFERRED	byte offset (0x74 per instruction)	^\s*iVar22\ =\ iVar22\ \+\ 0x74;$	+1
+use	evsAssignVertexInputs	iVar22	fogOutputReg	INFERRED	programState+0x4c output counter: register allocated for the fog output	^\s*iVar22\ =\ \*\(int\ \*\)\(iVar21\ \+\ 0x4c\);$	+3
+local	evsAssignVertexInputs	uVar20	tempSlotIndex	INFERRED	index of the temp slot being scanned
+local	evsAssignVertexInputs	uVar23	scanInstIndex	INFERRED	index of the instruction after the current one during the slot scan
+use	evsAssignVertexInputs	uVar24	inputMask	INFERRED	shader[0xc] input-used flag bits	^\s*uVar24\ =\ param_2\[0xc\];$	+1
+use	evsAssignVertexInputs	uVar24	inputMask	INFERRED	shader[0xc] input-used flag bits	^\s*param_2\[0xc\]\ =\ uVar24\ \|\ 4;$	+1
+use	evsAssignVertexInputs	uVar24	inputMask	INFERRED	shader[0xc] input-used flag bits	^\s*uVar24\ =\ param_2\[0xc\];$@2	+1
+use	evsAssignVertexInputs	uVar24	inputMask	INFERRED	shader[0xc] input-used flag bits	^\s*param_2\[0xc\]\ =\ uVar24\ \|\ 4;$@2	+1
+use	evsAssignVertexInputs	uVar24	inputMask	INFERRED	shader[0xc] input-used flag bits	^\s*uVar24\ =\ param_2\[0xc\];$@3	+1
+use	evsAssignVertexInputs	uVar24	inputMask	INFERRED	shader[0xc] input-used flag bits	^\s*param_2\[0xc\]\ =\ uVar24\ \|\ 4;$@3	+1
+use	evsAssignVertexInputs	uVar24	tokenCounter	INFERRED	counter of the input-index token pairs	^\s*uVar24\ =\ 0;$	+1
+use	evsAssignVertexInputs	uVar24	tokenCounter	INFERRED	counter of the input-index token pairs	^\s*\(\(int\ \(\*\)\(\)\)FUN_0006fd10\)\(param_1,iVar10,\(uVar24\ \&\ 0x3fff\)\ <<\ 0x10\ \|\ 0x1a\);$	+3
+use	evsAssignVertexInputs	uVar24	tokenCounter	INFERRED	counter of the input-index token pairs	^\s*\}\ while\ \(uVar24\ <\ uVar13\);$	+1
+use	evsAssignVertexInputs	uVar24	symbolIndex	INFERRED	symbol loop counter	^\s*uVar24\ =\ 0;$@2	+1
+use	evsAssignVertexInputs	uVar24	symbolIndex	INFERRED	symbol loop counter	^\s*uVar24\ =\ uVar24\ \+\ 1;$@2	+1
+use	evsAssignVertexInputs	uVar24	symbolIndex	INFERRED	symbol loop counter	^\s*\}\ while\ \(uVar24\ <\ uVar13\);$@2	+1
+use	evsAssignVertexInputs	uVar24	symbolIndex	INFERRED	symbol loop counter	^\s*uVar24\ =\ 0;$@3	+1
+use	evsAssignVertexInputs	uVar24	symbolIndex	INFERRED	symbol loop counter	^\s*\*\(uint\ \*\)\(iVar26\ \+\ \*\(int\ \*\)\(iVar21\ \+\ 0x114\)\)\ =\ uVar24;$	+1
+use	evsAssignVertexInputs	uVar24	symbolIndex	INFERRED	symbol loop counter	^\s*uVar24\ =\ uVar24\ \+\ 1;$@3	+1
+use	evsAssignVertexInputs	uVar24	symbolIndex	INFERRED	symbol loop counter	^\s*\}\ while\ \(uVar24\ <\ uVar13\);$@3	+1
+use	evsAssignVertexInputs	uVar24	tempSlotCount	INFERRED	programState+0x40: number of temp slots	^\s*uVar24\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 0x40\);$	+2
+use	evsAssignVertexInputs	uVar24	tempSlotCount	INFERRED	programState+0x40: number of temp slots	^\s*uVar24\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 0x40\);$@2	+1
+use	evsAssignVertexInputs	uVar24	tempSlotCount	INFERRED	programState+0x40: number of temp slots	^\s*\}\ while\ \(uVar20\ <\ uVar24\);$	+1
+use	evsAssignVertexInputs	iVar26	slotCountdown	INFERRED	0x16 countdown for the table walks	^\s*iVar26\ =\ 0x16;$	+1
+use	evsAssignVertexInputs	iVar26	slotCountdown	INFERRED	0x16 countdown for the table walks	^\s*iVar26\ =\ iVar26\ \+\ \-1;$	+2
+use	evsAssignVertexInputs	iVar26	slotCountdown	INFERRED	0x16 countdown for the table walks	^\s*iVar26\ =\ 0x16;$@2	+1
+use	evsAssignVertexInputs	iVar26	slotCountdown	INFERRED	0x16 countdown for the table walks	^\s*iVar26\ =\ iVar26\ \+\ \-1;$@2	+2
+use	evsAssignVertexInputs	iVar26	instOffsetC	INFERRED	instruction index * 0x74	^\s*iVar26\ =\ uVar13\ \*\ 0x74;$	+1
+use	evsAssignVertexInputs	iVar26	instOffsetC	INFERRED	instruction index * 0x74	^\s*if\ \(\*\(int\ \*\)\(iVar26\ \+\ iVar18\ \+\ 0x20\)\ ==\ 2\)\ \{$	+2
+use	evsAssignVertexInputs	iVar26	instOffsetC	INFERRED	instruction index * 0x74	^\s*if\ \(\*\(int\ \*\)\(iVar26\ \+\ iVar18\ \+\ 0x3c\)\ ==\ 2\)\ \{$	+2
+use	evsAssignVertexInputs	iVar26	instOffsetC	INFERRED	instruction index * 0x74	^\s*if\ \(\*\(int\ \*\)\(iVar26\ \+\ iVar18\ \+\ 0x58\)\ ==\ 2\)\ \{$	+3
+use	evsAssignVertexInputs	iVar26	instOffsetC	INFERRED	instruction index * 0x74	^\s*\*\(undefined4\ \*\)\(iVar26\ \+\ param_2\[8\]\)\ =\ 0;$	+1
+use	evsAssignVertexInputs	iVar26	symbolDataTypeC	INFERRED	symbol record +0x24	^\s*iVar26\ =\ \*\(int\ \*\)\(in_r7\ \+\ 0x24\);$	+2
+use	evsAssignVertexInputs	iVar26	symbolDataTypeC	INFERRED	symbol record +0x24	^\s*else\ if\ \(iVar26\ ==\ 0x87c0\)\ \{$	+1
+use	evsAssignVertexInputs	iVar26	symbolDataTypeC	INFERRED	symbol record +0x24	^\s*if\ \(iVar26\ ==\ 0x87be\)\ goto\ LAB_000728e4;$	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10;$	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@2	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@3	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@4	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@5	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@6	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@7	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@8	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@9	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@10	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@11	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@12	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@13	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@14	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@15	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@16	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar26\ =\ iVar10\ \+\ 1;$@17	+1
+use	evsAssignVertexInputs	iVar26	nextInputRegCandidateB	INFERRED	cursor value after this symbol's allocation	^\s*iVar10\ =\ iVar26;$	+1
+use	evsAssignVertexInputs	iVar26	curProgramStateB	INFERRED	program state re-read from the active program index	^\s*iVar26\ =\ \*\*\(int\ \*\*\)\(in_r7\ \*\ 4\ \+\ iVar15\);$	+1
+use	evsAssignVertexInputs	iVar26	curProgramStateB	INFERRED	program state re-read from the active program index	^\s*iVar15\ =\ \(\(int\ \(\*\)\(\)\)FUN_00070c70\)\(iVar26\);$	+4
+use	evsAssignVertexInputs	iVar26	curProgramStateB	INFERRED	program state re-read from the active program index	^\s*iVar26\ =\ \*\*\(int\ \*\*\)\(in_r7\ \*\ 4\ \+\ iVar15\);$@2	+1
+use	evsAssignVertexInputs	iVar26	curProgramStateB	INFERRED	program state re-read from the active program index	^\s*iVar15\ =\ \(\(int\ \(\*\)\(\)\)FUN_00070c70\)\(iVar26\);$@2	+4
+use	evsAssignVertexInputs	iVar26	curProgramStateB	INFERRED	program state re-read from the active program index	^\s*iVar26\ =\ \*\*\(int\ \*\*\)\(in_r7\ \*\ 4\ \+\ iVar15\);$@3	+1
+use	evsAssignVertexInputs	iVar26	curProgramStateB	INFERRED	program state re-read from the active program index	^\s*iVar14\ =\ \(\(int\ \(\*\)\(\)\)FUN_00070c70\)\(iVar26\);$	+4
+use	evsAssignVertexInputs	iVar26	curProgramStateB	INFERRED	program state re-read from the active program index	^\s*iVar26\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000118c\)\ \+\ param_1\)\ \*\ 4\ \+\ \*param_2\);$	+2
+use	evsAssignVertexInputs	iVar26	curProgramStateB	INFERRED	program state re-read from the active program index	^\s*iVar16\ =\ iVar15\ \+\ \*\(int\ \*\)\(iVar26\ \+\ 0x3c\);$	+1
+use	evsAssignVertexInputs	iVar26	curProgramStateB	INFERRED	program state re-read from the active program index	^\s*if\ \(uVar20\ ==\ \*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x000013c0\)\ \+\ iVar26\)\)\ \{$	+1
+use	evsAssignVertexInputs	iVar26	curProgramStateB	INFERRED	program state re-read from the active program index	^\s*if\ \(\(uVar20\ !=\ \*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x000013cc\)\ \+\ iVar26\)\)\ \&\&\ \(bVar1\)\)\ \{$	+1
+use	evsAssignVertexInputs	iVar26	curProgramStateB	INFERRED	program state re-read from the active program index	^\s*\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar26\ \+\ 0x3c\)\ \+\ iVar15\ \+\ 0x1c\)\ \*\ 0x54\ \+\ param_2\[8\]\ \+\ 0x3d\)\ =\ 0;$	+1
+use	evsAssignVertexInputs	iVar26	curProgramStateB	INFERRED	program state re-read from the active program index	^\s*\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar26\ \+\ 0x3c\)\ \+\ iVar15\ \+\ 0x20\)\ \*\ 0x54\ \+\ param_2\[8\]\ \+\ 0x3d\)\ =\ 0;$	+1
+use	evsAssignVertexInputs	iVar26	curProgramStateB	INFERRED	program state re-read from the active program index	^\s*\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar26\ \+\ 0x3c\)\ \+\ iVar15\ \+\ 0x24\)\ \*\ 0x54\ \+\ param_2\[8\]\ \+\ 0x3d\)\ =\ 0;$	+7
+use	evsAssignVertexInputs	iVar26	curProgramStateB	INFERRED	program state re-read from the active program index	^\s*uVar24\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 0x40\);$@2	+1
+use	evsAssignVertexInputs	iVar26	symbolRecordC	INFERRED	symbol record: symbolOffset + shader[8]	^\s*iVar26\ =\ iVar22\ \+\ param_2\[8\];$	+3
+use	evsAssignVertexInputs	iVar26	symbolRecordC	INFERRED	symbol record: symbolOffset + shader[8]	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 4\);$	+1
+use	evsAssignVertexInputs	iVar26	symbolRecordC	INFERRED	symbol record: symbolOffset + shader[8]	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 0x10\);$	+1
+use	evsAssignVertexInputs	iVar26	symbolRecordC	INFERRED	symbol record: symbolOffset + shader[8]	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 0x14\);$	+1
+use	evsAssignVertexInputs	iVar26	symbolRecordC	INFERRED	symbol record: symbolOffset + shader[8]	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 0x18\);$	+1
+use	evsAssignVertexInputs	iVar26	symbolRecordC	INFERRED	symbol record: symbolOffset + shader[8]	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 0x1c\);$	+1
+use	evsAssignVertexInputs	iVar26	symbolRecordC	INFERRED	symbol record: symbolOffset + shader[8]	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar26\ \+\ 4\);$@2	+1
+use	evsAssignVertexInputs	iVar26	symbolRecordC	INFERRED	symbol record: symbolOffset + shader[8]	^\s*iVar26\ =\ iVar22\ \+\ param_2\[8\];$@2	+4
+use	evsAssignVertexInputs	iVar26	symbolRecordC	INFERRED	symbol record: symbolOffset + shader[8]	^\s*else\ if\ \(\*\(int\ \*\)\(iVar26\ \+\ 0x28\)\ ==\ 0x87c3\)\ goto\ LAB_00073754;$	+1
+use	evsAssignVertexInputs	iVar26	emitResult	INFERRED	words emitted by the per-opcode emitter (negative = failure)	^\s*iVar26\ =\ \(\*\*\(code\ \*\*\)\(\&DAT_001b9d04\ \+\ \*\(int\ \*\)\(iVar22\ \+\ param_2\[6\]\)\ \*\ 4\)\)$	+1
+use	evsAssignVertexInputs	iVar26	emitResult	INFERRED	words emitted by the per-opcode emitter (negative = failure)	^\s*if\ \(iVar26\ <\ 0\)\ \{$	+1
+use	evsAssignVertexInputs	iVar26	emitResult	INFERRED	words emitted by the per-opcode emitter (negative = failure)	^\s*\*\(int\ \*\)\(iVar21\ \+\ 4\)\ =\ iVar26\ \+\ \*\(int\ \*\)\(iVar21\ \+\ 4\);$	+1
+use	evsAssignVertexInputs	iVar26	usedListOffset	INFERRED	usedSymbolCount * 4	^\s*iVar26\ =\ iVar10\ \*\ 4;$	+1
+use	evsAssignVertexInputs	iVar26	usedListOffset	INFERRED	usedSymbolCount * 4	^\s*\*\(uint\ \*\)\(iVar26\ \+\ \*\(int\ \*\)\(iVar21\ \+\ 0x114\)\)\ =\ uVar24;$	+1
+local	evsAssignVertexInputs	uStack_58	maxTempCount	INFERRED	largest shader[0x19] temp count seen over the instructions
