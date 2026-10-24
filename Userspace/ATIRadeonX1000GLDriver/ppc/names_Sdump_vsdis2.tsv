@@ -5,9 +5,7 @@ local	FUN_000cdc3c	param_3	outText	CONFIRMED	destination text (plain decimal or 
 local	FUN_000cdc3c	fparam_1	value	CONFIRMED	the double being formatted (passed to ecvt)
 local	FUN_000cdc3c	local_94	ecvtSign	CONFIRMED	ecvt sign output: non-zero = negative
 local	FUN_000cdc3c	local_98	decimalPointOrRemainder	INFERRED	ecvt decimal-point position, then reused as the running remainder of the exponent digits
-local	FUN_000cdc3c	pcVar7	digitsOrOutCursor	INFERRED	ecvt digit string, then the output cursor in the exponent branch
 local	FUN_000cdc3c	bVar1	isNegative	CONFIRMED	ecvtSign != 0: a leading "-" was written
-local	FUN_000cdc3c	uVar13	signOffsetOrExponent	INFERRED	1 when a sign was written, else 0; in the exponent branch the absolute exponent
 local	FUN_000cdc3c	iVar4	outPosition	INFERRED	write index into outText
 local	FUN_000cdc3c	iVar8	scratchIndex	INFERRED	running write index / temporary integer
 local	FUN_000cdc3c	pcVar9	copyCursor	INFERRED	cursor while copying digits
@@ -59,9 +57,7 @@ local	FUN_000ced58	uVar9	previousWord	INFERRED	param_2[-3]: the paired vector in
 local	FUN_000ced58	uVar10	negateBits	CONFIRMED	word & 0x18000000: negate bits of the sources
 local	FUN_000ced58	uVar3	opcodeIndex	CONFIRMED	word>>21 & 0xf | (word & 4)<<2 | 0x40: math-engine opcode 0x40..0x5c
 local	FUN_000ced58	uVar8	opcodeOffset	INFERRED	opcodeIndex - 0x40
-local	FUN_000ced58	uVar11	registerTypeOrLoopIndex	INFERRED	word & 0xf (register type), later the swizzle loop counter
 local	FUN_000ced58	uVar2	prefixHigh	INFERRED	upper word of the "Du" prefix constant
-local	FUN_000ced58	iVar7	prefixLowOrZero	INFERRED	lower word of the "Du" prefix constant, later 0 (pass-through)
 local	FUN_000ced58	puVar5	operandText0Copy	INFERRED	copy of param_4
 local	FUN_000ced58	puVar6	operandText1Copy	INFERRED	copy of param_5
 local	FUN_000ced58	in_r8	argR8	UNKNOWN	Ghidra register input
@@ -94,7 +90,6 @@ local	FUN_000ce514	param_5	argR7	UNKNOWN	pass-through slot
 local	FUN_000ce514	param_6	argR8	UNKNOWN	pass-through slot
 local	FUN_000ce514	param_7	argR9	UNKNOWN	pass-through slot
 local	FUN_000ce514	param_8	argR10Value	INFERRED	printf slot reused for string bytes
-local	FUN_000ce514	pcVar7	semanticNameOrValue	INFERRED	pointer to the semantic name ("IL_pos"...), later reused as a pass-through value
 local	FUN_000ce514	local_1f8	semanticNameText	CONFIRMED	copy of the semantic name characters
 local	FUN_000ce514	local_1f4	semanticNameText4	INFERRED	bytes 4.. of the copied name
 local	FUN_000ce514	local_1f0	semanticNameText8	INFERRED	bytes 8.. of the copied name

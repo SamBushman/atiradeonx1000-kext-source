@@ -1,0 +1,59 @@
+use	FUN_000ce148	uVar8	relIndexComponent	CONFIRMED	source word >> 29: component (x y z w) of the relative address register used as index; selects the .x/.y/.z/.w of a0	^\s*uVar8\ =\ uVar6\ >>\ 0x1d;$	+1
+use	FUN_000ce148	uVar8	relIndexComponent	CONFIRMED	source word >> 29: component (x y z w) of the relative address register used as index; selects the .x/.y/.z/.w of a0	^\s*switch\(uVar8\ \&\ 3\)\ \{$	+1
+use	FUN_000ce148	uVar8	componentIndex	CONFIRMED	0..3 loop counter over the four swizzle components	^\s*uVar8\ =\ 0;$	+1
+use	FUN_000ce148	uVar8	componentIndex	CONFIRMED	0..3 loop counter over the four swizzle components	^\s*if\ \(\(\(uVar2\ \&\ 0x2000000\ <<\ \(uVar8\ \&\ 0x3f\)\)\ !=\ 0\)\ \&\&\ \(uVar7\ !=\ 0\)\)\ \{$	+1
+use	FUN_000ce148	uVar8	componentIndex	CONFIRMED	0..3 loop counter over the four swizzle components	^\s*bVar1\ =\ uVar8\ !=\ 3;$	+1
+use	FUN_000ce148	uVar8	componentIndex	CONFIRMED	0..3 loop counter over the four swizzle components	^\s*uVar8\ =\ uVar8\ \+\ 1;$	+1
+use	FUN_000ce148	uVar10	registerIndex	CONFIRMED	source word >> 5 (& 0xff): register number printed with %d	^\s*uVar10\ =\ uVar6\ >>\ 5;$	+1
+use	FUN_000ce148	uVar10	registerIndex	CONFIRMED	source word >> 5 (& 0xff): register number printed with %d	^\s*FUN_001a32d0\(auStack_48,"%d",uVar10\ \&\ 0xff,in_r6,in_r7,in_r8,uVar6,in_r10\);$	+1
+use	FUN_000ce148	uVar10	swizzleShift	CONFIRMED	bit offset of the current swizzle field: starts at 0xd, advances by 3 per component	^\s*uVar10\ =\ 0xd;$	+1
+use	FUN_000ce148	uVar10	swizzleShift	CONFIRMED	bit offset of the current swizzle field: starts at 0xd, advances by 3 per component	^\s*switch\(\(uVar4\ \&\ 7\ <<\ \(uVar10\ \&\ 0x3f\)\)\ >>\ \(uVar10\ \&\ 0x3f\)\)\ \{$	+1
+use	FUN_000ce148	uVar10	swizzleShift	CONFIRMED	bit offset of the current swizzle field: starts at 0xd, advances by 3 per component	^\s*uVar10\ =\ uVar10\ \+\ 3;$	+1
+use	FUN_000ced58	iVar7	prefixLow	INFERRED	low word of the s_Du operand prefix string (4 bytes) or 0 when the instruction has no prefix	^\s*iVar7\ =\ \(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)\&\(s_Du_001a64b4\)\ \+\ 0\)\);$	+1
+use	FUN_000ced58	iVar7	prefixLow	INFERRED	low word of the s_Du operand prefix string (4 bytes) or 0 when the instruction has no prefix	^\s*iVar7\ =\ 0;$	+1
+use	FUN_000ced58	iVar7	prefixLow	INFERRED	low word of the s_Du operand prefix string (4 bytes) or 0 when the instruction has no prefix	^\s*FUN_001a32d0\(auStack_48,"%d",uVar12\ >>\ 0x13\ \&\ 3,puVar5,puVar6,in_r8,iVar7,in_r10\);$	+1
+use	FUN_000ced58	iVar7	prefixLow	INFERRED	low word of the s_Du operand prefix string (4 bytes) or 0 when the instruction has no prefix	^\s*FUN_001a32d0\(auStack_43,"%d",uVar12\ >>\ 5\ \&\ 0xff,puVar5,puVar6,in_r8,iVar7,in_r10\);$	+1
+use	FUN_000ced58	iVar7	length	CONFIRMED	strlen of the operand text before the next operand is appended	^\s*iVar7\ =\ _strlen\(param_5\);$	+2
+use	FUN_000ced58	iVar7	length	CONFIRMED	strlen of the operand text before the next operand is appended	^\s*iVar7\ =\ _strlen\(param_5\);$@2	+2
+use	FUN_000ced58	iVar7	length	CONFIRMED	strlen of the operand text before the next operand is appended	^\s*iVar7\ =\ _strlen\(param_5\);$@3	+2
+use	FUN_000ced58	iVar7	length	CONFIRMED	strlen of the operand text before the next operand is appended	^\s*iVar7\ =\ _strlen\(param_5\);$@4	+2
+use	FUN_000ced58	iVar7	length	CONFIRMED	strlen of the operand text before the next operand is appended	^\s*iVar7\ =\ _strlen\(param_5\);$@5	+2
+use	FUN_000ced58	iVar7	length	CONFIRMED	strlen of the operand text before the next operand is appended	^\s*iVar7\ =\ _strlen\(param_5\);$@6	+2
+use	FUN_000ced58	iVar7	length	CONFIRMED	strlen of the operand text before the next operand is appended	^\s*iVar7\ =\ _strlen\(param_5\);$@7	+2
+use	FUN_000ced58	iVar7	length	CONFIRMED	strlen of the operand text before the next operand is appended	^\s*iVar7\ =\ _strlen\(param_5\);$@8	+2
+use	FUN_000ced58	iVar7	length	CONFIRMED	strlen of the operand text before the next operand is appended	^\s*iVar7\ =\ _strlen\(param_5\);$@9	+2
+use	FUN_000ced58	uVar11	registerType	CONFIRMED	instruction word & 0xf: 0 "r", 1 "v", 2 "c", 3 "t"	^\s*uVar11\ =\ uVar12\ \&\ 0xf;$	+1
+use	FUN_000ced58	uVar11	registerType	CONFIRMED	instruction word & 0xf: 0 "r", 1 "v", 2 "c", 3 "t"	^\s*if\ \(uVar11\ ==\ 1\)\ \{$	+1
+use	FUN_000ced58	uVar11	registerType	CONFIRMED	instruction word & 0xf: 0 "r", 1 "v", 2 "c", 3 "t"	^\s*else\ if\ \(uVar11\ ==\ 0\)\ \{$	+1
+use	FUN_000ced58	uVar11	registerType	CONFIRMED	instruction word & 0xf: 0 "r", 1 "v", 2 "c", 3 "t"	^\s*else\ if\ \(uVar11\ ==\ 2\)\ \{$	+1
+use	FUN_000ced58	uVar11	registerType	CONFIRMED	instruction word & 0xf: 0 "r", 1 "v", 2 "c", 3 "t"	^\s*else\ if\ \(uVar11\ ==\ 3\)\ \{$	+1
+use	FUN_000ced58	uVar11	componentIndex	CONFIRMED	0..1 loop counter over the swizzle components	^\s*uVar11\ =\ 0;$	+1
+use	FUN_000ced58	uVar11	componentIndex	CONFIRMED	0..1 loop counter over the swizzle components	^\s*if\ \(\(\(uVar10\ \&\ 0x2000000\ <<\ \(uVar11\ \&\ 0x3f\)\)\ !=\ 0\)\ \&\&\ \(uVar10\ !=\ 0\)\)\ \{$	+1
+use	FUN_000ced58	uVar11	componentIndex	CONFIRMED	0..1 loop counter over the swizzle components	^\s*bVar1\ =\ uVar11\ !=\ 1;$	+1
+use	FUN_000ced58	uVar11	componentIndex	CONFIRMED	0..1 loop counter over the swizzle components	^\s*uVar11\ =\ uVar11\ \+\ 1;$	+1
+use	vsdisPrintFlowInstruction	pcVar2	compareText	CONFIRMED	"!=" or "==" printed in the IF line	^\s*pcVar2\ =\ "!=";$	+1
+use	vsdisPrintFlowInstruction	pcVar2	compareText	CONFIRMED	"!=" or "==" printed in the IF line	^\s*pcVar2\ =\ "==";$	+1
+use	vsdisPrintFlowInstruction	pcVar2	compareText	CONFIRMED	"!=" or "==" printed in the IF line	^\s*\(\(int\ \(\*\)\(\)\)FUN_000ce050\)\(param_1,pcVar3,iVar7,pcVar2,pcVar5,iVar6,iVar4,param_8\);$	+1
+use	vsdisPrintFlowInstruction	pcVar2	compareText	CONFIRMED	"!=" or "==" printed in the IF line	^\s*pcVar2\ =\ \(char\ \*\)param_2\[3\];$	+1
+use	vsdisPrintFlowInstruction	pcVar2	flowFormat	CONFIRMED	printf format of the CF- CALL / Loop / Rep / endif line	^\s*pcVar2\ =\ "\ \ \ \ \ \ \ \ \ \ CF\-\ CALL\ at\ %d,\ subroutine\ from\ %d\ to\ %d";$	+1
+use	vsdisPrintFlowInstruction	pcVar2	flowFormat	CONFIRMED	printf format of the CF- CALL / Loop / Rep / endif line	^\s*pcVar2\ =\ "\ \ \ \ \ \ \ \ \ \ CF\-\ Loop\ I%d\ first\ in\ loop\ =\ %d\ last\ in\ loop\ =\ %d";$	+1
+use	vsdisPrintFlowInstruction	pcVar2	flowFormat	CONFIRMED	printf format of the CF- CALL / Loop / Rep / endif line	^\s*pcVar2\ =\ "\ \ \ \ \ \ \ \ \ \ CF\-\ Rep\ \ I%d\ first\ in\ loop\ =\ %d\ last\ in\ loop\ =\ %d";$	+1
+use	vsdisPrintFlowInstruction	pcVar2	flowFormat	CONFIRMED	printf format of the CF- CALL / Loop / Rep / endif line	^\s*pcVar2\ =\ "\ endif=\ %d\ ,\ endinst\ =\ %d,\ retinst\ =\ %d";$	+1
+use	vsdisPrintFlowInstruction	pcVar2	flowFormat	CONFIRMED	printf format of the CF- CALL / Loop / Rep / endif line	^\s*\(\(int\ \(\*\)\(\)\)FUN_000ce050\)\(param_1,pcVar2,iVar4,iVar7,iVar6,param_6,param_7,param_8\);$	+1
+use	vsdisPrintOutputMapping	pcVar7	semanticName	CONFIRMED	"IL_pos", IL_pointsize, "IL_color", IL_backcolor, "IL_fog", IL_generic or IL_unknown: name of the output semantic	^\s*pcVar7\ =\ "IL_pos";$	+1
+use	vsdisPrintOutputMapping	pcVar7	semanticName	CONFIRMED	"IL_pos", IL_pointsize, "IL_color", IL_backcolor, "IL_fog", IL_generic or IL_unknown: name of the output semantic	^\s*pcVar7\ =\ \(char\ \*\)\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)\&\(s_IL_pointsize_001a62d4\)\ \+\ 0\)\);$	+1
+use	vsdisPrintOutputMapping	pcVar7	semanticName	CONFIRMED	"IL_pos", IL_pointsize, "IL_color", IL_backcolor, "IL_fog", IL_generic or IL_unknown: name of the output semantic	^\s*pcVar7\ =\ "IL_color";$	+1
+use	vsdisPrintOutputMapping	pcVar7	semanticName	CONFIRMED	"IL_pos", IL_pointsize, "IL_color", IL_backcolor, "IL_fog", IL_generic or IL_unknown: name of the output semantic	^\s*pcVar7\ =\ \(char\ \*\)\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)\&\(s_IL_backcolor_001a62f0\)\ \+\ 0\)\);$	+1
+use	vsdisPrintOutputMapping	pcVar7	semanticName	CONFIRMED	"IL_pos", IL_pointsize, "IL_color", IL_backcolor, "IL_fog", IL_generic or IL_unknown: name of the output semantic	^\s*pcVar7\ =\ "IL_fog";$	+1
+use	vsdisPrintOutputMapping	pcVar7	semanticName	CONFIRMED	"IL_pos", IL_pointsize, "IL_color", IL_backcolor, "IL_fog", IL_generic or IL_unknown: name of the output semantic	^\s*pcVar7\ =\ \(char\ \*\)\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)\&\(s_IL_generic_001a6308\)\ \+\ 0\)\);$	+1
+use	vsdisPrintOutputMapping	pcVar7	semanticName	CONFIRMED	"IL_pos", IL_pointsize, "IL_color", IL_backcolor, "IL_fog", IL_generic or IL_unknown: name of the output semantic	^\s*pcVar7\ =\ \(char\ \*\)\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)\&\(s_IL_unknown_001a6314\)\ \+\ 0\)\);$	+1
+use	vsdisPrintOutputMapping	pcVar7	semanticName	CONFIRMED	"IL_pos", IL_pointsize, "IL_color", IL_backcolor, "IL_fog", IL_generic or IL_unknown: name of the output semantic	^\s*FUN_001a32d0\(local_218\ \+\ 4,"%d",\(uint\)\(byte\)param_2\[1\],param_4,param_5,param_6,pcVar7,param_8\);$	+1
+use	vsdisPrintOutputMapping	pcVar7	entryByteCursor	CONFIRMED	= outputMapEntry, then advanced one byte per component	^\s*pcVar7\ =\ param_2;$	+1
+use	vsdisPrintOutputMapping	pcVar7	entryByteCursor	CONFIRMED	= outputMapEntry, then advanced one byte per component	^\s*bVar2\ =\ pcVar7\[4\];$	+1
+use	vsdisPrintOutputMapping	pcVar7	entryByteCursor	CONFIRMED	= outputMapEntry, then advanced one byte per component	^\s*pcVar7\ =\ pcVar7\ \+\ 1;$	+1
+use	vsdisPrintOutputMapping	pcVar7	entryByteCursor	CONFIRMED	= outputMapEntry, then advanced one byte per component	^\s*FUN_001a32d0\(puVar10,"o%d\.%c\ ",\(uint\)\(byte\)pcVar6\[4\],\(int\)local_218\[\(byte\)pcVar6\[8\]\],uVar4$	+2
+use	vsdisPrintOutputMapping	pcVar7	entryByteCursor	CONFIRMED	= outputMapEntry, then advanced one byte per component	^\s*FUN_001a32d0\(auStack_1b8,"%s%s%s%s",auStack_138,auStack_f8,auStack_b8,pcVar6,pcVar7,pcVar8\);$	+1
+use	vsdisPrintOutputMapping	pcVar7	entryByteCursor	CONFIRMED	= outputMapEntry, then advanced one byte per component	^\s*pcVar7\ =\ \(\*\(GhidraMachOSection\ \*\)0x00000054\)\.sectname\ \+\ 0xb;$	+1
+use	vsdisPrintOutputMapping	pcVar7	entryByteCursor	CONFIRMED	= outputMapEntry, then advanced one byte per component	^\s*pcVar7\ =\ \(char\ \*\)\(int\)local_218\[\(byte\)param_2\[0xb\]\];$	+1
+use	vsdisPrintOutputMapping	pcVar7	entryByteCursor	CONFIRMED	= outputMapEntry, then advanced one byte per component	^\s*FUN_001a32d0\(auStack_1b8,"o%d\.%c%c%c%c",\(uint\)\(byte\)param_2\[4\],iVar5,iVar12,pcVar6,pcVar7,$	+2
+use	vsdisPrintOutputMapping	pcVar7	entryByteCursor	CONFIRMED	= outputMapEntry, then advanced one byte per component	^\s*\(\(int\ \(\*\)\(\)\)FUN_000ce050\)\(param_1,";\ \ \ \ %s\ =\ %s%s",auStack_1b8,local_1f8,local_218\ \+\ 4,pcVar6,pcVar7,pcVar8\);$	+1

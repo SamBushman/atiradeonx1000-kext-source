@@ -1,0 +1,29 @@
+use	FUN_000cdc3c	uVar13	signOffset	CONFIRMED	1 when a '-' was written (ecvt sign flag), else 0: index of the first digit character	^\s*uVar13\ =\ \(uint\)bVar1;$	+1
+use	FUN_000cdc3c	uVar13	signOffset	CONFIRMED	1 when a '-' was written (ecvt sign flag), else 0: index of the first digit character	^\s*param_3\[uVar13\ \+\ 1\]\ =\ '\.';$	+2
+use	FUN_000cdc3c	uVar13	signOffset	CONFIRMED	1 when a '-' was written (ecvt sign flag), else 0: index of the first digit character	^\s*uVar10\ =\ uVar13;$	+1
+use	FUN_000cdc3c	uVar13	signOffset	CONFIRMED	1 when a '-' was written (ecvt sign flag), else 0: index of the first digit character	^\s*uVar10\ =\ uVar13\ \+\ 2;$	+2
+use	FUN_000cdc3c	uVar13	exponentMagnitude	CONFIRMED	|decimal exponent - 1| printed after the 'e' by the scientific branch	^\s*uVar13\ =\ local_98\ \-\ 1;$	+1
+use	FUN_000cdc3c	uVar13	exponentMagnitude	CONFIRMED	|decimal exponent - 1| printed after the 'e' by the scientific branch	^\s*if\ \(\(int\)uVar13\ <\ 0\)\ \{$	+2
+use	FUN_000cdc3c	uVar13	exponentMagnitude	CONFIRMED	|decimal exponent - 1| printed after the 'e' by the scientific branch	^\s*uStack_84\ =\ uVar13\ \^\ 0x80000000;$	+1
+use	FUN_000cdc3c	uVar13	exponentMagnitude	CONFIRMED	|decimal exponent - 1| printed after the 'e' by the scientific branch	^\s*local_98\ =\ uVar13;$	+1
+use	FUN_000cdc3c	uVar13	exponentMagnitude	CONFIRMED	|decimal exponent - 1| printed after the 'e' by the scientific branch	^\s*cVar6\ =\ \(char\)\(uVar13\ /\ uVar5\);$	+1
+use	FUN_000cdc3c	uVar13	exponentMagnitude	CONFIRMED	|decimal exponent - 1| printed after the 'e' by the scientific branch	^\s*uVar13\ =\ local_98\ \-\ cVar6\ \*\ iVar8;$	+2
+use	FUN_000cdc3c	uVar13	digitIndex	INFERRED	index into the ecvt digit string in the fixed-notation copy loop	^\s*uVar13\ =\ 0;$	+1
+use	FUN_000cdc3c	uVar13	digitIndex	INFERRED	index into the ecvt digit string in the fixed-notation copy loop	^\s*if\ \(uVar13\ ==\ local_98\)\ \{$	+1
+use	FUN_000cdc3c	uVar13	digitIndex	INFERRED	index into the ecvt digit string in the fixed-notation copy loop	^\s*uVar13\ =\ uVar13\ \+\ 1;$	+1
+use	FUN_000cdc3c	uVar13	digitIndex	INFERRED	index into the ecvt digit string in the fixed-notation copy loop	^\s*pcVar9\ =\ pcVar7\ \+\ uVar13;$	+2
+use	FUN_000cdc3c	uVar13	trimmedEnd	CONFIRMED	position of the terminating NUL after trailing zeros of the fraction were trimmed	^\s*uVar13\ =\ uVar10;$	+1
+use	FUN_000cdc3c	uVar13	trimmedEnd	CONFIRMED	position of the terminating NUL after trailing zeros of the fraction were trimmed	^\s*uVar13\ =\ uVar10;$@2	+1
+use	FUN_000cdc3c	uVar13	trimmedEnd	CONFIRMED	position of the terminating NUL after trailing zeros of the fraction were trimmed	^\s*uVar13\ =\ iVar8\ \+\ 2U;$	+1
+use	FUN_000cdc3c	uVar13	trimmedEnd	CONFIRMED	position of the terminating NUL after trailing zeros of the fraction were trimmed	^\s*uVar13\ =\ iVar8\ \+\ 1;$	+1
+use	FUN_000cdc3c	uVar13	trimmedEnd	CONFIRMED	position of the terminating NUL after trailing zeros of the fraction were trimmed	^\s*param_3\[uVar13\]\ =\ '\\0';$	+1
+use	FUN_000cdc3c	pcVar7	digits	CONFIRMED	digit string returned by _ecvt(value, significantDigits, &decimalPoint, &sign)	^\s*pcVar7\ =\ _ecvt\(fparam_1,param_2,\(int\ \*\)\&local_98,local_94\);$	+1
+use	FUN_000cdc3c	pcVar7	digits	CONFIRMED	digit string returned by _ecvt(value, significantDigits, &decimalPoint, &sign)	^\s*param_3\[bVar1\]\ =\ \*pcVar7;$	+1
+use	FUN_000cdc3c	pcVar7	digits	CONFIRMED	digit string returned by _ecvt(value, significantDigits, &decimalPoint, &sign)	^\s*cVar6\ =\ pcVar7\[1\];$	+1
+use	FUN_000cdc3c	pcVar7	digits	CONFIRMED	digit string returned by _ecvt(value, significantDigits, &decimalPoint, &sign)	^\s*cVar6\ =\ pcVar7\[iVar4\];$	+1
+use	FUN_000cdc3c	pcVar7	digits	CONFIRMED	digit string returned by _ecvt(value, significantDigits, &decimalPoint, &sign)	^\s*if\ \(\*pcVar7\ !=\ '\\0'\)\ \{$	+1
+use	FUN_000cdc3c	pcVar7	digits	CONFIRMED	digit string returned by _ecvt(value, significantDigits, &decimalPoint, &sign)	^\s*pcVar9\ =\ pcVar7;$	+1
+use	FUN_000cdc3c	pcVar7	digits	CONFIRMED	digit string returned by _ecvt(value, significantDigits, &decimalPoint, &sign)	^\s*pcVar9\ =\ pcVar7\ \+\ uVar13;$	+2
+use	FUN_000cdc3c	pcVar7	exponentCursor	CONFIRMED	output cursor outText + position where the exponent digits are written	^\s*pcVar7\ =\ param_3\ \+\ iVar4;$	+1
+use	FUN_000cdc3c	pcVar7	exponentCursor	CONFIRMED	output cursor outText + position where the exponent digits are written	^\s*\*pcVar7\ =\ cVar6\ \+\ '0';$	+1
+use	FUN_000cdc3c	pcVar7	exponentCursor	CONFIRMED	output cursor outText + position where the exponent digits are written	^\s*pcVar7\ =\ pcVar7\ \+\ 1;$	+1

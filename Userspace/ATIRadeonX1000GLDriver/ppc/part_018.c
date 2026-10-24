@@ -4589,20 +4589,23 @@ int scShaderStateFlag(param_1)
 /* FUN_000cdc3c @ 0xcdc3c (996 bytes) */
 char * FUN_000cdc3c(undefined4 unusedArg,int significantDigits,char *outText,double value)
 {
-  uint loopIndex;
+  char *exponentCursor;
+  uint trimmedEnd;
+  uint digitIndex;
+  uint exponentMagnitude;
+  uint signOffset;
   bool isNegative;
   double i2dMagic;
   double twoPow31;
   int outPosition;
   uint powerOfTen;
   char digitChar;
-  char *digitsOrOutCursor;
+  char *digits;
   int scratchIndex;
   char *copyCursor;
   uint exponentDigitCount;
   uint loopIndex2;
   uint digitExponent;
-  uint signOffsetOrExponent;
   double logValue;
   double powValue;
   double digitExponentAsDouble;
@@ -4621,39 +4624,39 @@ char * FUN_000cdc3c(undefined4 unusedArg,int significantDigits,char *outText,dou
   
   ecvtSign[0] = 0;
   decimalPointOrRemainder = 0;
-  digitsOrOutCursor = _ecvt(value,significantDigits,(int *)&decimalPointOrRemainder,ecvtSign);
+  digits = _ecvt(value,significantDigits,(int *)&decimalPointOrRemainder,ecvtSign);
   isNegative = ecvtSign[0] != 0;
   if (isNegative) {
     *outText = '-';
   }
-  signOffsetOrExponent = (uint)isNegative;
+  signOffset = (uint)isNegative;
   if (((int)decimalPointOrRemainder < 1 - significantDigits) || (significantDigits < (int)decimalPointOrRemainder)) {
-    outText[isNegative] = *digitsOrOutCursor;
-    outText[signOffsetOrExponent + 1] = '.';
-    scratchIndex = signOffsetOrExponent + 2;
-    digitChar = digitsOrOutCursor[1];
+    outText[isNegative] = *digits;
+    outText[signOffset + 1] = '.';
+    scratchIndex = signOffset + 2;
+    digitChar = digits[1];
     if (digitChar != '\0') {
       copyCursor = outText + scratchIndex;
       outPosition = 1;
       do {
         *copyCursor = digitChar;
         outPosition = outPosition + 1;
-        digitChar = digitsOrOutCursor[outPosition];
+        digitChar = digits[outPosition];
         scratchIndex = scratchIndex + 1;
         copyCursor = copyCursor + 1;
       } while (digitChar != '\0');
     }
-    signOffsetOrExponent = decimalPointOrRemainder - 1;
+    exponentMagnitude = decimalPointOrRemainder - 1;
     outText[scratchIndex] = 'e';
     outPosition = scratchIndex + 1;
-    if ((int)signOffsetOrExponent < 0) {
-      signOffsetOrExponent = -signOffsetOrExponent;
+    if ((int)exponentMagnitude < 0) {
+      exponentMagnitude = -exponentMagnitude;
       outText[outPosition] = '-';
       outPosition = scratchIndex + 2;
     }
-    i2dLo1 = signOffsetOrExponent ^ 0x80000000;
+    i2dLo1 = exponentMagnitude ^ 0x80000000;
     i2dHi1 = 0x43300000;
-    decimalPointOrRemainder = signOffsetOrExponent;
+    decimalPointOrRemainder = exponentMagnitude;
     logValue = _log((double)(float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_001aa1e0));
     powValue = _log(DOUBLE_001aa238);
     twoPow31 = DOUBLE_001aa1e8;
@@ -4668,7 +4671,7 @@ char * FUN_000cdc3c(undefined4 unusedArg,int significantDigits,char *outText,dou
       fctiwzScratch1 = (longlong)(int)exponentDigitCount;
     }
     loopIndex2 = 0;
-    digitsOrOutCursor = outText + outPosition;
+    exponentCursor = outText + outPosition;
     digitExponent = exponentDigitCount;
     do {
       i2dLo2 = digitExponent ^ 0x80000000;
@@ -4685,8 +4688,8 @@ char * FUN_000cdc3c(undefined4 unusedArg,int significantDigits,char *outText,dou
         powerOfTen = (uint)(int)powValue;
         fctiwzScratch3 = (longlong)(int)powerOfTen;
       }
-      digitChar = (char)(signOffsetOrExponent / powerOfTen);
-      *digitsOrOutCursor = digitChar + '0';
+      digitChar = (char)(exponentMagnitude / powerOfTen);
+      *exponentCursor = digitChar + '0';
       logValue = _pow(logValue,digitExponentAsDouble);
       if (DOUBLE_001aa1e8 <= logValue) {
         fctiwzScratch6 = (longlong)(int)(logValue - DOUBLE_001aa1e8);
@@ -4697,19 +4700,19 @@ char * FUN_000cdc3c(undefined4 unusedArg,int significantDigits,char *outText,dou
         fctiwzScratch5 = (longlong)scratchIndex;
       }
       loopIndex2 = loopIndex2 + 1;
-      digitsOrOutCursor = digitsOrOutCursor + 1;
+      exponentCursor = exponentCursor + 1;
       digitExponent = digitExponent - 1;
-      signOffsetOrExponent = decimalPointOrRemainder - digitChar * scratchIndex;
-      decimalPointOrRemainder = signOffsetOrExponent;
+      exponentMagnitude = decimalPointOrRemainder - digitChar * scratchIndex;
+      decimalPointOrRemainder = exponentMagnitude;
     } while (loopIndex2 <= exponentDigitCount);
     outText[loopIndex2 + outPosition] = '\0';
   }
   else {
-    exponentDigitCount = signOffsetOrExponent;
+    exponentDigitCount = signOffset;
     if ((int)decimalPointOrRemainder < 1) {
       outText[isNegative] = '0';
-      exponentDigitCount = signOffsetOrExponent + 2;
-      outText[signOffsetOrExponent + 1] = '.';
+      exponentDigitCount = signOffset + 2;
+      outText[signOffset + 1] = '.';
       if ((int)decimalPointOrRemainder < 0) {
         scratchIndex = -decimalPointOrRemainder;
         copyCursor = outText + exponentDigitCount;
@@ -4725,44 +4728,44 @@ char * FUN_000cdc3c(undefined4 unusedArg,int significantDigits,char *outText,dou
       }
       decimalPointOrRemainder = 0xffffffff;
     }
-    if (*digitsOrOutCursor != '\0') {
-      loopIndex = 0;
-      copyCursor = digitsOrOutCursor;
+    if (*digits != '\0') {
+      digitIndex = 0;
+      copyCursor = digits;
       do {
-        if (loopIndex == decimalPointOrRemainder) {
+        if (digitIndex == decimalPointOrRemainder) {
           decimalPointOrRemainder = 0xffffffff;
           outText[exponentDigitCount] = '.';
           exponentDigitCount = exponentDigitCount + 1;
         }
-        loopIndex = loopIndex + 1;
+        digitIndex = digitIndex + 1;
         outText[exponentDigitCount] = *copyCursor;
         exponentDigitCount = exponentDigitCount + 1;
-        copyCursor = digitsOrOutCursor + loopIndex;
-      } while (digitsOrOutCursor[loopIndex] != '\0');
+        copyCursor = digits + digitIndex;
+      } while (digits[digitIndex] != '\0');
     }
     outText[exponentDigitCount] = '\0';
     if (decimalPointOrRemainder == 0xffffffff) {
       digitChar = *outText;
-      signOffsetOrExponent = exponentDigitCount;
+      trimmedEnd = exponentDigitCount;
       if (digitChar != '\0') {
         scratchIndex = 0;
         do {
           if (digitChar != '0') {
             if (digitChar == '.') {
-              signOffsetOrExponent = exponentDigitCount;
+              trimmedEnd = exponentDigitCount;
               if (scratchIndex + 2U < exponentDigitCount) {
-                signOffsetOrExponent = scratchIndex + 2U;
+                trimmedEnd = scratchIndex + 2U;
               }
             }
             else {
-              signOffsetOrExponent = scratchIndex + 1;
+              trimmedEnd = scratchIndex + 1;
             }
           }
           scratchIndex = scratchIndex + 1;
           digitChar = outText[scratchIndex];
         } while (digitChar != '\0');
       }
-      outText[signOffsetOrExponent] = '\0';
+      outText[trimmedEnd] = '\0';
     }
   }
   return outText;
@@ -4834,6 +4837,8 @@ int FUN_000ce148(disasmCtx, sourceWordPtr, outText)
   uint *sourceWordPtr;
   undefined1 *outText;
 {
+  uint swizzleShift;
+  uint componentIndex;
   bool moreComponents;
   uint negateBits;
   uint registerType;
@@ -4845,9 +4850,9 @@ int FUN_000ce148(disasmCtx, sourceWordPtr, outText)
   uint sourceWord;
   undefined4 argR10;
   uint anyNegate;
-  uint relComponentOrLoopIndex;
+  uint relIndexComponent;
   uint relativeBits;
-  uint registerIndexOrShift;
+  uint registerIndex;
   undefined1 indexText [32];
   
   sourceWord = *sourceWordPtr;
@@ -4856,8 +4861,8 @@ int FUN_000ce148(disasmCtx, sourceWordPtr, outText)
   registerType = sourceWord & 0xf;
   swizzleBits = sourceWord & 0x1ffe000;
   *outText = 0;
-  relComponentOrLoopIndex = sourceWord >> 0x1d;
-  registerIndexOrShift = sourceWord >> 5;
+  relIndexComponent = sourceWord >> 0x1d;
+  registerIndex = sourceWord >> 5;
   if (negateBits == 0x1e000000) {
     anyNegate = 0;
     length = _strlen(outText);
@@ -4886,7 +4891,7 @@ int FUN_000ce148(disasmCtx, sourceWordPtr, outText)
     length = _strlen(outText);
     *(undefined2 *)(outText + length) = 0x3f00;
   }
-  printf_LDBLStub_1a32d0(indexText,"%d",registerIndexOrShift & 0xff,argR6,argR7,argR8,sourceWord,argR10);
+  printf_LDBLStub_1a32d0(indexText,"%d",registerIndex & 0xff,argR6,argR7,argR8,sourceWord,argR10);
   if (relativeBits == 0) {
     _strcat(outText,indexText);
   }
@@ -4899,7 +4904,7 @@ int FUN_000ce148(disasmCtx, sourceWordPtr, outText)
       length = _strlen(outText);
       *(undefined4 *)(outText + length) = 0x5b693000;
     }
-    switch(relComponentOrLoopIndex & 3) {
+    switch(relIndexComponent & 3) {
     case 0:
       _strcat(outText,".x");
       break;
@@ -4922,16 +4927,16 @@ int FUN_000ce148(disasmCtx, sourceWordPtr, outText)
     *(undefined2 *)(outText + length) = 0x5d00;
   }
   if ((swizzleBits != 0xd10000) || (anyNegate != 0)) {
-    relComponentOrLoopIndex = 0;
+    componentIndex = 0;
     length = _strlen(outText);
     *(undefined2 *)(outText + length) = 0x2e00;
-    registerIndexOrShift = 0xd;
+    swizzleShift = 0xd;
     do {
-      if (((negateBits & 0x2000000 << (relComponentOrLoopIndex & 0x3f)) != 0) && (anyNegate != 0)) {
+      if (((negateBits & 0x2000000 << (componentIndex & 0x3f)) != 0) && (anyNegate != 0)) {
         length = _strlen(outText);
         *(undefined2 *)(outText + length) = 0x2d00;
       }
-      switch((swizzleBits & 7 << (registerIndexOrShift & 0x3f)) >> (registerIndexOrShift & 0x3f)) {
+      switch((swizzleBits & 7 << (swizzleShift & 0x3f)) >> (swizzleShift & 0x3f)) {
       case 0:
         length = _strlen(outText);
         *(undefined2 *)(outText + length) = 0x7800;
@@ -4960,9 +4965,9 @@ int FUN_000ce148(disasmCtx, sourceWordPtr, outText)
         length = _strlen(outText);
         *(undefined2 *)(outText + length) = 0x3f00;
       }
-      moreComponents = relComponentOrLoopIndex != 3;
-      registerIndexOrShift = registerIndexOrShift + 3;
-      relComponentOrLoopIndex = relComponentOrLoopIndex + 1;
+      moreComponents = componentIndex != 3;
+      swizzleShift = swizzleShift + 3;
+      componentIndex = componentIndex + 1;
     } while (moreComponents);
   }
   return sourceWordPtr + 1;
@@ -4996,6 +5001,7 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
   undefined4 argR9;
   uint argR10Value;
 {
+  char *entryByteCursor;
   int loopIndex;
   bool sourcesDiffer;
   byte componentSource;
@@ -5003,7 +5009,7 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
   undefined4 oneArg;
   int iVar5;
   char *entryCursor;
-  char *semanticNameOrValue;
+  char *semanticName;
   char *componentCursorA;
   uint componentBit;
   undefined1 *componentTextCursor;
@@ -5030,7 +5036,7 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
       *(unsigned int *)semanticNameText = (unsigned int)(*(unsigned int *)((unsigned char *)&(s_IL_pos_001a62cc) + 0));
       (*(unsigned short *)((unsigned char *)&(acStack_1f3) + 0)) = (*(unsigned short *)((unsigned char *)&(s_IL_pos_001a62cc) + 5));
       semanticNameText4 = s_IL_pos_001a62cc[4];
-      semanticNameOrValue = "IL_pos";
+      semanticName = "IL_pos";
       break;
     case '\x01':
       argR10Value = (uint)(byte)s_IL_pointsize_001a62d4[0xc];
@@ -5038,14 +5044,14 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
       semanticNameText4 = (*(unsigned int *)((unsigned char *)&(s_IL_pointsize_001a62d4) + 4));
       semanticNameText8 = (*(unsigned int *)((unsigned char *)&(s_IL_pointsize_001a62d4) + 8));
       semanticNameText12 = s_IL_pointsize_001a62d4[0xc];
-      semanticNameOrValue = (char *)(*(unsigned int *)((unsigned char *)&(s_IL_pointsize_001a62d4) + 0));
+      semanticName = (char *)(*(unsigned int *)((unsigned char *)&(s_IL_pointsize_001a62d4) + 0));
       break;
     case '\x02':
       *(unsigned int *)semanticNameText = (unsigned int)(*(unsigned int *)((unsigned char *)&(s_IL_color_001a62e4) + 0));
       semanticNameText4 = (*(unsigned int *)((unsigned char *)&(s_IL_color_001a62e4) + 4));
       semanticNameText8 = s_IL_color_001a62e4[8];
       semanticNameText8 = CONCAT13(semanticNameText8,nameCopyCursor);
-      semanticNameOrValue = "IL_color";
+      semanticName = "IL_color";
       break;
     case '\x03':
       argR10Value = (uint)(byte)s_IL_backcolor_001a62f0[0xc];
@@ -5053,13 +5059,13 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
       semanticNameText4 = (*(unsigned int *)((unsigned char *)&(s_IL_backcolor_001a62f0) + 4));
       semanticNameText8 = (*(unsigned int *)((unsigned char *)&(s_IL_backcolor_001a62f0) + 8));
       semanticNameText12 = s_IL_backcolor_001a62f0[0xc];
-      semanticNameOrValue = (char *)(*(unsigned int *)((unsigned char *)&(s_IL_backcolor_001a62f0) + 0));
+      semanticName = (char *)(*(unsigned int *)((unsigned char *)&(s_IL_backcolor_001a62f0) + 0));
       break;
     case '\x04':
       *(unsigned int *)semanticNameText = (unsigned int)(*(unsigned int *)((unsigned char *)&(s_IL_fog_001a6300) + 0));
       (*(unsigned short *)((unsigned char *)&(acStack_1f3) + 0)) = (*(unsigned short *)((unsigned char *)&(s_IL_fog_001a6300) + 5));
       semanticNameText4 = s_IL_fog_001a6300[4];
-      semanticNameOrValue = "IL_fog";
+      semanticName = "IL_fog";
       break;
     case '\x05':
       argR10Value = (uint)(ushort)(*(unsigned short *)((unsigned char *)&(s_IL_generic_001a6308) + 9));
@@ -5067,7 +5073,7 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
       semanticNameText4 = (*(unsigned int *)((unsigned char *)&(s_IL_generic_001a6308) + 4));
       (*(unsigned short *)((unsigned char *)&(acStack_1ef) + 0)) = (*(unsigned short *)((unsigned char *)&(s_IL_generic_001a6308) + 9));
       semanticNameText8 = s_IL_generic_001a6308[8];
-      semanticNameOrValue = (char *)(*(unsigned int *)((unsigned char *)&(s_IL_generic_001a6308) + 0));
+      semanticName = (char *)(*(unsigned int *)((unsigned char *)&(s_IL_generic_001a6308) + 0));
       break;
     default:
       argR10Value = (uint)(ushort)(*(unsigned short *)((unsigned char *)&(s_IL_unknown_001a6314) + 9));
@@ -5075,9 +5081,9 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
       semanticNameText4 = (*(unsigned int *)((unsigned char *)&(s_IL_unknown_001a6314) + 4));
       (*(unsigned short *)((unsigned char *)&(acStack_1ef) + 0)) = (*(unsigned short *)((unsigned char *)&(s_IL_unknown_001a6314) + 9));
       semanticNameText8 = s_IL_unknown_001a6314[8];
-      semanticNameOrValue = (char *)(*(unsigned int *)((unsigned char *)&(s_IL_unknown_001a6314) + 0));
+      semanticName = (char *)(*(unsigned int *)((unsigned char *)&(s_IL_unknown_001a6314) + 0));
     }
-    printf_LDBLStub_1a32d0(componentLetters + 4,"%d",(uint)(byte)outputMapEntry[1],argR6,argR7,argR8,semanticNameOrValue,argR10Value);
+    printf_LDBLStub_1a32d0(componentLetters + 4,"%d",(uint)(byte)outputMapEntry[1],argR6,argR7,argR8,semanticName,argR10Value);
     builtin_strncpy(componentLetters,"xyzw",4);
     componentMask = *(uint *)outputMapEntry >> 4;
     loopIndex = 0;
@@ -5086,10 +5092,10 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
     oneArg = 1;
     componentCursorA = componentLetters;
     componentsRemaining = 4;
-    semanticNameOrValue = outputMapEntry;
+    entryByteCursor = outputMapEntry;
     do {
       if ((componentMask & 0xf & 1 << (componentBit & 0x3f)) != 0) {
-        componentSource = semanticNameOrValue[4];
+        componentSource = entryByteCursor[4];
         *(uint *)(componentCursorA + 0x10) = (uint)componentSource;
         if ((loopIndex != 0) && ((uint)componentSource != *(uint *)(componentCursorA + 0xc))) {
           sourcesDiffer = true;
@@ -5098,7 +5104,7 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
         componentCursorA = componentCursorA + 4;
       }
       componentBit = componentBit + 1;
-      semanticNameOrValue = semanticNameOrValue + 1;
+      entryByteCursor = entryByteCursor + 1;
       componentsRemaining = componentsRemaining + -1;
     } while (componentsRemaining != 0);
     if (sourcesDiffer) {
@@ -5111,7 +5117,7 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
         }
         else {
           printf_LDBLStub_1a32d0(componentTextCursor,"o%d.%c ",(uint)(byte)entryCursor[4],(int)componentLetters[(byte)entryCursor[8]],oneArg
-                       ,loopIndex,semanticNameOrValue,componentCursorA);
+                       ,loopIndex,entryByteCursor,componentCursorA);
         }
         sourcesDiffer = componentMask != 3;
         componentTextCursor = componentTextCursor + 0x40;
@@ -5119,7 +5125,7 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
         componentMask = componentMask + 1;
       } while (sourcesDiffer);
       entryCursor = componentText3;
-      printf_LDBLStub_1a32d0(destinationText,"%s%s%s%s",componentText0,componentText1,componentText2,entryCursor,semanticNameOrValue,componentCursorA);
+      printf_LDBLStub_1a32d0(destinationText,"%s%s%s%s",componentText0,componentText1,componentText2,entryCursor,entryByteCursor,componentCursorA);
     }
     else {
       iVar5 = 0x5f;
@@ -5134,14 +5140,14 @@ int vsdisPrintOutputMapping(disasmCtx, outputMapEntry, argR5, argR6, argR7, argR
       if ((componentMask & 4) != 0) {
         entryCursor = (char *)(int)componentLetters[(byte)outputMapEntry[10]];
       }
-      semanticNameOrValue = (*(GhidraMachOSection *)0x00000054).sectname + 0xb;
+      entryByteCursor = (*(GhidraMachOSection *)0x00000054).sectname + 0xb;
       if ((componentMask & 8) != 0) {
-        semanticNameOrValue = (char *)(int)componentLetters[(byte)outputMapEntry[0xb]];
+        entryByteCursor = (char *)(int)componentLetters[(byte)outputMapEntry[0xb]];
       }
-      printf_LDBLStub_1a32d0(destinationText,"o%d.%c%c%c%c",(uint)(byte)outputMapEntry[4],iVar5,componentsRemaining,entryCursor,semanticNameOrValue,
+      printf_LDBLStub_1a32d0(destinationText,"o%d.%c%c%c%c",(uint)(byte)outputMapEntry[4],iVar5,componentsRemaining,entryCursor,entryByteCursor,
                    componentCursorA);
     }
-    ((int (*)())FUN_000ce050)(disasmCtx,";    %s = %s%s",destinationText,semanticNameText,componentLetters + 4,entryCursor,semanticNameOrValue,componentCursorA);
+    ((int (*)())FUN_000ce050)(disasmCtx,";    %s = %s%s",destinationText,semanticNameText,componentLetters + 4,entryCursor,entryByteCursor,componentCursorA);
   }
   return;
 }
@@ -5358,7 +5364,9 @@ int FUN_000ced58(disasmCtx, instructionWordPtr, mnemonicText, operandText0, oper
   undefined2 *operandText0;
   undefined2 *operandText1;
 {
+  uint componentIndex;
   int length;
+  int prefixLow;
   bool moreComponents;
   undefined4 prefixHigh;
   uint opcodeIndex;
@@ -5366,30 +5374,29 @@ int FUN_000ced58(disasmCtx, instructionWordPtr, mnemonicText, operandText0, oper
   undefined2 *operandText0Copy;
   undefined2 *operandText1Copy;
   undefined4 argR8;
-  int prefixLowOrZero;
   undefined4 argR10;
   uint opcodeOffset;
   uint previousWord;
   uint negateBits;
-  uint registerTypeOrLoopIndex;
+  uint registerType;
   uint instructionWord;
   undefined1 indexText [5];
   undefined1 indexTextTail [23];
   
   prefixHigh = (*(unsigned int *)((unsigned char *)&(s_Du_001a64b4) + 4));
-  prefixLowOrZero = (*(unsigned int *)((unsigned char *)&(s_Du_001a64b4) + 0));
+  prefixLow = (*(unsigned int *)((unsigned char *)&(s_Du_001a64b4) + 0));
   instructionWord = *instructionWordPtr;
   previousWord = instructionWordPtr[-3];
   negateBits = instructionWord & 0x18000000;
   opcodeIndex = instructionWord >> 0x15 & 0xf | (instructionWord & 4) << 2 | 0x40;
-  registerTypeOrLoopIndex = instructionWord & 0xf;
+  registerType = instructionWord & 0xf;
   opcodeOffset = opcodeIndex - 0x40;
   *(undefined4 *)mnemonicText = (*(unsigned int *)((unsigned char *)&(s_Du_001a64b4) + 0));
   *(undefined4 *)(mnemonicText + 4) = prefixHigh;
   operandText0Copy = operandText0;
   operandText1Copy = operandText1;
   if (opcodeOffset < 0x1d) {
-    prefixLowOrZero = 0;
+    prefixLow = 0;
     switch(opcodeIndex) {
     case 0x40:
       _strcat(mnemonicText,"NOPme     ");
@@ -5483,7 +5490,7 @@ int FUN_000ced58(disasmCtx, instructionWordPtr, mnemonicText, operandText0, oper
     _strcat(mnemonicText,"ERROR     ");
   }
   *operandText0 = 0x7400;
-  printf_LDBLStub_1a32d0(indexText,"%d",instructionWord >> 0x13 & 3,operandText0Copy,operandText1Copy,argR8,prefixLowOrZero,argR10);
+  printf_LDBLStub_1a32d0(indexText,"%d",instructionWord >> 0x13 & 3,operandText0Copy,operandText1Copy,argR8,prefixLow,argR10);
   if ((previousWord & 0x2000000) != 0) {
     _strcat(operandText0,"_sat");
   }
@@ -5508,31 +5515,31 @@ int FUN_000ced58(disasmCtx, instructionWordPtr, mnemonicText, operandText0, oper
   }
   length2 = _strlen(operandText0);
   *(undefined2 *)(length2 + (int)operandText0) = 0x2c00;
-  if (registerTypeOrLoopIndex == 1) {
+  if (registerType == 1) {
     *operandText1 = 0x7600;
   }
-  else if (registerTypeOrLoopIndex == 0) {
+  else if (registerType == 0) {
     *operandText1 = 0x7200;
   }
-  else if (registerTypeOrLoopIndex == 2) {
+  else if (registerType == 2) {
     *operandText1 = 0x6300;
   }
-  else if (registerTypeOrLoopIndex == 3) {
+  else if (registerType == 3) {
     *operandText1 = 0x7400;
   }
   else {
     *operandText1 = 0x3f00;
   }
-  printf_LDBLStub_1a32d0(indexTextTail,"%d",instructionWord >> 5 & 0xff,operandText0Copy,operandText1Copy,argR8,prefixLowOrZero,argR10);
+  printf_LDBLStub_1a32d0(indexTextTail,"%d",instructionWord >> 5 & 0xff,operandText0Copy,operandText1Copy,argR8,prefixLow,argR10);
   _strcat(operandText1,indexTextTail);
   negateBits = instructionWord & 0x6000000;
   if (((instructionWord & 0x7e000) != 0x10000) || (negateBits != 0)) {
-    registerTypeOrLoopIndex = 0;
+    componentIndex = 0;
     length = _strlen(operandText1);
     *(undefined2 *)(length + (int)operandText1) = 0x2e00;
     opcodeIndex = 0xd;
     do {
-      if (((negateBits & 0x2000000 << (registerTypeOrLoopIndex & 0x3f)) != 0) && (negateBits != 0)) {
+      if (((negateBits & 0x2000000 << (componentIndex & 0x3f)) != 0) && (negateBits != 0)) {
         length = _strlen(operandText1);
         *(undefined2 *)(length + (int)operandText1) = 0x2d00;
       }
@@ -5565,9 +5572,9 @@ int FUN_000ced58(disasmCtx, instructionWordPtr, mnemonicText, operandText0, oper
         length = _strlen(operandText1);
         *(undefined2 *)(length + (int)operandText1) = 0x3f00;
       }
-      moreComponents = registerTypeOrLoopIndex != 1;
+      moreComponents = componentIndex != 1;
       opcodeIndex = opcodeIndex + 3;
-      registerTypeOrLoopIndex = registerTypeOrLoopIndex + 1;
+      componentIndex = componentIndex + 1;
     } while (moreComponents);
   }
   return instructionWordPtr + 1;
@@ -5919,8 +5926,9 @@ int vsdisPrintFlowInstruction(disasmCtx, labelEntry, argR5, argR6, argR7, argR8,
   undefined4 argR9;
   undefined4 argR10;
 {
+  char *flowFormat;
   undefined4 flowOpName;
-  char *condOrFormat;
+  char *compareText;
   char *formatString;
   int formatValueB;
   char *formatValueA;
@@ -5932,17 +5940,17 @@ int vsdisPrintFlowInstruction(disasmCtx, labelEntry, argR5, argR6, argR7, argR8,
   if (flowOp == 0x35) {
     formatValueD = labelEntry[3];
     if (*labelEntry == 0) {
-      condOrFormat = "!=";
+      compareText = "!=";
     }
     else {
-      condOrFormat = "==";
+      compareText = "==";
     }
     formatValueB = labelEntry[6];
     formatString = "          CF- IF  B%d %s 0, if = %d, else = %d, endif = %d";
     formatValueA = (char *)(labelEntry[4] + 1);
     formatValueC = labelEntry[5] + 1;
 LAB_000cfef0:
-    ((int (*)())FUN_000ce050)(disasmCtx,formatString,formatValueD,condOrFormat,formatValueA,formatValueC,formatValueB,argR10);
+    ((int (*)())FUN_000ce050)(disasmCtx,formatString,formatValueD,compareText,formatValueA,formatValueC,formatValueB,argR10);
     return;
   }
   if (flowOp < 0x36) {
@@ -5954,12 +5962,12 @@ LAB_000cfef0:
         formatValueC = labelEntry[6];
         formatValueB = labelEntry[4];
         formatValueD = labelEntry[5];
-        condOrFormat = "          CF- CALL at %d, subroutine from %d to %d";
+        flowFormat = "          CF- CALL at %d, subroutine from %d to %d";
         goto LAB_000cfe3c;
       }
       if (flowOp == 9) {
         formatValueD = labelEntry[4];
-        condOrFormat = (char *)labelEntry[3];
+        compareText = (char *)labelEntry[3];
         if (*labelEntry == 0) {
           formatValueA = "!=";
         }
@@ -5981,13 +5989,13 @@ LAB_000cfef0:
       if (labelEntry[1] == 0) {
         formatValueC = labelEntry[6];
         formatValueB = labelEntry[3];
-        condOrFormat = "          CF- Loop I%d first in loop = %d last in loop = %d";
+        flowFormat = "          CF- Loop I%d first in loop = %d last in loop = %d";
         formatValueD = labelEntry[4] + 1;
       }
       else {
         formatValueC = labelEntry[6];
         formatValueB = labelEntry[3];
-        condOrFormat = "          CF- Rep  I%d first in loop = %d last in loop = %d";
+        flowFormat = "          CF- Rep  I%d first in loop = %d last in loop = %d";
         formatValueD = labelEntry[4] + 1;
       }
       goto LAB_000cfe3c;
@@ -6006,11 +6014,11 @@ LAB_000cfef0:
   ((int (*)())FUN_000ce050)(disasmCtx," else=%d, labelinst=%d",labelEntry[5],labelEntry[5],formatValueD,argR8,argR9,argR10)
   ;
   formatValueB = labelEntry[6];
-  condOrFormat = " endif= %d , endinst = %d, retinst = %d";
+  flowFormat = " endif= %d , endinst = %d, retinst = %d";
   formatValueD = formatValueB;
   formatValueC = formatValueB;
 LAB_000cfe3c:
-  ((int (*)())FUN_000ce050)(disasmCtx,condOrFormat,formatValueB,formatValueD,formatValueC,argR8,argR9,argR10);
+  ((int (*)())FUN_000ce050)(disasmCtx,flowFormat,formatValueB,formatValueD,formatValueC,argR8,argR9,argR10);
   return;
 }
 

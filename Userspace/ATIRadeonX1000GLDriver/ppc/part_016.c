@@ -5953,20 +5953,21 @@ int ilTokenBufPush(ctx, tokenBuf, token)
   uint *tokenBuf;
   undefined4 token;
 {
-  uint pushIndexOrNewData;
+  uint newTokenData;
+  uint tokenIndex;
   
-  pushIndexOrNewData = *tokenBuf;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  tokenIndex = *tokenBuf;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(undefined4 *)(pushIndexOrNewData * 4 + tokenBuf[2]) = token;
+  *(undefined4 *)(tokenIndex * 4 + tokenBuf[2]) = token;
   *tokenBuf = *tokenBuf + 1;
   return;
 }
@@ -5976,46 +5977,47 @@ int atifsEmitFinalColorClamp(ctx, tokenBuf)
   int ctx;
   uint *tokenBuf;
 {
-  uint pushIndexOrNewData;
+  uint newTokenData;
+  uint tokenIndex;
   
-  pushIndexOrNewData = *tokenBuf;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  tokenIndex = *tokenBuf;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(undefined4 *)(pushIndexOrNewData * 4 + tokenBuf[2]) = 0xe;
-  pushIndexOrNewData = *tokenBuf + 1;
-  *tokenBuf = pushIndexOrNewData;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  *(undefined4 *)(tokenIndex * 4 + tokenBuf[2]) = 0xe;
+  tokenIndex = *tokenBuf + 1;
+  *tokenBuf = tokenIndex;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(undefined4 *)(pushIndexOrNewData * 4 + tokenBuf[2]) = 0x170000;
-  pushIndexOrNewData = *tokenBuf + 1;
-  *tokenBuf = pushIndexOrNewData;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  *(undefined4 *)(tokenIndex * 4 + tokenBuf[2]) = 0x170000;
+  tokenIndex = *tokenBuf + 1;
+  *tokenBuf = tokenIndex;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(undefined4 *)(pushIndexOrNewData * 4 + tokenBuf[2]) = 0x40000;
+  *(undefined4 *)(tokenIndex * 4 + tokenBuf[2]) = 0x40000;
   *tokenBuf = *tokenBuf + 1;
   return;
 }
@@ -6025,72 +6027,73 @@ int atifsEmitAddSecondaryColor(ctx, tokenBuf)
   int ctx;
   uint *tokenBuf;
 {
-  uint pushIndexOrNewData;
+  uint newTokenData;
+  uint tokenIndex;
   
-  pushIndexOrNewData = *tokenBuf;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  tokenIndex = *tokenBuf;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(undefined4 *)(pushIndexOrNewData * 4 + tokenBuf[2]) = 3;
-  pushIndexOrNewData = *tokenBuf + 1;
-  *tokenBuf = pushIndexOrNewData;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  *(undefined4 *)(tokenIndex * 4 + tokenBuf[2]) = 3;
+  tokenIndex = *tokenBuf + 1;
+  *tokenBuf = tokenIndex;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(undefined4 *)(pushIndexOrNewData * 4 + tokenBuf[2]) = 0x40000;
-  pushIndexOrNewData = *tokenBuf + 1;
-  *tokenBuf = pushIndexOrNewData;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  *(undefined4 *)(tokenIndex * 4 + tokenBuf[2]) = 0x40000;
+  tokenIndex = *tokenBuf + 1;
+  *tokenBuf = tokenIndex;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(undefined4 *)(pushIndexOrNewData * 4 + tokenBuf[2]) = 0x40000;
-  pushIndexOrNewData = *tokenBuf + 1;
-  *tokenBuf = pushIndexOrNewData;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  *(undefined4 *)(tokenIndex * 4 + tokenBuf[2]) = 0x40000;
+  tokenIndex = *tokenBuf + 1;
+  *tokenBuf = tokenIndex;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(undefined4 *)(pushIndexOrNewData * 4 + tokenBuf[2]) = 0x530000;
-  pushIndexOrNewData = *tokenBuf + 1;
-  *tokenBuf = pushIndexOrNewData;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  *(undefined4 *)(tokenIndex * 4 + tokenBuf[2]) = 0x530000;
+  tokenIndex = *tokenBuf + 1;
+  *tokenBuf = tokenIndex;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(undefined **)(pushIndexOrNewData * 4 + tokenBuf[2]) = ((unsigned char *)0x00004210);
+  *(undefined **)(tokenIndex * 4 + tokenBuf[2]) = ((unsigned char *)0x00004210);
   *tokenBuf = *tokenBuf + 1;
   return;
 }
@@ -6103,24 +6106,25 @@ int atifsEmitMoveWithWriteMask(ctx, tokenBuf, dstRegEnum, srcTempIndex, writeMas
   uint srcTempIndex;
   uint writeMask;
 {
-  uint pushIndexOrNewData;
+  uint newTokenData;
+  uint tokenIndex;
   uint ilWriteMask;
   
-  pushIndexOrNewData = *tokenBuf;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  tokenIndex = *tokenBuf;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(undefined4 *)(pushIndexOrNewData * 4 + tokenBuf[2]) = 0x47;
+  *(undefined4 *)(tokenIndex * 4 + tokenBuf[2]) = 0x47;
   ilWriteMask = 0;
-  pushIndexOrNewData = *tokenBuf + 1;
-  *tokenBuf = pushIndexOrNewData;
+  tokenIndex = *tokenBuf + 1;
+  *tokenBuf = tokenIndex;
   if ((writeMask & 7) == 0) {
     ilWriteMask = 0x15;
   }
@@ -6136,94 +6140,97 @@ int atifsEmitMoveWithWriteMask(ctx, tokenBuf, dstRegEnum, srcTempIndex, writeMas
   if ((writeMask & 8) != 0) {
     ilWriteMask = ilWriteMask | 0x40;
   }
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(uint *)(pushIndexOrNewData * 4 + tokenBuf[2]) = dstRegEnum + 0x76dfU & 0xffff | 0x440000;
-  pushIndexOrNewData = *tokenBuf + 1;
-  *tokenBuf = pushIndexOrNewData;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  *(uint *)(tokenIndex * 4 + tokenBuf[2]) = dstRegEnum + 0x76dfU & 0xffff | 0x440000;
+  tokenIndex = *tokenBuf + 1;
+  *tokenBuf = tokenIndex;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(uint *)(pushIndexOrNewData * 4 + tokenBuf[2]) = ilWriteMask;
-  pushIndexOrNewData = *tokenBuf + 1;
-  *tokenBuf = pushIndexOrNewData;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  *(uint *)(tokenIndex * 4 + tokenBuf[2]) = ilWriteMask;
+  tokenIndex = *tokenBuf + 1;
+  *tokenBuf = tokenIndex;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(uint *)(pushIndexOrNewData * 4 + tokenBuf[2]) = srcTempIndex & 0xffff | 0x40000;
+  *(uint *)(tokenIndex * 4 + tokenBuf[2]) = srcTempIndex & 0xffff | 0x40000;
   *tokenBuf = *tokenBuf + 1;
   return;
 }
 
 /* atifsEmitSourceOperand @ 0xb1e80 (932 bytes) */
-int atifsEmitSourceOperand(ctx, tokenBuf, srcArg, param_4, param_5, regWritten)
+int atifsEmitSourceOperand(ctx, tokenBuf, srcArg, reserved0, isColorOp, regWritten)
   int ctx;
   uint *tokenBuf;
   uint *srcArg;
-  undefined4 param_4;
-  undefined4 param_5;
+  undefined4 reserved0;
+  undefined4 isColorOp;
   int regWritten;
 {
+  uint swizzleNewTokenData;
+  uint newTokenData;
+  uint tokenIndex;
   uint argRep;
   uint argMod;
-  uint uVar3;
+  uint argReg;
   uint srcToken;
   undefined *swizzleWord;
   
   srcToken = 0;
   swizzleWord = (undefined *)0x0;
-  uVar3 = *srcArg;
-  if ((uVar3 - 0x8921 < 6) && (*(char *)(uVar3 + regWritten + -0x8921) == '\0')) {
-    uVar3 = 0;
+  argReg = *srcArg;
+  if ((argReg - 0x8921 < 6) && (*(char *)(argReg + regWritten + -0x8921) == '\0')) {
+    argReg = 0;
     *srcArg = 0;
 LAB_000b1f80:
     srcToken = 0x410000;
     swizzleWord = ((unsigned char *)0x00004444);
   }
-  else if (uVar3 < 0x8927) {
-    if (uVar3 < 0x8921) {
-      if (uVar3 == 1) {
+  else if (argReg < 0x8927) {
+    if (argReg < 0x8921) {
+      if (argReg == 1) {
         srcToken = 0x410000;
         swizzleWord = ((unsigned char *)0x00005555);
       }
       else {
-        if (uVar3 == 0) goto LAB_000b1f80;
-        if (uVar3 == 0x8577) {
+        if (argReg == 0) goto LAB_000b1f80;
+        if (argReg == 0x8577) {
           srcToken = 0x120000;
         }
       }
     }
     else {
-      srcToken = uVar3 + 0x76df & 0xffff | 0x40000;
+      srcToken = argReg + 0x76df & 0xffff | 0x40000;
     }
   }
-  else if (0x8940 < uVar3) {
-    if (uVar3 < 0x8949) {
-      srcToken = uVar3 + 0x76bf & 0xffff | 0x10000;
+  else if (0x8940 < argReg) {
+    if (argReg < 0x8949) {
+      srcToken = argReg + 0x76bf & 0xffff | 0x10000;
     }
-    else if (uVar3 == 0x896d) {
+    else if (argReg == 0x896d) {
       srcToken = 0x130000;
     }
   }
@@ -6249,7 +6256,7 @@ LAB_000b2028:
   if ((argMod & 8) != 0) {
     swizzleWord = (undefined *)((uint)swizzleWord | 0x20000);
   }
-  if (1 < uVar3) {
+  if (1 < argReg) {
     if (argRep == 0x1904) {
       swizzleWord = (undefined *)((uint)swizzleWord & 0xffff8888 | 0x1111);
     }
@@ -6268,50 +6275,51 @@ LAB_000b2028:
       swizzleWord = (undefined *)((uint)swizzleWord & 0xffff8888 | 0x3333);
     }
   }
-  uVar3 = *tokenBuf;
-  if (tokenBuf[1] <= uVar3) {
-    uVar3 = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  tokenIndex = *tokenBuf;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(uVar3,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = uVar3;
-    uVar3 = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(uint *)(uVar3 * 4 + tokenBuf[2]) = srcToken;
-  uVar3 = *tokenBuf + 1;
-  *tokenBuf = uVar3;
+  *(uint *)(tokenIndex * 4 + tokenBuf[2]) = srcToken;
+  tokenIndex = *tokenBuf + 1;
+  *tokenBuf = tokenIndex;
   if ((srcToken & 0x400000) != 0) {
-    if (tokenBuf[1] <= uVar3) {
-      srcToken = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+    if (tokenBuf[1] <= tokenIndex) {
+      swizzleNewTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
       if (tokenBuf[2] != 0) {
-        _memcpy(srcToken,tokenBuf[2],*tokenBuf << 2);
+        _memcpy(swizzleNewTokenData,tokenBuf[2],*tokenBuf << 2);
         (**(code **)(ctx + 0x18))(tokenBuf[2]);
       }
-      tokenBuf[2] = srcToken;
-      uVar3 = *tokenBuf;
+      tokenBuf[2] = swizzleNewTokenData;
+      tokenIndex = *tokenBuf;
       tokenBuf[1] = tokenBuf[1] + 0x80;
     }
-    *(undefined **)(uVar3 * 4 + tokenBuf[2]) = swizzleWord;
+    *(undefined **)(tokenIndex * 4 + tokenBuf[2]) = swizzleWord;
     *tokenBuf = *tokenBuf + 1;
   }
   return 1;
 }
 
 /* atifsEmitDestinationOperand @ 0xb2260 (692 bytes) */
-int atifsEmitDestinationOperand(ctx, tokenBuf, dstArg, param_4, hasWriteMask, regWritten)
+int atifsEmitDestinationOperand(ctx, tokenBuf, dstArg, reserved0, hasWriteMask, regWritten)
   int ctx;
   uint *tokenBuf;
   uint *dstArg;
-  undefined4 param_4;
+  undefined4 reserved0;
   int hasWriteMask;
   int regWritten;
 {
-  uint pushIndexOrNewData;
+  uint newTokenData;
+  uint tokenIndex;
   uint dstModBits;
-  uint dstMask;
   uint dstRegEnum;
+  uint dstMask;
   uint ilDstWord;
   uint dstToken;
   
@@ -6372,169 +6380,176 @@ LAB_000b2364:
       ilDstWord = ilDstWord | 0xc00;
     }
   }
-  pushIndexOrNewData = *tokenBuf;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  tokenIndex = *tokenBuf;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(uint *)(pushIndexOrNewData * 4 + tokenBuf[2]) = dstToken;
-  pushIndexOrNewData = *tokenBuf + 1;
-  *tokenBuf = pushIndexOrNewData;
+  *(uint *)(tokenIndex * 4 + tokenBuf[2]) = dstToken;
+  tokenIndex = *tokenBuf + 1;
+  *tokenBuf = tokenIndex;
   if ((dstToken & 0x400000) != 0) {
-    if (tokenBuf[1] <= pushIndexOrNewData) {
-      pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+    if (tokenBuf[1] <= tokenIndex) {
+      newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
       if (tokenBuf[2] != 0) {
-        _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+        _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
         (**(code **)(ctx + 0x18))(tokenBuf[2]);
       }
-      tokenBuf[2] = pushIndexOrNewData;
-      pushIndexOrNewData = *tokenBuf;
+      tokenBuf[2] = newTokenData;
+      tokenIndex = *tokenBuf;
       tokenBuf[1] = tokenBuf[1] + 0x80;
     }
-    *(uint *)(pushIndexOrNewData * 4 + tokenBuf[2]) = ilDstWord;
+    *(uint *)(tokenIndex * 4 + tokenBuf[2]) = ilDstWord;
     *tokenBuf = *tokenBuf + 1;
   }
   return 1;
 }
 
 /* atifsEmitTextureOps @ 0xb25a0 (2216 bytes) */
-int atifsEmitTextureOps(ctx, tokenBuf, fsState, pass, param_5, regWritten)
+int atifsEmitTextureOps(ctx, tokenBuf, fsState, pass, passCount, regWritten)
   int ctx;
   uint *tokenBuf;
   int fsState;
   int pass;
-  undefined4 param_5;
+  undefined4 passCount;
   int regWritten;
 {
+  int textureOp2;
+  int entryOffset;
+  int coordSource;
+  uint coordSourceToken;
+  uint newTokenData;
+  uint tokenIndex;
+  uint coordNewTokenData;
   int textureOp;
-  uint coordToken;
-  uint opsPerPassOrToken;
+  uint coordTokenIndex;
+  uint regsPerPass;
   int shaderDef;
   uint loopIndex;
   uint swizzleMode;
   undefined *swizzleWord;
   int recordOffset;
   
-  opsPerPassOrToken = (uint)*(ushort *)(fsState + 0x14);
+  regsPerPass = (uint)*(ushort *)(fsState + 0x14);
   shaderDef = *(int *)(fsState + 0x10);
   if (*(ushort *)(fsState + 0x14) != 0) {
     loopIndex = 0;
     do {
-      recordOffset = (loopIndex + opsPerPassOrToken * pass) * 0xc;
+      recordOffset = (loopIndex + regsPerPass * pass) * 0xc;
       textureOp = recordOffset + *(int *)(shaderDef + 0xc);
       if (*(char *)(recordOffset + *(int *)(shaderDef + 0xc)) != '\0') {
         swizzleMode = *(uint *)(textureOp + 4);
         swizzleWord = (undefined *)0x0;
         if (*(char *)(textureOp + 1) == '\0') {
           if ((swizzleMode == 0x8976) && (loopIndex == *(int *)(textureOp + 8) - 0x8921U)) goto LAB_000b2c0c;
-          opsPerPassOrToken = *tokenBuf;
-          if (tokenBuf[1] <= opsPerPassOrToken) {
-            opsPerPassOrToken = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+          tokenIndex = *tokenBuf;
+          if (tokenBuf[1] <= tokenIndex) {
+            newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
             if (tokenBuf[2] != 0) {
-              _memcpy(opsPerPassOrToken,tokenBuf[2],*tokenBuf << 2);
+              _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
               (**(code **)(ctx + 0x18))(tokenBuf[2]);
             }
-            tokenBuf[2] = opsPerPassOrToken;
-            opsPerPassOrToken = *tokenBuf;
+            tokenBuf[2] = newTokenData;
+            tokenIndex = *tokenBuf;
             tokenBuf[1] = tokenBuf[1] + 0x80;
           }
-          *(undefined4 *)(opsPerPassOrToken * 4 + tokenBuf[2]) = 0x47;
-          opsPerPassOrToken = *tokenBuf + 1;
-          *tokenBuf = opsPerPassOrToken;
-          if (tokenBuf[1] <= opsPerPassOrToken) {
-            opsPerPassOrToken = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + tokenBuf[2]) = 0x47;
+          tokenIndex = *tokenBuf + 1;
+          *tokenBuf = tokenIndex;
+          if (tokenBuf[1] <= tokenIndex) {
+            newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
             if (tokenBuf[2] != 0) {
-              _memcpy(opsPerPassOrToken,tokenBuf[2],*tokenBuf << 2);
+              _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
               (**(code **)(ctx + 0x18))(tokenBuf[2]);
             }
-            tokenBuf[2] = opsPerPassOrToken;
-            opsPerPassOrToken = *tokenBuf;
+            tokenBuf[2] = newTokenData;
+            tokenIndex = *tokenBuf;
             tokenBuf[1] = tokenBuf[1] + 0x80;
           }
-          *(uint *)(opsPerPassOrToken * 4 + tokenBuf[2]) = loopIndex + 6 & 0xffff | 0x40000;
+          *(uint *)(tokenIndex * 4 + tokenBuf[2]) = loopIndex + 6 & 0xffff | 0x40000;
           *tokenBuf = *tokenBuf + 1;
           *(undefined1 *)(regWritten + loopIndex) = 1;
-          textureOp = *(int *)(recordOffset + *(int *)(shaderDef + 0xc) + 8);
-          if (textureOp - 0x84c0U < 6) {
-            opsPerPassOrToken = textureOp + 0x7b40U & 0xffff | 0x110000;
+          coordSource = *(int *)(recordOffset + *(int *)(shaderDef + 0xc) + 8);
+          if (coordSource - 0x84c0U < 6) {
+            coordSourceToken = coordSource + 0x7b40U & 0xffff | 0x110000;
           }
           else {
-            opsPerPassOrToken = textureOp + 0x76dfU & 0xffff | 0x40000;
+            coordSourceToken = coordSource + 0x76dfU & 0xffff | 0x40000;
           }
-          coordToken = *tokenBuf;
-          if (tokenBuf[1] <= coordToken) {
-            coordToken = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+          coordTokenIndex = *tokenBuf;
+          if (tokenBuf[1] <= coordTokenIndex) {
+            coordNewTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
             if (tokenBuf[2] != 0) {
-              _memcpy(coordToken,tokenBuf[2],*tokenBuf << 2);
+              _memcpy(coordNewTokenData,tokenBuf[2],*tokenBuf << 2);
               (**(code **)(ctx + 0x18))(tokenBuf[2]);
             }
-            tokenBuf[2] = coordToken;
-            coordToken = *tokenBuf;
+            tokenBuf[2] = coordNewTokenData;
+            coordTokenIndex = *tokenBuf;
             tokenBuf[1] = tokenBuf[1] + 0x80;
           }
-          *(uint *)(coordToken * 4 + tokenBuf[2]) = opsPerPassOrToken | 0x400000;
-          opsPerPassOrToken = *tokenBuf + 1;
-          *tokenBuf = opsPerPassOrToken;
+          *(uint *)(coordTokenIndex * 4 + tokenBuf[2]) = coordSourceToken | 0x400000;
+          tokenIndex = *tokenBuf + 1;
+          *tokenBuf = tokenIndex;
         }
         else {
-          opsPerPassOrToken = *tokenBuf;
-          if (tokenBuf[1] <= opsPerPassOrToken) {
-            opsPerPassOrToken = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+          tokenIndex = *tokenBuf;
+          if (tokenBuf[1] <= tokenIndex) {
+            newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
             if (tokenBuf[2] != 0) {
-              _memcpy(opsPerPassOrToken,tokenBuf[2],*tokenBuf << 2);
+              _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
               (**(code **)(ctx + 0x18))(tokenBuf[2]);
             }
-            tokenBuf[2] = opsPerPassOrToken;
-            opsPerPassOrToken = *tokenBuf;
+            tokenBuf[2] = newTokenData;
+            tokenIndex = *tokenBuf;
             tokenBuf[1] = tokenBuf[1] + 0x80;
           }
-          *(uint *)(opsPerPassOrToken * 4 + tokenBuf[2]) = (loopIndex & 0x3fff) << 0x10 | 0x5d;
-          opsPerPassOrToken = *tokenBuf + 1;
-          *tokenBuf = opsPerPassOrToken;
-          if (tokenBuf[1] <= opsPerPassOrToken) {
-            opsPerPassOrToken = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+          *(uint *)(tokenIndex * 4 + tokenBuf[2]) = (loopIndex & 0x3fff) << 0x10 | 0x5d;
+          tokenIndex = *tokenBuf + 1;
+          *tokenBuf = tokenIndex;
+          if (tokenBuf[1] <= tokenIndex) {
+            newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
             if (tokenBuf[2] != 0) {
-              _memcpy(opsPerPassOrToken,tokenBuf[2],*tokenBuf << 2);
+              _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
               (**(code **)(ctx + 0x18))(tokenBuf[2]);
             }
-            tokenBuf[2] = opsPerPassOrToken;
-            opsPerPassOrToken = *tokenBuf;
+            tokenBuf[2] = newTokenData;
+            tokenIndex = *tokenBuf;
             tokenBuf[1] = tokenBuf[1] + 0x80;
           }
-          *(uint *)(opsPerPassOrToken * 4 + tokenBuf[2]) = loopIndex + 6 & 0xffff | 0x40000;
+          *(uint *)(tokenIndex * 4 + tokenBuf[2]) = loopIndex + 6 & 0xffff | 0x40000;
           *tokenBuf = *tokenBuf + 1;
-          textureOp = *(int *)(recordOffset + *(int *)(shaderDef + 0xc) + 8);
-          if (textureOp - 0x84c0U < 6) {
-            opsPerPassOrToken = textureOp + 0x7b40U & 0xffff | 0x110000;
+          coordSource = *(int *)(recordOffset + *(int *)(shaderDef + 0xc) + 8);
+          if (coordSource - 0x84c0U < 6) {
+            coordSourceToken = coordSource + 0x7b40U & 0xffff | 0x110000;
           }
-          else if (*(char *)(regWritten + textureOp + -0x8921) == '\0') {
+          else if (*(char *)(regWritten + coordSource + -0x8921) == '\0') {
             swizzleMode = 0;
-            opsPerPassOrToken = textureOp + 0x76dfU & 0xffff | 0x10000;
+            coordSourceToken = coordSource + 0x76dfU & 0xffff | 0x10000;
           }
           else {
-            opsPerPassOrToken = textureOp + 0x76dfU & 0xffff | 0x40000;
+            coordSourceToken = coordSource + 0x76dfU & 0xffff | 0x40000;
           }
           *(undefined1 *)(loopIndex + regWritten) = 1;
-          coordToken = *tokenBuf;
-          if (tokenBuf[1] <= coordToken) {
-            coordToken = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+          coordTokenIndex = *tokenBuf;
+          if (tokenBuf[1] <= coordTokenIndex) {
+            coordNewTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
             if (tokenBuf[2] != 0) {
-              _memcpy(coordToken,tokenBuf[2],*tokenBuf << 2);
+              _memcpy(coordNewTokenData,tokenBuf[2],*tokenBuf << 2);
               (**(code **)(ctx + 0x18))(tokenBuf[2]);
             }
-            tokenBuf[2] = coordToken;
-            coordToken = *tokenBuf;
+            tokenBuf[2] = coordNewTokenData;
+            coordTokenIndex = *tokenBuf;
             tokenBuf[1] = tokenBuf[1] + 0x80;
           }
-          *(uint *)(coordToken * 4 + tokenBuf[2]) = opsPerPassOrToken | 0x400000;
-          opsPerPassOrToken = *tokenBuf + 1;
-          *tokenBuf = opsPerPassOrToken;
+          *(uint *)(coordTokenIndex * 4 + tokenBuf[2]) = coordSourceToken | 0x400000;
+          tokenIndex = *tokenBuf + 1;
+          *tokenBuf = tokenIndex;
         }
         if (swizzleMode == 0x8977) {
           swizzleWord = ((unsigned char *)0x00003310);
@@ -6553,74 +6568,74 @@ int atifsEmitTextureOps(ctx, tokenBuf, fsState, pass, param_5, regWritten)
         else if (swizzleMode == 0x8979) {
           swizzleWord = (undefined *)0x603510;
         }
-        if (tokenBuf[1] <= opsPerPassOrToken) {
-          opsPerPassOrToken = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+        if (tokenBuf[1] <= tokenIndex) {
+          newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
           if (tokenBuf[2] != 0) {
-            _memcpy(opsPerPassOrToken,tokenBuf[2],*tokenBuf << 2);
+            _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
             (**(code **)(ctx + 0x18))(tokenBuf[2]);
           }
-          tokenBuf[2] = opsPerPassOrToken;
-          opsPerPassOrToken = *tokenBuf;
+          tokenBuf[2] = newTokenData;
+          tokenIndex = *tokenBuf;
           tokenBuf[1] = tokenBuf[1] + 0x80;
         }
-        *(undefined **)(opsPerPassOrToken * 4 + tokenBuf[2]) = swizzleWord;
+        *(undefined **)(tokenIndex * 4 + tokenBuf[2]) = swizzleWord;
         *tokenBuf = *tokenBuf + 1;
-        opsPerPassOrToken = (uint)*(ushort *)(fsState + 0x14);
+        regsPerPass = (uint)*(ushort *)(fsState + 0x14);
       }
 LAB_000b2c0c:
       loopIndex = loopIndex + 1;
-    } while ((int)loopIndex < (int)opsPerPassOrToken);
-    if (opsPerPassOrToken != 0) {
+    } while ((int)loopIndex < (int)regsPerPass);
+    if (regsPerPass != 0) {
       loopIndex = 0;
       do {
-        textureOp = (loopIndex + opsPerPassOrToken * pass) * 0xc;
-        recordOffset = textureOp + *(int *)(shaderDef + 0xc);
-        if ((*(char *)(textureOp + *(int *)(shaderDef + 0xc)) != '\0') &&
-           (((*(char *)(recordOffset + 1) != '\0' || (*(int *)(recordOffset + 4) != 0x8976)) ||
-            (loopIndex != *(int *)(recordOffset + 8) - 0x8921U)))) {
-          opsPerPassOrToken = *tokenBuf;
-          if (tokenBuf[1] <= opsPerPassOrToken) {
-            opsPerPassOrToken = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+        entryOffset = (loopIndex + regsPerPass * pass) * 0xc;
+        textureOp2 = entryOffset + *(int *)(shaderDef + 0xc);
+        if ((*(char *)(entryOffset + *(int *)(shaderDef + 0xc)) != '\0') &&
+           (((*(char *)(textureOp2 + 1) != '\0' || (*(int *)(textureOp2 + 4) != 0x8976)) ||
+            (loopIndex != *(int *)(textureOp2 + 8) - 0x8921U)))) {
+          tokenIndex = *tokenBuf;
+          if (tokenBuf[1] <= tokenIndex) {
+            newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
             if (tokenBuf[2] != 0) {
-              _memcpy(opsPerPassOrToken,tokenBuf[2],*tokenBuf << 2);
+              _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
               (**(code **)(ctx + 0x18))(tokenBuf[2]);
             }
-            tokenBuf[2] = opsPerPassOrToken;
-            opsPerPassOrToken = *tokenBuf;
+            tokenBuf[2] = newTokenData;
+            tokenIndex = *tokenBuf;
             tokenBuf[1] = tokenBuf[1] + 0x80;
           }
-          *(undefined4 *)(opsPerPassOrToken * 4 + tokenBuf[2]) = 0x47;
-          opsPerPassOrToken = *tokenBuf + 1;
-          *tokenBuf = opsPerPassOrToken;
-          if (tokenBuf[1] <= opsPerPassOrToken) {
-            opsPerPassOrToken = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + tokenBuf[2]) = 0x47;
+          tokenIndex = *tokenBuf + 1;
+          *tokenBuf = tokenIndex;
+          if (tokenBuf[1] <= tokenIndex) {
+            newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
             if (tokenBuf[2] != 0) {
-              _memcpy(opsPerPassOrToken,tokenBuf[2],*tokenBuf << 2);
+              _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
               (**(code **)(ctx + 0x18))(tokenBuf[2]);
             }
-            tokenBuf[2] = opsPerPassOrToken;
-            opsPerPassOrToken = *tokenBuf;
+            tokenBuf[2] = newTokenData;
+            tokenIndex = *tokenBuf;
             tokenBuf[1] = tokenBuf[1] + 0x80;
           }
-          *(uint *)(opsPerPassOrToken * 4 + tokenBuf[2]) = loopIndex & 0xffff | 0x40000;
-          opsPerPassOrToken = *tokenBuf + 1;
-          *tokenBuf = opsPerPassOrToken;
-          if (tokenBuf[1] <= opsPerPassOrToken) {
-            opsPerPassOrToken = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+          *(uint *)(tokenIndex * 4 + tokenBuf[2]) = loopIndex & 0xffff | 0x40000;
+          tokenIndex = *tokenBuf + 1;
+          *tokenBuf = tokenIndex;
+          if (tokenBuf[1] <= tokenIndex) {
+            newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
             if (tokenBuf[2] != 0) {
-              _memcpy(opsPerPassOrToken,tokenBuf[2],*tokenBuf << 2);
+              _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
               (**(code **)(ctx + 0x18))(tokenBuf[2]);
             }
-            tokenBuf[2] = opsPerPassOrToken;
-            opsPerPassOrToken = *tokenBuf;
+            tokenBuf[2] = newTokenData;
+            tokenIndex = *tokenBuf;
             tokenBuf[1] = tokenBuf[1] + 0x80;
           }
-          *(uint *)(opsPerPassOrToken * 4 + tokenBuf[2]) = (loopIndex & 0xffff) + 6 & 0xffff | 0x40000;
+          *(uint *)(tokenIndex * 4 + tokenBuf[2]) = (loopIndex & 0xffff) + 6 & 0xffff | 0x40000;
           *tokenBuf = *tokenBuf + 1;
-          opsPerPassOrToken = (uint)*(ushort *)(fsState + 0x14);
+          regsPerPass = (uint)*(ushort *)(fsState + 0x14);
         }
         loopIndex = loopIndex + 1;
-      } while ((int)loopIndex < (int)opsPerPassOrToken);
+      } while ((int)loopIndex < (int)regsPerPass);
     }
   }
   return;
@@ -6631,59 +6646,60 @@ int atifsEmitClearTemp0(ctx, tokenBuf)
   int ctx;
   uint *tokenBuf;
 {
-  uint pushIndexOrNewData;
+  uint newTokenData;
+  uint tokenIndex;
   
-  pushIndexOrNewData = *tokenBuf;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  tokenIndex = *tokenBuf;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(undefined4 *)(pushIndexOrNewData * 4 + tokenBuf[2]) = 0x47;
-  pushIndexOrNewData = *tokenBuf + 1;
-  *tokenBuf = pushIndexOrNewData;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  *(undefined4 *)(tokenIndex * 4 + tokenBuf[2]) = 0x47;
+  tokenIndex = *tokenBuf + 1;
+  *tokenBuf = tokenIndex;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(undefined4 *)(pushIndexOrNewData * 4 + tokenBuf[2]) = 0x40000;
-  pushIndexOrNewData = *tokenBuf + 1;
-  *tokenBuf = pushIndexOrNewData;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  *(undefined4 *)(tokenIndex * 4 + tokenBuf[2]) = 0x40000;
+  tokenIndex = *tokenBuf + 1;
+  *tokenBuf = tokenIndex;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(undefined4 *)(pushIndexOrNewData * 4 + tokenBuf[2]) = 0x410000;
-  pushIndexOrNewData = *tokenBuf + 1;
-  *tokenBuf = pushIndexOrNewData;
-  if (tokenBuf[1] <= pushIndexOrNewData) {
-    pushIndexOrNewData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
+  *(undefined4 *)(tokenIndex * 4 + tokenBuf[2]) = 0x410000;
+  tokenIndex = *tokenBuf + 1;
+  *tokenBuf = tokenIndex;
+  if (tokenBuf[1] <= tokenIndex) {
+    newTokenData = (**(code **)(ctx + 0xc))(tokenBuf[1] * 4 + 0x200);
     if (tokenBuf[2] != 0) {
-      _memcpy(pushIndexOrNewData,tokenBuf[2],*tokenBuf << 2);
+      _memcpy(newTokenData,tokenBuf[2],*tokenBuf << 2);
       (**(code **)(ctx + 0x18))(tokenBuf[2]);
     }
-    tokenBuf[2] = pushIndexOrNewData;
-    pushIndexOrNewData = *tokenBuf;
+    tokenBuf[2] = newTokenData;
+    tokenIndex = *tokenBuf;
     tokenBuf[1] = tokenBuf[1] + 0x80;
   }
-  *(undefined **)(pushIndexOrNewData * 4 + tokenBuf[2]) = ((unsigned char *)0x00004444);
+  *(undefined **)(tokenIndex * 4 + tokenBuf[2]) = ((unsigned char *)0x00004444);
   *tokenBuf = *tokenBuf + 1;
   return;
 }
@@ -6835,22 +6851,37 @@ LAB_000b3398:
 int atifsCompileCurrentShader(ctx)
   int ctx;
 {
+  uint constantIndex;
+  uint constantCount;
+  uint ilCndOpcodeBase;
+  uint alphaSourceCount;
+  undefined4 programBytes;
+  int ilCndModeBit;
+  int savedColorDst;
+  int constantOffset2;
+  int passIndex;
+  int programTable;
+  code *setConstantFn;
+  int instructionNumber;
+  int contextSlot;
+  int constantOffset;
+  bool isLastConstant;
   bool redirectedToScratch;
   bool haveAlphaOp;
   ushort ilOpcode;
   code *programSizeFn;
   char wantSecondaryAdd;
-  int iVar5;
-  int iVar6;
+  int regIndex;
+  int colorOpsInPass;
   undefined4 staleProgram;
-  undefined4 uVar8;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined1 *puVar9;
-  undefined4 in_r8;
-  uint uVar10;
-  uint uVar11;
-  int iVar12;
+  undefined4 ilHeaderWord;
+  undefined4 deadArg4;
+  undefined4 deadArg5;
+  undefined1 *constantFloats;
+  undefined4 deadArg6;
+  uint constantBit;
+  uint ctxFlags;
+  int alphaOpsInPass;
   int colorOpsDoneInPass;
   int alphaOpsDoneInPass;
   int nextColorOp;
@@ -6859,10 +6890,10 @@ int atifsCompileCurrentShader(ctx)
   undefined1 *compiledProgram;
   code *callocFn;
   int *colorOp;
-  undefined1 *puVar21;
+  undefined1 *programConstantPtr;
   int *alphaOp;
   int shaderDef;
-  int instructionNumber;
+  int regCount;
   uint ilOpcodeWord;
   undefined1 regWritten [8];
   undefined4 tokenCount;
@@ -6880,14 +6911,14 @@ int atifsCompileCurrentShader(ctx)
   }
   compiledProgram = *(undefined1 **)(*(int *)(((unsigned char *)0x0000113c) + ctx) * 4 + *(int *)(shaderDef + 0x70));
   if (compiledProgram != (undefined1 *)0x0) {
-    uVar11 = *(uint *)(ctx + 0x44);
-    if ((uVar11 & 0x100000) == 0) {
-      if ((((int)uVar11 < 0) && (*(short *)(((unsigned char *)0x00002d48) + rendererRec) == -0x7e06)) ||
-         (wantSecondaryAdd = '\0', (uVar11 & 0x80800000) == 0x800000)) {
+    ctxFlags = *(uint *)(ctx + 0x44);
+    if ((ctxFlags & 0x100000) == 0) {
+      if ((((int)ctxFlags < 0) && (*(short *)(((unsigned char *)0x00002d48) + rendererRec) == -0x7e06)) ||
+         (wantSecondaryAdd = '\0', (ctxFlags & 0x80800000) == 0x800000)) {
         wantSecondaryAdd = '\x01';
       }
     }
-    else if (((uVar11 & 0x800000) == 0) ||
+    else if (((ctxFlags & 0x800000) == 0) ||
             (wantSecondaryAdd = '\x01', *(char *)(*(int *)(((unsigned char *)0x00001168) + ctx) + 0x6e) == '\0')) {
       wantSecondaryAdd = '\0';
     }
@@ -6905,34 +6936,34 @@ int atifsCompileCurrentShader(ctx)
   tokenCount = 0;
   tokenCapacity = 0;
   ((int (*)())ilTokenBufPush)(ctx,&tokenCount,1);
-  uVar8 = 0x10200;
+  ilHeaderWord = 0x10200;
   ((int (*)())ilTokenBufPush)(ctx,&tokenCount,0x10200);
-  iVar5 = 0;
-  instructionNumber = 8;
+  regIndex = 0;
+  regCount = 8;
   do {
-    regWritten[iVar5] = 0;
-    iVar5 = iVar5 + 1;
-    instructionNumber = instructionNumber + -1;
-  } while (instructionNumber != 0);
+    regWritten[regIndex] = 0;
+    regIndex = regIndex + 1;
+    regCount = regCount + -1;
+  } while (regCount != 0);
   if (compiledProgram != (undefined1 *)0x0) {
-    iVar5 = *(int *)(shaderDef + 0x70);
-    staleProgram = *(undefined4 *)(*(int *)(((unsigned char *)0x0000113c) + ctx) * 4 + iVar5);
-    *(undefined4 *)(*(int *)(((unsigned char *)0x0000113c) + ctx) * 4 + iVar5) = 0;
-    (**(code **)(((unsigned char *)0x00001158) + ctx))(ctx,staleProgram,uVar8,in_r6,in_r7,in_r8,iVar5);
+    programTable = *(int *)(shaderDef + 0x70);
+    staleProgram = *(undefined4 *)(*(int *)(((unsigned char *)0x0000113c) + ctx) * 4 + programTable);
+    *(undefined4 *)(*(int *)(((unsigned char *)0x0000113c) + ctx) * 4 + programTable) = 0;
+    (**(code **)(((unsigned char *)0x00001158) + ctx))(ctx,staleProgram,ilHeaderWord,deadArg4,deadArg5,deadArg6,programTable);
     programSizeFn = *(code **)(((unsigned char *)0x00001284) + ctx);
-    instructionNumber = *(int *)(((unsigned char *)0x0000113c) + ctx);
+    contextSlot = *(int *)(((unsigned char *)0x0000113c) + ctx);
     callocFn = *(code **)(ctx + 0x10);
-    iVar5 = *(int *)(shaderDef + 0x70);
+    programTable = *(int *)(shaderDef + 0x70);
   }
   else {
     programSizeFn = *(code **)(((unsigned char *)0x00001284) + ctx);
-    instructionNumber = *(int *)(((unsigned char *)0x0000113c) + ctx);
+    contextSlot = *(int *)(((unsigned char *)0x0000113c) + ctx);
     callocFn = *(code **)(ctx + 0x10);
-    iVar5 = *(int *)(shaderDef + 0x70);
+    programTable = *(int *)(shaderDef + 0x70);
   }
-  uVar8 = (*programSizeFn)(ctx);
-  uVar8 = (*callocFn)(1,uVar8);
-  *(undefined4 *)(instructionNumber * 4 + iVar5) = uVar8;
+  programBytes = (*programSizeFn)(ctx);
+  programBytes = (*callocFn)(1,programBytes);
+  *(undefined4 *)(contextSlot * 4 + programTable) = programBytes;
   compiledProgram = *(undefined1 **)(*(int *)(((unsigned char *)0x0000113c) + ctx) * 4 + *(int *)(shaderDef + 0x70));
   *compiledProgram = 0;
   passCount = *(int *)(shaderDef + 4);
@@ -6942,17 +6973,17 @@ int atifsCompileCurrentShader(ctx)
     nextColorOp = 0;
     nextAlphaOp = 0;
     instructionNumber = 0;
-    iVar5 = 0;
+    passIndex = 0;
     do {
       colorOpsDoneInPass = 0;
       alphaOpsDoneInPass = 0;
       opsDoneInPass = 0;
-      ((int (*)())atifsEmitTextureOps)(ctx,&tokenCount,((unsigned char *)0x00001134U) + ctx,iVar5,passCount,regWritten);
+      ((int (*)())atifsEmitTextureOps)(ctx,&tokenCount,((unsigned char *)0x00001134U) + ctx,passIndex,passCount,regWritten);
       while( true ) {
-        iVar6 = *(int *)(*(int *)(shaderDef + 0x14) + iVar5 * 4);
-        iVar12 = *(int *)(*(int *)(shaderDef + 0x20) + iVar5 * 4);
-        if (iVar6 + iVar12 <= opsDoneInPass) break;
-        if (((nextColorOp < *(int *)(shaderDef + 0x18)) && (colorOpsDoneInPass < iVar6)) &&
+        colorOpsInPass = *(int *)(*(int *)(shaderDef + 0x14) + passIndex * 4);
+        alphaOpsInPass = *(int *)(*(int *)(shaderDef + 0x20) + passIndex * 4);
+        if (colorOpsInPass + alphaOpsInPass <= opsDoneInPass) break;
+        if (((nextColorOp < *(int *)(shaderDef + 0x18)) && (colorOpsDoneInPass < colorOpsInPass)) &&
            (colorOp = (int *)(nextColorOp * 0x4c + *(int *)(shaderDef + 0x10)), instructionNumber == colorOp[0x11])) {
           nextColorOp = nextColorOp + 1;
           colorOpsDoneInPass = colorOpsDoneInPass + 1;
@@ -6962,7 +6993,7 @@ int atifsCompileCurrentShader(ctx)
         else {
           colorOp = (int *)0x0;
         }
-        if (((nextAlphaOp < *(int *)(shaderDef + 0x24)) && (alphaOpsDoneInPass < iVar12)) &&
+        if (((nextAlphaOp < *(int *)(shaderDef + 0x24)) && (alphaOpsDoneInPass < alphaOpsInPass)) &&
            (alphaOp = (int *)(nextAlphaOp * 0x4c + *(int *)(shaderDef + 0x1c)), instructionNumber == alphaOp[0x11])) {
           alphaOpsDoneInPass = alphaOpsDoneInPass + 1;
           opsDoneInPass = opsDoneInPass + 1;
@@ -6975,10 +7006,10 @@ int atifsCompileCurrentShader(ctx)
         if ((colorOp == (int *)0x0) || (alphaOp == (int *)0x0)) goto LAB_000b3a90;
         switch(*alphaOp) {
         case 0x8961:
-          uVar11 = 1;
+          alphaSourceCount = 1;
           break;
         default:
-          uVar11 = 0;
+          alphaSourceCount = 0;
           break;
         case 0x8966:
         case 0x8967:
@@ -6986,7 +7017,7 @@ int atifsCompileCurrentShader(ctx)
         case 0x8963:
         case 0x8964:
         case 0x8965:
-          uVar11 = 2;
+          alphaSourceCount = 2;
           break;
         case 0x896c:
           if (*colorOp == 0x896c) goto LAB_000b3a90;
@@ -6994,22 +7025,22 @@ int atifsCompileCurrentShader(ctx)
         case 0x8969:
         case 0x896a:
         case 0x896b:
-          uVar11 = 3;
+          alphaSourceCount = 3;
         }
-        iVar6 = colorOp[1];
-        if (((iVar6 != alphaOp[5]) && ((iVar6 != alphaOp[9] || (uVar11 < 2)))) &&
-           ((iVar6 != alphaOp[0xd] || (uVar11 < 3)))) {
+        savedColorDst = colorOp[1];
+        if (((savedColorDst != alphaOp[5]) && ((savedColorDst != alphaOp[9] || (alphaSourceCount < 2)))) &&
+           ((savedColorDst != alphaOp[0xd] || (alphaSourceCount < 3)))) {
 LAB_000b3a90:
           if (colorOp != (int *)0x0) {
             redirectedToScratch = false;
-            iVar6 = 0;
+            savedColorDst = 0;
             goto LAB_000b3aa8;
           }
           redirectedToScratch = false;
-          iVar6 = 0;
+          savedColorDst = 0;
           goto switchD_000b3adc_caseD_8962;
         }
-        iVar6 = colorOp[1];
+        savedColorDst = colorOp[1];
         redirectedToScratch = true;
         colorOp[1] = 6;
 LAB_000b3aa8:
@@ -7057,14 +7088,14 @@ LAB_000b3e14:
           ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,colorOp + 0xd,0,1,regWritten);
           goto switchD_000b3adc_caseD_8962;
         case 0x896a:
-          uVar11 = 0x3000d;
-          iVar12 = 1;
+          ilCndOpcodeBase = 0x3000d;
+          ilCndModeBit = 1;
           goto LAB_000b3d3c;
         case 0x896b:
-          uVar11 = 0x2000d;
-          iVar12 = 0;
+          ilCndOpcodeBase = 0x2000d;
+          ilCndModeBit = 0;
 LAB_000b3d3c:
-          ((int (*)())ilTokenBufPush)(ctx,&tokenCount,iVar12 << 0x16 | uVar11);
+          ((int (*)())ilTokenBufPush)(ctx,&tokenCount,ilCndModeBit << 0x16 | ilCndOpcodeBase);
           ((int (*)())atifsEmitDestinationOperand)(ctx,&tokenCount,colorOp + 1,0,1,regWritten);
           ((int (*)())atifsEmitSourceOperand)(ctx,&tokenCount,colorOp + 0xd,0,1,regWritten);
           goto LAB_000b3bb4;
@@ -7133,12 +7164,12 @@ LAB_000b3f68:
         }
 switchD_000b3e78_caseD_8962:
         if (redirectedToScratch) {
-          ((int (*)())atifsEmitMoveWithWriteMask)(ctx,&tokenCount,iVar6,colorOp[1],colorOp[2]);
-          colorOp[1] = iVar6;
+          ((int (*)())atifsEmitMoveWithWriteMask)(ctx,&tokenCount,savedColorDst,colorOp[1],colorOp[2]);
+          colorOp[1] = savedColorDst;
         }
       }
-      iVar5 = iVar5 + 1;
-    } while (passCount != iVar5);
+      passIndex = passIndex + 1;
+    } while (passCount != passIndex);
   }
   if ((*(uint *)(ctx + 0x44) & 0x80100000) == 0x80000000) {
     if (*(short *)(((unsigned char *)0x00002d48) + rendererRec) == -0x7e06) goto LAB_000b420c;
@@ -7154,52 +7185,52 @@ LAB_000b420c:
   ((int (*)())atifsEmitFinalColorClamp)(ctx,&tokenCount);
   ((int (*)())ilTokenBufPush)(ctx,&tokenCount,0x28);
   *(undefined4 *)(compiledProgram + 0x11c) = 0;
-  uVar11 = (uint)*(ushort *)(((unsigned char *)0x0000114a) + ctx);
-  if (uVar11 != 0) {
-    uVar10 = 0;
-    iVar5 = 0;
-    puVar21 = compiledProgram;
+  constantCount = (uint)*(ushort *)(((unsigned char *)0x0000114a) + ctx);
+  if (constantCount != 0) {
+    constantBit = 0;
+    constantOffset2 = 0;
+    programConstantPtr = compiledProgram;
     do {
-      if (*(char *)(*(int *)(shaderDef + 0x28) + iVar5) != '\0') {
-        *(uint *)(compiledProgram + 0x11c) = 1 << (uVar10 & 0x3f) | *(uint *)(compiledProgram + 0x11c);
-        *(undefined4 *)(puVar21 + 0x98) = *(undefined4 *)(*(int *)(shaderDef + 0x28) + iVar5 + 4);
-        *(undefined4 *)(puVar21 + 0x9c) = *(undefined4 *)(*(int *)(shaderDef + 0x28) + iVar5 + 8);
-        *(undefined4 *)(puVar21 + 0xa0) = *(undefined4 *)(*(int *)(shaderDef + 0x28) + iVar5 + 0xc);
-        *(undefined4 *)(puVar21 + 0xa4) = *(undefined4 *)(*(int *)(shaderDef + 0x28) + iVar5 + 0x10);
-        uVar11 = (uint)*(ushort *)(((unsigned char *)0x0000114a) + ctx);
+      if (*(char *)(*(int *)(shaderDef + 0x28) + constantOffset2) != '\0') {
+        *(uint *)(compiledProgram + 0x11c) = 1 << (constantBit & 0x3f) | *(uint *)(compiledProgram + 0x11c);
+        *(undefined4 *)(programConstantPtr + 0x98) = *(undefined4 *)(*(int *)(shaderDef + 0x28) + constantOffset2 + 4);
+        *(undefined4 *)(programConstantPtr + 0x9c) = *(undefined4 *)(*(int *)(shaderDef + 0x28) + constantOffset2 + 8);
+        *(undefined4 *)(programConstantPtr + 0xa0) = *(undefined4 *)(*(int *)(shaderDef + 0x28) + constantOffset2 + 0xc);
+        *(undefined4 *)(programConstantPtr + 0xa4) = *(undefined4 *)(*(int *)(shaderDef + 0x28) + constantOffset2 + 0x10);
+        constantCount = (uint)*(ushort *)(((unsigned char *)0x0000114a) + ctx);
       }
-      uVar10 = uVar10 + 1;
-      iVar5 = iVar5 + 0x14;
-      puVar21 = puVar21 + 0x10;
-    } while ((int)uVar10 < (int)uVar11);
+      constantBit = constantBit + 1;
+      constantOffset2 = constantOffset2 + 0x14;
+      programConstantPtr = programConstantPtr + 0x10;
+    } while ((int)constantBit < (int)constantCount);
   }
   compiledProgram[0x120] = 1;
   (**(code **)(((unsigned char *)0x00001288) + ctx))(ctx,0,compiledProgram,&tokenCount);
   compiledProgram[0x119] = 0;
 LAB_000b42ec:
-  uVar11 = 0;
-  shaderDef = 0;
+  constantIndex = 0;
+  constantOffset = 0;
   ((unsigned char *)0x00001136)[ctx] = 0;
-  puVar21 = compiledProgram + 0x98;
+  programConstantPtr = compiledProgram + 0x98;
   do {
-    if ((1 << (uVar11 & 0x3f) & *(uint *)(compiledProgram + 0x11c)) == 0) {
-      if (*(char *)(shaderDef + *(int *)(*(int *)(((unsigned char *)0x00001154) + ctx) + 0xc)) != '\0') {
-        programSizeFn = *(code **)(((unsigned char *)0x00001280) + ctx);
-        puVar9 = (undefined1 *)(shaderDef + *(int *)(*(int *)(((unsigned char *)0x00001154) + ctx) + 0xc) + 4);
+    if ((1 << (constantIndex & 0x3f) & *(uint *)(compiledProgram + 0x11c)) == 0) {
+      if (*(char *)(constantOffset + *(int *)(*(int *)(((unsigned char *)0x00001154) + ctx) + 0xc)) != '\0') {
+        setConstantFn = *(code **)(((unsigned char *)0x00001280) + ctx);
+        constantFloats = (undefined1 *)(constantOffset + *(int *)(*(int *)(((unsigned char *)0x00001154) + ctx) + 0xc) + 4);
         goto LAB_000b4370;
       }
     }
     else {
-      programSizeFn = *(code **)(((unsigned char *)0x00001280) + ctx);
-      puVar9 = puVar21;
+      setConstantFn = *(code **)(((unsigned char *)0x00001280) + ctx);
+      constantFloats = programConstantPtr;
 LAB_000b4370:
-      (*programSizeFn)(ctx,compiledProgram,uVar11,uVar11,puVar9,1,0);
+      (*setConstantFn)(ctx,compiledProgram,constantIndex,constantIndex,constantFloats,1,0);
     }
-    redirectedToScratch = uVar11 == 7;
-    puVar21 = puVar21 + 0x10;
-    shaderDef = shaderDef + 0x14;
-    uVar11 = uVar11 + 1;
-    if (redirectedToScratch) {
+    isLastConstant = constantIndex == 7;
+    programConstantPtr = programConstantPtr + 0x10;
+    constantOffset = constantOffset + 0x14;
+    constantIndex = constantIndex + 1;
+    if (isLastConstant) {
       if ((*(uint *)(ctx + 0x44) & 0x22000) == 0x20000) {
         (**(code **)(((unsigned char *)0x00001290) + ctx))(ctx,compiledProgram);
       }

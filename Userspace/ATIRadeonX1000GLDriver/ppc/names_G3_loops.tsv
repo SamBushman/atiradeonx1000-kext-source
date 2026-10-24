@@ -157,7 +157,6 @@ use	FUN_000c4ce0	uVar21	loopIndex3	INFERRED	initialised to a literal, stepped by
 use	FUN_000c5e60	uVar12	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#50	+165	all	all
 use	FUN_000c8110	uVar6	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#108	+7	all	all
 use	FUN_000cdc3c	uVar11	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#60	+35	all	all
-use	FUN_000cdc3c	uVar13	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#119	+12	all	all
 use	FUN_000ce514	iVar5	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#71	+31	all	all
 use	FUN_000cff30	iVar7	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#12	+9	all	all
 use	FUN_000d002c	iVar4	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#16	+73	all	all

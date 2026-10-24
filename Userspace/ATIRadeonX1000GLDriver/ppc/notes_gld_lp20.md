@@ -27,3 +27,12 @@ SampleMap, +4 swizzle, +8 coordinate source), +0x10 colour ops (0x4c stride) / +
 
 Op record (0x4c bytes, built on the stack by `atifsAddColorOp` / `atifsAddAlphaOp`): +0 op, +4 dst register, +8 dst mask (colour only), +0xc dst
 modifier, +0x10 reserved, +0x14/+0x24/+0x34 the three packed arguments (16 bytes: register, 0, modifier bits, replicate), +0x44 ordinal, +0x48 pass.
+
+## Joined names left in parts 015-018 (with evidence)
+
+* `FUN_000cdc3c` (float formatter): `decimalPointOrRemainder` (`local_98`) is the int whose address is passed to `_ecvt` (decimal point exponent); the scientific
+  branch reuses it as the running remainder of the exponent digit loop. It is an address-taken frame slot, so `apply_names.py` cannot split it.
+* `vsDisassembleLine`: `shaderStateOrLabel` (`iVar1`) carries the disassembler state at the top of the label loop and the label entry computed by
+  `iVar1 = loopIndex * 0x1c + *(iVar1 + 0x654)` in the same web (an `x = f(x)` line); `labelTableOrLine` (`piVar5`) is read as a dead argument of the printf after
+  the loop whichever of its two values it holds. A first attempt to split them with `use` rows (gate gT7) produced mis-targeted segments (MERGE slot 76 for 80 and 84,
+  UNINIT 0 -> 2); the function was reset to its gated HEAD state. The split is open: it needs lhs/rhs rows on the `x = f(x)` line and the printf read kept on one name.

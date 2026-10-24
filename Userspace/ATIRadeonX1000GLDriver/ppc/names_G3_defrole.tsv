@@ -75,8 +75,6 @@ use	FUN_000c8de0	iVar2	allocation	INFERRED	every definition is the result of a c
 use	FUN_000ce148	iVar5	length	INFERRED	every definition is the result of a call whose name says it returns this	#12	+98	all	all
 use	FUN_000cea6c	iVar3	length	INFERRED	every definition is the result of a call whose name says it returns this	#45	+62	all	all
 use	FUN_000ced58	iVar4	length2	INFERRED	every definition is the result of a call whose name says it returns this	#115	+19	all	all
-use	FUN_000ced58	iVar7	length	INFERRED	every definition is the result of a call whose name says it returns this	#155	+35	all	all
-use	FUN_000cff30	iVar1	length	INFERRED	every definition is the result of a call whose name says it returns this	#28	+1	all	all
 use	FUN_000d002c	iVar1	length	INFERRED	every definition is the result of a call whose name says it returns this	#29	+28	all	all
 use	FUN_000d002c	iVar5	length2	INFERRED	every definition is the result of a call whose name says it returns this	#70	+3	all	all
 use	FUN_000d0488	iVar7	length	INFERRED	every definition is the result of a call whose name says it returns this	#97	+58	all	all
