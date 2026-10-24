@@ -552,62 +552,66 @@ int TGenericLinker__CreateFromStreamWithSymbolTableUpdate(this, _PPStream, parse
 int TGenericLinker__RemoveUnreachableFunctions(this)
   unsigned char * this;
 {
+  int shaderStringLen;
+  int nameLen;
+  int nextChunk2;
+  int opChunk;
   uint lastOp;
   int length;
   int compareResult;
   int functionName;
   int length2;
-  bool bVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
+  bool removedAny;
+  int stageOffset;
+  int nextChunk;
+  int callChunk;
+  int callNameCompare;
   uint firstOp;
   int length3;
   char *allocation;
-  int loopIndex;
-  int iVar10;
-  uint uVar11;
-  void *pvVar12;
-  int iVar13;
+  int stage;
+  int fnIdx;
+  uint chunkHeader;
+  void *infoSink;
+  int fnIdxBase;
   
-  loopIndex = 0;
+  stage = 0;
 code_r0x97bb33e4:
-  iVar2 = loopIndex * 4;
+  stageOffset = stage * 4;
 code_r0x97bb33e8:
-  bVar1 = false;
-  iVar10 = 0;
-  if ((*(int *)(this + iVar2 + 0x38) != 0) && (0 < *(int *)(*(int *)(this + iVar2 + 0x38) + 4))) {
+  removedAny = false;
+  fnIdx = 0;
+  if ((*(int *)(this + stageOffset + 0x38) != 0) && (0 < *(int *)(*(int *)(this + stageOffset + 0x38) + 4))) {
 code_r0x97bb3410:
-    functionName = FunctionTable__getFunctionName(*(unsigned char **)(this + iVar2 + 0x38),iVar10);
+    functionName = FunctionTable__getFunctionName(*(unsigned char **)(this + stageOffset + 0x38),fnIdx);
     compareResult = _memcmp(functionName,"main(",6);
-    iVar13 = iVar10;
+    fnIdxBase = fnIdx;
     if (compareResult != 0) {
-      for (iVar4 = **(int **)(*(int *)(this + iVar2 + 0x30) + 0x20); iVar4 != 0;
-          iVar4 = *(int *)(iVar4 + 8)) {
-        if ((((*(uint *)(iVar4 + 0xc) & 0x3fc0000) == 0x1300000) && (*(int *)(iVar4 + 0x40) != 0))
-           && (iVar5 = _strcmp(iVar4 + 0x44,functionName), iVar5 == 0)) goto LAB_97bb37a8;
+      for (callChunk = **(int **)(*(int *)(this + stageOffset + 0x30) + 0x20); callChunk != 0;
+          callChunk = *(int *)(callChunk + 8)) {
+        if ((((*(uint *)(callChunk + 0xc) & 0x3fc0000) == 0x1300000) && (*(int *)(callChunk + 0x40) != 0))
+           && (callNameCompare = _strcmp(callChunk + 0x44,functionName), callNameCompare == 0)) goto LAB_97bb37a8;
       }
-      for (iVar13 = **(int **)(*(int *)(this + iVar2 + 0x30) + 0x20); iVar13 != 0;
-          iVar13 = *(int *)(iVar13 + 8)) {
-        uVar11 = *(uint *)(iVar13 + 0xc);
-        firstOp = FunctionTable__getFirstOp(*(unsigned char **)(this + iVar2 + 0x38),iVar10);
-        if ((uVar11 & 0x3ffff) == firstOp) {
-          bVar1 = false;
+      for (opChunk = **(int **)(*(int *)(this + stageOffset + 0x30) + 0x20); opChunk != 0;
+          opChunk = *(int *)(opChunk + 8)) {
+        chunkHeader = *(uint *)(opChunk + 0xc);
+        firstOp = FunctionTable__getFirstOp(*(unsigned char **)(this + stageOffset + 0x38),fnIdx);
+        if ((chunkHeader & 0x3ffff) == firstOp) {
+          removedAny = false;
           goto LAB_97bb361c;
         }
       }
       length2 = _strlen(DAT_a7b7baec);
-      length = _strlen((&_shaderString)[loopIndex]);
-      iVar5 = _strlen(functionName);
-      allocation = (char *)_malloc(length2 + length + iVar5 + 9);
-      FunctionTable__getFirstOp(*(unsigned char **)(this + iVar2 + 0x38),iVar10);
-      _sprintf(allocation,DAT_a7b7baec,functionName,(&_shaderString)[loopIndex]);
-      pvVar12 = *(void **)(this + 0x84);
+      length = _strlen((&_shaderString)[stage]);
+      nameLen = _strlen(functionName);
+      allocation = (char *)_malloc(length2 + length + nameLen + 9);
+      FunctionTable__getFirstOp(*(unsigned char **)(this + stageOffset + 0x38),fnIdx);
+      _sprintf(allocation,DAT_a7b7baec,functionName,(&_shaderString)[stage]);
+      infoSink = *(void **)(this + 0x84);
                     
-      __ZN13TInfoSinkBase6appendEPKc(pvVar12,"INTERNAL ERROR: ");
-      __ZN13TInfoSinkBase6appendEPKc(pvVar12,allocation);
-      __ZN13TInfoSinkBase6appendEPKc(pvVar12,"\n");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,allocation);
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
       _free(allocation);
       goto code_r0x97bb3790;
     }
@@ -615,67 +619,67 @@ code_r0x97bb3410:
   }
   goto LAB_97bb37d4;
   while( true ) {
-    if ((*(uint *)(iVar13 + 0xc) & 0x3ffff) == 0) {
+    if ((*(uint *)(opChunk + 0xc) & 0x3ffff) == 0) {
       length = _strlen(DAT_a7b7baf0);
-      iVar5 = _strlen((&_shaderString)[loopIndex]);
+      shaderStringLen = _strlen((&_shaderString)[stage]);
       length3 = _strlen(functionName);
-      allocation = (char *)_malloc(length + iVar5 + length3 + 1);
-      _sprintf(allocation,DAT_a7b7baf0,functionName,(&_shaderString)[loopIndex]);
-      pvVar12 = *(void **)(this + 0x84);
+      allocation = (char *)_malloc(length + shaderStringLen + length3 + 1);
+      _sprintf(allocation,DAT_a7b7baf0,functionName,(&_shaderString)[stage]);
+      infoSink = *(void **)(this + 0x84);
                     
-      __ZN13TInfoSinkBase6appendEPKc(pvVar12,"INTERNAL ERROR: ");
-      __ZN13TInfoSinkBase6appendEPKc(pvVar12,allocation);
-      __ZN13TInfoSinkBase6appendEPKc(pvVar12,"\n");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,allocation);
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
       _free(allocation);
     }
     else {
       _PPStreamRemoveLabelsAtOperationIndex
-                (*(undefined4 *)(this + iVar2 + 0x30),*(uint *)(iVar13 + 0xc) & 0x3ffff);
-      iVar4 = *(int *)(iVar13 + 8);
-      bVar1 = iVar4 == 0;
-      if (!bVar1) {
-        *(uint *)(iVar4 + 0xc) =
-             (*(uint *)(iVar13 + 0xc) >> 0x1a & 7) << 0x1a | *(uint *)(iVar4 + 0xc) & 0xe3ffffff;
+                (*(undefined4 *)(this + stageOffset + 0x30),*(uint *)(opChunk + 0xc) & 0x3ffff);
+      nextChunk2 = *(int *)(opChunk + 8);
+      removedAny = nextChunk2 == 0;
+      if (!removedAny) {
+        *(uint *)(nextChunk2 + 0xc) =
+             (*(uint *)(opChunk + 0xc) >> 0x1a & 7) << 0x1a | *(uint *)(nextChunk2 + 0xc) & 0xe3ffffff;
       }
-      _PPStreamChunkListRemoveChunk(*(undefined4 *)(*(int *)(this + iVar2 + 0x30) + 0x20),iVar13);
-      iVar13 = iVar4;
+      _PPStreamChunkListRemoveChunk(*(undefined4 *)(*(int *)(this + stageOffset + 0x30) + 0x20),opChunk);
+      opChunk = nextChunk2;
     }
-    if (bVar1) break;
+    if (removedAny) break;
 LAB_97bb361c:
-    uVar11 = *(uint *)(iVar13 + 0xc);
-    lastOp = FunctionTable__getLastOp(*(unsigned char **)(this + iVar2 + 0x38),iVar10);
-    if ((uVar11 & 0x3ffff) == lastOp) {
-      if (!bVar1) {
-        iVar3 = *(int *)(iVar13 + 8);
-        if (iVar3 != 0) {
-          *(uint *)(iVar3 + 0xc) =
-               (*(uint *)(iVar13 + 0xc) >> 0x1a & 7) << 0x1a | *(uint *)(iVar3 + 0xc) & 0xe3ffffff;
+    chunkHeader = *(uint *)(opChunk + 0xc);
+    lastOp = FunctionTable__getLastOp(*(unsigned char **)(this + stageOffset + 0x38),fnIdx);
+    if ((chunkHeader & 0x3ffff) == lastOp) {
+      if (!removedAny) {
+        nextChunk = *(int *)(opChunk + 8);
+        if (nextChunk != 0) {
+          *(uint *)(nextChunk + 0xc) =
+               (*(uint *)(opChunk + 0xc) >> 0x1a & 7) << 0x1a | *(uint *)(nextChunk + 0xc) & 0xe3ffffff;
         }
-        uVar11 = *(uint *)(iVar13 + 0xc);
-        lastOp = FunctionTable__getLastOp(*(unsigned char **)(this + iVar2 + 0x38),iVar10);
-        if ((uVar11 & 0x3ffff) == lastOp) {
+        chunkHeader = *(uint *)(opChunk + 0xc);
+        lastOp = FunctionTable__getLastOp(*(unsigned char **)(this + stageOffset + 0x38),fnIdx);
+        if ((chunkHeader & 0x3ffff) == lastOp) {
           _PPStreamChunkListRemoveChunk
-                    (*(undefined4 *)(*(int *)(this + iVar2 + 0x30) + 0x20),iVar13);
+                    (*(undefined4 *)(*(int *)(this + stageOffset + 0x30) + 0x20),opChunk);
         }
       }
       break;
     }
   }
 code_r0x97bb3790:
-  iVar13 = iVar10 + -1;
-  bVar1 = true;
-  FunctionTable__removeFunction(*(unsigned char **)(this + iVar2 + 0x38),iVar10);
+  fnIdxBase = fnIdx + -1;
+  removedAny = true;
+  FunctionTable__removeFunction(*(unsigned char **)(this + stageOffset + 0x38),fnIdx);
 LAB_97bb37a8:
-  iVar10 = iVar13 + 1;
-  if ((*(int *)(this + iVar2 + 0x38) == 0) ||
-     (*(int *)(*(int *)(this + iVar2 + 0x38) + 4) <= iVar10)) goto code_r0x97bb37cc;
+  fnIdx = fnIdxBase + 1;
+  if ((*(int *)(this + stageOffset + 0x38) == 0) ||
+     (*(int *)(*(int *)(this + stageOffset + 0x38) + 4) <= fnIdx)) goto code_r0x97bb37cc;
   goto code_r0x97bb3410;
 code_r0x97bb37cc:
-  if (!bVar1) goto LAB_97bb37d4;
+  if (!removedAny) goto LAB_97bb37d4;
   goto code_r0x97bb33e8;
 LAB_97bb37d4:
-  loopIndex = loopIndex + 1;
-  if (1 < loopIndex) {
+  stage = stage + 1;
+  if (1 < stage) {
     return;
   }
   goto code_r0x97bb33e4;
