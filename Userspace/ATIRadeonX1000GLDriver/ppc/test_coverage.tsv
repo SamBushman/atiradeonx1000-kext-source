@@ -235,7 +235,7 @@
 0x236f0	returnSecondArgument	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x23700	gldEmitCurrentAttributeRegisters	360	yes	
 0x23870	FUN_00023870	420	yes	
-0x23a24	FUN_00023a24	1860	no	indirect call (driver context / vtable / callback)
+0x23a24	gld_emitPrimitiveVertices	1860	no	indirect call (driver context / vtable / callback)
 0x24190	FUN_00024190	344	no	indirect call (driver context / vtable / callback)
 0x242f0	FUN_000242f0	116	yes	
 0x24370	FUN_00024370	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)

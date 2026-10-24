@@ -441,7 +441,7 @@ extern int FUN_000230d0();
 extern int returnSecondArgument();
 extern int gldEmitCurrentAttributeRegisters();
 extern int FUN_00023870();
-extern int FUN_00023a24();
+extern int gld_emitPrimitiveVertices();
 extern int FUN_00024190();
 extern void FUN_000242f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8);
 extern void FUN_00024370(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);

@@ -6246,173 +6246,179 @@ int FUN_00023870(param_1, param_2, param_3, param_4)
   return param_4 + 7;
 }
 
-/* FUN_00023a24 @ 0x23a24 (1860 bytes) - hidden-argument defect (found auditing #70/#77): real
- * callers (the gldPrimWrapperTriangleFan_23a24-family wrappers tail-calling in via 0x23a20) pass a real 6th
- * argument in r8, previously read here as an undeclared, uninitialised in_r8. */
-int FUN_00023a24(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
-  int param_5;
-  undefined4 param_6;
+/* hidden-argument defect of gld_emitPrimitiveVertices (found auditing #70/#77): real callers (the
+ * gldPrimWrapperTriangleFan_23a24-family wrappers tail-calling in via 0x23a20) pass a real 6th
+ * argument in r8, previously read there as an undeclared, uninitialised in_r8. */
+/* gld_emitPrimitiveVertices @ 0x23a24 (1860 bytes) */
+int gld_emitPrimitiveVertices(ctx, hwPrimType, extraVertexAttribs, vertexAttribs, vertexCount, extraArg)
+  int ctx;
+  int hwPrimType;
+  undefined4 extraVertexAttribs;
+  int vertexAttribs;
+  int vertexCount;
+  undefined4 extraArg;
 {
-  bool bVar1;
-  int iVar2;
-  undefined4 *puVar3;
-  undefined4 *puVar4;
+  int vertexIndex;
+  int currentRegBlock;
+  undefined4 cursorChain;
+  undefined4 connection;
+  bool emitsExtraVertex;
+  int packetVertexCount;
+  undefined4 *packetStart;
+  undefined4 *packetCursor;
   undefined4 uVar5;
-  undefined4 uVar6;
+  undefined4 gb_aa_config;
 
-  bVar1 = param_2 == 5;
-  uVar5 = *(undefined4 *)(param_1 + 4);
-  uVar6 = *(undefined4 *)(param_1 + 0x1ca0);
-  iVar2 = param_5;
-  if (bVar1) {
-    iVar2 = param_5 + 1;
+  emitsExtraVertex = hwPrimType == 5;
+  connection = *(undefined4 *)(ctx + 4);
+  gb_aa_config = *(undefined4 *)(ctx + 0x1ca0);
+  packetVertexCount = vertexCount;
+  if (emitsExtraVertex) {
+    packetVertexCount = vertexCount + 1;
   }
-  puVar3 = (undefined4 *)
-           (**(code **)(param_1 + 0x2758))
-                     (param_1,(*(int *)(param_1 + 0x243c) + 1U & 0xfffffffe) +
-                              iVar2 * *(int *)(param_1 + 0x243c) * 5 + iVar2 * 2 + 0x16,param_3,
-                      param_4,param_5,param_6,iVar2 * 2);
-  iVar2 = *(int *)(param_1 + 0x2440);
-  *(undefined4 **)(0x00002748 + param_1 + 4) = puVar3;
-  if (iVar2 != param_1 + 0x1be4) {
-    *(int *)(param_1 + 0x2440) = param_1 + 0x1be4;
-    *(int *)(param_1 + 0x2444) = param_1 + 0x1c04;
-    *(undefined4 *)(param_1 + 0x248c) = *(undefined4 *)(param_1 + 0x1ca4);
-    puVar3 = (undefined4 *)FUN_0002c0c0(uVar5,puVar3);
+  packetStart = (undefined4 *)
+           (**(code **)(ctx + 0x2758))
+                     (ctx,(*(int *)(ctx + 0x243c) + 1U & 0xfffffffe) +
+                              packetVertexCount * *(int *)(ctx + 0x243c) * 5 + packetVertexCount * 2 + 0x16,extraVertexAttribs,
+                      vertexAttribs,vertexCount,extraArg,packetVertexCount * 2);
+  currentRegBlock = *(int *)(ctx + 0x2440);
+  *(undefined4 **)(0x00002748 + ctx + 4) = packetStart;
+  if (currentRegBlock != ctx + 0x1be4) {
+    *(int *)(ctx + 0x2440) = ctx + 0x1be4;
+    *(int *)(ctx + 0x2444) = ctx + 0x1c04;
+    *(undefined4 *)(ctx + 0x248c) = *(undefined4 *)(ctx + 0x1ca4);
+    packetStart = (undefined4 *)FUN_0002c0c0(connection,packetStart);
   }
-  if (*(char *)(param_1 + 0x2802) == '\0') {
-    *puVar3 = 0x5c8;
-    puVar3[1] = 0x10000000;
-    puVar3 = puVar3 + 2;
-    *(undefined1 *)(param_1 + 0x2802) = 1;
+  if (*(char *)(ctx + 0x2802) == '\0') {
+    *packetStart = 0x5c8;
+    packetStart[1] = 0x10000000;
+    packetStart = packetStart + 2;
+    *(undefined1 *)(ctx + 0x2802) = 1;
   }
-  puVar4 = puVar3 + 4;
-  *puVar3 = 0x82c;
-  uVar5 = *(undefined4 *)(param_1 + 0x1b84);
-  puVar3[2] = 0x821;
-  puVar3[3] = param_2;
-  puVar3[1] = uVar5;
-  if (*(char *)(*(int *)(param_1 + 4) + 0x20) == '\0') {
-    if (bVar1) {
-      puVar4 = (undefined4 *)((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_3,puVar4);
+  packetCursor = packetStart + 4;
+  *packetStart = 0x82c;
+  uVar5 = *(undefined4 *)(ctx + 0x1b84);
+  packetStart[2] = 0x821;
+  packetStart[3] = hwPrimType;
+  packetStart[1] = uVar5;
+  if (*(char *)(*(int *)(ctx + 4) + 0x20) == '\0') {
+    if (emitsExtraVertex) {
+      packetCursor = (undefined4 *)((int (*)())gldEmitCurrentAttributeRegisters)(ctx,extraVertexAttribs,packetCursor);
     }
-    if (param_5 == 0x24) {
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4,puVar4);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x100,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x200,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x300,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x400,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x500,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x600,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x700,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x800,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x900,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0xa00,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0xb00,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0xc00,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0xd00,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0xe00,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0xf00,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x1000,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,((unsigned char *)0x00001100) + param_4,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,((unsigned char *)0x00001200) + param_4,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,((unsigned char *)0x00001300) + param_4,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,((unsigned char *)0x00001400) + param_4,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,((unsigned char *)0x00001500) + param_4,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,((unsigned char *)0x00001600) + param_4,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,((unsigned char *)0x00001700) + param_4,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x1800,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x1900,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x1a00,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x1b00,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x1c00,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x1d00,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x1e00,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x1f00,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x2000,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x2100,uVar5);
-      uVar5 = ((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x2200,uVar5);
-      puVar4 = (undefined4 *)((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4 + 0x2300,uVar5);
+    if (vertexCount == 0x24) {
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs,packetCursor);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x100,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x200,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x300,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x400,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x500,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x600,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x700,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x800,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x900,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0xa00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0xb00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0xc00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0xd00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0xe00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0xf00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x1000,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,((unsigned char *)0x00001100) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,((unsigned char *)0x00001200) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,((unsigned char *)0x00001300) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,((unsigned char *)0x00001400) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,((unsigned char *)0x00001500) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,((unsigned char *)0x00001600) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,((unsigned char *)0x00001700) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x1800,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x1900,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x1a00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x1b00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x1c00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x1d00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x1e00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x1f00,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x2000,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x2100,cursorChain);
+      cursorChain = ((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x2200,cursorChain);
+      packetCursor = (undefined4 *)((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs + 0x2300,cursorChain);
     }
-    else if (0 < param_5) {
-      iVar2 = 0;
+    else if (0 < vertexCount) {
+      vertexIndex = 0;
       do {
-        iVar2 = iVar2 + 1;
-        puVar4 = (undefined4 *)((int (*)())gldEmitCurrentAttributeRegisters)(param_1,param_4,puVar4);
-        param_4 = param_4 + 0x100;
-      } while (param_5 != iVar2);
+        vertexIndex = vertexIndex + 1;
+        packetCursor = (undefined4 *)((int (*)())gldEmitCurrentAttributeRegisters)(ctx,vertexAttribs,packetCursor);
+        vertexAttribs = vertexAttribs + 0x100;
+      } while (vertexCount != vertexIndex);
     }
   }
   else {
-    if (bVar1) {
-      puVar4 = (undefined4 *)((int (*)())FUN_00023870)(param_1,uVar6,param_3,puVar4);
+    if (emitsExtraVertex) {
+      packetCursor = (undefined4 *)((int (*)())FUN_00023870)(ctx,gb_aa_config,extraVertexAttribs,packetCursor);
     }
-    if (param_5 == 0x24) {
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4,puVar4);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x100,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x200,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x300,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x400,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x500,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x600,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x700,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x800,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x900,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0xa00,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0xb00,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0xc00,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0xd00,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0xe00,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0xf00,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x1000,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,((unsigned char *)0x00001100) + param_4,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,((unsigned char *)0x00001200) + param_4,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,((unsigned char *)0x00001300) + param_4,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,((unsigned char *)0x00001400) + param_4,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,((unsigned char *)0x00001500) + param_4,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,((unsigned char *)0x00001600) + param_4,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,((unsigned char *)0x00001700) + param_4,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x1800,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x1900,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x1a00,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x1b00,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x1c00,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x1d00,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x1e00,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x1f00,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x2000,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x2100,uVar5);
-      uVar5 = ((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x2200,uVar5);
-      puVar4 = (undefined4 *)((int (*)())FUN_00023870)(param_1,uVar6,param_4 + 0x2300,uVar5);
+    if (vertexCount == 0x24) {
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs,packetCursor);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x100,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x200,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x300,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x400,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x500,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x600,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x700,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x800,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x900,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xa00,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xb00,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xc00,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xd00,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xe00,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0xf00,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1000,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001100) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001200) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001300) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001400) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001500) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001600) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,((unsigned char *)0x00001700) + vertexAttribs,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1800,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1900,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1a00,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1b00,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1c00,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1d00,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1e00,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x1f00,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x2000,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x2100,cursorChain);
+      cursorChain = ((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x2200,cursorChain);
+      packetCursor = (undefined4 *)((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs + 0x2300,cursorChain);
     }
-    else if (0 < param_5) {
-      iVar2 = 0;
+    else if (0 < vertexCount) {
+      vertexIndex = 0;
       do {
-        iVar2 = iVar2 + 1;
-        puVar4 = (undefined4 *)((int (*)())FUN_00023870)(param_1,uVar6,param_4,puVar4);
-        param_4 = param_4 + 0x100;
-      } while (param_5 != iVar2);
+        vertexIndex = vertexIndex + 1;
+        packetCursor = (undefined4 *)((int (*)())FUN_00023870)(ctx,gb_aa_config,vertexAttribs,packetCursor);
+        vertexAttribs = vertexAttribs + 0x100;
+      } while (vertexCount != vertexIndex);
     }
   }
-  *puVar4 = 0x92b;
-  puVar4[3] = 0;
-  puVar4[2] = ((unsigned char *)0x00001393U);
-  puVar4[1] = 0;
-  *(undefined4 **)(0x00002748 + param_1 + 4) = puVar4 + 4;
+  *packetCursor = 0x92b;
+  packetCursor[3] = 0;
+  packetCursor[2] = ((unsigned char *)0x00001393U);
+  packetCursor[1] = 0;
+  *(undefined4 **)(0x00002748 + ctx + 4) = packetCursor + 4;
   /* dropped 2nd arg, same defect class as gld_startPacket (issue #64) - stock stores the just-advanced
    * pointer to +0x274c then loads it right back into r4 before the bctr tail-jump. */
-  (**(code **)(param_1 + 0x275c))(param_1,puVar4 + 4);
+  (**(code **)(ctx + 0x275c))(ctx,packetCursor + 4);
   return;
 }
 
-/* FUN_00024190 @ 0x24190 (344 bytes) - hidden-argument defect (found auditing #70): real callers
- * (gldPrimWrapperPolygon_24190/000246f0/0002 47f0, tail-calling in via 0x24190) pass a real 5th argument in
- * r7, previously read here as an undeclared, uninitialised in_r7. in_r8 stays as-is: no real
- * caller supplies it (stock genuinely forwards whatever garbage is there). */
+/* FUN_00024190: hidden-argument defect (found auditing #70): real callers
+ * (gldPrimWrapperPolygon_24190/000246f0/0002 47f0, tail-calling in via 0x24190) pass a real 5th argument
+ * in r7, previously read here as an undeclared, uninitialised in_r7. in_r8 stays as-is: no real caller
+ * supplies it (stock genuinely forwards whatever garbage is there). */
+/* FUN_00024190 @ 0x24190 (344 bytes) */
 int FUN_00024190(param_1, param_2, param_3, param_4, param_5)
   int param_1;
   undefined4 param_2;
@@ -6473,11 +6479,11 @@ int FUN_00024190(param_1, param_2, param_3, param_4, param_5)
   return;
 }
 
-/* FUN_000242f0 @ 0x242f0 (116 bytes) - same duplicated-body defect as #77: the real 116-byte
- * wrapper had been overwritten with unrelated FUN_00039330-family content. Rewritten from real
- * stock disassembly. Also corrects an earlier misreading of this function's own real 7th
- * argument (see FUN_0002cc30): no real caller here sets r9 either, it just forwards garbage
- * like the rest of the dispatch-wrapper family. */
+/* FUN_000242f0: same duplicated-body defect as #77: the real 116-byte wrapper had been overwritten with
+ * unrelated FUN_00039330-family content. Rewritten from real stock disassembly. Also corrects an earlier
+ * misreading of this function's own real 7th argument (see FUN_0002cc30): no real caller here sets r9
+ * either, it just forwards garbage like the rest of the dispatch-wrapper family. */
+/* FUN_000242f0 @ 0x242f0 (116 bytes) */
 void FUN_000242f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8)
 {
   uint uVar1;
@@ -6485,14 +6491,15 @@ void FUN_000242f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
 
   uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,4,param_3,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
   if (uVar1 != 0) {
-    return FUN_00023a24(param_1 + 0x240,4,0,param_2,uVar1,param_4);
+    return gld_emitPrimitiveVertices(param_1 + 0x240,4,0,param_2,uVar1,param_4);
   }
   return;
 }
 
-/* FUN_00024370 @ 0x24370 (112 bytes) - same duplicated-body defect as #77 (this file's copy of
- * the bug: the real 112-byte wrapper had been overwritten with unrelated FUN_00039330-family
- * content). Rewritten from real stock disassembly, same as the part_004.c siblings. */
+/* FUN_00024370: same duplicated-body defect as #77 (this file's copy of the bug: the real 112-byte wrapper
+ * had been overwritten with unrelated FUN_00039330-family content). Rewritten from real stock disassembly,
+ * same as the part_004.c siblings. */
+/* FUN_00024370 @ 0x24370 (112 bytes) */
 void FUN_00024370(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   uint uVar1;
@@ -6500,7 +6507,7 @@ void FUN_00024370(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
 
   uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,5,param_3,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,fparam_9);
   if (uVar1 != 0) {
-    return FUN_00023a24(param_1 + 0x240,6,0,param_2,uVar1,param_4);
+    return gld_emitPrimitiveVertices(param_1 + 0x240,6,0,param_2,uVar1,param_4);
   }
   return;
 }

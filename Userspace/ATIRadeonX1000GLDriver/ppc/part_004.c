@@ -8,7 +8,7 @@ void gldPrimWrapperTriangleFan_23a24(int param_1,undefined4 param_2,int param_3,
   
   uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,6,param_4,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,fparam_9);
   if (uVar1 != 0) {
-    return FUN_00023a24(param_1 + 0x240,5,param_2,param_3,uVar1,param_5);
+    return gld_emitPrimitiveVertices(param_1 + 0x240,5,param_2,param_3,uVar1,param_5);
   }
   return;
 }
@@ -21,7 +21,7 @@ void gldPrimWrapperQuads_23a24(int param_1,int param_2,undefined4 param_3,undefi
   
   uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,7,param_3,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,fparam_9);
   if (uVar1 != 0) {
-    return FUN_00023a24(param_1 + 0x240,13,0,param_2,uVar1,param_4);
+    return gld_emitPrimitiveVertices(param_1 + 0x240,13,0,param_2,uVar1,param_4);
   }
   return;
 }
@@ -34,7 +34,7 @@ void gldPrimWrapperQuadStrip_23a24(int param_1,int param_2,undefined4 param_3,un
   
   uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,8,param_3,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,fparam_9);
   if (uVar1 != 0) {
-    return FUN_00023a24(param_1 + 0x240,14,0,param_2,uVar1,param_4);
+    return gld_emitPrimitiveVertices(param_1 + 0x240,14,0,param_2,uVar1,param_4);
   }
   return;
 }
@@ -47,7 +47,7 @@ void gldPrimWrapperPolygon_23a24(int param_1,int param_2,undefined4 param_3,unde
   
   uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,9,param_3,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,fparam_9);
   if (uVar1 != 0) {
-    return FUN_00023a24(param_1 + 0x240,15,0,param_2,uVar1,param_4);
+    return gld_emitPrimitiveVertices(param_1 + 0x240,15,0,param_2,uVar1,param_4);
   }
   return;
 }
@@ -73,7 +73,7 @@ void gldPrimWrapperPoints_23a24(int param_1,int param_2,undefined4 param_3,undef
   
   uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,0,param_3,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,fparam_9);
   if (uVar1 != 0) {
-    return FUN_00023a24(param_1 + 0x240,1,0,param_2,uVar1,0);
+    return gld_emitPrimitiveVertices(param_1 + 0x240,1,0,param_2,uVar1,0);
   }
   return;
 }
@@ -99,7 +99,7 @@ void gldPrimWrapperLines_23a24(int param_1,int param_2,undefined4 param_3,undefi
   
   uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,1,param_3,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,fparam_9);
   if (uVar1 != 0) {
-    return FUN_00023a24(param_1 + 0x240,2,0,param_2,uVar1,0);
+    return gld_emitPrimitiveVertices(param_1 + 0x240,2,0,param_2,uVar1,0);
   }
   return;
 }
@@ -125,7 +125,7 @@ void gldPrimWrapperLineLoop_23a24(int param_1,int param_2,undefined4 param_3,und
   
   uVar1 = ((uint (*)())FUN_0002cc30)(param_1,param_4,2,param_3,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,fparam_9);
   if (uVar1 != 0) {
-    return FUN_00023a24(param_1 + 0x240,12,0,param_2,uVar1,param_4);
+    return gld_emitPrimitiveVertices(param_1 + 0x240,12,0,param_2,uVar1,param_4);
   }
   return;
 }
@@ -138,7 +138,7 @@ void gldPrimWrapperLineStrip_23a24(int param_1,int param_2,undefined4 param_3,un
   
   uVar1 = ((uint (*)())FUN_0002cc30)(param_1,param_4,3,param_3,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,fparam_9);
   if (uVar1 != 0) {
-    return FUN_00023a24(param_1 + 0x240,3,0,param_2,uVar1,param_4);
+    return gld_emitPrimitiveVertices(param_1 + 0x240,3,0,param_2,uVar1,param_4);
   }
   return;
 }
@@ -6135,15 +6135,15 @@ int FUN_0002cc10(ctx)
   return gld_submitRing(ctx,0x1000000);
 }
 
-/* FUN_0002cc30 @ 0x2cc30 (276 bytes) - hidden-argument + read-before-write defect (found
- * auditing #70): real stock r9 at entry is a genuine 7th argument (param_7) - the
- * `if (param_4 < 4)` path never touches r9 at all, so it reaches the shared code below still
- * holding whatever the caller passed; the `else` path recomputes it (`param_3 & 1`) for its own
- * use before falling into the same shared code. The corpus previously modelled both as the same
- * local `in_r9`, uninitialised on the first path - a real read-before-write. Of the 25 real
- * call sites, only gld_drawVertexArray supplies a genuine non-zero value here (a real field read);
- * every other caller (including this file's own dispatch-wrapper family) passes 0, matching
- * what real stock callers themselves forward. */
+/* FUN_0002cc30: hidden-argument + read-before-write defect (found auditing #70): real stock r9 at entry is
+ * a genuine 7th argument (param_7) - the `if (param_4 < 4)` path never touches r9 at all, so it reaches
+ * the shared code below still holding whatever the caller passed; the `else` path recomputes it (`param_3
+ * & 1`) for its own use before falling into the same shared code. The corpus previously modelled both as
+ * the same local `in_r9`, uninitialised on the first path - a real read-before-write. Of the 25 real call
+ * sites, only gld_drawVertexArray supplies a genuine non-zero value here (a real field read); every other
+ * caller (including this file's own dispatch-wrapper family) passes 0, matching what real stock callers
+ * themselves forward. */
+/* FUN_0002cc30 @ 0x2cc30 (276 bytes) */
 uint FUN_0002cc30(int ctx,undefined4 param_2,uint param_3,uint param_4,undefined4 param_5,undefined4 param_6,uint param_7,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9)
 {
   int iVar1;
@@ -6427,6 +6427,8 @@ int FUN_0002d210(param_1, param_2)
 /* gldPackColorForSurfaceFormat @ 0x2d2b0 (2388 bytes) */
 void gldPackColorForSurfaceFormat(int surface,double red,double green,double blue,double alpha)
 {
+  float packedColor;
+  double redScaled;
   int halfAlphaB;
   uint channelInt2;
   uint channelInt;
@@ -6445,8 +6447,7 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
   uint greenByte;
   uint blueByte;
   uint channelInt3;
-  float fVar6;
-  double dVar7;
+  double redClamped;
   double greenClamped;
   double blueClamped;
   double alphaClamped;
@@ -6463,11 +6464,11 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
   if (*(char *)(surface + 0x37) == '\0') {
     return;
   }
-  dVar7 = (double)FLOAT_001aa0d4;
+  redClamped = (double)FLOAT_001aa0d4;
   redChannelD = DOUBLE_001aa228;
-  if ((dVar7 <= red) &&
-     (dVar7 = red, redChannelD = red, (double)FLOAT_001aa0e8 < red)) {
-    dVar7 = (double)FLOAT_001aa0e8;
+  if ((redClamped <= red) &&
+     (redClamped = red, redChannelD = red, (double)FLOAT_001aa0e8 < red)) {
+    redClamped = (double)FLOAT_001aa0e8;
     redChannelD = DOUBLE_001aa200;
   }
   greenClamped = (double)FLOAT_001aa0d4;
@@ -6515,35 +6516,35 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
   }
   alphaChannelD = alphaChannelD * DOUBLE_001aa258;
   if (DOUBLE_001aa1e8 <= alphaChannelD) {
-    fVar6 = GH_U2F((unsigned int)(((int)(alphaChannelD - DOUBLE_001aa1e8) + -0x80000000)));
+    packedColor = GH_U2F((unsigned int)(((int)(alphaChannelD - DOUBLE_001aa1e8) + -0x80000000)));
   }
   else {
-    fVar6 = GH_U2F((unsigned int)((int)alphaChannelD));
+    packedColor = GH_U2F((unsigned int)((int)alphaChannelD));
   }
   switch(*(char *)(surface + 0x37)) {
   default:
-    fVar6 = 0.0;
+    packedColor = 0.0;
     break;
   case '\x01':
   case '\x03':
-    fVar6 = redByteBits;
+    packedColor = redByteBits;
     break;
   case '\x02':
     break;
   case '\x04':
   case '\x0f':
   case '\x16':
-    fVar6 = GH_U2F((unsigned int)(((uint)(int)redByteBits | (int)fVar6 << 8)));
+    packedColor = GH_U2F((unsigned int)(((uint)(int)redByteBits | (int)packedColor << 8)));
     break;
   case '\x05':
-    fVar6 = GH_U2F((unsigned int)((((uint)(int)redByteBits & 0xf8) << 8 | (greenByte & 0xfc) << 3 | blueByte >> 3)));
+    packedColor = GH_U2F((unsigned int)((((uint)(int)redByteBits & 0xf8) << 8 | (greenByte & 0xfc) << 3 | blueByte >> 3)));
     break;
   case '\x06':
-    fVar6 = GH_U2F((unsigned int)((((uint)(int)fVar6 & 0xf0) << 8 | ((uint)(int)redByteBits & 0xf0) << 4 | greenByte & 0xf0 |
+    packedColor = GH_U2F((unsigned int)((((uint)(int)packedColor & 0xf0) << 8 | ((uint)(int)redByteBits & 0xf0) << 4 | greenByte & 0xf0 |
                    blueByte >> 4)));
     break;
   case '\a':
-    fVar6 = GH_U2F((unsigned int)((((uint)(int)fVar6 & 0x80) << 8 | ((uint)(int)redByteBits & 0xf8) << 7 | (greenByte & 0xf8) << 2 |
+    packedColor = GH_U2F((unsigned int)((((uint)(int)packedColor & 0x80) << 8 | ((uint)(int)redByteBits & 0xf8) << 7 | (greenByte & 0xf8) << 2 |
                    blueByte >> 3)));
     break;
   case '\b':
@@ -6556,41 +6557,41 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
   case '\x1d':
   case '&':
   case '\'':
-    fVar6 = (float)(blueByte | (int)GH_F2U(fVar6) << 0x18 | (int)GH_F2U(redByteBits) << 0x10 | greenByte << 8);
+    packedColor = (float)(blueByte | (int)GH_F2U(packedColor) << 0x18 | (int)GH_F2U(redByteBits) << 0x10 | greenByte << 8);
     break;
   case '\t':
   case '\n':
   case '\x12':
   case '\x18':
   case '\x1e':
-    fVar6 = GH_U2F((unsigned int)(((uint)(int)redByteBits | greenByte << 8 | (int)fVar6 << 0x18 | blueByte << 0x10)));
+    packedColor = GH_U2F((unsigned int)(((uint)(int)redByteBits | greenByte << 8 | (int)packedColor << 0x18 | blueByte << 0x10)));
     break;
   case '\x10':
-    dVar7 = dVar7 * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
-    roundedD = (double)(float)dVar7;
+    redScaled = redClamped * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
+    roundedD = (double)(float)redScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelInt = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
     }
     else {
-      channelInt = (uint)(int)dVar7;
+      channelInt = (uint)(int)redScaled;
     }
     goto LAB_0002d9d4;
   case '\x13':
   case '\x15':
-    fVar6 = redF;
+    packedColor = redF;
     break;
   case '\x14':
-    fVar6 = alphaF;
+    packedColor = alphaF;
     break;
   case '\x19':
   case '\x1b':
-    dVar7 = dVar7 * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
-    roundedD = (double)(float)dVar7;
+    redScaled = redClamped * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
+    roundedD = (double)(float)redScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelInt = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
     }
     else {
-      channelInt = (uint)(int)dVar7;
+      channelInt = (uint)(int)redScaled;
     }
     goto LAB_0002d9d0;
   case '\x1a':
@@ -6605,16 +6606,16 @@ void gldPackColorForSurfaceFormat(int surface,double red,double green,double blu
 LAB_0002d9d0:
     channelInt = channelInt & 0xffff;
 LAB_0002d9d4:
-    fVar6 = GH_U2F((unsigned int)((channelInt | channelInt << 0x10)));
+    packedColor = GH_U2F((unsigned int)((channelInt | channelInt << 0x10)));
     break;
   case '\x1c':
-    dVar7 = dVar7 * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
-    roundedD = (double)(float)dVar7;
+    redScaled = redClamped * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
+    roundedD = (double)(float)redScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelInt = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
     }
     else {
-      channelInt = (uint)(int)dVar7;
+      channelInt = (uint)(int)redScaled;
     }
     alphaScaled = alphaClamped * (double)FLOAT_001aa14c + (double)FLOAT_001aa10c;
     roundedD = (double)(float)alphaScaled;
@@ -6624,30 +6625,30 @@ LAB_0002d9d4:
     else {
       channelIntB = (int)alphaScaled;
     }
-    fVar6 = GH_U2F((unsigned int)((channelInt & 0xffff | channelIntB << 0x10)));
+    packedColor = GH_U2F((unsigned int)((channelInt & 0xffff | channelIntB << 0x10)));
     break;
   case '\x1f':
   case '!':
     halfRed = ((uint (*)())floatToHalfBits)(red);
-    fVar6 = GH_U2F((unsigned int)((halfRed << 0x10 | halfRed)));
+    packedColor = GH_U2F((unsigned int)((halfRed << 0x10 | halfRed)));
     break;
   case ' ':
     halfAlpha = ((uint (*)())floatToHalfBits)(alphaD);
-    fVar6 = GH_U2F((unsigned int)((halfAlpha << 0x10 | halfAlpha)));
+    packedColor = GH_U2F((unsigned int)((halfAlpha << 0x10 | halfAlpha)));
     break;
   case '\"':
     halfRed = ((uint (*)())floatToHalfBits)(red);
     halfAlphaB = ((uint (*)())floatToHalfBits)((double)alphaF);
-    fVar6 = GH_U2F((unsigned int)((halfRed | halfAlphaB << 0x10)));
+    packedColor = GH_U2F((unsigned int)((halfRed | halfAlphaB << 0x10)));
     break;
   case '#':
-    dVar7 = dVar7 * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
-    roundedD = (double)(float)dVar7;
+    redScaled = redClamped * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
+    roundedD = (double)(float)redScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelInt = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
     }
     else {
-      channelInt = (uint)(int)dVar7;
+      channelInt = (uint)(int)redScaled;
     }
     channelInt = channelInt & 0x3ff;
     alphaScaled = alphaClamped * (double)FLOAT_001aa158 + (double)FLOAT_001aa10c;
@@ -6694,13 +6695,13 @@ LAB_0002d9d4:
     else {
       channelIntB = (int)alphaScaledD;
     }
-    dVar7 = dVar7 * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
-    roundedD = (double)(float)dVar7;
+    redScaled = redClamped * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
+    roundedD = (double)(float)redScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelInt2 = (int)(roundedD - DOUBLE_001aa1e8) + 0x80000000;
     }
     else {
-      channelInt2 = (uint)(int)dVar7;
+      channelInt2 = (uint)(int)redScaled;
     }
     channelInt2 = channelIntB << 0x1e | (channelInt2 & 0x3ff) << 0x14;
     greenScaled = greenClamped * (double)FLOAT_001aa154 + (double)FLOAT_001aa10c;
@@ -6712,23 +6713,23 @@ LAB_0002d9d4:
       channelInt3 = (uint)(int)greenScaled;
     }
 LAB_0002dcb4:
-    fVar6 = GH_U2F((unsigned int)((channelInt | channelInt2 | (channelInt3 & 0x3ff) << 10)));
+    packedColor = GH_U2F((unsigned int)((channelInt | channelInt2 | (channelInt3 & 0x3ff) << 10)));
     break;
   case '(':
-    fVar6 = GH_U2F((unsigned int)(((uint)(int)redByteBits & 0xe0 | greenByte >> 3 & 0x1c | blueByte >> 6)));
+    packedColor = GH_U2F((unsigned int)(((uint)(int)redByteBits & 0xe0 | greenByte >> 3 & 0x1c | blueByte >> 6)));
     break;
   case ')':
-    dVar7 = dVar7 * (double)FLOAT_001aa150 + (double)FLOAT_001aa10c;
-    roundedD = (double)(float)dVar7;
+    redScaled = redClamped * (double)FLOAT_001aa150 + (double)FLOAT_001aa10c;
+    roundedD = (double)(float)redScaled;
     if (DOUBLE_001aa1e8 <= roundedD) {
       channelIntB = (int)(roundedD - DOUBLE_001aa1e8) + -0x80000000;
     }
     else {
-      channelIntB = (int)dVar7;
+      channelIntB = (int)redScaled;
     }
-    fVar6 = GH_U2F((unsigned int)((channelIntB << 8)));
+    packedColor = GH_U2F((unsigned int)((channelIntB << 8)));
   }
-  *(float *)(surface + 0x28) = fVar6;
+  *(float *)(surface + 0x28) = packedColor;
   return;
 }
 

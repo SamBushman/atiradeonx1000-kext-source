@@ -442,10 +442,10 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 236f8	23700	padding	returnSecondArgument	2	
 23868	23870	padding	gldEmitCurrentAttributeRegisters	2	
 23a14	23a20	padding	FUN_00023870	3	
-23a74	23a80	padding	FUN_00023a24	3	
-23ec8	23ed0	padding	FUN_00023a24	2	
-24164	24170	padding	FUN_00023a24	3	
-2417c	24180	padding	FUN_00023a24	1	
+23a74	23a80	padding	gld_emitPrimitiveVertices	3	
+23ec8	23ed0	padding	gld_emitPrimitiveVertices	2	
+24164	24170	padding	gld_emitPrimitiveVertices	3	
+2417c	24180	padding	gld_emitPrimitiveVertices	1	
 2418c	24190	padding	FUN_000242f0	1	
 242e8	242f0	padding	FUN_000242f0	2	
 2434c	24350	padding	FUN_000242f0	1	
