@@ -2259,7 +2259,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
   float dstFactorG;
   float dstFactorB;
   float dstFactorA;
-  undefined1 auStack_40 [12];
+  undefined1 factorScratchRGB [12];
   float factorAlphaScratch;
   float clampValueCarry;
   
@@ -2345,11 +2345,11 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     ;
     ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(blendState >> 8 & 0xf,srcColor,dstColor,blendConstant,&dstFactorR);
     if ((blendState & 0xf) != (blendState >> 4 & 0xf)) {
-      ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(blendState >> 4 & 0xf,srcColor,dstColor,blendConstant,auStack_40);
+      ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(blendState >> 4 & 0xf,srcColor,dstColor,blendConstant,factorScratchRGB);
       srcFactorA = factorAlphaScratch;
     }
     if ((blendState >> 8 & 0xf) != (blendState >> 0xc & 0xf)) {
-      ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(blendState >> 0xc & 0xf,srcColor,dstColor,blendConstant,auStack_40);
+      ((int (*)())_InterpreterRasterOpMachineCalculateBlendingFactors)(blendState >> 0xc & 0xf,srcColor,dstColor,blendConstant,factorScratchRGB);
       dstFactorA = factorAlphaScratch;
     }
   }

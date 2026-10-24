@@ -15,11 +15,11 @@ int _PPCRuntimeCompilerGetOffsetInRegister(compiler, registerIndex)
 {
   int registerRecord;
   int descriptorCopy [2];
-  byte abStack_38 [40];
+  byte descriptorCopyTail [40];
   
   registerRecord = registerIndex * 0x38 + compiler;
   _memcpy(descriptorCopy,registerRecord + 8,0x24);
-  return *(undefined4 *)(descriptorCopy[0] + (uint)abStack_38[*(int *)(registerRecord + 4)] * 4);
+  return *(undefined4 *)(descriptorCopy[0] + (uint)descriptorCopyTail[*(int *)(registerRecord + 4)] * 4);
 }
 
 /* _PPCRuntimeCompilerBuildTransferSwizzle @ 0x97bda0d4 (104 bytes) */

@@ -313,7 +313,7 @@ int __ZNSsC4Ev(this)
 {
   char reservation;
   byte cr0Reg;
-  unsigned char aaStack_20 [28];
+  unsigned char stringAllocator [28];
   
   do {
     if (reservation != '\0') {
@@ -321,7 +321,7 @@ int __ZNSsC4Ev(this)
       cr0Reg = 2;
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
-  return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,&DAT_a7b7bf90,aaStack_20);
+  return ((int (*)())__ZNSs12_Alloc_hiderC4EPcRKSaIcE)(this,&DAT_a7b7bf90,stringAllocator);
 }
 
 /* __ZNSsC2ERKSaIcE @ 0x97c136e0 (4 bytes) */
@@ -699,7 +699,7 @@ int __ZNSsD4Ev(this)
   int data;
   char reservation;
   byte cr0Reg;
-  undefined1 auStack_20 [20];
+  undefined1 stringAllocator [20];
   
   data = *(int *)this;
   ((int (*)())__ZNKSs13get_allocatorEv)();
@@ -713,7 +713,7 @@ int __ZNSsD4Ev(this)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(data + -0xc),(uint)auStack_20);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(data + -0xc),(uint)stringAllocator);
   }
   return;
 }

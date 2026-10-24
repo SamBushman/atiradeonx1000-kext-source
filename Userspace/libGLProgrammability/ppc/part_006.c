@@ -829,7 +829,7 @@ int __ZN7TSymbolC2ERKS_(this, symbol)
   int srcName;
   int srcNameData;
   char *nameText;
-  undefined4 auStack_30 [7];
+  undefined4 stringAllocator [7];
   
   srcName = *(int *)(symbol + 4);
   *(undefined ***)this = &PTR___ZN7TSymbolD1Ev_a7b7d568;
@@ -840,9 +840,9 @@ int __ZN7TSymbolC2ERKS_(this, symbol)
   nameMem = (void *)TPoolAllocator__allocate(poolAllocator,8);
   newName = (void *)0x0;
   if (nameMem != (void *)0x0) {
-    auStack_30[0] = GetGlobalPoolAllocator();
+    stringAllocator[0] = GetGlobalPoolAllocator();
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-              (nameMem,nameText,(unsigned char *)auStack_30);
+              (nameMem,nameText,(unsigned char *)stringAllocator);
     newName = nameMem;
   }
   uniqueId = *(undefined4 *)(symbol + 8);
@@ -863,7 +863,7 @@ int __ZN7TSymbolC1ERKS_(this, symbol)
   int srcName;
   int srcNameData;
   char *nameText;
-  undefined4 auStack_30 [7];
+  undefined4 stringAllocator [7];
   
   srcName = *(int *)(symbol + 4);
   *(undefined ***)this = &PTR___ZN7TSymbolD1Ev_a7b7d568;
@@ -874,9 +874,9 @@ int __ZN7TSymbolC1ERKS_(this, symbol)
   nameMem = (void *)TPoolAllocator__allocate(poolAllocator,8);
   newName = (void *)0x0;
   if (nameMem != (void *)0x0) {
-    auStack_30[0] = GetGlobalPoolAllocator();
+    stringAllocator[0] = GetGlobalPoolAllocator();
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-              (nameMem,nameText,(unsigned char *)auStack_30);
+              (nameMem,nameText,(unsigned char *)stringAllocator);
     newName = nameMem;
   }
   uniqueId = *(undefined4 *)(symbol + 8);
@@ -1197,7 +1197,7 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   byte cr0Reg;
   undefined4 emptyParamName;
   undefined4 emptyParamType;
-  undefined4 auStack_50 [4];
+  undefined4 stringAllocator [4];
   
   ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)function);
   *(int *)this = DAT_a7b7ba7c + 8;
@@ -1246,9 +1246,9 @@ int __ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
     nameStrMem = (void *)TPoolAllocator__allocate(poolAllocator,8);
     nameString = (void *)0x0;
     if (nameStrMem != (void *)0x0) {
-      auStack_50[0] = GetGlobalPoolAllocator();
+      stringAllocator[0] = GetGlobalPoolAllocator();
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                (nameStrMem,nameText,(unsigned char *)auStack_50);
+                (nameStrMem,nameText,(unsigned char *)stringAllocator);
       nameString = nameStrMem;
     }
     *(void **)(finishPtr + -8) = nameString;
@@ -1296,7 +1296,7 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
   byte cr0Reg;
   undefined4 emptyParamName;
   undefined4 emptyParamType;
-  undefined4 auStack_50 [4];
+  undefined4 stringAllocator [4];
   
   ((int (*)())__ZN7TSymbolC2ERKS_)(this,(unsigned char *)function);
   *(int *)this = DAT_a7b7ba7c + 8;
@@ -1345,9 +1345,9 @@ int __ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairI
     nameStrMem = (void *)TPoolAllocator__allocate(poolAllocator,8);
     nameString = (void *)0x0;
     if (nameStrMem != (void *)0x0) {
-      auStack_50[0] = GetGlobalPoolAllocator();
+      stringAllocator[0] = GetGlobalPoolAllocator();
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                (nameStrMem,nameText,(unsigned char *)auStack_50);
+                (nameStrMem,nameText,(unsigned char *)stringAllocator);
       nameString = nameStrMem;
     }
     *(void **)(finishPtr + -8) = nameString;
@@ -2052,7 +2052,7 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   byte cr0;
   ulonglong yylexResult;
   undefined8 nodePair;
-  unsigned char aTStack_2ca2 [2];
+  unsigned char yyssBeforeInit [2];
   unsigned char yyssInit [400];
   unsigned char yyvsInit [8800];
   unsigned char yylval [48];
@@ -2229,7 +2229,7 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   unsigned char * operandOut2;
   uint leftTextLen;
   uint rightTextLen;
-  unsigned char * pTStack_70;
+  unsigned char * initializerNodeOut;
   int yyruleByteOffset;
   undefined *typeVtableAddr;
   unsigned char * picBase;
@@ -2244,7 +2244,7 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   yystateOrYylen = 0;
   yyerrstatus = 0;
   yychar = -2;
-  yyssp = aTStack_2ca2;
+  yyssp = yyssBeforeInit;
   yyssBytes = (unsigned char *)0x190;
   yyvs = yyvsp;
   yyss = yyssInit;
@@ -7416,7 +7416,7 @@ LAB_97bab0ec:
     scratchR7 = *(char **)(yyvsp + 8);
     executeInitializerResult = TParseContext__executeInitializer
                        (parseContext,*(uint *)(yyvsp + -0x58),*(unsigned char **)(yyvsp + -0x54),
-                        (unsigned char *)slotArg,(unsigned char *)scratchR7,&pTStack_70);
+                        (unsigned char *)slotArg,(unsigned char *)scratchR7,&initializerNodeOut);
     scratchR6 = (char *)slotArg;
     if (executeInitializerResult == 0) goto switchD_97ba39c8_caseD_2;
 LAB_97bab1f4:

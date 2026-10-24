@@ -7811,10 +7811,10 @@ int _glpPPShaderToProgramString(shader, printOptions, printFlags)
   int copyEnd2;
   char *allocation8;
   char *allocation;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
+  undefined4 r4AfterOutBufferMalloc;
+  undefined4 r4AfterParamArrayPosMalloc;
   undefined4 callResultLow;
-  undefined4 extraout_r4_01;
+  undefined4 r4AfterArraySizesMalloc;
   int copyLength6;
   int nextIndex6;
   int *allocation9;
@@ -7882,7 +7882,7 @@ int _glpPPShaderToProgramString(shader, printOptions, printFlags)
     requestedFlags = requestedFlags | 0xc00000;
   }
   addressRegCount = shader[6];
-  callResultLow = extraout_r4;
+  callResultLow = r4AfterOutBufferMalloc;
   outCursor = outBuffer;
   if (addressRegCount != 0) {
     ch = 'A';
@@ -8313,7 +8313,7 @@ LAB_97c0239c:
         allocation4 = highestParamRegister * 4 + 4;
         allocation3 = _malloc(allocation4);
         allocation10 = (int *)_malloc(allocation4);
-        if ((allocation3 == 0) || (callResultLow = extraout_r4_00, allocation10 == (int *)0x0)) {
+        if ((allocation3 == 0) || (callResultLow = r4AfterParamArrayPosMalloc, allocation10 == (int *)0x0)) {
           allocation9 = allocation10;
           allocation8 = outBuffer;
           if (allocation3 != 0) {
@@ -8332,7 +8332,7 @@ joined_r0x97c02488:
     }
     if (shader[0xe] != 0) {
       allocation9 = (int *)_malloc(shader[0xe] << 2);
-      callResultLow = extraout_r4_01;
+      callResultLow = r4AfterArraySizesMalloc;
     }
     callResultPair = CONCAT44(allocation9,callResultLow);
     loopIndex3 = 0;
@@ -10756,7 +10756,7 @@ int _InlineFunctionsBranch(stream)
   undefined4 lastResult;
   int calleeRecordOffset;
   int insertedChunk;
-  undefined4 extraout_r3;
+  undefined4 r3AfterFreeFuncInfos;
   uint opWord0;
   int opsScanned;
   uint returnWord0;
@@ -10954,7 +10954,7 @@ LAB_97c0638c:
       } while (funcInfoIndex < funcCount);
     }
     _free(funcInfos[0]);
-    lastResult = extraout_r3;
+    lastResult = r3AfterFreeFuncInfos;
   }
   return lastResult;
 }
@@ -12098,11 +12098,11 @@ int _BitSetClone(bitSet)
 int _BitSetFree(bitSet)
   int bitSet;
 {
-  undefined4 extraout_r3;
+  undefined4 r3AfterFreeBitSet;
   
   _free(*(undefined4 *)(bitSet + 8));
   _free(bitSet);
-  return extraout_r3;
+  return r3AfterFreeBitSet;
 }
 
 /* _BitSetGetSizeInBits @ 0x97c07db4 (8 bytes) */

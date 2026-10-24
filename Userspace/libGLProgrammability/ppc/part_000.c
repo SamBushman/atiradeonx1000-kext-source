@@ -2952,16 +2952,16 @@ int _PPParserGetInteger(parser, valueOut)
   int part;
   undefined4 status;
   long strtolResult;
-  char acStack_120 [256];
+  char partText [256];
   char *intEnd [5];
   
-  part = ((int (*)())_PPParserGetPart)(parser,acStack_120,1);
+  part = ((int (*)())_PPParserGetPart)(parser,partText,1);
   status = 0x2d;
   if (part != 0) {
-    strtolResult = _strtol(acStack_120,intEnd,0);
+    strtolResult = _strtol(partText,intEnd,0);
     *valueOut = strtolResult;
     status = 0x15;
-    if (intEnd[0] == acStack_120 + part) {
+    if (intEnd[0] == partText + part) {
       status = 0;
     }
   }
@@ -3617,7 +3617,7 @@ int _PPParserParseOperation(parser, opcode, precision, updateCC, saturate, ccReg
   undefined4 *sourceCursor;
   uint loopIndex;
   char partBuf [256];
-  undefined1 auStack_190 [256];
+  undefined1 branchLabelText [256];
   uint opHeader;
   uint opFlags;
   undefined4 opDest0;
@@ -3742,7 +3742,7 @@ LAB_97b81664:
     break;
   case 0x4b:
   case 0x4c:
-    ppParserParseBranchLabelResult = _PPParserParseBranchLabel(parser,auStack_190,&branchTarget);
+    ppParserParseBranchLabelResult = _PPParserParseBranchLabel(parser,branchLabelText,&branchTarget);
     if (ppParserParseBranchLabelResult != 0) {
       return ppParserParseBranchLabelResult;
     }
@@ -3852,7 +3852,7 @@ LAB_97b818a8:
         opHeader = *(uint *)(resultOrLastOp + 0xc) >> 3 & 0x1c000000 | sourceCount << 0x1d | opHeader & 0x3ffffff;
       }
       opWord13 = branchTarget;
-      _PPStreamAddOperation(status,&opHeader,auStack_190,*(undefined1 *)(parser + 0x440));
+      _PPStreamAddOperation(status,&opHeader,branchLabelText,*(undefined1 *)(parser + 0x440));
       *(undefined1 *)(parser + 0x440) = 0;
       resultOrLastOp = 0;
     }
@@ -4160,15 +4160,15 @@ int _PPParserParseEnd(parser)
   int compareResult;
   int part;
   undefined4 status;
-  undefined1 auStack_110 [264];
+  undefined1 partText [264];
   
-  part = ((int (*)())_PPParserGetPart)(parser,auStack_110,0);
+  part = ((int (*)())_PPParserGetPart)(parser,partText,0);
   status = 0x2d;
   if (part != 0) {
-    compareResult = _memcmp(auStack_110,"END",4);
+    compareResult = _memcmp(partText,"END",4);
     status = 6;
     if (compareResult == 0) {
-      part = ((int (*)())_PPParserGetPart)(parser,auStack_110,0);
+      part = ((int (*)())_PPParserGetPart)(parser,partText,0);
       status = 9;
       if (part == 0) {
         status = 0;

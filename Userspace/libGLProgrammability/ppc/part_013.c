@@ -26,7 +26,7 @@ int __ZN17TPPStreamCompilerD4Ev(this, deleteFlags)
   void *owned;
   char reservation;
   byte cr0Reg;
-  undefined1 auStack_30 [24];
+  undefined1 stringAllocator [24];
   
   *(int *)this = DAT_a7b7bd98 + 8;
   ConstantAllocationList__clear((unsigned char *)((int)this + 0x44));
@@ -89,7 +89,7 @@ int __ZN17TPPStreamCompilerD4Ev(this, deleteFlags)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(sizeOrStringRep + -0xc),auStack_30);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(sizeOrStringRep + -0xc),stringAllocator);
   }
   sizeOrStringRep = *(int *)((int)this + 0xb0);
   refCountPtr = (int *)(sizeOrStringRep + -4);
@@ -102,7 +102,7 @@ int __ZN17TPPStreamCompilerD4Ev(this, deleteFlags)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(sizeOrStringRep + -0xc),auStack_30);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(sizeOrStringRep + -0xc),stringAllocator);
   }
   __ZN22ConstantAllocationListD1Ev((unsigned char *)((int)this + 0x44));
   *(undefined ***)this = &PTR___ZN9TCompilerD1Ev_a7b7d850;

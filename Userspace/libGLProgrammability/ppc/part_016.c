@@ -14,7 +14,7 @@ int _PPCConstantsAndScratchCreate()
 double _PPCConstantsAndScratchInitialise(undefined4 *constants)
 {
   double log2Result;
-  double extraout_f1;
+  double f1AfterNoiseInit;
   
   _memset(constants,0,0xd80);
   *constants = 0x1a;
@@ -145,7 +145,7 @@ double _PPCConstantsAndScratchInitialise(undefined4 *constants)
   constants[0x7d] = 0;
   constants[0x73] = (float)(1.0 / log2Result);
   _PPCNoiseGeneratorInitialise(constants + 0xd8);
-  return extraout_f1;
+  return f1AfterNoiseInit;
 }
 
 /* _PPEmulatorAttachProgram @ 0x97be5bac (8 bytes) */
@@ -2911,20 +2911,20 @@ int _glpPPDisassemble(program)
   int nextIndex3;
   int copyLength5;
   int *tempArraySizeOut;
-  undefined4 extraout_r3;
-  undefined4 extraout_r3_00;
+  undefined4 r3AfterFreeArraySizes;
+  undefined4 r3AfterFreeParamArraySizes;
   undefined4 callResultLow;
-  undefined4 extraout_r3_01;
+  undefined4 r3AfterFreeLabelValues;
   void *allocation;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
-  undefined4 extraout_r4_03;
-  undefined4 extraout_r4_04;
-  undefined4 extraout_r4_05;
-  undefined4 extraout_r4_06;
-  undefined4 extraout_r4_07;
+  undefined4 r4AfterOutBufMalloc;
+  undefined4 r4AfterTempArrayPosMalloc;
+  undefined4 r4AfterTempArraySizesMalloc;
+  undefined4 r4AfterFreeArraySizes;
+  undefined4 r4AfterParamArrayPosMalloc;
+  undefined4 r4AfterParamArraySizesMalloc;
+  undefined4 r4AfterFreeParamArraySizes;
+  undefined4 r4AfterLabelValuesMemset;
+  undefined4 r4AfterFreeLabelValues;
   undefined1 *outBytePtr;
   uint instructionsLeft;
   uint highestParamRegister;
@@ -2976,7 +2976,7 @@ int _glpPPDisassemble(program)
   outBufCapacity = 0x800;
   indentDepth = 1;
   outBuf = (int *)_malloc(0x800);
-  callResultPair = CONCAT44(outBuf,extraout_r4);
+  callResultPair = CONCAT44(outBuf,r4AfterOutBufMalloc);
   arrayIndex = 0;
   paramNumbers = 0;
   paramArrayPos = 0;
@@ -3312,7 +3312,7 @@ LAB_97bea698:
       arraySizes = (int *)0x0;
       if (program[0x10] != 0) {
         arraySizes = (int *)_malloc(program[0x10] << 2);
-        callResultLow = extraout_r4_01;
+        callResultLow = r4AfterTempArraySizesMalloc;
       }
       callResultPair = CONCAT44(arraySizes,callResultLow);
       loopIndex = 0;
@@ -3381,7 +3381,7 @@ LAB_97bea790:
     if (!(bool)(cr0Byte >> 5 & 1)) {
       cr0Image2 = (uint)(byte)((tempArrayPos < 0) << 3 | (0 < tempArrayPos) << 2 | (tempArrayPos == 0) << 1 |
                              xerSummaryOverflow & 1) << 0x1c;
-      callResultLow = extraout_r4_00;
+      callResultLow = r4AfterTempArrayPosMalloc;
       if (tempArrayPos == 0) goto joined_r0x97bea678;
       goto LAB_97bea698;
     }
@@ -3578,7 +3578,7 @@ LAB_97beacc8:
   }
   if (arraySizes != (int *)0x0) {
     _free(arraySizes);
-    callResultPair = CONCAT44(extraout_r3,extraout_r4_02);
+    callResultPair = CONCAT44(r3AfterFreeArraySizes,r4AfterFreeArraySizes);
   }
   if ((tempCount != 0) && (!isArbProgram)) {
     ch = '\n';
@@ -3939,7 +3939,7 @@ LAB_97beb670:
     paramNumbers = _malloc(allocation2);
     paramNumbersMissing = paramNumbers == 0;
     paramArrayPos = _malloc(allocation2);
-    if ((paramNumbersMissing) || (paramArrayPosMissing = false, callResultLow = extraout_r4_03, paramArrayPos == 0)) {
+    if ((paramNumbersMissing) || (paramArrayPosMissing = false, callResultLow = r4AfterParamArrayPosMalloc, paramArrayPos == 0)) {
       paramArrayPosMissing = paramArrayPos == 0;
 joined_r0x97beb668:
       if (!paramNumbersMissing) {
@@ -3956,7 +3956,7 @@ LAB_97bf0c18:
   arraySizes = (int *)0x0;
   if (program[0xe] != 0) {
     arraySizes = (int *)_malloc(program[0xe] << 2);
-    callResultLow = extraout_r4_04;
+    callResultLow = r4AfterParamArraySizesMalloc;
   }
   callResultPair = CONCAT44(arraySizes,callResultLow);
   loopIndex = 0;
@@ -5066,7 +5066,7 @@ LAB_97bed4a8:
   }
   if (arraySizes != (int *)0x0) {
     _free(arraySizes);
-    callResultPair = CONCAT44(extraout_r3_00,extraout_r4_05);
+    callResultPair = CONCAT44(r3AfterFreeParamArraySizes,r4AfterFreeParamArraySizes);
   }
   ch = '\n';
   copyIndex4 = 0;
@@ -5386,7 +5386,7 @@ LAB_97bedcb4:
     _memset(labelIds,0,labelCount);
     labelValues = _malloc(allocation2);
     memsetResult = _memset(labelValues,0,labelCount);
-    callResultPair = CONCAT44(memsetResult,extraout_r4_06);
+    callResultPair = CONCAT44(memsetResult,r4AfterLabelValuesMemset);
     labelCount = 0;
     noLabels = true;
     if (0 < (int)instructionCount) {
@@ -5515,7 +5515,7 @@ LAB_97bedcb4:
     }
     _free(labelIds);
     _free(labelValues);
-    callResultPair = CONCAT44(extraout_r3_01,extraout_r4_07);
+    callResultPair = CONCAT44(r3AfterFreeLabelValues,r4AfterFreeLabelValues);
   }
   ch = 'E';
   copyIndex4 = 0;
