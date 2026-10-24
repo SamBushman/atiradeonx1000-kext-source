@@ -1,0 +1,45 @@
+func	FUN_0010d730	IRInst__foldConstantFactor	INFERRED	binary op with one constant operand: becomes a mov of the other operand when the constant's component is 0.0/1.0-like, otherwise a trinary op (opcode 0x24) with newSource first
+local	FUN_0010d730	param_3	newSelect	INFERRED	param_3 >> 24 selects the component of newSource used as the constant
+local	FUN_0010d730	param_4	compiler	INFERRED	param_3 >> 24 selects the component of newSource used as the constant
+local	FUN_0010d730	uVar1	negate1	INFERRED	operand 1 negate bit (inst+0xb8 & 1)
+local	FUN_0010d730	uVar12	abs1	INFERRED	operand 1 abs bit
+local	FUN_0010d730	uVar2	negate2	INFERRED	operand 2 negate bit (inst+0xd0 & 1)
+local	FUN_0010d730	uVar11	abs2	INFERRED	operand 2 abs bit
+local	FUN_0010d730	uVar10	select1	INFERRED	operand 1 select word
+local	FUN_0010d730	uVar9	select2	INFERRED	operand 2 select word
+local	FUN_0010d730	iVar16	program	INFERRED	compiler's current program (+0x6c4)
+local	FUN_0010d730	uVar13	regKind	INFERRED	inst+0x98
+local	FUN_0010d730	uVar15	regNumber	INFERRED	inst+0x94
+local	FUN_0010d730	uVar14	destSelect	INFERRED	operand 0 select word
+local	FUN_0010d730	iVar6	isConstant	INFERRED	virtual slot 0x48 of newSource
+local	BitSet__setBit	param_1	bits	INFERRED	
+local	BitSet__setBit	param_2	bitIndex	INFERRED	
+local	BitSet__setBit	iVar1	byteAddr	INFERRED	bits + (bitIndex >> 3)
+func	FUN_0010dbfc	BitSet__clearBit	INFERRED	clears bit bitIndex of the byte array
+local	FUN_0010dbfc	param_1	bits	INFERRED	
+local	FUN_0010dbfc	param_2	bitIndex	INFERRED	
+local	FUN_0010dbfc	iVar1	byteAddr	INFERRED	bits + (bitIndex >> 3)
+func	FUN_0010dc20	BitSet__initDefault	INFERRED	fills 5 bytes with 0xff, 6 bytes with 0, then sets bits 0x28..0x2c
+local	FUN_0010dc20	param_1	bits	INFERRED	
+local	FUN_0010dc20	iVar3	remaining	INFERRED	loop counters
+local	FUN_0010dc20	iVar2	cursor	INFERRED	byte index / bit index
+local	FUN_0010dc20	bVar1	moreBits	INFERRED	bit index != 0x2c
+func	FUN_0010dc9c	BitSet__testBit	INFERRED	returns bit bitIndex of the byte array
+local	FUN_0010dc9c	param_1	bits	INFERRED	
+local	FUN_0010dc9c	param_2	bitIndex	INFERRED	
+local	HwLimits__vslot20_createInstWithOwner	param_2	owner	INFERRED	
+local	HwLimits__vslot20_createInstWithOwner	iVar1	newInst	INFERRED	IRLoadVertex (opcode 0xa4) with +0x12c = owner and flag 0x8000 cleared
+local	Compiler__getResourceModel	param_1	compiler	INFERRED	
+local	Compiler__getThreadModel	param_1	compiler	INFERRED	
+local	HwLimits__vslot8_failNotSupported	param_2	unusedArg2	INFERRED	
+local	HwLimits__vslot8_failNotSupported	param_3	unusedArg3	INFERRED	
+local	HwLimits__vslot8_failNotSupported	param_4	unusedArg4	INFERRED	
+local	HwLimits__vslot8_failNotSupported	param_5	unusedArg5	INFERRED	
+local	HwLimits__vslot8_failNotSupported	param_6	unusedArg6	INFERRED	
+local	FUN_0010defc	param_1	this	INFERRED	
+local	FUN_0010defc	param_2	compiler	INFERRED	
+local	FUN_0010defc	iVar1	entry	INFERRED	member +4 / +8, later its code object and release context
+local	FUN_0010defc	iVar2	firstEntry	INFERRED	member +4
+local	FUN_0010defc	puVar3	shaderObject	INFERRED	object at entry+0x60 (destroyed with its virtual 0 and released)
+local	KhanChip__ctor_10e050	iVar2	limitsObject	INFERRED	KhanVs (this[1]) / KhanPs (this[2]) allocated with FUN_000e1564
+local	KhanChip__ctor_10e114	iVar2	limitsObject	INFERRED	KhanVs (this[1]) / KhanPs (this[2]) allocated with FUN_000e1564

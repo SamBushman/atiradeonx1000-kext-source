@@ -2435,7 +2435,7 @@ LAB_0013cee8:
                   DList__unlink(operandVReg3);
                   Block__appendInst(uVar6,operandVReg3);
                 }
-                FUN_0010d730(piVar1,iVar11,uVar10,compiler);
+                IRInst__foldConstantFactor(piVar1,iVar11,uVar10,compiler);
                 if ((*(int *)(piVar1[0x22] + 8) != 0x31) && (bVar17)) {
                   IRInst__swapOperands(piVar1,2,3,compiler);
                 }

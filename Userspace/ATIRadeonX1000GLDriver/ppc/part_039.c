@@ -721,7 +721,7 @@ int KhanPs__ctor_128fd0(this, param_2, param_3)
   this[0x17] = 3;
   this[0xb] = 0x20;
   this[10] = 0x10;
-  FUN_0010dc20(this);
+  BitSet__initDefault(this);
   BitSet__setBit(this,0x30);
   BitSet__setBit(this,0x31);
   BitSet__setBit(this,0x36);
@@ -762,7 +762,7 @@ int KhanPs__ctor_129130(this, param_2, param_3)
   this[0x17] = 3;
   this[0xb] = 0x20;
   this[10] = 0x10;
-  FUN_0010dc20(this);
+  BitSet__initDefault(this);
   BitSet__setBit(this,0x30);
   BitSet__setBit(this,0x31);
   BitSet__setBit(this,0x36);
@@ -1756,7 +1756,7 @@ int KhanVs__ctor_12a578(this, param_2, param_3)
   this[10] = 0x100;
   this[0xe] = 0x10;
   this[0x11] = 4;
-  FUN_0010dc20(this);
+  BitSet__initDefault(this);
   BitSet__setBit(this,0x3a);
   BitSet__setBit(this,0x3e);
   BitSet__setBit(this,0x3f);
@@ -1799,7 +1799,7 @@ int KhanVs__ctor_12a6c0(this, param_2, param_3)
   this[10] = 0x100;
   this[0xe] = 0x10;
   this[0x11] = 4;
-  FUN_0010dc20(this);
+  BitSet__initDefault(this);
   BitSet__setBit(this,0x3a);
   BitSet__setBit(this,0x3e);
   BitSet__setBit(this,0x3f);

@@ -3329,7 +3329,7 @@ int Compiler__isOptionEnabled(compiler, optionId)
   int iVar1;
   
   if ((((int)*(char *)(((int)optionId >> 3) + compiler + 0x59c) >> (optionId & 7) & 1U) != 0) &&
-     (iVar1 = FUN_0010dc9c(*(undefined4 *)(compiler + COMP_target),optionId), iVar1 != 0)) {
+     (iVar1 = BitSet__testBit(*(undefined4 *)(compiler + COMP_target),optionId), iVar1 != 0)) {
     return 1;
   }
   return 0;

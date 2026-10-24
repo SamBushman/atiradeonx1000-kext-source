@@ -230,8 +230,8 @@
 0x10c268	IRInst__reduceTernaryToBinary
 0x10d31c	IRInst__replaceWithMovOfSource
 0x10d5e4	IRInst__convertCompareToBinaryAlu
-0x10d88c	FUN_0010d730
-0x10d948	FUN_0010d730
+0x10d88c	IRInst__foldConstantFactor
+0x10d948	IRInst__foldConstantFactor
 0x10e0d0	KhanChip__ctor_10e050
 0x10e100	KhanChip__ctor_10e050
 0x10e104	KhanChip__ctor_10e050

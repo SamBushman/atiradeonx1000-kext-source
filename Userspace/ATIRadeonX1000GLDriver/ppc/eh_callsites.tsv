@@ -624,11 +624,11 @@ fd5c8	FUN_000fd5c8	103cf4	103cf8	-	no-handler
 10d4cc	IRInst__convertCompareToBinaryAlu	10d4f0	10d588	-	no-handler
 10d4cc	IRInst__convertCompareToBinaryAlu	10d5c4	10d5c8	10d5e4	cleanup
 10d4cc	IRInst__convertCompareToBinaryAlu	10d5e4	10d718	-	no-handler
-10d730	FUN_0010d730	10d75c	10d834	-	no-handler
-10d730	FUN_0010d730	10d850	10d854	10d88c	cleanup
-10d730	FUN_0010d730	10d8a8	10d8d8	-	no-handler
-10d730	FUN_0010d730	10d900	10d904	10d948	cleanup
-10d730	FUN_0010d730	10d930	10da84	-	no-handler
+10d730	IRInst__foldConstantFactor	10d75c	10d834	-	no-handler
+10d730	IRInst__foldConstantFactor	10d850	10d854	10d88c	cleanup
+10d730	IRInst__foldConstantFactor	10d8a8	10d8d8	-	no-handler
+10d730	IRInst__foldConstantFactor	10d900	10d904	10d948	cleanup
+10d730	IRInst__foldConstantFactor	10d930	10da84	-	no-handler
 10e050	KhanChip__ctor_10e050	10e0a4	10e0a8	10e104	cleanup
 10e050	KhanChip__ctor_10e050	10e0b8	10e0bc	10e0d0	cleanup
 10e050	KhanChip__ctor_10e050	10e0c8	10e0cc	10e104	cleanup

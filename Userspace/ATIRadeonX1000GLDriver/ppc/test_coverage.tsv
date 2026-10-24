@@ -1869,14 +1869,14 @@
 0x10d15c	IRInst__replaceWithMovOfSource	504	no	indirect call (driver context / vtable / callback)
 0x10d358	IRInst__canonicalizeCommutativeOperands	372	yes	
 0x10d4cc	IRInst__convertCompareToBinaryAlu	608	no	indirect call (driver context / vtable / callback)
-0x10d730	FUN_0010d730	844	no	indirect call (driver context / vtable / callback)
+0x10d730	IRInst__foldConstantFactor	844	no	indirect call (driver context / vtable / callback)
 0x10da84	HwLimits__vslot24_resetBindingTables	84	yes	
 0x10dad8	HwLimits__dtor_10dad8	128	yes	
 0x10db58	HwLimits__dtor_10db58	128	yes	
 0x10dbd8	BitSet__setBit	36	yes	
-0x10dbfc	FUN_0010dbfc	36	yes	
-0x10dc20	FUN_0010dc20	124	yes	
-0x10dc9c	FUN_0010dc9c	28	yes	
+0x10dbfc	BitSet__clearBit	36	yes	
+0x10dc20	BitSet__initDefault	124	yes	
+0x10dc9c	BitSet__testBit	28	yes	
 0x10dcb8	HwLimits__vslot77_getBindingLimitsDefault	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x10dcc4	HwLimits__vslot10_failNotSupported	56	yes	
 0x10dd08	HwLimits__vslot20_createInstWithOwner	68	yes	

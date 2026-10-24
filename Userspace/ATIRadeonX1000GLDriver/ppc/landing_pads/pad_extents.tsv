@@ -230,8 +230,8 @@ ffd5c	ffd60	FUN_000fd5c8
 10c268	10c26c	IRInst__reduceTernaryToBinary
 10d31c	10d320	IRInst__replaceWithMovOfSource
 10d5e4	10d5e8	IRInst__convertCompareToBinaryAlu
-10d88c	10d890	FUN_0010d730
-10d948	10d94c	FUN_0010d730
+10d88c	10d890	IRInst__foldConstantFactor
+10d948	10d94c	IRInst__foldConstantFactor
 10e0d0	10e0d4	KhanChip__ctor_10e050
 10e100	10e104	KhanChip__ctor_10e050
 10e104	10e114	KhanChip__ctor_10e050

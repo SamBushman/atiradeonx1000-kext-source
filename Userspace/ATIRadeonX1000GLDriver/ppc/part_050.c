@@ -424,7 +424,7 @@ int FudoPs__ctor_191efc(this, compiler, createSchedModels)
   this[0x11] = 4;
   this[0x12] = 4;
   this[0x14] = 0x20;
-  FUN_0010dc20(this);
+  BitSet__initDefault(this);
   BitSet__setBit(this,0x2f);
   BitSet__setBit(this,0x30);
   BitSet__setBit(this,0x31);
@@ -518,7 +518,7 @@ int FudoPs__ctor_1920e0(this, compiler, createSchedModels)
   this[0x11] = 4;
   this[0x12] = 4;
   this[0x14] = 0x20;
-  FUN_0010dc20(this);
+  BitSet__initDefault(this);
   BitSet__setBit(this,0x2f);
   BitSet__setBit(this,0x30);
   BitSet__setBit(this,0x31);

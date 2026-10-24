@@ -3113,8 +3113,8 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 10c268	10c26c	eh-pad	IRInst__reduceTernaryToBinary	1	__Unwind_Resume
 10d31c	10d320	eh-pad	IRInst__replaceWithMovOfSource	1	__Unwind_Resume
 10d5e4	10d5e8	eh-pad	IRInst__convertCompareToBinaryAlu	1	__Unwind_Resume
-10d88c	10d890	millicode	FUN_0010d730	1	
-10d948	10d94c	eh-pad	FUN_0010d730	1	__Unwind_Resume
+10d88c	10d890	millicode	IRInst__foldConstantFactor	1	
+10d948	10d94c	eh-pad	IRInst__foldConstantFactor	1	__Unwind_Resume
 10dcfc	10dd08	other	HwLimits__vslot10_failNotSupported	3	
 10dd4c	10dd54	millicode	HwLimits__vslot20_createInstWithOwner	2	
 10ddf4	10ddfc	other	KhanPs__vslot16_getConstant0xb5	2	
