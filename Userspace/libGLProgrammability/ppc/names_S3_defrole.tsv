@@ -274,19 +274,19 @@ use	__ZN14TGenericLinkerC2Ei	puVar3	allocation	INFERRED	every definition is the 
 use	__ZN14TGenericLinkerC1Ei	puVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+22	all	all
 use	__ZN14TGenericLinkerC4Ei	puVar3	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#0	+22	all	all
 use	TGenericLinker__attributeBindingRequest	iVar1	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#2	+1	all	all
-use	TGenericLinker__link	iVar2	sizeActiveAttributes	INFERRED	every definition is the result of a call whose name says it returns this	#62	+1	all	all
-use	TGenericLinker__link	iVar2	sizeActiveVertexUniforms	INFERRED	every definition is the result of a call whose name says it returns this	#76	+1	all	all
-use	TGenericLinker__link	iVar2	sizeActiveFragmentUniforms	INFERRED	every definition is the result of a call whose name says it returns this	#90	+1	all	all
-use	TGenericLinker__link	iVar2	numActiveVertexSamplers	INFERRED	every definition is the result of a call whose name says it returns this	#104	+1	all	all
-use	TGenericLinker__link	iVar2	numActiveFragmentSamplers	INFERRED	every definition is the result of a call whose name says it returns this	#118	+1	all	all
-use	TGenericLinker__link	iVar2	numActiveVertexSamplers	INFERRED	every definition is the result of a call whose name says it returns this	#132	+2	all	all
-use	TGenericLinker__link	iVar2	numActiveFragmentSamplers	INFERRED	every definition is the result of a call whose name says it returns this	#138	+1	all	all
-use	TGenericLinker__link	pcVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#37	+108	all	all
-use	TGenericLinker__link	uVar5	sizeActiveAttributes2	INFERRED	every definition is the result of a call whose name says it returns this	#66	+1	all	all
-use	TGenericLinker__link	uVar5	sizeActiveVertexUniforms2	INFERRED	every definition is the result of a call whose name says it returns this	#80	+1	all	all
-use	TGenericLinker__link	uVar5	sizeActiveFragmentUniforms2	INFERRED	every definition is the result of a call whose name says it returns this	#94	+1	all	all
-use	TGenericLinker__link	uVar5	numActiveVertexSamplers2	INFERRED	every definition is the result of a call whose name says it returns this	#108	+1	all	all
-use	TGenericLinker__link	uVar5	numActiveFragmentSamplers2	INFERRED	every definition is the result of a call whose name says it returns this	#122	+1	all	all
+use	TGenericLinker__link	iVar2	sizeActiveAttributes	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar2\ =\ BindingTable__GetSizeActiveAttributes\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\);$	+1	all	all
+use	TGenericLinker__link	iVar2	sizeActiveVertexUniforms	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar2\ =\ BindingTable__GetSizeActiveVertexUniforms\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\);$	+1	all	all
+use	TGenericLinker__link	iVar2	sizeActiveFragmentUniforms	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar2\ =\ BindingTable__GetSizeActiveFragmentUniforms\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\);$	+1	all	all
+use	TGenericLinker__link	iVar2	numActiveVertexSamplers	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar2\ =\ BindingTable__GetNumActiveVertexSamplers\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\);$	+1	all	all
+use	TGenericLinker__link	iVar2	numActiveFragmentSamplers	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar2\ =\ BindingTable__GetNumActiveFragmentSamplers\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\);$	+1	all	all
+use	TGenericLinker__link	iVar2	numActiveVertexSamplers	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar2\ =\ BindingTable__GetNumActiveVertexSamplers\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\);$@2	+2	all	all
+use	TGenericLinker__link	iVar2	numActiveFragmentSamplers	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar2\ =\ BindingTable__GetNumActiveFragmentSamplers\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\);$@2	+1	all	all
+use	TGenericLinker__link	pcVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*pcVar4\ =\ \(char\ \*\)_malloc\(iVar6\ \+\ iVar3\ \+\ 1\);$	+108	all	all
+use	TGenericLinker__link	uVar5	sizeActiveAttributes2	INFERRED	every definition is the result of a call whose name says it returns this	^\s*uVar5\ =\ BindingTable__GetSizeActiveAttributes\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\);$	+1	all	all
+use	TGenericLinker__link	uVar5	sizeActiveVertexUniforms2	INFERRED	every definition is the result of a call whose name says it returns this	^\s*uVar5\ =\ BindingTable__GetSizeActiveVertexUniforms\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\);$	+1	all	all
+use	TGenericLinker__link	uVar5	sizeActiveFragmentUniforms2	INFERRED	every definition is the result of a call whose name says it returns this	^\s*uVar5\ =\ BindingTable__GetSizeActiveFragmentUniforms\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\);$	+1	all	all
+use	TGenericLinker__link	uVar5	numActiveVertexSamplers2	INFERRED	every definition is the result of a call whose name says it returns this	^\s*uVar5\ =\ BindingTable__GetNumActiveVertexSamplers\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\);$	+1	all	all
+use	TGenericLinker__link	uVar5	numActiveFragmentSamplers2	INFERRED	every definition is the result of a call whose name says it returns this	^\s*uVar5\ =\ BindingTable__GetNumActiveFragmentSamplers\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 4\)\);$	+1	all	all
 use	TGenericLinker__getStatsString	iVar1	length	INFERRED	every definition is the result of a call whose name says it returns this	#2	+1	all	all
 use	TGenericLinker__getStatsString	uVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#3	+2	all	all
 use	TGenericLinker__getPPStreamString	iVar4	length	INFERRED	every definition is the result of a call whose name says it returns this	#10	+36	all	all

@@ -2,7 +2,7 @@
 """ph.py DIR [FN-glob ...] : per function, the placeholder variables still present in the CURRENT text with counts"""
 import sys, re, glob, os, fnmatch, collections
 d = sys.argv[1]; pats = sys.argv[2:] or ['*']
-R = re.compile(r'\b(?:extraout_\w+|\w*Stack_[0-9a-f]+)\b|\b(?:[a-z]{0,3}Var\d+|local_[0-9a-f]+|param_\d+|in_[a-z0-9]+|[a-z]?Stack_[0-9a-f]+)\b')
+R = re.compile(r'\b(?:extraout_\w+|\w*Stack_[0-9a-f]+)\b|\b(?:[a-z]{0,3}Var\d+|local_[0-9a-f]+|param_\d+|in_[a-z0-9]+|[a-z]?Stack_[0-9a-f]+|p+_?[A-Za-z]*Var\d+)\b')
 H = re.compile(r'^/\* (\S+) @ 0x[0-9a-f]+')
 for pf in sorted(glob.glob(os.path.join(d, 'part_*.c'))):
     cur = None; c = collections.Counter()

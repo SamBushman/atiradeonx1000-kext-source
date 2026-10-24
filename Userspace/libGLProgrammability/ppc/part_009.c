@@ -686,19 +686,19 @@ LAB_97bb37d4:
 }
 
 /* TGenericLinker__RenumberLabels @ 0x97bb37fc (40 bytes) */
-int TGenericLinker__RenumberLabels(this, _PPStreamChunk, param_3, param_4)
+int TGenericLinker__RenumberLabels(this, chunk, oldLabel, newLabel)
   unsigned char * this;
-  unsigned char * _PPStreamChunk;
-  uint param_3;
-  uint param_4;
+  unsigned char * chunk;
+  uint oldLabel;
+  uint newLabel;
 {
-  if (_PPStreamChunk != (unsigned char *)0x0) {
+  if (chunk != (unsigned char *)0x0) {
     do {
-      if (param_3 == *(uint *)(_PPStreamChunk + 0xc)) {
-        *(uint *)(_PPStreamChunk + 0xc) = param_4;
+      if (oldLabel == *(uint *)(chunk + 0xc)) {
+        *(uint *)(chunk + 0xc) = newLabel;
       }
-      _PPStreamChunk = *(unsigned char **)(_PPStreamChunk + 8);
-    } while (_PPStreamChunk != (unsigned char *)0x0);
+      chunk = *(unsigned char **)(chunk + 8);
+    } while (chunk != (unsigned char *)0x0);
     return;
   }
   return;
@@ -1469,57 +1469,60 @@ int TGenericLinker__InsertClientAttribBinding(this, binding)
 }
 
 /* TGenericLinker__AddAttribBinding @ 0x97bb4b0c (276 bytes) */
-int TGenericLinker__AddAttribBinding(param_1, str, param_3, param_4)
-  char *param_1;
-  char *str;
-  undefined4 param_3;
-  undefined4 param_4;
+int TGenericLinker__AddAttribBinding(linker, attribName, glType, isBuiltIn)
+  char *linker;
+  char *attribName;
+  undefined4 glType;
+  undefined4 isBuiltIn;
 {
-  unsigned char * this;
-  int iVar1;
-  undefined4 uVar2;
-  int iVar3;
-  char *pcVar4;
-  void *pvVar5;
+  char *message;
+  int formatLength;
+  int insertResult;
+  unsigned char * binding;
+  int existingBinding;
+  undefined4 locationZeroName;
+  int nameLength;
+  char *errorText;
+  void *infoSink;
   
-  this = operator_new(0x38);
-  __ZN7BindingC1Ev(this);
-  pcVar4 = DAT_a7b7bb84;
-  if (this == (unsigned char *)0x0) {
-    pvVar5 = *(void **)(param_1 + 0x84);
+  binding = operator_new(0x38);
+  __ZN7BindingC1Ev(binding);
+  errorText = DAT_a7b7bb84;
+  if (binding == (unsigned char *)0x0) {
+    infoSink = *(void **)(linker + 0x84);
                     
-    __ZN13TInfoSinkBase6appendEPKc(pvVar5,"INTERNAL ERROR: ");
-    __ZN13TInfoSinkBase6appendEPKc(pvVar5,pcVar4);
-    __ZN13TInfoSinkBase6appendEPKc(pvVar5,"\n");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,errorText);
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
   }
   else {
-    Binding__SetName(this,str);
-    iVar1 = BindingTable__FindAttribBinding(*(unsigned char **)(param_1 + 4),this);
-    if (iVar1 == 0) {
-      Binding__SetClientRequest(this,0);
-      Binding__SetOpenGLType(this,(*(unsigned short *)((unsigned char *)&(param_3) + 2)));
-      Binding__SetDecSize(this,1);
-      Binding__SetActualSize(this,1);
-      Binding__SetBuiltIn(this,param_4);
-      iVar1 = BindingTable__InsertAttribBinding(*(unsigned char **)(param_1 + 4),this);
-      if (iVar1 != 0) {
-        return iVar1;
+    Binding__SetName(binding,attribName);
+    existingBinding = BindingTable__FindAttribBinding(*(unsigned char **)(linker + 4),binding);
+    if (existingBinding == 0) {
+      Binding__SetClientRequest(binding,0);
+      Binding__SetOpenGLType(binding,(*(unsigned short *)((unsigned char *)&(glType) + 2)));
+      Binding__SetDecSize(binding,1);
+      Binding__SetActualSize(binding,1);
+      Binding__SetBuiltIn(binding,isBuiltIn);
+      insertResult = BindingTable__InsertAttribBinding(*(unsigned char **)(linker + 4),binding);
+      if (insertResult != 0) {
+        return insertResult;
       }
-      uVar2 = BindingTable__GetAttribBindingNameByLocation(*(unsigned char **)(param_1 + 4),0);
-      iVar1 = _strlen(_linkErrorString);
-      iVar3 = _strlen(uVar2);
-      pcVar4 = (char *)_malloc(iVar1 + iVar3 + 1);
-      _sprintf(pcVar4,_linkErrorString,uVar2);
-      pvVar5 = *(void **)(param_1 + 0x84);
+      locationZeroName = BindingTable__GetAttribBindingNameByLocation(*(unsigned char **)(linker + 4),0);
+      formatLength = _strlen(_linkErrorString);
+      nameLength = _strlen(locationZeroName);
+      message = (char *)_malloc(formatLength + nameLength + 1);
+      _sprintf(message,_linkErrorString,locationZeroName);
+      infoSink = *(void **)(linker + 0x84);
                     
-      __ZN13TInfoSinkBase6appendEPKc(pvVar5,"ERROR: ");
-      __ZN13TInfoSinkBase6appendEPKc(pvVar5,pcVar4);
-      __ZN13TInfoSinkBase6appendEPKc(pvVar5,"\n");
-      _free(pcVar4);
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,message);
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
+      _free(message);
       return 0;
     }
-    __ZN7BindingD1Ev(this);
-    __ZdlPv(this);
+    __ZN7BindingD1Ev(binding);
+    __ZdlPv(binding);
   }
   return 0;
 }
@@ -1607,98 +1610,98 @@ int TGenericLinker__CollectClientAttributeBindings(this)
 int TGenericLinker__CollectAttributeBindings(this)
   unsigned char * this;
 {
-  unsigned char * pPVar1;
-  uint uVar2;
+  unsigned char * parseSymbol;
+  uint glType;
   
   if (*(unsigned char **)(this + 0x28) != (unsigned char *)0x0) {
-    for (pPVar1 = (unsigned char *)
+    for (parseSymbol = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar1 != (unsigned char *)0x0;
-        pPVar1 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
-      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a4)) &&
-         (*(int *)(pPVar1 + 0x34) == 0)) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5c,0);
+        parseSymbol != (unsigned char *)0x0;
+        parseSymbol = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol)) {
+      if (((**(char **)parseSymbol == '\x02') && (*(short *)(parseSymbol + 0x2c) == -0x74a4)) &&
+         (*(int *)(parseSymbol + 0x34) == 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(parseSymbol + 0x14),0x8b5c,0);
       }
     }
-    for (pPVar1 = (unsigned char *)
+    for (parseSymbol = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar1 != (unsigned char *)0x0;
-        pPVar1 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
-      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a5)) &&
-         (*(int *)(pPVar1 + 0x34) == 0)) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5b,0);
+        parseSymbol != (unsigned char *)0x0;
+        parseSymbol = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol)) {
+      if (((**(char **)parseSymbol == '\x02') && (*(short *)(parseSymbol + 0x2c) == -0x74a5)) &&
+         (*(int *)(parseSymbol + 0x34) == 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(parseSymbol + 0x14),0x8b5b,0);
       }
     }
-    for (pPVar1 = (unsigned char *)
+    for (parseSymbol = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar1 != (unsigned char *)0x0;
-        pPVar1 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
-      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a6)) &&
-         (*(int *)(pPVar1 + 0x34) == 0)) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5a,0);
+        parseSymbol != (unsigned char *)0x0;
+        parseSymbol = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol)) {
+      if (((**(char **)parseSymbol == '\x02') && (*(short *)(parseSymbol + 0x2c) == -0x74a6)) &&
+         (*(int *)(parseSymbol + 0x34) == 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(parseSymbol + 0x14),0x8b5a,0);
       }
     }
-    for (pPVar1 = (unsigned char *)
+    for (parseSymbol = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar1 != (unsigned char *)0x0;
-        pPVar1 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
-      if ((((**(char **)pPVar1 == '\x02') &&
-           (uVar2 = (uint)*(ushort *)(pPVar1 + 0x2c), uVar2 != 0x8b5c)) && (uVar2 != 0x8b5b)) &&
-         ((uVar2 != 0x8b5a && (*(int *)(pPVar1 + 0x34) == 0)))) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),uVar2,0);
+        parseSymbol != (unsigned char *)0x0;
+        parseSymbol = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol)) {
+      if ((((**(char **)parseSymbol == '\x02') &&
+           (glType = (uint)*(ushort *)(parseSymbol + 0x2c), glType != 0x8b5c)) && (glType != 0x8b5b)) &&
+         ((glType != 0x8b5a && (*(int *)(parseSymbol + 0x34) == 0)))) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(parseSymbol + 0x14),glType,0);
       }
     }
-    for (pPVar1 = (unsigned char *)
+    for (parseSymbol = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar1 != (unsigned char *)0x0;
-        pPVar1 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
-      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a4)) &&
-         (*(int *)(pPVar1 + 0x34) != 0)) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5c,1);
+        parseSymbol != (unsigned char *)0x0;
+        parseSymbol = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol)) {
+      if (((**(char **)parseSymbol == '\x02') && (*(short *)(parseSymbol + 0x2c) == -0x74a4)) &&
+         (*(int *)(parseSymbol + 0x34) != 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(parseSymbol + 0x14),0x8b5c,1);
       }
     }
-    for (pPVar1 = (unsigned char *)
+    for (parseSymbol = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar1 != (unsigned char *)0x0;
-        pPVar1 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
-      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a5)) &&
-         (*(int *)(pPVar1 + 0x34) != 0)) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5b,1);
+        parseSymbol != (unsigned char *)0x0;
+        parseSymbol = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol)) {
+      if (((**(char **)parseSymbol == '\x02') && (*(short *)(parseSymbol + 0x2c) == -0x74a5)) &&
+         (*(int *)(parseSymbol + 0x34) != 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(parseSymbol + 0x14),0x8b5b,1);
       }
     }
-    for (pPVar1 = (unsigned char *)
+    for (parseSymbol = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar1 != (unsigned char *)0x0;
-        pPVar1 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
-      if (((**(char **)pPVar1 == '\x02') && (*(short *)(pPVar1 + 0x2c) == -0x74a6)) &&
-         (*(int *)(pPVar1 + 0x34) != 0)) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),0x8b5a,1);
+        parseSymbol != (unsigned char *)0x0;
+        parseSymbol = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol)) {
+      if (((**(char **)parseSymbol == '\x02') && (*(short *)(parseSymbol + 0x2c) == -0x74a6)) &&
+         (*(int *)(parseSymbol + 0x34) != 0)) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(parseSymbol + 0x14),0x8b5a,1);
       }
     }
-    for (pPVar1 = (unsigned char *)
+    for (parseSymbol = (unsigned char *)
                   ParseSymbolTable__NextSymbol
                             (*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
-        pPVar1 != (unsigned char *)0x0;
-        pPVar1 = (unsigned char *)
-                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar1)) {
-      if (((**(char **)pPVar1 == '\x02') &&
-          (uVar2 = (uint)*(ushort *)(pPVar1 + 0x2c), uVar2 != 0x8b5c)) &&
-         ((uVar2 != 0x8b5b && ((uVar2 != 0x8b5a && (*(int *)(pPVar1 + 0x34) != 0)))))) {
-        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(pPVar1 + 0x14),uVar2,1);
+        parseSymbol != (unsigned char *)0x0;
+        parseSymbol = (unsigned char *)
+                 ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol)) {
+      if (((**(char **)parseSymbol == '\x02') &&
+          (glType = (uint)*(ushort *)(parseSymbol + 0x2c), glType != 0x8b5c)) &&
+         ((glType != 0x8b5b && ((glType != 0x8b5a && (*(int *)(parseSymbol + 0x34) != 0)))))) {
+        ((int (*)())TGenericLinker__AddAttribBinding)((char *)this,*(undefined4 *)(parseSymbol + 0x14),glType,1);
       }
     }
   }
@@ -2744,66 +2747,67 @@ int TGenericLinker__BuildUniformRemapTables(this)
 }
 
 /* TGenericLinker__InsertUniformBindingFromSymbol @ 0x97bb727c (388 bytes) */
-int TGenericLinker__InsertUniformBindingFromSymbol(this, parseSymbol, param_3)
+int TGenericLinker__InsertUniformBindingFromSymbol(this, parseSymbol, isFragment)
   unsigned char * this;
   unsigned char * parseSymbol;
-  int param_3;
+  int isFragment;
 {
-  unsigned char * this_00;
-  unsigned char * pBVar1;
-  int iVar2;
-  int iVar3;
-  char *pcVar4;
-  undefined4 uVar5;
-  void *this_01;
+  undefined4 uniformName;
+  unsigned char * binding;
+  unsigned char * existingBinding;
+  int formatLength;
+  int nameLength;
+  char *message;
+  undefined4 success;
+  void *infoSink;
   
-  uVar5 = 1;
+  success = 1;
   if ((**(char **)parseSymbol == '\x03') &&
      ((*(uint *)(*(char **)parseSymbol + 0xc) & 0x1f0000) != 0x110000)) {
-    this_00 = operator_new(0x38);
-    __ZN7BindingC1Ev(this_00);
-    if (this_00 == (unsigned char *)0x0) {
-      uVar5 = *(undefined4 *)(parseSymbol + 0x14);
-      iVar2 = _strlen(DAT_a7b7bb7c);
-      iVar3 = _strlen(uVar5);
-      pcVar4 = (char *)_malloc(iVar2 + iVar3 + 1);
-      _sprintf(pcVar4,DAT_a7b7bb7c,uVar5);
-      this_01 = *(void **)(this + 0x84);
+    binding = operator_new(0x38);
+    __ZN7BindingC1Ev(binding);
+    if (binding == (unsigned char *)0x0) {
+      uniformName = *(undefined4 *)(parseSymbol + 0x14);
+      formatLength = _strlen(DAT_a7b7bb7c);
+      nameLength = _strlen(uniformName);
+      message = (char *)_malloc(formatLength + nameLength + 1);
+      _sprintf(message,DAT_a7b7bb7c,uniformName);
+      infoSink = *(void **)(this + 0x84);
                     
-      __ZN13TInfoSinkBase6appendEPKc(this_01,"INTERNAL ERROR: ");
-      __ZN13TInfoSinkBase6appendEPKc(this_01,pcVar4);
-      __ZN13TInfoSinkBase6appendEPKc(this_01,"\n");
-      _free(pcVar4);
-      uVar5 = 0;
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,message);
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
+      _free(message);
+      success = 0;
     }
     else {
-      Binding__SetName(this_00,*(char **)(parseSymbol + 0x14));
-      pBVar1 = (unsigned char *)BindingTable__FindUniformBinding(*(unsigned char **)(this + 4),this_00);
-      if (pBVar1 == (unsigned char *)0x0) {
-        Binding__SetClientRequest(this_00,0);
-        Binding__SetOpenGLType(this_00,*(ushort *)(parseSymbol + 0x2c));
-        Binding__SetDecSize(this_00,(int)*(short *)(parseSymbol + 0x2e));
-        Binding__SetActualSize(this_00,1);
-        Binding__SetBuiltIn(this_00,*(undefined4 *)(parseSymbol + 0x34));
+      Binding__SetName(binding,*(char **)(parseSymbol + 0x14));
+      existingBinding = (unsigned char *)BindingTable__FindUniformBinding(*(unsigned char **)(this + 4),binding);
+      if (existingBinding == (unsigned char *)0x0) {
+        Binding__SetClientRequest(binding,0);
+        Binding__SetOpenGLType(binding,*(ushort *)(parseSymbol + 0x2c));
+        Binding__SetDecSize(binding,(int)*(short *)(parseSymbol + 0x2e));
+        Binding__SetActualSize(binding,1);
+        Binding__SetBuiltIn(binding,*(undefined4 *)(parseSymbol + 0x34));
         if (*(short *)(parseSymbol + 0x2e) == 1) {
-          BindingTable__InsertSingleUniform(*(unsigned char **)(this + 4),this_00,param_3);
+          BindingTable__InsertSingleUniform(*(unsigned char **)(this + 4),binding,isFragment);
         }
         else {
           BindingTable__InsertUniformArray
-                    (*(unsigned char **)(this + 4),this_00,(int)*(short *)(parseSymbol + 0x30),param_3,2,
+                    (*(unsigned char **)(this + 4),binding,(int)*(short *)(parseSymbol + 0x30),isFragment,2,
                      (unsigned char **)(this + 0x28));
         }
       }
       else {
         if (*(short *)(parseSymbol + 0x2e) == 1) {
-          BindingTable__AddSingleUniformReference(*(unsigned char **)(this + 4),pBVar1,param_3);
+          BindingTable__AddSingleUniformReference(*(unsigned char **)(this + 4),existingBinding,isFragment);
         }
-        __ZN7BindingD1Ev(this_00);
-        __ZdlPv(this_00);
+        __ZN7BindingD1Ev(binding);
+        __ZdlPv(binding);
       }
     }
   }
-  return uVar5;
+  return success;
 }
 
 /* TGenericLinker__CollectUniformBindings @ 0x97bb7498 (296 bytes) */
@@ -3215,90 +3219,90 @@ override_jmp_97bb7c58_case_0:
 }
 
 /* TGenericLinker__BuildProcessingComponents @ 0x97bb8054 (200 bytes) */
-int TGenericLinker__BuildProcessingComponents(this, param_2)
+int TGenericLinker__BuildProcessingComponents(this, unusedArg)
   void **this;
-  int param_2;
+  int unusedArg;
 {
   void *createFromStreamWithSymbolTableUpdateResult;
   void *createFunctionTableResult;
-  unsigned char * pPVar2;
-  undefined4 uVar3;
-  int iVar4;
-  void **ppvVar5;
+  unsigned char * symbolTableCopy;
+  undefined4 success;
+  int stage;
+  void **stageSlots;
   
-  uVar3 = 1;
-  iVar4 = 0;
-  ppvVar5 = this;
+  success = 1;
+  stage = 0;
+  stageSlots = this;
   do {
-    if (0 < (int)ppvVar5[8]) {
-      createFunctionTableResult = (void *)((int (*)())TGenericLinker__CreateFunctionTable)((unsigned char *)this,iVar4);
-      ppvVar5[0xe] = createFunctionTableResult;
+    if (0 < (int)stageSlots[8]) {
+      createFunctionTableResult = (void *)((int (*)())TGenericLinker__CreateFunctionTable)((unsigned char *)this,stage);
+      stageSlots[0xe] = createFunctionTableResult;
       if (createFunctionTableResult == (void *)0x0) {
-        uVar3 = 0;
+        success = 0;
       }
-      else if (ppvVar5[8] == (void *)0x1) {
-        pPVar2 = (unsigned char *)
+      else if (stageSlots[8] == (void *)0x1) {
+        symbolTableCopy = (unsigned char *)
                  ParseSymbolTable__CopySymbolTable
-                           (*(unsigned char **)(*(int *)ppvVar5[2] + 0x68));
-        ppvVar5[10] = pPVar2;
+                           (*(unsigned char **)(*(int *)stageSlots[2] + 0x68));
+        stageSlots[10] = symbolTableCopy;
         createFromStreamWithSymbolTableUpdateResult = (void *)((int (*)())TGenericLinker__CreateFromStreamWithSymbolTableUpdate)((unsigned char *)this,
-                                    *(unsigned char **)(*(int *)ppvVar5[2] + 0x70),pPVar2);
-        ppvVar5[0xc] = createFromStreamWithSymbolTableUpdateResult;
+                                    *(unsigned char **)(*(int *)stageSlots[2] + 0x70),symbolTableCopy);
+        stageSlots[0xc] = createFromStreamWithSymbolTableUpdateResult;
       }
-      else if (1 < (int)ppvVar5[8]) {
-        uVar3 = ((int (*)())TGenericLinker__MergeCompilers)((unsigned char *)this,iVar4);
+      else if (1 < (int)stageSlots[8]) {
+        success = ((int (*)())TGenericLinker__MergeCompilers)((unsigned char *)this,stage);
       }
     }
-    iVar4 = iVar4 + 1;
-    ppvVar5 = ppvVar5 + 1;
-  } while (iVar4 < 2);
-  return uVar3;
+    stage = stage + 1;
+    stageSlots = stageSlots + 1;
+  } while (stage < 2);
+  return success;
 }
 
 /* __ZN14TGenericLinkerC2Ei @ 0x97bb811c (4 bytes) */
-int __ZN14TGenericLinkerC2Ei(this, param_2)
+int __ZN14TGenericLinkerC2Ei(this, debugOptions)
   void *this;
-  int param_2;
+  int debugOptions;
 {
   int atomicStore;
-  undefined *puVar1;
-  int *piVar2;
+  undefined *emptyRep;
+  int *emptyRepRefCount;
   undefined4 *allocation;
-  void *this_00;
-  int iVar4;
+  void *bindingTable;
+  int lastStageSlot;
   char reservation;
   byte cr0Reg;
   
   *(int *)this = DAT_a7b7bba0 + 8;
-  *(int *)((int)this + 0x7c) = param_2;
+  *(int *)((int)this + 0x7c) = debugOptions;
   allocation = operator_new(0x10);
-  puVar1 = PTR__S_empty_rep_storage_a7b7c0f0;
-  piVar2 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
+  emptyRep = PTR__S_empty_rep_storage_a7b7c0f0;
+  emptyRepRefCount = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
     if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = atomicStore;
+      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
+      *emptyRepRefCount = atomicStore;
       cr0Reg = 2;
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   allocation[1] = 4;
-  *allocation = puVar1 + 0xc;
+  *allocation = emptyRep + 0xc;
   do {
     if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = atomicStore;
+      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
+      *emptyRepRefCount = atomicStore;
       cr0Reg = 2;
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
-  allocation[2] = puVar1 + 0xc;
+  allocation[2] = emptyRep + 0xc;
   allocation[3] = 4;
   *(undefined4 *)((int)this + 0x80) = 1;
   *(undefined4 **)((int)this + 0x84) = allocation;
-  *(int *)((int)this + 0x7c) = param_2;
-  this_00 = operator_new(0x48);
-  __ZN12BindingTableC1Ej(this_00,0x80);
-  *(void **)((int)this + 4) = this_00;
-  iVar4 = (int)this + 4;
+  *(int *)((int)this + 0x7c) = debugOptions;
+  bindingTable = operator_new(0x48);
+  __ZN12BindingTableC1Ej(bindingTable,0x80);
+  *(void **)((int)this + 4) = bindingTable;
+  lastStageSlot = (int)this + 4;
   *(undefined4 *)((int)this + 0x5c) = 0;
   *(undefined4 *)((int)this + 0x50) = 0;
   *(undefined4 *)((int)this + 0x54) = 0;
@@ -3314,54 +3318,54 @@ int __ZN14TGenericLinkerC2Ei(this, param_2)
     *(undefined4 *)((int)this + 0x40) = 0;
     *(undefined4 *)((int)this + 0x48) = 0;
     this = (void *)((int)this + 4);
-  } while ((int)this <= iVar4);
+  } while ((int)this <= lastStageSlot);
   return;
 }
 
 /* __ZN14TGenericLinkerC1Ei @ 0x97bb8120 (4 bytes) */
-int __ZN14TGenericLinkerC1Ei(this, param_2)
+int __ZN14TGenericLinkerC1Ei(this, debugOptions)
   void *this;
-  int param_2;
+  int debugOptions;
 {
   int atomicStore;
-  undefined *puVar1;
-  int *piVar2;
+  undefined *emptyRep;
+  int *emptyRepRefCount;
   undefined4 *allocation;
-  void *this_00;
-  int iVar4;
+  void *bindingTable;
+  int lastStageSlot;
   char reservation;
   byte cr0Reg;
   
   *(int *)this = DAT_a7b7bba0 + 8;
-  *(int *)((int)this + 0x7c) = param_2;
+  *(int *)((int)this + 0x7c) = debugOptions;
   allocation = operator_new(0x10);
-  puVar1 = PTR__S_empty_rep_storage_a7b7c0f0;
-  piVar2 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
+  emptyRep = PTR__S_empty_rep_storage_a7b7c0f0;
+  emptyRepRefCount = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
     if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = atomicStore;
+      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
+      *emptyRepRefCount = atomicStore;
       cr0Reg = 2;
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   allocation[1] = 4;
-  *allocation = puVar1 + 0xc;
+  *allocation = emptyRep + 0xc;
   do {
     if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = atomicStore;
+      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
+      *emptyRepRefCount = atomicStore;
       cr0Reg = 2;
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
-  allocation[2] = puVar1 + 0xc;
+  allocation[2] = emptyRep + 0xc;
   allocation[3] = 4;
   *(undefined4 *)((int)this + 0x80) = 1;
   *(undefined4 **)((int)this + 0x84) = allocation;
-  *(int *)((int)this + 0x7c) = param_2;
-  this_00 = operator_new(0x48);
-  __ZN12BindingTableC1Ej(this_00,0x80);
-  *(void **)((int)this + 4) = this_00;
-  iVar4 = (int)this + 4;
+  *(int *)((int)this + 0x7c) = debugOptions;
+  bindingTable = operator_new(0x48);
+  __ZN12BindingTableC1Ej(bindingTable,0x80);
+  *(void **)((int)this + 4) = bindingTable;
+  lastStageSlot = (int)this + 4;
   *(undefined4 *)((int)this + 0x5c) = 0;
   *(undefined4 *)((int)this + 0x50) = 0;
   *(undefined4 *)((int)this + 0x54) = 0;
@@ -3377,54 +3381,54 @@ int __ZN14TGenericLinkerC1Ei(this, param_2)
     *(undefined4 *)((int)this + 0x40) = 0;
     *(undefined4 *)((int)this + 0x48) = 0;
     this = (void *)((int)this + 4);
-  } while ((int)this <= iVar4);
+  } while ((int)this <= lastStageSlot);
   return;
 }
 
 /* __ZN14TGenericLinkerC4Ei @ 0x97bb8124 (268 bytes) */
-int __ZN14TGenericLinkerC4Ei(this, param_2)
+int __ZN14TGenericLinkerC4Ei(this, debugOptions)
   void *this;
-  int param_2;
+  int debugOptions;
 {
   int atomicStore;
-  undefined *puVar1;
-  int *piVar2;
+  undefined *emptyRep;
+  int *emptyRepRefCount;
   undefined4 *allocation;
-  void *this_00;
-  int iVar4;
+  void *bindingTable;
+  int lastStageSlot;
   char reservation;
   byte cr0Reg;
   
   *(int *)this = DAT_a7b7bba0 + 8;
-  *(int *)((int)this + 0x7c) = param_2;
+  *(int *)((int)this + 0x7c) = debugOptions;
   allocation = operator_new(0x10);
-  puVar1 = PTR__S_empty_rep_storage_a7b7c0f0;
-  piVar2 = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
+  emptyRep = PTR__S_empty_rep_storage_a7b7c0f0;
+  emptyRepRefCount = (int *)(PTR__S_empty_rep_storage_a7b7c0f0 + 8);
   do {
     if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = atomicStore;
+      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
+      *emptyRepRefCount = atomicStore;
       cr0Reg = 2;
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   allocation[1] = 4;
-  *allocation = puVar1 + 0xc;
+  *allocation = emptyRep + 0xc;
   do {
     if (reservation != '\0') {
-      atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-      *piVar2 = atomicStore;
+      atomicStore = storeWordConditionalIndexed(*emptyRepRefCount + 1,0,emptyRepRefCount);
+      *emptyRepRefCount = atomicStore;
       cr0Reg = 2;
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
-  allocation[2] = puVar1 + 0xc;
+  allocation[2] = emptyRep + 0xc;
   allocation[3] = 4;
   *(undefined4 *)((int)this + 0x80) = 1;
   *(undefined4 **)((int)this + 0x84) = allocation;
-  *(int *)((int)this + 0x7c) = param_2;
-  this_00 = operator_new(0x48);
-  __ZN12BindingTableC1Ej(this_00,0x80);
-  *(void **)((int)this + 4) = this_00;
-  iVar4 = (int)this + 4;
+  *(int *)((int)this + 0x7c) = debugOptions;
+  bindingTable = operator_new(0x48);
+  __ZN12BindingTableC1Ej(bindingTable,0x80);
+  *(void **)((int)this + 4) = bindingTable;
+  lastStageSlot = (int)this + 4;
   *(undefined4 *)((int)this + 0x5c) = 0;
   *(undefined4 *)((int)this + 0x50) = 0;
   *(undefined4 *)((int)this + 0x54) = 0;
@@ -3440,7 +3444,7 @@ int __ZN14TGenericLinkerC4Ei(this, param_2)
     *(undefined4 *)((int)this + 0x40) = 0;
     *(undefined4 *)((int)this + 0x48) = 0;
     this = (void *)((int)this + 4);
-  } while ((int)this <= iVar4);
+  } while ((int)this <= lastStageSlot);
   return;
 }
 
@@ -3470,22 +3474,23 @@ int __ZN14TGenericLinkerD4Ev(this, param_2)
   void *this;
   uint param_2;
 {
+  int firstData;
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  int iVar4;
-  int *piVar5;
-  void *this_00;
+  int secondData;
+  int *infoSinkData;
+  void *bindingTable;
   char reservation;
   byte cr0Reg;
-  undefined1 auStack_30 [28];
+  undefined1 allocScratch [28];
   
   *(int *)this = DAT_a7b7bba0 + 8;
   ((int (*)())TGenericLinker__reset)(this);
-  piVar5 = *(int **)((int)this + 0x84);
-  if (piVar5 != (int *)0x0) {
-    iVar4 = piVar5[2];
-    refCountPtr = (int *)(iVar4 + -4);
+  infoSinkData = *(int **)((int)this + 0x84);
+  if (infoSinkData != (int *)0x0) {
+    secondData = infoSinkData[2];
+    refCountPtr = (int *)(secondData + -4);
     do {
       oldRefCount = *refCountPtr;
       if (reservation != '\0') {
@@ -3495,10 +3500,10 @@ int __ZN14TGenericLinkerD4Ev(this, param_2)
       }
     } while (!(bool)(cr0Reg >> 1 & 1));
     if (oldRefCount < 1) {
-      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_30);
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(secondData + -0xc),allocScratch);
     }
-    iVar4 = *piVar5;
-    refCountPtr = (int *)(iVar4 + -4);
+    firstData = *infoSinkData;
+    refCountPtr = (int *)(firstData + -4);
     do {
       oldRefCount = *refCountPtr;
       if (reservation != '\0') {
@@ -3508,14 +3513,14 @@ int __ZN14TGenericLinkerD4Ev(this, param_2)
       }
     } while (!(bool)(cr0Reg >> 1 & 1));
     if (oldRefCount < 1) {
-      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_30);
+      __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(firstData + -0xc),allocScratch);
     }
-    __ZdlPv(piVar5);
+    __ZdlPv(infoSinkData);
   }
-  this_00 = *(void **)((int)this + 4);
-  if (this_00 != (void *)0x0) {
-    __ZN12BindingTableD1Ev(this_00);
-    __ZdlPv(this_00);
+  bindingTable = *(void **)((int)this + 4);
+  if (bindingTable != (void *)0x0) {
+    __ZN12BindingTableD1Ev(bindingTable);
+    __ZdlPv(bindingTable);
   }
   *(undefined ***)this = &PTR___ZN13TShHandleBaseD1Ev_a7b7d700;
   if ((param_2 & 1) != 0) {
@@ -3553,26 +3558,26 @@ int TGenericLinker__getNumShaderLocalParams(this, language)
 }
 
 /* TGenericLinker__attributeBindingRequest @ 0x97bb838c (196 bytes) */
-int TGenericLinker__attributeBindingRequest(this, param_2, str)
+int TGenericLinker__attributeBindingRequest(this, location, str)
   unsigned char * this;
-  ulong param_2;
+  ulong location;
   char *str;
 {
   int compareResult;
   int insertAttribRequestBindingResult;
-  unsigned char * this_00;
+  unsigned char * binding;
   
   compareResult = _memcmp(str,"gl_",3);
   if (compareResult != 0) {
-    this_00 = operator_new(0x38);
-    __ZN7BindingC1Ev(this_00);
-    Binding__SetName(this_00,str);
-    Binding__SetLocation(this_00,param_2);
-    Binding__SetClientRequest(this_00,1);
-    insertAttribRequestBindingResult = BindingTable__InsertAttribRequestBinding(*(unsigned char **)(this + 4),this_00);
-    if ((insertAttribRequestBindingResult == 0) && (this_00 != (unsigned char *)0x0)) {
-      __ZN7BindingD1Ev(this_00);
-      __ZdlPv(this_00);
+    binding = operator_new(0x38);
+    __ZN7BindingC1Ev(binding);
+    Binding__SetName(binding,str);
+    Binding__SetLocation(binding,location);
+    Binding__SetClientRequest(binding,1);
+    insertAttribRequestBindingResult = BindingTable__InsertAttribRequestBinding(*(unsigned char **)(this + 4),binding);
+    if ((insertAttribRequestBindingResult == 0) && (binding != (unsigned char *)0x0)) {
+      __ZN7BindingD1Ev(binding);
+      __ZdlPv(binding);
       return;
     }
   }
@@ -3580,129 +3585,130 @@ int TGenericLinker__attributeBindingRequest(this, param_2, str)
 }
 
 /* TGenericLinker__getActiveUniform @ 0x97bb8450 (192 bytes) */
-int TGenericLinker__getActiveUniform(this, param_2, param_3, param_4, param_5, param_6, str)
+int TGenericLinker__getActiveUniform(this, index, bufSize, lengthOut, sizeOut, typeOut, str)
   unsigned char * this;
-  ulong param_2;
-  long param_3;
-  long *param_4;
-  long *param_5;
-  ulong *param_6;
+  ulong index;
+  long bufSize;
+  long *lengthOut;
+  long *sizeOut;
+  ulong *typeOut;
   char *str;
 {
-  unsigned char * this_00;
-  undefined4 uVar1;
-  long lVar2;
-  ulong uVar3;
+  long activeSize;
+  unsigned char * binding;
+  undefined4 found;
+  long nameLength;
+  ulong glType;
   
-  this_00 = (unsigned char *)BindingTable__FindUniformBindingByIndex(*(unsigned char **)(this + 4),param_2)
+  binding = (unsigned char *)BindingTable__FindUniformBindingByIndex(*(unsigned char **)(this + 4),index)
   ;
-  uVar1 = 0;
-  if (this_00 != (unsigned char *)0x0) {
-    if (param_3 == 0) {
-      if (param_4 != (long *)0x0) {
-        *param_4 = 0;
+  found = 0;
+  if (binding != (unsigned char *)0x0) {
+    if (bufSize == 0) {
+      if (lengthOut != (long *)0x0) {
+        *lengthOut = 0;
       }
     }
     else {
-      _strncpy(str,*(char **)(this_00 + 8),param_3);
-      str[param_3 + -1] = '\0';
-      if (param_4 != (long *)0x0) {
-        lVar2 = _strlen(str);
-        *param_4 = lVar2;
+      _strncpy(str,*(char **)(binding + 8),bufSize);
+      str[bufSize + -1] = '\0';
+      if (lengthOut != (long *)0x0) {
+        nameLength = _strlen(str);
+        *lengthOut = nameLength;
       }
     }
-    if (param_5 != (long *)0x0) {
-      lVar2 = Binding__GetActualSize(this_00);
-      *param_5 = lVar2;
+    if (sizeOut != (long *)0x0) {
+      activeSize = Binding__GetActualSize(binding);
+      *sizeOut = activeSize;
     }
-    if (param_6 != (ulong *)0x0) {
-      uVar3 = Binding__GetOpenGLType(this_00);
-      *param_6 = uVar3;
+    if (typeOut != (ulong *)0x0) {
+      glType = Binding__GetOpenGLType(binding);
+      *typeOut = glType;
     }
-    uVar1 = 1;
+    found = 1;
   }
-  return uVar1;
+  return found;
 }
 
 /* TGenericLinker__getUniformTypeInfo @ 0x97bb8510 (172 bytes) */
-int TGenericLinker__getUniformTypeInfo(this, param_2, param_3, param_4, param_5)
+int TGenericLinker__getUniformTypeInfo(this, location, remainingSizeOut, typeOut, flagsOut)
   unsigned char * this;
-  long param_2;
-  long *param_3;
-  ulong *param_4;
-  uchar *param_5;
+  long location;
+  long *remainingSizeOut;
+  ulong *typeOut;
+  uchar *flagsOut;
 {
-  undefined4 uVar1;
-  unsigned char * this_00;
-  int iVar2;
-  int iVar3;
-  uint uVar4;
-  ulong uVar5;
+  undefined4 found;
+  unsigned char * binding;
+  int activeSize;
+  int bindingLocation;
+  uint elementSlots;
+  ulong glType;
   
-  this_00 = (unsigned char *)
-            BindingTable__FindUniformBindingByLocation(*(unsigned char **)(this + 4),param_2);
-  uVar1 = 0;
-  if (this_00 != (unsigned char *)0x0) {
-    if (param_3 != (long *)0x0) {
-      iVar2 = Binding__GetActualSize(this_00);
-      iVar3 = Binding__GetLocation(this_00);
-      uVar4 = Binding__GetBindingBasicSize(this_00);
-      *param_3 = iVar2 - (uint)(param_2 - iVar3) / uVar4;
+  binding = (unsigned char *)
+            BindingTable__FindUniformBindingByLocation(*(unsigned char **)(this + 4),location);
+  found = 0;
+  if (binding != (unsigned char *)0x0) {
+    if (remainingSizeOut != (long *)0x0) {
+      activeSize = Binding__GetActualSize(binding);
+      bindingLocation = Binding__GetLocation(binding);
+      elementSlots = Binding__GetBindingBasicSize(binding);
+      *remainingSizeOut = activeSize - (uint)(location - bindingLocation) / elementSlots;
     }
-    if (param_4 != (ulong *)0x0) {
-      uVar5 = Binding__GetOpenGLType(this_00);
-      *param_4 = uVar5;
+    if (typeOut != (ulong *)0x0) {
+      glType = Binding__GetOpenGLType(binding);
+      *typeOut = glType;
     }
-    if (param_5 != (uchar *)0x0) {
-      *param_5 = (uchar)this_00[0x34];
-      *(unsigned char *)(param_5 + 1) = this_00[0x35];
+    if (flagsOut != (uchar *)0x0) {
+      *flagsOut = (uchar)binding[0x34];
+      *(unsigned char *)(flagsOut + 1) = binding[0x35];
     }
-    uVar1 = 1;
+    found = 1;
   }
-  return uVar1;
+  return found;
 }
 
 /* TGenericLinker__getActiveAttrib @ 0x97bb85bc (188 bytes) */
-int TGenericLinker__getActiveAttrib(this, param_2, param_3, param_4, param_5, param_6, str)
+int TGenericLinker__getActiveAttrib(this, index, bufSize, lengthOut, sizeOut, typeOut, str)
   unsigned char * this;
-  ulong param_2;
-  long param_3;
-  long *param_4;
-  long *param_5;
-  ulong *param_6;
+  ulong index;
+  long bufSize;
+  long *lengthOut;
+  long *sizeOut;
+  ulong *typeOut;
   char *str;
 {
-  unsigned char * this_00;
-  undefined4 uVar1;
-  long lVar2;
-  ulong uVar3;
+  unsigned char * binding;
+  undefined4 found;
+  long activeSize;
+  ulong glType;
   
-  this_00 = (unsigned char *)BindingTable__GetAttribBindingByIndex(*(unsigned char **)(this + 4),param_2);
-  uVar1 = 0;
-  if (this_00 != (unsigned char *)0x0) {
-    if (param_3 == 0) {
-      if (param_4 != (long *)0x0) {
-        *param_4 = 0;
+  binding = (unsigned char *)BindingTable__GetAttribBindingByIndex(*(unsigned char **)(this + 4),index);
+  found = 0;
+  if (binding != (unsigned char *)0x0) {
+    if (bufSize == 0) {
+      if (lengthOut != (long *)0x0) {
+        *lengthOut = 0;
       }
     }
     else {
-      _strncpy(str,*(char **)(this_00 + 8),param_3);
-      str[param_3 + -1] = '\0';
-      if (param_4 != (long *)0x0) {
-        *param_4 = *(long *)(this_00 + 0x10);
+      _strncpy(str,*(char **)(binding + 8),bufSize);
+      str[bufSize + -1] = '\0';
+      if (lengthOut != (long *)0x0) {
+        *lengthOut = *(long *)(binding + 0x10);
       }
     }
-    if (param_5 != (long *)0x0) {
-      lVar2 = Binding__GetActualSize(this_00);
-      *param_5 = lVar2;
+    if (sizeOut != (long *)0x0) {
+      activeSize = Binding__GetActualSize(binding);
+      *sizeOut = activeSize;
     }
-    if (param_6 != (ulong *)0x0) {
-      uVar3 = Binding__GetOpenGLType(this_00);
-      *param_6 = uVar3;
+    if (typeOut != (ulong *)0x0) {
+      glType = Binding__GetOpenGLType(binding);
+      *typeOut = glType;
     }
-    uVar1 = 1;
+    found = 1;
   }
-  return uVar1;
+  return found;
 }
 
 /* TGenericLinker__getPPStreamManager @ 0x97bb8678 (40 bytes) */
@@ -3723,8 +3729,8 @@ int TGenericLinker__getPPStreamManager(this, language)
 int TGenericLinker__reset(this)
   unsigned char * this;
 {
-  void *pvVar1;
-  unsigned char * pTVar2;
+  void *stageObject;
+  unsigned char * stageSlot;
   
   if (*(int *)(this + 0x50) != 0) {
     _free(*(int *)(this + 0x50));
@@ -3742,52 +3748,52 @@ int TGenericLinker__reset(this)
     _free(*(int *)(this + 0x58));
   }
   *(undefined4 *)(this + 0x58) = 0;
-  pTVar2 = this;
+  stageSlot = this;
   do {
-    if (*(int *)(pTVar2 + 0x30) != 0) {
-      _PPStreamFree(*(int *)(pTVar2 + 0x30));
+    if (*(int *)(stageSlot + 0x30) != 0) {
+      _PPStreamFree(*(int *)(stageSlot + 0x30));
     }
-    pvVar1 = *(void **)(pTVar2 + 0x28);
-    *(undefined4 *)(pTVar2 + 0x30) = 0;
-    if (pvVar1 != (void *)0x0) {
-      __ZN16ParseSymbolTableD1Ev(pvVar1);
-      __ZdlPv(pvVar1);
+    stageObject = *(void **)(stageSlot + 0x28);
+    *(undefined4 *)(stageSlot + 0x30) = 0;
+    if (stageObject != (void *)0x0) {
+      __ZN16ParseSymbolTableD1Ev(stageObject);
+      __ZdlPv(stageObject);
     }
-    pvVar1 = *(void **)(pTVar2 + 0x38);
-    *(undefined4 *)(pTVar2 + 0x28) = 0;
-    if (pvVar1 != (void *)0x0) {
-      __ZN13FunctionTableD1Ev(pvVar1);
-      __ZdlPv(pvVar1);
+    stageObject = *(void **)(stageSlot + 0x38);
+    *(undefined4 *)(stageSlot + 0x28) = 0;
+    if (stageObject != (void *)0x0) {
+      __ZN13FunctionTableD1Ev(stageObject);
+      __ZdlPv(stageObject);
     }
-    *(undefined4 *)(pTVar2 + 0x38) = 0;
-    pTVar2 = pTVar2 + 4;
-  } while ((int)pTVar2 <= (int)(this + 4));
-  pTVar2 = this;
+    *(undefined4 *)(stageSlot + 0x38) = 0;
+    stageSlot = stageSlot + 4;
+  } while ((int)stageSlot <= (int)(this + 4));
+  stageSlot = this;
   do {
-    if (*(int *)(pTVar2 + 8) != 0) {
-      _free(*(int *)(pTVar2 + 8));
+    if (*(int *)(stageSlot + 8) != 0) {
+      _free(*(int *)(stageSlot + 8));
     }
-    *(undefined4 *)(pTVar2 + 8) = 0;
-    if (*(int *)(pTVar2 + 0x10) != 0) {
-      _free(*(int *)(pTVar2 + 0x10));
+    *(undefined4 *)(stageSlot + 8) = 0;
+    if (*(int *)(stageSlot + 0x10) != 0) {
+      _free(*(int *)(stageSlot + 0x10));
     }
-    *(undefined4 *)(pTVar2 + 0x10) = 0;
-    if (*(int *)(pTVar2 + 0x18) != 0) {
-      _free(*(int *)(pTVar2 + 0x18));
+    *(undefined4 *)(stageSlot + 0x10) = 0;
+    if (*(int *)(stageSlot + 0x18) != 0) {
+      _free(*(int *)(stageSlot + 0x18));
     }
-    *(undefined4 *)(pTVar2 + 0x20) = 0;
-    *(undefined4 *)(pTVar2 + 0x18) = 0;
-    pTVar2 = pTVar2 + 4;
-  } while ((int)pTVar2 <= (int)(this + 4));
-  pTVar2 = this;
+    *(undefined4 *)(stageSlot + 0x20) = 0;
+    *(undefined4 *)(stageSlot + 0x18) = 0;
+    stageSlot = stageSlot + 4;
+  } while ((int)stageSlot <= (int)(this + 4));
+  stageSlot = this;
   do {
-    if (*(int *)(pTVar2 + 0x40) != 0) {
-      _free(*(int *)(pTVar2 + 0x40));
+    if (*(int *)(stageSlot + 0x40) != 0) {
+      _free(*(int *)(stageSlot + 0x40));
     }
-    *(undefined4 *)(pTVar2 + 0x40) = 0;
-    *(undefined4 *)(pTVar2 + 0x48) = 0;
-    pTVar2 = pTVar2 + 4;
-  } while ((int)pTVar2 <= (int)(this + 4));
+    *(undefined4 *)(stageSlot + 0x40) = 0;
+    *(undefined4 *)(stageSlot + 0x48) = 0;
+    stageSlot = stageSlot + 4;
+  } while ((int)stageSlot <= (int)(this + 4));
   BindingTable__ClearInternalBindings(*(unsigned char **)(this + 4));
   *(undefined4 *)(this + 0x78) = 0;
   *(undefined4 *)(this + 0x74) = 0xffffffff;
@@ -3800,11 +3806,15 @@ int TGenericLinker__reset(this)
 }
 
 /* TGenericLinker__link @ 0x97bb883c (372 bytes) */
-int TGenericLinker__link(this, param_2, param_3)
+int TGenericLinker__link(this, shaderObjects, numShaders)
   unsigned char * this;
-  void **param_2;
-  int param_3;
+  void **shaderObjects;
+  int numShaders;
 {
+  unsigned char *streamSlot;
+  int ppStream;
+  int formatLength;
+  int shaderNameLength;
   int numActiveVertexSamplers3;
   int numActiveFragmentSamplers3;
   int buildUniformRemapTablesResult;
@@ -3823,25 +3833,25 @@ int TGenericLinker__link(this, param_2, param_3)
   int sizeActiveFragmentUniforms;
   int sizeActiveVertexUniforms;
   int sizeActiveAttributes;
-  bool bVar1;
-  int iVar2;
-  int iVar3;
+  bool attribsRemapped;
+  int stagesLeft;
+  int branchResolveResult;
   char *allocation;
   undefined4 sizeActiveAttributes2;
-  int iVar6;
-  unsigned char * pTVar7;
-  void *pvVar8;
+  int linkStatus;
+  unsigned char *stageSlot;
+  void *infoSink;
   
-  iVar6 = 1;
-  if (0 < param_3) {
-    iVar6 = ((int (*)())TGenericLinker__BuildSymbolTableList)(this,param_2,param_3);
-    if ((iVar6 == 1) && (iVar6 = ((int (*)())TGenericLinker__BuildProcessingComponents)((void **)this,(int)param_2), iVar6 == 1))
+  linkStatus = 1;
+  if (0 < numShaders) {
+    linkStatus = ((int (*)())TGenericLinker__BuildSymbolTableList)(this,shaderObjects,numShaders);
+    if ((linkStatus == 1) && (linkStatus = ((int (*)())TGenericLinker__BuildProcessingComponents)((void **)this,(int)shaderObjects), linkStatus == 1))
     {
       ((int (*)())TGenericLinker__RemoveExtraVertexOutputs)(this);
       ((int (*)())TGenericLinker__FixOutputReads)(this);
       allocateTextureUnitsForVaryingsResult = ((int (*)())TGenericLinker__AllocateTextureUnitsForVaryings)(this);
       if (allocateTextureUnitsForVaryingsResult == 0) {
-        iVar6 = 0;
+        linkStatus = 0;
       }
       if (1 < *(int *)(this + 0x80)) {
         ((int (*)())TGenericLinker__OptimizeFunctionIO)(this);
@@ -3850,164 +3860,164 @@ int TGenericLinker__link(this, param_2, param_3)
           ((int (*)())TGenericLinker__RemoveUnusedRegisters)(this);
         }
       }
-      pTVar7 = this;
+      stageSlot = this;
       do {
-        if (*(int *)(pTVar7 + 0x30) != 0) {
+        if (*(int *)(stageSlot + 0x30) != 0) {
           ((int (*)())TGenericLinker__CoalesceCommonUniforms)(this);
-          _PPStreamSortParamConstants(*(undefined4 *)(pTVar7 + 0x30));
-          _PPStreamPackIndices(*(undefined4 *)(pTVar7 + 0x30));
+          _PPStreamSortParamConstants(*(undefined4 *)(stageSlot + 0x30));
+          _PPStreamPackIndices(*(undefined4 *)(stageSlot + 0x30));
         }
-        pTVar7 = pTVar7 + 4;
-      } while ((int)pTVar7 <= (int)(this + 4));
+        stageSlot = stageSlot + 4;
+      } while ((int)stageSlot <= (int)(this + 4));
       if (allocateTextureUnitsForVaryingsResult != 0) {
         loopIndex = 0;
         do {
           if ((*(int *)(this + loopIndex * 4 + 0x30) != 0) &&
-             (iVar3 = _PPStreamResolveBranches(*(int *)(this + loopIndex * 4 + 0x30)), iVar3 != 0)) {
-            iVar6 = _strlen(DAT_a7b7bb1c);
-            iVar3 = _strlen((&_shaderString)[loopIndex]);
-            allocation = (char *)_malloc(iVar6 + iVar3 + 1);
+             (branchResolveResult = _PPStreamResolveBranches(*(int *)(this + loopIndex * 4 + 0x30)), branchResolveResult != 0)) {
+            formatLength = _strlen(DAT_a7b7bb1c);
+            shaderNameLength = _strlen((&_shaderString)[loopIndex]);
+            allocation = (char *)_malloc(formatLength + shaderNameLength + 1);
             _sprintf(allocation,DAT_a7b7bb1c,(&_shaderString)[loopIndex]);
-            pvVar8 = *(void **)(this + 0x84);
+            infoSink = *(void **)(this + 0x84);
                     
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,allocation);
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"\n");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,allocation);
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
             _free(allocation);
-            iVar6 = 0;
+            linkStatus = 0;
           }
           loopIndex = loopIndex + 1;
         } while (loopIndex < 2);
-        if (iVar6 == 1) {
+        if (linkStatus == 1) {
           collectClientAttributeBindingsResult = ((int (*)())TGenericLinker__CollectClientAttributeBindings)(this);
           if (collectClientAttributeBindingsResult == 0) {
-            iVar6 = 0;
+            linkStatus = 0;
           }
           collectAttributeBindingsResult = ((int (*)())TGenericLinker__CollectAttributeBindings)(this);
           if (collectAttributeBindingsResult == 0) {
-            iVar6 = 0;
+            linkStatus = 0;
           }
           collectUniformBindingsResult = ((int (*)())TGenericLinker__CollectUniformBindings)(this);
           if (collectUniformBindingsResult == 0) {
-            iVar6 = 0;
+            linkStatus = 0;
           }
           sizeActiveAttributes = BindingTable__GetSizeActiveAttributes(*(unsigned char **)(this + 4));
           if (0x10 < sizeActiveAttributes) {
-            iVar6 = _strlen(UNK_a7b7bae8);
-            allocation = (char *)_malloc(iVar6 + 0x11);
+            formatLength = _strlen(UNK_a7b7bae8);
+            allocation = (char *)_malloc(formatLength + 0x11);
             sizeActiveAttributes2 = BindingTable__GetSizeActiveAttributes(*(unsigned char **)(this + 4));
             _sprintf(allocation,UNK_a7b7bae8,0x10,sizeActiveAttributes2);
-            pvVar8 = *(void **)(this + 0x84);
+            infoSink = *(void **)(this + 0x84);
                     
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,allocation);
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"\n");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,allocation);
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
             _free(allocation);
-            iVar6 = 0;
+            linkStatus = 0;
           }
           sizeActiveVertexUniforms = BindingTable__GetSizeActiveVertexUniforms(*(unsigned char **)(this + 4));
           if (0x200 < sizeActiveVertexUniforms) {
-            iVar6 = _strlen(DAT_a7b7baec);
-            allocation = (char *)_malloc(iVar6 + 0x11);
+            formatLength = _strlen(DAT_a7b7baec);
+            allocation = (char *)_malloc(formatLength + 0x11);
             sizeActiveVertexUniforms2 = BindingTable__GetSizeActiveVertexUniforms(*(unsigned char **)(this + 4));
             _sprintf(allocation,DAT_a7b7baec,0x200,sizeActiveVertexUniforms2);
-            pvVar8 = *(void **)(this + 0x84);
+            infoSink = *(void **)(this + 0x84);
                     
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,allocation);
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"\n");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,allocation);
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
             _free(allocation);
-            iVar6 = 0;
+            linkStatus = 0;
           }
           sizeActiveFragmentUniforms = BindingTable__GetSizeActiveFragmentUniforms(*(unsigned char **)(this + 4));
           if (0x200 < sizeActiveFragmentUniforms) {
-            iVar6 = _strlen(DAT_a7b7baf0);
-            allocation = (char *)_malloc(iVar6 + 0x11);
+            formatLength = _strlen(DAT_a7b7baf0);
+            allocation = (char *)_malloc(formatLength + 0x11);
             sizeActiveFragmentUniforms2 = BindingTable__GetSizeActiveFragmentUniforms(*(unsigned char **)(this + 4));
             _sprintf(allocation,DAT_a7b7baf0,0x200,sizeActiveFragmentUniforms2);
-            pvVar8 = *(void **)(this + 0x84);
+            infoSink = *(void **)(this + 0x84);
                     
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,allocation);
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"\n");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,allocation);
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
             _free(allocation);
-            iVar6 = 0;
+            linkStatus = 0;
           }
           numActiveVertexSamplers = BindingTable__GetNumActiveVertexSamplers(*(unsigned char **)(this + 4));
           if (0 < numActiveVertexSamplers) {
-            iVar6 = _strlen(UNK_a7b7baf4);
-            allocation = (char *)_malloc(iVar6 + 0x11);
+            formatLength = _strlen(UNK_a7b7baf4);
+            allocation = (char *)_malloc(formatLength + 0x11);
             numActiveVertexSamplers2 = BindingTable__GetNumActiveVertexSamplers(*(unsigned char **)(this + 4));
             _sprintf(allocation,UNK_a7b7baf4,0,numActiveVertexSamplers2);
-            pvVar8 = *(void **)(this + 0x84);
+            infoSink = *(void **)(this + 0x84);
                     
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,allocation);
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"\n");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,allocation);
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
             _free(allocation);
-            iVar6 = 0;
+            linkStatus = 0;
           }
           numActiveFragmentSamplers = BindingTable__GetNumActiveFragmentSamplers(*(unsigned char **)(this + 4));
           if (0x10 < numActiveFragmentSamplers) {
-            iVar6 = _strlen(UNK_a7b7baf8);
-            allocation = (char *)_malloc(iVar6 + 0x11);
+            formatLength = _strlen(UNK_a7b7baf8);
+            allocation = (char *)_malloc(formatLength + 0x11);
             numActiveFragmentSamplers2 = BindingTable__GetNumActiveFragmentSamplers(*(unsigned char **)(this + 4));
             _sprintf(allocation,UNK_a7b7baf8,0x10,numActiveFragmentSamplers2);
-            pvVar8 = *(void **)(this + 0x84);
+            infoSink = *(void **)(this + 0x84);
                     
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,allocation);
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"\n");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,allocation);
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
             _free(allocation);
-            iVar6 = 0;
+            linkStatus = 0;
           }
           numActiveVertexSamplers = BindingTable__GetNumActiveVertexSamplers(*(unsigned char **)(this + 4));
           numActiveFragmentSamplers3 = BindingTable__GetNumActiveFragmentSamplers(*(unsigned char **)(this + 4));
           if (0x10 < numActiveVertexSamplers + numActiveFragmentSamplers3) {
-            iVar6 = _strlen(UNK_a7b7bafc);
-            allocation = (char *)_malloc(iVar6 + 0x11);
+            formatLength = _strlen(UNK_a7b7bafc);
+            allocation = (char *)_malloc(formatLength + 0x11);
             numActiveVertexSamplers3 = BindingTable__GetNumActiveVertexSamplers(*(unsigned char **)(this + 4));
             numActiveFragmentSamplers = BindingTable__GetNumActiveFragmentSamplers(*(unsigned char **)(this + 4));
             _sprintf(allocation,UNK_a7b7bafc,0x10,numActiveVertexSamplers3 + numActiveFragmentSamplers);
-            pvVar8 = *(void **)(this + 0x84);
+            infoSink = *(void **)(this + 0x84);
                     
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"ERROR: ");
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,allocation);
-            __ZN13TInfoSinkBase6appendEPKc(pvVar8,"\n");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,allocation);
+            __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
             _free(allocation);
-            iVar6 = 0;
+            linkStatus = 0;
           }
-          if (iVar6 == 1) {
+          if (linkStatus == 1) {
             remapVertexAttributesResult = ((int (*)())TGenericLinker__RemapVertexAttributes)(this);
             if (remapVertexAttributesResult == 0) {
-              iVar6 = 0;
+              linkStatus = 0;
             }
-            bVar1 = iVar6 == 1;
+            attribsRemapped = linkStatus == 1;
             buildUniformRemapTablesResult = ((int (*)())TGenericLinker__BuildUniformRemapTables)(this);
             if (buildUniformRemapTablesResult == 0) {
-              iVar6 = 0;
+              linkStatus = 0;
             }
-            if ((buildUniformRemapTablesResult != 0 && bVar1) && (3 < *(int *)(this + 0x80))) {
-              pTVar7 = this + 0x30;
-              iVar2 = 1;
+            if ((buildUniformRemapTablesResult != 0 && attribsRemapped) && (3 < *(int *)(this + 0x80))) {
+              streamSlot = this + 0x30;
+              stagesLeft = 1;
               do {
-                iVar3 = *(int *)pTVar7;
-                pTVar7 = pTVar7 + 4;
-                if (iVar3 != 0) {
-                  _glpPPShaderLinearizeStreamMgr(iVar3,0xfd);
+                ppStream = *(int *)streamSlot;
+                streamSlot = streamSlot + 4;
+                if (ppStream != 0) {
+                  _glpPPShaderLinearizeStreamMgr(ppStream,0xfd);
                 }
-                iVar2 = iVar2 + -1;
-              } while (-1 < iVar2);
+                stagesLeft = stagesLeft + -1;
+              } while (-1 < stagesLeft);
             }
           }
         }
       }
     }
-    if (iVar6 == 0) {
+    if (linkStatus == 0) {
       reset(this);
     }
   }
-  return iVar6;
+  return linkStatus;
 }
 
 /* TGenericLinker__getStatsString @ 0x97bb9098 (104 bytes) */
@@ -4015,99 +4025,99 @@ int TGenericLinker__getStatsString(this)
   unsigned char * this;
 {
   int length;
-  int iVar1;
+  int statsString;
   undefined4 allocation;
   
-  iVar1 = *(int *)(this + 0x50);
-  if (iVar1 == 0) {
+  statsString = *(int *)(this + 0x50);
+  if (statsString == 0) {
     length = _strlen(DAT_a7b7bb5c);
     allocation = _malloc(length * 4 + 4);
     *(undefined4 *)(this + 0x50) = allocation;
     _strcpy(allocation,DAT_a7b7bb5c);
-    iVar1 = *(int *)(this + 0x50);
+    statsString = *(int *)(this + 0x50);
   }
-  return iVar1;
+  return statsString;
 }
 
 /* TGenericLinker__getPPStreamString @ 0x97bb9100 (604 bytes) */
 int TGenericLinker__getPPStreamString(this)
   unsigned char * this;
 {
-  bool bVar1;
-  int iVar2;
+  bool noFragmentText;
+  int totalLength;
   undefined4 allocation;
   int length;
   char *allocation2;
-  void *pvVar6;
-  void *pvVar7;
-  int local_30 [5];
+  void *vertexText;
+  void *fragmentText;
+  int streamSize [5];
   
-  pvVar6 = (void *)0x0;
-  pvVar7 = (void *)0x0;
+  vertexText = (void *)0x0;
+  fragmentText = (void *)0x0;
   if (*(int *)(this + 0x54) != 0) {
     _free(*(int *)(this + 0x54));
   }
   *(undefined4 *)(this + 0x54) = 0;
-  iVar2 = _strlen(DAT_a7b7bb4c);
+  totalLength = _strlen(DAT_a7b7bb4c);
   if (*(int *)(this + 0x30) == 0) {
     length = _strlen(DAT_a7b7bb58);
-    pvVar6 = (void *)_malloc(length + 1);
-    _strcpy(pvVar6,DAT_a7b7bb58);
+    vertexText = (void *)_malloc(length + 1);
+    _strcpy(vertexText,DAT_a7b7bb58);
   }
   else {
-    _PPStreamGetStream(*(int *)(this + 0x30),0,local_30);
-    if (local_30[0] != 0) {
-      allocation = _malloc(local_30[0] * 8 + 0xfU & 0xfffffff0);
-      _PPStreamGetStream(*(undefined4 *)(this + 0x30),allocation,local_30);
-      pvVar6 = _glpPPDisassemble(allocation);
+    _PPStreamGetStream(*(int *)(this + 0x30),0,streamSize);
+    if (streamSize[0] != 0) {
+      allocation = _malloc(streamSize[0] * 8 + 0xfU & 0xfffffff0);
+      _PPStreamGetStream(*(undefined4 *)(this + 0x30),allocation,streamSize);
+      vertexText = _glpPPDisassemble(allocation);
       _free(allocation);
     }
   }
-  if (pvVar6 != (void *)0x0) {
-    length = _strlen(pvVar6);
-    iVar2 = iVar2 + length;
+  if (vertexText != (void *)0x0) {
+    length = _strlen(vertexText);
+    totalLength = totalLength + length;
   }
   length = _strlen(DAT_a7b7bb48);
-  iVar2 = iVar2 + length;
+  totalLength = totalLength + length;
   if (*(int *)(this + 0x34) == 0) {
     length = _strlen(DAT_a7b7bb58);
-    pvVar7 = (void *)_malloc(length + 1);
-    _strcpy(pvVar7,DAT_a7b7bb58);
+    fragmentText = (void *)_malloc(length + 1);
+    _strcpy(fragmentText,DAT_a7b7bb58);
   }
   else {
-    _PPStreamGetStream(*(int *)(this + 0x34),0,local_30);
-    if (local_30[0] != 0) {
-      allocation = _malloc(local_30[0] * 8 + 0xfU & 0xfffffff0);
-      _PPStreamGetStream(*(undefined4 *)(this + 0x34),allocation,local_30);
-      pvVar7 = _glpPPDisassemble(allocation);
+    _PPStreamGetStream(*(int *)(this + 0x34),0,streamSize);
+    if (streamSize[0] != 0) {
+      allocation = _malloc(streamSize[0] * 8 + 0xfU & 0xfffffff0);
+      _PPStreamGetStream(*(undefined4 *)(this + 0x34),allocation,streamSize);
+      fragmentText = _glpPPDisassemble(allocation);
       _free(allocation);
     }
   }
-  bVar1 = pvVar7 == (void *)0x0;
-  if (!bVar1) {
-    length = _strlen(pvVar7);
-    iVar2 = iVar2 + length;
+  noFragmentText = fragmentText == (void *)0x0;
+  if (!noFragmentText) {
+    length = _strlen(fragmentText);
+    totalLength = totalLength + length;
   }
-  allocation2 = (char *)_malloc(iVar2 + 8);
+  allocation2 = (char *)_malloc(totalLength + 8);
   *(char **)(this + 0x54) = allocation2;
   _sprintf(allocation2,"%s\n",DAT_a7b7bb4c);
-  if (pvVar6 == (void *)0x0) {
+  if (vertexText == (void *)0x0) {
     _sprintf(*(char **)(this + 0x54),"%s\n\n%s\n",*(char **)(this + 0x54),DAT_a7b7bb48);
   }
   else {
-    _sprintf(*(char **)(this + 0x54),"%s%s\n\n%s\n",*(char **)(this + 0x54),pvVar6,DAT_a7b7bb48);
+    _sprintf(*(char **)(this + 0x54),"%s%s\n\n%s\n",*(char **)(this + 0x54),vertexText,DAT_a7b7bb48);
   }
-  if (bVar1) {
+  if (noFragmentText) {
     _sprintf(*(char **)(this + 0x54),"%s\n",*(char **)(this + 0x54));
   }
   else {
-    _sprintf(*(char **)(this + 0x54),"%s%s\n",*(char **)(this + 0x54),pvVar7);
+    _sprintf(*(char **)(this + 0x54),"%s%s\n",*(char **)(this + 0x54),fragmentText);
   }
-  if (pvVar6 != (void *)0x0) {
-    _free(pvVar6);
+  if (vertexText != (void *)0x0) {
+    _free(vertexText);
   }
-  if (!bVar1) {
-    _free(pvVar7);
+  if (!noFragmentText) {
+    _free(fragmentText);
   }
   return *(undefined4 *)(this + 0x54);
 }
@@ -4119,102 +4129,102 @@ int TGenericLinker__getShaderToProgramString(this)
   int length3;
   int length2;
   int length;
-  bool bVar1;
-  int iVar2;
+  bool noFragmentText;
+  int totalLength;
   undefined4 allocation;
   int glpPPShaderLinearizeResult;
   char *allocation2;
-  int iVar6;
-  int iVar7;
-  int local_30 [4];
+  int vertexText;
+  int fragmentText;
+  int streamSize [4];
   
-  iVar6 = 0;
-  iVar7 = 0;
+  vertexText = 0;
+  fragmentText = 0;
   if (*(int *)(this + 0x58) != 0) {
     _free(*(int *)(this + 0x58));
   }
   *(undefined4 *)(this + 0x58) = 0;
-  iVar2 = _strlen(DAT_a7b7bb54);
+  totalLength = _strlen(DAT_a7b7bb54);
   if (*(int *)(this + 0x30) == 0) {
     length2 = _strlen(DAT_a7b7bb58);
-    iVar6 = _malloc(length2 + 1);
-    _strcpy(iVar6,DAT_a7b7bb58);
+    vertexText = _malloc(length2 + 1);
+    _strcpy(vertexText,DAT_a7b7bb58);
   }
   else {
-    _PPStreamGetStream(*(int *)(this + 0x30),0,local_30);
-    if (local_30[0] != 0) {
-      allocation = _malloc(local_30[0] * 8 + 0xfU & 0xfffffff0);
-      _PPStreamGetStream(*(undefined4 *)(this + 0x30),allocation,local_30);
+    _PPStreamGetStream(*(int *)(this + 0x30),0,streamSize);
+    if (streamSize[0] != 0) {
+      allocation = _malloc(streamSize[0] * 8 + 0xfU & 0xfffffff0);
+      _PPStreamGetStream(*(undefined4 *)(this + 0x30),allocation,streamSize);
       if (*(int *)(this + 0x80) < 4) {
-        iVar6 = _glpPPShaderToProgramString(allocation,0,0);
+        vertexText = _glpPPShaderToProgramString(allocation,0,0);
       }
       else {
         glpPPShaderLinearizeResult = _glpPPShaderLinearize(allocation,0xff);
-        iVar6 = 0;
+        vertexText = 0;
         if (glpPPShaderLinearizeResult != 0) {
-          iVar6 = _glpPPShaderToProgramString(glpPPShaderLinearizeResult,0,0);
+          vertexText = _glpPPShaderToProgramString(glpPPShaderLinearizeResult,0,0);
           _glpFreePPShaderLinearize(glpPPShaderLinearizeResult);
         }
       }
       _free(allocation);
     }
   }
-  if (iVar6 != 0) {
-    length = _strlen(iVar6);
-    iVar2 = iVar2 + length;
+  if (vertexText != 0) {
+    length = _strlen(vertexText);
+    totalLength = totalLength + length;
   }
   length = _strlen(DAT_a7b7bb50);
-  iVar2 = iVar2 + length;
+  totalLength = totalLength + length;
   if (*(int *)(this + 0x34) == 0) {
     length3 = _strlen(DAT_a7b7bb58);
-    iVar7 = _malloc(length3 + 1);
-    _strcpy(iVar7,DAT_a7b7bb58);
+    fragmentText = _malloc(length3 + 1);
+    _strcpy(fragmentText,DAT_a7b7bb58);
   }
   else {
-    _PPStreamGetStream(*(int *)(this + 0x34),0,local_30);
-    if (local_30[0] != 0) {
-      allocation = _malloc(local_30[0] * 8 + 0xfU & 0xfffffff0);
-      _PPStreamGetStream(*(undefined4 *)(this + 0x34),allocation,local_30);
+    _PPStreamGetStream(*(int *)(this + 0x34),0,streamSize);
+    if (streamSize[0] != 0) {
+      allocation = _malloc(streamSize[0] * 8 + 0xfU & 0xfffffff0);
+      _PPStreamGetStream(*(undefined4 *)(this + 0x34),allocation,streamSize);
       if (*(int *)(this + 0x80) < 4) {
-        iVar7 = _glpPPShaderToProgramString(allocation,0,0);
+        fragmentText = _glpPPShaderToProgramString(allocation,0,0);
       }
       else {
         glpPPShaderLinearizeResult = _glpPPShaderLinearize(allocation,0xff);
-        iVar7 = 0;
+        fragmentText = 0;
         if (glpPPShaderLinearizeResult != 0) {
-          iVar7 = _glpPPShaderToProgramString(glpPPShaderLinearizeResult,0,0);
+          fragmentText = _glpPPShaderToProgramString(glpPPShaderLinearizeResult,0,0);
           _glpFreePPShaderLinearize(glpPPShaderLinearizeResult);
         }
       }
       _free(allocation);
     }
   }
-  bVar1 = iVar7 == 0;
-  if (!bVar1) {
-    length = _strlen(iVar7);
-    iVar2 = iVar2 + length;
+  noFragmentText = fragmentText == 0;
+  if (!noFragmentText) {
+    length = _strlen(fragmentText);
+    totalLength = totalLength + length;
   }
-  allocation2 = (char *)_malloc(iVar2 + 8);
+  allocation2 = (char *)_malloc(totalLength + 8);
   *(char **)(this + 0x58) = allocation2;
   _sprintf(allocation2,"%s\n",DAT_a7b7bb54);
-  if (iVar6 == 0) {
+  if (vertexText == 0) {
     _sprintf(*(char **)(this + 0x58),"%s\n\n",*(char **)(this + 0x58));
   }
   else {
-    _sprintf(*(char **)(this + 0x58),"%s%s\n\n",*(char **)(this + 0x58),iVar6);
+    _sprintf(*(char **)(this + 0x58),"%s%s\n\n",*(char **)(this + 0x58),vertexText);
   }
   _sprintf(*(char **)(this + 0x58),"%s%s\n",*(char **)(this + 0x58),DAT_a7b7bb50);
-  if (bVar1) {
+  if (noFragmentText) {
     _sprintf(*(char **)(this + 0x58),"%s\n",*(char **)(this + 0x58));
   }
   else {
-    _sprintf(*(char **)(this + 0x58),"%s%s\n",*(char **)(this + 0x58),iVar7);
+    _sprintf(*(char **)(this + 0x58),"%s%s\n",*(char **)(this + 0x58),fragmentText);
   }
-  if (iVar6 != 0) {
-    _free(iVar6);
+  if (vertexText != 0) {
+    _free(vertexText);
   }
-  if (!bVar1) {
-    _free(iVar7);
+  if (!noFragmentText) {
+    _free(fragmentText);
   }
   return *(undefined4 *)(this + 0x58);
 }
@@ -4223,14 +4233,14 @@ int TGenericLinker__getShaderToProgramString(this)
 int TGenericLinker__getTableString(this)
   unsigned char * this;
 {
-  int iVar1;
+  int tableString;
   
-  iVar1 = *(int *)(this + 0x5c);
-  if (iVar1 == 0) {
-    iVar1 = ((int (*)())TGenericLinker__GetFullTableString)(this);
-    *(int *)(this + 0x5c) = iVar1;
+  tableString = *(int *)(this + 0x5c);
+  if (tableString == 0) {
+    tableString = ((int (*)())TGenericLinker__GetFullTableString)(this);
+    *(int *)(this + 0x5c) = tableString;
   }
-  return iVar1;
+  return tableString;
 }
 
 /* GetGLStringForType @ 0x97bb96a0 (168 bytes) */
@@ -4412,122 +4422,124 @@ int GetScalerWidthForType(glType)
 int getOpenGLTypeFromTType(type)
   unsigned char * type;
 {
-  int iVar1;
-  uint uVar2;
+  int nominalSize;
+  int isMatrix;
+  int isArray;
+  uint basicType;
   undefined4 r4In0;
-  undefined4 in_r5;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 uVar3;
+  undefined4 r5Fwd;
+  undefined4 r6Fwd;
+  undefined4 r7Fwd;
+  undefined4 r8Fwd;
+  undefined4 glType;
   
-  uVar3 = 0x1400;
-  iVar1 = (**(code **)(*(int *)type + 0x38))(type);
-  if (iVar1 == 0) {
-    uVar2 = (**(code **)(*(int *)type + 0x20))(type);
-    if (uVar2 < 0x10) {
-      switch(uVar2) {
+  glType = 0x1400;
+  isArray = (**(code **)(*(int *)type + 0x38))(type);
+  if (isArray == 0) {
+    basicType = (**(code **)(*(int *)type + 0x20))(type);
+    if (basicType < 0x10) {
+      switch(basicType) {
       case 1:
-        iVar1 = (**(code **)(*(int *)type + 0x34))(type,r4In0,in_r5,in_r6,in_r7,in_r8,uVar2 * 4);
-        if (iVar1 == 0) {
-          iVar1 = (**(code **)(*(int *)type + 0x2c))(type);
-          if (iVar1 == 2) {
-            uVar3 = 0x8b50;
+        isMatrix = (**(code **)(*(int *)type + 0x34))(type,r4In0,r5Fwd,r6Fwd,r7Fwd,r8Fwd,basicType * 4);
+        if (isMatrix == 0) {
+          nominalSize = (**(code **)(*(int *)type + 0x2c))(type);
+          if (nominalSize == 2) {
+            glType = 0x8b50;
           }
-          else if (iVar1 < 3) {
-            if (iVar1 == 1) {
-              uVar3 = 0x1406;
+          else if (nominalSize < 3) {
+            if (nominalSize == 1) {
+              glType = 0x1406;
             }
           }
-          else if (iVar1 == 3) {
-            uVar3 = 0x8b51;
+          else if (nominalSize == 3) {
+            glType = 0x8b51;
           }
-          else if (iVar1 == 4) {
-            uVar3 = 0x8b52;
+          else if (nominalSize == 4) {
+            glType = 0x8b52;
           }
         }
         else {
-          iVar1 = (**(code **)(*(int *)type + 0x2c))(type);
-          if (iVar1 == 3) {
-            uVar3 = 0x8b5b;
+          nominalSize = (**(code **)(*(int *)type + 0x2c))(type);
+          if (nominalSize == 3) {
+            glType = 0x8b5b;
           }
-          else if (iVar1 < 4) {
-            if (iVar1 == 2) {
-              uVar3 = 0x8b5a;
+          else if (nominalSize < 4) {
+            if (nominalSize == 2) {
+              glType = 0x8b5a;
             }
           }
-          else if (iVar1 == 4) {
-            uVar3 = 0x8b5c;
+          else if (nominalSize == 4) {
+            glType = 0x8b5c;
           }
         }
         break;
       case 2:
-        iVar1 = (**(code **)(*(int *)type + 0x2c))(type);
-        if (iVar1 == 2) {
-          uVar3 = 0x8b53;
+        nominalSize = (**(code **)(*(int *)type + 0x2c))(type);
+        if (nominalSize == 2) {
+          glType = 0x8b53;
         }
-        else if (iVar1 < 3) {
-          if (iVar1 == 1) {
-            uVar3 = 0x1404;
+        else if (nominalSize < 3) {
+          if (nominalSize == 1) {
+            glType = 0x1404;
           }
         }
-        else if (iVar1 == 3) {
-          uVar3 = 0x8b54;
+        else if (nominalSize == 3) {
+          glType = 0x8b54;
         }
-        else if (iVar1 == 4) {
-          uVar3 = 0x8b55;
+        else if (nominalSize == 4) {
+          glType = 0x8b55;
         }
         break;
       case 3:
-        iVar1 = (**(code **)(*(int *)type + 0x2c))(type);
-        if (iVar1 == 2) {
-          uVar3 = 0x8b57;
+        nominalSize = (**(code **)(*(int *)type + 0x2c))(type);
+        if (nominalSize == 2) {
+          glType = 0x8b57;
         }
-        else if (iVar1 < 3) {
-          if (iVar1 == 1) {
-            uVar3 = 0x8b56;
+        else if (nominalSize < 3) {
+          if (nominalSize == 1) {
+            glType = 0x8b56;
           }
         }
-        else if (iVar1 == 3) {
-          uVar3 = 0x8b58;
+        else if (nominalSize == 3) {
+          glType = 0x8b58;
         }
-        else if (iVar1 == 4) {
-          uVar3 = 0x8b59;
+        else if (nominalSize == 4) {
+          glType = 0x8b59;
         }
         break;
       case 5:
-        uVar3 = 0x8b5d;
+        glType = 0x8b5d;
         break;
       case 6:
-        uVar3 = 0x8b5e;
+        glType = 0x8b5e;
         break;
       case 7:
-        uVar3 = 0x8b5f;
+        glType = 0x8b5f;
         break;
       case 8:
-        uVar3 = 0x8b60;
+        glType = 0x8b60;
         break;
       case 9:
-        uVar3 = 0x8b61;
+        glType = 0x8b61;
         break;
       case 10:
-        uVar3 = 0x8b62;
+        glType = 0x8b62;
         break;
       case 0xb:
-        uVar3 = 0x8b63;
+        glType = 0x8b63;
         break;
       case 0xc:
-        uVar3 = 0x8b64;
+        glType = 0x8b64;
         break;
       case 0xe:
-        uVar3 = 0x7ffe;
+        glType = 0x7ffe;
       }
     }
   }
   else {
-    uVar3 = 0x7fff;
+    glType = 0x7fff;
   }
-  return uVar3;
+  return glType;
 }
 
 /* __ZN20AddressTempAllocatorC2Ev @ 0x97bb9d04 (4 bytes) */

@@ -1,0 +1,119 @@
+use	getOpenGLTypeFromTType	iVar1	isArray	CONFIRMED	TType vtable +0x38 (isArray): an array type is reported as the 0x7fff marker	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\ \+\ 0x38\)\)\(param_1\);$	+2
+use	getOpenGLTypeFromTType	iVar1	isMatrix	CONFIRMED	TType vtable +0x34 (isMatrix)	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\ \+\ 0x34\)\)\(param_1,a1,in_r5,in_r6,in_r7,in_r8,uVar2\ \*\ 4\);$	+2
+use	getOpenGLTypeFromTType	iVar1	nominalSize	CONFIRMED	TType vtable +0x2c (getNominalSize): 1..4 selects scalar/vec2/vec3/vec4	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\ \+\ 0x2c\)\)\(param_1\);$	+2
+use	getOpenGLTypeFromTType	iVar1	nominalSize	CONFIRMED	TType vtable +0x2c (getNominalSize): 1..4 selects scalar/vec2/vec3/vec4	^\s*else\ if\ \(iVar1\ <\ 3\)\ \{$	+2
+use	getOpenGLTypeFromTType	iVar1	nominalSize	CONFIRMED	TType vtable +0x2c (getNominalSize): 1..4 selects scalar/vec2/vec3/vec4	^\s*else\ if\ \(iVar1\ ==\ 3\)\ \{$	+1
+use	getOpenGLTypeFromTType	iVar1	nominalSize	CONFIRMED	TType vtable +0x2c (getNominalSize): 1..4 selects scalar/vec2/vec3/vec4	^\s*else\ if\ \(iVar1\ ==\ 4\)\ \{$	+1
+use	getOpenGLTypeFromTType	iVar1	nominalSize	CONFIRMED	getNominalSize for a matrix: 2..4 selects mat2/mat3/mat4	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\ \+\ 0x2c\)\)\(param_1\);$@2	+2
+use	getOpenGLTypeFromTType	iVar1	nominalSize	CONFIRMED	getNominalSize for a matrix: 2..4 selects mat2/mat3/mat4	^\s*else\ if\ \(iVar1\ <\ 4\)\ \{$	+2
+use	getOpenGLTypeFromTType	iVar1	nominalSize	CONFIRMED	getNominalSize for a matrix: 2..4 selects mat2/mat3/mat4	^\s*else\ if\ \(iVar1\ ==\ 4\)\ \{$@2	+1
+use	getOpenGLTypeFromTType	iVar1	nominalSize	CONFIRMED	getNominalSize for an int vector	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\ \+\ 0x2c\)\)\(param_1\);$@3	+2
+use	getOpenGLTypeFromTType	iVar1	nominalSize	CONFIRMED	getNominalSize for an int vector	^\s*else\ if\ \(iVar1\ <\ 3\)\ \{$@2	+2
+use	getOpenGLTypeFromTType	iVar1	nominalSize	CONFIRMED	getNominalSize for an int vector	^\s*else\ if\ \(iVar1\ ==\ 3\)\ \{$@2	+1
+use	getOpenGLTypeFromTType	iVar1	nominalSize	CONFIRMED	getNominalSize for an int vector	^\s*else\ if\ \(iVar1\ ==\ 4\)\ \{$@3	+1
+use	getOpenGLTypeFromTType	iVar1	nominalSize	CONFIRMED	getNominalSize for a bool vector	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\ \+\ 0x2c\)\)\(param_1\);$@4	+2
+use	getOpenGLTypeFromTType	iVar1	nominalSize	CONFIRMED	getNominalSize for a bool vector	^\s*else\ if\ \(iVar1\ <\ 3\)\ \{$@3	+2
+use	getOpenGLTypeFromTType	iVar1	nominalSize	CONFIRMED	getNominalSize for a bool vector	^\s*else\ if\ \(iVar1\ ==\ 3\)\ \{$@3	+1
+use	getOpenGLTypeFromTType	iVar1	nominalSize	CONFIRMED	getNominalSize for a bool vector	^\s*else\ if\ \(iVar1\ ==\ 4\)\ \{$@4	+1
+local	getOpenGLTypeFromTType	uVar2	basicType	CONFIRMED	TType vtable +0x20 (getBasicType): 1 float, 2 int, 3 bool, 5..12 sampler/other basic types
+local	getOpenGLTypeFromTType	uVar3	glType	CONFIRMED	GL type enum returned (0x1406 GL_FLOAT, 0x8b50 GL_FLOAT_VEC2, ..., 0x7ffe/0x7fff markers; 0x1400 = no type)
+local	getOpenGLTypeFromTType	in_r5	r5Fwd	INFERRED	stray r5 passed through to the isMatrix virtual call (Ghidra register pass-through)
+local	getOpenGLTypeFromTType	in_r6	r6Fwd	INFERRED	stray r6 passed through to the isMatrix virtual call
+local	getOpenGLTypeFromTType	in_r7	r7Fwd	INFERRED	stray r7 passed through to the isMatrix virtual call
+local	getOpenGLTypeFromTType	in_r8	r8Fwd	INFERRED	stray r8 passed through to the isMatrix virtual call
+local	std__terminate	p_Var1	threadTerminateHandler	CONFIRMED	per-thread terminate handler from __keymgr_get_per_thread_data(4); replaces the global handler when set
+local	__cxxabiv1____unexpected	p_Var1	threadUnexpectedHandler	CONFIRMED	per-thread unexpected handler from __keymgr_get_per_thread_data(3)
+local	std__unexpected	p_Var1	threadUnexpectedHandler	CONFIRMED	per-thread unexpected handler from __keymgr_get_per_thread_data(3)
+local	TGenericLinker__RenumberLabels	param_3	oldLabel	CONFIRMED	operation index (chunk +0xc) to replace
+local	TGenericLinker__RenumberLabels	param_4	newLabel	CONFIRMED	operation index written into every chunk whose +0xc equals oldLabel
+local	__ZN14TGenericLinkerC2Ei	param_2	debugOptions	INFERRED	constructor argument stored at this+0x7c (3Dlabs TLinker dOptions)
+local	__ZN14TGenericLinkerC1Ei	param_2	debugOptions	INFERRED	constructor argument stored at this+0x7c (3Dlabs TLinker dOptions)
+local	__ZN14TGenericLinkerC4Ei	param_2	debugOptions	INFERRED	constructor argument stored at this+0x7c (3Dlabs TLinker dOptions)
+local	__ZN14TGenericLinkerC2Ei	puVar1	emptyRep	CONFIRMED	shared empty std::string _Rep (_S_empty_rep_storage) whose data pointer (+0xc) initialises both info-sink strings
+local	__ZN14TGenericLinkerC1Ei	puVar1	emptyRep	CONFIRMED	shared empty std::string _Rep (_S_empty_rep_storage) whose data pointer (+0xc) initialises both info-sink strings
+local	__ZN14TGenericLinkerC4Ei	puVar1	emptyRep	CONFIRMED	shared empty std::string _Rep (_S_empty_rep_storage) whose data pointer (+0xc) initialises both info-sink strings
+local	__ZN14TGenericLinkerC2Ei	piVar2	emptyRepRefCount	CONFIRMED	reference count of the empty rep (+8), incremented once per string that shares it
+local	__ZN14TGenericLinkerC1Ei	piVar2	emptyRepRefCount	CONFIRMED	reference count of the empty rep (+8), incremented once per string that shares it
+local	__ZN14TGenericLinkerC4Ei	piVar2	emptyRepRefCount	CONFIRMED	reference count of the empty rep (+8), incremented once per string that shares it
+local	__ZN14TGenericLinkerC2Ei	this_00	bindingTable	CONFIRMED	pool-less new BindingTable(0x80) stored at this+4
+local	__ZN14TGenericLinkerC1Ei	this_00	bindingTable	CONFIRMED	pool-less new BindingTable(0x80) stored at this+4
+local	__ZN14TGenericLinkerC4Ei	this_00	bindingTable	CONFIRMED	pool-less new BindingTable(0x80) stored at this+4
+local	__ZN14TGenericLinkerC2Ei	iVar4	lastStageSlot	INFERRED	address of the last per-stage slot (this+4); bounds the loop that zeroes the two stages' arrays
+local	__ZN14TGenericLinkerC1Ei	iVar4	lastStageSlot	INFERRED	address of the last per-stage slot (this+4); bounds the loop that zeroes the two stages' arrays
+local	__ZN14TGenericLinkerC4Ei	iVar4	lastStageSlot	INFERRED	address of the last per-stage slot (this+4); bounds the loop that zeroes the two stages' arrays
+local	__ZN14TGenericLinkerD4Ev	piVar5	infoSinkData	CONFIRMED	the info sink allocated in the constructor (two strings at +0 and +8)
+local	__ZN14TGenericLinkerD4Ev	this_00	bindingTable	CONFIRMED	BindingTable at this+4, destroyed and deleted
+local	__ZN14TGenericLinkerD4Ev	auStack_30	allocScratch	INFERRED	empty allocator temporary passed to _Rep::_M_destroy
+local	TGenericLinker__attributeBindingRequest	param_2	location	CONFIRMED	attribute location requested by glBindAttribLocation
+local	TGenericLinker__attributeBindingRequest	this_00	binding	CONFIRMED	newly allocated Binding (0x38 bytes) for the request
+local	TGenericLinker__getActiveUniform	param_2	index	CONFIRMED	uniform index passed to FindUniformBindingByIndex
+local	TGenericLinker__getActiveUniform	param_3	bufSize	CONFIRMED	size of the caller's name buffer
+local	TGenericLinker__getActiveUniform	param_4	lengthOut	CONFIRMED	optional: characters written to the name buffer (excluding NUL)
+local	TGenericLinker__getActiveUniform	param_5	sizeOut	CONFIRMED	optional: uniform's active size
+local	TGenericLinker__getActiveUniform	param_6	typeOut	CONFIRMED	optional: uniform's OpenGL type enum
+local	TGenericLinker__getActiveUniform	this_00	binding	CONFIRMED	the uniform's Binding (name at +8)
+local	TGenericLinker__getActiveUniform	uVar1	found	CONFIRMED	1 when a binding exists at the index, else 0
+local	TGenericLinker__getActiveUniform	uVar3	glType	CONFIRMED	Binding__GetOpenGLType result
+local	TGenericLinker__getUniformTypeInfo	param_2	location	CONFIRMED	uniform location queried
+local	TGenericLinker__getUniformTypeInfo	param_3	remainingSizeOut	CONFIRMED	optional: array elements left from this location to the end of the uniform
+local	TGenericLinker__getUniformTypeInfo	param_4	typeOut	CONFIRMED	optional: OpenGL type enum
+local	TGenericLinker__getUniformTypeInfo	param_5	flagsOut	INFERRED	optional: two flag bytes copied from binding +0x34/+0x35
+local	TGenericLinker__getUniformTypeInfo	this_00	binding	CONFIRMED	the uniform's Binding found by location
+local	TGenericLinker__getUniformTypeInfo	uVar1	found	CONFIRMED	1 when a binding exists at the location, else 0
+local	TGenericLinker__getUniformTypeInfo	iVar2	activeSize	CONFIRMED	Binding__GetActualSize
+local	TGenericLinker__getUniformTypeInfo	iVar3	bindingLocation	CONFIRMED	Binding__GetLocation: first location of the uniform
+local	TGenericLinker__getUniformTypeInfo	uVar4	elementSlots	CONFIRMED	Binding__GetBindingBasicSize: location slots per array element
+local	TGenericLinker__getUniformTypeInfo	uVar5	glType	CONFIRMED	Binding__GetOpenGLType result
+local	TGenericLinker__getActiveAttrib	param_2	index	CONFIRMED	attribute index passed to GetAttribBindingByIndex
+local	TGenericLinker__getActiveAttrib	param_3	bufSize	CONFIRMED	size of the caller's name buffer
+local	TGenericLinker__getActiveAttrib	param_4	lengthOut	CONFIRMED	optional: name length (binding +0x10)
+local	TGenericLinker__getActiveAttrib	param_5	sizeOut	CONFIRMED	optional: attribute's active size
+local	TGenericLinker__getActiveAttrib	param_6	typeOut	CONFIRMED	optional: attribute's OpenGL type enum
+local	TGenericLinker__getActiveAttrib	this_00	binding	CONFIRMED	the attribute's Binding (name at +8)
+local	TGenericLinker__getActiveAttrib	uVar1	found	CONFIRMED	1 when a binding exists at the index, else 0
+local	TGenericLinker__getActiveAttrib	lVar2	activeSize	CONFIRMED	Binding__GetActualSize
+local	TGenericLinker__getActiveAttrib	uVar3	glType	CONFIRMED	Binding__GetOpenGLType result
+local	TGenericLinker__getStatsString	iVar1	statsString	CONFIRMED	cached stats string (this+0x50), built on first use
+local	TGenericLinker__getTableString	iVar1	tableString	CONFIRMED	cached table string (this+0x5c), built on first use
+use	TGenericLinker__getActiveUniform	lVar2	nameLength	CONFIRMED	strlen of the copied name	^\s*lVar2\ =\ _strlen\(param_7\);$	+2
+use	TGenericLinker__getActiveUniform	lVar2	activeSize	CONFIRMED	Binding__GetActualSize	^\s*lVar2\ =\ Binding__GetActualSize\(this_00\);$	+2
+use	__ZN14TGenericLinkerD4Ev	iVar4	secondData	CONFIRMED	character data of the info sink's second string (+8)	^\s*iVar4\ =\ piVar5\[2\];$	+2
+use	__ZN14TGenericLinkerD4Ev	iVar4	secondData	CONFIRMED	character data of the info sink's second string (+8)	^\s*__ZNSs4_Rep10_M_destroyERKSaIcE\(\(unsigned\ char\ \*\)\(iVar4\ \+\ \-0xc\),auStack_30\);$	+1
+use	__ZN14TGenericLinkerD4Ev	iVar4	firstData	CONFIRMED	character data of the info sink's first string (+0)	^\s*iVar4\ =\ \*piVar5;$	+2
+use	__ZN14TGenericLinkerD4Ev	iVar4	firstData	CONFIRMED	character data of the info sink's first string (+0)	^\s*__ZNSs4_Rep10_M_destroyERKSaIcE\(\(unsigned\ char\ \*\)\(iVar4\ \+\ \-0xc\),auStack_30\);$@2	+1
+local	TGenericLinker__AddAttribBinding	this	binding	CONFIRMED	the new Binding (operator new 0x38) for the attribute
+local	TGenericLinker__AddAttribBinding	param_1	linker	CONFIRMED	the TGenericLinker (this+4 = BindingTable, this+0x84 = info sink)
+local	TGenericLinker__AddAttribBinding	param_3	glType	CONFIRMED	OpenGL type enum stored with Binding__SetOpenGLType (halfword)
+local	TGenericLinker__AddAttribBinding	param_4	isBuiltIn	CONFIRMED	stored with Binding__SetBuiltIn: 1 for gl_ built-in attributes
+local	TGenericLinker__AddAttribBinding	uVar2	locationZeroName	CONFIRMED	name of the attribute already bound at location 0, quoted in the link error
+local	TGenericLinker__AddAttribBinding	iVar3	nameLength	CONFIRMED	strlen of locationZeroName
+local	TGenericLinker__AddAttribBinding	pvVar5	infoSink	CONFIRMED	the linker's info sink (this+0x84)
+local	TGenericLinker__CollectAttributeBindings	pPVar1	parseSymbol	CONFIRMED	symbol being scanned (kind 2 = vertex-side attribute chunk)
+local	TGenericLinker__CollectAttributeBindings	uVar2	glType	CONFIRMED	symbol's OpenGL type (symbol +0x2c) for the generic (non-matrix) pass
+local	TGenericLinker__InsertUniformBindingFromSymbol	param_3	isFragment	CONFIRMED	stage flag forwarded to BindingTable__InsertSingleUniform / InsertUniformArray / AddSingleUniformReference
+local	TGenericLinker__InsertUniformBindingFromSymbol	this_00	binding	CONFIRMED	the new Binding (operator new 0x38) for the uniform
+local	TGenericLinker__InsertUniformBindingFromSymbol	this_01	infoSink	CONFIRMED	the linker's info sink (this+0x84)
+local	TGenericLinker__InsertUniformBindingFromSymbol	pBVar1	existingBinding	CONFIRMED	binding of the same name already in the uniform table, or null
+local	TGenericLinker__InsertUniformBindingFromSymbol	iVar2	formatLength	CONFIRMED	strlen of the error format string
+local	TGenericLinker__InsertUniformBindingFromSymbol	iVar3	nameLength	CONFIRMED	strlen of the uniform name
+local	TGenericLinker__InsertUniformBindingFromSymbol	pcVar4	message	CONFIRMED	malloc'd error text
+local	TGenericLinker__BuildProcessingComponents	param_2	unusedArg	INFERRED	extra argument Ghidra recovered; never read
+local	TGenericLinker__BuildProcessingComponents	pPVar2	symbolTableCopy	CONFIRMED	copy of the single compiler object's symbol table (ParseSymbolTable__CopySymbolTable)
+local	TGenericLinker__BuildProcessingComponents	uVar3	success	CONFIRMED	1 unless a stage fails to build
+local	TGenericLinker__BuildProcessingComponents	iVar4	stage	CONFIRMED	0 = vertex, 1 = fragment
+local	TGenericLinker__BuildProcessingComponents	ppvVar5	stageSlots	CONFIRMED	this + stage*4: base of the stage's slot arrays (+0x20 object count, +0x38 FunctionTable, +0x30 PP stream, +0x28 symbol table)
+use	TGenericLinker__AddAttribBinding	iVar1	existingBinding	CONFIRMED	BindingTable__FindAttribBinding: an attribute of this name is already bound (duplicate, new Binding discarded)	^\s*iVar1\ =\ BindingTable__FindAttribBinding\(\*\(unsigned\ char\ \*\*\)\(param_1\ \+\ 4\),this\);$	+2
+use	TGenericLinker__AddAttribBinding	iVar1	insertResult	CONFIRMED	BindingTable__InsertAttribBinding result: 0 = location conflict	^\s*iVar1\ =\ BindingTable__InsertAttribBinding\(\*\(unsigned\ char\ \*\*\)\(param_1\ \+\ 4\),this\);$	+3
+use	TGenericLinker__AddAttribBinding	iVar1	formatLength	CONFIRMED	strlen of the link-error format string	^\s*iVar1\ =\ _strlen\(_linkErrorString\);$	+1
+use	TGenericLinker__AddAttribBinding	iVar1	formatLength	CONFIRMED	strlen of the link-error format string	^\s*pcVar4\ =\ \(char\ \*\)_malloc\(iVar1\ \+\ iVar3\ \+\ 1\);$	+1
+use	TGenericLinker__AddAttribBinding	pcVar4	errorText	CONFIRMED	static internal-error message text	^\s*pcVar4\ =\ DAT_a7b7bb84;$	+1
+use	TGenericLinker__AddAttribBinding	pcVar4	errorText	CONFIRMED	static internal-error message text	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar5,pcVar4\);$	+1
+use	TGenericLinker__AddAttribBinding	pcVar4	message	CONFIRMED	malloc-ed formatted link error	^\s*pcVar4\ =\ \(char\ \*\)_malloc\(iVar1\ \+\ iVar3\ \+\ 1\);$	+2
+use	TGenericLinker__AddAttribBinding	pcVar4	message	CONFIRMED	malloc-ed formatted link error	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar5,pcVar4\);$@2	+1
+use	TGenericLinker__AddAttribBinding	pcVar4	message	CONFIRMED	malloc-ed formatted link error	^\s*_free\(pcVar4\);$	+1
+use	TGenericLinker__InsertUniformBindingFromSymbol	uVar5	success	CONFIRMED	return value: 1, or 0 when the Binding allocation failed	^\s*uVar5\ =\ 1;$	+1
+use	TGenericLinker__InsertUniformBindingFromSymbol	uVar5	success	CONFIRMED	return value: 1, or 0 when the Binding allocation failed	^\s*uVar5\ =\ 0;$	+1
+use	TGenericLinker__InsertUniformBindingFromSymbol	uVar5	success	CONFIRMED	return value: 1, or 0 when the Binding allocation failed	^\s*return\ uVar5;$	+1
+use	TGenericLinker__InsertUniformBindingFromSymbol	uVar5	uniformName	CONFIRMED	uniform name (symbol +0x14) quoted in the internal-error message	^\s*uVar5\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x14\);$	+1
+use	TGenericLinker__InsertUniformBindingFromSymbol	uVar5	uniformName	CONFIRMED	uniform name (symbol +0x14) quoted in the internal-error message	^\s*iVar3\ =\ _strlen\(uVar5\);$	+1
+use	TGenericLinker__InsertUniformBindingFromSymbol	uVar5	uniformName	CONFIRMED	uniform name (symbol +0x14) quoted in the internal-error message	^\s*_sprintf\(pcVar4,DAT_a7b7bb7c,uVar5\);$	+1

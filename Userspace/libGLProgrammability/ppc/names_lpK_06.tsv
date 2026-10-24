@@ -1,0 +1,56 @@
+local	TGenericLinker__reset	pvVar1	stageObject	CONFIRMED	per-stage ParseSymbolTable or FunctionTable being destroyed and freed
+local	TGenericLinker__reset	pTVar2	stageSlot	CONFIRMED	this + stage*4: cursor over the two stages' slot arrays (one pass per array family)
+local	TGenericLinker__link	param_2	shaderObjects	CONFIRMED	array of the shader (compiler) objects to link
+local	TGenericLinker__link	param_3	numShaders	CONFIRMED	number of shader objects
+local	TGenericLinker__link	bVar1	attribsRemapped	CONFIRMED	link status was still OK after RemapVertexAttributes
+local	TGenericLinker__link	pvVar8	infoSink	CONFIRMED	the linker's info sink (this+0x84)
+local	TGenericLinker__getPPStreamString	bVar1	noFragmentText	CONFIRMED	the fragment disassembly is null (the empty-string placeholder is printed instead)
+local	TGenericLinker__getPPStreamString	iVar2	totalLength	CONFIRMED	running byte count of the combined string
+local	TGenericLinker__getPPStreamString	pvVar6	vertexText	CONFIRMED	disassembly of the vertex PP stream (this+0x30)
+local	TGenericLinker__getPPStreamString	pvVar7	fragmentText	CONFIRMED	disassembly of the fragment PP stream (this+0x34)
+local	TGenericLinker__getPPStreamString	local_30	streamSize	CONFIRMED	out parameter of _PPStreamGetStream: [0] = instruction count (8 bytes each)
+local	TGenericLinker__getShaderToProgramString	bVar1	noFragmentText	CONFIRMED	the fragment program text is null (the empty-string placeholder is printed instead)
+local	TGenericLinker__getShaderToProgramString	iVar2	totalLength	CONFIRMED	running byte count of the combined string
+local	TGenericLinker__getShaderToProgramString	iVar6	vertexText	CONFIRMED	program text of the vertex PP stream (this+0x30)
+local	TGenericLinker__getShaderToProgramString	iVar7	fragmentText	CONFIRMED	program text of the fragment PP stream (this+0x34)
+local	TGenericLinker__getShaderToProgramString	local_30	streamSize	CONFIRMED	out parameter of _PPStreamGetStream: [0] = instruction count (8 bytes each)
+use	TGenericLinker__link	iVar3	branchResolveResult	CONFIRMED	_PPStreamResolveBranches result: nonzero = unresolved branch, link error	^\s*\(iVar3\ =\ _PPStreamResolveBranches\(\*\(int\ \*\)\(this\ \+\ iVar2\ \*\ 4\ \+\ 0x30\)\),\ iVar3\ !=\ 0\)\)\ \{$	+1
+use	TGenericLinker__link	iVar3	shaderNameLength	CONFIRMED	strlen of the stage name (_shaderString[stage]) for the error text	^\s*iVar3\ =\ _strlen\(\(\&_shaderString\)\[iVar2\]\);$	+2
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*iVar6\ =\ 1;$	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)TGenericLinker__BuildSymbolTableList\)\(this,param_2,param_3\);$	+2
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*iVar6\ =\ 0;$	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*iVar6\ =\ 0;$@2	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*if\ \(iVar6\ ==\ 1\)\ \{$	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*iVar6\ =\ 0;$@3	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*iVar6\ =\ 0;$@4	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*iVar6\ =\ 0;$@5	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*iVar6\ =\ 0;$@6	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*iVar6\ =\ 0;$@7	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*iVar6\ =\ 0;$@8	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*iVar6\ =\ 0;$@9	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*iVar6\ =\ 0;$@10	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*iVar6\ =\ 0;$@11	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*if\ \(iVar6\ ==\ 1\)\ \{$@2	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*iVar6\ =\ 0;$@12	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*bVar1\ =\ iVar6\ ==\ 1;$	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*iVar6\ =\ 0;$@13	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*if\ \(iVar6\ ==\ 0\)\ \{$	+1
+use	TGenericLinker__link	iVar6	linkStatus	CONFIRMED	1 while the link is OK, 0 once any stage failed (reset runs when it is 0)	^\s*return\ iVar6;$	+1
+use	TGenericLinker__link	iVar6	formatLength	CONFIRMED	strlen of the error format string	^\s*iVar6\ =\ _strlen\(DAT_a7b7bb1c\);$	+1
+use	TGenericLinker__link	iVar6	formatLength	CONFIRMED	strlen of the error format string	^\s*pcVar4\ =\ \(char\ \*\)_malloc\(iVar6\ \+\ iVar3\ \+\ 1\);$	+1
+use	TGenericLinker__link	iVar6	formatLength	CONFIRMED	strlen of the error format string	^\s*iVar6\ =\ _strlen\(UNK_a7b7bae8\);$	+2
+use	TGenericLinker__link	iVar6	formatLength	CONFIRMED	strlen of the error format string	^\s*iVar6\ =\ _strlen\(DAT_a7b7baec\);$	+2
+use	TGenericLinker__link	iVar6	formatLength	CONFIRMED	strlen of the error format string	^\s*iVar6\ =\ _strlen\(DAT_a7b7baf0\);$	+2
+use	TGenericLinker__link	iVar6	formatLength	CONFIRMED	strlen of the error format string	^\s*iVar6\ =\ _strlen\(UNK_a7b7baf4\);$	+2
+use	TGenericLinker__link	iVar6	formatLength	CONFIRMED	strlen of the error format string	^\s*iVar6\ =\ _strlen\(UNK_a7b7baf8\);$	+2
+use	TGenericLinker__link	iVar6	formatLength	CONFIRMED	strlen of the error format string	^\s*iVar6\ =\ _strlen\(UNK_a7b7bafc\);$	+2
+use	TGenericLinker__link	iVar2	stagesLeft	CONFIRMED	countdown over the two per-stage PP stream slots	^\s*iVar2\ =\ 1;$	+1
+use	TGenericLinker__link	iVar2	stagesLeft	CONFIRMED	countdown over the two per-stage PP stream slots	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+use	TGenericLinker__link	iVar3	ppStream	CONFIRMED	PP stream pointer read from the stage slot (+0x30)	^\s*iVar3\ =\ \*\(int\ \*\)pTVar7;$	+1
+use	TGenericLinker__link	iVar3	ppStream	CONFIRMED	PP stream pointer read from the stage slot (+0x30)	^\s*if\ \(iVar3\ !=\ 0\)\ \{$	+2
+use	TGenericLinker__link	pTVar7	stageSlot	CONFIRMED	this + stage*4: cursor over the two stages	^\s*pTVar7\ =\ this;$	+1
+use	TGenericLinker__link	pTVar7	stageSlot	CONFIRMED	this + stage*4: cursor over the two stages	^\s*if\ \(\*\(int\ \*\)\(pTVar7\ \+\ 0x30\)\ !=\ 0\)\ \{$	+1
+use	TGenericLinker__link	pTVar7	stageSlot	CONFIRMED	this + stage*4: cursor over the two stages	^\s*_PPStreamSortParamConstants\(\*\(undefined4\ \*\)\(pTVar7\ \+\ 0x30\)\);$	+2
+use	TGenericLinker__link	pTVar7	stageSlot	CONFIRMED	this + stage*4: cursor over the two stages	^\s*pTVar7\ =\ pTVar7\ \+\ 4;$	+2
+use	TGenericLinker__link	pTVar7	streamSlot	CONFIRMED	cursor over the per-stage PP stream pointers starting at this+0x30	^\s*pTVar7\ =\ this\ \+\ 0x30;$	+1
+use	TGenericLinker__link	pTVar7	streamSlot	CONFIRMED	cursor over the per-stage PP stream pointers starting at this+0x30	^\s*iVar3\ =\ \*\(int\ \*\)pTVar7;$	+2

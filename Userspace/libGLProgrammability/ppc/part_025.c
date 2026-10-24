@@ -1239,11 +1239,11 @@ int __cxxabiv1____terminate(handler)
 /* std__terminate @ 0x97c19e0c (56 bytes) */
 int std__terminate()
 {
-  unsigned char * p_Var1;
+  unsigned char * threadTerminateHandler;
   
-  p_Var1 = (unsigned char *)__keymgr_get_per_thread_data(4);
-  if (p_Var1 != (unsigned char *)0x0) {
-    __cxxabiv1____terminate_handler = p_Var1;
+  threadTerminateHandler = (unsigned char *)__keymgr_get_per_thread_data(4);
+  if (threadTerminateHandler != (unsigned char *)0x0) {
+    __cxxabiv1____terminate_handler = threadTerminateHandler;
   }
                     
   ((int (*)())__cxxabiv1____terminate)(__cxxabiv1____terminate_handler);
@@ -1253,15 +1253,15 @@ int std__terminate()
 int __cxxabiv1____unexpected(handler)
   unsigned char * handler;
 {
-  unsigned char * p_Var1;
+  unsigned char * threadUnexpectedHandler;
   undefined4 newTerminateHandler;
   int oldTerminateHandler;
   
   ((int (*)())handler)(handler);
   ((int (*)())std__terminate)();
-  p_Var1 = (unsigned char *)__keymgr_get_per_thread_data(3);
-  if (p_Var1 != (unsigned char *)0x0) {
-    __unexpected_handler = p_Var1;
+  threadUnexpectedHandler = (unsigned char *)__keymgr_get_per_thread_data(3);
+  if (threadUnexpectedHandler != (unsigned char *)0x0) {
+    __unexpected_handler = threadUnexpectedHandler;
   }
   newTerminateHandler = ((int (*)())__cxxabiv1____unexpected)(__unexpected_handler);
   oldTerminateHandler = __keymgr_get_per_thread_data(4);
@@ -1276,13 +1276,13 @@ int __cxxabiv1____unexpected(handler)
 /* std__unexpected @ 0x97c19e60 (56 bytes) */
 int std__unexpected()
 {
-  unsigned char * p_Var1;
+  unsigned char * threadUnexpectedHandler;
   undefined4 newTerminateHandler;
   int oldTerminateHandler;
   
-  p_Var1 = (unsigned char *)__keymgr_get_per_thread_data(3);
-  if (p_Var1 != (unsigned char *)0x0) {
-    __cxxabiv1____unexpected_handler = p_Var1;
+  threadUnexpectedHandler = (unsigned char *)__keymgr_get_per_thread_data(3);
+  if (threadUnexpectedHandler != (unsigned char *)0x0) {
+    __cxxabiv1____unexpected_handler = threadUnexpectedHandler;
   }
   newTerminateHandler = ((int (*)())__cxxabiv1____unexpected)(__cxxabiv1____unexpected_handler);
   oldTerminateHandler = __keymgr_get_per_thread_data(4);
