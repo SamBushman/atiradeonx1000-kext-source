@@ -4234,76 +4234,76 @@ int TGenericLinker__getTableString(this)
 }
 
 /* GetGLStringForType @ 0x97bb96a0 (168 bytes) */
-int GetGLStringForType(param_1)
-  int param_1;
+int GetGLStringForType(glType)
+  int glType;
 {
-  if (param_1 == 0x1404) {
+  if (glType == 0x1404) {
     return _glTypeNameStrings;
   }
-  if (param_1 == 0x1406) {
+  if (glType == 0x1406) {
     return DAT_a7b7bc28;
   }
-  if ((param_1 + 0x74b0U & 0xffff) < 0x15) {
-    return *(undefined4 *)(param_1 * 4 + -0x584a7114);
+  if ((glType + 0x74b0U & 0xffff) < 0x15) {
+    return *(undefined4 *)(glType * 4 + -0x584a7114);
   }
-  if (param_1 == 0x7ffe) {
+  if (glType == 0x7ffe) {
     return DAT_a7b7bc80;
   }
-  if (param_1 == 0x7fff) {
+  if (glType == 0x7fff) {
     return DAT_a7b7bc84;
   }
   return DAT_a7b7bc88;
 }
 
 /* GetShaderStringForType @ 0x97bb9748 (168 bytes) */
-int GetShaderStringForType(param_1)
-  int param_1;
+int GetShaderStringForType(glType)
+  int glType;
 {
-  if (param_1 == 0x1404) {
+  if (glType == 0x1404) {
     return _shaderTypeNameStrings;
   }
-  if (param_1 == 0x1406) {
+  if (glType == 0x1406) {
     return DAT_a7b7bc90;
   }
-  if ((param_1 + 0x74b0U & 0xffff) < 0x15) {
-    return *(undefined4 *)(param_1 * 4 + -0x584a70ac);
+  if ((glType + 0x74b0U & 0xffff) < 0x15) {
+    return *(undefined4 *)(glType * 4 + -0x584a70ac);
   }
-  if (param_1 == 0x7ffe) {
+  if (glType == 0x7ffe) {
     return DAT_a7b7bce8;
   }
-  if (param_1 == 0x7fff) {
+  if (glType == 0x7fff) {
     return DAT_a7b7bcec;
   }
   return DAT_a7b7bcf0;
 }
 
 /* GetVec4sForType @ 0x97bb97f0 (136 bytes) */
-int GetVec4sForType(param_1)
-  int param_1;
+int GetVec4sForType(glType)
+  int glType;
 {
-  if (param_1 == 0x8b5a) {
+  if (glType == 0x8b5a) {
     return 2;
   }
-  if (param_1 < 0x8b5b) {
-    if (param_1 != 0x1406) {
-      if (param_1 < 0x1407) {
-        if (param_1 != 0x1404) {
+  if (glType < 0x8b5b) {
+    if (glType != 0x1406) {
+      if (glType < 0x1407) {
+        if (glType != 0x1404) {
           return 0;
         }
       }
-      else if (param_1 < 0x8b50) {
+      else if (glType < 0x8b50) {
         return 0;
       }
     }
   }
   else {
-    if (param_1 == 0x8b5c) {
+    if (glType == 0x8b5c) {
       return 4;
     }
-    if (param_1 < 0x8b5c) {
+    if (glType < 0x8b5c) {
       return 3;
     }
-    if (0x8b64 < param_1) {
+    if (0x8b64 < glType) {
       return 0;
     }
   }
@@ -4311,33 +4311,33 @@ int GetVec4sForType(param_1)
 }
 
 /* GetPPStreamTypeForGLType @ 0x97bb9878 (164 bytes) */
-int GetPPStreamTypeForGLType(param_1)
-  int param_1;
+int GetPPStreamTypeForGLType(glType)
+  int glType;
 {
-  if (param_1 < 0x8b56) {
-    if (param_1 < 0x8b53) {
-      if (param_1 == 0x1406) {
+  if (glType < 0x8b56) {
+    if (glType < 0x8b53) {
+      if (glType == 0x1406) {
         return 1;
       }
-      if (param_1 < 0x1407) {
-        if (param_1 == 0x1404) {
+      if (glType < 0x1407) {
+        if (glType == 0x1404) {
           return 3;
         }
       }
-      else if (0x8b4f < param_1) {
+      else if (0x8b4f < glType) {
         return 1;
       }
       return 0;
     }
   }
   else {
-    if (param_1 < 0x8b5d) {
-      if (0x8b59 < param_1) {
+    if (glType < 0x8b5d) {
+      if (0x8b59 < glType) {
         return 1;
       }
       return 4;
     }
-    if (0x8b64 < param_1) {
+    if (0x8b64 < glType) {
       return 0;
     }
   }
@@ -4345,30 +4345,30 @@ int GetPPStreamTypeForGLType(param_1)
 }
 
 /* GetScalerWidthForType @ 0x97bb991c (260 bytes) */
-int GetScalerWidthForType(param_1)
-  int param_1;
+int GetScalerWidthForType(glType)
+  int glType;
 {
-  if (param_1 == 0x8b56) {
+  if (glType == 0x8b56) {
     return 1;
   }
-  if (0x8b56 < param_1) {
-    if (param_1 == 0x8b5a) {
+  if (0x8b56 < glType) {
+    if (glType == 0x8b5a) {
       return 2;
     }
-    if (param_1 < 0x8b5b) {
-      if (param_1 != 0x8b58) {
-        if (param_1 < 0x8b59) {
+    if (glType < 0x8b5b) {
+      if (glType != 0x8b58) {
+        if (glType < 0x8b59) {
           return 2;
         }
         return 4;
       }
     }
     else {
-      if (param_1 == 0x8b5c) {
+      if (glType == 0x8b5c) {
         return 4;
       }
-      if (0x8b5b < param_1) {
-        if (param_1 < 0x8b65) {
+      if (0x8b5b < glType) {
+        if (glType < 0x8b65) {
           return 1;
         }
         return 0;
@@ -4376,33 +4376,33 @@ int GetScalerWidthForType(param_1)
     }
     return 3;
   }
-  if (param_1 == 0x8b51) {
+  if (glType == 0x8b51) {
     return 3;
   }
-  if (param_1 < 0x8b52) {
-    if (param_1 == 0x1406) {
+  if (glType < 0x8b52) {
+    if (glType == 0x1406) {
       return 1;
     }
-    if (param_1 < 0x1407) {
-      if (param_1 == 0x1404) {
+    if (glType < 0x1407) {
+      if (glType == 0x1404) {
         return 1;
       }
     }
-    else if (param_1 == 0x8b50) {
+    else if (glType == 0x8b50) {
       return 2;
     }
     return 0;
   }
-  if (param_1 == 0x8b53) {
+  if (glType == 0x8b53) {
     return 2;
   }
-  if (param_1 < 0x8b53) {
+  if (glType < 0x8b53) {
     return 4;
   }
-  if (param_1 == 0x8b54) {
+  if (glType == 0x8b54) {
     return 3;
   }
-  if (param_1 == 0x8b55) {
+  if (glType == 0x8b55) {
     return 4;
   }
   return 0;
@@ -4650,11 +4650,11 @@ LAB_97bb9e58:
 }
 
 /* AddressTempAllocator__releaseTemporary @ 0x97bb9e78 (20 bytes) */
-int AddressTempAllocator__releaseTemporary(this, param_2)
+int AddressTempAllocator__releaseTemporary(this, tempIndex)
   unsigned char * this;
-  uint param_2;
+  uint tempIndex;
 {
-  *(undefined4 *)(param_2 * 4 + *(int *)this) = 0;
+  *(undefined4 *)(tempIndex * 4 + *(int *)this) = 0;
   return;
 }
 
@@ -4662,15 +4662,15 @@ int AddressTempAllocator__releaseTemporary(this, param_2)
 int __ZN18TemporaryAllocatorC2Ev(this)
   void *this;
 {
-  int iVar1;
+  int slotsLeft;
   
-  iVar1 = 0x19;
+  slotsLeft = 0x19;
   do {
     *(undefined4 *)this = 0;
     *(undefined4 *)((int)this + 100) = 0;
     this = (void *)((int)this + 4);
-    iVar1 = iVar1 + -1;
-  } while (iVar1 != 0);
+    slotsLeft = slotsLeft + -1;
+  } while (slotsLeft != 0);
   return;
 }
 

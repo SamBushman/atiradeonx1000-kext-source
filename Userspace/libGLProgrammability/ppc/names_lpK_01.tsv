@@ -1,5 +1,3 @@
-local	__ZN9__gnu_cxxeqIPcSsEEbRKNS_17__normal_iteratorIT_T0_EES7_	this	lhs	CONFIRMED	free function operator==(const __normal_iterator&, const __normal_iterator&): left operand (it is not a member, so no this)
-local	__ZN9__gnu_cxxeqIPKcSsEEbRKNS_17__normal_iteratorIT_T0_EES8_	this	lhs	CONFIRMED	free function operator==(const __normal_iterator&, const __normal_iterator&): left operand (it is not a member, so no this)
 local	__ZN9__gnu_cxxeqIPcSsEEbRKNS_17__normal_iteratorIT_T0_EES7_	param_2	rhs	CONFIRMED	right operand iterator
 local	__ZN9__gnu_cxxeqIPKcSsEEbRKNS_17__normal_iteratorIT_T0_EES8_	param_2	rhs	CONFIRMED	right operand iterator
 local	__ZNSsC2IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE	param_2	first	CONFIRMED	basic_string(InputIt first, InputIt last, const Alloc&): range start forwarded to _S_construct
@@ -22,7 +20,6 @@ local	__ZdlPv	param_1	block	CONFIRMED	operator delete(void*): freed unless null
 local	__ZdlPv	uVar1	result	INFERRED	0, or r3 as left by free (Ghidra return pass-through)
 local	__ZNKSaIcE7addressERc	param_2	ref	CONFIRMED	allocator::address(reference): returned unchanged
 local	__ZNSaIcE9constructEPcRKc	param_2	slot	CONFIRMED	allocator::construct(pointer p, const char& value): destination (null-checked placement new)
-local	__ZNSaIcE9constructEPcRKc	str	value	CONFIRMED	the const char& copied into the slot (a single char, not a string)
 local	__ZdaPv	param_1	block	CONFIRMED	operator delete[](void*) forwards to operator delete
 local	__ZdaPv	uVar1	result	INFERRED	return value of operator delete
 local	operator_new__	param_1	byteCount	CONFIRMED	operator new[](size_t) forwards to operator new
@@ -38,10 +35,8 @@ local	__ZNSt10bad_typeidD4Ev	param_2	deleteFlag	CONFIRMED	in-charge deleting fla
 local	__ZN10__cxxabiv117__class_type_infoD4Ev	param_2	deleteFlag	CONFIRMED	in-charge deleting flag
 local	__ZN10__cxxabiv120__si_class_type_infoD4Ev	param_2	deleteFlag	CONFIRMED	in-charge deleting flag
 local	__ZN10__cxxabiv121__vmi_class_type_infoD4Ev	param_2	deleteFlag	CONFIRMED	in-charge deleting flag
-local	__ZNKSt9type_infoeqERKS_	type_info	other	CONFIRMED	type_info::operator==(const type_info&): the other object (compared by address, then by mangled name at +4)
 local	__ZNKSt9type_infoeqERKS_	iVar1	nameCompare	CONFIRMED	strcmp of the two mangled-name strings (this+4 / other+4)
 local	__ZNKSt9type_infoeqERKS_	uVar2	equal	CONFIRMED	1 when same object or same name, else 0
-local	__ZNKSt9type_info10__do_catchEPKS_PPvj	type_info	thrType	CONFIRMED	__do_catch(const type_info* thr_type, void** thr_obj, unsigned outer): thrown type, compared with == (Ghidra mistyped it void**)
 local	__ZNKSt9type_info10__do_catchEPKS_PPvj	param_3	outer	INFERRED	pointer-nesting level (unused by the base class)
 local	__ZNKSt9type_info11__do_upcastEPKN10__cxxabiv117__class_type_infoEPPv	param_2	target	INFERRED	__do_upcast(const class_type_info* target, void** obj_ptr): ignored, the base type_info never upcasts (returns 0)
 local	___cxa_call_unexpected_97c19d00	alStack_40	lsdaHeader	CONFIRMED	lsda_header_info filled by parse_lsda_header and read by check_exception_spec

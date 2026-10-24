@@ -1,100 +1,102 @@
 #include "decls.h"
 
 /* std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert @ 0x97c30ec8 (356 bytes) */
-int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert(this, _Rb_tree_node_base1, _Rb_tree_node_base2, pair, text)
-  unsigned char * this;
-  unsigned char * _Rb_tree_node_base1;
-  unsigned char * _Rb_tree_node_base2;
-  int pair;
-  unsigned char * text;
+int std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_insert(resultIter, tree, hintX, parentNode, value)
+  unsigned char * resultIter;
+  unsigned char * tree;
+  unsigned char * hintX;
+  int parentNode;
+  unsigned char * value;
 {
-  int iVar1;
-  unsigned char * p_Var2;
-  uint *puVar3;
-  uint uVar4;
-  uint uVar5;
-  uint local_30;
-  uint local_2c [4];
+  int keyCompare;
+  int headerNode;
+  unsigned char * newNode;
+  uint *minLengthPtr;
+  uint nodeKeyLength;
+  uint keyLength;
+  uint keyLengthCopy;
+  uint nodeKeyLengthCopy [4];
   
-  if ((pair == *(int *)(_Rb_tree_node_base1 + 4)) || (_Rb_tree_node_base2 != (unsigned char *)0x0)) {
+  if ((parentNode == *(int *)(tree + 4)) || (hintX != (unsigned char *)0x0)) {
 LAB_97c30f44:
-    p_Var2 = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)_Rb_tree_node_base1,0x1c);
-    if (p_Var2 + 0x10 != (unsigned char *)0x0) {
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(p_Var2 + 0x10,text);
-      *(undefined4 *)(p_Var2 + 0x18) = *(undefined4 *)(text + 8);
+    newNode = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)tree,0x1c);
+    if (newNode + 0x10 != (unsigned char *)0x0) {
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(newNode + 0x10,value);
+      *(undefined4 *)(newNode + 0x18) = *(undefined4 *)(value + 8);
     }
-    *(unsigned char **)(pair + 8) = p_Var2;
-    iVar1 = *(int *)(_Rb_tree_node_base1 + 4);
-    if (pair != iVar1) {
-      if (pair == *(int *)(iVar1 + 8)) {
-        *(unsigned char **)(iVar1 + 8) = p_Var2;
+    *(unsigned char **)(parentNode + 8) = newNode;
+    headerNode = *(int *)(tree + 4);
+    if (parentNode != headerNode) {
+      if (parentNode == *(int *)(headerNode + 8)) {
+        *(unsigned char **)(headerNode + 8) = newNode;
       }
       goto LAB_97c30fe4;
     }
-    *(unsigned char **)(pair + 4) = p_Var2;
-    iVar1 = *(int *)(_Rb_tree_node_base1 + 4);
+    *(unsigned char **)(parentNode + 4) = newNode;
+    headerNode = *(int *)(tree + 4);
   }
   else {
-    puVar3 = local_2c;
-    uVar5 = *(uint *)(*(int *)(text + 4) + -0xc);
-    local_30 = uVar5;
-    uVar4 = *(uint *)((int)*(void **)(pair + 0x14) + -0xc);
-    local_2c[0] = uVar4;
-    if (uVar5 <= uVar4) {
-      puVar3 = &local_30;
+    minLengthPtr = nodeKeyLengthCopy;
+    keyLength = *(uint *)(*(int *)(value + 4) + -0xc);
+    keyLengthCopy = keyLength;
+    nodeKeyLength = *(uint *)((int)*(void **)(parentNode + 0x14) + -0xc);
+    nodeKeyLengthCopy[0] = nodeKeyLength;
+    if (keyLength <= nodeKeyLength) {
+      minLengthPtr = &keyLengthCopy;
     }
-    iVar1 = _memcmp(*(void **)(text + 4),*(void **)(pair + 0x14),*puVar3);
-    if (iVar1 == 0) {
-      iVar1 = uVar5 - uVar4;
+    keyCompare = _memcmp(*(void **)(value + 4),*(void **)(parentNode + 0x14),*minLengthPtr);
+    if (keyCompare == 0) {
+      keyCompare = keyLength - nodeKeyLength;
     }
-    if (iVar1 < 0) goto LAB_97c30f44;
-    p_Var2 = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)_Rb_tree_node_base1,0x1c);
-    if (p_Var2 + 0x10 != (unsigned char *)0x0) {
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(p_Var2 + 0x10,text);
-      *(undefined4 *)(p_Var2 + 0x18) = *(undefined4 *)(text + 8);
+    if (keyCompare < 0) goto LAB_97c30f44;
+    newNode = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)tree,0x1c);
+    if (newNode + 0x10 != (unsigned char *)0x0) {
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(newNode + 0x10,value);
+      *(undefined4 *)(newNode + 0x18) = *(undefined4 *)(value + 8);
     }
-    *(unsigned char **)(pair + 0xc) = p_Var2;
-    iVar1 = *(int *)(_Rb_tree_node_base1 + 4);
-    if (pair != *(int *)(iVar1 + 0xc)) goto LAB_97c30fe4;
+    *(unsigned char **)(parentNode + 0xc) = newNode;
+    headerNode = *(int *)(tree + 4);
+    if (parentNode != *(int *)(headerNode + 0xc)) goto LAB_97c30fe4;
   }
-  *(unsigned char **)(iVar1 + 0xc) = p_Var2;
+  *(unsigned char **)(headerNode + 0xc) = newNode;
 LAB_97c30fe4:
-  *(int *)(p_Var2 + 4) = pair;
-  *(undefined4 *)(p_Var2 + 0xc) = 0;
-  *(undefined4 *)(p_Var2 + 8) = 0;
-  ((int (*)())std___Rb_tree_rebalance)(p_Var2,(unsigned char **)(*(int *)(_Rb_tree_node_base1 + 4) + 4));
-  *(int *)(_Rb_tree_node_base1 + 8) = *(int *)(_Rb_tree_node_base1 + 8) + 1;
-  *(unsigned char **)this = p_Var2;
-  return this;
+  *(int *)(newNode + 4) = parentNode;
+  *(undefined4 *)(newNode + 0xc) = 0;
+  *(undefined4 *)(newNode + 8) = 0;
+  ((int (*)())std___Rb_tree_rebalance)(newNode,(unsigned char **)(*(int *)(tree + 4) + 4));
+  *(int *)(tree + 8) = *(int *)(tree + 8) + 1;
+  *(unsigned char **)resultIter = newNode;
+  return resultIter;
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_ @ 0x97c3102c (172 bytes) */
-int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_(this, param_2)
-  ulong this;
-  unsigned char * param_2;
+int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_(capacity, alloc)
+  ulong capacity;
+  unsigned char * alloc;
 {
-  uint uVar1;
+  uint padding;
+  uint sizeEstimate;
   undefined4 *allocation;
-  ulong uVar3;
+  ulong allocSize;
   
-  if (0x3ffffffc < this) {
+  if (0x3ffffffc < capacity) {
     std____throw_length_error("basic_string::_S_create");
   }
-  uVar1 = this + 0x1d;
-  uVar3 = this + 0xd;
-  if (uVar1 < 0x1001) {
-    if (uVar3 < 0x81) goto LAB_97c310a4;
-    uVar1 = 0x80 - (uVar1 & 0x7f) & 0x7f;
+  sizeEstimate = capacity + 0x1d;
+  allocSize = capacity + 0xd;
+  if (sizeEstimate < 0x1001) {
+    if (allocSize < 0x81) goto LAB_97c310a4;
+    padding = 0x80 - (sizeEstimate & 0x7f) & 0x7f;
   }
   else {
-    uVar1 = 0x1000 - (uVar1 & 0xfff) & 0xfff;
+    padding = 0x1000 - (sizeEstimate & 0xfff) & 0xfff;
   }
-  this = this + uVar1;
-  uVar3 = this + 0xd;
+  capacity = capacity + padding;
+  allocSize = capacity + 0xd;
 LAB_97c310a4:
-  allocation = (undefined4 *)TPoolAllocator__allocate(*(unsigned char **)param_2,uVar3);
+  allocation = (undefined4 *)TPoolAllocator__allocate(*(unsigned char **)alloc,allocSize);
   *allocation = 0;
-  allocation[1] = this;
+  allocation[1] = capacity;
   allocation[2] = 0;
   return allocation;
 }
@@ -103,96 +105,100 @@ LAB_97c310a4:
 int std___Rb_tree_base_iterator___M_decrement(this)
   unsigned char * this;
 {
-  int iVar1;
-  int iVar2;
-  int *piVar3;
+  int parentNode;
+  int rightChild;
+  int predecessor;
+  int *node;
   
-  piVar3 = *(int **)this;
-  if ((*piVar3 == 0) && (*(int **)(piVar3[1] + 4) == piVar3)) {
-    *(int *)this = piVar3[3];
+  node = *(int **)this;
+  if ((*node == 0) && (*(int **)(node[1] + 4) == node)) {
+    *(int *)this = node[3];
     return;
   }
-  iVar2 = piVar3[2];
-  if (iVar2 == 0) {
-    iVar2 = piVar3[1];
-    if (piVar3 == *(int **)(iVar2 + 8)) {
+  predecessor = node[2];
+  if (predecessor == 0) {
+    parentNode = node[1];
+    if (node == *(int **)(parentNode + 8)) {
       do {
-        *(int *)this = iVar2;
-        iVar2 = *(int *)(iVar2 + 4);
-      } while (*(int *)this == *(int *)(iVar2 + 8));
+        *(int *)this = parentNode;
+        parentNode = *(int *)(parentNode + 4);
+      } while (*(int *)this == *(int *)(parentNode + 8));
     }
-    *(int *)this = iVar2;
+    *(int *)this = parentNode;
     return;
   }
-  for (iVar1 = *(int *)(iVar2 + 0xc); iVar1 != 0; iVar1 = *(int *)(iVar1 + 0xc)) {
-    iVar2 = iVar1;
+  for (rightChild = *(int *)(predecessor + 0xc); rightChild != 0; rightChild = *(int *)(rightChild + 0xc)) {
+    predecessor = rightChild;
   }
-  *(int *)this = iVar2;
+  *(int *)this = predecessor;
   return;
 }
 
 /* std___Rb_tree_rebalance @ 0x97c31168 (328 bytes) */
-int std___Rb_tree_rebalance(_Rb_tree_node_base1, _Rb_tree_node_base2)
-  unsigned char * _Rb_tree_node_base1;
-  unsigned char ** _Rb_tree_node_base2;
+int std___Rb_tree_rebalance(x, root)
+  unsigned char * x;
+  unsigned char ** root;
 {
-  int iVar1;
-  unsigned char * p_Var2;
-  unsigned char * p_Var3;
-  unsigned char * p_Var4;
+  unsigned char *rotateTop;
+  unsigned char *pivot;
+  unsigned char *grandparentChild;
+  int parentColor;
+  unsigned char *rootNode;
+  unsigned char *parentNode;
+  unsigned char *nextX;
   
-  *(undefined4 *)_Rb_tree_node_base1 = 0;
-  p_Var2 = *_Rb_tree_node_base2;
-  if (_Rb_tree_node_base1 != p_Var2) {
-    p_Var3 = *(unsigned char **)(_Rb_tree_node_base1 + 4);
-    iVar1 = *(int *)p_Var3;
-    while (iVar1 == 0) {
-      p_Var4 = *(unsigned char **)(p_Var3 + 4);
-      p_Var2 = *(unsigned char **)(p_Var4 + 8);
-      if (p_Var3 == p_Var2) {
-        p_Var2 = *(unsigned char **)(p_Var4 + 0xc);
-        if ((p_Var2 == (unsigned char *)0x0) || (*(int *)p_Var2 != 0)) {
-          p_Var4 = _Rb_tree_node_base1;
-          p_Var2 = p_Var3;
-          if (_Rb_tree_node_base1 == *(unsigned char **)(p_Var3 + 0xc)) {
-            ((int (*)())std___Rb_tree_rotate_left)(p_Var3,_Rb_tree_node_base2);
-            p_Var2 = *(unsigned char **)(p_Var3 + 4);
-            p_Var4 = p_Var3;
+  *(undefined4 *)x = 0;
+  rootNode = *root;
+  if (x != rootNode) {
+    parentNode = *(unsigned char **)(x + 4);
+    parentColor = *(int *)parentNode;
+    while (parentColor == 0) {
+      nextX = *(unsigned char **)(parentNode + 4);
+      grandparentChild = *(unsigned char **)(nextX + 8);
+      if (parentNode == grandparentChild) {
+        grandparentChild = *(unsigned char **)(nextX + 0xc);
+        if ((grandparentChild == (unsigned char *)0x0) || (*(int *)grandparentChild != 0)) {
+          nextX = x;
+          pivot = parentNode;
+          if (x == *(unsigned char **)(parentNode + 0xc)) {
+            ((int (*)())std___Rb_tree_rotate_left)(parentNode,root);
+            pivot = *(unsigned char **)(parentNode + 4);
+            nextX = parentNode;
           }
-          p_Var3 = *(unsigned char **)(p_Var2 + 4);
-          *(undefined4 *)p_Var2 = 1;
-          *(undefined4 *)p_Var3 = 0;
-          ((int (*)())std___Rb_tree_rotate_right)(p_Var3,_Rb_tree_node_base2);
+          rotateTop = *(unsigned char **)(pivot + 4);
+          *(undefined4 *)pivot = 1;
+          *(undefined4 *)rotateTop = 0;
+          ((int (*)())std___Rb_tree_rotate_right)(rotateTop,root);
         }
         else {
 LAB_97c31228:
-          *(undefined4 *)p_Var3 = 1;
-          *(undefined4 *)p_Var2 = 1;
-          *(undefined4 *)p_Var4 = 0;
+          *(undefined4 *)parentNode = 1;
+          *(undefined4 *)grandparentChild = 1;
+          *(undefined4 *)nextX = 0;
         }
       }
       else {
-        if ((p_Var2 != (unsigned char *)0x0) && (*(int *)p_Var2 == 0)) goto LAB_97c31228;
-        p_Var4 = _Rb_tree_node_base1;
-        p_Var2 = p_Var3;
-        if (_Rb_tree_node_base1 == *(unsigned char **)(p_Var3 + 8)) {
-          ((int (*)())std___Rb_tree_rotate_right)(p_Var3,_Rb_tree_node_base2);
-          p_Var2 = *(unsigned char **)(p_Var3 + 4);
-          p_Var4 = p_Var3;
+        if ((grandparentChild != (unsigned char *)0x0) && (*(int *)grandparentChild == 0)) goto LAB_97c31228;
+        nextX = x;
+        pivot = parentNode;
+        if (x == *(unsigned char **)(parentNode + 8)) {
+          ((int (*)())std___Rb_tree_rotate_right)(parentNode,root);
+          pivot = *(unsigned char **)(parentNode + 4);
+          nextX = parentNode;
         }
-        p_Var3 = *(unsigned char **)(p_Var2 + 4);
-        *(undefined4 *)p_Var2 = 1;
-        *(undefined4 *)p_Var3 = 0;
-        ((int (*)())std___Rb_tree_rotate_left)(p_Var3,_Rb_tree_node_base2);
+        rotateTop = *(unsigned char **)(pivot + 4);
+        *(undefined4 *)pivot = 1;
+        *(undefined4 *)rotateTop = 0;
+        ((int (*)())std___Rb_tree_rotate_left)(rotateTop,root);
       }
-      p_Var2 = *_Rb_tree_node_base2;
-      if (p_Var4 == p_Var2) break;
-      p_Var3 = *(unsigned char **)(p_Var4 + 4);
-      _Rb_tree_node_base1 = p_Var4;
-      iVar1 = *(int *)p_Var3;
+      rootNode = *root;
+      if (nextX == rootNode) break;
+      parentNode = *(unsigned char **)(nextX + 4);
+      x = nextX;
+      parentColor = *(int *)parentNode;
     }
   }
-  *(undefined4 *)p_Var2 = 1;
+  *(undefined4 *)rootNode = 1;
   return;
 }
 
@@ -230,15 +236,15 @@ int TType__isArray(this)
 int TType__getInstanceSize(this)
   unsigned char * this;
 {
-  uint uVar1;
-  int iVar2;
+  uint typeBits;
+  int nominalSize;
   
-  uVar1 = *(uint *)(this + 0x24);
-  if ((uVar1 & 0x400) != 0) {
-    iVar2 = (int)(uVar1 << 0xd | uVar1 >> 0x13) >> 0x18;
-    return iVar2 * iVar2;
+  typeBits = *(uint *)(this + 0x24);
+  if ((typeBits & 0x400) != 0) {
+    nominalSize = (int)(typeBits << 0xd | typeBits >> 0x13) >> 0x18;
+    return nominalSize * nominalSize;
   }
-  return (int)(uVar1 << 0xd | uVar1 >> 0x13) >> 0x18;
+  return (int)(typeBits << 0xd | typeBits >> 0x13) >> 0x18;
 }
 
 /* TType__isMatrix @ 0x97c31334 (12 bytes) */
@@ -252,13 +258,13 @@ int TType__isMatrix(this)
 int TType__isVector(this)
   unsigned char * this;
 {
-  uint uVar1;
+  uint typeBits;
   
-  uVar1 = *(uint *)(this + 0x24);
-  if ((int)(uVar1 << 0xd | uVar1 >> 0x13) >> 0x18 < 2) {
+  typeBits = *(uint *)(this + 0x24);
+  if ((int)(typeBits << 0xd | typeBits >> 0x13) >> 0x18 < 2) {
     return 0;
   }
-  if ((uVar1 & 0x400) != 0) {
+  if ((typeBits & 0x400) != 0) {
     return 0;
   }
   return 1;
@@ -283,16 +289,16 @@ int __ZN5TType7setTypeE10TBasicTypeibbi(this, basicType, nominalSize, matrixFlag
 }
 
 /* __ZN5TType7setTypeE10TBasicTypeibPS_ @ 0x97c31388 (40 bytes) */
-int __ZN5TType7setTypeE10TBasicTypeibPS_(this, basicType, param_3, param_4, type)
+int __ZN5TType7setTypeE10TBasicTypeibPS_(this, basicType, nominalSize, matrixFlag, type)
   void *this;
   uint basicType;
-  uint param_3;
-  uint param_4;
+  uint nominalSize;
+  uint matrixFlag;
   int type;
 {
   *(uint *)((int)this + 0x24) =
-       (param_4 & 1) << 10 |
-       (param_3 & 0xff) << 0xb | (basicType & 0x3f) << 0x13 | *(uint *)((int)this + 0x24) & 0xfe0003ff
+       (matrixFlag & 1) << 10 |
+       (nominalSize & 0xff) << 0xb | (basicType & 0x3f) << 0x13 | *(uint *)((int)this + 0x24) & 0xfe0003ff
   ;
   if (type == 0) {
     return;
@@ -331,23 +337,23 @@ int TType__setFieldName(this, text)
   unsigned char * this;
   unsigned char * text;
 {
-  void *pvVar1;
-  unsigned char * this_00;
-  void *this_01;
-  char *pcVar2;
-  undefined4 local_20 [4];
+  void *fieldName;
+  unsigned char * globalPool;
+  void *stringObject;
+  char *textData;
+  undefined4 allocRef [4];
   
   *(undefined1 *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = *DAT_a7b7b718;
-  pcVar2 = *(char **)(text + 4);
-  this_00 = (unsigned char *)GetGlobalPoolAllocator();
-  this_01 = (void *)TPoolAllocator__allocate(this_00,8);
-  pvVar1 = (void *)0x0;
-  if (this_01 != (void *)0x0) {
-    local_20[0] = GetGlobalPoolAllocator();
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(this_01,pcVar2,(unsigned char *)local_20);
-    pvVar1 = this_01;
+  textData = *(char **)(text + 4);
+  globalPool = (unsigned char *)GetGlobalPoolAllocator();
+  stringObject = (void *)TPoolAllocator__allocate(globalPool,8);
+  fieldName = (void *)0x0;
+  if (stringObject != (void *)0x0) {
+    allocRef[0] = GetGlobalPoolAllocator();
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(stringObject,textData,(unsigned char *)allocRef);
+    fieldName = stringObject;
   }
-  *(void **)(this + 0xc) = pvVar1;
+  *(void **)(this + 0xc) = fieldName;
   return;
 }
 
@@ -389,66 +395,68 @@ int TType__getNominalSize(this)
 }
 
 /* std___Rb_tree_rotate_left @ 0x97c314f8 (92 bytes) */
-int std___Rb_tree_rotate_left(_Rb_tree_node_base1, _Rb_tree_node_base2)
-  unsigned char * _Rb_tree_node_base1;
-  unsigned char ** _Rb_tree_node_base2;
+int std___Rb_tree_rotate_left(x, root)
+  unsigned char * x;
+  unsigned char ** root;
 {
-  int iVar1;
-  unsigned char * p_Var2;
+  int xParent;
+  int innerSubtree;
+  unsigned char * y;
   
-  p_Var2 = *(unsigned char **)(_Rb_tree_node_base1 + 0xc);
-  iVar1 = *(int *)(p_Var2 + 8);
-  *(int *)(_Rb_tree_node_base1 + 0xc) = iVar1;
-  if (iVar1 != 0) {
-    *(unsigned char **)(iVar1 + 4) = _Rb_tree_node_base1;
+  y = *(unsigned char **)(x + 0xc);
+  innerSubtree = *(int *)(y + 8);
+  *(int *)(x + 0xc) = innerSubtree;
+  if (innerSubtree != 0) {
+    *(unsigned char **)(innerSubtree + 4) = x;
   }
-  *(undefined4 *)(p_Var2 + 4) = *(undefined4 *)(_Rb_tree_node_base1 + 4);
-  if (_Rb_tree_node_base1 == *_Rb_tree_node_base2) {
-    *_Rb_tree_node_base2 = p_Var2;
+  *(undefined4 *)(y + 4) = *(undefined4 *)(x + 4);
+  if (x == *root) {
+    *root = y;
   }
   else {
-    iVar1 = *(int *)(_Rb_tree_node_base1 + 4);
-    if (_Rb_tree_node_base1 == *(unsigned char **)(iVar1 + 8)) {
-      *(unsigned char **)(iVar1 + 8) = p_Var2;
+    xParent = *(int *)(x + 4);
+    if (x == *(unsigned char **)(xParent + 8)) {
+      *(unsigned char **)(xParent + 8) = y;
     }
     else {
-      *(unsigned char **)(iVar1 + 0xc) = p_Var2;
+      *(unsigned char **)(xParent + 0xc) = y;
     }
   }
-  *(unsigned char **)(_Rb_tree_node_base1 + 4) = p_Var2;
-  *(unsigned char **)(p_Var2 + 8) = _Rb_tree_node_base1;
+  *(unsigned char **)(x + 4) = y;
+  *(unsigned char **)(y + 8) = x;
   return;
 }
 
 /* std___Rb_tree_rotate_right @ 0x97c31554 (92 bytes) */
-int std___Rb_tree_rotate_right(_Rb_tree_node_base1, _Rb_tree_node_base2)
-  unsigned char * _Rb_tree_node_base1;
-  unsigned char ** _Rb_tree_node_base2;
+int std___Rb_tree_rotate_right(x, root)
+  unsigned char * x;
+  unsigned char ** root;
 {
-  int iVar1;
-  unsigned char * p_Var2;
+  int xParent;
+  int innerSubtree;
+  unsigned char * y;
   
-  p_Var2 = *(unsigned char **)(_Rb_tree_node_base1 + 8);
-  iVar1 = *(int *)(p_Var2 + 0xc);
-  *(int *)(_Rb_tree_node_base1 + 8) = iVar1;
-  if (iVar1 != 0) {
-    *(unsigned char **)(iVar1 + 4) = _Rb_tree_node_base1;
+  y = *(unsigned char **)(x + 8);
+  innerSubtree = *(int *)(y + 0xc);
+  *(int *)(x + 8) = innerSubtree;
+  if (innerSubtree != 0) {
+    *(unsigned char **)(innerSubtree + 4) = x;
   }
-  *(undefined4 *)(p_Var2 + 4) = *(undefined4 *)(_Rb_tree_node_base1 + 4);
-  if (_Rb_tree_node_base1 == *_Rb_tree_node_base2) {
-    *_Rb_tree_node_base2 = p_Var2;
+  *(undefined4 *)(y + 4) = *(undefined4 *)(x + 4);
+  if (x == *root) {
+    *root = y;
   }
   else {
-    iVar1 = *(int *)(_Rb_tree_node_base1 + 4);
-    if (_Rb_tree_node_base1 == *(unsigned char **)(iVar1 + 0xc)) {
-      *(unsigned char **)(iVar1 + 0xc) = p_Var2;
+    xParent = *(int *)(x + 4);
+    if (x == *(unsigned char **)(xParent + 0xc)) {
+      *(unsigned char **)(xParent + 0xc) = y;
     }
     else {
-      *(unsigned char **)(iVar1 + 8) = p_Var2;
+      *(unsigned char **)(xParent + 8) = y;
     }
   }
-  *(unsigned char **)(_Rb_tree_node_base1 + 4) = p_Var2;
-  *(unsigned char **)(p_Var2 + 0xc) = _Rb_tree_node_base1;
+  *(unsigned char **)(x + 4) = y;
+  *(unsigned char **)(y + 0xc) = x;
   return;
 }
 
@@ -460,35 +468,35 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(this, text)
   int *refCountPtr;
   int atomicStore;
   int atomicStore2;
-  int *piVar2;
+  int *srcRefCountPtr;
   int oldRefCount;
-  int iVar4;
-  int iVar5;
+  int adoptedData;
+  int oldData;
   char reservation;
   byte cr0Reg;
-  int local_30 [4];
-  int local_20;
+  int thisAlloc [4];
+  int srcPool;
   
-  iVar4 = *(int *)(text + 4);
-  if ((void *)(*(int *)((int)this + 4) + -0xc) != (void *)(iVar4 + -0xc)) {
-    local_20 = *(int *)text;
-    local_30[0] = *(int *)this;
-    if ((*(int *)(iVar4 + -4) < 0) || (local_30[0] != local_20)) {
-      iVar4 = __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep8_M_cloneERKS2_m
-                        ((void *)(iVar4 + -0xc),(unsigned char *)local_30,0);
+  adoptedData = *(int *)(text + 4);
+  if ((void *)(*(int *)((int)this + 4) + -0xc) != (void *)(adoptedData + -0xc)) {
+    srcPool = *(int *)text;
+    thisAlloc[0] = *(int *)this;
+    if ((*(int *)(adoptedData + -4) < 0) || (thisAlloc[0] != srcPool)) {
+      adoptedData = __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep8_M_cloneERKS2_m
+                        ((void *)(adoptedData + -0xc),(unsigned char *)thisAlloc,0);
     }
     else {
-      piVar2 = (int *)(iVar4 + -4);
+      srcRefCountPtr = (int *)(adoptedData + -4);
       do {
         if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-          *piVar2 = atomicStore;
+          atomicStore = storeWordConditionalIndexed(*srcRefCountPtr + 1,0,srcRefCountPtr);
+          *srcRefCountPtr = atomicStore;
           cr0Reg = 2;
         }
       } while (!(bool)(cr0Reg >> 1 & 1));
     }
-    iVar5 = *(int *)((int)this + 4);
-    refCountPtr = (int *)(iVar5 + -4);
+    oldData = *(int *)((int)this + 4);
+    refCountPtr = (int *)(oldData + -4);
     do {
       oldRefCount = *refCountPtr;
       if (reservation != '\0') {
@@ -499,9 +507,9 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(this, text)
     } while (!(bool)(cr0Reg >> 1 & 1));
     if (oldRefCount < 1) {
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                ((unsigned char *)(iVar5 + -0xc),(unsigned char *)local_30);
+                ((unsigned char *)(oldData + -0xc),(unsigned char *)thisAlloc);
     }
-    *(int *)((int)this + 4) = iVar4;
+    *(int *)((int)this + 4) = adoptedData;
   }
   return this;
 }
@@ -683,15 +691,17 @@ int std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gn
 
 /* std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string_____operator_ @ 0x97c31a14 (280 bytes) */
 int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string_____operator_( unsigned char
-              *this, unsigned char *param_2)
+              *this, unsigned char *source)
 
 {
-  int iVar1;
-  int iVar2;
+  int rightmostNode;
+  int rightChild;
+  int leftChild;
+  int leftmostNode;
   undefined4 _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult;
   
   if (this != (unsigned char
-               *)param_2) {
+               *)source) {
     if (*(int *)(this + 8) != 0) {
       ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase)(this,*(unsigned char **)(*(int *)(this + 4) + 4));
       *(int *)(*(int *)(this + 4) + 8) = *(int *)(this + 4);
@@ -700,26 +710,26 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
       *(undefined4 *)(this + 8) = 0;
     }
     *(undefined4 *)(this + 8) = 0;
-    if (*(unsigned char **)(*(int *)(param_2 + 4) + 4) == (unsigned char *)0x0) {
+    if (*(unsigned char **)(*(int *)(source + 4) + 4) == (unsigned char *)0x0) {
       *(undefined4 *)(*(int *)(this + 4) + 4) = 0;
       *(int *)(*(int *)(this + 4) + 8) = *(int *)(this + 4);
       *(int *)(*(int *)(this + 4) + 0xc) = *(int *)(this + 4);
     }
     else {
-      _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult = ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy)(this,*(unsigned char **)(*(int *)(param_2 + 4) + 4),
+      _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult = ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy)(this,*(unsigned char **)(*(int *)(source + 4) + 4),
                         *(unsigned char **)(this + 4));
       *(undefined4 *)(*(int *)(this + 4) + 4) = _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult;
-      iVar2 = *(int *)(*(int *)(this + 4) + 4);
-      for (iVar1 = *(int *)(iVar2 + 8); iVar1 != 0; iVar1 = *(int *)(iVar1 + 8)) {
-        iVar2 = iVar1;
+      leftmostNode = *(int *)(*(int *)(this + 4) + 4);
+      for (leftChild = *(int *)(leftmostNode + 8); leftChild != 0; leftChild = *(int *)(leftChild + 8)) {
+        leftmostNode = leftChild;
       }
-      *(int *)(*(int *)(this + 4) + 8) = iVar2;
-      iVar2 = *(int *)(*(int *)(this + 4) + 4);
-      for (iVar1 = *(int *)(iVar2 + 0xc); iVar1 != 0; iVar1 = *(int *)(iVar1 + 0xc)) {
-        iVar2 = iVar1;
+      *(int *)(*(int *)(this + 4) + 8) = leftmostNode;
+      rightmostNode = *(int *)(*(int *)(this + 4) + 4);
+      for (rightChild = *(int *)(rightmostNode + 0xc); rightChild != 0; rightChild = *(int *)(rightChild + 0xc)) {
+        rightmostNode = rightChild;
       }
-      *(int *)(*(int *)(this + 4) + 0xc) = iVar2;
-      *(undefined4 *)(this + 8) = *(undefined4 *)(param_2 + 8);
+      *(int *)(*(int *)(this + 4) + 0xc) = rightmostNode;
+      *(undefined4 *)(this + 8) = *(undefined4 *)(source + 8);
     }
   }
   return this;
@@ -727,56 +737,56 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
 
 /* std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy @ 0x97c31b2c (280 bytes) */
 int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy( unsigned char
-          *this, unsigned char *param_2, unsigned char *param_3)
+          *this, unsigned char *srcRoot, unsigned char *parentNode)
 
 {
   undefined4 _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult;
-  undefined4 uVar1;
-  unsigned char * p_Var2;
-  unsigned char * p_Var3;
-  unsigned char * p_Var4;
-  unsigned char * p_Var5;
-  undefined4 *puVar6;
+  undefined4 nodeColor;
+  unsigned char * newRoot;
+  unsigned char * newNode;
+  unsigned char * prevNode;
+  unsigned char * srcRight;
+  undefined4 *srcNode;
   
-  p_Var2 = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)this,0x20);
-  if (p_Var2 + 0x10 != (unsigned char *)0x0) {
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(p_Var2 + 0x10,(unsigned char *)(param_2 + 0x10))
+  newRoot = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)this,0x20);
+  if (newRoot + 0x10 != (unsigned char *)0x0) {
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(newRoot + 0x10,(unsigned char *)(srcRoot + 0x10))
     ;
-    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(p_Var2 + 0x18,(unsigned char *)(param_2 + 0x18))
+    __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(newRoot + 0x18,(unsigned char *)(srcRoot + 0x18))
     ;
   }
-  uVar1 = *(undefined4 *)param_2;
-  *(undefined4 *)(p_Var2 + 0xc) = 0;
-  p_Var4 = *(unsigned char **)(param_2 + 0xc);
-  *(undefined4 *)p_Var2 = uVar1;
-  *(unsigned char **)(p_Var2 + 4) = param_3;
-  *(undefined4 *)(p_Var2 + 8) = 0;
-  if (p_Var4 != (unsigned char *)0x0) {
-    _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult = ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy)(this,p_Var4,p_Var2);
-    *(undefined4 *)(p_Var2 + 0xc) = _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult;
+  nodeColor = *(undefined4 *)srcRoot;
+  *(undefined4 *)(newRoot + 0xc) = 0;
+  prevNode = *(unsigned char **)(srcRoot + 0xc);
+  *(undefined4 *)newRoot = nodeColor;
+  *(unsigned char **)(newRoot + 4) = parentNode;
+  *(undefined4 *)(newRoot + 8) = 0;
+  if (prevNode != (unsigned char *)0x0) {
+    _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult = ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy)(this,prevNode,newRoot);
+    *(undefined4 *)(newRoot + 0xc) = _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult;
   }
-  p_Var4 = p_Var2;
-  for (puVar6 = *(undefined4 **)(param_2 + 8); puVar6 != (undefined4 *)0x0;
-      puVar6 = (undefined4 *)puVar6[2]) {
-    p_Var3 = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)this,0x20);
-    if (p_Var3 + 0x10 != (unsigned char *)0x0) {
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(p_Var3 + 0x10,(unsigned char *)(puVar6 + 4));
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(p_Var3 + 0x18,(unsigned char *)(puVar6 + 6));
+  prevNode = newRoot;
+  for (srcNode = *(undefined4 **)(srcRoot + 8); srcNode != (undefined4 *)0x0;
+      srcNode = (undefined4 *)srcNode[2]) {
+    newNode = (unsigned char *)TPoolAllocator__allocate(*(unsigned char **)this,0x20);
+    if (newNode + 0x10 != (unsigned char *)0x0) {
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(newNode + 0x10,(unsigned char *)(srcNode + 4));
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(newNode + 0x18,(unsigned char *)(srcNode + 6));
     }
-    *(undefined4 *)(p_Var3 + 0xc) = 0;
-    p_Var5 = (unsigned char *)puVar6[3];
-    uVar1 = *puVar6;
-    *(undefined4 *)(p_Var3 + 8) = 0;
-    *(undefined4 *)p_Var3 = uVar1;
-    *(unsigned char **)(p_Var3 + 4) = p_Var4;
-    *(unsigned char **)(p_Var4 + 8) = p_Var3;
-    if (p_Var5 != (unsigned char *)0x0) {
-      _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult = ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy)(this,p_Var5,p_Var3);
-      *(undefined4 *)(p_Var3 + 0xc) = _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult;
+    *(undefined4 *)(newNode + 0xc) = 0;
+    srcRight = (unsigned char *)srcNode[3];
+    nodeColor = *srcNode;
+    *(undefined4 *)(newNode + 8) = 0;
+    *(undefined4 *)newNode = nodeColor;
+    *(unsigned char **)(newNode + 4) = prevNode;
+    *(unsigned char **)(prevNode + 8) = newNode;
+    if (srcRight != (unsigned char *)0x0) {
+      _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult = ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copy)(this,srcRight,newNode);
+      *(undefined4 *)(newNode + 0xc) = _Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_copyResult;
     }
-    p_Var4 = p_Var3;
+    prevNode = newNode;
   }
-  return p_Var2;
+  return newRoot;
 }
 
 /* TType__setStructSize @ 0x97c31c44 (284 bytes) */
@@ -834,11 +844,11 @@ int TIntermNode__getLine(this)
 }
 
 /* TIntermNode__setLine @ 0x97c31d68 (8 bytes) */
-int TIntermNode__setLine(this, param_2)
+int TIntermNode__setLine(this, line)
   unsigned char * this;
-  int param_2;
+  int line;
 {
-  *(int *)(this + 4) = param_2;
+  *(int *)(this + 4) = line;
   return;
 }
 
@@ -1005,15 +1015,15 @@ int TIntermTyped__getNominalSize(this)
 int TIntermTyped__getSize(this)
   unsigned char * this;
 {
-  uint uVar1;
-  int iVar2;
+  uint typeBits;
+  int nominalSize;
   
-  uVar1 = *(uint *)(this + 0x2c);
-  if ((uVar1 & 0x400) != 0) {
-    iVar2 = (int)(uVar1 << 0xd | uVar1 >> 0x13) >> 0x18;
-    return iVar2 * iVar2;
+  typeBits = *(uint *)(this + 0x2c);
+  if ((typeBits & 0x400) != 0) {
+    nominalSize = (int)(typeBits << 0xd | typeBits >> 0x13) >> 0x18;
+    return nominalSize * nominalSize;
   }
-  return (int)(uVar1 << 0xd | uVar1 >> 0x13) >> 0x18;
+  return (int)(typeBits << 0xd | typeBits >> 0x13) >> 0x18;
 }
 
 /* TIntermTyped__isMatrix @ 0x97c31f4c (12 bytes) */
@@ -1034,13 +1044,13 @@ int TIntermTyped__isArray(this)
 int TIntermTyped__isVector(this)
   unsigned char * this;
 {
-  uint uVar1;
+  uint typeBits;
   
-  uVar1 = *(uint *)(this + 0x2c);
-  if ((int)(uVar1 << 0xd | uVar1 >> 0x13) >> 0x18 < 2) {
+  typeBits = *(uint *)(this + 0x2c);
+  if ((int)(typeBits << 0xd | typeBits >> 0x13) >> 0x18 < 2) {
     return 0;
   }
-  if ((uVar1 & 0x400) != 0) {
+  if ((typeBits & 0x400) != 0) {
     return 0;
   }
   return 1;
@@ -1066,27 +1076,28 @@ int __ZN12TIntermTypedD0Ev(this)
 
 /* std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase @ 0x97c31ff4 (192 bytes) */
 int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase( unsigned char
-                *this, unsigned char *param_2)
+                *this, unsigned char *node)
 
 {
+  int firstData;
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  int iVar4;
-  unsigned char * p_Var5;
+  int secondData;
+  unsigned char * leftChild;
   char reservation;
   byte cr0Flags;
-  undefined4 local_40 [4];
-  undefined4 local_30 [5];
+  undefined4 secondAlloc [4];
+  undefined4 firstAlloc [5];
   
-  cr0Flags = (param_2 == (unsigned char *)0x0) << 1;
-  if (param_2 != (unsigned char *)0x0) {
+  cr0Flags = (node == (unsigned char *)0x0) << 1;
+  if (node != (unsigned char *)0x0) {
     do {
-      ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase)(this,*(unsigned char **)(param_2 + 0xc));
-      local_40[0] = *(undefined4 *)(param_2 + 0x18);
-      iVar4 = *(int *)(param_2 + 0x1c);
-      refCountPtr = (int *)(iVar4 + -4);
-      p_Var5 = *(unsigned char **)(param_2 + 8);
+      ((int (*)())std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase)(this,*(unsigned char **)(node + 0xc));
+      secondAlloc[0] = *(undefined4 *)(node + 0x18);
+      secondData = *(int *)(node + 0x1c);
+      refCountPtr = (int *)(secondData + -4);
+      leftChild = *(unsigned char **)(node + 8);
       do {
         oldRefCount = *refCountPtr;
         if (reservation != '\0') {
@@ -1097,11 +1108,11 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
       } while (!(bool)(cr0Flags >> 1 & 1));
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                  ((unsigned char *)(iVar4 + -0xc),local_40);
+                  ((unsigned char *)(secondData + -0xc),secondAlloc);
       }
-      iVar4 = *(int *)(param_2 + 0x14);
-      local_30[0] = *(undefined4 *)(param_2 + 0x10);
-      refCountPtr = (int *)(iVar4 + -4);
+      firstData = *(int *)(node + 0x14);
+      firstAlloc[0] = *(undefined4 *)(node + 0x10);
+      refCountPtr = (int *)(firstData + -4);
       do {
         oldRefCount = *refCountPtr;
         if (reservation != '\0') {
@@ -1112,10 +1123,10 @@ int std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Sel
       } while (!(bool)(cr0Flags >> 1 & 1));
       if (oldRefCount < 1) {
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
-                  ((unsigned char *)(iVar4 + -0xc),local_30);
+                  ((unsigned char *)(firstData + -0xc),firstAlloc);
       }
-      param_2 = p_Var5;
-    } while (p_Var5 != (unsigned char *)0x0);
+      node = leftChild;
+    } while (leftChild != (unsigned char *)0x0);
   }
   return;
 }

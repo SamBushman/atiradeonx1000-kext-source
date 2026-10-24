@@ -5,15 +5,15 @@ int __Unwind_FindEnclosingFunction(pc)
   void *pc;
 {
   void *unwind_Find_FDEResult;
-  void *pvVar2;
-  dwarf_eh_bases adStack_20 [2];
+  void *functionStart;
+  dwarf_eh_bases ehBases [2];
   
-  unwind_Find_FDEResult = ((int (*)())__Unwind_Find_FDE)((void *)((int)pc + -1),adStack_20);
-  pvVar2 = (void *)0x0;
+  unwind_Find_FDEResult = ((int (*)())__Unwind_Find_FDE)((void *)((int)pc + -1),ehBases);
+  functionStart = (void *)0x0;
   if (unwind_Find_FDEResult != (void *)0x0) {
-    pvVar2 = (void *)adStack_20[0].func;
+    functionStart = (void *)ehBases[0].func;
   }
-  return pvVar2;
+  return functionStart;
 }
 
 /* __Unwind_GetDataRelBase @ 0x97c1a61c (8 bytes) */
@@ -124,7 +124,7 @@ int _execute_stack_op(opPtr, opEnd, context, initial)
   uint stackFrameWords [67];
   uint *operand;
   uint *stmp;
-  int local_38;
+  int regNumber;
   uint offsetOrIndex;
   int utmp [7];
   
@@ -473,15 +473,15 @@ LAB_97c1ae34:
       stackByteOffset = op - 0x70;
       goto LAB_97c1ab30;
     case 0x90:
-      opPtrNext = (ushort *)_read_uleb128_97c1a3ec(opPtrNext,&local_38);
-      stackByteOffset = local_38;
+      opPtrNext = (ushort *)_read_uleb128_97c1a3ec(opPtrNext,&regNumber);
+      stackByteOffset = regNumber;
 LAB_97c1aaf4:
       operand = (uint *)**(uint **)(context + stackByteOffset * 4);
       goto LAB_97c1aba8;
     case 0x92:
-      lebValue = _read_uleb128_97c1a3ec(opPtrNext,&local_38);
+      lebValue = _read_uleb128_97c1a3ec(opPtrNext,&regNumber);
       opPtrNext = (ushort *)_read_sleb128_97c1a41c(lebValue,&offsetOrIndex);
-      stackByteOffset = local_38;
+      stackByteOffset = regNumber;
 LAB_97c1ab30:
       operand = (uint *)(**(int **)(context + stackByteOffset * 4) + offsetOrIndex);
 LAB_97c1ae4c:
@@ -1115,7 +1115,7 @@ int __Unwind_ForcedUnwind_Phase2(exc, context)
   undefined4 context;
 {
   int uw_frame_state_forResult;
-  int iVar1;
+  int personalityResult;
   int stopCode;
   undefined4 action;
   code *stop;
@@ -1140,11 +1140,11 @@ int __Unwind_ForcedUnwind_Phase2(exc, context)
       return 5;
     }
     if (personality != (code *)0x0) {
-      iVar1 = (*personality)(1,10,*exc,exc[1],exc,context);
-      if (iVar1 == 7) {
+      personalityResult = (*personality)(1,10,*exc,exc[1],exc,context);
+      if (personalityResult == 7) {
         return 7;
       }
-      if (iVar1 != 8) {
+      if (personalityResult != 8) {
         return 2;
       }
     }
@@ -1234,11 +1234,11 @@ int __Unwind_GetIP(context)
 }
 
 /* __Unwind_SetIP @ 0x97c1bef4 (8 bytes) */
-int __Unwind_SetIP(param_1, new_value)
-  unsigned char * param_1;
+int __Unwind_SetIP(context, new_value)
+  unsigned char * context;
   unsigned char new_value;
 {
-  *(unsigned char *)(param_1 + 0x1c0) = new_value;
+  *(unsigned char *)(context + 0x1c0) = new_value;
   return;
 }
 
@@ -1395,7 +1395,7 @@ int _read_uleb128_97c1c41c(p, val)
   byte *p;
   uint *val;
 {
-  byte bVar1;
+  byte byteRead;
   uint shiftForByte;
   uint shift;
   uint result;
@@ -1403,12 +1403,12 @@ int _read_uleb128_97c1c41c(p, val)
   shift = 0;
   result = 0;
   do {
-    bVar1 = *p;
+    byteRead = *p;
     p = p + 1;
     shiftForByte = shift & 0x3f;
     shift = shift + 7;
-    result = result | (bVar1 & 0x7f) << shiftForByte;
-  } while ((bVar1 & 0x80) != 0);
+    result = result | (byteRead & 0x7f) << shiftForByte;
+  } while ((byteRead & 0x80) != 0);
   *val = result;
   return p;
 }
@@ -1418,7 +1418,7 @@ int _read_sleb128_97c1c44c(p, val)
   byte *p;
   uint *val;
 {
-  byte bVar1;
+  byte byteRead;
   uint shiftForByte;
   uint shift;
   uint result;
@@ -1426,13 +1426,13 @@ int _read_sleb128_97c1c44c(p, val)
   shift = 0;
   result = 0;
   do {
-    bVar1 = *p;
+    byteRead = *p;
     p = p + 1;
     shiftForByte = shift & 0x3f;
     shift = shift + 7;
-    result = result | (bVar1 & 0x7f) << shiftForByte;
-  } while ((bVar1 & 0x80) != 0);
-  if ((shift < 0x20) && ((bVar1 & 0x40) != 0)) {
+    result = result | (byteRead & 0x7f) << shiftForByte;
+  } while ((byteRead & 0x80) != 0);
+  if ((shift < 0x20) && ((byteRead & 0x40) != 0)) {
     result = result | -1 << (shift & 0x3f);
   }
   *val = result;
@@ -1563,9 +1563,9 @@ int ___register_frame_info_table_bases(fde, ob, tb, db)
 }
 
 /* ___register_frame_table @ 0x97c1c710 (68 bytes) */
-int ___register_frame_table(fde, param_2)
+int ___register_frame_table(fde, unusedArg)
   void *fde;
-  undefined4 param_2;
+  undefined4 unusedArg;
 {
   void *ob;
   
@@ -1780,9 +1780,9 @@ int _frame_heapsort(ob, fdeCompare, erratic)
   undefined4 tmp2;
   int compareResult;
   int compareResult2;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 r6Fwd;
+  undefined4 r7Fwd;
+  undefined4 r8Fwd;
   uint i;
   uint n;
   int leftChildIndexMinus1;
@@ -1811,7 +1811,7 @@ joined_r0x97c1cb68:
         i = leftChildIndexMinus1 + 2;
         if (i < n) {
           byteOffsetOfI2 = heapBuildIndex * 8;
-          compareResult = (*fdeCompare)(ob,a[heapBuildIndex * 2 + 2],a[heapBuildIndex * 2 + 1],in_r6,in_r7,in_r8
+          compareResult = (*fdeCompare)(ob,a[heapBuildIndex * 2 + 2],a[heapBuildIndex * 2 + 1],r6Fwd,r7Fwd,r8Fwd
                              ,tmp);
           if (compareResult < 1) {
             compareResult = heapBuildIndex << 2;
@@ -2608,27 +2608,27 @@ int _fde_split(ob, fdeCompare, linear, erratic)
 /* save_world @ 0x97c1dd00 (252 bytes) */
 int save_world()
 {
-  int in_r11;
-  int iVar1;
+  int r11In;
+  int globalWord;
   
-  iVar1 = *(int *)PTR_DAT_a7b7c100;
-  *(unsigned char **)(&STACKARG(0x0) + in_r11) = ((unsigned int)__builtin_frame_address(0));
-  if (iVar1 == 0) {
+  globalWord = *(int *)PTR_DAT_a7b7c100;
+  *(unsigned char **)(&STACKARG(0x0) + r11In) = ((unsigned int)__builtin_frame_address(0));
+  if (globalWord == 0) {
     return;
   }
   return;
 }
 
 /* eh_rest_world_r10 @ 0x97c1de10 (264 bytes) */
-int eh_rest_world_r10(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+int eh_rest_world_r10(r3In, r4In, r5In, r6In, r7In, r8In, r9In, r10In)
+  undefined4 r3In;
+  undefined4 r4In;
+  undefined4 r5In;
+  undefined4 r6In;
+  undefined4 r7In;
+  undefined4 r8In;
+  undefined4 r9In;
+  undefined4 r10In;
 {
   
                     
@@ -2636,8 +2636,8 @@ int eh_rest_world_r10(param_1, param_2, param_3, param_4, param_5, param_6, para
   (**(code **)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x0)) + 8))
             (*(undefined4 *)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x0)) + -0x1b0),*(undefined4 *)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x0)) + -0x1ac)
              ,*(undefined4 *)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x0)) + -0x1a8),
-             *(undefined4 *)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x0)) + -0x1a4),param_8,*(code **)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x0)) + 8),
-             param_7,param_8);
+             *(undefined4 *)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x0)) + -0x1a4),r10In,*(code **)((*(int *)(*(unsigned int *)__builtin_frame_address(0) + 0x0)) + 8),
+             r9In,r10In);
   return;
 }
 
@@ -2651,26 +2651,27 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(this, str, pool_al
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_ @ 0x97c30ae4 (100 bytes) */
-int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_(this, str, pool_allocator)
+int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_(this, str, alloc)
   void *this;
   char *str;
-  unsigned char * pool_allocator;
+  unsigned char * alloc;
 {
-  undefined4 uVar1;
+  char *newData;
+  undefined4 poolAlloc;
   size_t length;
-  char *pcVar3;
+  char *endPtr;
   
   if (str == (char *)0x0) {
-    pcVar3 = (char *)0xffffffff;
+    endPtr = (char *)0xffffffff;
   }
   else {
     length = _strlen(str);
-    pcVar3 = str + length;
+    endPtr = str + length;
   }
-  pcVar3 = ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag)(str,pcVar3,pool_allocator,0);
-  uVar1 = *(undefined4 *)pool_allocator;
-  *(char **)((int)this + 4) = pcVar3;
-  *(undefined4 *)this = uVar1;
+  newData = ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag)(str,endPtr,alloc,0);
+  poolAlloc = *(undefined4 *)alloc;
+  *(char **)((int)this + 4) = newData;
+  *(undefined4 *)this = poolAlloc;
   return;
 }
 
@@ -2688,33 +2689,33 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_(this, text)
   unsigned char * text;
 {
   int atomicStore;
-  int *piVar2;
-  undefined4 uVar3;
-  int iVar4;
+  int *refCountPtr;
+  undefined4 allocWord;
+  int adoptedData;
   char reservation;
   byte cr0Reg;
-  int local_40 [4];
-  int local_30;
+  int globalAlloc [4];
+  int srcPool;
   
-  iVar4 = *(int *)(text + 4);
-  local_40[0] = GetGlobalPoolAllocator();
-  local_30 = *(int *)text;
-  if ((*(int *)(iVar4 + -4) < 0) || (local_40[0] != local_30)) {
-    iVar4 = ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep8_M_cloneERKS2_m)((void *)(iVar4 + -0xc),(unsigned char *)local_40,0);
+  adoptedData = *(int *)(text + 4);
+  globalAlloc[0] = GetGlobalPoolAllocator();
+  srcPool = *(int *)text;
+  if ((*(int *)(adoptedData + -4) < 0) || (globalAlloc[0] != srcPool)) {
+    adoptedData = ((int (*)())__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep8_M_cloneERKS2_m)((void *)(adoptedData + -0xc),(unsigned char *)globalAlloc,0);
   }
   else {
-    piVar2 = (int *)(iVar4 + -4);
+    refCountPtr = (int *)(adoptedData + -4);
     do {
       if (reservation != '\0') {
-        atomicStore = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-        *piVar2 = atomicStore;
+        atomicStore = storeWordConditionalIndexed(*refCountPtr + 1,0,refCountPtr);
+        *refCountPtr = atomicStore;
         cr0Reg = 2;
       }
     } while (!(bool)(cr0Reg >> 1 & 1));
   }
-  uVar3 = *(undefined4 *)text;
-  *(int *)((int)this + 4) = iVar4;
-  *(undefined4 *)this = uVar3;
+  allocWord = *(undefined4 *)text;
+  *(int *)((int)this + 4) = adoptedData;
+  *(undefined4 *)this = allocWord;
   return;
 }
 
@@ -2818,70 +2819,71 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_(this, 
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag @ 0x97c30d70 (196 bytes) */
-int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag(this, str1, str2)
-  void *this;
-  void *str1;
-  unsigned char * str2;
+int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag(first, last, alloc)
+  void *first;
+  void *last;
+  unsigned char * alloc;
 {
-  int iVar1;
-  int *piVar2;
-  int iVar3;
-  ulong *puVar4;
-  ulong uVar5;
-  ulong *puVar6;
+  int atomicStore;
+  int emptyRep;
+  int *refCountPtr;
+  int globalPool;
+  ulong *rep;
+  ulong length;
+  ulong *newData;
   char reservation;
   byte cr0Reg;
   
-  if ((this == str1) &&
-     (iVar3 = GetGlobalPoolAllocator(), iVar1 = (*(int *)&DAT_a7b7b71c), *(int *)str2 == iVar3)) {
-    piVar2 = (int *)((*(int *)&DAT_a7b7b71c) + 8);
+  if ((first == last) &&
+     (globalPool = GetGlobalPoolAllocator(), emptyRep = (*(int *)&DAT_a7b7b71c), *(int *)alloc == globalPool)) {
+    refCountPtr = (int *)((*(int *)&DAT_a7b7b71c) + 8);
     do {
       if (reservation != '\0') {
-        iVar3 = storeWordConditionalIndexed(*piVar2 + 1,0,piVar2);
-        *piVar2 = iVar3;
+        atomicStore = storeWordConditionalIndexed(*refCountPtr + 1,0,refCountPtr);
+        *refCountPtr = atomicStore;
         cr0Reg = 2;
       }
     } while (!(bool)(cr0Reg >> 1 & 1));
-    return (char *)(iVar1 + 0xc);
+    return (char *)(emptyRep + 0xc);
   }
-  if (this == (void *)0x0) {
+  if (first == (void *)0x0) {
     std____throw_logic_error("attempt to create string with null pointer");
   }
-  uVar5 = (int)str1 - (int)this;
-  puVar4 = (ulong *)__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_
-                              (uVar5,str2);
-  puVar6 = puVar4 + 3;
-  _memcpy(puVar6,this,uVar5);
-  *puVar4 = uVar5;
-  *(char *)((int)puVar6 + uVar5) = '\0';
-  return (char *)puVar6;
+  length = (int)last - (int)first;
+  rep = (ulong *)__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_
+                              (length,alloc);
+  newData = rep + 3;
+  _memcpy(newData,first,length);
+  *rep = length;
+  *(char *)((int)newData + length) = '\0';
+  return (char *)newData;
 }
 
 /* __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep8_M_cloneERKS2_m @ 0x97c30e34 (148 bytes) */
-int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep8_M_cloneERKS2_m(this, pool_allocator, param_3)
+int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep8_M_cloneERKS2_m(this, alloc, extra)
   void *this;
-  unsigned char * pool_allocator;
-  ulong param_3;
+  unsigned char * alloc;
+  ulong extra;
 {
-  uint uVar1;
-  undefined4 *puVar2;
-  undefined4 uVar4;
-  uint uVar3;
+  uint requested;
+  undefined4 *newRep;
+  undefined4 copiedLength;
+  uint newCapacity;
   
-  uVar1 = *(int *)this + param_3;
-  uVar3 = uVar1;
-  if (((*(uint *)((int)this + 4) < uVar1) && (0xfe3 < uVar1)) &&
-     (uVar3 = *(uint *)((int)this + 4) << 1, uVar3 < uVar1)) {
-    uVar3 = uVar1;
+  requested = *(int *)this + extra;
+  newCapacity = requested;
+  if (((*(uint *)((int)this + 4) < requested) && (0xfe3 < requested)) &&
+     (newCapacity = *(uint *)((int)this + 4) << 1, newCapacity < requested)) {
+    newCapacity = requested;
   }
-  puVar2 = (undefined4 *)
-           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_(uVar3,pool_allocator);
-  uVar4 = 0;
+  newRep = (undefined4 *)
+           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_(newCapacity,alloc);
+  copiedLength = 0;
   if (*(size_t *)this != 0) {
-    _memcpy(puVar2 + 3,(void *)((int)this + 0xc),*(size_t *)this);
-    uVar4 = *(undefined4 *)this;
+    _memcpy(newRep + 3,(void *)((int)this + 0xc),*(size_t *)this);
+    copiedLength = *(undefined4 *)this;
   }
-  *puVar2 = uVar4;
-  return puVar2 + 3;
+  *newRep = copiedLength;
+  return newRep + 3;
 }
 
