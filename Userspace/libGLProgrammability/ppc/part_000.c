@@ -1258,7 +1258,6 @@ int _PPParserParseStatement(parser)
   int ppParserParseOperationResult;
   int length;
   int compareResult;
-  int opcode;
   int declStatus;
   int length2;
   undefined4 precision;
