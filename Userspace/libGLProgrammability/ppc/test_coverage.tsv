@@ -1551,11 +1551,11 @@
 0x97c1a0c8	___cxa_get_globals_fast	52	yes	
 0x97c1a0fc	___cxa_get_globals	220	yes	
 0x97c1a1d8	___eprintf	76	no	calls an import (abort); calls an import (fflush); calls an import (fprintf)
-0x97c1a23c	FUN_97c1a23c	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97c1a24c	FUN_97c1a24c	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97c1a258	FUN_97c1a258	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97c1a25c	FUN_97c1a25c	24	no	tiny (24 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97c1a28c	FUN_97c1a28c	60	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x97c1a23c	_savef20	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1a24c	_savef24	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1a258	_savef27	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1a25c	_savef28	24	no	tiny (24 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97c1a28c	_restf20	60	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x97c1a2c8	_size_of_encoded_value_97c1a2c8	120	no	calls an import (abort)
 0x97c1a340	_base_of_encoded_value	172	no	calls an import (abort)
 0x97c1a3ec	_read_uleb128_97c1a3ec	48	yes	

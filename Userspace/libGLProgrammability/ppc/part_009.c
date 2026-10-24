@@ -1455,7 +1455,7 @@ int TGenericLinker__GetBindingTableString(this)
   undefined4 sizeActiveUserAttributes;
   undefined4 numActiveUniformBindings;
   undefined4 sizeActiveUserUniforms;
-  int in_stack_ffffff88;
+  int unusedStackArg0;
   
   string = BindingTable__GetString(*(unsigned char **)(this + 4),3);
   if (*(int *)(this + 0x74) < 0) {

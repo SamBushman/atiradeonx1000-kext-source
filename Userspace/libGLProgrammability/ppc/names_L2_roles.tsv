@@ -89,7 +89,7 @@ use	TIntermBinary__promote	puVar2	atomicStore	INFERRED	every definition is the r
 use	TIntermediate__promoteConstantUnion	puVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#106	+1	all	all
 use	OutputTreeText	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#19	+1	all	all
 use	OutputSymbol	iVar4	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#22	+1	all	all
-use	OutputBinary	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#27	+1	all	all
+use	OutputBinary	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar1\ =\ storeWordConditionalIndexed\(iVar3\ \+\ \-1,0,piVar2\);$	+1	all	all
 use	OutputUnary	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#20	+1	all	all
 use	OutputAggregate	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#30	+1	all	all
 use	OutputSelection	iVar1	atomicStore	INFERRED	every definition is the result of a call whose name says it returns this	#19	+1	all	all

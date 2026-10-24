@@ -273,8 +273,8 @@
 97c08ca4	_HashTableGet	r8	PASS-indirect	97c08ccc bctrl 
 97c10924	_glpDCBRealloc	r4	USED	97c10928 or. r29,r4,r4
 97c13458	__ZNSs4_Rep10_M_disposeERKSaIcE	r4	PASS-yes	97c13474 b __ZNSs4_Rep10_M_destroyERKSaIcE
-97c1a23c	FUN_97c1a23c	r3	DEAD	
-97c1a25c	FUN_97c1a25c	r3	RET	97c1a270 blr 
+97c1a23c	_savef20	r3	DEAD	
+97c1a25c	_savef28	r3	RET	97c1a270 blr 
 97c1bb6c	__Unwind_RaiseException	r6	PASS-no	97c1bb74 bl save_world
 97c1bb6c	__Unwind_RaiseException	r7	PASS-no	97c1bb74 bl save_world
 97c1bb6c	__Unwind_RaiseException	r8	PASS-no	97c1bb74 bl save_world

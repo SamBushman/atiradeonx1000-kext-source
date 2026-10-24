@@ -415,7 +415,7 @@ start	end	kind	owner	instructions	calls
 97c19ee0	97c19ef0	eh-pad	std::set_terminate	4	__Unwind_Resume,___cxa_call_unexpected
 97c19f54	97c19f64	eh-pad	std::set_unexpected	4	__Unwind_Resume,___cxa_call_unexpected
 97c1a224	97c1a23c	millicode	___eprintf	6	
-97c1a274	97c1a28c	millicode	FUN_97c1a25c	6	
+97c1a274	97c1a28c	millicode	_savef28	6	
 97c1a4d4	97c1a508	table	_read_encoded_value_with_base_97c1a468	13	
 97c1a7ec	97c1aa3c	table	_execute_stack_op	148	
 97c1ad34	97c1ad88	table	_execute_stack_op	21	

@@ -3168,7 +3168,7 @@ int _InterpreterTestCR(machine, operandWord0, operandWord1, operandWord2, operan
 }
 
 /* _InterpreterEmulateOp @ 0x97bcdd50 (20820 bytes) */
-int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+int * _InterpreterEmulateOp(int *machine,int *inst,double unusedFloatArg1,double scratchF2,double scratchF3,double scratchF4,double scratchF5,double scratchF6,double scratchF7,double scratchF8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   float sourceComponentW;
   float smoothT;
@@ -3252,11 +3252,11 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double fparam_1,double fparam
   double floorValue_29;
   double floorValue_30;
   double floorValue_31;
-  double in_stack_fffffe78;
-  double in_stack_fffffe80;
-  double in_stack_fffffe88;
-  double in_stack_fffffe90;
-  double in_stack_fffffe98;
+  double leftoverStackArg0;
+  double leftoverStackArg1;
+  double leftoverStackArg2;
+  double leftoverStackArg3;
+  double leftoverStackArg4;
   undefined4 destElement;
   float opVec [12];
   float srcC [4];
@@ -3874,9 +3874,9 @@ switchD_97bd0598_caseD_0:
         }
         else {
           storedComponent = opVec[4];
-          fparam_2 = (double)opVec[7];
+          scratchF2 = (double)opVec[7];
           opVec[1] = opVec[4];
-          powResult = _pow((double)opVec[5],fparam_2);
+          powResult = _pow((double)opVec[5],scratchF2);
           opVec[2] = (float)powResult;
         }
         goto LAB_97bd1cd8;
@@ -4282,7 +4282,7 @@ LAB_97bd109c:
         opVec[0] = _atan2f(opVec[4],opVec[8]);
         opVec[1] = _atan2f(opVec[5],opVec[9]);
         opVec[2] = _atan2f(opVec[6],opVec[10]);
-        fparam_2 = (double)opVec[0xb];
+        scratchF2 = (double)opVec[0xb];
         opVec[3] = _atan2f(opVec[7],opVec[0xb]);
         break;
       case 0x1f:
@@ -4532,15 +4532,15 @@ LAB_97bd2210:
         if (opVec[0xb] < opVec[7]) goto LAB_97bd2210;
         break;
       case 0x2e:
-        fparam_6 = (double)opVec[10];
-        fparam_7 = (double)opVec[9];
-        fparam_8 = (double)opVec[8];
-        opVec[0] = (float)((double)opVec[5] * fparam_6 -
-                              (double)(float)(fparam_7 * (double)opVec[6]));
-        opVec[2] = (float)((double)opVec[4] * fparam_7 -
-                              (double)(float)(fparam_8 * (double)opVec[5]));
-        opVec[1] = (float)((double)opVec[6] * fparam_8 -
-                              (double)(float)(fparam_6 * (double)opVec[4]));
+        scratchF6 = (double)opVec[10];
+        scratchF7 = (double)opVec[9];
+        scratchF8 = (double)opVec[8];
+        opVec[0] = (float)((double)opVec[5] * scratchF6 -
+                              (double)(float)(scratchF7 * (double)opVec[6]));
+        opVec[2] = (float)((double)opVec[4] * scratchF7 -
+                              (double)(float)(scratchF8 * (double)opVec[5]));
+        opVec[1] = (float)((double)opVec[6] * scratchF8 -
+                              (double)(float)(scratchF6 * (double)opVec[4]));
         goto LAB_97bd1ce0;
       case 0x2f:
         dimension = (uint)*(byte *)((int)inst + 5);
@@ -4655,8 +4655,8 @@ LAB_97bd1cd8:
         break;
       case 0x38:
         if (1 < *(int *)(*(int *)(emulator + 0xd80) + 0x38) - 0x8b30U) {
-          fparam_2 = (double)opVec[0xb];
-          mathAccumulator = _pow((double)opVec[7],fparam_2);
+          scratchF2 = (double)opVec[0xb];
+          mathAccumulator = _pow((double)opVec[7],scratchF2);
           goto LAB_97bd1d68;
         }
         powResult = _pow((double)opVec[4],(double)opVec[8]);
@@ -4664,9 +4664,9 @@ LAB_97bd1cd8:
         powResult = _pow((double)opVec[5],(double)opVec[9]);
         opVec[1] = (float)powResult;
         powResult = _pow((double)opVec[6],(double)opVec[10]);
-        fparam_2 = (double)opVec[0xb];
+        scratchF2 = (double)opVec[0xb];
         opVec[2] = (float)powResult;
-        powValue = _pow((double)opVec[7],fparam_2);
+        powValue = _pow((double)opVec[7],scratchF2);
         goto LAB_97bd2010;
       case 0x39:
         if (2.1474836e+09 <= opVec[8]) {
@@ -4743,14 +4743,14 @@ LAB_97bd1cd8:
         opVec[3] = -opVec[7];
         break;
       case 0x3c:
-        fparam_5 = (double)((float)(1.0 - (double)opVec[7]) * srcC[3]);
+        scratchF5 = (double)((float)(1.0 - (double)opVec[7]) * srcC[3]);
         opVec[0] = opVec[4] * opVec[8] + (1.0 - opVec[4]) * srcC[0];
         opVec[1] = opVec[5] * opVec[9] + (1.0 - opVec[5]) * srcC[1];
-        fparam_8 = (double)opVec[1];
+        scratchF8 = (double)opVec[1];
         opVec[2] = opVec[6] * opVec[10] + (1.0 - opVec[6]) * srcC[2];
-        fparam_7 = (double)opVec[2];
-        opVec[3] = (float)((double)opVec[7] * (double)opVec[0xb] + fparam_5);
-        fparam_6 = (double)opVec[3];
+        scratchF7 = (double)opVec[2];
+        opVec[3] = (float)((double)opVec[7] * (double)opVec[0xb] + scratchF5);
+        scratchF6 = (double)opVec[3];
         break;
       case 0x3d:
         operandComponent = opVec[8];
@@ -4975,20 +4975,20 @@ LAB_97bd29a8:
         }
         else if (textureTarget < 3) {
           if (textureTarget == 1) {
-            ((void (*)())_InterpreterTextureSamplerSampleTexel3D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodOrBias,fparam_2,fparam_3,
-                       fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_fffffe78,
-                       in_stack_fffffe80,in_stack_fffffe88,in_stack_fffffe90);
+            ((void (*)())_InterpreterTextureSamplerSampleTexel3D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodOrBias,scratchF2,scratchF3,
+                       scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,
+                       leftoverStackArg1,leftoverStackArg2,leftoverStackArg3);
           }
         }
         else if (textureTarget == 3) {
-          ((void (*)())_InterpreterTextureSamplerSampleTexel2D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodOrBias,fparam_2,fparam_3,
-                     fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_fffffe78,
-                     in_stack_fffffe80,in_stack_fffffe88,in_stack_fffffe90,in_stack_fffffe98);
+          ((void (*)())_InterpreterTextureSamplerSampleTexel2D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodOrBias,scratchF2,scratchF3,
+                     scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,
+                     leftoverStackArg1,leftoverStackArg2,leftoverStackArg3,leftoverStackArg4);
         }
         else if (textureTarget == 4) {
-          ((void (*)())_InterpreterTextureSamplerSampleTexel1D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodOrBias,fparam_2,fparam_3,
-                     fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_fffffe78,
-                     in_stack_fffffe80,in_stack_fffffe88,in_stack_fffffe90);
+          ((void (*)())_InterpreterTextureSamplerSampleTexel1D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodOrBias,scratchF2,scratchF3,
+                     scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,
+                     leftoverStackArg1,leftoverStackArg2,leftoverStackArg3);
         }
         opVec[0] = texelX;
         opVec[1] = texelY;
@@ -5122,12 +5122,12 @@ switchD_97bd0598_caseD_6:
           sqrtResult = _sqrt(sqrtValue);
           mathTemp = (double)srcC[0];
           operandComponent = (float)((double)operandComponent + sqrtResult);
-          fparam_7 = (double)(operandComponent * opVec[0xb]);
+          scratchF7 = (double)(operandComponent * opVec[0xb]);
           opVec[0] = (float)(mathTemp * (double)opVec[4] - (double)(operandComponent * opVec[8]));
           opVec[1] = (float)(mathTemp * (double)opVec[5] - (double)(operandComponent * opVec[9]));
           opVec[2] = (float)(mathTemp * (double)opVec[6] - (double)(operandComponent * opVec[10]));
-          fparam_8 = (double)opVec[2];
-          opVec[3] = (float)(mathTemp * (double)opVec[7] - fparam_7);
+          scratchF8 = (double)opVec[2];
+          opVec[3] = (float)(mathTemp * (double)opVec[7] - scratchF7);
         }
         else {
           opVec[3] = 0.0;
@@ -5513,7 +5513,7 @@ int _InterpreterWriteFinalFragmentToBuffer(machine, operandWord1, operandWord2, 
 }
 
 /* _InterpreterRun @ 0x97bd31e0 (1020 bytes) */
-void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _InterpreterRun(int emulator,int elementCount,double scratchF1,double scratchF2,double scratchF3,double scratchF4,double scratchF5,double scratchF6,double scratchF7,double scratchF8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
   int programTarget;
   bool wSafeToDivide;
@@ -5553,11 +5553,11 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
   double xBias;
   double invWScale;
   double invWBias;
-  double in_stack_ffffff38;
-  double in_stack_ffffff40;
-  double in_stack_ffffff48;
-  double in_stack_ffffff50;
-  double in_stack_ffffff58;
+  double leftoverStackArg0;
+  double leftoverStackArg1;
+  double leftoverStackArg2;
+  double leftoverStackArg3;
+  double leftoverStackArg4;
   
   one = DOUBLE_97c30a60;
   programTarget = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
@@ -5617,7 +5617,7 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
       else {
         clipOrMask = clipAndMask << 8 | clipOrMask;
       }
-      FUN_97c1a28c(clipOrMask);
+      _restf20(clipOrMask);
       return;
     }
     itemsLeft = itemsLeft + -1;
@@ -5628,15 +5628,15 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
       *(uint *)(machine + 0xa58) = *(uint *)(machine + 0xa58) | testFlags;
       programInfo = *(int *)(emulator + 0xd80);
       elementCount = extraOut1;
-      fparam_1 = extraOutF1;
+      scratchF1 = extraOutF1;
     }
     inst = *(int *)(programInfo + 0x120);
     if ((inst != 0) && (*(int *)(machine + 0xa58) == 0)) {
       do {
-        inst = ((int * (*)())_InterpreterEmulateOp)(machine,inst,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,
-                            fparam_7,fparam_8,in_stack_ffffff38,in_stack_ffffff40,in_stack_ffffff48,
-                            in_stack_ffffff50,in_stack_ffffff58);
-        fparam_1 = extraOutF2;
+        inst = ((int * (*)())_InterpreterEmulateOp)(machine,inst,scratchF1,scratchF2,scratchF3,scratchF4,scratchF5,scratchF6,
+                            scratchF7,scratchF8,leftoverStackArg0,leftoverStackArg1,leftoverStackArg2,
+                            leftoverStackArg3,leftoverStackArg4);
+        scratchF1 = extraOutF2;
         if (inst == 0) break;
       } while (*(int *)(machine + 0xa58) == 0);
       programInfo = *(int *)(emulator + 0xd80);
@@ -5644,7 +5644,7 @@ void _InterpreterRun(int emulator,int elementCount,double fparam_1,double fparam
     }
     if ((*(int *)(programInfo + 0x38) == 0x8804) || (*(int *)(programInfo + 0x38) == 0x8b30)) {
       if (*(int *)(machine + 0xa58) == 0) {
-        fparam_1 = (double)((int (*)())_InterpreterWriteFinalFragmentToBuffer)(machine,elementCount,leftoverR5,leftoverR6,leftoverR7,leftoverR8,viewportOrTarget);
+        scratchF1 = (double)((int (*)())_InterpreterWriteFinalFragmentToBuffer)(machine,elementCount,leftoverR5,leftoverR6,leftoverR7,leftoverR8,viewportOrTarget);
         programInfo = *(int *)(emulator + 0xd80);
         elementCount = extraOut3;
       }

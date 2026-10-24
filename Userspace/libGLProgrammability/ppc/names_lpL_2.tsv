@@ -1,0 +1,167 @@
+local	OutputConstantUnion	in_stack_fffffe08	leftoverStackArg0	INFERRED	stack argument slot forwarded unchanged to the callees
+local	OutputConstantUnion	in_stack_fffffe10	leftoverStackArg1	INFERRED	stack argument slot forwarded unchanged to the callees
+local	OutputConstantUnion	in_stack_fffffe18	leftoverStackArg2	INFERRED	stack argument slot forwarded unchanged to the callees
+local	OutputConstantUnion	in_stack_fffffe20	leftoverStackArg3	INFERRED	stack argument slot forwarded unchanged to the callees
+local	OutputConstantUnion	in_stack_fffffe28	leftoverStackArg4	INFERRED	stack argument slot forwarded unchanged to the callees
+local	TGenericLinker__GetBindingTableString	in_stack_ffffff88	unusedStackArg0	INFERRED	stack argument slot never read
+local	_InterpreterEmulateOp	fparam_1	unusedFloatArg1	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterEmulateOp	fparam_3	scratchF3	INFERRED	FPR f3 argument leftover forwarded unchanged to callees
+local	_InterpreterEmulateOp	fparam_4	scratchF4	INFERRED	FPR f4 argument leftover forwarded unchanged to callees
+local	_InterpreterEmulateOp	fparam_9	unusedFloatArg9	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterEmulateOp	fparam_10	unusedFloatArg10	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterEmulateOp	fparam_11	unusedFloatArg11	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterEmulateOp	fparam_12	unusedFloatArg12	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterEmulateOp	fparam_13	unusedFloatArg13	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterEmulateOp	in_stack_fffffe78	leftoverStackArg0	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterEmulateOp	in_stack_fffffe80	leftoverStackArg1	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterEmulateOp	in_stack_fffffe88	leftoverStackArg2	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterEmulateOp	in_stack_fffffe90	leftoverStackArg3	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterEmulateOp	in_stack_fffffe98	leftoverStackArg4	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterRun	fparam_2	scratchF2	INFERRED	FPR f2 argument leftover forwarded unchanged to callees
+local	_InterpreterRun	fparam_3	scratchF3	INFERRED	FPR f3 argument leftover forwarded unchanged to callees
+local	_InterpreterRun	fparam_4	scratchF4	INFERRED	FPR f4 argument leftover forwarded unchanged to callees
+local	_InterpreterRun	fparam_5	scratchF5	INFERRED	FPR f5 argument leftover forwarded unchanged to callees
+local	_InterpreterRun	fparam_6	scratchF6	INFERRED	FPR f6 argument leftover forwarded unchanged to callees
+local	_InterpreterRun	fparam_7	scratchF7	INFERRED	FPR f7 argument leftover forwarded unchanged to callees
+local	_InterpreterRun	fparam_8	scratchF8	INFERRED	FPR f8 argument leftover forwarded unchanged to callees
+local	_InterpreterRun	fparam_9	unusedFloatArg9	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterRun	fparam_10	unusedFloatArg10	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterRun	fparam_11	unusedFloatArg11	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterRun	fparam_12	unusedFloatArg12	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterRun	fparam_13	unusedFloatArg13	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterRun	in_stack_ffffff38	leftoverStackArg0	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterRun	in_stack_ffffff40	leftoverStackArg1	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterRun	in_stack_ffffff48	leftoverStackArg2	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterRun	in_stack_ffffff50	leftoverStackArg3	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterRun	in_stack_ffffff58	leftoverStackArg4	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterTextureSamplerSampleTexel1D	fparam_2	scratchF2	INFERRED	FPR f2 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel1D	fparam_3	scratchF3	INFERRED	FPR f3 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel1D	fparam_4	scratchF4	INFERRED	FPR f4 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel1D	fparam_5	scratchF5	INFERRED	FPR f5 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel1D	fparam_6	scratchF6	INFERRED	FPR f6 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel1D	fparam_7	scratchF7	INFERRED	FPR f7 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel1D	fparam_8	scratchF8	INFERRED	FPR f8 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel1D	fparam_9	unusedFloatArg9	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel1D	fparam_10	unusedFloatArg10	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel1D	fparam_11	unusedFloatArg11	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel1D	fparam_12	unusedFloatArg12	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel1D	in_stack_ffffff48	leftoverStackArg0	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterTextureSamplerSampleTexel1D	in_stack_ffffff50	leftoverStackArg1	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterTextureSamplerSampleTexel1D	in_stack_ffffff58	leftoverStackArg2	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterTextureSamplerSampleTexel1D	in_stack_ffffff60	leftoverStackArg3	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterTextureSamplerSampleTexel2D	fparam_2	scratchF2	INFERRED	FPR f2 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel2D	fparam_3	scratchF3	INFERRED	FPR f3 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel2D	fparam_4	scratchF4	INFERRED	FPR f4 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel2D	fparam_5	scratchF5	INFERRED	FPR f5 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel2D	fparam_6	scratchF6	INFERRED	FPR f6 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel2D	fparam_7	scratchF7	INFERRED	FPR f7 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel2D	fparam_8	scratchF8	INFERRED	FPR f8 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel2D	fparam_9	unusedFloatArg9	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2D	fparam_10	unusedFloatArg10	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2D	fparam_11	unusedFloatArg11	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2D	fparam_12	unusedFloatArg12	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2D	fparam_13	unusedFloatArg13	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2D	in_stack_ffffff48	leftoverStackArg0	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterTextureSamplerSampleTexel2D	in_stack_ffffff50	leftoverStackArg1	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterTextureSamplerSampleTexel2D	in_stack_ffffff58	leftoverStackArg2	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterTextureSamplerSampleTexel2D	in_stack_ffffff60	leftoverStackArg3	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterTextureSamplerSampleTexel2D	in_stack_ffffff68	leftoverStackArg4	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterTextureSamplerSampleTexel3D	fparam_2	scratchF2	INFERRED	FPR f2 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel3D	fparam_3	scratchF3	INFERRED	FPR f3 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel3D	fparam_4	scratchF4	INFERRED	FPR f4 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel3D	fparam_5	scratchF5	INFERRED	FPR f5 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel3D	fparam_6	scratchF6	INFERRED	FPR f6 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel3D	fparam_7	scratchF7	INFERRED	FPR f7 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel3D	fparam_8	scratchF8	INFERRED	FPR f8 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel3D	fparam_9	unusedFloatArg9	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel3D	fparam_10	unusedFloatArg10	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel3D	fparam_11	unusedFloatArg11	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel3D	fparam_12	unusedFloatArg12	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel3D	in_stack_ffffff48	leftoverStackArg0	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterTextureSamplerSampleTexel3D	in_stack_ffffff50	leftoverStackArg1	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterTextureSamplerSampleTexel3D	in_stack_ffffff58	leftoverStackArg2	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterTextureSamplerSampleTexel3D	in_stack_ffffff60	leftoverStackArg3	INFERRED	stack argument slot forwarded unchanged to the callees
+local	_InterpreterTextureSamplerCalculateLambda1D	fparam_1	unusedFloatArg1	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda1D	fparam_2	unusedFloatArg2	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda1D	fparam_3	unusedFloatArg3	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda1D	fparam_4	unusedFloatArg4	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda1D	fparam_5	unusedFloatArg5	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda1D	fparam_6	unusedFloatArg6	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda1D	fparam_7	unusedFloatArg7	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda1D	fparam_8	unusedFloatArg8	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda1D	fparam_9	unusedFloatArg9	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda1D	fparam_10	unusedFloatArg10	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda1D	fparam_11	unusedFloatArg11	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda1D	fparam_12	unusedFloatArg12	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda2D	fparam_1	unusedFloatArg1	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda2D	fparam_2	unusedFloatArg2	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda2D	fparam_3	unusedFloatArg3	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda2D	fparam_4	unusedFloatArg4	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda2D	fparam_5	unusedFloatArg5	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda2D	fparam_6	unusedFloatArg6	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda2D	fparam_7	unusedFloatArg7	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda2D	fparam_8	unusedFloatArg8	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda2D	fparam_9	unusedFloatArg9	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda2D	fparam_10	unusedFloatArg10	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda2D	fparam_11	unusedFloatArg11	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda2D	fparam_12	unusedFloatArg12	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda3D	fparam_1	unusedFloatArg1	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda3D	fparam_2	unusedFloatArg2	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda3D	fparam_3	unusedFloatArg3	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda3D	fparam_4	unusedFloatArg4	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda3D	fparam_5	unusedFloatArg5	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda3D	fparam_6	unusedFloatArg6	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda3D	fparam_7	unusedFloatArg7	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda3D	fparam_8	unusedFloatArg8	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda3D	fparam_9	unusedFloatArg9	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda3D	fparam_10	unusedFloatArg10	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda3D	fparam_11	unusedFloatArg11	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerCalculateLambda3D	fparam_12	unusedFloatArg12	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	fparam_1	scratchF1	INFERRED	FPR f1 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	fparam_2	unusedFloatArg2	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	fparam_3	unusedFloatArg3	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	fparam_4	unusedFloatArg4	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	fparam_5	unusedFloatArg5	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	fparam_6	unusedFloatArg6	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	fparam_7	unusedFloatArg7	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	fparam_8	unusedFloatArg8	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	fparam_9	unusedFloatArg9	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	fparam_10	unusedFloatArg10	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	fparam_11	unusedFloatArg11	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	fparam_1	scratchF1	INFERRED	FPR f1 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	fparam_2	unusedFloatArg2	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	fparam_3	unusedFloatArg3	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	fparam_4	unusedFloatArg4	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	fparam_5	unusedFloatArg5	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	fparam_6	unusedFloatArg6	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	fparam_7	unusedFloatArg7	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	fparam_8	unusedFloatArg8	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	fparam_9	unusedFloatArg9	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	fparam_10	unusedFloatArg10	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	fparam_11	unusedFloatArg11	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	fparam_12	unusedFloatArg12	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	fparam_13	unusedFloatArg13	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	fparam_1	scratchF1	INFERRED	FPR f1 argument leftover forwarded unchanged to callees
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	fparam_2	unusedFloatArg2	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	fparam_3	unusedFloatArg3	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	fparam_4	unusedFloatArg4	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	fparam_5	unusedFloatArg5	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	fparam_6	unusedFloatArg6	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	fparam_7	unusedFloatArg7	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	fparam_8	unusedFloatArg8	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	fparam_9	unusedFloatArg9	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	fparam_10	unusedFloatArg10	INFERRED	never read: only in the signature (stale FPR argument)
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	fparam_11	unusedFloatArg11	INFERRED	never read: only in the signature (stale FPR argument)
+local	_PPEmulatorEmulateSingleOp	fparam_1	scratchF1	INFERRED	FPR f1 argument leftover forwarded unchanged to callees
+local	_PPEmulatorEmulateSingleOp	fparam_2	scratchF2	INFERRED	FPR f2 argument leftover forwarded unchanged to callees
+local	_PPEmulatorEmulateSingleOp	fparam_3	scratchF3	INFERRED	FPR f3 argument leftover forwarded unchanged to callees
+local	_PPEmulatorEmulateSingleOp	fparam_4	scratchF4	INFERRED	FPR f4 argument leftover forwarded unchanged to callees
+local	_PPEmulatorEmulateSingleOp	fparam_5	scratchF5	INFERRED	FPR f5 argument leftover forwarded unchanged to callees
+local	_PPEmulatorEmulateSingleOp	fparam_6	scratchF6	INFERRED	FPR f6 argument leftover forwarded unchanged to callees
+local	_PPEmulatorEmulateSingleOp	fparam_7	scratchF7	INFERRED	FPR f7 argument leftover forwarded unchanged to callees
+local	_PPEmulatorEmulateSingleOp	fparam_8	scratchF8	INFERRED	FPR f8 argument leftover forwarded unchanged to callees
+local	_PPEmulatorEmulateSingleOp	fparam_9	scratchF9	INFERRED	FPR f9 argument leftover forwarded unchanged to callees
+local	_PPEmulatorEmulateSingleOp	fparam_10	scratchF10	INFERRED	FPR f10 argument leftover forwarded unchanged to callees
+local	_PPEmulatorEmulateSingleOp	fparam_11	scratchF11	INFERRED	FPR f11 argument leftover forwarded unchanged to callees
+local	_PPEmulatorEmulateSingleOp	fparam_12	scratchF12	INFERRED	FPR f12 argument leftover forwarded unchanged to callees
+local	_PPEmulatorEmulateSingleOp	fparam_13	scratchF13	INFERRED	FPR f13 argument leftover forwarded unchanged to callees

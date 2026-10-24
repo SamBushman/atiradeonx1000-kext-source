@@ -178,10 +178,10 @@ int _PPEmulatorFramebufferFormat(emulator)
 }
 
 /* _PPEmulatorEmulateSingleOp @ 0x97be5be4 (8 bytes) */
-void _PPEmulatorEmulateSingleOp(int emulator,undefined4 inst,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12,double fparam_13)
+void _PPEmulatorEmulateSingleOp(int emulator,undefined4 inst,double scratchF1,double scratchF2,double scratchF3,double scratchF4,double scratchF5,double scratchF6,double scratchF7,double scratchF8,double scratchF9,double scratchF10,double scratchF11,double scratchF12,double scratchF13)
 {
-  ((int * (*)())_InterpreterEmulateOp)(*(undefined4 *)(emulator + 0xdf0),inst,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,
-             fparam_6,fparam_7,fparam_8,fparam_9,fparam_10,fparam_11,fparam_12,fparam_13);
+  ((int * (*)())_InterpreterEmulateOp)(*(undefined4 *)(emulator + 0xdf0),inst,scratchF1,scratchF2,scratchF3,scratchF4,scratchF5,
+             scratchF6,scratchF7,scratchF8,scratchF9,scratchF10,scratchF11,scratchF12,scratchF13);
   return;
 }
 

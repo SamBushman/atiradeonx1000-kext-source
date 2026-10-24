@@ -24,3 +24,9 @@ Pitfalls found in the lpK round (all gate- or check-visible):
 * A split that leaves one use on the old name shows as DATAFLOW / UNINIT: list every line of the variable (`grep -n`) before writing ranges (multi-line `for (...)` headers, `x = f(x)` lines, the malloc after a length computation).
 * Fake-struct locals (`local_50[2]`, `local_48`, `local_40[2]` in `TGenericLinker__BuildSymbolTableList`) are addressed relative to each other (`(int)local_40 + i*4 - 8`): the number of 4-byte declarations a split adds changes their relative distance (MERGE of A-slots). Keep the added declaration count even, or leave the function's split count where the gate passes.
 * `find_webs` refuses functions with `do ... while( true )` / goto spaghetti ("do without while"); use `rng.py` ranges there.
+
+Pitfalls found in the lpL round:
+* `ph.py` now also counts `fparam_N` (FPR parameters), `in_stack_*` (stack argument slots) and `FUN_xxxx` calls/definitions: the older counters (`[a-z]{0,3}Var..|local_..|param_..|in_[a-z0-9]+`) missed all of them because `\b` does not match inside `fparam_1` / `in_stack_ffffff48`, and ignored the capitalised `pTVar` prefix.
+* A split that adds or removes declarations shifts the `#N` line anchors of OTHER tables' rows for the same function (names_L2_roles.tsv `OutputBinary`); the first apply passes and the next `--check` errors with "neither X nor Y in the segment". Convert the row's anchor to a regex over the Ghidra line (`orig.py` prints it).
+* An FPR scratch (`fparam_N` assigned in several `switch` cases of `_InterpreterEmulateOp` and also forwarded as a stale argument to the texture sampler) is ONE web: it cannot be split; name it after the register (`scratchF2`) and list the roles in the evidence.
+* Gate base must be the last GATED commit; a gate of a committed tree against HEAD compares the tree with itself and reports IDENTICAL.

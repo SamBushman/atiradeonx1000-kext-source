@@ -1546,11 +1546,11 @@
 0x97c1a0c8	52	___cxa_get_globals_fast	part_025	converted
 0x97c1a0fc	220	___cxa_get_globals	part_025	converted
 0x97c1a1d8	76	___eprintf	part_025	converted
-0x97c1a23c	16	FUN_97c1a23c	part_025	converted
-0x97c1a24c	12	FUN_97c1a24c	part_025	converted
-0x97c1a258	4	FUN_97c1a258	part_025	converted
-0x97c1a25c	24	FUN_97c1a25c	part_025	converted
-0x97c1a28c	60	FUN_97c1a28c	part_025	converted
+0x97c1a23c	16	_savef20	part_025	converted
+0x97c1a24c	12	_savef24	part_025	converted
+0x97c1a258	4	_savef27	part_025	converted
+0x97c1a25c	24	_savef28	part_025	converted
+0x97c1a28c	60	_restf20	part_025	converted
 0x97c1a2c8	120	_size_of_encoded_value_97c1a2c8	part_025	converted
 0x97c1a340	172	_base_of_encoded_value	part_025	converted
 0x97c1a3ec	48	_read_uleb128_97c1a3ec	part_025	converted

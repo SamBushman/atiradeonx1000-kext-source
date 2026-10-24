@@ -1,0 +1,5 @@
+func	FUN_97c1a23c	_savef20	CONFIRMED	0x97c1a23c = `stfd f20,-96(r1)`: inner entry of the FPR save millicode (f14 at 0x97c1a224, 4 bytes each) running f20..f23 into the next entry
+func	FUN_97c1a24c	_savef24	CONFIRMED	0x97c1a24c = `stfd f24,-64(r1)`: inner entry of the FPR save millicode (f24..f26 into _savef27)
+func	FUN_97c1a258	_savef27	CONFIRMED	0x97c1a258 = `stfd f27,-40(r1)`: single store falling into _savef28
+func	FUN_97c1a25c	_savef28	CONFIRMED	0x97c1a25c = `stfd f28,-32(r1)`, f29..f31, `stw r0,8(r1)`, `blr`: tail of the FPR save millicode
+func	FUN_97c1a28c	_restf20	CONFIRMED	0x97c1a28c = `lfd f20,-96(r1)`: inner entry of the FPR restore millicode (f14 at 0x97c1a274): lfd f20..f31, `lwz r0,8(r1)`, `mtlr r0`, `blr`

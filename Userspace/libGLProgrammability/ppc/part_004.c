@@ -3733,11 +3733,11 @@ int OutputConstantUnion(intermConstantUnion, intermTraverser)
   double scratchF6;
   double scratchF7;
   double scratchF8;
-  double in_stack_fffffe08;
-  double in_stack_fffffe10;
-  double in_stack_fffffe18;
-  double in_stack_fffffe20;
-  double in_stack_fffffe28;
+  double leftoverStackArg0;
+  double leftoverStackArg1;
+  double leftoverStackArg2;
+  double leftoverStackArg3;
+  double leftoverStackArg4;
   undefined **typeTemp1OrTextBuf [4];
   char locTextBuf [20];
   uint typeTemp1Bits;
@@ -3786,8 +3786,8 @@ LAB_97b977f8:
           if (componentBasicType == 1) {
             ((char * (*)())_glp_dtostr)(getTypeResult,intermTraverserCopy,floatTextBuf,300,
                         (double)*(float *)(*(int *)(intermConstantUnion + 0x30) + componentIndex * 4),DOUBLE_97c30a70,
-                        scratchF3,scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,in_stack_fffffe08,in_stack_fffffe10,
-                        in_stack_fffffe18,in_stack_fffffe20,in_stack_fffffe28);
+                        scratchF3,scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,leftoverStackArg1,
+                        leftoverStackArg2,leftoverStackArg3,leftoverStackArg4);
             _sprintf(floatTextBuf,"%s (%s)",floatTextBuf,"const float");
             __ZN13TInfoSinkBase6appendEPKc(infoSink + 8,floatTextBuf);
             goto LAB_97b977f8;

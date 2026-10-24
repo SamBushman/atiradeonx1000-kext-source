@@ -1457,36 +1457,36 @@ int ___eprintf(format, arg1, arg2, arg3)
   _abort();
 }
 
-/* FUN_97c1a23c @ 0x97c1a23c (16 bytes) */
-int FUN_97c1a23c()
+/* _savef20 @ 0x97c1a23c (16 bytes) */
+int _savef20()
 {
   undefined4 r3In;
   
   return r3In;
 }
 
-/* FUN_97c1a24c @ 0x97c1a24c (12 bytes) */
-int FUN_97c1a24c()
+/* _savef24 @ 0x97c1a24c (12 bytes) */
+int _savef24()
 {
   return;
 }
 
-/* FUN_97c1a258 @ 0x97c1a258 (4 bytes) */
-int FUN_97c1a258()
+/* _savef27 @ 0x97c1a258 (4 bytes) */
+int _savef27()
 {
   return;
 }
 
-/* FUN_97c1a25c @ 0x97c1a25c (24 bytes) */
-int FUN_97c1a25c()
+/* _savef28 @ 0x97c1a25c (24 bytes) */
+int _savef28()
 {
   undefined4 r3In;
   
   return r3In;
 }
 
-/* FUN_97c1a28c @ 0x97c1a28c (60 bytes) */
-int FUN_97c1a28c()
+/* _restf20 @ 0x97c1a28c (60 bytes) */
+int _restf20()
 {
   return;
 }
