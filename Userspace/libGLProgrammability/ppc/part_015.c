@@ -1412,9 +1412,14 @@ int _PPCRuntimeCompilerLoop(compiler)
 int _PPCRuntimeCompilerCompileNO(compiler)
   int compiler;
 {
-  int sourceIndexOrRecord;
+  undefined4 texCodeCursor;
+  uint destRegisterTable;
+  uint registerBaseIndex;
+  int srcByteOffset;
+  int srcRecordPtr;
+  int srcIndex;
   int instructionRecord;
-  undefined4 textureObjectOrCodeCursor;
+  undefined4 samplerTextureObject;
   undefined4 srcDescWord7;
   undefined4 glpDCBReallocResult;
   int glpDCBReallocResult2;
@@ -1437,7 +1442,7 @@ int _PPCRuntimeCompilerCompileNO(compiler)
   bool writesDestination;
   undefined4 *instructionListCursor;
   int passIndex;
-  uint sourceCountOrTemp;
+  uint sourceCount;
   uint loopIndex2;
   int sourceRecord;
   undefined4 codeBuffer;
@@ -1476,10 +1481,10 @@ int _PPCRuntimeCompilerCompileNO(compiler)
         currentInst = *(uint **)(compiler + 0xe28);
         componentCount = 1;
         writesDestination = true;
-        sourceCountOrTemp = currentInst[0xc];
+        sourceCount = currentInst[0xc];
         opcode = *currentInst;
         saturate = *(char *)(currentInst + 1);
-        if (sourceCountOrTemp != 0) {
+        if (sourceCount != 0) {
           intTemp = 0;
           do {
             if ((*(char *)((int)currentInst + intTemp + 0x48) != '\0') &&
@@ -1487,13 +1492,13 @@ int _PPCRuntimeCompilerCompileNO(compiler)
               componentCount = loopIndex2;
             }
             intTemp = intTemp + 0x24;
-            sourceCountOrTemp = sourceCountOrTemp - 1;
-          } while (sourceCountOrTemp != 0);
+            sourceCount = sourceCount - 1;
+          } while (sourceCount != 0);
         }
         if (opcode == 0x22) {
           if ((*(int *)(compiler + 0x380) == 0) &&
              (((destBaseIndex = *(ushort *)(currentInst + 7),
-               sourceCountOrTemp = ((int (*)())_PPCRuntimeCompilerGetBaseIndexInRegister)(compiler,0x10), destBaseIndex != sourceCountOrTemp ||
+               registerBaseIndex = ((int (*)())_PPCRuntimeCompilerGetBaseIndexInRegister)(compiler,0x10), destBaseIndex != registerBaseIndex ||
                (destRegisterOffsets = (int *)currentInst[3],
                intTemp = ((int (*)())_PPCRuntimeCompilerGetOffsetInRegister)(compiler,0x10), *destRegisterOffsets != intTemp)) ||
               (currentInst = *(uint **)(compiler + 0xe28), (currentInst[10] & 0x1000000) == 0)))) {
@@ -1502,27 +1507,27 @@ int _PPCRuntimeCompilerCompileNO(compiler)
           }
           if ((*(int *)(compiler + 0x3b8) == 0) &&
              (((destBaseIndex = *(ushort *)(currentInst + 7),
-               sourceCountOrTemp = ((int (*)())_PPCRuntimeCompilerGetBaseIndexInRegister)(compiler,0x11), destBaseIndex != sourceCountOrTemp ||
-               (sourceCountOrTemp = currentInst[3], intTemp = ((int (*)())_PPCRuntimeCompilerGetOffsetInRegister)(compiler,0x11),
-               *(int *)(sourceCountOrTemp + 4) != intTemp)) ||
+               registerBaseIndex = ((int (*)())_PPCRuntimeCompilerGetBaseIndexInRegister)(compiler,0x11), destBaseIndex != registerBaseIndex ||
+               (destRegisterTable = currentInst[3], intTemp = ((int (*)())_PPCRuntimeCompilerGetOffsetInRegister)(compiler,0x11),
+               *(int *)(destRegisterTable + 4) != intTemp)) ||
               (currentInst = *(uint **)(compiler + 0xe28), (currentInst[10] & 0x2000000) == 0)))) {
             _PPCRuntimeCompilerBackupRegister(compiler,0x11);
             currentInst = *(uint **)(compiler + 0xe28);
           }
           if ((*(int *)(compiler + 0x3f0) == 0) &&
              (((destBaseIndex = *(ushort *)(currentInst + 7),
-               sourceCountOrTemp = ((int (*)())_PPCRuntimeCompilerGetBaseIndexInRegister)(compiler,0x12), destBaseIndex != sourceCountOrTemp ||
-               (sourceCountOrTemp = currentInst[3], intTemp = ((int (*)())_PPCRuntimeCompilerGetOffsetInRegister)(compiler,0x12),
-               *(int *)(sourceCountOrTemp + 8) != intTemp)) ||
+               registerBaseIndex = ((int (*)())_PPCRuntimeCompilerGetBaseIndexInRegister)(compiler,0x12), destBaseIndex != registerBaseIndex ||
+               (destRegisterTable = currentInst[3], intTemp = ((int (*)())_PPCRuntimeCompilerGetOffsetInRegister)(compiler,0x12),
+               *(int *)(destRegisterTable + 8) != intTemp)) ||
               (currentInst = *(uint **)(compiler + 0xe28), (currentInst[10] & 0x4000000) == 0)))) {
             _PPCRuntimeCompilerBackupRegister(compiler,0x12);
             currentInst = *(uint **)(compiler + 0xe28);
           }
           if ((*(int *)(compiler + 0x428) == 0) &&
              (((destBaseIndex = *(ushort *)(currentInst + 7),
-               sourceCountOrTemp = ((int (*)())_PPCRuntimeCompilerGetBaseIndexInRegister)(compiler,0x13), destBaseIndex != sourceCountOrTemp ||
-               (sourceCountOrTemp = currentInst[3], intTemp = ((int (*)())_PPCRuntimeCompilerGetOffsetInRegister)(compiler,0x13),
-               *(int *)(sourceCountOrTemp + 0xc) != intTemp)) ||
+               registerBaseIndex = ((int (*)())_PPCRuntimeCompilerGetBaseIndexInRegister)(compiler,0x13), destBaseIndex != registerBaseIndex ||
+               (destRegisterTable = currentInst[3], intTemp = ((int (*)())_PPCRuntimeCompilerGetOffsetInRegister)(compiler,0x13),
+               *(int *)(destRegisterTable + 0xc) != intTemp)) ||
               (currentInst = *(uint **)(compiler + 0xe28), (currentInst[10] & 0x8000000) == 0)))) {
             _PPCRuntimeCompilerBackupRegister(compiler,0x13);
             currentInst = *(uint **)(compiler + 0xe28);
@@ -1544,14 +1549,14 @@ int _PPCRuntimeCompilerCompileNO(compiler)
           }
           else if ((*(char *)(currentInst + 0x12) == '\0') ||
                   (*(char *)((int)currentInst + 0x49) != *(char *)((int)currentInst + 0x6d))) {
-            sourceIndexOrRecord = 0;
+            srcIndex = 0;
             if (*(char *)(currentInst + 0x12) == '\0') {
               if (*(char *)(currentInst + 0x1b) != '\0') {
                 ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,currentInst[0x16],currentInst[0x17],currentInst[0x18],currentInst[0x19],
                            currentInst[0x1a],currentInst[0x1b],currentInst[0x1c],currentInst[0x1d],currentInst[0x1e],0,1
                           );
                 instruction = *(int *)(compiler + 0xe28);
-                sourceIndexOrRecord = 1;
+                srcIndex = 1;
                 srcDescWord8 = *(undefined4 *)(instruction + 0x54);
                 srcDescWord7 = *(undefined4 *)(instruction + 0x50);
                 srcDescWord6OrCodePtr = *(int **)(instruction + 0x4c);
@@ -1584,15 +1589,15 @@ LAB_97bdc778:
               chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
               codeCursor = *(int *)(compiler + 0xe30);
               *(undefined4 *)(codeCursor + chunkIndex * 4) = 0xfd008090;
-              sourceIndexOrRecord = sourceIndexOrRecord * 0x24 + *(int *)(compiler + 0xe28);
+              srcRecordPtr = srcIndex * 0x24 + *(int *)(compiler + 0xe28);
               *(int *)(compiler + 0xe30) = codeCursor + chunkIndex * 4 + 4;
-              srcDescWord1OrCodePtr = *(undefined4 *)(sourceIndexOrRecord + 0x38);
-              srcDescWord2 = *(undefined4 *)(sourceIndexOrRecord + 0x3c);
-              srcDescWord3 = *(undefined4 *)(sourceIndexOrRecord + 0x40);
-              srcDescWord4OrTemp = *(int *)(sourceIndexOrRecord + 0x44);
-              ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(sourceIndexOrRecord + 0x34),srcDescWord1OrCodePtr,srcDescWord2,srcDescWord3,srcDescWord4OrTemp,
-                         *(undefined4 *)(sourceIndexOrRecord + 0x48),*(undefined4 *)(sourceIndexOrRecord + 0x4c),
-                         *(undefined4 *)(sourceIndexOrRecord + 0x50),*(undefined4 *)(sourceIndexOrRecord + 0x54),1,1);
+              srcDescWord1OrCodePtr = *(undefined4 *)(srcRecordPtr + 0x38);
+              srcDescWord2 = *(undefined4 *)(srcRecordPtr + 0x3c);
+              srcDescWord3 = *(undefined4 *)(srcRecordPtr + 0x40);
+              srcDescWord4OrTemp = *(int *)(srcRecordPtr + 0x44);
+              ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(srcRecordPtr + 0x34),srcDescWord1OrCodePtr,srcDescWord2,srcDescWord3,srcDescWord4OrTemp,
+                         *(undefined4 *)(srcRecordPtr + 0x48),*(undefined4 *)(srcRecordPtr + 0x4c),
+                         *(undefined4 *)(srcRecordPtr + 0x50),*(undefined4 *)(srcRecordPtr + 0x54),1,1);
               chunkByteOffset = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
               srcDescWord6OrCodePtr = *(int **)(compiler + 0xe30);
               chunkByteOffset = chunkByteOffset << 2;
@@ -1603,7 +1608,7 @@ LAB_97bdc778:
               codeCursor = *(int *)(compiler + 0xe30);
               *(undefined4 *)(codeCursor + chunkIndex * 4) = 0xfd008090;
               *(int *)(compiler + 0xe30) = codeCursor + chunkIndex * 4 + 4;
-              sourceRecord = sourceIndexOrRecord * 0x24 + *(int *)(compiler + 0xe28);
+              sourceRecord = srcIndex * 0x24 + *(int *)(compiler + 0xe28);
               ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(sourceRecord + 0x34),*(undefined4 *)(sourceRecord + 0x38),
                          *(undefined4 *)(sourceRecord + 0x3c),*(undefined4 *)(sourceRecord + 0x40),
                          *(undefined4 *)(sourceRecord + 0x44),*(undefined4 *)(sourceRecord + 0x48),
@@ -1613,14 +1618,14 @@ LAB_97bdc778:
               codeCursor3 = *(int *)(compiler + 0xe30);
               *(undefined4 *)(codeCursor3 + chunkIndex2 * 4) = 0xfe208090;
               *(int *)(compiler + 0xe30) = codeCursor3 + chunkIndex2 * 4 + 4;
-              sourceIndexOrRecord = sourceIndexOrRecord * 0x24 + *(int *)(compiler + 0xe28);
-              srcDescWord1OrCodePtr = *(undefined4 *)(sourceIndexOrRecord + 0x38);
-              srcDescWord2 = *(undefined4 *)(sourceIndexOrRecord + 0x3c);
-              srcDescWord3 = *(undefined4 *)(sourceIndexOrRecord + 0x40);
-              srcDescWord4OrTemp = *(int *)(sourceIndexOrRecord + 0x44);
-              ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(sourceIndexOrRecord + 0x34),srcDescWord1OrCodePtr,srcDescWord2,srcDescWord3,srcDescWord4OrTemp,
-                         *(undefined4 *)(sourceIndexOrRecord + 0x48),*(undefined4 *)(sourceIndexOrRecord + 0x4c),
-                         *(undefined4 *)(sourceIndexOrRecord + 0x50),*(undefined4 *)(sourceIndexOrRecord + 0x54),2,1);
+              srcRecordPtr = srcIndex * 0x24 + *(int *)(compiler + 0xe28);
+              srcDescWord1OrCodePtr = *(undefined4 *)(srcRecordPtr + 0x38);
+              srcDescWord2 = *(undefined4 *)(srcRecordPtr + 0x3c);
+              srcDescWord3 = *(undefined4 *)(srcRecordPtr + 0x40);
+              srcDescWord4OrTemp = *(int *)(srcRecordPtr + 0x44);
+              ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(srcRecordPtr + 0x34),srcDescWord1OrCodePtr,srcDescWord2,srcDescWord3,srcDescWord4OrTemp,
+                         *(undefined4 *)(srcRecordPtr + 0x48),*(undefined4 *)(srcRecordPtr + 0x4c),
+                         *(undefined4 *)(srcRecordPtr + 0x50),*(undefined4 *)(srcRecordPtr + 0x54),2,1);
               chunkByteOffset = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
               srcDescWord6OrCodePtr = *(int **)(compiler + 0xe30);
               chunkByteOffset = chunkByteOffset << 2;
@@ -1628,12 +1633,12 @@ LAB_97bdc778:
             }
             else {
               if (componentCount != 4) goto LAB_97bdcb04;
-              sourceIndexOrRecord = sourceIndexOrRecord * 0x24;
+              srcByteOffset = srcIndex * 0x24;
               chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
               codeCursor = *(int *)(compiler + 0xe30);
               *(undefined4 *)(codeCursor + chunkIndex * 4) = 0xfd008090;
               *(int *)(compiler + 0xe30) = codeCursor + chunkIndex * 4 + 4;
-              sourceRecord = sourceIndexOrRecord + *(int *)(compiler + 0xe28);
+              sourceRecord = srcByteOffset + *(int *)(compiler + 0xe28);
               ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(sourceRecord + 0x34),*(undefined4 *)(sourceRecord + 0x38),
                          *(undefined4 *)(sourceRecord + 0x3c),*(undefined4 *)(sourceRecord + 0x40),
                          *(undefined4 *)(sourceRecord + 0x44),*(undefined4 *)(sourceRecord + 0x48),
@@ -1643,7 +1648,7 @@ LAB_97bdc778:
               codeCursor = *(int *)(compiler + 0xe30);
               *(undefined4 *)(codeCursor + chunkIndex * 4) = 0xfe208090;
               *(int *)(compiler + 0xe30) = codeCursor + chunkIndex * 4 + 4;
-              sourceRecord = sourceIndexOrRecord + *(int *)(compiler + 0xe28);
+              sourceRecord = srcByteOffset + *(int *)(compiler + 0xe28);
               ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(sourceRecord + 0x34),*(undefined4 *)(sourceRecord + 0x38),
                          *(undefined4 *)(sourceRecord + 0x3c),*(undefined4 *)(sourceRecord + 0x40),
                          *(undefined4 *)(sourceRecord + 0x44),*(undefined4 *)(sourceRecord + 0x48),
@@ -1653,14 +1658,14 @@ LAB_97bdc778:
               codeCursor3 = *(int *)(compiler + 0xe30);
               *(undefined4 *)(codeCursor3 + chunkIndex2 * 4) = 0xfe408090;
               *(int *)(compiler + 0xe30) = codeCursor3 + chunkIndex2 * 4 + 4;
-              sourceIndexOrRecord = sourceIndexOrRecord + *(int *)(compiler + 0xe28);
-              srcDescWord1OrCodePtr = *(undefined4 *)(sourceIndexOrRecord + 0x38);
-              srcDescWord2 = *(undefined4 *)(sourceIndexOrRecord + 0x3c);
-              srcDescWord3 = *(undefined4 *)(sourceIndexOrRecord + 0x40);
-              srcDescWord4OrTemp = *(int *)(sourceIndexOrRecord + 0x44);
-              ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(sourceIndexOrRecord + 0x34),srcDescWord1OrCodePtr,srcDescWord2,srcDescWord3,srcDescWord4OrTemp,
-                         *(undefined4 *)(sourceIndexOrRecord + 0x48),*(undefined4 *)(sourceIndexOrRecord + 0x4c),
-                         *(undefined4 *)(sourceIndexOrRecord + 0x50),*(undefined4 *)(sourceIndexOrRecord + 0x54),3,1);
+              srcRecordPtr = srcByteOffset + *(int *)(compiler + 0xe28);
+              srcDescWord1OrCodePtr = *(undefined4 *)(srcRecordPtr + 0x38);
+              srcDescWord2 = *(undefined4 *)(srcRecordPtr + 0x3c);
+              srcDescWord3 = *(undefined4 *)(srcRecordPtr + 0x40);
+              srcDescWord4OrTemp = *(int *)(srcRecordPtr + 0x44);
+              ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(srcRecordPtr + 0x34),srcDescWord1OrCodePtr,srcDescWord2,srcDescWord3,srcDescWord4OrTemp,
+                         *(undefined4 *)(srcRecordPtr + 0x48),*(undefined4 *)(srcRecordPtr + 0x4c),
+                         *(undefined4 *)(srcRecordPtr + 0x50),*(undefined4 *)(srcRecordPtr + 0x54),3,1);
               chunkByteOffset = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
               srcDescWord6OrCodePtr = *(int **)(compiler + 0xe30);
               chunkByteOffset = chunkByteOffset << 2;
@@ -2146,25 +2151,25 @@ switchD_97bdd53c_default:
                 srcDescWord4OrTemp = *(int *)(compiler + 0xe20);
                 if (*(int *)(*(int *)(srcDescWord4OrTemp + 0xd80) + 0x38) - 0x8b30U < 2) {
                   srcDescWord6OrCodePtr = *(int **)(*(int *)(compiler + 0xe28) + 0x58);
-                  textureObjectOrCodeCursor = *(undefined4 *)
+                  samplerTextureObject = *(undefined4 *)
                             (*(int *)((uint)*(ushort *)(*(int *)(compiler + 0xe28) + 0x68) * 4 +
                                       srcDescWord4OrTemp + 0xd84) + *srcDescWord6OrCodePtr);
                 }
                 else {
-                  textureObjectOrCodeCursor = *(undefined4 *)(*(int *)(compiler + 0xe28) + 0x10c);
+                  samplerTextureObject = *(undefined4 *)(*(int *)(compiler + 0xe28) + 0x10c);
                 }
                 ((int (*)())_PPCTextureSamplerAttachGLDContext)(*(undefined4 *)(compiler + 0xe1c),*(undefined4 *)(srcDescWord4OrTemp + 0xd9c));
                 intTemp = *(int *)(*(int *)(compiler + 0xe28) + 0x110);
                 if (intTemp == 2) {
                   srcDescWord1OrCodePtr = *(undefined4 *)(compiler + 0xe30);
-                  textureObjectOrCodeCursor = ((int (*)())_PPCTextureSamplerSampleTexelRECTRTCNO)(*(undefined4 *)(compiler + 0xe1c),textureObjectOrCodeCursor,srcDescWord1OrCodePtr);
+                  texCodeCursor = ((int (*)())_PPCTextureSamplerSampleTexelRECTRTCNO)(*(undefined4 *)(compiler + 0xe1c),samplerTextureObject,srcDescWord1OrCodePtr);
                 }
                 else {
                   if (intTemp != 3) goto switchD_97bdcdfc_caseD_3;
                   srcDescWord1OrCodePtr = *(undefined4 *)(compiler + 0xe30);
-                  textureObjectOrCodeCursor = ((int (*)())_PPCTextureSamplerSampleTexel2DRTCNO)(*(undefined4 *)(compiler + 0xe1c),textureObjectOrCodeCursor,srcDescWord1OrCodePtr);
+                  texCodeCursor = ((int (*)())_PPCTextureSamplerSampleTexel2DRTCNO)(*(undefined4 *)(compiler + 0xe1c),samplerTextureObject,srcDescWord1OrCodePtr);
                 }
-                *(undefined4 *)(compiler + 0xe30) = textureObjectOrCodeCursor;
+                *(undefined4 *)(compiler + 0xe30) = texCodeCursor;
                 goto switchD_97bdcdfc_caseD_3;
               case 0x48:
                 if ((*(byte *)(*(int *)(compiler + 0xe28) + 0x28) & 1) != 0) {
