@@ -167,7 +167,7 @@ use	FUN_00050300	uVar14	dirtyUnitMask	INFERRED	(mask | (mask & mask2) << 8) shif
 use	FUN_00050300	uVar14	dirtyUnitMask	INFERRED	(mask | (mask & mask2) << 8) shifted right once per iteration; the loop emits one register group per set bit	^\s*if\ \(\(uVar14\ \&\ 1\)\ !=\ 0\)\ \{$	+1
 use	FUN_00050300	uVar14	dirtyUnitMask	INFERRED	(mask | (mask & mask2) << 8) shifted right once per iteration; the loop emits one register group per set bit	^\s*uVar14\ =\ uVar14\ >>\ 1;$	+1
 use	FUN_00050300	uVar14	dirtyUnitMask	INFERRED	(mask | (mask & mask2) << 8) shifted right once per iteration; the loop emits one register group per set bit	^\s*\}\ while\ \(uVar14\ !=\ 0\);$	+1
-local	FUN_00050300	param_1	commandStream	INFERRED	called as FUN_00050300(ctx + 0x240) from FUN_0002c6c0; +0x2758/+0x275c are streamAllocate/streamSetCurrent (ctx+0x2998/+0x299c) and the shadows it reads are ctx+0x240+offset
+local	FUN_00050300	param_1	glContext	INFERRED	called as FUN_00050300(ctx + 0x240) from FUN_0002c6c0; +0x2758/+0x275c are streamAllocate/streamSetCurrent (ctx+0x2998/+0x299c) and the shadows it reads are ctx+0x240+offset
 use	FUN_00050300	uVar8	unitShadowValue0	INFERRED	value read through texUnitShadowPtr0 for the current unit, stored into the register-write packet	^\s*uVar8\ =\ \*puVar10;$	+1
 use	FUN_00050300	uVar8	unitShadowValue0	INFERRED	value read through texUnitShadowPtr0 for the current unit, stored into the register-write packet	^\s*puVar2\[1\]\ =\ uVar8;$@2	+1
 use	FUN_00050300	uVar8	unitShadowValue1	INFERRED	value read through texUnitShadowPtr1 for the current unit, stored into the register-write packet	^\s*uVar8\ =\ \*puVar11;$	+1
@@ -1626,3 +1626,340 @@ use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback 
 use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar19\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@9	+1
 use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*_memcpy\(uVar4,\*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\),\*puVar20\ <<\ 2\);$@9	+1
 use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\ =\ uVar4;$@9	+1
+local	FUN_0004a860	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+local	FUN_0004a8f0	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+local	FUN_0004ab60	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+local	FUN_0004ac90	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004ac90	piVar9	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*piVar9\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x1e5c\);$	+2
+use	FUN_0004ac90	piVar9	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*piVar9\[0x68\]\ =\ iVar14;$	+1
+use	FUN_0004ac90	piVar9	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*piVar9\[99\]\ =\ iVar14;$	+1
+use	FUN_0004ac90	piVar9	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*piVar9\[0x6d\]\ =\ iVar14;$	+1
+use	FUN_0004ac90	piVar9	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*piVar9\[0x72\]\ =\ iVar14;$	+1
+use	FUN_0004ac90	piVar9	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*\*\(uint\ \*\)\(\(int\)piVar9\ \+\ \(int\)\(\(\(unsigned\ char\ \*\)0x000010b8\)\ \+\ uVar2\)\)\ =$	+2
+use	FUN_0004ac90	piVar9	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*if\ \(\(bVar1\)\ \&\&\ \(\*\(undefined1\ \*\)\(\(int\)piVar9\ \+\ 0x10eb\)\ =\ 0,\ piVar9\ ==\ \*\(int\ \*\*\)\(param_1\ \+\ 0x1e64\)\)\)$	+1
+use	FUN_0004ac90	piVar9	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*iVar12\ =\ piVar9\[0xdac\];$	+4
+use	FUN_0004ac90	piVar9	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*iVar12\ =\ piVar9\[0xdaf\];$	+4
+use	FUN_0004ac90	piVar9	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*\*\(int\ \*\*\)\(param_1\ \+\ 0x1e64\)\ =\ piVar9;$	+1
+use	FUN_0004ac90	piVar9	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*if\ \(\*\(char\ \*\)\(\(int\)piVar9\ \+\ 0x10eb\)\ ==\ '\\0'\)\ \{$	+1
+use	FUN_0004ac90	piVar9	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*piVar6\ =\ piVar9;$@2	+1
+use	FUN_0004ac90	piVar9	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*piVar5\ =\ piVar9\ \+\ 0x20;$	+2
+use	FUN_0004ac90	piVar9	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*if\ \(\(\(uVar10\ \&\ 1\)\ !=\ 0\)\ \&\&\ \(\(1\ <<\ \(uVar2\ \&\ 0x3f\)\ \&\ piVar9\[0x436\]\)\ ==\ 0\)\)\ \{$	+1
+use	FUN_0004ac90	piVar9	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*\*\(undefined1\ \*\)\(\(int\)piVar9\ \+\ 0x10eb\)\ =\ 1;$	+1
+local	FUN_0004b190	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004b190	iVar7	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1e5c\);$	+4
+use	FUN_0004b190	iVar7	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1e5c\);$@2	+3
+use	FUN_0004b190	iVar7	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x294c\)\)\(param_1,iVar7\);$@2	+1
+use	FUN_0004b190	uVar8	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1930\);$	+1
+use	FUN_0004b190	uVar8	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1930\);$@2	+1
+use	FUN_0004b190	uVar8	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*\(\*pcVar3\)\(param_1,uVar8\);$	+1
+local	FUN_0004b480	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004b480	uVar2	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1930\);$	+1
+use	FUN_0004b480	uVar2	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x1930\)\ =\ uVar2;$	+1
+local	FUN_0004b520	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004b520	piVar1	glContextWord1e7c	INFERRED	load of glContext+0x1e7c (no field row, no register pairing): positional name	^\s*piVar1\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x1e7c\);$	+1
+use	FUN_0004b520	piVar1	glContextWord1e7c	INFERRED	load of glContext+0x1e7c (no field row, no register pairing): positional name	^\s*if\ \(param_2\ !=\ \*piVar1\)\ \{$	+1
+use	FUN_0004b520	piVar1	glContextWord1e7c	INFERRED	load of glContext+0x1e7c (no field row, no register pairing): positional name	^\s*\}\ while\ \(param_2\ !=\ piVar1\[iVar2\]\);$	+1
+use	FUN_0004b520	piVar1	glContextWord1e7c	INFERRED	load of glContext+0x1e7c (no field row, no register pairing): positional name	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ \(int\)piVar1\)\ =\ \*\(undefined4\ \*\)\(\(int\)piVar1\ \+\ iVar4\ \+\ 4\);$	+1
+use	FUN_0004b520	piVar1	glContextWord1e7c	INFERRED	load of glContext+0x1e7c (no field row, no register pairing): positional name	^\s*piVar1\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x1e7c\);$@2	+1
+local	FUN_0004b5d0	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004b5d0	piVar1	glContextWord1e7c	INFERRED	load of glContext+0x1e7c (no field row, no register pairing): positional name	^\s*piVar1\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x1e7c\);$	+1
+use	FUN_0004b5d0	piVar1	glContextWord1e7c	INFERRED	load of glContext+0x1e7c (no field row, no register pairing): positional name	^\s*if\ \(param_2\ !=\ \*piVar1\)\ \{$	+1
+use	FUN_0004b5d0	piVar1	glContextWord1e7c	INFERRED	load of glContext+0x1e7c (no field row, no register pairing): positional name	^\s*\}\ while\ \(piVar1\[iVar2\]\ !=\ param_2\);$	+1
+use	FUN_0004b5d0	piVar1	glContextWord1e7c	INFERRED	load of glContext+0x1e7c (no field row, no register pairing): positional name	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ \(int\)piVar1\)\ =\ \*\(undefined4\ \*\)\(\(int\)piVar1\ \+\ iVar4\ \+\ 4\);$	+1
+use	FUN_0004b5d0	piVar1	glContextWord1e7c	INFERRED	load of glContext+0x1e7c (no field row, no register pairing): positional name	^\s*piVar1\ =\ \*\(int\ \*\*\)\(param_1\ \+\ 0x1e7c\);$@2	+1
+local	FUN_0004b710	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+local	FUN_0004b7d0	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+local	FUN_0004bbf0	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004bbf0	uVar7	glContextWord1e6c	INFERRED	load of glContext+0x1e6c (no field row, no register pairing): positional name	^\s*uVar7\ =\ \*\(ushort\ \*\)\(param_1\ \+\ 0x1e6c\);$	+2
+use	FUN_0004bbf0	uVar7	glContextWord1e6c	INFERRED	load of glContext+0x1e6c (no field row, no register pairing): positional name	^\s*uVar7\ =\ \*\(ushort\ \*\)\(param_1\ \+\ 0x1e6c\);$@2	+1
+use	FUN_0004bbf0	uVar7	glContextWord1e6c	INFERRED	load of glContext+0x1e6c (no field row, no register pairing): positional name	^\s*\*\(ushort\ \*\)\(param_1\ \+\ 0x1e6c\)\ =\ uVar7\ \+\ 1;$	+1
+use	FUN_0004bbf0	uVar7	glContextWord1e6c	INFERRED	load of glContext+0x1e6c (no field row, no register pairing): positional name	^\s*uVar7\ =\ \*\(ushort\ \*\)\(param_1\ \+\ 0x1e6c\);$@3	+1
+use	FUN_0004bbf0	uVar7	glContextWord1e6c	INFERRED	load of glContext+0x1e6c (no field row, no register pairing): positional name	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1e5c\)\ =\ iVar6\ \+\ \(uint\)uVar7\ \*\ 0x3754\ \+\ \-0x3754;$	+1
+use	FUN_0004bbf0	uVar7	glContextWord1e6c	INFERRED	load of glContext+0x1e6c (no field row, no register pairing): positional name	^\s*\*\(ushort\ \*\)\(iVar4\ \+\ iVar15\)\ =\ uVar7\ \-\ 1;$	+1
+use	FUN_0004bbf0	uVar7	glContextWord1e6c	INFERRED	load of glContext+0x1e6c (no field row, no register pairing): positional name	^\s*\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x000015c8\)\ \+\ uVar5\ \*\ 0x3754\ \+\ iVar6\)\ =\ uVar7\ \-\ 1;$	+1
+use	FUN_0004bbf0	iVar15	glContextWord1e60	INFERRED	load of glContext+0x1e60 (no field row, no register pairing): positional name	^\s*iVar15\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1e60\)\ \+\ uVar5\ \*\ 0x3754;$	+5
+use	FUN_0004bbf0	iVar15	glContextWord1e60	INFERRED	load of glContext+0x1e60 (no field row, no register pairing): positional name	^\s*\*\(int\ \*\)\(param_1\ \+\ 0x1e5c\)\ =\ iVar15;$	+1
+use	FUN_0004bbf0	iVar15	glContextWord1e60	INFERRED	load of glContext+0x1e60 (no field row, no register pairing): positional name	^\s*if\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001550\)\ \+\ iVar15\)\ ==\ \*\(int\ \*\)\(param_1\ \+\ 0x18b0\)\ \&\&$	+2
+use	FUN_0004bbf0	iVar15	glContextWord1e60	INFERRED	load of glContext+0x1e60 (no field row, no register pairing): positional name	^\s*uVar10\ =\ \(uint\)\*\(ushort\ \*\)\(\(\(unsigned\ char\ \*\)0x000015c8\)\ \+\ iVar15\);$	+2
+local	FUN_0004c560	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004c560	iVar3	glContextWord1e68	INFERRED	load of glContext+0x1e68 (no field row, no register pairing): positional name	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1e68\);$	+4
+use	FUN_0004c560	iVar3	glContextWord1e68	INFERRED	load of glContext+0x1e68 (no field row, no register pairing): positional name	^\s*if\ \(\(iVar3\ !=\ param_2\)\ \&\&\ \(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000010d8\)\ \+\ param_2\)\ !=\ 0\)\)\ \{$	+1
+local	FUN_0004c720	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004c720	bVar1	glContextWord23e0	INFERRED	load of glContext+0x23e0 (no field row, no register pairing): positional name	^\s*bVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x23e0\)\ ==\ 0;$	+2
+use	FUN_0004c720	bVar1	glContextWord23e0	INFERRED	load of glContext+0x23e0 (no field row, no register pairing): positional name	^\s*if\ \(\(bVar1\)\ \|\|\ \(\*\(int\ \*\)\(param_1\ \+\ 0x2768\)\ ==\ 0\)\)\ \{$	+1
+use	FUN_0004c720	iVar12	glContextWord276c	INFERRED	load of glContext+0x276c (no field row, no register pairing): positional name	^\s*iVar12\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x276c\);$	+1
+use	FUN_0004c720	iVar12	glContextWord276c	INFERRED	load of glContext+0x276c (no field row, no register pairing): positional name	^\s*if\ \(iVar12\ ==\ iVar6\)\ \{$	+1
+use	FUN_0004c720	iVar12	glContextWord276c	INFERRED	load of glContext+0x276c (no field row, no register pairing): positional name	^\s*\*\(uint\ \*\)\(puVar7\ \+\ iVar12\ \*\ 4\ \+\ 200\)\ =$	+2
+use	FUN_0004c720	iVar12	glContextWord276c	INFERRED	load of glContext+0x276c (no field row, no register pairing): positional name	^\s*iVar12\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x276c\);$@2	+1
+use	FUN_0004c720	iVar12	glContextWord276c	INFERRED	load of glContext+0x276c (no field row, no register pairing): positional name	^\s*if\ \(iVar12\ ==\ iVar6\)\ \{$@2	+1
+use	FUN_0004c720	iVar12	glContextWord276c	INFERRED	load of glContext+0x276c (no field row, no register pairing): positional name	^\s*\*\(uint\ \*\)\(puVar7\ \+\ iVar12\ \*\ 4\ \+\ 200\)\ =$@2	+2
+use	FUN_0004c720	uVar14	vapOutVtxFmt0	INFERRED	field vap_out_vtx_fmt_0 of the GLD context (ctx+0x1ddc)	^\s*uVar14\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1b9c\);$	+1
+use	FUN_0004c720	uVar14	vapOutVtxFmt0	INFERRED	field vap_out_vtx_fmt_0 of the GLD context (ctx+0x1ddc)	^\s*if\ \(\(\(\(\(param_2\ !=\ 0\)\ \|\|\ \(iVar6\ !=\ 0\)\)\ \|\|\ \(uVar8\ !=\ \*\(uint\ \*\)\(puVar7\ \+\ 0x228\)\)\)\ \|\|$	+5
+use	FUN_0004c720	uVar14	vapOutVtxFmt0	INFERRED	field vap_out_vtx_fmt_0 of the GLD context (ctx+0x1ddc)	^\s*\*\(uint\ \*\)\(puVar7\ \+\ 0x218\)\ =\ uVar14;$	+1
+use	FUN_0004c720	uVar14	vapOutVtxFmt0	INFERRED	field vap_out_vtx_fmt_0 of the GLD context (ctx+0x1ddc)	^\s*iVar18\ =\ \(uVar14\ >>\ 1\ \&\ 1\)\ \+\ \(uVar14\ >>\ 2\ \&\ 1\)\ \+\ \(uVar14\ >>\ 3\ \&\ 1\)\ \+\ \(uVar14\ >>\ 4\ \&\ 1\);$	+1
+use	FUN_0004c720	uVar17	glContextWord1bb0	INFERRED	load of glContext+0x1bb0 (no field row, no register pairing): positional name	^\s*uVar17\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1bb0\);$	+1
+use	FUN_0004c720	uVar17	glContextWord1bb0	INFERRED	load of glContext+0x1bb0 (no field row, no register pairing): positional name	^\s*\*\(undefined4\ \*\)\(puVar7\ \+\ 0x220\)\ =\ uVar17;$	+1
+use	FUN_0004c720	uVar17	glContextWord1bb0	INFERRED	load of glContext+0x1bb0 (no field row, no register pairing): positional name	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x1bb4\)\ =\ uVar17;$	+1
+local	FUN_0004ce30	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004ce30	iVar4	glState	INFERRED	*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+1
+use	FUN_0004ce30	iVar4	glState	INFERRED	*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x10\);$	+1
+use	FUN_0004ce30	iVar4	glState	INFERRED	*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators	^\s*iVar8\ =\ iVar4\ \+\ 0x30;$	+3
+use	FUN_0004ce30	uVar5	scHyperzEn	INFERRED	field sc_hyperz_en of the GLD context (ctx+0x1d20)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1ae0\)\ \|\ 3;$	+2
+use	FUN_0004ce30	uVar5	scHyperzEn	INFERRED	field sc_hyperz_en of the GLD context (ctx+0x1d20)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1ae0\)\ \&\ 0xfffffffe;$	+2
+use	FUN_0004ce30	uVar5	scHyperzEn	INFERRED	field sc_hyperz_en of the GLD context (ctx+0x1d20)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1ae0\)\ \&\ 0xfffffffd\ \|\ 1;$	+2
+use	FUN_0004ce30	uVar5	scHyperzEn	INFERRED	field sc_hyperz_en of the GLD context (ctx+0x1d20)	^\s*\*\(byte\ \*\)\(iVar8\ \+\ 0xc6\)\ =\ \(byte\)\(\(uVar5\ \^\ 2\)\ >>\ 1\)\ \&\ 1;$	+1
+use	FUN_0004ce30	uVar5	scHyperzEn	INFERRED	field sc_hyperz_en of the GLD context (ctx+0x1d20)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1ae0\);$	+1
+use	FUN_0004ce30	uVar5	scHyperzEn	INFERRED	field sc_hyperz_en of the GLD context (ctx+0x1d20)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1ae0\);$@2	+1
+use	FUN_0004ce30	uVar5	scHyperzEn	INFERRED	field sc_hyperz_en of the GLD context (ctx+0x1d20)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1ae0\)\ \&\ 0xfffffffe;$@2	+2
+use	FUN_0004ce30	uVar5	scHyperzEn	INFERRED	field sc_hyperz_en of the GLD context (ctx+0x1d20)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1ae0\);$@3	+1
+use	FUN_0004ce30	uVar5	scHyperzEn	INFERRED	field sc_hyperz_en of the GLD context (ctx+0x1d20)	^\s*if\ \(\(uVar7\ ==\ uVar5\)\ \&\&\ \(iVar6\ ==\ \*\(int\ \*\)\(param_1\ \+\ 0x1ab0\)\)\)\ \{$	+1
+use	FUN_0004ce30	iVar6	zbBwCntl	INFERRED	field zb_bw_cntl of the GLD context (ctx+0x1cf0)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1ab0\);$	+1
+use	FUN_0004ce30	iVar6	zbBwCntl	INFERRED	field zb_bw_cntl of the GLD context (ctx+0x1cf0)	^\s*if\ \(\(uVar7\ ==\ uVar5\)\ \&\&\ \(iVar6\ ==\ \*\(int\ \*\)\(param_1\ \+\ 0x1ab0\)\)\)\ \{$	+1
+local	FUN_0004d100	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004d100	uVar3	fgAlphaFunc	INFERRED	field fg_alpha_func of the GLD context (ctx+0x1c8c)	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1a4c\);$	+1
+use	FUN_0004d100	uVar3	fgAlphaFunc	INFERRED	field fg_alpha_func of the GLD context (ctx+0x1c8c)	^\s*if\ \(uVar3\ !=\ uVar7\)\ \{$	+1
+use	FUN_0004d100	uVar3	fgAlphaFunc	INFERRED	field fg_alpha_func of the GLD context (ctx+0x1c8c)	^\s*iVar4\ =\ FUN_0001a010\(iVar4,\*\(undefined4\ \*\)\(iVar4\ \+\ 0x26a0\),in_r5,in_r6,uVar3,uVar5,uVar8\);$	+1
+use	FUN_0004d100	uVar3	fgAlphaFunc	INFERRED	field fg_alpha_func of the GLD context (ctx+0x1c8c)	^\s*iVar4\ =\ FUN_0001a010\(\*\(undefined4\ \*\)\(param_1\ \+\ 4\),\*\(undefined4\ \*\)\(param_1\ \+\ 0x2460\),in_r5,in_r6,$	+2
+use	FUN_0004d100	iVar4	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1e5c\);$	+1
+use	FUN_0004d100	iVar4	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*if\ \(\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001098\)\ \+\ iVar4\)\ ==\ 1\)\ \&\&$	+3
+use	FUN_0004d100	iVar4	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*if\ \(\(\*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x00001544\)\ \+\ iVar4\)\ \&\ 0x10\)\ ==\ 0\)\ \{$	+1
+use	FUN_0004d100	iVar4	glContextWord1e5c	INFERRED	load of glContext+0x1e5c (no field row, no register pairing): positional name	^\s*if\ \(\(\*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x00001544\)\ \+\ iVar4\)\ \&\ 0x10\)\ !=\ 0\)\ goto\ LAB_0004d2c8;$	+1
+use	FUN_0004d100	iVar4	rb3dColorChannelMask	INFERRED	field rb3d_color_channel_mask of the GLD context (ctx+0x1d34)	^\s*iVar4\ =\ \*\(int\ \*\)\(0x00001af4\ \+\ param_1\);$	+1
+use	FUN_0004d100	iVar4	rb3dColorChannelMask	INFERRED	field rb3d_color_channel_mask of the GLD context (ctx+0x1d34)	^\s*if\ \(iVar4\ ==\ 0\)\ \{$@3	+1
+use	FUN_0004d100	uVar5	zbCntl	INFERRED	field zb_cntl of the GLD context (ctx+0x1ce0)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1aa0\);$	+1
+use	FUN_0004d100	uVar5	zbCntl	INFERRED	field zb_cntl of the GLD context (ctx+0x1ce0)	^\s*if\ \(\(\(\(uVar5\ \&\ 6\)\ !=\ 6\)\ \&\&\ \(\(\(unsigned\ char\ \*\)0x00002b7e\)\[iVar4\]\ ==\ '\\0'\)\)\ \&\&$	+2
+use	FUN_0004d100	uVar5	zbCntl	INFERRED	field zb_cntl of the GLD context (ctx+0x1ce0)	^\s*iVar4\ =\ FUN_0001a010\(iVar4,\*\(undefined4\ \*\)\(iVar4\ \+\ 0x26a0\),in_r5,in_r6,uVar3,uVar5,uVar8\);$	+1
+use	FUN_0004d100	uVar5	zbCntl	INFERRED	field zb_cntl of the GLD context (ctx+0x1ce0)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1aa0\);$@2	+1
+use	FUN_0004d100	uVar5	zbCntl	INFERRED	field zb_cntl of the GLD context (ctx+0x1ce0)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1aa0\);$@3	+1
+use	FUN_0004d100	uVar5	zbCntl	INFERRED	field zb_cntl of the GLD context (ctx+0x1ce0)	^\s*if\ \(\(\(uVar5\ \&\ 2\)\ !=\ 0\)\ \&\&\ \(\(uVar9\ >>\ 9\ \&\ 1\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_0004d100	uVar5	zbCntl	INFERRED	field zb_cntl of the GLD context (ctx+0x1ce0)	^\s*iVar4\ =\ FUN_0001a010\(\*\(undefined4\ \*\)\(param_1\ \+\ 4\),\*\(undefined4\ \*\)\(param_1\ \+\ 0x2460\),in_r5,in_r6,$	+2
+use	FUN_0004d100	uVar9	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+1
+use	FUN_0004d100	uVar9	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@2	+3
+use	FUN_0004d100	uVar9	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@3	+1
+use	FUN_0004d100	uVar9	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*if\ \(\(\(\(\(\(\(unsigned\ char\ \*\)0x00002e2c\)\[iVar4\]\ ==\ '\\0'\)\ \|\|\ \(\(uVar9\ \&\ 0x20000\)\ !=\ 0\)\)\ \|\|$	+6
+use	FUN_0004d100	uVar9	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@4	+1
+use	FUN_0004d100	uVar9	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*if\ \(\(\(uVar5\ \&\ 2\)\ !=\ 0\)\ \&\&\ \(\(uVar9\ >>\ 9\ \&\ 1\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_0004d100	uVar11	glContextWord1ab8	INFERRED	load of glContext+0x1ab8 (no field row, no register pairing): positional name	^\s*uVar11\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1ab8\);$	+1
+use	FUN_0004d100	uVar11	glContextWord1ab8	INFERRED	load of glContext+0x1ab8 (no field row, no register pairing): positional name	^\s*uVar7\ =\ uVar11\ \|\ 1;$	+1
+use	FUN_0004d100	uVar11	glContextWord1ab8	INFERRED	load of glContext+0x1ab8 (no field row, no register pairing): positional name	^\s*if\ \(uVar11\ !=\ uVar7\)\ \{$	+1
+use	FUN_0004d100	uVar11	zbZstencilcntl	INFERRED	field zb_zstencilcntl of the GLD context (ctx+0x1ce4)	^\s*uVar11\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1aa4\);$	+1
+use	FUN_0004d100	uVar11	zbZstencilcntl	INFERRED	field zb_zstencilcntl of the GLD context (ctx+0x1ce4)	^\s*if\ \(\(\(uVar7\ \&\ 1\)\ !=\ \(uVar3\ \&\ 1\)\)\ \|\|$	+2
+local	FUN_0004d620	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004d620	uVar4	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+2
+use	FUN_0004d620	uVar4	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*if\ \(\(uVar4\ \&\ 0x2000\)\ !=\ 0\)\ \{$	+1
+use	FUN_0004d620	uVar4	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*if\ \(\(uVar4\ \&\ 0x80100000\)\ ==\ 0x80000000\)\ \{$	+1
+use	FUN_0004d620	uVar4	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*else\ if\ \(\(uVar4\ \&\ 0x800000\)\ !=\ 0\)\ \{$	+1
+local	FUN_0004d770	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004d770	iVar8	glState	INFERRED	*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators	^\s*iVar8\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+1
+use	FUN_0004d770	iVar8	glState	INFERRED	*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar8\ \+\ 0x10\);$	+3
+use	FUN_0004d770	iVar8	glState	INFERRED	*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators	^\s*fVar5\ =\ fVar1\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,\*\(uint\ \*\)\(iVar8\ \+\ 0x160\)\ \^\ 0x80000000\)\ \-$	+2
+use	FUN_0004d770	iVar9	glContextWord1c98	INFERRED	load of glContext+0x1c98 (no field row, no register pairing): positional name	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1c98\);$	+1
+use	FUN_0004d770	iVar9	glContextWord1c98	INFERRED	load of glContext+0x1c98 (no field row, no register pairing): positional name	^\s*if\ \(\(\(\(\(iVar15\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c8c\)\)\ \|\|\ \(iVar13\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c88\)\)\)\ \|\|$	+4
+use	FUN_0004d770	iVar10	glContextWord1c9c	INFERRED	load of glContext+0x1c9c (no field row, no register pairing): positional name	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1c9c\);$	+1
+use	FUN_0004d770	iVar10	glContextWord1c9c	INFERRED	load of glContext+0x1c9c (no field row, no register pairing): positional name	^\s*if\ \(\(\(\(\(iVar15\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c8c\)\)\ \|\|\ \(iVar13\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c88\)\)\)\ \|\|$	+4
+use	FUN_0004d770	iVar11	glContextWord1c90	INFERRED	load of glContext+0x1c90 (no field row, no register pairing): positional name	^\s*iVar11\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1c90\);$	+1
+use	FUN_0004d770	iVar11	glContextWord1c90	INFERRED	load of glContext+0x1c90 (no field row, no register pairing): positional name	^\s*if\ \(\(\(\(\(iVar15\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c8c\)\)\ \|\|\ \(iVar13\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c88\)\)\)\ \|\|$	+4
+use	FUN_0004d770	iVar12	glContextWord1c94	INFERRED	load of glContext+0x1c94 (no field row, no register pairing): positional name	^\s*iVar12\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1c94\);$	+1
+use	FUN_0004d770	iVar12	glContextWord1c94	INFERRED	load of glContext+0x1c94 (no field row, no register pairing): positional name	^\s*if\ \(\(\(\(\(iVar15\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c8c\)\)\ \|\|\ \(iVar13\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c88\)\)\)\ \|\|$	+4
+use	FUN_0004d770	iVar13	glContextWord1c88	INFERRED	load of glContext+0x1c88 (no field row, no register pairing): positional name	^\s*iVar13\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1c88\);$	+1
+use	FUN_0004d770	iVar13	glContextWord1c88	INFERRED	load of glContext+0x1c88 (no field row, no register pairing): positional name	^\s*if\ \(\(\(\(\(iVar15\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c8c\)\)\ \|\|\ \(iVar13\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c88\)\)\)\ \|\|$	+4
+use	FUN_0004d770	uVar14	glContextWord1b14	INFERRED	load of glContext+0x1b14 (no field row, no register pairing): positional name	^\s*uVar14\ =\ \*\(uint\ \*\)\(0x00001b14\ \+\ param_1\);$	+2
+use	FUN_0004d770	uVar14	glContextWord1b14	INFERRED	load of glContext+0x1b14 (no field row, no register pairing): positional name	^\s*if\ \(uVar14\ !=\ uVar7\)\ \{$	+1
+use	FUN_0004d770	iVar15	glContextWord1c8c	INFERRED	load of glContext+0x1c8c (no field row, no register pairing): positional name	^\s*iVar15\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1c8c\);$	+1
+use	FUN_0004d770	iVar15	glContextWord1c8c	INFERRED	load of glContext+0x1c8c (no field row, no register pairing): positional name	^\s*if\ \(\(\(\(\(iVar15\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c8c\)\)\ \|\|\ \(iVar13\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c88\)\)\)\ \|\|$	+4
+local	FUN_0004dbe0	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+local	FUN_0004dd40	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004dd40	uVar1	glContextWord1c98	INFERRED	load of glContext+0x1c98 (no field row, no register pairing): positional name	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1c98\);$	+1
+use	FUN_0004dd40	uVar1	glContextWord1c98	INFERRED	load of glContext+0x1c98 (no field row, no register pairing): positional name	^\s*param_2\[6\]\ =\ uVar1;$	+1
+local	FUN_0004ddc0	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+local	FUN_0004de30	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+local	FUN_0004def0	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004def0	uVar9	txEnable	INFERRED	field tx_enable of the GLD context (ctx+0x29f0)	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x27b0\)\ \&\ \~\(iVar17\ <<\ 8\);$	+2
+use	FUN_0004def0	uVar9	txEnable	INFERRED	field tx_enable of the GLD context (ctx+0x29f0)	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x27b0\);$	+1
+use	FUN_0004def0	uVar9	txEnable	INFERRED	field tx_enable of the GLD context (ctx+0x29f0)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x27b0\)\ =\ iVar17\ <<\ 8\ \|\ uVar9;$	+1
+use	FUN_0004def0	iVar17	glContextWord27b4	INFERRED	load of glContext+0x27b4 (no field row, no register pairing): positional name	^\s*iVar17\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x27b4\);$	+1
+use	FUN_0004def0	iVar17	glContextWord27b4	INFERRED	load of glContext+0x27b4 (no field row, no register pairing): positional name	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x27b0\)\ \&\ \~\(iVar17\ <<\ 8\);$	+1
+use	FUN_0004def0	iVar17	glContextWord27b4	INFERRED	load of glContext+0x27b4 (no field row, no register pairing): positional name	^\s*iVar17\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x27b4\);$@2	+1
+use	FUN_0004def0	iVar17	glContextWord27b4	INFERRED	load of glContext+0x27b4 (no field row, no register pairing): positional name	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x27b0\)\ =\ iVar17\ <<\ 8\ \|\ uVar9;$	+1
+use	FUN_0004def0	uVar20	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*uVar20\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+1
+use	FUN_0004def0	uVar20	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*if\ \(\(\(uVar20\ \&\ 0x100000\)\ !=\ 0\)\ \&\&\ \(\*\(code\ \*\*\)\(\(int\)\(\(unsigned\ char\ \*\)0x000011cc\)\ \+\ param_1\)\ !=\ \(code\ \*\)0x0\)\)\ \{$	+1
+use	FUN_0004def0	uVar20	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*uVar20\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@2	+1
+use	FUN_0004def0	uVar20	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*if\ \(\(uVar20\ \&\ 0x20000\)\ ==\ 0\)\ \{$	+1
+use	FUN_0004def0	uVar20	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*if\ \(\(uVar20\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+1
+use	FUN_0004def0	iVar21	glContextWord1808	INFERRED	load of glContext+0x1808 (no field row, no register pairing): positional name	^\s*iVar21\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1808\);$	+1
+use	FUN_0004def0	iVar21	glContextWord1808	INFERRED	load of glContext+0x1808 (no field row, no register pairing): positional name	^\s*if\ \(iVar21\ ==\ 0\)\ \{$	+1
+local	FUN_0004e880	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004e880	uVar1	glContextWord243c	INFERRED	load of glContext+0x243c (no field row, no register pairing): positional name	^\s*uVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x243c\)\ \+\ 1U\ >>\ 1;$	+2
+use	FUN_0004e880	uVar1	glContextWord243c	INFERRED	load of glContext+0x243c (no field row, no register pairing): positional name	^\s*uVar4\ =\ \(uVar1\ \-\ 1\)\ \*\ 0x10000;$	+1
+use	FUN_0004e880	uVar1	glContextWord243c	INFERRED	load of glContext+0x243c (no field row, no register pairing): positional name	^\s*puVar2\[uVar1\ \+\ 1\]\ =\ uVar4\ \|\ 0x878;$	+2
+use	FUN_0004e880	uVar1	glContextWord243c	INFERRED	load of glContext+0x243c (no field row, no register pairing): positional name	^\s*uVar4\ =\ uVar1;$	+1
+use	FUN_0004e880	uVar1	glContextWord243c	INFERRED	load of glContext+0x243c (no field row, no register pairing): positional name	^\s*\*\(undefined4\ \*\)\(\(int\)puVar2\ \+\ iVar3\ \+\ uVar1\ \*\ 4\ \+\ 8\)\ =$	+1
+use	FUN_0004e880	uVar1	glContextWord243c	INFERRED	load of glContext+0x243c (no field row, no register pairing): positional name	^\s*\*\(uint\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ uVar1\ \*\ 8\ \+\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ \+\ 8;$	+1
+local	FUN_0004eba0	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004eba0	iVar3	glState	INFERRED	*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+2
+use	FUN_0004eba0	iVar3	glState	INFERRED	*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators	^\s*iVar1\ =\ FUN_0001a010\(\*\(int\ \*\)\(param_1\ \+\ 4\),uVar2,param_3,param_4,param_5,param_6,iVar3\);$	+1
+use	FUN_0004eba0	iVar4	glContextWord8	INFERRED	load of glContext+0x8 (no field row, no register pairing): positional name	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_0004eba0	iVar4	glContextWord8	INFERRED	load of glContext+0x8 (no field row, no register pairing): positional name	^\s*\*\(short\ \*\)\(param_1\ \+\ 0x1b42\)\ =\ \(short\)\(\(uint\)\(iVar4\ \*\ iVar1\)\ >>\ 1\);$	+1
+use	FUN_0004eba0	iVar4	glContextWord8	INFERRED	load of glContext+0x8 (no field row, no register pairing): positional name	^\s*\(uint\)\(int\)\(FLOAT_001aa0e8\ /$	+4
+use	FUN_0004eba0	iVar5	glContextWord2768	INFERRED	load of glContext+0x2768 (no field row, no register pairing): positional name	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2768\);$	+1
+use	FUN_0004eba0	iVar5	glContextWord2768	INFERRED	load of glContext+0x2768 (no field row, no register pairing): positional name	^\s*if\ \(\(\(\(\(\(unsigned\ char\ \*\)0x00002e2d\)\[\*\(int\ \*\)\(iVar1\ \+\ 0x10\)\]\ ==\ '\\0'\)\ \|\|$	+4
+use	FUN_0004eba0	iVar5	glContextWord2768	INFERRED	load of glContext+0x2768 (no field row, no register pairing): positional name	^\s*\*\(short\ \*\)\(param_1\ \+\ 0x1b42\)\ =\ \(short\)\*\(undefined4\ \*\)\(iVar5\ \+\ 0x18\);$	+1
+use	FUN_0004eba0	iVar5	glContextWord2768	INFERRED	load of glContext+0x2768 (no field row, no register pairing): positional name	^\s*if\ \(iVar5\ !=\ 0\)\ \{$	+2
+local	FUN_0004ed90	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004ed90	fVar1	glContextWord100	INFERRED	load of glContext+0x100 (no field row, no register pairing): positional name	^\s*fVar1\ =\ \*\(float\ \*\)\(param_1\ \+\ 0x100\)\ \+\ FLOAT_001aa0e8;$	+1
+use	FUN_0004ed90	fVar1	glContextWord100	INFERRED	load of glContext+0x100 (no field row, no register pairing): positional name	^\s*fVar1\ =\ \*\(float\ \*\)\(param_1\ \+\ 0x100\);$	+1
+use	FUN_0004ed90	fVar1	glContextWord100	INFERRED	load of glContext+0x100 (no field row, no register pairing): positional name	^\s*\*\(short\ \*\)\(param_1\ \+\ 0x1cd2\)\ =\ \(short\)\(\(uint\)\(int\)\(iVar6\ \*\ \(int\)fVar1\)\ >>\ 1\);$	+1
+use	FUN_0004ed90	fVar2	glContextWord104	INFERRED	load of glContext+0x104 (no field row, no register pairing): positional name	^\s*fVar2\ =\ \*\(float\ \*\)\(param_1\ \+\ 0x104\)\ \+\ FLOAT_001aa0e8;$	+1
+use	FUN_0004ed90	fVar2	glContextWord104	INFERRED	load of glContext+0x104 (no field row, no register pairing): positional name	^\s*fVar2\ =\ \*\(float\ \*\)\(param_1\ \+\ 0x104\);$	+1
+use	FUN_0004ed90	fVar2	glContextWord104	INFERRED	load of glContext+0x104 (no field row, no register pairing): positional name	^\s*\*\(short\ \*\)\(param_1\ \+\ 0x1cd0\)\ =\ \(short\)\(\(uint\)\(int\)\(iVar6\ \*\ \(int\)fVar2\)\ >>\ 1\);$	+1
+use	FUN_0004ed90	uVar5	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+2
+use	FUN_0004ed90	uVar5	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*if\ \(\(uVar5\ \&\ 0x60020000\)\ ==\ 0x40000000\)\ \{$	+1
+use	FUN_0004ed90	uVar5	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*if\ \(\(uVar5\ \&\ 0x80\)\ !=\ 0\)\ \{$	+1
+use	FUN_0004ed90	uVar5	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*else\ if\ \(\(uVar5\ \&\ 0x80\)\ ==\ 0\)\ \{$	+1
+use	FUN_0004ed90	uVar5	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*if\ \(\(uVar5\ \&\ 0x20000000\)\ ==\ 0\)\ \{$	+1
+use	FUN_0004ed90	uVar5	glContextWord44	INFERRED	load of glContext+0x44 (no field row, no register pairing): positional name	^\s*if\ \(\(uVar5\ \&\ 0x20000000\)\ ==\ 0\)\ \{$@2	+1
+use	FUN_0004ed90	uVar5	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1930\)\ \|\ 0x2000;$	+2
+use	FUN_0004ed90	uVar5	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1930\);$	+1
+use	FUN_0004ed90	uVar5	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1930\)\ =\ uVar5\ \|\ 0xc08000;$	+1
+use	FUN_0004ed90	iVar6	glContextWord8	INFERRED	load of glContext+0x8 (no field row, no register pairing): positional name	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_0004ed90	iVar6	glContextWord8	INFERRED	load of glContext+0x8 (no field row, no register pairing): positional name	^\s*uVar3\ =\ \(undefined2\)\(\(uint\)\(iVar6\ \*\ \*\(int\ \*\)\(param_1\ \+\ 0xe4\)\)\ >>\ 1\);$	+1
+use	FUN_0004ed90	iVar6	glContextWord8	INFERRED	load of glContext+0x8 (no field row, no register pairing): positional name	^\s*uVar3\ =\ \(undefined2\)\(\(uint\)\(int\)\(iVar6\ \*\ \(int\)\(\*\(float\ \*\)\(param_1\ \+\ 0xf0\)\ \+\ FLOAT_001aa10c\)\)\ >>\ 1\);$	+1
+use	FUN_0004ed90	iVar6	glContextWord8	INFERRED	load of glContext+0x8 (no field row, no register pairing): positional name	^\s*fVar1\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,iVar6\)\ \-\ DOUBLE_001aa250\);$	+1
+use	FUN_0004ed90	iVar6	glContextWord8	INFERRED	load of glContext+0x8 (no field row, no register pairing): positional name	^\s*\*\(short\ \*\)\(param_1\ \+\ 0x1cd2\)\ =\ \(short\)\(\(uint\)\(int\)\(iVar6\ \*\ \(int\)fVar1\)\ >>\ 1\);$	+2
+use	FUN_0004ed90	iVar6	glContextWord8	INFERRED	load of glContext+0x8 (no field row, no register pairing): positional name	^\s*\*\(short\ \*\)\(param_1\ \+\ 0x1cd2\)\ =\ \(short\)\(\(uint\)\(iVar6\ \*\ \*\(int\ \*\)\(param_1\ \+\ 0x108\)\)\ >>\ 1\);$	+2
+use	FUN_0004ed90	iVar6	glContextWord8	INFERRED	load of glContext+0x8 (no field row, no register pairing): positional name	^\s*\*\(short\ \*\)\(param_1\ \+\ 0x1cd2\)\ =\ \(short\)\(iVar6\ \*\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000013d0U\)\ \+\ param_1\)\ >>\ 1\);$	+2
+use	FUN_0004ed90	iVar7	glContextWord2768	INFERRED	load of glContext+0x2768 (no field row, no register pairing): positional name	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2768\);$	+1
+use	FUN_0004ed90	iVar7	glContextWord2768	INFERRED	load of glContext+0x2768 (no field row, no register pairing): positional name	^\s*if\ \(\(\(uVar5\ \&\ 0x60020000\)\ ==\ 0x40000000\)\ \&\&\ \(iVar7\ !=\ 0\)\)\ \{$	+5
+local	FUN_0004f2e0	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004f2e0	bVar1	colorFormatIndex	INFERRED	field colorFormatIndex of the GLD context (ctx+0x2b7f)	^\s*bVar1\ =\ \*\(byte\ \*\)\(param_1\ \+\ 0x293f\);$	+1
+use	FUN_0004f2e0	bVar1	colorFormatIndex	INFERRED	field colorFormatIndex of the GLD context (ctx+0x2b7f)	^\s*uVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_0004f160\)\(param_1,\*\(uint\ \*\)\(puVar3\ \+\ \(uint\)bVar1\ \*\ 0x24\ \+\ 0x1c\)\ >>\ 0x1e\);$	+1
+use	FUN_0004f2e0	bVar1	colorFormatIndex	INFERRED	field colorFormatIndex of the GLD context (ctx+0x2b7f)	^\s*uVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_0004f160\)\(param_1,\*\(uint\ \*\)\(puVar3\ \+\ \(uint\)bVar1\ \*\ 0x24\ \+\ 0x18\)\ >>\ 1\ \&\ 3\);$	+1
+use	FUN_0004f2e0	bVar1	colorFormatIndex	INFERRED	field colorFormatIndex of the GLD context (ctx+0x2b7f)	^\s*uVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_0004f160\)\(param_1,\*\(uint\ \*\)\(puVar3\ \+\ \(uint\)bVar1\ \*\ 0x24\ \+\ 0x18\)\ >>\ 3\ \&\ 3\);$	+1
+local	FUN_0004f720	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004f720	iVar2	glContextWord23d0	INFERRED	load of glContext+0x23d0 (no field row, no register pairing): positional name	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x23d0\);$	+2
+use	FUN_0004f720	iVar2	glContextWord23d0	INFERRED	load of glContext+0x23d0 (no field row, no register pairing): positional name	^\s*\*\(undefined\ \*\*\)\(param_1\ \+\ 0x238c\)\ =\ \(PTR_FUN_001db2dc\)\[iVar2\ \*\ 0x2d\];$	+1
+use	FUN_0004f720	iVar2	glContextWord23d0	INFERRED	load of glContext+0x23d0 (no field row, no register pairing): positional name	^\s*\*\(undefined\ \*\*\)\(param_1\ \+\ 0x2394\)\ =\ \(PTR_FUN_001db2ec\)\[iVar2\ \*\ 0x2d\];$	+1
+use	FUN_0004f720	iVar2	glContextWord23d0	INFERRED	load of glContext+0x23d0 (no field row, no register pairing): positional name	^\s*if\ \(iVar2\ ==\ 4\)\ \{$	+1
+use	FUN_0004f720	uVar4	rb3dRopcntl	INFERRED	field rb3d_ropcntl of the GLD context (ctx+0x1d38)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1af8\);$	+1
+use	FUN_0004f720	uVar4	rb3dRopcntl	INFERRED	field rb3d_ropcntl of the GLD context (ctx+0x1d38)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1af8\)\ =\ uVar4\ \&\ 0xfffffffb;$	+1
+use	FUN_0004f720	uVar5	rb3dColorChannelMask	INFERRED	field rb3d_color_channel_mask of the GLD context (ctx+0x1d34)	^\s*uVar5\ =\ \*\(uint\ \*\)\(0x00001af4\ \+\ param_1\);$	+1
+use	FUN_0004f720	uVar5	rb3dColorChannelMask	INFERRED	field rb3d_color_channel_mask of the GLD context (ctx+0x1d34)	^\s*\*\(uint\ \*\)\(0x00001af4\ \+\ param_1\)\ =\ uVar5\ \|\ 0xf;$	+1
+use	FUN_0004f720	uVar5	scEdgerule	INFERRED	field sc_edgerule of the GLD context (ctx+0x1cfc)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1abc\);$	+1
+use	FUN_0004f720	uVar5	scEdgerule	INFERRED	field sc_edgerule of the GLD context (ctx+0x1cfc)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1abc\)\ =\ uVar5\ \&\ 0xc0000000\ \|\ 0x2da49525;$	+1
+use	FUN_0004f720	uVar5	glContextWord2454	INFERRED	load of glContext+0x2454 (no field row, no register pairing): positional name	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x2454\);$	+1
+use	FUN_0004f720	uVar5	glContextWord2454	INFERRED	load of glContext+0x2454 (no field row, no register pairing): positional name	^\s*if\ \(\(int\)uVar5\ <\ 0\)\ \{$	+1
+use	FUN_0004f720	uVar5	glContextWord2454	INFERRED	load of glContext+0x2454 (no field row, no register pairing): positional name	^\s*else\ if\ \(\(uVar5\ \&\ 0x8000000\)\ ==\ 0\)\ \{$	+2
+local	FUN_0004fd80	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_0004fd80	pcVar7	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*pcVar7\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x275c\);$	+1
+use	FUN_0004fd80	pcVar7	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*\(\*pcVar7\)\(param_1,iVar9\ \+\ 0x14\);$	+1
+use	FUN_0004fd80	iVar9	glContextWord1e70	INFERRED	load of glContext+0x1e70 (no field row, no register pairing): positional name	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1e70\);$	+4
+use	FUN_0004fd80	iVar9	glContextWord1e70	INFERRED	load of glContext+0x1e70 (no field row, no register pairing): positional name	^\s*iVar10\ =\ iVar6\ \+\ iVar9;$	+1
+use	FUN_0004fd80	iVar9	glContextWord1e70	INFERRED	load of glContext+0x1e70 (no field row, no register pairing): positional name	^\s*\*\(uint\ \*\)\(iVar6\ \+\ iVar9\ \+\ 0x8c\)\ =\ uVar2;$	+1
+local	FUN_00050140	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_00050140	bVar1	colorFormatIndex	INFERRED	field colorFormatIndex of the GLD context (ctx+0x2b7f)	^\s*bVar1\ =\ \*\(byte\ \*\)\(param_1\ \+\ 0x293f\);$	+1
+use	FUN_00050140	bVar1	colorFormatIndex	INFERRED	field colorFormatIndex of the GLD context (ctx+0x2b7f)	^\s*\(\(byte\)PTR_DAT_001e88c8\[\(uint\)bVar1\ \*\ 0x24\ \+\ 0x1c\]\ \&\ 0xf\);$	+1
+use	FUN_00050140	bVar1	colorFormatIndex	INFERRED	field colorFormatIndex of the GLD context (ctx+0x2b7f)	^\s*\(\*\(uint\ \*\)\(puVar2\ \+\ \(uint\)bVar1\ \*\ 0x24\ \+\ 0x1c\)\ >>\ 0x14\ \&\ 0xf\);$	+1
+use	FUN_00050140	bVar1	colorFormatIndex	INFERRED	field colorFormatIndex of the GLD context (ctx+0x2b7f)	^\s*\(\*\(ushort\ \*\)\(puVar2\ \+\ \(uint\)bVar1\ \*\ 0x24\ \+\ 0x1c\)\ \&\ 0xf\);$	+1
+use	FUN_00050140	bVar1	colorFormatIndex	INFERRED	field colorFormatIndex of the GLD context (ctx+0x2b7f)	^\s*\(\*\(uint\ \*\)\(puVar2\ \+\ \(uint\)bVar1\ \*\ 0x24\ \+\ 0x1c\)\ >>\ 0xc\ \&\ 0xf\);$	+1
+use	FUN_00050140	uVar3	glContextWord1b2c	INFERRED	load of glContext+0x1b2c (no field row, no register pairing): positional name	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1b2c\);$	+2
+use	FUN_00050140	uVar3	glContextWord1b2c	INFERRED	load of glContext+0x1b2c (no field row, no register pairing): positional name	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1b2c\)\ =\ uVar3\ \&\ 0xfffc0000\ \|\ 0x3aaaa;$	+1
+use	FUN_00050140	uVar3	glContextWord1b2c	INFERRED	load of glContext+0x1b2c (no field row, no register pairing): positional name	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1b2c\)\ =\ uVar3\ \&\ 0xfffcc0c0\ \|\ 0x31515;$	+1
+use	FUN_00050140	uVar3	glContextWord1b2c	INFERRED	load of glContext+0x1b2c (no field row, no register pairing): positional name	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1b2c\)\ =\ uVar3\ \&\ 0xfffc0000\ \|\ 0x39595;$	+1
+use	FUN_00050140	uVar3	glContextWord1b2c	INFERRED	load of glContext+0x1b2c (no field row, no register pairing): positional name	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1b2c\)\ =\ uVar3\ \&\ 0xfffc0000\ \|\ 0x35555;$	+1
+local	FUN_00050ef0	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_00050ef0	pcVar1	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*pcVar1\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x275c\);$	+1
+use	FUN_00050ef0	pcVar1	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*\(\*pcVar1\)\(param_1,iVar3\ \+\ 0x10,param_3,param_4,in_r7,in_r8,a6\);$	+1
+use	FUN_00050ef0	uVar2	glContextWord1b7c	INFERRED	load of glContext+0x1b7c (no field row, no register pairing): positional name	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1b7c\);$	+2
+use	FUN_00050ef0	uVar2	glContextWord1b7c	INFERRED	load of glContext+0x1b7c (no field row, no register pairing): positional name	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1b7c\)\ =\ \(uVar5\ \&\ 0xf\)\ <<\ 4\ \|\ uVar4\ \&\ 0xf\ \|\ uVar2\ \&\ 0xffffff00;$	+1
+local	FUN_000520c0	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_000520c0	iVar8	glState	INFERRED	*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators	^\s*iVar8\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+1
+use	FUN_000520c0	iVar8	glState	INFERRED	*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar8\ \+\ 0x10\);$	+3
+use	FUN_000520c0	iVar8	glState	INFERRED	*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators	^\s*fVar5\ =\ fVar1\ \*\ \(float\)\(\(double\)CONCAT44\(0x43300000,\*\(uint\ \*\)\(iVar8\ \+\ 0x160\)\ \^\ 0x80000000\)\ \-$	+2
+use	FUN_000520c0	iVar9	glContextWord1c98	INFERRED	load of glContext+0x1c98 (no field row, no register pairing): positional name	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1c98\);$	+1
+use	FUN_000520c0	iVar9	glContextWord1c98	INFERRED	load of glContext+0x1c98 (no field row, no register pairing): positional name	^\s*if\ \(\(\(\(iVar15\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c8c\)\)\ \|\|\ \(iVar13\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c88\)\)\)\ \|\|$	+4
+use	FUN_000520c0	iVar10	glContextWord1c9c	INFERRED	load of glContext+0x1c9c (no field row, no register pairing): positional name	^\s*iVar10\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1c9c\);$	+1
+use	FUN_000520c0	iVar10	glContextWord1c9c	INFERRED	load of glContext+0x1c9c (no field row, no register pairing): positional name	^\s*if\ \(\(\(\(iVar15\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c8c\)\)\ \|\|\ \(iVar13\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c88\)\)\)\ \|\|$	+4
+use	FUN_000520c0	iVar11	glContextWord1c90	INFERRED	load of glContext+0x1c90 (no field row, no register pairing): positional name	^\s*iVar11\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1c90\);$	+1
+use	FUN_000520c0	iVar11	glContextWord1c90	INFERRED	load of glContext+0x1c90 (no field row, no register pairing): positional name	^\s*if\ \(\(\(\(iVar15\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c8c\)\)\ \|\|\ \(iVar13\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c88\)\)\)\ \|\|$	+4
+use	FUN_000520c0	iVar12	glContextWord1c94	INFERRED	load of glContext+0x1c94 (no field row, no register pairing): positional name	^\s*iVar12\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1c94\);$	+1
+use	FUN_000520c0	iVar12	glContextWord1c94	INFERRED	load of glContext+0x1c94 (no field row, no register pairing): positional name	^\s*if\ \(\(\(\(iVar15\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c8c\)\)\ \|\|\ \(iVar13\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c88\)\)\)\ \|\|$	+4
+use	FUN_000520c0	iVar13	glContextWord1c88	INFERRED	load of glContext+0x1c88 (no field row, no register pairing): positional name	^\s*iVar13\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1c88\);$	+1
+use	FUN_000520c0	iVar13	glContextWord1c88	INFERRED	load of glContext+0x1c88 (no field row, no register pairing): positional name	^\s*if\ \(\(\(\(iVar15\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c8c\)\)\ \|\|\ \(iVar13\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c88\)\)\)\ \|\|$	+4
+use	FUN_000520c0	iVar15	glContextWord1c8c	INFERRED	load of glContext+0x1c8c (no field row, no register pairing): positional name	^\s*iVar15\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1c8c\);$	+1
+use	FUN_000520c0	iVar15	glContextWord1c8c	INFERRED	load of glContext+0x1c8c (no field row, no register pairing): positional name	^\s*if\ \(\(\(\(iVar15\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c8c\)\)\ \|\|\ \(iVar13\ !=\ \*\(int\ \*\)\(param_1\ \+\ 0x1c88\)\)\)\ \|\|$	+4
+local	FUN_00052280	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+use	FUN_00052280	uVar2	fgFogColorB	INFERRED	register FG_FOG_COLOR_B (0x4bd0) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1c9c	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a5c\);$	+1
+use	FUN_00052280	uVar2	fgFogColorB	INFERRED	register FG_FOG_COLOR_B (0x4bd0) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1c9c	^\s*puVar6\[3\]\ =\ uVar2;$@2	+1
+use	FUN_00052280	uVar2	gaFogOffset	INFERRED	register GA_FOG_OFFSET (0x4298) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cb8	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a78\);$	+1
+use	FUN_00052280	uVar2	gaFogOffset	INFERRED	register GA_FOG_OFFSET (0x4298) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cb8	^\s*puVar6\[8\]\ =\ uVar2;$	+1
+use	FUN_00052280	uVar2	rb3dAblendcntl	INFERRED	register RB3D_ABLENDCNTL (0x4e08) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cc4	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a84\);$	+1
+use	FUN_00052280	uVar2	rb3dAblendcntl	INFERRED	register RB3D_ABLENDCNTL (0x4e08) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cc4	^\s*puVar6\[2\]\ =\ uVar2;$	+1
+use	FUN_00052280	uVar2	rb3dConstantColor	INFERRED	register RB3D_CONSTANT_COLOR (0x4e10) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cc8	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a88\);$	+1
+use	FUN_00052280	uVar2	rb3dConstantColor	INFERRED	register RB3D_CONSTANT_COLOR (0x4e10) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cc8	^\s*puVar6\[4\]\ =\ uVar2;$	+1
+use	FUN_00052280	uVar2	rb3dDitherCtl	INFERRED	field rb3d_dither_ctl of the GLD context (ctx+0x1d30)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1af0\);$	+1
+use	FUN_00052280	uVar2	rb3dDitherCtl	INFERRED	field rb3d_dither_ctl of the GLD context (ctx+0x1d30)	^\s*puVar6\[6\]\ =\ uVar2;$	+1
+use	FUN_00052280	uVar2	rb3dConstantColorAr	INFERRED	register RB3D_CONSTANT_COLOR_AR (0x4ef8) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1ccc	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a8c\);$	+1
+use	FUN_00052280	uVar2	rb3dConstantColorAr	INFERRED	register RB3D_CONSTANT_COLOR_AR (0x4ef8) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1ccc	^\s*puVar6\[8\]\ =\ uVar2;$@2	+1
+use	FUN_00052280	uVar2	scHyperzEn	INFERRED	field sc_hyperz_en of the GLD context (ctx+0x1d20)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1ae0\);$	+1
+use	FUN_00052280	uVar2	scHyperzEn	INFERRED	field sc_hyperz_en of the GLD context (ctx+0x1d20)	^\s*puVar7\[2\]\ =\ uVar2;$	+1
+use	FUN_00052280	uVar2	gaPolyMode	INFERRED	field ga_poly_mode of the GLD context (ctx+0x1d7c)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b3c\);$	+1
+use	FUN_00052280	uVar2	gaPolyMode	INFERRED	field ga_poly_mode of the GLD context (ctx+0x1d7c)	^\s*puVar7\[1\]\ =\ uVar2;$	+1
+use	FUN_00052280	uVar2	gbEnable	INFERRED	field gb_enable of the GLD context (ctx+0x1d90)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b50\);$	+1
+use	FUN_00052280	uVar2	gbEnable	INFERRED	field gb_enable of the GLD context (ctx+0x1d90)	^\s*puVar7\[3\]\ =\ uVar2;$	+1
+use	FUN_00052280	uVar2	gbEnable	INFERRED	field gb_enable of the GLD context (ctx+0x1d90)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b50\);$@2	+1
+use	FUN_00052280	uVar2	gbEnable	INFERRED	field gb_enable of the GLD context (ctx+0x1d90)	^\s*puVar6\[1\]\ =\ uVar2;$@2	+1
+use	FUN_00052280	uVar2	gbSelect	INFERRED	register GB_SELECT (0x401c) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1ca4	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a64\);$	+1
+use	FUN_00052280	uVar2	gbSelect	INFERRED	register GB_SELECT (0x401c) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1ca4	^\s*puVar7\[5\]\ =\ uVar2;$	+1
+use	FUN_00052280	uVar2	vapOutVtxFmt1	INFERRED	field vap_out_vtx_fmt_1 of the GLD context (ctx+0x1de0)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1ba0\);$	+1
+use	FUN_00052280	uVar2	vapOutVtxFmt1	INFERRED	field vap_out_vtx_fmt_1 of the GLD context (ctx+0x1de0)	^\s*puVar7\[7\]\ =\ uVar2;$	+1
+use	FUN_00052280	uVar2	vapOutVtxFmt1	INFERRED	field vap_out_vtx_fmt_1 of the GLD context (ctx+0x1de0)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1ba0\);$@2	+1
+use	FUN_00052280	uVar2	vapOutVtxFmt1	INFERRED	field vap_out_vtx_fmt_1 of the GLD context (ctx+0x1de0)	^\s*puVar7\[7\]\ =\ uVar2;$@2	+1
+use	FUN_00052280	uVar2	vapOutVtxFmt1	INFERRED	field vap_out_vtx_fmt_1 of the GLD context (ctx+0x1de0)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1ba0\);$@3	+1
+use	FUN_00052280	uVar2	vapOutVtxFmt1	INFERRED	field vap_out_vtx_fmt_1 of the GLD context (ctx+0x1de0)	^\s*puVar6\[3\]\ =\ uVar2;$@3	+1
+use	FUN_00052280	uVar2	gaPointSize	INFERRED	field ga_point_size of the GLD context (ctx+0x1f0c)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1ccc\);$	+1
+use	FUN_00052280	uVar2	gaPointSize	INFERRED	field ga_point_size of the GLD context (ctx+0x1f0c)	^\s*puVar7\[1\]\ =\ uVar2;$@2	+1
+use	FUN_00052280	uVar2	gaPointT1	INFERRED	field ga_point_t1 of the GLD context (ctx+0x1f08)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1cc8\);$	+1
+use	FUN_00052280	uVar2	gaPointT1	INFERRED	field ga_point_t1 of the GLD context (ctx+0x1f08)	^\s*puVar7\[6\]\ =\ uVar2;$	+1
+use	FUN_00052280	uVar2	gaLineStippleConfig	INFERRED	register GA_LINE_STIPPLE_CONFIG (0x4238) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1da4	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b64\);$	+1
+use	FUN_00052280	uVar2	gaLineStippleConfig	INFERRED	register GA_LINE_STIPPLE_CONFIG (0x4238) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1da4	^\s*puVar7\[2\]\ =\ uVar2;$@2	+1
+use	FUN_00052280	uVar2	rb3dColorChannelMask	INFERRED	field rb3d_color_channel_mask of the GLD context (ctx+0x1d34)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(0x00001af4\ \+\ param_1\);$	+1
+use	FUN_00052280	uVar2	rb3dColorChannelMask	INFERRED	field rb3d_color_channel_mask of the GLD context (ctx+0x1d34)	^\s*puVar7\[1\]\ =\ uVar2;$@3	+1
+use	FUN_00052280	uVar2	usOutFmt3	INFERRED	field us_out_fmt_3 of the GLD context (ctx+0x2588)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(0x00002348\ \+\ param_1\);$	+1
+use	FUN_00052280	uVar2	usOutFmt3	INFERRED	field us_out_fmt_3 of the GLD context (ctx+0x2588)	^\s*puVar7\[4\]\ =\ uVar2;$	+1
+use	FUN_00052280	uVar2	suDepthOffset	INFERRED	register SU_DEPTH_OFFSET (0x42c4) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d74	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(0x00001b34\ \+\ param_1\);$	+1
+use	FUN_00052280	uVar2	suDepthOffset	INFERRED	register SU_DEPTH_OFFSET (0x42c4) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d74	^\s*puVar7\[6\]\ =\ uVar2;$@2	+1
+use	FUN_00052280	uVar2	gbAaConfig	INFERRED	field gb_aa_config of the GLD context (ctx+0x1ca0)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a60\);$	+1
+use	FUN_00052280	uVar2	gbAaConfig	INFERRED	field gb_aa_config of the GLD context (ctx+0x1ca0)	^\s*puVar7\[1\]\ =\ uVar2;$@4	+1
+use	FUN_00052280	uVar2	gbMspos1	INFERRED	field gb_mspos1 of the GLD context (ctx+0x1cac)	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a6c\);$	+1
+use	FUN_00052280	uVar2	gbMspos1	INFERRED	field gb_mspos1 of the GLD context (ctx+0x1cac)	^\s*puVar7\[4\]\ =\ uVar2;$@2	+1
+use	FUN_00052280	uVar2	glContextWord1ca0	INFERRED	load of glContext+0x1ca0 (no field row, no register pairing): positional name	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1ca0\);$	+1
+use	FUN_00052280	uVar2	glContextWord1ca0	INFERRED	load of glContext+0x1ca0 (no field row, no register pairing): positional name	^\s*puVar7\[2\]\ =\ uVar2;$@3	+1
+use	FUN_00052280	uVar2	vapVtxSize	INFERRED	register VAP_VTX_SIZE (0x20b4) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1ee4	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1ca4\);$	+1
+use	FUN_00052280	uVar2	vapVtxSize	INFERRED	register VAP_VTX_SIZE (0x20b4) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1ee4	^\s*puVar7\[4\]\ =\ uVar2;$@3	+1
+use	FUN_00052280	uVar2	glContextWord2370	INFERRED	load of glContext+0x2370 (no field row, no register pairing): positional name	^\s*uVar2\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x2370\);$	+1
+use	FUN_00052280	uVar2	glContextWord2370	INFERRED	load of glContext+0x2370 (no field row, no register pairing): positional name	^\s*puVar6\[5\]\ =\ uVar2;$@2	+1
+use	FUN_00052280	pcVar3	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*pcVar3\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x275c\);$	+1
+use	FUN_00052280	pcVar3	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*\(\*pcVar3\)\(param_1,puVar6\);$	+1
+use	FUN_00052280	pcVar3	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*pcVar3\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x275c\);$@2	+1
+use	FUN_00052280	pcVar3	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*\(\*pcVar3\)\(param_1,puVar7\);$	+1
+use	FUN_00052280	pcVar3	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*pcVar3\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x275c\);$@3	+1
+use	FUN_00052280	pcVar3	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*\(\*pcVar3\)\(param_1,puVar6\ \+\ uVar12\);$	+1
+use	FUN_00052280	uVar4	fgFogBlend	INFERRED	field fg_fog_blend of the GLD context (ctx+0x1d2c)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1aec\);$	+2
+use	FUN_00052280	uVar4	fgFogBlend	INFERRED	field fg_fog_blend of the GLD context (ctx+0x1d2c)	^\s*puVar6\[5\]\ =\ uVar4\ \&\ 0xfffffffe;$	+1
+use	FUN_00052280	uVar4	rb3dBlendcntl	INFERRED	field rb3d_blendcntl of the GLD context (ctx+0x1cc0)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1a80\);$	+2
+use	FUN_00052280	uVar4	rb3dBlendcntl	INFERRED	field rb3d_blendcntl of the GLD context (ctx+0x1cc0)	^\s*puVar6\[1\]\ =\ uVar4\ \&\ 0xfffffffc;$	+1
+use	FUN_00052280	uVar4	fgAlphaFunc	INFERRED	field fg_alpha_func of the GLD context (ctx+0x1c8c)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1a4c\);$	+2
+use	FUN_00052280	uVar4	fgAlphaFunc	INFERRED	field fg_alpha_func of the GLD context (ctx+0x1c8c)	^\s*puVar6\[1\]\ =\ uVar4\ \&\ 0xfffff7ff;$	+1
+use	FUN_00052280	uVar4	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1930\);$	+2
+use	FUN_00052280	uVar4	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1930\);$@2	+1
+use	FUN_00052280	uVar4	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*if\ \(\(uVar4\ \&\ 0x200000\)\ !=\ 0\)\ \{$	+1
+use	FUN_00052280	uVar4	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1930\);$@3	+1
+use	FUN_00052280	uVar4	registerDirty	INFERRED	register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)	^\s*if\ \(\(uVar4\ \&\ 0x1000000\)\ !=\ 0\)\ \{$	+1
+use	FUN_00052280	iVar9	glContextWord1938	INFERRED	load of glContext+0x1938 (no field row, no register pairing): positional name	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1938\);$@2	+1
+use	FUN_00052280	iVar9	glContextWord1938	INFERRED	load of glContext+0x1938 (no field row, no register pairing): positional name	^\s*puVar6\[2\]\ =\ \(\(unsigned\ char\ \*\)0x00001100\)\ \+\ iVar9;$	+1
+use	FUN_00052280	iVar9	glState	INFERRED	*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators	^\s*iVar9\ =\ \*\(int\ \*\)\(param_1\ \+\ 4\);$	+2
+use	FUN_00052280	iVar9	glState	INFERRED	*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators	^\s*\*\(undefined4\ \*\*\)\(iVar9\ \+\ 0x1d8\)\ =\ puVar7;$	+1
+local	FUN_00052cc0	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+local	FUN_00052e60	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+local	FUN_00053000	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
+

@@ -78,6 +78,10 @@ LD = [re.compile(r'\*\([^)]*\*\)\(%s \+ (0x[0-9a-f]+|\d+)\)' % B),
       re.compile(r'\*\([^)]*\*\)\((0x[0-9a-f]+|\d+) \+ %s\)' % B)]
 OPEN = re.compile(r'\b%s\b' % re.escape(var))
 by = {}; bad = []; evid = {}; used = {}
+EXTRA = {0x1930: ('registerDirty', 'register-dirty word: every gldValidate* ORs a bit into it (notes_gld_functions.md section 3)'),
+         0x4: ('glState', '*(glContext + 4): the GL state object; (glState)->+0x10 is the GL state block read by the gldValidate* translators'),
+         0x38: ('dirtyWord0', 'first dirty word tested by gldValidateState (notes_gld_functions.md section 3)'),
+         0x3c: ('dirtyWord1', 'second dirty word tested by gldValidateState (notes_gld_functions.md section 3)')}
 for k, ls in enumerate(ws):
     if not any(OPEN.search(F.CURRENT[x]) for x in ls): continue
     offs = set(); ok = True; n = 0; regs = set()
@@ -100,12 +104,13 @@ for k, ls in enumerate(ws):
         if o in names and len(regs) == 1 and regmap.get(next(iter(regs))) and os.environ.get('AUDIT'): print('AUDIT %s field=%s pair=%s %s' % ('OK ' if camel(regmap[next(iter(regs))][0]) == camel(names[o][0]) else 'BAD', names[o][0], regmap[next(iter(regs))][0], hex(o)))
         if o in names: nm = camel(names[o][0])
         elif len(regs) == 1 and regmap.get(next(iter(regs))): nm = camel(regmap[next(iter(regs))][0])
-        else: nm = 'ctxWord%x' % o
+        elif (o - adj) in EXTRA: nm = EXTRA[o - adj][0]
+        else: nm = '%sWord%x' % (os.environ.get('BASENAME', base), o - adj)
         if nm in used and used[nm] != o:     # same name for a different field: keep the first, qualify the later one with its offset
             nm = nm + '%x' % o
         used[nm] = o
         by.setdefault(nm, []).append(k)
-        evid[nm] = ('field %s of the GLD context (ctx+0x%x)' % (names[o][0], o)) if o in names else (('register %s (0x%x) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x%x' % (regmap[next(iter(regs))][0], next(iter(regs)), o)) if (len(regs) == 1 and regmap.get(next(iter(regs)))) else 'load of ctx+0x%x' % o)
+        evid[nm] = ('field %s of the GLD context (ctx+0x%x)' % (names[o][0], o)) if o in names else (('register %s (0x%x) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x%x' % (regmap[next(iter(regs))][0], next(iter(regs)), o)) if (len(regs) == 1 and regmap.get(next(iter(regs)))) else (EXTRA[o - adj][1] if (o - adj) in EXTRA else 'load of %s+0x%x (no field row, no register pairing): positional name' % (os.environ.get('BASENAME', base), o - adj)))
         print('web %3d  %-24s off 0x%x%s regs %s' % (k, nm, o, '' if o in names else '  (no field row)', [hex(r) for r in regs]))
     else:
         bad.append(k)
