@@ -188,12 +188,12 @@ int TParseContext__insertBuiltInArrayAtGlobalLevel(this)
   uint oldTypeBits;
   unsigned char * pTVar7;
   void *newNameString;
-  int *a0;
+  int *newVariable;
   unsigned char * variableNameRef;
   char *errorMessage;
-  int a2;
-  int a3;
-  int a4;
+  int foundTypeWord24;
+  int foundTypeWord20;
+  int foundTypeWord1c;
   int scratchR8;
   int levelsBegin;
   undefined4 scratchR10;
@@ -252,51 +252,51 @@ LAB_97b9c154:
     levelsBegin = *symbolTable;
   }
   pTVar7 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
-  a0 = (int *)((int (*)())TPoolAllocator__allocate)(pTVar7,0x40);
+  newVariable = (int *)((int (*)())TPoolAllocator__allocate)(pTVar7,0x40);
   variableVtable = PTR_vtable_a7b7c0b4;
-  a0[1] = (int)nameString;
-  *a0 = (int)(variableVtable + 8);
+  newVariable[1] = (int)nameString;
+  *newVariable = (int)(variableVtable + 8);
   scratchR8 = *(int *)(foundVariable + 0x18);
-  a4 = *(int *)(foundVariable + 0x1c);
-  a3 = *(int *)(foundVariable + 0x20);
-  a2 = *(int *)(foundVariable + 0x24);
+  foundTypeWord1c = *(int *)(foundVariable + 0x1c);
+  foundTypeWord20 = *(int *)(foundVariable + 0x20);
+  foundTypeWord24 = *(int *)(foundVariable + 0x24);
   typeWord1c = *(int *)(foundVariable + 0x28);
   typeArraySize = *(int *)(foundVariable + 0x10);
   typeStructure = *(int *)(foundVariable + 0x14);
   typeWord20 = *(int *)(foundVariable + 0x2c);
-  a0[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7d4d0;
-  a0[6] = scratchR8;
-  a0[7] = a4;
-  a0[8] = a3;
-  a0[9] = a2;
-  a0[10] = typeWord1c;
-  a0[4] = typeArraySize;
-  a0[5] = typeStructure;
+  newVariable[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7d4d0;
+  newVariable[6] = scratchR8;
+  newVariable[7] = foundTypeWord1c;
+  newVariable[8] = foundTypeWord20;
+  newVariable[9] = foundTypeWord24;
+  newVariable[10] = typeWord1c;
+  newVariable[4] = typeArraySize;
+  newVariable[5] = typeStructure;
   scratchR10 = 0;
-  a0[0xb] = typeWord20;
-  oldTypeBits = a0[0xc];
+  newVariable[0xb] = typeWord20;
+  oldTypeBits = newVariable[0xc];
   typeQualifierBits = *(uint *)(foundVariable + 0x30) & 0xfe000000;
-  a0[0xc] = typeQualifierBits | oldTypeBits & 0x1ffffff;
+  newVariable[0xc] = typeQualifierBits | oldTypeBits & 0x1ffffff;
   typeBasicTypeBits = (*(uint *)(foundVariable + 0x30) >> 0x13 & 0x3f) << 0x13;
-  a0[0xc] = typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ffff;
+  newVariable[0xc] = typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ffff;
   typeSizeBits = *(uint *)(foundVariable + 0x30) & 0x7f800;
-  a0[0xc] = typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ff;
+  newVariable[0xc] = typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ff;
   typeMatrixBit = (*(uint *)(foundVariable + 0x30) >> 10 & 1) << 10;
-  a0[0xc] = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
-  a0[0xc] = (*(uint *)(foundVariable + 0x30) >> 9 & 1) << 9 | typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x1ff
+  newVariable[0xc] = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
+  newVariable[0xc] = (*(uint *)(foundVariable + 0x30) >> 9 & 1) << 9 | typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x1ff
   ;
-  a0[0xd] = 0;
-  a0[0xe] = 0;
-  a0[0xf] = 0;
+  newVariable[0xd] = 0;
+  newVariable[0xe] = 0;
+  newVariable[0xf] = 0;
   symbolTable = *(int **)(this + 4);
   uniqueId = symbolTable[3];
   symbolTable[3] = uniqueId + 1;
-  a0[2] = uniqueId + 1;
+  newVariable[2] = uniqueId + 1;
   symbolTableLevel = *(undefined4 *)(*symbolTable + ((symbolTable[1] - *symbolTable & 0xfffffffcU) - 4));
   insertResultSecond = 0;
-  variableNameRef = (unsigned char *)(**(code **)(*a0 + 8))(a0,typeWord1c,a2,a3,a4,scratchR8,symbolTable,0);
+  variableNameRef = (unsigned char *)(**(code **)(*newVariable + 8))(newVariable,typeWord1c,foundTypeWord24,foundTypeWord20,foundTypeWord1c,scratchR8,symbolTable,0);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&nameCopy,variableNameRef);
-  mapEntryVariable = a0;
+  mapEntryVariable = newVariable;
   std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&mapInsertFirst,symbolTableLevel,&nameCopy);
   insertResultFirst = mapInsertFirst;
   refCountPtr = (int *)(nameCopyChars + -4);
@@ -317,7 +317,7 @@ LAB_97b9c154:
   if (insertResultSecond != 0) {
     return 0;
   }
-  (**(code **)(*a0 + 4))(a0);
+  (**(code **)(*newVariable + 4))(newVariable);
   nameChars = *(int *)((int)nameString + 4);
   nameLength = *(int *)(nameChars + -0xc);
   cr0Flags = *DAT_a7b7ba18;
@@ -385,19 +385,19 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
   void *this;
   unsigned char * nameStringRef;
   undefined **structTypeNameString;
-  undefined4 a1;
+  undefined4 lineCopy;
   undefined4 r4Out0;
   undefined4 passThroughR4;
-  undefined4 a1_00;
+  undefined4 lineCopy2;
   char *typeNameString;
-  unsigned char * a2;
-  undefined4 a3;
+  unsigned char * fwdR5;
+  undefined4 fwdR6;
   uint scratchR7;
   uint scratchR8;
   int atomicStore;
   char *structTypeNameChars2;
   int currentLevel;
-  int *a0;
+  int *existingSymbol;
   undefined4 symbolTableLevel;
   int *symbolTableLevels;
   char reservation;
@@ -468,11 +468,11 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
         currentLevel = *(int *)(levelsBegin + levelIndex * 4);
         nameStringRef = text;
         std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)levelFindResult,currentLevel,text);
-        a0 = (int *)0x0;
+        existingSymbol = (int *)0x0;
         if (levelFindResult[0] != *(int *)(currentLevel + 4)) {
-          a0 = *(int **)(levelFindResult[0] + 0x18);
+          existingSymbol = *(int **)(levelFindResult[0] + 0x18);
         }
-        if ((a0 != (int *)0x0) || (levelIndex + -1 < 0)) break;
+        if ((existingSymbol != (int *)0x0) || (levelIndex + -1 < 0)) break;
         levelsBegin = *symbolTableLevels;
         levelIndex = levelIndex + -1;
       }
@@ -482,7 +482,7 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
       if (&STACKARG(0x0) != (undefined1 *)0x3c) {
         sameScope = (uint)(levelIndex == (symbolTableLevels[1] - *symbolTableLevels >> 2) + -1);
       }
-      if ((a0 == (int *)0x0) || (sameScope == 0)) {
+      if ((existingSymbol == (int *)0x0) || (sameScope == 0)) {
         stackTypeArraySize = (char *)TParseContext__reservedErrorCheck((unsigned char *)parseContext,(int)line,text);
         cr0Flags = (stackTypeArraySize == (char *)0x0) << 1;
         if (stackTypeArraySize != (char *)0x0) {
@@ -513,8 +513,8 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
         pt2CopyUserDef = ptUserDef;
         stackTypeStructure = 0;
         stackTypeStructureSizeOrStackTypeBStructure = (char *)0x0;
-        a2 = ptUserDef;
-        a3 = ptLine;
+        fwdR5 = ptUserDef;
+        fwdR6 = ptLine;
         scratchR8 = (*(uint *)((unsigned char *)ghidra_home + 16));
         ptSize = (*(uint *)((unsigned char *)ghidra_home + 20));
         stackTypeFieldName = stackTypeArraySize;
@@ -529,7 +529,7 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
           structSizeResult = TType__setStructSize((unsigned char *)&stackType,*(unsigned char **)(ptUserDef + 8));
           stackTypeStructureSizeOrStackTypeBStructure = (char *)((ulonglong)structSizeResult >> 0x20);
           structTypeNameStringRef = (**(code **)(*(int *)pt2CopyUserDef + 0x18))
-                            (pt2CopyUserDef,(int)structSizeResult,a2,a3,scratchR8,ptSize,*(int *)pt2CopyUserDef);
+                            (pt2CopyUserDef,(int)structSizeResult,fwdR5,fwdR6,scratchR8,ptSize,*(int *)pt2CopyUserDef);
           *(byte *)(*(int *)(structTypeNameStringRef + 4) + *(int *)(*(int *)(structTypeNameStringRef + 4) + -0xc)) = *DAT_a7b7ba18;
           structTypeNameChars = *(char **)(structTypeNameStringRef + 4);
           poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
@@ -540,8 +540,8 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
           structTypeName = (undefined **)0x0;
           if (structTypeNameString != (undefined **)0x0) {
             poolAllocatorArg1[0] = ((int (*)())GetGlobalPoolAllocator)();
-            a2 = (unsigned char *)poolAllocatorArg1;
-            __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(structTypeNameString,structTypeNameChars,a2);
+            fwdR5 = (unsigned char *)poolAllocatorArg1;
+            __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(structTypeNameString,structTypeNameChars,fwdR5);
             passThroughR4 = r4Out0;
             structTypeName = structTypeNameString;
           }
@@ -583,7 +583,7 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
         newVariable[2] = uniqueId + 1;
         symbolTableLevel = *(undefined4 *)(*symbolTable + ((symbolTable[1] - *symbolTable & 0xfffffffcU) - 4));
         stackTypeArraySize = (char *)0x0;
-        variableNameString = (unsigned char *)(**(code **)(*newVariable + 8))(newVariable,passThroughR4,a2,a3,scratchR8,ptSize,symbolTable);
+        variableNameString = (unsigned char *)(**(code **)(*newVariable + 8))(newVariable,passThroughR4,fwdR5,fwdR6,scratchR8,ptSize,symbolTable);
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&nameCopy,variableNameString);
         variableForInsert = newVariable;
         std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&stackTypeTypeNameOrStackTypeB,symbolTableLevel,&nameCopy);
@@ -621,7 +621,7 @@ LAB_97b9caf4:
         errorReason = "INTERNAL ERROR inserting new symbol";
       }
       else {
-        isVariable = (**(code **)(*a0 + 0x10))(a0,a1,nameStringRef,publicType,intermTyped,ptSize,levelsBegin);
+        isVariable = (**(code **)(*existingSymbol + 0x10))(existingSymbol,lineCopy,nameStringRef,publicType,intermTyped,ptSize,levelsBegin);
         if (isVariable == 0) {
           identifierChars = *(int *)(text + 4);
           identifierLength = *(int *)(identifierChars + -0xc);
@@ -629,14 +629,14 @@ LAB_97b9caf4:
           errorReason = "variable expected";
         }
         else {
-          isArray = (**(code **)(a0[3] + 0x38))(a0 + 3,a1_00,nameStringRef,publicType,intermTyped,ptSize,levelsBegin);
+          isArray = (**(code **)(existingSymbol[3] + 0x38))(existingSymbol + 3,lineCopy2,nameStringRef,publicType,intermTyped,ptSize,levelsBegin);
           if (isArray == 0) {
             identifierChars = *(int *)(text + 4);
             identifierLength = *(int *)(identifierChars + -0xc);
             stringTerminator = (uint)*DAT_a7b7ba18;
             errorReason = "redeclaring non-array as array";
           }
-          else if (a0[4] < 1) {
+          else if (existingSymbol[4] < 1) {
             stackTypeBitsOrStackTypeBWord14 = ((*(uint *)((unsigned char *)ghidra_home + 28)) & 1) << 9 |
                         ((*(uint *)((unsigned char *)ghidra_home + 24)) & 1) << 10 |
                         ((*(uint *)((unsigned char *)ghidra_home + 20)) & 0xff) << 0xb |
@@ -692,12 +692,12 @@ LAB_97b9caf4:
             }
             stackTypeTypeNameOrStackTypeB = structTypeName;
             typesMatch = false;
-            if (((a0[0xc] & 0x1fffe00U) == (stackTypeBitsOrStackTypeBWord14 & 0x1fffe00)) && (a0[5] == stackTypeStructure)) {
+            if (((existingSymbol[0xc] & 0x1fffe00U) == (stackTypeBitsOrStackTypeBWord14 & 0x1fffe00)) && (existingSymbol[5] == stackTypeStructure)) {
               typesMatch = true;
             }
             stackType = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
             if (typesMatch) {
-              for (redeclaredArrayNode = a0[0xf]; redeclaredArrayNode != 0; redeclaredArrayNode = *(int *)(redeclaredArrayNode + 0x20)) {
+              for (redeclaredArrayNode = existingSymbol[0xf]; redeclaredArrayNode != 0; redeclaredArrayNode = *(int *)(redeclaredArrayNode + 0x20)) {
                 if (*(int *)arraySizeUnion[0xc] < *(int *)(redeclaredArrayNode + 0x1c)) {
                   identifierChars = *(int *)(text + 4);
                   identifierLength = *(int *)(identifierChars + -0xc);
@@ -709,8 +709,8 @@ LAB_97b9caf4:
                 *(uint *)(redeclaredArrayNode + 0x24) = *(uint *)(redeclaredArrayNode + 0x24) | 0x200;
               }
               if (!noArraySizeNode) {
-                a0[4] = *(int *)arraySizeUnion[0xc];
-                a0[0xc] = a0[0xc] | 0x200;
+                existingSymbol[4] = *(int *)arraySizeUnion[0xc];
+                existingSymbol[0xc] = existingSymbol[0xc] | 0x200;
               }
               goto LAB_97b9caf4;
             }
@@ -1022,16 +1022,16 @@ int TParseContext__nonInitErrorCheck(this, sourceLoc, text, publicType)
   uint oldTypeBits;
   int declQualifier;
   unsigned char * pTVar10;
-  int *a0;
+  int *newVariable;
   int structTypeNameRef;
   void *newTypeNameString;
   unsigned char * variableNameRef;
   undefined4 r4Out0;
-  undefined4 a1;
-  unsigned char * a2;
+  undefined4 staleR4;
+  unsigned char * fwdR5;
   int ptQualifier;
-  uint a4;
-  uint a5;
+  uint ptSize;
+  uint ptType;
   int *symbolTable;
   char *structTypeNameChars;
   undefined4 symbolTableLevel;
@@ -1077,17 +1077,17 @@ int TParseContext__nonInitErrorCheck(this, sourceLoc, text, publicType)
     *(undefined4 *)(publicType + 4) = 0;
   }
   pTVar10 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
-  a0 = (int *)((int (*)())TPoolAllocator__allocate)(pTVar10,0x40);
+  newVariable = (int *)((int (*)())TPoolAllocator__allocate)(pTVar10,0x40);
   ptCopy1UserDef = *(int **)(publicType + 0x14);
   ptQualifier = *(int *)(publicType + 4);
-  a5 = *(uint *)publicType;
-  a4 = *(uint *)(publicType + 8);
+  ptType = *(uint *)publicType;
+  ptSize = *(uint *)(publicType + 8);
   ptCopy1Matrix = *(uint *)(publicType + 0xc);
   ptCopy1Array = *(uint *)(publicType + 0x10);
-  a2 = *(unsigned char **)(publicType + 0x18);
+  fwdR5 = *(unsigned char **)(publicType + 0x18);
   stackTypeBits = (ptCopy1Array & 1) << 9 |
              (ptCopy1Matrix & 1) << 10 |
-             (a4 & 0xff) << 0xb | (a5 & 0x3f) << 0x13 | ptQualifier << 0x19 | stackTypeBits & 0x1ff;
+             (ptSize & 0xff) << 0xb | (ptType & 0x3f) << 0x13 | ptQualifier << 0x19 | stackTypeBits & 0x1ff;
   stackType = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   stackTypeWord20 = 0;
   stackTypeArraySize = 0;
@@ -1097,76 +1097,76 @@ int TParseContext__nonInitErrorCheck(this, sourceLoc, text, publicType)
   stackTypeWord14 = 0;
   stackTypeStructureSize = 0;
   stackTypeWord1c = 0;
-  a1 = 0;
+  staleR4 = 0;
   typeNameString = stackTypeTypeName;
-  ptCopy1Type = a5;
+  ptCopy1Type = ptType;
   ptCopy1Qualifier = ptQualifier;
-  ptCopy1Size = a4;
-  ptCopy1Line = a2;
-  ptCopy2Type = a5;
+  ptCopy1Size = ptSize;
+  ptCopy1Line = fwdR5;
+  ptCopy2Type = ptType;
   ptCopy2Qualifier = ptQualifier;
-  ptCopy2Size = a4;
+  ptCopy2Size = ptSize;
   ptCopy2Matrix = ptCopy1Matrix;
   ptCopy2Array = ptCopy1Array;
   ptCopy2UserDef = ptCopy1UserDef;
-  ptCopy2Line = a2;
+  ptCopy2Line = fwdR5;
   if (ptCopy1UserDef != (int *)0x0) {
     stackTypeStructure = ptCopy1UserDef[2];
     structSizeResult = TType__setStructSize((unsigned char *)&stackType,(unsigned char *)ptCopy1UserDef[2]);
     stackTypeStructureSize = (int)((ulonglong)structSizeResult >> 0x20);
-    structTypeNameRef = (**(code **)(*ptCopy2UserDef + 0x18))(ptCopy2UserDef,(int)structSizeResult,a2,ptQualifier,a4,a5,*ptCopy2UserDef);
+    structTypeNameRef = (**(code **)(*ptCopy2UserDef + 0x18))(ptCopy2UserDef,(int)structSizeResult,fwdR5,ptQualifier,ptSize,ptType,*ptCopy2UserDef);
     *(byte *)(*(int *)(structTypeNameRef + 4) + *(int *)(*(int *)(structTypeNameRef + 4) + -0xc)) = *DAT_a7b7ba18;
     structTypeNameChars = *(char **)(structTypeNameRef + 4);
     pTVar10 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
     typeNameAllocation = ((int (*)())TPoolAllocator__allocate)(pTVar10,8);
     newTypeNameString = (void *)((ulonglong)typeNameAllocation >> 0x20);
-    a1 = (undefined4)typeNameAllocation;
+    staleR4 = (undefined4)typeNameAllocation;
     cr0Reg = (newTypeNameString == (void *)0x0) << 1;
     typeNameString = (void *)0x0;
     if (newTypeNameString != (void *)0x0) {
       allocatorArg[0] = ((int (*)())GetGlobalPoolAllocator)();
-      a2 = (unsigned char *)allocatorArg;
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(newTypeNameString,structTypeNameChars,a2);
-      a1 = r4Out0;
+      fwdR5 = (unsigned char *)allocatorArg;
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(newTypeNameString,structTypeNameChars,fwdR5);
+      staleR4 = r4Out0;
       typeNameString = newTypeNameString;
     }
   }
   stackTypeTypeName = typeNameString;
-  a0[1] = (int)text;
-  *a0 = (int)(PTR_vtable_a7b7c0b4 + 8);
-  a0[4] = stackTypeArraySize;
-  a0[5] = stackTypeStructure;
-  a0[6] = stackTypeFieldName;
-  a0[7] = (int)stackTypeTypeName;
-  a0[8] = stackTypeWord14;
-  a0[9] = stackTypeStructureSize;
-  a0[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7d4d0;
-  a0[10] = stackTypeWord1c;
-  a0[0xb] = stackTypeWord20;
-  oldTypeBits = a0[0xc];
+  newVariable[1] = (int)text;
+  *newVariable = (int)(PTR_vtable_a7b7c0b4 + 8);
+  newVariable[4] = stackTypeArraySize;
+  newVariable[5] = stackTypeStructure;
+  newVariable[6] = stackTypeFieldName;
+  newVariable[7] = (int)stackTypeTypeName;
+  newVariable[8] = stackTypeWord14;
+  newVariable[9] = stackTypeStructureSize;
+  newVariable[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7d4d0;
+  newVariable[10] = stackTypeWord1c;
+  newVariable[0xb] = stackTypeWord20;
+  oldTypeBits = newVariable[0xc];
   typeQualifierBits = stackTypeBits & 0xfe000000;
-  a0[0xc] = typeQualifierBits | oldTypeBits & 0x1ffffff;
+  newVariable[0xc] = typeQualifierBits | oldTypeBits & 0x1ffffff;
   typeBasicTypeBits = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
-  a0[0xc] = typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ffff;
+  newVariable[0xc] = typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ffff;
   typeSizeBits = stackTypeBits & 0x7f800;
-  a0[0xc] = typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ff;
+  newVariable[0xc] = typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ff;
   typeMatrixBit = (stackTypeBits >> 10 & 1) << 10;
-  a0[0xc] = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
-  a0[0xc] = (stackTypeBits >> 9 & 1) << 9 | typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x1ff;
-  a0[0xd] = 0;
-  a0[0xe] = 0;
-  a0[0xf] = 0;
+  newVariable[0xc] = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
+  newVariable[0xc] = (stackTypeBits >> 9 & 1) << 9 | typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x1ff;
+  newVariable[0xd] = 0;
+  newVariable[0xe] = 0;
+  newVariable[0xf] = 0;
   symbolTable = *(int **)(this + 4);
   stackType = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   uniqueId = symbolTable[3];
   symbolTable[3] = uniqueId + 1;
-  a0[2] = uniqueId + 1;
+  newVariable[2] = uniqueId + 1;
   levelsBegin = *symbolTable;
   symbolTableLevel = *(undefined4 *)(levelsBegin + ((symbolTable[1] - levelsBegin & 0xfffffffcU) - 4));
   stackTypeArraySize = 0;
-  variableNameRef = (unsigned char *)(**(code **)(*a0 + 8))(a0,a1,a2,ptQualifier,a4,a5,symbolTable,levelsBegin);
+  variableNameRef = (unsigned char *)(**(code **)(*newVariable + 8))(newVariable,staleR4,fwdR5,ptQualifier,ptSize,ptType,symbolTable,levelsBegin);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&nameCopy,variableNameRef);
-  mapEntryVariable = a0;
+  mapEntryVariable = newVariable;
   std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&stackTypeTypeName,symbolTableLevel,&nameCopy);
   stackType = stackTypeTypeName;
   refCountPtr = (int *)(nameCopyChars + -4);
@@ -1185,12 +1185,12 @@ int TParseContext__nonInitErrorCheck(this, sourceLoc, text, publicType)
               ((unsigned char *)(nameCopyChars + -0xc),destroyAllocatorArg);
   }
   if (stackTypeArraySize == 0) {
-    existingNameRef = a0[1];
+    existingNameRef = newVariable[1];
     terminalChar = *DAT_a7b7ba18;
     *(byte *)(*(int *)(existingNameRef + 4) + *(int *)(*(int *)(existingNameRef + 4) + -0xc)) = terminalChar;
-    error((int)this,(char *)sourceLoc,"redefinition",*(char **)(existingNameRef + 4),"",a5,(uint)terminalChar,existingNameRef);
-    if (a0 != (int *)0x0) {
-      (**(code **)(*a0 + 4))(a0);
+    error((int)this,(char *)sourceLoc,"redefinition",*(char **)(existingNameRef + 4),"",ptType,(uint)terminalChar,existingNameRef);
+    if (newVariable != (int *)0x0) {
+      (**(code **)(*newVariable + 4))(newVariable);
     }
   }
   else {
@@ -1201,7 +1201,7 @@ int TParseContext__nonInitErrorCheck(this, sourceLoc, text, publicType)
     terminalChar = *DAT_a7b7ba18;
     *(byte *)(*(int *)(text + 4) + *(int *)(*(int *)(text + 4) + -0xc)) = terminalChar;
     error((int)this,(char *)sourceLoc,"variables with qualifier \'const\' must be initialized",
-          *(char **)(text + 4),"",a5,(uint)terminalChar,levelsBegin);
+          *(char **)(text + 4),"",ptType,(uint)terminalChar,levelsBegin);
   }
   return true;
 }
@@ -1544,40 +1544,40 @@ int TParseContext__findFunction(this, sourceLoc, function, builtInOut, scratchR8
   byte terminalChar;
   int levelIndex;
   undefined4 mangledName;
-  undefined4 a1;
-  undefined4 a2;
+  undefined4 sourceLocCopy;
+  undefined4 mangledNameCopy;
   char *errorReason;
-  bool *a3;
+  bool *builtInOutCopy;
   int levelsBegin;
   int *symbolTable;
   int level;
-  int *a0;
+  int *foundSymbol;
   int findResult [7];
   
   symbolTable = *(int **)(this + 4);
-  a3 = builtInOut;
+  builtInOutCopy = builtInOut;
   mangledName = (**(code **)(*(int *)function + 8))(function,sourceLoc,function,builtInOut,scratchR8,scratchR9);
   levelsBegin = *symbolTable;
   levelIndex = (symbolTable[1] - levelsBegin >> 2) + -1;
   while( true ) {
     level = *(int *)(levelsBegin + levelIndex * 4);
-    a2 = mangledName;
+    mangledNameCopy = mangledName;
     std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)findResult,level,mangledName);
-    a0 = (int *)0x0;
+    foundSymbol = (int *)0x0;
     if (findResult[0] != *(int *)(level + 4)) {
-      a0 = *(int **)(findResult[0] + 0x18);
+      foundSymbol = *(int **)(findResult[0] + 0x18);
     }
-    if ((a0 != (int *)0x0) || (levelIndex + -1 < 0)) break;
+    if ((foundSymbol != (int *)0x0) || (levelIndex + -1 < 0)) break;
     levelsBegin = *symbolTable;
     levelIndex = levelIndex + -1;
   }
   if (builtInOut != (bool *)0x0) {
     *(uint *)builtInOut = (uint)(levelIndex == 0);
   }
-  if (a0 != (int *)0x0) {
-    isFunctionResult = (**(code **)(*a0 + 0xc))(a0,a1,a2,a3,scratchR8,scratchR9,levelsBegin);
+  if (foundSymbol != (int *)0x0) {
+    isFunctionResult = (**(code **)(*foundSymbol + 0xc))(foundSymbol,sourceLocCopy,mangledNameCopy,builtInOutCopy,scratchR8,scratchR9,levelsBegin);
     if (isFunctionResult != 0) {
-      return a0;
+      return foundSymbol;
     }
     nameStringRef = *(int *)(function + 4);
     nameChars = *(int *)(nameStringRef + 4);
@@ -1671,8 +1671,8 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   undefined **structTypeName;
   undefined **r4Out3;
   undefined4 r4Out4;
-  undefined4 a1;
-  undefined4 a1_00;
+  undefined4 lineCopy;
+  undefined4 lineCopy2;
   undefined ***destroyAllocatorArg;
   unsigned char * ptUserDef;
   char *errorReason;
@@ -1680,7 +1680,7 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   uint ptQualifier;
   undefined4 passThroughR4;
   undefined **ptSize;
-  uint *a6;
+  uint *parseSymbolTable;
   uint qualifierBits;
   int childVtable;
   undefined4 singleConstantParam;
@@ -1690,7 +1690,7 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   undefined4 symbolTableLevel;
   int currentLevel;
   char *typeNameChars;
-  unsigned char * a0;
+  unsigned char * newNodeType;
   char reservation;
   byte cr0Flags;
   undefined8 variableAllocation;
@@ -1801,7 +1801,7 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   }
   stackTypeTypeName = structTypeName;
   newNode[1] = (int)identifier;
-  a0 = (unsigned char *)(newNode + 3);
+  newNodeType = (unsigned char *)(newNode + 3);
   *newNode = (int)(PTR_vtable_a7b7c0b4 + 8);
   tempName = &nameCopy;
   newNode[4] = voidErrorResult;
@@ -1826,16 +1826,16 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   newNode[0xd] = 0;
   newNode[0xe] = 0;
   newNode[0xf] = 0;
-  a6 = *(uint **)(this + 4);
+  parseSymbolTable = *(uint **)(this + 4);
   stackType = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-  uniqueId = a6[3];
-  a6[3] = uniqueId + 1;
+  uniqueId = parseSymbolTable[3];
+  parseSymbolTable[3] = uniqueId + 1;
   newNode[2] = uniqueId + 1;
-  levelsBegin = *a6;
-  symbolTableLevel = *(undefined4 *)(levelsBegin + ((a6[1] - levelsBegin & 0xfffffffc) - 4));
+  levelsBegin = *parseSymbolTable;
+  symbolTableLevel = *(undefined4 *)(levelsBegin + ((parseSymbolTable[1] - levelsBegin & 0xfffffffc) - 4));
   zeroWord = 0;
   variableNameString = (unsigned char *)
-            (**(code **)(*newNode + 8))(newNode,passThroughR4,ptUserDef,ptLineCopy,ptQualifier,ptSize,a6,levelsBegin);
+            (**(code **)(*newNode + 8))(newNode,passThroughR4,ptUserDef,ptLineCopy,ptQualifier,ptSize,parseSymbolTable,levelsBegin);
   __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(tempName,variableNameString);
   variableForInsert = newNode;
   std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&stackTypeTypeName,symbolTableLevel,tempName);
@@ -1866,7 +1866,7 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
     nameChars = *(char **)(levelsBegin + 4);
     goto LAB_97b9df14;
   }
-  ptLineCopy = (**(code **)(newNode[3] + 0x24))(a0,passThroughR4,tempName,ptLineCopy,ptQualifier,ptSize,decrementedRefCount,levelsBegin);
+  ptLineCopy = (**(code **)(newNode[3] + 0x24))(newNodeType,passThroughR4,tempName,ptLineCopy,ptQualifier,ptSize,decrementedRefCount,levelsBegin);
   if (2 < ptLineCopy) {
     nameChars = (char *)getQualifierString((uint)newNode[0xc] >> 0x19);
     errorReason = " cannot initialize this type of qualifier ";
@@ -1874,7 +1874,7 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   }
   if (ptLineCopy != 2) {
     variableSymbol = TIntermediate__addSymbol
-                      (*(unsigned char **)this,newNode[2],(unsigned char *)newNode[1],a0,line);
+                      (*(unsigned char **)this,newNode[2],(unsigned char *)newNode[1],newNodeType,line);
     assignNode = (unsigned char *)
               TIntermediate__addAssign(*(unsigned char **)this,0x76,variableSymbol,initializer,line);
     *intermNode = assignNode;
@@ -1920,7 +1920,7 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   qualifierIsNotConst = -((int)-((uint)stackTypeBits >> 0x19 ^ 2) >> 0x1f);
   cr0Flags = (qualifierIsNotConst == 0) << 1;
   if (qualifierIsNotConst != 0) {
-    TType__getCompleteString(&ptCopyType,a0);
+    TType__getCompleteString(&ptCopyType,newNodeType);
     stringTerminator = *DAT_a7b7ba18;
     *(byte *)(ptCopyQualifier + *(int *)(ptCopyQualifier - 0xc)) = stringTerminator;
     error((int)this,(char *)line," assigning non-constant to","=","\'%s\'",ptCopyQualifier,(uint)stringTerminator,
@@ -1942,7 +1942,7 @@ LAB_97b9e848:
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
               ((unsigned char *)(typeStringData - 0xc),destroyAllocatorArg);
 LAB_97b9e184:
-    (**(code **)(newNode[3] + 0x28))(a0,0);
+    (**(code **)(newNode[3] + 0x28))(newNodeType,0);
     return 1;
   }
   ptUserDef = *(unsigned char **)(publicType + 0x14);
@@ -2044,10 +2044,10 @@ LAB_97b9e184:
         sequence = (**(code **)(*aggregateNode + 100))(aggregateNode);
         childVtable = *(int *)**(undefined4 **)(sequence + 4);
         childConstantUnion = (int *)(**(code **)(childVtable + 0x14))
-                                  ((int *)**(undefined4 **)(sequence + 4),a1,ptUserDef,qualifierIsNotConst,ptLine,
+                                  ((int *)**(undefined4 **)(sequence + 4),lineCopy,ptUserDef,qualifierIsNotConst,ptLine,
                                    ptQualifierCopy,childVtable);
         childConstantUnionResult = (**(code **)(*childConstantUnion + 0x18))(childConstantUnion);
-        passThroughR4 = a1_00;
+        passThroughR4 = lineCopy2;
         if (childConstantUnionResult != 0) {
           existingTypeWord = newNode[4];
           stackTypeStructure = (undefined **)newNode[5];
@@ -2065,7 +2065,7 @@ LAB_97b9e184:
                       ((uint)newNode[0xc] >> 0x13 & 0x3f) << 0x13 |
                       newNode[0xc] & 0xfe000000U | (uint)stackTypeBits & 0x1ff);
           constantArrayPtr = (**(code **)(*(int *)initializer + 0x1c))
-                            (initializer,a1_00,stackTypeBits,stackTypeWord20,stackTypeWord1c,stackTypeStructureSize,stackTypeFieldName,
+                            (initializer,lineCopy2,stackTypeBits,stackTypeWord20,stackTypeWord1c,stackTypeStructureSize,stackTypeFieldName,
                              stackTypeWord14);
           symbolTableArg = *(undefined4 *)(this + 4);
           passThroughR4 = *(undefined4 *)(constantArrayPtr + 0x30);
@@ -2106,14 +2106,14 @@ LAB_97b9e6d8:
       stackType = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
       *intermNode = (unsigned char *)0x0;
       if (parseResult != 0) {
-        (**(code **)(newNode[3] + 0x28))(a0,0);
+        (**(code **)(newNode[3] + 0x28))(newNodeType,0);
         return parseResult;
       }
       return 0;
     }
     symbolNodeResult = (**(code **)(*(int *)initializer + 0x28))(initializer);
     if (symbolNodeResult == 0) {
-      TType__getCompleteString((unsigned char *)&stackType,a0);
+      TType__getCompleteString((unsigned char *)&stackType,newNodeType);
       stringTerminator = *DAT_a7b7ba18;
       *(byte *)(typeStringChars + *(int *)(typeStringChars - 0xc)) = stringTerminator;
       error((int)this,(char *)line," assigning non-constant to","=","\'%s\'",typeStringChars,
@@ -2273,7 +2273,7 @@ int TParseContext__canNodeBeRemoved(this, intermNode)
   undefined4 result;
   unsigned char * operatorNode;
   int isConstructorResult;
-  int *a0;
+  int *childTyped;
   int constUnionTest;
   undefined4 *childCursor;
   
@@ -2288,8 +2288,8 @@ int TParseContext__canNodeBeRemoved(this, intermNode)
       sequence = (**(code **)(*(int *)operatorNode + 100))(operatorNode);
       for (childCursor = *(undefined4 **)(sequence + 4); childCursor != *(undefined4 **)(sequence + 8);
           childCursor = childCursor + 1) {
-        a0 = (int *)(**(code **)(*(int *)*childCursor + 0x14))((int *)*childCursor);
-        constUnionTest = (**(code **)(*a0 + 0x18))(a0);
+        childTyped = (int *)(**(code **)(*(int *)*childCursor + 0x14))((int *)*childCursor);
+        constUnionTest = (**(code **)(*childTyped + 0x18))(childTyped);
         if (constUnionTest == 0) {
           return 0;
         }
@@ -2317,17 +2317,17 @@ int TParseContext__addConstructor(this, intermNode, type, op, function, line)
   int convertedSequence;
   int nodeAggregate;
   bool isNotStruct;
-  unsigned char * a0;
+  unsigned char * intermAggregate;
   int firstChildVtable;
   unsigned char * pTVar3;
   undefined4 nodeLineC;
   int *convertedAggregate;
   unsigned char * pTVar6;
   unsigned char * pTVar7;
-  unsigned char * a0_00;
-  undefined4 a1;
+  unsigned char * builtInNode;
+  undefined4 intermNodeCopy;
   char *lineArg;
-  undefined4 a5;
+  undefined4 fwdR8;
   int scratchR9;
   undefined4 scratchR10;
   undefined4 *structFieldBegin;
@@ -2345,17 +2345,17 @@ int TParseContext__addConstructor(this, intermNode, type, op, function, line)
   isNotStruct = op != 0x75;
   structFieldBegin = (undefined4 *)0x0;
   lineArg = line;
-  a0 = (unsigned char *)(**(code **)(*(int *)intermNode + 0x1c))(intermNode);
+  intermAggregate = (unsigned char *)(**(code **)(*(int *)intermNode + 0x1c))(intermNode);
   if (!isNotStruct) {
     structFieldList = *(int *)(function + 0x24);
     structFieldBegin = *(undefined4 **)(structFieldList + 4);
   }
-  if (((a0 == (unsigned char *)0x0) || (*(int *)(a0 + 0x30) != 0)) ||
-     (nodeSequence = (**(code **)(*(int *)a0 + 100))(a0),
+  if (((intermAggregate == (unsigned char *)0x0) || (*(int *)(intermAggregate + 0x30) != 0)) ||
+     (nodeSequence = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate),
      *(int *)(nodeSequence + 8) - *(int *)(nodeSequence + 4) >> 2 == 1)) {
     if (isNotStruct) {
       nodeLineC = (*(code *)**(undefined4 **)intermNode)(intermNode);
-      a5 = 0;
+      fwdR8 = 0;
       pTVar3 = (unsigned char *)((int (*)())TParseContext__constructBuiltIn)(this,type,op,intermNode,nodeLineC,0);
       if (pTVar3 == (unsigned char *)0x0) {
         return (unsigned char *)0x0;
@@ -2375,7 +2375,7 @@ int TParseContext__addConstructor(this, intermNode, type, op, function, line)
       firstChildVtable = *(int *)**(undefined4 **)(convertedSequence + 4);
       pTVar6 = (unsigned char *)
                (**(code **)(firstChildVtable + 0x1c))
-                         ((int *)**(undefined4 **)(convertedSequence + 4),a1,op,intermNode,nodeLineC,a5,firstChildVtable);
+                         ((int *)**(undefined4 **)(convertedSequence + 4),intermNodeCopy,op,intermNode,nodeLineC,fwdR8,firstChildVtable);
       pTVar3 = (unsigned char *)
                __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate
                          (*(void **)this,pTVar3,type,pTVar6);
@@ -2388,7 +2388,7 @@ int TParseContext__addConstructor(this, intermNode, type, op, function, line)
     }
   }
   else {
-    pTVar7 = (unsigned char *)(**(code **)(*(int *)a0 + 100))(a0);
+    pTVar7 = (unsigned char *)(**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
     if ((isNotStruct) ||
        (scratchR9 = *(int *)(pTVar7 + 4),
        *(int *)(structFieldList + 8) - *(int *)(structFieldList + 4) >> 3 == *(int *)(pTVar7 + 8) - scratchR9 >> 2)) {
@@ -2399,16 +2399,16 @@ int TParseContext__addConstructor(this, intermNode, type, op, function, line)
         iteratorSlot = childCursor;
         if (childCursor == *(undefined4 **)(pTVar7 + 8)) {
           pTVar3 = (unsigned char *)
-                   TIntermediate__setAggregateOperator(*(unsigned char **)this,a0,op,line);
+                   TIntermediate__setAggregateOperator(*(unsigned char **)this,intermAggregate,op,line);
           return pTVar3;
         }
         if (isNotStruct) {
           nodeLineC = (*(code *)**(undefined4 **)intermNode)(intermNode);
-          a0_00 = (unsigned char *)((int (*)())TParseContext__constructBuiltIn)(this,type,op,*childCursor,nodeLineC,1);
-          if (a0_00 != (unsigned char *)0x0) {
-            canBeRemoved = ((int (*)())TParseContext__canNodeBeRemoved)(this,a0_00);
+          builtInNode = (unsigned char *)((int (*)())TParseContext__constructBuiltIn)(this,type,op,*childCursor,nodeLineC,1);
+          if (builtInNode != (unsigned char *)0x0) {
+            canBeRemoved = ((int (*)())TParseContext__canNodeBeRemoved)(this,builtInNode);
             if (canBeRemoved == 0) goto LAB_97b9ed60;
-            pTVar6 = (unsigned char *)(**(code **)(*(int *)a0_00 + 0x1c))(a0_00);
+            pTVar6 = (unsigned char *)(**(code **)(*(int *)builtInNode + 0x1c))(builtInNode);
             __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate
                       (*(void **)this,pTVar7,type,&argIndex,(unsigned char *)&iteratorSlot,pTVar6
                       );
@@ -2416,14 +2416,14 @@ int TParseContext__addConstructor(this, intermNode, type, op, function, line)
         }
         else {
           nodeLineB = (*(code *)**(undefined4 **)intermNode)(intermNode);
-          a0_00 = (unsigned char *)
+          builtInNode = (unsigned char *)
                   ((int (*)())TParseContext__constructStruct)(this,(unsigned char *)*childCursor,(unsigned char *)structFieldBegin[argIndexCopy * 2],
                                   argIndex + 1,nodeLineB,1);
-          if (a0_00 != (unsigned char *)0x0) {
+          if (builtInNode != (unsigned char *)0x0) {
 LAB_97b9ed60:
             std__vector_TIntermNode__pool_allocator_TIntermNode_____erase
                       (eraseResultSlot,pTVar7,iteratorSlot);
-            replacementNode = a0_00;
+            replacementNode = builtInNode;
             std__vector_TIntermNode__pool_allocator_TIntermNode_____insert
                       (eraseResultSlot,pTVar7,iteratorSlot,&replacementNode);
           }
@@ -2528,32 +2528,32 @@ int TParseContext__constructStruct(this, intermNode, type, paramCount, line, sub
   undefined4 result;
   unsigned char * pTVar3;
   undefined4 fromTypeName;
-  undefined4 a1;
-  unsigned char * a2;
-  int a3;
-  int a4;
-  int a5;
-  int a6;
+  undefined4 intermNodeCopy;
+  unsigned char * typeCopy;
+  int paramCountCopy;
+  int lineCopy;
+  int subsetCopy;
+  int typesMatch;
   undefined **typeTemp [2];
   int typeTempStructure;
   uint typeTempBits;
   undefined **typeTemp2 [9];
   uint typeTemp2Bits;
   
-  a2 = type;
-  a3 = paramCount;
-  a4 = line;
-  a5 = subset;
+  typeCopy = type;
+  paramCountCopy = paramCount;
+  lineCopy = line;
+  subsetCopy = subset;
   nodeTyped = (int *)(**(code **)(*(int *)intermNode + 0x14))
                             (intermNode,intermNode,type,paramCount,line,subset);
   (**(code **)(*nodeTyped + 0x38))(typeTemp,nodeTyped);
-  a6 = 0;
+  typesMatch = 0;
   if (((*(uint *)(type + 0x24) & 0x1fffe00) == (typeTempBits & 0x1fffe00)) &&
      (*(int *)(type + 8) == typeTempStructure)) {
-    a6 = 1;
+    typesMatch = 1;
   }
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-  if (a6 == 0) {
+  if (typesMatch == 0) {
     basicString = TType__getBasicString(*(uint *)(type + 0x24) >> 0x13 & 0x3f);
     nodeTyped = (int *)(**(code **)(*(int *)intermNode + 0x14))(intermNode);
     (**(code **)(*nodeTyped + 0x38))(typeTemp2,nodeTyped);
@@ -2569,7 +2569,7 @@ int TParseContext__constructStruct(this, intermNode, type, paramCount, line, sub
     result = TIntermediate__setAggregateOperator(*(unsigned char **)this,pTVar3,0x75,line);
   }
   else {
-    result = (**(code **)(*(int *)intermNode + 0x14))(intermNode,a1,a2,a3,a4,a5,a6);
+    result = (**(code **)(*(int *)intermNode + 0x14))(intermNode,intermNodeCopy,typeCopy,paramCountCopy,lineCopy,subsetCopy,typesMatch);
   }
   return result;
 }
@@ -2597,13 +2597,13 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
   int firstChildVtable;
   undefined *oldRefCount;
   int constUnionNode;
-  unsigned char * a1;
+  unsigned char * constantUnionNode;
   int *nodeAggregate;
   unsigned char * pTVar7;
   unsigned char * resultArray;
   unsigned char * pTVar9;
-  undefined4 a1_00;
-  uint a1_01;
+  undefined4 vectorFieldsCopy;
+  uint sourceLine;
   undefined4 scratchR9;
   undefined4 scratchR10;
   unsigned char * constArray;
@@ -2619,20 +2619,20 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
   pTVar9 = intermTyped;
   lineCopy = line;
   constUnionNode = (**(code **)(*(int *)intermTyped + 0x18))(intermTyped,vectorFields,intermTyped,line,scratchR7,scratchR8);
-  a1 = (unsigned char *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
+  constantUnionNode = (unsigned char *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
   if (constUnionNode != 0) {
     constArray = *(unsigned char **)(constUnionNode + 0x30);
     if (constArray == (unsigned char *)0x0) {
       infoSink = *(void **)(this + 8);
                     
       __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-      a1_01 = line & 0xffff;
-      cr0Flags = (a1_01 == 0) << 1;
-      if (a1_01 == 0) {
+      sourceLine = line & 0xffff;
+      cr0Flags = (sourceLine == 0) << 1;
+      if (sourceLine == 0) {
         _sprintf(locTextBuf,"%d:? ",line >> 0x10);
       }
       else {
-        _sprintf(locTextBuf,"%d:%d",line >> 0x10,a1_01);
+        _sprintf(locTextBuf,"%d:%d",line >> 0x10,sourceLine);
       }
       __ZNSsC1EPKcRKSaIcE(typeTempOrTextBuf,locTextBuf,allocatorDummy);
       *(undefined *)((int)typeTempOrTextBuf[0] + (int)typeTempOrTextBuf[0][-3]) = *PTR__S_terminal_a7b7c0b8;
@@ -2658,13 +2658,13 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
     }
     goto LAB_97b9f4c4;
   }
-  if (a1 == (unsigned char *)0x0) {
+  if (constantUnionNode == (unsigned char *)0x0) {
     error((int)this,(char *)line,"No aggregate or constant union node available","Internal Error"
           ,"",scratchR8,scratchR9,scratchR10);
     TParseContext__recover(this);
     return (unsigned char *)0x0;
   }
-  (**(code **)(*(int *)a1 + 0x38))(typeTempOrTextBuf,a1);
+  (**(code **)(*(int *)constantUnionNode + 0x38))(typeTempOrTextBuf,constantUnionNode);
   if ((typeTempBits & 0x400) == 0) {
     objectSize = (int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18;
   }
@@ -2675,29 +2675,29 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
   pTVar7 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
   constArray = (unsigned char *)((int (*)())TPoolAllocator__allocate)(pTVar7,objectSize << 2);
   typeTempOrTextBuf[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-  nodeAggregate = (int *)(**(code **)(*(int *)a1 + 0x1c))(a1);
+  nodeAggregate = (int *)(**(code **)(*(int *)constantUnionNode + 0x1c))(constantUnionNode);
   sequence = (**(code **)(*nodeAggregate + 100))(nodeAggregate);
   if (*(int *)(sequence + 8) - *(int *)(sequence + 4) >> 2 == 1) {
-    nodeAggregate = (int *)(**(code **)(*(int *)a1 + 0x1c))(a1);
+    nodeAggregate = (int *)(**(code **)(*(int *)constantUnionNode + 0x1c))(constantUnionNode);
     sequence = (**(code **)(*nodeAggregate + 100))(nodeAggregate);
     firstChildVtable = *(int *)**(undefined4 **)(sequence + 4);
     firstChildTyped = (int *)(**(code **)(firstChildVtable + 0x14))
-                              ((int *)**(undefined4 **)(sequence + 4),a1_00,pTVar9,lineCopy,scratchR7,
+                              ((int *)**(undefined4 **)(sequence + 4),vectorFieldsCopy,pTVar9,lineCopy,scratchR7,
                                scratchR8,firstChildVtable);
     constUnionTest = (**(code **)(*firstChildTyped + 0x18))(firstChildTyped);
     if (constUnionTest == 0) goto LAB_97b9f438;
-    (**(code **)(*(int *)a1 + 0x38))(typeTempOrTextBuf,a1);
+    (**(code **)(*(int *)constantUnionNode + 0x38))(typeTempOrTextBuf,constantUnionNode);
     scratchR10 = 1;
     parseResult = TIntermediate__parseConstTree
-                       (*(unsigned char **)this,line,a1,constArray,*(undefined4 *)(a1 + 0x30),
+                       (*(unsigned char **)this,line,constantUnionNode,constArray,*(undefined4 *)(constantUnionNode + 0x30),
                         *(undefined4 *)(this + 4),typeTempOrTextBuf,1);
   }
   else {
 LAB_97b9f438:
-    (**(code **)(*(int *)a1 + 0x38))(typeTempOrTextBuf,a1);
+    (**(code **)(*(int *)constantUnionNode + 0x38))(typeTempOrTextBuf,constantUnionNode);
     scratchR10 = 0;
     parseResult = TIntermediate__parseConstTree
-                       (*(unsigned char **)this,line,a1,constArray,*(undefined4 *)(a1 + 0x30),
+                       (*(unsigned char **)this,line,constantUnionNode,constArray,*(undefined4 *)(constantUnionNode + 0x30),
                         *(undefined4 *)(this + 4),typeTempOrTextBuf,0);
   }
   typeTempOrTextBuf[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
@@ -2753,33 +2753,33 @@ int TParseContext__addConstMatrixNode(this, columnIndex, intermTyped, line)
   int sequence;
   int objectSize;
   int *constUnionNode;
-  unsigned char * a1;
+  unsigned char * constantUnionNode;
   undefined4 resultNode;
   unsigned char * poolAllocator;
   unsigned char * newConstArray;
-  undefined4 a1_00;
-  char *a2;
-  char *a3;
+  undefined4 columnIndexCopy;
+  char *fwdR5;
+  char *fwdR6;
   char *scratchR7;
   int scratchR8;
   undefined4 scratchR9;
-  int a6;
+  int firstChildVtable;
   undefined4 scratchR10;
   int columnOffset;
   int constArray;
   undefined **typeTemp [9];
   uint typeTempBits;
   
-  a2 = (char *)intermTyped;
-  a3 = (char *)line;
+  fwdR5 = (char *)intermTyped;
+  fwdR6 = (char *)line;
   constUnionNode = (int *)(**(code **)(*(int *)intermTyped + 0x18))(intermTyped,columnIndex,intermTyped,line);
-  a1 = (unsigned char *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
+  constantUnionNode = (unsigned char *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
   (**(code **)(*(int *)intermTyped + 0x38))(typeTemp,intermTyped);
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   columnOffset = columnIndex;
   if ((int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18 <= columnIndex) {
-    a2 = "";
-    a3 = "[";
+    fwdR5 = "";
+    fwdR6 = "[";
     scratchR7 = "matrix field selection out of range \'%d\'";
     columnOffset = 0;
     error((int)this,(char *)line,"","[","matrix field selection out of range \'%d\'",columnIndex,
@@ -2799,13 +2799,13 @@ int TParseContext__addConstMatrixNode(this, columnIndex, intermTyped, line)
                        (unsigned char *)typeTemp,line);
     return resultNode;
   }
-  if (a1 == (unsigned char *)0x0) {
+  if (constantUnionNode == (unsigned char *)0x0) {
     error((int)this,(char *)line,"No Aggregate or Constant Union node available","Internal Error"
           ,"",scratchR8,scratchR9,scratchR10);
     TParseContext__recover(this);
     return 0;
   }
-  (**(code **)(*(int *)a1 + 0x38))((unsigned char *)typeTemp,a1);
+  (**(code **)(*(int *)constantUnionNode + 0x38))((unsigned char *)typeTemp,constantUnionNode);
   if ((typeTempBits & 0x400) == 0) {
     objectSize = (int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18;
   }
@@ -2816,34 +2816,34 @@ int TParseContext__addConstMatrixNode(this, columnIndex, intermTyped, line)
   poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
   newConstArray = (unsigned char *)((int (*)())TPoolAllocator__allocate)(poolAllocator,objectSize << 2);
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-  (**(code **)(*(int *)a1 + 0x38))((unsigned char *)typeTemp,a1);
+  (**(code **)(*(int *)constantUnionNode + 0x38))((unsigned char *)typeTemp,constantUnionNode);
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-  nodeAggregate = (int *)(**(code **)(*(int *)a1 + 0x1c))(a1);
+  nodeAggregate = (int *)(**(code **)(*(int *)constantUnionNode + 0x1c))(constantUnionNode);
   sequence = (**(code **)(*nodeAggregate + 100))(nodeAggregate);
   if (*(int *)(sequence + 8) - *(int *)(sequence + 4) >> 2 == 1) {
-    nodeAggregate = (int *)(**(code **)(*(int *)a1 + 0x1c))(a1);
+    nodeAggregate = (int *)(**(code **)(*(int *)constantUnionNode + 0x1c))(constantUnionNode);
     sequence = (**(code **)(*nodeAggregate + 100))(nodeAggregate);
-    a6 = *(int *)**(undefined4 **)(sequence + 4);
-    firstChildTyped = (int *)(**(code **)(a6 + 0x14))
-                              ((int *)**(undefined4 **)(sequence + 4),a1_00,a2,a3,scratchR7,scratchR8,a6);
+    firstChildVtable = *(int *)**(undefined4 **)(sequence + 4);
+    firstChildTyped = (int *)(**(code **)(firstChildVtable + 0x14))
+                              ((int *)**(undefined4 **)(sequence + 4),columnIndexCopy,fwdR5,fwdR6,scratchR7,scratchR8,firstChildVtable);
     constUnionTest = (**(code **)(*firstChildTyped + 0x18))(firstChildTyped);
     if (constUnionTest != 0) {
-      (**(code **)(*(int *)a1 + 0x38))((unsigned char *)typeTemp,a1);
+      (**(code **)(*(int *)constantUnionNode + 0x38))((unsigned char *)typeTemp,constantUnionNode);
       parseResult = TIntermediate__parseConstTree
-                        (*(unsigned char **)this,line,a1,newConstArray,*(undefined4 *)(a1 + 0x30),
+                        (*(unsigned char **)this,line,constantUnionNode,newConstArray,*(undefined4 *)(constantUnionNode + 0x30),
                          *(undefined4 *)(this + 4),(unsigned char *)typeTemp,1);
       goto LAB_97b9f8f4;
     }
   }
-  (**(code **)(*(int *)a1 + 0x38))(typeTemp,a1);
+  (**(code **)(*(int *)constantUnionNode + 0x38))(typeTemp,constantUnionNode);
   parseResult = TIntermediate__parseConstTree
-                    (*(unsigned char **)this,line,a1,newConstArray,*(undefined4 *)(a1 + 0x30),
+                    (*(unsigned char **)this,line,constantUnionNode,newConstArray,*(undefined4 *)(constantUnionNode + 0x30),
                      *(undefined4 *)(this + 4),typeTemp,0);
 LAB_97b9f8f4:
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   resultNode = 0;
   if (parseResult == 0) {
-    (**(code **)(*(int *)a1 + 0x38))(typeTemp,a1);
+    (**(code **)(*(int *)constantUnionNode + 0x38))(typeTemp,constantUnionNode);
     resultNode = TIntermediate__addConstantUnion
                       (*(unsigned char **)this,
                        newConstArray + ((int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18) * columnOffset * 4,
@@ -2871,15 +2871,15 @@ int TParseContext__addConstStruct(this, text, intermTyped, line, scratchR7, scra
   int nodeVtable;
   int lineCopy;
   unsigned char * pTVar2;
-  unsigned char * a1;
+  unsigned char * constantUnionNode;
   unsigned char * structFieldType;
   unsigned char * poolAllocator;
   int *fieldType;
   undefined4 resultNode;
-  undefined4 a1_00;
-  undefined4 a1_01;
+  undefined4 textCopy;
+  undefined4 textCopy2;
   uint *minLengthPtr;
-  unsigned char * a2;
+  unsigned char * fwdR5;
   int nodeVtableB;
   int fieldTypeBegin;
   undefined4 scratchR10;
@@ -2895,13 +2895,13 @@ int TParseContext__addConstStruct(this, text, intermTyped, line, scratchR7, scra
   uint nameLengths [5];
   
   componentOffset = 0;
-  a2 = intermTyped;
+  fwdR5 = intermTyped;
   lineCopy = line;
   (**(code **)(*(int *)intermTyped + 0x38))(typeTemp,intermTyped,intermTyped,line,scratchR7,scratchR8);
   nodeVtableB = *(int *)intermTyped;
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-  pTVar2 = (unsigned char *)(**(code **)(nodeVtableB + 0x18))(intermTyped,a1_00,a2,lineCopy,scratchR7,scratchR8,nodeVtableB);
-  a1 = (unsigned char *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
+  pTVar2 = (unsigned char *)(**(code **)(nodeVtableB + 0x18))(intermTyped,textCopy,fwdR5,lineCopy,scratchR7,scratchR8,nodeVtableB);
+  constantUnionNode = (unsigned char *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
   for (fieldIndex = 0; fieldIndex < (uint)(*(int *)(typeTempStructure + 8) - *(int *)(typeTempStructure + 4) >> 3);
       fieldIndex = fieldIndex + 1) {
     fieldType = *(int **)(*(int *)(typeTempStructure + 4) + fieldIndex * 8);
@@ -2914,8 +2914,8 @@ int TParseContext__addConstStruct(this, text, intermTyped, line, scratchR7, scra
     if (fieldNameLen <= nameLength) {
       minLengthPtr = &fieldNameLength;
     }
-    a2 = (unsigned char *)*minLengthPtr;
-    fieldTypeBegin = _memcmp(*(undefined4 *)(fieldTypeBegin + 4),*(int *)(text + 4),a2);
+    fwdR5 = (unsigned char *)*minLengthPtr;
+    fieldTypeBegin = _memcmp(*(undefined4 *)(fieldTypeBegin + 4),*(int *)(text + 4),fwdR5);
     if (fieldTypeBegin == 0) {
       fieldTypeBegin = fieldNameLen - nameLength;
     }
@@ -2932,49 +2932,49 @@ int TParseContext__addConstStruct(this, text, intermTyped, line, scratchR7, scra
   if (pTVar2 != (unsigned char *)0x0) {
     nodeVtable = *(int *)pTVar2;
     constArray = *(unsigned char **)(pTVar2 + 0x30);
-    a1 = pTVar2;
+    constantUnionNode = pTVar2;
     goto LAB_97b9fc60;
   }
-  if (a1 == (unsigned char *)0x0) {
+  if (constantUnionNode == (unsigned char *)0x0) {
     error((int)this,(char *)line,"No Aggregate or Constant Union node available","Internal Error"
           ,"",scratchR8,nodeVtableB,scratchR10);
     TParseContext__recover(this);
     return 0;
   }
-  (**(code **)(*(int *)a1 + 0x38))(typeTemp,a1);
+  (**(code **)(*(int *)constantUnionNode + 0x38))(typeTemp,constantUnionNode);
   poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
   constArray = (unsigned char *)((int (*)())TPoolAllocator__allocate)(poolAllocator,typeTempStructureSize << 2);
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-  nodeAggregate = (int *)(**(code **)(*(int *)a1 + 0x1c))(a1);
+  nodeAggregate = (int *)(**(code **)(*(int *)constantUnionNode + 0x1c))(constantUnionNode);
   sequence = (**(code **)(*nodeAggregate + 100))(nodeAggregate);
   if (*(int *)(sequence + 8) - *(int *)(sequence + 4) >> 2 == 1) {
-    nodeAggregate = (int *)(**(code **)(*(int *)a1 + 0x1c))(a1);
+    nodeAggregate = (int *)(**(code **)(*(int *)constantUnionNode + 0x1c))(constantUnionNode);
     sequence = (**(code **)(*nodeAggregate + 100))(nodeAggregate);
     firstChildVtable = *(int *)**(undefined4 **)(sequence + 4);
     firstChildTyped = (int *)(**(code **)(firstChildVtable + 0x14))
-                              ((int *)**(undefined4 **)(sequence + 4),a1_01,a2,lineCopy,scratchR7,scratchR8,
+                              ((int *)**(undefined4 **)(sequence + 4),textCopy2,fwdR5,lineCopy,scratchR7,scratchR8,
                                firstChildVtable);
     constUnionTest = (**(code **)(*firstChildTyped + 0x18))(firstChildTyped);
     if (constUnionTest == 0) goto LAB_97b9fc00;
-    (**(code **)(*(int *)a1 + 0x38))(typeTemp,a1);
+    (**(code **)(*(int *)constantUnionNode + 0x38))(typeTemp,constantUnionNode);
     parseResult = TIntermediate__parseConstTree
-                      (*(unsigned char **)this,line,a1,constArray,*(undefined4 *)(a1 + 0x30),
+                      (*(unsigned char **)this,line,constantUnionNode,constArray,*(undefined4 *)(constantUnionNode + 0x30),
                        *(undefined4 *)(this + 4),typeTemp,1);
   }
   else {
 LAB_97b9fc00:
-    (**(code **)(*(int *)a1 + 0x38))(typeTemp,a1);
+    (**(code **)(*(int *)constantUnionNode + 0x38))(typeTemp,constantUnionNode);
     parseResult = TIntermediate__parseConstTree
-                      (*(unsigned char **)this,line,a1,constArray,*(undefined4 *)(a1 + 0x30),
+                      (*(unsigned char **)this,line,constantUnionNode,constArray,*(undefined4 *)(constantUnionNode + 0x30),
                        *(undefined4 *)(this + 4),typeTemp,0);
   }
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   if (parseResult != 0) {
     return 0;
   }
-  nodeVtable = *(int *)a1;
+  nodeVtable = *(int *)constantUnionNode;
 LAB_97b9fc60:
-  (**(code **)(nodeVtable + 0x38))(typeTemp,a1);
+  (**(code **)(nodeVtable + 0x38))(typeTemp,constantUnionNode);
   resultNode = TIntermediate__addConstantUnion
                     (*(unsigned char **)this,constArray + componentOffset * 4,(unsigned char *)typeTemp,line);
   return resultNode;

@@ -1,0 +1,131 @@
+local	_lFloatConst	a3	tokenCopy	INFERRED	incoming argument register (r6) forwarded unchanged as an outgoing call argument
+local	_byte_scan	a1	currentChar	INFERRED	the current input character, read through the cpp input source virtual call (get char) or the pending char passed in
+local	_yylex_CPP	a6	fwdR9	INFERRED	constant 0xa7b79cdc left in r9 and forwarded as the 7th argument of the token-source and error calls
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	a1	staleR4	INFERRED	r4 left over from the pool allocate / string constructor calls, forwarded as the 2nd argument of the TVariable vtable call
+local	TIntermediate__addBinaryMath	a0_00	promoteReceiver	INFERRED	the operand whose promote (vtable +0x5c) is called: the non-scalar operand, or the first operand
+local	TIntermediate__addBinaryMath	a2	promoteOperand	INFERRED	the other operand, 3rd argument of the promote call
+local	TIntermediate__addBinaryMath	a3	intermediateField0	INFERRED	first word of the TIntermediate (this), 4th argument of the promote call
+local	TIntermediate__addBinaryMath	a4	promoteSwapFlag	INFERRED	0 when the receiver is the second operand, 1 when it is the first; last argument of the promote call
+local	TIntermediate__addUnaryMath	a0	constantOperand	INFERRED	getAsConstantUnion (vtable +0x18) of the operand node; later its promote is called
+local	TIntermediate__addUnaryMath	a1	operandNode	INFERRED	the working operand node: getAsTyped result, then its conversion/copy/temp-const replacements
+local	TIntermediate__addUnaryMath	a4	symbolTableCopy	INFERRED	copy of the symbolTable argument staged in r7 for the getAsTyped/promote calls
+local	TIntermediate__addConversion	a1	opCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TIntermediate__addConversion	a1_00	opCopy2	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TIntermediate__addConversion	a1_01	opCopy3	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TIntermediate__addConversion	a2	fwdR5	INFERRED	r5 staged as 3rd argument of the getType/getBasicType calls: type, &stackType or the sequence cursor, never used by the callee
+local	TIntermediate__addConversion	a6	constValueScratch	INFERRED	scratch reused in one register: empty-sequence flag 0/1, then pointer to / values loaded from the constant union array (+0x30), forwarded as 7th argument
+local	TIntermediate__makeAggregate	a1	sequenceInsertSlot	INFERRED	pointer to the vector end slot where the node is stored (sequence end, or the slot after the reserve/insert call)
+local	__ZN13TIntermediate12addSelectionEP12TIntermTyped15TIntermNodePairi	a6	selectionVtable	INFERRED	vtable pointer (PTR_vtable_a7b7c0cc + 8, TIntermSelection) stored into the new node; also forwarded as 7th argument
+local	TIntermediate__addComma	a3	lineCopy	INFERRED	incoming argument register (r6) forwarded unchanged as an outgoing call argument
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	a0	stackTypePtr	INFERRED	pointer to the on-stack TType filled by getType (vtable +0x38) and passed to addConversion
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	a0_00	convertedOperand3	INFERRED	the third operand after addConversion, or the third operand itself when no conversion was needed
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	a1	staleR4	INFERRED	r4 left over from the addConversion call, then 0, forwarded as 2nd argument of the getAsConstantUnion call
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	a2	conversionType	INFERRED	the TType* passed to addConversion (&stackType)
+local	__ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i	a3	conversionOperand	INFERRED	the operand passed to addConversion (3rd, then 2nd operand)
+local	TIntermediate__addConstantUnion	a2	typeWord1cArg	INFERRED	TType word at +0x1c staged as an outgoing argument of the TType copy call
+local	TIntermediate__addConstantUnion	a3	typeWord18Arg	INFERRED	TType word at +0x18 staged as an outgoing argument of the TType copy call
+local	TIntermediate__addConstantUnion	a4	typeWord14Arg	INFERRED	TType word at +0x14 staged as an outgoing argument of the TType copy call
+local	TIntermediate__addConstantUnion	a5	typeWord10Arg	INFERRED	TType word at +0x10 staged as an outgoing argument of the TType copy call
+local	TIntermediate__addConstantUnion	a6	typeBit9Arg	INFERRED	bit 9 of the TType bit-field word (type+0x24 >> 9 & 1) staged as an outgoing argument
+local	TIntermediate__addConstantUnion	a7	typeWord0cArg	INFERRED	TType word at +0xc staged as an outgoing argument of the TType copy call
+local	TIntermediate__postProcess	a0	aggregateNode	INFERRED	getAsAggregate (vtable +0x1c) of the node being post-processed
+local	TIntermBinary__promote	a1	infoSinkCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	compareStructure	a0	fieldType	INFERRED	TType of the structure field being compared (field list entry)
+local	compareStructure	a2	constUnion2Copy	INFERRED	incoming argument register (r5) forwarded unchanged as an outgoing call argument
+local	compareStructure	a3	constIndexPtrCopy	INFERRED	incoming argument register (r6) forwarded unchanged as an outgoing call argument
+local	TIntermediate__changeAggrToTempConst	a0	childTyped	INFERRED	getAsTyped (vtable +0x14) of the first child of the aggregate
+local	TIntermediate__changeAggrToTempConst	a1	intermAggregateCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TIntermediate__changeAggrToTempConst	a2	symbolTableCopy	INFERRED	incoming argument register (r5) forwarded unchanged as an outgoing call argument
+local	TIntermediate__changeAggrToTempConst	a6	childVtable	INFERRED	vtable of the first child node (called for getAsTyped)
+local	TIntermediate__promoteConstantUnion	a1	basicTypeCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TIntermediate__promoteConstantUnion	a1_00	basicTypeCopy2	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TIntermediate__promoteConstantUnion	a1_01	basicTypeCopy3	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TIntermediate__promoteConstantUnion	a1_02	sourceLine	INFERRED	low 16 bits of the node's source location (the line number half; high half is the file string number printed first)
+local	TIntermediate__promoteConstantUnion	a2	intermConstantUnionCopy	INFERRED	incoming argument register (r5) forwarded unchanged as an outgoing call argument
+local	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	a0	newConstantUnionNode	INFERRED	new pool-allocated TIntermConstantUnion built from the child (high word of the allocate pair)
+local	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	a1	childConstantUnion	INFERRED	getAsConstantUnion (vtable +0x18) of the first child; its type is copied to the new node
+local	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	a1_00	aggregateLine	INFERRED	getLine (vtable +0) of the aggregate, passed to setLine of the new node
+local	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	a1_01	vectorCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	a3	fwdR6	INFERRED	r6 staged as 4th argument: intermAggregate, then the insert node slot
+local	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	a4	childIndex	INFERRED	value of *indexPtr: the index of the child being replaced
+local	__ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__gnu_cxx17__normal_iteratorIPS2_St6vectorIS2_14pool_allocatorIS2_EEEEP16TIntermAggregate	a5	intermAggregateCopy	INFERRED	incoming argument register (r8) forwarded unchanged as an outgoing call argument
+local	__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate	a0	aggregateNode	INFERRED	getAsAggregate (vtable +0x1c) of the typed node
+local	__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate	a1	intermTypedCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate	a2	typeCopy	INFERRED	incoming argument register (r5) forwarded unchanged as an outgoing call argument
+local	__ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggregate	a3	intermAggregateCopy	INFERRED	incoming argument register (r6) forwarded unchanged as an outgoing call argument
+local	TIntermediate__removeMatrixConstNode	a0	newConstantUnionNode	INFERRED	new pool-allocated TIntermConstantUnion for the matrix column (high word of the allocate pair)
+local	TIntermediate__removeMatrixConstNode	a1	vectorCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TIntermediate__removeMatrixConstNode	a1_00	vectorCopy2	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TIntermediate__removeMatrixConstNode	a2	fwdR5	INFERRED	r5 staged as 3rd argument: type, then the vector element address
+local	TIntermediate__removeMatrixConstNode	a3	fwdR6	INFERRED	r6 staged as 4th argument: intermAggregate, then the insert node slot
+local	TIntermediate__removeMatrixConstNode	a4	indexCopy	INFERRED	incoming argument register (r7) forwarded unchanged as an outgoing call argument
+local	OutputTreeText	a1	sourceLine	INFERRED	low 16 bits of the node's source location (the line number half; high half is the file string number printed first)
+local	OutputSymbol	a1	intermTraverserCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	OutputSymbol	a1_00	intermTraverserCopy2	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	OutputSymbol	a2	traverserDepth	INFERRED	the traverser's current depth (+0x20): indentation passed to OutputTreeText
+local	OutputSymbol	a6	symbolNameChars	INFERRED	character buffer of the symbol-name string (name+4)
+local	OutputConstantUnion	a1	intermTraverserCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	OutputConstantUnion	a1_00	sourceLine	INFERRED	low 16 bits of the node's source location (the line number half; high half is the file string number printed first)
+local	ParseSymbol	a0	variableType	INFERRED	the TType embedded at +0xc of the variable (receiver of its vtable calls)
+local	ParseSymbol	a1	intermTraverserCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	ParseUnary	a1	sourceLine	INFERRED	low 16 bits of the node's source location (the line number half; high half is the file string number printed first)
+local	ParseAggregate	a1	intermAggregateCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	ParseAggregate	a1_00	sourceLine	INFERRED	low 16 bits of the node's source location (the line number half; high half is the file string number printed first)
+local	ParseAggregate	a2	intermTraverserCopy	INFERRED	incoming argument register (r5) forwarded unchanged as an outgoing call argument
+local	ParseSelection	a1	sourceLine	INFERRED	low 16 bits of the node's source location (the line number half; high half is the file string number printed first)
+local	ParseConstantUnion	a6	traverserField3c	INFERRED	intermTraverser + 0x3c staged as 7th argument of the getType call
+local	ParseLoop	a1	sourceLine	INFERRED	low 16 bits of the node's source location (the line number half; high half is the file string number printed first)
+local	ParseBranch	a1	sourceLine	INFERRED	low 16 bits of the node's source location (the line number half; high half is the file string number printed first)
+local	TParseContext__error	a1	sourceLine	INFERRED	low 16 bits of the node's source location (the line number half; high half is the file string number printed first)
+local	TParseContext__lValueErrorCheck	a1	staleR4	INFERRED	r4 left over from the preceding call, forwarded as 2nd argument of the getQualifier/isArray calls
+local	TParseContext__lValueErrorCheck	a1_00	sourceLocCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TParseContext__constructorErrorCheck	a0	functionParam	INFERRED	parameter TType* from the constructor function's parameter list
+local	TParseContext__constructorErrorCheck	a1	sourceLocCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TParseContext__constructorErrorCheck	a1_00	sourceLocCopy2	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TParseContext__constructorErrorCheck	a1_01	sourceLocCopy3	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TParseContext__constructorErrorCheck	a6	constructorScratch	INFERRED	scratch in one register: switch index (op - 0x66), type bits being built, refcount decrement, and the 7th argument forwarded to error
+local	TParseContext__constructorErrorCheck	a6_00	paramTypeVtableArg	INFERRED	vtable of the constructor parameter type
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	a2	foundTypeWord24	INFERRED	TType word +0x24 of the found variable, staged as an outgoing argument and copied into the new variable
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	a3	foundTypeWord20	INFERRED	TType word +0x20 of the found variable
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	a4	foundTypeWord1c	INFERRED	TType word +0x1c of the found variable
+local	TParseContext__arrayErrorCheck	a0	existingSymbol	INFERRED	symbol found by name in the scopes (null when not found), then the variable being redeclared
+local	TParseContext__arrayErrorCheck	a1	lineCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TParseContext__arrayErrorCheck	a1_00	lineCopy2	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TParseContext__arrayErrorCheck	a2	fwdR5	INFERRED	r5 staged as 3rd argument: ptUserDef, then the pool allocator argument
+local	TParseContext__arrayErrorCheck	a3	fwdR6	INFERRED	r6 staged as 4th argument: ptLine
+local	TParseContext__nonInitErrorCheck	a1	staleR4	INFERRED	r4 left over from the pool allocate / string constructor calls, forwarded as 2nd argument of the TVariable vtable call
+local	TParseContext__nonInitErrorCheck	a2	fwdR5	INFERRED	r5 staged as 3rd argument: publicType user-defined type, then the allocator argument
+local	TParseContext__nonInitErrorCheck	a4	ptSize	INFERRED	publicType word +8: size/matrix/array field bits
+local	TParseContext__nonInitErrorCheck	a5	ptType	INFERRED	publicType word +0: basic type
+local	TParseContext__findFunction	a0	foundSymbol	INFERRED	symbol found by mangled name in the scope levels (null when not found)
+local	TParseContext__findFunction	a1	sourceLocCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TParseContext__findFunction	a2	mangledNameCopy	INFERRED	mangledName staged as 3rd argument of the isFunction call
+local	TParseContext__findFunction	a3	builtInOutCopy	INFERRED	copy of the builtInOut argument staged as 4th argument
+local	TParseContext__executeInitializer	a0	newNodeType	INFERRED	the TType embedded in the new variable (newNode + 3 words): receiver of its vtable calls
+local	TParseContext__executeInitializer	a1	lineCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TParseContext__executeInitializer	a1_00	lineCopy2	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TParseContext__executeInitializer	a6	parseSymbolTable	INFERRED	the parse context's symbol table (this+4): unique id counter at [3], level stack [0]/[1]
+local	TParseContext__canNodeBeRemoved	a0	childTyped	INFERRED	getAsTyped (vtable +0x14) of the child node
+local	TParseContext__addConstructor	a0	intermAggregate	INFERRED	getAsAggregate (vtable +0x1c) of the argument node
+local	TParseContext__addConstructor	a0_00	builtInNode	INFERRED	result of constructBuiltIn / the replacement node for a child
+local	TParseContext__addConstructor	a1	intermNodeCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TParseContext__addConstructor	a5	fwdR8	INFERRED	constant 0 staged in r8 as 6th argument
+local	TParseContext__constructStruct	a1	intermNodeCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TParseContext__constructStruct	a2	typeCopy	INFERRED	incoming argument register (r5) forwarded unchanged as an outgoing call argument
+local	TParseContext__constructStruct	a3	paramCountCopy	INFERRED	incoming argument register (r6) forwarded unchanged as an outgoing call argument
+local	TParseContext__constructStruct	a4	lineCopy	INFERRED	incoming argument register (r7) forwarded unchanged as an outgoing call argument
+local	TParseContext__constructStruct	a5	subsetCopy	INFERRED	incoming argument register (r8) forwarded unchanged as an outgoing call argument
+local	TParseContext__constructStruct	a6	typesMatch	INFERRED	1 when the argument's TType matches the struct type (same bits 9..24 and structure), else 0; forwarded as 7th argument
+local	TParseContext__addConstVectorNode	a1	constantUnionNode	INFERRED	the intermTyped's constant-union node (vtable +0x1c result; value array at +0x30)
+local	TParseContext__addConstVectorNode	a1_00	vectorFieldsCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TParseContext__addConstVectorNode	a1_01	sourceLine	INFERRED	low 16 bits of the node's source location (the line number half; high half is the file string number printed first)
+local	TParseContext__addConstMatrixNode	a1	constantUnionNode	INFERRED	the intermTyped's constant-union node (vtable +0x1c result; value array at +0x30)
+local	TParseContext__addConstMatrixNode	a1_00	columnIndexCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TParseContext__addConstMatrixNode	a2	fwdR5	INFERRED	r5 staged as 3rd argument: intermTyped, then an empty string
+local	TParseContext__addConstMatrixNode	a3	fwdR6	INFERRED	r6 staged as 4th argument: line, then the string "["
+local	TParseContext__addConstMatrixNode	a6	firstChildVtable	INFERRED	vtable of the first child of the sequence (called for getAsTyped)
+local	TParseContext__addConstStruct	a1	constantUnionNode	INFERRED	the intermTyped's constant-union node (vtable +0x1c result, or the struct field's node; value array at +0x30)
+local	TParseContext__addConstStruct	a1_00	textCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TParseContext__addConstStruct	a1_01	textCopy2	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
+local	TParseContext__addConstStruct	a2	fwdR5	INFERRED	r5 staged as 3rd argument: intermTyped, then the field-name compare length
+local	TPPStreamCompiler__constructFromOperand	a6	fieldNameLengthOrConst	INFERRED	scratch in one register: constant 0xa7b7736c staged as 7th argument, then the field-name string length (chars[-0xc]), then the terminator character loaded from the global

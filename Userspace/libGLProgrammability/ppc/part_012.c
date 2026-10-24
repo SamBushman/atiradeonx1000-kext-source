@@ -2786,7 +2786,7 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
   undefined4 leftoverR7;
   undefined4 leftoverR8;
   unsigned char *destOperand;
-  uint a6;
+  uint fieldNameLengthOrConst;
   uint fieldCount;
   uint fieldIndex;
   int argIndex;
@@ -2817,16 +2817,16 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
         fieldsBegin = *(int *)(structFieldList + 4);
         fieldCount = *(int *)(structFieldList + 8) - fieldsBegin >> 3;
         if (fieldCount != 0) {
-          a6 = 0xa7b7736c;
+          fieldNameLengthOrConst = 0xa7b7736c;
           noParentName = parentName == 0;
           terminatorGlobalBase = -0x58488c94;
           argCursor = argOperands;
           remainingArgs = argCount;
           while( true ) {
             fieldType = *(int **)(fieldsBegin + fieldIndex * 8);
-            fieldNameString = (**(code **)(*fieldType + 0x1c))(fieldType,destOperandPtr,argCursor,remainingArgs,leftoverR7,leftoverR8,a6);
-            a6 = *(uint *)(*(int *)(fieldNameString + 4) + -0xc);
-            *(undefined1 *)(*(int *)(fieldNameString + 4) + a6) = **(undefined1 **)(terminatorGlobalBase + 0x4a30);
+            fieldNameString = (**(code **)(*fieldType + 0x1c))(fieldType,destOperandPtr,argCursor,remainingArgs,leftoverR7,leftoverR8,fieldNameLengthOrConst);
+            fieldNameLengthOrConst = *(uint *)(*(int *)(fieldNameString + 4) + -0xc);
+            *(undefined1 *)(*(int *)(fieldNameString + 4) + fieldNameLengthOrConst) = **(undefined1 **)(terminatorGlobalBase + 0x4a30);
             fieldNameChars = *(uint *)(fieldNameString + 4);
             length = _strlen(fieldNameChars);
             nameBufferSize = length + 1;
@@ -2866,7 +2866,7 @@ int TPPStreamCompiler__constructFromOperand(this, destOperandPtr, argOperands, a
                     do {
                       fieldType = *(int **)(*(int *)(argStructFieldList + 4) + argFieldIndex * 8);
                       argFieldNameString = (**(code **)(*fieldType + 0x1c))(fieldType);
-                      a6 = (uint)*DAT_a7b7bd9c;
+                      fieldNameLengthOrConst = (uint)*DAT_a7b7bd9c;
                       *(byte *)(*(int *)(argFieldNameString + 4) + *(int *)(*(int *)(argFieldNameString + 4) + -0xc)) =
                            *DAT_a7b7bd9c;
                       argFieldNameChars = *(undefined4 *)(argFieldNameString + 4);

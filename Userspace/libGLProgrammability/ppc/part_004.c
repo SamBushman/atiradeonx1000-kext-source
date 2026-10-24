@@ -81,7 +81,7 @@ int TIntermBinary__promote(this, infoSink, scratchR5, scratchR6, scratchR7, scra
   uint leftNominalSize;
   uint leftIsMatrix;
   int rightBasicType;
-  undefined4 a1;
+  undefined4 infoSinkCopy;
   undefined4 r4Out0;
   undefined4 r4Out1;
   undefined4 r4Out2;
@@ -163,7 +163,7 @@ LAB_97b90770:
     else {
       if (queryResultOrOperator == 0x2c) {
 LAB_97b907c4:
-        queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34),a1);
+        queryResultOrOperator = (**(code **)(**(int **)(this + 0x34) + 0x40))(*(int **)(this + 0x34),infoSinkCopy);
         if (queryResultOrOperator != 3) {
           return 0;
         }
@@ -522,12 +522,12 @@ int compareStructure(type, constUnion1, constUnion2, constIndexPtr)
   int constIndex;
   int fieldOffset;
   int fieldsBegin;
-  int *a0;
+  int *fieldType;
   undefined4 r4Out0;
   undefined4 r4Out1;
   undefined4 scratchR4;
-  unsigned char * a2;
-  int *a3;
+  unsigned char * constUnion2Copy;
+  int *constIndexPtrCopy;
   undefined4 scratchR7;
   undefined4 scratchR8;
   int fieldVtableThenBasicType;
@@ -541,8 +541,8 @@ int compareStructure(type, constUnion1, constUnion2, constIndexPtr)
   typeList = *(int *)(type + 8);
   fieldsBegin = *(int *)(typeList + 4);
   fieldCount = *(int *)(typeList + 8) - fieldsBegin >> 3;
-  a2 = constUnion2;
-  a3 = constIndexPtr;
+  constUnion2Copy = constUnion2;
+  constIndexPtrCopy = constIndexPtr;
   if (fieldCount == 0) {
     return 1;
   }
@@ -553,9 +553,9 @@ int compareStructure(type, constUnion1, constUnion2, constIndexPtr)
     scratchR4 = r4Out0;
     if (0 < fieldSize) {
       do {
-        a0 = *(int **)(*(int *)(typeList + 4) + fieldOffset);
-        fieldVtableThenBasicType = *a0;
-        fieldVtableThenBasicType = (**(code **)(fieldVtableThenBasicType + 0x20))(a0,scratchR4,a2,a3,scratchR7,scratchR8,fieldVtableThenBasicType);
+        fieldType = *(int **)(*(int *)(typeList + 4) + fieldOffset);
+        fieldVtableThenBasicType = *fieldType;
+        fieldVtableThenBasicType = (**(code **)(fieldVtableThenBasicType + 0x20))(fieldType,scratchR4,constUnion2Copy,constIndexPtrCopy,scratchR7,scratchR8,fieldVtableThenBasicType);
         scratchR4 = r4Out1;
         if (fieldVtableThenBasicType == 2) {
 LAB_97b916a8:
@@ -578,8 +578,8 @@ LAB_97b916c8:
         else {
           if (fieldVtableThenBasicType == 3) goto LAB_97b916a8;
           if (fieldVtableThenBasicType == 0xe) {
-            a2 = constUnion2;
-            a3 = constIndexPtr;
+            constUnion2Copy = constUnion2;
+            constIndexPtrCopy = constIndexPtr;
             nestedResult = ((int (*)())compareStructure)(*(unsigned char **)(*(int *)(typeList + 4) + fieldOffset),constUnion1,constUnion2,
                                      constIndexPtr);
             scratchR4 = (undefined4)nestedResult;
@@ -2617,20 +2617,20 @@ int TIntermediate__changeAggrToTempConst(this, intermAggregate, symbolTable, lin
   int childSequence;
   int objectSize;
   unsigned char * poolAllocator;
-  int *a0;
+  int *childTyped;
   int lineCopy;
   undefined4 constNode;
-  undefined4 a1;
-  unsigned char * a2;
+  undefined4 intermAggregateCopy;
+  unsigned char * symbolTableCopy;
   undefined4 scratchR7;
   undefined4 scratchR8;
-  int a6;
+  int childVtable;
   unsigned char * constArray;
   undefined8 constArrayAlloc;
   undefined **typeTemp [9];
   uint typeTempBits;
   
-  a2 = symbolTable;
+  symbolTableCopy = symbolTable;
   lineCopy = line;
   (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate,symbolTable,line);
   if ((typeTempBits & 0x400) == 0) {
@@ -2645,13 +2645,13 @@ int TIntermediate__changeAggrToTempConst(this, intermAggregate, symbolTable, lin
   constArray = (unsigned char *)((ulonglong)constArrayAlloc >> 0x20);
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   childSequence = (**(code **)(*(int *)intermAggregate + 100))
-                    (intermAggregate,(int)constArrayAlloc,a2,lineCopy,scratchR7,scratchR8,*(int *)intermAggregate);
+                    (intermAggregate,(int)constArrayAlloc,symbolTableCopy,lineCopy,scratchR7,scratchR8,*(int *)intermAggregate);
   if (*(int *)(childSequence + 8) - *(int *)(childSequence + 4) >> 2 == 1) {
     childSequence = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
-    a6 = *(int *)**(undefined4 **)(childSequence + 4);
-    a0 = (int *)(**(code **)(a6 + 0x14))
-                          ((int *)**(undefined4 **)(childSequence + 4),a1,a2,lineCopy,scratchR7,scratchR8,a6);
-    childConstUnion = (**(code **)(*a0 + 0x18))(a0);
+    childVtable = *(int *)**(undefined4 **)(childSequence + 4);
+    childTyped = (int *)(**(code **)(childVtable + 0x14))
+                          ((int *)**(undefined4 **)(childSequence + 4),intermAggregateCopy,symbolTableCopy,lineCopy,scratchR7,scratchR8,childVtable);
+    childConstUnion = (**(code **)(*childTyped + 0x18))(childTyped);
     if (childConstUnion != 0) {
       (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate);
       parseResult = ((int (*)())TIntermediate__parseConstTree)(this,line,(unsigned char *)intermAggregate,constArray,*(undefined4 *)(intermAggregate + 0x30),
@@ -2748,12 +2748,12 @@ int TIntermediate__promoteConstantUnion(this, basicType, intermConstantUnion)
   unsigned char * newConstArray;
   uint srcBasicType;
   undefined4 constNode;
-  undefined4 a1;
-  undefined4 a1_00;
-  undefined4 a1_01;
-  int *a2;
+  undefined4 basicTypeCopy;
+  undefined4 basicTypeCopy2;
+  undefined4 basicTypeCopy3;
+  int *intermConstantUnionCopy;
   undefined4 scratchR6;
-  uint a1_02;
+  uint sourceLine;
   undefined4 scratchR7;
   undefined4 scratchR8;
   undefined *scratchR9;
@@ -2782,7 +2782,7 @@ int TIntermediate__promoteConstantUnion(this, basicType, intermConstantUnion)
   longlong d2iScratch;
   
   srcConstArray = intermConstantUnion[0xc];
-  a2 = intermConstantUnion;
+  intermConstantUnionCopy = intermConstantUnion;
   (**(code **)(*intermConstantUnion + 0x38))(typeTempOrTextBuf,intermConstantUnion,intermConstantUnion);
   if ((typeTempBits & 0x400) == 0) {
     componentCount = (int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18;
@@ -2833,13 +2833,13 @@ LAB_97b962b8:
                     
 override_jmp_97b960f0_case_0:
           __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
-          a1_02 = sourceLoc & 0xffff;
-          cr0Flags = (a1_02 == 0) << 1;
-          if (a1_02 == 0) {
+          sourceLine = sourceLoc & 0xffff;
+          cr0Flags = (sourceLine == 0) << 1;
+          if (sourceLine == 0) {
             _sprintf((char *)&stackType,"%d:? ",(int)sourceLoc >> 0x10);
           }
           else {
-            _sprintf((char *)&stackType,"%d:%d",(int)sourceLoc >> 0x10,a1_02);
+            _sprintf((char *)&stackType,"%d:%d",(int)sourceLoc >> 0x10,sourceLine);
           }
           __ZNSsC1EPKcRKSaIcE(typeTempOrTextBuf,(char *)&stackType,allocatorDummy);
           *(undefined *)((int)typeTempOrTextBuf[0] + (int)typeTempOrTextBuf[0][-3]) = *PTR__S_terminal_a7b7c0b8;
@@ -2878,7 +2878,7 @@ override_jmp_97b960f0_case_0:
           }
           infoSink = *(void **)this;
           errorText = "Cannot promote";
-          sourceLoc = (**(code **)*intermConstantUnion)(intermConstantUnion,a1,a2,scratchR6,scratchR7,scratchR8,scratchR9);
+          sourceLoc = (**(code **)*intermConstantUnion)(intermConstantUnion,basicTypeCopy,intermConstantUnionCopy,scratchR6,scratchR7,scratchR8,scratchR9);
                     
           goto override_jmp_97b960f0_case_0;
         }
@@ -2905,7 +2905,7 @@ LAB_97b96098:
           else if (srcBasicType == 3) goto LAB_97b96230;
           infoSink = *(void **)this;
           errorText = "Cannot promote";
-          sourceLoc = (**(code **)*intermConstantUnion)(intermConstantUnion,a1_00,a2,scratchR6,scratchR7,scratchR8,scratchR9);
+          sourceLoc = (**(code **)*intermConstantUnion)(intermConstantUnion,basicTypeCopy2,intermConstantUnionCopy,scratchR6,scratchR7,scratchR8,scratchR9);
                     
           goto override_jmp_97b960f0_case_0;
         }
@@ -2931,7 +2931,7 @@ LAB_97b9641c:
   stackTypeStructureSize = 0;
   stackTypeWord1c = 0;
   stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  line = (**(code **)*intermConstantUnion)(intermConstantUnion,a1_01,a2,scratchR6,scratchR7,scratchR8,(undefined4 *)*intermConstantUnion);
+  line = (**(code **)*intermConstantUnion)(intermConstantUnion,basicTypeCopy3,intermConstantUnionCopy,scratchR6,scratchR7,scratchR8,(undefined4 *)*intermConstantUnion);
   constNode = TIntermediate__addConstantUnion(this,newConstArray,(unsigned char *)&stackType,line);
   return constNode;
 }
@@ -2961,13 +2961,13 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
   int removeMatrixConstNodeResult;
   unsigned char * poolAllocator;
   undefined4 *constValueSlot;
-  int *a0;
-  int *a1;
-  undefined4 a1_00;
-  undefined4 a1_01;
-  unsigned char * a3;
-  int a4;
-  unsigned char * a5;
+  int *newConstantUnionNode;
+  int *childConstantUnion;
+  undefined4 aggregateLine;
+  undefined4 vectorCopy;
+  unsigned char * fwdR6;
+  int childIndex;
+  unsigned char * intermAggregateCopy;
   int oldSequenceEnd;
   undefined *constantUnionVtable;
   undefined8 newNodeAlloc;
@@ -2988,15 +2988,15 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
   
   if (intermAggregate != (unsigned char *)0x0) {
     *(int *)__normal_iterator = *(int *)(vector + 4) + *indexPtr * 4;
-    a5 = intermAggregate;
+    intermAggregateCopy = intermAggregate;
     aggregateSequence = (**(code **)(*(int *)intermAggregate + 100))
                       (intermAggregate,vector,type,indexPtr,__normal_iterator,intermAggregate,*(int *)intermAggregate);
     oldSequenceEnd = *(int *)(vector + 8);
     oldSequenceBegin = *(int *)(vector + 4);
     if (*(int *)(aggregateSequence + 8) - *(int *)(aggregateSequence + 4) >> 2 == 1) {
-      a4 = *indexPtr;
-      a3 = intermAggregate;
-      removeMatrixConstNodeResult = ((int (*)())TIntermediate__removeMatrixConstNode)(this,vector,type,intermAggregate,a4);
+      childIndex = *indexPtr;
+      fwdR6 = intermAggregate;
+      removeMatrixConstNodeResult = ((int (*)())TIntermediate__removeMatrixConstNode)(this,vector,type,intermAggregate,childIndex);
       if (removeMatrixConstNodeResult == 0) {
         loopIndex = 0;
         constantUnionVtable = PTR_vtable_a7b7c0c8 + 8;
@@ -3019,45 +3019,45 @@ int __ZN13TIntermediate15removeChildNodeER7TVectorIP11TIntermNodeER5TTypeRiRN9__
           *constValueSlot = **(undefined4 **)(childConstUnion + 0x30);
           poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
           newNodeAlloc = TPoolAllocator__allocate(poolAllocator,0x34);
-          a0 = (int *)((ulonglong)newNodeAlloc >> 0x20);
+          newConstantUnionNode = (int *)((ulonglong)newNodeAlloc >> 0x20);
           childVtable = *(int *)**(undefined4 **)(aggregateSequence + 4);
-          a1 = (int *)(**(code **)(childVtable + 0x18))
-                                ((int *)**(undefined4 **)(aggregateSequence + 4),(int)newNodeAlloc,type,a3,a4,a5,
+          childConstantUnion = (int *)(**(code **)(childVtable + 0x18))
+                                ((int *)**(undefined4 **)(aggregateSequence + 4),(int)newNodeAlloc,type,fwdR6,childIndex,intermAggregateCopy,
                                  childVtable);
-          (**(code **)(*a1 + 0x38))(&stackType,a1);
-          *a0 = (int)&PTR_getLine_a7b7cf90;
-          a0[1] = 0;
-          a0[3] = stackTypeArraySize;
-          a0[4] = stackTypeStructure;
-          a0[5] = stackTypeFieldName;
-          a0[6] = stackTypeTypeName;
-          a0[7] = stackTypeWord14;
-          a0[8] = stackTypeStructureSize;
-          a0[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
-          a0[9] = stackTypeWord1c;
-          a0[10] = stackTypeWord20;
-          oldTypeBits = a0[0xb];
+          (**(code **)(*childConstantUnion + 0x38))(&stackType,childConstantUnion);
+          *newConstantUnionNode = (int)&PTR_getLine_a7b7cf90;
+          newConstantUnionNode[1] = 0;
+          newConstantUnionNode[3] = stackTypeArraySize;
+          newConstantUnionNode[4] = stackTypeStructure;
+          newConstantUnionNode[5] = stackTypeFieldName;
+          newConstantUnionNode[6] = stackTypeTypeName;
+          newConstantUnionNode[7] = stackTypeWord14;
+          newConstantUnionNode[8] = stackTypeStructureSize;
+          newConstantUnionNode[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
+          newConstantUnionNode[9] = stackTypeWord1c;
+          newConstantUnionNode[10] = stackTypeWord20;
+          oldTypeBits = newConstantUnionNode[0xb];
           typeQualifierBits = stackTypeBits & 0xfe000000;
-          a0[0xb] = typeQualifierBits | oldTypeBits & 0x1ffffff;
+          newConstantUnionNode[0xb] = typeQualifierBits | oldTypeBits & 0x1ffffff;
           typeBasicTypeBits = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
-          a0[0xb] = typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ffff;
+          newConstantUnionNode[0xb] = typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ffff;
           typeSizeBits = stackTypeBits & 0x7f800;
-          a0[0xb] = typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ff;
+          newConstantUnionNode[0xb] = typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ff;
           typeMatrixBit = (stackTypeBits >> 10 & 1) << 10;
-          a0[0xb] = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
-          a0[0xb] = (stackTypeBits >> 9 & 1) << 9 | typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x1ff;
-          a0[0xc] = (int)constValueSlot;
-          *a0 = (int)constantUnionVtable;
+          newConstantUnionNode[0xb] = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
+          newConstantUnionNode[0xb] = (stackTypeBits >> 9 & 1) << 9 | typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x1ff;
+          newConstantUnionNode[0xc] = (int)constValueSlot;
+          *newConstantUnionNode = (int)constantUnionVtable;
           stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-          nodeVtable = *a0;
-          a1_00 = (*(code *)**(undefined4 **)intermAggregate)(intermAggregate,a1_01,type,a3,a4,a5,a0 + 2);
-          (**(code **)(nodeVtable + 4))(a0,a1_00);
+          nodeVtable = *newConstantUnionNode;
+          aggregateLine = (*(code *)**(undefined4 **)intermAggregate)(intermAggregate,vectorCopy,type,fwdR6,childIndex,intermAggregateCopy,newConstantUnionNode + 2);
+          (**(code **)(nodeVtable + 4))(newConstantUnionNode,aggregateLine);
           type = (unsigned char *)(*(int *)(vector + 4) + *indexPtr * 4);
-          a3 = (unsigned char *)insertNodeSlot;
+          fwdR6 = (unsigned char *)insertNodeSlot;
           *(unsigned char **)__normal_iterator = type;
-          insertNodeSlot[0] = a0;
+          insertNodeSlot[0] = newConstantUnionNode;
           std__vector_TIntermNode__pool_allocator_TIntermNode_____insert
-                    (&insertResult,vector,type,a3);
+                    (&insertResult,vector,type,fwdR6);
         }
       }
     }
@@ -3092,31 +3092,31 @@ int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggrega
   undefined4 *sequenceFinish;
   int prevFinish;
   int typeObjectSize;
-  int *a0;
+  int *aggregateNode;
   unsigned char * childSequence;
   int firstChildVtable;
   int elementSequence;
-  undefined4 a1;
-  unsigned char * a2;
-  unsigned char * a3;
+  undefined4 intermTypedCopy;
+  unsigned char * typeCopy;
+  unsigned char * intermAggregateCopy;
   undefined4 scratchR7;
   undefined4 scratchR8;
   undefined1 eraseResultSlot [20];
   
-  a2 = type;
-  a3 = intermAggregate;
+  typeCopy = type;
+  intermAggregateCopy = intermAggregate;
   typeObjectSize = (**(code **)(*(int *)type + 0x30))(type,intermTyped,type,intermAggregate);
   if (typeObjectSize == 1) {
     aggregateSequence = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
     firstChildVtable = *(int *)**(undefined4 **)(aggregateSequence + 4);
     intermTyped = (unsigned char *)
               (**(code **)(firstChildVtable + 0x14))
-                        ((int *)**(undefined4 **)(aggregateSequence + 4),a1,a2,a3,scratchR7,scratchR8,firstChildVtable);
+                        ((int *)**(undefined4 **)(aggregateSequence + 4),intermTypedCopy,typeCopy,intermAggregateCopy,scratchR7,scratchR8,firstChildVtable);
   }
   else {
     typeObjectSize = (**(code **)(*(int *)type + 0x30))(type);
-    a0 = (int *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
-    childSequence = (unsigned char *)(**(code **)(*a0 + 100))(a0);
+    aggregateNode = (int *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
+    childSequence = (unsigned char *)(**(code **)(*aggregateNode + 100))(aggregateNode);
     checkSequence = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
     if (*(int *)(checkSequence + 8) - *(int *)(checkSequence + 4) >> 2 == 1) {
       removeMatrixConstNodeResult = ((int (*)())TIntermediate__removeMatrixConstNode)(this,(unsigned char *)childSequence,type,intermAggregate,1);
@@ -3187,13 +3187,13 @@ int TIntermediate__removeMatrixConstNode(this, vector, type, intermAggregate, in
   int aggregateSequence;
   unsigned char * poolAllocator;
   undefined4 *constValueSlot;
-  int *a0;
+  int *newConstantUnionNode;
   int *childNode;
-  undefined4 a1;
-  undefined4 a1_00;
-  unsigned char * a2;
-  unsigned char * a3;
-  int a4;
+  undefined4 vectorCopy;
+  undefined4 vectorCopy2;
+  unsigned char * fwdR5;
+  unsigned char * fwdR6;
+  int indexCopy;
   undefined4 scratchR8;
   undefined *constantUnionVtable;
   int elementIndex;
@@ -3215,9 +3215,9 @@ int TIntermediate__removeMatrixConstNode(this, vector, type, intermAggregate, in
   
   result = 0;
   if (intermAggregate != (unsigned char *)0x0) {
-    a2 = type;
-    a3 = intermAggregate;
-    a4 = index;
+    fwdR5 = type;
+    fwdR6 = intermAggregate;
+    indexCopy = index;
     aggregateSequence = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
     result = 0;
     if (*(int *)(intermAggregate + 0x30) - 0x72U < 3) {
@@ -3243,7 +3243,7 @@ int TIntermediate__removeMatrixConstNode(this, vector, type, intermAggregate, in
         if (elementIndex == (elementIndex / diagonalStride) * diagonalStride) {
           childVtable = *(int *)**(undefined4 **)(aggregateSequence + 4);
           childVtable = (**(code **)(childVtable + 0x18))
-                            ((int *)**(undefined4 **)(aggregateSequence + 4),a1,a2,a3,a4,scratchR8,childVtable);
+                            ((int *)**(undefined4 **)(aggregateSequence + 4),vectorCopy,fwdR5,fwdR6,indexCopy,scratchR8,childVtable);
           *constValueSlot = **(undefined4 **)(childVtable + 0x30);
         }
         else {
@@ -3261,43 +3261,43 @@ LAB_97b96b5c:
         }
         poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
         newNodeAlloc = TPoolAllocator__allocate(poolAllocator,0x34);
-        a0 = (int *)((ulonglong)newNodeAlloc >> 0x20);
+        newConstantUnionNode = (int *)((ulonglong)newNodeAlloc >> 0x20);
         childNode = (int *)**(undefined4 **)(aggregateSequence + 4);
         childNode = (int *)(**(code **)(*childNode + 0x18))
-                                   (childNode,(int)newNodeAlloc,a2,a3,a4,scratchR8,*(undefined4 **)(aggregateSequence + 4));
+                                   (childNode,(int)newNodeAlloc,fwdR5,fwdR6,indexCopy,scratchR8,*(undefined4 **)(aggregateSequence + 4));
         (**(code **)(*childNode + 0x38))(&stackType,childNode);
-        *a0 = (int)&PTR_getLine_a7b7cf90;
-        a0[1] = 0;
-        a0[3] = stackTypeArraySize;
-        a0[4] = stackTypeStructure;
-        a0[5] = stackTypeFieldName;
-        a0[6] = stackTypeTypeName;
-        a0[7] = stackTypeWord14;
-        a0[8] = stackTypeStructureSize;
-        a0[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
-        a0[9] = stackTypeWord1c;
-        a0[10] = stackTypeWord20;
-        oldTypeBits = a0[0xb];
+        *newConstantUnionNode = (int)&PTR_getLine_a7b7cf90;
+        newConstantUnionNode[1] = 0;
+        newConstantUnionNode[3] = stackTypeArraySize;
+        newConstantUnionNode[4] = stackTypeStructure;
+        newConstantUnionNode[5] = stackTypeFieldName;
+        newConstantUnionNode[6] = stackTypeTypeName;
+        newConstantUnionNode[7] = stackTypeWord14;
+        newConstantUnionNode[8] = stackTypeStructureSize;
+        newConstantUnionNode[2] = (int)&PTR___ZN5TTypeD1Ev_a7b7cff8;
+        newConstantUnionNode[9] = stackTypeWord1c;
+        newConstantUnionNode[10] = stackTypeWord20;
+        oldTypeBits = newConstantUnionNode[0xb];
         typeQualifierBits = stackTypeBits & 0xfe000000;
-        a0[0xb] = typeQualifierBits | oldTypeBits & 0x1ffffff;
+        newConstantUnionNode[0xb] = typeQualifierBits | oldTypeBits & 0x1ffffff;
         typeBasicTypeBits = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
-        a0[0xb] = typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ffff;
+        newConstantUnionNode[0xb] = typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ffff;
         typeSizeBits = stackTypeBits & 0x7f800;
-        a0[0xb] = typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ff;
+        newConstantUnionNode[0xb] = typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x7ff;
         typeMatrixBit = (stackTypeBits >> 10 & 1) << 10;
-        a0[0xb] = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
-        a0[0xb] = (stackTypeBits >> 9 & 1) << 9 | typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x1ff;
-        a0[0xc] = (int)constValueSlot;
-        *a0 = (int)constantUnionVtable;
+        newConstantUnionNode[0xb] = typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x3ff;
+        newConstantUnionNode[0xb] = (stackTypeBits >> 9 & 1) << 9 | typeMatrixBit | typeSizeBits | typeBasicTypeBits | typeQualifierBits | oldTypeBits & 0x1ff;
+        newConstantUnionNode[0xc] = (int)constValueSlot;
+        *newConstantUnionNode = (int)constantUnionVtable;
         stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-        nodeVtable = *a0;
-        result = (*(code *)**(undefined4 **)intermAggregate)(intermAggregate,a1_00,a2,a3,a4,scratchR8,a0 + 2);
-        (**(code **)(nodeVtable + 4))(a0,result);
-        a2 = (unsigned char *)(*(int *)(vector + 4) + index * 4 + elementIndex * 4);
-        a3 = (unsigned char *)insertNodeSlot;
+        nodeVtable = *newConstantUnionNode;
+        result = (*(code *)**(undefined4 **)intermAggregate)(intermAggregate,vectorCopy2,fwdR5,fwdR6,indexCopy,scratchR8,newConstantUnionNode + 2);
+        (**(code **)(nodeVtable + 4))(newConstantUnionNode,result);
+        fwdR5 = (unsigned char *)(*(int *)(vector + 4) + index * 4 + elementIndex * 4);
+        fwdR6 = (unsigned char *)insertNodeSlot;
         elementIndex = elementIndex + 1;
-        insertNodeSlot[0] = a0;
-        std__vector_TIntermNode__pool_allocator_TIntermNode_____insert(insertResultSlot,vector,a2,a3);
+        insertNodeSlot[0] = newConstantUnionNode;
+        std__vector_TIntermNode__pool_allocator_TIntermNode_____insert(insertResultSlot,vector,fwdR5,fwdR6);
       }
     }
   }
@@ -3393,7 +3393,7 @@ int OutputTreeText(infoSink, intermNode, depth)
   int *refCountPtr;
   int oldRefCount;
   uint sourceLoc;
-  uint a1;
+  uint sourceLine;
   char reservation;
   byte cr0Flags;
   int locString [4];
@@ -3401,13 +3401,13 @@ int OutputTreeText(infoSink, intermNode, depth)
   unsigned char allocatorDummy [28];
   
   sourceLoc = (*(code *)**(undefined4 **)intermNode)(intermNode,intermNode,depth);
-  a1 = sourceLoc & 0xffff;
-  cr0Flags = (a1 == 0) << 1;
-  if (a1 == 0) {
+  sourceLine = sourceLoc & 0xffff;
+  cr0Flags = (sourceLine == 0) << 1;
+  if (sourceLine == 0) {
     _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1);
+    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,sourceLine);
   }
   __ZNSsC1EPKcRKSaIcE(locString,locTextBuf,allocatorDummy);
   __ZN13TInfoSinkBase6appendERKSs(infoSink + 8,(unsigned char *)locString);
@@ -3448,10 +3448,10 @@ int OutputSymbol(intermSymbol, intermTraverser, scratchR5, scratchR6, scratchR7,
   int typeCharsCopy;
   int symbolName;
   undefined4 symbolId;
-  undefined4 a1;
-  undefined4 a1_00;
-  int a2;
-  int a6;
+  undefined4 intermTraverserCopy;
+  undefined4 intermTraverserCopy2;
+  int traverserDepth;
+  int symbolNameChars;
   undefined4 nameChars;
   char reservation;
   byte cr0Reg;
@@ -3460,17 +3460,17 @@ int OutputSymbol(intermSymbol, intermTraverser, scratchR5, scratchR6, scratchR7,
   int typeStringChars;
   undefined4 destroyAllocatorArg [7];
   
-  a2 = *(int *)(intermTraverser + 0x20);
-  ((int (*)())OutputTreeText)(*(unsigned char **)(intermTraverser + 0x30),(unsigned char *)intermSymbol,a2);
+  traverserDepth = *(int *)(intermTraverser + 0x20);
+  ((int (*)())OutputTreeText)(*(unsigned char **)(intermTraverser + 0x30),(unsigned char *)intermSymbol,traverserDepth);
   ((int (*)())TType__getCompleteString)(&typeString,intermSymbol + 8);
   typeCharsCopy = typeStringChars;
   stringTerminal = DAT_a7b7b9e0;
   *(undefined1 *)(typeStringChars + *(int *)(typeStringChars + -0xc)) = *DAT_a7b7b9e0;
-  symbolName = (**(code **)(*(int *)intermSymbol + 0x60))(intermSymbol,a1,a2,scratchR6,scratchR7,scratchR8,typeStringChars);
-  a6 = *(int *)(symbolName + 4);
-  *(undefined1 *)(a6 + *(int *)(a6 + -0xc)) = *stringTerminal;
+  symbolName = (**(code **)(*(int *)intermSymbol + 0x60))(intermSymbol,intermTraverserCopy,traverserDepth,scratchR6,scratchR7,scratchR8,typeStringChars);
+  symbolNameChars = *(int *)(symbolName + 4);
+  *(undefined1 *)(symbolNameChars + *(int *)(symbolNameChars + -0xc)) = *stringTerminal;
   nameChars = *(undefined4 *)(symbolName + 4);
-  symbolId = (**(code **)(*(int *)intermSymbol + 0x5c))(intermSymbol,a1_00,a2,scratchR6,scratchR7,scratchR8,a6,symbolName);
+  symbolId = (**(code **)(*(int *)intermSymbol + 0x5c))(intermSymbol,intermTraverserCopy2,traverserDepth,scratchR6,scratchR7,scratchR8,symbolNameChars,symbolName);
   _sprintf(symbolTextBuf,"\'%s\' (%s) id: %d\n",nameChars,typeCharsCopy,symbolId);
   refCountPtr = (int *)(typeStringChars + -4);
   destroyAllocatorArg[0] = typeString;
@@ -3717,10 +3717,10 @@ int OutputConstantUnion(intermConstantUnion, intermTraverser)
   undefined **refCountPtr;
   undefined *oldRefCount;
   undefined4 getTypeResult;
-  undefined4 a1;
+  undefined4 intermTraverserCopy;
   char *boolText;
   undefined ***pppuVar8;
-  uint a1_00;
+  uint sourceLine;
   int componentIndex;
   unsigned char * pTVar10;
   unsigned char * this;
@@ -3783,7 +3783,7 @@ LAB_97b977f8:
       else {
         if (componentBasicType < 3) {
           if (componentBasicType == 1) {
-            ((char * (*)())_glp_dtostr)(getTypeResult,a1,floatTextBuf,300,
+            ((char * (*)())_glp_dtostr)(getTypeResult,intermTraverserCopy,floatTextBuf,300,
                         (double)*(float *)(*(int *)(intermConstantUnion + 0x30) + componentIndex * 4),DOUBLE_97c30a70,
                         scratchF3,scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,in_stack_fffffe08,in_stack_fffffe10,
                         in_stack_fffffe18,in_stack_fffffe20,in_stack_fffffe28);
@@ -3806,16 +3806,16 @@ LAB_97b977f8:
           pppuVar8 = (undefined ***)")";
           goto LAB_97b977f0;
         }
-        sourceLoc = (*(code *)**(undefined4 **)intermConstantUnion)(intermConstantUnion,a1);
+        sourceLoc = (*(code *)**(undefined4 **)intermConstantUnion)(intermConstantUnion,intermTraverserCopy);
                     
         __ZN13TInfoSinkBase6appendEPKc(this,"INTERNAL ERROR: ");
-        a1_00 = sourceLoc & 0xffff;
-        cr0Flags = (a1_00 == 0) << 1;
-        if (a1_00 == 0) {
+        sourceLine = sourceLoc & 0xffff;
+        cr0Flags = (sourceLine == 0) << 1;
+        if (sourceLine == 0) {
           _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
         }
         else {
-          _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1_00);
+          _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,sourceLine);
         }
         __ZNSsC1EPKcRKSaIcE(typeTemp1OrTextBuf,locTextBuf,allocatorDummy);
         *(undefined *)((int)typeTemp1OrTextBuf[0] + (int)typeTemp1OrTextBuf[0][-3]) = *PTR__S_terminal_a7b7c0b8;
@@ -4238,12 +4238,12 @@ int ParseSymbol(intermSymbol, intermTraverser)
   unsigned char * this;
   uint variableBasicTypeU;
   int componentSrcBasicType;
-  undefined4 a1;
+  undefined4 intermTraverserCopy;
   undefined4 r4Out0;
   undefined ***pppuVar9;
   uint traverserTypeBits;
   int levelsBeginOrVariable;
-  int a0;
+  int variableType;
   int resultArray;
   int instanceSize;
   int componentIndex;
@@ -4292,7 +4292,7 @@ int ParseSymbol(intermSymbol, intermTraverser)
   if (*(int *)(intermTraverser + 0x30) < instanceSize) {
     if (stackTypeBits >> 0x19 == 2) {
       levelsVector = *(int **)(intermTraverser + 0x70);
-      symbolNameString = (**(code **)(*(int *)intermSymbol + 0x60))(intermSymbol,a1);
+      symbolNameString = (**(code **)(*(int *)intermSymbol + 0x60))(intermSymbol,intermTraverserCopy);
       levelsBeginOrVariable = *levelsVector;
       levelIndex = (levelsVector[1] - levelsBeginOrVariable >> 2) + -1;
       while( true ) {
@@ -4327,13 +4327,13 @@ int ParseSymbol(intermSymbol, intermTraverser)
       }
       constArray = (int)((ulonglong)constArrayAlloc >> 0x20);
       if (constArray != 0) {
-        a0 = levelsBeginOrVariable + 0xc;
-        variableBasicType = (**(code **)(*(int *)(levelsBeginOrVariable + 0xc) + 0x20))(a0,(int)constArrayAlloc);
+        variableType = levelsBeginOrVariable + 0xc;
+        variableBasicType = (**(code **)(*(int *)(levelsBeginOrVariable + 0xc) + 0x20))(variableType,(int)constArrayAlloc);
         if (variableBasicType == 0xe) {
           componentCount = *(int *)(levelsBeginOrVariable + 0x24);
         }
         else {
-          componentCount = (**(code **)(*(int *)(levelsBeginOrVariable + 0xc) + 0x30))(a0);
+          componentCount = (**(code **)(*(int *)(levelsBeginOrVariable + 0xc) + 0x30))(variableType);
         }
         componentIndex = 0;
         if (componentCount < 1) {
@@ -4343,7 +4343,7 @@ int ParseSymbol(intermSymbol, intermTraverser)
           if (instanceSize <= *(int *)(intermTraverser + 0x30)) {
             return;
           }
-          variableBasicTypeU = (**(code **)(*(int *)(levelsBeginOrVariable + 0xc) + 0x20))(a0);
+          variableBasicTypeU = (**(code **)(*(int *)(levelsBeginOrVariable + 0xc) + 0x20))(variableType);
           traverserBasicType = *(uint *)(intermTraverser + 0x60) >> 0x13 & 0x3f;
           if ((variableBasicTypeU == traverserBasicType) || (traverserBasicType == 0xe)) {
 code_r0x97b98c14:
@@ -4351,7 +4351,7 @@ code_r0x97b98c14:
                  *(undefined4 *)(componentIndex * 4 + constArray);
           }
           else {
-            componentSrcBasicType = (**(code **)(*(int *)(levelsBeginOrVariable + 0xc) + 0x20))(a0);
+            componentSrcBasicType = (**(code **)(*(int *)(levelsBeginOrVariable + 0xc) + 0x20))(variableType);
             if (componentSrcBasicType == 2) {
               traverserBasicType = *(uint *)(intermTraverser + 0x60) >> 0x13 & 0x3f;
               if (traverserBasicType == 1) {
@@ -4707,7 +4707,7 @@ int ParseUnary(preVisit, intermUnary, intermTraverser)
   int *refCountPtr;
   int oldRefCount;
   uint sourceLoc;
-  uint a1;
+  uint sourceLine;
   void *this;
   char reservation;
   byte cr0Reg;
@@ -4739,13 +4739,13 @@ int ParseUnary(preVisit, intermUnary, intermTraverser)
   this = *(void **)(intermTraverser + 0x6c);
   sourceLoc = (*(code *)**(undefined4 **)intermUnary)(intermUnary);
   __ZN13TInfoSinkBase6appendEPKc(this,"ERROR: ");
-  a1 = sourceLoc & 0xffff;
-  cr0Flags = (a1 == 0) << 1;
-  if (a1 == 0) {
+  sourceLine = sourceLoc & 0xffff;
+  cr0Flags = (sourceLine == 0) << 1;
+  if (sourceLine == 0) {
     _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1);
+    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,sourceLine);
   }
   __ZNSsC1EPKcRKSaIcE(&typeString,locTextBuf,allocatorDummy);
   typeString[*(int *)(typeString + -0xc)] = *PTR__S_terminal_a7b7c0b8;
@@ -4833,9 +4833,9 @@ int ParseAggregate(preVisit, intermAggregate, intermTraverser, scratchR6, scratc
   int *firstChildTyped;
   int sequence;
   uint sourceLoc;
-  undefined4 a1;
-  unsigned char * a2;
-  uint a1_00;
+  undefined4 intermAggregateCopy;
+  unsigned char * intermTraverserCopy;
+  uint sourceLine;
   int firstChildVtable;
   void *this;
   undefined4 *childCursor;
@@ -4854,7 +4854,7 @@ int ParseAggregate(preVisit, intermAggregate, intermTraverser, scratchR6, scratc
   char locTextBuf [64];
   unsigned char allocatorDummy [24];
   
-  a2 = intermTraverser;
+  intermTraverserCopy = intermTraverser;
   isConstructorResult = ((int (*)())TIntermOperator__isConstructor)((unsigned char *)intermAggregate);
   if (((int)((ulonglong)isConstructorResult >> 0x20) == 0) && (*(int *)(intermAggregate + 0x30) != 0x25)) {
     ((int (*)())TType__getCompleteString)(&typeString,intermTraverser + 0x3c);
@@ -4878,13 +4878,13 @@ int ParseAggregate(preVisit, intermAggregate, intermTraverser, scratchR6, scratc
     sourceLoc = (*(code *)**(undefined4 **)intermAggregate)(intermAggregate);
                     
     __ZN13TInfoSinkBase6appendEPKc(this,"ERROR: ");
-    a1_00 = sourceLoc & 0xffff;
-    cr0Flags = (a1_00 == 0) << 1;
-    if (a1_00 == 0) {
+    sourceLine = sourceLoc & 0xffff;
+    cr0Flags = (sourceLine == 0) << 1;
+    if (sourceLine == 0) {
       _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
     }
     else {
-      _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1_00);
+      _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,sourceLine);
     }
     __ZNSsC1EPKcRKSaIcE(&typeString,locTextBuf,allocatorDummy);
     typeString[*(int *)(typeString + -0xc)] = *PTR__S_terminal_a7b7c0b8;
@@ -4914,7 +4914,7 @@ int ParseAggregate(preVisit, intermAggregate, intermTraverser, scratchR6, scratc
         sequence = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
         firstChildVtable = *(int *)**(undefined4 **)(sequence + 4);
         firstChildTyped = (int *)(**(code **)(firstChildVtable + 0x14))
-                                  ((int *)**(undefined4 **)(sequence + 4),a1,a2,scratchR6,scratchR7,scratchR8
+                                  ((int *)**(undefined4 **)(sequence + 4),intermAggregateCopy,intermTraverserCopy,scratchR6,scratchR7,scratchR8
                                    ,firstChildVtable);
         firstChildConstUnion = (**(code **)(*firstChildTyped + 0x18))(firstChildTyped);
         if (firstChildConstUnion != 0) {
@@ -4925,7 +4925,7 @@ int ParseAggregate(preVisit, intermAggregate, intermTraverser, scratchR6, scratc
         *(undefined4 *)(intermTraverser + 0x68) = 1;
         *(undefined4 *)(intermTraverser + 100) = *(undefined4 *)(intermAggregate + 0x30);
         (**(code **)(*(int *)intermAggregate + 0x38))
-                  (typeTemp1,intermAggregate,a2,scratchR6,scratchR7,scratchR8,*(int *)intermAggregate);
+                  (typeTemp1,intermAggregate,intermTraverserCopy,scratchR6,scratchR7,scratchR8,*(int *)intermAggregate);
         typeTemp1[0] = &PTR___ZN5TTypeD1Ev_a7b7d488;
         if ((typeTemp1Bits >> 0x13 & 0x3f) == 0xe) {
           (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp2,intermAggregate);
@@ -4948,7 +4948,7 @@ int ParseAggregate(preVisit, intermAggregate, intermTraverser, scratchR6, scratc
         if ((typeTemp1Bits & 0x400) != 0) {
           *(undefined4 *)(intermTraverser + 0x7c) = 1;
           (**(code **)(*(int *)intermAggregate + 0x38))
-                    (typeTemp2,intermAggregate,a2,scratchR6,scratchR7,scratchR8,typeTemp1Bits & 0x400);
+                    (typeTemp2,intermAggregate,intermTraverserCopy,scratchR6,scratchR7,scratchR8,typeTemp1Bits & 0x400);
           typeTemp2[0] = &PTR___ZN5TTypeD1Ev_a7b7d488;
           *(int *)(intermTraverser + 0x80) = (int)(typeTemp2Bits << 0xd | typeTemp2Bits >> 0x13) >> 0x18;
         }
@@ -4987,7 +4987,7 @@ int ParseSelection(preVisit, intermSelection, intermTraverser)
   int *refCountPtr;
   int oldRefCount;
   uint sourceLoc;
-  uint a1;
+  uint sourceLine;
   void *this;
   char reservation;
   byte cr0Flags;
@@ -4998,13 +4998,13 @@ int ParseSelection(preVisit, intermSelection, intermTraverser)
   this = *(void **)(intermTraverser + 0x6c);
   sourceLoc = (*(code *)**(undefined4 **)intermSelection)(intermSelection,intermSelection,intermTraverser);
   __ZN13TInfoSinkBase6appendEPKc(this,"INTERNAL ERROR: ");
-  a1 = sourceLoc & 0xffff;
-  cr0Flags = (a1 == 0) << 1;
-  if (a1 == 0) {
+  sourceLine = sourceLoc & 0xffff;
+  cr0Flags = (sourceLine == 0) << 1;
+  if (sourceLine == 0) {
     _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1);
+    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,sourceLine);
   }
   __ZNSsC1EPKcRKSaIcE(locString,locTextBuf,allocatorDummy);
   locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
@@ -5094,7 +5094,7 @@ int ParseConstantUnion(intermConstantUnion, intermTraverser, scratchR5, scratchR
   uint traverserTypeBits;
   undefined4 *srcCursor;
   undefined4 srcValue;
-  unsigned char * a6;
+  unsigned char * traverserField3c;
   int matrixSize;
   int totalSize;
   int instanceSize;
@@ -5114,7 +5114,7 @@ int ParseConstantUnion(intermConstantUnion, intermTraverser, scratchR5, scratchR
   undefined **typeTemp3b [9];
   uint typeTemp3bBits;
   
-  a6 = intermTraverser + 0x3c;
+  traverserField3c = intermTraverser + 0x3c;
   traverserTypeBits = *(uint *)(intermTraverser + 0x60);
   resultArray = *(int *)(intermTraverser + 0x34);
   if ((traverserTypeBits >> 0x13 & 0x3f) == 0xe) {
@@ -5136,7 +5136,7 @@ int ParseConstantUnion(intermConstantUnion, intermTraverser, scratchR5, scratchR
         (**(code **)(*(int *)intermConstantUnion + 0x38))(typeTemp2a,intermConstantUnion);
       }
       else {
-        (**(code **)(*(int *)intermConstantUnion + 0x38))(typeTemp2a,intermConstantUnion,scratchR5,scratchR6,scratchR7,scratchR8,a6);
+        (**(code **)(*(int *)intermConstantUnion + 0x38))(typeTemp2a,intermConstantUnion,scratchR5,scratchR6,scratchR7,scratchR8,traverserField3c);
         if ((typeTemp2aBits & 0x400) == 0) {
           typeTemp2aStructureSize = (int)(typeTemp2aBits << 0xd | typeTemp2aBits >> 0x13) >> 0x18;
         }
@@ -5302,7 +5302,7 @@ int ParseLoop(preVisit, intermLoop, intermTraverser)
   int *refCountPtr;
   int oldRefCount;
   uint sourceLoc;
-  uint a1;
+  uint sourceLine;
   void *this;
   char reservation;
   byte cr0Flags;
@@ -5313,13 +5313,13 @@ int ParseLoop(preVisit, intermLoop, intermTraverser)
   this = *(void **)(intermTraverser + 0x6c);
   sourceLoc = (*(code *)**(undefined4 **)intermLoop)(intermLoop,intermLoop,intermTraverser);
   __ZN13TInfoSinkBase6appendEPKc(this,"INTERNAL ERROR: ");
-  a1 = sourceLoc & 0xffff;
-  cr0Flags = (a1 == 0) << 1;
-  if (a1 == 0) {
+  sourceLine = sourceLoc & 0xffff;
+  cr0Flags = (sourceLine == 0) << 1;
+  if (sourceLine == 0) {
     _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1);
+    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,sourceLine);
   }
   __ZNSsC1EPKcRKSaIcE(locString,locTextBuf,allocatorDummy);
   locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
@@ -5399,7 +5399,7 @@ int ParseBranch(preVisit, intermBranch, intermTraverser)
   int *refCountPtr;
   int oldRefCount;
   uint sourceLoc;
-  uint a1;
+  uint sourceLine;
   void *this;
   char reservation;
   byte cr0Flags;
@@ -5410,13 +5410,13 @@ int ParseBranch(preVisit, intermBranch, intermTraverser)
   this = *(void **)(intermTraverser + 0x6c);
   sourceLoc = (*(code *)**(undefined4 **)intermBranch)(intermBranch,intermBranch,intermTraverser);
   __ZN13TInfoSinkBase6appendEPKc(this,"INTERNAL ERROR: ");
-  a1 = sourceLoc & 0xffff;
-  cr0Flags = (a1 == 0) << 1;
-  if (a1 == 0) {
+  sourceLine = sourceLoc & 0xffff;
+  cr0Flags = (sourceLine == 0) << 1;
+  if (sourceLine == 0) {
     _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1);
+    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,sourceLine);
   }
   __ZNSsC1EPKcRKSaIcE(locString,locTextBuf,allocatorDummy);
   locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
@@ -5811,7 +5811,7 @@ int TParseContext__error(this, sourceLoc, reason, str, extraInfoFormat, varArg1,
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  uint a1;
+  uint sourceLine;
   void *infoSink;
   char reservation;
   byte cr0Flags;
@@ -5826,13 +5826,13 @@ int TParseContext__error(this, sourceLoc, reason, str, extraInfoFormat, varArg1,
   _vsnprintf(formattedInfoBuf,400,extraInfoFormat,&(*(unsigned int *)((unsigned char *)ghidra_home + 20)));
   __ZN13TInfoSinkBase6appendEPKc(*(void **)(this + 8),"ERROR: ");
   infoSink = *(void **)(this + 8);
-  a1 = (uint)sourceLoc & 0xffff;
-  cr0Flags = (a1 == 0) << 1;
-  if (a1 == 0) {
+  sourceLine = (uint)sourceLoc & 0xffff;
+  cr0Flags = (sourceLine == 0) << 1;
+  if (sourceLine == 0) {
     _sprintf(locTextBuf,"%d:? ",(int)sourceLoc >> 0x10);
   }
   else {
-    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,a1);
+    _sprintf(locTextBuf,"%d:%d",(int)sourceLoc >> 0x10,sourceLine);
   }
   __ZNSsC1EPKcRKSaIcE(locString,locTextBuf,allocatorDummy);
   locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
@@ -5999,8 +5999,8 @@ int TParseContext__lValueErrorCheck(this, sourceLoc, str, intermTyped, scratchR7
   uint qualifier;
   undefined4 r4Out0;
   undefined4 r4Out1;
-  undefined4 a1;
-  undefined4 a1_00;
+  undefined4 staleR4;
+  undefined4 sourceLocCopy;
   char *tokenCopy;
   char *extraInfoFormat;
   undefined4 *elementCursor;
@@ -6015,16 +6015,16 @@ int TParseContext__lValueErrorCheck(this, sourceLoc, str, intermTyped, scratchR7
   if (binaryNode == (int *)0x0) {
     hasSymbolNode = symbolNode != (int *)0x0;
     symbolNameChars = 0;
-    a1 = r4Out0;
+    staleR4 = r4Out0;
     if (hasSymbolNode) {
       symbolName = (**(code **)(*symbolNode + 0x60))(symbolNode);
       scratchR9 = (uint)*DAT_a7b7ba18;
       *(byte *)(*(int *)(symbolName + 4) + *(int *)(*(int *)(symbolName + 4) + -0xc)) = *DAT_a7b7ba18;
       symbolNameChars = *(undefined4 *)(symbolName + 4);
-      a1 = r4Out1;
+      staleR4 = r4Out1;
     }
     modifyReason = (char *)0x0;
-    qualifier = (**(code **)(*(int *)intermTyped + 0x44))(intermTyped,a1,tokenCopy,pTVar5,scratchR7,scratchR8,scratchR9);
+    qualifier = (**(code **)(*(int *)intermTyped + 0x44))(intermTyped,staleR4,tokenCopy,pTVar5,scratchR7,scratchR8,scratchR9);
     if (qualifier < 0x12) {
       scratchR9 = qualifier * 4;
       switch(qualifier) {
@@ -6056,7 +6056,7 @@ int TParseContext__lValueErrorCheck(this, sourceLoc, str, intermTyped, scratchR7
     else {
 switchD_97b9ace4_caseD_0:
       basicType = (**(code **)(*(int *)intermTyped + 0x40))
-                        (intermTyped,a1_00,tokenCopy,pTVar5,scratchR7,scratchR8,scratchR9);
+                        (intermTyped,sourceLocCopy,tokenCopy,pTVar5,scratchR7,scratchR8,scratchR9);
       if (basicType - 5U < 8) {
         modifyReason = "can\'t modify a sampler";
       }
@@ -6301,19 +6301,19 @@ int TParseContext__constructorErrorCheck(this, sourceLoc, intermNode, function, 
   unsigned char * functionName;
   unsigned char * poolAllocator;
   void *newTypeNameString;
-  uint *a0;
+  uint *functionParam;
   int paramSizeOrScratchR4;
   int r4Out0;
   int r4Out1;
   int r4Out2;
-  undefined4 a1;
+  undefined4 sourceLocCopy;
   undefined4 r4Out3;
   undefined4 r4Out4;
-  undefined4 a1_00;
+  undefined4 sourceLocCopy2;
   int r4Out5;
   int r4Out6;
   int r4Out7;
-  undefined4 a1_01;
+  undefined4 sourceLocCopy3;
   undefined4 r4Out8;
   undefined4 scratchR4;
   unsigned char * pTVar12;
@@ -6323,9 +6323,9 @@ int TParseContext__constructorErrorCheck(this, sourceLoc, intermNode, function, 
   int opCopy;
   char *extraInfoFormat;
   int *typeCopy;
-  uint a6;
+  uint constructorScratch;
   uint ctorTypeBits;
-  int a6_00;
+  int paramTypeVtableArg;
   int scratchR10;
   unsigned char * pTVar20;
   int paramIndex;
@@ -6350,13 +6350,13 @@ int TParseContext__constructorErrorCheck(this, sourceLoc, intermNode, function, 
   undefined4 destroyArgA [4];
   undefined4 destroyArgB [4];
   
-  a6 = op - 0x66;
+  constructorScratch = op - 0x66;
   paramSizeOrScratchR4 = sourceLoc;
   pTVar12 = intermNode;
   pTVar14 = function;
   opCopy = op;
   typeCopy = type;
-  switch(a6) {
+  switch(constructorScratch) {
   case 0:
     ctorTypeBits = stackTypeBits & 0xfff | 0x100800;
     goto LAB_97b9b330;
@@ -6396,7 +6396,7 @@ LAB_97b9b2f0:
   case 10:
     ctorTypeBits = stackTypeBits & 0x1fff | 0x101800;
 LAB_97b9b330:
-    a6 = 0;
+    constructorScratch = 0;
     stackTypeBits = ctorTypeBits & 0xfffff9ff;
     nameCopy1CharsOrScratch = stackTypeBits << 0xd;
     typeCopy = (int *)0x0;
@@ -6435,7 +6435,7 @@ LAB_97b9b3cc:
 LAB_97b9b490:
     ctorTypeBits = ctorNominalSize << 0xb | stackTypeBits & 0x3ff | 0x80000;
 LAB_97b9b4a0:
-    a6 = ctorTypeBits & 0xfffffdff | 0x400;
+    constructorScratch = ctorTypeBits & 0xfffffdff | 0x400;
     type[9] = ctorTypeBits & 0x7f800 | ctorTypeBits & 0xfff80000 | type[9] & 0x1ffU | 0x400;
     type[8] = 0;
     stackTypeArraySize = 0;
@@ -6455,7 +6455,7 @@ LAB_97b9b4a0:
     type[6] = 0;
     type[7] = 0;
     nameCopy1CharsOrScratch = scratchR10;
-    stackTypeBits = a6;
+    stackTypeBits = constructorScratch;
     goto LAB_97b9b714;
   case 0xf:
     pTVar20 = *(unsigned char **)(function + 0x24);
@@ -6521,9 +6521,9 @@ LAB_97b9b4a0:
     destroyArgB[0] = nameCopy1;
     do {
       oldRefCount = *refCountPtr;
-      a6 = oldRefCount - 1;
+      constructorScratch = oldRefCount - 1;
       if (reservation != '\0') {
-        newRefCount = storeWordConditionalIndexed(a6,0,refCountPtr);
+        newRefCount = storeWordConditionalIndexed(constructorScratch,0,refCountPtr);
         *refCountPtr = newRefCount;
         cr0Flags = 2;
       }
@@ -6539,8 +6539,8 @@ LAB_97b9b4a0:
     errorToken = "Internal Error";
     goto LAB_97b9b9d8;
   }
-  a6 = ctorNominalSize << 0xb | ctorTypeBits & 0xfff801ff;
-  nameCopy1CharsOrScratch = a6 << 0xd;
+  constructorScratch = ctorNominalSize << 0xb | ctorTypeBits & 0xfff801ff;
+  nameCopy1CharsOrScratch = constructorScratch << 0xd;
   type[9] = ctorNominalSize << 0xb | ctorTypeBits & 0xfff80000 | type[9] & 0x1ffU;
   type[8] = 0;
   stackTypeArraySize = 0;
@@ -6559,7 +6559,7 @@ LAB_97b9b4a0:
   type[5] = 0;
   type[6] = 0;
   type[7] = 0;
-  stackTypeBits = a6;
+  stackTypeBits = constructorScratch;
 LAB_97b9b714:
   totalSize = 0;
   constType = true;
@@ -6572,13 +6572,13 @@ LAB_97b9b714:
       paramIndex = paramIndex + 1) {
     paramOffset = paramIndex * 8;
     paramType = *(int **)(*(int *)(function + 0x10) + paramOffset + 4);
-    a6_00 = *paramType;
-    paramSizeOrScratchR4 = (**(code **)(a6_00 + 0x30))(paramType,paramSizeOrScratchR4,pTVar12,pTVar14,opCopy,typeCopy,a6_00);
+    paramTypeVtableArg = *paramType;
+    paramSizeOrScratchR4 = (**(code **)(paramTypeVtableArg + 0x30))(paramType,paramSizeOrScratchR4,pTVar12,pTVar14,opCopy,typeCopy,paramTypeVtableArg);
     totalSize = totalSize + paramSizeOrScratchR4;
-    scratchR4 = a1;
+    scratchR4 = sourceLocCopy;
     if ((op - 0x72U < 3) &&
        (paramType = *(int **)(*(int *)(function + 0x10) + paramOffset + 4), paramSizeOrScratchR4 = *paramType,
-       paramSizeOrScratchR4 = (**(code **)(paramSizeOrScratchR4 + 0x34))(paramType,a1,pTVar12,pTVar14,opCopy,typeCopy,paramSizeOrScratchR4),
+       paramSizeOrScratchR4 = (**(code **)(paramSizeOrScratchR4 + 0x34))(paramType,sourceLocCopy,pTVar12,pTVar14,opCopy,typeCopy,paramSizeOrScratchR4),
        scratchR4 = r4Out3, paramSizeOrScratchR4 != 0)) {
       matrixInMatrix = true;
     }
@@ -6596,9 +6596,9 @@ LAB_97b9b714:
     if (paramTypeVtable != 2) {
       constType = false;
     }
-    a0 = *(uint **)(*(int *)(function + 0x10) + paramOffset + 4);
-    a6 = *a0;
-    paramIsArray = (**(code **)(a6 + 0x38))(a0,a1_00,pTVar12,pTVar14,opCopy,typeCopy,a6);
+    functionParam = *(uint **)(*(int *)(function + 0x10) + paramOffset + 4);
+    constructorScratch = *functionParam;
+    paramIsArray = (**(code **)(constructorScratch + 0x38))(functionParam,sourceLocCopy2,pTVar12,pTVar14,opCopy,typeCopy,constructorScratch);
     if (paramIsArray != 0) {
       arrayArg = true;
     }
@@ -6629,9 +6629,9 @@ LAB_97b9b714:
         errorReason = "constructor argument does not have a type";
       }
       else {
-        scratchR4 = a1_01;
+        scratchR4 = sourceLocCopy3;
         if ((op == 0x75) ||
-           (paramSizeOrScratchR4 = (**(code **)(*argTyped + 0x40))(argTyped,a1_01,pTVar12,pTVar14,opCopy),
+           (paramSizeOrScratchR4 = (**(code **)(*argTyped + 0x40))(argTyped,sourceLocCopy3,pTVar12,pTVar14,opCopy),
            scratchR4 = r4Out8, 7 < paramSizeOrScratchR4 - 5U)) {
           argBasicType = (**(code **)(*argTyped + 0x40))(argTyped,scratchR4,pTVar12,pTVar14,opCopy);
           if (argBasicType != 0) {
@@ -6652,7 +6652,7 @@ LAB_97b9b714:
 LAB_97b9b9d8:
   extraInfoFormat = "";
 LAB_97b9b9dc:
-  error((int)this,(char *)sourceLoc,errorReason,errorToken,extraInfoFormat,typeCopy,a6,scratchR10);
+  error((int)this,(char *)sourceLoc,errorReason,errorToken,extraInfoFormat,typeCopy,constructorScratch,scratchR10);
   return 1;
 }
 
