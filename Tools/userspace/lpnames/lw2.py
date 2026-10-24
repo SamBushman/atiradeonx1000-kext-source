@@ -6,7 +6,7 @@ import find_webs as F
 d,fn=sys.argv[1],sys.argv[2]
 body,brace=F.load(d,fn)        # normalised (Ghidra) text; F.CURRENT = current text lines
 cur=F.CURRENT
-PH=re.compile(r'\b([a-z]{0,3}Var\d+|p[A-Z]\w*Var?\d*|local_[0-9a-f]+|param_\d+|in_[a-z0-9]+|extraout_\w+|this_\d+|a[0-5](?:_\d+)?|unaff_\w+|[a-z]{1,3}Stack_[0-9a-f]+)\b')
+PH=re.compile(r'\b([a-z]{0,3}Var\d+|p+[A-Za-z]*Var\d+|p[A-Z]\w*Var?\d*|[a-z]?Stack_[0-9a-f]+|auStack_[0-9a-f]+|local_[0-9a-f]+|param_\d+|in_[a-z0-9]+|extraout_\w+|this_\d+|a[0-5](?:_\d+)?|unaff_\w+|[a-z]{1,3}Stack_[0-9a-f]+)\b')
 names=[]
 for l in body[brace+1:]:
     for m in PH.findall(l):
@@ -15,7 +15,7 @@ nodes,entry=F.build_cfg(body,brace)
 IDENT=re.compile(r'[A-Za-z_]\w*')
 for v in names:
     try: ws=F.webs(nodes,entry,v)[0]
-    except Exception as e: print('== %s: %s'%(v,str(e)[:60])); continue
+    except (Exception, SystemExit) as e: print('== %s: %s'%(v,str(e)[:60])); continue
     print('== %s: %d webs'%(v,len(ws)))
     for i,w in enumerate(ws):
         ls=sorted(w)
