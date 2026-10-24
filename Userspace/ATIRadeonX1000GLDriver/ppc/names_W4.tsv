@@ -844,8 +844,6 @@ local	FUN_000840d0	iVar15	instr	INFERRED	instruction count on entry, then the po
 local	FUN_000840d0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array
 local	FUN_000840d0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry
 local	FUN_000840d0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across
-local	FUN_000840d0	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field
-local	FUN_000840d0	uVar12	oldWord1	INFERRED	word 1 as read before packing
 local	FUN_000840d0	uVar17	oldWord2	INFERRED	word 2 as read before packing
 local	FUN_000840d0	uVar10	src0FileField	INFERRED	src0File & 0xf
 local	FUN_000840d0	uVar11	src1FileField	INFERRED	src1File & 0xf
@@ -865,8 +863,6 @@ local	FUN_000844e0	iVar15	instr	INFERRED	instruction count on entry, then the po
 local	FUN_000844e0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_000844e0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_000844e0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
-local	FUN_000844e0	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
-local	FUN_000844e0	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
 local	FUN_000844e0	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
 local	FUN_000844e0	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
 local	FUN_000844e0	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)
@@ -886,8 +882,6 @@ local	FUN_00084710	iVar15	instr	INFERRED	instruction count on entry, then the po
 local	FUN_00084710	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_00084710	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_00084710	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
-local	FUN_00084710	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
-local	FUN_00084710	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
 local	FUN_00084710	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
 local	FUN_00084710	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
 local	FUN_00084710	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)
@@ -907,8 +901,6 @@ local	FUN_00085180	iVar15	instr	INFERRED	instruction count on entry, then the po
 local	FUN_00085180	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_00085180	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_00085180	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
-local	FUN_00085180	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
-local	FUN_00085180	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
 local	FUN_00085180	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
 local	FUN_00085180	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
 local	FUN_00085180	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)
@@ -928,8 +920,6 @@ local	FUN_000853b0	iVar15	instr	INFERRED	instruction count on entry, then the po
 local	FUN_000853b0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_000853b0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_000853b0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
-local	FUN_000853b0	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
-local	FUN_000853b0	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
 local	FUN_000853b0	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
 local	FUN_000853b0	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
 local	FUN_000853b0	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)
@@ -949,8 +939,6 @@ local	FUN_000855e0	iVar15	instr	INFERRED	instruction count on entry, then the po
 local	FUN_000855e0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_000855e0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_000855e0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
-local	FUN_000855e0	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
-local	FUN_000855e0	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
 local	FUN_000855e0	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
 local	FUN_000855e0	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
 local	FUN_000855e0	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)
@@ -970,8 +958,6 @@ local	FUN_00085810	iVar15	instr	INFERRED	instruction count on entry, then the po
 local	FUN_00085810	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_00085810	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_00085810	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
-local	FUN_00085810	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
-local	FUN_00085810	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
 local	FUN_00085810	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
 local	FUN_00085810	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
 local	FUN_00085810	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)
@@ -991,8 +977,6 @@ local	FUN_000862b0	iVar15	instr	INFERRED	instruction count on entry, then the po
 local	FUN_000862b0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_000862b0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_000862b0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
-local	FUN_000862b0	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
-local	FUN_000862b0	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
 local	FUN_000862b0	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
 local	FUN_000862b0	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
 local	FUN_000862b0	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)
@@ -1012,8 +996,6 @@ local	FUN_000864e0	iVar15	instr	INFERRED	instruction count on entry, then the po
 local	FUN_000864e0	iVar16	instrArray	CONFIRMED	*(ctx+0x3c8) instruction array (same code shape as FUN_000840d0)
 local	FUN_000864e0	iVar9	instrOffset	CONFIRMED	count*0x10: byte offset of the new entry (same code shape as FUN_000840d0)
 local	FUN_000864e0	uVar14	newStorage	CONFIRMED	calloc(capacity*0x10+0x200) replacement array, old entries memcpy-ed across (same code shape as FUN_000840d0)
-local	FUN_000864e0	uVar13	oldWord0	INFERRED	word 0 as read before packing; later reused as a packed select field (same code shape as FUN_000840d0)
-local	FUN_000864e0	uVar12	oldWord1	INFERRED	word 1 as read before packing (same code shape as FUN_000840d0)
 local	FUN_000864e0	uVar17	oldWord2	INFERRED	word 2 as read before packing (same code shape as FUN_000840d0)
 local	FUN_000864e0	uVar10	src0FileField	INFERRED	src0File & 0xf (same code shape as FUN_000840d0)
 local	FUN_000864e0	uVar11	src1FileField	INFERRED	src1File & 0xf (same code shape as FUN_000840d0)

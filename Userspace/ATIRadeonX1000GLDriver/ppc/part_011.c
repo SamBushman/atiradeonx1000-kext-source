@@ -4705,6 +4705,27 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   undefined4 compiler;
   int shaderProgram;
 {
+  undefined4 candidateSrc2SelectorW;
+  undefined4 candidateSrc2SelectorZ;
+  undefined4 candidateSrc2SelectorY;
+  undefined4 candidateSrc2SelectorX;
+  undefined4 candidateSrc1SelectorW;
+  undefined4 candidateSrc1SelectorZ;
+  undefined4 candidateSrc1SelectorY;
+  undefined4 candidateSrc1SelectorX;
+  undefined4 candidateSrc0SelectorW;
+  undefined4 candidateSrc0SelectorZ;
+  undefined4 candidateSrc0SelectorY;
+  undefined4 candidateSrc0SelectorX;
+  undefined4 writerSrc2SelectorW;
+  undefined4 writerSrc2SelectorY;
+  undefined4 writerSrc1SelectorW;
+  undefined4 writerSrc1SelectorY;
+  undefined4 writerSrc0SelectorW;
+  undefined4 writerSrc0SelectorY;
+  bool wIsOne;
+  bool yIsOne;
+  bool xIsOne;
   bool bVar1;
   float constantX;
   float constantW;
@@ -4721,7 +4742,7 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   int iVar13;
   uint instructionIndex;
   uint instructionCount;
-  undefined4 *puVar17;
+  undefined4 *selectorBase;
   uint uVar18;
   undefined4 uVar19;
   undefined4 uVar20;
@@ -4743,8 +4764,8 @@ int evsFoldConstantMoves(compiler, shaderProgram)
   bool bVar35;
   bool bVar36;
   bool bVar37;
-  bool bVar38;
-  bool bVar39;
+  bool yIsZero;
+  bool wIsZero;
   char cStack_88;
   char cStack_87;
   char cStack_86;
@@ -4772,19 +4793,19 @@ LAB_0007de3c:
       constantY = constantValue[1];
       constantZ = constantValue[2];
       uStack_60 = 0;
-      bVar33 = constantX == 1.0;
-      bVar34 = constantY == 1.0;
-      bVar35 = constantW == 1.0;
+      xIsOne = constantX == 1.0;
+      yIsOne = constantY == 1.0;
+      wIsOne = constantW == 1.0;
       uVar30 = (uint)(byte)((constantX == 0.0) << 2 | (constantX != 0.0) << 1 | in_xer_so & 1);
       iStack_78 = uVar30 << 0x1c;
       bVar36 = constantZ == 1.0;
       bVar37 = constantZ == 0.0;
-      bVar38 = constantY == 0.0;
-      bVar39 = constantW == 0.0;
+      yIsZero = constantY == 0.0;
+      wIsZero = constantW == 0.0;
       if (((((!(bool)((byte)((uVar30 << 0xc) >> 8) >> 5 & 1)) ||
-            (((bVar33 || (constantX == -1.0)) || (bVar38)))) ||
-           (((bVar34 || (constantY == -1.0)) || (bVar37)))) ||
-          (((bVar36 || (constantZ == -1.0)) || ((bVar39 || ((bVar35 || (constantW == -1.0)))))))) &&
+            (((xIsOne || (constantX == -1.0)) || (yIsZero)))) ||
+           (((yIsOne || (constantY == -1.0)) || (bVar37)))) ||
+          (((bVar36 || (constantZ == -1.0)) || ((wIsZero || ((wIsOne || (constantW == -1.0)))))))) &&
          (uVar30 = instructionIndex + 1, uVar30 < instructionCount)) {
         iVar32 = uVar30 * 0x74;
         bVar6 = false;
@@ -4796,20 +4817,20 @@ LAB_0007de3c:
              (*(int *)(iVar13 + 8) == *(int *)(currentInstruction + 8))) {
             bVar1 = *(int *)(iVar13 + 0xc) != 0;
             bVar10 = (byte)((uint)iStack_78 >> 0x18);
-            if (((bVar1) || (!(bool)(bVar10 >> 5 & 1))) || ((bVar33 || (bVar12 = 0, constantX == -1.0)))
+            if (((bVar1) || (!(bool)(bVar10 >> 5 & 1))) || ((xIsOne || (bVar12 = 0, constantX == -1.0)))
                ) {
               bVar12 = 1;
             }
-            if (((*(int *)(iVar13 + 0x10) != 0) || (bVar38)) ||
-               ((bVar34 || (bVar14 = 0, constantY == -1.0)))) {
+            if (((*(int *)(iVar13 + 0x10) != 0) || (yIsZero)) ||
+               ((yIsOne || (bVar14 = 0, constantY == -1.0)))) {
               bVar14 = 1;
             }
             if ((((*(int *)(iVar13 + 0x14) != 0) || (bVar37)) || (bVar36)) ||
                (bVar29 = 0, constantZ == -1.0)) {
               bVar29 = 1;
             }
-            if (((*(int *)(iVar13 + 0x18) != 0) || (bVar39)) ||
-               ((bVar35 || (bVar7 = 0, constantW == -1.0)))) {
+            if (((*(int *)(iVar13 + 0x18) != 0) || (wIsZero)) ||
+               ((wIsOne || (bVar7 = 0, constantW == -1.0)))) {
               bVar7 = 1;
             }
             bVar6 = (bool)(bVar7 & bVar29 & bVar14 & bVar12);
@@ -4817,7 +4838,7 @@ LAB_0007de3c:
               if (!bVar1) {
                 *(undefined4 *)(iVar13 + 0xc) = 1;
                 if ((bool)(bVar10 >> 5 & 1)) {
-                  if (bVar33) {
+                  if (xIsOne) {
                     *(undefined4 *)(iVar13 + 0x28) = 0x87de;
                   }
                   else {
@@ -4830,10 +4851,10 @@ LAB_0007de3c:
               }
               if (*(int *)(iVar13 + 0x10) == 0) {
                 *(undefined4 *)(iVar13 + 0x10) = 1;
-                if (bVar38) {
+                if (yIsZero) {
                   *(undefined4 *)(iVar13 + 0x2c) = 0x87dd;
                 }
-                else if (bVar34) {
+                else if (yIsOne) {
                   *(undefined4 *)(iVar13 + 0x2c) = 0x87de;
                 }
                 else {
@@ -4854,12 +4875,12 @@ LAB_0007de3c:
               }
               if (*(int *)(iVar13 + 0x18) == 0) {
                 *(undefined4 *)(iVar13 + 0x18) = 1;
-                if (bVar39) {
+                if (wIsZero) {
                   *(undefined4 *)(iVar13 + 0x34) = 0x87dd;
                   bVar1 = true;
                   instructionCount = *(uint *)(shaderProgram + 0x14);
                 }
-                else if (bVar35) {
+                else if (wIsOne) {
                   *(undefined4 *)(iVar13 + 0x34) = 0x87de;
                   bVar1 = true;
                   instructionCount = *(uint *)(shaderProgram + 0x14);
@@ -5118,11 +5139,11 @@ LAB_0007e760: ;
               if ((*(int *)(iVar13 + 0x20) == 2) &&
                  (*(int *)(iVar13 + 0x24) == *(int *)(iVar32 + 8))) {
                 selectorEnumerant = *(undefined4 *)(iVar13 + 0x28);
-                puVar17 = (undefined4 *)(iVar32 + 0x28);
+                selectorBase = (undefined4 *)(iVar32 + 0x28);
                 *(undefined4 *)(iVar13 + 0x24) = *(undefined4 *)(iVar32 + 0x24);
                 switch(selectorEnumerant) {
                 case 0x87d5:
-                  selectorEnumerant = *puVar17;
+                  selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
                   selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
@@ -5134,7 +5155,7 @@ LAB_0007e760: ;
                   selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  selectorEnumerant = *puVar17;
+                  selectorEnumerant = *selectorBase;
                   switch(selectorEnumerant) {
                   case 0x87d5:
 code_r0x0007ed7c:
@@ -5252,68 +5273,68 @@ code_r0x0007ed88:
                     goto code_r0x0007ed88;
                   }
                 }
-                uVar9 = *(undefined4 *)(iVar13 + 0x2c);
+                writerSrc0SelectorY = *(undefined4 *)(iVar13 + 0x2c);
                 *(undefined4 *)(iVar13 + 0x28) = selectorEnumerant;
-                switch(uVar9) {
+                switch(writerSrc0SelectorY) {
                 case 0x87d5:
-                  uVar9 = *puVar17;
+                  writerSrc0SelectorY = *selectorBase;
                   break;
                 case 0x87d6:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x2c);
                   break;
                 case 0x87d7:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x30);
                   break;
                 case 0x87d8:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  uVar9 = *puVar17;
-                  switch(uVar9) {
+                  writerSrc0SelectorY = *selectorBase;
+                  switch(writerSrc0SelectorY) {
                   case 0x87d5:
 code_r0x0007efd4:
-                    uVar9 = 0x87d9;
+                    writerSrc0SelectorY = 0x87d9;
                     break;
                   case 0x87d6:
 code_r0x0007efc8:
-                    uVar9 = 0x87da;
+                    writerSrc0SelectorY = 0x87da;
                     break;
                   case 0x87d7:
 code_r0x0007f034:
-                    uVar9 = 0x87db;
+                    writerSrc0SelectorY = 0x87db;
                     break;
                   case 0x87d8:
 code_r0x0007f028:
-                    uVar9 = 0x87dc;
+                    writerSrc0SelectorY = 0x87dc;
                     break;
                   case 0x87d9:
 code_r0x0007f01c:
-                    uVar9 = 0x87d5;
+                    writerSrc0SelectorY = 0x87d5;
                     break;
                   case 0x87da:
 code_r0x0007f010:
-                    uVar9 = 0x87d6;
+                    writerSrc0SelectorY = 0x87d6;
                     break;
                   case 0x87db:
 code_r0x0007f004:
-                    uVar9 = 0x87d7;
+                    writerSrc0SelectorY = 0x87d7;
                     break;
                   case 0x87dc:
 code_r0x0007eff8:
-                    uVar9 = 0x87d8;
+                    writerSrc0SelectorY = 0x87d8;
                     break;
                   case 0x87de:
 code_r0x0007efec:
-                    uVar9 = 0x87df;
+                    writerSrc0SelectorY = 0x87df;
                     break;
                   case 0x87df:
 code_r0x0007efe0:
-                    uVar9 = 0x87de;
+                    writerSrc0SelectorY = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x2c);
-                  switch(uVar9) {
+                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x2c);
+                  switch(writerSrc0SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007efd4;
                   case 0x87d6:
@@ -5337,8 +5358,8 @@ code_r0x0007efe0:
                   }
                   break;
                 case 0x87db:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x30);
-                  switch(uVar9) {
+                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x30);
+                  switch(writerSrc0SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007efd4;
                   case 0x87d6:
@@ -5362,8 +5383,8 @@ code_r0x0007efe0:
                   }
                   break;
                 case 0x87dc:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x34);
-                  switch(uVar9) {
+                  writerSrc0SelectorY = *(undefined4 *)(iVar32 + 0x34);
+                  switch(writerSrc0SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007efd4;
                   case 0x87d6:
@@ -5387,10 +5408,10 @@ code_r0x0007efe0:
                   }
                 }
                 selectorEnumerant = *(undefined4 *)(iVar13 + 0x30);
-                *(undefined4 *)(iVar13 + 0x2c) = uVar9;
+                *(undefined4 *)(iVar13 + 0x2c) = writerSrc0SelectorY;
                 switch(selectorEnumerant) {
                 case 0x87d5:
-                  selectorEnumerant = *puVar17;
+                  selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
                   selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
@@ -5402,7 +5423,7 @@ code_r0x0007efe0:
                   selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  selectorEnumerant = *puVar17;
+                  selectorEnumerant = *selectorBase;
                   switch(selectorEnumerant) {
                   case 0x87d5:
 code_r0x0007f22c:
@@ -5520,68 +5541,68 @@ code_r0x0007f238:
                     goto code_r0x0007f238;
                   }
                 }
-                uVar9 = *(undefined4 *)(iVar13 + 0x34);
+                writerSrc0SelectorW = *(undefined4 *)(iVar13 + 0x34);
                 *(undefined4 *)(iVar13 + 0x30) = selectorEnumerant;
-                switch(uVar9) {
+                switch(writerSrc0SelectorW) {
                 case 0x87d5:
-                  uVar9 = *puVar17;
+                  writerSrc0SelectorW = *selectorBase;
                   break;
                 case 0x87d6:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x2c);
                   break;
                 case 0x87d7:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x30);
                   break;
                 case 0x87d8:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  uVar9 = *puVar17;
-                  switch(uVar9) {
+                  writerSrc0SelectorW = *selectorBase;
+                  switch(writerSrc0SelectorW) {
                   case 0x87d5:
 code_r0x0007f484:
-                    uVar9 = 0x87d9;
+                    writerSrc0SelectorW = 0x87d9;
                     break;
                   case 0x87d6:
 code_r0x0007f478:
-                    uVar9 = 0x87da;
+                    writerSrc0SelectorW = 0x87da;
                     break;
                   case 0x87d7:
 code_r0x0007f4e4:
-                    uVar9 = 0x87db;
+                    writerSrc0SelectorW = 0x87db;
                     break;
                   case 0x87d8:
 code_r0x0007f4d8:
-                    uVar9 = 0x87dc;
+                    writerSrc0SelectorW = 0x87dc;
                     break;
                   case 0x87d9:
 code_r0x0007f4cc:
-                    uVar9 = 0x87d5;
+                    writerSrc0SelectorW = 0x87d5;
                     break;
                   case 0x87da:
 code_r0x0007f4c0:
-                    uVar9 = 0x87d6;
+                    writerSrc0SelectorW = 0x87d6;
                     break;
                   case 0x87db:
 code_r0x0007f4b4:
-                    uVar9 = 0x87d7;
+                    writerSrc0SelectorW = 0x87d7;
                     break;
                   case 0x87dc:
 code_r0x0007f4a8:
-                    uVar9 = 0x87d8;
+                    writerSrc0SelectorW = 0x87d8;
                     break;
                   case 0x87de:
 code_r0x0007f49c:
-                    uVar9 = 0x87df;
+                    writerSrc0SelectorW = 0x87df;
                     break;
                   case 0x87df:
 code_r0x0007f490:
-                    uVar9 = 0x87de;
+                    writerSrc0SelectorW = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x2c);
-                  switch(uVar9) {
+                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x2c);
+                  switch(writerSrc0SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007f484;
                   case 0x87d6:
@@ -5605,8 +5626,8 @@ code_r0x0007f490:
                   }
                   break;
                 case 0x87db:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x30);
-                  switch(uVar9) {
+                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x30);
+                  switch(writerSrc0SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007f484;
                   case 0x87d6:
@@ -5630,8 +5651,8 @@ code_r0x0007f490:
                   }
                   break;
                 case 0x87dc:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x34);
-                  switch(uVar9) {
+                  writerSrc0SelectorW = *(undefined4 *)(iVar32 + 0x34);
+                  switch(writerSrc0SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007f484;
                   case 0x87d6:
@@ -5654,16 +5675,16 @@ code_r0x0007f490:
                     goto code_r0x0007f490;
                   }
                 }
-                *(undefined4 *)(iVar13 + 0x34) = uVar9;
+                *(undefined4 *)(iVar13 + 0x34) = writerSrc0SelectorW;
               }
               if ((*(int *)(iVar13 + 0x3c) == 2) &&
                  (*(int *)(iVar13 + 0x40) == *(int *)(iVar32 + 8))) {
                 selectorEnumerant = *(undefined4 *)(iVar13 + 0x44);
-                puVar17 = (undefined4 *)(iVar32 + 0x28);
+                selectorBase = (undefined4 *)(iVar32 + 0x28);
                 *(undefined4 *)(iVar13 + 0x40) = *(undefined4 *)(iVar32 + 0x24);
                 switch(selectorEnumerant) {
                 case 0x87d5:
-                  selectorEnumerant = *puVar17;
+                  selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
                   selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
@@ -5675,7 +5696,7 @@ code_r0x0007f490:
                   selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  selectorEnumerant = *puVar17;
+                  selectorEnumerant = *selectorBase;
                   switch(selectorEnumerant) {
                   case 0x87d5:
 code_r0x0007f708:
@@ -5793,68 +5814,68 @@ code_r0x0007f714:
                     goto code_r0x0007f714;
                   }
                 }
-                uVar9 = *(undefined4 *)(iVar13 + 0x48);
+                writerSrc1SelectorY = *(undefined4 *)(iVar13 + 0x48);
                 *(undefined4 *)(iVar13 + 0x44) = selectorEnumerant;
-                switch(uVar9) {
+                switch(writerSrc1SelectorY) {
                 case 0x87d5:
-                  uVar9 = *puVar17;
+                  writerSrc1SelectorY = *selectorBase;
                   break;
                 case 0x87d6:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x2c);
                   break;
                 case 0x87d7:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x30);
                   break;
                 case 0x87d8:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  uVar9 = *puVar17;
-                  switch(uVar9) {
+                  writerSrc1SelectorY = *selectorBase;
+                  switch(writerSrc1SelectorY) {
                   case 0x87d5:
 code_r0x0007f960:
-                    uVar9 = 0x87d9;
+                    writerSrc1SelectorY = 0x87d9;
                     break;
                   case 0x87d6:
 code_r0x0007f954:
-                    uVar9 = 0x87da;
+                    writerSrc1SelectorY = 0x87da;
                     break;
                   case 0x87d7:
 code_r0x0007f9c0:
-                    uVar9 = 0x87db;
+                    writerSrc1SelectorY = 0x87db;
                     break;
                   case 0x87d8:
 code_r0x0007f9b4:
-                    uVar9 = 0x87dc;
+                    writerSrc1SelectorY = 0x87dc;
                     break;
                   case 0x87d9:
 code_r0x0007f9a8:
-                    uVar9 = 0x87d5;
+                    writerSrc1SelectorY = 0x87d5;
                     break;
                   case 0x87da:
 code_r0x0007f99c:
-                    uVar9 = 0x87d6;
+                    writerSrc1SelectorY = 0x87d6;
                     break;
                   case 0x87db:
 code_r0x0007f990:
-                    uVar9 = 0x87d7;
+                    writerSrc1SelectorY = 0x87d7;
                     break;
                   case 0x87dc:
 code_r0x0007f984:
-                    uVar9 = 0x87d8;
+                    writerSrc1SelectorY = 0x87d8;
                     break;
                   case 0x87de:
 code_r0x0007f978:
-                    uVar9 = 0x87df;
+                    writerSrc1SelectorY = 0x87df;
                     break;
                   case 0x87df:
 code_r0x0007f96c:
-                    uVar9 = 0x87de;
+                    writerSrc1SelectorY = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x2c);
-                  switch(uVar9) {
+                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x2c);
+                  switch(writerSrc1SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007f960;
                   case 0x87d6:
@@ -5878,8 +5899,8 @@ code_r0x0007f96c:
                   }
                   break;
                 case 0x87db:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x30);
-                  switch(uVar9) {
+                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x30);
+                  switch(writerSrc1SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007f960;
                   case 0x87d6:
@@ -5903,8 +5924,8 @@ code_r0x0007f96c:
                   }
                   break;
                 case 0x87dc:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x34);
-                  switch(uVar9) {
+                  writerSrc1SelectorY = *(undefined4 *)(iVar32 + 0x34);
+                  switch(writerSrc1SelectorY) {
                   case 0x87d5:
                     goto code_r0x0007f960;
                   case 0x87d6:
@@ -5928,10 +5949,10 @@ code_r0x0007f96c:
                   }
                 }
                 selectorEnumerant = *(undefined4 *)(iVar13 + 0x4c);
-                *(undefined4 *)(iVar13 + 0x48) = uVar9;
+                *(undefined4 *)(iVar13 + 0x48) = writerSrc1SelectorY;
                 switch(selectorEnumerant) {
                 case 0x87d5:
-                  selectorEnumerant = *puVar17;
+                  selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
                   selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
@@ -5943,7 +5964,7 @@ code_r0x0007f96c:
                   selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  selectorEnumerant = *puVar17;
+                  selectorEnumerant = *selectorBase;
                   switch(selectorEnumerant) {
                   case 0x87d5:
 code_r0x0007fbb8:
@@ -6061,68 +6082,68 @@ code_r0x0007fbc4:
                     goto code_r0x0007fbc4;
                   }
                 }
-                uVar9 = *(undefined4 *)(iVar13 + 0x50);
+                writerSrc1SelectorW = *(undefined4 *)(iVar13 + 0x50);
                 *(undefined4 *)(iVar13 + 0x4c) = selectorEnumerant;
-                switch(uVar9) {
+                switch(writerSrc1SelectorW) {
                 case 0x87d5:
-                  uVar9 = *puVar17;
+                  writerSrc1SelectorW = *selectorBase;
                   break;
                 case 0x87d6:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x2c);
                   break;
                 case 0x87d7:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x30);
                   break;
                 case 0x87d8:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  uVar9 = *puVar17;
-                  switch(uVar9) {
+                  writerSrc1SelectorW = *selectorBase;
+                  switch(writerSrc1SelectorW) {
                   case 0x87d5:
 code_r0x0007fe10:
-                    uVar9 = 0x87d9;
+                    writerSrc1SelectorW = 0x87d9;
                     break;
                   case 0x87d6:
 code_r0x0007fe04:
-                    uVar9 = 0x87da;
+                    writerSrc1SelectorW = 0x87da;
                     break;
                   case 0x87d7:
 code_r0x0007fe70:
-                    uVar9 = 0x87db;
+                    writerSrc1SelectorW = 0x87db;
                     break;
                   case 0x87d8:
 code_r0x0007fe64:
-                    uVar9 = 0x87dc;
+                    writerSrc1SelectorW = 0x87dc;
                     break;
                   case 0x87d9:
 code_r0x0007fe58:
-                    uVar9 = 0x87d5;
+                    writerSrc1SelectorW = 0x87d5;
                     break;
                   case 0x87da:
 code_r0x0007fe4c:
-                    uVar9 = 0x87d6;
+                    writerSrc1SelectorW = 0x87d6;
                     break;
                   case 0x87db:
 code_r0x0007fe40:
-                    uVar9 = 0x87d7;
+                    writerSrc1SelectorW = 0x87d7;
                     break;
                   case 0x87dc:
 code_r0x0007fe34:
-                    uVar9 = 0x87d8;
+                    writerSrc1SelectorW = 0x87d8;
                     break;
                   case 0x87de:
 code_r0x0007fe28:
-                    uVar9 = 0x87df;
+                    writerSrc1SelectorW = 0x87df;
                     break;
                   case 0x87df:
 code_r0x0007fe1c:
-                    uVar9 = 0x87de;
+                    writerSrc1SelectorW = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x2c);
-                  switch(uVar9) {
+                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x2c);
+                  switch(writerSrc1SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007fe10;
                   case 0x87d6:
@@ -6146,8 +6167,8 @@ code_r0x0007fe1c:
                   }
                   break;
                 case 0x87db:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x30);
-                  switch(uVar9) {
+                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x30);
+                  switch(writerSrc1SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007fe10;
                   case 0x87d6:
@@ -6171,8 +6192,8 @@ code_r0x0007fe1c:
                   }
                   break;
                 case 0x87dc:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x34);
-                  switch(uVar9) {
+                  writerSrc1SelectorW = *(undefined4 *)(iVar32 + 0x34);
+                  switch(writerSrc1SelectorW) {
                   case 0x87d5:
                     goto code_r0x0007fe10;
                   case 0x87d6:
@@ -6195,16 +6216,16 @@ code_r0x0007fe1c:
                     goto code_r0x0007fe1c;
                   }
                 }
-                *(undefined4 *)(iVar13 + 0x50) = uVar9;
+                *(undefined4 *)(iVar13 + 0x50) = writerSrc1SelectorW;
               }
               if ((*(int *)(iVar13 + 0x58) == 2) &&
                  (*(int *)(iVar13 + 0x5c) == *(int *)(iVar32 + 8))) {
                 selectorEnumerant = *(undefined4 *)(iVar13 + 0x60);
-                puVar17 = (undefined4 *)(iVar32 + 0x28);
+                selectorBase = (undefined4 *)(iVar32 + 0x28);
                 *(undefined4 *)(iVar13 + 0x5c) = *(undefined4 *)(iVar32 + 0x24);
                 switch(selectorEnumerant) {
                 case 0x87d5:
-                  selectorEnumerant = *puVar17;
+                  selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
                   selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
@@ -6216,7 +6237,7 @@ code_r0x0007fe1c:
                   selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  selectorEnumerant = *puVar17;
+                  selectorEnumerant = *selectorBase;
                   switch(selectorEnumerant) {
                   case 0x87d5:
 code_r0x00080094:
@@ -6334,68 +6355,68 @@ code_r0x000800a0:
                     goto code_r0x000800a0;
                   }
                 }
-                uVar9 = *(undefined4 *)(iVar13 + 100);
+                writerSrc2SelectorY = *(undefined4 *)(iVar13 + 100);
                 *(undefined4 *)(iVar13 + 0x60) = selectorEnumerant;
-                switch(uVar9) {
+                switch(writerSrc2SelectorY) {
                 case 0x87d5:
-                  uVar9 = *puVar17;
+                  writerSrc2SelectorY = *selectorBase;
                   break;
                 case 0x87d6:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x2c);
                   break;
                 case 0x87d7:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x30);
                   break;
                 case 0x87d8:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  uVar9 = *puVar17;
-                  switch(uVar9) {
+                  writerSrc2SelectorY = *selectorBase;
+                  switch(writerSrc2SelectorY) {
                   case 0x87d5:
 code_r0x000802ec:
-                    uVar9 = 0x87d9;
+                    writerSrc2SelectorY = 0x87d9;
                     break;
                   case 0x87d6:
 code_r0x000802e0:
-                    uVar9 = 0x87da;
+                    writerSrc2SelectorY = 0x87da;
                     break;
                   case 0x87d7:
 code_r0x0008034c:
-                    uVar9 = 0x87db;
+                    writerSrc2SelectorY = 0x87db;
                     break;
                   case 0x87d8:
 code_r0x00080340:
-                    uVar9 = 0x87dc;
+                    writerSrc2SelectorY = 0x87dc;
                     break;
                   case 0x87d9:
 code_r0x00080334:
-                    uVar9 = 0x87d5;
+                    writerSrc2SelectorY = 0x87d5;
                     break;
                   case 0x87da:
 code_r0x00080328:
-                    uVar9 = 0x87d6;
+                    writerSrc2SelectorY = 0x87d6;
                     break;
                   case 0x87db:
 code_r0x0008031c:
-                    uVar9 = 0x87d7;
+                    writerSrc2SelectorY = 0x87d7;
                     break;
                   case 0x87dc:
 code_r0x00080310:
-                    uVar9 = 0x87d8;
+                    writerSrc2SelectorY = 0x87d8;
                     break;
                   case 0x87de:
 code_r0x00080304:
-                    uVar9 = 0x87df;
+                    writerSrc2SelectorY = 0x87df;
                     break;
                   case 0x87df:
 code_r0x000802f8:
-                    uVar9 = 0x87de;
+                    writerSrc2SelectorY = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x2c);
-                  switch(uVar9) {
+                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x2c);
+                  switch(writerSrc2SelectorY) {
                   case 0x87d5:
                     goto code_r0x000802ec;
                   case 0x87d6:
@@ -6419,8 +6440,8 @@ code_r0x000802f8:
                   }
                   break;
                 case 0x87db:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x30);
-                  switch(uVar9) {
+                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x30);
+                  switch(writerSrc2SelectorY) {
                   case 0x87d5:
                     goto code_r0x000802ec;
                   case 0x87d6:
@@ -6444,8 +6465,8 @@ code_r0x000802f8:
                   }
                   break;
                 case 0x87dc:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x34);
-                  switch(uVar9) {
+                  writerSrc2SelectorY = *(undefined4 *)(iVar32 + 0x34);
+                  switch(writerSrc2SelectorY) {
                   case 0x87d5:
                     goto code_r0x000802ec;
                   case 0x87d6:
@@ -6469,10 +6490,10 @@ code_r0x000802f8:
                   }
                 }
                 selectorEnumerant = *(undefined4 *)(iVar13 + 0x68);
-                *(undefined4 *)(iVar13 + 100) = uVar9;
+                *(undefined4 *)(iVar13 + 100) = writerSrc2SelectorY;
                 switch(selectorEnumerant) {
                 case 0x87d5:
-                  selectorEnumerant = *puVar17;
+                  selectorEnumerant = *selectorBase;
                   break;
                 case 0x87d6:
                   selectorEnumerant = *(undefined4 *)(iVar32 + 0x2c);
@@ -6484,7 +6505,7 @@ code_r0x000802f8:
                   selectorEnumerant = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  selectorEnumerant = *puVar17;
+                  selectorEnumerant = *selectorBase;
                   switch(selectorEnumerant) {
                   case 0x87d5:
 code_r0x00080544:
@@ -6602,68 +6623,68 @@ code_r0x00080550:
                     goto code_r0x00080550;
                   }
                 }
-                uVar9 = *(undefined4 *)(iVar13 + 0x6c);
+                writerSrc2SelectorW = *(undefined4 *)(iVar13 + 0x6c);
                 *(undefined4 *)(iVar13 + 0x68) = selectorEnumerant;
-                switch(uVar9) {
+                switch(writerSrc2SelectorW) {
                 case 0x87d5:
-                  uVar9 = *puVar17;
+                  writerSrc2SelectorW = *selectorBase;
                   break;
                 case 0x87d6:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x2c);
+                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x2c);
                   break;
                 case 0x87d7:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x30);
+                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x30);
                   break;
                 case 0x87d8:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x34);
+                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x34);
                   break;
                 case 0x87d9:
-                  uVar9 = *puVar17;
-                  switch(uVar9) {
+                  writerSrc2SelectorW = *selectorBase;
+                  switch(writerSrc2SelectorW) {
                   case 0x87d5:
 code_r0x0008079c:
-                    uVar9 = 0x87d9;
+                    writerSrc2SelectorW = 0x87d9;
                     break;
                   case 0x87d6:
 code_r0x00080790:
-                    uVar9 = 0x87da;
+                    writerSrc2SelectorW = 0x87da;
                     break;
                   case 0x87d7:
 code_r0x000807fc:
-                    uVar9 = 0x87db;
+                    writerSrc2SelectorW = 0x87db;
                     break;
                   case 0x87d8:
 code_r0x000807f0:
-                    uVar9 = 0x87dc;
+                    writerSrc2SelectorW = 0x87dc;
                     break;
                   case 0x87d9:
 code_r0x000807e4:
-                    uVar9 = 0x87d5;
+                    writerSrc2SelectorW = 0x87d5;
                     break;
                   case 0x87da:
 code_r0x000807d8:
-                    uVar9 = 0x87d6;
+                    writerSrc2SelectorW = 0x87d6;
                     break;
                   case 0x87db:
 code_r0x000807cc:
-                    uVar9 = 0x87d7;
+                    writerSrc2SelectorW = 0x87d7;
                     break;
                   case 0x87dc:
 code_r0x000807c0:
-                    uVar9 = 0x87d8;
+                    writerSrc2SelectorW = 0x87d8;
                     break;
                   case 0x87de:
 code_r0x000807b4:
-                    uVar9 = 0x87df;
+                    writerSrc2SelectorW = 0x87df;
                     break;
                   case 0x87df:
 code_r0x000807a8:
-                    uVar9 = 0x87de;
+                    writerSrc2SelectorW = 0x87de;
                   }
                   break;
                 case 0x87da:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x2c);
-                  switch(uVar9) {
+                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x2c);
+                  switch(writerSrc2SelectorW) {
                   case 0x87d5:
                     goto code_r0x0008079c;
                   case 0x87d6:
@@ -6687,8 +6708,8 @@ code_r0x000807a8:
                   }
                   break;
                 case 0x87db:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x30);
-                  switch(uVar9) {
+                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x30);
+                  switch(writerSrc2SelectorW) {
                   case 0x87d5:
                     goto code_r0x0008079c;
                   case 0x87d6:
@@ -6712,8 +6733,8 @@ code_r0x000807a8:
                   }
                   break;
                 case 0x87dc:
-                  uVar9 = *(undefined4 *)(iVar32 + 0x34);
-                  switch(uVar9) {
+                  writerSrc2SelectorW = *(undefined4 *)(iVar32 + 0x34);
+                  switch(writerSrc2SelectorW) {
                   case 0x87d5:
                     goto code_r0x0008079c;
                   case 0x87d6:
@@ -6736,7 +6757,7 @@ code_r0x000807a8:
                     goto code_r0x000807a8;
                   }
                 }
-                *(undefined4 *)(iVar13 + 0x6c) = uVar9;
+                *(undefined4 *)(iVar13 + 0x6c) = writerSrc2SelectorW;
               }
               instructions = instructions + -1;
               currentInstruction = currentInstruction + 0x74;
@@ -6846,7 +6867,7 @@ code_r0x00080a54:
             if ((*(int *)(iVar32 + 0x20) != 2) ||
                (*(int *)(iVar32 + 0x24) != *(int *)(currentInstruction + -0x6c))) goto code_r0x000813a8;
             *(undefined4 *)(iVar32 + 0x24) = *(undefined4 *)(currentInstruction + -0x50);
-            uVar9 = *(undefined4 *)(iVar32 + 0x28);
+            candidateSrc0SelectorX = *(undefined4 *)(iVar32 + 0x28);
             switch(*(undefined4 *)(iVar32 + 0x28)) {
             case 0x87d5:
             case 0x87d6:
@@ -6857,45 +6878,45 @@ code_r0x00080a54:
               switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x00080cac:
-                uVar9 = 0x87d9;
+                candidateSrc0SelectorX = 0x87d9;
                 break;
               case 0x87d6:
 code_r0x00080ca0:
-                uVar9 = 0x87da;
+                candidateSrc0SelectorX = 0x87da;
                 break;
               case 0x87d7:
 code_r0x00080d0c:
-                uVar9 = 0x87db;
+                candidateSrc0SelectorX = 0x87db;
                 break;
               case 0x87d8:
 code_r0x00080d00:
-                uVar9 = 0x87dc;
+                candidateSrc0SelectorX = 0x87dc;
                 break;
               case 0x87d9:
 code_r0x00080cf4:
-                uVar9 = 0x87d5;
+                candidateSrc0SelectorX = 0x87d5;
                 break;
               case 0x87da:
 code_r0x00080ce8:
-                uVar9 = 0x87d6;
+                candidateSrc0SelectorX = 0x87d6;
                 break;
               case 0x87db:
 code_r0x00080cdc:
-                uVar9 = 0x87d7;
+                candidateSrc0SelectorX = 0x87d7;
                 break;
               case 0x87dc:
 code_r0x00080cd0:
-                uVar9 = 0x87d8;
+                candidateSrc0SelectorX = 0x87d8;
                 break;
               default:
                 goto code_r0x00080c98;
               case 0x87de:
 code_r0x00080cc4:
-                uVar9 = 0x87df;
+                candidateSrc0SelectorX = 0x87df;
                 break;
               case 0x87df:
 code_r0x00080cb8:
-                uVar9 = 0x87de;
+                candidateSrc0SelectorX = 0x87de;
               }
               goto code_r0x00080d14;
             case 0x87da:
@@ -6974,10 +6995,10 @@ code_r0x00080cb8:
               goto code_r0x00080d14;
             }
 code_r0x00080c98:
-            uVar9 = selectorEnumerant;
+            candidateSrc0SelectorX = selectorEnumerant;
 code_r0x00080d14:
-            *(undefined4 *)(iVar32 + 0x28) = uVar9;
-            uVar9 = *(undefined4 *)(iVar32 + 0x2c);
+            *(undefined4 *)(iVar32 + 0x28) = candidateSrc0SelectorX;
+            candidateSrc0SelectorY = *(undefined4 *)(iVar32 + 0x2c);
             switch(*(undefined4 *)(iVar32 + 0x2c)) {
             case 0x87d5:
             case 0x87d6:
@@ -6988,45 +7009,45 @@ code_r0x00080d14:
               switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x00080edc:
-                uVar9 = 0x87d9;
+                candidateSrc0SelectorY = 0x87d9;
                 break;
               case 0x87d6:
 code_r0x00080ed0:
-                uVar9 = 0x87da;
+                candidateSrc0SelectorY = 0x87da;
                 break;
               case 0x87d7:
 code_r0x00080f3c:
-                uVar9 = 0x87db;
+                candidateSrc0SelectorY = 0x87db;
                 break;
               case 0x87d8:
 code_r0x00080f30:
-                uVar9 = 0x87dc;
+                candidateSrc0SelectorY = 0x87dc;
                 break;
               case 0x87d9:
 code_r0x00080f24:
-                uVar9 = 0x87d5;
+                candidateSrc0SelectorY = 0x87d5;
                 break;
               case 0x87da:
 code_r0x00080f18:
-                uVar9 = 0x87d6;
+                candidateSrc0SelectorY = 0x87d6;
                 break;
               case 0x87db:
 code_r0x00080f0c:
-                uVar9 = 0x87d7;
+                candidateSrc0SelectorY = 0x87d7;
                 break;
               case 0x87dc:
 code_r0x00080f00:
-                uVar9 = 0x87d8;
+                candidateSrc0SelectorY = 0x87d8;
                 break;
               default:
                 goto code_r0x00080ec8;
               case 0x87de:
 code_r0x00080ef4:
-                uVar9 = 0x87df;
+                candidateSrc0SelectorY = 0x87df;
                 break;
               case 0x87df:
 code_r0x00080ee8:
-                uVar9 = 0x87de;
+                candidateSrc0SelectorY = 0x87de;
               }
               goto code_r0x00080f44;
             case 0x87da:
@@ -7105,10 +7126,10 @@ code_r0x00080ee8:
               goto code_r0x00080f44;
             }
 code_r0x00080ec8:
-            uVar9 = selectorEnumerant;
+            candidateSrc0SelectorY = selectorEnumerant;
 code_r0x00080f44:
-            *(undefined4 *)(iVar32 + 0x2c) = uVar9;
-            uVar9 = *(undefined4 *)(iVar32 + 0x30);
+            *(undefined4 *)(iVar32 + 0x2c) = candidateSrc0SelectorY;
+            candidateSrc0SelectorZ = *(undefined4 *)(iVar32 + 0x30);
             switch(*(undefined4 *)(iVar32 + 0x30)) {
             case 0x87d5:
             case 0x87d6:
@@ -7119,45 +7140,45 @@ code_r0x00080f44:
               switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x0008110c:
-                uVar9 = 0x87d9;
+                candidateSrc0SelectorZ = 0x87d9;
                 break;
               case 0x87d6:
 code_r0x00081100:
-                uVar9 = 0x87da;
+                candidateSrc0SelectorZ = 0x87da;
                 break;
               case 0x87d7:
 code_r0x0008116c:
-                uVar9 = 0x87db;
+                candidateSrc0SelectorZ = 0x87db;
                 break;
               case 0x87d8:
 code_r0x00081160:
-                uVar9 = 0x87dc;
+                candidateSrc0SelectorZ = 0x87dc;
                 break;
               case 0x87d9:
 code_r0x00081154:
-                uVar9 = 0x87d5;
+                candidateSrc0SelectorZ = 0x87d5;
                 break;
               case 0x87da:
 code_r0x00081148:
-                uVar9 = 0x87d6;
+                candidateSrc0SelectorZ = 0x87d6;
                 break;
               case 0x87db:
 code_r0x0008113c:
-                uVar9 = 0x87d7;
+                candidateSrc0SelectorZ = 0x87d7;
                 break;
               case 0x87dc:
 code_r0x00081130:
-                uVar9 = 0x87d8;
+                candidateSrc0SelectorZ = 0x87d8;
                 break;
               default:
                 goto code_r0x000810f8;
               case 0x87de:
 code_r0x00081124:
-                uVar9 = 0x87df;
+                candidateSrc0SelectorZ = 0x87df;
                 break;
               case 0x87df:
 code_r0x00081118:
-                uVar9 = 0x87de;
+                candidateSrc0SelectorZ = 0x87de;
               }
               goto code_r0x00081174;
             case 0x87da:
@@ -7236,10 +7257,10 @@ code_r0x00081118:
               goto code_r0x00081174;
             }
 code_r0x000810f8:
-            uVar9 = selectorEnumerant;
+            candidateSrc0SelectorZ = selectorEnumerant;
 code_r0x00081174:
-            *(undefined4 *)(iVar32 + 0x30) = uVar9;
-            uVar9 = *(undefined4 *)(iVar32 + 0x34);
+            *(undefined4 *)(iVar32 + 0x30) = candidateSrc0SelectorZ;
+            candidateSrc0SelectorW = *(undefined4 *)(iVar32 + 0x34);
             switch(*(undefined4 *)(iVar32 + 0x34)) {
             case 0x87d5:
             case 0x87d6:
@@ -7250,45 +7271,45 @@ code_r0x00081174:
               switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x0008133c:
-                uVar9 = 0x87d9;
+                candidateSrc0SelectorW = 0x87d9;
                 break;
               case 0x87d6:
 code_r0x00081330:
-                uVar9 = 0x87da;
+                candidateSrc0SelectorW = 0x87da;
                 break;
               case 0x87d7:
 code_r0x0008139c:
-                uVar9 = 0x87db;
+                candidateSrc0SelectorW = 0x87db;
                 break;
               case 0x87d8:
 code_r0x00081390:
-                uVar9 = 0x87dc;
+                candidateSrc0SelectorW = 0x87dc;
                 break;
               case 0x87d9:
 code_r0x00081384:
-                uVar9 = 0x87d5;
+                candidateSrc0SelectorW = 0x87d5;
                 break;
               case 0x87da:
 code_r0x00081378:
-                uVar9 = 0x87d6;
+                candidateSrc0SelectorW = 0x87d6;
                 break;
               case 0x87db:
 code_r0x0008136c:
-                uVar9 = 0x87d7;
+                candidateSrc0SelectorW = 0x87d7;
                 break;
               case 0x87dc:
 code_r0x00081360:
-                uVar9 = 0x87d8;
+                candidateSrc0SelectorW = 0x87d8;
                 break;
               default:
                 goto code_r0x00081328;
               case 0x87de:
 code_r0x00081354:
-                uVar9 = 0x87df;
+                candidateSrc0SelectorW = 0x87df;
                 break;
               case 0x87df:
 code_r0x00081348:
-                uVar9 = 0x87de;
+                candidateSrc0SelectorW = 0x87de;
               }
               goto code_r0x000813a4;
             case 0x87da:
@@ -7367,14 +7388,14 @@ code_r0x00081348:
               goto code_r0x000813a4;
             }
 code_r0x00081328:
-            uVar9 = selectorEnumerant;
+            candidateSrc0SelectorW = selectorEnumerant;
 code_r0x000813a4:
-            *(undefined4 *)(iVar32 + 0x34) = uVar9;
+            *(undefined4 *)(iVar32 + 0x34) = candidateSrc0SelectorW;
 code_r0x000813a8:
             if ((*(int *)(iVar32 + 0x3c) != 2) ||
                (*(int *)(iVar32 + 0x40) != *(int *)(currentInstruction + -0x6c))) goto code_r0x00081c90;
             *(undefined4 *)(iVar32 + 0x40) = *(undefined4 *)(currentInstruction + -0x50);
-            uVar9 = *(undefined4 *)(iVar32 + 0x44);
+            candidateSrc1SelectorX = *(undefined4 *)(iVar32 + 0x44);
             switch(*(undefined4 *)(iVar32 + 0x44)) {
             case 0x87d5:
             case 0x87d6:
@@ -7385,45 +7406,45 @@ code_r0x000813a8:
               switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x00081594:
-                uVar9 = 0x87d9;
+                candidateSrc1SelectorX = 0x87d9;
                 break;
               case 0x87d6:
 code_r0x00081588:
-                uVar9 = 0x87da;
+                candidateSrc1SelectorX = 0x87da;
                 break;
               case 0x87d7:
 code_r0x000815f4:
-                uVar9 = 0x87db;
+                candidateSrc1SelectorX = 0x87db;
                 break;
               case 0x87d8:
 code_r0x000815e8:
-                uVar9 = 0x87dc;
+                candidateSrc1SelectorX = 0x87dc;
                 break;
               case 0x87d9:
 code_r0x000815dc:
-                uVar9 = 0x87d5;
+                candidateSrc1SelectorX = 0x87d5;
                 break;
               case 0x87da:
 code_r0x000815d0:
-                uVar9 = 0x87d6;
+                candidateSrc1SelectorX = 0x87d6;
                 break;
               case 0x87db:
 code_r0x000815c4:
-                uVar9 = 0x87d7;
+                candidateSrc1SelectorX = 0x87d7;
                 break;
               case 0x87dc:
 code_r0x000815b8:
-                uVar9 = 0x87d8;
+                candidateSrc1SelectorX = 0x87d8;
                 break;
               default:
                 goto code_r0x00081580;
               case 0x87de:
 code_r0x000815ac:
-                uVar9 = 0x87df;
+                candidateSrc1SelectorX = 0x87df;
                 break;
               case 0x87df:
 code_r0x000815a0:
-                uVar9 = 0x87de;
+                candidateSrc1SelectorX = 0x87de;
               }
               goto code_r0x000815fc;
             case 0x87da:
@@ -7502,10 +7523,10 @@ code_r0x000815a0:
               goto code_r0x000815fc;
             }
 code_r0x00081580:
-            uVar9 = selectorEnumerant;
+            candidateSrc1SelectorX = selectorEnumerant;
 code_r0x000815fc:
-            *(undefined4 *)(iVar32 + 0x44) = uVar9;
-            uVar9 = *(undefined4 *)(iVar32 + 0x48);
+            *(undefined4 *)(iVar32 + 0x44) = candidateSrc1SelectorX;
+            candidateSrc1SelectorY = *(undefined4 *)(iVar32 + 0x48);
             switch(*(undefined4 *)(iVar32 + 0x48)) {
             case 0x87d5:
             case 0x87d6:
@@ -7516,45 +7537,45 @@ code_r0x000815fc:
               switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x000817c4:
-                uVar9 = 0x87d9;
+                candidateSrc1SelectorY = 0x87d9;
                 break;
               case 0x87d6:
 code_r0x000817b8:
-                uVar9 = 0x87da;
+                candidateSrc1SelectorY = 0x87da;
                 break;
               case 0x87d7:
 code_r0x00081824:
-                uVar9 = 0x87db;
+                candidateSrc1SelectorY = 0x87db;
                 break;
               case 0x87d8:
 code_r0x00081818:
-                uVar9 = 0x87dc;
+                candidateSrc1SelectorY = 0x87dc;
                 break;
               case 0x87d9:
 code_r0x0008180c:
-                uVar9 = 0x87d5;
+                candidateSrc1SelectorY = 0x87d5;
                 break;
               case 0x87da:
 code_r0x00081800:
-                uVar9 = 0x87d6;
+                candidateSrc1SelectorY = 0x87d6;
                 break;
               case 0x87db:
 code_r0x000817f4:
-                uVar9 = 0x87d7;
+                candidateSrc1SelectorY = 0x87d7;
                 break;
               case 0x87dc:
 code_r0x000817e8:
-                uVar9 = 0x87d8;
+                candidateSrc1SelectorY = 0x87d8;
                 break;
               default:
                 goto code_r0x000817b0;
               case 0x87de:
 code_r0x000817dc:
-                uVar9 = 0x87df;
+                candidateSrc1SelectorY = 0x87df;
                 break;
               case 0x87df:
 code_r0x000817d0:
-                uVar9 = 0x87de;
+                candidateSrc1SelectorY = 0x87de;
               }
               goto code_r0x0008182c;
             case 0x87da:
@@ -7633,10 +7654,10 @@ code_r0x000817d0:
               goto code_r0x0008182c;
             }
 code_r0x000817b0:
-            uVar9 = selectorEnumerant;
+            candidateSrc1SelectorY = selectorEnumerant;
 code_r0x0008182c:
-            *(undefined4 *)(iVar32 + 0x48) = uVar9;
-            uVar9 = *(undefined4 *)(iVar32 + 0x4c);
+            *(undefined4 *)(iVar32 + 0x48) = candidateSrc1SelectorY;
+            candidateSrc1SelectorZ = *(undefined4 *)(iVar32 + 0x4c);
             switch(*(undefined4 *)(iVar32 + 0x4c)) {
             case 0x87d5:
             case 0x87d6:
@@ -7647,45 +7668,45 @@ code_r0x0008182c:
               switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x000819f4:
-                uVar9 = 0x87d9;
+                candidateSrc1SelectorZ = 0x87d9;
                 break;
               case 0x87d6:
 code_r0x000819e8:
-                uVar9 = 0x87da;
+                candidateSrc1SelectorZ = 0x87da;
                 break;
               case 0x87d7:
 code_r0x00081a54:
-                uVar9 = 0x87db;
+                candidateSrc1SelectorZ = 0x87db;
                 break;
               case 0x87d8:
 code_r0x00081a48:
-                uVar9 = 0x87dc;
+                candidateSrc1SelectorZ = 0x87dc;
                 break;
               case 0x87d9:
 code_r0x00081a3c:
-                uVar9 = 0x87d5;
+                candidateSrc1SelectorZ = 0x87d5;
                 break;
               case 0x87da:
 code_r0x00081a30:
-                uVar9 = 0x87d6;
+                candidateSrc1SelectorZ = 0x87d6;
                 break;
               case 0x87db:
 code_r0x00081a24:
-                uVar9 = 0x87d7;
+                candidateSrc1SelectorZ = 0x87d7;
                 break;
               case 0x87dc:
 code_r0x00081a18:
-                uVar9 = 0x87d8;
+                candidateSrc1SelectorZ = 0x87d8;
                 break;
               default:
                 goto code_r0x000819e0;
               case 0x87de:
 code_r0x00081a0c:
-                uVar9 = 0x87df;
+                candidateSrc1SelectorZ = 0x87df;
                 break;
               case 0x87df:
 code_r0x00081a00:
-                uVar9 = 0x87de;
+                candidateSrc1SelectorZ = 0x87de;
               }
               goto code_r0x00081a5c;
             case 0x87da:
@@ -7764,10 +7785,10 @@ code_r0x00081a00:
               goto code_r0x00081a5c;
             }
 code_r0x000819e0:
-            uVar9 = selectorEnumerant;
+            candidateSrc1SelectorZ = selectorEnumerant;
 code_r0x00081a5c:
-            *(undefined4 *)(iVar32 + 0x4c) = uVar9;
-            uVar9 = *(undefined4 *)(iVar32 + 0x50);
+            *(undefined4 *)(iVar32 + 0x4c) = candidateSrc1SelectorZ;
+            candidateSrc1SelectorW = *(undefined4 *)(iVar32 + 0x50);
             switch(*(undefined4 *)(iVar32 + 0x50)) {
             case 0x87d5:
             case 0x87d6:
@@ -7778,45 +7799,45 @@ code_r0x00081a5c:
               switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x00081c24:
-                uVar9 = 0x87d9;
+                candidateSrc1SelectorW = 0x87d9;
                 break;
               case 0x87d6:
 code_r0x00081c18:
-                uVar9 = 0x87da;
+                candidateSrc1SelectorW = 0x87da;
                 break;
               case 0x87d7:
 code_r0x00081c84:
-                uVar9 = 0x87db;
+                candidateSrc1SelectorW = 0x87db;
                 break;
               case 0x87d8:
 code_r0x00081c78:
-                uVar9 = 0x87dc;
+                candidateSrc1SelectorW = 0x87dc;
                 break;
               case 0x87d9:
 code_r0x00081c6c:
-                uVar9 = 0x87d5;
+                candidateSrc1SelectorW = 0x87d5;
                 break;
               case 0x87da:
 code_r0x00081c60:
-                uVar9 = 0x87d6;
+                candidateSrc1SelectorW = 0x87d6;
                 break;
               case 0x87db:
 code_r0x00081c54:
-                uVar9 = 0x87d7;
+                candidateSrc1SelectorW = 0x87d7;
                 break;
               case 0x87dc:
 code_r0x00081c48:
-                uVar9 = 0x87d8;
+                candidateSrc1SelectorW = 0x87d8;
                 break;
               default:
                 goto code_r0x00081c10;
               case 0x87de:
 code_r0x00081c3c:
-                uVar9 = 0x87df;
+                candidateSrc1SelectorW = 0x87df;
                 break;
               case 0x87df:
 code_r0x00081c30:
-                uVar9 = 0x87de;
+                candidateSrc1SelectorW = 0x87de;
               }
               goto code_r0x00081c8c;
             case 0x87da:
@@ -7895,14 +7916,14 @@ code_r0x00081c30:
               goto code_r0x00081c8c;
             }
 code_r0x00081c10:
-            uVar9 = selectorEnumerant;
+            candidateSrc1SelectorW = selectorEnumerant;
 code_r0x00081c8c:
-            *(undefined4 *)(iVar32 + 0x50) = uVar9;
+            *(undefined4 *)(iVar32 + 0x50) = candidateSrc1SelectorW;
 code_r0x00081c90:
             if ((*(int *)(iVar32 + 0x58) != 2) ||
                (*(int *)(iVar32 + 0x5c) != *(int *)(currentInstruction + -0x6c))) goto code_r0x00082578;
             *(undefined4 *)(iVar32 + 0x5c) = *(undefined4 *)(currentInstruction + -0x50);
-            uVar9 = *(undefined4 *)(iVar32 + 0x60);
+            candidateSrc2SelectorX = *(undefined4 *)(iVar32 + 0x60);
             switch(*(undefined4 *)(iVar32 + 0x60)) {
             case 0x87d5:
             case 0x87d6:
@@ -7913,45 +7934,45 @@ code_r0x00081c90:
               switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x00081e7c:
-                uVar9 = 0x87d9;
+                candidateSrc2SelectorX = 0x87d9;
                 break;
               case 0x87d6:
 code_r0x00081e70:
-                uVar9 = 0x87da;
+                candidateSrc2SelectorX = 0x87da;
                 break;
               case 0x87d7:
 code_r0x00081edc:
-                uVar9 = 0x87db;
+                candidateSrc2SelectorX = 0x87db;
                 break;
               case 0x87d8:
 code_r0x00081ed0:
-                uVar9 = 0x87dc;
+                candidateSrc2SelectorX = 0x87dc;
                 break;
               case 0x87d9:
 code_r0x00081ec4:
-                uVar9 = 0x87d5;
+                candidateSrc2SelectorX = 0x87d5;
                 break;
               case 0x87da:
 code_r0x00081eb8:
-                uVar9 = 0x87d6;
+                candidateSrc2SelectorX = 0x87d6;
                 break;
               case 0x87db:
 code_r0x00081eac:
-                uVar9 = 0x87d7;
+                candidateSrc2SelectorX = 0x87d7;
                 break;
               case 0x87dc:
 code_r0x00081ea0:
-                uVar9 = 0x87d8;
+                candidateSrc2SelectorX = 0x87d8;
                 break;
               default:
                 goto code_r0x00081e68;
               case 0x87de:
 code_r0x00081e94:
-                uVar9 = 0x87df;
+                candidateSrc2SelectorX = 0x87df;
                 break;
               case 0x87df:
 code_r0x00081e88:
-                uVar9 = 0x87de;
+                candidateSrc2SelectorX = 0x87de;
               }
               goto code_r0x00081ee4;
             case 0x87da:
@@ -8030,10 +8051,10 @@ code_r0x00081e88:
               goto code_r0x00081ee4;
             }
 code_r0x00081e68:
-            uVar9 = selectorEnumerant;
+            candidateSrc2SelectorX = selectorEnumerant;
 code_r0x00081ee4:
-            *(undefined4 *)(iVar32 + 0x60) = uVar9;
-            uVar9 = *(undefined4 *)(iVar32 + 100);
+            *(undefined4 *)(iVar32 + 0x60) = candidateSrc2SelectorX;
+            candidateSrc2SelectorY = *(undefined4 *)(iVar32 + 100);
             switch(*(undefined4 *)(iVar32 + 100)) {
             case 0x87d5:
             case 0x87d6:
@@ -8044,45 +8065,45 @@ code_r0x00081ee4:
               switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x000820ac:
-                uVar9 = 0x87d9;
+                candidateSrc2SelectorY = 0x87d9;
                 break;
               case 0x87d6:
 code_r0x000820a0:
-                uVar9 = 0x87da;
+                candidateSrc2SelectorY = 0x87da;
                 break;
               case 0x87d7:
 code_r0x0008210c:
-                uVar9 = 0x87db;
+                candidateSrc2SelectorY = 0x87db;
                 break;
               case 0x87d8:
 code_r0x00082100:
-                uVar9 = 0x87dc;
+                candidateSrc2SelectorY = 0x87dc;
                 break;
               case 0x87d9:
 code_r0x000820f4:
-                uVar9 = 0x87d5;
+                candidateSrc2SelectorY = 0x87d5;
                 break;
               case 0x87da:
 code_r0x000820e8:
-                uVar9 = 0x87d6;
+                candidateSrc2SelectorY = 0x87d6;
                 break;
               case 0x87db:
 code_r0x000820dc:
-                uVar9 = 0x87d7;
+                candidateSrc2SelectorY = 0x87d7;
                 break;
               case 0x87dc:
 code_r0x000820d0:
-                uVar9 = 0x87d8;
+                candidateSrc2SelectorY = 0x87d8;
                 break;
               default:
                 goto code_r0x00082098;
               case 0x87de:
 code_r0x000820c4:
-                uVar9 = 0x87df;
+                candidateSrc2SelectorY = 0x87df;
                 break;
               case 0x87df:
 code_r0x000820b8:
-                uVar9 = 0x87de;
+                candidateSrc2SelectorY = 0x87de;
               }
               goto code_r0x00082114;
             case 0x87da:
@@ -8161,10 +8182,10 @@ code_r0x000820b8:
               goto code_r0x00082114;
             }
 code_r0x00082098:
-            uVar9 = selectorEnumerant;
+            candidateSrc2SelectorY = selectorEnumerant;
 code_r0x00082114:
-            *(undefined4 *)(iVar32 + 100) = uVar9;
-            uVar9 = *(undefined4 *)(iVar32 + 0x68);
+            *(undefined4 *)(iVar32 + 100) = candidateSrc2SelectorY;
+            candidateSrc2SelectorZ = *(undefined4 *)(iVar32 + 0x68);
             switch(*(undefined4 *)(iVar32 + 0x68)) {
             case 0x87d5:
             case 0x87d6:
@@ -8175,45 +8196,45 @@ code_r0x00082114:
               switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x000822dc:
-                uVar9 = 0x87d9;
+                candidateSrc2SelectorZ = 0x87d9;
                 break;
               case 0x87d6:
 code_r0x000822d0:
-                uVar9 = 0x87da;
+                candidateSrc2SelectorZ = 0x87da;
                 break;
               case 0x87d7:
 code_r0x0008233c:
-                uVar9 = 0x87db;
+                candidateSrc2SelectorZ = 0x87db;
                 break;
               case 0x87d8:
 code_r0x00082330:
-                uVar9 = 0x87dc;
+                candidateSrc2SelectorZ = 0x87dc;
                 break;
               case 0x87d9:
 code_r0x00082324:
-                uVar9 = 0x87d5;
+                candidateSrc2SelectorZ = 0x87d5;
                 break;
               case 0x87da:
 code_r0x00082318:
-                uVar9 = 0x87d6;
+                candidateSrc2SelectorZ = 0x87d6;
                 break;
               case 0x87db:
 code_r0x0008230c:
-                uVar9 = 0x87d7;
+                candidateSrc2SelectorZ = 0x87d7;
                 break;
               case 0x87dc:
 code_r0x00082300:
-                uVar9 = 0x87d8;
+                candidateSrc2SelectorZ = 0x87d8;
                 break;
               default:
                 goto code_r0x000822c8;
               case 0x87de:
 code_r0x000822f4:
-                uVar9 = 0x87df;
+                candidateSrc2SelectorZ = 0x87df;
                 break;
               case 0x87df:
 code_r0x000822e8:
-                uVar9 = 0x87de;
+                candidateSrc2SelectorZ = 0x87de;
               }
               goto code_r0x00082344;
             case 0x87da:
@@ -8292,10 +8313,10 @@ code_r0x000822e8:
               goto code_r0x00082344;
             }
 code_r0x000822c8:
-            uVar9 = selectorEnumerant;
+            candidateSrc2SelectorZ = selectorEnumerant;
 code_r0x00082344:
-            *(undefined4 *)(iVar32 + 0x68) = uVar9;
-            uVar9 = *(undefined4 *)(iVar32 + 0x6c);
+            *(undefined4 *)(iVar32 + 0x68) = candidateSrc2SelectorZ;
+            candidateSrc2SelectorW = *(undefined4 *)(iVar32 + 0x6c);
             switch(*(undefined4 *)(iVar32 + 0x6c)) {
             case 0x87d5:
             case 0x87d6:
@@ -8306,45 +8327,45 @@ code_r0x00082344:
               switch(selectorEnumerant) {
               case 0x87d5:
 code_r0x0008250c:
-                uVar9 = 0x87d9;
+                candidateSrc2SelectorW = 0x87d9;
                 break;
               case 0x87d6:
 code_r0x00082500:
-                uVar9 = 0x87da;
+                candidateSrc2SelectorW = 0x87da;
                 break;
               case 0x87d7:
 code_r0x0008256c:
-                uVar9 = 0x87db;
+                candidateSrc2SelectorW = 0x87db;
                 break;
               case 0x87d8:
 code_r0x00082560:
-                uVar9 = 0x87dc;
+                candidateSrc2SelectorW = 0x87dc;
                 break;
               case 0x87d9:
 code_r0x00082554:
-                uVar9 = 0x87d5;
+                candidateSrc2SelectorW = 0x87d5;
                 break;
               case 0x87da:
 code_r0x00082548:
-                uVar9 = 0x87d6;
+                candidateSrc2SelectorW = 0x87d6;
                 break;
               case 0x87db:
 code_r0x0008253c:
-                uVar9 = 0x87d7;
+                candidateSrc2SelectorW = 0x87d7;
                 break;
               case 0x87dc:
 code_r0x00082530:
-                uVar9 = 0x87d8;
+                candidateSrc2SelectorW = 0x87d8;
                 break;
               default:
                 goto code_r0x000824f8;
               case 0x87de:
 code_r0x00082524:
-                uVar9 = 0x87df;
+                candidateSrc2SelectorW = 0x87df;
                 break;
               case 0x87df:
 code_r0x00082518:
-                uVar9 = 0x87de;
+                candidateSrc2SelectorW = 0x87de;
               }
               goto code_r0x00082574;
             case 0x87da:
@@ -8423,9 +8444,9 @@ code_r0x00082518:
               goto code_r0x00082574;
             }
 code_r0x000824f8:
-            uVar9 = selectorEnumerant;
+            candidateSrc2SelectorW = selectorEnumerant;
 code_r0x00082574:
-            *(undefined4 *)(iVar32 + 0x6c) = uVar9;
+            *(undefined4 *)(iVar32 + 0x6c) = candidateSrc2SelectorW;
 code_r0x00082578:
             if ((*(int *)(iVar32 + 4) != 2) ||
                (bVar33 = true, *(int *)(iVar32 + 8) != *(int *)(currentInstruction + -0x6c))) {

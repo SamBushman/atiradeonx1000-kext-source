@@ -44,7 +44,9 @@ def main():
         w = getattr(R, 'whole', lambda v: None)(var)
         if w:
             rows.append((var, '*', w)); continue
-        ws, er = F.webs(nodes, entry, var)
+        try: ws, er = F.webs(nodes, entry, var)
+        except SystemExit as e:
+            print('skip %s: %s' % (var, e)); continue
         DEF = re.compile(r'(?<![\w.>])%s\s*=(?!=)\s*(.*)' % re.escape(var))
         by = {}
         for k, ls in enumerate(ws):
