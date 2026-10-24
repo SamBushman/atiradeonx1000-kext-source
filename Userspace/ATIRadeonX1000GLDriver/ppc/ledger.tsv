@@ -880,10 +880,10 @@
 0x9d080	596	FUN_0009d080	part_014	converted
 0x9d2e0	184	FUN_0009d2e0	part_014	converted
 0x9d3b0	64	FUN_0009d3b0	part_014	converted
-0x9d410	5944	FUN_0009d410	part_014	converted
+0x9d410	5944	ffvpBuildProgram	part_014	converted
 0x9eb90	560	fpVariantCacheGrow	part_014	converted
 0x9edd0	708	FUN_0009edd0	part_014	converted
-0x9f0b0	4444	FUN_0009f0b0	part_014	converted
+0x9f0b0	4444	programFillStateConstants	part_014	converted
 0xa0290	96	arbProgramFindIndex	part_014	converted
 0xa0300	80	glProgramStringARB_impl	part_014	converted
 0xa0350	36	FUN_000a0350	part_014	converted

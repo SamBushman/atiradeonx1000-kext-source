@@ -349,7 +349,7 @@ void FUN_00083870(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     if (iVar3 == 0) {
       FUN_0009d080(param_1,(int)uVar18,param_3,param_4,param_5,param_6);
       uVar8 = FUN_0009bd00(param_1);
-      iVar15 = FUN_0009d410(param_1,0,&local_38,local_34,uVar8,param_6,iVar15,in_r10);
+      iVar15 = ffvpBuildProgram(param_1,0,&local_38,local_34,uVar8,param_6,iVar15,in_r10);
       iVar3 = FUN_0009c800(param_1,param_1 + 0x1874,iVar15,(uint)*(byte *)(param_1 + 0x131),local_38
                            ,local_34[0],uVar8,(uint)*(byte *)(param_1 + 0x126));
       puVar9 = (undefined4 *)

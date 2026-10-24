@@ -1,0 +1,18 @@
+local	FUN_0009f0b0	param_3	unusedArg3	INFERRED	never read: compiler-passed argument register (the caller passes 8 integer + 13 FP argument registers)
+local	FUN_0009f0b0	param_4	unusedArg4	INFERRED	never read: compiler-passed argument register (the caller passes 8 integer + 13 FP argument registers)
+local	FUN_0009f0b0	param_5	unusedArg5	INFERRED	never read: compiler-passed argument register (the caller passes 8 integer + 13 FP argument registers)
+local	FUN_0009f0b0	param_6	unusedArg6	INFERRED	never read: compiler-passed argument register (the caller passes 8 integer + 13 FP argument registers)
+local	FUN_0009f0b0	param_7	unusedArg7	INFERRED	never read: compiler-passed argument register (the caller passes 8 integer + 13 FP argument registers)
+local	FUN_0009f0b0	param_8	unusedArg8	INFERRED	never read: compiler-passed argument register (the caller passes 8 integer + 13 FP argument registers)
+local	FUN_0009f0b0	fparam_2	unusedFloatArg2	INFERRED	never read: FP argument register spilled by the decompiler
+local	FUN_0009f0b0	fparam_3	unusedFloatArg3	INFERRED	never read: FP argument register spilled by the decompiler
+local	FUN_0009f0b0	fparam_4	unusedFloatArg4	INFERRED	never read: FP argument register spilled by the decompiler
+local	FUN_0009f0b0	fparam_5	unusedFloatArg5	INFERRED	never read: FP argument register spilled by the decompiler
+local	FUN_0009f0b0	fparam_6	unusedFloatArg6	INFERRED	never read: FP argument register spilled by the decompiler
+local	FUN_0009f0b0	fparam_7	unusedFloatArg7	INFERRED	never read: FP argument register spilled by the decompiler
+local	FUN_0009f0b0	fparam_8	unusedFloatArg8	INFERRED	never read: FP argument register spilled by the decompiler
+local	FUN_0009f0b0	fparam_9	unusedFloatArg9	INFERRED	never read: FP argument register spilled by the decompiler
+local	FUN_0009f0b0	fparam_10	unusedFloatArg10	INFERRED	never read: FP argument register spilled by the decompiler
+local	FUN_0009f0b0	fparam_11	unusedFloatArg11	INFERRED	never read: FP argument register spilled by the decompiler
+local	FUN_0009f0b0	fparam_12	unusedFloatArg12	INFERRED	never read: FP argument register spilled by the decompiler
+local	FUN_0009f0b0	fparam_13	unusedFloatArg13	INFERRED	never read: FP argument register spilled by the decompiler

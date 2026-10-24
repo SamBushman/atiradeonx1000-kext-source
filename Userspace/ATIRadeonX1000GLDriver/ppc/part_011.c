@@ -8752,7 +8752,7 @@ int FUN_00082c50(param_1, param_2, param_3, param_4, param_5, param_6, param_7, 
       return;
     }
     puVar7 = *(undefined4 **)(param_2 + 0x4c);
-    ((void (*)())FUN_0009f0b0)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,fparam_1,in_f2,
+    ((void (*)())programFillStateConstants)(param_1,param_2,param_3,param_4,param_5,param_6,param_7,param_8,fparam_1,in_f2,
                  in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,in_stack_ffffffa8,in_stack_ffffffb0,
                  in_stack_ffffffb8,in_stack_ffffffc0,in_stack_ffffffc8);
     iVar2 = *(int *)(param_2 + 0x48) * 4 + 3;
