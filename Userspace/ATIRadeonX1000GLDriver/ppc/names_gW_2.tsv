@@ -1,6 +1,6 @@
 local	FUN_0014f420	param_1	useA	CONFIRMED	pair {consumer instruction, operand index}: IRInst__getOperandSource(*param_1,param_1[1]) is the source feeding the operand
 local	FUN_0014f420	param_2	useB	CONFIRMED	second pair {consumer instruction, operand index}, same layout as param_1
-local	FUN_0014f420	param_3	program	INFERRED	forwarded unchanged as the last argument (program+8) of IRInst__setOperandSource
+local	FUN_0014f420	param_3	pass	INFERRED	the pass object: pass+8 is the compiler context passed to IRInst__setOperandSource (sibling FUN_0014e9e4 and Inst__takeOutCommonFactor name it pass)
 local	FUN_0014f420	param_4	allowRewrite	INFERRED	when 0 the function returns 1 right after finding the matching term pair, before rewriting any operand
 local	FUN_0014f420	param_5	allowOperandSwap	INFERRED	when 0 the function returns 1 after the in-place rewrite, before exchanging an operand between the uses
 local	FUN_0014f420	iStack00000020	programHome	INFERRED	stack home of param_3 (all later reads use the home)
