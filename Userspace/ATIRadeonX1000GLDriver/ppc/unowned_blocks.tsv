@@ -1615,11 +1615,11 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 7c6c4	7c6d0	padding	recordProgramAllocateAndEmit	3	
 7c724	7c730	padding	recordProgramAllocateAndEmit	3	
 7c754	7c760	padding	recordProgramAllocateAndEmit	3	
-7c92c	7c930	padding	FUN_0007c760	1	
-7cbd8	7cbe0	padding	FUN_0007c760	2	
-7d280	7d488	table	FUN_0007c760	130	
-7d59c	7d5a0	padding	FUN_0007c760	1	
-7dcc4	7dcd0	padding	FUN_0007c760	3	
+7c92c	7c930	padding	recordProgramBuildDependencies	1	
+7cbd8	7cbe0	padding	recordProgramBuildDependencies	2	
+7d280	7d488	table	recordProgramBuildDependencies	130	
+7d59c	7d5a0	padding	recordProgramBuildDependencies	1	
+7dcc4	7dcd0	padding	recordProgramBuildDependencies	3	
 7dd28	7dd30	padding	FUN_0007dcd0	2	
 7dd7c	7dd80	padding	FUN_0007dd30	1	
 7ddd4	7dde0	padding	FUN_0007dd30	3	

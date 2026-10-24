@@ -918,7 +918,7 @@ extern int FUN_0007a1a0();
 extern int FUN_0007a4a0();
 extern int FUN_0007aae0();
 extern int recordProgramAllocateAndEmit();
-extern int FUN_0007c760();
+extern int recordProgramBuildDependencies();
 extern int FUN_0007dcd0();
 extern int FUN_0007dd30();
 extern int evsFoldConstantMoves();

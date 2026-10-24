@@ -712,7 +712,7 @@
 0x7a4a0	FUN_0007a4a0	1544	yes	
 0x7aae0	FUN_0007aae0	1460	no	indirect call (driver context / vtable / callback)
 0x7b0d0	recordProgramAllocateAndEmit	5660	yes	
-0x7c760	FUN_0007c760	4940	yes	
+0x7c760	recordProgramBuildDependencies	4940	yes	
 0x7dcd0	FUN_0007dcd0	88	no	indirect call (driver context / vtable / callback)
 0x7dd30	FUN_0007dd30	160	no	indirect call (driver context / vtable / callback)
 0x7dde0	evsFoldConstantMoves	14156	yes	

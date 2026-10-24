@@ -5327,7 +5327,7 @@ int FUN_0009cb10(param_1, param_2, param_3, param_4)
   *(undefined4 **)(param_3 + 0x2c) = &local_30;
   *(undefined4 *)(param_3 + 8) = uVar3;
   *(undefined4 **)(param_3 + 0x30) = local_2c;
-  iVar2 = FUN_0007c760(param_3);
+  iVar2 = recordProgramBuildDependencies(param_3);
   if (iVar2 == 0) {
     _memcpy(*(undefined4 *)(iVar4 + 0x3c8),uVar1,param_4 * local_38);
     *(int *)(iVar4 + 0x3cc) = local_38;

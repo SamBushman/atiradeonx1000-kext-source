@@ -1893,7 +1893,7 @@ int FUN_0005f540(param_1, param_2)
     puVar4[0xb] = &uStack_30;
     puVar4[2] = uVar7;
     puVar4[0xc] = auStack_2c;
-    iVar5 = FUN_0007c760(puVar4);
+    iVar5 = recordProgramBuildDependencies(puVar4);
     FUN_0007a110(puVar4);
     (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar11 + 0x1c));
     *(int *)(iVar11 + 0x1c) = iVar3;

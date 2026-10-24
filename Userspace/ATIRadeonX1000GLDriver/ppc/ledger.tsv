@@ -711,7 +711,7 @@
 0x7a4a0	1544	FUN_0007a4a0	part_011	converted
 0x7aae0	1460	FUN_0007aae0	part_011	converted
 0x7b0d0	5660	recordProgramAllocateAndEmit	part_011	converted
-0x7c760	4940	FUN_0007c760	part_011	converted
+0x7c760	4940	recordProgramBuildDependencies	part_011	converted
 0x7dcd0	88	FUN_0007dcd0	part_011	converted
 0x7dd30	160	FUN_0007dd30	part_011	converted
 0x7dde0	3504	evsFoldConstantMoves	part_011	converted
