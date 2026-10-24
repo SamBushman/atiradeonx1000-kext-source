@@ -748,19 +748,19 @@ int __ZStplIcSt11char_traitsIcESaIcEESbIT_T0_T1_ERKS6_S8_(result, lhs, rhs)
 }
 
 /* __ZN9__gnu_cxxeqIPcSsEEbRKNS_17__normal_iteratorIT_T0_EES7_ @ 0x97c168a4 (24 bytes) */
-int __ZN9__gnu_cxxeqIPcSsEEbRKNS_17__normal_iteratorIT_T0_EES7_(this, param_2)
-  unsigned char * this;
-  unsigned char * param_2;
+int __ZN9__gnu_cxxeqIPcSsEEbRKNS_17__normal_iteratorIT_T0_EES7_(lhs, rhs)
+  unsigned char * lhs;
+  unsigned char * rhs;
 {
-  return *(int *)this == *(int *)param_2;
+  return *(int *)lhs == *(int *)rhs;
 }
 
 /* __ZN9__gnu_cxxeqIPKcSsEEbRKNS_17__normal_iteratorIT_T0_EES8_ @ 0x97c168bc (24 bytes) */
-int __ZN9__gnu_cxxeqIPKcSsEEbRKNS_17__normal_iteratorIT_T0_EES8_(this, param_2)
-  unsigned char * this;
-  unsigned char * param_2;
+int __ZN9__gnu_cxxeqIPKcSsEEbRKNS_17__normal_iteratorIT_T0_EES8_(lhs, rhs)
+  unsigned char * lhs;
+  unsigned char * rhs;
 {
-  return *(int *)this == *(int *)param_2;
+  return *(int *)lhs == *(int *)rhs;
 }
 
 /* __ZNSsC2IPcEET_S1_RKSaIcE @ 0x97c168d4 (4 bytes) */
@@ -816,10 +816,10 @@ int __ZNSsC1IPKcEET_S2_RKSaIcE(this, str1, str2, allocator)
   char *str2;
   unsigned char * allocator;
 {
-  char *pcVar1;
+  char *newData;
   
-  pcVar1 = ((int (*)())__ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag)(str1,str2,allocator,0);
-  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,allocator);
+  newData = ((int (*)())__ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag)(str1,str2,allocator,0);
+  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,newData,allocator);
 }
 
 /* __ZNSsC4IPKcEET_S2_RKSaIcE @ 0x97c16934 (80 bytes) */
@@ -829,81 +829,81 @@ int __ZNSsC4IPKcEET_S2_RKSaIcE(this, str1, str2, allocator)
   char *str2;
   unsigned char * allocator;
 {
-  char *pcVar1;
+  char *newData;
   
-  pcVar1 = ((int (*)())__ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag)(str1,str2,allocator,0);
-  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,allocator);
+  newData = ((int (*)())__ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag)(str1,str2,allocator,0);
+  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,newData,allocator);
 }
 
 /* __ZNSsC2IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE @ 0x97c16984 (4 bytes) */
-int __ZNSsC2IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE(this, param_2, param_3, allocator)
+int __ZNSsC2IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE(this, first, last, allocator)
   void *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 first;
+  undefined4 last;
   undefined4 allocator;
 {
-  return ((int (*)())__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE)(this,param_2,param_3,allocator);
+  return ((int (*)())__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE)(this,first,last,allocator);
 }
 
 /* __ZNSsC1IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE @ 0x97c16988 (4 bytes) */
-int __ZNSsC1IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE(this, param_2, param_3, allocator)
+int __ZNSsC1IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE(this, first, last, allocator)
   void *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 first;
+  undefined4 last;
   unsigned char * allocator;
 {
-  char *pcVar1;
+  char *newData;
   
-  pcVar1 = ((int (*)())__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag)(param_2,param_3,allocator,0);
-  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,allocator);
+  newData = ((int (*)())__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag)(first,last,allocator,0);
+  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,newData,allocator);
 }
 
 /* __ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE @ 0x97c1698c (80 bytes) */
-int __ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE(this, param_2, param_3, allocator)
+int __ZNSsC4IN9__gnu_cxx17__normal_iteratorIPcSsEEEET_S4_RKSaIcE(this, first, last, allocator)
   void *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 first;
+  undefined4 last;
   unsigned char * allocator;
 {
-  char *pcVar1;
+  char *newData;
   
-  pcVar1 = ((int (*)())__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag)(param_2,param_3,allocator,0);
-  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,pcVar1,allocator);
+  newData = ((int (*)())__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag)(first,last,allocator,0);
+  return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,newData,allocator);
 }
 
 /* __ZNSsC2IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE @ 0x97c169dc (4 bytes) */
-int __ZNSsC2IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE(this, param_2, param_3, allocator)
+int __ZNSsC2IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE(this, first, last, allocator)
   void *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 first;
+  undefined4 last;
   undefined4 allocator;
 {
-  return ((int (*)())__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE)(this,param_2,param_3,allocator);
+  return ((int (*)())__ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE)(this,first,last,allocator);
 }
 
 /* __ZNSsC1IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE @ 0x97c169e0 (4 bytes) */
-int __ZNSsC1IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE(this, param_2, param_3, allocator)
+int __ZNSsC1IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE(this, first, last, allocator)
   void *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 first;
+  undefined4 last;
   unsigned char * allocator;
 {
   char *string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__Result;
   
-  string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__Result = ((int (*)())std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__)(param_2,param_3,allocator,0);
+  string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__Result = ((int (*)())std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__)(first,last,allocator,0);
   return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__Result,allocator);
 }
 
 /* __ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE @ 0x97c169e4 (80 bytes) */
-int __ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE(this, param_2, param_3, allocator)
+int __ZNSsC4IN9__gnu_cxx17__normal_iteratorIPKcSsEEEET_S5_RKSaIcE(this, first, last, allocator)
   void *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 first;
+  undefined4 last;
   unsigned char * allocator;
 {
   char *string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__Result;
   
-  string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__Result = ((int (*)())std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__)(param_2,param_3,allocator,0);
+  string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__Result = ((int (*)())std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__)(first,last,allocator,0);
   return __ZNSs12_Alloc_hiderC4EPcRKSaIcE(this,string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__Result,allocator);
 }
 

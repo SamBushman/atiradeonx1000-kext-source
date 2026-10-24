@@ -118,21 +118,21 @@ int __ZNSt13runtime_errorD0Ev(this)
 }
 
 /* __ZNSt13runtime_errorD4Ev @ 0x97c17e4c (136 bytes) */
-int __ZNSt13runtime_errorD4Ev(this, param_2)
+int __ZNSt13runtime_errorD4Ev(this, deleteFlag)
   void *this;
-  uint param_2;
+  uint deleteFlag;
 {
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  int iVar4;
+  int stringData;
   char reservation;
   byte cr0Reg;
-  undefined1 auStack_20 [20];
+  undefined1 allocScratch [20];
   
-  iVar4 = *(int *)((int)this + 4);
+  stringData = *(int *)((int)this + 4);
   *(int *)this = DAT_a7b7c010 + 8;
-  refCountPtr = (int *)(iVar4 + -4);
+  refCountPtr = (int *)(stringData + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -142,10 +142,10 @@ int __ZNSt13runtime_errorD4Ev(this, param_2)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_20);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stringData + -0xc),allocScratch);
   }
   __ZNSt9exceptionD2Ev(this);
-  if ((param_2 & 1) != 0) {
+  if ((deleteFlag & 1) != 0) {
     __ZdlPv(this);
   }
   return;
@@ -260,12 +260,12 @@ int __ZNSt9type_infoD0Ev(this)
 }
 
 /* __ZNSt9type_infoD4Ev @ 0x97c18000 (44 bytes) */
-int __ZNSt9type_infoD4Ev(this, param_2)
+int __ZNSt9type_infoD4Ev(this, deleteFlag)
   void *this;
-  uint param_2;
+  uint deleteFlag;
 {
   *(int *)this = DAT_a7b7c02c + 8;
-  if ((param_2 & 1) == 0) {
+  if ((deleteFlag & 1) == 0) {
     return;
   }
   return __ZdlPv(this);
@@ -293,13 +293,13 @@ int __ZNSt8bad_castD0Ev(this)
 }
 
 /* __ZNSt8bad_castD4Ev @ 0x97c18044 (88 bytes) */
-int __ZNSt8bad_castD4Ev(this, param_2)
+int __ZNSt8bad_castD4Ev(this, deleteFlag)
   void *this;
-  uint param_2;
+  uint deleteFlag;
 {
   *(int *)this = DAT_a7b7c028 + 8;
   __ZNSt9exceptionD2Ev(this);
-  if ((param_2 & 1) != 0) {
+  if ((deleteFlag & 1) != 0) {
     __ZdlPv(this);
   }
   return;
@@ -327,32 +327,32 @@ int __ZNSt10bad_typeidD0Ev(this)
 }
 
 /* __ZNSt10bad_typeidD4Ev @ 0x97c180b4 (88 bytes) */
-int __ZNSt10bad_typeidD4Ev(this, param_2)
+int __ZNSt10bad_typeidD4Ev(this, deleteFlag)
   void *this;
-  uint param_2;
+  uint deleteFlag;
 {
   *(int *)this = DAT_a7b7c024 + 8;
   __ZNSt9exceptionD2Ev(this);
-  if ((param_2 & 1) != 0) {
+  if ((deleteFlag & 1) != 0) {
     __ZdlPv(this);
   }
   return;
 }
 
 /* __ZNKSt9type_infoeqERKS_ @ 0x97c1810c (76 bytes) */
-int __ZNKSt9type_infoeqERKS_(this, type_info)
+int __ZNKSt9type_infoeqERKS_(this, other)
   void *this;
-  unsigned char * type_info;
+  unsigned char * other;
 {
-  int iVar1;
-  undefined4 uVar2;
+  int nameCompare;
+  undefined4 equal;
   
-  uVar2 = 0;
-  if ((type_info == this) ||
-     (iVar1 = _strcmp(*(undefined4 *)((int)this + 4),*(undefined4 *)(type_info + 4)), iVar1 == 0)) {
-    uVar2 = 1;
+  equal = 0;
+  if ((other == this) ||
+     (nameCompare = _strcmp(*(undefined4 *)((int)this + 4),*(undefined4 *)(other + 4)), nameCompare == 0)) {
+    equal = 1;
   }
-  return uVar2;
+  return equal;
 }
 
 /* __ZNKSt9type_info14__is_pointer_pEv @ 0x97c18158 (8 bytes) */
@@ -368,18 +368,18 @@ int __ZNKSt9type_info15__is_function_pEv()
 }
 
 /* __ZNKSt9type_info10__do_catchEPKS_PPvj @ 0x97c18168 (4 bytes) */
-int __ZNKSt9type_info10__do_catchEPKS_PPvj(this, type_info, param_3)
+int __ZNKSt9type_info10__do_catchEPKS_PPvj(this, thrType, outer)
   unsigned char * this;
-  void **type_info;
-  uint param_3;
+  void **thrType;
+  uint outer;
 {
-  return ((int (*)())__ZNKSt9type_infoeqERKS_)(this,(unsigned char *)type_info);
+  return ((int (*)())__ZNKSt9type_infoeqERKS_)(this,(unsigned char *)thrType);
 }
 
 /* __ZNKSt9type_info11__do_upcastEPKN10__cxxabiv117__class_type_infoEPPv @ 0x97c1816c (8 bytes) */
-int __ZNKSt9type_info11__do_upcastEPKN10__cxxabiv117__class_type_infoEPPv(this, param_2)
+int __ZNKSt9type_info11__do_upcastEPKN10__cxxabiv117__class_type_infoEPPv(this, target)
   unsigned char * this;
-  void **param_2;
+  void **target;
 {
   return 0;
 }
@@ -406,13 +406,13 @@ int __ZN10__cxxabiv117__class_type_infoD0Ev(this)
 }
 
 /* __ZN10__cxxabiv117__class_type_infoD4Ev @ 0x97c1818c (104 bytes) */
-int __ZN10__cxxabiv117__class_type_infoD4Ev(this, param_2)
+int __ZN10__cxxabiv117__class_type_infoD4Ev(this, deleteFlag)
   void *this;
-  uint param_2;
+  uint deleteFlag;
 {
   *(int *)this = DAT_a7b7c020 + 8;
   ((int (*)())__ZNSt9type_infoD2Ev)(this);
-  if ((param_2 & 1) != 0) {
+  if ((deleteFlag & 1) != 0) {
     __ZdlPv(this);
     return;
   }
@@ -441,13 +441,13 @@ int __ZN10__cxxabiv120__si_class_type_infoD0Ev(this)
 }
 
 /* __ZN10__cxxabiv120__si_class_type_infoD4Ev @ 0x97c1820c (104 bytes) */
-int __ZN10__cxxabiv120__si_class_type_infoD4Ev(this, param_2)
+int __ZN10__cxxabiv120__si_class_type_infoD4Ev(this, deleteFlag)
   void *this;
-  uint param_2;
+  uint deleteFlag;
 {
   *(int *)this = DAT_a7b7c01c + 8;
   ((int (*)())__ZN10__cxxabiv117__class_type_infoD2Ev)(this);
-  if ((param_2 & 1) != 0) {
+  if ((deleteFlag & 1) != 0) {
     __ZdlPv(this);
     return;
   }
@@ -476,13 +476,13 @@ int __ZN10__cxxabiv121__vmi_class_type_infoD0Ev(this)
 }
 
 /* __ZN10__cxxabiv121__vmi_class_type_infoD4Ev @ 0x97c1828c (104 bytes) */
-int __ZN10__cxxabiv121__vmi_class_type_infoD4Ev(this, param_2)
+int __ZN10__cxxabiv121__vmi_class_type_infoD4Ev(this, deleteFlag)
   void *this;
-  uint param_2;
+  uint deleteFlag;
 {
   *(int *)this = DAT_a7b7c018 + 8;
   ((int (*)())__ZN10__cxxabiv117__class_type_infoD2Ev)(this);
-  if ((param_2 & 1) != 0) {
+  if ((deleteFlag & 1) != 0) {
     __ZdlPv(this);
     return;
   }
@@ -632,14 +632,15 @@ int __ZNK10__cxxabiv117__class_type_info12__do_dyncastEiNS0_10__sub_kindEPKS0_PK
   int srcPtr;
   int *result;
 {
-  int iVar1;
+  int thisIsDstType;
+  int thisIsSrcType;
   
-  if ((objPtr == srcPtr) && (iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,srcType), iVar1 != 0)) {
+  if ((objPtr == srcPtr) && (thisIsSrcType = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,srcType), thisIsSrcType != 0)) {
     result[2] = accessPath;
   }
   else {
-    iVar1 = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,dstType);
-    if (iVar1 != 0) {
+    thisIsDstType = ((int (*)())__ZNKSt9type_infoeqERKS_)(this,dstType);
+    if (thisIsDstType != 0) {
       *result = objPtr;
       result[3] = 1;
       result[1] = accessPath;

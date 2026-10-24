@@ -1,18 +1,18 @@
 #include "decls.h"
 
 /* __ZdlPv @ 0x97c1734c (40 bytes) */
-int __ZdlPv(param_1)
-  void *param_1;
+int __ZdlPv(block)
+  void *block;
 {
   undefined4 r3Out0;
-  undefined4 uVar1;
+  undefined4 result;
   
-  uVar1 = 0;
-  if (param_1 != (void *)0x0) {
-    _free(param_1);
-    uVar1 = r3Out0;
+  result = 0;
+  if (block != (void *)0x0) {
+    _free(block);
+    result = r3Out0;
   }
-  return uVar1;
+  return result;
 }
 
 /* __ZNSaIcEC2Ev @ 0x97c17374 (4 bytes) */
@@ -76,11 +76,11 @@ int __ZNSaIcED4Ev(this)
 }
 
 /* __ZNKSaIcE7addressERc @ 0x97c173a0 (8 bytes) */
-int __ZNKSaIcE7addressERc(this, param_2)
+int __ZNKSaIcE7addressERc(this, ref)
   void *this;
-  char *param_2;
+  char *ref;
 {
-  return param_2;
+  return ref;
 }
 
 /* __ZNKSaIcE7addressERKc @ 0x97c173a8 (8 bytes) */
@@ -309,15 +309,15 @@ int std__allocator_char___deallocate(alloc, p, n)
 }
 
 /* __ZNSaIcE9constructEPcRKc @ 0x97c17780 (20 bytes) */
-int __ZNSaIcE9constructEPcRKc(this, param_2, str)
+int __ZNSaIcE9constructEPcRKc(this, slot, value)
   void *this;
-  char *param_2;
-  char *str;
+  char *slot;
+  char *value;
 {
-  if (param_2 == (char *)0x0) {
+  if (slot == (char *)0x0) {
     return;
   }
-  *param_2 = *str;
+  *slot = *value;
   return;
 }
 
@@ -564,22 +564,22 @@ int std____default_alloc_template_true_0___reallocate(p, oldSz, newSz)
 }
 
 /* __ZdaPv @ 0x97c17b10 (32 bytes) */
-int __ZdaPv(param_1)
-  void *param_1;
+int __ZdaPv(block)
+  void *block;
 {
-  undefined4 uVar1;
+  undefined4 result;
   
-  uVar1 = ((int (*)())__ZdlPv)(param_1);
-  return uVar1;
+  result = ((int (*)())__ZdlPv)(block);
+  return result;
 }
 
 /* operator_new__ @ 0x97c17b30 (20 bytes) */
-int operator_new__(param_1)
-  ulong param_1;
+int operator_new__(byteCount)
+  ulong byteCount;
 {
   void *allocation;
   
-  allocation = operator_new(param_1);
+  allocation = operator_new(byteCount);
   return allocation;
 }
 
@@ -631,21 +631,21 @@ int __ZNSt11logic_errorD0Ev(this)
 }
 
 /* __ZNSt11logic_errorD4Ev @ 0x97c17be4 (136 bytes) */
-int __ZNSt11logic_errorD4Ev(this, param_2)
+int __ZNSt11logic_errorD4Ev(this, deleteFlag)
   void *this;
-  uint param_2;
+  uint deleteFlag;
 {
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  int iVar4;
+  int stringData;
   char reservation;
   byte cr0Reg;
-  undefined1 auStack_20 [20];
+  undefined1 allocScratch [20];
   
-  iVar4 = *(int *)((int)this + 4);
+  stringData = *(int *)((int)this + 4);
   *(int *)this = DAT_a7b7c014 + 8;
-  refCountPtr = (int *)(iVar4 + -4);
+  refCountPtr = (int *)(stringData + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -655,10 +655,10 @@ int __ZNSt11logic_errorD4Ev(this, param_2)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(iVar4 + -0xc),auStack_20);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stringData + -0xc),allocScratch);
   }
   __ZNSt9exceptionD2Ev(this);
-  if ((param_2 & 1) != 0) {
+  if ((deleteFlag & 1) != 0) {
     ((int (*)())__ZdlPv)(this);
   }
   return;

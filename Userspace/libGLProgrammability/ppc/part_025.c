@@ -1192,7 +1192,7 @@ int ___cxa_call_unexpected_97c19d00(excObj)
   unsigned char * terminateHandler;
   int handlerSwitchValue;
   uchar *languageSpecificData;
-  unsigned char alStack_40 [8];
+  unsigned char lsdaHeader [8];
   undefined4 savedTTypeBase;
   
   ((int (*)())___cxa_begin_catch)(excObj);
@@ -1204,13 +1204,13 @@ int ___cxa_call_unexpected_97c19d00(excObj)
   ((int (*)())___cxa_begin_catch)(__unexpectedResult);
   cxa_get_globals_fastResult = (undefined4 *)((int (*)())___cxa_get_globals_fast)();
   currentException = (undefined4 *)*cxa_get_globals_fastResult;
-  ((int (*)())parse_lsda_header)((unsigned char *)0x0,languageSpecificData,alStack_40);
-  check_exception_specResult = ((int (*)())check_exception_spec)(alStack_40,(unsigned char *)*currentException,currentException + 0x14,handlerSwitchValue);
+  ((int (*)())parse_lsda_header)((unsigned char *)0x0,languageSpecificData,lsdaHeader);
+  check_exception_specResult = ((int (*)())check_exception_spec)(lsdaHeader,(unsigned char *)*currentException,currentException + 0x14,handlerSwitchValue);
   if (check_exception_specResult != 0) {
     ___cxa_rethrow();
   }
   badExceptionTypeinfo = PTR_typeinfo_a7b7c180;
-  check_exception_specResult = ((int (*)())check_exception_spec)(alStack_40,(unsigned char *)PTR_typeinfo_a7b7c180,(void *)0x0,handlerSwitchValue);
+  check_exception_specResult = ((int (*)())check_exception_spec)(lsdaHeader,(unsigned char *)PTR_typeinfo_a7b7c180,(void *)0x0,handlerSwitchValue);
   if (check_exception_specResult != 0) {
     badException = (undefined4 *)___cxa_allocate_exception(4);
     badExceptionDtor = PTR___ZNSt13bad_exceptionD1Ev_a7b7c17c;
@@ -1460,9 +1460,9 @@ int ___eprintf(format, arg1, arg2, arg3)
 /* FUN_97c1a23c @ 0x97c1a23c (16 bytes) */
 int FUN_97c1a23c()
 {
-  undefined4 in_r3;
+  undefined4 r3In;
   
-  return in_r3;
+  return r3In;
 }
 
 /* FUN_97c1a24c @ 0x97c1a24c (12 bytes) */
@@ -1480,9 +1480,9 @@ int FUN_97c1a258()
 /* FUN_97c1a25c @ 0x97c1a25c (24 bytes) */
 int FUN_97c1a25c()
 {
-  undefined4 in_r3;
+  undefined4 r3In;
   
-  return in_r3;
+  return r3In;
 }
 
 /* FUN_97c1a28c @ 0x97c1a28c (60 bytes) */
