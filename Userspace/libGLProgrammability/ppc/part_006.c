@@ -1666,6 +1666,10 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   undefined *scratchR9;
   uint scratchR10;
 {
+  unsigned char *typeAt840Word14;
+  unsigned char *typeAt840Structure;
+  unsigned char *typeAt850Word18;
+  unsigned char *typeAt840ArraySize;
   int yylen;
   int yytoken;
   int fieldNameStr2;
@@ -3329,7 +3333,7 @@ switchD_97ba39c8_caseD_6:
       typeTmp1Word0cOrPubMatrix = (unsigned char *)0x0;
       typeTmp1TypeNameOrStr2Alloc = (unsigned char *)0x0;
       typeTmp1Word14OrStr2Data = (unsigned char *)0x0;
-      typeTmp1Word18OrPubLine = (unsigned char *)0x0;
+      typeAt850Word18 = (unsigned char *)0x0;
       typeTmp1MaxArraySize = (unsigned char *)0x0;
       scratchR6 = (char *)stackNode;
       scratchR7 = (char *)stackNodeWord4c;
@@ -3794,7 +3798,7 @@ LAB_97ba97d8:
     typeTmp1Word0cOrPubMatrix = (unsigned char *)0x0;
     typeTmp1TypeNameOrStr2Alloc = (unsigned char *)0x0;
     typeTmp1Word14OrStr2Data = (unsigned char *)0x0;
-    typeTmp1Word18OrPubLine = (unsigned char *)0x0;
+    typeAt850Word18 = (unsigned char *)0x0;
     typeTmp1MaxArraySize = (unsigned char *)0x0;
     typeTmp1Word20OrPubType = (unsigned char *)0x0;
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
@@ -3812,7 +3816,7 @@ LAB_97ba97d8:
     *(unsigned char **)(newFunction + 0x28) = typeTmp1Word0cOrPubMatrix;
     *(unsigned char **)(newFunction + 0x2c) = typeTmp1TypeNameOrStr2Alloc;
     *(unsigned char **)(newFunction + 0x30) = typeTmp1Word14OrStr2Data;
-    *(unsigned char **)(newFunction + 0x34) = typeTmp1Word18OrPubLine;
+    *(unsigned char **)(newFunction + 0x34) = typeAt850Word18;
     *(undefined ***)(newFunction + 0x1c) = &PTR___ZN5TTypeD1Ev_a7b7d640;
     *(unsigned char **)(newFunction + 0x38) = typeTmp1MaxArraySize;
     *(unsigned char **)(newFunction + 0x3c) = typeTmp1Word20OrPubType;
@@ -5596,7 +5600,7 @@ LAB_97ba8824:
     typeTmp1Word0cOrPubMatrix = (unsigned char *)0x0;
     typeTmp1TypeNameOrStr2Alloc = (unsigned char *)0x0;
     typeTmp1Word14OrStr2Data = (unsigned char *)0x0;
-    typeTmp1Word18OrPubLine = (unsigned char *)0x0;
+    typeAt850Word18 = (unsigned char *)0x0;
     typeTmp1MaxArraySize = (unsigned char *)0x0;
     typeNameStr = typeTmp1TypeNameOrStr2Alloc;
     typeTmp2StructureOrPubLine = (unsigned char *)scratchR7;
@@ -5614,7 +5618,7 @@ LAB_97ba8824:
       picBaseArg = 0xa7b8374c;
       picBase = (unsigned char *)0xa7b8374c;
       setStructSizeResult2 = TType__setStructSize((unsigned char *)&typeTmp1VtableOrStr1Alloc,*(unsigned char **)(typeTmp2Word14OrPubUserDef2 + 8));
-      typeTmp1Word18OrPubLine = (unsigned char *)((ulonglong)setStructSizeResult2 >> 0x20);
+      typeAt850Word18 = (unsigned char *)((ulonglong)setStructSizeResult2 >> 0x20);
       typeNameStr2 = (**(code **)(*(uint *)typeTmp3ArraySizeOrPub3UserDef + 0x18))
                          (typeTmp3ArraySizeOrPub3UserDef,(int)setStructSizeResult2,fullySpecifiedTypeTypeLine,scratchR6,scratchR7,picBaseArg,*(uint *)typeTmp3ArraySizeOrPub3UserDef);
       *(undefined1 *)(*(int *)(typeNameStr2 + 4) + *(int *)(*(int *)(typeNameStr2 + 4) + -0xc)) =
@@ -5648,7 +5652,7 @@ LAB_97ba8824:
     *(unsigned char **)(newFunction + 0x28) = typeTmp1Word0cOrPubMatrix;
     *(unsigned char **)(newFunction + 0x2c) = typeTmp1TypeNameOrStr2Alloc;
     *(unsigned char **)(newFunction + 0x30) = typeTmp1Word14OrStr2Data;
-    *(unsigned char **)(newFunction + 0x34) = typeTmp1Word18OrPubLine;
+    *(unsigned char **)(newFunction + 0x34) = typeAt850Word18;
     *(unsigned char **)(newFunction + 0x1c) = typeVtable3;
     *(unsigned char **)(newFunction + 0x38) = typeTmp1MaxArraySize;
     *(unsigned char **)(newFunction + 0x3c) = typeTmp1Word20OrPubType;
@@ -5778,11 +5782,11 @@ LAB_97ba8824:
       ;
       typeTmp1TypeNameOrStr2Alloc = (unsigned char *)&PTR___ZN5TTypeD1Ev_a7b7d640;
       typeTmp2VtableOrPubArray = (unsigned char *)0x0;
-      typeTmp1Word14OrStr2Data = (unsigned char *)0x0;
-      typeTmp1Word18OrPubLine = (unsigned char *)0x0;
+      typeAt840ArraySize = (unsigned char *)0x0;
+      typeAt840Structure = (unsigned char *)0x0;
       typeTmp1MaxArraySize = (unsigned char *)0x0;
       typeTmp1Word20OrPubType = (unsigned char *)0x0;
-      typeTmp1BitsOrPubQualifier = (unsigned char *)0x0;
+      typeAt840Word14 = (unsigned char *)0x0;
       pubSize = (unsigned char *)0x0;
       pubMatrix = (unsigned char *)0x0;
       picBase = (unsigned char *)0xa7b8374c;
@@ -6058,11 +6062,11 @@ LAB_97bab5f4:
       ;
       typeTmp1TypeNameOrStr2Alloc = (unsigned char *)&PTR___ZN5TTypeD1Ev_a7b7d640;
       typeTmp2VtableOrPubArray = (unsigned char *)0x0;
-      typeTmp1Word14OrStr2Data = (unsigned char *)0x0;
-      typeTmp1Word18OrPubLine = (unsigned char *)0x0;
+      typeAt840ArraySize = (unsigned char *)0x0;
+      typeAt840Structure = (unsigned char *)0x0;
       typeTmp1MaxArraySize = (unsigned char *)0x0;
       typeTmp1Word20OrPubType = (unsigned char *)0x0;
-      typeTmp1BitsOrPubQualifier = (unsigned char *)0x0;
+      typeAt840Word14 = (unsigned char *)0x0;
       pubSize = (unsigned char *)0x0;
       pubMatrix = (unsigned char *)0x0;
       picBase = (unsigned char *)0xa7b8374c;
