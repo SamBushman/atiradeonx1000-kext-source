@@ -6,7 +6,7 @@ local	_PPCRuntimeCompilerBackupRegister	piVar13	usedFlags	INFERRED	cursor into c
 local	_PPCRuntimeCompilerBackupRegister	local_60	componentUsedFlags	INFERRED	1 for every source component referenced by the register's swizzle
 local	_PPCRuntimeCompilerBackupRegister	piVar9	flagCursor	INFERRED	scans the following components' used flags
 local	_PPCRuntimeCompilerBackupRegister	uVar7	scanIndex	INFERRED	index of the component checked for being used
-local	_PPCRuntimeCompilerBackupRegister	iVar10	vectorModeOrCmp	INFERRED	0, then the memcmp of two descriptors, then the vector-mode flag (compiler+0xe4c)
+local	_PPCRuntimeCompilerBackupRegister	iVar10	vectorModeLoaded	INFERRED	second vector-mode register: loaded from compiler+0x393 for the bank/store decisions; in the descriptor-compare loop the same variable first holds 0 and the _memcmp result and those definitions reach the later tests along paths that skip the load (find_webs: one web)
 local	_PPCRuntimeCompilerBackupRegister	iVar15	regsLeft	INFERRED	down-counter of registers left to examine in the bank
 local	_PPCRuntimeCompilerBackupRegister	iVar18	recordOffset	INFERRED	register index * 0x38: byte offset of its record
 local	_PPCRuntimeCompilerBackupRegister	uVar20	bankIndex	INFERRED	0 = scalar bank, 1 = vector bank

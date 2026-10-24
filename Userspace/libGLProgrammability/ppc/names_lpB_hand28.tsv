@@ -1,7 +1,6 @@
 local	_InterpreterRasterOpMachine_Blending	fVar1	clampValue	INFERRED	value kept by the fsel-style clamp of the current colour component
 local	_InterpreterRasterOpMachine_Blending	fVar2	clampLimit1	INFERRED	0.0/1.0 clamp limit loaded for the next component compare
 local	_InterpreterRasterOpMachine_Blending	fVar3	clampLimit2	INFERRED	0.0/1.0 clamp limit loaded for the next component compare
-local	_InterpreterRasterOpMachine_Blending	fVar4	clampLimit3OrValue	INFERRED	clamp limit, also the value kept by the first clamp
 local	_InterpreterRasterOpMachine_Blending	local_30	clampValueCarry	INFERRED	previous clampValue carried across the clamp steps (stack spill of the fsel result)
 local	GetChunkForSymbol	param_2	shaderStage	INFERRED	TPPStreamCompiler+0x3c: 0 selects the vertex-stage chunk kinds in GetBuiltInChunkForSymbol
 local	GetChunkForSymbol	bVar1	isTypedKind	INFERRED	chunk kind carries a stream type / width (kinds 0, 2, 3, 4)

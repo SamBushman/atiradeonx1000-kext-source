@@ -2255,13 +2255,16 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
   float *dstColor;
   float *result;
 {
+  float selectedFactorB;
+  float clampLowerLimitB;
+  float clampUpperLimitA;
   float srcComponent3;
   float srcComponent2;
   float srcComponent;
   float clampValue;
   float clampLimit1;
   float clampLimit2;
-  float clampLimit3OrValue;
+  float clampValueSelect;
   int emulator;
   uint framebufferFormat;
   uint blendState;
@@ -2285,12 +2288,12 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
   clampLimit1 = FLOAT_97c3acd8;
   if ((framebufferFormat & 0x8000000) == 0) {
     srcComponent2 = *srcColor;
-    clampLimit3OrValue = srcComponent2;
+    clampValueSelect = srcComponent2;
     if (FLOAT_97c3acd8 <= srcComponent2) {
       srcComponent2 = 1.0;
-      clampLimit3OrValue = clampValueCarry;
+      clampValueSelect = clampValueCarry;
     }
-    clampValueCarry = clampLimit3OrValue;
+    clampValueCarry = clampValueSelect;
     srcComponent3 = srcColor[1];
     *srcColor = srcComponent2;
     clampLimit2 = FLOAT_97c3acd8;
@@ -2302,7 +2305,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     clampValueCarry = clampValue;
     srcComponent = srcColor[2];
     srcColor[1] = srcComponent3;
-    clampLimit3OrValue = FLOAT_97c3acd8;
+    clampUpperLimitA = FLOAT_97c3acd8;
     clampValue = srcComponent;
     if (clampLimit2 <= srcComponent) {
       srcComponent = 1.0;
@@ -2313,7 +2316,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     srcColor[2] = srcComponent;
     clampLimit1 = TAllocation__guardBlockSize;
     clampValue = srcComponent2;
-    if (clampLimit3OrValue <= srcComponent2) {
+    if (clampUpperLimitA <= srcComponent2) {
       srcComponent2 = 1.0;
       clampValue = clampValueCarry;
     }
@@ -2329,7 +2332,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     clampValueCarry = clampValue;
     srcComponent = srcColor[1];
     *srcColor = srcComponent3;
-    clampLimit3OrValue = TAllocation__guardBlockSize;
+    clampLowerLimitB = TAllocation__guardBlockSize;
     clampValue = srcComponent;
     if (srcComponent <= clampLimit2) {
       srcComponent = 0.0;
@@ -2340,7 +2343,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     srcColor[1] = srcComponent;
     clampLimit1 = TAllocation__guardBlockSize;
     clampValue = srcComponent2;
-    if (srcComponent2 <= clampLimit3OrValue) {
+    if (srcComponent2 <= clampLowerLimitB) {
       srcComponent2 = 0.0;
       clampValue = clampValueCarry;
     }
@@ -2379,7 +2382,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     result[1] = srcColor[1] * srcFactorG - dstColor[1] * dstFactorG;
     srcComponent = dstColor[2];
     srcComponent2 = srcColor[2];
-    clampLimit3OrValue = dstFactorB;
+    selectedFactorB = dstFactorB;
     dstFactorB = srcFactorB;
     break;
   case 2:
@@ -2387,7 +2390,7 @@ int _InterpreterRasterOpMachine_Blending(machine, srcColor, dstColor, result)
     result[1] = dstColor[1] * dstFactorG - srcColor[1] * srcFactorG;
     srcComponent = srcColor[2];
     srcComponent2 = dstColor[2];
-    clampLimit3OrValue = srcFactorB;
+    selectedFactorB = srcFactorB;
     break;
   case 3:
     srcComponent = *dstColor;
@@ -2426,7 +2429,7 @@ LAB_97bd72c0:
   default:
     goto switchD_97bd7128_default;
   }
-  srcComponent = srcComponent2 * dstFactorB - srcComponent * clampLimit3OrValue;
+  srcComponent = srcComponent2 * dstFactorB - srcComponent * selectedFactorB;
 LAB_97bd7230:
   result[2] = srcComponent;
 switchD_97bd7128_default:
@@ -3402,7 +3405,7 @@ int _PPCRuntimeCompilerBackupRegister(compiler, regIndex)
   uint scanIndex;
   uint *codeCursor4;
   int *flagCursor;
-  int vectorModeOrCmp;
+  int vectorModeLoaded;
   int *regRecord;
   uint nextComponent;
   int *usedFlags;
@@ -3461,7 +3464,7 @@ LAB_97bd8c50:
       loopIndex = loopIndex + 1;
       regRecord = regRecord + 0xe;
     } while (loopIndex < 0x20);
-    vectorModeOrCmp = 0;
+    vectorModeLoaded = 0;
     if (vectorMode != 0) {
       vectorRegIndex = regIndex - 0x20;
       loopIndex2 = 0;
@@ -3470,7 +3473,7 @@ LAB_97bd8c50:
       do {
         if (((loopIndex2 != vectorRegIndex) && (regRecord[0x1c0] == 0)) &&
            ((regRecord[0x1cb] != 0 &&
-            ((vectorModeOrCmp = _memcmp(regRecord[0x1c2],compiler[regIndex * 0xe + 2],0x10), vectorModeOrCmp == 0 &&
+            ((vectorModeLoaded = _memcmp(regRecord[0x1c2],compiler[regIndex * 0xe + 2],0x10), vectorModeLoaded == 0 &&
              (*(short *)(regRecord + 0x1c6) == *(short *)(compiler + regIndex * 0xe + 6))))))) {
           identitySwizzle = 0x10203;
           if (((uint)compiler[vectorRegIndex * 0xe + 0x1c4] >> 8 !=
@@ -3607,9 +3610,9 @@ LAB_97bd9024:
         loopIndex2 = loopIndex2 + 1;
         regRecord = regRecord + 0xe;
       } while (loopIndex2 < 0x20);
-      vectorModeOrCmp = compiler[0x393];
+      vectorModeLoaded = compiler[0x393];
     }
-    if (((vectorModeOrCmp != 0) && (*(short *)(compiler + regIndex * 0xe + 6) == 0)) &&
+    if (((vectorModeLoaded != 0) && (*(short *)(compiler + regIndex * 0xe + 6) == 0)) &&
        ((*(char *)(compiler + regIndex * 0xe + 4) == -1 ||
         (((*(char *)((int)compiler + recordOffset + 0x11) == -1 ||
           (*(char *)((int)compiler + recordOffset + 0x12) == -1)) ||
@@ -3624,11 +3627,11 @@ LAB_97bd9024:
         ((int (*)())_PPCRuntimeCompilerDirtyRegister)(compiler,regIndex - 0x20);
         return;
       }
-      vectorModeOrCmp = compiler[0x393];
+      vectorModeLoaded = compiler[0x393];
     }
-    bankIndex = (uint)(vectorModeOrCmp != 0);
+    bankIndex = (uint)(vectorModeLoaded != 0);
     bankFirstReg = bankIndex * 0x20;
-    if (vectorModeOrCmp == 0) {
+    if (vectorModeLoaded == 0) {
       registerLimit = 0x20;
     }
     else {
@@ -3650,7 +3653,7 @@ LAB_97bd9024:
       } while (regsLeft != 0);
       if (foundCandidate) {
         if ((*(short *)(compiler + candidateReg * 0xe + 6) == 0) && (compiler[candidateReg * 0xe] == 0)) {
-          if (vectorModeOrCmp == 0) {
+          if (vectorModeLoaded == 0) {
             ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(compiler,candidateReg);
           }
           else {
@@ -3662,9 +3665,9 @@ LAB_97bd9024:
                                 compiler[candidateReg * 0xe + 8]);
             *(undefined4 *)(variableInfo2 + 4) = 1;
           }
-          vectorModeOrCmp = compiler[0x393];
+          vectorModeLoaded = compiler[0x393];
         }
-        if (vectorModeOrCmp == 0) {
+        if (vectorModeLoaded == 0) {
           recordWord7 = compiler[regIndex * 0xe + 7];
           targetReg = candidateReg;
         }
@@ -3692,7 +3695,7 @@ LAB_97bd9024:
       }
     }
     if (*(short *)(compiler + regIndex * 0xe + 6) == 0) {
-      if (vectorModeOrCmp != 0) {
+      if (vectorModeLoaded != 0) {
         regIndex = regIndex - 0x20;
       }
       ((int (*)())_PPCRuntimeCompilerSaveRegisterToMemory)(compiler,regIndex);
