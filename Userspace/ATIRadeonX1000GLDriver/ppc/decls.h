@@ -479,7 +479,7 @@ extern int FUN_00029c00();
 extern int FUN_0002a260();
 extern int gld_drawPixelsFromClientSurface();
 extern int noop_2b3b0();
-extern int FUN_0002b3c0();
+extern int gld_sumQueryCounters();
 extern int _gldGetQueryInfo();
 extern void FUN_0002b740(int param_1,int *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9);
 extern int FUN_0002b7f0();

@@ -22,7 +22,7 @@ for p in range(a, b + 1):
         if cur: funcs[cur].append(l)
     for fn, ls in funcs.items():
         t = ''.join(ls)
-        offs = [int(o, 16) for o in re.findall(r'\bparam_1 \+ (0x[0-9a-f]+)', t)]
+        offs = [int(o, 16) for o in re.findall(r'\b(?:param_1|ctx|glContext) \+ (0x[0-9a-f]+)', t)]
         big = [o for o in offs if o >= 0x100]
         hit = [o for o in big if o in FLD]
         if not (len(big) >= 3 and len(hit) / len(big) >= 0.7): continue

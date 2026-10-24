@@ -566,8 +566,8 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 2b388	2b390	padding	gld_drawPixelsFromClientSurface	2	
 2b3a4	2b3b0	padding	gld_drawPixelsFromClientSurface	3	
 2b3b4	2b3c0	padding	noop_2b3b0	3	
-2b508	2b510	padding	FUN_0002b3c0	2	
-2b598	2b5a0	padding	FUN_0002b3c0	2	
+2b508	2b510	padding	gld_sumQueryCounters	2	
+2b598	2b5a0	padding	gld_sumQueryCounters	2	
 2b68c	2b690	padding	_gldGetQueryInfo	1	
 2b738	2b740	padding	_gldGetQueryInfo	2	
 2b7ec	2b7f0	padding	FUN_0002b740	1	

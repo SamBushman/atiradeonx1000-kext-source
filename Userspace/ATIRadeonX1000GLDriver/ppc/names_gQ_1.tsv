@@ -1291,3 +1291,120 @@ use	dxtDecompressImage	uVar12	pixelInBlock	CONFIRMED	columnInBlock + rowInBlock*
 use	dxtDecompressImage	uVar12	pixelInBlock	CONFIRMED	columnInBlock + rowInBlock*4: pixel number inside the 4x4 block	^\s*uVar12\ =\ uVar4\ >>\ \(\(uVar12\ \+\ \(\(\(int\)uVar12\ >>\ 3\)\ \+$	^\s*if\ \(uVar5\ <=\ uVar7\)\ \{$	rhs	none
 use	dxtDecompressImage	uVar12	alphaIndex	CONFIRMED	the pixel's 3-bit DXT5 alpha index	^\s*uVar12\ =\ uVar4\ >>\ \(\(uVar12\ \+\ \(\(\(int\)uVar12\ >>\ 3\)\ \+$	^\s*\(uint\)\(\(int\)uVar12\ <\ 0\ \&\&\ \(uVar12\ \&\ 7\)\ !=\ 0\)\)\ \*\ \-8\)\ \*\ 3$	lhs	none
 use	dxtDecompressImage	uVar12	alphaIndex	CONFIRMED	the pixel's 3-bit DXT5 alpha index	^\s*if\ \(uVar5\ <=\ uVar7\)\ \{$	^\s*>>\ 0x22\);$	all	none
+local	dxt5EncodeAlphaBlock	param_1	rgbaBlock	CONFIRMED	4x4 block of RGBA8 source pixels (16 pixels, 4 bytes each, alpha at +3)
+local	dxt5EncodeAlphaBlock	param_2	dstBlock	CONFIRMED	8-byte DXT5 alpha block written here; the function returns dstBlock + 8
+use	dxt5EncodeAlphaBlock	iVar3	pixelCursor	CONFIRMED	walks the 16 source pixels in the min/max scan	^\s*iVar3\ =\ param_1;$	+1
+use	dxt5EncodeAlphaBlock	iVar3	pixelCursor	CONFIRMED	walks the 16 source pixels in the min/max scan	^\s*uVar2\ =\ \(uint\)\*\(byte\ \*\)\(iVar3\ \+\ 3\);$	+2
+use	dxt5EncodeAlphaBlock	iVar3	blockRow	CONFIRMED	row (0..3) of the 4x4 block in the index search	^\s*iVar3\ =\ 0;$	+1
+use	dxt5EncodeAlphaBlock	iVar3	blockRow	CONFIRMED	row (0..3) of the 4x4 block in the index search	^\s*piVar6\ =\ local_70\ \+\ iVar3\ \*\ 4;$	+2
+use	dxt5EncodeAlphaBlock	iVar3	blockRow	CONFIRMED	row (0..3) of the 4x4 block in the index search	^\s*bVar1\ =\ iVar3\ !=\ 3;$	+2
+use	dxt5EncodeAlphaBlock	iVar10	pixelsLeft	CONFIRMED	countdown from 16 in the min/max scan	^\s*iVar10\ =\ 0x10;$	+1
+use	dxt5EncodeAlphaBlock	iVar10	pixelsLeft	CONFIRMED	countdown from 16 in the min/max scan	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2
+use	dxt5EncodeAlphaBlock	iVar10	blockColumn	CONFIRMED	column (0..3) of the 4x4 block in the index search	^\s*iVar10\ =\ 0;$	+1
+use	dxt5EncodeAlphaBlock	iVar10	blockColumn	CONFIRMED	column (0..3) of the 4x4 block in the index search	^\s*bVar1\ =\ iVar10\ !=\ 3;$	+1
+use	dxt5EncodeAlphaBlock	iVar10	blockColumn	CONFIRMED	column (0..3) of the 4x4 block in the index search	^\s*iVar10\ =\ iVar10\ \+\ 1;$	+1
+local	dxt5EncodeAlphaBlock	uVar2	alpha	CONFIRMED	alpha byte of the pixel being scanned
+use	dxt5EncodeAlphaBlock	uVar8	minAlpha	CONFIRMED	smallest alpha in the block (starts at 255)	^\s*uVar8\ =\ 0xff;$	+1
+use	dxt5EncodeAlphaBlock	uVar8	minAlpha	CONFIRMED	smallest alpha in the block (starts at 255)	^\s*if\ \(uVar2\ <\ uVar8\)\ \{$	+2
+use	dxt5EncodeAlphaBlock	uVar8	minAlpha	CONFIRMED	smallest alpha in the block (starts at 255)	^\s*if\ \(uVar8\ ==\ 0\)\ \{$	+1
+use	dxt5EncodeAlphaBlock	uVar8	minAlpha	CONFIRMED	smallest alpha in the block (starts at 255)	^\s*local_78\[0\]\ =\ \(byte\)uVar8;$	+1
+use	dxt5EncodeAlphaBlock	uVar8	minAlpha	CONFIRMED	smallest alpha in the block (starts at 255)	^\s*local_78\[3\]\ =\ \(char\)\(\(uVar8\ \*\ 3\ \+\ uVar9\ \*\ 2\)\ /\ 5\);$	+4
+use	dxt5EncodeAlphaBlock	uVar8	minAlpha	CONFIRMED	smallest alpha in the block (starts at 255)	^\s*local_78\[1\]\ =\ \(byte\)uVar8;$	+7
+use	dxt5EncodeAlphaBlock	uVar8	bestDelta	INFERRED	smallest (palette entry - alpha) found so far for the current pixel (starts at 255)	^\s*uVar8\ =\ 0xff;$@2	+1
+use	dxt5EncodeAlphaBlock	uVar8	bestDelta	INFERRED	smallest (palette entry - alpha) found so far for the current pixel (starts at 255)	^\s*if\ \(\(uint\)local_78\[iVar4\]\ \-\ \(uint\)\*pbVar7\ <\ uVar8\)\ \{$	+1
+use	dxt5EncodeAlphaBlock	uVar8	bestDelta	INFERRED	smallest (palette entry - alpha) found so far for the current pixel (starts at 255)	^\s*uVar8\ =\ \(uint\)local_78\[iVar4\]\ \-\ \(uint\)\*pbVar7;$	+1
+local	dxt5EncodeAlphaBlock	uVar9	maxAlpha	CONFIRMED	largest alpha in the block (starts at 0)
+local	dxt5EncodeAlphaBlock	piVar6	indexCursor	CONFIRMED	next slot of alphaIndices to fill
+local	dxt5EncodeAlphaBlock	pbVar7	alphaCursor	CONFIRMED	alpha byte of the pixel whose palette index is being chosen (stepped 4 bytes per column)
+local	dxt5EncodeAlphaBlock	iVar5	bestIndex	CONFIRMED	palette index chosen for the current pixel
+local	dxt5EncodeAlphaBlock	iVar4	paletteIndex	CONFIRMED	palette entry being compared
+local	dxt5EncodeAlphaBlock	iVar11	paletteLeft	CONFIRMED	countdown from 8 over the palette entries
+use	dxt5EncodeAlphaBlock	bVar1	moreColumns	CONFIRMED	column != 3: the column loop continues	^\s*bVar1\ =\ iVar10\ !=\ 3;$	+1
+use	dxt5EncodeAlphaBlock	bVar1	moreColumns	CONFIRMED	column != 3: the column loop continues	^\s*\}\ while\ \(bVar1\);$	+1
+use	dxt5EncodeAlphaBlock	bVar1	moreRows	CONFIRMED	row != 3: the row loop continues	^\s*bVar1\ =\ iVar3\ !=\ 3;$	+1
+use	dxt5EncodeAlphaBlock	bVar1	moreRows	CONFIRMED	row != 3: the row loop continues	^\s*\}\ while\ \(bVar1\);$@2	+1
+local	dxt5EncodeAlphaBlock	local_78	alphaPalette	CONFIRMED	8-entry DXT5 alpha palette; entries 0-3 here (entries 4-7 are the next frame slots, indexed past this array as decompiled)
+use	dxt5EncodeAlphaBlock	local_74	alphaPalette4	CONFIRMED	alpha palette entry 4	^\s*local_74\ =\ \(char\)\(\(uVar8\ \*\ 2\ \+\ uVar9\ \*\ 3\)\ /\ 5\);$	+1
+use	dxt5EncodeAlphaBlock	local_74	alphaPalette4	CONFIRMED	alpha palette entry 4	^\s*local_74\ =\ \(char\)\(\(uVar9\ \*\ 4\ \+\ uVar8\ \*\ 3\)\ /\ 7\);$	+1
+use	dxt5EncodeAlphaBlock	local_73	alphaPalette5	CONFIRMED	alpha palette entry 5	^\s*local_73\ =\ \(char\)\(\(uVar8\ \+\ uVar9\ \*\ 4\)\ /\ 5\);$	+1
+use	dxt5EncodeAlphaBlock	local_73	alphaPalette5	CONFIRMED	alpha palette entry 5	^\s*local_73\ =\ \(char\)\(\(uVar9\ \*\ 3\ \+\ uVar8\ \*\ 4\)\ /\ 7\);$	+1
+use	dxt5EncodeAlphaBlock	local_72	alphaPalette6	CONFIRMED	alpha palette entry 6 (0 in the 6-value mode)	^\s*local_72\ =\ 0;$	+1
+use	dxt5EncodeAlphaBlock	local_72	alphaPalette6	CONFIRMED	alpha palette entry 6 (0 in the 6-value mode)	^\s*local_72\ =\ \(char\)\(\(uVar9\ \*\ 2\ \+\ uVar8\ \*\ 5\)\ /\ 7\);$	+1
+use	dxt5EncodeAlphaBlock	local_71	alphaPalette7	CONFIRMED	alpha palette entry 7 (255 in the 6-value mode)	^\s*local_71\ =\ 0xff;$	+1
+use	dxt5EncodeAlphaBlock	local_71	alphaPalette7	CONFIRMED	alpha palette entry 7 (255 in the 6-value mode)	^\s*local_71\ =\ \(char\)\(\(uVar9\ \+\ uVar8\ \*\ 6\)\ /\ 7\);$	+1
+local	dxt5EncodeAlphaBlock	local_70	alphaIndices	CONFIRMED	16 three-bit palette indices of the block; entries 0-3 here (4-15 are the following frame slots)
+local	dxt5EncodeAlphaBlock	local_60	alphaIndex4	CONFIRMED	palette index of pixel 4, packed into the output block
+local	dxt5EncodeAlphaBlock	local_5c	alphaIndex5	CONFIRMED	palette index of pixel 5, packed into the output block
+local	dxt5EncodeAlphaBlock	local_58	alphaIndex6	CONFIRMED	palette index of pixel 6, packed into the output block
+local	dxt5EncodeAlphaBlock	local_54	alphaIndex7	CONFIRMED	palette index of pixel 7, packed into the output block
+local	dxt5EncodeAlphaBlock	local_50	alphaIndex8	CONFIRMED	palette index of pixel 8, packed into the output block
+local	dxt5EncodeAlphaBlock	local_4c	alphaIndex9	CONFIRMED	palette index of pixel 9, packed into the output block
+local	dxt5EncodeAlphaBlock	local_48	alphaIndex10	CONFIRMED	palette index of pixel 10, packed into the output block
+local	dxt5EncodeAlphaBlock	local_44	alphaIndex11	CONFIRMED	palette index of pixel 11, packed into the output block
+local	dxt5EncodeAlphaBlock	local_40	alphaIndex12	CONFIRMED	palette index of pixel 12, packed into the output block
+local	dxt5EncodeAlphaBlock	local_3c	alphaIndex13	CONFIRMED	palette index of pixel 13, packed into the output block
+local	dxt5EncodeAlphaBlock	local_38	alphaIndex14	CONFIRMED	palette index of pixel 14, packed into the output block
+local	dxt5EncodeAlphaBlock	local_34	alphaIndex15	CONFIRMED	palette index of pixel 15, packed into the output block
+local	FUN_0002b3c0	param_1	ctx	INFERRED	GL context: +0x224 query pool, +0x154 render flags, +0x2610 pipe count
+local	FUN_0002b3c0	param_2	queryHandle	INFERRED	pointer to the query's slot index: the slot is queryPool + index*8 words + 0x84 words
+local	FUN_0002b3c0	uVar1	endianBits	INFERRED	ctx renderFlags & 0x30000: 0x10000 means the counters are stored with swapped 16-bit halves
+local	FUN_0002b3c0	uVar7	pipeCount	INFERRED	number of pipe counters to sum (ctx+0x2610; 2 when it reads 1 and ctx+0x261c is 2)
+local	FUN_0002b3c0	piVar12	queryPool	INFERRED	ctx+0x224: pool whose first word flags a pending 16-entry running total and whose entries hold per-pipe counters
+use	FUN_0002b3c0	puVar10	resultSlot	INFERRED	this query's counter slot (5 words used: lanes at [0],[4],[2],[3], extra at [1])	^\s*puVar10\ =\ \(uint\ \*\)\(piVar12\ \+\ \*param_2\ \*\ 8\ \+\ 0x84\);$	+1
+use	FUN_0002b3c0	puVar10	resultSlot	INFERRED	this query's counter slot (5 words used: lanes at [0],[4],[2],[3], extra at [1])	^\s*uVar5\ =\ \*puVar10\ <<\ 0x10\ \|\ \*puVar10\ >>\ 0x10;$	+4
+use	FUN_0002b3c0	puVar10	resultSlot	INFERRED	this query's counter slot (5 words used: lanes at [0],[4],[2],[3], extra at [1])	^\s*uVar5\ =\ \*puVar10;$	+4
+use	FUN_0002b3c0	puVar10	resultSlot	INFERRED	this query's counter slot (5 words used: lanes at [0],[4],[2],[3], extra at [1])	^\s*uVar9\ =\ puVar10\[1\];$	+1
+use	FUN_0002b3c0	puVar10	poolEntryCursor	INFERRED	walks the 16 pool entries (8 words each) of the running total	^\s*puVar10\ =\ \(uint\ \*\)\(piVar12\ \+\ 4\);$	+1
+use	FUN_0002b3c0	puVar10	poolEntryCursor	INFERRED	walks the 16 pool entries (8 words each) of the running total	^\s*uVar2\ =\ \*puVar10\ <<\ 0x10\ \|\ \*puVar10\ >>\ 0x10;$	+4
+use	FUN_0002b3c0	puVar10	poolEntryCursor	INFERRED	walks the 16 pool entries (8 words each) of the running total	^\s*uVar2\ =\ \*puVar10;$	+4
+use	FUN_0002b3c0	puVar10	poolEntryCursor	INFERRED	walks the 16 pool entries (8 words each) of the running total	^\s*puVar10\ =\ puVar10\ \+\ 8;$	+1
+local	FUN_0002b3c0	uVar5	sumLow	INFERRED	low word of the 64-bit sum of the query's lane counters (starts as lane 0)
+local	FUN_0002b3c0	uVar4	sumHigh	INFERRED	high word of the 64-bit sum (carries); a non-zero high word saturates the result to 0xffffffff
+use	FUN_0002b3c0	uVar8	lane1	INFERRED	second pipe counter of the slot (word 4)	^\s*uVar8\ =\ puVar10\[4\]\ <<\ 0x10\ \|\ puVar10\[4\]\ >>\ 0x10;$	+1
+use	FUN_0002b3c0	uVar8	lane1	INFERRED	second pipe counter of the slot (word 4)	^\s*uVar8\ =\ puVar10\[4\];$	+1
+use	FUN_0002b3c0	uVar8	lane1	INFERRED	second pipe counter of the slot (word 4)	^\s*bVar13\ =\ CARRY4\(uVar5,uVar8\);$	+2
+use	FUN_0002b3c0	uVar2	lane2	INFERRED	third pipe counter of the slot (word 2)	^\s*uVar2\ =\ puVar10\[2\]\ <<\ 0x10\ \|\ puVar10\[2\]\ >>\ 0x10;$	+1
+use	FUN_0002b3c0	uVar2	lane2	INFERRED	third pipe counter of the slot (word 2)	^\s*uVar2\ =\ puVar10\[2\];$	+1
+use	FUN_0002b3c0	uVar2	lane2	INFERRED	third pipe counter of the slot (word 2)	^\s*bVar13\ =\ CARRY4\(uVar5,uVar2\);$	+2
+use	FUN_0002b3c0	uVar3	lane3	INFERRED	fourth pipe counter of the slot (word 3)	^\s*uVar3\ =\ puVar10\[3\]\ <<\ 0x10\ \|\ puVar10\[3\]\ >>\ 0x10;$	+1
+use	FUN_0002b3c0	uVar3	lane3	INFERRED	fourth pipe counter of the slot (word 3)	^\s*uVar3\ =\ puVar10\[3\];$	+1
+use	FUN_0002b3c0	uVar3	lane3	INFERRED	fourth pipe counter of the slot (word 3)	^\s*bVar13\ =\ CARRY4\(uVar5,uVar3\);$	+2
+use	FUN_0002b3c0	uVar9	extraCount	INFERRED	word 1 of the slot, added when non-zero	^\s*uVar9\ =\ puVar10\[1\];$	+1
+use	FUN_0002b3c0	uVar9	extraCount	INFERRED	word 1 of the slot, added when non-zero	^\s*if\ \(uVar9\ !=\ 0\)\ \{$	+3
+use	FUN_0002b3c0	uVar8	entrySumLow	INFERRED	low word of the sum over the 16 pool entries	^\s*uVar8\ =\ 0;$	+1
+use	FUN_0002b3c0	uVar8	entrySumLow	INFERRED	low word of the sum over the 16 pool entries	^\s*bVar13\ =\ CARRY4\(uVar8,uVar2\);$	+2
+use	FUN_0002b3c0	uVar8	entrySumLow	INFERRED	low word of the sum over the 16 pool entries	^\s*bVar13\ =\ CARRY4\(uVar8,uVar3\);$	+2
+use	FUN_0002b3c0	uVar8	entrySumLow	INFERRED	low word of the sum over the 16 pool entries	^\s*bVar13\ =\ CARRY4\(uVar8,uVar9\);$	+2
+use	FUN_0002b3c0	uVar8	entrySumLow	INFERRED	low word of the sum over the 16 pool entries	^\s*bVar13\ =\ CARRY4\(uVar8,uVar11\);$	+2
+use	FUN_0002b3c0	uVar8	entrySumLow	INFERRED	low word of the sum over the 16 pool entries	^\s*bVar13\ =\ CARRY4\(uVar5,uVar8\);$@2	+2
+local	FUN_0002b3c0	iVar6	entrySumHigh	INFERRED	high word (carries) of the sum over the 16 pool entries
+use	FUN_0002b3c0	uVar2	entryLane0	INFERRED	pool entry counter, lane 0	^\s*uVar2\ =\ \*puVar10\ <<\ 0x10\ \|\ \*puVar10\ >>\ 0x10;$	+1
+use	FUN_0002b3c0	uVar2	entryLane0	INFERRED	pool entry counter, lane 0	^\s*uVar2\ =\ \*puVar10;$	+1
+use	FUN_0002b3c0	uVar2	entryLane0	INFERRED	pool entry counter, lane 0	^\s*bVar13\ =\ CARRY4\(uVar8,uVar2\);$	+2
+use	FUN_0002b3c0	uVar3	entryLane1	INFERRED	pool entry counter, lane 1	^\s*uVar3\ =\ puVar10\[4\]\ <<\ 0x10\ \|\ puVar10\[4\]\ >>\ 0x10;$	+1
+use	FUN_0002b3c0	uVar3	entryLane1	INFERRED	pool entry counter, lane 1	^\s*uVar3\ =\ puVar10\[4\];$	+1
+use	FUN_0002b3c0	uVar3	entryLane1	INFERRED	pool entry counter, lane 1	^\s*bVar13\ =\ CARRY4\(uVar8,uVar3\);$	+2
+use	FUN_0002b3c0	uVar9	entryLane2	INFERRED	pool entry counter, lane 2	^\s*uVar9\ =\ puVar10\[2\]\ <<\ 0x10\ \|\ puVar10\[2\]\ >>\ 0x10;$	+1
+use	FUN_0002b3c0	uVar9	entryLane2	INFERRED	pool entry counter, lane 2	^\s*uVar9\ =\ puVar10\[2\];$	+1
+use	FUN_0002b3c0	uVar9	entryLane2	INFERRED	pool entry counter, lane 2	^\s*bVar13\ =\ CARRY4\(uVar8,uVar9\);$	+2
+local	FUN_0002b3c0	uVar11	entryLane3	INFERRED	pool entry counter, lane 3
+local	FUN_0002b3c0	iVar14	entriesLeft	INFERRED	countdown from 16 pool entries
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*bVar13\ =\ CARRY4\(uVar5,uVar8\);$	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*uVar4\ =\ \(uint\)bVar13;$	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*bVar13\ =\ CARRY4\(uVar5,uVar2\);$	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*uVar4\ =\ uVar4\ \+\ bVar13;$	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*bVar13\ =\ CARRY4\(uVar5,uVar3\);$	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*uVar4\ =\ uVar4\ \+\ bVar13;$@2	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*bVar13\ =\ CARRY4\(uVar5,uVar9\);$	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*uVar4\ =\ uVar4\ \+\ bVar13;$@3	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*bVar13\ =\ CARRY4\(uVar8,uVar2\);$	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*iVar6\ =\ iVar6\ \+\ \(uint\)bVar13;$	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*bVar13\ =\ CARRY4\(uVar8,uVar3\);$	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*iVar6\ =\ iVar6\ \+\ \(uint\)bVar13;$@2	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*bVar13\ =\ CARRY4\(uVar8,uVar9\);$	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*iVar6\ =\ iVar6\ \+\ \(uint\)bVar13;$@3	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*bVar13\ =\ CARRY4\(uVar8,uVar11\);$	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*iVar6\ =\ iVar6\ \+\ \(uint\)bVar13;$@4	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*bVar13\ =\ CARRY4\(uVar5,uVar8\);$@2	+1
+use	FUN_0002b3c0	bVar13	carry	INFERRED	carry out of the 32-bit add just performed (CARRY4)	^\s*uVar4\ =\ uVar4\ \+\ iVar6\ \+\ \(uint\)bVar13;$	+1
+func	FUN_0002b3c0	gld_sumQueryCounters	INFERRED	adds the per-pipe counters of one query slot (lanes at words 0,4,2,3 up to pipeCount, plus word 1) and, when the pool's pending flag is set, the 16 pool entries, as a 64-bit sum; returns 0xffffffff when the high word is non-zero

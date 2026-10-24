@@ -273,7 +273,7 @@
 0x2a260	FUN_0002a260	356	no	indirect call (driver context / vtable / callback)
 0x2a3d0	gld_drawPixelsFromClientSurface	3968	no	atomic / cache / barrier instruction; calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x2b3b0	noop_2b3b0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x2b3c0	FUN_0002b3c0	464	yes	
+0x2b3c0	gld_sumQueryCounters	464	yes	
 0x2b5a0	_gldGetQueryInfo	404	no	calls an import (usleep)
 0x2b740	FUN_0002b740	172	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x2b7f0	FUN_0002b7f0	968	no	atomic / cache / barrier instruction

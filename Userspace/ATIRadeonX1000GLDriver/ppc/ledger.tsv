@@ -272,7 +272,7 @@
 0x2a260	356	FUN_0002a260	part_004	converted
 0x2a3d0	3968	gld_drawPixelsFromClientSurface	part_004	converted
 0x2b3b0	4	noop_2b3b0	part_004	converted
-0x2b3c0	464	FUN_0002b3c0	part_004	converted
+0x2b3c0	464	gld_sumQueryCounters	part_004	converted
 0x2b5a0	404	_gldGetQueryInfo	part_004	converted
 0x2b740	172	FUN_0002b740	part_004	converted
 0x2b7f0	968	FUN_0002b7f0	part_004	converted

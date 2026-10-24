@@ -1387,117 +1387,121 @@ int FUN_0001bac0(ctx, param_2)
 }
 
 /* dxt5EncodeAlphaBlock @ 0x1be50 (868 bytes) */
-int dxt5EncodeAlphaBlock(param_1, param_2)
-  int param_1;
-  byte *param_2;
+int dxt5EncodeAlphaBlock(rgbaBlock, dstBlock)
+  int rgbaBlock;
+  byte *dstBlock;
 {
-  bool bVar1;
-  uint uVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
-  byte *pbVar7;
-  uint uVar8;
-  uint uVar9;
-  int iVar10;
-  int iVar11;
-  byte local_78 [4];
-  undefined1 local_74;
-  undefined1 local_73;
-  undefined1 local_72;
-  undefined1 local_71;
-  int local_70 [4];
-  int local_60;
-  uint local_5c;
-  int local_58;
-  int local_54;
-  undefined4 local_50;
-  int local_4c;
-  uint local_48;
-  int local_44;
-  int local_40;
-  uint local_3c;
-  int local_38;
-  int local_34;
+  bool moreRows;
+  uint bestDelta;
+  int blockColumn;
+  int blockRow;
+  bool moreColumns;
+  uint alpha;
+  int pixelCursor;
+  int paletteIndex;
+  int bestIndex;
+  int *indexCursor;
+  byte *alphaCursor;
+  uint minAlpha;
+  uint maxAlpha;
+  int pixelsLeft;
+  int paletteLeft;
+  byte alphaPalette [4];
+  undefined1 alphaPalette4;
+  undefined1 alphaPalette5;
+  undefined1 alphaPalette6;
+  undefined1 alphaPalette7;
+  int alphaIndices [4];
+  int alphaIndex4;
+  uint alphaIndex5;
+  int alphaIndex6;
+  int alphaIndex7;
+  undefined4 alphaIndex8;
+  int alphaIndex9;
+  uint alphaIndex10;
+  int alphaIndex11;
+  int alphaIndex12;
+  uint alphaIndex13;
+  int alphaIndex14;
+  int alphaIndex15;
   
-  iVar10 = 0x10;
-  uVar8 = 0xff;
-  uVar9 = 0;
-  iVar3 = param_1;
+  pixelsLeft = 0x10;
+  minAlpha = 0xff;
+  maxAlpha = 0;
+  pixelCursor = rgbaBlock;
   do {
-    uVar2 = (uint)*(byte *)(iVar3 + 3);
-    iVar3 = iVar3 + 4;
-    if (uVar2 < uVar8) {
-      uVar8 = uVar2;
+    alpha = (uint)*(byte *)(pixelCursor + 3);
+    pixelCursor = pixelCursor + 4;
+    if (alpha < minAlpha) {
+      minAlpha = alpha;
     }
-    if (uVar9 < uVar2) {
-      uVar9 = uVar2;
+    if (maxAlpha < alpha) {
+      maxAlpha = alpha;
     }
-    iVar10 = iVar10 + -1;
-  } while (iVar10 != 0);
-  if (uVar8 == 0) {
-    if (uVar9 != 0xff) {
+    pixelsLeft = pixelsLeft + -1;
+  } while (pixelsLeft != 0);
+  if (minAlpha == 0) {
+    if (maxAlpha != 0xff) {
 LAB_0001bfec:
-      local_78[0] = (byte)uVar8;
-      local_78[1] = (byte)uVar9;
-      local_78[3] = (char)((uVar8 * 3 + uVar9 * 2) / 5);
-      local_74 = (char)((uVar8 * 2 + uVar9 * 3) / 5);
-      local_78[2] = (char)((uVar9 + uVar8 * 4) / 5);
-      local_73 = (char)((uVar8 + uVar9 * 4) / 5);
-      local_72 = 0;
-      local_71 = 0xff;
+      alphaPalette[0] = (byte)minAlpha;
+      alphaPalette[1] = (byte)maxAlpha;
+      alphaPalette[3] = (char)((minAlpha * 3 + maxAlpha * 2) / 5);
+      alphaPalette4 = (char)((minAlpha * 2 + maxAlpha * 3) / 5);
+      alphaPalette[2] = (char)((maxAlpha + minAlpha * 4) / 5);
+      alphaPalette5 = (char)((minAlpha + maxAlpha * 4) / 5);
+      alphaPalette6 = 0;
+      alphaPalette7 = 0xff;
       goto LAB_0001bf84;
     }
   }
-  else if (uVar9 == 0xff) goto LAB_0001bfec;
-  local_78[0] = (byte)uVar9;
-  local_78[1] = (byte)uVar8;
-  local_78[2] = (char)((uVar8 + uVar9 * 6) / 7);
-  local_78[3] = (char)((uVar9 * 5 + uVar8 * 2) / 7);
-  local_74 = (char)((uVar9 * 4 + uVar8 * 3) / 7);
-  local_73 = (char)((uVar9 * 3 + uVar8 * 4) / 7);
-  local_72 = (char)((uVar9 * 2 + uVar8 * 5) / 7);
-  local_71 = (char)((uVar9 + uVar8 * 6) / 7);
+  else if (maxAlpha == 0xff) goto LAB_0001bfec;
+  alphaPalette[0] = (byte)maxAlpha;
+  alphaPalette[1] = (byte)minAlpha;
+  alphaPalette[2] = (char)((minAlpha + maxAlpha * 6) / 7);
+  alphaPalette[3] = (char)((maxAlpha * 5 + minAlpha * 2) / 7);
+  alphaPalette4 = (char)((maxAlpha * 4 + minAlpha * 3) / 7);
+  alphaPalette5 = (char)((maxAlpha * 3 + minAlpha * 4) / 7);
+  alphaPalette6 = (char)((maxAlpha * 2 + minAlpha * 5) / 7);
+  alphaPalette7 = (char)((maxAlpha + minAlpha * 6) / 7);
 LAB_0001bf84:
-  iVar3 = 0;
+  blockRow = 0;
   do {
-    iVar10 = 0;
-    piVar6 = local_70 + iVar3 * 4;
-    pbVar7 = (byte *)(param_1 + iVar3 * 0x10 + 3);
+    blockColumn = 0;
+    indexCursor = alphaIndices + blockRow * 4;
+    alphaCursor = (byte *)(rgbaBlock + blockRow * 0x10 + 3);
     do {
-      uVar8 = 0xff;
-      iVar5 = 0;
-      iVar4 = 0;
-      iVar11 = 8;
+      bestDelta = 0xff;
+      bestIndex = 0;
+      paletteIndex = 0;
+      paletteLeft = 8;
       do {
-        if ((uint)local_78[iVar4] - (uint)*pbVar7 < uVar8) {
-          iVar5 = iVar4;
-          uVar8 = (uint)local_78[iVar4] - (uint)*pbVar7;
+        if ((uint)alphaPalette[paletteIndex] - (uint)*alphaCursor < bestDelta) {
+          bestIndex = paletteIndex;
+          bestDelta = (uint)alphaPalette[paletteIndex] - (uint)*alphaCursor;
         }
-        iVar4 = iVar4 + 1;
-        iVar11 = iVar11 + -1;
-      } while (iVar11 != 0);
-      bVar1 = iVar10 != 3;
-      *piVar6 = iVar5;
-      pbVar7 = pbVar7 + 4;
-      piVar6 = piVar6 + 1;
-      iVar10 = iVar10 + 1;
-    } while (bVar1);
-    bVar1 = iVar3 != 3;
-    iVar3 = iVar3 + 1;
-  } while (bVar1);
-  param_2[1] = local_78[1];
-  param_2[2] = (byte)(local_70[2] << 6) | (byte)(local_70[1] << 3) | (byte)local_70[0];
-  param_2[3] = (byte)(local_5c << 7) | (byte)(local_60 << 4) | (byte)(local_70[3] << 1) |
-               (byte)((uint)local_70[2] >> 2) & 1;
-  param_2[5] = (byte)(local_48 << 6) | (byte)(local_4c << 3) | (byte)local_50;
-  param_2[4] = (byte)(local_54 << 5) | (byte)(local_58 << 2) | (byte)(local_5c >> 1) & 3;
-  param_2[6] = (byte)(local_3c << 7) | (byte)(local_40 << 4) | (byte)(local_44 << 1) |
-               (byte)(local_48 >> 2) & 1;
-  param_2[7] = (byte)(local_34 << 5) | (byte)(local_38 << 2) | (byte)(local_3c >> 1) & 3;
-  *param_2 = local_78[0];
-  return param_2 + 8;
+        paletteIndex = paletteIndex + 1;
+        paletteLeft = paletteLeft + -1;
+      } while (paletteLeft != 0);
+      moreColumns = blockColumn != 3;
+      *indexCursor = bestIndex;
+      alphaCursor = alphaCursor + 4;
+      indexCursor = indexCursor + 1;
+      blockColumn = blockColumn + 1;
+    } while (moreColumns);
+    moreRows = blockRow != 3;
+    blockRow = blockRow + 1;
+  } while (moreRows);
+  dstBlock[1] = alphaPalette[1];
+  dstBlock[2] = (byte)(alphaIndices[2] << 6) | (byte)(alphaIndices[1] << 3) | (byte)alphaIndices[0];
+  dstBlock[3] = (byte)(alphaIndex5 << 7) | (byte)(alphaIndex4 << 4) | (byte)(alphaIndices[3] << 1) |
+               (byte)((uint)alphaIndices[2] >> 2) & 1;
+  dstBlock[5] = (byte)(alphaIndex10 << 6) | (byte)(alphaIndex9 << 3) | (byte)alphaIndex8;
+  dstBlock[4] = (byte)(alphaIndex7 << 5) | (byte)(alphaIndex6 << 2) | (byte)(alphaIndex5 >> 1) & 3;
+  dstBlock[6] = (byte)(alphaIndex13 << 7) | (byte)(alphaIndex12 << 4) | (byte)(alphaIndex11 << 1) |
+               (byte)(alphaIndex10 >> 2) & 1;
+  dstBlock[7] = (byte)(alphaIndex15 << 5) | (byte)(alphaIndex14 << 2) | (byte)(alphaIndex13 >> 1) & 3;
+  *dstBlock = alphaPalette[0];
+  return dstBlock + 8;
 }
 
 /* dxt1DecodeColorIndex @ 0x1c1c0 (416 bytes) */

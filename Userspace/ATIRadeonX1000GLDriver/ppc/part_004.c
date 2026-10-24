@@ -4999,115 +4999,120 @@ int noop_2b3b0(value)
   return value;
 }
 
-/* FUN_0002b3c0 @ 0x2b3c0 (464 bytes) */
-int FUN_0002b3c0(param_1, param_2)
-  int param_1;
-  int *param_2;
+/* gld_sumQueryCounters @ 0x2b3c0 (464 bytes) */
+int gld_sumQueryCounters(ctx, queryHandle)
+  int ctx;
+  int *queryHandle;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
-  uint uVar7;
-  uint uVar8;
-  uint uVar9;
-  uint *puVar10;
-  uint uVar11;
-  int *piVar12;
-  bool bVar13;
-  int iVar14;
+  uint entryLane2;
+  uint entryLane1;
+  uint entryLane0;
+  uint entrySumLow;
+  uint *poolEntryCursor;
+  uint endianBits;
+  uint lane2;
+  uint lane3;
+  uint sumHigh;
+  uint sumLow;
+  int entrySumHigh;
+  uint pipeCount;
+  uint lane1;
+  uint extraCount;
+  uint *resultSlot;
+  uint entryLane3;
+  int *queryPool;
+  bool carry;
+  int entriesLeft;
   
-  uVar7 = *(uint *)(param_1 + 0x2610);
-  piVar12 = *(int **)(param_1 + 0x224);
-  uVar1 = *(uint *)(param_1 + 0x154) & 0x30000;
-  puVar10 = (uint *)(piVar12 + *param_2 * 8 + 0x84);
-  if ((uVar7 == 1) && (*(int *)(param_1 + 0x261c) == 2)) {
-    uVar7 = 2;
+  pipeCount = *(uint *)(ctx + 0x2610);
+  queryPool = *(int **)(ctx + 0x224);
+  endianBits = *(uint *)(ctx + 0x154) & 0x30000;
+  resultSlot = (uint *)(queryPool + *queryHandle * 8 + 0x84);
+  if ((pipeCount == 1) && (*(int *)(ctx + 0x261c) == 2)) {
+    pipeCount = 2;
   }
-  if (uVar1 == 0x10000) {
-    uVar5 = *puVar10 << 0x10 | *puVar10 >> 0x10;
-    uVar8 = puVar10[4] << 0x10 | puVar10[4] >> 0x10;
-    uVar2 = puVar10[2] << 0x10 | puVar10[2] >> 0x10;
-    uVar3 = puVar10[3] << 0x10 | puVar10[3] >> 0x10;
+  if (endianBits == 0x10000) {
+    sumLow = *resultSlot << 0x10 | *resultSlot >> 0x10;
+    lane1 = resultSlot[4] << 0x10 | resultSlot[4] >> 0x10;
+    lane2 = resultSlot[2] << 0x10 | resultSlot[2] >> 0x10;
+    lane3 = resultSlot[3] << 0x10 | resultSlot[3] >> 0x10;
   }
   else {
-    uVar5 = *puVar10;
-    uVar8 = puVar10[4];
-    uVar2 = puVar10[2];
-    uVar3 = puVar10[3];
+    sumLow = *resultSlot;
+    lane1 = resultSlot[4];
+    lane2 = resultSlot[2];
+    lane3 = resultSlot[3];
   }
-  uVar9 = puVar10[1];
-  uVar4 = 0;
-  if (1 < uVar7) {
-    bVar13 = CARRY4(uVar5,uVar8);
-    uVar5 = uVar5 + uVar8;
-    uVar4 = (uint)bVar13;
+  extraCount = resultSlot[1];
+  sumHigh = 0;
+  if (1 < pipeCount) {
+    carry = CARRY4(sumLow,lane1);
+    sumLow = sumLow + lane1;
+    sumHigh = (uint)carry;
   }
-  if (2 < uVar7) {
-    bVar13 = CARRY4(uVar5,uVar2);
-    uVar5 = uVar5 + uVar2;
-    uVar4 = uVar4 + bVar13;
+  if (2 < pipeCount) {
+    carry = CARRY4(sumLow,lane2);
+    sumLow = sumLow + lane2;
+    sumHigh = sumHigh + carry;
   }
-  if (3 < uVar7) {
-    bVar13 = CARRY4(uVar5,uVar3);
-    uVar5 = uVar5 + uVar3;
-    uVar4 = uVar4 + bVar13;
+  if (3 < pipeCount) {
+    carry = CARRY4(sumLow,lane3);
+    sumLow = sumLow + lane3;
+    sumHigh = sumHigh + carry;
   }
-  if (uVar9 != 0) {
-    bVar13 = CARRY4(uVar5,uVar9);
-    uVar5 = uVar5 + uVar9;
-    uVar4 = uVar4 + bVar13;
+  if (extraCount != 0) {
+    carry = CARRY4(sumLow,extraCount);
+    sumLow = sumLow + extraCount;
+    sumHigh = sumHigh + carry;
   }
-  if (*piVar12 != 0) {
-    puVar10 = (uint *)(piVar12 + 4);
-    iVar6 = 0;
-    iVar14 = 0x10;
-    uVar8 = 0;
+  if (*queryPool != 0) {
+    poolEntryCursor = (uint *)(queryPool + 4);
+    entrySumHigh = 0;
+    entriesLeft = 0x10;
+    entrySumLow = 0;
     do {
-      if (uVar1 == 0x10000) {
-        uVar2 = *puVar10 << 0x10 | *puVar10 >> 0x10;
-        uVar3 = puVar10[4] << 0x10 | puVar10[4] >> 0x10;
-        uVar9 = puVar10[2] << 0x10 | puVar10[2] >> 0x10;
-        uVar11 = puVar10[3] << 0x10 | puVar10[3] >> 0x10;
+      if (endianBits == 0x10000) {
+        entryLane0 = *poolEntryCursor << 0x10 | *poolEntryCursor >> 0x10;
+        entryLane1 = poolEntryCursor[4] << 0x10 | poolEntryCursor[4] >> 0x10;
+        entryLane2 = poolEntryCursor[2] << 0x10 | poolEntryCursor[2] >> 0x10;
+        entryLane3 = poolEntryCursor[3] << 0x10 | poolEntryCursor[3] >> 0x10;
       }
       else {
-        uVar2 = *puVar10;
-        uVar3 = puVar10[4];
-        uVar9 = puVar10[2];
-        uVar11 = puVar10[3];
+        entryLane0 = *poolEntryCursor;
+        entryLane1 = poolEntryCursor[4];
+        entryLane2 = poolEntryCursor[2];
+        entryLane3 = poolEntryCursor[3];
       }
-      bVar13 = CARRY4(uVar8,uVar2);
-      uVar8 = uVar8 + uVar2;
-      iVar6 = iVar6 + (uint)bVar13;
-      if (1 < uVar7) {
-        bVar13 = CARRY4(uVar8,uVar3);
-        uVar8 = uVar8 + uVar3;
-        iVar6 = iVar6 + (uint)bVar13;
+      carry = CARRY4(entrySumLow,entryLane0);
+      entrySumLow = entrySumLow + entryLane0;
+      entrySumHigh = entrySumHigh + (uint)carry;
+      if (1 < pipeCount) {
+        carry = CARRY4(entrySumLow,entryLane1);
+        entrySumLow = entrySumLow + entryLane1;
+        entrySumHigh = entrySumHigh + (uint)carry;
       }
-      if (2 < uVar7) {
-        bVar13 = CARRY4(uVar8,uVar9);
-        uVar8 = uVar8 + uVar9;
-        iVar6 = iVar6 + (uint)bVar13;
+      if (2 < pipeCount) {
+        carry = CARRY4(entrySumLow,entryLane2);
+        entrySumLow = entrySumLow + entryLane2;
+        entrySumHigh = entrySumHigh + (uint)carry;
       }
-      if (3 < uVar7) {
-        bVar13 = CARRY4(uVar8,uVar11);
-        uVar8 = uVar8 + uVar11;
-        iVar6 = iVar6 + (uint)bVar13;
+      if (3 < pipeCount) {
+        carry = CARRY4(entrySumLow,entryLane3);
+        entrySumLow = entrySumLow + entryLane3;
+        entrySumHigh = entrySumHigh + (uint)carry;
       }
-      puVar10 = puVar10 + 8;
-      iVar14 = iVar14 + -1;
-    } while (iVar14 != 0);
-    bVar13 = CARRY4(uVar5,uVar8);
-    uVar5 = uVar5 + uVar8;
-    uVar4 = uVar4 + iVar6 + (uint)bVar13;
+      poolEntryCursor = poolEntryCursor + 8;
+      entriesLeft = entriesLeft + -1;
+    } while (entriesLeft != 0);
+    carry = CARRY4(sumLow,entrySumLow);
+    sumLow = sumLow + entrySumLow;
+    sumHigh = sumHigh + entrySumHigh + (uint)carry;
   }
-  *piVar12 = 0;
-  if (uVar4 != 0) {
+  *queryPool = 0;
+  if (sumHigh != 0) {
     return 0xffffffff;
   }
-  return uVar5;
+  return sumLow;
 }
 
 /* _gldGetQueryInfo @ 0x2b5a0 (404 bytes) */
@@ -5154,7 +5159,7 @@ int _gldGetQueryInfo(ctx, query, pname, valueOut)
       result2 = queryEntry[3];
       slot0Pending = *queryEntry == -1;
     }
-    available = ((int (*)())FUN_0002b3c0)(ctx,query);
+    available = ((int (*)())gld_sumQueryCounters)(ctx,query);
     *valueOut = available;
   }
   else if (pname == 0x8867) {
