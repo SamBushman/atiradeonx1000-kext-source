@@ -1,74 +1,76 @@
 #include "decls.h"
 
 /* IRInst__deleteIfUnused @ 0x10564c (584 bytes) */
-int IRInst__deleteIfUnused(inst, param_2, param_3)
+int IRInst__deleteIfUnused(inst, compiler, sourcesReleased)
   int *inst;
-  int param_2;
-  int param_3;
+  int compiler;
+  int sourcesReleased;
 {
+  int countValue;
+  int isDeletable;
   int sourceDef;
   int useCount;
   int loopIndex;
-  int iVar1;
-  undefined4 uVar2;
-  int *a0;
-  int iVar3;
-  int *a0_00;
+  int operandCount;
+  undefined4 result;
+  int *sourceInst;
+  int operandIndex;
+  int *grandSourceInst;
   int operandVReg;
-  int iVar5;
+  int childOperandIndex;
   
-  useCount = IRInst__useCount(inst,*(undefined4 *)(param_2 + 0x6c4));
-  uVar2 = 0;
+  useCount = IRInst__useCount(inst,*(undefined4 *)(compiler + 0x6c4));
+  result = 0;
   if (useCount == 0) {
-    if (param_3 == 0) {
-      iVar1 = inst[0x21];
-      iVar3 = 1;
-      if (0 < iVar1) {
+    if (sourcesReleased == 0) {
+      operandCount = inst[0x21];
+      operandIndex = 1;
+      if (0 < operandCount) {
         do {
-          sourceDef = IRInst__getOperandSource(inst,iVar3);
-          iVar1 = inst[0x21];
-          iVar3 = iVar3 + 1;
+          sourceDef = IRInst__getOperandSource(inst,operandIndex);
+          operandCount = inst[0x21];
+          operandIndex = operandIndex + 1;
           *(int *)(sourceDef + 0x160) = *(int *)(sourceDef + 0x160) + -1;
-        } while (iVar3 <= iVar1);
+        } while (operandIndex <= operandCount);
       }
     }
     else {
-      iVar1 = inst[0x21];
+      operandCount = inst[0x21];
     }
-    if (0 < iVar1) {
+    if (0 < operandCount) {
       loopIndex = 1;
       do {
-        a0 = (int *)IRInst__getOperandSource(inst,loopIndex);
-        iVar3 = (**(code **)(*a0 + 0x5c))(a0);
-        if ((iVar3 != 0) || (iVar3 = (**(code **)(*a0 + 0x60))(a0), iVar3 != 0)) {
-          iVar5 = 1;
-          iVar3 = IRInst__useCount(a0,*(undefined4 *)(param_2 + 0x6c4));
-          if (iVar3 == 0) {
-            for (; iVar3 = (**(code **)(*a0 + 0x14))(a0), iVar5 <= iVar3; iVar5 = iVar5 + 1) {
-              a0_00 = (int *)IRInst__getOperandSource(a0,iVar5);
-              a0_00[0x58] = a0_00[0x58] + -1;
-              iVar3 = (**(code **)(*a0_00 + 0x5c))(a0_00);
-              if ((iVar3 != 0) &&
-                 (iVar3 = IRInst__useCount(a0_00,*(undefined4 *)(param_2 + 0x6c4)), iVar3 == 0)) {
-                (**(code **)(*a0 + 0x60))(a0);
-                for (iVar3 = 1; operandVReg = (**(code **)(*a0_00 + 0x14))(a0_00), iVar3 <= operandVReg;
-                    iVar3 = iVar3 + 1) {
-                  operandVReg = IRInst__getOperandSource(a0_00,iVar3);
+        sourceInst = (int *)IRInst__getOperandSource(inst,loopIndex);
+        isDeletable = (**(code **)(*sourceInst + 0x5c))(sourceInst);
+        if ((isDeletable != 0) || (isDeletable = (**(code **)(*sourceInst + 0x60))(sourceInst), isDeletable != 0)) {
+          childOperandIndex = 1;
+          countValue = IRInst__useCount(sourceInst,*(undefined4 *)(compiler + 0x6c4));
+          if (countValue == 0) {
+            for (; countValue = (**(code **)(*sourceInst + 0x14))(sourceInst), childOperandIndex <= countValue; childOperandIndex = childOperandIndex + 1) {
+              grandSourceInst = (int *)IRInst__getOperandSource(sourceInst,childOperandIndex);
+              grandSourceInst[0x58] = grandSourceInst[0x58] + -1;
+              countValue = (**(code **)(*grandSourceInst + 0x5c))(grandSourceInst);
+              if ((countValue != 0) &&
+                 (countValue = IRInst__useCount(grandSourceInst,*(undefined4 *)(compiler + 0x6c4)), countValue == 0)) {
+                (**(code **)(*sourceInst + 0x60))(sourceInst);
+                for (countValue = 1; operandVReg = (**(code **)(*grandSourceInst + 0x14))(grandSourceInst), countValue <= operandVReg;
+                    countValue = countValue + 1) {
+                  operandVReg = IRInst__getOperandSource(grandSourceInst,countValue);
                   *(int *)(operandVReg + 0x160) = *(int *)(operandVReg + 0x160) + -1;
                 }
-                (**(code **)(*a0_00 + 0xc))(a0_00,param_3,param_2);
+                (**(code **)(*grandSourceInst + 0xc))(grandSourceInst,sourcesReleased,compiler);
               }
             }
-            (**(code **)(*a0 + 0xc))(a0,param_3,param_2);
+            (**(code **)(*sourceInst + 0xc))(sourceInst,sourcesReleased,compiler);
           }
         }
         loopIndex = loopIndex + 1;
       } while (loopIndex <= inst[0x21]);
     }
-    (**(code **)(*inst + 0xc))(inst,param_3,param_2);
-    uVar2 = 1;
+    (**(code **)(*inst + 0xc))(inst,sourcesReleased,compiler);
+    result = 1;
   }
-  return uVar2;
+  return result;
 }
 
 /* IRInst__dropCounterAndDeleteIfUnused @ 0x105894 (20 bytes) */
@@ -83,70 +85,70 @@ int IRInst__dropCounterAndDeleteIfUnused(inst, arg)
   return uVar1;
 }
 
-/* FUN_001058a8 @ 0x1058a8 (136 bytes) */
-int FUN_001058a8(inst, param_2)
+/* IRInst__decrementSourceUseCounts @ 0x1058a8 (136 bytes) */
+int IRInst__decrementSourceUseCounts(inst, program)
   int inst;
-  int param_2;
+  int program;
 {
   int operandVReg;
-  int iVar2;
+  int operandIndex;
   
-  if (((*(uint *)(param_2 + 0x30) & 0x80) != 0) && (iVar2 = 1, 0 < *(int *)(inst + 0x84))) {
+  if (((*(uint *)(program + 0x30) & 0x80) != 0) && (operandIndex = 1, 0 < *(int *)(inst + 0x84))) {
     do {
-      operandVReg = IRInst__getOperandSource(inst,iVar2);
+      operandVReg = IRInst__getOperandSource(inst,operandIndex);
       if (operandVReg != 0) {
-        operandVReg = IRInst__getOperandSource(inst,iVar2);
+        operandVReg = IRInst__getOperandSource(inst,operandIndex);
         *(int *)(operandVReg + 0x160) = *(int *)(operandVReg + 0x160) + -1;
       }
-      iVar2 = iVar2 + 1;
-    } while (iVar2 <= *(int *)(inst + 0x84));
+      operandIndex = operandIndex + 1;
+    } while (operandIndex <= *(int *)(inst + 0x84));
   }
   return;
 }
 
-/* FUN_00105930 @ 0x105930 (276 bytes) */
-int FUN_00105930(inst, param_2)
+/* IRInst__removeFromSourceUserLists @ 0x105930 (276 bytes) */
+int IRInst__removeFromSourceUserLists(inst, program)
   int inst;
-  int param_2;
+  int program;
 {
   int operandVReg;
-  uint uVar2;
-  int *piVar3;
-  int iVar4;
+  uint userCount;
+  int *elementRef;
+  int operandIndex;
   uint loopIndex;
-  uint *puVar6;
+  uint *userVector;
   
-  if (((*(uint *)(param_2 + 0x30) & 0x80) != 0) && (iVar4 = 1, 0 < *(int *)(inst + 0x84))) {
+  if (((*(uint *)(program + 0x30) & 0x80) != 0) && (operandIndex = 1, 0 < *(int *)(inst + 0x84))) {
     do {
-      operandVReg = IRInst__getOperandSource(inst,iVar4);
+      operandVReg = IRInst__getOperandSource(inst,operandIndex);
       if (operandVReg != 0) {
-        operandVReg = IRInst__getOperandSource(inst,iVar4);
-        puVar6 = *(uint **)(operandVReg + 0x10);
-        uVar2 = puVar6[1];
-        if (0 < (int)uVar2) {
+        operandVReg = IRInst__getOperandSource(inst,operandIndex);
+        userVector = *(uint **)(operandVReg + 0x10);
+        userCount = userVector[1];
+        if (0 < (int)userCount) {
           loopIndex = 0;
           do {
-            if (loopIndex < *puVar6) {
-              if (uVar2 <= loopIndex) {
-                _memset(uVar2 * 4 + puVar6[2],0,(loopIndex - uVar2) * 4 + 4);
-                puVar6[1] = loopIndex + 1;
+            if (loopIndex < *userVector) {
+              if (userCount <= loopIndex) {
+                _memset(userCount * 4 + userVector[2],0,(loopIndex - userCount) * 4 + 4);
+                userVector[1] = loopIndex + 1;
               }
-              piVar3 = (int *)(loopIndex * 4 + puVar6[2]);
+              elementRef = (int *)(loopIndex * 4 + userVector[2]);
             }
             else {
-              piVar3 = (int *)Vector__elementRefGrow(puVar6,loopIndex);
+              elementRef = (int *)Vector__elementRefGrow(userVector,loopIndex);
             }
-            if (inst == *piVar3) {
-              Vector__removeAt(puVar6,loopIndex);
+            if (inst == *elementRef) {
+              Vector__removeAt(userVector,loopIndex);
               break;
             }
-            uVar2 = puVar6[1];
+            userCount = userVector[1];
             loopIndex = loopIndex + 1;
-          } while ((int)loopIndex < (int)uVar2);
+          } while ((int)loopIndex < (int)userCount);
         }
       }
-      iVar4 = iVar4 + 1;
-    } while (iVar4 <= *(int *)(inst + 0x84));
+      operandIndex = operandIndex + 1;
+    } while (operandIndex <= *(int *)(inst + 0x84));
   }
   return;
 }
@@ -156,183 +158,186 @@ int IRInst__removeFromList(this, compiler)
   int *this;
   int compiler;
 {
-  uint uVar1;
-  int iVar2;
-  int iVar3;
+  int vslot40Result;
+  uint flags;
+  int vslot34Result;
+  int nextInst;
   
-  iVar2 = (**(code **)(*this + 0x34))(this,compiler);
-  if (iVar2 == 0) {
+  vslot34Result = (**(code **)(*this + 0x34))(this,compiler);
+  if (vslot34Result == 0) {
     (**(code **)(*this + 0x38))(this);
   }
-  ((int (*)())FUN_00105930)(this,*(undefined4 *)(compiler + COMP_currentProgram));
-  iVar3 = this[1];
-  iVar2 = (**(code **)(*this + 0x40))(this);
-  if ((iVar2 != 0) &&
-     (iVar2 = *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x3a0), this == *(int **)(iVar2 + 300))) {
-    *(int *)(iVar2 + 300) = iVar3;
+  ((int (*)())IRInst__removeFromSourceUserLists)(this,*(undefined4 *)(compiler + COMP_currentProgram));
+  nextInst = this[1];
+  vslot40Result = (**(code **)(*this + 0x40))(this);
+  if ((vslot40Result != 0) &&
+     (vslot40Result = *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x3a0), this == *(int **)(vslot40Result + 300))) {
+    *(int *)(vslot40Result + 300) = nextInst;
   }
-  uVar1 = this[5];
-  if ((((uVar1 & 4) == 0) && (iVar3 != 0)) && ((*(uint *)(iVar3 + 0x14) & 4) != 0)) {
-    *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) & 0xfffffffb;
-    uVar1 = this[5];
+  flags = this[5];
+  if ((((flags & 4) == 0) && (nextInst != 0)) && ((*(uint *)(nextInst + 0x14) & 4) != 0)) {
+    *(uint *)(nextInst + 0x14) = *(uint *)(nextInst + 0x14) & 0xfffffffb;
+    flags = this[5];
   }
-  this[5] = uVar1 & 0xfffffffe;
+  this[5] = flags & 0xfffffffe;
   return DList__unlink(this);
 }
 
-/* FUN_00105b24 @ 0x105b24 (88 bytes) */
-int FUN_00105b24(param_1, param_2)
-  undefined4 param_1;
-  int param_2;
+/* IRInst__detachWhenTracking @ 0x105b24 (88 bytes) */
+int IRInst__detachWhenTracking(inst, program)
+  undefined4 inst;
+  int program;
 {
-  if ((*(uint *)(param_2 + 0x30) & 0x80) != 0) {
-    ((int (*)())FUN_00105930)(param_1,param_2);
-    ((int (*)())FUN_001058a8)(param_1,param_2);
+  if ((*(uint *)(program + 0x30) & 0x80) != 0) {
+    ((int (*)())IRInst__removeFromSourceUserLists)(inst,program);
+    ((int (*)())IRInst__decrementSourceUseCounts)(inst,program);
     return;
   }
   return;
 }
 
 /* IRInst__removeFromListEx @ 0x105b7c (224 bytes) */
-int IRInst__removeFromListEx(this, param_2, compiler)
+int IRInst__removeFromListEx(this, sourcesReleased, compiler)
   int *this;
-  undefined4 param_2;
+  undefined4 sourcesReleased;
   int compiler;
 {
-  uint uVar1;
-  int iVar2;
-  int iVar3;
+  int vslot40Result;
+  uint flags;
+  int vslot34Result;
+  int nextInst;
   
-  iVar2 = (**(code **)(*this + 0x34))(this,param_2,compiler);
-  if (iVar2 == 0) {
+  vslot34Result = (**(code **)(*this + 0x34))(this,sourcesReleased,compiler);
+  if (vslot34Result == 0) {
     (**(code **)(*this + 0x38))(this);
   }
-  ((int (*)())FUN_00105b24)(this,*(undefined4 *)(compiler + COMP_currentProgram));
-  iVar3 = this[1];
-  iVar2 = (**(code **)(*this + 0x40))(this);
-  if ((iVar2 != 0) &&
-     (iVar2 = *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x3a0), this == *(int **)(iVar2 + 300))) {
-    *(int *)(iVar2 + 300) = iVar3;
+  ((int (*)())IRInst__detachWhenTracking)(this,*(undefined4 *)(compiler + COMP_currentProgram));
+  nextInst = this[1];
+  vslot40Result = (**(code **)(*this + 0x40))(this);
+  if ((vslot40Result != 0) &&
+     (vslot40Result = *(int *)(*(int *)(compiler + COMP_currentProgram) + 0x3a0), this == *(int **)(vslot40Result + 300))) {
+    *(int *)(vslot40Result + 300) = nextInst;
   }
-  uVar1 = this[5];
-  if ((((uVar1 & 4) == 0) && (iVar3 != 0)) && ((*(uint *)(iVar3 + 0x14) & 4) != 0)) {
-    *(uint *)(iVar3 + 0x14) = *(uint *)(iVar3 + 0x14) & 0xfffffffb;
-    uVar1 = this[5];
+  flags = this[5];
+  if ((((flags & 4) == 0) && (nextInst != 0)) && ((*(uint *)(nextInst + 0x14) & 4) != 0)) {
+    *(uint *)(nextInst + 0x14) = *(uint *)(nextInst + 0x14) & 0xfffffffb;
+    flags = this[5];
   }
-  this[5] = uVar1 & 0xfffffffe;
+  this[5] = flags & 0xfffffffe;
   return DList__unlink(this);
 }
 
 /* IRInst__getDefiningField128 @ 0x105c5c (168 bytes) */
-int IRInst__getDefiningField128(inst, param_2)
+int IRInst__getDefiningField128(inst, operandIndex)
   int inst;
-  int param_2;
+  int operandIndex;
 {
   int operandVReg;
-  undefined4 uVar2;
-  int *piVar3;
+  undefined4 destKind;
+  int *operandRef;
   
   while( true ) {
-    if (param_2 == 0) {
+    if (operandIndex == 0) {
       return *(undefined4 *)(inst + 0x128);
     }
-    operandVReg = IRInst__getOperandSource(inst,param_2);
+    operandVReg = IRInst__getOperandSource(inst,operandIndex);
     if (operandVReg == 0) break;
-    inst = IRInst__getOperandSource(inst,param_2);
-    param_2 = 0;
+    inst = IRInst__getOperandSource(inst,operandIndex);
+    operandIndex = 0;
   }
-  piVar3 = *(int **)(param_2 * 0x18 + inst + 0x8c);
-  if (piVar3 == (int *)0x0) {
+  operandRef = *(int **)(operandIndex * 0x18 + inst + 0x8c);
+  if (operandRef == (int *)0x0) {
     return 0;
   }
                     
                     
-  uVar2 = (**(code **)(*piVar3 + 0x24))(piVar3);
-  return uVar2;
+  destKind = (**(code **)(*operandRef + 0x24))(operandRef);
+  return destKind;
 }
 
 /* IRInst__firstLiteralSourceValue @ 0x105d04 (184 bytes) */
-int IRInst__firstLiteralSourceValue(param_1, inst)
-  undefined4 *param_1;
+int IRInst__firstLiteralSourceValue(outValue, inst)
+  undefined4 *outValue;
   int *inst;
 {
-  int iVar1;
+  int operandIndex;
   int operandRecord;
-  int iVar3;
+  int lastOperand;
   
   if ((inst[5] & 0x200U) == 0) {
-    iVar3 = inst[0x21];
+    lastOperand = inst[0x21];
   }
   else {
-    iVar3 = inst[0x21] + -1;
+    lastOperand = inst[0x21] + -1;
   }
-  iVar1 = (**(code **)(*inst + 0x14))(inst);
+  operandIndex = (**(code **)(*inst + 0x14))(inst);
   do {
-    iVar1 = iVar1 + 1;
-    if (iVar3 < iVar1) {
-      *param_1 = DAT_001af9bc;
-      return param_1;
+    operandIndex = operandIndex + 1;
+    if (lastOperand < operandIndex) {
+      *outValue = DAT_001af9bc;
+      return outValue;
     }
-    operandRecord = IRInst__getOperandRecord(inst,iVar1);
+    operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   } while ((*(uint *)(*(int *)(operandRecord + 4) + 0x14) & 0x80000) == 0);
-  *param_1 = *(undefined4 *)(operandRecord + 0x10);
-  return param_1;
+  *outValue = *(undefined4 *)(operandRecord + 0x10);
+  return outValue;
 }
 
-/* FUN_00105dbc @ 0x105dbc (152 bytes) */
-int FUN_00105dbc(inst, param_2)
+/* IRInst__operandKindClass @ 0x105dbc (152 bytes) */
+int IRInst__operandKindClass(inst, operandIndex)
   undefined4 inst;
-  int param_2;
+  int operandIndex;
 {
+  int regKind;
   int sourceDef;
   int operandRecord;
-  undefined1 uVar1;
-  int iVar2;
+  undefined1 result;
+  int sourceInst;
   
-  if ((param_2 < 1) || (iVar2 = IRInst__getOperandSource(inst,param_2), iVar2 == 0)) {
-    operandRecord = IRInst__getOperandRecord(inst,param_2);
-    iVar2 = *(int *)(operandRecord + 0xc);
+  if ((operandIndex < 1) || (sourceInst = IRInst__getOperandSource(inst,operandIndex), sourceInst == 0)) {
+    operandRecord = IRInst__getOperandRecord(inst,operandIndex);
+    regKind = *(int *)(operandRecord + 0xc);
   }
   else {
-    sourceDef = IRInst__getOperandSource(inst,param_2);
-    iVar2 = *(int *)(sourceDef + 0x98);
+    sourceDef = IRInst__getOperandSource(inst,operandIndex);
+    regKind = *(int *)(sourceDef + 0x98);
   }
-  uVar1 = 2;
-  if (PTR_PTR_001e8c60[iVar2 * 0x10 + 9] != '\x01') {
-    uVar1 = PTR_PTR_001e8c60[iVar2 * 0x10 + 9] == '\x02';
+  result = 2;
+  if (PTR_PTR_001e8c60[regKind * 0x10 + 9] != '\x01') {
+    result = PTR_PTR_001e8c60[regKind * 0x10 + 9] == '\x02';
   }
-  return uVar1;
+  return result;
 }
 
 /* IRInst__copyOperandFrom @ 0x105e54 (72 bytes) */
-int IRInst__copyOperandFrom(param_1, param_2, inst, param_4)
-  int param_1;
-  int param_2;
+int IRInst__copyOperandFrom(dstInst, dstIndex, inst, srcIndex)
+  int dstInst;
+  int dstIndex;
   undefined4 inst;
-  undefined4 param_4;
+  undefined4 srcIndex;
 {
   undefined4 operandRecord;
   
-  operandRecord = IRInst__getOperandRecord(inst,param_4);
-  return IROperand__copyFrom(param_2 * 0x18 + param_1 + 0x8c,operandRecord);
+  operandRecord = IRInst__getOperandRecord(inst,srcIndex);
+  return IROperand__copyFrom(dstIndex * 0x18 + dstInst + 0x8c,operandRecord);
 }
 
-/* FUN_00105e9c @ 0x105e9c (104 bytes) */
-int FUN_00105e9c(inst, param_2)
+/* IRInst__appendOperandRef @ 0x105e9c (104 bytes) */
+int IRInst__appendOperandRef(inst, operandRef)
   int inst;
-  undefined4 param_2;
+  undefined4 operandRef;
 {
-  int iVar1;
-  int iVar2;
+  int newIndex;
+  int oldCount;
   
-  iVar2 = *(int *)(inst + 0x84);
-  iVar1 = iVar2 + 1;
-  *(int *)(inst + 0x84) = iVar1;
+  oldCount = *(int *)(inst + 0x84);
+  newIndex = oldCount + 1;
+  *(int *)(inst + 0x84) = newIndex;
   if ((*(uint *)(inst + 0x14) & 0x200) != 0) {
-    ((int (*)())IRInst__copyOperandFrom)(inst,iVar1,inst,iVar2);
-    iVar1 = *(int *)(inst + 0x84) + -1;
+    ((int (*)())IRInst__copyOperandFrom)(inst,newIndex,inst,oldCount);
+    newIndex = *(int *)(inst + 0x84) + -1;
   }
-  return IRInst__setOperandRef(inst,iVar1,param_2);
+  return IRInst__setOperandRef(inst,newIndex,operandRef);
 }
 
 /* IRInst__addToUseLists @ 0x105f04 (256 bytes) */
@@ -444,51 +449,51 @@ int IRInst__setOperandSource(inst, operandIndex, newSource, trackUses, compilerC
   return;
 }
 
-/* FUN_001061b0 @ 0x1061b0 (128 bytes) */
-int FUN_001061b0(param_1, param_2, param_3)
+/* IRInst__replaceOperandsReferencing @ 0x1061b0 (128 bytes) */
+int IRInst__replaceOperandsReferencing(param_1, refInst, compiler)
   int param_1;
-  int param_2;
-  undefined4 param_3;
+  int refInst;
+  undefined4 compiler;
 {
-  int iVar1;
-  int iVar2;
+  int operandCount;
+  int refWord;
   int loopIndex;
-  int iVar4;
+  int recordCursor;
   
-  iVar1 = *(int *)(param_1 + 0x84);
-  iVar2 = *(int *)(param_2 + 0x8c);
-  if (0 < iVar1) {
+  operandCount = *(int *)(param_1 + 0x84);
+  refWord = *(int *)(refInst + 0x8c);
+  if (0 < operandCount) {
     loopIndex = 1;
-    iVar4 = param_1;
+    recordCursor = param_1;
     do {
-      if (iVar2 == *(int *)(iVar4 + 0xa4)) {
-        ((int (*)())IRInst__setOperandSource)(param_1,loopIndex,param_2,0,param_3);
-        iVar1 = *(int *)(param_1 + 0x84);
+      if (refWord == *(int *)(recordCursor + 0xa4)) {
+        ((int (*)())IRInst__setOperandSource)(param_1,loopIndex,refInst,0,compiler);
+        operandCount = *(int *)(param_1 + 0x84);
       }
       loopIndex = loopIndex + 1;
-      iVar4 = iVar4 + 0x18;
-    } while (loopIndex <= iVar1);
+      recordCursor = recordCursor + 0x18;
+    } while (loopIndex <= operandCount);
   }
   return;
 }
 
 /* IRInst__setOperandSourceIfLegal @ 0x106230 (144 bytes) */
-int IRInst__setOperandSourceIfLegal(param_1, param_2, param_3, param_4, param_5, param_6)
-  undefined4 param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  int param_6;
+int IRInst__setOperandSourceIfLegal(inst, operandIndex, source, legalityArg4, legalityArg5, compiler)
+  undefined4 inst;
+  undefined4 operandIndex;
+  undefined4 source;
+  undefined4 legalityArg4;
+  undefined4 legalityArg5;
+  int compiler;
 {
-  int iVar1;
+  int isLegal;
   
-  iVar1 = (**(code **)(**(int **)(param_6 + 0x30c) + 0x11c))
-                    (*(int **)(param_6 + 0x30c),param_1,param_2,param_3,param_4,param_5,param_6);
-  if (iVar1 != 0) {
-    ((int (*)())IRInst__setOperandSource)(param_1,param_2,param_3,0,param_6);
+  isLegal = (**(code **)(**(int **)(compiler + 0x30c) + 0x11c))
+                    (*(int **)(compiler + 0x30c),inst,operandIndex,source,legalityArg4,legalityArg5,compiler);
+  if (isLegal != 0) {
+    ((int (*)())IRInst__setOperandSource)(inst,operandIndex,source,0,compiler);
   }
-  return iVar1 != 0;
+  return isLegal != 0;
 }
 
 /* IRInst__getOrCreateOperandRecord @ 0x1062c0 (156 bytes) */
@@ -672,12 +677,13 @@ int IRProjection__validate(inst, compiler)
   undefined4 inst;
   undefined4 compiler;
 {
-  int iVar1;
+  int selectRecord;
+  int isProjection;
   
-  iVar1 = IRInst__isProjectionOfClass26or3a(inst);
-  if (iVar1 != 0) {
-    iVar1 = IRInst__getOperandRecord(inst,1);
-    SelectWord__isSplat(*(undefined4 *)(iVar1 + 0x10));
+  isProjection = IRInst__isProjectionOfClass26or3a(inst);
+  if (isProjection != 0) {
+    selectRecord = IRInst__getOperandRecord(inst,1);
+    SelectWord__isSplat(*(undefined4 *)(selectRecord + 0x10));
   }
   return ((int (*)())IRInst__validate)(inst,compiler);
 }
@@ -696,25 +702,26 @@ int IRPhiNode__validate(inst, compiler)
   int inst;
   undefined4 compiler;
 {
+  int srcRecord;
   int loopIndex;
-  int iVar1;
-  int iVar2;
+  int operandCount;
+  int checkIndex;
   
-  iVar1 = *(int *)(inst + 0x84);
-  if (0 < iVar1) {
+  operandCount = *(int *)(inst + 0x84);
+  if (0 < operandCount) {
     loopIndex = 1;
     do {
-      iVar1 = IRInst__getOperandRecord(inst,loopIndex);
+      srcRecord = IRInst__getOperandRecord(inst,loopIndex);
       loopIndex = loopIndex + 1;
-      SelectWord__isIdentity(*(undefined4 *)(iVar1 + 0x10));
-      iVar1 = *(int *)(inst + 0x84);
-    } while (loopIndex <= iVar1);
+      SelectWord__isIdentity(*(undefined4 *)(srcRecord + 0x10));
+      operandCount = *(int *)(inst + 0x84);
+    } while (loopIndex <= operandCount);
   }
-  if (1 < iVar1) {
-    iVar2 = 2;
+  if (1 < operandCount) {
+    checkIndex = 2;
     do {
-      iVar2 = iVar2 + 1;
-    } while (iVar2 <= iVar1);
+      checkIndex = checkIndex + 1;
+    } while (checkIndex <= operandCount);
   }
   return ((int (*)())IRInst__validate)(inst,compiler);
 }
@@ -807,53 +814,57 @@ int IRInst__insertSourceBeforeLast(inst, newSource, compiler)
   undefined4 newSource;
   int compiler;
 {
-  undefined4 uVar1;
+  undefined4 defaultSelect2;
+  undefined4 lastSelect;
+  undefined4 lastSource2;
+  undefined4 lastSource;
+  undefined4 defaultSelect;
   int oldCount;
   int newCount;
-  int iVar4;
+  int lastIndex;
   
   oldCount = *(int *)(inst + 0x84);
   newCount = oldCount + 1;
   *(int *)(inst + 0x84) = newCount;
   if ((*(uint *)(inst + 0x14) & 0x200) == 0) {
     ((int (*)())IRInst__setOperandSource)(inst,newCount,newSource,0,compiler);
-    uVar1 = DAT_001af9bc;
+    defaultSelect = DAT_001af9bc;
     if (newCount == 0) {
       *(undefined4 *)(inst + 0x9c) = DAT_001af9bc;
     }
     else {
       oldCount = IRInst__getOperandRecord(inst,newCount);
-      *(undefined4 *)(oldCount + 0x10) = uVar1;
+      *(undefined4 *)(oldCount + 0x10) = defaultSelect;
     }
   }
   else {
     if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 8) == 0) {
-      uVar1 = IRInst__getOperandSource(inst,oldCount);
-      ((int (*)())IRInst__setOperandSource)(inst,newCount,uVar1,0,compiler);
+      lastSource = IRInst__getOperandSource(inst,oldCount);
+      ((int (*)())IRInst__setOperandSource)(inst,newCount,lastSource,0,compiler);
     }
     else {
-      uVar1 = IRInst__getOperandSource(inst,oldCount);
-      ((int (*)())IRInst__setExtraOperandSource)(inst,uVar1,0,compiler);
+      lastSource2 = IRInst__getOperandSource(inst,oldCount);
+      ((int (*)())IRInst__setExtraOperandSource)(inst,lastSource2,0,compiler);
     }
-    iVar4 = *(int *)(inst + 0x84);
+    lastIndex = *(int *)(inst + 0x84);
     newCount = IRInst__getOperandRecord(inst,oldCount);
-    uVar1 = *(undefined4 *)(newCount + 0x10);
-    if (iVar4 == 0) {
-      *(undefined4 *)(inst + 0x9c) = uVar1;
+    lastSelect = *(undefined4 *)(newCount + 0x10);
+    if (lastIndex == 0) {
+      *(undefined4 *)(inst + 0x9c) = lastSelect;
     }
     else {
-      newCount = IRInst__getOperandRecord(inst,iVar4);
-      *(undefined4 *)(newCount + 0x10) = uVar1;
+      newCount = IRInst__getOperandRecord(inst,lastIndex);
+      *(undefined4 *)(newCount + 0x10) = lastSelect;
     }
     ((int (*)())IRInst__setOperandSource)(inst,oldCount,newSource,0,compiler);
-    uVar1 = DAT_001af9bc;
+    defaultSelect2 = DAT_001af9bc;
     if (oldCount == 0) {
       *(undefined4 *)(inst + 0x9c) = DAT_001af9bc;
       newCount = 0;
     }
     else {
       newCount = IRInst__getOperandRecord(inst,oldCount);
-      *(undefined4 *)(newCount + 0x10) = uVar1;
+      *(undefined4 *)(newCount + 0x10) = defaultSelect2;
       newCount = oldCount;
     }
   }
@@ -861,43 +872,43 @@ int IRInst__insertSourceBeforeLast(inst, newSource, compiler)
 }
 
 /* IRInst__setLastOperandFromRecord @ 0x106b48 (88 bytes) */
-int IRInst__setLastOperandFromRecord(inst, param_2, param_3, param_4)
+int IRInst__setLastOperandFromRecord(inst, srcRecord, trackUses, compiler)
   int inst;
-  int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
+  int srcRecord;
+  undefined4 trackUses;
+  undefined4 compiler;
 {
   int operandRecord;
-  undefined4 uVar2;
+  undefined4 selectWord;
   
-  ((int (*)())IRInst__setExtraOperandSource)(inst,*(undefined4 *)(param_2 + 4),param_3,param_4);
-  uVar2 = *(undefined4 *)(param_2 + 0x10);
+  ((int (*)())IRInst__setExtraOperandSource)(inst,*(undefined4 *)(srcRecord + 4),trackUses,compiler);
+  selectWord = *(undefined4 *)(srcRecord + 0x10);
   if (*(int *)(inst + 0x84) == 0) {
-    *(undefined4 *)(inst + 0x9c) = uVar2;
+    *(undefined4 *)(inst + 0x9c) = selectWord;
   }
   else {
     operandRecord = IRInst__getOperandRecord(inst,*(int *)(inst + 0x84));
-    *(undefined4 *)(operandRecord + 0x10) = uVar2;
+    *(undefined4 *)(operandRecord + 0x10) = selectWord;
   }
   return;
 }
 
 /* IRMix__validate @ 0x106ba0 (276 bytes) */
-int IRMix__validate(inst, compiler, param_3, param_4, param_5, param_6, param_7)
+int IRMix__validate(inst, compiler, unusedArg3, forwardedArg4, forwardedArg5, forwardedArg6, forwardedArg7)
   int *inst;
   int compiler;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+  undefined4 unusedArg3;
+  undefined4 forwardedArg4;
+  undefined4 forwardedArg5;
+  undefined4 forwardedArg6;
+  undefined4 forwardedArg7;
 {
   int loopIndex2;
-  bool bVar1;
-  int iVar2;
+  bool moreChannels;
+  int channel;
   undefined4 operandVReg;
   int operandRecord;
-  int *a0;
+  int *sourceInst;
   int loopIndex;
   
   if (0 < inst[0x21]) {
@@ -906,7 +917,7 @@ int IRMix__validate(inst, compiler, param_3, param_4, param_5, param_6, param_7)
       loopIndex2 = loopIndex2 + 1;
     } while (loopIndex2 <= inst[0x21]);
   }
-  iVar2 = 0;
+  channel = 0;
   do {
     IRInst__getOperandRecord(inst,0);
     if (0 < inst[0x21]) {
@@ -917,18 +928,18 @@ int IRMix__validate(inst, compiler, param_3, param_4, param_5, param_6, param_7)
           if (loopIndex != 1) {
             operandVReg = IRInst__getOperandSource(inst,loopIndex);
             operandRecord = IRInst__getOperandRecord(inst,loopIndex);
-            IRInst__allSelectsAreHwConstants(operandVReg,compiler,*(undefined4 *)(operandRecord + 0x10),param_4,param_5,param_6,param_7
+            IRInst__allSelectsAreHwConstants(operandVReg,compiler,*(undefined4 *)(operandRecord + 0x10),forwardedArg4,forwardedArg5,forwardedArg6,forwardedArg7
                         );
           }
-          a0 = (int *)IRInst__getOperandSource(inst,loopIndex);
-          (**(code **)(*a0 + 0x60))(a0);
+          sourceInst = (int *)IRInst__getOperandSource(inst,loopIndex);
+          (**(code **)(*sourceInst + 0x60))(sourceInst);
         }
         loopIndex = loopIndex + 1;
       } while (loopIndex <= inst[0x21]);
     }
-    bVar1 = iVar2 != 3;
-    iVar2 = iVar2 + 1;
-  } while (bVar1);
+    moreChannels = channel != 3;
+    channel = channel + 1;
+  } while (moreChannels);
   (**(code **)(*inst + 0x14))(inst);
   return ((int (*)())IRInst__validate)(inst,compiler);
 }
@@ -942,22 +953,27 @@ int IRPresub1__validate(this, compiler)
   return ((int (*)())IRInst__validate)(this,compiler);
 }
 
-/* FUN_00106cf8 @ 0x106cf8 (772 bytes) */
-int FUN_00106cf8(inst, param_2)
+/* IRInst__isCoalescableMov @ 0x106cf8 (772 bytes) */
+int IRInst__isCoalescableMov(inst, colorGraph)
   int *inst;
-  undefined4 param_2;
+  undefined4 colorGraph;
 {
+  int operandKindClass;
+  int byteCountdown;
+  int operandIndex;
+  int isMovLike;
+  int sourceReg;
   int flagBit0Result;
   int *operandVReg;
-  int *piVar1;
-  int iVar2;
-  int iVar3;
+  int *flagBytePtr;
+  int vslot50Result;
+  int instReg;
   undefined4 operandVReg2;
   
   if ((inst[5] & 0x200U) != 0) {
     operandVReg = (int *)IRInst__getOperandSource(inst,inst[0x21]);
-    iVar2 = (**(code **)(*operandVReg + 0x50))(operandVReg);
-    if (iVar2 == 0) {
+    vslot50Result = (**(code **)(*operandVReg + 0x50))(operandVReg);
+    if (vslot50Result == 0) {
       if (operandVReg[0x20] == 0) {
         return 0;
       }
@@ -968,65 +984,65 @@ int FUN_00106cf8(inst, param_2)
       if ((operandVReg[5] & 2U) != 0) {
         return 0;
       }
-      iVar2 = (**(code **)(*operandVReg + 0x50))(operandVReg);
-      if (iVar2 != 0) {
+      vslot50Result = (**(code **)(*operandVReg + 0x50))(operandVReg);
+      if (vslot50Result != 0) {
         return 0;
       }
-      iVar2 = thunk_FUN_00134de8(param_2,operandVReg);
-      iVar3 = thunk_FUN_00134de8(param_2,inst);
-      if (iVar2 != iVar3) {
+      sourceReg = thunk_FUN_00134de8(colorGraph,operandVReg);
+      instReg = thunk_FUN_00134de8(colorGraph,inst);
+      if (sourceReg != instReg) {
         return 0;
       }
     }
   }
-  iVar2 = (**(code **)(*inst + 100))(inst);
-  if (iVar2 != 0) {
-    for (iVar2 = 1; iVar3 = (**(code **)(*inst + 0x14))(inst), iVar2 <= iVar3;
-        iVar2 = iVar2 + 1) {
-      if ((inst[iVar2 * 6 + 0x28] & 1U) != 0) {
+  isMovLike = (**(code **)(*inst + 100))(inst);
+  if (isMovLike != 0) {
+    for (operandIndex = 1; instReg = (**(code **)(*inst + 0x14))(inst), operandIndex <= instReg;
+        operandIndex = operandIndex + 1) {
+      if ((inst[operandIndex * 6 + 0x28] & 1U) != 0) {
         return 0;
       }
-      if ((inst[iVar2 * 6 + 0x28] & 2U) != 0) {
+      if ((inst[operandIndex * 6 + 0x28] & 2U) != 0) {
         return 0;
       }
-      iVar3 = IRInst__isSourceSelectIdentity(inst,iVar2);
-      if (iVar3 == 0) {
+      instReg = IRInst__isSourceSelectIdentity(inst,operandIndex);
+      if (instReg == 0) {
         return 0;
       }
     }
     if ((inst[0x48] == 0) && (inst[0x49] == 0)) {
       if ((inst[0x20] != 0) &&
-         (((iVar2 = RegKind__flagBit0(inst[0x26]), iVar2 != 0 && ((inst[5] & 2U) == 0)) &&
-          (iVar2 = (**(code **)(*inst + 0x50))(inst), iVar2 == 0)))) {
-        iVar2 = 4;
-        piVar1 = inst;
+         (((operandIndex = RegKind__flagBit0(inst[0x26]), operandIndex != 0 && ((inst[5] & 2U) == 0)) &&
+          (operandIndex = (**(code **)(*inst + 0x50))(inst), operandIndex == 0)))) {
+        byteCountdown = 4;
+        flagBytePtr = inst;
         do {
-          if ((uint)(*(byte *)(piVar1 + 0x27) - 2) < 2) {
+          if ((uint)(*(byte *)(flagBytePtr + 0x27) - 2) < 2) {
             return 0;
           }
-          piVar1 = (int *)((int)piVar1 + 1);
-          iVar2 = iVar2 + -1;
-        } while (iVar2 != 0);
+          flagBytePtr = (int *)((int)flagBytePtr + 1);
+          byteCountdown = byteCountdown + -1;
+        } while (byteCountdown != 0);
       }
       IRInst__getOperandRecord(inst,0);
-      iVar2 = ((int (*)())FUN_00105dbc)(inst,0);
-      if ((((iVar2 == 0) && ((inst[5] & 2U) == 0)) &&
+      operandKindClass = ((int (*)())IRInst__operandKindClass)(inst,0);
+      if ((((operandKindClass == 0) && ((inst[5] & 2U) == 0)) &&
           ((inst[0x20] != 0 &&
-           ((iVar2 = RegKind__flagBit0(inst[0x26]), iVar2 != 0 && ((inst[5] & 2U) == 0)))))) &&
-         (iVar2 = (**(code **)(*inst + 0x50))(inst), iVar2 == 0)) {
+           ((operandKindClass = RegKind__flagBit0(inst[0x26]), operandKindClass != 0 && ((inst[5] & 2U) == 0)))))) &&
+         (operandKindClass = (**(code **)(*inst + 0x50))(inst), operandKindClass == 0)) {
         operandVReg = (int *)IRInst__getOperandSource(inst,1);
-        iVar2 = (**(code **)(*operandVReg + 0x50))(operandVReg);
-        if (iVar2 != 0) {
+        vslot50Result = (**(code **)(*operandVReg + 0x50))(operandVReg);
+        if (vslot50Result != 0) {
           return 1;
         }
         operandVReg = (int *)IRInst__getOperandSource(inst,1);
-        if ((((operandVReg[0x20] != 0) && (iVar2 = RegKind__flagBit0(operandVReg[0x26]), iVar2 != 0)) &&
-            ((operandVReg[5] & 2U) == 0)) && (iVar2 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar2 == 0))
+        if ((((operandVReg[0x20] != 0) && (vslot50Result = RegKind__flagBit0(operandVReg[0x26]), vslot50Result != 0)) &&
+            ((operandVReg[5] & 2U) == 0)) && (vslot50Result = (**(code **)(*operandVReg + 0x50))(operandVReg), vslot50Result == 0))
         {
           operandVReg2 = IRInst__getOperandSource(inst,1);
-          iVar2 = thunk_FUN_00134de8(param_2,operandVReg2);
-          iVar3 = thunk_FUN_00134de8(param_2,inst);
-          if (iVar2 == iVar3) {
+          sourceReg = thunk_FUN_00134de8(colorGraph,operandVReg2);
+          instReg = thunk_FUN_00134de8(colorGraph,inst);
+          if (sourceReg == instReg) {
             return 1;
           }
         }
@@ -1036,172 +1052,172 @@ int FUN_00106cf8(inst, param_2)
   return 0;
 }
 
-/* FUN_00106ffc @ 0x106ffc (80 bytes) */
-int FUN_00106ffc(inst, param_2, compiler)
+/* IRFetch__ctor_106ffc @ 0x106ffc (80 bytes) */
+int IRFetch__ctor_106ffc(inst, opcode, compiler)
   undefined4 *inst;
-  undefined4 param_2;
+  undefined4 opcode;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  IRInst__ctor_1051b0(inst,param_2,compiler);
-  puVar1 = PTR_DAT_001e8c64;
+  IRInst__ctor_1051b0(inst,opcode,compiler);
+  vtable = PTR_DAT_001e8c64;
   inst[0x20] = 1;
   inst[0x21] = 1;
-  *inst = puVar1 + 8;
+  *inst = vtable + 8;
   return;
 }
 
-/* FUN_0010704c @ 0x10704c (80 bytes) */
-int FUN_0010704c(inst, param_2, compiler)
+/* IRFetch__ctor_10704c @ 0x10704c (80 bytes) */
+int IRFetch__ctor_10704c(inst, opcode, compiler)
   undefined4 *inst;
-  undefined4 param_2;
+  undefined4 opcode;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  IRInst__ctor_1051b0(inst,param_2,compiler);
-  puVar1 = PTR_DAT_001e8c64;
+  IRInst__ctor_1051b0(inst,opcode,compiler);
+  vtable = PTR_DAT_001e8c64;
   inst[0x20] = 1;
   inst[0x21] = 1;
-  *inst = puVar1 + 8;
+  *inst = vtable + 8;
   return;
 }
 
-/* FUN_0010709c @ 0x10709c (92 bytes) */
-int FUN_0010709c(inst, param_2, compiler)
+/* IRPseudo__ctor_10709c @ 0x10709c (92 bytes) */
+int IRPseudo__ctor_10709c(inst, opcode, compiler)
   undefined4 *inst;
-  undefined4 param_2;
+  undefined4 opcode;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  IRInst__ctor_1051b0(inst,param_2,compiler);
-  puVar1 = PTR_DAT_001e8b50;
+  IRInst__ctor_1051b0(inst,opcode,compiler);
+  vtable = PTR_DAT_001e8b50;
   inst[5] = inst[5] | 0x18000;
-  *inst = puVar1 + 8;
+  *inst = vtable + 8;
   inst[0x20] = 0;
   return;
 }
 
-/* FUN_001070f8 @ 0x1070f8 (92 bytes) */
-int FUN_001070f8(inst, param_2, compiler)
+/* IRPseudo__ctor @ 0x1070f8 (92 bytes) */
+int IRPseudo__ctor(inst, opcode, compiler)
   undefined4 *inst;
-  undefined4 param_2;
+  undefined4 opcode;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  IRInst__ctor_1051b0(inst,param_2,compiler);
-  puVar1 = PTR_DAT_001e8b50;
+  IRInst__ctor_1051b0(inst,opcode,compiler);
+  vtable = PTR_DAT_001e8b50;
   inst[5] = inst[5] | 0x18000;
-  *inst = puVar1 + 8;
+  *inst = vtable + 8;
   inst[0x20] = 0;
   return;
 }
 
-/* FUN_00107154 @ 0x107154 (84 bytes) */
-int FUN_00107154(inst, param_2, compiler)
+/* IRAlu__ctor_107154 @ 0x107154 (84 bytes) */
+int IRAlu__ctor_107154(inst, opcode, compiler)
   undefined4 *inst;
-  undefined4 param_2;
+  undefined4 opcode;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  IRInst__ctor_1051b0(inst,param_2,compiler);
-  puVar1 = PTR_DAT_001e8c58;
+  IRInst__ctor_1051b0(inst,opcode,compiler);
+  vtable = PTR_DAT_001e8c58;
   inst[0x4b] = 0;
   inst[0x20] = 1;
-  *inst = puVar1 + 8;
+  *inst = vtable + 8;
   return;
 }
 
-/* FUN_001071a8 @ 0x1071a8 (84 bytes) */
-int FUN_001071a8(inst, param_2, compiler)
+/* IRAlu__ctor_1071a8 @ 0x1071a8 (84 bytes) */
+int IRAlu__ctor_1071a8(inst, opcode, compiler)
   undefined4 *inst;
-  undefined4 param_2;
+  undefined4 opcode;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  IRInst__ctor_1051b0(inst,param_2,compiler);
-  puVar1 = PTR_DAT_001e8c58;
+  IRInst__ctor_1051b0(inst,opcode,compiler);
+  vtable = PTR_DAT_001e8c58;
   inst[0x4b] = 0;
   inst[0x20] = 1;
-  *inst = puVar1 + 8;
+  *inst = vtable + 8;
   return;
 }
 
-/* FUN_001071fc @ 0x1071fc (84 bytes) */
-int FUN_001071fc(param_1, param_2, param_3)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+/* IRMemStore__ctor_1071fc @ 0x1071fc (84 bytes) */
+int IRMemStore__ctor_1071fc(this, opcode, compiler)
+  undefined4 *this;
+  undefined4 opcode;
+  undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  ((int (*)())FUN_0010704c)(param_1,param_2,param_3);
-  puVar1 = PTR_DAT_001e8c10;
-  param_1[0x4b] = 0;
-  param_1[0x21] = 2;
-  *param_1 = puVar1 + 8;
+  ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
+  vtable = PTR_DAT_001e8c10;
+  this[0x4b] = 0;
+  this[0x21] = 2;
+  *this = vtable + 8;
   return;
 }
 
 /* IRVertexFetch__ctor_107250 @ 0x107250 (128 bytes) */
-int IRVertexFetch__ctor_107250(this, param_2, param_3, param_4, param_5)
+int IRVertexFetch__ctor_107250(this, opcode, compiler, vertexArg4, vertexArg5)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+  undefined4 opcode;
+  undefined4 compiler;
+  undefined4 vertexArg4;
+  undefined4 vertexArg5;
 {
-  undefined4 uVar1;
-  undefined *puVar2;
+  undefined4 defaultWord;
+  undefined *vtable;
   
-  ((int (*)())FUN_0010704c)(this,param_2,param_3);
-  uVar1 = DAT_001af9bc;
-  puVar2 = PTR_DAT_001e8c08 + 8;
-  this[0x4b] = param_5;
-  *this = puVar2;
+  ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
+  defaultWord = DAT_001af9bc;
+  vtable = PTR_DAT_001e8c08 + 8;
+  this[0x4b] = vertexArg5;
+  *this = vtable;
   this[0x4f] = 0;
-  this[0x50] = uVar1;
-  this[0x4c] = param_4;
+  this[0x50] = defaultWord;
+  this[0x4c] = vertexArg4;
   this[0x4d] = 0;
   this[0x4e] = 0;
   return IRVertexFetch__initSemantics(this);
 }
 
 /* IRVertexFetch__ctor_1072d0 @ 0x1072d0 (128 bytes) */
-int IRVertexFetch__ctor_1072d0(this, param_2, compiler, param_4, param_5)
+int IRVertexFetch__ctor_1072d0(this, opcode, compiler, vertexArg4, vertexArg5)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 opcode;
   undefined4 compiler;
-  undefined4 param_4;
-  undefined4 param_5;
+  undefined4 vertexArg4;
+  undefined4 vertexArg5;
 {
-  undefined4 uVar1;
-  undefined *puVar2;
+  undefined4 defaultWord;
+  undefined *vtable;
   
-  ((int (*)())FUN_0010704c)(this,param_2,compiler);
-  uVar1 = DAT_001af9bc;
-  puVar2 = PTR_DAT_001e8c08 + 8;
-  this[0x4b] = param_5;
-  *this = puVar2;
+  ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
+  defaultWord = DAT_001af9bc;
+  vtable = PTR_DAT_001e8c08 + 8;
+  this[0x4b] = vertexArg5;
+  *this = vtable;
   this[0x4f] = 0;
-  this[0x50] = uVar1;
-  this[0x4c] = param_4;
+  this[0x50] = defaultWord;
+  this[0x4c] = vertexArg4;
   this[0x4d] = 0;
   this[0x4e] = 0;
   return IRVertexFetch__initSemantics(this);
 }
 
-/* FUN_00107350 @ 0x107350 (84 bytes) */
-int FUN_00107350(param_1, compiler, param_3, param_4)
-  undefined4 param_1;
+/* IRVertexFetch__new @ 0x107350 (84 bytes) */
+int IRVertexFetch__new(opcode, compiler, vertexArg4, vertexArg5)
+  undefined4 opcode;
   int compiler;
-  undefined4 param_3;
-  undefined4 param_4;
+  undefined4 vertexArg4;
+  undefined4 vertexArg5;
 {
   undefined4 *allocation;
   undefined4 arena;
@@ -1209,28 +1225,28 @@ int FUN_00107350(param_1, compiler, param_3, param_4)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())IRVertexFetch__ctor_1072d0)(allocation + 1,param_1,compiler,param_3,param_4);
+  ((int (*)())IRVertexFetch__ctor_1072d0)(allocation + 1,opcode,compiler,vertexArg4,vertexArg5);
   return allocation + 1;
 }
 
 /* IRVertexFetch__ctor_1073dc @ 0x1073dc (68 bytes) */
-int IRVertexFetch__ctor_1073dc(this, param_2, param_3)
+int IRVertexFetch__ctor_1073dc(this, opcode, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 opcode;
+  undefined4 compiler;
 {
-  ((int (*)())FUN_0010704c)(this,param_2,param_3);
+  ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
   *this = PTR_DAT_001e8c08 + 8;
   return;
 }
 
 /* IRVertexFetch__ctor_107420 @ 0x107420 (68 bytes) */
-int IRVertexFetch__ctor_107420(this, param_2, compiler)
+int IRVertexFetch__ctor_107420(this, opcode, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 opcode;
   undefined4 compiler;
 {
-  ((int (*)())FUN_0010704c)(this,param_2,compiler);
+  ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
   *this = PTR_DAT_001e8c08 + 8;
   return;
 }
@@ -1250,116 +1266,116 @@ int IRLoadConst__vslot75(this, compiler)
   return allocation + 1;
 }
 
-/* FUN_001074e0 @ 0x1074e0 (232 bytes) */
-int FUN_001074e0(param_1, param_2, compiler)
-  undefined4 *param_1;
-  int param_2;
+/* IRTextureFetch__ctor_1074e0 @ 0x1074e0 (232 bytes) */
+int IRTextureFetch__ctor_1074e0(this, opcode, compiler)
+  undefined4 *this;
+  int opcode;
   int compiler;
 {
-  undefined4 uVar1;
-  undefined *puVar2;
-  undefined2 *puVar3;
+  undefined4 defaultWord;
+  undefined *vtable;
+  undefined2 *fetchStateBlock;
   
-  ((int (*)())FUN_0010704c)(param_1,param_2,compiler);
-  puVar2 = PTR_DAT_001e8c0c;
-  param_1[0x4c] = 0;
-  param_1[0x4d] = 0xffffffff;
-  *param_1 = puVar2 + 8;
-  param_1[0x26] = 0;
-  param_1[0x2c] = 0;
-  param_1[0x42] = 0;
-  param_1[0x41] = 0;
-  puVar3 = (undefined2 *)Arena__alloc(*(undefined4 *)(compiler + COMP_arenaA),0x24);
-  _memset(puVar3,0,0x24);
-  uVar1 = DAT_001af9bc;
-  puVar3[4] = 7;
-  puVar3[6] = 3;
-  puVar3[9] = 1;
-  puVar3[10] = 0;
-  *puVar3 = 3;
-  puVar3[1] = 3;
-  puVar3[2] = 3;
-  puVar3[3] = 7;
-  puVar3[5] = 3;
-  puVar3[7] = 1;
-  puVar3[8] = 0;
-  puVar3[0xb] = 0;
-  puVar3[0xc] = 0;
-  puVar3[0xd] = 0;
-  puVar3[0xe] = 0;
-  param_1[0x4f] = puVar3;
-  param_1[0x4e] = 0xffffffff;
-  param_1[0x50] = uVar1;
-  if (param_2 == 0x77) {
-    param_1[5] = param_1[5] | 8;
+  ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
+  vtable = PTR_DAT_001e8c0c;
+  this[0x4c] = 0;
+  this[0x4d] = 0xffffffff;
+  *this = vtable + 8;
+  this[0x26] = 0;
+  this[0x2c] = 0;
+  this[0x42] = 0;
+  this[0x41] = 0;
+  fetchStateBlock = (undefined2 *)Arena__alloc(*(undefined4 *)(compiler + COMP_arenaA),0x24);
+  _memset(fetchStateBlock,0,0x24);
+  defaultWord = DAT_001af9bc;
+  fetchStateBlock[4] = 7;
+  fetchStateBlock[6] = 3;
+  fetchStateBlock[9] = 1;
+  fetchStateBlock[10] = 0;
+  *fetchStateBlock = 3;
+  fetchStateBlock[1] = 3;
+  fetchStateBlock[2] = 3;
+  fetchStateBlock[3] = 7;
+  fetchStateBlock[5] = 3;
+  fetchStateBlock[7] = 1;
+  fetchStateBlock[8] = 0;
+  fetchStateBlock[0xb] = 0;
+  fetchStateBlock[0xc] = 0;
+  fetchStateBlock[0xd] = 0;
+  fetchStateBlock[0xe] = 0;
+  this[0x4f] = fetchStateBlock;
+  this[0x4e] = 0xffffffff;
+  this[0x50] = defaultWord;
+  if (opcode == 0x77) {
+    this[5] = this[5] | 8;
   }
   return;
 }
 
 /* IRTextureFetchGradients__ctor_107600 @ 0x107600 (76 bytes) */
-int IRTextureFetchGradients__ctor_107600(param_1, param_2, param_3)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int IRTextureFetchGradients__ctor_107600(this, opcode, compiler)
+  undefined4 *this;
+  undefined4 opcode;
+  undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  ((int (*)())FUN_001074e0)(param_1,param_2,param_3);
-  puVar1 = PTR_DAT_001e8c48;
-  param_1[0x21] = 3;
-  *param_1 = puVar1 + 8;
+  ((int (*)())IRTextureFetch__ctor_1074e0)(this,opcode,compiler);
+  vtable = PTR_DAT_001e8c48;
+  this[0x21] = 3;
+  *this = vtable + 8;
   return;
 }
 
-/* FUN_0010764c @ 0x10764c (232 bytes) */
-int FUN_0010764c(param_1, param_2, compiler)
-  undefined4 *param_1;
-  int param_2;
+/* IRTextureFetch__ctor_10764c @ 0x10764c (232 bytes) */
+int IRTextureFetch__ctor_10764c(this, opcode, compiler)
+  undefined4 *this;
+  int opcode;
   int compiler;
 {
-  undefined4 uVar1;
-  undefined *puVar2;
-  undefined2 *puVar3;
+  undefined4 defaultWord;
+  undefined *vtable;
+  undefined2 *fetchStateBlock;
   
-  ((int (*)())FUN_0010704c)(param_1,param_2,compiler);
-  puVar2 = PTR_DAT_001e8c0c;
-  param_1[0x4c] = 0;
-  param_1[0x4d] = 0xffffffff;
-  *param_1 = puVar2 + 8;
-  param_1[0x26] = 0;
-  param_1[0x2c] = 0;
-  param_1[0x42] = 0;
-  param_1[0x41] = 0;
-  puVar3 = (undefined2 *)Arena__alloc(*(undefined4 *)(compiler + COMP_arenaA),0x24);
-  _memset(puVar3,0,0x24);
-  uVar1 = DAT_001af9bc;
-  puVar3[4] = 7;
-  puVar3[6] = 3;
-  puVar3[9] = 1;
-  puVar3[10] = 0;
-  *puVar3 = 3;
-  puVar3[1] = 3;
-  puVar3[2] = 3;
-  puVar3[3] = 7;
-  puVar3[5] = 3;
-  puVar3[7] = 1;
-  puVar3[8] = 0;
-  puVar3[0xb] = 0;
-  puVar3[0xc] = 0;
-  puVar3[0xd] = 0;
-  puVar3[0xe] = 0;
-  param_1[0x4f] = puVar3;
-  param_1[0x4e] = 0xffffffff;
-  param_1[0x50] = uVar1;
-  if (param_2 == 0x77) {
-    param_1[5] = param_1[5] | 8;
+  ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
+  vtable = PTR_DAT_001e8c0c;
+  this[0x4c] = 0;
+  this[0x4d] = 0xffffffff;
+  *this = vtable + 8;
+  this[0x26] = 0;
+  this[0x2c] = 0;
+  this[0x42] = 0;
+  this[0x41] = 0;
+  fetchStateBlock = (undefined2 *)Arena__alloc(*(undefined4 *)(compiler + COMP_arenaA),0x24);
+  _memset(fetchStateBlock,0,0x24);
+  defaultWord = DAT_001af9bc;
+  fetchStateBlock[4] = 7;
+  fetchStateBlock[6] = 3;
+  fetchStateBlock[9] = 1;
+  fetchStateBlock[10] = 0;
+  *fetchStateBlock = 3;
+  fetchStateBlock[1] = 3;
+  fetchStateBlock[2] = 3;
+  fetchStateBlock[3] = 7;
+  fetchStateBlock[5] = 3;
+  fetchStateBlock[7] = 1;
+  fetchStateBlock[8] = 0;
+  fetchStateBlock[0xb] = 0;
+  fetchStateBlock[0xc] = 0;
+  fetchStateBlock[0xd] = 0;
+  fetchStateBlock[0xe] = 0;
+  this[0x4f] = fetchStateBlock;
+  this[0x4e] = 0xffffffff;
+  this[0x50] = defaultWord;
+  if (opcode == 0x77) {
+    this[5] = this[5] | 8;
   }
   return;
 }
 
-/* FUN_0010776c @ 0x10776c (68 bytes) */
-int FUN_0010776c(param_1, compiler)
-  undefined4 param_1;
+/* IRTextureFetch__new @ 0x10776c (68 bytes) */
+int IRTextureFetch__new(opcode, compiler)
+  undefined4 opcode;
   int compiler;
 {
   undefined4 *allocation;
@@ -1368,7 +1384,7 @@ int FUN_0010776c(param_1, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_0010764c)(allocation + 1,param_1,compiler);
+  ((int (*)())IRTextureFetch__ctor_10764c)(allocation + 1,opcode,compiler);
   return allocation + 1;
 }
 
@@ -1383,22 +1399,22 @@ int IRLoadConst__vslot59(this, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())FUN_0010764c)(allocation + 1,this,compiler);
+  ((int (*)())IRTextureFetch__ctor_10764c)(allocation + 1,this,compiler);
   return allocation + 1;
 }
 
 /* IRTextureFetchGradients__ctor_107864 @ 0x107864 (76 bytes) */
-int IRTextureFetchGradients__ctor_107864(param_1, param_2, compiler)
-  undefined4 *param_1;
-  undefined4 param_2;
+int IRTextureFetchGradients__ctor_107864(this, opcode, compiler)
+  undefined4 *this;
+  undefined4 opcode;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  ((int (*)())FUN_001074e0)(param_1,param_2,compiler);
-  puVar1 = PTR_DAT_001e8c48;
-  param_1[0x21] = 3;
-  *param_1 = puVar1 + 8;
+  ((int (*)())IRTextureFetch__ctor_1074e0)(this,opcode,compiler);
+  vtable = PTR_DAT_001e8c48;
+  this[0x21] = 3;
+  *this = vtable + 8;
   return;
 }
 
@@ -1418,83 +1434,83 @@ int IRLoadConst__vslot71(this, compiler)
 }
 
 /* IRMemLoad__ctor_10792c @ 0x10792c (84 bytes) */
-int IRMemLoad__ctor_10792c(param_1, param_2, param_3)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int IRMemLoad__ctor_10792c(this, opcode, compiler)
+  undefined4 *this;
+  undefined4 opcode;
+  undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  ((int (*)())FUN_0010704c)(param_1,param_2,param_3);
-  puVar1 = PTR_DAT_001e8c50;
-  param_1[0x4b] = 0;
-  param_1[0x21] = 2;
-  *param_1 = puVar1 + 8;
+  ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
+  vtable = PTR_DAT_001e8c50;
+  this[0x4b] = 0;
+  this[0x21] = 2;
+  *this = vtable + 8;
   return;
 }
 
-/* FUN_00107980 @ 0x107980 (84 bytes) */
-int FUN_00107980(param_1, param_2, param_3)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+/* IRMemLoad__ctor_107980 @ 0x107980 (84 bytes) */
+int IRMemLoad__ctor_107980(this, opcode, compiler)
+  undefined4 *this;
+  undefined4 opcode;
+  undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  ((int (*)())FUN_0010704c)(param_1,param_2,param_3);
-  puVar1 = PTR_DAT_001e8c50;
-  param_1[0x4b] = 0;
-  param_1[0x21] = 2;
-  *param_1 = puVar1 + 8;
+  ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
+  vtable = PTR_DAT_001e8c50;
+  this[0x4b] = 0;
+  this[0x21] = 2;
+  *this = vtable + 8;
   return;
 }
 
 /* IRMemStore__ctor_1079d4 @ 0x1079d4 (84 bytes) */
-int IRMemStore__ctor_1079d4(param_1, param_2, param_3)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int IRMemStore__ctor_1079d4(this, opcode, compiler)
+  undefined4 *this;
+  undefined4 opcode;
+  undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  ((int (*)())FUN_0010704c)(param_1,param_2,param_3);
-  puVar1 = PTR_DAT_001e8c10;
-  param_1[0x4b] = 0;
-  param_1[0x21] = 2;
-  *param_1 = puVar1 + 8;
+  ((int (*)())IRFetch__ctor_10704c)(this,opcode,compiler);
+  vtable = PTR_DAT_001e8c10;
+  this[0x4b] = 0;
+  this[0x21] = 2;
+  *this = vtable + 8;
   return;
 }
 
 /* IRZeroary__ctor_107a28 @ 0x107a28 (76 bytes) */
-int IRZeroary__ctor_107a28(param_1, param_2, param_3)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int IRZeroary__ctor_107a28(this, opcode, compiler)
+  undefined4 *this;
+  undefined4 opcode;
+  undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  ((int (*)())FUN_001071a8)(param_1,param_2,param_3);
-  puVar1 = PTR_DAT_001e8c2c;
-  param_1[0x21] = 0;
-  *param_1 = puVar1 + 8;
+  ((int (*)())IRAlu__ctor_1071a8)(this,opcode,compiler);
+  vtable = PTR_DAT_001e8c2c;
+  this[0x21] = 0;
+  *this = vtable + 8;
   return;
 }
 
 /* IRNop__ctor_107a74 @ 0x107a74 (92 bytes) */
-int IRNop__ctor_107a74(this, param_2, compiler)
+int IRNop__ctor_107a74(this, opcode, compiler)
   undefined4 *this;
-  undefined4 param_2;
+  undefined4 opcode;
   undefined4 compiler;
 {
-  undefined4 uVar1;
-  undefined *puVar2;
+  undefined4 defaultWord;
+  undefined *vtable;
   
-  ((int (*)())IRZeroary__ctor_107a28)(this,param_2,compiler);
-  uVar1 = DAT_001af9c8;
-  puVar2 = PTR_DAT_001e8be8 + 8;
+  ((int (*)())IRZeroary__ctor_107a28)(this,opcode,compiler);
+  defaultWord = DAT_001af9c8;
+  vtable = PTR_DAT_001e8be8 + 8;
   this[0x20] = 0;
-  *this = puVar2;
-  this[0x27] = uVar1;
+  *this = vtable;
+  this[0x27] = defaultWord;
   this[0x21] = 0;
   return;
 }
@@ -1515,42 +1531,42 @@ int IRLoadConst__vslot41(this, compiler)
 }
 
 /* IRNop__ctor_107b4c @ 0x107b4c (92 bytes) */
-int IRNop__ctor_107b4c(this, param_2, param_3)
+int IRNop__ctor_107b4c(this, opcode, compiler)
   undefined4 *this;
-  undefined4 param_2;
-  undefined4 param_3;
+  undefined4 opcode;
+  undefined4 compiler;
 {
-  undefined4 uVar1;
-  undefined *puVar2;
+  undefined4 defaultWord;
+  undefined *vtable;
   
-  ((int (*)())IRZeroary__ctor_107a28)(this,param_2,param_3);
-  uVar1 = DAT_001af9c8;
-  puVar2 = PTR_DAT_001e8be8 + 8;
+  ((int (*)())IRZeroary__ctor_107a28)(this,opcode,compiler);
+  defaultWord = DAT_001af9c8;
+  vtable = PTR_DAT_001e8be8 + 8;
   this[0x20] = 0;
-  *this = puVar2;
-  this[0x27] = uVar1;
+  *this = vtable;
+  this[0x27] = defaultWord;
   this[0x21] = 0;
   return;
 }
 
 /* IRZeroary__ctor_107ba8 @ 0x107ba8 (76 bytes) */
-int IRZeroary__ctor_107ba8(param_1, param_2, compiler)
-  undefined4 *param_1;
-  undefined4 param_2;
+int IRZeroary__ctor_107ba8(this, opcode, compiler)
+  undefined4 *this;
+  undefined4 opcode;
   undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  ((int (*)())FUN_001071a8)(param_1,param_2,compiler);
-  puVar1 = PTR_DAT_001e8c2c;
-  param_1[0x21] = 0;
-  *param_1 = puVar1 + 8;
+  ((int (*)())IRAlu__ctor_1071a8)(this,opcode,compiler);
+  vtable = PTR_DAT_001e8c2c;
+  this[0x21] = 0;
+  *this = vtable + 8;
   return;
 }
 
-/* FUN_00107bf4 @ 0x107bf4 (68 bytes) */
-int FUN_00107bf4(param_1, compiler)
-  undefined4 param_1;
+/* IRZeroary__new @ 0x107bf4 (68 bytes) */
+int IRZeroary__new(opcode, compiler)
+  undefined4 opcode;
   int compiler;
 {
   undefined4 *allocation;
@@ -1559,7 +1575,7 @@ int FUN_00107bf4(param_1, compiler)
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   *allocation = arena;
-  ((int (*)())IRZeroary__ctor_107ba8)(allocation + 1,param_1,compiler);
+  ((int (*)())IRZeroary__ctor_107ba8)(allocation + 1,opcode,compiler);
   return allocation + 1;
 }
 
@@ -1578,58 +1594,58 @@ int IRLoadConst__vslot51(this, compiler)
   return allocation + 1;
 }
 
-/* FUN_00107cec @ 0x107cec (76 bytes) */
-int FUN_00107cec(param_1, param_2, param_3)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+/* IRUnary__ctor_107cec @ 0x107cec (76 bytes) */
+int IRUnary__ctor_107cec(this, opcode, compiler)
+  undefined4 *this;
+  undefined4 opcode;
+  undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  ((int (*)())FUN_001071a8)(param_1,param_2,param_3);
-  puVar1 = PTR_DAT_001e8c68;
-  param_1[0x21] = 1;
-  *param_1 = puVar1 + 8;
+  ((int (*)())IRAlu__ctor_1071a8)(this,opcode,compiler);
+  vtable = PTR_DAT_001e8c68;
+  this[0x21] = 1;
+  *this = vtable + 8;
   return;
 }
 
 /* IRMov__ctor_107d38 @ 0x107d38 (112 bytes) */
-int IRMov__ctor_107d38(param_1, param_2, param_3)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int IRMov__ctor_107d38(this, opcode, compiler)
+  undefined4 *this;
+  undefined4 opcode;
+  undefined4 compiler;
 {
-  bool bVar1;
-  undefined *puVar2;
+  bool moreOperands;
+  undefined *vtable;
   int loopIndex;
   
-  ((int (*)())FUN_00107cec)(param_1,param_2,param_3);
-  puVar2 = PTR_DAT_001e8bf0;
-  param_1[0x20] = 1;
-  *param_1 = puVar2 + 8;
+  ((int (*)())IRUnary__ctor_107cec)(this,opcode,compiler);
+  vtable = PTR_DAT_001e8bf0;
+  this[0x20] = 1;
+  *this = vtable + 8;
   loopIndex = 0;
   do {
-    bVar1 = loopIndex != 1;
-    param_1[0x25] = 0xffffffff;
-    param_1[0x26] = 0;
+    moreOperands = loopIndex != 1;
+    this[0x25] = 0xffffffff;
+    this[0x26] = 0;
     loopIndex = loopIndex + 1;
-    param_1 = param_1 + 6;
-  } while (bVar1);
+    this = this + 6;
+  } while (moreOperands);
   return;
 }
 
 /* IRInst__reinitAsUnary @ 0x107da8 (76 bytes) */
-int IRInst__reinitAsUnary(param_1, param_2, param_3)
-  undefined4 *param_1;
-  undefined4 param_2;
-  undefined4 param_3;
+int IRInst__reinitAsUnary(this, opcode, compiler)
+  undefined4 *this;
+  undefined4 opcode;
+  undefined4 compiler;
 {
-  undefined *puVar1;
+  undefined *vtable;
   
-  ((int (*)())FUN_001071a8)(param_1,param_2,param_3);
-  puVar1 = PTR_DAT_001e8c68;
-  param_1[0x21] = 1;
-  *param_1 = puVar1 + 8;
+  ((int (*)())IRAlu__ctor_1071a8)(this,opcode,compiler);
+  vtable = PTR_DAT_001e8c68;
+  this[0x21] = 1;
+  *this = vtable + 8;
   return;
 }
 
@@ -1644,7 +1660,7 @@ asm(".set FUN_00105a44, _IRInst__removeFromList");
 asm(".globl FUN_00105b7c");
 asm(".set FUN_00105b7c, _IRInst__removeFromListEx");
 asm(".globl FUN_00105e9c");
-asm(".set FUN_00105e9c, _FUN_00105e9c");
+asm(".set FUN_00105e9c, _IRInst__appendOperandRef");
 asm(".globl FUN_0010647c");
 asm(".set FUN_0010647c, _IRInst__validate");
 asm(".globl FUN_001066e8");
@@ -1662,7 +1678,7 @@ asm(".set FUN_00106cb4, _IRPresub1__validate");
 asm(".globl FUN_00107464");
 asm(".set FUN_00107464, _IRLoadConst__vslot75");
 asm(".globl FUN_0010776c");
-asm(".set FUN_0010776c, _FUN_0010776c");
+asm(".set FUN_0010776c, _IRTextureFetch__new");
 asm(".globl FUN_001077e8");
 asm(".set FUN_001077e8, _IRLoadConst__vslot59");
 asm(".globl FUN_001078b0");

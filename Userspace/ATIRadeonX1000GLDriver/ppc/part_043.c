@@ -769,8 +769,8 @@ LAB_00147e9c:
     uVar7 = *(uint *)(param_2 * 0x18 + inst + 0xa0);
     uVar6 = *(uint *)(param_4 * 0x18 + inst2 + 0xa0);
     if (((uVar7 & 1) == (uVar6 & 1)) && ((uVar7 >> 1 & 1) == (uVar6 >> 1 & 1))) {
-      iVar3 = FUN_00105dbc(inst,param_2);
-      iVar5 = FUN_00105dbc(inst2,param_4);
+      iVar3 = IRInst__operandKindClass(inst,param_2);
+      iVar5 = IRInst__operandKindClass(inst2,param_4);
       if (iVar3 == iVar5) {
         definingField128 = IRInst__getDefiningField128(inst,param_2);
         definingField1282 = IRInst__getDefiningField128(inst2,param_4);
@@ -1632,7 +1632,7 @@ int FUN_001494dc(inst, param_2, param_3)
           } while (iVar2 != 0);
         }
         IRInst__getOperandRecord(inst,0);
-        iVar2 = FUN_00105dbc(inst,0);
+        iVar2 = IRInst__operandKindClass(inst,0);
         if (iVar2 == 0) {
           piVar6 = (int *)(inst[5] & 2);
           if ((piVar6 == (int *)0x0) && ((inst[5] & 0x200U) != 0)) {
@@ -1673,7 +1673,7 @@ LAB_00149704:
                     } while (iVar3 != 0);
                   }
                   IRInst__getOperandRecord(a0,0);
-                  iVar3 = FUN_00105dbc(a0,0);
+                  iVar3 = IRInst__operandKindClass(a0,0);
                   if (((iVar3 == 0) && ((a0[5] & 2U) == 0)) &&
                      (((a0[5] & 0x200U) == 0 &&
                       (piVar6 = (int *)IRInst__getOperandSource(a0,1), piVar6 == piVar7)))) {
@@ -1764,7 +1764,7 @@ LAB_00149a40:
         } while (iVar2 != 0);
       }
       IRInst__getOperandRecord(inst,0);
-      iVar2 = FUN_00105dbc(inst,0);
+      iVar2 = IRInst__operandKindClass(inst,0);
       if (iVar2 == 0) {
         sourceDef = (int *)IRInst__getOperandSource(inst,1);
         if ((((-1 < sourceDef[5]) && ((sourceDef[5] & 0x200U) == 0)) &&
@@ -9638,7 +9638,7 @@ LAB_0015802c:
           } while (iVar1 != 0);
         }
         IRInst__getOperandRecord(inst,0);
-        iVar1 = FUN_00105dbc(inst,0);
+        iVar1 = IRInst__operandKindClass(inst,0);
         if ((((iVar1 == 0) && ((inst[5] & 2U) == 0)) && ((inst[5] & 0x200U) == 0)) &&
            (iVar1 = IRInst__hasSingleUse(inst,param_6), iVar1 != 0)) {
           inst = (int *)IRInst__getOperandSource(inst,1);

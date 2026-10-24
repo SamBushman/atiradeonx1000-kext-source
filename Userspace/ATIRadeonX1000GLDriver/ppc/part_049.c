@@ -343,7 +343,7 @@ int FUN_00186a88(inst, operandIndex, inst2, program, param_5, param_6, param_7)
         } while (selectsLeft != 0);
       }
       IRInst__getOperandRecord(inst,0);
-      loopIndex = FUN_00105dbc(inst,0);
+      loopIndex = IRInst__operandKindClass(inst,0);
       if (((loopIndex == 0) && ((inst[5] & 2U) == 0)) && ((inst[5] & 0x200U) == 0)) {
         return 0;
       }
@@ -6044,7 +6044,7 @@ int R300VSchedModel__vslot19(this, inst)
         ((iVar1 != 0x4c && (iVar1 != 0x4d)))))) {
       for (operandNumber = 0; numSources2 = (**(code **)(*inst + 0x14))(inst), operandNumber <= numSources2;
           operandNumber = operandNumber + 1) {
-        numSources2 = FUN_00105dbc(inst,operandNumber);
+        numSources2 = IRInst__operandKindClass(inst,operandNumber);
         if (numSources2 != 0) {
           return 3;
         }

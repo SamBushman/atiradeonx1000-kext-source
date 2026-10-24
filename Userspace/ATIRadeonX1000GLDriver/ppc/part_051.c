@@ -1363,7 +1363,7 @@ int R300MachineAssembler__assembleBlock(this, block, startOfShaderFlag)
         groupInst = prevInst;
       }
     }
-    iVar11 = FUN_00106cf8(groupInst,*(undefined4 *)(iVar11 + 0x6c4));
+    iVar11 = IRInst__isCoalescableMov(groupInst,*(undefined4 *)(iVar11 + 0x6c4));
     prevInst = groupInst;
     if ((((iVar11 == 0) || (instFlags = groupInst[5], (instFlags & 4) != 0)) || ((int)instFlags < 0)) ||
        ((instFlags & 0x1000) != 0)) {

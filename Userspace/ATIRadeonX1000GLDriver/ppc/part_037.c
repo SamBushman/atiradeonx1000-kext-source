@@ -322,7 +322,7 @@ LAB_0011f2a8:
       }
       else {
         IRInst__getOperandRecord(iVar7,0);
-        iVar7 = FUN_00105dbc(iVar7,0);
+        iVar7 = IRInst__operandKindClass(iVar7,0);
         if (iVar7 != 0) goto LAB_0011f2a8;
         iVar13 = *(int *)(iVar3 + 0x214);
         operandSource = IRInst__getOperandSource(iVar13,1);
@@ -349,7 +349,7 @@ LAB_0011f2a8:
         }
         iVar7 = *piVar12;
         IRInst__getOperandRecord(iVar7,1);
-        iVar7 = FUN_00105dbc(iVar7,1);
+        iVar7 = IRInst__operandKindClass(iVar7,1);
         if (iVar7 == 0) {
           iVar7 = *piVar12;
 LAB_0011f054:
@@ -438,7 +438,7 @@ LAB_0011f190:
           *piVar12 = iVar7;
         }
         else {
-          iVar7 = FUN_00105dbc(*piVar12,1);
+          iVar7 = IRInst__operandKindClass(*piVar12,1);
           if (iVar7 != 1) goto LAB_0011f2a8;
           piVar4 = *(int **)(ctx + 0xb0);
           iVar7 = *piVar12;
@@ -495,7 +495,7 @@ int Program__tryEliminateRedundantCopy(param_1, inst, param_3)
         } while (iVar1 != 0);
       }
       IRInst__getOperandRecord(inst,0);
-      iVar1 = FUN_00105dbc(inst,0);
+      iVar1 = IRInst__operandKindClass(inst,0);
       if (((iVar1 == 0) && ((inst[5] & 2U) == 0)) &&
          (((inst[5] & 0x200U) == 0 && (iVar1 = RegKind__flagBit0(inst[0x26]), iVar1 != 0)))) {
         iVar1 = IRInst__getOperandSource(inst,1);

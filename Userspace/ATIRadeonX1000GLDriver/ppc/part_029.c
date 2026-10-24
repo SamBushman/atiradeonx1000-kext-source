@@ -38,7 +38,7 @@ int FUN_00107eec(inst, param_2, compiler)
 {
   undefined *puVar1;
   
-  FUN_001071a8(inst,param_2,compiler);
+  IRAlu__ctor_1071a8(inst,param_2,compiler);
   puVar1 = PTR_DAT_001e8bec;
   inst[0x21] = 2;
   *inst = puVar1 + 8;
@@ -117,7 +117,7 @@ int IRInst__reinitAsBinary(inst, param_2, compiler)
 {
   undefined *puVar1;
   
-  FUN_001071a8(inst,param_2,compiler);
+  IRAlu__ctor_1071a8(inst,param_2,compiler);
   puVar1 = PTR_DAT_001e8bec;
   inst[0x21] = 2;
   *inst = puVar1 + 8;
@@ -162,7 +162,7 @@ int FUN_001082b8(inst, param_2, compiler)
 {
   undefined *puVar1;
   
-  FUN_001071a8(inst,param_2,compiler);
+  IRAlu__ctor_1071a8(inst,param_2,compiler);
   puVar1 = PTR_DAT_001e8c24;
   inst[0x21] = 3;
   *inst = puVar1 + 8;
@@ -177,7 +177,7 @@ int IRInst__reinitAsTrinary(inst, param_2, compiler)
 {
   undefined *puVar1;
   
-  FUN_001071a8(inst,param_2,compiler);
+  IRAlu__ctor_1071a8(inst,param_2,compiler);
   puVar1 = PTR_DAT_001e8c24;
   inst[0x21] = 3;
   *inst = puVar1 + 8;
@@ -224,7 +224,7 @@ int IRInst__reinitAsMov(param_1, param_2, compiler)
   undefined *puVar2;
   int iVar3;
   
-  FUN_00107cec(param_1,param_2,compiler);
+  IRUnary__ctor_107cec(param_1,param_2,compiler);
   puVar2 = PTR_DAT_001e8bf0;
   param_1[0x20] = 1;
   *param_1 = puVar2 + 8;
@@ -277,7 +277,7 @@ int IRExport__ctor_1085b0(this, compiler)
   undefined4 uVar1;
   undefined4 opcodeInfo;
   
-  FUN_001071a8(this,0x30,compiler);
+  IRAlu__ctor_1071a8(this,0x30,compiler);
   this[5] = this[5] | 0x12;
   *this = &PTR_FUN_001ea118;
   if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) == 0) {
@@ -393,7 +393,7 @@ int IRExport__ctor_108918(this, compiler)
   undefined4 uVar1;
   undefined4 opcodeInfo;
   
-  FUN_001071a8(this,0x30,compiler);
+  IRAlu__ctor_1071a8(this,0x30,compiler);
   this[5] = this[5] | 0x12;
   *this = &PTR_FUN_001ea118;
   if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) == 0) {
@@ -489,7 +489,7 @@ int FUN_00108c68(this, compiler)
 {
   undefined *puVar1;
   
-  FUN_001070f8(this,0x86,compiler);
+  IRPseudo__ctor(this,0x86,compiler);
   puVar1 = PTR_DAT_001e8bf4;
   this[0x4b] = 0;
   *this = puVar1 + 8;
@@ -503,7 +503,7 @@ int FUN_00108cbc(this, compiler)
 {
   undefined *puVar1;
   
-  FUN_001070f8(this,0x86,compiler);
+  IRPseudo__ctor(this,0x86,compiler);
   puVar1 = PTR_DAT_001e8bf4;
   this[0x4b] = 0;
   *this = puVar1 + 8;
@@ -515,7 +515,7 @@ int IREntry__ctor_108d10(this, compiler)
   undefined4 *this;
   undefined4 compiler;
 {
-  FUN_001070f8(this,0x87,compiler);
+  IRPseudo__ctor(this,0x87,compiler);
   *this = PTR_DAT_001e8c44 + 8;
   return;
 }
@@ -525,7 +525,7 @@ int IREntry__ctor_108d5c(this, compiler)
   undefined4 *this;
   undefined4 compiler;
 {
-  FUN_001070f8(this,0x87,compiler);
+  IRPseudo__ctor(this,0x87,compiler);
   *this = PTR_DAT_001e8c44 + 8;
   return;
 }
@@ -535,7 +535,7 @@ int IRExit__ctor_108da8(this, compiler)
   undefined4 *this;
   undefined4 compiler;
 {
-  FUN_001070f8(this,0x88,compiler);
+  IRPseudo__ctor(this,0x88,compiler);
   *this = PTR_DAT_001e8c5c + 8;
   return;
 }
@@ -545,7 +545,7 @@ int IRExit__ctor_108df4(this, compiler)
   undefined4 *this;
   undefined4 compiler;
 {
-  FUN_001070f8(this,0x88,compiler);
+  IRPseudo__ctor(this,0x88,compiler);
   *this = PTR_DAT_001e8c5c + 8;
   return;
 }
@@ -558,7 +558,7 @@ int FUN_00108e40(this, kind, compiler)
 {
   undefined *puVar1;
   
-  FUN_001070f8(this,kind,compiler);
+  IRPseudo__ctor(this,kind,compiler);
   puVar1 = PTR_DAT_001e8c54;
   this[0x20] = 1;
   *this = puVar1 + 8;

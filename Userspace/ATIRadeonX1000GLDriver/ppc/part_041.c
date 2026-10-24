@@ -783,7 +783,7 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
                         } while (byteLoopLeft != 0);
                       }
                       IRInst__getOperandRecord(walkInst,0);
-                      noSourceResult = FUN_00105dbc(walkInst,0);
+                      noSourceResult = IRInst__operandKindClass(walkInst,0);
                       if (((noSourceResult == 0) && ((walkInst[5] & 2U) == 0)) &&
                          (((((walkInst[5] & 0x200U) == 0 &&
                             ((cursorInst = (int *)IRInst__getOperandSource(walkInst,1), cursorInst[0x20] != 0 &&
@@ -1263,7 +1263,7 @@ int FUN_0013323c(pass, param_2)
                   } while (iVar9 != 0);
                 }
                 IRInst__getOperandRecord(piVar26,0);
-                iVar9 = FUN_00105dbc(piVar26,0);
+                iVar9 = IRInst__operandKindClass(piVar26,0);
                 if (iVar9 != 0) goto LAB_001339e0;
                 uVar16 = piVar26[5];
                 if ((((uVar16 & 2) == 0) && ((uVar16 & 0x200) == 0)) && (-1 < (int)uVar16)) {
@@ -3956,7 +3956,7 @@ LAB_00137af8:
                       }
                       IRInst__getOperandRecord(piVar1,iVar3);
                       piVar5 = piVar5 + 6;
-                      iVar6 = FUN_00105dbc(piVar1,iVar3);
+                      iVar6 = IRInst__operandKindClass(piVar1,iVar3);
                       if (iVar6 != 0) goto LAB_00137af8;
                     }
                     uVar4 = piVar1[5];

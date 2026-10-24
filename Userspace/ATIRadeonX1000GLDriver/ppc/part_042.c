@@ -2337,7 +2337,7 @@ int IfHeader__convertInnerIfToCmov(param_1, param_2, param_3)
                     } while (iVar5 != 0);
                   }
                   IRInst__getOperandRecord(operandVReg,0);
-                  iVar5 = FUN_00105dbc(operandVReg,0);
+                  iVar5 = IRInst__operandKindClass(operandVReg,0);
                   if (((iVar5 != 0) || ((operandVReg[5] & 2U) != 0)) ||
                      ((in_r9 = (int *)(operandVReg[5] & 0x200), in_r9 != (int *)0x0 ||
                       (*(int *)(operandVReg[4] + 4) != 1)))) goto LAB_0013cd68;
@@ -2373,7 +2373,7 @@ LAB_0013cd68:
                     } while (iVar5 != 0);
                   }
                   IRInst__getOperandRecord(operandVReg,0);
-                  iVar5 = FUN_00105dbc(operandVReg,0);
+                  iVar5 = IRInst__operandKindClass(operandVReg,0);
                   if ((((iVar5 != 0) || ((operandVReg[5] & 2U) != 0)) ||
                       (in_r9 = (int *)(operandVReg[5] & 0x200), in_r9 != (int *)0x0)) ||
                      (*(int *)(operandVReg[4] + 4) != 1)) goto LAB_0013cee8;

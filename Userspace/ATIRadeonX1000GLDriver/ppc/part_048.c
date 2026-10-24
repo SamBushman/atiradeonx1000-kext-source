@@ -3377,7 +3377,7 @@ LAB_00180a14: ;
     for (iVar19 = 1;
         loopIndex5 = (**(code **)(**(int **)(key + 0xb0) + 0x14))(*(int **)(key + 0xb0)),
         iVar19 <= loopIndex5; iVar19 = iVar19 + 1) {
-      loopIndex5 = FUN_00105dbc(*(undefined4 *)(key + 0xb0),iVar19);
+      loopIndex5 = IRInst__operandKindClass(*(undefined4 *)(key + 0xb0),iVar19);
       if (loopIndex5 == 2) {
         puVar27 = *(uint **)(*(int *)(loopIndex4 + *(int *)(key + 0xb0) + 0x8c) + 0x2c);
         uVar18 = puVar27[1];
@@ -3473,7 +3473,7 @@ LAB_00180cb4:
       loopIndex8 = *(int **)(*loopIndex8 + 0xb0);
       iVar19 = (**(code **)(*loopIndex8 + 0x74))(loopIndex8);
       if (((iVar19 != 0) && (*(int *)(loopIndex8[0x22] + 8) == 0xfb)) &&
-         (iVar19 = FUN_00105dbc(*(undefined4 *)(key + 0xb0),loopIndex4), iVar19 == 0)) {
+         (iVar19 = IRInst__operandKindClass(*(undefined4 *)(key + 0xb0),loopIndex4), iVar19 == 0)) {
         iVar19 = IRInst__getOperandRecord(*(undefined4 *)(key + 0xb0),loopIndex4);
         SelectWord__readMask(&local_78,*(undefined4 *)(iVar19 + 0x10));
         local_9c = local_78;

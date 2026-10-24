@@ -3219,7 +3219,7 @@ LAB_000f9f08:
       allocation = (undefined4 *)Arena__alloc(arena,0x168);
       *allocation = arena;
       puVar21 = allocation + 1;
-      FUN_001071fc(puVar21,0xfc,*(undefined4 *)(pass + 8));
+      IRMemStore__ctor_1071fc(puVar21,0xfc,*(undefined4 *)(pass + 8));
       arena = FUN_000ec208(pass,uVar11);
       operandRecord3 = IRInst__getOperandRecord(puVar21,0);
       *(undefined4 *)(operandRecord3 + 0xc) = arena;
@@ -3310,7 +3310,7 @@ LAB_000fa1bc:
       allocation = (undefined4 *)Arena__alloc(arena,0x168);
       *allocation = arena;
       puVar21 = allocation + 1;
-      FUN_001071fc(puVar21,0xfc,*(undefined4 *)(pass + 8));
+      IRMemStore__ctor_1071fc(puVar21,0xfc,*(undefined4 *)(pass + 8));
       arena = FUN_000ec208(pass,uVar11);
       operandRecord = IRInst__getOperandRecord(puVar21,0);
       *(undefined4 *)(operandRecord + 0xc) = arena;
@@ -4108,7 +4108,7 @@ LAB_000fb800:
         allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
         *allocation = arenaAt374;
         allocation = allocation + 1;
-        FUN_00107980(allocation,arena,*(undefined4 *)(param_1 + 8));
+        IRMemLoad__ctor_107980(allocation,arena,*(undefined4 *)(param_1 + 8));
         arena = FUN_000ec208(param_1,uVar34);
         pdVar17 = (dword *)((int)((unsigned char *)0x0) + 2);
         operandRecord3 = IRInst__getOperandRecord(allocation,1);
@@ -4165,7 +4165,7 @@ LAB_000fb800:
       allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
       *allocation = arenaAt374;
       allocation = allocation + 1;
-      FUN_00107980(allocation,arena,*(undefined4 *)(param_1 + 8));
+      IRMemLoad__ctor_107980(allocation,arena,*(undefined4 *)(param_1 + 8));
       arena = FUN_000ec208(param_1,4);
       operandRecord2 = IRInst__getOperandRecord(allocation,0);
       *(undefined4 *)(operandRecord2 + 0xc) = arena;

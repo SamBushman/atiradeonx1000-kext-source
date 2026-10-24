@@ -48,7 +48,7 @@ LAB_00158b4c:
           } while (iVar2 != 0);
         }
         IRInst__getOperandRecord(inst,0);
-        iVar2 = FUN_00105dbc(inst,0);
+        iVar2 = IRInst__operandKindClass(inst,0);
         if (iVar2 != 0) goto LAB_00158b48;
         uVar1 = inst[5];
         if (((uVar1 & 2) == 0) && ((uVar1 & 0x200) == 0)) {
@@ -259,7 +259,7 @@ int Inst__distributeResultScale(rootInst, program)
                 } while (lanesLeft != 0);
               }
               IRInst__getOperandRecord(operandVReg,0);
-              addrMode = FUN_00105dbc(operandVReg,0);
+              addrMode = IRInst__operandKindClass(operandVReg,0);
               if (((addrMode == 0) && ((operandVReg[5] & 2U) == 0)) && ((operandVReg[5] & 0x200U) == 0)) {
                 *(int *)(program + 0x17c) = *(int *)(program + 0x17c) + 1;
                 sourceDef2 = IRInst__getOperandSource(operandVReg,1);
@@ -299,7 +299,7 @@ LAB_00159218:
                 } while (lanesLeft2 != 0);
               }
               IRInst__getOperandRecord(callResult,0);
-              addrMode2 = FUN_00105dbc(callResult,0);
+              addrMode2 = IRInst__operandKindClass(callResult,0);
               if (((addrMode2 == 0) && ((callResult[5] & 2U) == 0)) && ((callResult[5] & 0x200U) == 0)) {
                 *(int *)(program + 0x17c) = *(int *)(program + 0x17c) + 1;
                 sourceDef2 = IRInst__getOperandSource(callResult,1);
@@ -4419,7 +4419,7 @@ LAB_001605dc:
         } while (iVar2 != 0);
       }
       IRInst__getOperandRecord(inst,0);
-      iVar2 = FUN_00105dbc(inst,0);
+      iVar2 = IRInst__operandKindClass(inst,0);
       if (((iVar2 == 0) && (*(int *)(node[0x22] + 8) != 0x8e)) &&
          (iVar2 = (**(code **)(*node + 0x60))(node), iVar2 == 0)) {
         iVar2 = (**(code **)(*node + 0x28))(node);
@@ -4581,7 +4581,7 @@ LAB_001605dc:
     } while (iVar2 != 0);
   }
   IRInst__getOperandRecord(inst,0);
-  iVar2 = FUN_00105dbc(inst,0);
+  iVar2 = IRInst__operandKindClass(inst,0);
   if (iVar2 != 0) {
     return 0;
   }
@@ -10496,7 +10496,7 @@ LAB_0016a200:
                 } while (selectsLeft != 0);
               }
               IRInst__getOperandRecord(inst2,0);
-              iVar2 = FUN_00105dbc(inst2,0);
+              iVar2 = IRInst__operandKindClass(inst2,0);
               if (iVar2 != 0) goto LAB_0016a1fc;
               instFlags = inst2[5];
               if (((instFlags & 2) != 0) || ((instFlags & 0x200) != 0)) goto LAB_0016a200;

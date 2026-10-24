@@ -631,7 +631,7 @@ int FUN_0012c3d0(inst, param_2, param_3)
     iVar2 = (**(code **)(*inst + 0x14))(inst);
     if (iVar2 < iVar5) {
       iVar5 = (**(code **)(*inst + 0x18))(inst);
-      if ((iVar5 == 1) && (iVar5 = FUN_00105dbc(inst,0), iVar5 == 1)) {
+      if ((iVar5 == 1) && (iVar5 = IRInst__operandKindClass(inst,0), iVar5 == 1)) {
         uVar6 = *(undefined4 *)(param_3 + 0x3ac);
         definingField128 = IRInst__getDefiningField128(inst,0);
         piVar3 = (int *)FUN_00127608(uVar6,0x24,definingField128 + param_2,0);
@@ -647,7 +647,7 @@ int FUN_0012c3d0(inst, param_2, param_3)
       }
       return;
     }
-    iVar2 = FUN_00105dbc(inst,iVar5);
+    iVar2 = IRInst__operandKindClass(inst,iVar5);
     if (iVar2 == 1) {
       definingField1282 = IRInst__getDefiningField128(inst,iVar5);
       if (piVar3[0x2c] == 0x28) {
@@ -717,7 +717,7 @@ int LoopInfo__matchCounterInit(loopInfo, inst)
         } while (index != 0);
       }
       IRInst__getOperandRecord(inst,0);
-      index = FUN_00105dbc(inst,0);
+      index = IRInst__operandKindClass(inst,0);
       if (((index == 0) && ((inst[5] & 2U) == 0)) && ((inst[5] & 0x200U) == 0)) {
         operandVReg = (int *)IRInst__getOperandSource(inst,1);
         index = (**(code **)(*operandVReg + 0x48))(operandVReg);
@@ -1463,7 +1463,7 @@ int pass_flatten_ifs(flattenPass)
               iVar5 = 0;
             }
             elseBlock = phiInst[4];
-            FUN_00105b24(phiInst,flattenPass);
+            IRInst__detachWhenTracking(phiInst,flattenPass);
             DList__unlink(phiInst);
             IRInst__reinitAsTrinary(phiInst,0x25,*(undefined4 *)(flattenPass + 8));
             Block__insertInstAfter(blockAfterIf,insertAfterInst,phiInst);
@@ -3646,7 +3646,7 @@ int FUN_001311cc(param_1, param_2, param_3, param_4, param_5, compiler)
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar4 = allocation + 1;
   *allocation = arena;
-  FUN_00107980(puVar4,0xfb,compiler);
+  IRMemLoad__ctor_107980(puVar4,0xfb,compiler);
   arena = UNK_001affe4;
   allocation[0x27] = 0;
   allocation[0x28] = arena;
@@ -3703,7 +3703,7 @@ int FUN_001312f4(inst, param_2, param_3, param_4, compiler)
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   puVar7 = allocation + 1;
   *allocation = arena;
-  FUN_001071fc(puVar7,0xfc,compiler);
+  IRMemStore__ctor_1071fc(puVar7,0xfc,compiler);
   arena = *(undefined4 *)(param_2 + 0x94);
   allocation[0x27] = 0x3b;
   allocation[0x26] = arena;

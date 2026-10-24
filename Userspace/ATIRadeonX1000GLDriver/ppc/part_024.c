@@ -2772,7 +2772,7 @@ int FUN_000f04d4(param_1, inst)
         } while (iVar3 != 0);
       }
       IRInst__getOperandRecord(inst,0);
-      FUN_00105dbc(inst,0);
+      IRInst__operandKindClass(inst,0);
     }
   }
 LAB_000f0628:
@@ -3059,7 +3059,7 @@ code_r0x000f1384:
                     } while (iVar15 != 0);
                   }
                   IRInst__getOperandRecord(piVar3,0);
-                  iVar15 = FUN_00105dbc(piVar3,0);
+                  iVar15 = IRInst__operandKindClass(piVar3,0);
                   if ((iVar15 == 0) && ((piVar3[5] & 2U) == 0)) {
                     arena = IRInst__getOperandSource(piVar3,1);
                     iVar9 = ((int (*)())FUN_000ecc1c)(arena,local_84,*(undefined4 *)(pass + 8));
@@ -3134,7 +3134,7 @@ code_r0x000f101c:
                     } while (iVar15 != 0);
                   }
                   IRInst__getOperandRecord(piVar3,0);
-                  iVar15 = FUN_00105dbc(piVar3,0);
+                  iVar15 = IRInst__operandKindClass(piVar3,0);
                   if (iVar15 == 0) {
                     operandVReg = (int *)IRInst__getOperandSource(piVar3,1);
                     iVar15 = (**(code **)(*operandVReg + 0x48))();

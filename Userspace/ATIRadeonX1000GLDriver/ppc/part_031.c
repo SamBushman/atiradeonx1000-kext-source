@@ -2322,7 +2322,7 @@ int FUN_0010f4d4(param_1)
       }
       uVar5 = *(undefined4 *)*puVar2;
       IRInst__getOperandRecord(uVar5,0);
-      iVar3 = FUN_00105dbc(uVar5,0);
+      iVar3 = IRInst__operandKindClass(uVar5,0);
       if (iVar3 != 0) {
         return 1;
       }
@@ -2348,7 +2348,7 @@ int FUN_0010f4d4(param_1)
       }
       uVar5 = *(undefined4 *)*puVar2;
       IRInst__getOperandRecord(uVar5,0);
-      iVar3 = FUN_00105dbc(uVar5,0);
+      iVar3 = IRInst__operandKindClass(uVar5,0);
       if (iVar3 != 0) {
         return 1;
       }
@@ -2374,7 +2374,7 @@ int FUN_0010f4d4(param_1)
       }
       uVar5 = *(undefined4 *)*puVar2;
       IRInst__getOperandRecord(uVar5,0);
-      iVar3 = FUN_00105dbc(uVar5,0);
+      iVar3 = IRInst__operandKindClass(uVar5,0);
       if (iVar3 != 0) {
         return 1;
       }

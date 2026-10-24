@@ -1941,7 +1941,7 @@ int FUN_0012ab04(inst)
     if (iVar1 < loopIndex) {
       return 0;
     }
-    iVar1 = FUN_00105dbc(inst,loopIndex);
+    iVar1 = IRInst__operandKindClass(inst,loopIndex);
     if (iVar1 == 1) break;
     loopIndex = loopIndex + 1;
   }

@@ -1913,7 +1913,7 @@ int R300VMachineAssembler__assembleBlock(this, block)
       groupInst = (int *)((int (*)())R300VMachineAssembler__findFoldableMovePair)(this,block,piVar5,this + 0x1f);
       iVar3 = this[3];
     }
-    iVar3 = FUN_00106cf8(groupInst,*(undefined4 *)(iVar3 + 0x6c4));
+    iVar3 = IRInst__isCoalescableMov(groupInst,*(undefined4 *)(iVar3 + 0x6c4));
     if ((((iVar3 == 0) || (instFlags = groupInst[5], (instFlags & 4) != 0)) || ((int)instFlags < 0)) ||
        ((instFlags & 0x1000) != 0)) {
       (**(code **)(*this + 0xbc))(this);
@@ -2320,7 +2320,7 @@ LAB_0019bee4:
     destRegType = inst[0x26];
   }
   *instructionWords = (*(uint *)(&DAT_001b2ad0 + destRegType * 4) & 0xf) << 8 | *instructionWords & 0xfffff0ff;
-  destAddrMode = FUN_00105dbc(inst,0);
+  destAddrMode = IRInst__operandKindClass(inst,0);
   if (destAddrMode == 1) {
     *(undefined4 *)(this + 0x24) = 1;
     *instructionWords = *instructionWords | 0x1000;
@@ -2549,7 +2549,7 @@ int R300VMachineAssembler__encodeSourceOperand(this, inst, instructionWords, sou
   }
   loopIndex = (**(code **)(*srcDefInst + 0x60))(srcDefInst);
   if (loopIndex == 0) {
-    loopIndex = FUN_00105dbc(inst,sourceNumber);
+    loopIndex = IRInst__operandKindClass(inst,sourceNumber);
     srcRegClass = srcDefInst[0x26];
     allocTable = *(undefined4 *)(*(int *)(this + 0xc) + 0x6c4);
     regDefInst = srcDefInst;
@@ -2566,7 +2566,7 @@ LAB_0019c490:
     }
   }
   else {
-    loopIndex = FUN_00105dbc(srcDefInst,1);
+    loopIndex = IRInst__operandKindClass(srcDefInst,1);
     srcRegClass = IRInst__getOperandSource(srcDefInst,1);
     srcRegClass = *(int *)(srcRegClass + 0x98);
     if (srcRegClass != 0x33) {
@@ -2827,10 +2827,10 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
   dualMathWord = instructionWords + 3;
   *instructionWords = *instructionWords | 0x10000000;
   a2 = instructionWords;
-  FUN_00105dbc(inst,1);
+  IRInst__operandKindClass(inst,1);
   loopIndex = (**(code **)(*inst + 0x14))(inst);
   if (loopIndex == 2) {
-    FUN_00105dbc(inst,2);
+    IRInst__operandKindClass(inst,2);
   }
   operandVReg = (int *)IRInst__getOperandSource(inst,1);
   loopIndex = (**(code **)(*operandVReg + 0x60))(operandVReg);
