@@ -3109,165 +3109,175 @@ code_r0x97bb7b18:
 }
 
 /* TGenericLinker__BuildSymbolTableList @ 0x97bb7b4c (352 bytes) */
-int TGenericLinker__BuildSymbolTableList(this, param_2, param_3)
+int TGenericLinker__BuildSymbolTableList(this, shaderHandles, numShaders)
   unsigned char * this;
-  void **param_2;
-  int param_3;
+  void **shaderHandles;
+  int numShaders;
 {
+  int shaderCompiler;
+  void *loopInfoSink;
+  void *newPpStreamArray;
+  void *symbolTableArray;
+  void *compilerArray;
+  int shaderCursor;
+  int checkStage;
+  unsigned char *stageSlot;
+  int stageByteOffset;
+  int fillSlot;
   char *allocation;
-  bool bVar1;
-  int iVar2;
-  int *piVar3;
-  int iVar4;
+  bool linkOk;
+  int stage;
+  int *shaderHandle;
+  int compiler;
   size_t length;
   size_t length2;
-  char *pcVar7;
+  char *errorText;
   void **r4Out0;
   void **r4Out1;
   void **r4In0;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  unsigned char * pTVar8;
+  undefined4 r6Fwd;
+  undefined4 r7Fwd;
+  undefined4 r8Fwd;
+  unsigned char *r9Fwd;
   undefined4 r10In0;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  void *pvVar13;
-  int local_50 [2];
-  undefined8 local_48;
-  undefined8 local_40 [2];
+  int ppStreamArray;
+  int shaderIndex;
+  int r5Fwd;
+  int status;
+  void *infoSink;
+  int mainCount [2];
+  undefined8 mainShaderIndex;
+  undefined8 fillIndex [2];
   
-  iVar10 = 0;
-  pTVar8 = (unsigned char *)0x0;
+  shaderIndex = 0;
+  r9Fwd = (unsigned char *)0x0;
   r10In0 = 0;
-  local_50[0] = 0;
-  local_50[1] = 0;
-  local_48 = DAT_97c38fb0;
-  iVar12 = 1;
-  local_40[0] = DAT_97c38fb8;
-  r4In0 = param_2;
-  iVar11 = param_3;
-  if (param_3 < 1) {
+  mainCount[0] = 0;
+  mainCount[1] = 0;
+  mainShaderIndex = DAT_97c38fb0;
+  status = 1;
+  fillIndex[0] = DAT_97c38fb8;
+  r4In0 = shaderHandles;
+  r5Fwd = numShaders;
+  if (numShaders < 1) {
 LAB_97bb7d6c:
-    bVar1 = false;
-    if (iVar12 == 1) {
-      iVar11 = 0;
+    linkOk = false;
+    if (status == 1) {
+      checkStage = 0;
       do {
-        if ((local_50[iVar11] == 0) && (0 < *(int *)(this + iVar11 * 4 + 0x20))) {
+        if ((mainCount[checkStage] == 0) && (0 < *(int *)(this + checkStage * 4 + 0x20))) {
           length = _strlen(UNK_a7b7bab8);
-          length2 = _strlen((char *)(&_shaderString)[iVar11]);
+          length2 = _strlen((char *)(&_shaderString)[checkStage]);
           allocation = _malloc(length + length2 + 1);
-          _sprintf(allocation,UNK_a7b7bab8,(&_shaderString)[iVar11]);
-          pvVar13 = *(void **)(this + 0x84);
+          _sprintf(allocation,UNK_a7b7bab8,(&_shaderString)[checkStage]);
+          infoSink = *(void **)(this + 0x84);
                     
 override_jmp_97bb7df4_case_0:
-          __ZN13TInfoSinkBase6appendEPKc(pvVar13,"ERROR: ");
-          __ZN13TInfoSinkBase6appendEPKc(pvVar13,allocation);
-          __ZN13TInfoSinkBase6appendEPKc(pvVar13,"\n");
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,allocation);
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
           _free(allocation);
-          iVar12 = 0;
+          status = 0;
         }
-        else if (1 < local_50[iVar11]) {
+        else if (1 < mainCount[checkStage]) {
           length = _strlen(UNK_a7b7babc);
-          length2 = _strlen((char *)(&_shaderString)[iVar11]);
+          length2 = _strlen((char *)(&_shaderString)[checkStage]);
           allocation = _malloc(length + length2 + 9);
-          _sprintf(allocation,UNK_a7b7babc,local_50[iVar11],(&_shaderString)[iVar11]);
-          pvVar13 = *(void **)(this + 0x84);
+          _sprintf(allocation,UNK_a7b7babc,mainCount[checkStage],(&_shaderString)[checkStage]);
+          infoSink = *(void **)(this + 0x84);
                     
           goto override_jmp_97bb7df4_case_0;
         }
-        iVar11 = iVar11 + 1;
-      } while (iVar11 < 2);
-      bVar1 = iVar12 == 1;
-      if (bVar1) {
-        pTVar8 = this;
+        checkStage = checkStage + 1;
+      } while (checkStage < 2);
+      linkOk = status == 1;
+      if (linkOk) {
+        stageSlot = this;
         do {
-          pvVar13 = _malloc(*(int *)(pTVar8 + 0x20) << 2);
-          *(void **)(pTVar8 + 8) = pvVar13;
-          pvVar13 = _malloc(*(int *)(pTVar8 + 0x20) << 2);
-          *(void **)(pTVar8 + 0x10) = pvVar13;
-          pvVar13 = _malloc(*(int *)(pTVar8 + 0x20) << 2);
-          *(void **)(pTVar8 + 0x18) = pvVar13;
-          pTVar8 = pTVar8 + 4;
-        } while ((int)pTVar8 <= (int)(this + 4));
+          compilerArray = _malloc(*(int *)(stageSlot + 0x20) << 2);
+          *(void **)(stageSlot + 8) = compilerArray;
+          symbolTableArray = _malloc(*(int *)(stageSlot + 0x20) << 2);
+          *(void **)(stageSlot + 0x10) = symbolTableArray;
+          newPpStreamArray = _malloc(*(int *)(stageSlot + 0x20) << 2);
+          *(void **)(stageSlot + 0x18) = newPpStreamArray;
+          stageSlot = stageSlot + 4;
+        } while ((int)stageSlot <= (int)(this + 4));
       }
     }
   }
   else {
     do {
-      piVar3 = param_2[iVar10];
-      if (piVar3 == (int *)0x0) {
-        pTVar8 = (unsigned char *)&_linkIntErrorString;
-        pvVar13 = *(void **)(this + 0x84);
-        pcVar7 = DAT_a7b7bb64;
+      shaderHandle = shaderHandles[shaderIndex];
+      if (shaderHandle == (int *)0x0) {
+        r9Fwd = (unsigned char *)&_linkIntErrorString;
+        loopInfoSink = *(void **)(this + 0x84);
+        errorText = DAT_a7b7bb64;
                     
 override_jmp_97bb7c58_case_0:
-        __ZN13TInfoSinkBase6appendEPKc(pvVar13,"INTERNAL ERROR: ");
-        __ZN13TInfoSinkBase6appendEPKc(pvVar13,pcVar7);
-        __ZN13TInfoSinkBase6appendEPKc(pvVar13,"\n");
-        iVar12 = 0;
+        __ZN13TInfoSinkBase6appendEPKc(loopInfoSink,"INTERNAL ERROR: ");
+        __ZN13TInfoSinkBase6appendEPKc(loopInfoSink,errorText);
+        __ZN13TInfoSinkBase6appendEPKc(loopInfoSink,"\n");
+        status = 0;
         r4In0 = r4Out1;
       }
       else {
-        iVar4 = (**(code **)(*piVar3 + 8))(piVar3,r4In0,iVar11,in_r6,in_r7,in_r8,pTVar8,r10In0);
-        if (iVar4 == 0) {
-          pTVar8 = (unsigned char *)&_linkIntErrorString;
-          pvVar13 = *(void **)(this + 0x84);
-          pcVar7 = DAT_a7b7bb64;
+        compiler = (**(code **)(*shaderHandle + 8))(shaderHandle,r4In0,r5Fwd,r6Fwd,r7Fwd,r8Fwd,r9Fwd,r10In0);
+        if (compiler == 0) {
+          r9Fwd = (unsigned char *)&_linkIntErrorString;
+          loopInfoSink = *(void **)(this + 0x84);
+          errorText = DAT_a7b7bb64;
                     
           goto override_jmp_97bb7c58_case_0;
         }
-        iVar2 = 0;
-        if (*(int *)(iVar4 + 8) != 0) {
-          if (*(int *)(iVar4 + 8) != 1) {
-            pvVar13 = *(void **)(this + 0x84);
-            pcVar7 = _linkIntErrorString;
+        stage = 0;
+        if (*(int *)(compiler + 8) != 0) {
+          if (*(int *)(compiler + 8) != 1) {
+            loopInfoSink = *(void **)(this + 0x84);
+            errorText = _linkIntErrorString;
                     
             goto override_jmp_97bb7c58_case_0;
           }
-          iVar2 = 1;
+          stage = 1;
         }
-        if (*(int *)(iVar4 + 0xac) != 0) {
-          local_50[iVar2] = local_50[iVar2] + 1;
-          *(int *)((int)local_40 + iVar2 * 4 + -8) = iVar10;
+        if (*(int *)(compiler + 0xac) != 0) {
+          mainCount[stage] = mainCount[stage] + 1;
+          *(int *)((int)fillIndex + stage * 4 + -8) = shaderIndex;
         }
-        pTVar8 = this + iVar2 * 4;
-        *(int *)(pTVar8 + 0x20) = *(int *)(pTVar8 + 0x20) + 1;
+        r9Fwd = this + stage * 4;
+        *(int *)(r9Fwd + 0x20) = *(int *)(r9Fwd + 0x20) + 1;
         r4In0 = r4Out0;
       }
-      iVar10 = iVar10 + 1;
-      if (param_3 <= iVar10) goto LAB_97bb7d6c;
-    } while (iVar12 == 1);
-    bVar1 = false;
+      shaderIndex = shaderIndex + 1;
+      if (numShaders <= shaderIndex) goto LAB_97bb7d6c;
+    } while (status == 1);
+    linkOk = false;
   }
-  iVar11 = 0;
-  if ((0 < param_3) && (bVar1)) {
+  shaderCursor = 0;
+  if ((0 < numShaders) && (linkOk)) {
     do {
-      piVar3 = *param_2;
-      param_2 = param_2 + 1;
-      if ((piVar3 != (int *)0x0) && (iVar10 = (**(code **)(*piVar3 + 8))(piVar3), iVar10 != 0)) {
-        iVar4 = (uint)(*(int *)(iVar10 + 8) != 0) * 4;
-        if (*(int *)((int)local_40 + iVar4 + -8) == iVar11) {
-          **(int **)(this + iVar4 + 8) = iVar10;
-          **(undefined4 **)(this + iVar4 + 0x10) = *(undefined4 *)(iVar10 + 0x68);
-          **(undefined4 **)(this + iVar4 + 0x18) = *(undefined4 *)(iVar10 + 0x70);
+      shaderHandle = *shaderHandles;
+      shaderHandles = shaderHandles + 1;
+      if ((shaderHandle != (int *)0x0) && (shaderCompiler = (**(code **)(*shaderHandle + 8))(shaderHandle), shaderCompiler != 0)) {
+        stageByteOffset = (uint)(*(int *)(shaderCompiler + 8) != 0) * 4;
+        if (*(int *)((int)fillIndex + stageByteOffset + -8) == shaderCursor) {
+          **(int **)(this + stageByteOffset + 8) = shaderCompiler;
+          **(undefined4 **)(this + stageByteOffset + 0x10) = *(undefined4 *)(shaderCompiler + 0x68);
+          **(undefined4 **)(this + stageByteOffset + 0x18) = *(undefined4 *)(shaderCompiler + 0x70);
         }
         else {
-          *(int *)(*(int *)((int)local_40 + iVar4) * 4 + *(int *)(this + iVar4 + 8)) = iVar10;
-          *(undefined4 *)(*(int *)((int)local_40 + iVar4) * 4 + *(int *)(this + iVar4 + 0x10)) =
-               *(undefined4 *)(iVar10 + 0x68);
-          iVar2 = *(int *)((int)local_40 + iVar4);
-          iVar9 = *(int *)(this + iVar4 + 0x18);
-          *(int *)((int)local_40 + iVar4) = iVar2 + 1;
-          *(undefined4 *)(iVar2 * 4 + iVar9) = *(undefined4 *)(iVar10 + 0x70);
+          *(int *)(*(int *)((int)fillIndex + stageByteOffset) * 4 + *(int *)(this + stageByteOffset + 8)) = shaderCompiler;
+          *(undefined4 *)(*(int *)((int)fillIndex + stageByteOffset) * 4 + *(int *)(this + stageByteOffset + 0x10)) =
+               *(undefined4 *)(shaderCompiler + 0x68);
+          fillSlot = *(int *)((int)fillIndex + stageByteOffset);
+          ppStreamArray = *(int *)(this + stageByteOffset + 0x18);
+          *(int *)((int)fillIndex + stageByteOffset) = fillSlot + 1;
+          *(undefined4 *)(fillSlot * 4 + ppStreamArray) = *(undefined4 *)(shaderCompiler + 0x70);
         }
       }
-      iVar11 = iVar11 + 1;
-    } while (iVar11 < param_3);
+      shaderCursor = shaderCursor + 1;
+    } while (shaderCursor < numShaders);
   }
-  return iVar12;
+  return status;
 }
 
 /* TGenericLinker__BuildProcessingComponents @ 0x97bb8054 (200 bytes) */
