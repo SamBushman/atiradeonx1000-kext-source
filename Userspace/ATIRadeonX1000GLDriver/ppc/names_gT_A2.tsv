@@ -1,0 +1,119 @@
+local	FUN_000a1090	param_1	ctx	INFERRED	GL engine context (+0x1154 shader table, +0x113c context slot, +0x27bc cleared)
+local	FUN_000a1090	param_2	unitEnabled	INFERRED	16 flag bytes, one per texture unit
+local	FUN_000a1090	param_3	unitTarget	INFERRED	16 words, one per texture unit: target enum (1 -> bit 2, 2 -> bit 1, else bit 8)
+local	FUN_000a1090	uVar1	unitTargetBits	INFERRED	value stored into ctx+0x48+4*unit: 0 when the unit flag is clear
+use	FUN_000a1090	iVar3	unitStatePtr	INFERRED	walks ctx+0x48 (16 words)	^\s*iVar3\ =\ param_1;$	+1
+use	FUN_000a1090	iVar3	unitStatePtr	INFERRED	walks ctx+0x48 (16 words)	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x48\)\ =\ uVar1;$	+1
+use	FUN_000a1090	iVar3	unitStatePtr	INFERRED	walks ctx+0x48 (16 words)	^\s*iVar3\ =\ iVar3\ \+\ 4;$	+1
+use	FUN_000a1090	iVar3	shaderTable	CONFIRMED	ctx+0x1154 shader table (+4 shader count, +0x88 shader array)	^\s*iVar3\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001154\)\ \+\ param_1\);$	+2
+use	FUN_000a1090	iVar3	shaderTable	CONFIRMED	ctx+0x1154 shader table (+4 shader count, +0x88 shader array)	^\s*iVar5\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000113c\)\ \+\ param_1\)\ \*\ 4\ \+$	+2
+use	FUN_000a1090	iVar3	shaderTable	CONFIRMED	ctx+0x1154 shader table (+4 shader count, +0x88 shader array)	^\s*iVar3\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001154\)\ \+\ param_1\);$@2	+1
+use	FUN_000a1090	iVar3	shaderTable	CONFIRMED	ctx+0x1154 shader table (+4 shader count, +0x88 shader array)	^\s*\}\ while\ \(uVar2\ <\ \*\(uint\ \*\)\(iVar3\ \+\ 4\)\);$	+1
+use	FUN_000a1090	iVar4	unitIndex	INFERRED	index into the 16 per-unit flag bytes	^\s*iVar4\ =\ 0;$	+1
+use	FUN_000a1090	iVar4	unitIndex	INFERRED	index into the 16 per-unit flag bytes	^\s*if\ \(\*\(char\ \*\)\(param_2\ \+\ iVar4\)\ !=\ '\\0'\)\ \{$	+1
+use	FUN_000a1090	iVar4	unitIndex	INFERRED	index into the 16 per-unit flag bytes	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
+use	FUN_000a1090	iVar4	shaderOffset	CONFIRMED	byte offset of the current 0x78-byte shader record	^\s*iVar4\ =\ 0;$@2	+1
+use	FUN_000a1090	iVar4	shaderOffset	CONFIRMED	byte offset of the current 0x78-byte shader record	^\s*iVar5\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000113c\)\ \+\ param_1\)\ \*\ 4\ \+$	+2
+use	FUN_000a1090	iVar4	shaderOffset	CONFIRMED	byte offset of the current 0x78-byte shader record	^\s*iVar4\ =\ iVar4\ \+\ 0x78;$	+1
+use	FUN_000a1090	iVar5	unitsLeft	INFERRED	countdown from 16	^\s*iVar5\ =\ 0x10;$	+1
+use	FUN_000a1090	iVar5	unitsLeft	INFERRED	countdown from 16	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	FUN_000a1090	iVar5	programObject	INFERRED	the shader's per-context program (shader+0x70 table, indexed by ctx+0x113c); +0x15cc is set to 1	^\s*iVar5\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000113c\)\ \+\ param_1\)\ \*\ 4\ \+$	+4
+local	FUN_000a1160	param_1	ctx	INFERRED	GL engine context; (ctx+0x1134 != 0) guards a null context; returns ctx+0x1135 when the bound shader is valid
+local	FUN_000a11a0	param_1	ctx	INFERRED	GL engine context
+local	FUN_000a11a0	iVar1	boundShader	CONFIRMED	ctx+0x1144; +0x74 valid flag, +0x6c usesColorInterpolator
+local	FUN_000a11f0	param_1	ctx	CONFIRMED	GL engine context; ctx+0x1135 (usedTextureUnitMask) is rebuilt
+local	FUN_000a11f0	param_2	shader	CONFIRMED	shader whose texture-op table (shader+0xc) is scanned
+local	FUN_000a11f0	param_3	passCount	CONFIRMED	number of passes scanned (shader+4)
+local	FUN_000a11f0	uVar1	regsPerPass	CONFIRMED	ctx+0x1148 ushort
+local	FUN_000a11f0	iVar2	entryOffset	CONFIRMED	byte offset of the 12-byte texture-op entry (pass * regsPerPass + reg) * 0xc
+local	FUN_000a11f0	uVar3	unitIndex	CONFIRMED	coordinate source - GL_TEXTURE0 (0x84c0); bit set in the mask when < 8
+local	FUN_000a11f0	iVar5	regIndex	INFERRED	register index within the pass
+local	FUN_000a11f0	uVar6	regsLeft	INFERRED	countdown over the registers of the pass
+local	glBindFragmentShaderATI_impl	bVar1	searching	INFERRED	true while the shader name was not found in the table
+local	glBindFragmentShaderATI_impl	uVar2	newShaders	INFERRED	freshly allocated shader array when the table grows by 8
+local	glBindFragmentShaderATI_impl	iVar3	shaderOffset	CONFIRMED	byte offset of the matching/new 0x78-byte shader record
+use	glBindFragmentShaderATI_impl	iVar4	nextShaderOffset	INFERRED	offset of the next shader record while searching	^\s*iVar4\ =\ 0;$	+1
+use	glBindFragmentShaderATI_impl	iVar4	nextShaderOffset	INFERRED	offset of the next shader record while searching	^\s*iVar4\ =\ iVar4\ \+\ 0x78;$	+1
+use	glBindFragmentShaderATI_impl	iVar4	nextShaderOffset	INFERRED	offset of the next shader record while searching	^\s*iVar3\ =\ iVar4;$	+1
+use	glBindFragmentShaderATI_impl	iVar4	shaders	CONFIRMED	shaderTable+0x88 shader array	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0x88\);$	+1
+use	glBindFragmentShaderATI_impl	iVar4	shaders	CONFIRMED	shaderTable+0x88 shader array	^\s*if\ \(\*\(char\ \*\)\(iVar3\ \+\ iVar4\ \+\ 0x6c\)\ ==\ '\\0'\)\ \{$	+1
+use	glBindFragmentShaderATI_impl	uVar5	shaderCount	CONFIRMED	shaderTable+4	^\s*uVar5\ =\ \*\(uint\ \*\)\(iVar7\ \+\ 4\);$	+1
+use	glBindFragmentShaderATI_impl	uVar5	shaderCount	CONFIRMED	shaderTable+4	^\s*while\ \(uVar6\ <\ uVar5\)\ \{$	+1
+use	glBindFragmentShaderATI_impl	uVar5	shaderCount	CONFIRMED	shaderTable+4	^\s*if\ \(\(uVar5\ \&\ 7\)\ ==\ 0\)\ \{$	+2
+use	glBindFragmentShaderATI_impl	uVar5	shaderCount	CONFIRMED	shaderTable+4	^\s*uVar5\ =\ \*\(uint\ \*\)\(iVar7\ \+\ 4\);$@2	+1
+use	glBindFragmentShaderATI_impl	uVar5	shaderCount	CONFIRMED	shaderTable+4	^\s*\(\(int\ \(\*\)\(\)\)FUN_000a2920\)\(param_1,uVar5\ \*\ 0x78\ \+\ \*\(int\ \*\)\(iVar7\ \+\ 0x88\)\);$	+1
+use	glBindFragmentShaderATI_impl	uVar5	ctxFlags	INFERRED	snapshot of ctx+0x44 before the 0x4000 bit is updated	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+4
+use	glBindFragmentShaderATI_impl	uVar5	ctxFlags	INFERRED	snapshot of ctx+0x44 before the 0x4000 bit is updated	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@2	+4
+use	glBindFragmentShaderATI_impl	uVar5	ctxFlags	INFERRED	snapshot of ctx+0x44 before the 0x4000 bit is updated	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@3	+2
+use	glBindFragmentShaderATI_impl	uVar5	ctxFlags	INFERRED	snapshot of ctx+0x44 before the 0x4000 bit is updated	^\s*if\ \(\(uVar5\ \&\ 0x32000\)\ ==\ 0x20000\)\ \{$	+1
+use	glBindFragmentShaderATI_impl	uVar6	newCtxFlags	INFERRED	ctx+0x44 with bit 0x4000 set from the shader's usesColorInterpolator	^\s*uVar6\ =\ uVar5\ >>\ 1\ \&\ 0x4000\ \|\ uVar5\ \&\ 0xffffbfff;$	+2
+use	glBindFragmentShaderATI_impl	uVar6	newCtxFlags	INFERRED	ctx+0x44 with bit 0x4000 set from the shader's usesColorInterpolator	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x44\)\ =\ uVar6\ \|\ 0x10000;$	+1
+local	glBindFragmentShaderATI_impl	iVar7	shaderTable	CONFIRMED	ctx+0x1154
+local	glEndFragmentShaderATI_impl	bVar1	colorOpsPending	INFERRED	more colour ops of the single pass remain to be scanned
+local	glEndFragmentShaderATI_impl	bVar2	usesColorInterpolator	CONFIRMED	an argument is GL_PRIMARY_COLOR (0x8577) or GL_SECONDARY_INTERPOLATOR_ATI (0x896d)
+use	glEndFragmentShaderATI_impl	iVar3	alphaOffset	INFERRED	byte offset of the current alpha op record	^\s*iVar3\ =\ 0;$	+1
+use	glEndFragmentShaderATI_impl	iVar3	alphaOffset	INFERRED	byte offset of the current alpha op record	^\s*if\ \(\(\(iVar11\ <\ \*\(int\ \*\)\(iVar13\ \+\ 0x24\)\)\ \&\&\ \(iVar7\ <\ \*\*\(int\ \*\*\)\(iVar13\ \+\ 0x20\)\)\)\ \&\&$	+2
+use	glEndFragmentShaderATI_impl	iVar3	alphaOffset	INFERRED	byte offset of the current alpha op record	^\s*iVar3\ =\ iVar3\ \+\ 0x4c;$	+1
+use	glEndFragmentShaderATI_impl	iVar3	validateResult	INFERRED	result of the validation hook at ctx+0x1164	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001164\)\ \+\ param_1\)\)\(param_1\);$	+2
+local	glEndFragmentShaderATI_impl	iVar4	colorOffset	INFERRED	byte offset of the current colour op record
+local	glEndFragmentShaderATI_impl	iVar5	opOrdinal	INFERRED	running op ordinal compared with record +0x44
+local	glEndFragmentShaderATI_impl	iVar8	opRecord	CONFIRMED	colour or alpha op record being examined (arguments at +0x14, +0x24, +0x34)
+use	glEndFragmentShaderATI_impl	uVar9	flagsBefore	INFERRED	snapshot of ctx+0x44	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+2
+use	glEndFragmentShaderATI_impl	uVar9	flagsBefore	INFERRED	snapshot of ctx+0x44	^\s*if\ \(\(uVar9\ \&\ 0x32000\)\ ==\ 0x30000\)\ \{$	+2
+use	glEndFragmentShaderATI_impl	uVar9	flagsBefore	INFERRED	snapshot of ctx+0x44	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@2	+2
+use	glEndFragmentShaderATI_impl	uVar9	flagsBefore	INFERRED	snapshot of ctx+0x44	^\s*if\ \(\(uVar9\ \&\ 0x32000\)\ ==\ 0x20000\)\ \{$	+1
+local	glEndFragmentShaderATI_impl	uVar10	flagsAfter	INFERRED	ctx+0x44 after the 0x4000 update
+local	glEndFragmentShaderATI_impl	iVar12	colorOpsPlaced	INFERRED	colour ops of the pass matched so far
+local	glEndFragmentShaderATI_impl	iVar13	shader	CONFIRMED	ctx+0x1144 bound shader being finished
+local	glPassTexCoordATI_impl	iVar1	addOk	INFERRED	result of atifsAddTextureOp
+local	glPassTexCoordATI_impl	uVar2	passIndex	CONFIRMED	currentPass + passBoundaryPending (ctx+0x1138, +0x1137)
+local	glSampleMapATI_impl	iVar1	addOk	INFERRED	result of atifsAddTextureOp
+local	glSampleMapATI_impl	uVar2	passIndex	CONFIRMED	currentPass + passBoundaryPending (ctx+0x1138, +0x1137)
+local	atifsFreeShader	param_1	ctx	CONFIRMED	GL engine context (+0x18 free callback)
+local	atifsFreeShader	param_2	shader	CONFIRMED	shader record whose arrays (+0xc/+0x10/+0x14/+0x1c/+0x20/+0x28/+0x70) are freed
+local	atifsFreeShader	a0	programTable	CONFIRMED	shader+0x70: per-context-slot program handles
+local	atifsFreeShader	iVar1	shaderTable	CONFIRMED	ctx+0x1154 (+0x8c number of context slots)
+local	atifsAddTextureOp	param_1	ctx	CONFIRMED	GL engine context
+local	atifsAddTextureOp	param_2	shader	CONFIRMED	shader record (+0xc texture-op table)
+local	atifsAddTextureOp	param_3	passIndex	CONFIRMED	pass the op belongs to
+local	atifsAddTextureOp	param_4	dst	CONFIRMED	GL_REG_n destination
+local	atifsAddTextureOp	param_5	coordSource	CONFIRMED	texture coordinate source (GL_TEXTUREn or GL_REG_n)
+local	atifsAddTextureOp	param_6	isSampleMap	CONFIRMED	0 = PassTexCoord, 1 = SampleMap
+local	atifsAddTextureOp	param_7	swizzle	CONFIRMED	GL_SWIZZLE_STR/STQ/STR_DR/STQ_DQ_ATI
+local	atifsAddTextureOp	iVar1	entriesLeft	INFERRED	countdown over regsPerPass * maxPasses entries
+local	atifsAddTextureOp	iVar2	entryOffset	CONFIRMED	byte offset of the 12-byte texture-op entry for (pass, dst)
+local	atifsAddTextureOp	pcVar3	entry	CONFIRMED	texture-op entry being filled
+local	atifsAddTextureOp	pcVar4	scan	INFERRED	cursor over all entries, looking for the same coordinate source with an incompatible swizzle
+local	atifsUnshareShaderTable	param_1	ctx	CONFIRMED	GL engine context that takes a private copy of the table
+local	atifsUnshareShaderTable	param_2	srcCtx	CONFIRMED	context whose shader table (+0x1154) is shared
+use	atifsUnshareShaderTable	iVar1	slotIndex	INFERRED	shaderTable+0x8c before the increment: this context's slot	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x8c\);$	+3
+use	atifsUnshareShaderTable	iVar1	shaderOffset	CONFIRMED	byte offset of the current 0x78-byte shader record	^\s*iVar1\ =\ 0;$	+1
+use	atifsUnshareShaderTable	iVar1	shaderOffset	CONFIRMED	byte offset of the current 0x78-byte shader record	^\s*iVar5\ =\ iVar1\ \+\ \*\(int\ \*\)\(iVar6\ \+\ 0x88\);$	+1
+use	atifsUnshareShaderTable	iVar1	shaderOffset	CONFIRMED	byte offset of the current 0x78-byte shader record	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x88\)\ \+\ iVar1;$	+2
+use	atifsUnshareShaderTable	uVar2	newSlotTable	INFERRED	calloc'd (slotCount, 4) replacement for shaderTable+0x80	^\s*uVar2\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(\*\(undefined4\ \*\)\(iVar6\ \+\ 0x8c\),4\);$	+3
+use	atifsUnshareShaderTable	uVar2	newProgramTable	INFERRED	calloc'd replacement for shader+0x70	^\s*uVar2\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(\*\(undefined4\ \*\)\(iVar6\ \+\ 0x8c\),4\);$@2	+2
+use	atifsUnshareShaderTable	uVar4	oldSlotTable	INFERRED	previous shaderTable+0x80	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x80\);$	+1
+use	atifsUnshareShaderTable	uVar4	oldSlotTable	INFERRED	previous shaderTable+0x80	^\s*_memcpy\(uVar2,uVar4,\*\(int\ \*\)\(iVar6\ \+\ 0x8c\)\ \*\ 4\ \+\ \-4\);$	+2
+use	atifsUnshareShaderTable	uVar4	oldProgramTable	INFERRED	previous shader+0x70	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x70\);$	+1
+use	atifsUnshareShaderTable	uVar4	oldProgramTable	INFERRED	previous shader+0x70	^\s*_memcpy\(\*\(undefined4\ \*\)\(iVar5\ \+\ 0x70\),uVar4,\*\(int\ \*\)\(iVar6\ \+\ 0x8c\)\ \*\ 4\ \+\ \-4\);$	+2
+use	atifsUnshareShaderTable	iVar5	shader	CONFIRMED	shaderTable+0x88 + offset	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x88\)\ \+\ iVar1;$	+1
+use	atifsUnshareShaderTable	iVar5	shader	CONFIRMED	shaderTable+0x88 + offset	^\s*_memcpy\(\*\(undefined4\ \*\)\(iVar5\ \+\ 0x70\),uVar4,\*\(int\ \*\)\(iVar6\ \+\ 0x8c\)\ \*\ 4\ \+\ \-4\);$	+1
+local	atifsUnshareShaderTable	iVar6	sharedTable	CONFIRMED	the table now shared by param_1 (refcount at +8 incremented)
+local	atifsInitShader	param_1	ctx	CONFIRMED	GL engine context (+0xc malloc, +0x10 calloc)
+local	atifsInitShader	param_2	shader	CONFIRMED	shader record being initialised
+local	atifsInitShader	uVar1	maxPasses	CONFIRMED	ctx+0x1150
+local	atifsInitShader	uVar2	regsPerPass	CONFIRMED	ctx+0x1148
+local	atifsInitShader	uVar3	newBuffer	INFERRED	allocation result, stored straight into the shader record
+use	atifsInitShader	iVar4	passByteOffset	INFERRED	pass index * 4 in the per-pass count arrays	^\s*iVar4\ =\ iVar6\ \*\ 4;$	+1
+use	atifsInitShader	iVar4	passByteOffset	INFERRED	pass index * 4 in the per-pass count arrays	^\s*\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x14\)\ \+\ iVar4\)\ =\ 0;$	+2
+use	atifsInitShader	iVar4	constantOffset	CONFIRMED	byte offset (0x14 stride) of the constant being defaulted to 1.0	^\s*iVar4\ =\ 0;$@2	+1
+use	atifsInitShader	iVar4	constantOffset	CONFIRMED	byte offset (0x14 stride) of the constant being defaulted to 1.0	^\s*\*\(undefined1\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x28\)\ \+\ iVar4\)\ =\ 0;$	+6
+use	atifsInitShader	iVar5	entryOffset	CONFIRMED	byte offset of the 12-byte texture-op entry	^\s*iVar5\ =\ iVar4\ \+\ iVar6\ \*\ uVar2;$	+1
+use	atifsInitShader	iVar5	entryOffset	CONFIRMED	byte offset of the 12-byte texture-op entry	^\s*iVar5\ =\ iVar5\ \*\ 0xc;$	+4
+use	atifsInitShader	iVar5	constantRecord	CONFIRMED	shader+0x28 constants array + offset: the 0x14-byte constant being defaulted	^\s*iVar5\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x28\)\ \+\ iVar4;$	+1
+use	atifsInitShader	iVar5	constantRecord	CONFIRMED	shader+0x28 constants array + offset: the 0x14-byte constant being defaulted	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\)\ =\ 0x3f800000;$	+1
+local	atifsInitShader	iVar7	defaultCoordSource	CONFIRMED	GL_TEXTURE0 (0x84c0) + register index
+local	atifsResetState	param_1	ctx	INFERRED	GL engine context
+local	atifsReleaseShaderTable	param_1	ctx	INFERRED	GL engine context
+local	atifsSetShaderValid	param_1	shader	CONFIRMED	shader record, +0x74 valid flag
+local	atifsSetShaderValid	param_2	valid	CONFIRMED	stored as the byte flag
