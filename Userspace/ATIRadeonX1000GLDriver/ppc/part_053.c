@@ -919,13 +919,13 @@ int ilSourceOperandWordCount(param_1)
 {
   uint uVar1;
   int iVar2;
-  uint *loopIndex;
+  uint *loopPtr;
   uint loopIndex2;
   
-  loopIndex = param_1 + 1;
+  loopPtr = param_1 + 1;
   uVar1 = *param_1;
   if ((uVar1 & 0x400000) != 0) {
-    loopIndex = param_1 + 2;
+    loopPtr = param_1 + 2;
   }
   if ((uVar1 & 0x1800000) == 0) {
     loopIndex2 = 0;
@@ -935,20 +935,20 @@ int ilSourceOperandWordCount(param_1)
     else {
       do {
         loopIndex2 = loopIndex2 + 1;
-        iVar2 = ((int (*)())ilSourceOperandWordCount)(loopIndex);
+        iVar2 = ((int (*)())ilSourceOperandWordCount)(loopPtr);
         uVar1 = *param_1;
-        loopIndex = loopIndex + iVar2;
+        loopPtr = loopPtr + iVar2;
       } while (loopIndex2 < (uVar1 >> 0x19 & 1));
     }
     if ((uVar1 & 0x1800000) == 0) goto LAB_0019ed78;
   }
-  loopIndex = (uint *)((int (*)())ilSkipRelativeAddressWords)(uVar1 >> 0x17 & 3,uVar1 >> 0x19 & 1,loopIndex);
+  loopPtr = (uint *)((int (*)())ilSkipRelativeAddressWords)(uVar1 >> 0x17 & 3,uVar1 >> 0x19 & 1,loopPtr);
   uVar1 = *param_1;
 LAB_0019ed78:
   if ((uVar1 & 0x4000000) != 0) {
-    loopIndex = loopIndex + 1;
+    loopPtr = loopPtr + 1;
   }
-  return (int)loopIndex - (int)param_1 >> 2;
+  return (int)loopPtr - (int)param_1 >> 2;
 }
 
 /* ilInstructionHeaderWordCount @ 0x19edb4 (84 bytes) */
@@ -2115,7 +2115,7 @@ int R520MachineAssembler__vslot66_selectBitsForLiteralLanes(this, sourceIndex, p
   int *a0;
   int operandRecord;
   uint *packedWord;
-  byte *loopIndex2;
+  byte *loopPtr2;
   int loopIndex;
   uint uVar9;
   
@@ -2126,10 +2126,10 @@ int R520MachineAssembler__vslot66_selectBitsForLiteralLanes(this, sourceIndex, p
     do {
       a0 = (int *)IRInst__getOperandSource(inst,loopIndex);
       if ((a0 != (int *)0x0) && (operandRecord = (**(code **)(*a0 + 0x48))(a0), operandRecord != 0)) {
-        loopIndex2 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 16));
+        loopPtr2 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 16));
         uVar9 = 0;
         do {
-          bVar2 = *loopIndex2;
+          bVar2 = *loopPtr2;
           if (bVar2 < 4) {
             operandRecord = IRInst__getOperandRecord(inst,loopIndex);
             uVar4 = (uint)*(byte *)((uint)bVar2 + operandRecord + 0x10);
@@ -2147,7 +2147,7 @@ int R520MachineAssembler__vslot66_selectBitsForLiteralLanes(this, sourceIndex, p
             }
           }
           bVar1 = uVar9 != 6;
-          loopIndex2 = loopIndex2 + 1;
+          loopPtr2 = loopPtr2 + 1;
           uVar9 = uVar9 + 3;
         } while (bVar1);
       }

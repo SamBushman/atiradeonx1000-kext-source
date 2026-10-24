@@ -10,13 +10,13 @@ int FUN_00186510(inst, param_2, param_3, compiler)
   bool bVar1;
   byte bVar2;
   undefined4 uVar3;
-  char *loopIndex5;
+  char *loopPtr5;
   int loopIndex2;
   int loopIndex3;
   uint uVar7;
   int loopIndex4;
   int *inst1;
-  int *loopIndex6;
+  int *loopPtr6;
   undefined1 *puVar11;
   int loopIndex;
   int local_78;
@@ -45,13 +45,13 @@ int FUN_00186510(inst, param_2, param_3, compiler)
   local_64 = *(undefined4 *)(loopIndex2 + 0x10);
   do {
     loopIndex2 = 0;
-    loopIndex5 = &DAT_001b0228 + loopIndex4 * 4;
+    loopPtr5 = &DAT_001b0228 + loopIndex4 * 4;
     loopIndex = 4;
     while ((*(char *)((int)&local_64 + loopIndex2) != '\0' ||
            ((*(char *)((int)&local_78 + loopIndex2) == *(char *)((int)&local_60 + loopIndex2) &&
-            (*(char *)((int)&local_78 + loopIndex2) == *loopIndex5))))) {
+            (*(char *)((int)&local_78 + loopIndex2) == *loopPtr5))))) {
       loopIndex2 = loopIndex2 + 1;
-      loopIndex5 = loopIndex5 + 1;
+      loopPtr5 = loopPtr5 + 1;
       loopIndex = loopIndex + -1;
       if (loopIndex == 0) {
         return 1;
@@ -67,12 +67,12 @@ int FUN_00186510(inst, param_2, param_3, compiler)
   }
   inst1 = (int *)*param_2;
   loopIndex4 = 1;
-  loopIndex6 = (int *)*param_3;
+  loopPtr6 = (int *)*param_3;
   loopIndex2 = IRInst__isSourceSelectIdentity(inst,1);
   if (loopIndex2 != 0) {
     loopIndex4 = 2;
     local_60 = local_78;
-    inst1 = loopIndex6;
+    inst1 = loopPtr6;
   }
   loopIndex = *(int *)(compiler + 0x6c4);
   loopIndex2 = IRInst__getOperandRecord(inst,0);
@@ -163,10 +163,10 @@ LAB_00186708:
         }
       }
       else {
-        loopIndex6 = local_58;
+        loopPtr6 = local_58;
         for (; loopIndex2 = (**(code **)(*inst1 + 0x14))(inst1), loopIndex3 <= loopIndex2; loopIndex3 = loopIndex3 + 1) {
-          *loopIndex6 = DAT_001b0224;
-          loopIndex6 = loopIndex6 + 1;
+          *loopPtr6 = DAT_001b0224;
+          loopPtr6 = loopPtr6 + 1;
         }
       }
       loopIndex2 = IRInst__getOperandRecord(inst,loopIndex4);
@@ -189,10 +189,10 @@ LAB_00186708:
         bVar1 = loopIndex != 3;
         loopIndex = loopIndex + 1;
       } while (bVar1);
-      loopIndex6 = local_58;
+      loopPtr6 = local_58;
       for (loopIndex2 = 1; loopIndex = (**(code **)(*inst1 + 0x14))(inst1), uVar3 = DAT_001b0220,
           loopIndex2 <= loopIndex; loopIndex2 = loopIndex2 + 1) {
-        loopIndex = *loopIndex6;
+        loopIndex = *loopPtr6;
         if (loopIndex2 == 0) {
           inst1[0x27] = loopIndex;
         }
@@ -200,7 +200,7 @@ LAB_00186708:
           loopIndex3 = IRInst__getOperandRecord(inst1,loopIndex2);
           *(int *)(loopIndex3 + 0x10) = loopIndex;
         }
-        loopIndex6 = loopIndex6 + 1;
+        loopPtr6 = loopPtr6 + 1;
       }
       WriteMask__fromSelectWord(&local_48,local_74);
       SelectWord__maskUnused(&local_44,uVar3,local_48);
@@ -1887,16 +1887,16 @@ int SelectWord__matchesAnyKnownPattern(param_1)
   undefined4 param_1;
 {
   int callResult;
-  undefined4 *loopIndex;
+  undefined4 *loopPtr;
   
-  loopIndex = &DAT_001b2994;
+  loopPtr = &DAT_001b2994;
   do {
-    callResult = SelectWord__areCompatible(*loopIndex,param_1);
+    callResult = SelectWord__areCompatible(*loopPtr,param_1);
     if (callResult != 0) {
       return 1;
     }
-    loopIndex = loopIndex + 1;
-  } while (loopIndex != (undefined4 *)&UNK_001b29e4);
+    loopPtr = loopPtr + 1;
+  } while (loopPtr != (undefined4 *)&UNK_001b29e4);
   return 0;
 }
 
@@ -2845,8 +2845,8 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
   int *inst;
   bool bVar1;
   bool bVar2;
-  undefined4 *loopIndex5;
-  undefined1 *loopIndex6;
+  undefined4 *loopPtr5;
+  undefined1 *loopPtr6;
   uint loopIndex8;
   int *piVar6;
   int loopIndex3;
@@ -2863,12 +2863,12 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
   
   bVar1 = param_3 <= param_4;
   if (bVar1) {
-    loopIndex5 = (undefined4 *)(param_3 * 4 + param_2 + 0x48);
+    loopPtr5 = (undefined4 *)(param_3 * 4 + param_2 + 0x48);
     loopIndex4 = param_3;
     do {
       loopIndex4 = loopIndex4 + 1;
-      *loopIndex5 = 0;
-      loopIndex5 = loopIndex5 + 1;
+      *loopPtr5 = 0;
+      loopPtr5 = loopPtr5 + 1;
     } while (loopIndex4 <= param_4);
   }
   vector = *(uint **)(param_2 + 0x40);
@@ -2892,12 +2892,12 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
       loopIndex2 = *piVar6;
       if (*(int *)(loopIndex2 + 8) == 0) {
         if (bVar1) {
-          loopIndex6 = (undefined1 *)(param_3 + loopIndex2 + 0x18);
+          loopPtr6 = (undefined1 *)(param_3 + loopIndex2 + 0x18);
           loopIndex = param_3;
           do {
             loopIndex = loopIndex + 1;
-            *loopIndex6 = 0;
-            loopIndex6 = loopIndex6 + 1;
+            *loopPtr6 = 0;
+            loopPtr6 = loopPtr6 + 1;
           } while (loopIndex <= param_4);
         }
         *(undefined1 *)(param_5 + loopIndex2 + 0x18) = 1;
@@ -2933,19 +2933,19 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
             IRInst__getOperandSource(inst,2);
           }
           if (bVar1) {
-            loopIndex6 = (undefined1 *)((int)inst + param_3 + 0xc);
+            loopPtr6 = (undefined1 *)((int)inst + param_3 + 0xc);
             loopIndex2 = param_3;
             do {
-              loopIndex6[0x90] = 1;
+              loopPtr6[0x90] = 1;
               loopIndex3 = *inst;
-              *loopIndex6 = 0;
+              *loopPtr6 = 0;
               (**(code **)(loopIndex3 + 0x88))(inst,1,loopIndex2,4);
               loopIndex3 = (**(code **)(*inst + 0x14))(inst);
               if (loopIndex3 == 2) {
                 (**(code **)(*inst + 0x88))(inst,2,loopIndex2,4);
               }
               loopIndex2 = loopIndex2 + 1;
-              loopIndex6 = loopIndex6 + 1;
+              loopPtr6 = loopPtr6 + 1;
             } while (loopIndex2 <= param_4);
           }
           loopIndex3 = param_5 + (int)inst;
@@ -2958,12 +2958,12 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
             (**(code **)(*inst + 0x88))(inst,2,param_5,param_5);
           }
           if (bVar1) {
-            loopIndex5 = (undefined4 *)(param_3 * 4 + loopIndex + 0x48);
+            loopPtr5 = (undefined4 *)(param_3 * 4 + loopIndex + 0x48);
             loopIndex2 = param_3;
             do {
               loopIndex2 = loopIndex2 + 1;
-              *loopIndex5 = 0;
-              loopIndex5 = loopIndex5 + 1;
+              *loopPtr5 = 0;
+              loopPtr5 = loopPtr5 + 1;
             } while (loopIndex2 <= param_4);
           }
           vector2 = *(uint **)(loopIndex + 0x40);
@@ -2986,12 +2986,12 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
               loopIndex2 = *piVar6;
               if (*(int *)(loopIndex2 + 8) == 0) {
                 if (bVar1) {
-                  loopIndex6 = (undefined1 *)(param_3 + loopIndex2 + 0x18);
+                  loopPtr6 = (undefined1 *)(param_3 + loopIndex2 + 0x18);
                   loopIndex3 = param_3;
                   do {
                     loopIndex3 = loopIndex3 + 1;
-                    *loopIndex6 = 0;
-                    loopIndex6 = loopIndex6 + 1;
+                    *loopPtr6 = 0;
+                    loopPtr6 = loopPtr6 + 1;
                   } while (loopIndex3 <= param_4);
                 }
                 *(undefined1 *)(param_5 + loopIndex2 + 0x18) = 1;
@@ -3142,7 +3142,7 @@ int R300SchedModel__vslot14(this, node)
   int operandRecord2;
   undefined1 laneSelect;
   uint instFlags;
-  undefined1 *loopIndex2;
+  undefined1 *loopPtr2;
   int flagBit0Result;
   int operandRecord;
   undefined4 in_r7;
@@ -3201,13 +3201,13 @@ int R300SchedModel__vslot14(this, node)
     a2 = SelectWord__firstWrittenComponent(*(undefined4 *)(operandRecord2 + 0x10));
     lastLane = a2;
   }
-  loopIndex2 = (undefined1 *)((int)nodeInst + a2 + 0xc);
+  loopPtr2 = (undefined1 *)((int)nodeInst + a2 + 0xc);
   loopIndex = a2;
   do {
     loopIndex = loopIndex + 1;
-    loopIndex2[0x90] = 1;
-    *loopIndex2 = 0;
-    loopIndex2 = loopIndex2 + 1;
+    loopPtr2[0x90] = 1;
+    *loopPtr2 = 0;
+    loopPtr2 = loopPtr2 + 1;
   } while (loopIndex <= lastLane);
   *(undefined1 *)((int)nodeInst + resultLane + 0xc) = 1;
   *(undefined1 *)((int)nodeInst + resultLane + 0x9c) = 0;
@@ -3237,19 +3237,19 @@ int FUN_0018bc94(param_1, param_2, param_3, param_4)
   int *param_4;
 {
   bool bVar1;
-  int *loopIndex5;
+  int *loopPtr5;
   int iVar3;
   undefined4 uVar4;
   int iVar5;
-  int *loopIndex6;
+  int *loopPtr6;
   int loopIndex2;
-  int *loopIndex7;
-  int *loopIndex8;
+  int *loopPtr7;
+  int *loopPtr8;
   int iVar10;
-  int *loopIndex3;
+  int *loopPtr3;
   int loopIndex;
   int *piVar13;
-  int *loopIndex4;
+  int *loopPtr4;
   int *piVar15;
   int local_68 [10];
   
@@ -3260,144 +3260,144 @@ int FUN_0018bc94(param_1, param_2, param_3, param_4)
       if (loopIndex2 != 0) goto LAB_0018c1b0;
     }
     else {
-      loopIndex3 = param_3 + 3;
-      loopIndex7 = param_4 + 3;
-      loopIndex6 = param_4;
-      loopIndex8 = param_3;
+      loopPtr3 = param_3 + 3;
+      loopPtr7 = param_4 + 3;
+      loopPtr6 = param_4;
+      loopPtr8 = param_3;
       do {
-        loopIndex4 = (int *)*loopIndex8;
-        if ((((loopIndex4 == (int *)0x0) || (loopIndex4 == *(int **)(loopIndex2 + 0x18))) ||
+        loopPtr4 = (int *)*loopPtr8;
+        if ((((loopPtr4 == (int *)0x0) || (loopPtr4 == *(int **)(loopIndex2 + 0x18))) ||
             ((((*(int **)(loopIndex2 + 0x18) != (int *)0x0 &&
-               ((loopIndex4[0x20] != 0 && (iVar3 = RegKind__flagBit0(loopIndex4[0x26]), iVar3 != 0)))) &&
-              ((loopIndex4[5] & 2U) == 0)) &&
-             ((((((iVar3 = (**(code **)(*loopIndex4 + 0x50))(loopIndex4), iVar3 == 0 &&
-                  (loopIndex4 = *(int **)(loopIndex2 + 0x18), loopIndex4[0x20] != 0)) &&
-                 (iVar3 = RegKind__flagBit0(loopIndex4[0x26]), iVar3 != 0)) &&
-                (((loopIndex4[5] & 2U) == 0 &&
-                 (iVar3 = (**(code **)(*loopIndex4 + 0x50))(loopIndex4), iVar3 == 0)))) &&
-               ((*(uint *)(*loopIndex8 + 0x14) & 0x40) != 0)) &&
+               ((loopPtr4[0x20] != 0 && (iVar3 = RegKind__flagBit0(loopPtr4[0x26]), iVar3 != 0)))) &&
+              ((loopPtr4[5] & 2U) == 0)) &&
+             ((((((iVar3 = (**(code **)(*loopPtr4 + 0x50))(loopPtr4), iVar3 == 0 &&
+                  (loopPtr4 = *(int **)(loopIndex2 + 0x18), loopPtr4[0x20] != 0)) &&
+                 (iVar3 = RegKind__flagBit0(loopPtr4[0x26]), iVar3 != 0)) &&
+                (((loopPtr4[5] & 2U) == 0 &&
+                 (iVar3 = (**(code **)(*loopPtr4 + 0x50))(loopPtr4), iVar3 == 0)))) &&
+               ((*(uint *)(*loopPtr8 + 0x14) & 0x40) != 0)) &&
               (((*(uint *)(*(int *)(loopIndex2 + 0x18) + 0x14) & 0x40) != 0 &&
-               (*(int *)(*loopIndex8 + 0x94) == *(int *)(*(int *)(loopIndex2 + 0x18) + 0x94))))))))) &&
-           (((loopIndex4 = (int *)*loopIndex3, loopIndex4 == (int *)0x0 ||
-             (loopIndex4 == *(int **)(loopIndex2 + 0x24))) ||
-            (((((*(int **)(loopIndex2 + 0x24) != (int *)0x0 && (loopIndex4[0x20] != 0)) &&
-               (iVar3 = RegKind__flagBit0(loopIndex4[0x26]), iVar3 != 0)) &&
-              ((((loopIndex4[5] & 2U) == 0 &&
-                (iVar3 = (**(code **)(*loopIndex4 + 0x50))(loopIndex4), iVar3 == 0)) &&
-               (loopIndex4 = *(int **)(loopIndex2 + 0x24), loopIndex4[0x20] != 0)))) &&
-             (((iVar3 = RegKind__flagBit0(loopIndex4[0x26]), iVar3 != 0 && ((loopIndex4[5] & 2U) == 0)) &&
-              ((iVar3 = (**(code **)(*loopIndex4 + 0x50))(loopIndex4), iVar3 == 0 &&
-               ((((*(uint *)(*loopIndex3 + 0x14) & 0x40) != 0 &&
+               (*(int *)(*loopPtr8 + 0x94) == *(int *)(*(int *)(loopIndex2 + 0x18) + 0x94))))))))) &&
+           (((loopPtr4 = (int *)*loopPtr3, loopPtr4 == (int *)0x0 ||
+             (loopPtr4 == *(int **)(loopIndex2 + 0x24))) ||
+            (((((*(int **)(loopIndex2 + 0x24) != (int *)0x0 && (loopPtr4[0x20] != 0)) &&
+               (iVar3 = RegKind__flagBit0(loopPtr4[0x26]), iVar3 != 0)) &&
+              ((((loopPtr4[5] & 2U) == 0 &&
+                (iVar3 = (**(code **)(*loopPtr4 + 0x50))(loopPtr4), iVar3 == 0)) &&
+               (loopPtr4 = *(int **)(loopIndex2 + 0x24), loopPtr4[0x20] != 0)))) &&
+             (((iVar3 = RegKind__flagBit0(loopPtr4[0x26]), iVar3 != 0 && ((loopPtr4[5] & 2U) == 0)) &&
+              ((iVar3 = (**(code **)(*loopPtr4 + 0x50))(loopPtr4), iVar3 == 0 &&
+               ((((*(uint *)(*loopPtr3 + 0x14) & 0x40) != 0 &&
                  ((*(uint *)(*(int *)(loopIndex2 + 0x24) + 0x14) & 0x40) != 0)) &&
-                (*(int *)(*loopIndex3 + 0x94) == *(int *)(*(int *)(loopIndex2 + 0x24) + 0x94))))))))))))) {
-          *loopIndex8 = *(int *)(loopIndex2 + 0x18);
-          *loopIndex3 = *(int *)(loopIndex2 + 0x24);
-          *loopIndex6 = *loopIndex6 + 1;
-          *loopIndex7 = *loopIndex7 + 1;
+                (*(int *)(*loopPtr3 + 0x94) == *(int *)(*(int *)(loopIndex2 + 0x24) + 0x94))))))))))))) {
+          *loopPtr8 = *(int *)(loopIndex2 + 0x18);
+          *loopPtr3 = *(int *)(loopIndex2 + 0x24);
+          *loopPtr6 = *loopPtr6 + 1;
+          *loopPtr7 = *loopPtr7 + 1;
           iVar3 = ((int (*)())FUN_0018bc94)(param_1,param_2 + 1,param_3,param_4);
           if (iVar3 != 0) goto LAB_0018c1b0;
-          *loopIndex6 = *loopIndex6 + -1;
-          iVar3 = *loopIndex7 + -1;
-          *loopIndex7 = iVar3;
-          if (*loopIndex6 == 0) {
-            *loopIndex8 = 0;
-            iVar3 = *loopIndex7;
+          *loopPtr6 = *loopPtr6 + -1;
+          iVar3 = *loopPtr7 + -1;
+          *loopPtr7 = iVar3;
+          if (*loopPtr6 == 0) {
+            *loopPtr8 = 0;
+            iVar3 = *loopPtr7;
           }
           if (iVar3 == 0) {
-            *loopIndex3 = 0;
+            *loopPtr3 = 0;
           }
         }
-        loopIndex8 = loopIndex8 + 1;
-        loopIndex3 = loopIndex3 + 1;
-        loopIndex7 = loopIndex7 + 1;
-        loopIndex6 = loopIndex6 + 1;
-      } while (param_3 + 3 != loopIndex8);
+        loopPtr8 = loopPtr8 + 1;
+        loopPtr3 = loopPtr3 + 1;
+        loopPtr7 = loopPtr7 + 1;
+        loopPtr6 = loopPtr6 + 1;
+      } while (param_3 + 3 != loopPtr8);
     }
 LAB_0018bf4c:
     uVar4 = 0;
   }
   else {
-    loopIndex7 = param_4 + 3;
-    loopIndex4 = local_68;
-    loopIndex6 = loopIndex7;
-    loopIndex8 = param_4;
-    loopIndex3 = loopIndex4;
+    loopPtr7 = param_4 + 3;
+    loopPtr4 = local_68;
+    loopPtr6 = loopPtr7;
+    loopPtr8 = param_4;
+    loopPtr3 = loopPtr4;
     do {
-      loopIndex2 = *loopIndex8;
-      loopIndex8 = loopIndex8 + 1;
-      *loopIndex3 = loopIndex2;
-      loopIndex2 = *loopIndex6;
-      loopIndex6 = loopIndex6 + 1;
-      loopIndex3[3] = loopIndex2;
-      loopIndex3 = loopIndex3 + 1;
-    } while (loopIndex3 != local_68 + 3);
+      loopIndex2 = *loopPtr8;
+      loopPtr8 = loopPtr8 + 1;
+      *loopPtr3 = loopIndex2;
+      loopIndex2 = *loopPtr6;
+      loopPtr6 = loopPtr6 + 1;
+      loopPtr3[3] = loopIndex2;
+      loopPtr3 = loopPtr3 + 1;
+    } while (loopPtr3 != local_68 + 3);
     loopIndex2 = 0;
     iVar3 = param_1 + 0x10;
     do {
       piVar13 = (int *)(iVar3 + 8);
       iVar10 = 0;
-      loopIndex6 = param_4;
-      loopIndex8 = param_3;
+      loopPtr6 = param_4;
+      loopPtr8 = param_3;
       do {
         if ((*(int *)(param_1 + 0x30) == 0) && (*piVar13 != 0)) {
           loopIndex = 0;
-          loopIndex5 = loopIndex8;
+          loopPtr5 = loopPtr8;
           do {
-            if (((int *)*loopIndex5 != (int *)0x0) &&
-               ((piVar15 = (int *)*piVar13, (int *)*loopIndex5 == piVar15 ||
+            if (((int *)*loopPtr5 != (int *)0x0) &&
+               ((piVar15 = (int *)*piVar13, (int *)*loopPtr5 == piVar15 ||
                 ((((piVar15 != (int *)0x0 && (piVar15[0x20] != 0)) &&
                   (iVar5 = RegKind__flagBit0(piVar15[0x26]), iVar5 != 0)) &&
                  ((((((piVar15[5] & 2U) == 0 &&
                      (iVar5 = (**(code **)(*piVar15 + 0x50))(piVar15), iVar5 == 0)) &&
-                    ((piVar15 = (int *)*loopIndex5, piVar15[0x20] != 0 &&
+                    ((piVar15 = (int *)*loopPtr5, piVar15[0x20] != 0 &&
                      ((iVar5 = RegKind__flagBit0(piVar15[0x26]), iVar5 != 0 && ((piVar15[5] & 2U) == 0)))
                      ))) && (iVar5 = (**(code **)(*piVar15 + 0x50))(piVar15), iVar5 == 0)) &&
                   ((((*(uint *)(*piVar13 + 0x14) & 0x40) != 0 &&
-                    ((*(uint *)(*loopIndex5 + 0x14) & 0x40) != 0)) &&
-                   (*(int *)(*piVar13 + 0x94) == *(int *)(*loopIndex5 + 0x94))))))))))) {
-              loopIndex6[loopIndex] = loopIndex6[loopIndex] + 1;
+                    ((*(uint *)(*loopPtr5 + 0x14) & 0x40) != 0)) &&
+                   (*(int *)(*piVar13 + 0x94) == *(int *)(*loopPtr5 + 0x94))))))))))) {
+              loopPtr6[loopIndex] = loopPtr6[loopIndex] + 1;
               goto LAB_0018c0d4;
             }
             bVar1 = loopIndex != 2;
-            loopIndex5 = loopIndex5 + 1;
+            loopPtr5 = loopPtr5 + 1;
             loopIndex = loopIndex + 1;
           } while (bVar1);
           loopIndex = 0;
-          loopIndex5 = loopIndex8;
-          while (*loopIndex5 != 0) {
+          loopPtr5 = loopPtr8;
+          while (*loopPtr5 != 0) {
             bVar1 = loopIndex == 2;
-            loopIndex5 = loopIndex5 + 1;
+            loopPtr5 = loopPtr5 + 1;
             loopIndex = loopIndex + 1;
             if (bVar1) {
-              loopIndex6 = param_3 + 3;
+              loopPtr6 = param_3 + 3;
               do {
-                iVar3 = *loopIndex4;
+                iVar3 = *loopPtr4;
                 *param_4 = iVar3;
-                loopIndex2 = loopIndex4[3];
-                *loopIndex7 = loopIndex2;
+                loopIndex2 = loopPtr4[3];
+                *loopPtr7 = loopIndex2;
                 if (iVar3 == 0) {
                   *param_3 = 0;
                 }
                 if (loopIndex2 == 0) {
-                  *loopIndex6 = 0;
+                  *loopPtr6 = 0;
                 }
-                loopIndex4 = loopIndex4 + 1;
+                loopPtr4 = loopPtr4 + 1;
                 param_4 = param_4 + 1;
-                loopIndex7 = loopIndex7 + 1;
-                loopIndex6 = loopIndex6 + 1;
+                loopPtr7 = loopPtr7 + 1;
+                loopPtr6 = loopPtr6 + 1;
                 param_3 = param_3 + 1;
-              } while (loopIndex3 != loopIndex4);
+              } while (loopPtr3 != loopPtr4);
               goto LAB_0018bf4c;
             }
           }
-          loopIndex8[loopIndex] = *piVar13;
-          loopIndex6[loopIndex] = loopIndex6[loopIndex] + 1;
+          loopPtr8[loopIndex] = *piVar13;
+          loopPtr6[loopIndex] = loopPtr6[loopIndex] + 1;
         }
 LAB_0018c0d4:
         bVar1 = iVar10 != 0xc;
         piVar13 = piVar13 + 3;
-        loopIndex6 = loopIndex6 + 3;
-        loopIndex8 = loopIndex8 + 3;
+        loopPtr6 = loopPtr6 + 3;
+        loopPtr8 = loopPtr8 + 3;
         iVar10 = iVar10 + 0xc;
       } while (bVar1);
       bVar1 = loopIndex2 != 2;
@@ -3411,142 +3411,143 @@ LAB_0018c1b0:
   return uVar4;
 }
 
-/* FUN_0018c1c8 @ 0x18c1c8 (1440 bytes) */
-int FUN_0018c1c8(param_1, param_2)
-  int *param_1;
-  int *param_2;
+/* PackState__buildSlotTable @ 0x18c1c8 (1440 bytes) */
+int PackState__buildSlotTable(packState, slotTable)
+  int *packState;
+  int *slotTable;
 {
-  int *loopIndex;
+  int *placedReg2;
+  int *loopPtr;
   int callResult;
-  int *loopIndex2;
-  int *loopIndex3;
-  int *piVar5;
+  int *loopPtr2;
+  int *loopPtr3;
+  int *secondTriple;
   int *loopRemaining;
-  int *piVar7;
-  int local_58 [3];
-  int local_4c [9];
+  int *placedReg;
+  int slotUseCounts [3];
+  int slotUseCountsSecond [9];
   
-  piVar5 = param_2 + 3;
-  loopIndex3 = local_58;
-  loopIndex = piVar5;
-  loopIndex2 = param_2;
+  secondTriple = slotTable + 3;
+  loopPtr3 = slotUseCounts;
+  loopPtr = secondTriple;
+  loopPtr2 = slotTable;
   do {
-    *loopIndex3 = 0;
-    loopIndex3[3] = 0;
-    loopIndex3 = loopIndex3 + 1;
-    *loopIndex2 = 0;
-    *loopIndex = 0;
-    loopIndex2 = loopIndex2 + 1;
-    loopIndex = loopIndex + 1;
-  } while (loopIndex3 != local_4c);
-  if (*param_1 != 0) {
-    *param_2 = *param_1;
-    local_58[0] = local_58[0] + 1;
+    *loopPtr3 = 0;
+    loopPtr3[3] = 0;
+    loopPtr3 = loopPtr3 + 1;
+    *loopPtr2 = 0;
+    *loopPtr = 0;
+    loopPtr2 = loopPtr2 + 1;
+    loopPtr = loopPtr + 1;
+  } while (loopPtr3 != slotUseCountsSecond);
+  if (*packState != 0) {
+    *slotTable = *packState;
+    slotUseCounts[0] = slotUseCounts[0] + 1;
   }
-  if (param_1[1] != 0) {
-    *piVar5 = param_1[1];
-    local_4c[0] = local_4c[0] + 1;
+  if (packState[1] != 0) {
+    *secondTriple = packState[1];
+    slotUseCountsSecond[0] = slotUseCountsSecond[0] + 1;
   }
-  loopIndex = param_1;
-  loopIndex2 = param_1;
+  loopPtr = packState;
+  loopPtr2 = packState;
   do {
-    loopIndex3 = param_1;
-    loopRemaining = param_1;
-    if ((param_1[2] == 0) || (param_1[3] == 0)) {
+    loopPtr3 = packState;
+    loopRemaining = packState;
+    if ((packState[2] == 0) || (packState[3] == 0)) {
 LAB_0018c498:
       do {
-        if ((param_1[4] == 0) || (param_1[5] == 0)) {
+        if ((packState[4] == 0) || (packState[5] == 0)) {
 LAB_0018c6a0:
-          callResult = ((int (*)())FUN_0018bc94)(param_1,0,param_2,local_58);
+          callResult = ((int (*)())FUN_0018bc94)(packState,0,slotTable,slotUseCounts);
           if (callResult != 0) {
             return 1;
           }
-          local_4c[0] = local_4c[0] + -1;
-          if (local_4c[0] == 0) {
-            *piVar5 = 0;
+          slotUseCountsSecond[0] = slotUseCountsSecond[0] + -1;
+          if (slotUseCountsSecond[0] == 0) {
+            *secondTriple = 0;
           }
-          local_4c[1] = local_4c[1] + -1;
-          if (local_4c[1] == 0) {
-            param_2[4] = 0;
+          slotUseCountsSecond[1] = slotUseCountsSecond[1] + -1;
+          if (slotUseCountsSecond[1] == 0) {
+            slotTable[4] = 0;
           }
         }
         else {
-          piVar7 = (int *)*piVar5;
-          if ((((piVar7 == (int *)0x0) || (piVar7 == (int *)loopRemaining[5])) ||
-              ((((((int *)loopRemaining[5] != (int *)0x0 && (piVar7[0x20] != 0)) &&
-                 (callResult = RegKind__flagBit0(piVar7[0x26]), callResult != 0)) &&
-                (((piVar7[5] & 2U) == 0 &&
-                 (callResult = (**(code **)(*piVar7 + 0x50))(piVar7), callResult == 0)))) &&
-               ((piVar7 = (int *)loopRemaining[5], piVar7[0x20] != 0 &&
-                (((callResult = RegKind__flagBit0(piVar7[0x26]), callResult != 0 && ((piVar7[5] & 2U) == 0)) &&
-                 ((callResult = (**(code **)(*piVar7 + 0x50))(piVar7), callResult == 0 &&
-                  ((((*(uint *)(*piVar5 + 0x14) & 0x40) != 0 &&
+          placedReg = (int *)*secondTriple;
+          if ((((placedReg == (int *)0x0) || (placedReg == (int *)loopRemaining[5])) ||
+              ((((((int *)loopRemaining[5] != (int *)0x0 && (placedReg[0x20] != 0)) &&
+                 (callResult = RegKind__flagBit0(placedReg[0x26]), callResult != 0)) &&
+                (((placedReg[5] & 2U) == 0 &&
+                 (callResult = (**(code **)(*placedReg + 0x50))(placedReg), callResult == 0)))) &&
+               ((placedReg = (int *)loopRemaining[5], placedReg[0x20] != 0 &&
+                (((callResult = RegKind__flagBit0(placedReg[0x26]), callResult != 0 && ((placedReg[5] & 2U) == 0)) &&
+                 ((callResult = (**(code **)(*placedReg + 0x50))(placedReg), callResult == 0 &&
+                  ((((*(uint *)(*secondTriple + 0x14) & 0x40) != 0 &&
                     ((*(uint *)(loopRemaining[5] + 0x14) & 0x40) != 0)) &&
-                   (*(int *)(*piVar5 + 0x94) == *(int *)(loopRemaining[5] + 0x94))))))))))))) &&
-             (((piVar7 = (int *)param_2[4], piVar7 == (int *)0x0 || (piVar7 == (int *)loopIndex3[4])) ||
-              (((int *)loopIndex3[4] != (int *)0x0 &&
-               ((((piVar7[0x20] != 0 && (callResult = RegKind__flagBit0(piVar7[0x26]), callResult != 0)) &&
-                 (((piVar7[5] & 2U) == 0 &&
-                  (((callResult = (**(code **)(*piVar7 + 0x50))(piVar7), callResult == 0 &&
-                    (piVar7 = (int *)loopIndex3[4], piVar7[0x20] != 0)) &&
-                   (callResult = RegKind__flagBit0(piVar7[0x26]), callResult != 0)))))) &&
-                ((((piVar7[5] & 2U) == 0 &&
-                  (callResult = (**(code **)(*piVar7 + 0x50))(piVar7), callResult == 0)) &&
-                 (((*(uint *)(param_2[4] + 0x14) & 0x40) != 0 &&
-                  (((*(uint *)(loopIndex3[4] + 0x14) & 0x40) != 0 &&
-                   (*(int *)(param_2[4] + 0x94) == *(int *)(loopIndex3[4] + 0x94))))))))))))))) {
-            *piVar5 = loopRemaining[5];
-            local_4c[1] = local_4c[1] + 1;
-            local_4c[0] = local_4c[0] + 1;
-            param_2[4] = loopIndex3[4];
+                   (*(int *)(*secondTriple + 0x94) == *(int *)(loopRemaining[5] + 0x94))))))))))))) &&
+             (((placedReg = (int *)slotTable[4], placedReg == (int *)0x0 || (placedReg == (int *)loopPtr3[4])) ||
+              (((int *)loopPtr3[4] != (int *)0x0 &&
+               ((((placedReg[0x20] != 0 && (callResult = RegKind__flagBit0(placedReg[0x26]), callResult != 0)) &&
+                 (((placedReg[5] & 2U) == 0 &&
+                  (((callResult = (**(code **)(*placedReg + 0x50))(placedReg), callResult == 0 &&
+                    (placedReg = (int *)loopPtr3[4], placedReg[0x20] != 0)) &&
+                   (callResult = RegKind__flagBit0(placedReg[0x26]), callResult != 0)))))) &&
+                ((((placedReg[5] & 2U) == 0 &&
+                  (callResult = (**(code **)(*placedReg + 0x50))(placedReg), callResult == 0)) &&
+                 (((*(uint *)(slotTable[4] + 0x14) & 0x40) != 0 &&
+                  (((*(uint *)(loopPtr3[4] + 0x14) & 0x40) != 0 &&
+                   (*(int *)(slotTable[4] + 0x94) == *(int *)(loopPtr3[4] + 0x94))))))))))))))) {
+            *secondTriple = loopRemaining[5];
+            slotUseCountsSecond[1] = slotUseCountsSecond[1] + 1;
+            slotUseCountsSecond[0] = slotUseCountsSecond[0] + 1;
+            slotTable[4] = loopPtr3[4];
             goto LAB_0018c6a0;
           }
         }
         loopRemaining = loopRemaining + -1;
-        loopIndex3 = loopIndex3 + 1;
-      } while (param_1 + -2 != loopRemaining);
-      local_58[0] = local_58[0] + -1;
-      if (local_58[0] == 0) {
-        *param_2 = 0;
+        loopPtr3 = loopPtr3 + 1;
+      } while (packState + -2 != loopRemaining);
+      slotUseCounts[0] = slotUseCounts[0] + -1;
+      if (slotUseCounts[0] == 0) {
+        *slotTable = 0;
       }
-      local_58[1] = local_58[1] + -1;
-      if (local_58[1] == 0) {
-        param_2[1] = 0;
+      slotUseCounts[1] = slotUseCounts[1] + -1;
+      if (slotUseCounts[1] == 0) {
+        slotTable[1] = 0;
       }
     }
     else {
-      piVar7 = (int *)*param_2;
-      if ((((piVar7 == (int *)0x0) || (piVar7 == (int *)loopIndex2[3])) ||
-          (((((((int *)loopIndex2[3] != (int *)0x0 && (piVar7[0x20] != 0)) &&
-              (callResult = RegKind__flagBit0(piVar7[0x26]), callResult != 0)) &&
-             (((piVar7[5] & 2U) == 0 && (callResult = (**(code **)(*piVar7 + 0x50))(piVar7), callResult == 0))
-             )) && (piVar7 = (int *)loopIndex2[3], piVar7[0x20] != 0)) &&
-           ((((callResult = RegKind__flagBit0(piVar7[0x26]), callResult != 0 && ((piVar7[5] & 2U) == 0)) &&
-             (callResult = (**(code **)(*piVar7 + 0x50))(piVar7), callResult == 0)) &&
-            ((((*(uint *)(*param_2 + 0x14) & 0x40) != 0 &&
-              ((*(uint *)(loopIndex2[3] + 0x14) & 0x40) != 0)) &&
-             (*(int *)(*param_2 + 0x94) == *(int *)(loopIndex2[3] + 0x94))))))))) &&
-         (((piVar7 = (int *)param_2[1], piVar7 == (int *)0x0 || (piVar7 == (int *)loopIndex[2])) ||
-          (((((int *)loopIndex[2] != (int *)0x0 &&
-             ((piVar7[0x20] != 0 && (callResult = RegKind__flagBit0(piVar7[0x26]), callResult != 0)))) &&
-            ((piVar7[5] & 2U) == 0)) &&
-           (((((callResult = (**(code **)(*piVar7 + 0x50))(piVar7), callResult == 0 &&
-               (piVar7 = (int *)loopIndex[2], piVar7[0x20] != 0)) &&
-              (callResult = RegKind__flagBit0(piVar7[0x26]), callResult != 0)) &&
-             (((piVar7[5] & 2U) == 0 && (callResult = (**(code **)(*piVar7 + 0x50))(piVar7), callResult == 0))
-             )) && (((*(uint *)(param_2[1] + 0x14) & 0x40) != 0 &&
-                    (((*(uint *)(loopIndex[2] + 0x14) & 0x40) != 0 &&
-                     (*(int *)(param_2[1] + 0x94) == *(int *)(loopIndex[2] + 0x94))))))))))))) {
-        *param_2 = loopIndex2[3];
-        local_58[0] = local_58[0] + 1;
-        local_58[1] = local_58[1] + 1;
-        param_2[1] = loopIndex[2];
+      placedReg2 = (int *)*slotTable;
+      if ((((placedReg2 == (int *)0x0) || (placedReg2 == (int *)loopPtr2[3])) ||
+          (((((((int *)loopPtr2[3] != (int *)0x0 && (placedReg2[0x20] != 0)) &&
+              (callResult = RegKind__flagBit0(placedReg2[0x26]), callResult != 0)) &&
+             (((placedReg2[5] & 2U) == 0 && (callResult = (**(code **)(*placedReg2 + 0x50))(placedReg2), callResult == 0))
+             )) && (placedReg2 = (int *)loopPtr2[3], placedReg2[0x20] != 0)) &&
+           ((((callResult = RegKind__flagBit0(placedReg2[0x26]), callResult != 0 && ((placedReg2[5] & 2U) == 0)) &&
+             (callResult = (**(code **)(*placedReg2 + 0x50))(placedReg2), callResult == 0)) &&
+            ((((*(uint *)(*slotTable + 0x14) & 0x40) != 0 &&
+              ((*(uint *)(loopPtr2[3] + 0x14) & 0x40) != 0)) &&
+             (*(int *)(*slotTable + 0x94) == *(int *)(loopPtr2[3] + 0x94))))))))) &&
+         (((placedReg2 = (int *)slotTable[1], placedReg2 == (int *)0x0 || (placedReg2 == (int *)loopPtr[2])) ||
+          (((((int *)loopPtr[2] != (int *)0x0 &&
+             ((placedReg2[0x20] != 0 && (callResult = RegKind__flagBit0(placedReg2[0x26]), callResult != 0)))) &&
+            ((placedReg2[5] & 2U) == 0)) &&
+           (((((callResult = (**(code **)(*placedReg2 + 0x50))(placedReg2), callResult == 0 &&
+               (placedReg2 = (int *)loopPtr[2], placedReg2[0x20] != 0)) &&
+              (callResult = RegKind__flagBit0(placedReg2[0x26]), callResult != 0)) &&
+             (((placedReg2[5] & 2U) == 0 && (callResult = (**(code **)(*placedReg2 + 0x50))(placedReg2), callResult == 0))
+             )) && (((*(uint *)(slotTable[1] + 0x14) & 0x40) != 0 &&
+                    (((*(uint *)(loopPtr[2] + 0x14) & 0x40) != 0 &&
+                     (*(int *)(slotTable[1] + 0x94) == *(int *)(loopPtr[2] + 0x94))))))))))))) {
+        *slotTable = loopPtr2[3];
+        slotUseCounts[0] = slotUseCounts[0] + 1;
+        slotUseCounts[1] = slotUseCounts[1] + 1;
+        slotTable[1] = loopPtr[2];
         goto LAB_0018c498;
       }
     }
-    loopIndex2 = loopIndex2 + -1;
-    loopIndex = loopIndex + 1;
-    if (param_1 + -2 == loopIndex2) {
+    loopPtr2 = loopPtr2 + -1;
+    loopPtr = loopPtr + 1;
+    if (packState + -2 == loopPtr2) {
       return 0;
     }
   } while( true );
@@ -3558,24 +3559,24 @@ int PackState__countFreeSlots(state, freeCounts)
   int *freeCounts;
 {
   int callResult;
-  int *loopIndex;
+  int *loopPtr;
   int local_38 [3];
   int local_2c [9];
   
-  callResult = ((int (*)())FUN_0018c1c8)(state,local_38);
+  callResult = ((int (*)())PackState__buildSlotTable)(state,local_38);
   freeCounts[1] = 0;
   *freeCounts = 0;
   if (callResult != 0) {
-    loopIndex = local_38;
+    loopPtr = local_38;
     do {
-      if (*loopIndex == 0) {
+      if (*loopPtr == 0) {
         *freeCounts = *freeCounts + 1;
       }
-      if (loopIndex[3] == 0) {
+      if (loopPtr[3] == 0) {
         freeCounts[1] = freeCounts[1] + 1;
       }
-      loopIndex = loopIndex + 1;
-    } while (loopIndex != local_2c);
+      loopPtr = loopPtr + 1;
+    } while (loopPtr != local_2c);
   }
   return callResult;
 }
@@ -3590,34 +3591,34 @@ int FUN_0018c7f4(param_1, param_2, param_3)
   int iVar2;
   int *piVar3;
   int loopIndex;
-  int *loopIndex2;
+  int *loopPtr2;
   
-  loopIndex2 = (int *)(param_3 * 0xc + param_1 + 0x18);
+  loopPtr2 = (int *)(param_3 * 0xc + param_1 + 0x18);
   loopIndex = 0;
-  while (((int *)*loopIndex2 == (int *)0x0 ||
-         ((param_2 != (int *)*loopIndex2 &&
+  while (((int *)*loopPtr2 == (int *)0x0 ||
+         ((param_2 != (int *)*loopPtr2 &&
           (((((param_2 == (int *)0x0 || (param_2[0x20] == 0)) ||
              (iVar2 = RegKind__flagBit0(param_2[0x26]), iVar2 == 0)) ||
             (((((param_2[5] & 2U) != 0 ||
                (iVar2 = (**(code **)(*param_2 + 0x50))(param_2), iVar2 != 0)) ||
-              ((piVar3 = (int *)*loopIndex2, piVar3[0x20] == 0 ||
+              ((piVar3 = (int *)*loopPtr2, piVar3[0x20] == 0 ||
                ((iVar2 = RegKind__flagBit0(piVar3[0x26]), iVar2 == 0 || ((piVar3[5] & 2U) != 0)))))) ||
              (iVar2 = (**(code **)(*piVar3 + 0x50))(piVar3), iVar2 != 0)))) ||
-           ((((param_2[5] & 0x40U) == 0 || ((*(uint *)(*loopIndex2 + 0x14) & 0x40) == 0)) ||
-            (param_2[0x25] != *(int *)(*loopIndex2 + 0x94)))))))))) {
+           ((((param_2[5] & 0x40U) == 0 || ((*(uint *)(*loopPtr2 + 0x14) & 0x40) == 0)) ||
+            (param_2[0x25] != *(int *)(*loopPtr2 + 0x94)))))))))) {
     bVar1 = loopIndex == 2;
-    loopIndex2 = loopIndex2 + 1;
+    loopPtr2 = loopPtr2 + 1;
     loopIndex = loopIndex + 1;
     if (bVar1) {
       loopIndex = 0;
-      loopIndex2 = (int *)(param_3 * 0xc + param_1 + 0x18);
+      loopPtr2 = (int *)(param_3 * 0xc + param_1 + 0x18);
       do {
-        if (*loopIndex2 == 0) {
+        if (*loopPtr2 == 0) {
           *(int **)((param_3 * 3 + loopIndex) * 4 + param_1 + 0x18) = param_2;
           return 1;
         }
         bVar1 = loopIndex != 2;
-        loopIndex2 = loopIndex2 + 1;
+        loopPtr2 = loopPtr2 + 1;
         loopIndex = loopIndex + 1;
       } while (bVar1);
       return 0;
@@ -3638,28 +3639,28 @@ int FUN_0018c980(param_1, param_2, param_3)
   int loopIndex2;
   int iVar5;
   int iVar6;
-  int *loopIndex3;
+  int *loopPtr3;
   int *piVar8;
   
   loopIndex2 = 0;
   iVar6 = param_1;
   while (*(int *)(iVar6 + 0x30) != 0) {
-    loopIndex3 = *(int **)(iVar6 + 0x18);
-    if (((param_2 == loopIndex3) ||
-        ((((((loopIndex3 != (int *)0x0 && (param_2 != (int *)0x0)) && (loopIndex3[0x20] != 0)) &&
-           ((loopIndex = RegKind__flagBit0(loopIndex3[0x26]), loopIndex != 0 && ((loopIndex3[5] & 2U) == 0)))) &&
-          ((((loopIndex = (**(code **)(*loopIndex3 + 0x50))(loopIndex3), loopIndex == 0 &&
+    loopPtr3 = *(int **)(iVar6 + 0x18);
+    if (((param_2 == loopPtr3) ||
+        ((((((loopPtr3 != (int *)0x0 && (param_2 != (int *)0x0)) && (loopPtr3[0x20] != 0)) &&
+           ((loopIndex = RegKind__flagBit0(loopPtr3[0x26]), loopIndex != 0 && ((loopPtr3[5] & 2U) == 0)))) &&
+          ((((loopIndex = (**(code **)(*loopPtr3 + 0x50))(loopPtr3), loopIndex == 0 &&
              ((param_2[0x20] != 0 && (loopIndex = RegKind__flagBit0(param_2[0x26]), loopIndex != 0)))) &&
             ((param_2[5] & 2U) == 0)) &&
            (((loopIndex = (**(code **)(*param_2 + 0x50))(param_2), loopIndex == 0 &&
              ((*(uint *)(*(int *)(iVar6 + 0x18) + 0x14) & 0x40) != 0)) &&
             ((param_2[5] & 0x40U) != 0)))))) &&
          (*(int *)(*(int *)(iVar6 + 0x18) + 0x94) == param_2[0x25])))) &&
-       ((loopIndex3 = *(int **)(iVar6 + 0x24), param_3 == loopIndex3 ||
-        (((((loopIndex3 != (int *)0x0 && (param_3 != (int *)0x0)) &&
-           ((loopIndex3[0x20] != 0 &&
-            ((loopIndex = RegKind__flagBit0(loopIndex3[0x26]), loopIndex != 0 && ((loopIndex3[5] & 2U) == 0)))))) &&
-          (loopIndex = (**(code **)(*loopIndex3 + 0x50))(loopIndex3), loopIndex == 0)) &&
+       ((loopPtr3 = *(int **)(iVar6 + 0x24), param_3 == loopPtr3 ||
+        (((((loopPtr3 != (int *)0x0 && (param_3 != (int *)0x0)) &&
+           ((loopPtr3[0x20] != 0 &&
+            ((loopIndex = RegKind__flagBit0(loopPtr3[0x26]), loopIndex != 0 && ((loopPtr3[5] & 2U) == 0)))))) &&
+          (loopIndex = (**(code **)(*loopPtr3 + 0x50))(loopPtr3), loopIndex == 0)) &&
          (((((param_3[0x20] != 0 && (loopIndex = RegKind__flagBit0(param_3[0x26]), loopIndex != 0)) &&
             ((param_3[5] & 2U) == 0)) &&
            ((loopIndex = (**(code **)(*param_3 + 0x50))(param_3), loopIndex == 0 &&
@@ -3679,9 +3680,9 @@ int FUN_0018c980(param_1, param_2, param_3)
   *(int **)(iVar6 + 0x18) = param_2;
   *(int **)(iVar6 + 0x24) = param_3;
   if (loopIndex < 3) {
-    loopIndex3 = (int *)(loopIndex * 4 + param_1 + 0x18);
+    loopPtr3 = (int *)(loopIndex * 4 + param_1 + 0x18);
     do {
-      piVar8 = (int *)*loopIndex3;
+      piVar8 = (int *)*loopPtr3;
       if ((piVar8 != (int *)0x0) &&
          ((param_2 == piVar8 ||
           ((((param_2 != (int *)0x0 && (piVar8[0x20] != 0)) &&
@@ -3690,11 +3691,11 @@ int FUN_0018c980(param_1, param_2, param_3)
              && ((param_2[0x20] != 0 &&
                  ((iVar6 = RegKind__flagBit0(param_2[0x26]), iVar6 != 0 && ((param_2[5] & 2U) == 0))))))
             && ((iVar6 = (**(code **)(*param_2 + 0x50))(param_2), iVar6 == 0 &&
-                ((((*(uint *)(*loopIndex3 + 0x14) & 0x40) != 0 && ((param_2[5] & 0x40U) != 0)) &&
-                 (*(int *)(*loopIndex3 + 0x94) == param_2[0x25])))))))))))) {
-        *loopIndex3 = 0;
+                ((((*(uint *)(*loopPtr3 + 0x14) & 0x40) != 0 && ((param_2[5] & 0x40U) != 0)) &&
+                 (*(int *)(*loopPtr3 + 0x94) == param_2[0x25])))))))))))) {
+        *loopPtr3 = 0;
       }
-      piVar8 = (int *)loopIndex3[3];
+      piVar8 = (int *)loopPtr3[3];
       if ((piVar8 != (int *)0x0) &&
          ((param_3 == piVar8 ||
           ((((param_3 != (int *)0x0 && (piVar8[0x20] != 0)) &&
@@ -3704,12 +3705,12 @@ int FUN_0018c980(param_1, param_2, param_3)
                        ((((iVar6 = RegKind__flagBit0(param_3[0x26]), iVar6 != 0 &&
                           ((param_3[5] & 2U) == 0)) &&
                          (iVar6 = (**(code **)(*param_3 + 0x50))(param_3), iVar6 == 0)) &&
-                        (((*(uint *)(loopIndex3[3] + 0x14) & 0x40) != 0 && ((param_3[5] & 0x40U) != 0)))
-                        ))) && (*(int *)(loopIndex3[3] + 0x94) == param_3[0x25])))))))) {
-        loopIndex3[3] = 0;
+                        (((*(uint *)(loopPtr3[3] + 0x14) & 0x40) != 0 && ((param_3[5] & 0x40U) != 0)))
+                        ))) && (*(int *)(loopPtr3[3] + 0x94) == param_3[0x25])))))))) {
+        loopPtr3[3] = 0;
       }
       bVar1 = loopIndex != 2;
-      loopIndex3 = loopIndex3 + 1;
+      loopPtr3 = loopPtr3 + 1;
       loopIndex = loopIndex + 1;
     } while (bVar1);
   }
@@ -4439,7 +4440,7 @@ int R300SchedModel__legalizeInstruction(this, inst)
   int block;
   undefined4 mixInnerSource;
   int program;
-  uint *loopIndex6;
+  uint *loopPtr6;
   undefined4 presubSelect1;
   int loopIndex3;
   uint loopIndex7;
@@ -4507,7 +4508,7 @@ int R300SchedModel__legalizeInstruction(this, inst)
         }
         if (loopIndex <= *(int *)(loopIndex3 + 0x84)) {
           loopIndex5 = loopIndex * 0x18;
-          loopIndex6 = (uint *)(loopIndex5 + loopIndex3 + 0xa0);
+          loopPtr6 = (uint *)(loopIndex5 + loopIndex3 + 0xa0);
           do {
             sourceDef = (int *)IRInst__getOperandSource(loopIndex3,loopIndex);
             if (loopIndex2 != sourceDef[0x54]) {
@@ -4518,7 +4519,7 @@ LAB_0018e6e0:
                 pushUpFailed = true;
                 break;
               }
-              if ((*loopIndex6 & 1) != 0) {
+              if ((*loopPtr6 & 1) != 0) {
                 isLoadConst = (**(code **)(*sourceDef + 0x48))(sourceDef);
                 if (isLoadConst == 0) {
                   hasSingleUse = IRInst__hasSingleUse(sourceDef,program);
@@ -4613,7 +4614,7 @@ LAB_0018e5a0:
 LAB_0018e6c4:
             loopIndex = loopIndex + 1;
             loopIndex5 = loopIndex5 + 0x18;
-            loopIndex6 = loopIndex6 + 6;
+            loopPtr6 = loopPtr6 + 6;
           } while (loopIndex <= *(int *)(loopIndex3 + 0x84));
         }
       }
@@ -4798,15 +4799,15 @@ code_r0x0018eb5c: ;
           loopIndex5 = swizzleGroupCount + -1;
           if (1 < loopIndex5) {
             loopIndex3 = 1;
-            loopIndex6 = local_84;
+            loopPtr6 = local_84;
             do {
-              loopIndex6 = loopIndex6 + 1;
+              loopPtr6 = loopPtr6 + 1;
               loopIndex5 = IRInst__create(0x31,this[2]);
               IRInst__copyBodyFrom(loopIndex5,targetInst);
-              loopIndex7 = *loopIndex6;
+              loopIndex7 = *loopPtr6;
               loopIndex = IRInst__getOperandRecord(loopIndex5,1);
               *(uint *)(loopIndex + 0x10) = loopIndex7;
-              SelectWord__clearReadComponents(&clearedSelectMiddle,*loopIndex6);
+              SelectWord__clearReadComponents(&clearedSelectMiddle,*loopPtr6);
               *(undefined4 *)(loopIndex5 + 0x9c) = clearedSelectMiddle;
               Block__insertInstBefore(block,targetInst,loopIndex5);
               if ((targetInst[5] & 2U) == 0) {
@@ -4832,7 +4833,7 @@ code_r0x0018eb5c: ;
           loopIndex4 = 0;
           if (0 < swizzleGroupCount) {
             loopIndex3 = 0;
-            loopIndex6 = local_84;
+            loopPtr6 = local_84;
             loopIndex5 = loopIndex4;
             do {
               *(int *)(program + 0x238) = *(int *)(program + 0x238) + 1;
@@ -4840,10 +4841,10 @@ code_r0x0018eb5c: ;
               *(undefined4 *)(loopIndex4 + 0x98) = 0;
               *(undefined4 *)(loopIndex4 + 0x94) = *(undefined4 *)(loopIndex4 + 0x14c);
               IRInst__setOperandSource(loopIndex4,1,splitSource,0,this[2]);
-              loopIndex7 = *loopIndex6;
+              loopIndex7 = *loopPtr6;
               loopIndex = IRInst__getOperandRecord(loopIndex4,1);
               *(uint *)(loopIndex + 0x10) = loopIndex7;
-              SelectWord__clearReadComponents(clearedSelectTemp,*loopIndex6);
+              SelectWord__clearReadComponents(clearedSelectTemp,*loopPtr6);
               *(undefined4 *)(loopIndex4 + 0x9c) = clearedSelectTemp[0];
               if (loopIndex5 == 0) {
                 if ((((splitSource[0x20] != 0) && (loopIndex5 = RegKind__flagBit0(splitSource[0x26]), loopIndex5 != 0)) &&
@@ -4878,7 +4879,7 @@ code_r0x0018eb5c: ;
                 Block__insertInstBefore(block,targetInst,loopIndex4);
               }
               loopIndex3 = loopIndex3 + 1;
-              loopIndex6 = loopIndex6 + 1;
+              loopPtr6 = loopPtr6 + 1;
               loopIndex5 = loopIndex4;
             } while (loopIndex3 < swizzleGroupCount);
           }

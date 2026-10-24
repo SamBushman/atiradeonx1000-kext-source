@@ -2975,7 +2975,7 @@
 0x18b654	R300SchedModel__vslot11	888	no	indirect call (driver context / vtable / callback)
 0x18b9cc	R300SchedModel__vslot14	712	no	indirect call (driver context / vtable / callback)
 0x18bc94	FUN_0018bc94	1332	yes	
-0x18c1c8	FUN_0018c1c8	1440	yes	
+0x18c1c8	PackState__buildSlotTable	1440	yes	
 0x18c768	PackState__countFreeSlots	140	yes	
 0x18c7f4	FUN_0018c7f4	396	no	indirect call (driver context / vtable / callback)
 0x18c980	FUN_0018c980	1112	no	indirect call (driver context / vtable / callback)

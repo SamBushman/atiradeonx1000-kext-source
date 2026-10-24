@@ -79,7 +79,7 @@ int R520MachineAssembler__vslot28_endLoop(this, node, block, compiler)
 {
   int vector;
   byte bVar1;
-  int *loopIndex;
+  int *loopPtr;
   int iVar3;
   int iVar4;
   uint loopIndex2;
@@ -91,12 +91,12 @@ int R520MachineAssembler__vslot28_endLoop(this, node, block, compiler)
   undefined8 uVar10;
   
   vector = *(int *)(this[4] + 0x24);
-  loopIndex = (int *)0x0;
+  loopPtr = (int *)0x0;
   loopIndex2 = *(uint *)(vector + 4);
   if (loopIndex2 - 1 < loopIndex2) {
-    loopIndex = (int *)((loopIndex2 - 1) * 4 + *(int *)(vector + 8));
+    loopPtr = (int *)((loopIndex2 - 1) * 4 + *(int *)(vector + 8));
   }
-  loopStartRecord = *loopIndex;
+  loopStartRecord = *loopPtr;
   Vector__removeAt(vector,loopIndex2 - 1);
   iVar4 = this[0x18];
   uVar10 = Compiler__isOptionEnabled(compiler,0x4b);
@@ -130,13 +130,13 @@ LAB_001a168c:
   this[iVar6 + 0x30] = loopStartRecord;
   if (0 < loopRemaining) {
     iVar4 = this[0x2a];
-    loopIndex = this + iVar6 + 0x30;
+    loopPtr = this + iVar6 + 0x30;
     loopIndex2 = (uint)*(byte *)(iVar4 + a4 + 0x13);
     while( true ) {
-      if (*(char *)(*loopIndex * 0x48 + iVar4 + 0xf) == '\0') {
+      if (*(char *)(*loopPtr * 0x48 + iVar4 + 0xf) == '\0') {
         loopIndex2 = loopIndex2 + 1;
       }
-      loopStartRecord = loopIndex[1];
+      loopStartRecord = loopPtr[1];
       iVar6 = iVar4 + loopStartRecord * 0x48;
       if (*(char *)(iVar6 + 0xf) == '\x01') {
         loopIndex2 = loopIndex2 + 1;
@@ -145,7 +145,7 @@ LAB_001a168c:
       if (loopIndex2 != 0) {
         *(undefined1 *)(loopStartRecord * 0x48 + this[0x2a] + 0x15) = 1;
       }
-      loopIndex = loopIndex + 1;
+      loopPtr = loopPtr + 1;
       loopRemaining = loopRemaining + -1;
       if (loopRemaining == 0) break;
       iVar4 = this[0x2a];

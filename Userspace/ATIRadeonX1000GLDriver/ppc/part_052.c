@@ -267,8 +267,8 @@ int R300MachineAssembler__assembleAluInstruction(this, irInst)
   undefined4 uVar14;
   undefined4 a1;
   int *selectSrcIdx;
-  int *loopIndex;
-  int *loopIndex2;
+  int *loopPtr;
+  int *loopPtr2;
   uint rgbUsedMaskOld;
   int *irInstWords;
   int picTableWord;
@@ -305,11 +305,11 @@ int R300MachineAssembler__assembleAluInstruction(this, irInst)
   undefined *local_60;
   int *local_5c;
   
-  loopIndex = &local_ac;
+  loopPtr = &local_ac;
   a4 = &local_f8;
   alphaHardwareOpcodeOut = &local_f4;
-  loopIndex2 = irInst;
-  uVar10 = R300MachineAssembler__classifyAluOperation(this,&local_9c,loopIndex,irInst,a4,alphaHardwareOpcodeOut);
+  loopPtr2 = irInst;
+  uVar10 = R300MachineAssembler__classifyAluOperation(this,&local_9c,loopPtr,irInst,a4,alphaHardwareOpcodeOut);
   local_6c = uVar10 & 1;
   local_70 = uVar10 >> 1 & 1;
   local_68 = *(int *)(irInst[0x22] + 8);
@@ -346,7 +346,7 @@ LAB_00198290:
       operandVReg = IRInst__getOperandSource(irInst,srcIdx);
       a0 = (int *)((ulonglong)operandVReg >> 0x20);
       picTableWord = *(int *)(local_60 + -0x56f8);
-      loopRemaining = (**(code **)(*a0 + 0x60))(a0,(int)operandVReg,loopIndex,loopIndex2,a4,alphaHardwareOpcodeOut,local_60);
+      loopRemaining = (**(code **)(*a0 + 0x60))(a0,(int)operandVReg,loopPtr,loopPtr2,a4,alphaHardwareOpcodeOut,local_60);
       if (loopRemaining == 0) {
         local_7c = 0;
         local_80 = (int *)0x0;
@@ -361,8 +361,8 @@ LAB_00198290:
         swizzle = local_88;
         a0 = (int *)IRInst__getOperandSource(local_80,1);
         a4 = (int *)this[3];
-        loopIndex2 = (int *)0x0;
-        loopIndex = a0;
+        loopPtr2 = (int *)0x0;
+        loopPtr = a0;
         IRInst__setOperandSource(irInst,srcIdx,a0,0,a4);
         if (srcIdx == (int *)0x0) {
           local_7c = 1;
@@ -377,11 +377,11 @@ LAB_00198290:
       loopRemaining = a0[0x26];
       if (loopRemaining != 0x2c) {
         if (loopRemaining == 0x29) {
-          loopIndex2 = (int *)this[3];
-          loopIndex = srcIdx;
+          loopPtr2 = (int *)this[3];
+          loopPtr = srcIdx;
           /* dropped 2 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-           * disassembly): stock passes srcIdx and loopIndex2 (the value just computed above) too. */
-          local_f0 = (**(code **)(*this + 0x158))(this,irInst,srcIdx,loopIndex2);
+           * disassembly): stock passes srcIdx and loopPtr2 (the value just computed above) too. */
+          local_f0 = (**(code **)(*this + 0x158))(this,irInst,srcIdx,loopPtr2);
 LAB_0019852c:
           bVar3 = srcIdx == (int *)((int)((unsigned char *)0x0) + 3);
           crFlagsByte = (byte)((uint)local_64 >> 0x18);
@@ -403,10 +403,10 @@ LAB_0019852c:
             if (loopRemaining == 0) {
               if (anyEnabledLaneSelectsXyzResult != 0) {
                 loopIndex3 = 1;
-                loopIndex2 = this + 0xe;
-                loopIndex = this;
+                loopPtr2 = this + 0xe;
+                loopPtr = this;
                 do {
-                  piVar25 = (int *)loopIndex[7];
+                  piVar25 = (int *)loopPtr[7];
                   a4 = (int *)(loopIndex3 - 1);
                   if ((a0 == piVar25) ||
                      ((((((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) && (piVar25[0x20] != 0))
@@ -416,16 +416,16 @@ LAB_0019852c:
                           ((a0[0x20] != 0 && (loopRemaining = RegKind__flagBit0(a0[0x26]), loopRemaining != 0)))))) &&
                         ((a0[5] & 2U) == 0)) &&
                        (((loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0 &&
-                         ((*(uint *)(loopIndex[7] + 0x14) & 0x40) != 0)) && ((a0[5] & 0x40U) != 0))))
-                      && (*(int *)(loopIndex[7] + 0x94) == a0[0x25])))) {
+                         ((*(uint *)(loopPtr[7] + 0x14) & 0x40) != 0)) && ((a0[5] & 0x40U) != 0))))
+                      && (*(int *)(loopPtr[7] + 0x94) == a0[0x25])))) {
                     usedMaskOld = this[0x20];
-                    *loopIndex2 = local_f0;
+                    *loopPtr2 = local_f0;
                     this[0x20] = 1 << (loopIndex3 & 0x3f) | usedMaskOld;
                     goto LAB_00199c88;
                   }
                   bVar4 = loopIndex3 != 3;
-                  loopIndex2 = loopIndex2 + 1;
-                  loopIndex = loopIndex + 1;
+                  loopPtr2 = loopPtr2 + 1;
+                  loopPtr = loopPtr + 1;
                   loopIndex3 = loopIndex3 + 1;
                 } while (bVar4);
                 a4 = (int *)((int)((unsigned char *)0x0) + 3);
@@ -437,10 +437,10 @@ LAB_00199c88:
             else {
               if (anyEnabledLaneSelectsXyzResult == 0) {
                 loopIndex3 = 1;
-                loopIndex2 = this + 0x12;
-                loopIndex = this;
+                loopPtr2 = this + 0x12;
+                loopPtr = this;
                 do {
-                  piVar25 = (int *)loopIndex[10];
+                  piVar25 = (int *)loopPtr[10];
                   a4 = (int *)(loopIndex3 - 1);
                   if ((a0 == piVar25) ||
                      ((((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) &&
@@ -451,16 +451,16 @@ LAB_00199c88:
                        (((a0[0x20] != 0 && (loopRemaining = RegKind__flagBit0(a0[0x26]), loopRemaining != 0)) &&
                         ((a0[5] & 2U) == 0)))) &&
                       (((loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0 &&
-                        ((*(uint *)(loopIndex[10] + 0x14) & 0x40) != 0)) &&
-                       (((a0[5] & 0x40U) != 0 && (*(int *)(loopIndex[10] + 0x94) == a0[0x25])))))))) {
+                        ((*(uint *)(loopPtr[10] + 0x14) & 0x40) != 0)) &&
+                       (((a0[5] & 0x40U) != 0 && (*(int *)(loopPtr[10] + 0x94) == a0[0x25])))))))) {
                     usedMaskOld = this[0x21];
-                    *loopIndex2 = local_f0;
+                    *loopPtr2 = local_f0;
                     this[0x21] = 1 << (loopIndex3 & 0x3f) | usedMaskOld;
                     goto LAB_00199b44;
                   }
                   bVar4 = loopIndex3 != 3;
-                  loopIndex2 = loopIndex2 + 1;
-                  loopIndex = loopIndex + 1;
+                  loopPtr2 = loopPtr2 + 1;
+                  loopPtr = loopPtr + 1;
                   loopIndex3 = loopIndex3 + 1;
                 } while (bVar4);
                 a4 = (int *)((int)((unsigned char *)0x0) + 3);
@@ -469,10 +469,10 @@ LAB_00199b44:
               }
               else {
                 loopIndex3 = 1;
-                loopIndex2 = this;
-                loopIndex = this;
+                loopPtr2 = this;
+                loopPtr = this;
                 do {
-                  piVar25 = (int *)loopIndex2[7];
+                  piVar25 = (int *)loopPtr2[7];
                   a4 = (int *)(loopIndex3 - 1);
                   if (((a0 == piVar25) ||
                       ((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) &&
@@ -483,9 +483,9 @@ LAB_00199b44:
                             ((a0[0x20] != 0 && (loopRemaining = RegKind__flagBit0(a0[0x26]), loopRemaining != 0)))) &&
                            ((a0[5] & 2U) == 0)) &&
                           ((loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0 &&
-                           ((*(uint *)(loopIndex2[7] + 0x14) & 0x40) != 0)))))))) &&
-                       (((a0[5] & 0x40U) != 0 && (*(int *)(loopIndex2[7] + 0x94) == a0[0x25])))))) &&
-                     ((piVar25 = (int *)loopIndex2[10], a0 == piVar25 ||
+                           ((*(uint *)(loopPtr2[7] + 0x14) & 0x40) != 0)))))))) &&
+                       (((a0[5] & 0x40U) != 0 && (*(int *)(loopPtr2[7] + 0x94) == a0[0x25])))))) &&
+                     ((piVar25 = (int *)loopPtr2[10], a0 == piVar25 ||
                       ((((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) && (piVar25[0x20] != 0)) &&
                          ((loopRemaining = RegKind__flagBit0(piVar25[0x26]), loopRemaining != 0 &&
                           ((piVar25[5] & 2U) == 0)))) &&
@@ -493,21 +493,21 @@ LAB_00199b44:
                           ((a0[0x20] != 0 && (loopRemaining = RegKind__flagBit0(a0[0x26]), loopRemaining != 0)))) &&
                          ((a0[5] & 2U) == 0)))) &&
                        ((((loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0 &&
-                          ((*(uint *)(loopIndex2[10] + 0x14) & 0x40) != 0)) && ((a0[5] & 0x40U) != 0))
-                        && (*(int *)(loopIndex2[10] + 0x94) == a0[0x25])))))))) {
+                          ((*(uint *)(loopPtr2[10] + 0x14) & 0x40) != 0)) && ((a0[5] & 0x40U) != 0))
+                        && (*(int *)(loopPtr2[10] + 0x94) == a0[0x25])))))))) {
                     rgbUsedMaskOld = this[0x20];
                     usedMaskOld = this[0x21];
                     loopIndex3 = 1 << (loopIndex3 & 0x3f);
-                    loopIndex[0x12] = local_f0;
+                    loopPtr[0x12] = local_f0;
                     this[0x20] = loopIndex3 | rgbUsedMaskOld;
                     this[0x21] = loopIndex3 | usedMaskOld;
-                    loopIndex[0xe] = local_f0;
+                    loopPtr[0xe] = local_f0;
                     goto LAB_001999e8;
                   }
                   bVar4 = loopIndex3 != 3;
-                  loopIndex2 = loopIndex2 + 1;
+                  loopPtr2 = loopPtr2 + 1;
                   loopIndex3 = loopIndex3 + 1;
-                  loopIndex = loopIndex + 1;
+                  loopPtr = loopPtr + 1;
                 } while (bVar4);
                 a4 = (int *)((int)((unsigned char *)0x0) + 3);
 LAB_001999e8:
@@ -523,14 +523,14 @@ joined_r0x00199c90:
                   }
                 }
               }
-              loopIndex = rgbSelect;
-              loopIndex2 = rgbMod;
+              loopPtr = rgbSelect;
+              loopPtr2 = rgbMod;
               /* dropped 4 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-               * disassembly): stock passes loopIndex, loopIndex2, r21 (== a4: the search loop's
+               * disassembly): stock passes loopPtr, loopPtr2, r21 (== a4: the search loop's
                * `r23 - 1`, or 3 only when the loop runs out - NOT a literal 3, #80), and swizzle
                * too - swizzle's real register (r27) is set once, early in the function, and never
                * reassigned before this call, same as the already-fixed 0xec/0xf0 calls above. */
-              (*selectMethod)(this,selectSrcIdx,loopIndex,loopIndex2,a4,swizzle);
+              (*selectMethod)(this,selectSrcIdx,loopPtr,loopPtr2,a4,swizzle);
               alphaHardwareOpcodeOut = swizzle;
             }
           }
@@ -547,10 +547,10 @@ LAB_00199cdc:
             alphaSelect[(int)srcIdx] = 0x10;
             if (iVar13 != 0) {
               loopIndex3 = 1;
-              loopIndex2 = this + 0x12;
-              loopIndex = this;
+              loopPtr2 = this + 0x12;
+              loopPtr = this;
               do {
-                piVar25 = (int *)loopIndex[10];
+                piVar25 = (int *)loopPtr[10];
                 a4 = (int *)(loopIndex3 - 1);
                 if ((a0 == piVar25) ||
                    ((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) &&
@@ -561,16 +561,16 @@ LAB_00199cdc:
                        ((a0[0x20] != 0 && (iVar13 = RegKind__flagBit0(a0[0x26]), iVar13 != 0)))))))) &&
                     ((((a0[5] & 2U) == 0 &&
                       ((iVar13 = (**(code **)(*a0 + 0x50))(a0), iVar13 == 0 &&
-                       ((*(uint *)(loopIndex[10] + 0x14) & 0x40) != 0)))) &&
-                     (((a0[5] & 0x40U) != 0 && (*(int *)(loopIndex[10] + 0x94) == a0[0x25])))))))) {
+                       ((*(uint *)(loopPtr[10] + 0x14) & 0x40) != 0)))) &&
+                     (((a0[5] & 0x40U) != 0 && (*(int *)(loopPtr[10] + 0x94) == a0[0x25])))))))) {
                   usedMaskOld = this[0x21];
-                  *loopIndex2 = local_f0;
+                  *loopPtr2 = local_f0;
                   this[0x21] = 1 << (loopIndex3 & 0x3f) | usedMaskOld;
                   goto LAB_00199e60;
                 }
                 bVar4 = loopIndex3 != 3;
-                loopIndex2 = loopIndex2 + 1;
-                loopIndex = loopIndex + 1;
+                loopPtr2 = loopPtr2 + 1;
+                loopPtr = loopPtr + 1;
                 loopIndex3 = loopIndex3 + 1;
               } while (bVar4);
               a4 = (int *)((int)((unsigned char *)0x0) + 3);
@@ -584,19 +584,19 @@ LAB_00199e60:
                   selectSrcIdx = (int *)((int)((unsigned char *)0x0) + 1);
                 }
               }
-              loopIndex = alphaSelect;
-              loopIndex2 = local_5c;
+              loopPtr = alphaSelect;
+              loopPtr2 = local_5c;
               alphaHardwareOpcodeOut = swizzle2;
               /* dropped 4 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-               * disassembly): stock passes loopIndex, loopIndex2, r21 (== a4, search-loop r23-1 / 3 on exhaustion - not a literal 3, #80), and piVar25 too. */
-              (**(code **)(*this + 0xfc))(this,selectSrcIdx,loopIndex,loopIndex2,a4,alphaHardwareOpcodeOut);
+               * disassembly): stock passes loopPtr, loopPtr2, r21 (== a4, search-loop r23-1 / 3 on exhaustion - not a literal 3, #80), and piVar25 too. */
+              (**(code **)(*this + 0xfc))(this,selectSrcIdx,loopPtr,loopPtr2,a4,alphaHardwareOpcodeOut);
             }
             if (loopRemaining != 0) {
               loopIndex3 = 1;
-              loopIndex2 = this + 0xe;
-              loopIndex = this;
+              loopPtr2 = this + 0xe;
+              loopPtr = this;
               do {
-                piVar25 = (int *)loopIndex[7];
+                piVar25 = (int *)loopPtr[7];
                 a4 = (int *)(loopIndex3 - 1);
                 if ((a0 == piVar25) ||
                    (((((piVar25 != (int *)0x0 && (a0 != (int *)0x0)) && (piVar25[0x20] != 0)) &&
@@ -606,16 +606,16 @@ LAB_00199e60:
                         ((a0[0x20] != 0 && (loopRemaining = RegKind__flagBit0(a0[0x26]), loopRemaining != 0)))))) &&
                       ((a0[5] & 2U) == 0)))) &&
                     ((((loopRemaining = (**(code **)(*a0 + 0x50))(a0), loopRemaining == 0 &&
-                       ((*(uint *)(loopIndex[7] + 0x14) & 0x40) != 0)) && ((a0[5] & 0x40U) != 0)) &&
-                     (*(int *)(loopIndex[7] + 0x94) == a0[0x25])))))) {
+                       ((*(uint *)(loopPtr[7] + 0x14) & 0x40) != 0)) && ((a0[5] & 0x40U) != 0)) &&
+                     (*(int *)(loopPtr[7] + 0x94) == a0[0x25])))))) {
                   usedMaskOld = this[0x20];
-                  *loopIndex2 = local_f0;
+                  *loopPtr2 = local_f0;
                   this[0x20] = 1 << (loopIndex3 & 0x3f) | usedMaskOld;
                   goto LAB_00199fdc;
                 }
                 bVar4 = loopIndex3 != 3;
-                loopIndex2 = loopIndex2 + 1;
-                loopIndex = loopIndex + 1;
+                loopPtr2 = loopPtr2 + 1;
+                loopPtr = loopPtr + 1;
                 loopIndex3 = loopIndex3 + 1;
               } while (bVar4);
               a4 = (int *)((int)((unsigned char *)0x0) + 3);
@@ -629,12 +629,12 @@ LAB_00199fdc:
                   piVar25 = (int *)((int)((unsigned char *)0x0) + 1);
                 }
               }
-              loopIndex = alphaSelect;
-              loopIndex2 = local_5c;
+              loopPtr = alphaSelect;
+              loopPtr2 = local_5c;
               /* dropped 4 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-               * disassembly): stock passes loopIndex, loopIndex2, r21 (== a4, not a literal 3, #80), and swizzle2 too -
+               * disassembly): stock passes loopPtr, loopPtr2, r21 (== a4, not a literal 3, #80), and swizzle2 too -
                * swizzle2 directly, not piVar25 (reassigned below, diverged from swizzle2 by here). */
-              (**(code **)(*this + 0x100))(this,piVar25,loopIndex,loopIndex2,a4,swizzle2);
+              (**(code **)(*this + 0x100))(this,piVar25,loopPtr,loopPtr2,a4,swizzle2);
               alphaHardwareOpcodeOut = swizzle2;
             }
           }
@@ -645,11 +645,11 @@ LAB_00199fdc:
             local_f0 = FUN_00134de8(*(undefined4 *)(this[3] + 0x6c4),a0);
             loopRemaining = (**(code **)(*a0 + 0x80))(a0);
             if (loopRemaining != 0) {
-              loopIndex2 = (int *)this[3];
-              loopIndex = irInst;
+              loopPtr2 = (int *)this[3];
+              loopPtr = irInst;
               /* dropped 2 args (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-               * disassembly): stock passes irInst and loopIndex2 too. */
-              (**(code **)(*this + 0x154))(this,srcIdx,irInst,loopIndex2);
+               * disassembly): stock passes irInst and loopPtr2 too. */
+              (**(code **)(*this + 0x154))(this,srcIdx,irInst,loopPtr2);
             }
             goto LAB_0019852c;
           }
@@ -661,34 +661,34 @@ LAB_00199fdc:
           loopRemaining = (**(code **)(*a0 + 0x48))(a0);
           if (loopRemaining != 0) {
             if (a0[0x26] == 0x33) {
-              loopIndex = &local_f0;
+              loopPtr = &local_f0;
               /* dropped 1 arg (found auditing #70 via ExtendIndirectCalls.java / ground-truth
-               * disassembly): stock passes &local_f0 (loopIndex) too. */
-              loopRemaining = (**(code **)(*this + 0xdc))(this,a0,loopIndex);
+               * disassembly): stock passes &local_f0 (loopPtr) too. */
+              loopRemaining = (**(code **)(*this + 0xdc))(this,a0,loopPtr);
               if (loopRemaining == 0) {
                 if ((srcIdx != (int *)((int)((unsigned char *)0x0) + 3)) ||
                    ((bool)((byte)((uint)local_64 >> 0x1d) & 1))) {
                   if (writesRgb) {
-                    loopIndex = rgbSelect;
-                    loopIndex2 = rgbMod;
+                    loopPtr = rgbSelect;
+                    loopPtr2 = rgbMod;
                     a4 = irInst;
                     /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
-                     * ground-truth disassembly): stock passes loopIndex, loopIndex2, a4 too. */
-                    (**(code **)(*this + 0xd4))(this,srcIdx,loopIndex,loopIndex2,a4);
+                     * ground-truth disassembly): stock passes loopPtr, loopPtr2, a4 too. */
+                    (**(code **)(*this + 0xd4))(this,srcIdx,loopPtr,loopPtr2,a4);
                   }
                   if (writesAlpha) {
-                    loopIndex = alphaSelect;
-                    loopIndex2 = local_5c;
+                    loopPtr = alphaSelect;
+                    loopPtr2 = local_5c;
                     a4 = irInst;
                     /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
-                     * ground-truth disassembly): stock passes loopIndex, loopIndex2, a4 too. */
-                    (**(code **)(*this + 0xd8))(this,srcIdx,loopIndex,loopIndex2,a4);
+                     * ground-truth disassembly): stock passes loopPtr, loopPtr2, a4 too. */
+                    (**(code **)(*this + 0xd8))(this,srcIdx,loopPtr,loopPtr2,a4);
                   }
                 }
                 else {
                   alphaSelect[2] = 0x11;
-                  loopIndex = alphaSelect;
-                  loopIndex2 = local_5c;
+                  loopPtr = alphaSelect;
+                  loopPtr2 = local_5c;
                   a4 = irInst;
                   (**(code **)(*this + 0xd8))
                             (this,3,alphaSelect,local_5c,irInst,alphaHardwareOpcodeOut,*(code **)(*this + 0xd8)
@@ -700,7 +700,7 @@ LAB_00199fdc:
             }
             else {
               local_f0 = a0[0x25];
-              loopIndex = a0;
+              loopPtr = a0;
               R300MachineAssembler__trackMaxLevelAndAssemble(this,local_f0,a0);
               local_f0 = (**(code **)(*this + 0xe0))(this,local_f0);
             }
@@ -711,26 +711,26 @@ LAB_00199fdc:
           if ((srcIdx != (int *)((int)((unsigned char *)0x0) + 3)) ||
              ((bool)((byte)((uint)local_64 >> 0x1d) & 1))) {
             if (writesRgb) {
-              loopIndex = rgbSelect;
-              loopIndex2 = rgbMod;
+              loopPtr = rgbSelect;
+              loopPtr2 = rgbMod;
               a4 = swizzle;
               /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
-               * ground-truth disassembly): stock passes loopIndex, loopIndex2, a4 too. */
-              (**(code **)(*this + 0xec))(this,srcIdx,loopIndex,loopIndex2,a4);
+               * ground-truth disassembly): stock passes loopPtr, loopPtr2, a4 too. */
+              (**(code **)(*this + 0xec))(this,srcIdx,loopPtr,loopPtr2,a4);
             }
             if (writesAlpha) {
-              loopIndex = alphaSelect;
-              loopIndex2 = local_5c;
+              loopPtr = alphaSelect;
+              loopPtr2 = local_5c;
               a4 = swizzle;
               /* dropped 3 args (found auditing #70 via ExtendIndirectCalls.java /
-               * ground-truth disassembly): stock passes loopIndex, loopIndex2, a4 too. */
-              (**(code **)(*this + 0xf0))(this,srcIdx,loopIndex,loopIndex2,a4);
+               * ground-truth disassembly): stock passes loopPtr, loopPtr2, a4 too. */
+              (**(code **)(*this + 0xf0))(this,srcIdx,loopPtr,loopPtr2,a4);
             }
           }
           else {
             alphaSelect[2] = 0x11;
-            loopIndex = alphaSelect;
-            loopIndex2 = local_5c;
+            loopPtr = alphaSelect;
+            loopPtr2 = local_5c;
             a4 = swizzle;
             (**(code **)(*this + 0xf0))
                       (this,1,alphaSelect,local_5c,swizzle,alphaHardwareOpcodeOut,*(code **)(*this + 0xf0));
@@ -740,19 +740,19 @@ LAB_00199fdc:
           bVar3 = (local_84 & 0xffffff00) == 0;
           iVar13 = *(int *)(a0[0x22] + 8);
           loopRemaining = (**(code **)(*a0 + 0x14))
-                             (a0,a1,loopIndex,loopIndex2,a4,alphaHardwareOpcodeOut,a0[0x22],*(code **)(*a0 + 0x14));
+                             (a0,a1,loopPtr,loopPtr2,a4,alphaHardwareOpcodeOut,a0[0x22],*(code **)(*a0 + 0x14));
           if (!bVar3) {
             this[0x20] = loopRemaining * 4 - 2U | this[0x20];
             (**(code **)(*this + 0xe4))
-                      (this,*(undefined4 *)(PTR_DAT_001e913c + iVar13 * 0x38 + 0xc),loopIndex,
-                       loopIndex2,a4,alphaHardwareOpcodeOut,PTR_DAT_001e913c + iVar13 * 0x38);
+                      (this,*(undefined4 *)(PTR_DAT_001e913c + iVar13 * 0x38 + 0xc),loopPtr,
+                       loopPtr2,a4,alphaHardwareOpcodeOut,PTR_DAT_001e913c + iVar13 * 0x38);
           }
           bVar4 = -1 < (int)-loopIndex3;
           if (!bVar4) {
             this[0x21] = loopRemaining * 4 - 2U | this[0x21];
             (**(code **)(*this + 0xe8))
-                      (this,*(undefined4 *)(PTR_DAT_001e913c + iVar13 * 0x38 + 0xc),loopIndex,
-                       loopIndex2,a4,alphaHardwareOpcodeOut,PTR_DAT_001e913c + iVar13 * 0x38);
+                      (this,*(undefined4 *)(PTR_DAT_001e913c + iVar13 * 0x38 + 0xc),loopPtr,
+                       loopPtr2,a4,alphaHardwareOpcodeOut,PTR_DAT_001e913c + iVar13 * 0x38);
           }
           if (loopRemaining < 2) {
             if (loopRemaining != 1) goto LAB_0019a030;
@@ -769,8 +769,8 @@ LAB_00199fdc:
               if (loopRemaining != 0) {
                 loopRemaining = IRInst__getOperandSource(a0,1);
                 registerIndex = *(undefined4 *)(loopRemaining + 0x94);
-                loopIndex = (int *)IRInst__getOperandSource(a0,1);
-                R300MachineAssembler__trackMaxLevelAndAssemble(this,registerIndex,loopIndex);
+                loopPtr = (int *)IRInst__getOperandSource(a0,1);
+                R300MachineAssembler__trackMaxLevelAndAssemble(this,registerIndex,loopPtr);
                 iVar13 = (**(code **)(*this + 0xe0))(this,registerIndex);
               }
             }
@@ -831,8 +831,8 @@ LAB_001994a8:
               if (loopRemaining != 0) {
                 loopRemaining = IRInst__getOperandSource(a0,1);
                 registerIndex2 = *(undefined4 *)(loopRemaining + 0x94);
-                loopIndex = (int *)IRInst__getOperandSource(a0,1);
-                R300MachineAssembler__trackMaxLevelAndAssemble(this,registerIndex2,loopIndex);
+                loopPtr = (int *)IRInst__getOperandSource(a0,1);
+                R300MachineAssembler__trackMaxLevelAndAssemble(this,registerIndex2,loopPtr);
                 iVar11 = (**(code **)(*this + 0xe0))(this,registerIndex2);
               }
             }
@@ -855,8 +855,8 @@ LAB_00198950:
               if (loopRemaining != 0) {
                 loopRemaining = IRInst__getOperandSource(a0,2);
                 registerIndex3 = *(undefined4 *)(loopRemaining + 0x94);
-                loopIndex = (int *)IRInst__getOperandSource(a0,2);
-                R300MachineAssembler__trackMaxLevelAndAssemble(this,registerIndex3,loopIndex);
+                loopPtr = (int *)IRInst__getOperandSource(a0,2);
+                R300MachineAssembler__trackMaxLevelAndAssemble(this,registerIndex3,loopPtr);
                 iVar12 = (**(code **)(*this + 0xe0))(this,registerIndex3);
               }
             }
@@ -1014,8 +1014,8 @@ LAB_0019941c:
             }
 LAB_00199420:
             if ((bVar3) || (bVar4)) {
-              loopIndex = (int *)(irInstWords[8] & 1U ^ 1);
-              IROperand__setModifierBits(irInstWords + 3,1,loopIndex);
+              loopPtr = (int *)(irInstWords[8] & 1U ^ 1);
+              IROperand__setModifierBits(irInstWords + 3,1,loopPtr);
             }
           }
         }
@@ -1028,8 +1028,8 @@ LAB_0019a030:
             (**(code **)(*this + 0x108))(this,srcIdx,rgbMod,local_80,picTableWord);
           }
           a4 = (int *)this[3];
-          loopIndex2 = (int *)0x0;
-          loopIndex = local_80;
+          loopPtr2 = (int *)0x0;
+          loopPtr = local_80;
           IRInst__setOperandSource(irInst,srcIdx,local_80,0,a4);
           if (srcIdx == (int *)0x0) {
             irInst[0x27] = picTableWord;

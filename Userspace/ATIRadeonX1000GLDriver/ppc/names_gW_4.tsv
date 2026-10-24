@@ -79,4 +79,3 @@ local	FUN_001506d0	param_1	useA	CONFIRMED	pair {consumer instruction, operand in
 local	FUN_001506d0	param_2	useB	CONFIRMED	second pair
 local	FUN_001506d0	param_3	pass	CONFIRMED	forwarded unchanged to FUN_0014e9e4, FUN_0014f420 and Inst__reassociate_14e6e4
 local	FUN_001506d0	iVar1	useAPrecheck	INFERRED	FUN_00146cd8(param_1,..): precheck result for use A
-local	FUN_001506d0	callResult	useBPrecheck	INFERRED	FUN_00146cd8(param_2,..): precheck result for use B

@@ -3181,7 +3181,7 @@ extern int FUN_0018b1bc();
 extern int R300SchedModel__vslot11();
 extern int R300SchedModel__vslot14();
 extern int FUN_0018bc94();
-extern int FUN_0018c1c8();
+extern int PackState__buildSlotTable();
 extern int PackState__countFreeSlots();
 extern int FUN_0018c7f4();
 extern int FUN_0018c980();

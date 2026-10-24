@@ -2975,7 +2975,7 @@
 0x18b654	888	R300SchedModel__vslot11	part_049	converted
 0x18b9cc	712	R300SchedModel__vslot14	part_049	converted
 0x18bc94	1332	FUN_0018bc94	part_049	converted
-0x18c1c8	1440	FUN_0018c1c8	part_049	converted
+0x18c1c8	1440	PackState__buildSlotTable	part_049	converted
 0x18c768	140	PackState__countFreeSlots	part_049	converted
 0x18c7f4	396	FUN_0018c7f4	part_049	converted
 0x18c980	1112	FUN_0018c980	part_049	converted

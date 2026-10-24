@@ -1389,7 +1389,7 @@ int R300MachineAssembler__assembleBlock(this, block, startOfShaderFlag)
           cursorInst = (int *)cursorInst[2];
         } while ((cursorInst != (int *)0x0) && ((instFlags & 4) != 0));
       }
-      FUN_0018c1c8(packState,this + 7);
+      PackState__buildSlotTable(packState,this + 7);
       if (groupInst == (int *)0x0) {
 LAB_00197808:
         cursorInst = (int *)groupInst[2];
