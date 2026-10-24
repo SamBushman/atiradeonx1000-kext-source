@@ -1869,7 +1869,7 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   int arraySetMaxSizeResult;
   int nextUniqueId;
   int loopIndex4;
-  uint functionPrototypeTypeOrFunction;
+  uint functionPrototypeFunction;
   int stringData3;
   int stringData2;
   uint expressionNode;
@@ -1881,16 +1881,16 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   int *symbolTable2;
   int *newVariable;
   int extensionError;
-  uint typeQualifierQualifierOrParamType;
+  uint typeQualifierQualifier;
   unsigned char * typeSpecifierUserDef;
   unsigned char * typeSpecifierSize3;
-  unsigned char * typeSpecifierTypeOrFunction;
+  unsigned char * typeSpecifierType;
   unsigned char * typeSpecifierTypeLine2;
-  unsigned char * typeSpecifierQualifierOrParamType2;
+  unsigned char * typeSpecifierQualifier2;
   unsigned char * typeSpecifierTypeLine;
   unsigned char * typeSpecifierMatrix2;
   unsigned char * typeSpecifierSize2;
-  unsigned char * typeSpecifierQualifierOrParamType;
+  unsigned char * typeSpecifierQualifier;
   uint sizeBits;
   uint basicTypeBits2;
   uint qualifierBits2;
@@ -1898,9 +1898,9 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   unsigned char * typeSpecifierSize;
   unsigned char * newType;
   unsigned char * fullySpecifiedTypeTypeLine;
-  unsigned char * parameterDeclarationQualifierOrParamType2;
-  uint parameterDeclarationQualifierOrParamType;
-  uint functionHeaderWithParametersTypeOrFunction;
+  unsigned char * parameterDeclarationParamType2;
+  uint parameterDeclarationParamType;
+  uint functionHeaderWithParametersFunction;
   uint unaryOperatorOp;
   unsigned char * identifierString2;
   int reservedError;
@@ -1909,8 +1909,8 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   uint constructorIdentifierUserDef;
   uint constructorIdentifierOp;
   unsigned char * newFunction;
-  uint functionCallHeaderWithParametersTypeOrFunction;
-  uint functionCallHeaderTypeOrFunction;
+  uint functionCallHeaderWithParametersFunction;
+  uint functionCallHeaderFunction;
   uint functionCallGenericNode;
   int loopIndex2;
   unsigned char * newRefCount2;
@@ -2039,7 +2039,7 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   undefined4 lastLevel2;
   int *paramEntry;
   unsigned char * symbolTable3;
-  unsigned char * structDeclarationListTypeOrFunction;
+  unsigned char * structDeclarationListTypeList;
   uint nameLenB;
   int qualifier1;
   int isVariable;
@@ -3536,23 +3536,23 @@ LAB_97ba5e64:
     typeMem = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     (**(code **)(**(int **)(yyvsp + 8) + 0x38))(typeMem,*(int **)(yyvsp + 8));
     typeTmp1VtableOrStr1Alloc = typeTmp1TypeNameOrStr2Alloc;
-    functionCallHeaderTypeOrFunction = *(uint *)(yyvsp + -0x1c);
-    elementPtr = *(undefined4 **)(functionCallHeaderTypeOrFunction + 0x14);
+    functionCallHeaderFunction = *(uint *)(yyvsp + -0x1c);
+    elementPtr = *(undefined4 **)(functionCallHeaderFunction + 0x14);
     typeTmp1ArraySizeOrStr1Data = typeMem;
     typeTmp1Word14OrStr2Data = typeMem;
-    if (elementPtr == *(undefined4 **)(functionCallHeaderTypeOrFunction + 0x18)) {
+    if (elementPtr == *(undefined4 **)(functionCallHeaderFunction + 0x18)) {
       std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux
-                ((unsigned char *)(functionCallHeaderTypeOrFunction + 0xc),
-                 *(undefined4 *)(functionCallHeaderTypeOrFunction + 0x14),&typeTmp1VtableOrStr1Alloc);
+                ((unsigned char *)(functionCallHeaderFunction + 0xc),
+                 *(undefined4 *)(functionCallHeaderFunction + 0x14),&typeTmp1VtableOrStr1Alloc);
     }
     else {
       finishPtr2 = 0;
       if (elementPtr != (undefined4 *)0x0) {
         elementPtr[1] = typeMem;
         *elementPtr = typeTmp1TypeNameOrStr2Alloc;
-        finishPtr2 = *(int *)(functionCallHeaderTypeOrFunction + 0x14);
+        finishPtr2 = *(int *)(functionCallHeaderFunction + 0x14);
       }
-      *(int *)(functionCallHeaderTypeOrFunction + 0x14) = finishPtr2 + 8;
+      *(int *)(functionCallHeaderFunction + 0x14) = finishPtr2 + 8;
     }
     typeTmp1ArraySizeCopy = typeTmp1ArraySizeOrStr1Data;
     paramFinish = *(int *)(typeTmp1ArraySizeOrStr1Data + 0x14);
@@ -3573,9 +3573,9 @@ LAB_97ba5e64:
       paramFinish = *(int *)(typeTmp1ArraySizeCopy + 0x14);
     }
     __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_ERKS7_S9_
-              ((unsigned char *)&typeTmp1TypeNameOrStr2Alloc,(unsigned char *)(functionCallHeaderTypeOrFunction + 0x44),paramFinish);
+              ((unsigned char *)&typeTmp1TypeNameOrStr2Alloc,(unsigned char *)(functionCallHeaderFunction + 0x44),paramFinish);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_
-              ((unsigned char *)(functionCallHeaderTypeOrFunction + 0x44),(unsigned char *)&typeTmp1TypeNameOrStr2Alloc);
+              ((unsigned char *)(functionCallHeaderFunction + 0x44),(unsigned char *)&typeTmp1TypeNameOrStr2Alloc);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc7[0] = typeTmp1TypeNameOrStr2Alloc;
     do {
@@ -3601,23 +3601,23 @@ LAB_97ba5e64:
     typeMem = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     (**(code **)(**(int **)(yyvsp + 8) + 0x38))(typeMem,*(int **)(yyvsp + 8));
     typeTmp1VtableOrStr1Alloc = typeTmp1TypeNameOrStr2Alloc;
-    functionCallHeaderWithParametersTypeOrFunction = *(uint *)(yyvsp + -0x48);
-    elementPtr = *(undefined4 **)(functionCallHeaderWithParametersTypeOrFunction + 0x14);
+    functionCallHeaderWithParametersFunction = *(uint *)(yyvsp + -0x48);
+    elementPtr = *(undefined4 **)(functionCallHeaderWithParametersFunction + 0x14);
     typeTmp1ArraySizeOrStr1Data = typeMem;
     typeTmp1Word14OrStr2Data = typeMem;
-    if (elementPtr == *(undefined4 **)(functionCallHeaderWithParametersTypeOrFunction + 0x18)) {
+    if (elementPtr == *(undefined4 **)(functionCallHeaderWithParametersFunction + 0x18)) {
       std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux
-                ((unsigned char *)(functionCallHeaderWithParametersTypeOrFunction + 0xc),
-                 *(undefined4 *)(functionCallHeaderWithParametersTypeOrFunction + 0x14),&typeTmp1VtableOrStr1Alloc);
+                ((unsigned char *)(functionCallHeaderWithParametersFunction + 0xc),
+                 *(undefined4 *)(functionCallHeaderWithParametersFunction + 0x14),&typeTmp1VtableOrStr1Alloc);
     }
     else {
       finishPtr2 = 0;
       if (elementPtr != (undefined4 *)0x0) {
         elementPtr[1] = typeMem;
         *elementPtr = typeTmp1TypeNameOrStr2Alloc;
-        finishPtr2 = *(int *)(functionCallHeaderWithParametersTypeOrFunction + 0x14);
+        finishPtr2 = *(int *)(functionCallHeaderWithParametersFunction + 0x14);
       }
-      *(int *)(functionCallHeaderWithParametersTypeOrFunction + 0x14) = finishPtr2 + 8;
+      *(int *)(functionCallHeaderWithParametersFunction + 0x14) = finishPtr2 + 8;
     }
     typeTmp1ArraySizeCopy = typeTmp1ArraySizeOrStr1Data;
     paramFinish = *(int *)(typeTmp1ArraySizeOrStr1Data + 0x14);
@@ -3638,9 +3638,9 @@ LAB_97ba5e64:
       paramFinish = *(int *)(typeTmp1ArraySizeCopy + 0x14);
     }
     __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_ERKS7_S9_
-              ((unsigned char *)&typeTmp1TypeNameOrStr2Alloc,(unsigned char *)(functionCallHeaderWithParametersTypeOrFunction + 0x44),paramFinish);
+              ((unsigned char *)&typeTmp1TypeNameOrStr2Alloc,(unsigned char *)(functionCallHeaderWithParametersFunction + 0x44),paramFinish);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_
-              ((unsigned char *)(functionCallHeaderWithParametersTypeOrFunction + 0x44),(unsigned char *)&typeTmp1TypeNameOrStr2Alloc);
+              ((unsigned char *)(functionCallHeaderWithParametersFunction + 0x44),(unsigned char *)&typeTmp1TypeNameOrStr2Alloc);
     refCountPtr = typeTmp1Word14OrStr2Data + -4;
     destroyAlloc8[0] = typeTmp1TypeNameOrStr2Alloc;
     do {
@@ -5504,25 +5504,25 @@ LAB_97ba8824:
       goto LAB_97ba86ec;
     }
     yyvalTypeOrFunction = *(unsigned char **)(yyvsp + -0x48);
-    functionHeaderWithParametersTypeOrFunction = *(uint *)(yyvsp + -0x48);
-    elementEnd = *(uint **)(functionHeaderWithParametersTypeOrFunction + 0x14);
-    if (elementEnd == *(uint **)(functionHeaderWithParametersTypeOrFunction + 0x18)) {
+    functionHeaderWithParametersFunction = *(uint *)(yyvsp + -0x48);
+    elementEnd = *(uint **)(functionHeaderWithParametersFunction + 0x14);
+    if (elementEnd == *(uint **)(functionHeaderWithParametersFunction + 0x18)) {
       std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux
-                ((unsigned char *)(functionHeaderWithParametersTypeOrFunction + 0xc),
-                 *(undefined4 *)(functionHeaderWithParametersTypeOrFunction + 0x14),yyvsp + 0x10);
+                ((unsigned char *)(functionHeaderWithParametersFunction + 0xc),
+                 *(undefined4 *)(functionHeaderWithParametersFunction + 0x14),yyvsp + 0x10);
     }
     else {
       finishPtr2 = 0;
       if (elementEnd != (uint *)0x0) {
-        parameterDeclarationQualifierOrParamType = *(uint *)(yyvsp + 0x14);
+        parameterDeclarationParamType = *(uint *)(yyvsp + 0x14);
         *elementEnd = *(uint *)(yyvsp + 0x10);
-        elementEnd[1] = parameterDeclarationQualifierOrParamType;
-        finishPtr2 = *(int *)(functionHeaderWithParametersTypeOrFunction + 0x14);
+        elementEnd[1] = parameterDeclarationParamType;
+        finishPtr2 = *(int *)(functionHeaderWithParametersFunction + 0x14);
       }
-      *(int *)(functionHeaderWithParametersTypeOrFunction + 0x14) = finishPtr2 + 8;
+      *(int *)(functionHeaderWithParametersFunction + 0x14) = finishPtr2 + 8;
     }
-    parameterDeclarationQualifierOrParamType2 = *(unsigned char **)(yyvsp + 0x14);
-    paramFinish = *(int *)(parameterDeclarationQualifierOrParamType2 + 0x14);
+    parameterDeclarationParamType2 = *(unsigned char **)(yyvsp + 0x14);
+    paramFinish = *(int *)(parameterDeclarationParamType2 + 0x14);
     if (paramFinish == 0) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       newString = (unsigned char *)TPoolAllocator__allocate(poolAllocator,8);
@@ -5534,15 +5534,15 @@ LAB_97ba8824:
         ;
         mangledString = newString;
       }
-      *(unsigned char **)(parameterDeclarationQualifierOrParamType2 + 0x14) = mangledString;
-      ((int (*)())TType__buildMangledName)(parameterDeclarationQualifierOrParamType2,mangledString);
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(*(void **)(parameterDeclarationQualifierOrParamType2 + 0x14),1,0x3b);
-      paramFinish = *(int *)(parameterDeclarationQualifierOrParamType2 + 0x14);
+      *(unsigned char **)(parameterDeclarationParamType2 + 0x14) = mangledString;
+      ((int (*)())TType__buildMangledName)(parameterDeclarationParamType2,mangledString);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6appendEmc(*(void **)(parameterDeclarationParamType2 + 0x14),1,0x3b);
+      paramFinish = *(int *)(parameterDeclarationParamType2 + 0x14);
     }
     __ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_ERKS7_S9_
-              ((unsigned char *)&typeTmp1VtableOrStr1Alloc,(unsigned char *)(functionHeaderWithParametersTypeOrFunction + 0x44),paramFinish);
+              ((unsigned char *)&typeTmp1VtableOrStr1Alloc,(unsigned char *)(functionHeaderWithParametersFunction + 0x44),paramFinish);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_
-              ((unsigned char *)(functionHeaderWithParametersTypeOrFunction + 0x44),(unsigned char *)&typeTmp1VtableOrStr1Alloc);
+              ((unsigned char *)(functionHeaderWithParametersFunction + 0x44),(unsigned char *)&typeTmp1VtableOrStr1Alloc);
     refCountPtr = typeTmp1ArraySizeOrStr1Data + -4;
     destroyRep = (unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc);
     destroyAlloc59[0] = typeTmp1VtableOrStr1Alloc;
@@ -5763,7 +5763,7 @@ LAB_97ba8824:
     picBase2 = (unsigned char *)0xa7b8374c;
     if (*(uint *)(yyvsp + -0x90) != 0) {
       typeTmp2TypeNameOrPubArray2 = *(unsigned char **)(yyvsp + -0xa0);
-      typeSpecifierQualifierOrParamType = *(unsigned char **)(yyvsp + -0x9c);
+      typeSpecifierQualifier = *(unsigned char **)(yyvsp + -0x9c);
       typeSpecifierSize2 = *(unsigned char **)(yyvsp + -0x98);
       typeSpecifierMatrix2 = *(unsigned char **)(yyvsp + -0x94);
       typeTmp2BitsOrPub3Qualifier = *(unsigned char **)(yyvsp + -0x8c);
@@ -5774,7 +5774,7 @@ LAB_97ba8824:
                   (((uint)typeTmp2Word20OrPub3Type & 1) << 9 |
                   ((uint)typeSpecifierMatrix2 & 1) << 10 |
                   ((uint)typeSpecifierSize2 & 0xff) << 0xb |
-                  ((uint)typeTmp2TypeNameOrPubArray2 & 0x3f) << 0x13 | (int)typeSpecifierQualifierOrParamType << 0x19 | (uint)typeTmp2ArraySizeOrPubUserDef & 0x1ff)
+                  ((uint)typeTmp2TypeNameOrPubArray2 & 0x3f) << 0x13 | (int)typeSpecifierQualifier << 0x19 | (uint)typeTmp2ArraySizeOrPubUserDef & 0x1ff)
       ;
       typeTmp1TypeNameOrStr2Alloc = (unsigned char *)&PTR___ZN5TTypeD1Ev_a7b7d640;
       typeTmp2VtableOrPubArray = (unsigned char *)0x0;
@@ -5787,12 +5787,12 @@ LAB_97ba8824:
       pubMatrix = (unsigned char *)0x0;
       picBase = (unsigned char *)0xa7b8374c;
       typeWord20Value = typeTmp1Word20OrPubType;
-      typeTmp2Word14OrPubUserDef2 = typeSpecifierQualifierOrParamType;
+      typeTmp2Word14OrPubUserDef2 = typeSpecifierQualifier;
       typeTmp2Word18OrPubLine2 = typeSpecifierSize2;
       typeTmp2MaxArraySize = typeSpecifierMatrix2;
       pub3Size = typeSpecifierTypeLine;
       typeTmp3VtableOrPub3Array = typeTmp2TypeNameOrPubArray2;
-      typeTmp3ArraySizeOrPub3UserDef = typeSpecifierQualifierOrParamType;
+      typeTmp3ArraySizeOrPub3UserDef = typeSpecifierQualifier;
       typeTmp3StructureOrPub3Line = typeSpecifierSize2;
       typeTmp3Word0c = typeSpecifierMatrix2;
       typeTmp3TypeNameOrTypeTmp4Vtable = typeTmp2Word20OrPub3Type;
@@ -5803,7 +5803,7 @@ LAB_97ba8824:
         setStructSizeResult2 = TType__setStructSize((unsigned char *)&typeTmp1TypeNameOrStr2Alloc,*(unsigned char **)(typeTmp2BitsOrPub3Qualifier + 8));
         pubSize = (unsigned char *)((ulonglong)setStructSizeResult2 >> 0x20);
         typeNameStr2 = (**(code **)(*(uint *)typeTmp3Word14OrTypeTmp4ArraySize + 0x18))
-                           (typeTmp3Word14OrTypeTmp4ArraySize,(int)setStructSizeResult2,typeSpecifierTypeLine,typeSpecifierMatrix2,typeSpecifierSize2,typeSpecifierQualifierOrParamType,*(uint *)typeTmp3Word14OrTypeTmp4ArraySize)
+                           (typeTmp3Word14OrTypeTmp4ArraySize,(int)setStructSizeResult2,typeSpecifierTypeLine,typeSpecifierMatrix2,typeSpecifierSize2,typeSpecifierQualifier,*(uint *)typeTmp3Word14OrTypeTmp4ArraySize)
         ;
         *(undefined1 *)(*(int *)(typeNameStr2 + 4) + *(int *)(*(int *)(typeNameStr2 + 4) + -0xc)) =
              **(undefined1 **)(picBase + -0x7cc4);
@@ -5851,7 +5851,7 @@ LAB_97ba8824:
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     newType = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     typeTmp1VtableOrStr1Alloc = *(unsigned char **)(yyvsp + -0xa0);
-    typeSpecifierQualifierOrParamType2 = *(unsigned char **)(yyvsp + -0x9c);
+    typeSpecifierQualifier2 = *(unsigned char **)(yyvsp + -0x9c);
     typeTmp1StructureOrPubSize = *(unsigned char **)(yyvsp + -0x98);
     typeTmp1Word0cOrPubMatrix = *(unsigned char **)(yyvsp + -0x94);
     scratchR7 = *(char **)(yyvsp + -0x90);
@@ -5867,7 +5867,7 @@ LAB_97ba8824:
     *(undefined4 *)(newType + 0x18) = 0;
     *(undefined4 *)(newType + 0x1c) = 0;
     oldTypeBits = *(uint *)(newType + 0x24);
-    qualifierBits2 = (int)typeSpecifierQualifierOrParamType2 << 0x19;
+    qualifierBits2 = (int)typeSpecifierQualifier2 << 0x19;
     *(uint *)(newType + 0x24) = qualifierBits2 | oldTypeBits & 0x1ffffff;
     basicTypeBits2 = ((uint)typeTmp1VtableOrStr1Alloc & 0x3f) << 0x13;
     *(uint *)(newType + 0x24) = basicTypeBits2 | qualifierBits2 | oldTypeBits & 0x7ffff;
@@ -5880,7 +5880,7 @@ LAB_97ba8824:
     typeTmp1TypeNameOrStr2Alloc = (unsigned char *)scratchR7;
     typeTmp1Word14OrStr2Data = (unsigned char *)scratchR6;
     typeTmp1Word20OrPubType = typeTmp1VtableOrStr1Alloc;
-    typeTmp1BitsOrPubQualifier = typeSpecifierQualifierOrParamType2;
+    typeTmp1BitsOrPubQualifier = typeSpecifierQualifier2;
     pubSize = typeTmp1StructureOrPubSize;
     pubMatrix = typeTmp1Word0cOrPubMatrix;
     typeTmp2VtableOrPubArray = (unsigned char *)scratchR7;
@@ -6043,7 +6043,7 @@ LAB_97bab5f4:
     picBase2 = (unsigned char *)0xa7b8374c;
     if (*(uint *)(yyvsp + -100) != 0) {
       typeTmp2TypeNameOrPubArray2 = *(unsigned char **)(yyvsp + -0x74);
-      typeSpecifierQualifierOrParamType = *(unsigned char **)(yyvsp + -0x70);
+      typeSpecifierQualifier = *(unsigned char **)(yyvsp + -0x70);
       typeSpecifierSize2 = *(unsigned char **)(yyvsp + -0x6c);
       typeSpecifierMatrix2 = *(unsigned char **)(yyvsp + -0x68);
       typeTmp2BitsOrPub3Qualifier = *(unsigned char **)(yyvsp + -0x60);
@@ -6054,7 +6054,7 @@ LAB_97bab5f4:
                   (((uint)typeTmp2Word20OrPub3Type & 1) << 9 |
                   ((uint)typeSpecifierMatrix2 & 1) << 10 |
                   ((uint)typeSpecifierSize2 & 0xff) << 0xb |
-                  ((uint)typeTmp2TypeNameOrPubArray2 & 0x3f) << 0x13 | (int)typeSpecifierQualifierOrParamType << 0x19 | (uint)typeTmp2ArraySizeOrPubUserDef & 0x1ff)
+                  ((uint)typeTmp2TypeNameOrPubArray2 & 0x3f) << 0x13 | (int)typeSpecifierQualifier << 0x19 | (uint)typeTmp2ArraySizeOrPubUserDef & 0x1ff)
       ;
       typeTmp1TypeNameOrStr2Alloc = (unsigned char *)&PTR___ZN5TTypeD1Ev_a7b7d640;
       typeTmp2VtableOrPubArray = (unsigned char *)0x0;
@@ -6067,12 +6067,12 @@ LAB_97bab5f4:
       pubMatrix = (unsigned char *)0x0;
       picBase = (unsigned char *)0xa7b8374c;
       typeWord20Value = typeTmp1Word20OrPubType;
-      typeTmp2Word14OrPubUserDef2 = typeSpecifierQualifierOrParamType;
+      typeTmp2Word14OrPubUserDef2 = typeSpecifierQualifier;
       typeTmp2Word18OrPubLine2 = typeSpecifierSize2;
       typeTmp2MaxArraySize = typeSpecifierMatrix2;
       pub3Size = typeSpecifierTypeLine;
       typeTmp3VtableOrPub3Array = typeTmp2TypeNameOrPubArray2;
-      typeTmp3ArraySizeOrPub3UserDef = typeSpecifierQualifierOrParamType;
+      typeTmp3ArraySizeOrPub3UserDef = typeSpecifierQualifier;
       typeTmp3StructureOrPub3Line = typeSpecifierSize2;
       typeTmp3Word0c = typeSpecifierMatrix2;
       typeTmp3TypeNameOrTypeTmp4Vtable = typeTmp2Word20OrPub3Type;
@@ -6083,7 +6083,7 @@ LAB_97bab5f4:
         setStructSizeResult2 = TType__setStructSize((unsigned char *)&typeTmp1TypeNameOrStr2Alloc,*(unsigned char **)(typeTmp2BitsOrPub3Qualifier + 8));
         pubSize = (unsigned char *)((ulonglong)setStructSizeResult2 >> 0x20);
         typeNameStr2 = (**(code **)(*(uint *)typeTmp3Word14OrTypeTmp4ArraySize + 0x18))
-                           (typeTmp3Word14OrTypeTmp4ArraySize,(int)setStructSizeResult2,typeSpecifierTypeLine,typeSpecifierMatrix2,typeSpecifierSize2,typeSpecifierQualifierOrParamType,*(uint *)typeTmp3Word14OrTypeTmp4ArraySize)
+                           (typeTmp3Word14OrTypeTmp4ArraySize,(int)setStructSizeResult2,typeSpecifierTypeLine,typeSpecifierMatrix2,typeSpecifierSize2,typeSpecifierQualifier,*(uint *)typeTmp3Word14OrTypeTmp4ArraySize)
         ;
         *(undefined1 *)(*(int *)(typeNameStr2 + 4) + *(int *)(*(int *)(typeNameStr2 + 4) + -0xc)) =
              **(undefined1 **)(picBase + -0x7cc4);
@@ -6126,7 +6126,7 @@ LAB_97bab5f4:
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     newType = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
     typeTmp1VtableOrStr1Alloc = *(unsigned char **)(yyvsp + -0x74);
-    typeSpecifierQualifierOrParamType2 = *(unsigned char **)(yyvsp + -0x70);
+    typeSpecifierQualifier2 = *(unsigned char **)(yyvsp + -0x70);
     typeTmp1StructureOrPubSize = *(unsigned char **)(yyvsp + -0x6c);
     typeTmp1Word0cOrPubMatrix = *(unsigned char **)(yyvsp + -0x68);
     scratchR7 = *(char **)(yyvsp + -100);
@@ -6142,7 +6142,7 @@ LAB_97bab5f4:
     *(undefined4 *)(newType + 0x18) = 0;
     *(undefined4 *)(newType + 0x1c) = 0;
     oldTypeBits = *(uint *)(newType + 0x24);
-    qualifierBits2 = (int)typeSpecifierQualifierOrParamType2 << 0x19;
+    qualifierBits2 = (int)typeSpecifierQualifier2 << 0x19;
     *(uint *)(newType + 0x24) = qualifierBits2 | oldTypeBits & 0x1ffffff;
     basicTypeBits2 = ((uint)typeTmp1VtableOrStr1Alloc & 0x3f) << 0x13;
     *(uint *)(newType + 0x24) = basicTypeBits2 | qualifierBits2 | oldTypeBits & 0x7ffff;
@@ -6155,7 +6155,7 @@ LAB_97bab5f4:
     typeTmp1TypeNameOrStr2Alloc = (unsigned char *)scratchR7;
     typeTmp1Word14OrStr2Data = (unsigned char *)scratchR6;
     typeTmp1Word20OrPubType = typeTmp1VtableOrStr1Alloc;
-    typeTmp1BitsOrPubQualifier = typeSpecifierQualifierOrParamType2;
+    typeTmp1BitsOrPubQualifier = typeSpecifierQualifier2;
     pubSize = typeTmp1StructureOrPubSize;
     pubMatrix = typeTmp1Word0cOrPubMatrix;
     typeTmp2VtableOrPubArray = (unsigned char *)scratchR7;
@@ -6396,7 +6396,7 @@ LAB_97ba9a08:
     yyvalQualifierOrParamType = *(unsigned char **)(yyvsp + 0x14);
     break;
   case 0x7f:
-    typeSpecifierTypeOrFunction = *(unsigned char **)(yyvsp + 0x10);
+    typeSpecifierType = *(unsigned char **)(yyvsp + 0x10);
     typeTmp1ArraySizeOrStr1Data = *(unsigned char **)(yyvsp + -0x18);
     typeSpecifierSize3 = *(unsigned char **)(yyvsp + 0x18);
     typeTmp1Word0cOrPubMatrix = *(unsigned char **)(yyvsp + 0x1c);
@@ -6405,29 +6405,29 @@ LAB_97ba9a08:
     typeTmp1Word18OrPubLine = (unsigned char *)0x0;
     typeTmp2StructureOrPubLine = (unsigned char *)0x0;
     typeTmp1TypeNameOrStr2Alloc = (unsigned char *)0x0;
-    typeQualifierQualifierOrParamType = *(uint *)(yyvsp + -0x18);
-    typeTmp1VtableOrStr1Alloc = typeSpecifierTypeOrFunction;
+    typeQualifierQualifier = *(uint *)(yyvsp + -0x18);
+    typeTmp1VtableOrStr1Alloc = typeSpecifierType;
     typeTmp1StructureOrPubSize = typeSpecifierSize3;
     typeTmp1Word14OrStr2Data = typeSpecifierUserDef;
-    typeTmp1Word20OrPubType = typeSpecifierTypeOrFunction;
+    typeTmp1Word20OrPubType = typeSpecifierType;
     typeTmp1BitsOrPubQualifier = typeTmp1ArraySizeOrStr1Data;
     pubSize = typeSpecifierSize3;
     pubMatrix = typeTmp1Word0cOrPubMatrix;
     typeTmp2ArraySizeOrPubUserDef = typeSpecifierUserDef;
-    if ((typeQualifierQualifierOrParamType == 3) && (*(uint *)(yyvsp + 0x10) - 2 < 2)) {
+    if ((typeQualifierQualifier == 3) && (*(uint *)(yyvsp + 0x10) - 2 < 2)) {
       scratchR6 = (char *)getQualifierString(3);
       scratchR7 = "";
       TParseContext__error
-                ((int)parseContext,*(char **)(yyvsp + 0x28),"cannot be bool or int",scratchR6,"",typeSpecifierTypeOrFunction,
+                ((int)parseContext,*(char **)(yyvsp + 0x28),"cannot be bool or int",scratchR6,"",typeSpecifierType,
                  typeSpecifierUserDef,typeSpecifierSize3);
       TParseContext__recover(parseContext);
-      typeQualifierQualifierOrParamType = *(uint *)(yyvsp + -0x18);
+      typeQualifierQualifier = *(uint *)(yyvsp + -0x18);
     }
-    if ((typeQualifierQualifierOrParamType - 4 < 2) && (*(uint *)(yyvsp + 0x10) - 2 < 2)) {
-      scratchR6 = (char *)getQualifierString(typeQualifierQualifierOrParamType);
+    if ((typeQualifierQualifier - 4 < 2) && (*(uint *)(yyvsp + 0x10) - 2 < 2)) {
+      scratchR6 = (char *)getQualifierString(typeQualifierQualifier);
       scratchR7 = "";
       TParseContext__error
-                ((int)parseContext,*(char **)(yyvsp + 0x28),"cannot be bool or int",scratchR6,"",typeSpecifierTypeOrFunction,
+                ((int)parseContext,*(char **)(yyvsp + 0x28),"cannot be bool or int",scratchR6,"",typeSpecifierType,
                  typeSpecifierUserDef,typeSpecifierSize3);
       TParseContext__recover(parseContext);
     }
@@ -6847,7 +6847,7 @@ LAB_97baa46c:
   case 0x9e:
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     newType = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
-    structDeclarationListTypeOrFunction = *(unsigned char **)(yyvsp + -0x1c);
+    structDeclarationListTypeList = *(unsigned char **)(yyvsp + -0x1c);
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_
               ((unsigned char *)&typeTmp1VtableOrStr1Alloc,*(unsigned char **)(yyvsp + -0x80));
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_((unsigned char *)&typeTmp1TypeNameOrStr2Alloc,(unsigned char *)&typeTmp1VtableOrStr1Alloc);
@@ -6856,11 +6856,11 @@ LAB_97baa46c:
     *(undefined4 *)(newType + 0x20) = 0;
     *(uint *)(newType + 0x24) = *(uint *)(newType + 0x24) & 0x9ff | 0x700800;
     *(undefined4 *)(newType + 4) = 0;
-    *(unsigned char **)(newType + 8) = structDeclarationListTypeOrFunction;
+    *(unsigned char **)(newType + 8) = structDeclarationListTypeList;
     *(undefined4 *)(newType + 0xc) = 0;
     *(undefined4 *)(newType + 0x14) = 0;
     *(undefined4 *)(newType + 0x1c) = 0;
-    setStructSizeResult3 = TType__setStructSize(newType,structDeclarationListTypeOrFunction);
+    setStructSizeResult3 = TType__setStructSize(newType,structDeclarationListTypeList);
     typeTmp1Word14Copy = typeTmp1Word14OrStr2Data;
     picBase = (unsigned char *)0xa7b8374c;
     *(undefined4 *)(newType + 0x18) = setStructSizeResult3;
@@ -7006,7 +7006,7 @@ LAB_97baa46c:
   case 0x9f:
     poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
     newType = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x28);
-    structDeclarationListTypeOrFunction = *(unsigned char **)(yyvsp + -0x1c);
+    structDeclarationListTypeList = *(unsigned char **)(yyvsp + -0x1c);
     ctorAlloc15[0] = GetGlobalPoolAllocator();
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
               ((unsigned char *)&typeTmp1VtableOrStr1Alloc,"",(unsigned char *)ctorAlloc15);
@@ -7016,11 +7016,11 @@ LAB_97baa46c:
     *(undefined4 *)(newType + 0x20) = 0;
     *(uint *)(newType + 0x24) = *(uint *)(newType + 0x24) & 0x9ff | 0x700800;
     *(undefined4 *)(newType + 4) = 0;
-    *(unsigned char **)(newType + 8) = structDeclarationListTypeOrFunction;
+    *(unsigned char **)(newType + 8) = structDeclarationListTypeList;
     *(undefined4 *)(newType + 0xc) = 0;
     *(undefined4 *)(newType + 0x14) = 0;
     *(undefined4 *)(newType + 0x1c) = 0;
-    setStructSizeResult3 = TType__setStructSize(newType,structDeclarationListTypeOrFunction);
+    setStructSizeResult3 = TType__setStructSize(newType,structDeclarationListTypeList);
     typeTmp1Word14Copy = typeTmp1Word14OrStr2Data;
     *(undefined4 *)(newType + 0x18) = setStructSizeResult3;
     picBase = (unsigned char *)0xa7b8374c;
@@ -7973,9 +7973,9 @@ LAB_97bab674:
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_
                 ((unsigned char *)(typeTmp1ArraySizeOrStr1Data + -0xc),destroyAlloc70);
     }
-    functionPrototypeTypeOrFunction = *(uint *)(yyvsp + -0x48);
+    functionPrototypeFunction = *(uint *)(yyvsp + -0x48);
     aggregateNode = (int *)(**(code **)(*(uint *)yyvalNode + 0x1c))(yyvalNode);
-    (**(code **)(*aggregateNode + 0x34))(aggregateNode,functionPrototypeTypeOrFunction + 0x1c);
+    (**(code **)(*aggregateNode + 0x34))(aggregateNode,functionPrototypeFunction + 0x1c);
     aggregateNode3 = (**(code **)(*(uint *)yyvalNode + 0x1c))(yyvalNode);
     *(undefined4 *)(aggregateNode3 + 0x60) = *(undefined4 *)((int)parseContext + 0x40);
     aggregateNode3 = (**(code **)(*(uint *)yyvalNode + 0x1c))(yyvalNode);
