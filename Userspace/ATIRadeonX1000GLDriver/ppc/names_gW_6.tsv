@@ -1,0 +1,25 @@
+use	Program__valueNumberInst	iVar1	valueKey	INFERRED	*param_4: the ValueKey object being numbered (+0xb0 is its instruction)	^\s*iVar1\ =\ \*param_4;$	+2
+use	Program__valueNumberInst	iVar1	valueKey	INFERRED	*param_4: the ValueKey object being numbered (+0xb0 is its instruction)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_00173638\)\(iVar1\);$	+2
+use	Program__valueNumberInst	iVar1	valueKey	INFERRED	*param_4: the ValueKey object being numbered (+0xb0 is its instruction)	^\s*iVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_001745f0\)\(iVar1\);$	+4
+use	Program__valueNumberInst	iVar1	currentDefinition	INFERRED	VReg__currentDefinition(...): the instruction currently defining the destination register	^\s*iVar1\ =\ FUN_00122fa4\(\*\(undefined4\ \*\)\(iVar2\ \+\ 0xa4\),\*\(undefined4\ \*\)\(param_1\ \+\ 0x3a0\),$	+4
+use	Program__valueNumberInst	iVar2	currentDefinition2	INFERRED	VReg__currentDefinition(...) of the key's instruction destination	^\s*iVar2\ =\ FUN_00122fa4\(\*\(undefined4\ \*\)\(iVar7\ \+\ 0xa4\),\*\(undefined4\ \*\)\(param_1\ \+\ 0x3a0\),$	+5
+use	Program__valueNumberInst	iVar2	valueKey2	INFERRED	*param_4 reloaded after the redundancy elimination	^\s*iVar2\ =\ \*param_4;$	+2
+use	Program__valueNumberInst	iVar2	valueKey2	INFERRED	*param_4 reloaded after the redundancy elimination	^\s*iVar2\ =\ \*param_4;$@2	+1
+use	Program__valueNumberInst	iVar2	valueKey2	INFERRED	*param_4 reloaded after the redundancy elimination	^\s*iVar2\ =\ \*param_4;$@3	+1
+use	Program__valueNumberInst	iVar2	valueKey2	INFERRED	*param_4 reloaded after the redundancy elimination	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(iVar2\ \+\ 0xb0\)\ \+\ 100\)\)\(\*\(int\ \*\*\)\(iVar2\ \+\ 0xb0\)\);$	+7
+use	Program__valueNumberInst	iVar7	keyInst	INFERRED	*(*param_4 + 0xb0): the instruction of the ValueKey	^\s*iVar7\ =\ \*\(int\ \*\)\(\*param_4\ \+\ 0xb0\);$	+6
+use	Program__valueNumberInst	piVar6	keyInst2	INFERRED	*(valueKey2 + 0xb0): the instruction of the ValueKey (checked for a destination register)	^\s*piVar6\ =\ \*\(int\ \*\*\)\(iVar2\ \+\ 0xb0\);$	+5
+use	Program__valueNumberInst	uVar3	vectorFilledCount	INFERRED	vector[1], the number of filled elements of the per-value vector (vector layout: +0 capacity, +4 filled, +8 data)	^\s*uVar3\ =\ puVar8\[1\];$	+3
+use	Program__valueNumberInst	uVar3	vectorFilledCount	INFERRED	vector[1], the number of filled elements of the per-value vector (vector layout: +0 capacity, +4 filled, +8 data)	^\s*uVar3\ =\ puVar8\[1\];$@2	+3
+use	Program__valueNumberInst	puVar4	vectorElementRef	INFERRED	address of element param_2 of the per-value hash table vector (grown on demand by Vector__elementRefGrow)	^\s*puVar4\ =\ \(undefined4\ \*\)\(param_2\ \*\ 4\ \+\ puVar8\[2\]\);$	+1
+use	Program__valueNumberInst	puVar4	vectorElementRef	INFERRED	address of element param_2 of the per-value hash table vector (grown on demand by Vector__elementRefGrow)	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,param_2\);$	+1
+use	Program__valueNumberInst	puVar4	vectorElementRef	INFERRED	address of element param_2 of the per-value hash table vector (grown on demand by Vector__elementRefGrow)	^\s*FUN_00194d44\(\*puVar4,\*param_4\);$	+1
+use	Program__valueNumberInst	puVar4	vectorElementRef	INFERRED	address of element param_2 of the per-value hash table vector (grown on demand by Vector__elementRefGrow)	^\s*puVar4\ =\ \(undefined4\ \*\)\(param_2\ \*\ 4\ \+\ puVar8\[2\]\);$@2	+1
+use	Program__valueNumberInst	puVar4	vectorElementRef	INFERRED	address of element param_2 of the per-value hash table vector (grown on demand by Vector__elementRefGrow)	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,param_2\);$@2	+1
+use	Program__valueNumberInst	puVar4	vectorElementRef	INFERRED	address of element param_2 of the per-value hash table vector (grown on demand by Vector__elementRefGrow)	^\s*FUN_00194d44\(\*puVar4,\*param_4\);$@2	+1
+use	Program__valueNumberInst	uVar5	result	INFERRED	return value: 0 when nothing was eliminated, 1 when the instruction was replaced or eliminated	^\s*uVar5\ =\ 0;$	+1
+use	Program__valueNumberInst	uVar5	result	INFERRED	return value: 0 when nothing was eliminated, 1 when the instruction was replaced or eliminated	^\s*uVar5\ =\ 1;$	+1
+use	Program__valueNumberInst	uVar5	result	INFERRED	return value: 0 when nothing was eliminated, 1 when the instruction was replaced or eliminated	^\s*return\ uVar5;$	+1
+local	Program__valueNumberInst	param_1	program	CONFIRMED	Compiler__isOptionEnabled(*(program+8),..), program+0x40c / +0x408 per-value hash vectors, +0x478 instruction counter
+local	Program__valueNumberInst	param_2	valueNumber	INFERRED	index into the per-value hash vectors (param_2 < *vector) and passed to the key lookups
+local	Program__valueNumberInst	param_4	keyRef	CONFIRMED	pointer to the ValueKey being numbered; *param_4 is replaced when a redundant instruction is eliminated

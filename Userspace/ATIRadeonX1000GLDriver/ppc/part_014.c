@@ -7488,7 +7488,7 @@ LAB_0009fb60:
       paramOffset = paramOffset + 4;
     } while (paramIndex < paramCount);
   }
-  FUN_001a327c();
+  _restf14();
   return;
 }
 

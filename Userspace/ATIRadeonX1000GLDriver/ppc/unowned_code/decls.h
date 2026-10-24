@@ -509,7 +509,7 @@ extern int pass_flatten_ifs();
 extern int ResourceModel__vslot11();
 extern int Compiler__findInPtrSet();
 extern int FUN_00186a88();
-extern int FUN_00193d18();
+extern int List__freeAllNodes();
 extern int _calloc();
 extern int _malloc();
 extern int _memset();

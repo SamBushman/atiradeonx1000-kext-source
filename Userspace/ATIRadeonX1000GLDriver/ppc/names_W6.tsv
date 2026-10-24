@@ -14,9 +14,9 @@ local	FUN_0017386c	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb
 local	FUN_0017386c	iVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017386c	iVar3	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_00173938	iVar2	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_00173938	puVar1	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00173938	puVar1	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001739c0	iVar2	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_001739c0	puVar1	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001739c0	puVar1	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00173a48	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_00173a48	iVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00173af8	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
@@ -27,39 +27,39 @@ local	FUN_00173f1c	iVar3	loopIndex	INFERRED	rule R1: incremented by 1 inside a l
 local	FUN_00173f1c	iVar5	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00173f1c	iVar7	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_00173f1c	iVar9	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00173f1c	pcVar16	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00173f1c	piVar13	loopIndex5	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00173f1c	piVar6	loopIndex6	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00173f1c	puVar15	loopIndex7	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00173f1c	puVar8	loopIndex8	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00173f1c	pcVar16	loopPtr4	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00173f1c	piVar13	loopPtr5	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00173f1c	piVar6	loopPtr6	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00173f1c	puVar15	loopPtr7	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00173f1c	puVar8	loopPtr8	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001745f0	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_001745f0	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_001747c4	iVar3	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_00174888	iVar3	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_0017494c	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017494c	iVar6	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017494c	puVar9	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017494c	puVar9	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00174b04	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_00174b04	iVar10	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00174b04	uVar6	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00174e0c	iVar10	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00174e0c	iVar12	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_00174e0c	iVar2	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00174e0c	piVar11	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00174e0c	piVar3	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00174e0c	piVar11	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00174e0c	piVar3	loopPtr4	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00174e0c	uVar7	loopIndex5	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001758d8	iVar7	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_001758d8	puVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001758d8	puVar2	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00175b40	iVar4	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_00175b40	iVar9	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00175b40	puVar13	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00175b40	puVar13	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001762c0	iVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001763e4	iVar2	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_001763e4	iVar4	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_001763e4	pcVar6	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_001763e4	piVar5	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001763e4	pcVar6	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001763e4	piVar5	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00176474	iVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00176474	pfVar3	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00176474	pfVar3	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017662c	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017662c	iVar3	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001766bc	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
@@ -70,33 +70,33 @@ local	FUN_001767d8	iVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a l
 local	FUN_001768d4	iVar4	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00176954	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_00176a94	iVar7	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_00176a94	puVar3	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00176a94	puVar3	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00176c40	iVar2	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_00176c40	iVar5	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00176c40	puVar3	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00176c40	puVar3	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00176ec0	uVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_00176f44	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_00176f44	iVar3	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00176f44	puVar4	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00176f44	puVar5	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00176f44	puVar4	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00176f44	puVar5	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00176fd4	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_00176fd4	iVar3	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00176fd4	puVar4	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00176fd4	puVar5	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00176fd4	puVar4	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00176fd4	puVar5	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00177064	iVar3	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00177064	piVar4	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00177064	piVar4	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001770e4	iVar7	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_001770e4	piVar8	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001770e4	piVar8	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001771b0	iVar5	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_001771b0	piVar6	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001771b0	piVar6	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017729c	iVar5	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017729c	piVar6	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017729c	piVar6	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017737c	iVar3	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017737c	piVar4	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017737c	piVar5	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017737c	piVar4	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017737c	piVar5	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017740c	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017740c	iVar5	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017740c	piVar4	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017740c	piVar4	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00177548	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_00177548	iVar3	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001775d8	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
@@ -121,12 +121,12 @@ local	FUN_00177e14	iVar2	callResult	INFERRED	rule R2: holds a call result that i
 local	FUN_00178024	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_00178024	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_001781a4	iVar5	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_001781a4	piVar3	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_001781a4	puVar1	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001781a4	piVar3	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001781a4	puVar1	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00178338	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
-local	FUN_00178338	piVar9	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00178338	piVar9	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00178648	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
-local	FUN_00178648	piVar9	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00178648	piVar9	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001789f0	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_001789f0	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_001789f0	iVar3	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
@@ -134,9 +134,9 @@ local	FUN_00178b1c	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb
 local	FUN_00178b1c	iVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00178b1c	iVar5	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00178b1c	iVar6	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00178b1c	piVar3	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00178b1c	piVar3	loopPtr4	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00178e90	iVar5	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_00178e90	pfVar4	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00178e90	pfVar4	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00179064	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_00179064	iVar3	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_00179138	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
@@ -145,8 +145,8 @@ local	FUN_001792f0	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb
 local	FUN_001792f0	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_001793d8	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_001793d8	iVar9	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_001793d8	pcVar7	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_001793d8	piVar10	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001793d8	pcVar7	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001793d8	piVar10	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001793d8	uVar5	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00179608	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_00179608	uVar5	callResult	INFERRED	rule R2: holds a call result that is tested or returned
@@ -177,40 +177,40 @@ local	FUN_0017a3d4	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb
 local	FUN_0017a3d4	iVar17	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017a3d4	iVar18	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_0017a3d4	iVar8	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017a3d4	pfVar6	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017a3d4	pfVar7	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017a3d4	piVar15	loopIndex5	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017a3d4	pfVar6	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017a3d4	pfVar7	loopPtr4	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017a3d4	piVar15	loopPtr5	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017a748	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017a748	iVar4	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_0017a748	iVar8	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017a748	puVar3	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017a748	puVar7	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017a748	puVar3	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017a748	puVar7	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017a8a4	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017a8a4	iVar10	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017a8a4	iVar12	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_0017a8a4	iVar13	loopRemaining2	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_0017a8a4	puVar5	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017a8a4	puVar5	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017ab4c	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017ab4c	iVar6	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017ab4c	puVar7	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017ab4c	puVar7	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017ad24	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017ad24	iVar2	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_0017ad24	iVar5	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_0017ae28	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017af58	iVar3	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017af58	iVar4	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_0017af58	piVar7	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017af58	piVar7	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017b020	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017b12c	param_1	key	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017b12c	iVar21	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017b12c	iVar5	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017b12c	iVar7	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017b12c	pcVar19	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017b12c	piVar11	loopIndex5	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017b12c	piVar12	loopIndex6	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017b12c	piVar8	loopIndex7	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017b12c	puVar13	loopIndex8	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017b12c	puVar17	loopIndex9	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017b12c	pcVar19	loopPtr4	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017b12c	piVar11	loopPtr5	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017b12c	piVar12	loopPtr6	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017b12c	piVar8	loopPtr7	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017b12c	puVar13	loopPtr8	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017b12c	puVar17	loopPtr9	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017b96c	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017b96c	iVar11	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017b96c	iVar13	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
@@ -235,10 +235,10 @@ local	FUN_0017c888	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb
 local	FUN_0017c888	iVar2	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_0017c910	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017c910	iVar10	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017c910	piVar14	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017c910	piVar14	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017cb14	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017cb14	iVar10	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017cb14	piVar14	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017cb14	piVar14	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017cd18	iVar2	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_0017cd18	iVar4	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017cdbc	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
@@ -252,7 +252,7 @@ local	FUN_0017d26c	iVar13	loopIndex	INFERRED	rule R1: incremented by 1 inside a 
 local	FUN_0017d26c	iVar11	member0xb0	INFERRED	rule R5: assigned once from the context member at +0xb0
 local	FUN_0017d3f8	iVar2	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_0017d3f8	iVar4	loopRemaining2	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_0017d3f8	puVar1	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017d3f8	puVar1	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017d4e0	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017d4e0	iVar2	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_0017d57c	iVar2	callResult	INFERRED	rule R2: holds a call result that is tested or returned
@@ -263,19 +263,19 @@ local	FUN_0017d6ac	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb
 local	FUN_0017d6ac	iVar11	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_0017d6ac	iVar5	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017d6ac	iVar6	loopRemaining2	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_0017d6ac	pfVar3	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017d6ac	pfVar9	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017d6ac	pfVar3	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017d6ac	pfVar9	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017d9b8	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017d9b8	iVar14	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017d9b8	iVar15	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_0017d9b8	iVar5	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017d9b8	piVar12	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017d9b8	piVar4	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017d9b8	piVar12	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017d9b8	piVar4	loopPtr4	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017dbdc	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017dbdc	iVar3	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_0017dbdc	iVar4	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017dbdc	iVar7	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017dbdc	piVar5	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017dbdc	piVar5	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017e02c	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017e1f4	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017e1f4	iVar4	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
@@ -291,14 +291,14 @@ local	FUN_0017e7e0	iVar6	loopRemaining	INFERRED	rule R1: decremented by 1 inside
 local	FUN_0017e7e0	iVar16	member0xb0	INFERRED	rule R5: assigned once from the context member at +0xb0
 local	FUN_0017ebb0	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017ebb0	iVar18	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017ebb0	puVar6	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017ebb0	puVar6	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017ebb0	uVar2	member0x21c	INFERRED	rule R5: assigned once from the context member at +0x21c
 local	FUN_0017ee68	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017ee68	iVar17	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017f1f8	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017f1f8	iVar7	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017f1f8	iVar8	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_0017f1f8	pfVar2	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017f1f8	pfVar2	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017f3f8	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017f3f8	iVar6	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017f594	uVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
@@ -309,8 +309,8 @@ local	FUN_0017f78c	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb
 local	FUN_0017f7ec	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_0017f7ec	iVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0017f7ec	iVar5	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017f7ec	piVar3	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0017f7ec	piVar4	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017f7ec	piVar3	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0017f7ec	piVar4	loopPtr4	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00180154	param_1	ctx	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_00180154	iVar5	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00180154	iVar6	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
@@ -319,10 +319,10 @@ local	FUN_00180250	iVar14	loopIndex	INFERRED	rule R1: incremented by 1 inside a 
 local	FUN_00180250	iVar19	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_00180250	iVar7	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00180250	iVar9	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00180250	pcVar12	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00180250	pcVar8	loopIndex5	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00180250	piVar11	loopIndex6	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00180250	piVar17	loopIndex7	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00180250	pcVar12	loopPtr4	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00180250	pcVar8	loopPtr5	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00180250	piVar11	loopPtr6	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00180250	piVar17	loopPtr7	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00180830	param_1	key	INFERRED	rule R3: param_1 is dereferenced at +0xb0 and +0x238 (the shared per-context layout used across this family)
 local	FUN_00180830	iVar10	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_00180830	iVar14	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
@@ -330,10 +330,10 @@ local	FUN_00180830	iVar16	loopIndex2	INFERRED	rule R1: incremented by 1 inside a
 local	FUN_00180830	iVar28	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00180830	iVar4	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00180830	iVar6	loopIndex5	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00180830	pcVar26	loopIndex6	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00180830	piVar12	loopIndex7	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00180830	piVar24	loopIndex8	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00180830	puVar11	loopIndex9	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00180830	pcVar26	loopPtr6	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00180830	piVar12	loopPtr7	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00180830	piVar24	loopPtr8	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00180830	puVar11	loopPtr9	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00181ab0	iVar5	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00181b80	iVar10	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00181f00	iVar10	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
@@ -350,7 +350,7 @@ local	FUN_00184d7c	iVar3	callResult	INFERRED	rule R2: holds a call result that i
 local	FUN_00184d7c	uVar4	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00184ef0	iVar21	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_00184ef0	iVar4	loopRemaining2	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_00184ef0	puVar19	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00184ef0	puVar19	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00184ef0	uVar18	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001859bc	iVar3	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_00185da4	iVar3	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
@@ -360,8 +360,8 @@ local	FUN_00186510	iVar12	loopIndex	INFERRED	rule R1: incremented by 1 inside a 
 local	FUN_00186510	iVar5	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00186510	iVar6	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00186510	iVar8	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00186510	pcVar4	loopIndex5	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00186510	piVar10	loopIndex6	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00186510	pcVar4	loopPtr5	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00186510	piVar10	loopPtr6	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00186a88	iVar4	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00186a88	iVar5	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00186a88	iVar7	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
@@ -383,7 +383,7 @@ local	FUN_001895a0	iVar5	loopIndex	INFERRED	rule R1: incremented by 1 inside a l
 local	FUN_00189660	uVar2	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_0018976c	uVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_00189788	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
-local	FUN_00189788	puVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00189788	puVar2	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00189840	iVar1	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_00189840	iVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00189840	iVar3	loopRemaining2	INFERRED	rule R1: decremented by 1 inside a loop
@@ -403,34 +403,34 @@ local	FUN_0018b1bc	iVar10	loopIndex	INFERRED	rule R1: incremented by 1 inside a 
 local	FUN_0018b1bc	iVar14	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018b1bc	iVar7	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018b1bc	iVar9	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0018b1bc	puVar3	loopIndex5	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0018b1bc	puVar4	loopIndex6	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018b1bc	puVar3	loopPtr5	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018b1bc	puVar4	loopPtr6	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018b1bc	uVar13	loopIndex7	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018b1bc	uVar5	loopIndex8	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018b654	iVar7	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018b654	iVar8	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_0018b9cc	iVar6	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0018b9cc	puVar3	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018b9cc	puVar3	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018bc94	iVar12	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018bc94	iVar7	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0018bc94	piVar11	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0018bc94	piVar14	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0018bc94	piVar2	loopIndex5	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0018bc94	piVar6	loopIndex6	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0018bc94	piVar8	loopIndex7	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0018bc94	piVar9	loopIndex8	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018bc94	piVar11	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018bc94	piVar14	loopPtr4	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018bc94	piVar2	loopPtr5	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018bc94	piVar6	loopPtr6	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018bc94	piVar8	loopPtr7	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018bc94	piVar9	loopPtr8	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018c1c8	iVar2	callResult	INFERRED	rule R2: holds a call result that is tested or returned
-local	FUN_0018c1c8	piVar1	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0018c1c8	piVar3	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0018c1c8	piVar4	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018c1c8	piVar1	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018c1c8	piVar3	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018c1c8	piVar4	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018c1c8	piVar6	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_0018c768	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
-local	FUN_0018c768	piVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018c768	piVar2	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018c7f4	iVar4	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0018c7f4	piVar5	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018c7f4	piVar5	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018c980	iVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018c980	iVar4	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0018c980	piVar7	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018c980	piVar7	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018d388	iVar2	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_0018da48	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_0018dabc	iVar8	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
@@ -441,7 +441,7 @@ local	FUN_0018e1a8	iVar14	loopIndex2	INFERRED	rule R1: incremented by 1 inside a
 local	FUN_0018e1a8	iVar20	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018e1a8	iVar5	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018e1a8	iVar7	loopIndex5	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0018e1a8	puVar18	loopIndex6	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0018e1a8	puVar18	loopPtr6	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018e1a8	uVar21	loopIndex7	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0018f42c	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_0018f55c	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
@@ -463,23 +463,23 @@ local	FUN_00191298	piVar4	callResult2	INFERRED	rule R2: holds a call result that
 local	FUN_00191888	iVar3	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_00191888	uVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00191940	iVar4	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_00191940	pcVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00191940	pcVar2	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001919d8	iVar10	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_001919d8	iVar9	loopRemaining2	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_001919d8	pdVar7	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_001919d8	puVar4	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001919d8	pdVar7	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001919d8	puVar4	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00191b30	iVar3	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_00191b30	iVar6	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00191b30	pfVar5	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00191b30	pfVar5	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00191c7c	iVar6	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_00191c7c	iVar7	loopRemaining2	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_00191c7c	pcVar3	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00191c7c	pcVar5	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00191c7c	pfVar4	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00191efc	pfVar11	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00191c7c	pcVar3	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00191c7c	pcVar5	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00191c7c	pfVar4	loopPtr3	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00191efc	pfVar11	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00191efc	uVar10	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00191efc	uVar8	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_001920e0	pfVar11	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001920e0	pfVar11	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001920e0	uVar10	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001920e0	uVar8	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001922c4	iVar5	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
@@ -488,12 +488,12 @@ local	FUN_0019286c	iVar13	callResult	INFERRED	rule R2: holds a call result that 
 local	FUN_0019286c	iVar19	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0019286c	iVar3	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0019286c	iVar9	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_0019286c	pcVar2	loopIndex4	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0019286c	pcVar2	loopPtr4	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00193944	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_00193e74	uVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_00194034	iVar2	count	CONFIRMED	counts the nodes of the circular list from list+8 up to the sentinel list+0xc
 local	FUN_001940f0	iVar7	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_001940f0	puVar4	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001940f0	puVar4	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001940f0	uVar5	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001942d4	iVar1	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_00194374	iVar1	remaining	CONFIRMED	finds the first element equal to value in the array {capacity,count,data} and removes it; returns 1 when found
@@ -509,10 +509,10 @@ local	FUN_00194720	uVar4	loopIndex	INFERRED	rule R1: incremented by 1 inside a l
 local	FUN_00194834	iVar3	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_00194834	uVar4	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00194938	uVar5	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00194aa8	puVar7	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00194aa8	puVar7	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00194aa8	uVar11	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00194aa8	uVar8	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_00194e44	puVar8	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_00194e44	puVar8	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00194e44	uVar12	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_00194e44	uVar9	loopIndex3	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001950e0	uVar5	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
@@ -543,7 +543,7 @@ local	FUN_0019eb30	iVar3	loopRemaining	INFERRED	rule R1: decremented by 1 inside
 local	FUN_0019ebdc	iVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0019ebdc	iVar3	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_0019ec88	iVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_0019ecf4	puVar3	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_0019ecf4	puVar3	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0019ecf4	uVar4	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0019f310	uVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_0019f98c	iVar4	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
@@ -554,10 +554,10 @@ local	FUN_0019fccc	iVar1	callResult	INFERRED	rule R2: holds a call result that i
 local	FUN_001a07c0	iVar8	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001a09d0	fVar3	callResult	INFERRED	rule R2: holds a call result that is tested or returned
 local	FUN_001a09d0	iVar8	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
-local	FUN_001a09d0	pbVar7	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001a09d0	pbVar7	loopPtr2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001a0b3c	iVar6	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001a158c	iVar8	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
-local	FUN_001a158c	piVar2	loopIndex	INFERRED	rule R1: incremented by 1 inside a loop
+local	FUN_001a158c	piVar2	loopPtr	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001a158c	uVar5	loopIndex2	INFERRED	rule R1: incremented by 1 inside a loop
 local	FUN_001a1d24	iVar12	loopRemaining	INFERRED	rule R1: decremented by 1 inside a loop
 local	FUN_001a2b10	iVar1	callResult	INFERRED	rule R2: holds a call result that is tested or returned

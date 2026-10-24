@@ -127,31 +127,31 @@ int OpcodeInfo__deleting_dtor(this)
 }
 
 /* IrAddFloat__vslot5_getValueKeyTransformLevel @ 0x1d0278 (288 bytes) */
-int IrAddFloat__vslot5_getValueKeyTransformLevel(this, param_2, param_3, param_4)
+int IrAddFloat__vslot5_getValueKeyTransformLevel(this, param_2, param_3, compiler)
   undefined4 this;
   int param_2;
   int *param_3;
-  int param_4;
+  int compiler;
 {
   bool bVar1;
   int iVar2;
   int operandRecord;
   int iVar4;
-  undefined4 uVar5;
+  undefined4 inst;
   undefined4 uVar6;
   int loopIndex;
   
   iVar2 = FUN_0017d610(param_2);
   if (((iVar2 == 0) && (iVar2 = FUN_0017cdbc(param_2), iVar2 == 0)) &&
-     ((iVar2 = Compiler__isOptionEnabled(param_4,0xc), iVar2 == 0 || (iVar2 = FUN_0017e338(param_2), iVar2 == 0))
+     ((iVar2 = Compiler__isOptionEnabled(compiler,0xc), iVar2 == 0 || (iVar2 = FUN_0017e338(param_2), iVar2 == 0))
      )) {
-    iVar4 = *(int *)(param_4 + 0x658);
-    iVar2 = *(int *)(*(int *)(param_4 + 0x6c4) + 0xa8);
-    uVar5 = *(undefined4 *)(param_2 + 0xb0);
+    iVar4 = *(int *)(compiler + 0x658);
+    iVar2 = *(int *)(*(int *)(compiler + 0x6c4) + 0xa8);
+    inst = *(undefined4 *)(param_2 + 0xb0);
     uVar6 = 2;
     loopIndex = 0;
     do {
-      operandRecord = IRInst__getOperandRecord(uVar5,0);
+      operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
         if (iVar4 <= iVar2) {
           return uVar6;
@@ -519,7 +519,7 @@ int IrAddInt__vslot5_getValueKeyTransformLevel(this, param_2, param_3, param_4)
   int operandRecord;
   int iVar4;
   undefined4 uVar5;
-  undefined4 uVar6;
+  undefined4 inst;
   int loopIndex;
   
   iVar2 = FUN_0017cdbc(param_2);
@@ -527,11 +527,11 @@ int IrAddInt__vslot5_getValueKeyTransformLevel(this, param_2, param_3, param_4)
   if (iVar2 == 0) {
     iVar4 = *(int *)(param_4 + 0x658);
     iVar2 = *(int *)(*(int *)(param_4 + 0x6c4) + 0xa8);
-    uVar6 = *(undefined4 *)(param_2 + 0xb0);
+    inst = *(undefined4 *)(param_2 + 0xb0);
     uVar5 = 2;
     loopIndex = 0;
     do {
-      operandRecord = IRInst__getOperandRecord(uVar6,0);
+      operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
         if (iVar4 <= iVar2) {
           return uVar5;

@@ -1,0 +1,8 @@
+local	FUN_0018c1c8	param_1	packState	INFERRED	the six register entries of the packing state, read as three pairs (param_1[0..5]); PackState__countFreeSlots passes its state here
+local	FUN_0018c1c8	param_2	slotTable	INFERRED	output: six register entries, two triples (param_2[0..2] and param_2[3..5]), zeroed first and filled by the matching below
+local	FUN_0018c1c8	piVar5	secondTriple	CONFIRMED	param_2 + 3, the second triple of slotTable
+local	FUN_0018c1c8	local_58	slotUseCounts	INFERRED	per-entry fill counts of the slot table (first triple here, the second triple follows as local_4c)
+local	FUN_0018c1c8	local_4c	slotUseCountsSecond	INFERRED	fill counts of the second triple (local_58 + 3 ints)
+use	FUN_0018c1c8	piVar7	placedReg	INFERRED	register currently placed in the second-triple slot, compared with the candidate by the RegKind/flags/+0x94 tests	^\s*piVar7\ =\ \(int\ \*\)\*piVar5;$	+24
+use	FUN_0018c1c8	piVar7	placedReg2	INFERRED	register currently placed in the first-triple slot, same tests	^\s*piVar7\ =\ \(int\ \*\)\*param_2;$	+22
+func	FUN_0018c1c8	PackState__buildSlotTable	INFERRED	zeroes a six-entry slot table (two triples) and fills it from the packing state pairs by backtracking over register compatibility (FUN_0018bc94 completes the assignment); PackState__countFreeSlots counts its empty entries

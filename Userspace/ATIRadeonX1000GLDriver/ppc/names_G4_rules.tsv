@@ -48,7 +48,7 @@ local	FUN_00147b8c	piVar2	callResult2	INFERRED	holds one call's result that is t
 local	FUN_0014c604	iVar1	callResult	INFERRED	holds one call's result that is tested or returned
 local	FUN_0014c604	iVar3	callResult2	INFERRED	holds one call's result that is tested or returned
 local	FUN_0014c604	iVar4	callResult3	INFERRED	holds one call's result that is tested or returned
-local	FUN_001506d0	iVar2	callResult	INFERRED	holds one call's result that is tested or returned
+local	FUN_001506d0	iVar2	useBPrecheck	INFERRED	FUN_00146cd8(param_2,..): precheck result for use B
 local	FUN_00151318	uVar2	callResult	INFERRED	holds one call's result that is tested or returned
 local	FUN_00151a74	uVar7	callResult	INFERRED	holds one call's result that is tested or returned
 local	FUN_00158c3c	piVar5	callResult	INFERRED	holds one call's result that is tested or returned

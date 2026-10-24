@@ -1,0 +1,176 @@
+local	FUN_0014f420	param_1	useA	CONFIRMED	pair {consumer instruction, operand index}: IRInst__getOperandSource(*param_1,param_1[1]) is the source feeding the operand
+local	FUN_0014f420	param_2	useB	CONFIRMED	second pair {consumer instruction, operand index}, same layout as param_1
+local	FUN_0014f420	param_3	pass	INFERRED	the pass object: pass+8 is the compiler context passed to IRInst__setOperandSource (sibling FUN_0014e9e4 and Inst__takeOutCommonFactor name it pass)
+local	FUN_0014f420	param_4	allowRewrite	INFERRED	when 0 the function returns 1 right after finding the matching term pair, before rewriting any operand
+local	FUN_0014f420	param_5	allowOperandSwap	INFERRED	when 0 the function returns 1 after the in-place rewrite, before exchanging an operand between the uses
+local	FUN_0014f420	iStack00000020	programHome	INFERRED	stack home of param_3 (all later reads use the home)
+local	FUN_0014f420	iStack00000024	allowRewriteHome	INFERRED	stack home of param_4
+local	FUN_0014f420	iStack00000028	allowOperandSwapHome	INFERRED	stack home of param_5
+local	FUN_0014f420	bVar1	consumerIsNotMul	CONFIRMED	*(*(consumer+0x88)+8) != 0x13: consumer opcode is not IrMulFloat (compiler_opcodes.tsv: opcode 19)
+local	FUN_0014f420	local_f8	matchFrame	INFERRED	frame words addressed as arrays by the 3-term loops: B negate/abs bits, A select words, A flag bits, B term/select/flag sub-arrays at +0xc/+0xf/+0x12, A terms at +0x15
+local	FUN_0014f420	local_a4	termInstsA	INFERRED	A terms: source 1 and 2 of use A's source instruction and the consumer's other operand
+local	FUN_0014f420	local_c8	termInstsB	INFERRED	B terms (same layout as local_a4); element 3 doubles as a saved select word
+local	FUN_0014f420	local_58	negateFlagsPtrB	INFERRED	pointer to the B-side flag words in matchFrame (local_f8 + 0x12)
+local	FUN_0014f420	local_54	selectWordsPtrB	INFERRED	pointer to the B-side select words in matchFrame (local_f8 + 0xf)
+local	FUN_0014f420	local_64	crossedMatch	INFERRED	1 when B term i matched A term j+1 rather than j
+local	FUN_0014f420	local_68	termIndexB	INFERRED	index i of the outer 3-term loop over B
+local	FUN_0014f420	local_cc	absOtherA	INFERRED	bit 1 of the flags of the consumer's other operand (use A)
+use	FUN_0014f420	uVar9	useOperandIndexA	INFERRED	copy of param_1[1], the operand index of use A, feeds the 'other operand' index (i%2)+1	^\s*uVar9\ =\ param_1\[1\];$	+3
+use	FUN_0014f420	uVar9	useOperandIndexA	INFERRED	copy of param_1[1], the operand index of use A, feeds the 'other operand' index (i%2)+1	^\s*uVar9\ =\ param_1\[1\];$@2	+1
+use	FUN_0014f420	uVar9	useOperandIndexA	INFERRED	copy of param_1[1], the operand index of use A, feeds the 'other operand' index (i%2)+1	^\s*iVar19\ =\ FUN_001054ec\(\*param_1,uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+$	+2
+use	FUN_0014f420	uVar9	useOperandIndexA	INFERRED	copy of param_1[1], the operand index of use A, feeds the 'other operand' index (i%2)+1	^\s*uVar9\ =\ param_1\[1\];$@4	+1
+use	FUN_0014f420	uVar9	useOperandIndexA	INFERRED	copy of param_1[1], the operand index of use A, feeds the 'other operand' index (i%2)+1	^\s*local_cc\ =\ \*\(uint\ \*\)\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*$	+2
+use	FUN_0014f420	uVar9	useOperandIndexA	INFERRED	copy of param_1[1], the operand index of use A, feeds the 'other operand' index (i%2)+1	^\s*uVar9\ =\ param_1\[1\];$@5	+1
+use	FUN_0014f420	uVar9	useOperandIndexA	INFERRED	copy of param_1[1], the operand index of use A, feeds the 'other operand' index (i%2)+1	^\s*FUN_00106004\(\*param_1,uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*$	+2
+use	FUN_0014f420	uVar9	useOperandIndexA	INFERRED	copy of param_1[1], the operand index of use A, feeds the 'other operand' index (i%2)+1	^\s*uVar9\ =\ param_1\[1\];$@6	+3
+use	FUN_0014f420	uVar9	useOperandIndexA	INFERRED	copy of param_1[1], the operand index of use A, feeds the 'other operand' index (i%2)+1	^\s*uVar9\ =\ param_1\[1\];$@7	+3
+use	FUN_0014f420	uVar9	useOperandIndexA	INFERRED	copy of param_1[1], the operand index of use A, feeds the 'other operand' index (i%2)+1	^\s*uVar9\ =\ param_1\[1\];$@8	+1
+use	FUN_0014f420	uVar9	useOperandIndexA	INFERRED	copy of param_1[1], the operand index of use A, feeds the 'other operand' index (i%2)+1	^\s*FUN_00106004\(\*param_1,uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*$@2	+2
+use	FUN_0014f420	uVar9	useOperandIndexA	INFERRED	copy of param_1[1], the operand index of use A, feeds the 'other operand' index (i%2)+1	^\s*uVar9\ =\ param_1\[1\];$@9	+3
+use	FUN_0014f420	uVar9	useOperandIndexA	INFERRED	copy of param_1[1], the operand index of use A, feeds the 'other operand' index (i%2)+1	^\s*uVar9\ =\ param_1\[1\];$@10	+3
+use	FUN_0014f420	uVar9	useOperandIndexB	INFERRED	copy of param_2[1], the operand index of use B	^\s*uVar9\ =\ param_2\[1\];$	+3
+use	FUN_0014f420	uVar9	useOperandIndexB	INFERRED	copy of param_2[1], the operand index of use B	^\s*uVar9\ =\ param_2\[1\];$@2	+1
+use	FUN_0014f420	uVar9	useOperandIndexB	INFERRED	copy of param_2[1], the operand index of use B	^\s*iVar19\ =\ FUN_001054ec\(\*param_2,uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+$	+2
+use	FUN_0014f420	uVar9	useOperandIndexB	INFERRED	copy of param_2[1], the operand index of use B	^\s*uVar9\ =\ param_2\[1\];$@5	+1
+use	FUN_0014f420	uVar9	useOperandIndexB	INFERRED	copy of param_2[1], the operand index of use B	^\s*FUN_00106004\(\*param_2,uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*$	+2
+use	FUN_0014f420	uVar9	useOperandIndexB	INFERRED	copy of param_2[1], the operand index of use B	^\s*uVar9\ =\ param_2\[1\];$@6	+3
+use	FUN_0014f420	uVar9	useOperandIndexB	INFERRED	copy of param_2[1], the operand index of use B	^\s*uVar9\ =\ param_2\[1\];$@7	+3
+use	FUN_0014f420	uVar9	useOperandIndexB	INFERRED	copy of param_2[1], the operand index of use B	^\s*uVar9\ =\ param_2\[1\];$@8	+3
+use	FUN_0014f420	uVar9	useOperandIndexB	INFERRED	copy of param_2[1], the operand index of use B	^\s*uVar9\ =\ param_2\[1\];$@9	+1
+use	FUN_0014f420	uVar9	useOperandIndexB	INFERRED	copy of param_2[1], the operand index of use B	^\s*FUN_00106004\(\*param_2,uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*$@2	+2
+use	FUN_0014f420	uVar9	useOperandIndexB	INFERRED	copy of param_2[1], the operand index of use B	^\s*uVar9\ =\ param_2\[1\];$@10	+3
+use	FUN_0014f420	uVar9	useOperandIndexB	INFERRED	copy of param_2[1], the operand index of use B	^\s*uVar9\ =\ param_2\[1\];$@11	+3
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*uVar9\ =\ local_f8\[3\];$	+1
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*FUN_000f2bdc\(\&local_70,uVar9,\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\);$	+1
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*uVar9\ =\ local_f8\[4\];$	+1
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*FUN_000f2bdc\(\&local_6c,uVar9,\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\);$	+1
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*uVar9\ =\ local_f8\[5\];$	+1
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*\*\(uint\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar9;$@3	+1
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*uVar9\ =\ local_f8\[3\];$@2	+1
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*\*\(uint\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar9;$@4	+1
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*uVar9\ =\ local_f8\[4\];$@2	+1
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*\*\(uint\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar9;$@5	+1
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*uVar9\ =\ local_f8\[5\];$@2	+1
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*\*\(uint\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar9;$@6	+1
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*uVar9\ =\ local_f8\[4\];$@3	+1
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*\*\(uint\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar9;$@7	+1
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*uVar9\ =\ local_f8\[3\];$@3	+1
+use	FUN_0014f420	uVar9	savedSelectWordA	INFERRED	select word saved from the A-side frame words local_f8[3..5] and stored back into operand records	^\s*\*\(uint\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar9;$@8	+1
+use	FUN_0014f420	uVar9	savedSelectWordB2	INFERRED	select word saved from the B-side frame words (local_c8[3], local_b8, local_b4) and stored back	^\s*uVar9\ =\ local_c8\[3\];$	+1
+use	FUN_0014f420	uVar9	savedSelectWordB2	INFERRED	select word saved from the B-side frame words (local_c8[3], local_b8, local_b4) and stored back	^\s*FUN_000f2bdc\(local_f8\ \+\ 0x18,uVar9,\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\);$	+1
+use	FUN_0014f420	uVar9	savedSelectWordB2	INFERRED	select word saved from the B-side frame words (local_c8[3], local_b8, local_b4) and stored back	^\s*uVar9\ =\ local_c8\[3\];$@2	+1
+use	FUN_0014f420	uVar9	savedSelectWordB2	INFERRED	select word saved from the B-side frame words (local_c8[3], local_b8, local_b4) and stored back	^\s*\*\(uint\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar9;$	+1
+use	FUN_0014f420	uVar9	savedSelectWordB2	INFERRED	select word saved from the B-side frame words (local_c8[3], local_b8, local_b4) and stored back	^\s*uVar9\ =\ local_c8\[3\];$@3	+1
+use	FUN_0014f420	uVar9	savedSelectWordB2	INFERRED	select word saved from the B-side frame words (local_c8[3], local_b8, local_b4) and stored back	^\s*\*\(uint\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar9;$@2	+1
+use	FUN_0014f420	uVar9	secondSourceSelect	INFERRED	select word of operand 2 of the source (offset 0x10 of IRInst__getOperandRecord(sourceDef,2)), compared lane by lane with the first	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0x10\);$	+1
+use	FUN_0014f420	uVar9	secondSourceSelect	INFERRED	select word of operand 2 of the source (offset 0x10 of IRInst__getOperandRecord(sourceDef,2)), compared lane by lane with the first	^\s*if\ \(\(uVar10\ >>\ 0x18\ !=\ 4\)\ \|\|\ \(iVar19\ =\ 1,\ uVar9\ >>\ 0x18\ !=\ 4\)\)\ \{$	+1
+use	FUN_0014f420	uVar9	secondSourceSelect	INFERRED	select word of operand 2 of the source (offset 0x10 of IRInst__getOperandRecord(sourceDef,2)), compared lane by lane with the first	^\s*if\ \(\(\(uVar10\ >>\ 0x10\ \&\ 0xff\)\ !=\ 4\)\ \|\|\ \(iVar3\ =\ 1,\ \(uVar9\ >>\ 0x10\ \&\ 0xff\)\ !=\ 4\)\)\ \{$	+1
+use	FUN_0014f420	uVar9	secondSourceSelect	INFERRED	select word of operand 2 of the source (offset 0x10 of IRInst__getOperandRecord(sourceDef,2)), compared lane by lane with the first	^\s*if\ \(\(\(uVar10\ >>\ 8\ \&\ 0xff\)\ !=\ 4\)\ \|\|\ \(iVar18\ =\ 1,\ \(uVar9\ >>\ 8\ \&\ 0xff\)\ !=\ 4\)\)\ \{$	+1
+use	FUN_0014f420	uVar9	secondSourceSelect	INFERRED	select word of operand 2 of the source (offset 0x10 of IRInst__getOperandRecord(sourceDef,2)), compared lane by lane with the first	^\s*if\ \(\(\(uVar10\ \&\ 0xff\)\ !=\ 4\)\ \|\|\ \(uVar10\ =\ 1,\ \(uVar9\ \&\ 0xff\)\ !=\ 4\)\)\ \{$	+1
+use	FUN_0014f420	uVar9	secondSourceSelect	INFERRED	select word of operand 2 of the source (offset 0x10 of IRInst__getOperandRecord(sourceDef,2)), compared lane by lane with the first	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0x10\);$@2	+1
+use	FUN_0014f420	uVar9	secondSourceSelect	INFERRED	select word of operand 2 of the source (offset 0x10 of IRInst__getOperandRecord(sourceDef,2)), compared lane by lane with the first	^\s*if\ \(\(uVar10\ >>\ 0x18\ !=\ 4\)\ \|\|\ \(iVar19\ =\ 1,\ uVar9\ >>\ 0x18\ !=\ 4\)\)\ \{$@2	+1
+use	FUN_0014f420	uVar9	secondSourceSelect	INFERRED	select word of operand 2 of the source (offset 0x10 of IRInst__getOperandRecord(sourceDef,2)), compared lane by lane with the first	^\s*if\ \(\(\(uVar10\ >>\ 0x10\ \&\ 0xff\)\ !=\ 4\)\ \|\|\ \(iVar3\ =\ 1,\ \(uVar9\ >>\ 0x10\ \&\ 0xff\)\ !=\ 4\)\)\ \{$@2	+1
+use	FUN_0014f420	uVar9	secondSourceSelect	INFERRED	select word of operand 2 of the source (offset 0x10 of IRInst__getOperandRecord(sourceDef,2)), compared lane by lane with the first	^\s*if\ \(\(\(uVar10\ >>\ 8\ \&\ 0xff\)\ !=\ 4\)\ \|\|\ \(iVar18\ =\ 1,\ \(uVar9\ >>\ 8\ \&\ 0xff\)\ !=\ 4\)\)\ \{$@2	+1
+use	FUN_0014f420	uVar9	secondSourceSelect	INFERRED	select word of operand 2 of the source (offset 0x10 of IRInst__getOperandRecord(sourceDef,2)), compared lane by lane with the first	^\s*if\ \(\(\(uVar10\ \&\ 0xff\)\ !=\ 4\)\ \|\|\ \(uVar10\ =\ 1,\ \(uVar9\ \&\ 0xff\)\ !=\ 4\)\)\ \{$@2	+1
+use	FUN_0014f420	uVar10	useOperandIndexBCopy	INFERRED	copy of param_2[1]	^\s*uVar10\ =\ param_2\[1\];$	+3
+use	FUN_0014f420	uVar10	useOperandIndexACopy	INFERRED	copy of param_1[1]	^\s*uVar10\ =\ param_1\[1\];$	+3
+use	FUN_0014f420	uVar10	useOperandIndexACopy	INFERRED	copy of param_1[1]	^\s*uVar10\ =\ param_1\[1\];$@2	+3
+use	FUN_0014f420	uVar4	savedSelectWordB	INFERRED	select word read back from the B-side frame words before being stored into an operand record	^\s*uVar4\ =\ local_b8;$	+1
+use	FUN_0014f420	uVar4	savedSelectWordB	INFERRED	select word read back from the B-side frame words before being stored into an operand record	^\s*FUN_000f2bdc\(\&local_94,uVar4,\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\);$	+1
+use	FUN_0014f420	uVar4	savedSelectWordB	INFERRED	select word read back from the B-side frame words before being stored into an operand record	^\s*uVar4\ =\ local_b4;$	+1
+use	FUN_0014f420	uVar4	savedSelectWordB	INFERRED	select word read back from the B-side frame words before being stored into an operand record	^\s*\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar4;$	+1
+use	FUN_0014f420	uVar4	savedSelectWordB	INFERRED	select word read back from the B-side frame words before being stored into an operand record	^\s*uVar4\ =\ local_b8;$@2	+1
+use	FUN_0014f420	uVar4	savedSelectWordB	INFERRED	select word read back from the B-side frame words before being stored into an operand record	^\s*\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar4;$@2	+1
+use	FUN_0014f420	uVar4	savedSelectWordB	INFERRED	select word read back from the B-side frame words before being stored into an operand record	^\s*uVar4\ =\ local_b4;$@2	+1
+use	FUN_0014f420	uVar4	savedSelectWordB	INFERRED	select word read back from the B-side frame words before being stored into an operand record	^\s*\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar4;$@3	+1
+use	FUN_0014f420	uVar4	savedSelectWordB	INFERRED	select word read back from the B-side frame words before being stored into an operand record	^\s*uVar4\ =\ local_b8;$@3	+1
+use	FUN_0014f420	uVar4	savedSelectWordB	INFERRED	select word read back from the B-side frame words before being stored into an operand record	^\s*\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar4;$@4	+1
+use	FUN_0014f420	uVar4	copiedSelectWord	INFERRED	select word read from operand record and written to the other use's operand record	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\);$	+1
+use	FUN_0014f420	uVar4	copiedSelectWord	INFERRED	select word read from operand record and written to the other use's operand record	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar4;$	+1
+use	FUN_0014f420	iVar3	termByteOffsetB	INFERRED	byte offset (4*i) of B term i in the frame, loop variable of the outer 3-term loop	^\s*iVar3\ =\ 0;$	+1
+use	FUN_0014f420	iVar3	termByteOffsetB	INFERRED	byte offset (4*i) of B term i in the frame, loop variable of the outer 3-term loop	^\s*puVar16\ =\ \*\(uint\ \*\*\)\(\(int\)local_f8\ \+\ iVar3\ \+\ 0x30\);$	+1
+use	FUN_0014f420	iVar3	termByteOffsetB	INFERRED	byte offset (4*i) of B term i in the frame, loop variable of the outer 3-term loop	^\s*if\ \(\(\(\(local_f8\[iVar18\ \+\ 9\]\ !=\ \*\(uint\ \*\)\(\(int\)local_f8\ \+\ iVar3\)\)\ \|\|$	+4
+use	FUN_0014f420	iVar3	termByteOffsetB	INFERRED	byte offset (4*i) of B term i in the frame, loop variable of the outer 3-term loop	^\s*iVar6\ =\ FUN_000f2da8\(\*\(undefined4\ \*\)\(\(int\)local_f8\ \+\ iVar7\ \+\ 0xc\),$	+7
+use	FUN_0014f420	iVar3	termByteOffsetB	INFERRED	byte offset (4*i) of B term i in the frame, loop variable of the outer 3-term loop	^\s*iVar3\ =\ iVar3\ \+\ 4;$	+1
+use	FUN_0014f420	iVar3	lane2Flag	INFERRED	flag set when both source select words select code 4 in lane 2 (bits 16..23)	^\s*if\ \(\(\(uVar10\ >>\ 0x10\ \&\ 0xff\)\ !=\ 4\)\ \|\|\ \(iVar3\ =\ 1,\ \(uVar9\ >>\ 0x10\ \&\ 0xff\)\ !=\ 4\)\)\ \{$	+2
+use	FUN_0014f420	iVar3	lane2Flag	INFERRED	flag set when both source select words select code 4 in lane 2 (bits 16..23)	^\s*\*\(uint\ \*\)\(iVar7\ \+\ 0x9c\)\ =\ uVar10\ \|\ iVar18\ <<\ 8\ \|\ iVar3\ <<\ 0x10\ \|\ iVar19\ <<\ 0x18;$	+1
+use	FUN_0014f420	iVar3	lane2Flag	INFERRED	flag set when both source select words select code 4 in lane 2 (bits 16..23)	^\s*if\ \(\(\(uVar10\ >>\ 0x10\ \&\ 0xff\)\ !=\ 4\)\ \|\|\ \(iVar3\ =\ 1,\ \(uVar9\ >>\ 0x10\ \&\ 0xff\)\ !=\ 4\)\)\ \{$@2	+2
+use	FUN_0014f420	iVar3	lane2Flag	INFERRED	flag set when both source select words select code 4 in lane 2 (bits 16..23)	^\s*\*\(uint\ \*\)\(iVar7\ \+\ 0x9c\)\ =\ uVar10\ \|\ iVar18\ <<\ 8\ \|\ iVar3\ <<\ 0x10\ \|\ iVar19\ <<\ 0x18;$@2	+1
+use	FUN_0014f420	iVar3	selectsCompatible2	INFERRED	result of the select-word compatibility test (FUN_000f2da8) of the swapped terms	^\s*iVar3\ =\ FUN_000f2da8\(local_f8\[iVar13\ \+\ 0xf\],local_f8\[iVar15\ \+\ 3\]\);$	+2
+use	FUN_0014f420	iVar18	matchCandidateIndexA	INFERRED	index j of the A term currently matched against B term i	^\s*iVar18\ =\ iVar11;$	+1
+use	FUN_0014f420	iVar18	matchCandidateIndexA	INFERRED	index j of the A term currently matched against B term i	^\s*iVar14\ =\ iVar18;$	+1
+use	FUN_0014f420	iVar18	matchCandidateIndexA	INFERRED	index j of the A term currently matched against B term i	^\s*iVar7\ =\ iVar18\ \*\ 4;$	+5
+use	FUN_0014f420	iVar18	matchCandidateIndexA	INFERRED	index j of the A term currently matched against B term i	^\s*iVar7\ =\ iVar18\ <<\ 2;$	+1
+use	FUN_0014f420	iVar18	matchCandidateIndexA	INFERRED	index j of the A term currently matched against B term i	^\s*iVar15\ =\ iVar18;$	+1
+use	FUN_0014f420	iVar18	matchCandidateIndexA	INFERRED	index j of the A term currently matched against B term i	^\s*iVar18\ =\ iVar15;$	+1
+use	FUN_0014f420	iVar18	lane1Flag	INFERRED	flag set when both source select words select code 4 in lane 1 (bits 8..15)	^\s*if\ \(\(\(uVar10\ >>\ 8\ \&\ 0xff\)\ !=\ 4\)\ \|\|\ \(iVar18\ =\ 1,\ \(uVar9\ >>\ 8\ \&\ 0xff\)\ !=\ 4\)\)\ \{$	+2
+use	FUN_0014f420	iVar18	lane1Flag	INFERRED	flag set when both source select words select code 4 in lane 1 (bits 8..15)	^\s*\*\(uint\ \*\)\(iVar7\ \+\ 0x9c\)\ =\ uVar10\ \|\ iVar18\ <<\ 8\ \|\ iVar3\ <<\ 0x10\ \|\ iVar19\ <<\ 0x18;$	+1
+use	FUN_0014f420	iVar18	lane1Flag	INFERRED	flag set when both source select words select code 4 in lane 1 (bits 8..15)	^\s*if\ \(\(\(uVar10\ >>\ 8\ \&\ 0xff\)\ !=\ 4\)\ \|\|\ \(iVar18\ =\ 1,\ \(uVar9\ >>\ 8\ \&\ 0xff\)\ !=\ 4\)\)\ \{$@2	+2
+use	FUN_0014f420	iVar18	lane1Flag	INFERRED	flag set when both source select words select code 4 in lane 1 (bits 8..15)	^\s*\*\(uint\ \*\)\(iVar7\ \+\ 0x9c\)\ =\ uVar10\ \|\ iVar18\ <<\ 8\ \|\ iVar3\ <<\ 0x10\ \|\ iVar19\ <<\ 0x18;$@2	+1
+use	FUN_0014f420	iVar18	selectsCompatible	INFERRED	result of the select-word compatibility test (FUN_000f2da8)	^\s*iVar18\ =\ FUN_000f2da8\(local_f8\[iVar3\ \+\ 3\],local_f8\[\(int\)\(\(int\)local_68\ \+\ 0xf\)\]\);$	+2
+use	FUN_0014f420	iVar18	selectsCompatible	INFERRED	result of the select-word compatibility test (FUN_000f2da8)	^\s*iVar18\ =\ FUN_000f2da8\(local_f8\[iVar15\ \+\ 3\],local_f8\[iVar13\ \+\ 0xf\]\);$	+2
+use	FUN_0014f420	iVar19	consumerInstA	INFERRED	*param_1: the consumer instruction of use A	^\s*iVar19\ =\ \*param_1;$	+2
+use	FUN_0014f420	iVar19	consumerInstA	INFERRED	*param_1: the consumer instruction of use A	^\s*iVar19\ =\ \*param_1;$@2	+1
+use	FUN_0014f420	iVar19	consumerInstA	INFERRED	*param_1: the consumer instruction of use A	^\s*if\ \(\(iVar19\ ==\ iVar3\)\ \|\|$	+2
+use	FUN_0014f420	iVar19	precheckResult	INFERRED	result of FUN_0014699c(param_1,param_2), which must be nonzero when the consumer is a multiply	^\s*iVar19\ =\ \(\(int\ \(\*\)\(\)\)FUN_0014699c\)\(param_1,param_2\);$	+2
+use	FUN_0014f420	iVar19	operandSlotAddrA	INFERRED	consumer + operandIndex*0x18 + 0x80: the operand record area of use A (flags at +0x20)	^\s*iVar19\ =\ iVar3\ \+\ uVar9\ \*\ 0x18\ \+\ 0x80;$	+3
+use	FUN_0014f420	iVar19	operandSlotAddrB	INFERRED	same for use B	^\s*iVar19\ =\ iVar3\ \+\ uVar9\ \*\ 0x18\ \+\ 0x80;$@2	+3
+use	FUN_0014f420	iVar19	termIndexAPlusOne	INFERRED	j+1 of the inner 3-term loop over A (wraps mod 3 into nextTermSlotA)	^\s*iVar19\ =\ 0;$	+1
+use	FUN_0014f420	iVar19	termIndexAPlusOne	INFERRED	j+1 of the inner 3-term loop over A (wraps mod 3 into nextTermSlotA)	^\s*iVar11\ =\ iVar19;$	+2
+use	FUN_0014f420	iVar19	termIndexAPlusOne	INFERRED	j+1 of the inner 3-term loop over A (wraps mod 3 into nextTermSlotA)	^\s*iVar15\ =\ iVar19\ %\ 3;$	+1
+use	FUN_0014f420	iVar19	termIndexAPlusOne	INFERRED	j+1 of the inner 3-term loop over A (wraps mod 3 into nextTermSlotA)	^\s*\}\ while\ \(iVar19\ !=\ 3\);$	+1
+use	FUN_0014f420	iVar19	lane3Flag	INFERRED	flag set when both source select words select code 4 in lane 3 (bits 24..31)	^\s*if\ \(\(uVar10\ >>\ 0x18\ !=\ 4\)\ \|\|\ \(iVar19\ =\ 1,\ uVar9\ >>\ 0x18\ !=\ 4\)\)\ \{$	+2
+use	FUN_0014f420	iVar19	lane3Flag	INFERRED	flag set when both source select words select code 4 in lane 3 (bits 24..31)	^\s*\*\(uint\ \*\)\(iVar7\ \+\ 0x9c\)\ =\ uVar10\ \|\ iVar18\ <<\ 8\ \|\ iVar3\ <<\ 0x10\ \|\ iVar19\ <<\ 0x18;$	+1
+use	FUN_0014f420	iVar19	lane3Flag	INFERRED	flag set when both source select words select code 4 in lane 3 (bits 24..31)	^\s*if\ \(\(uVar10\ >>\ 0x18\ !=\ 4\)\ \|\|\ \(iVar19\ =\ 1,\ uVar9\ >>\ 0x18\ !=\ 4\)\)\ \{$@2	+2
+use	FUN_0014f420	iVar19	lane3Flag	INFERRED	flag set when both source select words select code 4 in lane 3 (bits 24..31)	^\s*\*\(uint\ \*\)\(iVar7\ \+\ 0x9c\)\ =\ uVar10\ \|\ iVar18\ <<\ 8\ \|\ iVar3\ <<\ 0x10\ \|\ iVar19\ <<\ 0x18;$@2	+1
+use	FUN_0014f420	iVar15	nextTermSlotA	INFERRED	(j+1) % 3, the neighbouring A term slot	^\s*iVar15\ =\ iVar19\ %\ 3;$	+2
+use	FUN_0014f420	iVar15	nextTermSlotA	INFERRED	(j+1) % 3, the neighbouring A term slot	^\s*if\ \(\(\(\(local_f8\[iVar18\ \+\ 9\]\ !=\ \*\(uint\ \*\)\(\(int\)local_f8\ \+\ iVar3\)\)\ \|\|$	+4
+use	FUN_0014f420	iVar15	nextTermSlotA	INFERRED	(j+1) % 3, the neighbouring A term slot	^\s*if\ \(\(\(iVar6\ !=\ 0\)\ \&\&$	+5
+use	FUN_0014f420	iVar15	nextTermSlotA	INFERRED	(j+1) % 3, the neighbouring A term slot	^\s*iVar14\ =\ iVar15;$	+2
+use	FUN_0014f420	iVar15	nextTermSlotA	INFERRED	(j+1) % 3, the neighbouring A term slot	^\s*if\ \(\(puVar16\ ==\ \(uint\ \*\)local_f8\[iVar15\ \+\ 0x15\]\)\ \&\&$	+2
+use	FUN_0014f420	iVar15	nextTermSlotA	INFERRED	(j+1) % 3, the neighbouring A term slot	^\s*iVar18\ =\ iVar15;$	+2
+use	FUN_0014f420	iVar15	nextTermSlotA	INFERRED	(j+1) % 3, the neighbouring A term slot	^\s*iVar3\ =\ iVar15;$	+2
+use	FUN_0014f420	iVar15	nextTermSlotA	INFERRED	(j+1) % 3, the neighbouring A term slot	^\s*puVar16\ =\ local_f8\ \+\ iVar15;$	+2
+use	FUN_0014f420	iVar15	nextTermSlotA	INFERRED	(j+1) % 3, the neighbouring A term slot	^\s*iVar18\ =\ FUN_000f2da8\(local_f8\[iVar15\ \+\ 3\],local_f8\[iVar13\ \+\ 0xf\]\);$	+1
+use	FUN_0014f420	iVar13	nextTermSlotB	INFERRED	(i+1) % 3, the neighbouring B term slot	^\s*iVar13\ =\ \(int\)puVar20\ %\ 3;$	+1
+use	FUN_0014f420	iVar13	nextTermSlotB	INFERRED	(i+1) % 3, the neighbouring B term slot	^\s*if\ \(\(puVar16\ ==\ puVar12\)\ \&\&\ \(local_f8\[iVar13\ \+\ 0xc\]\ ==\ local_f8\[iVar15\ \+\ 0x15\]\)\)\ \{$	+1
+use	FUN_0014f420	iVar13	nextTermSlotB	INFERRED	(i+1) % 3, the neighbouring B term slot	^\s*if\ \(\(\(\(local_f8\[iVar18\ \+\ 9\]\ !=\ \*\(uint\ \*\)\(\(int\)local_f8\ \+\ iVar3\)\)\ \|\|$	+4
+use	FUN_0014f420	iVar13	nextTermSlotB	INFERRED	(i+1) % 3, the neighbouring B term slot	^\s*if\ \(\(\(iVar6\ !=\ 0\)\ \&\&$	+5
+use	FUN_0014f420	iVar13	nextTermSlotB	INFERRED	(i+1) % 3, the neighbouring B term slot	^\s*if\ \(\(puVar16\ ==\ \(uint\ \*\)local_f8\[iVar15\ \+\ 0x15\]\)\ \&\&$	+2
+use	FUN_0014f420	iVar13	nextTermSlotB	INFERRED	(i+1) % 3, the neighbouring B term slot	^\s*iVar3\ =\ FUN_000f2da8\(local_f8\[iVar13\ \+\ 0xf\],local_f8\[iVar15\ \+\ 3\]\);$	+1
+use	FUN_0014f420	iVar13	nextTermSlotB	INFERRED	(i+1) % 3, the neighbouring B term slot	^\s*puVar16\ =\ local_f8\ \+\ iVar13;$	+2
+use	FUN_0014f420	iVar7	matchCandidateByteOffsetA	INFERRED	4 * matchCandidateIndexA, byte offset into the frame	^\s*iVar7\ =\ iVar18\ \*\ 4;$	+1
+use	FUN_0014f420	iVar7	matchCandidateByteOffsetA	INFERRED	4 * matchCandidateIndexA, byte offset into the frame	^\s*iVar7\ =\ iVar18\ <<\ 2;$	+1
+use	FUN_0014f420	iVar7	matchCandidateByteOffsetA	INFERRED	4 * matchCandidateIndexA, byte offset into the frame	^\s*iVar6\ =\ FUN_000f2da8\(\*\(undefined4\ \*\)\(\(int\)local_f8\ \+\ iVar7\ \+\ 0xc\),$	+7
+use	FUN_0014f420	bVar2	foundMatch	INFERRED	set when a matching term pair is found, ends the 3x3 search	^\s*bVar2\ =\ true;$	+1
+use	FUN_0014f420	bVar2	foundMatch	INFERRED	set when a matching term pair is found, ends the 3x3 search	^\s*bVar2\ =\ false;$	+1
+use	FUN_0014f420	bVar2	foundMatch	INFERRED	set when a matching term pair is found, ends the 3x3 search	^\s*if\ \(bVar2\)\ goto\ LAB_0014fad0;$	+1
+use	FUN_0014f420	bVar2	foundMatch	INFERRED	set when a matching term pair is found, ends the 3x3 search	^\s*if\ \(!bVar2\)\ \{$	+1
+use	FUN_0014f420	puVar12	termA	INFERRED	the A term j read through the pointer into the frame (A terms are local_f8[0x15..0x17])	^\s*puVar12\ =\ \(uint\ \*\)\*puVar17;$	+1
+use	FUN_0014f420	puVar12	termA	INFERRED	the A term j read through the pointer into the frame (A terms are local_f8[0x15..0x17])	^\s*if\ \(\(puVar16\ ==\ puVar12\)\ \&\&\ \(local_f8\[iVar13\ \+\ 0xc\]\ ==\ local_f8\[iVar15\ \+\ 0x15\]\)\)\ \{$	+1
+use	FUN_0014f420	puVar12	termA	INFERRED	the A term j read through the pointer into the frame (A terms are local_f8[0x15..0x17])	^\s*if\ \(\(\(\(local_f8\[iVar18\ \+\ 9\]\ !=\ \*\(uint\ \*\)\(\(int\)local_f8\ \+\ iVar3\)\)\ \|\|$	+4
+use	FUN_0014f420	puVar12	termA	INFERRED	the A term j read through the pointer into the frame (A terms are local_f8[0x15..0x17])	^\s*if\ \(\(puVar16\ ==\ \(uint\ \*\)local_f8\[iVar15\ \+\ 0x15\]\)\ \&\&$	+2
+use	FUN_0014f420	puVar12	termA	INFERRED	the A term j read through the pointer into the frame (A terms are local_f8[0x15..0x17])	^\s*iVar19\ =\ FUN_001049c4\(piVar8,iStack00000020,iVar19,param_4,iVar11,puVar12,puVar16\);$	+1
+use	FUN_0014f420	puVar16	termB	INFERRED	B term i (local_f8[0xc + i])	^\s*puVar16\ =\ \*\(uint\ \*\*\)\(\(int\)local_f8\ \+\ iVar3\ \+\ 0x30\);$	+1
+use	FUN_0014f420	puVar16	termB	INFERRED	B term i (local_f8[0xc + i])	^\s*if\ \(\(puVar16\ ==\ puVar12\)\ \&\&\ \(local_f8\[iVar13\ \+\ 0xc\]\ ==\ local_f8\[iVar15\ \+\ 0x15\]\)\)\ \{$	+1
+use	FUN_0014f420	puVar16	termB	INFERRED	B term i (local_f8[0xc + i])	^\s*if\ \(\(puVar16\ ==\ \(uint\ \*\)local_f8\[iVar15\ \+\ 0x15\]\)\ \&\&$	+2
+use	FUN_0014f420	puVar17	termPtrA	INFERRED	pointer to A term j in the frame	^\s*puVar17\ =\ local_f8\ \+\ 0x15;$	+1
+use	FUN_0014f420	puVar17	termPtrA	INFERRED	pointer to A term j in the frame	^\s*puVar12\ =\ \(uint\ \*\)\*puVar17;$	+1
+use	FUN_0014f420	puVar17	termPtrA	INFERRED	pointer to A term j in the frame	^\s*puVar17\ =\ puVar17\ \+\ 1;$	+1
+use	FUN_0014f420	puVar20	nextTermIndexB	INFERRED	i+1 of the outer 3-term loop over B	^\s*puVar20\ =\ \(uint\ \*\)\(\(int\)local_68\ \+\ 1\);$	+2
+use	FUN_0014f420	puVar20	nextTermIndexB	INFERRED	i+1 of the outer 3-term loop over B	^\s*if\ \(puVar20\ !=\ \(uint\ \*\)\(\(int\)\(\(unsigned\ char\ \*\)0x0\)\ \+\ 3\)\)\ \{$	+1
+use	FUN_0014f420	puVar20	nextTermIndexB	INFERRED	i+1 of the outer 3-term loop over B	^\s*local_68\ =\ puVar20;$	+1
+use	FUN_0014f420	iVar14	matchedIndexA	INFERRED	index of the matched A term after the crossed/non-crossed decision	^\s*iVar14\ =\ iVar18;$	+1
+use	FUN_0014f420	iVar14	matchedIndexA	INFERRED	index of the matched A term after the crossed/non-crossed decision	^\s*iVar14\ =\ iVar15;$	+1
+use	FUN_0014f420	iVar14	matchedIndexA	INFERRED	index of the matched A term after the crossed/non-crossed decision	^\s*iVar14\ =\ iVar11;$	+1
+use	FUN_0014f420	iVar14	matchedIndexA	INFERRED	index of the matched A term after the crossed/non-crossed decision	^\s*if\ \(iVar14\ ==\ 2\)\ \{$	+1
+use	FUN_0014f420	iVar14	matchedIndexA	INFERRED	index of the matched A term after the crossed/non-crossed decision	^\s*else\ if\ \(iVar14\ ==\ 1\)\ \{$	+1
+use	FUN_0014f420	iVar14	matchedIndexA	INFERRED	index of the matched A term after the crossed/non-crossed decision	^\s*iVar3\ =\ iVar14;$	+1
+use	FUN_0014f420	iVar14	matchedIndexA	INFERRED	index of the matched A term after the crossed/non-crossed decision	^\s*iVar15\ =\ iVar14;$	+1
+use	FUN_0014f420	iVar6	selectsCompatibleA	INFERRED	result of FUN_000f2da8 on the A-side select words in the 3x3 search	^\s*iVar6\ =\ FUN_000f2da8\(\*\(undefined4\ \*\)\(\(int\)local_f8\ \+\ iVar7\ \+\ 0xc\),$	+7
+use	FUN_0014f420	piVar8	updatedSourceInst	INFERRED	source instruction of use A or B whose operand was exchanged; re-evaluated through virtual slot 3 and FUN_001049c4	^\s*piVar8\ =\ \(int\ \*\)FUN_00105594\(\*param_1,param_1\[1\]\);$	+1
+use	FUN_0014f420	piVar8	updatedSourceInst	INFERRED	source instruction of use A or B whose operand was exchanged; re-evaluated through virtual slot 3 and FUN_001049c4	^\s*piVar8\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_0014f420	piVar8	updatedSourceInst	INFERRED	source instruction of use A or B whose operand was exchanged; re-evaluated through virtual slot 3 and FUN_001049c4	^\s*piVar8\ =\ \(int\ \*\)FUN_00105594\(\*param_2,param_2\[1\]\);$	+1
+use	FUN_0014f420	piVar8	updatedSourceInst	INFERRED	source instruction of use A or B whose operand was exchanged; re-evaluated through virtual slot 3 and FUN_001049c4	^\s*iVar19\ =\ FUN_001049c4\(piVar8,iStack00000020,iVar19,param_4,iVar11,puVar12,puVar16\);$	+1
+use	FUN_0014f420	piVar8	updatedSourceInst	INFERRED	source instruction of use A or B whose operand was exchanged; re-evaluated through virtual slot 3 and FUN_001049c4	^\s*\(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0xc\)\)\(piVar8,1,\*\(undefined4\ \*\)\(iStack00000020\ \+\ 8\)\);$	+1
+func	FUN_0014f420	Inst__swapMatchedOperandsBetweenUses	INFERRED	given two operand uses (consumer, index) whose sources each combine three terms, finds two shared terms by a 3x3 search and exchanges the remaining operand between the uses; caller FUN_001506d0 tries both argument orders and then Inst__reassociate_14e6e4

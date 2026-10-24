@@ -1,0 +1,13 @@
+local	Inst__swapMatchedOperandsBetweenUses	local_70	composedSelectA1	CONFIRMED	out-parameter of SelectWord__compose(&local_70, savedSelect, operand select): the combined select word stored into the A-side frame slot 3
+local	Inst__swapMatchedOperandsBetweenUses	local_6c	composedSelectA2	CONFIRMED	same for A's second select word (frame slot 4)
+local	Inst__swapMatchedOperandsBetweenUses	local_94	composedSelectB2	CONFIRMED	out-parameter of SelectWord__compose for B's second select word (stored into local_b8)
+local	Inst__swapMatchedOperandsBetweenUses	local_90	destWriteMaskB2	CONFIRMED	WriteMask__fromSelectWord(&local_90, destination select) in the B operand-2 exchange case
+local	Inst__swapMatchedOperandsBetweenUses	local_8c	maskedDestSelectB2	CONFIRMED	SelectWord__maskUnused(&local_8c, 0x10203, local_90) stored into B's destination operand select
+local	Inst__swapMatchedOperandsBetweenUses	local_88	destWriteMaskB1	CONFIRMED	same as local_90 in the B operand-1 exchange case
+local	Inst__swapMatchedOperandsBetweenUses	local_84	maskedDestSelectB1	CONFIRMED	same as local_8c in the B operand-1 exchange case
+local	Inst__swapMatchedOperandsBetweenUses	local_80	destWriteMaskA2	CONFIRMED	same in the A operand-2 exchange case
+local	Inst__swapMatchedOperandsBetweenUses	local_7c	maskedDestSelectA2	CONFIRMED	same in the A operand-2 exchange case
+local	Inst__swapMatchedOperandsBetweenUses	local_78	destWriteMaskA1	CONFIRMED	same in the A operand-1 exchange case
+local	Inst__swapMatchedOperandsBetweenUses	local_74	maskedDestSelectA1	CONFIRMED	same in the A operand-1 exchange case
+local	Inst__swapMatchedOperandsBetweenUses	local_b8	selectWordOp2B	INFERRED	B-side saved select word of operand 2 (frame order: op1 in local_c8[3], op2 here, other in local_b4)
+local	Inst__swapMatchedOperandsBetweenUses	local_b4	selectWordOtherB	INFERRED	B-side saved select word of the consumer's other operand

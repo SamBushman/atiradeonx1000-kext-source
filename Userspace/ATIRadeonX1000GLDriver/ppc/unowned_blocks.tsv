@@ -3452,7 +3452,7 @@ ffd5c	ffd60	millicode	FUN_000fd5c8	1
 193b88	193ba8	eh-pad	FUN_00193b3c	8	0x193cc0,__Unwind_Resume
 193bd0	193be8	other	FUN_00193b3c	6	
 193c74	193c94	eh-pad	FUN_00193c00	8	0x193cc0,__Unwind_Resume
-193d94	193d98	millicode	FUN_00193d18	1	
+193d94	193d98	millicode	List__freeAllNodes	1	
 193f04	193f08	millicode	Arena__bytesInUse	1	
 194bac	194be8	eh-pad	HashTable__grow	15	0x193cc0,__Unwind_Resume
 194dfc	194e1c	eh-pad	HashTable__insert	8	0x193cc0,__Unwind_Resume

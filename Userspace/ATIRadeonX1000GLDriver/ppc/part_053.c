@@ -1,12 +1,12 @@
 #include "decls.h"
 
 /* R520VMachineAssembler__vslot27_assembleLoopHeader @ 0x19d858 (1008 bytes) */
-int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, param_4, param_5, compiler, param_7)
+int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, param_4, traversal, compiler, param_7)
   int *this;
   int node;
   undefined4 block;
   undefined4 param_4;
-  undefined4 param_5;
+  undefined4 traversal;
   undefined4 compiler;
   undefined4 param_7;
 {
@@ -34,7 +34,7 @@ int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, param_4
   
   program = *(int **)(node + 0xac);
   a5 = compiler;
-  branchInst = Block__getBranchInst(node,node,block,param_4,param_5,compiler,param_7);
+  branchInst = Block__getBranchInst(node,node,block,param_4,traversal,compiler,param_7);
   if (*program != 0) goto LAB_0019dc0c;
   loopStackSlot = (uint *)0x0;
   condSwizzle = *(uint *)(this[0x25] + 4);
@@ -126,11 +126,11 @@ LAB_0019dab0:
             (predicatedInst,(loopStackEntry - ((loopStackEntry - 1) + (uint)(loopStackEntry == 0))) + 2,a2,selectByte,compiler,a5,loopStackEntry - 1)
   ;
   Block__appendInst(node,predicatedInst);
-  FUN_00193f20(branchInst);
+  DListNode__unlinkAndDelete(branchInst);
   *(undefined4 *)(node + 0x130) = 0;
 LAB_0019dc0c:
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
-  return Block__accept(*(undefined4 *)(node + 0x13c),param_5);
+  return Block__accept(*(undefined4 *)(node + 0x13c),traversal);
 }
 
 /* R520VMachineAssembler__vslot30_assembleBlockThenSlot40 @ 0x19dc48 (104 bytes) */
@@ -532,7 +532,7 @@ LAB_0019e3d4:
     IROperand__setModifierBits(predSetInst + loopIndex * 6 + 0x23,1,1);
   }
   Block__appendInst(node,predSetInst);
-  FUN_00193f20(branchInst);
+  DListNode__unlinkAndDelete(branchInst);
   *(undefined4 *)(node + 0x130) = 0;
 LAB_0019e5d0:
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
@@ -919,13 +919,13 @@ int ilSourceOperandWordCount(param_1)
 {
   uint uVar1;
   int iVar2;
-  uint *loopIndex;
+  uint *loopPtr;
   uint loopIndex2;
   
-  loopIndex = param_1 + 1;
+  loopPtr = param_1 + 1;
   uVar1 = *param_1;
   if ((uVar1 & 0x400000) != 0) {
-    loopIndex = param_1 + 2;
+    loopPtr = param_1 + 2;
   }
   if ((uVar1 & 0x1800000) == 0) {
     loopIndex2 = 0;
@@ -935,20 +935,20 @@ int ilSourceOperandWordCount(param_1)
     else {
       do {
         loopIndex2 = loopIndex2 + 1;
-        iVar2 = ((int (*)())ilSourceOperandWordCount)(loopIndex);
+        iVar2 = ((int (*)())ilSourceOperandWordCount)(loopPtr);
         uVar1 = *param_1;
-        loopIndex = loopIndex + iVar2;
+        loopPtr = loopPtr + iVar2;
       } while (loopIndex2 < (uVar1 >> 0x19 & 1));
     }
     if ((uVar1 & 0x1800000) == 0) goto LAB_0019ed78;
   }
-  loopIndex = (uint *)((int (*)())ilSkipRelativeAddressWords)(uVar1 >> 0x17 & 3,uVar1 >> 0x19 & 1,loopIndex);
+  loopPtr = (uint *)((int (*)())ilSkipRelativeAddressWords)(uVar1 >> 0x17 & 3,uVar1 >> 0x19 & 1,loopPtr);
   uVar1 = *param_1;
 LAB_0019ed78:
   if ((uVar1 & 0x4000000) != 0) {
-    loopIndex = loopIndex + 1;
+    loopPtr = loopPtr + 1;
   }
-  return (int)loopIndex - (int)param_1 >> 2;
+  return (int)loopPtr - (int)param_1 >> 2;
 }
 
 /* ilInstructionHeaderWordCount @ 0x19edb4 (84 bytes) */
@@ -2115,7 +2115,7 @@ int R520MachineAssembler__vslot66_selectBitsForLiteralLanes(this, sourceIndex, p
   int *a0;
   int operandRecord;
   uint *packedWord;
-  byte *loopIndex2;
+  byte *loopPtr2;
   int loopIndex;
   uint uVar9;
   
@@ -2126,10 +2126,10 @@ int R520MachineAssembler__vslot66_selectBitsForLiteralLanes(this, sourceIndex, p
     do {
       a0 = (int *)IRInst__getOperandSource(inst,loopIndex);
       if ((a0 != (int *)0x0) && (operandRecord = (**(code **)(*a0 + 0x48))(a0), operandRecord != 0)) {
-        loopIndex2 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 16));
+        loopPtr2 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 16));
         uVar9 = 0;
         do {
-          bVar2 = *loopIndex2;
+          bVar2 = *loopPtr2;
           if (bVar2 < 4) {
             operandRecord = IRInst__getOperandRecord(inst,loopIndex);
             uVar4 = (uint)*(byte *)((uint)bVar2 + operandRecord + 0x10);
@@ -2147,7 +2147,7 @@ int R520MachineAssembler__vslot66_selectBitsForLiteralLanes(this, sourceIndex, p
             }
           }
           bVar1 = uVar9 != 6;
-          loopIndex2 = loopIndex2 + 1;
+          loopPtr2 = loopPtr2 + 1;
           uVar9 = uVar9 + 3;
         } while (bVar1);
       }
@@ -2304,7 +2304,7 @@ int evaluateConstantComparison(inst, resultKnownOut)
   int inst;
   undefined4 *resultKnownOut;
 {
-  undefined4 uVar1;
+  undefined4 laneMask;
   int iVar2;
   bool bVar3;
   int local_48;
@@ -2312,10 +2312,10 @@ int evaluateConstantComparison(inst, resultKnownOut)
   int local_30;
   float local_2c;
   
-  uVar1 = DAT_001b2d70;
+  laneMask = DAT_001b2d70;
   iVar2 = IRInst__getUniformSourceConstant(inst,1,DAT_001b2d70,&local_48);
   if ((((iVar2 == 0) || (local_48 != 2)) ||
-      (iVar2 = IRInst__getUniformSourceConstant(inst,2,uVar1,&local_30), iVar2 == 0)) || (local_30 != 2)) {
+      (iVar2 = IRInst__getUniformSourceConstant(inst,2,laneMask,&local_30), iVar2 == 0)) || (local_30 != 2)) {
     bVar3 = false;
     *resultKnownOut = 0;
   }
@@ -2378,6 +2378,7 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   undefined4 param_6;
   undefined4 param_7;
 {
+  int inst;
   undefined4 sourceDef;
   bool bVar1;
   int iVar2;
@@ -2385,15 +2386,15 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   undefined4 uVar4;
   undefined4 *puVar5;
   int a3;
-  uint uVar6;
+  uint vectorFilledCount;
   undefined4 uVar7;
-  uint *puVar8;
+  uint *vector;
   
   a3 = compiler;
-  iVar3 = Block__getBranchInst(node,node,block,compiler,param_5,param_6,param_7);
+  inst = Block__getBranchInst(node,node,block,compiler,param_5,param_6,param_7);
   uVar7 = *(undefined4 *)(compiler + COMP_currentProgram);
-  iVar2 = *(int *)(iVar3 + 300);
-  sourceDef = IRInst__getOperandSource(iVar3,1);
+  iVar2 = *(int *)(inst + 300);
+  sourceDef = IRInst__getOperandSource(inst,1);
   uVar4 = thunk_FUN_00134de8(uVar7,sourceDef);
   iVar3 = this[0x18];
   (**(code **)(*this + 0x34))
@@ -2406,15 +2407,15 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   if (bVar1) {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -0x44) = 1;
   }
-  puVar8 = *(uint **)(this[4] + 0x24);
-  uVar6 = puVar8[1];
-  if (uVar6 < *puVar8) {
-    _memset(uVar6 * 4 + puVar8[2],0,4);
-    puVar5 = (undefined4 *)(uVar6 * 4 + puVar8[2]);
-    puVar8[1] = uVar6 + 1;
+  vector = *(uint **)(this[4] + 0x24);
+  vectorFilledCount = vector[1];
+  if (vectorFilledCount < *vector) {
+    _memset(vectorFilledCount * 4 + vector[2],0,4);
+    puVar5 = (undefined4 *)(vectorFilledCount * 4 + vector[2]);
+    vector[1] = vectorFilledCount + 1;
   }
   else {
-    puVar5 = (undefined4 *)Vector__elementRefGrow(puVar8,uVar6);
+    puVar5 = (undefined4 *)Vector__elementRefGrow(vector,vectorFilledCount);
   }
   *puVar5 = uVar4;
   return;

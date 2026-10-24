@@ -1627,7 +1627,7 @@ int Block__detach(block)
   bitsetWord = (*(uint *)(block + 0xb4) >> 3 & 0x1ffffffc) + *(int *)(*(int *)(block + 0xac) + 0x3bc)
   ;
   *(uint *)(bitsetWord + 8) = (-2 << bitIndex | 0xfffffffeU >> 0x20 - bitIndex) & *(uint *)(bitsetWord + 8);
-  return FUN_00193f20(block);
+  return DListNode__unlinkAndDelete(block);
 }
 
 /* Block__appendInst @ 0xe7688 (60 bytes) */

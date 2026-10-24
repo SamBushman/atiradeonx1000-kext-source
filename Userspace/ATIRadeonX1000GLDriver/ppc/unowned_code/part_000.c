@@ -1702,7 +1702,7 @@ int orph_e2084(param_1)
   iVar1 = param_1;
   do {
     if (*(int *)(iVar1 + 0x370) != 0) {
-      FUN_00193d18(*(int *)(iVar1 + 0x370));
+      List__freeAllNodes(*(int *)(iVar1 + 0x370));
       (**(code **)(param_1 + 0x34c))
                 (*(undefined4 *)(param_1 + 0x354),*(undefined4 *)(iVar1 + 0x370));
       *(undefined4 *)(iVar1 + 0x370) = 0;
@@ -1726,7 +1726,7 @@ int orph_e208c(param_1)
   iVar1 = param_1;
   do {
     if (*(int *)(iVar1 + 0x370) != 0) {
-      FUN_00193d18(*(int *)(iVar1 + 0x370));
+      List__freeAllNodes(*(int *)(iVar1 + 0x370));
       (**(code **)(param_1 + 0x34c))
                 (*(undefined4 *)(param_1 + 0x354),*(undefined4 *)(iVar1 + 0x370));
       *(undefined4 *)(iVar1 + 0x370) = 0;

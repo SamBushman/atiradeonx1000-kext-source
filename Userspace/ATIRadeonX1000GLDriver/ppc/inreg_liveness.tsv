@@ -89,10 +89,10 @@
 14e6e4	Inst__reassociate_14e6e4	r7	PASS-deep	14e9a4 bl 0x105594
 14e6e4	Inst__reassociate_14e6e4	r8	PASS-deep	14e9a4 bl 0x105594
 14e6e4	Inst__reassociate_14e6e4	r9	PASS-deep	14e9a4 bl 0x105594
-1506d0	FUN_001506d0	r6	PASS-deep	1506f8 bl 0x146cd8
-1506d0	FUN_001506d0	r7	PASS-deep	1506f8 bl 0x146cd8
-1506d0	FUN_001506d0	r8	PASS-deep	1506f8 bl 0x146cd8
-1506d0	FUN_001506d0	r9	PASS-deep	1506f8 bl 0x146cd8
+1506d0	Inst__reassociateUsePair	r6	PASS-deep	1506f8 bl 0x146cd8
+1506d0	Inst__reassociateUsePair	r7	PASS-deep	1506f8 bl 0x146cd8
+1506d0	Inst__reassociateUsePair	r8	PASS-deep	1506f8 bl 0x146cd8
+1506d0	Inst__reassociateUsePair	r9	PASS-deep	1506f8 bl 0x146cd8
 1507d0	FUN_001507d0	r6	PASS-deep	150810 bl 0x105594
 1507d0	FUN_001507d0	r7	PASS-deep	150810 bl 0x105594
 1507d0	FUN_001507d0	r8	PASS-deep	150810 bl 0x105594

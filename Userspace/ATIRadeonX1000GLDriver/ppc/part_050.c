@@ -103,7 +103,7 @@ int FudoPs__encodeUniformImmediate(this, values, laneSelectors)
 {
   unsigned int ghidra_home[8] = { this, values, laneSelectors, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool haveFirstValue;
-  char *loopIndex;
+  char *loopPtr;
   undefined4 callResult;
   int loopRemaining;
   double commonValue;
@@ -114,9 +114,9 @@ int FudoPs__encodeUniformImmediate(this, values, laneSelectors)
   loopRemaining = 4;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = laneSelectors;
   commonValue = (double)FLOAT_001aa0d4;
-  loopIndex = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
+  loopPtr = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
   do {
-    if (*loopIndex != '\x04') {
+    if (*loopPtr != '\x04') {
       if (haveFirstValue) {
         if ((double)*values != commonValue) {
           return 0;
@@ -128,7 +128,7 @@ int FudoPs__encodeUniformImmediate(this, values, laneSelectors)
         haveFirstValue = true;
       }
     }
-    loopIndex = loopIndex + 1;
+    loopPtr = loopPtr + 1;
     values = values + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
@@ -146,10 +146,10 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
   float fVar1;
   bool bVar2;
   int *piVar3;
-  uint *loopIndex2;
+  uint *loopPtr2;
   undefined *puVar5;
   int iVar6;
-  dword *loopIndex;
+  dword *loopPtr;
   undefined4 uVar8;
   int loopRemaining2;
   int loopRemaining;
@@ -163,19 +163,19 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     bVar2 = true;
     iVar6 = 1;
     piVar3 = laneSwizzle;
-    loopIndex = constants;
+    loopPtr = constants;
     do {
       if (*(char *)piVar3 != '\x04') {
         if (bVar2) {
-          fVar1 = (float)*loopIndex;
+          fVar1 = (float)*loopPtr;
           bVar2 = false;
         }
-        else if ((float)*loopIndex != fVar1) {
+        else if ((float)*loopPtr != fVar1) {
           iVar6 = 0;
         }
       }
       piVar3 = (int *)((int)piVar3 + 1);
-      loopIndex = loopIndex + 1;
+      loopPtr = loopPtr + 1;
       loopRemaining2 = loopRemaining2 + -1;
     } while (loopRemaining2 != 0);
     piVar3 = laneSwizzle;
@@ -185,13 +185,13 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     else {
       puVar5 = (undefined *)0x4;
       loopRemaining2 = 4;
-      loopIndex2 = &local_38;
+      loopPtr2 = &local_38;
       do {
-        *loopIndex2 = 0x7ffffffe;
-        loopIndex2 = loopIndex2 + 1;
+        *loopPtr2 = 0x7ffffffe;
+        loopPtr2 = loopPtr2 + 1;
         loopRemaining2 = loopRemaining2 + -1;
       } while (loopRemaining2 != 0);
-      loopIndex = ((unsigned char *)0x4);
+      loopPtr = ((unsigned char *)0x4);
       loopRemaining2 = 0;
       loopRemaining = 4;
       do {
@@ -206,7 +206,7 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
       return loopRemaining2;
     }
     uVar8 = *(undefined4 *)(program + 0x3ac);
-    iVar6 = FUN_000f5f94(uVar8,constants,laneSwizzle,piVar3,puVar5,iVar6,loopIndex);
+    iVar6 = FUN_000f5f94(uVar8,constants,laneSwizzle,piVar3,puVar5,iVar6,loopPtr);
     if (iVar6 != 0) {
       return iVar6;
     }
@@ -231,7 +231,7 @@ int FudoPs__vslot59_tryEncodeSourceConstant(this, inst, srcIndex, laneSwizzle, c
   int *a0;
   int loopRemaining;
   undefined4 result;
-  float *loopIndex2;
+  float *loopPtr2;
   int loopIndex;
   uint laneMaskWord;
   undefined4 srcSelectWord;
@@ -253,18 +253,18 @@ LAB_00191c54:
     loopIndex = 0;
     srcSelectWord = *(undefined4 *)(loopRemaining + 0x10);
     loopRemaining = 4;
-    loopIndex2 = (float *)&constLane0;
+    loopPtr2 = (float *)&constLane0;
     do {
       laneMaskByte = *(char *)((int)&laneMaskWord + loopIndex);
-      *loopIndex2 = 0.0;
+      *loopPtr2 = 0.0;
       if (laneMaskByte == '\0') {
         if ((((int)*(char *)(a0 + 0x57) >> (*(byte *)((int)&srcSelectWord + loopIndex) & 0x3f) & 1U) == 0) ||
            (((laneValue = GH_U2F((unsigned int)(a0[(uint)*(byte *)((int)&srcSelectWord + loopIndex) * 6 + 8])), laneValue != 0.0 &&
              (laneValue != 1.0)) && (halfBits = 0x3f000000, laneValue != 0.5)))) goto LAB_00191c54;
-        *loopIndex2 = laneValue;
+        *loopPtr2 = laneValue;
       }
       loopIndex = loopIndex + 1;
-      loopIndex2 = loopIndex2 + 1;
+      loopPtr2 = loopPtr2 + 1;
       loopRemaining = loopRemaining + -1;
     } while (loopRemaining != 0);
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(compiler + 0x6c4),srcIndex,(double)GH_U2F((unsigned int)(constLane0)),
@@ -293,30 +293,30 @@ int FudoPs__classifyLiteralOperand(this, laneValues, kindOut, laneSelectors, com
   unsigned int ghidra_home[8] = { this, laneValues, kindOut, laneSelectors, compiler, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   float laneValue;
   bool haveFirstValue;
-  char *loopIndex;
-  float *loopIndex3;
-  char *loopIndex2;
+  char *loopPtr;
+  float *loopPtr3;
+  char *loopPtr2;
   int loopRemaining;
   int loopRemaining2;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = laneSelectors;
   *kindOut = 0xffffffff;
-  loopIndex = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12));
+  loopPtr = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 12));
   loopRemaining = 4;
-  loopIndex3 = laneValues;
-  loopIndex2 = loopIndex;
-  while ((((*loopIndex2 == '\x04' || (laneValue = *loopIndex3, laneValue == FLOAT_001aa0d4)) ||
+  loopPtr3 = laneValues;
+  loopPtr2 = loopPtr;
+  while ((((*loopPtr2 == '\x04' || (laneValue = *loopPtr3, laneValue == FLOAT_001aa0d4)) ||
           (laneValue == FLOAT_001aa10c)) || (laneValue == 1.0))) {
-    loopIndex2 = loopIndex2 + 1;
-    loopIndex3 = loopIndex3 + 1;
+    loopPtr2 = loopPtr2 + 1;
+    loopPtr3 = loopPtr3 + 1;
     loopRemaining = loopRemaining + -1;
     if (loopRemaining == 0) {
-      loopRemaining = (int)loopIndex2 - (int)loopIndex;
+      loopRemaining = (int)loopPtr2 - (int)loopPtr;
       do {
-        if (*loopIndex == '\x04') {
+        if (*loopPtr == '\x04') {
           *laneValues = 0.0;
         }
-        loopIndex = loopIndex + 1;
+        loopPtr = loopPtr + 1;
         laneValues = laneValues + 1;
         loopRemaining = loopRemaining + -1;
       } while (loopRemaining != 0);
@@ -329,20 +329,20 @@ int FudoPs__classifyLiteralOperand(this, laneValues, kindOut, laneSelectors, com
   }
   loopRemaining = 4;
   haveFirstValue = true;
-  loopIndex3 = laneValues;
+  loopPtr3 = laneValues;
   laneValue = FLOAT_001aa0d4;
   do {
-    if (*loopIndex != '\x04') {
+    if (*loopPtr != '\x04') {
       if (haveFirstValue) {
-        laneValue = *loopIndex3;
+        laneValue = *loopPtr3;
         haveFirstValue = false;
       }
-      else if (*loopIndex3 != laneValue) {
+      else if (*loopPtr3 != laneValue) {
         return 0;
       }
     }
-    loopIndex = loopIndex + 1;
-    loopIndex3 = loopIndex3 + 1;
+    loopPtr = loopPtr + 1;
+    loopPtr3 = loopPtr3 + 1;
     loopRemaining = loopRemaining + -1;
   } while (loopRemaining != 0);
   loopRemaining = (**(code **)(*this + 0x98))(this,laneValues,(*(unsigned int *)((unsigned char *)ghidra_home + 12)));
@@ -406,7 +406,7 @@ int FudoPs__ctor_191efc(this, compiler, createSchedModels)
   uint loopIndex3;
   float *rowStart;
   uint loopIndex2;
-  float *loopIndex;
+  float *loopPtr;
   double powerOfTwo;
   
   KhanPs__ctor_128fd0(this,compiler,0);
@@ -457,9 +457,9 @@ int FudoPs__ctor_191efc(this, compiler, createSchedModels)
   loopIndex3 = 0;
   do {
     loopIndex2 = 0;
-    loopIndex = rowStart;
+    loopPtr = rowStart;
     do {
-      loopIndex = loopIndex + 1;
+      loopPtr = loopPtr + 1;
       if (loopIndex3 == 0) {
         immediateValue = FLOAT_001aa1c0;
         if (loopIndex2 != 0) {
@@ -474,7 +474,7 @@ int FudoPs__ctor_191efc(this, compiler, createSchedModels)
                 ((float)((double)CONCAT44(0x43300000,loopIndex2 ^ 0x80000000) - intToDoubleBias) * mantissaStep + oneValue);
       }
       notLastMantissa = loopIndex2 != 7;
-      *loopIndex = immediateValue;
+      *loopPtr = immediateValue;
       loopIndex2 = loopIndex2 + 1;
     } while (notLastMantissa);
     notLastMantissa = loopIndex3 != 0xf;
@@ -500,7 +500,7 @@ int FudoPs__ctor_1920e0(this, compiler, createSchedModels)
   uint loopIndex3;
   float *rowStart;
   uint loopIndex2;
-  float *loopIndex;
+  float *loopPtr;
   double powerOfTwo;
   
   KhanPs__ctor_128fd0(this,compiler,0);
@@ -551,9 +551,9 @@ int FudoPs__ctor_1920e0(this, compiler, createSchedModels)
   loopIndex3 = 0;
   do {
     loopIndex2 = 0;
-    loopIndex = rowStart;
+    loopPtr = rowStart;
     do {
-      loopIndex = loopIndex + 1;
+      loopPtr = loopPtr + 1;
       if (loopIndex3 == 0) {
         immediateValue = FLOAT_001aa1c0;
         if (loopIndex2 != 0) {
@@ -568,7 +568,7 @@ int FudoPs__ctor_1920e0(this, compiler, createSchedModels)
                 ((float)((double)CONCAT44(0x43300000,loopIndex2 ^ 0x80000000) - intToDoubleBias) * mantissaStep + oneValue);
       }
       notLastMantissa = loopIndex2 != 7;
-      *loopIndex = immediateValue;
+      *loopPtr = immediateValue;
       loopIndex2 = loopIndex2 + 1;
     } while (notLastMantissa);
     notLastMantissa = loopIndex3 != 0xf;
@@ -579,12 +579,16 @@ int FudoPs__ctor_1920e0(this, compiler, createSchedModels)
 }
 
 /* FUN_001922c4 @ 0x1922c4 (1016 bytes) */
-int FUN_001922c4(param_1, param_2, inst, param_4)
+int FUN_001922c4(param_1, param_2, inst, program)
   undefined4 param_1;
   undefined4 param_2;
   int *inst;
-  int param_4;
+  int program;
 {
+  int newSource;
+  int operandIndex2;
+  int operandRecord1;
+  int operandIndex;
   undefined4 sourceDef;
   int operandRecord2;
   int operandRecord;
@@ -594,8 +598,8 @@ int FUN_001922c4(param_1, param_2, inst, param_4)
   undefined4 uVar4;
   int loopIndex;
   int iVar6;
-  undefined4 uVar7;
-  undefined4 uVar8;
+  undefined4 set;
+  undefined4 set2;
   undefined4 uVar9;
   undefined4 uVar10;
   undefined4 uVar11;
@@ -605,7 +609,7 @@ int FUN_001922c4(param_1, param_2, inst, param_4)
   undefined4 local_44;
   undefined4 local_40;
   
-  uVar11 = *(undefined4 *)(param_4 + 8);
+  uVar11 = *(undefined4 *)(program + 8);
   iVar2 = *(int *)(inst[0x22] + 8);
   if (((((iVar2 == 0x5d) || (iVar2 == 0x29)) || (iVar2 == 0x5b)) ||
       ((iVar2 == 0x27 || (iVar2 == 0x5e)))) ||
@@ -613,100 +617,100 @@ int FUN_001922c4(param_1, param_2, inst, param_4)
     switch(iVar2) {
     case 0x27:
     case 0x5b:
-      iVar12 = 1;
-      iVar2 = 2;
+      operandIndex = 1;
+      operandIndex2 = 2;
       uVar9 = 3;
       uVar10 = 2;
-      uVar8 = 1;
-      uVar7 = 1;
+      set2 = 1;
+      set = 1;
       break;
     case 0x28:
     case 0x5c:
-      iVar12 = 2;
-      iVar2 = 1;
+      operandIndex = 2;
+      operandIndex2 = 1;
       uVar9 = 2;
       uVar10 = 3;
-      uVar8 = 0;
-      uVar7 = 0;
+      set2 = 0;
+      set = 0;
       break;
     case 0x29:
     case 0x5d:
-      iVar12 = 1;
-      iVar2 = 2;
+      operandIndex = 1;
+      operandIndex2 = 2;
       uVar9 = 3;
       uVar10 = 2;
-      uVar8 = 0;
-      uVar7 = 0;
+      set2 = 0;
+      set = 0;
       break;
     case 0x2a:
     case 0x5e:
-      iVar12 = 1;
-      iVar2 = 2;
+      operandIndex = 1;
+      operandIndex2 = 2;
       uVar9 = 2;
       uVar10 = 3;
-      uVar8 = 1;
-      uVar7 = 1;
+      set2 = 1;
+      set = 1;
       break;
     default:
-      iVar12 = 0;
-      iVar2 = 0;
+      operandIndex = 0;
+      operandIndex2 = 0;
       uVar9 = 0;
       uVar10 = 0;
-      uVar8 = 0;
-      uVar7 = 0;
+      set2 = 0;
+      set = 0;
     }
     inst2 = IRInst__create(0x12,uVar11);
-    sourceDef = IRInst__getOperandSource(inst,iVar12);
-    IRInst__setOperandSource(inst2,iVar12,sourceDef,*(uint *)(param_4 + 0x30) >> 7 & 1,uVar11);
-    loopIndex = IRInst__getOperandRecord(inst,iVar12);
+    sourceDef = IRInst__getOperandSource(inst,operandIndex);
+    IRInst__setOperandSource(inst2,operandIndex,sourceDef,*(uint *)(program + 0x30) >> 7 & 1,uVar11);
+    loopIndex = IRInst__getOperandRecord(inst,operandIndex);
     uVar4 = *(undefined4 *)(loopIndex + 0x10);
-    loopIndex = IRInst__getOperandRecord(inst2,iVar12);
+    loopIndex = IRInst__getOperandRecord(inst2,operandIndex);
     *(undefined4 *)(loopIndex + 0x10) = uVar4;
-    loopIndex = inst2 + iVar12 * 0x18 + 0x8c;
-    IROperand__setModifierBits(loopIndex,2,(uint)inst[iVar12 * 6 + 0x28] >> 1 & 1);
-    IROperand__setModifierBits(loopIndex,1,inst[iVar12 * 6 + 0x28] & 1);
-    sourceDef = IRInst__getOperandSource(inst,iVar2);
-    IRInst__setOperandSource(inst2,iVar2,sourceDef,*(uint *)(param_4 + 0x30) >> 7 & 1,uVar11);
-    operandRecord = IRInst__getOperandRecord(inst,iVar2);
+    loopIndex = inst2 + operandIndex * 0x18 + 0x8c;
+    IROperand__setModifierBits(loopIndex,2,(uint)inst[operandIndex * 6 + 0x28] >> 1 & 1);
+    IROperand__setModifierBits(loopIndex,1,inst[operandIndex * 6 + 0x28] & 1);
+    sourceDef = IRInst__getOperandSource(inst,operandIndex2);
+    IRInst__setOperandSource(inst2,operandIndex2,sourceDef,*(uint *)(program + 0x30) >> 7 & 1,uVar11);
+    operandRecord = IRInst__getOperandRecord(inst,operandIndex2);
     uVar4 = *(undefined4 *)(operandRecord + 0x10);
-    operandRecord = IRInst__getOperandRecord(inst2,iVar2);
+    operandRecord = IRInst__getOperandRecord(inst2,operandIndex2);
     *(undefined4 *)(operandRecord + 0x10) = uVar4;
-    iVar12 = inst2 + iVar2 * 0x18 + 0x8c;
-    IROperand__setModifierBits(iVar12,2,(uint)inst[iVar2 * 6 + 0x28] >> 1 & 1);
-    IROperand__setModifierBits(iVar12,1,inst[iVar2 * 6 + 0x28] & 1U ^ 1);
+    operandRecord1 = inst2 + operandIndex2 * 0x18 + 0x8c;
+    IROperand__setModifierBits(operandRecord1,2,(uint)inst[operandIndex2 * 6 + 0x28] >> 1 & 1);
+    IROperand__setModifierBits(operandRecord1,1,inst[operandIndex2 * 6 + 0x28] & 1U ^ 1);
     operandRecord2 = IRInst__getOperandRecord(inst,0);
     uVar4 = *(undefined4 *)(operandRecord2 + 0x10);
     *(undefined4 *)(inst2 + 0x94) = *(undefined4 *)(inst2 + 0x14c);
     *(undefined4 *)(inst2 + 0x9c) = uVar4;
     *(undefined4 *)(inst2 + 0x98) = 0;
     ((int (*)())DList__insertBefore)(inst2,inst);
-    if ((*(uint *)(param_4 + 0x30) & 0x80) == 0) {
-      *(int *)(inst2 + 0x160) = *(int *)(param_4 + 0x478) + 1;
+    if ((*(uint *)(program + 0x30) & 0x80) == 0) {
+      *(int *)(inst2 + 0x160) = *(int *)(program + 0x478) + 1;
     }
     *(int *)(inst2 + 0x158) = inst[0x56];
-    iVar2 = 0;
+    newSource = 0;
     local_40 = 0;
     local_48 = 0;
     local_44 = 0;
     IRInst__saveCounters(inst,&local_48,0xffffffff);
     if ((inst[5] & 0x200U) != 0) {
-      iVar2 = IRInst__getOperandSource(inst,inst[0x21]);
+      newSource = IRInst__getOperandSource(inst,inst[0x21]);
     }
     iVar12 = inst[4];
     ((int (*)())DList__unlink)(inst);
-    IRInst__setOperandSource(inst,1,0,*(uint *)(param_4 + 0x30) >> 7 & 1,uVar11);
-    IRInst__setOperandSource(inst,2,0,*(uint *)(param_4 + 0x30) >> 7 & 1,uVar11);
-    IRInst__reinitAsTrinary(inst,0x25,*(undefined4 *)(param_4 + 8));
+    IRInst__setOperandSource(inst,1,0,*(uint *)(program + 0x30) >> 7 & 1,uVar11);
+    IRInst__setOperandSource(inst,2,0,*(uint *)(program + 0x30) >> 7 & 1,uVar11);
+    IRInst__reinitAsTrinary(inst,0x25,*(undefined4 *)(program + 8));
     IRInst__restoreCounters(inst,&local_48);
     inst[4] = iVar12;
-    IRInst__setOperandSource(inst,1,inst2,*(uint *)(param_4 + 0x30) >> 7 & 1,uVar11);
+    IRInst__setOperandSource(inst,1,inst2,*(uint *)(program + 0x30) >> 7 & 1,uVar11);
     loopIndex = 0;
-    IROperand__setModifierBits(inst + 0x29,1,uVar8);
-    IROperand__setModifierBits(inst + 0x29,2,uVar7);
+    IROperand__setModifierBits(inst + 0x29,1,set2);
+    IROperand__setModifierBits(inst + 0x29,2,set);
     dVar13 = (double)FLOAT_001aa0e8;
-    ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_4,uVar10,dVar13,dVar13,dVar13,dVar13);
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,uVar10,dVar13,dVar13,dVar13,dVar13);
     dVar13 = (double)FLOAT_001aa0d4;
-    ((void (*)())IRInst__makeLiteralVec4Float)(inst,param_4,uVar9,dVar13,dVar13,dVar13,dVar13);
+    ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,uVar9,dVar13,dVar13,dVar13,dVar13);
     inst[0x25] = inst[0x53];
     inst[0x26] = 0;
     operandRecord = IRInst__getOperandRecord(inst2,0);
@@ -722,13 +726,13 @@ int FUN_001922c4(param_1, param_2, inst, param_4)
       bVar1 = loopIndex != 3;
       loopIndex = loopIndex + 1;
     } while (bVar1);
-    if (iVar2 != 0) {
-      IRInst__setExtraOperandSource(inst,iVar2,*(uint *)(param_4 + 0x30) >> 7 & 1,uVar11);
+    if (newSource != 0) {
+      IRInst__setExtraOperandSource(inst,newSource,*(uint *)(program + 0x30) >> 7 & 1,uVar11);
     }
     inst[0x56] = *(int *)(inst2 + 0x158);
     ((int (*)())DList__insertAfter)(inst,inst2);
-    if ((*(uint *)(param_4 + 0x30) & 0x80) == 0) {
-      Inst__r300ReassociateAddPair(inst,1,inst2,param_4);
+    if ((*(uint *)(program + 0x30) & 0x80) == 0) {
+      Inst__r300ReassociateAddPair(inst,1,inst2,program);
     }
   }
   return inst;
@@ -744,13 +748,16 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
   undefined4 passThroughR8;
   undefined4 passThroughR9;
 {
+  undefined4 srcInst;
+  undefined4 newSource;
+  undefined4 inst21;
   undefined4 changedFlag;
   int *operandDefInst;
   int *curInstCopy;
   int *combinedInst;
   int *combineInstA;
   bool bVar1;
-  char *loopIndex4;
+  char *loopPtr4;
   int loopIndex3;
   int *src1DefInst;
   undefined4 src1DefArg;
@@ -1045,15 +1052,15 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
                   }
                   Block__insertInstBefore(curInst[0x56],curInst,combineInstA);
                   laneMaskBytes[0] = *(int *)(PTR_DAT_001e8b64 + uVar17 * 4);
-                  loopIndex4 = PTR_DAT_001e8b64 + uVar20 * 4;
+                  loopPtr4 = PTR_DAT_001e8b64 + uVar20 * 4;
                   loopRemaining = 4;
                   loopIndex3 = 0;
                   do {
-                    if (*loopIndex4 != '\x01') {
-                      *(char *)((int)laneMaskBytes + loopIndex3) = *loopIndex4;
+                    if (*loopPtr4 != '\x01') {
+                      *(char *)((int)laneMaskBytes + loopIndex3) = *loopPtr4;
                     }
                     loopIndex3 = loopIndex3 + 1;
-                    loopIndex4 = loopIndex4 + 1;
+                    loopPtr4 = loopPtr4 + 1;
                     loopRemaining = loopRemaining + -1;
                   } while (loopRemaining != 0);
                   curInst[0x27] = laneMaskBytes[0];
@@ -1077,8 +1084,8 @@ LAB_00193490:
     Inst__r300Peephole_1882a4(curInst,program[PROG_compiler / 4]);
     for (loopIndex3 = 1; loopRemaining = (**(code **)(*curInst + 0x14))(curInst), loopIndex3 <= loopRemaining; loopIndex3 = loopIndex3 + 1
         ) {
-      uVar21 = IRInst__getOperandSource(curInst,loopIndex3);
-      Inst__r300ReassociateAddPair(curInst,loopIndex3,uVar21,program);
+      inst21 = IRInst__getOperandSource(curInst,loopIndex3);
+      Inst__r300ReassociateAddPair(curInst,loopIndex3,inst21,program);
     }
     loopIndex3 = Inst__r300ReassociateAddPair(inst,consumerSrcIndex,curInst,program);
     if (loopIndex3 != 0) {
@@ -1108,7 +1115,7 @@ LAB_00193490:
            (loopIndex = IRInst__getOperandSource(loopRemaining,*(undefined4 *)(loopRemaining + 0x84)),
            (*(uint *)(loopIndex + 0x14) & 0x200) == 0)) {
           loopIndex2 = 0;
-          uVar21 = IRInst__getOperandSource(loopRemaining,*(undefined4 *)(loopRemaining + 0x84));
+          newSource = IRInst__getOperandSource(loopRemaining,*(undefined4 *)(loopRemaining + 0x84));
           cloneResult = IRInst__clone(combinedInst,program[PROG_compiler / 4],0);
           curInstCopy = combinedInst;
           loopIndex = cloneResult;
@@ -1116,7 +1123,7 @@ LAB_00193490:
             callResult = IRInst__getOperandRecord(combinedInst,loopIndex3);
             uVar17 = (uint)*(byte *)(loopIndex2 + callResult + 0x10);
             if (uVar17 < 4) {
-              callResult = FUN_000f313c(uVar21,uVar17);
+              callResult = FUN_000f313c(newSource,uVar17);
               if (callResult == 0) {
                 *(undefined1 *)(loopIndex + 0x9c) = 1;
               }
@@ -1129,7 +1136,7 @@ LAB_00193490:
             loopIndex = loopIndex + 1;
             loopIndex2 = loopIndex2 + 1;
           } while (bVar1);
-          IRInst__setOperandSource(cloneResult,loopIndex3,uVar21,0,program[PROG_compiler / 4]);
+          IRInst__setOperandSource(cloneResult,loopIndex3,newSource,0,program[PROG_compiler / 4]);
           IRInst__setExtraOperandSource(combinedInst,cloneResult,0,program[PROG_compiler / 4]);
           Block__insertInstBefore(combinedInst[0x56],combinedInst,cloneResult);
           IRInst__setOperandSource(loopRemaining,*(undefined4 *)(loopRemaining + 0x84),0,0,program[PROG_compiler / 4]);
@@ -1157,8 +1164,8 @@ LAB_00193490:
                   }
                 }
                 else {
-                  uVar21 = IRInst__getOperandSource(cloneResult,loopIndex);
-                  loopRemaining = IRInst__clone(uVar21,program[PROG_compiler / 4],0);
+                  srcInst = IRInst__getOperandSource(cloneResult,loopIndex);
+                  loopRemaining = IRInst__clone(srcInst,program[PROG_compiler / 4],0);
                   IRInst__setOperandSource(cloneResult,loopIndex,loopRemaining,0,program[PROG_compiler / 4]);
                   Block__insertInstBefore(*(undefined4 *)(cloneResult + 0x158),cloneResult,loopRemaining);
                   if (0 < *(int *)(loopRemaining + 0x84)) {
@@ -1390,24 +1397,24 @@ int Arena__free(arena, ptr)
   return;
 }
 
-/* FUN_00193d18 @ 0x193d18 (124 bytes) */
-int FUN_00193d18(param_1)
-  int *param_1;
+/* List__freeAllNodes @ 0x193d18 (124 bytes) */
+int List__freeAllNodes(list)
+  int *list;
 {
   int *piVar1;
   int iVar2;
   
-  piVar1 = (int *)param_1[1];
+  piVar1 = (int *)list[1];
   while (piVar1 != (int *)0x0) {
     iVar2 = *piVar1;
-    (**(code **)(*param_1 + 0x34c))(*(undefined4 *)(*param_1 + 0x354),piVar1);
+    (**(code **)(*list + 0x34c))(*(undefined4 *)(*list + 0x354),piVar1);
     piVar1 = (int *)iVar2;
   }
-  param_1[3] = 0;
-  param_1[1] = 0;
-  param_1[5] = 0;
-  param_1[4] = 0;
-  param_1[2] = 0;
+  list[3] = 0;
+  list[1] = 0;
+  list[5] = 0;
+  list[4] = 0;
+  list[2] = 0;
   return;
 }
 
@@ -1502,17 +1509,17 @@ int DList__isEmpty(param_1)
   return *(int *)(param_1 + 8) == param_1 + 0xc;
 }
 
-/* FUN_00193f20 @ 0x193f20 (36 bytes) */
-int FUN_00193f20(param_1)
-  int *param_1;
+/* DListNode__unlinkAndDelete @ 0x193f20 (36 bytes) */
+int DListNode__unlinkAndDelete(node)
+  int *node;
 {
   int iVar1;
   int iVar2;
   
-  iVar2 = param_1[2];
-  iVar1 = *param_1;
-  *(int *)(iVar2 + 4) = param_1[1];
-  *(int *)(param_1[1] + 8) = iVar2;
+  iVar2 = node[2];
+  iVar1 = *node;
+  *(int *)(iVar2 + 4) = node[1];
+  *(int *)(node[1] + 8) = iVar2;
                     
                     
   (**(code **)(iVar1 + 4))();
@@ -1664,7 +1671,7 @@ int Vector__shellSort(param_1, param_2)
   uint uVar1;
   int iVar2;
   uint uVar3;
-  undefined4 *loopIndex2;
+  undefined4 *loopPtr2;
   uint loopIndex3;
   undefined4 uVar6;
   int loopIndex;
@@ -1684,11 +1691,11 @@ int Vector__shellSort(param_1, param_2)
         return;
       }
     } while (uVar3 <= uVar1);
-    loopIndex2 = (undefined4 *)(iVar8 + uVar1 * 4);
+    loopPtr2 = (undefined4 *)(iVar8 + uVar1 * 4);
     loopIndex = 0;
     loopIndex3 = uVar1;
     do {
-      uVar6 = *loopIndex2;
+      uVar6 = *loopPtr2;
       for (iVar9 = loopIndex; -1 < iVar9; iVar9 = iVar9 - uVar1) {
         iVar2 = (*param_2)(*(undefined4 *)(iVar8 + iVar9 * 4),uVar6);
         if (iVar2 < 1) break;
@@ -1697,7 +1704,7 @@ int Vector__shellSort(param_1, param_2)
       loopIndex3 = loopIndex3 + 1;
       loopIndex = loopIndex + 1;
       *(undefined4 *)(iVar8 + (uVar1 + iVar9) * 4) = uVar6;
-      loopIndex2 = loopIndex2 + 1;
+      loopPtr2 = loopPtr2 + 1;
       uVar3 = *(uint *)(param_1 + 4);
     } while (loopIndex3 < uVar3);
   } while( true );
@@ -2115,7 +2122,7 @@ int HashTable__grow(param_1)
   undefined4 *puVar4;
   uint uVar5;
   int iVar6;
-  undefined4 *loopIndex;
+  undefined4 *loopPtr;
   uint loopIndex3;
   uint *puVar9;
   uint uVar10;
@@ -2133,7 +2140,7 @@ int HashTable__grow(param_1)
   _memset(allocation2,0,*param_1 << 2);
   if (0 < (int)uVar5) {
     loopIndex3 = 0;
-    loopIndex = (undefined4 *)(allocation2 + uVar5 * 4);
+    loopPtr = (undefined4 *)(allocation2 + uVar5 * 4);
     iVar6 = 0;
     do {
       puVar13 = *(uint **)(param_1[2] + iVar6);
@@ -2159,7 +2166,7 @@ int HashTable__grow(param_1)
         allocation3 = ((int (*)())Arena__alloc)(uVar17,8);
         allocation[3] = allocation3;
         loopIndex2 = 0;
-        *loopIndex = puVar14;
+        *loopPtr = puVar14;
         uVar10 = puVar13[1];
         puVar9 = *(uint **)(allocation2 + iVar6);
         iVar12 = uVar10 << 2;
@@ -2210,7 +2217,7 @@ int HashTable__grow(param_1)
       }
       loopIndex3 = loopIndex3 + 1;
       iVar6 = iVar6 + 4;
-      loopIndex = loopIndex + 1;
+      loopPtr = loopPtr + 1;
     } while (uVar5 != loopIndex3);
   }
   param_1[2] = allocation2;
@@ -2266,7 +2273,7 @@ int HashTable__grow_194e44(param_1)
   undefined4 *puVar5;
   uint uVar6;
   int iVar7;
-  undefined4 *loopIndex;
+  undefined4 *loopPtr;
   uint loopIndex3;
   uint *puVar10;
   uint uVar11;
@@ -2283,7 +2290,7 @@ int HashTable__grow_194e44(param_1)
   _memset(allocation2,0,*param_1 << 2);
   if (uVar6 != 0) {
     loopIndex3 = 0;
-    loopIndex = (undefined4 *)(allocation2 + uVar6 * 4);
+    loopPtr = (undefined4 *)(allocation2 + uVar6 * 4);
     iVar7 = 0;
     do {
       puVar14 = *(uint **)(param_1[2] + iVar7);
@@ -2309,7 +2316,7 @@ int HashTable__grow_194e44(param_1)
         allocation3 = ((int (*)())Arena__alloc)(uVar17,8);
         allocation[3] = allocation3;
         loopIndex2 = 0;
-        *loopIndex = puVar15;
+        *loopPtr = puVar15;
         uVar11 = puVar14[1];
         puVar10 = *(uint **)(allocation2 + iVar7);
         iVar13 = uVar11 << 2;
@@ -2360,7 +2367,7 @@ int HashTable__grow_194e44(param_1)
       }
       loopIndex3 = loopIndex3 + 1;
       iVar7 = iVar7 + 4;
-      loopIndex = loopIndex + 1;
+      loopPtr = loopPtr + 1;
     } while (uVar6 != loopIndex3);
   }
   param_1[2] = allocation2;
