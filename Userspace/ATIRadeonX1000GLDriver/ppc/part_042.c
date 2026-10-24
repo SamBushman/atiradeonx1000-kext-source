@@ -2415,7 +2415,7 @@ LAB_0013cee8:
           }
           else {
             bVar17 = false;
-            FUN_0010d4cc(iVar11,compiler);
+            IRInst__convertCompareToBinaryAlu(iVar11,compiler);
             Block__appendInst(uVar6,iVar11);
           }
           piVar1 = *(int **)(iVar3 + 0x98);
@@ -3024,7 +3024,7 @@ LAB_0013dcf0:
                           iVar11 = iVar11 + 1;
                         } while (iVar11 <= iVar23);
                       }
-                      FUN_0010c37c(piVar20,*(undefined4 *)(program + PROG_compiler));
+                      IRInst__removeDefaultSelectOperands(piVar20,*(undefined4 *)(program + PROG_compiler));
                       iVar23 = piVar20[0x21];
                       if ((piVar20[5] & 0x200U) != 0) {
                         iVar23 = iVar23 + -1;
@@ -3206,7 +3206,7 @@ code_r0x0013e80c:
                     (iVar17 = RegKind__flagBit8(piVar20[0x26]), iVar17 != 0)))) {
                   iVar17 = IRInst__getOperandRecord(piVar20,0);
                   if (*(int *)(iVar17 + 0x10) != DAT_001b0014) {
-                    FUN_0010d358(piVar20,*(undefined4 *)(program + PROG_compiler));
+                    IRInst__canonicalizeCommutativeOperands(piVar20,*(undefined4 *)(program + PROG_compiler));
                   }
                   if ((piVar20[5] & 0x200U) != 0) {
                     iVar17 = *(int *)(iVar8 + piVar20[0x53] * 4);
@@ -3744,7 +3744,7 @@ int FUN_0013f3d4(inst, param_2)
         SelectWord__mergeWrittenLanes(local_38,local_48,*(undefined4 *)(operandRecord2 + 0x10));
         inst[0x27] = local_38[0];
         local_48 = local_38[0];
-        piVar9 = (int *)((int (*)())FUN_0010bed0)(2,local_38[0],iVar6,param_2,*(undefined4 *)(param_2 + 8),
+        piVar9 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,local_38[0],iVar6,param_2,*(undefined4 *)(param_2 + 8),
                                      (double)FLOAT_001aa0d4);
         do {
           if (*(char *)((int)&local_48 + iVar13) == '\0') {
@@ -4445,13 +4445,13 @@ LAB_001405bc:
                 iVar21 = iVar21 + 1;
               } while (bVar20);
               if (iVar14 == 1) {
-                FUN_0010cfcc(&local_58,piVar11,iVar9,pass);
+                IRInst__foldMovSourceSelect(&local_58,piVar11,iVar9,pass);
                 uVar30 = local_58;
                 iVar13 = IRInst__getOperandRecord(piVar11,iVar9);
                 *(undefined4 *)(iVar13 + 0x10) = uVar30;
               }
               if (piVar5 != (int *)0x0) {
-                FUN_0010cfcc(local_54,piVar5,iVar9,pass);
+                IRInst__foldMovSourceSelect(local_54,piVar5,iVar9,pass);
                 uVar30 = local_54[0];
                 iVar13 = IRInst__getOperandRecord(piVar5,iVar9);
                 *(undefined4 *)(iVar13 + 0x10) = uVar30;
@@ -7125,7 +7125,7 @@ LAB_00144264:
       iVar26 = iVar26 + 1;
       iVar13 = iVar13 + -1;
     } while (iVar13 != 0);
-    iVar24 = ((int (*)())FUN_0010bed0)(2,uVar5,iVar24,iVar7,uVar17,(double)FLOAT_001aa0d4);
+    iVar24 = ((int (*)())IRInst__createWithConstantOperands)(2,uVar5,iVar24,iVar7,uVar17,(double)FLOAT_001aa0d4);
     *(undefined4 *)(iVar24 + 0x160) = *(undefined4 *)(iVar7 + 0x478);
     operandRecord = IRInst__getOperandRecord(iVar24,0);
     WriteMask__fromSelectWord(&local_a8,*(undefined4 *)(operandRecord + 0x10));
@@ -7164,7 +7164,7 @@ LAB_00144264:
       iVar13 = iVar13 + -1;
     } while (iVar13 != 0);
     local_c8 = local_d4;
-    iVar13 = ((int (*)())FUN_0010bed0)(2,local_c4[0],iVar25,iVar7,uVar17,(double)FLOAT_001aa0d4);
+    iVar13 = ((int (*)())IRInst__createWithConstantOperands)(2,local_c4[0],iVar25,iVar7,uVar17,(double)FLOAT_001aa0d4);
     *(undefined4 *)(iVar13 + 0x160) = *(undefined4 *)(iVar7 + 0x478);
     operandRecord2 = IRInst__getOperandRecord(iVar13,0);
     WriteMask__fromSelectWord(&local_a4,*(undefined4 *)(operandRecord2 + 0x10));
@@ -7284,7 +7284,7 @@ LAB_001448d8:
       iVar13 = iVar13 + 1;
       iVar28 = iVar28 + -1;
     } while (iVar28 != 0);
-    iVar24 = ((int (*)())FUN_0010bed0)(2,uVar5,iVar24,iVar7,uVar17,(double)FLOAT_001aa0e8);
+    iVar24 = ((int (*)())IRInst__createWithConstantOperands)(2,uVar5,iVar24,iVar7,uVar17,(double)FLOAT_001aa0e8);
     *(undefined4 *)(iVar24 + 0x160) = *(undefined4 *)(iVar7 + 0x478);
     operandRecord3 = IRInst__getOperandRecord(iVar24,0);
     WriteMask__fromSelectWord(&local_9c,*(undefined4 *)(operandRecord3 + 0x10));
@@ -7335,7 +7335,7 @@ LAB_001448d8:
     } while (iVar28 != 0);
     local_cc = local_d0;
     local_c8 = local_d0;
-    iVar25 = ((int (*)())FUN_0010bed0)(3,local_c4[0],iVar25,iVar7,uVar17,(double)FLOAT_001aa0e8);
+    iVar25 = ((int (*)())IRInst__createWithConstantOperands)(3,local_c4[0],iVar25,iVar7,uVar17,(double)FLOAT_001aa0e8);
     *(undefined4 *)(iVar25 + 0x160) = *(undefined4 *)(iVar7 + 0x478);
     operandRecord3 = IRInst__getOperandRecord(iVar25,0);
     WriteMask__fromSelectWord(&local_98,*(undefined4 *)(operandRecord3 + 0x10));
@@ -7376,7 +7376,7 @@ LAB_001448d8:
       iVar13 = iVar13 + 1;
       iVar28 = iVar28 + -1;
     } while (iVar28 != 0);
-    iVar13 = ((int (*)())FUN_0010bed0)(2,local_c8,iVar26,iVar7,uVar17,(double)FLOAT_001aa0d4);
+    iVar13 = ((int (*)())IRInst__createWithConstantOperands)(2,local_c8,iVar26,iVar7,uVar17,(double)FLOAT_001aa0d4);
     *(undefined4 *)(iVar13 + 0x160) = *(undefined4 *)(iVar7 + 0x478);
     iVar28 = 0;
     operandRecord = IRInst__getOperandRecord(iVar13,0);

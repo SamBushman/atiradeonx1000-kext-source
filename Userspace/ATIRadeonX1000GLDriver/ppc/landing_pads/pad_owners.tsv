@@ -227,9 +227,9 @@
 0x10adb4	IRInst__newOpcode8c
 0x10b000	IRInst__cloneIfPresub
 0x10be9c	IRInst__setLiteralOperandAndSource
-0x10c268	FUN_0010c010
+0x10c268	IRInst__reduceTernaryToBinary
 0x10d31c	IRInst__replaceWithMovOfSource
-0x10d5e4	FUN_0010d4cc
+0x10d5e4	IRInst__convertCompareToBinaryAlu
 0x10d88c	FUN_0010d730
 0x10d948	FUN_0010d730
 0x10e0d0	KhanChip__ctor_10e050

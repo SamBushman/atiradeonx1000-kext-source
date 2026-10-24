@@ -2629,14 +2629,14 @@ int Inst__collapseAlgebraic_0015ceb0(node, pass)
           *(int *)(pass + 0x280) = *(int *)(pass + 0x280) + 1;
           SelectWord__mergeWrittenLanes(&local_68,local_100,local_fc);
           local_104 = local_68;
-          piVar9 = (int *)((int (*)())FUN_0010bed0)(2,local_68,piVar9,pass,*(undefined4 *)(pass + 8),1.0);
+          piVar9 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,local_68,piVar9,pass,*(undefined4 *)(pass + 8),1.0);
           if (*(int *)(pass + 0x478) < piVar15[0x58]) {
             piVar15[0x58] = piVar15[0x58] + 1;
           }
           else {
             piVar15[0x58] = *(int *)(pass + 0x478) + 1;
           }
-          piVar15 = (int *)((int (*)())FUN_0010bed0)(2,local_104,piVar15,pass,*(undefined4 *)(pass + 8),1.0
+          piVar15 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,local_104,piVar15,pass,*(undefined4 *)(pass + 8),1.0
                                        );
           operandRecord2 = IRInst__getOperandRecord(node,2);
           uVar12 = *(undefined4 *)(operandRecord2 + 0x10);
@@ -4050,7 +4050,7 @@ LAB_0015f88c:
           }
           bVar3 = local_a0[3] != 0;
           iVar18 = 0;
-          piVar8 = (int *)((int (*)())FUN_0010bed0)(iVar11,0x1010101,uVar13,pass,uVar15,fparam_1);
+          piVar8 = (int *)((int (*)())IRInst__createWithConstantOperands)(iVar11,0x1010101,uVar13,pass,uVar15,fparam_1);
           operandRecord4 = IRInst__getOperandRecord(node,iVar16);
           local_b8 = *(int *)(operandRecord4 + 0x10);
           piVar7 = piVar8;

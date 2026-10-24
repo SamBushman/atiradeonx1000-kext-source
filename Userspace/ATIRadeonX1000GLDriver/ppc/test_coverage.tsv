@@ -1859,16 +1859,16 @@
 0x10bb9c	IRInst__retargetOpcode	220	no	indirect call (driver context / vtable / callback)
 0x10bc78	IRInst__retargetOpcodeFromOperands	216	no	indirect call (driver context / vtable / callback)
 0x10bd50	IRInst__setLiteralOperandAndSource	352	yes	
-0x10bed0	FUN_0010bed0	320	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x10c010	FUN_0010c010	872	yes	
-0x10c37c	FUN_0010c37c	256	yes	
+0x10bed0	IRInst__createWithConstantOperands	320	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x10c010	IRInst__reduceTernaryToBinary	872	yes	
+0x10c37c	IRInst__removeDefaultSelectOperands	256	yes	
 0x10c47c	FUN_0010c47c	500	no	indirect call (driver context / vtable / callback)
 0x10c670	FUN_0010c670	1240	no	indirect call (driver context / vtable / callback)
 0x10cb48	FUN_0010cb48	1156	no	indirect call (driver context / vtable / callback)
-0x10cfcc	FUN_0010cfcc	400	no	indirect call (driver context / vtable / callback)
+0x10cfcc	IRInst__foldMovSourceSelect	400	no	indirect call (driver context / vtable / callback)
 0x10d15c	IRInst__replaceWithMovOfSource	504	no	indirect call (driver context / vtable / callback)
-0x10d358	FUN_0010d358	372	yes	
-0x10d4cc	FUN_0010d4cc	608	no	indirect call (driver context / vtable / callback)
+0x10d358	IRInst__canonicalizeCommutativeOperands	372	yes	
+0x10d4cc	IRInst__convertCompareToBinaryAlu	608	no	indirect call (driver context / vtable / callback)
 0x10d730	FUN_0010d730	844	no	indirect call (driver context / vtable / callback)
 0x10da84	HwLimits__vslot24_resetBindingTables	84	yes	
 0x10dad8	HwLimits__dtor_10dad8	128	yes	

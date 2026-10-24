@@ -6000,10 +6000,10 @@ int FUN_00151370(inst, inst2, param_3)
             iVar4 = iVar4 + -1;
           } while (iVar4 != 0);
           sourceDef3 = IRInst__getOperandSource(inst,1);
-          uVar8 = ((int (*)())FUN_0010bed0)(2,uVar5,sourceDef3,param_3,*(undefined4 *)(param_3 + 8),0.0);
+          uVar8 = ((int (*)())IRInst__createWithConstantOperands)(2,uVar5,sourceDef3,param_3,*(undefined4 *)(param_3 + 8),0.0);
           uVar5 = local_b0;
           sourceDef3 = IRInst__getOperandSource(inst2,1);
-          uVar9 = ((int (*)())FUN_0010bed0)(2,uVar5,sourceDef3,param_3,*(undefined4 *)(param_3 + 8),0.0);
+          uVar9 = ((int (*)())IRInst__createWithConstantOperands)(2,uVar5,sourceDef3,param_3,*(undefined4 *)(param_3 + 8),0.0);
           uVar5 = local_ac;
           operandRecord = IRInst__getOperandRecord(uVar8,1);
           uVar6 = local_a8;
@@ -6231,13 +6231,13 @@ int FUN_00151a74(inst, inst2, param_3)
               SelectWord__mergeWrittenLanes(local_60,iVar2,local_b8);
               local_b8 = local_60[0];
               sourceDef = IRInst__getOperandSource(inst2,1);
-              piVar9 = (int *)((int (*)())FUN_0010bed0)(3,local_60[0],sourceDef,param_3,*(undefined4 *)(param_3 + 8),
+              piVar9 = (int *)((int (*)())IRInst__createWithConstantOperands)(3,local_60[0],sourceDef,param_3,*(undefined4 *)(param_3 + 8),
                                            1.0);
               iVar2 = local_b8;
               sourceDef = IRInst__getOperandSource(inst,1);
-              a0 = (int *)((int (*)())FUN_0010bed0)(3,iVar2,sourceDef,param_3,*(undefined4 *)(param_3 + 8),1.0);
+              a0 = (int *)((int (*)())IRInst__createWithConstantOperands)(3,iVar2,sourceDef,param_3,*(undefined4 *)(param_3 + 8),1.0);
               uVar3 = *(undefined4 *)(param_3 + 8);
-              piVar10 = (int *)((int (*)())FUN_0010bed0)(2,local_b8,piVar11,param_3,uVar3,0.0);
+              piVar10 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,local_b8,piVar11,param_3,uVar3,0.0);
               if (*(int *)(param_3 + 0x478) < piVar11[0x58]) {
                 piVar11[0x58] = piVar11[0x58] + 1;
               }
@@ -6540,12 +6540,12 @@ int FUN_001524b8(inst, inst2, param_3)
                 iVar13 = iVar14;
               } while (iVar19 != 0);
               sourceDef2 = IRInst__getOperandSource(inst2,1);
-              piVar9 = (int *)((int (*)())FUN_0010bed0)(3,local_48[0],sourceDef2,param_3,*(undefined4 *)(param_3 + 8),
+              piVar9 = (int *)((int (*)())IRInst__createWithConstantOperands)(3,local_48[0],sourceDef2,param_3,*(undefined4 *)(param_3 + 8),
                                            1.0);
               iVar5 = local_98;
               sourceDef2 = IRInst__getOperandSource(inst,1);
               uVar7 = *(undefined4 *)(param_3 + 8);
-              a0 = (int *)((int (*)())FUN_0010bed0)(3,iVar5,sourceDef2,param_3,uVar7,1.0);
+              a0 = (int *)((int (*)())IRInst__createWithConstantOperands)(3,iVar5,sourceDef2,param_3,uVar7,1.0);
               uVar11 = (uint)*(byte *)((int)&local_a0 + iVar12);
               local_94 = 0x1010101;
               local_90[0] = 0x1010101;
@@ -6883,7 +6883,7 @@ int FUN_00152ea8(inst, inst2, param_3)
                   iVar4 = (**(code **)(*operandVReg + 0x60))(operandVReg);
                   if (iVar4 == 0) {
                     sourceDef = IRInst__getOperandSource(inst4,1);
-                    piVar8 = (int *)((int (*)())FUN_0010bed0)(3,0x1010101,sourceDef,param_3,uVar17,1.0);
+                    piVar8 = (int *)((int (*)())IRInst__createWithConstantOperands)(3,0x1010101,sourceDef,param_3,uVar17,1.0);
                     if (0 < piVar8[0x21]) {
                       iVar4 = 1;
                       do {
@@ -7018,7 +7018,7 @@ int FUN_00152ea8(inst, inst2, param_3)
                   iVar6 = local_120;
                   if (iVar21 == 0) {
                     sourceDef = IRInst__getOperandSource(inst4,2);
-                    piVar10 = (int *)((int (*)())FUN_0010bed0)(3,iVar6,sourceDef,param_3,uVar17,1.0);
+                    piVar10 = (int *)((int (*)())IRInst__createWithConstantOperands)(3,iVar6,sourceDef,param_3,uVar17,1.0);
                     if (0 < piVar10[0x21]) {
                       iVar6 = 1;
                       do {
@@ -7145,7 +7145,7 @@ int FUN_00152ea8(inst, inst2, param_3)
                   iVar21 = local_11c;
                   if (iVar9 == 0) {
                     sourceDef = IRInst__getOperandSource(inst3,1);
-                    piVar11 = (int *)((int (*)())FUN_0010bed0)(2,iVar21,sourceDef,param_3,uVar17,0.0);
+                    piVar11 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,iVar21,sourceDef,param_3,uVar17,0.0);
                     if (0 < piVar11[0x21]) {
                       iVar21 = 1;
                       do {
@@ -7560,18 +7560,18 @@ int FUN_001541f0(node, inst, pass)
                   iVar15 = node[0x49];
                   sourceDef = IRInst__getOperandSource(piVar11,1);
                   iVar7 = -1;
-                  a0 = (int *)((int (*)())FUN_0010bed0)(2,local_58[0],sourceDef,pass,*(undefined4 *)(pass + 8),
+                  a0 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,local_58[0],sourceDef,pass,*(undefined4 *)(pass + 8),
                                            0.0);
                   iVar4 = local_e0;
                   sourceDef = IRInst__getOperandSource(piVar11,2);
                   iVar17 = -1;
-                  piVar9 = (int *)((int (*)())FUN_0010bed0)(2,iVar4,sourceDef,pass,*(undefined4 *)(pass + 8),
+                  piVar9 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,iVar4,sourceDef,pass,*(undefined4 *)(pass + 8),
                                                0.0);
                   iVar4 = local_e0;
                   sourceDef = IRInst__getOperandSource(piVar20,1);
                   uVar21 = *(undefined4 *)(pass + 8);
                   iVar18 = -1;
-                  piVar10 = (int *)((int (*)())FUN_0010bed0)(2,iVar4,sourceDef,pass,uVar21,0.0);
+                  piVar10 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,iVar4,sourceDef,pass,uVar21,0.0);
                   operandRecord = IRInst__getOperandRecord(piVar11,1);
                   local_dc = *(undefined4 *)(operandRecord + 0x10);
                   operandRecord = IRInst__getOperandRecord(piVar11,2);

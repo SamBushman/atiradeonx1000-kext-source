@@ -3775,10 +3775,10 @@ LAB_000f2690:
             uVar9 = ~*(uint *)(iVar5 + 0xc);
             if ((uVar8 & (uVar9 << 0x18 | (uVar9 & 0xff00) << 8 | uVar9 >> 8 & 0xff00 |
                          uVar9 >> 0x18)) == 0) goto LAB_000f25ac;
-            FUN_0010c010(piVar3,3,*(undefined4 *)(param_1 + 8));
+            IRInst__reduceTernaryToBinary(piVar3,3,*(undefined4 *)(param_1 + 8));
           }
           else {
-            FUN_0010c010(piVar3,2,*(undefined4 *)(param_1 + 8));
+            IRInst__reduceTernaryToBinary(piVar3,2,*(undefined4 *)(param_1 + 8));
           }
           a2 = pdVar11;
           in_r6 = dVar10;

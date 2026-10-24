@@ -2977,7 +2977,7 @@ int ValueKey__mixLiteralSources(key)
         uVar4 = (&uStack_fc)[loopIndex];
         loopIndex2 = IRInst__getOperandRecord(iVar14,1);
         *(undefined4 *)(loopIndex2 + 0x10) = uVar4;
-        FUN_0010c37c(iVar14,*(undefined4 *)(key + 0x238));
+        IRInst__removeDefaultSelectOperands(iVar14,*(undefined4 *)(key + 0x238));
       }
       loopIndex7 = *(int **)(key + 0xb0);
       loopIndex2 = loopIndex;
