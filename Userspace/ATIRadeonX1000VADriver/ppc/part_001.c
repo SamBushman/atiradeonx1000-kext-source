@@ -389,8 +389,8 @@ int ava_setup_decode(ctx, sizeInfo, requestedCount)
   double fpPassThrough6;
   double fpPassThrough7;
   double fpPassThrough8;
-  double in_stack_ffffff88;
-  double in_stack_ffffff90;
+  double fpPassThrough9;
+  double fpPassThrough10;
   undefined4 scalarOut0;
   undefined4 scalarIn0;
   uint scalarIn1;
@@ -524,7 +524,7 @@ int ava_setup_decode(ctx, sizeInfo, requestedCount)
           if (indexOrStatus == 0) {
             fpPassThrough1 = (double)((int (*)())ava_acquire_image)(ctx,1);
             ((void (*)())ava_build_stage_programs)(ctx,fpPassThrough1,fpPassThrough2,fpPassThrough3,fpPassThrough4,fpPassThrough5,fpPassThrough6,fpPassThrough7,fpPassThrough8,
-                         in_stack_ffffff88,in_stack_ffffff90);
+                         fpPassThrough9,fpPassThrough10);
             ((int (*)())ava_build_block_grid)(ctx,r4AfterCall,bufferOrStatus,widthOrCount,allocOrRowBase,allocAlign,allocFlags,planeTableA);
             DAT_0000f1a8 = *(undefined4 *)(ctx + 0x578);
             DAT_0000f1a4 = *(undefined4 *)(ctx + 0x57c);

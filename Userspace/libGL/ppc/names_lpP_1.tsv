@@ -1,0 +1,4 @@
+func	FUN_92f27b4c	_restf26	CONFIRMED	FPR restore millicode entry (lfd f26,-0x30(r1) ... lwz r0,8(r1); mtlr r0; lfd f31,-8(r1); blr); same family as _restf20 elsewhere
+func	FUN_92f27fc0	_savef26	CONFIRMED	FPR save millicode entry (stfd f26,-0x30(r1) .. stfd f31,-8(r1); stw r0,8(r1); blr)
+func	FUN_92f27fc8	_savef28	CONFIRMED	FPR save millicode entry (stfd f28,-0x20(r1) .. stfd f31,-8(r1); stw r0,8(r1); blr)
+func	FUN_92f2ab64	__dyld_func_lookup_island	CONFIRMED	32-byte PIC branch island (mflr/bcl/mflr/addis/mtlr/addi/mtctr/bctr) whose computed target 0x92f2aaec is __dyld_func_lookup (Mach-O disassembly of the stock libGL.dylib)

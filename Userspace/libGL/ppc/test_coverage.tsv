@@ -2,7 +2,7 @@
 0x92f279e4	_CGLSetCurrentContext	96	yes	
 0x92f27a44	dyld_stub_binding_helper	48	no	toolchain crt code (runs under dyld: lazy binding / image initialisation)
 0x92f27a74	_CGLGetCurrentContext	168	yes	
-0x92f27b4c	FUN_92f27b4c	36	no	tiny (36 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x92f27b4c	_restf26	36	no	tiny (36 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x92f27b70	_glGetIntegerv	132	yes	
 0x92f27bf4	_glGetBooleanv	132	yes	
 0x92f27c78	_glGetString	124	yes	
@@ -11,8 +11,8 @@
 0x92f27e04	_glLoadIdentity	112	yes	
 0x92f27e74	_glShadeModel	124	yes	
 0x92f27ef0	_glClearColor	160	yes	
-0x92f27fc0	FUN_92f27fc0	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x92f27fc8	FUN_92f27fc8	24	no	tiny (24 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x92f27fc0	_savef26	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x92f27fc8	_savef28	24	no	tiny (24 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x92f27fe0	_glClearDepth	128	yes	
 0x92f28060	_glEnable	124	yes	
 0x92f280dc	_glDepthFunc	124	yes	
@@ -95,7 +95,7 @@
 0x92f2aa58	_glTextureRangeAPPLE	140	yes	
 0x92f2aaec	__dyld_func_lookup	32	no	toolchain crt code (runs under dyld: lazy binding / image initialisation)
 0x92f2ab0c	___initialize_Cplusplus	88	no	toolchain crt code (runs under dyld: lazy binding / image initialisation); indirect call (driver context / vtable / callback)
-0x92f2ab64	FUN_92f2ab64	32	no	tiny (32 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x92f2ab64	__dyld_func_lookup_island	32	no	tiny (32 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x92f2ab84	_glAccum	140	yes	
 0x92f2ac10	_glAreTexturesResident	144	yes	
 0x92f2aca0	_glArrayElement	124	yes	

@@ -117,8 +117,8 @@ int _find_atexit_10_3()
   return 0;
 }
 
-/* FUN_000009b4 @ 0x9b4 (32 bytes) */
-int FUN_000009b4(string1, string2)
+/* _strcmp_island_9b4 @ 0x9b4 (32 bytes) */
+int _strcmp_island_9b4(string1, string2)
   char *string1;
   char *string2;
 {
@@ -126,8 +126,8 @@ int FUN_000009b4(string1, string2)
   return;
 }
 
-/* FUN_000009d4 @ 0x9d4 (32 bytes) */
-int FUN_000009d4()
+/* __dyld_func_lookup_island_9d4 @ 0x9d4 (32 bytes) */
+int __dyld_func_lookup_island_9d4()
 {
                     
                     
@@ -189,15 +189,15 @@ LAB_00000bc8:
   return result;
 }
 
-/* FUN_00000c04 @ 0xc04 (32 bytes) */
-int FUN_00000c04()
+/* __keymgr_set_and_unlock_processwide_ptr_island_c04 @ 0xc04 (32 bytes) */
+int __keymgr_set_and_unlock_processwide_ptr_island_c04()
 {
   __keymgr_set_and_unlock_processwide_ptr();
   return;
 }
 
-/* FUN_00000c24 @ 0xc24 (32 bytes) */
-int FUN_00000c24(cxaAtexitFn, cxaFinalizeFn)
+/* _check_cxa_atexit_island_c24 @ 0xc24 (32 bytes) */
+int _check_cxa_atexit_island_c24(cxaAtexitFn, cxaFinalizeFn)
   code *cxaAtexitFn;
   code *cxaFinalizeFn;
 {
@@ -227,8 +227,8 @@ int FUN_00000c24(cxaAtexitFn, cxaFinalizeFn)
   return result;
 }
 
-/* FUN_00000c44 @ 0xc44 (32 bytes) */
-int FUN_00000c44()
+/* _dlsym_island_c44 @ 0xc44 (32 bytes) */
+int _dlsym_island_c44()
 {
                     
                     
@@ -236,8 +236,8 @@ int FUN_00000c44()
   return;
 }
 
-/* FUN_00000c64 @ 0xc64 (32 bytes) */
-int FUN_00000c64()
+/* _find_atexit_10_3_island_c64 @ 0xc64 (32 bytes) */
+int _find_atexit_10_3_island_c64()
 {
   int nsSymbol;
   uint imageCount;
@@ -280,8 +280,8 @@ int FUN_00000c64()
   return 0;
 }
 
-/* FUN_00000c84 @ 0xc84 (32 bytes) */
-int FUN_00000c84()
+/* _dlopen_island_c84 @ 0xc84 (32 bytes) */
+int _dlopen_island_c84()
 {
                     
                     
@@ -289,8 +289,8 @@ int FUN_00000c84()
   return;
 }
 
-/* FUN_00000ca4 @ 0xca4 (32 bytes) */
-int FUN_00000ca4()
+/* _calloc_island_ca4 @ 0xca4 (32 bytes) */
+int _calloc_island_ca4()
 {
                     
                     
@@ -298,8 +298,8 @@ int FUN_00000ca4()
   return;
 }
 
-/* FUN_00000cc4 @ 0xcc4 (32 bytes) */
-int FUN_00000cc4()
+/* __keymgr_get_and_lock_processwide_ptr_island_cc4 @ 0xcc4 (32 bytes) */
+int __keymgr_get_and_lock_processwide_ptr_island_cc4()
 {
                     
                     
@@ -348,15 +348,15 @@ int _add_routine(globals, routine)
   return result;
 }
 
-/* FUN_00000df0 @ 0xdf0 (32 bytes) */
-int FUN_00000df0()
+/* __keymgr_set_and_unlock_processwide_ptr_island_df0 @ 0xdf0 (32 bytes) */
+int __keymgr_set_and_unlock_processwide_ptr_island_df0()
 {
   __keymgr_set_and_unlock_processwide_ptr();
   return;
 }
 
-/* FUN_00000e10 @ 0xe10 (32 bytes) */
-int FUN_00000e10()
+/* _malloc_island_e10 @ 0xe10 (32 bytes) */
+int _malloc_island_e10()
 {
                     
                     
@@ -410,15 +410,15 @@ int _run_routines(globals, stopNode)
   return globalsHome;
 }
 
-/* FUN_00000f54 @ 0xf54 (32 bytes) */
-int FUN_00000f54()
+/* __keymgr_get_and_lock_processwide_ptr_island_f54 @ 0xf54 (32 bytes) */
+int __keymgr_get_and_lock_processwide_ptr_island_f54()
 {
   __keymgr_get_and_lock_processwide_ptr();
   return;
 }
 
-/* FUN_00000f74 @ 0xf74 (32 bytes) */
-int FUN_00000f74()
+/* _free_island_f74 @ 0xf74 (32 bytes) */
+int _free_island_f74()
 {
                     
                     
@@ -426,8 +426,8 @@ int FUN_00000f74()
   return;
 }
 
-/* FUN_00000f94 @ 0xf94 (32 bytes) */
-int FUN_00000f94()
+/* __keymgr_set_and_unlock_processwide_ptr_island_f94 @ 0xf94 (32 bytes) */
+int __keymgr_set_and_unlock_processwide_ptr_island_f94()
 {
                     
                     
@@ -484,8 +484,8 @@ int _cxa_atexit_wrapper(entry)
   return;
 }
 
-/* FUN_000010ec @ 0x10ec (32 bytes) */
-int FUN_000010ec(globals, stopNode)
+/* _run_routines_island_10ec @ 0x10ec (32 bytes) */
+int _run_routines_island_10ec(globals, stopNode)
   int globals;
   undefined4 *stopNode;
 {
@@ -524,8 +524,8 @@ int FUN_000010ec(globals, stopNode)
   return globalsHome;
 }
 
-/* FUN_0000110c @ 0x110c (32 bytes) */
-int FUN_0000110c()
+/* __keymgr_set_and_unlock_processwide_ptr_island_110c @ 0x110c (32 bytes) */
+int __keymgr_set_and_unlock_processwide_ptr_island_110c()
 {
                     
                     
@@ -533,8 +533,8 @@ int FUN_0000110c()
   return;
 }
 
-/* FUN_0000112c @ 0x112c (32 bytes) */
-int FUN_0000112c()
+/* __keymgr_get_and_lock_processwide_ptr_island_112c @ 0x112c (32 bytes) */
+int __keymgr_get_and_lock_processwide_ptr_island_112c()
 {
                     
                     
@@ -562,15 +562,15 @@ int _our_atexit()
   return;
 }
 
-/* FUN_00001208 @ 0x1208 (32 bytes) */
-int FUN_00001208()
+/* __keymgr_set_and_unlock_processwide_ptr_island_1208 @ 0x1208 (32 bytes) */
+int __keymgr_set_and_unlock_processwide_ptr_island_1208()
 {
   __keymgr_set_and_unlock_processwide_ptr();
   return;
 }
 
-/* FUN_00001228 @ 0x1228 (32 bytes) */
-int FUN_00001228(globals, stopNode)
+/* _run_routines_island_1228 @ 0x1228 (32 bytes) */
+int _run_routines_island_1228(globals, stopNode)
   int globals;
   undefined4 *stopNode;
 {
@@ -609,8 +609,8 @@ int FUN_00001228(globals, stopNode)
   return globalsHome;
 }
 
-/* FUN_00001248 @ 0x1248 (32 bytes) */
-int FUN_00001248()
+/* __keymgr_get_and_lock_processwide_ptr_island_1248 @ 0x1248 (32 bytes) */
+int __keymgr_get_and_lock_processwide_ptr_island_1248()
 {
                     
                     
@@ -692,16 +692,16 @@ int _atexit_common(entry, dsoHandle)
   return result;
 }
 
-/* FUN_00001508 @ 0x1508 (32 bytes) */
-int FUN_00001508(size)
+/* _malloc_island_1508 @ 0x1508 (32 bytes) */
+int _malloc_island_1508(size)
   size_t size;
 {
   _malloc(size);
   return;
 }
 
-/* FUN_00001528 @ 0x1528 (32 bytes) */
-int FUN_00001528()
+/* __keymgr_set_and_unlock_processwide_ptr_island_1528 @ 0x1528 (32 bytes) */
+int __keymgr_set_and_unlock_processwide_ptr_island_1528()
 {
                     
                     
@@ -709,8 +709,8 @@ int FUN_00001528()
   return;
 }
 
-/* FUN_00001548 @ 0x1548 (32 bytes) */
-int FUN_00001548(globals, routine)
+/* _add_routine_island_1548 @ 0x1548 (32 bytes) */
+int _add_routine_island_1548(globals, routine)
   int globals;
   undefined4 *routine;
 {
@@ -750,8 +750,8 @@ int FUN_00001548(globals, routine)
   return result;
 }
 
-/* FUN_00001568 @ 0x1568 (32 bytes) */
-int FUN_00001568()
+/* _get_globals_island_1568 @ 0x1568 (32 bytes) */
+int _get_globals_island_1568()
 {
   int libSystemHandle;
   undefined4 symbolAddress;
@@ -828,8 +828,8 @@ int ___cxa_atexit(function, argument, dsoHandle)
   return result;
 }
 
-/* FUN_000015e8 @ 0x15e8 (32 bytes) */
-int FUN_000015e8(entry, dsoHandle)
+/* _atexit_common_island_15e8 @ 0x15e8 (32 bytes) */
+int _atexit_common_island_15e8(entry, dsoHandle)
   undefined4 entry;
   undefined4 dsoHandle;
 {
@@ -853,8 +853,8 @@ int _atexit(function)
   return result;
 }
 
-/* FUN_00001664 @ 0x1664 (32 bytes) */
-int FUN_00001664(entry, dsoHandle)
+/* _atexit_common_island_1664 @ 0x1664 (32 bytes) */
+int _atexit_common_island_1664(entry, dsoHandle)
   undefined4 entry;
   undefined4 dsoHandle;
 {

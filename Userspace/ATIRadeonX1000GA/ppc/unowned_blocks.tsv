@@ -1,5 +1,5 @@
 start	end	kind	owner	instructions	calls
-1684	1690	padding	FUN_00001664	3	
+1684	1690	padding	_atexit_common_island_1664	3	
 16d8	16e0	padding	__SetSurface	2	
 1758	1760	padding	__SetDestination	2	
 1794	17a0	padding	__LockSurface	3	
@@ -76,14 +76,14 @@ start	end	kind	owner	instructions	calls
 5558	5560	padding	_radeonCopy	2	
 556c	5570	padding	_radeonCopy	1	
 5594	55a4	millicode	_radeonCopy	4	
-58ac	58b0	padding	FUN_000055a4	1	
-5964	5970	padding	FUN_000055a4	3	
-5d84	5d90	padding	FUN_000055a4	3	
-5fc8	5fd0	padding	FUN_000055a4	2	
-654c	6550	padding	FUN_000055a4	1	
-81d8	81e0	padding	FUN_000055a4	2	
-823c	8240	padding	FUN_000055a4	1	
-825c	8260	padding	FUN_000055a4	1	
+58ac	58b0	padding	_radeonCopyRegionBody	1	
+5964	5970	padding	_radeonCopyRegionBody	3	
+5d84	5d90	padding	_radeonCopyRegionBody	3	
+5fc8	5fd0	padding	_radeonCopyRegionBody	2	
+654c	6550	padding	_radeonCopyRegionBody	1	
+81d8	81e0	padding	_radeonCopyRegionBody	2	
+823c	8240	padding	_radeonCopyRegionBody	1	
+825c	8260	padding	_radeonCopyRegionBody	1	
 8678	8680	padding	_radeonFill	2	
 a56c	a570	padding	_radeonFill	1	
 a594	a5a0	padding	_radeonFill	3	

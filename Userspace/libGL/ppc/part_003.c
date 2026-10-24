@@ -1355,7 +1355,7 @@ void _glOrtho(double left,double right,double bottom,double top,double near_val,
     glContext[0x2ac] = &STACKARG(0xffffff60);
   }
   (*(code *)glContext[0xbe])(left,right,bottom,top,near_val,far_val,*glContext);
-  FUN_92f27b4c();
+  _restf26();
   return;
 }
 

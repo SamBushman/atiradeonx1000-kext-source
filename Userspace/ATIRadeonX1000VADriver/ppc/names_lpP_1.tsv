@@ -1,0 +1,2 @@
+local	ava_setup_decode	in_stack_ffffff88	fpPassThrough9	INFERRED	ninth double argument forwarded to ava_build_stage_programs (stack-passed; the callee takes 8 float registers plus two stack doubles that this function never defines), continues fpPassThrough1..8
+local	ava_setup_decode	in_stack_ffffff90	fpPassThrough10	INFERRED	tenth double argument forwarded to ava_build_stage_programs (stack-passed), continues fpPassThrough1..9

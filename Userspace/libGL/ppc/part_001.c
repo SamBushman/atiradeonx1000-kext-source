@@ -358,7 +358,7 @@ void _glFrustum(double left,double right,double bottom,double top,double near_va
     glContext[0x2ac] = &STACKARG(0xffffff60);
   }
   (*(code *)glContext[0x61])(left,right,bottom,top,near_val,far_val,*glContext);
-  FUN_92f27b4c();
+  _restf26();
   return;
 }
 
@@ -807,8 +807,8 @@ int ___initialize_Cplusplus()
   return;
 }
 
-/* FUN_92f2ab64 @ 0x92f2ab64 (32 bytes) */
-int FUN_92f2ab64()
+/* __dyld_func_lookup_island @ 0x92f2ab64 (32 bytes) */
+int __dyld_func_lookup_island()
 {
   ((int (*)())__dyld_func_lookup)();
   return;

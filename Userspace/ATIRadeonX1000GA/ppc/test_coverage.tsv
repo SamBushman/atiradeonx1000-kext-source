@@ -5,40 +5,40 @@
 0x678	_cxa_atexit_check_1	120	not a C function of the rebuilt image	
 0x6f0	_check_cxa_atexit	204	not a C function of the rebuilt image	
 0x7bc	_find_atexit_10_3	504	not a C function of the rebuilt image	
-0x9b4	FUN_000009b4	32	not a C function of the rebuilt image	
-0x9d4	FUN_000009d4	32	not a C function of the rebuilt image	
+0x9b4	_strcmp_island_9b4	32	not a C function of the rebuilt image	
+0x9d4	__dyld_func_lookup_island_9d4	32	not a C function of the rebuilt image	
 0x9f4	_get_globals	528	not a C function of the rebuilt image	
-0xc04	FUN_00000c04	32	not a C function of the rebuilt image	
-0xc24	FUN_00000c24	32	not a C function of the rebuilt image	
-0xc44	FUN_00000c44	32	not a C function of the rebuilt image	
-0xc64	FUN_00000c64	32	not a C function of the rebuilt image	
-0xc84	FUN_00000c84	32	not a C function of the rebuilt image	
-0xca4	FUN_00000ca4	32	not a C function of the rebuilt image	
-0xcc4	FUN_00000cc4	32	not a C function of the rebuilt image	
+0xc04	__keymgr_set_and_unlock_processwide_ptr_island_c04	32	not a C function of the rebuilt image	
+0xc24	_check_cxa_atexit_island_c24	32	not a C function of the rebuilt image	
+0xc44	_dlsym_island_c44	32	not a C function of the rebuilt image	
+0xc64	_find_atexit_10_3_island_c64	32	not a C function of the rebuilt image	
+0xc84	_dlopen_island_c84	32	not a C function of the rebuilt image	
+0xca4	_calloc_island_ca4	32	not a C function of the rebuilt image	
+0xcc4	__keymgr_get_and_lock_processwide_ptr_island_cc4	32	not a C function of the rebuilt image	
 0xce4	_add_routine	268	not a C function of the rebuilt image	
-0xdf0	FUN_00000df0	32	not a C function of the rebuilt image	
-0xe10	FUN_00000e10	32	not a C function of the rebuilt image	
+0xdf0	__keymgr_set_and_unlock_processwide_ptr_island_df0	32	not a C function of the rebuilt image	
+0xe10	_malloc_island_e10	32	not a C function of the rebuilt image	
 0xe30	_run_routines	292	not a C function of the rebuilt image	
-0xf54	FUN_00000f54	32	not a C function of the rebuilt image	
-0xf74	FUN_00000f74	32	not a C function of the rebuilt image	
-0xf94	FUN_00000f94	32	not a C function of the rebuilt image	
+0xf54	__keymgr_get_and_lock_processwide_ptr_island_f54	32	not a C function of the rebuilt image	
+0xf74	_free_island_f74	32	not a C function of the rebuilt image	
+0xf94	__keymgr_set_and_unlock_processwide_ptr_island_f94	32	not a C function of the rebuilt image	
 0xfb4	_cxa_atexit_wrapper	312	not a C function of the rebuilt image	
-0x10ec	FUN_000010ec	32	not a C function of the rebuilt image	
-0x110c	FUN_0000110c	32	not a C function of the rebuilt image	
-0x112c	FUN_0000112c	32	not a C function of the rebuilt image	
+0x10ec	_run_routines_island_10ec	32	not a C function of the rebuilt image	
+0x110c	__keymgr_set_and_unlock_processwide_ptr_island_110c	32	not a C function of the rebuilt image	
+0x112c	__keymgr_get_and_lock_processwide_ptr_island_112c	32	not a C function of the rebuilt image	
 0x114c	_our_atexit	188	not a C function of the rebuilt image	
-0x1208	FUN_00001208	32	not a C function of the rebuilt image	
-0x1228	FUN_00001228	32	not a C function of the rebuilt image	
-0x1248	FUN_00001248	32	not a C function of the rebuilt image	
+0x1208	__keymgr_set_and_unlock_processwide_ptr_island_1208	32	not a C function of the rebuilt image	
+0x1228	_run_routines_island_1228	32	not a C function of the rebuilt image	
+0x1248	__keymgr_get_and_lock_processwide_ptr_island_1248	32	not a C function of the rebuilt image	
 0x1268	_atexit_common	672	not a C function of the rebuilt image	
-0x1508	FUN_00001508	32	not a C function of the rebuilt image	
-0x1528	FUN_00001528	32	not a C function of the rebuilt image	
-0x1548	FUN_00001548	32	not a C function of the rebuilt image	
-0x1568	FUN_00001568	32	not a C function of the rebuilt image	
+0x1508	_malloc_island_1508	32	not a C function of the rebuilt image	
+0x1528	__keymgr_set_and_unlock_processwide_ptr_island_1528	32	not a C function of the rebuilt image	
+0x1548	_add_routine_island_1548	32	not a C function of the rebuilt image	
+0x1568	_get_globals_island_1568	32	not a C function of the rebuilt image	
 0x1588	___cxa_atexit	96	not a C function of the rebuilt image	
-0x15e8	FUN_000015e8	32	not a C function of the rebuilt image	
+0x15e8	_atexit_common_island_15e8	32	not a C function of the rebuilt image	
 0x1608	_atexit	92	not a C function of the rebuilt image	
-0x1664	FUN_00001664	32	not a C function of the rebuilt image	
+0x1664	_atexit_common_island_1664	32	not a C function of the rebuilt image	
 0x1690	__SetSurface	184	no	calls an import (io_connect_method_scalarI_structureO)
 0x1750	__SetDestination	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1760	__LockSurface	160	no	calls an import (io_connect_method_scalarI_scalarO)
@@ -69,13 +69,13 @@
 0x4290	_createOffscreenBuffer	588	no	calls an import (free); calls an import (io_connect_method_scalarI_structureI); calls an import (malloc)
 0x4500	__Stop	248	no	calls an import (IOObjectRelease); calls an import (IOServiceClose); calls an import (free)
 0x4600	_radeonCopy	3944	no	calls an import (IOConnectMapMemory)
-0x55a4	FUN_000055a4	11396	no	calls an import (IOConnectMapMemory); calls an import (io_connect_method_scalarI_structureO)
+0x55a4	_radeonCopyRegionBody	11396	no	calls an import (IOConnectMapMemory); calls an import (io_connect_method_scalarI_structureO)
 0x8260	_radeonFill	9000	no	calls an import (IOConnectMapMemory)
 0xa5a0	_radeonHighlight	5300	no	calls an import (IOConnectMapMemory)
 0xba90	_radeonSolidScanlines	3660	no	calls an import (IOConnectMapMemory)
 0xc89c	_printf$LDBLStub	172	not a C function of the rebuilt image	
-0xc954	FUN_0000c954	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xc960	FUN_0000c960	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xc968	FUN_0000c968	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xc974	FUN_0000c974	36	no	tiny (36 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xc954	_savef17	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xc960	_savef20	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xc968	_savef22	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0xc974	_savef25	36	no	tiny (36 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0xc9ec	___stub_getrealaddr	164	not a C function of the rebuilt image	

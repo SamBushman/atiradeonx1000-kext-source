@@ -1953,7 +1953,7 @@ int Binding__operator_(this, binding)
   undefined4 isBuiltIn;
   ulong actualSize;
   int activeIndex;
-  unsigned char BVar1;
+  unsigned char usedByFragment;
   int location;
   undefined4 isClientRequest;
   ushort openGLType;
@@ -1976,9 +1976,9 @@ int Binding__operator_(this, binding)
     actualSize = Binding__GetActualSize(binding);
     Binding__SetActualSize(this,actualSize);
     this[0x34] = binding[0x34];
-    BVar1 = binding[0x35];
+    usedByFragment = binding[0x35];
     *(undefined4 *)(this + 4) = 0;
-    this[0x35] = BVar1;
+    this[0x35] = usedByFragment;
     *(undefined4 *)this = 0;
   }
   return this;

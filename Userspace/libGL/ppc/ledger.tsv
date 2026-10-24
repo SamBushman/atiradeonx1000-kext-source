@@ -1,7 +1,7 @@
 0x92f279e4	96	_CGLSetCurrentContext	part_000	converted
 0x92f27a44	48	dyld_stub_binding_helper	part_000	converted
 0x92f27a74	168	_CGLGetCurrentContext	part_000	converted
-0x92f27b4c	36	FUN_92f27b4c	part_000	converted
+0x92f27b4c	36	_restf26	part_000	converted
 0x92f27b70	132	_glGetIntegerv	part_000	converted
 0x92f27bf4	132	_glGetBooleanv	part_000	converted
 0x92f27c78	124	_glGetString	part_000	converted
@@ -10,8 +10,8 @@
 0x92f27e04	112	_glLoadIdentity	part_000	converted
 0x92f27e74	124	_glShadeModel	part_000	converted
 0x92f27ef0	160	_glClearColor	part_000	converted
-0x92f27fc0	8	FUN_92f27fc0	part_000	converted
-0x92f27fc8	24	FUN_92f27fc8	part_000	converted
+0x92f27fc0	8	_savef26	part_000	converted
+0x92f27fc8	24	_savef28	part_000	converted
 0x92f27fe0	128	_glClearDepth	part_000	converted
 0x92f28060	124	_glEnable	part_000	converted
 0x92f280dc	124	_glDepthFunc	part_000	converted
@@ -94,7 +94,7 @@
 0x92f2aa58	140	_glTextureRangeAPPLE	part_001	converted
 0x92f2aaec	32	__dyld_func_lookup	part_001	converted
 0x92f2ab0c	88	___initialize_Cplusplus	part_001	converted
-0x92f2ab64	32	FUN_92f2ab64	part_001	converted
+0x92f2ab64	32	__dyld_func_lookup_island	part_001	converted
 0x92f2ab84	140	_glAccum	part_001	converted
 0x92f2ac10	144	_glAreTexturesResident	part_001	converted
 0x92f2aca0	124	_glArrayElement	part_001	converted

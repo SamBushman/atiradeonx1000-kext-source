@@ -1,0 +1,1 @@
+local	Binding__operator_	BVar1	usedByFragment	CONFIRMED	copy of Binding byte +0x35: set to 1 by BindingTable__AddBinding when isFragment, printed as the "F" flag by the binding dump (+0x34 is the "V" vertex flag)

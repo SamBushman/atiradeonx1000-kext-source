@@ -49,8 +49,8 @@ int _CGLGetCurrentContext()
   return result;
 }
 
-/* FUN_92f27b4c @ 0x92f27b4c (36 bytes) */
-int FUN_92f27b4c()
+/* _restf26 @ 0x92f27b4c (36 bytes) */
+int _restf26()
 {
   return;
 }
@@ -249,14 +249,14 @@ void _glClearColor(double red,double green,double blue,double alpha)
   return;
 }
 
-/* FUN_92f27fc0 @ 0x92f27fc0 (8 bytes) */
-int FUN_92f27fc0()
+/* _savef26 @ 0x92f27fc0 (8 bytes) */
+int _savef26()
 {
   return;
 }
 
-/* FUN_92f27fc8 @ 0x92f27fc8 (24 bytes) */
-int FUN_92f27fc8()
+/* _savef28 @ 0x92f27fc8 (24 bytes) */
+int _savef28()
 {
   return;
 }

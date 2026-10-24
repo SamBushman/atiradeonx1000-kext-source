@@ -1439,8 +1439,8 @@ LAB_00004b14:
   return 0xe00002be;
 }
 
-/* FUN_000055a4 @ 0x55a4 (11396 bytes) */
-int FUN_000055a4(int accel,undefined4 unusedArg2,undefined4 unusedArg3,uint blitFlags,int blitReq,dword srcRef,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8)
+/* _radeonCopyRegionBody @ 0x55a4 (11396 bytes) */
+int _radeonCopyRegionBody(int accel,undefined4 unusedArg2,undefined4 unusedArg3,uint blitFlags,int blitReq,dword srcRef,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8)
 {
   int rightTileQuadFlushRegIdx;
   int rightTileQuadDrawRegValueIdx;
@@ -5770,26 +5770,26 @@ int _printf_LDBLStub(printfArg1, printfArg2, printfArg3, printfArg4, printfArg5,
   return;
 }
 
-/* FUN_0000c954 @ 0xc954 (12 bytes) */
-int FUN_0000c954()
+/* _savef17 @ 0xc954 (12 bytes) */
+int _savef17()
 {
   return;
 }
 
-/* FUN_0000c960 @ 0xc960 (8 bytes) */
-int FUN_0000c960()
+/* _savef20 @ 0xc960 (8 bytes) */
+int _savef20()
 {
   return;
 }
 
-/* FUN_0000c968 @ 0xc968 (12 bytes) */
-int FUN_0000c968()
+/* _savef22 @ 0xc968 (12 bytes) */
+int _savef22()
 {
   return;
 }
 
-/* FUN_0000c974 @ 0xc974 (36 bytes) */
-int FUN_0000c974()
+/* _savef25 @ 0xc974 (36 bytes) */
+int _savef25()
 {
   return;
 }
