@@ -2364,7 +2364,7 @@ int arbEmitRecord1Src_op0e(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, s
   *(uint *)(instr + 4) =
        srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xf0000000;
   srcWord = (srcNegate[3] & 1) << 0x1c |
-          srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcWord | srcFileField;
+          srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField;
   *(uint *)(instr + 4) = srcWord;
   *(uint *)(instr + 8) = srcWord;
   *(uint *)(instr + 0xc) = srcWord;
@@ -2460,7 +2460,7 @@ int arbEmitRecord1Src_op47(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, s
   *(uint *)(instr + 4) =
        srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xf0000000;
   srcWord = (srcNegate[3] & 1) << 0x1c |
-          srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcWord | srcFileField;
+          srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField;
   *(uint *)(instr + 4) = srcWord;
   *(uint *)(instr + 8) = srcWord;
   *(uint *)(instr + 0xc) = srcWord;
@@ -2556,7 +2556,7 @@ int arbEmitRecord1Src_op49(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, s
   *(uint *)(instr + 4) =
        srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xf0000000;
   srcWord = (srcNegate[3] & 1) << 0x1c |
-          srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcWord | srcFileField;
+          srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField;
   *(uint *)(instr + 4) = srcWord;
   *(uint *)(instr + 8) = srcWord;
   *(uint *)(instr + 0xc) = srcWord;
@@ -2652,7 +2652,7 @@ int arbEmitRecord1Src_op4b(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, s
   *(uint *)(instr + 4) =
        srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xf0000000;
   srcWord = (srcNegate[3] & 1) << 0x1c |
-          srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcWord | srcFileField;
+          srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField;
   *(uint *)(instr + 4) = srcWord;
   *(uint *)(instr + 8) = srcWord;
   *(uint *)(instr + 0xc) = srcWord;
@@ -2748,7 +2748,7 @@ int arbEmitRecord1Src_op43(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, s
   *(uint *)(instr + 4) =
        srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xf0000000;
   srcWord = (srcNegate[3] & 1) << 0x1c |
-          srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcWord | srcFileField;
+          srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField;
   *(uint *)(instr + 4) = srcWord;
   *(uint *)(instr + 8) = srcWord;
   *(uint *)(instr + 0xc) = srcWord;
