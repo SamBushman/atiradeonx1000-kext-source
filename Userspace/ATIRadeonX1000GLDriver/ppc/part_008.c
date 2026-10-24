@@ -1841,234 +1841,242 @@ int extvsEncodeSourceOperand(ctx, shader, operand, outWord, registerSelect, sele
   uint selectFlag;
   int matrixRow;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
-  int iVar9;
-  int iVar10;
+  int symbolEntry;
+  uint encodedWord;
+  uint stateIndexBits;
+  uint selectFlagBit6;
+  uint flagBit20;
+  uint flagBit21;
+  uint flagBit22;
+  uint flagBit23;
+  uint registerBits;
+  uint oldWord;
+  uint operandKind;
+  int symbolDataType;
+  int programState;
   
-  uVar7 = *outWord;
-  uVar6 = registerSelect & 0x3f;
-  uVar1 = (selectFlag & 1) << 6;
-  iVar10 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
-  *outWord = uVar1 | uVar6 | uVar7 & 0xefffff00;
-  uVar2 = (operand[2] & 1) << 0x14;
-  *outWord = uVar2 | uVar1 | uVar6 | uVar7 & 0xefefff00;
-  uVar3 = (operand[3] & 1) << 0x15;
-  *outWord = uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xefcfff00;
-  uVar4 = (operand[4] & 1) << 0x16;
-  *outWord = uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef8fff00;
-  uVar5 = (operand[5] & 1) << 0x17;
-  *outWord = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef0fff00;
-  uVar8 = *operand;
-  if (uVar8 == 2) {
-    iVar10 = operand[1] * 0x54 + shader[8];
-    if (*(int *)(iVar10 + 0x28) == 0x87c4) {
-      iVar9 = *(int *)(iVar10 + 0x24);
-      if (iVar9 == 0x87bf) {
-        *outWord = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef0ff000;
-        uVar8 = (*(uint *)(iVar10 + 4) & 0x7f) << 0xd |
-                uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef001000;
-        *outWord = uVar8;
+  oldWord = *outWord;
+  registerBits = registerSelect & 0x3f;
+  selectFlagBit6 = (selectFlag & 1) << 6;
+  programState = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+  *outWord = selectFlagBit6 | registerBits | oldWord & 0xefffff00;
+  flagBit20 = (operand[2] & 1) << 0x14;
+  *outWord = flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xefefff00;
+  flagBit21 = (operand[3] & 1) << 0x15;
+  *outWord = flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xefcfff00;
+  flagBit22 = (operand[4] & 1) << 0x16;
+  *outWord = flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef8fff00;
+  flagBit23 = (operand[5] & 1) << 0x17;
+  *outWord = flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef0fff00;
+  operandKind = *operand;
+  if (operandKind == 2) {
+    symbolEntry = operand[1] * 0x54 + shader[8];
+    if (*(int *)(symbolEntry + 0x28) == 0x87c4) {
+      symbolDataType = *(int *)(symbolEntry + 0x24);
+      if (symbolDataType == 0x87bf) {
+        *outWord = flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef0ff000;
+        encodedWord = (*(uint *)(symbolEntry + 4) & 0x7f) << 0xd |
+                flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000;
+        *outWord = encodedWord;
       }
-      else if (iVar9 == 0x87c0) {
-        *outWord = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef0ff000;
-        uVar8 = (*(uint *)(matrixRow * 4 + iVar10 + 0x10) & 0x7f) << 0xd |
-                uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef001000;
-        *outWord = uVar8;
+      else if (symbolDataType == 0x87c0) {
+        *outWord = flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef0ff000;
+        encodedWord = (*(uint *)(matrixRow * 4 + symbolEntry + 0x10) & 0x7f) << 0xd |
+                flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000;
+        *outWord = encodedWord;
       }
       else {
-        if (iVar9 != 0x87be) {
+        if (symbolDataType != 0x87be) {
           return 0;
         }
-        *outWord = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef0ff000;
-        uVar8 = (*(uint *)(iVar10 + 4) & 0x7f) << 0xd;
-        uVar6 = uVar6 | uVar7 & 0xef001000;
-        *outWord = uVar8 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6;
-        iVar10 = *(int *)(iVar10 + 8);
-        if (iVar10 == 1) {
-          uVar8 = uVar8 | uVar3 | uVar1 | uVar6;
-          *outWord = uVar8;
+        *outWord = flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef0ff000;
+        encodedWord = (*(uint *)(symbolEntry + 4) & 0x7f) << 0xd;
+        registerBits = registerBits | oldWord & 0xef001000;
+        *outWord = encodedWord | flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits;
+        symbolEntry = *(int *)(symbolEntry + 8);
+        if (symbolEntry == 1) {
+          encodedWord = encodedWord | flagBit21 | selectFlagBit6 | registerBits;
+          *outWord = encodedWord;
         }
-        else if (iVar10 == 0) {
-          uVar8 = uVar8 | uVar2 | uVar1 | uVar6;
-          *outWord = uVar8;
+        else if (symbolEntry == 0) {
+          encodedWord = encodedWord | flagBit20 | selectFlagBit6 | registerBits;
+          *outWord = encodedWord;
         }
-        else if (iVar10 == 2) {
-          uVar8 = uVar8 | uVar4 | uVar1 | uVar6;
-          *outWord = uVar8;
+        else if (symbolEntry == 2) {
+          encodedWord = encodedWord | flagBit22 | selectFlagBit6 | registerBits;
+          *outWord = encodedWord;
         }
         else {
-          if (iVar10 != 3) {
+          if (symbolEntry != 3) {
             return 0;
           }
-          uVar8 = uVar8 | uVar5 | uVar1 | uVar6;
-          *outWord = uVar8;
+          encodedWord = encodedWord | flagBit23 | selectFlagBit6 | registerBits;
+          *outWord = encodedWord;
         }
       }
     }
     else {
-      if (*(int *)(iVar10 + 0x28) != -1) {
+      if (*(int *)(symbolEntry + 0x28) != -1) {
         return 0;
       }
-      uVar8 = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef001000 | 0x100;
-      *outWord = uVar8;
+      encodedWord = flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x100;
+      *outWord = encodedWord;
     }
   }
-  else if (uVar8 < 3) {
-    if (uVar8 != 1) {
+  else if (operandKind < 3) {
+    if (operandKind != 1) {
       return 0;
     }
-    *outWord = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef0ff000 | 0x200;
-    uVar8 = operand[1];
-    if (uVar8 == 0x879b) {
-      uVar8 = (*(uint *)(iVar10 + 0x1ec) & 0x7f) << 0xd |
-              uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef001000 | 0x200;
-      *outWord = uVar8;
+    *outWord = flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef0ff000 | 0x200;
+    encodedWord = operand[1];
+    if (encodedWord == 0x879b) {
+      encodedWord = (*(uint *)(programState + 0x1ec) & 0x7f) << 0xd |
+              flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x200;
+      *outWord = encodedWord;
     }
-    else if (uVar8 < 0x879c) {
-      if (uVar8 == 0x610f) {
+    else if (encodedWord < 0x879c) {
+      if (encodedWord == 0x610f) {
         if (*(char *)((int)shader + 0x6f) != '\0') {
-          uVar8 = (*(uint *)(iVar10 + 500) & 0x7f) << 0xd |
-                  uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef001000 | 0x200;
-          *outWord = uVar8;
+          encodedWord = (*(uint *)(programState + 500) & 0x7f) << 0xd |
+                  flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x200;
+          *outWord = encodedWord;
           goto LAB_00057320;
         }
       }
       else {
-        if (uVar8 < 0x6110) {
-          if (uVar8 != 0x610e) {
+        if (encodedWord < 0x6110) {
+          if (encodedWord != 0x610e) {
             return 0;
           }
           if (*(char *)((int)shader + 0x79) == '\0') {
-            *outWord = uVar5 | uVar4 | uVar3 | uVar1 | uVar6 | uVar7 & 0xef001000 | 0x200;
+            *outWord = flagBit23 | flagBit22 | flagBit21 | selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x200;
           }
           else {
-            *outWord = (*(uint *)(iVar10 + 0x1fc) & 0x7f) << 0xd |
-                       uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef001000 | 0x200;
+            *outWord = (*(uint *)(programState + 0x1fc) & 0x7f) << 0xd |
+                       flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x200;
           }
-          uVar8 = *outWord & 0xff1fffff;
-          *outWord = uVar8;
+          encodedWord = *outWord & 0xff1fffff;
+          *outWord = encodedWord;
           goto LAB_00057320;
         }
-        if (uVar8 != 0x6110) {
-          if (uVar8 != 0x879a) {
+        if (encodedWord != 0x6110) {
+          if (encodedWord != 0x879a) {
             return 0;
           }
-          uVar8 = (*(uint *)(iVar10 + 0x1e8) & 0x7f) << 0xd |
-                  uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef001000 | 0x200;
-          *outWord = uVar8;
+          encodedWord = (*(uint *)(programState + 0x1e8) & 0x7f) << 0xd |
+                  flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x200;
+          *outWord = encodedWord;
           goto LAB_00057320;
         }
         if (*(char *)(shader + 0x1c) != '\0') {
-          uVar8 = (*(uint *)(iVar10 + 0x1f8) & 0x7f) << 0xd |
-                  uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef001000 | 0x200;
-          *outWord = uVar8;
+          encodedWord = (*(uint *)(programState + 0x1f8) & 0x7f) << 0xd |
+                  flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x200;
+          *outWord = encodedWord;
           goto LAB_00057320;
         }
       }
-      uVar8 = uVar1 | uVar6 | uVar7 & 0xef001000 | 0x200;
-      *outWord = uVar8;
+      encodedWord = selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x200;
+      *outWord = encodedWord;
     }
-    else if (uVar8 < 0x87a5) {
-      if (uVar8 < 0x879d) {
-        uVar8 = (*(uint *)(iVar10 + 0x1f0) & 0x7f) << 0xd |
-                uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef001000 | 0x200;
-        *outWord = uVar8;
-        if (*(char *)(iVar10 + 0x42) != '\0') {
-          uVar8 = *outWord & 0xff7fffff;
-          *outWord = uVar8;
+    else if (encodedWord < 0x87a5) {
+      if (encodedWord < 0x879d) {
+        encodedWord = (*(uint *)(programState + 0x1f0) & 0x7f) << 0xd |
+                flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x200;
+        *outWord = encodedWord;
+        if (*(char *)(programState + 0x42) != '\0') {
+          encodedWord = *outWord & 0xff7fffff;
+          *outWord = encodedWord;
         }
       }
       else {
-        uVar8 = (*(uint *)(uVar8 * 4 + iVar10 + -0x21c74) & 0x7f) << 0xd |
-                uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef001000 | 0x200;
-        *outWord = uVar8;
+        encodedWord = (*(uint *)(encodedWord * 4 + programState + -0x21c74) & 0x7f) << 0xd |
+                flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x200;
+        *outWord = encodedWord;
       }
     }
     else {
-      if (uVar8 != 0x87bd) {
+      if (encodedWord != 0x87bd) {
         return 0;
       }
-      *outWord = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef0ff000 | 0x300;
-      uVar2 = (*(uint *)(iVar10 + 0x1f0) & 0x7f) << 0xd;
-      uVar6 = uVar6 | uVar7 & 0xef001000;
-      *outWord = uVar2 | uVar5 | uVar1 | uVar6 | 0x300;
-      uVar8 = (*(byte *)(iVar10 + 0x42) & 1) << 0x17 | uVar2 | uVar1 | uVar6 | 0x300;
-      *outWord = uVar8;
+      *outWord = flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef0ff000 | 0x300;
+      stateIndexBits = (*(uint *)(programState + 0x1f0) & 0x7f) << 0xd;
+      registerBits = registerBits | oldWord & 0xef001000;
+      *outWord = stateIndexBits | flagBit23 | selectFlagBit6 | registerBits | 0x300;
+      encodedWord = (*(byte *)(programState + 0x42) & 1) << 0x17 | stateIndexBits | selectFlagBit6 | registerBits | 0x300;
+      *outWord = encodedWord;
     }
   }
-  else if (uVar8 == 3) {
-    *outWord = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef0ff000;
-    uVar8 = (operand[1] & 0x7f) << 0xd |
-            uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef001000;
-    *outWord = uVar8;
+  else if (operandKind == 3) {
+    *outWord = flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef0ff000;
+    encodedWord = (operand[1] & 0x7f) << 0xd |
+            flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000;
+    *outWord = encodedWord;
   }
   else {
-    if (uVar8 != 5) {
+    if (operandKind != 5) {
       return 0;
     }
-    *outWord = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef0ff000 | 0x100;
-    uVar8 = (operand[1] & 0x7f) << 0xd |
-            uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar6 | uVar7 & 0xef001000 | 0x100;
-    *outWord = uVar8;
+    *outWord = flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef0ff000 | 0x100;
+    encodedWord = (operand[1] & 0x7f) << 0xd |
+            flagBit23 | flagBit22 | flagBit21 | flagBit20 | selectFlagBit6 | registerBits | oldWord & 0xef001000 | 0x100;
+    *outWord = encodedWord;
   }
 LAB_00057320:
-  *outWord = uVar8 & 0x1fffefff;
+  *outWord = encodedWord & 0x1fffefff;
   return 1;
 }
 
 /* extvsEncodeSourceSwizzle @ 0x57340 (1768 bytes) */
-int extvsEncodeSourceSwizzle(shader, symbolList, operand, outWord, param_5)
+int extvsEncodeSourceSwizzle(shader, symbolList, operand, outWord, matrixRow)
   undefined4 shader;
   int symbolList;
   uint *operand;
   uint *outWord;
-  int param_5;
+  int matrixRow;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
+  int entryDataType;
+  uint broadcastX;
+  uint symbolStorage;
+  uint finalWord;
+  uint operandKind;
+  uint registerIndexBits;
+  uint broadcastY;
+  uint broadcastZ;
+  uint swizzleWord;
+  uint componentClassBit;
+  int symbolDataType;
+  int symbolOffset;
+  int symbolEntry;
   
   switch(operand[2]) {
   case 0x87d5:
   case 0x87d9:
-    uVar4 = *outWord & 0xffff1fff;
-    *outWord = uVar4;
+    swizzleWord = *outWord & 0xffff1fff;
+    *outWord = swizzleWord;
     break;
   case 0x87d6:
   case 0x87da:
-    uVar4 = *outWord & 0xffff1fff | 0x2000;
-    *outWord = uVar4;
+    swizzleWord = *outWord & 0xffff1fff | 0x2000;
+    *outWord = swizzleWord;
     break;
   case 0x87d7:
   case 0x87db:
-    uVar4 = *outWord & 0xffff1fff | 0x4000;
-    *outWord = uVar4;
+    swizzleWord = *outWord & 0xffff1fff | 0x4000;
+    *outWord = swizzleWord;
     break;
   case 0x87d8:
   case 0x87dc:
-    uVar4 = *outWord & 0xffff1fff | 0x6000;
-    *outWord = uVar4;
+    swizzleWord = *outWord & 0xffff1fff | 0x6000;
+    *outWord = swizzleWord;
     break;
   case 0x87dd:
-    uVar4 = *outWord & 0xffff1fff | 0x8000;
-    *outWord = uVar4;
+    swizzleWord = *outWord & 0xffff1fff | 0x8000;
+    *outWord = swizzleWord;
     break;
   case 0x87de:
   case 0x87df:
-    uVar4 = *outWord & 0xffff1fff | 0xa000;
-    *outWord = uVar4;
+    swizzleWord = *outWord & 0xffff1fff | 0xa000;
+    *outWord = swizzleWord;
     break;
   default:
     goto LAB_00057ae0;
@@ -2077,47 +2085,47 @@ int extvsEncodeSourceSwizzle(shader, symbolList, operand, outWord, param_5)
 LAB_00057ae0:
     return 0;
   }
-  uVar5 = 1 << (operand[2] - 0x87d5 & 0x3f);
-  if ((uVar5 & 0x30f) == 0) {
-    if ((uVar5 & 0x4f0) == 0) {
+  componentClassBit = 1 << (operand[2] - 0x87d5 & 0x3f);
+  if ((componentClassBit & 0x30f) == 0) {
+    if ((componentClassBit & 0x4f0) == 0) {
       return 0;
     }
-    uVar4 = uVar4 | 0x2000000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord | 0x2000000;
+    *outWord = swizzleWord;
   }
   else {
-    uVar4 = uVar4 & 0xfdffffff;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xfdffffff;
+    *outWord = swizzleWord;
   }
   switch(operand[3]) {
   case 0x87d5:
   case 0x87d9:
-    uVar4 = uVar4 & 0xfff8ffff;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xfff8ffff;
+    *outWord = swizzleWord;
     break;
   case 0x87d6:
   case 0x87da:
-    uVar4 = uVar4 & 0xfff8ffff | 0x10000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xfff8ffff | 0x10000;
+    *outWord = swizzleWord;
     break;
   case 0x87d7:
   case 0x87db:
-    uVar4 = uVar4 & 0xfff8ffff | 0x20000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xfff8ffff | 0x20000;
+    *outWord = swizzleWord;
     break;
   case 0x87d8:
   case 0x87dc:
-    uVar4 = uVar4 & 0xfff8ffff | 0x30000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xfff8ffff | 0x30000;
+    *outWord = swizzleWord;
     break;
   case 0x87dd:
-    uVar4 = uVar4 & 0xfff8ffff | 0x40000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xfff8ffff | 0x40000;
+    *outWord = swizzleWord;
     break;
   case 0x87de:
   case 0x87df:
-    uVar4 = uVar4 & 0xfff8ffff | 0x50000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xfff8ffff | 0x50000;
+    *outWord = swizzleWord;
     break;
   default:
     return 0;
@@ -2125,47 +2133,47 @@ LAB_00057ae0:
   if (10 < operand[3] - 0x87d5) {
     return 0;
   }
-  uVar5 = 1 << (operand[3] - 0x87d5 & 0x3f);
-  if ((uVar5 & 0x30f) == 0) {
-    if ((uVar5 & 0x4f0) == 0) {
+  componentClassBit = 1 << (operand[3] - 0x87d5 & 0x3f);
+  if ((componentClassBit & 0x30f) == 0) {
+    if ((componentClassBit & 0x4f0) == 0) {
       return 0;
     }
-    uVar4 = uVar4 | 0x4000000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord | 0x4000000;
+    *outWord = swizzleWord;
   }
   else {
-    uVar4 = uVar4 & 0xfbffffff;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xfbffffff;
+    *outWord = swizzleWord;
   }
   switch(operand[4]) {
   case 0x87d5:
   case 0x87d9:
-    uVar4 = uVar4 & 0xffc7ffff;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xffc7ffff;
+    *outWord = swizzleWord;
     break;
   case 0x87d6:
   case 0x87da:
-    uVar4 = uVar4 & 0xffc7ffff | 0x80000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xffc7ffff | 0x80000;
+    *outWord = swizzleWord;
     break;
   case 0x87d7:
   case 0x87db:
-    uVar4 = uVar4 & 0xffc7ffff | 0x100000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xffc7ffff | 0x100000;
+    *outWord = swizzleWord;
     break;
   case 0x87d8:
   case 0x87dc:
-    uVar4 = uVar4 & 0xffc7ffff | 0x180000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xffc7ffff | 0x180000;
+    *outWord = swizzleWord;
     break;
   case 0x87dd:
-    uVar4 = uVar4 & 0xffc7ffff | 0x200000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xffc7ffff | 0x200000;
+    *outWord = swizzleWord;
     break;
   case 0x87de:
   case 0x87df:
-    uVar4 = uVar4 & 0xffc7ffff | 0x280000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xffc7ffff | 0x280000;
+    *outWord = swizzleWord;
     break;
   default:
     return 0;
@@ -2173,47 +2181,47 @@ LAB_00057ae0:
   if (10 < operand[4] - 0x87d5) {
     return 0;
   }
-  uVar5 = 1 << (operand[4] - 0x87d5 & 0x3f);
-  if ((uVar5 & 0x30f) == 0) {
-    if ((uVar5 & 0x4f0) == 0) {
+  componentClassBit = 1 << (operand[4] - 0x87d5 & 0x3f);
+  if ((componentClassBit & 0x30f) == 0) {
+    if ((componentClassBit & 0x4f0) == 0) {
       return 0;
     }
-    uVar4 = uVar4 | 0x8000000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord | 0x8000000;
+    *outWord = swizzleWord;
   }
   else {
-    uVar4 = uVar4 & 0xf7ffffff;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xf7ffffff;
+    *outWord = swizzleWord;
   }
   switch(operand[5]) {
   case 0x87d5:
   case 0x87d9:
-    uVar4 = uVar4 & 0xfe3fffff;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xfe3fffff;
+    *outWord = swizzleWord;
     break;
   case 0x87d6:
   case 0x87da:
-    uVar4 = uVar4 & 0xfe3fffff | 0x400000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xfe3fffff | 0x400000;
+    *outWord = swizzleWord;
     break;
   case 0x87d7:
   case 0x87db:
-    uVar4 = uVar4 & 0xfe3fffff | 0x800000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xfe3fffff | 0x800000;
+    *outWord = swizzleWord;
     break;
   case 0x87d8:
   case 0x87dc:
-    uVar4 = uVar4 & 0xfe3fffff | 0xc00000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xfe3fffff | 0xc00000;
+    *outWord = swizzleWord;
     break;
   case 0x87dd:
-    uVar4 = uVar4 & 0xfe3fffff | 0x1000000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xfe3fffff | 0x1000000;
+    *outWord = swizzleWord;
     break;
   case 0x87de:
   case 0x87df:
-    uVar4 = uVar4 & 0xfe3fffff | 0x1400000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xfe3fffff | 0x1400000;
+    *outWord = swizzleWord;
     break;
   default:
     return 0;
@@ -2221,157 +2229,157 @@ LAB_00057ae0:
   if (10 < operand[5] - 0x87d5) {
     return 0;
   }
-  uVar5 = 1 << (operand[5] - 0x87d5 & 0x3f);
-  if ((uVar5 & 0x30f) == 0) {
-    if ((uVar5 & 0x4f0) == 0) {
+  componentClassBit = 1 << (operand[5] - 0x87d5 & 0x3f);
+  if ((componentClassBit & 0x30f) == 0) {
+    if ((componentClassBit & 0x4f0) == 0) {
       return 0;
     }
-    uVar4 = uVar4 | 0x10000000;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord | 0x10000000;
+    *outWord = swizzleWord;
   }
   else {
-    uVar4 = uVar4 & 0xefffffff;
-    *outWord = uVar4;
+    swizzleWord = swizzleWord & 0xefffffff;
+    *outWord = swizzleWord;
   }
-  uVar5 = *operand;
-  if (uVar5 != 2) {
-    if (uVar5 < 3) {
-      if (uVar5 != 0) {
+  operandKind = *operand;
+  if (operandKind != 2) {
+    if (operandKind < 3) {
+      if (operandKind != 0) {
         return 0;
       }
-      uVar5 = uVar4 & 0xffffe018;
-      *outWord = uVar5;
+      finalWord = swizzleWord & 0xffffe018;
+      *outWord = finalWord;
     }
-    else if (uVar5 == 3) {
-      *outWord = uVar4 & 0xfffffff8;
-      uVar5 = (operand[1] & 0xff) << 5 | uVar4 & 0xffffe018;
-      *outWord = uVar5;
+    else if (operandKind == 3) {
+      *outWord = swizzleWord & 0xfffffff8;
+      finalWord = (operand[1] & 0xff) << 5 | swizzleWord & 0xffffe018;
+      *outWord = finalWord;
     }
     else {
-      if (uVar5 != 4) {
+      if (operandKind != 4) {
         return 0;
       }
-      *outWord = uVar4 & 0xfffffff8 | 2;
-      uVar5 = (operand[1] & 0xff) << 5 | uVar4 & 0xffffe018 | 2;
-      *outWord = uVar5;
+      *outWord = swizzleWord & 0xfffffff8 | 2;
+      finalWord = (operand[1] & 0xff) << 5 | swizzleWord & 0xffffe018 | 2;
+      *outWord = finalWord;
     }
     goto LAB_00057aa0;
   }
-  iVar7 = operand[1] * 0x54;
-  iVar8 = iVar7 + *(int *)(symbolList + 4);
-  uVar5 = *(uint *)(iVar8 + 0x28);
-  if (uVar5 < 0x87c4) {
-    if (uVar5 < 0x87c2) {
-      if (uVar5 != 0x87c1) {
+  symbolOffset = operand[1] * 0x54;
+  symbolEntry = symbolOffset + *(int *)(symbolList + 4);
+  symbolStorage = *(uint *)(symbolEntry + 0x28);
+  if (symbolStorage < 0x87c4) {
+    if (symbolStorage < 0x87c2) {
+      if (symbolStorage != 0x87c1) {
         return 0;
       }
-      iVar6 = *(int *)(iVar8 + 0x24);
-      if (iVar6 == 0x87bf) {
-        *outWord = uVar4 & 0xfffffff8 | 1;
-        uVar1 = (*(uint *)(iVar8 + 4) & 0xff) << 5;
-        uVar5 = uVar1 | uVar4 & 0xffffe018 | 1;
-        *outWord = uVar5;
-        iVar7 = iVar7 + *(int *)(symbolList + 4);
-        if ((*(char *)(iVar7 + 0x44) != '\0') && (*(int *)(iVar7 + 0x48) == 1)) {
-          uVar5 = uVar1 | uVar4 & 0xfe3fe018 | 1 | 0x1000000;
-          *outWord = uVar5;
+      symbolDataType = *(int *)(symbolEntry + 0x24);
+      if (symbolDataType == 0x87bf) {
+        *outWord = swizzleWord & 0xfffffff8 | 1;
+        registerIndexBits = (*(uint *)(symbolEntry + 4) & 0xff) << 5;
+        finalWord = registerIndexBits | swizzleWord & 0xffffe018 | 1;
+        *outWord = finalWord;
+        symbolOffset = symbolOffset + *(int *)(symbolList + 4);
+        if ((*(char *)(symbolOffset + 0x44) != '\0') && (*(int *)(symbolOffset + 0x48) == 1)) {
+          finalWord = registerIndexBits | swizzleWord & 0xfe3fe018 | 1 | 0x1000000;
+          *outWord = finalWord;
         }
         goto LAB_00057aa0;
       }
-      if (iVar6 != 0x87c0) {
-        if (iVar6 != 0x87be) {
+      if (symbolDataType != 0x87c0) {
+        if (symbolDataType != 0x87be) {
           return 0;
         }
-        *outWord = uVar4 & 0xfffffff8 | 1;
-        uVar5 = (*(uint *)(iVar8 + 4) & 0xff) << 5;
-        *outWord = uVar5 | uVar4 & 0xffffe018 | 1;
-        uVar1 = (*(uint *)(iVar8 + 8) & 7) << 0xd;
-        *outWord = uVar1 | uVar5 | uVar4 & 0xffff0018 | 1;
-        iVar7 = iVar7 + *(int *)(symbolList + 4);
-        if ((*(char *)(iVar7 + 0x44) == '\0') || (*(int *)(iVar7 + 0x48) != 0xf)) {
-          uVar2 = (*(uint *)(iVar8 + 8) & 7) << 0x10;
-          *outWord = uVar2 | uVar1 | uVar5 | uVar4 & 0xfff80018 | 1;
-          uVar3 = (*(uint *)(iVar8 + 8) & 7) << 0x13;
-          *outWord = uVar3 | uVar2 | uVar1 | uVar5 | uVar4 & 0xffc00018 | 1;
-          uVar5 = (*(uint *)(iVar8 + 8) & 7) << 0x16 |
-                  uVar3 | uVar2 | uVar1 | uVar5 | uVar4 & 0xfe000018 | 1;
-          *outWord = uVar5;
+        *outWord = swizzleWord & 0xfffffff8 | 1;
+        finalWord = (*(uint *)(symbolEntry + 4) & 0xff) << 5;
+        *outWord = finalWord | swizzleWord & 0xffffe018 | 1;
+        broadcastX = (*(uint *)(symbolEntry + 8) & 7) << 0xd;
+        *outWord = broadcastX | finalWord | swizzleWord & 0xffff0018 | 1;
+        symbolOffset = symbolOffset + *(int *)(symbolList + 4);
+        if ((*(char *)(symbolOffset + 0x44) == '\0') || (*(int *)(symbolOffset + 0x48) != 0xf)) {
+          broadcastY = (*(uint *)(symbolEntry + 8) & 7) << 0x10;
+          *outWord = broadcastY | broadcastX | finalWord | swizzleWord & 0xfff80018 | 1;
+          broadcastZ = (*(uint *)(symbolEntry + 8) & 7) << 0x13;
+          *outWord = broadcastZ | broadcastY | broadcastX | finalWord | swizzleWord & 0xffc00018 | 1;
+          finalWord = (*(uint *)(symbolEntry + 8) & 7) << 0x16 |
+                  broadcastZ | broadcastY | broadcastX | finalWord | swizzleWord & 0xfe000018 | 1;
+          *outWord = finalWord;
         }
         else {
-          uVar5 = uVar1 | uVar5 | uVar4 & 0xfe000018 | 1 | 0x1640000;
-          *outWord = uVar5;
+          finalWord = broadcastX | finalWord | swizzleWord & 0xfe000018 | 1 | 0x1640000;
+          *outWord = finalWord;
         }
-        uVar5 = uVar5 & 0xe1ffffff;
-        *outWord = uVar5;
+        finalWord = finalWord & 0xe1ffffff;
+        *outWord = finalWord;
         goto LAB_00057aa0;
       }
-      uVar4 = uVar4 & 0xfffffff8 | 1;
+      swizzleWord = swizzleWord & 0xfffffff8 | 1;
     }
     else {
-      iVar7 = *(int *)(iVar8 + 0x24);
-      if (iVar7 == 0x87bf) {
-        *outWord = uVar4 & 0xfffffff8 | 2;
-        uVar5 = (*(uint *)(iVar8 + 4) & 0xff) << 5 | uVar4 & 0xffffe018 | 2;
-        *outWord = uVar5;
+      entryDataType = *(int *)(symbolEntry + 0x24);
+      if (entryDataType == 0x87bf) {
+        *outWord = swizzleWord & 0xfffffff8 | 2;
+        finalWord = (*(uint *)(symbolEntry + 4) & 0xff) << 5 | swizzleWord & 0xffffe018 | 2;
+        *outWord = finalWord;
         goto LAB_00057aa0;
       }
-      if (iVar7 != 0x87c0) {
-        uVar4 = uVar4 & 0xfffffff8 | 2;
-        if (iVar7 != 0x87be) {
+      if (entryDataType != 0x87c0) {
+        swizzleWord = swizzleWord & 0xfffffff8 | 2;
+        if (entryDataType != 0x87be) {
           return 0;
         }
         goto LAB_000579dc;
       }
-      uVar4 = uVar4 & 0xfffffff8 | 2;
+      swizzleWord = swizzleWord & 0xfffffff8 | 2;
     }
-    *outWord = uVar4;
-    uVar5 = (*(uint *)(param_5 * 4 + iVar8 + 0x10) & 0xff) << 5 | uVar4 & 0xffffe01f;
-    *outWord = uVar5;
+    *outWord = swizzleWord;
+    finalWord = (*(uint *)(matrixRow * 4 + symbolEntry + 0x10) & 0xff) << 5 | swizzleWord & 0xffffe01f;
+    *outWord = finalWord;
   }
   else {
-    if (uVar5 != 0x87c4) {
+    if (symbolStorage != 0x87c4) {
       return 0;
     }
-    iVar7 = *(int *)(iVar8 + 0x24);
-    if (iVar7 == 0x87bf) {
-      *outWord = uVar4 & 0xfffffff8;
-      uVar5 = (*(uint *)(iVar8 + 4) & 0xff) << 5 | uVar4 & 0xffffe018;
-      *outWord = uVar5;
+    entryDataType = *(int *)(symbolEntry + 0x24);
+    if (entryDataType == 0x87bf) {
+      *outWord = swizzleWord & 0xfffffff8;
+      finalWord = (*(uint *)(symbolEntry + 4) & 0xff) << 5 | swizzleWord & 0xffffe018;
+      *outWord = finalWord;
       goto LAB_00057aa0;
     }
-    if (iVar7 == 0x87c0) {
-      *outWord = uVar4 & 0xfffffff8;
-      uVar5 = (*(uint *)(param_5 * 4 + iVar8 + 0x10) & 0xff) << 5 | uVar4 & 0xffffe018;
-      *outWord = uVar5;
+    if (entryDataType == 0x87c0) {
+      *outWord = swizzleWord & 0xfffffff8;
+      finalWord = (*(uint *)(matrixRow * 4 + symbolEntry + 0x10) & 0xff) << 5 | swizzleWord & 0xffffe018;
+      *outWord = finalWord;
       goto LAB_00057aa0;
     }
-    if (iVar7 != 0x87be) {
+    if (entryDataType != 0x87be) {
       return 0;
     }
-    uVar4 = uVar4 & 0xfffffff8;
+    swizzleWord = swizzleWord & 0xfffffff8;
 LAB_000579dc:
-    *outWord = uVar4;
-    uVar5 = (*(uint *)(iVar8 + 4) & 0xff) << 5;
-    *outWord = uVar5 | uVar4 & 0xffffe01f;
-    uVar1 = (*(uint *)(iVar8 + 8) & 7) << 0xd;
-    *outWord = uVar1 | uVar5 | uVar4 & 0xffff001f;
-    uVar2 = (*(uint *)(iVar8 + 8) & 7) << 0x10;
-    *outWord = uVar2 | uVar1 | uVar5 | uVar4 & 0xfff8001f;
-    uVar3 = (*(uint *)(iVar8 + 8) & 7) << 0x13;
-    *outWord = uVar3 | uVar2 | uVar1 | uVar5 | uVar4 & 0xffc0001f;
-    uVar5 = (*(uint *)(iVar8 + 8) & 7) << 0x16 | uVar3 | uVar2 | uVar1 | uVar5 | uVar4 & 0xe000001f;
-    *outWord = uVar5;
+    *outWord = swizzleWord;
+    finalWord = (*(uint *)(symbolEntry + 4) & 0xff) << 5;
+    *outWord = finalWord | swizzleWord & 0xffffe01f;
+    broadcastX = (*(uint *)(symbolEntry + 8) & 7) << 0xd;
+    *outWord = broadcastX | finalWord | swizzleWord & 0xffff001f;
+    broadcastY = (*(uint *)(symbolEntry + 8) & 7) << 0x10;
+    *outWord = broadcastY | broadcastX | finalWord | swizzleWord & 0xfff8001f;
+    broadcastZ = (*(uint *)(symbolEntry + 8) & 7) << 0x13;
+    *outWord = broadcastZ | broadcastY | broadcastX | finalWord | swizzleWord & 0xffc0001f;
+    finalWord = (*(uint *)(symbolEntry + 8) & 7) << 0x16 | broadcastZ | broadcastY | broadcastX | finalWord | swizzleWord & 0xe000001f;
+    *outWord = finalWord;
   }
 LAB_00057aa0:
   if (*(char *)(operand + 6) == '\0') {
-    uVar5 = uVar5 & 0x9fffffef;
-    *outWord = uVar5;
+    finalWord = finalWord & 0x9fffffef;
+    *outWord = finalWord;
   }
   else {
-    uVar5 = uVar5 & 0x9fffffff | 0x10;
-    *outWord = uVar5;
+    finalWord = finalWord & 0x9fffffff | 0x10;
+    *outWord = finalWord;
   }
-  *outWord = uVar5 & 0x7fffffff;
+  *outWord = finalWord & 0x7fffffff;
   return 1;
 }
 
@@ -3064,260 +3072,264 @@ int extvsEmitAdd(compiler, program, irInstruction)
 }
 
 /* extvsEmitMad @ 0x59190 (2512 bytes) */
-int extvsEmitMad(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int extvsEmitMad(ctx, shader, instRecord)
+  int ctx;
+  int *shader;
+  int instRecord;
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
-  undefined4 *puVar5;
-  int iVar6;
-  int iVar7;
-  int *piVar8;
-  undefined4 uStack_b8;
-  undefined4 uStack_b4;
-  undefined4 uStack_b0;
-  undefined4 uStack_ac;
-  undefined4 uStack_a8;
-  undefined4 uStack_a4;
-  undefined1 uStack_a0;
-  undefined4 uStack_9c;
-  undefined4 uStack_98;
-  undefined4 uStack_94;
-  undefined4 uStack_90;
-  undefined4 uStack_8c;
-  undefined4 uStack_88;
-  undefined1 uStack_84;
-  undefined4 uStack_80;
-  undefined4 uStack_7c;
-  undefined4 uStack_78;
-  undefined4 uStack_74;
-  undefined4 uStack_70;
-  undefined4 uStack_6c;
-  undefined1 uStack_68;
-  undefined4 uStack_64;
-  undefined4 uStack_60;
-  undefined4 uStack_5c;
-  undefined4 uStack_58;
-  undefined4 uStack_54;
-  undefined4 uStack_50;
-  undefined1 uStack_4c;
+  int instSlot;
+  int hwProgram;
+  undefined4 slotsEmitted;
+  undefined4 tempIndex;
+  uint swizzleWord;
+  int conflict;
+  undefined4 newInstArray;
+  int src2Operand;
+  undefined4 *src1Operand;
+  int src0Operand;
+  int instCount;
+  int *symbolList;
+  undefined4 tmpOperandAKind;
+  undefined4 tmpOperandAIndex;
+  undefined4 tmpOperandAComp0;
+  undefined4 tmpOperandAComp1;
+  undefined4 tmpOperandAComp2;
+  undefined4 tmpOperandAComp3;
+  undefined1 tmpOperandAFlag;
+  undefined4 tmpOperandBKind;
+  undefined4 tmpOperandBIndex;
+  undefined4 tmpOperandBComp0;
+  undefined4 tmpOperandBComp1;
+  undefined4 tmpOperandBComp2;
+  undefined4 tmpOperandBComp3;
+  undefined1 tmpOperandBFlag;
+  undefined4 tmpOperandCKind;
+  undefined4 tmpOperandCIndex;
+  undefined4 tmpOperandCComp0;
+  undefined4 tmpOperandCComp1;
+  undefined4 tmpOperandCComp2;
+  undefined4 tmpOperandCComp3;
+  undefined1 tmpOperandCFlag;
+  undefined4 tmpOperandDKind;
+  undefined4 tmpOperandDIndex;
+  undefined4 tmpOperandDComp0;
+  undefined4 tmpOperandDComp1;
+  undefined4 tmpOperandDComp2;
+  undefined4 tmpOperandDComp3;
+  undefined1 tmpOperandDFlag;
   
-  piVar8 = param_2 + 7;
-  iVar6 = param_3 + 0x20;
-  puVar5 = (undefined4 *)(param_3 + 0x3c);
-  iVar2 = ((int (*)())extvsOperandsConflictInBank)(piVar8,iVar6,puVar5);
-  if (iVar2 == 0) {
-    iVar4 = param_3 + 0x58;
-    iVar2 = ((int (*)())extvsOperandsConflictInBank)(piVar8,iVar6,iVar4);
-    if ((iVar2 == 0) && (iVar2 = ((int (*)())extvsOperandsConflictInBank)(piVar8,puVar5,iVar4), iVar2 == 0)) {
-      iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (0x100 < iVar7 + 1U) {
-        *(undefined1 *)(param_2 + 4) = 0;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        if (*(uint *)(iVar2 + 0x20) < iVar7 + 1U) {
-          uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-          (**(code **)(((unsigned char *)0x00001344) + param_1))
-                    (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-          (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-          *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-          iVar7 = *(int *)(iVar2 + 0x18);
-          *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+  symbolList = shader + 7;
+  src0Operand = instRecord + 0x20;
+  src1Operand = (undefined4 *)(instRecord + 0x3c);
+  conflict = ((int (*)())extvsOperandsConflictInBank)(symbolList,src0Operand,src1Operand);
+  if (conflict == 0) {
+    src2Operand = instRecord + 0x58;
+    conflict = ((int (*)())extvsOperandsConflictInBank)(symbolList,src0Operand,src2Operand);
+    if ((conflict == 0) && (conflict = ((int (*)())extvsOperandsConflictInBank)(symbolList,src1Operand,src2Operand), conflict == 0)) {
+      hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+      instCount = *(int *)(hwProgram + 0x18);
+      if (0x100 < instCount + 1U) {
+        *(undefined1 *)(shader + 4) = 0;
+        instCount = *(int *)(hwProgram + 0x18);
+        if (*(uint *)(hwProgram + 0x20) < instCount + 1U) {
+          newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+          (**(code **)(((unsigned char *)0x00001344) + ctx))
+                    (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+          (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+          *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
+          instCount = *(int *)(hwProgram + 0x18);
+          *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
         }
       }
-      iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-      ((int (*)())extvsEncodeSourceOperand)(param_1,param_2,param_3 + 4,iVar2,4,0,0);
-      ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,iVar6,iVar2 + 4,0);
-      ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,puVar5,iVar2 + 8,0);
-      ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,iVar4,iVar2 + 0xc,0);
-      uVar3 = 1;
+      instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,instRecord + 4,instSlot,4,0,0);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src0Operand,instSlot + 4,0);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src1Operand,instSlot + 8,0);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src2Operand,instSlot + 0xc,0);
+      slotsEmitted = 1;
     }
     else {
-      iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (0x100 < iVar7 + 2U) {
-        *(undefined1 *)(param_2 + 4) = 0;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        if (*(uint *)(iVar2 + 0x20) < iVar7 + 2U) {
-          uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-          (**(code **)(((unsigned char *)0x00001344) + param_1))
-                    (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-          (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-          *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-          iVar7 = *(int *)(iVar2 + 0x18);
-          *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+      hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+      instCount = *(int *)(hwProgram + 0x18);
+      if (0x100 < instCount + 2U) {
+        *(undefined1 *)(shader + 4) = 0;
+        instCount = *(int *)(hwProgram + 0x18);
+        if (*(uint *)(hwProgram + 0x20) < instCount + 2U) {
+          newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+          (**(code **)(((unsigned char *)0x00001344) + ctx))
+                    (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+          (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+          *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
+          instCount = *(int *)(hwProgram + 0x18);
+          *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
         }
       }
-      iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-      uVar3 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
-      uStack_80 = 3;
-      uStack_68 = 0;
-      uStack_6c = 1;
-      uStack_78 = 1;
-      uStack_74 = 1;
-      uStack_70 = 1;
-      uStack_7c = uVar3;
-      ((int (*)())extvsEncodeSourceOperand)(param_1,param_2,&uStack_80,iVar2,2,0,0);
-      ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,iVar6,iVar2 + 4,0);
-      ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,puVar5,iVar2 + 8,0);
-      *(undefined4 *)(iVar2 + 0xc) = *(undefined4 *)(iVar2 + 8);
-      ((int (*)())extvsEncodeSourceOperand)(param_1,param_2,param_3 + 4,iVar2 + 0x10,3,0,0);
-      uStack_64 = 3;
-      uStack_4c = 0;
-      uStack_5c = 0x87d5;
-      uStack_58 = 0x87d6;
-      uStack_54 = 0x87d7;
-      uStack_50 = 0x87d8;
-      uStack_60 = uVar3;
-      ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,&uStack_64,iVar2 + 0x14,0);
-      ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,iVar4,iVar2 + 0x18,0);
-      uVar3 = 2;
-      *(undefined4 *)(iVar2 + 0x1c) = *(undefined4 *)(iVar2 + 0x18);
+      instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+      tempIndex = ((int (*)())extvsAllocTempSlot)(ctx,shader);
+      tmpOperandCKind = 3;
+      tmpOperandCFlag = 0;
+      tmpOperandCComp3 = 1;
+      tmpOperandCComp0 = 1;
+      tmpOperandCComp1 = 1;
+      tmpOperandCComp2 = 1;
+      tmpOperandCIndex = tempIndex;
+      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,&tmpOperandCKind,instSlot,2,0,0);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src0Operand,instSlot + 4,0);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src1Operand,instSlot + 8,0);
+      *(undefined4 *)(instSlot + 0xc) = *(undefined4 *)(instSlot + 8);
+      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,instRecord + 4,instSlot + 0x10,3,0,0);
+      tmpOperandDKind = 3;
+      tmpOperandDFlag = 0;
+      tmpOperandDComp0 = 0x87d5;
+      tmpOperandDComp1 = 0x87d6;
+      tmpOperandDComp2 = 0x87d7;
+      tmpOperandDComp3 = 0x87d8;
+      tmpOperandDIndex = tempIndex;
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,&tmpOperandDKind,instSlot + 0x14,0);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src2Operand,instSlot + 0x18,0);
+      slotsEmitted = 2;
+      *(undefined4 *)(instSlot + 0x1c) = *(undefined4 *)(instSlot + 0x18);
     }
   }
   else {
-    iVar4 = param_3 + 0x58;
-    iVar2 = ((int (*)())extvsOperandsConflictInBank)(piVar8,iVar6,iVar4);
-    if ((iVar2 == 0) || (iVar2 = ((int (*)())extvsOperandsConflictInBank)(piVar8,puVar5,iVar4), iVar2 == 0)) {
-      iVar2 = ((int (*)())extvsOperandsConflictInBank)(piVar8,puVar5,iVar4);
-      if (iVar2 == 0) {
-        iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-        iVar7 = *(int *)(iVar2 + 0x18);
-        if (0x100 < iVar7 + 2U) {
-          *(undefined1 *)(param_2 + 4) = 0;
-          iVar7 = *(int *)(iVar2 + 0x18);
-          if (*(uint *)(iVar2 + 0x20) < iVar7 + 2U) {
-            uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-            (**(code **)(((unsigned char *)0x00001344) + param_1))
-                      (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-            (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-            *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-            iVar7 = *(int *)(iVar2 + 0x18);
-            *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+    src2Operand = instRecord + 0x58;
+    conflict = ((int (*)())extvsOperandsConflictInBank)(symbolList,src0Operand,src2Operand);
+    if ((conflict == 0) || (conflict = ((int (*)())extvsOperandsConflictInBank)(symbolList,src1Operand,src2Operand), conflict == 0)) {
+      conflict = ((int (*)())extvsOperandsConflictInBank)(symbolList,src1Operand,src2Operand);
+      if (conflict == 0) {
+        hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+        instCount = *(int *)(hwProgram + 0x18);
+        if (0x100 < instCount + 2U) {
+          *(undefined1 *)(shader + 4) = 0;
+          instCount = *(int *)(hwProgram + 0x18);
+          if (*(uint *)(hwProgram + 0x20) < instCount + 2U) {
+            newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+            (**(code **)(((unsigned char *)0x00001344) + ctx))
+                      (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+            (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+            *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
+            instCount = *(int *)(hwProgram + 0x18);
+            *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
           }
         }
-        iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-        uVar3 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
-        uStack_64 = 3;
-        uStack_4c = 0;
-        uStack_50 = 1;
-        uStack_5c = 1;
-        uStack_58 = 1;
-        uStack_54 = 1;
-        uStack_60 = uVar3;
-        ((int (*)())extvsEncodeSourceOperand)(param_1,param_2,&uStack_64,iVar2,3,0,0);
-        ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,iVar6,iVar2 + 4,0);
-        uVar1 = *(uint *)(iVar2 + 4) & 0xfe001fff | 0x1248000;
-        *(uint *)(iVar2 + 0xc) = uVar1;
-        *(uint *)(iVar2 + 8) = uVar1;
-        ((int (*)())extvsEncodeSourceOperand)(param_1,param_2,param_3 + 4,iVar2 + 0x10,4,0,0);
-        uStack_80 = 3;
-        uStack_68 = 0;
-        uStack_78 = 0x87d5;
-        uStack_74 = 0x87d6;
-        uStack_70 = 0x87d7;
-        uStack_6c = 0x87d8;
-        uStack_7c = uVar3;
-        ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,&uStack_80,iVar2 + 0x14,0);
+        instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+        tempIndex = ((int (*)())extvsAllocTempSlot)(ctx,shader);
+        tmpOperandDKind = 3;
+        tmpOperandDFlag = 0;
+        tmpOperandDComp3 = 1;
+        tmpOperandDComp0 = 1;
+        tmpOperandDComp1 = 1;
+        tmpOperandDComp2 = 1;
+        tmpOperandDIndex = tempIndex;
+        ((int (*)())extvsEncodeSourceOperand)(ctx,shader,&tmpOperandDKind,instSlot,3,0,0);
+        ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src0Operand,instSlot + 4,0);
+        swizzleWord = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
+        *(uint *)(instSlot + 0xc) = swizzleWord;
+        *(uint *)(instSlot + 8) = swizzleWord;
+        ((int (*)())extvsEncodeSourceOperand)(ctx,shader,instRecord + 4,instSlot + 0x10,4,0,0);
+        tmpOperandCKind = 3;
+        tmpOperandCFlag = 0;
+        tmpOperandCComp0 = 0x87d5;
+        tmpOperandCComp1 = 0x87d6;
+        tmpOperandCComp2 = 0x87d7;
+        tmpOperandCComp3 = 0x87d8;
+        tmpOperandCIndex = tempIndex;
+        ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,&tmpOperandCKind,instSlot + 0x14,0);
       }
       else {
-        iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-        iVar7 = *(int *)(iVar2 + 0x18);
-        if (0x100 < iVar7 + 2U) {
-          *(undefined1 *)(param_2 + 4) = 0;
-          iVar7 = *(int *)(iVar2 + 0x18);
-          if (*(uint *)(iVar2 + 0x20) < iVar7 + 2U) {
-            uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-            (**(code **)(((unsigned char *)0x00001344) + param_1))
-                      (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-            (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-            *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-            iVar7 = *(int *)(iVar2 + 0x18);
-            *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+        hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+        instCount = *(int *)(hwProgram + 0x18);
+        if (0x100 < instCount + 2U) {
+          *(undefined1 *)(shader + 4) = 0;
+          instCount = *(int *)(hwProgram + 0x18);
+          if (*(uint *)(hwProgram + 0x20) < instCount + 2U) {
+            newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+            (**(code **)(((unsigned char *)0x00001344) + ctx))
+                      (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+            (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+            *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
+            instCount = *(int *)(hwProgram + 0x18);
+            *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
           }
         }
-        iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-        uVar3 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
-        uStack_b8 = 3;
-        uStack_a0 = 0;
-        uStack_a4 = 1;
-        uStack_b0 = 1;
-        uStack_ac = 1;
-        uStack_a8 = 1;
-        uStack_b4 = uVar3;
-        ((int (*)())extvsEncodeSourceOperand)(param_1,param_2,&uStack_b8,iVar2,3,0,0);
-        ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,puVar5,iVar2 + 4,0);
-        uVar1 = *(uint *)(iVar2 + 4) & 0xfe001fff | 0x1248000;
-        *(uint *)(iVar2 + 0xc) = uVar1;
-        *(uint *)(iVar2 + 8) = uVar1;
-        ((int (*)())extvsEncodeSourceOperand)(param_1,param_2,param_3 + 4,iVar2 + 0x10,4,0,0);
-        ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,iVar6,iVar2 + 0x14,0);
-        uStack_9c = 3;
-        uStack_84 = 0;
-        uStack_94 = 0x87d5;
-        uStack_90 = 0x87d6;
-        uStack_8c = 0x87d7;
-        uStack_88 = 0x87d8;
-        puVar5 = &uStack_9c;
-        uStack_98 = uVar3;
+        instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+        tempIndex = ((int (*)())extvsAllocTempSlot)(ctx,shader);
+        tmpOperandAKind = 3;
+        tmpOperandAFlag = 0;
+        tmpOperandAComp3 = 1;
+        tmpOperandAComp0 = 1;
+        tmpOperandAComp1 = 1;
+        tmpOperandAComp2 = 1;
+        tmpOperandAIndex = tempIndex;
+        ((int (*)())extvsEncodeSourceOperand)(ctx,shader,&tmpOperandAKind,instSlot,3,0,0);
+        ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src1Operand,instSlot + 4,0);
+        swizzleWord = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
+        *(uint *)(instSlot + 0xc) = swizzleWord;
+        *(uint *)(instSlot + 8) = swizzleWord;
+        ((int (*)())extvsEncodeSourceOperand)(ctx,shader,instRecord + 4,instSlot + 0x10,4,0,0);
+        ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src0Operand,instSlot + 0x14,0);
+        tmpOperandBKind = 3;
+        tmpOperandBFlag = 0;
+        tmpOperandBComp0 = 0x87d5;
+        tmpOperandBComp1 = 0x87d6;
+        tmpOperandBComp2 = 0x87d7;
+        tmpOperandBComp3 = 0x87d8;
+        src1Operand = &tmpOperandBKind;
+        tmpOperandBIndex = tempIndex;
       }
-      ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,puVar5,iVar2 + 0x18,0);
-      ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,iVar4,iVar2 + 0x1c,0);
-      uVar3 = 2;
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src1Operand,instSlot + 0x18,0);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src2Operand,instSlot + 0x1c,0);
+      slotsEmitted = 2;
     }
     else {
-      iVar2 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + param_1) * 4 + *param_2);
-      iVar7 = *(int *)(iVar2 + 0x18);
-      if (0x100 < iVar7 + 3U) {
-        *(undefined1 *)(param_2 + 4) = 0;
-        iVar7 = *(int *)(iVar2 + 0x18);
-        if (*(uint *)(iVar2 + 0x20) < iVar7 + 3U) {
-          uVar3 = (**(code **)(param_1 + 0xc))(*(uint *)(iVar2 + 0x20) * 0x10 + 0x100);
-          (**(code **)(((unsigned char *)0x00001344) + param_1))
-                    (uVar3,*(undefined4 *)(iVar2 + 0x1c),*(int *)(iVar2 + 0x20) << 4);
-          (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar2 + 0x1c));
-          *(undefined4 *)(iVar2 + 0x1c) = uVar3;
-          iVar7 = *(int *)(iVar2 + 0x18);
-          *(int *)(iVar2 + 0x20) = *(int *)(iVar2 + 0x20) + 0x10;
+      hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+      instCount = *(int *)(hwProgram + 0x18);
+      if (0x100 < instCount + 3U) {
+        *(undefined1 *)(shader + 4) = 0;
+        instCount = *(int *)(hwProgram + 0x18);
+        if (*(uint *)(hwProgram + 0x20) < instCount + 3U) {
+          newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
+          (**(code **)(((unsigned char *)0x00001344) + ctx))
+                    (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
+          (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
+          *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
+          instCount = *(int *)(hwProgram + 0x18);
+          *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
         }
       }
-      iVar2 = iVar7 * 0x10 + *(int *)(iVar2 + 0x1c);
-      uVar3 = ((int (*)())extvsAllocTempSlot)(param_1,param_2);
-      uStack_b8 = 3;
-      uStack_a0 = 0;
-      uStack_a4 = 1;
-      uStack_b0 = 1;
-      uStack_ac = 1;
-      uStack_a8 = 1;
-      uStack_b4 = uVar3;
-      ((int (*)())extvsEncodeSourceOperand)(param_1,param_2,&uStack_b8,iVar2,3,0,0);
-      ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,iVar6,iVar2 + 4,0);
-      uVar1 = *(uint *)(iVar2 + 4) & 0xfe001fff | 0x1248000;
-      *(uint *)(iVar2 + 0xc) = uVar1;
-      *(uint *)(iVar2 + 8) = uVar1;
-      ((int (*)())extvsEncodeSourceOperand)(param_1,param_2,&uStack_b8,iVar2 + 0x10,2,0,0);
-      uStack_9c = 3;
-      uStack_84 = 0;
-      uStack_90 = 0x87d6;
-      uStack_94 = 0x87d5;
-      uStack_8c = 0x87d7;
-      uStack_88 = 0x87d8;
-      uStack_98 = uVar3;
-      ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,&uStack_9c,iVar2 + 0x14,0);
-      ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,puVar5,iVar2 + 0x18,0);
-      *(undefined4 *)(iVar2 + 0x1c) = *(undefined4 *)(iVar2 + 0x18);
-      ((int (*)())extvsEncodeSourceOperand)(param_1,param_2,param_3 + 4,iVar2 + 0x20,3,0,0);
-      ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,&uStack_9c,iVar2 + 0x24,0);
-      ((int (*)())extvsEncodeSourceSwizzle)(param_2,piVar8,iVar4,iVar2 + 0x28,0);
-      uVar3 = 3;
-      *(undefined4 *)(iVar2 + 0x2c) = *(undefined4 *)(iVar2 + 0x28);
+      instSlot = instCount * 0x10 + *(int *)(hwProgram + 0x1c);
+      tempIndex = ((int (*)())extvsAllocTempSlot)(ctx,shader);
+      tmpOperandAKind = 3;
+      tmpOperandAFlag = 0;
+      tmpOperandAComp3 = 1;
+      tmpOperandAComp0 = 1;
+      tmpOperandAComp1 = 1;
+      tmpOperandAComp2 = 1;
+      tmpOperandAIndex = tempIndex;
+      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,&tmpOperandAKind,instSlot,3,0,0);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src0Operand,instSlot + 4,0);
+      swizzleWord = *(uint *)(instSlot + 4) & 0xfe001fff | 0x1248000;
+      *(uint *)(instSlot + 0xc) = swizzleWord;
+      *(uint *)(instSlot + 8) = swizzleWord;
+      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,&tmpOperandAKind,instSlot + 0x10,2,0,0);
+      tmpOperandBKind = 3;
+      tmpOperandBFlag = 0;
+      tmpOperandBComp1 = 0x87d6;
+      tmpOperandBComp0 = 0x87d5;
+      tmpOperandBComp2 = 0x87d7;
+      tmpOperandBComp3 = 0x87d8;
+      tmpOperandBIndex = tempIndex;
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,&tmpOperandBKind,instSlot + 0x14,0);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src1Operand,instSlot + 0x18,0);
+      *(undefined4 *)(instSlot + 0x1c) = *(undefined4 *)(instSlot + 0x18);
+      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,instRecord + 4,instSlot + 0x20,3,0,0);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,&tmpOperandBKind,instSlot + 0x24,0);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src2Operand,instSlot + 0x28,0);
+      slotsEmitted = 3;
+      *(undefined4 *)(instSlot + 0x2c) = *(undefined4 *)(instSlot + 0x28);
     }
   }
-  return uVar3;
+  return slotsEmitted;
 }
 
 /* extvsEmitFrc @ 0x59b80 (304 bytes) */
