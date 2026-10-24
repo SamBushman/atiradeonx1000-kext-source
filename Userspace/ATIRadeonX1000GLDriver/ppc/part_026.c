@@ -5033,6 +5033,8 @@ int FUN_000fd5c8(program, ilReader)
   int program;
   uint ******ilReader;
 {
+  bool constantFlag;
+  bool notLastIteration;
   uint bitmapByteOffset2;
   uint sourceRegisterIndex;
   uint conditionStackTopIndex;
@@ -5086,8 +5088,7 @@ int FUN_000fd5c8(program, ilReader)
   int laneSelect;
   int registerFile2;
   int ilOpcode;
-  bool constantFlag;
-  bool notLastIteration;
+  bool bVar1;
   undefined4 irOpcode;
   undefined4 enclosingLoopHeader;
   undefined4 ifConditionInst;
@@ -5104,7 +5105,6 @@ int FUN_000fd5c8(program, ilReader)
   undefined4 translationKind;
   undefined4 compilerArenaA;
   undefined4 vectorStorage;
-  bool bVar1;
   bool bVar2;
   bool bVar3;
   byte ilRegisterIndex;

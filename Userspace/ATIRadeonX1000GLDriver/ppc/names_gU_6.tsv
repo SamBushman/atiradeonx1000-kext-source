@@ -1,0 +1,20 @@
+use	FUN_000fd5c8	bVar1	notLastIteration	INFERRED	loop-continue flag of a fixed-count loop: bVar = i != last; i = i + 1; while (bVar)	^\s*bVar1\ =\ iVar43\ !=\ 3;$	^\s*iVar43\ =\ iVar43\ \+\ 1;$	all	none
+use	FUN_000fd5c8	bVar1	notLastIteration	INFERRED	loop-continue flag of a fixed-count loop: bVar = i != last; i = i + 1; while (bVar)	^\s*\}\ while\ \(bVar1\);$	^\s*goto\ switchD_000fdaf0_caseD_2;$	all	none
+use	FUN_000fd5c8	bVar1	notLastIteration	INFERRED	loop-continue flag of a fixed-count loop: bVar = i != last; i = i + 1; while (bVar)	^\s*bVar1\ =\ iVar43\ !=\ 3;$@2	^\s*iVar43\ =\ iVar43\ \+\ 1;$	all	none
+use	FUN_000fd5c8	bVar1	notLastIteration	INFERRED	loop-continue flag of a fixed-count loop: bVar = i != last; i = i + 1; while (bVar)	^\s*\}\ while\ \(bVar1\);$@2	^\s*goto\ switchD_000fdaf0_caseD_2;$	all	none
+use	FUN_000fd5c8	bVar1	notLastIteration	INFERRED	loop-continue flag of a fixed-count loop: bVar = i != last; i = i + 1; while (bVar)	^\s*bVar1\ =\ iVar47\ !=\ 3;$	^\s*iVar47\ =\ iVar47\ \+\ 1;$	all	none
+use	FUN_000fd5c8	bVar1	notLastIteration	INFERRED	loop-continue flag of a fixed-count loop: bVar = i != last; i = i + 1; while (bVar)	^\s*\}\ while\ \(bVar1\);$@3	^\s*\}$	all	none
+use	FUN_000fd5c8	bVar1	notLastIteration	INFERRED	loop-continue flag of a fixed-count loop: bVar = i != last; i = i + 1; while (bVar)	^\s*bVar1\ =\ iVar43\ !=\ 3;$@3	^\s*iVar43\ =\ iVar43\ \+\ 1;$	all	none
+use	FUN_000fd5c8	bVar1	notLastIteration	INFERRED	loop-continue flag of a fixed-count loop: bVar = i != last; i = i + 1; while (bVar)	^\s*\}\ while\ \(bVar1\);$@4	^\s*\}$	all	none
+use	FUN_000fd5c8	bVar1	notLastIteration	INFERRED	loop-continue flag of a fixed-count loop: bVar = i != last; i = i + 1; while (bVar)	^\s*bVar1\ =\ iVar34\ !=\ 0xc;$	^\s*iVar34\ =\ iVar34\ \+\ 4;$	all	none
+use	FUN_000fd5c8	bVar1	notLastIteration	INFERRED	loop-continue flag of a fixed-count loop: bVar = i != last; i = i + 1; while (bVar)	^\s*\}\ while\ \(bVar1\);$@5	^\s*\}$	all	none
+use	FUN_000fd5c8	bVar1	constantFlag	INFERRED	default value	^\s*bVar1\ =\ true;$	^\s*bVar3\ =\ false;$	all	none
+use	FUN_000fd5c8	bVar1	constantFlag	INFERRED	default value	^\s*bVar1\ =\ false;$	^\s*bVar3\ =\ false;$	all	none
+use	FUN_000fd5c8	bVar1	constantFlag	INFERRED	default value	^\s*bVar1\ =\ false;$@2	^\s*bVar3\ =\ false;$	all	none
+use	FUN_000fd5c8	bVar1	constantFlag	INFERRED	default value	^\s*bVar1\ =\ false;$@3	^\s*bVar3\ =\ true;$	all	none
+use	FUN_000fd5c8	bVar1	constantFlag	INFERRED	default value	^\s*bVar1\ =\ true;$@2	^\s*bVar3\ =\ true;$	all	none
+use	FUN_000fd5c8	bVar1	constantFlag	INFERRED	default value	^\s*if\ \(!bVar1\)\ \{$	^\s*\*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ =\ \*\(uint\ \*\)\(iVar34\ \+\ 0x13c\)\ \|\ 1;$	all	none
+use	FUN_000fd5c8	bVar1	constantFlag	INFERRED	default value	^\s*bVar1\ =\ false;$@4	^\s*break;$	all	none
+use	FUN_000fd5c8	bVar1	constantFlag	INFERRED	default value	^\s*bVar1\ =\ true;$@3	^\s*\}$	all	none
+use	FUN_000fd5c8	bVar1	constantFlag	INFERRED	default value	^\s*if\ \(\(!bVar1\)\ \&\&$	^\s*if\ \(ppppppuVar40\ ==\ \(uint\ \*\*\*\*\*\*\)\(\(int\)\(\(unsigned\ char\ \*\)0x0\)\ \+\ 1U\)\)\ \{$	all	none
+use	FUN_000fd5c8	bVar1	constantFlag	INFERRED	default value	^\s*if\ \(bVar1\)\ \{$@6	^\s*iVar20\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$	all	none
