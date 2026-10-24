@@ -740,14 +740,14 @@ int fpilTranslateSourceWithSwizzle(param_1, param_2, param_3, param_4, param_5)
   return uVar3;
 }
 
-/* FUN_0003f5d0 @ 0x3f5d0 (12 bytes) */
-int FUN_0003f5d0(param_1)
-  int param_1;
+/* freeIfNonNull @ 0x3f5d0 (12 bytes) */
+int freeIfNonNull(pointer)
+  int pointer;
 {
-  if (param_1 == 0) {
+  if (pointer == 0) {
     return;
   }
-  return _free(param_1);
+  return _free(pointer);
 }
 
 /* fpilDestroyTranslator @ 0x3f5e0 (112 bytes) */
@@ -755,7 +755,7 @@ int fpilDestroyTranslator(param_1)
   int param_1;
 {
   if (*(int *)(param_1 + 0x34) != 0) {
-    ((int (*)())FUN_0003f5d0)(*(int *)(param_1 + 0x34));
+    ((int (*)())freeIfNonNull)(*(int *)(param_1 + 0x34));
   }
   if (*(int *)(param_1 + 0x28) != 0) {
     _free(*(int *)(param_1 + 0x28));

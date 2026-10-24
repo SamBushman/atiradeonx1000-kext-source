@@ -3647,15 +3647,15 @@ int FUN_00062370(param_1, param_2, param_3)
   return;
 }
 
-/* FUN_000623e0 @ 0x623e0 (40 bytes) */
-int FUN_000623e0(param_1)
-  int param_1;
+/* extvsInitLimits @ 0x623e0 (40 bytes) */
+int extvsInitLimits(ctx)
+  int ctx;
 {
-  *(undefined4 *)(((unsigned char *)0x000011c4) + param_1) = 0x100;
-  *(undefined4 *)(((unsigned char *)0x000011b8) + param_1) = 0x100;
-  *(undefined4 *)(((unsigned char *)0x000011bc) + param_1) = 0x10;
-  *(undefined4 *)(((unsigned char *)0x000011c8) + param_1) = 0x20;
-  *(undefined4 *)(((unsigned char *)0x000011c0) + param_1) = 0x100;
+  *(undefined4 *)(((unsigned char *)0x000011c4) + ctx) = 0x100;
+  *(undefined4 *)(((unsigned char *)0x000011b8) + ctx) = 0x100;
+  *(undefined4 *)(((unsigned char *)0x000011bc) + ctx) = 0x10;
+  *(undefined4 *)(((unsigned char *)0x000011c8) + ctx) = 0x20;
+  *(undefined4 *)(((unsigned char *)0x000011c0) + ctx) = 0x100;
   return;
 }
 
@@ -9782,7 +9782,7 @@ asm(".set FUN_0005f810, _extvsPrepareHardwareProgram");
 asm(".globl FUN_00062370");
 asm(".set FUN_00062370, _FUN_00062370");
 asm(".globl FUN_000623e0");
-asm(".set FUN_000623e0, _FUN_000623e0");
+asm(".set FUN_000623e0, _extvsInitLimits");
 asm(".globl FUN_00062410");
 asm(".set FUN_00062410, _FUN_00062410");
 asm(".globl FUN_00062510");

@@ -16,7 +16,7 @@
 0x4bbf0	FUN_0004bbf0	0x4bf94	memset	r5	0x3754 printed as &UNK_00003754 (symbolized-text-address)	BENIGN-SYMBOLIZED
 0x4bbf0	FUN_0004bbf0	0x4c0b0	memset	r5	0x3754 printed as &UNK_00003754 (symbolized-text-address)	BENIGN-SYMBOLIZED
 0x4def0	FUN_0004def0	0x4e454	FUN_0004de30	r9	0x0 not at argument 6 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
-0x4f720	FUN_0004f720	0x4f930	memset	r9	0x9 not at argument 6 of any C call (1 C calls)	BENIGN-IMPORT-ARITY
+0x4f720	gldInitStateDefaults	0x4f930	memset	r9	0x9 not at argument 6 of any C call (1 C calls)	BENIGN-IMPORT-ARITY
 0x656b0	FUN_000656b0	0x65790	FUN_00065610	r5	r1+0x38 (a stack address) not at argument 2 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x656b0	FUN_000656b0	0x65790	FUN_00065610	r6	r1+0x3c (a stack address) not at argument 3 of any C call (1 C calls)	BENIGN-CALLEE-IGNORES
 0x7a4a0	FUN_0007a4a0	0x7a604	recordDestFileIs0	r4	incoming param_3 not at argument 1 of any C call (2 C calls)	BENIGN-CALLEE-ONLY-RETURNS-IT

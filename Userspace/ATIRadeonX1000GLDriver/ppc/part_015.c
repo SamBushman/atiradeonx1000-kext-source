@@ -3876,7 +3876,7 @@ int FUN_000a7050(param_1)
   *(undefined4 *)(param_1 + 0x20b8) = 0x10;
   uVar6 = (*pcVar4)(0x40,a1,iVar5,in_r6,a4,uVar6,pcVar4);
   *(undefined4 *)(param_1 + 0x20bc) = uVar6;
-  FUN_0004f720(iVar9);
+  gldInitStateDefaults(iVar9);
   puVar2 = PTR_FUN_001e8afc;
   *(undefined **)(((unsigned char *)0x000013e0) + param_1) = PTR_FUN_001e89c4;
   *(undefined **)(((unsigned char *)0x00001398) + param_1) = puVar2;

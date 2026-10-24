@@ -370,7 +370,7 @@
 0x3f050	336	FUN_0003f050	part_006	converted
 0x3f1c0	700	fpilTranslateSource	part_006	converted
 0x3f4e0	232	fpilTranslateSourceWithSwizzle	part_006	converted
-0x3f5d0	12	FUN_0003f5d0	part_006	converted
+0x3f5d0	12	freeIfNonNull	part_006	converted
 0x3f5e0	112	fpilDestroyTranslator	part_006	converted
 0x3f660	220	fpilCreateTranslator	part_006	converted
 0x3f750	232	fpilTranslateDestination	part_006	converted
@@ -430,8 +430,8 @@
 0x4dac0	272	gldValidateDepthTest	part_007	converted
 0x4dbe0	76	FUN_0004dbe0	part_007	converted
 0x4dc30	220	gldValidateTexEnvColor	part_007	converted
-0x4dd10	40	FUN_0004dd10	part_007	converted
-0x4dd40	116	FUN_0004dd40	part_007	converted
+0x4dd10	40	gldEmitScissorRegs	part_007	converted
+0x4dd40	116	gldEmitViewportAndGuardBand	part_007	converted
 0x4ddc0	104	FUN_0004ddc0	part_007	converted
 0x4de30	180	FUN_0004de30	part_007	converted
 0x4def0	2428	FUN_0004def0	part_007	converted
@@ -444,7 +444,7 @@
 0x4f160	352	FUN_0004f160	part_007	converted
 0x4f2e0	616	FUN_0004f2e0	part_007	converted
 0x4f550	452	gldValidateScissor	part_007	converted
-0x4f720	1348	FUN_0004f720	part_007	converted
+0x4f720	1348	gldInitStateDefaults	part_007	converted
 0x4fc80	252	FUN_0004fc80	part_007	converted
 0x4fd80	492	FUN_0004fd80	part_007	converted
 0x4ff70	416	gldValidateAlphaTest	part_007	converted
@@ -462,8 +462,8 @@
 0x53000	52	FUN_00053000	part_007	converted
 0x53040	20	FUN_00053040	part_007	converted
 0x53060	4	noop_53060	part_007	converted
-0x53070	36	FUN_00053070	part_007	converted
-0x530a0	24	FUN_000530a0	part_007	converted
+0x53070	36	extvsConstantsDirty	part_007	converted
+0x530a0	24	extvsClearConstantsDirty	part_007	converted
 0x530c0	184	FUN_000530c0	part_007	converted
 0x53190	116	FUN_00053190	part_007	converted
 0x53220	284	extvsGetOrCreateStateSymbol	part_007	converted
@@ -478,7 +478,7 @@
 0x53a90	100	extvsFindShaderIndex	part_007	converted
 0x53b00	84	extvsGetShaderById	part_007	converted
 0x53b60	568	extvsBindShader	part_007	converted
-0x53dc0	20	FUN_00053dc0	part_008	converted
+0x53dc0	20	extvsReserveSymbolIds	part_008	converted
 0x53de0	268	extvsDeleteShaderObject	part_008	converted
 0x53ef0	12	glDeleteVertexShaderEXT_impl	part_008	converted
 0x53f00	124	glShaderOp1EXT_impl	part_008	converted
@@ -488,7 +488,7 @@
 0x541a0	196	glWriteMaskEXT_impl	part_008	converted
 0x54270	308	glInsertComponentEXT_impl	part_008	converted
 0x543b0	164	glExtractComponentEXT_impl	part_008	converted
-0x54460	8	FUN_00054460	part_008	converted
+0x54460	8	glGenSymbolsEXT_impl5	part_008	converted
 0x54470	272	FUN_00054470	part_008	converted
 0x54590	288	FUN_00054590	part_008	converted
 0x546d0	284	FUN_000546d0	part_008	converted
@@ -561,7 +561,7 @@
 0x62120	252	extvsComputeStateKey	part_009	converted
 0x62220	272	extvsStateFree	part_009	converted
 0x62370	104	FUN_00062370	part_009	converted
-0x623e0	40	FUN_000623e0	part_009	converted
+0x623e0	40	extvsInitLimits	part_009	converted
 0x62410	116	FUN_00062410	part_009	converted
 0x62490	120	FUN_00062490	part_009	converted
 0x62510	92	FUN_00062510	part_009	converted

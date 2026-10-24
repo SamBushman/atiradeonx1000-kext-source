@@ -944,7 +944,7 @@ int FUN_00025bf0(ctx, program)
     if (*(int *)(program + 0x34) != 0) {
       *(undefined4 *)(program + 0x34) = 0;
     }
-    FUN_0003f5d0(*(undefined4 *)(program + 0x38));
+    freeIfNonNull(*(undefined4 *)(program + 0x38));
     *(undefined4 *)(program + 0x38) = 0;
     listNode = *(int **)(program + 0x24);
     while (listNode != (int *)(program + 0x20)) {
@@ -1147,7 +1147,7 @@ LAB_000260dc:
       }
       bVar3 = false;
       uVar5 = 0x1f9;
-      FUN_0003f5d0(param_2[0xe]);
+      freeIfNonNull(param_2[0xe]);
       param_2[0xe] = 0;
       while( true ) {
         if (*(short *)*param_2 == -0x74d0) {
@@ -1206,7 +1206,7 @@ LAB_000260dc:
         if (param_2[0xd] != 0) {
           param_2[0xd] = 0;
         }
-        FUN_0003f5d0(param_2[0xe]);
+        freeIfNonNull(param_2[0xe]);
         param_2[0xe] = 0;
         fpilDestroyTranslator(piVar7);
       }
@@ -1275,7 +1275,7 @@ LAB_000264f0:
   iVar2 = FUN_0003b5b0(iVar3,piVar1 + 5);
   if (iVar2 != 0) {
     if (piVar1[3] == param_2[5]) {
-      iVar2 = FUN_00053070(iVar3);
+      iVar2 = extvsConstantsDirty(iVar3);
     }
     else {
       piVar1[3] = param_2[5];
@@ -1290,7 +1290,7 @@ LAB_000264f0:
       if (param_2[0xd] != 0) {
         param_2[0xd] = 0;
       }
-      FUN_0003f5d0(param_2[0xe]);
+      freeIfNonNull(param_2[0xe]);
       param_2[0xe] = 0;
       if (*(short *)*param_2 == -0x74cf) {
         iVar2 = _glpPPShaderLinearize(*(undefined4 *)((short *)*param_2 + 2),0xff);

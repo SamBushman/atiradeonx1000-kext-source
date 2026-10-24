@@ -885,7 +885,7 @@ PTR_FUN_001e89c8	0x1e89c8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_LAB_001e89cc	0x1e89cc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_LAB_001e89cc asm("PTR_LAB_001e89cc");	pointer -> _raw_entry_627e0	data.s
 PTR_FUN_001e89d0	0x1e89d0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89d0 asm("PTR_FUN_001e89d0");	pointer -> vpStateCacheCreate	data.s
 PTR_LAB_001e89d4	0x1e89d4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_LAB_001e89d4 asm("PTR_LAB_001e89d4");	pointer -> _raw_entry_772f0	data.s
-PTR_FUN_001e89d8	0x1e89d8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89d8 asm("PTR_FUN_001e89d8");	pointer -> FUN_000623e0	data.s
+PTR_FUN_001e89d8	0x1e89d8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89d8 asm("PTR_FUN_001e89d8");	pointer -> extvsInitLimits	data.s
 PTR_FUN_001e89dc	0x1e89dc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89dc asm("PTR_FUN_001e89dc");	pointer -> noop_70c60	data.s
 PTR_FUN_001e89e0	0x1e89e0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e0 asm("PTR_FUN_001e89e0");	pointer -> FUN_00062940	data.s
 PTR_FUN_001e89e4	0x1e89e4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e4 asm("PTR_FUN_001e89e4");	pointer -> evsAssignVertexInputs	data.s
