@@ -2753,9 +2753,9 @@ int FUN_00135a2c(param_1, param_2, param_3)
 }
 
 /* FUN_00135c20 @ 0x135c20 (260 bytes) */
-int FUN_00135c20(param_1, param_2, param_3)
+int FUN_00135c20(param_1, elementIndex, param_3)
   int param_1;
-  uint param_2;
+  uint elementIndex;
   uint param_3;
 {
   undefined4 uVar1;
@@ -2766,16 +2766,16 @@ int FUN_00135c20(param_1, param_2, param_3)
   uint *puVar6;
   
   uVar1 = 1;
-  if (param_2 != param_3) {
-    callResult = ((int (*)())InterferenceMatrix__testPair)(param_1,param_3,param_2);
+  if (elementIndex != param_3) {
+    callResult = ((int (*)())InterferenceMatrix__testPair)(param_1,param_3,elementIndex);
     uVar1 = 0;
     if (callResult == 0) {
-      uVar5 = param_2;
-      if ((int)param_3 < (int)param_2) {
+      uVar5 = elementIndex;
+      if ((int)param_3 < (int)elementIndex) {
         uVar5 = param_3;
       }
-      if ((int)param_2 < (int)param_3) {
-        param_2 = param_3;
+      if ((int)elementIndex < (int)param_3) {
+        elementIndex = param_3;
       }
       puVar6 = *(uint **)(param_1 + 4);
       if (uVar5 < *puVar6) {
@@ -2789,8 +2789,8 @@ int FUN_00135c20(param_1, param_2, param_3)
       else {
         puVar4 = (undefined4 *)Vector__elementRefGrow(puVar6,uVar5);
       }
-      ((int (*)())FUN_00135a2c)(*puVar4,param_2,param_1);
-      ((int (*)())FUN_00134cd4)(param_1,uVar5,param_2);
+      ((int (*)())FUN_00135a2c)(*puVar4,elementIndex,param_1);
+      ((int (*)())FUN_00134cd4)(param_1,uVar5,elementIndex);
       uVar1 = 1;
     }
   }

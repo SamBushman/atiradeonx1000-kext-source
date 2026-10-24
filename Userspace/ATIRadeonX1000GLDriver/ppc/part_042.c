@@ -373,27 +373,27 @@ LAB_00139978:
 }
 
 /* FUN_00139c78 @ 0x139c78 (200 bytes) */
-int FUN_00139c78(inst, param_2, param_3, param_4)
+int FUN_00139c78(inst, param_2, param_3, program)
   int inst;
   int param_2;
   undefined4 param_3;
-  int param_4;
+  int program;
 {
   int iVar1;
   int *piVar2;
   
   if (((*(uint *)(inst + 0x14) & 1) != 0) &&
      ((param_2 == 0 || ((*(uint *)(param_2 + 0x14) & 1) != 0)))) {
-    iVar1 = ((int (*)())FUN_001398b4)(inst,param_2,param_3,param_4);
+    iVar1 = ((int (*)())FUN_001398b4)(inst,param_2,param_3,program);
     if (iVar1 != 0) {
-      *(int *)(inst + 0x150) = *(int *)(param_4 + 0x474) + -1;
+      *(int *)(inst + 0x150) = *(int *)(program + 0x474) + -1;
     }
-    piVar2 = *(int **)(*(int *)(param_4 + 8) + 0x30c);
-    iVar1 = (**(code **)(*piVar2 + 0x70))(piVar2,param_2,param_3,inst,param_4);
+    piVar2 = *(int **)(*(int *)(program + 8) + 0x30c);
+    iVar1 = (**(code **)(*piVar2 + 0x70))(piVar2,param_2,param_3,inst,program);
     if (iVar1 != 0) {
-      *(int *)(inst + 0x150) = *(int *)(param_4 + 0x474) + -1;
+      *(int *)(inst + 0x150) = *(int *)(program + 0x474) + -1;
     }
-    FUN_001486e8(inst,param_4);
+    FUN_001486e8(inst,program);
     return;
   }
   return;
@@ -1859,8 +1859,8 @@ LAB_0013c188:
 #undef vecArena
 
 /* FUN_0013c210 @ 0x13c210 (964 bytes) */
-int FUN_0013c210(param_1)
-  int param_1;
+int FUN_0013c210(program)
+  int program;
 {
   int sourceDef;
   bool bVar1;
@@ -1894,24 +1894,24 @@ int FUN_0013c210(param_1)
   #define vec2Data (*(int *)(local_44_buf + 0x08))
   #define vec2Arena (*(undefined4 *)(local_44_buf + 0x0c))
   
-  iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 8),0x1c);
-  if ((((iVar2 == 0) && (iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 8),0x1d), iVar2 == 0)) &&
-      (iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 8),0x39), iVar2 == 0)) &&
-     (iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 8),0x1b), iVar2 == 0)) {
-    Compiler__logf(*(undefined4 *)(param_1 + 8),
+  iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x1c);
+  if ((((iVar2 == 0) && (iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x1d), iVar2 == 0)) &&
+      (iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x39), iVar2 == 0)) &&
+     (iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),0x1b), iVar2 == 0)) {
+    Compiler__logf(*(undefined4 *)(program + 8),
                  "Special : all peephole flags off -> bypass Rewrite()\n",in_r5,in_r6,in_r7,in_r8,
                  in_r9,in_r10);
   }
-  *(int *)(param_1 + 0x474) = *(int *)(param_1 + 0x474) + 1;
-  vecArena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
+  *(int *)(program + 0x474) = *(int *)(program + 0x474) + 1;
+  vecArena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
   vecCount = 0;
   vecCapacity = 2;
   vecData = Arena__alloc(vecArena,8);
-  vec2Arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
+  vec2Arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
   vec2Capacity = 2;
   vec2Count = 0;
   vec2Data = Arena__alloc(vec2Arena,8);
-  iVar2 = *(int *)(param_1 + 0x3c4);
+  iVar2 = *(int *)(program + 0x3c4);
   loopIndex = 1;
   iVar8 = 0;
   do {
@@ -1948,11 +1948,11 @@ int FUN_0013c210(param_1)
       uVar11 = vecCount;
       while (uVar11 != 0) {
         if (bVar1) {
-          if ((local_58 == 0) || (*(int *)(param_1 + 0x474) == *(int *)(local_58 + 0x150))) {
+          if ((local_58 == 0) || (*(int *)(program + 0x474) == *(int *)(local_58 + 0x150))) {
             bVar1 = false;
           }
           else {
-            *(int *)(local_58 + 0x150) = *(int *)(param_1 + 0x474);
+            *(int *)(local_58 + 0x150) = *(int *)(program + 0x474);
             sourceDef = IRInst__getOperandSource(local_58,1);
             uVar11 = vecCount;
             if (sourceDef == 0) {
@@ -1963,7 +1963,7 @@ int FUN_0013c210(param_1)
               uVar10 = *puVar3;
 LAB_0013c528:
               uVar6 = ((int (*)())FUN_0013922c)(&vec2Capacity);
-              ((int (*)())FUN_00139c78)(local_58,uVar10,uVar6,param_1);
+              ((int (*)())FUN_00139c78)(local_58,uVar10,uVar6,program);
               goto LAB_0013c540;
             }
             if (vecCount < vecCapacity) {
@@ -1976,7 +1976,7 @@ LAB_0013c528:
               piVar4 = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
             }
             *piVar4 = local_58;
-            uVar10 = ((int (*)())FUN_0013a38c)(local_58,&vec2Capacity,param_1);
+            uVar10 = ((int (*)())FUN_0013a38c)(local_58,&vec2Capacity,program);
 LAB_0013c54c:
             local_58 = IRInst__getOperandSource(local_58,uVar10);
             bVar1 = true;
@@ -2018,7 +2018,7 @@ LAB_0013c540:
           uVar11 = vecCount;
         }
       }
-      iVar2 = *(int *)(param_1 + 0x3c4);
+      iVar2 = *(int *)(program + 0x3c4);
     }
     loopIndex = loopIndex + 1;
     iVar8 = iVar8 + 4;
@@ -5820,9 +5820,9 @@ int FUN_001427a4(param_1, param_2, inst)
 }
 
 /* FUN_00142974 @ 0x142974 (1532 bytes) */
-int FUN_00142974(param_1, param_2, param_3, param_4)
+int FUN_00142974(param_1, inst, param_3, param_4)
   int *param_1;
-  int *param_2;
+  int *inst;
   int param_3;
   int param_4;
 {
@@ -5854,18 +5854,18 @@ int FUN_00142974(param_1, param_2, param_3, param_4)
   undefined4 local_4c;
   undefined4 local_48 [4];
   
-  ((int (*)())FUN_001427a4)(auStack_58,param_1,param_2);
+  ((int (*)())FUN_001427a4)(auStack_58,param_1,inst);
   if (param_3 == param_4) {
     return 1;
   }
-  if ((*(int *)(param_2[0x22] + 8) == 0x8e) ||
-     (vecCount = (**(code **)(*param_2 + 0x5c))(param_2), vecCount != 0)) {
+  if ((*(int *)(inst[0x22] + 8) == 0x8e) ||
+     (vecCount = (**(code **)(*inst + 0x5c))(inst), vecCount != 0)) {
     return 0;
   }
   vecArena = *(undefined4 *)(*param_1 + 0x378);
   vecCapacity = 2;
   vecData = Arena__alloc(vecArena,8);
-  puVar11 = (uint *)param_2[4];
+  puVar11 = (uint *)inst[4];
   if (puVar11[1] != 0) {
     loopIndex = 0;
     uVar5 = 1;
@@ -5880,13 +5880,13 @@ int FUN_00142974(param_1, param_2, param_3, param_4)
             if (uVar1 <= loopIndex) {
               _memset(uVar1 * 4 + puVar11[2],0,(loopIndex - uVar1) * 4 + 4);
               puVar11[1] = uVar5;
-              puVar12 = (uint *)param_2[4];
+              puVar12 = (uint *)inst[4];
             }
             piVar2 = (int *)(iVar6 + puVar11[2]);
           }
           else {
             piVar2 = (int *)Vector__elementRefGrow(puVar11,loopIndex);
-            puVar12 = (uint *)param_2[4];
+            puVar12 = (uint *)inst[4];
           }
           iVar7 = *piVar2;
           if (loopIndex2 < *puVar12) {
@@ -5895,13 +5895,13 @@ int FUN_00142974(param_1, param_2, param_3, param_4)
             if (uVar1 <= loopIndex2) {
               _memset(uVar1 * 4 + puVar12[2],0,(loopIndex2 - uVar1) * 4 + 4);
               puVar12[1] = loopIndex2 + 1;
-              puVar11 = (uint *)param_2[4];
+              puVar11 = (uint *)inst[4];
             }
             piVar2 = (int *)(loopIndex2 * 4 + puVar12[2]);
           }
           else {
             piVar2 = (int *)Vector__elementRefGrow(puVar12,loopIndex2);
-            puVar11 = (uint *)param_2[4];
+            puVar11 = (uint *)inst[4];
           }
           if (iVar7 == *piVar2) break;
         }
@@ -5930,7 +5930,7 @@ int FUN_00142974(param_1, param_2, param_3, param_4)
               piVar4 = (int *)IRInst__getOperandSource(piVar2,piVar2[0x21]);
             }
             uVar1 = vecCount;
-            if (piVar4 == param_2) {
+            if (piVar4 == inst) {
               if (vecCount < vecCapacity) {
                 iVar7 = vecCount * 4;
                 _memset(iVar7 + vecData,0,4);
@@ -5941,11 +5941,11 @@ int FUN_00142974(param_1, param_2, param_3, param_4)
                 puVar3 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
               }
               *puVar3 = piVar2;
-              puVar11 = (uint *)param_2[4];
+              puVar11 = (uint *)inst[4];
               goto LAB_00142c3c;
             }
           }
-          puVar11 = (uint *)param_2[4];
+          puVar11 = (uint *)inst[4];
         }
 LAB_00142c3c:
         loopIndex2 = loopIndex2 + 1;
