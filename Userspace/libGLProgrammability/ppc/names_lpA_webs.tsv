@@ -388,5 +388,4 @@ use	UpdateOperations	iVar8	walkIdxNext	INFERRED	new position in the chunk list w
 local	UpdateOperations	param_3	unusedArg3	INFERRED	third argument is not used by the function
 local	BindingTable__InsertUniformArray	param_3	unusedArg3	INFERRED	third argument is not used by the function
 local	_updateExtensionBehavior	local_1c0	firstExtNode	INFERRED	copy of the first node of the extension map (begin iterator) kept in a local and never read
-local	TSymbolTableLevel__clone	a6	headerOrNewRefCount	INFERRED	flow-joined: the new map's header node (also forwarded as stale seventh argument), later the decremented refcount
 local	TSymbolTableLevel__dump	a6	treeEnd	INFERRED	the map's header node (end iterator), also forwarded as stale seventh argument

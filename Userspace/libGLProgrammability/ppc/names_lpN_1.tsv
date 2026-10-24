@@ -224,3 +224,27 @@ use	TIntermediate__addConversion	iVar11	childConstantUnion	INFERRED	constant nod
 use	TIntermediate__addConversion	iVar11	constantInt	INFERRED	the integer constant value read from the node (first entry of the constant array)	^\s*iVar11\ =\ \*\*\(int\ \*\*\)\(iVar11\ \+\ 0x30\);$	+1	lhs	none
 use	TIntermediate__addConversion	iVar11	constantInt	INFERRED	the integer constant value being converted to bool/float	^\s*a6\ =\ \(undefined4\ \*\)\(iVar11\ \+\ \-1\);$	+2
 local	_byte_scan	iVar3	inputChar	CONFIRMED	the current input character (-1 = EOF); for single-character tokens it is also the token code returned
+local	TPPStreamCompiler__constructFromOperand	a6	scratchR9	INFERRED	scratch register (7th argument, r9): staged constant 0xa7b7736c, then the field-name string length (chars[-0xc]), then the terminator character loaded from the global; forwarded as a dead vararg (one def-use web, cannot be split)
+use	TPPStreamCompiler__parseIntermediateTree	iVar1	labelQueueSize	INFERRED	size() of the label queue while it is drained	^\s*iVar1\ =\ size\(pQVar3\);$	+2
+use	TPPStreamCompiler__parseIntermediateTree	iVar1	functionStackEmpty	INFERRED	ParseFunctionStack::empty() of the function stack at this+0x58 (0 = not empty)	^\s*while\ \(iVar1\ =\ \(\(int\ \(\*\)\(\)\)ParseFunctionStack__empty\)\(\(unsigned\ char\ \*\)\(this\ \+\ 0x58\)\),\ iVar1\ ==\ 0\)\ \{$	+1
+use	TSymbolTableLevel__clone	a6	mapHeader	INFERRED	the new map header node (newLevel[1], its +0xc parent set to itself); also forwarded as the stale 7th argument of the insert call	^\s*a6\ =\ puVar4\[1\];$	+2
+use	TSymbolTableLevel__clone	a6	mapHeader	INFERRED	the new map header node (newLevel[1], its +0xc parent set to itself); also forwarded as the stale 7th argument of the insert call	^\s*\(\*\(int\ \*\*\)\(local_90\[0\]\ \+\ 0x18\),param_2,in_r5,in_r6,in_r7,in_r8,a6\);$	+1
+use	TSymbolTableLevel__clone	a6	newRefCount	INFERRED	the decremented reference count (oldRefCount - 1) stored back with the conditional store	^\s*a6\ =\ iVar2\ \+\ \-1;$	+1
+use	TSymbolTableLevel__clone	a6	newRefCount	INFERRED	the decremented reference count (oldRefCount - 1) stored back with the conditional store	^\s*iVar1\ =\ storeWordConditionalIndexed\(a6,0,piVar6\);$	+1
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*iVar48\ =\ 0;$	+1
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*\*\(short\ \*\)pTVar46\ =\ \(short\)iVar48;$	+1
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*iVar55\ =\ iVar48\ \*\ 2;$	+2
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*iVar48\ =\ \(int\)\*\(short\ \*\)\(\&_yytable\ \+\ \(int\)param_7\);$	+3
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*else\ if\ \(iVar48\ !=\ 0\)\ \{$	+2
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*iVar48\ =\ \(int\)\*\(short\ \*\)\(\&_yytable\ \+\ \(int\)param_7\);$@2	+3
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*if\ \(iVar48\ ==\ 0\)\ goto\ LAB_97bac03c;$	+2
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*uVar57\ =\ \-iVar48;$	+1
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*iVar48\ =\ \(int\)\*\(short\ \*\)\(\&_yytable\ \+\ \(int\)param_7\);$@3	+1
+use	yyparse	iVar48	yystate	INFERRED	bison yystate: the current parser state number (0 at start, stored in the state stack, indexes yypact/yydefact)	^\s*iVar48\ =\ \(int\)\*\(short\ \*\)\(\&DAT_97c35e08\ \+\ param_8\);$	+1
+use	yyparse	iVar48	yytoken	INFERRED	bison yytoken: the translated lookahead token (yytranslate[yychar]; 0 at EOF, 0xa9 undefined token)	^\s*iVar48\ =\ 0;$@2	+1
+use	yyparse	iVar48	yytoken	INFERRED	bison yytoken: the translated lookahead token (yytranslate[yychar]; 0 at EOF, 0xa9 undefined token)	^\s*iVar48\ =\ 0xa9;$	+1
+use	yyparse	iVar48	yytoken	INFERRED	bison yytoken: the translated lookahead token (yytranslate[yychar]; 0 at EOF, 0xa9 undefined token)	^\s*iVar48\ =\ \(int\)\(char\)\(\&_yytranslate\)\[iVar44\];$	+1
+use	yyparse	iVar48	yytoken	INFERRED	bison yytoken: the translated lookahead token (yytranslate[yychar]; 0 at EOF, 0xa9 undefined token)	^\s*uVar57\ =\ sVar1\ \+\ iVar48;$	+4
+use	yyparse	iVar48	yylen	INFERRED	bison yylen = yyr2[yyn]: the length of the rule being reduced (number of value-stack entries popped)	^\s*iVar48\ =\ \(int\)\*\(short\ \*\)\(\&_yyr2\ \+\ local_6c\);$	+2
+use	yyparse	iVar48	yylen	INFERRED	bison yylen = yyr2[yyn]: the length of the rule being reduced (number of value-stack entries popped)	^\s*_memcpy\(\&local_880,pTVar56\ \+\ \(1\ \-\ iVar48\)\ \*\ 0x2c,0x2c\);$	+1
+use	yyparse	iVar48	yylen	INFERRED	bison yylen = yyr2[yyn]: the length of the rule being reduced (number of value-stack entries popped)	^\s*pTVar46\ =\ pTVar46\ \+\ iVar48\ \*\ \-2;$	+2

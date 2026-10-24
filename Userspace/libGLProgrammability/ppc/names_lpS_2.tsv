@@ -128,4 +128,3 @@ local	TParseContext__addConstStruct	a1	intermAggregate	INFERRED	the intermTyped'
 local	TParseContext__addConstStruct	a1_00	textCopy	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
 local	TParseContext__addConstStruct	a1_01	textCopy2	INFERRED	incoming argument register (r4) forwarded unchanged as an outgoing call argument
 local	TParseContext__addConstStruct	a2	fwdR5	INFERRED	r5 staged as 3rd argument: intermTyped, then the field-name compare length
-local	TPPStreamCompiler__constructFromOperand	a6	fieldNameLengthOrConst	INFERRED	scratch in one register: constant 0xa7b7736c staged as 7th argument, then the field-name string length (chars[-0xc]), then the terminator character loaded from the global

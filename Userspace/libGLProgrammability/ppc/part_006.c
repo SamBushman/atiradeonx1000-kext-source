@@ -1486,6 +1486,7 @@ int TSymbolTableLevel__clone(this, map)
   unsigned char * this;
   unsigned char * map;
 {
+  int newRefCount;
   int *refCountPtr;
   int atomicStore;
   int oldRefCount;
@@ -1498,7 +1499,7 @@ int TSymbolTableLevel__clone(this, map)
   undefined4 staleR6;
   undefined4 staleR7;
   undefined4 staleR8;
-  int headerOrNewRefCount;
+  int mapHeader;
   char reservation;
   byte cr0Reg;
   int iter [4];
@@ -1523,14 +1524,14 @@ int TSymbolTableLevel__clone(this, map)
   *headerNode = 0;
   *(undefined4 *)(newLevel[1] + 4) = 0;
   *(undefined4 *)(newLevel[1] + 8) = newLevel[1];
-  headerOrNewRefCount = newLevel[1];
-  *(int *)(headerOrNewRefCount + 0xc) = headerOrNewRefCount;
+  mapHeader = newLevel[1];
+  *(int *)(mapHeader + 0xc) = mapHeader;
   treeEnd = *(int *)(this + 4);
   iter[0] = *(int *)(treeEnd + 8);
   if (iter[0] != treeEnd) {
     do {
       clonedSymbol = (int *)(**(code **)(**(int **)(iter[0] + 0x18) + 0x18))
-                                (*(int **)(iter[0] + 0x18),map,insertKeyPtr,staleR6,staleR7,staleR8,headerOrNewRefCount);
+                                (*(int **)(iter[0] + 0x18),map,insertKeyPtr,staleR6,staleR7,staleR8,mapHeader);
       unusedInsertWord = 0;
       symbolName = (unsigned char *)(**(code **)(*clonedSymbol + 8))(clonedSymbol);
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&nameCopyAlloc,symbolName);
@@ -1543,9 +1544,9 @@ int TSymbolTableLevel__clone(this, map)
       destroyAlloc[0] = nameCopyAlloc;
       do {
         oldRefCount = *refCountPtr;
-        headerOrNewRefCount = oldRefCount + -1;
+        newRefCount = oldRefCount + -1;
         if (reservation != '\0') {
-          atomicStore = storeWordConditionalIndexed(headerOrNewRefCount,0,refCountPtr);
+          atomicStore = storeWordConditionalIndexed(newRefCount,0,refCountPtr);
           *refCountPtr = atomicStore;
           cr0Reg = 2;
         }
@@ -1666,6 +1667,8 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   undefined *scratchR9;
   uint scratchR10;
 {
+  int yylen;
+  int yytoken;
   int fieldNameStr2;
   int foundSymbol;
   int aggregateNode3;
@@ -2033,7 +2036,7 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   unsigned char * yyss;
   unsigned char * yyssp;
   unsigned char * constructorIdentifierOp2;
-  int yystateOrYylen;
+  int yystate;
   undefined4 lastLevel2;
   int *paramEntry;
   unsigned char * symbolTable3;
@@ -2241,7 +2244,7 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   yyOutArgs = yy_outargs;
   yyvsp = yyvsInit;
   yystacksize = (unsigned char *)0xc8;
-  yystateOrYylen = 0;
+  yystate = 0;
   yyerrstatus = 0;
   yychar = -2;
   yyssp = yyssBeforeInit;
@@ -2251,7 +2254,7 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
 LAB_97ba3784:
   do {
     yyssp = yyssp + 2;
-    *(short *)yyssp = (short)yystateOrYylen;
+    *(short *)yyssp = (short)yystate;
     yyvsBase = yyvs;
     yyssBase = yyss;
     if (yyss + (int)yyssBytes + -2 <= yyssp) {
@@ -2280,8 +2283,8 @@ LAB_97ba3784:
       }
     }
     yylexResult = CONCAT44(yychar,scratchR4);
-    yystateByteOffset = yystateOrYylen * 2;
-    yypactEntry = (&_yypact)[yystateOrYylen];
+    yystateByteOffset = yystate * 2;
+    yypactEntry = (&_yypact)[yystate];
     staleR8Value = yyssBytes;
     yyvs = yyvsBase;
     yyss = yyssBase;
@@ -2306,12 +2309,12 @@ LAB_97bac050:
         if (((*(short *)((int)&_yypact + yystateByteOffset) != -0x8000) &&
             (yyn = (int)*(short *)((int)&_yypact + yystateByteOffset) + 1, yyn < 0x4f0)) &&
            (scratchR9 = (undefined *)(yyn * 2), *(short *)(&_yycheck + (int)scratchR9) == 1)) {
-          yystateOrYylen = (int)*(short *)(&_yytable + (int)scratchR9);
-          if (yystateOrYylen < 0) {
-            if (yystateOrYylen != -0x8000) goto LAB_97bac0d0;
+          yystate = (int)*(short *)(&_yytable + (int)scratchR9);
+          if (yystate < 0) {
+            if (yystate != -0x8000) goto LAB_97bac0d0;
           }
-          else if (yystateOrYylen != 0) {
-            if (yystateOrYylen == 0x14d) {
+          else if (yystate != 0) {
+            if (yystate == 0x14d) {
               return 0;
             }
             yyvsp = yyvsp + 0x2c;
@@ -2335,26 +2338,26 @@ LAB_97bac050:
     yychar = (int)(yylexResult >> 0x20);
     scratchR4 = (undefined4)yylexResult;
     if ((longlong)yylexResult < 0x100000000) {
-      yystateOrYylen = 0;
+      yytoken = 0;
       yychar = 0;
     }
     else {
-      yystateOrYylen = 0xa9;
+      yytoken = 0xa9;
       if (yylexResult < 0x15d00000000) {
-        yystateOrYylen = (int)(char)(&_yytranslate)[yychar];
+        yytoken = (int)(char)(&_yytranslate)[yychar];
       }
     }
-    yyn = yypactEntry + yystateOrYylen;
+    yyn = yypactEntry + yytoken;
     if ((0x4ef < yyn) ||
-       (scratchR9 = (undefined *)(yyn * 2), *(short *)(&_yycheck + (int)scratchR9) != yystateOrYylen))
+       (scratchR9 = (undefined *)(yyn * 2), *(short *)(&_yycheck + (int)scratchR9) != yytoken))
     goto LAB_97ba3958;
-    yystateOrYylen = (int)*(short *)(&_yytable + (int)scratchR9);
-    if (yystateOrYylen < 0) {
-      if (yystateOrYylen != -0x8000) break;
+    yystate = (int)*(short *)(&_yytable + (int)scratchR9);
+    if (yystate < 0) {
+      if (yystate != -0x8000) break;
       goto LAB_97bac03c;
     }
-    if (yystateOrYylen == 0) goto LAB_97bac03c;
-    if (yystateOrYylen == 0x14d) {
+    if (yystate == 0) goto LAB_97bac03c;
+    if (yystate == 0x14d) {
       return 0;
     }
     if (yychar != 0) {
@@ -2369,13 +2372,13 @@ LAB_97bac050:
     }
   } while( true );
 LAB_97bac0d0:
-  yyn = -yystateOrYylen;
+  yyn = -yystate;
 LAB_97ba3970:
   yyruleByteOffset = yyn * 2;
-  yystateOrYylen = (int)*(short *)(&_yyr2 + yyruleByteOffset);
-  if (0 < yystateOrYylen) {
+  yylen = (int)*(short *)(&_yyr2 + yyruleByteOffset);
+  if (0 < yylen) {
     scratchR5 = (char *)0x2c;
-    _memcpy(&yyval,yyvsp + (1 - yystateOrYylen) * 0x2c,0x2c);
+    _memcpy(&yyval,yyvsp + (1 - yylen) * 0x2c,0x2c);
     scratchR4 = r4Out2;
   }
   yyvalNodeReg = yyvalNode;
@@ -7989,8 +7992,8 @@ switchD_97ba39c8_caseD_0:
   typeTmp3VtableOrPub3Array = typeTmp3VtableReg;
   yyvalNode = yyvalNodeReg;
   scratchR5 = (char *)0x2c;
-  yyssp = yyssp + yystateOrYylen * -2;
-  yyvsp = yyvsp + yystateOrYylen * -0x2c + 0x2c;
+  yyssp = yyssp + yylen * -2;
+  yyvsp = yyvsp + yylen * -0x2c + 0x2c;
   _memcpy(yyvsp,&yyval,0x2c);
   scratchR10 = *(short *)(" !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^" +
                       yyruleByteOffset + 0x40) * 2;
@@ -8000,10 +8003,10 @@ switchD_97ba39c8_caseD_0:
   if ((yytableIndex < 0x4f0) &&
      (scratchR9 = (undefined *)(yytableIndex * 2),
      (int)*(short *)(&_yycheck + (int)scratchR9) == (int)*(short *)yyssp)) {
-    yystateOrYylen = (int)*(short *)(&_yytable + (int)scratchR9);
+    yystate = (int)*(short *)(&_yytable + (int)scratchR9);
   }
   else {
-    yystateOrYylen = (int)*(short *)(&DAT_97c35e08 + scratchR10);
+    yystate = (int)*(short *)(&DAT_97c35e08 + scratchR10);
   }
   goto LAB_97ba3784;
 LAB_97ba8338:
