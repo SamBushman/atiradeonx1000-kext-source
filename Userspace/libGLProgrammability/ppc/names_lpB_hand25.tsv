@@ -5,7 +5,7 @@ local	_InterpreterEmulateOp	pbVar9	srcDimCursor	INFERRED	walks the per-source di
 local	_InterpreterEmulateOp	iVar14	callStackTop	INFERRED	machine[0x29b]: call-stack pointer read for RET
 local	_InterpreterEmulateOp	piVar11	poppedStackTop	INFERRED	call-stack pointer after popping one return address
 local	_InterpreterEmulateOp	bVar25	fallsThrough	INFERRED	instruction does not branch: advance to the next instruction
-local	_InterpreterEmulateOp	dVar27	texLodOrBias	INFERRED	operand component passed as the LOD/bias argument of the texture sampler calls
+local	_InterpreterEmulateOp	dVar27	texLodBias	INFERRED	operand component passed as the LOD/bias argument of the texture sampler calls (single role)
 local	_InterpreterEmulateOp	dVar28	mathTemp	INFERRED	reused double temporary of the math operations (floor/log2/pow/cross product)
 local	_InterpreterEmulateOp	local_b0	i2dHi	INFERRED	high word 0x43300000 of the int->double conversion idiom
 local	_InterpreterEmulateOp	uStack_ac	i2dLo	INFERRED	low word (value ^ 0x80000000) of the int->double conversion idiom; also a logic result 0/1

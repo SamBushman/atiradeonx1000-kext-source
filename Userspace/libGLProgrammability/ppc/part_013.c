@@ -3249,7 +3249,7 @@ int * _InterpreterEmulateOp(int *machine,int *inst,double unusedFloatArg1,double
   uint sourceElement;
   bool fallsThrough;
   int sourcesRemaining;
-  double texLodOrBias;
+  double texLodBias;
   double mathTemp;
   double floorValue_29;
   double floorValue_30;
@@ -4956,7 +4956,7 @@ LAB_97bd1cd8:
 LAB_97bd29a8:
           programInfo = *(int *)(emulator + 0xd80);
         }
-        texLodOrBias = (double)operandComponent;
+        texLodBias = (double)operandComponent;
         if (*(int *)(programInfo + 0x38) - 0x8b30U < 2) {
           if (2.1474836e+09 <= opVec[8]) {
             d2iScratch3 = (longlong)(int)(opVec[8] - 2.1474836e+09);
@@ -4977,18 +4977,18 @@ LAB_97bd29a8:
         }
         else if (textureTarget < 3) {
           if (textureTarget == 1) {
-            ((void (*)())_InterpreterTextureSamplerSampleTexel3D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodOrBias,scratchF2,scratchF3,
+            ((void (*)())_InterpreterTextureSamplerSampleTexel3D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodBias,scratchF2,scratchF3,
                        scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,
                        leftoverStackArg1,leftoverStackArg2,leftoverStackArg3);
           }
         }
         else if (textureTarget == 3) {
-          ((void (*)())_InterpreterTextureSamplerSampleTexel2D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodOrBias,scratchF2,scratchF3,
+          ((void (*)())_InterpreterTextureSamplerSampleTexel2D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodBias,scratchF2,scratchF3,
                      scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,
                      leftoverStackArg1,leftoverStackArg2,leftoverStackArg3,leftoverStackArg4);
         }
         else if (textureTarget == 4) {
-          ((void (*)())_InterpreterTextureSamplerSampleTexel1D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodOrBias,scratchF2,scratchF3,
+          ((void (*)())_InterpreterTextureSamplerSampleTexel1D)(machine[0x28b],intComponent,in_r5_artifact,opVec + 4,&texelX,texLodBias,scratchF2,scratchF3,
                      scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,
                      leftoverStackArg1,leftoverStackArg2,leftoverStackArg3);
         }

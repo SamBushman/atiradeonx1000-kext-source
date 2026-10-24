@@ -61,24 +61,29 @@ int _PPCRuntimeCompilerSwizzleRegisterAV(compiler, vectorReg, swizzle)
   int vectorReg;
   uint *swizzle;
 {
+  uint selectorA;
+  uint firstSelector;
+  uint registerFields;
+  uint component3Selector;
+  uint selectorB;
+  uint remainingSelectors;
+  uint instWord;
   uint shiftedSelectors;
   uint nextSelector;
   uint secondSelector;
   uint eqShiftB;
   uint equalRunStart;
-  uint runStartOrInstWord;
-  uint swizzleWordOrInst;
+  uint runStart;
+  uint swizzleWord;
   uint shiftedSelectorsB;
   int srcRegB;
   int srcRegA;
   uint *codeCursor2;
   uint *codeCursor;
   int selectorBitBase;
-  uint firstSelector;
   uint selectors;
   int ascendingRun;
   int equalRun;
-  uint component3Selector;
   uint ascShiftB;
   uint *codeWritePtr;
   uint *nextCursor;
@@ -86,24 +91,24 @@ int _PPCRuntimeCompilerSwizzleRegisterAV(compiler, vectorReg, swizzle)
   uint eqShiftA;
   uint *emitPtr2;
   
-  swizzleWordOrInst = *swizzle;
+  swizzleWord = *swizzle;
   ascendingRun = 1;
   equalRun = 1;
-  selectors = (swizzleWordOrInst & 0x3000000) << 4 | (swizzleWordOrInst & 0x30000) << 8 | (swizzleWordOrInst & 0x300) << 0xc |
-          (swizzleWordOrInst & 3) << 0x10;
-  runStartOrInstWord = 0;
+  selectors = (swizzleWord & 0x3000000) << 4 | (swizzleWord & 0x30000) << 8 | (swizzleWord & 0x300) << 0xc |
+          (swizzleWord & 3) << 0x10;
+  runStart = 0;
   selectors = selectors | selectors >> 0x10;
   do {
-    if (((selectors >> (runStartOrInstWord * -4 + 0x1c & 0x3f)) + 1 & 3) == (selectors >> (runStartOrInstWord * -4 + 0x18 & 0x3f) & 3)
+    if (((selectors >> (runStart * -4 + 0x1c & 0x3f)) + 1 & 3) == (selectors >> (runStart * -4 + 0x18 & 0x3f) & 3)
        ) {
-      selectorBitBase = runStartOrInstWord * 4 + 8;
+      selectorBitBase = runStart * 4 + 8;
       ascendingRun = 2;
       ascShiftA = 0x20 - selectorBitBase;
       ascShiftB = 0x1c - selectorBitBase;
       goto LAB_97bda1ac;
     }
-    runStartOrInstWord = runStartOrInstWord + 1;
-  } while ((int)runStartOrInstWord < 4);
+    runStart = runStart + 1;
+  } while ((int)runStart < 4);
   goto LAB_97bda240;
   while( true ) {
     equalRun = equalRun + 1;
@@ -133,13 +138,13 @@ LAB_97bda278:
 LAB_97bda1ac:
     if (((selectors >> (ascShiftA & 0x3f)) + 1 & 3) != (selectors >> (ascShiftB & 0x3f) & 3)) break;
   }
-  if ((runStartOrInstWord == 0) && (ascendingRun < 4)) {
+  if ((runStart == 0) && (ascendingRun < 4)) {
     ascShiftA = 0x10;
     ascShiftB = 0xc;
     do {
       if (((selectors >> (ascShiftA & 0x3f)) + 1 & 3) != (selectors >> (ascShiftB & 0x3f) & 3)) break;
       ascendingRun = ascendingRun + 1;
-      runStartOrInstWord = runStartOrInstWord - 1 & 3;
+      runStart = runStart - 1 & 3;
       ascShiftA = ascShiftA + 4;
       ascShiftB = ascShiftB + 4;
     } while (ascendingRun < 4);
@@ -165,29 +170,29 @@ LAB_97bda304:
     return;
   }
   if (ascendingRun == 4) {
-    runStartOrInstWord = (swizzleWordOrInst & 0x3000000) >> 0x18;
-    if (runStartOrInstWord == 0) {
+    runStart = (swizzleWord & 0x3000000) >> 0x18;
+    if (runStart == 0) {
       return;
     }
-    swizzleWordOrInst = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
-    runStartOrInstWord = runStartOrInstWord << 8;
+    registerFields = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
+    runStart = runStart << 8;
 LAB_97bda710:
     codeWritePtr = *(uint **)(compiler + 0xe30);
-    runStartOrInstWord = swizzleWordOrInst | runStartOrInstWord & 0x300 | 0x1000002c;
+    instWord = registerFields | runStart & 0x300 | 0x1000002c;
 LAB_97bdaabc:
-    *codeWritePtr = runStartOrInstWord;
+    *codeWritePtr = instWord;
   }
   else {
     if (equalRun == 3) {
-      swizzleWordOrInst = vectorReg << 0xb;
-      runStartOrInstWord = selectors >> (equalRunStart * -4 + 0x10 & 0x3f);
+      registerFields = vectorReg << 0xb;
+      remainingSelectors = selectors >> (equalRunStart * -4 + 0x10 & 0x3f);
       codeCursor = *(uint **)(compiler + 0xe30);
-      *codeCursor = (selectors >> (equalRunStart * -4 + 0x1c & 0x3f) & 0xf) << 0x10 | 0x600000 | swizzleWordOrInst | 0x1000028c;
+      *codeCursor = (selectors >> (equalRunStart * -4 + 0x1c & 0x3f) & 0xf) << 0x10 | 0x600000 | registerFields | 0x1000028c;
       *(uint **)(compiler + 0xe30) = codeCursor + 1;
       srcRegA = vectorReg;
-      if ((runStartOrInstWord & 0xf) != 0) {
+      if ((remainingSelectors & 0xf) != 0) {
         srcRegA = 4;
-        codeCursor[1] = vectorReg << 0x10 | 0x800000U | swizzleWordOrInst | (runStartOrInstWord & 3) << 8 | 0x1000002c;
+        codeCursor[1] = vectorReg << 0x10 | 0x800000U | registerFields | (remainingSelectors & 3) << 8 | 0x1000002c;
         *(uint **)(compiler + 0xe30) = codeCursor + 2;
       }
       codeCursor = *(uint **)(compiler + 0xe30);
@@ -197,40 +202,40 @@ LAB_97bdaabc:
       if (equalRunStart == 0) {
         return;
       }
-      swizzleWordOrInst = vectorReg << 0x15 | vectorReg << 0x10 | swizzleWordOrInst;
-      runStartOrInstWord = equalRunStart;
+      registerFields = vectorReg << 0x15 | vectorReg << 0x10 | registerFields;
+      runStart = equalRunStart;
     }
     else {
       if (ascendingRun != 3) {
         if (equalRun == 2) {
-          swizzleWordOrInst = vectorReg << 0xb;
+          registerFields = vectorReg << 0xb;
           shiftedSelectorsB = selectors >> (equalRunStart * -4 + 0x14 & 0x3f);
-          runStartOrInstWord = shiftedSelectorsB & 0xf;
+          selectorB = shiftedSelectorsB & 0xf;
           nextSelector = selectors >> (equalRunStart * -4 + 0x10 & 0x3f) & 0xf;
           codeCursor = *(uint **)(compiler + 0xe30);
-          *codeCursor = (selectors >> (equalRunStart * -4 + 0x1c & 0x3f) & 0xf) << 0x10 | 0x600000 | swizzleWordOrInst |
+          *codeCursor = (selectors >> (equalRunStart * -4 + 0x1c & 0x3f) & 0xf) << 0x10 | 0x600000 | registerFields |
                     0x1000028c;
           emitPtr2 = codeCursor + 1;
           *(uint **)(compiler + 0xe30) = emitPtr2;
-          if (nextSelector == (runStartOrInstWord + 1 & 3)) {
+          if (nextSelector == (selectorB + 1 & 3)) {
             srcRegA = vectorReg;
-            if (runStartOrInstWord != 0) {
+            if (selectorB != 0) {
               srcRegA = 4;
-              *emitPtr2 = vectorReg << 0x10 | 0x800000U | swizzleWordOrInst | (shiftedSelectorsB & 3) << 8 | 0x1000002c;
+              *emitPtr2 = vectorReg << 0x10 | 0x800000U | registerFields | (shiftedSelectorsB & 3) << 8 | 0x1000002c;
               *(uint **)(compiler + 0xe30) = codeCursor + 2;
             }
             codeCursor2 = *(uint **)(compiler + 0xe30);
-            runStartOrInstWord = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000022c;
+            instWord = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000022c;
 LAB_97bda6e8:
-            *codeCursor2 = runStartOrInstWord;
+            *codeCursor2 = instWord;
             nextCursor = codeCursor2 + 1;
           }
           else {
-            if (nextSelector != runStartOrInstWord) {
+            if (nextSelector != selectorB) {
               srcRegA = vectorReg;
-              if (runStartOrInstWord != 0) {
+              if (selectorB != 0) {
                 srcRegA = 4;
-                *emitPtr2 = vectorReg << 0x10 | 0x800000U | swizzleWordOrInst | (shiftedSelectorsB & 3) << 8 | 0x1000002c;
+                *emitPtr2 = vectorReg << 0x10 | 0x800000U | registerFields | (shiftedSelectorsB & 3) << 8 | 0x1000002c;
                 *(uint **)(compiler + 0xe30) = codeCursor + 2;
               }
               selectors = selectors >> (equalRunStart * -4 + 0x10 & 0x3f);
@@ -240,29 +245,29 @@ LAB_97bda6e8:
               srcRegA = vectorReg;
               if ((selectors & 0xf) != 0) {
                 srcRegA = 4;
-                codeCursor[1] = vectorReg << 0x10 | 0x800000U | swizzleWordOrInst | (selectors & 3) << 8 | 0x1000002c;
+                codeCursor[1] = vectorReg << 0x10 | 0x800000U | registerFields | (selectors & 3) << 8 | 0x1000002c;
                 *(uint **)(compiler + 0xe30) = codeCursor + 2;
               }
               codeCursor2 = *(uint **)(compiler + 0xe30);
-              runStartOrInstWord = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
+              instWord = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
               goto LAB_97bda6e8;
             }
             nextCursor = codeCursor + 3;
             codeCursor[2] = vectorReg << 0x15 | 0x1003222c;
-            *emitPtr2 = runStartOrInstWord << 0x10 | 0x800000 | swizzleWordOrInst | 0x1000028c;
+            *emitPtr2 = selectorB << 0x10 | 0x800000 | registerFields | 0x1000028c;
           }
           *(uint **)(compiler + 0xe30) = nextCursor;
           if (equalRunStart == 0) {
             return;
           }
-          swizzleWordOrInst = vectorReg << 0x15 | vectorReg << 0x10 | swizzleWordOrInst;
-          runStartOrInstWord = equalRunStart;
+          registerFields = vectorReg << 0x15 | vectorReg << 0x10 | registerFields;
+          runStart = equalRunStart;
 LAB_97bda70c:
-          runStartOrInstWord = (4 - runStartOrInstWord) * 0x100;
+          runStart = (4 - runStart) * 0x100;
           goto LAB_97bda710;
         }
         if (ascendingRun == 2) {
-          firstSelector = selectors >> (runStartOrInstWord * -4 + 0x1c & 0x3f) & 0xf;
+          firstSelector = selectors >> (runStart * -4 + 0x1c & 0x3f) & 0xf;
           srcRegA = vectorReg;
           if (firstSelector != 2) {
             codeCursor = *(uint **)(compiler + 0xe30);
@@ -271,12 +276,12 @@ LAB_97bda70c:
                       | 0x1000002c;
             *(uint **)(compiler + 0xe30) = codeCursor + 1;
           }
-          shiftedSelectors = selectors >> (runStartOrInstWord * -4 + 0x14 & 0x3f);
-          swizzleWordOrInst = shiftedSelectors & 0xf;
-          secondSelector = selectors >> (runStartOrInstWord * -4 + 0x10 & 0x3f) & 0xf;
-          if (secondSelector == (swizzleWordOrInst + 1 & 3)) {
+          shiftedSelectors = selectors >> (runStart * -4 + 0x14 & 0x3f);
+          selectorA = shiftedSelectors & 0xf;
+          secondSelector = selectors >> (runStart * -4 + 0x10 & 0x3f) & 0xf;
+          if (secondSelector == (selectorA + 1 & 3)) {
             srcRegB = vectorReg;
-            if (swizzleWordOrInst != 0) {
+            if (selectorA != 0) {
               codeCursor = *(uint **)(compiler + 0xe30);
               srcRegB = 4;
               *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (shiftedSelectors & 3) << 8 |
@@ -289,22 +294,22 @@ LAB_97bda854:
             *(uint **)(compiler + 0xe30) = codeWritePtr + 1;
           }
           else {
-            if (secondSelector == swizzleWordOrInst) {
+            if (secondSelector == selectorA) {
               codeCursor = *(uint **)(compiler + 0xe30);
-              *codeCursor = swizzleWordOrInst << 0x10 | 0x800000 | vectorReg << 0xb | 0x1000028c;
+              *codeCursor = selectorA << 0x10 | 0x800000 | vectorReg << 0xb | 0x1000028c;
               codeWritePtr = codeCursor + 1;
               *codeWritePtr = vectorReg << 0x15 | srcRegA << 0x10 | 0x1000222c;
               goto LAB_97bda854;
             }
             srcRegB = vectorReg;
-            if (swizzleWordOrInst != 0) {
+            if (selectorA != 0) {
               codeCursor = *(uint **)(compiler + 0xe30);
               srcRegB = 4;
               *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (shiftedSelectors & 3) << 8 |
                         0x1000002c;
               *(uint **)(compiler + 0xe30) = codeCursor + 1;
             }
-            selectors = selectors >> (runStartOrInstWord * -4 + 0x10 & 0x3f);
+            selectors = selectors >> (runStart * -4 + 0x10 & 0x3f);
             codeCursor = *(uint **)(compiler + 0xe30);
             *codeCursor = srcRegA << 0x10 | srcRegB << 0xb | 0x1060012c;
             *(uint **)(compiler + 0xe30) = codeCursor + 1;
@@ -319,13 +324,13 @@ LAB_97bda854:
             *codeCursor = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
             *(uint **)(compiler + 0xe30) = codeCursor + 1;
           }
-          if (runStartOrInstWord == 0) {
+          if (runStart == 0) {
             return;
           }
-          swizzleWordOrInst = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
+          registerFields = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
           goto LAB_97bda70c;
         }
-        component3Selector = (swizzleWordOrInst & 0x3000000) >> 0x18;
+        component3Selector = (swizzleWord & 0x3000000) >> 0x18;
         srcRegA = vectorReg;
         if (component3Selector != 3) {
           codeCursor = *(uint **)(compiler + 0xe30);
@@ -335,10 +340,10 @@ LAB_97bda854:
           *(uint **)(compiler + 0xe30) = codeCursor + 1;
         }
         srcRegB = vectorReg;
-        if ((swizzleWordOrInst & 0x30000) != 0) {
+        if ((swizzleWord & 0x30000) != 0) {
           codeCursor = *(uint **)(compiler + 0xe30);
           srcRegB = 4;
-          *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | ((swizzleWordOrInst & 0x30000) >> 0x10) << 8
+          *codeCursor = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | ((swizzleWord & 0x30000) >> 0x10) << 8
                     | 0x1000002c;
           *(uint **)(compiler + 0xe30) = codeCursor + 1;
         }
@@ -346,25 +351,25 @@ LAB_97bda854:
         *codeCursor = srcRegA << 0x10 | srcRegB << 0xb | 0x1060012c;
         *(uint **)(compiler + 0xe30) = codeCursor + 1;
         srcRegA = vectorReg;
-        if ((swizzleWordOrInst & 0x300) != 0) {
+        if ((swizzleWord & 0x300) != 0) {
           srcRegA = 4;
-          codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | swizzleWordOrInst & 0x300 | 0x1000002c;
+          codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | swizzleWord & 0x300 | 0x1000002c;
           *(uint **)(compiler + 0xe30) = codeCursor + 2;
         }
         codeCursor = *(uint **)(compiler + 0xe30);
         *codeCursor = srcRegA << 0xb | 0x1063012c;
         *(uint **)(compiler + 0xe30) = codeCursor + 1;
         srcRegA = vectorReg;
-        if ((swizzleWordOrInst & 3) != 0) {
+        if ((swizzleWord & 3) != 0) {
           srcRegA = 4;
-          codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (swizzleWordOrInst & 3) << 8 | 0x1000002c;
+          codeCursor[1] = vectorReg << 0x10 | 0x800000U | vectorReg << 0xb | (swizzleWord & 3) << 8 | 0x1000002c;
           *(uint **)(compiler + 0xe30) = codeCursor + 2;
         }
         codeWritePtr = *(uint **)(compiler + 0xe30);
-        runStartOrInstWord = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
+        instWord = vectorReg << 0x15 | 0x30000U | srcRegA << 0xb | 0x1000012c;
         goto LAB_97bdaabc;
       }
-      firstSelector = selectors >> (runStartOrInstWord * -4 + 0x1c & 0x3f) & 0xf;
+      firstSelector = selectors >> (runStart * -4 + 0x1c & 0x3f) & 0xf;
       srcRegA = vectorReg;
       if (firstSelector != 1) {
         codeCursor = *(uint **)(compiler + 0xe30);
@@ -373,7 +378,7 @@ LAB_97bda854:
                   0x1000002c;
         *(uint **)(compiler + 0xe30) = codeCursor + 1;
       }
-      selectors = selectors >> (runStartOrInstWord * -4 + 0x10 & 0x3f);
+      selectors = selectors >> (runStart * -4 + 0x10 & 0x3f);
       srcRegB = vectorReg;
       if ((selectors & 0xf) != 0) {
         codeCursor = *(uint **)(compiler + 0xe30);
@@ -385,12 +390,12 @@ LAB_97bda854:
       *codeCursor = vectorReg << 0x15 | srcRegA << 0x10 | srcRegB << 0xb | 0x1000012c;
       codeWritePtr = codeCursor + 1;
       *(uint **)(compiler + 0xe30) = codeWritePtr;
-      if (runStartOrInstWord == 0) {
+      if (runStart == 0) {
         return;
       }
-      swizzleWordOrInst = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
+      registerFields = vectorReg << 0x15 | vectorReg << 0x10 | vectorReg << 0xb;
     }
-    *codeWritePtr = swizzleWordOrInst | (4 - runStartOrInstWord) * 0x100 & 0x300 | 0x1000002c;
+    *codeWritePtr = registerFields | (4 - runStart) * 0x100 & 0x300 | 0x1000002c;
   }
   *(uint **)(compiler + 0xe30) = codeWritePtr + 1;
   return;
@@ -6026,12 +6031,12 @@ int _PPCTextureSamplerSampleTexelRECTFromLevelRTCAV(sampler, textureUnit, codeCu
   uint textureUnit;
   uint *codeCursor;
 {
-  int sampleWordCount;
-  int chunkWordsThenEnd;
+  int wrapCoordsWordCount;
   int floatToIntWordCount;
+  int sampleWordCount;
+  int textureState;
   uint *emitPtr;
   uint *stateEmitPtr;
-  int textureState;
   bool isLinearFilter;
   short wrapModeS;
   short wrapModeT;
@@ -6102,9 +6107,9 @@ int _PPCTextureSamplerSampleTexelRECTFromLevelRTCAV(sampler, textureUnit, codeCu
 LAB_97be3d34:
     floatToIntWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexFloatToIntDenormalisedAVRTC,codeCursor);
     emitPtr = codeCursor + floatToIntWordCount;
-    chunkWordsThenEnd = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,emitPtr);
-    sampleWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,emitPtr + chunkWordsThenEnd);
-    emitPtr = emitPtr + chunkWordsThenEnd + sampleWordCount;
+    wrapCoordsWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,emitPtr);
+    sampleWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,emitPtr + wrapCoordsWordCount);
+    emitPtr = emitPtr + wrapCoordsWordCount + sampleWordCount;
     *emitPtr = 0x10431c84;
   }
   else {
@@ -6127,9 +6132,9 @@ LAB_97be3d2c:
     emitPtr = codeCursor + floatToIntWordCount;
     *emitPtr = 0x10c00484;
     emitPtr = emitPtr + 1;
-    chunkWordsThenEnd = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,emitPtr);
-    sampleWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,emitPtr + chunkWordsThenEnd);
-    emitPtr = emitPtr + chunkWordsThenEnd + sampleWordCount;
+    wrapCoordsWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,emitPtr);
+    sampleWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,emitPtr + wrapCoordsWordCount);
+    emitPtr = emitPtr + wrapCoordsWordCount + sampleWordCount;
     *emitPtr = 0x1024492c;
     emitPtr[1] = 0x1021392e;
     emitPtr[2] = 0x10200a8c;
@@ -6137,9 +6142,9 @@ LAB_97be3d2c:
     emitPtr[4] = 0x100a4a2c;
     emitPtr[5] = 0x10060780;
     emitPtr = emitPtr + 6;
-    chunkWordsThenEnd = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,emitPtr);
-    sampleWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,emitPtr + chunkWordsThenEnd);
-    emitPtr = emitPtr + chunkWordsThenEnd + sampleWordCount;
+    wrapCoordsWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,emitPtr);
+    sampleWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,emitPtr + wrapCoordsWordCount);
+    emitPtr = emitPtr + wrapCoordsWordCount + sampleWordCount;
     *emitPtr = 0x1025492c;
     emitPtr[1] = 0x1021392e;
     emitPtr[2] = 0x10200a8c;
@@ -6147,9 +6152,9 @@ LAB_97be3d2c:
     emitPtr[4] = 0x100a4b2c;
     emitPtr[5] = 0x10060780;
     emitPtr = emitPtr + 6;
-    chunkWordsThenEnd = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,emitPtr);
-    sampleWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,emitPtr + chunkWordsThenEnd);
-    emitPtr = emitPtr + chunkWordsThenEnd + sampleWordCount;
+    wrapCoordsWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,emitPtr);
+    sampleWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,emitPtr + wrapCoordsWordCount);
+    emitPtr = emitPtr + wrapCoordsWordCount + sampleWordCount;
     *emitPtr = 0x1024492c;
     emitPtr[1] = 0x1021396e;
     emitPtr[2] = 0x10200a8c;
@@ -6157,9 +6162,9 @@ LAB_97be3d2c:
     emitPtr[4] = 0x1003528c;
     emitPtr[5] = 0x10060780;
     emitPtr = emitPtr + 6;
-    chunkWordsThenEnd = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,emitPtr);
-    sampleWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,emitPtr + chunkWordsThenEnd);
-    emitPtr = emitPtr + chunkWordsThenEnd + sampleWordCount;
+    wrapCoordsWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexWrapCoordsCCCAVRTC,emitPtr);
+    sampleWordCount = ((int (*)())_glpRTCAddAChunk_97be1c2c)(&_glpOpTexSample2DAVRTC,emitPtr + wrapCoordsWordCount);
+    emitPtr = emitPtr + wrapCoordsWordCount + sampleWordCount;
     *emitPtr = 0x1025492c;
     emitPtr[1] = 0x1021396e;
     emitPtr[2] = 0x10200a8c;
