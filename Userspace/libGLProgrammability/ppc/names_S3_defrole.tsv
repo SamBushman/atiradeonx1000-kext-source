@@ -266,7 +266,6 @@ use	TGenericLinker__GetBindingTableString	uVar8	sizeActiveUserUniforms	INFERRED	
 use	TGenericLinker__GetFullTableString	iVar3	length	INFERRED	every definition is the result of a call whose name says it returns this	#2	+2	all	all
 use	TGenericLinker__GetFullTableString	iVar4	length2	INFERRED	every definition is the result of a call whose name says it returns this	#3	+1	all	all
 use	TGenericLinker__GetFullTableString	pcVar5	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#4	+5	all	all
-use	TGenericLinker__AllocateTextureUnitsForVaryings	uVar2	firstOp	INFERRED	every definition is the result of a call whose name says it returns this	^\s*uVar2\ =\ FunctionTable__getFirstOp\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ 0x3c\),uVar9\);$	+1	all	all
 use	TGenericLinker__BuildSymbolTableList	pcVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*pcVar7\ =\ _malloc\(sVar5\ \+\ sVar6\ \+\ 1\);$	+15	all	all
 use	TGenericLinker__BuildSymbolTableList	sVar5	length	INFERRED	every definition is the result of a call whose name says it returns this	^\s*sVar5\ =\ _strlen\(UNK_a7b7bab8\);$	+16	all	all
 use	TGenericLinker__BuildSymbolTableList	sVar6	length2	INFERRED	every definition is the result of a call whose name says it returns this	^\s*sVar6\ =\ _strlen\(\(char\ \*\)\(\&_shaderString\)\[iVar11\]\);$	+15	all	all

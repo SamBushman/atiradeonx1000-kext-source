@@ -22,14 +22,9 @@ local	TGenericLinker__MergeCompilers	bVar3	chunkKind	INFERRED	first byte of the 
 local	TGenericLinker__MergeCompilers	uVar20	chunkWord	INFERRED	header word of a chunk (+0xc / +0x10): low 18 bits operation index, bits 16..20 register class (0x11 = constant)
 local	TGenericLinker__MergeCompilers	p_Var29	constantChunk	INFERRED	constant-list chunk being copied into the merged stream (class 0x11)
 local	TGenericLinker__MergeCompilers	p_Var19	newConstantChunk	INFERRED	copy of constantChunk added to the merged stream's constant list
-local	TGenericLinker__AllocateTextureUnitsForVaryings	uVar22	success	CONFIRMED	1 until an error is appended to the info sink; returned
 local	TGenericLinker__AllocateTextureUnitsForVaryings	pPVar7	parseSymbol	CONFIRMED	ParseSymbol cursor over a stage's symbol table (NextSymbol)
-local	TGenericLinker__AllocateTextureUnitsForVaryings	iVar27	usedSetCountOrSlotMap	INFERRED	count of distinct texture-coordinate sets in use; after the capacity check it is the malloc(0x80) slot map (8 rows x 4 components)
-local	TGenericLinker__AllocateTextureUnitsForVaryings	iVar25	allocationIdOrCounter	INFERRED	fragment table +0x1c on entry; then the id stored into the slot map for each allocated varying; also the final row counter
-local	TGenericLinker__AllocateTextureUnitsForVaryings	iVar24	slotIndexOrTemp	INFERRED	fragment table +0x20 on entry; then the component slot (4 per row) being tried and chunk-cursor temporaries
 local	TGenericLinker__AllocateTextureUnitsForVaryings	local_e0	slotPlan	INFERRED	14-word array: words 0..3 receive the row (texcoord set) and words 4..7 the component of each slot of the varying being placed
 local	TGenericLinker__AllocateTextureUnitsForVaryings	puVar5	slotPlanCursor	INFERRED	cursor into slotPlan while storing a varying's slots
-local	TGenericLinker__AllocateTextureUnitsForVaryings	uVar18	bindingIndexOrComponentCount	INFERRED	binding word & 0x1f (texcoord set index) first; then the component count being placed (4 down to 1)
 local	TGenericLinker__AllocateTextureUnitsForVaryings	piVar10	vertexSymbol	CONFIRMED	result of ParseSymbolTable__FindGlobalSymbolByName(vertex table, name): the vertex-side varying matching the fragment symbol
 local	TGenericLinker__AllocateTextureUnitsForVaryings	piVar20	slotMapCursor	INFERRED	pointer into the slot map while filling a varying's slots
 local	TGenericLinker__AllocateTextureUnitsForVaryings	bVar1	slotsFree	INFERRED	true while the tried component range of the slot map is free

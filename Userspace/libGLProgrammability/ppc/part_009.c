@@ -1853,62 +1853,112 @@ LAB_97bb56a8:
 int TGenericLinker__AllocateTextureUnitsForVaryings(this)
   unsigned char * this;
 {
-  int ppStreamManager;
-  uint loopIndex;
+  uint functionIndex;
+  uint attempt;
+  uint offsetInRun;
+  uint component;
+  uint typeOrVec4Count;
+  undefined4 firstOpValue;
+  undefined4 maxIndex;
+  undefined4 functionName;
+  undefined4 fragmentTypeName;
+  undefined4 typeNameForLength;
+  int fragmentChunk;
+  int mapWord3;
+  int mainCompare;
+  int lastIndex;
+  int lastComponentCount;
+  int mapWord;
+  int bindingChunk;
+  int typeNameLength;
+  int rowPtr;
+  int mapRow;
+  int planOffset;
+  int runComponent;
+  int rowOffset;
+  int msgNameLength;
+  uint planComponent;
+  uint fragmentDestWord;
+  uint fragmentSrcWord;
+  uint vertexDestWord;
+  uint lastComponent;
   uint firstOp;
-  bool slotsFree;
+  uint setComponent;
+  uint scanIndex;
+  uint usedMask;
+  uint setIndex;
+  uint componentIndex;
+  uint opIndex;
+  uint placed;
+  uint componentCount;
+  int scanOffset;
+  int opChunk;
+  int nameCompare;
+  int slotCursor;
+  int fmtLength;
+  int setRowOffset;
+  int nameLength;
+  int setsLeft;
+  int allocationId;
+  int slotMap;
+  int formatLength;
+  undefined4 symbolName;
+  uint texCoordSet;
+  int totalSlots;
+  int ppStreamManager;
   uint uVar2;
-  uint uVar3;
-  unsigned char * this_00;
-  int iVar4;
+  bool slotsFree;
+  uint setNo;
+  unsigned char * fragmentSymbolTable;
+  int negativeId;
   uint *slotPlanCursor;
-  uint uVar6;
+  uint planSet;
   unsigned char * parseSymbol;
   char *messageText;
-  uint uVar9;
+  uint scalerWidth;
   int *vertexSymbol;
   unsigned char * functionTable;
-  int iVar12;
-  undefined4 uVar13;
-  int iVar14;
-  undefined4 uVar15;
+  int mapWord2;
+  undefined4 varyingName;
+  int typeNameLength2;
+  undefined4 vertexTypeName;
   char *messagePrefix;
-  uint uVar17;
-  uint bindingIndexOrComponentCount;
-  int iVar19;
+  uint placedNext;
+  uint chunkHeader;
+  int insertedOp;
   int *slotMapCursor;
-  uint uVar21;
+  uint vertexSrcWord;
   undefined4 success;
   ushort bindingChunkIndex;
-  int slotIndexOrTemp;
-  int allocationIdOrCounter;
-  undefined4 uVar26;
-  int usedSetCountOrSlotMap;
+  int fragRegCount;
+  int fragVaryingCount;
+  undefined4 symbolNameB;
+  int usedSetCount;
   void *infoSink;
-  uint uVar29;
+  uint copyCountdown;
   uint slotPlan [14];
-  undefined4 local_a8;
-  undefined4 local_a4;
-  undefined4 local_a0;
-  undefined4 local_9c;
-  undefined4 local_98;
-  undefined4 local_94;
-  undefined4 local_90;
-  undefined4 local_8c;
+  undefined4 opRecordWord6;
+  undefined4 opRecordWord7;
+  undefined4 opRecordWord8;
+  undefined4 opRecordWord9;
+  undefined4 opRecordWord10;
+  undefined4 opRecordWord11;
+  undefined4 opRecordWord12;
+  undefined4 opRecordWord13;
   uint outputBindingWord;
   undefined4 outputBindingChunkIndex;
-  uint local_70;
-  undefined4 local_6c;
+  uint attribBindingWord;
+  undefined4 attribBindingChunkIndex;
   uint vec4Index;
   int insideMain;
-  uint *local_58;
+  uint *opRecord;
   
   *(undefined4 *)(this + 0x74) = 0xffffffff;
   *(undefined4 *)(this + 0x78) = 0;
   success = 1;
-  usedSetCountOrSlotMap = 0;
-  allocationIdOrCounter = 0;
-  slotIndexOrTemp = 0;
+  usedSetCount = 0;
+  fragVaryingCount = 0;
+  fragRegCount = 0;
   if (*(unsigned char **)(this + 0x28) != (unsigned char *)0x0) {
     for (parseSymbol = (unsigned char *)
                   ParseSymbolTable__NextSymbol
@@ -1917,38 +1967,38 @@ int TGenericLinker__AllocateTextureUnitsForVaryings(this)
         parseSymbol = (unsigned char *)
                  ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol)) {
       if ((**(char **)parseSymbol == '\x04') &&
-         (bindingIndexOrComponentCount = *(uint *)(*(char **)parseSymbol + 0xc), (bindingIndexOrComponentCount & 0xf0000) == 0x60000)) {
-        bindingIndexOrComponentCount = bindingIndexOrComponentCount & 0x1f;
-        *(uint *)(this + 0x78) = *(uint *)(this + 0x78) | 1 << bindingIndexOrComponentCount;
-        if (*(int *)(this + 0x74) < (int)bindingIndexOrComponentCount) {
-          *(uint *)(this + 0x74) = bindingIndexOrComponentCount;
+         (chunkHeader = *(uint *)(*(char **)parseSymbol + 0xc), (chunkHeader & 0xf0000) == 0x60000)) {
+        texCoordSet = chunkHeader & 0x1f;
+        *(uint *)(this + 0x78) = *(uint *)(this + 0x78) | 1 << texCoordSet;
+        if (*(int *)(this + 0x74) < (int)texCoordSet) {
+          *(uint *)(this + 0x74) = texCoordSet;
         }
-        usedSetCountOrSlotMap = usedSetCountOrSlotMap + 1;
+        usedSetCount = usedSetCount + 1;
       }
     }
   }
-  this_00 = *(unsigned char **)(this + 0x2c);
-  if (this_00 != (unsigned char *)0x0) {
-    allocationIdOrCounter = *(int *)(this_00 + 0x1c);
-    slotIndexOrTemp = *(int *)(this_00 + 0x20);
-    for (parseSymbol = (unsigned char *)ParseSymbolTable__NextSymbol(this_00,(unsigned char *)0x0);
+  fragmentSymbolTable = *(unsigned char **)(this + 0x2c);
+  if (fragmentSymbolTable != (unsigned char *)0x0) {
+    fragVaryingCount = *(int *)(fragmentSymbolTable + 0x1c);
+    fragRegCount = *(int *)(fragmentSymbolTable + 0x20);
+    for (parseSymbol = (unsigned char *)ParseSymbolTable__NextSymbol(fragmentSymbolTable,(unsigned char *)0x0);
         parseSymbol != (unsigned char *)0x0;
         parseSymbol = (unsigned char *)
                  ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x2c),parseSymbol)) {
       if ((**(char **)parseSymbol == '\x02') &&
-         (bindingIndexOrComponentCount = *(uint *)(*(char **)parseSymbol + 0xc), (bindingIndexOrComponentCount & 0xf0000) == 0x70000)) {
-        bindingIndexOrComponentCount = bindingIndexOrComponentCount & 0x1f;
-        if (*(int *)(this + 0x74) < (int)bindingIndexOrComponentCount) {
-          *(uint *)(this + 0x74) = bindingIndexOrComponentCount;
+         (chunkHeader = *(uint *)(*(char **)parseSymbol + 0xc), (chunkHeader & 0xf0000) == 0x70000)) {
+        texCoordSet = chunkHeader & 0x1f;
+        if (*(int *)(this + 0x74) < (int)texCoordSet) {
+          *(uint *)(this + 0x74) = texCoordSet;
         }
-        if ((*(uint *)(this + 0x78) & 1 << bindingIndexOrComponentCount) == 0) {
-          usedSetCountOrSlotMap = usedSetCountOrSlotMap + 1;
+        if ((*(uint *)(this + 0x78) & 1 << texCoordSet) == 0) {
+          usedSetCount = usedSetCount + 1;
         }
-        *(uint *)(this + 0x78) = *(uint *)(this + 0x78) | 1 << bindingIndexOrComponentCount;
+        *(uint *)(this + 0x78) = *(uint *)(this + 0x78) | 1 << texCoordSet;
       }
     }
   }
-  if (allocationIdOrCounter != 0) {
+  if (fragVaryingCount != 0) {
     if ((*(int *)(this + 0x28) == 0) || (*(int *)(this + 0x2c) == 0)) {
       if (*(unsigned char **)(this + 0x2c) != (unsigned char *)0x0) {
         for (parseSymbol = (unsigned char *)
@@ -1958,11 +2008,11 @@ int TGenericLinker__AllocateTextureUnitsForVaryings(this)
             parseSymbol = (unsigned char *)
                      ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol)) {
           if ((**(char **)parseSymbol == '\0') && (*(int *)(parseSymbol + 0x60) != 0)) {
-            success = *(undefined4 *)(parseSymbol + 0x14);
-            usedSetCountOrSlotMap = _strlen(UNK_a7b7badc);
-            slotIndexOrTemp = _strlen(success);
-            messageText = (char *)_malloc(usedSetCountOrSlotMap + slotIndexOrTemp + 1);
-            _sprintf(messageText,UNK_a7b7badc,success);
+            symbolName = *(undefined4 *)(parseSymbol + 0x14);
+            formatLength = _strlen(UNK_a7b7badc);
+            nameLength = _strlen(symbolName);
+            messageText = (char *)_malloc(formatLength + nameLength + 1);
+            _sprintf(messageText,UNK_a7b7badc,symbolName);
             infoSink = *(void **)(this + 0x84);
                     
             __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
@@ -1975,11 +2025,11 @@ int TGenericLinker__AllocateTextureUnitsForVaryings(this)
       }
     }
     else {
-      allocationIdOrCounter = 1;
-      slotIndexOrTemp = usedSetCountOrSlotMap * 4 + slotIndexOrTemp;
-      if (slotIndexOrTemp < 0x21) {
-        usedSetCountOrSlotMap = _malloc(0x80);
-        _memset(usedSetCountOrSlotMap,0,0x80);
+      allocationId = 1;
+      totalSlots = usedSetCount * 4 + fragRegCount;
+      if (totalSlots < 0x21) {
+        slotMap = _malloc(0x80);
+        _memset(slotMap,0,0x80);
         for (parseSymbol = (unsigned char *)
                       ParseSymbolTable__NextSymbol
                                 (*(unsigned char **)(this + 0x2c),(unsigned char *)0x0);
@@ -1987,15 +2037,15 @@ int TGenericLinker__AllocateTextureUnitsForVaryings(this)
             parseSymbol = (unsigned char *)
                      ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x2c),parseSymbol)) {
           if ((**(char **)parseSymbol == '\x02') &&
-             (bindingIndexOrComponentCount = *(uint *)(*(char **)parseSymbol + 0xc), (bindingIndexOrComponentCount & 0xf0000) == 0x70000)) {
-            slotIndexOrTemp = (bindingIndexOrComponentCount & 0x1f) * 0x10;
-            iVar4 = -allocationIdOrCounter;
-            iVar19 = slotIndexOrTemp + usedSetCountOrSlotMap;
-            *(int *)(usedSetCountOrSlotMap + slotIndexOrTemp) = iVar4;
-            allocationIdOrCounter = allocationIdOrCounter + 1;
-            *(int *)(iVar19 + 0xc) = iVar4;
-            *(int *)(iVar19 + 4) = iVar4;
-            *(int *)(iVar19 + 8) = iVar4;
+             (chunkHeader = *(uint *)(*(char **)parseSymbol + 0xc), (chunkHeader & 0xf0000) == 0x70000)) {
+            setRowOffset = (chunkHeader & 0x1f) * 0x10;
+            negativeId = -allocationId;
+            rowPtr = setRowOffset + slotMap;
+            *(int *)(slotMap + setRowOffset) = negativeId;
+            allocationId = allocationId + 1;
+            *(int *)(rowPtr + 0xc) = negativeId;
+            *(int *)(rowPtr + 4) = negativeId;
+            *(int *)(rowPtr + 8) = negativeId;
           }
         }
         for (parseSymbol = (unsigned char *)
@@ -2005,18 +2055,18 @@ int TGenericLinker__AllocateTextureUnitsForVaryings(this)
             parseSymbol = (unsigned char *)
                      ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol)) {
           if ((**(char **)parseSymbol == '\x04') &&
-             (bindingIndexOrComponentCount = *(uint *)(*(char **)parseSymbol + 0xc), (bindingIndexOrComponentCount & 0xf0000) == 0x60000)) {
-            slotIndexOrTemp = (bindingIndexOrComponentCount & 0x1f) * 0x10;
-            iVar4 = -allocationIdOrCounter;
-            iVar19 = slotIndexOrTemp + usedSetCountOrSlotMap;
-            *(int *)(usedSetCountOrSlotMap + slotIndexOrTemp) = iVar4;
-            allocationIdOrCounter = allocationIdOrCounter + 1;
-            *(int *)(iVar19 + 0xc) = iVar4;
-            *(int *)(iVar19 + 4) = iVar4;
-            *(int *)(iVar19 + 8) = iVar4;
+             (chunkHeader = *(uint *)(*(char **)parseSymbol + 0xc), (chunkHeader & 0xf0000) == 0x60000)) {
+            setRowOffset = (chunkHeader & 0x1f) * 0x10;
+            negativeId = -allocationId;
+            rowPtr = setRowOffset + slotMap;
+            *(int *)(slotMap + setRowOffset) = negativeId;
+            allocationId = allocationId + 1;
+            *(int *)(rowPtr + 0xc) = negativeId;
+            *(int *)(rowPtr + 4) = negativeId;
+            *(int *)(rowPtr + 8) = negativeId;
           }
         }
-        bindingIndexOrComponentCount = 4;
+        componentCount = 4;
         do {
           for (parseSymbol = (unsigned char *)
                         ParseSymbolTable__NextSymbol
@@ -2025,21 +2075,21 @@ int TGenericLinker__AllocateTextureUnitsForVaryings(this)
               parseSymbol = (unsigned char *)
                        ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x2c),parseSymbol)) {
             if (((**(char **)parseSymbol == '\0') && (*(int *)(parseSymbol + 0x60) != 0)) &&
-               (uVar9 = ((int (*)())GetScalerWidthForType)((uint)*(ushort *)(parseSymbol + 0x2c)), bindingIndexOrComponentCount == uVar9)) {
+               (scalerWidth = ((int (*)())GetScalerWidthForType)((uint)*(ushort *)(parseSymbol + 0x2c)), componentCount == scalerWidth)) {
               vertexSymbol = (int *)ParseSymbolTable__FindGlobalSymbolByName
                                          (*(unsigned char **)(this + 0x28),
                                           *(char **)(parseSymbol + 0x14));
               if (((vertexSymbol == (int *)0x0) ||
-                  (uVar9 = (uint)*(ushort *)(parseSymbol + 0x2c), uVar9 != *(ushort *)(vertexSymbol + 0xb)))
+                  (typeOrVec4Count = (uint)*(ushort *)(parseSymbol + 0x2c), typeOrVec4Count != *(ushort *)(vertexSymbol + 0xb)))
                  || ((*(char *)*vertexSymbol != '\0' || (vec4Index = 0, vertexSymbol[0x17] == 0)))) {
                 success = 0;
                 if (vertexSymbol == (int *)0x0) {
 code_r0x97bb689c:
-                  uVar13 = *(undefined4 *)(parseSymbol + 0x14);
-                  slotIndexOrTemp = _strlen(UNK_a7b7bad4);
-                  iVar4 = _strlen(uVar13);
-                  messageText = (char *)_malloc(slotIndexOrTemp + iVar4 + 1);
-                  _sprintf(messageText,UNK_a7b7bad4,uVar13);
+                  varyingName = *(undefined4 *)(parseSymbol + 0x14);
+                  fmtLength = _strlen(UNK_a7b7bad4);
+                  msgNameLength = _strlen(varyingName);
+                  messageText = (char *)_malloc(fmtLength + msgNameLength + 1);
+                  _sprintf(messageText,UNK_a7b7bad4,varyingName);
                   infoSink = *(void **)(this + 0x84);
                     
 override_jmp_97bb67f0_case_0:
@@ -2047,27 +2097,27 @@ override_jmp_97bb67f0_case_0:
                 }
                 else {
                   if (*(short *)(parseSymbol + 0x2c) != *(short *)(vertexSymbol + 0xb)) {
-                    uVar26 = *(undefined4 *)(parseSymbol + 0x14);
-                    slotIndexOrTemp = _strlen(UNK_a7b7bad0);
-                    iVar4 = _strlen(uVar26);
-                    uVar13 = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(vertexSymbol + 0xb));
-                    iVar19 = _strlen(uVar13);
-                    uVar13 = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(parseSymbol + 0x2c));
-                    iVar14 = _strlen(uVar13);
-                    messageText = (char *)_malloc(slotIndexOrTemp + iVar4 + iVar19 + iVar14 + 1);
-                    uVar13 = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(parseSymbol + 0x2c));
-                    uVar15 = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(vertexSymbol + 0xb));
-                    _sprintf(messageText,UNK_a7b7bad0,uVar26,uVar15,uVar13);
+                    symbolNameB = *(undefined4 *)(parseSymbol + 0x14);
+                    fmtLength = _strlen(UNK_a7b7bad0);
+                    msgNameLength = _strlen(symbolNameB);
+                    typeNameForLength = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(vertexSymbol + 0xb));
+                    typeNameLength = _strlen(typeNameForLength);
+                    typeNameForLength = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(parseSymbol + 0x2c));
+                    typeNameLength2 = _strlen(typeNameForLength);
+                    messageText = (char *)_malloc(fmtLength + msgNameLength + typeNameLength + typeNameLength2 + 1);
+                    fragmentTypeName = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(parseSymbol + 0x2c));
+                    vertexTypeName = ((int (*)())GetShaderStringForType)((uint)*(ushort *)(vertexSymbol + 0xb));
+                    _sprintf(messageText,UNK_a7b7bad0,symbolNameB,vertexTypeName,fragmentTypeName);
                     infoSink = *(void **)(this + 0x84);
                     
                     goto override_jmp_97bb67f0_case_0;
                   }
                   if ((*(char *)*vertexSymbol == '\0') && (vertexSymbol[0x17] == 0)) goto code_r0x97bb689c;
-                  uVar13 = *(undefined4 *)(parseSymbol + 0x14);
-                  slotIndexOrTemp = _strlen(UNK_a7b7bb70);
-                  iVar4 = _strlen(uVar13);
-                  messageText = (char *)_malloc(slotIndexOrTemp + iVar4 + 1);
-                  _sprintf(messageText,UNK_a7b7bb70,uVar13);
+                  varyingName = *(undefined4 *)(parseSymbol + 0x14);
+                  fmtLength = _strlen(UNK_a7b7bb70);
+                  msgNameLength = _strlen(varyingName);
+                  messageText = (char *)_malloc(fmtLength + msgNameLength + 1);
+                  _sprintf(messageText,UNK_a7b7bb70,varyingName);
                   infoSink = *(void **)(this + 0x84);
                   messagePrefix = "INTERNAL ERROR: ";
                     
@@ -2078,11 +2128,11 @@ override_jmp_97bb67f0_case_0:
                 _free(messageText);
               }
               else {
-                while (uVar9 = ((int (*)())GetVec4sForType)(uVar9), vec4Index < uVar9) {
+                while (typeOrVec4Count = ((int (*)())GetVec4sForType)(typeOrVec4Count), vec4Index < typeOrVec4Count) {
                   slotPlan[7] = 0xffffffff;
                   slotPlan[3] = 0xffffffff;
                   slotPlan[4] = 0xffffffff;
-                  slotIndexOrTemp = 0;
+                  slotCursor = 0;
                   slotPlan[5] = 0xffffffff;
                   slotPlan[6] = 0xffffffff;
                   slotPlan[0] = 0xffffffff;
@@ -2090,60 +2140,60 @@ override_jmp_97bb67f0_case_0:
                   slotPlan[2] = 0xffffffff;
                   do {
                     slotsFree = true;
-                    if (bindingIndexOrComponentCount == 2) {
-                      iVar4 = slotIndexOrTemp << 2;
+                    if (componentCount == 2) {
+                      rowOffset = slotCursor << 2;
 code_r0x97bb5b68:
-                      if (*(int *)(iVar4 + usedSetCountOrSlotMap + 4) == 0) {
+                      if (*(int *)(rowOffset + slotMap + 4) == 0) {
 code_r0x97bb5b80:
-                        if (*(int *)(iVar4 + usedSetCountOrSlotMap) == 0) goto code_r0x97bb5b90;
+                        if (*(int *)(rowOffset + slotMap) == 0) goto code_r0x97bb5b90;
                       }
 code_r0x97bb5b8c:
                       slotsFree = false;
                     }
                     else {
-                      if (2 < bindingIndexOrComponentCount) {
-                        if (bindingIndexOrComponentCount == 3) {
-                          iVar4 = slotIndexOrTemp << 2;
+                      if (2 < componentCount) {
+                        if (componentCount == 3) {
+                          rowOffset = slotCursor << 2;
 code_r0x97bb5b50:
-                          if (*(int *)(iVar4 + usedSetCountOrSlotMap + 8) == 0) goto code_r0x97bb5b68;
+                          if (*(int *)(rowOffset + slotMap + 8) == 0) goto code_r0x97bb5b68;
                         }
                         else {
-                          if (bindingIndexOrComponentCount != 4) goto code_r0x97bb5b90;
-                          iVar4 = slotIndexOrTemp * 4;
-                          if (*(int *)(iVar4 + usedSetCountOrSlotMap + 0xc) == 0) goto code_r0x97bb5b50;
+                          if (componentCount != 4) goto code_r0x97bb5b90;
+                          rowOffset = slotCursor * 4;
+                          if (*(int *)(rowOffset + slotMap + 0xc) == 0) goto code_r0x97bb5b50;
                         }
                         goto code_r0x97bb5b8c;
                       }
-                      if (bindingIndexOrComponentCount == 1) {
-                        iVar4 = slotIndexOrTemp << 2;
+                      if (componentCount == 1) {
+                        rowOffset = slotCursor << 2;
                         goto code_r0x97bb5b80;
                       }
                     }
 code_r0x97bb5b90:
                     slotsFree = !slotsFree;
-                    if ((!slotsFree) && (uVar9 = 0, bindingIndexOrComponentCount != 0)) {
-                      slotMapCursor = (int *)(slotIndexOrTemp * 4 + usedSetCountOrSlotMap);
+                    if ((!slotsFree) && (component = 0, componentCount != 0)) {
+                      slotMapCursor = (int *)(slotCursor * 4 + slotMap);
                       slotPlanCursor = slotPlan;
-                      uVar29 = bindingIndexOrComponentCount;
+                      copyCountdown = componentCount;
                       do {
-                        uVar2 = *(uint *)(this + 0x78);
-                        slotPlanCursor[4] = uVar9;
-                        uVar9 = uVar9 + 1;
-                        *(uint *)(this + 0x78) = uVar2 | 1 << (slotIndexOrTemp >> 2 & 0x3fU);
-                        *slotPlanCursor = slotIndexOrTemp >> 2;
+                        usedMask = *(uint *)(this + 0x78);
+                        slotPlanCursor[4] = component;
+                        component = component + 1;
+                        *(uint *)(this + 0x78) = usedMask | 1 << (slotCursor >> 2 & 0x3fU);
+                        *slotPlanCursor = slotCursor >> 2;
                         slotPlanCursor = slotPlanCursor + 1;
-                        *slotMapCursor = allocationIdOrCounter;
+                        *slotMapCursor = allocationId;
                         slotMapCursor = slotMapCursor + 1;
-                        uVar29 = uVar29 - 1;
-                      } while (uVar29 != 0);
+                        copyCountdown = copyCountdown - 1;
+                      } while (copyCountdown != 0);
                     }
-                    slotIndexOrTemp = slotIndexOrTemp + 4;
-                  } while ((slotIndexOrTemp < 0x20) && (slotsFree));
-                  slotIndexOrTemp = 0;
+                    slotCursor = slotCursor + 4;
+                  } while ((slotCursor < 0x20) && (slotsFree));
+                  slotCursor = 0;
                   if (slotsFree) {
                     do {
-                      uVar9 = 1;
-                      if (-bindingIndexOrComponentCount == -4) {
+                      offsetInRun = 1;
+                      if (-componentCount == -4) {
 code_r0x97bb5ccc:
                         if (!slotsFree) goto code_r0x97bb5cd0;
                       }
@@ -2151,27 +2201,27 @@ code_r0x97bb5ccc:
                         if (slotsFree) {
                           do {
                             slotsFree = true;
-                            if (bindingIndexOrComponentCount == 2) {
+                            if (componentCount == 2) {
 code_r0x97bb5c80:
-                              if (*(int *)((slotIndexOrTemp + uVar9) * 4 + usedSetCountOrSlotMap + 4) == 0) {
+                              if (*(int *)((slotCursor + offsetInRun) * 4 + slotMap + 4) == 0) {
 code_r0x97bb5c9c:
-                                if (*(int *)(usedSetCountOrSlotMap + (slotIndexOrTemp + uVar9) * 4) == 0)
+                                if (*(int *)(slotMap + (slotCursor + offsetInRun) * 4) == 0)
                                 goto code_r0x97bb5cb0;
                               }
 code_r0x97bb5cac:
                               slotsFree = false;
                             }
-                            else if (bindingIndexOrComponentCount < 3) {
-                              if (bindingIndexOrComponentCount == 1) goto code_r0x97bb5c9c;
+                            else if (componentCount < 3) {
+                              if (componentCount == 1) goto code_r0x97bb5c9c;
                             }
-                            else if (bindingIndexOrComponentCount == 3) {
-                              if (*(int *)((slotIndexOrTemp + uVar9) * 4 + usedSetCountOrSlotMap + 8) == 0)
+                            else if (componentCount == 3) {
+                              if (*(int *)((slotCursor + offsetInRun) * 4 + slotMap + 8) == 0)
                               goto code_r0x97bb5c80;
                               goto code_r0x97bb5cac;
                             }
 code_r0x97bb5cb0:
-                            uVar9 = uVar9 + 1;
-                            if (-bindingIndexOrComponentCount + 4 < uVar9) {
+                            offsetInRun = offsetInRun + 1;
+                            if (-componentCount + 4 < offsetInRun) {
                               slotsFree = !slotsFree;
                               goto code_r0x97bb5ccc;
                             }
@@ -2179,54 +2229,54 @@ code_r0x97bb5cb0:
                           slotsFree = false;
                         }
 code_r0x97bb5cd0:
-                        iVar4 = 0;
-                        if (bindingIndexOrComponentCount != 0) {
-                          slotMapCursor = (int *)((slotIndexOrTemp + (uVar9 - 1)) * 4 + usedSetCountOrSlotMap);
+                        runComponent = 0;
+                        if (componentCount != 0) {
+                          slotMapCursor = (int *)((slotCursor + (offsetInRun - 1)) * 4 + slotMap);
                           slotPlanCursor = slotPlan;
-                          uVar29 = bindingIndexOrComponentCount;
+                          copyCountdown = componentCount;
                           do {
-                            uVar2 = *(uint *)(this + 0x78);
-                            slotPlanCursor[4] = iVar4 + (uVar9 - 1);
-                            iVar4 = iVar4 + 1;
-                            *(uint *)(this + 0x78) = uVar2 | 1 << (slotIndexOrTemp >> 2 & 0x3fU);
-                            *slotPlanCursor = slotIndexOrTemp >> 2;
+                            usedMask = *(uint *)(this + 0x78);
+                            slotPlanCursor[4] = runComponent + (offsetInRun - 1);
+                            runComponent = runComponent + 1;
+                            *(uint *)(this + 0x78) = usedMask | 1 << (slotCursor >> 2 & 0x3fU);
+                            *slotPlanCursor = slotCursor >> 2;
                             slotPlanCursor = slotPlanCursor + 1;
-                            *slotMapCursor = allocationIdOrCounter;
+                            *slotMapCursor = allocationId;
                             slotMapCursor = slotMapCursor + 1;
-                            uVar29 = uVar29 - 1;
-                          } while (uVar29 != 0);
+                            copyCountdown = copyCountdown - 1;
+                          } while (copyCountdown != 0);
                         }
                       }
-                      slotIndexOrTemp = slotIndexOrTemp + 4;
-                    } while ((slotIndexOrTemp < 0x20) && (slotsFree));
+                      slotCursor = slotCursor + 4;
+                    } while ((slotCursor < 0x20) && (slotsFree));
                   }
-                  uVar9 = 0;
-                  if ((bindingIndexOrComponentCount != 0) && (slotsFree)) {
+                  attempt = 0;
+                  if ((componentCount != 0) && (slotsFree)) {
                     do {
-                      uVar29 = 0;
-                      loopIndex = 0;
+                      placed = 0;
+                      scanIndex = 0;
                       if (slotsFree) {
                         do {
-                          uVar17 = uVar29;
-                          if (*(int *)(loopIndex * 4 + usedSetCountOrSlotMap) == 0) {
-                            uVar3 = ((int)loopIndex >> 2) + (uint)((int)loopIndex < 0 && (loopIndex & 3) != 0);
-                            slotPlan[uVar29] = uVar3;
-                            uVar17 = uVar29 + 1;
-                            *(uint *)(this + 0x78) = *(uint *)(this + 0x78) | 1 << (uVar3 & 0x3f);
-                            slotPlan[uVar29 + 4] = loopIndex + uVar3 * -4;
-                            *(int *)(loopIndex * 4 + usedSetCountOrSlotMap) = allocationIdOrCounter;
+                          placedNext = placed;
+                          if (*(int *)(scanIndex * 4 + slotMap) == 0) {
+                            setNo = ((int)scanIndex >> 2) + (uint)((int)scanIndex < 0 && (scanIndex & 3) != 0);
+                            slotPlan[placed] = setNo;
+                            placedNext = placed + 1;
+                            *(uint *)(this + 0x78) = *(uint *)(this + 0x78) | 1 << (setNo & 0x3f);
+                            slotPlan[placed + 4] = scanIndex + setNo * -4;
+                            *(int *)(scanIndex * 4 + slotMap) = allocationId;
                           }
-                          if (uVar17 == bindingIndexOrComponentCount) {
+                          if (placedNext == componentCount) {
                             slotsFree = false;
                           }
-                          loopIndex = loopIndex + 1;
-                        } while (((int)loopIndex < 0x20) && (uVar29 = uVar17, slotsFree));
+                          scanIndex = scanIndex + 1;
+                        } while (((int)scanIndex < 0x20) && (placed = placedNext, slotsFree));
                       }
-                      uVar9 = uVar9 + 1;
-                    } while ((uVar9 < bindingIndexOrComponentCount) && (slotsFree));
+                      attempt = attempt + 1;
+                    } while ((attempt < componentCount) && (slotsFree));
                   }
                   messageText = UNK_a7b7bacc;
-                  allocationIdOrCounter = allocationIdOrCounter + 1;
+                  allocationId = allocationId + 1;
                   if (slotsFree) {
                     success = 0;
                     infoSink = *(void **)(this + 0x84);
@@ -2238,57 +2288,57 @@ code_r0x97bb5cd0:
                   else {
                     functionTable = *(unsigned char **)(this + 0x38);
                     insideMain = 0;
-                    uVar9 = 0;
+                    functionIndex = 0;
                     if ((functionTable != (unsigned char *)0x0) && (*(int *)(functionTable + 4) != 0)) {
                       while( true ) {
-                        uVar13 = FunctionTable__getFunctionName(functionTable,uVar9);
-                        slotIndexOrTemp = _memcmp(uVar13,"main(",6);
-                        if (slotIndexOrTemp == 0) break;
+                        functionName = FunctionTable__getFunctionName(functionTable,functionIndex);
+                        nameCompare = _memcmp(functionName,"main(",6);
+                        if (nameCompare == 0) break;
                         functionTable = *(unsigned char **)(this + 0x38);
-                        uVar9 = uVar9 + 1;
-                        if ((functionTable == (unsigned char *)0x0) || (*(uint *)(functionTable + 4) <= uVar9))
+                        functionIndex = functionIndex + 1;
+                        if ((functionTable == (unsigned char *)0x0) || (*(uint *)(functionTable + 4) <= functionIndex))
                         break;
                       }
                     }
-                    for (slotIndexOrTemp = **(int **)(*(int *)(this + 0x30) + 0x20); slotIndexOrTemp != 0;
-                        slotIndexOrTemp = *(int *)(slotIndexOrTemp + 8)) {
-                      uVar29 = FunctionTable__getFirstOp(*(unsigned char **)(this + 0x38),uVar9);
-                      if (uVar29 == (*(uint *)(slotIndexOrTemp + 0xc) & 0x3ffff)) {
+                    for (opChunk = **(int **)(*(int *)(this + 0x30) + 0x20); opChunk != 0;
+                        opChunk = *(int *)(opChunk + 8)) {
+                      opIndex = FunctionTable__getFirstOp(*(unsigned char **)(this + 0x38),functionIndex);
+                      if (opIndex == (*(uint *)(opChunk + 0xc) & 0x3ffff)) {
                         insideMain = 1;
                       }
-                      if (((insideMain != 0) && ((*(uint *)(slotIndexOrTemp + 0xc) & 0x3fc0000) == 0x1340000))
-                         && (uVar29 = 0, bindingIndexOrComponentCount != 0)) {
-                        iVar4 = 0;
-                        local_58 = slotPlan + 8;
+                      if (((insideMain != 0) && ((*(uint *)(opChunk + 0xc) & 0x3fc0000) == 0x1340000))
+                         && (componentIndex = 0, componentCount != 0)) {
+                        planOffset = 0;
+                        opRecord = slotPlan + 8;
 code_r0x97bb5ec0:
                         ppStreamManager = *(int *)(this + 0x30);
-                        loopIndex = 0;
-                        uVar17 = *(uint *)((int)slotPlan + iVar4);
-                        for (iVar19 = **(int **)(ppStreamManager + 0x1c); iVar19 != 0;
-                            iVar19 = *(int *)(iVar19 + 8)) {
-                          if (((*(uint *)(iVar19 + 0xc) & 0xf0000) == 0x60000) &&
-                             ((*(uint *)(iVar19 + 0xc) & 0x1f) == uVar17)) {
-                            bindingChunkIndex = *(ushort *)(iVar19 + 0x12);
-                            uVar3 = 3;
-                            slotMapCursor = (int *)(uVar17 * 0x10 + usedSetCountOrSlotMap + 0xc);
+                        setComponent = 0;
+                        setIndex = *(uint *)((int)slotPlan + planOffset);
+                        for (bindingChunk = **(int **)(ppStreamManager + 0x1c); bindingChunk != 0;
+                            bindingChunk = *(int *)(bindingChunk + 8)) {
+                          if (((*(uint *)(bindingChunk + 0xc) & 0xf0000) == 0x60000) &&
+                             ((*(uint *)(bindingChunk + 0xc) & 0x1f) == setIndex)) {
+                            bindingChunkIndex = *(ushort *)(bindingChunk + 0x12);
+                            lastComponent = 3;
+                            slotMapCursor = (int *)(setIndex * 0x10 + slotMap + 0xc);
                             goto code_r0x97bb5f28;
                           }
                         }
                         outputBindingChunkIndex = 0;
-                        outputBindingWord = uVar17 & 0x1f | 0x4060000;
-                        slotMapCursor = (int *)(uVar17 * 0x10 + usedSetCountOrSlotMap + 0xc);
-                        uVar3 = 3;
+                        outputBindingWord = setIndex & 0x1f | 0x4060000;
+                        slotMapCursor = (int *)(setIndex * 0x10 + slotMap + 0xc);
+                        lastComponent = 3;
                         do {
-                          iVar19 = *slotMapCursor;
+                          mapWord = *slotMapCursor;
                           slotMapCursor = slotMapCursor + -1;
-                          if (iVar19 != 0) {
-                            outputBindingWord = (uVar3 & 3) << 0x18 | uVar17 & 0x1f | 0x4060000;
+                          if (mapWord != 0) {
+                            outputBindingWord = (lastComponent & 3) << 0x18 | setIndex & 0x1f | 0x4060000;
                             break;
                           }
-                          uVar3 = uVar3 - 1;
-                        } while (-1 < (int)uVar3);
-                        uVar13 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(ppStreamManager + 0x1c));
-                        bindingChunkIndex = (short)uVar13 + 1;
+                          lastComponent = lastComponent - 1;
+                        } while (-1 < (int)lastComponent);
+                        maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(ppStreamManager + 0x1c));
+                        bindingChunkIndex = (short)maxIndex + 1;
                         outputBindingChunkIndex = CONCAT22((*(unsigned short *)((unsigned char *)&(outputBindingChunkIndex) + 0)),bindingChunkIndex);
                         _PPStreamAddOutputBinding(*(undefined4 *)(this + 0x30),&outputBindingWord);
 code_r0x97bb5fe4:
@@ -2296,30 +2346,30 @@ code_r0x97bb5fe4:
                         goto code_r0x97bb5fe8;
                       }
 code_r0x97bb61d0:
-                      uVar29 = FunctionTable__getLastOp(*(unsigned char **)(this + 0x38),uVar9);
-                      if (uVar29 == (*(uint *)(slotIndexOrTemp + 0xc) & 0x3ffff)) break;
+                      opIndex = FunctionTable__getLastOp(*(unsigned char **)(this + 0x38),functionIndex);
+                      if (opIndex == (*(uint *)(opChunk + 0xc) & 0x3ffff)) break;
                     }
                     functionTable = *(unsigned char **)(this + 0x3c);
-                    uVar9 = 0;
+                    functionIndex = 0;
                     if ((functionTable != (unsigned char *)0x0) && (*(int *)(functionTable + 4) != 0)) {
                       while( true ) {
-                        uVar13 = FunctionTable__getFunctionName(functionTable,uVar9);
-                        slotIndexOrTemp = _memcmp(uVar13,"main(",6);
-                        if (slotIndexOrTemp == 0) break;
+                        functionName = FunctionTable__getFunctionName(functionTable,functionIndex);
+                        nameCompare = _memcmp(functionName,"main(",6);
+                        if (nameCompare == 0) break;
                         functionTable = *(unsigned char **)(this + 0x3c);
-                        uVar9 = uVar9 + 1;
-                        if ((functionTable == (unsigned char *)0x0) || (*(uint *)(functionTable + 4) <= uVar9))
+                        functionIndex = functionIndex + 1;
+                        if ((functionTable == (unsigned char *)0x0) || (*(uint *)(functionTable + 4) <= functionIndex))
                         break;
                       }
                     }
-                    for (slotIndexOrTemp = **(int **)(*(int *)(this + 0x34) + 0x20); slotIndexOrTemp != 0;
-                        slotIndexOrTemp = *(int *)(slotIndexOrTemp + 8)) {
-                      uVar29 = FunctionTable__getFirstOp(*(unsigned char **)(this + 0x3c),uVar9);
-                      if (uVar29 == (*(uint *)(slotIndexOrTemp + 0xc) & 0x3ffff)) {
-                        uVar29 = 0;
-                        if (bindingIndexOrComponentCount != 0) {
-                          local_58 = slotPlan + 8;
-                          iVar4 = 0;
+                    for (opChunk = **(int **)(*(int *)(this + 0x34) + 0x20); opChunk != 0;
+                        opChunk = *(int *)(opChunk + 8)) {
+                      opIndex = FunctionTable__getFirstOp(*(unsigned char **)(this + 0x3c),functionIndex);
+                      if (opIndex == (*(uint *)(opChunk + 0xc) & 0x3ffff)) {
+                        componentIndex = 0;
+                        if (componentCount != 0) {
+                          opRecord = slotPlan + 8;
+                          planOffset = 0;
                           goto code_r0x97bb62a8;
                         }
                         break;
@@ -2327,34 +2377,34 @@ code_r0x97bb61d0:
                     }
                   }
 code_r0x97bb6720:
-                  uVar9 = (uint)*(ushort *)(parseSymbol + 0x2c);
+                  typeOrVec4Count = (uint)*(ushort *)(parseSymbol + 0x2c);
                   vec4Index = vec4Index + 1;
                 }
               }
             }
           }
-          bindingIndexOrComponentCount = bindingIndexOrComponentCount - 1;
-        } while (bindingIndexOrComponentCount != 0);
-        slotIndexOrTemp = 0;
+          componentCount = componentCount - 1;
+        } while (componentCount != 0);
+        scanOffset = 0;
         *(undefined4 *)(this + 0x74) = 0xffffffff;
-        allocationIdOrCounter = 8;
+        setsLeft = 8;
         do {
-          iVar4 = slotIndexOrTemp * 4 + usedSetCountOrSlotMap;
-          if ((((*(int *)(usedSetCountOrSlotMap + slotIndexOrTemp * 4) != 0) || (*(int *)(iVar4 + 4) != 0)) ||
-              (*(int *)(iVar4 + 8) != 0)) || (*(int *)(iVar4 + 0xc) != 0)) {
-            *(int *)(this + 0x74) = slotIndexOrTemp >> 2;
+          mapRow = scanOffset * 4 + slotMap;
+          if ((((*(int *)(slotMap + scanOffset * 4) != 0) || (*(int *)(mapRow + 4) != 0)) ||
+              (*(int *)(mapRow + 8) != 0)) || (*(int *)(mapRow + 0xc) != 0)) {
+            *(int *)(this + 0x74) = scanOffset >> 2;
           }
-          slotIndexOrTemp = slotIndexOrTemp + 4;
-          allocationIdOrCounter = allocationIdOrCounter + -1;
-        } while (allocationIdOrCounter != 0);
-        if (usedSetCountOrSlotMap != 0) {
-          _free(usedSetCountOrSlotMap);
+          scanOffset = scanOffset + 4;
+          setsLeft = setsLeft + -1;
+        } while (setsLeft != 0);
+        if (slotMap != 0) {
+          _free(slotMap);
         }
       }
       else {
-        usedSetCountOrSlotMap = _strlen(DAT_a7b7bb00);
-        messageText = (char *)_malloc(usedSetCountOrSlotMap + 0x11);
-        _sprintf(messageText,DAT_a7b7bb00,0x20,slotIndexOrTemp);
+        formatLength = _strlen(DAT_a7b7bb00);
+        messageText = (char *)_malloc(formatLength + 0x11);
+        _sprintf(messageText,DAT_a7b7bb00,0x20,totalSlots);
         infoSink = *(void **)(this + 0x84);
                     
         __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
@@ -2366,229 +2416,229 @@ code_r0x97bb6720:
     }
   }
   return success;
-  while (uVar3 = uVar3 - 1, -1 < (int)uVar3) {
+  while (lastComponent = lastComponent - 1, -1 < (int)lastComponent) {
 code_r0x97bb5f28:
-    iVar12 = *slotMapCursor;
+    mapWord2 = *slotMapCursor;
     slotMapCursor = slotMapCursor + -1;
-    if (iVar12 != 0) {
-      *(uint *)(iVar19 + 0xc) = (uVar3 & 3) << 0x18 | *(uint *)(iVar19 + 0xc) & 0xfcffffff;
+    if (mapWord2 != 0) {
+      *(uint *)(bindingChunk + 0xc) = (lastComponent & 3) << 0x18 | *(uint *)(bindingChunk + 0xc) & 0xfcffffff;
       goto code_r0x97bb5fe4;
     }
   }
 code_r0x97bb5fe8:
-  local_a8 = 0;
-  local_a4 = 0;
-  local_a0 = 0;
-  local_9c = 0;
-  local_98 = 0;
-  local_94 = 0;
+  opRecordWord6 = 0;
+  opRecordWord7 = 0;
+  opRecordWord8 = 0;
+  opRecordWord9 = 0;
+  opRecordWord10 = 0;
+  opRecordWord11 = 0;
   slotPlan[9] = 0;
-  uVar3 = 0x60000;
-  uVar21 = 0x800000;
+  vertexDestWord = 0x60000;
+  vertexSrcWord = 0x800000;
   slotPlan[8] = 0x20000000;
   slotPlan[0xc] = 0x800000;
   slotPlan[10] = 0x60000;
-  local_90 = *(undefined4 *)(slotIndexOrTemp + 0x3c);
+  opRecordWord12 = *(undefined4 *)(opChunk + 0x3c);
   slotPlan[0xb] = (uint)bindingChunkIndex;
-  local_8c = 0;
+  opRecordWord13 = 0;
   slotPlan[0xd] = (uint)(ushort)(*(short *)(*vertexSymbol + 0x12) + (short)vec4Index);
-  uVar6 = *(uint *)((int)slotPlan + iVar4);
-  while ((uVar6 == uVar17 && (uVar29 < bindingIndexOrComponentCount))) {
-    uVar6 = *(uint *)((int)slotPlan + iVar4 + 0x10);
-    if (uVar6 == 1) {
-      uVar3 = (loopIndex & 3) << 6 | uVar3 & 0xffffff3f | 0x4000;
+  planSet = *(uint *)((int)slotPlan + planOffset);
+  while ((planSet == setIndex && (componentIndex < componentCount))) {
+    planComponent = *(uint *)((int)slotPlan + planOffset + 0x10);
+    if (planComponent == 1) {
+      vertexDestWord = (setComponent & 3) << 6 | vertexDestWord & 0xffffff3f | 0x4000;
 code_r0x97bb60fc:
-      uVar3 = (uVar6 & 3) << 10 | uVar3 & 0xfffff3ff;
-      slotPlan[10] = uVar3;
+      vertexDestWord = (planComponent & 3) << 10 | vertexDestWord & 0xfffff3ff;
+      slotPlan[10] = vertexDestWord;
     }
     else {
-      if (1 < (int)uVar6) {
-        if (uVar6 == 2) {
-          uVar3 = (loopIndex & 3) << 4 | uVar3 & 0xffffffcf | 0x8000;
+      if (1 < (int)planComponent) {
+        if (planComponent == 2) {
+          vertexDestWord = (setComponent & 3) << 4 | vertexDestWord & 0xffffffcf | 0x8000;
         }
         else {
-          if (uVar6 != 3) goto code_r0x97bb6108;
-          uVar3 = (loopIndex & 3) << 2 | uVar3 & 0xfffffff3 | 0x10000;
+          if (planComponent != 3) goto code_r0x97bb6108;
+          vertexDestWord = (setComponent & 3) << 2 | vertexDestWord & 0xfffffff3 | 0x10000;
         }
         goto code_r0x97bb60fc;
       }
-      if (uVar6 == 0) {
-        uVar3 = (loopIndex & 3) << 8 | uVar3 & 0xfffffcff | 0x2000;
+      if (planComponent == 0) {
+        vertexDestWord = (setComponent & 3) << 8 | vertexDestWord & 0xfffffcff | 0x2000;
         goto code_r0x97bb60fc;
       }
     }
 code_r0x97bb6108:
-    if (loopIndex == 1) {
-      uVar21 = (uVar29 & 3) << 0x13 | uVar21 & 0xffe7ffff;
+    if (setComponent == 1) {
+      vertexSrcWord = (componentIndex & 3) << 0x13 | vertexSrcWord & 0xffe7ffff;
 code_r0x97bb6150:
-      slotPlan[0xc] = uVar21;
+      slotPlan[0xc] = vertexSrcWord;
     }
     else {
-      if (1 < (int)loopIndex) {
-        if (loopIndex == 2) {
-          uVar21 = (uVar29 & 3) << 0x11 | uVar21 & 0xfff9ffff;
+      if (1 < (int)setComponent) {
+        if (setComponent == 2) {
+          vertexSrcWord = (componentIndex & 3) << 0x11 | vertexSrcWord & 0xfff9ffff;
         }
         else {
-          if (loopIndex != 3) goto code_r0x97bb6154;
-          uVar21 = (uVar29 & 3) << 0xf | uVar21 & 0xfffe7fff;
+          if (setComponent != 3) goto code_r0x97bb6154;
+          vertexSrcWord = (componentIndex & 3) << 0xf | vertexSrcWord & 0xfffe7fff;
         }
         goto code_r0x97bb6150;
       }
-      if (loopIndex == 0) {
-        uVar21 = (uVar29 & 3) << 0x15 | uVar21 & 0xff9fffff;
+      if (setComponent == 0) {
+        vertexSrcWord = (componentIndex & 3) << 0x15 | vertexSrcWord & 0xff9fffff;
         goto code_r0x97bb6150;
       }
     }
 code_r0x97bb6154:
-    uVar29 = uVar29 + 1;
-    loopIndex = loopIndex + 1;
-    iVar4 = uVar29 * 4;
-    uVar6 = slotPlan[uVar29];
+    componentIndex = componentIndex + 1;
+    setComponent = setComponent + 1;
+    planOffset = componentIndex * 4;
+    planSet = slotPlan[componentIndex];
   }
-  slotPlan[0xc] = (loopIndex - 1) * 0x1000 & 0x3000 | uVar21;
-  slotPlan[9] = (loopIndex - 1) * 0x4000000 & 0xc000000 | 0x800000;
-  iVar19 = _PPStreamInsertOperationAfterChunk(ppStreamManager,local_58,0,0,*(undefined4 *)(slotIndexOrTemp + 4));
+  slotPlan[0xc] = (setComponent - 1) * 0x1000 & 0x3000 | vertexSrcWord;
+  slotPlan[9] = (setComponent - 1) * 0x4000000 & 0xc000000 | 0x800000;
+  insertedOp = _PPStreamInsertOperationAfterChunk(ppStreamManager,opRecord,0,0,*(undefined4 *)(opChunk + 4));
   _PPStreamChangeBranchTargets
-            (*(undefined4 *)(this + 0x30),*(uint *)(slotIndexOrTemp + 0xc) & 0x3ffff,
-             *(uint *)(iVar19 + 0xc) & 0x3ffff);
-  if (bindingIndexOrComponentCount <= uVar29) goto code_r0x97bb61d0;
+            (*(undefined4 *)(this + 0x30),*(uint *)(opChunk + 0xc) & 0x3ffff,
+             *(uint *)(insertedOp + 0xc) & 0x3ffff);
+  if (componentCount <= componentIndex) goto code_r0x97bb61d0;
   goto code_r0x97bb5ec0;
 code_r0x97bb62a8:
-  loopIndex = 0;
-  uVar17 = *(uint *)((int)slotPlan + iVar4);
-  for (iVar19 = **(int **)(*(int *)(this + 0x34) + 0x18); iVar19 != 0; iVar19 = *(int *)(iVar19 + 8)
+  setComponent = 0;
+  setIndex = *(uint *)((int)slotPlan + planOffset);
+  for (bindingChunk = **(int **)(*(int *)(this + 0x34) + 0x18); bindingChunk != 0; bindingChunk = *(int *)(bindingChunk + 8)
       ) {
-    if (((*(uint *)(iVar19 + 0xc) & 0xf0000) == 0x70000) &&
-       ((*(uint *)(iVar19 + 0xc) & 0x1f) == uVar17)) {
-      bindingChunkIndex = *(ushort *)(iVar19 + 0x12);
-      uVar3 = 3;
-      slotMapCursor = (int *)(uVar17 * 0x10 + usedSetCountOrSlotMap + 0xc);
+    if (((*(uint *)(bindingChunk + 0xc) & 0xf0000) == 0x70000) &&
+       ((*(uint *)(bindingChunk + 0xc) & 0x1f) == setIndex)) {
+      bindingChunkIndex = *(ushort *)(bindingChunk + 0x12);
+      lastComponent = 3;
+      slotMapCursor = (int *)(setIndex * 0x10 + slotMap + 0xc);
       goto code_r0x97bb630c;
     }
   }
-  local_6c = 0;
-  local_70 = uVar17 & 0x1f | 0x4070000;
-  slotMapCursor = (int *)(uVar17 * 0x10 + usedSetCountOrSlotMap + 0xc);
-  uVar3 = 3;
+  attribBindingChunkIndex = 0;
+  attribBindingWord = setIndex & 0x1f | 0x4070000;
+  slotMapCursor = (int *)(setIndex * 0x10 + slotMap + 0xc);
+  lastComponent = 3;
   do {
-    iVar19 = *slotMapCursor;
+    mapWord = *slotMapCursor;
     slotMapCursor = slotMapCursor + -1;
-    if (iVar19 != 0) {
-      local_70 = (uVar3 & 3) << 0x18 | uVar17 & 0x1f | 0x4070000;
+    if (mapWord != 0) {
+      attribBindingWord = (lastComponent & 3) << 0x18 | setIndex & 0x1f | 0x4070000;
       break;
     }
-    uVar3 = uVar3 - 1;
-  } while (-1 < (int)uVar3);
-  uVar13 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(*(int *)(this + 0x34) + 0x18));
-  bindingChunkIndex = (short)uVar13 + 1;
-  local_6c = CONCAT22((*(unsigned short *)((unsigned char *)&(local_6c) + 0)),bindingChunkIndex);
-  _PPStreamAddAttribBinding(*(undefined4 *)(this + 0x34),&local_70);
+    lastComponent = lastComponent - 1;
+  } while (-1 < (int)lastComponent);
+  maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(*(int *)(this + 0x34) + 0x18));
+  bindingChunkIndex = (short)maxIndex + 1;
+  attribBindingChunkIndex = CONCAT22((*(unsigned short *)((unsigned char *)&(attribBindingChunkIndex) + 0)),bindingChunkIndex);
+  _PPStreamAddAttribBinding(*(undefined4 *)(this + 0x34),&attribBindingWord);
   goto code_r0x97bb63d0;
-  while (uVar3 = uVar3 - 1, -1 < (int)uVar3) {
+  while (lastComponent = lastComponent - 1, -1 < (int)lastComponent) {
 code_r0x97bb630c:
-    iVar14 = *slotMapCursor;
+    mapWord3 = *slotMapCursor;
     slotMapCursor = slotMapCursor + -1;
-    if (iVar14 != 0) {
-      *(uint *)(iVar19 + 0xc) = (uVar3 & 3) << 0x18 | *(uint *)(iVar19 + 0xc) & 0xfcffffff;
+    if (mapWord3 != 0) {
+      *(uint *)(bindingChunk + 0xc) = (lastComponent & 3) << 0x18 | *(uint *)(bindingChunk + 0xc) & 0xfcffffff;
       break;
     }
   }
 code_r0x97bb63d0:
-  local_a8 = 0;
-  local_a4 = 0;
-  local_a0 = 0;
-  local_9c = 0;
-  local_98 = 0;
-  local_94 = 0;
+  opRecordWord6 = 0;
+  opRecordWord7 = 0;
+  opRecordWord8 = 0;
+  opRecordWord9 = 0;
+  opRecordWord10 = 0;
+  opRecordWord11 = 0;
   slotPlan[0xb] = 0;
   slotPlan[9] = 0;
-  uVar21 = 0x20000;
+  fragmentDestWord = 0x20000;
   slotPlan[8] = 0x20000000;
   slotPlan[10] = 0x20000;
-  local_90 = *(undefined4 *)(slotIndexOrTemp + 0x3c);
-  local_8c = 0;
-  uVar3 = 0;
+  opRecordWord12 = *(undefined4 *)(opChunk + 0x3c);
+  opRecordWord13 = 0;
+  fragmentSrcWord = 0;
   slotPlan[0xd] = (uint)bindingChunkIndex;
   slotPlan[0xc] = 0;
-  uVar6 = *(uint *)((int)slotPlan + iVar4);
+  planSet = *(uint *)((int)slotPlan + planOffset);
   slotPlan[0xb] = (uint)(ushort)(*(short *)(*(int *)parseSymbol + 0x12) + (short)vec4Index);
-  while ((uVar6 == uVar17 && (uVar29 < bindingIndexOrComponentCount))) {
-    if (loopIndex == 1) {
-      uVar21 = (uVar29 & 3) << 6 | uVar21 & 0xffffff3f | 0x4000;
+  while ((planSet == setIndex && (componentIndex < componentCount))) {
+    if (setComponent == 1) {
+      fragmentDestWord = (componentIndex & 3) << 6 | fragmentDestWord & 0xffffff3f | 0x4000;
 code_r0x97bb64dc:
-      slotPlan[10] = uVar21;
+      slotPlan[10] = fragmentDestWord;
     }
     else {
-      if (1 < (int)loopIndex) {
-        if (loopIndex == 2) {
-          uVar21 = (uVar29 & 3) << 4 | uVar21 & 0xffffffcf | 0x8000;
+      if (1 < (int)setComponent) {
+        if (setComponent == 2) {
+          fragmentDestWord = (componentIndex & 3) << 4 | fragmentDestWord & 0xffffffcf | 0x8000;
         }
         else {
-          if (loopIndex != 3) goto code_r0x97bb64e0;
-          uVar21 = (uVar29 & 3) << 2 | uVar21 & 0xfffffff3 | 0x10000;
+          if (setComponent != 3) goto code_r0x97bb64e0;
+          fragmentDestWord = (componentIndex & 3) << 2 | fragmentDestWord & 0xfffffff3 | 0x10000;
         }
-        uVar21 = (loopIndex & 3) << 10 | uVar21 & 0xfffff3ff;
+        fragmentDestWord = (setComponent & 3) << 10 | fragmentDestWord & 0xfffff3ff;
         goto code_r0x97bb64dc;
       }
-      if (loopIndex == 0) {
-        uVar21 = (uVar29 & 3) << 8 | uVar21 & 0xfffffcff | 0x2000;
+      if (setComponent == 0) {
+        fragmentDestWord = (componentIndex & 3) << 8 | fragmentDestWord & 0xfffffcff | 0x2000;
         goto code_r0x97bb64dc;
       }
     }
 code_r0x97bb64e0:
-    if (loopIndex == 1) {
-      uVar3 = (*(uint *)((int)slotPlan + iVar4 + 0x10) & 3) << 0x13 | uVar3 & 0xffe7ffff;
+    if (setComponent == 1) {
+      fragmentSrcWord = (*(uint *)((int)slotPlan + planOffset + 0x10) & 3) << 0x13 | fragmentSrcWord & 0xffe7ffff;
 code_r0x97bb6544:
-      slotPlan[0xc] = uVar3;
+      slotPlan[0xc] = fragmentSrcWord;
     }
     else {
-      if (1 < (int)loopIndex) {
-        if (loopIndex == 2) {
-          uVar3 = (*(uint *)((int)slotPlan + iVar4 + 0x10) & 3) << 0x11 | uVar3 & 0xfff9ffff;
+      if (1 < (int)setComponent) {
+        if (setComponent == 2) {
+          fragmentSrcWord = (*(uint *)((int)slotPlan + planOffset + 0x10) & 3) << 0x11 | fragmentSrcWord & 0xfff9ffff;
         }
         else {
-          if (loopIndex != 3) goto code_r0x97bb6548;
-          uVar3 = (*(uint *)((int)slotPlan + iVar4 + 0x10) & 3) << 0xf | uVar3 & 0xfffe7fff;
+          if (setComponent != 3) goto code_r0x97bb6548;
+          fragmentSrcWord = (*(uint *)((int)slotPlan + planOffset + 0x10) & 3) << 0xf | fragmentSrcWord & 0xfffe7fff;
         }
         goto code_r0x97bb6544;
       }
-      if (loopIndex == 0) {
-        uVar3 = (*(uint *)((int)slotPlan + iVar4 + 0x10) & 3) << 0x15 | uVar3 & 0xff9fffff;
+      if (setComponent == 0) {
+        fragmentSrcWord = (*(uint *)((int)slotPlan + planOffset + 0x10) & 3) << 0x15 | fragmentSrcWord & 0xff9fffff;
         goto code_r0x97bb6544;
       }
     }
 code_r0x97bb6548:
-    uVar29 = uVar29 + 1;
-    loopIndex = loopIndex + 1;
-    iVar4 = uVar29 * 4;
-    uVar6 = slotPlan[uVar29];
+    componentIndex = componentIndex + 1;
+    setComponent = setComponent + 1;
+    planOffset = componentIndex * 4;
+    planSet = slotPlan[componentIndex];
   }
-  iVar19 = loopIndex - 1;
-  slotPlan[0xc] = iVar19 * 0x1000 & 0x3000U | uVar3;
-  slotPlan[10] = iVar19 * 0x400 & 0xc00U | uVar21 & 0xfffff3ff;
-  slotPlan[9] = iVar19 * 0x4000000 & 0xc000000U | 0x800000;
-  firstOp = FunctionTable__getFirstOp(*(unsigned char **)(this + 0x3c),uVar9);
-  if (firstOp == (*(uint *)(slotIndexOrTemp + 0xc) & 0x3ffff)) {
-    iVar19 = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(*(int *)(this + 0x34) + 0x20));
-    *(uint *)(slotIndexOrTemp + 0xc) = iVar19 + 1U & 0x3ffff | *(uint *)(slotIndexOrTemp + 0xc) & 0xfffc0000;
-    uVar13 = FunctionTable__getFirstOp(*(unsigned char **)(this + 0x3c),uVar9);
+  lastComponentCount = setComponent - 1;
+  slotPlan[0xc] = lastComponentCount * 0x1000 & 0x3000U | fragmentSrcWord;
+  slotPlan[10] = lastComponentCount * 0x400 & 0xc00U | fragmentDestWord & 0xfffff3ff;
+  slotPlan[9] = lastComponentCount * 0x4000000 & 0xc000000U | 0x800000;
+  firstOp = FunctionTable__getFirstOp(*(unsigned char **)(this + 0x3c),functionIndex);
+  if (firstOp == (*(uint *)(opChunk + 0xc) & 0x3ffff)) {
+    lastIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(*(int *)(this + 0x34) + 0x20));
+    *(uint *)(opChunk + 0xc) = lastIndex + 1U & 0x3ffff | *(uint *)(opChunk + 0xc) & 0xfffc0000;
+    firstOpValue = FunctionTable__getFirstOp(*(unsigned char **)(this + 0x3c),functionIndex);
     _PPStreamChangeBranchTargets
-              (*(undefined4 *)(this + 0x34),uVar13,*(uint *)(slotIndexOrTemp + 0xc) & 0x3ffff);
+              (*(undefined4 *)(this + 0x34),firstOpValue,*(uint *)(opChunk + 0xc) & 0x3ffff);
   }
-  iVar19 = _PPStreamInsertOperationAfterChunk
-                     (*(undefined4 *)(this + 0x34),local_58,0,1,*(undefined4 *)(slotIndexOrTemp + 4));
-  if (iVar19 != 0) {
-    FunctionTable__setFirstOp(*(unsigned char **)(this + 0x3c),uVar9,0);
-    for (iVar14 = **(int **)(*(int *)(this + 0x34) + 0x24); slotIndexOrTemp = iVar19, iVar14 != 0;
-        iVar14 = *(int *)(iVar14 + 8)) {
-      iVar12 = _memcmp("main(",iVar14 + 0x14,6);
-      if (iVar12 == 0) {
-        *(undefined4 *)(iVar14 + 0xc) = 0;
+  insertedOp = _PPStreamInsertOperationAfterChunk
+                     (*(undefined4 *)(this + 0x34),opRecord,0,1,*(undefined4 *)(opChunk + 4));
+  if (insertedOp != 0) {
+    FunctionTable__setFirstOp(*(unsigned char **)(this + 0x3c),functionIndex,0);
+    for (fragmentChunk = **(int **)(*(int *)(this + 0x34) + 0x24); opChunk = insertedOp, fragmentChunk != 0;
+        fragmentChunk = *(int *)(fragmentChunk + 8)) {
+      mainCompare = _memcmp("main(",fragmentChunk + 0x14,6);
+      if (mainCompare == 0) {
+        *(undefined4 *)(fragmentChunk + 0xc) = 0;
         break;
       }
     }
   }
-  if (bindingIndexOrComponentCount <= uVar29) goto code_r0x97bb6720;
+  if (componentCount <= componentIndex) goto code_r0x97bb6720;
   goto code_r0x97bb62a8;
 }
 
