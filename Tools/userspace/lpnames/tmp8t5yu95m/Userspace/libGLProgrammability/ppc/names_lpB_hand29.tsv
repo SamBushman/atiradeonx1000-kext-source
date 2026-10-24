@@ -1,0 +1,28 @@
+local	TPPStreamCompiler__error	param_1	this	CONFIRMED	TPPStreamCompiler*: +0x90 line/source id, +0xa0 error flag, +0xb0 TInfoSinkBase
+local	TPPStreamCompiler__error	param_2	formatSelect	INFERRED	nonzero selects the alternate prefix/format pair
+local	TPPStreamCompiler__error	param_3	locationText	INFERRED	optional location/symbol text included in the message (NULL: omitted)
+local	TPPStreamCompiler__error	param_4	format	CONFIRMED	printf-style format of the message
+local	TPPStreamCompiler__error	param_5	vaArg1	CONFIRMED	first variadic argument (spilled r7)
+local	TPPStreamCompiler__error	param_6	vaArg2	CONFIRMED	second variadic argument (spilled r8)
+local	TPPStreamCompiler__error	param_7	vaArg3	CONFIRMED	third variadic argument (spilled r9)
+local	TPPStreamCompiler__error	param_8	vaArg4	CONFIRMED	fourth variadic argument (spilled r10)
+local	TPPStreamCompiler__error	pcVar1	formatWithLocation	INFERRED	output format used when locationText is given
+local	TPPStreamCompiler__error	pcVar2	formatPlain	INFERRED	output format used without locationText
+local	TPPStreamCompiler__error	iVar3	messageLength	INFERRED	strlen of the formatted message
+local	TPPStreamCompiler__error	pcVar4	lineBuffer	CONFIRMED	malloc'd buffer holding the final line appended to the info sink
+local	TPPStreamCompiler__error	iVar5	locationLength	INFERRED	strlen(locationText) or 0
+local	TPPStreamCompiler__error	acStack_120	message	CONFIRMED	vsprintf result of format + the variadic arguments
+local	TPPStreamCompiler__warning	param_1	this	CONFIRMED	TPPStreamCompiler*: +0x90 line/source id, +0xa0 error flag, +0xb0 TInfoSinkBase
+local	TPPStreamCompiler__warning	param_2	formatSelect	INFERRED	nonzero selects the alternate prefix/format pair
+local	TPPStreamCompiler__warning	param_3	locationText	INFERRED	optional location/symbol text included in the message (NULL: omitted)
+local	TPPStreamCompiler__warning	param_4	format	CONFIRMED	printf-style format of the message
+local	TPPStreamCompiler__warning	param_5	vaArg1	CONFIRMED	first variadic argument (spilled r7)
+local	TPPStreamCompiler__warning	param_6	vaArg2	CONFIRMED	second variadic argument (spilled r8)
+local	TPPStreamCompiler__warning	param_7	vaArg3	CONFIRMED	third variadic argument (spilled r9)
+local	TPPStreamCompiler__warning	param_8	vaArg4	CONFIRMED	fourth variadic argument (spilled r10)
+local	TPPStreamCompiler__warning	pcVar1	formatWithLocation	INFERRED	output format used when locationText is given
+local	TPPStreamCompiler__warning	pcVar2	formatPlain	INFERRED	output format used without locationText
+local	TPPStreamCompiler__warning	iVar3	messageLength	INFERRED	strlen of the formatted message
+local	TPPStreamCompiler__warning	pcVar4	lineBuffer	CONFIRMED	malloc'd buffer holding the final line appended to the info sink
+local	TPPStreamCompiler__warning	iVar5	locationLength	INFERRED	strlen(locationText) or 0
+local	TPPStreamCompiler__warning	acStack_120	message	CONFIRMED	vsprintf result of format + the variadic arguments

@@ -1,0 +1,16 @@
+use	TPPStreamCompiler__constructFromOperand	iVar3	destSymbol	CONFIRMED	ParseSymbol of the destination operand	iVar3 = \*\(int \*\)pPVar12;	iVar3 = \*\(int \*\)\(iVar15 \+ 4\);
+use	TPPStreamCompiler__constructFromOperand	iVar3	fieldsBegin	CONFIRMED	start of the struct's field entries (structFieldList +4)	iVar3 = \*\(int \*\)\(iVar15 \+ 4\);@1	iVar3 = \(\*\*\(code \*\*\)\(\*piVar4 \+ 0x1c\)\)
+use	TPPStreamCompiler__constructFromOperand	iVar3	fieldNameString	CONFIRMED	TString* from TType vtable slot 0x1c (getFieldName)	iVar3 = \(\*\*\(code \*\*\)\(\*piVar4 \+ 0x1c\)\)	iVar3 = _strlen\(uVar18\);
+use	TPPStreamCompiler__constructFromOperand	iVar3	nameBufferSize	CONFIRMED	strlen(field name) + 1 (+ strlen(parentName) + 1): size of the malloc'd child name	iVar3 = _strlen\(uVar18\);	pPVar12 = operator_new\(0x38\);
+use	TPPStreamCompiler__constructFromOperand	iVar3	argSymbol	CONFIRMED	ParseSymbol of the current argument	iVar3 = \*\(int \*\)param_3\[iVar16\];	iVar3 = \*\(int \*\)\(\*\(int \*\)\(iVar3 \+ 0xc\) \+ 8\);		rhs
+use	TPPStreamCompiler__constructFromOperand	iVar3	argStructFieldList	CONFIRMED	TTypeList* of the argument's struct type	iVar3 = \*\(int \*\)\(\*\(int \*\)\(iVar3 \+ 0xc\) \+ 8\);	uVar11 = param_4 - iVar16;	lhs	
+use	TPPStreamCompiler__constructFromOperand	iVar3	fieldsBegin	CONFIRMED	start of the struct's field entries, reloaded for the next field	iVar3 = \*\(int \*\)\(iVar15 \+ 4\);@2	else if \(sVar2 == 0x7fff\)
+use	TPPStreamCompiler__constructFromOperand	iVar3	destSymbol	CONFIRMED	ParseSymbol of the destination operand (array path: +0x2e array size; basic path: tested against NULL)	else if \(sVar2 == 0x7fff\)	
+use	TPPStreamCompiler__assignOperands	pPVar7	pendingOperand	CONFIRMED	compiler +0x88: the pending indirect-address operand (its +0xc operand is the index)	pPVar7 = \*\(unsigned char \*\*\)\(this \+ 0x88\);@1	pPVar7 = local_50\[2\];
+use	TPPStreamCompiler__getConstantAsSourceVar	uVar3	lanesLeft	CONFIRMED	countdown over valueCount while checking mergedLaneFlags	uVar3 = param_4;	+9
+use	TPPStreamCompiler__constructElement	iVar17	zeroCountdown	CONFIRMED	countdown of the four words of constantLanes being zeroed	iVar17 = 4;	iVar16 = 0;
+use	TPPStreamCompiler__constructElement	iVar17	destIsMatrixNow	CONFIRMED	ParseOperand__IsMatrix of the destination: a matrix destination gets the column as a direct index	iVar17 = ParseOperand__IsMatrix\(\*param_2\);	local_90 = 
+use	TPPStreamCompiler__constructElement	iVar17	argByteOffsetOrCopyResult	INFERRED	byte offset of the current argument in param_3 (index * 4); at the end of the move path it also receives the copyPropagateCompilerTemp result (non-zero = the move was folded away), tested right away	iVar17 = iVar5 << 2;	iVar17 = \*\(int \*\)\*param_2;
+use	TPPStreamCompiler__constructElement	iVar17	destSymbol	CONFIRMED	ParseSymbol of the destination (*parseOperand1): +0x2c OpenGL type	iVar17 = \*\(int \*\)\*param_2;@1	iVar17 = \*\(int \*\)param_3\[iVar5\];
+use	TPPStreamCompiler__constructElement	iVar17	argSymbol	CONFIRMED	ParseSymbol of the current argument: +0x2c OpenGL type	iVar17 = \*\(int \*\)param_3\[iVar5\];	iVar17 = \*\(int \*\)\*param_2;
+use	TPPStreamCompiler__constructElement	iVar17	destSymbol	CONFIRMED	ParseSymbol of the destination (constant-lane operation)	iVar17 = \*\(int \*\)\*param_2;@2	

@@ -1,0 +1,15 @@
+local	_GetAtomString	param_1	atable	CONFIRMED	AtomTable*: [0] string buffer, [1] used bytes, [10] atom->offset map, [0xc] atom count
+local	_GetAtomString	param_2	atom	CONFIRMED	atom number
+local	_GetChunkAllocationSize	param_1	chunkKind	CONFIRMED	chunk kind byte (0 .. 0xb)
+local	_GetChunkAllocationSize	param_2	extraSize	CONFIRMED	kind-specific string length / extra size (NULL if none)
+local	_GetReversedAtom	param_1	atable	CONFIRMED	AtomTable* (+0x2c reverse map, +0x30 next free)
+local	_GetReversedAtom	param_2	atom	CONFIRMED	atom number
+local	_FreeHashTable	param_1	htable	CONFIRMED	HashTable*: [0] entries, [1] size, [2] count
+local	_PPParserShutdown	iVar1	scope	INFERRED	first scope of the parser, removed repeatedly
+local	_InitStringTable	param_1	stringTable	CONFIRMED	StringTable*: [0] buffer, [1] used bytes, [2] capacity (0x4000)
+local	_PPStreamAttachOperationsChunkList	param_2	chunkList	CONFIRMED	the operation chunk list stored at stream+0x20
+local	_PPStreamAttachParamBindingsChunkList	param_2	chunkList	CONFIRMED	the parameter-binding chunk list stored at stream+0x10
+local	_PPStreamAttachParamBindingArraysChunkList	param_2	chunkList	CONFIRMED	the parameter-binding-array chunk list stored at stream+0x14
+local	_PPEmulatorProgramCreate	uVar1	defaultWord	INFERRED	DAT_a7b7bda4 stored at program+0xc and +8
+local	__dyld_func_lookup	uVar1	result	INFERRED	dyld_func_lookup_pointer() result; returned
+local	___initialize_Cplusplus	uStack_28	initializerFn	INFERRED	function pointer returned by the dyld lookup (module initialiser caller); called with the mach header

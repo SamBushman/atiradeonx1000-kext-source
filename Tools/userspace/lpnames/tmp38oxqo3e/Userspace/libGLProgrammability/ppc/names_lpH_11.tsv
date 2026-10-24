@@ -1,0 +1,108 @@
+use	ParseSymbolTable__FindFirstElement	pPVar1	elementSymbol	INFERRED	new ParseSymbol (operator_new(100)) for one array element / struct field	^\s*pPVar1\ =\ operator_new\(100\);$	+2
+use	ParseSymbolTable__FindFirstElement	pPVar1	elementSymbol	INFERRED	new ParseSymbol (operator_new(100)) for one array element / struct field	^\s*ParseSymbol__SetName\(pPVar1,pcVar3\);$	+1
+use	ParseSymbolTable__FindFirstElement	pPVar1	elementSymbol	INFERRED	new ParseSymbol (operator_new(100)) for one array element / struct field	^\s*\*\(undefined4\ \*\)\(pPVar1\ \+\ 0x28\)\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x28\);$	+1
+use	ParseSymbolTable__FindFirstElement	pPVar1	elementSymbol	INFERRED	new ParseSymbol (operator_new(100)) for one array element / struct field	^\s*\*\(undefined4\ \*\)\(pPVar1\ \+\ 0x40\)\ =\ uVar10;$	+6
+use	ParseSymbolTable__FindFirstElement	pPVar1	elementSymbol	INFERRED	new ParseSymbol (operator_new(100)) for one array element / struct field	^\s*pPVar1\ =\ operator_new\(100\);$@2	+4
+use	ParseSymbolTable__FindFirstElement	pPVar1	elementSymbol	INFERRED	new ParseSymbol (operator_new(100)) for one array element / struct field	^\s*ParseSymbol__CatName\(pPVar1,acStack_30\);$	+1
+use	ParseSymbolTable__FindFirstElement	pPVar1	elementSymbol	INFERRED	new ParseSymbol (operator_new(100)) for one array element / struct field	^\s*\*\(undefined4\ \*\)\(pPVar1\ \+\ 0x28\)\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x28\);$@2	+12
+use	ParseSymbolTable__FindFirstElement	iVar2	parentNameLength	INFERRED	_strlen of the parent symbol name (symbol+0x14)	^\s*iVar2\ =\ _strlen\(\*\(int\ \*\)\(param_2\ \+\ 0x14\)\);$	+2
+use	ParseSymbolTable__FindFirstElement	pcVar3	elementName	INFERRED	malloc'd composed element name "parent.field"	^\s*pcVar3\ =\ \(char\ \*\)_malloc\(iVar5\);$	+1
+use	ParseSymbolTable__FindFirstElement	pcVar3	elementName	INFERRED	malloc'd composed element name "parent.field"	^\s*_strcpy\(pcVar3,uVar10\);$	+1
+use	ParseSymbolTable__FindFirstElement	pcVar3	elementName	INFERRED	malloc'd composed element name "parent.field"	^\s*_sprintf\(pcVar3,DAT_a7b7bbf4,\*\(int\ \*\)\(param_2\ \+\ 0x14\),uVar10\);$	+1
+use	ParseSymbolTable__FindFirstElement	pcVar3	elementName	INFERRED	malloc'd composed element name "parent.field"	^\s*ParseSymbol__SetName\(pPVar1,pcVar3\);$	+1
+use	ParseSymbolTable__FindFirstElement	pcVar3	elementName	INFERRED	malloc'd composed element name "parent.field"	^\s*_free\(pcVar3\);$	+1
+use	ParseSymbolTable__FindFirstElement	pTVar4	elementType	INFERRED	parse-tree type (symbol+0xc) of the array symbol, given to each element	^\s*pTVar4\ =\ \*\(unsigned\ char\ \*\*\)\(param_2\ \+\ 0xc\);$	+1
+use	ParseSymbolTable__FindFirstElement	pTVar4	elementType	INFERRED	parse-tree type (symbol+0xc) of the array symbol, given to each element	^\s*ParseSymbol__SetParseTreeType\(pPVar1,pTVar4\);$	+1
+local	ParseSymbolTable__FindFirstElement	in_r5	strayR5	INFERRED	r5 forwarded as a dead register argument
+local	ParseSymbolTable__FindFirstElement	in_r6	strayR6	INFERRED	r6 forwarded as a dead register argument
+local	ParseSymbolTable__FindFirstElement	in_r7	strayR7	INFERRED	r7 forwarded as a dead register argument
+local	ParseSymbolTable__FindFirstElement	in_r8	strayR8	INFERRED	r8 forwarded as a dead register argument
+use	ParseSymbolTable__FindFirstElement	iVar5	fieldNameObj	INFERRED	TString* returned by the field type virtual slot 0x1c (field name); +4 is its data	^\s*iVar5\ =\ \*\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar9\ \+\ 4\);$	+5
+use	ParseSymbolTable__FindFirstElement	iVar5	nameBufferSize	INFERRED	strlen(field name) + 1 (+ parent length + 1): size of the composed name buffer	^\s*iVar5\ =\ _strlen\(uVar10\);$	+2
+use	ParseSymbolTable__FindFirstElement	iVar5	nameBufferSize	INFERRED	strlen(field name) + 1 (+ parent length + 1): size of the composed name buffer	^\s*iVar5\ =\ iVar5\ \+\ iVar2\ \+\ 1;$	+1
+use	ParseSymbolTable__FindFirstElement	iVar5	nameBufferSize	INFERRED	strlen(field name) + 1 (+ parent length + 1): size of the composed name buffer	^\s*pcVar3\ =\ \(char\ \*\)_malloc\(iVar5\);$	+1
+use	ParseSymbolTable__FindFirstElement	iVar5	srcFlag3c	INFERRED	symbol+0x3c flag of the source symbol, OR-ed with +0x40 into the element flag	^\s*iVar5\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x3c\);$	+1
+use	ParseSymbolTable__FindFirstElement	iVar5	srcFlag3c	INFERRED	symbol+0x3c flag of the source symbol, OR-ed with +0x40 into the element flag	^\s*if\ \(\(iVar5\ !=\ 0\)\ \|\|\ \(\*\(int\ \*\)\(param_2\ \+\ 0x40\)\ !=\ 0\)\)\ \{$	+1
+use	ParseSymbolTable__FindFirstElement	uVar6	flag3c	INFERRED	symbol+0x3c flag copied to the element	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x3c\);$	+1
+use	ParseSymbolTable__FindFirstElement	uVar6	flag3c	INFERRED	symbol+0x3c flag copied to the element	^\s*\*\(undefined4\ \*\)\(pPVar1\ \+\ 0x3c\)\ =\ uVar6;$	+1
+use	ParseSymbolTable__FindFirstElement	uVar7	flag5c	INFERRED	symbol+0x5c flag copied to the element	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x5c\);$	+1
+use	ParseSymbolTable__FindFirstElement	uVar7	flag5c	INFERRED	symbol+0x5c flag copied to the element	^\s*\*\(undefined4\ \*\)\(pPVar1\ \+\ 0x5c\)\ =\ uVar7;$	+1
+use	ParseSymbolTable__FindFirstElement	uVar8	flag60	INFERRED	symbol+0x60 flag copied to the element	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x60\);$	+1
+use	ParseSymbolTable__FindFirstElement	uVar8	flag60	INFERRED	symbol+0x60 flag copied to the element	^\s*\*\(undefined4\ \*\)\(pPVar1\ \+\ 0x60\)\ =\ uVar8;$	+1
+use	ParseSymbolTable__FindFirstElement	iVar9	structFieldList	INFERRED	struct field list of the symbol type (type+8)	^\s*iVar9\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0xc\)\ \+\ 8\);$	+2
+use	ParseSymbolTable__FindFirstElement	iVar9	structFieldList	INFERRED	struct field list of the symbol type (type+8)	^\s*iVar5\ =\ \*\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar9\ \+\ 4\);$	+1
+use	ParseSymbolTable__FindFirstElement	iVar9	structFieldList	INFERRED	struct field list of the symbol type (type+8)	^\s*\(\(int\ \*\)\*\*\(undefined4\ \*\*\)\(iVar9\ \+\ 4\),a1,in_r5,in_r6,in_r7,in_r8,iVar5\);$	+1
+use	ParseSymbolTable__FindFirstElement	iVar9	structFieldList	INFERRED	struct field list of the symbol type (type+8)	^\s*ParseSymbol__SetParseTreeType\(pPVar1,\(unsigned\ char\ \*\)\*\*\(undefined4\ \*\*\)\(iVar9\ \+\ 4\)\);$	+1
+use	ParseSymbolTable__FindFirstElement	uVar10	result	INFERRED	return value: the result of the recursive FindFirstElement / FindSymbol (0 when none)	^\s*uVar10\ =\ 0;$	+1
+use	ParseSymbolTable__FindFirstElement	uVar10	result	INFERRED	return value: the result of the recursive FindFirstElement / FindSymbol (0 when none)	^\s*uVar10\ =\ \(\(int\ \(\*\)\(\)\)ParseSymbolTable__FindFirstElement\)\(this,pPVar1\);$	+1
+use	ParseSymbolTable__FindFirstElement	uVar10	result	INFERRED	return value: the result of the recursive FindFirstElement / FindSymbol (0 when none)	^\s*uVar10\ =\ \(\(int\ \(\*\)\(\)\)ParseSymbolTable__FindFirstElement\)\(this,pPVar1\);$@2	+1
+use	ParseSymbolTable__FindFirstElement	uVar10	result	INFERRED	return value: the result of the recursive FindFirstElement / FindSymbol (0 when none)	^\s*uVar10\ =\ \(\(int\ \(\*\)\(\)\)ParseSymbolTable__FindSymbol\)\(this,param_2\);$	+1
+use	ParseSymbolTable__FindFirstElement	uVar10	result	INFERRED	return value: the result of the recursive FindFirstElement / FindSymbol (0 when none)	^\s*return\ uVar10;$	+1
+use	ParseSymbolTable__FindFirstElement	uVar10	fieldNameData	INFERRED	field name string data pointer (name object +4)	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 4\);$	+2
+use	ParseSymbolTable__FindFirstElement	uVar10	fieldNameData	INFERRED	field name string data pointer (name object +4)	^\s*_strcpy\(pcVar3,uVar10\);$	+1
+use	ParseSymbolTable__FindFirstElement	uVar10	fieldNameData	INFERRED	field name string data pointer (name object +4)	^\s*_sprintf\(pcVar3,DAT_a7b7bbf4,\*\(int\ \*\)\(param_2\ \+\ 0x14\),uVar10\);$	+1
+use	ParseSymbolTable__FindFirstElement	uVar10	flag40	INFERRED	symbol+0x40 flag (or the OR of the +0x3c / +0x40 flags) copied to the element	^\s*uVar10\ =\ 0;$@2	+1
+use	ParseSymbolTable__FindFirstElement	uVar10	flag40	INFERRED	symbol+0x40 flag (or the OR of the +0x3c / +0x40 flags) copied to the element	^\s*uVar10\ =\ 1;$	+1
+use	ParseSymbolTable__FindFirstElement	uVar10	flag40	INFERRED	symbol+0x40 flag (or the OR of the +0x3c / +0x40 flags) copied to the element	^\s*\*\(undefined4\ \*\)\(pPVar1\ \+\ 0x40\)\ =\ uVar10;$	+1
+use	ParseSymbolTable__FindFirstElement	uVar10	flag40	INFERRED	symbol+0x40 flag (or the OR of the +0x3c / +0x40 flags) copied to the element	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ 0x40\);$	+1
+use	ParseSymbolTable__FindFirstElement	uVar10	flag40	INFERRED	symbol+0x40 flag (or the OR of the +0x3c / +0x40 flags) copied to the element	^\s*\*\(undefined4\ \*\)\(pPVar1\ \+\ 0x40\)\ =\ uVar10;$@2	+1
+use	ParseSymbolTable__FindFirstElement	uVar11	elementIndex	INFERRED	loop index over the array elements	^\s*uVar11\ =\ 0;$	+1
+use	ParseSymbolTable__FindFirstElement	uVar11	elementIndex	INFERRED	loop index over the array elements	^\s*ParseSymbol__AddDirectIndex\(pPVar1,uVar11\);$	+2
+use	ParseSymbolTable__FindFirstElement	uVar11	elementIndex	INFERRED	loop index over the array elements	^\s*uVar11\ =\ uVar11\ \+\ 1;$	+2
+local	ParseSymbolTable__FindFirstElement	acStack_30	indexText	INFERRED	"[%d]" array index text appended to the element name
+use	ParseSymbolTable__InsertSymbol	bVar1	foundSymbolId	INFERRED	a symbol with the same id (+0x28) already exists in the table	^\s*bVar1\ =\ false;$	+1
+use	ParseSymbolTable__InsertSymbol	bVar1	foundSymbolId	INFERRED	a symbol with the same id (+0x28) already exists in the table	^\s*bVar1\ =\ true;$	+1
+use	ParseSymbolTable__InsertSymbol	bVar1	foundSymbolId	INFERRED	a symbol with the same id (+0x28) already exists in the table	^\s*if\ \(bVar1\)\ goto\ LAB_97bbd244;$	+1
+use	ParseSymbolTable__InsertSymbol	puVar2	terminalCharPtr	INFERRED	pointer to the std::string _S_terminal character, stored at data[length] (inlined c_str)	^\s*puVar2\ =\ DAT_a7b7bcfc;$	+1
+use	ParseSymbolTable__InsertSymbol	puVar2	terminalCharPtr	INFERRED	pointer to the std::string _S_terminal character, stored at data[length] (inlined c_str)	^\s*\*\(undefined1\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 4\)\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar8\ \+\ 4\)\ \+\ \-0xc\)\)\ =\ \*puVar2;$	+1
+use	ParseSymbolTable__InsertSymbol	iVar3	structFieldList	INFERRED	struct field list of the symbol type (type+8): {_, begin, end} of 8-byte entries	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0xc\)\ \+\ 8\);$	+2
+use	ParseSymbolTable__InsertSymbol	iVar3	structFieldList	INFERRED	struct field list of the symbol type (type+8): {_, begin, end} of 8-byte entries	^\s*uVar10\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\)\ \-\ \*\(int\ \*\)\(iVar3\ \+\ 4\)\ >>\ 3;$	+1
+use	ParseSymbolTable__InsertSymbol	iVar3	structFieldList	INFERRED	struct field list of the symbol type (type+8): {_, begin, end} of 8-byte entries	^\s*a0\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar3\ \+\ 4\)\ \+\ uVar11\ \*\ 8\);$	+1
+use	ParseSymbolTable__InsertSymbol	iVar3	structFieldList	INFERRED	struct field list of the symbol type (type+8): {_, begin, end} of 8-byte entries	^\s*ParseSymbol__SetParseTreeType\(pPVar6,\*\(unsigned\ char\ \*\*\)\(\*\(int\ \*\)\(iVar3\ \+\ 4\)\ \+\ uVar11\ \*\ 8\)\);$	+1
+use	ParseSymbolTable__InsertSymbol	iVar3	symbolCursor	INFERRED	cursor over the table symbol list (next at +8)	^\s*for\ \(iVar3\ =\ \*\(int\ \*\)this;\ iVar3\ !=\ 0;\ iVar3\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\)\)\ \{$	+2
+use	ParseSymbolTable__InsertSymbol	sVar5	glType	INFERRED	symbol OpenGL type (+0x2c): 0x7ffe struct, 0x7fff array	^\s*sVar5\ =\ \*\(short\ \*\)\(param_2\ \+\ 0x2c\);$	+1
+use	ParseSymbolTable__InsertSymbol	sVar5	glType	INFERRED	symbol OpenGL type (+0x2c): 0x7ffe struct, 0x7fff array	^\s*if\ \(sVar5\ ==\ 0x7ffe\)\ \{$	+1
+use	ParseSymbolTable__InsertSymbol	sVar5	glType	INFERRED	symbol OpenGL type (+0x2c): 0x7ffe struct, 0x7fff array	^\s*else\ if\ \(sVar5\ ==\ 0x7fff\)\ \{$	+1
+use	ParseSymbolTable__InsertSymbol	sVar5	glType	INFERRED	symbol OpenGL type (+0x2c): 0x7ffe struct, 0x7fff array	^\s*sVar5\ =\ \*\(short\ \*\)\(param_2\ \+\ 0x2c\);$@2	+3
+use	ParseSymbolTable__InsertSymbol	uVar4	elementFlag40	INFERRED	OR of the symbol +0x3c / +0x40 flags copied to the element	^\s*uVar4\ =\ 0;$	+1
+use	ParseSymbolTable__InsertSymbol	uVar4	elementFlag40	INFERRED	OR of the symbol +0x3c / +0x40 flags copied to the element	^\s*uVar4\ =\ 1;$	+1
+use	ParseSymbolTable__InsertSymbol	uVar4	elementFlag40	INFERRED	OR of the symbol +0x3c / +0x40 flags copied to the element	^\s*\*\(undefined4\ \*\)\(pPVar6\ \+\ 0x40\)\ =\ uVar4;$	+1
+use	ParseSymbolTable__InsertSymbol	uVar4	elementFlag40	INFERRED	OR of the symbol +0x3c / +0x40 flags copied to the element	^\s*uVar4\ =\ 0;$@2	+1
+use	ParseSymbolTable__InsertSymbol	uVar4	elementFlag40	INFERRED	OR of the symbol +0x3c / +0x40 flags copied to the element	^\s*uVar4\ =\ 1;$@2	+1
+use	ParseSymbolTable__InsertSymbol	uVar4	elementFlag40	INFERRED	OR of the symbol +0x3c / +0x40 flags copied to the element	^\s*\*\(undefined4\ \*\)\(pPVar6\ \+\ 0x40\)\ =\ uVar4;$@2	+1
+use	ParseSymbolTable__InsertSymbol	pPVar6	elementSymbol	INFERRED	new ParseSymbol (copy-constructed) for one struct field / array element	^\s*pPVar6\ =\ operator_new\(100\);$	+3
+use	ParseSymbolTable__InsertSymbol	pPVar6	elementSymbol	INFERRED	new ParseSymbol (copy-constructed) for one struct field / array element	^\s*ParseSymbol__CatName\(pPVar6,\*\(char\ \*\*\)\(iVar8\ \+\ 4\)\);$	+4
+use	ParseSymbolTable__InsertSymbol	pPVar6	elementSymbol	INFERRED	new ParseSymbol (copy-constructed) for one struct field / array element	^\s*\*\(undefined4\ \*\)\(pPVar6\ \+\ 0x40\)\ =\ uVar4;$	+2
+use	ParseSymbolTable__InsertSymbol	pPVar6	elementSymbol	INFERRED	new ParseSymbol (copy-constructed) for one struct field / array element	^\s*\*\(unsigned\ char\ \*\*\)pPVar7\ =\ pPVar6;$	+1
+use	ParseSymbolTable__InsertSymbol	pPVar6	elementSymbol	INFERRED	new ParseSymbol (copy-constructed) for one struct field / array element	^\s*pPVar6\ =\ operator_new\(100\);$@2	+3
+use	ParseSymbolTable__InsertSymbol	pPVar6	elementSymbol	INFERRED	new ParseSymbol (copy-constructed) for one struct field / array element	^\s*ParseSymbol__CatName\(pPVar6,acStack_40\);$	+3
+use	ParseSymbolTable__InsertSymbol	pPVar6	elementSymbol	INFERRED	new ParseSymbol (copy-constructed) for one struct field / array element	^\s*\*\(undefined4\ \*\)\(pPVar6\ \+\ 0x40\)\ =\ uVar4;$@2	+2
+use	ParseSymbolTable__InsertSymbol	pPVar6	elementSymbol	INFERRED	new ParseSymbol (copy-constructed) for one struct field / array element	^\s*\*\(unsigned\ char\ \*\*\)pPVar7\ =\ pPVar6;$@2	+1
+use	ParseSymbolTable__InsertSymbol	pPVar6	elementSymbol	INFERRED	new ParseSymbol (copy-constructed) for one struct field / array element	^\s*pPVar6\ =\ operator_new\(100\);$@3	+4
+use	ParseSymbolTable__InsertSymbol	pPVar6	elementSymbol	INFERRED	new ParseSymbol (copy-constructed) for one struct field / array element	^\s*\*\(undefined4\ \*\)\(pPVar6\ \+\ 0x40\)\ =\ uVar9;$	+2
+use	ParseSymbolTable__InsertSymbol	pPVar6	elementSymbol	INFERRED	new ParseSymbol (copy-constructed) for one struct field / array element	^\s*\*\(unsigned\ char\ \*\*\)pPVar7\ =\ pPVar6;$@3	+1
+use	ParseSymbolTable__InsertSymbol	pPVar7	elementOperand	INFERRED	new ParseOperand wrapping the element symbol for processOperand	^\s*pPVar7\ =\ operator_new\(0x38\);$	+6
+use	ParseSymbolTable__InsertSymbol	pPVar7	elementOperand	INFERRED	new ParseOperand wrapping the element symbol for processOperand	^\s*pPVar7\ =\ operator_new\(0x38\);$@2	+3
+use	ParseSymbolTable__InsertSymbol	pPVar7	elementOperand	INFERRED	new ParseOperand wrapping the element symbol for processOperand	^\s*\(\(int\ \(\*\)\(\)\)ParseSymbolTable__processOperand\)\(this,pPVar7\);$@2	+1
+use	ParseSymbolTable__InsertSymbol	pPVar7	elementOperand	INFERRED	new ParseOperand wrapping the element symbol for processOperand	^\s*if\ \(pPVar7\ !=\ \(unsigned\ char\ \*\)0x0\)\ \{$	+3
+use	ParseSymbolTable__InsertSymbol	pPVar7	elementOperand	INFERRED	new ParseOperand wrapping the element symbol for processOperand	^\s*pPVar7\ =\ operator_new\(0x38\);$@3	+6
+use	ParseSymbolTable__InsertSymbol	iVar8	fieldNameObj	INFERRED	TString* returned by the field type virtual slot 0x1c (field name); +4 is its data	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x1c\)\)\(a0\);$	+3
+use	ParseSymbolTable__InsertSymbol	uVar9	result	INFERRED	return value: result of InsertSingleSymbol (0 otherwise)	^\s*uVar9\ =\ 0;$	+1
+use	ParseSymbolTable__InsertSymbol	uVar9	result	INFERRED	return value: result of InsertSingleSymbol (0 otherwise)	^\s*uVar9\ =\ \(\(int\ \(\*\)\(\)\)ParseSymbolTable__InsertSingleSymbol\)\(this,param_2\);$	+1
+use	ParseSymbolTable__InsertSymbol	uVar9	result	INFERRED	return value: result of InsertSingleSymbol (0 otherwise)	^\s*return\ uVar9;$	+1
+use	ParseSymbolTable__InsertSymbol	uVar9	trimmedFlag40	INFERRED	OR of the symbol +0x3c / +0x40 flags copied to the base-name symbol	^\s*uVar9\ =\ 0;$@2	+1
+use	ParseSymbolTable__InsertSymbol	uVar9	trimmedFlag40	INFERRED	OR of the symbol +0x3c / +0x40 flags copied to the base-name symbol	^\s*uVar9\ =\ 1;$	+1
+use	ParseSymbolTable__InsertSymbol	uVar9	trimmedFlag40	INFERRED	OR of the symbol +0x3c / +0x40 flags copied to the base-name symbol	^\s*\*\(undefined4\ \*\)\(pPVar6\ \+\ 0x40\)\ =\ uVar9;$	+1
+use	ParseSymbolTable__InsertSymbol	uVar10	fieldCount	INFERRED	number of struct fields ((end - begin) >> 3)	^\s*uVar10\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\)\ \-\ \*\(int\ \*\)\(iVar3\ \+\ 4\)\ >>\ 3;$	+2
+use	ParseSymbolTable__InsertSymbol	uVar10	fieldCount	INFERRED	number of struct fields ((end - begin) >> 3)	^\s*\}\ while\ \(uVar11\ <\ uVar10\);$	+1
+use	ParseSymbolTable__InsertSymbol	uVar10	elementIndex	INFERRED	loop index over the array elements	^\s*uVar10\ =\ 0;$	+1
+use	ParseSymbolTable__InsertSymbol	uVar10	elementIndex	INFERRED	loop index over the array elements	^\s*ParseSymbol__AddDirectIndex\(pPVar6,uVar10\);$	+2
+use	ParseSymbolTable__InsertSymbol	uVar10	elementIndex	INFERRED	loop index over the array elements	^\s*if\ \(uVar10\ ==\ 0\)\ \{$	+1
+use	ParseSymbolTable__InsertSymbol	uVar10	elementIndex	INFERRED	loop index over the array elements	^\s*if\ \(uVar10\ ==\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0xc\)\ \+\ 4\)\ \-\ 1U\)\ \{$	+1
+use	ParseSymbolTable__InsertSymbol	uVar10	elementIndex	INFERRED	loop index over the array elements	^\s*uVar10\ =\ uVar10\ \+\ 1;$	+2
+use	ParseSymbolTable__InsertSymbol	uVar11	fieldIndex	INFERRED	loop index over the struct fields	^\s*uVar11\ =\ 0;$	+1
+use	ParseSymbolTable__InsertSymbol	uVar11	fieldIndex	INFERRED	loop index over the struct fields	^\s*a0\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar3\ \+\ 4\)\ \+\ uVar11\ \*\ 8\);$	+1
+use	ParseSymbolTable__InsertSymbol	uVar11	fieldIndex	INFERRED	loop index over the struct fields	^\s*ParseSymbol__SetParseTreeType\(pPVar6,\*\(unsigned\ char\ \*\*\)\(\*\(int\ \*\)\(iVar3\ \+\ 4\)\ \+\ uVar11\ \*\ 8\)\);$	+1
+use	ParseSymbolTable__InsertSymbol	uVar11	fieldIndex	INFERRED	loop index over the struct fields	^\s*uVar11\ =\ uVar11\ \+\ 1;$	+1
+use	ParseSymbolTable__InsertSymbol	uVar11	fieldIndex	INFERRED	loop index over the struct fields	^\s*\}\ while\ \(uVar11\ <\ uVar10\);$	+1
+local	ParseSymbolTable__InsertSymbol	acStack_40	indexText	INFERRED	"[%d]" array index text appended to the element name

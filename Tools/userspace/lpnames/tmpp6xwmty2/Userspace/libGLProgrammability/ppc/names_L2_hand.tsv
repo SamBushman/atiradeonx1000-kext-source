@@ -1,0 +1,23 @@
+local	GetBuiltInChunkForSymbol	param_1	parseSymbol	INFERRED	passed to ParseSymbol__GetDirectIndex(param_1,0); +0x14 holds the name text and +0x20 its length (the hash loop reads them)
+local	GetBuiltInChunkForSymbol	iVar11	nameHash	CONFIRMED	sum over the symbol's characters of c * (3 + 2*i); the function is a switch over this value against constants (0x10f9c, 0x81d5, ...)
+local	GetBuiltInChunkForSymbol	iVar12	chunk	CONFIRMED	result of _PPStreamChunkCreateWithType; its word at +0xc is filled in and it is returned
+local	GetBuiltInChunkForSymbol	uVar6	chunkWord	CONFIRMED	every definition is the new value stored to *(chunk + 0xc)
+local	GetBuiltInChunkForSymbol	uVar8	chunkType	CONFIRMED	the constant first argument of _PPStreamChunkCreateWithType
+local	GetBuiltInChunkForSymbol	bVar1	hashMatches	INFERRED	bVar1 = nameHash == constant, tested right after
+local	GetBuiltInChunkForSymbol	iVar10	charIndex	INFERRED	0..length-1 index of the character read in the hash loop
+local	GetBuiltInChunkForSymbol	iVar7	charWeight	INFERRED	starts at 3 and grows by 2 per character: the multiplier in the hash
+local	GetBuiltInChunkForSymbol	iVar4	weightedChar	INFERRED	character * charWeight, added to nameHash
+local	GetBuiltInChunkForSymbol	pcVar2	charPtr	INFERRED	points at the current name character in the hash loop
+local	yylex	uVar7	token	INFERRED	every assignment is a token code (0x101, 0x102, 0x11d, ... or 0 for end/char) and it is what the scanner returns
+local	_PPParserBuildErrorString	pcVar1	message	CONFIRMED	every assignment is an error text ("missing or invalid version", "unrecognised option", ...) copied into the result
+local	_glpPPDisassemble	puVar18	outBytePtr	INFERRED	byte pointer into the output text: set to outCursor + copyLength, then characters are stored through it
+local	TParseContext__executeInitializer	piVar6	newNode	INFERRED	the object returned by the allocating call (high half of uVar31); the function then stores identifier, type words and initializer into it
+local	_PPParserParseStatement	piVar10	opsList	CONFIRMED	assigned &_OpsList_ARBvp10 or &_OpsList_ARBfp10 and indexed as the op name table
+local	_PPCRuntimeCompilerCompileAV	puVar16	opTemplate	INFERRED	every assignment is &_glpOp...AVRTC, the AltiVec code template chunk appended with _glpRTCAddAChunk
+local	GetBuiltInInitialSwizzle	param_1	parseSymbol	INFERRED	same symbol object as GetBuiltInChunkForSymbol: +0x14 name text, +0x20 length
+local	GetBuiltInInitialSwizzle	iVar7	nameHash	CONFIRMED	sum over the symbol's characters of c * (3 + 2*i), switched on against constants
+local	GetBuiltInInitialSwizzle	iVar6	charIndex	INFERRED	0..length-1 index of the character read in the hash loop
+local	GetBuiltInInitialSwizzle	iVar5	charWeight	INFERRED	starts at 3 and grows by 2 per character: the multiplier in the hash
+local	GetBuiltInInitialSwizzle	iVar4	weightedChar	INFERRED	character * charWeight, added to nameHash
+local	GetBuiltInInitialSwizzle	pcVar2	charPtr	INFERRED	points at the current name character in the hash loop
+local	GetBuiltInInitialSwizzle	bVar1	hashMatches	INFERRED	bVar1 = nameHash == constant, tested right after

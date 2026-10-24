@@ -1,0 +1,8 @@
+func	FUN_97b89f04	_unlinkScope__body	CONFIRMED	the scope cleanup callback _unlinkScope (pointer in DAT_a7b7b048, registered with _mem_AddCleanup): its entry is 0x97b89f00 and the first instruction lwz r2,0(r3) falls into this function, which Ghidra starts one instruction later
+func	FUN_97b8acb4	_reget_token__body	CONFIRMED	the scan callback _reget_token of the pushed-back token input source (pointer in DAT_a7b7b04c): the real entry is one instruction before this function
+func	FUN_97b9907c	ParseBinary__errorReportTail	INFERRED	out-of-line tail of ParseBinary (the jump table 0x97b99064-0x97b9907c ends right before it): prints the location-prefixed message with a message pointer kept in unaff_r28
+func	FUN_97b99274	ParseUnary__errorReportTail	INFERRED	out-of-line tail of ParseUnary (the jump table 0x97b9925c-0x97b99274 ends right before it): prints the location-prefixed message
+func	FUN_97b9989c	ParseSelection__errorReportTail	INFERRED	out-of-line tail of ParseSelection (the jump table ends right before it): prints the location-prefixed message
+func	FUN_97b99eb8	ParseLoop__errorReportTail	INFERRED	out-of-line tail of ParseLoop (the jump table ends right before it): prints the location-prefixed message
+func	FUN_97b9a04c	ParseBranch__errorReportTail	INFERRED	out-of-line tail of ParseBranch (the jump table ends right before it): prints the location-prefixed message
+func	FUN_97b9a844	TParseContext__error__tail	INFERRED	out-of-line tail of TParseContext::error (the jump table 0x97b9a82c-0x97b9a844 ends right before it): appends the quoted token, reason and extra info and bumps the error count

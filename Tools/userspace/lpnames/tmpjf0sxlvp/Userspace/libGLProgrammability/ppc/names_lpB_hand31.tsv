@@ -1,0 +1,29 @@
+local	__ZN17TPPStreamCompilerD4Ev	param_2	deleteFlags	INFERRED	bit 0: also free the object (deleting destructor)
+local	__ZN17TPPStreamCompilerD4Ev	iVar4	sizeOrStringRep	INFERRED	stack size, then the std::string representation pointers released
+local	__ZN17TPPStreamCompilerD4Ev	pvVar5	owned	INFERRED	owned sub-object destroyed and deleted
+local	TPPStreamCompiler__reset	puVar1	ppStream	INFERRED	this->ppStream (+0x70); word 0 gets the shader enum
+local	TPPStreamCompiler__reset	uVar2	shaderEnum	INFERRED	0x8b31 vertex or 0x8b30 fragment shader enum
+local	TPPStreamCompiler__reset	iVar3	stage	INFERRED	this->stage (+8): 0 vertex, 1 fragment
+local	TPPStreamCompiler__reset	pvVar4	owned	INFERRED	owned sub-object destroyed and deleted
+local	_InterpreterLoadSource	iVar6	workPtr	INFERRED	reused temp: program target, interpolant array, then the operand register-file base
+local	_InterpreterLoadSource	iVar8	bankInfo	INFERRED	program info + bank*0xc: register bank descriptor (+0x80 table, +0x88 mask)
+local	_PPCRuntimeCompilerDirtyRegister	param_1	compiler	CONFIRMED	PPCRuntimeCompiler*
+local	_PPCRuntimeCompilerDirtyRegister	param_2	regIndex	CONFIRMED	register index (+0x20 in AltiVec mode)
+local	_PPCRuntimeCompilerDirtyRegister	iVar1	record	CONFIRMED	register record (index*0x38) being reset
+local	_PPCRuntimeCompilerInitialiseRegisterAllocator	uVar1	optionFlags	CONFIRMED	compiler option flags (+0xe50): bit0/1 pre-mark registers busy
+local	_PPCRuntimeCompilerInitialiseRegisterAllocator	puVar2	inUseFlag	INFERRED	in-use flag of the register record being pre-marked
+local	_PPCRuntimeCompilerInitialiseRegisterAllocator	uVar3	nextIndex	INFERRED	loop index + 1
+local	_PPCRuntimeCompilerInitialiseRegisterAllocator	iVar4	recordsLeft	INFERRED	down-counter of records to pre-mark
+local	_PPCRuntimeCompilerCalculateIndirectAddress	param_2	elementAddress	INFERRED	address of the register-file element
+local	_PPCRuntimeCompilerCalculateIndirectAddress	param_3	bankIndex	INFERRED	register bank (program info + bank*0xc descriptor)
+local	_PPCRuntimeCompilerCalculateIndirectAddress	param_4	unusedArg4	INFERRED	unused
+local	_PPCRuntimeCompilerCalculateIndirectAddress	param_5	relativeInfo	INFERRED	relative-address info: high half is the offset added
+local	_PPCRuntimeCompilerCalculateIndirectAddress	param_6	unusedArg6	INFERRED	unused
+local	_PPCRuntimeCompilerCalculateIndirectAddress	param_7	unusedArg7	INFERRED	unused
+local	_PPCRuntimeCompilerCalculateIndirectAddress	param_8	unusedArg8	INFERRED	unused
+local	_PPCRuntimeCompilerCalculateIndirectAddress	uVar1	bankMaskLo	INFERRED	low half of the bank mask / size at descriptor+0x8a
+local	_PPCRuntimeCompilerCalculateIndirectAddress	sStack00000028	relativeOffset	INFERRED	relativeInfo >> 16
+local	_glpRTCAddAChunk_97bd7cbc	param_1	chunk	CONFIRMED	zero-terminated array of precompiled instruction words
+local	_glpRTCAddAChunk_97bd7cbc	param_2	dest	CONFIRMED	code buffer receiving the words
+local	_glpRTCAddAChunk_97bd7cbc	iVar1	word	INFERRED	current instruction word
+local	_glpRTCAddAChunk_97bd7cbc	iVar2	wordCount	INFERRED	words copied; returned

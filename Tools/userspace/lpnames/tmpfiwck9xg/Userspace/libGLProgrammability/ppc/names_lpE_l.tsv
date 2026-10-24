@@ -1,0 +1,72 @@
+local	TPPStreamCompiler__constructReplicate	local_80	opHeader	INFERRED	_PPStreamOperation record word 0 (Header)
+local	TPPStreamCompiler__constructReplicate	local_7c	opFlags	INFERRED	_PPStreamOperation record word 1 (Flags)
+local	TPPStreamCompiler__constructReplicate	local_78	opDest0	INFERRED	_PPStreamOperation record word 2 (Dest0)
+local	TPPStreamCompiler__constructReplicate	local_74	opDest1	INFERRED	_PPStreamOperation record word 3 (Dest1)
+local	TPPStreamCompiler__constructReplicate	local_70	opSrc0A	INFERRED	_PPStreamOperation record word 4 (Src0A)
+local	TPPStreamCompiler__constructReplicate	local_6c	opSrc0B	INFERRED	_PPStreamOperation record word 5 (Src0B)
+local	TPPStreamCompiler__constructReplicate	local_68	opSrc1A	INFERRED	_PPStreamOperation record word 6 (Src1A)
+local	TPPStreamCompiler__constructReplicate	local_64	opSrc1B	INFERRED	_PPStreamOperation record word 7 (Src1B)
+local	TPPStreamCompiler__constructReplicate	local_60	opSrc2A	INFERRED	_PPStreamOperation record word 8 (Src2A)
+local	TPPStreamCompiler__constructReplicate	local_5c	opSrc2B	INFERRED	_PPStreamOperation record word 9 (Src2B)
+local	TPPStreamCompiler__constructReplicate	local_58	opAuxA	INFERRED	_PPStreamOperation record word 10 (AuxA)
+local	TPPStreamCompiler__constructReplicate	local_54	opAuxB	INFERRED	_PPStreamOperation record word 11 (AuxB)
+local	TPPStreamCompiler__constructReplicate	local_50	opLine	INFERRED	_PPStreamOperation record word 12 (Line)
+local	TPPStreamCompiler__constructReplicate	local_4c	opWord13	INFERRED	_PPStreamOperation record word 13 (Word13)
+local	TPPStreamCompiler__constructReplicate	piVar5	sourceOperand	CONFIRMED	*parseOperand2: the scalar source ParseOperand (symbol at +0, constant data pointer at +4, own GL type at +0x18)
+local	TPPStreamCompiler__constructReplicate	uVar2	sourceGlType	CONFIRMED	OpenGL type of the source: symbol +0x2c or operand +0x18
+local	TPPStreamCompiler__constructReplicate	bVar1	isScalarValueType	CONFIRMED	source GL type is float (0x1406), int (0x1404) or bool (0x8b56), so its constant value is copied
+local	TPPStreamCompiler__constructReplicate	local_30	constantWords	CONFIRMED	constant value words handed to getConstantAsSourceVar (word 0 = the scalar value)
+local	TPPStreamCompiler__constructReplicate	local_40	operandDescA	INFERRED	first word of the descriptor returned by getOperandAs{Dest,Source}Var / getConstantAsSourceVar
+local	TPPStreamCompiler__constructReplicate	local_3c	operandDescB	INFERRED	second word of that descriptor
+local	TPPStreamCompiler__constructReplicate	iVar3	destLogicalSize	CONFIRMED	ParseOperand__GetLogicalSize(destination): loop bound and the (size-1) field
+local	TPPStreamCompiler__constructReplicate	uVar6	unusedArg7	INFERRED	zero passed as a leftover 7th register argument of getOperandAsSourceVar
+local	TPPStreamCompiler__constructReplicate	uVar7	unusedArg8	INFERRED	zero passed as a leftover 8th register argument of getOperandAsSourceVar
+local	TPPStreamCompiler__constructDiagonal	local_b0	fillheader	INFERRED	_PPStreamOperation record word 0 (Header)
+local	TPPStreamCompiler__constructDiagonal	local_ac	fillflags	INFERRED	_PPStreamOperation record word 1 (Flags)
+local	TPPStreamCompiler__constructDiagonal	local_a8	filldest0	INFERRED	_PPStreamOperation record word 2 (Dest0)
+local	TPPStreamCompiler__constructDiagonal	local_a4	filldest1	INFERRED	_PPStreamOperation record word 3 (Dest1)
+local	TPPStreamCompiler__constructDiagonal	local_a0	fillsrc0A	INFERRED	_PPStreamOperation record word 4 (Src0A)
+local	TPPStreamCompiler__constructDiagonal	local_9c	fillsrc0B	INFERRED	_PPStreamOperation record word 5 (Src0B)
+local	TPPStreamCompiler__constructDiagonal	local_98	fillsrc1A	INFERRED	_PPStreamOperation record word 6 (Src1A)
+local	TPPStreamCompiler__constructDiagonal	local_94	fillsrc1B	INFERRED	_PPStreamOperation record word 7 (Src1B)
+local	TPPStreamCompiler__constructDiagonal	local_90	fillsrc2A	INFERRED	_PPStreamOperation record word 8 (Src2A)
+local	TPPStreamCompiler__constructDiagonal	local_8c	fillsrc2B	INFERRED	_PPStreamOperation record word 9 (Src2B)
+local	TPPStreamCompiler__constructDiagonal	local_88	fillauxA	INFERRED	_PPStreamOperation record word 10 (AuxA)
+local	TPPStreamCompiler__constructDiagonal	local_84	fillauxB	INFERRED	_PPStreamOperation record word 11 (AuxB)
+local	TPPStreamCompiler__constructDiagonal	local_80	fillline	INFERRED	_PPStreamOperation record word 12 (Line)
+local	TPPStreamCompiler__constructDiagonal	local_7c	fillword13	INFERRED	_PPStreamOperation record word 13 (Word13)
+local	TPPStreamCompiler__constructDiagonal	local_f0	diagheader	INFERRED	_PPStreamOperation record word 0 (Header)
+local	TPPStreamCompiler__constructDiagonal	local_ec	diagflags	INFERRED	_PPStreamOperation record word 1 (Flags)
+local	TPPStreamCompiler__constructDiagonal	local_e8	diagdest0	INFERRED	_PPStreamOperation record word 2 (Dest0)
+local	TPPStreamCompiler__constructDiagonal	local_e4	diagdest1	INFERRED	_PPStreamOperation record word 3 (Dest1)
+local	TPPStreamCompiler__constructDiagonal	local_e0	diagsrc0A	INFERRED	_PPStreamOperation record word 4 (Src0A)
+local	TPPStreamCompiler__constructDiagonal	local_dc	diagsrc0B	INFERRED	_PPStreamOperation record word 5 (Src0B)
+local	TPPStreamCompiler__constructDiagonal	local_d8	diagsrc1A	INFERRED	_PPStreamOperation record word 6 (Src1A)
+local	TPPStreamCompiler__constructDiagonal	local_d4	diagsrc1B	INFERRED	_PPStreamOperation record word 7 (Src1B)
+local	TPPStreamCompiler__constructDiagonal	local_d0	diagsrc2A	INFERRED	_PPStreamOperation record word 8 (Src2A)
+local	TPPStreamCompiler__constructDiagonal	local_cc	diagsrc2B	INFERRED	_PPStreamOperation record word 9 (Src2B)
+local	TPPStreamCompiler__constructDiagonal	local_c8	diagauxA	INFERRED	_PPStreamOperation record word 10 (AuxA)
+local	TPPStreamCompiler__constructDiagonal	local_c4	diagauxB	INFERRED	_PPStreamOperation record word 11 (AuxB)
+local	TPPStreamCompiler__constructDiagonal	local_c0	diagline	INFERRED	_PPStreamOperation record word 12 (Line)
+local	TPPStreamCompiler__constructDiagonal	local_bc	diagword13	INFERRED	_PPStreamOperation record word 13 (Word13)
+local	TPPStreamCompiler__constructDiagonal	piVar10	sourceOperand	CONFIRMED	*parseOperand2: the scalar source ParseOperand (symbol at +0, constant data pointer at +4, own GL type at +0x18)
+local	TPPStreamCompiler__constructDiagonal	uVar4	sourceGlType	CONFIRMED	OpenGL type of the source: symbol +0x2c or operand +0x18
+local	TPPStreamCompiler__constructDiagonal	bVar3	isScalarValueType	CONFIRMED	source GL type is float (0x1406), int (0x1404) or bool (0x8b56): its constant value is copied into the diagonal cell
+local	TPPStreamCompiler__constructDiagonal	bVar2	isFirstColumn	CONFIRMED	loopIndex == 0: the first diagonal column adds the direct index, later columns overwrite it
+local	TPPStreamCompiler__constructDiagonal	bVar1	sizeIsNot4	CONFIRMED	destination logical size != 4, picks the narrower fill patterns
+local	TPPStreamCompiler__constructDiagonal	iVar11	columnCount	CONFIRMED	number of diagonal columns: the logical size for a matrix destination, else 1
+local	TPPStreamCompiler__constructDiagonal	puVar12	diagonalCell	CONFIRMED	points at constantCells[loopIndex], the cell receiving the source constant for this column
+local	TPPStreamCompiler__constructDiagonal	puVar5	zeroCursor	CONFIRMED	walks constantCells zeroing its four words each column
+local	TPPStreamCompiler__constructDiagonal	local_70	constantCells	CONFIRMED	four constant value words (zero except the diagonal cell) passed to getConstantAsSourceVar
+local	TPPStreamCompiler__constructDiagonal	local_60	operandDescA	INFERRED	first word of the descriptor returned by getOperandAs{Dest,Source}Var / getConstantAsSourceVar
+local	TPPStreamCompiler__constructDiagonal	local_5c	operandDescB	INFERRED	second word of that descriptor
+local	TPPStreamCompiler__constructDiagonal	uVar9	destDescWithOpcode	INFERRED	destination descriptor A with the default lane bits 0x6c ORed in
+local	TPPStreamCompiler__constructDiagonal	in_r10	unusedArg8	INFERRED	leftover 8th register argument of getOperandAsSourceVar
+
+use	TPPStreamCompiler__constructReplicate	iVar8	componentIndex	INFERRED	x y z w component index 0..logicalSize-1 whose destination lane bits are set	for \(iVar8 = 0;	local_7c = \(local_78 >> 0xc & 1\) << 0x1c
+use	TPPStreamCompiler__constructReplicate	iVar8	destSymbol	INFERRED	ParseSymbol of the destination (*parseOperand1): +0x2c OpenGL type	iVar8 = \*\(int \*\)\*param_2;	uVar4 = GetPPStreamTypeForGLType
+use	TPPStreamCompiler__constructDiagonal	uVar8	destDescMasked	INFERRED	destination descriptor A with the lane selector and write-mask bits cleared (& 0xfffe1c0f)	uVar8 = local_60 & 0xfffe1c0f;	uVar8 = GetPPStreamTypeForGLType
+use	TPPStreamCompiler__constructDiagonal	uVar8	fillDescBits	INFERRED	fill descriptor bits being composed from the lane pattern for the column and the vector size	uVar8 = local_a8 & 0xfffffcff \| 0x2000;	uVar8 = GetPPStreamTypeForGLType
+use	TPPStreamCompiler__constructDiagonal	iVar7	zeroCountdown	INFERRED	countdown of the four words of constantCells being zeroed	iVar7 = 4;	+6
+use	TPPStreamCompiler__constructDiagonal	iVar7	destSymbol	INFERRED	ParseSymbol of the destination (*parseOperand1): +0x2c OpenGL type	iVar7 = \*\(int \*\)\*param_2;	uVar8 = GetPPStreamTypeForGLType
+use	TPPStreamCompiler__constructDiagonal	iVar7	destSymbol	INFERRED	ParseSymbol of the destination (*parseOperand1): +0x2c OpenGL type (second operation)	iVar7 = \*\(int \*\)\*param_2;@2	uVar8 = GetPPStreamTypeForGLType

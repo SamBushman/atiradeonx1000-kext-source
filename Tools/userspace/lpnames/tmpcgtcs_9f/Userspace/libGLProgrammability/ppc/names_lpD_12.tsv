@@ -1,0 +1,56 @@
+local	_uw_update_context_1	param_1	context	CONFIRMED	struct _Unwind_Context*: reg[111] pointers at +0, cfa +0x1bc, ra +0x1c0, args_size +0x1d4; also advanced one slot per iteration in the register loop
+local	_uw_update_context_1	param_2	fs	CONFIRMED	_Unwind_FrameState*: regs.reg[] {loc +0, how +4} at 8*i, cfa_offset +0x37c, cfa_reg +0x380, cfa_exp +0x384, cfa_how +0x388; also advanced one entry per iteration
+local	_uw_update_context_1	aiStack_210	origContext	CONFIRMED	struct _Unwind_Context orig_context = *context (memcpy 0x1d8)
+local	_uw_update_context_1	piVar2	regSlotOrExpResult	UNKNOWN	saved-register slot of the CFA register, then execute_stack_op results; the stale value is also the returned scratch
+local	_uw_update_context_1	piVar3	cfa	CONFIRMED	this frame's CFA: register value + cfa_offset, or the CFA expression result; stored at context->cfa
+local	_uw_update_context_1	piVar4	lastReg	CONFIRMED	&context->reg[110]: loop bound over the 111 DWARF registers
+local	_uw_update_context_1	local_30	cfaExpLen	CONFIRMED	length of the CFA expression (read_uleb128)
+local	_uw_update_context_1	local_2c	regExpLen	CONFIRMED	length of a REG_SAVED_EXP expression (read_uleb128)
+use	_uw_update_context_1	iVar1	cfaRegValue	CONFIRMED	value held in the CFA register (the saved slot's contents, or context->cfa when the register has no slot)	^\s*iVar1\ =\ param_1\[0x6f\];$	^\s*iVar1\ =\ param_2\[1\];$	all	none
+use	_uw_update_context_1	iVar1	regHow	CONFIRMED	fs->regs.reg[i].how: 0 unsaved, 1 saved at CFA offset, 2 saved in register, 3 saved by expression	^\s*iVar1\ =\ param_2\[1\];$		all	none
+local	___frame_state_for	cVar1	savedKind	CONFIRMED	fs.regs.reg[i].how, stored to state_in->saved[i]
+local	___frame_state_for	puVar3	fsEntryCursor	INFERRED	walks the frame-state register entries (8 bytes each), addressed relative to the context buffer
+local	___frame_state_for	pcVar4	savedOut	CONFIRMED	&state_in->saved[i]
+local	___frame_state_for	puVar5	regOrOffsetOut	CONFIRMED	&state_in->reg_or_offset[i]
+local	___frame_state_for	auStack_5a0	stackContext	CONFIRMED	struct _Unwind_Context on the stack (0x1d8 bytes, zeroed)
+local	___frame_state_for	local_3e0	contextRa	CONFIRMED	context.ra = pc_target + 1
+local	___frame_state_for	local_3cc	contextArgsSize	CONFIRMED	context.args_size (+0x1d4) copied to state_in->args_size
+local	___frame_state_for	local_3c0	uwFrameState	CONFIRMED	_Unwind_FrameState fs filled by uw_frame_state_for
+local	___frame_state_for	local_3b9	fsBody	CONFIRMED	interior of fs (register table bytes), never accessed by name here
+local	___frame_state_for	local_44	fsCfaOffset	CONFIRMED	fs.cfa_offset (+0x37c)
+local	___frame_state_for	local_3e	fsCfaReg	CONFIRMED	low half of fs.cfa_reg (+0x380)
+local	___frame_state_for	local_38	fsCfaHow	CONFIRMED	fs.cfa_how (+0x388); 2 = CFA_EXP is not representable in struct frame_state
+local	___frame_state_for	local_24	fsRetaddrColumn	CONFIRMED	fs.retaddr_column (+0x39c)
+local	___frame_state_for	local_20	fsEhPtr	CONFIRMED	fs.eh_ptr (+0x3a0)
+use	___frame_state_for	iVar6	result	CONFIRMED	state_in on success, 0 otherwise	^\s*iVar6\ =\ 0;$	^\s*iVar6\ =\ 0x4e;$	all	none
+use	___frame_state_for	iVar6	regsLeft	CONFIRMED	78 saved-register entries still to copy	^\s*iVar6\ =\ 0x4e;$	^\s*iVar6\ =\ param_2;$	all	none
+use	___frame_state_for	iVar6	result	CONFIRMED	state_in on success, 0 otherwise	^\s*iVar6\ =\ param_2;$		all	none
+local	_uw_install_context_1	param_1	current	CONFIRMED	struct _Unwind_Context* current
+local	_uw_install_context_1	param_2	target	CONFIRMED	struct _Unwind_Context* target
+local	_uw_install_context_1	iVar2	regOffset	CONFIRMED	i * 4: byte offset of reg[i]
+local	_uw_install_context_1	pbVar1	regSizePtr	CONFIRMED	&dwarf_reg_size_table[i]
+local	_uw_install_context_1	iVar3	currentReg	CONFIRMED	current->reg[i]
+local	_uw_install_context_1	iVar4	targetReg	CONFIRMED	target->reg[i]
+local	__Unwind_Find_FDE	param_2	bases	CONFIRMED	struct dwarf_eh_bases* bases
+local	__Unwind_Find_FDE	puVar2	objectState	CONFIRMED	keymgr process-wide pointer 0x12e: {seen_objects, unseen_objects, ...}; calloc'd on first use
+local	__Unwind_Find_FDE	bVar1	dontAlloc	CONFIRMED	no object state could be obtained: examine_objects must not allocate
+local	__Unwind_Find_FDE	pvVar3	fde	CONFIRMED	the FDE found for pc
+local	_base_from_object	param_1	encoding	CONFIRMED	DW_EH_PE encoding byte (0xff = omit)
+local	_base_from_object	param_2	ob	CONFIRMED	struct object*: tbase +4, dbase +8
+local	_base_from_object	uVar2	application	CONFIRMED	encoding & 0x70: DW_EH_PE_pcrel 0x10, textrel 0x20, datarel 0x30, funcrel 0x40, aligned 0x50
+local	_base_from_object	bVar1	isPcrelOrAligned	CONFIRMED	application is pcrel or aligned (no base needed), else abort
+local	_live_image_destructor	param_1	image	CONFIRMED	struct live_images*: examined_p +0x14, fde +0x18, object_info +0x1c
+local	_live_image_destructor	puVar1	objectState	CONFIRMED	keymgr process-wide pointer 0x12e: {seen_objects, unseen_objects}
+local	_uw_init_context_1	param_2	outerCfa	CONFIRMED	outer_cfa stored at context->cfa
+local	_uw_init_context_1	param_3	outerRa	CONFIRMED	outer_ra stored at context->ra
+local	_uw_init_context_1	in_LR	entryReturnAddress	CONFIRMED	__builtin_return_address(0) at entry: context->ra before the frame state lookup
+local	_uw_init_context_1	auStack_3d0	fs	CONFIRMED	_Unwind_FrameState on the stack
+local	_uw_init_context_1	local_54	fsCfaOffset	CONFIRMED	zero: the uw_frame_state_for status (asserted 0), reused as fs.cfa_offset
+local	_uw_init_context_1	local_50	fsCfaReg	CONFIRMED	fs.cfa_reg (+0x380) forced to 0
+local	_uw_init_context_1	local_48	fsCfaHow	CONFIRMED	fs.cfa_how (+0x388) = CFA_REG_OFFSET (1)
+local	_uw_update_context	param_1	context	CONFIRMED	struct _Unwind_Context*
+local	_uw_update_context	param_2	fs	CONFIRMED	_Unwind_FrameState*: retaddr_column at +0x39c
+local	__Unwind_ForcedUnwind	param_4	unusedArg4	UNKNOWN	unused register argument
+local	__Unwind_ForcedUnwind	param_5	unusedArg5	UNKNOWN	unused register argument
+local	__Unwind_ForcedUnwind	param_6	unusedArg6	UNKNOWN	unused register argument
+local	__Unwind_ForcedUnwind	param_7	unusedArg7	UNKNOWN	unused register argument

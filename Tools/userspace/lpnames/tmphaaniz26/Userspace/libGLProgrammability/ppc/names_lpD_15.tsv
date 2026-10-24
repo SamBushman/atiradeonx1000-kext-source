@@ -1,0 +1,270 @@
+local	__ZNK10__cxxabiv117__class_type_info10__do_catchEPKSt9type_infoPPvj	param_3	thrObj	CONFIRMED	void** thr_obj
+local	__ZNK10__cxxabiv117__class_type_info10__do_catchEPKSt9type_infoPPvj	param_4	outer	CONFIRMED	unsigned outer: nesting level of the pointer (>= 4 stops the recursion)
+local	__ZNK10__cxxabiv117__class_type_info10__do_catchEPKSt9type_infoPPvj	iVar1	isSameType	CONFIRMED	*this == *thr_type
+local	__ZNK10__cxxabiv117__class_type_info10__do_catchEPKSt9type_infoPPvj	uVar2	caught	CONFIRMED	true for the same type, else the thr_type->__do_catch result
+local	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv	param_2	dstType	CONFIRMED	const __class_type_info* dst_type
+local	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv	param_3	objPtr	CONFIRMED	void** obj_ptr: updated to the upcast pointer on success
+local	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv	param_4	unusedArg4	UNKNOWN	unused register argument
+local	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv	param_5	unusedArg5	UNKNOWN	unused register argument
+local	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv	param_6	unusedArg6	UNKNOWN	unused register argument
+local	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv	bVar1	isPublic	CONFIRMED	contained_public_p(result.part2dst): bits 1 and 2 of part2dst set
+local	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv	local_20	resultDstPtr	CONFIRMED	__upcast_result result: dst_ptr
+local	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv	local_1c	resultPart2dst	CONFIRMED	result.part2dst
+local	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv	local_18	resultSrcDetails	CONFIRMED	result.src_details, initialised to __flags_unknown_mask (0x10)
+local	__ZNK10__cxxabiv117__class_type_info11__do_upcastEPKS0_PPv	local_14	resultBaseType	CONFIRMED	result.base_type, initialised to 0
+local	__ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_	param_2	src2dst	CONFIRMED	ptrdiff_t src2dst
+local	__ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_	param_3	objPtr	CONFIRMED	const void* obj_ptr
+local	__ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_	param_5	srcPtr	CONFIRMED	const void* src_ptr
+local	__ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_	iVar1	isSrcType	CONFIRMED	*this == *src_type
+local	__ZNK10__cxxabiv120__si_class_type_info20__do_find_public_srcEiPKvPKNS_17__class_type_infoES2_	uVar2	baseResult	CONFIRMED	__sub_kind result of the base class's __do_find_public_src (vtable +0x20)
+local	__ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_	param_2	src2dst	CONFIRMED	ptrdiff_t src2dst
+local	__ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_	param_3	objPtr	CONFIRMED	const void* obj_ptr
+local	__ZNK10__cxxabiv117__class_type_info20__do_find_public_srcEiPKvPKS0_S2_	param_5	srcPtr	CONFIRMED	const void* src_ptr
+local	__cxxabiv1____vmi_class_type_info____do_find_public_src	param_2	src2dst	CONFIRMED	ptrdiff_t src2dst (-3: src is a virtual base, skip)
+local	__cxxabiv1____vmi_class_type_info____do_find_public_src	param_3	objPtr	CONFIRMED	const void* obj_ptr
+local	__cxxabiv1____vmi_class_type_info____do_find_public_src	param_5	srcPtr	CONFIRMED	const void* src_ptr
+local	__cxxabiv1____vmi_class_type_info____do_find_public_src	bVar1	isNonVirtual	CONFIRMED	(offset_flags & __virtual_mask) == 0
+local	__cxxabiv1____vmi_class_type_info____do_find_public_src	p_Var4	baseInfo	CONFIRMED	&__base_info[i] (base_type at +0x10, offset_flags at +0x14), walked downwards
+use	__cxxabiv1____vmi_class_type_info____do_find_public_src	uVar2	baseOffsetFlags	CONFIRMED	__base_class_type_info::__offset_flags: bit0 virtual, bit1 public, offset in bits 8..	^\s*uVar2\ =\ \*\(uint\ \*\)\(p_Var4\ \+\ 0x14\);$	^\s*uVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(p_Var4\ \+\ 0x10\)\ \+\ 0x20\)\)$	all	none
+use	__cxxabiv1____vmi_class_type_info____do_find_public_src	uVar2	baseResult	CONFIRMED	__sub_kind result of the base's __do_find_public_src (vtable +0x20)	^\s*uVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(p_Var4\ \+\ 0x10\)\ \+\ 0x20\)\)$		all	none
+use	__cxxabiv1____vmi_class_type_info____do_find_public_src	iVar3	isSrcType	CONFIRMED	*this == *src_type	^\s*\(iVar3\ =\ \(\(int\ \(\*\)\(\)\)__ZNKSt9type_infoeqERKS_\)\(this,\(unsigned\ char\ \*\)param_4\),\ iVar3\ !=\ 0\)\)\ \{$	^\s*iVar3\ =\ \(int\)uVar2\ >>\ 8;$	all	none
+use	__cxxabiv1____vmi_class_type_info____do_find_public_src	iVar3	baseOffset	CONFIRMED	offset_flags >> 8, replaced by the vbase offset read through the vtable for a virtual base	^\s*iVar3\ =\ \(int\)uVar2\ >>\ 8;$		all	none
+local	TIntermTyped__setType	uVar6	structure	CONFIRMED	TType +8: structure (TTypeList*)
+local	TIntermTyped__setType	uVar10	fieldName	CONFIRMED	TType +0xc: fieldName (TString*)
+local	TIntermTyped__setType	uVar12	typeName	CONFIRMED	TType +0x10: typeName (TString*)
+local	TIntermTyped__setType	uVar11	word14	CONFIRMED	TType +0x14 (unknown, copied)
+local	TIntermTyped__setType	uVar9	structureSize	CONFIRMED	TType +0x18: structureSize
+local	TIntermTyped__setType	uVar8	word1c	CONFIRMED	TType +0x1c (unknown, copied)
+local	TIntermTyped__setType	uVar7	word20	CONFIRMED	TType +0x20 (unknown, copied)
+local	TIntermTyped__setType	uVar5	oldBits	CONFIRMED	the destination bit-field word (+0x2c) before the update
+local	TIntermTyped__setType	uVar2	qualifierBits	CONFIRMED	source bit-field bits 31..25: qualifier
+local	TIntermTyped__setType	uVar3	basicTypeBits	CONFIRMED	source bit-field bits 24..19: basic type, repositioned
+local	TIntermTyped__setType	uVar1	nominalSizeBits	CONFIRMED	source bit-field bits 18..11: nominal size
+local	TIntermTyped__setType	uVar4	matrixBit	CONFIRMED	source bit-field bit 10: isMatrix
+local	TIntermTyped__getType	param_2	node	CONFIRMED	the TIntermTyped node whose embedded TType (+0xc) is copied
+local	TIntermTyped__getType	uVar12	word20	CONFIRMED	TType +0x20 (unknown, copied)
+local	TIntermTyped__getType	uVar11	structure	CONFIRMED	TType +8: structure (TTypeList*)
+local	TIntermTyped__getType	uVar10	fieldName	CONFIRMED	TType +0xc: fieldName (TString*)
+local	TIntermTyped__getType	uVar9	typeName	CONFIRMED	TType +0x10: typeName (TString*)
+local	TIntermTyped__getType	uVar8	word14	CONFIRMED	TType +0x14 (unknown, copied)
+local	TIntermTyped__getType	uVar7	structureSize	CONFIRMED	TType +0x18: structureSize
+local	TIntermTyped__getType	uVar6	word1c	CONFIRMED	TType +0x1c (unknown, copied)
+local	TIntermTyped__getType	uVar5	oldBits	CONFIRMED	the destination bit-field word before the update
+local	TIntermTyped__getType	uVar2	qualifierBits	CONFIRMED	node type bit-field bits 31..25: qualifier
+local	TIntermTyped__getType	uVar3	basicTypeBits	CONFIRMED	node type bit-field bits 24..19: basic type, repositioned
+local	TIntermTyped__getType	uVar1	nominalSizeBits	CONFIRMED	node type bit-field bits 18..11: nominal size
+local	TIntermTyped__getType	uVar4	matrixBit	CONFIRMED	node type bit-field bit 10: isMatrix
+local	TType__setStructSize	iVar2	totalSize	CONFIRMED	accumulated size of all members, stored at this->structureSize (+0x18)
+local	TType__setStructSize	piVar3	entry	CONFIRMED	TTypeLine* cursor over the member list
+local	TType__setStructSize	iVar1	memberSize	CONFIRMED	size of the current member (array length multiplied in for arrays)
+local	__ZN5TType7setTypeE10TBasicTypeibbi	param_3	nominalSize	CONFIRMED	nominal size stored in bits 18..11
+local	__ZN5TType7setTypeE10TBasicTypeibbi	param_4	matrixFlag	CONFIRMED	isMatrix stored in bit 10
+local	__ZN5TType7setTypeE10TBasicTypeibbi	param_5	arrayFlag	CONFIRMED	isArray stored in bit 9
+local	__ZN5TType7setTypeE10TBasicTypeibbi	param_6	arraySizeArg	CONFIRMED	array size stored at this->arraySize (+4)
+local	TType__setTypeName	pvVar1	typeName	CONFIRMED	new pool-allocated TString stored at this->typeName (+0x10)
+local	TType__setTypeName	this_00	globalAllocator	CONFIRMED	GetGlobalPoolAllocator()
+local	TType__setTypeName	this_01	stringMem	CONFIRMED	8 bytes from the pool allocator for the TString
+local	TType__setTypeName	pcVar2	chars	CONFIRMED	the character data of name
+local	TType__setTypeName	local_20	poolAllocArg	CONFIRMED	pool_allocator<char> constructed from the global pool for the TString constructor
+local	std____default_alloc_template_true_0___allocate	uVar1	freeListOffset	CONFIRMED	byte offset into _S_free_list: ((n + 7) / 8 - 1) * 4
+local	std____default_alloc_template_true_0___allocate	puVar3	result	CONFIRMED	the free-list node handed out (or the operator-new block)
+local	std____default_alloc_template_true_0___allocate	auStack_30	lock	CONFIRMED	the _Lock guard object taking _S_node_allocator_lock
+local	std__allocator_char___allocate	param_2	n	CONFIRMED	size_type __n: element count (bytes); 0 returns null
+local	std__allocator_char___allocate	uVar1	freeListOffset	CONFIRMED	byte offset into _S_free_list: ((n + 7) / 8 - 1) * 4
+local	std__allocator_char___allocate	puVar2	result	CONFIRMED	the free-list node handed out (or the operator-new block)
+local	std__allocator_char___allocate	auStack_30	lock	CONFIRMED	the _Lock guard object taking _S_node_allocator_lock
+local	std____default_alloc_template_true_0___deallocate	param_2	n	CONFIRMED	size_t __n: its size in bytes
+local	std____default_alloc_template_true_0___deallocate	uVar1	freeListOffset	CONFIRMED	byte offset into _S_free_list for this size
+local	std____default_alloc_template_true_0___deallocate	auStack_30	lock	CONFIRMED	the _Lock guard object taking _S_node_allocator_lock
+local	std__allocator_char___deallocate	this	alloc	CONFIRMED	the std::allocator<char> object
+local	std__allocator_char___deallocate	param_3	n	CONFIRMED	size_type __n: its size in bytes
+local	std__allocator_char___deallocate	uVar1	freeListOffset	CONFIRMED	byte offset into _S_free_list for this size
+local	std__allocator_char___deallocate	auStack_30	lock	CONFIRMED	the _Lock guard object taking _S_node_allocator_lock
+local	std__allocator_wchar_t___allocate	param_2	n	CONFIRMED	size_type __n: element count (> 0x3fffffff throws bad_alloc)
+local	std__allocator_wchar_t___allocate	uVar1	result	CONFIRMED	the block returned by the default allocator, n * 4 bytes
+local	__ZNSaIwE10deallocateEPwm	param_3	n	CONFIRMED	size_type __n: element count; freed as n * 4 bytes
+local	std____default_alloc_template_true_0____S_refill	puVar3	currentObj	CONFIRMED	the free-list node being linked (advanced by __n each step)
+local	std____default_alloc_template_true_0____S_refill	local_20	nobjs	CONFIRMED	int __nobjs = 20, reduced by _S_chunk_alloc
+local	std____default_alloc_template_true_0____S_chunk_alloc	param_2	nobjs	CONFIRMED	int& __nobjs: objects wanted, reduced to what the pool holds
+local	std____default_alloc_template_true_0____S_chunk_alloc	uVar4	bytesToGet	CONFIRMED	2 * total_bytes + round_up(_S_heap_size >> 4)
+use	std____default_alloc_template_true_0____S_chunk_alloc	uVar1	bytesLeft	CONFIRMED	_S_end_free - _S_start_free	^\s*uVar1\ =\ _S_end_free\ \-\ \(int\)_S_start_free;$	^\s*uVar1\ =\ uVar1\ \+\ 7\ >>\ 1\ \&\ 0x7ffffffc;$	all	rhs
+use	std____default_alloc_template_true_0____S_chunk_alloc	uVar1	freeListOffset	CONFIRMED	byte offset into _S_free_list for the leftover bytes	^\s*uVar1\ =\ uVar1\ \+\ 7\ >>\ 1\ \&\ 0x7ffffffc;$	^\s*uVar1\ =\ param_1;$	lhs	none
+use	std____default_alloc_template_true_0____S_chunk_alloc	uVar1	i	CONFIRMED	__i: object size searched upwards in steps of 8 for a larger free list	^\s*uVar1\ =\ param_1;$		all	none
+use	std____default_alloc_template_true_0____S_chunk_alloc	uVar2	totalBytes	CONFIRMED	__size * __nobjs	^\s*uVar2\ =\ param_1\ \*\ \*param_2;$	^\s*uVar2\ =\ uVar1\ \+\ 7\ >>\ 1\ \&\ 0x7ffffffc;$	all	none
+use	std____default_alloc_template_true_0____S_chunk_alloc	uVar2	freeListSlot	CONFIRMED	byte offset into _S_free_list for size __i	^\s*uVar2\ =\ uVar1\ \+\ 7\ >>\ 1\ \&\ 0x7ffffffc;$		all	none
+use	std____default_alloc_template_true_0____S_chunk_alloc	puVar3	result	CONFIRMED	the chunk start returned (_S_start_free before advancing)	^\s*puVar3\ =\ _S_start_free;$	^\s*puVar3\ =\ \*\(undefined4\ \*\*\)\(\&DAT_a7b7bf90\ \+\ uVar2\);$	all	none
+use	std____default_alloc_template_true_0____S_chunk_alloc	puVar3	freeListHead	CONFIRMED	*my_free_list: a block taken from a larger free list	^\s*puVar3\ =\ \*\(undefined4\ \*\*\)\(\&DAT_a7b7bf90\ \+\ uVar2\);$		all	none
+local	std____default_alloc_template_true_0___reallocate	param_2	oldSz	CONFIRMED	size_t __old_sz
+local	std____default_alloc_template_true_0___reallocate	param_3	newSz	CONFIRMED	size_t __new_sz
+local	std____default_alloc_template_true_0___reallocate	pvVar1	result	CONFIRMED	the block returned: p when the rounded size is unchanged, else a fresh allocation with the copy
+local	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	pvVar3	keyChars	CONFIRMED	the new key's character data
+local	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	iVar5	y	CONFIRMED	_Link_type y: the last node visited in the descent (the insertion parent)
+local	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	iVar6	x	CONFIRMED	_Link_type x: the node being descended into
+local	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	puVar2	minRef	CONFIRMED	std::min<size_type> result reference
+local	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	local_70	j	CONFIRMED	iterator __j = iterator(__y), then decremented (node pointer at [0])
+local	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	local_60	leftmost	CONFIRMED	begin(): header->left, compared with y to decide whether j can be decremented
+local	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	local_50	insertResult	CONFIRMED	iterator returned by the inlined _M_insert
+local	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	local_40	keySizeCopy	CONFIRMED	stack copy of the key size for the std::min reference (descent compare)
+local	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	local_3c	nodeKeySizeCopy	CONFIRMED	stack copy of the node key size for the std::min reference (descent compare)
+local	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	local_38	jKeySizeCopy	CONFIRMED	stack copy of j's key size for the std::min reference
+local	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	local_34	keySizeCopy2	CONFIRMED	stack copy of the key size for the std::min reference (j compare)
+use	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	iVar1	comp	CONFIRMED	bool __comp: key < node key, true when the tree is empty	^\s*iVar1\ =\ 1;$	^\s*iVar1\ =\ _memcmp\(pvVar3,\*\(void\ \*\*\)\(iVar5\ \+\ 0x14\),\*puVar2\);$	all	none
+use	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	iVar1	cmp	CONFIRMED	traits::compare of the key with the node key, then size difference when equal	^\s*iVar1\ =\ _memcmp\(pvVar3,\*\(void\ \*\*\)\(iVar5\ \+\ 0x14\),\*puVar2\);$	^\s*iVar1\ =\ \-\(iVar1\ >>\ 0x1f\);$	all	rhs
+use	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	iVar1	comp	CONFIRMED	bool __comp = key < node key	^\s*iVar1\ =\ \-\(iVar1\ >>\ 0x1f\);$	^\s*iVar1\ =\ local_70\[0\];$	lhs	none
+use	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	iVar1	jNode	CONFIRMED	__j node: the predecessor candidate	^\s*iVar1\ =\ local_70\[0\];$		all	none
+use	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	iVar4	header	CONFIRMED	tree->_M_header	^\s*iVar4\ =\ \*\(int\ \*\)\(param_2\ \+\ 4\);$	^\s*iVar4\ =\ _memcmp\(\*\(void\ \*\*\)\(local_70\[0\]\ \+\ 0x14\),\*\(void\ \*\*\)\(param_3\ \+\ 4\),\*puVar2\);$	all	none
+use	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	iVar4	cmp2	CONFIRMED	traits::compare of j's key with the new key, then size difference when equal	^\s*iVar4\ =\ _memcmp\(\*\(void\ \*\*\)\(local_70\[0\]\ \+\ 0x14\),\*\(void\ \*\*\)\(param_3\ \+\ 4\),\*puVar2\);$		all	none
+use	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	uVar7	keySize	CONFIRMED	the new key's size (descent compare)	^\s*uVar7\ =\ \*\(uint\ \*\)\(\(int\)pvVar3\ \+\ \-0xc\);$	^\s*uVar7\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(local_70\[0\]\ \+\ 0x14\)\ \+\ \-0xc\);$	all	none
+use	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	uVar7	jKeySize	CONFIRMED	j's key size	^\s*uVar7\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(local_70\[0\]\ \+\ 0x14\)\ \+\ \-0xc\);$		all	none
+use	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	uVar8	nodeKeySize	CONFIRMED	the descended node's key size	^\s*uVar8\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar5\ \+\ 0x14\)\ \+\ \-0xc\);$	^\s*uVar8\ =\ \*\(uint\ \*\)\(\(int\)\*\(void\ \*\*\)\(param_3\ \+\ 4\)\ \+\ \-0xc\);$	all	none
+use	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique	uVar8	valueKeySize	CONFIRMED	the new key's size (j compare)	^\s*uVar8\ =\ \*\(uint\ \*\)\(\(int\)\*\(void\ \*\*\)\(param_3\ \+\ 4\)\ \+\ \-0xc\);$		all	none
+local	TGenericLinker__CreateFunctionTable	param_2	stage	CONFIRMED	stage index: 0 vertex, 1 fragment
+local	TGenericLinker__CreateFunctionTable	iVar1	stageOffset	CONFIRMED	stage * 4: byte offset into the per-stage arrays (+8 compiler objects, +0x18 PP streams, +0x20 object count)
+local	TGenericLinker__CreateFunctionTable	this_00	mergedTable	CONFIRMED	the new merged FunctionTable (operator_new(8)), returned when it has functions and no error was found
+local	TGenericLinker__CreateFunctionTable	bVar4	errorFound	CONFIRMED	a duplicate or undefined function was reported to the info sink
+local	TGenericLinker__CreateFunctionTable	iVar13	objectIdx	CONFIRMED	index of the shader object being merged
+local	TGenericLinker__CreateFunctionTable	this_01	earlierFnTable	CONFIRMED	FunctionTable of an earlier object, searched for a duplicate definition
+local	TGenericLinker__CreateFunctionTable	bVar3	calleeMissing	CONFIRMED	no object defines the called function
+local	TGenericLinker__CreateFunctionTable	pvVar19	infoSink	CONFIRMED	the linker's info sink (this+0x84) receiving the error text
+local	TGenericLinker__CreateFunctionTable	uVar6	thisFnName	CONFIRMED	name of the function being merged
+local	TGenericLinker__CreateFunctionTable	uVar8	nameLen	CONFIRMED	strlen of the name being truncated at '('
+local	TGenericLinker__CreateFunctionTable	iVar10	shaderStringLen	CONFIRMED	strlen(_shaderString[stage])
+local	TGenericLinker__CreateFunctionTable	iVar11	nameCopyLen	CONFIRMED	strlen of the name copy
+use	TGenericLinker__CreateFunctionTable	pFVar16	objectFnTable	CONFIRMED	the shader object's FunctionTable (compiler object +0x6c)	^\s*pFVar16\ =\ \*\(unsigned\ char\ \*\*\)\(\*\(int\ \*\)\(iVar13\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ iVar1\ \+\ 8\)\)\ \+\ 0x6c\);$	^\s*pFVar16\ =\ \*\(unsigned\ char\ \*\*\)$	all	none
+use	TGenericLinker__CreateFunctionTable	pFVar16	scanFnTable	CONFIRMED	FunctionTable of the object scanned for a callee definition	^\s*pFVar16\ =\ \*\(unsigned\ char\ \*\*\)$		all	none
+use	TGenericLinker__CreateFunctionTable	iVar15	fnIdx	CONFIRMED	index of the function in the object's table	^\s*iVar15\ =\ 0;$	^\s*for\ \(iVar15\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar13\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ iVar1\ \+\ 0x18\)\)\ \+\ 0x20\);$	all	none
+use	TGenericLinker__CreateFunctionTable	iVar15	opChunk	CONFIRMED	call/op chunk cursor over the object's PP stream operation list (chunk +8 = next)	^\s*for\ \(iVar15\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar13\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ iVar1\ \+\ 0x18\)\)\ \+\ 0x20\);$		all	none
+use	TGenericLinker__CreateFunctionTable	bVar2	isDuplicate	CONFIRMED	the function name is already defined by an earlier object	^\s*bVar2\ =\ false;$	^\s*bVar2\ =\ false;$	all	none
+use	TGenericLinker__CreateFunctionTable	bVar2	calleeFound	CONFIRMED	an object defines the called function	^\s*bVar2\ =\ false;$@2		all	none
+use	TGenericLinker__CreateFunctionTable	uVar5	emptyFlag	CONFIRMED	FunctionTable__getEmpty	^\s*uVar5\ =\ FunctionTable__getEmpty\(pFVar16,iVar15\);$	^\s*uVar5\ =\ FunctionTable__getReturnVal\(pFVar16,iVar15\);$	all	none
+use	TGenericLinker__CreateFunctionTable	uVar5	returnVal	CONFIRMED	FunctionTable__getReturnVal	^\s*uVar5\ =\ FunctionTable__getReturnVal\(pFVar16,iVar15\);$	^\s*uVar5\ =\ FunctionTable__getFunctionName\(this_01,iVar17\);$	all	none
+use	TGenericLinker__CreateFunctionTable	uVar5	otherFnName	CONFIRMED	name of the earlier object's function	^\s*uVar5\ =\ FunctionTable__getFunctionName\(this_01,iVar17\);$	^\s*uVar5\ =\ FunctionTable__getFunctionName\(pFVar16,iVar7\);$	all	none
+use	TGenericLinker__CreateFunctionTable	uVar5	calleeScanName	CONFIRMED	name of the function being compared with the called name	^\s*uVar5\ =\ FunctionTable__getFunctionName\(pFVar16,iVar7\);$		all	none
+use	TGenericLinker__CreateFunctionTable	uVar18	firstOp	CONFIRMED	FunctionTable__getFirstOp	^\s*uVar18\ =\ FunctionTable__getFirstOp\(pFVar16,iVar15\);$	^\s*uVar18\ =\ FunctionTable__getLastOp\(pFVar16,iVar15\);$	all	none
+use	TGenericLinker__CreateFunctionTable	uVar18	lastOp	CONFIRMED	FunctionTable__getLastOp	^\s*uVar18\ =\ FunctionTable__getLastOp\(pFVar16,iVar15\);$	^\s*for\ \(uVar18\ =\ 0;\ uVar8\ =\ _strlen\(iVar7\),\ uVar18\ <\ uVar8;\ uVar18\ =\ uVar18\ \+\ 1\)\ \{$	all	none
+use	TGenericLinker__CreateFunctionTable	uVar18	charIdx	CONFIRMED	index into the name copy while truncating at '('	^\s*for\ \(uVar18\ =\ 0;\ uVar8\ =\ _strlen\(iVar7\),\ uVar18\ <\ uVar8;\ uVar18\ =\ uVar18\ \+\ 1\)\ \{$		all	none
+use	TGenericLinker__CreateFunctionTable	pcVar12	fnName	CONFIRMED	name of the function being merged	^\s*pcVar12\ =\ \(char\ \*\)FunctionTable__getFunctionName\(pFVar16,iVar15\);$	^\s*pcVar12\ =\ \(char\ \*\)_malloc\(iVar9\ \+\ iVar10\ \+\ iVar11\ \+\ 1\);$	all	none
+use	TGenericLinker__CreateFunctionTable	pcVar12	errorMessage	CONFIRMED	malloc'd sprintf buffer for the error text	^\s*pcVar12\ =\ \(char\ \*\)_malloc\(iVar9\ \+\ iVar10\ \+\ iVar11\ \+\ 1\);$		all	none
+use	TGenericLinker__CreateFunctionTable	iVar14	earlierObjIdx	CONFIRMED	index of the earlier object being compared	^\s*iVar14\ =\ 0;$	+4
+use	TGenericLinker__CreateFunctionTable	iVar14	mergedFnIdx	CONFIRMED	index of the function added to the merged table	^\s*iVar14\ =\ FunctionTable__addFunction\(this_00,pcVar12\);$	+11
+use	TGenericLinker__CreateFunctionTable	iVar14	earlierObjIdx	CONFIRMED	index of the earlier object being compared	^\s*\}$	+47
+use	TGenericLinker__CreateFunctionTable	iVar14	calleeName	CONFIRMED	malloc'd copy of the called function's name (chunk +0x44)	^\s*iVar14\ =\ _malloc\(\*\(int\ \*\)\(iVar15\ \+\ 0x40\)\ \+\ 1\);$	+49
+use	TGenericLinker__CreateFunctionTable	iVar17	numParams	CONFIRMED	FunctionTable__getNumParams	^\s*iVar17\ =\ FunctionTable__getNumParams\(pFVar16,iVar15\);$	+2
+use	TGenericLinker__CreateFunctionTable	iVar17	earlierFnIdx	CONFIRMED	index of the function in the earlier object's table	^\s*iVar17\ =\ 0;$	+36
+use	TGenericLinker__CreateFunctionTable	iVar17	scanObjIdx	CONFIRMED	index of the object scanned for the callee	^\s*iVar17\ =\ 0;$@2	+32
+use	TGenericLinker__CreateFunctionTable	iVar17	msgFormatLen	CONFIRMED	strlen of the error format string	^\s*iVar17\ =\ _strlen\(UNK_a7b7bb24\);$	+5
+use	TGenericLinker__CreateFunctionTable	iVar7	compareResult	CONFIRMED	strcmp of the two function names	^\s*iVar7\ =\ _strcmp\(uVar5,uVar6\);$	+3
+use	TGenericLinker__CreateFunctionTable	iVar7	duplicateNameLen	CONFIRMED	strlen of the duplicated function name	^\s*iVar7\ =\ _strlen\(uVar5\);$	+1	all	rhs
+use	TGenericLinker__CreateFunctionTable	iVar7	nameCopy	CONFIRMED	malloc'd copy of the duplicated name, truncated at '('	^\s*iVar7\ =\ _malloc\(iVar7\ \+\ 1\);$	+22	lhs
+use	TGenericLinker__CreateFunctionTable	iVar7	scanFnIdx	CONFIRMED	index of the function scanned in the object's table	^\s*iVar7\ =\ 0;$	+14
+use	TGenericLinker__CreateFunctionTable	iVar7	shaderStringLen2	CONFIRMED	strlen(_shaderString[stage]) in the undefined-callee message	^\s*iVar7\ =\ _strlen\(\(\&_shaderString\)\[param_2\]\);$	+3
+use	TGenericLinker__CreateFunctionTable	iVar9	msgFormatLen2	CONFIRMED	strlen of the duplicate-function format string	^\s*iVar9\ =\ _strlen\(DAT_a7b7bb20\);$	+5
+use	TGenericLinker__CreateFunctionTable	iVar9	compareResult2	CONFIRMED	strcmp of the called name with a function name	^\s*iVar9\ =\ _strcmp\(iVar14,uVar5\);$	+2
+use	TGenericLinker__CreateFunctionTable	iVar9	calleeNameLen	CONFIRMED	strlen of the called function's name	^\s*iVar9\ =\ _strlen\(iVar14\);$	+2
+local	TGenericLinker__FixOutputReads	iVar7	stageOffset	CONFIRMED	stage * 4: byte offset into the per-stage arrays (+0x30 PP stream)
+local	TGenericLinker__FixOutputReads	pTVar9	stageEntry	CONFIRMED	this + stage * 4: the per-stage slot (+0x30 PP stream, +0x38 FunctionTable)
+local	TGenericLinker__FixOutputReads	iVar10	outputSymbol	INFERRED	chunk in the stream's output register list (stream +0x1c): register index at +0x12, flags at +0xc
+local	TGenericLinker__FixOutputReads	uVar1	outputReg	INFERRED	register index of the output symbol (chunk +0x12)
+local	TGenericLinker__FixOutputReads	local_a0	tempUsageFlags	INFERRED	first word of the temp-usage record passed to _PPStreamAddTempUsage: component/type bits copied from the output symbol
+local	TGenericLinker__FixOutputReads	local_98	tempUsageWord2	UNKNOWN	third word of the temp-usage record (zero)
+local	TGenericLinker__FixOutputReads	local_94	tempUsageWord3	UNKNOWN	fourth word of the temp-usage record (zero)
+local	TGenericLinker__FixOutputReads	local_9c	opChunkOrTempIndex	INFERRED	first the op chunk cursor of the read scan (ends at 0), then the new temp register index (maxIndex + 1) in the low half of the temp-usage record's second word; one slot because the null cursor's high half reaches the packed word
+local	TGenericLinker__FixOutputReads	local_90	opHeader	INFERRED	MOV record inserted at the end of main: word 0 header
+local	TGenericLinker__FixOutputReads	local_8c	opFlags	INFERRED	inserted record word 1: flags
+local	TGenericLinker__FixOutputReads	local_88	opDest0	INFERRED	inserted record destination descriptor, first word
+local	TGenericLinker__FixOutputReads	local_84	opDest1	INFERRED	inserted record destination descriptor, second word: the output register
+local	TGenericLinker__FixOutputReads	local_80	opSrc0A	INFERRED	inserted record source 0 descriptor, first word
+local	TGenericLinker__FixOutputReads	local_7c	opSrc0B	INFERRED	inserted record source 0 descriptor, second word: the new temp register
+local	TGenericLinker__FixOutputReads	local_78	opSrc1A	INFERRED	inserted record source 1 (zero)
+local	TGenericLinker__FixOutputReads	local_74	opSrc1B	INFERRED	inserted record source 1 (zero)
+local	TGenericLinker__FixOutputReads	local_70	opSrc2A	INFERRED	inserted record source 2 (zero)
+local	TGenericLinker__FixOutputReads	local_6c	opSrc2B	INFERRED	inserted record source 2 (zero)
+local	TGenericLinker__FixOutputReads	local_68	opAuxA	INFERRED	inserted record auxiliary operand (zero)
+local	TGenericLinker__FixOutputReads	local_64	opAuxB	INFERRED	inserted record auxiliary operand (zero)
+local	TGenericLinker__FixOutputReads	local_60	opLine	INFERRED	inserted record source line (copied from the located op chunk)
+local	TGenericLinker__FixOutputReads	local_5c	opWord13	INFERRED	inserted record word 13 (zero)
+use	TGenericLinker__FixOutputReads	bVar2	outputIsRead	CONFIRMED	some operation reads the output register (as a source or as the output-write marker)	^\s*bVar2\ =\ false;$	^\s*bVar2\ =\ false;$	all	none
+use	TGenericLinker__FixOutputReads	bVar2	mainReached	INFERRED	the scan passed the first op of main (operation index 0), looking for main's last op	^\s*bVar2\ =\ false;$@2		all	none
+use	TGenericLinker__FixOutputReads	iVar3	operandCursor	CONFIRMED	operand descriptor pointer inside an op chunk (chunk +0x10, 8 bytes per operand)	^\s*iVar3\ =\ local_9c\ \+\ 0x10;$	+14
+use	TGenericLinker__FixOutputReads	iVar3	opChunk	CONFIRMED	op chunk cursor over the stage's operation list (chunk +8 = next)	^\s*for\ \(iVar3\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(pTVar9\ \+\ 0x30\)\ \+\ 0x20\);\ iVar3\ !=\ 0;$	+90
+use	TGenericLinker__FixOutputReads	uVar5	operandCount	CONFIRMED	number of source operands of the op chunk (header bits 29..31)	^\s*uVar5\ =\ \*\(uint\ \*\)\(local_9c\ \+\ 0xc\)\ >>\ 0x1d;$	+17
+use	TGenericLinker__FixOutputReads	uVar5	chunkHeaderWord	CONFIRMED	header word (+0xc) of the op chunk	^\s*uVar5\ =\ \*\(uint\ \*\)\(iVar3\ \+\ 0xc\);$	+16
+use	TGenericLinker__FixOutputReads	uVar5	mainLastOp	CONFIRMED	operation index of main's last op (0 until found)	^\s*uVar5\ =\ 0;$	+65
+use	TGenericLinker__FixOutputReads	uVar11	operandIdx	CONFIRMED	index of the source operand being tested	^\s*uVar11\ =\ 0;$	+18
+use	TGenericLinker__FixOutputReads	uVar11	operandIdx	CONFIRMED	index of the source operand being rewritten	^\s*uVar11\ =\ 0;$@2	+15
+use	TGenericLinker__FixOutputReads	uVar11	fnIdx	CONFIRMED	index of the function in the stage's FunctionTable	^\s*uVar11\ =\ 0;$@3	+12
+use	TGenericLinker__FixOutputReads	uVar11	chunkHeader	CONFIRMED	header word (+0xc) of the op chunk	^\s*uVar11\ =\ \*\(uint\ \*\)\(iVar3\ \+\ 0xc\);$	+5
+use	TGenericLinker__FixOutputReads	uVar11	componentCount	INFERRED	component/type selector from the temp-usage flags (bits 24..25), steering the MOV's write mask	^\s*uVar11\ =\ local_a0\ >>\ 0x18\ \&\ 3;$	+42
+use	TGenericLinker__FixOutputReads	uVar11	chunkHeader	CONFIRMED	header word (+0xc) of the op chunk	^\s*uVar11\ =\ \*\(uint\ \*\)\(iVar3\ \+\ 0xc\);$@2	+3
+use	TGenericLinker__FixOutputReads	iVar6	operandCursor2	CONFIRMED	operand descriptor pointer inside an op chunk being rewritten	^\s*iVar6\ =\ iVar3\ \+\ 0x10;$	+11
+use	TGenericLinker__FixOutputReads	iVar6	insertedOp	CONFIRMED	the MOV chunk just inserted (_PPStreamInsertOperationAfterChunk)	^\s*iVar6\ =\ _PPStreamInsertOperationAfterChunk$	+6
+local	ParseSymbolTable__GetString	param_2	mode	INFERRED	dump mode: 0 all symbols in list order, 1 per hash bucket, 2 grouped by chunk kind (2, 3, 4, 0)
+local	ParseSymbolTable__GetString	pPVar2	symbol	CONFIRMED	ParseSymbol* walked with NextSymbol / NextSymbolInHash
+local	ParseSymbolTable__GetString	pcVar3	buffer	CONFIRMED	the current output buffer (starts at malloc(0x800), grown by 25% steps)
+local	ParseSymbolTable__GetString	pcVar6	result	CONFIRMED	the output buffer returned: buffer, or its larger replacement after a regrow
+local	ParseSymbolTable__GetString	uVar8	capacity	CONFIRMED	allocated size of the output buffer
+local	ParseSymbolTable__GetString	iVar10	usedLen	CONFIRMED	strlen of the text accumulated in the buffer
+local	ParseSymbolTable__GetString	uVar1	needed	CONFIRMED	bytes needed for the buffer after appending the symbol text
+local	ParseSymbolTable__GetString	iVar4	symbolText	CONFIRMED	malloc'd text from ParseSymbol__GetString, freed after appending
+local	ParseSymbolTable__GetString	iVar5	newLen	CONFIRMED	usedLen + strlen(symbolText)
+local	ParseSymbolTable__GetString	uVar7	sectionHeader	INFERRED	the section header string appended between kind passes of mode 2
+use	ParseSymbolTable__GetString	uVar11	hashSize	CONFIRMED	this+0x10: number of hash buckets	^\s*uVar11\ =\ \*\(uint\ \*\)\(this\ \+\ 0x10\);$	^\s*uVar11\ =\ iVar5\ \+\ 1;$	all	none
+use	ParseSymbolTable__GetString	uVar11	needed2	CONFIRMED	bytes needed for the buffer after appending the symbol text	^\s*uVar11\ =\ iVar5\ \+\ 1;$	^\s*uVar11\ =\ \*\(uint\ \*\)\(this\ \+\ 0x10\);$	all	none
+use	ParseSymbolTable__GetString	uVar11	hashSize	CONFIRMED	this+0x10: number of hash buckets	^\s*uVar11\ =\ \*\(uint\ \*\)\(this\ \+\ 0x10\);$@2		all	none
+local	AddressTempAllocator__getTemporary	uVar3	capacity	CONFIRMED	this+4: number of slots in the table
+local	AddressTempAllocator__getTemporary	iVar8	slotOffset	CONFIRMED	slot * 4: byte offset of the slot in the table
+local	AddressTempAllocator__getTemporary	piVar5	slotCursor	CONFIRMED	pointer walking the slot table looking for a zero (free) entry
+local	AddressTempAllocator__getTemporary	iVar4	table	CONFIRMED	the slot table (this+0): the freshly grown copy, or the existing one
+local	AddressTempAllocator__getTemporary	iVar7	copyIdx	CONFIRMED	index of the slot being copied into the grown table
+local	AddressTempAllocator__getTemporary	iVar1	copyOffset	CONFIRMED	copyIdx * 4: byte offset of the slot being copied
+local	AddressTempAllocator__getTemporary	iVar6	oldTable	CONFIRMED	the previous slot table, freed after the copy
+local	AddressTempAllocator__getTemporary	iVar10	copyLeft	CONFIRMED	slots still to copy
+use	AddressTempAllocator__getTemporary	iVar2	slotValue	CONFIRMED	*slotCursor: non-zero when the slot is in use	^\s*iVar2\ =\ \*piVar5;$	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 4\);$	all	none
+use	AddressTempAllocator__getTemporary	iVar2	oldCapacity	CONFIRMED	this+4 before growing: number of slots copied	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 4\);$		all	none
+local	ParseOperand__GetString	sVar1	glTypeSigned	CONFIRMED	OpenGL type of the operand (ParseSymbol +0x2c, or operand +0x18) compared against GL_FLOAT 0x1406 / GL_INT 0x1404 / GL_BOOL 0x8b56
+local	ParseOperand__GetString	uVar2	glType	CONFIRMED	OpenGL type of the operand (ParseSymbol +0x2c, or operand +0x18) for the component formatting switch
+local	ParseOperand__GetString	pcVar4	formatString	CONFIRMED	sprintf format chosen for the text being built
+local	ParseOperand__GetString	pcVar9	valueArg	CONFIRMED	value passed to the format: the integer component, or the strings "true"/"false"
+local	ParseOperand__GetString	uVar8	baseSize	CONFIRMED	ParseOperand__GetBaseSize: number of components
+local	ParseOperand__GetString	in_f3	unusedFpArg3	UNKNOWN	floating-point register argument forwarded to _glp_dtostr
+local	ParseOperand__GetString	in_f4	unusedFpArg4	UNKNOWN	floating-point register argument forwarded to _glp_dtostr
+local	ParseOperand__GetString	in_f5	unusedFpArg5	UNKNOWN	floating-point register argument forwarded to _glp_dtostr
+local	ParseOperand__GetString	in_f6	unusedFpArg6	UNKNOWN	floating-point register argument forwarded to _glp_dtostr
+local	ParseOperand__GetString	in_f7	unusedFpArg7	UNKNOWN	floating-point register argument forwarded to _glp_dtostr
+local	ParseOperand__GetString	in_f8	unusedFpArg8	UNKNOWN	floating-point register argument forwarded to _glp_dtostr
+local	ParseOperand__GetString	in_stack_ffffff98	unusedStackArg0	UNKNOWN	stack argument slot forwarded to _glp_dtostr
+local	ParseOperand__GetString	in_stack_ffffffa0	unusedStackArg1	UNKNOWN	stack argument slot forwarded to _glp_dtostr
+local	ParseOperand__GetString	in_stack_ffffffa8	unusedStackArg2	UNKNOWN	stack argument slot forwarded to _glp_dtostr
+local	ParseOperand__GetString	in_stack_ffffffb0	unusedStackArg3	UNKNOWN	stack argument slot forwarded to _glp_dtostr
+local	ParseOperand__GetString	in_stack_ffffffb8	unusedStackArg4	UNKNOWN	stack argument slot forwarded to _glp_dtostr
+use	ParseOperand__GetString	iVar3	symbolPtr	CONFIRMED	*this: the operand's ParseSymbol (null for a constant operand)	^\s*iVar3\ =\ \*\(int\ \*\)this;$	^\s*iVar3\ =\ uVar10\ \*\ 4;$	all	none
+use	ParseOperand__GetString	iVar3	elemOffset	CONFIRMED	component * 4: byte offset of the component value	^\s*iVar3\ =\ uVar10\ \*\ 4;$		all	none
+local	ParseSymbolTable__RemoveEndSymbol	iVar8	removedOk	CONFIRMED	true while the symbol's chunk counters were the last-allocated ones; 0 aborts the removal
+local	ParseSymbolTable__RemoveEndSymbol	uVar9	vec4Idx	CONFIRMED	index of the vec4 register chunk being released
+local	ParseSymbolTable__RemoveEndSymbol	uVar5	vec4Count	CONFIRMED	GetVec4sForType(symbol type): number of vec4 registers the symbol occupies
+local	ParseSymbolTable__RemoveEndSymbol	pbVar10	chunk	CONFIRMED	the symbol's chunk (kind byte at +0)
+local	ParseSymbolTable__RemoveEndSymbol	bVar1	chunkKind	CONFIRMED	chunk kind byte: 0 uniform/temp, 2 fragment-side varying, 3 constant, 4 vertex-side varying
+local	ParseSymbolTable__RemoveEndSymbol	iVar6	scalarWidth2	CONFIRMED	GetScalerWidthForType for the temp symbol
+use	ParseSymbolTable__RemoveEndSymbol	iVar7	scalarWidth	CONFIRMED	GetScalerWidthForType(symbol type)	^\s*iVar7\ =\ GetScalerWidthForType\(\(uint\)\*\(ushort\ \*\)\(param_2\ \+\ 0x2c\)\);$	^\s*iVar7\ =\ \*\(int\ \*\)\(this\ \+\ 0x38\);$	all	none
+use	ParseSymbolTable__RemoveEndSymbol	iVar7	tempCounter	CONFIRMED	this+0x38: next temp register index	^\s*iVar7\ =\ \*\(int\ \*\)\(this\ \+\ 0x38\);$	^\s*iVar7\ =\ __ZeqRK11ParseSymbolS1_\(pPVar3,param_2\);$	all	none
+use	ParseSymbolTable__RemoveEndSymbol	iVar7	isMatch	CONFIRMED	ParseSymbol operator== result	^\s*iVar7\ =\ __ZeqRK11ParseSymbolS1_\(pPVar3,param_2\);$		all	none
+use	ParseSymbolTable__RemoveEndSymbol	pPVar2	hashPrev	CONFIRMED	predecessor of the node in the hash chain	^\s*pPVar2\ =\ \(unsigned\ char\ \*\)0x0;$	+20
+use	ParseSymbolTable__RemoveEndSymbol	pPVar2	listPrev	CONFIRMED	predecessor of the node in the symbol list	^\s*pPVar2\ =\ \(unsigned\ char\ \*\)0x0;$@2	
+use	ParseSymbolTable__RemoveEndSymbol	pPVar3	hashNode	CONFIRMED	node of the hash bucket chain being compared (node +4 = next in bucket)	^\s*for\ \(pPVar3\ =\ \*\(unsigned\ char\ \*\*\)$	+19
+use	ParseSymbolTable__RemoveEndSymbol	pPVar3	listNext	CONFIRMED	next node of the symbol list (node +8 = next)	^\s*pPVar3\ =\ \*\(unsigned\ char\ \*\*\)this;$	
+local	ParseSymbolTable__RemoveEndSymbol	pPVar4	listNode	CONFIRMED	node of the symbol list being compared
+local	ConstantAllocationList__addConstant	param_2	constantId	INFERRED	id stored at the start of the 0x18-byte entry
+local	ConstantAllocationList__addConstant	param_3	values	INFERRED	four words (a vec4 of constant components) copied to entry +4..+0x10
+local	ConstantAllocationList__addConstant	param_4	glType	INFERRED	OpenGL type code stored as the ushort at entry +0x14
+local	ConstantAllocationList__addConstant	pbVar1	valueSrc	CONFIRMED	pointer to the value word being copied
+local	ConstantAllocationList__addConstant	iVar3	valueByteOffset	CONFIRMED	byte offset of the value word (0, 4, 8, 12)
+local	ConstantAllocationList__addConstant	iVar5	wordsLeft	CONFIRMED	value words still to copy
+local	ConstantAllocationList__addConstant	iVar6	entryOffset	CONFIRMED	byte offset of the entry being copied (0x18 per entry)
+local	ConstantAllocationList__addConstant	iVar10	oldEntry	CONFIRMED	address of the old entry being copied
+local	ConstantAllocationList__addConstant	iVar2	newEntry	CONFIRMED	address of the new entry being filled
+local	ConstantAllocationList__addConstant	uVar7	entryWord3	CONFIRMED	entry word being copied
+local	ConstantAllocationList__addConstant	uVar8	entryWord1	CONFIRMED	entry word being copied
+local	ConstantAllocationList__addConstant	uVar9	entryWord2	CONFIRMED	entry word being copied
+local	ConstantAllocationList__addConstant	uVar11	count	CONFIRMED	this+4: number of entries
+use	ConstantAllocationList__addConstant	iVar4	oldEntries	CONFIRMED	this+0: the existing entry array	^\s*iVar4\ =\ \*\(int\ \*\)this;$	^\s*iVar4\ =\ iVar3\ \+\ \*\(int\ \*\)\(this\ \+\ 4\)\ \*\ 0x18\ \+\ \*\(int\ \*\)this;$	all	none
+use	ConstantAllocationList__addConstant	iVar4	valueDst	CONFIRMED	address of the value words in the new entry	^\s*iVar4\ =\ iVar3\ \+\ \*\(int\ \*\)\(this\ \+\ 4\)\ \*\ 0x18\ \+\ \*\(int\ \*\)this;$		all	none

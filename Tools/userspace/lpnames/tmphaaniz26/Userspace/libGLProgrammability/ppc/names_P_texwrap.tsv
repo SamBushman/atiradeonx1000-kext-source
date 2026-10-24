@@ -1,0 +1,34 @@
+local	_InterpreterTextureSamplerWrapCoordinate	param_1	sampler	CONFIRMED	texture sampler state: [1] current texture object, [2] current level record (same layout as the FromLevel functions)
+local	_InterpreterTextureSamplerWrapCoordinate	param_2	texelCoord	CONFIRMED	int[3] texel coordinate (S,T,R) wrapped in place
+local	_InterpreterTextureSamplerWrapCoordinate	iVar4	levelRecord	CONFIRMED	sampler[2], the selected mip level record: +0x30/+0x34/+0x38 and +0x80/+0x84/+0x88 are per-axis clamp limits, +0x40/+0x44/+0x48 per-axis repeat masks
+local	_InterpreterTextureSamplerWrapCoordinate	iVar2	textureState	CONFIRMED	**(sampler+4): sampler state record with wrap modes at +0x10/+0x12/+0x14 and the minification filter at +0x16
+local	_InterpreterTextureSamplerWrapCoordinate	uVar5	wrapModeS	CONFIRMED	ushort at textureState+0x10 compared with GL_CLAMP 0x2900, GL_REPEAT 0x2901, GL_CLAMP_TO_BORDER 0x812d, GL_CLAMP_TO_EDGE 0x812f
+local	_InterpreterTextureSamplerWrapCoordinate	uVar7	wrapModeT	CONFIRMED	ushort at textureState+0x12, same enums
+local	_InterpreterTextureSamplerWrapCoordinate	uVar6	wrapModeR	CONFIRMED	ushort at textureState+0x14, same enums
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedS	INFERRED	new S coordinate: masked (REPEAT) or clamped to 0 / limit	^\s*uVar1\ =\ \*param_2\ \&\ \*\(uint\ \*\)\(iVar4\ \+\ 0x40\);$	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedS	INFERRED	new S coordinate: masked (REPEAT) or clamped to 0 / limit	^\s*\*param_2\ =\ uVar1;$	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedS	INFERRED	new S coordinate: masked (REPEAT) or clamped to 0 / limit	^\s*uVar1\ =\ 0;$	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedS	INFERRED	new S coordinate: masked (REPEAT) or clamped to 0 / limit	^\s*uVar1\ =\ \*param_2;$	+2
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedS	INFERRED	new S coordinate: masked (REPEAT) or clamped to 0 / limit	^\s*uVar1\ =\ \*param_2;$@2	+2
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedS	INFERRED	new S coordinate: masked (REPEAT) or clamped to 0 / limit	^\s*if\ \(uVar3\ <\ uVar1\)\ \{$	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedT	INFERRED	new T coordinate	^\s*uVar1\ =\ param_2\[1\]\ \&\ \*\(uint\ \*\)\(iVar4\ \+\ 0x44\);$	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedT	INFERRED	new T coordinate	^\s*param_2\[1\]\ =\ uVar1;$	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedT	INFERRED	new T coordinate	^\s*uVar1\ =\ 0;$@2	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedT	INFERRED	new T coordinate	^\s*uVar1\ =\ param_2\[1\];$	+2
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedT	INFERRED	new T coordinate	^\s*uVar1\ =\ param_2\[1\];$@2	+2
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedT	INFERRED	new T coordinate	^\s*if\ \(uVar3\ <\ uVar1\)\ \{$@2	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedR	INFERRED	new R coordinate	^\s*uVar1\ =\ param_2\[2\]\ \&\ \*\(uint\ \*\)\(iVar4\ \+\ 0x48\);$	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedR	INFERRED	new R coordinate	^\s*uVar1\ =\ 0;$@3	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedR	INFERRED	new R coordinate	^\s*param_2\[2\]\ =\ uVar1;$	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedR	INFERRED	new R coordinate	^\s*uVar1\ =\ param_2\[2\];$	+2
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedR	INFERRED	new R coordinate	^\s*if\ \(uVar3\ <\ uVar1\)\ \{$@3	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar1	wrappedR	INFERRED	new R coordinate	^\s*uVar1\ =\ param_2\[2\];$@2	+2
+use	_InterpreterTextureSamplerWrapCoordinate	uVar3	clampLimitS	INFERRED	S clamp limit: levelRecord+0x80 (CLAMP, CLAMP_TO_BORDER) or +0x30 (CLAMP_TO_EDGE)	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0x80\);$	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar3	clampLimitS	INFERRED	S clamp limit: levelRecord+0x80 (CLAMP, CLAMP_TO_BORDER) or +0x30 (CLAMP_TO_EDGE)	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0x30\);$	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar3	clampLimitS	INFERRED	S clamp limit: levelRecord+0x80 (CLAMP, CLAMP_TO_BORDER) or +0x30 (CLAMP_TO_EDGE)	^\s*if\ \(uVar3\ <\ uVar1\)\ \{$	+2
+use	_InterpreterTextureSamplerWrapCoordinate	uVar3	clampLimitT	INFERRED	T clamp limit: +0x84 or +0x34	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0x84\);$	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar3	clampLimitT	INFERRED	T clamp limit: +0x84 or +0x34	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0x34\);$	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar3	clampLimitT	INFERRED	T clamp limit: +0x84 or +0x34	^\s*if\ \(uVar3\ <\ uVar1\)\ \{$@2	+2
+use	_InterpreterTextureSamplerWrapCoordinate	uVar3	clampLimitR	INFERRED	R clamp limit: +0x88 or +0x38	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0x88\);$	+1
+use	_InterpreterTextureSamplerWrapCoordinate	uVar3	clampLimitR	INFERRED	R clamp limit: +0x88 or +0x38	^\s*if\ \(uVar3\ <\ uVar1\)\ \{$@3	+2
+use	_InterpreterTextureSamplerWrapCoordinate	uVar3	clampLimitR	INFERRED	R clamp limit: +0x88 or +0x38	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0x38\);$	+1

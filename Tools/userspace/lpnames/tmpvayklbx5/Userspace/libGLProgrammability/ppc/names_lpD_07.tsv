@@ -1,0 +1,60 @@
+local	parse_lsda_header	param_2	p	CONFIRMED	const unsigned char* p: cursor through the LSDA (GCC eh_personality.cc parse_lsda_header)
+local	parse_lsda_header	uVar1	regionStart	CONFIRMED	info->Start = _Unwind_GetRegionStart(context) (0 without a context)
+local	parse_lsda_header	uVar4	lpStartEncoding	CONFIRMED	@LPStart encoding byte, 0xff (DW_EH_PE_omit) = use Start
+local	parse_lsda_header	uVar2	lpStartBase	CONFIRMED	base_of_encoded_value(lpStartEncoding, context)
+local	parse_lsda_header	local_30	tmp	CONFIRMED	_Unwind_Word tmp filled by read_uleb128
+local	parse_lsda_header	plVar6	afterEncodingByte	INFERRED	cursor just past the ttype_encoding byte, then advanced over the TType offset uleb128
+local	parse_lsda_header	iVar3	callSiteTable	CONFIRMED	p after the call-site-table length uleb128: start of the call-site table, also the return value
+use	parse_lsda_header	plVar5	lsdaCursor	CONFIRMED	p after the LPStart header byte(s)	^\s*plVar5\ =\ \(unsigned\ char\ \*\)\(param_2\ \+\ 1\);$	^\s*plVar5\ =\ \(unsigned\ char\ \*\)0x0;$	all	none
+use	parse_lsda_header	plVar5	ttypeTable	CONFIRMED	info->TType = p + tmp (0 when ttype_encoding is omit)	^\s*plVar5\ =\ \(unsigned\ char\ \*\)0x0;$		all	none
+local	__Z15get_ttype_entryP16lsda_header_infoj	param_2	i	CONFIRMED	_Unwind_Word i: 1-based index counted back from info->TType
+local	__Z15get_ttype_entryP16lsda_header_infoj	iVar1	entrySize	CONFIRMED	size_of_encoded_value(info->ttype_encoding)
+local	__Z15get_ttype_entryP16lsda_header_infoj	local_20	entry	CONFIRMED	_Unwind_Ptr ptr filled by read_encoded_value_with_base and returned
+local	get_adjusted_ptr	param_3	thrownPtrP	CONFIRMED	void** thrown_ptr_p adjusted for pointer/derived catch types
+local	get_adjusted_ptr	iVar1	throwIsPointer	CONFIRMED	throw_type->__is_pointer_p() (type_info vtable +8)
+local	get_adjusted_ptr	local_20	thrownPtr	CONFIRMED	copy of *thrown_ptr_p (dereferenced once more for pointer throws), passed by address to __do_catch
+local	check_exception_spec	param_3	thrownPtr	CONFIRMED	void* thrown_ptr
+local	check_exception_spec	param_4	filterValue	CONFIRMED	_Unwind_Sword filter_value (negative: exception-specification offset)
+local	check_exception_spec	ptVar1	catchType	CONFIRMED	spec entry fetched with get_ttype_entry
+local	check_exception_spec	iVar2	adjusted	CONFIRMED	get_adjusted_ptr(catch_type, throw_type, &thrown_ptr): the thrown type is allowed by the spec
+local	check_exception_spec	puVar3	specCursor	CONFIRMED	cursor e through the uleb128 list of allowed type indexes
+local	check_exception_spec	local_20	tmp	CONFIRMED	_Unwind_Word tmp: the next spec type index
+local	___gxx_personality_v0	param_1	version	CONFIRMED	int version: must be 1
+local	___gxx_personality_v0	param_2	actions	CONFIRMED	_Unwind_Action: 1 search phase, 2 cleanup phase, 4 handler frame, 8 force unwind
+local	___gxx_personality_v0	param_3	exceptionClassLo	CONFIRMED	_Unwind_Exception_Class, first word (0x474e5543 = "GNUC")
+local	___gxx_personality_v0	param_4	exceptionClassHi	CONFIRMED	_Unwind_Exception_Class, second word (0x432b2b00 = "C++\0")
+local	___gxx_personality_v0	param_5	ueHeader	CONFIRMED	_Unwind_Exception* ue_header; the thrown object follows it (+0x20) and the __cxa_exception fields precede it
+local	___gxx_personality_v0	param_6	context	CONFIRMED	_Unwind_Context*
+local	___gxx_personality_v0	new_value	landingPad	CONFIRMED	landing pad address (LPStart + cs_lp), installed with _Unwind_SetIP; for a handler frame restored from the exception (ue_header - 0xc)
+local	___gxx_personality_v0	new_value_00	handlerSwitchValue	CONFIRMED	handler switch value (ar_filter) installed in register 4; restored from the exception (ue_header - 0x18)
+local	___gxx_personality_v0	uVar12	callSiteEncoding	CONFIRMED	info.call_site_encoding byte used for the cs_start/cs_len/cs_lp reads
+local	___gxx_personality_v0	uVar9	reloadedTTypeBase	CONFIRMED	base_of_encoded_value(info.ttype_encoding, context) stored back into the exception for the handler frame
+local	___gxx_personality_v0	ptVar7	catchType	CONFIRMED	get_ttype_entry(&info, ar_filter): the catch clause type, null for catch(...)
+local	___gxx_personality_v0	ptVar11	throwType	CONFIRMED	type_info of the thrown exception, null for foreign exceptions and force unwind
+local	___gxx_personality_v0	iVar8	adjustedOk	CONFIRMED	get_adjusted_ptr(catch_type, throw_type, &thrown_ptr)
+local	___gxx_personality_v0	puVar3	p	CONFIRMED	cursor p through the LSDA: header end, call-site table entries, then the action record
+local	___gxx_personality_v0	puVar6	pAfterCallSite	CONFIRMED	p after the cs_action uleb128 of the current call-site entry
+local	___gxx_personality_v0	puVar10	actionRecord	CONFIRMED	action_record: info.action_table + cs_action - 1, then p + ar_disp for the next record
+local	___gxx_personality_v0	iStack_80	infoStart	CONFIRMED	lsda_header_info info.Start (+0)
+local	___gxx_personality_v0	iStack_7c	infoLPStart	CONFIRMED	info.LPStart (+4)
+local	___gxx_personality_v0	uStack_78	infoTTypeBase	CONFIRMED	info.ttype_base (+8)
+local	___gxx_personality_v0	puStack_70	infoActionTable	CONFIRMED	info.action_table (+0x10), end of the call-site table
+local	___gxx_personality_v0	bStack_6c	infoTTypeEncoding	CONFIRMED	info.ttype_encoding (+0x14)
+local	___gxx_personality_v0	bStack_6b	infoCallSiteEncoding	CONFIRMED	info.call_site_encoding (+0x15)
+local	___gxx_personality_v0	uStack_60	csStart	CONFIRMED	cs_start of the current call-site entry
+local	___gxx_personality_v0	uStack_5c	csLen	CONFIRMED	cs_len
+local	___gxx_personality_v0	uStack_58	csLandingPad	CONFIRMED	cs_lp
+local	___gxx_personality_v0	uStack_54	csAction	CONFIRMED	cs_action
+local	___gxx_personality_v0	uStack_50	arFilter	CONFIRMED	ar_filter (sleb128): 0 cleanup, > 0 handler type index, < 0 exception spec
+local	___gxx_personality_v0	iStack_4c	arDisp	CONFIRMED	ar_disp (sleb128): displacement to the next action record, 0 ends the chain
+local	___gxx_personality_v0	apvStack_48	thrownPtr	CONFIRMED	void* thrown_ptr = ue_header + 1; its address is passed to get_adjusted_ptr
+use	___gxx_personality_v0	uVar5	callSiteBase	CONFIRMED	base_of_encoded_value(call_site_encoding, 0): absolute displacements	^\s*uVar5\ =\ \(\(int\ \(\*\)\(\)\)__Z21base_of_encoded_valuehP15_Unwind_Context\)\(uVar12,\(unsigned\ char\ \*\)0x0\);$	^\s*uVar5\ =\ 2;$	all	none
+use	___gxx_personality_v0	uVar5	foundType	CONFIRMED	found_type: 0 nothing, 1 terminate, 2 cleanup, 3 handler	^\s*uVar5\ =\ 2;$	^\s*uVar5\ =\ param_2\ \&\ 8;$	all	none
+use	___gxx_personality_v0	uVar5	handlerTest	INFERRED	actions & _UA_FORCE_UNWIND for catch(...), or the check_exception_spec result: zero selects the handler path	^\s*uVar5\ =\ param_2\ \&\ 8;$	^\s*uVar5\ =\ 3;$	all	none
+use	___gxx_personality_v0	uVar5	foundType	CONFIRMED	found_type = found_handler	^\s*uVar5\ =\ 3;$	^\s*uVar5\ =\ \(\(int\ \(\*\)\(\)\)check_exception_spec\)\(\(unsigned\ char\ \*\)\&iStack_80,ptVar11,apvStack_48\[0\],uStack_50\);$	all	none
+use	___gxx_personality_v0	uVar5	handlerTest	INFERRED	check_exception_spec result (or actions & _UA_FORCE_UNWIND on the catch(...) path): zero selects the handler path	^\s*uVar5\ =\ \(\(int\ \(\*\)\(\)\)check_exception_spec\)\(\(unsigned\ char\ \*\)\&iStack_80,ptVar11,apvStack_48\[0\],uStack_50\);$	^\s*uVar5\ =\ 2;$	all	none
+use	___gxx_personality_v0	uVar5	foundType	CONFIRMED	found_type	^\s*uVar5\ =\ 2;$@2		all	none
+use	___gxx_personality_v0	bVar1	foundTerminate	CONFIRMED	found_type == found_terminate (no landing pad)	^\s*bVar1\ =\ new_value\ ==\ 0;$	^\s*bVar1\ =\ false;$	all	none
+use	___gxx_personality_v0	bVar1	sawCleanup	CONFIRMED	saw_cleanup in the action-record loop	^\s*bVar1\ =\ false;$	^\s*bVar1\ =\ uVar5\ ==\ 1;$	all	none
+use	___gxx_personality_v0	bVar1	foundTerminate	CONFIRMED	found_type == found_terminate	^\s*bVar1\ =\ uVar5\ ==\ 1;$	^\s*bVar1\ =\ true;$	all	none
+use	___gxx_personality_v0	bVar1	sawCleanup	CONFIRMED	saw_cleanup = true for a zero filter	^\s*bVar1\ =\ true;$		all	none

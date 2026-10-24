@@ -1,0 +1,30 @@
+local	_unlinkScope__body	unaff_r2	nextScope	CONFIRMED	scope->next (+0), loaded by the entry instruction lwz r2,0(r3) before this function body
+local	ParseBinary__errorReportTail	unaff_r28	messageText	INFERRED	caller's callee-saved r28: the error message text appended after the location
+local	ParseBinary__errorReportTail	unaff_r29	infoSink	INFERRED	caller's callee-saved r29: the traverser info sink the message is appended to
+local	ParseBinary__errorReportTail	unaff_r30	sourceLoc	INFERRED	caller's callee-saved r30: node getLine()
+local	ParseBinary__errorReportTail	unaff_r31	picBase	INFERRED	caller's callee-saved r31: PIC base register used to address the string literals
+local	ParseUnary__errorReportTail	unaff_r27	locStringObj	INFERRED	caller's callee-saved r27: address of the std::string object that receives the location text
+local	ParseUnary__errorReportTail	unaff_r28	traverser	INFERRED	caller's callee-saved r28: the TConstTraverser whose error flag (+0x74) is set
+local	ParseUnary__errorReportTail	unaff_r29	sourceLoc	INFERRED	caller's callee-saved r29: node getLine()
+local	ParseUnary__errorReportTail	unaff_r30	infoSink	INFERRED	caller's callee-saved r30: the traverser info sink
+local	ParseUnary__errorReportTail	unaff_r31	picBase	INFERRED	caller's callee-saved r31: PIC base register used to address the string literals
+local	ParseSelection__errorReportTail	unaff_r27	traverser	INFERRED	caller's callee-saved r27: the TConstTraverser whose error flag (+0x74) is set
+local	ParseSelection__errorReportTail	unaff_r28	messageText	INFERRED	caller's callee-saved r28: the error message text
+local	ParseSelection__errorReportTail	unaff_r29	sourceLoc	INFERRED	caller's callee-saved r29: node getLine()
+local	ParseSelection__errorReportTail	unaff_r30	infoSink	INFERRED	caller's callee-saved r30: the traverser info sink
+local	ParseSelection__errorReportTail	unaff_r31	picBase	INFERRED	caller's callee-saved r31: PIC base register used to address the string literals
+local	ParseLoop__errorReportTail	unaff_r27	traverser	INFERRED	caller's callee-saved r27: the TConstTraverser whose error flag (+0x74) is set
+local	ParseLoop__errorReportTail	unaff_r28	messageText	INFERRED	caller's callee-saved r28: the error message text
+local	ParseLoop__errorReportTail	unaff_r29	sourceLoc	INFERRED	caller's callee-saved r29: node getLine()
+local	ParseLoop__errorReportTail	unaff_r30	infoSink	INFERRED	caller's callee-saved r30: the traverser info sink
+local	ParseLoop__errorReportTail	unaff_r31	picBase	INFERRED	caller's callee-saved r31: PIC base register used to address the string literals
+local	ParseBranch__errorReportTail	unaff_r27	traverser	INFERRED	caller's callee-saved r27: the TConstTraverser whose error flag (+0x74) is set
+local	ParseBranch__errorReportTail	unaff_r28	messageText	INFERRED	caller's callee-saved r28: the error message text
+local	ParseBranch__errorReportTail	unaff_r29	sourceLoc	INFERRED	caller's callee-saved r29: node getLine()
+local	ParseBranch__errorReportTail	unaff_r30	infoSink	INFERRED	caller's callee-saved r30: the traverser info sink
+local	ParseBranch__errorReportTail	unaff_r31	picBase	INFERRED	caller's callee-saved r31: PIC base register used to address the string literals
+local	TParseContext__error__tail	unaff_r26	reason	INFERRED	caller's callee-saved r26: the reason text of the error
+local	TParseContext__error__tail	unaff_r27	token	INFERRED	caller's callee-saved r27: the token text shown in quotes
+local	TParseContext__error__tail	unaff_r28	sourceLoc	INFERRED	caller's callee-saved r28: node source location
+local	TParseContext__error__tail	unaff_r30	parseContext	INFERRED	caller's callee-saved r30: the TParseContext (+8 info sink, +0x18 error count)
+local	TParseContext__error__tail	unaff_r31	picBase	INFERRED	caller's callee-saved r31: PIC base register used to address the string literals

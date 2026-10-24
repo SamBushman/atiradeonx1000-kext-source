@@ -1,0 +1,25 @@
+local	_InterpreterEmulateOp	pfVar1	srcBElement	INFERRED	element of source operand B read next to the source A element in the dot-product style loops
+local	_InterpreterEmulateOp	bVar2	cmpResult	INFERRED	result of the component comparison used by SLE/SGE-style selects
+local	_InterpreterEmulateOp	fVar6	dotProduct	INFERRED	running dot-product / scalar accumulator
+local	_InterpreterEmulateOp	pbVar9	srcDimCursor	INFERRED	walks the per-source dimension bytes of the instruction (stride 0x24)
+local	_InterpreterEmulateOp	iVar14	callStackTop	INFERRED	machine[0x29b]: call-stack pointer read for RET
+local	_InterpreterEmulateOp	piVar11	poppedStackTop	INFERRED	call-stack pointer after popping one return address
+local	_InterpreterEmulateOp	bVar25	fallsThrough	INFERRED	instruction does not branch: advance to the next instruction
+local	_InterpreterEmulateOp	dVar27	texLodOrBias	INFERRED	operand component passed as the LOD/bias argument of the texture sampler calls
+local	_InterpreterEmulateOp	dVar28	mathTemp	INFERRED	reused double temporary of the math operations (floor/log2/pow/cross product)
+local	_InterpreterEmulateOp	local_b0	i2dHi	INFERRED	high word 0x43300000 of the int->double conversion idiom
+local	_InterpreterEmulateOp	uStack_ac	i2dLo	INFERRED	low word (value ^ 0x80000000) of the int->double conversion idiom; also a logic result 0/1
+local	_InterpreterEmulateOp	local_a8	d2iScratch1	INFERRED	double->int conversion scratch
+local	_InterpreterEmulateOp	local_a0	d2iScratch2	INFERRED	double->int conversion scratch
+local	_InterpreterEmulateOp	local_98	d2iScratch3	INFERRED	double->int conversion scratch
+local	_InterpreterEmulateOp	local_90	d2iScratch4	INFERRED	double->int conversion scratch
+local	_InterpreterEmulateOp	local_80	texelX	INFERRED	sampled texel x
+local	_InterpreterEmulateOp	local_7c	texelY	INFERRED	sampled texel y
+local	_InterpreterEmulateOp	local_78	texelZ	INFERRED	sampled texel z
+local	_InterpreterEmulateOp	local_74	texelW	INFERRED	sampled texel w
+local	_InterpreterEmulateOp	local_70	storedComponent	INFERRED	component value written to the destination in the per-component store step
+use	_InterpreterEmulateOp	bVar4	instUpdateCC	INFERRED	instruction byte +6: update-condition-code flag	#0	^\s*bVar4\ =\ \*\(byte\ \*\)\(\(int\)param_2\ \+\ 5\);	all	none
+use	_InterpreterEmulateOp	bVar4	vectorDimension	INFERRED	instruction byte +5: vector dimension 1..4	^\s*bVar4\ =\ \*\(byte\ \*\)\(\(int\)param_2\ \+\ 5\);		all	none
+use	_InterpreterEmulateOp	fVar7	smoothT	INFERRED	clamped (x - edge0)/(edge1 - edge0) smoothstep parameter	^\s*fVar7\ =\ \(local_100\[1\]	^\s*fVar7\ =\ local_130\[7\];	all	none
+use	_InterpreterEmulateOp	fVar7	sourceComponentW	INFERRED	source component w (opVec[7])	^\s*fVar7\ =\ local_130\[7\];	^\s*uStack_ac\ =\ 0;	all	none
+use	_InterpreterEmulateOp	fVar7	logicComponent	INFERRED	operand component tested by the logical ops (AND/OR/XOR)	*		all	none

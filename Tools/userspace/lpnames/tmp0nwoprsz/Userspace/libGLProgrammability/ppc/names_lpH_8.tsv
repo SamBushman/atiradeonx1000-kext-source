@@ -1,0 +1,37 @@
+use	TIntermSelection__compileNode	piVar4	conditionConstantPtr	INFERRED	operand+4: pointer to the compile-time constant of the condition operand (null when not constant)	^\s*piVar4\ =\ \*\(int\ \*\*\)\(pPVar6\ \+\ 4\);$	+3
+use	TIntermSelection__compileNode	piVar4	conditionConstantPtr	INFERRED	operand+4: pointer to the compile-time constant of the condition operand (null when not constant)	^\s*uVar14\ =\ \(uint\)\(piVar4\ !=\ \(int\ \*\)0x0\);$	+1
+use	TIntermSelection__compileNode	pTVar5	nodeType	INFERRED	node type (virtual slot 0x3c) for the result temporary	^\s*pTVar5\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x3c\)\)$	+1
+use	TIntermSelection__compileNode	pTVar5	nodeType	INFERRED	node type (virtual slot 0x3c) for the result temporary	^\s*local_40\ =\ \(unsigned\ char\ \*\)TPPStreamCompiler__newTemporary\(param_2,pTVar5\);$	+1
+use	TIntermSelection__compileNode	iVar8	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*iVar8\ =\ a1_00;$	+1
+use	TIntermSelection__compileNode	iVar8	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*iVar8\ =\ extraout_r4;$	+1
+use	TIntermSelection__compileNode	iVar8	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*iVar8\ =\ extraout_r4_00;$	+1
+use	TIntermSelection__compileNode	iVar8	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*iVar8\ =\ \(int\)uVar15;$	+1
+use	TIntermSelection__compileNode	iVar8	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*iVar8\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar12\ \+\ 0x20\)\ \+\ 4\);$	+3
+use	TIntermSelection__compileNode	iVar8	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*iVar8\ =\ extraout_r4_01;$	+1
+use	TIntermSelection__compileNode	iVar8	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*iVar8\ =\ extraout_r4_02;$	+1
+use	TIntermSelection__compileNode	iVar8	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*local_80\ =\ \(\*\(code\ \*\)\*param_6\)\(this,iVar8,a2,pcVar10,param_5,param_6,0,0\);$	+1
+use	TIntermSelection__compileNode	iVar8	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*iVar8\ =\ extraout_r4_03;$	+1
+use	TIntermSelection__compileNode	iVar8	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*iVar8\ =\ extraout_r4_04;$	+1
+use	TIntermSelection__compileNode	iVar8	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,iVar8,a2,pcVar10,param_5,param_6,0x58\);$	+1
+use	TIntermSelection__compileNode	iVar8	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*iVar8\ =\ a1_02;$	+1
+use	TIntermSelection__compileNode	iVar8	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*iVar8\ =\ extraout_r4_05;$	+1
+use	TIntermSelection__compileNode	iVar8	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*iVar8\ =\ extraout_r4_06;$	+1
+use	TIntermSelection__compileNode	iVar8	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,iVar8,a2,pcVar10,param_5,param_6,0x1640000\);$	+1
+use	TIntermSelection__compileNode	iVar8	logicalSize	INFERRED	ParseOperand__GetLogicalSize result; (size-1) goes into the header size field	^\s*iVar8\ =\ ParseOperand__GetLogicalSize\(pPVar6\);$	+2
+use	TIntermSelection__compileNode	iVar8	logicalSize	INFERRED	ParseOperand__GetLogicalSize result; (size-1) goes into the header size field	^\s*iVar8\ =\ ParseOperand__GetLogicalSize\(pPVar6\);$@2	+2
+use	TIntermSelection__compileNode	iVar8	logicalSize	INFERRED	ParseOperand__GetLogicalSize result; (size-1) goes into the header size field	^\s*iVar8\ =\ ParseOperand__GetLogicalSize\(local_40\);$	+2
+use	TIntermSelection__compileNode	uVar11	opcodeValue	INFERRED	0x4f: the branch opcode (0x13c0000 >> 18) also forwarded as a stray argument	^\s*uVar11\ =\ 0x4f;$	+1
+use	TIntermSelection__compileNode	uVar11	opcodeValue	INFERRED	0x4f: the branch opcode (0x13c0000 >> 18) also forwarded as a stray argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,pPVar6,pcVar10,param_5,param_6,uVar11,param_8$	+2
+use	TIntermSelection__compileNode	uVar11	strayZero11	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar11\ =\ 0;$	+1
+use	TIntermSelection__compileNode	uVar11	strayZero11	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_3c,pcVar10,param_5,param_6,uVar11,param_8\);$	+1
+use	TIntermSelection__compileNode	uVar11	strayZero11	INFERRED	constant 0 forwarded as a dead register argument	^\s*uVar11\ =\ 0;$@2	+1
+use	TIntermSelection__compileNode	uVar11	strayZero11	INFERRED	constant 0 forwarded as a dead register argument	^\s*\(\(unsigned\ char\ \*\)\&local_70,param_2,local_38\[0\],pcVar10,param_5,param_6,uVar11,$	+2
+use	TIntermSelection__compileNode	uVar11	ifElseLabelLength	INFERRED	_strlen(ifElseLabel) passed to _PPStreamAddLabel	^\s*uVar11\ =\ _strlen\(pcVar10\);$	+1
+use	TIntermSelection__compileNode	uVar11	ifElseLabelLength	INFERRED	_strlen(ifElseLabel) passed to _PPStreamAddLabel	^\s*_PPStreamAddLabel\(iVar12,pcVar10,uVar11\);$	+1
+use	TIntermSelection__compileNode	uVar15	lastOpIndexPair	INFERRED	64-bit pair returned by TPPStreamCompiler__LastOperationIndex (low word = index)	^\s*uVar15\ =\ TPPStreamCompiler__LastOperationIndex\(param_2\);$	+4
+local	TIntermSelection__compileNode	param_3	strayArg3	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermSelection__compileNode	param_4	strayArg4	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermSelection__compileNode	param_5	strayArg5	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermSelection__compileNode	param_6	strayArg6	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermSelection__compileNode	param_7	strayArg7	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermSelection__compileNode	param_8	strayArg8	INFERRED	extra register-argument slot forwarded as a dead stray argument

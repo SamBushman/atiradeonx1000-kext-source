@@ -1,0 +1,13 @@
+local	_PPParserMacroSetSearchString	param_1	parser	INFERRED	PPParser*, unused
+local	_PPParserMacroSetSearchString	param_2	macro	CONFIRMED	PPParserMacro*: [0] search string
+local	_PPParserMacroSetSearchString	param_3	searchString	CONFIRMED	text copied into macro[0]
+local	_PPParserMacroSetSearchString	param_4	length	CONFIRMED	length of searchString
+local	_PPParserMacroSetParamStringsCount	param_2	count	CONFIRMED	number of macro parameters: stored at macro+8, calloc(4,count) array at macro+0xc
+local	_PPParserMacroSetParamString	param_2	index	CONFIRMED	parameter slot in macro+0xc
+local	_PPParserMacroSetParamString	param_3	paramString	CONFIRMED	parameter name copied into the slot
+local	_PPParserMacroSetParamString	iVar1	slotOffset	INFERRED	index*4
+local	_PPParserMacroSetParamString	iVar4	paramArray	INFERRED	macro+0xc: the parameter-string array
+local	_PPParserCreate	param_1	owner	INFERRED	stored at parser+0x48c (calloc(0x490) PPParser)
+local	_PPParserScopeCreate	param_1	parser	CONFIRMED	PPParser* handed to the macro setup calls
+local	_PPParserScopeCreate	auStack_f0	mvmultBody	CONFIRMED	body text of the built-in MVMULT macro (DP4 rows)
+local	_PPParserScopeCreate	auStack_90	tmvmultBody	CONFIRMED	body text of the built-in TMVMULT macro (MUL/MAD rows)

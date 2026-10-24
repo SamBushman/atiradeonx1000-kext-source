@@ -1,0 +1,82 @@
+local	TPPStreamCompiler__newNodeFromOperand	a0_00	srcType	INFERRED	TType* read through the operand's ParseSymbol +0xc (parse-tree type); its vtable slots getBasicType/getNominalSize/isMatrix/isArray are called and its fields copied
+local	TPPStreamCompiler__newNodeFromOperand	a1	basicType	CONFIRMED	srcType vtable slot 0x20 = TType::getBasicType, passed as basic type to setType
+local	TPPStreamCompiler__newNodeFromOperand	a2	nominalSize	CONFIRMED	srcType vtable slot 0x2c = TType::getNominalSize, passed as size to setType
+local	TPPStreamCompiler__newNodeFromOperand	a3	isMatrix	CONFIRMED	srcType vtable slot 0x34 = TType::isMatrix, passed as matrix flag to setType
+local	TPPStreamCompiler__newNodeFromOperand	a4	isArray	CONFIRMED	srcType vtable slot 0x38 = TType::isArray, passed as array flag to setType
+local	TPPStreamCompiler__newNodeFromOperand	a5	arraySize	CONFIRMED	srcType +4 = TType arraySize, passed as last setType argument
+local	TPPStreamCompiler__newNodeFromOperand	this_00	poolAllocator	CONFIRMED	GetGlobalPoolAllocator() result, used for TPoolAllocator__allocate
+local	TPPStreamCompiler__newNodeFromOperand	a0	newType	CONFIRMED	0x28-byte TType allocated from the pool, vtable stored, then setType called through its vtable
+local	TPPStreamCompiler__newNodeFromOperand	uVar1	srcNominalSizeBits	CONFIRMED	srcType bit-field word & 0x7f800 = nominal size bits 18..11
+local	TPPStreamCompiler__newNodeFromOperand	uVar2	srcQualifierBits	CONFIRMED	srcType bit-field word & 0xfe000000 = qualifier bits 31..25
+local	TPPStreamCompiler__newNodeFromOperand	uVar3	srcBasicTypeBits	CONFIRMED	(srcType bit-field word >> 0x13 & 0x3f) << 0x13 = basic type bits 24..19
+local	TPPStreamCompiler__newNodeFromOperand	uVar4	srcIsMatrixBit	CONFIRMED	(srcType bit-field word >> 10 & 1) << 10 = isMatrix bit
+local	TPPStreamCompiler__newNodeFromOperand	uVar5	dstTypeBits	CONFIRMED	newType +0x24 bit-field word before the field-wise copy (low bits kept)
+local	TPPStreamCompiler__newNodeFromOperand	iVar7	srcField1c	INFERRED	srcType +0x1c (unknown TType field, copied)
+local	TPPStreamCompiler__newNodeFromOperand	iVar8	srcStructureSize	CONFIRMED	srcType +0x18 = TType structureSize
+local	TPPStreamCompiler__newNodeFromOperand	iVar9	srcField14	INFERRED	srcType +0x14 (unknown TType field, copied)
+local	TPPStreamCompiler__newNodeFromOperand	iVar10	srcStructure	CONFIRMED	srcType +8 = TType structure (TTypeList*)
+local	TPPStreamCompiler__newNodeFromOperand	iVar11	srcTypeName	CONFIRMED	srcType +0x10 = TType typeName
+local	TPPStreamCompiler__newNodeFromOperand	iVar12	srcFieldName	CONFIRMED	srcType +0xc = TType fieldName
+use	TPPStreamCompiler__newNodeFromOperand	iVar6	srcField20	INFERRED	srcType +0x20 (unknown TType field, copied)	iVar6 = a0_00\[8\];	if \(\*\(int \*\)\(\*\(int \*\)param_2 \+ 0x48\)
+use	TPPStreamCompiler__newNodeFromOperand	iVar6	indexedDimCount	INFERRED	number of direct indices applied to the operand (parseOperand +0x20), or 0 when a matrix is indexed: nonzero forces nominalSize to 1	if \(a3 == 0\) \{	
+local	TPPStreamCompiler__newTemporary	this_00	poolAllocator	CONFIRMED	GetGlobalPoolAllocator() result used for TPoolAllocator__allocate
+local	TPPStreamCompiler__newTemporary	a0	newType	CONFIRMED	0x28-byte pool TType copied from `type`
+local	TPPStreamCompiler__newTemporary	this_01	operand	CONFIRMED	operator_new(0x38) + ParseOperandC1, returned
+local	TPPStreamCompiler__newTemporary	this_02	symbol	CONFIRMED	operator_new(100) + ParseSymbolC1, stored at operand +0, named and typed
+local	TPPStreamCompiler__newTemporary	acStack_120	symbolNameBuffer	INFERRED	sprintf target passed to ParseSymbol__SetName
+local	TPPStreamCompiler__newTemporary	uVar1	srcNominalSizeBits	CONFIRMED	type bit-field word & 0x7f800 = nominal size bits
+local	TPPStreamCompiler__newTemporary	uVar2	srcQualifierBits	CONFIRMED	type bit-field word & 0xfe000000 = qualifier bits
+local	TPPStreamCompiler__newTemporary	uVar3	srcBasicTypeBits	CONFIRMED	(word >> 0x13 & 0x3f) << 0x13 = basic type bits
+local	TPPStreamCompiler__newTemporary	uVar4	srcIsMatrixBit	CONFIRMED	(word >> 10 & 1) << 10 = isMatrix bit
+local	TPPStreamCompiler__newTemporary	uVar6	dstTypeBits	CONFIRMED	newType +0x24 bit-field word before the field-wise copy
+local	TPPStreamCompiler__newTemporary	uVar8	srcStructure	CONFIRMED	type +8 = TType structure
+local	TPPStreamCompiler__newTemporary	uVar9	srcTypeName	CONFIRMED	type +0x10 = TType typeName
+local	TPPStreamCompiler__newTemporary	a5	srcField14	INFERRED	type +0x14 (unknown TType field, copied)
+local	TPPStreamCompiler__newTemporary	a4	srcStructureSize	CONFIRMED	type +0x18 = TType structureSize
+local	TPPStreamCompiler__newTemporary	a3	srcField1c	INFERRED	type +0x1c (unknown TType field, copied)
+use	TPPStreamCompiler__newTemporary	uVar7	srcField20	INFERRED	type +0x20 (unknown TType field, copied)	uVar7 = \*\(undefined4 \*\)\(param_2 \+ 0x20\);	uVar5 = TemporaryAllocator__getTemporary
+use	TPPStreamCompiler__newTemporary	uVar7	glTypeString	INFERRED	GetGLStringForType(symbol OpenGL type), the %s argument of the temp-name sprintf	uVar7 = GetGLStringForType	
+use	TPPStreamCompiler__newTemporary	uVar5	srcArraySize	CONFIRMED	type +4 = TType arraySize, copied to newType +4	uVar5 = \*\(undefined4 \*\)\(param_2 \+ 4\);	uVar5 = TemporaryAllocator__getTemporary
+use	TPPStreamCompiler__newTemporary	uVar5	temporaryIndex	CONFIRMED	TemporaryAllocator__getTemporary result: temp number, stored at symbol +0x28 and formatted into the name	uVar5 = TemporaryAllocator__getTemporary	
+local	TPPStreamCompiler__newAddressTemp	this_00	poolAllocator	CONFIRMED	GetGlobalPoolAllocator() result
+local	TPPStreamCompiler__newAddressTemp	pTVar1	addressType	INFERRED	fresh 0x28-byte pool TType with qualifier/basic-type bits preset (0x100800) and every other field zero
+local	TPPStreamCompiler__newAddressTemp	this_01	operand	CONFIRMED	operator_new(0x38) + ParseOperandC1, returned
+local	TPPStreamCompiler__newAddressTemp	this_02	symbol	CONFIRMED	operator_new(100) + ParseSymbolC1
+local	TPPStreamCompiler__newAddressTemp	uVar2	addressTempIndex	CONFIRMED	AddressTempAllocator__getTemporary result, formatted into the name and stored at symbol +0x28
+local	TPPStreamCompiler__newAddressTemp	acStack_120	symbolNameBuffer	INFERRED	sprintf target passed to ParseSymbol__SetName
+local	TPPStreamCompiler__newReturnValue	param_1	compiler	CONFIRMED	used as this: *(param_1 + 0x68) is the ParseSymbolTable, as everywhere in TPPStreamCompiler
+local	TPPStreamCompiler__newReturnValue	this	poolAllocator	CONFIRMED	GetGlobalPoolAllocator() result
+local	TPPStreamCompiler__newReturnValue	a0	newType	CONFIRMED	0x28-byte pool TType copied from `type`
+local	TPPStreamCompiler__newReturnValue	this_00	operand	CONFIRMED	operator_new(0x38) + ParseOperandC1, returned
+local	TPPStreamCompiler__newReturnValue	this_01	symbol	CONFIRMED	operator_new(100) + ParseSymbolC1, named `str`
+local	TPPStreamCompiler__newReturnValue	uVar1	srcNominalSizeBits	CONFIRMED	type bit-field word & 0x7f800 = nominal size bits
+local	TPPStreamCompiler__newReturnValue	uVar2	srcQualifierBits	CONFIRMED	type bit-field word & 0xfe000000 = qualifier bits
+local	TPPStreamCompiler__newReturnValue	uVar3	srcBasicTypeBits	CONFIRMED	(word >> 0x13 & 0x3f) << 0x13 = basic type bits
+local	TPPStreamCompiler__newReturnValue	uVar4	srcIsMatrixBit	CONFIRMED	(word >> 10 & 1) << 10 = isMatrix bit
+local	TPPStreamCompiler__newReturnValue	uVar5	srcArraySize	CONFIRMED	type +4 = TType arraySize
+local	TPPStreamCompiler__newReturnValue	uVar6	dstTypeBits	CONFIRMED	newType +0x24 bit-field word before the field-wise copy
+local	TPPStreamCompiler__newReturnValue	uVar7	srcField20	INFERRED	type +0x20 (unknown TType field, copied)
+local	TPPStreamCompiler__newReturnValue	uVar8	srcField1c	INFERRED	type +0x1c (unknown TType field, copied)
+local	TPPStreamCompiler__newReturnValue	uVar9	srcStructureSize	CONFIRMED	type +0x18 = TType structureSize
+local	TPPStreamCompiler__newReturnValue	uVar10	srcField14	INFERRED	type +0x14 (unknown TType field, copied)
+local	TPPStreamCompiler__newReturnValue	uVar11	srcTypeName	CONFIRMED	type +0x10 = TType typeName
+local	TPPStreamCompiler__newReturnValue	uVar12	srcFieldName	CONFIRMED	type +0xc = TType fieldName
+local	TPPStreamCompiler__newParam	this_00	poolAllocator	CONFIRMED	GetGlobalPoolAllocator() result
+local	TPPStreamCompiler__newParam	a0	newType	CONFIRMED	0x28-byte pool TType copied from `type`
+local	TPPStreamCompiler__newParam	this_01	operand	CONFIRMED	operator_new(0x38) + ParseOperandC1, returned
+local	TPPStreamCompiler__newParam	this_02	symbol	CONFIRMED	operator_new(100) + ParseSymbolC1
+local	TPPStreamCompiler__newParam	param_4	paramIndex	INFERRED	formatted after `str` by sprintf into the symbol name (strlen(str)+10 bytes)
+local	TPPStreamCompiler__newParam	iVar7	nameLength	CONFIRMED	strlen(str), sizes the name buffer
+local	TPPStreamCompiler__newParam	pcVar8	paramName	CONFIRMED	malloc'd name buffer: sprintf(str, paramIndex), passed to ParseSymbol__SetName and freed
+local	TPPStreamCompiler__newParam	uVar1	srcNominalSizeBits	CONFIRMED	type bit-field word & 0x7f800 = nominal size bits
+local	TPPStreamCompiler__newParam	uVar2	srcQualifierBits	CONFIRMED	type bit-field word & 0xfe000000 = qualifier bits
+local	TPPStreamCompiler__newParam	uVar3	srcBasicTypeBits	CONFIRMED	(word >> 0x13 & 0x3f) << 0x13 = basic type bits
+local	TPPStreamCompiler__newParam	uVar4	srcIsMatrixBit	CONFIRMED	(word >> 10 & 1) << 10 = isMatrix bit
+local	TPPStreamCompiler__newParam	uVar5	srcArraySize	CONFIRMED	type +4 = TType arraySize
+local	TPPStreamCompiler__newParam	uVar6	dstTypeBits	CONFIRMED	newType +0x24 bit-field word before the field-wise copy
+local	TPPStreamCompiler__newParam	uVar9	srcField20	INFERRED	type +0x20 (unknown TType field, copied)
+local	TPPStreamCompiler__newParam	uVar10	srcField1c	INFERRED	type +0x1c (unknown TType field, copied)
+local	TPPStreamCompiler__newParam	uVar11	srcStructureSize	CONFIRMED	type +0x18 = TType structureSize
+local	TPPStreamCompiler__newParam	uVar12	srcField14	INFERRED	type +0x14 (unknown TType field, copied)
+local	TPPStreamCompiler__newParam	uVar13	srcTypeName	CONFIRMED	type +0x10 = TType typeName
+local	TPPStreamCompiler__newParam	uVar14	srcFieldName	CONFIRMED	type +0xc = TType fieldName

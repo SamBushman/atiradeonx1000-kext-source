@@ -1,0 +1,20 @@
+local	TPPStreamCompiler__getOperandAsDestVar	param_3	operand	CONFIRMED	the ParseOperand converted to a destination descriptor
+local	TPPStreamCompiler__getOperandAsDestVar	param_4	unusedArg4	INFERRED	leftover register argument, never read
+local	TPPStreamCompiler__getOperandAsDestVar	param_5	unusedArg5	INFERRED	leftover register argument, never read
+local	TPPStreamCompiler__getOperandAsDestVar	param_6	unusedArg6	INFERRED	leftover register argument, never read
+local	TPPStreamCompiler__getOperandAsSourceVar	param_3	operand	CONFIRMED	the ParseOperand: a NULL symbol (*operand == 0) means a constant operand whose values are at operand +4
+local	TPPStreamCompiler__getOperandAsSourceVar	param_4	unusedArg4	INFERRED	leftover register argument, never read
+local	TPPStreamCompiler__getOperandAsSourceVar	param_5	unusedArg5	INFERRED	leftover register argument, only forwarded to error() as a varargs value
+local	TPPStreamCompiler__getOperandAsSourceVar	param_6	unusedArg6	INFERRED	leftover register argument, only forwarded to error()
+local	TPPStreamCompiler__getOperandAsSourceVar	param_7	unusedArg7	INFERRED	leftover register argument, only forwarded to error()
+local	TPPStreamCompiler__getOperandAsSourceVar	param_8	unusedArg8	INFERRED	leftover register argument, only forwarded to error()
+local	TPPStreamCompiler__getOperandAsSourceVar	bVar1	isScalarValueType	CONFIRMED	constant operand GL type is int (0x1404) or bool (0x8b56), so its value is copied (float 0x1406 is tested separately)
+local	TPPStreamCompiler__getOperandAsSourceVar	uVar2	operandGlType	CONFIRMED	OpenGL type of the operand: symbol +0x2c or operand +0x18
+local	TPPStreamCompiler__getOperandAsSourceVar	puVar3	zeroCursor	CONFIRMED	walks constantWords zeroing its four words
+local	TPPStreamCompiler__getOperandAsSourceVar	uVar4	operandLogicalSize	CONFIRMED	ParseOperand__GetLogicalSize(operand), the lane loop bound
+local	TPPStreamCompiler__getOperandAsSourceVar	uVar6	laneIndex	CONFIRMED	constant lane being copied (0..operandLogicalSize-1; more than 4 raises an error)
+local	TPPStreamCompiler__getOperandAsSourceVar	local_50	constantWords	CONFIRMED	four constant value words passed to getConstantAsSourceVar, or the descriptor buffer GetAsSourceVar fills
+local	TPPStreamCompiler__getOperandAsSourceVar	local_40	descA	INFERRED	first word of the descriptor from getConstantAsSourceVar or GetAsSourceVar
+local	TPPStreamCompiler__getOperandAsSourceVar	local_3c	descB	INFERRED	second word of the descriptor
+use	TPPStreamCompiler__getOperandAsSourceVar	iVar7	zeroCountdown	CONFIRMED	countdown of the four words of constantWords being zeroed	iVar7 = 4;	iVar7 = 0;
+use	TPPStreamCompiler__getOperandAsSourceVar	iVar7	valueByteOffset	CONFIRMED	byte offset (lane * 4) of the constant value being copied	iVar7 = 0;	

@@ -1,0 +1,13 @@
+use	TIntermAggregate__compileNode	piVar11	operandTypeObj	INFERRED	operand type object (*(operand+0xc)) whose virtual slot 0x24 classifies it	*		all	none
+use	TIntermAggregate__compileNode	uVar7	carriedR4	INFERRED	r4 value carried through the function and forwarded as a stray register argument	*		all	none
+use	TIntermAggregate__compileNode	iVar8	calleeNameObj	INFERRED	TString* returned by getName() (virtual slot 0x6c); +4 is its string data	*		all	none
+use	TIntermAggregate__compileNode	pcVar9	functionNameData	INFERRED	function name string data (getName()+4 / ParseFunctionStack__current) or node type forwarded as stray arg	*		all	none
+use	TIntermAggregate__compileNode	local_50	paramTempOperand	INFERRED	temporary ParseOperand* from newParam, assigned then destroyed (call parameters)	*		all	none
+use	TIntermAggregate__compileNode	local_4c	argTempOperand	INFERRED	temporary ParseOperand* from newParam, assigned then destroyed (argument promotion)	*		all	none
+use	TIntermAggregate__compileNode	ppPVar13	operandArraySel	INFERRED	selected operand array (copies if present, else originals) or stray register argument	*		all	none
+use	TIntermAggregate__compileNode	ppPVar14	paramSlotPtr	INFERRED	address of the current parameter slot (param list + index)	*		all	none
+use	TIntermAggregate__compileNode	uVar17	operatorOffset	INFERRED	operatorCode - 0x8a, index into the arithmetic operator range	*		all	none
+local	TIntermAggregate__compileNode	param_4	strayArg4	INFERRED	extra register-argument slot (r6) used as scratch for stray call arguments
+local	TIntermAggregate__compileNode	param_5	strayArg5	INFERRED	extra register-argument slot (r7) forwarded as stray call argument
+local	TIntermAggregate__compileNode	param_6	strayArg6	INFERRED	extra register-argument slot (r8) forwarded as stray call argument
+use	TIntermAggregate__compileNode	iVar20	labelNameObj	INFERRED	TString* returned by getName() (virtual slot 0x6c); +4 is its string data, used for the operation label	*		all	none

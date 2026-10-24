@@ -1,0 +1,94 @@
+local	TIntermediate__parseConstTree	param_2	unusedLine	INFERRED	source line argument; never read
+local	TIntermediate__parseConstTree	param_8	singleConstantParam	INFERRED	constructor takes a single constant argument (stored at traverser +0x68)
+local	TIntermediate__parseConstTree	uVar1	result	INFERRED	1 when the traversal reported an error, else 0
+local	TIntermediate__parseConstTree	uVar2	typeBits	INFERRED	bit-field word (+0x24) of the type argument
+local	TIntermediate__parseConstTree	local_b0	visitSymbolFn	INFERRED	TConstTraverser member +0x00 (ParseSymbol); &local_b0 is the traverser passed to traverse
+local	TIntermediate__parseConstTree	local_ac	visitConstantUnionFn	INFERRED	TConstTraverser member +0x04
+local	TIntermediate__parseConstTree	local_a8	visitBinaryFn	INFERRED	TConstTraverser member +0x08
+local	TIntermediate__parseConstTree	local_a4	visitUnaryFn	INFERRED	TConstTraverser member +0x0c
+local	TIntermediate__parseConstTree	local_a0	visitSelectionFn	INFERRED	TConstTraverser member +0x10
+local	TIntermediate__parseConstTree	local_9c	visitAggregateFn	INFERRED	TConstTraverser member +0x14
+local	TIntermediate__parseConstTree	local_98	visitLoopFn	INFERRED	TConstTraverser member +0x18
+local	TIntermediate__parseConstTree	local_94	visitBranchFn	INFERRED	TConstTraverser member +0x1c
+local	TIntermediate__parseConstTree	local_90	depth	INFERRED	TIntermTraverser depth (+0x20)
+local	TIntermediate__parseConstTree	local_8c	preVisit	INFERRED	TIntermTraverser preVisit (+0x24)
+local	TIntermediate__parseConstTree	local_88	postVisit	INFERRED	TIntermTraverser postVisit (+0x28)
+local	TIntermediate__parseConstTree	local_84	rightToLeft	INFERRED	TIntermTraverser rightToLeft (+0x2c)
+local	TIntermediate__parseConstTree	local_80	index	INFERRED	TConstTraverser index (+0x30): next component to fill
+use	TIntermediate__parseConstTree	local_7c	unionArray	INFERRED	TConstTraverser unionArray (+0x34): the constant array being filled	^\s*local_7c\ =\ param_4;$	+1
+local	TIntermediate__parseConstTree	local_78	unusedField38	INFERRED	TConstTraverser word at +0x38, zero-initialised and never read here
+local	TIntermediate__parseConstTree	local_4c	travConstructorType	INFERRED	TConstTraverser constructorType (+0x64)
+local	TIntermediate__parseConstTree	local_48	travSingleConstantParam	INFERRED	TConstTraverser singleConstantParam (+0x68)
+local	TIntermediate__parseConstTree	local_44	travInfoSink	INFERRED	TConstTraverser infoSink (+0x6c)
+local	TIntermediate__parseConstTree	local_40	travSymbolTable	INFERRED	TConstTraverser symbolTable (+0x70)
+local	TIntermediate__parseConstTree	local_3c	errorFlag	INFERRED	TConstTraverser error flag (+0x74)
+local	TIntermediate__parseConstTree	local_34	isMatrix	INFERRED	TConstTraverser isMatrix (+0x7c)
+local	TIntermediate__parseConstTree	local_30	matrixSize	INFERRED	TConstTraverser matrixSize (+0x80)
+local	TParseContext__parseVectorFields	param_3	vecSize	INFERRED	nominal size of the vector being swizzled: each field must be below it
+local	TParseContext__parseVectorFields	param_5	line	INFERRED	source line for error messages
+local	TParseContext__parseVectorFields	bVar1	terminalChar	INFERRED	std::string::_S_terminal byte stored after the text
+use	TParseContext__parseVectorFields	iVar2	fieldCount	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 4\)\ \+\ \-0xc\);$	+3
+use	TParseContext__parseVectorFields	iVar2	fieldCount	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*if\ \(iVar2\ <\ 1\)\ \{$	+1
+use	TParseContext__parseVectorFields	iVar2	fieldCount	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ \*\(int\ \*\)\(param_4\ \+\ 0x10\);$	+1
+use	TParseContext__parseVectorFields	iVar2	fieldCount	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ \*\(int\ \*\)\(param_4\ \+\ 0x10\);$@2	+1
+use	TParseContext__parseVectorFields	iVar2	fieldCount	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*\}\ while\ \(in_r10\ <\ iVar2\);$	+1
+use	TParseContext__parseVectorFields	iVar2	fieldCount	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*if\ \(0\ <\ iVar2\)\ \{$	+1
+use	TParseContext__parseVectorFields	iVar2	fieldCount	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*\}\ while\ \(in_r10\ <\ iVar2\);$@2	+1
+use	TParseContext__parseVectorFields	iVar2	textChars	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\ \+\ 4\);$	+2
+use	TParseContext__parseVectorFields	iVar2	textChars	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar2\ \+\ \-0xc\);$	+1
+use	TParseContext__parseVectorFields	iVar2	textChars	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ \*\(int\ \*\)\(param_2\ \+\ 4\);$@2	+2
+use	TParseContext__parseVectorFields	iVar2	textChars	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*\*\(byte\ \*\)\(iVar2\ \+\ iVar3\)\ =\ bVar1;$	+1
+use	TParseContext__parseVectorFields	iVar2	componentIndex	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ 1;$	+1
+use	TParseContext__parseVectorFields	iVar2	componentIndex	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ 1;$@2	+1
+use	TParseContext__parseVectorFields	iVar2	componentIndex	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ 2;$@2	+1
+use	TParseContext__parseVectorFields	iVar2	componentIndex	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ 1;$@4	+1
+use	TParseContext__parseVectorFields	iVar2	componentIndex	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ 2;$@3	+1
+use	TParseContext__parseVectorFields	iVar2	componentIndex	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ 2;$@4	+1
+use	TParseContext__parseVectorFields	iVar2	componentIndex	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ 0;$	+1
+use	TParseContext__parseVectorFields	iVar2	componentIndex	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ 0;$@3	+1
+use	TParseContext__parseVectorFields	iVar2	componentIndex	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ 0;$@4	+1
+use	TParseContext__parseVectorFields	iVar2	componentIndex	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*local_24\[in_r10\ \+\ 1\]\ =\ iVar2;$@2	+1
+use	TParseContext__parseVectorFields	iVar2	componentIndex	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ 1;$@3	+1
+use	TParseContext__parseVectorFields	iVar2	componentIndex	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ 2;$	+1
+use	TParseContext__parseVectorFields	iVar2	componentIndex	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ 0;$@2	+1
+use	TParseContext__parseVectorFields	iVar2	componentIndex	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*local_24\[in_r10\ \+\ 1\]\ =\ iVar2;$	+2
+use	TParseContext__parseVectorFields	iVar2	errTextLength	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar3\ \+\ \-0xc\);$	+1
+use	TParseContext__parseVectorFields	iVar2	errTextLength	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*\*\(byte\ \*\)\(iVar3\ \+\ iVar2\)\ =\ bVar1;$	+1
+use	TParseContext__parseVectorFields	iVar2	errTextLength	INFERRED	w0/w1 number of swizzle fields (text length); w2 character pointer of the field text; w3/w4 component index within its field set; w5 text length for the error	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar3\ \+\ \-0xc\);$@2	+1
+use	TParseContext__parseVectorFields	iVar3	textLengthB	INFERRED	w0 text length; w1 component index recorded for a field; w2 text characters	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar2\ \+\ \-0xc\);$	+1
+use	TParseContext__parseVectorFields	iVar3	textLengthB	INFERRED	w0 text length; w1 component index recorded for a field; w2 text characters	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar2\ \+\ \-0xc\);$@2	+1
+use	TParseContext__parseVectorFields	iVar3	textLengthB	INFERRED	w0 text length; w1 component index recorded for a field; w2 text characters	^\s*\*\(byte\ \*\)\(iVar2\ \+\ iVar3\)\ =\ bVar1;$	+1
+use	TParseContext__parseVectorFields	iVar3	fieldValue	INFERRED	w0 text length; w1 component index recorded for a field; w2 text characters	^\s*iVar3\ =\ \*\(int\ \*\)param_4;$	+1
+use	TParseContext__parseVectorFields	iVar3	fieldValue	INFERRED	w0 text length; w1 component index recorded for a field; w2 text characters	^\s*if\ \(param_3\ <=\ iVar3\)\ \{$	+1
+use	TParseContext__parseVectorFields	iVar3	textCharsB	INFERRED	w0 text length; w1 component index recorded for a field; w2 text characters	^\s*iVar3\ =\ \*\(int\ \*\)\(param_2\ \+\ 4\);$	+2
+use	TParseContext__parseVectorFields	iVar3	textCharsB	INFERRED	w0 text length; w1 component index recorded for a field; w2 text characters	^\s*\*\(byte\ \*\)\(iVar3\ \+\ iVar2\)\ =\ bVar1;$	+1
+use	TParseContext__parseVectorFields	iVar3	textCharsB	INFERRED	w0 text length; w1 component index recorded for a field; w2 text characters	^\s*iVar3\ =\ \*\(int\ \*\)\(param_2\ \+\ 4\);$@2	+2
+local	TParseContext__parseVectorFields	in_r10	fieldIndex	INFERRED	loop counter over the swizzle characters
+local	TParseContext__parseVectorFields	local_24	fieldSets	INFERRED	per-field set id (x/y/z/w, r/g/b/a, s/t/p/q) recorded for the same-set check
+local	TParseContext__parseVectorFields	pcVar5	errorMessage	INFERRED	"vector field selection out of range" and the other error texts
+local	TParseContext__parseVectorFields	pcVar6	errorToken	INFERRED	character pointer of the text, passed to error as the token
+local	TParseContext__parseVectorFields	piVar7	fieldSetCursor	INFERRED	cursor over fieldSets in the validation loop
+use	TParseContext__parseVectorFields	uVar4	fieldSetId	INFERRED	w0 set id of the character (0 xyzw, 1 rgba, 2 stpq, 3 other); w1 1 on success, 0 after an error	^\s*uVar4\ =\ 0;$	+1
+use	TParseContext__parseVectorFields	uVar4	fieldSetId	INFERRED	w0 set id of the character (0 xyzw, 1 rgba, 2 stpq, 3 other); w1 1 on success, 0 after an error	^\s*uVar4\ =\ 1;$	+1
+use	TParseContext__parseVectorFields	uVar4	fieldSetId	INFERRED	w0 set id of the character (0 xyzw, 1 rgba, 2 stpq, 3 other); w1 1 on success, 0 after an error	^\s*uVar4\ =\ 2;$	+1
+use	TParseContext__parseVectorFields	uVar4	fieldSetId	INFERRED	w0 set id of the character (0 xyzw, 1 rgba, 2 stpq, 3 other); w1 1 on success, 0 after an error	^\s*uVar4\ =\ 3;$	+1
+use	TParseContext__parseVectorFields	uVar4	fieldSetId	INFERRED	w0 set id of the character (0 xyzw, 1 rgba, 2 stpq, 3 other); w1 1 on success, 0 after an error	^\s*\*\(undefined4\ \*\)\(param_4\ \+\ in_r10\ \*\ 4\)\ =\ uVar4;$	+1
+use	TParseContext__parseVectorFields	uVar4	result	INFERRED	w0 set id of the character (0 xyzw, 1 rgba, 2 stpq, 3 other); w1 1 on success, 0 after an error	^\s*uVar4\ =\ 1;$@2	+1
+use	TParseContext__parseVectorFields	uVar4	result	INFERRED	w0 set id of the character (0 xyzw, 1 rgba, 2 stpq, 3 other); w1 1 on success, 0 after an error	^\s*uVar4\ =\ 0;$@2	+1
+use	TParseContext__parseVectorFields	uVar4	result	INFERRED	w0 set id of the character (0 xyzw, 1 rgba, 2 stpq, 3 other); w1 1 on success, 0 after an error	^\s*return\ uVar4;$	+1
+local	TParseContext__parseMatrixFields	param_3	matSize	INFERRED	matrix size: row and column selectors must be below it
+local	TParseContext__parseMatrixFields	param_5	line	INFERRED	source line for error messages
+local	TParseContext__parseMatrixFields	cVar1	secondChar	INFERRED	second character of the field text
+local	TParseContext__parseMatrixFields	iVar2	firstChar	INFERRED	first character of the field text
+local	TParseContext__parseMatrixFields	pcVar3	errorMessage	INFERRED	error text ("illegal matrix field selection", ...)
+use	TParseContext__parseMatrixFields	pcVar5	textChars	INFERRED	character pointer of the field text	^\s*pcVar5\ =\ \*\(char\ \*\*\)\(param_2\ \+\ 4\);$	+2
+use	TParseContext__parseMatrixFields	pcVar5	textChars	INFERRED	character pointer of the field text	^\s*iVar2\ =\ \(int\)\*pcVar5;$	+1
+use	TParseContext__parseMatrixFields	pcVar5	textChars	INFERRED	character pointer of the field text	^\s*if\ \(\('/'\ <\ pcVar5\[1\]\)\ \&\&\ \(pcVar5\[1\]\ <\ '4'\)\)\ \{$	+1
+use	TParseContext__parseMatrixFields	pcVar5	textChars	INFERRED	character pointer of the field text	^\s*pcVar5\[2\]\ =\ \*DAT_a7b7ba18;$	+1
+use	TParseContext__parseMatrixFields	pcVar5	textChars	INFERRED	character pointer of the field text	^\s*cVar1\ =\ pcVar5\[1\];$	+1
+use	TParseContext__parseMatrixFields	pcVar5	textChars	INFERRED	character pointer of the field text	^\s*pcVar5\[\*\(int\ \*\)\(pcVar5\ \+\ \-0xc\)\]\ =\ \*DAT_a7b7ba18;$	+1
+use	TParseContext__parseMatrixFields	pcVar5	textChars	INFERRED	character pointer of the field text	^\s*pcVar5\[uVar4\]\ =\ \*DAT_a7b7ba18;$	+1
+use	TParseContext__parseMatrixFields	pcVar5	textChars	INFERRED	character pointer of the field text	^\s*pcVar5\ =\ \*\(char\ \*\*\)\(param_2\ \+\ 4\);$@2	+1
+use	TParseContext__parseMatrixFields	pcVar5	textChars	INFERRED	character pointer of the field text	^\s*pcVar5\ =\ \*\(char\ \*\*\)\(param_2\ \+\ 4\);$@3	+1
+use	TParseContext__parseMatrixFields	pcVar5	textChars	INFERRED	character pointer of the field text	^\s*error\(\(int\)this,\(char\ \*\)param_5,pcVar3,pcVar5,"",this,uVar4,param_5\);$	+1
+local	TParseContext__parseMatrixFields	uVar4	textLengthOrTerminal	INFERRED	text length, then the std::string terminal byte stored after the text (same Ghidra variable)

@@ -1,0 +1,239 @@
+local	yy_get_next_buffer	puVar9	source	INFERRED	flex yy_get_next_buffer: moves the unread tail of the buffer to the start, grows the buffer when full (yy_flex_realloc), reads up to 0x2000 bytes through yylex_CPP, appends the two end-of-buffer NULs
+local	yy_get_next_buffer	puVar8	dest	INFERRED	flex yy_get_next_buffer: moves the unread tail of the buffer to the start, grows the buffer when full (yy_flex_realloc), reads up to 0x2000 bytes through yylex_CPP, appends the two end-of-buffer NULs
+local	yy_get_next_buffer	puVar7	numberToMove	INFERRED	flex yy_get_next_buffer: moves the unread tail of the buffer to the start, grows the buffer when full (yy_flex_realloc), reads up to 0x2000 bytes through yylex_CPP, appends the two end-of-buffer NULs
+local	yy_get_next_buffer	puVar10	moveRemaining	INFERRED	flex yy_get_next_buffer: moves the unread tail of the buffer to the start, grows the buffer when full (yy_flex_realloc), reads up to 0x2000 bytes through yylex_CPP, appends the two end-of-buffer NULs
+local	yy_get_next_buffer	iVar2	b	INFERRED	flex yy_get_next_buffer: moves the unread tail of the buffer to the start, grows the buffer when full (yy_flex_realloc), reads up to 0x2000 bytes through yylex_CPP, appends the two end-of-buffer NULs
+local	yy_get_next_buffer	pvVar4	oldChBuf	INFERRED	flex yy_get_next_buffer: moves the unread tail of the buffer to the start, grows the buffer when full (yy_flex_realloc), reads up to 0x2000 bytes through yylex_CPP, appends the two end-of-buffer NULs
+local	yy_get_next_buffer	uVar6	oldSize	INFERRED	flex yy_get_next_buffer: moves the unread tail of the buffer to the start, grows the buffer when full (yy_flex_realloc), reads up to 0x2000 bytes through yylex_CPP, appends the two end-of-buffer NULs
+local	yy_get_next_buffer	uVar1	ch	INFERRED	flex yy_get_next_buffer: moves the unread tail of the buffer to the start, grows the buffer when full (yy_flex_realloc), reads up to 0x2000 bytes through yylex_CPP, appends the two end-of-buffer NULs
+local	yy_get_previous_state	iVar2	yyCurrentState	INFERRED	flex yy_get_previous_state: replays yytext..yy_c_buf_p through the compressed DFA tables (_yy_base/_yy_chk/_yy_def/_yy_nxt, meta class table at DAT_97c37d83)
+local	yy_get_previous_state	pbVar3	yyCp	INFERRED	flex yy_get_previous_state: replays yytext..yy_c_buf_p through the compressed DFA tables (_yy_base/_yy_chk/_yy_def/_yy_nxt, meta class table at DAT_97c37d83)
+local	yy_get_previous_state	uVar5	yyC	INFERRED	flex yy_get_previous_state: replays yytext..yy_c_buf_p through the compressed DFA tables (_yy_base/_yy_chk/_yy_def/_yy_nxt, meta class table at DAT_97c37d83)
+local	yy_get_previous_state	iVar4	stateOffset	INFERRED	flex yy_get_previous_state: replays yytext..yy_c_buf_p through the compressed DFA tables (_yy_base/_yy_chk/_yy_def/_yy_nxt, meta class table at DAT_97c37d83)
+local	yy_get_previous_state	iVar1	nxtIndex	INFERRED	flex yy_get_previous_state: replays yytext..yy_c_buf_p through the compressed DFA tables (_yy_base/_yy_chk/_yy_def/_yy_nxt, meta class table at DAT_97c37d83)
+local	yy_try_NUL_trans	param_1	yyCurrentState	INFERRED	flex yy_try_NUL_trans: one DFA step on the NUL character; returns 0 for the jam state 0x199
+local	yy_try_NUL_trans	iVar3	stateOffset	INFERRED	flex yy_try_NUL_trans: one DFA step on the NUL character; returns 0 for the jam state 0x199
+local	yy_try_NUL_trans	uVar2	yyC	INFERRED	flex yy_try_NUL_trans: one DFA step on the NUL character; returns 0 for the jam state 0x199
+local	yy_try_NUL_trans	iVar1	nxtIndex	INFERRED	flex yy_try_NUL_trans: one DFA step on the NUL character; returns 0 for the jam state 0x199
+local	yy_create_buffer	param_1	file	INFERRED	flex yy_create_buffer(file,size): 0x28-byte YY_BUFFER_STATE, ch_buf of size+2 bytes, yy_is_our_buffer = 1, yy_init_buffer
+local	yy_create_buffer	param_2	bufSize	INFERRED	flex yy_create_buffer(file,size): 0x28-byte YY_BUFFER_STATE, ch_buf of size+2 bytes, yy_is_our_buffer = 1, yy_init_buffer
+local	yy_create_buffer	pyVar1	b	INFERRED	flex yy_create_buffer(file,size): 0x28-byte YY_BUFFER_STATE, ch_buf of size+2 bytes, yy_is_our_buffer = 1, yy_init_buffer
+local	yy_create_buffer	iVar2	chBuf	INFERRED	flex yy_create_buffer(file,size): 0x28-byte YY_BUFFER_STATE, ch_buf of size+2 bytes, yy_is_our_buffer = 1, yy_init_buffer
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	puVar1	nulCharPtr	INFERRED	TFunction copy constructor (clone with type map): TSymbol copy, own vtable, empty std::vector<TParameter> (+0xc alloc, +0x10 begin, +0x14 finish, +0x18 end), TParameter {TString *name, TType *type} copies (pool-allocated string and TType via copyType), return TType (+0x1c) copy, mangled-name string (+0x44) assign, +0x4c/+0x50
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	piVar2	emptyRepRefCount	INFERRED	TFunction copy constructor (clone with type map): TSymbol copy, own vtable, empty std::vector<TParameter> (+0xc alloc, +0x10 begin, +0x14 finish, +0x18 end), TParameter {TString *name, TType *type} copies (pool-allocated string and TType via copyType), return TType (+0x1c) copy, mangled-name string (+0x44) assign, +0x4c/+0x50
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	puVar7	paramFinish	INFERRED	TFunction copy constructor (clone with type map): TSymbol copy, own vtable, empty std::vector<TParameter> (+0xc alloc, +0x10 begin, +0x14 finish, +0x18 end), TParameter {TString *name, TType *type} copies (pool-allocated string and TType via copyType), return TType (+0x1c) copy, mangled-name string (+0x44) assign, +0x4c/+0x50
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar6	srcParams	INFERRED	TFunction copy constructor (clone with type map): TSymbol copy, own vtable, empty std::vector<TParameter> (+0xc alloc, +0x10 begin, +0x14 finish, +0x18 end), TParameter {TString *name, TType *type} copies (pool-allocated string and TType via copyType), return TType (+0x1c) copy, mangled-name string (+0x44) assign, +0x4c/+0x50
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar10	srcParamName	INFERRED	TFunction copy constructor (clone with type map): TSymbol copy, own vtable, empty std::vector<TParameter> (+0xc alloc, +0x10 begin, +0x14 finish, +0x18 end), TParameter {TString *name, TType *type} copies (pool-allocated string and TType via copyType), return TType (+0x1c) copy, mangled-name string (+0x44) assign, +0x4c/+0x50
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar9	srcNameData	INFERRED	TFunction copy constructor (clone with type map): TSymbol copy, own vtable, empty std::vector<TParameter> (+0xc alloc, +0x10 begin, +0x14 finish, +0x18 end), TParameter {TString *name, TType *type} copies (pool-allocated string and TType via copyType), return TType (+0x1c) copy, mangled-name string (+0x44) assign, +0x4c/+0x50
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pcVar12	nameText	INFERRED	TFunction copy constructor (clone with type map): TSymbol copy, own vtable, empty std::vector<TParameter> (+0xc alloc, +0x10 begin, +0x14 finish, +0x18 end), TParameter {TString *name, TType *type} copies (pool-allocated string and TType via copyType), return TType (+0x1c) copy, mangled-name string (+0x44) assign, +0x4c/+0x50
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pTVar13	srcParamType	INFERRED	TFunction copy constructor (clone with type map): TSymbol copy, own vtable, empty std::vector<TParameter> (+0xc alloc, +0x10 begin, +0x14 finish, +0x18 end), TParameter {TString *name, TType *type} copies (pool-allocated string and TType via copyType), return TType (+0x1c) copy, mangled-name string (+0x44) assign, +0x4c/+0x50
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar11	paramIdx	INFERRED	TFunction copy constructor (clone with type map): TSymbol copy, own vtable, empty std::vector<TParameter> (+0xc alloc, +0x10 begin, +0x14 finish, +0x18 end), TParameter {TString *name, TType *type} copies (pool-allocated string and TType via copyType), return TType (+0x1c) copy, mangled-name string (+0x44) assign, +0x4c/+0x50
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	this_00	nameStrMem	INFERRED	TFunction copy constructor (clone with type map): TSymbol copy, own vtable, empty std::vector<TParameter> (+0xc alloc, +0x10 begin, +0x14 finish, +0x18 end), TParameter {TString *name, TType *type} copies (pool-allocated string and TType via copyType), return TType (+0x1c) copy, mangled-name string (+0x44) assign, +0x4c/+0x50
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pvVar3	nameString	INFERRED	TFunction copy constructor (clone with type map): TSymbol copy, own vtable, empty std::vector<TParameter> (+0xc alloc, +0x10 begin, +0x14 finish, +0x18 end), TParameter {TString *name, TType *type} copies (pool-allocated string and TType via copyType), return TType (+0x1c) copy, mangled-name string (+0x44) assign, +0x4c/+0x50
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	this_01	paramType	INFERRED	TFunction copy constructor (clone with type map): TSymbol copy, own vtable, empty std::vector<TParameter> (+0xc alloc, +0x10 begin, +0x14 finish, +0x18 end), TParameter {TString *name, TType *type} copies (pool-allocated string and TType via copyType), return TType (+0x1c) copy, mangled-name string (+0x44) assign, +0x4c/+0x50
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	local_60	emptyParamName	INFERRED	TFunction copy constructor (clone with type map): TSymbol copy, own vtable, empty std::vector<TParameter> (+0xc alloc, +0x10 begin, +0x14 finish, +0x18 end), TParameter {TString *name, TType *type} copies (pool-allocated string and TType via copyType), return TType (+0x1c) copy, mangled-name string (+0x44) assign, +0x4c/+0x50
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	local_5c	emptyParamType	INFERRED	TFunction copy constructor (clone with type map): TSymbol copy, own vtable, empty std::vector<TParameter> (+0xc alloc, +0x10 begin, +0x14 finish, +0x18 end), TParameter {TString *name, TType *type} copies (pool-allocated string and TType via copyType), return TType (+0x1c) copy, mangled-name string (+0x44) assign, +0x4c/+0x50
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	local_50	nameCtorAlloc	INFERRED	TFunction copy constructor (clone with type map): TSymbol copy, own vtable, empty std::vector<TParameter> (+0xc alloc, +0x10 begin, +0x14 finish, +0x18 end), TParameter {TString *name, TType *type} copies (pool-allocated string and TType via copyType), return TType (+0x1c) copy, mangled-name string (+0x44) assign, +0x4c/+0x50
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	puVar1	nulCharPtr	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	piVar2	emptyRepRefCount	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	puVar7	paramFinish	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar6	srcParams	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar10	srcParamName	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar9	srcNameData	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pcVar12	nameText	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pTVar13	srcParamType	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar11	paramIdx	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	this_00	nameStrMem	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pvVar3	nameString	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	this_01	paramType	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	puVar1	nulCharPtr	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	piVar2	emptyRepRefCount	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	puVar7	paramFinish	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar6	srcParams	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar10	srcParamName	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	iVar9	srcNameData	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pcVar12	nameText	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pTVar13	srcParamType	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar11	paramIdx	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	this_00	nameStrMem	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pvVar3	nameString	INFERRED	TFunction copy constructor (alias of C4)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	this_01	paramType	INFERRED	TFunction copy constructor (alias of C4)
+local	TSymbolTableLevel__clone	puVar4	newLevel	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTableLevel__clone	puVar5	headerNode	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTableLevel__clone	local_80	treeEnd	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTableLevel__clone	local_90	iter	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTableLevel__clone	piVar6	clonedSymbol	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTableLevel__clone	psVar7	symbolName	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTableLevel__clone	local_50	nameCopyAlloc	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTableLevel__clone	local_4c	nameCopyData	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTableLevel__clone	local_48	pairSymbol	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTableLevel__clone	local_70	insertIter	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTableLevel__clone	local_60	insertResultAlloc	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTableLevel__clone	local_5c	insertResultData	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTableLevel__clone	local_40	destroyAlloc	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTableLevel__clone	in_r6	staleR6	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTableLevel__clone	in_r7	staleR7	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTableLevel__clone	in_r8	staleR8	INFERRED	TSymbolTableLevel::clone(map): new level (std::map<TString,TSymbol*> of 0x10 bytes) filled with each symbol's virtual clone(map)
+local	TSymbolTable__copyTable	puVar4	treeHeader	INFERRED	TSymbolTable::copyTable(other): clones each level of the other table (TSymbolTableLevel::clone with a fresh std::map<TVector<TTypeLine>*,..> type map) and appends them
+local	TSymbolTable__copyTable	local_60	typeMap	INFERRED	TSymbolTable::copyTable(other): clones each level of the other table (TSymbolTableLevel::clone with a fresh std::map<TVector<TTypeLine>*,..> type map) and appends them
+local	TSymbolTable__copyTable	local_5c	typeMapCount	INFERRED	TSymbolTable::copyTable(other): clones each level of the other table (TSymbolTableLevel::clone with a fresh std::map<TVector<TTypeLine>*,..> type map) and appends them
+local	TSymbolTable__copyTable	local_30	clonedLevel	INFERRED	TSymbolTable::copyTable(other): clones each level of the other table (TSymbolTableLevel::clone with a fresh std::map<TVector<TTypeLine>*,..> type map) and appends them
+local	_ShGetInfoLog	param_1	handle	INFERRED	ShGetInfoLog(handle): the info sink of the compiler (vtable slot 2) or of the linker (slot 3), NUL-terminated and returned
+local	_ShGetInfoLog	puVar1	terminalPtr	INFERRED	ShGetInfoLog(handle): the info sink of the compiler (vtable slot 2) or of the linker (slot 3), NUL-terminated and returned
+local	_ShGetInfoLog	piVar3	infoSink	INFERRED	ShGetInfoLog(handle): the info sink of the compiler (vtable slot 2) or of the linker (slot 3), NUL-terminated and returned
+local	_ShGetInfoLog	iVar4	result	INFERRED	ShGetInfoLog(handle): the info sink of the compiler (vtable slot 2) or of the linker (slot 3), NUL-terminated and returned
+local	_ShGetActiveUniform	param_1	handle	INFERRED	ShGetActiveUniform(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveUniform
+local	_ShGetActiveUniform	param_2	index	INFERRED	ShGetActiveUniform(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveUniform
+local	_ShGetActiveUniform	param_3	maxLength	INFERRED	ShGetActiveUniform(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveUniform
+local	_ShGetActiveUniform	param_4	lengthOut	INFERRED	ShGetActiveUniform(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveUniform
+local	_ShGetActiveUniform	param_5	sizeOut	INFERRED	ShGetActiveUniform(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveUniform
+local	_ShGetActiveUniform	param_6	typeOut	INFERRED	ShGetActiveUniform(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveUniform
+local	_ShGetActiveUniform	this	linkerObj	INFERRED	ShGetActiveUniform(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveUniform
+local	_ShGetActiveUniform	uVar1	result	INFERRED	ShGetActiveUniform(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveUniform
+local	_ShGetUniformTypeInfo	param_1	handle	INFERRED	ShGetUniformTypeInfo(handle,index,...) = TGenericLinker::getUniformTypeInfo
+local	_ShGetUniformTypeInfo	param_2	index	INFERRED	ShGetUniformTypeInfo(handle,index,...) = TGenericLinker::getUniformTypeInfo
+local	_ShGetUniformTypeInfo	this	linkerObj	INFERRED	ShGetUniformTypeInfo(handle,index,...) = TGenericLinker::getUniformTypeInfo
+local	_ShGetUniformTypeInfo	uVar1	result	INFERRED	ShGetUniformTypeInfo(handle,index,...) = TGenericLinker::getUniformTypeInfo
+local	TType__buildMangledName	a1	staleR4	INFERRED	TType::buildMangledName(text): 'm' matrix / 'v' vector prefix, basic type 'f','i','b' or sampler code ('s1','s2','s3','sC','sS1','sS2','sR2','sSR2') or "struct-<name>-<field mangled names>", nominal size digit, "[n]" for arrays
+local	TType__buildMangledName	uVar3	mangleChar	INFERRED	TType::buildMangledName(text): 'm' matrix / 'v' vector prefix, basic type 'f','i','b' or sampler code ('s1','s2','s3','sC','sS1','sS2','sR2','sSR2') or "struct-<name>-<field mangled names>", nominal size digit, "[n]" for arrays
+local	TType__buildMangledName	pcVar4	typeCode	INFERRED	TType::buildMangledName(text): 'm' matrix / 'v' vector prefix, basic type 'f','i','b' or sampler code ('s1','s2','s3','sC','sS1','sS2','sR2','sSR2') or "struct-<name>-<field mangled names>", nominal size digit, "[n]" for arrays
+local	TType__buildMangledName	uVar5	fieldIdx	INFERRED	TType::buildMangledName(text): 'm' matrix / 'v' vector prefix, basic type 'f','i','b' or sampler code ('s1','s2','s3','sC','sS1','sS2','sR2','sSR2') or "struct-<name>-<field mangled names>", nominal size digit, "[n]" for arrays
+local	TType__buildMangledName	acStack_20	sizeText	INFERRED	TType::buildMangledName(text): 'm' matrix / 'v' vector prefix, basic type 'f','i','b' or sampler code ('s1','s2','s3','sC','sS1','sS2','sR2','sSR2') or "struct-<name>-<field mangled names>", nominal size digit, "[n]" for arrays
+local	TSymbolTable__dump	this_00	sinkBase	INFERRED	TSymbolTable::dump(infoSink): prints "LEVEL <n>" and dumps each level from the innermost outwards
+local	TSymbolTable__dump	iVar4	levelIdx	INFERRED	TSymbolTable::dump(infoSink): prints "LEVEL <n>" and dumps each level from the innermost outwards
+local	TSymbolTable__dump	local_70	levelNumStrAlloc	INFERRED	TSymbolTable::dump(infoSink): prints "LEVEL <n>" and dumps each level from the innermost outwards
+local	TSymbolTable__dump	local_6c	levelNumStrData	INFERRED	TSymbolTable::dump(infoSink): prints "LEVEL <n>" and dumps each level from the innermost outwards
+local	TSymbolTable__dump	acStack_60	levelText	INFERRED	TSymbolTable::dump(infoSink): prints "LEVEL <n>" and dumps each level from the innermost outwards
+local	TSymbolTable__dump	local_50	ctorAlloc	INFERRED	TSymbolTable::dump(infoSink): prints "LEVEL <n>" and dumps each level from the innermost outwards
+local	TSymbolTable__dump	local_40	destroyAlloc	INFERRED	TSymbolTable::dump(infoSink): prints "LEVEL <n>" and dumps each level from the innermost outwards
+local	TSymbolTableLevel__relateToOperator	local_30	treeEnd	INFERRED	TSymbolTableLevel::relateToOperator(name,op): for every function symbol whose name compares equal, stores the operator (symbol +0x4c)
+local	TSymbolTableLevel__relateToOperator	local_40	iter	INFERRED	TSymbolTableLevel::relateToOperator(name,op): for every function symbol whose name compares equal, stores the operator (symbol +0x4c)
+local	TSymbolTableLevel__relateToOperator	iVar2	symbol	INFERRED	TSymbolTableLevel::relateToOperator(name,op): for every function symbol whose name compares equal, stores the operator (symbol +0x4c)
+local	__ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	this_00	poolAllocator	INFERRED	TVariable copy constructor (SymbolTable.cpp): type.copyType, userType (+0x34), unionArray (+0x38, a one-element constUnion array copied by basic type), arrayInformationType (+0x3c) must be 0; assertion messages are from the original source
+local	__ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	puVar3	unionArray	INFERRED	TVariable copy constructor (SymbolTable.cpp): type.copyType, userType (+0x34), unionArray (+0x38, a one-element constUnion array copied by basic type), arrayInformationType (+0x3c) must be 0; assertion messages are from the original source
+local	__ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar4	assertLine	INFERRED	TVariable copy constructor (SymbolTable.cpp): type.copyType, userType (+0x34), unionArray (+0x38, a one-element constUnion array copied by basic type), arrayInformationType (+0x3c) must be 0; assertion messages are from the original source
+local	__ZN9TVariableC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pcVar5	assertText	INFERRED	TVariable copy constructor (SymbolTable.cpp): type.copyType, userType (+0x34), unionArray (+0x38, a one-element constUnion array copied by basic type), arrayInformationType (+0x3c) must be 0; assertion messages are from the original source
+local	__ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	this_00	poolAllocator	INFERRED	TVariable copy constructor (alias of C4)
+local	__ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	puVar3	unionArray	INFERRED	TVariable copy constructor (alias of C4)
+local	__ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar4	assertLine	INFERRED	TVariable copy constructor (alias of C4)
+local	__ZN9TVariableC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pcVar5	assertText	INFERRED	TVariable copy constructor (alias of C4)
+local	__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	this_00	poolAllocator	INFERRED	TVariable copy constructor (alias of C4)
+local	__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	puVar3	unionArray	INFERRED	TVariable copy constructor (alias of C4)
+local	__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	uVar4	assertLine	INFERRED	TVariable copy constructor (alias of C4)
+local	__ZN9TVariableC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	pcVar5	assertText	INFERRED	TVariable copy constructor (alias of C4)
+local	__ZN9TFunctionD4Ev	iVar4	paramPtr	INFERRED	TFunction destructor: destroys each parameter's TType (vtable slot 1), releases the mangled-name string (+0x44/+0x48), restores the TSymbol vtable
+local	__ZN9TFunctionD4Ev	piVar3	paramType	INFERRED	TFunction destructor: destroys each parameter's TType (vtable slot 1), releases the mangled-name string (+0x44/+0x48), restores the TSymbol vtable
+local	__ZN9TFunctionD4Ev	iVar2	paramEnd	INFERRED	TFunction destructor: destroys each parameter's TType (vtable slot 1), releases the mangled-name string (+0x44/+0x48), restores the TSymbol vtable
+local	__ZN17TSymbolTableLevelD4Ev	a0	symbol	INFERRED	TSymbolTableLevel destructor: deletes every symbol of the std::map (vtable slot 1) then clears the tree
+local	__ZN17TSymbolTableLevelD4Ev	in_r5	staleR5	INFERRED	TSymbolTableLevel destructor: deletes every symbol of the std::map (vtable slot 1) then clears the tree
+local	__ZN17TSymbolTableLevelD4Ev	in_r6	staleR6	INFERRED	TSymbolTableLevel destructor: deletes every symbol of the std::map (vtable slot 1) then clears the tree
+local	__ZN17TSymbolTableLevelD4Ev	in_r7	staleR7	INFERRED	TSymbolTableLevel destructor: deletes every symbol of the std::map (vtable slot 1) then clears the tree
+local	__ZN17TSymbolTableLevelD4Ev	in_r8	staleR8	INFERRED	TSymbolTableLevel destructor: deletes every symbol of the std::map (vtable slot 1) then clears the tree
+local	__ZN17TSymbolTableLevelD4Ev	local_30	iter	INFERRED	TSymbolTableLevel destructor: deletes every symbol of the std::map (vtable slot 1) then clears the tree
+local	__ZN17TSymbolTableLevelD4Ev	local_20	treeEnd	INFERRED	TSymbolTableLevel destructor: deletes every symbol of the std::map (vtable slot 1) then clears the tree
+local	__ZN7TSymbolC4ERKS_	iVar3	srcName	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC4ERKS_	iVar4	srcNameData	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC4ERKS_	pcVar5	nameText	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC4ERKS_	this_00	poolAllocator	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC4ERKS_	this_01	nameMem	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC4ERKS_	pvVar2	newName	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC4ERKS_	uVar1	uniqueId	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC4ERKS_	local_30	ctorAlloc	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC2ERKS_	iVar3	srcName	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC2ERKS_	iVar4	srcNameData	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC2ERKS_	pcVar5	nameText	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC2ERKS_	this_00	poolAllocator	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC2ERKS_	this_01	nameMem	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC2ERKS_	pvVar2	newName	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC2ERKS_	uVar1	uniqueId	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC1ERKS_	iVar3	srcName	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC1ERKS_	iVar4	srcNameData	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC1ERKS_	pcVar5	nameText	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC1ERKS_	this_00	poolAllocator	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC1ERKS_	this_01	nameMem	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC1ERKS_	pvVar2	newName	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	__ZN7TSymbolC1ERKS_	uVar1	uniqueId	INFERRED	TSymbol copy constructor: pool-allocated copy of the name string (+4) and the unique id (+8)
+local	_ShAttributeBindingRequest	param_1	handle	INFERRED	ShAttributeBindingRequest(handle,index,name) = TGenericLinker::attributeBindingRequest
+local	_ShAttributeBindingRequest	param_2	index	INFERRED	ShAttributeBindingRequest(handle,index,name) = TGenericLinker::attributeBindingRequest
+local	_ShAttributeBindingRequest	this	linkerObj	INFERRED	ShAttributeBindingRequest(handle,index,name) = TGenericLinker::attributeBindingRequest
+local	_ShGetNumActiveAttributes	param_1	handle	INFERRED	ShGetNumActiveAttributes(handle): linker binding table (linker+4) active attribute binding count
+local	_ShGetNumActiveAttributes	iVar1	linkerObj	INFERRED	ShGetNumActiveAttributes(handle): linker binding table (linker+4) active attribute binding count
+local	_ShGetNumActiveAttributes	uVar2	result	INFERRED	ShGetNumActiveAttributes(handle): linker binding table (linker+4) active attribute binding count
+local	_ShGetActiveUserUniformsSize	param_1	handle	INFERRED	ShGetActiveUserUniformsSize(handle): linker binding table (linker+4) size of active user uniforms
+local	_ShGetActiveUserUniformsSize	iVar1	linkerObj	INFERRED	ShGetActiveUserUniformsSize(handle): linker binding table (linker+4) size of active user uniforms
+local	_ShGetActiveUserUniformsSize	uVar2	result	INFERRED	ShGetActiveUserUniformsSize(handle): linker binding table (linker+4) size of active user uniforms
+local	_ShGetActiveAttrib	param_1	handle	INFERRED	ShGetActiveAttrib(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveAttrib
+local	_ShGetActiveAttrib	param_2	index	INFERRED	ShGetActiveAttrib(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveAttrib
+local	_ShGetActiveAttrib	param_3	maxLength	INFERRED	ShGetActiveAttrib(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveAttrib
+local	_ShGetActiveAttrib	param_4	lengthOut	INFERRED	ShGetActiveAttrib(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveAttrib
+local	_ShGetActiveAttrib	param_5	sizeOut	INFERRED	ShGetActiveAttrib(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveAttrib
+local	_ShGetActiveAttrib	param_6	typeOut	INFERRED	ShGetActiveAttrib(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveAttrib
+local	_ShGetActiveAttrib	this	linkerObj	INFERRED	ShGetActiveAttrib(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveAttrib
+local	_ShGetActiveAttrib	uVar1	result	INFERRED	ShGetActiveAttrib(handle,index,maxLength,length,size,type,name) = TGenericLinker::getActiveAttrib
+local	_ShGetCompilerStats	param_1	handle	INFERRED	ShGetCompilerStats(handle): compiler (vtable slot 2) virtual method at slot 9
+local	_ShGetCompilerStats	a0	compiler	INFERRED	ShGetCompilerStats(handle): compiler (vtable slot 2) virtual method at slot 9
+local	_ShGetCompilerStats	uVar1	result	INFERRED	ShGetCompilerStats(handle): compiler (vtable slot 2) virtual method at slot 9
+local	_ShGetLinkerPPStream	param_1	handle	INFERRED	ShGetLinkerPPStream(handle) = TGenericLinker::getPPStreamString
+local	_ShGetLinkerPPStream	this	linkerObj	INFERRED	ShGetLinkerPPStream(handle) = TGenericLinker::getPPStreamString
+local	_ShGetLinkerPPStream	uVar1	result	INFERRED	ShGetLinkerPPStream(handle) = TGenericLinker::getPPStreamString
+local	TVariable__dump	iVar2	symbolName	INFERRED	TVariable::dump(infoSink): "<name>: <qualifier> <basic type>[0]\n"
+local	TVariable__dump	iVar3	nameData	INFERRED	TVariable::dump(infoSink): "<name>: <qualifier> <basic type>[0]\n"
+local	yyrestart	param_1	inputFile	INFERRED	flex yyrestart(file): creates the buffer if needed, yy_init_buffer(buffer,file), yy_load_buffer_state
+local	yylex	param_2	parseContext	INFERRED	flex-generated yylex of the GLSL scanner: DFA tables _yy_base/_yy_chk/_yy_def/_yy_nxt, token codes returned per action, yylval filled at param_1 (line at +0, value at +4, symbol at +8)
+local	yylex	pbVar11	yyBp	INFERRED	flex-generated yylex of the GLSL scanner: DFA tables _yy_base/_yy_chk/_yy_def/_yy_nxt, token codes returned per action, yylval filled at param_1 (line at +0, value at +4, symbol at +8)
+local	yylex	pbVar14	yyCp	INFERRED	flex-generated yylex of the GLSL scanner: DFA tables _yy_base/_yy_chk/_yy_def/_yy_nxt, token codes returned per action, yylval filled at param_1 (line at +0, value at +4, symbol at +8)
+local	yylex	iVar8	stateOffset	INFERRED	flex-generated yylex of the GLSL scanner: DFA tables _yy_base/_yy_chk/_yy_def/_yy_nxt, token codes returned per action, yylval filled at param_1 (line at +0, value at +4, symbol at +8)
+local	yylex	iVar1	nxtIndex	INFERRED	flex-generated yylex of the GLSL scanner: DFA tables _yy_base/_yy_chk/_yy_def/_yy_nxt, token codes returned per action, yylval filled at param_1 (line at +0, value at +4, symbol at +8)
+local	yylex	puVar10	yyDefPtr	INFERRED	flex-generated yylex of the GLSL scanner: DFA tables _yy_base/_yy_chk/_yy_def/_yy_nxt, token codes returned per action, yylval filled at param_1 (line at +0, value at +4, symbol at +8)
+local	yylex	pcVar3	tokenLine	INFERRED	flex-generated yylex of the GLSL scanner: DFA tables _yy_base/_yy_chk/_yy_def/_yy_nxt, token codes returned per action, yylval filled at param_1 (line at +0, value at +4, symbol at +8)
+local	yylex	pbVar2	matchStart	INFERRED	flex-generated yylex of the GLSL scanner: DFA tables _yy_base/_yy_chk/_yy_def/_yy_nxt, token codes returned per action, yylval filled at param_1 (line at +0, value at +4, symbol at +8)
+local	yylex	this	identMem	INFERRED	flex-generated yylex of the GLSL scanner: DFA tables _yy_base/_yy_chk/_yy_def/_yy_nxt, token codes returned per action, yylval filled at param_1 (line at +0, value at +4, symbol at +8)
+local	yylex	psVar4	identString	INFERRED	flex-generated yylex of the GLSL scanner: DFA tables _yy_base/_yy_chk/_yy_def/_yy_nxt, token codes returned per action, yylval filled at param_1 (line at +0, value at +4, symbol at +8)
+local	yylex	local_70	identCtorAlloc	INFERRED	flex-generated yylex of the GLSL scanner: DFA tables _yy_base/_yy_chk/_yy_def/_yy_nxt, token codes returned per action, yylval filled at param_1 (line at +0, value at +4, symbol at +8)
+local	yylex	this_00	stringMem	INFERRED	flex-generated yylex of the GLSL scanner: DFA tables _yy_base/_yy_chk/_yy_def/_yy_nxt, token codes returned per action, yylval filled at param_1 (line at +0, value at +4, symbol at +8)
+local	yylex	local_60	stringCtorAlloc	INFERRED	flex-generated yylex of the GLSL scanner: DFA tables _yy_base/_yy_chk/_yy_def/_yy_nxt, token codes returned per action, yylval filled at param_1 (line at +0, value at +4, symbol at +8)
+local	yylex	lVar5	intValue	INFERRED	flex-generated yylex of the GLSL scanner: DFA tables _yy_base/_yy_chk/_yy_def/_yy_nxt, token codes returned per action, yylval filled at param_1 (line at +0, value at +4, symbol at +8)
+local	yylex	dVar15	floatValue	INFERRED	flex-generated yylex of the GLSL scanner: DFA tables _yy_base/_yy_chk/_yy_def/_yy_nxt, token codes returned per action, yylval filled at param_1 (line at +0, value at +4, symbol at +8)
+local	_ShGetPPStream	param_1	handle	INFERRED	_ShGetPPStream wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetPPStream	a0	compilerObj	INFERRED	_ShGetPPStream wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetPPStream	uVar1	result	INFERRED	_ShGetPPStream wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetShaderLocalParamRemapTable	param_1	handle	INFERRED	_ShGetShaderLocalParamRemapTable wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetShaderLocalParamRemapTable	this	linkerObj	INFERRED	_ShGetShaderLocalParamRemapTable wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetShaderLocalParamRemapTable	uVar1	result	INFERRED	_ShGetShaderLocalParamRemapTable wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetNumShaderLocalParams	param_1	handle	INFERRED	_ShGetNumShaderLocalParams wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetNumShaderLocalParams	this	linkerObj	INFERRED	_ShGetNumShaderLocalParams wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetNumShaderLocalParams	uVar1	result	INFERRED	_ShGetNumShaderLocalParams wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetNumActiveUniforms	param_1	handle	INFERRED	_ShGetNumActiveUniforms wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetNumActiveUniforms	iVar1	linkerObj	INFERRED	_ShGetNumActiveUniforms wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetNumActiveUniforms	uVar2	result	INFERRED	_ShGetNumActiveUniforms wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetMaxAttributeLength	param_1	handle	INFERRED	_ShGetMaxAttributeLength wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetMaxAttributeLength	iVar1	linkerObj	INFERRED	_ShGetMaxAttributeLength wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetMaxAttributeLength	uVar2	result	INFERRED	_ShGetMaxAttributeLength wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetMaxUniformLength	param_1	handle	INFERRED	_ShGetMaxUniformLength wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetMaxUniformLength	iVar1	linkerObj	INFERRED	_ShGetMaxUniformLength wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetMaxUniformLength	uVar2	result	INFERRED	_ShGetMaxUniformLength wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetAttribLocation	param_1	handle	INFERRED	_ShGetAttribLocation wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetAttribLocation	iVar1	linkerObj	INFERRED	_ShGetAttribLocation wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetUniformLocation	param_1	handle	INFERRED	_ShGetUniformLocation wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetUniformLocation	iVar1	linkerObj	INFERRED	_ShGetUniformLocation wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetPPStreamManager	param_1	handle	INFERRED	_ShGetPPStreamManager wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetPPStreamManager	this	linkerObj	INFERRED	_ShGetPPStreamManager wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetPPStreamManager	uVar1	result	INFERRED	_ShGetPPStreamManager wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetLinkerStats	param_1	handle	INFERRED	_ShGetLinkerStats wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetLinkerStats	this	linkerObj	INFERRED	_ShGetLinkerStats wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetLinkerStats	uVar1	result	INFERRED	_ShGetLinkerStats wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetCompilerPPStream	param_1	handle	INFERRED	_ShGetCompilerPPStream wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetCompilerPPStream	a0	compilerObj	INFERRED	_ShGetCompilerPPStream wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetCompilerPPStream	uVar1	result	INFERRED	_ShGetCompilerPPStream wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetLinkerShaderToProgramString	param_1	handle	INFERRED	_ShGetLinkerShaderToProgramString wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetLinkerShaderToProgramString	this	linkerObj	INFERRED	_ShGetLinkerShaderToProgramString wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetLinkerShaderToProgramString	uVar1	result	INFERRED	_ShGetLinkerShaderToProgramString wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetCompilerShaderToProgramString	param_1	handle	INFERRED	_ShGetCompilerShaderToProgramString wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetCompilerShaderToProgramString	a0	compilerObj	INFERRED	_ShGetCompilerShaderToProgramString wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetCompilerShaderToProgramString	uVar1	result	INFERRED	_ShGetCompilerShaderToProgramString wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetLinkerBindingTable	param_1	handle	INFERRED	_ShGetLinkerBindingTable wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetLinkerBindingTable	this	linkerObj	INFERRED	_ShGetLinkerBindingTable wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetLinkerBindingTable	uVar1	result	INFERRED	_ShGetLinkerBindingTable wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetCompilerSymbolTable	param_1	handle	INFERRED	_ShGetCompilerSymbolTable wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetCompilerSymbolTable	a0	compilerObj	INFERRED	_ShGetCompilerSymbolTable wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)
+local	_ShGetCompilerSymbolTable	uVar1	result	INFERRED	_ShGetCompilerSymbolTable wrapper over the compiler/linker object behind the shader handle (vtable slot 2 = compiler, 3 = linker)

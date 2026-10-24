@@ -1,0 +1,3 @@
+local	TPPStreamCompiler__equalOperands	ppPVar13	operandAArg	INFERRED	register copy of the 3rd call argument: operand A (param_3) first, later the address of sub-operand slot 2 for the recursive equalOperands call
+local	TPPStreamCompiler__equalOperands	a3	operandBArg	INFERRED	register copy of the 4th call argument: operand B (param_4) first, later the address of sub-operand slot 3 for the recursive call
+use	TPPStreamCompiler__equalOperands	iVar18	isEqualTestArg	CONFIRMED	copy of param_5 (isEqualTest) forwarded as the 5th argument of the getOperandAs*Var and recursive calls	iVar18 = param_5;@1	

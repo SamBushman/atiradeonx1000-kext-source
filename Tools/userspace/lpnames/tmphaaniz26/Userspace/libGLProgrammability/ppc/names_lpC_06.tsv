@@ -1,0 +1,178 @@
+local	TIntermUnary__promote	bVar1	operandTypeMatches	INFERRED	operand basic type equals the one the operator requires (float / int / bool)
+use	TIntermUnary__promote	iVar2	op	INFERRED	w0 TIntermOperator operator (+0x30); others operand->getBasicType() (vtable +0x40)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x30\);$	+2
+use	TIntermUnary__promote	iVar2	op	INFERRED	w0 TIntermOperator operator (+0x30); others operand->getBasicType() (vtable +0x40)	^\s*if\ \(iVar2\ <\ 9\)\ \{$	+2
+use	TIntermUnary__promote	iVar2	op	INFERRED	w0 TIntermOperator operator (+0x30); others operand->getBasicType() (vtable +0x40)	^\s*if\ \(6\ <\ iVar2\)\ \{$	+1
+use	TIntermUnary__promote	iVar2	op	INFERRED	w0 TIntermOperator operator (+0x30); others operand->getBasicType() (vtable +0x40)	^\s*if\ \(iVar2\ !=\ 5\)\ goto\ LAB_97b90544;$	+1
+use	TIntermUnary__promote	iVar2	op	INFERRED	w0 TIntermOperator operator (+0x30); others operand->getBasicType() (vtable +0x40)	^\s*else\ if\ \(0xc\ <\ iVar2\)\ \{$	+2
+use	TIntermUnary__promote	iVar2	operandBasicType	INFERRED	w0 TIntermOperator operator (+0x30); others operand->getBasicType() (vtable +0x40)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 0x34\)\ \+\ 0x40\)\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0x34\)\);$	+2
+use	TIntermUnary__promote	iVar2	operandBasicType	INFERRED	w0 TIntermOperator operator (+0x30); others operand->getBasicType() (vtable +0x40)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 0x34\)\ \+\ 0x40\)\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0x34\)\);$@2	+2
+use	TIntermUnary__promote	iVar2	operandBasicType	INFERRED	w0 TIntermOperator operator (+0x30); others operand->getBasicType() (vtable +0x40)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 0x34\)\ \+\ 0x40\)\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0x34\)\);$@3	+2
+use	TIntermUnary__promote	iVar2	operandBasicType	INFERRED	w0 TIntermOperator operator (+0x30); others operand->getBasicType() (vtable +0x40)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 0x34\)\ \+\ 0x40\)\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0x34\)\);$@4	+2
+local	TIntermUnary__promote	local_40	operandType	INFERRED	copy of the operand type (TType, 0x38 bytes) passed to setType
+local	TIntermBinary__promote	param_3	scratchR5	UNKNOWN	register leftover forwarded through the vtable calls
+local	TIntermBinary__promote	param_4	scratchR6	UNKNOWN	register leftover forwarded through the vtable calls
+local	TIntermBinary__promote	param_5	scratchR7	UNKNOWN	register leftover forwarded through the vtable calls
+local	TIntermBinary__promote	param_6	scratchR8	UNKNOWN	register leftover forwarded through the vtable calls
+use	TIntermBinary__promote	iVar11	rightBasicType	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x38\)\ \+\ 0x40\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x38\)\);$	+2
+use	TIntermBinary__promote	iVar11	rightMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x38\)\ \+\ 0x50\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x38\)\);$	+2
+use	TIntermBinary__promote	iVar11	leftMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x34\)\ \+\ 0x50\)\)$	+1
+use	TIntermBinary__promote	iVar11	leftMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*if\ \(\(iVar11\ ==\ 0\)\ \&\&$	+3
+use	TIntermBinary__promote	iVar11	leftMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x34\)\ \+\ 0x50\)\)$@2	+1
+use	TIntermBinary__promote	iVar11	leftMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*if\ \(\(iVar11\ ==\ 0\)\ \|\|$	+3
+use	TIntermBinary__promote	iVar11	leftMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x34\)\ \+\ 0x50\)\)$@3	+1
+use	TIntermBinary__promote	iVar11	leftMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*if\ \(iVar11\ !=\ 0\)\ \{$	+1
+use	TIntermBinary__promote	iVar11	rightMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x38\)\ \+\ 0x50\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x38\)\);$@2	+1
+use	TIntermBinary__promote	iVar11	rightMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*if\ \(iVar11\ !=\ 0\)\ goto\ LAB_97b9100c;$	+1
+use	TIntermBinary__promote	iVar11	leftMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x34\)\ \+\ 0x50\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x34\)\);$	+1
+use	TIntermBinary__promote	iVar11	leftMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*if\ \(\(iVar11\ !=\ 0\)\ \|\|$	+3
+use	TIntermBinary__promote	iVar11	rightBasicType	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x38\)\ \+\ 0x40\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x38\)\);$@2	+2
+use	TIntermBinary__promote	iVar11	leftMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x34\)\ \+\ 0x50\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x34\),uVar4\);$	+4
+use	TIntermBinary__promote	iVar11	leftMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x34\)\ \+\ 0x50\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x34\)\);$@2	+4
+use	TIntermBinary__promote	iVar11	leftMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x34\)\ \+\ 0x50\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x34\)\);$@3	+4
+use	TIntermBinary__promote	iVar11	leftMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x34\)\ \+\ 0x50\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x34\)\);$@4	+1
+use	TIntermBinary__promote	iVar11	leftMatrixFlag	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*if\ \(\(iVar11\ !=\ 0\)\ \|\|$@2	+3
+use	TIntermBinary__promote	iVar11	rightNominalSize	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x38\)\ \+\ 0x48\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x38\)\);$	+2
+use	TIntermBinary__promote	iVar11	rightBasicType	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x38\)\ \+\ 0x40\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x38\)\);$@3	+2
+use	TIntermBinary__promote	iVar11	resultIsMatrix	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ 0;$	+1
+use	TIntermBinary__promote	iVar11	resultIsMatrix	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*iVar11\ =\ 1;$	+1
+use	TIntermBinary__promote	iVar11	resultIsMatrix	INFERRED	left = this+0x34, right = this+0x38; vtable +0x40 getBasicType, +0x48 getNominalSize, +0x50 isMatrix; w15 matrix bit of the result type	^\s*local_7c\ =\ iVar11\ <<\ 10\ \|\ \(uVar6\ \&\ 0xff\)\ <<\ 0xb\ \|\ \(uVar8\ \&\ 0x3f\)\ <<\ 0x13\ \|\ local_7c\ \&\ 0x1ff;$	+1
+local	TIntermBinary__promote	local_4c	typeTempBits	INFERRED	bit-field word (+0x24) of the TType temp at local_70
+local	TIntermBinary__promote	local_68	typeTempStructure	INFERRED	structure pointer (+8) of the TType temp at local_70
+local	TIntermBinary__promote	local_70	typeTempOrTextBuf	INFERRED	stack area used both as the sprintf buffer of the internal error and as a getType() TType temp
+local	TIntermBinary__promote	pcVar12	setTypeFn	INFERRED	TIntermTyped::setType (vtable +0x34)
+use	TIntermBinary__promote	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*ppuVar3\ =\ local_a0\ \+\ \-1;$	+1
+use	TIntermBinary__promote	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar5\ =\ \*ppuVar3;$	+1
+use	TIntermBinary__promote	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar5\ \+\ \-1,0,ppuVar3\);$	+2
+use	TIntermBinary__promote	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*ppuVar3\ =\ local_a0\ \+\ \-1;$@2	+1
+use	TIntermBinary__promote	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar5\ =\ \*ppuVar3;$@2	+1
+use	TIntermBinary__promote	ppuVar3	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the internal-error text is appended	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar5\ \+\ \-1,0,ppuVar3\);$@2	+2
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*uVar4\ =\ extraout_r4;$	+1
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*if\ \(\(uVar9\ !=\ uVar6\)\ \&\&$@2	+3
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*\(\*\(int\ \*\*\)\(this\ \+\ 0x34\),uVar4,param_3,param_4,param_5,param_6,iVar7\);$	+1
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*\(\*\(int\ \*\*\)\(this\ \+\ 0x34\),uVar4,param_3,param_4,param_5,param_6,iVar7\);$@4	+1
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*iVar11\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x34\)\ \+\ 0x50\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x34\),uVar4\);$	+1
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*iVar7\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x34\)\ \+\ 0x48\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x34\),uVar4\);$	+1
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*uVar4\ =\ extraout_r4_01;$	+1
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*if\ \(\(iVar11\ ==\ 0\)\ \&\&$	+3
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*\(\*\(int\ \*\*\)\(this\ \+\ 0x34\),uVar4,param_3,param_4,param_5,param_6,iVar7\);$@2	+1
+use	TIntermBinary__promote	uVar4	newOperator	INFERRED	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*uVar4\ =\ 0x27;$	+1
+use	TIntermBinary__promote	uVar4	newOperator	INFERRED	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*uVar4\ =\ 0x56;$	+1
+use	TIntermBinary__promote	uVar4	newOperator	INFERRED	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*uVar4\ =\ 0x29;$	+1
+use	TIntermBinary__promote	uVar4	newOperator	INFERRED	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*uVar4\ =\ 0x7a;$	+1
+use	TIntermBinary__promote	uVar4	newOperator	INFERRED	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*uVar4\ =\ 0x7d;$	+1
+use	TIntermBinary__promote	uVar4	newOperator	INFERRED	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*uVar4\ =\ 0x7c;$	+1
+use	TIntermBinary__promote	uVar4	newOperator	INFERRED	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*\*\(undefined4\ \*\)\(this\ \+\ 0x30\)\ =\ uVar4;$@2	+1
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*uVar4\ =\ extraout_r4_03;$	+1
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*if\ \(\(iVar11\ ==\ 0\)\ \|\|$	+3
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*\(\*\(int\ \*\*\)\(this\ \+\ 0x34\),uVar4,param_3,param_4,param_5,param_6,iVar7\);$@3	+1
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*uVar4\ =\ extraout_r4_05;$	+1
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*if\ \(\(iVar11\ !=\ 0\)\ \|\|$	+4
+use	TIntermBinary__promote	uVar4	newOperator	INFERRED	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*uVar4\ =\ 0x26;$	+1
+use	TIntermBinary__promote	uVar4	newOperator	INFERRED	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*uVar4\ =\ 0x28;$	+1
+use	TIntermBinary__promote	uVar4	newOperator	INFERRED	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*\*\(undefined4\ \*\)\(this\ \+\ 0x30\)\ =\ uVar4;$	+1
+use	TIntermBinary__promote	uVar4	newOperator	INFERRED	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*uVar4\ =\ 0x7b;$	+1
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*uVar4\ =\ extraout_r4_07;$	+1
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*if\ \(\(iVar11\ !=\ 0\)\ \|\|$@2	+3
+use	TIntermBinary__promote	uVar4	scratchR4	UNKNOWN	w5/w10 the operator code the node is rewritten to (stored at this+0x30); the others are Ghidra extra-output r4 carried through the vtable calls	^\s*\(this,uVar4,param_3,param_4,param_5,param_6,iVar7\);$	+1
+local	TType__getCompleteString	param_1	result	INFERRED	TString returned (copy of the built description)
+local	TType__getCompleteString	param_2	type	INFERRED	TType being described (bit-field word at +0x24)
+local	TType__getCompleteString	iVar2	nominalSize	INFERRED	vector / matrix dimension from the bit-field word
+local	TType__getCompleteString	uVar3	typeBits	INFERRED	TType bit-field word (+0x24): qualifier, basic type, size, matrix, array
+local	TType__getCompleteString	pcVar4	writeCursor	INFERRED	end of the text written so far into the stack buffer
+local	TType__getCompleteString	local_20	allocatorArg	INFERRED	pool_allocator argument of the result TString constructor
+local	OutputTreeText	param_3	depth	INFERRED	tree depth: number of indent steps printed
+local	OutputTreeText	uVar4	sourceLoc	INFERRED	node getLine(): string number << 16 | line
+local	OutputTreeText	local_80	locString	INFERRED	"string:line" prefix as a std::string
+local	OutputSymbol	param_3	scratchR5	UNKNOWN	register leftover forwarded through the vtable calls
+local	OutputSymbol	param_4	scratchR6	UNKNOWN	register leftover forwarded through the vtable calls
+local	OutputSymbol	param_5	scratchR7	UNKNOWN	register leftover forwarded through the vtable calls
+local	OutputSymbol	param_6	scratchR8	UNKNOWN	register leftover forwarded through the vtable calls
+local	OutputSymbol	puVar1	stringTerminal	INFERRED	DAT: std::string::_S_terminal, written after the last character
+local	OutputSymbol	iVar3	typeCharsCopy	INFERRED	copy of the type description character pointer
+local	OutputSymbol	iVar4	symbolName	INFERRED	symbol->getSymbol() TString (vtable +0x60)
+local	OutputSymbol	uVar5	symbolId	INFERRED	symbol->getId() (vtable +0x5c)
+local	OutputSymbol	uVar6	nameChars	INFERRED	character pointer of the symbol name
+local	OutputSymbol	local_40	typeString	INFERRED	TType::getCompleteString result (TString: allocator word)
+local	OutputSymbol	local_3c	typeStringChars	INFERRED	character pointer of typeString
+local	OutputSymbol	local_30	destroyAllocatorArg	INFERRED	allocator argument for _Rep::_M_destroy of the type string
+local	OutputBinary	param_1	preVisit	INFERRED	traversal visit flag
+local	OutputBinary	pcVar4	opName	INFERRED	operator name ("Multiply" or operatorStrings[op])
+local	OutputBinary	local_30	typeString	INFERRED	TType::getCompleteString result (TString: allocator word)
+local	OutputBinary	local_2c	typeStringChars	INFERRED	character pointer of typeString
+local	OutputBinary	local_20	destroyAllocatorArg	INFERRED	allocator argument for _Rep::_M_destroy of the type string
+local	OutputUnary	param_1	preVisit	INFERRED	traversal visit flag
+local	OutputUnary	local_30	typeString	INFERRED	TType::getCompleteString result (TString: allocator word)
+local	OutputUnary	local_2c	typeStringChars	INFERRED	character pointer of typeString
+local	OutputUnary	local_20	destroyAllocatorArg	INFERRED	allocator argument for _Rep::_M_destroy of the type string
+local	OutputAggregate	param_1	preVisit	INFERRED	traversal visit flag
+local	OutputAggregate	local_30	typeString	INFERRED	TType::getCompleteString result (TString: allocator word)
+local	OutputAggregate	local_2c	typeStringChars	INFERRED	character pointer of typeString
+local	OutputAggregate	local_20	destroyAllocatorArg	INFERRED	allocator argument for _Rep::_M_destroy of the type string
+local	OutputSelection	param_1	preVisit	INFERRED	traversal visit flag
+use	OutputSelection	iVar3	depth	INFERRED	w1 traverser depth after increment; w2/w3 getTrueBlock (vtable +0x60) / getFalseBlock (vtable +100) tested non-null	^\s*iVar3\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x20\);$	+3
+use	OutputSelection	iVar3	trueBlockTest	INFERRED	w1 traverser depth after increment; w2/w3 getTrueBlock (vtable +0x60) / getFalseBlock (vtable +100) tested non-null	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 0x60\)\)\(param_2\);$	+2
+use	OutputSelection	iVar3	falseBlockTest	INFERRED	w1 traverser depth after increment; w2/w3 getTrueBlock (vtable +0x60) / getFalseBlock (vtable +100) tested non-null	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 100\)\)\(param_2\);$	+2
+use	OutputSelection	piVar2	condition	INFERRED	getCondition (vtable +0x5c), getTrueBlock, getFalseBlock traversed	^\s*piVar2\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 0x5c\)\)\(param_2\);$	+2
+use	OutputSelection	piVar2	trueBlock	INFERRED	getCondition (vtable +0x5c), getTrueBlock, getFalseBlock traversed	^\s*piVar2\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 0x60\)\)\(param_2\);$	+2
+use	OutputSelection	piVar2	falseBlock	INFERRED	getCondition (vtable +0x5c), getTrueBlock, getFalseBlock traversed	^\s*piVar2\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\ \+\ 100\)\)\(param_2\);$	+2
+local	OutputSelection	local_30	typeString	INFERRED	TType::getCompleteString result (TString: allocator word)
+local	OutputSelection	local_2c	typeStringChars	INFERRED	character pointer of typeString
+local	OutputSelection	local_20	destroyAllocatorArg	INFERRED	allocator argument for _Rep::_M_destroy of the type string
+local	OutputConstantUnion	iVar2	componentCount	INFERRED	number of constant components printed
+local	OutputConstantUnion	iVar9	componentIndex	INFERRED	component being printed
+use	OutputConstantUnion	uVar3	componentBasicType	INFERRED	w0 basic type of the constant (1 float, 2 int, 3 bool); w1 node getLine() for the internal error text	^\s*uVar3\ =\ local_19c\ >>\ 0x13\ \&\ 0x3f;$	+1
+use	OutputConstantUnion	uVar3	componentBasicType	INFERRED	w0 basic type of the constant (1 float, 2 int, 3 bool); w1 node getLine() for the internal error text	^\s*if\ \(uVar3\ ==\ 2\)\ \{$	+1
+use	OutputConstantUnion	uVar3	componentBasicType	INFERRED	w0 basic type of the constant (1 float, 2 int, 3 bool); w1 node getLine() for the internal error text	^\s*if\ \(uVar3\ <\ 3\)\ \{$	+2
+use	OutputConstantUnion	uVar3	componentBasicType	INFERRED	w0 basic type of the constant (1 float, 2 int, 3 bool); w1 node getLine() for the internal error text	^\s*else\ if\ \(uVar3\ ==\ 3\)\ \{$	+1
+use	OutputConstantUnion	uVar3	sourceLoc	INFERRED	w0 basic type of the constant (1 float, 2 int, 3 bool); w1 node getLine() for the internal error text	^\s*uVar3\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)param_1\)\(param_1,a1\);$	+1
+use	OutputConstantUnion	uVar3	sourceLoc	INFERRED	w0 basic type of the constant (1 float, 2 int, 3 bool); w1 node getLine() for the internal error text	^\s*a1_00\ =\ uVar3\ \&\ 0xffff;$	+1
+use	OutputConstantUnion	uVar3	sourceLoc	INFERRED	w0 basic type of the constant (1 float, 2 int, 3 bool); w1 node getLine() for the internal error text	^\s*_sprintf\(acStack_1b0,"%d:\?\ ",\(int\)uVar3\ >>\ 0x10\);$	+1
+use	OutputConstantUnion	uVar3	sourceLoc	INFERRED	w0 basic type of the constant (1 float, 2 int, 3 bool); w1 node getLine() for the internal error text	^\s*_sprintf\(acStack_1b0,"%d:%d",\(int\)uVar3\ >>\ 0x10,a1_00\);$	+1
+local	OutputConstantUnion	uVar6	getTypeResult	INFERRED	return value of the getType vtable call
+local	OutputConstantUnion	pcVar7	boolText	INFERRED	"true" or "false"
+use	OutputConstantUnion	ppuVar4	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the error text is appended	^\s*ppuVar4\ =\ local_1c0\[0\]\ \+\ \-1;$	+1
+use	OutputConstantUnion	ppuVar4	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the error text is appended	^\s*puVar5\ =\ \*ppuVar4;$	+1
+use	OutputConstantUnion	ppuVar4	refCountPtr	INFERRED	std::string rep refcount pointer decremented after the error text is appended	^\s*puVar1\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar5\ \+\ \-1,0,ppuVar4\);$	+2
+local	OutputConstantUnion	in_f3	scratchF3	UNKNOWN	register leftover forwarded to _glp_dtostr
+local	OutputConstantUnion	in_f4	scratchF4	UNKNOWN	register leftover forwarded to _glp_dtostr
+local	OutputConstantUnion	in_f5	scratchF5	UNKNOWN	register leftover forwarded to _glp_dtostr
+local	OutputConstantUnion	in_f6	scratchF6	UNKNOWN	register leftover forwarded to _glp_dtostr
+local	OutputConstantUnion	in_f7	scratchF7	UNKNOWN	register leftover forwarded to _glp_dtostr
+local	OutputConstantUnion	in_f8	scratchF8	UNKNOWN	register leftover forwarded to _glp_dtostr
+local	OutputConstantUnion	local_1c0	typeTemp1OrTextBuf	INFERRED	stack area used as a getType() TType temp and as the sprintf buffer
+local	OutputConstantUnion	local_19c	typeTemp1Bits	INFERRED	bit-field word (+0x24) of the TType temp at local_1c0
+local	OutputConstantUnion	local_190	typeTemp2	INFERRED	second getType() temp
+local	OutputConstantUnion	local_178	typeTemp2Structure	INFERRED	structure pointer (+8) of typeTemp2
+local	OutputConstantUnion	local_16c	typeTemp2Bits	INFERRED	bit-field word (+0x24) of typeTemp2
+local	OutputLoop	param_1	preVisit	INFERRED	traversal visit flag
+local	OutputLoop	iVar1	depth	INFERRED	traverser depth after increment
+local	OutputBranch	param_1	preVisit	INFERRED	traversal visit flag
+local	TIntermediate__outputTree	local_50	visitSymbolFn	INFERRED	TIntermTraverser member +0x00 (OutputSymbol); &local_50 is the traverser passed to traverse
+local	TIntermediate__outputTree	local_4c	visitConstantUnionFn	INFERRED	TIntermTraverser member +0x04
+local	TIntermediate__outputTree	local_48	visitBinaryFn	INFERRED	TIntermTraverser member +0x08
+local	TIntermediate__outputTree	local_44	visitUnaryFn	INFERRED	TIntermTraverser member +0x0c
+local	TIntermediate__outputTree	local_40	visitSelectionFn	INFERRED	TIntermTraverser member +0x10
+local	TIntermediate__outputTree	local_3c	visitAggregateFn	INFERRED	TIntermTraverser member +0x14
+local	TIntermediate__outputTree	local_38	visitLoopFn	INFERRED	TIntermTraverser member +0x18
+local	TIntermediate__outputTree	local_34	visitBranchFn	INFERRED	TIntermTraverser member +0x1c
+local	TIntermediate__outputTree	local_30	depth	INFERRED	TIntermTraverser depth (+0x20)
+local	TIntermediate__outputTree	local_2c	preVisit	INFERRED	TIntermTraverser preVisit (+0x24)
+local	TIntermediate__outputTree	local_28	postVisit	INFERRED	TIntermTraverser postVisit (+0x28)
+local	TIntermediate__outputTree	local_24	rightToLeft	INFERRED	TIntermTraverser rightToLeft (+0x2c)
+local	TIntermediate__outputTree	local_20	infoSink	INFERRED	TOutputTraverser infoSink (+0x30)
+local	TIntermBinary__traverse	iVar1	visit	INFERRED	result of the visitBinary callback: whether to descend
+local	TIntermBinary__traverse	piVar2	childNode	INFERRED	left or right operand traversed
+local	TIntermUnary__traverse	iVar1	visit	INFERRED	result of the visitUnary callback: whether to descend
+local	TIntermAggregate__traverse	iVar1	visit	INFERRED	result of the visitAggregate callback: whether to descend
+use	TIntermAggregate__traverse	puVar2	childCursor	INFERRED	iterator over the aggregate sequence (forward, or backward when rightToLeft)	^\s*for\ \(puVar2\ =\ \*\(undefined4\ \*\*\)\(this\ \+\ 0x38\);\ puVar2\ !=\ \*\(undefined4\ \*\*\)\(this\ \+\ 0x3c\);$	+3
+use	TIntermAggregate__traverse	puVar2	childCursor	INFERRED	iterator over the aggregate sequence (forward, or backward when rightToLeft)	^\s*puVar2\ =\ \*\(undefined4\ \*\*\)\(this\ \+\ 0x3c\);$	+4
+use	TIntermSelection__traverse	iVar1	visit	INFERRED	w0 result of the visitSelection callback; w1 vtable of the child node	^\s*iVar1\ =\ 1;$	+1
+use	TIntermSelection__traverse	iVar1	visit	INFERRED	w0 result of the visitSelection callback; w1 vtable of the child node	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(param_2\ \+\ 0x10\)\)\(1,this,param_2\);$	+1
+use	TIntermSelection__traverse	iVar1	visit	INFERRED	w0 result of the visitSelection callback; w1 vtable of the child node	^\s*if\ \(iVar1\ ==\ 0\)\ \{$	+1
+use	TIntermSelection__traverse	iVar1	nodeVtable	INFERRED	w0 result of the visitSelection callback; w1 vtable of the child node	^\s*iVar1\ =\ \*piVar2;$	+1
+use	TIntermSelection__traverse	iVar1	nodeVtable	INFERRED	w0 result of the visitSelection callback; w1 vtable of the child node	^\s*iVar1\ =\ \*piVar2;$@2	+1
+use	TIntermSelection__traverse	iVar1	nodeVtable	INFERRED	w0 result of the visitSelection callback; w1 vtable of the child node	^\s*\(\*\*\(code\ \*\*\)\(iVar1\ \+\ 8\)\)\(piVar2,param_2\);$	+1
+local	TIntermSelection__traverse	piVar2	childNode	INFERRED	condition, true block or false block traversed
+local	TIntermLoop__traverse	iVar1	visit	INFERRED	result of the visitLoop callback: whether to descend
+local	TIntermLoop__traverse	piVar2	childNode	INFERRED	body, test or terminal traversed
+local	TIntermBranch__traverse	iVar1	visit	INFERRED	result of the visitBranch callback: whether to descend

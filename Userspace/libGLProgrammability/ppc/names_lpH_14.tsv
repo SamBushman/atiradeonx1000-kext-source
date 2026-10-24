@@ -1,0 +1,94 @@
+use	TIntermLoop__indirectNode	piVar1	testNode	INFERRED	this+0xc: the loop test expression node	^\s*piVar1\ =\ \*\(int\ \*\*\)\(this\ \+\ 0xc\);$	+3
+use	TIntermLoop__indirectNode	piVar1	bodyNode	INFERRED	this+8: the loop body node	^\s*piVar1\ =\ \*\(int\ \*\*\)\(this\ \+\ 8\);$	+3
+use	TIntermLoop__indirectNode	piVar1	terminalNode	INFERRED	this+0x10: the loop terminal (increment) expression node	^\s*piVar1\ =\ \*\(int\ \*\*\)\(this\ \+\ 0x10\);$	+3
+local	TIntermLoop__indirectNode	pvVar2	childResult	INFERRED	operand returned by compiling a child node (virtual slot 0x10), destroyed immediately
+use	ParseSymbolTable__FinishArrayAddition	bVar1	chunkKind	INFERRED	kind byte of the last inserted chunk (this+0x48): 0 temp/uniform, 3 constant/param	^\s*bVar1\ =\ \*\*\(byte\ \*\*\)\(this\ \+\ 0x48\);$	+6
+use	ParseSymbolTable__FinishArrayAddition	bVar1	chunkKind	INFERRED	kind byte of the last inserted chunk (this+0x48): 0 temp/uniform, 3 constant/param	^\s*if\ \(\(bVar1\ !=\ 3\)\ \|\|$	+3
+use	ParseSymbolTable__FinishArrayAddition	sVar2	counterLow	INFERRED	low 16 bits of a table counter (this+0x3a / +0x26) minus one: index patched into the first chunk	^\s*sVar2\ =\ \*\(short\ \*\)\(this\ \+\ 0x3a\);$	+1
+use	ParseSymbolTable__FinishArrayAddition	sVar2	counterLow	INFERRED	low 16 bits of a table counter (this+0x3a / +0x26) minus one: index patched into the first chunk	^\s*sVar2\ =\ \*\(short\ \*\)\(this\ \+\ 0x26\);$	+1
+use	ParseSymbolTable__FinishArrayAddition	sVar2	counterLow	INFERRED	low 16 bits of a table counter (this+0x3a / +0x26) minus one: index patched into the first chunk	^\s*\*\(short\ \*\)\(iVar4\ \+\ 0x12\)\ =\ sVar2\ \+\ \-1;$	+1
+use	ParseSymbolTable__FinishArrayAddition	iVar3	arrayTrackingMode	INFERRED	this+0x50: non-zero while array-usage tracking is active	^\s*iVar3\ =\ \*\(int\ \*\)\(this\ \+\ 0x50\);$	+3
+use	ParseSymbolTable__FinishArrayAddition	iVar3	arrayTrackingMode	INFERRED	this+0x50: non-zero while array-usage tracking is active	^\s*iVar3\ =\ \*\(int\ \*\)\(this\ \+\ 0x50\);$@2	+1
+use	ParseSymbolTable__FinishArrayAddition	iVar3	arrayTrackingMode	INFERRED	this+0x50: non-zero while array-usage tracking is active	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
+use	ParseSymbolTable__FinishArrayAddition	iVar4	firstChunk	INFERRED	first chunk of the PPStream list whose index word is patched	^\s*if\ \(\(bVar1\ !=\ 0\)\ \|\|$	+3
+use	ParseSymbolTable__FinishArrayAddition	iVar4	firstChunk	INFERRED	first chunk of the PPStream list whose index word is patched	^\s*if\ \(\(bVar1\ !=\ 3\)\ \|\|$	+3
+use	ParseSymbolTable__FinishArrayAddition	iVar4	firstChunk	INFERRED	first chunk of the PPStream list whose index word is patched	^\s*\*\(short\ \*\)\(iVar4\ \+\ 0x12\)\ =\ sVar2\ \+\ \-1;$	+1
+use	ParseSymbolTable__FindNextParamSymbolByName	iVar2	foundOrCompare	INFERRED	return value: the matching symbol, or 0; also holds the _strncmp result during the scan	^\s*iVar2\ =\ 0;$	+1
+use	ParseSymbolTable__FindNextParamSymbolByName	iVar2	foundOrCompare	INFERRED	return value: the matching symbol, or 0; also holds the _strncmp result during the scan	^\s*while\ \(\(iVar2\ =\ 0,\ iVar4\ !=\ 0\ \&\&$	+5
+use	ParseSymbolTable__FindNextParamSymbolByName	iVar2	foundOrCompare	INFERRED	return value: the matching symbol, or 0; also holds the _strncmp result during the scan	^\s*return\ iVar2;$	+1
+use	ParseSymbolTable__FindNextParamSymbolByName	iVar3	symbolName	INFERRED	symbol name (+0x14) compared with the searched prefix	^\s*while\ \(\(iVar2\ =\ 0,\ iVar4\ !=\ 0\ \&\&$	+5
+use	ParseSymbolTable__FindNextParamSymbolByName	iVar4	symbolCursor	INFERRED	cursor over the table symbol list (next at +8)	^\s*iVar4\ =\ \*\(int\ \*\)this;$	+1
+use	ParseSymbolTable__FindNextParamSymbolByName	iVar4	symbolCursor	INFERRED	cursor over the table symbol list (next at +8)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_2\ \+\ 8\);$	+1
+use	ParseSymbolTable__FindNextParamSymbolByName	iVar4	symbolCursor	INFERRED	cursor over the table symbol list (next at +8)	^\s*while\ \(\(iVar2\ =\ 0,\ iVar4\ !=\ 0\ \&\&$	+6
+use	TIntermSymbol__compileNode	uVar3	sourceLine	INFERRED	virtual slot 0 of the node (line), stored to compiler+0x90	^\s*uVar3\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1,param_3,param_4,param_5,param_6,a6\);$	+2
+local	TIntermSymbol__compileNode	puVar1	terminalCharPtr	INFERRED	pointer to the std::string _S_terminal character, stored at data[length] (inlined c_str)
+use	TIntermSymbol__compileNode	this_00	newSymbol	INFERRED	new ParseSymbol (operator_new(100)) for the symbol node	^\s*this_00\ =\ operator_new\(100\);$	+2
+use	TIntermSymbol__compileNode	this_00	newSymbol	INFERRED	new ParseSymbol (operator_new(100)) for the symbol node	^\s*ParseSymbol__SetName\(this_00,\*\(char\ \*\*\)\(iVar2\ \+\ 4\)\);$	+1
+use	TIntermSymbol__compileNode	this_00	newSymbol	INFERRED	new ParseSymbol (operator_new(100)) for the symbol node	^\s*\*\(undefined4\ \*\)\(this_00\ \+\ 0x28\)\ =\ uVar3;$	+1
+use	TIntermSymbol__compileNode	this_00	newSymbol	INFERRED	new ParseSymbol (operator_new(100)) for the symbol node	^\s*ParseSymbol__SetParseTreeType\(this_00,pTVar4\);$	+1
+use	TIntermSymbol__compileNode	this_00	newSymbol	INFERRED	new ParseSymbol (operator_new(100)) for the symbol node	^\s*\*\(undefined4\ \*\)\(this_00\ \+\ 0x10\)\ =\ uVar3;$	+1
+use	TIntermSymbol__compileNode	this_00	newSymbol	INFERRED	new ParseSymbol (operator_new(100)) for the symbol node	^\s*\*this_01\ =\ this_00;$	+1
+use	TIntermSymbol__compileNode	pTVar4	symbolType	INFERRED	node type (virtual slot 0x3c) given to the new symbol	^\s*pTVar4\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x3c\)\)\(this\);$	+2
+use	TIntermSymbol__compileNode	this_01	symbolOperand	INFERRED	new ParseOperand (0x38 bytes) wrapping the symbol, returned	^\s*this_01\ =\ \(undefined4\ \*\)0x0;$	+1
+use	TIntermSymbol__compileNode	this_01	symbolOperand	INFERRED	new ParseOperand (0x38 bytes) wrapping the symbol, returned	^\s*this_01\ =\ operator_new\(0x38\);$	+3
+use	TIntermSymbol__compileNode	this_01	symbolOperand	INFERRED	new ParseOperand (0x38 bytes) wrapping the symbol, returned	^\s*return\ this_01;$	+1
+local	TIntermSymbol__compileNode	param_3	strayArg3	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermSymbol__compileNode	param_4	strayArg4	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermSymbol__compileNode	param_5	strayArg5	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermSymbol__compileNode	param_6	strayArg6	INFERRED	extra register-argument slot forwarded as a dead stray argument
+use	ParseSymbolTable__AddSymbol	iVar1	bucketOffset	INFERRED	byte offset of the symbol hash bucket (hash % bucket count * 4)	^\s*iVar1\ =\ \(\*\(uint\ \*\)\(param_2\ \+\ 0x1c\)\ \-$	+2
+use	ParseSymbolTable__AddSymbol	iVar1	bucketOffset	INFERRED	byte offset of the symbol hash bucket (hash % bucket count * 4)	^\s*iVar1\ =\ \(\*\(uint\ \*\)\(param_2\ \+\ 0x1c\)\ \-$@2	+4
+use	ParseSymbolTable__AddSymbol	iVar1	bucketOffset	INFERRED	byte offset of the symbol hash bucket (hash % bucket count * 4)	^\s*\*\(unsigned\ char\ \*\*\)\(iVar1\ \+\ iVar3\)\ =\ param_2;$	+1
+use	ParseSymbolTable__AddSymbol	iVar1	lastInBucket	INFERRED	last symbol of the hash bucket chain (next at +4)	^\s*iVar1\ =\ iVar2;$	+2
+use	ParseSymbolTable__AddSymbol	iVar1	lastInBucket	INFERRED	last symbol of the hash bucket chain (next at +4)	^\s*\*\(unsigned\ char\ \*\*\)\(iVar1\ \+\ 4\)\ =\ param_2;$	+1
+use	ParseSymbolTable__AddSymbol	iVar2	chainNext	INFERRED	next symbol in the bucket chain	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar1\ \+\ iVar3\);$	+1
+use	ParseSymbolTable__AddSymbol	iVar2	chainNext	INFERRED	next symbol in the bucket chain	^\s*iVar1\ =\ iVar2;$	+3
+use	ParseSymbolTable__AddSymbol	iVar3	buckets	INFERRED	this+8: the hash bucket array	^\s*iVar3\ =\ \*\(int\ \*\)\(this\ \+\ 8\);$	+1
+use	ParseSymbolTable__AddSymbol	iVar3	buckets	INFERRED	this+8: the hash bucket array	^\s*iVar3\ =\ \*\(int\ \*\)\(this\ \+\ 8\);$@2	+1
+use	ParseSymbolTable__AddSymbol	iVar3	buckets	INFERRED	this+8: the hash bucket array	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar1\ \+\ iVar3\);$	+2
+use	ParseSymbolTable__AddSymbol	iVar3	buckets	INFERRED	this+8: the hash bucket array	^\s*\*\(unsigned\ char\ \*\*\)\(iVar1\ \+\ iVar3\)\ =\ param_2;$	+1
+use	TIntermSelection__indirectNode	piVar2	trueBlock	INFERRED	this+0x34: the true branch node (falseBlock is this+0x38)	^\s*piVar2\ =\ \(int\ \*\)0x0;$	+1
+use	TIntermSelection__indirectNode	piVar2	trueBlock	INFERRED	this+0x34: the true branch node (falseBlock is this+0x38)	^\s*piVar2\ =\ \*\(int\ \*\*\)\(this\ \+\ 0x34\);$	+1
+use	TIntermSelection__indirectNode	piVar2	trueBlock	INFERRED	this+0x34: the true branch node (falseBlock is this+0x38)	^\s*if\ \(piVar2\ !=\ \(int\ \*\)0x0\)\ \{$	+2
+local	TIntermSelection__indirectNode	pvVar1	childResult	INFERRED	operand returned by compiling a child node (virtual slot 0x10), destroyed immediately
+use	TIntermSymbol__indirectNode	uVar3	sourceLine	INFERRED	virtual slot 0 of the node (line), stored to compiler+0x90	^\s*uVar3\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1,param_3,param_4,param_5,param_6,a6\);$	+2
+local	TIntermSymbol__indirectNode	puVar1	terminalCharPtr	INFERRED	pointer to the std::string _S_terminal character, stored at data[length] (inlined c_str)
+use	TIntermSymbol__indirectNode	this_00	newSymbol	INFERRED	new ParseSymbol (operator_new(100)) for the symbol node	^\s*this_00\ =\ operator_new\(100\);$	+2
+use	TIntermSymbol__indirectNode	this_00	newSymbol	INFERRED	new ParseSymbol (operator_new(100)) for the symbol node	^\s*ParseSymbol__SetName\(this_00,\*\(char\ \*\*\)\(iVar2\ \+\ 4\)\);$	+1
+use	TIntermSymbol__indirectNode	this_00	newSymbol	INFERRED	new ParseSymbol (operator_new(100)) for the symbol node	^\s*\*\(undefined4\ \*\)\(this_00\ \+\ 0x28\)\ =\ uVar3;$	+1
+use	TIntermSymbol__indirectNode	this_00	newSymbol	INFERRED	new ParseSymbol (operator_new(100)) for the symbol node	^\s*ParseSymbol__SetParseTreeType\(this_00,pTVar4\);$	+1
+use	TIntermSymbol__indirectNode	this_00	newSymbol	INFERRED	new ParseSymbol (operator_new(100)) for the symbol node	^\s*\*\(undefined4\ \*\)\(this_00\ \+\ 0x10\)\ =\ uVar3;$	+1
+use	TIntermSymbol__indirectNode	this_00	newSymbol	INFERRED	new ParseSymbol (operator_new(100)) for the symbol node	^\s*\*this_01\ =\ this_00;$	+1
+use	TIntermSymbol__indirectNode	pTVar4	symbolType	INFERRED	node type (virtual slot 0x3c) given to the new symbol	^\s*pTVar4\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x3c\)\)\(this\);$	+2
+use	TIntermSymbol__indirectNode	this_01	symbolOperand	INFERRED	new ParseOperand (0x38 bytes) wrapping the symbol, returned	^\s*this_01\ =\ \(undefined4\ \*\)0x0;$	+1
+use	TIntermSymbol__indirectNode	this_01	symbolOperand	INFERRED	new ParseOperand (0x38 bytes) wrapping the symbol, returned	^\s*this_01\ =\ operator_new\(0x38\);$	+3
+use	TIntermSymbol__indirectNode	this_01	symbolOperand	INFERRED	new ParseOperand (0x38 bytes) wrapping the symbol, returned	^\s*return\ this_01;$	+1
+local	TIntermSymbol__indirectNode	param_3	strayArg3	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermSymbol__indirectNode	param_4	strayArg4	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermSymbol__indirectNode	param_5	strayArg5	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermSymbol__indirectNode	param_6	strayArg6	INFERRED	extra register-argument slot forwarded as a dead stray argument
+use	TIntermUnary__indirectNode	uVar1	sourceLine	INFERRED	virtual slot 0 of the node (line), stored to compiler+0x90	^\s*uVar1\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,param_2,param_3,param_4,param_5,param_6\);$	+2
+use	TIntermUnary__indirectNode	this_00	childResult	INFERRED	operand returned by compiling the child node (virtual slot 0x10), destroyed immediately	^\s*this_00\ =\ \(void\ \*\)\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(this\ \+\ 0x34\)\ \+\ 0x10\)\)\(\*\(int\ \*\*\)\(this\ \+\ 0x34\),param_2\);$	+4
+local	TIntermUnary__indirectNode	param_3	strayArg3	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermUnary__indirectNode	param_4	strayArg4	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermUnary__indirectNode	param_5	strayArg5	INFERRED	extra register-argument slot forwarded as a dead stray argument
+local	TIntermUnary__indirectNode	param_6	strayArg6	INFERRED	extra register-argument slot forwarded as a dead stray argument
+use	ParseSymbolTable__processOperand	bVar1	noSymbol	INFERRED	InsertSymbol returned null (nothing registered), so the operand is left unchanged	^\s*bVar1\ =\ pPVar2\ ==\ \(unsigned\ char\ \*\)0x0;$	+1
+use	ParseSymbolTable__processOperand	bVar1	noSymbol	INFERRED	InsertSymbol returned null (nothing registered), so the operand is left unchanged	^\s*bVar1\ =\ false;$	+1
+use	ParseSymbolTable__processOperand	bVar1	noSymbol	INFERRED	InsertSymbol returned null (nothing registered), so the operand is left unchanged	^\s*if\ \(\(\(!bVar1\)\ \&\&\ \(\*\(unsigned\ char\ \*\*\)param_2\ =\ pPVar2,\ \*\(int\ \*\)\(pPVar2\ \+\ 0x34\)\ !=\ 0\)\)\ \&\&$	+2
+use	ParseSymbolTable__processOperand	pPVar2	tableSymbol	INFERRED	the symbol found in (or inserted into) the table that the operand now points to	^\s*pPVar2\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)ParseSymbolTable__FindSymbol\)\(this,this_00\);$	+4
+use	ParseSymbolTable__processOperand	pPVar2	tableSymbol	INFERRED	the symbol found in (or inserted into) the table that the operand now points to	^\s*if\ \(\(\(!bVar1\)\ \&\&\ \(\*\(unsigned\ char\ \*\*\)param_2\ =\ pPVar2,\ \*\(int\ \*\)\(pPVar2\ \+\ 0x34\)\ !=\ 0\)\)\ \&\&$	+2
+use	ParseSymbolTable__processOperand	iVar3	builtinSwizzle	INFERRED	GetBuiltInInitialSwizzle result added to the operand	^\s*int\ iVar3;$	+1
+use	ParseSymbolTable__processOperand	iVar3	builtinSwizzle	INFERRED	GetBuiltInInitialSwizzle result added to the operand	^\s*if\ \(\(\(!bVar1\)\ \&\&\ \(\*\(unsigned\ char\ \*\*\)param_2\ =\ pPVar2,\ \*\(int\ \*\)\(pPVar2\ \+\ 0x34\)\ !=\ 0\)\)\ \&\&$	+3
+use	ParseSymbolTable__processOperand	this_00	operandSymbol	INFERRED	the ParseSymbol held by the operand (*operand)	^\s*unsigned\ char\ \*\ this_00;$	+1
+use	ParseSymbolTable__processOperand	this_00	operandSymbol	INFERRED	the ParseSymbol held by the operand (*operand)	^\s*if\ \(\(\(param_2\ !=\ \(unsigned\ char\ \*\)0x0\)\ \&\&$	+5
+use	ParseSymbolTable__processOperand	this_00	operandSymbol	INFERRED	the ParseSymbol held by the operand (*operand)	^\s*ParseSymbol__SetArrayPositionFromLastIndex\(this_00\);$	+1
+use	ParseSymbolTable__processOperand	this_00	operandSymbol	INFERRED	the ParseSymbol held by the operand (*operand)	^\s*pPVar2\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)ParseSymbolTable__FindSymbol\)\(this,this_00\);$	+1
+use	ParseSymbolTable__processOperand	this_00	operandSymbol	INFERRED	the ParseSymbol held by the operand (*operand)	^\s*pPVar2\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)ParseSymbolTable__InsertSymbol\)\(this,this_00\);$	+1
+use	ParseSymbolTable__processOperand	this_00	operandSymbol	INFERRED	the ParseSymbol held by the operand (*operand)	^\s*__ZN11ParseSymbolD1Ev\(this_00\);$	+2
+use	store	iVar1	oldSize	INFERRED	queue element count (q+8) before appending the new element	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+1
+use	store	iVar1	oldSize	INFERRED	queue element count (q+8) before appending the new element	^\s*if\ \(iVar1\ ==\ 0\)\ \{$	+1
+use	store	iVar1	oldSize	INFERRED	queue element count (q+8) before appending the new element	^\s*iVar1\ =\ 0;$	+1
+use	store	iVar1	oldSize	INFERRED	queue element count (q+8) before appending the new element	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$@2	+1
+use	store	iVar1	oldSize	INFERRED	queue element count (q+8) before appending the new element	^\s*\*\(int\ \*\)\(param_1\ \+\ 8\)\ =\ iVar1\ \+\ 1;$	+1
+local	store	param_2	item	INFERRED	pointer stored in the new queue element

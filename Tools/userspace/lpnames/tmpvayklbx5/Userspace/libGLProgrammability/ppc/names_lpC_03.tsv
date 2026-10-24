@@ -1,0 +1,109 @@
+local	TIntermediate__addSymbol	param_2	id	CONFIRMED	TIntermSymbol id stored at +0x30 (getId)
+local	TIntermediate__addSymbol	param_5	line	CONFIRMED	source line passed to setLine (vtable slot 1)
+use	TIntermediate__addSymbol	iVar6	typeArraySize	INFERRED	inlined TType copy: type+4; then the shared empty std::string rep (refcount at +8, chars at +0xc)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_4\ \+\ 4\);$	+1
+use	TIntermediate__addSymbol	iVar6	typeArraySize	INFERRED	inlined TType copy: type+4; then the shared empty std::string rep (refcount at +8, chars at +0xc)	^\s*a0\[3\]\ =\ iVar6;$	+1
+use	TIntermediate__addSymbol	iVar6	emptyStringRep	INFERRED	inlined TType copy: type+4; then the shared empty std::string rep (refcount at +8, chars at +0xc)	^\s*iVar6\ =\ DAT_a7b7b9b8;$	+1
+use	TIntermediate__addSymbol	iVar6	emptyStringRep	INFERRED	inlined TType copy: type+4; then the shared empty std::string rep (refcount at +8, chars at +0xc)	^\s*piVar8\ =\ \(int\ \*\)\(iVar6\ \+\ 8\);$	+1
+use	TIntermediate__addSymbol	iVar6	emptyStringRep	INFERRED	inlined TType copy: type+4; then the shared empty std::string rep (refcount at +8, chars at +0xc)	^\s*a0\[0xe\]\ =\ iVar6\ \+\ 0xc;$	+1
+local	TIntermediate__addSymbol	iVar15	typeStructure	INFERRED	inlined TType copy of type+8
+local	TIntermediate__addSymbol	iVar14	typeFieldName	INFERRED	inlined TType copy of type+0xc
+local	TIntermediate__addSymbol	iVar13	typeTypeName	INFERRED	inlined TType copy of type+0x10
+local	TIntermediate__addSymbol	iVar12	typeWord14	INFERRED	inlined TType copy of type+0x14
+local	TIntermediate__addSymbol	iVar11	typeStructureSize	INFERRED	inlined TType copy of type+0x18
+local	TIntermediate__addSymbol	iVar10	typeWord1c	INFERRED	inlined TType copy of type+0x1c
+use	TIntermediate__addSymbol	iVar9	typeWord20	INFERRED	type+0x20 copy; atomic refcount store result; pool allocator stored as the TString allocator	^\s*iVar9\ =\ \*\(int\ \*\)\(param_4\ \+\ 0x20\);$	+1
+use	TIntermediate__addSymbol	iVar9	typeWord20	INFERRED	type+0x20 copy; atomic refcount store result; pool allocator stored as the TString allocator	^\s*a0\[10\]\ =\ iVar9;$	+1
+use	TIntermediate__addSymbol	iVar9	atomicStore	INFERRED	type+0x20 copy; atomic refcount store result; pool allocator stored as the TString allocator	^\s*iVar9\ =\ storeWordConditionalIndexed\(\*piVar8\ \+\ 1,0,piVar8\);$	+2
+use	TIntermediate__addSymbol	iVar9	stringAllocator	INFERRED	type+0x20 copy; atomic refcount store result; pool allocator stored as the TString allocator	^\s*iVar9\ =\ GetGlobalPoolAllocator\(\);$	+2
+local	TIntermediate__addSymbol	uVar1	typeSizeBits	INFERRED	type bit-field word & 0x7f800: nominal size field
+local	TIntermediate__addSymbol	uVar2	typeQualifierBits	INFERRED	type bit-field word & 0xfe000000: qualifier field
+local	TIntermediate__addSymbol	uVar3	typeBasicTypeBits	INFERRED	basic type field (bits 24..19) moved into place
+local	TIntermediate__addSymbol	uVar4	typeMatrixBit	INFERRED	matrix bit (bit 10)
+local	TIntermediate__addSymbol	uVar7	oldTypeBits	INFERRED	bit-field word of the new symbol's TType before the field-wise copy
+local	TIntermediate__addSymbol	piVar8	emptyRepRefCount	INFERRED	refcount of the shared empty string rep, atomically incremented
+local	TIntermediate__addSymbol	puVar5	intermSymbolVtable	INFERRED	PTR_vtable: TIntermSymbol vtable (+8 stored at a0[0])
+local	TIntermediate__addBinaryMath	param_5	line	CONFIRMED	source line; 0 means take it from the right operand getLine
+use	TIntermediate__addBinaryMath	bVar1	typeTemp1Constructed	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*bVar1\ =\ false;$	+1
+use	TIntermediate__addBinaryMath	bVar1	typeTemp1Constructed	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*if\ \(bVar1\)\ goto\ LAB_97b8d008;$	+1
+use	TIntermediate__addBinaryMath	bVar1	typeTemp1Constructed	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*bVar1\ =\ true;$	+1
+use	TIntermediate__addBinaryMath	bVar1	typeTemp3Live	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*bVar1\ =\ false;$@2	+1
+use	TIntermediate__addBinaryMath	bVar1	typeTemp3Live	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*bVar1\ =\ true;$@2	+1
+use	TIntermediate__addBinaryMath	bVar1	typeTemp3Live	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*if\ \(!bVar1\)\ break;$	+1
+use	TIntermediate__addBinaryMath	bVar1	typeTemp3Live	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*bVar1\ =\ false;$@3	+1
+use	TIntermediate__addBinaryMath	bVar1	typeTemp3Live	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*bVar1\ =\ true;$@3	+1
+use	TIntermediate__addBinaryMath	bVar1	typeTemp3Live	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*if\ \(bVar1\)\ goto\ LAB_97b8cf5c;$	+1
+use	TIntermediate__addBinaryMath	bVar1	typeTemp1Constructed	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*bVar1\ =\ false;$@4	+1
+use	TIntermediate__addBinaryMath	bVar1	typeTemp1Constructed	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*if\ \(bVar1\)\ goto\ LAB_97b8d098;$	+1
+use	TIntermediate__addBinaryMath	bVar1	typeTemp1Constructed	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*bVar1\ =\ true;$@4	+1
+use	TIntermediate__addBinaryMath	bVar1	operandTypesMatch	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*bVar1\ =\ false;$@5	+1
+use	TIntermediate__addBinaryMath	bVar1	operandTypesMatch	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*bVar1\ =\ true;$@5	+1
+use	TIntermediate__addBinaryMath	bVar1	operandTypesMatch	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*if\ \(!bVar1\)\ \{$	+1
+use	TIntermediate__addBinaryMath	bVar1	bothOperandsConst	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*bVar1\ =\ false;$@6	+1
+use	TIntermediate__addBinaryMath	bVar1	bothOperandsConst	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*bVar1\ =\ local_cc\ >>\ 0x19\ ==\ 2;$	+1
+use	TIntermediate__addBinaryMath	bVar1	bothOperandsConst	INFERRED	w0/w3: stack TType temp typeTemp1 constructed (needs destructor); w1/w2: third temp; w4: both operand types equal apart from size/array; w5: both operand qualifiers are const	^\s*if\ \(bVar1\)\ \{$	+1
+use	TIntermediate__addBinaryMath	bVar2	typeTemp2Live	INFERRED	w0: second stack TType temp constructed; w1: at most one operand is a structure so an implicit conversion is attempted	^\s*bVar2\ =\ false;$	+1
+use	TIntermediate__addBinaryMath	bVar2	typeTemp2Live	INFERRED	w0: second stack TType temp constructed; w1: at most one operand is a structure so an implicit conversion is attempted	^\s*bVar2\ =\ true;$	+1
+use	TIntermediate__addBinaryMath	bVar2	typeTemp2Live	INFERRED	w0: second stack TType temp constructed; w1: at most one operand is a structure so an implicit conversion is attempted	^\s*bVar2\ =\ false;$@2	+1
+use	TIntermediate__addBinaryMath	bVar2	typeTemp2Live	INFERRED	w0: second stack TType temp constructed; w1: at most one operand is a structure so an implicit conversion is attempted	^\s*bVar2\ =\ true;$@2	+1
+use	TIntermediate__addBinaryMath	bVar2	typeTemp2Live	INFERRED	w0: second stack TType temp constructed; w1: at most one operand is a structure so an implicit conversion is attempted	^\s*if\ \(bVar2\)\ \{$	+1
+use	TIntermediate__addBinaryMath	bVar2	needsConversion	INFERRED	w0: second stack TType temp constructed; w1: at most one operand is a structure so an implicit conversion is attempted	^\s*bVar2\ =\ false;$@3	+1
+use	TIntermediate__addBinaryMath	bVar2	needsConversion	INFERRED	w0: second stack TType temp constructed; w1: at most one operand is a structure so an implicit conversion is attempted	^\s*bVar2\ =\ true;$@3	+1
+use	TIntermediate__addBinaryMath	bVar2	needsConversion	INFERRED	w0: second stack TType temp constructed; w1: at most one operand is a structure so an implicit conversion is attempted	^\s*if\ \(bVar2\)\ \{$@2	+1
+local	TIntermediate__addBinaryMath	bVar3	typeTemp1Live	INFERRED	first stack TType temp (local_f0) constructed
+local	TIntermediate__addBinaryMath	bVar4	operandInvalid	INFERRED	operand type check failed: return 0
+use	TIntermediate__addBinaryMath	iVar8	promoteResult	INFERRED	w1 promote(); w2 left->getAsConstantUnion(); w3 right->getAsAggregate(); w4 left->getAsAggregate(); w5 *a0; w6 constant getSize()	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x5c\)\)\(a0,\*\(undefined4\ \*\)this\);$	+2
+use	TIntermediate__addBinaryMath	iVar8	leftConstantUnion	INFERRED	w1 promote(); w2 left->getAsConstantUnion(); w3 right->getAsAggregate(); w4 left->getAsAggregate(); w5 *a0; w6 constant getSize()	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x18\)\)\(param_3\);$	+1
+use	TIntermediate__addBinaryMath	iVar8	leftConstantUnion	INFERRED	w1 promote(); w2 left->getAsConstantUnion(); w3 right->getAsAggregate(); w4 left->getAsAggregate(); w5 *a0; w6 constant getSize()	^\s*if\ \(iVar8\ !=\ 0\)\ \{$	+1
+use	TIntermediate__addBinaryMath	iVar8	rightAggregate	INFERRED	w1 promote(); w2 left->getAsConstantUnion(); w3 right->getAsAggregate(); w4 left->getAsAggregate(); w5 *a0; w6 constant getSize()	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x1c\)\)\(piVar7\);$	+2
+use	TIntermediate__addBinaryMath	iVar8	leftAggregate	INFERRED	w1 promote(); w2 left->getAsConstantUnion(); w3 right->getAsAggregate(); w4 left->getAsAggregate(); w5 *a0; w6 constant getSize()	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*param_3\ \+\ 0x1c\)\)\(param_3\);$	+2
+use	TIntermediate__addBinaryMath	iVar8	nodeVtable	INFERRED	w1 promote(); w2 left->getAsConstantUnion(); w3 right->getAsAggregate(); w4 left->getAsAggregate(); w5 *a0; w6 constant getSize()	^\s*iVar8\ =\ \*a0;$	+1
+use	TIntermediate__addBinaryMath	iVar8	nodeVtable	INFERRED	w1 promote(); w2 left->getAsConstantUnion(); w3 right->getAsAggregate(); w4 left->getAsAggregate(); w5 *a0; w6 constant getSize()	^\s*pcVar14\ =\ \*\(code\ \*\*\)\(iVar8\ \+\ 0x60\);$	+1
+use	TIntermediate__addBinaryMath	iVar8	constantSize	INFERRED	w1 promote(); w2 left->getAsConstantUnion(); w3 right->getAsAggregate(); w4 left->getAsAggregate(); w5 *a0; w6 constant getSize()	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)pTVar10\ \+\ 0x4c\)\)\(pTVar10\);$	+2
+local	TIntermediate__addBinaryMath	iVar9	rightConstantUnion	INFERRED	right->getAsConstantUnion()
+local	TIntermediate__addBinaryMath	local_3c	typeTemp3AltBits	INFERRED	bit-field word (+0x24) of the TType temp at local_60
+local	TIntermediate__addBinaryMath	local_60	typeTemp3Alt	INFERRED	third getType() temp used by the logical-operator case
+local	TIntermediate__addBinaryMath	local_6c	typeTemp3Bits	INFERRED	bit-field word (+0x24) of the TType temp at local_90
+local	TIntermediate__addBinaryMath	local_88	typeTemp3Structure	INFERRED	structure pointer (+8) of the TType temp at local_90
+local	TIntermediate__addBinaryMath	local_90	typeTemp3	INFERRED	third getType() temp used by the relational-operator case
+local	TIntermediate__addBinaryMath	local_9c	typeTemp2Bits	INFERRED	bit-field word (+0x24) of the TType temp at local_c0
+local	TIntermediate__addBinaryMath	local_b8	typeTemp2Structure	INFERRED	structure pointer (+8) of the TType temp at local_c0
+local	TIntermediate__addBinaryMath	local_c0	typeTemp2	INFERRED	second getType() temp
+local	TIntermediate__addBinaryMath	local_cc	typeTemp1Bits	INFERRED	bit-field word (+0x24) of the TType temp at local_f0
+local	TIntermediate__addBinaryMath	local_e8	typeTemp1Structure	INFERRED	structure pointer (+8) of the TType temp at local_f0
+local	TIntermediate__addBinaryMath	local_f0	typeTemp1	INFERRED	first extra getType() temp
+use	TIntermediate__addBinaryMath	pcVar14	setOperandFn	INFERRED	w1: TIntermBinary::setLeft or setRight (vtable +0x60 / +100); w2: constant node fold (vtable +0x5c)	^\s*pcVar14\ =\ \*\(code\ \*\*\)\(iVar8\ \+\ 0x60\);$	+1
+use	TIntermediate__addBinaryMath	pcVar14	setOperandFn	INFERRED	w1: TIntermBinary::setLeft or setRight (vtable +0x60 / +100); w2: constant node fold (vtable +0x5c)	^\s*pcVar14\ =\ \*\(code\ \*\*\)\(\*a0\ \+\ 100\);$	+1
+use	TIntermediate__addBinaryMath	pcVar14	setOperandFn	INFERRED	w1: TIntermBinary::setLeft or setRight (vtable +0x60 / +100); w2: constant node fold (vtable +0x5c)	^\s*\(\*pcVar14\)\(a0,pTVar12\);$	+1
+use	TIntermediate__addBinaryMath	pcVar14	foldFn	INFERRED	w1: TIntermBinary::setLeft or setRight (vtable +0x60 / +100); w2: constant node fold (vtable +0x5c)	^\s*pcVar14\ =\ \*\(code\ \*\*\)\(\*\(int\ \*\)pTVar12\ \+\ 0x5c\);$	+1
+use	TIntermediate__addBinaryMath	pcVar14	foldFn	INFERRED	w1: TIntermBinary::setLeft or setRight (vtable +0x60 / +100); w2: constant node fold (vtable +0x5c)	^\s*pcVar14\ =\ \*\(code\ \*\*\)\(\*\(int\ \*\)pTVar10\ \+\ 0x5c\);$	+1
+use	TIntermediate__addBinaryMath	pcVar14	foldFn	INFERRED	w1: TIntermBinary::setLeft or setRight (vtable +0x60 / +100); w2: constant node fold (vtable +0x5c)	^\s*piVar7\ =\ \(int\ \*\)\(\*pcVar14\)\(a0_00,a0\[0xc\],a2,a3,a4\);$	+1
+use	TIntermediate__addBinaryMath	piVar11	leftConstCopy	INFERRED	copyConstUnion of the left / right constant	^\s*piVar11\ =\ \(int\ \*\)TIntermediate__copyConstUnion\(this,pTVar10\);$	+2
+use	TIntermediate__addBinaryMath	piVar11	rightConstCopy	INFERRED	copyConstUnion of the left / right constant	^\s*piVar11\ =\ \(int\ \*\)TIntermediate__copyConstUnion\(this,pTVar12\);$	+2
+use	TIntermediate__addBinaryMath	piVar7	rightOperand	INFERRED	right operand after implicit conversion; fold() result returned when non-null	^\s*piVar7\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)TIntermediate__addConversion\)\(this,param_2,local_c0,param_4\);$	+1
+use	TIntermediate__addBinaryMath	piVar7	rightOperand	INFERRED	right operand after implicit conversion; fold() result returned when non-null	^\s*if\ \(piVar7\ ==\ \(int\ \*\)0x0\)\ \{$	+1
+use	TIntermediate__addBinaryMath	piVar7	rightOperand	INFERRED	right operand after implicit conversion; fold() result returned when non-null	^\s*piVar7\ =\ param_4;$	+1
+use	TIntermediate__addBinaryMath	piVar7	rightOperand	INFERRED	right operand after implicit conversion; fold() result returned when non-null	^\s*piVar7\ =\ param_4;$@2	+1
+use	TIntermediate__addBinaryMath	piVar7	rightOperand	INFERRED	right operand after implicit conversion; fold() result returned when non-null	^\s*param_5\ =\ \(\*\*\(code\ \*\*\)\*piVar7\)\(piVar7\);$	+1
+use	TIntermediate__addBinaryMath	piVar7	rightOperand	INFERRED	right operand after implicit conversion; fold() result returned when non-null	^\s*\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 100\)\)\(a0,piVar7\);$	+1
+use	TIntermediate__addBinaryMath	piVar7	rightOperand	INFERRED	right operand after implicit conversion; fold() result returned when non-null	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x18\)\)\(piVar7\);$	+1
+use	TIntermediate__addBinaryMath	piVar7	rightOperand	INFERRED	right operand after implicit conversion; fold() result returned when non-null	^\s*pTVar12\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x18\)\)\(piVar7\);$	+1
+use	TIntermediate__addBinaryMath	piVar7	rightOperand	INFERRED	right operand after implicit conversion; fold() result returned when non-null	^\s*\(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x38\)\)\(\&local_120,piVar7\);$	+1
+use	TIntermediate__addBinaryMath	piVar7	rightOperand	INFERRED	right operand after implicit conversion; fold() result returned when non-null	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x1c\)\)\(piVar7\);$	+1
+use	TIntermediate__addBinaryMath	piVar7	rightOperand	INFERRED	right operand after implicit conversion; fold() result returned when non-null	^\s*pTVar13\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x1c\)\)\(piVar7\);$	+1
+use	TIntermediate__addBinaryMath	piVar7	foldResult	INFERRED	right operand after implicit conversion; fold() result returned when non-null	^\s*piVar7\ =\ \(int\ \*\)\(\*pcVar14\)\(a0_00,a0\[0xc\],a2,a3,a4\);$	+3
+local	TIntermediate__addBinaryMath	puVar5	intermBinaryVtable	INFERRED	PTR_vtable: TIntermBinary vtable (+8 stored at a0[0])
+local	TIntermediate__addBinaryMath	uVar6	oldTypeBits	INFERRED	bit-field word of the new node's TType before the field-wise init
+local	TIntermediate__addAssign	param_5	line	CONFIRMED	source line; 0 means take it from the left operand getLine
+use	TIntermediate__addAssign	iVar3	rightConstUnion	INFERRED	w1 right->getAsConstantUnion(); w2 addConversion result; w3 promote() result	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_4\ \+\ 0x18\)\)\(param_4\);$	+2
+use	TIntermediate__addAssign	iVar3	convertedRight	INFERRED	w1 right->getAsConstantUnion(); w2 addConversion result; w3 promote() result	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)TIntermediate__addConversion\)\(this,param_2,\&local_50,param_4\);$	+1
+use	TIntermediate__addAssign	iVar3	convertedRight	INFERRED	w1 right->getAsConstantUnion(); w2 addConversion result; w3 promote() result	^\s*if\ \(iVar3\ !=\ 0\)\ \{$@2	+1
+use	TIntermediate__addAssign	iVar3	convertedRight	INFERRED	w1 right->getAsConstantUnion(); w2 addConversion result; w3 promote() result	^\s*\(\*\*\(code\ \*\*\)\(\*a0\ \+\ 100\)\)\(a0,iVar3\);$	+1
+use	TIntermediate__addAssign	iVar3	promoteResult	INFERRED	w1 right->getAsConstantUnion(); w2 addConversion result; w3 promote() result	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x5c\)\)\(a0,\*\(undefined4\ \*\)this\);$	+1
+use	TIntermediate__addAssign	iVar3	promoteResult	INFERRED	w1 right->getAsConstantUnion(); w2 addConversion result; w3 promote() result	^\s*if\ \(iVar3\ !=\ 0\)\ \{$@3	+1
+local	TIntermediate__addAssign	piVar5	result	INFERRED	new assign node, or 0 on failure
+local	TIntermediate__addAssign	pTVar4	rightConstUnionNode	INFERRED	right->getAsConstantUnion() passed to copyConstUnion
+local	TIntermediate__addAssign	puVar1	intermBinaryVtable	INFERRED	PTR_vtable: TIntermBinary vtable
+local	TIntermediate__addAssign	uVar2	oldTypeBits	INFERRED	bit-field word of the new node's TType before the field-wise init
+local	TIntermediate__addIndex	param_5	line	CONFIRMED	source line; 0 means take it from the right operand getLine
+local	TIntermediate__addIndex	puVar1	intermBinaryVtable	INFERRED	PTR_vtable: TIntermBinary vtable
+local	TIntermediate__addIndex	uVar2	oldTypeBits	INFERRED	bit-field word of the new node's TType before the field-wise init

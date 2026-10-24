@@ -1,0 +1,35 @@
+local	_PPParserParseStatement	uVar8	profile	INFERRED	parser->profile flags (+0x48c), re-read after each suffix test
+local	_PPParserScopeFindIdentifier	iVar1	compareResult	INFERRED	strcmp of the identifier name
+local	_PPParserParseSourceVar	param_2	operand	CONFIRMED	2-word source operand descriptor being filled
+local	_PPParserParseSourceVar	param_3	opcode	CONFIRMED	opcode of the instruction (selects scalar/array handling)
+local	_PPParserParseSourceVar	param_4	isLiteral	CONFIRMED	set to 1 when the operand is a numeric literal, else 0
+local	_PPParserParseSourceVar	local_130	partBuf	INFERRED	token text: identifier, vertex/fragment, program/state, a number or {
+local	_PPParserParseSourceVar	local_30	literalEnd	INFERRED	strtod end pointer: equals partBuf+length when the whole token is a number
+local	_PPParserParseSourceVar	local_2c	bindingCount	INFERRED	binding count passed to _PPParserParseParamBinding for an inline constant
+local	_PPParserParseSourceVar	local_28	arrayIndex	INFERRED	array index parsed from [..] (low half added to the identifier's ordinal)
+local	_PPParserParseSourceVar	uVar1	ordinal	INFERRED	parser ordinal copied into the operand
+local	_PPParserParseSourceVar	uVar2	operandFlags	INFERRED	operand descriptor word 0 after the literal/identifier flag bits are set
+local	_PPParserParseSourceVar	iVar3	status	INFERRED	parser status code from the binding/attribute parsers
+local	_PPParserParseSourceVar	iVar4	compareResult	INFERRED	memcmp result of vertex/fragment/program/state keyword checks
+local	_PPStreamChunkListGetStream	param_2	entries	CONFIRMED	output array of 8-byte {word, word} stream entries (NULL: only count)
+local	_PPStreamChunkListGetStream	param_3	entryCount	CONFIRMED	receives the total number of stream entries
+local	_PPStreamChunkListGetStream	param_4	context	CONFIRMED	forwarded to _PPStreamChunkGetStream
+local	_PPStreamChunkListGetStream	iVar1	entryIndex	INFERRED	index of the next entry written to `entries`
+local	_PPStreamChunkListGetStream	iVar2	chunk	INFERRED	current chunk of the list (+8 next)
+local	_PPStreamChunkListGetStream	iVar4	entryPtr	INFERRED	address of the next entry slot (entries + 8*index)
+local	_PPStreamChunkListGetStream	local_30	chunkEntryCount	INFERRED	entries produced by the current chunk
+local	_PPStreamChunkListGetStream	auStack_40	countOnlyEntry	INFERRED	scratch entry used while only counting
+local	_PPStreamChunkListGetStream	auStack_2c	extraEntry	INFERRED	scratch entry for the 2nd.. entries of a multi-entry chunk
+local	_PPStreamChunkGetStream	stream	outEntry	CONFIRMED	receives the 2-word stream entry of the chunk
+local	_PPStreamChunkGetStream	param_2	chunk	CONFIRMED	the chunk (byte 0 = kind)
+local	_PPStreamChunkGetStream	param_3	context	INFERRED	unused
+local	_PPStreamChunkGetStream	param_4	entryCountOut	CONFIRMED	receives the number of entries this chunk occupies
+local	_PPStreamChunkGetStream	param_5	entryIndex	CONFIRMED	which entry of a multi-entry chunk to fetch
+local	_PPStreamChunkGetStream	uVar1	entryWord1	INFERRED	second word of the entry
+local	_PPStreamChunkGetStream	uVar2	entryWord0	INFERRED	first word of the entry
+local	_PPParserParseDestination	param_2	operand	CONFIRMED	2-word destination operand descriptor being filled
+local	_PPParserParseDestination	param_3	opcode	CONFIRMED	opcode of the instruction
+local	_PPParserParseDestination	local_130	partBuf	INFERRED	token text: result.* or an identifier, then [ . or ;
+local	_PPParserParseDestination	local_30	arrayIndex	INFERRED	array index parsed from [..]
+local	_PPParserParseDestination	iVar1	status	INFERRED	part length / memcmp result / parser status code
+local	_PPParserParseDestination	uVar2	identifierKind	INFERRED	identifier kind word (+0xc): selects the destination register file

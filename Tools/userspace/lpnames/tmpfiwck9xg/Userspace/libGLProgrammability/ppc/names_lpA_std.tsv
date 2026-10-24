@@ -1,0 +1,223 @@
+local	__ZNSs6rbeginEv	local_20	endIter	INFERRED	end() result iterator stored into the reverse_iterator's base
+local	__ZNKSs6rbeginEv	local_20	endIter	INFERRED	end() result iterator stored into the reverse_iterator's base
+local	__ZNSs4rendEv	local_20	beginIter	INFERRED	begin() result iterator stored into the reverse_iterator's base
+local	__ZNKSs4rendEv	local_20	beginIter	INFERRED	begin() result iterator stored into the reverse_iterator's base
+local	__ZNSs7replaceEmmPKcm	uVar2	strSize	INFERRED	libstdc++ 4.0 basic_string::replace(pos1,n1,s,n2): size = _M_rep()->_M_length (data[-0xc]); the two locals receive _M_ibegin() out-iterators
+local	__ZNSs7replaceEmmPKcm	local_30	ibeginIterA	INFERRED	libstdc++ 4.0 basic_string::replace(pos1,n1,s,n2): size = _M_rep()->_M_length (data[-0xc]); the two locals receive _M_ibegin() out-iterators
+local	__ZNSs7replaceEmmPKcm	local_2c	ibeginIterB	INFERRED	libstdc++ 4.0 basic_string::replace(pos1,n1,s,n2): size = _M_rep()->_M_length (data[-0xc]); the two locals receive _M_ibegin() out-iterators
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_	param_3	i2	INFERRED	libstdc++ 4.0 basic_string::replace(i1,i2,k1,k2): startOff=i1-_M_ibegin(), len1=min(i2-i1,size-startOff), len2=k2-k1
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_	uVar2	startOff	INFERRED	libstdc++ 4.0 basic_string::replace(i1,i2,k1,k2): startOff=i1-_M_ibegin(), len1=min(i2-i1,size-startOff), len2=k2-k1
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_	uVar3	len1	INFERRED	libstdc++ 4.0 basic_string::replace(i1,i2,k1,k2): startOff=i1-_M_ibegin(), len1=min(i2-i1,size-startOff), len2=k2-k1
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_	iVar4	len2	INFERRED	libstdc++ 4.0 basic_string::replace(i1,i2,k1,k2): startOff=i1-_M_ibegin(), len1=min(i2-i1,size-startOff), len2=k2-k1
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_	uVar5	strSize	INFERRED	libstdc++ 4.0 basic_string::replace(i1,i2,k1,k2): startOff=i1-_M_ibegin(), len1=min(i2-i1,size-startOff), len2=k2-k1
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_	local_30	ibeginIter	INFERRED	libstdc++ 4.0 basic_string::replace(i1,i2,k1,k2): startOff=i1-_M_ibegin(), len1=min(i2-i1,size-startOff), len2=k2-k1
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_	local_2c	ibeginIterA	INFERRED	libstdc++ 4.0 basic_string::replace(i1,i2,k1,k2): startOff=i1-_M_ibegin(), len1=min(i2-i1,size-startOff), len2=k2-k1
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S1_S1_	local_28	ibeginIterB	INFERRED	libstdc++ 4.0 basic_string::replace(i1,i2,k1,k2): startOff=i1-_M_ibegin(), len1=min(i2-i1,size-startOff), len2=k2-k1
+local	__ZNSs5eraseEmm	pcVar2	data	INFERRED	libstdc++ 4.0 basic_string::erase(pos,n) via replace: _M_check(pos) iterator, _M_fold(pos,n) end iterator, startOff=pos-_M_ibegin(), eraseLen=min(end-pos,size-startOff)
+local	__ZNSs5eraseEmm	pcVar1	curData	INFERRED	libstdc++ 4.0 basic_string::erase(pos,n) via replace: _M_check(pos) iterator, _M_fold(pos,n) end iterator, startOff=pos-_M_ibegin(), eraseLen=min(end-pos,size-startOff)
+local	__ZNSs5eraseEmm	uVar5	strSize	INFERRED	libstdc++ 4.0 basic_string::erase(pos,n) via replace: _M_check(pos) iterator, _M_fold(pos,n) end iterator, startOff=pos-_M_ibegin(), eraseLen=min(end-pos,size-startOff)
+local	__ZNSs5eraseEmm	uVar3	startOff	INFERRED	libstdc++ 4.0 basic_string::erase(pos,n) via replace: _M_check(pos) iterator, _M_fold(pos,n) end iterator, startOff=pos-_M_ibegin(), eraseLen=min(end-pos,size-startOff)
+local	__ZNSs5eraseEmm	uVar4	eraseLen	INFERRED	libstdc++ 4.0 basic_string::erase(pos,n) via replace: _M_check(pos) iterator, _M_fold(pos,n) end iterator, startOff=pos-_M_ibegin(), eraseLen=min(end-pos,size-startOff)
+local	__ZNSs5eraseEmm	local_40	posIter	INFERRED	libstdc++ 4.0 basic_string::erase(pos,n) via replace: _M_check(pos) iterator, _M_fold(pos,n) end iterator, startOff=pos-_M_ibegin(), eraseLen=min(end-pos,size-startOff)
+local	__ZNSs5eraseEmm	local_3c	endIter	INFERRED	libstdc++ 4.0 basic_string::erase(pos,n) via replace: _M_check(pos) iterator, _M_fold(pos,n) end iterator, startOff=pos-_M_ibegin(), eraseLen=min(end-pos,size-startOff)
+local	__ZNSs5eraseEmm	local_38	ibeginIter	INFERRED	libstdc++ 4.0 basic_string::erase(pos,n) via replace: _M_check(pos) iterator, _M_fold(pos,n) end iterator, startOff=pos-_M_ibegin(), eraseLen=min(end-pos,size-startOff)
+local	__ZNSs5eraseEmm	local_34	ibeginIterA	INFERRED	libstdc++ 4.0 basic_string::erase(pos,n) via replace: _M_check(pos) iterator, _M_fold(pos,n) end iterator, startOff=pos-_M_ibegin(), eraseLen=min(end-pos,size-startOff)
+local	__ZNSs5eraseEmm	local_30	ibeginIterB	INFERRED	libstdc++ 4.0 basic_string::erase(pos,n) via replace: _M_check(pos) iterator, _M_fold(pos,n) end iterator, startOff=pos-_M_ibegin(), eraseLen=min(end-pos,size-startOff)
+local	__ZNSs6resizeEmc	uVar4	strSize	INFERRED	libstdc++ 4.0 basic_string::resize(n,c) shrinking branch is erase(n,npos) inlined; in_register_00000014 is the upper 24 bits of the char argument in r5
+local	__ZNSs6resizeEmc	uVar5	eraseLen	INFERRED	libstdc++ 4.0 basic_string::resize(n,c) shrinking branch is erase(n,npos) inlined; in_register_00000014 is the upper 24 bits of the char argument in r5
+local	__ZNSs6resizeEmc	local_40	posIter	INFERRED	libstdc++ 4.0 basic_string::resize(n,c) shrinking branch is erase(n,npos) inlined; in_register_00000014 is the upper 24 bits of the char argument in r5
+local	__ZNSs6resizeEmc	local_3c	endIter	INFERRED	libstdc++ 4.0 basic_string::resize(n,c) shrinking branch is erase(n,npos) inlined; in_register_00000014 is the upper 24 bits of the char argument in r5
+local	__ZNSs6resizeEmc	local_38	ibeginIter	INFERRED	libstdc++ 4.0 basic_string::resize(n,c) shrinking branch is erase(n,npos) inlined; in_register_00000014 is the upper 24 bits of the char argument in r5
+local	__ZNSs6resizeEmc	local_34	ibeginIterA	INFERRED	libstdc++ 4.0 basic_string::resize(n,c) shrinking branch is erase(n,npos) inlined; in_register_00000014 is the upper 24 bits of the char argument in r5
+local	__ZNSs6resizeEmc	local_30	ibeginIterB	INFERRED	libstdc++ 4.0 basic_string::resize(n,c) shrinking branch is erase(n,npos) inlined; in_register_00000014 is the upper 24 bits of the char argument in r5
+local	__ZNSs6resizeEmc	in_register_00000014	cHigh24	INFERRED	libstdc++ 4.0 basic_string::resize(n,c) shrinking branch is erase(n,npos) inlined; in_register_00000014 is the upper 24 bits of the char argument in r5
+local	__ZNSs7reserveEm	uVar4	newData	INFERRED	libstdc++ 4.0 basic_string::reserve: _Rep::_M_clone(alloc,extra) returns the new character data pointer that replaces _M_dataplus._M_p
+local	__ZNSs7reserveEm	aaStack_20	allocatorTmp	INFERRED	libstdc++ 4.0 basic_string::reserve: _Rep::_M_clone(alloc,extra) returns the new character data pointer that replaces _M_dataplus._M_p
+local	__ZNSspLEc	in_register_00000010	cHigh24	INFERRED	upper 24 bits of the char argument in r4 (CONCAT31 rebuilds the full int)
+local	__ZNSs6appendERKSs	uVar1	newLen	INFERRED	append(str): newLen = size+str.size; _M_replace_safe(_M_iend(),_M_iend(),str._M_ibegin(),str._M_iend())
+local	__ZNSs6appendERKSs	local_30	iendIterA	INFERRED	append(str): newLen = size+str.size; _M_replace_safe(_M_iend(),_M_iend(),str._M_ibegin(),str._M_iend())
+local	__ZNSs6appendERKSs	local_2c	iendIterB	INFERRED	append(str): newLen = size+str.size; _M_replace_safe(_M_iend(),_M_iend(),str._M_ibegin(),str._M_iend())
+local	__ZNSs6appendERKSs	local_28	textBeginIter	INFERRED	append(str): newLen = size+str.size; _M_replace_safe(_M_iend(),_M_iend(),str._M_ibegin(),str._M_iend())
+local	__ZNSs6appendERKSs	local_24	textEndIter	INFERRED	append(str): newLen = size+str.size; _M_replace_safe(_M_iend(),_M_iend(),str._M_ibegin(),str._M_iend())
+local	__ZNSs6appendERKSsmm	uVar1	newLen	INFERRED	append(str,pos,n): copyLenPtr points at min(n, str.size-pos) (textRemaining); _M_check(pos) and _M_fold(pos,n) give the source range
+local	__ZNSs6appendERKSsmm	puVar2	copyLenPtr	INFERRED	append(str,pos,n): copyLenPtr points at min(n, str.size-pos) (textRemaining); _M_check(pos) and _M_fold(pos,n) give the source range
+local	__ZNSs6appendERKSsmm	local_40	iendIterA	INFERRED	append(str,pos,n): copyLenPtr points at min(n, str.size-pos) (textRemaining); _M_check(pos) and _M_fold(pos,n) give the source range
+local	__ZNSs6appendERKSsmm	local_3c	iendIterB	INFERRED	append(str,pos,n): copyLenPtr points at min(n, str.size-pos) (textRemaining); _M_check(pos) and _M_fold(pos,n) give the source range
+local	__ZNSs6appendERKSsmm	local_38	textPosIter	INFERRED	append(str,pos,n): copyLenPtr points at min(n, str.size-pos) (textRemaining); _M_check(pos) and _M_fold(pos,n) give the source range
+local	__ZNSs6appendERKSsmm	local_34	textEndIter	INFERRED	append(str,pos,n): copyLenPtr points at min(n, str.size-pos) (textRemaining); _M_check(pos) and _M_fold(pos,n) give the source range
+local	__ZNSs6appendERKSsmm	local_30	textRemaining	INFERRED	append(str,pos,n): copyLenPtr points at min(n, str.size-pos) (textRemaining); _M_check(pos) and _M_fold(pos,n) give the source range
+local	__ZNSs6appendEPKcm	uVar1	newLen	INFERRED	append(s,n): newLen=size+n; _M_replace_safe(_M_iend(),_M_iend(),s,s+n)
+local	__ZNSs6appendEPKcm	local_30	iendIterA	INFERRED	append(s,n): newLen=size+n; _M_replace_safe(_M_iend(),_M_iend(),s,s+n)
+local	__ZNSs6appendEPKcm	local_2c	iendIterB	INFERRED	append(s,n): newLen=size+n; _M_replace_safe(_M_iend(),_M_iend(),s,s+n)
+local	__ZNSs6appendEmc	uVar1	newLen	INFERRED	append(n,c): newLen=size+n; replace(_M_iend(),_M_iend(),n,c)
+local	__ZNSs6appendEmc	local_30	iendIterA	INFERRED	append(n,c): newLen=size+n; replace(_M_iend(),_M_iend(),n,c)
+local	__ZNSs6appendEmc	local_2c	iendIterB	INFERRED	append(n,c): newLen=size+n; replace(_M_iend(),_M_iend(),n,c)
+local	std__string__push_back	local_30	iendIterA	INFERRED	push_back(c): replace(_M_iend(),_M_iend(),1,c)
+local	std__string__push_back	local_2c	iendIterB	INFERRED	push_back(c): replace(_M_iend(),_M_iend(),1,c)
+use	__ZNSs6resizeEmc	uVar1	origSize	INFERRED	string size before resize	uVar1 = \*\(uint \*\)\(\*\(int \*\)this \+ -0xc\)	uVar1 = local_40 - local_38
+use	__ZNSs6resizeEmc	uVar1	startOff	INFERRED	offset of the erased range from _M_ibegin()	uVar1 = local_40 - local_38	
+
+local	__ZNSs6assignERKSs	uVar4	newData	INFERRED	assign(str): _Rep::_M_grab(alloc,alloc) of the source's rep gives the new data pointer; textData = str._M_dataplus._M_p
+local	__ZNSs6assignERKSs	iVar5	textData	INFERRED	assign(str): _Rep::_M_grab(alloc,alloc) of the source's rep gives the new data pointer; textData = str._M_dataplus._M_p
+local	__ZNSs6assignERKSs	aaStack_40	allocatorTmp	INFERRED	assign(str): _Rep::_M_grab(alloc,alloc) of the source's rep gives the new data pointer; textData = str._M_dataplus._M_p
+local	__ZNSs6assignERKSsmm	iVar1	textData	INFERRED	assign(str,pos,n): textRemaining = str.size - pos (clamps n)
+local	__ZNSs6assignERKSsmm	uVar2	textRemaining	INFERRED	assign(str,pos,n): textRemaining = str.size - pos (clamps n)
+local	__ZNSs6insertEmPKcm	pcVar1	srcAdj	INFERRED	libstdc++ 4.0 insert(pos,s,n) aliasing branch: s adjusted after _M_mutate, dstPtr=_M_data()+pos, nLeft=dst-s when s overlaps the gap
+local	__ZNSs6insertEmPKcm	pcVar2	srcRest	INFERRED	libstdc++ 4.0 insert(pos,s,n) aliasing branch: s adjusted after _M_mutate, dstPtr=_M_data()+pos, nLeft=dst-s when s overlaps the gap
+local	__ZNSs6insertEmPKcm	iVar3	nLeft	INFERRED	libstdc++ 4.0 insert(pos,s,n) aliasing branch: s adjusted after _M_mutate, dstPtr=_M_data()+pos, nLeft=dst-s when s overlaps the gap
+local	__ZNSs6insertEmPKcm	uVar4	strSize	INFERRED	libstdc++ 4.0 insert(pos,s,n) aliasing branch: s adjusted after _M_mutate, dstPtr=_M_data()+pos, nLeft=dst-s when s overlaps the gap
+local	__ZNSs6insertEmPKcm	pcVar5	dstPtr	INFERRED	libstdc++ 4.0 insert(pos,s,n) aliasing branch: s adjusted after _M_mutate, dstPtr=_M_data()+pos, nLeft=dst-s when s overlaps the gap
+local	__ZNSs6insertEmPKcm	local_30	ibeginIterA	INFERRED	libstdc++ 4.0 insert(pos,s,n) aliasing branch: s adjusted after _M_mutate, dstPtr=_M_data()+pos, nLeft=dst-s when s overlaps the gap
+local	__ZNSs6insertEmPKcm	local_2c	ibeginIterB	INFERRED	libstdc++ 4.0 insert(pos,s,n) aliasing branch: s adjusted after _M_mutate, dstPtr=_M_data()+pos, nLeft=dst-s when s overlaps the gap
+local	__ZNSs6insertEmRKSs	pcVar2	srcAdj	INFERRED	libstdc++ 4.0 insert(pos,str): same aliasing branch as insert(pos,s,n) with s=str data and n=str.size
+local	__ZNSs6insertEmRKSs	uVar1	textLen	INFERRED	libstdc++ 4.0 insert(pos,str): same aliasing branch as insert(pos,s,n) with s=str data and n=str.size
+local	__ZNSs6insertEmRKSs	pcVar3	srcRest	INFERRED	libstdc++ 4.0 insert(pos,str): same aliasing branch as insert(pos,s,n) with s=str data and n=str.size
+local	__ZNSs6insertEmRKSs	iVar4	nLeft	INFERRED	libstdc++ 4.0 insert(pos,str): same aliasing branch as insert(pos,s,n) with s=str data and n=str.size
+local	__ZNSs6insertEmRKSs	uVar5	strSize	INFERRED	libstdc++ 4.0 insert(pos,str): same aliasing branch as insert(pos,s,n) with s=str data and n=str.size
+local	__ZNSs6insertEmRKSs	pcVar6	dstPtr	INFERRED	libstdc++ 4.0 insert(pos,str): same aliasing branch as insert(pos,s,n) with s=str data and n=str.size
+local	__ZNSs6insertEmRKSs	local_30	ibeginIterA	INFERRED	libstdc++ 4.0 insert(pos,str): same aliasing branch as insert(pos,s,n) with s=str data and n=str.size
+local	__ZNSs6insertEmRKSs	local_2c	ibeginIterB	INFERRED	libstdc++ 4.0 insert(pos,str): same aliasing branch as insert(pos,s,n) with s=str data and n=str.size
+local	__ZNSs6insertEmRKSsmm	pcVar1	srcAdj	INFERRED	libstdc++ 4.0 insert(pos1,str,pos2,n) aliasing branch
+local	__ZNSs6insertEmRKSsmm	pcVar3	srcRest	INFERRED	libstdc++ 4.0 insert(pos1,str,pos2,n) aliasing branch
+local	__ZNSs6insertEmRKSsmm	pcVar5	dstPtr	INFERRED	libstdc++ 4.0 insert(pos1,str,pos2,n) aliasing branch
+local	__ZNSs6insertEmRKSsmm	local_30	ibeginIterA	INFERRED	libstdc++ 4.0 insert(pos1,str,pos2,n) aliasing branch
+local	__ZNSs6insertEmRKSsmm	local_2c	ibeginIterB	INFERRED	libstdc++ 4.0 insert(pos1,str,pos2,n) aliasing branch
+local	__ZNSs6insertEmmc	local_30	posIter	INFERRED	insert(pos,n,c): _M_check(pos) iterator passed as both ends of replace
+local	__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEc	iVar1	posOffset	INFERRED	insert(p,c): posOffset=p-_M_ibegin(); iterTmp holds _M_ibegin()/_M_check() results; result iterator = _M_ibegin()+posOffset
+local	__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEc	local_30	iterTmp	INFERRED	insert(p,c): posOffset=p-_M_ibegin(); iterTmp holds _M_ibegin()/_M_check() results; result iterator = _M_ibegin()+posOffset
+local	__ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEE	iVar1	posOffset	INFERRED	erase(p): posOffset=p-_M_ibegin(); result iterator = _M_ibegin()+posOffset
+local	__ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEE	local_30	iterTmp	INFERRED	erase(p): posOffset=p-_M_ibegin(); result iterator = _M_ibegin()+posOffset
+local	__ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEES2_	iVar1	posOffset	INFERRED	erase(first,last): posOffset=first-_M_ibegin(); result iterator = _M_ibegin()+posOffset
+local	__ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEES2_	local_30	iterTmp	INFERRED	erase(first,last): posOffset=first-_M_ibegin(); result iterator = _M_ibegin()+posOffset
+local	__ZNSs7replaceEmmRKSsmm	iVar1	textData	INFERRED	replace(pos1,n1,str,pos2,n2): textRemaining=str.size-pos2 clamps n2
+local	__ZNSs7replaceEmmRKSsmm	uVar2	textRemaining	INFERRED	replace(pos1,n1,str,pos2,n2): textRemaining=str.size-pos2 clamps n2
+local	__ZNSs7replaceEmmmc	local_30	posIter	INFERRED	replace(pos1,n1,n2,c): _M_check(pos1) and _M_fold(pos1,n1) iterators
+local	__ZNSs7replaceEmmmc	local_2c	endIter	INFERRED	replace(pos1,n1,n2,c): _M_check(pos1) and _M_fold(pos1,n1) iterators
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm	local_30	ibeginIter	INFERRED	replace(i1,i2,s,n) -> replace(i1-_M_ibegin(),i2-i1,s,n)
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_RKSs	pcVar1	textData	INFERRED	replace(i1,i2,str) -> replace(i1-_M_ibegin(),i2-i1,str data,str size)
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_RKSs	local_30	ibeginIter	INFERRED	replace(i1,i2,str) -> replace(i1-_M_ibegin(),i2-i1,str data,str size)
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc	local_30	ibeginIter	INFERRED	replace(i1,i2,n,c): offsets relative to _M_ibegin()
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcS4_	local_30	ibeginIter	INFERRED	replace(i1,i2,k1,k2) -> replace(i1-_M_ibegin(),i2-i1,k1,k2-k1)
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S2_S2_	local_30	ibeginIter	INFERRED	replace(i1,i2,k1,k2) -> replace(i1-_M_ibegin(),i2-i1,k1,k2-k1)
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_NS0_IPKcSsEES5_	local_30	ibeginIter	INFERRED	replace(i1,i2,k1,k2) -> replace(i1-_M_ibegin(),i2-i1,k1,k2-k1)
+local	std__string___S_construct	puVar1	resultData	INFERRED	_S_construct(n,c,alloc): n==0 returns the shared empty rep data (_S_empty_rep+0xc), else _Rep::_S_create(n) with data at rep+0xc, memset to c, rep->_M_length=n, NUL terminated
+local	std__string___S_construct	puVar2	rep	INFERRED	_S_construct(n,c,alloc): n==0 returns the shared empty rep data (_S_empty_rep+0xc), else _Rep::_S_create(n) with data at rep+0xc, memset to c, rep->_M_length=n, NUL terminated
+local	std__string__copy	uVar1	remaining	INFERRED	copy(s,n,pos): remaining=size-pos clamps n
+local	__ZNKSs4findEPKcmm	uVar1	endPos	INFERRED	find(s,pos,n): endPos=pos+n tested against the size; cur=data+pos for memcmp
+local	__ZNKSs4findEPKcmm	uVar3	strSize	INFERRED	find(s,pos,n): endPos=pos+n tested against the size; cur=data+pos for memcmp
+local	__ZNKSs4findEPKcmm	iVar4	cur	INFERRED	find(s,pos,n): endPos=pos+n tested against the size; cur=data+pos for memcmp
+local	__ZNKSs4findEcm	iVar2	result	INFERRED	find(c,pos): memchr over [data+pos,data+size); result = hit - data or npos
+local	__ZNKSs4findEcm	cStack0000001c	cSpill	INFERRED	find(c,pos): memchr over [data+pos,data+size); result = hit - data or npos
+local	__ZNKSs5rfindEPKcmm	uVar1	curPos	INFERRED	rfind(s,pos,n): start = min(pos,size-n), scan down with memcmp
+local	__ZNKSs5rfindEPKcmm	puVar2	startPtr	INFERRED	rfind(s,pos,n): start = min(pos,size-n), scan down with memcmp
+local	__ZNKSs5rfindEPKcmm	iVar3	cmpResult	INFERRED	rfind(s,pos,n): start = min(pos,size-n), scan down with memcmp
+local	__ZNKSs5rfindEPKcmm	iVar4	data	INFERRED	rfind(s,pos,n): start = min(pos,size-n), scan down with memcmp
+local	__ZNKSs5rfindEPKcmm	local_30	maxPos	INFERRED	rfind(s,pos,n): start = min(pos,size-n), scan down with memcmp
+use	__ZNSs6insertEmRKSsmm	iVar2	textData	INFERRED	str._M_dataplus._M_p of the source string	iVar2 = \*\(int \*\)\w+;	iVar2 = \(int\)pcVar5
+use	__ZNSs6insertEmRKSsmm	iVar2	nLeft	INFERRED	dst - s: bytes of the source that lie before the gap	iVar2 = \(int\)pcVar5 - \(int\)pcVar1;	
+use	__ZNSs6insertEmRKSsmm	uVar4	textRemaining	INFERRED	str.size - pos2 clamps n	uVar4 = uVar4 - param_4;	uVar4 = \*\(uint \*\)\(\*\(int \*\)this
+use	__ZNSs6insertEmRKSsmm	uVar4	strSize	INFERRED	this->size before the insert	uVar4 = \*\(uint \*\)\(\*\(int \*\)this \+ -0xc\);	
+local	__ZNSs6rbeginEv	this	result	INFERRED	returns the reverse_iterator through the hidden first argument (a one-word iterator object); the std::string is the second argument
+local	__ZNSs6rbeginEv	param_2	self	INFERRED	the std::string the member function runs on (second argument, after the hidden return pointer)
+local	__ZNKSs6rbeginEv	this	result	INFERRED	returns the reverse_iterator through the hidden first argument (a one-word iterator object); the std::string is the second argument
+local	__ZNKSs6rbeginEv	param_2	self	INFERRED	the std::string the member function runs on (second argument, after the hidden return pointer)
+local	__ZNSs4rendEv	this	result	INFERRED	returns the reverse_iterator through the hidden first argument (a one-word iterator object); the std::string is the second argument
+local	__ZNSs4rendEv	param_2	self	INFERRED	the std::string the member function runs on (second argument, after the hidden return pointer)
+local	__ZNKSs4rendEv	this	result	INFERRED	returns the reverse_iterator through the hidden first argument (a one-word iterator object); the std::string is the second argument
+local	__ZNKSs4rendEv	param_2	self	INFERRED	the std::string the member function runs on (second argument, after the hidden return pointer)
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_RKSs	param_3	i2	INFERRED	replace(i1,i2,str): second iterator
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKc	param_3	i2	INFERRED	replace(i1,i2,s): second iterator
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcm	param_3	i2	INFERRED	replace(i1,i2,s,n): second iterator
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc	param_3	i2	INFERRED	replace(i1,i2,n,c): second iterator and count
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_mc	param_4	n	INFERRED	replace(i1,i2,n,c): second iterator and count
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_PKcS4_	param_3	i2	INFERRED	replace(i1,i2,k1,k2): second iterator
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S2_S2_	param_3	i2	INFERRED	replace(i1,i2,k1,k2): second iterator and end of source range
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_S2_S2_	param_5	k2	INFERRED	replace(i1,i2,k1,k2): second iterator and end of source range
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_NS0_IPKcSsEES5_	param_3	i2	INFERRED	replace(i1,i2,k1,k2): second iterator and end of source range
+local	__ZNSs7replaceEN9__gnu_cxx17__normal_iteratorIPcSsEES2_NS0_IPKcSsEES5_	param_5	k2	INFERRED	replace(i1,i2,k1,k2): second iterator and end of source range
+local	__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEc	param_3	p	INFERRED	insert(p,c): position iterator (first argument is the hidden iterator return slot, second the string)
+local	__ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEE	param_3	p	INFERRED	erase(p): iterator to erase
+local	__ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEES2_	param_3	first	INFERRED	erase(first,last): iterator range
+local	__ZNSs5eraseEN9__gnu_cxx17__normal_iteratorIPcSsEES2_	param_4	last	INFERRED	erase(first,last): iterator range
+local	__ZNSs6insertEN9__gnu_cxx17__normal_iteratorIPcSsEEmc	param_3	n	INFERRED	insert(p,n,c): count
+local	std__string___S_construct	param_2	c	INFERRED	_S_construct(n,c,alloc): fill char and allocator
+local	std__string___S_construct	param_3	alloc	INFERRED	_S_construct(n,c,alloc): fill char and allocator
+local	std__string__copy	param_3	n	INFERRED	copy(s,n,pos): count and start position
+local	std__string__copy	param_4	pos	INFERRED	copy(s,n,pos): count and start position
+local	__ZNSspLEc	param_2	c	INFERRED	operator+=(char c)
+local	std__string__push_back	param_2	c	INFERRED	push_back(char c)
+local	__ZNKSsixEm	param_2	pos	INFERRED	operator[](pos) const
+local	__ZNSsixEm	param_2	pos	INFERRED	operator[](pos)
+local	std__string___M_check	param_2	self	INFERRED	_M_check(pos): throws out_of_range("basic_string::_M_check") if pos > size, result iterator = _M_ibegin()+pos stored through the hidden return pointer
+local	std__string___M_check	param_3	pos	INFERRED	_M_check(pos): throws out_of_range("basic_string::_M_check") if pos > size, result iterator = _M_ibegin()+pos stored through the hidden return pointer
+local	std__string___M_check	local_20	ibeginIter	INFERRED	_M_check(pos): throws out_of_range("basic_string::_M_check") if pos > size, result iterator = _M_ibegin()+pos stored through the hidden return pointer
+local	__ZNKSs7_M_foldEmm	param_4	n	INFERRED	_M_fold(pos,n): n clamped to size-pos, result iterator = _M_ibegin()+pos+n through the hidden return pointer
+local	__ZNKSs7_M_foldEmm	uVar1	remaining	INFERRED	_M_fold(pos,n): n clamped to size-pos, result iterator = _M_ibegin()+pos+n through the hidden return pointer
+local	__ZNKSs7_M_foldEmm	local_20	ibeginIter	INFERRED	_M_fold(pos,n): n clamped to size-pos, result iterator = _M_ibegin()+pos+n through the hidden return pointer
+local	__ZNSs4_Rep10_M_disposeERKSaIcE	in_r4	alloc	INFERRED	_Rep::_M_dispose(alloc): atomic decrement of the refcount word at rep+8; _M_destroy(alloc) when it was <=0
+local	__ZNSs4_Rep10_M_disposeERKSaIcE	paVar2	refCountPtr	INFERRED	_Rep::_M_dispose(alloc): atomic decrement of the refcount word at rep+8; _M_destroy(alloc) when it was <=0
+local	__ZNSs4_Rep10_M_disposeERKSaIcE	iVar3	oldRefCount	INFERRED	_Rep::_M_dispose(alloc): atomic decrement of the refcount word at rep+8; _M_destroy(alloc) when it was <=0
+local	__ZNSs9_M_mutateEmmm	iVar4	curData	INFERRED	libstdc++ 4.0 _M_mutate(pos,len1,len2): tailSrc=data+pos+len1, tailLen=size-pos-len1, newSize=size+len2-len1; reallocates through _Rep::_S_create(newCapacity) when shared or too small; curData is the data pointer whose rep is reset to sharable at the end
+local	__ZNSs9_M_mutateEmmm	iVar6	tailSrc	INFERRED	libstdc++ 4.0 _M_mutate(pos,len1,len2): tailSrc=data+pos+len1, tailLen=size-pos-len1, newSize=size+len2-len1; reallocates through _Rep::_S_create(newCapacity) when shared or too small; curData is the data pointer whose rep is reset to sharable at the end
+local	__ZNSs9_M_mutateEmmm	iVar7	tailLen	INFERRED	libstdc++ 4.0 _M_mutate(pos,len1,len2): tailSrc=data+pos+len1, tailLen=size-pos-len1, newSize=size+len2-len1; reallocates through _Rep::_S_create(newCapacity) when shared or too small; curData is the data pointer whose rep is reset to sharable at the end
+local	__ZNSs9_M_mutateEmmm	uVar8	newSize	INFERRED	libstdc++ 4.0 _M_mutate(pos,len1,len2): tailSrc=data+pos+len1, tailLen=size-pos-len1, newSize=size+len2-len1; reallocates through _Rep::_S_create(newCapacity) when shared or too small; curData is the data pointer whose rep is reset to sharable at the end
+local	__ZNSs9_M_mutateEmmm	uVar5	newCapacity	INFERRED	libstdc++ 4.0 _M_mutate(pos,len1,len2): tailSrc=data+pos+len1, tailLen=size-pos-len1, newSize=size+len2-len1; reallocates through _Rep::_S_create(newCapacity) when shared or too small; curData is the data pointer whose rep is reset to sharable at the end
+local	__ZNSs9_M_mutateEmmm	aaStack_40	allocatorTmp	INFERRED	libstdc++ 4.0 _M_mutate(pos,len1,len2): tailSrc=data+pos+len1, tailLen=size-pos-len1, newSize=size+len2-len1; reallocates through _Rep::_S_create(newCapacity) when shared or too small; curData is the data pointer whose rep is reset to sharable at the end
+local	__ZNSs4_Rep10_M_refcopyEv	piVar2	refCountPtr	INFERRED	_Rep::_M_refcopy: atomic increment of the refcount word at rep+8, returns rep+0xc (the data)
+local	__ZNSsC4ERKSaIcE	pcVar1	emptyData	INFERRED	string(alloc): _S_construct(0,0,alloc) gives the shared empty data
+local	__ZNSsC1ERKSs	piVar2	refCountPtr	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC1ERKSs	pcVar3	data	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC1ERKSs	aaStack_50	cloneAlloc	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC1ERKSs	aaStack_30	hiderAlloc	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC4ERKSs	piVar2	refCountPtr	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC4ERKSs	pcVar3	data	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC4ERKSs	aaStack_50	cloneAlloc	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC4ERKSs	aaStack_30	hiderAlloc	INFERRED	string(str) copy ctor: share the rep (refcount++) or _M_clone when leaked (refcount<0)
+local	__ZNSsC1ERKSsmm	pcVar1	newData	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC1ERKSsmm	uStack_50	posIter	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC1ERKSsmm	auStack_4c	endIter	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC1ERKSsmm	aaStack_40	ctorAlloc	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC1ERKSsmm	aaStack_30	hiderAlloc	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmm	pcVar1	newData	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmm	local_50	posIter	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmm	local_4c	endIter	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmm	aaStack_40	ctorAlloc	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmm	aaStack_30	hiderAlloc	INFERRED	string(str,pos,n): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmmRKSaIcE	pcVar1	newData	INFERRED	string(str,pos,n,alloc): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmmRKSaIcE	local_30	posIter	INFERRED	string(str,pos,n,alloc): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4ERKSsmmRKSaIcE	local_2c	endIter	INFERRED	string(str,pos,n,alloc): _M_check(pos) and _M_fold(pos,n) give the source range for _S_construct
+local	__ZNSsC4EPKcmRKSaIcE	pcVar1	newData	INFERRED	string(s,n,alloc): _S_construct(s,s+n,alloc)
+local	__ZNSsC4EmcRKSaIcE	pcVar1	newData	INFERRED	string(n,c,alloc): _S_construct(n,c,alloc); in_register_00000014 is the upper 24 bits of c
+local	__ZNSsC4EmcRKSaIcE	in_register_00000014	cHigh24	INFERRED	string(n,c,alloc): _S_construct(n,c,alloc); in_register_00000014 is the upper 24 bits of c
+local	__ZNSs6assignEPKcm	psVar2	result	INFERRED	libstdc++ 4.0 assign(s,n): when s aliases the buffer memmove/memcpy in place, else _M_replace_safe(_M_ibegin(),_M_iend(),s,s+n)
+local	__ZNSs6assignEPKcm	local_30	ibeginIter	INFERRED	libstdc++ 4.0 assign(s,n): when s aliases the buffer memmove/memcpy in place, else _M_replace_safe(_M_ibegin(),_M_iend(),s,s+n)
+local	__ZNSs6assignEPKcm	local_2c	iendIter	INFERRED	libstdc++ 4.0 assign(s,n): when s aliases the buffer memmove/memcpy in place, else _M_replace_safe(_M_ibegin(),_M_iend(),s,s+n)
+local	__ZNSs6assignEPKc	psVar3	result	INFERRED	libstdc++ 4.0 assign(s) = assign(s,strlen(s)): in-place when s aliases the buffer, else _M_replace_safe
+local	__ZNSs6assignEPKc	local_30	ibeginIter	INFERRED	libstdc++ 4.0 assign(s) = assign(s,strlen(s)): in-place when s aliases the buffer, else _M_replace_safe
+local	__ZNSs6assignEPKc	local_2c	iendIter	INFERRED	libstdc++ 4.0 assign(s) = assign(s,strlen(s)): in-place when s aliases the buffer, else _M_replace_safe
+local	__ZNSsaSEPKc	psVar3	result	INFERRED	operator=(const char*) = assign(s,strlen(s))
+local	__ZNSsaSEPKc	local_30	ibeginIter	INFERRED	operator=(const char*) = assign(s,strlen(s))
+local	__ZNSsaSEPKc	local_2c	iendIter	INFERRED	operator=(const char*) = assign(s,strlen(s))
+local	__ZNSs6assignEmc	local_30	ibeginIter	INFERRED	assign(n,c): replace(_M_ibegin(),_M_iend(),n,c)
+local	__ZNSs6assignEmc	local_2c	iendIter	INFERRED	assign(n,c): replace(_M_ibegin(),_M_iend(),n,c)
+local	__ZNSsaSEc	param_2	c	INFERRED	operator=(char c): replace(_M_ibegin(),_M_iend(),1,c)
+local	__ZNSsaSEc	local_30	ibeginIter	INFERRED	operator=(char c): replace(_M_ibegin(),_M_iend(),1,c)
+local	__ZNSsaSEc	local_2c	iendIter	INFERRED	operator=(char c): replace(_M_ibegin(),_M_iend(),1,c)
+local	__ZNSs5beginEv	param_2	self	INFERRED	begin(): leaks the rep (_M_leak) and returns the data pointer through the hidden return pointer; second argument is the string
+local	__ZNKSs5beginEv	param_2	self	INFERRED	begin() const: data pointer through the hidden return pointer; second argument is the string
+local	__ZNSs3endEv	param_2	self	INFERRED	end(): _M_leak then data+size through the hidden return pointer; second argument is the string
+local	__ZNKSs3endEv	param_2	self	INFERRED	end() const: data+size through the hidden return pointer; second argument is the string
+use	__ZNSs4_Rep7_M_grabERKSaIcES2_	paVar2	cloned	INFERRED	result of _M_clone for a leaked rep	paVar2 = \(unsigned char \*\)__ZNSs4_Rep8_M_clone	paVar2 = (this|param_1) \+ 8
+use	__ZNSs4_Rep7_M_grabERKSaIcES2_	paVar2	refCountPtr	INFERRED	pointer to the refcount word at rep+8	paVar2 = (this|param_1) \+ 8;	
+use	__ZNSsC2EPKcRKSaIcE	pcVar2	endPtr	INFERRED	end of the C string (str+strlen(str)), or -1 for a null pointer	if \(\w+ == \(char \*\)0x0\)	pcVar2 = \w+_S_construct
+use	__ZNSsC2EPKcRKSaIcE	pcVar2	newData	INFERRED	data pointer returned by _S_construct (left-hand side of the call)	pcVar2 = \w+_S_construct	\(\w+,pcVar2,\w+,0\);
+use	__ZNSsC2EPKcRKSaIcE	pcVar2	endPtr	INFERRED	end pointer argument of _S_construct	\(\w+,pcVar2,\w+,0\);	+1
+use	__ZNSsC2EPKcRKSaIcE	pcVar2	newData	INFERRED	data pointer returned by _S_construct	_Alloc_hiderC4EPcRKSaIcE\)\(this,pcVar2	
+use	__ZNSsC1EPKcRKSaIcE	pcVar2	endPtr	INFERRED	end of the C string (str+strlen(str)), or -1 for a null pointer	if \(\w+ == \(char \*\)0x0\)	pcVar2 = \w+_S_construct
+use	__ZNSsC1EPKcRKSaIcE	pcVar2	newData	INFERRED	data pointer returned by _S_construct (left-hand side of the call)	pcVar2 = \w+_S_construct	\(\w+,pcVar2,\w+,0\);
+use	__ZNSsC1EPKcRKSaIcE	pcVar2	endPtr	INFERRED	end pointer argument of _S_construct	\(\w+,pcVar2,\w+,0\);	+1
+use	__ZNSsC1EPKcRKSaIcE	pcVar2	newData	INFERRED	data pointer returned by _S_construct	_Alloc_hiderC4EPcRKSaIcE\)\(this,pcVar2	
+use	__ZNSsC4EPKcRKSaIcE	pcVar2	endPtr	INFERRED	end of the C string (str+strlen(str)), or -1 for a null pointer	if \(\w+ == \(char \*\)0x0\)	pcVar2 = \w+_S_construct
+use	__ZNSsC4EPKcRKSaIcE	pcVar2	newData	INFERRED	data pointer returned by _S_construct (left-hand side of the call)	pcVar2 = \w+_S_construct	\(\w+,pcVar2,\w+,0\);
+use	__ZNSsC4EPKcRKSaIcE	pcVar2	endPtr	INFERRED	end pointer argument of _S_construct	\(\w+,pcVar2,\w+,0\);	+1
+use	__ZNSsC4EPKcRKSaIcE	pcVar2	newData	INFERRED	data pointer returned by _S_construct	_Alloc_hiderC4EPcRKSaIcE\)\(this,pcVar2	

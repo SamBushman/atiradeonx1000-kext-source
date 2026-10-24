@@ -1,0 +1,23 @@
+local	std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux	param_2	position	CONFIRMED	libstdc++ vector::_M_insert_aux(iterator __position, const T& __x): the insertion point
+local	std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux	param_3	newParameter	CONFIRMED	the element to insert (const T&): two words (8-byte element)
+local	std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux	local_30	newFinish	CONFIRMED	__new_finish: iterator advanced by the two uninitialized_copy calls; slot 0 is its value, passed by address as the result slot
+local	std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux	iVar2	destroyCursor	CONFIRMED	the _Destroy(begin(), end()) loop over the old elements (empty body: no destructor needed)
+local	std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux	uVar5	movedWord	CONFIRMED	word carried by the copy_backward loop that shifts elements up by one
+local	std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux	uVar7	xWord1	CONFIRMED	x[1], the second word of the inserted element (kept in __x_copy)
+local	std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux	uVar4	xWord0	CONFIRMED	x[0], the first word of the inserted element (kept in __x_copy)
+local	std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux	puVar8	copyDest	CONFIRMED	destination cursor of the construct-at-finish step and the copy_backward loop
+use	std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux	iVar3	len	CONFIRMED	new capacity in elements: 2 * size, or 1 when empty (__len)	iVar3 = 1;	puVar8 = \(undefined4 \*\)0x0;
+use	std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux	iVar3	elemsToMove	CONFIRMED	number of elements between position and finish-2 shifted up by copy_backward	iVar3 = \(int\)\(puVar8 \+ -2\) - \(int\)param_2 >> 3;	
+use	std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux	iVar1	oldSize	CONFIRMED	(finish - start) >> 3: the element count, size() in __old_size	iVar1 = \(int\)puVar6 - \*\(int \*\)\(this \+ 4\) >> 3;	+4
+use	std__vector_TParameter_pool_allocator_TParameter_____M_insert_aux	puVar6	srcCursor	CONFIRMED	source cursor of the copy_backward loop (finish-2 walking down)	puVar6 = puVar8 \+ -2;	
+local	std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux	param_2	position	CONFIRMED	libstdc++ vector::_M_insert_aux(iterator __position, const T& __x): the insertion point
+local	std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux	local_30	newFinish	CONFIRMED	__new_finish: iterator advanced by the two uninitialized_copy calls; slot 0 is its value, passed by address as the result slot
+local	std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux	iVar2	destroyCursor	CONFIRMED	the _Destroy(begin(), end()) loop over the old elements (empty body: no destructor needed)
+local	std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux	uVar5	movedWord	CONFIRMED	word carried by the copy_backward loop that shifts elements up by one
+local	std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux	uVar7	xWord1	CONFIRMED	x[1], the second word of the inserted element (kept in __x_copy)
+local	std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux	uVar4	xWord0	CONFIRMED	x[0], the first word of the inserted element (kept in __x_copy)
+local	std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux	puVar8	copyDest	CONFIRMED	destination cursor of the construct-at-finish step and the copy_backward loop
+use	std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux	iVar3	len	CONFIRMED	new capacity in elements: 2 * size, or 1 when empty (__len)	iVar3 = 1;	puVar8 = \(undefined4 \*\)0x0;
+use	std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux	iVar3	elemsToMove	CONFIRMED	number of elements between position and finish-2 shifted up by copy_backward	iVar3 = \(int\)\(puVar8 \+ -2\) - \(int\)param_2 >> 3;	
+use	std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux	iVar1	oldSize	CONFIRMED	(finish - start) >> 3: the element count, size() in __old_size	iVar1 = \(int\)puVar6 - \*\(int \*\)\(this \+ 4\) >> 3;	+4
+use	std__vector_TTypeLine_pool_allocator_TTypeLine_____M_insert_aux	puVar6	srcCursor	CONFIRMED	source cursor of the copy_backward loop (finish-2 walking down)	puVar6 = puVar8 \+ -2;	

@@ -1,0 +1,23 @@
+use	TIntermLoop__compileNode	iVar17	loopId	INFERRED	compiler+0x8c: running label counter, used to build the gl__While* label names	^\s*iVar17\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x8c\);$	+1
+use	TIntermLoop__compileNode	iVar17	loopId	INFERRED	compiler+0x8c: running label counter, used to build the gl__While* label names	^\s*\*\(int\ \*\)\(param_2\ \+\ 0x8c\)\ =\ iVar17\ \+\ 1;$	+1
+use	TIntermLoop__compileNode	iVar17	loopId	INFERRED	compiler+0x8c: running label counter, used to build the gl__While* label names	^\s*_sprintf\(acStack_130,"%s%d","gl__WhileBody_",iVar17\);$	+4
+use	TIntermLoop__compileNode	iVar17	loopId	INFERRED	compiler+0x8c: running label counter, used to build the gl__While* label names	^\s*local_80\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1,pcVar11,iVar17,param_5,a5,0x1a80000\);$	+1
+use	TIntermLoop__compileNode	iVar17	opListTailBefore	INFERRED	last operation record of the PPStream operation list before the loop body was compiled	^\s*iVar17\ =\ 0;$	+1
+use	TIntermLoop__compileNode	iVar17	opListTailBefore	INFERRED	last operation record of the PPStream operation list before the loop body was compiled	^\s*iVar17\ =\ iVar8;$	+1
+use	TIntermLoop__compileNode	iVar17	opListTailBefore	INFERRED	last operation record of the PPStream operation list before the loop body was compiled	^\s*for\ \(iVar2\ =\ iVar17;\ iVar2\ !=\ 0;\ iVar2\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\)\)\ \{$	+1
+use	TIntermLoop__compileNode	iVar17	opListTailBefore	INFERRED	last operation record of the PPStream operation list before the loop body was compiled	^\s*if\ \(\(\*\(int\ \*\)\(param_2\ \+\ 0xc4\)\ <\ 2\)\ \|\|\ \(iVar8\ !=\ iVar17\)\)\ \{$	+1
+use	TIntermLoop__compileNode	iVar17	lastLabelChunk	INFERRED	last chunk of the PPStream list at +0x24, removed again	^\s*iVar17\ =\ 0;$@2	+1
+use	TIntermLoop__compileNode	iVar17	lastLabelChunk	INFERRED	last chunk of the PPStream list at +0x24, removed again	^\s*iVar17\ =\ iVar8;$@2	+1
+use	TIntermLoop__compileNode	iVar17	lastLabelChunk	INFERRED	last chunk of the PPStream list at +0x24, removed again	^\s*_PPStreamChunkListRemoveChunk\(\*\(int\ \*\*\)\(iVar16\ \+\ 0x24\),iVar17\);$	+1
+use	TIntermLoop__compileNode	iVar8	opCursor	INFERRED	cursor walking the operation list to its last record	^\s*for\ \(iVar8\ =\ \*piVar15;\ iVar8\ !=\ 0;\ iVar8\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\)\)\ \{$	+2
+use	TIntermLoop__compileNode	iVar8	logicalSize	INFERRED	ParseOperand__GetLogicalSize; (size-1) goes into the header size field	^\s*iVar8\ =\ ParseOperand__GetLogicalSize\(local_60\);$	+2
+use	TIntermLoop__compileNode	iVar8	logicalSize	INFERRED	ParseOperand__GetLogicalSize; (size-1) goes into the header size field	^\s*iVar8\ =\ ParseOperand__GetLogicalSize\(local_60\);$@2	+2
+use	TIntermLoop__compileNode	iVar8	logicalSize	INFERRED	ParseOperand__GetLogicalSize; (size-1) goes into the header size field	^\s*iVar8\ =\ ParseOperand__GetLogicalSize\(local_60\);$@3	+2
+use	TIntermLoop__compileNode	iVar8	logicalSize	INFERRED	ParseOperand__GetLogicalSize; (size-1) goes into the header size field	^\s*iVar8\ =\ ParseOperand__GetLogicalSize\(local_60\);$@4	+2
+use	TIntermLoop__compileNode	iVar8	testFirst	INFERRED	this+0x14: the loop tests its condition first (while/for) or after the body (do-while)	^\s*iVar8\ =\ \*\(int\ \*\)\(this\ \+\ 0x14\);$	+2
+use	TIntermLoop__compileNode	iVar8	testFirst	INFERRED	this+0x14: the loop tests its condition first (while/for) or after the body (do-while)	^\s*local_80\ =\ iVar8;$	+2
+use	TIntermLoop__compileNode	iVar8	opListTailAfter	INFERRED	last operation record of the list after the body (compared with the tail before)	^\s*iVar8\ =\ 0;$	+1
+use	TIntermLoop__compileNode	iVar8	opListTailAfter	INFERRED	last operation record of the list after the body (compared with the tail before)	^\s*iVar8\ =\ iVar2;$	+1
+use	TIntermLoop__compileNode	iVar8	opListTailAfter	INFERRED	last operation record of the list after the body (compared with the tail before)	^\s*if\ \(\(\*\(int\ \*\)\(param_2\ \+\ 0xc4\)\ <\ 2\)\ \|\|\ \(iVar8\ !=\ iVar17\)\)\ \{$	+1
+use	TIntermLoop__compileNode	iVar8	opListTailAfter	INFERRED	last operation record of the list after the body (compared with the tail before)	^\s*_PPStreamChunkListRemoveChunk\(piVar15,iVar8\);$	+1
+use	TIntermLoop__compileNode	iVar8	labelCursor	INFERRED	cursor walking the list at PPStream+0x24 to its last chunk	^\s*for\ \(iVar8\ =\ \*\*\(int\ \*\*\)\(iVar16\ \+\ 0x24\);\ iVar8\ !=\ 0;\ iVar8\ =\ \*\(int\ \*\)\(iVar8\ \+\ 8\)\)\ \{$	+2

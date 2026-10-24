@@ -1,0 +1,18 @@
+# local	FUNCTION	old	new	tier	evidence
+local	yyparse	local_87c	yyvalOp	CONFIRMED	yyval+4 = interm.op (TOperator): assignment_operator rules 82-92 store 0x76..0x84 here; see notes_ttype_layout.md
+local	yyparse	local_878	yyvalNode	CONFIRMED	yyval+8 = interm.intermTypedNode/intermNode/nodePair.node1; addComma result (rule 94) lands here; every case start reloads it into the register copy pTVar3
+local	yyparse	local_874	yyvalNode2	INFERRED	yyval+0xc = nodePair.node2 (second word of the node union); only 3 uses
+local	yyparse	local_870	yyvalTypeOrFunction	CONFIRMED	yyval+0x10: TPublicType.type (rule 132 stores 0 = void) and TFunction* in rules 101/102 (`local_870 = *(yyvsp + -0x1c)`)
+local	yyparse	local_86c	yyvalQualifierOrParamType	CONFIRMED	yyval+0x14: TPublicType.qualifier (rule 132: symbol-table level test; static type_qualifier objects hold 2/3/4/6) and TParameter.type
+local	yyparse	local_868	yyvalSize	CONFIRMED	yyval+0x18: TPublicType.size (rule 132 stores 1; mat2/mat3 rules 145/146 store 2/3)
+local	yyparse	local_864	yyvalMatrix	CONFIRMED	yyval+0x1c: TPublicType.matrix flag (0 in rule 132)
+local	yyparse	local_860	yyvalArray	CONFIRMED	yyval+0x20: TPublicType.array flag (0 in rule 132)
+local	yyparse	local_85c	yyvalUserDef	CONFIRMED	yyval+0x24: TPublicType.userDef (TType* of a struct type; 0 in rule 132)
+local	yyparse	local_858	yyvalTypeLine	CONFIRMED	yyval+0x28: TPublicType.line (rule 132: `local_858 = *(yyvsp)`)
+local	yyparse	param_2	scratchR4	CONFIRMED	K&R register leftover: yyparse takes one argument (parseContext, r3); param_2 is r4, used as scratch/return-register copy (`param_2 = r4Out17`)
+local	yyparse	param_3	scratchR5	CONFIRMED	r5 leftover: used as call-argument scratch (`param_3 = 0x2c` before the memcpy length)
+local	yyparse	param_4	scratchR6	CONFIRMED	r6 leftover: loaded with the token string / table index just before calls (`param_4 = "expression"`)
+local	yyparse	param_5	scratchR7	CONFIRMED	r7 leftover: loaded with the extraInfo string before calls (`param_5 = ""`)
+local	yyparse	param_6	scratchR8	CONFIRMED	r8 leftover: register scratch
+local	yyparse	param_7	scratchR9	CONFIRMED	r9 leftover: also holds the yypact/yycheck table byte offset (`param_7 = uVar57 * 2`)
+local	yyparse	param_8	scratchR10	CONFIRMED	r10 leftover: holds yypgoto index (`param_8 = *(short *)... * 2`)

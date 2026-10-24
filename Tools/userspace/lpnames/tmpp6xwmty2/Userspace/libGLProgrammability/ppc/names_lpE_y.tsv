@@ -1,0 +1,288 @@
+local	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	param_1	sampler	CONFIRMED	texture sampler: *sampler is the 8-entry texture object table, [1] current object, [5] cached unit, [6] cached dimension code, [7] cached border mode, [8] projective coordinates enabled, [10] lambda computed
+local	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	param_2	textureUnit	CONFIRMED	texture unit, clamped to 7; indexes the sampler object table
+local	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	param_3	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+local	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	piVar8	textureObject	CONFIRMED	sampler->table[textureUnit]: *textureObject is its sampler state (wrap modes +0x10 / +0x12, minification filter +0x16)
+local	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	uVar4	minFilter	CONFIRMED	texture minification filter (state +0x16): GL_NEAREST 0x2600, GL_LINEAR 0x2601, 0x2700..0x2703 the mipmap filters
+local	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	bVar1	isLinearFilter	INFERRED	minFilter is GL_LINEAR (0x2601) or GL_LINEAR_MIPMAP_LINEAR (0x2703): the bilinear path
+local	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	uVar5	emittedWord	INFERRED	instruction word emitted into the code stream
+local	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	sVar2	wrapModeS	CONFIRMED	texture wrap mode S (state +0x10); 0x812d is GL_CLAMP_TO_BORDER, 0x2900 GL_CLAMP, 0x2901 GL_REPEAT
+local	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	sVar3	wrapModeT	CONFIRMED	texture wrap mode T (state +0x12); 0x812d is GL_CLAMP_TO_BORDER, 0x2900 GL_CLAMP, 0x2901 GL_REPEAT
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	stateEmitPtr	INFERRED	cursor while the sampler-state load words are emitted	^\s*puVar9\ =\ param_3\ \+\ 1;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	stateEmitPtr	INFERRED	cursor while the sampler-state load words are emitted	^\s*\*puVar9\ =\ 0x39e00160;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	stateEmitPtr	INFERRED	cursor while the sampler-state load words are emitted	^\s*puVar9\ =\ param_3\ \+\ 3;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	stateEmitPtr	INFERRED	cursor while the sampler-state load words are emitted	^\s*\*puVar9\ =\ 0x82510190;$	+5
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	stateEmitPtr	INFERRED	cursor while the sampler-state load words are emitted	^\s*\*puVar9\ =\ 0x82510190;$@2	+5
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	stateEmitPtr	INFERRED	cursor while the sampler-state load words are emitted	^\s*\*puVar9\ =\ 0x82510140;$	+5
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	stateEmitPtr	INFERRED	cursor while the sampler-state load words are emitted	^\s*puVar9\[5\]\ =\ uVar5;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	stateEmitPtr	INFERRED	cursor while the sampler-state load words are emitted	^\s*param_3\ =\ puVar9\ \+\ 6;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	emitPtr	INFERRED	cursor over the emitted sample code; the final value is returned	^\s*puVar9\ =\ param_3\ \+\ iVar6;$	+5
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	emitPtr	INFERRED	cursor over the emitted sample code; the final value is returned	^\s*puVar9\ =\ param_3\ \+\ iVar6;$@2	+41
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	puVar9	emitPtr	INFERRED	cursor over the emitted sample code; the final value is returned	^\s*return\ puVar9\ \+\ 1;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar6	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*iVar6\ =\ \*piVar8;$	+3
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar6	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*else\ if\ \(\(\(\(sVar2\ !=\ 0x2900\)\ \&\&\ \(sVar3\ !=\ 0x2900\)\)\ \|\|\ \(\*\(short\ \*\)\(iVar6\ \+\ 0x16\)\ ==\ 0x2600\)\)\ \|\|$	+2
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar6	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*iVar6\ =\ \*piVar8;$@2	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar6	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*uVar4\ =\ \*\(ushort\ \*\)\(iVar6\ \+\ 0x16\);$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar6	floatToIntWordCount	CONFIRMED	word count of the float-to-integer coordinate chunk just copied	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexFloatToIntDenormalisedAVRTC,param_3\);$	+2
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar6	floatToIntWordCount	CONFIRMED	word count of the float-to-integer coordinate chunk just copied	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexFloatToIntDenormalisedWithLERPValuesAVRTC,param_3\);$	+2
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar6	chunkWordsThenEnd	INFERRED	word count of the _glpOpTexWrapCoords chunk just copied, then the running end offset	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexWrapCoordsCCCAVRTC,puVar9\);$	+3
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar6	chunkWordsThenEnd	INFERRED	word count of the _glpOpTexWrapCoords chunk just copied, then the running end offset	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexWrapCoordsCCCAVRTC,puVar9\);$@2	+3
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar6	chunkWordsThenEnd	INFERRED	word count of the _glpOpTexWrapCoords chunk just copied, then the running end offset	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexWrapCoordsCCCAVRTC,puVar9\);$@3	+3
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar6	chunkWordsThenEnd	INFERRED	word count of the _glpOpTexWrapCoords chunk just copied, then the running end offset	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexWrapCoordsCCCAVRTC,puVar9\);$@4	+3
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar6	chunkWordsThenEnd	INFERRED	word count of the _glpOpTexWrapCoords chunk just copied, then the running end offset	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexWrapCoordsCCCAVRTC,puVar9\);$@5	+3
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*iVar7\ =\ 0x812d;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*else\ if\ \(\(\(\(sVar2\ !=\ 0x2900\)\ \&\&\ \(sVar3\ !=\ 0x2900\)\)\ \|\|\ \(\*\(short\ \*\)\(iVar6\ \+\ 0x16\)\ ==\ 0x2600\)\)\ \|\|$	+3
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*if\ \(\(\(param_1\[5\]\ !=\ param_2\)\ \|\|\ \(param_1\[6\]\ !=\ 2\)\)\ \|\|\ \(param_1\[7\]\ !=\ iVar7\)\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*if\ \(iVar7\ ==\ 0x812d\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*else\ if\ \(iVar7\ ==\ 0x2900\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*param_1\[7\]\ =\ iVar7;$	+1
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar7	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample2DAVRTC chunk just copied	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample2DAVRTC,puVar9\ \+\ iVar6\);$	+2
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar7	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample2DAVRTC chunk just copied	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample2DAVRTC,puVar9\ \+\ iVar6\);$@2	+2
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar7	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample2DAVRTC chunk just copied	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample2DAVRTC,puVar9\ \+\ iVar6\);$@3	+2
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar7	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample2DAVRTC chunk just copied	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample2DAVRTC,puVar9\ \+\ iVar6\);$@4	+2
+use	_PPCTextureSamplerSampleTexelRECTFromLevelRTCAV	iVar7	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample2DAVRTC chunk just copied	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample2DAVRTC,puVar9\ \+\ iVar6\);$@5	+2
+local	_PPCTextureSamplerSampleTexel2DRTCNO	param_1	sampler	CONFIRMED	texture sampler: *sampler is the 8-entry texture object table, [1] current object, [8] projective coordinates enabled, [9] derivatives attached, [10] lambda computed
+local	_PPCTextureSamplerSampleTexel2DRTCNO	param_2	textureUnit	CONFIRMED	texture unit; indexes the sampler object table
+local	_PPCTextureSamplerSampleTexel2DRTCNO	param_3	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted
+local	_PPCTextureSamplerSampleTexel2DRTCNO	sVar1	wrapModeS	CONFIRMED	texture wrap mode S (state +0x10); 0x812d is GL_CLAMP_TO_BORDER, 0x2900 GL_CLAMP
+local	_PPCTextureSamplerSampleTexel2DRTCNO	sVar2	wrapModeT	CONFIRMED	texture wrap mode T (state +0x12)
+local	_PPCTextureSamplerSampleTexel2DRTCNO	uVar3	emittedWord	INFERRED	instruction word emitted into the code stream
+local	_PPCTextureSamplerSampleTexel2DRTCNO	piVar4	textureObject	CONFIRMED	sampler->table[textureUnit]: *textureObject is its sampler state
+local	_PPCTextureSamplerSampleTexel2DRTCNO	puVar5	coordChunk	CONFIRMED	_glpOpTexPrepareCoords* chunk descriptor chosen for the coordinate setup
+local	_PPCTextureSamplerSampleTexel2DRTCNO	iVar6	sampleWordCount	CONFIRMED	word count of the _glpOpTexSampleRTC chunk just copied
+use	_PPCTextureSamplerSampleTexel2DRTCNO	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*iVar7\ =\ 0x812d;$	+1
+use	_PPCTextureSamplerSampleTexel2DRTCNO	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*else\ if\ \(\(sVar1\ ==\ 0x2900\)\ \|\|\ \(iVar7\ =\ 0,\ sVar2\ ==\ 0x2900\)\)\ \{$	+2
+use	_PPCTextureSamplerSampleTexel2DRTCNO	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*if\ \(\(\(param_1\[5\]\ !=\ param_2\)\ \|\|\ \(param_1\[6\]\ !=\ 3\)\)\ \|\|\ \(param_1\[7\]\ !=\ iVar7\)\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexel2DRTCNO	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*if\ \(iVar7\ ==\ 0x812d\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexel2DRTCNO	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*else\ if\ \(iVar7\ ==\ 0x2900\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexel2DRTCNO	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*param_1\[7\]\ =\ iVar7;$	+1
+use	_PPCTextureSamplerSampleTexel2DRTCNO	iVar7	coordChunkWordCount	CONFIRMED	word count of the coordinate-setup chunk just copied	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(puVar5,param_3\);$	+3
+local	_PPCTextureSamplerSampleTexel2DRTCNO	puVar8	emitPtr	INFERRED	cursor while the sampler-state words are emitted
+local	_PPCTextureSamplerSampleTexelRECTRTCNO	param_1	sampler	CONFIRMED	texture sampler: *sampler is the 8-entry texture object table, [1] current object, [8] projective coordinates enabled, [9] derivatives attached, [10] lambda computed
+local	_PPCTextureSamplerSampleTexelRECTRTCNO	param_2	textureUnit	CONFIRMED	texture unit; indexes the sampler object table
+local	_PPCTextureSamplerSampleTexelRECTRTCNO	param_3	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted
+local	_PPCTextureSamplerSampleTexelRECTRTCNO	sVar1	wrapModeS	CONFIRMED	texture wrap mode S (state +0x10); 0x812d is GL_CLAMP_TO_BORDER, 0x2900 GL_CLAMP
+local	_PPCTextureSamplerSampleTexelRECTRTCNO	sVar2	wrapModeT	CONFIRMED	texture wrap mode T (state +0x12)
+local	_PPCTextureSamplerSampleTexelRECTRTCNO	uVar3	emittedWord	INFERRED	instruction word emitted into the code stream
+local	_PPCTextureSamplerSampleTexelRECTRTCNO	piVar4	textureObject	CONFIRMED	sampler->table[textureUnit]: *textureObject is its sampler state
+local	_PPCTextureSamplerSampleTexelRECTRTCNO	iVar5	sampleWordCount	CONFIRMED	word count of the _glpOpTexSampleRTC chunk just copied
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	iVar6	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*iVar6\ =\ 0x812d;$	+1
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	iVar6	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*else\ if\ \(\(sVar1\ ==\ 0x2900\)\ \|\|\ \(iVar6\ =\ 0,\ sVar2\ ==\ 0x2900\)\)\ \{$	+2
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	iVar6	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*if\ \(iVar6\ ==\ 0x812d\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	iVar6	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*else\ if\ \(iVar6\ ==\ 0x2900\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	iVar6	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words	^\s*param_1\[7\]\ =\ iVar6;$	+1
+use	_PPCTextureSamplerSampleTexelRECTRTCNO	iVar6	coordChunkWordCount	CONFIRMED	word count of the _glpOpTexPrepareCoords chunk just copied	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexPrepareCoords4CCRTC,param_3\);$	+3
+local	_PPCTextureSamplerSampleTexelRECTRTCNO	puVar7	emitPtr	INFERRED	cursor while the sampler-state words are emitted
+local	_PPCRasterOpMachine_BlendingRTCAV	param_1	machine	CONFIRMED	raster-op machine: *machine is the emulator context (program info at +0xd80)
+local	_PPCRasterOpMachine_BlendingRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+local	_PPCRasterOpMachine_BlendingRTCAV	uVar5	blendState	INFERRED	raster state +0x58: source / destination blend factors for RGB (bits 0..7) and alpha (bits 8..15), RGB equation bits 16..18, alpha equation bits 19..21
+local	_PPCRasterOpMachine_BlendingRTCAV	iVar6	vectorRegSel	INFERRED	AltiVec register field: 0x13 when both equations are equal (one op for all lanes), else 3
+local	_PPCRasterOpMachine_BlendingRTCAV	bVar1	equationsEqual	CONFIRMED	RGB blend equation equals the alpha blend equation
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	blendField	INFERRED	blend factor / equation field extracted from blendState	^\s*uVar2\ =\ _PPEmulatorFramebufferFormat\(\*param_1\);$	+2
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	blendField	INFERRED	blend factor / equation field extracted from blendState	^\s*if\ \(\(\(\(\(uVar5\ \&\ 0xf\)\ \-\ 8\ <\ 4\)\ \|\|$	+6
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	blendField	INFERRED	blend factor / equation field extracted from blendState	^\s*uVar2\ =\ uVar5\ >>\ 4\ \&\ 0xf;$	+3
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	blendField	INFERRED	blend factor / equation field extracted from blendState	^\s*uVar2\ =\ uVar5\ >>\ 0xc\ \&\ 0xf;$	+3
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	blendField	INFERRED	blend factor / equation field extracted from blendState	^\s*uVar2\ =\ uVar5\ >>\ 0x10\ \&\ 7;$	+2
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	blendField	INFERRED	blend factor / equation field extracted from blendState	^\s*switch\(uVar2\)\ \{$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	rgbEquationWord	INFERRED	AltiVec instruction word emitted for the RGB blend equation	^\s*uVar2\ =\ iVar6\ <<\ 0x15\ \|\ 0x1004284a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	rgbEquationWord	INFERRED	AltiVec instruction word emitted for the RGB blend equation	^\s*uVar2\ =\ iVar6\ <<\ 0x15\ \|\ 0x1005204a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	rgbEquationWord	INFERRED	AltiVec instruction word emitted for the RGB blend equation	^\s*\*param_2\ =\ uVar2;$@2	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	rgbEquationWord	INFERRED	AltiVec instruction word emitted for the RGB blend equation	^\s*uVar2\ =\ iVar6\ <<\ 0x15\ \|\ 0x1013144a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	rgbEquationWord	INFERRED	AltiVec instruction word emitted for the RGB blend equation	^\s*uVar2\ =\ iVar6\ <<\ 0x15\ \|\ 0x1013140a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	rgbEquationWord	INFERRED	AltiVec instruction word emitted for the RGB blend equation	^\s*\*param_2\ =\ uVar2;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	alphaEquationWord	INFERRED	AltiVec instruction word emitted for the alpha blend equation	^\s*uVar2\ =\ 0x1262206e;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	alphaEquationWord	INFERRED	AltiVec instruction word emitted for the alpha blend equation	^\s*uVar2\ =\ 0x1264284a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	alphaEquationWord	INFERRED	AltiVec instruction word emitted for the alpha blend equation	^\s*uVar2\ =\ 0x1265204a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	alphaEquationWord	INFERRED	AltiVec instruction word emitted for the alpha blend equation	^\s*\*param_2\ =\ uVar2;$@4	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	alphaEquationWord	INFERRED	AltiVec instruction word emitted for the alpha blend equation	^\s*uVar2\ =\ 0x1273144a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	alphaEquationWord	INFERRED	AltiVec instruction word emitted for the alpha blend equation	^\s*uVar2\ =\ 0x1273140a;$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	uVar2	alphaEquationWord	INFERRED	AltiVec instruction word emitted for the alpha blend equation	^\s*\*param_2\ =\ uVar2;$@3	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	puVar3	emitPtr	INFERRED	cursor over the emitted blend-factor code	^\s*puVar3\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)_PPCRasterOpMachineCalculateBlendingFactorsRTCAV\)\(param_2,0,uVar5\ \&\ 0xf\);$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	puVar3	emitPtr	INFERRED	cursor over the emitted blend-factor code	^\s*puVar4\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)_PPCRasterOpMachineCalculateBlendingFactorsRTCAV\)\(puVar3,3,uVar2\);$	+2
+use	_PPCRasterOpMachine_BlendingRTCAV	puVar3	emitPtr	INFERRED	cursor over the emitted blend-factor code	^\s*param_2\ =\ \(uint\ \*\)\(\(int\ \(\*\)\(\)\)_PPCRasterOpMachineCalculateBlendingFactorsRTCAV\)\(puVar3,1,uVar5\ >>\ 8\ \&\ 0xf\);$	+1
+use	_PPCRasterOpMachine_BlendingRTCAV	puVar3	emitPtrAlpha	INFERRED	cursor over the emitted alpha blend-factor code	^\s*puVar3\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)_PPCRasterOpMachineCalculateBlendingFactorsRTCAV\)\(param_2,3,uVar2\);$	+3
+local	_PPCRasterOpMachine_BlendingRTCAV	puVar4	factorEnd	INFERRED	cursor returned by CalculateBlendingFactors for the destination factor
+local	_PPCTextureSamplerSampleTexel1DRTCAV	param_1	sampler	CONFIRMED	texture sampler: *sampler is the 8-entry texture object table, [1] current object, [8] projective coordinates enabled, [9] derivatives attached, [10] lambda computed
+local	_PPCTextureSamplerSampleTexel1DRTCAV	param_2	textureUnit	CONFIRMED	texture unit; indexes the sampler object table
+local	_PPCTextureSamplerSampleTexel1DRTCAV	param_3	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted
+local	_PPCTextureSamplerSampleTexel1DRTCAV	piVar5	textureObject	CONFIRMED	sampler->table[textureUnit]: *textureObject is its sampler state (minification filter +0x16)
+local	_PPCTextureSamplerSampleTexel1DRTCAV	uVar4	unitLoadWord	INFERRED	instruction word that loads the texture unit state (unit*4 & 0xfffc | 0x82220000); re-emitted after the first sample
+local	_PPCTextureSamplerSampleTexel1DRTCAV	iVar2	lambdaWordCount	CONFIRMED	word count of the _glpOpTexCalculateLambda1DAVRTC chunk just copied
+local	_PPCTextureSamplerSampleTexel1DRTCAV	puVar1	afterLambdaPtr	INFERRED	emit position just after the lambda calculation chunk
+local	_PPCTextureSamplerSampleTexel1DRTCAV	puVar6	stateEmitPtr	INFERRED	cursor while the sampler-state words are emitted
+use	_PPCTextureSamplerSampleTexel1DRTCAV	puVar3	emitCursor	INFERRED	end of the emitted sample code, returned; each FromLevel call returns the advanced cursor	^\s*puVar3\ =\ \(undefined4\ \*\)$	+1
+use	_PPCTextureSamplerSampleTexel1DRTCAV	puVar3	emitCursor	INFERRED	end of the emitted sample code, returned; each FromLevel call returns the advanced cursor	^\s*puVar3\ =\ \(undefined4\ \*\)$@3	+11
+use	_PPCTextureSamplerSampleTexel1DRTCAV	puVar3	emitCursor	INFERRED	end of the emitted sample code, returned; each FromLevel call returns the advanced cursor	^\s*return\ puVar3;$	+1
+use	_PPCTextureSamplerSampleTexel1DRTCAV	puVar3	emitCursor	INFERRED	end of the emitted sample code, returned; each FromLevel call returns the advanced cursor	^\s*puVar3\ =\ \(undefined4\ \*\)$@2	+1
+use	_PPCTextureSamplerSampleTexel1DRTCAV	puVar3	emitCursor	INFERRED	end of the emitted sample code, returned; each FromLevel call returns the advanced cursor	^\s*\*puVar3\ =\ 0x39e00220;$	+6
+use	_PPCTextureSamplerSampleTexel1DRTCAV	puVar3	resultCursor	INFERRED	cursor returned by the FromLevel emitter on the path without the lambda calculation	^\s*puVar3\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)_PPCTextureSamplerSampleTexel1DFromLevelRTCAV\)\(param_1,param_2,param_3\);$	+2
+local	_PPCTextureSamplerSampleTexel2DRTCAV	param_1	sampler	CONFIRMED	texture sampler: *sampler is the 8-entry texture object table, [1] current object, [8] projective coordinates enabled, [9] derivatives attached, [10] lambda computed
+local	_PPCTextureSamplerSampleTexel2DRTCAV	param_2	textureUnit	CONFIRMED	texture unit; indexes the sampler object table
+local	_PPCTextureSamplerSampleTexel2DRTCAV	param_3	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted
+local	_PPCTextureSamplerSampleTexel2DRTCAV	piVar5	textureObject	CONFIRMED	sampler->table[textureUnit]: *textureObject is its sampler state (minification filter +0x16)
+local	_PPCTextureSamplerSampleTexel2DRTCAV	uVar4	unitLoadWord	INFERRED	instruction word that loads the texture unit state (unit*4 & 0xfffc | 0x82220000); re-emitted after the first sample
+local	_PPCTextureSamplerSampleTexel2DRTCAV	iVar2	lambdaWordCount	CONFIRMED	word count of the _glpOpTexCalculateLambda2DAVRTC chunk just copied
+local	_PPCTextureSamplerSampleTexel2DRTCAV	puVar1	afterLambdaPtr	INFERRED	emit position just after the lambda calculation chunk
+local	_PPCTextureSamplerSampleTexel2DRTCAV	puVar6	stateEmitPtr	INFERRED	cursor while the sampler-state words are emitted
+use	_PPCTextureSamplerSampleTexel2DRTCAV	puVar3	emitCursor	INFERRED	end of the emitted sample code, returned; each FromLevel call returns the advanced cursor	^\s*puVar3\ =\ \(undefined4\ \*\)$	+1
+use	_PPCTextureSamplerSampleTexel2DRTCAV	puVar3	emitCursor	INFERRED	end of the emitted sample code, returned; each FromLevel call returns the advanced cursor	^\s*puVar3\ =\ \(undefined4\ \*\)$@3	+11
+use	_PPCTextureSamplerSampleTexel2DRTCAV	puVar3	emitCursor	INFERRED	end of the emitted sample code, returned; each FromLevel call returns the advanced cursor	^\s*return\ puVar3;$	+1
+use	_PPCTextureSamplerSampleTexel2DRTCAV	puVar3	emitCursor	INFERRED	end of the emitted sample code, returned; each FromLevel call returns the advanced cursor	^\s*puVar3\ =\ \(undefined4\ \*\)$@2	+1
+use	_PPCTextureSamplerSampleTexel2DRTCAV	puVar3	emitCursor	INFERRED	end of the emitted sample code, returned; each FromLevel call returns the advanced cursor	^\s*\*puVar3\ =\ 0x39e00220;$	+6
+use	_PPCTextureSamplerSampleTexel2DRTCAV	puVar3	resultCursor	INFERRED	cursor returned by the FromLevel emitter on the path without the lambda calculation	^\s*puVar3\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)_PPCTextureSamplerSampleTexel2DFromLevelRTCAV\)\(param_1,param_2,param_3\);$	+2
+local	_PPCTextureSamplerSampleTexel3DRTCAV	param_1	sampler	CONFIRMED	texture sampler: *sampler is the 8-entry texture object table, [1] current object, [8] projective coordinates enabled, [9] derivatives attached, [10] lambda computed
+local	_PPCTextureSamplerSampleTexel3DRTCAV	param_2	textureUnit	CONFIRMED	texture unit; indexes the sampler object table
+local	_PPCTextureSamplerSampleTexel3DRTCAV	param_3	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted
+local	_PPCTextureSamplerSampleTexel3DRTCAV	piVar5	textureObject	CONFIRMED	sampler->table[textureUnit]: *textureObject is its sampler state (minification filter +0x16)
+local	_PPCTextureSamplerSampleTexel3DRTCAV	uVar4	unitLoadWord	INFERRED	instruction word that loads the texture unit state (unit*4 & 0xfffc | 0x82220000); re-emitted after the first sample
+local	_PPCTextureSamplerSampleTexel3DRTCAV	iVar2	lambdaWordCount	CONFIRMED	word count of the _glpOpTexCalculateLambda3DAVRTC chunk just copied
+local	_PPCTextureSamplerSampleTexel3DRTCAV	puVar1	afterLambdaPtr	INFERRED	emit position just after the lambda calculation chunk
+local	_PPCTextureSamplerSampleTexel3DRTCAV	puVar6	stateEmitPtr	INFERRED	cursor while the sampler-state words are emitted
+use	_PPCTextureSamplerSampleTexel3DRTCAV	puVar3	emitCursor	INFERRED	end of the emitted sample code, returned; each FromLevel call returns the advanced cursor	^\s*puVar3\ =\ \(undefined4\ \*\)$	+1
+use	_PPCTextureSamplerSampleTexel3DRTCAV	puVar3	emitCursor	INFERRED	end of the emitted sample code, returned; each FromLevel call returns the advanced cursor	^\s*puVar3\ =\ \(undefined4\ \*\)$@3	+11
+use	_PPCTextureSamplerSampleTexel3DRTCAV	puVar3	emitCursor	INFERRED	end of the emitted sample code, returned; each FromLevel call returns the advanced cursor	^\s*return\ puVar3;$	+1
+use	_PPCTextureSamplerSampleTexel3DRTCAV	puVar3	emitCursor	INFERRED	end of the emitted sample code, returned; each FromLevel call returns the advanced cursor	^\s*puVar3\ =\ \(undefined4\ \*\)$@2	+1
+use	_PPCTextureSamplerSampleTexel3DRTCAV	puVar3	emitCursor	INFERRED	end of the emitted sample code, returned; each FromLevel call returns the advanced cursor	^\s*\*puVar3\ =\ 0x39e00220;$	+6
+use	_PPCTextureSamplerSampleTexel3DRTCAV	puVar3	resultCursor	INFERRED	cursor returned by the FromLevel emitter on the path without the lambda calculation	^\s*puVar3\ =\ \(undefined4\ \*\)\(\(int\ \(\*\)\(\)\)_PPCTextureSamplerSampleTexel3DFromLevelRTCAV\)\(param_1,param_2,param_3\);$	+2
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar5	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*iVar5\ =\ \*piVar8;$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar5	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*sVar2\ =\ \*\(short\ \*\)\(iVar5\ \+\ 0x10\);$	+4
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar5	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*iVar5\ =\ \*piVar8;$@2	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar5	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*uVar3\ =\ \*\(ushort\ \*\)\(iVar5\ \+\ 0x16\);$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*iVar7\ =\ 0x812d;$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*if\ \(\(sVar2\ !=\ \-0x7ed3\)\ \&\&$	+4
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*if\ \(\(\(param_1\[5\]\ ==\ param_2\)\ \&\&\ \(param_1\[6\]\ ==\ 4\)\)\ \&\&\ \(param_1\[7\]\ ==\ iVar7\)\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*if\ \(iVar7\ ==\ 0x812d\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*else\ if\ \(iVar7\ ==\ 0x2900\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar7	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*param_1\[7\]\ =\ iVar7;$	+1
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar7	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample1DAVRTC chunk just copied	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample1DAVRTC,iVar5\);$	+2
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar7	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample1DAVRTC chunk just copied	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample1DAVRTC,iVar5\);$@2	+2
+use	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar7	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample1DAVRTC chunk just copied	^\s*iVar7\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample1DAVRTC,iVar5\);$@3	+2
+local	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	param_1	sampler	CONFIRMED	texture sampler: *sampler is the 8-entry texture object table, [1] current object, [5] cached unit, [6] cached dimension code, [7] cached border mode, [8] projective coordinates enabled, [10] lambda computed
+local	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	param_2	textureUnit	CONFIRMED	texture unit, clamped to 7; indexes the sampler object table
+local	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	param_3	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+local	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	piVar8	textureObject	CONFIRMED	sampler->table[textureUnit]: *textureObject is its sampler state (wrap modes +0x10 / +0x12, minification filter +0x16)
+local	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	uVar3	minFilter	CONFIRMED	texture minification filter (state +0x16): GL_NEAREST 0x2600, GL_LINEAR 0x2601, 0x2700..0x2703 the mipmap filters
+local	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	bVar1	isLinearFilter	INFERRED	minFilter is GL_LINEAR (0x2601) or GL_LINEAR_MIPMAP_LINEAR (0x2703): the bilinear path
+local	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	iVar4	lambdaComputed	CONFIRMED	sampler[10]: a level of detail was computed before this call
+local	_PPCTextureSamplerSampleTexel1DFromLevelRTCAV	sVar2	wrapModeS	CONFIRMED	texture wrap mode S (state +0x10); 0x812d is GL_CLAMP_TO_BORDER, 0x2900 GL_CLAMP, 0x2901 GL_REPEAT
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar6	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*iVar6\ =\ \*piVar9;$	+3
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar6	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*else\ if\ \(\(\(\(sVar2\ !=\ 0x2900\)\ \&\&\ \(sVar3\ !=\ 0x2900\)\)\ \|\|\ \(\*\(short\ \*\)\(iVar6\ \+\ 0x16\)\ ==\ 0x2600\)\)\ \|\|$	+2
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar6	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*iVar6\ =\ \*piVar9;$@2	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar6	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*uVar4\ =\ \*\(ushort\ \*\)\(iVar6\ \+\ 0x16\);$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar8	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*iVar8\ =\ 0x812d;$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar8	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*else\ if\ \(\(\(\(sVar2\ !=\ 0x2900\)\ \&\&\ \(sVar3\ !=\ 0x2900\)\)\ \|\|\ \(\*\(short\ \*\)\(iVar6\ \+\ 0x16\)\ ==\ 0x2600\)\)\ \|\|$	+3
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar8	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*if\ \(\(\(param_1\[5\]\ ==\ param_2\)\ \&\&\ \(param_1\[6\]\ ==\ 3\)\)\ \&\&\ \(param_1\[7\]\ ==\ iVar8\)\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar8	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*if\ \(iVar8\ ==\ 0x812d\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar8	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*else\ if\ \(iVar8\ ==\ 0x2900\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar8	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*param_1\[7\]\ =\ iVar8;$	+1
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar8	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample2DAVRTC chunk just copied	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample2DAVRTC,iVar6\);$	+2
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar8	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample2DAVRTC chunk just copied	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample2DAVRTC,iVar6\);$@2	+2
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar8	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample2DAVRTC chunk just copied	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample2DAVRTC,iVar6\);$@3	+2
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar8	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample2DAVRTC chunk just copied	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample2DAVRTC,iVar6\);$@4	+2
+use	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar8	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample2DAVRTC chunk just copied	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample2DAVRTC,iVar6\);$@5	+2
+local	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	param_1	sampler	CONFIRMED	texture sampler: *sampler is the 8-entry texture object table, [1] current object, [5] cached unit, [6] cached dimension code, [7] cached border mode, [8] projective coordinates enabled, [10] lambda computed
+local	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	param_2	textureUnit	CONFIRMED	texture unit, clamped to 7; indexes the sampler object table
+local	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	param_3	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+local	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	piVar9	textureObject	CONFIRMED	sampler->table[textureUnit]: *textureObject is its sampler state (wrap modes +0x10 / +0x12, minification filter +0x16)
+local	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	uVar4	minFilter	CONFIRMED	texture minification filter (state +0x16): GL_NEAREST 0x2600, GL_LINEAR 0x2601, 0x2700..0x2703 the mipmap filters
+local	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	bVar1	isLinearFilter	INFERRED	minFilter is GL_LINEAR (0x2601) or GL_LINEAR_MIPMAP_LINEAR (0x2703): the bilinear path
+local	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	iVar5	lambdaComputed	CONFIRMED	sampler[10]: a level of detail was computed before this call
+local	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	sVar2	wrapModeS	CONFIRMED	texture wrap mode S (state +0x10); 0x812d is GL_CLAMP_TO_BORDER, 0x2900 GL_CLAMP, 0x2901 GL_REPEAT
+local	_PPCTextureSamplerSampleTexel2DFromLevelRTCAV	sVar3	wrapModeT	CONFIRMED	texture wrap mode T (state +0x12); 0x812d is GL_CLAMP_TO_BORDER, 0x2900 GL_CLAMP, 0x2901 GL_REPEAT
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar6	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*iVar6\ =\ \*piVar8;$	+4
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar6	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*else\ if\ \(\(\(\(sVar2\ !=\ 0x2900\)\ \&\&\ \(sVar3\ !=\ 0x2900\)\)\ \&\&\ \(\*\(short\ \*\)\(iVar6\ \+\ 0x14\)\ !=\ 0x2900\)\)\ \|\|$	+3
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar6	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*iVar6\ =\ \*piVar8;$@2	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar6	textureState	CONFIRMED	*textureObject: the sampler state record	^\s*uVar4\ =\ \*\(ushort\ \*\)\(iVar6\ \+\ 0x16\);$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar9	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*iVar9\ =\ 0x812d;$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar9	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*else\ if\ \(\(\(\(sVar2\ !=\ 0x2900\)\ \&\&\ \(sVar3\ !=\ 0x2900\)\)\ \&\&\ \(\*\(short\ \*\)\(iVar6\ \+\ 0x14\)\ !=\ 0x2900\)\)\ \|\|$	+4
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar9	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*if\ \(\(\(param_1\[5\]\ ==\ param_2\)\ \&\&\ \(param_1\[6\]\ ==\ 1\)\)\ \&\&\ \(param_1\[7\]\ ==\ iVar9\)\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar9	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*if\ \(iVar9\ ==\ 0x812d\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar9	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*else\ if\ \(iVar9\ ==\ 0x2900\)\ \{$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar9	borderMode	INFERRED	0x812d clamp-to-border, 0x2900 clamp, or 0: selects the wrap/border instruction words (cached in sampler[7])	^\s*param_1\[7\]\ =\ iVar9;$	+1
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar9	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample3DAVRTC chunk just copied	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample3DAVRTC,iVar6\);$	+2
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar9	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample3DAVRTC chunk just copied	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample3DAVRTC,iVar6\);$@2	+2
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar9	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample3DAVRTC chunk just copied	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample3DAVRTC,iVar6\);$@3	+2
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar9	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample3DAVRTC chunk just copied	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample3DAVRTC,iVar6\);$@4	+2
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar9	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample3DAVRTC chunk just copied	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample3DAVRTC,iVar6\);$@5	+2
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar9	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample3DAVRTC chunk just copied	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample3DAVRTC,iVar6\);$@6	+2
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar9	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample3DAVRTC chunk just copied	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample3DAVRTC,iVar6\);$@7	+2
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar9	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample3DAVRTC chunk just copied	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample3DAVRTC,iVar6\);$@8	+2
+use	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar9	sampleWordCount	CONFIRMED	word count of the _glpOpTexSample3DAVRTC chunk just copied	^\s*iVar9\ =\ \(\(int\ \(\*\)\(\)\)_glpRTCAddAChunk_97be1c2c\)\(\&_glpOpTexSample3DAVRTC,iVar6\);$@9	+2
+local	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	param_1	sampler	CONFIRMED	texture sampler: *sampler is the 8-entry texture object table, [1] current object, [5] cached unit, [6] cached dimension code, [7] cached border mode, [8] projective coordinates enabled, [10] lambda computed
+local	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	param_2	textureUnit	CONFIRMED	texture unit, clamped to 7; indexes the sampler object table
+local	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	param_3	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+local	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	piVar8	textureObject	CONFIRMED	sampler->table[textureUnit]: *textureObject is its sampler state (wrap modes +0x10 / +0x12, minification filter +0x16)
+local	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	uVar4	minFilter	CONFIRMED	texture minification filter (state +0x16): GL_NEAREST 0x2600, GL_LINEAR 0x2601, 0x2700..0x2703 the mipmap filters
+local	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	bVar1	isLinearFilter	INFERRED	minFilter is GL_LINEAR (0x2601) or GL_LINEAR_MIPMAP_LINEAR (0x2703): the bilinear path
+local	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	iVar5	lambdaComputed	CONFIRMED	sampler[10]: a level of detail was computed before this call
+local	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	sVar2	wrapModeS	CONFIRMED	texture wrap mode S (state +0x10); 0x812d is GL_CLAMP_TO_BORDER, 0x2900 GL_CLAMP, 0x2901 GL_REPEAT
+local	_PPCTextureSamplerSampleTexel3DFromLevelRTCAV	sVar3	wrapModeT	CONFIRMED	texture wrap mode T (state +0x12); 0x812d is GL_CLAMP_TO_BORDER, 0x2900 GL_CLAMP, 0x2901 GL_REPEAT
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	param_1	stencilOp	INFERRED	stencil update operation selector 0..7 (case 1 emits nothing: keep)
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	param_2	stencilPtrReg	INFERRED	register holding the stencil buffer address, the base of the emitted stb
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	param_3	valueReg	INFERRED	register holding the stencil value being updated
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	param_4	stencilRef	INFERRED	stencil reference value (low half of the replace / li words)
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	param_5	writeMask	INFERRED	stencil write mask; its complement selects the bits kept from the old value
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	param_6	codeCursor	CONFIRMED	write cursor: where the next PowerPC instruction word is emitted
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	uVar1	clearBitsWord	INFERRED	rlwinm-form instruction word that clears the masked bits of the stencil value (mask complement, value register)
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	uVar2	deltaLoadWord	INFERRED	li instruction word loading the +1 / -1 step used by the increment and decrement operations
+local	_PPCRasterOpMachineUpdateStencilBufferRTCAV	puVar3	emitPtr	INFERRED	cursor over the emitted stencil update code
+local	_PPCRasterOpMachine_AlphaTestRTCAV	param_1	machine	CONFIRMED	raster-op machine: *machine is the emulator context (program info at +0xd80), machine[1] the runtime compiler (+0xe3c = the epilog branch target)
+local	_PPCRasterOpMachine_AlphaTestRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ 0;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \(uint\)\(\*\(int\ \*\)\(param_1\[1\]\ \+\ 0xe3c\)\ \-\ \(int\)param_2\)\ >>\ 2;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \*\(int\ \*\)\(param_1\[1\]\ \+\ 0xe3c\)\ \-\ \(int\)param_2\ \&\ 0x3fffffcU\ \|\ 0x48000000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \(uVar6\ \&\ 0x3fff\)\ <<\ 2\ \|\ 0x40800000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \(uVar6\ \&\ 0x3fff\)\ <<\ 2\ \|\ 0x40820000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \(uVar6\ \&\ 0x3fff\)\ <<\ 2\ \|\ 0x41810000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \(uVar6\ \&\ 0x3fff\)\ <<\ 2\ \|\ 0x40810000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \(uVar6\ \&\ 0x3fff\)\ <<\ 2\ \|\ 0x41820000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*uVar6\ =\ \(uVar6\ \&\ 0x3fff\)\ <<\ 2\ \|\ 0x41800000;$	+1
+use	_PPCRasterOpMachine_AlphaTestRTCAV	uVar6	branchField	INFERRED	skip distance in words, then the conditional branch instruction word built from it	^\s*\*param_2\ =\ uVar6;$	+1
+local	_PPCRasterOpMachine_AlphaTestRTCAV	fVar1	clampBound	INFERRED	lower, then upper clamp bound applied to the alpha reference
+local	_PPCRasterOpMachine_AlphaTestRTCAV	fVar3	alphaRef	CONFIRMED	raster state +0x44: the alpha test reference value
+local	_PPCRasterOpMachine_AlphaTestRTCAV	dVar7	alphaRefScaled	INFERRED	alphaRef converted to double for the float-to-integer conversion
+local	_PPCRasterOpMachine_AlphaTestRTCAV	iVar4	rasterState	INFERRED	emulator +0xd80: program info with the folded raster state (+0x40 alpha function, +0x44 reference)
+local	_PPCRasterOpMachine_AlphaTestRTCAV	uVar5	alphaState	INFERRED	raster state +0x40: the alpha function in the low 3 bits
+local	_PPCRasterOpMachine_AlphaTestRTCAV	uVar2	alphaFunc	INFERRED	alphaState & 7: 0 never-skip, 7 always, 1..6 the comparison selecting the branch
+local	_PPCRasterOpMachine_LogicOpRTCAV	param_1	machine	CONFIRMED	raster-op machine: *machine is the emulator context (program info at +0xd80), machine[1] the runtime compiler (+0xe3c = the epilog branch target)
+local	_PPCRasterOpMachine_LogicOpRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar2	logicOpState	INFERRED	raster state +0x68: the logic operation in the low 4 bits	^\s*uVar2\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0xd80\)\ \+\ 0x68\);$	+2
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar2	logicOpState	INFERRED	raster state +0x68: the logic operation in the low 4 bits	^\s*uVar2\ =\ uVar2\ \&\ 0xf;$	+2
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar2	logicOpState	INFERRED	raster state +0x68: the logic operation in the low 4 bits	^\s*switch\(uVar2\)\ \{$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	logicOp	INFERRED	logicOpState & 0xf: the GL logic operation (0 CLEAR .. 15 SET order of the emitted cases)	^\s*uVar1\ =\ uVar2\ \&\ 0xf;$	+3
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	logicOp	INFERRED	logicOpState & 0xf: the GL logic operation (0 CLEAR .. 15 SET order of the emitted cases)	^\s*else\ if\ \(uVar1\ <\ 2\)\ \{$	+2
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	logicOp	INFERRED	logicOpState & 0xf: the GL logic operation (0 CLEAR .. 15 SET order of the emitted cases)	^\s*if\ \(uVar1\ ==\ 2\)\ \{$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	logicOp	INFERRED	logicOpState & 0xf: the GL logic operation (0 CLEAR .. 15 SET order of the emitted cases)	^\s*if\ \(uVar1\ !=\ 4\)\ \{$	+1
+use	_PPCRasterOpMachine_LogicOpRTCAV	uVar1	logicOp	INFERRED	logicOpState & 0xf: the GL logic operation (0 CLEAR .. 15 SET order of the emitted cases)	^\s*if\ \(uVar1\ !=\ 5\)\ \{$	+1
+local	_PPCRasterOpMachine_DepthTestRTCAV	param_1	machine	CONFIRMED	raster-op machine: *machine is the emulator context (program info at +0xd80), machine[1] the runtime compiler (+0xe3c = the epilog branch target)
+local	_PPCRasterOpMachine_DepthTestRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+local	_PPCRasterOpMachine_DepthTestRTCAV	iVar3	compiler	CONFIRMED	machine[1]: the runtime compiler, whose +0xe3c is the branch target of the emitted skip-to-epilog branch
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar2	depthState	INFERRED	raster state +0x50: the depth function in the low 3 bits	^\s*uVar2\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(\*param_1\ \+\ 0xd80\)\ \+\ 0x50\);$	+2
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar2	depthState	INFERRED	raster state +0x50: the depth function in the low 3 bits	^\s*switch\(uVar2\ \&\ 7\)\ \{$	+1
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar1	depthFunc	INFERRED	depthState & 7: 0 never-pass skip, 7 always, 1..6 the comparison selecting the branch	^\s*uVar1\ =\ uVar2\ \&\ 7;$	+2
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar1	skipWords	INFERRED	distance in words from the cursor to the epilog branch target	^\s*uVar1\ =\ \(uint\)\(\*\(int\ \*\)\(iVar3\ \+\ 0xe3c\)\ \-\ \(int\)param_2\)\ >>\ 2;$	+1
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar1	skipWords	INFERRED	distance in words from the cursor to the epilog branch target	^\s*\*param_2\ =\ \(uVar1\ \&\ 0xffffff\)\ <<\ 2\ \|\ 0x48000000;$	+1
+use	_PPCRasterOpMachine_DepthTestRTCAV	uVar1	skipWords	INFERRED	distance in words from the cursor to the epilog branch target	^\s*\*param_2\ =\ \(uVar1\ \-\ 1\)\ \*\ 4\ \&\ 0x3fffffc\ \|\ 0x48000000;$	+1
+local	_PPCRasterOpMachine_BufferMaskRTCAV	param_1	machine	CONFIRMED	raster-op machine: *machine is the emulator context (program info at +0xd80), machine[1] the runtime compiler (+0xe3c = the epilog branch target)
+local	_PPCRasterOpMachine_BufferMaskRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+local	_PPCRasterOpMachine_BufferMaskRTCAV	uVar1	writeMasks	INFERRED	raster state +0x70: colour write-mask bits 17..20 (one per colour channel)
+local	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	param_1	codeCursor	CONFIRMED	write cursor: where the next AltiVec instruction word is emitted; returned advanced
+local	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	param_2	vectorReg	INFERRED	AltiVec register number the factor is computed into
+local	_PPCRasterOpMachineCalculateBlendingFactorsRTCAV	param_3	blendFactor	INFERRED	GL blend factor selector 0..14 (ZERO, ONE, the SRC/DST colour and alpha variants, constant colour and alpha, SRC_ALPHA_SATURATE)
+local	_PPCTextureSamplerWrapCoordinates1DRTCAV	param_1	sampler	CONFIRMED	texture sampler: *sampler is the 8-entry texture object table, sampler[1] the current object
+local	_PPCTextureSamplerWrapCoordinates1DRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+local	_PPCTextureSamplerWrapCoordinates1DRTCAV	sVar1	minFilter	CONFIRMED	texture minification filter (state +0x16)
+local	_PPCTextureSamplerWrapCoordinates1DRTCAV	sVar2	wrapModeS	CONFIRMED	texture wrap mode S (state +0x10)
+local	_PPCTextureSamplerWrapCoordinates1DRTCAV	puVar3	coordChunk	CONFIRMED	_glpOpTexWrapCoords* chunk descriptor chosen from the wrap mode
+local	_PPCTextureSamplerWrapCoordinates2DRTCAV	param_1	sampler	CONFIRMED	texture sampler: *sampler is the 8-entry texture object table, sampler[1] the current object
+local	_PPCTextureSamplerWrapCoordinates2DRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+use	_PPCTextureSamplerWrapCoordinates2DRTCAV	iVar3	textureState	CONFIRMED	*sampler->object: the sampler state record	^\s*iVar3\ =\ \*\*\(int\ \*\*\)\(param_1\ \+\ 4\);$	+4
+local	_PPCTextureSamplerWrapCoordinates2DRTCAV	sVar1	wrapModeS	CONFIRMED	texture wrap mode S (state +0x10)
+local	_PPCTextureSamplerWrapCoordinates2DRTCAV	sVar4	wrapModeT	CONFIRMED	texture wrap mode T (state +0x12)
+local	_PPCTextureSamplerWrapCoordinates2DRTCAV	puVar2	coordChunk	CONFIRMED	_glpOpTexWrapCoords* chunk descriptor chosen from the wrap modes
+local	_PPCTextureSamplerWrapCoordinates3DRTCAV	param_1	sampler	CONFIRMED	texture sampler: *sampler is the 8-entry texture object table, sampler[1] the current object
+local	_PPCTextureSamplerWrapCoordinates3DRTCAV	param_2	codeCursor	CONFIRMED	write cursor: where the next PowerPC / AltiVec instruction word is emitted; returned advanced
+use	_PPCTextureSamplerWrapCoordinates3DRTCAV	iVar3	textureState	CONFIRMED	*sampler->object: the sampler state record	^\s*iVar3\ =\ \*\*\(int\ \*\*\)\(param_1\ \+\ 4\);$	+5
+local	_PPCTextureSamplerWrapCoordinates3DRTCAV	sVar1	wrapModeS	CONFIRMED	texture wrap mode S (state +0x10)
+local	_PPCTextureSamplerWrapCoordinates3DRTCAV	sVar5	wrapModeT	CONFIRMED	texture wrap mode T (state +0x12)
+local	_PPCTextureSamplerWrapCoordinates3DRTCAV	sVar4	wrapModeR	CONFIRMED	texture wrap mode R (state +0x14)
+local	_PPCTextureSamplerWrapCoordinates3DRTCAV	puVar2	coordChunk	CONFIRMED	_glpOpTexWrapCoords* chunk descriptor chosen from the wrap modes

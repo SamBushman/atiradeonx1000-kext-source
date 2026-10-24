@@ -1,0 +1,55 @@
+local	_PPParserPreprocessString	param_1	parser	CONFIRMED	PPParser*, passed through
+local	_PPParserPreprocessString	param_2	source	CONFIRMED	program text being normalised (whitespace collapsed to single separators, comments after # dropped)
+local	_PPParserPreprocessString	param_3	keepHeader	INFERRED	nonzero: the first 10 characters (the !!ARBvp1.0 header) are copied verbatim
+local	_PPParserPreprocessString	bVar3	inComment	CONFIRMED	set on `#`, cleared at the end of the line
+local	_PPParserPreprocessString	cVar2	nextCh	INFERRED	character after the current one, tested for whitespace/#
+local	_PPParserPreprocessString	bVar1	nextByte	INFERRED	byte after the sign or dot, tested for digit/space
+local	_PPParserPreprocessString	uVar4	curPos	INFERRED	pass 1: input index of the character being examined
+local	_PPParserPreprocessString	uVar15	nextPos	INFERRED	pass 1: input index after the current character
+local	_PPParserPreprocessString	uVar8	outLengthPlus1	INFERRED	pass 1: output length+1 around a sign
+local	_PPParserPreprocessString	iVar13	charStep	INFERRED	pass 1: 1, or 2 for a CR LF pair
+local	_PPParserPreprocessString	iVar14	charAdvance	INFERRED	pass 2: 1, or 2 for a CR LF pair
+local	_PPParserPreprocessString	iVar10	nextOutPos	INFERRED	pass 2: output index after the current character
+local	_PPParserPreprocessString	uVar5	ch	INFERRED	pass 2: the character being copied
+use	_PPParserPreprocessString	uVar7	outLength	INFERRED	pass 1: number of output characters counted	#0	^\s*iVar9\ =\ 0;	all	none
+use	_PPParserPreprocessString	uVar7	srcPos	INFERRED	pass 2: input index being copied	^\s*iVar9\ =\ 0;	^code_r0x97b7c67c:	all	none
+use	_PPParserPreprocessString	uVar7	outLength	INFERRED	pass 1: number of output characters counted (tail block)	^code_r0x97b7c67c:		all	none
+use	_PPParserPreprocessString	uVar16	inPos	INFERRED	pass 1: input index of the next character (also holds the new output length briefly)	#0	^\s*iVar9\ =\ 0;	all	none
+use	_PPParserPreprocessString	uVar16	headerLeft	INFERRED	pass 2: down-counter while copying the verbatim header	^\s*for\ \(uVar16\ =\ uVar7;	+4	all	none
+use	_PPParserPreprocessString	uVar16	lastWasSep	INFERRED	pass 2: 1 when the last emitted character is a separator/space	^\s*iVar9\ =\ 0;	^code_r0x97b7c67c:	all	none
+use	_PPParserPreprocessString	uVar16	inPos	INFERRED	pass 1: input index of the next character (tail block)	^code_r0x97b7c67c:		all	none
+use	_PPParserPreprocessString	uVar12	prevSep	INFERRED	pass 1: 1 when the last counted character is a separator/space	#0	^\s*iVar9\ =\ 0;	all	none
+use	_PPParserPreprocessString	uVar12	numState	INFERRED	pass 2: number-literal state (0 none, 1 digit seen, 3 after a dot)	^\s*iVar9\ =\ 0;		all	none
+use	_PPParserPreprocessString	uVar11	digitState	INFERRED	pass 1: number-literal state (0 none, 1 digit seen, 3 after a dot)	#0	^\s*iVar9\ =\ 0;	all	none
+use	_PPParserPreprocessString	uVar11	curSrcPos	INFERRED	pass 2: input index of the character being examined	^\s*iVar9\ =\ 0;		all	none
+use	_PPParserPreprocessString	iVar9	outPos	INFERRED	pass 2: output index	*		all	none
+local	_PPParserScopeAddMacro	param_2	macro	CONFIRMED	PPParserMacro* appended to the scope's doubly linked macro list (+8 first, +0xc last)
+local	_PPParserScopeAddMacro	iVar1	firstMacro	INFERRED	scope->firstMacro after the update
+local	_PPParserAddScope	param_2	scope	CONFIRMED	scope appended to the parser's scope list (+0x448 first, +0x44c last)
+local	_PPParserAddScope	iVar1	firstScope	INFERRED	parser->firstScope after the update
+local	_PPParserAttachString	param_2	text	CONFIRMED	program text
+local	_PPParserAttachString	param_3	preprocess	CONFIRMED	nonzero: normalise through _PPParserPreprocessString, else copy verbatim
+local	_PPParserAttachString	iVar1	charsLeft	INFERRED	strlen of the stored text (parser[1]), then the down-counter while counting newlines (parser[2])
+local	_PPParserAttachString	iVar2	scanIndex	INFERRED	index into the text while counting newlines
+local	_PPParserAttachStream	param_2	stream	CONFIRMED	PPStream* stored at parser+0x1c and propagated to every scope
+local	_PPParserAttachStream	iVar1	scope	INFERRED	walks the scope list (+0x20 next)
+local	_PPParserScopeAttachStream	param_2	stream	CONFIRMED	PPStream* stored in the scope and every identifier
+local	_PPParserScopeAttachStream	iVar1	identifier	INFERRED	identifier list element (+0x18 stream, +0x20 next)
+local	_PPParserParse	bVar1	succeeded	INFERRED	parse finished without error
+local	_PPParserParse	iVar2	branchError	INFERRED	_PPStreamResolveBranches result
+local	_PPParserParse	iVar3	status	INFERRED	parser status code: 0 ok, 1/3/6 states, 0x2d/0x1b errors
+local	_PPParserParseVersion	auStack_110	headerToken	CONFIRMED	first token: must be "!!ARBvp1.0" or "!!ARBfp1.0"
+local	_PPParserParseVersion	uVar1	status	INFERRED	0 ok, 4 bad header
+local	_PPParserGetPart	param_2	partBuf	CONFIRMED	receives the next whitespace-delimited token
+local	_PPParserGetPart	param_3	expandMacros	CONFIRMED	nonzero: a macro name is replaced by its expansion in the text
+local	_PPParserGetPart	iVar1	savedPos	INFERRED	parser->pos before the token was read
+local	_PPParserGetPart	iVar2	savedLine	INFERRED	parser->line before the token was read
+local	_PPParserGetPart	uVar6	tokenLength	INFERRED	characters in the token (0 or 0xff = failure)
+local	_PPParserGetPart	auStack_120	replaceBuf	INFERRED	macro expansion text
+use	_PPParserGetPart	iVar3	getCharStatus	INFERRED	_PPParserGetCharacter result: nonzero at end of text	^\s*iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserGetCharacter\)	+2	all	none
+use	_PPParserGetPart	iVar3	macro	INFERRED	macro found for the token	iVar3\ =\ \(\(int\ \(\*\)\(\)\)_PPParserScopeFindMacro\)	+3	all	none
+use	_PPParserGetPart	iVar3	newTextLength	INFERRED	text length after the expansion	*		all	none
+local	_PPParserGetCharacter	param_2	outChar	CONFIRMED	receives the next character; newlines become spaces
+local	_PPParserGetCharacter	bVar1	sawNewline	INFERRED	a newline was skipped before the final character
+local	_PPParserGetCharacter	uVar2	atEnd	INFERRED	1 at end of text, else 0
+local	_PPParserGetCharacter	iVar3	pos	INFERRED	parser->pos (index into the text)

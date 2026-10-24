@@ -1,0 +1,33 @@
+# entry	size	name	static references in the stock	decision
+0x97b853f0	8	orph_97b853f0	-	not wired: no static reference (dead / alignment fragment)
+0x97b86c5c	8	orph_97b86c5c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x97b86c64	8	orph_97b86c64	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x97b86c6c	8	orph_97b86c6c	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x97b86c74	8	orph_97b86c74	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x97b86c98	8	orph_97b86c98	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x97b99088	240	orph_97b99088	-	not wired: no static reference (dead / alignment fragment)
+0x97b990a0	240	orph_97b990a0	-	not wired: no static reference (dead / alignment fragment)
+0x97b990ac	236	orph_97b990ac	-	not wired: no static reference (dead / alignment fragment)
+0x97b9928c	248	orph_97b9928c	-	not wired: no static reference (dead / alignment fragment)
+0x97b99298	248	orph_97b99298	-	not wired: no static reference (dead / alignment fragment)
+0x97b992a4	244	orph_97b992a4	-	not wired: no static reference (dead / alignment fragment)
+0x97b998a8	248	orph_97b998a8	-	not wired: no static reference (dead / alignment fragment)
+0x97b998c0	248	orph_97b998c0	-	not wired: no static reference (dead / alignment fragment)
+0x97b998cc	244	orph_97b998cc	-	not wired: no static reference (dead / alignment fragment)
+0x97b99ec4	248	orph_97b99ec4	-	not wired: no static reference (dead / alignment fragment)
+0x97b99edc	248	orph_97b99edc	-	not wired: no static reference (dead / alignment fragment)
+0x97b99ee8	244	orph_97b99ee8	-	not wired: no static reference (dead / alignment fragment)
+0x97b9a058	248	orph_97b9a058	-	not wired: no static reference (dead / alignment fragment)
+0x97b9a070	248	orph_97b9a070	-	not wired: no static reference (dead / alignment fragment)
+0x97b9a07c	244	orph_97b9a07c	-	not wired: no static reference (dead / alignment fragment)
+0x97b9a85c	324	orph_97b9a85c	-	not wired: no static reference (dead / alignment fragment)
+0x97b9a868	324	orph_97b9a868	-	not wired: no static reference (dead / alignment fragment)
+0x97b9a874	320	orph_97b9a874	-	not wired: no static reference (dead / alignment fragment)
+0x97bae35c	236	orph_97bae35c	-	not wired: no static reference (dead / alignment fragment)
+0x97bae368	236	orph_97bae368	-	not wired: no static reference (dead / alignment fragment)
+0x97bae374	236	orph_97bae374	-	not wired: no static reference (dead / alignment fragment)
+0x97bae380	232	orph_97bae380	-	not wired: no static reference (dead / alignment fragment)
+0x97bd3c20	8	orph_97bd3c20	-	not wired: no static reference (dead / alignment fragment)
+0x97c08028	8	orph_97c08028	-	not wired: no static reference (dead / alignment fragment)
+0x97c102ec	8	orph_97c102ec	data	wired: pointed to by a data word (callback table), pointer identity verified by data_compare
+0x97c1ddfc	20	orph_97c1ddfc	-	not wired: no static reference (dead / alignment fragment)

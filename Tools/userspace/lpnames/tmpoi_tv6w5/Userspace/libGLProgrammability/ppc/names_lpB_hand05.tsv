@@ -1,0 +1,38 @@
+local	_CPPpragma	param_1	yylvalpp	CONFIRMED	yystypepp*: [2] sc_ident, [3..] sc_string
+local	_CPPpragma	puVar1	cppRef	INFERRED	&_cpp GOT pointer
+local	_CPPpragma	puVar2	atableRef	INFERRED	&_atable GOT pointer
+local	_CPPpragma	uVar3	token	CONFIRMED	current pragma token from currentInput->scan
+local	_CPPpragma	iVar11	tokenCount	CONFIRMED	number of pragma tokens collected (passed to _HandlePragma)
+local	_CPPpragma	iVar6	tokenCapacity	CONFIRMED	current capacity of allTokens (starts at 10, doubled by realloc)
+local	_CPPpragma	iVar8	nextCapacity	INFERRED	capacity after the optional doubling
+local	_CPPpragma	puVar9	srcStr	INFERRED	text copied into tokenCopy: atom text, sc_string or the one-char buffer
+local	_CPPpragma	puVar10	freeCursor	INFERRED	walks allTokens while freeing the copies
+local	_CPPpragma	local_40	charStr	INFERRED	one-char string built from a punctuation token
+use	_CPPpragma	uVar4	r4Fwd	INFERRED	extraout r4 forwarded to the error/log call	^\s*uVar4\ =\ extraout_r4_00;	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)puVar1\ \+\ 0x20\);	all	none
+use	_CPPpragma	uVar4	returnToken	INFERRED	token returned: 10, or the scan result after #pragma was handled	*		all	none
+use	_CPPpragma	iVar7	cppState	INFERRED	*cpp: cpp state; forwarded as a dead vararg	^\s*iVar7\ =\ \*\(int\ \*\)PTR__cpp_a7b7c0a4;	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)puVar1\ \+\ 0x20\);	all	none
+use	_CPPpragma	iVar7	currentInput	INFERRED	cpp->currentInput (+0x20): the input-source object whose vtable is called	*		all	none
+local	_CPPversion	param_1	yylvalpp	CONFIRMED	yystypepp*: [0] sc_int, [3..] sc_string (the version digits)
+local	_CPPversion	puVar1	cppRef	INFERRED	&_cpp GOT pointer
+local	_CPPversion	uVar4	r4Fwd	INFERRED	extraout r4 forwarded to the error call
+local	_CPPversion	iVar3	nextToken	INFERRED	token scanned after the version number
+use	_CPPversion	iVar2	currentInput	INFERRED	cpp->currentInput (+0x20)	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)puVar1\ \+\ 0x20\);	+2	all	none
+use	_CPPversion	iVar2	token	CONFIRMED	token from currentInput->scan; returned (10 on success)	*		all	none
+local	_CPPextension	param_1	yylvalpp	CONFIRMED	yystypepp*: [2] sc_ident
+local	_CPPextension	puVar1	cppRef	INFERRED	&_cpp GOT pointer
+local	_CPPextension	puVar2	atableRef	INFERRED	&_atable GOT pointer
+local	_CPPextension	iVar3	token	CONFIRMED	token from currentInput->scan; returned
+local	_CPPextension	uVar4	messageR4	INFERRED	extraout r4 forwarded to the log call
+local	_CPPextension	pcVar5	errorMessage	CONFIRMED	"behavior for extension not specified" / "':' missing after extension name"
+local	_CPPextension	auStack_70	extensionName	CONFIRMED	copy of the extension name atom text; first arg of _updateExtensionBehavior
+local	_readCPPline	param_1	yylvalpp	CONFIRMED	yystypepp* passed to every directive handler
+local	_readCPPline	puVar1	cppRef	INFERRED	&_cpp GOT pointer
+local	_readCPPline	uVar4	isIfdef	CONFIRMED	1 for #ifdef, 0 for #ifndef: first argument of _CPPifdef
+local	_readCPPline	uVar5	versionFlag	INFERRED	set to 1 for #version (and the #else-after-#else error); stored (xor 1 on the normal path) at cpp+0x28 as the not-a-version-token flag
+use	_readCPPline	iVar2	cppState	INFERRED	*cpp: the cpp state, stored with the version flag at +0x28	^\s*iVar2\ =\ \*\(int\ \*\)puVar1;@1	+2	all	none
+use	_readCPPline	iVar2	cppState	INFERRED	*cpp: the cpp state (#endif bookkeeping)	^\s*iVar2\ =\ \*\(int\ \*\)puVar1;@2	+8	all	none
+use	_readCPPline	iVar2	cppState	INFERRED	*cpp: the cpp state, stored with the version flag at +0x28	^\s*iVar2\ =\ \*\(int\ \*\)PTR__cpp_a7b7c0a4;		all	none
+use	_readCPPline	iVar2	directiveAtom	CONFIRMED	atom of the directive name (yylvalpp->sc_ident) compared with the _defineAtom/_elseAtom/... atoms	*		all	none
+use	_readCPPline	iVar3	cppStateInput	INFERRED	*cpp read to test the if-depth (+0x34) and fetch currentInput (+0x20)	^\s*iVar3\ =\ \*\(int\ \*\)puVar1;@1	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x20\)	all	rhs
+use	_readCPPline	iVar3	cppStateInput	INFERRED	*cpp read to test the if-depth (+0x34) and fetch currentInput (+0x20)	^\s*iVar3\ =\ \*\(int\ \*\)puVar1;@3	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x20\)	all	rhs
+use	_readCPPline	iVar3	token	CONFIRMED	directive handler result / token from currentInput->scan; returned	*		all	none

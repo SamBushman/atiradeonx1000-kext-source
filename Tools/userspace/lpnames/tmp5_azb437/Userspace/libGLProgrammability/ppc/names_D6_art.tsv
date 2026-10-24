@@ -1,0 +1,225 @@
+# local rows, fork D6: Ghidra register-model artifacts
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTable	bVar17	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__Z16IdentifyBuiltIns11EShLanguageR12TSymbolTableRK16TBuiltInResource	bVar10	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	TIntermediate__addSymbol	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TIntermediate__addSymbol	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	TIntermediate__addUnaryMath	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TIntermediate__addUnaryMath	bVar15	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	TIntermediate__setAggregateOperator	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TIntermediate__setAggregateOperator	bVar10	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	TIntermediate__addConversion	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TIntermediate__addConversion	bVar20	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	TIntermediate__growAggregate	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TIntermediate__growAggregate	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	TIntermediate__makeAggregate	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TIntermediate__makeAggregate	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	TIntermediate__addSwizzle	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TIntermediate__addSwizzle	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	TIntermBinary__promote	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TIntermBinary__promote	bVar13	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	TIntermediate__promoteConstantUnion	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TIntermediate__promoteConstantUnion	bVar11	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	OutputTreeText	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	OutputTreeText	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	OutputSymbol	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	OutputSymbol	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	OutputBinary	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	OutputBinary	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	OutputUnary	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	OutputUnary	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	OutputAggregate	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	OutputAggregate	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	OutputSelection	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	OutputSelection	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	OutputConstantUnion	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	OutputConstantUnion	bVar11	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	ParseSymbol	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	ParseSymbol	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	ParseSymbol	bVar18	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	ParseBinary	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	ParseBinary	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	ParseBinary	bVar10	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	FUN_97b9907c	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	FUN_97b9907c	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	ParseUnary	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	ParseUnary	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	ParseUnary	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	FUN_97b99274	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	FUN_97b99274	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	ParseAggregate	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	ParseAggregate	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	ParseAggregate	bVar7	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	ParseSelection	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	ParseSelection	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	FUN_97b9989c	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	FUN_97b9989c	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	ParseLoop	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	ParseLoop	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	FUN_97b99eb8	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	FUN_97b99eb8	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	ParseBranch	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	ParseBranch	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	FUN_97b9a04c	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	FUN_97b9a04c	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	TParseContext__error	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TParseContext__error	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	FUN_97b9a844	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	FUN_97b9a844	bVar6	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	TParseContext__reservedErrorCheck	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TParseContext__reservedErrorCheck	bVar8	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	TParseContext__constructorErrorCheck	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TParseContext__constructorErrorCheck	bVar22	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TParseContext__insertBuiltInArrayAtGlobalLevel	bVar18	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	TParseContext__arraySetMaxSize	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TParseContext__arraySetMaxSize	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	TParseContext__arraySetMaxSize	bVar9	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	TParseContext__nonInitErrorCheck	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TParseContext__nonInitErrorCheck	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	TParseContext__extensionErrorCheck	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TParseContext__extensionErrorCheck	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	TParseContext__extensionErrorCheck	bVar12	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	TParseContext__addConstVectorNode	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TParseContext__addConstVectorNode	bVar12	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	TParseContext__initializeExtensionBehavior	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TParseContext__initializeExtensionBehavior	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	_ShInitialize	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	_ShInitialize	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	initializeSymbolTable	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	initializeSymbolTable	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	initializeSymbolTable	bVar10	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	_ShCompile	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	_ShCompile	bVar15	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	TSymbolTable__dump	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TSymbolTable__dump	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	__ZN9TFunctionD4Ev	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN9TFunctionD4Ev	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN9TFunctionC2ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN9TFunctionC1ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN9TFunctionC4ERKS_RSt3mapIP7TVectorI9TTypeLineES6_St4lessIS6_ESaISt4pairIKS6_S6_EEE	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	TSymbolTableLevel__clone	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TSymbolTableLevel__clone	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	TSymbolTable__copyTable	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TSymbolTable__copyTable	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	_CPPWarningToInfoLog	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	_CPPWarningToInfoLog	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	_StoreStr	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	_StoreStr	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	_GetBehavior	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	_GetBehavior	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	_updateExtensionBehavior	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	_updateExtensionBehavior	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZN14TGenericLinkerC2Ei	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN14TGenericLinkerC2Ei	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZN14TGenericLinkerC1Ei	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN14TGenericLinkerC1Ei	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZN14TGenericLinkerC4Ei	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN14TGenericLinkerC4Ei	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZN14TGenericLinkerD4Ev	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN14TGenericLinkerD4Ev	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	TIntermAggregate__compileNode	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	TIntermAggregate__compileNode	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZN17TPPStreamCompilerC2E11EShLanguagei	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN17TPPStreamCompilerC2E11EShLanguagei	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZN17TPPStreamCompilerC1E11EShLanguagei	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN17TPPStreamCompilerC1E11EShLanguagei	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZN17TPPStreamCompilerC4E11EShLanguagei	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN17TPPStreamCompilerC4E11EShLanguagei	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZN17TPPStreamCompilerD4Ev	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN17TPPStreamCompilerD4Ev	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std____throw_logic_error	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std____throw_logic_error	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std____throw_domain_error	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std____throw_domain_error	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std____throw_invalid_argument	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std____throw_invalid_argument	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std____throw_length_error	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std____throw_length_error	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std____throw_out_of_range	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std____throw_out_of_range	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std____throw_runtime_error	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std____throw_runtime_error	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std____throw_range_error	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std____throw_range_error	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std____throw_overflow_error	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std____throw_overflow_error	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std____throw_underflow_error	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std____throw_underflow_error	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSs4_Rep10_M_disposeERKSaIcE	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSs4_Rep10_M_disposeERKSaIcE	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSs9_M_mutateEmmm	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSs9_M_mutateEmmm	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSs4_Rep10_M_refcopyEv	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSs4_Rep10_M_refcopyEv	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSsC4Ev	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSsC4Ev	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSsC1ERKSs	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSsC1ERKSs	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSs4_Rep7_M_grabERKSaIcES2_	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSs4_Rep7_M_grabERKSaIcES2_	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSsC4ERKSs	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSsC4ERKSs	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSsD4Ev	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSsD4Ev	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSs7reserveEm	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSs7reserveEm	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSs6assignERKSs	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSs6assignERKSs	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std__string___S_construct	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSs4_Rep9_S_createEmRKSaIcE	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSs4_Rep9_S_createEmRKSaIcE	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSs12_S_constructIN9__gnu_cxx17__normal_iteratorIPcSsEEEES2_T_S4_RKSaIcESt20forward_iterator_tag	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std__string___S_construct___gnu_cxx____normal_iterator_char_const__std__string__	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std__string___S_construct_char__	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std__string___S_construct_char__	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSs12_S_constructIPKcEEPcT_S3_RKSaIcESt20forward_iterator_tag	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std____default_alloc_template_true_0___allocate	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std____default_alloc_template_true_0___allocate	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std__allocator_char___allocate	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std__allocator_char___allocate	bVar4	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	__ZNSt11logic_errorD4Ev	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSt11logic_errorD4Ev	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSt13runtime_errorD4Ev	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSt13runtime_errorD4Ev	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIPKcEEPcT_S8_RKS2_St20forward_iterator_tag	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string______M_erase	bVar6	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	__ZN16TIntermAggregateD1Ev	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN16TIntermAggregateD1Ev	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZN16TIntermAggregateD0Ev	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN16TIntermAggregateD0Ev	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZN13TIntermSymbolD1Ev	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN13TIntermSymbolD1Ev	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZN13TIntermSymbolD0Ev	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZN13TIntermSymbolD0Ev	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIN9__gnu_cxx17__normal_iteratorIPcS3_EEEES7_T_S9_RKS2_St20forward_iterator_tag	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE12_S_constructIN9__gnu_cxx17__normal_iteratorIPcS3_EEEES7_T_S9_RKS2_St20forward_iterator_tag	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7reserveEm	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE7reserveEm	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_St18input_iterator_tag	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE10_M_replaceIPKcEERS3_N9__gnu_cxx17__normal_iteratorIPcS3_EESB_T_SC_St18input_iterator_tag	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE9_M_mutateEmmm	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE9_M_mutateEmmm	in_cr0	cr0Reg	INFERRED	Ghidra artifact: the incoming condition register field CR0
+local	std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState_____M_insert_aux	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std__vector_TPoolAllocator__tAllocState_std__allocator_TPoolAllocator__tAllocState_____M_insert_aux	bVar13	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_erase	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std___Rb_tree_std__string_std__pair_std__string_const_TBehavior__std___Select1st_std__pair_std__string_const_TBehavior___std__less_std__string__pool_allocator_std__pair_std__string_const_TBehavior______M_erase	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std__vector_TSymbolTableLevel__std__allocator_TSymbolTableLevel______M_insert_aux	bVar10	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it
+local	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_erase	in_RESERVE	reservation	INFERRED	Ghidra artifact: the lwarx reservation flag tested before the conditional store (stwcx.)
+local	std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol_______M_erase	bVar5	cr0Flags	INFERRED	Ghidra models CR0 as a byte: (x == 0) << 1 sets the EQ bit, (V >> 1 & 1) tests it

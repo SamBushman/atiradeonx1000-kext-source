@@ -1,0 +1,37 @@
+local	_PPEmulatorProgramConvertFromPPStream	param_2	ppStream	CONFIRMED	PPStream*: [0] profile enum, [4] parameter bindings, [6] attribute bindings, [7] output bindings, [8] operations, [10] texture bindings, [0xb] constants, [0xc] options (chunk lists)
+local	_PPEmulatorProgramConvertFromPPStream	piVar26	opList	INFERRED	pp-stream operation chunk list (param_2[8])
+local	_PPEmulatorProgramConvertFromPPStream	iVar18	attribBindingList	INFERRED	attribute-binding chunk list (param_2[6]); count*16 = attribute storage size
+local	_PPEmulatorProgramConvertFromPPStream	piVar5	optionList	INFERRED	option chunk list (param_2[0xc]): APPLE_no_runtime_compile (6), APPLE_no_altivec (7)
+local	_PPEmulatorProgramConvertFromPPStream	piVar15	texBindingList	INFERRED	texture-unit binding chunk list (param_2[10])
+local	_PPEmulatorProgramConvertFromPPStream	uVar16	outputBindingList	INFERRED	output-binding chunk list (param_2[7])
+local	_PPEmulatorProgramConvertFromPPStream	uVar17	paramBindingList	INFERRED	parameter-binding chunk list (param_2[4])
+local	_PPEmulatorProgramConvertFromPPStream	piVar12	constantList	INFERRED	constant chunk list (param_2[0xb]): 4 words per chunk
+local	_PPEmulatorProgramConvertFromPPStream	puVar9	inst	INFERRED	emulator instruction record being filled (0x11c bytes, stride 0x47 words)
+local	_PPEmulatorProgramConvertFromPPStream	puVar27	opHeader	INFERRED	&operation.header (operation chunk + 0xc)
+local	_PPEmulatorProgramConvertFromPPStream	uVar19	engineFlags	INFERRED	feature flags stored at emulator[0x49]: bit0 runtime compile, bit1 AltiVec, bit2 ...; cleared by APPLE_no_* options
+local	_PPEmulatorProgramConvertFromPPStream	uVar23	registerAddr	INFERRED	address of the operand register: file base + index*16
+local	_PPEmulatorProgramConvertFromPPStream	uVar1	operandOrdinal	INFERRED	binding ordinal (ushort) of the operand
+local	_PPEmulatorProgramConvertFromPPStream	bVar4	fieldByte	INFERRED	small field extracted from the operand word
+local	_PPEmulatorProgramConvertFromPPStream	uVar2	workWord3	INFERRED	reused scratch: mask/flag word during operand decoding
+local	_PPEmulatorProgramConvertFromPPStream	uVar3	workWord4	INFERRED	reused scratch: operand field during source decoding
+local	_PPEmulatorProgramConvertFromPPStream	uVar13	workWord	INFERRED	reused scratch: opcode, emulator feature flags, operand class and field extracts
+local	_PPEmulatorProgramConvertFromPPStream	uVar14	workWord2	INFERRED	reused scratch: opcode, operand class and field extracts
+local	_PPEmulatorProgramConvertFromPPStream	uVar8	constWord3	INFERRED	constant vector word 3 (chunk+0x18) while copying constants
+local	_PPEmulatorProgramConvertFromPPStream	uVar10	constWord2	INFERRED	constant vector word 2 (chunk+0x14)
+local	_PPEmulatorProgramConvertFromPPStream	uVar11	constWord1	INFERRED	constant vector word 1 (chunk+0x10)
+use	_PPEmulatorProgramConvertFromPPStream	uVar20	opCount	INFERRED	number of pp-stream operations (opList[2])	#0	^\s*iVar6\ =\ \*piVar15;	all	none
+use	_PPEmulatorProgramConvertFromPPStream	uVar20	texUnit	INFERRED	texture unit (binding word >> 24 & 7) of a texture binding	*		all	none
+use	_PPEmulatorProgramConvertFromPPStream	iVar6	optionChunk	INFERRED	option chunk walked for the APPLE_no_* options	^\s*iVar6\ =\ \*piVar5;	^\s*iVar25\ =\ piVar12\[2\];	all	none
+use	_PPEmulatorProgramConvertFromPPStream	iVar6	constChunk	INFERRED	constant chunk being copied into emulator[0x2c]	^\s*iVar6\ =\ \*piVar12;	^\s*puVar9\ =\ \(uint\ \*\)_calloc	all	none
+use	_PPEmulatorProgramConvertFromPPStream	iVar6	srcIndex	INFERRED	index of the source operand being converted	^\s*iVar6\ =\ 0;	^\s*iVar6\ =\ \*piVar15;	all	none
+use	_PPEmulatorProgramConvertFromPPStream	iVar6	texChunk	INFERRED	texture binding chunk walked to build the unit table	*		all	none
+use	_PPEmulatorProgramConvertFromPPStream	iVar25	optionsLeft	INFERRED	down-counter of option chunks	iVar25\ =\ piVar5\[2\]	^\s*iVar25\ =\ piVar12\[2\];	all	none
+use	_PPEmulatorProgramConvertFromPPStream	iVar25	constsLeft	INFERRED	down-counter of constant chunks	^\s*iVar25\ =\ piVar12\[2\];	^\s*iVar25\ =\ \*piVar26;	all	none
+use	_PPEmulatorProgramConvertFromPPStream	iVar25	opChunk	INFERRED	pp-stream operation chunk being converted (+8 next)	^\s*iVar25\ =\ \*piVar26;	iVar25\ =\ piVar15\[2\]	all	none
+use	_PPEmulatorProgramConvertFromPPStream	iVar25	texLeft	INFERRED	down-counter of texture binding chunks	*		all	none
+use	_PPEmulatorProgramConvertFromPPStream	iVar21	constIndex	INFERRED	index of the constant being copied	^\s*iVar21\ =\ 0;@1	^\s*if\ \(uVar20\ !=\ 0\)\ \{	all	none
+use	_PPEmulatorProgramConvertFromPPStream	iVar21	srcWordOffset	INFERRED	byte offset of the current source operand in the operation (index*8)	*		all	none
+use	_PPEmulatorProgramConvertFromPPStream	iVar24	constByteOffset	INFERRED	constIndex*16: byte offset in emulator[0x2c]	#0	^\s*puVar9\ =\ \(uint\ \*\)_calloc	all	none
+use	_PPEmulatorProgramConvertFromPPStream	iVar24	srcRecOffset	INFERRED	srcIndex*0x24: byte offset of the source record in inst	*		all	none
+use	_PPEmulatorProgramConvertFromPPStream	iVar7	constDest	INFERRED	address of the destination constant slot	^\s*iVar7\ =\ iVar24\ \+\ param_1\[0x2c\];	+8	all	none
+use	_PPEmulatorProgramConvertFromPPStream	iVar7	registerFileBase	INFERRED	base address of the register file for the operand's storage class	*		all	none

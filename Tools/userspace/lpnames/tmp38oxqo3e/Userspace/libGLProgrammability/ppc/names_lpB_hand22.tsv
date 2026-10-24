@@ -1,0 +1,130 @@
+local	_PPParserParseDestinationMask	param_2	operand	CONFIRMED	destination operand descriptor word receiving the write mask (bits 13..16)
+local	_PPParserParseDestinationMask	local_110	partBuf	INFERRED	token text: the mask letters
+local	_PPParserParseDestinationMask	uVar5	swizzleSets	INFERRED	which letter sets were used: bit0 rgba/stpq, bit1 xyzw
+local	_PPParserParseDestinationMask	uVar1	maskWord	INFERRED	operand word with the new mask bit set
+local	_PPParserParseDestinationMask	uVar3	status	INFERRED	parser status code (0 ok, 0xd mixed sets, 0x2d no token)
+local	_PPParserParseTempDeclaration	param_2	tempMode	CONFIRMED	LONG/SHORT mode of the TEMP declaration (stored in the identifier and usage record)
+local	_PPParserParseTempDeclaration	local_140	partBuf	INFERRED	token text: a temp name, then [ , or ;
+local	_PPParserParseTempDeclaration	local_40	usageModeWord	INFERRED	temp usage record word 0: mode << 29
+local	_PPParserParseTempDeclaration	local_3c	usageOrdinal	INFERRED	temp usage record word 1: temp ordinal
+local	_PPParserParseTempDeclaration	local_38	usageWord2	INFERRED	temp usage record word 2 (0)
+local	_PPParserParseTempDeclaration	local_34	usageWord3	INFERRED	temp usage record word 3 (0)
+local	_PPParserParseTempDeclaration	local_30	arrayIndex	INFERRED	_PPParserParseArray result: [0] is the array length of the temp
+local	_PPParserParseTempDeclaration	iVar1	scope	INFERRED	current scope (parser+0x44c)
+local	_PPParserParseTempDeclaration	uVar3	tempCount	INFERRED	number of temp registers declared by this statement so far
+local	_PPStreamChunkListSort	bVar1	swapped	INFERRED	a swap happened in this bubble-sort pass
+local	_PPStreamChunkListSort	iVar2	next	INFERRED	chunk after current (swap candidate)
+local	_PPStreamChunkListSort	iVar3	prevOfCurrent	INFERRED	chunk before the current one
+local	_PPStreamChunkListSort	iVar4	current	INFERRED	chunk compared with its successor (sort key: ushort at +0x12)
+local	_PPEmulatorProgramInitialiseHandleBanks	param_2	bank0Max	CONFIRMED	largest handle index of bank 0
+local	_PPEmulatorProgramInitialiseHandleBanks	param_3	bank1Max	CONFIRMED	largest handle index of bank 1
+local	_PPEmulatorProgramInitialiseHandleBanks	param_4	bank2Max	CONFIRMED	largest handle index of bank 2
+local	_PPEmulatorProgramInitialiseHandleBanks	param_5	bank3Max	CONFIRMED	largest handle index of bank 3
+local	_PPEmulatorProgramInitialiseHandleBanks	iVar1	bankMax	INFERRED	largest handle index of the bank being set up
+local	_PPEmulatorProgramInitialiseHandleBanks	iVar5	bitsLeft	INFERRED	down-counter 32..1 while locating the highest set bit / building the mask
+local	_PPEmulatorProgramInitialiseHandleBanks	uVar2	handleMask	INFERRED	all-ones mask covering the highest set bit of bankMax; then the number of handles
+local	_InitHashTable	param_1	htable	CONFIRMED	HashTable*: [0] entries, [1] size, [2] entry count, [3..] collision counters
+local	_InitHashTable	param_2	tableSize	CONFIRMED	number of 8-byte entries
+local	_InitHashTable	iVar1	entryOffset	INFERRED	index*8 of the entry being cleared
+local	_InitHashTable	iVar3	index	INFERRED	entry index, then the collision-counter down-counter
+local	_InitHashTable	piVar2	counterCursor	INFERRED	walks the collision counters
+local	_InitHashTable	uVar4	success	INFERRED	1 when the entries were allocated
+local	_IncreaseHashTableSize	param_1	atable	CONFIRMED	AtomTable* whose hash table is doubled and rebuilt
+local	_IncreaseHashTableSize	local_50	oldTable	INFERRED	copy of the old AtomTable (0x38 bytes)
+local	_IncreaseHashTableSize	local_44	oldHashEntries	INFERRED	old hash entries (oldTable+0xc)
+local	_IncreaseHashTableSize	local_40	oldHashSize	INFERRED	old hash size (oldTable+0x10)
+local	_IncreaseHashTableSize	local_28	oldAtomToString	INFERRED	old atom->string-slot map (oldTable+0x28)
+local	_IncreaseHashTableSize	local_20	oldNextFree	INFERRED	old next free atom (oldTable+0x30)
+local	_IncreaseHashTableSize	iVar1	atom	INFERRED	atom number being re-added
+local	_IncreaseHashTableSize	iVar4	atomString	INFERRED	text of the atom looked up in the old table
+local	_IncreaseHashTableSize	uVar2	success	INFERRED	1 when the rebuilt table is in place
+local	_PPParserParseAliasDeclaration	local_130	partBuf	INFERRED	token text: the alias name, =, the aliased words, ;
+local	_PPParserParseAliasDeclaration	local_30	savedPos	INFERRED	parser position before scanning the alias body
+local	_PPParserParseAliasDeclaration	local_2c	savedLine	INFERRED	parser line before scanning the alias body
+local	_PPParserParseAliasDeclaration	iVar2	bodyLength	INFERRED	characters of the alias body (sum of the parts + separators)
+local	_PPParserParseAliasDeclaration	iVar4	writePos	INFERRED	write position while re-reading the body into allocation
+local	_PPParserParseAliasDeclaration	uVar1	status	INFERRED	parser status code
+local	___lshrdi3	param_1	valueHi	CONFIRMED	high word of the 64-bit value
+local	___lshrdi3	param_2	valueLo	CONFIRMED	low word of the 64-bit value
+local	___lshrdi3	param_3	shift	CONFIRMED	shift count 0..63
+local	___lshrdi3	uVar1	complementOrResultHi	INFERRED	32-shift, then the high word of the result
+local	___lshrdi3	uStack_30	resultLo	INFERRED	low word of the result
+local	___ashldi3	param_1	valueHi	CONFIRMED	high word of the 64-bit value
+local	___ashldi3	param_2	valueLo	CONFIRMED	low word of the 64-bit value
+local	___ashldi3	param_3	shift	CONFIRMED	shift count 0..63
+local	___ashldi3	uVar1	complementOrResultHi	INFERRED	32-shift, then the high word of the result
+local	___ashldi3	uStack_2c	resultLo	INFERRED	low word of the result
+local	_GrowAtomTable	param_1	atable	CONFIRMED	AtomTable* (+0x28 atom map, +0x2c reverse map, +0x34 size)
+local	_GrowAtomTable	param_2	newSize	CONFIRMED	new capacity in atoms
+local	_PPStreamAddTempUsage	param_1	stream	CONFIRMED	PPStream*: +4 is the temp-usage chunk list
+local	_PPStreamAddTempUsage	param_2	usage	CONFIRMED	4-word temp usage record
+local	_PPStreamAddTempUsage	uVar2	usageList	INFERRED	stream->temp-usage chunk list
+local	_PPStreamAddTempUsage	uVar3	usageWord3	INFERRED	usage[3]
+local	_PPStreamAddTempUsage	uVar4	usageWord0	INFERRED	usage[0]
+local	_PPStreamAddTempUsage	uVar5	usageWord2	INFERRED	usage[2]
+local	_PPStreamAddTempUsage	uVar6	usageWord1	INFERRED	usage[1]
+local	_PPStreamAddConstant	param_1	stream	CONFIRMED	PPStream*: +0x2c is the constant chunk list
+local	_PPStreamAddConstant	param_2	constant	CONFIRMED	4-float constant vector
+local	_PPStreamAddConstant	uVar6	constantList	INFERRED	stream->constant chunk list
+local	_PPStreamAddConstant	uVar1	constantW	INFERRED	constant[3]
+local	_PPStreamAddConstant	uVar2	constantX	INFERRED	constant[0]
+local	_PPStreamAddConstant	uVar3	constantY	INFERRED	constant[1]
+local	_PPStreamAddConstant	uVar4	constantZ	INFERRED	constant[2]
+local	_PPStreamChunkListChunkAtIndex	param_2	index	CONFIRMED	chunk index (ushort at +0x12 for most kinds) searched for
+local	_PPStreamChunkListChunkAtIndex	puVar2	chunk	INFERRED	chunk being examined (+8 next)
+local	_PPStreamChunkListChunkAtIndex	uVar1	chunkIndex	INFERRED	index of the current chunk (kind-specific field or position)
+local	_PPStreamChunkListChunkAtIndex	uVar3	position	INFERRED	running position of the chunk in the list
+local	_PPStreamChunkListGetMaxIndex	puVar2	chunk	INFERRED	chunk being examined (+8 next)
+local	_PPStreamChunkListGetMaxIndex	uVar1	chunkIndex	INFERRED	index of the current chunk (kind-specific field)
+local	_PPStreamChunkListGetMaxIndex	uVar3	maxIndex	INFERRED	largest index seen
+local	_AddString	param_1	stringTable	CONFIRMED	StringTable*: [0] buffer, [1] used bytes, [2] capacity
+local	_AddString	param_2	string	CONFIRMED	string appended
+local	_AddString	iVar3	offset	INFERRED	offset of the new string in the buffer; returned
+local	_AllocateAtom	param_1	atable	CONFIRMED	AtomTable*
+local	_AllocateAtom	iVar1	atom	INFERRED	atom number handed out (nextFree before the increment)
+local	_LookUpAddStringHash	param_1	atable	CONFIRMED	AtomTable* (+0xc hash entries)
+local	_LookUpAddStringHash	param_2	string	CONFIRMED	string to find or add
+local	_LookUpAddStringHash	iVar1	entryOffset	INFERRED	hash slot*8
+local	_GetAtomString	iVar1	stringOffset	INFERRED	offset of the atom's string in the string table
+local	_PPParserGetScalars	param_2	values	CONFIRMED	receives the parsed floats
+local	_PPParserGetScalars	param_3	count	CONFIRMED	number of scalars wanted
+local	_PPParserGetScalars	local_130	partBuf	INFERRED	token text: a number, then ,
+local	_PPParserGetScalars	local_30	numberEnd	INFERRED	_glp_strtod end pointer
+local	_PPStreamChunkListRemoveChunk	param_2	chunk	CONFIRMED	chunk unlinked from the list and freed
+local	_PPStreamChunkListRemoveChunk	iVar1	prev	INFERRED	previous chunk of the removed one
+local	_PPStreamChunkListRemoveChunk	extraout_r3	r3Out	INFERRED	Ghidra extra-output of r3 after _free; returned
+local	_PPParserRemoveScope	param_2	scope	CONFIRMED	scope unlinked from the parser scope list and freed
+local	_PPParserRemoveScope	iVar1	prev	INFERRED	previous scope
+local	_PPParserScopeRemoveIdentifier	param_2	identifier	CONFIRMED	identifier unlinked from the scope list and freed
+local	_PPParserScopeRemoveIdentifier	iVar1	prev	INFERRED	previous identifier
+local	_PPParserScopeRemoveMacro	param_2	macro	CONFIRMED	macro unlinked from the scope list and freed
+local	_PPParserScopeRemoveMacro	iVar1	prev	INFERRED	previous macro
+local	_PPParserMacroFree	uVar1	paramCount	INFERRED	macro->paramCount
+local	_PPParserMacroFree	iVar2	paramString	INFERRED	parameter string freed
+local	_PPParserMacroFree	iVar3	paramArray	INFERRED	macro->params array
+local	_PPStreamGetTexOperationCount	param_1	stream	CONFIRMED	PPStream*: +0x20 is the operation list
+local	_PPStreamGetTexOperationCount	iVar1	count	INFERRED	number of TEX/TXP/TXB operations
+local	_PPStreamGetTexOperationCount	iVar2	opChunk	INFERRED	operation chunk (+8 next)
+local	_HashString2	param_1	string	CONFIRMED	string hashed (secondary hash)
+local	_HashString2	iVar1	chValue	INFERRED	character value
+local	_HashString2	uVar2	hash	INFERRED	running hash
+local	_HashString	param_1	string	CONFIRMED	string hashed (primary hash)
+local	_HashString	uVar2	hash	INFERRED	running hash; returned masked to 31 bits
+local	_lReverse	param_1	value	CONFIRMED	number whose bits are reversed
+local	_lReverse	uVar1	lowBit	INFERRED	least significant bit shifted out
+local	_lReverse	uVar2	reversed	INFERRED	bit-reversed value
+local	_LookUpAddString	param_1	atable	CONFIRMED	AtomTable*
+local	_LookUpAddString	param_2	string	CONFIRMED	string to find or add
+local	_LookUpAddString	iVar2	atom	INFERRED	atom of the string (allocated when new)
+local	_PPStreamChunkListFree	iVar1	chunksLeft	INFERRED	down-counter of chunks
+local	_PPStreamChunkListFree	iVar2	chunk	INFERRED	chunk being freed
+local	_PPStreamChunkListFree	iVar3	nextChunk	INFERRED	chunk after it
+local	_SetAtomValue	param_1	atable	CONFIRMED	AtomTable*
+local	_SetAtomValue	param_2	atom	CONFIRMED	atom number
+local	_SetAtomValue	param_3	hashSlot	CONFIRMED	hash slot whose string offset becomes the atom's value
+local	_FreeStringTable	param_1	stringTable	CONFIRMED	StringTable*: [0] buffer, [1] used, [2] capacity
+local	_FreeStringTable	extraout_r3	r3Out	INFERRED	Ghidra extra-output of r3 after _free; returned
+local	_FreeStringTable	uVar1	result	INFERRED	return value (0, or the r3 left by _free)
+local	_PPParserMacroSetReplaceString	param_1	parser	INFERRED	PPParser*, unused
+local	_PPParserMacroSetReplaceString	param_2	macro	CONFIRMED	PPParserMacro*: +4 is the body
+local	_PPParserMacroSetReplaceString	param_3	replaceString	CONFIRMED	new macro body

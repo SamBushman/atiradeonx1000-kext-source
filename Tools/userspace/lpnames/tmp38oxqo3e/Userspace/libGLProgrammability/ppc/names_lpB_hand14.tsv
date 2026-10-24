@@ -1,0 +1,20 @@
+local	_PPParserParseAttributeBinding	bVar1	isFragmentProgram	INFERRED	profile bit 1 (ARBfp) set: selects the fragment.* attribute names
+local	_PPParserParseAttributeBinding	local_140	partBuf	INFERRED	token text: vertex/fragment, attrib, position, color, texcoord, material, ...
+local	_PPParserParseAttributeBinding	local_40	binding	INFERRED	attribute binding word: class in bits 16..19 (position 1, color 2, texcoord 7, weight 6, attrib 9, material 0xa), index in the low bits
+local	_PPParserParseAttributeBinding	local_3c	bindingOrdinal	INFERRED	low half of the binding's ordinal word (parser+0x24 counter)
+local	_PPParserParseAttributeBinding	uStack_3a	bindingOrdinalHi	INFERRED	high half of the binding's ordinal word
+local	_PPParserParseAttributeBinding	local_30	arrayIndex	INFERRED	_PPParserParseArray result: [0] is the parsed index
+local	_PPParserParseAttributeBinding	iVar3	partLenCmpOrClass	INFERRED	GetPart length, memcmp results, then the binding class / error code / stream pointer
+local	_PPParserParseAttributeBinding	iVar5	bindingChunk	INFERRED	attribute-binding chunk walked while looking for an equal binding (+8 next)
+use	_PPParserParseAttributeBinding	uVar2	profile	INFERRED	parser->profile flags (+0x48c)	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x48c\);	+6	all	none
+use	_PPParserParseAttributeBinding	uVar2	indexLimit	INFERRED	parser limit (+0x488/+0x470/+0x478/...) compared with the parsed array index	*		all	none
+local	_PPParserParseOutputBinding	param_2	outputMode	INFERRED	precision/mode value stored in the top 3 bits of the binding word (param_2 << 0x1d)
+local	_PPParserParseOutputBinding	bVar1	isFragmentProgram	INFERRED	profile bit 1 (ARBfp) set: selects the result.* output names
+local	_PPParserParseOutputBinding	uVar2	profile	INFERRED	parser->profile flags (+0x48c)
+local	_PPParserParseOutputBinding	iVar3	partLenCmpOrClass	INFERRED	GetPart length, memcmp results, then the output class / error code
+local	_PPParserParseOutputBinding	local_140	partBuf	INFERRED	first byte of the token buffer; its address is passed to _PPParserGetPart
+local	_PPParserParseOutputBinding	local_13f	partBuf1	INFERRED	second byte of the token buffer (cleared when a front/back qualifier is dropped)
+local	_PPParserParseOutputBinding	local_40	binding	INFERRED	output binding word: mode in bits 29..31, class in bits 16..19, index in the low bits
+local	_PPParserParseOutputBinding	local_3c	bindingOrdinal	INFERRED	low half of the binding's ordinal word (parser+0x28 counter)
+local	_PPParserParseOutputBinding	uStack_3a	bindingOrdinalHi	INFERRED	high half of the binding's ordinal word
+local	_PPParserParseOutputBinding	local_30	arrayIndex	INFERRED	_PPParserParseArray result: [0] is the parsed index

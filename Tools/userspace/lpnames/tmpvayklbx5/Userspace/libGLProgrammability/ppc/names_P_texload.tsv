@@ -1,0 +1,21 @@
+local	_InterpreterTextureSamplerLoadTexel1D	param_1	sampler	CONFIRMED	texture sampler state ([1] current texture object)
+local	_InterpreterTextureSamplerLoadTexel1D	param_2	texelData	INFERRED	base of the level texel array: 16-byte RGBA float texels
+local	_InterpreterTextureSamplerLoadTexel1D	param_3	unusedLevelRecord	UNKNOWN	not read by the 1D loader
+local	_InterpreterTextureSamplerLoadTexel1D	param_4	texelCoord	CONFIRMED	int[1] texel coordinate (S)
+local	_InterpreterTextureSamplerLoadTexel1D	param_5	texelOut	CONFIRMED	receives the RGBA texel as 4 words
+local	_InterpreterTextureSamplerLoadTexel1D	uVar2	texelType	INFERRED	word at texture object +0xae4 compared with GL type enums (0x1401 UNSIGNED_BYTE, 0x1406 FLOAT, 0x8033, 0x8363, 0x8365..0x8367, 0x8815, 0x881a/b); those types return without loading
+local	_InterpreterTextureSamplerLoadTexel1D	puVar1	texelPtr	INFERRED	address of the 16-byte texel in texelData
+local	_InterpreterTextureSamplerLoadTexel2D	param_1	sampler	CONFIRMED	texture sampler state ([1] current texture object)
+local	_InterpreterTextureSamplerLoadTexel2D	param_2	texelData	INFERRED	base of the level texel array: 16-byte RGBA float texels
+local	_InterpreterTextureSamplerLoadTexel2D	param_3	levelRecord	INFERRED	level image record; its first word is the level width (row pitch in texels)
+local	_InterpreterTextureSamplerLoadTexel2D	param_4	texelCoord	CONFIRMED	int[2] texel coordinate (S,T)
+local	_InterpreterTextureSamplerLoadTexel2D	param_5	texelOut	CONFIRMED	receives the RGBA texel as 4 words
+local	_InterpreterTextureSamplerLoadTexel2D	uVar2	texelType	INFERRED	word at texture object +0xae4 compared with GL type enums (0x1401 UNSIGNED_BYTE, 0x1406 FLOAT, 0x8033, 0x8363, 0x8365..0x8367, 0x8815, 0x881a/b); those types return without loading
+local	_InterpreterTextureSamplerLoadTexel2D	puVar1	texelPtr	INFERRED	address of the 16-byte texel in texelData
+local	_InterpreterTextureSamplerLoadTexel3D	param_1	sampler	CONFIRMED	texture sampler state ([1] current texture object)
+local	_InterpreterTextureSamplerLoadTexel3D	param_2	texelData	INFERRED	base of the level texel array: 16-byte RGBA float texels
+local	_InterpreterTextureSamplerLoadTexel3D	param_3	levelRecord	INFERRED	level image record; its first word is the level width (row pitch in texels)
+local	_InterpreterTextureSamplerLoadTexel3D	param_4	texelCoord	CONFIRMED	int[3] texel coordinate (S,T,R)
+local	_InterpreterTextureSamplerLoadTexel3D	param_5	texelOut	CONFIRMED	receives the RGBA texel as 4 words
+local	_InterpreterTextureSamplerLoadTexel3D	uVar2	texelType	INFERRED	word at texture object +0xae4 compared with GL type enums (0x1401 UNSIGNED_BYTE, 0x1406 FLOAT, 0x8033, 0x8363, 0x8365..0x8367, 0x8815, 0x881a/b); those types return without loading
+local	_InterpreterTextureSamplerLoadTexel3D	puVar1	texelPtr	INFERRED	address of the 16-byte texel in texelData

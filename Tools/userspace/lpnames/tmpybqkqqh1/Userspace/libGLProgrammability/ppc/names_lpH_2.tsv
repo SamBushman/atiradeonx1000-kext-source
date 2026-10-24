@@ -1,0 +1,113 @@
+use	TIntermAggregate__compileNode	iVar20	ppStream	CONFIRMED	compiler+0x70: the PPStream receiving operations and labels (_PPStreamAddLabel first argument)	^\s*iVar20\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x70\);$	+1
+use	TIntermAggregate__compileNode	iVar20	ppStream	CONFIRMED	compiler+0x70: the PPStream receiving operations and labels (_PPStreamAddLabel first argument)	^\s*_PPStreamAddLabel\(iVar20,\*\(undefined4\ \*\)\(iVar6\ \+\ 4\),uVar7\);$	+1
+use	TIntermAggregate__compileNode	iVar20	ppStream	INFERRED	compiler+0x70 PPStream: +0x20 is its operation list, +4 the last operation record	^\s*iVar20\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar20\ \+\ 0x20\)\ \+\ 4\);$	+1	rhs	none
+use	TIntermAggregate__compileNode	iVar20	lastOperation	INFERRED	PPStream last operation record; its header word (+0xc) opcode field is compared with 0x4d (0x1340000)	^\s*iVar20\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar20\ \+\ 0x20\)\ \+\ 4\);$	+1	lhs	none
+use	TIntermAggregate__compileNode	iVar20	lastOperation	INFERRED	last operation record header test against 0x1340000	^\s*if\ \(\(iVar20\ ==\ 0\)\ \|\|\ \(\(\*\(uint\ \*\)\(iVar20\ \+\ 0xc\)\ \&\ 0x3fc0000\)\ !=\ 0x1340000\)\)\ \{$	+1
+use	TIntermAggregate__compileNode	iVar20	paramSetupIndex	INFERRED	counted loop index over the child operands: newParam / operand copies	^\s*iVar20\ =\ 0;$	+1
+use	TIntermAggregate__compileNode	iVar20	paramSetupIndex	INFERRED	counted loop index over the child operands: newParam / operand copies	^\s*iVar8\ =\ iVar20\ \*\ 4;$	+1
+use	TIntermAggregate__compileNode	iVar20	paramSetupIndex	INFERRED	counted loop index over the child operands: newParam / operand copies	^\s*uVar7\ =\ TPPStreamCompiler__newParam\(param_2,pTVar10,pcVar9,iVar20\);$	+1
+use	TIntermAggregate__compileNode	iVar20	paramSetupIndex	INFERRED	counted loop index over the child operands: newParam / operand copies	^\s*if\ \(\(\*\(int\ \*\)\(ppPVar19\[iVar20\]\ \+\ 0xc\)\ ==\ 0\)\ \&\&\ \(\*\(int\ \*\)\(ppPVar19\[iVar20\]\ \+\ 8\)\ ==\ 0\)\)\ \{$	+2
+use	TIntermAggregate__compileNode	iVar20	paramSetupIndex	INFERRED	counted loop index over the child operands: newParam / operand copies	^\s*__ZN12ParseOperandC1ERKS_\(this_01,ppPVar19\[iVar20\]\);$	+3
+use	TIntermAggregate__compileNode	iVar20	paramSetupIndex	INFERRED	counted loop index over the child operands: newParam / operand copies	^\s*__ZN12ParseOperandC1ERKS_\(pvVar27,\*\(unsigned\ char\ \*\*\)\(ppPVar19\[iVar20\]\ \+\ 0xc\)\);$	+1
+use	TIntermAggregate__compileNode	iVar20	paramSetupIndex	INFERRED	counted loop index over the child operands: newParam / operand copies	^\s*pPVar25\ =\ ppPVar19\[iVar20\];$@2	+1
+use	TIntermAggregate__compileNode	iVar20	paramSetupIndex	INFERRED	counted loop index over the child operands: newParam / operand copies	^\s*pPVar25\ =\ ppPVar12\[iVar20\];$	+1
+use	TIntermAggregate__compileNode	iVar20	paramSetupIndex	INFERRED	counted loop index over the child operands: newParam / operand copies	^\s*__ZN12ParseOperandC1ERKS_\(pvVar27,\*\(unsigned\ char\ \*\*\)\(ppPVar19\[iVar20\]\ \+\ 8\)\);$	+1
+use	TIntermAggregate__compileNode	iVar20	paramSetupIndex	INFERRED	counted loop index over the child operands: newParam / operand copies	^\s*param_3\ =\ ppPVar19\ \+\ iVar20;$	+2
+use	TIntermAggregate__compileNode	iVar20	paramSetupIndex	INFERRED	counted loop index over the child operands: newParam / operand copies	^\s*\}\ while\ \(iVar20\ <\ iVar18\);$	+1
+use	TIntermAggregate__compileNode	iVar20	isWriteableFlag	INFERRED	ParseOperand__isWriteable result	^\s*iVar20\ =\ ParseOperand__isWriteable\(ppPVar19\[iVar8\]\);$	+2
+use	TIntermAggregate__compileNode	iVar20	returnNameData	INFERRED	name string data pointer of the node (getName()+4) for the return value	^\s*iVar20\ =\ \*\(int\ \*\)\(iVar6\ \+\ 4\);$	+2
+use	TIntermAggregate__compileNode	iVar20	returnNameData	INFERRED	name string data pointer of the node (getName()+4) for the return value	^\s*\(this,a1_06,a2,pcVar9,uVar7,a5,iVar20,iVar6\);$	+1
+use	TIntermAggregate__compileNode	iVar20	paramScanIndex	INFERRED	counted loop index over the call parameters	^\s*iVar20\ =\ 0;$@2	+1
+use	TIntermAggregate__compileNode	iVar20	paramScanIndex	INFERRED	counted loop index over the call parameters	^\s*ppPVar14\ =\ \(unsigned\ char\ \*\*\)\(puVar26\ \+\ iVar20\);$	+3
+use	TIntermAggregate__compileNode	iVar20	paramScanIndex	INFERRED	counted loop index over the call parameters	^\s*\(piVar11\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)puVar26\[iVar20\]\ \+\ 0xc\),$	+1
+use	TIntermAggregate__compileNode	iVar20	paramScanIndex	INFERRED	counted loop index over the call parameters	^\s*\(piVar11,a1_01,ppPVar13,param_4,param_5,a5,\*\(int\ \*\)puVar26\[iVar20\]\),$	+1
+use	TIntermAggregate__compileNode	iVar20	paramScanIndex	INFERRED	counted loop index over the call parameters	^\s*\(param_2,\*\(unsigned\ char\ \*\*\)\(\*\(int\ \*\)puVar26\[iVar20\]\ \+\ 0xc\),pcVar9,iVar20\);$	+1
+use	TIntermAggregate__compileNode	iVar20	paramScanIndex	INFERRED	counted loop index over the call parameters	^\s*iVar20\ =\ iVar20\ \+\ 1;$@2	+2
+use	TIntermAggregate__compileNode	iVar20	curLastOpIndex	INFERRED	TPPStreamCompiler__LastOperationIndex result compared with the function first-op	^\s*iVar20\ =\ TPPStreamCompiler__LastOperationIndex\(param_2\);$	+1
+use	TIntermAggregate__compileNode	iVar20	curLastOpIndex	INFERRED	TPPStreamCompiler__LastOperationIndex result compared with the function first-op	^\s*if\ \(iVar20\ <\ \(int\)\(\(ulonglong\)uVar28\ >>\ 0x20\)\)\ goto\ LAB_97bc0788;$	+1
+use	TIntermAggregate__compileNode	iVar20	argTypeVtable	INFERRED	vtable pointer of the operand type object (*piVar11)	^\s*\(\(\(piVar11\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)ppPVar19\[iVar6\]\ \+\ 0xc\),\ iVar20\ =\ \*piVar11,$	+1
+use	TIntermAggregate__compileNode	iVar20	argTypeVtable	INFERRED	vtable pointer of the operand type object	^\s*iVar20\ =\ \(\*\*\(code\ \*\*\)\(iVar20\ \+\ 0x24\)\)\(piVar11,uVar7,param_3,param_4,param_5,a5,iVar20\),$	+1	rhs	none
+use	TIntermAggregate__compileNode	iVar20	argTypeKind	INFERRED	kind returned by the type object virtual slot 0x24 (9 / 0xb / 0xc select out-parameter kinds)	^\s*iVar20\ =\ \(\*\*\(code\ \*\*\)\(iVar20\ \+\ 0x24\)\)\(piVar11,uVar7,param_3,param_4,param_5,a5,iVar20\),$	+1	lhs	none
+use	TIntermAggregate__compileNode	iVar20	argTypeKind	INFERRED	kind returned by the type object virtual slot 0x24	^\s*iVar20\ ==\ 9\ \|\|$	+1
+use	TIntermAggregate__compileNode	iVar20	argTypeKind	INFERRED	kind returned by the type object virtual slot 0x24	^\s*iVar20\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x24\)\)$	+1
+use	TIntermAggregate__compileNode	iVar20	argTypeKind	INFERRED	kind returned by the type object virtual slot 0x24	^\s*iVar20\ ==\ 0xb\)\)\ \|\|$	+1
+use	TIntermAggregate__compileNode	iVar20	argTypeKind	INFERRED	kind returned by the type object virtual slot 0x24	^\s*iVar20\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x24\)\)$@2	+1
+use	TIntermAggregate__compileNode	iVar20	argTypeKind	INFERRED	kind returned by the type object virtual slot 0x24	^\s*uVar7\ =\ extraout_r4_08,\ iVar20\ ==\ 0xc\)\)\)\)\ \{$	+1
+use	TIntermAggregate__compileNode	iVar20	operandsLeft	INFERRED	down-counting loop counter, initialised to the child count	^\s*iVar20\ =\ iVar18;$	+1
+use	TIntermAggregate__compileNode	iVar20	operandsLeft	INFERRED	down-counting loop counter, initialised to the child count	^\s*iVar20\ =\ iVar20\ \+\ \-1;$	+1
+use	TIntermAggregate__compileNode	iVar20	operandsLeft	INFERRED	down-counting loop counter, initialised to the child count	^\s*\}\ while\ \(iVar20\ !=\ 0\);$	+1
+use	TIntermAggregate__compileNode	iVar20	operandsLeft	INFERRED	down-counting loop counter, initialised to the child count	^\s*iVar20\ =\ iVar18;$@2	+1
+use	TIntermAggregate__compileNode	iVar20	operandsLeft	INFERRED	down-counting loop counter, initialised to the child count	^\s*iVar20\ =\ iVar20\ \+\ \-1;$@2	+1
+use	TIntermAggregate__compileNode	iVar20	operandsLeft	INFERRED	down-counting loop counter, initialised to the child count	^\s*\}\ while\ \(iVar20\ !=\ 0\);$@2	+1
+use	TIntermAggregate__compileNode	iVar20	operandsLeft	INFERRED	down-counting loop counter, initialised to the child count	^\s*iVar20\ =\ iVar18;$@3	+1
+use	TIntermAggregate__compileNode	iVar20	operandsLeft	INFERRED	down-counting loop counter, initialised to the child count	^\s*iVar20\ =\ iVar20\ \+\ \-1;$@3	+1
+use	TIntermAggregate__compileNode	iVar20	operandsLeft	INFERRED	down-counting loop counter, initialised to the child count	^\s*\}\ while\ \(iVar20\ !=\ 0\);$@3	+1
+use	TIntermAggregate__compileNode	iVar8	mainNameCompare	INFERRED	memcmp(name,"main(",5) result: 0 when the function is main	^\s*iVar8\ =\ _memcmp\(\*\(undefined4\ \*\)\(iVar8\ \+\ 4\),"main\(",5\);$	+2
+use	TIntermAggregate__compileNode	iVar8	pendingQueueSize	INFERRED	size() of the deferred-node queue at compiler+0x4c	^\s*while\ \(iVar8\ =\ \(\(int\ \(\*\)\(\)\)size\)\(\(unsigned\ char\ \*\)\(param_2\ \+\ 0x4c\)\),\ iVar8\ !=\ 0\)\ \{$	+1
+use	TIntermAggregate__compileNode	iVar8	lastOpBefore	INFERRED	TPPStreamCompiler__LastOperationIndex before the function body (-1 when empty)	^\s*iVar8\ =\ TPPStreamCompiler__LastOperationIndex\(param_2\);$	+1
+use	TIntermAggregate__compileNode	iVar8	lastOpBefore	INFERRED	TPPStreamCompiler__LastOperationIndex before the function body (-1 when empty)	^\s*if\ \(iVar8\ !=\ \-1\)\ \{$	+2
+use	TIntermAggregate__compileNode	iVar8	paramByteOffset	INFERRED	paramIndex * 4 offset into the new parameter-operand array	^\s*iVar8\ =\ iVar20\ \*\ 4;$	+1
+use	TIntermAggregate__compileNode	iVar8	paramByteOffset	INFERRED	paramIndex * 4 offset into the new parameter-operand array	^\s*\*\(undefined4\ \*\)\(iVar8\ \+\ iVar6\)\ =\ uVar7;$	+1
+use	TIntermAggregate__compileNode	iVar8	paramByteOffset	INFERRED	paramIndex * 4 offset into the new parameter-operand array	^\s*TPPStreamCompiler__assignOperands\(param_2,\(unsigned\ char\ \*\*\)\(iVar6\ \+\ iVar8\),param_3,0\);$	+1
+use	TIntermAggregate__compileNode	iVar8	copyBackIndex	INFERRED	loop index over the children when writing parameter copies back	^\s*iVar8\ =\ 0;$	+1
+use	TIntermAggregate__compileNode	iVar8	copyBackIndex	INFERRED	loop index over the children when writing parameter copies back	^\s*iVar20\ =\ ParseOperand__isWriteable\(ppPVar19\[iVar8\]\);$	+1
+use	TIntermAggregate__compileNode	iVar8	copyBackIndex	INFERRED	loop index over the children when writing parameter copies back	^\s*if\ \(ppPVar12\[iVar8\]\ ==\ \(unsigned\ char\ \*\)0x0\)\ \{$	+1
+use	TIntermAggregate__compileNode	iVar8	copyBackIndex	INFERRED	loop index over the children when writing parameter copies back	^\s*a2\ =\ \(unsigned\ char\ \*\)\(iVar6\ \+\ iVar8\ \*\ 4\);$	+1
+use	TIntermAggregate__compileNode	iVar8	copyBackIndex	INFERRED	loop index over the children when writing parameter copies back	^\s*TPPStreamCompiler__assignOperands\(param_2,ppPVar13\ \+\ iVar8,\(unsigned\ char\ \*\*\)a2,0\);$	+1
+use	TIntermAggregate__compileNode	iVar8	copyBackIndex	INFERRED	loop index over the children when writing parameter copies back	^\s*pvVar27\ =\ \*\(void\ \*\*\)\(iVar8\ \*\ 4\ \+\ iVar6\);$	+1
+use	TIntermAggregate__compileNode	iVar8	copyBackIndex	INFERRED	loop index over the children when writing parameter copies back	^\s*pPVar25\ =\ ppPVar12\[iVar8\];$	+1
+use	TIntermAggregate__compileNode	iVar8	copyBackIndex	INFERRED	loop index over the children when writing parameter copies back	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+2
+use	TIntermAggregate__compileNode	iVar8	functionFirstOp	INFERRED	FunctionTable__getFirstOp result	^\s*iVar8\ =\ FunctionTable__getFirstOp\(\*\(unsigned\ char\ \*\*\)\(param_2\ \+\ 0x6c\),iVar6\);$	+2
+use	TIntermAggregate__compileNode	iVar8	lastParamOpIndex	INFERRED	ParseFunctionStack__getLastParamOpIndex result	^\s*iVar8\ =\ ParseFunctionStack__getLastParamOpIndex\(pPVar22\);$	+1
+use	TIntermAggregate__compileNode	iVar8	lastParamOpIndex	INFERRED	ParseFunctionStack__getLastParamOpIndex result	^\s*if\ \(iVar8\ !=\ iVar16\)\ goto\ LAB_97bc06f4;$	+1
+use	TIntermAggregate__compileNode	iVar8	callArgTypeVtable	INFERRED	vtable pointer of the parameter type object	^\s*\(\(piVar11\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)puVar26\[iVar20\]\ \+\ 0xc\),\ iVar8\ =\ \*piVar11,$	+1
+use	TIntermAggregate__compileNode	iVar8	callArgTypeVtable	INFERRED	vtable pointer of the parameter type object	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(iVar8\ \+\ 0x24\)\)\(piVar11,uVar7,ppPVar13,param_4,param_5,a5,iVar8\),$	+1	rhs	none
+use	TIntermAggregate__compileNode	iVar8	callArgTypeKind	INFERRED	kind from the type object virtual slot 0x24 (10 / 0xb)	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(iVar8\ \+\ 0x24\)\)\(piVar11,uVar7,ppPVar13,param_4,param_5,a5,iVar8\),$	+1	lhs	none
+use	TIntermAggregate__compileNode	iVar8	callArgTypeKind	INFERRED	kind from the type object virtual slot 0x24	^\s*iVar8\ ==\ 10\ \|\|$	+1
+use	TIntermAggregate__compileNode	iVar8	callArgTypeKind	INFERRED	kind from the type object virtual slot 0x24	^\s*iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x24\)\)$	+1
+use	TIntermAggregate__compileNode	iVar8	callArgTypeKind	INFERRED	kind from the type object virtual slot 0x24	^\s*uVar7\ =\ extraout_r4_05,\ iVar8\ ==\ 0xb\)\)\)\)\ \{$	+1
+use	TIntermAggregate__compileNode	iVar16	defReturnNameData	INFERRED	name string data pointer for the return value	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar8\ \+\ 4\);$	+2
+use	TIntermAggregate__compileNode	iVar16	defReturnNameData	INFERRED	name string data pointer for the return value	^\s*\(this,a1_00,param_3,param_4,param_5,param_6,iVar16,iVar8\);$	+1
+use	TIntermAggregate__compileNode	iVar16	lastOpIndexNow	INFERRED	TPPStreamCompiler__LastOperationIndex compared with the last param op index	^\s*iVar16\ =\ TPPStreamCompiler__LastOperationIndex\(param_2\);$	+2
+use	TIntermAggregate__compileNode	piVar11	queuedNode	INFERRED	node taken from the deferred queue at compiler+0x4c; slot 0xc compiles it	^\s*piVar11\ =\ \(int\ \*\)fetch\(\(unsigned\ char\ \*\)\(param_2\ \+\ 0x4c\)\);$	+2
+use	TIntermAggregate__compileNode	piVar11	operandTypeObj	INFERRED	type object *(operand+0xc) whose virtual slot 0x24 classifies it	^\s*\(piVar11\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)local_48\[0\]\ \+\ 0xc\),\ piVar11\ !=\ \(int\ \*\)0x0\)\)\ \{$	+2
+use	TIntermAggregate__compileNode	piVar11	operandTypeObj	INFERRED	type object *(operand+0xc) whose virtual slot 0x24 classifies it	^\s*\(\(piVar11\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)puVar26\[iVar20\]\ \+\ 0xc\),\ iVar8\ =\ \*piVar11,$	+1
+use	TIntermAggregate__compileNode	piVar11	operandTypeObj	INFERRED	type object *(operand+0xc) whose virtual slot 0x24 classifies it	^\s*\(piVar11\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)puVar26\[iVar20\]\ \+\ 0xc\),$	+1
+use	TIntermAggregate__compileNode	piVar11	operandTypeObj	INFERRED	type object *(operand+0xc) whose virtual slot 0x24 classifies it	^\s*\(piVar11,a1_01,ppPVar13,param_4,param_5,a5,\*\(int\ \*\)puVar26\[iVar20\]\),$	+1
+use	TIntermAggregate__compileNode	piVar11	operandTypeObj	INFERRED	type object *(operand+0xc) whose virtual slot 0x24 classifies it	^\s*\(\(\(piVar11\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)ppPVar19\[iVar6\]\ \+\ 0xc\),\ iVar20\ =\ \*piVar11,$	+1
+use	TIntermAggregate__compileNode	piVar11	operandTypeObj	INFERRED	type object *(operand+0xc) whose virtual slot 0x24 classifies it	^\s*\(piVar11\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)ppPVar19\[iVar6\]\ \+\ 0xc\),$	+1
+use	TIntermAggregate__compileNode	piVar11	operandTypeObj	INFERRED	type object *(operand+0xc) whose virtual slot 0x24 classifies it	^\s*\(piVar11\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)ppPVar19\[iVar6\]\ \+\ 0xc\),$@2	+1
+use	TIntermAggregate__compileNode	piVar11	childTypeObj	INFERRED	object returned by the child virtual slot 0x14; slot 0x3c gives its type	^\s*piVar11\ =\ \(int\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)\*puVar26\ \+\ 0x14\)\)$	+1
+use	TIntermAggregate__compileNode	piVar11	childTypeObj	INFERRED	object returned by the child virtual slot 0x14; slot 0x3c gives its type	^\s*pTVar10\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x3c\)\)\(piVar11\);$	+1
+use	TIntermAggregate__compileNode	uVar7	sourceLine	INFERRED	virtual slot 0 of the node (getLine), stored to compiler+0x90	^\s*uVar7\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$	+2
+use	TIntermAggregate__compileNode	uVar7	labelLength	INFERRED	_strlen of the function name, passed to _PPStreamAddLabel	^\s*uVar7\ =\ _strlen\(\*\(undefined4\ \*\)\(iVar6\ \+\ 4\)\);$	+1
+use	TIntermAggregate__compileNode	uVar7	labelLength	INFERRED	_strlen of the function name, passed to _PPStreamAddLabel	^\s*_PPStreamAddLabel\(iVar20,\*\(undefined4\ \*\)\(iVar6\ \+\ 4\),uVar7\);$	+1
+use	TIntermAggregate__compileNode	uVar7	newParamOperand	INFERRED	TPPStreamCompiler__newParam result stored into the parameter array	^\s*uVar7\ =\ TPPStreamCompiler__newParam\(param_2,pTVar10,pcVar9,iVar20\);$	+2
+use	TIntermAggregate__compileNode	uVar7	functionIsEmpty	INFERRED	0/1 flag passed to FunctionTable__setEmpty	^\s*uVar7\ =\ 0;$@2	+1
+use	TIntermAggregate__compileNode	uVar7	functionIsEmpty	INFERRED	0/1 flag passed to FunctionTable__setEmpty	^\s*uVar7\ =\ 1;$	+1
+use	TIntermAggregate__compileNode	uVar7	functionIsEmpty	INFERRED	0/1 flag passed to FunctionTable__setEmpty	^\s*FunctionTable__setEmpty\(this_00,iVar6,uVar7\);$	+1
+use	TIntermAggregate__compileNode	pcVar9	nodeType	INFERRED	virtual slot 0x3c of the node (getType): TType* passed to newReturnValue	^\s*pcVar9\ =\ \(char\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x3c\)\)$	+1
+use	TIntermAggregate__compileNode	pcVar9	nodeType	INFERRED	virtual slot 0x3c of the node (getType): TType* passed to newReturnValue	^\s*local_48\[0\]\ =\ \(unsigned\ char\ \*\)TPPStreamCompiler__newReturnValue\(\(unsigned\ char\ \*\)param_2,pcVar9,uVar7\)$	+1
+use	TIntermAggregate__compileNode	pcVar9	nodeType	INFERRED	virtual slot 0x3c of the node (getType): TType* passed to newReturnValue	^\s*pcVar9\ =\ \(char\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x3c\)\)$@2	+2
+use	TIntermAggregate__compileNode	pcVar9	nodeType	INFERRED	virtual slot 0x3c of the node (getType): TType* passed to newReturnValue	^\s*TPPStreamCompiler__newReturnValue\(\(unsigned\ char\ \*\)param_2,pcVar9,uVar23\);$	+1
+use	TIntermAggregate__compileNode	pcVar9	functionNameData	INFERRED	function name string data (getName()+4 / ParseFunctionStack__current) used to name parameters	^\s*pcVar9\ =\ \*\(char\ \*\*\)\(iVar16\ \+\ 4\);$	+1
+use	TIntermAggregate__compileNode	pcVar9	functionNameData	INFERRED	function name string data (getName()+4 / ParseFunctionStack__current) used to name parameters	^\s*pcVar9\ =\ \*\(char\ \*\*\)\(iVar20\ \+\ 4\);$	+2
+use	TIntermAggregate__compileNode	pcVar9	functionNameData	INFERRED	function name string data (getName()+4 / ParseFunctionStack__current) used to name parameters	^\s*pcVar9\ =\ \(char\ \*\)0x0;$	+1
+use	TIntermAggregate__compileNode	pcVar9	functionNameData	INFERRED	function name string data (getName()+4 / ParseFunctionStack__current) used to name parameters	^\s*pcVar9\ =\ \(char\ \*\)ParseFunctionStack__current\(pPVar22\);$	+1
+use	TIntermAggregate__compileNode	pcVar9	functionNameData	INFERRED	function name string data (getName()+4 / ParseFunctionStack__current) used to name parameters	^\s*\(\*\(unsigned\ char\ \*\*\)\(param_2\ \+\ 0x6c\),pcVar9,param_3,param_4,param_5,a5\);$	+1
+use	TIntermAggregate__compileNode	pcVar9	functionNameData	INFERRED	function name string data (getName()+4 / ParseFunctionStack__current) used to name parameters	^\s*pcVar9\ =\ \*\(char\ \*\*\)\(iVar8\ \+\ 4\);$	+1
+use	TIntermAggregate__compileNode	pcVar9	functionNameData	INFERRED	function name string data (getName()+4 / ParseFunctionStack__current) used to name parameters	^\s*\(param_2,\*\(unsigned\ char\ \*\*\)\(\*\(int\ \*\)puVar26\[iVar20\]\ \+\ 0xc\),pcVar9,iVar20\);$	+1
+use	TIntermAggregate__compileNode	pTVar10	resultType	INFERRED	node type (virtual slot 0x3c) for the temporary	^\s*pTVar10\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x3c\)\)$	+1
+use	TIntermAggregate__compileNode	pTVar10	resultType	INFERRED	node type (virtual slot 0x3c) for the temporary	^\s*uVar28\ =\ TPPStreamCompiler__newTemporary\(param_2,pTVar10\);$	+1
+use	TIntermAggregate__compileNode	pTVar10	paramType	INFERRED	type of the child (virtual slot 0x3c of its type object) passed to newParam	^\s*pTVar10\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*piVar11\ \+\ 0x3c\)\)\(piVar11\);$	+2
+use	TIntermAggregate__compileNode	pTVar10	constructedType	INFERRED	node type passed to TPPStreamCompiler__construct	^\s*pTVar10\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x3c\)\)\(this\);$	+2
+local	TIntermAggregate__compileNode	this_00	functionTable	INFERRED	compiler+0x6c: the FunctionTable
+local	TIntermAggregate__compileNode	this_01	operandCopy	INFERRED	new ParseOperand (0x38 bytes) copy-constructed from the child
+local	TIntermAggregate__compileNode	a2	opHeaderOrParamSlotPtr	INFERRED	pointer to the op header (3118) or to the parameter slot (3131); later only a stray register argument
+local	TIntermAggregate__compileNode	puVar21	paramListCursor	INFERRED	cursor over the saved parameter list while freeing the entries
+local	TIntermAggregate__compileNode	pPVar22	functionStack	INFERRED	compiler+0x58: the ParseFunctionStack
+local	TIntermAggregate__compileNode	uVar23	returnValueName	INFERRED	name string data of the node, passed to newReturnValue
+local	TIntermAggregate__compileNode	puVar24	srcSlotCursor	INFERRED	cursor into the op record source slots (opHeaderAndFlags + 4 words per source)
+local	TIntermAggregate__compileNode	pvVar27	operandTemp	INFERRED	new or old ParseOperand being constructed / destroyed
+local	TIntermAggregate__compileNode	uVar28	resultAndR4Pair	INFERRED	64-bit pair (r3 = result operand, r4 = carried leftover) rebuilt with CONCAT44
+local	TIntermAggregate__compileNode	ppuVar5	stackTypeVtable	INFERRED	copy of the stackType vtable word written into the op record source slot

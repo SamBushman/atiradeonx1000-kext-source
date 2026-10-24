@@ -1,0 +1,44 @@
+local	TPPStreamCompiler__copyPropagateCompilerTemp	uVar21	propagated	CONFIRMED	return value: 1 when the move was folded into earlier operations and the temp's definition removed
+local	TPPStreamCompiler__copyPropagateCompilerTemp	bVar1	moveUsesRelativeAddressing	INFERRED	the move's destination B or one of its source words has bit 31 set (relative addressing)
+local	TPPStreamCompiler__copyPropagateCompilerTemp	bVar2	searchEnded	INFERRED	the backward search finished: all lanes handled, a barrier was hit or the temp is read elsewhere
+local	TPPStreamCompiler__copyPropagateCompilerTemp	bVar9	tempReadElsewhere	INFERRED	another operation reads the temp's register, so its defining operation cannot be rewritten
+local	TPPStreamCompiler__copyPropagateCompilerTemp	bVar10	rewroteDefinition	CONFIRMED	at least one earlier defining operation was rewritten to write the move's destination
+local	TPPStreamCompiler__copyPropagateCompilerTemp	bVar11	barrierReached	INFERRED	search stopped at a label, an operation that cannot be crossed or a chunk-order limit
+local	TPPStreamCompiler__copyPropagateCompilerTemp	p_Var17	srcCursor	CONFIRMED	walks the move's source descriptor pairs (8 bytes each from +0x10)
+local	TPPStreamCompiler__copyPropagateCompilerTemp	uVar18	movDestB	CONFIRMED	move word 3 (destination B), copied into the rewritten operation's +0x18
+local	TPPStreamCompiler__copyPropagateCompilerTemp	uVar3	maskBitY	CONFIRMED	(mergedMaskXYZ[1] & 1) << 14: y write-mask bit of the rewritten destination
+local	TPPStreamCompiler__copyPropagateCompilerTemp	uVar4	maskBitZ	CONFIRMED	(mergedMaskXYZ[2] & 1) << 15: z write-mask bit
+local	TPPStreamCompiler__copyPropagateCompilerTemp	uVar5	maskBitW	CONFIRMED	(mergedMaskW & 1) << 16: w write-mask bit
+local	TPPStreamCompiler__copyPropagateCompilerTemp	uVar6	laneSelBitsX	CONFIRMED	(mergedLaneSel[0] & 3) << 8: x lane selector of the rewritten destination
+local	TPPStreamCompiler__copyPropagateCompilerTemp	uVar7	laneSelBitsY	CONFIRMED	(mergedLaneSel[1] & 3) << 6: y lane selector
+local	TPPStreamCompiler__copyPropagateCompilerTemp	uVar8	laneSelBitsZ	CONFIRMED	(mergedLaneSel[2] & 3) << 4: z lane selector
+local	TPPStreamCompiler__copyPropagateCompilerTemp	in_r7	movSrcSwizzleX	INFERRED	move source 0 x selector (bits 21..22); also forwarded as a leftover register to the warning call
+local	TPPStreamCompiler__copyPropagateCompilerTemp	local_b0	pendingMaskXYZ	CONFIRMED	x y z write-mask bits of the move's destination not yet satisfied by a defining operation (cleared lane by lane)
+local	TPPStreamCompiler__copyPropagateCompilerTemp	local_a4	pendingMaskW	CONFIRMED	w write-mask bit still pending (the 4th entry of the pending-mask array)
+local	TPPStreamCompiler__copyPropagateCompilerTemp	local_a0	mergedMaskXYZ	CONFIRMED	x y z write-mask bits to write into the rewritten defining operation
+local	TPPStreamCompiler__copyPropagateCompilerTemp	local_94	mergedMaskW	CONFIRMED	w write-mask bit for the rewritten operation (4th entry of the merged-mask array)
+local	TPPStreamCompiler__copyPropagateCompilerTemp	local_90	mergedLaneSel	CONFIRMED	new destination lane selectors (x y z w) for the rewritten operation
+local	TPPStreamCompiler__copyPropagateCompilerTemp	local_80	defLaneSel	CONFIRMED	lane selectors of the defining operation's destination (bits 8, 6, 4, 2 of its word 5)
+local	TPPStreamCompiler__copyPropagateCompilerTemp	local_70	defWriteMask	CONFIRMED	write-mask bits x y z w (bits 13..16) of the defining operation's destination
+local	TPPStreamCompiler__copyPropagateCompilerTemp	local_60	movSrcSwizzle	CONFIRMED	source 0 swizzle selectors x y z w of the move (bits 21, 19, 17, 15)
+local	TPPStreamCompiler__copyPropagateCompilerTemp	local_50	movDestLaneSel	CONFIRMED	destination lane selectors x y z w of the move (bits 8, 6, 4, 2 of its destination A)
+use	TPPStreamCompiler__copyPropagateCompilerTemp	iVar16	tempSymbol	CONFIRMED	ParseSymbol of the temp (*tempOperand): +0x3c / +0x40 non-zero when the temp may be propagated	iVar16 = \*\(int \*\)param_3;	iVar16 = 0;
+use	TPPStreamCompiler__copyPropagateCompilerTemp	iVar16	defChunk	CONFIRMED	operation chunk being examined; starts at the last operation and walks back (+4)	iVar16 = 0;@1	
+use	TPPStreamCompiler__copyPropagateCompilerTemp	iVar12	opScanCursor	CONFIRMED	walks the stream operation list (+0x20) to find its last chunk	for \(iVar12 = \*\*\(int \*\*\)\(uVar19 \+ 0x20\)	iVar12 = 0;
+use	TPPStreamCompiler__copyPropagateCompilerTemp	iVar12	lastLabelChunk	CONFIRMED	last chunk of the stream's label list (+0x24); its word 3 is compared with the operation index to stop at labels	iVar12 = 0;	
+use	TPPStreamCompiler__copyPropagateCompilerTemp	iVar14	labelScanCursor	CONFIRMED	walks the label list (+0x24)	for \(iVar14 = \*\*\(int \*\*\)\(uVar19 \+ 0x24\)	iVar14 = \*\(int \*\)p_Var17;
+use	TPPStreamCompiler__copyPropagateCompilerTemp	iVar14	srcWord	CONFIRMED	one source descriptor A word of the move; bit 31 = relative addressing	iVar14 = \*\(int \*\)p_Var17;	iVar14 = iVar16 \+ 0x10;
+use	TPPStreamCompiler__copyPropagateCompilerTemp	iVar14	defSrcCursor	CONFIRMED	walks the defining operation's source pairs (8 bytes each from +0x10)	iVar14 = iVar16 \+ 0x10;	iVar14 = 4;
+use	TPPStreamCompiler__copyPropagateCompilerTemp	iVar14	lanesLeft	CONFIRMED	countdown over the four lanes x y z w	iVar14 = 4;	
+use	TPPStreamCompiler__copyPropagateCompilerTemp	uVar13	movDestAWord	CONFIRMED	move word 2 (destination A): bits 13..16 hold the x y z w write mask	uVar13 = \*\(uint \*\)\(param_2 \+ 8\);	uVar13 = local_a0\[0\] \| local_a0\[1\]
+use	TPPStreamCompiler__copyPropagateCompilerTemp	uVar13	pendingMaskAny	CONFIRMED	OR of the pending write-mask bits: non-zero while some lanes still need a defining operation	uVar13 = local_a0\[0\] \| local_a0\[1\]	
+use	TPPStreamCompiler__copyPropagateCompilerTemp	uVar22	movSrcCount	CONFIRMED	move header word 0 >> 29: number of source descriptors	uVar22 = \*\(uint \*\)param_2 >> 0x1d;	bVar2 = uVar13 == 0;
+use	TPPStreamCompiler__copyPropagateCompilerTemp	uVar22	defHeader	CONFIRMED	defining chunk word 3: opcode in bits 18..25, source count in bits 29..31, operation index in the low 18 bits	uVar22 = \*\(uint \*\)\(iVar16 \+ 0xc\);@1	uVar22 = uVar22 >> 0x1d;		rhs
+use	TPPStreamCompiler__copyPropagateCompilerTemp	uVar22	defSrcCount	CONFIRMED	defining chunk word 3 >> 29: number of its source descriptors	uVar22 = uVar22 >> 0x1d;	^\s*else \{\s*$	lhs
+use	TPPStreamCompiler__copyPropagateCompilerTemp	uVar22	defHeader	CONFIRMED	defining chunk word 3 (when the label list is exhausted or the label index is not beyond this operation)	uVar22 = \*\(uint \*\)\(iVar16 \+ 0xc\);@2	LAB_97bc909c:
+use	TPPStreamCompiler__copyPropagateCompilerTemp	uVar22	defOpcodeBits	CONFIRMED	defining chunk word 3 & 0x3fc0000: its opcode; the listed opcodes can take over the move's lane mapping	uVar22 = \*\(uint \*\)\(iVar16 \+ 0xc\) & 0x3fc0000;	uVar22 = \*\(uint \*\)\(param_2 \+ 8\);
+use	TPPStreamCompiler__copyPropagateCompilerTemp	uVar22	movDestA	CONFIRMED	move word 2 (destination A), written to the defining operation with the new mask and lane bits	uVar22 = \*\(uint \*\)\(param_2 \+ 8\);	
+use	TPPStreamCompiler__copyPropagateCompilerTemp	uVar15	defSrcIndex	CONFIRMED	index of the defining operation's source being compared	uVar15 = 0;	uVar15 = local_60\[puVar20\[0x18\]\]
+use	TPPStreamCompiler__copyPropagateCompilerTemp	uVar15	srcLane	CONFIRMED	lane of the defining destination selected by the move's source swizzle for the current component	uVar15 = local_60\[puVar20\[0x18\]\]	uVar15 = local_80\[uVar15\];		rhs
+use	TPPStreamCompiler__copyPropagateCompilerTemp	uVar15	newLaneSel	CONFIRMED	the defining destination's lane selector for srcLane, stored as the component's new selector	uVar15 = local_80\[uVar15\];	uVar15 = \(local_a0\[0\] & 1\) << 0xd;	lhs
+use	TPPStreamCompiler__copyPropagateCompilerTemp	uVar15	maskBitX	CONFIRMED	(mergedMaskXYZ[0] & 1) << 13: x write-mask bit of the rewritten destination	uVar15 = \(local_a0\[0\] & 1\) << 0xd;	

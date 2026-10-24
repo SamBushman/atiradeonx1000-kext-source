@@ -1,0 +1,30 @@
+local	fetch	iVar1	newCount	CONFIRMED	queue count (+8) minus one, stored back; zero resets the tail (+4)
+local	fetch	puVar2	headNode	CONFIRMED	queue head (+0) node: value at +0, next at +4; freed after the pop
+local	fetch	uVar3	value	CONFIRMED	head node's value, returned (0 when the queue is empty)
+local	ParseWhileLoopStack__push	uVar1	previousTop	CONFIRMED	old stack top, linked into the new node at +8
+local	ParseWhileLoopStack__pop	pvVar1	topNode	CONFIRMED	current stack top, freed
+local	ParseWhileLoopStack__pop	uVar2	nextNode	CONFIRMED	top node's next (+8), becomes the new top
+local	ParseWhileLoopStack__continueLabel	uVar1	label	CONFIRMED	top node's first word, 0 when the stack is empty
+local	ParseWhileLoopStack__breakLabel	uVar1	label	CONFIRMED	top node's second word (+4), 0 when the stack is empty
+local	ParseFunctionStack__push	uVar2	previousTop	CONFIRMED	old stack top, linked into the new node at +0x10
+local	ParseFunctionStack__pop	puVar1	topNode	CONFIRMED	current stack top, freed
+local	ParseFunctionStack__pop	uVar2	nextNode	CONFIRMED	top node's next (+0x10), becomes the new top
+local	ParseFunctionStack__pop	uVar3	functionName	CONFIRMED	top node's name (+0), returned (0 when the stack is empty)
+local	ParseFunctionStack__current	uVar1	functionName	CONFIRMED	top node's name (+0), 0 when the stack is empty
+local	ParseFunctionStack__getCurrentNumParams	uVar1	numParams	CONFIRMED	top node +4, 0 when the stack is empty
+local	ParseFunctionStack__setCurrentNumParams	param_2	numParams	CONFIRMED	stored at top node +4
+local	ParseFunctionStack__getLastParamOpIndex	uVar1	lastParamOpIndex	CONFIRMED	top node +8, 0 when the stack is empty
+local	ParseFunctionStack__setLastParamOpIndex	param_2	lastParamOpIndex	CONFIRMED	stored at top node +8
+local	ParseFunctionStack__getCurrentParamList	uVar1	paramList	CONFIRMED	top node +0xc, 0 when the stack is empty
+local	TPPStreamCompiler__getVertex	this_00	poolAllocator	CONFIRMED	GetGlobalPoolAllocator() result
+local	TPPStreamCompiler__getVertex	pTVar1	vertexType	INFERRED	fresh pool TType with preset bit-field word (0x6082000), the built-in vertex input type
+local	TPPStreamCompiler__getVertex	this_01	operand	CONFIRMED	operator_new(0x38) + ParseOperandC1, returned
+local	TPPStreamCompiler__getVertex	this_02	symbol	CONFIRMED	operator_new(100) + ParseSymbolC1, named with a built-in string and typed
+local	TPPStreamCompiler__getPosition	this_00	poolAllocator	CONFIRMED	GetGlobalPoolAllocator() result
+local	TPPStreamCompiler__getPosition	pTVar1	positionType	INFERRED	fresh pool TType with preset bit-field word (0x1a082000), the built-in position type
+local	TPPStreamCompiler__getPosition	this_01	operand	CONFIRMED	operator_new(0x38) + ParseOperandC1, returned
+local	TPPStreamCompiler__getPosition	this_02	symbol	CONFIRMED	operator_new(100) + ParseSymbolC1, named with a built-in string and typed
+local	TPPStreamCompiler__getMVP	this_00	poolAllocator	CONFIRMED	GetGlobalPoolAllocator() result
+local	TPPStreamCompiler__getMVP	pTVar1	mvpType	INFERRED	fresh pool TType with preset bit-field word (0xc082400), the built-in model-view-projection matrix type
+local	TPPStreamCompiler__getMVP	this_01	operand	CONFIRMED	operator_new(0x38) + ParseOperandC1, returned
+local	TPPStreamCompiler__getMVP	this_02	symbol	CONFIRMED	operator_new(100) + ParseSymbolC1, named with a built-in string and typed

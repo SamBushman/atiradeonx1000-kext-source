@@ -1,0 +1,43 @@
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	param_3	operandCount	CONFIRMED	number of entries in operands
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	pTVar5	operandType	CONFIRMED	newNodeFromOperand result: the TType of the operand, passed to newTemporary
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	bVar2	operandAliased	INFERRED	another slot of operands holds the same ParseOperand, so it must not be freed
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	uVar8	recordLine	CONFIRMED	compiler +0x90 (current source line) stored as the record's line word
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	uVar1	tempGlType	CONFIRMED	OpenGL type of the temporary: symbol +0x2c or operand +0x18
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	uVar6	tempStreamType	CONFIRMED	GetPPStreamTypeForGLType of tempGlType: bits 23..25 of the flags word
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_50	tempOperand	CONFIRMED	new temporary of the operand's type that receives the operand value and replaces operands[i]
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_4c	offsetOperand	CONFIRMED	operands[i] +0xc operand (the added offset), detached before the add operation
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_48	tempOperandSlot	CONFIRMED	slot 0 receives the temporary assigned from operands[i] in the final pass; passed to assignOperands
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_60	operandDescA	INFERRED	first word of the descriptor filled by getOperandAs{Dest,Source}Var
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	local_5c	operandDescB	INFERRED	second word of the descriptor
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	pPVar3	firstOperand	CONFIRMED	operands[0]	pPVar3 = \*param_2;	pPVar3 = \(unsigned char \*\)\(\(int \(\*\)\(\)\)TPPStreamCompiler__newTemporary\)\(this,pTVar5\);
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	pPVar3	firstOperandTemp	CONFIRMED	newTemporary result stored back into operands[0]	pPVar3 = \(unsigned char \*\)\(\(int \(\*\)\(\)\)TPPStreamCompiler__newTemporary\)\(this,pTVar5\);	iVar10 = 1;
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	pPVar3	offsetOperandOrig	CONFIRMED	operands[i] +0xc (the offset operand), cleared in the operand	pPVar3 = \*\(unsigned char \*\*\)\(param_2\[iVar10\] \+ 0xc\);	pPVar3 = param_2\[iVar10\];
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	pPVar3	operandToFree	CONFIRMED	ParseOperand destroyed and freed (replaced operand, then the offset operand)	pPVar3 = param_2\[iVar10\];@1	param_2\[iVar10\] = local_50;
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	pPVar3	operandToFree	CONFIRMED	replaced operand destroyed and freed unless an alias exists	LAB_97bc80d0:	param_2\[iVar10\] = local_48\[0\];
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	ppPVar4	offsetOperandSlotPtr	CONFIRMED	address of offsetOperand, passed to the nested IndirectAddressHandler and the getOperandAs*Var calls	ppPVar4 = &local_4c;	ppPVar4 = param_2;
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	ppPVar4	aliasScanCursor	CONFIRMED	walks operands comparing each slot with operands[i] to find an alias	ppPVar4 = param_2;@1	ppPVar4 = param_2;
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	ppPVar4	firstIndirectScanCursor	CONFIRMED	walks operands to find the first one with an index operand (+8)	ppPVar4 = param_2;@2	ppPVar4 = param_2;
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	ppPVar4	aliasScanCursor	CONFIRMED	walks operands comparing each slot with the operand being replaced	ppPVar4 = param_2;@3	
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	iVar10	operandIndex	CONFIRMED	index 1..operandCount-1 of the operand whose offset is folded into a temporary	iVar10 = 1;	iVar10 = param_3;
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	iVar10	indirectOperandIndex	INFERRED	first operand with an index operand, plus compiler +0x9c; then the running index of the final temp-assignment pass	iVar10 = param_3;	
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	iVar7	tempLogicalSize	CONFIRMED	ParseOperand__GetLogicalSize(tempOperand): flags bits 26..27 store size-1	iVar7 = ParseOperand__GetLogicalSize\(local_50\);	iVar7 = 0;
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	iVar7	aliasScanIndex	CONFIRMED	slot index of the alias scan	iVar7 = 0;@1	iVar7 = 0;
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	iVar7	firstIndirectScanIndex	CONFIRMED	slot index of the scan for the first operand with an index operand	iVar7 = 0;@2	iVar7 = param_3;
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	iVar7	aliasScanRemaining	CONFIRMED	countdown of the alias scan over operandCount slots	iVar7 = param_3;	
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandi	iVar9	aliasScanIndex2	CONFIRMED	slot index of the alias scan in the final pass	iVar9 = 0;	
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_	local_20	operandCopy0	CONFIRMED	local array slot 0 passed as operands[0] to the counted handler (count 2)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_	local_1c	operandCopy1	CONFIRMED	local array slot 1
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_	local_30	operandCopy0	CONFIRMED	local array slot 0 passed as operands[0] to the counted handler (count 3)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_	local_2c	operandCopy1	CONFIRMED	local array slot 1
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_	local_28	operandCopy2	CONFIRMED	local array slot 2
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_	local_30	operandCopy0	CONFIRMED	local array slot 0 passed as operands[0] to the counted handler (count 4)
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_	local_2c	operandCopy1	CONFIRMED	local array slot 1
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_	local_28	operandCopy2	CONFIRMED	local array slot 2
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_S2_S2_	local_24	operandCopy3	CONFIRMED	local array slot 3
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i	param_4	extraOperandCount	CONFIRMED	number of operands after the first; the counted handler gets extraOperandCount+1 operands
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i	ppPVar4	operandCopies	CONFIRMED	alloca'd array: slot 0 = *parseOperand1, slots 1.. = the extra operands copied from parseOperand2
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i	ppPVar3	extraOperandCursor	CONFIRMED	walks parseOperand2 while copying the extra operands in
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i	ppPVar1	copyCursor	CONFIRMED	walks operandCopies while copying
+local	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i	apPStack_20	allocaBase	INFERRED	fixed stack slots below which the variable-length operand array is carved by the frame adjustment
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i	iVar2	allocaAdjust	INFERRED	frame adjustment: -(extraOperandCount*4+0x22 & ~0xf) bytes, used to place the operand array	iVar2 = -\(param_4 \* 4 \+ 0x22U & 0xfffffff0\);	iVar2 = param_4;
+use	__ZN17TPPStreamCompiler22IndirectAddressHandlerEPP12ParseOperandS2_i	iVar2	remainingCount	CONFIRMED	countdown of the extra operands left to copy	iVar2 = param_4;	

@@ -1,0 +1,28 @@
+local	TPPStreamCompiler__construct	param_4	argCount	INFERRED	number of constructor arguments; 1 enables the same-type pass-through shortcut
+local	TPPStreamCompiler__construct	local_30	resultOperandSlots	CONFIRMED	slot 0 holds the new temporary operand (returned unless the argument is reused); the array is passed to constructFromOperand
+local	TPPStreamCompiler__construct	sVar2	resultGlType	CONFIRMED	OpenGL type of the result: symbol +0x2c or the operand's own type field +0x18
+local	TPPStreamCompiler__construct	sVar3	argGlType	CONFIRMED	OpenGL type of argument 0, same selection of +0x2c / +0x18
+local	TPPStreamCompiler__construct	bVar1	argMatchesResult	INFERRED	argument has the result's size/matrix shape, so it can be returned unchanged
+local	TPPStreamCompiler__construct	pPVar4	discardedTemp	CONFIRMED	the unneeded new temporary, destroyed and freed when the argument is returned directly
+use	TPPStreamCompiler__construct	iVar5	argSymbol	CONFIRMED	ParseSymbol of argument 0	iVar5 = \*\(int \*\)\*param_3;	iVar5 = ParseOperand__GetLogicalSize\(local_30\[0\]\);
+use	TPPStreamCompiler__construct	iVar5	resultLogicalSize	CONFIRMED	logical size of the new temporary	iVar5 = ParseOperand__GetLogicalSize\(local_30\[0\]\);	iVar6 = 1;
+use	TPPStreamCompiler__construct	iVar5	resultIsMatrix	CONFIRMED	ParseOperand__IsMatrix(result)	iVar5 = ParseOperand__IsMatrix\(local_30\[0\]\);	iVar6 = ParseOperand__GetLogicalSize\(local_30\[0\]\);
+use	TPPStreamCompiler__construct	iVar5	argIsMatrix	CONFIRMED	ParseOperand__IsMatrix(argument 0)	iVar5 = ParseOperand__IsMatrix\(\*param_3\);	bVar1 = iVar6 == 1;
+use	TPPStreamCompiler__construct	iVar5	argLogicalSize	CONFIRMED	logical size of argument 0, compared with the result's column count	iVar5 = ParseOperand__GetLogicalSize\(\*param_3\);	+2
+use	TPPStreamCompiler__construct	iVar6	argLogicalSizeCheck	CONFIRMED	logical size of argument 0, equal to the result's logical size for the shortcut	iVar6 = ParseOperand__GetLogicalSize\(\*param_3\);	iVar6 = 1;
+use	TPPStreamCompiler__construct	iVar6	resultColumnCount	INFERRED	1, or the result's logical size when the result is a matrix; must match what argument 0 provides	iVar6 = 1;	
+local	TPPStreamCompiler__FinishScalerSelect	local_20	pendingIndexSlots	CONFIRMED	slot 0 holds the pending operand's +0xc operand (the select index), passed with the destination to IndirectAddressHandler
+local	TPPStreamCompiler__FinishScalerSelect	ppPVar3	pendingIndexSlotPtr	CONFIRMED	address of pendingIndexSlots, passed as the 3rd pointer to IndirectAddressHandler and the getOperandAs*Var calls
+local	TPPStreamCompiler__FinishScalerSelect	pPVar6	operandToFree	CONFIRMED	operand destroyed and freed after the operation is emitted
+local	TPPStreamCompiler__FinishScalerSelect	uVar1	pendingGlType	CONFIRMED	OpenGL type of the pending operand: symbol +0x2c or operand +0x18
+local	TPPStreamCompiler__FinishScalerSelect	uVar5	recordLine	CONFIRMED	compiler +0x90 (current source line) stored as the record's line word
+use	TPPStreamCompiler__FinishScalerSelect	iVar4	pendingOperand	CONFIRMED	compiler +0x88: the pending scalar-select ParseOperand (its +0xc operand is the index)	iVar4 = \*\(int \*\)\(this \+ 0x88\);	iVar4 = \*\*\(int \*\*\)\(this \+ 0x88\);
+use	TPPStreamCompiler__FinishScalerSelect	iVar4	pendingSymbol	CONFIRMED	ParseSymbol of the pending operand	iVar4 = \*\*\(int \*\*\)\(this \+ 0x88\);	iVar4 = ParseOperand__GetLogicalSize
+use	TPPStreamCompiler__FinishScalerSelect	iVar4	pendingLogicalSize	CONFIRMED	ParseOperand__GetLogicalSize(pending operand): flags bits 26..27 store size-1	iVar4 = ParseOperand__GetLogicalSize	
+local	TPPStreamCompiler__FinishScalerSelect	local_30	operandDescA	INFERRED	first word of the two-word operand descriptor filled by getOperandAs{Dest,Source}Var
+local	TPPStreamCompiler__FinishScalerSelect	local_2c	operandDescB	INFERRED	second word of the two-word operand descriptor
+local	TPPStreamCompiler__LastOperationIndex	iVar1	lastOperationChunk	CONFIRMED	last chunk (+4) of the stream's operation chunk list (stream +0x20); word 3 low 18 bits are the operation index
+local	TPPStreamCompiler__AddOperation	param_5	labelLength	CONFIRMED	length of labelText forwarded to _PPStreamAddOperation
+local	TPPStreamCompiler__generateAddressLoad	this_00	indexOperand	CONFIRMED	operand +8: the address index; loaded by an address-load operation, then destroyed and cleared
+local	TPPStreamCompiler__generateAddressLoad	local_30	indexDescA	INFERRED	first word of the descriptor of indexOperand from getOperandAsSourceVar
+local	TPPStreamCompiler__generateAddressLoad	local_2c	indexDescB	INFERRED	second word of the descriptor

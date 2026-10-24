@@ -1,0 +1,1106 @@
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*fVar7\ =\ \*pfVar22;$	+4
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x1c\)\ =\ fVar7;$	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*fVar7\ =\ 0\.0;$@2	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*fVar7\ =\ \(float\)dVar23;$	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x20\)\ =\ fVar7;$	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ ABS\(pfVar22\[3\]\);$	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ \*pfVar22;$@3	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar22\[3\];$@3	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x24\)\ =\ fVar7;$@10	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ \*pfVar22;$@2	+3
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*fVar7\ =\ pfVar22\[1\];$	+3
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*fVar7\ =\ pfVar22\[2\];$	+3
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar22\[3\];$	+3
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 0\.0;$@3	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ \-1\.0;$	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 1\.0;$	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*\*pfVar21\ =\ fVar7;$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ \(float\)dVar23;$@2	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ 1\.0\ /\ pfVar22\[3\];$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ 1\.8446744e\+19;$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ \-5\.421011e\-20;$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ \-1\.8446744e\+19;$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ 1\.0\ /\ fVar3;$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ 5\.421011e\-20;$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ \(float\)dVar23;$@3	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x24\)\ =\ fVar7;$	+4
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 1\.0;$@2	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 0\.0;$@4	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*\*pfVar21\ =\ fVar7;$@2	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ 0\.017453292;$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ 57\.29578;$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*\*pfVar21\ =\ \*pfVar22\ \*\ fVar7;$	+4
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 1\.0;$@3	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 0\.0;$@5	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*\*pfVar21\ =\ fVar7;$@4	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ _atan2f\(\*pfVar22,\*pfVar19\);$	+2
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*fVar7\ =\ _atan2f\(pfVar22\[1\],pfVar19\[1\]\);$	+2
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*fVar7\ =\ _atan2f\(pfVar22\[2\],pfVar19\[2\]\);$	+2
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ _atan2f\(pfVar22\[3\],pfVar19\[3\]\);$	+2
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar22\[3\]\ \+\ pfVar19\[3\];$	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar22\[3\]\ \-\ pfVar19\[3\];$	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar22\[3\]\ \*\ pfVar19\[3\];$	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uStack_8c\)\ \-\ 4503601774854144\.0\);$	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar19\[3\];$	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar22\[iVar13\];$	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x24\)\ =\ fVar7;$@6	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar22\[3\]\ /\ pfVar19\[3\];$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ 0\.0;$@6	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ pfVar22\[iVar13\]\ \*\ pfVar19\[iVar13\]\ \+\ fVar7;$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ 1\.0;$@4	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ 0\.0;$@14	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x24\)\ =\ fVar7;$@5	+4
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ pfVar22\[2\]\ \*\ pfVar19\[2\]\ \+\ \*pfVar22\ \*\ \*pfVar19\ \+\ pfVar22\[1\]\ \*\ pfVar19\[1\];$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ pfVar22\[3\]\ \*\ pfVar19\[3\]\ \+$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ pfVar22\[2\]\ \*\ pfVar19\[2\]\ \+\ \*pfVar22\ \*\ \*pfVar19\ \+\ pfVar22\[1\]\ \*\ pfVar19\[1\]\ \+\ pfVar19\[3\];$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x24\)\ =\ fVar7;$@3	+4
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ \(float\)dVar23;$@4	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ \*pfVar19;$	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ \*pfVar22;$@4	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*\*pfVar21\ =\ fVar7;$@7	+1
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*fVar7\ =\ pfVar19\[1\];$	+1
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*fVar7\ =\ pfVar22\[1\];$@2	+1
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x1c\)\ =\ fVar7;$@5	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*fVar7\ =\ pfVar19\[2\];$	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*fVar7\ =\ pfVar22\[2\];$@2	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x20\)\ =\ fVar7;$@5	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar19\[3\];$@2	+2
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ fVar3;$	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar19\[3\];$@3	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x24\)\ =\ fVar7;$@4	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ \*pfVar19;$@2	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ \*pfVar22;$@5	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*\*pfVar21\ =\ fVar7;$@8	+1
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*fVar7\ =\ pfVar19\[1\];$@2	+1
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*fVar7\ =\ pfVar22\[1\];$@3	+1
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x1c\)\ =\ fVar7;$@6	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*fVar7\ =\ pfVar19\[2\];$@2	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*fVar7\ =\ pfVar22\[2\];$@3	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x20\)\ =\ fVar7;$@6	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*fVar7\ =\ \*pfVar19;$@3	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x20\)\ =\ fVar4\ \*\ fVar5\ \-\ fVar7\ \*\ fVar3;$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ 0\.0;$@7	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ pfVar22\[iVar13\]\ \*\ pfVar19\[iVar13\]\ \+\ fVar7;$@2	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ fVar7\ \+\ fVar7;$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*\*pfVar21\ =\ \-\(fVar7\ \*\ \*pfVar19\ \-\ \*pfVar22\);$	+4
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 1\.0;$@5	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 0\.0;$@8	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*\*pfVar21\ =\ fVar7;$@9	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 1\.0;$@6	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 0\.0;$@9	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*\*pfVar21\ =\ fVar7;$@10	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 0\.0;$@10	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 1\.0;$@7	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*\*pfVar21\ =\ fVar7;$@11	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 1\.0;$@8	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 0\.0;$@11	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*\*pfVar21\ =\ fVar7;$@12	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 0\.0;$@12	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 1\.0;$@9	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*\*pfVar21\ =\ fVar7;$@13	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 1\.0;$@10	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 0\.0;$@13	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*\*pfVar21\ =\ fVar7;$@14	+1
+use	_EmulateOp	fVar7	floatToInt	INFERRED	float operand converted to a signed integer through the 2^31 split	^\s*fVar7\ =\ \*pfVar19;$@4	+3
+use	_EmulateOp	fVar7	floatToInt	INFERRED	float operand converted to a signed integer through the 2^31 split	^\s*iVar13\ =\ \(int\)fVar7;$	+1
+use	_EmulateOp	fVar7	floatToInt	INFERRED	float operand converted to a signed integer through the 2^31 split	^\s*fVar7\ =\ \*pfVar19;$@5	+3
+use	_EmulateOp	fVar7	floatToInt	INFERRED	float operand converted to a signed integer through the 2^31 split	^\s*iVar13\ =\ \(int\)fVar7;$@2	+1
+use	_EmulateOp	fVar7	floatToInt	INFERRED	float operand converted to a signed integer through the 2^31 split	^\s*fVar7\ =\ \*pfVar19;$@6	+3
+use	_EmulateOp	fVar7	floatToInt	INFERRED	float operand converted to a signed integer through the 2^31 split	^\s*iVar13\ =\ \(int\)fVar7;$@3	+1
+use	_EmulateOp	fVar7	floatToInt	INFERRED	float operand converted to a signed integer through the 2^31 split	^\s*fVar7\ =\ \*pfVar19;$@7	+3
+use	_EmulateOp	fVar7	floatToInt	INFERRED	float operand converted to a signed integer through the 2^31 split	^\s*iVar13\ =\ \(int\)fVar7;$@4	+1
+use	_EmulateOp	fVar7	floatToInt	INFERRED	float operand converted to a signed integer through the 2^31 split	^\s*fVar7\ =\ \*pfVar19;$@8	+3
+use	_EmulateOp	fVar7	floatToInt	INFERRED	float operand converted to a signed integer through the 2^31 split	^\s*iVar13\ =\ \(int\)fVar7;$@5	+1
+use	_EmulateOp	fVar7	floatToInt	INFERRED	float operand converted to a signed integer through the 2^31 split	^\s*fVar7\ =\ \*pfVar19;$@9	+3
+use	_EmulateOp	fVar7	floatToInt	INFERRED	float operand converted to a signed integer through the 2^31 split	^\s*iVar14\ =\ \(int\)fVar7;$	+1
+use	_EmulateOp	fVar7	accumulator	INFERRED	running sum of products/squares in a component loop	^\s*fVar7\ =\ 0\.0;$@15	+1
+use	_EmulateOp	fVar7	accumulator	INFERRED	running sum of products/squares in a component loop	^\s*fVar7\ =\ pfVar15\[iVar12\]\ \*\ pfVar19\[iVar12\]\ \+\ fVar7;$	+1
+use	_EmulateOp	fVar7	accumulator	INFERRED	running sum of products/squares in a component loop	^\s*if\ \(0\.0\ <=\ fVar7\)\ \{$	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ \-pfVar22\[3\];$	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar22\[3\];$@2	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar22\[3\]\ \*\ pfVar19\[3\]\ \+\ \(1\.0\ \-\ pfVar22\[3\]\)\ \*\ pfVar15\[3\];$	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar22\[3\]\ \*\ pfVar19\[3\]\ \+\ pfVar15\[3\];$	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x24\)\ =\ fVar7;$@9	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar15\[3\];$	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*if\ \(\(fVar5\ <\ fVar7\)\ \&\&\ \(fVar7\ =\ fVar4,\ fVar4\ <\ fVar3\)\)\ \{$	+2
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar15\[3\];$@2	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*fVar7\ =\ pfVar19\[3\];$@4	+1
+use	_EmulateOp	fVar7	resultW	INFERRED	stored as the fourth component of the destination constant (dest+0x24)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x24\)\ =\ fVar7;$@7	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ \*pfVar15;$	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ \*pfVar19;$@10	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*\*pfVar21\ =\ fVar7;$@16	+1
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*fVar7\ =\ pfVar15\[1\];$	+1
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*fVar7\ =\ pfVar19\[1\];$@3	+1
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x1c\)\ =\ fVar7;$@8	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*fVar7\ =\ pfVar15\[2\];$	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*fVar7\ =\ pfVar19\[2\];$@3	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x20\)\ =\ fVar7;$@8	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ \(\*pfVar15\ \-\ \*pfVar22\)\ /\ \(\*pfVar19\ \-\ \*pfVar22\);$	+4
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*fVar7\ =\ 1\.0;$@11	+1
+use	_EmulateOp	fVar7	resultX	INFERRED	stored as the first component of the destination constant (pfVar21 = dest+0x18)	^\s*\*pfVar21\ =\ fVar7\ \*\ fVar7\ \*\ \(3\.0\ \-\ \(fVar7\ \+\ fVar7\)\);$	+1
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*fVar7\ =\ \(pfVar15\[1\]\ \-\ pfVar22\[1\]\)\ /\ \(pfVar19\[1\]\ \-\ pfVar22\[1\]\);$	+4
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*fVar7\ =\ 1\.0;$@12	+1
+use	_EmulateOp	fVar7	resultY	INFERRED	stored as the second component of the destination constant (dest+0x1c)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x1c\)\ =\ fVar7\ \*\ fVar7\ \*\ \(3\.0\ \-\ \(fVar7\ \+\ fVar7\)\);$	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*fVar7\ =\ \(pfVar15\[2\]\ \-\ pfVar22\[2\]\)\ /\ \(pfVar19\[2\]\ \-\ pfVar22\[2\]\);$	+4
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*fVar7\ =\ 1\.0;$@13	+1
+use	_EmulateOp	fVar7	resultZ	INFERRED	stored as the third component of the destination constant (dest+0x20)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x20\)\ =\ fVar7\ \*\ fVar7\ \*\ \(3\.0\ \-\ \(fVar7\ \+\ fVar7\)\);$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ \(pfVar15\[3\]\ \-\ pfVar22\[3\]\)\ /\ \(pfVar19\[3\]\ \-\ pfVar22\[3\]\);$	+4
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ 1\.0;$@14	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ fVar7\ \*\ fVar7\ \*\ \(3\.0\ \-\ \(fVar7\ \+\ fVar7\)\);$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x24\)\ =\ fVar7;$@8	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ 0\.0;$@20	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ pfVar22\[iVar12\]\ \*\ pfVar19\[iVar12\]\ \+\ fVar7;$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*dVar23\ =\ \(double\)\-\(fVar3\ \*\ fVar3\ \*\ \(1\.0\ \-\ fVar7\ \*\ fVar7\)\ \-\ 1\.0\);$	+1
+use	_EmulateOp	fVar7	scalarResult	INFERRED	one value stored into all four components of the destination constant (dot/length style ops)	^\s*fVar7\ =\ \(float\)\(\(double\)\(fVar3\ \*\ fVar7\)\ \+\ dVar23\);$	+5
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _ceil\(\(double\)pfVar22\[3\]\);$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _floor\(\(double\)pfVar22\[3\]\);$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _sqrt\(ABS\(\(double\)pfVar22\[3\]\)\);$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _exp2\(\(double\)pfVar22\[3\]\);$@2	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ \(double\)pfVar22\[3\];$@2	+3
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _log2\(dVar23\);$@5	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _sin\(\(double\)pfVar22\[3\]\);$@2	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _cos\(\(double\)pfVar22\[3\]\);$@2	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _tan\(\(double\)pfVar22\[3\]\);$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _asin\(\(double\)pfVar22\[3\]\);$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _acos\(\(double\)pfVar22\[3\]\);$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _atan\(\(double\)pfVar22\[3\]\);$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _trunc\(\(double\)pfVar22\[3\]\);$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _exp\(\(double\)pfVar22\[3\]\);$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _log\(\(double\)pfVar22\[3\]\);$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x24\)\ =\ \(float\)dVar23;$	+1
+use	_EmulateOp	dVar23	sqrtValue	INFERRED	result of sqrt()	^\s*dVar23\ =\ \(double\)CONCAT44\(0x43300000,uStack_8c\)\ \-\ 4503601774854144\.0;$	+1
+use	_EmulateOp	dVar23	sqrtValue	INFERRED	result of sqrt()	^\s*fVar7\ =\ \(float\)dVar23;$@2	+1
+use	_EmulateOp	dVar23	sqrtValue	INFERRED	result of sqrt()	^\s*dVar23\ =\ _sqrt\(ABS\(\(double\)pfVar22\[3\]\)\);$@3	+2
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _exp2\(\(double\)pfVar22\[3\]\);$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ 0\.0;$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ \(double\)\(float\)\(\(double\)fVar7\ \*\ \(double\)fVar7\ \+\ dVar23\);$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _sqrt\(dVar23\);$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*fVar7\ =\ \(float\)dVar23;$@3	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ \(double\)pfVar22\[3\];$	+3
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _log2\(dVar23\);$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _sin\(\(double\)pfVar22\[3\]\);$	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _cos\(\(double\)pfVar22\[3\]\);$	+1
+use	_EmulateOp	dVar23	exp2Value	INFERRED	result of exp2()	^\s*dVar23\ =\ _exp2\(\(double\)pfVar22\[3\]\);$@3	+1
+use	_EmulateOp	dVar23	exp2Value	INFERRED	result of exp2()	^\s*dVar23\ =\ _log2\(dVar24\);$@2	+1
+use	_EmulateOp	dVar23	exp2Value	INFERRED	result of exp2()	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x20\)\ =\ \(float\)dVar23;$@6	+1
+use	_EmulateOp	dVar23	log2Value	INFERRED	result of log2()	^\s*dVar23\ =\ \(double\)\*pfVar22;$	+3
+use	_EmulateOp	dVar23	log2Value	INFERRED	result of log2()	^\s*dVar23\ =\ _log2\(dVar23\);$@2	+2
+use	_EmulateOp	dVar23	log2Value	INFERRED	result of log2()	^\s*dVar23\ =\ \(double\)pfVar22\[1\];$	+3
+use	_EmulateOp	dVar23	log2Value	INFERRED	result of log2()	^\s*dVar23\ =\ _log2\(dVar23\);$@3	+2
+use	_EmulateOp	dVar23	log2Value	INFERRED	result of log2()	^\s*dVar23\ =\ \(double\)pfVar22\[2\];$	+3
+use	_EmulateOp	dVar23	log2Value	INFERRED	result of log2()	^\s*dVar23\ =\ _log2\(dVar23\);$@4	+2
+use	_EmulateOp	dVar23	sqrtValue	INFERRED	result of sqrt()	^\s*dVar23\ =\ 0\.0;$@7	+1
+use	_EmulateOp	dVar23	sqrtValue	INFERRED	result of sqrt()	^\s*dVar23\ =\ \(double\)\(float\)\(\(double\)fVar7\ \*\ \(double\)fVar7\ \+\ dVar23\);$@2	+1
+use	_EmulateOp	dVar23	sqrtValue	INFERRED	result of sqrt()	^\s*dVar23\ =\ _sqrt\(dVar23\);$@2	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ 0\.0;$@8	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ \(double\)\(float\)\(\(double\)\(pfVar22\[iVar13\]\ \-\ pfVar19\[iVar13\]\)\ \*$	+2
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _sqrt\(dVar23\);$@3	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*fVar7\ =\ \(float\)dVar23;$@4	+1
+use	_EmulateOp	dVar23	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar23\ =\ _pow\(\(double\)pfVar22\[3\],\(double\)pfVar19\[3\]\);$	+1
+use	_EmulateOp	dVar23	powValue	INFERRED	result of pow()	^\s*dVar23\ =\ _pow\(\(double\)pfVar22\[3\],\(double\)pfVar19\[3\]\);$@2	+1
+use	_EmulateOp	dVar23	powValue	INFERRED	result of pow()	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x24\)\ =\ \(float\)dVar23;$@2	+1
+use	_EmulateOp	dVar23	powValue	INFERRED	result of pow()	^\s*dVar23\ =\ _trunc\(\(double\)\(pfVar22\[3\]\ /\ pfVar19\[3\]\)\);$	+1
+use	_EmulateOp	dVar23	sqrtValue	INFERRED	result of sqrt()	^\s*dVar23\ =\ \(double\)\-\(fVar3\ \*\ fVar3\ \*\ \(1\.0\ \-\ fVar7\ \*\ fVar7\)\ \-\ 1\.0\);$	+4
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*fVar3\ =\ pfVar22\[3\];$	+3
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*if\ \(fVar3\ <\ 0\.0\)\ \{$	+2
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*if\ \(\-1\.8446744e\+19\ <=\ fVar3\)\ goto\ LAB_97c0d2cc;$	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*fVar7\ =\ 1\.0\ /\ fVar3;$	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*fVar3\ =\ pfVar22\[3\];$@2	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*if\ \(fVar3\ <\ fVar7\)\ \{$	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*fVar7\ =\ fVar3;$	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*fVar3\ =\ pfVar22\[3\];$@3	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*if\ \(pfVar19\[3\]\ <\ fVar3\)\ goto\ LAB_97c0e08c;$	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*fVar3\ =\ pfVar22\[1\];$	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x20\)\ =\ fVar4\ \*\ fVar5\ \-\ fVar7\ \*\ fVar3;$	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*fVar3\ =\ \*pfVar19;$	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*fVar5\ =\ fVar3;$	+2
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*if\ \(\(fVar5\ <\ fVar4\)\ \&\&\ \(fVar4\ =\ fVar3,\ fVar3\ <\ fVar7\)\)\ \{$	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*fVar3\ =\ pfVar19\[1\];$	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*fVar5\ =\ fVar3;$@2	+2
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*if\ \(\(fVar5\ <\ fVar4\)\ \&\&\ \(fVar4\ =\ fVar3,\ fVar3\ <\ fVar7\)\)\ \{$@2	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*fVar3\ =\ pfVar19\[2\];$	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*fVar5\ =\ fVar3;$@3	+2
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*if\ \(\(fVar5\ <\ fVar4\)\ \&\&\ \(fVar4\ =\ fVar3,\ fVar3\ <\ fVar7\)\)\ \{$@3	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*fVar3\ =\ pfVar22\[3\];$@4	+1
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*if\ \(fVar4\ <\ fVar3\)\ \{$	+2
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*if\ \(\(fVar5\ <\ fVar7\)\ \&\&\ \(fVar7\ =\ fVar4,\ fVar4\ <\ fVar3\)\)\ \{$	+2
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*fVar3\ =\ \*pfVar15;$	+2
+use	_EmulateOp	fVar3	operandComponent	INFERRED	temporary copy of a source operand component (compare/min/max/saturate steps)	^\s*fVar7\ =\ \(float\)\(\(double\)\(fVar3\ \*\ fVar7\)\ \+\ dVar23\);$	+1
+use	_EmulateOp	uVar9	sizeMinusOne	INFERRED	destination vector size minus one, from the instruction's size field (bits 27..26 of word 4)	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x10\)\ >>\ 0x1a\ \&\ 3;$	+3
+use	_EmulateOp	uVar9	sizeMinusOne	INFERRED	destination vector size minus one, from the instruction's size field (bits 27..26 of word 4)	^\s*uVar9\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0x10\)\ >>\ 0x1a\ \&\ 3;$@2	+3
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar9\ =\ 0;$	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar9\ =\ 1;$	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*\*pfVar21\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar9\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0\);$	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar9\ =\ 0;$@2	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar9\ =\ 1;$@2	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,uVar9\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0\);$	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar9\ =\ 0;$@3	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar9\ =\ 1;$@3	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*\*pfVar21\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar9\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0\);$@2	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar9\ =\ 0;$@4	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar9\ =\ 1;$@4	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,uVar9\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0\);$@2	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar9\ =\ 0;$@5	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar9\ =\ 1;$@5	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*\*pfVar21\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar9\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0\);$@3	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar9\ =\ 0;$@6	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar9\ =\ 1;$@6	+1
+use	_EmulateOp	uVar9	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,uVar9\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0\);$@3	+1
+use	_EmulateOp	iVar14	nextComponent	INFERRED	next component index in the normalise loop	^\s*iVar14\ =\ iVar13\ \+\ 1;$	+1
+use	_EmulateOp	iVar14	nextComponent	INFERRED	next component index in the normalise loop	^\s*iVar13\ =\ iVar14;$	+2
+use	_EmulateOp	iVar14	remainingComponents	INFERRED	down-counting component loop counter initialised from the size field + 1	^\s*for\ \(iVar14\ =\ \(\*\(uint\ \*\)\(param_2\ \+\ 0x10\)\ >>\ 0x1a\ \&\ 3\)\ \+\ 1;\ iVar14\ !=\ 0;\ iVar14\ =\ iVar14\ \+\ \-1\)\ \{$	+1
+use	_EmulateOp	iVar14	remainingComponents	INFERRED	down-counting component loop counter initialised from the size field + 1	^\s*for\ \(iVar14\ =\ \(\*\(uint\ \*\)\(param_2\ \+\ 0x10\)\ >>\ 0x1a\ \&\ 3\)\ \+\ 1;\ iVar14\ !=\ 0;\ iVar14\ =\ iVar14\ \+\ \-1\)$	+1
+use	_EmulateOp	iVar14	remainingComponents	INFERRED	down-counting component loop counter initialised from the size field + 1	^\s*for\ \(iVar14\ =\ \(\*\(uint\ \*\)\(param_2\ \+\ 0x10\)\ >>\ 0x1a\ \&\ 3\)\ \+\ 1;\ iVar14\ !=\ 0;\ iVar14\ =\ iVar14\ \+\ \-1\)\ \{$@2	+1
+use	_EmulateOp	iVar14	intComponent	INFERRED	float operand converted to a signed int (2^31 split)	^\s*iVar14\ =\ \(int\)\(fVar7\ \-\ 2\.1474836e\+09\);$	+2
+use	_EmulateOp	iVar14	intComponent	INFERRED	float operand converted to a signed int (2^31 split)	^\s*iVar14\ =\ \(int\)fVar7;$	+2
+use	_EmulateOp	iVar14	intComponent	INFERRED	float operand converted to a signed int (2^31 split)	^\s*pfVar21\[iVar13\]\ =\ pfVar22\[iVar14\];$	+1
+use	_EmulateOp	iVar12	validArgCount	CONFIRMED	number of valid source operands returned by _GetValidArgs	^\s*iVar12\ =\ _GetValidArgs\(param_2\);$	+1
+use	_EmulateOp	iVar12	validArgCount	CONFIRMED	number of valid source operands returned by _GetValidArgs	^\s*if\ \(0\ <\ iVar12\)\ \{$	+1
+use	_EmulateOp	iVar12	validArgCount	CONFIRMED	number of valid source operands returned by _GetValidArgs	^\s*\}\ while\ \(iVar18\ <\ iVar12\);$	+1
+use	_EmulateOp	iVar12	validArgCount	CONFIRMED	number of valid source operands returned by _GetValidArgs	^\s*if\ \(\(\(iVar12\ !=\ 1\)\ \|\|\ \(bVar1\)\)\ \|\|\ \(pfVar22\ ==\ \(float\ \*\)0x0\)\)\ goto\ LAB_97c0d82c;$	+1
+use	_EmulateOp	iVar12	validArgCount	CONFIRMED	number of valid source operands returned by _GetValidArgs	^\s*if\ \(\(\(iVar12\ !=\ 2\)\ \|\|\ \(bVar1\)\)\ \|\|\ \(\(pfVar22\ ==\ \(float\ \*\)0x0\ \|\|\ \(pfVar19\ ==\ \(float\ \*\)0x0\)\)\)\)$	+1
+use	_EmulateOp	iVar12	validArgCount	CONFIRMED	number of valid source operands returned by _GetValidArgs	^\s*if\ \(\(\(\(iVar12\ !=\ 3\)\ \|\|\ \(bVar1\)\)\ \|\|\ \(pfVar22\ ==\ \(float\ \*\)0x0\)\)\ \|\|$	+1
+use	_EmulateOp	iVar12	componentIndex	INFERRED	component index of the dot-product style loops	^\s*iVar12\ =\ 0;$	+1
+use	_EmulateOp	iVar12	componentIndex	INFERRED	component index of the dot-product style loops	^\s*fVar7\ =\ pfVar15\[iVar12\]\ \*\ pfVar19\[iVar12\]\ \+\ fVar7;$	+2
+use	_EmulateOp	iVar12	componentIndex	INFERRED	component index of the dot-product style loops	^\s*iVar12\ =\ 0;$@2	+1
+use	_EmulateOp	iVar12	componentIndex	INFERRED	component index of the dot-product style loops	^\s*fVar7\ =\ pfVar22\[iVar12\]\ \*\ pfVar19\[iVar12\]\ \+\ fVar7;$	+2
+use	_EmulateOp	iVar12	currentInst	INFERRED	copy of the instruction pointer used when clearing the dest registers	^\s*iVar12\ =\ param_2;$	+1
+use	_EmulateOp	iVar12	currentInst	INFERRED	copy of the instruction pointer used when clearing the dest registers	^\s*iVar12\ =\ \*\(int\ \*\)\(iVar12\ \+\ 4\);$	+1
+use	_EmulateOp	iVar12	currentInst	INFERRED	copy of the instruction pointer used when clearing the dest registers	^\s*\(\(int\ \(\*\)\(\)\)_ClearDestedRegisters\)\(param_1,param_3,iVar12,iVar18\);$	+1
+use	_EmulateOp	iVar13	hashEntry	CONFIRMED	register-info entry looked up in the hash set	^\s*iVar13\ =\ _HashSetGet\(param_3,piVar17\);$	+3
+use	_EmulateOp	iVar13	remainingCount	INFERRED	down-counting loop counter	^\s*iVar13\ =\ uVar9\ \+\ 1;$	+1
+use	_EmulateOp	iVar13	remainingCount	INFERRED	down-counting loop counter	^\s*iVar13\ =\ iVar13\ \+\ \-1;$	+2
+use	_EmulateOp	iVar13	remainingCount	INFERRED	down-counting loop counter	^\s*iVar13\ =\ uVar9\ \+\ 1;$@2	+1
+use	_EmulateOp	iVar13	remainingCount	INFERRED	down-counting loop counter	^\s*iVar13\ =\ iVar13\ \+\ \-1;$@2	+2
+use	_EmulateOp	iVar13	componentIndex2	INFERRED	loop index over the components	^\s*iVar13\ =\ 0;$	+1
+use	_EmulateOp	iVar13	componentIndex2	INFERRED	loop index over the components	^\s*iVar14\ =\ iVar13\ \+\ 1;$	+3
+use	_EmulateOp	iVar13	componentIndex2	INFERRED	loop index over the components	^\s*iVar13\ =\ 0;$@2	+1
+use	_EmulateOp	iVar13	componentIndex2	INFERRED	loop index over the components	^\s*fVar7\ =\ pfVar22\[iVar13\]\ \*\ pfVar19\[iVar13\]\ \+\ fVar7;$	+2
+use	_EmulateOp	iVar13	componentIndex2	INFERRED	loop index over the components	^\s*iVar13\ =\ 0;$@3	+1
+use	_EmulateOp	iVar13	componentIndex2	INFERRED	loop index over the components	^\s*dVar23\ =\ \(double\)\(float\)\(\(double\)\(pfVar22\[iVar13\]\ \-\ pfVar19\[iVar13\]\)\ \*$	+3
+use	_EmulateOp	iVar13	componentIndex2	INFERRED	loop index over the components	^\s*iVar13\ =\ 0;$@4	+1
+use	_EmulateOp	iVar13	componentIndex2	INFERRED	loop index over the components	^\s*fVar7\ =\ pfVar22\[iVar13\]\ \*\ pfVar19\[iVar13\]\ \+\ fVar7;$@2	+2
+use	_EmulateOp	iVar13	intComponent2	INFERRED	float converted to a signed int (2^31 split)	^\s*iVar13\ =\ \(int\)\(fVar7\ \-\ 2\.1474836e\+09\);$	+2
+use	_EmulateOp	iVar13	intComponent2	INFERRED	float converted to a signed int (2^31 split)	^\s*iVar13\ =\ \(int\)fVar7;$	+2
+use	_EmulateOp	iVar13	intComponent2	INFERRED	float converted to a signed int (2^31 split)	^\s*\*pfVar21\ =\ pfVar22\[iVar13\];$	+1
+use	_EmulateOp	iVar13	intComponent2	INFERRED	float converted to a signed int (2^31 split)	^\s*iVar13\ =\ \(int\)\(fVar7\ \-\ 2\.1474836e\+09\);$@2	+2
+use	_EmulateOp	iVar13	intComponent2	INFERRED	float converted to a signed int (2^31 split)	^\s*iVar13\ =\ \(int\)fVar7;$@2	+2
+use	_EmulateOp	iVar13	intComponent2	INFERRED	float converted to a signed int (2^31 split)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x1c\)\ =\ pfVar22\[iVar13\];$	+1
+use	_EmulateOp	iVar13	intComponent2	INFERRED	float converted to a signed int (2^31 split)	^\s*iVar13\ =\ \(int\)\(fVar7\ \-\ 2\.1474836e\+09\);$@3	+2
+use	_EmulateOp	iVar13	intComponent2	INFERRED	float converted to a signed int (2^31 split)	^\s*iVar13\ =\ \(int\)fVar7;$@3	+2
+use	_EmulateOp	iVar13	intComponent2	INFERRED	float converted to a signed int (2^31 split)	^\s*\*\(float\ \*\)\(iVar18\ \+\ 0x20\)\ =\ pfVar22\[iVar13\];$	+1
+use	_EmulateOp	iVar13	intComponent2	INFERRED	float converted to a signed int (2^31 split)	^\s*iVar13\ =\ \(int\)\(fVar7\ \-\ 2\.1474836e\+09\);$@4	+2
+use	_EmulateOp	iVar13	intComponent2	INFERRED	float converted to a signed int (2^31 split)	^\s*iVar13\ =\ \(int\)fVar7;$@4	+2
+use	_EmulateOp	iVar13	intComponent2	INFERRED	float converted to a signed int (2^31 split)	^\s*fVar7\ =\ pfVar22\[iVar13\];$	+1
+use	_EmulateOp	iVar13	intComponent2	INFERRED	float converted to a signed int (2^31 split)	^\s*iVar13\ =\ \(int\)\(fVar7\ \-\ 2\.1474836e\+09\);$@5	+2
+use	_EmulateOp	iVar13	intComponent2	INFERRED	float converted to a signed int (2^31 split)	^\s*iVar13\ =\ \(int\)fVar7;$@5	+2
+use	_EmulateOp	iVar13	intComponent2	INFERRED	float converted to a signed int (2^31 split)	^\s*pfVar21\[iVar13\]\ =\ pfVar22\[iVar14\];$	+1
+use	_EmulateOp	iVar13	componentIndex2	INFERRED	loop index over the components	^\s*for\ \(iVar13\ =\ \(\*\(uint\ \*\)\(param_2\ \+\ 0x10\)\ >>\ 0x1a\ \&\ 3\)\ \+\ 1;\ iVar13\ !=\ 0;\ iVar13\ =\ iVar13\ \+\ \-1\)\ \{$	+1
+use	_EmulateOp	iVar13	componentIndex2	INFERRED	loop index over the components	^\s*for\ \(iVar13\ =\ \(\*\(uint\ \*\)\(param_2\ \+\ 0x10\)\ >>\ 0x1a\ \&\ 3\)\ \+\ 1;\ iVar13\ !=\ 0;\ iVar13\ =\ iVar13\ \+\ \-1\)\ \{$@2	+1
+use	_EmulateOp	uVar8	resultWBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the fourth destination component	^\s*uVar8\ =\ 0x3f800000;$	+1
+use	_EmulateOp	uVar8	resultWBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the fourth destination component	^\s*uVar8\ =\ 0xbf800000;$@3	+1
+use	_EmulateOp	uVar8	resultWBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the fourth destination component	^\s*uVar8\ =\ 0x3f800000;$@6	+1
+use	_EmulateOp	uVar8	resultWBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the fourth destination component	^\s*uVar8\ =\ 0;$@5	+1
+use	_EmulateOp	uVar8	resultWBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the fourth destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x24\)\ =\ uVar8;$	+1
+use	_EmulateOp	uVar8	resultWBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the fourth destination component	^\s*uVar8\ =\ 0x3f800000;$@9	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0;$	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0xbf800000;$	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0x3f800000;$@2	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x1c\)\ =\ uVar8;$	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0;$@2	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0xbf800000;$@2	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0x3f800000;$@3	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x20\)\ =\ uVar8;$	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0x3f800000;$@4	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0;$@3	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x1c\)\ =\ uVar8;$@2	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0x3f800000;$@5	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0;$@4	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x20\)\ =\ uVar8;$@2	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0x3f800000;$@7	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0;$@6	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x1c\)\ =\ uVar8;$@3	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0x3f800000;$@8	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0;$@7	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x20\)\ =\ uVar8;$@3	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0x3f800000;$@10	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0;$@8	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x1c\)\ =\ uVar8;$@4	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0x3f800000;$@11	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0;$@9	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x20\)\ =\ uVar8;$@4	+1
+use	_EmulateOp	uVar8	resultWBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the fourth destination component	^\s*uVar8\ =\ 0x3f800000;$@12	+1
+use	_EmulateOp	uVar8	resultWBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the fourth destination component	^\s*uVar8\ =\ 0x3f800000;$@17	+1
+use	_EmulateOp	uVar8	resultWBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the fourth destination component	^\s*uVar8\ =\ 0x3f800000;$@20	+1
+use	_EmulateOp	uVar8	resultWBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the fourth destination component	^\s*uVar8\ =\ 0x3f800000;$@25	+1
+use	_EmulateOp	uVar8	resultWBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the fourth destination component	^\s*uVar8\ =\ 0;$@20	+1
+use	_EmulateOp	uVar8	resultWBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the fourth destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x24\)\ =\ uVar8;$@2	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0x3f800000;$@13	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0;$@10	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x1c\)\ =\ uVar8;$@5	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0x3f800000;$@14	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0;$@11	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x20\)\ =\ uVar8;$@5	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0;$@12	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0x3f800000;$@15	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x1c\)\ =\ uVar8;$@6	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0;$@13	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0x3f800000;$@16	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x20\)\ =\ uVar8;$@6	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0x3f800000;$@18	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0;$@14	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x1c\)\ =\ uVar8;$@7	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0x3f800000;$@19	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0;$@15	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x20\)\ =\ uVar8;$@7	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0;$@16	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0x3f800000;$@21	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x1c\)\ =\ uVar8;$@8	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0;$@17	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0x3f800000;$@22	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x20\)\ =\ uVar8;$@8	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0x3f800000;$@23	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*uVar8\ =\ 0;$@18	+1
+use	_EmulateOp	uVar8	resultYBits	INFERRED	raw float bit pattern (0 / 1.0 / -1.0) stored as the second destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x1c\)\ =\ uVar8;$@9	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0x3f800000;$@24	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*uVar8\ =\ 0;$@19	+1
+use	_EmulateOp	uVar8	resultZBits	INFERRED	raw float bit pattern stored as the third destination component	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x20\)\ =\ uVar8;$@9	+1
+local	_EmulateOp	param_1	compileContext	INFERRED	first argument passed to _GetRegisterTypeInfo/_ClearDestedOpRegisters/_ClearRegisterState: the register-analysis context
+local	_EmulateOp	iVar18	destInfo	CONFIRMED	hash-set entry (0x28 bytes) for the destination register: +0x14 = value known, +0x18..+0x27 the constant vec4
+local	_EmulateOp	pfVar21	destValue	CONFIRMED	destInfo+0x18: the destination constant vec4 written by every folded opcode
+local	_EmulateOp	puVar16	instWords	CONFIRMED	inst+0xc: opcode is *instWords >> 0x12 & 0xff, source operand words follow
+local	_EmulateOp	puVar20	operandWordCursor	INFERRED	walks the source operand words (stride 8 bytes) while collecting register infos
+local	_EmulateOp	piVar17	operandKey	CONFIRMED	address of the 5-int lookup key {register id (ushort), type...} passed to _HashSetGet/_GetRegisterTypeInfo
+local	_EmulateOp	bVar1	noDestination	CONFIRMED	true when the instruction has no destination register info (no 0x1e000 bits or lookup failed)
+local	_EmulateOp	bVar6	foldFailed	INFERRED	set when an opcode could not be folded; checked before marking the destination unknown
+local	_EmulateOp	bVar2	foldFailedOrCompare	INFERRED	reused: fold-failed flag and the result of an operand compare (src1[3] <= src0[3])
+local	_EmulateOp	uStack_8c	intToFloatLow	INFERRED	low word of the 0x43300000:xxxxxxxx double used by the 2^52 int-to-double trick
+local	_EmulateOp	local_88	intPairHi	INFERRED	64-bit scratch holding the converted integer pair (shift/convert opcodes)
+local	_EmulateOp	local_80	intPairLo	INFERRED	second 64-bit scratch of the integer conversion
+local	_EmulateOp	local_90	intToFloatHigh	CONFIRMED	0x43300000 high word of the int-to-double trick
+local	_EmulateOp	local_bc	operandType	INFERRED	bits 25..23 of the operand word: the operand's type, part of the hash key
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[7\];$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*local_130\[3\]\ =\ fVar6;$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[0xb\];$@2	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[7\];$@2	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*if\ \(\(fVar6\ <\ local_100\[3\]\)\ \&\&$	+2
+use	_InterpreterEmulateOp	fVar6	squaredComponent	INFERRED	component read in the sum-of-squares loop	^\s*fVar6\ =\ \*pfVar10;$	+1
+use	_InterpreterEmulateOp	fVar6	squaredComponent	INFERRED	component read in the sum-of-squares loop	^\s*dVar27\ =\ \(double\)\(float\)\(\(double\)fVar6\ \*\ \(double\)fVar6\ \+\ dVar27\);$	+1
+use	_InterpreterEmulateOp	fVar6	squaredComponent	INFERRED	component read in the sum-of-squares loop	^\s*fVar6\ =\ \*pfVar10;$@2	+1
+use	_InterpreterEmulateOp	fVar6	squaredComponent	INFERRED	component read in the sum-of-squares loop	^\s*dVar27\ =\ \(double\)\(float\)\(\(double\)fVar6\ \*\ \(double\)fVar6\ \+\ dVar27\);$@2	+1
+use	_InterpreterEmulateOp	fVar6	degRadFactor	CONFIRMED	pi/180 or 180/pi factor of the RAD/DEG opcodes	^\s*fVar6\ =\ 0\.017453292;$	+1
+use	_InterpreterEmulateOp	fVar6	degRadFactor	CONFIRMED	pi/180 or 180/pi factor of the RAD/DEG opcodes	^\s*fVar6\ =\ 57\.29578;$	+1
+use	_InterpreterEmulateOp	fVar6	degRadFactor	CONFIRMED	pi/180 or 180/pi factor of the RAD/DEG opcodes	^\s*local_130\[0\]\ =\ local_130\[4\]\ \*\ fVar6;$	+4
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[8\];$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[0xb\];$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*dVar27\ =\ _floor\(\(double\)\(float\)\(dVar29\ /\ \(double\)fVar6\)\);$	+2
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[7\]\ /\ local_130\[0xb\];$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[7\];$@3	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*dVar27\ =\ _trunc\(\(double\)fVar6\);$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[8\];$@2	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[4\];$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*if\ \(\(fVar6\ <\ local_100\[0\]\)\ \&\&\ \(local_130\[0\]\ =\ local_130\[8\],\ local_130\[8\]\ <\ local_130\[4\]\)\)\ \{$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[9\];$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[5\];$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*if\ \(\(fVar6\ <\ local_100\[1\]\)\ \&\&\ \(local_130\[1\]\ =\ local_130\[9\],\ local_130\[9\]\ <\ local_130\[5\]\)\)\ \{$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[10\];$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[6\];$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*if\ \(\(fVar6\ <\ local_100\[2\]\)\ \&\&\ \(local_130\[2\]\ =\ local_130\[10\],\ local_130\[10\]\ <\ local_130\[6\]\)\)$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ \(local_100\[0\]\ \-\ local_130\[4\]\)\ /\ \(local_130\[8\]\ \-\ local_130\[4\]\);$	+4
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ 1\.0;$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*local_130\[0\]\ =\ fVar6\ \*\ fVar6\ \*\ \(3\.0\ \-\ \(fVar6\ \+\ fVar6\)\);$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ \(local_100\[2\]\ \-\ local_130\[6\]\)\ /\ \(local_130\[10\]\ \-\ local_130\[6\]\);$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*if\ \(\(fVar6\ <=\ 0\.0\)\ \|\|\ \(fVar6\ <\ 1\.0\)\)\ \{$@2	+3
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ 1\.0;$@2	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*local_130\[2\]\ =\ fVar6\ \*\ fVar6\ \*\ \(3\.0\ \-\ \(fVar6\ \+\ fVar6\)\);$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[4\];$@2	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*if\ \(\(\(cVar5\ ==\ '\\x04'\)\ \|\|\ \(fVar6\ =\ local_130\[5\],\ cVar5\ ==\ '\\x05'\)\)\ \|\|$	+3
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[4\];$@3	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*if\ \(\(\(cVar5\ ==\ '\\x04'\)\ \|\|\ \(fVar6\ =\ local_130\[5\],\ cVar5\ ==\ '\\x05'\)\)\ \|\|$@2	+3
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[4\];$@4	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*if\ \(\(\(cVar5\ ==\ '\\x04'\)\ \|\|\ \(fVar6\ =\ local_130\[5\],\ cVar5\ ==\ '\\x05'\)\)\ \|\|$@3	+3
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[4\];$@5	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*if\ \(\(\(cVar5\ ==\ '\\x04'\)\ \|\|\ \(fVar6\ =\ local_130\[5\],\ cVar5\ ==\ '\\x05'\)\)\ \|\|$@4	+3
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ 0\.0;$@5	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_100\[0\];$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ fVar7;$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*dVar27\ =\ \(double\)fVar6;$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ 0\.0;$@6	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ \*pfVar23\ \*\ \*pfVar1\ \+\ fVar6;$@3	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*dVar27\ =\ \(double\)\-\(local_100\[0\]\ \*\ local_100\[0\]\ \*\ \(1\.0\ \-\ fVar6\ \*\ fVar6\)\ \-\ 1\.0\);$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_100\[0\]\ \*\ fVar6;$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ \(float\)\(\(double\)fVar6\ \+\ dVar27\);$	+5
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*\(fVar6\ =\ 1\.0,\ local_130\[6\]\ !=\ local_130\[10\]\)\)\ \{$	+2
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*\*pfVar10\ =\ fVar6;$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[2\];$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*fVar6\ =\ local_130\[1\];$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*if\ \(\(fVar7\ !=\ 0\.0\)\ \&\&\ \(uStack_ac\ =\ 0,\ fVar6\ !=\ 0\.0\)\)\ \{$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*if\ \(\(local_130\[0\]\ ==\ 0\.0\)\ \|\|\ \(fVar6\ =\ local_130\[3\],\ fVar7\ =\ local_130\[2\],\ local_130\[1\]\ ==\ 0\.0\)$	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*if\ \(\(local_130\[4\]\ !=\ local_130\[8\]\)\ \|\|\ \(fVar6\ =\ 1\.0,\ local_130\[5\]\ !=\ local_130\[9\]\)\)\ \{$	+2
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*\*pfVar10\ =\ fVar6;$@2	+1
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*\(\(local_130\[6\]\ !=\ local_130\[10\]\ \|\|\ \(fVar6\ =\ 1\.0,\ local_130\[7\]\ !=\ local_130\[0xb\]\)\)\)\)\ \{$	+2
+use	_InterpreterEmulateOp	fVar6	operandComponent	INFERRED	temporary copy of an operand component (compare, min/max, divide)	^\s*\*pfVar10\ =\ fVar6;$@3	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*pfVar10\ =\ local_130;$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*pfVar10\ =\ local_130;$@2	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*pfVar10\ =\ local_130;$@3	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*pfVar10\ =\ \&local_e0;$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*pfVar10\ =\ \&local_d0;$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*pfVar10\ =\ \&local_c0;$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*pfVar10\ =\ local_130;$@13	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterWriteDestination\)\(param_1,iVar14,iVar21,iVar26,iVar12,iVar13,iVar15,iVar16,iVar19,iVar22,uVar32,pfVar10,$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*pfVar10\ =\ local_130\ \+\ 8;$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[uVar17\ \*\ 9\ \+\ 0x14\],param_2\[uVar17\ \*\ 9\ \+\ 0x15\],0,pfVar10\);$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[uVar17\ \*\ 9\ \+\ 0x15\],1,pfVar10\);$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[uVar17\ \*\ 9\ \+\ 0x15\],1,pfVar10\);$@2	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[uVar17\ \*\ 9\ \+\ 0x15\],2,pfVar10\);$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[uVar17\ \*\ 9\ \+\ 0x15\],1,pfVar10\);$@3	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[uVar17\ \*\ 9\ \+\ 0x15\],2,pfVar10\);$@2	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[uVar17\ \*\ 9\ \+\ 0x15\],3,pfVar10\);$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*pfVar10\ =\ local_130\ \+\ 8;$@2	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],0,pfVar10\);$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],1,pfVar10\);$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],1,pfVar10\);$@2	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],2,pfVar10\);$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],1,pfVar10\);$@3	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],2,pfVar10\);$@2	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],3,pfVar10\);$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*pfVar10\ =\ local_130\ \+\ 8;$@3	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],0,pfVar10\);$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],1,pfVar10\);$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],1,pfVar10\);$@2	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],2,pfVar10\);$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],1,pfVar10\);$@3	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],2,pfVar10\);$@2	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],3,pfVar10\);$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*pfVar10\ =\ local_130\ \+\ 4;$	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],0,pfVar10\);$@2	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],1,pfVar10\);$@4	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],0,pfVar10\);$@3	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*pfVar10\ =\ local_130\ \+\ 8;$@4	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],0,pfVar10\);$@2	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],1,pfVar10\);$@4	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],2,pfVar10\);$@3	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*pfVar10\ =\ local_130\ \+\ 8;$@5	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],0,pfVar10\);$@3	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],1,pfVar10\);$@5	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],2,pfVar10\);$@4	+1
+use	_InterpreterEmulateOp	pfVar10	operandScratch	INFERRED	points at the scratch vec4 a source operand is loaded into / the matrix result	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],3,pfVar10\);$@2	+1
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar10\ =\ local_130\ \+\ 4;$@2	+1
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*fVar6\ =\ \*pfVar10;$	+2
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar10\ =\ local_130\ \+\ 4;$@3	+1
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*fVar6\ =\ \*pfVar10;$@2	+2
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar10\ =\ local_130;$@4	+1
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*\*pfVar10\ =\ pfVar10\[4\]\ /\ \(float\)dVar27;$	+2
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar10\ =\ local_130;$@5	+1
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar23\ =\ pfVar10\ \+\ 4;$	+3
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar10\ =\ local_130;$@6	+1
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar23\ =\ pfVar10\ \+\ 4;$@2	+3
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar10\ =\ local_130;$@7	+1
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar23\ =\ pfVar10\ \+\ 4;$@3	+3
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar10\ =\ local_130;$@8	+1
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar23\ =\ pfVar10\ \+\ 0xc;$	+3
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar10\ =\ local_130;$@9	+1
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar23\ =\ pfVar10\ \+\ 4;$@4	+3
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar10\ =\ local_130;$@10	+1
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*\*pfVar10\ =\ fVar6;$	+2
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar10\ =\ local_130;$@11	+1
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*\*pfVar10\ =\ fVar6;$@2	+2
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*pfVar10\ =\ local_130;$@12	+1
+use	_InterpreterEmulateOp	pfVar10	componentCursor	INFERRED	walks the operand components in the length/normalize/dot loops	^\s*\*pfVar10\ =\ fVar6;$@3	+2
+use	_InterpreterEmulateOp	uVar24	sourceElement	INFERRED	vec4 slot (array element) of the source operand; 0 when the operand is not an array	^\s*uVar24\ =\ uVar17;$	+1
+use	_InterpreterEmulateOp	uVar24	sourceElement	INFERRED	vec4 slot (array element) of the source operand; 0 when the operand is not an array	^\s*uVar24\ =\ 0;$	+1
+use	_InterpreterEmulateOp	uVar24	sourceElement	INFERRED	vec4 slot (array element) of the source operand; 0 when the operand is not an array	^\s*,param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],uVar24,local_130\ \+\ 4\);$	+1
+use	_InterpreterEmulateOp	uVar24	sourceElement	INFERRED	vec4 slot (array element) of the source operand; 0 when the operand is not an array	^\s*uVar24\ =\ uVar17;$@2	+1
+use	_InterpreterEmulateOp	uVar24	sourceElement	INFERRED	vec4 slot (array element) of the source operand; 0 when the operand is not an array	^\s*uVar24\ =\ 0;$@2	+1
+use	_InterpreterEmulateOp	uVar24	sourceElement	INFERRED	vec4 slot (array element) of the source operand; 0 when the operand is not an array	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],uVar24,local_130\ \+\ 8\);$	+1
+use	_InterpreterEmulateOp	uVar24	sourceElement	INFERRED	vec4 slot (array element) of the source operand; 0 when the operand is not an array	^\s*uVar24\ =\ uVar17;$@3	+1
+use	_InterpreterEmulateOp	uVar24	sourceElement	INFERRED	vec4 slot (array element) of the source operand; 0 when the operand is not an array	^\s*uVar24\ =\ 0;$@3	+1
+use	_InterpreterEmulateOp	uVar24	sourceElement	INFERRED	vec4 slot (array element) of the source operand; 0 when the operand is not an array	^\s*param_2\[0x24\],param_2\[0x25\],param_2\[0x26\],param_2\[0x27\],uVar24,local_100\);$	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar24\ =\ 0;$@4	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar24\ =\ 1;$	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar24\ =\ 0;$@5	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uStack_ac\ =\ uVar24\ \^\ 0x80000000;$	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*dVar27\ =\ \(double\)CONCAT44\(0x43300000,uVar24\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0;$	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ 5\);$	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*if\ \(uVar24\ !=\ 0\)\ \{$	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ uVar24\ \-\ 1;$	+2
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ 5\);$@2	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*if\ \(uVar24\ !=\ 0\)\ \{$@2	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ uVar24\ \-\ 1;$@2	+2
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ 5\);$@3	+2
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ uVar24\ \-\ 1;$@3	+2
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar24\ =\ 0;$@6	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar24\ =\ 1;$@2	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*local_130\[0\]\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar24\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0$	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar24\ =\ 0;$@7	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar24\ =\ 1;$@3	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*local_130\[2\]\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar24\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0$	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar24\ =\ 0;$@8	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar24\ =\ 1;$@4	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*local_130\[0\]\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar24\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0$@2	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar24\ =\ 0;$@9	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar24\ =\ 1;$@5	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*local_130\[2\]\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar24\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0$@2	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar24\ =\ 0;$@10	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar24\ =\ 1;$@6	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*local_130\[0\]\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar24\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0$@3	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar24\ =\ 0;$@11	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar24\ =\ 1;$@7	+1
+use	_InterpreterEmulateOp	uVar24	boolBit	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*local_130\[2\]\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar24\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0$@3	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ 5\);$@4	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*if\ \(uVar24\ !=\ 0\)\ \{$@4	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ uVar24\ \-\ 1;$@4	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*\}\ while\ \(uVar24\ !=\ 0\);$@4	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ 5\);$@5	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*if\ \(uVar24\ !=\ 0\)\ \{$@5	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ uVar24\ \-\ 1;$@5	+2
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ 5\);$@6	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*if\ \(uVar24\ !=\ 0\)\ \{$@6	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ uVar24\ \-\ 1;$@6	+2
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ 5\);$@7	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*if\ \(uVar24\ !=\ 0\)\ \{$@7	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ uVar24\ \-\ 1;$@7	+2
+use	_InterpreterEmulateOp	uVar24	intComponent	INFERRED	float converted to a signed integer (2^31 split) for the integer/shift opcodes	^\s*uVar24\ =\ \(int\)\(local_130\[8\]\ \-\ 2\.1474836e\+09\)\ \^\ 0x80000000;$	+1
+use	_InterpreterEmulateOp	uVar24	intComponent	INFERRED	float converted to a signed integer (2^31 split) for the integer/shift opcodes	^\s*uVar24\ =\ \(uint\)\(int\)local_130\[8\];$	+2
+use	_InterpreterEmulateOp	uVar24	intComponent	INFERRED	float converted to a signed integer (2^31 split) for the integer/shift opcodes	^\s*uVar24\ =\ param_2\[0x43\];$	+1
+use	_InterpreterEmulateOp	uVar24	intComponent	INFERRED	float converted to a signed integer (2^31 split) for the integer/shift opcodes	^\s*\(param_1\[0x28b\],uVar24,in_r5,local_130\ \+\ 4,\&local_80\);$	+1
+use	_InterpreterEmulateOp	uVar24	intComponent	INFERRED	float converted to a signed integer (2^31 split) for the integer/shift opcodes	^\s*\(\(void\ \(\*\)\(\)\)_InterpreterTextureSamplerSampleTexel3D\)\(param_1\[0x28b\],uVar24,in_r5,local_130\ \+\ 4,\&local_80,dVar27,fparam_2,fparam_3,$	+1
+use	_InterpreterEmulateOp	uVar24	intComponent	INFERRED	float converted to a signed integer (2^31 split) for the integer/shift opcodes	^\s*\(\(void\ \(\*\)\(\)\)_InterpreterTextureSamplerSampleTexel2D\)\(param_1\[0x28b\],uVar24,in_r5,local_130\ \+\ 4,\&local_80,dVar27,fparam_2,fparam_3,$	+1
+use	_InterpreterEmulateOp	uVar24	intComponent	INFERRED	float converted to a signed integer (2^31 split) for the integer/shift opcodes	^\s*\(\(void\ \(\*\)\(\)\)_InterpreterTextureSamplerSampleTexel1D\)\(param_1\[0x28b\],uVar24,in_r5,local_130\ \+\ 4,\&local_80,dVar27,fparam_2,fparam_3,$	+1
+use	_InterpreterEmulateOp	uVar24	intComponent	INFERRED	float converted to a signed integer (2^31 split) for the integer/shift opcodes	^\s*uVar24\ =\ \(int\)\(dVar27\ \-\ 2147483648\.0\)\ \^\ 0x80000000;$	+1
+use	_InterpreterEmulateOp	uVar24	intComponent	INFERRED	float converted to a signed integer (2^31 split) for the integer/shift opcodes	^\s*uVar24\ =\ \(uint\)\(int\)dVar27;$	+2
+use	_InterpreterEmulateOp	uVar24	intComponent	INFERRED	float converted to a signed integer (2^31 split) for the integer/shift opcodes	^\s*param_1\[0x290\]\ =\ uVar24;$	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ 5\);$@8	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*if\ \(uVar24\ !=\ 0\)\ \{$@8	+1
+use	_InterpreterEmulateOp	uVar24	dimension	INFERRED	vector dimension byte of the instruction (inst+5): number of components the length/dot/normalize loops cover	^\s*uVar24\ =\ uVar24\ \-\ 1;$@8	+2
+use	_InterpreterEmulateOp	uVar24	sourceElement	INFERRED	vec4 slot (array element) of the source operand; 0 when the operand is not an array	^\s*uVar24\ =\ uVar17;$@4	+1
+use	_InterpreterEmulateOp	uVar24	sourceElement	INFERRED	vec4 slot (array element) of the source operand; 0 when the operand is not an array	^\s*uVar24\ =\ 0;$@12	+1
+use	_InterpreterEmulateOp	uVar24	sourceElement	INFERRED	vec4 slot (array element) of the source operand; 0 when the operand is not an array	^\s*param_2\[10\],param_2\[0xb\],uVar24,local_130,\(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ 6\)\);$	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*dVar27\ =\ _ceil\(\(double\)local_130\[7\]\);$	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*dVar27\ =\ _floor\(\(double\)local_130\[7\]\);$	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*dVar27\ =\ _sqrt\(ABS\(\(double\)local_130\[7\]\)\);$	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*dVar27\ =\ _exp2\(\(double\)local_130\[7\]\);$@2	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*dVar27\ =\ _log2\(dVar28\);$@3	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*dVar27\ =\ _sin\(\(double\)local_130\[7\]\);$@2	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*dVar27\ =\ _cos\(\(double\)local_130\[7\]\);$@2	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*dVar27\ =\ _tan\(\(double\)local_130\[7\]\);$	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*dVar27\ =\ _asin\(\(double\)local_130\[7\]\);$	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*dVar27\ =\ _acos\(\(double\)local_130\[7\]\);$	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*dVar27\ =\ _atan\(\(double\)local_130\[7\]\);$	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*dVar27\ =\ _pow\(\(double\)local_130\[7\],fparam_2\);$@2	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*dVar27\ =\ _trunc\(\(double\)fVar6\);$	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*dVar27\ =\ _exp\(\(double\)local_130\[7\]\);$	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*dVar27\ =\ _log\(\(double\)local_130\[7\]\);$	+1
+use	_InterpreterEmulateOp	dVar27	powValue	INFERRED	result of pow()	^\s*local_130\[3\]\ =\ \(float\)dVar27;$@2	+1
+use	_InterpreterEmulateOp	dVar27	floorValue	INFERRED	result of floor()	^\s*dVar27\ =\ \(double\)local_130\[7\];$	+1
+use	_InterpreterEmulateOp	dVar27	floorValue	INFERRED	result of floor()	^\s*dVar28\ =\ _floor\(dVar27\);$	+2
+use	_InterpreterEmulateOp	dVar27	floorValue	INFERRED	result of floor()	^\s*dVar27\ =\ 1\.0\ /\ dVar27;$	+1
+use	_InterpreterEmulateOp	dVar27	floorValue	INFERRED	result of floor()	^\s*dVar27\ =\ \-\(\(double\)fVar6\ \*\ dVar27\ \-\ dVar29\);$	+1
+use	_InterpreterEmulateOp	dVar27	floorValue	INFERRED	result of floor()	^\s*local_130\[3\]\ =\ \(float\)dVar27;$	+1
+use	_InterpreterEmulateOp	dVar27	intAsDouble	INFERRED	integer converted to double with the 2^52 bias trick	^\s*dVar27\ =\ \(double\)CONCAT44\(0x43300000,uVar24\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0;$	+1
+use	_InterpreterEmulateOp	dVar27	intAsDouble	INFERRED	integer converted to double with the 2^52 bias trick	^\s*local_130\[0\]\ =\ \(float\)dVar27;$@3	+1
+use	_InterpreterEmulateOp	dVar27	intAsDouble	INFERRED	integer converted to double with the 2^52 bias trick	^\s*dVar27\ =\ 1\.0\ /\ dVar27;$@2	+1
+use	_InterpreterEmulateOp	dVar27	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar27\ =\ _exp2\(\(double\)local_130\[7\]\);$	+1
+use	_InterpreterEmulateOp	dVar27	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar27\ =\ 0\.0;$	+1
+use	_InterpreterEmulateOp	dVar27	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar27\ =\ \(double\)\(float\)\(\(double\)fVar6\ \*\ \(double\)fVar6\ \+\ dVar27\);$	+1
+use	_InterpreterEmulateOp	dVar27	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar27\ =\ _sqrt\(dVar27\);$	+1
+use	_InterpreterEmulateOp	dVar27	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*local_130\[0\]\ =\ \(float\)dVar27;$@6	+1
+use	_InterpreterEmulateOp	dVar27	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar27\ =\ \(double\)local_130\[7\];$@2	+3
+use	_InterpreterEmulateOp	dVar27	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar27\ =\ _log2\(dVar27\);$	+1
+use	_InterpreterEmulateOp	dVar27	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar27\ =\ _sin\(\(double\)local_130\[7\]\);$	+1
+use	_InterpreterEmulateOp	dVar27	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar27\ =\ _cos\(\(double\)local_130\[7\]\);$	+1
+use	_InterpreterEmulateOp	dVar27	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar27\ =\ 0\.0;$@5	+1
+use	_InterpreterEmulateOp	dVar27	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar27\ =\ \(double\)\(float\)\(\(double\)\(\*pfVar23\ \-\ \*pfVar1\)\ \*\ \(double\)\(\*pfVar23\ \-\ \*pfVar1\)\ \+$	+2
+use	_InterpreterEmulateOp	dVar27	mathAccumulator	INFERRED	double temporary that is both a running sum of squares and a libm result (shared by register allocation)	^\s*dVar27\ =\ _pow\(\(double\)local_130\[7\],fparam_2\);$	+1
+use	_InterpreterEmulateOp	dVar27	exp2Value	INFERRED	result of exp2()	^\s*dVar27\ =\ _exp2\(\(double\)local_130\[7\]\);$@3	+1
+use	_InterpreterEmulateOp	dVar27	exp2Value	INFERRED	result of exp2()	^\s*dVar27\ =\ _log2\(dVar28\);$@5	+1
+use	_InterpreterEmulateOp	dVar27	exp2Value	INFERRED	result of exp2()	^\s*local_130\[2\]\ =\ \(float\)dVar27;$@7	+1
+use	_InterpreterEmulateOp	dVar27	log2Value	INFERRED	result of log2()	^\s*dVar27\ =\ \(double\)local_130\[4\];$	+3
+use	_InterpreterEmulateOp	dVar27	log2Value	INFERRED	result of log2()	^\s*dVar27\ =\ _log2\(dVar27\);$@2	+1
+use	_InterpreterEmulateOp	dVar27	sqrtValue	INFERRED	result of sqrt()	^\s*dVar27\ =\ 0\.0;$@4	+1
+use	_InterpreterEmulateOp	dVar27	sqrtValue	INFERRED	result of sqrt()	^\s*dVar27\ =\ \(double\)\(float\)\(\(double\)fVar6\ \*\ \(double\)fVar6\ \+\ dVar27\);$@2	+1
+use	_InterpreterEmulateOp	dVar27	sqrtValue	INFERRED	result of sqrt()	^\s*dVar27\ =\ _sqrt\(dVar27\);$@2	+1
+use	_InterpreterEmulateOp	dVar27	floorValue	INFERRED	result of floor()	^\s*dVar27\ =\ \(double\)local_130\[4\];$@2	+1
+use	_InterpreterEmulateOp	dVar27	floorValue	INFERRED	result of floor()	^\s*dVar28\ =\ _floor\(\(double\)\(float\)\(dVar27\ /\ dVar31\)\);$	+1
+use	_InterpreterEmulateOp	dVar27	floorValue	INFERRED	result of floor()	^\s*local_130\[0\]\ =\ \(float\)\-\(dVar31\ \*\ dVar28\ \-\ dVar27\);$	+1
+use	_InterpreterEmulateOp	dVar27	floorValue	INFERRED	result of floor()	^\s*dVar27\ =\ \(double\)local_130\[4\];$@3	+1
+use	_InterpreterEmulateOp	dVar27	floorValue	INFERRED	result of floor()	^\s*dVar28\ =\ _floor\(\(double\)\(float\)\(dVar27\ /\ dVar31\)\);$@2	+1
+use	_InterpreterEmulateOp	dVar27	floorValue	INFERRED	result of floor()	^\s*local_130\[0\]\ =\ \(float\)\-\(dVar31\ \*\ dVar28\ \-\ dVar27\);$@2	+1
+use	_InterpreterEmulateOp	dVar27	sqrtValue	INFERRED	result of sqrt()	^\s*dVar27\ =\ \(double\)\-\(local_100\[0\]\ \*\ local_100\[0\]\ \*\ \(1\.0\ \-\ fVar6\ \*\ fVar6\)\ \-\ 1\.0\);$	+2
+use	_InterpreterEmulateOp	dVar27	sqrtValue	INFERRED	result of sqrt()	^\s*dVar27\ =\ _sqrt\(dVar27\);$@3	+1
+use	_InterpreterEmulateOp	dVar27	expValue	INFERRED	result of exp()	^\s*dVar27\ =\ _exp\(\(double\)local_130\[4\]\);$	+2
+use	_InterpreterEmulateOp	dVar27	expValue	INFERRED	result of exp()	^\s*dVar27\ =\ _exp\(\(double\)local_130\[5\]\);$	+2
+use	_InterpreterEmulateOp	dVar27	expValue	INFERRED	result of exp()	^\s*dVar27\ =\ _exp\(\(double\)local_130\[6\]\);$	+2
+use	_InterpreterEmulateOp	dVar27	logValue	INFERRED	result of log()	^\s*dVar27\ =\ _log\(\(double\)local_130\[4\]\);$	+2
+use	_InterpreterEmulateOp	dVar27	logValue	INFERRED	result of log()	^\s*dVar27\ =\ _log\(\(double\)local_130\[5\]\);$	+2
+use	_InterpreterEmulateOp	dVar27	logValue	INFERRED	result of log()	^\s*dVar27\ =\ _log\(\(double\)local_130\[6\]\);$	+2
+use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*dVar29\ =\ \(double\)local_130\[4\];$	+2
+use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*local_130\[0\]\ =\ \(float\)\(dVar29\ \-\ dVar27\);$	+1
+use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*dVar29\ =\ \(double\)local_130\[6\];$	+1
+use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*dVar28\ =\ _floor\(dVar29\);$	+1
+use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*local_130\[2\]\ =\ \(float\)\(dVar29\ \-\ dVar28\);$	+1
+use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*dVar29\ =\ \(double\)local_130\[5\];$	+1
+use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*dVar27\ =\ _floor\(\(double\)\(float\)\(dVar29\ /\ dVar30\)\);$	+1
+use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*local_130\[1\]\ =\ \(float\)\-\(dVar30\ \*\ dVar27\ \-\ dVar29\);$	+1
+use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*dVar29\ =\ \(double\)local_130\[5\];$@2	+1
+use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*dVar27\ =\ _floor\(\(double\)\(float\)\(dVar29\ /\ dVar30\)\);$@2	+1
+use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*local_130\[1\]\ =\ \(float\)\-\(dVar30\ \*\ dVar27\ \-\ dVar29\);$@2	+1
+use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*dVar29\ =\ \(double\)local_130\[7\];$	+1
+use	_InterpreterEmulateOp	dVar29	floorValue_29	INFERRED	result of floor()	^\s*dVar27\ =\ _floor\(\(double\)\(float\)\(dVar29\ /\ \(double\)fVar6\)\);$	+2
+use	_InterpreterEmulateOp	dVar31	floorValue_31	INFERRED	result of floor()	^\s*dVar31\ =\ \(double\)local_130\[8\];$	+2
+use	_InterpreterEmulateOp	dVar31	floorValue_31	INFERRED	result of floor()	^\s*local_130\[0\]\ =\ \(float\)\-\(dVar31\ \*\ dVar28\ \-\ dVar27\);$	+1
+use	_InterpreterEmulateOp	dVar31	floorValue_31	INFERRED	result of floor()	^\s*dVar31\ =\ \(double\)local_130\[8\];$@2	+1
+use	_InterpreterEmulateOp	dVar31	floorValue_31	INFERRED	result of floor()	^\s*dVar27\ =\ _floor\(\(double\)\(float\)\(dVar28\ /\ dVar31\)\);$	+1
+use	_InterpreterEmulateOp	dVar31	floorValue_31	INFERRED	result of floor()	^\s*dVar31\ =\ \(double\)local_130\[10\];$	+1
+use	_InterpreterEmulateOp	dVar31	floorValue_31	INFERRED	result of floor()	^\s*dVar27\ =\ _floor\(\(double\)\(float\)\(dVar28\ /\ dVar31\)\);$@2	+1
+use	_InterpreterEmulateOp	dVar31	floorValue_31	INFERRED	result of floor()	^\s*local_130\[2\]\ =\ \(float\)\-\(dVar31\ \*\ dVar27\ \-\ dVar28\);$	+1
+use	_InterpreterEmulateOp	dVar31	floorValue_31	INFERRED	result of floor()	^\s*dVar31\ =\ \(double\)local_130\[8\];$@3	+2
+use	_InterpreterEmulateOp	dVar31	floorValue_31	INFERRED	result of floor()	^\s*local_130\[0\]\ =\ \(float\)\-\(dVar31\ \*\ dVar28\ \-\ dVar27\);$@2	+1
+use	_InterpreterEmulateOp	dVar30	floorValue_30	INFERRED	result of floor()	^\s*dVar30\ =\ \(double\)local_130\[8\];$	+1
+use	_InterpreterEmulateOp	dVar30	floorValue_30	INFERRED	result of floor()	^\s*dVar27\ =\ _floor\(\(double\)\(float\)\(dVar29\ /\ dVar30\)\);$	+1
+use	_InterpreterEmulateOp	dVar30	floorValue_30	INFERRED	result of floor()	^\s*local_130\[1\]\ =\ \(float\)\-\(dVar30\ \*\ dVar27\ \-\ dVar29\);$	+1
+use	_InterpreterEmulateOp	dVar30	floorValue_30	INFERRED	result of floor()	^\s*dVar30\ =\ \(double\)local_130\[9\];$	+1
+use	_InterpreterEmulateOp	dVar30	floorValue_30	INFERRED	result of floor()	^\s*dVar27\ =\ _floor\(\(double\)\(float\)\(dVar29\ /\ dVar30\)\);$@2	+1
+use	_InterpreterEmulateOp	dVar30	floorValue_30	INFERRED	result of floor()	^\s*local_130\[1\]\ =\ \(float\)\-\(dVar30\ \*\ dVar27\ \-\ dVar29\);$@2	+1
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*cVar5\ =\ \*\(char\ \*\)\(param_2\ \+\ 0x18\);$	+1
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*if\ \(\(\(\(cVar5\ !=\ '\\0'\)\ \&\&\ \(local_130\[0\]\ =\ local_130\[5\],\ cVar5\ !=\ '\\x01'\)\)\ \&\&$	+3
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*if\ \(\(\(cVar5\ ==\ '\\x04'\)\ \|\|\ \(fVar6\ =\ local_130\[5\],\ cVar5\ ==\ '\\x05'\)\)\ \|\|$	+2
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*if\ \(\(\(cVar5\ !=\ '\\t'\)\ \&\&\ \(local_130\[0\]\ =\ 1\.0,\ cVar5\ !=\ '\\b'\)\)\ \&\&$	+2
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*cVar5\ =\ \*\(char\ \*\)\(\(int\)param_2\ \+\ 0x61\);$	+1
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*if\ \(\(\(\(cVar5\ !=\ '\\0'\)\ \&\&\ \(local_130\[1\]\ =\ local_130\[5\],\ cVar5\ !=\ '\\x01'\)\)\ \&\&$	+3
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*if\ \(\(\(cVar5\ ==\ '\\x04'\)\ \|\|\ \(fVar6\ =\ local_130\[5\],\ cVar5\ ==\ '\\x05'\)\)\ \|\|$@2	+2
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*if\ \(\(\(cVar5\ !=\ '\\t'\)\ \&\&\ \(local_130\[1\]\ =\ 1\.0,\ cVar5\ !=\ '\\b'\)\)\ \&\&$	+2
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*cVar5\ =\ \*\(char\ \*\)\(\(int\)param_2\ \+\ 0x62\);$	+1
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*if\ \(\(\(\(cVar5\ !=\ '\\0'\)\ \&\&\ \(local_130\[2\]\ =\ local_130\[5\],\ cVar5\ !=\ '\\x01'\)\)\ \&\&$	+3
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*if\ \(\(\(cVar5\ ==\ '\\x04'\)\ \|\|\ \(fVar6\ =\ local_130\[5\],\ cVar5\ ==\ '\\x05'\)\)\ \|\|$@3	+2
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*if\ \(\(\(cVar5\ !=\ '\\t'\)\ \&\&\ \(local_130\[2\]\ =\ 1\.0,\ cVar5\ !=\ '\\b'\)\)\ \&\&$	+2
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*cVar5\ =\ \*\(char\ \*\)\(\(int\)param_2\ \+\ 99\);$	+1
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*if\ \(\(\(\(cVar5\ !=\ '\\0'\)\ \&\&\ \(local_130\[3\]\ =\ local_130\[5\],\ cVar5\ !=\ '\\x01'\)\)\ \&\&$	+3
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*if\ \(\(\(cVar5\ ==\ '\\x04'\)\ \|\|\ \(fVar6\ =\ local_130\[5\],\ cVar5\ ==\ '\\x05'\)\)\ \|\|$@4	+2
+use	_InterpreterEmulateOp	cVar5	swizzleSelect	CONFIRMED	per-component selector of the SWZ opcode: 0 = zero, 1 = one, 4..7 pick a source component	^\s*if\ \(\(\(cVar5\ !=\ '\\t'\)\ \&\&\ \(local_130\[3\]\ =\ 1\.0,\ cVar5\ !=\ '\\b'\)\)\ \&\&$	+2
+use	_InterpreterEmulateOp	iVar14	sourceCount	CONFIRMED	instruction source-operand count (inst word 0xc)	^\s*iVar14\ =\ param_2\[0xc\];$	+1
+use	_InterpreterEmulateOp	iVar14	sourceCount	CONFIRMED	instruction source-operand count (inst word 0xc)	^\s*if\ \(iVar14\ !=\ 0\)\ \{$	+1
+use	_InterpreterEmulateOp	iVar14	sourceCount	CONFIRMED	instruction source-operand count (inst word 0xc)	^\s*iVar26\ =\ iVar14;$	+1
+use	_InterpreterEmulateOp	iVar14	sourceCount	CONFIRMED	instruction source-operand count (inst word 0xc)	^\s*if\ \(iVar14\ !=\ 0\)\ \{$@2	+1
+use	_InterpreterEmulateOp	iVar14	sourceCount	CONFIRMED	instruction source-operand count (inst word 0xc)	^\s*iVar14\ =\ param_2\[0xc\];$@2	+1
+use	_InterpreterEmulateOp	iVar14	destOffsetTable	CONFIRMED	first word of the destination operand (its componentOffsets pointer), kept for the write-back	^\s*iVar14\ =\ param_2\[3\];$	+1
+use	_InterpreterEmulateOp	iVar14	destOffsetTable	CONFIRMED	first word of the destination operand (its componentOffsets pointer), kept for the write-back	^\s*iVar14\ =\ param_2\[3\];$@2	+1
+use	_InterpreterEmulateOp	iVar14	destOffsetTable	CONFIRMED	first word of the destination operand (its componentOffsets pointer), kept for the write-back	^\s*iVar14\ =\ param_2\[3\];$@3	+1
+use	_InterpreterEmulateOp	iVar14	destOffsetTable	CONFIRMED	first word of the destination operand (its componentOffsets pointer), kept for the write-back	^\s*iVar14\ =\ param_2\[3\];$@4	+1
+use	_InterpreterEmulateOp	iVar14	destOffsetTable	CONFIRMED	first word of the destination operand (its componentOffsets pointer), kept for the write-back	^\s*iVar14\ =\ param_2\[3\];$@5	+1
+use	_InterpreterEmulateOp	iVar14	destOffsetTable	CONFIRMED	first word of the destination operand (its componentOffsets pointer), kept for the write-back	^\s*iVar14\ =\ param_2\[3\];$@6	+1
+use	_InterpreterEmulateOp	iVar14	destOffsetTable	CONFIRMED	first word of the destination operand (its componentOffsets pointer), kept for the write-back	^\s*iVar14\ =\ param_2\[3\];$@7	+1
+use	_InterpreterEmulateOp	iVar14	destOffsetTable	CONFIRMED	first word of the destination operand (its componentOffsets pointer), kept for the write-back	^\s*iVar14\ =\ param_2\[3\];$@8	+1
+use	_InterpreterEmulateOp	iVar14	destOffsetTable	CONFIRMED	first word of the destination operand (its componentOffsets pointer), kept for the write-back	^\s*iVar14\ =\ param_2\[3\];$@9	+1
+use	_InterpreterEmulateOp	iVar14	destOffsetTable	CONFIRMED	first word of the destination operand (its componentOffsets pointer), kept for the write-back	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterWriteDestination\)\(param_1,iVar14,iVar21,iVar26,iVar12,iVar13,iVar15,iVar16,iVar19,iVar22,uVar32,pfVar10,$	+1
+use	_InterpreterEmulateOp	iVar14	intComponentI14	INFERRED	float component converted to a signed int (2^31 split)	^\s*iVar14\ =\ \(int\)\(local_130\[8\]\ \-\ 2\.1474836e\+09\);$	+2
+use	_InterpreterEmulateOp	iVar14	intComponentI14	INFERRED	float component converted to a signed int (2^31 split)	^\s*iVar14\ =\ \(int\)local_130\[8\];$	+2
+use	_InterpreterEmulateOp	iVar14	intComponentI14	INFERRED	float component converted to a signed int (2^31 split)	^\s*local_130\[0\]\ =\ local_130\[iVar14\ \+\ 4\];$	+1
+use	_InterpreterEmulateOp	iVar14	intComponentI14	INFERRED	float component converted to a signed int (2^31 split)	^\s*iVar14\ =\ \(int\)\(local_130\[8\]\ \-\ 2\.1474836e\+09\);$@2	+2
+use	_InterpreterEmulateOp	iVar14	intComponentI14	INFERRED	float component converted to a signed int (2^31 split)	^\s*iVar14\ =\ \(int\)local_130\[8\];$@2	+2
+use	_InterpreterEmulateOp	iVar14	intComponentI14	INFERRED	float component converted to a signed int (2^31 split)	^\s*local_130\[1\]\ =\ local_130\[iVar14\ \+\ 4\];$	+1
+use	_InterpreterEmulateOp	iVar14	intComponentI14	INFERRED	float component converted to a signed int (2^31 split)	^\s*iVar14\ =\ \(int\)\(local_130\[8\]\ \-\ 2\.1474836e\+09\);$@3	+2
+use	_InterpreterEmulateOp	iVar14	intComponentI14	INFERRED	float component converted to a signed int (2^31 split)	^\s*iVar14\ =\ \(int\)local_130\[8\];$@3	+2
+use	_InterpreterEmulateOp	iVar14	intComponentI14	INFERRED	float component converted to a signed int (2^31 split)	^\s*local_130\[2\]\ =\ local_130\[iVar14\ \+\ 4\];$	+1
+use	_InterpreterEmulateOp	iVar14	intComponentI14	INFERRED	float component converted to a signed int (2^31 split)	^\s*iVar14\ =\ \(int\)\(local_130\[8\]\ \-\ 2\.1474836e\+09\);$@4	+2
+use	_InterpreterEmulateOp	iVar14	intComponentI14	INFERRED	float component converted to a signed int (2^31 split)	^\s*iVar14\ =\ \(int\)local_130\[8\];$@4	+2
+use	_InterpreterEmulateOp	iVar14	intComponentI14	INFERRED	float component converted to a signed int (2^31 split)	^\s*local_130\[3\]\ =\ local_130\[iVar14\ \+\ 4\];$	+1
+use	_InterpreterEmulateOp	iVar14	programInfo	CONFIRMED	emulator program info (+0x38 target)	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar19\ \+\ 0xd80\);$	+1
+use	_InterpreterEmulateOp	iVar14	programInfo	CONFIRMED	emulator program info (+0x38 target)	^\s*if\ \(1\ <\ \*\(int\ \*\)\(iVar14\ \+\ 0x38\)\ \-\ 0x8b30U\)\ \{$	+1
+use	_InterpreterEmulateOp	iVar14	programInfo	CONFIRMED	emulator program info (+0x38 target)	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar19\ \+\ 0xd80\);$@2	+1
+use	_InterpreterEmulateOp	iVar14	programInfo	CONFIRMED	emulator program info (+0x38 target)	^\s*if\ \(\*\(int\ \*\)\(iVar14\ \+\ 0x38\)\ \-\ 0x8b30U\ <\ 2\)\ \{$	+1
+use	_InterpreterEmulateOp	iVar14	intComponentI14	INFERRED	float component converted to a signed int (2^31 split)	^\s*iVar14\ =\ \(int\)\(local_130\[8\]\ \-\ 2\.1474836e\+09\);$@5	+2
+use	_InterpreterEmulateOp	iVar14	intComponentI14	INFERRED	float component converted to a signed int (2^31 split)	^\s*iVar14\ =\ \(int\)local_130\[8\];$@5	+2
+use	_InterpreterEmulateOp	iVar14	intComponentI14	INFERRED	float component converted to a signed int (2^31 split)	^\s*local_130\[iVar14\]\ =\ local_130\[iVar26\ \+\ 4\];$	+1
+use	_InterpreterEmulateOp	uVar17	scalarSourceIndex	INFERRED	index (0/1) of the operand that is not a scalar replicate: selects which source supplies the vector	^\s*uVar17\ =\ \(uint\)\(cVar3\ ==\ '\\0'\);$	+2
+use	_InterpreterEmulateOp	uVar17	scalarSourceIndex	INFERRED	index (0/1) of the operand that is not a scalar replicate: selects which source supplies the vector	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterLoadSource\)\(param_1,param_2\[uVar17\ \*\ 9\ \+\ 0xd\],param_2\[uVar17\ \*\ 9\ \+\ 0xe\],$	+4
+use	_InterpreterEmulateOp	uVar17	scalarSourceIndex	INFERRED	index (0/1) of the operand that is not a scalar replicate: selects which source supplies the vector	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterLoadSource\)\(param_1,param_2\[uVar17\ \*\ 9\ \+\ 0xd\],param_2\[uVar17\ \*\ 9\ \+\ 0xe\],$@2	+5
+use	_InterpreterEmulateOp	uVar17	scalarSourceIndex	INFERRED	index (0/1) of the operand that is not a scalar replicate: selects which source supplies the vector	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterLoadSource\)\(param_1,param_2\[uVar17\ \*\ 9\ \+\ 0xd\],param_2\[uVar17\ \*\ 9\ \+\ 0xe\],$@3	+5
+use	_InterpreterEmulateOp	uVar17	scalarSourceIndex	INFERRED	index (0/1) of the operand that is not a scalar replicate: selects which source supplies the vector	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterLoadSource\)\(param_1,param_2\[uVar17\ \*\ 9\ \+\ 0xd\],param_2\[uVar17\ \*\ 9\ \+\ 0xe\],$@4	+5
+use	_InterpreterEmulateOp	uVar17	scalarSourceIndex	INFERRED	index (0/1) of the operand that is not a scalar replicate: selects which source supplies the vector	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterLoadSource\)\(param_1,param_2\[uVar17\ \*\ 9\ \+\ 0xd\],param_2\[uVar17\ \*\ 9\ \+\ 0xe\],$@5	+5
+use	_InterpreterEmulateOp	uVar17	scalarSourceIndex	INFERRED	index (0/1) of the operand that is not a scalar replicate: selects which source supplies the vector	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterLoadSource\)\(param_1,param_2\[uVar17\ \*\ 9\ \+\ 0xd\],param_2\[uVar17\ \*\ 9\ \+\ 0xe\],$@6	+5
+use	_InterpreterEmulateOp	uVar17	scalarSourceIndex	INFERRED	index (0/1) of the operand that is not a scalar replicate: selects which source supplies the vector	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterLoadSource\)\(param_1,param_2\[uVar17\ \*\ 9\ \+\ 0xd\],param_2\[uVar17\ \*\ 9\ \+\ 0xe\],$@7	+5
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*uVar17\ =\ uVar20;$	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*uVar17\ =\ 0;$@2	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],uVar17,local_130\ \+\ 4\);$	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*uVar17\ =\ uVar20;$@2	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*uVar17\ =\ 0;$@3	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],uVar17,local_130\ \+\ 8\);$	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*uVar17\ =\ uVar20;$@3	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*uVar17\ =\ 0;$@4	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],uVar17,local_130\ \+\ 4\);$@2	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*uVar17\ =\ uVar20;$@4	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*uVar17\ =\ 0;$@5	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],uVar17,local_130\ \+\ 8\);$@2	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*uVar17\ =\ uVar20;$@5	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*uVar17\ =\ 0;$@6	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],uVar17,local_130\ \+\ 4\);$@3	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*uVar17\ =\ uVar20;$@6	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*uVar17\ =\ 0;$@7	+1
+use	_InterpreterEmulateOp	uVar17	sourceElement2	INFERRED	vec4 slot (array element) of the source operand	^\s*param_2\[0x1b\],param_2\[0x1c\],param_2\[0x1d\],param_2\[0x1e\],uVar17,local_130\ \+\ 8\);$@3	+1
+local	_InterpreterEmulateOp	local_100	srcC	INFERRED	third source operand value float[4] (loaded by _InterpreterLoadSource with the third operand words)
+local	_InterpreterEmulateOp	local_f0	prodC0R0	INFERRED	4x4 matrix product result, four stack-adjacent floats per column group
+local	_InterpreterEmulateOp	local_ec	prodC0R1	INFERRED	matrix product result
+local	_InterpreterEmulateOp	local_e8	prodC0R2	INFERRED	matrix product result
+local	_InterpreterEmulateOp	local_e4	prodC0R3	INFERRED	matrix product result
+local	_InterpreterEmulateOp	local_e0	prodC1R0	INFERRED	matrix product result
+local	_InterpreterEmulateOp	local_dc	prodC1R1	INFERRED	matrix product result
+local	_InterpreterEmulateOp	local_d8	prodC1R2	INFERRED	matrix product result
+local	_InterpreterEmulateOp	local_d4	prodC1R3	INFERRED	matrix product result
+local	_InterpreterEmulateOp	local_d0	prodC2R0	INFERRED	matrix product result
+local	_InterpreterEmulateOp	local_cc	prodC2R1	INFERRED	matrix product result
+local	_InterpreterEmulateOp	local_c8	prodC2R2	INFERRED	matrix product result
+local	_InterpreterEmulateOp	local_c4	prodC2R3	INFERRED	matrix product result
+local	_InterpreterEmulateOp	local_c0	prodC3R0	INFERRED	matrix product result
+local	_InterpreterEmulateOp	local_bc	prodC3R1	INFERRED	matrix product result
+local	_InterpreterEmulateOp	local_b8	prodC3R2	INFERRED	matrix product result
+local	_InterpreterEmulateOp	local_b4	prodC3R3	INFERRED	matrix product result
+local	_InterpreterEmulateOp	piVar18	nextInst	INFERRED	inst+0x47 words (instruction stride 0x11c): returned as the next instruction, NULL after the program's last instruction
+local	_InterpreterEmulateOp	cVar3	saturate	CONFIRMED	byte at inst+4: saturate flag (the JIT adds the saturate chunk when it is set)
+local	_InterpreterEmulateOp	uVar32	destElement	INFERRED	vec4 slot written by the matrix/vector multiply write-backs (0..3)
+local	_InterpreterEmulateOp	in_r5	in_r5_artifact	UNKNOWN	Ghidra input-register artifact: leftover r5 carried into the _InterpreterLoadSource calls
+use	_InterpreterEmulateOp	iVar21	opcode	CONFIRMED	instruction opcode (index into the mnemonic table _ppstreamOpString)	^\s*iVar21\ =\ \*param_2;$	+1
+use	_InterpreterEmulateOp	iVar21	opcode	CONFIRMED	instruction opcode (index into the mnemonic table _ppstreamOpString)	^\s*if\ \(iVar21\ ==\ 0x22\)\ \{$	+1
+use	_InterpreterEmulateOp	iVar21	opcode	CONFIRMED	instruction opcode (index into the mnemonic table _ppstreamOpString)	^\s*if\ \(\(iVar21\ !=\ 0x31\)\ \&\&\ \(iVar21\ !=\ 0x36\)\)\ \{$	+1
+use	_InterpreterEmulateOp	iVar21	opcode	CONFIRMED	instruction opcode (index into the mnemonic table _ppstreamOpString)	^\s*switch\(iVar21\)\ \{$	+1
+use	_InterpreterEmulateOp	iVar21	opcode	CONFIRMED	instruction opcode (index into the mnemonic table _ppstreamOpString)	^\s*if\ \(\(iVar21\ ==\ 0x43\)\ \|\|\ \(iVar21\ ==\ 0x45\)\)\ \{$	+1
+use	_InterpreterEmulateOp	iVar21	opcode	CONFIRMED	instruction opcode (index into the mnemonic table _ppstreamOpString)	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterTextureSamplerSetLodBiasEnabled\)\(param_1\[0x28b\],\(uint\)\(iVar21\ ==\ 0x44\ \|\|\ iVar21\ \-\ 0x44U\ ==\ 1\)\);$	+1
+use	_InterpreterEmulateOp	iVar21	opcode	CONFIRMED	instruction opcode (index into the mnemonic table _ppstreamOpString)	^\s*if\ \(iVar21\ \-\ 0x44U\ <\ 2\)\ \{$	+1
+use	_InterpreterEmulateOp	iVar21	opcode	CONFIRMED	instruction opcode (index into the mnemonic table _ppstreamOpString)	^\s*if\ \(iVar21\ ==\ 0x36\)\ \{$	+1
+use	_InterpreterEmulateOp	iVar21	destBankIndex	CONFIRMED	destination operand word 1 (bank index) cached for the write-back	^\s*iVar21\ =\ param_2\[4\];$	+1
+use	_InterpreterEmulateOp	iVar21	destBankIndex	CONFIRMED	destination operand word 1 (bank index) cached for the write-back	^\s*iVar21\ =\ param_2\[4\];$@2	+1
+use	_InterpreterEmulateOp	iVar21	destBankIndex	CONFIRMED	destination operand word 1 (bank index) cached for the write-back	^\s*iVar21\ =\ param_2\[4\];$@3	+1
+use	_InterpreterEmulateOp	iVar21	destBankIndex	CONFIRMED	destination operand word 1 (bank index) cached for the write-back	^\s*iVar21\ =\ param_2\[4\];$@4	+1
+use	_InterpreterEmulateOp	iVar21	destBankIndex	CONFIRMED	destination operand word 1 (bank index) cached for the write-back	^\s*iVar21\ =\ param_2\[4\];$@5	+1
+use	_InterpreterEmulateOp	iVar21	destBankIndex	CONFIRMED	destination operand word 1 (bank index) cached for the write-back	^\s*iVar21\ =\ param_2\[4\];$@6	+1
+use	_InterpreterEmulateOp	iVar21	destBankIndex	CONFIRMED	destination operand word 1 (bank index) cached for the write-back	^\s*iVar21\ =\ param_2\[4\];$@7	+1
+use	_InterpreterEmulateOp	iVar21	destBankIndex	CONFIRMED	destination operand word 1 (bank index) cached for the write-back	^\s*iVar21\ =\ param_2\[4\];$@8	+1
+use	_InterpreterEmulateOp	iVar21	destBankIndex	CONFIRMED	destination operand word 1 (bank index) cached for the write-back	^\s*iVar21\ =\ param_2\[4\];$@9	+1
+use	_InterpreterEmulateOp	iVar21	destBankIndex	CONFIRMED	destination operand word 1 (bank index) cached for the write-back	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterWriteDestination\)\(param_1,iVar14,iVar21,iVar26,iVar12,iVar13,iVar15,iVar16,iVar19,iVar22,uVar32,pfVar10,$	+1
+use	_InterpreterEmulateOp	iVar26	sourcesRemaining	INFERRED	down-counter over the source operands	^\s*iVar26\ =\ iVar14;$	+1
+use	_InterpreterEmulateOp	iVar26	sourcesRemaining	INFERRED	down-counter over the source operands	^\s*iVar26\ =\ iVar26\ \+\ \-1;$	+2
+use	_InterpreterEmulateOp	iVar26	destSwizzle	CONFIRMED	destination operand word 2 (component selects)	^\s*iVar26\ =\ param_2\[5\];$	+1
+use	_InterpreterEmulateOp	iVar26	destSwizzle	CONFIRMED	destination operand word 2 (component selects)	^\s*iVar26\ =\ param_2\[5\];$@2	+1
+use	_InterpreterEmulateOp	iVar26	destSwizzle	CONFIRMED	destination operand word 2 (component selects)	^\s*iVar26\ =\ param_2\[5\];$@3	+1
+use	_InterpreterEmulateOp	iVar26	destSwizzle	CONFIRMED	destination operand word 2 (component selects)	^\s*iVar26\ =\ param_2\[5\];$@4	+1
+use	_InterpreterEmulateOp	iVar26	destSwizzle	CONFIRMED	destination operand word 2 (component selects)	^\s*iVar26\ =\ param_2\[5\];$@5	+1
+use	_InterpreterEmulateOp	iVar26	destSwizzle	CONFIRMED	destination operand word 2 (component selects)	^\s*iVar26\ =\ param_2\[5\];$@6	+1
+use	_InterpreterEmulateOp	iVar26	destSwizzle	CONFIRMED	destination operand word 2 (component selects)	^\s*iVar26\ =\ param_2\[5\];$@7	+1
+use	_InterpreterEmulateOp	iVar26	destSwizzle	CONFIRMED	destination operand word 2 (component selects)	^\s*iVar26\ =\ param_2\[5\];$@8	+1
+use	_InterpreterEmulateOp	iVar26	destSwizzle	CONFIRMED	destination operand word 2 (component selects)	^\s*iVar26\ =\ param_2\[5\];$@9	+1
+use	_InterpreterEmulateOp	iVar26	destSwizzle	CONFIRMED	destination operand word 2 (component selects)	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterWriteDestination\)\(param_1,iVar14,iVar21,iVar26,iVar12,iVar13,iVar15,iVar16,iVar19,iVar22,uVar32,pfVar10,$	+1
+use	_InterpreterEmulateOp	iVar26	intComponentI26	INFERRED	float converted to a signed int	^\s*iVar26\ =\ \(int\)\(local_130\[8\]\ \-\ 2\.1474836e\+09\);$	+2
+use	_InterpreterEmulateOp	iVar26	intComponentI26	INFERRED	float converted to a signed int	^\s*iVar26\ =\ \(int\)local_130\[8\];$	+2
+use	_InterpreterEmulateOp	iVar26	intComponentI26	INFERRED	float converted to a signed int	^\s*local_130\[iVar14\]\ =\ local_130\[iVar26\ \+\ 4\];$	+1
+use	_InterpreterEmulateOp	iVar19	emulator	CONFIRMED	emulator context (*machine)	^\s*iVar19\ =\ \*param_1;$	+1
+use	_InterpreterEmulateOp	iVar19	emulator	CONFIRMED	emulator context (*machine)	^\s*if\ \(param_2\ ==\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar19\ \+\ 0xd80\)\ \+\ 4\)\)\ \{$	+1
+use	_InterpreterEmulateOp	iVar19	emulator	CONFIRMED	emulator context (*machine)	^\s*if\ \(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar19\ \+\ 0xd80\)\ \+\ 0x38\)\ \-\ 0x8b30U\ <\ 2\)\ \{$	+1
+use	_InterpreterEmulateOp	iVar19	emulator	CONFIRMED	emulator context (*machine)	^\s*if\ \(1\ <\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar19\ \+\ 0xd80\)\ \+\ 0x38\)\ \-\ 0x8b30U\)\ \{$	+1
+use	_InterpreterEmulateOp	iVar19	emulator	CONFIRMED	emulator context (*machine)	^\s*if\ \(1\ <\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar19\ \+\ 0xd80\)\ \+\ 0x38\)\ \-\ 0x8b30U\)\ \{$@2	+1
+use	_InterpreterEmulateOp	iVar19	emulator	CONFIRMED	emulator context (*machine)	^\s*if\ \(1\ <\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar19\ \+\ 0xd80\)\ \+\ 0x38\)\ \-\ 0x8b30U\)\ \{$@3	+1
+use	_InterpreterEmulateOp	iVar19	emulator	CONFIRMED	emulator context (*machine)	^\s*if\ \(1\ <\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar19\ \+\ 0xd80\)\ \+\ 0x38\)\ \-\ 0x8b30U\)\ \{$@4	+1
+use	_InterpreterEmulateOp	iVar19	emulator	CONFIRMED	emulator context (*machine)	^\s*if\ \(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar19\ \+\ 0xd80\)\ \+\ 0x38\)\ \-\ 0x8b30U\ <\ 2\)\ \{$@2	+1
+use	_InterpreterEmulateOp	iVar19	emulator	CONFIRMED	emulator context (*machine)	^\s*if\ \(1\ <\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar19\ \+\ 0xd80\)\ \+\ 0x38\)\ \-\ 0x8b30U\)\ \{$@5	+1
+use	_InterpreterEmulateOp	iVar19	emulator	CONFIRMED	emulator context (*machine)	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterTextureSamplerAttachGLDContext\)\(param_1\[0x28b\],\*\(undefined4\ \*\)\(iVar19\ \+\ 0xd9c\)\);$	+1
+use	_InterpreterEmulateOp	iVar19	emulator	CONFIRMED	emulator context (*machine)	^\s*\(\(void\ \(\*\)\(\)\)_InterpreterTextureSamplerAttachDerivatives\)\(param_1\[0x28b\],\*\(undefined4\ \*\)\(iVar19\ \+\ 0xda4\),\(double\)GH_U2F\(\(unsigned\ int\)\(param_1\[0x28f\]\)\)\);$	+1
+use	_InterpreterEmulateOp	iVar19	emulator	CONFIRMED	emulator context (*machine)	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar19\ \+\ 0xd80\);$	+1
+use	_InterpreterEmulateOp	iVar19	emulator	CONFIRMED	emulator context (*machine)	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar19\ \+\ 0xd80\);$@2	+1
+use	_InterpreterEmulateOp	iVar19	emulator	CONFIRMED	emulator context (*machine)	^\s*piVar18\ =\ \(int\ \*\)\(\(\*\*\(int\ \*\*\)\(iVar19\ \+\ 0xd80\)\ \+\ param_2\[2\]\ \*\ 0x11c\)\ \-\ 0x11c\);$	+2
+use	_InterpreterEmulateOp	iVar19	destWriteMask	CONFIRMED	destination operand word 7: write-enable bits and condition test	^\s*iVar19\ =\ param_2\[10\];$	+1
+use	_InterpreterEmulateOp	iVar19	destWriteMask	CONFIRMED	destination operand word 7: write-enable bits and condition test	^\s*iVar19\ =\ param_2\[10\];$@2	+1
+use	_InterpreterEmulateOp	iVar19	destWriteMask	CONFIRMED	destination operand word 7: write-enable bits and condition test	^\s*iVar19\ =\ param_2\[10\];$@3	+1
+use	_InterpreterEmulateOp	iVar19	destWriteMask	CONFIRMED	destination operand word 7: write-enable bits and condition test	^\s*iVar19\ =\ param_2\[10\];$@4	+1
+use	_InterpreterEmulateOp	iVar19	destWriteMask	CONFIRMED	destination operand word 7: write-enable bits and condition test	^\s*iVar19\ =\ param_2\[10\];$@5	+1
+use	_InterpreterEmulateOp	iVar19	destWriteMask	CONFIRMED	destination operand word 7: write-enable bits and condition test	^\s*iVar19\ =\ param_2\[10\];$@6	+1
+use	_InterpreterEmulateOp	iVar19	destWriteMask	CONFIRMED	destination operand word 7: write-enable bits and condition test	^\s*iVar19\ =\ param_2\[10\];$@7	+1
+use	_InterpreterEmulateOp	iVar19	destWriteMask	CONFIRMED	destination operand word 7: write-enable bits and condition test	^\s*iVar19\ =\ param_2\[10\];$@8	+1
+use	_InterpreterEmulateOp	iVar19	destWriteMask	CONFIRMED	destination operand word 7: write-enable bits and condition test	^\s*iVar19\ =\ param_2\[10\];$@9	+1
+use	_InterpreterEmulateOp	iVar19	destWriteMask	CONFIRMED	destination operand word 7: write-enable bits and condition test	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterWriteDestination\)\(param_1,iVar14,iVar21,iVar26,iVar12,iVar13,iVar15,iVar16,iVar19,iVar22,uVar32,pfVar10,$	+1
+use	_InterpreterEmulateOp	iVar19	sourceOffset	INFERRED	byte offset of the first or second source operand inside the instruction	^\s*iVar19\ =\ 0x54;$	+1
+use	_InterpreterEmulateOp	iVar19	sourceOffset	INFERRED	byte offset of the first or second source operand inside the instruction	^\s*iVar19\ =\ 0x30;$	+1
+use	_InterpreterEmulateOp	iVar19	sourceOffset	INFERRED	byte offset of the first or second source operand inside the instruction	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterLoadSource\)\(param_1,\*\(undefined4\ \*\)\(\(int\)param_2\ \+\ iVar19\ \+\ 4\),$	+9
+use	_InterpreterEmulateOp	iVar12	destIndexInfo	CONFIRMED	destination operand word 3 (relative-address info)	^\s*iVar12\ =\ param_2\[6\];$	+1
+use	_InterpreterEmulateOp	iVar12	destIndexInfo	CONFIRMED	destination operand word 3 (relative-address info)	^\s*iVar12\ =\ param_2\[6\];$@2	+1
+use	_InterpreterEmulateOp	iVar12	destIndexInfo	CONFIRMED	destination operand word 3 (relative-address info)	^\s*iVar12\ =\ param_2\[6\];$@3	+1
+use	_InterpreterEmulateOp	iVar12	destIndexInfo	CONFIRMED	destination operand word 3 (relative-address info)	^\s*iVar12\ =\ param_2\[6\];$@4	+1
+use	_InterpreterEmulateOp	iVar12	destIndexInfo	CONFIRMED	destination operand word 3 (relative-address info)	^\s*iVar12\ =\ param_2\[6\];$@5	+1
+use	_InterpreterEmulateOp	iVar12	destIndexInfo	CONFIRMED	destination operand word 3 (relative-address info)	^\s*iVar12\ =\ param_2\[6\];$@6	+1
+use	_InterpreterEmulateOp	iVar12	destIndexInfo	CONFIRMED	destination operand word 3 (relative-address info)	^\s*iVar12\ =\ param_2\[6\];$@7	+1
+use	_InterpreterEmulateOp	iVar12	destIndexInfo	CONFIRMED	destination operand word 3 (relative-address info)	^\s*iVar12\ =\ param_2\[6\];$@8	+1
+use	_InterpreterEmulateOp	iVar12	destIndexInfo	CONFIRMED	destination operand word 3 (relative-address info)	^\s*iVar12\ =\ param_2\[6\];$@9	+1
+use	_InterpreterEmulateOp	iVar12	destIndexInfo	CONFIRMED	destination operand word 3 (relative-address info)	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterWriteDestination\)\(param_1,iVar14,iVar21,iVar26,iVar12,iVar13,iVar15,iVar16,iVar19,iVar22,uVar32,pfVar10,$	+1
+use	_InterpreterEmulateOp	iVar13	destStorageFlags	CONFIRMED	destination operand word 4 (storage class, negate, relative flag)	^\s*iVar13\ =\ param_2\[7\];$	+1
+use	_InterpreterEmulateOp	iVar13	destStorageFlags	CONFIRMED	destination operand word 4 (storage class, negate, relative flag)	^\s*iVar13\ =\ param_2\[7\];$@2	+1
+use	_InterpreterEmulateOp	iVar13	destStorageFlags	CONFIRMED	destination operand word 4 (storage class, negate, relative flag)	^\s*iVar13\ =\ param_2\[7\];$@3	+1
+use	_InterpreterEmulateOp	iVar13	destStorageFlags	CONFIRMED	destination operand word 4 (storage class, negate, relative flag)	^\s*iVar13\ =\ param_2\[7\];$@4	+1
+use	_InterpreterEmulateOp	iVar13	destStorageFlags	CONFIRMED	destination operand word 4 (storage class, negate, relative flag)	^\s*iVar13\ =\ param_2\[7\];$@5	+1
+use	_InterpreterEmulateOp	iVar13	destStorageFlags	CONFIRMED	destination operand word 4 (storage class, negate, relative flag)	^\s*iVar13\ =\ param_2\[7\];$@6	+1
+use	_InterpreterEmulateOp	iVar13	destStorageFlags	CONFIRMED	destination operand word 4 (storage class, negate, relative flag)	^\s*iVar13\ =\ param_2\[7\];$@7	+1
+use	_InterpreterEmulateOp	iVar13	destStorageFlags	CONFIRMED	destination operand word 4 (storage class, negate, relative flag)	^\s*iVar13\ =\ param_2\[7\];$@8	+1
+use	_InterpreterEmulateOp	iVar13	destStorageFlags	CONFIRMED	destination operand word 4 (storage class, negate, relative flag)	^\s*iVar13\ =\ param_2\[7\];$@9	+1
+use	_InterpreterEmulateOp	iVar13	destStorageFlags	CONFIRMED	destination operand word 4 (storage class, negate, relative flag)	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterWriteDestination\)\(param_1,iVar14,iVar21,iVar26,iVar12,iVar13,iVar15,iVar16,iVar19,iVar22,uVar32,pfVar10,$	+1
+use	_InterpreterEmulateOp	iVar15	destWord5	CONFIRMED	destination operand word 5	^\s*iVar15\ =\ param_2\[8\];$	+1
+use	_InterpreterEmulateOp	iVar15	destWord5	CONFIRMED	destination operand word 5	^\s*iVar15\ =\ param_2\[8\];$@2	+1
+use	_InterpreterEmulateOp	iVar15	destWord5	CONFIRMED	destination operand word 5	^\s*iVar15\ =\ param_2\[8\];$@3	+1
+use	_InterpreterEmulateOp	iVar15	destWord5	CONFIRMED	destination operand word 5	^\s*iVar15\ =\ param_2\[8\];$@4	+1
+use	_InterpreterEmulateOp	iVar15	destWord5	CONFIRMED	destination operand word 5	^\s*iVar15\ =\ param_2\[8\];$@5	+1
+use	_InterpreterEmulateOp	iVar15	destWord5	CONFIRMED	destination operand word 5	^\s*iVar15\ =\ param_2\[8\];$@6	+1
+use	_InterpreterEmulateOp	iVar15	destWord5	CONFIRMED	destination operand word 5	^\s*iVar15\ =\ param_2\[8\];$@7	+1
+use	_InterpreterEmulateOp	iVar15	destWord5	CONFIRMED	destination operand word 5	^\s*iVar15\ =\ param_2\[8\];$@8	+1
+use	_InterpreterEmulateOp	iVar15	destWord5	CONFIRMED	destination operand word 5	^\s*iVar15\ =\ param_2\[8\];$@9	+1
+use	_InterpreterEmulateOp	iVar15	destWord5	CONFIRMED	destination operand word 5	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterWriteDestination\)\(param_1,iVar14,iVar21,iVar26,iVar12,iVar13,iVar15,iVar16,iVar19,iVar22,uVar32,pfVar10,$	+1
+use	_InterpreterEmulateOp	iVar16	destValueType	CONFIRMED	destination operand word 6 (value type)	^\s*iVar16\ =\ param_2\[9\];$	+1
+use	_InterpreterEmulateOp	iVar16	destValueType	CONFIRMED	destination operand word 6 (value type)	^\s*iVar16\ =\ param_2\[9\];$@2	+1
+use	_InterpreterEmulateOp	iVar16	destValueType	CONFIRMED	destination operand word 6 (value type)	^\s*iVar16\ =\ param_2\[9\];$@3	+1
+use	_InterpreterEmulateOp	iVar16	destValueType	CONFIRMED	destination operand word 6 (value type)	^\s*iVar16\ =\ param_2\[9\];$@4	+1
+use	_InterpreterEmulateOp	iVar16	destValueType	CONFIRMED	destination operand word 6 (value type)	^\s*iVar16\ =\ param_2\[9\];$@5	+1
+use	_InterpreterEmulateOp	iVar16	destValueType	CONFIRMED	destination operand word 6 (value type)	^\s*iVar16\ =\ param_2\[9\];$@6	+1
+use	_InterpreterEmulateOp	iVar16	destValueType	CONFIRMED	destination operand word 6 (value type)	^\s*iVar16\ =\ param_2\[9\];$@7	+1
+use	_InterpreterEmulateOp	iVar16	destValueType	CONFIRMED	destination operand word 6 (value type)	^\s*iVar16\ =\ param_2\[9\];$@8	+1
+use	_InterpreterEmulateOp	iVar16	destValueType	CONFIRMED	destination operand word 6 (value type)	^\s*iVar16\ =\ param_2\[9\];$@9	+1
+use	_InterpreterEmulateOp	iVar16	destValueType	CONFIRMED	destination operand word 6 (value type)	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterWriteDestination\)\(param_1,iVar14,iVar21,iVar26,iVar12,iVar13,iVar15,iVar16,iVar19,iVar22,uVar32,pfVar10,$	+1
+use	_InterpreterEmulateOp	iVar22	destConditionSwizzleZW	CONFIRMED	destination operand word 8 (condition swizzle z,w)	^\s*iVar22\ =\ param_2\[0xb\];$	+1
+use	_InterpreterEmulateOp	iVar22	destConditionSwizzleZW	CONFIRMED	destination operand word 8 (condition swizzle z,w)	^\s*iVar22\ =\ param_2\[0xb\];$@2	+1
+use	_InterpreterEmulateOp	iVar22	destConditionSwizzleZW	CONFIRMED	destination operand word 8 (condition swizzle z,w)	^\s*iVar22\ =\ param_2\[0xb\];$@3	+1
+use	_InterpreterEmulateOp	iVar22	destConditionSwizzleZW	CONFIRMED	destination operand word 8 (condition swizzle z,w)	^\s*iVar22\ =\ param_2\[0xb\];$@4	+1
+use	_InterpreterEmulateOp	iVar22	destConditionSwizzleZW	CONFIRMED	destination operand word 8 (condition swizzle z,w)	^\s*iVar22\ =\ param_2\[0xb\];$@5	+1
+use	_InterpreterEmulateOp	iVar22	destConditionSwizzleZW	CONFIRMED	destination operand word 8 (condition swizzle z,w)	^\s*iVar22\ =\ param_2\[0xb\];$@6	+1
+use	_InterpreterEmulateOp	iVar22	destConditionSwizzleZW	CONFIRMED	destination operand word 8 (condition swizzle z,w)	^\s*iVar22\ =\ param_2\[0xb\];$@7	+1
+use	_InterpreterEmulateOp	iVar22	destConditionSwizzleZW	CONFIRMED	destination operand word 8 (condition swizzle z,w)	^\s*iVar22\ =\ param_2\[0xb\];$@8	+1
+use	_InterpreterEmulateOp	iVar22	destConditionSwizzleZW	CONFIRMED	destination operand word 8 (condition swizzle z,w)	^\s*iVar22\ =\ param_2\[0xb\];$@9	+1
+use	_InterpreterEmulateOp	iVar22	destConditionSwizzleZW	CONFIRMED	destination operand word 8 (condition swizzle z,w)	^\s*\(\(int\ \(\*\)\(\)\)_InterpreterWriteDestination\)\(param_1,iVar14,iVar21,iVar26,iVar12,iVar13,iVar15,iVar16,iVar19,iVar22,uVar32,pfVar10,$	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*uVar20\ =\ 1;$	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*if\ \(\(pbVar9\[\-1\]\ !=\ 0\)\ \&\&\ \(uVar20\ <\ \*pbVar9\)\)\ \{$	+2
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*if\ \(uVar20\ ==\ 2\)\ \{$	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*else\ if\ \(uVar20\ ==\ 3\)\ \{$	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*if\ \(uVar20\ !=\ 4\)\ \{$	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*if\ \(uVar20\ ==\ 2\)\ \{$@2	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*else\ if\ \(uVar20\ ==\ 3\)\ \{$@2	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*else\ if\ \(uVar20\ ==\ 4\)\ \{$	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*if\ \(uVar20\ ==\ 2\)\ \{$@3	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*else\ if\ \(uVar20\ ==\ 3\)\ \{$@3	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*else\ if\ \(uVar20\ ==\ 4\)\ \{$@2	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*else\ if\ \(uVar20\ ==\ 2\)\ \{$	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*else\ if\ \(uVar20\ ==\ 3\)\ \{$@4	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*if\ \(uVar20\ !=\ 4\)\ \{$@2	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*if\ \(uVar20\ ==\ 0\)\ \{$	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*if\ \(uVar20\ <=\ uVar17\)\ \{$	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*if\ \(uVar20\ <\ 2\)\ \{$	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*if\ \(uVar20\ ==\ 3\)\ \{$	+1
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*else\ if\ \(uVar20\ <\ 4\)\ \{$	+2
+use	_InterpreterEmulateOp	uVar20	elementCount	INFERRED	number of vec4 slots to process = largest vector width of the active source operands	^\s*else\ if\ \(uVar20\ ==\ 4\)\ \{$@3	+1
+use	_InterpreterEmulateOp	uVar20	destUpdatesCC	INFERRED	inst byte 6: update-condition-code flag passed to _InterpreterWriteDestination	^\s*uVar20\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ 6\);$	+1
+use	_InterpreterEmulateOp	uVar20	destUpdatesCC	INFERRED	inst byte 6: update-condition-code flag passed to _InterpreterWriteDestination	^\s*uVar20\ =\ \(uint\)bVar4;$	+1
+use	_InterpreterEmulateOp	uVar20	destUpdatesCC	INFERRED	inst byte 6: update-condition-code flag passed to _InterpreterWriteDestination	^\s*uVar20\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ 6\);$@2	+1
+use	_InterpreterEmulateOp	uVar20	destUpdatesCC	INFERRED	inst byte 6: update-condition-code flag passed to _InterpreterWriteDestination	^\s*uVar20\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ 6\);$@3	+1
+use	_InterpreterEmulateOp	uVar20	destUpdatesCC	INFERRED	inst byte 6: update-condition-code flag passed to _InterpreterWriteDestination	^\s*uVar20\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ 6\);$@4	+1
+use	_InterpreterEmulateOp	uVar20	destUpdatesCC	INFERRED	inst byte 6: update-condition-code flag passed to _InterpreterWriteDestination	^\s*uVar20\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ 6\);$@5	+1
+use	_InterpreterEmulateOp	uVar20	destUpdatesCC	INFERRED	inst byte 6: update-condition-code flag passed to _InterpreterWriteDestination	^\s*uVar20\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_2\ \+\ 6\);$@6	+1
+use	_InterpreterEmulateOp	uVar20	destUpdatesCC	INFERRED	inst byte 6: update-condition-code flag passed to _InterpreterWriteDestination	^\s*uVar20\);$	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*pfVar23\ =\ local_130\ \+\ 4;$	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],0,pfVar23\);$	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],1,pfVar23\);$	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],2,pfVar23\);$	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],1,pfVar23\);$@2	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],0,pfVar23\);$@2	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],1,pfVar23\);$@3	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],2,pfVar23\);$@2	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*pfVar23\ =\ local_130\ \+\ 4;$@2	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],0,pfVar23\);$@3	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],1,pfVar23\);$@4	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],2,pfVar23\);$@3	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],3,pfVar23\);$	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],2,pfVar23\);$@4	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],1,pfVar23\);$@5	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],0,pfVar23\);$@4	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],1,pfVar23\);$@6	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],2,pfVar23\);$@5	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],3,pfVar23\);$@2	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],2,pfVar23\);$@6	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],1,pfVar23\);$@7	+1
+use	_InterpreterEmulateOp	pfVar23	srcAPtr	INFERRED	points at operand A scratch (opVec+4)	^\s*param_2\[0x12\],param_2\[0x13\],param_2\[0x14\],param_2\[0x15\],0,pfVar23\);$@5	+1
+use	_InterpreterEmulateOp	pfVar23	srcElementPtr	INFERRED	component pointer into operand A during the dot-product style loops	^\s*pfVar23\ =\ pfVar10\ \+\ 4;$	+1
+use	_InterpreterEmulateOp	pfVar23	srcElementPtr	INFERRED	component pointer into operand A during the dot-product style loops	^\s*local_130\[0\]\ =\ \*pfVar23\ \*\ \*pfVar1\ \+\ local_130\[0\];$	+1
+use	_InterpreterEmulateOp	pfVar23	srcElementPtr	INFERRED	component pointer into operand A during the dot-product style loops	^\s*pfVar23\ =\ pfVar10\ \+\ 4;$@2	+1
+use	_InterpreterEmulateOp	pfVar23	srcElementPtr	INFERRED	component pointer into operand A during the dot-product style loops	^\s*dVar27\ =\ \(double\)\(float\)\(\(double\)\(\*pfVar23\ \-\ \*pfVar1\)\ \*\ \(double\)\(\*pfVar23\ \-\ \*pfVar1\)\ \+$	+1
+use	_InterpreterEmulateOp	pfVar23	srcElementPtr	INFERRED	component pointer into operand A during the dot-product style loops	^\s*pfVar23\ =\ pfVar10\ \+\ 4;$@3	+1
+use	_InterpreterEmulateOp	pfVar23	srcElementPtr	INFERRED	component pointer into operand A during the dot-product style loops	^\s*fVar6\ =\ \*pfVar23\ \*\ \*pfVar1\ \+\ fVar6;$	+1
+use	_InterpreterEmulateOp	pfVar23	srcElementPtr	INFERRED	component pointer into operand A during the dot-product style loops	^\s*pfVar23\ =\ pfVar10\ \+\ 0xc;$	+1
+use	_InterpreterEmulateOp	pfVar23	srcElementPtr	INFERRED	component pointer into operand A during the dot-product style loops	^\s*fVar6\ =\ \*pfVar23\ \*\ \*pfVar1\ \+\ fVar6;$@2	+1
+use	_InterpreterEmulateOp	pfVar23	srcElementPtr	INFERRED	component pointer into operand A during the dot-product style loops	^\s*pfVar23\ =\ pfVar10\ \+\ 4;$@4	+1
+use	_InterpreterEmulateOp	pfVar23	srcElementPtr	INFERRED	component pointer into operand A during the dot-product style loops	^\s*fVar6\ =\ \*pfVar23\ \*\ \*pfVar1\ \+\ fVar6;$@3	+1
+use	_InterpreterEmulateOp	uVar8	boolBit8	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar8\ =\ 0;$	+1
+use	_InterpreterEmulateOp	uVar8	boolBit8	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar8\ =\ 1;$	+1
+use	_InterpreterEmulateOp	uVar8	boolBit8	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*local_130\[1\]\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar8\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0\)$	+1
+use	_InterpreterEmulateOp	uVar8	boolBit8	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar8\ =\ 0;$@2	+1
+use	_InterpreterEmulateOp	uVar8	boolBit8	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar8\ =\ 0;$@3	+1
+use	_InterpreterEmulateOp	uVar8	boolBit8	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar8\ =\ 1;$@3	+1
+use	_InterpreterEmulateOp	uVar8	boolBit8	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar8\ =\ 0;$@6	+1
+use	_InterpreterEmulateOp	uVar8	boolBit8	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uStack_ac\ =\ uVar8\ \^\ 0x80000000;$	+1
+use	_InterpreterEmulateOp	uVar8	boolBit8	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*local_130\[3\]\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar8\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0\)$	+1
+use	_InterpreterEmulateOp	uVar8	boolBit8	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar8\ =\ 0;$@4	+1
+use	_InterpreterEmulateOp	uVar8	boolBit8	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar8\ =\ 1;$@2	+1
+use	_InterpreterEmulateOp	uVar8	boolBit8	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*local_130\[1\]\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar8\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0\)$@2	+1
+use	_InterpreterEmulateOp	uVar8	boolBit8	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar8\ =\ 0;$@5	+1
+use	_InterpreterEmulateOp	uVar8	boolBit8	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*uVar8\ =\ 1;$@4	+1
+use	_InterpreterEmulateOp	uVar8	boolBit8	INFERRED	0/1 truth value converted to float with the 2^52 bias trick	^\s*local_130\[1\]\ =\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar8\ \^\ 0x80000000\)\ \-\ 4503601774854144\.0\)$@3	+1
+use	_InterpreterEmulateOp	uVar8	textureTarget	INFERRED	inst word 0x44: texture target selector (1D/2D/3D/CUBE/RECT) for the TEX opcodes	^\s*uVar8\ =\ param_2\[0x44\];$	+2
+use	_InterpreterEmulateOp	uVar8	textureTarget	INFERRED	inst word 0x44: texture target selector (1D/2D/3D/CUBE/RECT) for the TEX opcodes	^\s*else\ if\ \(uVar8\ <\ 3\)\ \{$	+2
+use	_InterpreterEmulateOp	uVar8	textureTarget	INFERRED	inst word 0x44: texture target selector (1D/2D/3D/CUBE/RECT) for the TEX opcodes	^\s*else\ if\ \(uVar8\ ==\ 3\)\ \{$	+1
+use	_InterpreterEmulateOp	uVar8	textureTarget	INFERRED	inst word 0x44: texture target selector (1D/2D/3D/CUBE/RECT) for the TEX opcodes	^\s*else\ if\ \(uVar8\ ==\ 4\)\ \{$	+1
+
+
+
+
+
+use	_InterpreterNoiseGeneratorCalculate1D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uStack_4c\ =\ 0;$	+1
+use	_InterpreterNoiseGeneratorCalculate1D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uVar3\ =\ uStack_4c\ \+\ 1;$	+1
+use	_InterpreterNoiseGeneratorCalculate1D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*dVar4\ =\ _exp2\(\(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uStack_4c\)\ \-\ dVar2\)\);$	+1
+use	_InterpreterNoiseGeneratorCalculate1D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uStack_4c\ =\ uVar3;$@2	+1
+use	_InterpreterNoiseGeneratorCalculate2D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uStack_4c\ =\ 0;$	+1
+use	_InterpreterNoiseGeneratorCalculate2D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uVar3\ =\ uStack_4c\ \+\ 1;$	+1
+use	_InterpreterNoiseGeneratorCalculate2D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*dVar4\ =\ _exp2\(\(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uStack_4c\)\ \-\ dVar2\)\);$	+1
+use	_InterpreterNoiseGeneratorCalculate2D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uStack_4c\ =\ uVar3;$@2	+1
+use	_InterpreterNoiseGeneratorCalculate3D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uStack_4c\ =\ 0;$	+1
+use	_InterpreterNoiseGeneratorCalculate3D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uVar4\ =\ uStack_4c\ \+\ 1;$	+1
+use	_InterpreterNoiseGeneratorCalculate3D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*dVar5\ =\ _exp2\(\(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uStack_4c\)\ \-\ dVar3\)\);$	+1
+use	_InterpreterNoiseGeneratorCalculate3D	uStack_4c	loopIndex	INFERRED	up-counting loop index	^\s*uStack_4c\ =\ uVar4;$@2	+1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	param_1	sampler	CONFIRMED	texture sampler state: [1] current texture object, [2] current level record, [8] projective coordinates enabled, [10] level-of-detail computed
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	param_2	textureUnit	CONFIRMED	clamped to 7: index into the 8-entry texture object table at *sampler
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	param_3	level	CONFIRMED	mip level: level records are 0xd0 bytes (0x34 words) apart starting at texture object +0x120
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	param_4	texCoord	CONFIRMED	texture coordinate (s,t,r,q); divided by q when projection is enabled
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	param_5	texelOut	CONFIRMED	receives the filtered RGBA texel as float[4]
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	piVar6	textureObject	CONFIRMED	texture object bound to the unit: *(sampler->table + unit*4)
+local	_InterpreterTextureSamplerSampleTexel1DFromLevel	pfVar7	levelInfo	CONFIRMED	record of the selected mip level (texture object + level*0xd0 + 0x120)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	param_1	sampler	CONFIRMED	texture sampler state: [1] current texture object, [2] current level record, [8] projective coordinates enabled, [10] level-of-detail computed
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	param_2	textureUnit	CONFIRMED	clamped to 7: index into the 8-entry texture object table at *sampler
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	param_3	level	CONFIRMED	mip level: level records are 0xd0 bytes (0x34 words) apart starting at texture object +0x120
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	param_4	texCoord	CONFIRMED	texture coordinate (s,t,r,q); divided by q when projection is enabled
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	param_5	texelOut	CONFIRMED	receives the filtered RGBA texel as float[4]
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	piVar7	textureObject	CONFIRMED	texture object bound to the unit: *(sampler->table + unit*4)
+local	_InterpreterTextureSamplerSampleTexel2DFromLevel	pfVar9	levelInfo	CONFIRMED	record of the selected mip level (texture object + level*0xd0 + 0x120)
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	param_1	sampler	CONFIRMED	texture sampler state: [1] current texture object, [2] current level record, [8] projective coordinates enabled, [10] level-of-detail computed
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	param_2	textureUnit	CONFIRMED	clamped to 7: index into the 8-entry texture object table at *sampler
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	param_3	level	CONFIRMED	mip level: level records are 0xd0 bytes (0x34 words) apart starting at texture object +0x120
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	param_4	texCoord	CONFIRMED	texture coordinate (s,t,r,q); divided by q when projection is enabled
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	param_5	texelOut	CONFIRMED	receives the filtered RGBA texel as float[4]
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	piVar12	textureObject	CONFIRMED	texture object bound to the unit: *(sampler->table + unit*4)
+local	_InterpreterTextureSamplerSampleTexel3DFromLevel	pfVar13	levelInfo	CONFIRMED	record of the selected mip level (texture object + level*0xd0 + 0x120)
+local	_InterpreterTextureSamplerSampleTexelRECTFromLevel	param_1	sampler	CONFIRMED	texture sampler state: [1] current texture object, [2] current level record, [8] projective coordinates enabled, [10] level-of-detail computed
+local	_InterpreterTextureSamplerSampleTexelRECTFromLevel	param_2	textureUnit	CONFIRMED	clamped to 7: index into the 8-entry texture object table at *sampler
+local	_InterpreterTextureSamplerSampleTexelRECTFromLevel	param_3	level	CONFIRMED	mip level: level records are 0xd0 bytes (0x34 words) apart starting at texture object +0x120
+local	_InterpreterTextureSamplerSampleTexelRECTFromLevel	param_4	texCoord	CONFIRMED	texture coordinate (s,t,r,q); divided by q when projection is enabled
+local	_InterpreterTextureSamplerSampleTexelRECTFromLevel	param_5	texelOut	CONFIRMED	receives the filtered RGBA texel as float[4]
+local	_InterpreterTextureSamplerSampleTexelRECTFromLevel	piVar7	textureObject	CONFIRMED	texture object bound to the unit: *(sampler->table + unit*4)
+local	_InterpreterRasterOpMachine_Blending	param_1	machine	CONFIRMED	raster-op machine (embedded in the interpreter machine at +0xa24); *machine is the emulator context
+local	_InterpreterRasterOpMachine_Blending	param_2	srcColor	CONFIRMED	fragment colour float[4], clamped to [0,1] in place when the framebuffer is not floating point
+local	_InterpreterRasterOpMachine_Blending	param_3	dstColor	CONFIRMED	framebuffer colour float[4] read back
+local	_InterpreterRasterOpMachine_Blending	param_4	result	CONFIRMED	receives the blended colour float[4]
+local	_InterpreterRasterOpMachine_Blending	iVar5	emulator	CONFIRMED	*machine
+local	_InterpreterRasterOpMachine_Blending	uVar7	blendState	CONFIRMED	program info +0x58: bits 3..0 source RGB factor, 7..4 source alpha factor, 11..8 destination RGB factor, 15..12 destination alpha factor, 18..16 RGB equation, 21..19 alpha equation
+local	_InterpreterRasterOpMachine_Blending	iVar8	blendConstant	INFERRED	GL state +0x2d70: constant blend colour used by the CONSTANT_COLOR/ALPHA factors
+local	_InterpreterRasterOpMachine_Blending	local_60	srcFactorR	INFERRED	source RGB factor vec4 from _InterpreterRasterOpMachineCalculateBlendingFactors (local_60..local_54)
+local	_InterpreterRasterOpMachine_Blending	local_5c	srcFactorG	INFERRED	
+local	_InterpreterRasterOpMachine_Blending	local_58	srcFactorB	INFERRED	
+local	_InterpreterRasterOpMachine_Blending	local_54	srcFactorA	INFERRED	alpha lane of the source factor (replaced by the separate alpha factor)
+local	_InterpreterRasterOpMachine_Blending	local_50	dstFactorR	INFERRED	destination factor vec4 (local_50..local_44)
+local	_InterpreterRasterOpMachine_Blending	local_4c	dstFactorG	INFERRED	
+local	_InterpreterRasterOpMachine_Blending	local_48	dstFactorB	INFERRED	
+local	_InterpreterRasterOpMachine_Blending	local_44	dstFactorA	INFERRED	alpha lane of the destination factor
+local	_InterpreterRasterOpMachine_Blending	local_34	factorAlphaScratch	INFERRED	alpha lane of the scratch factor vec4 (auStack_40)
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ param_2\[2\];$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar1\ =\ fVar2;$	+3
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*param_2\[2\]\ =\ fVar2;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ param_2\[1\];$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar1\ =\ fVar2;$@2	+3
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*param_2\[1\]\ =\ fVar2;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ param_2\[2\]\ \*\ local_58\ \+\ param_3\[2\]\ \*\ local_48;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ param_3\[2\];$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ param_2\[2\];$@2	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ fVar3\ \*\ local_48\ \-\ fVar2\ \*\ fVar4;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*param_4\[2\]\ =\ fVar2;$@2	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ \*param_3;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ \*param_2;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*\*param_4\ =\ fVar2;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ param_3\[1\];$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ param_2\[1\];$@2	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*param_4\[1\]\ =\ fVar2;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ \*param_3;$@2	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ \*param_2;$@2	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*\*param_4\ =\ fVar2;$@2	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ param_3\[1\];$@2	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ param_2\[1\];$@3	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*param_4\[1\]\ =\ fVar2;$@2	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ param_2\[3\];$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ param_3\[3\];$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar2	srcComponent	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar3\ =\ fVar2\ \*\ local_44\ \-\ fVar3;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar3\ =\ \*param_2;$	+4
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*\*param_2\ =\ fVar3;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar3\ =\ param_2\[3\];$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar1\ =\ fVar3;$	+3
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*param_2\[3\]\ =\ fVar3;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar3\ =\ param_2\[2\];$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar1\ =\ fVar3;$@2	+3
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*param_2\[2\]\ =\ fVar3;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar3\ =\ param_2\[2\];$@2	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar3\ =\ param_3\[2\];$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ fVar3\ \*\ local_48\ \-\ fVar2\ \*\ fVar4;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar3\ =\ param_2\[2\];$@3	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*if\ \(fVar3\ <\ fVar2\)\ \{$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ fVar3;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar3\ =\ param_2\[2\];$@4	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*if\ \(param_3\[2\]\ <\ fVar3\)\ goto\ LAB_97bd72bc;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar3\ =\ param_2\[3\];$@2	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*if\ \(fVar3\ <\ fVar2\)\ \{$@2	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar2\ =\ fVar3;$@2	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar3\ =\ param_2\[3\];$@3	+1
+use	_InterpreterRasterOpMachine_Blending	fVar3	srcComponent2	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*if\ \(param_3\[3\]\ <\ fVar3\)\ goto\ LAB_97bd7378;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar4	srcComponent3	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar4\ =\ param_2\[1\];$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar4	srcComponent3	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar1\ =\ fVar4;$	+3
+use	_InterpreterRasterOpMachine_Blending	fVar4	srcComponent3	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*param_2\[1\]\ =\ fVar4;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar4	srcComponent3	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar4\ =\ \*param_2;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar4	srcComponent3	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar1\ =\ fVar4;$@2	+3
+use	_InterpreterRasterOpMachine_Blending	fVar4	srcComponent3	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*\*param_2\ =\ fVar4;$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar4	srcComponent3	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar4\ =\ param_2\[3\];$	+1
+use	_InterpreterRasterOpMachine_Blending	fVar4	srcComponent3	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*fVar3\ =\ fVar4;$	+3
+use	_InterpreterRasterOpMachine_Blending	fVar4	srcComponent3	INFERRED	fragment colour component being clamped to [0,1] (compare against 1.0 then 0.0)	^\s*param_2\[3\]\ =\ fVar4;$	+1
+

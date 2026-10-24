@@ -1,0 +1,12 @@
+local	TPPStreamCompiler__getSymbolTableString	param_2	style	INFERRED	dump style 0/1/2: selects the header format
+local	TPPStreamCompiler__getSymbolTableString	pcVar4	headerFormat	INFERRED	sprintf format selected by style
+local	TPPStreamCompiler__dumpSymbolTableInfo	param_2	style	INFERRED	dump style 0/1/2: selects the header format
+local	TPPStreamCompiler__dumpSymbolTableInfo	pcVar1	headerFormat	INFERRED	format selected by style
+local	TPPStreamCompiler__getStatsString	uVar1	placeholderText	INFERRED	default text (DAT_a7b7bd84) used until statistics exist
+local	TPPStreamCompiler__getStatsString	iVar2	statsString	INFERRED	this->statsString (+0x78), created on first use
+local	TPPStreamCompiler__getPPStreamString	uVar1	placeholderText	INFERRED	default text (DAT_a7b7bd88) used when there is no stream
+local	TPPStreamCompiler__getPPStreamString	pvVar2	ppStreamString	INFERRED	this->ppStreamString (+0x7c)
+local	_InterpreterAttachEmulatorContext	param_1	machine	CONFIRMED	interpreter machine; *machine = emulator
+local	_InterpreterAttachEmulatorContext	param_2	emulator	CONFIRMED	emulator context
+local	_PPCRuntimeCompilerAttachEmulatorContext	param_1	compiler	CONFIRMED	PPCRuntimeCompiler*; +0xe20 = emulator
+local	_PPCRuntimeCompilerAttachEmulatorContext	param_2	emulator	CONFIRMED	emulator context

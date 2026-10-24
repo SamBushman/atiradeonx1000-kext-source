@@ -1,0 +1,117 @@
+local	_InterpreterLoadSource	param_1	machine	CONFIRMED	first argument is the interpreter machine; *machine is the emulator context (0xd80 program info, 0xd84 storage base table)
+local	_InterpreterLoadSource	param_2	componentOffsets	INFERRED	table of 4 int byte-offsets per vec4 slot, indexed [element*4 + swizzle component]; *param_2 != 0 selects the perspective-scaled path
+local	_InterpreterLoadSource	param_3	bankIndex	INFERRED	selects the 0xc-byte bank record (+0x80 base, +0x84 count, +0x88 index mask) at program+0xd80 used for relative addressing
+local	_InterpreterLoadSource	param_4	swizzle	CONFIRMED	four component-select bytes: x=bits31..24, y=23..16, z=15..8, w=7..0 (bStack24/25/26 and low byte read in that order)
+local	_InterpreterLoadSource	param_5	indexInfo	INFERRED	high16 = signed relative-address offset added to the address register (machine+0xa40)
+local	_InterpreterLoadSource	param_6	storageFlags	INFERRED	high16 = storage class (index into the base-pointer table at emulator+0xd84), byte1 = negate, low byte = relative addressing flag
+local	_InterpreterLoadSource	param_7	operandWord5	UNKNOWN	unused by this function (operand descriptor word 5)
+local	_InterpreterLoadSource	param_8	valueType	INFERRED	0/1 = float, 3/4 = signed int converted through the 2^52 bias trick
+local	_InterpreterLoadSource	param_9	operandWord7	UNKNOWN	unused here (the write-mask word in a destination operand)
+local	_InterpreterLoadSource	param_10	operandWord8	UNKNOWN	unused here
+local	_InterpreterLoadSource	param_11	element	INFERRED	vec4 slot offset within an array operand (times 4 ints into componentOffsets, times 0x10 bytes for relative addressing)
+local	_InterpreterLoadSource	param_12	result	CONFIRMED	float[4] output written with the loaded (swizzled, negated) components
+local	_InterpreterLoadSource	fVar1	x	INFERRED	first loaded component, also reused as the w result on the integer path
+local	_InterpreterLoadSource	fVar2	y	INFERRED	second loaded component
+local	_InterpreterLoadSource	fVar3	z	INFERRED	third loaded component
+local	_InterpreterLoadSource	fVar4	w	INFERRED	fourth loaded component
+local	_InterpreterLoadSource	dVar5	intToFloatBias	CONFIRMED	DOUBLE_97c30a58 is the 0x4330000080000000 magic subtracted to convert signed ints to double
+local	_InterpreterLoadSource	iVar9	emulator	CONFIRMED	*machine
+local	_InterpreterLoadSource	piVar7	componentSlot	INFERRED	pointer to the 4-int offset table row of the operand (direct or relative-addressed)
+local	_InterpreterLoadSource	bStack00000024	swizzleX	CONFIRMED	param_4 >> 24
+local	_InterpreterLoadSource	bStack00000025	swizzleY	CONFIRMED	param_4 >> 16
+local	_InterpreterLoadSource	bStack00000026	swizzleZ	CONFIRMED	param_4 >> 8
+local	_InterpreterLoadSource	sStack00000028	relativeOffset	INFERRED	param_5 >> 16 added to the address register
+local	_InterpreterLoadSource	uStack0000002c	storageClass	INFERRED	param_6 >> 16
+local	_InterpreterLoadSource	cStack0000002e	negate	CONFIRMED	param_6 >> 8 byte: operands are negated when nonzero
+local	_InterpreterLoadSource	cStack0000002f	relativeAddressing	INFERRED	low byte of param_6, selects the address-register indexed slot
+local	_InterpreterWriteDestination	param_1	machine	CONFIRMED	interpreter machine
+local	_InterpreterWriteDestination	param_2	componentOffsets	INFERRED	destination offset table, same layout as a source operand
+local	_InterpreterWriteDestination	param_3	bankIndex	INFERRED	bank record index used for relative addressing
+local	_InterpreterWriteDestination	param_4	swizzle	CONFIRMED	component selects applied to the value before the write (param_12[param_4>>24] ...)
+local	_InterpreterWriteDestination	param_5	indexInfo	INFERRED	high16 = relative-address offset
+local	_InterpreterWriteDestination	param_6	storageFlags	INFERRED	high16 = storage class (1 = fragment output slot, 9 = fixed machine scalars, else base-pointer table), low byte = relative flag
+local	_InterpreterWriteDestination	param_7	operandWord5	UNKNOWN	not used directly
+local	_InterpreterWriteDestination	param_8	operandWord6	UNKNOWN	not used directly
+local	_InterpreterWriteDestination	param_9	writeMaskFlags	CONFIRMED	bits 0x1000000/0x2000000/0x4000000/0x8000000 = write enable for x/y/z/w, tested one component at a time
+local	_InterpreterWriteDestination	param_10	conditionSwizzleZW	INFERRED	forwarded to _InterpreterTestCR as the word holding the condition swizzle for components z,w
+local	_InterpreterWriteDestination	param_11	element	INFERRED	vec4 slot offset
+local	_InterpreterWriteDestination	param_12	value	CONFIRMED	float[4] to store; swizzled in place first
+local	_InterpreterWriteDestination	param_13	updateConditionCode	CONFIRMED	when nonzero each written component also updates machine condition code byte (0xa44..0xa47)
+local	_InterpreterWriteDestination	iVar1	emulator	CONFIRMED	*machine
+local	_InterpreterWriteDestination	iVar2	programInfo	CONFIRMED	emulator program info (+0x38 target 0x8804/0x8b30 = fragment)
+local	_InterpreterWriteDestination	pfVar5	componentTarget	INFERRED	running destination pointer for component w, initially the scratch swizzle buffer
+local	_InterpreterWriteDestination	pfVar4	targetX	INFERRED	destination address of component x (scratch when masked out)
+local	_InterpreterWriteDestination	pfVar7	targetY	INFERRED	destination address of component y
+local	_InterpreterWriteDestination	pfVar3	targetZ	INFERRED	destination address of component z
+local	_InterpreterWriteDestination	piVar6	storageBase	INFERRED	base pointer of the storage class the destination lives in
+local	_InterpreterWriteDestination	piVar8	componentSlot	INFERRED	4-int offset-table row of the destination slot
+local	_InterpreterWriteDestination	uVar9	conditionCode	CONFIRMED	3 = NaN, 2 = negative, 1 = positive, 0 = zero; written to the condition register byte
+local	_InterpreterWriteDestination	local_50	scratch	INFERRED	scratch float[4] standing in for masked-off components
+local	_InterpreterWriteDestination	local_40	swizzledX	CONFIRMED	value[swizzle x]
+local	_InterpreterWriteDestination	local_3c	swizzledY	CONFIRMED	value[swizzle y]
+local	_InterpreterWriteDestination	local_38	swizzledZ	CONFIRMED	value[swizzle z]
+local	_InterpreterWriteDestination	local_34	swizzledW	CONFIRMED	value[swizzle w]
+local	_InterpreterTestCR	param_1	machine	CONFIRMED	interpreter machine (condition code bytes at machine+0xa44..0xa47)
+local	_InterpreterTestCR	param_2	operandWord0	UNKNOWN	forwarded descriptor words, only param_9 is used
+local	_InterpreterTestCR	param_3	operandWord1	UNKNOWN	unused
+local	_InterpreterTestCR	param_4	operandWord2	UNKNOWN	unused
+local	_InterpreterTestCR	param_5	operandWord3	UNKNOWN	unused
+local	_InterpreterTestCR	param_6	operandWord4	UNKNOWN	unused
+local	_InterpreterTestCR	param_7	operandWord5	UNKNOWN	unused
+local	_InterpreterTestCR	param_8	operandWord6	UNKNOWN	unused
+local	_InterpreterTestCR	param_9	conditionWord	CONFIRMED	byte2 = comparison code (0 TR,1 EQ,2 GE,3 GT,4 LE,5 LT,6 NE,7 FL, read off the switch), bytes 3..4 = condition-register swizzle for components x,y; components z,w come from the next stack word
+local	_InterpreterTestCR	param_10	conditionSwizzleZW	INFERRED	the condition-register swizzle bytes are read at (&param_9 + component + 2): components z,w fall into the high half of this adjacent stack word
+local	_InterpreterTestCR	param_11	component	CONFIRMED	which of the four components is tested
+local	_InterpreterTestCR	uVar1	passes	CONFIRMED	result: nonzero when the condition holds
+local	_InterpreterTestCR	uVar2	conditionCode	CONFIRMED	condition-register value of the swizzled component
+local	_InterpreterWriteFinalFragmentToBuffer	param_1	machine	CONFIRMED	interpreter machine
+local	_InterpreterWriteFinalFragmentToBuffer	param_2	operandWord1	UNKNOWN	passed through unused
+local	_InterpreterWriteFinalFragmentToBuffer	param_3	operandWord2	UNKNOWN	passed through unused
+local	_InterpreterWriteFinalFragmentToBuffer	param_4	operandWord3	UNKNOWN	passed through unused
+local	_InterpreterWriteFinalFragmentToBuffer	param_5	operandWord4	UNKNOWN	passed through unused
+local	_InterpreterWriteFinalFragmentToBuffer	param_6	operandWord5	UNKNOWN	passed through unused
+local	_InterpreterWriteFinalFragmentToBuffer	param_7	viewportScaleBias	UNKNOWN	passed through unused
+local	_InterpreterWriteFinalFragmentToBuffer	iVar1	programInfo	CONFIRMED	emulator program info (+0x3c = raster-op stage flags)
+local	_InterpreterWriteFinalFragmentToBuffer	iVar2	emulator	CONFIRMED	*machine
+local	_InterpreterWriteFinalFragmentToBuffer	piVar3	fragmentColor	CONFIRMED	machine+0xa48 final fragment colour (4 words)
+local	_InterpreterWriteFinalFragmentToBuffer	auStack_40	destinationColor	INFERRED	framebuffer pixel read back and unpacked for blending/logic-op/mask
+local	_InterpreterWriteFinalFragmentToBuffer	local_30	resultR	INFERRED	blend/logic-op/mask output component 0
+local	_InterpreterWriteFinalFragmentToBuffer	local_2c	resultG	INFERRED	component 1
+local	_InterpreterWriteFinalFragmentToBuffer	local_28	resultB	INFERRED	component 2
+local	_InterpreterWriteFinalFragmentToBuffer	local_24	resultA	INFERRED	component 3
+local	_InterpreterPackPixel	param_1	machine	CONFIRMED	interpreter machine
+local	_InterpreterPackPixel	param_2	color	CONFIRMED	float[4] colour, clamped in place
+local	_InterpreterPackPixel	param_3	pixelOut	CONFIRMED	receives the packed pixel word (as a float bit pattern) or four floats
+local	_InterpreterPackPixel	iVar9	emulator	CONFIRMED	*machine
+local	_InterpreterUnpackPixel	param_1	machine	CONFIRMED	interpreter machine
+local	_InterpreterUnpackPixel	param_2	color	CONFIRMED	float[4] output colour
+local	_InterpreterUnpackPixel	param_3	pixelIn	CONFIRMED	packed pixel read from the framebuffer
+local	_InterpreterUnpackPixel	iVar7	emulator	CONFIRMED	*machine
+local	_InterpreterUnpackPixel	fVar3	red	INFERRED	unpacked first channel
+local	_InterpreterUnpackPixel	fVar5	green	INFERRED	unpacked second channel
+local	_InterpreterUnpackPixel	fVar6	blue	INFERRED	unpacked third channel
+local	_InterpreterUnpackPixel	fVar2	alpha	INFERRED	unpacked fourth channel
+local	_InterpreterUnpackPixel	fVar1	channelScale	INFERRED	1/255 (8888) or 1/31 (5551) normalisation factor
+local	_InterpreterRun	param_1	emulator	CONFIRMED	emulator context (0xd80 program info, 0xd88 vertex/fragment output pointer, 0xd9c GL state, 0xdf0 interpreter machine)
+local	_InterpreterRun	param_2	elementCount	CONFIRMED	number of vertices/fragments to run; counted down at the loop head
+local	_InterpreterRun	iVar23	machine	CONFIRMED	emulator+0xdf0, the interpreter machine
+local	_InterpreterRun	dVar13	one	CONFIRMED	DOUBLE_97c30a60 = 1.0
+local	_InterpreterRun	dVar28	invWBias	INFERRED	fragment case: attribute slope word at emulator+0xda0+0xc
+local	_InterpreterRun	dVar26	xBias	INFERRED	fragment case: emulator+0xda0 +8
+local	_InterpreterRun	dVar27	invWScale	INFERRED	fragment case: emulator+0xda4 +0xc
+local	_InterpreterRun	dVar25	xScale	INFERRED	fragment case: emulator+0xda4 +8
+local	_InterpreterRun	fVar14	zero	CONFIRMED	TAllocation__guardBlockSize (0.0 constant)
+local	_InterpreterRun	fVar8	viewportXScale	CONFIRMED	GL state +0x1b70
+local	_InterpreterRun	fVar11	viewportYScale	CONFIRMED	GL state +0x1b74
+local	_InterpreterRun	fVar7	viewportZScale	CONFIRMED	GL state +0x1b78
+local	_InterpreterRun	fVar9	viewportXBias	CONFIRMED	GL state +0x1b80
+local	_InterpreterRun	fVar10	viewportYBias	CONFIRMED	GL state +0x1b84
+local	_InterpreterRun	fVar6	viewportZBias	CONFIRMED	GL state +0x1b88
+local	_InterpreterRun	uVar21	clipOrMask	INFERRED	OR of the clip codes of all vertices run
+local	_InterpreterRun	uVar22	clipAndMask	INFERRED	AND of the clip codes (all-outside test)
+local	_InterpreterRun	pfVar16	vertexOutput	INFERRED	current output vertex record (emulator+0xd88): [4..7] clip position, [0x1f] clip code
+local	_InterpreterRun	fVar3	clipX	INFERRED	clip-space x of the vertex
+local	_InterpreterRun	fVar4	clipY	INFERRED	clip-space y
+local	_InterpreterRun	fVar5	clipZ	INFERRED	clip-space z
+local	_InterpreterRun	fVar12	negW	INFERRED	-clip w (lower bound of the clip volume), later the perspective divide factor
+local	_InterpreterRun	bVar1	wSafeToDivide	INFERRED	w is large enough in magnitude that 1/w is used

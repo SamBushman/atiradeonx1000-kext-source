@@ -1,0 +1,28 @@
+local	_AddAtomFixed	param_1	atable	CONFIRMED	AtomTable* (3Dlabs atom.c): +0xc hash table, +0x28 amap, +0x2c rmap, +0x30 nextFree, +0x34 size
+local	_AddAtomFixed	param_2	atomName	INFERRED	string handed to _LookUpAddStringHash
+local	_AddAtomFixed	param_3	atom	CONFIRMED	fixed atom number stored in amap and the hash entry
+use	_AddAtomFixed	iVar3	tableSize	INFERRED	atable->size (+0x34), possibly doubled/raised before _GrowAtomTable	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x34\);	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x30\);	all	none
+use	_AddAtomFixed	iVar3	nextFreeAtom	INFERRED	atable->nextFree (+0x30) walked up to atom	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x30\);		all	none
+local	_InitAtomTable	param_1	atable	CONFIRMED	AtomTable* being initialised
+local	_InitAtomTable	param_2	hashSize	CONFIRMED	passed to _InitHashTable, default 0x7ff when < 1
+local	_InitAtomTable	cVar2	savedChar	INFERRED	copy of the one-char buffer kept across the punctuation loop
+local	_InitAtomTable	cVar3	currentPunct	INFERRED	current character of the punctuation string
+local	_InitAtomTable	pcVar7	punctCursor	INFERRED	cursor into "~!%^&*()-+=|,.<>/?;:[]{}#"
+local	_InitAtomTable	puVar4	tokenCursor	INFERRED	walks the {atom, name} pairs of the _tokens table
+local	_InitAtomTable	puVar1	tokenNamePtr	INFERRED	tokenCursor+1: the name of the current _tokens entry
+local	_InitAtomTable	local_20_str	charStr	INFERRED	one-character NUL-terminated string used to add single-char atoms
+local	_InitAtomTable	local_20	charStr0	INFERRED	first char of charStr
+local	_InitAtomTable	local_1f	charStr1	INFERRED	terminator of charStr
+use	_InitAtomTable	iVar5	initResult	INFERRED	result of _InitStringTable	^\s*iVar5\ =\ _InitStringTable	^\s*iVar5\ =\ _InitHashTable	all	none
+use	_InitAtomTable	iVar5	initResult	INFERRED	result of _InitHashTable	^\s*iVar5\ =\ _InitHashTable	^\s*iVar5\ =\ 0;	all	none
+use	_InitAtomTable	iVar5	fillIndex	INFERRED	index filling amap[0..0x120] with the undefined atom	^\s*iVar5\ =\ 0;		all	none
+use	_InitAtomTable	uVar6	success	INFERRED	return value 0/1	^\s*uVar6\ =\ 0;@1	^\s*puVar4\ =\ &_tokens;	all	none
+use	_InitAtomTable	uVar6	tokenAtom	INFERRED	first word of the current _tokens entry: its atom number	^\s*uVar6\ =\ \*puVar4;	^\s*\}\ while\ \(puVar4\ <	all	none
+use	_InitAtomTable	uVar6	success	INFERRED	return value 0/1	^\s*\}\ while\ \(puVar4\ <		all	none
+local	_InitAtomTable	iVar8	fillRemaining	INFERRED	down-counter 0x121 of amap slots to fill
+local	_PrintAtomTable	param_1	atable	CONFIRMED	AtomTable*: strings at +0, rmap +0x28, nextFree +0x30, hash size/entries at [4],[5], collision counts from [6]
+local	_PrintAtomTable	piVar1	collisionCount	INFERRED	walks the three hash collision counters
+local	_PrintAtomTable	acStack_e0	msgBuf	INFERRED	sprintf buffer for _CPPDebugLogMsg
+local	_GetStringOfAtom	param_1	atable	CONFIRMED	AtomTable*
+local	_GetStringOfAtom	param_2	atom	CONFIRMED	atom number looked up in rmap
+local	_FreeAtomTable	param_1	atable	CONFIRMED	AtomTable* being freed

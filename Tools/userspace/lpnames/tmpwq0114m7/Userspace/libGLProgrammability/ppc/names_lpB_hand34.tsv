@@ -1,0 +1,34 @@
+local	TPPStreamCompiler__getShaderToProgramString	iVar1	programString	INFERRED	this->shaderProgramString (+0x80), created on first use
+local	TPPStreamCompiler__getTableString	iVar1	tableString	INFERRED	this->tableString (+0x84), created on first use
+local	_InterpreterInit	param_1	machine	CONFIRMED	Interpreter machine (0xa70 bytes)
+local	_InterpreterTextureSamplerAttachGLDContext	param_1	sampler	CONFIRMED	InterpreterTextureSampler*
+local	_InterpreterTextureSamplerAttachGLDContext	param_2	gldContext	CONFIRMED	GLD context stored at sampler[0]
+local	_InterpreterTextureSamplerSetProjectionEnabled	param_1	sampler	CONFIRMED	InterpreterTextureSampler*
+local	_InterpreterTextureSamplerSetProjectionEnabled	param_2	enabled	CONFIRMED	projective sampling flag stored at +0x20
+local	_InterpreterTextureSamplerSetLodBiasEnabled	param_1	sampler	CONFIRMED	InterpreterTextureSampler*
+local	_InterpreterTextureSamplerSetLodBiasEnabled	param_2	enabled	CONFIRMED	LOD-bias flag stored at +0x24
+local	_InterpreterRasterOpMachineAttachEmulatorContext	param_1	rasterOp	CONFIRMED	InterpreterRasterOpMachine*
+local	_InterpreterRasterOpMachineAttachEmulatorContext	param_2	emulator	CONFIRMED	emulator context stored at rasterOp[0]
+local	_InterpreterRasterOpMachineAttachRuntimeCompiler	param_1	rasterOp	CONFIRMED	InterpreterRasterOpMachine*
+local	_InterpreterRasterOpMachineAttachRuntimeCompiler	param_2	compiler	CONFIRMED	runtime compiler stored at rasterOp+4
+local	_PPCRuntimeCompilerAttachEmulatorProgram	param_1	compiler	CONFIRMED	PPCRuntimeCompiler*
+local	_PPCRuntimeCompilerAttachEmulatorProgram	param_2	program	CONFIRMED	program info stored at compiler+0xe24
+local	_PPCRuntimeCompilerSetRegister	iVar1	record	CONFIRMED	register record (index*0x38) being filled
+local	_InterpreterTextureSamplerAttachDerivatives	param_1	sampler	CONFIRMED	InterpreterTextureSampler*
+local	_InterpreterTextureSamplerAttachDerivatives	param_2	derivatives	INFERRED	derivative array stored at +0xc
+local	_InterpreterTextureSamplerAttachDerivatives	fparam_1	derivativeScale	INFERRED	derivative scale stored at +0x10
+local	_InterpreterFree	param_1	machine	CONFIRMED	Interpreter machine freed after shutdown
+local	_InterpreterTextureSamplerInitialise	param_1	sampler	CONFIRMED	InterpreterTextureSampler*: +0x14/+0x18 set to -1
+local	_InterpreterRasterOpMachineInitialise	param_1	rasterOp	CONFIRMED	InterpreterRasterOpMachine*: emulator and compiler cleared
+local	_PPCRuntimeCompilerLoadRegister	uVar8	zero	INFERRED	always 0, unused
+local	_PPCRuntimeCompilerLoadRegister	auStack_40	transferSwizzle	INFERRED	transfer swizzle built by _PPCRuntimeCompilerBuildTransferSwizzle
+local	_PPCRuntimeCompilerSaveAllTemporariesToMemory	uVar1	recordIndex	INFERRED	register record index (+0x20 in AltiVec mode)
+local	ConstructCompiler	param_2	optionFlags	INFERRED	second constructor argument of TPPStreamCompiler (int)
+local	FunctionTable__getReturnVal	param_2	functionIndex	CONFIRMED	function table index
+local	FunctionTable__getEmpty	param_2	functionIndex	CONFIRMED	function table index
+local	FunctionTable__getNumParams	param_2	functionIndex	CONFIRMED	function table index
+local	FunctionTable__getFirstOp	param_2	functionIndex	CONFIRMED	function table index
+local	FunctionTable__getLastOp	param_2	functionIndex	CONFIRMED	function table index
+local	_InterpreterShutdown	param_1	machine	CONFIRMED	Interpreter machine; its texture sampler (+0xa2c) is freed
+local	_PPCRuntimeCompilerInitialise	param_2	optionFlags	INFERRED	option flags (compiler+0xe50)
+local	_PPCRuntimeCompilerSetOptionFlags	param_2	optionFlags	CONFIRMED	flags stored at compiler+0xe50

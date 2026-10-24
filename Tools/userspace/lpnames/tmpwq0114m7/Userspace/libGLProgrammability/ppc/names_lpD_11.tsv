@@ -1,0 +1,38 @@
+local	_search_object	param_1	ob	CONFIRMED	struct object* (unwind-dw2-fde.c): pc_begin +0, u.single/array/sort +0xc, s.b bit-field +0x10
+local	_search_object	param_2	pc	CONFIRMED	void* pc: the address whose FDE is searched
+local	_search_object	uVar2	singleLo	CONFIRMED	binary_search_single_encoding_fdes: lo
+local	_search_object	uVar8	singleMid	CONFIRMED	binary_search_single_encoding_fdes: i = (lo + hi) / 2 (and the new hi)
+local	_search_object	iVar10	f	CONFIRMED	const fde* f: the candidate FDE vec->array[i] (or the fde list entry in the linear search)
+local	_search_object	piVar9	arrayCursor	CONFIRMED	fde** p walking ob->u.array in the linear search
+local	_search_object	local_38	singlePcBegin	CONFIRMED	pc_begin decoded from f with the object's single encoding
+local	_search_object	local_34	singlePcRange	CONFIRMED	pc_range decoded from f (array of 3 words on the stack)
+local	_search_object	local_40	mixedPcBegin	CONFIRMED	pc_begin decoded from f with the CIE's own encoding (mixed_encoding objects)
+local	_search_object	local_3c	mixedPcRange	CONFIRMED	pc_range decoded from f with the CIE's encoding
+use	_search_object	uVar1	objectBits	CONFIRMED	ob->s.b word (+0x10): count bits 0..20, encoding 21..28, mixed_encoding 29, from_array 30, sorted 31	^\s*uVar1\ =\ param_1\[4\];$	+13
+use	_search_object	uVar1	hi	CONFIRMED	binary search hi = vec->count (v->array +8, count +4)	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_1\[3\]\ \+\ 4\);$	+15
+use	_search_object	uVar1	objectBits	CONFIRMED	ob->s.b word, tested for the single-encoding case	^\s*uVar6\ =\ param_1\[3\];$	+20
+use	_search_object	uVar1	hi	CONFIRMED	binary search hi = vec->count	^\s*uVar5\ =\ param_1\[3\];$	+19
+use	_search_object	uVar1	objectBits	CONFIRMED	ob->s.b word, tested for from_array in the unsorted case	^\s*\}$@13	
+use	_search_object	uVar5	encoding	CONFIRMED	ob->s.b.encoding (bits 21..28): 0 = DW_EH_PE_absptr	^\s*uVar5\ =\ uVar1\ >>\ 0x15\ \&\ 0xff;$	+2
+use	_search_object	uVar5	unencodedLo	CONFIRMED	binary_search_unencoded_fdes: lo	^\s*uVar5\ =\ 0;$	+15
+use	_search_object	uVar5	encoding	CONFIRMED	ob->s.b.encoding	^\s*else\ \{$	+21
+use	_search_object	uVar5	mixedVec	CONFIRMED	vec = ob->u.sort (struct fde_vector: count +4, array +8)	^\s*uVar5\ =\ param_1\[3\];$	+19
+use	_search_object	uVar7	unencodedMid	CONFIRMED	binary_search_unencoded_fdes: i = (lo + hi) / 2 (and the new hi)	^\s*uVar7\ =\ uVar5\ \+\ uVar1\ >>\ 1;$	+11
+use	_search_object	uVar7	singleHi	CONFIRMED	binary_search_single_encoding_fdes: hi = vec->count	^\s*uVar7\ =\ \*\(uint\ \*\)\(uVar6\ \+\ 4\);$	+17
+use	_search_object	uVar7	mixedLo	CONFIRMED	binary_search_mixed_encoding_fdes: lo	^\s*uVar7\ =\ 0;$	+18
+use	_search_object	uVar6	singleVec	CONFIRMED	vec = ob->u.sort for the single-encoding search	^\s*uVar6\ =\ param_1\[3\];$	+19
+use	_search_object	uVar6	mixedMid	CONFIRMED	binary_search_mixed_encoding_fdes: i = (lo + hi) / 2 (and the new hi)	^\s*uVar6\ =\ uVar7\ \+\ uVar1\ >>\ 1;$	+14
+local	_examine_objects	param_1	pc	CONFIRMED	void* pc (unwind-dw2-fde-darwin.c examine_objects)
+local	_examine_objects	param_2	bases	CONFIRMED	struct dwarf_eh_bases* filled with tbase/dbase (+0/+4) and func
+local	_examine_objects	param_3	dontAlloc	CONFIRMED	dont_alloc: use the stack object instead of calloc (also set when calloc fails)
+local	_examine_objects	iVar3	image	CONFIRMED	struct live_images*: mh +4, vm_slide +8, destructor +0xc, next +0x10, examined_p +0x14, fde +0x18, object_info +0x1c
+local	_examine_objects	iVar8	ret	CONFIRMED	the FDE found, returned
+local	_examine_objects	uVar5	destructor	CONFIRMED	live_image_destructor stored at image->destructor
+local	_examine_objects	local_40	sectionSize	CONFIRMED	size of the __eh_frame section (getsectdatafromheader out parameter, first word)
+local	_examine_objects	local_60	panicob	CONFIRMED	struct object on the stack, used when calloc failed or dont_alloc
+local	_examine_objects	puVar7	ob	CONFIRMED	struct object* for the image (calloc(1, 0x1c) or the stack object)
+local	_examine_objects	puVar6	prevLink	CONFIRMED	struct object** p: the link being patched when inserting ob into seen_objects
+local	_examine_objects	puVar2	cur	CONFIRMED	*p: the current element of the seen_objects list (sorted by pc_begin)
+local	_examine_objects	puVar1	curNextLink	CONFIRMED	&cur->next
+use	_examine_objects	uVar9	realFde	CONFIRMED	fde + image->vm_slide: the slid address of the __eh_frame data	^\s*uVar9\ =\ iVar4\ \+\ \*\(int\ \*\)\(iVar3\ \+\ 8\);$	^\s*uVar9\ =\ puVar7\[4\]\ >>\ 0x15\ \&\ 0xff;$	all	none
+use	_examine_objects	uVar9	encoding	CONFIRMED	ob->s.b.encoding, or get_cie_encoding of the found FDE for mixed objects	^\s*uVar9\ =\ puVar7\[4\]\ >>\ 0x15\ \&\ 0xff;$		all	none

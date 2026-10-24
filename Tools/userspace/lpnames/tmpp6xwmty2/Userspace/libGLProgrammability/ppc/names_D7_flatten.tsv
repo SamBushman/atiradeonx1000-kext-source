@@ -1,0 +1,6 @@
+# local	FUNCTION	old	new	tier	evidence   (D7: _FlattenIf)
+local	_FlattenIf	param_2	ifChunk	INFERRED	the chunk the flattening starts at: _PPStreamInsertOperationBeforeChunk(..., param_2) places the new temp-register moves before it; the first region of the loops runs from param_2 to param_3
+local	_FlattenIf	param_3	elseChunk	INFERRED	end of the first (then) region and start of the second (else) region: local_b0[4..7] = {param_2, param_3, param_3-or-param_4, param_4}; zero when there is no else part (then param_3 is replaced by param_4)
+local	_FlattenIf	param_4	endifChunk	INFERRED	end chunk of the whole if/else construct; _PPStreamRemoveOperation(stream, endif) removes it after the registers written in the branches have been merged
+local	_FlattenIf	iStack00000024	endifChunkHome	CONFIRMED	home-slot copy of param_4 (iStack00000024 = param_4 at function entry), used wherever the endif chunk is needed
+local	_FlattenIf	iVar20	loopByteOffset	CONFIRMED	always loopIndex * 4: reset to 0 together with loopIndex, advanced by 4 per iteration, and added to the base of the 2-entry tables (local_b0, local_c0, local_70)
