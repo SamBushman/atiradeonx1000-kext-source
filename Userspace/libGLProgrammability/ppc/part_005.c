@@ -2597,7 +2597,7 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
   int firstChildVtable;
   undefined *oldRefCount;
   int constUnionNode;
-  unsigned char * constantUnionNode;
+  unsigned char * intermAggregate;
   int *nodeAggregate;
   unsigned char * pTVar7;
   unsigned char * resultArray;
@@ -2619,7 +2619,7 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
   pTVar9 = intermTyped;
   lineCopy = line;
   constUnionNode = (**(code **)(*(int *)intermTyped + 0x18))(intermTyped,vectorFields,intermTyped,line,scratchR7,scratchR8);
-  constantUnionNode = (unsigned char *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
+  intermAggregate = (unsigned char *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
   if (constUnionNode != 0) {
     constArray = *(unsigned char **)(constUnionNode + 0x30);
     if (constArray == (unsigned char *)0x0) {
@@ -2658,13 +2658,13 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
     }
     goto LAB_97b9f4c4;
   }
-  if (constantUnionNode == (unsigned char *)0x0) {
+  if (intermAggregate == (unsigned char *)0x0) {
     error((int)this,(char *)line,"No aggregate or constant union node available","Internal Error"
           ,"",scratchR8,scratchR9,scratchR10);
     TParseContext__recover(this);
     return (unsigned char *)0x0;
   }
-  (**(code **)(*(int *)constantUnionNode + 0x38))(typeTempOrTextBuf,constantUnionNode);
+  (**(code **)(*(int *)intermAggregate + 0x38))(typeTempOrTextBuf,intermAggregate);
   if ((typeTempBits & 0x400) == 0) {
     objectSize = (int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18;
   }
@@ -2675,10 +2675,10 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
   pTVar7 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
   constArray = (unsigned char *)((int (*)())TPoolAllocator__allocate)(pTVar7,objectSize << 2);
   typeTempOrTextBuf[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-  nodeAggregate = (int *)(**(code **)(*(int *)constantUnionNode + 0x1c))(constantUnionNode);
+  nodeAggregate = (int *)(**(code **)(*(int *)intermAggregate + 0x1c))(intermAggregate);
   sequence = (**(code **)(*nodeAggregate + 100))(nodeAggregate);
   if (*(int *)(sequence + 8) - *(int *)(sequence + 4) >> 2 == 1) {
-    nodeAggregate = (int *)(**(code **)(*(int *)constantUnionNode + 0x1c))(constantUnionNode);
+    nodeAggregate = (int *)(**(code **)(*(int *)intermAggregate + 0x1c))(intermAggregate);
     sequence = (**(code **)(*nodeAggregate + 100))(nodeAggregate);
     firstChildVtable = *(int *)**(undefined4 **)(sequence + 4);
     firstChildTyped = (int *)(**(code **)(firstChildVtable + 0x14))
@@ -2686,18 +2686,18 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
                                scratchR8,firstChildVtable);
     constUnionTest = (**(code **)(*firstChildTyped + 0x18))(firstChildTyped);
     if (constUnionTest == 0) goto LAB_97b9f438;
-    (**(code **)(*(int *)constantUnionNode + 0x38))(typeTempOrTextBuf,constantUnionNode);
+    (**(code **)(*(int *)intermAggregate + 0x38))(typeTempOrTextBuf,intermAggregate);
     scratchR10 = 1;
     parseResult = TIntermediate__parseConstTree
-                       (*(unsigned char **)this,line,constantUnionNode,constArray,*(undefined4 *)(constantUnionNode + 0x30),
+                       (*(unsigned char **)this,line,intermAggregate,constArray,*(undefined4 *)(intermAggregate + 0x30),
                         *(undefined4 *)(this + 4),typeTempOrTextBuf,1);
   }
   else {
 LAB_97b9f438:
-    (**(code **)(*(int *)constantUnionNode + 0x38))(typeTempOrTextBuf,constantUnionNode);
+    (**(code **)(*(int *)intermAggregate + 0x38))(typeTempOrTextBuf,intermAggregate);
     scratchR10 = 0;
     parseResult = TIntermediate__parseConstTree
-                       (*(unsigned char **)this,line,constantUnionNode,constArray,*(undefined4 *)(constantUnionNode + 0x30),
+                       (*(unsigned char **)this,line,intermAggregate,constArray,*(undefined4 *)(intermAggregate + 0x30),
                         *(undefined4 *)(this + 4),typeTempOrTextBuf,0);
   }
   typeTempOrTextBuf[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
@@ -2753,7 +2753,7 @@ int TParseContext__addConstMatrixNode(this, columnIndex, intermTyped, line)
   int sequence;
   int objectSize;
   int *constUnionNode;
-  unsigned char * constantUnionNode;
+  unsigned char * intermAggregate;
   undefined4 resultNode;
   unsigned char * poolAllocator;
   unsigned char * newConstArray;
@@ -2773,7 +2773,7 @@ int TParseContext__addConstMatrixNode(this, columnIndex, intermTyped, line)
   fwdR5 = (char *)intermTyped;
   fwdR6 = (char *)line;
   constUnionNode = (int *)(**(code **)(*(int *)intermTyped + 0x18))(intermTyped,columnIndex,intermTyped,line);
-  constantUnionNode = (unsigned char *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
+  intermAggregate = (unsigned char *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
   (**(code **)(*(int *)intermTyped + 0x38))(typeTemp,intermTyped);
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   columnOffset = columnIndex;
@@ -2799,13 +2799,13 @@ int TParseContext__addConstMatrixNode(this, columnIndex, intermTyped, line)
                        (unsigned char *)typeTemp,line);
     return resultNode;
   }
-  if (constantUnionNode == (unsigned char *)0x0) {
+  if (intermAggregate == (unsigned char *)0x0) {
     error((int)this,(char *)line,"No Aggregate or Constant Union node available","Internal Error"
           ,"",scratchR8,scratchR9,scratchR10);
     TParseContext__recover(this);
     return 0;
   }
-  (**(code **)(*(int *)constantUnionNode + 0x38))((unsigned char *)typeTemp,constantUnionNode);
+  (**(code **)(*(int *)intermAggregate + 0x38))((unsigned char *)typeTemp,intermAggregate);
   if ((typeTempBits & 0x400) == 0) {
     objectSize = (int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18;
   }
@@ -2816,34 +2816,34 @@ int TParseContext__addConstMatrixNode(this, columnIndex, intermTyped, line)
   poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
   newConstArray = (unsigned char *)((int (*)())TPoolAllocator__allocate)(poolAllocator,objectSize << 2);
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-  (**(code **)(*(int *)constantUnionNode + 0x38))((unsigned char *)typeTemp,constantUnionNode);
+  (**(code **)(*(int *)intermAggregate + 0x38))((unsigned char *)typeTemp,intermAggregate);
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-  nodeAggregate = (int *)(**(code **)(*(int *)constantUnionNode + 0x1c))(constantUnionNode);
+  nodeAggregate = (int *)(**(code **)(*(int *)intermAggregate + 0x1c))(intermAggregate);
   sequence = (**(code **)(*nodeAggregate + 100))(nodeAggregate);
   if (*(int *)(sequence + 8) - *(int *)(sequence + 4) >> 2 == 1) {
-    nodeAggregate = (int *)(**(code **)(*(int *)constantUnionNode + 0x1c))(constantUnionNode);
+    nodeAggregate = (int *)(**(code **)(*(int *)intermAggregate + 0x1c))(intermAggregate);
     sequence = (**(code **)(*nodeAggregate + 100))(nodeAggregate);
     firstChildVtable = *(int *)**(undefined4 **)(sequence + 4);
     firstChildTyped = (int *)(**(code **)(firstChildVtable + 0x14))
                               ((int *)**(undefined4 **)(sequence + 4),columnIndexCopy,fwdR5,fwdR6,scratchR7,scratchR8,firstChildVtable);
     constUnionTest = (**(code **)(*firstChildTyped + 0x18))(firstChildTyped);
     if (constUnionTest != 0) {
-      (**(code **)(*(int *)constantUnionNode + 0x38))((unsigned char *)typeTemp,constantUnionNode);
+      (**(code **)(*(int *)intermAggregate + 0x38))((unsigned char *)typeTemp,intermAggregate);
       parseResult = TIntermediate__parseConstTree
-                        (*(unsigned char **)this,line,constantUnionNode,newConstArray,*(undefined4 *)(constantUnionNode + 0x30),
+                        (*(unsigned char **)this,line,intermAggregate,newConstArray,*(undefined4 *)(intermAggregate + 0x30),
                          *(undefined4 *)(this + 4),(unsigned char *)typeTemp,1);
       goto LAB_97b9f8f4;
     }
   }
-  (**(code **)(*(int *)constantUnionNode + 0x38))(typeTemp,constantUnionNode);
+  (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate);
   parseResult = TIntermediate__parseConstTree
-                    (*(unsigned char **)this,line,constantUnionNode,newConstArray,*(undefined4 *)(constantUnionNode + 0x30),
+                    (*(unsigned char **)this,line,intermAggregate,newConstArray,*(undefined4 *)(intermAggregate + 0x30),
                      *(undefined4 *)(this + 4),typeTemp,0);
 LAB_97b9f8f4:
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   resultNode = 0;
   if (parseResult == 0) {
-    (**(code **)(*(int *)constantUnionNode + 0x38))(typeTemp,constantUnionNode);
+    (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate);
     resultNode = TIntermediate__addConstantUnion
                       (*(unsigned char **)this,
                        newConstArray + ((int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18) * columnOffset * 4,
@@ -2871,7 +2871,7 @@ int TParseContext__addConstStruct(this, text, intermTyped, line, scratchR7, scra
   int nodeVtable;
   int lineCopy;
   unsigned char * pTVar2;
-  unsigned char * constantUnionNode;
+  unsigned char * intermAggregate;
   unsigned char * structFieldType;
   unsigned char * poolAllocator;
   int *fieldType;
@@ -2901,7 +2901,7 @@ int TParseContext__addConstStruct(this, text, intermTyped, line, scratchR7, scra
   nodeVtableB = *(int *)intermTyped;
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   pTVar2 = (unsigned char *)(**(code **)(nodeVtableB + 0x18))(intermTyped,textCopy,fwdR5,lineCopy,scratchR7,scratchR8,nodeVtableB);
-  constantUnionNode = (unsigned char *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
+  intermAggregate = (unsigned char *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
   for (fieldIndex = 0; fieldIndex < (uint)(*(int *)(typeTempStructure + 8) - *(int *)(typeTempStructure + 4) >> 3);
       fieldIndex = fieldIndex + 1) {
     fieldType = *(int **)(*(int *)(typeTempStructure + 4) + fieldIndex * 8);
@@ -2932,23 +2932,23 @@ int TParseContext__addConstStruct(this, text, intermTyped, line, scratchR7, scra
   if (pTVar2 != (unsigned char *)0x0) {
     nodeVtable = *(int *)pTVar2;
     constArray = *(unsigned char **)(pTVar2 + 0x30);
-    constantUnionNode = pTVar2;
+    intermAggregate = pTVar2;
     goto LAB_97b9fc60;
   }
-  if (constantUnionNode == (unsigned char *)0x0) {
+  if (intermAggregate == (unsigned char *)0x0) {
     error((int)this,(char *)line,"No Aggregate or Constant Union node available","Internal Error"
           ,"",scratchR8,nodeVtableB,scratchR10);
     TParseContext__recover(this);
     return 0;
   }
-  (**(code **)(*(int *)constantUnionNode + 0x38))(typeTemp,constantUnionNode);
+  (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate);
   poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
   constArray = (unsigned char *)((int (*)())TPoolAllocator__allocate)(poolAllocator,typeTempStructureSize << 2);
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-  nodeAggregate = (int *)(**(code **)(*(int *)constantUnionNode + 0x1c))(constantUnionNode);
+  nodeAggregate = (int *)(**(code **)(*(int *)intermAggregate + 0x1c))(intermAggregate);
   sequence = (**(code **)(*nodeAggregate + 100))(nodeAggregate);
   if (*(int *)(sequence + 8) - *(int *)(sequence + 4) >> 2 == 1) {
-    nodeAggregate = (int *)(**(code **)(*(int *)constantUnionNode + 0x1c))(constantUnionNode);
+    nodeAggregate = (int *)(**(code **)(*(int *)intermAggregate + 0x1c))(intermAggregate);
     sequence = (**(code **)(*nodeAggregate + 100))(nodeAggregate);
     firstChildVtable = *(int *)**(undefined4 **)(sequence + 4);
     firstChildTyped = (int *)(**(code **)(firstChildVtable + 0x14))
@@ -2956,25 +2956,25 @@ int TParseContext__addConstStruct(this, text, intermTyped, line, scratchR7, scra
                                firstChildVtable);
     constUnionTest = (**(code **)(*firstChildTyped + 0x18))(firstChildTyped);
     if (constUnionTest == 0) goto LAB_97b9fc00;
-    (**(code **)(*(int *)constantUnionNode + 0x38))(typeTemp,constantUnionNode);
+    (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate);
     parseResult = TIntermediate__parseConstTree
-                      (*(unsigned char **)this,line,constantUnionNode,constArray,*(undefined4 *)(constantUnionNode + 0x30),
+                      (*(unsigned char **)this,line,intermAggregate,constArray,*(undefined4 *)(intermAggregate + 0x30),
                        *(undefined4 *)(this + 4),typeTemp,1);
   }
   else {
 LAB_97b9fc00:
-    (**(code **)(*(int *)constantUnionNode + 0x38))(typeTemp,constantUnionNode);
+    (**(code **)(*(int *)intermAggregate + 0x38))(typeTemp,intermAggregate);
     parseResult = TIntermediate__parseConstTree
-                      (*(unsigned char **)this,line,constantUnionNode,constArray,*(undefined4 *)(constantUnionNode + 0x30),
+                      (*(unsigned char **)this,line,intermAggregate,constArray,*(undefined4 *)(intermAggregate + 0x30),
                        *(undefined4 *)(this + 4),typeTemp,0);
   }
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   if (parseResult != 0) {
     return 0;
   }
-  nodeVtable = *(int *)constantUnionNode;
+  nodeVtable = *(int *)intermAggregate;
 LAB_97b9fc60:
-  (**(code **)(nodeVtable + 0x38))(typeTemp,constantUnionNode);
+  (**(code **)(nodeVtable + 0x38))(typeTemp,intermAggregate);
   resultNode = TIntermediate__addConstantUnion
                     (*(unsigned char **)this,constArray + componentOffset * 4,(unsigned char *)typeTemp,line);
   return resultNode;
