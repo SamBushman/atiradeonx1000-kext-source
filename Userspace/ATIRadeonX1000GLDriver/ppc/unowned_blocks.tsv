@@ -292,7 +292,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 1976c	19770	padding	glDrawPixels_impl	1	
 19874	19880	padding	glDrawPixels_impl	3	
 198a8	198b0	padding	glCopyPixels_impl	2	
-19934	19940	padding	FUN_000198b0	3	
+19934	19940	padding	gld_drawPixelsAtRasterPos	3	
 199c4	199d0	padding	gld_drawPixelsDispatch	3	
 19ac4	19ad0	padding	glCopyPixels_impl	3	
 19c24	19c30	padding	FUN_00019ad0	3	
@@ -566,8 +566,8 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 2b388	2b390	padding	gld_drawPixelsFromClientSurface	2	
 2b3a4	2b3b0	padding	gld_drawPixelsFromClientSurface	3	
 2b3b4	2b3c0	padding	noop_2b3b0	3	
-2b508	2b510	padding	FUN_0002b3c0	2	
-2b598	2b5a0	padding	FUN_0002b3c0	2	
+2b508	2b510	padding	gld_sumQueryCounters	2	
+2b598	2b5a0	padding	gld_sumQueryCounters	2	
 2b68c	2b690	padding	_gldGetQueryInfo	1	
 2b738	2b740	padding	_gldGetQueryInfo	2	
 2b7ec	2b7f0	padding	FUN_0002b740	1	

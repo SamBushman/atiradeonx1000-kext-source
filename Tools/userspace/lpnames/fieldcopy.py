@@ -32,7 +32,9 @@ out = []
 for v in vars_:
     ws, er = F.webs(nodes, entry, v)
     byname = {}
+    OPEN = re.compile(r'\b%s\b' % re.escape(v))
     for k, ls in enumerate(ws):
+        if not any(OPEN.search(F.CURRENT[x]) for x in ls): continue   # already renamed in the current text
         defs = []
         for x in ls:
             for m in DEFRX(v).finditer(body[x]): defs.append(m.group(1).strip())

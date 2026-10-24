@@ -3,9 +3,9 @@ use	FUN_000027d0	iVar14	loopIndex	INFERRED	initialised to a literal, stepped by 
 use	FUN_000027d0	iVar14	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#98	+13	all	all
 use	FUN_0001ae20	iVar5	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#110	+8	all	all
 use	FUN_0001b510	iVar16	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#24	+16	all	all
-use	FUN_0001d1e0	uVar13	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#6	+191	all	all
-use	FUN_0001d1e0	uVar14	loopIndex2	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#10	+184	all	all
-use	FUN_0001d1e0	uVar9	loopIndex3	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#3	+197	all	all
+use	FUN_0001d1e0	uVar13	rowIndex	INFERRED	image decode loop counter (rowIndex): initialised to 0, stepped by one, compared with the image dimension	#6	+191	all	all
+use	FUN_0001d1e0	uVar14	columnIndex	INFERRED	image decode loop counter (columnIndex): initialised to 0, stepped by one, compared with the image dimension	#10	+184	all	all
+use	FUN_0001d1e0	uVar9	sliceIndex	INFERRED	image decode loop counter (sliceIndex): initialised to 0, stepped by one, compared with the image dimension	#3	+197	all	all
 use	FUN_0001d880	iVar18	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#35	+12	all	all
 use	FUN_0001e730	iVar3	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#12	+16	all	all
 use	FUN_0001fd00	uVar15	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#48	+123	all	all
