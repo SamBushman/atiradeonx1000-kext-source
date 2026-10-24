@@ -1,7 +1,7 @@
 local	_uw_update_context_1	param_1	context	CONFIRMED	struct _Unwind_Context*: reg[111] pointers at +0, cfa +0x1bc, ra +0x1c0, args_size +0x1d4; also advanced one slot per iteration in the register loop
 local	_uw_update_context_1	param_2	fs	CONFIRMED	_Unwind_FrameState*: regs.reg[] {loc +0, how +4} at 8*i, cfa_offset +0x37c, cfa_reg +0x380, cfa_exp +0x384, cfa_how +0x388; also advanced one entry per iteration
 local	_uw_update_context_1	aiStack_210	origContext	CONFIRMED	struct _Unwind_Context orig_context = *context (memcpy 0x1d8)
-local	_uw_update_context_1	piVar2	regSlotOrExpResult	UNKNOWN	saved-register slot of the CFA register, then execute_stack_op results; the stale value is also the returned scratch
+local	_uw_update_context_1	piVar2	scratchResult	UNKNOWN	one def-use web (find_webs: 1 web): the CFA register slot pointer, then the _execute_stack_op results; the last value is also what the function returns (the real function is void, the return is the leftover r3)
 local	_uw_update_context_1	piVar3	cfa	CONFIRMED	this frame's CFA: register value + cfa_offset, or the CFA expression result; stored at context->cfa
 local	_uw_update_context_1	piVar4	lastReg	CONFIRMED	&context->reg[110]: loop bound over the 111 DWARF registers
 local	_uw_update_context_1	local_30	cfaExpLen	CONFIRMED	length of the CFA expression (read_uleb128)
@@ -11,7 +11,7 @@ use	_uw_update_context_1	iVar1	regHow	CONFIRMED	fs->regs.reg[i].how: 0 unsaved, 
 local	___frame_state_for	cVar1	savedKind	CONFIRMED	fs.regs.reg[i].how, stored to state_in->saved[i]
 local	___frame_state_for	puVar3	fsEntryCursor	INFERRED	walks the frame-state register entries (8 bytes each), addressed relative to the context buffer
 local	___frame_state_for	pcVar4	savedOut	CONFIRMED	&state_in->saved[i]
-local	___frame_state_for	puVar5	regOrOffsetOut	CONFIRMED	&state_in->reg_or_offset[i]
+local	___frame_state_for	puVar5	regOrOffsetSlot	CONFIRMED	&state_in->reg_or_offset[i] (the field is literally named reg_or_offset in libgcc's struct frame_state)
 local	___frame_state_for	auStack_5a0	stackContext	CONFIRMED	struct _Unwind_Context on the stack (0x1d8 bytes, zeroed)
 local	___frame_state_for	local_3e0	contextRa	CONFIRMED	context.ra = pc_target + 1
 local	___frame_state_for	local_3cc	contextArgsSize	CONFIRMED	context.args_size (+0x1d4) copied to state_in->args_size

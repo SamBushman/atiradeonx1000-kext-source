@@ -78,5 +78,5 @@ use	_FlattenIf	piVar12	condInfoSlot	CONFIRMED	condInfos[i] pointer	^\s*piVar12\ 
 use	_FlattenIf	piVar12	anlSizesBase	CONFIRMED	base of the ANL source size array	^\s*piVar12\ =\ local_64;$	+17	all	none
 use	_FlattenIf	piVar12	modifiedPair	CONFIRMED	{original, temp} RegInfo pair from the branch table iterator	^\s*piVar12\ =\ \(int\ \*\)_HashSetIteratorNext\(\&local_1a0\);$	+44	all	none
 
-local	_FlattenIf	local_1a0	keyOrIterator	CONFIRMED	stack overlay shared by several roles: RegInfo lookup key (C), HashSet iterator state (D), entry-copy operation record (D); declaration order must stay (address-taken contiguous words), so it is not split
-local	_FlattenIf	local_190	keySizeOrPairOpHeader	CONFIRMED	stack overlay shared by several roles: RegInfo lookup key (C), HashSet iterator state (D), entry-copy operation record (D); declaration order must stay (address-taken contiguous words), so it is not split
+local	_FlattenIf	local_1a0	keyIteratorOverlay	CONFIRMED	stack overlay (local_1a0): RegInfo lookup key, HashSet iterator state and entry-copy record share these address-taken contiguous words; cannot be split
+local	_FlattenIf	local_190	keySizePairHeaderOverlay	CONFIRMED	stack overlay (local_190): key size, then the pair/operation record header; address-taken contiguous words, cannot be split

@@ -125,7 +125,7 @@ int _execute_stack_op(opPtr, opEnd, context, initial)
   uint *operand;
   uint *stmp;
   int regNumber;
-  uint offsetOrIndex;
+  uint decodedImmediate;
   int utmp [7];
   
   stackFrameWords[3] = initial;
@@ -250,10 +250,10 @@ LAB_97c1acb4:
       }
       goto switchD_97c1a7e8_caseD_4;
     case 0x15:
-      offsetOrIndex = (uint)*(byte *)opPtrNext;
+      decodedImmediate = (uint)*(byte *)opPtrNext;
       opPtrNext = opPtr + 1;
-      if ((int)offsetOrIndex < (int)(stackElt - 1)) {
-        stackByteOffset = (stackElt - offsetOrIndex) * 4;
+      if ((int)decodedImmediate < (int)(stackElt - 1)) {
+        stackByteOffset = (stackElt - decodedImmediate) * 4;
 LAB_97c1ab88:
         operand = *(uint **)((int)stackFrameWords + stackByteOffset + 8);
 LAB_97c1aba8:
@@ -355,7 +355,7 @@ LAB_97c1ae34:
       if (-1 < (int)newStackElt) {
         branchOffset = *opPtrNext;
         opPtrNext = (ushort *)((int)opPtr + 3);
-        offsetOrIndex = (int)(short)branchOffset;
+        decodedImmediate = (int)(short)branchOffset;
         stackByteOffset = stackElt + 2;
         stackElt = newStackElt;
         if (stackFrameWords[stackByteOffset] != 0) {
@@ -367,7 +367,7 @@ LAB_97c1ae34:
     case 0x2f:
       branchOffset = *opPtrNext;
       opPtrNext = (ushort *)((int)opPtr + (int)(short)branchOffset + 3U);
-      offsetOrIndex = (int)(short)branchOffset;
+      decodedImmediate = (int)(short)branchOffset;
       goto switchD_97c1a7e8_caseD_96;
     case 0x30:
     case 0x31:
@@ -469,7 +469,7 @@ LAB_97c1ae34:
     case 0x8d:
     case 0x8e:
     case 0x8f:
-      opPtrNext = (ushort *)_read_sleb128_97c1a41c(opPtrNext,&offsetOrIndex);
+      opPtrNext = (ushort *)_read_sleb128_97c1a41c(opPtrNext,&decodedImmediate);
       stackByteOffset = op - 0x70;
       goto LAB_97c1ab30;
     case 0x90:
@@ -480,10 +480,10 @@ LAB_97c1aaf4:
       goto LAB_97c1aba8;
     case 0x92:
       lebValue = _read_uleb128_97c1a3ec(opPtrNext,&regNumber);
-      opPtrNext = (ushort *)_read_sleb128_97c1a41c(lebValue,&offsetOrIndex);
+      opPtrNext = (ushort *)_read_sleb128_97c1a41c(lebValue,&decodedImmediate);
       stackByteOffset = regNumber;
 LAB_97c1ab30:
-      operand = (uint *)(**(int **)(context + stackByteOffset * 4) + offsetOrIndex);
+      operand = (uint *)(**(int **)(context + stackByteOffset * 4) + decodedImmediate);
 LAB_97c1ae4c:
       stackElt = newStackElt;
       goto LAB_97c1ae98;
@@ -767,7 +767,7 @@ int ___frame_state_for(pcTarget, stateIn)
   int uw_frame_state_forResult;
   undefined1 *fsEntryCursor;
   char *savedOut;
-  undefined4 *regOrOffsetOut;
+  undefined4 *regOrOffsetSlot;
   int result;
   undefined1 stackContext [448];
   int contextRa;
@@ -787,20 +787,20 @@ int ___frame_state_for(pcTarget, stateIn)
   result = 0;
   if ((uw_frame_state_forResult == 0) && (fsCfaHow != 2)) {
     regsLeft = 0x4e;
-    regOrOffsetOut = (undefined4 *)(stateIn + 0x10);
+    regOrOffsetSlot = (undefined4 *)(stateIn + 0x10);
     savedOut = (char *)(stateIn + 0x14c);
     do {
       savedKind = fsEntryCursor[0x1e7];
       *savedOut = savedKind;
       if ((savedKind == '\x01') || (savedKind == '\x02')) {
-        *regOrOffsetOut = *(undefined4 *)(fsEntryCursor + 0x1e0);
+        *regOrOffsetSlot = *(undefined4 *)(fsEntryCursor + 0x1e0);
       }
       else {
-        *regOrOffsetOut = 0;
+        *regOrOffsetSlot = 0;
       }
       savedOut = savedOut + 1;
       fsEntryCursor = fsEntryCursor + 8;
-      regOrOffsetOut = regOrOffsetOut + 1;
+      regOrOffsetSlot = regOrOffsetSlot + 1;
       regsLeft = regsLeft + -1;
     } while (regsLeft != 0);
     *(undefined2 *)(stateIn + 0x148) = fsCfaReg;
@@ -821,7 +821,7 @@ int _uw_update_context_1(context, fs)
   int regHow;
   int exp;
   int cfaRegValue;
-  int *regSlotOrExpResult;
+  int *scratchResult;
   int *cfa;
   int *lastReg;
   int origContext [120];
@@ -830,12 +830,12 @@ int _uw_update_context_1(context, fs)
   
   _memcpy(origContext,context,0x1d8);
   if (fs[0xe2] == 1) {
-    regSlotOrExpResult = (int *)context[fs[0xe0]];
-    if (regSlotOrExpResult == (int *)0x0) {
+    scratchResult = (int *)context[fs[0xe0]];
+    if (scratchResult == (int *)0x0) {
       cfaRegValue = context[0x6f];
     }
     else {
-      cfaRegValue = *regSlotOrExpResult;
+      cfaRegValue = *scratchResult;
     }
     cfa = (int *)(cfaRegValue + fs[0xdf]);
   }
@@ -845,8 +845,8 @@ int _uw_update_context_1(context, fs)
       _abort();
     }
     exp = _read_uleb128_97c1a3ec(fs[0xe1],&cfaExpLen);
-    regSlotOrExpResult = (int *)((int (*)())_execute_stack_op)(exp,exp + cfaExpLen,context,0);
-    cfa = regSlotOrExpResult;
+    scratchResult = (int *)((int (*)())_execute_stack_op)(exp,exp + cfaExpLen,context,0);
+    cfa = scratchResult;
   }
   context[0x6f] = (int)cfa;
   lastReg = context + 0x6e;
@@ -861,14 +861,14 @@ int _uw_update_context_1(context, fs)
       }
       else if (regHow == 3) {
         exp = _read_uleb128_97c1a3ec(*fs,regExpLen);
-        regSlotOrExpResult = (int *)((int (*)())_execute_stack_op)(exp,exp + regExpLen[0],origContext,cfa);
-        *context = (int)regSlotOrExpResult;
+        scratchResult = (int *)((int (*)())_execute_stack_op)(exp,exp + regExpLen[0],origContext,cfa);
+        *context = (int)scratchResult;
       }
     }
     context = context + 1;
     fs = fs + 2;
   } while ((int)context <= (int)lastReg);
-  return regSlotOrExpResult;
+  return scratchResult;
 }
 
 /* _uw_update_context @ 0x97c1b758 (68 bytes) */

@@ -156,11 +156,11 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
   undefined4 op1AuxB;
   undefined4 op1Line;
   undefined4 op1Word13;
-  uint keyOrIterator;
+  uint keyIteratorOverlay;
   uint lookupKeyBank;
   undefined4 lookupKeyPrecision;
   undefined4 lookupKeyType;
-  undefined4 keySizeOrPairOpHeader;
+  undefined4 keySizePairHeaderOverlay;
   uint pairOpFlags;
   uint pairOpDest0;
   uint pairOpDest1;
@@ -276,16 +276,16 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
   } while (loopIndex < 2);
   elseForwardTable = 0;
   elseReverseTable = 0;
-  ifForwardTable = _HashTableNew((*(uint *)(*(int *)(stream + 4) + 8) >> 5) + 1,DAT_a7b7bf80,DAT_a7b7bf7c);
-  ifReverseTable = _HashTableNew((*(uint *)(*(int *)(stream + 4) + 8) >> 5) + 1,DAT_a7b7bf80,DAT_a7b7bf7c);
+  ifForwardTable = _HashTableNew((*(uint *)(*(int *)(stream + 4) + 8) >> 5) + 1,regHashFunctionPtr,regEqualsFunctionPtr);
+  ifReverseTable = _HashTableNew((*(uint *)(*(int *)(stream + 4) + 8) >> 5) + 1,regHashFunctionPtr,regEqualsFunctionPtr);
   if (elseChunk != 0) {
-    elseForwardTable = _HashTableNew((*(uint *)(*(int *)(stream + 4) + 8) >> 5) + 1,DAT_a7b7bf80,DAT_a7b7bf7c
+    elseForwardTable = _HashTableNew((*(uint *)(*(int *)(stream + 4) + 8) >> 5) + 1,regHashFunctionPtr,regEqualsFunctionPtr
                           );
-    elseReverseTable = _HashTableNew((*(uint *)(*(int *)(stream + 4) + 8) >> 5) + 1,DAT_a7b7bf80,DAT_a7b7bf7c
+    elseReverseTable = _HashTableNew((*(uint *)(*(int *)(stream + 4) + 8) >> 5) + 1,regHashFunctionPtr,regEqualsFunctionPtr
                           );
   }
-  selectScratch[2] = _HashSetNew((*(uint *)(*(int *)(stream + 4) + 8) >> 5) + 1,DAT_a7b7bf80,
-                            DAT_a7b7bf7c);
+  selectScratch[2] = _HashSetNew((*(uint *)(*(int *)(stream + 4) + 8) >> 5) + 1,regHashFunctionPtr,
+                            regEqualsFunctionPtr);
   branchTables[0] = ifForwardTable;
   branchTables[1] = elseForwardTable;
   branchTables[2] = ifReverseTable;
@@ -314,17 +314,17 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
           operandCursor = branchOp;
           do {
             lookupKeyBank = *(uint *)(operandCursor + 0x1c) >> 0x17 & 7;
-            keyOrIterator = (uint)*(ushort *)(operandCursor + 0x22);
+            keyIteratorOverlay = (uint)*(ushort *)(operandCursor + 0x22);
             tempInfo = (undefined4 *)
-                      _HashTableGet(*(undefined4 *)((int)branchTables + loopByteOffset),&keyOrIterator);
+                      _HashTableGet(*(undefined4 *)((int)branchTables + loopByteOffset),&keyIteratorOverlay);
             if (tempInfo == (undefined4 *)0x0) {
-              ((int (*)())_GetRegisterTypeInfo)(stream,&keyOrIterator);
+              ((int (*)())_GetRegisterTypeInfo)(stream,&keyIteratorOverlay);
               srcOriginalCopy = _malloc(0x28);
-              _memcpy(srcOriginalCopy,&keyOrIterator,0x28);
+              _memcpy(srcOriginalCopy,&keyIteratorOverlay,0x28);
               tempInfo = (undefined4 *)_malloc(0x28);
-              _memcpy(tempInfo,&keyOrIterator,0x28);
+              _memcpy(tempInfo,&keyIteratorOverlay,0x28);
               tempInfo[1] = 1;
-              addTempRegisterResult2 = _AddTempRegister(stream,lookupKeyPrecision,lookupKeyType,keySizeOrPairOpHeader);
+              addTempRegisterResult2 = _AddTempRegister(stream,lookupKeyPrecision,lookupKeyType,keySizePairHeaderOverlay);
               *tempInfo = addTempRegisterResult2;
               _HashTableAdd(*(undefined4 *)((int)branchTables + loopByteOffset),srcOriginalCopy,tempInfo);
               _HashTableAdd(*(undefined4 *)((int)branchTables + loopByteOffset + 8),tempInfo,srcOriginalCopy);
@@ -341,16 +341,16 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
         }
         if ((*(uint *)(branchOp + 0x14) & 0x1e000) != 0) {
           lookupKeyBank = *(uint *)(branchOp + 0x14) >> 0x11 & 7;
-          keyOrIterator = (uint)*(ushort *)(branchOp + 0x1a);
-          tempInfo = (undefined4 *)_HashTableGet(*(undefined4 *)((int)branchTables + loopByteOffset),&keyOrIterator);
+          keyIteratorOverlay = (uint)*(ushort *)(branchOp + 0x1a);
+          tempInfo = (undefined4 *)_HashTableGet(*(undefined4 *)((int)branchTables + loopByteOffset),&keyIteratorOverlay);
           if (tempInfo == (undefined4 *)0x0) {
-            ((int (*)())_GetRegisterTypeInfo)(stream,&keyOrIterator);
+            ((int (*)())_GetRegisterTypeInfo)(stream,&keyIteratorOverlay);
             destOriginalCopy = _malloc(0x28);
-            _memcpy(destOriginalCopy,&keyOrIterator,0x28);
+            _memcpy(destOriginalCopy,&keyIteratorOverlay,0x28);
             tempInfo = (undefined4 *)_malloc(0x28);
-            _memcpy(tempInfo,&keyOrIterator,0x28);
+            _memcpy(tempInfo,&keyIteratorOverlay,0x28);
             tempInfo[1] = 1;
-            addTempRegisterResult2 = _AddTempRegister(stream,lookupKeyPrecision,lookupKeyType,keySizeOrPairOpHeader);
+            addTempRegisterResult2 = _AddTempRegister(stream,lookupKeyPrecision,lookupKeyType,keySizePairHeaderOverlay);
             *tempInfo = addTempRegisterResult2;
             _HashTableAdd(*(undefined4 *)((int)branchTables + loopByteOffset),destOriginalCopy,tempInfo);
             _HashTableAdd(*(undefined4 *)((int)branchTables + loopByteOffset + 8),tempInfo,destOriginalCopy);
@@ -445,8 +445,8 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
   loopByteOffset = 0;
   do {
     if (*(int *)((int)branchTables + loopByteOffset + 0x10) != 0) {
-      _HashSetIteratorSetup(**(undefined4 **)((int)branchTables + loopByteOffset),&keyOrIterator);
-      modifiedPair = (int *)_HashSetIteratorNext(&keyOrIterator);
+      _HashSetIteratorSetup(**(undefined4 **)((int)branchTables + loopByteOffset),&keyIteratorOverlay);
+      modifiedPair = (int *)_HashSetIteratorNext(&keyIteratorOverlay);
       while (modifiedPair != (int *)0x0) {
         pairTempInfo = modifiedPair[1];
         op2Src0A = 0;
@@ -457,7 +457,7 @@ int _FlattenIf(stream, ifChunk, elseChunk, endifChunk)
         op2Dest0 = 0;
         op2Dest1 = 0;
         op2Src0B = 0;
-        keySizeOrPairOpHeader = 0x20000000;
+        keySizePairHeaderOverlay = 0x20000000;
         op2Src0A = *(undefined4 *)(*(int *)((int)branchTables + loopByteOffset + 0x10) + 0x3c);
         sizeShifted = (*(uint *)(pairTempInfo + 0x10) & 3) << 10;
         pairDestWord = sizeShifted | 0x6c;
@@ -488,8 +488,8 @@ LAB_97c0c1e8:
         pairOpFlags = (*(uint *)(pairTempInfo + 0x10) & 3) << 0x1a |
                     (*(uint *)(pairTempInfo + 0xc) & 7) << 0x17 | (*(uint *)(pairTempInfo + 8) & 3) << 0x12;
         _PPStreamInsertOperationAfterChunk
-                  (stream,&keySizeOrPairOpHeader,0,0,*(undefined4 *)((int)branchTables + loopByteOffset + 0x10));
-        modifiedPair = (int *)_HashSetIteratorNext(&keyOrIterator);
+                  (stream,&keySizePairHeaderOverlay,0,0,*(undefined4 *)((int)branchTables + loopByteOffset + 0x10));
+        modifiedPair = (int *)_HashSetIteratorNext(&keyIteratorOverlay);
       }
       _PPStreamRemoveOperation(stream,*(undefined4 *)((int)branchTables + loopByteOffset + 0x10));
     }
@@ -2707,7 +2707,7 @@ int _UnrollConstantLoopsSimple(stream, allowRepify)
   int loopStart;
   int loopEnd [5];
   
-  knownRegisters = _HashSetNew((*(uint *)(*(int *)(stream + 4) + 8) >> 5) + 1,DAT_a7b7bf80,DAT_a7b7bf7c);
+  knownRegisters = _HashSetNew((*(uint *)(*(int *)(stream + 4) + 8) >> 5) + 1,regHashFunctionPtr,regEqualsFunctionPtr);
   operationChunk = **(int **)(stream + 0x20);
   do {
     while( true ) {
@@ -3050,7 +3050,7 @@ int _RepifyConstantLoopSimple(compileContext, loopStart, loopEnd, iterationCount
   undefined4 convertHigh;
   uint convertLow;
   
-  knownRegisters = _HashSetNew((*(uint *)(*(int *)(compileContext + 4) + 8) >> 5) + 1,DAT_a7b7bf80,DAT_a7b7bf7c);
+  knownRegisters = _HashSetNew((*(uint *)(*(int *)(compileContext + 4) + 8) >> 5) + 1,regHashFunctionPtr,regEqualsFunctionPtr);
   bodyOperation = *(int *)(loopStart + 8);
   isConstantLoop = 1;
   do {
@@ -3100,7 +3100,7 @@ int _ConstantPropagateFold(compileContext)
   uint lookupKeyBank;
   longlong convertScratch;
   
-  knownRegisters = _HashSetNew((*(uint *)(*(int *)(compileContext + 4) + 8) >> 5) + 1,DAT_a7b7bf80,DAT_a7b7bf7c);
+  knownRegisters = _HashSetNew((*(uint *)(*(int *)(compileContext + 4) + 8) >> 5) + 1,regHashFunctionPtr,regEqualsFunctionPtr);
   for (operationChunk = **(int **)(compileContext + 0x20); operationChunk != 0; operationChunk = *(int *)(operationChunk + 8)) {
     operandCursor = operationChunk + 0xc;
     operandsLeft = _GetValidArgs(operationChunk);

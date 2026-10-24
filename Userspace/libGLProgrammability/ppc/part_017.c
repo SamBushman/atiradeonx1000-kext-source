@@ -11843,7 +11843,7 @@ int _LinearizeFixOutputReads(stream)
   int sourceOperandRewrite;
   int outputChunk;
   uint tempDeclWord0;
-  undefined4 tempDeclWord1OrScanChunk;
+  undefined4 tempDeclWord1Overlay;
   int tempDeclWord2;
   int tempDeclWord3;
   undefined4 movHeader;
@@ -11868,18 +11868,18 @@ int _LinearizeFixOutputReads(stream)
     }
     readsOutput = false;
     outputIndex = *(ushort *)(outputChunk + 0x12);
-    tempDeclWord1OrScanChunk = **(int **)(stream + 0x20);
-    if (tempDeclWord1OrScanChunk != 0) {
+    tempDeclWord1Overlay = **(int **)(stream + 0x20);
+    if (tempDeclWord1Overlay != 0) {
       do {
         loopIndex = 0;
-        sourceCount = *(uint *)(tempDeclWord1OrScanChunk + 0xc) >> 0x1d;
+        sourceCount = *(uint *)(tempDeclWord1Overlay + 0xc) >> 0x1d;
         if (sourceCount != 0) {
-          sourceOperand = tempDeclWord1OrScanChunk + 0x10;
+          sourceOperand = tempDeclWord1Overlay + 0x10;
           do {
             if ((((*(uint *)(sourceOperand + 0xc) >> 0x17 & 7) == 3) && (*(ushort *)(sourceOperand + 0x12) == outputIndex)
-                ) || (((*(uint *)(tempDeclWord1OrScanChunk + 0xc) >> 0x12 & 0xff) == 0x6d &&
-                      (((*(uint *)(tempDeclWord1OrScanChunk + 0x14) >> 0x11 & 7) == 3 &&
-                       (*(ushort *)(tempDeclWord1OrScanChunk + 0x1a) == outputIndex)))))) {
+                ) || (((*(uint *)(tempDeclWord1Overlay + 0xc) >> 0x12 & 0xff) == 0x6d &&
+                      (((*(uint *)(tempDeclWord1Overlay + 0x14) >> 0x11 & 7) == 3 &&
+                       (*(ushort *)(tempDeclWord1Overlay + 0x1a) == outputIndex)))))) {
               readsOutput = true;
               break;
             }
@@ -11888,14 +11888,14 @@ int _LinearizeFixOutputReads(stream)
             sourceOperand = sourceOperand + 8;
           } while (loopIndex < sourceCount);
         }
-        tempDeclWord1OrScanChunk = *(int *)(tempDeclWord1OrScanChunk + 8);
-      } while (tempDeclWord1OrScanChunk != 0);
+        tempDeclWord1Overlay = *(int *)(tempDeclWord1Overlay + 8);
+      } while (tempDeclWord1Overlay != 0);
       if (readsOutput) {
         tempDeclWord0 = 0;
-        tempDeclWord2 = tempDeclWord1OrScanChunk;
-        tempDeclWord3 = tempDeclWord1OrScanChunk;
+        tempDeclWord2 = tempDeclWord1Overlay;
+        tempDeclWord3 = tempDeclWord1Overlay;
         maxIndex = _PPStreamChunkListGetMaxIndex(*(undefined4 *)(stream + 4));
-        tempDeclWord1OrScanChunk = CONCAT22((*(unsigned short *)((unsigned char *)&(tempDeclWord1OrScanChunk) + 0)),(short)maxIndex + 1);
+        tempDeclWord1Overlay = CONCAT22((*(unsigned short *)((unsigned char *)&(tempDeclWord1Overlay) + 0)),(short)maxIndex + 1);
         tempDeclWord0 = (*(uint *)(outputChunk + 0xc) >> 0x18 & 3) << 0x18 |
                    (*(uint *)(outputChunk + 0xc) >> 0x1a & 7) << 0x1a |
                    *(uint *)(outputChunk + 0xc) & 0xe0000000 | tempDeclWord0 & 0xffffff;
@@ -11907,7 +11907,7 @@ int _LinearizeFixOutputReads(stream)
             if (((*(uint *)(opChunk + 0x14) >> 0x11 & 7) == 3) && (*(ushort *)(opChunk + 0x1a) == outputIndex)
                ) {
               *(uint *)(opChunk + 0x14) = *(uint *)(opChunk + 0x14) & 0xfff1ffff | 0x20000;
-              *(undefined2 *)(opChunk + 0x1a) = (*(unsigned short *)((unsigned char *)&(tempDeclWord1OrScanChunk) + 2));
+              *(undefined2 *)(opChunk + 0x1a) = (*(unsigned short *)((unsigned char *)&(tempDeclWord1Overlay) + 2));
             }
             opWord0 = *(uint *)(opChunk + 0xc);
             loopIndex2 = 0;
@@ -11917,7 +11917,7 @@ int _LinearizeFixOutputReads(stream)
                 if (((*(uint *)(sourceOperandRewrite + 0xc) >> 0x17 & 7) == 3) &&
                    (*(ushort *)(sourceOperandRewrite + 0x12) == outputIndex)) {
                   *(uint *)(sourceOperandRewrite + 0xc) = *(uint *)(sourceOperandRewrite + 0xc) & 0xfc7fffff | 0x800000;
-                  *(undefined2 *)(sourceOperandRewrite + 0x12) = (*(unsigned short *)((unsigned char *)&(tempDeclWord1OrScanChunk) + 2));
+                  *(undefined2 *)(sourceOperandRewrite + 0x12) = (*(unsigned short *)((unsigned char *)&(tempDeclWord1Overlay) + 2));
                   opWord0 = *(uint *)(opChunk + 0xc);
                 }
                 loopIndex2 = loopIndex2 + 1;
@@ -11964,7 +11964,7 @@ LAB_97c07a34:
                        tempSizeMinusOne << 0x1a | (tempDeclWord0 >> 0x1a & 7) << 0x17;
             movDest0 = movDest0 | 0x60000;
             movSrc0A = tempSizeMinusOne << 0xc | 0x8d8000;
-            movSrc0B = tempDeclWord1OrScanChunk & 0xffff;
+            movSrc0B = tempDeclWord1Overlay & 0xffff;
             movDest1 = (uint)outputIndex;
             movChunk = _PPStreamInsertOperationAfterChunk
                               (stream,&movHeader,0,0,*(undefined4 *)(opChunk + 4));

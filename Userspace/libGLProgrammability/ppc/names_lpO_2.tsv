@@ -104,3 +104,5 @@ use	_InterpreterRasterOpMachine_Blending	fVar4	clampLowerLimitB	CONFIRMED	0.0 (t
 use	_InterpreterRasterOpMachine_Blending	fVar4	selectedFactorB	CONFIRMED	blue blend factor picked per blend equation (dstFactorB / srcFactorB), multiplied into the second term	^\s*fVar4\ =\ local_48;$	^\s*local_48\ =\ local_58;$	all	none
 use	_InterpreterRasterOpMachine_Blending	fVar4	selectedFactorB	CONFIRMED	blue blend factor picked per blend equation (dstFactorB / srcFactorB), multiplied into the second term	^\s*fVar4\ =\ local_58;$	^\s*break;$	all	none
 use	_InterpreterRasterOpMachine_Blending	fVar4	selectedFactorB	CONFIRMED	blue blend factor picked per blend equation (dstFactorB / srcFactorB), multiplied into the second term	^\s*fVar2\ =\ fVar3\ \*\ local_48\ \-\ fVar2\ \*\ fVar4;$	^\s*LAB_97bd7230:$	all	none
+func	DAT_a7b7bf80	regHashFunctionPtr	CONFIRMED	__data word at 0xa7b7bf80 holds the address of _regHashFunction; passed as the hash-function argument of _HashTableNew/_HashSetNew
+func	DAT_a7b7bf7c	regEqualsFunctionPtr	CONFIRMED	__data word at 0xa7b7bf7c holds the address of _regEqualsFunction; passed as the equals-function argument of _HashTableNew/_HashSetNew

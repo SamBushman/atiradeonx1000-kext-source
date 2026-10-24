@@ -1006,8 +1006,8 @@ DAT_a7b7bf6c	0xa7b7bf6c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7b
 DAT_a7b7bf70	0xa7b7bf70	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf70 asm("DAT_a7b7bf70");	pointer -> _defaultHashFunction	data.s
 DAT_a7b7bf74	0xa7b7bf74	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf74 asm("DAT_a7b7bf74");	pointer -> _instructionIndexEqualsFunction	data.s
 DAT_a7b7bf78	0xa7b7bf78	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf78 asm("DAT_a7b7bf78");	pointer -> _instructionIndexHashFunction	data.s
-DAT_a7b7bf7c	0xa7b7bf7c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf7c asm("DAT_a7b7bf7c");	pointer -> _regEqualsFunction	data.s
-DAT_a7b7bf80	0xa7b7bf80	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf80 asm("DAT_a7b7bf80");	pointer -> _regHashFunction	data.s
+regEqualsFunctionPtr	0xa7b7bf7c	__DATA,__data	undefined4	4	extern unsigned int regEqualsFunctionPtr asm("regEqualsFunctionPtr");	pointer -> _regEqualsFunction	data.s
+regHashFunctionPtr	0xa7b7bf80	__DATA,__data	undefined4	4	extern unsigned int regHashFunctionPtr asm("regHashFunctionPtr");	pointer -> _regHashFunction	data.s
 std__string___S_empty_rep_storage	0xa7b7bf84	__DATA,__data	undefined1	1		0x00000000	data.s
 DAT_a7b7bf8c	0xa7b7bf8c	__DATA,__data	undefined4	4	extern unsigned int DAT_a7b7bf8c asm("DAT_a7b7bf8c");	0x00000000	data.s
 SYM_a7b7bf8c	0xa7b7bf8c	__DATA,__data	undefined4	4		0x00000000	data.s

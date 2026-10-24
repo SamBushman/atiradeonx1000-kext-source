@@ -1122,7 +1122,7 @@ int _PPCRuntimeCompilerWritePrologAV(compiler)
   int chunkIndex;
   undefined4 *cursorAfterMtctr;
   uint *codeCursor2;
-  undefined4 *vectorInstWord;
+  undefined4 *instWritePtr;
   uint saveOffset;
   int codeCursor3;
   int ppcInstWord;
@@ -1239,15 +1239,15 @@ int _PPCRuntimeCompilerWritePrologAV(compiler)
     if ((*(uint *)(programInfo2 + 0x34) & 4) != 0) {
       codeCursor = *(undefined4 **)(compiler + 0xe30);
       *codeCursor = 0x7c6068ce;
-      vectorInstWord = codeCursor + 1;
-      *(undefined4 **)(compiler + 0xe30) = vectorInstWord;
+      instWritePtr = codeCursor + 1;
+      *(undefined4 **)(compiler + 0xe30) = instWritePtr;
       if ((*(uint *)(compiler + 0xe50) & 8) == 0) {
-        *vectorInstWord = 0x11c9436a;
+        *instWritePtr = 0x11c9436a;
         programInfo2 = *(int *)(compiler + 0xe24);
         *(undefined4 **)(compiler + 0xe30) = codeCursor + 2;
       }
       else {
-        *vectorInstWord = 0x1080190a;
+        *instWritePtr = 0x1080190a;
         codeCursor[2] = 0x11c9236a;
         programInfo2 = *(int *)(compiler + 0xe24);
         *(undefined4 **)(compiler + 0xe30) = codeCursor + 3;
@@ -1448,15 +1448,15 @@ int _PPCRuntimeCompilerCompileNO(compiler)
   undefined4 codeBuffer;
   undefined *opTemplate;
   undefined4 srcDescWord0;
-  undefined4 srcDescWord1OrCodePtr;
+  undefined4 argReg5;
   undefined4 srcDescWord2;
   undefined4 srcDescWord3;
-  int srcDescWord4OrTemp;
-  undefined4 *nextInstructionOrLeftover;
+  int argReg8;
+  undefined4 *argReg9;
   undefined4 srcDescWord8;
   undefined4 srcDescWord5;
   int codeCursor;
-  int *srcDescWord6OrCodePtr;
+  int *argReg10;
   int codeBufferCapacity;
   uint componentCount;
   uint opcode;
@@ -1536,13 +1536,13 @@ int _PPCRuntimeCompilerCompileNO(compiler)
             ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,currentInst[0xd],currentInst[0xe],currentInst[0xf],currentInst[0x10],currentInst[0x11],
                        currentInst[0x12],currentInst[0x13],currentInst[0x14],currentInst[0x15],0,0);
             instructionRecord = *(int *)(compiler + 0xe28);
-            srcDescWord6OrCodePtr = *(int **)(instructionRecord + 0x70);
-            srcDescWord1OrCodePtr = *(undefined4 *)(instructionRecord + 0x5c);
+            argReg10 = *(int **)(instructionRecord + 0x70);
+            argReg5 = *(undefined4 *)(instructionRecord + 0x5c);
             srcDescWord2 = *(undefined4 *)(instructionRecord + 0x60);
             srcDescWord3 = *(undefined4 *)(instructionRecord + 100);
-            srcDescWord4OrTemp = *(int *)(instructionRecord + 0x68);
-            ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(instructionRecord + 0x58),srcDescWord1OrCodePtr,srcDescWord2,srcDescWord3,srcDescWord4OrTemp,
-                       *(undefined4 *)(instructionRecord + 0x6c),srcDescWord6OrCodePtr,*(undefined4 *)(instructionRecord + 0x74),
+            argReg8 = *(int *)(instructionRecord + 0x68);
+            ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(instructionRecord + 0x58),argReg5,srcDescWord2,srcDescWord3,argReg8,
+                       *(undefined4 *)(instructionRecord + 0x6c),argReg10,*(undefined4 *)(instructionRecord + 0x74),
                        *(undefined4 *)(instructionRecord + 0x78),0,1);
             intTemp = _glpRTCAddAChunk_97bd7cbc(&_glpOpMultRTC,*(undefined4 *)(compiler + 0xe30));
             *(int *)(compiler + 0xe30) = *(int *)(compiler + 0xe30) + intTemp * 4;
@@ -1559,12 +1559,12 @@ int _PPCRuntimeCompilerCompileNO(compiler)
                 srcIndex = 1;
                 srcDescWord8 = *(undefined4 *)(instruction + 0x54);
                 srcDescWord7 = *(undefined4 *)(instruction + 0x50);
-                srcDescWord6OrCodePtr = *(int **)(instruction + 0x4c);
+                argReg10 = *(int **)(instruction + 0x4c);
                 srcDescWord0 = *(undefined4 *)(instruction + 0x34);
-                srcDescWord1OrCodePtr = *(undefined4 *)(instruction + 0x38);
+                argReg5 = *(undefined4 *)(instruction + 0x38);
                 srcDescWord2 = *(undefined4 *)(instruction + 0x3c);
                 srcDescWord3 = *(undefined4 *)(instruction + 0x40);
-                srcDescWord4OrTemp = *(int *)(instruction + 0x44);
+                argReg8 = *(int *)(instruction + 0x44);
                 srcDescWord5 = *(undefined4 *)(instruction + 0x48);
                 goto LAB_97bdc778;
               }
@@ -1575,15 +1575,15 @@ int _PPCRuntimeCompilerCompileNO(compiler)
               instruction = *(int *)(compiler + 0xe28);
               srcDescWord8 = *(undefined4 *)(instruction + 0x78);
               srcDescWord7 = *(undefined4 *)(instruction + 0x74);
-              srcDescWord6OrCodePtr = *(int **)(instruction + 0x70);
+              argReg10 = *(int **)(instruction + 0x70);
               srcDescWord0 = *(undefined4 *)(instruction + 0x58);
-              srcDescWord1OrCodePtr = *(undefined4 *)(instruction + 0x5c);
+              argReg5 = *(undefined4 *)(instruction + 0x5c);
               srcDescWord2 = *(undefined4 *)(instruction + 0x60);
               srcDescWord3 = *(undefined4 *)(instruction + 100);
-              srcDescWord4OrTemp = *(int *)(instruction + 0x68);
+              argReg8 = *(int *)(instruction + 0x68);
               srcDescWord5 = *(undefined4 *)(instruction + 0x6c);
 LAB_97bdc778:
-              ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,srcDescWord0,srcDescWord1OrCodePtr,srcDescWord2,srcDescWord3,srcDescWord4OrTemp,srcDescWord5,srcDescWord6OrCodePtr,srcDescWord7,srcDescWord8,0,0);
+              ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,srcDescWord0,argReg5,srcDescWord2,srcDescWord3,argReg8,srcDescWord5,argReg10,srcDescWord7,srcDescWord8,0,0);
             }
             if (componentCount == 2) {
               chunkIndex = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
@@ -1591,15 +1591,15 @@ LAB_97bdc778:
               *(undefined4 *)(codeCursor + chunkIndex * 4) = 0xfd008090;
               srcRecordPtr = srcIndex * 0x24 + *(int *)(compiler + 0xe28);
               *(int *)(compiler + 0xe30) = codeCursor + chunkIndex * 4 + 4;
-              srcDescWord1OrCodePtr = *(undefined4 *)(srcRecordPtr + 0x38);
+              argReg5 = *(undefined4 *)(srcRecordPtr + 0x38);
               srcDescWord2 = *(undefined4 *)(srcRecordPtr + 0x3c);
               srcDescWord3 = *(undefined4 *)(srcRecordPtr + 0x40);
-              srcDescWord4OrTemp = *(int *)(srcRecordPtr + 0x44);
-              ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(srcRecordPtr + 0x34),srcDescWord1OrCodePtr,srcDescWord2,srcDescWord3,srcDescWord4OrTemp,
+              argReg8 = *(int *)(srcRecordPtr + 0x44);
+              ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(srcRecordPtr + 0x34),argReg5,srcDescWord2,srcDescWord3,argReg8,
                          *(undefined4 *)(srcRecordPtr + 0x48),*(undefined4 *)(srcRecordPtr + 0x4c),
                          *(undefined4 *)(srcRecordPtr + 0x50),*(undefined4 *)(srcRecordPtr + 0x54),1,1);
               chunkByteOffset = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
-              srcDescWord6OrCodePtr = *(int **)(compiler + 0xe30);
+              argReg10 = *(int **)(compiler + 0xe30);
               chunkByteOffset = chunkByteOffset << 2;
               ppcOpBase = 0xfe200000;
             }
@@ -1619,15 +1619,15 @@ LAB_97bdc778:
               *(undefined4 *)(codeCursor3 + chunkIndex2 * 4) = 0xfe208090;
               *(int *)(compiler + 0xe30) = codeCursor3 + chunkIndex2 * 4 + 4;
               srcRecordPtr = srcIndex * 0x24 + *(int *)(compiler + 0xe28);
-              srcDescWord1OrCodePtr = *(undefined4 *)(srcRecordPtr + 0x38);
+              argReg5 = *(undefined4 *)(srcRecordPtr + 0x38);
               srcDescWord2 = *(undefined4 *)(srcRecordPtr + 0x3c);
               srcDescWord3 = *(undefined4 *)(srcRecordPtr + 0x40);
-              srcDescWord4OrTemp = *(int *)(srcRecordPtr + 0x44);
-              ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(srcRecordPtr + 0x34),srcDescWord1OrCodePtr,srcDescWord2,srcDescWord3,srcDescWord4OrTemp,
+              argReg8 = *(int *)(srcRecordPtr + 0x44);
+              ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(srcRecordPtr + 0x34),argReg5,srcDescWord2,srcDescWord3,argReg8,
                          *(undefined4 *)(srcRecordPtr + 0x48),*(undefined4 *)(srcRecordPtr + 0x4c),
                          *(undefined4 *)(srcRecordPtr + 0x50),*(undefined4 *)(srcRecordPtr + 0x54),2,1);
               chunkByteOffset = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
-              srcDescWord6OrCodePtr = *(int **)(compiler + 0xe30);
+              argReg10 = *(int **)(compiler + 0xe30);
               chunkByteOffset = chunkByteOffset << 2;
               ppcOpBase = 0xfe400000;
             }
@@ -1659,21 +1659,21 @@ LAB_97bdc778:
               *(undefined4 *)(codeCursor3 + chunkIndex2 * 4) = 0xfe408090;
               *(int *)(compiler + 0xe30) = codeCursor3 + chunkIndex2 * 4 + 4;
               srcRecordPtr = srcByteOffset + *(int *)(compiler + 0xe28);
-              srcDescWord1OrCodePtr = *(undefined4 *)(srcRecordPtr + 0x38);
+              argReg5 = *(undefined4 *)(srcRecordPtr + 0x38);
               srcDescWord2 = *(undefined4 *)(srcRecordPtr + 0x3c);
               srcDescWord3 = *(undefined4 *)(srcRecordPtr + 0x40);
-              srcDescWord4OrTemp = *(int *)(srcRecordPtr + 0x44);
-              ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(srcRecordPtr + 0x34),srcDescWord1OrCodePtr,srcDescWord2,srcDescWord3,srcDescWord4OrTemp,
+              argReg8 = *(int *)(srcRecordPtr + 0x44);
+              ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)(srcRecordPtr + 0x34),argReg5,srcDescWord2,srcDescWord3,argReg8,
                          *(undefined4 *)(srcRecordPtr + 0x48),*(undefined4 *)(srcRecordPtr + 0x4c),
                          *(undefined4 *)(srcRecordPtr + 0x50),*(undefined4 *)(srcRecordPtr + 0x54),3,1);
               chunkByteOffset = _glpRTCAddAChunk_97bd7cbc(&_glpOpDot4RTC,*(undefined4 *)(compiler + 0xe30));
-              srcDescWord6OrCodePtr = *(int **)(compiler + 0xe30);
+              argReg10 = *(int **)(compiler + 0xe30);
               chunkByteOffset = chunkByteOffset << 2;
               ppcOpBase = 0xfe600000;
             }
-            *(uint *)((int)srcDescWord6OrCodePtr + chunkByteOffset) = ppcOpBase | 0x8090;
-            *(undefined4 *)((int)srcDescWord6OrCodePtr + chunkByteOffset + 4) = 0xfe004090;
-            *(int *)(compiler + 0xe30) = (int)srcDescWord6OrCodePtr + chunkByteOffset + 8;
+            *(uint *)((int)argReg10 + chunkByteOffset) = ppcOpBase | 0x8090;
+            *(undefined4 *)((int)argReg10 + chunkByteOffset + 4) = 0xfe004090;
+            *(int *)(compiler + 0xe30) = (int)argReg10 + chunkByteOffset + 8;
           }
 LAB_97bdcb04:
           ((int (*)())_PPCRuntimeCompilerWriteDestinationNO)(compiler,0);
@@ -1727,13 +1727,13 @@ LAB_97bdcb04:
                 loopIndex2 = 0;
                 do {
                   nextSourceIndex = loopIndex2 + 1;
-                  srcDescWord6OrCodePtr = *(int **)((int)currentInst + intTemp + 0x4c);
-                  srcDescWord1OrCodePtr = *(undefined4 *)((int)currentInst + intTemp + 0x38);
+                  argReg10 = *(int **)((int)currentInst + intTemp + 0x4c);
+                  argReg5 = *(undefined4 *)((int)currentInst + intTemp + 0x38);
                   srcDescWord2 = *(undefined4 *)((int)currentInst + intTemp + 0x3c);
                   srcDescWord3 = *(undefined4 *)((int)currentInst + intTemp + 0x40);
-                  srcDescWord4OrTemp = *(int *)((int)currentInst + intTemp + 0x44);
-                  ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)((int)currentInst + intTemp + 0x34),srcDescWord1OrCodePtr,srcDescWord2,srcDescWord3,
-                             srcDescWord4OrTemp,*(undefined4 *)((int)currentInst + intTemp + 0x48),srcDescWord6OrCodePtr,
+                  argReg8 = *(int *)((int)currentInst + intTemp + 0x44);
+                  ((int (*)())_PPCRuntimeCompilerLoadSourceNO)(compiler,*(undefined4 *)((int)currentInst + intTemp + 0x34),argReg5,srcDescWord2,srcDescWord3,
+                             argReg8,*(undefined4 *)((int)currentInst + intTemp + 0x48),argReg10,
                              *(undefined4 *)((int)currentInst + intTemp + 0x50),
                              *(undefined4 *)((int)currentInst + intTemp + 0x54),componentIndex,loopIndex2);
                   currentInst = *(uint **)(compiler + 0xe28);
@@ -2148,26 +2148,26 @@ switchD_97bdd53c_default:
                 *(undefined4 **)(compiler + 0xe30) = codeWritePtr5 + 1;
                 goto switchD_97bdcdfc_caseD_3;
               case 0x42:
-                srcDescWord4OrTemp = *(int *)(compiler + 0xe20);
-                if (*(int *)(*(int *)(srcDescWord4OrTemp + 0xd80) + 0x38) - 0x8b30U < 2) {
-                  srcDescWord6OrCodePtr = *(int **)(*(int *)(compiler + 0xe28) + 0x58);
+                argReg8 = *(int *)(compiler + 0xe20);
+                if (*(int *)(*(int *)(argReg8 + 0xd80) + 0x38) - 0x8b30U < 2) {
+                  argReg10 = *(int **)(*(int *)(compiler + 0xe28) + 0x58);
                   samplerTextureObject = *(undefined4 *)
                             (*(int *)((uint)*(ushort *)(*(int *)(compiler + 0xe28) + 0x68) * 4 +
-                                      srcDescWord4OrTemp + 0xd84) + *srcDescWord6OrCodePtr);
+                                      argReg8 + 0xd84) + *argReg10);
                 }
                 else {
                   samplerTextureObject = *(undefined4 *)(*(int *)(compiler + 0xe28) + 0x10c);
                 }
-                ((int (*)())_PPCTextureSamplerAttachGLDContext)(*(undefined4 *)(compiler + 0xe1c),*(undefined4 *)(srcDescWord4OrTemp + 0xd9c));
+                ((int (*)())_PPCTextureSamplerAttachGLDContext)(*(undefined4 *)(compiler + 0xe1c),*(undefined4 *)(argReg8 + 0xd9c));
                 intTemp = *(int *)(*(int *)(compiler + 0xe28) + 0x110);
                 if (intTemp == 2) {
-                  srcDescWord1OrCodePtr = *(undefined4 *)(compiler + 0xe30);
-                  texCodeCursor = ((int (*)())_PPCTextureSamplerSampleTexelRECTRTCNO)(*(undefined4 *)(compiler + 0xe1c),samplerTextureObject,srcDescWord1OrCodePtr);
+                  argReg5 = *(undefined4 *)(compiler + 0xe30);
+                  texCodeCursor = ((int (*)())_PPCTextureSamplerSampleTexelRECTRTCNO)(*(undefined4 *)(compiler + 0xe1c),samplerTextureObject,argReg5);
                 }
                 else {
                   if (intTemp != 3) goto switchD_97bdcdfc_caseD_3;
-                  srcDescWord1OrCodePtr = *(undefined4 *)(compiler + 0xe30);
-                  texCodeCursor = ((int (*)())_PPCTextureSamplerSampleTexel2DRTCNO)(*(undefined4 *)(compiler + 0xe1c),samplerTextureObject,srcDescWord1OrCodePtr);
+                  argReg5 = *(undefined4 *)(compiler + 0xe30);
+                  texCodeCursor = ((int (*)())_PPCTextureSamplerSampleTexel2DRTCNO)(*(undefined4 *)(compiler + 0xe1c),samplerTextureObject,argReg5);
                 }
                 *(undefined4 *)(compiler + 0xe30) = texCodeCursor;
                 goto switchD_97bdcdfc_caseD_3;
@@ -2219,29 +2219,29 @@ LAB_97bdd85c:
             intTemp = glpDCBReallocResult2 - intTemp >> 2;
             if (intTemp != 0) {
               intTemp = intTemp * 4;
-              srcDescWord6OrCodePtr = (int *)(*(int *)(compiler + 0xe3c) + intTemp);
+              argReg10 = (int *)(*(int *)(compiler + 0xe3c) + intTemp);
               *(int *)(compiler + 0xe30) = *(int *)(compiler + 0xe30) + intTemp;
-              srcDescWord4OrTemp = *(int *)(compiler + 0xe40) + intTemp;
+              argReg8 = *(int *)(compiler + 0xe40) + intTemp;
               *(int *)(compiler + 0xe34) = *(int *)(compiler + 0xe34) + intTemp;
               *(int *)(compiler + 0xe38) = *(int *)(compiler + 0xe38) + intTemp;
-              *(int **)(compiler + 0xe3c) = srcDescWord6OrCodePtr;
-              *(int *)(compiler + 0xe40) = srcDescWord4OrTemp;
+              *(int **)(compiler + 0xe3c) = argReg10;
+              *(int *)(compiler + 0xe40) = argReg8;
             }
           }
         }
         intTemp = *(int *)(compiler + 0xe24);
-        nextInstructionOrLeftover = (undefined4 *)(*(int *)(compiler + 0xe28) + 0x11c);
+        argReg9 = (undefined4 *)(*(int *)(compiler + 0xe28) + 0x11c);
         if (*(int *)(compiler + 0xe28) == *(int *)(intTemp + 4)) {
-          nextInstructionOrLeftover = (undefined4 *)0x0;
+          argReg9 = (undefined4 *)0x0;
         }
-        *(undefined4 **)(compiler + 0xe28) = nextInstructionOrLeftover;
-        instructionListCursor = nextInstructionOrLeftover;
+        *(undefined4 **)(compiler + 0xe28) = argReg9;
+        instructionListCursor = argReg9;
       }
       if ((*(int *)(intTemp + 0x38) != 0x8804) && (*(int *)(intTemp + 0x38) != 0x8b30)) {
         codeCursor2 = *(undefined4 **)(compiler + 0xe30);
         *codeCursor2 = 0xc0060010;
-        nextInstructionOrLeftover = codeCursor2 + 1;
-        *nextInstructionOrLeftover = 0xc0260014;
+        argReg9 = codeCursor2 + 1;
+        *argReg9 = 0xc0260014;
         codeCursor2[2] = 0xc0460018;
         codeCursor2[3] = 0xc066001c;
         *(undefined4 **)(compiler + 0xe30) = codeCursor2 + 4;
@@ -2270,7 +2270,7 @@ LAB_97bdd85c:
       *(undefined4 *)(compiler + 0xe2c) = glpDCBReallocResult;
                     
                     
-      (*_glpPushInstructions)(codeWordCount,glpDCBReallocResult,srcDescWord1OrCodePtr,srcDescWord2,srcDescWord3,srcDescWord4OrTemp,nextInstructionOrLeftover,srcDescWord6OrCodePtr);
+      (*_glpPushInstructions)(codeWordCount,glpDCBReallocResult,argReg5,srcDescWord2,srcDescWord3,argReg8,argReg9,argReg10);
       return;
     }
   } while( true );
@@ -6265,31 +6265,31 @@ int _PPCNoiseGeneratorCalculate1DAVRTC(noiseTable, codeCursor)
   undefined4 noiseTable;
   undefined4 *codeCursor;
 {
-  undefined4 *vectorInstWord;
+  undefined4 *instWritePtr;
   int glpRTCAddAChunkResult;
   int glpRTCAddAChunkResult2;
   uint loopIndex;
-  undefined4 *vectorInstWord2;
+  undefined4 *instWritePtr2;
   
   *codeCursor = 0x11a8400a;
   codeCursor[1] = 0x102b5c84;
-  vectorInstWord2 = codeCursor + 2;
+  instWritePtr2 = codeCursor + 2;
   loopIndex = 0;
   do {
     loopIndex = loopIndex + 1;
-    glpRTCAddAChunkResult = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpFirstStageAVRTC,vectorInstWord2);
-    glpRTCAddAChunkResult2 = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpSecondStage1DAVRTC,vectorInstWord2 + glpRTCAddAChunkResult);
-    vectorInstWord = vectorInstWord2 + glpRTCAddAChunkResult + glpRTCAddAChunkResult2;
-    *vectorInstWord = 0x1122486e;
-    vectorInstWord[1] = 0x10003b6e;
-    vectorInstWord[2] = 0x10213aee;
-    vectorInstWord2 = vectorInstWord + 3;
+    glpRTCAddAChunkResult = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpFirstStageAVRTC,instWritePtr2);
+    glpRTCAddAChunkResult2 = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpSecondStage1DAVRTC,instWritePtr2 + glpRTCAddAChunkResult);
+    instWritePtr = instWritePtr2 + glpRTCAddAChunkResult + glpRTCAddAChunkResult2;
+    *instWritePtr = 0x1122486e;
+    instWritePtr[1] = 0x10003b6e;
+    instWritePtr[2] = 0x10213aee;
+    instWritePtr2 = instWritePtr + 3;
   } while (loopIndex < 6);
-  *vectorInstWord2 = 0x10494c84;
-  vectorInstWord[4] = 0x1120038c;
-  vectorInstWord[5] = 0x39c00030;
-  vectorInstWord[6] = 0x7dae18ce;
-  return vectorInstWord + 7;
+  *instWritePtr2 = 0x10494c84;
+  instWritePtr[4] = 0x1120038c;
+  instWritePtr[5] = 0x39c00030;
+  instWritePtr[6] = 0x7dae18ce;
+  return instWritePtr + 7;
 }
 
 /* _PPCNoiseGeneratorCalculate2DAVRTC @ 0x97be419c (228 bytes) */
@@ -6297,31 +6297,31 @@ int _PPCNoiseGeneratorCalculate2DAVRTC(noiseTable, codeCursor)
   undefined4 noiseTable;
   undefined4 *codeCursor;
 {
-  undefined4 *vectorInstWord;
+  undefined4 *instWritePtr;
   int glpRTCAddAChunkResult;
   int glpRTCAddAChunkResult2;
   uint loopIndex;
-  undefined4 *vectorInstWord2;
+  undefined4 *instWritePtr2;
   
   *codeCursor = 0x11a8400a;
   codeCursor[1] = 0x102b5c84;
-  vectorInstWord2 = codeCursor + 2;
+  instWritePtr2 = codeCursor + 2;
   loopIndex = 0;
   do {
     loopIndex = loopIndex + 1;
-    glpRTCAddAChunkResult = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpFirstStageAVRTC,vectorInstWord2);
-    glpRTCAddAChunkResult2 = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpSecondStage2DAVRTC,vectorInstWord2 + glpRTCAddAChunkResult);
-    vectorInstWord = vectorInstWord2 + glpRTCAddAChunkResult + glpRTCAddAChunkResult2;
-    *vectorInstWord = 0x1122486e;
-    vectorInstWord[1] = 0x10003b6e;
-    vectorInstWord[2] = 0x10213aee;
-    vectorInstWord2 = vectorInstWord + 3;
+    glpRTCAddAChunkResult = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpFirstStageAVRTC,instWritePtr2);
+    glpRTCAddAChunkResult2 = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpSecondStage2DAVRTC,instWritePtr2 + glpRTCAddAChunkResult);
+    instWritePtr = instWritePtr2 + glpRTCAddAChunkResult + glpRTCAddAChunkResult2;
+    *instWritePtr = 0x1122486e;
+    instWritePtr[1] = 0x10003b6e;
+    instWritePtr[2] = 0x10213aee;
+    instWritePtr2 = instWritePtr + 3;
   } while (loopIndex < 6);
-  *vectorInstWord2 = 0x10494c84;
-  vectorInstWord[4] = 0x1120038c;
-  vectorInstWord[5] = 0x39c00030;
-  vectorInstWord[6] = 0x7dae18ce;
-  return vectorInstWord + 7;
+  *instWritePtr2 = 0x10494c84;
+  instWritePtr[4] = 0x1120038c;
+  instWritePtr[5] = 0x39c00030;
+  instWritePtr[6] = 0x7dae18ce;
+  return instWritePtr + 7;
 }
 
 /* _PPCNoiseGeneratorCalculate3DAVRTC @ 0x97be4280 (228 bytes) */
@@ -6329,31 +6329,31 @@ int _PPCNoiseGeneratorCalculate3DAVRTC(noiseTable, codeCursor)
   undefined4 noiseTable;
   undefined4 *codeCursor;
 {
-  undefined4 *vectorInstWord;
+  undefined4 *instWritePtr;
   int glpRTCAddAChunkResult;
   int glpRTCAddAChunkResult2;
   uint loopIndex;
-  undefined4 *vectorInstWord2;
+  undefined4 *instWritePtr2;
   
   *codeCursor = 0x11a8400a;
   codeCursor[1] = 0x102b5c84;
-  vectorInstWord2 = codeCursor + 2;
+  instWritePtr2 = codeCursor + 2;
   loopIndex = 0;
   do {
     loopIndex = loopIndex + 1;
-    glpRTCAddAChunkResult = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpFirstStageAVRTC,vectorInstWord2);
-    glpRTCAddAChunkResult2 = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpSecondStage3DAVRTC,vectorInstWord2 + glpRTCAddAChunkResult);
-    vectorInstWord = vectorInstWord2 + glpRTCAddAChunkResult + glpRTCAddAChunkResult2;
-    *vectorInstWord = 0x1122486e;
-    vectorInstWord[1] = 0x10003b6e;
-    vectorInstWord[2] = 0x10213aee;
-    vectorInstWord2 = vectorInstWord + 3;
+    glpRTCAddAChunkResult = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpFirstStageAVRTC,instWritePtr2);
+    glpRTCAddAChunkResult2 = ((int (*)())_glpRTCAddAChunk_97be4088)(&_glpOpSecondStage3DAVRTC,instWritePtr2 + glpRTCAddAChunkResult);
+    instWritePtr = instWritePtr2 + glpRTCAddAChunkResult + glpRTCAddAChunkResult2;
+    *instWritePtr = 0x1122486e;
+    instWritePtr[1] = 0x10003b6e;
+    instWritePtr[2] = 0x10213aee;
+    instWritePtr2 = instWritePtr + 3;
   } while (loopIndex < 6);
-  *vectorInstWord2 = 0x10494c84;
-  vectorInstWord[4] = 0x1120038c;
-  vectorInstWord[5] = 0x39c00030;
-  vectorInstWord[6] = 0x7dae18ce;
-  return vectorInstWord + 7;
+  *instWritePtr2 = 0x10494c84;
+  instWritePtr[4] = 0x1120038c;
+  instWritePtr[5] = 0x39c00030;
+  instWritePtr[6] = 0x7dae18ce;
+  return instWritePtr + 7;
 }
 
 /* _PPCNoiseGeneratorCalculate4DAVRTC @ 0x97be4364 (8 bytes) */

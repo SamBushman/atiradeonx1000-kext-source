@@ -173,7 +173,7 @@ local	_execute_stack_op	local_40	operand	CONFIRMED	popped top of stack / decoded
 local	_execute_stack_op	uVar6	first	CONFIRMED	second-from-top operand of a binary op (GCC 4.0 unwind-dw2.c)
 local	_execute_stack_op	local_3c	stmp	CONFIRMED	signed leb128 temporary (DW_OP_consts) (GCC 4.0 unwind-dw2.c)
 local	_execute_stack_op	local_30	utmp	CONFIRMED	unsigned leb128 temporary (DW_OP_constu, DW_OP_plus_uconst, DW_OP_regx...) (GCC 4.0 unwind-dw2.c)
-local	_execute_stack_op	local_34	offsetOrIndex	CONFIRMED	branch offset of DW_OP_bra/skip, or the index of DW_OP_pick (GCC 4.0 unwind-dw2.c)
+local	_execute_stack_op	local_34	decodedImmediate	CONFIRMED	decoded immediate operand of the current opcode: pick index (1 byte), bra/skip offset (2 bytes) or an sleb128 value read through &decodedImmediate (address taken, so one variable)
 local	_execute_stack_op	uVar2	branchOffset	CONFIRMED	signed 16-bit offset of DW_OP_bra/DW_OP_skip (GCC 4.0 unwind-dw2.c)
 local	_execute_stack_op	bVar1	operandSize	CONFIRMED	operand size byte of DW_OP_deref_size / the low byte of an 8-byte constant (GCC 4.0 unwind-dw2.c)
 local	_execute_stack_op	puVar7	opPtrNext	CONFIRMED	op_ptr after the opcode and its operands (GCC 4.0 unwind-dw2.c)
