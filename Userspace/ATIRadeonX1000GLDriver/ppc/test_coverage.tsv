@@ -2619,7 +2619,7 @@
 0x14e2dc	FUN_0014e2dc	1032	no	indirect call (driver context / vtable / callback)
 0x14e6e4	Inst__reassociate_14e6e4	744	yes	
 0x14e9e4	FUN_0014e9e4	2620	no	indirect call (driver context / vtable / callback)
-0x14f420	FUN_0014f420	4784	no	indirect call (driver context / vtable / callback)
+0x14f420	Inst__swapMatchedOperandsBetweenUses	4784	no	indirect call (driver context / vtable / callback)
 0x1506d0	FUN_001506d0	256	yes	
 0x1507d0	FUN_001507d0	964	yes	
 0x150b94	Inst__reassociate_150b94	420	yes	

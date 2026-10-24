@@ -2825,7 +2825,7 @@ extern int Inst__collapseThreeComponentSumToDot3();
 extern int FUN_0014e2dc();
 extern int Inst__reassociate_14e6e4();
 extern int FUN_0014e9e4();
-extern int FUN_0014f420();
+extern int Inst__swapMatchedOperandsBetweenUses();
 extern int FUN_001506d0();
 extern int FUN_001507d0();
 extern int Inst__reassociate_150b94();

@@ -354,33 +354,33 @@ use	FUN_0014f420	iVar3	operandIndex8	INFERRED	web passed only as callee paramete
 use	FUN_0014f420	local_5c	newSource2	INFERRED	web passed only as callee parameter newSource (2 uses, unanimous)	^\s*local_5c\ =\ local_a4\[2\];$	+1
 use	FUN_0014f420	local_5c	newSource2	INFERRED	web passed only as callee parameter newSource (2 uses, unanimous)	^\s*FUN_00106004\(uVar4,2,local_5c,1,\*\(undefined4\ \*\)\(iStack00000020\ \+\ 8\)\);$	+1
 use	FUN_0014f420	local_5c	newSource2	INFERRED	web passed only as callee parameter newSource (2 uses, unanimous)	^\s*FUN_00106004\(uVar4,1,local_5c,1,\*\(undefined4\ \*\)\(iStack00000020\ \+\ 8\)\);$	+1
-use	FUN_0014f420	local_60	set	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*local_60\ =\ local_cc;$	+1
-use	FUN_0014f420	local_60	set	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xbc,2,local_60\);$	+1
-use	FUN_0014f420	local_60	set	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xa4,2,local_60\);$	+1
-use	FUN_0014f420	local_a8	set2	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*local_a8\ =\ \*\(uint\ \*\)\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*$	+2
-use	FUN_0014f420	local_a8	set2	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xbc,1,local_a8\);$	+1
-use	FUN_0014f420	local_a8	set2	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xa4,1,local_a8\);$	+1
-use	FUN_0014f420	local_ac	set3	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_ac\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0xd0\)\ \&\ 1;$	+1
-use	FUN_0014f420	local_ac	set3	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_ac\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0x20\)\ \&\ 1\ \^\ local_ac;$	+1
-use	FUN_0014f420	local_ac	set3	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*\ \-2\)\ \*$	+2
-use	FUN_0014f420	local_ac	set3	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xbc,1,local_ac\);$	+1
-use	FUN_0014f420	local_b0	set4	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_b0\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0xb8\)\ \&\ 1;$	+1
-use	FUN_0014f420	local_b0	set4	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_b0\ =\ \(uint\)\(\(\*\(uint\ \*\)\(iVar19\ \+\ 0x20\)\ \&\ 1\)\ !=\ local_b0\);$	+1
-use	FUN_0014f420	local_b0	set4	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xa4,1,local_b0\);$	+1
-use	FUN_0014f420	local_b0	set4	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*\ \-2\)\ \*$@3	+2
-use	FUN_0014f420	local_d0	set5	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_d0\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0xd0\)\ >>\ 1\ \&\ 1;$	+1
-use	FUN_0014f420	local_d0	set5	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*\ \-2\)\ \*$@6	+2
-use	FUN_0014f420	local_d0	set5	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xbc,2,local_d0\);$	+1
-use	FUN_0014f420	local_d4	set6	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_d4\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0xb8\)\ >>\ 1\ \&\ 1;$	+1
-use	FUN_0014f420	local_d4	set6	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xa4,2,local_d4\);$	+1
-use	FUN_0014f420	local_d4	set6	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*\ \-2\)\ \*$@8	+2
-use	FUN_0014f420	local_d8	set7	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*local_d8\ =\ \*\(uint\ \*\)\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*$	+2
-use	FUN_0014f420	local_d8	set7	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xbc,1,local_d8\);$	+1
-use	FUN_0014f420	local_d8	set7	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xa4,1,local_d8\);$	+1
-use	FUN_0014f420	local_dc	set8	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_dc\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0xd0\)\ \&\ 1;$	+1
-use	FUN_0014f420	local_dc	set8	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_dc\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0x20\)\ \&\ 1\ \^\ local_dc;$	+1
-use	FUN_0014f420	local_dc	set8	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*\ \-2\)\ \*$@5	+2
-use	FUN_0014f420	local_dc	set8	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xbc,1,local_dc\);$	+1
+use	FUN_0014f420	local_60	absOtherAHome	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*local_60\ =\ local_cc;$	+1
+use	FUN_0014f420	local_60	absOtherAHome	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xbc,2,local_60\);$	+1
+use	FUN_0014f420	local_60	absOtherAHome	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xa4,2,local_60\);$	+1
+use	FUN_0014f420	local_a8	negateOtherB	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*local_a8\ =\ \*\(uint\ \*\)\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*$	+2
+use	FUN_0014f420	local_a8	negateOtherB	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xbc,1,local_a8\);$	+1
+use	FUN_0014f420	local_a8	negateOtherB	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xa4,1,local_a8\);$	+1
+use	FUN_0014f420	local_ac	negateOp2B	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_ac\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0xd0\)\ \&\ 1;$	+1
+use	FUN_0014f420	local_ac	negateOp2B	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_ac\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0x20\)\ \&\ 1\ \^\ local_ac;$	+1
+use	FUN_0014f420	local_ac	negateOp2B	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*\ \-2\)\ \*$	+2
+use	FUN_0014f420	local_ac	negateOp2B	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xbc,1,local_ac\);$	+1
+use	FUN_0014f420	local_b0	negateOp1B	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_b0\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0xb8\)\ \&\ 1;$	+1
+use	FUN_0014f420	local_b0	negateOp1B	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_b0\ =\ \(uint\)\(\(\*\(uint\ \*\)\(iVar19\ \+\ 0x20\)\ \&\ 1\)\ !=\ local_b0\);$	+1
+use	FUN_0014f420	local_b0	negateOp1B	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xa4,1,local_b0\);$	+1
+use	FUN_0014f420	local_b0	negateOp1B	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*\ \-2\)\ \*$@3	+2
+use	FUN_0014f420	local_d0	absOp2A	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_d0\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0xd0\)\ >>\ 1\ \&\ 1;$	+1
+use	FUN_0014f420	local_d0	absOp2A	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*\ \-2\)\ \*$@6	+2
+use	FUN_0014f420	local_d0	absOp2A	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xbc,2,local_d0\);$	+1
+use	FUN_0014f420	local_d4	absOp1A	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_d4\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0xb8\)\ >>\ 1\ \&\ 1;$	+1
+use	FUN_0014f420	local_d4	absOp1A	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xa4,2,local_d4\);$	+1
+use	FUN_0014f420	local_d4	absOp1A	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*\ \-2\)\ \*$@8	+2
+use	FUN_0014f420	local_d8	negateOtherA	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*local_d8\ =\ \*\(uint\ \*\)\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*$	+2
+use	FUN_0014f420	local_d8	negateOtherA	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xbc,1,local_d8\);$	+1
+use	FUN_0014f420	local_d8	negateOtherA	INFERRED	web passed only as callee parameter set (2 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xa4,1,local_d8\);$	+1
+use	FUN_0014f420	local_dc	negateOp2A	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_dc\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0xd0\)\ \&\ 1;$	+1
+use	FUN_0014f420	local_dc	negateOp2A	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*local_dc\ =\ \*\(uint\ \*\)\(iVar19\ \+\ 0x20\)\ \&\ 1\ \^\ local_dc;$	+1
+use	FUN_0014f420	local_dc	negateOp2A	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*\ \-2\)\ \*$@5	+2
+use	FUN_0014f420	local_dc	negateOp2A	INFERRED	web passed only as callee parameter set (1 uses, unanimous)	^\s*FUN_00103d50\(iVar19\ \+\ 0xbc,1,local_dc\);$	+1
 use	FUN_0014f420	uVar9	operandIndex9	INFERRED	web passed only as callee parameter operandIndex (1 uses, unanimous)	^\s*uVar9\ =\ param_1\[1\];$@3	+1
 use	FUN_0014f420	uVar9	operandIndex9	INFERRED	web passed only as callee parameter operandIndex (1 uses, unanimous)	^\s*local_d8\ =\ \*\(uint\ \*\)\(\(uVar9\ \+\ \(\(\(int\)uVar9\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar9\ <\ 0\ \&\&\ \(uVar9\ \&\ 1\)\ !=\ 0\)\)\ \*$	+2
 use	FUN_0014f420	uVar9	operandIndex9	INFERRED	web passed only as callee parameter operandIndex (1 uses, unanimous)	^\s*iVar19\ =\ iVar3\ \+\ uVar9\ \*\ 0x18\ \+\ 0x80;$	+1

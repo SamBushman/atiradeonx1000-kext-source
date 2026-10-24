@@ -2619,7 +2619,7 @@
 0x14e2dc	1032	FUN_0014e2dc	part_043	converted
 0x14e6e4	672	Inst__reassociate_14e6e4	part_043	converted
 0x14e9e4	2620	FUN_0014e9e4	part_043	converted
-0x14f420	4784	FUN_0014f420	part_043	converted
+0x14f420	4784	Inst__swapMatchedOperandsBetweenUses	part_043	converted
 0x1506d0	256	FUN_001506d0	part_043	converted
 0x1507d0	964	FUN_001507d0	part_043	converted
 0x150b94	420	Inst__reassociate_150b94	part_043	converted
