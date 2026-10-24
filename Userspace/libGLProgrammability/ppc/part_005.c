@@ -340,6 +340,12 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
   undefined4 ptLine;
   int *arraySizeNode;
 {
+  uint stackTypeBWord14;
+  char *stackTypeBTypeName;
+  char *stackTypeBFieldName;
+  char *stackTypeBStructure;
+  char *stackTypeBArraySize;
+  undefined **stackTypeTypeNameOverlay;
   int arraySizeBasicType;
   uint ptCopyQualifier;
   uint ptCopyType;
@@ -409,12 +415,11 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
   char *stackTypeArraySize;
   int stackTypeStructure;
   char *stackTypeFieldName;
-  undefined **stackTypeTypeNameOverlay;
-  char *stackTypeWord14Overlay;
-  char *stackTypeStructureOverlay;
-  char *stackTypeWord1cOverlay;
-  char *stackTypeWord20Overlay;
-  uint stackTypeBitsOverlay;
+  char *stackTypeWord14;
+  char *stackTypeStructureSize;
+  char *stackTypeWord1c;
+  char *stackTypeWord20;
+  uint stackTypeBits;
   undefined4 stackTypeBStructureSize;
   undefined4 stackTypeBWord1c;
   uint stackTypeBWord20;
@@ -493,10 +498,10 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
         variableAllocation = ((int (*)())TPoolAllocator__allocate)(poolAllocator,0x40);
         newVariable = (int *)((ulonglong)variableAllocation >> 0x20);
         passThroughR4 = (undefined4)variableAllocation;
-        stackTypeBitsOverlay = ((*(uint *)((unsigned char *)ghidra_home + 28)) & 1) << 9 |
+        stackTypeBits = ((*(uint *)((unsigned char *)ghidra_home + 28)) & 1) << 9 |
                     ((*(uint *)((unsigned char *)ghidra_home + 24)) & 1) << 10 |
                     ((*(uint *)((unsigned char *)ghidra_home + 20)) & 0xff) << 0xb |
-                    ((*(uint *)((unsigned char *)ghidra_home + 12)) & 0x3f) << 0x13 | (*(uint *)((unsigned char *)ghidra_home + 16)) << 0x19 | stackTypeBitsOverlay & 0x1ff;
+                    ((*(uint *)((unsigned char *)ghidra_home + 12)) & 0x3f) << 0x13 | (*(uint *)((unsigned char *)ghidra_home + 16)) << 0x19 | stackTypeBits & 0x1ff;
         pt2CopyLine = ptLine;
         stackType = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
         ptCopyType = (*(uint *)((unsigned char *)ghidra_home + 12));
@@ -513,22 +518,22 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
         pt2CopyArray = (*(uint *)((unsigned char *)ghidra_home + 28));
         pt2CopyUserDef = ptUserDef;
         stackTypeStructure = 0;
-        stackTypeStructureOverlay = (char *)0x0;
+        stackTypeStructureSize = (char *)0x0;
         fwdR5 = ptUserDef;
         fwdR6 = ptLine;
         scratchR8 = (*(uint *)((unsigned char *)ghidra_home + 16));
         ptSize = (*(uint *)((unsigned char *)ghidra_home + 20));
         stackTypeFieldName = stackTypeArraySize;
         structTypeName = (undefined **)0x0;
-        stackTypeWord14Overlay = stackTypeArraySize;
-        stackTypeWord1cOverlay = stackTypeArraySize;
-        stackTypeWord20Overlay = stackTypeArraySize;
+        stackTypeWord14 = stackTypeArraySize;
+        stackTypeWord1c = stackTypeArraySize;
+        stackTypeWord20 = stackTypeArraySize;
         if (ptUserDef != (unsigned char *)0x0) {
           stackTypeStructure = *(int *)(ptUserDef + 8);
           stackTypeTypeNameOverlay = (undefined **)stackTypeArraySize;
-          stackTypeStructureOverlay = stackTypeArraySize;
+          stackTypeStructureSize = stackTypeArraySize;
           structSizeResult = TType__setStructSize((unsigned char *)&stackType,*(unsigned char **)(ptUserDef + 8));
-          stackTypeStructureOverlay = (char *)((ulonglong)structSizeResult >> 0x20);
+          stackTypeStructureSize = (char *)((ulonglong)structSizeResult >> 0x20);
           structTypeNameStringRef = (**(code **)(*(int *)pt2CopyUserDef + 0x18))
                             (pt2CopyUserDef,(int)structSizeResult,fwdR5,fwdR6,scratchR8,ptSize,*(int *)pt2CopyUserDef);
           *(byte *)(*(int *)(structTypeNameStringRef + 4) + *(int *)(*(int *)(structTypeNameStringRef + 4) + -0xc)) = *DAT_a7b7ba18;
@@ -555,21 +560,21 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
         newVariable[5] = stackTypeStructure;
         newVariable[6] = (int)stackTypeFieldName;
         newVariable[7] = (int)stackTypeTypeNameOverlay;
-        newVariable[8] = (int)stackTypeWord14Overlay;
-        newVariable[9] = (int)stackTypeStructureOverlay;
+        newVariable[8] = (int)stackTypeWord14;
+        newVariable[9] = (int)stackTypeStructureSize;
         newVariable[3] = (int)&PTR___ZN5TTypeD1Ev_a7b7d4d0;
-        newVariable[10] = (int)stackTypeWord1cOverlay;
-        newVariable[0xb] = (int)stackTypeWord20Overlay;
+        newVariable[10] = (int)stackTypeWord1c;
+        newVariable[0xb] = (int)stackTypeWord20;
         oldVariableBits = newVariable[0xc];
-        qualifierField = stackTypeBitsOverlay & 0xfe000000;
+        qualifierField = stackTypeBits & 0xfe000000;
         newVariable[0xc] = qualifierField | oldVariableBits & 0x1ffffff;
-        basicTypeField = (stackTypeBitsOverlay >> 0x13 & 0x3f) << 0x13;
+        basicTypeField = (stackTypeBits >> 0x13 & 0x3f) << 0x13;
         newVariable[0xc] = basicTypeField | qualifierField | oldVariableBits & 0x7ffff;
-        sizeField = stackTypeBitsOverlay & 0x7f800;
+        sizeField = stackTypeBits & 0x7f800;
         newVariable[0xc] = sizeField | basicTypeField | qualifierField | oldVariableBits & 0x7ff;
-        matrixField = (stackTypeBitsOverlay >> 10 & 1) << 10;
+        matrixField = (stackTypeBits >> 10 & 1) << 10;
         newVariable[0xc] = matrixField | sizeField | basicTypeField | qualifierField | oldVariableBits & 0x3ff;
-        newVariable[0xc] = (stackTypeBitsOverlay >> 9 & 1) << 9 | matrixField | sizeField | basicTypeField | qualifierField | oldVariableBits & 0x1ff;
+        newVariable[0xc] = (stackTypeBits >> 9 & 1) << 9 | matrixField | sizeField | basicTypeField | qualifierField | oldVariableBits & 0x1ff;
         newVariable[0xd] = 0;
         newVariable[0xe] = 0;
         newVariable[0xf] = 0;
@@ -590,7 +595,7 @@ int TParseContext__arrayErrorCheck(parseContext, line, text, publicType, intermT
         std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&stackTypeTypeNameOverlay,symbolTableLevel,&nameCopy);
         stackType = stackTypeTypeNameOverlay;
         refCountPtr = (int *)(nameCopyChars + -4);
-        stackTypeArraySize = stackTypeWord14Overlay;
+        stackTypeArraySize = stackTypeWord14;
         destroyAllocator1[0] = nameCopy;
         do {
           oldRefCount = *refCountPtr;
@@ -638,14 +643,14 @@ LAB_97b9caf4:
             errorReason = "redeclaring non-array as array";
           }
           else if (existingSymbol[4] < 1) {
-            stackTypeBitsOverlay = ((*(uint *)((unsigned char *)ghidra_home + 28)) & 1) << 9 |
+            stackTypeBits = ((*(uint *)((unsigned char *)ghidra_home + 28)) & 1) << 9 |
                         ((*(uint *)((unsigned char *)ghidra_home + 24)) & 1) << 10 |
                         ((*(uint *)((unsigned char *)ghidra_home + 20)) & 0xff) << 0xb |
-                        ((*(uint *)((unsigned char *)ghidra_home + 12)) & 0x3f) << 0x13 | (*(uint *)((unsigned char *)ghidra_home + 16)) << 0x19 | stackTypeBitsOverlay & 0x1ff
+                        ((*(uint *)((unsigned char *)ghidra_home + 12)) & 0x3f) << 0x13 | (*(uint *)((unsigned char *)ghidra_home + 16)) << 0x19 | stackTypeBits & 0x1ff
             ;
             pt2CopyLine = ptLine;
             stackType = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-            stackTypeWord20Overlay = (char *)0x0;
+            stackTypeWord20 = (char *)0x0;
             ptCopyType = (*(uint *)((unsigned char *)ghidra_home + 12));
             ptCopyQualifier = (*(uint *)((unsigned char *)ghidra_home + 16));
             ptCopySize = (*(uint *)((unsigned char *)ghidra_home + 20));
@@ -663,9 +668,9 @@ LAB_97b9caf4:
             stackTypeStructure = 0;
             stackTypeFieldName = (char *)0x0;
             stackTypeTypeNameOverlay = (undefined **)0x0;
-            stackTypeWord14Overlay = (char *)0x0;
-            stackTypeStructureOverlay = (char *)0x0;
-            stackTypeWord1cOverlay = (char *)0x0;
+            stackTypeWord14 = (char *)0x0;
+            stackTypeStructureSize = (char *)0x0;
+            stackTypeWord1c = (char *)0x0;
             ptSize = (*(uint *)((unsigned char *)ghidra_home + 24));
             ptArray = (*(uint *)((unsigned char *)ghidra_home + 12));
             structTypeName = stackTypeTypeNameOverlay;
@@ -675,7 +680,7 @@ LAB_97b9caf4:
               scratchR8 = (*(uint *)((unsigned char *)ghidra_home + 20));
               scratchR7 = (*(uint *)((unsigned char *)ghidra_home + 16));
               structSizeResult = TType__setStructSize((unsigned char *)&stackType,*(unsigned char **)(ptUserDef + 8));
-              stackTypeStructureOverlay = (char *)((ulonglong)structSizeResult >> 0x20);
+              stackTypeStructureSize = (char *)((ulonglong)structSizeResult >> 0x20);
               structTypeNameStringRef = (**(code **)(*(int *)pt2CopyUserDef + 0x18))
                                 (pt2CopyUserDef,(int)structSizeResult,passThroughR4,scratchR8,scratchR7,ptSize,*(int *)pt2CopyUserDef)
               ;
@@ -693,7 +698,7 @@ LAB_97b9caf4:
             }
             stackTypeTypeNameOverlay = structTypeName;
             typesMatch = false;
-            if (((existingSymbol[0xc] & 0x1fffe00U) == (stackTypeBitsOverlay & 0x1fffe00)) && (existingSymbol[5] == stackTypeStructure)) {
+            if (((existingSymbol[0xc] & 0x1fffe00U) == (stackTypeBits & 0x1fffe00)) && (existingSymbol[5] == stackTypeStructure)) {
               typesMatch = true;
             }
             stackType = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
@@ -746,19 +751,19 @@ LAB_97b9cb40:
                (publicType & 0x3f) << 0x13 | intermTyped << 0x19 | stackTypeBBits & 0x1ff;
     pt4CopyLine = ptLine;
     stackTypeTypeNameOverlay = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
-    stackTypeWord20Overlay = (void *)0x0;
+    stackTypeBTypeName = (void *)0x0;
     stackTypeBWord20 = 0;
     pt3CopyUserDef = ptUserDef;
     pt3CopyLine = ptLine;
     pt4CopyUserDef = ptUserDef;
-    stackTypeWord14Overlay = (char *)0x0;
-    stackTypeStructureOverlay = (char *)0x0;
-    stackTypeWord1cOverlay = (char *)0x0;
-    stackTypeBitsOverlay = 0;
+    stackTypeBArraySize = (char *)0x0;
+    stackTypeBStructure = (char *)0x0;
+    stackTypeBFieldName = (char *)0x0;
+    stackTypeBWord14 = 0;
     stackTypeBStructureSize = 0;
     stackTypeBWord1c = 0;
     (*(uint *)((unsigned char *)ghidra_home + 28)) = ptArray;
-    typeNameString = stackTypeWord20Overlay;
+    typeNameString = stackTypeBTypeName;
     pt3CopyType = publicType;
     pt3CopyQualifier = (unsigned char *)intermTyped;
     pt3CopySize = ptSize;
@@ -770,7 +775,7 @@ LAB_97b9cb40:
     pt4CopyMatrix = ptMatrix;
     pt4CopyArray = ptArray;
     if (ptUserDef != (unsigned char *)0x0) {
-      stackTypeStructureOverlay = *(char **)(ptUserDef + 8);
+      stackTypeBStructure = *(char **)(ptUserDef + 8);
       passThroughR4 = ptLine;
       structSizeResult = TType__setStructSize((unsigned char *)&stackTypeTypeNameOverlay,*(unsigned char **)(ptUserDef + 8));
       stackTypeBStructureSize = (undefined4)((ulonglong)structSizeResult >> 0x20);
@@ -789,7 +794,7 @@ LAB_97b9cb40:
         typeNameString = this;
       }
     }
-    stackTypeWord20Overlay = typeNameString;
+    stackTypeBTypeName = typeNameString;
     TType__getCompleteString(&stackType,(unsigned char *)&stackTypeTypeNameOverlay);
     stackTypeArraySize[*(int *)(stackTypeArraySize + -0xc)] = *DAT_a7b7ba18;
     error(parseContext,(char *)line,"cannot declare arrays of this type",stackTypeArraySize,"",publicType,

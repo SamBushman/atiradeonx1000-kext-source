@@ -32,15 +32,20 @@ Measured by `grep` over the part files: declaration kind and number of lines tha
 | name | declaration | address-of/cast lines | find_webs (base) |
 |---|---|---|---|
 | `typeTemp1Overlay` (OutputConstantUnion) | `undefined **x [4]` | 2 | `local_1c0: 1 webs` |
-| `typeTempOverlay` (promote, promoteConstantUnion, addConstVectorNode, indirectNode) | `undefined **x [4]` | 7 | indirectNode `local_60: 1 webs` |
+| `typeTempOverlay` (promote, promoteConstantUnion, addConstVectorNode, indirectNode) | `undefined **x [4]` | 7 | `local_70: 1 webs`, `local_c0: 1 webs`, `local_90: 1 webs`, `local_60: 1 webs` (each `some use reached from ENTRY`) |
 | `operandDescOverlay` (TIntermBinary::compileNode) | `uint` first word of an 8-byte out-parameter | 19 | `local_80: 1 webs` |
 | `allocatorOverlay` / `mapIterOverlay` / `mapEndOverlay` (extensionErrorCheck) | `int x [4]` / `int` / `int` | 2 / 3 / 3 | `local_1c0: 1 webs`, `local_1b0: 2 webs`, `local_1a0: address taken in "(&local_1a0,pTVar8,local_180,&local_70);"` |
-| `binaryTypeWord4Overlay` / `compareTypeWord4Overlay` / `unaryTypeWord4Overlay` / `tailTypeWord4Overlay` / `rightTypeOverlay` (fold) | stack TType words, `rightTypeOverlay` is `undefined **x [4]` | 23 / 24 / 3 / 10 / 5 | n/a (fake-struct words of `&xTypeVtbl`) |
-| `stackType*Overlay` x6 (arrayErrorCheck) | scalar fake-struct words, no direct `&` | 0; the base `&stackType` is passed to getType / TString calls | `local_10c` 4 webs, `local_118` 7, `local_120` 6, `local_11c` 4, `local_114` 4, `local_110` 5 (each `some use reached from ENTRY`) |
+| `binaryTypeWord4Overlay` (`local_190`) / `compareTypeWord4Overlay` (`local_160`) / `tailTypeWord4Overlay` (`local_100`) (fold) | stack TType words | 23 / 24 / 10 | find_webs refuses all three: `address taken in "__ZNSs4_Rep10_M_destroyERKSaIcE(...,&local_190);"` (same text with `&local_160`, `&local_100`) |
+| `unaryTypeWord4Overlay` (`local_1c0`, fold) | stack TType word | 3 | `2 webs`: web 0 = declaration, the `puVar11[6] = local_1c0` read and the `(char *)&local_1c0` sprintf buffer; web 1 = the lone store `local_1c0 = 0` (no scalar use; the callee reads it back through `&unaryTypeVtbl`). Not split, not gated: the only separable web is a store whose reader is memory |
+| `rightTypeOverlay` (`local_140`, fold) | `undefined **x [4]` | 5 | `local_140: 1 webs` |
+| `stackTypeTypeNameOverlay` (`local_120`, arrayErrorCheck) | `undefined **` = stackType +0x10 typeName AND the vptr word of stackTypeB (base `&local_120`) | `&local_120` passed to `TType__setStructSize` / `TType__getCompleteString` | 6 webs; splitting it (lpM12) -> gate `part_005: ADDRESS-TAKEN split _TParseContext__arrayErrorCheck 488`, `151 functions compared, 1 problems`; kept as one name |
 
-The six `stackType*Overlay` words have webs, so a split is possible in principle. It was **not** attempted: each web is read through the address of the
-surrounding TType block (`&stackType`) that the callees fill, and the table rows say the slots are reused as TStrings. This is the one entry in this file
-that is not backed by a gate run, and it is still open.
+The other five words of the two overlapping stack TType temporaries (stackType base `local_130`, stackTypeB base `local_120`) were split by region
+(A = file lines 487-742, B = 743-800; every B word is re-initialised at lines 748-757 before its first read): `local_11c` -> `stackTypeWord14` /
+`stackTypeBArraySize`, `local_118` -> `stackTypeStructureSize` / `stackTypeBStructure`, `local_114` -> `stackTypeWord1c` / `stackTypeBFieldName`,
+`local_110` -> `stackTypeWord20` / `stackTypeBTypeName`, `local_10c` -> `stackTypeBits` / `stackTypeBWord14`. Gate **lpM14** SPLIT-EQUIVALENT,
+`part_005: 151 functions compared, 0 problems` (find_webs base counts: `local_10c` 4 webs, `local_118` 7, `local_11c` 4, `local_114` 4, `local_110` 5).
+The first all-six attempt **lpM12** failed with the ADDRESS-TAKEN message above; **lpM13** failed to compile (duplicate declaration, `FAIL cand part_005.c`).
 
 ## D. Verified splits that replaced earlier joined names
 
