@@ -14,6 +14,7 @@ lo = int(sys.argv[3]) if len(sys.argv) > 3 and sys.argv[3].isdigit() else 0
 hi = int(sys.argv[4]) if len(sys.argv) > 4 and sys.argv[4].isdigit() else 999
 dry = '--dry' in sys.argv
 VEC = '--vec' in sys.argv
+INSTF = '--instfield' in sys.argv
 PH = re.compile(r'^(?:[A-Za-z]{0,4}Var\d+|p+_?[A-Za-z]*Var\d+|local_[0-9a-f]+|param_\d+|in_[a-z]+\d*)$')
 SKIP = {'set', 'index', 'size', 'value', 'result', 'p', 'n', 'x', 'a', 'b', 'ptr', 'data', 'count', 'flags', 'ctx', 'param_1', 'param_2', 'param_3', 'param_4', 'this', 'arg', 'val', 'len', 'i', 'j', 'k', 'v', 'obj', 'self', 'state', 'type', 'name', 'buf', 'buffer', 'str', 'string', 'p1', 'p2'}
 H = re.compile(r'^/\* (\S+) @ 0x')
@@ -50,7 +51,16 @@ def vecvote(line, var):
     m = re.match(r'^\s*%s = (?:\([\w ]+\*+\))?\(?(?:\w+ \* 4 \+ )(vectorAlloc\d*)\[3\]\)?;$' % re.escape(var), line)
     if m: return ['elementRef']
     return []
+IFIELD = {0x84: 'operandCount', 0x120: 'saturate', 0x124: 'resultScaleCode', 0x11c: 'predicateKind', 0x12c: 'compareCondition', 0x160: 'instCounter', 0x14: 'instFlags', 0x94: 'destRegister', 0x98: 'destRegisterOffset', 0xb8: 'source1Flags', 0xd0: 'source2Flags', 0x88: 'opcodeInfo'}
+IBASE = r'(?:inst\d*|sourceDef\d*|newInst\d*|afterInst|consumerInst\d*|defInst\d*)'
+def ifvote(line, var):
+    m = re.match(r'^\s*%s = (?:\([\w ]+\*?\))?\*\((?:int|uint|undefined4) \*\)\(%s \+ (0x[0-9a-f]+)\);$' % (re.escape(var), IBASE), line)
+    if m and int(m.group(1), 16) in IFIELD: return [IFIELD[int(m.group(1), 16)]]
+    m = re.match(r'^\s*%s = %s\[(0x[0-9a-f]+)\];$' % (re.escape(var), IBASE), line)
+    if m and int(m.group(1), 16) * 4 in IFIELD: return [IFIELD[int(m.group(1), 16) * 4]]
+    return []
 def votes(line, var):
+    if INSTF: return ifvote(line, var)
     if VEC: return vecvote(line, var)
     v = []
     for pat in INSTF:
@@ -89,7 +99,7 @@ for fn, pn in funcs.items():
             if not any(re.search(r'(?<![\w])%s(?![\w])' % re.escape(var), cur[x]) for x in ls): continue   # already renamed
             vs = []
             for x in ls: vs += votes(cur[x], var)
-            if VEC:
+            if VEC or INSTF:
                 ndef = sum(1 for x in ls if re.search(r'(?<![\w])%s\s*=(?!=)' % re.escape(var), cur[x]))
                 if len(vs) != ndef: continue
             if vs and len(set(vs)) == 1: cand.append((k, vs[0], len(vs)))

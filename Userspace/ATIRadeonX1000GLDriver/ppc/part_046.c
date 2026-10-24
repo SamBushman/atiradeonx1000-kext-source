@@ -398,7 +398,7 @@ int FUN_00173cdc(ctx, param_2)
   int *piVar2;
   undefined4 uVar3;
   int iVar4;
-  uint uVar5;
+  uint vectorFilledCount;
   uint uVar6;
   uint *vector;
   undefined4 local_38 [4];
@@ -414,12 +414,12 @@ int FUN_00173cdc(ctx, param_2)
     iVar1 = *(int *)(param_2 + 0xb0);
     if ((*(uint *)(iVar1 + 0x14) & 1) == 0) {
       vector = *(uint **)(*(int *)(iVar1 + 0x8c) + 0x2c);
-      uVar5 = vector[1];
-      uVar6 = uVar5 - 1;
+      vectorFilledCount = vector[1];
+      uVar6 = vectorFilledCount - 1;
       if (uVar6 < *vector) {
-        if (uVar5 <= uVar6) {
-          _memset(uVar5 * 4 + vector[2],0,(uVar6 - uVar5) * 4 + 4);
-          vector[1] = uVar5;
+        if (vectorFilledCount <= uVar6) {
+          _memset(vectorFilledCount * 4 + vector[2],0,(uVar6 - vectorFilledCount) * 4 + 4);
+          vector[1] = vectorFilledCount;
         }
         piVar2 = (int *)(uVar6 * 4 + vector[2]);
       }
@@ -449,7 +449,7 @@ int Compiler__valueNumberForExpr(param_1, param_2)
   undefined4 *puVar1;
   undefined4 *puVar2;
   int *piVar3;
-  uint uVar4;
+  uint vectorFilledCount;
   undefined4 nextNegativeValueNumberResult;
   uint *vector;
   
@@ -475,14 +475,14 @@ int Compiler__valueNumberForExpr(param_1, param_2)
     HashTable__insert(*(undefined4 *)(param_1 + 0x3e4),puVar1);
     HashTable__insert(*(undefined4 *)(param_1 + 0x3e0),puVar1);
     vector = *(uint **)(param_1 + 0x3d8);
-    uVar4 = vector[1];
-    if (uVar4 < *vector) {
-      _memset(uVar4 * 4 + vector[2],0,4);
-      piVar3 = (int *)(uVar4 * 4 + vector[2]);
-      vector[1] = uVar4 + 1;
+    vectorFilledCount = vector[1];
+    if (vectorFilledCount < *vector) {
+      _memset(vectorFilledCount * 4 + vector[2],0,4);
+      piVar3 = (int *)(vectorFilledCount * 4 + vector[2]);
+      vector[1] = vectorFilledCount + 1;
     }
     else {
-      piVar3 = (int *)Vector__elementRefGrow(vector,uVar4);
+      piVar3 = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
     }
     *piVar3 = (int)puVar1;
   }
@@ -825,7 +825,7 @@ int FUN_001746c8(compiler, param_2)
   undefined4 *puVar1;
   undefined4 *allocation;
   int *piVar3;
-  uint uVar4;
+  uint vectorFilledCount;
   undefined4 arena;
   uint *vector;
   
@@ -851,14 +851,14 @@ int FUN_001746c8(compiler, param_2)
     allocation[8] = 0;
     HashTable__insert(*(undefined4 *)(compiler + COMP_pointerSet),puVar1);
     vector = *(uint **)(compiler + 0x3dc);
-    uVar4 = vector[1];
-    if (uVar4 < *vector) {
-      _memset(uVar4 * 4 + vector[2],0,4);
-      piVar3 = (int *)(uVar4 * 4 + vector[2]);
-      vector[1] = uVar4 + 1;
+    vectorFilledCount = vector[1];
+    if (vectorFilledCount < *vector) {
+      _memset(vectorFilledCount * 4 + vector[2],0,4);
+      piVar3 = (int *)(vectorFilledCount * 4 + vector[2]);
+      vector[1] = vectorFilledCount + 1;
     }
     else {
-      piVar3 = (int *)Vector__elementRefGrow(vector,uVar4);
+      piVar3 = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
     }
     *piVar3 = (int)puVar1;
   }
@@ -872,7 +872,7 @@ int FUN_001747c4(param_1, param_2, param_3, param_4)
   int param_3;
   int param_4;
 {
-  uint uVar1;
+  uint vectorFilledCount;
   undefined4 *puVar2;
   int callResult;
   int iVar4;
@@ -883,9 +883,9 @@ int FUN_001747c4(param_1, param_2, param_3, param_4)
     do {
       vector = *(uint **)(param_4 + 0x40c);
       if (param_2 < *vector) {
-        uVar1 = vector[1];
-        if (uVar1 <= param_2) {
-          _memset(uVar1 * 4 + vector[2],0,(param_2 - uVar1) * 4 + 4);
+        vectorFilledCount = vector[1];
+        if (vectorFilledCount <= param_2) {
+          _memset(vectorFilledCount * 4 + vector[2],0,(param_2 - vectorFilledCount) * 4 + 4);
           vector[1] = param_2 + 1;
         }
         puVar2 = (undefined4 *)(iVar4 + vector[2]);
@@ -911,7 +911,7 @@ int FUN_00174888(param_1, param_2, param_3, param_4)
   int param_3;
   int param_4;
 {
-  uint uVar1;
+  uint vectorFilledCount;
   undefined4 *puVar2;
   int callResult;
   int iVar4;
@@ -922,9 +922,9 @@ int FUN_00174888(param_1, param_2, param_3, param_4)
     do {
       vector = *(uint **)(param_4 + 0x408);
       if (param_2 < *vector) {
-        uVar1 = vector[1];
-        if (uVar1 <= param_2) {
-          _memset(uVar1 * 4 + vector[2],0,(param_2 - uVar1) * 4 + 4);
+        vectorFilledCount = vector[1];
+        if (vectorFilledCount <= param_2) {
+          _memset(vectorFilledCount * 4 + vector[2],0,(param_2 - vectorFilledCount) * 4 + 4);
           vector[1] = param_2 + 1;
         }
         puVar2 = (undefined4 *)(iVar4 + vector[2]);
@@ -955,7 +955,7 @@ int FUN_0017494c(ctx, param_2, param_3)
   int operandRecord;
   int *piVar5;
   int loopIndex;
-  uint uVar7;
+  uint vectorFilledCount;
   undefined4 arena;
   undefined4 *loopPtr2;
   uint uVar10;
@@ -991,12 +991,12 @@ int FUN_0017494c(ctx, param_2, param_3)
       iVar2 = *(int *)(iVar2 + 0xb0);
       if ((*(uint *)(iVar2 + 0x14) & 1) == 0) {
         vector = *(uint **)(*(int *)(iVar2 + 0x8c) + 0x2c);
-        uVar7 = vector[1];
-        uVar10 = uVar7 - 1;
+        vectorFilledCount = vector[1];
+        uVar10 = vectorFilledCount - 1;
         if (uVar10 < *vector) {
-          if (uVar7 <= uVar10) {
-            _memset(uVar7 * 4 + vector[2],0,(uVar10 - uVar7) * 4 + 4);
-            vector[1] = uVar7;
+          if (vectorFilledCount <= uVar10) {
+            _memset(vectorFilledCount * 4 + vector[2],0,(uVar10 - vectorFilledCount) * 4 + 4);
+            vector[1] = vectorFilledCount;
           }
           piVar5 = (int *)(uVar10 * 4 + vector[2]);
         }
@@ -1022,6 +1022,7 @@ int FUN_00174b04(ctx, param_2, param_3)
   uint param_2;
   int param_3;
 {
+  uint vectorFilledCount;
   int *piVar1;
   int *piVar2;
   uint uVar3;
@@ -1052,9 +1053,9 @@ int FUN_00174b04(ctx, param_2, param_3)
       uVar12 = param_2;
       do {
         if (uVar12 < *vector) {
-          uVar3 = vector[1];
-          if (uVar3 <= uVar12) {
-            _memset(uVar3 * 4 + vector[2],0,(uVar12 - uVar3) * 4 + 4);
+          vectorFilledCount = vector[1];
+          if (vectorFilledCount <= uVar12) {
+            _memset(vectorFilledCount * 4 + vector[2],0,(uVar12 - vectorFilledCount) * 4 + 4);
             vector[1] = uVar12 + 1;
           }
           piVar4 = (int *)(iVar5 + vector[2]);
@@ -1113,7 +1114,7 @@ int FUN_00174ce0(param_1, param_2, param_3)
   undefined4 *puVar2;
   int *piVar3;
   undefined4 nextValueNumberResult;
-  uint uVar5;
+  uint vectorFilledCount;
   uint *vector;
   
   *(undefined4 *)(*(int *)(param_1 + 0x3f4) + 4) = param_3;
@@ -1144,14 +1145,14 @@ int FUN_00174ce0(param_1, param_2, param_3)
     HashTable__insert(*(undefined4 *)(param_1 + 1000),puVar1);
     HashTable__insert(*(undefined4 *)(param_1 + 0x3ec),puVar1);
     vector = *(uint **)(param_1 + 0x3dc);
-    uVar5 = vector[1];
-    if (uVar5 < *vector) {
-      _memset(uVar5 * 4 + vector[2],0,4);
-      piVar3 = (int *)(uVar5 * 4 + vector[2]);
-      vector[1] = uVar5 + 1;
+    vectorFilledCount = vector[1];
+    if (vectorFilledCount < *vector) {
+      _memset(vectorFilledCount * 4 + vector[2],0,4);
+      piVar3 = (int *)(vectorFilledCount * 4 + vector[2]);
+      vector[1] = vectorFilledCount + 1;
     }
     else {
-      piVar3 = (int *)Vector__elementRefGrow(vector,uVar5);
+      piVar3 = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
     }
     *piVar3 = (int)puVar1;
   }
@@ -1584,11 +1585,12 @@ int FUN_001758d8(param_1, param_2, param_3, param_4)
   int param_3;
   int param_4;
 {
+  uint vectorFilledCount2;
   uint *vector2;
   undefined4 *foundEntry;
   undefined4 uVar1;
   undefined4 *loopPtr;
-  uint uVar3;
+  uint vectorFilledCount;
   undefined4 *puVar4;
   uint *vector;
   uint uVar6;
@@ -1600,9 +1602,9 @@ int FUN_001758d8(param_1, param_2, param_3, param_4)
     do {
       vector = *(uint **)(param_4 + 0x404);
       if (uVar6 < *vector) {
-        uVar3 = vector[1];
-        if (uVar3 <= uVar6) {
-          _memset(uVar3 * 4 + vector[2],0,(uVar6 - uVar3) * 4 + 4);
+        vectorFilledCount = vector[1];
+        if (vectorFilledCount <= uVar6) {
+          _memset(vectorFilledCount * 4 + vector[2],0,(uVar6 - vectorFilledCount) * 4 + 4);
           vector[1] = uVar6 + 1;
         }
         puVar4 = (undefined4 *)(loopRemaining + vector[2]);
@@ -1630,9 +1632,9 @@ int FUN_001758d8(param_1, param_2, param_3, param_4)
   ((int (*)())FUN_00174e0c)(param_1);
   vector2 = *(uint **)(param_4 + 0x404);
   if (param_2 < *vector2) {
-    uVar6 = vector2[1];
-    if (uVar6 <= param_2) {
-      _memset(uVar6 * 4 + vector2[2],0,(param_2 - uVar6) * 4 + 4);
+    vectorFilledCount2 = vector2[1];
+    if (vectorFilledCount2 <= param_2) {
+      _memset(vectorFilledCount2 * 4 + vector2[2],0,(param_2 - vectorFilledCount2) * 4 + 4);
       vector2[1] = param_2 + 1;
     }
     puVar4 = (undefined4 *)(param_2 * 4 + vector2[2]);
@@ -1650,7 +1652,7 @@ undefined4 * FUN_00175a3c(int compiler,undefined4 param_2,undefined4 param_3,dou
   undefined4 *puVar1;
   undefined4 *allocation;
   int *piVar3;
-  uint uVar4;
+  uint vectorFilledCount;
   undefined4 arena;
   uint *vector;
   
@@ -1674,14 +1676,14 @@ undefined4 * FUN_00175a3c(int compiler,undefined4 param_2,undefined4 param_3,dou
     HashTable__insert(*(undefined4 *)(compiler + 0x3e4),puVar1);
     HashTable__insert(*(undefined4 *)(compiler + 0x3e0),puVar1);
     vector = *(uint **)(compiler + 0x3d8);
-    uVar4 = vector[1];
-    if (uVar4 < *vector) {
-      _memset(uVar4 * 4 + vector[2],0,4);
-      piVar3 = (int *)(uVar4 * 4 + vector[2]);
-      vector[1] = uVar4 + 1;
+    vectorFilledCount = vector[1];
+    if (vectorFilledCount < *vector) {
+      _memset(vectorFilledCount * 4 + vector[2],0,4);
+      piVar3 = (int *)(vectorFilledCount * 4 + vector[2]);
+      vector[1] = vectorFilledCount + 1;
     }
     else {
-      piVar3 = (int *)Vector__elementRefGrow(vector,uVar4);
+      piVar3 = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
     }
     *piVar3 = (int)puVar1;
   }
@@ -1704,7 +1706,7 @@ int FUN_00175b40(valueKey)
   undefined4 uVar7;
   uint uVar8;
   int loopIndex;
-  uint uVar10;
+  uint vectorFilledCount;
   int iVar11;
   uint *vector;
   undefined4 *loopPtr2;
@@ -1721,12 +1723,12 @@ int FUN_00175b40(valueKey)
   }
   else {
     vector = *(uint **)(*(int *)(*(int *)(loopRemaining + 0x84) * 0x18 + loopRemaining + 0x8c) + 0x2c);
-    uVar10 = vector[1];
-    uVar8 = uVar10 - 1;
+    vectorFilledCount = vector[1];
+    uVar8 = vectorFilledCount - 1;
     if (uVar8 < *vector) {
-      if (uVar10 <= uVar8) {
-        _memset(uVar10 * 4 + vector[2],0,(uVar8 - uVar10) * 4 + 4);
-        vector[1] = uVar10;
+      if (vectorFilledCount <= uVar8) {
+        _memset(vectorFilledCount * 4 + vector[2],0,(uVar8 - vectorFilledCount) * 4 + 4);
+        vector[1] = vectorFilledCount;
         loopRemaining = valueKey[0x2c];
       }
       piVar5 = (int *)(uVar8 * 4 + vector[2]);

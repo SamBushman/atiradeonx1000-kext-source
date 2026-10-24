@@ -1321,6 +1321,7 @@ int Inst__movAndShiftUseVector(inst, program)
   int *inst;
   int program;
 {
+  uint vectorFilledCount2;
   undefined4 compilerCtx;
   uint *vector2;
   int operandIndex;
@@ -1335,7 +1336,7 @@ int Inst__movAndShiftUseVector(inst, program)
   int iVar1;
   undefined4 uVar2;
   int *piVar3;
-  uint uVar4;
+  uint vectorFilledCount;
   undefined4 *puVar5;
   int *operandVReg;
   int operandRecord;
@@ -1403,9 +1404,9 @@ LAB_00188a5c:
     if (-1 < (int)uVar9) {
       do {
         if (uVar9 < *vector) {
-          uVar4 = vector[1];
-          if (uVar4 <= uVar9) {
-            _memset(uVar4 * 4 + vector[2],0,(uVar9 - uVar4) * 4 + 4);
+          vectorFilledCount = vector[1];
+          if (vectorFilledCount <= uVar9) {
+            _memset(vectorFilledCount * 4 + vector[2],0,(uVar9 - vectorFilledCount) * 4 + 4);
             vector[1] = uVar9 + 1;
           }
           puVar5 = (undefined4 *)(uVar9 * 4 + vector[2]);
@@ -1455,13 +1456,13 @@ LAB_00188a5c:
             compilerCtx = *(undefined4 *)(program + 8);
             sourceDef = IRInst__getOperandSource(inst1,inst1[0x21]);
             vector2 = *(uint **)(sourceDef + 0x10);
-            uVar4 = vector2[1];
-            if (0 < (int)uVar4) {
+            vectorFilledCount2 = vector2[1];
+            if (0 < (int)vectorFilledCount2) {
               loopIndex = 0;
               do {
                 if (loopIndex < *vector2) {
-                  if (uVar4 <= loopIndex) {
-                    _memset(uVar4 * 4 + vector2[2],0,(loopIndex - uVar4) * 4 + 4);
+                  if (vectorFilledCount2 <= loopIndex) {
+                    _memset(vectorFilledCount2 * 4 + vector2[2],0,(loopIndex - vectorFilledCount2) * 4 + 4);
                     vector2[1] = loopIndex + 1;
                   }
                   piVar3 = (int *)(loopIndex * 4 + vector2[2]);
@@ -1475,9 +1476,9 @@ LAB_00188a5c:
                   *(int *)(sourceDef + 0x160) = *(int *)(sourceDef + 0x160) + -1;
                   break;
                 }
-                uVar4 = vector2[1];
+                vectorFilledCount2 = vector2[1];
                 loopIndex = loopIndex + 1;
-              } while ((int)loopIndex < (int)uVar4);
+              } while ((int)loopIndex < (int)vectorFilledCount2);
             }
             IRInst__setOperandSource(inst1,inst1[0x21],0,1,compilerCtx);
             inst1[0x21] = inst1[0x21] + -1;
@@ -2850,13 +2851,13 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
   uint loopIndex8;
   int *piVar6;
   int loopIndex3;
-  uint uVar8;
+  uint vectorFilledCount3;
   int *a0;
   undefined4 in_r8;
   int loopIndex4;
   int loopIndex;
-  uint uVar11;
-  uint uVar12;
+  uint vectorFilledCount;
+  uint vectorFilledCount2;
   uint loopIndex7;
   int loopIndex2;
   uint *vector;
@@ -2873,9 +2874,9 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
   }
   vector = *(uint **)(param_2 + 0x40);
   loopIndex7 = 0;
-  uVar11 = vector[1];
+  vectorFilledCount = vector[1];
   loopIndex4 = param_5;
-  if (0 < (int)uVar11) {
+  if (0 < (int)vectorFilledCount) {
     while( true ) {
       if (loopIndex7 < *vector) {
         loopIndex8 = vector[1];
@@ -2968,13 +2969,13 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
           }
           vector2 = *(uint **)(loopIndex + 0x40);
           loopIndex8 = 0;
-          uVar12 = vector2[1];
-          if (0 < (int)uVar12) {
+          vectorFilledCount2 = vector2[1];
+          if (0 < (int)vectorFilledCount2) {
             while( true ) {
               if (loopIndex8 < *vector2) {
-                uVar8 = vector2[1];
-                if (uVar8 <= loopIndex8) {
-                  _memset(uVar8 * 4 + vector2[2],0,(loopIndex8 - uVar8) * 4 + 4);
+                vectorFilledCount3 = vector2[1];
+                if (vectorFilledCount3 <= loopIndex8) {
+                  _memset(vectorFilledCount3 * 4 + vector2[2],0,(loopIndex8 - vectorFilledCount3) * 4 + 4);
                   vector2[1] = loopIndex8 + 1;
                 }
                 piVar6 = (int *)(loopIndex8 * 4 + vector2[2]);
@@ -2998,13 +2999,13 @@ int FUN_0018b1bc(param_1, param_2, param_3, param_4, param_5)
                 loopIndex2 = param_5 * 4 + loopIndex;
                 *(int *)(loopIndex2 + 0x48) = *(int *)(loopIndex2 + 0x48) + 1;
               }
-              if (uVar12 == loopIndex8) break;
+              if (vectorFilledCount2 == loopIndex8) break;
               vector2 = *(uint **)(loopIndex + 0x40);
             }
           }
         }
       }
-      if (uVar11 == loopIndex7) break;
+      if (vectorFilledCount == loopIndex7) break;
       vector = *(uint **)(param_2 + 0x40);
     }
   }

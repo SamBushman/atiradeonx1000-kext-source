@@ -1449,18 +1449,18 @@ int FUN_001792f0(ctx, param_2)
   int callResult;
   int *piVar2;
   uint uVar3;
-  uint uVar4;
+  uint vectorFilledCount;
   uint *vector;
   int iVar6;
   
   a0 = *(int **)(ctx + 0xb0);
   vector = *(uint **)(a0[param_2 * 6 + 0x23] + 0x2c);
-  uVar4 = vector[1];
-  uVar3 = uVar4 - 1;
+  vectorFilledCount = vector[1];
+  uVar3 = vectorFilledCount - 1;
   if (uVar3 < *vector) {
-    if (uVar4 <= uVar3) {
-      _memset(uVar4 * 4 + vector[2],0,(uVar3 - uVar4) * 4 + 4);
-      vector[1] = uVar4;
+    if (vectorFilledCount <= uVar3) {
+      _memset(vectorFilledCount * 4 + vector[2],0,(uVar3 - vectorFilledCount) * 4 + 4);
+      vector[1] = vectorFilledCount;
       a0 = *(int **)(ctx + 0xb0);
     }
     piVar2 = (int *)(uVar3 * 4 + vector[2]);
@@ -1589,6 +1589,8 @@ int FUN_00179608(ctx, param_2, operandIndex, operandIndex2)
   int operandIndex;
   int operandIndex2;
 {
+  uint vectorFilledCount2;
+  uint vectorFilledCount;
   uint *vector2;
   int inst;
   int operandRecord2;
@@ -1609,12 +1611,12 @@ int FUN_00179608(ctx, param_2, operandIndex, operandIndex2)
     inst = *(int *)(ctx + 0xb0);
     if (*(int *)(*(int *)(inst + 0x88) + 8) != 0x8e) {
       vector = *(uint **)(*(int *)(operandIndex * 0x18 + inst + 0x8c) + 0x2c);
-      uVar7 = vector[1];
-      uVar6 = uVar7 - 1;
+      vectorFilledCount2 = vector[1];
+      uVar6 = vectorFilledCount2 - 1;
       if (uVar6 < *vector) {
-        if (uVar7 <= uVar6) {
-          _memset(uVar7 * 4 + vector[2],0,(uVar6 - uVar7) * 4 + 4);
-          vector[1] = uVar7;
+        if (vectorFilledCount2 <= uVar6) {
+          _memset(vectorFilledCount2 * 4 + vector[2],0,(uVar6 - vectorFilledCount2) * 4 + 4);
+          vector[1] = vectorFilledCount2;
           inst = *(int *)(ctx + 0xb0);
         }
         piVar2 = (int *)(uVar6 * 4 + vector[2]);
@@ -1634,12 +1636,12 @@ int FUN_00179608(ctx, param_2, operandIndex, operandIndex2)
   iVar4 = *(int *)((operandIndex2 * 4 + param_2) * 4 + ctx + 0x168);
   if ((iVar4 < 0) && (*(int *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8) != 0x8e)) {
     vector2 = *(uint **)(*(int *)(operandIndex2 * 0x18 + *(int *)(ctx + 0xb0) + 0x8c) + 0x2c);
-    uVar6 = vector2[1];
-    uVar7 = uVar6 - 1;
+    vectorFilledCount = vector2[1];
+    uVar7 = vectorFilledCount - 1;
     if (uVar7 < *vector2) {
-      if (uVar6 <= uVar7) {
-        _memset(uVar6 * 4 + vector2[2],0,(uVar7 - uVar6) * 4 + 4);
-        vector2[1] = uVar6;
+      if (vectorFilledCount <= uVar7) {
+        _memset(vectorFilledCount * 4 + vector2[2],0,(uVar7 - vectorFilledCount) * 4 + 4);
+        vector2[1] = vectorFilledCount;
       }
       piVar2 = (int *)(uVar7 * 4 + vector2[2]);
     }
@@ -2685,18 +2687,18 @@ int FUN_0017b020(ctx, param_2)
 {
   int *piVar1;
   int iVar2;
-  uint uVar3;
+  uint vectorFilledCount;
   uint uVar4;
   uint *vector;
   int iVar6;
   
   vector = *(uint **)(*(int *)(param_2 * 0x18 + *(int *)(ctx + 0xb0) + 0x8c) + 0x2c);
-  uVar3 = vector[1];
-  uVar4 = uVar3 - 1;
+  vectorFilledCount = vector[1];
+  uVar4 = vectorFilledCount - 1;
   if (uVar4 < *vector) {
-    if (uVar3 <= uVar4) {
-      _memset(uVar3 * 4 + vector[2],0,(uVar4 - uVar3) * 4 + 4);
-      vector[1] = uVar3;
+    if (vectorFilledCount <= uVar4) {
+      _memset(vectorFilledCount * 4 + vector[2],0,(uVar4 - vectorFilledCount) * 4 + 4);
+      vector[1] = vectorFilledCount;
     }
     piVar1 = (int *)(uVar4 * 4 + vector[2]);
   }
@@ -2718,6 +2720,8 @@ int FUN_0017b020(ctx, param_2)
 int ValueKey__mixLiteralSources(key)
   int key;
 {
+  uint vectorFilledCount2;
+  uint vectorFilledCount;
   uint *vector2;
   int inst2;
   int operandIndex;
@@ -2896,12 +2900,12 @@ int ValueKey__mixLiteralSources(key)
           if (*(char *)(loopIndex + operandRecord + 0x10) == '\x01') {
             inst = *(int *)(key + 0xb0);
             vector = *(uint **)(*(int *)(*(int *)(inst + 0x84) * 0x18 + inst + 0x8c) + 0x2c);
-            uVar18 = vector[1];
-            uVar16 = uVar18 - 1;
+            vectorFilledCount2 = vector[1];
+            uVar16 = vectorFilledCount2 - 1;
             if (uVar16 < *vector) {
-              if (uVar18 <= uVar16) {
-                _memset(uVar18 * 4 + vector[2],0,(uVar16 - uVar18) * 4 + 4);
-                vector[1] = uVar18;
+              if (vectorFilledCount2 <= uVar16) {
+                _memset(vectorFilledCount2 * 4 + vector[2],0,(uVar16 - vectorFilledCount2) * 4 + 4);
+                vector[1] = vectorFilledCount2;
                 inst = *(int *)(key + 0xb0);
               }
               loopPtr7 = (int *)(uVar16 * 4 + vector[2]);
@@ -3019,12 +3023,12 @@ int ValueKey__mixLiteralSources(key)
       operandIndex2 = *loopPtr7;
       if (operandIndex2 != 0) {
         vector2 = *(uint **)(*(int *)(loopIndex + *(int *)(key + 0xb0) + 0x8c) + 0x2c);
-        uVar16 = vector2[1];
-        uVar18 = uVar16 - 1;
+        vectorFilledCount = vector2[1];
+        uVar18 = vectorFilledCount - 1;
         if (uVar18 < *vector2) {
-          if (uVar16 <= uVar18) {
-            _memset(uVar16 * 4 + vector2[2],0,(uVar18 - uVar16) * 4 + 4);
-            vector2[1] = uVar16;
+          if (vectorFilledCount <= uVar18) {
+            _memset(vectorFilledCount * 4 + vector2[2],0,(uVar18 - vectorFilledCount) * 4 + 4);
+            vector2[1] = vectorFilledCount;
           }
           loopPtr8 = (undefined4 *)(uVar18 * 4 + vector2[2]);
         }
@@ -3057,6 +3061,7 @@ int ValueKey__mixLiteralSources(key)
 int FUN_0017b96c(ctx)
   int ctx;
 {
+  uint vectorFilledCount2;
   uint *vector2;
   bool bVar1;
   bool bVar2;
@@ -3066,7 +3071,7 @@ int FUN_0017b96c(ctx)
   undefined4 uVar6;
   uint uVar7;
   undefined4 uVar8;
-  uint uVar9;
+  uint vectorFilledCount;
   int iVar10;
   int loopIndex;
   uint *vector;
@@ -3084,12 +3089,12 @@ int FUN_0017b96c(ctx)
   if (loopIndex3 == 0) {
     loopIndex3 = *(int *)(ctx + 0xb0);
     vector = *(uint **)(*(int *)(loopIndex3 + 0xa4) + 0x2c);
-    uVar9 = vector[1];
-    uVar7 = uVar9 - 1;
+    vectorFilledCount = vector[1];
+    uVar7 = vectorFilledCount - 1;
     if (uVar7 < *vector) {
-      if (uVar9 <= uVar7) {
-        _memset(uVar9 * 4 + vector[2],0,(uVar7 - uVar9) * 4 + 4);
-        vector[1] = uVar9;
+      if (vectorFilledCount <= uVar7) {
+        _memset(vectorFilledCount * 4 + vector[2],0,(uVar7 - vectorFilledCount) * 4 + 4);
+        vector[1] = vectorFilledCount;
         loopIndex3 = *(int *)(ctx + 0xb0);
       }
       piVar4 = (int *)(uVar7 * 4 + vector[2]);
@@ -3142,12 +3147,12 @@ LAB_0017bb2c:
   loopIndex3 = *(int *)(ctx + 0xb0);
   if ((*(int *)(loopIndex3 + 0x120) != 0) && (*(int *)(loopIndex3 + 0x124) == 0)) {
     vector2 = *(uint **)(*(int *)(loopIndex3 + 0xa4) + 0x2c);
-    uVar9 = vector2[1];
-    uVar7 = uVar9 - 1;
+    vectorFilledCount2 = vector2[1];
+    uVar7 = vectorFilledCount2 - 1;
     if (uVar7 < *vector2) {
-      if (uVar9 <= uVar7) {
-        _memset(uVar9 * 4 + vector2[2],0,(uVar7 - uVar9) * 4 + 4);
-        vector2[1] = uVar9;
+      if (vectorFilledCount2 <= uVar7) {
+        _memset(vectorFilledCount2 * 4 + vector2[2],0,(uVar7 - vectorFilledCount2) * 4 + 4);
+        vector2[1] = vectorFilledCount2;
         loopIndex3 = *(int *)(ctx + 0xb0);
       }
       puVar5 = (undefined4 *)(uVar7 * 4 + vector2[2]);

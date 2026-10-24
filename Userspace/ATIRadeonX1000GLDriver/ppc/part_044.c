@@ -964,6 +964,8 @@ int Inst__takeOutCommonFactor(param_1, pass)
   int param_1;
   int pass;
 {
+  uint vectorFilledCount2;
+  uint vectorFilledCount;
   undefined4 operandIndex11;
   uint *vector6;
   uint *vector5;
@@ -1056,9 +1058,9 @@ int Inst__takeOutCommonFactor(param_1, pass)
     do {
       vector5 = *(uint **)(iStack00000018 + 0x10);
       if (uVar24 < *vector5) {
-        uVar6 = vector5[1];
-        if (uVar6 <= uVar24) {
-          _memset(uVar6 * 4 + vector5[2],0,(uVar24 - uVar6) * 4 + 4);
+        vectorFilledCount = vector5[1];
+        if (vectorFilledCount <= uVar24) {
+          _memset(vectorFilledCount * 4 + vector5[2],0,(uVar24 - vectorFilledCount) * 4 + 4);
           vector5[1] = uVar24 + 1;
         }
         puVar7 = (undefined4 *)(iVar19 + vector5[2]);
@@ -1310,9 +1312,9 @@ LAB_0015abb0:
                       do {
                         vector6 = *(uint **)(iVar17 + 0x10);
                         if (uVar24 < *vector6) {
-                          uVar6 = vector6[1];
-                          if (uVar6 <= uVar24) {
-                            _memset(uVar6 * 4 + vector6[2],0,(uVar24 - uVar6) * 4 + 4);
+                          vectorFilledCount2 = vector6[1];
+                          if (vectorFilledCount2 <= uVar24) {
+                            _memset(vectorFilledCount2 * 4 + vector6[2],0,(uVar24 - vectorFilledCount2) * 4 + 4);
                             vector6[1] = uVar24 + 1;
                           }
                           piVar13 = (int *)(iVar12 + vector6[2]);
@@ -1484,6 +1486,8 @@ int FUN_0015b4a4(inst, param_2)
   int inst;
   int param_2;
 {
+  uint vectorFilledCount2;
+  uint vectorFilledCount;
   uint *vector2;
   int *inst2;
   int operandIndex;
@@ -1532,12 +1536,12 @@ int FUN_0015b4a4(inst, param_2)
         } while (bVar1);
         vector = (uint *)a0[4];
         uVar10 = 0;
-        uVar8 = vector[1];
-        if (uVar8 != 0) {
+        vectorFilledCount = vector[1];
+        if (vectorFilledCount != 0) {
           do {
             if (uVar10 < *vector) {
-              if (uVar8 <= uVar10) {
-                _memset(uVar8 * 4 + vector[2],0,(uVar10 - uVar8) * 4 + 4);
+              if (vectorFilledCount <= uVar10) {
+                _memset(vectorFilledCount * 4 + vector[2],0,(uVar10 - vectorFilledCount) * 4 + 4);
                 vector[1] = uVar10 + 1;
               }
               piVar4 = (int *)(uVar10 * 4 + vector[2]);
@@ -1552,8 +1556,8 @@ int FUN_0015b4a4(inst, param_2)
             }
             vector = (uint *)a0[4];
             uVar10 = uVar10 + 1;
-            uVar8 = vector[1];
-          } while (uVar10 < uVar8);
+            vectorFilledCount = vector[1];
+          } while (uVar10 < vectorFilledCount);
         }
         *(int *)(param_2 + 0x164) = *(int *)(param_2 + 0x164) + 1;
         local_44[0] = 4;
@@ -1590,12 +1594,12 @@ int FUN_0015b4a4(inst, param_2)
         } while (bVar1);
         vector2 = (uint *)a0[4];
         uVar10 = 0;
-        uVar8 = vector2[1];
-        if (uVar8 != 0) {
+        vectorFilledCount2 = vector2[1];
+        if (vectorFilledCount2 != 0) {
           do {
             if (uVar10 < *vector2) {
-              if (uVar8 <= uVar10) {
-                _memset(uVar8 * 4 + vector2[2],0,(uVar10 - uVar8) * 4 + 4);
+              if (vectorFilledCount2 <= uVar10) {
+                _memset(vectorFilledCount2 * 4 + vector2[2],0,(uVar10 - vectorFilledCount2) * 4 + 4);
                 vector2[1] = uVar10 + 1;
               }
               puVar5 = (undefined4 *)(uVar10 * 4 + vector2[2]);
@@ -1627,8 +1631,8 @@ int FUN_0015b4a4(inst, param_2)
               }
             }
             vector2 = (uint *)a0[4];
-            uVar8 = vector2[1];
-          } while (uVar10 < uVar8);
+            vectorFilledCount2 = vector2[1];
+          } while (uVar10 < vectorFilledCount2);
         }
       }
     }
@@ -2230,7 +2234,7 @@ int Inst__collapseAlgebraic_0015c6d4(inst, program)
   code *pcVar4;
   int iVar5;
   int iVar6;
-  uint uVar7;
+  uint vectorFilledCount;
   int *piVar8;
   int *piVar9;
   int operandRecord;
@@ -2336,13 +2340,13 @@ LAB_0015c880:
         if (uVar17 != 0) {
           sourceDef = IRInst__getOperandSource(inst,inst[0x21]);
           vector = *(uint **)(sourceDef + 0x10);
-          uVar7 = vector[1];
-          if (0 < (int)uVar7) {
+          vectorFilledCount = vector[1];
+          if (0 < (int)vectorFilledCount) {
             loopIndex2 = 0;
             do {
               if (loopIndex2 < *vector) {
-                if (uVar7 <= loopIndex2) {
-                  _memset(uVar7 * 4 + vector[2],0,(loopIndex2 - uVar7) * 4 + 4);
+                if (vectorFilledCount <= loopIndex2) {
+                  _memset(vectorFilledCount * 4 + vector[2],0,(loopIndex2 - vectorFilledCount) * 4 + 4);
                   vector[1] = loopIndex2 + 1;
                 }
                 piVar8 = (int *)(loopIndex2 * 4 + vector[2]);
@@ -2356,9 +2360,9 @@ LAB_0015c880:
                 *(int *)(sourceDef + 0x160) = *(int *)(sourceDef + 0x160) + -1;
                 break;
               }
-              uVar7 = vector[1];
+              vectorFilledCount = vector[1];
               loopIndex2 = loopIndex2 + 1;
-            } while ((int)loopIndex2 < (int)uVar7);
+            } while ((int)loopIndex2 < (int)vectorFilledCount);
           }
         }
         loopIndex = 1;

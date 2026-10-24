@@ -659,7 +659,7 @@ int R520MachineAssembler__vslot39_appendLoopStartRecord(this, loopCount)
   undefined4 in_r7;
   undefined4 in_r8;
   int iVar3;
-  uint uVar4;
+  uint vectorFilledCount;
   uint *vector;
   
   *(undefined4 *)(this[0x18] * 0x48 + this[0x2a]) = 5;
@@ -671,14 +671,14 @@ int R520MachineAssembler__vslot39_appendLoopStartRecord(this, loopCount)
   iVar1 = this[0x18];
   vector = *(uint **)(this[4] + 0x28);
   iVar3 = this[0x2a];
-  uVar4 = vector[1];
-  if (uVar4 < *vector) {
-    _memset(uVar4 * 4 + vector[2],0,4);
-    piVar2 = (int *)(uVar4 * 4 + vector[2]);
-    vector[1] = uVar4 + 1;
+  vectorFilledCount = vector[1];
+  if (vectorFilledCount < *vector) {
+    _memset(vectorFilledCount * 4 + vector[2],0,4);
+    piVar2 = (int *)(vectorFilledCount * 4 + vector[2]);
+    vector[1] = vectorFilledCount + 1;
   }
   else {
-    piVar2 = (int *)Vector__elementRefGrow(vector,uVar4);
+    piVar2 = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
   }
   *piVar2 = iVar1 * 0x48 + iVar3 + -0x48;
   return;
@@ -693,7 +693,7 @@ int R520MachineAssembler__appendBranchEndRecord(this, count, variant)
   int recordIndex;
   int *piVar2;
   int recordsBase;
-  uint uVar4;
+  uint vectorFilledCount;
   uint *vector;
   
   *(undefined4 *)(this[0x18] * 0x48 + this[0x2a]) = 5;
@@ -716,14 +716,14 @@ int R520MachineAssembler__appendBranchEndRecord(this, count, variant)
   recordIndex = this[0x18];
   vector = *(uint **)(this[4] + 0x28);
   recordsBase = this[0x2a];
-  uVar4 = vector[1];
-  if (uVar4 < *vector) {
-    _memset(uVar4 * 4 + vector[2],0,4);
-    piVar2 = (int *)(uVar4 * 4 + vector[2]);
-    vector[1] = uVar4 + 1;
+  vectorFilledCount = vector[1];
+  if (vectorFilledCount < *vector) {
+    _memset(vectorFilledCount * 4 + vector[2],0,4);
+    piVar2 = (int *)(vectorFilledCount * 4 + vector[2]);
+    vector[1] = vectorFilledCount + 1;
   }
   else {
-    piVar2 = (int *)Vector__elementRefGrow(vector,uVar4);
+    piVar2 = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
   }
   *piVar2 = recordIndex * 0x48 + recordsBase + -0x48;
   return;
@@ -907,6 +907,7 @@ int R520MachineAssembler__vslot37_closeBranch(this, node)
   int *this;
   int *node;
 {
+  uint vectorFilledCount;
   int *piVar1;
   undefined4 a1;
   uint uVar2;
@@ -956,14 +957,14 @@ int R520MachineAssembler__vslot37_closeBranch(this, node)
   *(short *)(pendingRecord * 0x48 + this[0x2a] + 0xc) = (short)this[0x18] - (short)this[0x1d];
   stackVector = this[0x18];
   vector = *(uint **)(this[4] + 0x24);
-  uVar2 = vector[1];
-  if (uVar2 < *vector) {
-    _memset(uVar2 * 4 + vector[2],0,4);
-    piVar1 = (int *)(uVar2 * 4 + vector[2]);
-    vector[1] = uVar2 + 1;
+  vectorFilledCount = vector[1];
+  if (vectorFilledCount < *vector) {
+    _memset(vectorFilledCount * 4 + vector[2],0,4);
+    piVar1 = (int *)(vectorFilledCount * 4 + vector[2]);
+    vector[1] = vectorFilledCount + 1;
   }
   else {
-    piVar1 = (int *)Vector__elementRefGrow(vector,uVar2);
+    piVar1 = (int *)Vector__elementRefGrow(vector,vectorFilledCount);
   }
   *piVar1 = stackVector;
   if (*(int *)(node[0x4f] + 0xdc) != 0) {
