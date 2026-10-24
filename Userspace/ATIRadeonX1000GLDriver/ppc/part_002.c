@@ -8814,13 +8814,14 @@ int FUN_00017260(ctx)
 }
 
 /* gld_setIntegerEngineParam @ 0x17310 (1008 bytes) */
-int gld_setIntegerEngineParam(param_1, param_2, param_3)
-  int param_1;
+int gld_setIntegerEngineParam(ctx, param_2, param_3)
+  int ctx;
   uint param_2;
   undefined4 *param_3;
 {
+  uint updateFlags2;
   undefined4 uVar1;
-  uint uVar2;
+  uint updateFlags;
   uint uVar3;
   undefined4 *puVar4;
   int iVar5;
@@ -8832,15 +8833,15 @@ int gld_setIntegerEngineParam(param_1, param_2, param_3)
   uVar1 = 0x271e;
   if (param_3 != (undefined4 *)0x0) {
     if (param_2 == 0x132) {
-      puVar4 = *(undefined4 **)(param_1 + 0x1dc);
-      if (*(undefined4 **)(param_1 + 0x1e0) <= puVar4 + 4) {
-        gld_submitRing(param_1,0x1000000);
-        puVar4 = *(undefined4 **)(param_1 + 0x1dc);
+      puVar4 = *(undefined4 **)(ctx + 0x1dc);
+      if (*(undefined4 **)(ctx + 0x1e0) <= puVar4 + 4) {
+        gld_submitRing(ctx,0x1000000);
+        puVar4 = *(undefined4 **)(ctx + 0x1dc);
       }
-      puVar6 = *(uint **)(param_1 + 0x1d8);
-      *(undefined4 **)(param_1 + 0x1dc) = puVar4 + 4;
+      puVar6 = *(uint **)(ctx + 0x1d8);
+      *(undefined4 **)(ctx + 0x1dc) = puVar4 + 4;
       *puVar6 = (int)puVar4 - (int)puVar6 >> 2 | *puVar6;
-      *(undefined4 **)(param_1 + 0x1d8) = puVar4;
+      *(undefined4 **)(ctx + 0x1d8) = puVar4;
       *puVar4 = 0x3d000000;
       puVar4[1] = 0x132;
       puVar4[2] = *param_3;
@@ -8850,12 +8851,12 @@ int gld_setIntegerEngineParam(param_1, param_2, param_3)
     else {
       if (param_2 < 0x133) {
         if (param_2 == 300) {
-          puVar4 = *(undefined4 **)(param_1 + 0x1dc);
-          if (*(undefined4 **)(param_1 + 0x1e0) <= puVar4 + 6) {
-            gld_submitRing(param_1,0x1000000);
-            puVar4 = *(undefined4 **)(param_1 + 0x1dc);
+          puVar4 = *(undefined4 **)(ctx + 0x1dc);
+          if (*(undefined4 **)(ctx + 0x1e0) <= puVar4 + 6) {
+            gld_submitRing(ctx,0x1000000);
+            puVar4 = *(undefined4 **)(ctx + 0x1dc);
           }
-          *(undefined4 **)(param_1 + 0x1dc) = puVar4 + 6;
+          *(undefined4 **)(ctx + 0x1dc) = puVar4 + 6;
           *puVar4 = ((unsigned char *)0x00001040U);
           puVar4[1] = 0;
           puVar4[2] = ((unsigned char *)0x00001393U);
@@ -8867,87 +8868,87 @@ int gld_setIntegerEngineParam(param_1, param_2, param_3)
       }
       else {
         if (param_2 == 0x1fe) {
-          if ((*(int *)(param_1 + 0xf8) != 0) && (*(int *)(param_1 + 0x2a84) == 0)) {
-            uVar1 = FUN_00019db0(param_1,*param_3,1);
+          if ((*(int *)(ctx + 0xf8) != 0) && (*(int *)(ctx + 0x2a84) == 0)) {
+            uVar1 = FUN_00019db0(ctx,*param_3,1);
             return uVar1;
           }
           return 0;
         }
         if (param_2 == 0x29b) {
-          if (*(uint *)(param_1 + 0x1e0) <= *(int *)(param_1 + 0x1dc) + 0x60U) {
-            gld_submitRing(param_1,0x1000000);
+          if (*(uint *)(ctx + 0x1e0) <= *(int *)(ctx + 0x1dc) + 0x60U) {
+            gld_submitRing(ctx,0x1000000);
           }
-          iVar5 = *(int *)(param_1 + 500);
-          uVar3 = *(uint *)(param_1 + 0x1f8);
+          iVar5 = *(int *)(ctx + 500);
+          uVar3 = *(uint *)(ctx + 0x1f8);
           if (uVar3 <= iVar5 + 0x800U) {
             local_28 = 2;
-            uVar3 = *(int *)(param_1 + 0x204) + 1;
-            *(uint *)(param_1 + 0x204) = uVar3;
+            uVar3 = *(int *)(ctx + 0x204) + 1;
+            *(uint *)(ctx + 0x204) = uVar3;
             if (2 < uVar3) {
-              if (*(int *)(param_1 + 0x1e4) + 0x28U < *(uint *)(param_1 + 0x1dc)) {
-                gld_submitRing(param_1,0x1000000);
-                iVar5 = *(int *)(param_1 + 500);
+              if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
+                gld_submitRing(ctx,0x1000000);
+                iVar5 = *(int *)(ctx + 500);
               }
-              *(undefined4 *)(param_1 + 0x204) = 1;
+              *(undefined4 *)(ctx + 0x204) = 1;
             }
-            *(int *)(*(int *)(param_1 + 0x208) + 0xc) = iVar5 - *(int *)(param_1 + 0x1fc) >> 2;
+            *(int *)(*(int *)(ctx + 0x208) + 0xc) = iVar5 - *(int *)(ctx + 0x1fc) >> 2;
             _io_connect_method_scalarI_scalarO
-                      (*(undefined4 *)(param_1 + 4),0x12,0,0,&local_24,&local_28);
-            uVar2 = *(uint *)(0x000026c8 + param_1);
-            *(int *)(param_1 + 0x1fc) = local_24;
+                      (*(undefined4 *)(ctx + 4),0x12,0,0,&local_24,&local_28);
+            updateFlags = *(uint *)(0x000026c8 + ctx);
+            *(int *)(ctx + 0x1fc) = local_24;
             uVar3 = local_24 + (local_20 & 0xfffffffc);
-            *(int *)(param_1 + 500) = local_24;
-            *(uint *)(param_1 + 0x1f8) = uVar3;
-            uVar1 = *(undefined4 *)(*(int *)(param_1 + 0x208) + 8);
-            *(uint *)(0x000026c8 + param_1) = uVar2 | 1;
-            *(undefined4 *)(param_1 + 0x200) = uVar1;
+            *(int *)(ctx + 500) = local_24;
+            *(uint *)(ctx + 0x1f8) = uVar3;
+            uVar1 = *(undefined4 *)(*(int *)(ctx + 0x208) + 8);
+            *(uint *)(0x000026c8 + ctx) = updateFlags | 1;
+            *(undefined4 *)(ctx + 0x200) = uVar1;
             iVar5 = local_24;
           }
           if (uVar3 <= iVar5 + 800U) {
             local_28 = 2;
-            uVar3 = *(int *)(param_1 + 0x204) + 1;
-            *(uint *)(param_1 + 0x204) = uVar3;
+            uVar3 = *(int *)(ctx + 0x204) + 1;
+            *(uint *)(ctx + 0x204) = uVar3;
             if (2 < uVar3) {
-              if (*(int *)(param_1 + 0x1e4) + 0x28U < *(uint *)(param_1 + 0x1dc)) {
-                gld_submitRing(param_1,0x1000000);
-                iVar5 = *(int *)(param_1 + 500);
+              if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
+                gld_submitRing(ctx,0x1000000);
+                iVar5 = *(int *)(ctx + 500);
               }
-              *(undefined4 *)(param_1 + 0x204) = 1;
+              *(undefined4 *)(ctx + 0x204) = 1;
             }
-            *(int *)(*(int *)(param_1 + 0x208) + 0xc) = iVar5 - *(int *)(param_1 + 0x1fc) >> 2;
+            *(int *)(*(int *)(ctx + 0x208) + 0xc) = iVar5 - *(int *)(ctx + 0x1fc) >> 2;
             _io_connect_method_scalarI_scalarO
-                      (*(undefined4 *)(param_1 + 4),0x12,0,0,&local_24,&local_28);
-            uVar3 = *(uint *)(0x000026c8 + param_1);
-            *(int *)(param_1 + 0x1fc) = local_24;
-            *(int *)(param_1 + 500) = local_24;
-            *(uint *)(param_1 + 0x1f8) = local_24 + (local_20 & 0xfffffffc);
-            uVar1 = *(undefined4 *)(*(int *)(param_1 + 0x208) + 8);
-            *(uint *)(0x000026c8 + param_1) = uVar3 | 1;
-            *(undefined4 *)(param_1 + 0x200) = uVar1;
+                      (*(undefined4 *)(ctx + 4),0x12,0,0,&local_24,&local_28);
+            updateFlags2 = *(uint *)(0x000026c8 + ctx);
+            *(int *)(ctx + 0x1fc) = local_24;
+            *(int *)(ctx + 500) = local_24;
+            *(uint *)(ctx + 0x1f8) = local_24 + (local_20 & 0xfffffffc);
+            uVar1 = *(undefined4 *)(*(int *)(ctx + 0x208) + 8);
+            *(uint *)(0x000026c8 + ctx) = updateFlags2 | 1;
+            *(undefined4 *)(ctx + 0x200) = uVar1;
             iVar5 = local_24;
           }
           iVar5 = iVar5 + 800;
-          *(int *)(param_1 + 500) = iVar5;
+          *(int *)(ctx + 500) = iVar5;
           local_28 = 2;
-          uVar3 = *(int *)(param_1 + 0x204) + 1;
-          *(uint *)(param_1 + 0x204) = uVar3;
+          uVar3 = *(int *)(ctx + 0x204) + 1;
+          *(uint *)(ctx + 0x204) = uVar3;
           if (2 < uVar3) {
-            if (*(int *)(param_1 + 0x1e4) + 0x28U < *(uint *)(param_1 + 0x1dc)) {
-              gld_submitRing(param_1,0x1000000);
-              iVar5 = *(int *)(param_1 + 500);
+            if (*(int *)(ctx + 0x1e4) + 0x28U < *(uint *)(ctx + 0x1dc)) {
+              gld_submitRing(ctx,0x1000000);
+              iVar5 = *(int *)(ctx + 500);
             }
-            *(undefined4 *)(param_1 + 0x204) = 1;
+            *(undefined4 *)(ctx + 0x204) = 1;
           }
-          *(int *)(*(int *)(param_1 + 0x208) + 0xc) = iVar5 - *(int *)(param_1 + 0x1fc) >> 2;
+          *(int *)(*(int *)(ctx + 0x208) + 0xc) = iVar5 - *(int *)(ctx + 0x1fc) >> 2;
           _io_connect_method_scalarI_scalarO
-                    (*(undefined4 *)(param_1 + 4),0x12,0,0,&local_24,&local_28);
-          uVar3 = *(uint *)(0x000026c8 + param_1);
-          *(int *)(param_1 + 0x1fc) = local_24;
-          *(int *)(param_1 + 500) = local_24;
-          *(uint *)(param_1 + 0x1f8) = local_24 + (local_20 & 0xfffffffc);
-          uVar1 = *(undefined4 *)(*(int *)(param_1 + 0x208) + 8);
-          *(uint *)(0x000026c8 + param_1) = uVar3 | 1;
-          *(undefined4 *)(param_1 + 0x200) = uVar1;
+                    (*(undefined4 *)(ctx + 4),0x12,0,0,&local_24,&local_28);
+          updateFlags2 = *(uint *)(0x000026c8 + ctx);
+          *(int *)(ctx + 0x1fc) = local_24;
+          *(int *)(ctx + 500) = local_24;
+          *(uint *)(ctx + 0x1f8) = local_24 + (local_20 & 0xfffffffc);
+          uVar1 = *(undefined4 *)(*(int *)(ctx + 0x208) + 8);
+          *(uint *)(0x000026c8 + ctx) = updateFlags2 | 1;
+          *(undefined4 *)(ctx + 0x200) = uVar1;
           return 0;
         }
       }

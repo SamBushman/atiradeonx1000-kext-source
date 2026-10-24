@@ -942,8 +942,8 @@ int FUN_000027a4(param_1, param_2)
 }
 
 /* FUN_000027d0 @ 0x27d0 (776 bytes) */
-int FUN_000027d0(param_1, param_2)
-  int param_1;
+int FUN_000027d0(ctx, param_2)
+  int ctx;
   int param_2;
 {
   int loopIndex;
@@ -957,11 +957,11 @@ int FUN_000027d0(param_1, param_2)
   undefined8 *puVar8;
   undefined8 *puVar9;
   int iVar10;
-  int iVar11;
+  int renderHeight;
   uint uVar12;
   int iVar13;
   int iVar14;
-  int iVar15;
+  int renderWidth;
   uint uVar16;
   undefined1 uStack_66;
   undefined1 uStack_65;
@@ -973,20 +973,20 @@ int FUN_000027d0(param_1, param_2)
        (uVar4 = 0, *(float *)(((unsigned char *)0x00002d9c) + param_2) < FLOAT_001aa0d4)) {
       uVar4 = 1;
     }
-    iVar15 = *(int *)(param_1 + 0x15c);
-    iVar11 = *(int *)(param_1 + 0x160);
+    renderWidth = *(int *)(ctx + 0x15c);
+    renderHeight = *(int *)(ctx + 0x160);
     iVar14 = 0;
     iVar5 = 0;
-    *(undefined1 *)(param_1 + 0x140) = uVar4;
-    uVar12 = iVar15 + 7U & 0xfffffff8;
-    iVar13 = iVar11;
+    *(undefined1 *)(ctx + 0x140) = uVar4;
+    uVar12 = renderWidth + 7U & 0xfffffff8;
+    iVar13 = renderHeight;
   }
   else {
-    iVar11 = *(int *)(param_1 + 0x160);
-    *(undefined1 *)(param_1 + 0x140) = 1;
+    renderHeight = *(int *)(ctx + 0x160);
+    *(undefined1 *)(ctx + 0x140) = 1;
     iVar14 = *(int *)(((unsigned char *)0x00003180) + param_2);
     uVar12 = iVar14 + *(int *)(((unsigned char *)0x00003188) + param_2);
-    iVar5 = iVar11 - (*(int *)(((unsigned char *)0x0000318c) + param_2) + *(int *)(((unsigned char *)0x00003184) + param_2));
+    iVar5 = renderHeight - (*(int *)(((unsigned char *)0x0000318c) + param_2) + *(int *)(((unsigned char *)0x00003184) + param_2));
     iVar13 = *(int *)(((unsigned char *)0x0000318c) + param_2) + iVar5;
     if (iVar14 < 0) {
       iVar14 = 0;
@@ -994,23 +994,23 @@ int FUN_000027d0(param_1, param_2)
     if (iVar5 < 0) {
       iVar5 = 0;
     }
-    iVar15 = *(int *)(param_1 + 0x15c);
-    uVar1 = iVar15 + 7U & 0xfffffff8;
+    renderWidth = *(int *)(ctx + 0x15c);
+    uVar1 = renderWidth + 7U & 0xfffffff8;
     if ((int)uVar1 < (int)uVar12) {
       uVar12 = uVar1;
     }
-    iVar10 = iVar11;
-    if (iVar13 <= iVar11) {
+    iVar10 = renderHeight;
+    if (iVar13 <= renderHeight) {
       iVar10 = iVar13;
     }
     uVar12 = uVar12 - iVar14;
     iVar13 = iVar10 - iVar5;
   }
   if ((0 < (int)uVar12) && (0 < iVar13)) {
-    uVar1 = iVar15 + 7U & 0xfffffff8;
-    iVar14 = iVar14 + uVar1 * (iVar11 - (iVar5 + iVar13));
-    if (*(char *)(param_1 + 0x141) == '\x01') {
-      puVar6 = (undefined4 *)(iVar14 * 4 + *(int *)(param_1 + 0x148));
+    uVar1 = renderWidth + 7U & 0xfffffff8;
+    iVar14 = iVar14 + uVar1 * (renderHeight - (iVar5 + iVar13));
+    if (*(char *)(ctx + 0x141) == '\x01') {
+      puVar6 = (undefined4 *)(iVar14 * 4 + *(int *)(ctx + 0x148));
       uVar2 = CONCAT31(CONCAT21(CONCAT11((char)(int)(*(float *)(((unsigned char *)0x00002d90) + param_2) *
                                                     FLOAT_001aa0cc),
                                          (char)(int)(*(float *)(((unsigned char *)0x00002d94) + param_2) *
@@ -1044,8 +1044,8 @@ int FUN_000027d0(param_1, param_2)
         } while (iVar13 != loopIndex);
       }
     }
-    else if (*(char *)(param_1 + 0x141) == '\x02') {
-      puVar8 = (undefined8 *)(iVar14 * 8 + *(int *)(param_1 + 0x148));
+    else if (*(char *)(ctx + 0x141) == '\x02') {
+      puVar8 = (undefined8 *)(iVar14 * 8 + *(int *)(ctx + 0x148));
       uStack_66 = (undefined1)
                   ((uint)(int)(*(float *)(((unsigned char *)0x00002d94) + param_2) * FLOAT_001aa0d0) >> 8);
       uStack_65 = (undefined1)(int)(*(float *)(((unsigned char *)0x00002d94) + param_2) * FLOAT_001aa0d0);
