@@ -952,7 +952,8 @@ int _glpDisassemble2Op(inst, outText, outWordCount, outTextLength, paramNumbers,
   uint instWord0;
   char *outPtr;
   int outPos;
-  int opOffsetOrTailLength;
+  int mnemonicOffset;
+  int copiedLength;
   int copyIndex9;
   int copyIndex10;
   int copyIndex11;
@@ -1004,7 +1005,7 @@ int _glpDisassemble2Op(inst, outText, outWordCount, outTextLength, paramNumbers,
 LAB_97c017a4:
     return 0xffffffff;
   }
-  opOffsetOrTailLength = opcode * 4;
+  mnemonicOffset = opcode * 4;
   outStart = outText;
   switch(opcode) {
   case 0:
@@ -1048,7 +1049,7 @@ LAB_97c017a4:
   case 4:
   case 5:
     copyIndex9 = 0;
-    mnemonic = *(char **)(PTR__ppstreamOpString_a7b7c108 + opOffsetOrTailLength);
+    mnemonic = *(char **)(PTR__ppstreamOpString_a7b7c108 + mnemonicOffset);
     ch = *mnemonic;
     while (ch != '\0') {
       *(char *)(outText + copyIndex9) = ch;
@@ -1071,12 +1072,12 @@ LAB_97c017a4:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 3:
@@ -1104,12 +1105,12 @@ LAB_97c017a4:
       copyIndex2 = copyIndex2 + 1;
     }
     outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s____scratch__97c2e438[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ", -scratch;\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ", -scratch;\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 6:
@@ -1174,12 +1175,12 @@ LAB_97c017a4:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___scratch__scratch1__97c2e4f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ", scratch, scratch1;\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ", scratch, scratch1;\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 7:
@@ -1223,12 +1224,12 @@ LAB_97c017a4:
         copyIndex2 = copyIndex2 + 1;
       }
       outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___scratch1__scratch__97c2e93c[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ", scratch1, scratch;\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ", scratch1, scratch;\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     else {
@@ -1249,12 +1250,12 @@ LAB_97c017a4:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s_____end_97c2e910[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ";\n# end\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ";\n# end\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     break;
@@ -1341,12 +1342,12 @@ LAB_97bfb2c8:
       copyIndex3 = copyIndex3 + 1;
     }
     outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outBase + copyIndex3,0,0,0);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___scratch_x__kHALF__97c2e970[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ", scratch.x, kHALF;\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ", scratch.x, kHALF;\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 9:
@@ -1392,12 +1393,12 @@ LAB_97bfb2c8:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,2,2);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ";\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ";\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     else if (sourceMode2 < 3) {
@@ -1426,12 +1427,12 @@ LAB_97bfb2c8:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,1,2);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ";\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ";\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     else {
@@ -1469,12 +1470,12 @@ LAB_97bfb2c8:
         copyIndex2 = copyIndex2 + 1;
       }
       outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___scratch_x__scratch_y__97c2e524[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ", scratch.x, scratch.y;\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ", scratch.x, scratch.y;\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     break;
@@ -1496,12 +1497,12 @@ LAB_97bfb2c8:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0xc:
@@ -1558,7 +1559,7 @@ LAB_97bfb2c8:
     loopIndex3 = 0;
     do {
       if ((writeMaskBits2 & 1) != 0) {
-        mnemonic = *(char **)(opStringTable + opOffsetOrTailLength);
+        mnemonic = *(char **)(opStringTable + mnemonicOffset);
         copyIndex10 = 0;
         ch = *mnemonic;
         while (ch != '\0') {
@@ -1686,12 +1687,12 @@ LAB_97bfb2c8:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___scratch_x__97c2e594[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ", scratch.x;\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ", scratch.x;\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x15:
@@ -1817,12 +1818,12 @@ LAB_97bfb2c8:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___scratch_x__97c2e594[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ", scratch.x;\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ", scratch.x;\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     else {
@@ -1943,12 +1944,12 @@ LAB_97bfb2c8:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteComponentsWithDestinationSwizzle)(inst,outCursor + copyIndex);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ";\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ";\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     break;
@@ -1969,12 +1970,12 @@ LAB_97bfb2c8:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___0_0174532925199__97c2e9d0[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ", 0.0174532925199;\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ", 0.0174532925199;\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x17:
@@ -1994,12 +1995,12 @@ LAB_97bfb2c8:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___57_295779513082__97c2e9bc[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ", 57.295779513082;\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ", 57.295779513082;\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x19:
@@ -2033,12 +2034,12 @@ LAB_97bfb2c8:
         loopIndex = loopIndex + 1;
         outStart = outCursor6 + copyIndex2;
       } while (loopIndex <= (int)(inst[2] >> 10 & 3));
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___end_97c2eb88[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = "# end\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = "# end\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     else {
@@ -2202,12 +2203,12 @@ LAB_97bfb2c8:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___scratch2__scratch1__97c2ed08[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ", scratch2, scratch1;\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ", scratch2, scratch1;\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     break;
@@ -2250,12 +2251,12 @@ LAB_97bfb2c8:
         loopIndex = loopIndex + 1;
         outStart = outCursor6 + copyIndex2;
       } while (loopIndex <= (int)(inst[2] >> 10 & 3));
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___end_97c2eb88[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = "# end\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = "# end\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     else {
@@ -2379,12 +2380,12 @@ LAB_97bfb2c8:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___scratch1___kHALF__kONE__97c2edac[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ", scratch1, -kHALF, kONE;\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ", scratch1, -kHALF, kONE;\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     break;
@@ -2519,12 +2520,12 @@ LAB_97bfb2c8:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outPtr + copyIndex,0,0,0);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___scratch__scratch1__97c2e4f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ", scratch, scratch1;\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ", scratch, scratch1;\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x1c:
@@ -2828,12 +2829,12 @@ LAB_97bfb2c8:
       copyIndex3 = copyIndex3 + 1;
     }
     outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outPtr + copyIndex3 + outLen,0,0,0);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___scratch2__scratch__97c2f24c[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ", scratch2, scratch;\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ", scratch2, scratch;\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x1d:
@@ -3153,12 +3154,12 @@ LAB_97bfb2c8:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outPtr + copyIndex + outPos,0,0,0);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___kHALFPI__scratch__97c2f608[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ", kHALFPI, scratch;\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ", kHALFPI, scratch;\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x1e:
@@ -3549,12 +3550,12 @@ LAB_97bfb2c8:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outPtr + copyIndex + outPos,0,0,0);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___scratch5__scratch1__scratch__97c2f590[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ", scratch5, scratch1, scratch;\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ", scratch5, scratch1, scratch;\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     else {
@@ -3764,12 +3765,12 @@ LAB_97bfb2c8:
         copyIndex3 = copyIndex3 + 1;
       }
       outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outPtr + copyIndex3 + outLen,0,0,0);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___scratch2__scratch__97c2f24c[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ", scratch2, scratch;\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ", scratch2, scratch;\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     break;
@@ -3783,7 +3784,7 @@ LAB_97bfb2c8:
     if (outLen2 == 0) goto LAB_97c0178c;
     do {
       copyIndex11 = 0;
-      mnemonic = *(char **)(PTR__ppstreamOpString_a7b7c108 + opOffsetOrTailLength);
+      mnemonic = *(char **)(PTR__ppstreamOpString_a7b7c108 + mnemonicOffset);
       ch = *mnemonic;
       while (ch != '\0') {
         *(char *)(outStart + copyIndex11) = ch;
@@ -3932,12 +3933,12 @@ LAB_97bfb2c8:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x22:
@@ -3974,12 +3975,12 @@ LAB_97bfb2c8:
           copyIndex = copyIndex + 1;
         }
         outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
-        opOffsetOrTailLength = 0;
+        copiedLength = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
-          *(char *)(outStart + opOffsetOrTailLength) = ch;
-          ch = ";\n"[opOffsetOrTailLength + 1];
-          opOffsetOrTailLength = opOffsetOrTailLength + 1;
+          *(char *)(outStart + copiedLength) = ch;
+          ch = ";\n"[copiedLength + 1];
+          copiedLength = copiedLength + 1;
         }
         break;
       }
@@ -4115,12 +4116,12 @@ LAB_97bfb2c8:
               copyIndex3 = copyIndex3 + 1;
             }
             outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outBase + copyIndex3,0,0,0);
-            opOffsetOrTailLength = 0;
+            copiedLength = 0;
             ch = s___scratch__97c2e620[0];
             while (ch != '\0') {
-              *(char *)(outStart + opOffsetOrTailLength) = ch;
-              ch = ", scratch;\n"[opOffsetOrTailLength + 1];
-              opOffsetOrTailLength = opOffsetOrTailLength + 1;
+              *(char *)(outStart + copiedLength) = ch;
+              ch = ", scratch;\n"[copiedLength + 1];
+              copiedLength = copiedLength + 1;
             }
           }
           else {
@@ -4183,12 +4184,12 @@ LAB_97bfb2c8:
               copyIndex3 = copyIndex3 + 1;
             }
             outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outBase + copyIndex3,0,0,0);
-            opOffsetOrTailLength = 0;
+            copiedLength = 0;
             ch = s___scratch1__97c2e684[0];
             while (ch != '\0') {
-              *(char *)(outStart + opOffsetOrTailLength) = ch;
-              ch = ", scratch1;\n"[opOffsetOrTailLength + 1];
-              opOffsetOrTailLength = opOffsetOrTailLength + 1;
+              *(char *)(outStart + copiedLength) = ch;
+              ch = ", scratch1;\n"[copiedLength + 1];
+              copiedLength = copiedLength + 1;
             }
           }
           break;
@@ -4893,12 +4894,12 @@ LAB_97bf7aec:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x25:
@@ -4934,12 +4935,12 @@ LAB_97bf7aec:
       copyIndex2 = copyIndex2 + 1;
     }
     outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___scratch_x__kHALF__97c2e970[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ", scratch.x, kHALF;\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ", scratch.x, kHALF;\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x26:
@@ -4975,12 +4976,12 @@ LAB_97bf7aec:
       copyIndex2 = copyIndex2 + 1;
     }
     outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___scratch_x__97c2e594[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ", scratch.x;\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ", scratch.x;\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x27:
@@ -5017,12 +5018,12 @@ LAB_97bf7aec:
         copyIndex2 = copyIndex2 + 1;
       }
       outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___scratch_x__scratch_y__97c2e524[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ", scratch.x, scratch.y;\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ", scratch.x, scratch.y;\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     else {
@@ -5084,12 +5085,12 @@ LAB_97bf7aec:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,0);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ";\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ";\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     break;
@@ -5180,18 +5181,18 @@ LAB_97bf7aec:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___scratch_x__97c2e594[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ", scratch.x;\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ", scratch.x;\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x2c:
   case 0x2d:
     copyIndex9 = 0;
-    mnemonic = *(char **)(PTR__ppstreamOpString_a7b7c108 + opOffsetOrTailLength);
+    mnemonic = *(char **)(PTR__ppstreamOpString_a7b7c108 + mnemonicOffset);
     ch = *mnemonic;
     while (ch != '\0') {
       *(char *)(outText + copyIndex9) = ch;
@@ -5222,19 +5223,19 @@ LAB_97bf7aec:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x2e:
   case 0x32:
   case 0x35:
     copyIndex9 = 0;
-    mnemonic = *(char **)(PTR__ppstreamOpString_a7b7c108 + opOffsetOrTailLength);
+    mnemonic = *(char **)(PTR__ppstreamOpString_a7b7c108 + mnemonicOffset);
     ch = *mnemonic;
     while (ch != '\0') {
       *(char *)(outText + copyIndex9) = ch;
@@ -5265,12 +5266,12 @@ LAB_97bf7aec:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x2f:
@@ -5356,12 +5357,12 @@ LAB_97bf7aec:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteComponentsWithDestinationSwizzle)(inst,outCursor + copyIndex);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x31:
@@ -5408,12 +5409,12 @@ LAB_97bf7aec:
           copyIndex = copyIndex + 1;
         }
         outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
-        opOffsetOrTailLength = 0;
+        copiedLength = 0;
         ch = s____scratch__kZERO__97c2e460[0];
         while (ch != '\0') {
-          *(char *)(outStart + opOffsetOrTailLength) = ch;
-          ch = ", -scratch, kZERO;\n"[opOffsetOrTailLength + 1];
-          opOffsetOrTailLength = opOffsetOrTailLength + 1;
+          *(char *)(outStart + copiedLength) = ch;
+          ch = ", -scratch, kZERO;\n"[copiedLength + 1];
+          copiedLength = copiedLength + 1;
         }
       }
       else {
@@ -5448,12 +5449,12 @@ LAB_97bf7aec:
           copyIndex = copyIndex + 1;
         }
         outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
-        opOffsetOrTailLength = 0;
+        copiedLength = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
-          *(char *)(outStart + opOffsetOrTailLength) = ch;
-          ch = ";\n"[opOffsetOrTailLength + 1];
-          opOffsetOrTailLength = opOffsetOrTailLength + 1;
+          *(char *)(outStart + copiedLength) = ch;
+          ch = ";\n"[copiedLength + 1];
+          copiedLength = copiedLength + 1;
         }
       }
     }
@@ -5610,12 +5611,12 @@ LAB_97bf9b6c:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s____scratch__kZERO__97c2e460[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ", -scratch, kZERO;\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ", -scratch, kZERO;\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     break;
@@ -5644,12 +5645,12 @@ LAB_97bf9b6c:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,1);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x34:
@@ -5677,12 +5678,12 @@ LAB_97bf9b6c:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,1);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x36:
@@ -5729,12 +5730,12 @@ LAB_97bf9b6c:
           copyIndex = copyIndex + 1;
         }
         outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
-        opOffsetOrTailLength = 0;
+        copiedLength = 0;
         ch = s____scratch__kZERO__97c2e460[0];
         while (ch != '\0') {
-          *(char *)(outStart + opOffsetOrTailLength) = ch;
-          ch = ", -scratch, kZERO;\n"[opOffsetOrTailLength + 1];
-          opOffsetOrTailLength = opOffsetOrTailLength + 1;
+          *(char *)(outStart + copiedLength) = ch;
+          ch = ", -scratch, kZERO;\n"[copiedLength + 1];
+          copiedLength = copiedLength + 1;
         }
       }
       else {
@@ -5769,12 +5770,12 @@ LAB_97bf9b6c:
           copyIndex = copyIndex + 1;
         }
         outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,3,0,0,8);
-        opOffsetOrTailLength = 0;
+        copiedLength = 0;
         ch = s_____end_97c2e910[0];
         while (ch != '\0') {
-          *(char *)(outStart + opOffsetOrTailLength) = ch;
-          ch = ";\n# end\n"[opOffsetOrTailLength + 1];
-          opOffsetOrTailLength = opOffsetOrTailLength + 1;
+          *(char *)(outStart + copiedLength) = ch;
+          ch = ";\n# end\n"[copiedLength + 1];
+          copiedLength = copiedLength + 1;
         }
       }
     }
@@ -5931,12 +5932,12 @@ LAB_97bf9370:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s____scratch__kZERO__97c2e460[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ", -scratch, kZERO;\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ", -scratch, kZERO;\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     break;
@@ -5946,7 +5947,7 @@ LAB_97bf9370:
     loopIndex3 = 0;
     do {
       if ((writeMaskBits2 & 1) != 0) {
-        mnemonic = *(char **)(opStringTable + opOffsetOrTailLength);
+        mnemonic = *(char **)(opStringTable + mnemonicOffset);
         copyIndex10 = 0;
         ch = *mnemonic;
         while (ch != '\0') {
@@ -6042,12 +6043,12 @@ LAB_97bf9370:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x3a:
@@ -6127,12 +6128,12 @@ LAB_97bf9370:
             copyIndex = copyIndex + 1;
           }
           outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
-          opOffsetOrTailLength = 0;
+          copiedLength = 0;
           ch = s___scratch__97c2e620[0];
           while (ch != '\0') {
-            *(char *)(outStart + opOffsetOrTailLength) = ch;
-            ch = ", scratch;\n"[opOffsetOrTailLength + 1];
-            opOffsetOrTailLength = opOffsetOrTailLength + 1;
+            *(char *)(outStart + copiedLength) = ch;
+            ch = ", scratch;\n"[copiedLength + 1];
+            copiedLength = copiedLength + 1;
           }
           break;
         }
@@ -6415,12 +6416,12 @@ LAB_97bf9370:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x3c:
@@ -6457,12 +6458,12 @@ LAB_97bf9370:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,4,0,0,8);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ";\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ";\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     else {
@@ -6522,12 +6523,12 @@ LAB_97bf9370:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___scratch__97c2e620[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ", scratch;\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ", scratch;\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     break;
@@ -6572,12 +6573,12 @@ LAB_97bf9370:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,4,0,0,8);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x3e:
@@ -6614,12 +6615,12 @@ LAB_97bf9370:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,4,0,0,0);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ";\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ";\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     else {
@@ -6665,12 +6666,12 @@ LAB_97bf9370:
           copyIndex = copyIndex + 1;
         }
         outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,4,0,0,0);
-        opOffsetOrTailLength = 0;
+        copiedLength = 0;
         ch = s___97c2d8f8[0];
         while (ch != '\0') {
-          *(char *)(outStart + opOffsetOrTailLength) = ch;
-          ch = ";\n"[opOffsetOrTailLength + 1];
-          opOffsetOrTailLength = opOffsetOrTailLength + 1;
+          *(char *)(outStart + copiedLength) = ch;
+          ch = ";\n"[copiedLength + 1];
+          copiedLength = copiedLength + 1;
         }
       }
       else {
@@ -6713,12 +6714,12 @@ LAB_97bf9370:
           copyIndex = copyIndex + 1;
         }
         outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,4,0,0,0);
-        opOffsetOrTailLength = 0;
+        copiedLength = 0;
         ch = s___scratch__97c2e620[0];
         while (ch != '\0') {
-          *(char *)(outStart + opOffsetOrTailLength) = ch;
-          ch = ", scratch;\n"[opOffsetOrTailLength + 1];
-          opOffsetOrTailLength = opOffsetOrTailLength + 1;
+          *(char *)(outStart + copiedLength) = ch;
+          ch = ", scratch;\n"[copiedLength + 1];
+          copiedLength = copiedLength + 1;
         }
       }
     }
@@ -6870,12 +6871,12 @@ LAB_97bf9370:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___scratch__scratch1__97c2e4f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ", scratch, scratch1;\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ", scratch, scratch1;\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x42:
@@ -6905,7 +6906,7 @@ LAB_97bf9370:
       *stateFlags = *stateFlags | 0x200000;
     }
     copyIndex9 = 0;
-    mnemonic = *(char **)(PTR__ppstreamOpString_a7b7c108 + opOffsetOrTailLength);
+    mnemonic = *(char **)(PTR__ppstreamOpString_a7b7c108 + mnemonicOffset);
     ch = *mnemonic;
     while (ch != '\0') {
       *(char *)(outText + copyIndex9) = ch;
@@ -6936,12 +6937,12 @@ LAB_97bf9370:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteTextureOperand_97bf37b4)(inst,outCursor + copyIndex,4,optionFlags);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x48:
@@ -6964,12 +6965,12 @@ LAB_97bf9370:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x4d:
@@ -6989,7 +6990,7 @@ LAB_97bf9370:
     goto LAB_97c0178c;
   case 0x4f:
     copyIndex9 = 0;
-    mnemonic = *(char **)(PTR__ppstreamOpString_a7b7c108 + opOffsetOrTailLength);
+    mnemonic = *(char **)(PTR__ppstreamOpString_a7b7c108 + mnemonicOffset);
     ch = *mnemonic;
     while (ch != '\0') {
       *(char *)(outText + copyIndex9) = ch;
@@ -7004,12 +7005,12 @@ LAB_97bf9370:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex9 + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x50:
@@ -7036,12 +7037,12 @@ LAB_97bf9370:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x51:
@@ -7068,12 +7069,12 @@ LAB_97bf9370:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x57:
@@ -7092,12 +7093,12 @@ LAB_97bf9370:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outText + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___97c2d8f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ";\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ";\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x5b:
@@ -7329,12 +7330,12 @@ LAB_97c00620:
       copyIndex = copyIndex + 1;
     }
     outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
-    opOffsetOrTailLength = 0;
+    copiedLength = 0;
     ch = s___scratch__scratch1__97c2e4f8[0];
     while (ch != '\0') {
-      *(char *)(outStart + opOffsetOrTailLength) = ch;
-      ch = ", scratch, scratch1;\n"[opOffsetOrTailLength + 1];
-      opOffsetOrTailLength = opOffsetOrTailLength + 1;
+      *(char *)(outStart + copiedLength) = ch;
+      ch = ", scratch, scratch1;\n"[copiedLength + 1];
+      copiedLength = copiedLength + 1;
     }
     break;
   case 0x6c:
@@ -7364,12 +7365,12 @@ LAB_97c00620:
         copyIndex2 = copyIndex2 + 1;
       }
       outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex + copyIndex2,0,0,0);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s____scratch__kZERO__97c2e460[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ", -scratch, kZERO;\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ", -scratch, kZERO;\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     else if (valueType == 3) {
@@ -7443,12 +7444,12 @@ LAB_97c00620:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor2 + copyIndex,0,0,0);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___scratch__scratch1__97c2e4f8[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ", scratch, scratch1;\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ", scratch, scratch1;\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     else {
@@ -7469,12 +7470,12 @@ LAB_97c00620:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,8);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ";\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ";\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     break;
@@ -7563,12 +7564,12 @@ LAB_97c00620:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteDestinationOperand_97bf3658)(inst,outCursor + copyIndex,0,0,0x40);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___scratch__97c2e620[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ", scratch;\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ", scratch;\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     else {
@@ -7603,12 +7604,12 @@ LAB_97c00620:
         copyIndex = copyIndex + 1;
       }
       outStart = ((int (*)())_glpWriteSourceOperand_97bf30b8)(inst,outCursor + copyIndex,paramNumbers,paramArrayPos,2,0,0,0);
-      opOffsetOrTailLength = 0;
+      copiedLength = 0;
       ch = s___97c2d8f8[0];
       while (ch != '\0') {
-        *(char *)(outStart + opOffsetOrTailLength) = ch;
-        ch = ";\n"[opOffsetOrTailLength + 1];
-        opOffsetOrTailLength = opOffsetOrTailLength + 1;
+        *(char *)(outStart + copiedLength) = ch;
+        ch = ";\n"[copiedLength + 1];
+        copiedLength = copiedLength + 1;
       }
     }
     break;
@@ -7696,7 +7697,7 @@ LAB_97c00620:
     } while (loopIndex <= (int)(writeMaskBits >> 10 & 3));
     goto LAB_97c01788;
   }
-  outStart = outStart + opOffsetOrTailLength;
+  outStart = outStart + copiedLength;
 LAB_97c01788:
   instWord0 = *inst;
 LAB_97c0178c:
