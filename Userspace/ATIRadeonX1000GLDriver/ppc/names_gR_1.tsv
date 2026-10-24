@@ -1316,3 +1316,313 @@ local	extvsEmitPow	local_4c	tmpOperand1Comp2	INFERRED	stack copy 1 of the 7-word
 local	extvsEmitPow	local_48	tmpOperand1Comp3	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 5
 local	extvsEmitPow	local_44	tmpOperand1Flag	INFERRED	stack copy 1 of the 7-word source operand record {kind, index, comp[4], flag} passed by address to extvsEncodeSourceOperand/Swizzle; word 6
 
+use	arbEmitIlMad	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*uVar1\ =\ param_7\[2\];$	+1
+use	arbEmitIlMad	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*uVar1\ =\ param_7\[2\];$@2	+1
+use	arbEmitIlMad	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*uVar1\ =\ param_7\[2\];$@3	+1
+use	arbEmitIlMad	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*uVar1\ =\ param_7\[2\];$@4	+1
+use	arbEmitIlMad	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*uVar1\ =\ param_7\[2\];$@5	+1
+use	arbEmitIlMad	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*uVar1\ =\ param_7\[2\];$@6	+2
+use	arbEmitIlMad	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*uVar1\ =\ param_7\[2\];$@7	+1
+use	arbEmitIlMad	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*\(uVar1\ \&\ 7\)\ <<\ 8\ \|$	+1
+use	arbEmitIlMad	uVar1	src1Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src1	^\s*uVar1\ =\ \(param_9\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_10\ \&\ 0xffff;$	+1
+use	arbEmitIlMad	uVar1	src1Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src1	^\s*uVar1\ =\ uVar1\ \|\ 0x400000;$	+1
+use	arbEmitIlMad	uVar1	src1Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src1	^\s*\*\(uint\ \*\)\(uVar13\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar1;$	+1
+use	arbEmitIlMad	uVar1	src1Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src1	^\s*if\ \(\(uVar1\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	arbEmitIlMad	iVar2	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*iVar2\ =\ param_4\[2\];$	+1
+use	arbEmitIlMad	iVar2	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*\(uint\)\(iVar2\ !=\ 0\)\ \*\ 0x10\ \|\ \(uint\)\(iVar8\ !=\ 0\)\ \*\ 4\ \|\ \(uint\)\(\*param_4\ !=\ 0\);$	+1
+use	arbEmitIlMad	iVar2	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*iVar2\ =\ param_4\[2\];$@2	+1
+use	arbEmitIlMad	iVar2	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*iVar2\ =\ param_4\[2\];$@3	+2
+use	arbEmitIlMad	uVar3	src0SelectY	INFERRED	component 1 of the 4-word array parameter src0Select	^\s*uVar3\ =\ param_7\[1\];$	+1
+use	arbEmitIlMad	uVar3	src0SelectY	INFERRED	component 1 of the 4-word array parameter src0Select	^\s*uVar3\ =\ param_7\[1\];$@2	+1
+use	arbEmitIlMad	uVar3	src0SelectY	INFERRED	component 1 of the 4-word array parameter src0Select	^\s*uVar3\ =\ param_7\[1\];$@3	+1
+use	arbEmitIlMad	uVar3	src0SelectY	INFERRED	component 1 of the 4-word array parameter src0Select	^\s*uVar3\ =\ param_7\[1\];$@4	+1
+use	arbEmitIlMad	uVar3	src0SelectY	INFERRED	component 1 of the 4-word array parameter src0Select	^\s*uVar3\ =\ param_7\[1\];$@5	+2
+use	arbEmitIlMad	uVar3	src0SelectY	INFERRED	component 1 of the 4-word array parameter src0Select	^\s*uVar3\ =\ param_7\[1\];$@6	+1
+use	arbEmitIlMad	uVar3	src0SelectY	INFERRED	component 1 of the 4-word array parameter src0Select	^\s*\(uVar7\ \&\ 1\)\ <<\ 7\ \|\ \(uVar3\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_8\ \&\ 1\)\ <<\ 3\ \|\ uVar10\ \&\ 7;$	+1
+use	arbEmitIlMad	uVar3	src1SelectZ	INFERRED	component 2 of the 4-word array parameter src1Select	^\s*uVar3\ =\ param_11\[2\];$	+1
+use	arbEmitIlMad	uVar3	src1SelectZ	INFERRED	component 2 of the 4-word array parameter src1Select	^\s*uVar3\ =\ param_11\[2\];$@2	+1
+use	arbEmitIlMad	uVar3	src1SelectZ	INFERRED	component 2 of the 4-word array parameter src1Select	^\s*uVar3\ =\ param_11\[2\];$@3	+1
+use	arbEmitIlMad	uVar3	src1SelectZ	INFERRED	component 2 of the 4-word array parameter src1Select	^\s*uVar3\ =\ param_11\[2\];$@4	+1
+use	arbEmitIlMad	uVar3	src1SelectZ	INFERRED	component 2 of the 4-word array parameter src1Select	^\s*uVar3\ =\ param_11\[2\];$@5	+1
+use	arbEmitIlMad	uVar3	src1SelectZ	INFERRED	component 2 of the 4-word array parameter src1Select	^\s*uVar3\ =\ param_11\[2\];$@6	+2
+use	arbEmitIlMad	uVar3	src1SelectZ	INFERRED	component 2 of the 4-word array parameter src1Select	^\s*uVar3\ =\ param_11\[2\];$@7	+1
+use	arbEmitIlMad	uVar3	src1SelectZ	INFERRED	component 2 of the 4-word array parameter src1Select	^\s*\(uVar3\ \&\ 7\)\ <<\ 8\ \|$	+1
+use	arbEmitIlMad	uVar3	src2Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src2	^\s*uVar3\ =\ \(param_13\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_14\ \&\ 0xffff;$	+1
+use	arbEmitIlMad	uVar3	src2Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src2	^\s*uVar3\ =\ uVar3\ \|\ 0x400000;$	+1
+use	arbEmitIlMad	uVar3	src2Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src2	^\s*\*\(uint\ \*\)\(uVar13\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar3;$	+1
+use	arbEmitIlMad	uVar3	src2Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src2	^\s*if\ \(\(uVar3\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	arbEmitIlMad	uVar5	src0NegateW	INFERRED	component 3 of the 4-word array parameter src0Negate	^\s*uVar5\ =\ param_8\[3\];$	+1
+use	arbEmitIlMad	uVar5	src0NegateW	INFERRED	component 3 of the 4-word array parameter src0Negate	^\s*uVar5\ =\ param_8\[3\];$@2	+1
+use	arbEmitIlMad	uVar5	src0NegateW	INFERRED	component 3 of the 4-word array parameter src0Negate	^\s*uVar5\ =\ param_8\[3\];$@3	+2
+use	arbEmitIlMad	uVar5	src0NegateW	INFERRED	component 3 of the 4-word array parameter src0Negate	^\s*uVar5\ =\ param_8\[3\];$@4	+1
+use	arbEmitIlMad	uVar5	src0NegateW	INFERRED	component 3 of the 4-word array parameter src0Negate	^\s*uVar18\ =\ \(uVar5\ \&\ 1\)\ <<\ 0xf\ \|$	+1
+use	arbEmitIlMad	uVar5	src1SelectY	INFERRED	component 1 of the 4-word array parameter src1Select	^\s*uVar5\ =\ param_11\[1\];$	+1
+use	arbEmitIlMad	uVar5	src1SelectY	INFERRED	component 1 of the 4-word array parameter src1Select	^\s*uVar5\ =\ param_11\[1\];$@2	+1
+use	arbEmitIlMad	uVar5	src1SelectY	INFERRED	component 1 of the 4-word array parameter src1Select	^\s*uVar5\ =\ param_11\[1\];$@3	+1
+use	arbEmitIlMad	uVar5	src1SelectY	INFERRED	component 1 of the 4-word array parameter src1Select	^\s*uVar5\ =\ param_11\[1\];$@4	+1
+use	arbEmitIlMad	uVar5	src1SelectY	INFERRED	component 1 of the 4-word array parameter src1Select	^\s*uVar5\ =\ param_11\[1\];$@5	+2
+use	arbEmitIlMad	uVar5	src1SelectY	INFERRED	component 1 of the 4-word array parameter src1Select	^\s*uVar5\ =\ param_11\[1\];$@6	+1
+use	arbEmitIlMad	uVar5	src1SelectY	INFERRED	component 1 of the 4-word array parameter src1Select	^\s*\(uVar10\ \&\ 1\)\ <<\ 7\ \|\ \(uVar5\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_12\ \&\ 1\)\ <<\ 3\ \|\ uVar11\ \&\ 7;$	+1
+use	arbEmitIlMad	uVar5	src2SelectZ	INFERRED	component 2 of the 4-word array parameter src2Select	^\s*uVar5\ =\ param_15\[2\];$	+2
+use	arbEmitIlMad	uVar5	src2SelectZ	INFERRED	component 2 of the 4-word array parameter src2Select	^\s*uVar5\ =\ param_15\[2\];$@2	+1
+use	arbEmitIlMad	uVar5	src2SelectZ	INFERRED	component 2 of the 4-word array parameter src2Select	^\s*uVar5\ =\ param_15\[2\];$@3	+1
+use	arbEmitIlMad	uVar5	src2SelectZ	INFERRED	component 2 of the 4-word array parameter src2Select	^\s*uVar5\ =\ param_15\[2\];$@4	+1
+use	arbEmitIlMad	uVar5	src2SelectZ	INFERRED	component 2 of the 4-word array parameter src2Select	^\s*uVar5\ =\ param_15\[2\];$@5	+1
+use	arbEmitIlMad	uVar5	src2SelectZ	INFERRED	component 2 of the 4-word array parameter src2Select	^\s*uVar5\ =\ param_15\[2\];$@6	+1
+use	arbEmitIlMad	uVar5	src2SelectZ	INFERRED	component 2 of the 4-word array parameter src2Select	^\s*uVar5\ =\ param_15\[2\];$@7	+1
+use	arbEmitIlMad	uVar5	src2SelectZ	INFERRED	component 2 of the 4-word array parameter src2Select	^\s*\(uVar5\ \&\ 7\)\ <<\ 8\ \|$	+1
+use	arbEmitIlMad	uVar6	src0NegateZ	INFERRED	component 2 of the 4-word array parameter src0Negate	^\s*uVar6\ =\ param_8\[2\];$	+1
+use	arbEmitIlMad	uVar6	src0NegateZ	INFERRED	component 2 of the 4-word array parameter src0Negate	^\s*uVar6\ =\ param_8\[2\];$@2	+2
+use	arbEmitIlMad	uVar6	src0NegateZ	INFERRED	component 2 of the 4-word array parameter src0Negate	^\s*uVar6\ =\ param_8\[2\];$@3	+1
+use	arbEmitIlMad	uVar6	src0NegateZ	INFERRED	component 2 of the 4-word array parameter src0Negate	^\s*\(uVar6\ \&\ 1\)\ <<\ 0xb\ \|$	+1
+use	arbEmitIlMad	uVar6	src1NegateW	INFERRED	component 3 of the 4-word array parameter src1Negate	^\s*uVar6\ =\ param_12\[3\];$	+1
+use	arbEmitIlMad	uVar6	src1NegateW	INFERRED	component 3 of the 4-word array parameter src1Negate	^\s*uVar6\ =\ param_12\[3\];$@2	+1
+use	arbEmitIlMad	uVar6	src1NegateW	INFERRED	component 3 of the 4-word array parameter src1Negate	^\s*uVar6\ =\ param_12\[3\];$@3	+2
+use	arbEmitIlMad	uVar6	src1NegateW	INFERRED	component 3 of the 4-word array parameter src1Negate	^\s*uVar6\ =\ param_12\[3\];$@4	+1
+use	arbEmitIlMad	uVar6	src1NegateW	INFERRED	component 3 of the 4-word array parameter src1Negate	^\s*uVar17\ =\ \(uVar6\ \&\ 1\)\ <<\ 0xf\ \|$	+1
+use	arbEmitIlMad	uVar6	src2SelectY	INFERRED	component 1 of the 4-word array parameter src2Select	^\s*uVar6\ =\ param_15\[1\];$	+2
+use	arbEmitIlMad	uVar6	src2SelectY	INFERRED	component 1 of the 4-word array parameter src2Select	^\s*uVar6\ =\ param_15\[1\];$@2	+1
+use	arbEmitIlMad	uVar6	src2SelectY	INFERRED	component 1 of the 4-word array parameter src2Select	^\s*uVar6\ =\ param_15\[1\];$@3	+1
+use	arbEmitIlMad	uVar6	src2SelectY	INFERRED	component 1 of the 4-word array parameter src2Select	^\s*uVar6\ =\ param_15\[1\];$@4	+1
+use	arbEmitIlMad	uVar6	src2SelectY	INFERRED	component 1 of the 4-word array parameter src2Select	^\s*uVar6\ =\ param_15\[1\];$@5	+1
+use	arbEmitIlMad	uVar6	src2SelectY	INFERRED	component 1 of the 4-word array parameter src2Select	^\s*uVar6\ =\ param_15\[1\];$@6	+1
+use	arbEmitIlMad	uVar6	src2SelectY	INFERRED	component 1 of the 4-word array parameter src2Select	^\s*\(uVar11\ \&\ 1\)\ <<\ 7\ \|\ \(uVar6\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_16\ \&\ 1\)\ <<\ 3\ \|\ uVar12\ \&\ 7;$	+1
+use	arbEmitIlMad	uVar7	src0NegateY	INFERRED	component 1 of the 4-word array parameter src0Negate	^\s*uVar7\ =\ param_8\[1\];$	+2
+use	arbEmitIlMad	uVar7	src0NegateY	INFERRED	component 1 of the 4-word array parameter src0Negate	^\s*uVar7\ =\ param_8\[1\];$@2	+1
+use	arbEmitIlMad	uVar7	src0NegateY	INFERRED	component 1 of the 4-word array parameter src0Negate	^\s*\(uVar7\ \&\ 1\)\ <<\ 7\ \|\ \(uVar3\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_8\ \&\ 1\)\ <<\ 3\ \|\ uVar10\ \&\ 7;$	+1
+use	arbEmitIlMad	uVar7	src1NegateZ	INFERRED	component 2 of the 4-word array parameter src1Negate	^\s*uVar7\ =\ param_12\[2\];$	+1
+use	arbEmitIlMad	uVar7	src1NegateZ	INFERRED	component 2 of the 4-word array parameter src1Negate	^\s*uVar7\ =\ param_12\[2\];$@2	+2
+use	arbEmitIlMad	uVar7	src1NegateZ	INFERRED	component 2 of the 4-word array parameter src1Negate	^\s*uVar7\ =\ param_12\[2\];$@3	+1
+use	arbEmitIlMad	uVar7	src1NegateZ	INFERRED	component 2 of the 4-word array parameter src1Negate	^\s*\(uVar7\ \&\ 1\)\ <<\ 0xb\ \|$	+1
+use	arbEmitIlMad	uVar7	src2NegateW	INFERRED	component 3 of the 4-word array parameter src2Negate	^\s*uVar7\ =\ param_16\[3\];$	+2
+use	arbEmitIlMad	uVar7	src2NegateW	INFERRED	component 3 of the 4-word array parameter src2Negate	^\s*uVar7\ =\ param_16\[3\];$@2	+1
+use	arbEmitIlMad	uVar7	src2NegateW	INFERRED	component 3 of the 4-word array parameter src2Negate	^\s*uVar7\ =\ param_16\[3\];$@3	+1
+use	arbEmitIlMad	uVar7	src2NegateW	INFERRED	component 3 of the 4-word array parameter src2Negate	^\s*uVar7\ =\ param_16\[3\];$@4	+1
+use	arbEmitIlMad	uVar7	src2NegateW	INFERRED	component 3 of the 4-word array parameter src2Negate	^\s*uVar16\ =\ \(uVar7\ \&\ 1\)\ <<\ 0xf\ \|$	+1
+use	arbEmitIlMad	iVar8	dstMaskY	INFERRED	component 1 of the 4-word array parameter dstMask	^\s*iVar8\ =\ param_4\[1\];$	+1
+use	arbEmitIlMad	iVar8	dstMaskY	INFERRED	component 1 of the 4-word array parameter dstMask	^\s*\(uint\)\(iVar2\ !=\ 0\)\ \*\ 0x10\ \|\ \(uint\)\(iVar8\ !=\ 0\)\ \*\ 4\ \|\ \(uint\)\(\*param_4\ !=\ 0\);$	+1
+use	arbEmitIlMad	iVar8	dstMaskY	INFERRED	component 1 of the 4-word array parameter dstMask	^\s*iVar8\ =\ param_4\[1\];$@2	+2
+use	arbEmitIlMad	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$	+1
+use	arbEmitIlMad	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$@2	+1
+use	arbEmitIlMad	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$@3	+1
+use	arbEmitIlMad	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$@4	+1
+use	arbEmitIlMad	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$@5	+1
+use	arbEmitIlMad	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$@6	+1
+use	arbEmitIlMad	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$@7	+2
+use	arbEmitIlMad	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$@8	+1
+use	arbEmitIlMad	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*\(uVar9\ \&\ 7\)\ <<\ 0xc\ \|$	+1
+use	arbEmitIlMad	uVar9	src1SelectW	INFERRED	component 3 of the 4-word array parameter src1Select	^\s*uVar9\ =\ param_11\[3\];$	+1
+use	arbEmitIlMad	uVar9	src1SelectW	INFERRED	component 3 of the 4-word array parameter src1Select	^\s*uVar9\ =\ param_11\[3\];$@2	+1
+use	arbEmitIlMad	uVar9	src1SelectW	INFERRED	component 3 of the 4-word array parameter src1Select	^\s*uVar9\ =\ param_11\[3\];$@3	+1
+use	arbEmitIlMad	uVar9	src1SelectW	INFERRED	component 3 of the 4-word array parameter src1Select	^\s*uVar9\ =\ param_11\[3\];$@4	+1
+use	arbEmitIlMad	uVar9	src1SelectW	INFERRED	component 3 of the 4-word array parameter src1Select	^\s*uVar9\ =\ param_11\[3\];$@5	+1
+use	arbEmitIlMad	uVar9	src1SelectW	INFERRED	component 3 of the 4-word array parameter src1Select	^\s*uVar9\ =\ param_11\[3\];$@6	+1
+use	arbEmitIlMad	uVar9	src1SelectW	INFERRED	component 3 of the 4-word array parameter src1Select	^\s*uVar9\ =\ param_11\[3\];$@7	+2
+use	arbEmitIlMad	uVar9	src1SelectW	INFERRED	component 3 of the 4-word array parameter src1Select	^\s*uVar9\ =\ param_11\[3\];$@8	+1
+use	arbEmitIlMad	uVar9	src1SelectW	INFERRED	component 3 of the 4-word array parameter src1Select	^\s*\(uVar9\ \&\ 7\)\ <<\ 0xc\ \|$@2	+1
+use	arbEmitIlMad	uVar9	src2NegateZ	INFERRED	component 2 of the 4-word array parameter src2Negate	^\s*uVar9\ =\ param_16\[2\];$	+2
+use	arbEmitIlMad	uVar9	src2NegateZ	INFERRED	component 2 of the 4-word array parameter src2Negate	^\s*uVar9\ =\ param_16\[2\];$@2	+1
+use	arbEmitIlMad	uVar9	src2NegateZ	INFERRED	component 2 of the 4-word array parameter src2Negate	^\s*uVar9\ =\ param_16\[2\];$@3	+1
+use	arbEmitIlMad	uVar9	src2NegateZ	INFERRED	component 2 of the 4-word array parameter src2Negate	^\s*\(uVar9\ \&\ 1\)\ <<\ 0xb\ \|$	+1
+use	arbEmitIlMad	uVar10	src0SelectX	INFERRED	component 0 of the 4-word array parameter src0Select	^\s*uVar10\ =\ \*param_7;$	+1
+use	arbEmitIlMad	uVar10	src0SelectX	INFERRED	component 0 of the 4-word array parameter src0Select	^\s*uVar10\ =\ \*param_7;$@2	+1
+use	arbEmitIlMad	uVar10	src0SelectX	INFERRED	component 0 of the 4-word array parameter src0Select	^\s*uVar10\ =\ \*param_7;$@3	+1
+use	arbEmitIlMad	uVar10	src0SelectX	INFERRED	component 0 of the 4-word array parameter src0Select	^\s*uVar10\ =\ \*param_7;$@4	+2
+use	arbEmitIlMad	uVar10	src0SelectX	INFERRED	component 0 of the 4-word array parameter src0Select	^\s*uVar10\ =\ \*param_7;$@5	+1
+use	arbEmitIlMad	uVar10	src0SelectX	INFERRED	component 0 of the 4-word array parameter src0Select	^\s*\(uVar7\ \&\ 1\)\ <<\ 7\ \|\ \(uVar3\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_8\ \&\ 1\)\ <<\ 3\ \|\ uVar10\ \&\ 7;$	+1
+use	arbEmitIlMad	uVar10	src1NegateY	INFERRED	component 1 of the 4-word array parameter src1Negate	^\s*uVar10\ =\ param_12\[1\];$	+2
+use	arbEmitIlMad	uVar10	src1NegateY	INFERRED	component 1 of the 4-word array parameter src1Negate	^\s*uVar10\ =\ param_12\[1\];$@2	+1
+use	arbEmitIlMad	uVar10	src1NegateY	INFERRED	component 1 of the 4-word array parameter src1Negate	^\s*\(uVar10\ \&\ 1\)\ <<\ 7\ \|\ \(uVar5\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_12\ \&\ 1\)\ <<\ 3\ \|\ uVar11\ \&\ 7;$	+1
+use	arbEmitIlMad	uVar10	src2SelectW	INFERRED	component 3 of the 4-word array parameter src2Select	^\s*uVar10\ =\ param_15\[3\];$	+2
+use	arbEmitIlMad	uVar10	src2SelectW	INFERRED	component 3 of the 4-word array parameter src2Select	^\s*uVar10\ =\ param_15\[3\];$@2	+1
+use	arbEmitIlMad	uVar10	src2SelectW	INFERRED	component 3 of the 4-word array parameter src2Select	^\s*uVar10\ =\ param_15\[3\];$@3	+1
+use	arbEmitIlMad	uVar10	src2SelectW	INFERRED	component 3 of the 4-word array parameter src2Select	^\s*uVar10\ =\ param_15\[3\];$@4	+1
+use	arbEmitIlMad	uVar10	src2SelectW	INFERRED	component 3 of the 4-word array parameter src2Select	^\s*uVar10\ =\ param_15\[3\];$@5	+1
+use	arbEmitIlMad	uVar10	src2SelectW	INFERRED	component 3 of the 4-word array parameter src2Select	^\s*uVar10\ =\ param_15\[3\];$@6	+1
+use	arbEmitIlMad	uVar10	src2SelectW	INFERRED	component 3 of the 4-word array parameter src2Select	^\s*uVar10\ =\ param_15\[3\];$@7	+1
+use	arbEmitIlMad	uVar10	src2SelectW	INFERRED	component 3 of the 4-word array parameter src2Select	^\s*uVar10\ =\ param_15\[3\];$@8	+1
+use	arbEmitIlMad	uVar10	src2SelectW	INFERRED	component 3 of the 4-word array parameter src2Select	^\s*\(uVar10\ \&\ 7\)\ <<\ 0xc\ \|$	+1
+use	arbEmitIlMad	uVar11	src1SelectX	INFERRED	component 0 of the 4-word array parameter src1Select	^\s*uVar11\ =\ \*param_11;$	+1
+use	arbEmitIlMad	uVar11	src1SelectX	INFERRED	component 0 of the 4-word array parameter src1Select	^\s*uVar11\ =\ \*param_11;$@2	+1
+use	arbEmitIlMad	uVar11	src1SelectX	INFERRED	component 0 of the 4-word array parameter src1Select	^\s*uVar11\ =\ \*param_11;$@3	+1
+use	arbEmitIlMad	uVar11	src1SelectX	INFERRED	component 0 of the 4-word array parameter src1Select	^\s*uVar11\ =\ \*param_11;$@4	+2
+use	arbEmitIlMad	uVar11	src1SelectX	INFERRED	component 0 of the 4-word array parameter src1Select	^\s*uVar11\ =\ \*param_11;$@5	+1
+use	arbEmitIlMad	uVar11	src1SelectX	INFERRED	component 0 of the 4-word array parameter src1Select	^\s*\(uVar10\ \&\ 1\)\ <<\ 7\ \|\ \(uVar5\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_12\ \&\ 1\)\ <<\ 3\ \|\ uVar11\ \&\ 7;$	+1
+use	arbEmitIlMad	uVar11	src2NegateY	INFERRED	component 1 of the 4-word array parameter src2Negate	^\s*uVar11\ =\ param_16\[1\];$	+2
+use	arbEmitIlMad	uVar11	src2NegateY	INFERRED	component 1 of the 4-word array parameter src2Negate	^\s*uVar11\ =\ param_16\[1\];$@2	+1
+use	arbEmitIlMad	uVar11	src2NegateY	INFERRED	component 1 of the 4-word array parameter src2Negate	^\s*\(uVar11\ \&\ 1\)\ <<\ 7\ \|\ \(uVar6\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_16\ \&\ 1\)\ <<\ 3\ \|\ uVar12\ \&\ 7;$	+1
+use	arbEmitIlMad	uVar12	src2SelectX	INFERRED	component 0 of the 4-word array parameter src2Select	^\s*uVar12\ =\ \*param_15;$	+2
+use	arbEmitIlMad	uVar12	src2SelectX	INFERRED	component 0 of the 4-word array parameter src2Select	^\s*uVar12\ =\ \*param_15;$@2	+1
+use	arbEmitIlMad	uVar12	src2SelectX	INFERRED	component 0 of the 4-word array parameter src2Select	^\s*uVar12\ =\ \*param_15;$@3	+1
+use	arbEmitIlMad	uVar12	src2SelectX	INFERRED	component 0 of the 4-word array parameter src2Select	^\s*uVar12\ =\ \*param_15;$@4	+1
+use	arbEmitIlMad	uVar12	src2SelectX	INFERRED	component 0 of the 4-word array parameter src2Select	^\s*uVar12\ =\ \*param_15;$@5	+1
+use	arbEmitIlMad	uVar12	src2SelectX	INFERRED	component 0 of the 4-word array parameter src2Select	^\s*\(uVar11\ \&\ 1\)\ <<\ 7\ \|\ \(uVar6\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_16\ \&\ 1\)\ <<\ 3\ \|\ uVar12\ \&\ 7;$	+1
+use	arbEmitIlMad	uVar13	dstToken	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand dst	^\s*uVar13\ =\ \(param_2\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_3\ \&\ 0xffff;$	+1
+use	arbEmitIlMad	uVar13	dstToken	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand dst	^\s*uVar13\ =\ uVar13\ \|\ 0x400000;$	+1
+use	arbEmitIlMad	uVar13	dstToken	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand dst	^\s*uVar13\ =\ uVar13\ \|\ 0x400000;$@2	+1
+use	arbEmitIlMad	uVar13	dstToken	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand dst	^\s*\*\(uint\ \*\)\(uVar5\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar13;$	+1
+use	arbEmitIlMad	uVar13	dstToken	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand dst	^\s*if\ \(\(uVar13\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	arbEmitIlMad	uVar14	src0Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src0	^\s*uVar14\ =\ \(param_5\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_6\ \&\ 0xffff;$	+1
+use	arbEmitIlMad	uVar14	src0Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src0	^\s*uVar14\ =\ uVar14\ \|\ 0x400000;$	+1
+use	arbEmitIlMad	uVar14	src0Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src0	^\s*\*\(uint\ \*\)\(uVar5\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar14;$	+1
+use	arbEmitIlMad	uVar14	src0Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src0	^\s*if\ \(\(uVar14\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+local	arbEmitIlMad	uVar15	dstMaskWord	INFERRED	packed select/negate word appended right after the dst token in the token buffer
+local	arbEmitIlMad	uVar18	src0Packed	INFERRED	packed select/negate word appended right after the src0 token in the token buffer
+local	arbEmitIlMad	uVar17	src1Packed	INFERRED	packed select/negate word appended right after the src1 token in the token buffer
+local	arbEmitIlMad	uVar16	src2Packed	INFERRED	packed select/negate word appended right after the src2 token in the token buffer
+use	arbEmitIlAddMad3Src	uVar1	src1Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src1	^\s*uVar1\ =\ \(param_9\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_10\ \&\ 0xffff;$	+1
+use	arbEmitIlAddMad3Src	uVar1	src1Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src1	^\s*uVar1\ =\ uVar1\ \|\ 0x400000;$	+1
+use	arbEmitIlAddMad3Src	uVar1	src1Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src1	^\s*\*\(uint\ \*\)\(uVar11\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar1;$	+1
+use	arbEmitIlAddMad3Src	uVar1	src1Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src1	^\s*if\ \(\(uVar1\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	arbEmitIlAddMad3Src	iVar2	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*iVar2\ =\ param_4\[2\];$	+1
+use	arbEmitIlAddMad3Src	iVar2	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*\(uint\)\(iVar2\ !=\ 0\)\ \*\ 0x10\ \|\ \(uint\)\(iVar8\ !=\ 0\)\ \*\ 4\ \|\ \(uint\)\(\*param_4\ !=\ 0\);$	+1
+use	arbEmitIlAddMad3Src	iVar2	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*iVar2\ =\ param_4\[2\];$@2	+1
+use	arbEmitIlAddMad3Src	iVar2	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*iVar2\ =\ param_4\[2\];$@3	+2
+use	arbEmitIlAddMad3Src	uVar3	src2Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src2	^\s*uVar3\ =\ \(param_13\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_14\ \&\ 0xffff;$	+1
+use	arbEmitIlAddMad3Src	uVar3	src2Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src2	^\s*uVar3\ =\ uVar3\ \|\ 0x400000;$	+1
+use	arbEmitIlAddMad3Src	uVar3	src2Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src2	^\s*\*\(uint\ \*\)\(uVar11\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar3;$	+1
+use	arbEmitIlAddMad3Src	uVar3	src2Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src2	^\s*if\ \(\(uVar3\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	arbEmitIlAddMad3Src	iVar8	dstMaskY	INFERRED	component 1 of the 4-word array parameter dstMask	^\s*iVar8\ =\ param_4\[1\];$	+1
+use	arbEmitIlAddMad3Src	iVar8	dstMaskY	INFERRED	component 1 of the 4-word array parameter dstMask	^\s*\(uint\)\(iVar2\ !=\ 0\)\ \*\ 0x10\ \|\ \(uint\)\(iVar8\ !=\ 0\)\ \*\ 4\ \|\ \(uint\)\(\*param_4\ !=\ 0\);$	+1
+use	arbEmitIlAddMad3Src	iVar8	dstMaskY	INFERRED	component 1 of the 4-word array parameter dstMask	^\s*iVar8\ =\ param_4\[1\];$@2	+2
+use	arbEmitIlMulMaxMin2Src	uVar1	src1Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src1	^\s*uVar1\ =\ \(param_9\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_10\ \&\ 0xffff;$	+1
+use	arbEmitIlMulMaxMin2Src	uVar1	src1Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src1	^\s*uVar1\ =\ uVar1\ \|\ 0x400000;$	+1
+use	arbEmitIlMulMaxMin2Src	uVar1	src1Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src1	^\s*\*\(uint\ \*\)\(uVar5\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar1;$	+1
+use	arbEmitIlMulMaxMin2Src	uVar1	src1Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src1	^\s*if\ \(\(uVar1\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	arbEmitIlMulMaxMin2Src	uVar1	src1Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src1	^\s*\(param_13\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_14\ \&\ 0xffff\ \|\ uVar1\ \&\ 0xfe400000\ \|\ 0x400000;$	+1
+use	arbEmitIlMulMaxMin2Src	iVar3	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*iVar3\ =\ param_4\[2\];$	+1
+use	arbEmitIlMulMaxMin2Src	iVar3	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*iVar3\ =\ param_4\[2\];$@2	+1
+use	arbEmitIlMulMaxMin2Src	iVar3	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*iVar3\ =\ param_4\[2\];$@3	+2
+use	arbEmitIlMulMaxMin2Src	iVar3	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*\(uint\)\(iVar3\ !=\ 0\)\ \*\ 0x10\ \|\ \(uint\)\(iVar9\ !=\ 0\)\ \*\ 4\ \|\ \(uint\)\(\*param_4\ !=\ 0\);$	+1
+use	arbEmitIlMulMaxMin2Src	iVar9	dstMaskY	INFERRED	component 1 of the 4-word array parameter dstMask	^\s*iVar9\ =\ param_4\[1\];$	+1
+use	arbEmitIlMulMaxMin2Src	iVar9	dstMaskY	INFERRED	component 1 of the 4-word array parameter dstMask	^\s*iVar9\ =\ param_4\[1\];$@2	+2
+use	arbEmitIlMulMaxMin2Src	iVar9	dstMaskY	INFERRED	component 1 of the 4-word array parameter dstMask	^\s*\(uint\)\(iVar3\ !=\ 0\)\ \*\ 0x10\ \|\ \(uint\)\(iVar9\ !=\ 0\)\ \*\ 4\ \|\ \(uint\)\(\*param_4\ !=\ 0\);$	+1
+use	arbEmitIlMulMaxMin2Src	uVar14	src0Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src0	^\s*uVar14\ =\ \(param_5\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_6\ \&\ 0xffff;$	+1
+use	arbEmitIlMulMaxMin2Src	uVar14	src0Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src0	^\s*uVar14\ =\ uVar14\ \|\ 0x400000;$	+1
+use	arbEmitIlMulMaxMin2Src	uVar14	src0Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src0	^\s*\*\(uint\ \*\)\(uVar5\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar14;$	+1
+use	arbEmitIlMulMaxMin2Src	uVar14	src0Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src0	^\s*if\ \(\(uVar14\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	arbEmitIlMulMaxMin2Src	uVar14	src0Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src0	^\s*\*\(uint\ \*\)\(uVar5\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar15\ \|\ uVar14\ \&\ 0xfe400000\ \|\ 0x440000;$	+1
+use	arbEmitIlMulMaxMin2Src	uVar15	dstToken	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand dst	^\s*uVar15\ =\ \(param_2\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_3\ \&\ 0xffff;$	+1
+use	arbEmitIlMulMaxMin2Src	uVar15	dstToken	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand dst	^\s*uVar15\ =\ uVar15\ \|\ 0x400000;$	+1
+use	arbEmitIlMulMaxMin2Src	uVar15	dstToken	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand dst	^\s*uVar15\ =\ uVar15\ \|\ 0x400000;$@2	+1
+use	arbEmitIlMulMaxMin2Src	uVar15	dstToken	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand dst	^\s*\*\(uint\ \*\)\(uVar5\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar15;$@2	+1
+use	arbEmitIlMulMaxMin2Src	uVar15	dstToken	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand dst	^\s*if\ \(\(uVar15\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	arbEmitIlRnd	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*uVar1\ =\ param_7\[2\];$	+2
+use	arbEmitIlRnd	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*uVar1\ =\ param_7\[2\];$@2	+1
+use	arbEmitIlRnd	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*uVar1\ =\ param_7\[2\];$@3	+1
+use	arbEmitIlRnd	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*uVar1\ =\ param_7\[2\];$@4	+1
+use	arbEmitIlRnd	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*uVar1\ =\ param_7\[2\];$@5	+1
+use	arbEmitIlRnd	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*uVar1\ =\ param_7\[2\];$@6	+1
+use	arbEmitIlRnd	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*uVar1\ =\ param_7\[2\];$@7	+1
+use	arbEmitIlRnd	uVar1	src0SelectZ	INFERRED	component 2 of the 4-word array parameter src0Select	^\s*\(uVar1\ \&\ 7\)\ <<\ 8\ \|\ \(uVar7\ \&\ 1\)\ <<\ 7\ \|\ \(uVar3\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_8\ \&\ 1\)\ <<\ 3\ \|\ uVar10\ \&\ 7$	+1
+use	arbEmitIlRnd	iVar2	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*iVar2\ =\ param_4\[2\];$	+1
+use	arbEmitIlRnd	iVar2	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*\(uint\)\(iVar2\ !=\ 0\)\ \*\ 0x10\ \|\ \(uint\)\(iVar8\ !=\ 0\)\ \*\ 4\ \|\ \(uint\)\(\*param_4\ !=\ 0\);$	+1
+use	arbEmitIlRnd	iVar2	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*iVar2\ =\ param_4\[2\];$@2	+1
+use	arbEmitIlRnd	iVar2	dstMaskZ	INFERRED	component 2 of the 4-word array parameter dstMask	^\s*iVar2\ =\ param_4\[2\];$@3	+2
+use	arbEmitIlRnd	uVar3	src0SelectY	INFERRED	component 1 of the 4-word array parameter src0Select	^\s*uVar3\ =\ param_7\[1\];$	+2
+use	arbEmitIlRnd	uVar3	src0SelectY	INFERRED	component 1 of the 4-word array parameter src0Select	^\s*uVar3\ =\ param_7\[1\];$@2	+1
+use	arbEmitIlRnd	uVar3	src0SelectY	INFERRED	component 1 of the 4-word array parameter src0Select	^\s*uVar3\ =\ param_7\[1\];$@3	+1
+use	arbEmitIlRnd	uVar3	src0SelectY	INFERRED	component 1 of the 4-word array parameter src0Select	^\s*uVar3\ =\ param_7\[1\];$@4	+1
+use	arbEmitIlRnd	uVar3	src0SelectY	INFERRED	component 1 of the 4-word array parameter src0Select	^\s*uVar3\ =\ param_7\[1\];$@5	+1
+use	arbEmitIlRnd	uVar3	src0SelectY	INFERRED	component 1 of the 4-word array parameter src0Select	^\s*uVar3\ =\ param_7\[1\];$@6	+1
+use	arbEmitIlRnd	uVar3	src0SelectY	INFERRED	component 1 of the 4-word array parameter src0Select	^\s*\(uVar1\ \&\ 7\)\ <<\ 8\ \|\ \(uVar7\ \&\ 1\)\ <<\ 7\ \|\ \(uVar3\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_8\ \&\ 1\)\ <<\ 3\ \|\ uVar10\ \&\ 7$	+1
+use	arbEmitIlRnd	uVar5	src0NegateW	INFERRED	component 3 of the 4-word array parameter src0Negate	^\s*uVar5\ =\ param_8\[3\];$	+2
+use	arbEmitIlRnd	uVar5	src0NegateW	INFERRED	component 3 of the 4-word array parameter src0Negate	^\s*uVar5\ =\ param_8\[3\];$@2	+1
+use	arbEmitIlRnd	uVar5	src0NegateW	INFERRED	component 3 of the 4-word array parameter src0Negate	^\s*uVar5\ =\ param_8\[3\];$@3	+1
+use	arbEmitIlRnd	uVar5	src0NegateW	INFERRED	component 3 of the 4-word array parameter src0Negate	^\s*uVar5\ =\ param_8\[3\];$@4	+1
+use	arbEmitIlRnd	uVar5	src0NegateW	INFERRED	component 3 of the 4-word array parameter src0Negate	^\s*uVar15\ =\ \(uVar5\ \&\ 1\)\ <<\ 0xf\ \|$	+1
+use	arbEmitIlRnd	uVar6	src0NegateZ	INFERRED	component 2 of the 4-word array parameter src0Negate	^\s*uVar6\ =\ param_8\[2\];$	+2
+use	arbEmitIlRnd	uVar6	src0NegateZ	INFERRED	component 2 of the 4-word array parameter src0Negate	^\s*uVar6\ =\ param_8\[2\];$@2	+1
+use	arbEmitIlRnd	uVar6	src0NegateZ	INFERRED	component 2 of the 4-word array parameter src0Negate	^\s*uVar6\ =\ param_8\[2\];$@3	+1
+use	arbEmitIlRnd	uVar6	src0NegateZ	INFERRED	component 2 of the 4-word array parameter src0Negate	^\s*\(uVar6\ \&\ 1\)\ <<\ 0xb\ \|$	+1
+use	arbEmitIlRnd	uVar7	src0NegateY	INFERRED	component 1 of the 4-word array parameter src0Negate	^\s*uVar7\ =\ param_8\[1\];$	+2
+use	arbEmitIlRnd	uVar7	src0NegateY	INFERRED	component 1 of the 4-word array parameter src0Negate	^\s*uVar7\ =\ param_8\[1\];$@2	+1
+use	arbEmitIlRnd	uVar7	src0NegateY	INFERRED	component 1 of the 4-word array parameter src0Negate	^\s*\(uVar1\ \&\ 7\)\ <<\ 8\ \|\ \(uVar7\ \&\ 1\)\ <<\ 7\ \|\ \(uVar3\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_8\ \&\ 1\)\ <<\ 3\ \|\ uVar10\ \&\ 7$	+1
+use	arbEmitIlRnd	iVar8	dstMaskY	INFERRED	component 1 of the 4-word array parameter dstMask	^\s*iVar8\ =\ param_4\[1\];$	+1
+use	arbEmitIlRnd	iVar8	dstMaskY	INFERRED	component 1 of the 4-word array parameter dstMask	^\s*\(uint\)\(iVar2\ !=\ 0\)\ \*\ 0x10\ \|\ \(uint\)\(iVar8\ !=\ 0\)\ \*\ 4\ \|\ \(uint\)\(\*param_4\ !=\ 0\);$	+1
+use	arbEmitIlRnd	iVar8	dstMaskY	INFERRED	component 1 of the 4-word array parameter dstMask	^\s*iVar8\ =\ param_4\[1\];$@2	+2
+use	arbEmitIlRnd	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$	+2
+use	arbEmitIlRnd	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$@2	+1
+use	arbEmitIlRnd	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$@3	+1
+use	arbEmitIlRnd	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$@4	+1
+use	arbEmitIlRnd	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$@5	+1
+use	arbEmitIlRnd	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$@6	+1
+use	arbEmitIlRnd	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$@7	+1
+use	arbEmitIlRnd	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*uVar9\ =\ param_7\[3\];$@8	+1
+use	arbEmitIlRnd	uVar9	src0SelectW	INFERRED	component 3 of the 4-word array parameter src0Select	^\s*\(uVar9\ \&\ 7\)\ <<\ 0xc\ \|$	+1
+use	arbEmitIlRnd	uVar10	src0SelectX	INFERRED	component 0 of the 4-word array parameter src0Select	^\s*uVar10\ =\ \*param_7;$	+2
+use	arbEmitIlRnd	uVar10	src0SelectX	INFERRED	component 0 of the 4-word array parameter src0Select	^\s*uVar10\ =\ \*param_7;$@2	+1
+use	arbEmitIlRnd	uVar10	src0SelectX	INFERRED	component 0 of the 4-word array parameter src0Select	^\s*uVar10\ =\ \*param_7;$@3	+1
+use	arbEmitIlRnd	uVar10	src0SelectX	INFERRED	component 0 of the 4-word array parameter src0Select	^\s*uVar10\ =\ \*param_7;$@4	+1
+use	arbEmitIlRnd	uVar10	src0SelectX	INFERRED	component 0 of the 4-word array parameter src0Select	^\s*uVar10\ =\ \*param_7;$@5	+1
+use	arbEmitIlRnd	uVar10	src0SelectX	INFERRED	component 0 of the 4-word array parameter src0Select	^\s*\(uVar1\ \&\ 7\)\ <<\ 8\ \|\ \(uVar7\ \&\ 1\)\ <<\ 7\ \|\ \(uVar3\ \&\ 7\)\ <<\ 4\ \|\ \(\*param_8\ \&\ 1\)\ <<\ 3\ \|\ uVar10\ \&\ 7$	+1
+use	arbEmitIlRnd	uVar11	src0Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src0	^\s*uVar11\ =\ \(param_5\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_6\ \&\ 0xffff;$	+1
+use	arbEmitIlRnd	uVar11	src0Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src0	^\s*uVar11\ =\ uVar11\ \|\ 0x400000;$	+1
+use	arbEmitIlRnd	uVar11	src0Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src0	^\s*\*\(uint\ \*\)\(uVar1\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x75c\)\)\ =\ uVar11;$	+1
+use	arbEmitIlRnd	uVar11	src0Token	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand src0	^\s*if\ \(\(uVar11\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	arbEmitIlRnd	uVar12	dstToken	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand dst	^\s*uVar12\ =\ \(param_2\ \&\ 0x3f\)\ <<\ 0x10\ \|\ param_3\ \&\ 0xffff;$	+1
+use	arbEmitIlRnd	uVar12	dstToken	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand dst	^\s*uVar12\ =\ uVar12\ \|\ 0x400000;$	+1
+use	arbEmitIlRnd	uVar12	dstToken	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand dst	^\s*uVar12\ =\ uVar12\ \|\ 0x400000;$@2	+1
+use	arbEmitIlRnd	uVar12	dstToken	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand dst	^\s*\*\(uint\ \*\)\(uVar1\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x75c\)\)\ =\ uVar12;$	+1
+use	arbEmitIlRnd	uVar12	dstToken	INFERRED	token word (file & 0x3f) << 16 | index & 0xffff of operand dst	^\s*if\ \(\(uVar12\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	arbEmitIlRnd	iVar14	dstMaskW	INFERRED	component 3 of the 4-word array parameter dstMask	^\s*iVar14\ =\ param_4\[3\];$	+1
+use	arbEmitIlRnd	iVar14	dstMaskW	INFERRED	component 3 of the 4-word array parameter dstMask	^\s*uVar13\ =\ \(uint\)\(iVar14\ !=\ 0\)\ \*\ 0x40\ \|$	+1
+use	arbEmitIlRnd	iVar14	dstMaskW	INFERRED	component 3 of the 4-word array parameter dstMask	^\s*iVar14\ =\ param_4\[3\];$@2	+1
+use	arbEmitIlRnd	iVar14	dstMaskW	INFERRED	component 3 of the 4-word array parameter dstMask	^\s*iVar14\ =\ param_4\[3\];$@3	+1
+use	arbEmitIlRnd	iVar14	dstMaskW	INFERRED	component 3 of the 4-word array parameter dstMask	^\s*iVar14\ =\ 0;$	+1
+use	arbEmitIlMad	uVar5	nextTokenIndex	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*uVar5\ =\ \*puVar20\ \+\ 1;$	+2
+use	arbEmitIlMad	uVar5	nextTokenIndex	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ <=\ uVar5\)\ \{$@2	+1
+use	arbEmitIlMad	uVar5	nextTokenIndex	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*uVar5\ =\ \*puVar20;$@3	+1
+use	arbEmitIlMad	uVar5	nextTokenIndex	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*\*\(uint\ \*\)\(uVar5\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar13;$	+1
+use	arbEmitIlMad	uVar5	nextTokenIndex	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*uVar5\ =\ \*puVar20\ \+\ 1;$@2	+2
+use	arbEmitIlMad	uVar5	nextTokenIndex	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ <=\ uVar5\)\ \{$@3	+1
+use	arbEmitIlMad	uVar5	nextTokenIndex	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*uVar5\ =\ \*puVar20;$@4	+1
+use	arbEmitIlMad	uVar5	nextTokenIndex	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*\*\(uint\ \*\)\(uVar5\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar15;$	+3
+use	arbEmitIlMad	uVar5	nextTokenIndex	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ <=\ uVar5\)\ \{$@4	+1
+use	arbEmitIlMad	uVar5	nextTokenIndex	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*uVar5\ =\ \*puVar20;$@5	+1
+use	arbEmitIlMad	uVar5	nextTokenIndex	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*\*\(uint\ \*\)\(uVar5\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar14;$	+1
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*uVar13\ =\ \*puVar20\ \+\ 1;$	+2
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ <=\ uVar13\)\ \{$	+1
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*uVar13\ =\ \*puVar20;$	+1
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*\*\(uint\ \*\)\(uVar13\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar18;$	+3
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ <=\ uVar13\)\ \{$@2	+1
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*uVar13\ =\ \*puVar20;$@2	+1
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*\*\(uint\ \*\)\(uVar13\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar1;$	+1
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*uVar13\ =\ \*puVar20\ \+\ 1;$@3	+2
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ <=\ uVar13\)\ \{$@3	+1
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*uVar13\ =\ \*puVar20;$@3	+1
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*\*\(uint\ \*\)\(uVar13\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar17;$	+3
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ <=\ uVar13\)\ \{$@4	+1
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*uVar13\ =\ \*puVar20;$@4	+1
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*\*\(uint\ \*\)\(uVar13\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar3;$	+1
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*uVar13\ =\ \*puVar20\ \+\ 1;$@5	+2
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*if\ \(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ <=\ uVar13\)\ \{$@5	+1
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*uVar13\ =\ \*puVar20;$@5	+1
+use	arbEmitIlMad	uVar13	nextTokenIndex2	INFERRED	*instrCountPtr + 1: the index of the next free token-buffer slot after a store	^\s*\*\(uint\ \*\)\(uVar13\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\)\ =\ uVar16;$	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar19\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*_memcpy\(uVar4,\*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\),\*puVar20\ <<\ 2\);$	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\ =\ uVar4;$	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar19\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@2	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*_memcpy\(uVar4,\*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\),\*puVar20\ <<\ 2\);$@2	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\ =\ uVar4;$@2	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar19\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@3	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*_memcpy\(uVar4,\*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\),\*puVar20\ <<\ 2\);$@3	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\ =\ uVar4;$@3	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar19\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@4	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*_memcpy\(uVar4,\*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\),\*puVar20\ <<\ 2\);$@4	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\ =\ uVar4;$@4	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar19\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@5	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*_memcpy\(uVar4,\*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\),\*puVar20\ <<\ 2\);$@5	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\ =\ uVar4;$@5	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar19\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@6	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*_memcpy\(uVar4,\*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\),\*puVar20\ <<\ 2\);$@6	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\ =\ uVar4;$@6	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar19\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@7	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*_memcpy\(uVar4,\*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\),\*puVar20\ <<\ 2\);$@7	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\ =\ uVar4;$@7	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar19\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@8	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*_memcpy\(uVar4,\*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\),\*puVar20\ <<\ 2\);$@8	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\ =\ uVar4;$@8	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(iVar19\ \+\ 0xc\)\)\(\*\(uint\ \*\)\(param_1\ \+\ ARB_tokenCapacity\)\ \*\ 4\ \+\ 0x200\);$@9	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*_memcpy\(uVar4,\*\(int\ \*\)\(param_1\ \+\ ARB_tokenBuffer\),\*puVar20\ <<\ 2\);$@9	+1
+use	arbEmitIlMad	uVar4	newTokenBuffer	INFERRED	result of the allocator callback (+0xc): the grown token buffer	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ ARB_tokenBuffer\)\ =\ uVar4;$@9	+1

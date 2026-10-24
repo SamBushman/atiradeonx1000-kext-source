@@ -32,6 +32,7 @@ for k, ls in enumerate(ws):
     defs = []
     for x in ls:
         for m in DEF.finditer(body[x]): defs.append(m.group(1))
+    if os.environ.get('CW_FIRSTDEF'): defs = defs[:1]   # classify the web by its first definition only (later definitions are updates of the same role)
     names = set()
     for t in defs:
         hit = [n for n, rx, ev in R if rx.search(t)]
