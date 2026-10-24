@@ -2821,6 +2821,24 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
   float *outValue;
   undefined4 unused;
 {
+  float *workRowP;
+  float reducedElem4;
+  float reciprocalPivot;
+  float reducedElem3;
+  float pivotRow0Elem1;
+  float pivotRow0Elem2;
+  float workRowAElem2;
+  float pivotRow0Elem3;
+  float workRowAElem3;
+  float workRowPElem3;
+  float workRowPElem2;
+  float workRowAElem7;
+  float workRowAElem6;
+  float workRowAElem5;
+  float workRowAElem4;
+  float workRowPElem1;
+  float pivotRow0Elem0;
+  float workRowAElem0;
   float factorB;
   float factorA;
   float pivotRowElem7Value;
@@ -2830,8 +2848,8 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
   float pivotRowElem3;
   float pivotRowElem2;
   float pivotRowElem1;
-  float *eliminateRowB;
-  float *eliminateRowA;
+  float *workRowB;
+  float *workRowA;
   float halfVectorZ;
   float lightDirY;
   float lightDirX;
@@ -2846,58 +2864,58 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
   float materialAmbientR;
   float materialShininess;
   float fVar1;
-  float fVar2;
-  float fVar3;
-  int iVar4;
-  float fVar5;
-  float fVar6;
-  float *pfVar7;
+  float workRowAElem1;
+  float eliminationFactor;
+  int copyByteOffset;
+  float reducedElem6;
+  float reducedElem5;
+  float *outCursor;
   float *pivotRowElem5;
   int lightOrFace;
   float *pivotRowElem4;
-  float *pfVar11;
+  float *pivotRow1Elem1;
   float *pivotRow;
   int stateOwner;
-  float *pfVar14;
-  float *pfVar15;
+  float *workRowD;
+  float *swapRow;
   int stateBlock;
-  float *eliminateRowC;
+  float *workRowC;
   int kind;
   float *pivotRowElem6;
   float *pivotRowElem7;
   double length;
   double depthNear;
   float matrixCopy [4];
-  float local_d8;
-  float local_d4;
-  float local_d0;
-  float local_cc;
-  float local_c8;
-  float local_c4;
-  float local_c0;
-  float local_bc;
-  float local_b8;
-  float local_b4;
-  float local_b0;
-  float local_ac;
-  float local_a8 [14];
-  float local_6c;
-  float local_68;
-  undefined4 local_64;
-  undefined4 local_60;
-  undefined4 local_5c;
-  float local_58;
-  float local_54;
-  undefined4 local_50;
-  float local_4c;
-  float local_48;
-  undefined4 local_44;
-  undefined4 local_40;
-  undefined4 local_3c;
-  float local_38;
-  float local_34;
-  float local_30;
-  undefined4 local_2c;
+  float matrixCopy4;
+  float matrixCopy5;
+  float matrixCopy6;
+  float matrixCopy7;
+  float matrixCopy8;
+  float matrixCopy9;
+  float matrixCopy10;
+  float matrixCopy11;
+  float matrixCopy12;
+  float matrixCopy13;
+  float matrixCopy14;
+  float matrixCopy15;
+  float augRows [14];
+  float augRow1Elem7;
+  float augRow2Elem0;
+  undefined4 augRow2Elem1;
+  undefined4 augRow2Elem2;
+  undefined4 augRow2Elem3;
+  float augRow2Elem4;
+  float augRow2Elem5;
+  undefined4 augRow2Elem6;
+  float augRow2Elem7;
+  float augRow3Elem0;
+  undefined4 augRow3Elem1;
+  undefined4 augRow3Elem2;
+  undefined4 augRow3Elem3;
+  float augRow3Elem4;
+  float augRow3Elem5;
+  float augRow3Elem6;
+  undefined4 augRow3Elem7;
   
   fVar1 = FLOAT_001aa0e8;
   kind = *(int *)(element + 8);
@@ -3203,227 +3221,227 @@ LAB_0008f398:
 LAB_0008f444:
     lightOrFace = 0;
     stateOwner = 0x10;
-    pfVar7 = matrixCopy;
+    outCursor = matrixCopy;
     do {
-      iVar4 = lightOrFace * 4;
+      copyByteOffset = lightOrFace * 4;
       lightOrFace = lightOrFace + 1;
-      *pfVar7 = *(float *)(stateBlock + iVar4);
-      pfVar7 = pfVar7 + 1;
+      *outCursor = *(float *)(stateBlock + copyByteOffset);
+      outCursor = outCursor + 1;
       stateOwner = stateOwner + -1;
     } while (stateOwner != 0);
     lightOrFace = *(int *)(element + 0x10);
     if ((lightOrFace == 1) || (lightOrFace == 3)) {
-      local_a8[4] = 1.0;
-      local_a8[0xd] = 1.0;
-      local_a8[1] = local_d8;
-      local_a8[2] = local_c8;
-      local_68 = matrixCopy[2];
-      local_a8[0] = matrixCopy[0];
-      local_a8[7] = FLOAT_001aa0d4;
-      local_a8[6] = FLOAT_001aa0d4;
-      local_a8[5] = FLOAT_001aa0d4;
-      local_a8[8] = matrixCopy[1];
-      local_6c = FLOAT_001aa0d4;
-      local_a8[3] = local_b8;
-      local_a8[9] = local_d4;
-      local_a8[0xc] = FLOAT_001aa0d4;
-      local_a8[10] = local_c4;
-      local_a8[0xb] = local_b4;
-      local_64 = local_d0;
-      local_60 = local_c0;
-      local_5c = local_b0;
-      local_50 = 0x3f800000;
-      local_4c = FLOAT_001aa0d4;
-      local_2c = 0x3f800000;
-      local_54 = FLOAT_001aa0d4;
-      local_58 = FLOAT_001aa0d4;
-      local_30 = FLOAT_001aa0d4;
-      local_34 = FLOAT_001aa0d4;
-      local_38 = FLOAT_001aa0d4;
-      local_44 = local_cc;
-      local_40 = local_bc;
-      local_48 = matrixCopy[3];
-      local_3c = local_ac;
-      eliminateRowA = &STACKARG(0xffffffb8);
-      eliminateRowC = &STACKARG(0xffffff98);
+      augRows[4] = 1.0;
+      augRows[0xd] = 1.0;
+      augRows[1] = matrixCopy4;
+      augRows[2] = matrixCopy8;
+      augRow2Elem0 = matrixCopy[2];
+      augRows[0] = matrixCopy[0];
+      augRows[7] = FLOAT_001aa0d4;
+      augRows[6] = FLOAT_001aa0d4;
+      augRows[5] = FLOAT_001aa0d4;
+      augRows[8] = matrixCopy[1];
+      augRow1Elem7 = FLOAT_001aa0d4;
+      augRows[3] = matrixCopy12;
+      augRows[9] = matrixCopy5;
+      augRows[0xc] = FLOAT_001aa0d4;
+      augRows[10] = matrixCopy9;
+      augRows[0xb] = matrixCopy13;
+      augRow2Elem1 = matrixCopy6;
+      augRow2Elem2 = matrixCopy10;
+      augRow2Elem3 = matrixCopy14;
+      augRow2Elem6 = 0x3f800000;
+      augRow2Elem7 = FLOAT_001aa0d4;
+      augRow3Elem7 = 0x3f800000;
+      augRow2Elem5 = FLOAT_001aa0d4;
+      augRow2Elem4 = FLOAT_001aa0d4;
+      augRow3Elem6 = FLOAT_001aa0d4;
+      augRow3Elem5 = FLOAT_001aa0d4;
+      augRow3Elem4 = FLOAT_001aa0d4;
+      augRow3Elem1 = matrixCopy7;
+      augRow3Elem2 = matrixCopy11;
+      augRow3Elem0 = matrixCopy[3];
+      augRow3Elem3 = matrixCopy15;
+      workRowA = &STACKARG(0xffffffb8);
+      workRowC = &STACKARG(0xffffff98);
       if (ABS(matrixCopy[3]) <= ABS(matrixCopy[2])) {
-        eliminateRowA = &STACKARG(0xffffff98);
-        eliminateRowC = &STACKARG(0xffffffb8);
+        workRowA = &STACKARG(0xffffff98);
+        workRowC = &STACKARG(0xffffffb8);
       }
-      eliminateRowB = local_a8 + 8;
-      fVar1 = *eliminateRowA;
-      if (ABS(*eliminateRowA) <= ABS(matrixCopy[1])) {
-        eliminateRowB = eliminateRowA;
-        eliminateRowA = local_a8 + 8;
-        fVar1 = matrixCopy[1];
+      workRowB = augRows + 8;
+      workRowAElem0 = *workRowA;
+      if (ABS(*workRowA) <= ABS(matrixCopy[1])) {
+        workRowB = workRowA;
+        workRowA = augRows + 8;
+        workRowAElem0 = matrixCopy[1];
       }
-      pivotRow = local_a8;
-      if (ABS(matrixCopy[0]) < ABS(fVar1)) {
-        pivotRow = eliminateRowA;
-        eliminateRowA = local_a8;
+      pivotRow = augRows;
+      if (ABS(matrixCopy[0]) < ABS(workRowAElem0)) {
+        pivotRow = workRowA;
+        workRowA = augRows;
       }
-      fVar1 = *pivotRow;
-      if (fVar1 != FLOAT_001aa0d4) {
+      pivotRow0Elem0 = *pivotRow;
+      if (pivotRow0Elem0 != FLOAT_001aa0d4) {
         pivotRowElem1 = pivotRow[1];
         pivotRowElem4 = pivotRow + 4;
-        factorA = *eliminateRowA / fVar1;
-        factorB = *eliminateRowB / fVar1;
-        fVar1 = *eliminateRowC / fVar1;
-        eliminateRowA[1] = -(factorA * pivotRowElem1 - eliminateRowA[1]);
-        eliminateRowB[1] = -(factorB * pivotRowElem1 - eliminateRowB[1]);
-        eliminateRowC[1] = -(fVar1 * pivotRowElem1 - eliminateRowC[1]);
+        factorA = *workRowA / pivotRow0Elem0;
+        factorB = *workRowB / pivotRow0Elem0;
+        pivotRow0Elem0 = *workRowC / pivotRow0Elem0;
+        workRowA[1] = -(factorA * pivotRowElem1 - workRowA[1]);
+        workRowB[1] = -(factorB * pivotRowElem1 - workRowB[1]);
+        workRowC[1] = -(pivotRow0Elem0 * pivotRowElem1 - workRowC[1]);
         pivotRowElem2 = pivotRow[2];
-        eliminateRowA[2] = -(factorA * pivotRowElem2 - eliminateRowA[2]);
-        eliminateRowB[2] = -(factorB * pivotRowElem2 - eliminateRowB[2]);
-        eliminateRowC[2] = -(fVar1 * pivotRowElem2 - eliminateRowC[2]);
+        workRowA[2] = -(factorA * pivotRowElem2 - workRowA[2]);
+        workRowB[2] = -(factorB * pivotRowElem2 - workRowB[2]);
+        workRowC[2] = -(pivotRow0Elem0 * pivotRowElem2 - workRowC[2]);
         pivotRowElem3 = pivotRow[3];
-        eliminateRowA[3] = -(factorA * pivotRowElem3 - eliminateRowA[3]);
-        eliminateRowB[3] = -(factorB * pivotRowElem3 - eliminateRowB[3]);
-        eliminateRowC[3] = -(fVar1 * pivotRowElem3 - eliminateRowC[3]);
+        workRowA[3] = -(factorA * pivotRowElem3 - workRowA[3]);
+        workRowB[3] = -(factorB * pivotRowElem3 - workRowB[3]);
+        workRowC[3] = -(pivotRow0Elem0 * pivotRowElem3 - workRowC[3]);
         pivotRowElem4Value = pivotRow[4];
         if (pivotRowElem4Value != FLOAT_001aa0d4) {
-          eliminateRowA[4] = -(factorA * pivotRowElem4Value - eliminateRowA[4]);
-          eliminateRowB[4] = -(factorB * pivotRowElem4Value - eliminateRowB[4]);
-          eliminateRowC[4] = -(fVar1 * pivotRowElem4Value - eliminateRowC[4]);
+          workRowA[4] = -(factorA * pivotRowElem4Value - workRowA[4]);
+          workRowB[4] = -(factorB * pivotRowElem4Value - workRowB[4]);
+          workRowC[4] = -(pivotRow0Elem0 * pivotRowElem4Value - workRowC[4]);
         }
         pivotRowElem5Value = pivotRow[5];
         pivotRowElem5 = pivotRow + 5;
         if (pivotRowElem5Value != FLOAT_001aa0d4) {
-          eliminateRowA[5] = -(factorA * pivotRowElem5Value - eliminateRowA[5]);
-          eliminateRowB[5] = -(factorB * pivotRowElem5Value - eliminateRowB[5]);
-          eliminateRowC[5] = -(fVar1 * pivotRowElem5Value - eliminateRowC[5]);
+          workRowA[5] = -(factorA * pivotRowElem5Value - workRowA[5]);
+          workRowB[5] = -(factorB * pivotRowElem5Value - workRowB[5]);
+          workRowC[5] = -(pivotRow0Elem0 * pivotRowElem5Value - workRowC[5]);
         }
         pivotRowElem6Value = pivotRow[6];
         pivotRowElem6 = pivotRow + 6;
         if (pivotRowElem6Value != FLOAT_001aa0d4) {
-          eliminateRowA[6] = -(factorA * pivotRowElem6Value - eliminateRowA[6]);
-          eliminateRowB[6] = -(factorB * pivotRowElem6Value - eliminateRowB[6]);
-          eliminateRowC[6] = -(fVar1 * pivotRowElem6Value - eliminateRowC[6]);
+          workRowA[6] = -(factorA * pivotRowElem6Value - workRowA[6]);
+          workRowB[6] = -(factorB * pivotRowElem6Value - workRowB[6]);
+          workRowC[6] = -(pivotRow0Elem0 * pivotRowElem6Value - workRowC[6]);
         }
         pivotRowElem7Value = pivotRow[7];
         pivotRowElem7 = pivotRow + 7;
         if (pivotRowElem7Value != FLOAT_001aa0d4) {
-          eliminateRowA[7] = -(factorA * pivotRowElem7Value - eliminateRowA[7]);
-          eliminateRowB[7] = -(factorB * pivotRowElem7Value - eliminateRowB[7]);
-          eliminateRowC[7] = -(fVar1 * pivotRowElem7Value - eliminateRowC[7]);
+          workRowA[7] = -(factorA * pivotRowElem7Value - workRowA[7]);
+          workRowB[7] = -(factorB * pivotRowElem7Value - workRowB[7]);
+          workRowC[7] = -(pivotRow0Elem0 * pivotRowElem7Value - workRowC[7]);
         }
-        pfVar15 = eliminateRowB;
-        if (ABS(eliminateRowB[1]) < ABS(eliminateRowC[1])) {
-          pfVar15 = eliminateRowC;
-          eliminateRowC = eliminateRowB;
+        swapRow = workRowB;
+        if (ABS(workRowB[1]) < ABS(workRowC[1])) {
+          swapRow = workRowC;
+          workRowC = workRowB;
         }
-        fVar1 = pfVar15[1];
-        fVar2 = eliminateRowA[1];
-        pfVar11 = eliminateRowA + 1;
-        pfVar14 = pfVar15;
-        if (ABS(fVar2) < ABS(fVar1)) {
-          pfVar11 = pfVar15 + 1;
-          pfVar14 = eliminateRowA;
-          eliminateRowA = pfVar15;
-          fVar2 = fVar1;
+        workRowPElem1 = swapRow[1];
+        workRowAElem1 = workRowA[1];
+        pivotRow1Elem1 = workRowA + 1;
+        workRowD = swapRow;
+        if (ABS(workRowAElem1) < ABS(workRowPElem1)) {
+          pivotRow1Elem1 = swapRow + 1;
+          workRowD = workRowA;
+          workRowA = swapRow;
+          workRowAElem1 = workRowPElem1;
         }
-        if (fVar2 != FLOAT_001aa0d4) {
-          fVar3 = pfVar14[1] / fVar2;
-          fVar2 = eliminateRowC[1] / fVar2;
-          pfVar14[2] = -(fVar3 * eliminateRowA[2] - pfVar14[2]);
-          eliminateRowC[2] = -(fVar2 * eliminateRowA[2] - eliminateRowC[2]);
-          pfVar14[3] = -(fVar3 * eliminateRowA[3] - pfVar14[3]);
-          eliminateRowC[3] = -(fVar2 * eliminateRowA[3] - eliminateRowC[3]);
-          fVar1 = eliminateRowA[4];
-          if (fVar1 != FLOAT_001aa0d4) {
-            pfVar14[4] = -(fVar3 * fVar1 - pfVar14[4]);
-            eliminateRowC[4] = -(fVar2 * fVar1 - eliminateRowC[4]);
+        if (workRowAElem1 != FLOAT_001aa0d4) {
+          eliminationFactor = workRowD[1] / workRowAElem1;
+          workRowAElem1 = workRowC[1] / workRowAElem1;
+          workRowD[2] = -(eliminationFactor * workRowA[2] - workRowD[2]);
+          workRowC[2] = -(workRowAElem1 * workRowA[2] - workRowC[2]);
+          workRowD[3] = -(eliminationFactor * workRowA[3] - workRowD[3]);
+          workRowC[3] = -(workRowAElem1 * workRowA[3] - workRowC[3]);
+          workRowAElem4 = workRowA[4];
+          if (workRowAElem4 != FLOAT_001aa0d4) {
+            workRowD[4] = -(eliminationFactor * workRowAElem4 - workRowD[4]);
+            workRowC[4] = -(workRowAElem1 * workRowAElem4 - workRowC[4]);
           }
-          fVar1 = eliminateRowA[5];
-          if (fVar1 != FLOAT_001aa0d4) {
-            pfVar14[5] = -(fVar3 * fVar1 - pfVar14[5]);
-            eliminateRowC[5] = -(fVar2 * fVar1 - eliminateRowC[5]);
+          workRowAElem5 = workRowA[5];
+          if (workRowAElem5 != FLOAT_001aa0d4) {
+            workRowD[5] = -(eliminationFactor * workRowAElem5 - workRowD[5]);
+            workRowC[5] = -(workRowAElem1 * workRowAElem5 - workRowC[5]);
           }
-          fVar1 = eliminateRowA[6];
-          if (fVar1 != FLOAT_001aa0d4) {
-            pfVar14[6] = -(fVar3 * fVar1 - pfVar14[6]);
-            eliminateRowC[6] = -(fVar2 * fVar1 - eliminateRowC[6]);
+          workRowAElem6 = workRowA[6];
+          if (workRowAElem6 != FLOAT_001aa0d4) {
+            workRowD[6] = -(eliminationFactor * workRowAElem6 - workRowD[6]);
+            workRowC[6] = -(workRowAElem1 * workRowAElem6 - workRowC[6]);
           }
-          fVar1 = eliminateRowA[7];
-          if (fVar1 != FLOAT_001aa0d4) {
-            pfVar14[7] = -(fVar3 * fVar1 - pfVar14[7]);
-            eliminateRowC[7] = -(fVar2 * fVar1 - eliminateRowC[7]);
+          workRowAElem7 = workRowA[7];
+          if (workRowAElem7 != FLOAT_001aa0d4) {
+            workRowD[7] = -(eliminationFactor * workRowAElem7 - workRowD[7]);
+            workRowC[7] = -(workRowAElem1 * workRowAElem7 - workRowC[7]);
           }
-          pfVar15 = pfVar14;
-          if (ABS(pfVar14[2]) < ABS(eliminateRowC[2])) {
-            pfVar15 = eliminateRowC;
-            eliminateRowC = pfVar14;
+          workRowP = workRowD;
+          if (ABS(workRowD[2]) < ABS(workRowC[2])) {
+            workRowP = workRowC;
+            workRowC = workRowD;
           }
-          fVar1 = pfVar15[2];
-          if (fVar1 != FLOAT_001aa0d4) {
-            fVar1 = eliminateRowC[2] / fVar1;
-            fVar2 = -(fVar1 * pfVar15[3] - eliminateRowC[3]);
-            eliminateRowC[3] = fVar2;
-            fVar3 = -(fVar1 * pfVar15[4] - eliminateRowC[4]);
-            eliminateRowC[4] = fVar3;
-            fVar6 = -(fVar1 * pfVar15[5] - eliminateRowC[5]);
-            eliminateRowC[5] = fVar6;
-            fVar5 = -(fVar1 * pfVar15[6] - eliminateRowC[6]);
-            eliminateRowC[6] = fVar5;
-            fVar1 = -(fVar1 * pfVar15[7] - eliminateRowC[7]);
-            eliminateRowC[7] = fVar1;
-            if (fVar2 != FLOAT_001aa0d4) {
-              fVar2 = FLOAT_001aa0e8 / fVar2;
-              fVar3 = fVar2 * fVar3;
-              eliminateRowC[4] = fVar3;
-              eliminateRowC[7] = fVar2 * fVar1;
-              eliminateRowC[5] = fVar2 * fVar6;
-              eliminateRowC[6] = fVar2 * fVar5;
-              fVar1 = pfVar15[3];
-              fVar2 = FLOAT_001aa0e8 / pfVar15[2];
-              pfVar15[4] = fVar2 * -(fVar1 * fVar3 - pfVar15[4]);
-              pfVar15[5] = fVar2 * -(fVar1 * eliminateRowC[5] - pfVar15[5]);
-              pfVar15[6] = fVar2 * -(fVar1 * eliminateRowC[6] - pfVar15[6]);
-              pfVar15[7] = fVar2 * -(fVar1 * eliminateRowC[7] - pfVar15[7]);
-              fVar1 = eliminateRowA[3];
-              eliminateRowA[4] = -(fVar1 * eliminateRowC[4] - eliminateRowA[4]);
-              eliminateRowA[5] = -(fVar1 * eliminateRowC[5] - eliminateRowA[5]);
-              eliminateRowA[6] = -(fVar1 * eliminateRowC[6] - eliminateRowA[6]);
-              eliminateRowA[7] = -(fVar1 * eliminateRowC[7] - eliminateRowA[7]);
-              fVar1 = pivotRow[3];
-              *pivotRowElem4 = -(fVar1 * eliminateRowC[4] - *pivotRowElem4);
-              *pivotRowElem5 = -(fVar1 * eliminateRowC[5] - *pivotRowElem5);
-              *pivotRowElem6 = -(fVar1 * eliminateRowC[6] - *pivotRowElem6);
-              *pivotRowElem7 = -(fVar1 * eliminateRowC[7] - *pivotRowElem7);
-              fVar1 = eliminateRowA[2];
-              fVar2 = FLOAT_001aa0e8 / *pfVar11;
-              eliminateRowA[4] = fVar2 * -(fVar1 * pfVar15[4] - eliminateRowA[4]);
-              eliminateRowA[5] = fVar2 * -(fVar1 * pfVar15[5] - eliminateRowA[5]);
-              eliminateRowA[6] = fVar2 * -(fVar1 * pfVar15[6] - eliminateRowA[6]);
-              eliminateRowA[7] = fVar2 * -(fVar1 * pfVar15[7] - eliminateRowA[7]);
-              fVar1 = pivotRow[2];
-              *pivotRowElem4 = -(fVar1 * pfVar15[4] - *pivotRowElem4);
-              *pivotRowElem5 = -(fVar1 * pfVar15[5] - *pivotRowElem5);
-              *pivotRowElem6 = -(fVar1 * pfVar15[6] - *pivotRowElem6);
-              *pivotRowElem7 = -(fVar1 * pfVar15[7] - *pivotRowElem7);
-              fVar1 = pivotRow[1];
-              fVar2 = FLOAT_001aa0e8 / *pivotRow;
-              *pivotRowElem4 = fVar2 * -(fVar1 * eliminateRowA[4] - *pivotRowElem4);
-              *pivotRowElem5 = fVar2 * -(fVar1 * eliminateRowA[5] - *pivotRowElem5);
-              *pivotRowElem6 = fVar2 * -(fVar1 * eliminateRowA[6] - *pivotRowElem6);
-              local_b8 = fVar2 * -(fVar1 * eliminateRowA[7] - *pivotRowElem7);
-              *pivotRowElem7 = local_b8;
+          workRowPElem2 = workRowP[2];
+          if (workRowPElem2 != FLOAT_001aa0d4) {
+            workRowPElem2 = workRowC[2] / workRowPElem2;
+            reducedElem3 = -(workRowPElem2 * workRowP[3] - workRowC[3]);
+            workRowC[3] = reducedElem3;
+            reducedElem4 = -(workRowPElem2 * workRowP[4] - workRowC[4]);
+            workRowC[4] = reducedElem4;
+            reducedElem5 = -(workRowPElem2 * workRowP[5] - workRowC[5]);
+            workRowC[5] = reducedElem5;
+            reducedElem6 = -(workRowPElem2 * workRowP[6] - workRowC[6]);
+            workRowC[6] = reducedElem6;
+            workRowPElem2 = -(workRowPElem2 * workRowP[7] - workRowC[7]);
+            workRowC[7] = workRowPElem2;
+            if (reducedElem3 != FLOAT_001aa0d4) {
+              reducedElem3 = FLOAT_001aa0e8 / reducedElem3;
+              reducedElem4 = reducedElem3 * reducedElem4;
+              workRowC[4] = reducedElem4;
+              workRowC[7] = reducedElem3 * workRowPElem2;
+              workRowC[5] = reducedElem3 * reducedElem5;
+              workRowC[6] = reducedElem3 * reducedElem6;
+              workRowPElem3 = workRowP[3];
+              reciprocalPivot = FLOAT_001aa0e8 / workRowP[2];
+              workRowP[4] = reciprocalPivot * -(workRowPElem3 * reducedElem4 - workRowP[4]);
+              workRowP[5] = reciprocalPivot * -(workRowPElem3 * workRowC[5] - workRowP[5]);
+              workRowP[6] = reciprocalPivot * -(workRowPElem3 * workRowC[6] - workRowP[6]);
+              workRowP[7] = reciprocalPivot * -(workRowPElem3 * workRowC[7] - workRowP[7]);
+              workRowAElem3 = workRowA[3];
+              workRowA[4] = -(workRowAElem3 * workRowC[4] - workRowA[4]);
+              workRowA[5] = -(workRowAElem3 * workRowC[5] - workRowA[5]);
+              workRowA[6] = -(workRowAElem3 * workRowC[6] - workRowA[6]);
+              workRowA[7] = -(workRowAElem3 * workRowC[7] - workRowA[7]);
+              pivotRow0Elem3 = pivotRow[3];
+              *pivotRowElem4 = -(pivotRow0Elem3 * workRowC[4] - *pivotRowElem4);
+              *pivotRowElem5 = -(pivotRow0Elem3 * workRowC[5] - *pivotRowElem5);
+              *pivotRowElem6 = -(pivotRow0Elem3 * workRowC[6] - *pivotRowElem6);
+              *pivotRowElem7 = -(pivotRow0Elem3 * workRowC[7] - *pivotRowElem7);
+              workRowAElem2 = workRowA[2];
+              reciprocalPivot = FLOAT_001aa0e8 / *pivotRow1Elem1;
+              workRowA[4] = reciprocalPivot * -(workRowAElem2 * workRowP[4] - workRowA[4]);
+              workRowA[5] = reciprocalPivot * -(workRowAElem2 * workRowP[5] - workRowA[5]);
+              workRowA[6] = reciprocalPivot * -(workRowAElem2 * workRowP[6] - workRowA[6]);
+              workRowA[7] = reciprocalPivot * -(workRowAElem2 * workRowP[7] - workRowA[7]);
+              pivotRow0Elem2 = pivotRow[2];
+              *pivotRowElem4 = -(pivotRow0Elem2 * workRowP[4] - *pivotRowElem4);
+              *pivotRowElem5 = -(pivotRow0Elem2 * workRowP[5] - *pivotRowElem5);
+              *pivotRowElem6 = -(pivotRow0Elem2 * workRowP[6] - *pivotRowElem6);
+              *pivotRowElem7 = -(pivotRow0Elem2 * workRowP[7] - *pivotRowElem7);
+              pivotRow0Elem1 = pivotRow[1];
+              reciprocalPivot = FLOAT_001aa0e8 / *pivotRow;
+              *pivotRowElem4 = reciprocalPivot * -(pivotRow0Elem1 * workRowA[4] - *pivotRowElem4);
+              *pivotRowElem5 = reciprocalPivot * -(pivotRow0Elem1 * workRowA[5] - *pivotRowElem5);
+              *pivotRowElem6 = reciprocalPivot * -(pivotRow0Elem1 * workRowA[6] - *pivotRowElem6);
+              matrixCopy12 = reciprocalPivot * -(pivotRow0Elem1 * workRowA[7] - *pivotRowElem7);
+              *pivotRowElem7 = matrixCopy12;
               matrixCopy[0] = *pivotRowElem4;
-              local_d8 = *pivotRowElem5;
-              local_c8 = *pivotRowElem6;
-              matrixCopy[1] = eliminateRowA[4];
-              local_d4 = eliminateRowA[5];
-              local_c4 = eliminateRowA[6];
-              local_b4 = eliminateRowA[7];
-              matrixCopy[2] = pfVar15[4];
-              local_d0 = pfVar15[5];
-              local_c0 = pfVar15[6];
+              matrixCopy4 = *pivotRowElem5;
+              matrixCopy8 = *pivotRowElem6;
+              matrixCopy[1] = workRowA[4];
+              matrixCopy5 = workRowA[5];
+              matrixCopy9 = workRowA[6];
+              matrixCopy13 = workRowA[7];
+              matrixCopy[2] = workRowP[4];
+              matrixCopy6 = workRowP[5];
+              matrixCopy10 = workRowP[6];
               lightOrFace = *(int *)(element + 0x10);
-              local_b0 = pfVar15[7];
-              matrixCopy[3] = eliminateRowC[4];
-              local_cc = eliminateRowC[5];
-              local_bc = eliminateRowC[6];
-              local_ac = eliminateRowC[7];
+              matrixCopy14 = workRowP[7];
+              matrixCopy[3] = workRowC[4];
+              matrixCopy7 = workRowC[5];
+              matrixCopy11 = workRowC[6];
+              matrixCopy15 = workRowC[7];
               goto LAB_0008eb2c;
             }
           }
@@ -3436,23 +3454,23 @@ LAB_0008eb2c:
       if (lightOrFace < 2) {
         lightOrFace = 0;
         stateBlock = 4;
-        pfVar7 = matrixCopy + kind;
+        outCursor = matrixCopy + kind;
         do {
-          fVar1 = *pfVar7;
-          pfVar7 = pfVar7 + 4;
-          *(float *)(lightOrFace + (int)outValue) = fVar1;
+          workRowAElem0 = *outCursor;
+          outCursor = outCursor + 4;
+          *(float *)(lightOrFace + (int)outValue) = workRowAElem0;
           lightOrFace = lightOrFace + 4;
           stateBlock = stateBlock + -1;
         } while (stateBlock != 0);
       }
       else if (lightOrFace < 4) {
         lightOrFace = 0;
-        pfVar7 = matrixCopy + kind * 4;
+        outCursor = matrixCopy + kind * 4;
         stateBlock = 4;
         do {
-          fVar1 = *pfVar7;
-          pfVar7 = pfVar7 + 1;
-          *(float *)(lightOrFace + (int)outValue) = fVar1;
+          workRowAElem0 = *outCursor;
+          outCursor = outCursor + 1;
+          *(float *)(lightOrFace + (int)outValue) = workRowAElem0;
           lightOrFace = lightOrFace + 4;
           stateBlock = stateBlock + -1;
         } while (stateBlock != 0);
