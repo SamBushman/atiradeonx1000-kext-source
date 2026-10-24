@@ -537,7 +537,7 @@ int FUN_000e2094(compiler, param_2)
   int iVar1;
   int iVar2;
   undefined4 *puVar3;
-  int in_r6;
+  int argR6;
   undefined4 in_r7;
   undefined4 in_r8;
   char *pcVar4;
@@ -615,7 +615,7 @@ int FUN_000e2094(compiler, param_2)
     }
     deleteComputationsThatCouldBeVsEnabled = Compiler__isOptionEnabled(compiler,0x10);
     if ((int)((ulonglong)deleteComputationsThatCouldBeVsEnabled >> 0x20) != 0) {
-      ((int (*)())FUN_000e1c50)(*(undefined4 *)(compiler + COMP_currentProgram),(int)deleteComputationsThatCouldBeVsEnabled,iVar1,in_r6,in_r7,in_r8,pcVar4);
+      ((int (*)())FUN_000e1c50)(*(undefined4 *)(compiler + COMP_currentProgram),(int)deleteComputationsThatCouldBeVsEnabled,iVar1,argR6,in_r7,in_r8,pcVar4);
     }
     *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) = *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) | 0x80
     ;
@@ -672,7 +672,7 @@ int FUN_000e2094(compiler, param_2)
               (*(int **)(compiler + COMP_target),*(undefined4 *)(compiler + 0x52c),compiler);
     pcVar4 = (char *)**(undefined4 **)(compiler + COMP_target);
     iVar1 = *(int *)(compiler + 0x52c) * 4 + compiler;
-    in_r6 = compiler;
+    argR6 = compiler;
     (**(code **)(pcVar4 + 0x8c))
               (*(undefined4 **)(compiler + COMP_target),*(undefined4 *)(iVar1 + 0x524),
                *(undefined4 *)(iVar1 + 0x4d4));

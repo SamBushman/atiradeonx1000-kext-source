@@ -3455,8 +3455,8 @@ int FUN_000f1d7c(pass, afterInst, inst)
   undefined4 a1;
   dword *a2;
   uint uVar8;
-  dword in_r6;
-  undefined4 in_r7;
+  dword argR6;
+  undefined4 argR7;
   undefined4 in_r8;
   uint uVar9;
   dword dVar10;
@@ -3629,7 +3629,7 @@ LAB_000f26a4:
         WriteMask__fromSelectWord(&local_48,*(undefined4 *)(operandRecord + 0x10));
         piVar3[3] = local_48;
         iVar4 = (**(code **)(*piVar3 + 0x7c))
-                          (piVar3,a1,a2,in_r6,in_r7,in_r8,*(code **)(*piVar3 + 0x7c));
+                          (piVar3,a1,a2,argR6,argR7,in_r8,*(code **)(*piVar3 + 0x7c));
         uVar8 = vec4Count;
         if (iVar4 == 0) {
           iVar4 = FUN_00104fd0(piVar3);
@@ -3781,7 +3781,7 @@ LAB_000f2690:
             FUN_0010c010(piVar3,2,*(undefined4 *)(pass + 8));
           }
           a2 = pdVar11;
-          in_r6 = dVar10;
+          argR6 = dVar10;
           IRInst__setHardwareRegisterAndAdd(piVar3,pass,pdVar11,dVar10);
           uVar9 = vec2Count;
           if (vec2Count < vec2Capacity) {
@@ -3815,9 +3815,9 @@ LAB_000f25ac:
           piVar3[3] = uVar8 | *(uint *)(sourceDef + 0xc);
           if ((dword *)*(undefined1 **)(sourceDef + 0x98) == pdVar11) {
             a2 = (dword *)0x0;
-            in_r6 = 0;
-            in_r7 = *(undefined4 *)(pass + 8);
-            IRInst__setOperandSource(piVar3,piVar3[0x21],0,0,in_r7);
+            argR6 = 0;
+            argR7 = *(undefined4 *)(pass + 8);
+            IRInst__setOperandSource(piVar3,piVar3[0x21],0,0,argR7);
             piVar3[0x21] = piVar3[0x21] + -1;
             piVar3[5] = piVar3[5] & 0xfffffdff;
           }
@@ -3832,7 +3832,7 @@ LAB_000f25ac:
             if ((uVar8 & (uVar9 << 0x18 | (uVar9 & 0xff00) << 8 | uVar9 >> 8 & 0xff00 |
                          uVar9 >> 0x18)) != 0) {
               a2 = pdVar11;
-              in_r6 = dVar10;
+              argR6 = dVar10;
               IRInst__setHardwareRegisterAndAdd(piVar3,pass,pdVar11,dVar10);
               piVar3[3] = 0;
               if (0 < piVar3[0x21]) {
@@ -3880,7 +3880,7 @@ LAB_000f260c:
       goto LAB_000f26b0;
     }
     a2 = pdVar11;
-    in_r6 = dVar10;
+    argR6 = dVar10;
     IRInst__setHardwareRegisterAndAdd(piVar3,pass,pdVar11,dVar10);
     sourceDef = IRInst__getOperandSource(piVar3,piVar3[0x21]);
     uVar9 = vec2Count;

@@ -781,7 +781,7 @@ int FUN_000e5e70(param_1)
   undefined4 uVar8;
   undefined4 *puVar9;
   undefined4 *puVar10;
-  int in_r7;
+  int argR7;
   undefined4 in_r8;
   uint uVar11;
   uint uVar12;
@@ -961,7 +961,7 @@ LAB_000e6ac4:
     goto switchD_000e61ac_caseD_a;
   case 7:
     local_64 = 6;
-    ((int (*)())FUN_000e547c)(param_1,0x34,local_68,6,in_r7,in_r8);
+    ((int (*)())FUN_000e547c)(param_1,0x34,local_68,6,argR7,in_r8);
     break;
   case 8:
     puVar15 = (uint *)param_1[0x22];
@@ -1060,9 +1060,9 @@ LAB_000e6ac4:
   case 9:
     local_64 = 8;
     iVar4 = local_68 + -1;
-    in_r7 = param_1[local_68 + 0x22];
+    argR7 = param_1[local_68 + 0x22];
     local_68 = iVar4;
-    ((int (*)())FUN_000e5384)(param_1,0x35,iVar4,8,in_r7,in_r8);
+    ((int (*)())FUN_000e5384)(param_1,0x35,iVar4,8,argR7,in_r8);
     break;
   default:
     goto switchD_000e61ac_caseD_a;
@@ -1296,25 +1296,25 @@ LAB_000e6870:
     goto switchD_000e61ac_caseD_53;
   case 0x65:
     local_64 = 6;
-    ((int (*)())FUN_000e547c)(param_1,0x6f,local_68,6,in_r7,in_r8);
+    ((int (*)())FUN_000e547c)(param_1,0x6f,local_68,6,argR7,in_r8);
     break;
   case 0x66:
     local_64 = 6;
-    ((int (*)())FUN_000e547c)(param_1,0x70,local_68,6,in_r7,in_r8);
+    ((int (*)())FUN_000e547c)(param_1,0x70,local_68,6,argR7,in_r8);
     break;
   case 0x67:
     local_64 = 8;
     iVar4 = local_68 + -1;
-    in_r7 = param_1[local_68 + 0x22];
+    argR7 = param_1[local_68 + 0x22];
     local_68 = iVar4;
-    ((int (*)())FUN_000e5384)(param_1,0x6f,iVar4,8,in_r7,in_r8);
+    ((int (*)())FUN_000e5384)(param_1,0x6f,iVar4,8,argR7,in_r8);
     break;
   case 0x68:
     local_64 = 8;
     iVar4 = local_68 + -1;
-    in_r7 = param_1[local_68 + 0x22];
+    argR7 = param_1[local_68 + 0x22];
     local_68 = iVar4;
-    ((int (*)())FUN_000e5384)(param_1,0x70,iVar4,8,in_r7,in_r8);
+    ((int (*)())FUN_000e5384)(param_1,0x70,iVar4,8,argR7,in_r8);
     break;
   case 0x69:
     piVar16 = (int *)0x0;
@@ -1599,11 +1599,11 @@ switchD_000e61ac_caseD_53:
     break;
   case 0x74:
     local_64 = 0x73;
-    ((int (*)())FUN_000e547c)(param_1,0x6f,local_68,0x73,in_r7,in_r8);
+    ((int (*)())FUN_000e547c)(param_1,0x6f,local_68,0x73,argR7,in_r8);
     break;
   case 0x75:
     local_64 = 0x73;
-    ((int (*)())FUN_000e547c)(param_1,0x70,local_68,0x73,in_r7,in_r8);
+    ((int (*)())FUN_000e547c)(param_1,0x70,local_68,0x73,argR7,in_r8);
   }
   goto LAB_000e5e9c;
 LAB_000e7400:
