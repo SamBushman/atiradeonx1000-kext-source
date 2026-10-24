@@ -1,0 +1,214 @@
+use	TGenericLinker__MergeCompilers	iVar8	objectCount	CONFIRMED	number of shader objects of the stage (this+stage*4+0x20); over 10000 is an error	^\s*iVar8\ =\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x20\);$	+1
+use	TGenericLinker__MergeCompilers	iVar8	objectCount	CONFIRMED	number of shader objects of the stage (this+stage*4+0x20); over 10000 is an error	^\s*if\ \(10000\ <\ iVar8\)\ \{$	+1
+use	TGenericLinker__MergeCompilers	iVar8	objectCount	CONFIRMED	number of shader objects of the stage (this+stage*4+0x20); over 10000 is an error	^\s*bVar22\ =\ 10000\ >=\ iVar8;$	+1
+use	TGenericLinker__MergeCompilers	iVar8	objectIndex	CONFIRMED	index of the shader object whose chunk lists are being merged	^\s*iVar8\ =\ 0;$	+1
+use	TGenericLinker__MergeCompilers	iVar8	objectIndex	CONFIRMED	index of the shader object whose chunk lists are being merged	^\s*iVar10\ =\ iVar8\ \*\ 4;$	+1
+use	TGenericLinker__MergeCompilers	iVar8	objectIndex	CONFIRMED	index of the shader object whose chunk lists are being merged	^\s*_sprintf\(local_70,"%04d",iVar8\);$	+1
+use	TGenericLinker__MergeCompilers	iVar8	objectIndex	CONFIRMED	index of the shader object whose chunk lists are being merged	^\s*_sprintf\(local_70,"%04d",iVar8\);$@2	+1
+use	TGenericLinker__MergeCompilers	iVar8	objectIndex	CONFIRMED	index of the shader object whose chunk lists are being merged	^\s*iVar8\ =\ iVar8\ \+\ 1;$	+1
+use	TGenericLinker__MergeCompilers	iVar8	objectIndex	CONFIRMED	index of the shader object whose chunk lists are being merged	^\s*\}\ while\ \(iVar8\ <\ \*\(int\ \*\)\(local_58\ \+\ 0x20\)\);$	+1
+use	TGenericLinker__MergeCompilers	iVar8	objectIndex	CONFIRMED	index of the shader object whose chunk lists are being merged	^\s*iVar8\ =\ 0;$@2	+1
+use	TGenericLinker__MergeCompilers	iVar8	objectIndex	CONFIRMED	index of the shader object whose chunk lists are being merged	^\s*iVar23\ =\ iVar8\ \*\ 4;$	+1
+use	TGenericLinker__MergeCompilers	iVar8	objectIndex	CONFIRMED	index of the shader object whose chunk lists are being merged	^\s*iVar8\ =\ iVar8\ \+\ 1;$@2	+2
+use	TGenericLinker__MergeCompilers	iVar8	objectIndex	CONFIRMED	index of the shader object whose chunk lists are being merged	^\s*iVar8\ =\ 0;$@4	+1
+use	TGenericLinker__MergeCompilers	iVar8	objectIndex	CONFIRMED	index of the shader object whose chunk lists are being merged	^\s*for\ \(iVar11\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar8\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x18\)\)\ \+\ 0x30\);$	+1
+use	TGenericLinker__MergeCompilers	iVar8	objectIndex	CONFIRMED	index of the shader object whose chunk lists are being merged	^\s*iVar8\ =\ iVar8\ \+\ 1;$@3	+2
+use	TGenericLinker__MergeCompilers	iVar8	phase	CONFIRMED	merge phase: 1 = symbols first referenced by the previous object, then 0 (compared with symbol +0x54)	^\s*iVar8\ =\ 1;$	+1
+use	TGenericLinker__MergeCompilers	iVar8	phase	CONFIRMED	merge phase: 1 = symbols first referenced by the previous object, then 0 (compared with symbol +0x54)	^\s*if\ \(iVar8\ ==\ \*\(int\ \*\)\(pPVar18\ \+\ 0x54\)\)\ \{$	+1
+use	TGenericLinker__MergeCompilers	iVar8	phase	CONFIRMED	merge phase: 1 = symbols first referenced by the previous object, then 0 (compared with symbol +0x54)	^\s*if\ \(\(iVar8\ !=\ 0\)\ \&\&\ \(pbVar21\ =\ \*\(byte\ \*\*\)pPVar18,\ pbVar21\ !=\ \(byte\ \*\)0x0\)\)\ \{$	+1
+use	TGenericLinker__MergeCompilers	iVar8	phase	CONFIRMED	merge phase: 1 = symbols first referenced by the previous object, then 0 (compared with symbol +0x54)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+2
+use	TGenericLinker__MergeCompilers	iVar8	maxChunkCount	CONFIRMED	largest per-object chunk count seen so far in the +0xc list	^\s*iVar8\ =\ 0;$@3	+1
+use	TGenericLinker__MergeCompilers	iVar8	maxChunkCount	CONFIRMED	largest per-object chunk count seen so far in the +0xc list	^\s*if\ \(iVar8\ <\ iVar12\)\ \{$	+1
+use	TGenericLinker__MergeCompilers	iVar8	maxChunkCount	CONFIRMED	largest per-object chunk count seen so far in the +0xc list	^\s*iVar8\ =\ iVar12;$	+1
+use	TGenericLinker__MergeCompilers	iVar23	opIndexBase	CONFIRMED	running operation-index offset added to each merged object's operation indices	^\s*iVar23\ =\ 0;$	+1
+use	TGenericLinker__MergeCompilers	iVar23	opIndexBase	CONFIRMED	running operation-index offset added to each merged object's operation indices	^\s*\(\*\(uint\ \*\)\(iVar14\ \+\ 0xc\)\ \&\ 0x3ffff\)\ \+\ iVar23\ \&\ 0x3ffff\ \|$	+1
+use	TGenericLinker__MergeCompilers	iVar23	opIndexBase	CONFIRMED	running operation-index offset added to each merged object's operation indices	^\s*\*\(uint\ \*\)\(iVar14\ \+\ 0x10\)\ =\ \(uVar20\ \&\ 0x3ffff\)\ \+\ iVar23\ \&\ 0x3ffff\ \|\ uVar20\ \&\ 0xfffc0000;$	+1
+use	TGenericLinker__MergeCompilers	iVar23	opIndexBase	CONFIRMED	running operation-index offset added to each merged object's operation indices	^\s*\*\(int\ \*\)\(iVar14\ \+\ 0xc\)\ =\ \*\(int\ \*\)\(iVar14\ \+\ 0xc\)\ \+\ iVar23;$	+1
+use	TGenericLinker__MergeCompilers	iVar23	opIndexBase	CONFIRMED	running operation-index offset added to each merged object's operation indices	^\s*\(\*\(unsigned\ char\ \*\*\)\(pTVar6\ \+\ 0x38\),iVar15,iVar26\ \+\ iVar23\);$	+1
+use	TGenericLinker__MergeCompilers	iVar23	opIndexBase	CONFIRMED	running operation-index offset added to each merged object's operation indices	^\s*\(\*\(unsigned\ char\ \*\*\)\(pTVar6\ \+\ 0x38\),iVar15,iVar26\ \+\ iVar23\);$@2	+1
+use	TGenericLinker__MergeCompilers	iVar23	opIndexBase	CONFIRMED	running operation-index offset added to each merged object's operation indices	^\s*iVar23\ =\ iVar23\ \+\ \*\(int\ \*\)\(iVar10\ \+\ iVar12\);$	+1
+use	TGenericLinker__MergeCompilers	iVar23	symbolObjectIndex	CONFIRMED	index of the shader object whose symbols are being merged	^\s*iVar23\ =\ 0;$@2	+1
+use	TGenericLinker__MergeCompilers	iVar23	symbolObjectIndex	CONFIRMED	index of the shader object whose symbols are being merged	^\s*iVar10\ =\ iVar23\ \*\ 4;$	+1
+use	TGenericLinker__MergeCompilers	iVar23	symbolObjectIndex	CONFIRMED	index of the shader object whose symbols are being merged	^\s*iVar23\ =\ iVar23\ \+\ 1;$	+2
+use	TGenericLinker__MergeCompilers	iVar23	constObjectOffset	CONFIRMED	object index * 4: offset into the per-object arrays while constants are merged	^\s*iVar23\ =\ iVar8\ \*\ 4;$	+1
+use	TGenericLinker__MergeCompilers	iVar23	constObjectOffset	CONFIRMED	object index * 4: offset into the per-object arrays while constants are merged	^\s*\*\*\(undefined4\ \*\*\)\(\*\(int\ \*\)\(iVar23\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x18\)\)\ \+\ 0x10\);$	+1
+use	TGenericLinker__MergeCompilers	iVar23	constObjectOffset	CONFIRMED	object index * 4: offset into the per-object arrays while constants are merged	^\s*UpdateOperations\(\*\(unsigned\ char\ \*\*\)\(iVar23\ \+\ iVar11\),$	+1
+use	TGenericLinker__MergeCompilers	iVar23	constObjectOffset	CONFIRMED	object index * 4: offset into the per-object arrays while constants are merged	^\s*\(\*\(int\ \*\)\(iVar23\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x18\)\)\ \+\ 0x20\),$	+2
+use	TGenericLinker__MergeCompilers	iVar23	constObjectOffset	CONFIRMED	object index * 4: offset into the per-object arrays while constants are merged	^\s*\(\*\(int\ \*\)\(iVar23\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x18\)\)\ \+\ 0x2c\),$	+1
+use	TGenericLinker__MergeCompilers	iVar23	inputChunk	CONFIRMED	chunk cursor over the object's +0xc chunk list (chunk +8 = next)	^\s*for\ \(iVar23\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar11\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x18\)\)\ \+\ 0xc\);$	+2
+use	TGenericLinker__MergeCompilers	iVar23	inputChunk	CONFIRMED	chunk cursor over the object's +0xc chunk list (chunk +8 = next)	^\s*uVar13\ =\ _PPStreamChunkCreateFromChunk\(iVar23\);$	+1
+use	TGenericLinker__MergeCompilers	iVar10	objectByteOffset	CONFIRMED	object index * 4: offset into the per-object arrays	^\s*iVar10\ =\ iVar8\ \*\ 4;$	+2
+use	TGenericLinker__MergeCompilers	iVar10	objectByteOffset	CONFIRMED	object index * 4: offset into the per-object arrays	^\s*if\ \(\*\(int\ \*\)\(iVar10\ \+\ iVar11\)\ ==\ 0\)\ \{$	+2
+use	TGenericLinker__MergeCompilers	iVar10	objectByteOffset	CONFIRMED	object index * 4: offset into the per-object arrays	^\s*\*\(int\ \*\)\(iVar10\ \+\ iVar12\)\ =\ \*\(int\ \*\)\(iVar10\ \+\ iVar12\)\ \+\ 1;$	+1
+use	TGenericLinker__MergeCompilers	iVar10	objectByteOffset	CONFIRMED	object index * 4: offset into the per-object arrays	^\s*for\ \(iVar26\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar10\ \+\ \*\(int\ \*\)\(pTVar28\ \+\ 0x18\)\)\ \+\ 0x24\);$	+1
+use	TGenericLinker__MergeCompilers	iVar10	objectByteOffset	CONFIRMED	object index * 4: offset into the per-object arrays	^\s*this_00\ =\ \*\(unsigned\ char\ \*\*\)\(\*\(int\ \*\)\(iVar10\ \+\ \*\(int\ \*\)\(pTVar28\ \+\ 8\)\)\ \+\ 0x6c\);$	+1
+use	TGenericLinker__MergeCompilers	iVar10	objectByteOffset	CONFIRMED	object index * 4: offset into the per-object arrays	^\s*iVar23\ =\ iVar23\ \+\ \*\(int\ \*\)\(iVar10\ \+\ iVar12\);$	+2
+use	TGenericLinker__MergeCompilers	iVar10	objectByteOffset	CONFIRMED	object index * 4: offset into the per-object arrays	^\s*iVar10\ =\ iVar23\ \*\ 4;$	+1
+use	TGenericLinker__MergeCompilers	iVar10	objectByteOffset	CONFIRMED	object index * 4: offset into the per-object arrays	^\s*\(\*\(unsigned\ char\ \*\*\)\(iVar10\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x10\)\),$	+1
+use	TGenericLinker__MergeCompilers	iVar10	objectByteOffset	CONFIRMED	object index * 4: offset into the per-object arrays	^\s*\(\*\(unsigned\ char\ \*\*\)\(iVar10\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x10\)\),$@2	+1
+use	TGenericLinker__MergeCompilers	iVar10	objectByteOffset	CONFIRMED	object index * 4: offset into the per-object arrays	^\s*\(iVar26\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar10\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x18\)\)\ \+\ 8\),$	+1
+use	TGenericLinker__MergeCompilers	iVar10	objectByteOffset	CONFIRMED	object index * 4: offset into the per-object arrays	^\s*\(iVar26\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar10\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x18\)\)\ \+$	+1
+use	TGenericLinker__MergeCompilers	iVar10	objectByteOffset	CONFIRMED	object index * 4: offset into the per-object arrays	^\s*UpdateOperations\(\*\(unsigned\ char\ \*\*\)\(iVar10\ \+\ iVar11\),$	+1
+use	TGenericLinker__MergeCompilers	iVar10	objectByteOffset	CONFIRMED	object index * 4: offset into the per-object arrays	^\s*\(\*\(int\ \*\)\(iVar10\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x18\)\)\ \+\ 0x20\),$	+2
+use	TGenericLinker__MergeCompilers	iVar10	constantIndex	CONFIRMED	next constant slot of the merged symbol table (+0x24), stored as the new chunk index	^\s*iVar10\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x28\)\ \+\ 0x24\);$	+2
+use	TGenericLinker__MergeCompilers	iVar10	constantIndex	CONFIRMED	next constant slot of the merged symbol table (+0x24), stored as the new chunk index	^\s*\*\(short\ \*\)\(p_Var19\ \+\ 0x12\)\ =\ \(short\)iVar10;$	+1
+use	TGenericLinker__MergeCompilers	iVar10	constantDelta	CONFIRMED	TGenericLinker__FindChunkDelta of the old and new constant chunk	^\s*iVar10\ =\ TGenericLinker__FindChunkDelta\(this,p_Var29,p_Var19\);$	+1
+use	TGenericLinker__MergeCompilers	iVar10	constantDelta	CONFIRMED	TGenericLinker__FindChunkDelta of the old and new constant chunk	^\s*\*\(int\ \*\)\(iVar23\ \+\ iVar12\),p_Var29,1,iVar10\);$	+1
+use	TGenericLinker__MergeCompilers	iVar10	sourceConstant	CONFIRMED	the object's constant at the old chunk index, registered with _PPStreamAddConstant	^\s*iVar10\ =\ _PPStreamChunkListChunkAtIndex$	+1
+use	TGenericLinker__MergeCompilers	iVar10	sourceConstant	CONFIRMED	the object's constant at the old chunk index, registered with _PPStreamAddConstant	^\s*_PPStreamAddConstant\(\*\(undefined4\ \*\)\(this\ \+\ iVar4\ \+\ 0x30\),iVar10\ \+\ 0xc\);$	+1
+use	TGenericLinker__MergeCompilers	iVar26	objectChunk	CONFIRMED	operation chunk cursor over the object's chunk list (chunk +8 = next)	^\s*iVar26\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar10\ \+\ \*\(int\ \*\)\(pTVar28\ \+\ 0x18\)\)\ \+\ 0x20\);$	+3
+use	TGenericLinker__MergeCompilers	iVar26	objectChunk	CONFIRMED	operation chunk cursor over the object's chunk list (chunk +8 = next)	^\s*iVar26\ =\ \*\(int\ \*\)\(iVar26\ \+\ 8\);$	+1
+use	TGenericLinker__MergeCompilers	iVar26	objectChunk	CONFIRMED	operation chunk cursor over the object's chunk list (chunk +8 = next)	^\s*for\ \(iVar26\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar10\ \+\ \*\(int\ \*\)\(pTVar28\ \+\ 0x18\)\)\ \+\ 0x24\);$	+3
+use	TGenericLinker__MergeCompilers	iVar26	objectFunctionCount	CONFIRMED	number of functions in the object's FunctionTable (+4)	^\s*iVar26\ =\ \*\(int\ \*\)\(this_00\ \+\ 4\);$	+2
+use	TGenericLinker__MergeCompilers	iVar26	objectFunctionCount	CONFIRMED	number of functions in the object's FunctionTable (+4)	^\s*iVar26\ =\ \*\(int\ \*\)\(this_00\ \+\ 4\);$@2	+1
+use	TGenericLinker__MergeCompilers	iVar26	objectFunctionCount	CONFIRMED	number of functions in the object's FunctionTable (+4)	^\s*\}\ while\ \(iVar14\ <\ iVar26\);$	+1
+use	TGenericLinker__MergeCompilers	iVar26	nameCompare	CONFIRMED	strcmp of the merged and the object's function names	^\s*iVar26\ =\ _strcmp\(uVar13,uVar17\);$	+2
+use	TGenericLinker__MergeCompilers	iVar26	firstOp	CONFIRMED	FunctionTable__getFirstOp of the merged function	^\s*iVar26\ =\ FunctionTable__getFirstOp\(\*\(unsigned\ char\ \*\*\)\(pTVar6\ \+\ 0x38\),iVar15\);$	+1
+use	TGenericLinker__MergeCompilers	iVar26	firstOp	CONFIRMED	FunctionTable__getFirstOp of the merged function	^\s*\(\*\(unsigned\ char\ \*\*\)\(pTVar6\ \+\ 0x38\),iVar15,iVar26\ \+\ iVar23\);$	+1
+use	TGenericLinker__MergeCompilers	iVar26	lastOp	CONFIRMED	FunctionTable__getLastOp of the merged function	^\s*iVar26\ =\ FunctionTable__getLastOp\(\*\(unsigned\ char\ \*\*\)\(pTVar6\ \+\ 0x38\),iVar15\);$	+1
+use	TGenericLinker__MergeCompilers	iVar26	lastOp	CONFIRMED	FunctionTable__getLastOp of the merged function	^\s*\(\*\(unsigned\ char\ \*\*\)\(pTVar6\ \+\ 0x38\),iVar15,iVar26\ \+\ iVar23\);$@2	+1
+use	TGenericLinker__MergeCompilers	iVar26	formatLength	CONFIRMED	strlen of the error format string	^\s*iVar26\ =\ _strlen\(UNK_a7b7bb18\);$	+1
+use	TGenericLinker__MergeCompilers	iVar26	formatLength	CONFIRMED	strlen of the error format string	^\s*pcVar9\ =\ \(char\ \*\)_malloc\(iVar26\ \+\ iVar14\ \+\ iVar15\ \+\ 1\);$	+1
+use	TGenericLinker__MergeCompilers	iVar26	formatLength	CONFIRMED	strlen of the error format string	^\s*iVar26\ =\ _strlen\(UNK_a7b7bb14\);$	+1
+use	TGenericLinker__MergeCompilers	iVar26	formatLength	CONFIRMED	strlen of the error format string	^\s*pcVar9\ =\ \(char\ \*\)_malloc\(iVar26\ \+\ iVar14\ \+\ iVar15\ \+\ 1\);$@2	+1
+use	TGenericLinker__MergeCompilers	iVar26	formatLength	CONFIRMED	strlen of the error format string	^\s*iVar26\ =\ _strlen\(DAT_a7b7bbc0\);$	+1
+use	TGenericLinker__MergeCompilers	iVar26	formatLength	CONFIRMED	strlen of the error format string	^\s*pcVar9\ =\ \(char\ \*\)_malloc\(iVar26\ \+\ iVar14\ \+\ 1\);$	+1
+use	TGenericLinker__MergeCompilers	iVar26	usageChunk	CONFIRMED	cursor over the object's usage chunk list (chunk +8 = next, +0xe/+0x12 = register indices)	^\s*\(iVar26\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar10\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x18\)\)\ \+\ 8\),$	+2
+use	TGenericLinker__MergeCompilers	iVar26	usageChunk	CONFIRMED	cursor over the object's usage chunk list (chunk +8 = next, +0xe/+0x12 = register indices)	^\s*if\ \(\*\(short\ \*\)\(pbVar21\ \+\ 0x12\)\ ==\ \*\(short\ \*\)\(iVar26\ \+\ 0xe\)\)\ \{$	+1
+use	TGenericLinker__MergeCompilers	iVar26	usageChunk	CONFIRMED	cursor over the object's usage chunk list (chunk +8 = next, +0xe/+0x12 = register indices)	^\s*if\ \(\*\(short\ \*\)\(pbVar21\ \+\ 0x12\)\ ==\ \*\(short\ \*\)\(iVar26\ \+\ 0x12\)\)\ \{$	+1
+use	TGenericLinker__MergeCompilers	iVar26	usageChunk	CONFIRMED	cursor over the object's usage chunk list (chunk +8 = next, +0xe/+0x12 = register indices)	^\s*iVar26\ =\ \*\(int\ \*\)\(iVar26\ \+\ 8\);$@2	+2
+use	TGenericLinker__MergeCompilers	iVar26	usageChunk	CONFIRMED	cursor over the object's usage chunk list (chunk +8 = next, +0xe/+0x12 = register indices)	^\s*\(iVar26\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar10\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x18\)\)\ \+$	+2
+use	TGenericLinker__MergeCompilers	iVar26	usageChunk	CONFIRMED	cursor over the object's usage chunk list (chunk +8 = next, +0xe/+0x12 = register indices)	^\s*if\ \(\*\(short\ \*\)\(pbVar21\ \+\ 0x12\)\ ==\ \*\(short\ \*\)\(iVar26\ \+\ 0xe\)\)\ \{$@2	+1
+use	TGenericLinker__MergeCompilers	iVar26	usageChunk	CONFIRMED	cursor over the object's usage chunk list (chunk +8 = next, +0xe/+0x12 = register indices)	^\s*if\ \(\*\(short\ \*\)\(pbVar21\ \+\ 0x12\)\ ==\ \*\(short\ \*\)\(iVar26\ \+\ 0x12\)\)\ \{$@2	+1
+use	TGenericLinker__MergeCompilers	iVar26	usageChunk	CONFIRMED	cursor over the object's usage chunk list (chunk +8 = next, +0xe/+0x12 = register indices)	^\s*iVar26\ =\ \*\(int\ \*\)\(iVar26\ \+\ 8\);$@3	+2
+use	TGenericLinker__MergeCompilers	iVar26	symbolDelta	CONFIRMED	TGenericLinker__FindChunkDelta of the symbol chunk and the merged symbol chunk	^\s*iVar26\ =\ TGenericLinker__FindChunkDelta\(this,\*\(unsigned\ char\ \*\*\)pPVar18,\(unsigned\ char\ \*\)\*puVar24\)$	+1
+use	TGenericLinker__MergeCompilers	iVar26	symbolDelta	CONFIRMED	TGenericLinker__FindChunkDelta of the symbol chunk and the merged symbol chunk	^\s*if\ \(iVar26\ !=\ 0\)\ \{$	+1
+use	TGenericLinker__MergeCompilers	iVar26	symbolDelta	CONFIRMED	TGenericLinker__FindChunkDelta of the symbol chunk and the merged symbol chunk	^\s*iVar26\);$	+1
+use	TGenericLinker__MergeCompilers	iVar14	newChunk	CONFIRMED	copy of the object's chunk added to the merged stream	^\s*iVar14\ =\ _PPStreamChunkCreateFromChunk\(iVar26\);$	+2
+use	TGenericLinker__MergeCompilers	iVar14	newChunk	CONFIRMED	copy of the object's chunk added to the merged stream	^\s*\*\(int\ \*\)\(iVar10\ \+\ iVar11\)\ =\ iVar14;$	+1
+use	TGenericLinker__MergeCompilers	iVar14	newChunk	CONFIRMED	copy of the object's chunk added to the merged stream	^\s*uVar20\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x10\);$	+4
+use	TGenericLinker__MergeCompilers	iVar14	newChunk	CONFIRMED	copy of the object's chunk added to the merged stream	^\s*\*\(uint\ \*\)\(iVar14\ \+\ 0x10\)\ =\ \(uVar20\ \&\ 0x3ffff\)\ \+\ iVar23\ \&\ 0x3ffff\ \|\ uVar20\ \&\ 0xfffc0000;$	+1
+use	TGenericLinker__MergeCompilers	iVar14	newChunk	CONFIRMED	copy of the object's chunk added to the merged stream	^\s*if\ \(\*\(int\ \*\)\(iVar14\ \+\ 0x40\)\ !=\ 0\)\ \{$	+2
+use	TGenericLinker__MergeCompilers	iVar14	newChunk	CONFIRMED	copy of the object's chunk added to the merged stream	^\s*pcVar16\ =\ \(char\ \*\)\(iVar14\ \+\ 0x44\);$	+1
+use	TGenericLinker__MergeCompilers	iVar14	newChunk	CONFIRMED	copy of the object's chunk added to the merged stream	^\s*iVar14\ =\ _PPStreamChunkCreateFromChunk\(iVar26\);$@2	+5
+use	TGenericLinker__MergeCompilers	iVar14	newChunk	CONFIRMED	copy of the object's chunk added to the merged stream	^\s*pcVar16\ =\ \(char\ \*\)\(iVar14\ \+\ 0x14\);$	+1
+use	TGenericLinker__MergeCompilers	iVar14	digitsLeft	CONFIRMED	label-number characters still to copy (4)	^\s*iVar14\ =\ 4;$	+1
+use	TGenericLinker__MergeCompilers	iVar14	digitsLeft	CONFIRMED	label-number characters still to copy (4)	^\s*iVar14\ =\ iVar14\ \+\ \-1;$	+2
+use	TGenericLinker__MergeCompilers	iVar14	digitsLeft	CONFIRMED	label-number characters still to copy (4)	^\s*iVar14\ =\ 4;$@2	+1
+use	TGenericLinker__MergeCompilers	iVar14	digitsLeft	CONFIRMED	label-number characters still to copy (4)	^\s*iVar14\ =\ iVar14\ \+\ \-1;$@2	+2
+use	TGenericLinker__MergeCompilers	iVar14	functionIndex	CONFIRMED	index of the function in the object's FunctionTable	^\s*iVar14\ =\ 0;$	+1
+use	TGenericLinker__MergeCompilers	iVar14	functionIndex	CONFIRMED	index of the function in the object's FunctionTable	^\s*uVar17\ =\ FunctionTable__getFunctionName\(this_00,iVar14\);$	+1
+use	TGenericLinker__MergeCompilers	iVar14	functionIndex	CONFIRMED	index of the function in the object's FunctionTable	^\s*iVar14\ =\ iVar14\ \+\ 1;$	+2
+use	TGenericLinker__MergeCompilers	iVar14	nameLength	CONFIRMED	strlen of the symbol name in the error text	^\s*iVar14\ =\ _strlen\(uVar13\);$	+1
+use	TGenericLinker__MergeCompilers	iVar14	nameLength	CONFIRMED	strlen of the symbol name in the error text	^\s*pcVar9\ =\ \(char\ \*\)_malloc\(iVar26\ \+\ iVar14\ \+\ iVar15\ \+\ 1\);$	+1
+use	TGenericLinker__MergeCompilers	iVar14	nameLength	CONFIRMED	strlen of the symbol name in the error text	^\s*iVar14\ =\ _strlen\(uVar13\);$@2	+1
+use	TGenericLinker__MergeCompilers	iVar14	nameLength	CONFIRMED	strlen of the symbol name in the error text	^\s*pcVar9\ =\ \(char\ \*\)_malloc\(iVar26\ \+\ iVar14\ \+\ iVar15\ \+\ 1\);$@2	+1
+use	TGenericLinker__MergeCompilers	iVar14	nameLength	CONFIRMED	strlen of the symbol name in the error text	^\s*iVar14\ =\ _strlen\(uVar13\);$@3	+2
+use	TGenericLinker__MergeCompilers	iVar14	vec4Count	CONFIRMED	GetVec4sForType of the symbol type: registers to renumber	^\s*iVar14\ =\ \(\(int\ \(\*\)\(\)\)GetVec4sForType\)\(\(uint\)\*\(ushort\ \*\)\(pPVar18\ \+\ 0x2c\)\);$	+1
+use	TGenericLinker__MergeCompilers	iVar14	vec4Count	CONFIRMED	GetVec4sForType of the symbol type: registers to renumber	^\s*\*\(int\ \*\)\(iVar10\ \+\ iVar12\),\*\(unsigned\ char\ \*\*\)pPVar18,iVar14,$	+1
+use	TGenericLinker__MergeCompilers	iVar15	prefixCompare	CONFIRMED	strncmp of a chunk label with a loop/if label prefix (gl__WhileBody_ ... gl__IfEnd_)	^\s*iVar15\ =\ _strncmp\(iVar25,"gl__WhileBody_",uVar13\);$	+2
+use	TGenericLinker__MergeCompilers	iVar15	prefixCompare	CONFIRMED	strncmp of a chunk label with a loop/if label prefix (gl__WhileBody_ ... gl__IfEnd_)	^\s*iVar15\ =\ _strncmp\(iVar25,"gl__WhileEnd_",uVar13\);$	+2
+use	TGenericLinker__MergeCompilers	iVar15	prefixCompare	CONFIRMED	strncmp of a chunk label with a loop/if label prefix (gl__WhileBody_ ... gl__IfEnd_)	^\s*iVar15\ =\ _strncmp\(iVar25,"gl__WhileStart_",uVar13\);$	+2
+use	TGenericLinker__MergeCompilers	iVar15	prefixCompare	CONFIRMED	strncmp of a chunk label with a loop/if label prefix (gl__WhileBody_ ... gl__IfEnd_)	^\s*iVar15\ =\ _strncmp\(iVar25,"gl__WhileEndIf_",uVar13\);$	+2
+use	TGenericLinker__MergeCompilers	iVar15	prefixCompare	CONFIRMED	strncmp of a chunk label with a loop/if label prefix (gl__WhileBody_ ... gl__IfEnd_)	^\s*iVar15\ =\ _strncmp\(iVar25,"gl__IfElse",uVar13\);$	+2
+use	TGenericLinker__MergeCompilers	iVar15	prefixCompare	CONFIRMED	strncmp of a chunk label with a loop/if label prefix (gl__WhileBody_ ... gl__IfEnd_)	^\s*iVar15\ =\ _strncmp\(iVar25,"gl__IfEnd_",uVar13\);$	+2
+use	TGenericLinker__MergeCompilers	iVar15	prefixCompare	CONFIRMED	strncmp of a chunk label with a loop/if label prefix (gl__WhileBody_ ... gl__IfEnd_)	^\s*iVar15\ =\ _strncmp\(iVar25,"gl__WhileBody_",uVar13\);$@2	+2
+use	TGenericLinker__MergeCompilers	iVar15	prefixCompare	CONFIRMED	strncmp of a chunk label with a loop/if label prefix (gl__WhileBody_ ... gl__IfEnd_)	^\s*iVar15\ =\ _strncmp\(iVar25,"gl__WhileEnd_",uVar13\);$@2	+2
+use	TGenericLinker__MergeCompilers	iVar15	prefixCompare	CONFIRMED	strncmp of a chunk label with a loop/if label prefix (gl__WhileBody_ ... gl__IfEnd_)	^\s*iVar15\ =\ _strncmp\(iVar25,"gl__WhileStart_",uVar13\);$@2	+2
+use	TGenericLinker__MergeCompilers	iVar15	prefixCompare	CONFIRMED	strncmp of a chunk label with a loop/if label prefix (gl__WhileBody_ ... gl__IfEnd_)	^\s*iVar15\ =\ _strncmp\(iVar25,"gl__WhileEndIf_",uVar13\);$@2	+2
+use	TGenericLinker__MergeCompilers	iVar15	prefixCompare	CONFIRMED	strncmp of a chunk label with a loop/if label prefix (gl__WhileBody_ ... gl__IfEnd_)	^\s*iVar15\ =\ _strncmp\(iVar25,"gl__IfElse",uVar13\);$@2	+2
+use	TGenericLinker__MergeCompilers	iVar15	prefixCompare	CONFIRMED	strncmp of a chunk label with a loop/if label prefix (gl__WhileBody_ ... gl__IfEnd_)	^\s*iVar15\ =\ _strncmp\(iVar25,"gl__IfEnd_",uVar13\);$@2	+2
+use	TGenericLinker__MergeCompilers	iVar15	stageFunctionIndex	CONFIRMED	index of the function in the merged stage's FunctionTable	^\s*iVar15\ =\ 0;$	+1
+use	TGenericLinker__MergeCompilers	iVar15	stageFunctionIndex	CONFIRMED	index of the function in the merged stage's FunctionTable	^\s*uVar13\ =\ FunctionTable__getFunctionName\(\*\(unsigned\ char\ \*\*\)\(pTVar6\ \+\ 0x38\),iVar15\);$	+1
+use	TGenericLinker__MergeCompilers	iVar15	stageFunctionIndex	CONFIRMED	index of the function in the merged stage's FunctionTable	^\s*iVar26\ =\ FunctionTable__getFirstOp\(\*\(unsigned\ char\ \*\*\)\(pTVar6\ \+\ 0x38\),iVar15\);$	+1
+use	TGenericLinker__MergeCompilers	iVar15	stageFunctionIndex	CONFIRMED	index of the function in the merged stage's FunctionTable	^\s*\(\*\(unsigned\ char\ \*\*\)\(pTVar6\ \+\ 0x38\),iVar15,iVar26\ \+\ iVar23\);$	+2
+use	TGenericLinker__MergeCompilers	iVar15	stageFunctionIndex	CONFIRMED	index of the function in the merged stage's FunctionTable	^\s*\(\*\(unsigned\ char\ \*\*\)\(pTVar6\ \+\ 0x38\),iVar15,iVar26\ \+\ iVar23\);$@2	+1
+use	TGenericLinker__MergeCompilers	iVar15	stageFunctionIndex	CONFIRMED	index of the function in the merged stage's FunctionTable	^\s*iVar15\ =\ iVar15\ \+\ 1;$	+2
+use	TGenericLinker__MergeCompilers	iVar15	stageNameLength	CONFIRMED	strlen of the stage name (_shaderString[stage])	^\s*iVar15\ =\ _strlen\(\(\&_shaderString\)\[param_2\]\);$	+2
+use	TGenericLinker__MergeCompilers	iVar15	stageNameLength	CONFIRMED	strlen of the stage name (_shaderString[stage])	^\s*iVar15\ =\ _strlen\(\(\&_shaderString\)\[param_2\]\);$@2	+2
+use	TGenericLinker__MergeCompilers	uVar13	newStream	CONFIRMED	the merged PP stream (_PPStreamCreate) stored at stage slot +0x30	^\s*uVar13\ =\ _PPStreamCreate\(\);$	+2
+use	TGenericLinker__MergeCompilers	uVar13	prefixLength	CONFIRMED	strlen of the label prefix being tested	^\s*uVar13\ =\ _strlen\("gl__WhileBody_"\);$	+2
+use	TGenericLinker__MergeCompilers	uVar13	prefixLength	CONFIRMED	strlen of the label prefix being tested	^\s*uVar13\ =\ _strlen\("gl__WhileEnd_"\);$	+2
+use	TGenericLinker__MergeCompilers	uVar13	prefixLength	CONFIRMED	strlen of the label prefix being tested	^\s*uVar13\ =\ _strlen\("gl__WhileStart_"\);$	+2
+use	TGenericLinker__MergeCompilers	uVar13	prefixLength	CONFIRMED	strlen of the label prefix being tested	^\s*uVar13\ =\ _strlen\("gl__WhileEndIf_"\);$	+2
+use	TGenericLinker__MergeCompilers	uVar13	prefixLength	CONFIRMED	strlen of the label prefix being tested	^\s*uVar13\ =\ _strlen\("gl__IfElse"\);$	+2
+use	TGenericLinker__MergeCompilers	uVar13	prefixLength	CONFIRMED	strlen of the label prefix being tested	^\s*uVar13\ =\ _strlen\("gl__IfEnd_"\);$	+2
+use	TGenericLinker__MergeCompilers	uVar13	prefixLength	CONFIRMED	strlen of the label prefix being tested	^\s*uVar13\ =\ _strlen\("gl__WhileBody_"\);$@2	+2
+use	TGenericLinker__MergeCompilers	uVar13	prefixLength	CONFIRMED	strlen of the label prefix being tested	^\s*uVar13\ =\ _strlen\("gl__WhileEnd_"\);$@2	+2
+use	TGenericLinker__MergeCompilers	uVar13	prefixLength	CONFIRMED	strlen of the label prefix being tested	^\s*uVar13\ =\ _strlen\("gl__WhileStart_"\);$@2	+2
+use	TGenericLinker__MergeCompilers	uVar13	prefixLength	CONFIRMED	strlen of the label prefix being tested	^\s*uVar13\ =\ _strlen\("gl__WhileEndIf_"\);$@2	+2
+use	TGenericLinker__MergeCompilers	uVar13	prefixLength	CONFIRMED	strlen of the label prefix being tested	^\s*uVar13\ =\ _strlen\("gl__IfElse"\);$@2	+2
+use	TGenericLinker__MergeCompilers	uVar13	prefixLength	CONFIRMED	strlen of the label prefix being tested	^\s*uVar13\ =\ _strlen\("gl__IfEnd_"\);$@2	+2
+use	TGenericLinker__MergeCompilers	uVar13	existingFunctionName	CONFIRMED	name of the function already in the merged stage's FunctionTable	^\s*uVar13\ =\ FunctionTable__getFunctionName\(\*\(unsigned\ char\ \*\*\)\(pTVar6\ \+\ 0x38\),iVar15\);$	+1
+use	TGenericLinker__MergeCompilers	uVar13	existingFunctionName	CONFIRMED	name of the function already in the merged stage's FunctionTable	^\s*iVar26\ =\ _strcmp\(uVar13,uVar17\);$	+1
+use	TGenericLinker__MergeCompilers	uVar13	symbolName	CONFIRMED	symbol name quoted in the error text	^\s*uVar13\ =\ puVar24\[5\];$	+1
+use	TGenericLinker__MergeCompilers	uVar13	symbolName	CONFIRMED	symbol name quoted in the error text	^\s*iVar14\ =\ _strlen\(uVar13\);$	+1
+use	TGenericLinker__MergeCompilers	uVar13	symbolName	CONFIRMED	symbol name quoted in the error text	^\s*_sprintf\(pcVar9,UNK_a7b7bb18,uVar13,\(\&_shaderString\)\[param_2\]\);$	+1
+use	TGenericLinker__MergeCompilers	uVar13	symbolName	CONFIRMED	symbol name quoted in the error text	^\s*uVar13\ =\ puVar24\[5\];$@2	+1
+use	TGenericLinker__MergeCompilers	uVar13	symbolName	CONFIRMED	symbol name quoted in the error text	^\s*iVar14\ =\ _strlen\(uVar13\);$@2	+1
+use	TGenericLinker__MergeCompilers	uVar13	symbolName	CONFIRMED	symbol name quoted in the error text	^\s*_sprintf\(pcVar9,UNK_a7b7bb14,uVar13,\(\&_shaderString\)\[param_2\]\);$	+1
+use	TGenericLinker__MergeCompilers	uVar13	symbolName	CONFIRMED	symbol name quoted in the error text	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(pPVar18\ \+\ 0x14\);$	+1
+use	TGenericLinker__MergeCompilers	uVar13	symbolName	CONFIRMED	symbol name quoted in the error text	^\s*iVar14\ =\ _strlen\(uVar13\);$@3	+1
+use	TGenericLinker__MergeCompilers	uVar13	symbolName	CONFIRMED	symbol name quoted in the error text	^\s*_sprintf\(pcVar9,UNK_a7b7bb90,uVar13\);$	+1
+use	TGenericLinker__MergeCompilers	uVar13	addFirstUsage	CONFIRMED	AddFromExternalSymbol flag: an earlier object's usage list has a chunk whose +0xe matches	^\s*uVar13\ =\ 0;$	+1
+use	TGenericLinker__MergeCompilers	uVar13	addFirstUsage	CONFIRMED	AddFromExternalSymbol flag: an earlier object's usage list has a chunk whose +0xe matches	^\s*uVar13\ =\ 1;$	+1
+use	TGenericLinker__MergeCompilers	uVar13	addFirstUsage	CONFIRMED	AddFromExternalSymbol flag: an earlier object's usage list has a chunk whose +0xe matches	^\s*uVar13\ =\ 1;$@2	+1
+use	TGenericLinker__MergeCompilers	uVar13	addFirstUsage	CONFIRMED	AddFromExternalSymbol flag: an earlier object's usage list has a chunk whose +0xe matches	^\s*\(\*\(unsigned\ char\ \*\*\)\(this\ \+\ iVar4\ \+\ 0x28\),pPVar18,uVar13,$	+1
+use	TGenericLinker__MergeCompilers	uVar13	newChunkCopy	CONFIRMED	copy of the object's chunk added to the merged stream's list	^\s*uVar13\ =\ _PPStreamChunkCreateFromChunk\(iVar23\);$	+1
+use	TGenericLinker__MergeCompilers	uVar13	newChunkCopy	CONFIRMED	copy of the object's chunk added to the merged stream's list	^\s*\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x30\)\ \+\ 0xc\),uVar13\);$	+1
+use	TGenericLinker__MergeCompilers	uVar13	newChunkCopy	CONFIRMED	copy of the object's chunk added to the merged stream's list	^\s*uVar13\ =\ _PPStreamChunkCreateFromChunk\(iVar11\);$	+2
+use	TGenericLinker__MergeCompilers	uVar17	incomingFunctionName	CONFIRMED	name of the object's function being compared	^\s*uVar17\ =\ FunctionTable__getFunctionName\(this_00,iVar14\);$	+2
+use	TGenericLinker__MergeCompilers	uVar17	patchPrevIndex	CONFIRMED	AddFromExternalSymbol flag: an earlier object's usage list has a chunk whose +0x12 matches	^\s*uVar17\ =\ 0;$	+1
+use	TGenericLinker__MergeCompilers	uVar17	patchPrevIndex	CONFIRMED	AddFromExternalSymbol flag: an earlier object's usage list has a chunk whose +0x12 matches	^\s*uVar17\ =\ 1;$	+1
+use	TGenericLinker__MergeCompilers	uVar17	patchPrevIndex	CONFIRMED	AddFromExternalSymbol flag: an earlier object's usage list has a chunk whose +0x12 matches	^\s*uVar17\ =\ 1;$@2	+1
+use	TGenericLinker__MergeCompilers	uVar17	patchPrevIndex	CONFIRMED	AddFromExternalSymbol flag: an earlier object's usage list has a chunk whose +0x12 matches	^\s*uVar17\);$	+1
+use	TGenericLinker__MergeCompilers	pcVar9	errorText	CONFIRMED	static error text appended to the info sink	^\s*pcVar9\ =\ DAT_a7b7bb0c;$	+1
+use	TGenericLinker__MergeCompilers	pcVar9	errorText	CONFIRMED	static error text appended to the info sink	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar27,pcVar9\);$	+1
+use	TGenericLinker__MergeCompilers	pcVar9	errorText	CONFIRMED	static error text appended to the info sink	^\s*pcVar9\ =\ UNK_a7b7bb10;$	+1
+use	TGenericLinker__MergeCompilers	pcVar9	errorText	CONFIRMED	static error text appended to the info sink	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar27,pcVar9\);$@2	+1
+use	TGenericLinker__MergeCompilers	pcVar9	digitCursor	CONFIRMED	cursor over the four label-number characters being copied	^\s*pcVar9\ =\ local_70;$	+1
+use	TGenericLinker__MergeCompilers	pcVar9	digitCursor	CONFIRMED	cursor over the four label-number characters being copied	^\s*cVar2\ =\ \*pcVar9;$	+2
+use	TGenericLinker__MergeCompilers	pcVar9	digitCursor	CONFIRMED	cursor over the four label-number characters being copied	^\s*pcVar9\ =\ local_70;$@2	+1
+use	TGenericLinker__MergeCompilers	pcVar9	digitCursor	CONFIRMED	cursor over the four label-number characters being copied	^\s*cVar2\ =\ \*pcVar9;$@2	+2
+use	TGenericLinker__MergeCompilers	pcVar9	message	CONFIRMED	malloc'd formatted error text	^\s*pcVar9\ =\ \(char\ \*\)_malloc\(iVar26\ \+\ iVar14\ \+\ iVar15\ \+\ 1\);$	+2
+use	TGenericLinker__MergeCompilers	pcVar9	message	CONFIRMED	malloc'd formatted error text	^\s*pcVar9\ =\ \(char\ \*\)_malloc\(iVar26\ \+\ iVar14\ \+\ iVar15\ \+\ 1\);$@2	+2
+use	TGenericLinker__MergeCompilers	pcVar9	message	CONFIRMED	malloc'd formatted error text	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar27,pcVar9\);$@3	+1
+use	TGenericLinker__MergeCompilers	pcVar9	message	CONFIRMED	malloc'd formatted error text	^\s*_free\(pcVar9\);$	+1
+use	TGenericLinker__MergeCompilers	pcVar9	message	CONFIRMED	malloc'd formatted error text	^\s*pcVar9\ =\ \(char\ \*\)_malloc\(iVar26\ \+\ iVar14\ \+\ 1\);$	+2
+use	TGenericLinker__MergeCompilers	pcVar9	message	CONFIRMED	malloc'd formatted error text	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar27,pcVar9\);$@4	+1
+use	TGenericLinker__MergeCompilers	pcVar9	message	CONFIRMED	malloc'd formatted error text	^\s*_free\(pcVar9\);$@2	+1
+use	TGenericLinker__MergeCompilers	pvVar27	infoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*pvVar27\ =\ \*\(void\ \*\*\)\(this\ \+\ 0x84\);$	+1
+use	TGenericLinker__MergeCompilers	pvVar27	infoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar27,"ERROR:\ "\);$	+3
+use	TGenericLinker__MergeCompilers	pvVar27	infoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*pvVar27\ =\ \*\(void\ \*\*\)\(this\ \+\ 0x84\);$@2	+1
+use	TGenericLinker__MergeCompilers	pvVar27	infoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar27,"ERROR:\ "\);$@2	+2
+use	TGenericLinker__MergeCompilers	pvVar27	infoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar27,"\\n"\);$@2	+1
+use	TGenericLinker__MergeCompilers	pvVar27	infoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*pvVar27\ =\ \*\(void\ \*\*\)\(this\ \+\ 0x84\);$@3	+1
+use	TGenericLinker__MergeCompilers	pvVar27	infoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*pvVar27\ =\ \*\(void\ \*\*\)\(this\ \+\ 0x84\);$@4	+1
+use	TGenericLinker__MergeCompilers	pvVar27	infoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar27,"ERROR:\ "\);$@3	+3
+use	TGenericLinker__MergeCompilers	pvVar27	infoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*pvVar27\ =\ \*\(void\ \*\*\)\(this\ \+\ 0x84\);$@5	+1
+use	TGenericLinker__MergeCompilers	pvVar27	infoSink	CONFIRMED	the linker's info sink (this+0x84)	^\s*__ZN13TInfoSinkBase6appendEPKc\(pvVar27,"ERROR:\ "\);$@4	+3
+use	TGenericLinker__MergeCompilers	pvVar27	newSymbolTable	CONFIRMED	the merged ParseSymbolTable (operator new 0x54) stored at stage slot +0x28	^\s*pvVar27\ =\ operator_new\(0x54\);$	+4
+use	TGenericLinker__MergeCompilers	pvVar27	oldSymbolTable	CONFIRMED	the merged symbol table, destroyed when the merge failed	^\s*pvVar27\ =\ \*\(void\ \*\*\)\(this\ \+\ iVar4\ \+\ 0x28\);$	+1
+use	TGenericLinker__MergeCompilers	pvVar27	oldSymbolTable	CONFIRMED	the merged symbol table, destroyed when the merge failed	^\s*if\ \(pvVar27\ !=\ \(void\ \*\)0x0\)\ \{$	+3
+use	TGenericLinker__MergeCompilers	iVar11	firstChunkOfObject	CONFIRMED	malloc'd per-object array: the first copied chunk of each object	^\s*iVar11\ =\ _malloc\(\*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x20\)\ <<\ 2\);$	+1
+use	TGenericLinker__MergeCompilers	iVar11	firstChunkOfObject	CONFIRMED	malloc'd per-object array: the first copied chunk of each object	^\s*_memset\(iVar11,0,\*\(int\ \*\)\(pTVar28\ \+\ 0x20\)\ <<\ 2\);$	+1
+use	TGenericLinker__MergeCompilers	iVar11	firstChunkOfObject	CONFIRMED	malloc'd per-object array: the first copied chunk of each object	^\s*if\ \(\*\(int\ \*\)\(iVar10\ \+\ iVar11\)\ ==\ 0\)\ \{$	+2
+use	TGenericLinker__MergeCompilers	iVar11	firstChunkOfObject	CONFIRMED	malloc'd per-object array: the first copied chunk of each object	^\s*UpdateOperations\(\*\(unsigned\ char\ \*\*\)\(iVar10\ \+\ iVar11\),$	+1
+use	TGenericLinker__MergeCompilers	iVar11	firstChunkOfObject	CONFIRMED	malloc'd per-object array: the first copied chunk of each object	^\s*UpdateOperations\(\*\(unsigned\ char\ \*\*\)\(iVar23\ \+\ iVar11\),$	+1
+use	TGenericLinker__MergeCompilers	iVar11	objectIndexB	CONFIRMED	object index in the loop that merges the +0xc lists	^\s*iVar11\ =\ 0;$	+1
+use	TGenericLinker__MergeCompilers	iVar11	objectIndexB	CONFIRMED	object index in the loop that merges the +0xc lists	^\s*for\ \(iVar23\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar11\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x18\)\)\ \+\ 0xc\);$	+1
+use	TGenericLinker__MergeCompilers	iVar11	objectIndexB	CONFIRMED	object index in the loop that merges the +0xc lists	^\s*iVar11\ =\ iVar11\ \+\ 1;$	+2
+use	TGenericLinker__MergeCompilers	iVar11	outputChunkCursor	CONFIRMED	cursor over the object's +0x30 chunk list (chunk +8 = next, +0xf compared)	^\s*for\ \(iVar11\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar8\ \*\ 4\ \+\ \*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x18\)\)\ \+\ 0x30\);$	+2
+use	TGenericLinker__MergeCompilers	iVar11	outputChunkCursor	CONFIRMED	cursor over the object's +0x30 chunk list (chunk +8 = next, +0xf compared)	^\s*if\ \(\*\(char\ \*\)\(iVar12\ \+\ 0xf\)\ ==\ \*\(char\ \*\)\(iVar11\ \+\ 0xf\)\)\ goto\ code_r0x97bb2f70;$	+1
+use	TGenericLinker__MergeCompilers	iVar11	outputChunkCursor	CONFIRMED	cursor over the object's +0x30 chunk list (chunk +8 = next, +0xf compared)	^\s*uVar13\ =\ _PPStreamChunkCreateFromChunk\(iVar11\);$	+1
+use	TGenericLinker__MergeCompilers	iVar12	chunkCountOfObject	CONFIRMED	malloc'd per-object array: number of chunks copied from each object	^\s*iVar12\ =\ _malloc\(\*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x20\)\ <<\ 2\);$	+1
+use	TGenericLinker__MergeCompilers	iVar12	chunkCountOfObject	CONFIRMED	malloc'd per-object array: number of chunks copied from each object	^\s*_memset\(iVar12,0,\*\(int\ \*\)\(pTVar28\ \+\ 0x20\)\ <<\ 2\);$	+1
+use	TGenericLinker__MergeCompilers	iVar12	chunkCountOfObject	CONFIRMED	malloc'd per-object array: number of chunks copied from each object	^\s*\*\(int\ \*\)\(iVar10\ \+\ iVar12\)\ =\ \*\(int\ \*\)\(iVar10\ \+\ iVar12\)\ \+\ 1;$	+1
+use	TGenericLinker__MergeCompilers	iVar12	chunkCountOfObject	CONFIRMED	malloc'd per-object array: number of chunks copied from each object	^\s*iVar23\ =\ iVar23\ \+\ \*\(int\ \*\)\(iVar10\ \+\ iVar12\);$	+1
+use	TGenericLinker__MergeCompilers	iVar12	chunkCountOfObject	CONFIRMED	malloc'd per-object array: number of chunks copied from each object	^\s*\*\(int\ \*\)\(iVar10\ \+\ iVar12\),\*\(unsigned\ char\ \*\*\)pPVar18,iVar14,$	+1
+use	TGenericLinker__MergeCompilers	iVar12	chunkCountOfObject	CONFIRMED	malloc'd per-object array: number of chunks copied from each object	^\s*\*\(int\ \*\)\(iVar23\ \+\ iVar12\),p_Var29,1,iVar10\);$	+1
+use	TGenericLinker__MergeCompilers	iVar12	inputCount	CONFIRMED	number of chunks seen in the object's +0xc list	^\s*iVar12\ =\ 0;$	+1
+use	TGenericLinker__MergeCompilers	iVar12	inputCount	CONFIRMED	number of chunks seen in the object's +0xc list	^\s*iVar12\ =\ iVar12\ \+\ 1;$	+2
+use	TGenericLinker__MergeCompilers	iVar12	inputCount	CONFIRMED	number of chunks seen in the object's +0xc list	^\s*iVar8\ =\ iVar12;$	+1
+use	TGenericLinker__MergeCompilers	iVar12	existingOutputChunk	CONFIRMED	cursor over the merged stream's +0x30 list looking for a chunk with the same +0xf	^\s*iVar12\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(this\ \+\ iVar4\ \+\ 0x30\)\ \+\ 0x30\);$	+2
+use	TGenericLinker__MergeCompilers	iVar12	existingOutputChunk	CONFIRMED	cursor over the merged stream's +0x30 list looking for a chunk with the same +0xf	^\s*if\ \(\*\(char\ \*\)\(iVar12\ \+\ 0xf\)\ ==\ \*\(char\ \*\)\(iVar11\ \+\ 0xf\)\)\ goto\ code_r0x97bb2f70;$	+3

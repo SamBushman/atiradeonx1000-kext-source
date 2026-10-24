@@ -1,7 +1,5 @@
 local	TGenericLinker__MergeCompilers	param_2	stage	CONFIRMED	0 selects GL_VERTEX_SHADER (0x8b31) for the merged stream type, otherwise 0x8b30; indexes the per-stage arrays this+stage*4+0x10/0x18/0x20/0x28/0x30
 local	TGenericLinker__MergeCompilers	iVar4	stageOffset	CONFIRMED	param_2 * 4: byte offset into the per-stage pointer arrays of the linker
-local	TGenericLinker__MergeCompilers	iVar11	objectFirstChunk	INFERRED	malloc(objectCount*4) array: first merged operation chunk of each shader object (set when still null)
-local	TGenericLinker__MergeCompilers	iVar12	objectChunkCount	INFERRED	malloc(objectCount*4) array: number of operation chunks each shader object contributed (incremented per chunk); summed into the next object's operation index base
 local	TGenericLinker__MergeCompilers	bVar22	success	CONFIRMED	starts as objectCount <= 10000, cleared on every error, returned; the merged stream/table are freed when it is false
 local	TGenericLinker__MergeCompilers	local_60	stageRequirementMet	INFERRED	0 for the vertex stage, 1 for the fragment stage, set to 1 when an object has its +0xa4 flag; an error is reported when it is still 0
 local	TGenericLinker__MergeCompilers	pTVar28	stageEntry	CONFIRMED	this + stageOffset: the base of the stage's per-array slots (+0x18 streams, +0x30 merged stream, +8 compilers)
@@ -11,20 +9,11 @@ local	TGenericLinker__MergeCompilers	pTVar7	stageEntryCopy3	UNKNOWN	compiler-sav
 local	TGenericLinker__MergeCompilers	local_5c	stageEntrySave1	UNKNOWN	spill slot of stageEntryCopy1
 local	TGenericLinker__MergeCompilers	local_58	stageEntrySave2	UNKNOWN	spill slot of stageEntryCopy2
 local	TGenericLinker__MergeCompilers	local_54	stageEntrySave3	UNKNOWN	spill slot of stageEntryCopy3
-local	TGenericLinker__MergeCompilers	iVar8	objectIndexOrPhase	INFERRED	object count at first, then the object loop index, then the symbol-phase counter (1 down to 0) and the longest chunk-list length
-local	TGenericLinker__MergeCompilers	iVar23	opIndexBaseOrObjectIndex	INFERRED	running operation-index base added to every chunk header word (+= objectChunkCount[i]), later reused as an object index
-local	TGenericLinker__MergeCompilers	iVar10	objectOffsetOrTemp	INFERRED	objectIndex*4 offset into the per-object arrays; reused as a chunk count and a chunk delta
-local	TGenericLinker__MergeCompilers	iVar26	chunkCursorOrTemp	INFERRED	chunk-list cursor (next at +8) and strcmp/delta temporaries
-local	TGenericLinker__MergeCompilers	iVar14	newChunkOrTemp	INFERRED	copy of a chunk made by _PPStreamChunkCreateFromChunk; reused as a loop index and a vec4 count
 local	TGenericLinker__MergeCompilers	iVar25	chunkLabelName	INFERRED	pointer to the label text inside a copied chunk (+0x44 operations, +0x14 other chunks), compared with the gl__While/gl__If prefixes
-local	TGenericLinker__MergeCompilers	iVar15	compareResultOrIndex	INFERRED	strncmp result, then the function-table inner loop index
-local	TGenericLinker__MergeCompilers	uVar13	stringLengthOrArg	INFERRED	strlen of the label prefixes, function names and error-message arguments
-local	TGenericLinker__MergeCompilers	pcVar9	messageOrCharCursor	INFERRED	error-message string pointer, later the source cursor of the 4-digit label number copy
 local	TGenericLinker__MergeCompilers	pcVar16	labelDigitCursor	INFERRED	destination cursor of the 4-character object number written into the label text
 local	TGenericLinker__MergeCompilers	cVar2	labelDigit	CONFIRMED	one character of the %04d object number copied into the label
 local	TGenericLinker__MergeCompilers	local_70	labelNumberText	CONFIRMED	char[16] filled by sprintf("%04d", objectIndex): makes gl__While/gl__If labels unique per object
 local	TGenericLinker__MergeCompilers	this_00	objectFunctionTable	INFERRED	the shader object's FunctionTable (compiler+0x6c) whose function names are matched against the merged table
-local	TGenericLinker__MergeCompilers	pvVar27	infoSinkOrNewTable	INFERRED	the linker info sink (this+0x84) in error paths; first the operator_new(0x54) ParseSymbolTable
 local	TGenericLinker__MergeCompilers	pPVar18	parseSymbol	CONFIRMED	ParseSymbol cursor over the object's symbol table via ParseSymbolTable__NextSymbol
 local	TGenericLinker__MergeCompilers	puVar24	mergedSymbol	CONFIRMED	result of ParseSymbolTable__FindGlobalSymbolByName in the merged table (same name as parseSymbol)
 local	TGenericLinker__MergeCompilers	bVar1	symbolMissing	INFERRED	true when the merged table has no symbol of that name

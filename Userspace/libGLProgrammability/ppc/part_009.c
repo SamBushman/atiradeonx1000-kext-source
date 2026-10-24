@@ -5,6 +5,42 @@ int TGenericLinker__MergeCompilers(this, stage)
   unsigned char * this;
   int stage;
 {
+  int existingOutputChunk;
+  int inputCount;
+  int outputChunkCursor;
+  int objectIndexB;
+  void *oldSymbolTable;
+  void *newSymbolTable;
+  char *message;
+  char *digitCursor;
+  undefined4 patchPrevIndex;
+  undefined4 newChunkCopy;
+  undefined4 addFirstUsage;
+  undefined4 symbolName;
+  undefined4 existingFunctionName;
+  undefined4 prefixLength;
+  int stageNameLength;
+  int stageFunctionIndex;
+  int vec4Count;
+  int nameLength;
+  int functionIndex;
+  int digitsLeft;
+  int symbolDelta;
+  int usageChunk;
+  int formatLength;
+  int lastOp;
+  int firstOp;
+  int nameCompare;
+  int objectFunctionCount;
+  int sourceConstant;
+  int constantDelta;
+  int constantIndex;
+  int inputChunk;
+  int constObjectOffset;
+  int symbolObjectIndex;
+  int maxChunkCount;
+  int phase;
+  int objectIndex;
   bool symbolMissing;
   char labelDigit;
   byte chunkKind;
@@ -12,27 +48,27 @@ int TGenericLinker__MergeCompilers(this, stage)
   unsigned char * stageEntryCopy1;
   unsigned char * stageEntryCopy2;
   unsigned char * stageEntryCopy3;
-  int objectIndexOrPhase;
-  char *messageOrCharCursor;
-  int objectOffsetOrTemp;
-  int objectFirstChunk;
-  int objectChunkCount;
-  undefined4 stringLengthOrArg;
-  int newChunkOrTemp;
-  int compareResultOrIndex;
+  int objectCount;
+  char *errorText;
+  int objectByteOffset;
+  int firstChunkOfObject;
+  int chunkCountOfObject;
+  undefined4 newStream;
+  int newChunk;
+  int prefixCompare;
   char *labelDigitCursor;
-  undefined4 uVar17;
+  undefined4 incomingFunctionName;
   unsigned char * parseSymbol;
   unsigned char * newConstantChunk;
   uint chunkWord;
   byte *symbolChunk;
   bool success;
-  int opIndexBaseOrObjectIndex;
+  int opIndexBase;
   undefined4 *mergedSymbol;
   unsigned char * objectFunctionTable;
   int chunkLabelName;
-  int chunkCursorOrTemp;
-  void *infoSinkOrNewTable;
+  int objectChunk;
+  void *infoSink;
   unsigned char * stageEntry;
   unsigned char * constantChunk;
   char labelNumberText [16];
@@ -42,26 +78,26 @@ int TGenericLinker__MergeCompilers(this, stage)
   unsigned char * stageEntrySave3;
   
   stageOffset = stage * 4;
-  objectFirstChunk = _malloc(*(int *)(this + stageOffset + 0x20) << 2);
-  objectChunkCount = _malloc(*(int *)(this + stageOffset + 0x20) << 2);
-  messageOrCharCursor = DAT_a7b7bb0c;
-  objectIndexOrPhase = *(int *)(this + stageOffset + 0x20);
+  firstChunkOfObject = _malloc(*(int *)(this + stageOffset + 0x20) << 2);
+  chunkCountOfObject = _malloc(*(int *)(this + stageOffset + 0x20) << 2);
+  errorText = DAT_a7b7bb0c;
+  objectCount = *(int *)(this + stageOffset + 0x20);
   stageRequirementMet = 0;
-  if (10000 < objectIndexOrPhase) {
-    infoSinkOrNewTable = *(void **)(this + 0x84);
+  if (10000 < objectCount) {
+    infoSink = *(void **)(this + 0x84);
                     
-    __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"ERROR: ");
-    __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,messageOrCharCursor);
-    __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"\n");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,errorText);
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
   }
-  success = 10000 >= objectIndexOrPhase;
+  success = 10000 >= objectCount;
   if (success) {
-    stringLengthOrArg = _PPStreamCreate();
-    *(undefined4 *)(this + stageOffset + 0x30) = stringLengthOrArg;
-    infoSinkOrNewTable = operator_new(0x54);
-    __ZN16ParseSymbolTableC1Ej(infoSinkOrNewTable,0x80);
-    *(void **)(this + stageOffset + 0x28) = infoSinkOrNewTable;
-    *(undefined4 *)((int)infoSinkOrNewTable + 0xc) = *(undefined4 *)(this + stageOffset + 0x30);
+    newStream = _PPStreamCreate();
+    *(undefined4 *)(this + stageOffset + 0x30) = newStream;
+    newSymbolTable = operator_new(0x54);
+    __ZN16ParseSymbolTableC1Ej(newSymbolTable,0x80);
+    *(void **)(this + stageOffset + 0x28) = newSymbolTable;
+    *(undefined4 *)((int)newSymbolTable + 0xc) = *(undefined4 *)(this + stageOffset + 0x30);
     if (stage == 0) {
       **(undefined4 **)(this + 0x30) = 0x8b31;
       stageRequirementMet = 0;
@@ -75,10 +111,10 @@ int TGenericLinker__MergeCompilers(this, stage)
   }
   if (success) {
     stageEntry = this + stageOffset;
-    objectIndexOrPhase = 0;
-    opIndexBaseOrObjectIndex = 0;
-    _memset(objectFirstChunk,0,*(int *)(stageEntry + 0x20) << 2);
-    _memset(objectChunkCount,0,*(int *)(stageEntry + 0x20) << 2);
+    objectIndex = 0;
+    opIndexBase = 0;
+    _memset(firstChunkOfObject,0,*(int *)(stageEntry + 0x20) << 2);
+    _memset(chunkCountOfObject,0,*(int *)(stageEntry + 0x20) << 2);
     stageEntryCopy1 = stageEntry;
     stageEntryCopy2 = stageEntry;
     stageEntryCopy3 = stageEntry;
@@ -87,172 +123,172 @@ int TGenericLinker__MergeCompilers(this, stage)
         stageEntrySave3 = stageEntryCopy3;
         stageEntrySave2 = stageEntryCopy2;
         stageEntrySave1 = stageEntryCopy1;
-        objectOffsetOrTemp = objectIndexOrPhase * 4;
-        chunkCursorOrTemp = **(int **)(*(int *)(objectOffsetOrTemp + *(int *)(stageEntry + 0x18)) + 0x20);
-        while (chunkCursorOrTemp != 0) {
-          newChunkOrTemp = _PPStreamChunkCreateFromChunk(chunkCursorOrTemp);
-          _PPStreamChunkListAddChunk(*(undefined4 *)(*(int *)(stageEntry + 0x30) + 0x20),newChunkOrTemp);
-          if (*(int *)(objectOffsetOrTemp + objectFirstChunk) == 0) {
-            *(int *)(objectOffsetOrTemp + objectFirstChunk) = newChunkOrTemp;
+        objectByteOffset = objectIndex * 4;
+        objectChunk = **(int **)(*(int *)(objectByteOffset + *(int *)(stageEntry + 0x18)) + 0x20);
+        while (objectChunk != 0) {
+          newChunk = _PPStreamChunkCreateFromChunk(objectChunk);
+          _PPStreamChunkListAddChunk(*(undefined4 *)(*(int *)(stageEntry + 0x30) + 0x20),newChunk);
+          if (*(int *)(objectByteOffset + firstChunkOfObject) == 0) {
+            *(int *)(objectByteOffset + firstChunkOfObject) = newChunk;
           }
-          chunkWord = *(uint *)(newChunkOrTemp + 0x10);
-          *(uint *)(newChunkOrTemp + 0xc) =
-               (*(uint *)(newChunkOrTemp + 0xc) & 0x3ffff) + opIndexBaseOrObjectIndex & 0x3ffff |
-               *(uint *)(newChunkOrTemp + 0xc) & 0xfffc0000;
+          chunkWord = *(uint *)(newChunk + 0x10);
+          *(uint *)(newChunk + 0xc) =
+               (*(uint *)(newChunk + 0xc) & 0x3ffff) + opIndexBase & 0x3ffff |
+               *(uint *)(newChunk + 0xc) & 0xfffc0000;
           if ((chunkWord & 0x3ffff) != 0) {
-            *(uint *)(newChunkOrTemp + 0x10) = (chunkWord & 0x3ffff) + opIndexBaseOrObjectIndex & 0x3ffff | chunkWord & 0xfffc0000;
+            *(uint *)(newChunk + 0x10) = (chunkWord & 0x3ffff) + opIndexBase & 0x3ffff | chunkWord & 0xfffc0000;
           }
-          if (*(int *)(newChunkOrTemp + 0x40) != 0) {
-            chunkLabelName = newChunkOrTemp + 0x44;
-            stringLengthOrArg = _strlen("gl__WhileBody_");
-            compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileBody_",stringLengthOrArg);
-            if (compareResultOrIndex != 0) {
-              stringLengthOrArg = _strlen("gl__WhileEnd_");
-              compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileEnd_",stringLengthOrArg);
-              if (compareResultOrIndex != 0) {
-                stringLengthOrArg = _strlen("gl__WhileStart_");
-                compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileStart_",stringLengthOrArg);
-                if (compareResultOrIndex != 0) {
-                  stringLengthOrArg = _strlen("gl__WhileEndIf_");
-                  compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileEndIf_",stringLengthOrArg);
-                  if (compareResultOrIndex != 0) {
-                    stringLengthOrArg = _strlen("gl__IfElse");
-                    compareResultOrIndex = _strncmp(chunkLabelName,"gl__IfElse",stringLengthOrArg);
-                    if (compareResultOrIndex != 0) {
-                      stringLengthOrArg = _strlen("gl__IfEnd_");
-                      compareResultOrIndex = _strncmp(chunkLabelName,"gl__IfEnd_",stringLengthOrArg);
-                      if (compareResultOrIndex != 0) goto code_r0x97bb257c;
+          if (*(int *)(newChunk + 0x40) != 0) {
+            chunkLabelName = newChunk + 0x44;
+            prefixLength = _strlen("gl__WhileBody_");
+            prefixCompare = _strncmp(chunkLabelName,"gl__WhileBody_",prefixLength);
+            if (prefixCompare != 0) {
+              prefixLength = _strlen("gl__WhileEnd_");
+              prefixCompare = _strncmp(chunkLabelName,"gl__WhileEnd_",prefixLength);
+              if (prefixCompare != 0) {
+                prefixLength = _strlen("gl__WhileStart_");
+                prefixCompare = _strncmp(chunkLabelName,"gl__WhileStart_",prefixLength);
+                if (prefixCompare != 0) {
+                  prefixLength = _strlen("gl__WhileEndIf_");
+                  prefixCompare = _strncmp(chunkLabelName,"gl__WhileEndIf_",prefixLength);
+                  if (prefixCompare != 0) {
+                    prefixLength = _strlen("gl__IfElse");
+                    prefixCompare = _strncmp(chunkLabelName,"gl__IfElse",prefixLength);
+                    if (prefixCompare != 0) {
+                      prefixLength = _strlen("gl__IfEnd_");
+                      prefixCompare = _strncmp(chunkLabelName,"gl__IfEnd_",prefixLength);
+                      if (prefixCompare != 0) goto code_r0x97bb257c;
                     }
                   }
                 }
               }
             }
-            _sprintf(labelNumberText,"%04d",objectIndexOrPhase);
-            labelDigitCursor = (char *)(newChunkOrTemp + 0x44);
-            messageOrCharCursor = labelNumberText;
-            newChunkOrTemp = 4;
+            _sprintf(labelNumberText,"%04d",objectIndex);
+            labelDigitCursor = (char *)(newChunk + 0x44);
+            digitCursor = labelNumberText;
+            digitsLeft = 4;
             do {
-              labelDigit = *messageOrCharCursor;
-              messageOrCharCursor = messageOrCharCursor + 1;
+              labelDigit = *digitCursor;
+              digitCursor = digitCursor + 1;
               *labelDigitCursor = labelDigit;
               labelDigitCursor = labelDigitCursor + 1;
-              newChunkOrTemp = newChunkOrTemp + -1;
-            } while (newChunkOrTemp != 0);
+              digitsLeft = digitsLeft + -1;
+            } while (digitsLeft != 0);
           }
 code_r0x97bb257c:
-          chunkCursorOrTemp = *(int *)(chunkCursorOrTemp + 8);
-          *(int *)(objectOffsetOrTemp + objectChunkCount) = *(int *)(objectOffsetOrTemp + objectChunkCount) + 1;
+          objectChunk = *(int *)(objectChunk + 8);
+          *(int *)(objectByteOffset + chunkCountOfObject) = *(int *)(objectByteOffset + chunkCountOfObject) + 1;
         }
         stageEntryCopy1 = stageEntrySave1;
         stageEntryCopy2 = stageEntrySave3;
-        for (chunkCursorOrTemp = **(int **)(*(int *)(objectOffsetOrTemp + *(int *)(stageEntry + 0x18)) + 0x24);
-            stageEntrySave1 = stageEntryCopy1, stageEntrySave3 = stageEntryCopy2, chunkCursorOrTemp != 0; chunkCursorOrTemp = *(int *)(chunkCursorOrTemp + 8)) {
-          newChunkOrTemp = _PPStreamChunkCreateFromChunk(chunkCursorOrTemp);
-          _PPStreamChunkListAddChunk(*(undefined4 *)(*(int *)(stageEntry + 0x30) + 0x24),newChunkOrTemp);
-          *(int *)(newChunkOrTemp + 0xc) = *(int *)(newChunkOrTemp + 0xc) + opIndexBaseOrObjectIndex;
-          if (*(int *)(newChunkOrTemp + 0x10) != 0) {
-            chunkLabelName = newChunkOrTemp + 0x14;
-            stringLengthOrArg = _strlen("gl__WhileBody_");
-            compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileBody_",stringLengthOrArg);
-            if (compareResultOrIndex != 0) {
-              stringLengthOrArg = _strlen("gl__WhileEnd_");
-              compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileEnd_",stringLengthOrArg);
-              if (compareResultOrIndex != 0) {
-                stringLengthOrArg = _strlen("gl__WhileStart_");
-                compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileStart_",stringLengthOrArg);
-                if (compareResultOrIndex != 0) {
-                  stringLengthOrArg = _strlen("gl__WhileEndIf_");
-                  compareResultOrIndex = _strncmp(chunkLabelName,"gl__WhileEndIf_",stringLengthOrArg);
-                  if (compareResultOrIndex != 0) {
-                    stringLengthOrArg = _strlen("gl__IfElse");
-                    compareResultOrIndex = _strncmp(chunkLabelName,"gl__IfElse",stringLengthOrArg);
-                    if (compareResultOrIndex != 0) {
-                      stringLengthOrArg = _strlen("gl__IfEnd_");
-                      compareResultOrIndex = _strncmp(chunkLabelName,"gl__IfEnd_",stringLengthOrArg);
-                      if (compareResultOrIndex != 0) goto code_r0x97bb26e0;
+        for (objectChunk = **(int **)(*(int *)(objectByteOffset + *(int *)(stageEntry + 0x18)) + 0x24);
+            stageEntrySave1 = stageEntryCopy1, stageEntrySave3 = stageEntryCopy2, objectChunk != 0; objectChunk = *(int *)(objectChunk + 8)) {
+          newChunk = _PPStreamChunkCreateFromChunk(objectChunk);
+          _PPStreamChunkListAddChunk(*(undefined4 *)(*(int *)(stageEntry + 0x30) + 0x24),newChunk);
+          *(int *)(newChunk + 0xc) = *(int *)(newChunk + 0xc) + opIndexBase;
+          if (*(int *)(newChunk + 0x10) != 0) {
+            chunkLabelName = newChunk + 0x14;
+            prefixLength = _strlen("gl__WhileBody_");
+            prefixCompare = _strncmp(chunkLabelName,"gl__WhileBody_",prefixLength);
+            if (prefixCompare != 0) {
+              prefixLength = _strlen("gl__WhileEnd_");
+              prefixCompare = _strncmp(chunkLabelName,"gl__WhileEnd_",prefixLength);
+              if (prefixCompare != 0) {
+                prefixLength = _strlen("gl__WhileStart_");
+                prefixCompare = _strncmp(chunkLabelName,"gl__WhileStart_",prefixLength);
+                if (prefixCompare != 0) {
+                  prefixLength = _strlen("gl__WhileEndIf_");
+                  prefixCompare = _strncmp(chunkLabelName,"gl__WhileEndIf_",prefixLength);
+                  if (prefixCompare != 0) {
+                    prefixLength = _strlen("gl__IfElse");
+                    prefixCompare = _strncmp(chunkLabelName,"gl__IfElse",prefixLength);
+                    if (prefixCompare != 0) {
+                      prefixLength = _strlen("gl__IfEnd_");
+                      prefixCompare = _strncmp(chunkLabelName,"gl__IfEnd_",prefixLength);
+                      if (prefixCompare != 0) goto code_r0x97bb26e0;
                     }
                   }
                 }
               }
             }
-            _sprintf(labelNumberText,"%04d",objectIndexOrPhase);
-            labelDigitCursor = (char *)(newChunkOrTemp + 0x14);
-            messageOrCharCursor = labelNumberText;
-            newChunkOrTemp = 4;
+            _sprintf(labelNumberText,"%04d",objectIndex);
+            labelDigitCursor = (char *)(newChunk + 0x14);
+            digitCursor = labelNumberText;
+            digitsLeft = 4;
             do {
-              labelDigit = *messageOrCharCursor;
-              messageOrCharCursor = messageOrCharCursor + 1;
+              labelDigit = *digitCursor;
+              digitCursor = digitCursor + 1;
               *labelDigitCursor = labelDigit;
               labelDigitCursor = labelDigitCursor + 1;
-              newChunkOrTemp = newChunkOrTemp + -1;
-            } while (newChunkOrTemp != 0);
+              digitsLeft = digitsLeft + -1;
+            } while (digitsLeft != 0);
           }
 code_r0x97bb26e0:
           stageEntryCopy1 = stageEntrySave1;
           stageEntryCopy2 = stageEntrySave3;
         }
-        newChunkOrTemp = 0;
-        objectFunctionTable = *(unsigned char **)(*(int *)(objectOffsetOrTemp + *(int *)(stageEntry + 8)) + 0x6c);
-        chunkCursorOrTemp = *(int *)(objectFunctionTable + 4);
-        if (0 < chunkCursorOrTemp) {
+        functionIndex = 0;
+        objectFunctionTable = *(unsigned char **)(*(int *)(objectByteOffset + *(int *)(stageEntry + 8)) + 0x6c);
+        objectFunctionCount = *(int *)(objectFunctionTable + 4);
+        if (0 < objectFunctionCount) {
           do {
-            compareResultOrIndex = 0;
+            stageFunctionIndex = 0;
             if (0 < *(int *)(*(int *)(stageEntryCopy1 + 0x38) + 4)) {
               do {
-                stringLengthOrArg = FunctionTable__getFunctionName(*(unsigned char **)(stageEntryCopy2 + 0x38),compareResultOrIndex);
-                uVar17 = FunctionTable__getFunctionName(objectFunctionTable,newChunkOrTemp);
-                chunkCursorOrTemp = _strcmp(stringLengthOrArg,uVar17);
-                if (chunkCursorOrTemp == 0) {
-                  chunkCursorOrTemp = FunctionTable__getFirstOp(*(unsigned char **)(stageEntryCopy2 + 0x38),compareResultOrIndex);
+                existingFunctionName = FunctionTable__getFunctionName(*(unsigned char **)(stageEntryCopy2 + 0x38),stageFunctionIndex);
+                incomingFunctionName = FunctionTable__getFunctionName(objectFunctionTable,functionIndex);
+                nameCompare = _strcmp(existingFunctionName,incomingFunctionName);
+                if (nameCompare == 0) {
+                  firstOp = FunctionTable__getFirstOp(*(unsigned char **)(stageEntryCopy2 + 0x38),stageFunctionIndex);
                   FunctionTable__setFirstOp
-                            (*(unsigned char **)(stageEntryCopy2 + 0x38),compareResultOrIndex,chunkCursorOrTemp + opIndexBaseOrObjectIndex);
-                  chunkCursorOrTemp = FunctionTable__getLastOp(*(unsigned char **)(stageEntryCopy2 + 0x38),compareResultOrIndex);
+                            (*(unsigned char **)(stageEntryCopy2 + 0x38),stageFunctionIndex,firstOp + opIndexBase);
+                  lastOp = FunctionTable__getLastOp(*(unsigned char **)(stageEntryCopy2 + 0x38),stageFunctionIndex);
                   FunctionTable__setLastOp
-                            (*(unsigned char **)(stageEntryCopy2 + 0x38),compareResultOrIndex,chunkCursorOrTemp + opIndexBaseOrObjectIndex);
+                            (*(unsigned char **)(stageEntryCopy2 + 0x38),stageFunctionIndex,lastOp + opIndexBase);
                 }
-                compareResultOrIndex = compareResultOrIndex + 1;
-              } while (compareResultOrIndex < *(int *)(*(int *)(stageEntryCopy2 + 0x38) + 4));
-              chunkCursorOrTemp = *(int *)(objectFunctionTable + 4);
+                stageFunctionIndex = stageFunctionIndex + 1;
+              } while (stageFunctionIndex < *(int *)(*(int *)(stageEntryCopy2 + 0x38) + 4));
+              objectFunctionCount = *(int *)(objectFunctionTable + 4);
             }
-            newChunkOrTemp = newChunkOrTemp + 1;
-          } while (newChunkOrTemp < chunkCursorOrTemp);
+            functionIndex = functionIndex + 1;
+          } while (functionIndex < objectFunctionCount);
         }
-        opIndexBaseOrObjectIndex = opIndexBaseOrObjectIndex + *(int *)(objectOffsetOrTemp + objectChunkCount);
-        if (*(int *)(*(int *)(objectOffsetOrTemp + *(int *)(stageEntrySave2 + 8)) + 0xa4) != 0) {
+        opIndexBase = opIndexBase + *(int *)(objectByteOffset + chunkCountOfObject);
+        if (*(int *)(*(int *)(objectByteOffset + *(int *)(stageEntrySave2 + 8)) + 0xa4) != 0) {
           stageRequirementMet = 1;
         }
-        objectIndexOrPhase = objectIndexOrPhase + 1;
+        objectIndex = objectIndex + 1;
         stageEntryCopy1 = stageEntrySave1;
         stageEntryCopy2 = stageEntrySave2;
         stageEntryCopy3 = stageEntrySave3;
-      } while (objectIndexOrPhase < *(int *)(stageEntrySave2 + 0x20));
+      } while (objectIndex < *(int *)(stageEntrySave2 + 0x20));
     }
-    messageOrCharCursor = UNK_a7b7bb10;
+    errorText = UNK_a7b7bb10;
     if (stageRequirementMet == 0) {
-      infoSinkOrNewTable = *(void **)(this + 0x84);
+      infoSink = *(void **)(this + 0x84);
                     
-      __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"ERROR: ");
-      __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,messageOrCharCursor);
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,errorText);
       success = false;
-      __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"\n");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
     }
   }
   if (success) {
-    objectIndexOrPhase = 1;
+    phase = 1;
     do {
-      opIndexBaseOrObjectIndex = 0;
+      symbolObjectIndex = 0;
       if (0 < *(int *)(this + stageOffset + 0x20)) {
         do {
-          objectOffsetOrTemp = opIndexBaseOrObjectIndex * 4;
+          objectByteOffset = symbolObjectIndex * 4;
           for (parseSymbol = (unsigned char *)
                          ParseSymbolTable__NextSymbol
-                                   (*(unsigned char **)(objectOffsetOrTemp + *(int *)(this + stageOffset + 0x10)),
+                                   (*(unsigned char **)(objectByteOffset + *(int *)(this + stageOffset + 0x10)),
                                     (unsigned char *)0x0); parseSymbol != (unsigned char *)0x0;
               parseSymbol = (unsigned char *)
                         ParseSymbolTable__NextSymbol
-                                  (*(unsigned char **)(objectOffsetOrTemp + *(int *)(this + stageOffset + 0x10)),
+                                  (*(unsigned char **)(objectByteOffset + *(int *)(this + stageOffset + 0x10)),
                                    parseSymbol)) {
-            if (objectIndexOrPhase == *(int *)(parseSymbol + 0x54)) {
+            if (phase == *(int *)(parseSymbol + 0x54)) {
               mergedSymbol = (undefined4 *)0x0;
               if (*(int *)(parseSymbol + 0x38) == 0) {
                 symbolMissing = true;
@@ -269,180 +305,180 @@ code_r0x97bb2ab4:
                   if (*(short *)(mergedSymbol + 0xb) == *(short *)(parseSymbol + 0x2c)) {
                     if (*(short *)((int)mergedSymbol + 0x2e) == *(short *)(parseSymbol + 0x2e))
                     goto code_r0x97bb2ab4;
-                    stringLengthOrArg = mergedSymbol[5];
-                    chunkCursorOrTemp = _strlen(UNK_a7b7bb18);
-                    newChunkOrTemp = _strlen(stringLengthOrArg);
-                    compareResultOrIndex = _strlen((&_shaderString)[stage]);
-                    messageOrCharCursor = (char *)_malloc(chunkCursorOrTemp + newChunkOrTemp + compareResultOrIndex + 1);
-                    _sprintf(messageOrCharCursor,UNK_a7b7bb18,stringLengthOrArg,(&_shaderString)[stage]);
-                    infoSinkOrNewTable = *(void **)(this + 0x84);
+                    symbolName = mergedSymbol[5];
+                    formatLength = _strlen(UNK_a7b7bb18);
+                    nameLength = _strlen(symbolName);
+                    stageNameLength = _strlen((&_shaderString)[stage]);
+                    message = (char *)_malloc(formatLength + nameLength + stageNameLength + 1);
+                    _sprintf(message,UNK_a7b7bb18,symbolName,(&_shaderString)[stage]);
+                    infoSink = *(void **)(this + 0x84);
                     
                   }
                   else {
-                    stringLengthOrArg = mergedSymbol[5];
-                    chunkCursorOrTemp = _strlen(UNK_a7b7bb14);
-                    newChunkOrTemp = _strlen(stringLengthOrArg);
-                    compareResultOrIndex = _strlen((&_shaderString)[stage]);
-                    messageOrCharCursor = (char *)_malloc(chunkCursorOrTemp + newChunkOrTemp + compareResultOrIndex + 1);
-                    _sprintf(messageOrCharCursor,UNK_a7b7bb14,stringLengthOrArg,(&_shaderString)[stage]);
-                    infoSinkOrNewTable = *(void **)(this + 0x84);
+                    symbolName = mergedSymbol[5];
+                    formatLength = _strlen(UNK_a7b7bb14);
+                    nameLength = _strlen(symbolName);
+                    stageNameLength = _strlen((&_shaderString)[stage]);
+                    message = (char *)_malloc(formatLength + nameLength + stageNameLength + 1);
+                    _sprintf(message,UNK_a7b7bb14,symbolName,(&_shaderString)[stage]);
+                    infoSink = *(void **)(this + 0x84);
                     
                   }
-                  __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"ERROR: ");
-                  __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,messageOrCharCursor);
-                  __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"\n");
-                  _free(messageOrCharCursor);
+                  __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+                  __ZN13TInfoSinkBase6appendEPKc(infoSink,message);
+                  __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
+                  _free(message);
                   success = false;
                   goto code_r0x97bb2ab4;
                 }
 code_r0x97bb2ab8:
-                stringLengthOrArg = 0;
-                uVar17 = 0;
-                if ((objectIndexOrPhase != 0) && (symbolChunk = *(byte **)parseSymbol, symbolChunk != (byte *)0x0)) {
+                addFirstUsage = 0;
+                patchPrevIndex = 0;
+                if ((phase != 0) && (symbolChunk = *(byte **)parseSymbol, symbolChunk != (byte *)0x0)) {
                   chunkKind = *symbolChunk;
                   if (chunkKind != 2) {
                     if (chunkKind < 3) {
                       if ((chunkKind == 0) &&
-                         (chunkCursorOrTemp = **(int **)(*(int *)(objectOffsetOrTemp + *(int *)(this + stageOffset + 0x18)) + 8),
-                         chunkCursorOrTemp != 0)) {
+                         (usageChunk = **(int **)(*(int *)(objectByteOffset + *(int *)(this + stageOffset + 0x18)) + 8),
+                         usageChunk != 0)) {
                         do {
-                          if (*(short *)(symbolChunk + 0x12) == *(short *)(chunkCursorOrTemp + 0xe)) {
-                            stringLengthOrArg = 1;
+                          if (*(short *)(symbolChunk + 0x12) == *(short *)(usageChunk + 0xe)) {
+                            addFirstUsage = 1;
                           }
-                          if (*(short *)(symbolChunk + 0x12) == *(short *)(chunkCursorOrTemp + 0x12)) {
-                            uVar17 = 1;
+                          if (*(short *)(symbolChunk + 0x12) == *(short *)(usageChunk + 0x12)) {
+                            patchPrevIndex = 1;
                           }
-                          chunkCursorOrTemp = *(int *)(chunkCursorOrTemp + 8);
-                        } while (chunkCursorOrTemp != 0);
+                          usageChunk = *(int *)(usageChunk + 8);
+                        } while (usageChunk != 0);
                       }
                     }
                     else if ((chunkKind == 3) &&
-                            (chunkCursorOrTemp = **(int **)(*(int *)(objectOffsetOrTemp + *(int *)(this + stageOffset + 0x18)) +
-                                                0x14), chunkCursorOrTemp != 0)) {
+                            (usageChunk = **(int **)(*(int *)(objectByteOffset + *(int *)(this + stageOffset + 0x18)) +
+                                                0x14), usageChunk != 0)) {
                       do {
-                        if (*(short *)(symbolChunk + 0x12) == *(short *)(chunkCursorOrTemp + 0xe)) {
-                          stringLengthOrArg = 1;
+                        if (*(short *)(symbolChunk + 0x12) == *(short *)(usageChunk + 0xe)) {
+                          addFirstUsage = 1;
                         }
-                        if (*(short *)(symbolChunk + 0x12) == *(short *)(chunkCursorOrTemp + 0x12)) {
-                          uVar17 = 1;
+                        if (*(short *)(symbolChunk + 0x12) == *(short *)(usageChunk + 0x12)) {
+                          patchPrevIndex = 1;
                         }
-                        chunkCursorOrTemp = *(int *)(chunkCursorOrTemp + 8);
-                      } while (chunkCursorOrTemp != 0);
+                        usageChunk = *(int *)(usageChunk + 8);
+                      } while (usageChunk != 0);
                     }
                   }
                 }
                 mergedSymbol = (undefined4 *)
                           ParseSymbolTable__AddFromExternalSymbol
-                                    (*(unsigned char **)(this + stageOffset + 0x28),parseSymbol,stringLengthOrArg,
-                                     uVar17);
+                                    (*(unsigned char **)(this + stageOffset + 0x28),parseSymbol,addFirstUsage,
+                                     patchPrevIndex);
               }
               if ((success != true) || (mergedSymbol == (undefined4 *)0x0)) {
                 if ((success == true) && (mergedSymbol == (undefined4 *)0x0)) {
-                  stringLengthOrArg = *(undefined4 *)(parseSymbol + 0x14);
-                  chunkCursorOrTemp = _strlen(DAT_a7b7bbc0);
-                  newChunkOrTemp = _strlen(stringLengthOrArg);
-                  messageOrCharCursor = (char *)_malloc(chunkCursorOrTemp + newChunkOrTemp + 1);
-                  _sprintf(messageOrCharCursor,UNK_a7b7bb90,stringLengthOrArg);
-                  infoSinkOrNewTable = *(void **)(this + 0x84);
+                  symbolName = *(undefined4 *)(parseSymbol + 0x14);
+                  formatLength = _strlen(DAT_a7b7bbc0);
+                  nameLength = _strlen(symbolName);
+                  message = (char *)_malloc(formatLength + nameLength + 1);
+                  _sprintf(message,UNK_a7b7bb90,symbolName);
+                  infoSink = *(void **)(this + 0x84);
                     
-                  __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"ERROR: ");
-                  __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,messageOrCharCursor);
-                  __ZN13TInfoSinkBase6appendEPKc(infoSinkOrNewTable,"\n");
-                  _free(messageOrCharCursor);
+                  __ZN13TInfoSinkBase6appendEPKc(infoSink,"ERROR: ");
+                  __ZN13TInfoSinkBase6appendEPKc(infoSink,message);
+                  __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
+                  _free(message);
                   success = false;
                 }
               }
               else {
-                chunkCursorOrTemp = TGenericLinker__FindChunkDelta(this,*(unsigned char **)parseSymbol,(unsigned char *)*mergedSymbol)
+                symbolDelta = TGenericLinker__FindChunkDelta(this,*(unsigned char **)parseSymbol,(unsigned char *)*mergedSymbol)
                 ;
-                if (chunkCursorOrTemp != 0) {
-                  newChunkOrTemp = ((int (*)())GetVec4sForType)((uint)*(ushort *)(parseSymbol + 0x2c));
-                  UpdateOperations(*(unsigned char **)(objectOffsetOrTemp + objectFirstChunk),
+                if (symbolDelta != 0) {
+                  vec4Count = ((int (*)())GetVec4sForType)((uint)*(ushort *)(parseSymbol + 0x2c));
+                  UpdateOperations(*(unsigned char **)(objectByteOffset + firstChunkOfObject),
                                    (unsigned char *)
                                    **(undefined4 **)
-                                     (*(int *)(objectOffsetOrTemp + *(int *)(this + stageOffset + 0x18)) + 0x20),
-                                   *(int *)(objectOffsetOrTemp + objectChunkCount),*(unsigned char **)parseSymbol,newChunkOrTemp,
-                                   chunkCursorOrTemp);
+                                     (*(int *)(objectByteOffset + *(int *)(this + stageOffset + 0x18)) + 0x20),
+                                   *(int *)(objectByteOffset + chunkCountOfObject),*(unsigned char **)parseSymbol,vec4Count,
+                                   symbolDelta);
                 }
               }
             }
           }
-          opIndexBaseOrObjectIndex = opIndexBaseOrObjectIndex + 1;
-        } while (opIndexBaseOrObjectIndex < *(int *)(this + stageOffset + 0x20));
+          symbolObjectIndex = symbolObjectIndex + 1;
+        } while (symbolObjectIndex < *(int *)(this + stageOffset + 0x20));
       }
-      objectIndexOrPhase = objectIndexOrPhase + -1;
-    } while (-1 < objectIndexOrPhase);
+      phase = phase + -1;
+    } while (-1 < phase);
     if (success == true) {
-      objectIndexOrPhase = 0;
+      objectIndex = 0;
       if (0 < *(int *)(this + stageOffset + 0x20)) {
         do {
-          opIndexBaseOrObjectIndex = objectIndexOrPhase * 4;
+          constObjectOffset = objectIndex * 4;
           for (constantChunk = (unsigned char *)
-                         **(undefined4 **)(*(int *)(opIndexBaseOrObjectIndex + *(int *)(this + stageOffset + 0x18)) + 0x10);
+                         **(undefined4 **)(*(int *)(constObjectOffset + *(int *)(this + stageOffset + 0x18)) + 0x10);
               constantChunk != (unsigned char *)0x0; constantChunk = *(unsigned char **)(constantChunk + 8)) {
             chunkWord = *(uint *)(constantChunk + 0xc);
             if ((chunkWord & 0x1f0000) == 0x110000) {
-              objectOffsetOrTemp = *(int *)(*(int *)(this + stageOffset + 0x28) + 0x24);
-              *(int *)(*(int *)(this + stageOffset + 0x28) + 0x24) = objectOffsetOrTemp + 1;
+              constantIndex = *(int *)(*(int *)(this + stageOffset + 0x28) + 0x24);
+              *(int *)(*(int *)(this + stageOffset + 0x28) + 0x24) = constantIndex + 1;
               newConstantChunk = (unsigned char *)_PPStreamChunkCreateFromChunk(constantChunk);
               _PPStreamChunkListAddChunk
                         (*(undefined4 *)(*(int *)(this + stageOffset + 0x30) + 0x10),newConstantChunk);
-              *(short *)(newConstantChunk + 0x12) = (short)objectOffsetOrTemp;
-              objectOffsetOrTemp = TGenericLinker__FindChunkDelta(this,constantChunk,newConstantChunk);
-              UpdateOperations(*(unsigned char **)(opIndexBaseOrObjectIndex + objectFirstChunk),
+              *(short *)(newConstantChunk + 0x12) = (short)constantIndex;
+              constantDelta = TGenericLinker__FindChunkDelta(this,constantChunk,newConstantChunk);
+              UpdateOperations(*(unsigned char **)(constObjectOffset + firstChunkOfObject),
                                (unsigned char *)
                                **(undefined4 **)
-                                 (*(int *)(opIndexBaseOrObjectIndex + *(int *)(this + stageOffset + 0x18)) + 0x20),
-                               *(int *)(opIndexBaseOrObjectIndex + objectChunkCount),constantChunk,1,objectOffsetOrTemp);
+                                 (*(int *)(constObjectOffset + *(int *)(this + stageOffset + 0x18)) + 0x20),
+                               *(int *)(constObjectOffset + chunkCountOfObject),constantChunk,1,constantDelta);
               *(undefined2 *)(newConstantChunk + 0xe) =
                    *(undefined2 *)(*(int *)(*(int *)(this + stageOffset + 0x30) + 0x2c) + 10);
-              objectOffsetOrTemp = _PPStreamChunkListChunkAtIndex
+              sourceConstant = _PPStreamChunkListChunkAtIndex
                                  (*(undefined4 *)
-                                   (*(int *)(opIndexBaseOrObjectIndex + *(int *)(this + stageOffset + 0x18)) + 0x2c),
+                                   (*(int *)(constObjectOffset + *(int *)(this + stageOffset + 0x18)) + 0x2c),
                                   chunkWord & 0xffff);
-              _PPStreamAddConstant(*(undefined4 *)(this + stageOffset + 0x30),objectOffsetOrTemp + 0xc);
+              _PPStreamAddConstant(*(undefined4 *)(this + stageOffset + 0x30),sourceConstant + 0xc);
             }
           }
-          objectIndexOrPhase = objectIndexOrPhase + 1;
-        } while (objectIndexOrPhase < *(int *)(this + stageOffset + 0x20));
+          objectIndex = objectIndex + 1;
+        } while (objectIndex < *(int *)(this + stageOffset + 0x20));
       }
-      objectFirstChunk = 0;
-      objectIndexOrPhase = 0;
+      objectIndexB = 0;
+      maxChunkCount = 0;
       if (0 < *(int *)(this + stageOffset + 0x20)) {
         do {
-          objectChunkCount = 0;
-          for (opIndexBaseOrObjectIndex = **(int **)(*(int *)(objectFirstChunk * 4 + *(int *)(this + stageOffset + 0x18)) + 0xc);
-              opIndexBaseOrObjectIndex != 0; opIndexBaseOrObjectIndex = *(int *)(opIndexBaseOrObjectIndex + 8)) {
-            objectChunkCount = objectChunkCount + 1;
-            if (objectIndexOrPhase < objectChunkCount) {
-              stringLengthOrArg = _PPStreamChunkCreateFromChunk(opIndexBaseOrObjectIndex);
+          inputCount = 0;
+          for (inputChunk = **(int **)(*(int *)(objectIndexB * 4 + *(int *)(this + stageOffset + 0x18)) + 0xc);
+              inputChunk != 0; inputChunk = *(int *)(inputChunk + 8)) {
+            inputCount = inputCount + 1;
+            if (maxChunkCount < inputCount) {
+              newChunkCopy = _PPStreamChunkCreateFromChunk(inputChunk);
               _PPStreamChunkListAddChunk
-                        (*(undefined4 *)(*(int *)(this + stageOffset + 0x30) + 0xc),stringLengthOrArg);
-              objectIndexOrPhase = objectChunkCount;
+                        (*(undefined4 *)(*(int *)(this + stageOffset + 0x30) + 0xc),newChunkCopy);
+              maxChunkCount = inputCount;
             }
           }
-          objectFirstChunk = objectFirstChunk + 1;
-        } while (objectFirstChunk < *(int *)(this + stageOffset + 0x20));
+          objectIndexB = objectIndexB + 1;
+        } while (objectIndexB < *(int *)(this + stageOffset + 0x20));
       }
-      objectIndexOrPhase = 0;
+      objectIndex = 0;
       if (0 < *(int *)(this + stageOffset + 0x20)) {
         do {
-          for (objectFirstChunk = **(int **)(*(int *)(objectIndexOrPhase * 4 + *(int *)(this + stageOffset + 0x18)) + 0x30);
-              objectFirstChunk != 0; objectFirstChunk = *(int *)(objectFirstChunk + 8)) {
-            objectChunkCount = **(int **)(*(int *)(this + stageOffset + 0x30) + 0x30);
-            if (objectChunkCount != 0) {
+          for (outputChunkCursor = **(int **)(*(int *)(objectIndex * 4 + *(int *)(this + stageOffset + 0x18)) + 0x30);
+              outputChunkCursor != 0; outputChunkCursor = *(int *)(outputChunkCursor + 8)) {
+            existingOutputChunk = **(int **)(*(int *)(this + stageOffset + 0x30) + 0x30);
+            if (existingOutputChunk != 0) {
               do {
-                if (*(char *)(objectChunkCount + 0xf) == *(char *)(objectFirstChunk + 0xf)) goto code_r0x97bb2f70;
-                objectChunkCount = *(int *)(objectChunkCount + 8);
-              } while (objectChunkCount != 0);
+                if (*(char *)(existingOutputChunk + 0xf) == *(char *)(outputChunkCursor + 0xf)) goto code_r0x97bb2f70;
+                existingOutputChunk = *(int *)(existingOutputChunk + 8);
+              } while (existingOutputChunk != 0);
             }
-            stringLengthOrArg = _PPStreamChunkCreateFromChunk(objectFirstChunk);
-            _PPStreamChunkListAddChunk(*(undefined4 *)(*(int *)(this + stageOffset + 0x30) + 0x30),stringLengthOrArg)
+            newChunkCopy = _PPStreamChunkCreateFromChunk(outputChunkCursor);
+            _PPStreamChunkListAddChunk(*(undefined4 *)(*(int *)(this + stageOffset + 0x30) + 0x30),newChunkCopy)
             ;
 code_r0x97bb2f70: ;
           }
-          objectIndexOrPhase = objectIndexOrPhase + 1;
-        } while (objectIndexOrPhase < *(int *)(this + stageOffset + 0x20));
+          objectIndex = objectIndex + 1;
+        } while (objectIndex < *(int *)(this + stageOffset + 0x20));
       }
     }
   }
@@ -450,11 +486,11 @@ code_r0x97bb2f70: ;
     if (*(int *)(this + stageOffset + 0x30) != 0) {
       _PPStreamFree(*(int *)(this + stageOffset + 0x30));
     }
-    infoSinkOrNewTable = *(void **)(this + stageOffset + 0x28);
+    oldSymbolTable = *(void **)(this + stageOffset + 0x28);
     *(undefined4 *)(this + stageOffset + 0x30) = 0;
-    if (infoSinkOrNewTable != (void *)0x0) {
-      __ZN16ParseSymbolTableD1Ev(infoSinkOrNewTable);
-      __ZdlPv(infoSinkOrNewTable);
+    if (oldSymbolTable != (void *)0x0) {
+      __ZN16ParseSymbolTableD1Ev(oldSymbolTable);
+      __ZdlPv(oldSymbolTable);
     }
     *(undefined4 *)(this + stageOffset + 0x28) = 0;
   }
