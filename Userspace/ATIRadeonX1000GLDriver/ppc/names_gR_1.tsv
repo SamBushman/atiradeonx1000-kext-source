@@ -1,0 +1,217 @@
+use	FUN_00050300	uVar8	rb3dDitherCtl	INFERRED	field rb3d_dither_ctl of the GLD context (ctx+0x1d30)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1af0\);$	+1
+use	FUN_00050300	uVar8	rb3dDitherCtl	INFERRED	field rb3d_dither_ctl of the GLD context (ctx+0x1d30)	^\s*puVar2\[1\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	vapCntlStatus	INFERRED	field vap_cntl_status of the GLD context (ctx+0x1dc0)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b80\);$	+1
+use	FUN_00050300	uVar8	vapCntlStatus	INFERRED	field vap_cntl_status of the GLD context (ctx+0x1dc0)	^\s*puVar2\[3\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	suCullMode	INFERRED	field su_cull_mode of the GLD context (ctx+0x1d70)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b30\);$	+1
+use	FUN_00050300	uVar8	suCullMode	INFERRED	field su_cull_mode of the GLD context (ctx+0x1d70)	^\s*puVar2\[6\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gaRoundMode	INFERRED	register GA_ROUND_MODE (0x428c) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d88	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b48\);$	+1
+use	FUN_00050300	uVar8	gaRoundMode	INFERRED	register GA_ROUND_MODE (0x428c) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d88	^\s*puVar2\[9\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gaLineCntl	INFERRED	register GA_LINE_CNTL (0x4234) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d80	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b40\);$	+1
+use	FUN_00050300	uVar8	gaLineCntl	INFERRED	register GA_LINE_CNTL (0x4234) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d80	^\s*puVar2\[0xb\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gbEnable	INFERRED	field gb_enable of the GLD context (ctx+0x1d90)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b50\);$	+1
+use	FUN_00050300	uVar8	gbEnable	INFERRED	field gb_enable of the GLD context (ctx+0x1d90)	^\s*puVar2\[0xd\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gaTriangleStipple	INFERRED	register GA_TRIANGLE_STIPPLE (0x4214) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d94	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b54\);$	+1
+use	FUN_00050300	uVar8	gaTriangleStipple	INFERRED	register GA_TRIANGLE_STIPPLE (0x4214) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d94	^\s*puVar2\[0xf\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gaLineStippleConfig	INFERRED	register GA_LINE_STIPPLE_CONFIG (0x4238) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1da4	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b64\);$	+1
+use	FUN_00050300	uVar8	gaLineStippleConfig	INFERRED	register GA_LINE_STIPPLE_CONFIG (0x4238) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1da4	^\s*puVar2\[0x11\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gaLineStippleValue	INFERRED	register GA_LINE_STIPPLE_VALUE (0x4260) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1da8	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b68\);$	+1
+use	FUN_00050300	uVar8	gaLineStippleValue	INFERRED	register GA_LINE_STIPPLE_VALUE (0x4260) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1da8	^\s*puVar2\[0x13\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gaLineS1	INFERRED	register GA_LINE_S1 (0x4268) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1db0	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b70\);$	+1
+use	FUN_00050300	uVar8	gaLineS1	INFERRED	register GA_LINE_S1 (0x4268) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1db0	^\s*puVar2\[0x16\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gbAaConfig	INFERRED	field gb_aa_config of the GLD context (ctx+0x1ca0)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a60\);$	+1
+use	FUN_00050300	uVar8	gbAaConfig	INFERRED	field gb_aa_config of the GLD context (ctx+0x1ca0)	^\s*puVar2\[0x1b\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gbMspos1	INFERRED	field gb_mspos1 of the GLD context (ctx+0x1cac)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a6c\);$	+1
+use	FUN_00050300	uVar8	gbMspos1	INFERRED	field gb_mspos1 of the GLD context (ctx+0x1cac)	^\s*puVar2\[0x1e\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	scScreendoor	INFERRED	field sc_screendoor of the GLD context (ctx+0x1da0)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b60\);$	+1
+use	FUN_00050300	uVar8	scScreendoor	INFERRED	field sc_screendoor of the GLD context (ctx+0x1da0)	^\s*puVar2\[0x20\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	rb3dAaresolveCtl	INFERRED	register RB3D_AARESOLVE_CTL (0x4e88) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x2600	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x23c0\);$	+1
+use	FUN_00050300	uVar8	rb3dAaresolveCtl	INFERRED	register RB3D_AARESOLVE_CTL (0x4e88) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x2600	^\s*puVar2\[0x22\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gaEnhance	INFERRED	register GA_ENHANCE (0x4274) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d8c	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b4c\);$	+1
+use	FUN_00050300	uVar8	gaEnhance	INFERRED	register GA_ENHANCE (0x4274) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d8c	^\s*puVar2\[0x24\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	suTexWrap	INFERRED	register SU_TEX_WRAP (0x42a0) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d68	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b28\);$	+1
+use	FUN_00050300	uVar8	suTexWrap	INFERRED	register SU_TEX_WRAP (0x42a0) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d68	^\s*puVar2\[0x26\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	rb3dColorClearValue	INFERRED	register RB3D_COLOR_CLEAR_VALUE (0x4e14) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cd4	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a94\);$	+1
+use	FUN_00050300	uVar8	rb3dColorClearValue	INFERRED	register RB3D_COLOR_CLEAR_VALUE (0x4e14) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cd4	^\s*puVar2\[0x2d\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gaFogOffset	INFERRED	register GA_FOG_OFFSET (0x4298) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cb8	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a78\);$	+1
+use	FUN_00050300	uVar8	gaFogOffset	INFERRED	register GA_FOG_OFFSET (0x4298) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cb8	^\s*puVar2\[0x30\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gaColorControl	INFERRED	register GA_COLOR_CONTROL (0x4278) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d6c	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b2c\);$	+1
+use	FUN_00050300	uVar8	gaColorControl	INFERRED	register GA_COLOR_CONTROL (0x4278) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d6c	^\s*puVar2\[0x32\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	ctxWord1ee0	INFERRED	load of ctx+0x1ee0	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1ca0\);$	+1
+use	FUN_00050300	uVar8	ctxWord1ee0	INFERRED	load of ctx+0x1ee0	^\s*puVar2\[0x34\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	vapOutVtxFmt1	INFERRED	field vap_out_vtx_fmt_1 of the GLD context (ctx+0x1de0)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1ba0\);$	+1
+use	FUN_00050300	uVar8	vapOutVtxFmt1	INFERRED	field vap_out_vtx_fmt_1 of the GLD context (ctx+0x1de0)	^\s*puVar2\[0x37\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	vapVtxSize	INFERRED	field vap_vtx_size of the GLD context (ctx+0x26cc)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x248c\);$	+1
+use	FUN_00050300	uVar8	vapVtxSize	INFERRED	field vap_vtx_size of the GLD context (ctx+0x26cc)	^\s*puVar2\[0x3a\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	vapVtxStateCntl	INFERRED	register VAP_VTX_STATE_CNTL (0x2180) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1db8	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b78\);$	+1
+use	FUN_00050300	uVar8	vapVtxStateCntl	INFERRED	register VAP_VTX_STATE_CNTL (0x2180) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1db8	^\s*puVar2\[0x3c\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	vapClipCntl	INFERRED	field vap_clip_cntl of the GLD context (ctx+0x1db4)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1b74\);$	+1
+use	FUN_00050300	uVar8	vapClipCntl	INFERRED	field vap_clip_cntl of the GLD context (ctx+0x1db4)	^\s*puVar2\[0x3e\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	vapPscSgnNormCntl	INFERRED	register VAP_PSC_SGN_NORM_CNTL (0x21dc) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1ef8	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1cb8\);$	+1
+use	FUN_00050300	uVar8	vapPscSgnNormCntl	INFERRED	register VAP_PSC_SGN_NORM_CNTL (0x21dc) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1ef8	^\s*puVar2\[0x42\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	scEdgerule	INFERRED	field sc_edgerule of the GLD context (ctx+0x1cfc)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1abc\);$	+1
+use	FUN_00050300	uVar8	scEdgerule	INFERRED	field sc_edgerule of the GLD context (ctx+0x1cfc)	^\s*puVar2\[0x4b\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gaColorControl1df8	INFERRED	field ga_color_control of the GLD context (ctx+0x1df8)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1bb8\);$	+1
+use	FUN_00050300	uVar8	gaColorControl1df8	INFERRED	field ga_color_control of the GLD context (ctx+0x1df8)	^\s*puVar2\[0x4d\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gbPs3Enable	INFERRED	field gb_ps3_enable of the GLD context (ctx+0x1dfc)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1bbc\);$	+1
+use	FUN_00050300	uVar8	gbPs3Enable	INFERRED	field gb_ps3_enable of the GLD context (ctx+0x1dfc)	^\s*puVar2\[0x4f\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	ps3TexSource	INFERRED	register PS3_TEX_SOURCE (0x4120) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1e00	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1bc0\);$	+1
+use	FUN_00050300	uVar8	ps3TexSource	INFERRED	register PS3_TEX_SOURCE (0x4120) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1e00	^\s*puVar2\[0x51\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	ps3VtxFmt	INFERRED	register PS3_VTX_FMT (0x411c) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1df0	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1bb0\);$	+1
+use	FUN_00050300	uVar8	ps3VtxFmt	INFERRED	register PS3_VTX_FMT (0x411c) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1df0	^\s*puVar2\[0x53\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	suTexWrapPs3	INFERRED	register SU_TEX_WRAP_PS3 (0x4114) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1e04	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1bc4\);$	+1
+use	FUN_00050300	uVar8	suTexWrapPs3	INFERRED	register SU_TEX_WRAP_PS3 (0x4114) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1e04	^\s*puVar2\[0x55\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	vapTexToColorCntl	INFERRED	register VAP_TEX_TO_COLOR_CNTL (0x2218) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1e08	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1bc8\);$	+1
+use	FUN_00050300	uVar8	vapTexToColorCntl	INFERRED	register VAP_TEX_TO_COLOR_CNTL (0x2218) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1e08	^\s*puVar2\[0x57\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	ctxWord1e0c	INFERRED	load of ctx+0x1e0c	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1bcc\);$	+1
+use	FUN_00050300	uVar8	ctxWord1e0c	INFERRED	load of ctx+0x1e0c	^\s*puVar2\[0x5b\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	ctxWord1e10	INFERRED	load of ctx+0x1e10	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1bd0\);$	+1
+use	FUN_00050300	uVar8	ctxWord1e10	INFERRED	load of ctx+0x1e10	^\s*puVar2\[0x5d\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	ctxWord1e14	INFERRED	load of ctx+0x1e14	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1bd4\);$	+1
+use	FUN_00050300	uVar8	ctxWord1e14	INFERRED	load of ctx+0x1e14	^\s*puVar2\[0x5f\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gaPointMinmax	INFERRED	register GA_POINT_MINMAX (0x4230) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1f10	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1cd0\);$	+1
+use	FUN_00050300	uVar8	gaPointMinmax	INFERRED	register GA_POINT_MINMAX (0x4230) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1f10	^\s*puVar2\[1\]\ =\ uVar8;$@3	+1
+use	FUN_00050300	uVar8	gaPointSize	INFERRED	field ga_point_size of the GLD context (ctx+0x1f0c)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1ccc\);$	+1
+use	FUN_00050300	uVar8	gaPointSize	INFERRED	field ga_point_size of the GLD context (ctx+0x1f0c)	^\s*puVar2\[3\]\ =\ uVar8;$@3	+1
+use	FUN_00050300	uVar8	rb3dRopcntl	INFERRED	field rb3d_ropcntl of the GLD context (ctx+0x1d38)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1af8\);$	+1
+use	FUN_00050300	uVar8	rb3dRopcntl	INFERRED	field rb3d_ropcntl of the GLD context (ctx+0x1d38)	^\s*puVar3\[1\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	fgDepthSrc	INFERRED	register FG_DEPTH_SRC (0x4bd8) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1c90	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a50\);$	+1
+use	FUN_00050300	uVar8	fgDepthSrc	INFERRED	register FG_DEPTH_SRC (0x4bd8) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1c90	^\s*puVar2\[2\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	fgAlphaValue	INFERRED	register FG_ALPHA_VALUE (0x4be0) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1e1c	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1bdc\);$	+1
+use	FUN_00050300	uVar8	fgAlphaValue	INFERRED	register FG_ALPHA_VALUE (0x4be0) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1e1c	^\s*puVar2\[4\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	fgFogColorB	INFERRED	register FG_FOG_COLOR_B (0x4bd0) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1c9c	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a5c\);$	+1
+use	FUN_00050300	uVar8	fgFogColorB	INFERRED	register FG_FOG_COLOR_B (0x4bd0) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1c9c	^\s*puVar2\[8\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gbSelect	INFERRED	register GB_SELECT (0x401c) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1ca4	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a64\);$	+1
+use	FUN_00050300	uVar8	gbSelect	INFERRED	register GB_SELECT (0x401c) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1ca4	^\s*puVar2\[10\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	gaSolidBa	INFERRED	register GA_SOLID_BA (0x4280) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cb4	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a74\);$	+1
+use	FUN_00050300	uVar8	gaSolidBa	INFERRED	register GA_SOLID_BA (0x4280) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cb4	^\s*puVar2\[0xf\]\ =\ uVar8;$@2	+1
+use	FUN_00050300	uVar8	rb3dAblendcntl	INFERRED	register RB3D_ABLENDCNTL (0x4e08) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cc4	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a84\);$	+1
+use	FUN_00050300	uVar8	rb3dAblendcntl	INFERRED	register RB3D_ABLENDCNTL (0x4e08) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cc4	^\s*puVar2\[0x12\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	rb3dConstantColor	INFERRED	register RB3D_CONSTANT_COLOR (0x4e10) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cc8	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a88\);$	+1
+use	FUN_00050300	uVar8	rb3dConstantColor	INFERRED	register RB3D_CONSTANT_COLOR (0x4e10) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cc8	^\s*puVar2\[0x14\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	rb3dConstantColorAr	INFERRED	register RB3D_CONSTANT_COLOR_AR (0x4ef8) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1ccc	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a8c\);$	+1
+use	FUN_00050300	uVar8	rb3dConstantColorAr	INFERRED	register RB3D_CONSTANT_COLOR_AR (0x4ef8) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1ccc	^\s*puVar2\[0x16\]\ =\ uVar8;$@2	+1
+use	FUN_00050300	uVar8	rb3dConstantColorGb	INFERRED	register RB3D_CONSTANT_COLOR_GB (0x4efc) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cd0	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1a90\);$	+1
+use	FUN_00050300	uVar8	rb3dConstantColorGb	INFERRED	register RB3D_CONSTANT_COLOR_GB (0x4efc) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cd0	^\s*puVar2\[0x18\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	zbZtop	INFERRED	register ZB_ZTOP (0x4f14) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cf8	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1ab8\);$	+1
+use	FUN_00050300	uVar8	zbZtop	INFERRED	register ZB_ZTOP (0x4f14) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1cf8	^\s*puVar2\[0x1a\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	zbZstencilcntl	INFERRED	field zb_zstencilcntl of the GLD context (ctx+0x1ce4)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x1aa4\);$	+1
+use	FUN_00050300	uVar8	zbZstencilcntl	INFERRED	field zb_zstencilcntl of the GLD context (ctx+0x1ce4)	^\s*puVar2\[0x1d\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	suDepthOffset	INFERRED	register SU_DEPTH_OFFSET (0x42c4) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d74	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(0x00001b34\ \+\ param_1\);$	+1
+use	FUN_00050300	uVar8	suDepthOffset	INFERRED	register SU_DEPTH_OFFSET (0x42c4) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x1d74	^\s*puVar2\[0x20\]\ =\ uVar8;$@2	+1
+use	FUN_00050300	uVar8	gbZPeqConfig	INFERRED	register GB_Z_PEQ_CONFIG (0x4028) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x2594	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x2354\);$	+1
+use	FUN_00050300	uVar8	gbZPeqConfig	INFERRED	register GB_Z_PEQ_CONFIG (0x4028) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x2594	^\s*puVar2\[0x22\]\ =\ uVar8;$@2	+1
+use	FUN_00050300	uVar8	ctxWord2598	INFERRED	load of ctx+0x2598	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x2358\);$	+1
+use	FUN_00050300	uVar8	ctxWord2598	INFERRED	load of ctx+0x2598	^\s*puVar2\[0x25\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	ctxWord25b0	INFERRED	load of ctx+0x25b0	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x2370\);$	+1
+use	FUN_00050300	uVar8	ctxWord25b0	INFERRED	load of ctx+0x25b0	^\s*puVar2\[0x2b\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	ctxWord25c0	INFERRED	load of ctx+0x25c0	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x2380\);$	+1
+use	FUN_00050300	uVar8	ctxWord25c0	INFERRED	load of ctx+0x25c0	^\s*puVar2\[0x30\]\ =\ uVar8;$@2	+1
+use	FUN_00050300	uVar8	ctxWord25e4	INFERRED	load of ctx+0x25e4	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x23a4\);$	+1
+use	FUN_00050300	uVar8	ctxWord25e4	INFERRED	load of ctx+0x25e4	^\s*puVar2\[0x3a\]\ =\ uVar8;$@2	+1
+use	FUN_00050300	uVar8	ctxWord2604	INFERRED	load of ctx+0x2604	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x23c4\);$	+1
+use	FUN_00050300	uVar8	ctxWord2604	INFERRED	load of ctx+0x2604	^\s*puVar2\[0x3c\]\ =\ uVar8;$@2	+1
+use	FUN_00050300	uVar8	ctxWord2608	INFERRED	load of ctx+0x2608	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x23c8\);$	+1
+use	FUN_00050300	uVar8	ctxWord2608	INFERRED	load of ctx+0x2608	^\s*puVar2\[0x3e\]\ =\ uVar8;$@2	+1
+use	FUN_00050300	uVar8	vapVtxNumArrays	INFERRED	register VAP_VTX_NUM_ARRAYS (0x20c0) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x26d0	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x2490\);$	+1
+use	FUN_00050300	uVar8	vapVtxNumArrays	INFERRED	register VAP_VTX_NUM_ARRAYS (0x20c0) of the R3xx/R5xx register PDFs, paired with this value in the state packet; shadow at ctx+0x26d0	^\s*puVar2\[1\]\ =\ uVar8;$@4	+1
+use	FUN_00050300	uVar8	ctxWord27c	INFERRED	load of ctx+0x27c	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x3c\);$	+1
+use	FUN_00050300	uVar8	ctxWord27c	INFERRED	load of ctx+0x27c	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x3c\)\ =\ uVar8;$	+1
+use	FUN_00050300	pcVar1	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*pcVar1\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x275c\);$	+1
+use	FUN_00050300	pcVar1	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*\(\*pcVar1\)\(param_1,puVar3\);$	+1
+use	FUN_00050300	pcVar1	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*pcVar1\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x275c\);$@2	+1
+use	FUN_00050300	pcVar1	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*\(\*pcVar1\)\(param_1,puVar2\);$	+1
+use	FUN_00050300	pcVar1	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*pcVar1\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x275c\);$@3	+1
+use	FUN_00050300	pcVar1	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*\(\*pcVar1\)\(param_1,puVar3\);$@2	+1
+use	FUN_00050300	pcVar1	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*pcVar1\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x275c\);$@4	+1
+use	FUN_00050300	pcVar1	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*\(\*pcVar1\)\(param_1,puVar2\ \+\ 0x41\);$	+1
+use	FUN_00050300	pcVar1	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*pcVar1\ =\ \*\(code\ \*\*\)\(param_1\ \+\ 0x275c\);$@5	+1
+use	FUN_00050300	pcVar1	streamSetCurrent	INFERRED	field streamSetCurrent of the GLD context (ctx+0x299c)	^\s*\(\*pcVar1\)\(param_1,iVar9\ \+\ 0x48,puVar5,uVar7,a4,a5,puVar2\);$	+1
+use	FUN_00050300	uVar14	fgAlphaFunc	INFERRED	field fg_alpha_func of the GLD context (ctx+0x1c8c)	^\s*uVar14\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1a4c\);$	+2
+use	FUN_00050300	uVar14	fgAlphaFunc	INFERRED	field fg_alpha_func of the GLD context (ctx+0x1c8c)	^\s*puVar2\[1\]\ =\ uVar14\ \&\ 0xfffff7ff;$	+1
+use	FUN_00050300	uVar14	fgFogBlend	INFERRED	field fg_fog_blend of the GLD context (ctx+0x1d2c)	^\s*uVar14\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1aec\);$	+2
+use	FUN_00050300	uVar14	fgFogBlend	INFERRED	field fg_fog_blend of the GLD context (ctx+0x1d2c)	^\s*puVar2\[0xc\]\ =\ uVar14\ \&\ 0xfffffffe;$	+1
+use	FUN_00050300	uVar14	rb3dBlendcntl	INFERRED	field rb3d_blendcntl of the GLD context (ctx+0x1cc0)	^\s*uVar14\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1a80\);$	+2
+use	FUN_00050300	uVar14	rb3dBlendcntl	INFERRED	field rb3d_blendcntl of the GLD context (ctx+0x1cc0)	^\s*puVar2\[0x11\]\ =\ uVar14\ \&\ 0xfffffffc;$	+1
+local	FUN_00050300	puVar2	packet	INFERRED	pointer into the stream slot returned by (*streamAllocate)(commandStream, nWords): register-write pairs {id, value} are stored through it
+use	FUN_00050300	puVar3	packetEnd	INFERRED	packet + N: end of the words written, handed to (*streamSetCurrent)(commandStream, packetEnd)	^\s*puVar3\ =\ puVar2\ \+\ 0x5a;$	+1
+use	FUN_00050300	puVar3	packetEnd	INFERRED	packet + N: end of the words written, handed to (*streamSetCurrent)(commandStream, packetEnd)	^\s*puVar3\ =\ puVar2\ \+\ 0x62;$	+1
+use	FUN_00050300	puVar3	packetEnd	INFERRED	packet + N: end of the words written, handed to (*streamSetCurrent)(commandStream, packetEnd)	^\s*\*\(undefined4\ \*\*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ puVar3;$	+2
+use	FUN_00050300	puVar3	packetEnd	INFERRED	packet + N: end of the words written, handed to (*streamSetCurrent)(commandStream, packetEnd)	^\s*puVar3\ =\ puVar2\ \+\ 4;$	+1
+use	FUN_00050300	puVar3	packetEnd	INFERRED	packet + N: end of the words written, handed to (*streamSetCurrent)(commandStream, packetEnd)	^\s*puVar3\ =\ puVar2\ \+\ 2;$	+1
+use	FUN_00050300	puVar3	packetEnd	INFERRED	packet + N: end of the words written, handed to (*streamSetCurrent)(commandStream, packetEnd)	^\s*\*\(undefined4\ \*\*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ puVar3;$@2	+2
+use	FUN_00050300	puVar3	packetCursor	INFERRED	write cursor inside the packet (advances by the words of each optional register group)	^\s*puVar3\ =\ puVar2\ \+\ 9;$	+1
+use	FUN_00050300	puVar3	packetCursor	INFERRED	write cursor inside the packet (advances by the words of each optional register group)	^\s*puVar3\ =\ puVar2\ \+\ 0xb;$	+1
+use	FUN_00050300	puVar3	packetCursor	INFERRED	write cursor inside the packet (advances by the words of each optional register group)	^\s*puVar2\ =\ puVar3\ \+\ 4;$	+2
+use	FUN_00050300	puVar3	packetCursor	INFERRED	write cursor inside the packet (advances by the words of each optional register group)	^\s*puVar3\[2\]\ =\ \(\(unsigned\ char\ \*\)0x00001383U\);$	+3
+use	FUN_00050300	puVar3	packetCursor	INFERRED	write cursor inside the packet (advances by the words of each optional register group)	^\s*puVar2\ =\ puVar3\ \+\ 9;$	+6
+use	FUN_00050300	puVar3	texUnitShadowPtr4	INFERRED	pointer walking the per-texture-unit shadow array at commandStream+0x1ddc, advanced by 4 bytes per unit in the dirty-unit loop	^\s*puVar3\ =\ \(undefined4\ \*\)\(param_1\ \+\ 0x1ddc\);$	+1
+use	FUN_00050300	puVar3	texUnitShadowPtr4	INFERRED	pointer walking the per-texture-unit shadow array at commandStream+0x1ddc, advanced by 4 bytes per unit in the dirty-unit loop	^\s*puVar2\[0xd\]\ =\ \*puVar3;$	+1
+use	FUN_00050300	puVar3	texUnitShadowPtr4	INFERRED	pointer walking the per-texture-unit shadow array at commandStream+0x1ddc, advanced by 4 bytes per unit in the dirty-unit loop	^\s*puVar3\ =\ puVar3\ \+\ 1;$	+1
+local	FUN_00050300	puVar4	texUnitShadowPtr5	INFERRED	pointer walking the per-texture-unit shadow array at commandStream+0x1e1c, advanced per unit in the dirty-unit loop
+local	FUN_00050300	puVar10	texUnitShadowPtr0	INFERRED	pointer walking the per-texture-unit shadow array at commandStream+0x1cdc, advanced per unit in the dirty-unit loop
+local	FUN_00050300	puVar11	texUnitShadowPtr1	INFERRED	pointer walking the per-texture-unit shadow array at commandStream+0x1d1c, advanced per unit in the dirty-unit loop
+local	FUN_00050300	puVar12	texUnitShadowPtr2	INFERRED	pointer walking the per-texture-unit shadow array at commandStream+0x1d5c, advanced per unit in the dirty-unit loop
+local	FUN_00050300	puVar13	texUnitShadowPtr3	INFERRED	pointer walking the per-texture-unit shadow array at commandStream+0x1d9c, advanced per unit in the dirty-unit loop
+use	FUN_00050300	iVar6	unitIndex	INFERRED	first unit register index (commandStream+0x1938), added to the per-unit register ids 0x1100.. and incremented once per unit bit of the dirty mask	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1938\);$	+1
+use	FUN_00050300	iVar6	unitIndex	INFERRED	first unit register index (commandStream+0x1938), added to the per-unit register ids 0x1100.. and incremented once per unit bit of the dirty mask	^\s*\*puVar2\ =\ \(\(unsigned\ char\ \*\)0x00001100\)\ \+\ iVar6;$	+1
+use	FUN_00050300	iVar6	unitIndex	INFERRED	first unit register index (commandStream+0x1938), added to the per-unit register ids 0x1100.. and incremented once per unit bit of the dirty mask	^\s*puVar2\[2\]\ =\ \(\(unsigned\ char\ \*\)0x00001110\)\ \+\ iVar6;$	+1
+use	FUN_00050300	iVar6	unitIndex	INFERRED	first unit register index (commandStream+0x1938), added to the per-unit register ids 0x1100.. and incremented once per unit bit of the dirty mask	^\s*puVar2\[4\]\ =\ \(\(unsigned\ char\ \*\)0x00001120U\)\ \+\ iVar6;$	+1
+use	FUN_00050300	iVar6	unitIndex	INFERRED	first unit register index (commandStream+0x1938), added to the per-unit register ids 0x1100.. and incremented once per unit bit of the dirty mask	^\s*puVar2\[6\]\ =\ \(\(unsigned\ char\ \*\)0x00001130\)\ \+\ iVar6;$	+1
+use	FUN_00050300	iVar6	unitIndex	INFERRED	first unit register index (commandStream+0x1938), added to the per-unit register ids 0x1100.. and incremented once per unit bit of the dirty mask	^\s*puVar2\[8\]\ =\ \(\(unsigned\ char\ \*\)0x00001170U\)\ \+\ iVar6;$	+1
+use	FUN_00050300	iVar6	unitIndex	INFERRED	first unit register index (commandStream+0x1938), added to the per-unit register ids 0x1100.. and incremented once per unit bit of the dirty mask	^\s*puVar2\[10\]\ =\ \(\(unsigned\ char\ \*\)0x00001160\)\ \+\ iVar6;$	+2
+use	FUN_00050300	iVar6	unitIndex	INFERRED	first unit register index (commandStream+0x1938), added to the per-unit register ids 0x1100.. and incremented once per unit bit of the dirty mask	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	FUN_00050300	iVar6	unitIndex	INFERRED	first unit register index (commandStream+0x1938), added to the per-unit register ids 0x1100.. and incremented once per unit bit of the dirty mask	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x1938\);$@2	+1
+use	FUN_00050300	iVar6	unitIndex	INFERRED	first unit register index (commandStream+0x1938), added to the per-unit register ids 0x1100.. and incremented once per unit bit of the dirty mask	^\s*puVar2\[2\]\ =\ \(\(unsigned\ char\ \*\)0x00001100\)\ \+\ iVar6;$	+1
+use	FUN_00050300	uVar14	dirtyUnitMask	INFERRED	(mask | (mask & mask2) << 8) shifted right once per iteration; the loop emits one register group per set bit	^\s*uVar14\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x27b0\)\ \|$	+1
+use	FUN_00050300	uVar14	dirtyUnitMask	INFERRED	(mask | (mask & mask2) << 8) shifted right once per iteration; the loop emits one register group per set bit	^\s*if\ \(uVar14\ !=\ 0\)\ \{$	+1
+use	FUN_00050300	uVar14	dirtyUnitMask	INFERRED	(mask | (mask & mask2) << 8) shifted right once per iteration; the loop emits one register group per set bit	^\s*if\ \(\(uVar14\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	FUN_00050300	uVar14	dirtyUnitMask	INFERRED	(mask | (mask & mask2) << 8) shifted right once per iteration; the loop emits one register group per set bit	^\s*uVar14\ =\ uVar14\ >>\ 1;$	+1
+use	FUN_00050300	uVar14	dirtyUnitMask	INFERRED	(mask | (mask & mask2) << 8) shifted right once per iteration; the loop emits one register group per set bit	^\s*\}\ while\ \(uVar14\ !=\ 0\);$	+1
+local	FUN_00050300	param_1	commandStream	INFERRED	called as FUN_00050300(ctx + 0x240) from FUN_0002c6c0; +0x2758/+0x275c are streamAllocate/streamSetCurrent (ctx+0x2998/+0x299c) and the shadows it reads are ctx+0x240+offset
+use	FUN_00050300	uVar8	unitShadowValue0	INFERRED	value read through texUnitShadowPtr0 for the current unit, stored into the register-write packet	^\s*uVar8\ =\ \*puVar10;$	+1
+use	FUN_00050300	uVar8	unitShadowValue0	INFERRED	value read through texUnitShadowPtr0 for the current unit, stored into the register-write packet	^\s*puVar2\[1\]\ =\ uVar8;$@2	+1
+use	FUN_00050300	uVar8	unitShadowValue1	INFERRED	value read through texUnitShadowPtr1 for the current unit, stored into the register-write packet	^\s*uVar8\ =\ \*puVar11;$	+1
+use	FUN_00050300	uVar8	unitShadowValue1	INFERRED	value read through texUnitShadowPtr1 for the current unit, stored into the register-write packet	^\s*puVar2\[3\]\ =\ uVar8;$@2	+1
+use	FUN_00050300	uVar8	unitShadowValue2	INFERRED	value read through texUnitShadowPtr2 for the current unit, stored into the register-write packet	^\s*uVar8\ =\ \*puVar12;$	+1
+use	FUN_00050300	uVar8	unitShadowValue2	INFERRED	value read through texUnitShadowPtr2 for the current unit, stored into the register-write packet	^\s*puVar2\[5\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	unitShadowValue3	INFERRED	value read through texUnitShadowPtr3 for the current unit, stored into the register-write packet	^\s*uVar8\ =\ \*puVar13;$	+1
+use	FUN_00050300	uVar8	unitShadowValue3	INFERRED	value read through texUnitShadowPtr3 for the current unit, stored into the register-write packet	^\s*puVar2\[7\]\ =\ uVar8;$	+1
+use	FUN_00050300	uVar8	unitShadowValue5	INFERRED	value read through texUnitShadowPtr5 for the current unit, stored into the register-write packet	^\s*uVar8\ =\ \*puVar4;$	+1
+use	FUN_00050300	uVar8	unitShadowValue5	INFERRED	value read through texUnitShadowPtr5 for the current unit, stored into the register-write packet	^\s*puVar2\[9\]\ =\ uVar8;$@2	+1
+use	FUN_00050300	uVar8	allocatedPacket	INFERRED	result of (*streamAllocate)(commandStream, 0x90): the packet slot, also recorded as the current stream pointer	^\s*uVar8\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2758\)\)\(param_1,0x90\);$	+3
+use	FUN_00050300	uVar8	streamStateWord	INFERRED	k-th word of the array at *(commandStream+0x2494) (ctx+0x26d4), copied into the packet next to a register id	^\s*uVar8\ =\ \*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0x2494\);$	+1
+use	FUN_00050300	uVar8	streamStateWord	INFERRED	k-th word of the array at *(commandStream+0x2494) (ctx+0x26d4), copied into the packet next to a register id	^\s*puVar2\[3\]\ =\ uVar8;$@4	+1
+use	FUN_00050300	uVar8	streamStateWord	INFERRED	k-th word of the array at *(commandStream+0x2494) (ctx+0x26d4), copied into the packet next to a register id	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x2494\)\ \+\ 4\);$	+1
+use	FUN_00050300	uVar8	streamStateWord	INFERRED	k-th word of the array at *(commandStream+0x2494) (ctx+0x26d4), copied into the packet next to a register id	^\s*puVar2\[5\]\ =\ uVar8;$@2	+1
+use	FUN_00050300	uVar8	streamStateWord	INFERRED	k-th word of the array at *(commandStream+0x2494) (ctx+0x26d4), copied into the packet next to a register id	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x2494\)\ \+\ 8\);$	+1
+use	FUN_00050300	uVar8	streamStateWord	INFERRED	k-th word of the array at *(commandStream+0x2494) (ctx+0x26d4), copied into the packet next to a register id	^\s*puVar2\[7\]\ =\ uVar8;$@2	+1
+use	FUN_00050300	uVar8	streamStateWord	INFERRED	k-th word of the array at *(commandStream+0x2494) (ctx+0x26d4), copied into the packet next to a register id	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x2494\)\ \+\ 0xc\);$	+1
+use	FUN_00050300	uVar8	streamStateWord	INFERRED	k-th word of the array at *(commandStream+0x2494) (ctx+0x26d4), copied into the packet next to a register id	^\s*puVar2\[9\]\ =\ uVar8;$@3	+1
+use	FUN_00050300	uVar8	streamStateWord	INFERRED	k-th word of the array at *(commandStream+0x2494) (ctx+0x26d4), copied into the packet next to a register id	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x2494\)\ \+\ 0x10\);$	+1
+use	FUN_00050300	uVar8	streamStateWord	INFERRED	k-th word of the array at *(commandStream+0x2494) (ctx+0x26d4), copied into the packet next to a register id	^\s*puVar2\[0xb\]\ =\ uVar8;$@2	+1
+use	FUN_00050300	uVar8	streamStateWord	INFERRED	k-th word of the array at *(commandStream+0x2494) (ctx+0x26d4), copied into the packet next to a register id	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x2494\)\ \+\ 0x14\);$	+1
+use	FUN_00050300	uVar8	streamStateWord	INFERRED	k-th word of the array at *(commandStream+0x2494) (ctx+0x26d4), copied into the packet next to a register id	^\s*puVar2\[0xd\]\ =\ uVar8;$@2	+1
+use	FUN_00050300	uVar8	streamStateWord	INFERRED	k-th word of the array at *(commandStream+0x2494) (ctx+0x26d4), copied into the packet next to a register id	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x2494\)\ \+\ 0x18\);$	+1
+use	FUN_00050300	uVar8	streamStateWord	INFERRED	k-th word of the array at *(commandStream+0x2494) (ctx+0x26d4), copied into the packet next to a register id	^\s*puVar2\[0xf\]\ =\ uVar8;$@3	+1
+use	FUN_00050300	iVar9	glStateBlock	INFERRED	(commandStream+4)->+0x10: the GL state block pointer (see notes_gld_functions.md section 3)	^\s*iVar9\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+1
+use	FUN_00050300	iVar9	glStateBlock	INFERRED	(commandStream+4)->+0x10: the GL state block pointer (see notes_gld_functions.md section 3)	^\s*if\ \(\(\*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x000031c0\)\ \+\ iVar9\)\ !=\ 0\)\ \&\&\ \(\(\(unsigned\ char\ \*\)0x00001491\)\[param_1\]\ !=\ '\\0'\)\)\ \{$	+1
+use	FUN_00050300	iVar9	streamCurrent	INFERRED	*(commandStream+0x2748+4) = ctx+0x298c streamCurrent: the stream write pointer at entry to the final callback packet	^\s*iVar9\ =\ \*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\);$	+1
+use	FUN_00050300	iVar9	streamCurrent	INFERRED	*(commandStream+0x2748+4) = ctx+0x298c streamCurrent: the stream write pointer at entry to the final callback packet	^\s*\*\(int\ \*\)\(0x00002748\ \+\ param_1\ \+\ 4\)\ =\ iVar9\ \+\ 0x48;$	+2
+use	FUN_00050300	iVar9	reserveResult	INFERRED	result of FUN_0004aa00(commandStream, 1), tested against 0	^\s*iVar9\ =\ FUN_0004aa00\(param_1,1\);$	+2
+use	FUN_00050300	uVar14	ctxWord2cc	INFERRED	load of ctx+0x2cc	^\s*uVar14\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x8c\);$	+1
+use	FUN_00050300	uVar14	ctxWord2cc	INFERRED	load of ctx+0x2cc	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x8c\)\ =\ uVar14\ \|\ 0x58000;$	+3
+local	FUN_00050300	in_r5	passThroughR5	INFERRED	r5 left over from the caller, forwarded unchanged as a dead argument of the indirect streamAllocate/streamSetCurrent calls
+local	FUN_00050300	in_r6	passThroughR6	INFERRED	r6 left over from the caller, forwarded unchanged as a dead argument of the indirect streamAllocate/streamSetCurrent calls
+local	FUN_00050300	in_r7	passThroughR7	INFERRED	r7 left over from the caller, forwarded unchanged as a dead argument of the indirect streamAllocate/streamSetCurrent calls
+local	FUN_00050300	in_r8	passThroughR8	INFERRED	r8 left over from the caller, forwarded unchanged as a dead argument of the indirect streamAllocate/streamSetCurrent calls
+use	FUN_00050300	puVar5	engineCapsEntry	INFERRED	PTR_DAT_001e88c8: table of 0x24-byte entries indexed by the byte at commandStream+0x293f; word +0x18 holds capability bits (0x8000/0x4000) that mask fog/alpha register values	^\s*puVar5\ =\ PTR_DAT_001e88c8;$	+1
+use	FUN_00050300	puVar5	engineCapsEntry	INFERRED	PTR_DAT_001e88c8: table of 0x24-byte entries indexed by the byte at commandStream+0x293f; word +0x18 holds capability bits (0x8000/0x4000) that mask fog/alpha register values	^\s*if\ \(\(\*\(uint\ \*\)\(puVar5\ \+\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x293f\)\ \*\ 0x24\ \+\ 0x18\)\ \&\ 0x8000\)\ ==\ 0\)\ \{$	+1
+use	FUN_00050300	puVar5	engineCapsEntry	INFERRED	PTR_DAT_001e88c8: table of 0x24-byte entries indexed by the byte at commandStream+0x293f; word +0x18 holds capability bits (0x8000/0x4000) that mask fog/alpha register values	^\s*if\ \(\(\*\(uint\ \*\)\(puVar5\ \+\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x293f\)\ \*\ 0x24\ \+\ 0x18\)\ \&\ 0x8000\)\ ==\ 0\)\ \{$@2	+1
+use	FUN_00050300	puVar5	engineCapsEntry	INFERRED	PTR_DAT_001e88c8: table of 0x24-byte entries indexed by the byte at commandStream+0x293f; word +0x18 holds capability bits (0x8000/0x4000) that mask fog/alpha register values	^\s*if\ \(\(\*\(uint\ \*\)\(puVar5\ \+\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x293f\)\ \*\ 0x24\ \+\ 0x18\)\ \&\ 0x4000\)\ ==\ 0\)\ \{$	+1
+use	FUN_00050300	puVar5	finalCallArgR5	INFERRED	constant 0x813ad left in r5, forwarded as a dead argument of the final streamSetCurrent call	^\s*puVar5\ =\ \(\(unsigned\ char\ \*\)0x000813adU\);$	+1
+use	FUN_00050300	puVar5	finalCallArgR5	INFERRED	constant 0x813ad left in r5, forwarded as a dead argument of the final streamSetCurrent call	^\s*\(\*pcVar1\)\(param_1,iVar9\ \+\ 0x48,puVar5,uVar7,a4,a5,puVar2\);$	+1
+use	FUN_00050300	uVar7	finalCallArgR6	INFERRED	constant 0x313e9 left in r6, forwarded as a dead argument of the final streamSetCurrent call	^\s*uVar7\ =\ 0x313e9;$	+1
+use	FUN_00050300	uVar7	finalCallArgR6	INFERRED	constant 0x313e9 left in r6, forwarded as a dead argument of the final streamSetCurrent call	^\s*\(\*pcVar1\)\(param_1,iVar9\ \+\ 0x48,puVar5,uVar7,a4,a5,puVar2\);$	+1
+use	FUN_00050300	uVar7	ctxWord278	INFERRED	load of ctx+0x278	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x38\);$	+1
+use	FUN_00050300	uVar7	ctxWord278	INFERRED	load of ctx+0x278	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x38\)\ =\ uVar7;$	+1
+func	FUN_00050300	gldEmitHardwareState	INFERRED	emits the whole hardware register state as {id,value} pairs through the stream (streamAllocate/streamSetCurrent): cache flush, then the shadows ctx+0x1c90.. (dither, cull, AA, blend, stencil, fog, vertex format ...) in ~0x1b4-word packets; 0x1393/0x13c6 cache-control packets first; called as FUN_00050300(ctx + 0x240) by FUN_0002c6c0

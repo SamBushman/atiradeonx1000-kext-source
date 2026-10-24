@@ -5907,7 +5907,7 @@ int FUN_0002c6c0(param_1)
   *(code **)(param_1 + 0x2998) = FUN_0002be70;
   *(code **)(param_1 + 0x299c) = noop_2be80;
   *(undefined4 **)(param_1 + 0x298c) = puVar1 + 8;
-  FUN_00050300(param_1 + 0x240);
+  gldEmitHardwareState(param_1 + 0x240);
   *puVar1 = *(undefined4 *)(param_1 + 0x1d20);
   puVar1[1] = *(undefined4 *)(param_1 + 0x1cf0);
   puVar1[5] = *(int *)(param_1 + 0x298c) - (int)(puVar1 + 8) >> 2;

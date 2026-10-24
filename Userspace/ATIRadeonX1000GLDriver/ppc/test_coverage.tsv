@@ -450,7 +450,7 @@
 0x4fd80	FUN_0004fd80	492	no	indirect call (driver context / vtable / callback)
 0x4ff70	gldValidateAlphaTest	416	yes	
 0x50140	FUN_00050140	424	yes	
-0x50300	FUN_00050300	3048	no	indirect call (driver context / vtable / callback)
+0x50300	gldEmitHardwareState	3048	no	indirect call (driver context / vtable / callback)
 0x50ef0	FUN_00050ef0	284	no	indirect call (driver context / vtable / callback)
 0x51010	gldValidateStencil	1024	yes	
 0x51420	gldValidateBlend	3152	yes	

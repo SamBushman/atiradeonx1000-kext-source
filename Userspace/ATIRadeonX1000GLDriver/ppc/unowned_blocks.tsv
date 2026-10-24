@@ -1057,7 +1057,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 5013c	50140	padding	gldValidateAlphaTest	1	
 50274	50280	padding	FUN_00050140	3	
 502f4	50300	padding	FUN_00050140	3	
-50eb8	50ec0	padding	FUN_00050300	2	
+50eb8	50ec0	padding	gldEmitHardwareState	2	
 5100c	51010	padding	FUN_00050ef0	1	
 513e8	513f0	padding	gldValidateStencil	2	
 51418	51420	padding	gldValidateStencil	2	

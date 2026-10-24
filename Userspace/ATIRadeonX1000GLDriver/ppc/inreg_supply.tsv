@@ -203,10 +203,10 @@
 4fd80	FUN_0004fd80	r6	PASS-indirect	GARBAGE	
 4fd80	FUN_0004fd80	r7	PASS-indirect	GARBAGE	
 4fd80	FUN_0004fd80	r8	PASS-indirect	GARBAGE	
-50300	FUN_00050300	r5	PASS-indirect	GARBAGE	
-50300	FUN_00050300	r6	PASS-indirect	GARBAGE	
-50300	FUN_00050300	r7	PASS-indirect	GARBAGE	
-50300	FUN_00050300	r8	PASS-indirect	GARBAGE	
+50300	gldEmitHardwareState	r5	PASS-indirect	GARBAGE	
+50300	gldEmitHardwareState	r6	PASS-indirect	GARBAGE	
+50300	gldEmitHardwareState	r7	PASS-indirect	GARBAGE	
+50300	gldEmitHardwareState	r8	PASS-indirect	GARBAGE	
 50ef0	FUN_00050ef0	r7	PASS-indirect	GARBAGE	
 50ef0	FUN_00050ef0	r8	PASS-indirect	GARBAGE	
 53990	extvsEndShader	r6	PASS-indirect	GARBAGE	

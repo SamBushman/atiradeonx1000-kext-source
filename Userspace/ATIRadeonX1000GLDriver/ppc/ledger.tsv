@@ -449,7 +449,7 @@
 0x4fd80	492	FUN_0004fd80	part_007	converted
 0x4ff70	416	gldValidateAlphaTest	part_007	converted
 0x50140	424	FUN_00050140	part_007	converted
-0x50300	3048	FUN_00050300	part_007	converted
+0x50300	3048	gldEmitHardwareState	part_007	converted
 0x50ef0	284	FUN_00050ef0	part_007	converted
 0x51010	1024	gldValidateStencil	part_007	converted
 0x51420	3152	gldValidateBlend	part_007	converted
