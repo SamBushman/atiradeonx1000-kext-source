@@ -1,16 +1,16 @@
 #include "decls.h"
 
 /* ExportAddress__ctor_1260f4 @ 0x1260f4 (88 bytes) */
-int ExportAddress__ctor_1260f4(param_1, param_2, param_3, param_4, param_5)
+int ExportAddress__ctor_1260f4(param_1, param_2, param_3, param_4, compiler)
   undefined4 *param_1;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
-  undefined4 param_5;
+  undefined4 compiler;
 {
   undefined *vtable;
   
-  VRegInfo__ctor_12379c(param_1,param_2,param_3,param_4,param_5);
+  VRegInfo__ctor_12379c(param_1,param_2,param_3,param_4,compiler);
   vtable = PTR_DAT_001e90d0;
   param_1[4] = 0x20;
   param_1[9] = param_1[9] | 2;
@@ -37,14 +37,14 @@ int ExportAddress__ctor_12614c(param_1, param_2, param_3, param_4, compiler)
 }
 
 /* ImmedConstBuffer__ctor_1261a4 @ 0x1261a4 (68 bytes) */
-int ImmedConstBuffer__ctor_1261a4(this, param_2, param_3, param_4, param_5)
+int ImmedConstBuffer__ctor_1261a4(this, param_2, param_3, param_4, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
-  undefined4 param_5;
+  undefined4 compiler;
 {
-  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,param_5);
+  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
   *this = &PTR_FUN_001ea8d0;
   return;
 }
@@ -137,22 +137,22 @@ int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
 }
 
 /* LoopIndexedConstSet__ctor_1264c4 @ 0x1264c4 (116 bytes) */
-int LoopIndexedConstSet__ctor_1264c4(this, param_2, param_3, param_4, param_5)
+int LoopIndexedConstSet__ctor_1264c4(this, param_2, param_3, param_4, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
-  int param_5;
+  int compiler;
 {
   undefined *vtable;
   
-  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,param_5);
+  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
   vtable = PTR_DAT_001e90ec;
   this[0xc] = 0;
   *this = vtable + 8;
   *this = PTR_DAT_001e90e4 + 8;
-  this[4] = *(undefined4 *)(param_5 + 0x33c);
-  *(int *)(param_5 + 0x33c) = *(int *)(param_5 + 0x33c) + 1;
+  this[4] = *(undefined4 *)(compiler + 0x33c);
+  *(int *)(compiler + 0x33c) = *(int *)(compiler + 0x33c) + 1;
   return;
 }
 
@@ -177,22 +177,22 @@ int LoopIndexedConstSet__ctor_126538(this, param_2, param_3, param_4, compiler)
 }
 
 /* LoopIndexedInputSet__ctor_1265ac @ 0x1265ac (116 bytes) */
-int LoopIndexedInputSet__ctor_1265ac(this, param_2, param_3, param_4, param_5)
+int LoopIndexedInputSet__ctor_1265ac(this, param_2, param_3, param_4, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
-  int param_5;
+  int compiler;
 {
   undefined *vtable;
   
-  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,param_5);
+  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
   vtable = PTR_DAT_001e90ec;
   this[0xc] = 0;
   *this = vtable + 8;
   *this = PTR_DAT_001e90d4 + 8;
-  this[4] = *(undefined4 *)(param_5 + 0x340);
-  *(int *)(param_5 + 0x340) = *(int *)(param_5 + 0x340) + 1;
+  this[4] = *(undefined4 *)(compiler + 0x340);
+  *(int *)(compiler + 0x340) = *(int *)(compiler + 0x340) + 1;
   return;
 }
 
@@ -217,22 +217,22 @@ int LoopIndexedInputSet__ctor_126620(this, param_2, param_3, param_4, compiler)
 }
 
 /* LoopIndexedOutputSet__ctor_126694 @ 0x126694 (116 bytes) */
-int LoopIndexedOutputSet__ctor_126694(this, param_2, param_3, param_4, param_5)
+int LoopIndexedOutputSet__ctor_126694(this, param_2, param_3, param_4, compiler)
   undefined4 *this;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
-  int param_5;
+  int compiler;
 {
   undefined *vtable;
   
-  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,param_5);
+  VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
   vtable = PTR_DAT_001e90ec;
   this[0xc] = 0;
   *this = vtable + 8;
   *this = PTR_DAT_001e90dc + 8;
-  this[4] = *(undefined4 *)(param_5 + 0x344);
-  *(int *)(param_5 + 0x344) = *(int *)(param_5 + 0x344) + 1;
+  this[4] = *(undefined4 *)(compiler + 0x344);
+  *(int *)(compiler + 0x344) = *(int *)(compiler + 0x344) + 1;
   return;
 }
 

@@ -450,8 +450,8 @@ int IRInst__setOperandSource(inst, operandIndex, newSource, trackUses, compilerC
 }
 
 /* IRInst__replaceOperandsReferencing @ 0x1061b0 (128 bytes) */
-int IRInst__replaceOperandsReferencing(param_1, refInst, compiler)
-  int param_1;
+int IRInst__replaceOperandsReferencing(inst, refInst, compiler)
+  int inst;
   int refInst;
   undefined4 compiler;
 {
@@ -460,15 +460,15 @@ int IRInst__replaceOperandsReferencing(param_1, refInst, compiler)
   int loopIndex;
   int recordCursor;
   
-  operandCount = *(int *)(param_1 + 0x84);
+  operandCount = *(int *)(inst + 0x84);
   refWord = *(int *)(refInst + 0x8c);
   if (0 < operandCount) {
     loopIndex = 1;
-    recordCursor = param_1;
+    recordCursor = inst;
     do {
       if (refWord == *(int *)(recordCursor + 0xa4)) {
-        ((int (*)())IRInst__setOperandSource)(param_1,loopIndex,refInst,0,compiler);
-        operandCount = *(int *)(param_1 + 0x84);
+        ((int (*)())IRInst__setOperandSource)(inst,loopIndex,refInst,0,compiler);
+        operandCount = *(int *)(inst + 0x84);
       }
       loopIndex = loopIndex + 1;
       recordCursor = recordCursor + 0x18;
