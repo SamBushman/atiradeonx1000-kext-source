@@ -252,7 +252,7 @@ use	TGenericLinker__FixOutputReads	uVar4	functionName	INFERRED	every definition 
 use	TGenericLinker__OptimizeFunctionIO	pcVar4	paramName	INFERRED	every definition is the result of a call whose name says it returns this	^\s*pcVar4\ =\ \(char\ \*\)_malloc\(iVar3\ \+\ 9\);$	+62	all	all
 use	TGenericLinker__GetRemapTableString	iVar3	length	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ _strlen\(_linkUtilString\);$	+0	all	all
 use	TGenericLinker__GetRemapTableString	iVar3	length	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ iVar3\ \+\ 2;$	+0	rhs	rhs
-use	TGenericLinker__GetRemapTableString	pcVar5	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*pcVar5\ =\ \(char\ \*\)_malloc\(iVar3\);$	+28	all	all
+use	TGenericLinker__GetRemapTableString	pcVar5	text	INFERRED	every definition is the result of a call whose name says it returns this	^\s*pcVar5\ =\ \(char\ \*\)_malloc\(iVar3\);$	+28	all	all
 use	TGenericLinker__GetBindingTableString	iVar2	length	INFERRED	every definition is the result of a call whose name says it returns this	#2	+14	all	all
 use	TGenericLinker__GetBindingTableString	iVar2	numActiveAttributeBindings	INFERRED	every definition is the result of a call whose name says it returns this	#18	+5	all	all
 use	TGenericLinker__GetBindingTableString	iVar3	length2	INFERRED	every definition is the result of a call whose name says it returns this	#3	+13	all	all
