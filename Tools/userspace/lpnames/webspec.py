@@ -28,7 +28,7 @@ for l in open(rules):
     if not l.strip() or l.startswith('#'): continue
     c = l.rstrip('\n').split('\t')
     R.append((c[0], re.compile(c[1]), c[2] if len(c) > 2 else ''))
-DEF = re.compile(r'(?<![\w.>])%s\s*=(?!=)\s*(.*)' % re.escape(var))
+DEF = re.compile(r'(?<![\w.>*])%s\s*=(?!=)\s*(.*)' % re.escape(var))
 OPEN = re.compile(r'\b%s\b' % re.escape(var))
 EV = {n.lstrip('~'): e for n, _, e in R}
 
