@@ -291,30 +291,32 @@ int PaIdentOrType(text, parseContext, symbol)
   unsigned char * parseContext;
   unsigned char ** symbol;
 {
+  int isVariableResult;
+  int symbolLevel;
   unsigned char * foundSymbol;
   undefined4 token;
-  int symbolLevelOrFlag;
+  int levelsBegin;
   int *symbolTable;
   int levelIdx;
   int findIter [5];
   
   symbolTable = *(int **)(parseContext + 4);
-  symbolLevelOrFlag = *symbolTable;
-  levelIdx = (symbolTable[1] - symbolLevelOrFlag >> 2) + -1;
+  levelsBegin = *symbolTable;
+  levelIdx = (symbolTable[1] - levelsBegin >> 2) + -1;
   while( true ) {
-    symbolLevelOrFlag = *(int *)(symbolLevelOrFlag + levelIdx * 4);
-    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)findIter,symbolLevelOrFlag,text);
+    symbolLevel = *(int *)(levelsBegin + levelIdx * 4);
+    std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find((unsigned char *)findIter,symbolLevel,text);
     foundSymbol = (unsigned char *)0x0;
-    if (findIter[0] != *(int *)(symbolLevelOrFlag + 4)) {
+    if (findIter[0] != *(int *)(symbolLevel + 4)) {
       foundSymbol = *(unsigned char **)(findIter[0] + 0x18);
     }
     levelIdx = levelIdx + -1;
     if ((foundSymbol != (unsigned char *)0x0) || (levelIdx < 0)) break;
-    symbolLevelOrFlag = *symbolTable;
+    levelsBegin = *symbolTable;
   }
   *symbol = foundSymbol;
   if ((((*(int *)(parseContext + 0x1c) != 0) || (foundSymbol == (unsigned char *)0x0)) ||
-      (symbolLevelOrFlag = (**(code **)(*(int *)foundSymbol + 0x10))(foundSymbol), symbolLevelOrFlag == 0)) ||
+      (isVariableResult = (**(code **)(*(int *)foundSymbol + 0x10))(foundSymbol), isVariableResult == 0)) ||
      (*(int *)(*symbol + 0x34) == 0)) {
     token = 0x12a;
   }
@@ -522,6 +524,8 @@ int _HandlePragma(tokens, tokenCount)
   undefined4 *tokens;
   int tokenCount;
 {
+  undefined4 staleR4;
+  undefined4 onOffText;
   int compareResult;
   char *message;
   undefined4 r4Out0;
@@ -537,28 +541,28 @@ int _HandlePragma(tokens, tokenCount)
   undefined4 staleR7;
   undefined4 staleR8;
   int cppState;
-  undefined4 tokenTextOrStale;
+  undefined4 pragmaName;
   
-  tokenTextOrStale = *tokens;
+  pragmaName = *tokens;
   cmpLen = 9;
-  compareResult = _memcmp(tokenTextOrStale,"optimize",9);
+  compareResult = _memcmp(pragmaName,"optimize",9);
   if (compareResult == 0) {
     if (tokenCount == 4) {
       cmpLen = 2;
       compareResult = _memcmp(tokens[1],"(",2);
       if (compareResult == 0) {
-        tokenTextOrStale = tokens[2];
-        compareResult = _memcmp(tokenTextOrStale,"on",3);
+        onOffText = tokens[2];
+        compareResult = _memcmp(onOffText,"on",3);
         if (compareResult == 0) {
           cppState = *(int *)PTR__cpp_a7b7c0a4;
           *(undefined4 *)(*(int *)(cppState + 0x2c) + 0x40) = 1;
         }
         else {
           cmpLen = 4;
-          compareResult = _memcmp(tokenTextOrStale,"off",4);
+          compareResult = _memcmp(onOffText,"off",4);
           if (compareResult != 0) {
             message = "\"on\" or \"off\" expected after \'(\' for \'optimize\' pragma";
-            tokenTextOrStale = r4Out2;
+            staleR4 = r4Out2;
             goto LAB_97bae84c;
           }
           cppState = *(int *)PTR__cpp_a7b7c0a4;
@@ -570,21 +574,21 @@ int _HandlePragma(tokens, tokenCount)
           return;
         }
         message = "\")\" expected to end \'optimize\' pragma";
-        tokenTextOrStale = r4Out3;
+        staleR4 = r4Out3;
       }
       else {
         message = "\"(\" expected after \'optimize\' keyword";
-        tokenTextOrStale = r4Out1;
+        staleR4 = r4Out1;
       }
     }
     else {
       message = "optimize pragma syntax is incorrect";
-      tokenTextOrStale = r4Out0;
+      staleR4 = r4Out0;
     }
   }
   else {
     cmpLen = 6;
-    compareResult = _memcmp(tokenTextOrStale,"debug",6);
+    compareResult = _memcmp(pragmaName,"debug",6);
     if (compareResult != 0) {
       return;
     }
@@ -592,18 +596,18 @@ int _HandlePragma(tokens, tokenCount)
       cmpLen = 2;
       compareResult = _memcmp(tokens[1],"(",2);
       if (compareResult == 0) {
-        tokenTextOrStale = tokens[2];
-        compareResult = _memcmp(tokenTextOrStale,"on",3);
+        onOffText = tokens[2];
+        compareResult = _memcmp(onOffText,"on",3);
         if (compareResult == 0) {
           cppState = *(int *)PTR__cpp_a7b7c0a4;
           *(undefined4 *)(*(int *)(cppState + 0x2c) + 0x44) = 1;
         }
         else {
           cmpLen = 4;
-          compareResult = _memcmp(tokenTextOrStale,"off",4);
+          compareResult = _memcmp(onOffText,"off",4);
           if (compareResult != 0) {
             message = "\"on\" or \"off\" expected after \'(\' for \'debug\' pragma";
-            tokenTextOrStale = r4Out6;
+            staleR4 = r4Out6;
             goto LAB_97bae84c;
           }
           cppState = *(int *)PTR__cpp_a7b7c0a4;
@@ -615,20 +619,20 @@ int _HandlePragma(tokens, tokenCount)
           return;
         }
         message = "\")\" expected to end \'debug\' pragma";
-        tokenTextOrStale = r4Out7;
+        staleR4 = r4Out7;
       }
       else {
         message = "\"(\" expected after \'debug\' keyword";
-        tokenTextOrStale = r4Out5;
+        staleR4 = r4Out5;
       }
     }
     else {
       message = "debug pragma syntax is incorrect";
-      tokenTextOrStale = r4Out4;
+      staleR4 = r4Out4;
     }
   }
 LAB_97bae84c:
-  ((int (*)())_CPPShInfoLogMsg)(message,tokenTextOrStale,cmpLen,staleR6,staleR7,staleR8,cppState);
+  ((int (*)())_CPPShInfoLogMsg)(message,staleR4,cmpLen,staleR6,staleR7,staleR8,cppState);
   return;
 }
 
@@ -2071,12 +2075,12 @@ int Binding__SetNameFromArrayName(this, str)
   unsigned char * this;
   char *str;
 {
-  int charIdx;
   int clearIdx;
-  int lenOrBracketPos;
+  int nameLengthCountdown;
+  int charIdx;
+  int nameLen;
   char *allocation;
   bool foundBracket;
-  int nameLen;
   char *chPtr;
   int nameData;
   undefined4 arrayIndex;
@@ -2090,10 +2094,10 @@ int Binding__SetNameFromArrayName(this, str)
     *(char **)(this + 8) = allocation;
     _strncpy(allocation,str,*(int *)(this + 0x10) + 1);
     nameData = *(int *)(this + 8);
-    lenOrBracketPos = *(int *)(this + 0x10);
-    if (*(char *)(nameData + lenOrBracketPos + -1) == ']') {
+    nameLengthCountdown = *(int *)(this + 0x10);
+    if (*(char *)(nameData + nameLengthCountdown + -1) == ']') {
       foundBracket = false;
-      bracketPos = lenOrBracketPos + -1;
+      bracketPos = nameLengthCountdown + -1;
       do {
         bracketPos = bracketPos + -1;
         if (*(char *)(nameData + bracketPos) == '[') {
@@ -2113,18 +2117,18 @@ int Binding__SetNameFromArrayName(this, str)
         } while (clearIdx < *(int *)(this + 0x10) + 1);
       }
       *(int *)(this + 0x10) = bracketPos;
-      lenOrBracketPos = bracketPos;
+      nameLengthCountdown = bracketPos;
     }
 LAB_97bb0358:
     charIdx = 0;
     *(undefined4 *)(this + 0xc) = 0;
-    if (lenOrBracketPos != 0) {
+    if (nameLengthCountdown != 0) {
       do {
         chPtr = (char *)(*(int *)(this + 8) + charIdx);
         charIdx = charIdx + 1;
         *(int *)(this + 0xc) = *(int *)(this + 0xc) + (int)*chPtr;
-        lenOrBracketPos = lenOrBracketPos + -1;
-      } while (lenOrBracketPos != 0);
+        nameLengthCountdown = nameLengthCountdown + -1;
+      } while (nameLengthCountdown != 0);
     }
   }
   return arrayIndex;

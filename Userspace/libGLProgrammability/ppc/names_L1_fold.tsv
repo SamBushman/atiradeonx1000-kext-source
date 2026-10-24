@@ -14,7 +14,7 @@ local	TIntermConstantUnion__fold	local_1d0	unaryTypeVtbl	INFERRED	this->getType(
 local	TIntermConstantUnion__fold	local_1cc	unaryTypeWord1	UNKNOWN	word 1 of the TType copy
 local	TIntermConstantUnion__fold	local_1c8	unaryTypeWord2	UNKNOWN	word 2 of the TType copy
 local	TIntermConstantUnion__fold	local_1c4	unaryTypeWord3	UNKNOWN	word 3 of the TType copy
-local	TIntermConstantUnion__fold	local_1c0	unaryTypeWord4OrLocText	UNKNOWN	word 4 of the TType copy; also the start of the "%d:%d" source-location sprintf buffer when the slot is reused
+local	TIntermConstantUnion__fold	local_1c0	unaryTypeWord4Overlay	UNKNOWN	frame slot of a stack TType temporary (Ghidra fake-struct word) that also holds the location text buffer "%d:%d" in a different lifetime; address-taken storage, cannot be split
 local	TIntermConstantUnion__fold	local_1bc	unaryTypeWord5	UNKNOWN	word 5 of the TType copy
 local	TIntermConstantUnion__fold	local_1b8	unaryTypeWord6	UNKNOWN	word 6 of the TType copy
 local	TIntermConstantUnion__fold	local_1b4	unaryTypeWord7	UNKNOWN	word 7 of the TType copy
@@ -24,7 +24,7 @@ local	TIntermConstantUnion__fold	local_1a0	binaryTypeVtbl	INFERRED	this->getType
 local	TIntermConstantUnion__fold	local_19c	binaryTypeWord1	UNKNOWN	word 1 of the TType copy
 local	TIntermConstantUnion__fold	local_198	binaryTypeWord2	UNKNOWN	word 2 of the TType copy
 local	TIntermConstantUnion__fold	local_194	binaryTypeWord3	UNKNOWN	word 3 of the TType copy
-local	TIntermConstantUnion__fold	local_190	binaryTypeWord4OrLocText	UNKNOWN	word 4 of the TType copy; also the start of the "%d:%d" source-location sprintf buffer when the slot is reused
+local	TIntermConstantUnion__fold	local_190	binaryTypeWord4Overlay	UNKNOWN	frame slot of a stack TType temporary (Ghidra fake-struct word) that also holds the location text buffer "%d:%d" in a different lifetime; address-taken storage, cannot be split
 local	TIntermConstantUnion__fold	local_18c	binaryTypeWord5	UNKNOWN	word 5 of the TType copy
 local	TIntermConstantUnion__fold	local_188	binaryTypeWord6	UNKNOWN	word 6 of the TType copy
 local	TIntermConstantUnion__fold	local_184	binaryTypeWord7	UNKNOWN	word 7 of the TType copy
@@ -34,7 +34,7 @@ local	TIntermConstantUnion__fold	local_170	compareTypeVtbl	INFERRED	this->getTyp
 local	TIntermConstantUnion__fold	local_16c	compareTypeWord1	UNKNOWN	word 1 of the TType copy
 local	TIntermConstantUnion__fold	local_168	compareTypeWord2	UNKNOWN	word 2 of the TType copy
 local	TIntermConstantUnion__fold	local_164	compareTypeWord3	UNKNOWN	word 3 of the TType copy
-local	TIntermConstantUnion__fold	local_160	compareTypeWord4OrLocText	UNKNOWN	word 4 of the TType copy; also the start of the "%d:%d" source-location sprintf buffer when the slot is reused
+local	TIntermConstantUnion__fold	local_160	compareTypeWord4Overlay	UNKNOWN	frame slot of a stack TType temporary (Ghidra fake-struct word) that also holds the location text buffer "%d:%d" in a different lifetime; address-taken storage, cannot be split
 local	TIntermConstantUnion__fold	local_15c	compareTypeWord5	UNKNOWN	word 5 of the TType copy
 local	TIntermConstantUnion__fold	local_158	compareTypeWord6	UNKNOWN	word 6 of the TType copy
 local	TIntermConstantUnion__fold	local_154	compareTypeWord7	UNKNOWN	word 7 of the TType copy
@@ -44,7 +44,7 @@ local	TIntermConstantUnion__fold	local_110	tailTypeVtbl	INFERRED	this->getType()
 local	TIntermConstantUnion__fold	local_10c	tailTypeWord1	UNKNOWN	word 1 of the TType copy
 local	TIntermConstantUnion__fold	local_108	tailTypeWord2	UNKNOWN	word 2 of the TType copy
 local	TIntermConstantUnion__fold	local_104	tailTypeWord3	UNKNOWN	word 3 of the TType copy
-local	TIntermConstantUnion__fold	local_100	tailTypeWord4OrLocText	UNKNOWN	word 4 of the TType copy; also the start of the "%d:%d" source-location sprintf buffer when the slot is reused
+local	TIntermConstantUnion__fold	local_100	tailTypeWord4Overlay	UNKNOWN	frame slot of a stack TType temporary (Ghidra fake-struct word) that also holds the location text buffer "%d:%d" in a different lifetime; address-taken storage, cannot be split
 local	TIntermConstantUnion__fold	local_fc	tailTypeWord5	UNKNOWN	word 5 of the TType copy
 local	TIntermConstantUnion__fold	local_f8	tailTypeWord6	UNKNOWN	word 6 of the TType copy
 local	TIntermConstantUnion__fold	local_f4	tailTypeWord7	UNKNOWN	word 7 of the TType copy
@@ -88,26 +88,11 @@ local	TIntermConstantUnion__fold	a1_08	r4In9	UNKNOWN	Ghidra input-register varia
 local	TIntermConstantUnion__fold	a1_09	r4In10	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next virtual call
 local	TIntermConstantUnion__fold	a1_10	r4In11	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next virtual call
 local	TIntermConstantUnion__fold	a1_11	r4In12	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next virtual call
-local	TIntermConstantUnion__fold	uVar21	typeBitsOrLoc	INFERRED	reused across the function: TType bit-field word (basic type in bits 19-24), packed source location from getLine()/this+4, and op-0x13 (binary operator index)
-local	TIntermConstantUnion__fold	uVar10	bitsOrLine	INFERRED	reused across the function: line number (packed location & 0xffff), TType qualifier bits (& 0xfe000000), integer operand of the folded operation
-local	TIntermConstantUnion__fold	uVar25	typeFieldOrInt	INFERRED	reused across the function: basic-type field of a TType word, TType word of the new node (+0x2c), right-hand integer operand
-local	TIntermConstantUnion__fold	puVar8	refCountOrVtable	INFERRED	reused across the function: std::string rep refcount read by the decrement loop; TType vtable address (+8) stored into the new node
-local	TIntermConstantUnion__fold	pTVar18	newNodeOrRightArg	INFERRED	reused across the function: new TIntermConstantUnion node (TPoolAllocator__allocate(...,0x34)); copy of param_3 forwarded as a register argument
-local	TIntermConstantUnion__fold	puVar11	nodeOrVtable	INFERRED	reused across the function: new TIntermConstantUnion node being filled in; vtable pointer of this/param_3
-local	TIntermConstantUnion__fold	pfVar26	resultOrRightFloats	INFERRED	reused across the function: newly allocated result union array; the right constant union array (a0[0xc])
-local	TIntermConstantUnion__fold	pcVar9	thisOrRightCursor	INFERRED	reused across the function: read cursor into this union array; union array of the right constant (a0[0xc])
 local	TIntermConstantUnion__fold	fVar5	leftValue	INFERRED	reused across the function: left float operand (this element, or the right constant when the operands are swapped) and accumulating result
-local	TIntermConstantUnion__fold	fVar6	rightOrResultValue	INFERRED	reused across the function: right float operand and the float result (or FLT_MAX / bool encoding) stored into the result array
-local	TIntermConstantUnion__fold	bVar31	flagOrCompare	INFERRED	reused across the function: right operand is a scalar to splat, comparison result, std::string refcount still positive
 local	TIntermConstantUnion__fold	bVar1	sizeFlag	INFERRED	iVar17 == 1 / iVar17 == 0 flag on the right constant size
-local	TIntermConstantUnion__fold	iVar12	sizeOrArrayOrIndex	INFERRED	reused across the function: object size of this/param_3, getAsConstantUnion result, allocated result array, component loop index
-local	TIntermConstantUnion__fold	iVar13	resultOrOffset	INFERRED	reused across the function: allocated result array pointer, loop index, byte offset into the union array
-local	TIntermConstantUnion__fold	iVar14	countOrResult	INFERRED	reused across the function: object size, countdown, integer quotient/result of the folded operation, loop index
-local	TIntermConstantUnion__fold	iVar17	sizeOrIndex	INFERRED	reused across the function: object size (vtable +0x4c), nominal size (+0x48), loop index, constant 2/3, param_5 copy
 local	TIntermConstantUnion__fold	iVar23	columnOffset	INFERRED	reused across the function: running element offset (0, += size) and countdown of the matrix multiply
-local	TIntermConstantUnion__fold	iVar28	sizeOrLoopIndex	INFERRED	reused across the function: object size (vtable +0x4c/+0x58), per-case loop index, byte offset (index << 2), integer quotient
 local	TIntermConstantUnion__fold	iVar33	columnsLeft	INFERRED	countdown (starts as the size, += -1) of the matrix multiply
-local	TIntermConstantUnion__fold	local_140	rightTypeOrString	INFERRED	param_3->getType() copy (vtable +0x38) in the final path; the slot is also the std::string temporary built for the diagnostic and its text buffer
+local	TIntermConstantUnion__fold	local_140	rightTypeOverlay	INFERRED	address-taken frame array: the stack TType temporary and the std::string rep for the location text occupy the same slot in different lifetimes
 local	TIntermConstantUnion__fold	aaStack_130	locTextBuf	INFERRED	char buffer of the "%d:%d" / "%d:? " sprintf of the source location (16 bytes), then the std::string text
 local	TIntermConstantUnion__fold	aaStack_120	stringAllocator	INFERRED	dummy std::allocator<char> passed by reference as third argument of the std::string(const char*, const allocator&) constructor
 local	TIntermConstantUnion__fold	local_11c	rightTypeBits	INFERRED	bit-field word of the param_3->getType() copy: its basic type (>> 0x13 & 0x3f) is compared with 0xe

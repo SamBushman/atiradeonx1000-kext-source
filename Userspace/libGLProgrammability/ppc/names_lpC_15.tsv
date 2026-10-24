@@ -2,18 +2,6 @@ local	TParseContext__extensionErrorCheck	param_2	sourceLoc	INFERRED	source locat
 local	TParseContext__extensionErrorCheck	bVar1	isDisabled	INFERRED	the extension behavior is EBhDisable (3): "extension ... is disabled"
 local	TParseContext__extensionErrorCheck	iStack_12c	strCopyChars	INFERRED	character pointer of the copy of the extension name used to build the message
 local	TParseContext__extensionErrorCheck	iStack_19c	msgPrefixChars	INFERRED	character pointer of the "extension " + name message prefix
-use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ local_1b0;$	+1
-use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*local_180\[0\]\ =\ iVar10;$	+1
-use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ local_190\[0\];$	+1
-use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ local_1b0;$@2	+1
-use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x18\);$	+1
-use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*if\ \(iVar10\ ==\ 2\)\ \{$	+1
-use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ local_1c0\[0\];$	+1
-use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*local_190\[0\]\ =\ iVar10;$	+1
-use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ local_1a0;$	+1
-use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ local_1c0\[0\];$@2	+1
-use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar10\ \+\ 0x18\);$@2	+1
-use	TParseContext__extensionErrorCheck	iVar10	mapNodeThenBehavior	INFERRED	TBehaviorMap node found / inserted for the extension name, replaced by its behavior value (+0x18)	^\s*bVar1\ =\ iVar10\ ==\ 3;$	+1
 use	TParseContext__extensionErrorCheck	iVar5	compareResult	INFERRED	memcmp of the key against the node key, then the length difference	^\s*iVar5\ =\ _memcmp\(local_1cc,\*\(undefined4\ \*\)\(local_1b0\ \+\ 0x14\),\*puVar7\);$	+4
 use	TParseContext__extensionErrorCheck	iVar5	compareResult	INFERRED	memcmp of the key against the node key, then the length difference	^\s*if\ \(iVar5\ <\ 0\)\ goto\ LAB_97b9d574;$	+1
 use	TParseContext__extensionErrorCheck	iVar5	compareResult	INFERRED	memcmp of the key against the node key, then the length difference	^\s*iVar5\ =\ _memcmp\(local_1cc,\*\(undefined4\ \*\)\(local_1c0\[0\]\ \+\ 0x14\),\*puVar7\);$	+4
@@ -29,10 +17,10 @@ local	TParseContext__extensionErrorCheck	local_16c	entryKeyChars	INFERRED	charac
 local	TParseContext__extensionErrorCheck	local_170	entryKey	INFERRED	copy of the key string used in the new map entry
 local	TParseContext__extensionErrorCheck	local_180	insertHintCopy	INFERRED	copy of the hint iterator
 local	TParseContext__extensionErrorCheck	local_190	insertIterator	INFERRED	iterator returned by insert_unique
-local	TParseContext__extensionErrorCheck	local_1a0	mapEndOrMsgPrefix	INFERRED	map end node (this+0x34), later the TString "extension " + name
+local	TParseContext__extensionErrorCheck	local_1a0	mapEndOverlay	INFERRED	address-taken frame slot: std::map end/insert result and later the "extension " message prefix string (&) share it
 local	TParseContext__extensionErrorCheck	local_1ac	msgChars	INFERRED	character pointer of the assembled message string
-local	TParseContext__extensionErrorCheck	local_1b0	mapIterOrMsgString	INFERRED	lower_bound iterator, later the message TString (address taken)
-local	TParseContext__extensionErrorCheck	local_1c0	allocatorArgOrLowerBound	INFERRED	pool_allocator argument for the key string constructor, later the lower_bound iterator of the second lookup
+local	TParseContext__extensionErrorCheck	local_1b0	mapIterOverlay	INFERRED	address-taken frame slot: std::map find/insert iterator and later the std::string message buffer (&) share it
+local	TParseContext__extensionErrorCheck	local_1c0	allocatorOverlay	INFERRED	address-taken frame slot: pool allocator argument (int[4] block) and the lower_bound result iterator share it
 local	TParseContext__extensionErrorCheck	local_1cc	extensionKeyChars	INFERRED	character pointer of the extension name key copy
 local	TParseContext__extensionErrorCheck	local_1d0	extensionKey	INFERRED	copy of the extension name used as the TBehaviorMap key
 local	TParseContext__extensionErrorCheck	local_34	lenNodeB	INFERRED	length of the node key in the second compare (address taken: min() argument)
@@ -98,7 +86,6 @@ local	TParseContext__findFunction	local_40	findResult	INFERRED	std::pair<iterato
 local	TParseContext__findFunction	pcVar4	errorReason	INFERRED	"function name expected" / "no matching overloaded function found"
 local	TParseContext__findFunction	piVar6	symbolTable	INFERRED	this+4: the symbol table (level vector at +0)
 local	TParseContext__findFunction	uVar3	mangledName	INFERRED	function->getMangledName() (vtable +8)
-local	TParseContext__executeInitializer	iVar8	levelsBeginOrVariableOrConstArray	INFERRED	level vector start, then the variable found by the level search, then its constant array: one Ghidra variable reused as a temp
 use	TParseContext__executeInitializer	local_14c	voidErrorResult	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*local_14c\ =\ TParseContext__voidErrorCheck\(this,param_2,param_3,param_4\);$	+3
 use	TParseContext__executeInitializer	local_14c	voidErrorResult	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*local_144\ =\ local_14c;$	+1
 use	TParseContext__executeInitializer	local_14c	voidErrorResult	INFERRED	w1 voidErrorCheck result; w2/w7 zero used to clear TType words; w3/w4 character pointers of strings whose refcount is released; w5/w6 a word copied from the existing variable	^\s*local_13c\ =\ local_14c;$	+3
@@ -213,7 +200,7 @@ use	TParseContext__addConstVectorNode	iVar5	fieldIndex	INFERRED	w1 node getAsCon
 use	TParseContext__addConstVectorNode	iVar5	fieldIndex	INFERRED	w1 node getAsConstantUnion(); w2 constant component count; w3/w4 aggregate->getSequence() (vtable +100); w5 swizzle field loop counter	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
 use	TParseContext__addConstVectorNode	iVar5	fieldIndex	INFERRED	w1 node getAsConstantUnion(); w2 constant component count; w3/w4 aggregate->getSequence() (vtable +100); w5 swizzle field loop counter	^\s*\}\ while\ \(iVar5\ <\ \*\(int\ \*\)\(param_2\ \+\ 0x10\)\);$	+1
 local	TParseContext__addConstVectorNode	local_6c	typeTempBits	INFERRED	bit-field word (+0x24) of the TType temp at local_90
-local	TParseContext__addConstVectorNode	local_90	typeTempOrTextBuf	INFERRED	stack area used as a getType() TType temp and as a text buffer
+local	TParseContext__addConstVectorNode	local_90	typeTempOverlay	INFERRED	address-taken frame array: the getType() TType temporary and the sprintf/text buffer occupy the same slot in different lifetimes; apply_names cannot split address-taken locals
 use	TParseContext__addConstVectorNode	pcVar10	constArray	INFERRED	the node's constant array, or the array freshly filled by parseConstTree	^\s*pcVar10\ =\ \*\(unsigned\ char\ \*\*\)\(iVar5\ \+\ 0x30\);$	+2
 use	TParseContext__addConstVectorNode	pcVar10	constArray	INFERRED	the node's constant array, or the array freshly filled by parseConstTree	^\s*pcVar10\ =\ \(unsigned\ char\ \*\)\(\(int\ \(\*\)\(\)\)TPoolAllocator__allocate\)\(pTVar7,iVar5\ <<\ 2\);$	+1
 use	TParseContext__addConstVectorNode	pcVar10	constArray	INFERRED	the node's constant array, or the array freshly filled by parseConstTree	^\s*\(\*\(unsigned\ char\ \*\*\)this,param_4,a1,pcVar10,\*\(undefined4\ \*\)\(a1\ \+\ 0x30\),$	+2

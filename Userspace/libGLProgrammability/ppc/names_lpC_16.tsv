@@ -48,7 +48,6 @@ local	TPoolAllocator__pop	pvVar2	savedPage	INFERRED	page list head recorded by t
 local	TPoolAllocator__pop	pvVar3	nextPage	INFERRED	next page saved before the current page is released
 local	TPoolAllocator__allocate	param_2	numBytes	INFERRED	requested allocation size
 local	TPoolAllocator__allocate	fVar1	guardBlockSizeF	INFERRED	TAllocation::guardBlockSize read as float
-local	TPoolAllocator__allocate	iVar6	offsetThenResult	INFERRED	current page offset, replaced by the returned allocation address
 local	TPoolAllocator__allocate	iVar7	allocationSize	INFERRED	numBytes plus the two guard blocks
 local	TPoolAllocator__allocate	uVar2	prevPage	INFERRED	previous in-use page stored in the new page header
 local	TPoolAllocator__allocate	uVar3	pageSize	INFERRED	allocator page size (+4)
@@ -280,8 +279,6 @@ local	_ShLink	param_3	numShaders	INFERRED	number of shaders
 local	_ShLink	param_4	linkerWord80	INFERRED	stored into the linker at +0x80
 local	_ShLink	param_5	linkerWord7c	INFERRED	stored into the linker at +0x7c
 local	_ShLink	iVar2	hasObjectCode	INFERRED	compiler->getObjectCode() non-null (vtable +0x20)
-local	_ShLink	iVar5	shaderIndexThenLinkResult	INFERRED	loop index over the shaders, then the TGenericLinker::link result
 local	_ShLink	pcVar3	messagePrefix	INFERRED	"INTERNAL ERROR: " / "ERROR: "
 local	_ShLink	pcVar4	messageText	INFERRED	error message text
-local	_ShLink	piVar1	shaderHandleThenCompiler	INFERRED	shader handle from the array, then its getAsCompiler() result
 local	ShSetEncryptionMethod	param_1	unusedArg1	UNKNOWN	never read

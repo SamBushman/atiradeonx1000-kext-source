@@ -620,16 +620,17 @@ int BindingTable__InsertAttribBinding(this, binding)
   unsigned char * this;
   unsigned char * binding;
 {
-  unsigned char *nextNode;
-  unsigned char *curNode;
   int bindingSlots;
   int isBuiltIn;
   int activeIndex;
   int hashIdx;
   int curLocation;
+  int headLocation;
+  unsigned char *nextNode;
+  unsigned char *curNode;
+  int builtInTestResult;
   int slotCount;
   undefined4 result;
-  int builtInOrCmp;
   int prevLocation;
   int newLocation;
   unsigned char *prevBinding;
@@ -639,12 +640,12 @@ int BindingTable__InsertAttribBinding(this, binding)
   result = 0;
   if (binding != (unsigned char *)0x0) {
     prevLocation = 0;
-    builtInOrCmp = Binding__IsBuiltIn(binding);
+    builtInTestResult = Binding__IsBuiltIn(binding);
     nextBinding = *(unsigned char **)(this + 0xc);
     newLocation = 1;
-    if ((builtInOrCmp != 0) && (builtInOrCmp = _memcmp(*(undefined4 *)(binding + 8),"gl_Vertex",10), builtInOrCmp == 0))
+    if ((builtInTestResult != 0) && (builtInTestResult = _memcmp(*(undefined4 *)(binding + 8),"gl_Vertex",10), builtInTestResult == 0))
     {
-      if ((nextBinding != (unsigned char *)0x0) && (builtInOrCmp = ((int (*)())Binding__GetLocation)(nextBinding), builtInOrCmp == 0)) {
+      if ((nextBinding != (unsigned char *)0x0) && (headLocation = ((int (*)())Binding__GetLocation)(nextBinding), headLocation == 0)) {
         return 0;
       }
       newLocation = 0;
@@ -932,6 +933,7 @@ int BindingTable__InsertUniformArray(this, binding, unusedArg3, firstTable, endT
   int endTable;
   unsigned char ** parseSymbolTable;
 {
+  int lastBindingSlots;
   int elementIdx;
   int bindingSlots;
   int activeIndex;
@@ -946,7 +948,7 @@ int BindingTable__InsertUniformArray(this, binding, unusedArg3, firstTable, endT
   int symbolFound;
   unsigned char * elementBinding;
   unsigned char * symbolTable;
-  int slotsOrFound;
+  int elementSymbolFound;
   int curLocation;
   unsigned char * nextNode;
   unsigned char * curNode;
@@ -999,8 +1001,8 @@ int BindingTable__InsertUniformArray(this, binding, unusedArg3, firstTable, endT
               symbolTable = *tablePtr;
               tablePtr = tablePtr + 1;
               if ((symbolTable != (unsigned char *)0x0) &&
-                 (slotsOrFound = ParseSymbolTable__FindSymbolByName(symbolTable,*(char **)(elementBinding + 8)),
-                 slotsOrFound != 0)) goto LAB_97bb1538;
+                 (elementSymbolFound = ParseSymbolTable__FindSymbolByName(symbolTable,*(char **)(elementBinding + 8)),
+                 elementSymbolFound != 0)) goto LAB_97bb1538;
               probeIdx = probeIdx + 1;
             } while (probeIdx < endTable);
           }
@@ -1012,7 +1014,7 @@ int BindingTable__InsertUniformArray(this, binding, unusedArg3, firstTable, endT
         if (keepElement) {
 LAB_97bb1538:
           location = 0;
-          slotsOrFound = 0;
+          lastBindingSlots = 0;
           nextNode = *(unsigned char **)(this + 0x14);
           if (*(unsigned char **)(this + 0x14) == (unsigned char *)0x0) {
             *(unsigned char **)(this + 0x14) = elementBinding;
@@ -1022,14 +1024,14 @@ LAB_97bb1538:
               curNode = nextNode;
               curLocation = ((int (*)())Binding__GetLocation)(curNode);
               if (-1 < curLocation) {
-                slotsOrFound = ((int (*)())Binding__GetBindingSlots)(curNode);
+                lastBindingSlots = ((int (*)())Binding__GetBindingSlots)(curNode);
                 location = curLocation;
               }
               nextNode = (unsigned char *)((int (*)())Binding__GetNextBinding)(curNode);
             } while (nextNode != (unsigned char *)0x0);
             ((int (*)())Binding__SetNextBinding)(curNode,elementBinding);
           }
-          ((int (*)())Binding__SetLocation)(elementBinding,location + slotsOrFound);
+          ((int (*)())Binding__SetLocation)(elementBinding,location + lastBindingSlots);
           hashIdx = Binding__GetHash(elementBinding,*(uint *)this);
           nextNode = *(unsigned char **)(hashIdx * 4 + *(int *)(this + 0x18));
           if (nextNode == (unsigned char *)0x0) {
