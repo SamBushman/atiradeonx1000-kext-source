@@ -1200,7 +1200,7 @@ int FUN_00174e0c(valueKey)
     if (loopIndex2 == 0) goto LAB_00174efc;
     loopPtr3 = (int *)valueKey[0x2c];
   }
-  loopIndex2 = FUN_001055cc(loopPtr3);
+  loopIndex2 = IRInst__isProjectionOfOpcode2a(loopPtr3);
   if ((((loopIndex2 != 0) || (loopIndex2 = IRInst__isProjectionOfClass26or3a(valueKey[0x2c]), loopIndex2 != 0)) ||
       (loopPtr3 = (int *)valueKey[0x2c], *(int *)(loopPtr3[0x22] + 8) == 0xb4)) ||
      ((loopIndex2 = (**(code **)(*loopPtr3 + 0x6c))(loopPtr3), loopIndex2 != 0 ||
@@ -1360,9 +1360,9 @@ LAB_00174efc:
                 loopRemaining = valueKey[loopIndex2 * 4 + loopIndex + 0x5a];
                 if (loopRemaining < 0) {
                   puVar4 = (undefined4 *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopRemaining);
-                  FUN_0010aee8(&local_40,valueKey[0x2c],*puVar4);
+                  IRInst__scaleByOutputScale(&local_40,valueKey[0x2c],*puVar4);
                   loopIndex2 = local_40;
-                  FUN_0010b118(local_3c,valueKey[0x2c],local_40);
+                  IRInst__clampOutputValue(local_3c,valueKey[0x2c],local_40);
                   loopRemaining = local_3c[0];
                   if (local_3c[0] != loopIndex2) goto LAB_001756e4;
                   goto LAB_001756ec;
@@ -1384,9 +1384,9 @@ LAB_001757a0:
               loopRemaining = loopPtr3[0x5e];
               if (loopRemaining < 0) {
                 puVar4 = (undefined4 *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopRemaining);
-                FUN_0010aee8(&local_48,valueKey[0x2c],*puVar4);
+                IRInst__scaleByOutputScale(&local_48,valueKey[0x2c],*puVar4);
                 loopIndex2 = local_48;
-                FUN_0010b118(&local_44,valueKey[0x2c],local_48);
+                IRInst__clampOutputValue(&local_44,valueKey[0x2c],local_48);
                 loopRemaining = local_44;
                 if (local_44 != loopIndex2) {
 LAB_001756e4:
@@ -1472,8 +1472,8 @@ LAB_0017547c:
         if (loopIndex < 0) {
           bVar8 = false;
           puVar4 = (undefined4 *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopIndex);
-          FUN_0010aee8(&local_50,valueKey[0x2c],*puVar4);
-          FUN_0010b118(&local_4c,valueKey[0x2c],local_50);
+          IRInst__scaleByOutputScale(&local_50,valueKey[0x2c],*puVar4);
+          IRInst__clampOutputValue(&local_4c,valueKey[0x2c],local_50);
           local_54 = local_4c;
           if (local_4c != local_50) goto LAB_00175348;
           goto LAB_00175350;
@@ -1522,8 +1522,8 @@ LAB_0017547c:
     if (loopIndex < 0) {
       bVar8 = false;
       puVar4 = (undefined4 *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopIndex);
-      FUN_0010aee8(local_68 + 4,valueKey[0x2c],*puVar4);
-      FUN_0010b118(&local_54,valueKey[0x2c],local_68[4]);
+      IRInst__scaleByOutputScale(local_68 + 4,valueKey[0x2c],*puVar4);
+      IRInst__clampOutputValue(&local_54,valueKey[0x2c],local_68[4]);
       local_50 = local_68[4];
       if (local_54 != local_68[4]) {
 LAB_00175348:
@@ -1780,7 +1780,7 @@ LAB_00175ce8:
       loopPtr2 = loopPtr2 + 1;
     } while (bVar1);
     loopRemaining = FUN_000f3154(valueKey[0x2c]);
-    if ((loopRemaining == 0) && (loopRemaining = FUN_001055cc(valueKey[0x2c]), loopRemaining == 0)) {
+    if ((loopRemaining == 0) && (loopRemaining = IRInst__isProjectionOfOpcode2a(valueKey[0x2c]), loopRemaining == 0)) {
       *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) =
            *(int *)(*(int *)(valueKey[0x8e] + 0x6c4) + 0xa8) + 1;
       loopRemaining = valueKey[0x2c];
@@ -2478,9 +2478,9 @@ int FUN_00176a94(param_1, valueKey, param_3)
             (piVar4,param_1,local_78,local_68,local_58,*(undefined4 *)(valueKey + 0x238));
   param_3_w = *param_1;
   if (param_3_w != FLOAT_001aa1d0) {
-    FUN_0010aee8(&local_48,*(undefined4 *)(valueKey + 0xb0),param_3_w);
+    IRInst__scaleByOutputScale(&local_48,*(undefined4 *)(valueKey + 0xb0),param_3_w);
     *param_1 = local_48;
-    FUN_0010b118(&local_44,*(undefined4 *)(valueKey + 0xb0),local_48);
+    IRInst__clampOutputValue(&local_44,*(undefined4 *)(valueKey + 0xb0),local_48);
     if (local_44 != *param_1) {
       *param_3 = 1;
       *param_1 = local_44;
@@ -2533,9 +2533,9 @@ int FUN_00176c40(param_1, valueKey, param_3, param_4)
   a6 = *(code **)(*a0 + 4);
   (*a6)(a0,param_1,local_48,*(undefined4 *)(valueKey + 0x238),in_r7,in_r8,a6);
   if (*param_1 != 0x7ffffffe) {
-    FUN_0010aee8(&local_28,*(undefined4 *)(valueKey + 0xb0),*param_1);
+    IRInst__scaleByOutputScale(&local_28,*(undefined4 *)(valueKey + 0xb0),*param_1);
     *param_1 = local_28;
-    FUN_0010b118(local_24,*(undefined4 *)(valueKey + 0xb0),local_28);
+    IRInst__clampOutputValue(local_24,*(undefined4 *)(valueKey + 0xb0),local_28);
     if (local_24[0] != *param_1) {
       *param_4 = 1;
       *param_1 = local_24[0];

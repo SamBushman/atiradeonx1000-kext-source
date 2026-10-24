@@ -6511,24 +6511,24 @@ void FUN_00024370(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
  * against the real compiled C symbols (gcc adds one underscore automatically).
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
-asm(".globl FUN_0001a280");
-asm(".set FUN_0001a280, _glFlush_impl");
-asm(".globl FUN_0001a4e0");
-asm(".set FUN_0001a4e0, _glFlush_impl_withSurfaceUpdate");
-asm(".globl FUN_0001a670");
-asm(".set FUN_0001a670, _gld_signalFence");
-asm(".globl FUN_0001a750");
-asm(".set FUN_0001a750, _glFinish_impl");
+asm(".globl glFlush_impl");
+asm(".set glFlush_impl, _glFlush_impl");
+asm(".globl glFlush_impl_withSurfaceUpdate");
+asm(".set glFlush_impl_withSurfaceUpdate, _glFlush_impl_withSurfaceUpdate");
+asm(".globl gld_signalFence");
+asm(".set gld_signalFence, _gld_signalFence");
+asm(".globl glFinish_impl");
+asm(".set glFinish_impl, _glFinish_impl");
 asm(".globl FUN_0001a9d0");
 asm(".set FUN_0001a9d0, _FUN_0001a9d0");
-asm(".globl FUN_0001e270");
-asm(".set FUN_0001e270, _returnZero_1e270");
-asm(".globl FUN_0001ecd0");
-asm(".set FUN_0001ecd0, _gld_drawVertexArray");
+asm(".globl returnZero_1e270");
+asm(".set returnZero_1e270, _returnZero_1e270");
+asm(".globl gld_drawVertexArray");
+asm(".set gld_drawVertexArray, _gld_drawVertexArray");
 asm(".globl FUN_00020330");
 asm(".set FUN_00020330, _FUN_00020330");
-asm(".globl FUN_00020420");
-asm(".set FUN_00020420, _gldDisplayNotificationCallback");
+asm(".globl gldDisplayNotificationCallback");
+asm(".set gldDisplayNotificationCallback, _gldDisplayNotificationCallback");
 asm(".globl FUN_000242f0");
 asm(".set FUN_000242f0, _FUN_000242f0");
 asm(".globl FUN_00024370");

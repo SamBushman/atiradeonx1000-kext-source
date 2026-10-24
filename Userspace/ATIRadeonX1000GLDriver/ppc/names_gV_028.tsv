@@ -1,0 +1,238 @@
+local	IRInst__deleteIfUnused	param_2	compiler	INFERRED	param_2+0x6c4 is the current program; param_3 == 0 means the source use counts still have to be decremented
+local	IRInst__deleteIfUnused	param_3	sourcesReleased	INFERRED	param_2+0x6c4 is the current program; param_3 == 0 means the source use counts still have to be decremented
+local	IRInst__deleteIfUnused	uVar2	result	INFERRED	1 when the instruction was deleted
+local	IRInst__deleteIfUnused	a0	sourceInst	INFERRED	operand source whose own use count may drop to zero
+local	IRInst__deleteIfUnused	a0_00	grandSourceInst	INFERRED	source of the source
+func	FUN_001058a8	IRInst__decrementSourceUseCounts	INFERRED	when program flag 0x80 is set, decrements the use count (+0x160) of every operand source
+local	FUN_001058a8	param_2	program	INFERRED	
+local	FUN_001058a8	iVar2	operandIndex	INFERRED	1..operandCount
+func	FUN_00105930	IRInst__removeFromSourceUserLists	INFERRED	when program flag 0x80 is set, removes inst from the user vector (+0x10) of each operand source
+local	FUN_00105930	param_2	program	INFERRED	
+local	FUN_00105930	puVar6	userVector	INFERRED	user vector of the source
+local	FUN_00105930	uVar2	userCount	INFERRED	element count of the user vector
+local	FUN_00105930	piVar3	elementRef	INFERRED	vector element
+local	FUN_00105930	iVar4	operandIndex	INFERRED	1..operandCount
+local	IRInst__removeFromList	uVar1	flags	INFERRED	this+0x14
+local	IRInst__removeFromList	iVar3	nextInst	INFERRED	this+4
+local	IRInst__removeFromListEx	param_2	sourcesReleased	INFERRED	forwarded as the second argument of virtual slot 0x34
+local	IRInst__removeFromListEx	uVar1	flags	INFERRED	this+0x14
+local	IRInst__removeFromListEx	iVar3	nextInst	INFERRED	this+4
+func	FUN_00105b24	IRInst__detachWhenTracking	INFERRED	when program flag 0x80 is set: remove from source user lists and decrement source use counts
+local	FUN_00105b24	param_1	inst	INFERRED	
+local	FUN_00105b24	param_2	program	INFERRED	
+local	IRInst__getDefiningField128	param_2	operandIndex	INFERRED	
+local	IRInst__getDefiningField128	uVar2	destKind	INFERRED	virtual slot 0x24 of the operand's reference
+local	IRInst__getDefiningField128	piVar3	operandRef	INFERRED	operand record's reference
+local	IRInst__firstLiteralSourceValue	param_1	outValue	INFERRED	
+local	IRInst__firstLiteralSourceValue	iVar1	operandIndex	INFERRED	scans operands after the fixed ones
+local	IRInst__firstLiteralSourceValue	iVar3	lastOperand	INFERRED	operand count (minus the trailing extra operand when flag 0x200)
+func	FUN_00105dbc	IRInst__operandKindClass	INFERRED	class (1/2/other) of the register kind of the operand source, via the kind table byte [9]
+local	FUN_00105dbc	param_2	operandIndex	INFERRED	
+local	FUN_00105dbc	uVar1	result	INFERRED	
+local	IRInst__copyOperandFrom	param_1	dstInst	INFERRED	
+local	IRInst__copyOperandFrom	param_2	dstIndex	INFERRED	
+local	IRInst__copyOperandFrom	param_4	srcIndex	INFERRED	
+func	FUN_00105e9c	IRInst__appendOperandRef	INFERRED	appends one operand reference (shifting the trailing extra operand when flag 0x200)
+local	FUN_00105e9c	param_2	operandRef	INFERRED	
+local	FUN_00105e9c	iVar2	oldCount	INFERRED	operand count before the append
+local	FUN_00105e9c	iVar1	newIndex	INFERRED	index of the appended operand
+func	FUN_001061b0	IRInst__replaceOperandsReferencing	INFERRED	operands whose reference word equals refInst's are re-pointed to refInst via setOperandSource
+local	FUN_001061b0	param_2	refInst	INFERRED	
+local	FUN_001061b0	param_3	compiler	INFERRED	
+local	FUN_001061b0	iVar1	operandCount	INFERRED	inst+0x84
+local	FUN_001061b0	iVar2	refWord	INFERRED	refInst+0x8c
+local	FUN_001061b0	iVar4	recordCursor	INFERRED	steps 0x18 per operand record
+local	IRInst__setOperandSourceIfLegal	param_1	inst	INFERRED	target virtual 0x11c decides legality
+local	IRInst__setOperandSourceIfLegal	param_2	operandIndex	INFERRED	target virtual 0x11c decides legality
+local	IRInst__setOperandSourceIfLegal	param_3	source	INFERRED	target virtual 0x11c decides legality
+local	IRInst__setOperandSourceIfLegal	param_4	legalityArg4	INFERRED	target virtual 0x11c decides legality
+local	IRInst__setOperandSourceIfLegal	param_5	legalityArg5	INFERRED	target virtual 0x11c decides legality
+local	IRInst__setOperandSourceIfLegal	param_6	compiler	INFERRED	target virtual 0x11c decides legality
+local	IRInst__setOperandSourceIfLegal	iVar1	isLegal	INFERRED	
+local	IRInst__insertSourceBeforeLast	iVar4	lastIndex	INFERRED	operand count after the shift
+local	IRInst__setLastOperandFromRecord	param_2	srcRecord	INFERRED	
+local	IRInst__setLastOperandFromRecord	param_3	trackUses	INFERRED	
+local	IRInst__setLastOperandFromRecord	param_4	compiler	INFERRED	
+local	IRInst__setLastOperandFromRecord	uVar2	selectWord	INFERRED	srcRecord+0x10
+local	IRMix__validate	param_3	unusedArg3	INFERRED	
+local	IRMix__validate	param_4	forwardedArg4	INFERRED	
+local	IRMix__validate	param_5	forwardedArg5	INFERRED	
+local	IRMix__validate	param_6	forwardedArg6	INFERRED	
+local	IRMix__validate	param_7	forwardedArg7	INFERRED	
+local	IRMix__validate	bVar1	moreChannels	INFERRED	channel != 3 before the increment
+local	IRMix__validate	a0	sourceInst	INFERRED	operand source
+func	FUN_00106cf8	IRInst__isCoalescableMov	INFERRED	1 when this mov-like instruction has an identity swizzle, no modifiers and the same assigned register as its source
+local	FUN_00106cf8	param_2	colorGraph	INFERRED	thunk_FUN_00134de8(param_2, inst) returns the register assigned to inst
+func	FUN_00106ffc	IRFetch__ctor_106ffc	INFERRED	IRInst ctor, then maxOperands = operandCount = 1 and the IRFetch vtable (the base of IRMemLoad/IRMemStore/IRTextureFetch/IRVertexFetch)
+local	FUN_00106ffc	param_2	opcode	INFERRED	
+local	FUN_00106ffc	puVar1	vtable	INFERRED	
+func	FUN_0010704c	IRFetch__ctor_10704c	INFERRED	same as FUN_00106ffc
+local	FUN_0010704c	param_2	opcode	INFERRED	
+local	FUN_0010704c	puVar1	vtable	INFERRED	
+func	FUN_0010709c	IRPseudo__ctor_10709c	= 0x18000, maxOperands = 0, IRPseudo vtable	IRInst ctor, flags
+local	FUN_0010709c	param_2	opcode	INFERRED	
+local	FUN_0010709c	puVar1	vtable	INFERRED	
+func	FUN_001070f8	IRPseudo__ctor	= 0x18000, maxOperands = 0, IRPseudo vtable (notes_compiler_ir.md section 3)	IRInst ctor, flags
+local	FUN_001070f8	param_2	opcode	INFERRED	
+local	FUN_001070f8	puVar1	vtable	INFERRED	
+func	FUN_00107154	IRAlu__ctor_107154	INFERRED	IRInst ctor, maxOperands = 1, +0x12c = 0, IRAlu vtable (the base of IRZeroary/IRUnary/IRBinary)
+local	FUN_00107154	param_2	opcode	INFERRED	
+local	FUN_00107154	puVar1	vtable	INFERRED	
+func	FUN_001071a8	IRAlu__ctor_1071a8	INFERRED	same as FUN_00107154
+local	FUN_001071a8	param_2	opcode	INFERRED	
+local	FUN_001071a8	puVar1	vtable	INFERRED	
+func	FUN_001071fc	IRMemStore__ctor_1071fc	INFERRED	IRFetch ctor, operandCount = 2, IRMemStore vtable
+local	FUN_001071fc	param_1	this	INFERRED	
+local	FUN_001071fc	param_2	opcode	INFERRED	
+local	FUN_001071fc	param_3	compiler	INFERRED	
+local	FUN_001071fc	puVar1	vtable	INFERRED	
+local	IRVertexFetch__ctor_107250	param_2	opcode	INFERRED	
+local	IRVertexFetch__ctor_107250	param_3	compiler	INFERRED	
+local	IRVertexFetch__ctor_107250	param_4	vertexArg4	INFERRED	
+local	IRVertexFetch__ctor_107250	param_5	vertexArg5	INFERRED	
+local	IRVertexFetch__ctor_107250	uVar1	defaultWord	INFERRED	DAT_001af9bc
+local	IRVertexFetch__ctor_107250	puVar2	vtable	INFERRED	
+local	IRVertexFetch__ctor_1072d0	param_2	opcode	INFERRED	
+local	IRVertexFetch__ctor_1072d0	param_4	vertexArg4	INFERRED	
+local	IRVertexFetch__ctor_1072d0	param_5	vertexArg5	INFERRED	
+local	IRVertexFetch__ctor_1072d0	uVar1	defaultWord	INFERRED	DAT_001af9bc
+local	IRVertexFetch__ctor_1072d0	puVar2	vtable	INFERRED	
+func	FUN_00107350	IRVertexFetch__new	INFERRED	allocates 0x168 bytes from arena A and runs IRVertexFetch__ctor_1072d0
+local	FUN_00107350	param_1	opcode	INFERRED	
+local	FUN_00107350	param_3	vertexArg4	INFERRED	
+local	FUN_00107350	param_4	vertexArg5	INFERRED	
+local	IRVertexFetch__ctor_1073dc	param_2	opcode	INFERRED	
+local	IRVertexFetch__ctor_1073dc	param_3	compiler	INFERRED	
+local	IRVertexFetch__ctor_107420	param_2	opcode	INFERRED	
+func	FUN_001074e0	IRTextureFetch__ctor_1074e0	INFERRED	IRFetch ctor, then initialises the texture fetch state block (0x24 bytes of default ushort fields); flag 8 for opcode 0x77
+local	FUN_001074e0	param_1	this	INFERRED	
+local	FUN_001074e0	param_2	opcode	INFERRED	
+local	FUN_001074e0	uVar1	defaultWord	INFERRED	DAT_001af9bc
+local	FUN_001074e0	puVar2	vtable	INFERRED	
+local	FUN_001074e0	puVar3	fetchStateBlock	INFERRED	0x24-byte block from arena A
+local	IRTextureFetchGradients__ctor_107600	param_1	this	INFERRED	
+local	IRTextureFetchGradients__ctor_107600	param_2	opcode	INFERRED	
+local	IRTextureFetchGradients__ctor_107600	param_3	compiler	INFERRED	
+local	IRTextureFetchGradients__ctor_107600	puVar1	vtable	INFERRED	
+func	FUN_0010764c	IRTextureFetch__ctor_10764c	INFERRED	same as FUN_001074e0
+local	FUN_0010764c	param_1	this	INFERRED	
+local	FUN_0010764c	param_2	opcode	INFERRED	
+local	FUN_0010764c	uVar1	defaultWord	INFERRED	DAT_001af9bc
+local	FUN_0010764c	puVar2	vtable	INFERRED	
+local	FUN_0010764c	puVar3	fetchStateBlock	INFERRED	0x24-byte block from arena A
+func	FUN_0010776c	IRTextureFetch__new	INFERRED	allocates 0x168 bytes from arena A and runs IRTextureFetch__ctor_10764c
+local	FUN_0010776c	param_1	opcode	INFERRED	
+local	IRTextureFetchGradients__ctor_107864	param_1	this	INFERRED	
+local	IRTextureFetchGradients__ctor_107864	param_2	opcode	INFERRED	
+local	IRTextureFetchGradients__ctor_107864	puVar1	vtable	INFERRED	
+local	IRMemLoad__ctor_10792c	param_1	this	INFERRED	
+local	IRMemLoad__ctor_10792c	param_2	opcode	INFERRED	
+local	IRMemLoad__ctor_10792c	param_3	compiler	INFERRED	
+local	IRMemLoad__ctor_10792c	puVar1	vtable	INFERRED	
+func	FUN_00107980	IRMemLoad__ctor_107980	INFERRED	same as IRMemLoad__ctor_10792c
+local	FUN_00107980	param_1	this	INFERRED	
+local	FUN_00107980	param_2	opcode	INFERRED	
+local	FUN_00107980	param_3	compiler	INFERRED	
+local	FUN_00107980	puVar1	vtable	INFERRED	
+local	IRMemStore__ctor_1079d4	param_1	this	INFERRED	
+local	IRMemStore__ctor_1079d4	param_2	opcode	INFERRED	
+local	IRMemStore__ctor_1079d4	param_3	compiler	INFERRED	
+local	IRMemStore__ctor_1079d4	puVar1	vtable	INFERRED	
+local	IRZeroary__ctor_107a28	param_1	this	INFERRED	
+local	IRZeroary__ctor_107a28	param_2	opcode	INFERRED	
+local	IRZeroary__ctor_107a28	param_3	compiler	INFERRED	
+local	IRZeroary__ctor_107a28	puVar1	vtable	INFERRED	
+local	IRNop__ctor_107a74	param_2	opcode	INFERRED	
+local	IRNop__ctor_107a74	uVar1	defaultWord	INFERRED	DAT_001af9c8
+local	IRNop__ctor_107a74	puVar2	vtable	INFERRED	
+local	IRNop__ctor_107b4c	param_2	opcode	INFERRED	
+local	IRNop__ctor_107b4c	param_3	compiler	INFERRED	
+local	IRNop__ctor_107b4c	uVar1	defaultWord	INFERRED	DAT_001af9c8
+local	IRNop__ctor_107b4c	puVar2	vtable	INFERRED	
+local	IRZeroary__ctor_107ba8	param_1	this	INFERRED	
+local	IRZeroary__ctor_107ba8	param_2	opcode	INFERRED	
+local	IRZeroary__ctor_107ba8	puVar1	vtable	INFERRED	
+func	FUN_00107bf4	IRZeroary__new	INFERRED	allocates 0x168 bytes from arena A and runs IRZeroary__ctor_107ba8
+local	FUN_00107bf4	param_1	opcode	INFERRED	
+func	FUN_00107cec	IRUnary__ctor_107cec	INFERRED	IRAlu ctor, operandCount = 1, IRUnary vtable (IRMov's base)
+local	FUN_00107cec	param_1	this	INFERRED	
+local	FUN_00107cec	param_2	opcode	INFERRED	
+local	FUN_00107cec	param_3	compiler	INFERRED	
+local	FUN_00107cec	puVar1	vtable	INFERRED	
+local	IRMov__ctor_107d38	param_1	this	INFERRED	
+local	IRMov__ctor_107d38	param_2	opcode	INFERRED	
+local	IRMov__ctor_107d38	param_3	compiler	INFERRED	
+local	IRMov__ctor_107d38	puVar2	vtable	INFERRED	
+local	IRMov__ctor_107d38	bVar1	moreOperands	INFERRED	loopIndex != 1
+local	IRInst__reinitAsUnary	param_1	this	INFERRED	
+local	IRInst__reinitAsUnary	param_2	opcode	INFERRED	
+local	IRInst__reinitAsUnary	param_3	compiler	INFERRED	
+local	IRInst__reinitAsUnary	puVar1	vtable	INFERRED	
+use	IRInst__deleteIfUnused	iVar5	childOperandIndex	INFERRED	operand loop over sourceInst	^\s*iVar5\ =\ 1;$	+1
+use	IRInst__deleteIfUnused	iVar5	childOperandIndex	INFERRED	operand loop over sourceInst	^\s*for\ \(;\ iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x14\)\)\(a0\),\ iVar5\ <=\ iVar3;\ iVar5\ =\ iVar5\ \+\ 1\)\ \{$	+2
+use	IRInst__deleteIfUnused	iVar1	operandCount	INFERRED	inst[0x21]	^\s*iVar1\ =\ param_1\[0x21\];$	+1
+use	IRInst__deleteIfUnused	iVar1	operandCount	INFERRED	inst[0x21]	^\s*if\ \(0\ <\ iVar1\)\ \{$	+1
+use	IRInst__deleteIfUnused	iVar1	operandCount	INFERRED	inst[0x21]	^\s*iVar1\ =\ param_1\[0x21\];$@2	+1
+use	IRInst__deleteIfUnused	iVar1	operandCount	INFERRED	inst[0x21]	^\s*\}\ while\ \(iVar3\ <=\ iVar1\);$	+1
+use	IRInst__deleteIfUnused	iVar1	operandCount	INFERRED	inst[0x21]	^\s*iVar1\ =\ param_1\[0x21\];$@3	+1
+use	IRInst__deleteIfUnused	iVar1	operandCount	INFERRED	inst[0x21]	^\s*if\ \(0\ <\ iVar1\)\ \{$@2	+1
+use	IRInst__deleteIfUnused	iVar3	operandIndex	INFERRED	operand loop decrementing source use counts	^\s*iVar3\ =\ 1;$	+1
+use	IRInst__deleteIfUnused	iVar3	operandIndex	INFERRED	operand loop decrementing source use counts	^\s*iVar5\ =\ FUN_00105594\(param_1,iVar3\);$	+1
+use	IRInst__deleteIfUnused	iVar3	operandIndex	INFERRED	operand loop decrementing source use counts	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
+use	IRInst__deleteIfUnused	iVar3	operandIndex	INFERRED	operand loop decrementing source use counts	^\s*\}\ while\ \(iVar3\ <=\ iVar1\);$	+1
+use	IRInst__deleteIfUnused	iVar3	isDeletable	INFERRED	virtual slot 0x5c of the source	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x5c\)\)\(a0\);$	+2
+use	IRInst__deleteIfUnused	iVar3	countValue	INFERRED	use count / operand count of the source	^\s*iVar3\ =\ FUN_00104054\(a0,\*\(undefined4\ \*\)\(param_2\ \+\ 0x6c4\)\);$	+3
+use	IRInst__deleteIfUnused	iVar3	countValue	INFERRED	use count / operand count of the source	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*a0_00\ \+\ 0x5c\)\)\(a0_00\);$	+3
+use	IRInst__deleteIfUnused	iVar3	countValue	INFERRED	use count / operand count of the source	^\s*for\ \(iVar3\ =\ 1;\ iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*a0_00\ \+\ 0x14\)\)\(a0_00\),\ iVar3\ <=\ iVar4;$	+3
+use	IRInst__removeFromList	iVar2	vslot34Result	INFERRED	virtual slot 0x34 of this	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x34\)\)\(param_1,param_2\);$	+2
+use	IRInst__removeFromList	iVar2	vslot40Result	INFERRED	virtual slot 0x40 of this: true when this is a block's first-instruction marker	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x40\)\)\(param_1\);$	+4
+use	IRInst__removeFromListEx	iVar2	vslot34Result	INFERRED	virtual slot 0x34 of this	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x34\)\)\(param_1,param_2,param_3\);$	+2
+use	IRInst__removeFromListEx	iVar2	vslot40Result	INFERRED	virtual slot 0x40 of this	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x40\)\)\(param_1\);$	+4
+use	FUN_00105dbc	iVar2	sourceInst	INFERRED	operand source	^\s*if\ \(\(param_2\ <\ 1\)\ \|\|\ \(iVar2\ =\ FUN_00105594\(param_1,param_2\),\ iVar2\ ==\ 0\)\)\ \{$	+1
+use	FUN_00105dbc	iVar2	regKind	INFERRED	register kind of the source or of the operand record	^\s*iVar2\ =\ FUN_001054ec\(param_1,param_2\);$	+2
+use	FUN_00105dbc	iVar2	regKind	INFERRED	register kind of the source or of the operand record	^\s*iVar2\ =\ FUN_00105594\(param_1,param_2\);$	+2
+use	FUN_00105dbc	iVar2	regKind	INFERRED	register kind of the source or of the operand record	^\s*if\ \(PTR_PTR_001e8c60\[iVar2\ \*\ 0x10\ \+\ 9\]\ !=\ '\\x01'\)\ \{$	+2
+use	IRProjection__validate	iVar1	isProjection	INFERRED		^\s*iVar1\ =\ FUN_001045e4\(param_1\);$	+2
+use	IRProjection__validate	iVar1	selectRecord	INFERRED	operand record 1	^\s*iVar1\ =\ FUN_001054ec\(param_1,1\);$	+2
+use	IRPhiNode__validate	iVar2	checkIndex	INFERRED	empty assert loop counter	^\s*iVar2\ =\ 2;$	+1
+use	IRPhiNode__validate	iVar2	checkIndex	INFERRED	empty assert loop counter	^\s*iVar2\ =\ iVar2\ \+\ 1;$@2	+2
+use	IRPhiNode__validate	iVar1	operandCount	INFERRED	inst+0x84	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x84\);$	+2
+use	IRPhiNode__validate	iVar1	operandCount	INFERRED	inst+0x84	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x84\);$@2	+2
+use	IRPhiNode__validate	iVar1	operandCount	INFERRED	inst+0x84	^\s*if\ \(1\ <\ iVar1\)\ \{$	+1
+use	IRPhiNode__validate	iVar1	operandCount	INFERRED	inst+0x84	^\s*\}\ while\ \(iVar2\ <=\ iVar1\);$@2	+1
+use	IRPhiNode__validate	iVar1	srcRecord	INFERRED	operand record of the loop operand	^\s*iVar1\ =\ FUN_001054ec\(param_1,iVar2\);$	+1
+use	IRPhiNode__validate	iVar1	srcRecord	INFERRED	operand record of the loop operand	^\s*FUN_000f3190\(\*\(undefined4\ \*\)\(iVar1\ \+\ 0x10\)\);$	+1
+use	IRInst__insertSourceBeforeLast	uVar1	defaultSelect	INFERRED	DAT_001af9bc stored as the new operand's select word	^\s*uVar1\ =\ DAT_001af9bc;$	+1
+use	IRInst__insertSourceBeforeLast	uVar1	defaultSelect	INFERRED	DAT_001af9bc stored as the new operand's select word	^\s*\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\ =\ uVar1;$	+1
+use	IRInst__insertSourceBeforeLast	uVar1	lastSource	INFERRED	source of the last operand	^\s*uVar1\ =\ FUN_00105594\(param_1,iVar2\);$	+2
+use	IRInst__insertSourceBeforeLast	uVar1	lastSource2	INFERRED	source of the last operand	^\s*uVar1\ =\ FUN_00105594\(param_1,iVar2\);$@2	+2
+use	IRInst__insertSourceBeforeLast	uVar1	lastSelect	INFERRED	select word of the last operand	^\s*uVar1\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\);$	+1
+use	IRInst__insertSourceBeforeLast	uVar1	lastSelect	INFERRED	select word of the last operand	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x9c\)\ =\ uVar1;$	+1
+use	IRInst__insertSourceBeforeLast	uVar1	lastSelect	INFERRED	select word of the last operand	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar1;$	+1
+use	IRInst__insertSourceBeforeLast	uVar1	defaultSelect2	INFERRED	DAT_001af9bc stored as the new operand's select word	^\s*uVar1\ =\ DAT_001af9bc;$@2	+1
+use	IRInst__insertSourceBeforeLast	uVar1	defaultSelect2	INFERRED	DAT_001af9bc stored as the new operand's select word	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x10\)\ =\ uVar1;$@2	+1
+use	IRMix__validate	iVar2	channel	INFERRED	0..3	^\s*iVar2\ =\ 0;$	+1
+use	IRMix__validate	iVar2	channel	INFERRED	0..3	^\s*bVar1\ =\ iVar2\ !=\ 3;$	+2
+use	FUN_00106cf8	piVar1	flagBytePtr	INFERRED	walks the 4 per-channel flag bytes at inst+0x9c	^\s*piVar1\ =\ param_1;$	+1
+use	FUN_00106cf8	piVar1	flagBytePtr	INFERRED	walks the 4 per-channel flag bytes at inst+0x9c	^\s*if\ \(\(uint\)\(\*\(byte\ \*\)\(piVar1\ \+\ 0x27\)\ \-\ 2\)\ <\ 2\)\ \{$	+1
+use	FUN_00106cf8	piVar1	flagBytePtr	INFERRED	walks the 4 per-channel flag bytes at inst+0x9c	^\s*piVar1\ =\ \(int\ \*\)\(\(int\)piVar1\ \+\ 1\);$	+1
+use	FUN_00106cf8	iVar3	instReg	INFERRED	register assigned to this instruction	^\s*iVar3\ =\ thunk_FUN_00134de8\(param_2,param_1\);$	+2
+use	FUN_00106cf8	iVar3	instReg	INFERRED	register assigned to this instruction	^\s*for\ \(iVar2\ =\ 1;\ iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x14\)\)\(param_1\),\ iVar2\ <=\ iVar3;$	+2
+use	FUN_00106cf8	iVar3	instReg	INFERRED	register assigned to this instruction	^\s*iVar3\ =\ FUN_000f31e8\(param_1,iVar2\);$	+2
+use	FUN_00106cf8	iVar3	instReg	INFERRED	register assigned to this instruction	^\s*iVar3\ =\ thunk_FUN_00134de8\(param_2,param_1\);$@2	+2
+use	FUN_00106cf8	iVar2	vslot50Result	INFERRED	virtual slot 0x50 of the source or of inst	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x50\)\)\(piVar1\);$	+2
+use	FUN_00106cf8	iVar2	vslot50Result	INFERRED	virtual slot 0x50 of the source or of inst	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x50\)\)\(piVar1\);$@2	+2
+use	FUN_00106cf8	iVar2	vslot50Result	INFERRED	virtual slot 0x50 of the source or of inst	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x50\)\)\(piVar1\);$@3	+2
+use	FUN_00106cf8	iVar2	vslot50Result	INFERRED	virtual slot 0x50 of the source or of inst	^\s*if\ \(\(\(\(piVar1\[0x20\]\ !=\ 0\)\ \&\&\ \(iVar2\ =\ FUN_00126760\(piVar1\[0x26\]\),\ iVar2\ !=\ 0\)\)\ \&\&$	+2
+use	FUN_00106cf8	iVar2	sourceReg	INFERRED	register assigned to the source	^\s*iVar2\ =\ thunk_FUN_00134de8\(param_2,piVar1\);$	+1
+use	FUN_00106cf8	iVar2	sourceReg	INFERRED	register assigned to the source	^\s*if\ \(iVar2\ !=\ iVar3\)\ \{$	+1
+use	FUN_00106cf8	iVar2	sourceReg	INFERRED	register assigned to the source	^\s*iVar2\ =\ thunk_FUN_00134de8\(param_2,uVar4\);$	+1
+use	FUN_00106cf8	iVar2	sourceReg	INFERRED	register assigned to the source	^\s*if\ \(iVar2\ ==\ iVar3\)\ \{$	+1
+use	FUN_00106cf8	iVar2	isMovLike	INFERRED	virtual slot 0x64 of inst	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 100\)\)\(param_1\);$	+2
+use	FUN_00106cf8	iVar2	operandIndex	INFERRED	operand loop	^\s*for\ \(iVar2\ =\ 1;\ iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x14\)\)\(param_1\),\ iVar2\ <=\ iVar3;$	+3
+use	FUN_00106cf8	iVar2	operandIndex	INFERRED	operand loop	^\s*if\ \(\(param_1\[iVar2\ \*\ 6\ \+\ 0x28\]\ \&\ 2U\)\ !=\ 0\)\ \{$	+1
+use	FUN_00106cf8	iVar2	operandIndex	INFERRED	operand loop	^\s*iVar3\ =\ FUN_000f31e8\(param_1,iVar2\);$	+1
+use	FUN_00106cf8	iVar2	operandIndex	INFERRED	operand loop	^\s*if\ \(\(param_1\[0x20\]\ !=\ 0\)\ \&\&$	+3
+use	FUN_00106cf8	iVar2	byteCountdown	INFERRED	4 channel flag bytes	^\s*iVar2\ =\ 4;$	+1
+use	FUN_00106cf8	iVar2	byteCountdown	INFERRED	4 channel flag bytes	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
+use	FUN_00106cf8	iVar2	operandKindClass	INFERRED	IRInst__operandKindClass of operand 0	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_00105dbc\)\(param_1,0\);$	+5

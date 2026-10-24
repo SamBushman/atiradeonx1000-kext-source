@@ -809,7 +809,7 @@ LAB_0016ddd8:
           allocation = (undefined4 *)Arena__alloc(arena,0x168);
           *allocation = arena;
           newLoadInst = allocation + 1;
-          FUN_00109a80(newLoadInst,0xfa,*scheduler);
+          IRLoad__ctor_109a80(newLoadInst,0xfa,*scheduler);
           requestedIndex2 = IRInst__getDefiningField128(inst,0);
           allocation[0x27] = 0x45;
           allocation[0x26] = loopIndex;
@@ -3786,7 +3786,7 @@ int ResourceModel__vslot32(this, inst, param_3)
     IRInst__ctor_10502c(inst,uVar2,*(undefined4 *)(this + 8));
   }
   else {
-    FUN_00104f34(inst,param_3);
+    IRInst__switchOpcodeVariant(inst,param_3);
   }
   return inst;
 }
@@ -4377,7 +4377,7 @@ LAB_001730b4:
       iVar7 = iVar7 + 4;
       iVar4 = iVar4 + -1;
       if (iVar4 == 0) {
-        inst = FUN_001084b8(0x31,*(undefined4 *)(ctx + 0x238));
+        inst = IRMov__new_1084b8(0x31,*(undefined4 *)(ctx + 0x238));
         IRInst__setOperandRef(inst,0,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
         IRInst__setOperandRef(inst,1,*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x8c));
         uVar2 = local_28;
@@ -4511,47 +4511,47 @@ int Compiler__exprRecordForValueNumber(param_1, param_2)
  * against the real compiled C symbols (gcc adds one underscore automatically).
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
-asm(".globl FUN_00172014");
-asm(".set FUN_00172014, _ResourceModel__vslot23");
-asm(".globl FUN_001722cc");
-asm(".set FUN_001722cc, _ResourceModel__vslot24");
-asm(".globl FUN_00172328");
-asm(".set FUN_00172328, _ResourceModel__vslot25");
-asm(".globl FUN_001723d8");
-asm(".set FUN_001723d8, _ResourceModel__vslot29");
-asm(".globl FUN_00172428");
-asm(".set FUN_00172428, _ResourceModel__vslot22");
-asm(".globl FUN_00172474");
-asm(".set FUN_00172474, _ResourceModel__vslot32");
-asm(".globl FUN_00172514");
-asm(".set FUN_00172514, _ResourceModel__vslot11");
-asm(".globl FUN_0017281c");
-asm(".set FUN_0017281c, _ThreadModel__vslot4");
-asm(".globl FUN_00172ab0");
-asm(".set FUN_00172ab0, _ExprRecordTable__hashByValueNumber");
-asm(".globl FUN_00172ad8");
-asm(".set FUN_00172ad8, _ExprRecordTable__eqByValueNumber");
-asm(".globl FUN_00172af4");
-asm(".set FUN_00172af4, _ExprRecordTable__hashByExpr");
-asm(".globl FUN_00172b2c");
-asm(".set FUN_00172b2c, _ExprRecordTable__eqByExpr");
-asm(".globl FUN_00172b48");
-asm(".set FUN_00172b48, _PtrSet__hashPtr");
-asm(".globl FUN_00172b70");
-asm(".set FUN_00172b70, _PtrSet__eqNonNullPtr");
-asm(".globl FUN_00172ba0");
-asm(".set FUN_00172ba0, _KeyLaneTable__hashByOpcode");
-asm(".globl FUN_00172bd0");
-asm(".set FUN_00172bd0, _KeyLaneTable__eqKeys");
-asm(".globl FUN_00172d1c");
-asm(".set FUN_00172d1c, _ScopedExprTable__hashKey");
-asm(".globl FUN_00172dc4");
-asm(".set FUN_00172dc4, _ScopedExprTable__eqKeys");
-asm(".globl FUN_00172dfc");
-asm(".set FUN_00172dfc, _returnZero_172dfc");
-asm(".globl FUN_00172e04");
-asm(".set FUN_00172e04, _LaneMatchTable__eqKeys");
-asm(".globl FUN_00172e78");
-asm(".set FUN_00172e78, _SwizzleTable__hashKey");
-asm(".globl FUN_00173228");
-asm(".set FUN_00173228, _SwizzleTable__eqKeys");
+asm(".globl ResourceModel__vslot23");
+asm(".set ResourceModel__vslot23, _ResourceModel__vslot23");
+asm(".globl ResourceModel__vslot24");
+asm(".set ResourceModel__vslot24, _ResourceModel__vslot24");
+asm(".globl ResourceModel__vslot25");
+asm(".set ResourceModel__vslot25, _ResourceModel__vslot25");
+asm(".globl ResourceModel__vslot29");
+asm(".set ResourceModel__vslot29, _ResourceModel__vslot29");
+asm(".globl ResourceModel__vslot22");
+asm(".set ResourceModel__vslot22, _ResourceModel__vslot22");
+asm(".globl ResourceModel__vslot32");
+asm(".set ResourceModel__vslot32, _ResourceModel__vslot32");
+asm(".globl ResourceModel__vslot11");
+asm(".set ResourceModel__vslot11, _ResourceModel__vslot11");
+asm(".globl ThreadModel__vslot4");
+asm(".set ThreadModel__vslot4, _ThreadModel__vslot4");
+asm(".globl ExprRecordTable__hashByValueNumber");
+asm(".set ExprRecordTable__hashByValueNumber, _ExprRecordTable__hashByValueNumber");
+asm(".globl ExprRecordTable__eqByValueNumber");
+asm(".set ExprRecordTable__eqByValueNumber, _ExprRecordTable__eqByValueNumber");
+asm(".globl ExprRecordTable__hashByExpr");
+asm(".set ExprRecordTable__hashByExpr, _ExprRecordTable__hashByExpr");
+asm(".globl ExprRecordTable__eqByExpr");
+asm(".set ExprRecordTable__eqByExpr, _ExprRecordTable__eqByExpr");
+asm(".globl PtrSet__hashPtr");
+asm(".set PtrSet__hashPtr, _PtrSet__hashPtr");
+asm(".globl PtrSet__eqNonNullPtr");
+asm(".set PtrSet__eqNonNullPtr, _PtrSet__eqNonNullPtr");
+asm(".globl KeyLaneTable__hashByOpcode");
+asm(".set KeyLaneTable__hashByOpcode, _KeyLaneTable__hashByOpcode");
+asm(".globl KeyLaneTable__eqKeys");
+asm(".set KeyLaneTable__eqKeys, _KeyLaneTable__eqKeys");
+asm(".globl ScopedExprTable__hashKey");
+asm(".set ScopedExprTable__hashKey, _ScopedExprTable__hashKey");
+asm(".globl ScopedExprTable__eqKeys");
+asm(".set ScopedExprTable__eqKeys, _ScopedExprTable__eqKeys");
+asm(".globl returnZero_172dfc");
+asm(".set returnZero_172dfc, _returnZero_172dfc");
+asm(".globl LaneMatchTable__eqKeys");
+asm(".set LaneMatchTable__eqKeys, _LaneMatchTable__eqKeys");
+asm(".globl SwizzleTable__hashKey");
+asm(".set SwizzleTable__hashKey, _SwizzleTable__hashKey");
+asm(".globl SwizzleTable__eqKeys");
+asm(".set SwizzleTable__eqKeys, _SwizzleTable__eqKeys");

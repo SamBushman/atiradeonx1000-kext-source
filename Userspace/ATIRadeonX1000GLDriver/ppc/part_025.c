@@ -1608,7 +1608,7 @@ int FUN_000f497c(inst, inst2)
   
   operandRecord = IRInst__getOperandRecord(inst,0);
   ((int (*)())WriteMask__fromSelectWord)(&local_28,*(undefined4 *)(operandRecord + 0x10));
-  iVar1 = FUN_001055cc(inst2);
+  iVar1 = IRInst__isProjectionOfOpcode2a(inst2);
   if (iVar1 == 0) {
     operandRecord = IRInst__getOperandRecord(inst2,0);
     ((int (*)())FUN_000f3968)(local_20,*(undefined4 *)(operandRecord + 0x10),DAT_001aa840);

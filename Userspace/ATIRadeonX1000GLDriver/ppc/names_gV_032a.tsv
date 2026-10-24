@@ -1,0 +1,10 @@
+local	Program__packPsInputs	param_1	program	INFERRED	
+local	Program__packPsInputs	piVar17	targetBlock	INFERRED	program+0x3a4, else the entry block program+0x3a0: the block whose interpolant loads are scanned
+local	Program__packPsInputs	uVar14	candidateCount	INFERRED	number of interpolant loads pushed on the candidate vector
+local	Program__packPsInputs	puVar18	candidateVector	INFERRED	vector header inside the allocation (allocation+1)
+local	Program__packPsInputs	iVar21	newElementCount	INFERRED	inner index + 1, stored as the vector count when the vector grows
+local	Program__packPsInputs	iVar16	mergeCount	INFERRED	number of loads in the merge group (starts at 1: the leader)
+local	Program__packPsInputs	iVar25	otherLoad	INFERRED	candidate load compared with the leader
+local	Program__packPsInputs	iVar20	interpWord144	INFERRED	leader word +0x144 (must equal the other load's)
+local	Program__packPsInputs	bVar1	moreLanes	INFERRED	lane != 3 before the increment
+local	Program__packPsInputs	uVar9	innerElementCount	INFERRED	vector count read while indexing the inner element

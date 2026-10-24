@@ -2781,8 +2781,8 @@ LAB_00032098:
   return 1;
 }
 
-/* FUN_00032100 @ 0x32100 (8252 bytes) */
-int FUN_00032100(ctx, texture, param_3, param_4, param_5, param_6)
+/* gldTextureMakeResident @ 0x32100 (8252 bytes) */
+int gldTextureMakeResident(ctx, texture, param_3, param_4, param_5, param_6)
   int ctx;
   int *texture;
   uint param_3;
@@ -4076,7 +4076,7 @@ int FUN_000341a0(param_1, param_2, param_3, param_4, param_5, param_6)
   undefined4 uVar2;
   
   uVar2 = *(undefined4 *)(param_1 + 4);
-  gldTextureMakeResidentResult = ((int (*)())FUN_00032100)(uVar2,param_2,param_3,param_4,param_5,param_6);
+  gldTextureMakeResidentResult = ((int (*)())gldTextureMakeResident)(uVar2,param_2,param_3,param_4,param_5,param_6);
   if (gldTextureMakeResidentResult == 0) {
     _gldDeleteTexture(uVar2,param_2);
   }
@@ -4205,7 +4205,7 @@ LAB_000342e0:
   levelRecord = ((int (*)())gldTextureFormatEntryForLevel)(ctx,texture,face,baseLevel,1);
   if (((levelRecord == 0) || ((*(uint *)(levelRecord + 0x18) & 0x10000) == 0)) ||
      (((*(byte *)((int)texture + 0x39) & 7) != 0 &&
-      (faceArg = ((int (*)())FUN_00032100)(ctx,texture,faceArg,uVar12,uVar20,in_r8), faceArg == 0))))
+      (faceArg = ((int (*)())gldTextureMakeResident)(ctx,texture,faceArg,uVar12,uVar20,in_r8), faceArg == 0))))
   goto LAB_000342e0;
   baseWidth = *(byte *)(levelTable + 0x30) - baseLevel;
   if ((int)baseWidth < 0) {
@@ -5012,7 +5012,7 @@ LAB_00035740:
     return 1;
   }
   if (((*(byte *)((int)param_2 + 0x39) & 7) != 0) &&
-     (iVar34 = ((int (*)())FUN_00032100)(ctx,param_2,iVar35,uVar49,uVar39,uVar50), iVar34 == 0))
+     (iVar34 = ((int (*)())gldTextureMakeResident)(ctx,param_2,iVar35,uVar49,uVar39,uVar50), iVar34 == 0))
   goto LAB_00035740;
   boundFramebuffer = *(int *)(ctx + 0x150);
   if (boundFramebuffer == 0) {
@@ -5894,7 +5894,7 @@ int glTexSubImage_impl(ctx, texture, face, level, xOffset, yOffset, zOffset, wid
     if ((levelRecord != 0) &&
        ((iVar22 = texture[0xd], iVar22 == 0 || (*(char *)(iVar22 + 0x16) != '\x06')))) {
       if ((*(byte *)((int)texture + 0x39) & 7) != 0) {
-        faceArg = ((int (*)())FUN_00032100)(ctx,texture,faceArg,levelArg,uVar44,yoffsetArg);
+        faceArg = ((int (*)())gldTextureMakeResident)(ctx,texture,faceArg,levelArg,uVar44,yoffsetArg);
         if (faceArg == 0) goto LAB_00037930;
         iVar22 = texture[0xd];
       }
@@ -6824,7 +6824,7 @@ LAB_00037930:
     return 1;
   }
   if (((((*(byte *)((int)texture + 0x39) & 7) != 0) &&
-       (iVar22 = ((int (*)())FUN_00032100)(ctx,texture,iVar22,*(byte *)((int)texture + 0x39) & 7,"",sizeOutPtr),
+       (iVar22 = ((int (*)())gldTextureMakeResident)(ctx,texture,iVar22,*(byte *)((int)texture + 0x39) & 7,"",sizeOutPtr),
        iVar22 == 0)) ||
       ((*(int *)sourceSurface[1] != 0 && (iVar22 = FUN_0001e280(ctx,sourceSurface,1), iVar22 == 0)))) ||
      (((int *)sourceSurface[2] == (int *)0x0 || (iVar22 = *(int *)sourceSurface[2], iVar22 == 0))))
@@ -10518,12 +10518,12 @@ int gldDeleteFragmentShaderObject(param_1, param_2)
  * against the real compiled C symbols (gcc adds one underscore automatically).
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
-asm(".globl FUN_00034200");
-asm(".set FUN_00034200, _glGenerateMipmap_impl");
+asm(".globl glGenerateMipmap_impl");
+asm(".set glGenerateMipmap_impl, _glGenerateMipmap_impl");
 asm(".globl FUN_000353a0");
 asm(".set FUN_000353a0, _FUN_000353a0");
-asm(".globl FUN_000369f0");
-asm(".set FUN_000369f0, _glTexSubImage_impl");
+asm(".globl glTexSubImage_impl");
+asm(".set glTexSubImage_impl, _glTexSubImage_impl");
 asm(".globl FUN_00039330");
 asm(".set FUN_00039330, _FUN_00039330");
 asm(".globl FUN_00039610");

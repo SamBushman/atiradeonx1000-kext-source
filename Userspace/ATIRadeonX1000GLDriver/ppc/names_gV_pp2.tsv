@@ -1,0 +1,4 @@
+local	FUN_00135c20	param_2	elementIndex	INFERRED	passed unchanged to the elementIndex parameter of a callee (callee signature)
+local	FUN_00139c78	param_4	program	INFERRED	passed unchanged to the program parameter of a callee (callee signature)
+local	FUN_0013c210	param_1	program	INFERRED	passed unchanged to the program parameter of a callee (callee signature)
+local	FUN_00142974	param_2	inst	INFERRED	passed unchanged to the inst parameter of a callee (callee signature)

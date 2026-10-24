@@ -1,0 +1,140 @@
+local	outputScaleFromExponent	param_1	exponent	INFERRED	index into the scale table at 0x1af9ec (entries for exponents -3..3)
+local	isOutputScaleValue	fparam_1	scale	INFERRED	float compared with the 7 table entries at 0x1af9e0
+local	isOutputScaleValue	pfVar1	scaleTablePtr	INFERRED	walks the 7-entry float table
+local	isOutputScaleValue	iVar2	remaining	INFERRED	entries left
+local	outputScaleExponent	fparam_1	scale	INFERRED	float looked up in the table
+local	outputScaleExponent	pfVar1	scaleTablePtr	INFERRED	walks the 7-entry float table
+local	outputScaleExponent	iVar2	tableIndex	INFERRED	position found; result is tableIndex - 3
+local	outputScaleExponent	iVar3	remaining	INFERRED	entries left
+local	tryOutputScaleExponent	param_2	outExponent	INFERRED	
+local	tryOutputScaleExponent	fparam_1	scale	INFERRED	
+local	tryOutputScaleExponent	uVar1	exponent	INFERRED	exponent -3..3 for the matching scale constant
+local	IRInst__swapOperands	param_1	inst	INFERRED	
+func	FUN_0010ad68	IRInst__newOpcode8c	INFERRED	allocates an IRInst for opcode 0x8c with operand 1 = (word2 = param_1, word3 = 0, select = constant)
+local	FUN_0010ad68	param_1	operandWord2	INFERRED	
+local	FUN_0010ad68	puVar4	newInst	INFERRED	the 0x168-byte instruction body (allocation + 1)
+func	FUN_0010ae20	IRInst__replaceBodyKeepLinks	INFERRED	re-initialises inst from srcInst keeping its list links, owning block, use count and counters, then frees srcInst
+local	FUN_0010ae20	param_1	inst	INFERRED	
+local	FUN_0010ae20	iVar1	useEpoch	INFERRED	program+0x478
+local	FUN_0010ae20	uVar3	nextLink	INFERRED	inst+4
+local	FUN_0010ae20	uVar4	ownerBlock	INFERRED	inst+0x158
+local	FUN_0010ae20	local_48	counterSnapshot	INFERRED	snapshot filled by IRInst__saveCounters
+local	FUN_0010ae20	local_44	counterSnapshotUseCount	INFERRED	snapshot word 1
+local	FUN_0010ae20	local_40	counterSnapshotInstId	INFERRED	snapshot word 2
+func	FUN_0010aee8	IRInst__scaleByOutputScale	INFERRED	*out = outputScaleFromExponent(inst+0x124) * value
+local	FUN_0010aee8	param_1	outValue	INFERRED	
+local	FUN_0010aee8	param_2	inst	INFERRED	
+local	FUN_0010aee8	param_3_w	valueBits	INFERRED	float passed as a word
+local	FUN_0010aee8	param_3	value	INFERRED	
+local	FUN_0010aee8	dVar1	outputScale	INFERRED	
+local	IRInst__cloneIfPresub	param_1	inst	INFERRED	
+local	IRInst__cloneIfPresub	param_2	program	INFERRED	
+local	IRInst__cloneIfPresub	param_3	trackUses	INFERRED	
+local	IRInst__cloneIfPresub	piVar2	result	INFERRED	the instruction itself, or its clone when virtual slot 0x5c says it must be cloned
+local	IRInst__cloneIfPresub	uVar4	userCount	INFERRED	element count of the source's user vector
+local	IRInst__cloneIfPresub	puVar7	userVector	INFERRED	user vector (+0x10) of the source
+local	IRInst__cloneIfPresub	iVar5	sourceInst	INFERRED	operand source (and, in loop conditions, the operand count)
+func	FUN_0010b118	IRInst__clampOutputValue	INFERRED	*out = value, replaced by the clamp constants when inst+0x120 is set and value <= the upper bound
+local	FUN_0010b118	param_1	outValue	INFERRED	
+local	FUN_0010b118	param_2	inst	INFERRED	
+local	FUN_0010b118	param_3_w	valueBits	INFERRED	float passed as a word
+local	FUN_0010b118	param_3	value	INFERRED	
+local	FUN_0010b118	fVar1	result	INFERRED	
+func	FUN_0010b184	IRInst__findConstantOperandWithValue	INFERRED	returns the operand index whose source is a constant (class 0x33) equal to value in some written channel, and the channel in *outChannel
+local	FUN_0010b184	param_2	vslot60Arg2	INFERRED	
+local	FUN_0010b184	param_3	outChannel	INFERRED	
+local	FUN_0010b184	fparam_1	value	INFERRED	
+local	FUN_0010b184	in_r6	vslot60Arg4	INFERRED	forwarded register argument of virtual slot 0x60
+local	FUN_0010b184	in_r7	vslot60Arg5	INFERRED	forwarded register argument of virtual slot 0x60
+local	FUN_0010b184	bVar1	lastChannel	INFERRED	channel == 3
+local	FUN_0010b184	uVar2	selectByte	INFERRED	the operand's select byte for the channel
+local	FUN_0010b184	iVar5	channel	INFERRED	0..3
+local	FUN_0010b184	iVar6	operandIndex	INFERRED	1..operandCount
+local	FUN_0010b184	iVar3	scratch	INFERRED	operand record / operand source / operand count
+local	IRInst__applyNegateModifier	param_1	outValue	INFERRED	
+local	IRInst__applyNegateModifier	param_2	inst	INFERRED	
+local	IRInst__applyNegateModifier	param_3	operandIndex	INFERRED	
+local	IRInst__applyNegateModifier	param_4_w	valueBits	INFERRED	float passed as a word
+local	IRInst__applyNegateModifier	param_4	value	INFERRED	
+local	IRInst__applyNegateModifier	fVar1	result	INFERRED	
+local	IRInst__applyAbsModifier	param_1	outValue	INFERRED	
+local	IRInst__applyAbsModifier	param_2	inst	INFERRED	
+local	IRInst__applyAbsModifier	param_3	operandIndex	INFERRED	
+local	IRInst__applyAbsModifier	param_4_w	valueBits	INFERRED	float passed as a word
+local	IRInst__applyAbsModifier	param_4	value	INFERRED	
+func	FUN_0010b32c	IRInst__createCompareConstInst	INFERRED	creates the compare instruction selected by param_1 (0..5) with the given words and a literal vec4 float operand
+local	FUN_0010b32c	param_1	compareKind	INFERRED	
+local	FUN_0010b32c	param_2	operandWord2	INFERRED	
+local	FUN_0010b32c	param_3	operandWord3	INFERRED	
+local	FUN_0010b32c	fparam_1	value	INFERRED	
+local	FUN_0010b32c	bVar1	swapOperands	INFERRED	operand 2 of the created instruction is the constant when false
+local	FUN_0010b32c	uVar5	currentProgram	INFERRED	compiler+0x6c4
+local	FUN_0010b32c	iVar6	nextTempId	INFERRED	compiler+0x3ac decremented to hand out a fresh temp id
+local	IRInst__isOperandConstZero	bVar1	lastLane	INFERRED	lane == 3
+local	IRInst__isOperandConstZero	fVar2	zero	INFERRED	FLOAT_001aa0d4
+local	IRInst__isOperandConstZero	uVar6	componentSel	INFERRED	select byte of the operand for the lane, followed through movs
+local	evaluateCompareFloats	fparam_1	lhs	INFERRED	
+local	evaluateCompareFloats	fparam_2	rhs	INFERRED	
+local	evaluateCompareFloats	bVar2	result	INFERRED	
+func	FUN_0010b93c	IRInst__foldCompareConstResult	INFERRED	result float of a compare/select against a constant for operand slot param_3: copies value, or 0/1 from the flag bits, or NaN-like default
+local	FUN_0010b93c	param_1	outValue	INFERRED	
+local	FUN_0010b93c	param_2	inst	INFERRED	
+local	FUN_0010b93c	param_3	operandSlot	INFERRED	
+local	FUN_0010b93c	param_5	compiler	INFERRED	
+local	FUN_0010b93c	param_4_w	valueBits	INFERRED	float passed as a word
+local	FUN_0010b93c	param_4	value	INFERRED	
+func	FUN_0010bb14	IRInst__compareResultIsConstant	INFERRED	opcode 0x12/0x13/0x14 only: true when the +0xb8/+0xd0 flag bits make the result independent of the operands
+local	FUN_0010bb14	param_1	inst	INFERRED	
+local	FUN_0010bb14	iVar1	opcode	INFERRED	descriptor opcode
+func	FUN_0010bb9c	IRInst__retargetOpcode	INFERRED	switches the instruction to the compare variant given by OpcodeTraits field 4, and rewrites operand selects from a table
+local	FUN_0010bb9c	param_1	inst	INFERRED	
+local	FUN_0010bb9c	param_2	select0	INFERRED	
+local	FUN_0010bb9c	param_3	select1	INFERRED	
+local	FUN_0010bb9c	param_4	select2	INFERRED	
+local	FUN_0010bb9c	param_5	invert	INFERRED	
+local	FUN_0010bb9c	iVar2	operandCount	INFERRED	virtual slot 0x14
+local	FUN_0010bb9c	puVar1	selectTable	INFERRED	PTR_DAT_001e8b8c
+func	FUN_0010bc78	IRInst__retargetOpcodeFromOperands	INFERRED	same retargeting, taking the selects from the operand words via FUN_000f33f8; returns 1 when the old opcode was 0x35
+local	FUN_0010bc78	param_1	inst	INFERRED	
+local	FUN_0010bc78	iVar1	oldOpcode	INFERRED	descriptor opcode before the change
+local	FUN_0010bc78	local_28	operandWord0	INFERRED	
+local	FUN_0010bc78	local_24	operandWord1	INFERRED	
+local	FUN_0010bc78	local_20	operandWord2	INFERRED	
+func	FUN_0010bd50	IRInst__setLiteralOperandAndSource	INFERRED	makes operand operandIndex a literal vec4 float of fparam_1 and, unless program flag 8 is set, creates the ValueKey definition and sets the operand source
+local	FUN_0010bd50	param_2	unusedArg2	INFERRED	
+local	FUN_0010bd50	fparam_1	value	INFERRED	
+local	FUN_0010bd50	piVar1	elementRef	INFERRED	element 0 of the register's definition vector
+local	FUN_0010bd50	iVar5	defInst	INFERRED	the defining instruction taken from the vector
+local	FUN_0010bd50	puVar6	valueKey	INFERRED	the 0x240-byte ValueKey (allocation+1)
+use	IRInst__swapOperands	iVar1	vslotArgA	INFERRED	operandA passed through the virtual call	^\s*iVar1\ =\ param_2;$	+1
+use	IRInst__swapOperands	iVar1	vslotArgA	INFERRED	operandA passed through the virtual call	^\s*iVar1\ =\ extraout_r4;$	+1
+use	IRInst__swapOperands	iVar1	vslotArgA	INFERRED	operandA passed through the virtual call	^\s*\(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x14\)\)\(param_1,iVar1,iVar2,param_4\);$	+1
+use	IRInst__swapOperands	iVar2	vslotArgB	INFERRED	operandB passed through the virtual call	^\s*iVar2\ =\ param_3;$	+1
+use	IRInst__swapOperands	iVar2	vslotArgB	INFERRED	operandB passed through the virtual call	^\s*\(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x14\)\)\(param_1,iVar1,iVar2,param_4\);$	+1
+use	IRInst__cloneIfPresub	iVar1	needsClone	INFERRED	virtual slot 0x5c	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x5c\)\)\(param_1,param_2,param_3\);$	+1
+use	IRInst__cloneIfPresub	iVar1	needsClone	INFERRED	virtual slot 0x5c	^\s*if\ \(iVar1\ !=\ 0\)\ \{$	+1
+use	IRInst__cloneIfPresub	iVar1	operandIndex	INFERRED	1..operandCount	^\s*for\ \(iVar1\ =\ 1;\ iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x14\)\)\(piVar2\),\ iVar1\ <=\ iVar5;$	+3
+use	IRInst__cloneIfPresub	iVar1	operandIndex2	INFERRED	1..operandCount	^\s*for\ \(iVar1\ =\ 1;\ iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x14\)\)\(piVar2\),\ iVar1\ <=\ iVar5;\ iVar1\ =\ iVar1\ \+\ 1$	+3
+use	FUN_0010b32c	uVar2	opcode	INFERRED	opcode chosen by the switch	^\s*uVar2\ =\ 0x2a;$	+1
+use	FUN_0010b32c	uVar2	opcode	INFERRED	opcode chosen by the switch	^\s*uVar2\ =\ 0x27;$	+1
+use	FUN_0010b32c	uVar2	opcode	INFERRED	opcode chosen by the switch	^\s*uVar2\ =\ 0x29;$	+1
+use	FUN_0010b32c	uVar2	opcode	INFERRED	opcode chosen by the switch	^\s*uVar2\ =\ 0x28;$	+1
+use	FUN_0010b32c	uVar2	opcode	INFERRED	opcode chosen by the switch	^\s*uVar2\ =\ 0x29;$@2	+1
+use	FUN_0010b32c	uVar2	opcode	INFERRED	opcode chosen by the switch	^\s*uVar2\ =\ 0x28;$@2	+1
+use	FUN_0010b32c	uVar2	opcode	INFERRED	opcode chosen by the switch	^\s*uVar2\ =\ 0;$	+1
+use	FUN_0010b32c	uVar2	opcode	INFERRED	opcode chosen by the switch	^\s*iVar3\ =\ FUN_001043f0\(uVar2,param_5\);$	+1
+use	FUN_0010b32c	uVar2	literalLaneCount	INFERRED	1 or 2 passed to IRInst__makeLiteralVec4Float	^\s*uVar2\ =\ 2;$	+1
+use	FUN_0010b32c	uVar2	literalLaneCount	INFERRED	1 or 2 passed to IRInst__makeLiteralVec4Float	^\s*uVar2\ =\ 1;$	+1
+use	FUN_0010b32c	uVar2	literalLaneCount	INFERRED	1 or 2 passed to IRInst__makeLiteralVec4Float	^\s*\(\(void\ \(\*\)\(\)\)FUN_000f79c4\)\(iVar3,uVar5,uVar2,fparam_1,fparam_1,fparam_1,fparam_1\);$	+1
+use	FUN_0010b32c	uVar2	defaultSelect	INFERRED	_UNK_001af9d8 stored as the destination select word	^\s*uVar2\ =\ _UNK_001af9d8;$	+1
+use	FUN_0010b32c	uVar2	defaultSelect	INFERRED	_UNK_001af9d8 stored as the destination select word	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x9c\)\ =\ uVar2;$	+1
+use	IRInst__isOperandConstZero	iVar3	isConstant	INFERRED	virtual slot 0x48 of the resolved source	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x48\)\)\(piVar4\);$	+3
+use	IRInst__isOperandConstZero	iVar3	operandRecord2	INFERRED	operand record	^\s*iVar3\ =\ FUN_001054ec\(param_1,0\);$	+2
+use	IRInst__isOperandConstZero	iVar3	operandRecord2	INFERRED	operand record	^\s*iVar3\ =\ FUN_001054ec\(param_1,param_2\);$	+2
+use	IRInst__isOperandConstZero	iVar3	operandRecord2	INFERRED	operand record	^\s*while\ \(iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 100\)\)\(piVar4\),\ iVar3\ !=\ 0\)\ \{$	+5
+use	FUN_0010bc78	iVar3	operandCount	INFERRED	virtual slot 0x14	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x14\)\)\(param_1\);$	+1
+use	FUN_0010bc78	iVar3	operandCount	INFERRED	virtual slot 0x14	^\s*if\ \(1\ <\ iVar3\)\ \{$	+1
+use	FUN_0010bc78	iVar3	operandCount	INFERRED	virtual slot 0x14	^\s*if\ \(2\ <\ iVar3\)\ \{$	+1
+use	FUN_0010bd50	iVar3	vreg	INFERRED	the operand's virtual register	^\s*iVar3\ =\ \*\(int\ \*\)\(param_3\ \*\ 0x18\ \+\ param_1\ \+\ 0x8c\);$	+2
+use	FUN_0010bd50	iVar3	vreg	INFERRED	the operand's virtual register	^\s*if\ \(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x2c\)\ \+\ 4\)\ ==\ 0\)\ \{$	+1
+use	FUN_0010bd50	iVar3	vreg	INFERRED	the operand's virtual register	^\s*FUN_00123424\(iVar3,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar5\ \+\ 0x158\)\ \+\ 0xb0\),puVar6\);$	+1

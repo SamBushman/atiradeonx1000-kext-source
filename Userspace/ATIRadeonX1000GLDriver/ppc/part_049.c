@@ -343,7 +343,7 @@ int FUN_00186a88(inst, operandIndex, inst2, program, param_5, param_6, param_7)
         } while (selectsLeft != 0);
       }
       IRInst__getOperandRecord(inst,0);
-      loopIndex = FUN_00105dbc(inst,0);
+      loopIndex = IRInst__operandKindClass(inst,0);
       if (((loopIndex == 0) && ((inst[5] & 2U) == 0)) && ((inst[5] & 0x200U) == 0)) {
         return 0;
       }
@@ -5265,7 +5265,7 @@ LAB_0018fa5c:
               moreComponents = loopIndex != 3;
               loopIndex = loopIndex + 1;
             } while (moreComponents);
-            FUN_0010bb9c(inst2,source1Select,source2Select,0,0,this[2]);
+            IRInst__retargetOpcode(inst2,source1Select,source2Select,0,0,this[2]);
             opcodeInfo = inst2[0x22];
           }
         }
@@ -5304,7 +5304,7 @@ int R300VSchedModel__vslot14(this, node)
   nodeInst = *(int **)(node + 0x38);
   opcode = *(int *)(nodeInst[0x22] + 8);
   if ((opcode == 0x66) || (opcode == 0x36)) {
-    FUN_0010bc78(nodeInst,this[2]);
+    IRInst__retargetOpcodeFromOperands(nodeInst,this[2]);
     nodeInst[0x26] = 0;
   }
   else if ((opcode == 0x31) || (*(int *)(nodeInst[0x22] + 8) == 0x13)) {
@@ -5325,7 +5325,7 @@ int R300VSchedModel__vslot14(this, node)
       moreComponents = loopIndex != 3;
       loopIndex = loopIndex + 1;
     } while (moreComponents);
-    FUN_0010bb9c(nodeInst,source1Select,source2Select,0,0,this[2]);
+    IRInst__retargetOpcode(nodeInst,source1Select,source2Select,0,0,this[2]);
     nodeInst[0x26] = 1;
   }
   resourceClass = (**(code **)(*this + 0x4c))(this,nodeInst);
@@ -6054,7 +6054,7 @@ int R300VSchedModel__vslot19(this, inst)
         ((iVar1 != 0x4c && (iVar1 != 0x4d)))))) {
       for (operandNumber = 0; numSources2 = (**(code **)(*inst + 0x14))(inst), operandNumber <= numSources2;
           operandNumber = operandNumber + 1) {
-        numSources2 = FUN_00105dbc(inst,operandNumber);
+        numSources2 = IRInst__operandKindClass(inst,operandNumber);
         if (numSources2 != 0) {
           return 3;
         }
@@ -6152,57 +6152,57 @@ asm(".globl FUN_00188fec");
 asm(".set FUN_00188fec, _KhanVs__peepholeCombine");
 asm(".globl FUN_001894ec");
 asm(".set FUN_001894ec, _KhanVs__vslot27_optimizeInstruction");
-asm(".globl FUN_00189604");
-asm(".set FUN_00189604, _R520SchedModel__vslot2_reset");
+asm(".globl R520SchedModel__vslot2_reset");
+asm(".set R520SchedModel__vslot2_reset, _R520SchedModel__vslot2_reset");
 asm(".globl FUN_0018962c");
 asm(".set FUN_0018962c, _KhanPs__vslot31_isNotTextureFetch");
 asm(".globl FUN_00189660");
 asm(".set FUN_00189660, _KhanPs__vslot65_isEncodableSourceSwizzle");
-asm(".globl FUN_001896f8");
-asm(".set FUN_001896f8, _SelectWord__isDefaultAfterCanonicalise");
+asm(".globl SelectWord__isDefaultAfterCanonicalise");
+asm(".set SelectWord__isDefaultAfterCanonicalise, _SelectWord__isDefaultAfterCanonicalise");
 asm(".globl FUN_001897f0");
 asm(".set FUN_001897f0, _KhanPs__vslot66_callHelper189788");
-asm(".globl FUN_00189be4");
-asm(".set FUN_00189be4, _R300SchedModel__vslot15");
-asm(".globl FUN_00189fd4");
-asm(".set FUN_00189fd4, _R300SchedModel__vslot19");
-asm(".globl FUN_0018a080");
-asm(".set FUN_0018a080, _R300SchedModel__vslot34");
-asm(".globl FUN_0018a1ec");
-asm(".set FUN_0018a1ec, _R300SchedModel__vslot26");
-asm(".globl FUN_0018a440");
-asm(".set FUN_0018a440, _R300SchedModel__vslot28");
-asm(".globl FUN_0018ad08");
-asm(".set FUN_0018ad08, _R300SchedModel__vslot16");
-asm(".globl FUN_0018b654");
-asm(".set FUN_0018b654, _R300SchedModel__vslot11");
-asm(".globl FUN_0018b9cc");
-asm(".set FUN_0018b9cc, _R300SchedModel__vslot14");
+asm(".globl R300SchedModel__vslot15");
+asm(".set R300SchedModel__vslot15, _R300SchedModel__vslot15");
+asm(".globl R300SchedModel__vslot19");
+asm(".set R300SchedModel__vslot19, _R300SchedModel__vslot19");
+asm(".globl R300SchedModel__vslot34");
+asm(".set R300SchedModel__vslot34, _R300SchedModel__vslot34");
+asm(".globl R300SchedModel__vslot26");
+asm(".set R300SchedModel__vslot26, _R300SchedModel__vslot26");
+asm(".globl R300SchedModel__vslot28");
+asm(".set R300SchedModel__vslot28, _R300SchedModel__vslot28");
+asm(".globl R300SchedModel__vslot16");
+asm(".set R300SchedModel__vslot16, _R300SchedModel__vslot16");
+asm(".globl R300SchedModel__vslot11");
+asm(".set R300SchedModel__vslot11, _R300SchedModel__vslot11");
+asm(".globl R300SchedModel__vslot14");
+asm(".set R300SchedModel__vslot14, _R300SchedModel__vslot14");
 asm(".globl FUN_0018dabc");
 asm(".set FUN_0018dabc, _R300SchedModel__tryRewriteConsumerSelects");
 asm(".globl FUN_0018e1a8");
 asm(".set FUN_0018e1a8, _R300SchedModel__legalizeInstruction");
-asm(".globl FUN_0018f42c");
-asm(".set FUN_0018f42c, _R520SchedModel__vslot4_addInstruction");
-asm(".globl FUN_0018f55c");
-asm(".set FUN_0018f55c, _R520SchedModel__vslot3_canAddInstruction");
-asm(".globl FUN_0018f674");
-asm(".set FUN_0018f674, _R300SchedModel__vslot12");
-asm(".globl FUN_0018f824");
-asm(".set FUN_0018f824, _R300VSchedModel__vslot2_reset");
-asm(".globl FUN_0018f918");
-asm(".set FUN_0018f918, _R300VSchedModel__vslot13");
-asm(".globl FUN_0018f984");
-asm(".set FUN_0018f984, _R300VSchedModel__vslot28");
-asm(".globl FUN_0018fbd8");
-asm(".set FUN_0018fbd8, _R300VSchedModel__vslot14");
-asm(".globl FUN_0018fd34");
-asm(".set FUN_0018fd34, _R300VSchedModel__vslot17");
-asm(".globl FUN_001904b8");
-asm(".set FUN_001904b8, _R300VSchedModel__vslot4_addInstruction");
-asm(".globl FUN_001906c8");
-asm(".set FUN_001906c8, _R300VSchedModel__vslot3_canAddInstruction");
-asm(".globl FUN_00190990");
-asm(".set FUN_00190990, _R300VSchedModel__vslot27");
-asm(".globl FUN_00191298");
-asm(".set FUN_00191298, _R300VSchedModel__vslot19");
+asm(".globl R520SchedModel__vslot4_addInstruction");
+asm(".set R520SchedModel__vslot4_addInstruction, _R520SchedModel__vslot4_addInstruction");
+asm(".globl R520SchedModel__vslot3_canAddInstruction");
+asm(".set R520SchedModel__vslot3_canAddInstruction, _R520SchedModel__vslot3_canAddInstruction");
+asm(".globl R300SchedModel__vslot12");
+asm(".set R300SchedModel__vslot12, _R300SchedModel__vslot12");
+asm(".globl R300VSchedModel__vslot2_reset");
+asm(".set R300VSchedModel__vslot2_reset, _R300VSchedModel__vslot2_reset");
+asm(".globl R300VSchedModel__vslot13");
+asm(".set R300VSchedModel__vslot13, _R300VSchedModel__vslot13");
+asm(".globl R300VSchedModel__vslot28");
+asm(".set R300VSchedModel__vslot28, _R300VSchedModel__vslot28");
+asm(".globl R300VSchedModel__vslot14");
+asm(".set R300VSchedModel__vslot14, _R300VSchedModel__vslot14");
+asm(".globl R300VSchedModel__vslot17");
+asm(".set R300VSchedModel__vslot17, _R300VSchedModel__vslot17");
+asm(".globl R300VSchedModel__vslot4_addInstruction");
+asm(".set R300VSchedModel__vslot4_addInstruction, _R300VSchedModel__vslot4_addInstruction");
+asm(".globl R300VSchedModel__vslot3_canAddInstruction");
+asm(".set R300VSchedModel__vslot3_canAddInstruction, _R300VSchedModel__vslot3_canAddInstruction");
+asm(".globl R300VSchedModel__vslot27");
+asm(".set R300VSchedModel__vslot27, _R300VSchedModel__vslot27");
+asm(".globl R300VSchedModel__vslot19");
+asm(".set R300VSchedModel__vslot19, _R300VSchedModel__vslot19");

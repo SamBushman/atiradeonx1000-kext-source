@@ -440,7 +440,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7a0, /* +0x6d4 */
     0x001cd7d8, /* +0x6d8 */
     0x001cd7a8, /* +0x6dc */
-    0x00105e9c, /* -> FUN_00105e9c */ /* +0x6e0 */
+    0x00105e9c, /* -> IRInst__appendOperandRef */ /* +0x6e0 */
     0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x6e4 */
     0x001cd7bc, /* -> IRPseudo__getKindName */ /* +0x6e8 */
     0x00000000, /* +0x6ec */
@@ -482,7 +482,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7a0, /* +0x77c */
     0x001cd7d8, /* +0x780 */
     0x001cd7a8, /* +0x784 */
-    0x00105e9c, /* -> FUN_00105e9c */ /* +0x788 */
+    0x00105e9c, /* -> IRInst__appendOperandRef */ /* +0x788 */
     0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x78c */
     0x001cd7bc, /* -> IRPseudo__getKindName */ /* +0x790 */
     0x00000000, /* +0x794 */
@@ -524,7 +524,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7a0, /* +0x824 */
     0x001cd7d8, /* +0x828 */
     0x001cd7a8, /* +0x82c */
-    0x00105e9c, /* -> FUN_00105e9c */ /* +0x830 */
+    0x00105e9c, /* -> IRInst__appendOperandRef */ /* +0x830 */
     0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x834 */
     0x001cd7bc, /* -> IRPseudo__getKindName */ /* +0x838 */
     0x00000000, /* +0x83c */
@@ -566,7 +566,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7a0, /* +0x8cc */
     0x001cd7d8, /* +0x8d0 */
     0x001cd7a8, /* +0x8d4 */
-    0x00105e9c, /* -> FUN_00105e9c */ /* +0x8d8 */
+    0x00105e9c, /* -> IRInst__appendOperandRef */ /* +0x8d8 */
     0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x8dc */
     0x001cd7bc, /* -> IRPseudo__getKindName */ /* +0x8e0 */
     0x00000000, /* +0x8e4 */
@@ -962,7 +962,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7a0, /* +0xefc */
     0x001cd7d8, /* +0xf00 */
     0x001cd7a8, /* +0xf04 */
-    0x00105e9c, /* -> FUN_00105e9c */ /* +0xf08 */
+    0x00105e9c, /* -> IRInst__appendOperandRef */ /* +0xf08 */
     0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0xf0c */
     0x001ce690, /* +0xf10 */
     0x00000000, /* +0xf14 */
@@ -1046,7 +1046,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7a0, /* +0x104c */
     0x001cec6c, /* +0x1050 */
     0x001cd7a8, /* +0x1054 */
-    0x00105e9c, /* -> FUN_00105e9c */ /* +0x1058 */
+    0x00105e9c, /* -> IRInst__appendOperandRef */ /* +0x1058 */
     0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x105c */
     0x001ceb14, /* +0x1060 */
     0x00000000, /* +0x1064 */
@@ -1214,7 +1214,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7a0, /* +0x12ec */
     0x001cd7d8, /* +0x12f0 */
     0x001cd7a8, /* +0x12f4 */
-    0x00105e9c, /* -> FUN_00105e9c */ /* +0x12f8 */
+    0x00105e9c, /* -> IRInst__appendOperandRef */ /* +0x12f8 */
     0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x12fc */
     0x001ce860, /* -> IRProjection__getKindName */ /* +0x1300 */
     0x00000000, /* +0x1304 */
@@ -1256,7 +1256,7 @@ const unsigned int sectDATA___const[2670] = {
     0x001cd7a0, /* +0x1394 */
     0x001cd7d8, /* +0x1398 */
     0x001cd7a8, /* +0x139c */
-    0x00105e9c, /* -> FUN_00105e9c */ /* +0x13a0 */
+    0x00105e9c, /* -> IRInst__appendOperandRef */ /* +0x13a0 */
     0x001069e8, /* -> IRInst__insertSourceBeforeLast */ /* +0x13a4 */
     0x001ce774, /* -> IRLoadConst__getKindName */ /* +0x13a8 */
     0x00000000, /* +0x13ac */

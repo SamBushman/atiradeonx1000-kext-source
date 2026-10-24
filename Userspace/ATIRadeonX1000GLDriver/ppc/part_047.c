@@ -822,9 +822,9 @@ int FUN_001781a4(param_1, valueKey, param_3)
   loopPtr = *(int **)(*(int *)(valueKey + 0xb0) + 0x88);
   (**(code **)(*loopPtr + 4))(loopPtr,param_1,local_68,*(undefined4 *)(valueKey + 0x238));
   if (*param_1 != 2.1474836e+09) {
-    FUN_0010aee8(&local_38,*(undefined4 *)(valueKey + 0xb0),*param_1);
+    IRInst__scaleByOutputScale(&local_38,*(undefined4 *)(valueKey + 0xb0),*param_1);
     *param_1 = local_38;
-    FUN_0010b118(local_34,*(undefined4 *)(valueKey + 0xb0),local_38);
+    IRInst__clampOutputValue(local_34,*(undefined4 *)(valueKey + 0xb0),local_38);
     if (local_34[0] != *param_1) {
       *param_3 = 1;
       *param_1 = local_34[0];
@@ -2102,12 +2102,12 @@ int FUN_0017a294(ctx, param_2, param_3)
   member0xb0 = *(int *)(ctx + 0xb0);
   iVar1 = *(int *)(*(int *)(member0xb0 + 0x88) + 8);
   if (iVar1 == 0x8b) {
-    FUN_00104be8(member0xb0,1);
+    IRInst__initOperandRecord(member0xb0,1);
     uVar3 = ((int (*)())FUN_0017a130)(1,param_2,*(undefined4 *)(ctx + 0xb0),param_3);
     *(undefined4 *)(ctx + 0x214) = uVar3;
     ((void (*)())IRInst__makeLiteralVec4Float)(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(param_3 + 0x6c4),1,(double)*param_2
                  ,(double)param_2[1],(double)param_2[2],(double)param_2[3]);
-    FUN_00104be8(*(undefined4 *)(ctx + 0xb0),2);
+    IRInst__initOperandRecord(*(undefined4 *)(ctx + 0xb0),2);
     local_24 = DAT_001b01ec;
     local_28 = DAT_001b01e8;
     local_20 = DAT_001b01f0;
@@ -2117,7 +2117,7 @@ int FUN_0017a294(ctx, param_2, param_3)
     *(undefined4 *)(*(int *)(ctx + 0xb0) + 300) = 0;
   }
   else if (iVar1 == 0x8c) {
-    FUN_00104be8(member0xb0,1);
+    IRInst__initOperandRecord(member0xb0,1);
     uVar3 = ((int (*)())FUN_0017a130)(1,param_2,*(undefined4 *)(ctx + 0xb0),param_3);
     *(undefined4 *)(ctx + 0x214) = uVar3;
     ((void (*)())IRInst__makeLiteralVec4Float)(*(undefined4 *)(ctx + 0xb0),*(undefined4 *)(param_3 + 0x6c4),1,(double)*param_2
@@ -2854,7 +2854,7 @@ int ValueKey__mixLiteralSources(key)
                 uVar22 = ((int (*)())ValueKey__findOrInsertLiteral)(iVar6,local_70,operandIndex2,(double)*literalRecord);
                 iVar6 = (int)((ulonglong)uVar22 >> 0x20);
                 if (*loopPtr6 < iVar6) {
-                  ((void (*)())FUN_0010bd50)(*loopPtr7,(int)uVar22,iVar6,*(undefined4 *)(key + 0x238),
+                  ((void (*)())IRInst__setLiteralOperandAndSource)(*loopPtr7,(int)uVar22,iVar6,*(undefined4 *)(key + 0x238),
                                (double)*literalRecord);
                   *loopPtr6 = iVar6;
                 }
@@ -2955,12 +2955,12 @@ int ValueKey__mixLiteralSources(key)
                   else {
                     operandIndex2 = operandIndex << 2;
                   }
-                  uVar4 = FUN_0010b93c(&local_88, *(undefined4 *)(key + 0xb0), operandIndex, *(unsigned int *)literalRecord, *(undefined4 *)(key + 0x238));
+                  uVar4 = IRInst__foldCompareConstResult(&local_88, *(undefined4 *)(key + 0xb0), operandIndex, *(unsigned int *)literalRecord, *(undefined4 *)(key + 0x238));
                   fparam_1 = (double)local_88;
                   uVar22 = ((int (*)())ValueKey__findOrInsertLiteral)(uVar4,local_70,operandIndex,fparam_1);
                   loopIndex3 = (int)((ulonglong)uVar22 >> 0x20);
                   if (*loopPtr6 < loopIndex3) {
-                    ((void (*)())FUN_0010bd50)(*loopPtr7,(int)uVar22,loopIndex3,*(undefined4 *)(key + 0x238),fparam_1
+                    ((void (*)())IRInst__setLiteralOperandAndSource)(*loopPtr7,(int)uVar22,loopIndex3,*(undefined4 *)(key + 0x238),fparam_1
                                 );
                     *loopPtr6 = loopIndex3;
                   }
@@ -2994,7 +2994,7 @@ int ValueKey__mixLiteralSources(key)
         uVar4 = (&uStack_fc)[loopIndex];
         loopIndex2 = IRInst__getOperandRecord(inst2,1);
         *(undefined4 *)(loopIndex2 + 0x10) = uVar4;
-        FUN_0010c37c(inst2,*(undefined4 *)(key + 0x238));
+        IRInst__removeDefaultSelectOperands(inst2,*(undefined4 *)(key + 0x238));
       }
       loopPtr7 = *(int **)(key + 0xb0);
       loopIndex2 = loopIndex;

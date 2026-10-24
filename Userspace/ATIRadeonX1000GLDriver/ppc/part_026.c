@@ -2819,7 +2819,7 @@ int FUN_000f94dc(compiler, list, descriptor, param_4, param_5, param_6, param_7)
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
     *allocation = arena;
     puVar12 = allocation + 1;
-    FUN_00109cfc(puVar12,0x83,*(undefined4 *)(compiler + 8));
+    IRMerge__ctor_109cfc(puVar12,0x83,*(undefined4 *)(compiler + 8));
     operandRecord2 = IRInst__getOperandRecord(puVar12,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0x39;
     *(undefined4 *)(operandRecord2 + 8) = 0;
@@ -2870,7 +2870,7 @@ int FUN_000f94dc(compiler, list, descriptor, param_4, param_5, param_6, param_7)
             instAlloc = (undefined4 *)Arena__alloc(arena,0x168);
             *instAlloc = arena;
             puVar10 = instAlloc + 1;
-            FUN_00109cfc(puVar10,0x83,*(undefined4 *)(compiler + 8));
+            IRMerge__ctor_109cfc(puVar10,0x83,*(undefined4 *)(compiler + 8));
             operandRecord = IRInst__getOperandRecord(puVar10,0);
             *(undefined4 *)(operandRecord + 0xc) = 0x39;
             arena = 4;
@@ -2893,7 +2893,7 @@ int FUN_000f94dc(compiler, list, descriptor, param_4, param_5, param_6, param_7)
         instAlloc = (undefined4 *)Arena__alloc(arena,0x168);
         *instAlloc = arena;
         puVar8 = instAlloc + 1;
-        FUN_00109428(puVar8,0x7a,*(undefined4 *)(compiler + 8));
+        IRLoadTemp__ctor_109428(puVar8,0x7a,*(undefined4 *)(compiler + 8));
         operandRecord = IRInst__getOperandRecord(puVar8,0);
         *(undefined4 *)(operandRecord + 0xc) = 0x10;
         loopIndex = loopIndex + 1;
@@ -3219,7 +3219,7 @@ LAB_000f9f08:
       allocation = (undefined4 *)Arena__alloc(arena,0x168);
       *allocation = arena;
       puVar21 = allocation + 1;
-      FUN_001071fc(puVar21,0xfc,*(undefined4 *)(pass + 8));
+      IRMemStore__ctor_1071fc(puVar21,0xfc,*(undefined4 *)(pass + 8));
       arena = FUN_000ec208(pass,uVar11);
       operandRecord3 = IRInst__getOperandRecord(puVar21,0);
       *(undefined4 *)(operandRecord3 + 0xc) = arena;
@@ -3255,7 +3255,7 @@ LAB_000f9f08:
       allocation = (undefined4 *)Arena__alloc(arena,0x168);
       *allocation = arena;
       puVar21 = allocation + 1;
-      FUN_00108a50(puVar21,0xf9,*(undefined4 *)(pass + 8));
+      IRGeomExport__ctor_108a50(puVar21,0xf9,*(undefined4 *)(pass + 8));
       allocation[0x28] = uVar14;
       allocation[0x22] = 2;
       if ((*descriptor & 0x4000000) != 0) {
@@ -3294,7 +3294,7 @@ LAB_000fa1bc:
       allocation = (undefined4 *)Arena__alloc(arena,0x168);
       *allocation = arena;
       puVar21 = allocation + 1;
-      FUN_00108770(puVar21,*(undefined4 *)(pass + 8));
+      IRGeomExport__ctor_108770(puVar21,*(undefined4 *)(pass + 8));
       allocation[0x28] = uVar14;
       allocation[0x50] = 0x24;
       allocation[0x51] = uVar12;
@@ -3310,7 +3310,7 @@ LAB_000fa1bc:
       allocation = (undefined4 *)Arena__alloc(arena,0x168);
       *allocation = arena;
       puVar21 = allocation + 1;
-      FUN_001071fc(puVar21,0xfc,*(undefined4 *)(pass + 8));
+      IRMemStore__ctor_1071fc(puVar21,0xfc,*(undefined4 *)(pass + 8));
       arena = FUN_000ec208(pass,uVar11);
       operandRecord = IRInst__getOperandRecord(puVar21,0);
       *(undefined4 *)(operandRecord + 0xc) = arena;
@@ -4108,7 +4108,7 @@ LAB_000fb800:
         allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
         *allocation = arenaAt374;
         allocation = allocation + 1;
-        FUN_00107980(allocation,arena,*(undefined4 *)(param_1 + 8));
+        IRMemLoad__ctor_107980(allocation,arena,*(undefined4 *)(param_1 + 8));
         arena = FUN_000ec208(param_1,uVar34);
         pdVar17 = (dword *)((int)((unsigned char *)0x0) + 2);
         operandRecord3 = IRInst__getOperandRecord(allocation,1);
@@ -4165,7 +4165,7 @@ LAB_000fb800:
       allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
       *allocation = arenaAt374;
       allocation = allocation + 1;
-      FUN_00107980(allocation,arena,*(undefined4 *)(param_1 + 8));
+      IRMemLoad__ctor_107980(allocation,arena,*(undefined4 *)(param_1 + 8));
       arena = FUN_000ec208(param_1,4);
       operandRecord2 = IRInst__getOperandRecord(allocation,0);
       *(undefined4 *)(operandRecord2 + 0xc) = arena;
@@ -4417,7 +4417,7 @@ LAB_000fc3f4:
         }
         arena = (undefined4)uVar39;
         if (*(int *)((ulonglong)uVar39 >> 0x20) == 0) {
-          iVar6 = FUN_00109810(0xa4,*(undefined4 *)(param_1 + 8));
+          iVar6 = IRLoadVertex__new_109810(0xa4,*(undefined4 *)(param_1 + 8));
           *(uint *)(iVar6 + 0x14) = *(uint *)(iVar6 + 0x14) & 0xffff7fff;
           iVar38 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
           *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar38;
@@ -5484,11 +5484,11 @@ code_r0x000fed00:
         argR6 = (uint ******)FUN_000ec2a0(program,ilRegisterType);
         iVar34 = FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile,ppppppuVar19,0);
         iVar34 = *(int *)(iVar34 + 0x38);
-        FUN_001041d0(iVar34,0,(uint)*tokenWords >> 0x10 & 3,argR6,ppppppuVar19);
-        FUN_001041d0(iVar34,1,(uint)*tokenWords >> 0x12 & 3,argR6,ppppppuVar19);
-        FUN_001041d0(iVar34,2,(uint)*tokenWords >> 0x14 & 3,argR6,ppppppuVar19);
+        IRLoadInterp__setLane(iVar34,0,(uint)*tokenWords >> 0x10 & 3,argR6,ppppppuVar19);
+        IRLoadInterp__setLane(iVar34,1,(uint)*tokenWords >> 0x12 & 3,argR6,ppppppuVar19);
+        IRLoadInterp__setLane(iVar34,2,(uint)*tokenWords >> 0x14 & 3,argR6,ppppppuVar19);
         argR7 = ppppppuVar19;
-        FUN_001041d0(iVar34,3,(uint)*tokenWords >> 0x16 & 3,argR6,ppppppuVar19);
+        IRLoadInterp__setLane(iVar34,3,(uint)*tokenWords >> 0x16 & 3,argR6,ppppppuVar19);
         firstTokenWord = *tokenWords;
         if (((uint)firstTokenWord & 0x1000000) != 0) {
           *(uint *)(iVar34 + 0x13c) = *(uint *)(iVar34 + 0x13c) | 1;
@@ -5549,7 +5549,7 @@ code_r0x000fed00:
         if (*(byte *)(iVar43 + (int)local_70) != 0) {
           argR6 = ppppppuVar19;
           argR7 = ppppppuVar38;
-          FUN_001041d0(iVar34,iVar43,(uint)*(byte *)(iVar43 + (int)local_70),ppppppuVar19,
+          IRLoadInterp__setLane(iVar34,iVar43,(uint)*(byte *)(iVar43 + (int)local_70),ppppppuVar19,
                        ppppppuVar38);
         }
         notLastIteration = iVar43 != 3;
@@ -5695,7 +5695,7 @@ code_r0x000fed00:
       do {
         if (*(char *)(iVar43 + (int)local_70) == '\0') {
           argR6 = ppppppuVar19;
-          FUN_00104104(registerInfo,iVar43,iVar34,ppppppuVar19);
+          IRLoadInterp__setLaneKindAndIndex(registerInfo,iVar43,iVar34,ppppppuVar19);
         }
         notLastIteration = iVar43 != 3;
         iVar43 = iVar43 + 1;
@@ -5784,7 +5784,7 @@ code_r0x000fed00:
       }
       IRInst__setHardwareRegisterAndAdd(mulAddInst,program,0x2b,0);
       mulAddInst[0x20] = 1;
-      movInst = (int *)FUN_001084b8(0x31,*(undefined4 *)(program + 8));
+      movInst = (int *)IRMov__new_1084b8(0x31,*(undefined4 *)(program + 8));
       operandRecord2 = IRInst__getOperandRecord(movInst,0);
       *(uint *******)(operandRecord2 + 8) = argR6;
       *(undefined4 *)(operandRecord2 + 0xc) = 0x2c;
@@ -5920,7 +5920,7 @@ code_r0x000fed00:
         argR6 = (uint ******)0x0;
         trailingToken = ilReader[(int)ilReader[0x16] + 0x23];
         virtualRegister = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x43,0xffffffff,0);
-        iVar34 = FUN_00109b74(0x10a,*(undefined4 *)(program + 8));
+        iVar34 = IRImmedConstBuff__new_109b74(0x10a,*(undefined4 *)(program + 8));
         *(int *)(program + 0x354) = iVar34;
         IRInst__setOperandRef(iVar34,0,virtualRegister);
         *(uint ******)(iVar34 + 300) = pppppuVar52 + (int)trailingToken;
@@ -5985,7 +5985,7 @@ code_r0x000fed00:
           instAllocation = (undefined4 *)Arena__alloc(compilerArenaA,0x168);
           *instAllocation = compilerArenaA;
           instObject = instAllocation + 1;
-          FUN_00109a80(instObject,0xfa,*(undefined4 *)(program + 8));
+          IRLoad__ctor_109a80(instObject,0xfa,*(undefined4 *)(program + 8));
           registerFile = FUN_000ec208(program,ilRegisterType);
           operandRecord = IRInst__getOperandRecord(instObject,0);
           *(undefined4 *)(operandRecord + 0xc) = registerFile;
@@ -6065,7 +6065,7 @@ code_r0x000fed00:
           do {
             if (*(char *)(iVar47 + (int)local_70) == '\0') {
               argR6 = ppppppuVar19;
-              FUN_00104104(iVar43,iVar47,iVar34,ppppppuVar19);
+              IRLoadInterp__setLaneKindAndIndex(iVar43,iVar47,iVar34,ppppppuVar19);
             }
             notLastIteration = iVar47 != 3;
             iVar47 = iVar47 + 1;
@@ -6191,7 +6191,7 @@ code_r0x000feeb8:
           do {
             argR6 = ppppppuVar19;
             argR7 = ppppppuVar48;
-            FUN_001041d0(iVar34,iVar43,1,ppppppuVar19,ppppppuVar48);
+            IRLoadInterp__setLane(iVar34,iVar43,1,ppppppuVar19,ppppppuVar48);
             notLastIteration = iVar43 != 3;
             iVar43 = iVar43 + 1;
           } while (notLastIteration);
@@ -7862,11 +7862,11 @@ code_r0x001022b4:
       goto code_r0x00101f74;
     case 0x4f:
       local_17c = (int *)((int)local_17c + 1);
-      ((void (*)())FUN_001048d4)(ppppppuVar38,(double)*(float *)(iVar47 + (int)local_17c * 4));
+      ((void (*)())IRInst__setExtraFixed3_4_1048d4)(ppppppuVar38,(double)*(float *)(iVar47 + (int)local_17c * 4));
       goto code_r0x00101d1c;
     case 0x50:
       local_17c = (int *)((int)local_17c + 1);
-      ((void (*)())FUN_0010490c)(ppppppuVar38,(double)*(float *)(iVar47 + (int)local_17c * 4));
+      ((void (*)())IRInst__setExtraFixed3_4_10490c)(ppppppuVar38,(double)*(float *)(iVar47 + (int)local_17c * 4));
       goto code_r0x00101d1c;
     case 0x51:
       ilRegisterIndex = *(byte *)((int)ilReader + 0x8d);

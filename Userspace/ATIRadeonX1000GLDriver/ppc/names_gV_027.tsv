@@ -1,0 +1,195 @@
+func	FUN_00103d78	floatToFixedSaturate	INFERRED	clamps a float to [-2^(integerBits-1), 2^(integerBits-1)+1/2^(fractionBits-1)] and scales by 2^fractionBits (fixed-point conversion); first arg unused
+local	FUN_00103d78	param_1	unusedArg1	INFERRED	reads: 1<<(param_2-1) is half the integer range; param_3 sets the scale 1<<param_3
+local	FUN_00103d78	param_2	integerBits	INFERRED	reads: 1<<(param_2-1) is half the integer range; param_3 sets the scale 1<<param_3
+local	FUN_00103d78	param_3	fractionBits	INFERRED	reads: 1<<(param_2-1) is half the integer range; param_3 sets the scale 1<<param_3
+local	FUN_00103d78	fparam_1	value	INFERRED	the float being converted
+local	FUN_00103d78	uVar2	halfRange	INFERRED	1 << (integerBits-1)
+local	FUN_00103d78	dVar5	minLimit	INFERRED	-halfRange as a double
+local	FUN_00103d78	dVar4	cappedAtMax	INFERRED	min(value, maxLimit)
+func	FUN_00103e84	setSelectedConstantWord	INFERRED	stores one of two constant words at record+0x10 depending on flag
+local	FUN_00103e84	param_1	record	INFERRED	param_1+0x10 is written; param_2 == 0 picks the first constant
+local	FUN_00103e84	param_2	flag	INFERRED	param_1+0x10 is written; param_2 == 0 picks the first constant
+local	IRInst__cloneInto	param_1	srcInst	INFERRED	memcpy 0x164 bytes src->dst; a fresh instruction id (compiler+0x324) unless keepId
+local	IRInst__cloneInto	param_2	dstInst	INFERRED	memcpy 0x164 bytes src->dst; a fresh instruction id (compiler+0x324) unless keepId
+local	IRInst__cloneInto	param_3	compiler	INFERRED	memcpy 0x164 bytes src->dst; a fresh instruction id (compiler+0x324) unless keepId
+local	IRInst__cloneInto	param_4	keepId	INFERRED	memcpy 0x164 bytes src->dst; a fresh instruction id (compiler+0x324) unless keepId
+local	IRInst__cloneInto	iVar1	newId	INFERRED	compiler->nextInstId before the increment
+local	IRInst__copyBodyFrom	param_1	dstInst	INFERRED	saves the counters of param_1, memcpy 0x164 bytes from param_2, restores the counters
+local	IRInst__copyBodyFrom	param_2	srcInst	INFERRED	saves the counters of param_1, memcpy 0x164 bytes from param_2, restores the counters
+local	IRInst__copyBodyFrom	local_28	counterSnapshot	INFERRED	3-word snapshot filled by IRInst__saveCounters (mask word)
+local	IRInst__copyBodyFrom	local_24	counterSnapshotUseCount	INFERRED	snapshot word 1 = inst+0x160
+local	IRInst__copyBodyFrom	local_20	counterSnapshotInstId	INFERRED	snapshot word 2 = inst+0x14c
+local	operandsHaveSameConstant	param_1	instA	INFERRED	compares inst A operand 0 words +0x94/+0x98 with the same words of operand operandIndex of inst B
+local	operandsHaveSameConstant	param_2	instB	INFERRED	compares inst A operand 0 words +0x94/+0x98 with the same words of operand operandIndex of inst B
+local	operandsHaveSameConstant	param_3	operandIndex	INFERRED	compares inst A operand 0 words +0x94/+0x98 with the same words of operand operandIndex of inst B
+local	operandsHaveSameConstant	iVar1	operandRecordB	INFERRED	operandIndex*0x18 + instB
+func	FUN_0010401c	IRInst__unlinkAndClearFlag0	INFERRED	DList__unlink(inst) and clears bit 0 of inst+0x14
+local	FUN_0010401c	param_1	inst	INFERRED	unlinked from its list; flag word +0x14 loses bit 0
+func	FUN_0010406c	RegKind__vectorWidthKind	INFERRED	register-kind table flag 0x400 -> kind 0x16, flag 0x800 -> kind 0x15, else the kind itself
+local	FUN_0010406c	param_1	regKind	INFERRED	index into the 0x10-byte register-kind table
+local	RegKind__laneCount	param_1	regKind	INFERRED	index into the register-kind table (0x400 -> 4 lanes, 0x800 -> 3)
+func	FUN_00104104	IRLoadInterp__setLaneKindAndIndex	index) into the lane word at inst+0x12c+4*lane (used byte = 0)	stores (kind<<16
+local	FUN_00104104	param_1	inst	INFERRED	word per lane at +0x12c..+0x138; byte 1 kind, ushort index
+local	FUN_00104104	param_2	lane	INFERRED	word per lane at +0x12c..+0x138; byte 1 kind, ushort index
+local	FUN_00104104	param_3	kind	INFERRED	word per lane at +0x12c..+0x138; byte 1 kind, ushort index
+local	FUN_00104104	param_4	indexValue	INFERRED	word per lane at +0x12c..+0x138; byte 1 kind, ushort index
+func	FUN_00104180	IRLoadInterp__laneIndex_104180	INFERRED	returns the 16-bit index of lane (same code as IRLoadInterp__laneIndex)
+local	FUN_00104180	param_1	inst	INFERRED	reads the ushort at +0x12e/+0x132/+0x136/+0x13a
+local	FUN_00104180	param_2	lane	INFERRED	reads the ushort at +0x12e/+0x132/+0x136/+0x13a
+func	FUN_001041d0	IRLoadInterp__setLane	kind<<16	stores (used<<24
+local	FUN_001041d0	param_1	inst	INFERRED	packs the three lane fields read back by laneUsed/laneKind/laneIndex
+local	FUN_001041d0	param_2	lane	INFERRED	packs the three lane fields read back by laneUsed/laneKind/laneIndex
+local	FUN_001041d0	param_3	used	INFERRED	packs the three lane fields read back by laneUsed/laneKind/laneIndex
+local	FUN_001041d0	param_4	kind	INFERRED	packs the three lane fields read back by laneUsed/laneKind/laneIndex
+local	FUN_001041d0	param_5	indexValue	INFERRED	packs the three lane fields read back by laneUsed/laneKind/laneIndex
+local	IRLoadInterp__laneIndex	param_1	inst	INFERRED	reads the ushort index of lane (+0x12e + 4*lane)
+local	IRLoadInterp__laneIndex	param_2	lane	INFERRED	reads the ushort index of lane (+0x12e + 4*lane)
+func	FUN_001042bc	IRInst__firstOperandWithSelectNot4	INFERRED	first operand index >= 1 whose component select byte (record +0x28, indexed by component) is not 4; -1 when none
+local	FUN_001042bc	param_1	inst	INFERRED	byte at inst+0xb4+component, stepping 0x18 per operand
+local	FUN_001042bc	param_2	componentSlot	INFERRED	byte at inst+0xb4+component, stepping 0x18 per operand
+local	FUN_001042bc	pcVar4	selectBytePtr	INFERRED	walks the select byte of successive operand records
+local	FUN_001042bc	cVar1	selectValue	INFERRED	the select byte just read (4 ends the scan)
+local	FUN_001042bc	iVar2	operandCount	INFERRED	result of virtual slot 0x14 of inst
+local	IRVertexFetch__initSemantics	param_1	inst	INFERRED	clears +0x98/+0xac, sets +0xb0 = 0x1f
+local	FUN_00104364	param_1	unusedArg1	INFERRED	writes 0, 0, 4 through the three out pointers
+local	FUN_00104364	param_2	outFirst	INFERRED	writes 0, 0, 4 through the three out pointers
+local	FUN_00104364	param_3	outSecond	INFERRED	writes 0, 0, 4 through the three out pointers
+local	FUN_00104364	param_4	outThird	INFERRED	writes 0, 0, 4 through the three out pointers
+local	IRInst__vslot28_hasFlag0x4000AndClass0x24	param_2	program	INFERRED	tests program+0x30 & 0x4000
+func	FUN_001043a0	instClassTableIsIdentity	INFERRED	checks that entry k of the 8-byte instruction-class table at 0x1ea500 stores k for k < 0x15
+local	FUN_001043a0	iVar1	storedIndex	INFERRED	first word of the table entry
+local	FUN_001043a0	piVar2	entry	INFERRED	cursor over the 8-byte table entries
+local	FUN_001043a0	iVar4	remaining	INFERRED	entries left to check
+func	FUN_001044e0	IRInst__replaceExtraData	INFERRED	frees the buffer at inst+0x13c in arena A and stores the new pointer
+local	FUN_001044e0	param_2	newData	INFERRED	Arena__free(compiler arena A, inst+0x13c) then inst+0x13c = newData
+func	FUN_001048d4	IRInst__setExtraFixed3_4_1048d4	INFERRED	stores floatToFixedSaturate(3,4,value) as ushort at inst->extra(+0x13c)+0x18
+func	FUN_0010490c	IRInst__setExtraFixed3_4_10490c	INFERRED	same as FUN_001048d4
+func	FUN_00104944	IRInst__setExtraFixed3_4_104944	INFERRED	same as FUN_001048d4
+local	FUN_001048d4	param_1	inst	INFERRED	
+local	FUN_0010490c	param_1	inst	INFERRED	
+local	FUN_00104944	param_1	inst	INFERRED	
+local	FUN_001048d4	fparam_1	value	INFERRED	float passed to floatToFixedSaturate
+local	FUN_0010490c	fparam_1	value	INFERRED	float passed to floatToFixedSaturate
+local	FUN_00104944	fparam_1	value	INFERRED	float passed to floatToFixedSaturate
+local	FUN_001048d4	iVar2	extraData	INFERRED	inst+0x13c
+local	FUN_0010490c	iVar2	extraData	INFERRED	inst+0x13c
+local	FUN_00104944	iVar2	extraData	INFERRED	inst+0x13c
+local	FUN_001048d4	uVar1	fixedValue	INFERRED	the saturated fixed-point result stored as ushort
+local	FUN_0010490c	uVar1	fixedValue	INFERRED	the saturated fixed-point result stored as ushort
+local	FUN_00104944	uVar1	fixedValue	INFERRED	the saturated fixed-point result stored as ushort
+func	FUN_0010453c	IRInst__allSelectsAreHwConstants	INFERRED	opcode 0x33 only: every component select byte other than 4 must name a constant operand accepted by the target (virtual slot 0xf0)
+local	FUN_0010453c	param_1	inst	INFERRED	param_3 holds the four select bytes spilled to ghidra_home[2]
+local	FUN_0010453c	param_2	compiler	INFERRED	param_3 holds the four select bytes spilled to ghidra_home[2]
+local	FUN_0010453c	param_3	selectBytes	INFERRED	param_3 holds the four select bytes spilled to ghidra_home[2]
+local	FUN_0010453c	param_4	unusedArg4	INFERRED	param_3 holds the four select bytes spilled to ghidra_home[2]
+local	FUN_0010453c	param_5	unusedArg5	INFERRED	param_3 holds the four select bytes spilled to ghidra_home[2]
+local	FUN_0010453c	param_6	unusedArg6	INFERRED	param_3 holds the four select bytes spilled to ghidra_home[2]
+local	FUN_0010453c	param_7	unusedArg7	INFERRED	param_3 holds the four select bytes spilled to ghidra_home[2]
+local	FUN_0010453c	uVar1	selectValue	INFERRED	one select byte
+local	FUN_0010453c	iVar2	isHwConstant	INFERRED	target virtual 0xf0 result for the operand value
+local	FUN_0010453c	uVar3	result	INFERRED	1 when all selects pass
+local	FUN_0010453c	pbVar4	selectPtr	INFERRED	cursor over the four select bytes
+local	IRInst__isProjectionOfClass26or3a	param_1	this	INFERRED	
+local	IRInst__isProjectionOfClass26or3a	iVar1	isProjection	INFERRED	virtual slot 0x54 of this
+local	IRInst__isProjectionOfClass26or3a	uVar2	result	INFERRED	
+local	IRInst__isProjectionOfClass44	param_1	this	INFERRED	
+local	IRInst__isProjectionOfClass44	iVar1	isProjection	INFERRED	virtual slot 0x54 of this
+local	IRInst__isProjectionOfClass44	uVar2	result	INFERRED	
+local	IRInst__setHardwareRegisterAndAdd	param_1	inst	INFERRED	stores +0x98 = regKind, +0x94 = regNumber, flags
+local	IRInst__setHardwareRegisterAndAdd	param_2	program	INFERRED	stores +0x98 = regKind, +0x94 = regNumber, flags
+local	IRInst__setHardwareRegisterAndAdd	param_3	regKind	INFERRED	stores +0x98 = regKind, +0x94 = regNumber, flags
+local	IRInst__setHardwareRegisterAndAdd	param_4	regNumber	INFERRED	stores +0x98 = regKind, +0x94 = regNumber, flags
+local	IROperand__copyFrom	param_1	dstOperand	INFERRED	copies modifier bits 0/1 then words 0..4
+local	IROperand__copyFrom	param_2	srcOperand	INFERRED	copies modifier bits 0/1 then words 0..4
+local	IROperand__copyFrom	uVar1	word0	INFERRED	src[0]
+local	IROperand__copyFrom	uVar2	word1	INFERRED	src[1]
+local	IROperand__copyFrom	uVar4	word2	INFERRED	src[2]
+local	IROperand__copyFrom	uVar3	word3	INFERRED	src[3]
+local	IROperand__copyModifiersAndSelect	param_1	dstOperand	INFERRED	copies modifier bits 0/1 and word +0x10
+local	IROperand__copyModifiersAndSelect	param_2	srcOperand	INFERRED	copies modifier bits 0/1 and word +0x10
+func	FUN_00104800	Inst__isBeforeOrSame	INFERRED	1 when instA precedes or equals instB (same block: scan back from B; different blocks: FUN_000e78f8 block order)
+local	FUN_00104800	param_1	instA	INFERRED	
+local	FUN_00104800	param_2	instB	INFERRED	
+local	FUN_00104800	iVar1	cursor	INFERRED	walks the previous links (+4) of instB's list
+local	FUN_00104800	uVar2	blockOrder	INFERRED	FUN_000e78f8 result for the two blocks
+local	Inst__nearestCommonAncestorBlock	param_1	instA	INFERRED	returns the earlier instruction, or the common ancestor block of the two
+local	Inst__nearestCommonAncestorBlock	param_2	instB	INFERRED	returns the earlier instruction, or the common ancestor block of the two
+local	Inst__nearestCommonAncestorBlock	iVar1	isBefore	INFERRED	Inst order test result
+local	Inst__nearestCommonAncestorBlock	uVar2	commonBlock	INFERRED	Block__nearestCommonAncestor of the two blocks
+local	Inst__nearestCommonAncestorBlock	iVar3	result	INFERRED	instA, instB or the redirect-resolved block
+func	FUN_001049a0	IRInst__hasTwoUses	INFERRED	use count (inst+0x160 minus program+0x478 epoch, floored at 0) equals 2
+local	FUN_001049a0	param_1	inst	INFERRED	
+local	FUN_001049a0	param_2	program	INFERRED	
+local	FUN_001049a0	iVar1	useCount	INFERRED	inst+0x160 - program+0x478, floored at 0
+func	FUN_001049c4	IRInst__hasNoUses	INFERRED	inst+0x160 <= program+0x478 (use count zero); signature shares a virtual slot shape with 5 unused args
+local	FUN_001049c4	param_1	inst	INFERRED	
+local	FUN_001049c4	param_2	program	INFERRED	
+local	FUN_001049c4	param_3	unusedArg3	INFERRED	
+local	FUN_001049c4	param_4	unusedArg4	INFERRED	
+local	FUN_001049c4	param_5	unusedArg5	INFERRED	
+local	FUN_001049c4	param_6	unusedArg6	INFERRED	
+local	FUN_001049c4	param_7	unusedArg7	INFERRED	
+local	IRLoadInterp__laneUsed	param_1	inst	INFERRED	reads the used byte of lane (+0x12c + 4*lane)
+local	IRLoadInterp__laneUsed	param_2	lane	INFERRED	reads the used byte of lane (+0x12c + 4*lane)
+func	FUN_00104ae4	IRLoadInterp__laneSelects	INFERRED	writes 4 select codes: lane used 1 -> 5, used 2 -> 6, else 4
+local	FUN_00104ae4	param_1	outSelects	INFERRED	
+local	FUN_00104ae4	param_2	inst	INFERRED	
+local	FUN_00104ae4	iVar2	used	INFERRED	IRLoadInterp__laneUsed of the lane
+local	FUN_00104ae4	iVar3	lane	INFERRED	0..3
+local	FUN_00104ae4	puVar4	outCursor	INFERRED	walks outSelects
+local	FUN_00104ae4	bVar1	moreLanes	INFERRED	lane != 3 before the increment
+local	IRLoadInterp__laneKind	param_1	inst	INFERRED	reads the kind byte of lane (+0x12d + 4*lane)
+local	IRLoadInterp__laneKind	param_2	lane	INFERRED	reads the kind byte of lane (+0x12d + 4*lane)
+local	IROperand__init	param_1	operand	INFERRED	sets word 3 = 0x46, clears modifier bits 0/1 of word 5
+func	FUN_00104be8	IRInst__initOperandRecord	INFERRED	IROperand__init on record operandIndex (inst+0x8c+0x18*n)
+local	FUN_00104be8	param_2	operandIndex	INFERRED	
+func	FUN_00104bf8	IRInst__resetFields	INFERRED	zeroes the instruction's operand records, lane words and bookkeeping fields after construction
+local	FUN_00104bf8	uVar3	defaultRecordWord	INFERRED	DAT_001af9bc, stored at inst+0x154 and operand+0xb4
+local	FUN_00104bf8	bVar1	moreOperands	INFERRED	loopIndex != 4
+local	FUN_00104bf8	uVar2	laneBit	INFERRED	lane & 0x3f, the bit cleared in the byte at inst+0x15c
+local	FUN_00104bf8	uVar6	lane	INFERRED	0..3
+local	FUN_00104bf8	puVar5	defaultWordPtr	INFERRED	address of the constant selected for operand+0xb4
+local	FUN_00104bf8	iVar8	recordCursor	INFERRED	steps 0x18 per operand record
+local	IRInst__readLastOperand	param_1	inst	INFERRED	out+4 and out+0x10 receive words of the last operand record (index inst+0x84)
+local	IRInst__readLastOperand	param_2	out	INFERRED	out+4 and out+0x10 receive words of the last operand record (index inst+0x84)
+func	FUN_00104d68	IRInst__applyChannelMask	INFERRED	per channel: byte 0 sets the flag byte at inst+0x9c+ch and clears every operand's select for it; nonzero clears the flag
+local	FUN_00104d68	param_1	inst	INFERRED	
+local	FUN_00104d68	param_2	channelBytes	INFERRED	
+local	FUN_00104d68	bVar1	moreChannels	INFERRED	loopIndex != 3
+local	FUN_00104d68	iVar2	operandCount	INFERRED	virtual slot 0x14
+local	FUN_00104d68	piVar3	channelFlagPtr	INFERRED	walks inst+0x9c bytes
+local	FUN_00104d68	iVar5	operandIndex	INFERRED	1..operandCount
+local	IRLoadConst__removeFromListEx	param_2	unusedArg2	INFERRED	unused second argument
+local	IRLoadConst__removeFromListEx	iVar1	instKind	INFERRED	this+0x98 (2 and 0x33 are never removed)
+local	IRLoadConst__removeFromListEx	uVar2	flags	INFERRED	this+0x14
+local	IRLoadConst__removeFromListEx	iVar3	nextInst	INFERRED	this+4
+func	FUN_00104ee4	IRLoadInterp__laneKind_104ee4	INFERRED	returns the kind byte of lane (same code as IRLoadInterp__laneKind)
+local	FUN_00104ee4	param_1	inst	INFERRED	
+local	FUN_00104ee4	param_2	lane	INFERRED	
+func	FUN_00104f34	IRInst__switchOpcodeVariant	INFERRED	swaps the opcode descriptor 0x2b<->0xa6 and 99<->100 depending on flag
+local	FUN_00104f34	param_1	inst	INFERRED	
+local	FUN_00104f34	param_2	flag	INFERRED	
+local	FUN_00104f34	iVar1	opcode	INFERRED	descriptor opcode (info+8)
+func	FUN_00104fd0	IRInst__opcodeIsInSet	INFERRED	opcode in {0x24..0x26, 0x9d, 0xab..0xad, 0xec..0xee, 0xf2..0xf4}
+local	FUN_00104fd0	param_1	inst	INFERRED	
+local	FUN_00104fd0	iVar1	opcode	INFERRED	descriptor opcode (info+8)
+local	IRInst__ctor_10502c	param_2	opcode	INFERRED	
+local	IRInst__ctor_1051b0	param_2	opcode	INFERRED	
+func	FUN_001055cc	IRInst__isProjectionOfOpcode2a	INFERRED	projection whose source (or own +0xb0 word) has class 0x2a
+local	FUN_001055cc	param_1	this	INFERRED	
+local	FUN_001055cc	iVar1	isProjection	INFERRED	virtual slot 0x54
+local	FUN_001055cc	bVar2	result	INFERRED	
+use	FUN_00103d78	dVar3	maxLimit	INFERRED	upper clamp bound halfRange + FLOAT/(1<<(fractionBits-1))	^\s*dVar3\ =\ \(double\)\(\(float\)\(\(double\)CONCAT44\(0x43300000,uVar2\ \^\ 0x80000000\)\ \-\ DOUBLE_001aa1e0\)\ \+$	+5
+use	FUN_00103d78	dVar3	maxLimit	INFERRED	upper clamp bound halfRange + FLOAT/(1<<(fractionBits-1))	^\s*dVar4\ =\ dVar3;$	+1
+use	FUN_00103d78	dVar3	clampedValue	INFERRED	max(cappedAtMax, minLimit): the saturated result scaled afterwards	^\s*dVar3\ =\ dVar4;$	+1
+use	FUN_00103d78	dVar3	clampedValue	INFERRED	max(cappedAtMax, minLimit): the saturated result scaled afterwards	^\s*dVar3\ =\ dVar5;$	+1
+use	FUN_00103d78	dVar3	clampedValue	INFERRED	max(cappedAtMax, minLimit): the saturated result scaled afterwards	^\s*dVar3\ =\ dVar4;$@2	+1
+use	FUN_00103d78	dVar3	clampedValue	INFERRED	max(cappedAtMax, minLimit): the saturated result scaled afterwards	^\s*return\ \(int\)\(dVar3\ \*\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,$	+3
+use	FUN_00103d78	fVar1	distanceToMax	INFERRED	maxLimit - value, sign selects the clamp	^\s*fVar1\ =\ \(float\)\(dVar3\ \-\ fparam_1\);$	+1
+use	FUN_00103d78	fVar1	distanceToMax	INFERRED	maxLimit - value, sign selects the clamp	^\s*if\ \(fVar1\ <\ 0\.0\)\ \{$	+1
+use	FUN_00103d78	fVar1	distanceToMax	INFERRED	maxLimit - value, sign selects the clamp	^\s*if\ \(\-fVar1\ <\ 0\.0\)\ \{$	+1
+use	FUN_00103d78	fVar1	distanceAboveMin	INFERRED	cappedAtMax - minLimit, sign selects the clamp	^\s*fVar1\ =\ \(float\)\(dVar4\ \-\ dVar5\);$	+1
+use	FUN_00103d78	fVar1	distanceAboveMin	INFERRED	cappedAtMax - minLimit, sign selects the clamp	^\s*if\ \(fVar1\ <\ 0\.0\)\ \{$@2	+1
+use	FUN_00103d78	fVar1	distanceAboveMin	INFERRED	cappedAtMax - minLimit, sign selects the clamp	^\s*if\ \(\-fVar1\ <\ 0\.0\)\ \{$@2	+1
+use	FUN_00104bf8	iVar7	remainingLanes	INFERRED	counts 4 lanes down	^\s*iVar7\ =\ 4;$	+1
+use	FUN_00104bf8	iVar7	remainingLanes	INFERRED	counts 4 lanes down	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+2

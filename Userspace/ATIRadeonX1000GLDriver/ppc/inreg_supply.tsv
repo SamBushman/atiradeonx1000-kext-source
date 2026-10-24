@@ -1,6 +1,6 @@
 # entry	function	register	inreg_liveness class	supply verdict	detail (reg_supply.py --all)
-10b184	FUN_0010b184	r6	PASS-indirect	GARBAGE	
-10b184	FUN_0010b184	r7	PASS-indirect	GARBAGE	
+10b184	IRInst__findConstantOperandWithValue	r6	PASS-indirect	GARBAGE	
+10b184	IRInst__findConstantOperandWithValue	r7	PASS-indirect	GARBAGE	
 10c47c	FUN_0010c47c	r5	PASS-indirect	GARBAGE	
 10c47c	FUN_0010c47c	r6	PASS-indirect	GARBAGE	
 10c47c	FUN_0010c47c	r7	PASS-indirect	GARBAGE	
@@ -10,13 +10,13 @@
 10c670	FUN_0010c670	r8	PASS-deep	GARBAGE	
 10c670	FUN_0010c670	r9	PASS-deep	GARBAGE	
 10cb48	FUN_0010cb48	r8	PASS-deep	GARBAGE	
-10cfcc	FUN_0010cfcc	r8	PASS-deep	GARBAGE	
-10cfcc	FUN_0010cfcc	r9	PASS-deep	GARBAGE	
-10d4cc	FUN_0010d4cc	r5	PASS-deep	GARBAGE	
-10d4cc	FUN_0010d4cc	r6	PASS-deep	GARBAGE	
-10d4cc	FUN_0010d4cc	r7	PASS-deep	GARBAGE	
-10d4cc	FUN_0010d4cc	r8	PASS-deep	GARBAGE	
-10d4cc	FUN_0010d4cc	r9	PASS-deep	GARBAGE	
+10cfcc	IRInst__foldMovSourceSelect	r8	PASS-deep	GARBAGE	
+10cfcc	IRInst__foldMovSourceSelect	r9	PASS-deep	GARBAGE	
+10d4cc	IRInst__convertCompareToBinaryAlu	r5	PASS-deep	GARBAGE	
+10d4cc	IRInst__convertCompareToBinaryAlu	r6	PASS-deep	GARBAGE	
+10d4cc	IRInst__convertCompareToBinaryAlu	r7	PASS-deep	GARBAGE	
+10d4cc	IRInst__convertCompareToBinaryAlu	r8	PASS-deep	GARBAGE	
+10d4cc	IRInst__convertCompareToBinaryAlu	r9	PASS-deep	GARBAGE	
 120cd4	FUN_00120cd4	r6	PASS-deep	GARBAGE	
 120cd4	FUN_00120cd4	r7	PASS-deep	GARBAGE	
 120cd4	FUN_00120cd4	r8	PASS-deep	GARBAGE	

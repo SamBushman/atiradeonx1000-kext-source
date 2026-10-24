@@ -1,0 +1,163 @@
+func	FUN_00107df4	IRUnary__new_107df4	INFERRED	allocates 0x168 bytes from arena A and runs IRInst__reinitAsUnary
+local	FUN_00107df4	param_1	opcode	INFERRED	first constructor argument after the object
+func	FUN_00107eec	IRBinary__ctor_107eec	INFERRED	constructor: stores the IRBinary vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00107eec	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRBinary vtable address
+local	FUN_00107eec	param_2	opcode	INFERRED	argument opcode of the base constructor call
+func	FUN_00107fd0	IRCmp2__ctor_107fd0	INFERRED	constructor: stores the IRCmp2 vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00107fd0	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRCmp2 vtable address
+local	FUN_00107fd0	param_1	this	INFERRED	argument this of the base constructor call
+func	FUN_001080e0	IRCmp2__ctor_1080e0	INFERRED	constructor: stores the IRCmp2 vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_001080e0	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRCmp2 vtable address
+local	FUN_001080e0	param_1	this	INFERRED	argument this of the base constructor call
+local	FUN_001080e0	param_3	compiler	INFERRED	argument compiler of the base constructor call
+local	IRInst__reinitAsBinary	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRBinary vtable address
+local	IRInst__reinitAsBinary	param_2	opcode	INFERRED	argument opcode of the base constructor call
+func	FUN_001081c0	IRBinary__new_1081c0	INFERRED	allocates 0x168 bytes from arena A and runs IRInst__reinitAsBinary
+local	FUN_001081c0	param_1	opcode	INFERRED	first constructor argument after the object
+func	FUN_001082b8	IRTrinary__ctor_1082b8	INFERRED	constructor: stores the IRTrinary vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_001082b8	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRTrinary vtable address
+local	FUN_001082b8	param_2	opcode	INFERRED	argument opcode of the base constructor call
+local	IRInst__reinitAsTrinary	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRTrinary vtable address
+local	IRInst__reinitAsTrinary	param_2	opcode	INFERRED	argument opcode of the base constructor call
+func	FUN_00108350	IRTrinary__new_108350	INFERRED	allocates 0x168 bytes from arena A and runs IRInst__reinitAsTrinary
+local	FUN_00108350	param_1	opcode	INFERRED	first constructor argument after the object
+local	IRInst__reinitAsMov	puVar2	vtable	INFERRED	PTR_DAT_ entry holding the IRMov vtable address
+local	IRInst__reinitAsMov	param_1	this	INFERRED	argument this of the base constructor call
+local	IRInst__reinitAsMov	param_2	opcode	INFERRED	argument opcode of the base constructor call
+func	FUN_001084b8	IRMov__new_1084b8	INFERRED	allocates 0x168 bytes from arena A and runs IRInst__reinitAsMov
+local	FUN_001084b8	param_1	opcode	INFERRED	first constructor argument after the object
+func	FUN_001086e8	IRGeomExport__ctor_1086e8	INFERRED	constructor: stores the IRGeomExport vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_001086e8	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRGeomExport vtable address
+func	FUN_00108770	IRGeomExport__ctor_108770	INFERRED	constructor: stores the IRGeomExport vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00108770	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRGeomExport vtable address
+func	FUN_001087f0	IRGeomExport__ctor_1087f0	INFERRED	constructor: stores the IRGeomExport vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_001087f0	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRGeomExport vtable address
+local	IRExportColorAndFog__ctor_108870	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRExportColorAndFog vtable address
+local	IRExportColorAndFog__ctor_1088c4	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRExportColorAndFog vtable address
+func	FUN_00108a50	IRGeomExport__ctor_108a50	INFERRED	constructor: stores the IRGeomExport vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00108a50	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRGeomExport vtable address
+func	FUN_00108c68	IRHeader__ctor_108c68	INFERRED	constructor: stores the IRHeader vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00108c68	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRHeader vtable address
+func	FUN_00108cbc	IRHeader__ctor_108cbc	INFERRED	constructor: stores the IRHeader vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00108cbc	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRHeader vtable address
+func	FUN_00108e40	IRLoad__ctor_108e40	INFERRED	constructor: stores the IRLoad vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00108e40	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRLoad vtable address
+local	IRUndefined__ctor_108e8c	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRUndefined vtable address
+local	IRUndefined__ctor_108e8c	param_1	this	INFERRED	argument this of the base constructor call
+local	IRUndefined__ctor_108e8c	param_2	opcode	INFERRED	argument opcode of the base constructor call
+local	IRUndefined__ctor_108f5c	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRUndefined vtable address
+local	IRUndefined__ctor_108f5c	param_1	this	INFERRED	argument this of the base constructor call
+local	IRUndefined__ctor_108f5c	param_2	opcode	INFERRED	argument opcode of the base constructor call
+local	IRUndefined__ctor_108f5c	param_3	compiler	INFERRED	argument compiler of the base constructor call
+func	FUN_00108fb0	IRUndefined__ctor_108fb0	INFERRED	constructor: stores the IRUndefined vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00108fb0	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRUndefined vtable address
+local	FUN_00108fb0	param_1	this	INFERRED	argument this of the base constructor call
+local	FUN_00108fb0	param_2	compiler	INFERRED	argument compiler of the base constructor call
+local	IRUndefined__ctor_10900c	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRUndefined vtable address
+local	IRUndefined__ctor_10900c	param_1	this	INFERRED	argument this of the base constructor call
+local	IRUndefined__ctor_10900c	param_2	compiler	INFERRED	argument compiler of the base constructor call
+local	IRLoadMemBufferIndex__ctor_109068	param_2	compiler	INFERRED	argument compiler of the base constructor call
+local	IRLoadMemBufferIndex__ctor_1090b4	param_2	compiler	INFERRED	argument compiler of the base constructor call
+local	IRLoadMemBuffer__ctor_109100	param_2	compiler	INFERRED	argument compiler of the base constructor call
+local	IRLoadMemBuffer__ctor_10914c	param_2	compiler	INFERRED	argument compiler of the base constructor call
+func	FUN_00109348	IRLoadTemp__ctor_109348	INFERRED	constructor: stores the IRLoadTemp vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00109348	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRLoadTemp vtable address
+local	FUN_00109348	param_1	this	INFERRED	argument this of the base constructor call
+local	FUN_00109348	param_3	compiler	INFERRED	argument compiler of the base constructor call
+local	IRLoadTemp__ctor_1093b8	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRLoadTemp vtable address
+local	IRLoadTemp__ctor_1093b8	param_1	this	INFERRED	argument this of the base constructor call
+local	IRLoadTemp__ctor_1093b8	param_3	compiler	INFERRED	argument compiler of the base constructor call
+func	FUN_00109428	IRLoadTemp__ctor_109428	INFERRED	constructor: stores the IRLoadTemp vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00109428	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRLoadTemp vtable address
+local	FUN_00109428	param_1	this	INFERRED	argument this of the base constructor call
+local	FUN_00109428	param_2	opcode	INFERRED	argument opcode of the base constructor call
+func	FUN_00109480	IRLoadTemp__new_109480	INFERRED	allocates 0x168 bytes from arena A and runs FUN_00109428
+local	FUN_00109480	param_1	opcode	INFERRED	first constructor argument after the object
+local	IRLoadTemp__ctor_1094fc	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRLoadTemp vtable address
+local	IRLoadTemp__ctor_1094fc	param_1	this	INFERRED	argument this of the base constructor call
+local	IRLoadTemp__ctor_1094fc	param_2	opcode	INFERRED	argument opcode of the base constructor call
+local	IRLoadTemp__ctor_1094fc	param_3	compiler	INFERRED	argument compiler of the base constructor call
+func	FUN_00109554	IRLoadTemp__ctor_109554	INFERRED	constructor: stores the IRLoadTemp vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00109554	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRLoadTemp vtable address
+local	FUN_00109554	param_1	this	INFERRED	argument this of the base constructor call
+local	FUN_00109554	param_2	compiler	INFERRED	argument compiler of the base constructor call
+local	IRLoadTemp__ctor_1095b4	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRLoadTemp vtable address
+local	IRLoadTemp__ctor_1095b4	param_1	this	INFERRED	argument this of the base constructor call
+local	IRLoadTemp__ctor_1095b4	param_2	compiler	INFERRED	argument compiler of the base constructor call
+func	FUN_00109764	IRLoadVertex__ctor_109764	INFERRED	constructor: stores the IRLoadVertex vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00109764	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRLoadVertex vtable address
+local	FUN_00109764	param_1	this	INFERRED	argument this of the base constructor call
+local	FUN_00109764	param_2	opcode	INFERRED	argument opcode of the base constructor call
+func	FUN_00109810	IRLoadVertex__new_109810	INFERRED	allocates 0x168 bytes from arena A and runs FUN_00109764
+local	FUN_00109810	param_1	opcode	INFERRED	first constructor argument after the object
+func	FUN_0010988c	IRLoadVertex__ctor_10988c	INFERRED	constructor: stores the IRLoadVertex vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0010988c	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRLoadVertex vtable address
+local	FUN_0010988c	param_1	this	INFERRED	argument this of the base constructor call
+local	FUN_0010988c	param_2	opcode	INFERRED	argument opcode of the base constructor call
+local	FUN_0010988c	param_3	compiler	INFERRED	argument compiler of the base constructor call
+func	FUN_00109a80	IRLoad__ctor_109a80	INFERRED	constructor: stores the IRLoad vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00109a80	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRLoad vtable address
+func	FUN_00109acc	IRImmedConstBuff__ctor_109acc	INFERRED	constructor: stores the IRImmedConstBuff vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00109acc	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRImmedConstBuff vtable address
+func	FUN_00109b20	IRImmedConstBuff__ctor_109b20	INFERRED	constructor: stores the IRImmedConstBuff vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00109b20	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRImmedConstBuff vtable address
+func	FUN_00109b74	IRImmedConstBuff__new_109b74	INFERRED	allocates 0x168 bytes from arena A and runs FUN_00109b20
+local	FUN_00109b74	param_1	opcode	INFERRED	first constructor argument after the object
+func	FUN_00109bf0	IRMerge__ctor_109bf0	INFERRED	constructor: stores the IRMerge vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00109bf0	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRMerge vtable address
+func	FUN_00109c4c	IRMerge__ctor_109c4c	INFERRED	constructor: stores the IRMerge vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00109c4c	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRMerge vtable address
+func	FUN_00109ca8	IRMerge__ctor_109ca8	INFERRED	constructor: stores the IRMerge vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00109ca8	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRMerge vtable address
+func	FUN_00109cfc	IRMerge__ctor_109cfc	INFERRED	constructor: stores the IRMerge vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00109cfc	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRMerge vtable address
+func	FUN_0010a474	IRLoopStart__ctor_10a474	INFERRED	constructor: stores the IRLoopStart vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0010a474	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRLoopStart vtable address
+func	FUN_0010a50c	IRLoopStart__ctor_10a50c	INFERRED	constructor: stores the IRLoopStart vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0010a50c	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRLoopStart vtable address
+func	FUN_0010a7d4	IRStartMakeCall__ctor_10a7d4	INFERRED	constructor: stores the IRStartMakeCall vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0010a7d4	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRStartMakeCall vtable address
+func	FUN_0010a83c	IRStartMakeCall__ctor_10a83c	INFERRED	constructor: stores the IRStartMakeCall vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0010a83c	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRStartMakeCall vtable address
+func	FUN_0010a8a4	IRStartCallRoutine__ctor_10a8a4	INFERRED	constructor: stores the IRStartCallRoutine vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0010a8a4	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRStartCallRoutine vtable address
+func	FUN_0010a90c	IRStartCallRoutine__ctor_10a90c	INFERRED	constructor: stores the IRStartCallRoutine vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0010a90c	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IRStartCallRoutine vtable address
+local	KhanChip__ctor_10e050	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the HwChip vtable address
+local	KhanChip__ctor_10e050	param_2	allocContext	INFERRED	allocation context passed to the member allocator FUN_000e1564 (Khan/Fudo chip and shader-limit constructors)
+local	KhanChip__ctor_10e114	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the HwChip vtable address
+local	KhanChip__ctor_10e114	param_2	allocContext	INFERRED	allocation context passed to the member allocator FUN_000e1564 (Khan/Fudo chip and shader-limit constructors)
+func	FUN_0010e1d8	FudoChip__ctor_10e1d8	INFERRED	constructor: stores the FudoChip vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0010e1d8	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the FudoChip vtable address
+local	FUN_0010e1d8	param_2	allocContext	INFERRED	allocation context passed to the member allocator FUN_000e1564 (Khan/Fudo chip and shader-limit constructors)
+func	FUN_0010e2a0	FudoChip__ctor_10e2a0	INFERRED	constructor: stores the FudoChip vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0010e2a0	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the FudoChip vtable address
+local	FUN_0010e2a0	param_2	allocContext	INFERRED	allocation context passed to the member allocator FUN_000e1564 (Khan/Fudo chip and shader-limit constructors)
+func	FUN_0012379c	VRegInfo__ctor_12379c	INFERRED	constructor: stores the VRegInfo vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0012379c	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the VRegInfo vtable address
+func	FUN_001238e8	VRegInfo__ctor_1238e8	INFERRED	constructor: stores the VRegInfo vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_001238e8	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the VRegInfo vtable address
+local	AddrIndexedSet__ctor_125f40	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the AddrIndexedSet vtable address
+func	FUN_00125f94	AddrIndexedSet__ctor_125f94	INFERRED	constructor: stores the AddrIndexedSet vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00125f94	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the AddrIndexedSet vtable address
+local	LoopRegister__ctor_125fe8	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the LoopRegister vtable address
+func	FUN_00126034	LoopRegister__ctor_126034	INFERRED	constructor: stores the LoopRegister vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00126034	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the LoopRegister vtable address
+local	LoopIndexedOutputSet__ctor_126080	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the LoopIndexedSet vtable address
+func	FUN_001260f4	ExportAddress__ctor_1260f4	INFERRED	constructor: stores the ExportAddress vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_001260f4	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the ExportAddress vtable address
+func	FUN_0012614c	ExportAddress__ctor_12614c	INFERRED	constructor: stores the ExportAddress vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0012614c	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the ExportAddress vtable address
+local	LoopIndexedConstSet__ctor_1264c4	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the LoopIndexedSet vtable address
+local	LoopIndexedConstSet__ctor_126538	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the LoopIndexedSet vtable address
+local	LoopIndexedInputSet__ctor_1265ac	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the LoopIndexedSet vtable address
+local	LoopIndexedInputSet__ctor_126620	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the LoopIndexedSet vtable address
+local	LoopIndexedOutputSet__ctor_126694	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the LoopIndexedSet vtable address
+func	FUN_00126de4	LoopIndexedSet__ctor_126de4	INFERRED	constructor: stores the LoopIndexedSet vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_00126de4	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the LoopIndexedSet vtable address
+func	FUN_00127994	VRegInfo__new_127994	INFERRED	allocates 0x168 bytes from arena A and runs FUN_001238e8
+local	KhanPs__createSchedModels	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the R300SchedModel vtable address
+local	FudoVs__createSchedModels	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the R300VSchedModel vtable address
+local	KhanVs__createSchedModels	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the R300VSchedModel vtable address
+func	FUN_0012e56c	IfFooter__ctor_12e56c	INFERRED	constructor: stores the IfFooter vtable (PTR_DAT -> nl_symbol_ptr -> vtable) at *this
+local	FUN_0012e56c	puVar1	vtable	INFERRED	PTR_DAT_ entry holding the IfFooter vtable address

@@ -1921,7 +1921,7 @@ int R300VMachineAssembler__assembleBlock(this, block)
       groupInst = (int *)((int (*)())R300VMachineAssembler__findFoldableMovePair)(this,block,piVar5,this + 0x1f);
       iVar3 = this[3];
     }
-    iVar3 = FUN_00106cf8(groupInst,*(undefined4 *)(iVar3 + 0x6c4));
+    iVar3 = IRInst__isCoalescableMov(groupInst,*(undefined4 *)(iVar3 + 0x6c4));
     if ((((iVar3 == 0) || (instFlags = groupInst[5], (instFlags & 4) != 0)) || ((int)instFlags < 0)) ||
        ((instFlags & 0x1000) != 0)) {
       (**(code **)(*this + 0xbc))(this);
@@ -2328,7 +2328,7 @@ LAB_0019bee4:
     destRegType = inst[0x26];
   }
   *instructionWords = (*(uint *)(&DAT_001b2ad0 + destRegType * 4) & 0xf) << 8 | *instructionWords & 0xfffff0ff;
-  destAddrMode = FUN_00105dbc(inst,0);
+  destAddrMode = IRInst__operandKindClass(inst,0);
   if (destAddrMode == 1) {
     *(undefined4 *)(this + 0x24) = 1;
     *instructionWords = *instructionWords | 0x1000;
@@ -2557,7 +2557,7 @@ int R300VMachineAssembler__encodeSourceOperand(this, inst, instructionWords, sou
   }
   loopIndex = (**(code **)(*srcDefInst + 0x60))(srcDefInst);
   if (loopIndex == 0) {
-    loopIndex = FUN_00105dbc(inst,sourceNumber);
+    loopIndex = IRInst__operandKindClass(inst,sourceNumber);
     srcRegClass = srcDefInst[0x26];
     allocTable = *(undefined4 *)(*(int *)(this + 0xc) + 0x6c4);
     regDefInst = srcDefInst;
@@ -2574,7 +2574,7 @@ LAB_0019c490:
     }
   }
   else {
-    loopIndex = FUN_00105dbc(srcDefInst,1);
+    loopIndex = IRInst__operandKindClass(srcDefInst,1);
     srcRegClass = IRInst__getOperandSource(srcDefInst,1);
     srcRegClass = *(int *)(srcRegClass + 0x98);
     if (srcRegClass != 0x33) {
@@ -2836,10 +2836,10 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
   dualMathWord = instructionWords + 3;
   *instructionWords = *instructionWords | 0x10000000;
   a2 = instructionWords;
-  FUN_00105dbc(inst,1);
+  IRInst__operandKindClass(inst,1);
   loopIndex = (**(code **)(*inst + 0x14))(inst);
   if (loopIndex == 2) {
-    FUN_00105dbc(inst,2);
+    IRInst__operandKindClass(inst,2);
   }
   operandVReg = (int *)IRInst__getOperandSource(inst,1);
   loopIndex = (**(code **)(*operandVReg + 0x60))(operandVReg);
@@ -3192,7 +3192,7 @@ int R520VMachineAssembler__getOrCreateConstantZeroInst(this)
     arenaAt378 = *(undefined4 *)(*(int *)(this + 0xc) + 0x378);
     instAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x168);
     *instAlloc = arenaAt378;
-    FUN_00109554(instAlloc + 1,*(undefined4 *)(this + 0xc));
+    IRLoadTemp__ctor_109554(instAlloc + 1,*(undefined4 *)(this + 0xc));
     *(undefined4 **)(this + 0x90) = instAlloc + 1;
     instAlloc[0x27] = 0;
     instAlloc[0x26] = zeroRegister;
@@ -3316,89 +3316,89 @@ int R520VMachineAssembler__vslot32_assembleWithPredicateClear(this, node, block,
  * against the real compiled C symbols (gcc adds one underscore automatically).
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
-asm(".globl FUN_00197b30");
-asm(".set FUN_00197b30, _R300MachineAssembler__emitTexRecord");
-asm(".globl FUN_00197de4");
-asm(".set FUN_00197de4, _R300MachineAssembler__rgbSelectForLiteralFloat");
-asm(".globl FUN_00197ecc");
-asm(".set FUN_00197ecc, _R300MachineAssembler__alphaSelectForLiteralFloat");
-asm(".globl FUN_00197fb4");
-asm(".set FUN_00197fb4, _R300MachineAssembler__setTempDestination");
-asm(".globl FUN_00198084");
-asm(".set FUN_00198084, _R300MachineAssembler__setOutputDestination");
-asm(".globl FUN_001981ac");
-asm(".set FUN_001981ac, _R300MachineAssembler__assembleAluInstruction");
-asm(".globl FUN_0019a2f0");
-asm(".set FUN_0019a2f0, _R300VMachineAssembler__finishProgram");
-asm(".globl FUN_0019a3bc");
-asm(".set FUN_0019a3bc, _R300VMachineAssembler__logStatistics");
-asm(".globl FUN_0019a484");
-asm(".set FUN_0019a484, _R300VMachineAssembler__copyControlFlowToOutput");
-asm(".globl FUN_0019a510");
-asm(".set FUN_0019a510, _R300VMachineAssembler__clearCurrentInstruction");
-asm(".globl FUN_0019a618");
-asm(".set FUN_0019a618, _R300VMachineAssembler__vslot2_exceedsLimits");
-asm(".globl FUN_0019a690");
-asm(".set FUN_0019a690, _R300VMachineAssembler__vslot49_advanceInstruction");
-asm(".globl FUN_0019a6a0");
-asm(".set FUN_0019a6a0, _R300VMachineAssembler__vslot48_declareAndAssemble");
-asm(".globl FUN_0019a80c");
-asm(".set FUN_0019a80c, _R300VMachineAssembler__vslot15_assembleUnlessConstantMove");
-asm(".globl FUN_0019a8a8");
-asm(".set FUN_0019a8a8, _R300VMachineAssembler__vslot16_noOp");
-asm(".globl FUN_0019a8ac");
-asm(".set FUN_0019a8ac, _R300VMachineAssembler__vslot18_callSlot14");
-asm(".globl FUN_0019a8bc");
-asm(".set FUN_0019a8bc, _R300VMachineAssembler__vslot19_callSlot14");
-asm(".globl FUN_0019a8d4");
-asm(".set FUN_0019a8d4, _R300VMachineAssembler__vslot43_beginLoop");
-asm(".globl FUN_0019a954");
-asm(".set FUN_0019a954, _R300VMachineAssembler__vslot44_endLoopBody");
-asm(".globl FUN_0019a9dc");
-asm(".set FUN_0019a9dc, _R300VMachineAssembler__vslot45_endLoop");
-asm(".globl FUN_0019aa7c");
-asm(".set FUN_0019aa7c, _R300VMachineAssembler__vslot46_leaveLoop");
-asm(".globl FUN_0019aaf4");
-asm(".set FUN_0019aaf4, _R300VMachineAssembler__vslot27_assembleOrFail");
-asm(".globl FUN_0019ab60");
-asm(".set FUN_0019ab60, _R300VMachineAssembler__vslot25_assembleOrFail");
-asm(".globl FUN_0019abc4");
-asm(".set FUN_0019abc4, _R300VMachineAssembler__vslot28_assembleChildOrFail");
-asm(".globl FUN_0019ac2c");
-asm(".set FUN_0019ac2c, _R300VMachineAssembler__vslot38_appendCallEntry");
-asm(".globl FUN_0019aca4");
-asm(".set FUN_0019aca4, _R300VMachineAssembler__vslot42_noOp");
-asm(".globl FUN_0019acb0");
-asm(".set FUN_0019acb0, _R300VMachineAssembler__init");
-asm(".globl FUN_0019adf8");
-asm(".set FUN_0019adf8, _R300VMachineAssembler__vslot6_setLoopStack");
-asm(".globl FUN_0019ae80");
-asm(".set FUN_0019ae80, _R300VMachineAssembler__vslot24_assembleWithTarget");
-asm(".globl FUN_0019aee8");
-asm(".set FUN_0019aee8, _R300VMachineAssembler__vslot30_assembleBlockThenSlot40");
-asm(".globl FUN_0019af40");
-asm(".set FUN_0019af40, _R300VMachineAssembler__vslot37_patchControlFlowTarget");
-asm(".globl FUN_0019b3c8");
-asm(".set FUN_0019b3c8, _R300VMachineAssembler__assembleBlock");
-asm(".globl FUN_0019b6a0");
-asm(".set FUN_0019b6a0, _R300VMachineAssembler__vslot40_endControlFlowBlock");
-asm(".globl FUN_0019b748");
-asm(".set FUN_0019b748, _R300VMachineAssembler__vslot39_appendBranchEntry");
-asm(".globl FUN_0019b808");
-asm(".set FUN_0019b808, _R300VMachineAssembler__vslot29_endIfBlock");
-asm(".globl FUN_0019b8bc");
-asm(".set FUN_0019b8bc, _R300VMachineAssembler__create");
-asm(".globl FUN_0019b9ac");
-asm(".set FUN_0019b9ac, _MachineAssembler__dtor_19b9ac");
-asm(".globl FUN_0019ba3c");
-asm(".set FUN_0019ba3c, _R300VMachineAssembler__deleting_dtor");
-asm(".globl FUN_0019d1f4");
-asm(".set FUN_0019d1f4, _R300VMachineAssembler__vslot14_assembleInstruction");
-asm(".globl FUN_0019d474");
-asm(".set FUN_0019d474, _R520VMachineAssembler__vslot33_noOp");
-asm(".globl FUN_0019d478");
-asm(".set FUN_0019d478, _R520VMachineAssembler__vslot12_visitNode");
-asm(".globl FUN_0019d590");
-asm(".set FUN_0019d590, _R520VMachineAssembler__vslot37_closeConditional");
-asm(".globl FUN_0019d7a0");
-asm(".set FUN_0019d7a0, _R520VMachineAssembler__vslot32_assembleWithPredicateClear");
+asm(".globl R300MachineAssembler__emitTexRecord");
+asm(".set R300MachineAssembler__emitTexRecord, _R300MachineAssembler__emitTexRecord");
+asm(".globl R300MachineAssembler__rgbSelectForLiteralFloat");
+asm(".set R300MachineAssembler__rgbSelectForLiteralFloat, _R300MachineAssembler__rgbSelectForLiteralFloat");
+asm(".globl R300MachineAssembler__alphaSelectForLiteralFloat");
+asm(".set R300MachineAssembler__alphaSelectForLiteralFloat, _R300MachineAssembler__alphaSelectForLiteralFloat");
+asm(".globl R300MachineAssembler__setTempDestination");
+asm(".set R300MachineAssembler__setTempDestination, _R300MachineAssembler__setTempDestination");
+asm(".globl R300MachineAssembler__setOutputDestination");
+asm(".set R300MachineAssembler__setOutputDestination, _R300MachineAssembler__setOutputDestination");
+asm(".globl R300MachineAssembler__assembleAluInstruction");
+asm(".set R300MachineAssembler__assembleAluInstruction, _R300MachineAssembler__assembleAluInstruction");
+asm(".globl R300VMachineAssembler__finishProgram");
+asm(".set R300VMachineAssembler__finishProgram, _R300VMachineAssembler__finishProgram");
+asm(".globl R300VMachineAssembler__logStatistics");
+asm(".set R300VMachineAssembler__logStatistics, _R300VMachineAssembler__logStatistics");
+asm(".globl R300VMachineAssembler__copyControlFlowToOutput");
+asm(".set R300VMachineAssembler__copyControlFlowToOutput, _R300VMachineAssembler__copyControlFlowToOutput");
+asm(".globl R300VMachineAssembler__clearCurrentInstruction");
+asm(".set R300VMachineAssembler__clearCurrentInstruction, _R300VMachineAssembler__clearCurrentInstruction");
+asm(".globl R300VMachineAssembler__vslot2_exceedsLimits");
+asm(".set R300VMachineAssembler__vslot2_exceedsLimits, _R300VMachineAssembler__vslot2_exceedsLimits");
+asm(".globl R300VMachineAssembler__vslot49_advanceInstruction");
+asm(".set R300VMachineAssembler__vslot49_advanceInstruction, _R300VMachineAssembler__vslot49_advanceInstruction");
+asm(".globl R300VMachineAssembler__vslot48_declareAndAssemble");
+asm(".set R300VMachineAssembler__vslot48_declareAndAssemble, _R300VMachineAssembler__vslot48_declareAndAssemble");
+asm(".globl R300VMachineAssembler__vslot15_assembleUnlessConstantMove");
+asm(".set R300VMachineAssembler__vslot15_assembleUnlessConstantMove, _R300VMachineAssembler__vslot15_assembleUnlessConstantMove");
+asm(".globl R300VMachineAssembler__vslot16_noOp");
+asm(".set R300VMachineAssembler__vslot16_noOp, _R300VMachineAssembler__vslot16_noOp");
+asm(".globl R300VMachineAssembler__vslot18_callSlot14");
+asm(".set R300VMachineAssembler__vslot18_callSlot14, _R300VMachineAssembler__vslot18_callSlot14");
+asm(".globl R300VMachineAssembler__vslot19_callSlot14");
+asm(".set R300VMachineAssembler__vslot19_callSlot14, _R300VMachineAssembler__vslot19_callSlot14");
+asm(".globl R300VMachineAssembler__vslot43_beginLoop");
+asm(".set R300VMachineAssembler__vslot43_beginLoop, _R300VMachineAssembler__vslot43_beginLoop");
+asm(".globl R300VMachineAssembler__vslot44_endLoopBody");
+asm(".set R300VMachineAssembler__vslot44_endLoopBody, _R300VMachineAssembler__vslot44_endLoopBody");
+asm(".globl R300VMachineAssembler__vslot45_endLoop");
+asm(".set R300VMachineAssembler__vslot45_endLoop, _R300VMachineAssembler__vslot45_endLoop");
+asm(".globl R300VMachineAssembler__vslot46_leaveLoop");
+asm(".set R300VMachineAssembler__vslot46_leaveLoop, _R300VMachineAssembler__vslot46_leaveLoop");
+asm(".globl R300VMachineAssembler__vslot27_assembleOrFail");
+asm(".set R300VMachineAssembler__vslot27_assembleOrFail, _R300VMachineAssembler__vslot27_assembleOrFail");
+asm(".globl R300VMachineAssembler__vslot25_assembleOrFail");
+asm(".set R300VMachineAssembler__vslot25_assembleOrFail, _R300VMachineAssembler__vslot25_assembleOrFail");
+asm(".globl R300VMachineAssembler__vslot28_assembleChildOrFail");
+asm(".set R300VMachineAssembler__vslot28_assembleChildOrFail, _R300VMachineAssembler__vslot28_assembleChildOrFail");
+asm(".globl R300VMachineAssembler__vslot38_appendCallEntry");
+asm(".set R300VMachineAssembler__vslot38_appendCallEntry, _R300VMachineAssembler__vslot38_appendCallEntry");
+asm(".globl R300VMachineAssembler__vslot42_noOp");
+asm(".set R300VMachineAssembler__vslot42_noOp, _R300VMachineAssembler__vslot42_noOp");
+asm(".globl R300VMachineAssembler__init");
+asm(".set R300VMachineAssembler__init, _R300VMachineAssembler__init");
+asm(".globl R300VMachineAssembler__vslot6_setLoopStack");
+asm(".set R300VMachineAssembler__vslot6_setLoopStack, _R300VMachineAssembler__vslot6_setLoopStack");
+asm(".globl R300VMachineAssembler__vslot24_assembleWithTarget");
+asm(".set R300VMachineAssembler__vslot24_assembleWithTarget, _R300VMachineAssembler__vslot24_assembleWithTarget");
+asm(".globl R300VMachineAssembler__vslot30_assembleBlockThenSlot40");
+asm(".set R300VMachineAssembler__vslot30_assembleBlockThenSlot40, _R300VMachineAssembler__vslot30_assembleBlockThenSlot40");
+asm(".globl R300VMachineAssembler__vslot37_patchControlFlowTarget");
+asm(".set R300VMachineAssembler__vslot37_patchControlFlowTarget, _R300VMachineAssembler__vslot37_patchControlFlowTarget");
+asm(".globl R300VMachineAssembler__assembleBlock");
+asm(".set R300VMachineAssembler__assembleBlock, _R300VMachineAssembler__assembleBlock");
+asm(".globl R300VMachineAssembler__vslot40_endControlFlowBlock");
+asm(".set R300VMachineAssembler__vslot40_endControlFlowBlock, _R300VMachineAssembler__vslot40_endControlFlowBlock");
+asm(".globl R300VMachineAssembler__vslot39_appendBranchEntry");
+asm(".set R300VMachineAssembler__vslot39_appendBranchEntry, _R300VMachineAssembler__vslot39_appendBranchEntry");
+asm(".globl R300VMachineAssembler__vslot29_endIfBlock");
+asm(".set R300VMachineAssembler__vslot29_endIfBlock, _R300VMachineAssembler__vslot29_endIfBlock");
+asm(".globl R300VMachineAssembler__create");
+asm(".set R300VMachineAssembler__create, _R300VMachineAssembler__create");
+asm(".globl MachineAssembler__dtor_19b9ac");
+asm(".set MachineAssembler__dtor_19b9ac, _MachineAssembler__dtor_19b9ac");
+asm(".globl R300VMachineAssembler__deleting_dtor");
+asm(".set R300VMachineAssembler__deleting_dtor, _R300VMachineAssembler__deleting_dtor");
+asm(".globl R300VMachineAssembler__vslot14_assembleInstruction");
+asm(".set R300VMachineAssembler__vslot14_assembleInstruction, _R300VMachineAssembler__vslot14_assembleInstruction");
+asm(".globl R520VMachineAssembler__vslot33_noOp");
+asm(".set R520VMachineAssembler__vslot33_noOp, _R520VMachineAssembler__vslot33_noOp");
+asm(".globl R520VMachineAssembler__vslot12_visitNode");
+asm(".set R520VMachineAssembler__vslot12_visitNode, _R520VMachineAssembler__vslot12_visitNode");
+asm(".globl R520VMachineAssembler__vslot37_closeConditional");
+asm(".set R520VMachineAssembler__vslot37_closeConditional, _R520VMachineAssembler__vslot37_closeConditional");
+asm(".globl R520VMachineAssembler__vslot32_assembleWithPredicateClear");
+asm(".set R520VMachineAssembler__vslot32_assembleWithPredicateClear, _R520VMachineAssembler__vslot32_assembleWithPredicateClear");

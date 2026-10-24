@@ -10965,9 +10965,9 @@ LAB_00019be0:
  * against the real compiled C symbols (gcc adds one underscore automatically).
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
-asm(".globl FUN_00016670");
-asm(".set FUN_00016670, _glBitmap_impl");
-asm(".globl FUN_00018120");
-asm(".set FUN_00018120, _glCopyPixels_impl");
-asm(".globl FUN_000199a0");
-asm(".set FUN_000199a0, _gld_drawPixelsDispatch");
+asm(".globl glBitmap_impl");
+asm(".set glBitmap_impl, _glBitmap_impl");
+asm(".globl glCopyPixels_impl");
+asm(".set glCopyPixels_impl, _glCopyPixels_impl");
+asm(".globl gld_drawPixelsDispatch");
+asm(".set gld_drawPixelsDispatch, _gld_drawPixelsDispatch");

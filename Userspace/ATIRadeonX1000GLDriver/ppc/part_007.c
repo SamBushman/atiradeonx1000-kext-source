@@ -4964,8 +4964,8 @@ int extvsBindShader(param_1, param_2)
  * against the real compiled C symbols (gcc adds one underscore automatically).
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
-asm(".globl FUN_0004c540");
-asm(".set FUN_0004c540, _noop_4c540");
+asm(".globl noop_4c540");
+asm(".set noop_4c540, _noop_4c540");
 asm(".globl FUN_0004c560");
 asm(".set FUN_0004c560, _FUN_0004c560");
 asm(".globl FUN_0004c720");

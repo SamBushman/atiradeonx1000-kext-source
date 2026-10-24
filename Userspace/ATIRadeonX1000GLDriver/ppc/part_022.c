@@ -3087,11 +3087,11 @@ LAB_000e9610:
  * against the real compiled C symbols (gcc adds one underscore automatically).
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
-asm(".globl FUN_000e77c0");
-asm(".set FUN_000e77c0, _LoopHeader__getKindName");
+asm(".globl LoopHeader__getKindName");
+asm(".set LoopHeader__getKindName, _LoopHeader__getKindName");
 asm(".globl FUN_000e7cf0");
 asm(".set FUN_000e7cf0, _EntryBlock__insertInstruction");
-asm(".globl FUN_000e84fc");
-asm(".set FUN_000e84fc, _Block__verify");
-asm(".globl FUN_000e86f0");
-asm(".set FUN_000e86f0, _LoopHeader__verify");
+asm(".globl Block__verify");
+asm(".set Block__verify, _Block__verify");
+asm(".globl LoopHeader__verify");
+asm(".set LoopHeader__verify, _LoopHeader__verify");

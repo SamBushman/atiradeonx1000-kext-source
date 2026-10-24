@@ -570,7 +570,7 @@ int FUN_000ecd28(param_1, newSource, afterInst, param_4, param_5, param_6)
   int *piVar4;
   int local_28 [2];
   
-  piVar2 = (int *)FUN_001084b8(0x31,*(undefined4 *)(param_1 + 8));
+  piVar2 = (int *)IRMov__new_1084b8(0x31,*(undefined4 *)(param_1 + 8));
   IRInst__setOperandSource(piVar2,1,newSource,0,*(undefined4 *)(param_1 + 8));
   IRInst__setHardwareRegisterAndAdd(piVar2,param_1,param_4,param_5);
   (**(code **)(*piVar2 + 0x94))(piVar2,afterInst,*(undefined4 *)(param_1 + 8));
@@ -1936,7 +1936,7 @@ int FUN_000eee4c(program)
               ((int (*)())Program__addInst)(program,piVar12);
             }
           }
-          else if ((((piVar12[5] & 2U) != 0) && (iVar3 = FUN_0010406c(piVar12[0x26]), iVar3 == 9))
+          else if ((((piVar12[5] & 2U) != 0) && (iVar3 = RegKind__vectorWidthKind(piVar12[0x26]), iVar3 == 9))
                   && (iVar3 = FUN_00127534(*(undefined4 *)(program + 0x3ac),0x21,0,0), iVar3 != 0))
           {
             IRInst__appendSource(piVar12,iVar3);
@@ -2236,7 +2236,7 @@ int FUN_000ef498(program, ilReader)
   ExitBlock__ctor_eaae8(allocation,*(undefined4 *)(program + 8));
   *(undefined4 **)(program + 0x3a8) = allocation;
   ((int (*)())FUN_000ec42c)(program,allocation);
-  FUN_00127994(*(undefined4 *)(program + 0x3ac),*(uint *)(program + 0x30) & 1);
+  VRegInfo__new_127994(*(undefined4 *)(program + 0x3ac),*(uint *)(program + 0x30) & 1);
   piVar8 = *(int **)(*(int *)(program + 8) + 0x30c);
   (**(code **)(*piVar8 + 0x10))(piVar8,*(int *)(program + 8));
   FUN_000fd5c8(program,ilReader);
@@ -2772,7 +2772,7 @@ int FUN_000f04d4(param_1, inst)
         } while (iVar3 != 0);
       }
       IRInst__getOperandRecord(inst,0);
-      FUN_00105dbc(inst,0);
+      IRInst__operandKindClass(inst,0);
     }
   }
 LAB_000f0628:
@@ -3059,7 +3059,7 @@ code_r0x000f1384:
                     } while (iVar15 != 0);
                   }
                   IRInst__getOperandRecord(piVar3,0);
-                  iVar15 = FUN_00105dbc(piVar3,0);
+                  iVar15 = IRInst__operandKindClass(piVar3,0);
                   if ((iVar15 == 0) && ((piVar3[5] & 2U) == 0)) {
                     arena = IRInst__getOperandSource(piVar3,1);
                     iVar9 = ((int (*)())FUN_000ecc1c)(arena,local_84,*(undefined4 *)(pass + 8));
@@ -3134,7 +3134,7 @@ code_r0x000f101c:
                     } while (iVar15 != 0);
                   }
                   IRInst__getOperandRecord(piVar3,0);
-                  iVar15 = FUN_00105dbc(piVar3,0);
+                  iVar15 = IRInst__operandKindClass(piVar3,0);
                   if (iVar15 == 0) {
                     operandVReg = (int *)IRInst__getOperandSource(piVar3,1);
                     iVar15 = (**(code **)(*operandVReg + 0x48))();
@@ -3321,7 +3321,7 @@ code_r0x000e76c4:
              (((iVar6 != operandVReg[0x56] ||
                (iVar12 = (**(code **)(*operandVReg + 0x28))(operandVReg), iVar12 != 0)) || (operandVReg[0x21] == 0)
               ))) {
-            piVar8 = (int *)FUN_001084b8(0x31,*(undefined4 *)(program + 8));
+            piVar8 = (int *)IRMov__new_1084b8(0x31,*(undefined4 *)(program + 8));
             IRInst__setOperandSource(piVar8,1,operandVReg,0,*(undefined4 *)(program + 8));
             (**(code **)(*piVar8 + 0x94))
                       (piVar8,*(undefined4 *)(program + 0x340),*(undefined4 *)(program + 8));
@@ -3387,7 +3387,7 @@ code_r0x000e76c4:
                  || (((iVar6 != operandVReg2[0x56] ||
                       (iVar9 = (**(code **)(*operandVReg2 + 0x28))(operandVReg2), iVar9 != 0)) ||
                      (operandVReg2[0x21] == 0)))) {
-                piVar10 = (int *)FUN_001084b8(0x31,*(undefined4 *)(program + 8));
+                piVar10 = (int *)IRMov__new_1084b8(0x31,*(undefined4 *)(program + 8));
                 IRInst__setOperandSource(piVar10,1,operandVReg2,0,*(undefined4 *)(program + 8));
                 IRInst__setHardwareRegisterAndAdd(piVar10,program,arena,0);
                 (**(code **)(*piVar10 + 0x94))
@@ -3568,13 +3568,13 @@ LAB_000f26b0:
           if (((dword *)operandVReg[0x26] != pdVar11) &&
              (iVar5 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar5 == 0)) {
             uVar8 = operandVReg[3];
-            iVar5 = FUN_001084b8(0x31,*(undefined4 *)(pass + 8));
+            iVar5 = IRMov__new_1084b8(0x31,*(undefined4 *)(pass + 8));
             IRInst__setOperandSource(iVar5,1,operandVReg,0,*(undefined4 *)(pass + 8));
             IRInst__setHardwareRegisterAndAdd(iVar5,pass,pdVar11,dVar10);
             SelectWord__selectWhereMasked(&local_3c,0,local_40 & uVar8);
             *(undefined4 *)(iVar5 + 0x9c) = local_3c;
             FUN_000f4698(iVar5,1,pass);
-            iVar6 = FUN_001055cc(piVar12);
+            iVar6 = IRInst__isProjectionOfOpcode2a(piVar12);
             if (iVar6 == 0) {
               iVar6 = (**(code **)(*piVar12 + 0x7c))(piVar12);
               if (iVar6 == 0) {
@@ -3632,7 +3632,7 @@ LAB_000f26a4:
                           (piVar3,a1,a2,argR6,argR7,in_r8,*(code **)(*piVar3 + 0x7c));
         uVar8 = vec4Count;
         if (iVar4 == 0) {
-          iVar4 = FUN_00104fd0(piVar3);
+          iVar4 = IRInst__opcodeIsInSet(piVar3);
           uVar8 = vec4Count;
           if (iVar4 == 0) {
             if ((piVar3[5] & 0x200U) == 0) goto LAB_000f26a4;
@@ -3761,11 +3761,11 @@ LAB_000f2690:
     operandRecord = IRInst__getOperandRecord(piVar3,0);
     WriteMask__fromSelectWord(&local_44,*(undefined4 *)(operandRecord + 0x10));
     uVar8 = local_44;
-    iVar4 = FUN_001055cc(piVar3);
+    iVar4 = IRInst__isProjectionOfOpcode2a(piVar3);
     if (iVar4 == 0) {
       iVar4 = (**(code **)(*piVar3 + 0x7c))(piVar3);
       if (iVar4 == 0) {
-        iVar4 = FUN_00104fd0(piVar3);
+        iVar4 = IRInst__opcodeIsInSet(piVar3);
         if (iVar4 != 0) {
           sourceDef = IRInst__getOperandSource(piVar3,2);
           iVar5 = IRInst__getOperandSource(piVar3,3);
@@ -3775,10 +3775,10 @@ LAB_000f2690:
             uVar9 = ~*(uint *)(iVar5 + 0xc);
             if ((uVar8 & (uVar9 << 0x18 | (uVar9 & 0xff00) << 8 | uVar9 >> 8 & 0xff00 |
                          uVar9 >> 0x18)) == 0) goto LAB_000f25ac;
-            FUN_0010c010(piVar3,3,*(undefined4 *)(pass + 8));
+            IRInst__reduceTernaryToBinary(piVar3,3,*(undefined4 *)(pass + 8));
           }
           else {
-            FUN_0010c010(piVar3,2,*(undefined4 *)(pass + 8));
+            IRInst__reduceTernaryToBinary(piVar3,2,*(undefined4 *)(pass + 8));
           }
           a2 = pdVar11;
           argR6 = dVar10;
@@ -4115,8 +4115,8 @@ int FUN_000f2d08(param_1)
  * against the real compiled C symbols (gcc adds one underscore automatically).
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
-asm(".globl FUN_000ebff8");
-asm(".set FUN_000ebff8, _ContinueBlock__clone");
+asm(".globl ContinueBlock__clone");
+asm(".set ContinueBlock__clone, _ContinueBlock__clone");
 asm(".globl FUN_000eca10");
 asm(".set FUN_000eca10, _KhanVs__vslot17_isSimpleInst");
 asm(".globl FUN_000ecad0");

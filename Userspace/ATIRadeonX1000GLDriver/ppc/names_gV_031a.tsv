@@ -1,0 +1,93 @@
+func	FUN_0010bed0	IRInst__createWithConstantOperands	INFERRED	creates an instruction (opcode 0xa2) with operandCount operands: operand 1 = newSource, operand 2 (and 3 when 3 operands) literal vec4 floats
+local	FUN_0010bed0	param_1	operandCount	INFERRED	
+local	FUN_0010bed0	param_2	destSelect	INFERRED	
+local	FUN_0010bed0	param_4	program	INFERRED	
+local	FUN_0010bed0	param_5	compiler	INFERRED	
+local	FUN_0010bed0	iVar2	newInst	INFERRED	the created instruction
+local	FUN_0010bed0	fparam_1	value	INFERRED	literal float for operand 2
+local	FUN_0010bed0	fparam_1_00	thirdConstant	INFERRED	literal for operand 3: 0.0 unless value is 0.0, then 1.0
+local	FUN_0010bed0	uVar1	defaultSelect	INFERRED	DAT_001af9fc stored as the select word of operands 1..3
+func	FUN_0010c010	IRInst__reduceTernaryToBinary	INFERRED	rewrites a 3-source instruction (opcode 0x24/0x25/0x26) into a binary one that drops source operandIndex, keeping modifiers, selects and the trailing extra operand
+local	FUN_0010c010	param_3	compiler	INFERRED	
+local	FUN_0010c010	iVar14	extraSource	INFERRED	trailing extra operand's source when flag 0x200, else 0
+local	FUN_0010c010	iVar12	keptSource	INFERRED	operand source passed on to the final virtual call
+local	FUN_0010c010	uVar2	modifiers1	INFERRED	operand 1 modifier bits (inst[0x2e])
+local	FUN_0010c010	uVar3	modifiers2	INFERRED	operand 2 modifier bits
+local	FUN_0010c010	uVar4	modifiers3	INFERRED	operand 3 modifier bits
+local	FUN_0010c010	uVar13	select1	INFERRED	operand 1 select word
+local	FUN_0010c010	uVar9	select2	INFERRED	operand 2 select word
+local	FUN_0010c010	uVar11	select3	INFERRED	operand 3 select word
+local	FUN_0010c010	iVar16	nextLink	INFERRED	inst+4 (next instruction in the list)
+local	FUN_0010c010	iVar15	ownerBlock	INFERRED	inst+0x158
+local	FUN_0010c010	iVar17	regKind	INFERRED	inst+0x98
+local	FUN_0010c010	iVar18	regNumber	INFERRED	inst+0x94
+local	FUN_0010c010	iVar19	destSelect	INFERRED	operand 0 select word
+local	FUN_0010c010	iVar20	outputClampFlag	INFERRED	inst+0x120
+local	FUN_0010c010	iVar21	scaleExponentWord	INFERRED	inst+0x124
+local	FUN_0010c010	bVar1	invertFirstNegate	INFERRED	operandIndex == 2: operand 1 negate bit is flipped
+local	FUN_0010c010	piVar22	operand1Record	INFERRED	address of operand 1's record (inst+0xa4)
+func	FUN_0010c37c	IRInst__removeDefaultSelectOperands	INFERRED	removes every operand whose select word equals DAT_001af9fc, shifting the later ones down
+local	FUN_0010c37c	iVar4	operandCount	INFERRED	
+local	FUN_0010c37c	iVar5	shiftIndex	INFERRED	operand being overwritten by the next one
+func	FUN_0010cfcc	IRInst__foldMovSourceSelect	INFERRED	if the operand's source is a mov-like instruction, replaces the operand by the mov's source and returns the composed select word
+local	FUN_0010cfcc	param_1	outSelect	INFERRED	
+local	FUN_0010cfcc	bVar1	selectByte	INFERRED	operand's select byte for the destination's splat component
+local	FUN_0010cfcc	uVar5	trackUses	INFERRED	1
+local	FUN_0010cfcc	uVar6	compilerArg	INFERRED	program+8
+local	FUN_0010cfcc	in_r8	staleR8	INFERRED	stale register forwarded to hasNoUses
+local	FUN_0010cfcc	in_r9	staleR9	INFERRED	stale register forwarded to hasNoUses
+local	FUN_0010cfcc	local_28	composedSelect	INFERRED	SelectWord__compose result
+func	FUN_0010d358	IRInst__canonicalizeCommutativeOperands	INFERRED	swaps operands 1 and 2 of a commutative op when operand 2 is the uniform/constant-like one
+local	FUN_0010d358	auStack_58	constantBuf1	INFERRED	IRInst__getUniformSourceConstant output buffer for operand 1
+local	FUN_0010d358	local_54	constantValue1	INFERRED	float value from that buffer
+local	FUN_0010d358	auStack_40	constantBuf2	INFERRED	output buffer for operand 2
+local	FUN_0010d358	local_3c	constantValue2	INFERRED	float value from that buffer
+local	FUN_0010d358	uVar4	src1Kind	INFERRED	register kind of operand 1's source
+func	FUN_0010d4cc	IRInst__convertCompareToBinaryAlu	INFERRED	turns a compare instruction into the binary ALU op for its condition (operands swapped for conditions flagged in the second table), unlinking it from a branch block first
+local	FUN_0010d4cc	param_2	compiler	INFERRED	
+local	FUN_0010d4cc	uVar1	negate1	INFERRED	operand 1 negate bit (inst+0xb8 & 1)
+local	FUN_0010d4cc	uVar11	abs1	INFERRED	operand 1 abs bit
+local	FUN_0010d4cc	uVar2	negate2	INFERRED	operand 2 negate bit (inst+0xd0 & 1)
+local	FUN_0010d4cc	uVar9	abs2	INFERRED	operand 2 abs bit
+local	FUN_0010d4cc	uVar10	select1	INFERRED	operand 1 select word
+local	FUN_0010d4cc	uVar8	select2	INFERRED	operand 2 select word
+local	FUN_0010d4cc	uVar3	defaultSelect	INFERRED	DAT_001af9dc
+local	FUN_0010d4cc	uVar12	instId	INFERRED	inst+0x14c
+local	FUN_0010d4cc	uVar14	blockQuery	INFERRED	virtual slot 0x24 of the owner block (pair result)
+local	FUN_0010d4cc	uVar7	newOpcode	INFERRED	from the table indexed by the compare condition
+local	FUN_0010d4cc	in_r5	staleR5	INFERRED	stale register forwarded to Block__getBranchInst
+local	FUN_0010d4cc	in_r6	staleR6	INFERRED	
+local	FUN_0010d4cc	in_r7	staleR7	INFERRED	
+local	FUN_0010d4cc	in_r8	staleR8	INFERRED	
+local	FUN_0010d4cc	in_r9	staleR9	INFERRED	
+local	IRInst__replaceWithMovOfSource	iVar13	program	INFERRED	param_4+0x6c4: the current program
+local	IRInst__replaceWithMovOfSource	iVar7	nextLink	INFERRED	inst[2]
+local	IRInst__replaceWithMovOfSource	iVar8	ownerBlock	INFERRED	inst+0x158
+local	IRInst__replaceWithMovOfSource	iVar9	debugVector	INFERRED	inst+0x10
+local	IRInst__replaceWithMovOfSource	iVar3	destSelect	INFERRED	operand 0 select word
+local	IRInst__replaceWithMovOfSource	iVar11	outputClampFlag	INFERRED	inst+0x120
+local	IRInst__replaceWithMovOfSource	iVar12	scaleExponentWord	INFERRED	inst+0x124
+local	IRInst__replaceWithMovOfSource	uVar1	operandModifiers	INFERRED	modifier bits of the kept operand
+local	IRInst__replaceWithMovOfSource	uVar10	operandSelect	INFERRED	select word of the kept operand
+local	IRInst__replaceWithMovOfSource	iVar14	otherIndex	INFERRED	loop over the operands that are dropped
+local	IRInst__replaceWithMovOfSource	local_78	lastOperandRecord	INFERRED	snapshot of the trailing extra operand (IRInst__readLastOperand)
+local	IRInst__replaceWithMovOfSource	local_74	lastOperandSource	INFERRED	snapshot word +4: the extra operand's source
+local	IRInst__replaceWithMovOfSource	local_64	lastOperandFlags	INFERRED	snapshot word +0x14
+use	FUN_0010c010	iVar5	oldOpcode	INFERRED	descriptor opcode of the ternary instruction	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\[0x22\]\ \+\ 8\);$	+2
+use	FUN_0010c010	iVar5	oldOpcode	INFERRED	descriptor opcode of the ternary instruction	^\s*else\ if\ \(iVar5\ ==\ 0x26\)\ \{$	+1
+use	FUN_0010c010	iVar5	oldOpcode	INFERRED	descriptor opcode of the ternary instruction	^\s*else\ if\ \(iVar5\ ==\ 0x24\)\ \{$	+1
+use	FUN_0010c010	iVar5	newOpcode	INFERRED	opcode of the binary replacement	^\s*iVar5\ =\ 0xb2\ \-\ \(uint\)\(param_2\ ==\ 3\);$	+1
+use	FUN_0010c010	iVar5	newOpcode	INFERRED	opcode of the binary replacement	^\s*iVar5\ =\ \(param_2\ ==\ 3\)\ \+\ 0xb1;$	+1
+use	FUN_0010c010	iVar5	newOpcode	INFERRED	opcode of the binary replacement	^\s*iVar5\ =\ 0xb0;$	+1
+use	FUN_0010c010	iVar5	newOpcode	INFERRED	opcode of the binary replacement	^\s*iVar5\ =\ 0xb3;$	+1
+use	FUN_0010c010	iVar5	newOpcode	INFERRED	opcode of the binary replacement	^\s*iVar5\ =\ 0;$	+1
+use	FUN_0010c010	iVar5	newOpcode	INFERRED	opcode of the binary replacement	^\s*FUN_00108174\(param_1,iVar5,param_3\);$	+1
+use	FUN_0010cfcc	iVar2	isMovLike	INFERRED	virtual slot 0x60 of the source	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x60\)\)\(a0\);$	+2
+use	FUN_0010cfcc	iVar3	srcRecord	INFERRED	operand record of the folded operand	^\s*iVar3\ =\ FUN_001054ec\(param_2,param_3\);$	+2
+use	FUN_0010cfcc	iVar3	srcRecord	INFERRED	operand record of the folded operand	^\s*for\ \(iVar2\ =\ 1;\ iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x14\)\)\(a0\),\ iVar2\ <=\ iVar3;\ iVar2\ =\ iVar2\ \+\ 1\)\ \{$	+3
+use	FUN_0010cfcc	iVar3	hasNoUsesResult	INFERRED	IRInst__hasNoUses of the old source	^\s*iVar3\ =\ FUN_001049c4\(a0,param_4,uVar4,uVar5,uVar6,in_r8,in_r9\);$	+2
+use	FUN_0010cfcc	uVar4	innerSelect	INFERRED	select word of the mov's source operand	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\);$	+1
+use	FUN_0010cfcc	uVar4	innerSelect	INFERRED	select word of the mov's source operand	^\s*FUN_000f2bdc\(local_28,uVar4,\*\(undefined4\ \*\)\(iVar2\ \+\ 0x10\)\);$	+1
+use	FUN_0010d358	uVar3	destSelect	INFERRED	operand 0 select word	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ 0x10\);$	+3
+use	FUN_0010d358	uVar3	src2Kind	INFERRED	register kind of operand 2's source	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ 0x98\);$	+1
+use	FUN_0010d358	uVar3	src2Kind	INFERRED	register kind of operand 2's source	^\s*iVar1\ =\ FUN_00126708\(uVar3\);$	+1

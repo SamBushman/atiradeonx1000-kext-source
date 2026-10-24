@@ -3711,5 +3711,5 @@ int _gldCreateShared(sharedOut)
  * against the real compiled C symbols (gcc adds one underscore automatically).
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
-asm(".globl FUN_00002ae0");
-asm(".set FUN_00002ae0, _glAccum_impl");
+asm(".globl glAccum_impl");
+asm(".set glAccum_impl, _glAccum_impl");

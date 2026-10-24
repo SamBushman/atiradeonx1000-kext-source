@@ -48,7 +48,7 @@ LAB_00158b4c:
           } while (iVar2 != 0);
         }
         IRInst__getOperandRecord(inst,0);
-        iVar2 = FUN_00105dbc(inst,0);
+        iVar2 = IRInst__operandKindClass(inst,0);
         if (iVar2 != 0) goto LAB_00158b48;
         uVar1 = inst[5];
         if (((uVar1 & 2) == 0) && ((uVar1 & 0x200) == 0)) {
@@ -259,7 +259,7 @@ int Inst__distributeResultScale(rootInst, program)
                 } while (lanesLeft != 0);
               }
               IRInst__getOperandRecord(operandVReg,0);
-              addrMode = FUN_00105dbc(operandVReg,0);
+              addrMode = IRInst__operandKindClass(operandVReg,0);
               if (((addrMode == 0) && ((operandVReg[5] & 2U) == 0)) && ((operandVReg[5] & 0x200U) == 0)) {
                 *(int *)(program + 0x17c) = *(int *)(program + 0x17c) + 1;
                 sourceDef2 = IRInst__getOperandSource(operandVReg,1);
@@ -299,7 +299,7 @@ LAB_00159218:
                 } while (lanesLeft2 != 0);
               }
               IRInst__getOperandRecord(callResult,0);
-              addrMode2 = FUN_00105dbc(callResult,0);
+              addrMode2 = IRInst__operandKindClass(callResult,0);
               if (((addrMode2 == 0) && ((callResult[5] & 2U) == 0)) && ((callResult[5] & 0x200U) == 0)) {
                 *(int *)(program + 0x17c) = *(int *)(program + 0x17c) + 1;
                 sourceDef2 = IRInst__getOperandSource(callResult,1);
@@ -455,7 +455,7 @@ LAB_0015977c:
         a0 = (int *)IRInst__getOperandSource(inst,1);
         isMix = (**(code **)(*a0 + 0x60))(a0);
         if (isMix != 0) {
-          mixSourceIndex = FUN_001042bc(a0,laneComponent);
+          mixSourceIndex = IRInst__firstOperandWithSelectNot4(a0,laneComponent);
           operandRecord3 = IRInst__getOperandRecord(a0,mixSourceIndex);
           laneComponent = (uint)*(byte *)(laneComponent + operandRecord3 + 0x10);
           a0 = (int *)IRInst__getOperandSource(a0,mixSourceIndex);
@@ -715,10 +715,10 @@ int FUN_00159b58(node, param_2, pass)
                 } while (operandIndex2 <= piVar4[0x21]);
               }
             }
-            FUN_0010aee8(&local_88,inst,param_3_w);
-            FUN_0010aee8(&local_84,inst,param_3_w2);
-            FUN_0010b118(&local_80,inst,local_88);
-            FUN_0010b118(&local_7c,inst,local_84);
+            IRInst__scaleByOutputScale(&local_88,inst,param_3_w);
+            IRInst__scaleByOutputScale(&local_84,inst,param_3_w2);
+            IRInst__clampOutputValue(&local_80,inst,local_88);
+            IRInst__clampOutputValue(&local_7c,inst,local_84);
             IRInst__applyAbsModifier(&local_78,node,1,local_80);
             IRInst__applyAbsModifier(&local_74,node,1,local_7c);
             IRInst__applyNegateModifier(&local_70,node,1,local_78);
@@ -2681,14 +2681,14 @@ int Inst__collapseAlgebraic_0015ceb0(node, pass)
           *(int *)(pass + 0x280) = *(int *)(pass + 0x280) + 1;
           SelectWord__mergeWrittenLanes(&local_68,local_100,local_fc);
           local_104 = local_68;
-          piVar9 = (int *)((int (*)())FUN_0010bed0)(2,local_68,piVar9,pass,*(undefined4 *)(pass + 8),1.0);
+          piVar9 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,local_68,piVar9,pass,*(undefined4 *)(pass + 8),1.0);
           if (*(int *)(pass + 0x478) < piVar15[0x58]) {
             piVar15[0x58] = piVar15[0x58] + 1;
           }
           else {
             piVar15[0x58] = *(int *)(pass + 0x478) + 1;
           }
-          piVar15 = (int *)((int (*)())FUN_0010bed0)(2,local_104,piVar15,pass,*(undefined4 *)(pass + 8),1.0
+          piVar15 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,local_104,piVar15,pass,*(undefined4 *)(pass + 8),1.0
                                        );
           operandRecord2 = IRInst__getOperandRecord(node,2);
           uVar12 = *(undefined4 *)(operandRecord2 + 0x10);
@@ -2805,7 +2805,7 @@ LAB_0015d5cc:
                   }
                 }
                 else {
-                  FUN_001049a0(operandVReg,pass);
+                  IRInst__hasTwoUses(operandVReg,pass);
                   uVar17 = *(uint *)(pass + 0x30) >> 7 & 1;
                   newSource3 = IRInst__cloneIfPresub(operandVReg,pass,uVar17);
                   IRInst__setOperandSource(a0,operandIndex2,newSource3,0,*(undefined4 *)(pass + 8));
@@ -3927,7 +3927,7 @@ int FUN_0015f44c(inst, operandIndex7, node, pass)
     if ((inst != 0) &&
        (((node != (int *)0x0 && (*(int *)(*(int *)(inst + 0x88) + 8) == 0x8e)) &&
         (iVar6 = (**(code **)(*node + 0x60))(node), iVar6 != 0)))) {
-      iVar11 = FUN_001084b8(0x31,*(undefined4 *)(pass + 8));
+      iVar11 = IRMov__new_1084b8(0x31,*(undefined4 *)(pass + 8));
       iVar6 = *(int *)(pass + 0x478);
       *(undefined4 *)(iVar11 + 0x98) = 0;
       *(int *)(iVar11 + 0x160) = iVar6 + 1;
@@ -4113,7 +4113,7 @@ LAB_0015f88c:
           }
           bVar3 = local_a0[3] != 0;
           iVar18 = 0;
-          piVar8 = (int *)((int (*)())FUN_0010bed0)(iVar11,0x1010101,inst1,pass,compilerCtx2,fparam_1);
+          piVar8 = (int *)((int (*)())IRInst__createWithConstantOperands)(iVar11,0x1010101,inst1,pass,compilerCtx2,fparam_1);
           operandRecord4 = IRInst__getOperandRecord(node,operandIndex3);
           local_b8 = *(int *)(operandRecord4 + 0x10);
           piVar7 = piVar8;
@@ -4208,7 +4208,7 @@ LAB_0015fa2c:
   }
   if ((piVar17[0x26] != 0x33) ||
      (iVar6 = IRInst__getOperandSource(node,node[0x21]), *(int *)(iVar6 + 300) == 3)) {
-    iVar11 = FUN_001084b8(0x31,*(undefined4 *)(pass + 8));
+    iVar11 = IRMov__new_1084b8(0x31,*(undefined4 *)(pass + 8));
     iVar6 = *(int *)(pass + 0x478);
     *(undefined4 *)(iVar11 + 0x98) = 0;
     *(int *)(iVar11 + 0x160) = iVar6 + 1;
@@ -4238,7 +4238,7 @@ LAB_0015fd14:
   node[0x21] = node[0x21] + -1;
   node[5] = node[5] & 0xfffffdff;
   piVar17[0x58] = iVar6 + -1;
-  iVar6 = FUN_001049c4(piVar17,pass,uVar15,uVar13,compilerCtx,in_r8,iVar6 + -1);
+  iVar6 = IRInst__hasNoUses(piVar17,pass,uVar15,uVar13,compilerCtx,in_r8,iVar6 + -1);
   bVar1 = iVar6 != 0;
   if (bVar1) {
     (**(code **)(*piVar17 + 0xc))(piVar17,0,*(undefined4 *)(pass + 8));
@@ -4482,7 +4482,7 @@ LAB_001605dc:
         } while (iVar2 != 0);
       }
       IRInst__getOperandRecord(inst,0);
-      iVar2 = FUN_00105dbc(inst,0);
+      iVar2 = IRInst__operandKindClass(inst,0);
       if (((iVar2 == 0) && (*(int *)(node[0x22] + 8) != 0x8e)) &&
          (iVar2 = (**(code **)(*node + 0x60))(node), iVar2 == 0)) {
         iVar2 = (**(code **)(*node + 0x28))(node);
@@ -4644,7 +4644,7 @@ LAB_001605dc:
     } while (iVar2 != 0);
   }
   IRInst__getOperandRecord(inst,0);
-  iVar2 = FUN_00105dbc(inst,0);
+  iVar2 = IRInst__operandKindClass(inst,0);
   if (iVar2 != 0) {
     return 0;
   }
@@ -5098,12 +5098,12 @@ int FUN_00161748(inst, inst2, pass)
         sourceDef = IRInst__getOperandSource(inst,1);
         uVar9 = *(undefined4 *)(pass + 8);
         operandRecord2 = IRInst__getOperandRecord(inst,1);
-        iVar7 = FUN_0010453c(sourceDef,uVar9,*(undefined4 *)(operandRecord2 + 0x10),in_r6,in_r7,in_r8,in_r9);
+        iVar7 = IRInst__allSelectsAreHwConstants(sourceDef,uVar9,*(undefined4 *)(operandRecord2 + 0x10),in_r6,in_r7,in_r8,in_r9);
         sourceDef = IRInst__getOperandSource(inst2,1);
         uVar9 = *(undefined4 *)(pass + 8);
         bVar1 = iVar7 == 0;
         operandRecord2 = IRInst__getOperandRecord(inst2,1);
-        iVar7 = FUN_0010453c(sourceDef,uVar9,*(undefined4 *)(operandRecord2 + 0x10),in_r6,in_r7,in_r8,in_r9);
+        iVar7 = IRInst__allSelectsAreHwConstants(sourceDef,uVar9,*(undefined4 *)(operandRecord2 + 0x10),in_r6,in_r7,in_r8,in_r9);
         if ((!bVar1) || (iVar7 != 0)) {
           if (((inst[0x2e] & 1U) != (inst2[0x2e] & 1U)) &&
              ((iVar7 == 0 || (iVar10 = FUN_00151318(inst2), iVar10 == 0)))) {
@@ -10582,7 +10582,7 @@ LAB_0016a200:
                 } while (selectsLeft != 0);
               }
               IRInst__getOperandRecord(inst2,0);
-              iVar2 = FUN_00105dbc(inst2,0);
+              iVar2 = IRInst__operandKindClass(inst2,0);
               if (iVar2 != 0) goto LAB_0016a1fc;
               instFlags = inst2[5];
               if (((instFlags & 2) != 0) || ((instFlags & 0x200) != 0)) goto LAB_0016a200;

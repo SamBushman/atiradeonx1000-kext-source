@@ -424,7 +424,7 @@ int FudoPs__ctor_191efc(this, compiler, createSchedModels)
   this[0x11] = 4;
   this[0x12] = 4;
   this[0x14] = 0x20;
-  FUN_0010dc20(this);
+  BitSet__initDefault(this);
   BitSet__setBit(this,0x2f);
   BitSet__setBit(this,0x30);
   BitSet__setBit(this,0x31);
@@ -518,7 +518,7 @@ int FudoPs__ctor_1920e0(this, compiler, createSchedModels)
   this[0x11] = 4;
   this[0x12] = 4;
   this[0x14] = 0x20;
-  FUN_0010dc20(this);
+  BitSet__initDefault(this);
   BitSet__setBit(this,0x2f);
   BitSet__setBit(this,0x30);
   BitSet__setBit(this,0x31);
@@ -993,7 +993,7 @@ int FudoPs__peepholeCombine(this, inst, consumerSrcIndex, inst2, program, passTh
               if (((loopIndex3 == loopRemaining) &&
                   (((uVar11 != (addSrcDef[0x34] & 1U) && ((addSrcDef[0x2e] & 2U) == 0)) &&
                    ((addSrcDef[0x34] & 2U) == 0)))) &&
-                 (loopRemaining = FUN_001049a0(loopRemaining,program), loopRemaining != 0)) {
+                 (loopRemaining = IRInst__hasTwoUses(loopRemaining,program), loopRemaining != 0)) {
                 loopRemaining = IRInst__getOperandRecord(addSrcDef,1);
                 uVar20 = (uint)*(byte *)(uVar17 + loopRemaining + 0x10);
                 loopRemaining = IRInst__getOperandRecord(addSrcDef,2);
@@ -2525,29 +2525,29 @@ int anyEnabledLaneSelectsXyz(swizzle, laneEnable)
  * against the real compiled C symbols (gcc adds one underscore automatically).
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
-asm(".globl FUN_0019156c");
-asm(".set FUN_0019156c, _R300VSchedModel__vslot12");
-asm(".globl FUN_00191710");
-asm(".set FUN_00191710, _isLiteralZeroHalfOrOne");
-asm(".globl FUN_00191940");
-asm(".set FUN_00191940, _FudoPs__encodeUniformImmediate");
+asm(".globl R300VSchedModel__vslot12");
+asm(".set R300VSchedModel__vslot12, _R300VSchedModel__vslot12");
+asm(".globl isLiteralZeroHalfOrOne");
+asm(".set isLiteralZeroHalfOrOne, _isLiteralZeroHalfOrOne");
+asm(".globl FudoPs__encodeUniformImmediate");
+asm(".set FudoPs__encodeUniformImmediate, _FudoPs__encodeUniformImmediate");
 asm(".globl FUN_001919d8");
 asm(".set FUN_001919d8, _FudoPs__vslot85_findOrEncodeConstantVector");
 asm(".globl FUN_00191b30");
 asm(".set FUN_00191b30, _FudoPs__vslot59_tryEncodeSourceConstant");
-asm(".globl FUN_00191c6c");
-asm(".set FUN_00191c6c, _FudoChip__vslot2");
-asm(".globl FUN_00191c7c");
-asm(".set FUN_00191c7c, _FudoPs__classifyLiteralOperand");
-asm(".globl FUN_00191e28");
-asm(".set FUN_00191e28, _FudoPs__createSchedModels");
+asm(".globl FudoChip__vslot2");
+asm(".set FudoChip__vslot2, _FudoChip__vslot2");
+asm(".globl FudoPs__classifyLiteralOperand");
+asm(".set FudoPs__classifyLiteralOperand, _FudoPs__classifyLiteralOperand");
+asm(".globl FudoPs__createSchedModels");
+asm(".set FudoPs__createSchedModels, _FudoPs__createSchedModels");
 asm(".globl FUN_0019286c");
 asm(".set FUN_0019286c, _FudoPs__peepholeCombine");
-asm(".globl FUN_00193944");
-asm(".set FUN_00193944, _R520SchedModel__vslot21");
-asm(".globl FUN_001939b4");
-asm(".set FUN_001939b4, _R520SchedModel__vslot22");
+asm(".globl R520SchedModel__vslot21");
+asm(".set R520SchedModel__vslot21, _R520SchedModel__vslot21");
+asm(".globl R520SchedModel__vslot22");
+asm(".set R520SchedModel__vslot22, _R520SchedModel__vslot22");
 asm(".globl FUN_00193a00");
 asm(".set FUN_00193a00, _FudoPs__vslot29_convertInnerIfsToPredicates");
-asm(".globl FUN_00193e18");
-asm(".set FUN_00193e18, _Arena__alloc");
+asm(".globl Arena__alloc");
+asm(".set Arena__alloc, _Arena__alloc");

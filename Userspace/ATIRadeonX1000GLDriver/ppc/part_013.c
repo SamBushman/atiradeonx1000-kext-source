@@ -5761,5 +5761,5 @@ asm(".globl FUN_0008fb70");
 asm(".set FUN_0008fb70, _FUN_0008fb70");
 asm(".globl FUN_000900a0");
 asm(".set FUN_000900a0, _FUN_000900a0");
-asm(".globl FUN_00090470");
-asm(".set FUN_00090470, _gldValidateState");
+asm(".globl gldValidateState");
+asm(".set gldValidateState, _gldValidateState");

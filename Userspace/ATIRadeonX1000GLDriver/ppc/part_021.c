@@ -344,7 +344,7 @@ int FUN_000e1b70(compiler, param_2)
     else if (param_2 == 4) {
       iVar1 = FUN_000e1564(compiler,0x10);
       if (iVar1 != 0) {
-        FUN_0010e1d8(iVar1,compiler);
+        FudoChip__ctor_10e1d8(iVar1,compiler);
       }
       *(int *)(compiler + 0x310) = iVar1;
     }
@@ -2356,19 +2356,19 @@ int FUN_000e4a38(param_1, param_2)
  * against the real compiled C symbols (gcc adds one underscore automatically).
  * Needed because ld64 (required for this PPC binary's size - stock ld breaks on
  * large PPC links) does not silently reconcile this the way stock ld did. */
-asm(".globl FUN_000e2860");
-asm(".set FUN_000e2860, _Block__accept");
-asm(".globl FUN_000e28f0");
-asm(".set FUN_000e28f0, _IfFooterStatic__accept");
-asm(".globl FUN_000e2a54");
-asm(".set FUN_000e2a54, _IRStartCallRoutine__acceptCallPseudo");
-asm(".globl FUN_000e2a70");
-asm(".set FUN_000e2a70, _IREndCallRoutine__acceptCallPseudo");
-asm(".globl FUN_000e2a8c");
-asm(".set FUN_000e2a8c, _IRStartMakeCall__acceptCallPseudo");
-asm(".globl FUN_000e2aa8");
-asm(".set FUN_000e2aa8, _IREndMakeCall__acceptCallPseudo");
+asm(".globl Block__accept");
+asm(".set Block__accept, _Block__accept");
+asm(".globl IfFooterStatic__accept");
+asm(".set IfFooterStatic__accept, _IfFooterStatic__accept");
+asm(".globl IRStartCallRoutine__acceptCallPseudo");
+asm(".set IRStartCallRoutine__acceptCallPseudo, _IRStartCallRoutine__acceptCallPseudo");
+asm(".globl IREndCallRoutine__acceptCallPseudo");
+asm(".set IREndCallRoutine__acceptCallPseudo, _IREndCallRoutine__acceptCallPseudo");
+asm(".globl IRStartMakeCall__acceptCallPseudo");
+asm(".set IRStartMakeCall__acceptCallPseudo, _IRStartMakeCall__acceptCallPseudo");
+asm(".globl IREndMakeCall__acceptCallPseudo");
+asm(".set IREndMakeCall__acceptCallPseudo, _IREndMakeCall__acceptCallPseudo");
 asm(".globl FUN_000e2fd8");
 asm(".set FUN_000e2fd8, _MachineAssembler__vslot34_declareDestinationLanesByClass");
-asm(".globl FUN_000e3140");
-asm(".set FUN_000e3140, _MachineAssembler__visitIfHeaderStatic");
+asm(".globl MachineAssembler__visitIfHeaderStatic");
+asm(".set MachineAssembler__visitIfHeaderStatic, _MachineAssembler__visitIfHeaderStatic");

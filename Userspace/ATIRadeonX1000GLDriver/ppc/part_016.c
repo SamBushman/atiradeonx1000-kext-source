@@ -10008,8 +10008,8 @@ LAB_000b9ef0:
  * large PPC links) does not silently reconcile this the way stock ld did. */
 asm(".globl FUN_000afe40");
 asm(".set FUN_000afe40, _FUN_000afe40");
-asm(".globl FUN_000b3630");
-asm(".set FUN_000b3630, _atifsCompileCurrentShader");
+asm(".globl atifsCompileCurrentShader");
+asm(".set atifsCompileCurrentShader, _atifsCompileCurrentShader");
 asm(".globl FUN_000b57a0");
 asm(".set FUN_000b57a0, _FUN_000b57a0");
 asm(".globl FUN_000b5b60");
