@@ -1666,6 +1666,7 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   undefined *scratchR9;
   uint scratchR10;
 {
+  int srcEntryWord04;
   int *treeFinish2;
   int *currentFunctionObj;
   uint declaredFunction;
@@ -1951,8 +1952,8 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   unsigned char *conditionNode;
   undefined4 *yyOutArgs;
   undefined4 yy_outargs[0x14];
-  undefined *puVar5;
-  int iVar6;
+  undefined *methodArg;
+  int paramArrayBegin;
   unsigned char *newVariableNode;
   unsigned char *arrayOperand;
   unsigned char * this;
@@ -2007,14 +2008,14 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   undefined4 r4In12;
   uint *elementEnd;
   undefined4 r4In13;
-  int iVar26;
+  int srcEntryWord20;
   undefined4 r4Out17;
   undefined4 r4Out18;
   undefined4 r4Out19;
-  unsigned char * pTVar27;
+  unsigned char *valueSlot;
   uint basicTypeBits3;
   char *errorLine2;
-  int iVar30;
+  int srcEntryWord1c;
   int r6Pass;
   char *emptyText;
   unsigned char *typeTmp3VtableReg;
@@ -2026,8 +2027,8 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   undefined **typeVtablePtr;
   bool foundMatch;
   int srcEntry;
-  int iVar38;
-  int iVar39;
+  int srcEntryWord0c;
+  int srcEntryWord08;
   code *nodeMethod;
   unsigned char * yystacksize;
   unsigned char * yyvs;
@@ -3413,14 +3414,14 @@ switchD_97ba39c8_caseD_6:
         if (qualifier1 - 10U < 2) {
           aggregateNode = (int *)(**(code **)(*(unsigned char **)yyvalNode + 0x1c))(yyvalNode);
           paramList = (**(code **)(*aggregateNode + 100))(aggregateNode);
-          iVar6 = *(int *)(paramList + 4);
-          argType = *(int **)(iVar6 + loopIndex2 * 4);
+          paramArrayBegin = *(int *)(paramList + 4);
+          argType = *(int **)(paramArrayBegin + loopIndex2 * 4);
           scratchR6 = (char *)(**(code **)(*argType + 0x14))
-                                      (argType,r4In8,opName,scratchR6,scratchR7,staleR8Value,iVar6);
+                                      (argType,r4In8,opName,scratchR6,scratchR7,staleR8Value,paramArrayBegin);
           nodeLine = (**(code **)*(unsigned char **)yyvalNode)(yyvalNode);
           opName = "assign";
           lValueError2 = TParseContext__lValueErrorCheck
-                             (parseContext,nodeLine,"assign",(unsigned char *)scratchR6,scratchR7,staleR8Value,iVar6,
+                             (parseContext,nodeLine,"assign",(unsigned char *)scratchR6,scratchR7,staleR8Value,paramArrayBegin,
                               scratchR10);
           if (lValueError2 != 0) {
             messageSource = (char *)(**(code **)**(undefined4 **)(yyvsp + 8))
@@ -3431,7 +3432,7 @@ switchD_97ba39c8_caseD_6:
             TParseContext__error
                       ((int)parseContext,messageSource,
                        "Constant value cannot be passed for \'out\' or \'inout\' parameters.",
-                       "Error","",staleR8Value,iVar6,scratchR10);
+                       "Error","",staleR8Value,paramArrayBegin,scratchR10);
             TParseContext__recover(parseContext);
           }
         }
@@ -6208,7 +6209,7 @@ LAB_97bab5f4:
   case 0x75:
     _memcpy(&yyval,yyvsp + -0x58,0x2c);
     identifierLine = *(uint *)yyvsp;
-    pTVar27 = (unsigned char *)(yyvsp + -0x48);
+    valueSlot = (unsigned char *)(yyvsp + -0x48);
     goto LAB_97ba9874;
   case 0x76:
     _memcpy(&yyval,yyvsp + -0xb0,0x2c);
@@ -6225,7 +6226,7 @@ LAB_97bab5f4:
   case 0x77:
     _memcpy(&yyval,yyvsp + -0xdc,0x2c);
     identifierLine = *(uint *)(yyvsp + -0x84);
-    pTVar27 = (unsigned char *)(yyvsp + -0xcc);
+    valueSlot = (unsigned char *)(yyvsp + -0xcc);
     goto LAB_97ba99a0;
   case 0x78:
     slotArg = yyvsp + -0xa0;
@@ -6266,7 +6267,7 @@ LAB_97bab5f4:
     break;
   case 0x7a:
     yyvalNode = (unsigned char *)0x0;
-    pTVar27 = (unsigned char *)(yyvsp + -0x1c);
+    valueSlot = (unsigned char *)(yyvsp + -0x1c);
     yyvalTypeOrFunction = *(unsigned char **)(yyvsp + -0x1c);
     yyvalQualifierOrParamType = *(unsigned char **)(yyvsp + -0x18);
     yyvalSize = *(unsigned char **)(yyvsp + -0x14);
@@ -6278,7 +6279,7 @@ LAB_97bab5f4:
     yyvalTypeLine = staleR9Value;
 LAB_97ba9874:
     structQualifierError = TParseContext__structQualifierErrorCheck
-                       (parseContext,identifierLine,pTVar27,scratchR6,scratchR7,staleR8Value,staleR9Value);
+                       (parseContext,identifierLine,valueSlot,scratchR6,scratchR7,staleR8Value,staleR9Value);
     if (structQualifierError != 0) {
       TParseContext__recover(parseContext);
     }
@@ -6315,7 +6316,7 @@ LAB_97ba9874:
     goto LAB_97ba9a08;
   case 0x7c:
     yyvalNode = (unsigned char *)0x0;
-    pTVar27 = (unsigned char *)(yyvsp + -0xa0);
+    valueSlot = (unsigned char *)(yyvsp + -0xa0);
     yyvalTypeOrFunction = *(unsigned char **)(yyvsp + -0xa0);
     yyvalQualifierOrParamType = *(unsigned char **)(yyvsp + -0x9c);
     yyvalSize = *(unsigned char **)(yyvsp + -0x98);
@@ -6327,7 +6328,7 @@ LAB_97ba9874:
     yyvalTypeLine = staleR9Value;
 LAB_97ba99a0:
     structQualifierError = TParseContext__structQualifierErrorCheck
-                       (parseContext,identifierLine,pTVar27,scratchR6,scratchR7,staleR8Value,staleR9Value);
+                       (parseContext,identifierLine,valueSlot,scratchR6,scratchR7,staleR8Value,staleR9Value);
     if (structQualifierError != 0) {
       TParseContext__recover(parseContext);
     }
@@ -7244,7 +7245,7 @@ LAB_97baadbc:
     *(unsigned char **)(newTypeMem + 0x18) = (unsigned char *)0x0;
     *(unsigned char **)(newTypeMem + 0x1c) = (unsigned char *)0x0;
     yyvalQualifierOrParamType = *(unsigned char **)yyvsp;
-    puVar5 = *(undefined **)(yyvsp + 4);
+    methodArg = *(undefined **)(yyvsp + 4);
     nodeMethod = *(code **)(*(unsigned char **)newTypeMem + 0x14);
     yyvalTypeOrFunction = newTypeMem;
     goto LAB_97baae6c;
@@ -7835,23 +7836,23 @@ LAB_97bab674:
         srcEntry = *(int *)(paramArray + paramByteOffset + 4);
         newNode[1] = *(int *)(paramArray + paramByteOffset);
         *newNode = (int)variableVtable;
-        iVar38 = *(int *)(srcEntry + 0xc);
+        srcEntryWord0c = *(int *)(srcEntry + 0xc);
         r8Pass = *(int *)(srcEntry + 0x10);
         r7Pass = *(int *)(srcEntry + 0x14);
         r6Pass = *(int *)(srcEntry + 0x18);
-        iVar30 = *(int *)(srcEntry + 0x1c);
-        iVar26 = *(int *)(srcEntry + 0x20);
-        iVar6 = *(int *)(srcEntry + 4);
-        iVar39 = *(int *)(srcEntry + 8);
+        srcEntryWord1c = *(int *)(srcEntry + 0x1c);
+        srcEntryWord20 = *(int *)(srcEntry + 0x20);
+        srcEntryWord04 = *(int *)(srcEntry + 4);
+        srcEntryWord08 = *(int *)(srcEntry + 8);
         newNode[3] = (int)(typeVtableAddr + 8);
-        newNode[6] = iVar38;
+        newNode[6] = srcEntryWord0c;
         newNode[7] = r8Pass;
         newNode[8] = r7Pass;
         newNode[9] = r6Pass;
-        newNode[10] = iVar30;
-        newNode[0xb] = iVar26;
-        newNode[5] = iVar39;
-        newNode[4] = iVar6;
+        newNode[10] = srcEntryWord1c;
+        newNode[0xb] = srcEntryWord20;
+        newNode[5] = srcEntryWord08;
+        newNode[4] = srcEntryWord04;
         oldNodeTypeBits = newNode[0xc];
         qualifierBits = *(uint *)(srcEntry + 0x24) & 0xfe000000;
         newNode[0xc] = qualifierBits | oldNodeTypeBits & 0x1ffffff;
@@ -7872,7 +7873,7 @@ LAB_97bab674:
         newNode[2] = nextUniqueId2 + 1;
         lastLevel = *(undefined4 *)(*symbolTable2 + ((symbolTable2[1] - *symbolTable2 & 0xfffffffcU) - 4));
         typeTmp1ArraySizeOrStr1Data = (unsigned char *)0x0;
-        keyString = (unsigned char *)(**(code **)(*newNode + 8))(newNode,iVar26,iVar30,r6Pass,r7Pass,r8Pass,symbolTable2);
+        keyString = (unsigned char *)(**(code **)(*newNode + 8))(newNode,srcEntryWord20,srcEntryWord1c,r6Pass,r7Pass,r8Pass,symbolTable2);
         __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_(&nodeKeyStrAlloc,keyString);
         nodeValue = newNode;
         std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique((unsigned char *)&typeTmp1TypeNameOrStr2Alloc,lastLevel,&nodeKeyStrAlloc);
@@ -8148,7 +8149,7 @@ LAB_97ba55dc:
     (**(code **)(*(int *)yyvalNode + 0x34))
               (yyvalNode,typeVtablePtr[loopIndex * 2],scratchR5,scratchR6,scratchR7,picBaseValue,typeVtablePtr);
     newTypeMem = (unsigned char *)(**(code **)(*(uint *)yyvalNode + 0x3c))(yyvalNode);
-    puVar5 = (undefined *)0x2;
+    methodArg = (undefined *)0x2;
     nodeMethod = *(code **)(*(unsigned char **)newTypeMem + 0x28);
   }
   else {
@@ -8174,12 +8175,12 @@ LAB_97ba55dc:
     newTypeMem = (unsigned char *)
               TIntermediate__addIndex(*(unsigned char **)parseContext,0x2f,scratchR5,scratchR6,scratchR7);
     typeVtablePtr = *(undefined ***)(typeTmp1StructureCopy2 + 4);
-    puVar5 = typeVtablePtr[loopIndex * 2];
+    methodArg = typeVtablePtr[loopIndex * 2];
     nodeMethod = *(code **)(*(unsigned char **)newTypeMem + 0x34);
     yyvalNode = newTypeMem;
   }
 LAB_97baae6c:
-  (*nodeMethod)(newTypeMem,puVar5,scratchR5,scratchR6,scratchR7,picBaseValue,typeVtablePtr);
+  (*nodeMethod)(newTypeMem,methodArg,scratchR5,scratchR6,scratchR7,picBaseValue,typeVtablePtr);
   yyvalNodeReg = yyvalNode;
   typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
   typeTmp7VtableReg = typeTmp7Vtable[0];
