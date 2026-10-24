@@ -1215,19 +1215,20 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
   int *inst;
   undefined4 constantAllocator;
 {
+  int operandIndex;
   uint sourceLaneWord;
   int iVar2;
-  int *piVar3;
+  int *inst1;
   undefined4 operandVReg;
   int *a0;
   int callResult;
   int *operandVReg2;
   undefined4 operandVReg3;
-  int iVar8;
+  int operandIndex2;
   uint local_28 [3];
   
   iVar2 = *(int *)(inst[0x22] + 8);
-  if ((((iVar2 == 0x9e) || (iVar2 == 0xa0)) || (iVar2 == 0x9f)) || (iVar8 = 1, iVar2 == 0xa1)) {
+  if ((((iVar2 == 0x9e) || (iVar2 == 0xa0)) || (iVar2 == 0x9f)) || (operandIndex2 = 1, iVar2 == 0xa1)) {
     iVar2 = IRInst__getOperandRecord(inst,0);
     if (((*(char *)(iVar2 + 0x10) == '\0') ||
         (iVar2 = IRInst__getOperandRecord(inst,0), *(char *)(iVar2 + 0x11) == '\0')) ||
@@ -1248,19 +1249,19 @@ int R300MachineAssembler__placeInstructionConstants(this, inst, constantAllocato
     }
   }
   else {
-    for (; iVar2 = (**(code **)(*inst + 0x14))(inst), iVar8 <= iVar2; iVar8 = iVar8 + 1) {
-      a0 = (int *)IRInst__getOperandSource(inst,iVar8);
+    for (; iVar2 = (**(code **)(*inst + 0x14))(inst), operandIndex2 <= iVar2; operandIndex2 = operandIndex2 + 1) {
+      a0 = (int *)IRInst__getOperandSource(inst,operandIndex2);
       callResult = (**(code **)(*a0 + 0x60))(a0);
-      piVar3 = inst;
-      iVar2 = iVar8;
+      inst1 = inst;
+      operandIndex = operandIndex2;
       if (callResult != 0) {
         operandVReg2 = (int *)IRInst__getOperandSource(a0,1);
-        piVar3 = a0;
-        iVar2 = 1;
+        inst1 = a0;
+        operandIndex = 1;
         a0 = operandVReg2;
       }
-      iVar2 = IRInst__getOperandRecord(piVar3,iVar2);
-      SelectWord__readMask(local_28,*(undefined4 *)(iVar2 + 0x10));
+      operandIndex = IRInst__getOperandRecord(inst1,operandIndex);
+      SelectWord__readMask(local_28,*(undefined4 *)(operandIndex + 0x10));
       sourceLaneWord = local_28[0];
       iVar2 = (**(code **)(*a0 + 0x5c))(a0);
       if (iVar2 == 0) {

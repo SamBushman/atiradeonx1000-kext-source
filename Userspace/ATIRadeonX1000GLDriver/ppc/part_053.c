@@ -1,12 +1,12 @@
 #include "decls.h"
 
 /* R520VMachineAssembler__vslot27_assembleLoopHeader @ 0x19d858 (1008 bytes) */
-int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, param_4, param_5, compiler, param_7)
+int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, param_4, traversal, compiler, param_7)
   int *this;
   int node;
   undefined4 block;
   undefined4 param_4;
-  undefined4 param_5;
+  undefined4 traversal;
   undefined4 compiler;
   undefined4 param_7;
 {
@@ -34,7 +34,7 @@ int R520VMachineAssembler__vslot27_assembleLoopHeader(this, node, block, param_4
   
   program = *(int **)(node + 0xac);
   a5 = compiler;
-  branchInst = Block__getBranchInst(node,node,block,param_4,param_5,compiler,param_7);
+  branchInst = Block__getBranchInst(node,node,block,param_4,traversal,compiler,param_7);
   if (*program != 0) goto LAB_0019dc0c;
   loopStackSlot = (uint *)0x0;
   condSwizzle = *(uint *)(this[0x25] + 4);
@@ -130,7 +130,7 @@ LAB_0019dab0:
   *(undefined4 *)(node + 0x130) = 0;
 LAB_0019dc0c:
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
-  return Block__accept(*(undefined4 *)(node + 0x13c),param_5);
+  return Block__accept(*(undefined4 *)(node + 0x13c),traversal);
 }
 
 /* R520VMachineAssembler__vslot30_assembleBlockThenSlot40 @ 0x19dc48 (104 bytes) */
@@ -2304,7 +2304,7 @@ int evaluateConstantComparison(inst, resultKnownOut)
   int inst;
   undefined4 *resultKnownOut;
 {
-  undefined4 uVar1;
+  undefined4 laneMask;
   int iVar2;
   bool bVar3;
   int local_48;
@@ -2312,10 +2312,10 @@ int evaluateConstantComparison(inst, resultKnownOut)
   int local_30;
   float local_2c;
   
-  uVar1 = DAT_001b2d70;
+  laneMask = DAT_001b2d70;
   iVar2 = IRInst__getUniformSourceConstant(inst,1,DAT_001b2d70,&local_48);
   if ((((iVar2 == 0) || (local_48 != 2)) ||
-      (iVar2 = IRInst__getUniformSourceConstant(inst,2,uVar1,&local_30), iVar2 == 0)) || (local_30 != 2)) {
+      (iVar2 = IRInst__getUniformSourceConstant(inst,2,laneMask,&local_30), iVar2 == 0)) || (local_30 != 2)) {
     bVar3 = false;
     *resultKnownOut = 0;
   }
@@ -2378,6 +2378,7 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   undefined4 param_6;
   undefined4 param_7;
 {
+  int inst;
   undefined4 sourceDef;
   bool bVar1;
   int iVar2;
@@ -2387,13 +2388,13 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   int a3;
   uint uVar6;
   undefined4 uVar7;
-  uint *puVar8;
+  uint *vector;
   
   a3 = compiler;
-  iVar3 = Block__getBranchInst(node,node,block,compiler,param_5,param_6,param_7);
+  inst = Block__getBranchInst(node,node,block,compiler,param_5,param_6,param_7);
   uVar7 = *(undefined4 *)(compiler + COMP_currentProgram);
-  iVar2 = *(int *)(iVar3 + 300);
-  sourceDef = IRInst__getOperandSource(iVar3,1);
+  iVar2 = *(int *)(inst + 300);
+  sourceDef = IRInst__getOperandSource(inst,1);
   uVar4 = thunk_FUN_00134de8(uVar7,sourceDef);
   iVar3 = this[0x18];
   (**(code **)(*this + 0x34))
@@ -2406,15 +2407,15 @@ int R520MachineAssembler__vslot26_assembleThenAppendRecord(this, node, block, co
   if (bVar1) {
     *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + -0x44) = 1;
   }
-  puVar8 = *(uint **)(this[4] + 0x24);
-  uVar6 = puVar8[1];
-  if (uVar6 < *puVar8) {
-    _memset(uVar6 * 4 + puVar8[2],0,4);
-    puVar5 = (undefined4 *)(uVar6 * 4 + puVar8[2]);
-    puVar8[1] = uVar6 + 1;
+  vector = *(uint **)(this[4] + 0x24);
+  uVar6 = vector[1];
+  if (uVar6 < *vector) {
+    _memset(uVar6 * 4 + vector[2],0,4);
+    puVar5 = (undefined4 *)(uVar6 * 4 + vector[2]);
+    vector[1] = uVar6 + 1;
   }
   else {
-    puVar5 = (undefined4 *)Vector__elementRefGrow(puVar8,uVar6);
+    puVar5 = (undefined4 *)Vector__elementRefGrow(vector,uVar6);
   }
   *puVar5 = uVar4;
   return;

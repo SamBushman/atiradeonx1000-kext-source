@@ -77,6 +77,7 @@ int R520MachineAssembler__vslot28_endLoop(this, node, block, compiler)
   undefined4 block;
   undefined4 compiler;
 {
+  int vector;
   byte bVar1;
   int *loopIndex;
   int iVar3;
@@ -89,14 +90,14 @@ int R520MachineAssembler__vslot28_endLoop(this, node, block, compiler)
   int loopStartRecord;
   undefined8 uVar10;
   
-  iVar4 = *(int *)(this[4] + 0x24);
+  vector = *(int *)(this[4] + 0x24);
   loopIndex = (int *)0x0;
-  loopIndex2 = *(uint *)(iVar4 + 4);
+  loopIndex2 = *(uint *)(vector + 4);
   if (loopIndex2 - 1 < loopIndex2) {
-    loopIndex = (int *)((loopIndex2 - 1) * 4 + *(int *)(iVar4 + 8));
+    loopIndex = (int *)((loopIndex2 - 1) * 4 + *(int *)(vector + 8));
   }
   loopStartRecord = *loopIndex;
-  Vector__removeAt(iVar4,loopIndex2 - 1);
+  Vector__removeAt(vector,loopIndex2 - 1);
   iVar4 = this[0x18];
   uVar10 = Compiler__isOptionEnabled(compiler,0x4b);
   if ((int)((ulonglong)uVar10 >> 0x20) == 0) {
@@ -566,39 +567,42 @@ int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
   undefined4 blockArg;
   uint flag;
 {
+  undefined4 newSource2;
+  undefined4 newSource;
+  int operandRecord1;
   int inst2;
   undefined4 uVar2;
   int iVar3;
   int operandRecord;
   uint uVar5;
   undefined4 a3;
-  int iVar6;
+  int operandRecord2;
   undefined1 compareCode;
   undefined1 auStack_48 [40];
   
   inst2 = IRInst__create(0x12,this[3]);
-  uVar2 = IRInst__getOperandSource(inst,1);
-  IRInst__setOperandSource(inst2,1,uVar2,0,this[3]);
-  iVar6 = inst2 + 0xa4;
+  newSource = IRInst__getOperandSource(inst,1);
+  IRInst__setOperandSource(inst2,1,newSource,0,this[3]);
+  operandRecord2 = inst2 + 0xa4;
   iVar3 = IRInst__getOperandRecord(inst,1);
   uVar2 = *(undefined4 *)(iVar3 + 0x10);
   iVar3 = IRInst__getOperandRecord(inst2,1);
   uVar5 = *(uint *)(inst + 0xb8);
   *(undefined4 *)(iVar3 + 0x10) = uVar2;
-  IROperand__setModifierBits(iVar6,2,uVar5 >> 1 & 1);
-  iVar3 = inst2 + 0xbc;
-  IROperand__setModifierBits(iVar6,1,*(uint *)(inst + 0xb8) & 1);
-  uVar2 = IRInst__getOperandSource(inst,2);
+  IROperand__setModifierBits(operandRecord2,2,uVar5 >> 1 & 1);
+  operandRecord1 = inst2 + 0xbc;
+  IROperand__setModifierBits(operandRecord2,1,*(uint *)(inst + 0xb8) & 1);
+  newSource2 = IRInst__getOperandSource(inst,2);
   a3 = 0;
-  IRInst__setOperandSource(inst2,2,uVar2,0,this[3]);
+  IRInst__setOperandSource(inst2,2,newSource2,0,this[3]);
   operandRecord = IRInst__getOperandRecord(inst,2);
   uVar2 = *(undefined4 *)(operandRecord + 0x10);
   operandRecord = IRInst__getOperandRecord(inst2,2);
   uVar5 = *(uint *)(inst + 0xd0);
   *(undefined4 *)(operandRecord + 0x10) = uVar2;
-  IROperand__setModifierBits(iVar3,2,uVar5 >> 1 & 1);
+  IROperand__setModifierBits(operandRecord1,2,uVar5 >> 1 & 1);
   compareCode = 2;
-  IROperand__setModifierBits(iVar3,1,*(uint *)(inst + 0xd0) & 1);
+  IROperand__setModifierBits(operandRecord1,1,*(uint *)(inst + 0xd0) & 1);
   *(undefined4 *)(inst2 + 0x9c) = 0x10101;
   operandRecord = IRInst__getOperandRecord(inst2,0);
   *(undefined4 *)(operandRecord + 0xc) = 0;
@@ -606,11 +610,11 @@ int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
   switch(*(undefined4 *)(inst + 300)) {
   case 0:
     compareCode = 0;
-    IROperand__setModifierBits(iVar3,1,*(uint *)(inst + 0xd0) & 1 ^ 1);
+    IROperand__setModifierBits(operandRecord1,1,*(uint *)(inst + 0xd0) & 1 ^ 1);
     break;
   case 1:
     compareCode = 3;
-    IROperand__setModifierBits(iVar3,1,*(uint *)(inst + 0xd0) & 1 ^ 1);
+    IROperand__setModifierBits(operandRecord1,1,*(uint *)(inst + 0xd0) & 1 ^ 1);
     break;
   case 2:
     uVar5 = *(uint *)(inst + 0xb8);
@@ -620,17 +624,17 @@ int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
     goto LAB_001a27a4;
   case 4:
     uVar5 = *(uint *)(inst + 0xd0);
-    iVar6 = iVar3;
+    operandRecord2 = operandRecord1;
 LAB_001a2784:
     compareCode = 1;
-    IROperand__setModifierBits(iVar6,1,uVar5 & 1 ^ 1);
+    IROperand__setModifierBits(operandRecord2,1,uVar5 & 1 ^ 1);
     break;
   case 5:
     uVar5 = *(uint *)(inst + 0xb8);
-    iVar3 = iVar6;
+    operandRecord1 = operandRecord2;
 LAB_001a27a4:
     compareCode = 2;
-    IROperand__setModifierBits(iVar3,1,uVar5 & 1 ^ 1);
+    IROperand__setModifierBits(operandRecord1,1,uVar5 & 1 ^ 1);
   }
   DListNode__init(auStack_48);
   DList__pushBack(auStack_48,inst2);
@@ -656,7 +660,7 @@ int R520MachineAssembler__vslot39_appendLoopStartRecord(this, loopCount)
   undefined4 in_r8;
   int iVar3;
   uint uVar4;
-  uint *puVar5;
+  uint *vector;
   
   *(undefined4 *)(this[0x18] * 0x48 + this[0x2a]) = 5;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x12) = 0;
@@ -665,16 +669,16 @@ int R520MachineAssembler__vslot39_appendLoopStartRecord(this, loopCount)
   (**(code **)(*this + 0x15c))(this,loopCount,in_r5,in_r6,in_r7,in_r8,*this);
   *(short *)(this[0x18] * 0x48 + this[0x2a] + -0x3c) = (short)this[0x18] + -1;
   iVar1 = this[0x18];
-  puVar5 = *(uint **)(this[4] + 0x28);
+  vector = *(uint **)(this[4] + 0x28);
   iVar3 = this[0x2a];
-  uVar4 = puVar5[1];
-  if (uVar4 < *puVar5) {
-    _memset(uVar4 * 4 + puVar5[2],0,4);
-    piVar2 = (int *)(uVar4 * 4 + puVar5[2]);
-    puVar5[1] = uVar4 + 1;
+  uVar4 = vector[1];
+  if (uVar4 < *vector) {
+    _memset(uVar4 * 4 + vector[2],0,4);
+    piVar2 = (int *)(uVar4 * 4 + vector[2]);
+    vector[1] = uVar4 + 1;
   }
   else {
-    piVar2 = (int *)Vector__elementRefGrow(puVar5,uVar4);
+    piVar2 = (int *)Vector__elementRefGrow(vector,uVar4);
   }
   *piVar2 = iVar1 * 0x48 + iVar3 + -0x48;
   return;
@@ -690,7 +694,7 @@ int R520MachineAssembler__appendBranchEndRecord(this, count, variant)
   int *piVar2;
   int recordsBase;
   uint uVar4;
-  uint *puVar5;
+  uint *vector;
   
   *(undefined4 *)(this[0x18] * 0x48 + this[0x2a]) = 5;
   *(undefined1 *)(this[0x18] * 0x48 + this[0x2a] + 0x12) = 0xff;
@@ -710,16 +714,16 @@ int R520MachineAssembler__appendBranchEndRecord(this, count, variant)
   (**(code **)(*this + 0x15c))(this);
   *(short *)(this[0x18] * 0x48 + this[0x2a] + -0x3c) = (short)this[0x18] + -1;
   recordIndex = this[0x18];
-  puVar5 = *(uint **)(this[4] + 0x28);
+  vector = *(uint **)(this[4] + 0x28);
   recordsBase = this[0x2a];
-  uVar4 = puVar5[1];
-  if (uVar4 < *puVar5) {
-    _memset(uVar4 * 4 + puVar5[2],0,4);
-    piVar2 = (int *)(uVar4 * 4 + puVar5[2]);
-    puVar5[1] = uVar4 + 1;
+  uVar4 = vector[1];
+  if (uVar4 < *vector) {
+    _memset(uVar4 * 4 + vector[2],0,4);
+    piVar2 = (int *)(uVar4 * 4 + vector[2]);
+    vector[1] = uVar4 + 1;
   }
   else {
-    piVar2 = (int *)Vector__elementRefGrow(puVar5,uVar4);
+    piVar2 = (int *)Vector__elementRefGrow(vector,uVar4);
   }
   *piVar2 = recordIndex * 0x48 + recordsBase + -0x48;
   return;
@@ -912,7 +916,7 @@ int R520MachineAssembler__vslot37_closeBranch(this, node)
   undefined4 in_r8;
   int pendingRecord;
   int stackVector;
-  uint *puVar5;
+  uint *vector;
   longlong callResult;
   undefined8 uVar7;
   
@@ -951,15 +955,15 @@ int R520MachineAssembler__vslot37_closeBranch(this, node)
   Vector__removeAt(stackVector,uVar2 - 1);
   *(short *)(pendingRecord * 0x48 + this[0x2a] + 0xc) = (short)this[0x18] - (short)this[0x1d];
   stackVector = this[0x18];
-  puVar5 = *(uint **)(this[4] + 0x24);
-  uVar2 = puVar5[1];
-  if (uVar2 < *puVar5) {
-    _memset(uVar2 * 4 + puVar5[2],0,4);
-    piVar1 = (int *)(uVar2 * 4 + puVar5[2]);
-    puVar5[1] = uVar2 + 1;
+  vector = *(uint **)(this[4] + 0x24);
+  uVar2 = vector[1];
+  if (uVar2 < *vector) {
+    _memset(uVar2 * 4 + vector[2],0,4);
+    piVar1 = (int *)(uVar2 * 4 + vector[2]);
+    vector[1] = uVar2 + 1;
   }
   else {
-    piVar1 = (int *)Vector__elementRefGrow(puVar5,uVar2);
+    piVar1 = (int *)Vector__elementRefGrow(vector,uVar2);
   }
   *piVar1 = stackVector;
   if (*(int *)(node[0x4f] + 0xdc) != 0) {

@@ -107,14 +107,15 @@ int IRInst__isCndFloatOp(param_1)
 int FUN_00173638(ctx)
   int ctx;
 {
+  int inst;
   int operandRecord;
   code *pcVar1;
   int iVar2;
   int *piVar3;
   
-  iVar2 = *(int *)(ctx + 0xb0);
-  if (*(int *)(*(int *)(iVar2 + 0x88) + 8) == 0x77) {
-    operandRecord = IRInst__getOperandRecord(iVar2,0);
+  inst = *(int *)(ctx + 0xb0);
+  if (*(int *)(*(int *)(inst + 0x88) + 8) == 0x77) {
+    operandRecord = IRInst__getOperandRecord(inst,0);
     if (*(int *)(operandRecord + 0x10) == DAT_001b01b4) {
       *(uint *)(*(int *)(ctx + 0xb0) + 0x14) =
            *(uint *)(*(int *)(ctx + 0xb0) + 0x14) & 0xfffffff7;
@@ -123,13 +124,13 @@ int FUN_00173638(ctx)
       pcVar1 = *(code **)(*piVar3 + 0xc);
       goto LAB_00173718;
     }
-    iVar2 = *(int *)(ctx + 0xb0);
+    inst = *(int *)(ctx + 0xb0);
   }
-  if ((((*(uint *)(iVar2 + 0x14) & 2) == 0) || (*(int *)(iVar2 + 0x98) != 0x3b)) ||
+  if ((((*(uint *)(inst + 0x14) & 2) == 0) || (*(int *)(inst + 0x98) != 0x3b)) ||
      (*(int *)(*(int *)(*(int *)(ctx + 0x238) + 0x6c4) + 0x334) != 0)) {
     return 0;
   }
-  *(uint *)(iVar2 + 0x14) = *(uint *)(iVar2 + 0x14) & 0xffffffef;
+  *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) & 0xffffffef;
   iVar2 = *(int *)(ctx + 0x238);
   if ((*(uint *)(*(int *)(iVar2 + 0x6c4) + 0x30) & 0x4000) == 0) {
     Program__removeInst(*(int *)(iVar2 + 0x6c4),*(undefined4 *)(ctx + 0xb0));
@@ -148,23 +149,23 @@ int FUN_00173754(ctx, param_2)
   int ctx;
   int param_2;
 {
-  int iVar1;
+  int inst;
   int loopIndex;
   int loopRemaining;
   undefined4 uVar4;
   undefined4 local_28;
   undefined4 local_24 [6];
   
-  iVar1 = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),9);
-  if (((iVar1 == 0) ||
+  inst = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),9);
+  if (((inst == 0) ||
       (*(int *)(*(int *)(ctx + 0x238) + 0x658) <=
        *(int *)(*(int *)(*(int *)(ctx + 0x238) + 0x6c4) + 0xa8))) ||
-     (iVar1 = *(int *)(param_2 + 0xb0), (*(uint *)(iVar1 + 0x14) & 1) == 0)) {
+     (inst = *(int *)(param_2 + 0xb0), (*(uint *)(inst + 0x14) & 1) == 0)) {
 LAB_00173854:
     uVar4 = 0;
   }
   else {
-    loopIndex = IRInst__getOperandRecord(iVar1,0);
+    loopIndex = IRInst__getOperandRecord(inst,0);
     local_28 = *(undefined4 *)(loopIndex + 0x10);
     loopRemaining = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
     loopIndex = 0;
@@ -180,7 +181,7 @@ LAB_00173854:
     *(int *)(loopIndex + 0xa8) = *(int *)(loopIndex + 0xa8) + 1;
     loopIndex = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
     *(int *)(loopIndex + 0x140) = *(int *)(loopIndex + 0x140) + 1;
-    FUN_0017d06c(ctx,iVar1,&DAT_001b01bc,0);
+    FUN_0017d06c(ctx,inst,&DAT_001b01bc,0);
     uVar4 = 1;
   }
   return uVar4;
@@ -190,8 +191,9 @@ LAB_00173854:
 int ValueKey__fillSourceLaneUsage(ctx)
   int ctx;
 {
+  undefined4 inst2;
   int *a0;
-  undefined4 uVar1;
+  undefined4 inst;
   int loopIndex;
   int callResult;
   undefined4 uVar4;
@@ -200,8 +202,8 @@ int ValueKey__fillSourceLaneUsage(ctx)
   
   a0 = *(int **)(ctx + 0xb0);
   if (*(int *)(a0[0x22] + 8) == 0x8e) {
-    uVar1 = (**(code **)(*a0 + 0x7c))(a0);
-    loopIndex = IRInst__allSourcesDefined(uVar1);
+    inst = (**(code **)(*a0 + 0x7c))(a0);
+    loopIndex = IRInst__allSourcesDefined(inst);
     if (loopIndex == 0) {
       return;
     }
@@ -212,10 +214,10 @@ int ValueKey__fillSourceLaneUsage(ctx)
   while( true ) {
     callResult = (**(code **)(*a0 + 0x14))(a0);
     if (callResult < loopIndex) break;
-    uVar1 = *(undefined4 *)(ctx + 0xb0);
+    inst2 = *(undefined4 *)(ctx + 0xb0);
     uVar4 = *(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4);
-    callResult = IRInst__getOperandRecord(uVar1,0);
-    FUN_000f3c30(local_28,uVar1,loopIndex,uVar4,*(undefined4 *)(callResult + 0x10));
+    callResult = IRInst__getOperandRecord(inst2,0);
+    FUN_000f3c30(local_28,inst2,loopIndex,uVar4,*(undefined4 *)(callResult + 0x10));
     a0 = *(int **)(ctx + 0xb0);
     *(undefined4 *)(iVar5 + 0x228) = local_28[0];
     loopIndex = loopIndex + 1;
@@ -289,14 +291,14 @@ int ValueKey__initCopy(param_1, param_2, param_3)
 }
 
 /* FUN_00173a48 @ 0x173a48 (176 bytes) */
-int FUN_00173a48(inst, param_2)
+int FUN_00173a48(inst, compiler)
   int *inst;
-  undefined4 param_2;
+  undefined4 compiler;
 {
   int callResult;
   int loopIndex;
   
-  callResult = OpcodeTraits__flagBit7(*(undefined4 *)(inst[0x22] + 8),param_2);
+  callResult = OpcodeTraits__flagBit7(*(undefined4 *)(inst[0x22] + 8),compiler);
   if (callResult == 0) {
     loopIndex = 1;
     callResult = (**(code **)(*inst + 0x14))(inst);
@@ -398,7 +400,7 @@ int FUN_00173cdc(ctx, param_2)
   int iVar4;
   uint uVar5;
   uint uVar6;
-  uint *puVar7;
+  uint *vector;
   undefined4 local_38 [4];
   undefined4 local_28 [4];
   
@@ -411,18 +413,18 @@ int FUN_00173cdc(ctx, param_2)
   else {
     iVar1 = *(int *)(param_2 + 0xb0);
     if ((*(uint *)(iVar1 + 0x14) & 1) == 0) {
-      puVar7 = *(uint **)(*(int *)(iVar1 + 0x8c) + 0x2c);
-      uVar5 = puVar7[1];
+      vector = *(uint **)(*(int *)(iVar1 + 0x8c) + 0x2c);
+      uVar5 = vector[1];
       uVar6 = uVar5 - 1;
-      if (uVar6 < *puVar7) {
+      if (uVar6 < *vector) {
         if (uVar5 <= uVar6) {
-          _memset(uVar5 * 4 + puVar7[2],0,(uVar6 - uVar5) * 4 + 4);
-          puVar7[1] = uVar5;
+          _memset(uVar5 * 4 + vector[2],0,(uVar6 - uVar5) * 4 + 4);
+          vector[1] = uVar5;
         }
-        piVar2 = (int *)(uVar6 * 4 + puVar7[2]);
+        piVar2 = (int *)(uVar6 * 4 + vector[2]);
       }
       else {
-        piVar2 = (int *)Vector__elementRefGrow(puVar7,uVar6);
+        piVar2 = (int *)Vector__elementRefGrow(vector,uVar6);
       }
       iVar1 = *(int *)(*piVar2 + 0xb0);
     }
@@ -449,7 +451,7 @@ int Compiler__valueNumberForExpr(param_1, param_2)
   int *piVar3;
   uint uVar4;
   undefined4 nextNegativeValueNumberResult;
-  uint *puVar6;
+  uint *vector;
   
   *(undefined4 *)(*(int *)(param_1 + 0x3f0) + 4) = 0;
   **(undefined4 **)(param_1 + 0x3f0) = param_2;
@@ -472,15 +474,15 @@ int Compiler__valueNumberForExpr(param_1, param_2)
     puVar2[2] = nextNegativeValueNumberResult;
     HashTable__insert(*(undefined4 *)(param_1 + 0x3e4),puVar1);
     HashTable__insert(*(undefined4 *)(param_1 + 0x3e0),puVar1);
-    puVar6 = *(uint **)(param_1 + 0x3d8);
-    uVar4 = puVar6[1];
-    if (uVar4 < *puVar6) {
-      _memset(uVar4 * 4 + puVar6[2],0,4);
-      piVar3 = (int *)(uVar4 * 4 + puVar6[2]);
-      puVar6[1] = uVar4 + 1;
+    vector = *(uint **)(param_1 + 0x3d8);
+    uVar4 = vector[1];
+    if (uVar4 < *vector) {
+      _memset(uVar4 * 4 + vector[2],0,4);
+      piVar3 = (int *)(uVar4 * 4 + vector[2]);
+      vector[1] = uVar4 + 1;
     }
     else {
-      piVar3 = (int *)Vector__elementRefGrow(puVar6,uVar4);
+      piVar3 = (int *)Vector__elementRefGrow(vector,uVar4);
     }
     *piVar3 = (int)puVar1;
   }
@@ -491,6 +493,7 @@ int Compiler__valueNumberForExpr(param_1, param_2)
 int ValueKey__fill(ctx)
   int ctx;
 {
+  dword *operandIndex2;
   bool bVar1;
   undefined4 *puVar2;
   int loopIndex;
@@ -506,7 +509,7 @@ int ValueKey__fill(ctx)
   undefined4 in_r7;
   int loopIndex3;
   dword dVar10;
-  dword *pdVar11;
+  dword *operandIndex;
   uint uVar12;
   int *loopIndex5;
   uint uVar14;
@@ -557,17 +560,17 @@ LAB_00173fa0:
     loopIndex = OpcodeTraits__flagBit2(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
                          *(undefined4 *)(ctx + 0x238));
     if (loopIndex != 0) {
-      pdVar11 = ((unsigned char *)0x0);
+      operandIndex = ((unsigned char *)0x0);
       loopIndex = OpcodeTraits__flagBit9(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
                            *(undefined4 *)(ctx + 0x238));
       if (loopIndex == 0) {
         while( true ) {
-          pdVar11 = (dword *)((int)pdVar11 + 1);
+          operandIndex = (dword *)((int)operandIndex + 1);
           loopIndex = (**(code **)(**(int **)(ctx + 0xb0) + 0x14))(*(int **)(ctx + 0xb0));
           uVar4 = extraout_r4_00;
-          if (loopIndex < (int)pdVar11) break;
+          if (loopIndex < (int)operandIndex) break;
           loopIndex = *(int *)(ctx + 0xb0);
-          loopIndex7 = *(uint **)(*(int *)((int)pdVar11 * 0x18 + loopIndex + 0x8c) + 0x2c);
+          loopIndex7 = *(uint **)(*(int *)((int)operandIndex * 0x18 + loopIndex + 0x8c) + 0x2c);
           uVar12 = loopIndex7[1];
           uVar14 = uVar12 - 1;
           if (uVar14 < *loopIndex7) {
@@ -583,25 +586,25 @@ LAB_00173fa0:
             loopIndex = *(int *)(ctx + 0xb0);
           }
           dVar10 = *in_r5;
-          loopIndex = IRInst__getOperandRecord(loopIndex,pdVar11);
+          loopIndex = IRInst__getOperandRecord(loopIndex,operandIndex);
           local_58[0] = *(undefined4 *)(loopIndex + 0x10);
-          loopIndex5 = (int *)((int)pdVar11 * 0x10 + ctx + 0x168);
-          loopIndex7 = (uint *)((int)pdVar11 * 0x20 + ctx + 200);
+          loopIndex5 = (int *)((int)operandIndex * 0x10 + ctx + 0x168);
+          loopIndex7 = (uint *)((int)operandIndex * 0x20 + ctx + 200);
           loopIndex = 0;
           do {
             if (*(byte *)((int)local_58 + loopIndex) != 4) {
               loopIndex3 = *(int *)((uint)*(byte *)((int)local_58 + loopIndex) * 4 + dVar10 + 0x20);
               if (loopIndex3 < 0) {
                 loopIndex8 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),loopIndex3);
-                IRInst__applyAbsModifier(&local_48,*(undefined4 *)(ctx + 0xb0),pdVar11,*loopIndex8);
-                in_r5 = pdVar11;
+                IRInst__applyAbsModifier(&local_48,*(undefined4 *)(ctx + 0xb0),operandIndex,*loopIndex8);
+                in_r5 = operandIndex;
                 in_r6 = local_48;
-                IRInst__applyNegateModifier(&local_44,*(undefined4 *)(ctx + 0xb0),pdVar11,local_48);
+                IRInst__applyNegateModifier(&local_44,*(undefined4 *)(ctx + 0xb0),operandIndex,local_48);
                 loopIndex3 = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),local_44);
                 loopIndex3 = *(int *)(loopIndex3 + 4);
               }
               else {
-                loopIndex2 = *(int *)(ctx + 0xb0) + (int)pdVar11 * 0x18 + 0x80;
+                loopIndex2 = *(int *)(ctx + 0xb0) + (int)operandIndex * 0x18 + 0x80;
                 *loopIndex7 = *(uint *)(loopIndex2 + 0x20) & 1;
                 loopIndex7[4] = *(uint *)(loopIndex2 + 0x20) >> 1 & 1;
               }
@@ -617,14 +620,14 @@ LAB_00173fa0:
       }
     }
     loopIndex5 = *(int **)(ctx + 0xb0);
-    pdVar11 = ((unsigned char *)0x0);
+    operandIndex2 = ((unsigned char *)0x0);
     while( true ) {
-      pdVar11 = (dword *)((int)pdVar11 + 1);
+      operandIndex2 = (dword *)((int)operandIndex2 + 1);
       uVar17 = (**(code **)(*loopIndex5 + 0x14))(loopIndex5);
       uVar4 = (undefined4)uVar17;
-      if ((int)((ulonglong)uVar17 >> 0x20) < (int)pdVar11) break;
+      if ((int)((ulonglong)uVar17 >> 0x20) < (int)operandIndex2) break;
       loopIndex5 = *(int **)(ctx + 0xb0);
-      loopIndex7 = *(uint **)(loopIndex5[(int)pdVar11 * 6 + 0x23] + 0x2c);
+      loopIndex7 = *(uint **)(loopIndex5[(int)operandIndex2 * 6 + 0x23] + 0x2c);
       uVar14 = loopIndex7[1];
       uVar12 = uVar14 - 1;
       if (uVar12 < *loopIndex7) {
@@ -641,14 +644,14 @@ LAB_00173fa0:
         loopIndex5 = *(int **)(ctx + 0xb0);
       }
       loopIndex3 = *loopIndex6;
-      loopIndex4 = (char *)((int)pdVar11 * 4 + ctx + 0x224);
-      loopIndex6 = (int *)((int)pdVar11 * 0x10 + ctx + 0x168);
-      loopIndex7 = (uint *)((int)pdVar11 * 0x20 + ctx + 200);
+      loopIndex4 = (char *)((int)operandIndex2 * 4 + ctx + 0x224);
+      loopIndex6 = (int *)((int)operandIndex2 * 0x10 + ctx + 0x168);
+      loopIndex7 = (uint *)((int)operandIndex2 * 0x20 + ctx + 200);
       loopIndex2 = 0;
       loopIndex = ctx;
       do {
         if (*loopIndex4 != '\0') {
-          loopRemaining = IRInst__getOperandRecord(loopIndex5,pdVar11);
+          loopRemaining = IRInst__getOperandRecord(loopIndex5,operandIndex2);
           uVar12 = (uint)*(byte *)(loopIndex2 + loopRemaining + 0x10);
           if (uVar12 == 4) {
             loopIndex5 = *(int **)(ctx + 0xb0);
@@ -659,18 +662,18 @@ LAB_00173fa0:
             loopRemaining = *(int *)(uVar12 * 4 + loopIndex3 + 0x20);
             if (loopRemaining < 0) {
               loopIndex8 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),loopRemaining);
-              IRInst__applyAbsModifier(&local_40,*(undefined4 *)(ctx + 0xb0),pdVar11,*loopIndex8);
-              in_r5 = pdVar11;
+              IRInst__applyAbsModifier(&local_40,*(undefined4 *)(ctx + 0xb0),operandIndex2,*loopIndex8);
+              in_r5 = operandIndex2;
               in_r6 = local_40;
-              IRInst__applyNegateModifier(local_3c,*(undefined4 *)(ctx + 0xb0),pdVar11,local_40);
+              IRInst__applyNegateModifier(local_3c,*(undefined4 *)(ctx + 0xb0),operandIndex2,local_40);
               loopRemaining = ((int (*)())Compiler__valueNumberForExpr)(*(undefined4 *)(ctx + 0x238),local_3c[0]);
               loopIndex5 = *(int **)(ctx + 0xb0);
               loopRemaining = *(int *)(loopRemaining + 4);
             }
             else {
               loopIndex5 = *(int **)(ctx + 0xb0);
-              *loopIndex7 = loopIndex5[(int)pdVar11 * 6 + 0x28] & 1;
-              loopIndex7[4] = (uint)loopIndex5[(int)pdVar11 * 6 + 0x28] >> 1 & 1;
+              *loopIndex7 = loopIndex5[(int)operandIndex2 * 6 + 0x28] & 1;
+              loopIndex7[4] = (uint)loopIndex5[(int)operandIndex2 * 6 + 0x28] >> 1 & 1;
             }
             *loopIndex6 = loopRemaining;
           }
@@ -824,7 +827,7 @@ int FUN_001746c8(compiler, param_2)
   int *piVar3;
   uint uVar4;
   undefined4 arena;
-  uint *puVar6;
+  uint *vector;
   
   **(undefined4 **)(compiler + 0x3f4) = param_2;
   puVar1 = (undefined4 *)
@@ -847,15 +850,15 @@ int FUN_001746c8(compiler, param_2)
     allocation[1] = param_2;
     allocation[8] = 0;
     HashTable__insert(*(undefined4 *)(compiler + COMP_pointerSet),puVar1);
-    puVar6 = *(uint **)(compiler + 0x3dc);
-    uVar4 = puVar6[1];
-    if (uVar4 < *puVar6) {
-      _memset(uVar4 * 4 + puVar6[2],0,4);
-      piVar3 = (int *)(uVar4 * 4 + puVar6[2]);
-      puVar6[1] = uVar4 + 1;
+    vector = *(uint **)(compiler + 0x3dc);
+    uVar4 = vector[1];
+    if (uVar4 < *vector) {
+      _memset(uVar4 * 4 + vector[2],0,4);
+      piVar3 = (int *)(uVar4 * 4 + vector[2]);
+      vector[1] = uVar4 + 1;
     }
     else {
-      piVar3 = (int *)Vector__elementRefGrow(puVar6,uVar4);
+      piVar3 = (int *)Vector__elementRefGrow(vector,uVar4);
     }
     *piVar3 = (int)puVar1;
   }
@@ -873,22 +876,22 @@ int FUN_001747c4(param_1, param_2, param_3, param_4)
   undefined4 *puVar2;
   int callResult;
   int iVar4;
-  uint *puVar5;
+  uint *vector;
   
   if (param_3 <= (int)param_2) {
     iVar4 = param_2 << 2;
     do {
-      puVar5 = *(uint **)(param_4 + 0x40c);
-      if (param_2 < *puVar5) {
-        uVar1 = puVar5[1];
+      vector = *(uint **)(param_4 + 0x40c);
+      if (param_2 < *vector) {
+        uVar1 = vector[1];
         if (uVar1 <= param_2) {
-          _memset(uVar1 * 4 + puVar5[2],0,(param_2 - uVar1) * 4 + 4);
-          puVar5[1] = param_2 + 1;
+          _memset(uVar1 * 4 + vector[2],0,(param_2 - uVar1) * 4 + 4);
+          vector[1] = param_2 + 1;
         }
-        puVar2 = (undefined4 *)(iVar4 + puVar5[2]);
+        puVar2 = (undefined4 *)(iVar4 + vector[2]);
       }
       else {
-        puVar2 = (undefined4 *)Vector__elementRefGrow(puVar5,param_2);
+        puVar2 = (undefined4 *)Vector__elementRefGrow(vector,param_2);
       }
       callResult = HashTable__find(*puVar2,param_1);
       if (callResult != 0) {
@@ -912,22 +915,22 @@ int FUN_00174888(param_1, param_2, param_3, param_4)
   undefined4 *puVar2;
   int callResult;
   int iVar4;
-  uint *puVar5;
+  uint *vector;
   
   if (param_3 <= (int)param_2) {
     iVar4 = param_2 << 2;
     do {
-      puVar5 = *(uint **)(param_4 + 0x408);
-      if (param_2 < *puVar5) {
-        uVar1 = puVar5[1];
+      vector = *(uint **)(param_4 + 0x408);
+      if (param_2 < *vector) {
+        uVar1 = vector[1];
         if (uVar1 <= param_2) {
-          _memset(uVar1 * 4 + puVar5[2],0,(param_2 - uVar1) * 4 + 4);
-          puVar5[1] = param_2 + 1;
+          _memset(uVar1 * 4 + vector[2],0,(param_2 - uVar1) * 4 + 4);
+          vector[1] = param_2 + 1;
         }
-        puVar2 = (undefined4 *)(iVar4 + puVar5[2]);
+        puVar2 = (undefined4 *)(iVar4 + vector[2]);
       }
       else {
-        puVar2 = (undefined4 *)Vector__elementRefGrow(puVar5,param_2);
+        puVar2 = (undefined4 *)Vector__elementRefGrow(vector,param_2);
       }
       callResult = HashTable__find(*puVar2,param_1);
       if (callResult != 0) {
@@ -956,7 +959,7 @@ int FUN_0017494c(ctx, param_2, param_3)
   undefined4 arena;
   undefined4 *loopIndex2;
   uint uVar10;
-  uint *puVar11;
+  uint *vector;
   
   iVar2 = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),9);
   if ((iVar2 != 0) &&
@@ -987,18 +990,18 @@ int FUN_0017494c(ctx, param_2, param_3)
     if (iVar2 != 0) {
       iVar2 = *(int *)(iVar2 + 0xb0);
       if ((*(uint *)(iVar2 + 0x14) & 1) == 0) {
-        puVar11 = *(uint **)(*(int *)(iVar2 + 0x8c) + 0x2c);
-        uVar7 = puVar11[1];
+        vector = *(uint **)(*(int *)(iVar2 + 0x8c) + 0x2c);
+        uVar7 = vector[1];
         uVar10 = uVar7 - 1;
-        if (uVar10 < *puVar11) {
+        if (uVar10 < *vector) {
           if (uVar7 <= uVar10) {
-            _memset(uVar7 * 4 + puVar11[2],0,(uVar10 - uVar7) * 4 + 4);
-            puVar11[1] = uVar7;
+            _memset(uVar7 * 4 + vector[2],0,(uVar10 - uVar7) * 4 + 4);
+            vector[1] = uVar7;
           }
-          piVar5 = (int *)(uVar10 * 4 + puVar11[2]);
+          piVar5 = (int *)(uVar10 * 4 + vector[2]);
         }
         else {
-          piVar5 = (int *)Vector__elementRefGrow(puVar11,uVar10);
+          piVar5 = (int *)Vector__elementRefGrow(vector,uVar10);
         }
         iVar2 = *(int *)(*piVar5 + 0xb0);
       }
@@ -1029,14 +1032,14 @@ int FUN_00174b04(ctx, param_2, param_3)
   uint uVar8;
   int iVar9;
   int loopIndex;
-  uint *puVar11;
+  uint *vector;
   uint uVar12;
   uint uVar13;
   
   loopIndex = 1;
   iVar9 = 0x18;
   piVar2 = *(int **)(ctx + 0xb0);
-  puVar11 = *(uint **)(*(int *)(*(int *)(ctx + 0x238) + 0x6c4) + 0x410);
+  vector = *(uint **)(*(int *)(*(int *)(ctx + 0x238) + 0x6c4) + 0x410);
   do {
     iVar5 = (**(code **)(*piVar2 + 0x14))(piVar2);
     if (iVar5 < loopIndex) {
@@ -1048,16 +1051,16 @@ int FUN_00174b04(ctx, param_2, param_3)
       iVar5 = param_2 << 2;
       uVar12 = param_2;
       do {
-        if (uVar12 < *puVar11) {
-          uVar3 = puVar11[1];
+        if (uVar12 < *vector) {
+          uVar3 = vector[1];
           if (uVar3 <= uVar12) {
-            _memset(uVar3 * 4 + puVar11[2],0,(uVar12 - uVar3) * 4 + 4);
-            puVar11[1] = uVar12 + 1;
+            _memset(uVar3 * 4 + vector[2],0,(uVar12 - uVar3) * 4 + 4);
+            vector[1] = uVar12 + 1;
           }
-          piVar4 = (int *)(iVar5 + puVar11[2]);
+          piVar4 = (int *)(iVar5 + vector[2]);
         }
         else {
-          piVar4 = (int *)Vector__elementRefGrow(puVar11,uVar12);
+          piVar4 = (int *)Vector__elementRefGrow(vector,uVar12);
         }
         iVar7 = *(int *)(*piVar4 + 0xc4);
         uVar3 = *(uint *)(iVar7 + 4);
@@ -1111,7 +1114,7 @@ int FUN_00174ce0(param_1, param_2, param_3)
   int *piVar3;
   undefined4 nextValueNumberResult;
   uint uVar5;
-  uint *puVar6;
+  uint *vector;
   
   *(undefined4 *)(*(int *)(param_1 + 0x3f4) + 4) = param_3;
   *(undefined4 *)(*(int *)(param_1 + 0x3f4) + 8) = param_2;
@@ -1140,15 +1143,15 @@ int FUN_00174ce0(param_1, param_2, param_3)
     puVar2[3] = param_2;
     HashTable__insert(*(undefined4 *)(param_1 + 1000),puVar1);
     HashTable__insert(*(undefined4 *)(param_1 + 0x3ec),puVar1);
-    puVar6 = *(uint **)(param_1 + 0x3dc);
-    uVar5 = puVar6[1];
-    if (uVar5 < *puVar6) {
-      _memset(uVar5 * 4 + puVar6[2],0,4);
-      piVar3 = (int *)(uVar5 * 4 + puVar6[2]);
-      puVar6[1] = uVar5 + 1;
+    vector = *(uint **)(param_1 + 0x3dc);
+    uVar5 = vector[1];
+    if (uVar5 < *vector) {
+      _memset(uVar5 * 4 + vector[2],0,4);
+      piVar3 = (int *)(uVar5 * 4 + vector[2]);
+      vector[1] = uVar5 + 1;
     }
     else {
-      piVar3 = (int *)Vector__elementRefGrow(puVar6,uVar5);
+      piVar3 = (int *)Vector__elementRefGrow(vector,uVar5);
     }
     *piVar3 = (int)puVar1;
   }
@@ -1159,6 +1162,8 @@ int FUN_00174ce0(param_1, param_2, param_3)
 int FUN_00174e0c(param_1)
   int *param_1;
 {
+  undefined4 inst2;
+  int inst;
   undefined4 nextValueNumberResult;
   int operandRecord;
   undefined4 uVar1;
@@ -1189,8 +1194,8 @@ int FUN_00174e0c(param_1)
   local_68[2] = 1;
   local_68[3] = 1;
   if (*(int *)(loopIndex3[0x22] + 8) == 0x8e) {
-    uVar1 = (**(code **)(*loopIndex3 + 0x7c))(loopIndex3);
-    loopIndex2 = IRInst__allSourcesDefined(uVar1);
+    inst2 = (**(code **)(*loopIndex3 + 0x7c))(loopIndex3);
+    loopIndex2 = IRInst__allSourcesDefined(inst2);
     if (loopIndex2 == 0) goto LAB_00174efc;
     loopIndex3 = (int *)param_1[0x2c];
   }
@@ -1219,30 +1224,30 @@ LAB_00174efc:
   }
   loopIndex2 = (**(code **)(*(int *)param_1[0x2c] + 0x60))((int *)param_1[0x2c]);
   if (loopIndex2 != 0) {
-    iVar9 = param_1[0x2c];
+    inst = param_1[0x2c];
     loopIndex2 = 0;
     loopIndex3 = param_1;
     do {
-      operandRecord = IRInst__getOperandRecord(iVar9,0);
+      operandRecord = IRInst__getOperandRecord(inst,0);
       if (*(char *)(loopIndex2 + operandRecord + 0x10) == '\x01') {
-        iVar9 = param_1[0x2c];
+        inst = param_1[0x2c];
       }
       else {
-        iVar9 = param_1[0x2c];
-        if (0 < *(int *)(iVar9 + 0x84)) {
+        inst = param_1[0x2c];
+        if (0 < *(int *)(inst + 0x84)) {
           loopIndex = 1;
           loopIndex4 = param_1 + loopIndex2 + 0x5e;
           do {
-            operandRecord = IRInst__getOperandRecord(iVar9,loopIndex);
+            operandRecord = IRInst__getOperandRecord(inst,loopIndex);
             if (*(char *)(loopIndex2 + operandRecord + 0x10) != '\x04') {
-              iVar9 = param_1[0x2c];
+              inst = param_1[0x2c];
               *loopIndex3 = *loopIndex4;
               break;
             }
-            iVar9 = param_1[0x2c];
+            inst = param_1[0x2c];
             loopIndex = loopIndex + 1;
             loopIndex4 = loopIndex4 + 4;
-          } while (loopIndex <= *(int *)(iVar9 + 0x84));
+          } while (loopIndex <= *(int *)(inst + 0x84));
         }
       }
       bVar8 = loopIndex2 == 3;
@@ -1252,7 +1257,7 @@ LAB_00174efc:
         loopIndex2 = 0;
         loopIndex3 = param_1;
         while( true ) {
-          operandRecord = IRInst__getOperandRecord(iVar9,0);
+          operandRecord = IRInst__getOperandRecord(inst,0);
           if (*(char *)(loopIndex2 + operandRecord + 0x10) == '\x01') {
             *loopIndex3 = 2;
           }
@@ -1260,7 +1265,7 @@ LAB_00174efc:
           loopIndex3 = loopIndex3 + 1;
           loopIndex2 = loopIndex2 + 1;
           if (bVar8) break;
-          iVar9 = param_1[0x2c];
+          inst = param_1[0x2c];
         }
         return;
       }
@@ -1579,12 +1584,13 @@ int FUN_001758d8(param_1, param_2, param_3, param_4)
   int param_3;
   int param_4;
 {
+  uint *vector2;
   undefined4 *foundEntry;
   undefined4 uVar1;
   undefined4 *loopIndex;
   uint uVar3;
   undefined4 *puVar4;
-  uint *puVar5;
+  uint *vector;
   uint uVar6;
   int loopRemaining;
   
@@ -1592,17 +1598,17 @@ int FUN_001758d8(param_1, param_2, param_3, param_4)
     loopRemaining = param_2 << 2;
     uVar6 = param_2;
     do {
-      puVar5 = *(uint **)(param_4 + 0x404);
-      if (uVar6 < *puVar5) {
-        uVar3 = puVar5[1];
+      vector = *(uint **)(param_4 + 0x404);
+      if (uVar6 < *vector) {
+        uVar3 = vector[1];
         if (uVar3 <= uVar6) {
-          _memset(uVar3 * 4 + puVar5[2],0,(uVar6 - uVar3) * 4 + 4);
-          puVar5[1] = uVar6 + 1;
+          _memset(uVar3 * 4 + vector[2],0,(uVar6 - uVar3) * 4 + 4);
+          vector[1] = uVar6 + 1;
         }
-        puVar4 = (undefined4 *)(loopRemaining + puVar5[2]);
+        puVar4 = (undefined4 *)(loopRemaining + vector[2]);
       }
       else {
-        puVar4 = (undefined4 *)Vector__elementRefGrow(puVar5,uVar6);
+        puVar4 = (undefined4 *)Vector__elementRefGrow(vector,uVar6);
       }
       foundEntry = (undefined4 *)HashTable__find(*puVar4,param_1);
       if (foundEntry != (undefined4 *)0x0) {
@@ -1622,17 +1628,17 @@ int FUN_001758d8(param_1, param_2, param_3, param_4)
     } while (param_3 <= (int)uVar6);
   }
   ((int (*)())FUN_00174e0c)(param_1);
-  puVar5 = *(uint **)(param_4 + 0x404);
-  if (param_2 < *puVar5) {
-    uVar6 = puVar5[1];
+  vector2 = *(uint **)(param_4 + 0x404);
+  if (param_2 < *vector2) {
+    uVar6 = vector2[1];
     if (uVar6 <= param_2) {
-      _memset(uVar6 * 4 + puVar5[2],0,(param_2 - uVar6) * 4 + 4);
-      puVar5[1] = param_2 + 1;
+      _memset(uVar6 * 4 + vector2[2],0,(param_2 - uVar6) * 4 + 4);
+      vector2[1] = param_2 + 1;
     }
-    puVar4 = (undefined4 *)(param_2 * 4 + puVar5[2]);
+    puVar4 = (undefined4 *)(param_2 * 4 + vector2[2]);
   }
   else {
-    puVar4 = (undefined4 *)Vector__elementRefGrow(puVar5,param_2);
+    puVar4 = (undefined4 *)Vector__elementRefGrow(vector2,param_2);
   }
   HashTable__insert(*puVar4,param_1);
   return (undefined4 *)0x0;
@@ -1646,7 +1652,7 @@ undefined4 * FUN_00175a3c(int compiler,undefined4 param_2,undefined4 param_3,dou
   int *piVar3;
   uint uVar4;
   undefined4 arena;
-  uint *puVar6;
+  uint *vector;
   
   *(undefined4 *)(*(int *)(compiler + 0x3f0) + 4) = param_3;
   **(float **)(compiler + 0x3f0) = (float)fparam_1;
@@ -1667,15 +1673,15 @@ undefined4 * FUN_00175a3c(int compiler,undefined4 param_2,undefined4 param_3,dou
     allocation[2] = param_3;
     HashTable__insert(*(undefined4 *)(compiler + 0x3e4),puVar1);
     HashTable__insert(*(undefined4 *)(compiler + 0x3e0),puVar1);
-    puVar6 = *(uint **)(compiler + 0x3d8);
-    uVar4 = puVar6[1];
-    if (uVar4 < *puVar6) {
-      _memset(uVar4 * 4 + puVar6[2],0,4);
-      piVar3 = (int *)(uVar4 * 4 + puVar6[2]);
-      puVar6[1] = uVar4 + 1;
+    vector = *(uint **)(compiler + 0x3d8);
+    uVar4 = vector[1];
+    if (uVar4 < *vector) {
+      _memset(uVar4 * 4 + vector[2],0,4);
+      piVar3 = (int *)(uVar4 * 4 + vector[2]);
+      vector[1] = uVar4 + 1;
     }
     else {
-      piVar3 = (int *)Vector__elementRefGrow(puVar6,uVar4);
+      piVar3 = (int *)Vector__elementRefGrow(vector,uVar4);
     }
     *piVar3 = (int)puVar1;
   }
@@ -1700,7 +1706,7 @@ int FUN_00175b40(param_1)
   int loopIndex;
   uint uVar10;
   int iVar11;
-  uint *puVar12;
+  uint *vector;
   undefined4 *loopIndex2;
   undefined4 local_38 [7];
   
@@ -1714,19 +1720,19 @@ int FUN_00175b40(param_1)
     } while (loopRemaining != 0);
   }
   else {
-    puVar12 = *(uint **)(*(int *)(*(int *)(loopRemaining + 0x84) * 0x18 + loopRemaining + 0x8c) + 0x2c);
-    uVar10 = puVar12[1];
+    vector = *(uint **)(*(int *)(*(int *)(loopRemaining + 0x84) * 0x18 + loopRemaining + 0x8c) + 0x2c);
+    uVar10 = vector[1];
     uVar8 = uVar10 - 1;
-    if (uVar8 < *puVar12) {
+    if (uVar8 < *vector) {
       if (uVar10 <= uVar8) {
-        _memset(uVar10 * 4 + puVar12[2],0,(uVar8 - uVar10) * 4 + 4);
-        puVar12[1] = uVar10;
+        _memset(uVar10 * 4 + vector[2],0,(uVar8 - uVar10) * 4 + 4);
+        vector[1] = uVar10;
         loopRemaining = param_1[0x2c];
       }
-      piVar5 = (int *)(uVar8 * 4 + puVar12[2]);
+      piVar5 = (int *)(uVar8 * 4 + vector[2]);
     }
     else {
-      piVar5 = (int *)Vector__elementRefGrow(puVar12,uVar8);
+      piVar5 = (int *)Vector__elementRefGrow(vector,uVar8);
       loopRemaining = param_1[0x2c];
     }
     iVar11 = *piVar5;
@@ -1792,6 +1798,8 @@ int Program__valueNumberInst(param_1, param_2, param_3, param_4, param_5)
   int *param_4;
   undefined4 param_5;
 {
+  uint *vector2;
+  int inst;
   int eliminateRedundantInstResult;
   int canonicalizeCommutativeOperandsResult;
   int valueNumberEnabled;
@@ -1802,7 +1810,7 @@ int Program__valueNumberInst(param_1, param_2, param_3, param_4, param_5)
   undefined4 uVar5;
   int *piVar6;
   int iVar7;
-  uint *puVar8;
+  uint *vector;
   
   valueNumberEnabled = Compiler__isOptionEnabled(*(undefined4 *)(param_1 + 8),7);
   if ((valueNumberEnabled == 0) || (*(int *)(*(int *)(param_1 + 8) + 0x654) <= *(int *)(param_1 + 0x14c))) {
@@ -1849,17 +1857,17 @@ LAB_00175e58:
               iVar2 = RegKind__flagBit0(piVar6[0x26]);
               if (((iVar2 == 0) || ((piVar6[5] & 2U) != 0)) ||
                  (iVar2 = (**(code **)(*piVar6 + 0x50))(piVar6), iVar2 != 0)) goto LAB_001760e4;
-              puVar8 = *(uint **)(param_1 + 0x40c);
-              if (param_2 < *puVar8) {
-                uVar3 = puVar8[1];
+              vector = *(uint **)(param_1 + 0x40c);
+              if (param_2 < *vector) {
+                uVar3 = vector[1];
                 if (uVar3 <= param_2) {
-                  _memset(uVar3 * 4 + puVar8[2],0,(param_2 - uVar3) * 4 + 4);
-                  puVar8[1] = param_2 + 1;
+                  _memset(uVar3 * 4 + vector[2],0,(param_2 - uVar3) * 4 + 4);
+                  vector[1] = param_2 + 1;
                 }
-                puVar4 = (undefined4 *)(param_2 * 4 + puVar8[2]);
+                puVar4 = (undefined4 *)(param_2 * 4 + vector[2]);
               }
               else {
-                puVar4 = (undefined4 *)Vector__elementRefGrow(puVar8,param_2);
+                puVar4 = (undefined4 *)Vector__elementRefGrow(vector,param_2);
               }
               HashTable__insert(*puVar4,*param_4);
               iVar2 = *param_4;
@@ -1876,25 +1884,25 @@ LAB_001760e4:
               (iVar2 = FUN_00172fb8(*param_4), iVar2 == 0)) &&
              (((iVar1 != 0 && (iVar1 = ((int (*)())FUN_00173754)(*param_4,iVar1), iVar1 != 0)) ||
               (iVar1 = ((int (*)())FUN_0017494c)(*param_4,param_2,param_3), iVar1 != 0)))) {
-            iVar2 = *(int *)(*param_4 + 0xb0);
-            iVar1 = VReg__currentDefinition(*(undefined4 *)(iVar2 + 0xa4),*(undefined4 *)(param_1 + 0x3a0),
+            inst = *(int *)(*param_4 + 0xb0);
+            iVar1 = VReg__currentDefinition(*(undefined4 *)(inst + 0xa4),*(undefined4 *)(param_1 + 0x3a0),
                                  *(uint *)(param_1 + 8));
-            if ((iVar2 == *(int *)(iVar1 + 0xb0)) &&
-               (iVar1 = Program__tryEliminateRedundantCopy(param_1,iVar2,param_5), iVar1 != 0)) goto LAB_0017624c;
+            if ((inst == *(int *)(iVar1 + 0xb0)) &&
+               (iVar1 = Program__tryEliminateRedundantCopy(param_1,inst,param_5), iVar1 != 0)) goto LAB_0017624c;
           }
           iVar1 = (**(code **)(**(int **)(*param_4 + 0xb0) + 0x68))(*(int **)(*param_4 + 0xb0));
           if (iVar1 == 0) {
-            puVar8 = *(uint **)(param_1 + 0x408);
-            if (param_2 < *puVar8) {
-              uVar3 = puVar8[1];
+            vector2 = *(uint **)(param_1 + 0x408);
+            if (param_2 < *vector2) {
+              uVar3 = vector2[1];
               if (uVar3 <= param_2) {
-                _memset(uVar3 * 4 + puVar8[2],0,(param_2 - uVar3) * 4 + 4);
-                puVar8[1] = param_2 + 1;
+                _memset(uVar3 * 4 + vector2[2],0,(param_2 - uVar3) * 4 + 4);
+                vector2[1] = param_2 + 1;
               }
-              puVar4 = (undefined4 *)(param_2 * 4 + puVar8[2]);
+              puVar4 = (undefined4 *)(param_2 * 4 + vector2[2]);
             }
             else {
-              puVar4 = (undefined4 *)Vector__elementRefGrow(puVar8,param_2);
+              puVar4 = (undefined4 *)Vector__elementRefGrow(vector2,param_2);
             }
             HashTable__insert(*puVar4,*param_4);
             return 0;
@@ -2406,7 +2414,7 @@ int FUN_00176a94(param_1, param_2, param_3)
   undefined4 local_58 [4];
   float local_48;
   float local_44;
-  float local_40;
+  float param_3_w;
   
   loopRemaining = 4;
   *param_1 = GH_U2F(0x7fff0000U);
@@ -2462,9 +2470,9 @@ int FUN_00176a94(param_1, param_2, param_3)
   piVar4 = *(int **)(*(int *)(param_2 + 0xb0) + 0x88);
   (**(code **)(*piVar4 + 8))
             (piVar4,param_1,local_78,local_68,local_58,*(undefined4 *)(param_2 + 0x238));
-  local_40 = *param_1;
-  if (local_40 != FLOAT_001aa1d0) {
-    FUN_0010aee8(&local_48,*(undefined4 *)(param_2 + 0xb0),local_40);
+  param_3_w = *param_1;
+  if (param_3_w != FLOAT_001aa1d0) {
+    FUN_0010aee8(&local_48,*(undefined4 *)(param_2 + 0xb0),param_3_w);
     *param_1 = local_48;
     FUN_0010b118(&local_44,*(undefined4 *)(param_2 + 0xb0),local_48);
     if (local_44 != *param_1) {
