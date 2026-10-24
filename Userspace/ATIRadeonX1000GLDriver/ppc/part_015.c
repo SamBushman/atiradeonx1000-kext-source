@@ -777,120 +777,120 @@ int atifsCreateShaderTable(ctx)
 }
 
 /* atifsPackArgument @ 0xa2660 (392 bytes) */
-int atifsPackArgument(param_1, param_2, param_3, param_4, param_5, param_6)
-  undefined4 param_1;
-  int param_2;
-  uint param_3;
-  uint param_4;
-  uint param_5;
-  uint *param_6;
+int atifsPackArgument(ctx, shader, argReg, argRep, argMods, packedArg)
+  undefined4 ctx;
+  int shader;
+  uint argReg;
+  uint argRep;
+  uint argMods;
+  uint *packedArg;
 {
-  uint uVar1;
-  uint uVar2;
+  uint modsCompFolded;
+  uint modsNormalized;
   
-  if (((((((5 < param_3 - 0x8921) && (7 < param_3 - 0x8941)) && (param_3 != 0)) &&
-        ((param_3 != 1 && (param_3 != 0x8577)))) && (param_3 != 0x896d)) ||
-      (((*param_6 = param_3, param_4 != 0 && (param_4 != 0x1903)) &&
-       ((param_4 != 0x1904 && ((param_4 != 0x1905 && (param_4 != 0x1906)))))))) ||
-     (param_6[3] = param_4, (param_5 & 0xfffffff0) != 0)) {
+  if (((((((5 < argReg - 0x8921) && (7 < argReg - 0x8941)) && (argReg != 0)) &&
+        ((argReg != 1 && (argReg != 0x8577)))) && (argReg != 0x896d)) ||
+      (((*packedArg = argReg, argRep != 0 && (argRep != 0x1903)) &&
+       ((argRep != 0x1904 && ((argRep != 0x1905 && (argRep != 0x1906)))))))) ||
+     (packedArg[3] = argRep, (argMods & 0xfffffff0) != 0)) {
     return 0;
   }
-  param_6[2] = param_5;
-  param_6[1] = 0;
-  if (param_3 < 2) {
-    param_6[3] = 0;
-    if (param_3 == 0) {
-      if ((param_5 & 2) != 0) {
-        param_5 = param_5 & 0xfffffffd;
-        param_3 = 1;
+  packedArg[2] = argMods;
+  packedArg[1] = 0;
+  if (argReg < 2) {
+    packedArg[3] = 0;
+    if (argReg == 0) {
+      if ((argMods & 2) != 0) {
+        argMods = argMods & 0xfffffffd;
+        argReg = 1;
       }
     }
-    else if ((param_3 == 1) && ((param_5 & 2) != 0)) {
-      param_5 = param_5 & 0xfffffffd;
-      param_3 = 0;
+    else if ((argReg == 1) && ((argMods & 2) != 0)) {
+      argMods = argMods & 0xfffffffd;
+      argReg = 0;
     }
-    uVar1 = param_5;
-    if ((((param_5 & 8) != 0) ||
-        ((uVar2 = param_5, param_3 == 0 &&
-         (uVar1 = param_5 & 0xfffffffa, uVar2 = uVar1, (param_5 & 8) != 0)))) &&
-       ((uVar2 = uVar1, (uVar1 & 1) != 0 && (uVar2 = uVar1 & 0xfffffff6, param_3 == 0)))) {
-      if ((uVar1 & 4) == 0) {
-        uVar2 = uVar2 | 4;
-        param_3 = 1;
+    modsCompFolded = argMods;
+    if ((((argMods & 8) != 0) ||
+        ((modsNormalized = argMods, argReg == 0 &&
+         (modsCompFolded = argMods & 0xfffffffa, modsNormalized = modsCompFolded, (argMods & 8) != 0)))) &&
+       ((modsNormalized = modsCompFolded, (modsCompFolded & 1) != 0 && (modsNormalized = modsCompFolded & 0xfffffff6, argReg == 0)))) {
+      if ((modsCompFolded & 4) == 0) {
+        modsNormalized = modsNormalized | 4;
+        argReg = 1;
       }
       else {
-        param_3 = 1;
-        uVar2 = uVar1 & 0xfffffff2;
+        argReg = 1;
+        modsNormalized = modsCompFolded & 0xfffffff2;
       }
     }
-    param_6[2] = uVar2;
-    *param_6 = param_3;
+    packedArg[2] = modsNormalized;
+    *packedArg = argReg;
   }
-  if (param_3 == 0x896d) {
-    *(undefined1 *)(param_2 + 0x6c) = 1;
+  if (argReg == 0x896d) {
+    *(undefined1 *)(shader + 0x6c) = 1;
     return 1;
   }
   return 1;
 }
 
 /* atifsCountPassOps @ 0xa27f0 (272 bytes) */
-int atifsCountPassOps(param_1, param_2, param_3, param_4)
-  int param_1;
-  int param_2;
-  int *param_3;
-  int *param_4;
+int atifsCountPassOps(passState, shader, colorOpsInLastPass, alphaOpsInLastPass)
+  int passState;
+  int shader;
+  int *colorOpsInLastPass;
+  int *alphaOpsInLastPass;
 {
-  bool bVar1;
-  bool bVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
+  bool colorOpsPending;
+  bool alphaOpsPending;
+  int colorOpsPlaced;
+  int colorOpsInPass;
+  int alphaOpsInPass;
+  int alphaOpsPlaced;
+  int opOrdinal;
   int loopIndex;
   int loopIndex2;
-  int iVar10;
+  int passByteOffset;
   int loopIndex3;
   
-  if (*(byte *)(param_1 + 4) == 0xffffffff) {
-    iVar3 = 0;
-    iVar6 = 0;
+  if (*(byte *)(passState + 4) == 0xffffffff) {
+    colorOpsPlaced = 0;
+    alphaOpsPlaced = 0;
   }
   else {
     loopIndex = 0;
     loopIndex2 = 0;
-    iVar7 = 0;
+    opOrdinal = 0;
     loopIndex3 = 0;
-    iVar10 = 0;
+    passByteOffset = 0;
     do {
-      iVar4 = *(int *)(iVar10 + *(int *)(param_2 + 0x14));
-      iVar5 = *(int *)(iVar10 + *(int *)(param_2 + 0x20));
-      iVar3 = 0;
-      iVar6 = 0;
-      bVar1 = 0 < iVar4;
-      bVar2 = 0 < iVar5;
-      while ((bVar1 || (bVar2))) {
-        if ((loopIndex < *(int *)(param_2 + 0x18)) &&
-           ((bVar1 && (iVar7 == *(int *)(loopIndex * 0x4c + *(int *)(param_2 + 0x10) + 0x44))))) {
-          iVar3 = iVar3 + 1;
+      colorOpsInPass = *(int *)(passByteOffset + *(int *)(shader + 0x14));
+      alphaOpsInPass = *(int *)(passByteOffset + *(int *)(shader + 0x20));
+      colorOpsPlaced = 0;
+      alphaOpsPlaced = 0;
+      colorOpsPending = 0 < colorOpsInPass;
+      alphaOpsPending = 0 < alphaOpsInPass;
+      while ((colorOpsPending || (alphaOpsPending))) {
+        if ((loopIndex < *(int *)(shader + 0x18)) &&
+           ((colorOpsPending && (opOrdinal == *(int *)(loopIndex * 0x4c + *(int *)(shader + 0x10) + 0x44))))) {
+          colorOpsPlaced = colorOpsPlaced + 1;
           loopIndex = loopIndex + 1;
-          iVar7 = iVar7 + 1;
-          bVar1 = iVar3 < iVar4;
+          opOrdinal = opOrdinal + 1;
+          colorOpsPending = colorOpsPlaced < colorOpsInPass;
         }
-        if (((loopIndex2 < *(int *)(param_2 + 0x24)) && (bVar2)) &&
-           (iVar7 == *(int *)(loopIndex2 * 0x4c + *(int *)(param_2 + 0x1c) + 0x44))) {
-          iVar6 = iVar6 + 1;
+        if (((loopIndex2 < *(int *)(shader + 0x24)) && (alphaOpsPending)) &&
+           (opOrdinal == *(int *)(loopIndex2 * 0x4c + *(int *)(shader + 0x1c) + 0x44))) {
+          alphaOpsPlaced = alphaOpsPlaced + 1;
           loopIndex2 = loopIndex2 + 1;
-          iVar7 = iVar7 + 1;
-          bVar2 = iVar6 < iVar5;
+          opOrdinal = opOrdinal + 1;
+          alphaOpsPending = alphaOpsPlaced < alphaOpsInPass;
         }
       }
       loopIndex3 = loopIndex3 + 1;
-      iVar10 = iVar10 + 4;
-    } while (loopIndex3 != *(byte *)(param_1 + 4) + 1);
+      passByteOffset = passByteOffset + 4;
+    } while (loopIndex3 != *(byte *)(passState + 4) + 1);
   }
-  *param_3 = iVar3;
-  *param_4 = iVar6;
+  *colorOpsInLastPass = colorOpsPlaced;
+  *alphaOpsInLastPass = alphaOpsPlaced;
   return;
 }
 
@@ -1096,162 +1096,165 @@ int atifsAddTextureOp(param_1, param_2, param_3, param_4, param_5, param_6, para
 }
 
 /* atifsAddColorOp @ 0xa2e90 (708 bytes) */
-int atifsAddColorOp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15, param_16)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
-  uint param_6;
-  uint param_7;
-  int param_8;
-  int param_9;
-  undefined4 param_10;
-  int param_11;
-  int param_12;
-  undefined4 param_13;
-  int param_14;
-  int param_15;
-  undefined4 param_16;
+int atifsAddColorOp(ctx, shader, passIndex, op, dst, dstMask, dstMod, arg1, arg1Rep, arg1Mod, arg2, arg2Rep, arg2Mod, arg3, arg3Rep, arg3Mod)
+  int ctx;
+  int shader;
+  int passIndex;
+  int op;
+  int dst;
+  uint dstMask;
+  uint dstMod;
+  int arg1;
+  int arg1Rep;
+  undefined4 arg1Mod;
+  int arg2;
+  int arg2Rep;
+  undefined4 arg2Mod;
+  int arg3;
+  int arg3Rep;
+  undefined4 arg3Mod;
 {
-  int iVar1;
-  int iVar2;
-  undefined1 *a5;
-  int local_98;
-  undefined1 auStack_94 [4];
-  int local_90;
-  int local_8c;
-  uint local_88;
-  uint local_84;
-  undefined4 local_80;
-  undefined1 auStack_7c [16];
-  undefined1 auStack_6c [16];
-  undefined1 auStack_5c [16];
-  int local_4c;
-  int local_48;
+  int deadCopyArg4;
+  int packOk;
+  int arg3PackOk;
+  undefined1 *recordArg3Alias;
+  int colorOpsInPass;
+  undefined1 alphaOpsInPassScratch [4];
+  int recordOp;
+  int recordDst;
+  uint recordDstMask;
+  uint recordDstMod;
+  undefined4 recordReserved;
+  undefined1 recordArg1 [16];
+  undefined1 recordArg2 [16];
+  undefined1 recordArg3 [16];
+  int recordOrdinal;
+  int recordPass;
   
-  ((int (*)())atifsCountPassOps)(((unsigned char *)0x00001134U) + param_1,param_2,&local_98,auStack_94);
-  if (((((param_3 < (int)(uint)(byte)((unsigned char *)0x00001150)[param_1]) &&
-        (local_98 < (int)(uint)*(ushort *)(((unsigned char *)0x0000114e) + param_1))) && (param_4 - 0x8961U < 0xc))
-      && (((1 << (param_4 - 0x8961U & 0x3f) & 0xffdU) != 0 &&
-          (local_90 = param_4,
-          iVar1 = ((int (*)())atifsPackArgument)(param_1,param_2,param_8,param_9,param_10,auStack_7c), iVar1 != 0))))
-     && (iVar1 = ((int (*)())atifsPackArgument)(param_1,param_2,param_11,param_12,param_13,auStack_6c), iVar1 != 0)) {
-    a5 = auStack_5c;
-    iVar1 = param_15;
-    iVar2 = ((int (*)())atifsPackArgument)(param_1,param_2,param_14,param_15,param_16,a5);
-    if ((((iVar2 != 0) && (param_5 - 0x8921U < 6)) &&
-        ((((7 < param_8 - 0x8941U ||
-           (((7 < param_11 - 0x8941U || (7 < param_14 - 0x8941U)) || (param_8 == param_11)))) ||
-          ((param_8 == param_14 || (param_11 == param_14)))) &&
-         (((param_7 & 0xffffffbf & (param_7 & 0xffffffbf) - 1) == 0 &&
-          ((((param_8 != 0x896d || (param_9 != 0x1906)) &&
-            ((param_11 != 0x896d || (param_12 != 0x1906)))) &&
-           ((param_14 != 0x896d || (param_15 != 0x1906)))))))))) &&
-       ((param_4 != 0x8967 ||
-        (((param_8 != 0x896d || ((param_9 != 0 && (param_9 != 0x1906)))) &&
-         ((param_11 != 0x896d || ((param_12 != 0 && (param_12 != 0x1906)))))))))) {
-      if (7 < param_6) {
+  ((int (*)())atifsCountPassOps)(((unsigned char *)0x00001134U) + ctx,shader,&colorOpsInPass,alphaOpsInPassScratch);
+  if (((((passIndex < (int)(uint)(byte)((unsigned char *)0x00001150)[ctx]) &&
+        (colorOpsInPass < (int)(uint)*(ushort *)(((unsigned char *)0x0000114e) + ctx))) && (op - 0x8961U < 0xc))
+      && (((1 << (op - 0x8961U & 0x3f) & 0xffdU) != 0 &&
+          (recordOp = op,
+          packOk = ((int (*)())atifsPackArgument)(ctx,shader,arg1,arg1Rep,arg1Mod,recordArg1), packOk != 0))))
+     && (packOk = ((int (*)())atifsPackArgument)(ctx,shader,arg2,arg2Rep,arg2Mod,recordArg2), packOk != 0)) {
+    recordArg3Alias = recordArg3;
+    deadCopyArg4 = arg3Rep;
+    arg3PackOk = ((int (*)())atifsPackArgument)(ctx,shader,arg3,arg3Rep,arg3Mod,recordArg3Alias);
+    if ((((arg3PackOk != 0) && (dst - 0x8921U < 6)) &&
+        ((((7 < arg1 - 0x8941U ||
+           (((7 < arg2 - 0x8941U || (7 < arg3 - 0x8941U)) || (arg1 == arg2)))) ||
+          ((arg1 == arg3 || (arg2 == arg3)))) &&
+         (((dstMod & 0xffffffbf & (dstMod & 0xffffffbf) - 1) == 0 &&
+          ((((arg1 != 0x896d || (arg1Rep != 0x1906)) &&
+            ((arg2 != 0x896d || (arg2Rep != 0x1906)))) &&
+           ((arg3 != 0x896d || (arg3Rep != 0x1906)))))))))) &&
+       ((op != 0x8967 ||
+        (((arg1 != 0x896d || ((arg1Rep != 0 && (arg1Rep != 0x1906)))) &&
+         ((arg2 != 0x896d || ((arg2Rep != 0 && (arg2Rep != 0x1906)))))))))) {
+      if (7 < dstMask) {
         return 0;
       }
-      local_4c = *(int *)(param_2 + 8);
-      *(int *)(param_2 + 8) = local_4c + 1;
-      local_80 = 0;
-      local_8c = param_5;
-      local_88 = param_6;
-      local_84 = param_7;
-      local_48 = param_3;
-      (**(code **)(((unsigned char *)0x00001344) + param_1))
-                (*(int *)(param_2 + 0x18) * 0x4c + *(int *)(param_2 + 0x10),&local_90,0x4c,iVar1,
-                 param_16,a5,*(int *)(param_2 + 0x10));
-      *(int *)(param_3 * 4 + *(int *)(param_2 + 0x14)) =
-           *(int *)(param_3 * 4 + *(int *)(param_2 + 0x14)) + 1;
-      *(int *)(param_2 + 0x18) = *(int *)(param_2 + 0x18) + 1;
+      recordOrdinal = *(int *)(shader + 8);
+      *(int *)(shader + 8) = recordOrdinal + 1;
+      recordReserved = 0;
+      recordDst = dst;
+      recordDstMask = dstMask;
+      recordDstMod = dstMod;
+      recordPass = passIndex;
+      (**(code **)(((unsigned char *)0x00001344) + ctx))
+                (*(int *)(shader + 0x18) * 0x4c + *(int *)(shader + 0x10),&recordOp,0x4c,deadCopyArg4,
+                 arg3Mod,recordArg3Alias,*(int *)(shader + 0x10));
+      *(int *)(passIndex * 4 + *(int *)(shader + 0x14)) =
+           *(int *)(passIndex * 4 + *(int *)(shader + 0x14)) + 1;
+      *(int *)(shader + 0x18) = *(int *)(shader + 0x18) + 1;
       return 1;
     }
   }
-  ((int (*)())atifsSetShaderValid)(param_2,0);
+  ((int (*)())atifsSetShaderValid)(shader,0);
   return 0;
 }
 
 /* atifsAddAlphaOp @ 0xa3160 (804 bytes) */
-int atifsAddAlphaOp(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9, param_10, param_11, param_12, param_13, param_14, param_15)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
-  uint param_6;
-  int param_7;
-  int param_8;
-  undefined4 param_9;
-  int param_10;
-  int param_11;
-  undefined4 param_12;
-  int param_13;
-  int param_14;
-  undefined4 param_15;
+int atifsAddAlphaOp(ctx, shader, passIndex, op, dst, dstMod, arg1, arg1Rep, arg1Mod, arg2, arg2Rep, arg2Mod, arg3, arg3Rep, arg3Mod)
+  int ctx;
+  int shader;
+  int passIndex;
+  int op;
+  int dst;
+  uint dstMod;
+  int arg1;
+  int arg1Rep;
+  undefined4 arg1Mod;
+  int arg2;
+  int arg2Rep;
+  undefined4 arg2Mod;
+  int arg3;
+  int arg3Rep;
+  undefined4 arg3Mod;
 {
-  int iVar1;
-  int iVar2;
-  undefined1 *a5;
-  undefined1 auStack_98 [4];
-  int local_94;
-  int local_90;
-  int local_8c;
-  undefined4 local_88;
-  uint local_84;
-  undefined4 local_80;
-  undefined1 auStack_7c [16];
-  undefined1 auStack_6c [16];
-  undefined1 auStack_5c [16];
-  int local_4c;
-  int local_48;
+  int prevColorOpRecord;
+  int deadCopyArg4;
+  int packOk;
+  int arg3PackOk;
+  undefined1 *recordArg3Alias;
+  undefined1 colorOpsInPassScratch [4];
+  int alphaOpsInPass;
+  int recordOp;
+  int recordDst;
+  undefined4 recordDstMask;
+  uint recordDstMod;
+  undefined4 recordReserved;
+  undefined1 recordArg1 [16];
+  undefined1 recordArg2 [16];
+  undefined1 recordArg3 [16];
+  int recordOrdinal;
+  int recordPass;
   
-  ((int (*)())atifsCountPassOps)(((unsigned char *)0x00001134U) + param_1,param_2,auStack_98,&local_94);
-  if (((((param_3 < (int)(uint)(byte)((unsigned char *)0x00001150)[param_1]) &&
-        (local_94 < (int)(uint)*(ushort *)(((unsigned char *)0x0000114e) + param_1))) && (param_4 - 0x8961U < 0xc))
-      && (((1 << (param_4 - 0x8961U & 0x3f) & 0xffdU) != 0 &&
-          (local_90 = param_4,
-          iVar1 = ((int (*)())atifsPackArgument)(param_1,param_2,param_7,param_8,param_9,auStack_7c), iVar1 != 0))))
-     && (iVar1 = ((int (*)())atifsPackArgument)(param_1,param_2,param_10,param_11,param_12,auStack_6c), iVar1 != 0)) {
-    a5 = auStack_5c;
-    iVar1 = param_14;
-    iVar2 = ((int (*)())atifsPackArgument)(param_1,param_2,param_13,param_14,param_15,a5);
-    if (((((((iVar2 != 0) && (param_5 - 0x8921U < 6)) &&
-           ((((7 < param_7 - 0x8941U ||
-              (((7 < param_10 - 0x8941U || (7 < param_13 - 0x8941U)) || (param_7 == param_10)))) ||
-             ((param_7 == param_13 || (param_10 == param_13)))) &&
-            ((param_6 & 0xffffffbf & (param_6 & 0xffffffbf) - 1) == 0)))) &&
-          (((1 < param_4 - 0x8966U && (param_4 != 0x896c)) ||
-           ((0 < *(int *)(param_2 + 0x18) &&
-            (((iVar2 = *(int *)(param_2 + 0x18) * 0x4c + *(int *)(param_2 + 0x10),
-              *(int *)(iVar2 + -8) == *(int *)(param_2 + 8) + -1 &&
-              (param_3 == *(int *)(iVar2 + -4))) && (param_4 == *(int *)(iVar2 + -0x4c))))))))) &&
-         (((param_4 == 0x8967 || (*(int *)(param_2 + 0x18) < 2)) ||
-          ((iVar2 = *(int *)(param_2 + 0x18) * 0x4c + *(int *)(param_2 + 0x10),
-           *(int *)(iVar2 + -8) != *(int *)(param_2 + 8) + -1 ||
-           ((param_3 != *(int *)(iVar2 + -4) || (*(int *)(iVar2 + -0x4c) != 0x8967)))))))) &&
-        (((param_7 != 0x896d || ((param_8 != 0 && (param_8 != 0x1906)))) &&
-         ((param_10 != 0x896d || ((param_11 != 0 && (param_11 != 0x1906)))))))) &&
-       ((param_13 != 0x896d || ((param_14 != 0 && (param_14 != 0x1906)))))) {
-      local_4c = *(int *)(param_2 + 8);
-      *(int *)(param_2 + 8) = local_4c + 1;
-      local_80 = 0;
-      local_88 = 0;
-      local_8c = param_5;
-      local_84 = param_6;
-      local_48 = param_3;
-      (**(code **)(((unsigned char *)0x00001344) + param_1))
-                (*(int *)(param_2 + 0x24) * 0x4c + *(int *)(param_2 + 0x1c),&local_90,0x4c,iVar1,
-                 param_15,a5,*(int *)(param_2 + 0x1c));
-      *(int *)(param_3 * 4 + *(int *)(param_2 + 0x20)) =
-           *(int *)(param_3 * 4 + *(int *)(param_2 + 0x20)) + 1;
-      *(int *)(param_2 + 0x24) = *(int *)(param_2 + 0x24) + 1;
+  ((int (*)())atifsCountPassOps)(((unsigned char *)0x00001134U) + ctx,shader,colorOpsInPassScratch,&alphaOpsInPass);
+  if (((((passIndex < (int)(uint)(byte)((unsigned char *)0x00001150)[ctx]) &&
+        (alphaOpsInPass < (int)(uint)*(ushort *)(((unsigned char *)0x0000114e) + ctx))) && (op - 0x8961U < 0xc))
+      && (((1 << (op - 0x8961U & 0x3f) & 0xffdU) != 0 &&
+          (recordOp = op,
+          packOk = ((int (*)())atifsPackArgument)(ctx,shader,arg1,arg1Rep,arg1Mod,recordArg1), packOk != 0))))
+     && (packOk = ((int (*)())atifsPackArgument)(ctx,shader,arg2,arg2Rep,arg2Mod,recordArg2), packOk != 0)) {
+    recordArg3Alias = recordArg3;
+    deadCopyArg4 = arg3Rep;
+    arg3PackOk = ((int (*)())atifsPackArgument)(ctx,shader,arg3,arg3Rep,arg3Mod,recordArg3Alias);
+    if (((((((arg3PackOk != 0) && (dst - 0x8921U < 6)) &&
+           ((((7 < arg1 - 0x8941U ||
+              (((7 < arg2 - 0x8941U || (7 < arg3 - 0x8941U)) || (arg1 == arg2)))) ||
+             ((arg1 == arg3 || (arg2 == arg3)))) &&
+            ((dstMod & 0xffffffbf & (dstMod & 0xffffffbf) - 1) == 0)))) &&
+          (((1 < op - 0x8966U && (op != 0x896c)) ||
+           ((0 < *(int *)(shader + 0x18) &&
+            (((prevColorOpRecord = *(int *)(shader + 0x18) * 0x4c + *(int *)(shader + 0x10),
+              *(int *)(prevColorOpRecord + -8) == *(int *)(shader + 8) + -1 &&
+              (passIndex == *(int *)(prevColorOpRecord + -4))) && (op == *(int *)(prevColorOpRecord + -0x4c))))))))) &&
+         (((op == 0x8967 || (*(int *)(shader + 0x18) < 2)) ||
+          ((prevColorOpRecord = *(int *)(shader + 0x18) * 0x4c + *(int *)(shader + 0x10),
+           *(int *)(prevColorOpRecord + -8) != *(int *)(shader + 8) + -1 ||
+           ((passIndex != *(int *)(prevColorOpRecord + -4) || (*(int *)(prevColorOpRecord + -0x4c) != 0x8967)))))))) &&
+        (((arg1 != 0x896d || ((arg1Rep != 0 && (arg1Rep != 0x1906)))) &&
+         ((arg2 != 0x896d || ((arg2Rep != 0 && (arg2Rep != 0x1906)))))))) &&
+       ((arg3 != 0x896d || ((arg3Rep != 0 && (arg3Rep != 0x1906)))))) {
+      recordOrdinal = *(int *)(shader + 8);
+      *(int *)(shader + 8) = recordOrdinal + 1;
+      recordReserved = 0;
+      recordDstMask = 0;
+      recordDst = dst;
+      recordDstMod = dstMod;
+      recordPass = passIndex;
+      (**(code **)(((unsigned char *)0x00001344) + ctx))
+                (*(int *)(shader + 0x24) * 0x4c + *(int *)(shader + 0x1c),&recordOp,0x4c,deadCopyArg4,
+                 arg3Mod,recordArg3Alias,*(int *)(shader + 0x1c));
+      *(int *)(passIndex * 4 + *(int *)(shader + 0x20)) =
+           *(int *)(passIndex * 4 + *(int *)(shader + 0x20)) + 1;
+      *(int *)(shader + 0x24) = *(int *)(shader + 0x24) + 1;
       return 1;
     }
   }
-  ((int (*)())atifsSetShaderValid)(param_2,0);
+  ((int (*)())atifsSetShaderValid)(shader,0);
   return 0;
 }
 

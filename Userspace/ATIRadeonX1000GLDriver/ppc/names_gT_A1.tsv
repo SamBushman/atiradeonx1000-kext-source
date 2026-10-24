@@ -1,0 +1,87 @@
+local	atifsPackArgument	param_1	ctx	INFERRED	GL engine context, first argument of every atifs* helper; unused here
+local	atifsPackArgument	param_2	shader	CONFIRMED	+0x6c byte (usesColorInterpolator) is set when the register is GL_SECONDARY_INTERPOLATOR_ATI (0x896d)
+local	atifsPackArgument	param_3	argReg	CONFIRMED	compared with GL_REG_n (0x8921), GL_CON_n (0x8941), GL_ZERO/GL_ONE, GL_PRIMARY_COLOR (0x8577), 0x896d; stored in packed[0]
+local	atifsPackArgument	param_4	argRep	CONFIRMED	0 or GL_RED/GREEN/BLUE/ALPHA (0x1903..0x1906) replicate selector; stored in packed[3]
+local	atifsPackArgument	param_5	argMods	CONFIRMED	modifier bits 1=2X 2=COMP 4=NEGATE 8=BIAS (value & 0xfffffff0 must be 0); stored in packed[2]
+local	atifsPackArgument	param_6	packedArg	INFERRED	16-byte output record {reg, 0, mods, rep}, the op record's argument slot
+local	atifsPackArgument	uVar1	modsCompFolded	INFERRED	modifier bits after the COMP bit was folded into a ZERO<->ONE swap
+local	atifsPackArgument	uVar2	modsNormalized	INFERRED	final modifier bits after the BIAS/NEGATE normalisation for ZERO/ONE arguments
+local	atifsCountPassOps	param_1	passState	INFERRED	pointer to ctx+0x1134; +4 byte is currentPass (0xffffffff = none yet)
+local	atifsCountPassOps	param_2	shader	CONFIRMED	+0x10/+0x14/+0x18 colour ops, +0x1c/+0x20/+0x24 alpha ops (0x4c records, ordinal at +0x44)
+local	atifsCountPassOps	param_3	colorOpsInLastPass	INFERRED	out: colour ops already recorded for the last pass (compared with ctx+0x114c limit by the callers)
+local	atifsCountPassOps	param_4	alphaOpsInLastPass	INFERRED	out: alpha ops already recorded for the last pass
+local	atifsCountPassOps	bVar1	colorOpsPending	INFERRED	more colour ops of this pass expected (placed < perPass count)
+local	atifsCountPassOps	bVar2	alphaOpsPending	INFERRED	more alpha ops of this pass expected
+local	atifsCountPassOps	iVar3	colorOpsPlaced	INFERRED	colour ops of the current pass matched so far; returned through param_3
+local	atifsCountPassOps	iVar6	alphaOpsPlaced	INFERRED	alpha ops of the current pass matched so far; returned through param_4
+local	atifsCountPassOps	iVar4	colorOpsInPass	INFERRED	shader+0x14[pass]: colour ops belonging to the pass
+local	atifsCountPassOps	iVar5	alphaOpsInPass	INFERRED	shader+0x20[pass]: alpha ops belonging to the pass
+local	atifsCountPassOps	iVar7	opOrdinal	INFERRED	running op ordinal compared with each record's +0x44 ordinal
+local	atifsCountPassOps	iVar10	passByteOffset	INFERRED	pass index * 4, indexes the per-pass count arrays
+local	atifsAddColorOp	param_1	ctx	INFERRED	GL engine context
+local	atifsAddColorOp	param_2	shader	CONFIRMED	shader record being defined (+8 ordinal counter, +0x10..+0x18 colour ops)
+local	atifsAddColorOp	param_3	passIndex	CONFIRMED	compared with ctx+0x1150 (max passes); stored at op record +0x48
+local	atifsAddColorOp	param_4	op	CONFIRMED	GL_*_ATI op 0x8961..0x896c (mask 0xffd)
+local	atifsAddColorOp	param_5	dst	CONFIRMED	GL_REG_0..5_ATI (0x8921 + n)
+local	atifsAddColorOp	param_6	dstMask	CONFIRMED	colour write mask, rejected when > 7
+local	atifsAddColorOp	param_7	dstMod	CONFIRMED	destination modifier bits; at most one bit once 0x40 is masked
+local	atifsAddColorOp	param_8	arg1	CONFIRMED	first argument register, packed by atifsPackArgument
+local	atifsAddColorOp	param_9	arg1Rep	CONFIRMED	first argument replicate
+local	atifsAddColorOp	param_10	arg1Mod	CONFIRMED	first argument modifier bits
+local	atifsAddColorOp	param_11	arg2	CONFIRMED	second argument register
+local	atifsAddColorOp	param_12	arg2Rep	CONFIRMED	second argument replicate
+local	atifsAddColorOp	param_13	arg2Mod	CONFIRMED	second argument modifier bits
+local	atifsAddColorOp	param_14	arg3	CONFIRMED	third argument register
+local	atifsAddColorOp	param_15	arg3Rep	CONFIRMED	third argument replicate
+local	atifsAddColorOp	param_16	arg3Mod	CONFIRMED	third argument modifier bits
+use	atifsAddColorOp	iVar1	packOk	INFERRED	result of atifsPackArgument (arguments 1 and 2)	^\s*if\ \(\(\(\(\(param_3\ <\ \(int\)\(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00001150\)\[param_1\]\)\ \&\&$	+6
+use	atifsAddColorOp	iVar1	deadCopyArg4	INFERRED	copy of arg3Rep forwarded as an unused 4th argument of the memcpy callback	^\s*iVar1\ =\ param_15;$	+1
+use	atifsAddColorOp	iVar1	deadCopyArg4	INFERRED	copy of arg3Rep forwarded as an unused 4th argument of the memcpy callback	^\s*\(\*\(int\ \*\)\(param_2\ \+\ 0x18\)\ \*\ 0x4c\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x10\),\&local_90,0x4c,iVar1,$	+2
+local	atifsAddColorOp	iVar2	arg3PackOk	INFERRED	result of atifsPackArgument for argument 3
+local	atifsAddColorOp	a5	recordArg3Alias	INFERRED	= &recordArg3, forwarded as an unused register argument of the memcpy callback
+local	atifsAddColorOp	local_98	colorOpsInPass	INFERRED	out of atifsCountPassOps, compared with the ctx+0x114c colour op limit
+local	atifsAddColorOp	auStack_94	alphaOpsInPassScratch	INFERRED	atifsCountPassOps second output, unused here
+local	atifsAddColorOp	local_90	recordOp	CONFIRMED	first word (op) of the 0x4c-byte op record built on the stack
+local	atifsAddColorOp	local_8c	recordDst	CONFIRMED	op record +4: dst register
+local	atifsAddColorOp	local_88	recordDstMask	CONFIRMED	op record +8: dst mask
+local	atifsAddColorOp	local_84	recordDstMod	CONFIRMED	op record +0xc: dst modifier
+local	atifsAddColorOp	local_80	recordReserved	INFERRED	op record +0x10, always 0
+local	atifsAddColorOp	auStack_7c	recordArg1	CONFIRMED	op record +0x14: packed argument 1
+local	atifsAddColorOp	auStack_6c	recordArg2	CONFIRMED	op record +0x24: packed argument 2
+local	atifsAddColorOp	auStack_5c	recordArg3	CONFIRMED	op record +0x34: packed argument 3
+local	atifsAddColorOp	local_4c	recordOrdinal	CONFIRMED	op record +0x44: shader+8 before the increment
+local	atifsAddColorOp	local_48	recordPass	CONFIRMED	op record +0x48: pass index
+local	atifsAddAlphaOp	param_1	ctx	INFERRED	GL engine context
+local	atifsAddAlphaOp	param_2	shader	CONFIRMED	shader record being defined (+8 ordinal counter, +0x1c..+0x24 alpha ops)
+local	atifsAddAlphaOp	param_3	passIndex	CONFIRMED	compared with ctx+0x1150 (max passes); stored at op record +0x48
+local	atifsAddAlphaOp	param_4	op	CONFIRMED	GL_*_ATI op 0x8961..0x896c (mask 0xffd)
+local	atifsAddAlphaOp	param_5	dst	CONFIRMED	GL_REG_0..5_ATI (0x8921 + n)
+local	atifsAddAlphaOp	param_6	dstMod	CONFIRMED	destination modifier bits; at most one bit once 0x40 is masked
+local	atifsAddAlphaOp	param_7	arg1	CONFIRMED	first argument register
+local	atifsAddAlphaOp	param_8	arg1Rep	CONFIRMED	first argument replicate
+local	atifsAddAlphaOp	param_9	arg1Mod	CONFIRMED	first argument modifier bits
+local	atifsAddAlphaOp	param_10	arg2	CONFIRMED	second argument register
+local	atifsAddAlphaOp	param_11	arg2Rep	CONFIRMED	second argument replicate
+local	atifsAddAlphaOp	param_12	arg2Mod	CONFIRMED	second argument modifier bits
+local	atifsAddAlphaOp	param_13	arg3	CONFIRMED	third argument register
+local	atifsAddAlphaOp	param_14	arg3Rep	CONFIRMED	third argument replicate
+local	atifsAddAlphaOp	param_15	arg3Mod	CONFIRMED	third argument modifier bits
+use	atifsAddAlphaOp	iVar1	packOk	INFERRED	result of atifsPackArgument (arguments 1 and 2)	^\s*if\ \(\(\(\(\(param_3\ <\ \(int\)\(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00001150\)\[param_1\]\)\ \&\&$	+6
+use	atifsAddAlphaOp	iVar1	deadCopyArg4	INFERRED	copy of arg3Rep forwarded as an unused 4th argument of the memcpy callback	^\s*iVar1\ =\ param_14;$	+1
+use	atifsAddAlphaOp	iVar1	deadCopyArg4	INFERRED	copy of arg3Rep forwarded as an unused 4th argument of the memcpy callback	^\s*\(\*\(int\ \*\)\(param_2\ \+\ 0x24\)\ \*\ 0x4c\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x1c\),\&local_90,0x4c,iVar1,$	+2
+local	atifsAddAlphaOp	a5	recordArg3Alias	INFERRED	= &recordArg3, forwarded as an unused register argument of the memcpy callback
+local	atifsAddAlphaOp	auStack_98	colorOpsInPassScratch	INFERRED	atifsCountPassOps first output, unused here
+local	atifsAddAlphaOp	local_94	alphaOpsInPass	INFERRED	out of atifsCountPassOps, compared with the ctx+0x114e alpha op limit
+local	atifsAddAlphaOp	local_90	recordOp	CONFIRMED	first word (op) of the 0x4c-byte op record built on the stack
+local	atifsAddAlphaOp	local_8c	recordDst	CONFIRMED	op record +4: dst register
+local	atifsAddAlphaOp	local_88	recordDstMask	CONFIRMED	op record +8: dst mask (always 0 for alpha ops)
+local	atifsAddAlphaOp	local_84	recordDstMod	CONFIRMED	op record +0xc: dst modifier
+local	atifsAddAlphaOp	local_80	recordReserved	INFERRED	op record +0x10, always 0
+local	atifsAddAlphaOp	auStack_7c	recordArg1	CONFIRMED	op record +0x14: packed argument 1
+local	atifsAddAlphaOp	auStack_6c	recordArg2	CONFIRMED	op record +0x24: packed argument 2
+local	atifsAddAlphaOp	auStack_5c	recordArg3	CONFIRMED	op record +0x34: packed argument 3
+local	atifsAddAlphaOp	local_4c	recordOrdinal	CONFIRMED	op record +0x44: shader+8 before the increment
+local	atifsAddAlphaOp	local_48	recordPass	CONFIRMED	op record +0x48: pass index
+use	atifsAddAlphaOp	iVar2	arg3PackOk	INFERRED	result of atifsPackArgument for argument 3, tested on the next line	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_000a2660\)\(param_1,param_2,param_13,param_14,param_15,a5\);$	+2
+use	atifsAddAlphaOp	iVar2	prevColorOpRecord	INFERRED	end of the COLOUR op array (shader+0x18 count * 0x4c + shader+0x10): the alpha op requires the previous colour record (-8 ordinal == shader+8 - 1, -4 pass, -0x4c op) to belong to the same pass and op	^\s*\(\(\(iVar2\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x18\)\ \*\ 0x4c\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x10\),$	+3
+use	atifsAddAlphaOp	iVar2	prevColorOpRecord	INFERRED	end of the COLOUR op array (shader+0x18 count * 0x4c + shader+0x10): the alpha op requires the previous colour record (-8 ordinal == shader+8 - 1, -4 pass, -0x4c op) to belong to the same pass and op	^\s*\(\(iVar2\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x18\)\ \*\ 0x4c\ \+\ \*\(int\ \*\)\(param_2\ \+\ 0x10\),$	+3
