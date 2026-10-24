@@ -49,7 +49,31 @@ What remains joined in yyparse (MEASURED in lpN7-lpN10, replacing the earlier ar
   the word (the stack `TType` temporary and the `TPublicType` copy that the value-stack copy-down reads).
 * NOT reproduced: wt-lp1's `UNINIT yyparse 61 -> 63` on the string-pair slots. Its split used `local_850`/`local_840`, which are address-taken (the tool refuses those), and its
   rows were not kept. Splitting the small webs of `local_84c`/`local_83c` (the interior half of that pair) did NOT raise any UNINIT (lpN7 problems: 0). The claim is therefore unverified and removed from the argument.
-* Open work: give the ~100 splittable small webs role names from per-case evidence, then re-gate; the rows are on branch `lp14-test-splits` (commits after 1b2f819).
+* Open work replaced by the round below.
+
+### Per-web naming round (gates lpN11, lpN12, both SPLIT-EQUIVALENT vs 1b2f819)
+Of the 84 small webs still carrying a joined name, 17 now have role names (rows in `names_lpN_2.tsv`):
+* 9 zero-stores that belong to an inlined `TType::TType` run: the TType vtable store (`&PTR___ZN5TTypeD1Ev_a7b7d640`) a few lines earlier names the base slot, the member is
+  `base - slot` by the TType layout of notes_ttype_layout.md. Names `typeAt840ArraySize` (`local_83c`, webs 3, 5), `typeAt850Word18` (`local_838`, webs 10, 12, 15),
+  `typeAt840Structure` (`local_838`, webs 16, 19), `typeAt840Word14` (`local_82c`, webs 3, 4). Gate lpN11.
+* 8 stores `local_838 = yyvalTypeLine` in the type_specifier rules (cases 0x27, 0x7b, 0x83, 0x84, 0x93, 0x9d, 0x9e, 0x9f): `pubCopy850Line`. Gate lpN12.
+
+**Flaw found in the area table (fixed for the webs above):** the frame-area table (names_lpA_yy.tsv) places TType temporary #1 at 0x850 only. The inlined TType constructors in cases
+0x69 and 0x73 store the vtable into `local_840` and zero `local_83c`, `local_838`, `local_82c`: that temporary is based at 0x840, so its members sit 0x10 words
+earlier than the 0x850-relative names say (`local_83c` is arraySize there, not word +0x14). The remaining joined names inherit the 0x850-relative attribution and are wrong for those cases.
+
+The other 67 small webs keep the joined name of their slot: about 30 are in case 0xbb (mixed TType / TPublicType construction with `isVector2`, `isMatrix2`, `typeTmp1ArraySizeCopy2` operands
+whose destination object is not recoverable from the statements), the rest store values (`scratchR6`, `symbol`, `resultNode`, `typeSpecifierSize`...) into words whose object cannot be told from
+the code around them (a TPublicType copy and a TType temporary are the same bytes; TType(TPublicType) is an inlined word copy).
+
+### Slot-level single names: not assigned, measured reason
+Every one of the address-taken bases is used in BOTH roles by direct address evidence, so no one-sided dominant name exists:
+`&local_850`: `VCALL+0x38` getType() target (cases 0xbb x4, 0x4f, 0xd7) and `TType__getCompleteString` / string constructor (cases 0xe, 0x69, 0x73, 0x9e, 0x9f, 0xd6, 0xd7);
+`&local_840`: string constructor / getCompleteString (cases 0x31-0x4d, 0x9e, 0x9f) and `TType__setStructSize` plus the TType vtable store (cases 0x69, 0x73);
+`&local_7b0`: getType() target and string constructor in case 0xbb. For the interior words, a use-line count by case mode classified 108 of 163 `local_850` uses,
+105 of 168 `local_84c` uses and 75 of 104 `local_83c` uses as lying in code that does not take the base's address at all (the default copy-down and common tails), so
+dominance by use count is not measurable. The accurate single description is the union already in the name; replacing it by one half would assert a role that the code contradicts in
+the other half of the cases.
 
 | name | Ghidra var | find_webs |
 |---|---|---|
