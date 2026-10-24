@@ -1961,7 +1961,7 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   void *stringMem2;
   unsigned char *typeListMem;
   unsigned char *intermediate;
-  undefined4 uVar16;
+  undefined4 staleR4Pass;
   unsigned char * poolAllocator;
   undefined4 *elementPtr;
   undefined4 *treeNodeMem;
@@ -2649,17 +2649,17 @@ LAB_97ba41e8:
           shiftedTypeBits = typeTmp4BitsOrStr3Data << 0xd;
           basicTypeBits3 = typeTmp4BitsOrStr3Data >> 0x13;
           queryResult = (**(code **)(**(int **)(yyvsp + -0x24) + 0x18))(*(int **)(yyvsp + -0x24));
-          uVar16 = r4Out4;
+          staleR4Pass = r4Out4;
           if (((int)(shiftedTypeBits | basicTypeBits3) >> 0x18 <= **(int **)(queryResult + 0x30)) &&
              (queryResult = (**(code **)(**(int **)(yyvsp + -0x7c) + 0x54))(*(int **)(yyvsp + -0x7c))
-             , uVar16 = r4Out5, queryResult == 0)) {
+             , staleR4Pass = r4Out5, queryResult == 0)) {
             foundMatch = true;
           }
           typeTmp3TypeNameOrTypeTmp4Vtable = picBase2 + -0x610c;
           staleR8Value = picBase2;
           if (foundMatch) {
             constantUnionNode = (**(code **)(**(int **)(yyvsp + -0x24) + 0x18))
-                               (*(int **)(yyvsp + -0x24),uVar16,scratchR5,scratchR6,scratchR7,picBase2);
+                               (*(int **)(yyvsp + -0x24),staleR4Pass,scratchR5,scratchR6,scratchR7,picBase2);
             staleR8Value = (unsigned char *)**(uint **)(constantUnionNode + 0x30);
             scratchR5 = "";
             scratchR6 = "[";
