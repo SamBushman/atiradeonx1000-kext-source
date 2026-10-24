@@ -1,0 +1,180 @@
+use	FUN_001474c8	iVar3	operandCount	INFERRED	web passed only as callee parameter operandCount (2 uses, unanimous)	^\s*iVar3\ =\ param_2\[0x21\];$	+2
+use	FUN_001474c8	iVar3	operandCount	INFERRED	web passed only as callee parameter operandCount (2 uses, unanimous)	^\s*if\ \(0\ <\ iVar3\)\ \{$	+1
+use	FUN_001474c8	iVar3	operandCount	INFERRED	web passed only as callee parameter operandCount (2 uses, unanimous)	^\s*iVar3\ =\ param_2\[0x21\];$@2	+2
+use	FUN_001474c8	iVar3	operandCount	INFERRED	web passed only as callee parameter operandCount (2 uses, unanimous)	^\s*if\ \(0\ <\ iVar3\)\ \{$@2	+1
+use	FUN_001474c8	iVar3	operandCount	INFERRED	web passed only as callee parameter operandCount (2 uses, unanimous)	^\s*if\ \(iVar3\ <\ iVar4\)\ goto\ LAB_001475b8;$	+1
+use	FUN_001474c8	iVar7	operandCount2	INFERRED	web passed only as callee parameter operandCount (2 uses, unanimous)	^\s*iVar7\ =\ param_2\[0x21\];$	+1
+use	FUN_001474c8	iVar7	operandCount2	INFERRED	web passed only as callee parameter operandCount (2 uses, unanimous)	^\s*if\ \(0\ <\ iVar7\)\ \{$	+1
+use	FUN_001474c8	iVar7	operandCount2	INFERRED	web passed only as callee parameter operandCount (2 uses, unanimous)	^\s*iVar7\ =\ param_2\[0x21\];$@2	+1
+use	FUN_001474c8	iVar7	operandCount2	INFERRED	web passed only as callee parameter operandCount (2 uses, unanimous)	^\s*\}\ while\ \(iVar3\ <=\ iVar7\);$	+1
+use	FUN_001479f8	iVar3	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x124\);$	+1
+use	FUN_001479f8	iVar3	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x124\)\ =\ iVar8\ \+\ iVar3;$	+1
+use	FUN_001479f8	iVar7	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x120\);$	+1
+use	FUN_001479f8	iVar7	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*if\ \(\(\(iVar7\ !=\ 0\)\ \&\&\ \(\(\*\(uint\ \*\)\(param_1\ \+\ 0xb8\)\ \&\ 1\)\ ==\ 0\)\)\ \&\&$	+2
+use	FUN_001479f8	iVar8	resultScaleCode2	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*iVar8\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x124\);$	+1
+use	FUN_001479f8	iVar8	resultScaleCode2	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0xfc\)\)\(piVar5,iVar8\ \+\ piVar4\[0x49\],piVar4\);$	+1
+use	FUN_001479f8	iVar8	resultScaleCode2	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*if\ \(\(\(iVar8\ ==\ 0\)\ \|\|\ \(\(bVar1\ \&\&\ \(bVar2\)\)\)\)\ \&\&\ \(iVar6\ =\ FUN_00105594\(param_1,1\),\ iVar6\ !=\ 0\)\)\ \{$	+1
+use	FUN_001479f8	iVar8	resultScaleCode2	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*if\ \(iVar8\ !=\ 0\)\ \{$	+1
+use	FUN_001479f8	iVar8	resultScaleCode2	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x124\)\ =\ iVar8\ \+\ iVar3;$	+1
+use	FUN_00147f54	iVar11	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*iVar11\ =\ param_1\[0x26\];$	+1
+use	FUN_00147f54	iVar11	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*param_1\[0x26\]\ =\ iVar11;$	+1
+use	FUN_00147f54	iVar13	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*iVar13\ =\ param_1\[0x25\];$	+1
+use	FUN_00147f54	iVar13	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*param_1\[0x25\]\ =\ iVar13;$	+1
+use	FUN_00147f54	iVar17	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*iVar17\ =\ param_1\[0x49\];$	+1
+use	FUN_00147f54	iVar17	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*local_a8\[0\]\ =\ iVar17\ \+\ local_a8\[0\];$	+1
+use	FUN_00147f54	iVar17	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*local_a8\[0\]\ =\ iVar17\ \+\ 1;$	+1
+use	FUN_00147f54	iVar17	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*local_a8\[0\]\ =\ iVar17\ \+\ 1;$@2	+1
+use	FUN_00147f54	iVar17	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*local_a8\[0\]\ =\ iVar17\ \+\ 1;$@3	+1
+use	FUN_00147f54	iVar7	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*iVar7\ =\ param_1\[0x48\];$	+1
+use	FUN_00147f54	iVar7	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*param_1\[0x48\]\ =\ iVar7;$	+1
+use	FUN_0014846c	iVar3	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*iVar3\ =\ param_1\[0x25\];$	+1
+use	FUN_0014846c	iVar3	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*if\ \(\(\(param_1\ !=\ piVar12\)\ \&\&\ \(iVar8\ ==\ piVar12\[0x26\]\)\)\ \&\&\ \(iVar3\ ==\ piVar12\[0x25\]\)\)\ \{$	+1
+use	FUN_0014846c	iVar8	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*iVar8\ =\ param_1\[0x26\];$	+1
+use	FUN_0014846c	iVar8	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*if\ \(\(\(param_1\ !=\ piVar12\)\ \&\&\ \(iVar8\ ==\ piVar12\[0x26\]\)\)\ \&\&\ \(iVar3\ ==\ piVar12\[0x25\]\)\)\ \{$	+1
+use	FUN_001486e8	iVar10	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*iVar10\ =\ param_1\[0x26\];$	+1
+use	FUN_001486e8	iVar10	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*if\ \(\(\(param_1\ !=\ piVar13\)\ \&\&\ \(iVar10\ ==\ piVar13\[0x26\]\)\)\ \&\&$	+3
+use	FUN_001486e8	iVar3	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*iVar3\ =\ param_1\[0x25\];$	+1
+use	FUN_001486e8	iVar3	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*if\ \(\(\(param_1\ !=\ piVar13\)\ \&\&\ \(iVar10\ ==\ piVar13\[0x26\]\)\)\ \&\&$	+3
+use	FUN_00151370	iVar4	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*iVar4\ =\ param_2\[0x48\];$	+1
+use	FUN_00151370	iVar4	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*param_1\[0x48\]\ =\ iVar4;$	+1
+use	FUN_00151370	iVar7	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*iVar7\ =\ param_1\[0x49\];$	+1
+use	FUN_00151370	iVar7	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*param_1\[0x49\]\ =\ iVar7;$	+1
+use	FUN_00151370	uVar2	source1Flags	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*uVar2\ =\ param_1\[0x2e\];$	+1
+use	FUN_00151370	uVar2	source1Flags	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*FUN_00103d50\(param_1\ \+\ 0x29,1,uVar2\ \&\ 1\);$	+2
+use	FUN_00151370	uVar3	source1Flags2	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*uVar3\ =\ param_2\[0x2e\];$	+1
+use	FUN_00151370	uVar3	source1Flags2	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*FUN_00103d50\(param_1\ \+\ 0x2f,1,uVar3\ \&\ 1\);$	+2
+use	FUN_001524b8	iVar8	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*iVar8\ =\ param_1\[0x49\];$	+7
+use	FUN_001524b8	iVar8	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*param_1\[0x49\]\ =\ iVar8;$	+1
+use	FUN_00152ea8	local_78	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*local_78\ =\ param_1\[0x49\];$	+1
+use	FUN_00152ea8	local_78	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*param_1\[0x49\]\ =\ local_78;$	+1
+use	FUN_001541f0	iVar4	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*iVar4\ =\ param_2\[0x48\];$	+1
+use	FUN_001541f0	iVar4	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*param_1\[0x48\]\ =\ iVar4;$	+1
+use	FUN_00156d48	iVar20	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*iVar20\ =\ param_1\[0x25\];$	+1
+use	FUN_00156d48	iVar20	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*param_1\[0x25\]\ =\ iVar20;$	+1
+use	FUN_00156d48	iVar23	destRegister2	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*iVar23\ =\ param_1\[0x25\];$	+1
+use	FUN_00156d48	iVar23	destRegister2	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*param_1\[0x25\]\ =\ iVar23;$	+1
+use	FUN_00156d48	iVar8	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*iVar8\ =\ param_1\[0x26\];$	+1
+use	FUN_00156d48	iVar8	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*param_1\[0x26\]\ =\ iVar8;$	+1
+use	FUN_00156d48	iVar8	destRegisterOffset2	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*iVar8\ =\ param_1\[0x26\];$@2	+1
+use	FUN_00156d48	iVar8	destRegisterOffset2	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*param_1\[0x26\]\ =\ iVar8;$@2	+1
+use	FUN_00156d48	uVar2	source1Flags	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*uVar2\ =\ param_1\[0x2e\];$	+1
+use	FUN_00156d48	uVar2	source1Flags	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*FUN_00103d50\(param_1\ \+\ 0x29,1,uVar2\ \&\ 1\);$	+2
+use	FUN_00156d48	uVar2	source1Flags2	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*uVar2\ =\ param_1\[0x2e\];$@2	+1
+use	FUN_00156d48	uVar2	source1Flags2	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*FUN_00103d50\(param_1\ \+\ 0x29,1,uVar2\ \&\ 1\);$@2	+2
+use	FUN_00156d48	uVar3	source2Flags	INFERRED	web passed only as callee parameter source2Flags (1 uses, unanimous)	^\s*uVar3\ =\ param_1\[0x34\];$	+1
+use	FUN_00156d48	uVar3	source2Flags	INFERRED	web passed only as callee parameter source2Flags (1 uses, unanimous)	^\s*FUN_00103d50\(param_1\ \+\ 0x2f,1,uVar3\ \&\ 1\);$	+2
+use	FUN_00156d48	uVar3	source2Flags2	INFERRED	web passed only as callee parameter source2Flags (1 uses, unanimous)	^\s*uVar3\ =\ param_1\[0x34\];$@2	+1
+use	FUN_00156d48	uVar3	source2Flags2	INFERRED	web passed only as callee parameter source2Flags (1 uses, unanimous)	^\s*FUN_00103d50\(param_1\ \+\ 0x2f,1,uVar3\ \&\ 1\);$@2	+2
+use	Inst__collapseAlgebraic_00158264	uVar10	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 0x98\);$	+1
+use	Inst__collapseAlgebraic_00158264	uVar10	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(param_3\ \+\ 0x98\)\ =\ uVar10;$	+1
+use	Inst__collapseAlgebraic_00158264	uVar11	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 0x94\);$	+1
+use	Inst__collapseAlgebraic_00158264	uVar11	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(param_3\ \+\ 0x94\)\ =\ uVar11;$	+1
+use	Inst__collapseAlgebraic_00158264	uVar4	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 0x120\);$	+1
+use	Inst__collapseAlgebraic_00158264	uVar4	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(param_3\ \+\ 0x120\)\ =\ uVar4;$	+1
+use	Inst__collapseAlgebraic_00158264	uVar7	source2Flags	INFERRED	web passed only as callee parameter source2Flags (2 uses, unanimous)	^\s*uVar7\ =\ \*\(uint\ \*\)\(param_3\ \+\ 0xd0\);$	+1
+use	Inst__collapseAlgebraic_00158264	uVar7	source2Flags	INFERRED	web passed only as callee parameter source2Flags (2 uses, unanimous)	^\s*uVar7\ =\ \*\(uint\ \*\)\(iVar17\ \+\ 0xd0\);$	+1
+use	Inst__collapseAlgebraic_00158264	uVar7	source2Flags	INFERRED	web passed only as callee parameter source2Flags (2 uses, unanimous)	^\s*if\ \(\(uVar7\ \&\ 2\)\ ==\ 0\)\ \{$	+1
+use	Inst__collapseAlgebraic_00158264	uVar8	instFlags	INFERRED	web passed only as callee parameter instFlags (2 uses, unanimous)	^\s*uVar8\ =\ \*\(uint\ \*\)\(param_3\ \+\ 0x14\);$	+1
+use	Inst__collapseAlgebraic_00158264	uVar8	instFlags	INFERRED	web passed only as callee parameter instFlags (2 uses, unanimous)	^\s*if\ \(\(uVar8\ \&\ 0x200\)\ !=\ 0\)\ \{$	+1
+use	Inst__collapseAlgebraic_00158264	uVar8	instFlags	INFERRED	web passed only as callee parameter instFlags (2 uses, unanimous)	^\s*uVar8\ =\ \*\(uint\ \*\)\(param_3\ \+\ 0x14\);$@2	+1
+use	Inst__collapseAlgebraic_00158264	uVar8	instFlags	INFERRED	web passed only as callee parameter instFlags (2 uses, unanimous)	^\s*if\ \(\(uVar8\ \&\ 2\)\ !=\ 0\)\ \{$	+1
+use	Inst__collapseAlgebraic_00158264	uVar9	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 0x124\);$	+1
+use	Inst__collapseAlgebraic_00158264	uVar9	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(param_3\ \+\ 0x124\)\ =\ uVar9;$	+1
+use	FUN_00159794	iVar2	opcodeInfo1	INFERRED	web passed only as callee parameter opcodeInfo (3 uses, unanimous)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x88\);$	+1
+use	FUN_00159794	iVar2	opcodeInfo1	INFERRED	web passed only as callee parameter opcodeInfo (3 uses, unanimous)	^\s*if\ \(\*\(int\ \*\)\(iVar2\ \+\ 8\)\ ==\ 0x24\)\ \{$	+1
+use	FUN_00159794	iVar2	opcodeInfo1	INFERRED	web passed only as callee parameter opcodeInfo (3 uses, unanimous)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x88\);$@2	+1
+use	FUN_00159794	iVar2	opcodeInfo1	INFERRED	web passed only as callee parameter opcodeInfo (3 uses, unanimous)	^\s*if\ \(\*\(int\ \*\)\(iVar2\ \+\ 8\)\ ==\ 0x26\)\ \{$	+1
+use	FUN_00159794	iVar2	opcodeInfo1	INFERRED	web passed only as callee parameter opcodeInfo (3 uses, unanimous)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x88\);$@3	+1
+use	FUN_00159794	iVar2	opcodeInfo1	INFERRED	web passed only as callee parameter opcodeInfo (3 uses, unanimous)	^\s*if\ \(\(\(\*\(int\ \*\)\(iVar2\ \+\ 8\)\ ==\ 0x25\)\ \&\&\ \(\(\*\(uint\ \*\)\(\*\(int\ \*\)\(param_3\ \+\ 0x6c4\)\ \+\ 0x30\)\ \&\ 8\)\ !=\ 0\)\)\ \&\&$	+2
+use	FUN_00159b58	uVar11	source1Flags	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*uVar11\ =\ \*\(uint\ \*\)\(iVar2\ \+\ 0xb8\);$	+1
+use	FUN_00159b58	uVar11	source1Flags	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*FUN_00103d50\(param_1\ \+\ 0xa4,1,uVar11\ \&\ 1\);$	+2
+use	FUN_00160eb0	iVar11	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*iVar11\ =\ \*\(int\ \*\)\(param_3\ \+\ 0x120\);$	+1
+use	FUN_00160eb0	iVar11	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*if\ \(\(\(\(\(iVar6\ ==\ 0\)\ \|\|$	+5
+use	FUN_00160eb0	iVar11	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*if\ \(\(\(\(iVar8\ ==\ 0\)\ \|\|$	+5
+use	FUN_00160eb0	iVar11	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*\*\(int\ \*\)\(param_3\ \+\ 0x120\)\ =\ iVar11;$	+1
+use	FUN_00160eb0	iVar11	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*\*\(int\ \*\)\(param_3\ \+\ 0x120\)\ =\ iVar11;$@2	+1
+use	FUN_00161748	iVar10	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (3 uses, unanimous)	^\s*iVar10\ =\ param_2\[0x49\];$	+2
+use	FUN_00161748	iVar10	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (3 uses, unanimous)	^\s*iVar10\ =\ param_2\[0x49\];$@2	+1
+use	FUN_00161748	iVar10	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (3 uses, unanimous)	^\s*iVar10\ =\ param_1\[0x49\];$	+1
+use	FUN_00161748	iVar10	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (3 uses, unanimous)	^\s*param_1\[0x49\]\ =\ iVar10;$	+1
+use	FUN_00161748	iVar7	saturate	INFERRED	web passed only as callee parameter saturate (3 uses, unanimous)	^\s*iVar7\ =\ param_2\[0x48\];$	+2
+use	FUN_00161748	iVar7	saturate	INFERRED	web passed only as callee parameter saturate (3 uses, unanimous)	^\s*iVar7\ =\ param_2\[0x48\];$@2	+1
+use	FUN_00161748	iVar7	saturate	INFERRED	web passed only as callee parameter saturate (3 uses, unanimous)	^\s*iVar7\ =\ param_1\[0x48\];$	+1
+use	FUN_00161748	iVar7	saturate	INFERRED	web passed only as callee parameter saturate (3 uses, unanimous)	^\s*param_1\[0x48\]\ =\ iVar7;$	+1
+use	FUN_00161748	uVar15	source1Flags	INFERRED	web passed only as callee parameter source1Flags (4 uses, unanimous)	^\s*uVar15\ =\ param_2\[0x2e\];$	+1
+use	FUN_00161748	uVar15	source1Flags	INFERRED	web passed only as callee parameter source1Flags (4 uses, unanimous)	^\s*if\ \(uVar16\ !=\ \(uVar15\ \&\ 1\)\)\ \{$	+1
+use	FUN_00161748	uVar15	source1Flags	INFERRED	web passed only as callee parameter source1Flags (4 uses, unanimous)	^\s*uVar15\ =\ param_2\[0x2e\];$@2	+1
+use	FUN_00161748	uVar15	source1Flags	INFERRED	web passed only as callee parameter source1Flags (4 uses, unanimous)	^\s*uVar15\ =\ param_2\[0x2e\];$@3	+1
+use	FUN_00161748	uVar15	source1Flags	INFERRED	web passed only as callee parameter source1Flags (4 uses, unanimous)	^\s*uVar16\ =\ uVar15\ \&\ 1;$	+1
+use	FUN_00161748	uVar15	source1Flags	INFERRED	web passed only as callee parameter source1Flags (4 uses, unanimous)	^\s*uVar15\ =\ param_2\[0x2e\];$@4	+1
+use	FUN_00161748	uVar15	source1Flags	INFERRED	web passed only as callee parameter source1Flags (4 uses, unanimous)	^\s*uVar6\ =\ uVar15\ >>\ 1\ \&\ 1;$	+1
+use	FUN_001621c8	iVar15	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*iVar15\ =\ piVar17\[0x48\];$	+1
+use	FUN_001621c8	iVar15	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*param_1\[0x48\]\ =\ iVar15;$	+1
+use	FUN_001621c8	iVar19	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*iVar19\ =\ param_1\[0x26\];$	+1
+use	FUN_001621c8	iVar19	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*param_1\[0x26\]\ =\ iVar19;$	+1
+use	FUN_001621c8	iVar20	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*iVar20\ =\ param_1\[0x25\];$	+1
+use	FUN_001621c8	iVar20	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*param_1\[0x25\]\ =\ iVar20;$	+1
+use	FUN_001621c8	uVar13	source1Flags	INFERRED	web passed only as callee parameter source1Flags (2 uses, unanimous)	^\s*uVar13\ =\ param_1\[0x2e\];$	+3
+use	FUN_001621c8	uVar13	source1Flags	INFERRED	web passed only as callee parameter source1Flags (2 uses, unanimous)	^\s*uVar13\ =\ param_1\[0x2e\];$@2	+1
+use	FUN_001621c8	uVar13	source1Flags	INFERRED	web passed only as callee parameter source1Flags (2 uses, unanimous)	^\s*if\ \(\(\(\(\(uVar13\ \&\ 1\)\ ==\ 0\)\ \&\&\ \(\(uVar13\ \&\ 2\)\ ==\ 0\)\)\ \&\&\ \(param_1\[0x48\]\ ==\ 0\)\)\ \&\&\ \(param_1\[0x49\]\ ==\ 0\)$	+2
+use	FUN_001621c8	uVar13	source1Flags2	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*uVar13\ =\ piVar17\[0x2e\];$	+1
+use	FUN_001621c8	uVar13	source1Flags2	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*FUN_00103d50\(param_1\ \+\ 0x29,1,uVar13\ \&\ 1\);$	+2
+use	FUN_001621c8	uVar5	source1Flags3	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*uVar5\ =\ piVar18\[0x2e\];$	+1
+use	FUN_001621c8	uVar5	source1Flags3	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*FUN_00103d50\(param_1\ \+\ 0x35,1,uVar5\ \&\ 1\);$	+2
+use	IRInst__needsNoSchedulerNode	iVar1	opcodeInfo	INFERRED	web passed only as callee parameter opcodeInfo (2 uses, unanimous)	^\s*iVar1\ =\ param_1\[0x22\];$	+1
+use	IRInst__needsNoSchedulerNode	iVar1	opcodeInfo	INFERRED	web passed only as callee parameter opcodeInfo (2 uses, unanimous)	^\s*iVar1\ =\ param_1\[0x22\];$@2	+2
+use	IRInst__needsNoSchedulerNode	iVar1	opcodeInfo	INFERRED	web passed only as callee parameter opcodeInfo (2 uses, unanimous)	^\s*if\ \(\*\(int\ \*\)\(iVar1\ \+\ 8\)\ !=\ 0xa4\)\ \{$	+1
+use	FUN_0017bd78	uVar14	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x120\);$	+1
+use	FUN_0017bd78	uVar14	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x120\)\ =\ uVar14;$	+1
+use	FUN_0017bd78	uVar15	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x94\);$	+1
+use	FUN_0017bd78	uVar15	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x94\)\ =\ uVar15;$	+1
+use	FUN_0017bd78	uVar16	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*uVar16\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x98\);$	+1
+use	FUN_0017bd78	uVar16	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x98\)\ =\ uVar16;$	+1
+use	FUN_0017bd78	uVar6	instFlags	INFERRED	web passed only as callee parameter instFlags (1 uses, unanimous)	^\s*uVar6\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 0x14\);$	+1
+use	FUN_0017bd78	uVar6	instFlags	INFERRED	web passed only as callee parameter instFlags (1 uses, unanimous)	^\s*bVar1\ =\ \(uVar6\ >>\ 9\ \&\ 1\)\ ==\ 0;$	+1
+use	FUN_0017bd78	uVar6	instFlags	INFERRED	web passed only as callee parameter instFlags (1 uses, unanimous)	^\s*if\ \(\(uVar6\ \&\ 0x200000\)\ !=\ 0\)\ \{$	+1
+use	FUN_0017c244	uVar13	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x120\);$	+1
+use	FUN_0017c244	uVar13	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x120\)\ =\ uVar13;$	+1
+use	FUN_0017c244	uVar14	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x124\);$	+1
+use	FUN_0017c244	uVar14	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x124\)\ =\ uVar14;$	+1
+use	FUN_0017c244	uVar16	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*uVar16\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x94\);$	+1
+use	FUN_0017c244	uVar16	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x94\)\ =\ uVar16;$	+1
+use	FUN_0017c244	uVar17	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*uVar17\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x98\);$	+1
+use	FUN_0017c244	uVar17	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x98\)\ =\ uVar17;$	+1
+use	FUN_0017c244	uVar5	instFlags	INFERRED	web passed only as callee parameter instFlags (1 uses, unanimous)	^\s*uVar5\ =\ \*\(uint\ \*\)\(iVar4\ \+\ 0x14\);$	+1
+use	FUN_0017c244	uVar5	instFlags	INFERRED	web passed only as callee parameter instFlags (1 uses, unanimous)	^\s*bVar1\ =\ \(uVar5\ >>\ 9\ \&\ 1\)\ ==\ 0;$	+1
+use	FUN_0017c244	uVar5	instFlags	INFERRED	web passed only as callee parameter instFlags (1 uses, unanimous)	^\s*if\ \(\(uVar5\ \&\ 0x200000\)\ !=\ 0\)\ \{$	+1
+use	FUN_0017e02c	uVar9	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x120\);$	+1
+use	FUN_0017e02c	uVar9	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x120\)\ =\ uVar9;$	+1
+use	FUN_0017e3f4	uVar13	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x120\);$	+1
+use	FUN_0017e3f4	uVar13	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x120\)\ =\ uVar13;$	+1
+use	FUN_0017e3f4	uVar14	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x124\);$	+1
+use	FUN_0017e3f4	uVar14	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x124\)\ =\ uVar14;$	+1
+use	FUN_0017e3f4	uVar15	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x94\);$	+1
+use	FUN_0017e3f4	uVar15	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x94\)\ =\ uVar15;$	+1
+use	FUN_0017e3f4	uVar16	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*uVar16\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x98\);$	+1
+use	FUN_0017e3f4	uVar16	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x98\)\ =\ uVar16;$	+1
+use	FUN_0017ebb0	uVar12	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x94\);$	+1
+use	FUN_0017ebb0	uVar12	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x94\)\ =\ uVar12;$	+1
+use	FUN_0017ebb0	uVar13	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x98\);$	+1
+use	FUN_0017ebb0	uVar13	destRegisterOffset	INFERRED	web passed only as callee parameter destRegisterOffset (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x98\)\ =\ uVar13;$	+1
+use	FUN_0017ebb0	uVar16	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*uVar16\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x120\);$	+1
+use	FUN_0017ebb0	uVar16	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x120\)\ =\ uVar16;$	+1
+use	FUN_0017ebb0	uVar17	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*uVar17\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x124\);$	+1
+use	FUN_0017ebb0	uVar17	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x124\)\ =\ uVar17;$	+1
+use	FUN_0017ee68	uVar7	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x120\);$	+1
+use	FUN_0017ee68	uVar7	saturate	INFERRED	web passed only as callee parameter saturate (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ 0x120\)\ =\ uVar7;$	+1
+use	FUN_0017ee68	uVar8	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x124\);$	+1
+use	FUN_0017ee68	uVar8	resultScaleCode	INFERRED	web passed only as callee parameter resultScaleCode (1 uses, unanimous)	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ 0x124\)\ =\ uVar8;$	+1
+use	FUN_00181f00	uVar2	source1Flags	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*uVar2\ =\ \*\(uint\ \*\)\(param_3\ \+\ 0xb8\);$	+1
+use	FUN_00181f00	uVar2	source1Flags	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*FUN_00103d50\(iVar3\ \+\ 0xa4,1,uVar2\ \&\ 1\);$	+1
+use	R300MachineAssembler__setOutputDestination	iVar4	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_4\ \+\ 0x94\);$	+1
+use	R300MachineAssembler__setOutputDestination	iVar4	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*iVar1\ =\ iVar4\ \+\ 1;$	+1
+use	R300MachineAssembler__setOutputDestination	iVar4	destRegister	INFERRED	web passed only as callee parameter destRegister (1 uses, unanimous)	^\s*uVar5\ =\ \(undefined1\)iVar4;$	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	source1Flags	INFERRED	web passed only as callee parameter source1Flags (2 uses, unanimous)	^\s*uVar2\ =\ param_2\[0x2e\];$	+2
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	source1Flags	INFERRED	web passed only as callee parameter source1Flags (2 uses, unanimous)	^\s*uVar2\ =\ param_2\[0x2e\];$@2	+1
+use	R300VMachineAssembler__encodeDualMathOperands	uVar2	source1Flags	INFERRED	web passed only as callee parameter source1Flags (2 uses, unanimous)	^\s*if\ \(\(uVar2\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	R520MachineAssembler__emitCompareToPredicate	uVar5	source1Flags	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0xb8\);$	+1
+use	R520MachineAssembler__emitCompareToPredicate	uVar5	source1Flags	INFERRED	web passed only as callee parameter source1Flags (1 uses, unanimous)	^\s*FUN_00103d50\(iVar6,2,uVar5\ >>\ 1\ \&\ 1\);$	+1
+use	R520MachineAssembler__emitCompareToPredicate	uVar5	source2Flags	INFERRED	web passed only as callee parameter source2Flags (1 uses, unanimous)	^\s*uVar5\ =\ \*\(uint\ \*\)\(param_2\ \+\ 0xd0\);$	+1
+use	R520MachineAssembler__emitCompareToPredicate	uVar5	source2Flags	INFERRED	web passed only as callee parameter source2Flags (1 uses, unanimous)	^\s*FUN_00103d50\(iVar3,2,uVar5\ >>\ 1\ \&\ 1\);$	+1

@@ -50,7 +50,7 @@ int FUN_0017bd78(ctx, operandIndex, param_3, param_4)
   uint uVar3;
   int node;
   int inst2;
-  uint uVar6;
+  uint instFlags;
   undefined4 operandRef3;
   undefined4 afterInst;
   undefined4 block;
@@ -58,9 +58,9 @@ int FUN_0017bd78(ctx, operandIndex, param_3, param_4)
   undefined4 uVar11;
   undefined4 operandRef;
   undefined4 operandRef2;
-  undefined4 uVar14;
-  undefined4 uVar15;
-  undefined4 uVar16;
+  undefined4 saturate;
+  undefined4 destRegister;
+  undefined4 destRegisterOffset;
   undefined4 local_58;
   
   node = *(int *)(ctx + 0xb0);
@@ -72,14 +72,14 @@ int FUN_0017bd78(ctx, operandIndex, param_3, param_4)
   inst = *(int *)(ctx + 0xb0);
   uVar11 = *(undefined4 *)(operandRecord2 + 0x10);
   operandRef = *(undefined4 *)(operandIndex * 0x18 + inst + 0x8c);
-  uVar14 = *(undefined4 *)(inst + 0x120);
+  saturate = *(undefined4 *)(inst + 0x120);
   operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   inst2 = *(int *)(ctx + 0xb0);
   bVar2 = *(byte *)(param_3 + operandRecord + 0x10);
-  uVar6 = *(uint *)(inst2 + 0x14);
+  instFlags = *(uint *)(inst2 + 0x14);
   uVar3 = *(uint *)(operandIndex * 0x18 + inst2 + 0xa0);
   uVar10 = *(undefined4 *)(operandIndex * 4 + ctx + 0x210);
-  bVar1 = (uVar6 >> 9 & 1) == 0;
+  bVar1 = (instFlags >> 9 & 1) == 0;
   if (bVar1) {
     operandRef3 = 0;
     local_58 = 0;
@@ -88,14 +88,14 @@ int FUN_0017bd78(ctx, operandIndex, param_3, param_4)
     local_58 = *(undefined4 *)(*(int *)(inst2 + 0x84) * 4 + ctx + 0x210);
     operandRef3 = *(undefined4 *)(*(int *)(inst2 + 0x84) * 0x18 + inst2 + 0x8c);
   }
-  uVar15 = *(undefined4 *)(inst2 + 0x94);
-  uVar16 = *(undefined4 *)(inst2 + 0x98);
+  destRegister = *(undefined4 *)(inst2 + 0x94);
+  destRegisterOffset = *(undefined4 *)(inst2 + 0x98);
   IRInst__reinitAsMov(inst2,0x31,*(undefined4 *)(ctx + 0x238));
   IRInst__setOperandRef(inst2,0,operandRef2);
-  *(undefined4 *)(inst2 + 0x94) = uVar15;
-  *(undefined4 *)(inst2 + 0x98) = uVar16;
+  *(undefined4 *)(inst2 + 0x94) = destRegister;
+  *(undefined4 *)(inst2 + 0x98) = destRegisterOffset;
   *(undefined4 *)(inst2 + 0x9c) = uVar11;
-  *(undefined4 *)(inst2 + 0x120) = uVar14;
+  *(undefined4 *)(inst2 + 0x120) = saturate;
   *(undefined4 *)(inst2 + 0x124) = param_4;
   IRInst__setOperandRef(inst2,1,operandRef);
   uVar11 = *(undefined4 *)(PTR_DAT_001e8b8c + (uint)bVar2 * 4);
@@ -112,7 +112,7 @@ int FUN_0017bd78(ctx, operandIndex, param_3, param_4)
     *(uint *)(inst2 + 0x14) = *(uint *)(inst2 + 0x14) | 0x200;
     *(undefined4 *)(ctx + 0x218) = local_58;
   }
-  if ((uVar6 & 0x200000) != 0) {
+  if ((instFlags & 0x200000) != 0) {
     *(uint *)(inst2 + 0x14) = *(uint *)(inst2 + 0x14) | 0x200000;
   }
   Block__insertInstAfter(block,afterInst,inst2);
@@ -259,7 +259,7 @@ int FUN_0017c244(ctx, operandIndex)
   uint uVar2;
   int node;
   int inst2;
-  uint uVar5;
+  uint instFlags;
   undefined4 operandRef3;
   undefined4 afterInst;
   undefined4 block;
@@ -267,11 +267,11 @@ int FUN_0017c244(ctx, operandIndex)
   undefined4 uVar10;
   undefined4 operandRef;
   undefined4 operandRef2;
-  undefined4 uVar13;
-  undefined4 uVar14;
+  undefined4 saturate;
+  undefined4 resultScaleCode;
   undefined4 uVar15;
-  undefined4 uVar16;
-  undefined4 uVar17;
+  undefined4 destRegister;
+  undefined4 destRegisterOffset;
   undefined4 local_58;
   
   node = *(int *)(ctx + 0xb0);
@@ -283,15 +283,15 @@ int FUN_0017c244(ctx, operandIndex)
   inst = *(int *)(ctx + 0xb0);
   uVar10 = *(undefined4 *)(operandRecord2 + 0x10);
   operandRef = *(undefined4 *)(operandIndex * 0x18 + inst + 0x8c);
-  uVar13 = *(undefined4 *)(inst + 0x120);
-  uVar14 = *(undefined4 *)(inst + 0x124);
+  saturate = *(undefined4 *)(inst + 0x120);
+  resultScaleCode = *(undefined4 *)(inst + 0x124);
   operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   inst2 = *(int *)(ctx + 0xb0);
   uVar15 = *(undefined4 *)(operandRecord + 0x10);
-  uVar5 = *(uint *)(inst2 + 0x14);
+  instFlags = *(uint *)(inst2 + 0x14);
   uVar2 = *(uint *)(operandIndex * 0x18 + inst2 + 0xa0);
   uVar9 = *(undefined4 *)(operandIndex * 4 + ctx + 0x210);
-  bVar1 = (uVar5 >> 9 & 1) == 0;
+  bVar1 = (instFlags >> 9 & 1) == 0;
   if (bVar1) {
     operandRef3 = 0;
     local_58 = 0;
@@ -300,15 +300,15 @@ int FUN_0017c244(ctx, operandIndex)
     local_58 = *(undefined4 *)(*(int *)(inst2 + 0x84) * 4 + ctx + 0x210);
     operandRef3 = *(undefined4 *)(*(int *)(inst2 + 0x84) * 0x18 + inst2 + 0x8c);
   }
-  uVar16 = *(undefined4 *)(inst2 + 0x94);
-  uVar17 = *(undefined4 *)(inst2 + 0x98);
+  destRegister = *(undefined4 *)(inst2 + 0x94);
+  destRegisterOffset = *(undefined4 *)(inst2 + 0x98);
   IRInst__reinitAsMov(inst2,0x31,*(undefined4 *)(ctx + 0x238));
   IRInst__setOperandRef(inst2,0,operandRef2);
-  *(undefined4 *)(inst2 + 0x98) = uVar17;
-  *(undefined4 *)(inst2 + 0x94) = uVar16;
+  *(undefined4 *)(inst2 + 0x98) = destRegisterOffset;
+  *(undefined4 *)(inst2 + 0x94) = destRegister;
   *(undefined4 *)(inst2 + 0x9c) = uVar10;
-  *(undefined4 *)(inst2 + 0x120) = uVar13;
-  *(undefined4 *)(inst2 + 0x124) = uVar14;
+  *(undefined4 *)(inst2 + 0x120) = saturate;
+  *(undefined4 *)(inst2 + 0x124) = resultScaleCode;
   IRInst__setOperandRef(inst2,1,operandRef);
   operandRecord = IRInst__getOperandRecord(inst2,1);
   *(undefined4 *)(operandRecord + 0x10) = uVar15;
@@ -323,7 +323,7 @@ int FUN_0017c244(ctx, operandIndex)
     *(uint *)(inst2 + 0x14) = *(uint *)(inst2 + 0x14) | 0x200;
     *(undefined4 *)(ctx + 0x218) = local_58;
   }
-  if ((uVar5 & 0x200000) != 0) {
+  if ((instFlags & 0x200000) != 0) {
     *(uint *)(inst2 + 0x14) = *(uint *)(inst2 + 0x14) | 0x200000;
   }
   Block__insertInstAfter(block,afterInst,inst2);
@@ -1643,7 +1643,7 @@ int FUN_0017e02c(ctx, operandIndex, param_3)
   uint uVar6;
   undefined4 uVar7;
   undefined4 uVar8;
-  undefined4 uVar9;
+  undefined4 saturate;
   undefined4 operandRef;
   undefined4 uVar11;
   undefined4 uVar12;
@@ -1662,7 +1662,7 @@ int FUN_0017e02c(ctx, operandIndex, param_3)
   inst = *(int *)(ctx + 0xb0);
   uVar12 = *(undefined4 *)(operandRecord2 + 0x10);
   operandRef2 = *(undefined4 *)(operandIndex * 0x18 + inst + 0x8c);
-  uVar9 = *(undefined4 *)(inst + 0x120);
+  saturate = *(undefined4 *)(inst + 0x120);
   operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   iVar5 = *(int *)(ctx + 0xb0);
   uVar14 = *(undefined4 *)(operandRecord + 0x10);
@@ -1698,7 +1698,7 @@ int FUN_0017e02c(ctx, operandIndex, param_3)
   *(undefined4 *)(operandRecord + 0x10) = uVar14;
   IROperand__setModifierBits(iVar5 + 0xa4,1,uVar3 & 1);
   IROperand__setModifierBits(iVar5 + 0xa4,2,uVar3 >> 1 & 1);
-  *(undefined4 *)(iVar5 + 0x120) = uVar9;
+  *(undefined4 *)(iVar5 + 0x120) = saturate;
   *(undefined4 *)(iVar5 + 0x124) = param_3;
   *(undefined4 *)(ctx + 0x214) = uVar11;
   if ((uVar6 & 0x200000) != 0) {
@@ -1813,10 +1813,10 @@ int FUN_0017e3f4(ctx, param_2, operandIndex, operandIndex2)
   undefined4 operandRef;
   undefined4 uVar11;
   undefined4 uVar12;
-  undefined4 uVar13;
-  undefined4 uVar14;
-  undefined4 uVar15;
-  undefined4 uVar16;
+  undefined4 saturate;
+  undefined4 resultScaleCode;
+  undefined4 destRegister;
+  undefined4 destRegisterOffset;
   undefined4 operandRef2;
   undefined4 uVar18;
   undefined4 uVar19;
@@ -1826,15 +1826,15 @@ int FUN_0017e3f4(ctx, param_2, operandIndex, operandIndex2)
   inst = *(int *)(ctx + 0xb0);
   ref = *(undefined4 *)(inst + 4);
   uVar3 = *(undefined4 *)(inst + 0x158);
-  uVar15 = *(undefined4 *)(inst + 0x94);
-  uVar16 = *(undefined4 *)(inst + 0x98);
+  destRegister = *(undefined4 *)(inst + 0x94);
+  destRegisterOffset = *(undefined4 *)(inst + 0x98);
   operandRef2 = *(undefined4 *)(inst + 0x8c);
   operandRecord = IRInst__getOperandRecord(inst,0);
   inst2 = *(int *)(ctx + 0xb0);
   uVar9 = *(undefined4 *)(operandRecord + 0x10);
   operandRef = *(undefined4 *)(operandIndex * 0x18 + inst2 + 0x8c);
-  uVar13 = *(undefined4 *)(inst2 + 0x120);
-  uVar14 = *(undefined4 *)(inst2 + 0x124);
+  saturate = *(undefined4 *)(inst2 + 0x120);
+  resultScaleCode = *(undefined4 *)(inst2 + 0x124);
   operandRecord = IRInst__getOperandRecord(inst2,operandIndex);
   inst3 = *(int *)(ctx + 0xb0);
   uVar11 = *(undefined4 *)(operandRecord + 0x10);
@@ -1859,8 +1859,8 @@ int FUN_0017e3f4(ctx, param_2, operandIndex, operandIndex2)
   iVar5 = *(int *)(ctx + 0xb0);
   IRInst__reinitAsBinary(iVar5,param_2,*(undefined4 *)(ctx + 0x238));
   IRInst__setOperandRef(iVar5,0,operandRef2);
-  *(undefined4 *)(iVar5 + 0x94) = uVar15;
-  *(undefined4 *)(iVar5 + 0x98) = uVar16;
+  *(undefined4 *)(iVar5 + 0x94) = destRegister;
+  *(undefined4 *)(iVar5 + 0x98) = destRegisterOffset;
   if (bVar1) {
     currentDefinition = VReg__currentDefinition(operandRef2,*(undefined4 *)(*(int *)(*(int *)(ctx + 0x238) + 0x6c4) + 0x3a0)
                         ,*(undefined4 *)(ctx + 0x238));
@@ -1872,8 +1872,8 @@ int FUN_0017e3f4(ctx, param_2, operandIndex, operandIndex2)
     *(undefined4 *)(ctx + 0x21c) = uVar19;
   }
   *(undefined4 *)(iVar5 + 0x9c) = uVar9;
-  *(undefined4 *)(iVar5 + 0x120) = uVar13;
-  *(undefined4 *)(iVar5 + 0x124) = uVar14;
+  *(undefined4 *)(iVar5 + 0x120) = saturate;
+  *(undefined4 *)(iVar5 + 0x124) = resultScaleCode;
   IRInst__setOperandRef(iVar5,1,operandRef);
   operandRecord = IRInst__getOperandRecord(iVar5,1);
   *(undefined4 *)(operandRecord + 0x10) = uVar11;
@@ -2109,27 +2109,27 @@ int FUN_0017ebb0(ctx, param_2, param_3, set)
   undefined4 operandRef4;
   undefined4 uVar10;
   undefined4 uVar11;
-  undefined4 uVar12;
-  undefined4 uVar13;
+  undefined4 destRegister;
+  undefined4 destRegisterOffset;
   undefined4 afterInst;
   undefined4 block;
-  undefined4 uVar16;
-  undefined4 uVar17;
+  undefined4 saturate;
+  undefined4 resultScaleCode;
   int loopIndex;
   undefined4 operandRef2;
   
   inst = *(int *)(ctx + 0xb0);
   afterInst = *(undefined4 *)(inst + 4);
   block = *(undefined4 *)(inst + 0x158);
-  uVar12 = *(undefined4 *)(inst + 0x94);
-  uVar13 = *(undefined4 *)(inst + 0x98);
+  destRegister = *(undefined4 *)(inst + 0x94);
+  destRegisterOffset = *(undefined4 *)(inst + 0x98);
   operandRef4 = *(undefined4 *)(inst + 0x8c);
   operandRecord = IRInst__getOperandRecord(inst,0);
   inst2 = *(int *)(ctx + 0xb0);
   member0x21c = *(undefined4 *)(ctx + 0x21c);
-  uVar17 = *(undefined4 *)(inst2 + 0x124);
+  resultScaleCode = *(undefined4 *)(inst2 + 0x124);
   uVar11 = *(undefined4 *)(operandRecord + 0x10);
-  uVar16 = *(undefined4 *)(inst2 + 0x120);
+  saturate = *(undefined4 *)(inst2 + 0x120);
   operandRef3 = *(undefined4 *)(inst2 + 0xd4);
   operandRecord2 = IRInst__getOperandRecord(inst2,3);
   node = *(int *)(ctx + 0xb0);
@@ -2148,10 +2148,10 @@ int FUN_0017ebb0(ctx, param_2, param_3, set)
   inst3 = *(int *)(ctx + 0xb0);
   IRInst__reinitAsBinary(inst3,0x12,*(undefined4 *)(ctx + 0x238));
   Block__insertInstAfter(block,afterInst,inst3);
-  *(undefined4 *)(inst3 + 0x120) = uVar16;
-  *(undefined4 *)(inst3 + 0x124) = uVar17;
-  *(undefined4 *)(inst3 + 0x94) = uVar12;
-  *(undefined4 *)(inst3 + 0x98) = uVar13;
+  *(undefined4 *)(inst3 + 0x120) = saturate;
+  *(undefined4 *)(inst3 + 0x124) = resultScaleCode;
+  *(undefined4 *)(inst3 + 0x94) = destRegister;
+  *(undefined4 *)(inst3 + 0x98) = destRegisterOffset;
   IRInst__setOperandRef(inst3,0,operandRef4);
   operandRef = *(int *)(param_2 + 0x8c);
   *(undefined4 *)(inst3 + 0x9c) = uVar11;
@@ -2205,6 +2205,8 @@ int FUN_0017ebb0(ctx, param_2, param_3, set)
 int FUN_0017ee68(ctx)
   int ctx;
 {
+  undefined4 resultScaleCode;
+  undefined4 saturate;
   undefined4 operandRef2;
   int node;
   int inst2;
@@ -2250,8 +2252,8 @@ int FUN_0017ee68(ctx)
   inst2 = *(int *)(ctx + 0xb0);
   uVar10 = *(undefined4 *)(loopIndex + 0x10);
   operandRef = *(undefined4 *)(operandIndex * 0x18 + inst2 + 0x8c);
-  uVar7 = *(undefined4 *)(inst2 + 0x120);
-  uVar8 = *(undefined4 *)(inst2 + 0x124);
+  saturate = *(undefined4 *)(inst2 + 0x120);
+  resultScaleCode = *(undefined4 *)(inst2 + 0x124);
   loopIndex = IRInst__getOperandRecord(inst2,operandIndex);
   node = *(int *)(ctx + 0xb0);
   uVar14 = *(uint *)(loopIndex + 0x10);
@@ -2292,8 +2294,8 @@ int FUN_0017ee68(ctx)
     IRInst__appendSource(loopIndex,operandRef3);
     *(uint *)(loopIndex + 0x14) = *(uint *)(loopIndex + 0x14) | 0x200;
   }
-  *(undefined4 *)(loopIndex + 0x120) = uVar7;
-  *(undefined4 *)(loopIndex + 0x124) = uVar8;
+  *(undefined4 *)(loopIndex + 0x120) = saturate;
+  *(undefined4 *)(loopIndex + 0x124) = resultScaleCode;
   *(undefined4 *)(ctx + 0x218) = uVar12;
   *(undefined4 *)(ctx + 0x214) = uVar12;
   puVar4 = PTR_DAT_001e8b8c;
@@ -4136,6 +4138,7 @@ int FUN_00181f00(compiler, block, inst)
   int block;
   int inst;
 {
+  uint source1Flags;
   uint vectorSize6;
   uint vectorSize5;
   uint vectorSize4;
@@ -5064,9 +5067,9 @@ code_r0x001836f0:
     loopIndex2 = IRInst__getOperandRecord(inst,2);
     uVar21 = *(undefined4 *)(loopIndex2 + 0x10);
     loopIndex2 = IRInst__getOperandRecord(newInst2,2);
-    uVar2 = *(uint *)(inst + 0xb8);
+    source1Flags = *(uint *)(inst + 0xb8);
     *(undefined4 *)(loopIndex2 + 0x10) = uVar21;
-    IROperand__setModifierBits(newInst2 + 0xa4,1,uVar2 & 1);
+    IROperand__setModifierBits(newInst2 + 0xa4,1,source1Flags & 1);
     IROperand__setModifierBits(newInst2 + 0xbc,1,*(uint *)(inst + 0xd0) & 1);
     IROperand__setModifierBits(newInst2 + 0xa4,2,*(uint *)(inst + 0xb8) >> 1 & 1);
     IROperand__setModifierBits(newInst2 + 0xbc,2,*(uint *)(inst + 0xd0) >> 1 & 1);

@@ -2580,9 +2580,9 @@
 0x1467e8	FUN_001467e8	128	no	indirect call (driver context / vtable / callback)
 0x146868	FUN_00146868	228	no	indirect call (driver context / vtable / callback)
 0x14694c	FUN_0014694c	80	yes	
-0x14699c	FUN_0014699c	368	yes	
+0x14699c	Use__negationParityEqual	368	yes	
 0x146b0c	FUN_00146b0c	460	yes	
-0x146cd8	FUN_00146cd8	264	yes	
+0x146cd8	Use__sourceIsPlainSingleUse	264	yes	
 0x146de0	Inst__opcodeOrSourcesDiffer	252	no	indirect call (driver context / vtable / callback)
 0x146edc	FUN_00146edc	304	yes	
 0x14700c	FUN_0014700c	56	yes	

@@ -494,7 +494,7 @@ int FUN_00159794(inst, param_2, param_3)
   int sourceDef;
   int loopIndex;
   uint uVar1;
-  int iVar2;
+  int opcodeInfo1;
   undefined4 uVar3;
   int iVar4;
   int *operandVReg;
@@ -509,31 +509,31 @@ int FUN_00159794(inst, param_2, param_3)
   undefined4 local_2c;
   undefined4 local_28 [2];
   
-  iVar2 = *(int *)(inst + 0x88);
+  opcodeInfo1 = *(int *)(inst + 0x88);
   local_2c = 0x3f000000;
   local_38 = 0x3f000000;
   local_34 = 0x3f000000;
   local_30 = 0x3f000000;
-  if (*(int *)(iVar2 + 8) == 0x24) {
+  if (*(int *)(opcodeInfo1 + 8) == 0x24) {
     opcodeInfo = Opcode__getInfo(0x25);
     *(undefined4 *)(inst + 0x88) = opcodeInfo;
     IROperand__setModifierBits(inst + 0xa4,1,1);
     IROperand__setModifierBits(inst + 0xa4,2,1);
-    iVar2 = *(int *)(inst + 0x88);
+    opcodeInfo1 = *(int *)(inst + 0x88);
     uVar3 = 1;
   }
   else {
     uVar3 = 0;
-    if (*(int *)(iVar2 + 8) == 0x26) {
+    if (*(int *)(opcodeInfo1 + 8) == 0x26) {
       uVar3 = 1;
       opcodeInfo2 = Opcode__getInfo(0x25);
       *(undefined4 *)(inst + 0x88) = opcodeInfo2;
       IROperand__setModifierBits(inst + 0xa4,1,*(uint *)(inst + 0xb8) & 1 ^ 1);
       IRInst__swapOperands(inst,2,3,param_3);
-      iVar2 = *(int *)(inst + 0x88);
+      opcodeInfo1 = *(int *)(inst + 0x88);
     }
   }
-  if (((*(int *)(iVar2 + 8) == 0x25) && ((*(uint *)(*(int *)(param_3 + 0x6c4) + 0x30) & 8) != 0)) &&
+  if (((*(int *)(opcodeInfo1 + 8) == 0x25) && ((*(uint *)(*(int *)(param_3 + 0x6c4) + 0x30) & 8) != 0)) &&
      (param_2 != 0)) {
     sourceDef = IRInst__getOperandSource(inst,1);
     operandRecord = IRInst__getOperandRecord(sourceDef,0);
@@ -616,6 +616,7 @@ int FUN_00159b58(node, param_2, pass)
   undefined4 param_2;
   int pass;
 {
+  uint source1Flags;
   uint set;
   int operandIndex3;
   int operandIndex2;
@@ -726,7 +727,7 @@ int FUN_00159b58(node, param_2, pass)
             local_50 = local_70;
             if ((0.0 <= local_70) || (local_50 = local_6c, 0.0 <= local_6c)) {
               if ((0.0 > local_70) || (local_50 = local_6c, local_6c < 0.0)) {
-                uVar11 = *(uint *)(inst + 0xb8);
+                source1Flags = *(uint *)(inst + 0xb8);
                 iVar8 = (**(code **)(*piVar4 + 0x5c))
                                   (piVar4,a1,uVar5,local_74,in_r7,in_r8,*(code **)(*piVar4 + 0x5c));
                 piVar3 = piVar4;
@@ -756,8 +757,8 @@ int FUN_00159b58(node, param_2, pass)
                 else {
                   piVar3[0x58] = *(int *)(pass + 0x478) + 1;
                 }
-                IROperand__setModifierBits(node + 0xa4,1,uVar11 & 1);
-                IROperand__setModifierBits(node + 0xa4,2,uVar11 >> 1 & 1);
+                IROperand__setModifierBits(node + 0xa4,1,source1Flags & 1);
+                IROperand__setModifierBits(node + 0xa4,2,source1Flags >> 1 & 1);
                 operandRecord = IRInst__getOperandRecord(inst,1);
                 uVar5 = *(undefined4 *)(operandRecord + 0x10);
                 operandRecord = IRInst__getOperandRecord(node,1);
@@ -4769,7 +4770,7 @@ int FUN_00160eb0(param_1, param_2, inst, program)
   int iVar8;
   int iVar9;
   int iVar10;
-  int iVar11;
+  int saturate;
   int *newSource;
   int *inst3;
   int *piVar14;
@@ -4817,7 +4818,7 @@ int FUN_00160eb0(param_1, param_2, inst, program)
         piVar14 = (int *)IRInst__getOperandSource(inst,*(undefined4 *)(inst + 0x84));
       }
       bVar1 = piVar14 == (int *)0x0;
-      iVar11 = *(int *)(inst + 0x120);
+      saturate = *(int *)(inst + 0x120);
       if (bVar1) {
         inst3 = (int *)0x0;
         newSource = (int *)0x0;
@@ -4832,7 +4833,7 @@ int FUN_00160eb0(param_1, param_2, inst, program)
               (iVar6 = ((int (*)())FUN_0015b974)(piVar14,&local_94,&local_88,&local_7c,&local_70), iVar6 == 0))
              || (local_8c != local_88)) ||
             ((iVar6 = FUN_0014700c(local_64,local_94), iVar6 == 0 || (local_80 != local_7c)))) ||
-           (iVar11 != piVar14[0x48])) {
+           (saturate != piVar14[0x48])) {
           bVar1 = true;
           inst3 = (int *)0x0;
           iVar6 = -1;
@@ -4862,7 +4863,7 @@ int FUN_00160eb0(param_1, param_2, inst, program)
                  (iVar8 = ((int (*)())FUN_0015b974)(inst1,&local_90,&local_84,&local_78,&local_6c), iVar8 == 0))
                 || (local_88 != local_84)) ||
                (((iVar8 = FUN_0014700c(local_94,local_90), iVar8 == 0 || (local_80 != local_78)) ||
-                (iVar11 != inst1[0x48])))) {
+                (saturate != inst1[0x48])))) {
               inst3 = (int *)0x0;
               iVar8 = -1;
               local_90 = 0;
@@ -5005,7 +5006,7 @@ int FUN_00160eb0(param_1, param_2, inst, program)
               IRInst__setExtraOperandSource(inst,newSource,0,*(undefined4 *)(program + 8));
             }
             *(undefined4 *)(inst + 0x98) = 0;
-            *(int *)(inst + 0x120) = iVar11;
+            *(int *)(inst + 0x120) = saturate;
             *(undefined4 *)(inst + 0x94) = *(undefined4 *)(inst + 0x14c);
             return 1;
           }
@@ -5023,7 +5024,7 @@ int FUN_00160eb0(param_1, param_2, inst, program)
           if (newSource != (int *)0x0) {
             IRInst__setExtraOperandSource(inst,newSource,0,*(undefined4 *)(program + 8));
           }
-          *(int *)(inst + 0x120) = iVar11;
+          *(int *)(inst + 0x120) = saturate;
         }
         ((int (*)())Inst__foldProducerIntoConsumer)(param_1,param_2,inst,program,&local_98);
         return 1;
@@ -5043,6 +5044,9 @@ int FUN_00161748(inst, inst2, pass)
   int *inst2;
   int pass;
 {
+  uint source1Flags;
+  int saturate;
+  int resultScaleCode;
   int cloneResult;
   int splitRgbAlphaEnabled;
   undefined4 sourceDef5;
@@ -5136,50 +5140,50 @@ int FUN_00161748(inst, inst2, pass)
             } while (iVar11 != 0);
             splitRgbAlphaEnabled = Compiler__isOptionEnabled(*(undefined4 *)(pass + 8),0x30);
             if ((splitRgbAlphaEnabled == 0) || (((char)local_88 != '\0' && ((char)local_84 != '\0')))) {
-              iVar10 = inst2[0x49];
-              if ((inst[0x49] != iVar10) && (iVar7 != 0)) {
+              resultScaleCode = inst2[0x49];
+              if ((inst[0x49] != resultScaleCode) && (iVar7 != 0)) {
                 iVar10 = FUN_00151318(inst2);
                 if (iVar10 == 0) {
-                  iVar10 = inst2[0x49];
+                  resultScaleCode = inst2[0x49];
                 }
                 else {
-                  iVar10 = inst[0x49];
+                  resultScaleCode = inst[0x49];
                 }
               }
               bVar4 = iVar7 == 0;
-              iVar7 = inst2[0x48];
-              if ((inst[0x48] != iVar7) && (!bVar4)) {
+              saturate = inst2[0x48];
+              if ((inst[0x48] != saturate) && (!bVar4)) {
                 iVar7 = FUN_00151318(inst2);
                 if (iVar7 == 0) {
-                  iVar7 = inst2[0x48];
+                  saturate = inst2[0x48];
                 }
                 else {
-                  iVar7 = inst[0x48];
+                  saturate = inst[0x48];
                 }
               }
               uVar17 = inst[0x2e];
-              uVar15 = inst2[0x2e];
+              source1Flags = inst2[0x2e];
               uVar16 = uVar17 & 1;
-              if (uVar16 != (uVar15 & 1)) {
+              if (uVar16 != (source1Flags & 1)) {
                 if ((bVar4) || (iVar11 = FUN_00151318(inst2), iVar11 == 0)) {
                   if ((bVar1) || (iVar11 = FUN_00151318(inst), iVar11 == 0)) {
                     uVar17 = inst[0x2e];
                     uVar16 = 0;
-                    uVar15 = inst2[0x2e];
+                    source1Flags = inst2[0x2e];
                   }
                   else {
-                    uVar15 = inst2[0x2e];
+                    source1Flags = inst2[0x2e];
                     uVar17 = inst[0x2e];
-                    uVar16 = uVar15 & 1;
+                    uVar16 = source1Flags & 1;
                   }
                 }
                 else {
                   uVar17 = inst[0x2e];
-                  uVar15 = inst2[0x2e];
+                  source1Flags = inst2[0x2e];
                   uVar16 = uVar17 & 1;
                 }
               }
-              uVar6 = uVar15 >> 1 & 1;
+              uVar6 = source1Flags >> 1 & 1;
               uVar17 = uVar17 >> 1 & 1;
               uVar15 = uVar6;
               if (((uVar17 != uVar6) && (uVar15 = uVar17, bVar4)) && (uVar15 = uVar6, bVar1)) {
@@ -5311,8 +5315,8 @@ LAB_00161e24:
                   inst[0x27] = local_78[0];
                   IROperand__setModifierBits(inst + 0x29,1,uVar16);
                   IROperand__setModifierBits(inst + 0x29,2,uVar15);
-                  inst[0x49] = iVar10;
-                  inst[0x48] = iVar7;
+                  inst[0x49] = resultScaleCode;
+                  inst[0x48] = saturate;
                   IRInst__setOperandSource(inst,inst[0x21],0,0,*(undefined4 *)(pass + 8));
                   inst[5] = inst[5] & 0xfffffdff;
                   uVar16 = inst2[5];
@@ -5393,6 +5397,8 @@ int FUN_001621c8(inst, inst2, pass)
   int *inst2;
   int pass;
 {
+  uint source1Flags2;
+  uint source1Flags;
   int *afterInst;
   int newSource2;
   int newSource;
@@ -5414,7 +5420,7 @@ int FUN_001621c8(inst, inst2, pass)
   bool bVar2;
   undefined1 uVar3;
   float *pfVar4;
-  uint uVar5;
+  uint source1Flags3;
   int iVar6;
   int iVar7;
   int iVar8;
@@ -5424,12 +5430,12 @@ int FUN_001621c8(inst, inst2, pass)
   float *pfVar12;
   uint uVar13;
   uint uVar14;
-  int iVar15;
+  int saturate;
   int iVar16;
   int *inst1;
   int *inst3;
-  int iVar19;
-  int iVar20;
+  int destRegisterOffset;
+  int destRegister;
   double dVar21;
   undefined4 local_d8;
   undefined4 local_d4;
@@ -5501,9 +5507,9 @@ int FUN_001621c8(inst, inst2, pass)
   sourceDef = IRInst__getOperandSource(inst,1);
   sourceDef3 = IRInst__getOperandSource(inst2,1);
   if (sourceDef == sourceDef3) {
-    uVar13 = inst[0x2e];
-    if (((inst2[0x2e] & 1U) == (uVar13 & 1)) &&
-       (((uint)inst2[0x2e] >> 1 & 1) == (uVar13 >> 1 & 1))) {
+    source1Flags = inst[0x2e];
+    if (((inst2[0x2e] & 1U) == (source1Flags & 1)) &&
+       (((uint)inst2[0x2e] >> 1 & 1) == (source1Flags >> 1 & 1))) {
       definingField128 = IRInst__getDefiningField128(inst2,1);
       definingField1282 = IRInst__getDefiningField128(inst,1);
       if ((definingField128 == definingField1282) && (iVar16 == iVar6)) {
@@ -5569,9 +5575,9 @@ int FUN_001621c8(inst, inst2, pass)
   }
   else {
 LAB_00162370:
-    uVar13 = inst[0x2e];
+    source1Flags = inst[0x2e];
   }
-  if (((((uVar13 & 1) == 0) && ((uVar13 & 2) == 0)) && (inst[0x48] == 0)) && (inst[0x49] == 0)
+  if (((((source1Flags & 1) == 0) && ((source1Flags & 2) == 0)) && (inst[0x48] == 0)) && (inst[0x49] == 0)
      ) {
     bVar2 = true;
     iVar7 = 0;
@@ -5739,7 +5745,7 @@ LAB_001627ec:
       *(int *)(newSource2 + 0x160) = *(int *)(pass + 0x478) + 1;
     }
     *(undefined4 *)(newSource2 + 0x9c) = 0;
-    iVar15 = inst1[0x48];
+    saturate = inst1[0x48];
     useCount = IRInst__useCount(inst,pass);
     sourceDef4 = IRInst__getOperandSource(inst1,1);
     operandRecord3 = IRInst__getOperandRecord(inst1,1);
@@ -5768,8 +5774,8 @@ LAB_001627ec:
     } while (iVar11 != 0);
     uVar14 = inst2[5];
     iVar8 = 0;
-    uVar13 = inst1[0x2e];
-    uVar5 = inst3[0x2e];
+    source1Flags2 = inst1[0x2e];
+    source1Flags3 = inst3[0x2e];
     if ((uVar14 & 0x200) != 0) {
       iVar8 = IRInst__getOperandSource(inst2,inst2[0x21]);
       uVar14 = inst2[5];
@@ -5782,29 +5788,29 @@ LAB_001627ec:
     }
     afterInst = (int *)inst[1];
     uVar14 = inst[5];
-    iVar19 = inst[0x26];
-    iVar20 = inst[0x25];
+    destRegisterOffset = inst[0x26];
+    destRegister = inst[0x25];
     iVar11 = inst[3];
     if (inst2 == afterInst) {
       afterInst = (int *)inst2[1];
     }
     DList__unlink(inst);
     IRInst__reinitAsTrinary(inst,0x14,*(undefined4 *)(pass + 8));
-    inst[0x25] = iVar20;
-    inst[0x26] = iVar19;
+    inst[0x25] = destRegister;
+    inst[0x26] = destRegisterOffset;
     if ((uVar14 & 2) != 0) {
       inst[5] = inst[5] | 2;
     }
     inst[3] = iVar11;
     inst[0x27] = local_c4;
     inst[0x49] = 0;
-    inst[0x48] = iVar15;
+    inst[0x48] = saturate;
     IRInst__setOperandSource(inst,1,sourceDef4,0,*(undefined4 *)(pass + 8));
     uVar10 = local_c8;
     operandRecord4 = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(operandRecord4 + 0x10) = uVar10;
-    IROperand__setModifierBits(inst + 0x29,1,uVar13 & 1);
-    IROperand__setModifierBits(inst + 0x29,2,uVar13 >> 1 & 1);
+    IROperand__setModifierBits(inst + 0x29,1,source1Flags2 & 1);
+    IROperand__setModifierBits(inst + 0x29,2,source1Flags2 >> 1 & 1);
     IRInst__setOperandSource(inst,2,newSource,0,*(undefined4 *)(pass + 8));
     uVar10 = local_c0;
     operandRecord = IRInst__getOperandRecord(inst,2);
@@ -5813,8 +5819,8 @@ LAB_001627ec:
     uVar10 = local_bc;
     operandRecord = IRInst__getOperandRecord(inst,3);
     *(undefined4 *)(operandRecord + 0x10) = uVar10;
-    IROperand__setModifierBits(inst + 0x35,1,uVar5 & 1);
-    IROperand__setModifierBits(inst + 0x35,2,uVar5 >> 1 & 1);
+    IROperand__setModifierBits(inst + 0x35,1,source1Flags3 & 1);
+    IROperand__setModifierBits(inst + 0x35,2,source1Flags3 >> 1 & 1);
     inst[0x58] = useCount + *(int *)(pass + 0x478);
     if (iVar8 != 0) {
       IRInst__setLastOperandFromRecord(inst,local_68,0,*(undefined4 *)(pass + 8));
@@ -7139,20 +7145,21 @@ LAB_00164d6c:
 int IRInst__needsNoSchedulerNode(inst)
   int *inst;
 {
+  int opcodeInfo;
   int iVar1;
   
   iVar1 = (**(code **)(*inst + 0x7c))(inst);
   if (iVar1 == 0) {
     if ((inst[5] & 0x8000U) == 0) {
-      iVar1 = inst[0x22];
+      opcodeInfo = inst[0x22];
     }
     else {
-      iVar1 = inst[0x22];
-      if ((*(int *)(iVar1 + 4) != 1) && (inst[0x21] == 0)) {
+      opcodeInfo = inst[0x22];
+      if ((*(int *)(opcodeInfo + 4) != 1) && (inst[0x21] == 0)) {
         return 1;
       }
     }
-    if (*(int *)(iVar1 + 8) != 0xa4) {
+    if (*(int *)(opcodeInfo + 8) != 0xa4) {
       return 0;
     }
   }

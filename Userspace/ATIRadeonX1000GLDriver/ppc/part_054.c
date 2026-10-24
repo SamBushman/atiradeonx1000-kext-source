@@ -567,6 +567,8 @@ int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
   undefined4 blockArg;
   uint flag;
 {
+  uint source2Flags;
+  uint source1Flags;
   undefined4 newSource2;
   undefined4 newSource;
   int operandRecord1;
@@ -587,9 +589,9 @@ int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
   iVar3 = IRInst__getOperandRecord(inst,1);
   uVar2 = *(undefined4 *)(iVar3 + 0x10);
   iVar3 = IRInst__getOperandRecord(inst2,1);
-  uVar5 = *(uint *)(inst + 0xb8);
+  source1Flags = *(uint *)(inst + 0xb8);
   *(undefined4 *)(iVar3 + 0x10) = uVar2;
-  IROperand__setModifierBits(operandRecord2,2,uVar5 >> 1 & 1);
+  IROperand__setModifierBits(operandRecord2,2,source1Flags >> 1 & 1);
   operandRecord1 = inst2 + 0xbc;
   IROperand__setModifierBits(operandRecord2,1,*(uint *)(inst + 0xb8) & 1);
   newSource2 = IRInst__getOperandSource(inst,2);
@@ -598,9 +600,9 @@ int R520MachineAssembler__emitCompareToPredicate(this, inst, blockArg, flag)
   operandRecord = IRInst__getOperandRecord(inst,2);
   uVar2 = *(undefined4 *)(operandRecord + 0x10);
   operandRecord = IRInst__getOperandRecord(inst2,2);
-  uVar5 = *(uint *)(inst + 0xd0);
+  source2Flags = *(uint *)(inst + 0xd0);
   *(undefined4 *)(operandRecord + 0x10) = uVar2;
-  IROperand__setModifierBits(operandRecord1,2,uVar5 >> 1 & 1);
+  IROperand__setModifierBits(operandRecord1,2,source2Flags >> 1 & 1);
   compareCode = 2;
   IROperand__setModifierBits(operandRecord1,1,*(uint *)(inst + 0xd0) & 1);
   *(undefined4 *)(inst2 + 0x9c) = 0x10101;

@@ -2580,9 +2580,9 @@
 0x1467e8	128	FUN_001467e8	part_042	converted
 0x146868	228	FUN_00146868	part_042	converted
 0x14694c	80	FUN_0014694c	part_043	converted
-0x14699c	368	FUN_0014699c	part_043	converted
+0x14699c	368	Use__negationParityEqual	part_043	converted
 0x146b0c	460	FUN_00146b0c	part_043	converted
-0x146cd8	264	FUN_00146cd8	part_043	converted
+0x146cd8	264	Use__sourceIsPlainSingleUse	part_043	converted
 0x146de0	252	Inst__opcodeOrSourcesDiffer	part_043	converted
 0x146edc	304	FUN_00146edc	part_043	converted
 0x14700c	56	FUN_0014700c	part_043	converted

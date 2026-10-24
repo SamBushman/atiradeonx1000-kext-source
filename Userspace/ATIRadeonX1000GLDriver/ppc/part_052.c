@@ -194,6 +194,7 @@ int R300MachineAssembler__setOutputDestination(this, writeRgb, writeAlpha, inst)
   int writeAlpha;
   int inst;
 {
+  int destRegister;
   int iVar1;
   undefined1 writeMask;
   int iVar3;
@@ -202,16 +203,16 @@ int R300MachineAssembler__setOutputDestination(this, writeRgb, writeAlpha, inst)
   int destinationClass;
   
   destinationClass = *(int *)(inst + 0x98);
-  iVar4 = *(int *)(inst + 0x94);
+  destRegister = *(int *)(inst + 0x94);
   if (destinationClass == 9) {
-    iVar1 = iVar4 + 1;
+    iVar1 = destRegister + 1;
     iVar3 = *(int *)(*(int *)(this + 0x5c) + 0x9374);
     if (iVar1 <= iVar3) {
       iVar1 = iVar3;
     }
     *(int *)(*(int *)(this + 0x5c) + 0x9374) = iVar1;
   }
-  outputIndex = (undefined1)iVar4;
+  outputIndex = (undefined1)destRegister;
   if ((writeRgb != 0) && (destinationClass != 8)) {
     *(undefined1 *)(*(int *)(this + 0x60) * 0x48 + *(int *)(this + 0x58) + 0x16) = outputIndex;
     iVar3 = *(int *)(this + 0x60);
@@ -2808,6 +2809,7 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
   int *inst;
   uint *instructionWords;
 {
+  uint source1Flags;
   int *operandVReg;
   byte bVar1;
   uint uVar2;
@@ -2874,16 +2876,16 @@ int R300VMachineAssembler__encodeDualMathOperands(this, inst, instructionWords)
     *(int *)(this + 0x34) = (int)((ulonglong)uVar14 >> 0x20);
   }
   uVar3 = (uint)((ulonglong)srcOffsetPair >> 0x20);
-  uVar2 = inst[0x2e];
-  if ((uVar2 & 2) == 0) {
+  source1Flags = inst[0x2e];
+  if ((source1Flags & 2) == 0) {
     uVar10 = *dualMathWord;
   }
   else {
     uVar10 = *dualMathWord | 8;
     *dualMathWord = uVar10;
-    uVar2 = inst[0x2e];
+    source1Flags = inst[0x2e];
   }
-  if ((uVar2 & 1) != 0) {
+  if ((source1Flags & 1) != 0) {
     uVar10 = uVar10 | 0x2000000;
     *dualMathWord = uVar10;
   }
