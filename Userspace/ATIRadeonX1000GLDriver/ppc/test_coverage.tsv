@@ -175,7 +175,7 @@
 0x18090	FUN_00018090	100	yes	
 0x18120	glCopyPixels_impl	6016	no	calls an import (malloc); indirect call (driver context / vtable / callback)
 0x18a40	glDrawPixels_impl	3636	no	calls an import (free); calls an import (glgConvertType); calls an import (glgPixelCenters)
-0x198b0	FUN_000198b0	228	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x198b0	gld_drawPixelsAtRasterPos	228	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x199a0	gld_drawPixelsDispatch	68	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x199f0	FUN_000199f0	212	yes	
 0x19ad0	FUN_00019ad0	360	yes	
@@ -267,7 +267,7 @@
 0x273a0	FUN_000273a0	1484	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x27990	FUN_00027990	2360	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x28350	gld_readPixelsViaBlit	3820	no	atomic / cache / barrier instruction; calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
-0x29290	FUN_00029290	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x29290	glReadPixels_entry	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x29294	glReadPixels_impl	2376	no	calls an import (glgConvertType); calls an import (glgProcessPixels); calls an import (io_connect_method_structureI_structureO)
 0x29c00	FUN_00029c00	1624	no	indirect call (driver context / vtable / callback)
 0x2a260	FUN_0002a260	356	no	indirect call (driver context / vtable / callback)

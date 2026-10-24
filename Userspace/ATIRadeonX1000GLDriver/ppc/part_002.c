@@ -10131,7 +10131,7 @@ LAB_00018700:
     }
     iVar34 = _malloc(iVar34 * height);
     if (iVar34 != 0) {
-      FUN_00029290(ctx,srcX,srcY,width,height,uVar32,puVar42,iVar34,2,0);
+      glReadPixels_entry(ctx,srcX,srcY,width,height,uVar32,puVar42,iVar34,2,0);
       ((int (*)())gld_drawPixelsDispatch)(ctx,rasterPos,width,height,uVar32,puVar42,iVar34,1,0);
                     
                     
@@ -10747,8 +10747,8 @@ LAB_000194f4:
   return;
 }
 
-/* FUN_000198b0 @ 0x198b0 (228 bytes) */
-int FUN_000198b0(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+/* gld_drawPixelsAtRasterPos @ 0x198b0 (228 bytes) */
+int gld_drawPixelsAtRasterPos(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int param_1;
   uint param_2;
   uint param_3;

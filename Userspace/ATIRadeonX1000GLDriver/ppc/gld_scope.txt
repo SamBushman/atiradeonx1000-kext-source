@@ -24,7 +24,7 @@ gld_drawVertexArray
 FUN_00024fe0
 FUN_00025bf0
 gld_readPixelsViaBlit
-FUN_00029290
+glReadPixels_entry
 glReadPixels_impl
 gld_drawPixelsFromClientSurface
 gldContextFreeResources

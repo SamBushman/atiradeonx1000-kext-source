@@ -1,8 +1,2 @@
 # local	FUNCTION	old	new	tier	evidence
-local	FUN_00002ae0	pcVar37	accumByteCursor	INFERRED	walks the software accumulation buffer (glContext+0x148) one RGBA8 pixel (4 bytes) at a time; stepped by 4 and written/read per channel
-local	FUN_00002ae0	pcVar30	accumByteEnd	INFERRED	end of the row for accumByteCursor: cursor + regionWidth*4
-local	FUN_00002ae0	psVar38	accumShortCursor	INFERRED	walks the software accumulation buffer one 16-bit-per-channel pixel (4 shorts) at a time
-local	FUN_00002ae0	psVar39	accumShortEnd	INFERRED	end of the row for accumShortCursor: cursor + regionWidth*4 shorts
 local	FUN_00002ae0	puVar43	readbackWordCursor	INFERRED	walks the 32-bit readback staging buffer (readbackPixels) one pixel at a time
-local	FUN_00002ae0	puVar42	readbackHalfCursor	INFERRED	walks the 16-bit readback staging buffer (readbackPixels, 2 bytes per pixel) one pixel at a time
-local	FUN_00002ae0	uVar45	paddedRowPixels	CONFIRMED	(drawable width at +0x15c + 7) & ~7: the readback buffer's row pitch in pixels; the row offset is stepped back by it each row

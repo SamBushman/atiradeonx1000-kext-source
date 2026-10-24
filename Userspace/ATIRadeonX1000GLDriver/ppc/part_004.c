@@ -3147,8 +3147,8 @@ LAB_0002918c:
   } while( true );
 }
 
-/* FUN_00029290 @ 0x29290 (4 bytes) */
-int FUN_00029290(ctx, rectX, rectY, width, height, format, pixelType, pixels, transferMode, surfaceInfo)
+/* glReadPixels_entry @ 0x29290 (4 bytes) */
+int glReadPixels_entry(ctx, rectX, rectY, width, height, format, pixelType, pixels, transferMode, surfaceInfo)
   int ctx;
   int rectX;
   int rectY;
@@ -6751,7 +6751,7 @@ asm(".set FUN_00027150, _FUN_00027150");
 asm(".globl FUN_000273a0");
 asm(".set FUN_000273a0, _FUN_000273a0");
 asm(".globl FUN_00029290");
-asm(".set FUN_00029290, _FUN_00029290");
+asm(".set FUN_00029290, _glReadPixels_entry");
 asm(".globl FUN_0002b740");
 asm(".set FUN_0002b740, _FUN_0002b740");
 asm(".globl FUN_0002bbc4");

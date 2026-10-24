@@ -174,7 +174,7 @@
 0x18090	100	FUN_00018090	part_002	converted
 0x18120	6016	glCopyPixels_impl	part_002	converted
 0x18a40	3636	glDrawPixels_impl	part_002	converted
-0x198b0	228	FUN_000198b0	part_002	converted
+0x198b0	228	gld_drawPixelsAtRasterPos	part_002	converted
 0x199a0	68	gld_drawPixelsDispatch	part_002	converted
 0x199f0	212	FUN_000199f0	part_002	converted
 0x19ad0	360	FUN_00019ad0	part_002	converted
@@ -266,7 +266,7 @@
 0x273a0	1484	FUN_000273a0	part_004	converted
 0x27990	2360	FUN_00027990	part_004	converted
 0x28350	3820	gld_readPixelsViaBlit	part_004	converted
-0x29290	4	FUN_00029290	part_004	converted
+0x29290	4	glReadPixels_entry	part_004	converted
 0x29294	2376	glReadPixels_impl	part_004	converted
 0x29c00	1624	FUN_00029c00	part_004	converted
 0x2a260	356	FUN_0002a260	part_004	converted

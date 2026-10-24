@@ -1087,577 +1087,638 @@ int FUN_000027d0(param_1, param_2)
 /* glAccum_impl @ 0x2ae0 (88 bytes) */
 void glAccum_impl(int glContext,undefined4 op,double value)
 {
-  float fVar1;
-  float fVar2;
-  byte bVar3;
-  byte bVar4;
-  float fVar5;
-  float fVar6;
-  float fVar7;
-  float fVar8;
-  float fVar9;
-  ushort uVar10;
-  float fVar11;
-  float fVar12;
-  uint uVar13;
-  char cVar14;
-  ushort uVar21;
-  int iVar15;
-  int iVar16;
-  int iVar17;
-  uint uVar18;
-  int iVar19;
-  uint uVar20;
+  double zeroD;
+  float valueScaleB;
+  float reciprocalValue;
+  float alphaScale;
+  char valueByte;
+  int alphaClamped8to16;
+  int greenClamped8to16;
+  int alphaByte;
+  ushort blueClamped16to16;
+  ushort greenClamped16to16;
+  ushort redClamped16to16;
+  ushort blueClamped8to16;
+  ushort pixelShr9;
+  uint rectBottomRet2;
+  uint blueByte;
+  uint redClamped16to32;
+  uint redClamped8to32;
+  uint texelShl5;
+  uint blueClamped16to32;
+  uint rectRight;
+  uint greenClamped16to32;
+  uint rectTopB;
+  uint rectBottomA;
+  uint paddedWidthB;
+  uint rectXB;
+  int rowBytes;
+  int rectBottomRaw;
+  int rectWidthPixels;
+  int alphaClamped16to16;
+  int redClamped8to16;
+  int accumBufferD;
+  int rectTopAdd;
+  int rectTopMul;
+  int rowCounterC;
+  int rectXThenRowStartB;
+  int accumBufferB;
+  int rowStartPixelRetB;
+  int shiftCount;
+  int fullWidthB;
+  int rowStartPixelRet;
+  int rectBottomClampB;
+  int rowCounterB;
+  int multiplierInt;
+  int divisor;
+  int fullHeightB;
+  int rectHeightThenBottom;
+  int engineStateB;
+  int rowCounter;
+  int fixedValue;
+  int rectHeight;
+  int engineState;
+  int accumBuffer;
+  uint rectBottomRet;
+  short *accumShortCursorRet;
+  short *accumShortEndRet;
+  char *accumByteCursorRet;
+  char *accumByteEndRet;
+  ushort *accumHalfEndRet;
+  ushort *readbackHalfDestCursor;
+  ushort *accumHalfCursorSrc16;
+  ushort *accumHalfCursor;
+  float valueScale;
+  float redOut;
+  byte texelShr8;
+  byte texelShr3;
+  float scaledSample;
+  float alpha1Out;
+  float green5Out;
+  float blue5Out;
+  float red5Out;
+  ushort pixelShr16;
+  float zeroF;
+  float channelMax31;
+  uint pixelWord;
+  char hasNegativeValues;
+  ushort pixelShr17;
+  int alphaClamped8to32;
+  int redByte;
+  int greenByte;
+  uint alphaClamped16to32;
+  int fullWidth;
+  uint rectWidth;
   void *readbackPixels;
-  int iVar23;
-  undefined1 *puVar24;
-  undefined2 *puVar25;
-  int iVar26;
-  ushort uVar27;
-  int iVar28;
-  uint uVar29;
+  int rectXThenRowStart;
+  undefined1 *accumRawByteCursor;
+  undefined2 *accumRaw16Cursor;
+  int fullHeight;
+  ushort texel16;
+  int rowCounterLoad;
+  uint rectTop;
   char *accumByteEnd;
-  uint uVar31;
-  byte *pbVar32;
-  ushort *puVar33;
-  int iVar34;
-  byte *pbVar35;
-  int iVar36;
+  uint paddedWidthA;
+  byte *accumUByteEnd;
+  ushort *accumHalfEnd;
+  int rectBottomClamp;
+  byte *accumUByteCursor;
+  int accumBufferC;
   char *accumByteCursor;
   short *accumShortCursor;
-  ushort uVar41;
+  ushort pixelShr1;
   short *accumShortEnd;
-  int iVar40;
+  int rowCounterD;
   ushort *readbackHalfCursor;
   uint *readbackWordCursor;
-  uint uVar44;
+  uint greenClamped8to32;
   uint paddedRowPixels;
-  uint uVar46;
-  undefined1 *puVar47;
-  ushort *puVar48;
-  undefined2 *puVar49;
-  double dVar50;
-  double dVar51;
-  double dVar52;
-  double dVar53;
-  double dVar54;
-  double dVar55;
-  double dVar56;
-  short sStack_262;
-  short sStack_25a;
-  short sStack_252;
-  short sStack_24a;
-  short sStack_242;
-  short sStack_23a;
-  short sStack_232;
-  short sStack_22a;
-  short sStack_da;
+  uint blueClamped8to32;
+  undefined1 *accumRawByteEnd;
+  ushort *accumHalfEndSrc16;
+  undefined2 *accumRaw16End;
+  double scaledSampleD;
+  double intBiasD;
+  double clampMinD;
+  double channelMax255D;
+  double blueOut;
+  double greenOut;
+  double alphaOut;
+  short accumFixedValueA8S16;
+  short accumFixedValueA16S16;
+  short accumFixedValueA8S32;
+  short accumFixedValueA16S32;
+  short loadFixedValueA8S16;
+  short loadFixedValueA16S16;
+  short loadFixedValueA8S32;
+  short loadFixedValueA16S32;
+  short addFixedValueA8;
   
-  iVar28 = *(int *)(glContext + 0x148);
-  if (iVar28 == 0) {
+  accumBuffer = *(int *)(glContext + 0x148);
+  if (accumBuffer == 0) {
     return;
   }
   switch(op) {
   case 0x100:
     if ((*(uint *)(glContext + 0x154) & 3) == 0) {
-      iVar28 = *(int *)(glContext + 0x10);
-      if (((unsigned char *)0x00003190)[iVar28] == '\0') {
-        iVar19 = *(int *)(glContext + 0x15c);
-        iVar26 = *(int *)(glContext + 0x160);
-        iVar23 = 0;
-        uVar29 = 0;
-        uVar20 = iVar19 + 7U & 0xfffffff8;
-        iVar28 = iVar26;
+      engineState = *(int *)(glContext + 0x10);
+      if (((unsigned char *)0x00003190)[engineState] == '\0') {
+        fullWidth = *(int *)(glContext + 0x15c);
+        fullHeight = *(int *)(glContext + 0x160);
+        rectXThenRowStart = 0;
+        rectTop = 0;
+        rectWidth = fullWidth + 7U & 0xfffffff8;
+        rectHeight = fullHeight;
       }
       else {
-        iVar23 = *(int *)(((unsigned char *)0x00003180) + iVar28);
-        iVar26 = *(int *)(glContext + 0x160);
-        uVar20 = iVar23 + *(int *)(((unsigned char *)0x00003188) + iVar28);
-        uVar29 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar28) + *(int *)(((unsigned char *)0x00003184) + iVar28));
-        iVar28 = *(int *)(((unsigned char *)0x0000318c) + iVar28) + uVar29;
-        if (iVar23 < 0) {
-          iVar23 = 0;
+        rectXThenRowStart = *(int *)(((unsigned char *)0x00003180) + engineState);
+        fullHeight = *(int *)(glContext + 0x160);
+        rectWidth = rectXThenRowStart + *(int *)(((unsigned char *)0x00003188) + engineState);
+        rectTop = fullHeight - (*(int *)(((unsigned char *)0x0000318c) + engineState) + *(int *)(((unsigned char *)0x00003184) + engineState));
+        engineState = *(int *)(((unsigned char *)0x0000318c) + engineState) + rectTop;
+        if (rectXThenRowStart < 0) {
+          rectXThenRowStart = 0;
         }
-        if ((int)uVar29 < 0) {
-          uVar29 = 0;
+        if ((int)rectTop < 0) {
+          rectTop = 0;
         }
-        iVar19 = *(int *)(glContext + 0x15c);
-        uVar31 = iVar19 + 7U & 0xfffffff8;
-        if ((int)uVar31 < (int)uVar20) {
-          uVar20 = uVar31;
+        fullWidth = *(int *)(glContext + 0x15c);
+        paddedWidthA = fullWidth + 7U & 0xfffffff8;
+        if ((int)paddedWidthA < (int)rectWidth) {
+          rectWidth = paddedWidthA;
         }
-        iVar34 = iVar26;
-        if (iVar28 <= iVar26) {
-          iVar34 = iVar28;
+        rectBottomClamp = fullHeight;
+        if (engineState <= fullHeight) {
+          rectBottomClamp = engineState;
         }
-        uVar20 = uVar20 - iVar23;
-        iVar28 = iVar34 - uVar29;
+        rectWidth = rectWidth - rectXThenRowStart;
+        rectHeight = rectBottomClamp - rectTop;
       }
-      if (uVar20 == 0) {
+      if (rectWidth == 0) {
         return;
       }
-      if (iVar28 == 0) {
+      if (rectHeight == 0) {
         return;
       }
-      readbackPixels = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 4);
-      FUN_00029290(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
+      readbackPixels = _malloc((fullWidth + 7U & 0xfffffff8) * fullHeight * 4);
+      glReadPixels_entry(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
                    *(undefined4 *)(glContext + 0x160),0x80e1,0x8367,readbackPixels,2,0);
-      uVar31 = uVar29 + iVar28;
+      rectBottomA = rectTop + rectHeight;
       if (value < (double)FLOAT_001aa0d4) {
         *(undefined1 *)(glContext + 0x140) = 1;
       }
       paddedRowPixels = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
-      iVar23 = iVar23 + paddedRowPixels * ((*(int *)(glContext + 0x160) - uVar29) + -1);
+      rectXThenRowStart = rectXThenRowStart + paddedRowPixels * ((*(int *)(glContext + 0x160) - rectTop) + -1);
       if (*(char *)(glContext + 0x141) == '\x01') {
-        sStack_252 = (short)(int)(value * (double)FLOAT_001aa0d8);
-        iVar28 = (int)sStack_252;
-        if (uVar29 < uVar31) {
-          iVar19 = 0;
+        accumFixedValueA8S32 = (short)(int)(value * (double)FLOAT_001aa0d8);
+        fixedValue = (int)accumFixedValueA8S32;
+        if (rectTop < rectBottomA) {
+          rowCounter = 0;
           do {
-            readbackWordCursor = (uint *)((int)readbackPixels + iVar23 * 4);
-            accumByteCursor = (char *)(iVar23 * 4 + *(int *)(glContext + 0x148));
-            accumByteEnd = accumByteCursor + uVar20 * 4;
+            readbackWordCursor = (uint *)((int)readbackPixels + rectXThenRowStart * 4);
+            accumByteCursor = (char *)(rectXThenRowStart * 4 + *(int *)(glContext + 0x148));
+            accumByteEnd = accumByteCursor + rectWidth * 4;
             for (; accumByteCursor < accumByteEnd; accumByteCursor = accumByteCursor + 4) {
-              uVar13 = *readbackWordCursor;
+              pixelWord = *readbackWordCursor;
               readbackWordCursor = readbackWordCursor + 1;
-              *accumByteCursor = (char)((int)(iVar28 * (uVar13 >> 9 & 0x7f80 | uVar13 >> 0x11 & 0x7f)) >>
+              *accumByteCursor = (char)((int)(fixedValue * (pixelWord >> 9 & 0x7f80 | pixelWord >> 0x11 & 0x7f)) >>
                                0x17) + *accumByteCursor;
-              accumByteCursor[3] = (char)((int)(iVar28 * (uVar13 >> 0x11 & 0x7f80 | uVar13 >> 0x19)) >> 0x17
+              accumByteCursor[3] = (char)((int)(fixedValue * (pixelWord >> 0x11 & 0x7f80 | pixelWord >> 0x19)) >> 0x17
                                  ) + accumByteCursor[3];
-              accumByteCursor[1] = (char)((int)(iVar28 * (uVar13 >> 1 & 0x7f80 | uVar13 >> 9 & 0x7f)) >>
+              accumByteCursor[1] = (char)((int)(fixedValue * (pixelWord >> 1 & 0x7f80 | pixelWord >> 9 & 0x7f)) >>
                                  0x17) + accumByteCursor[1];
-              accumByteCursor[2] = (char)((int)(iVar28 * ((uVar13 & 0xff) << 7 | uVar13 >> 1 & 0x7f)) >>
+              accumByteCursor[2] = (char)((int)(fixedValue * ((pixelWord & 0xff) << 7 | pixelWord >> 1 & 0x7f)) >>
                                  0x17) + accumByteCursor[2];
             }
-            iVar19 = iVar19 + 1;
-            iVar23 = iVar23 - paddedRowPixels;
-          } while (uVar31 - uVar29 != iVar19);
+            rowCounter = rowCounter + 1;
+            rectXThenRowStart = rectXThenRowStart - paddedRowPixels;
+          } while (rectBottomA - rectTop != rowCounter);
         }
       }
       else {
-        sStack_24a = (short)(int)(value * (double)FLOAT_001aa0d8);
-        iVar28 = (int)sStack_24a;
-        if (uVar29 < uVar31) {
-          iVar19 = 0;
+        accumFixedValueA16S32 = (short)(int)(value * (double)FLOAT_001aa0d8);
+        fixedValue = (int)accumFixedValueA16S32;
+        if (rectTop < rectBottomA) {
+          rowCounter = 0;
           do {
-            readbackWordCursor = (uint *)((int)readbackPixels + iVar23 * 4);
-            accumShortCursor = (short *)(iVar23 * 8 + *(int *)(glContext + 0x148));
-            accumShortEnd = accumShortCursor + uVar20 * 4;
+            readbackWordCursor = (uint *)((int)readbackPixels + rectXThenRowStart * 4);
+            accumShortCursor = (short *)(rectXThenRowStart * 8 + *(int *)(glContext + 0x148));
+            accumShortEnd = accumShortCursor + rectWidth * 4;
             for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
-              uVar13 = *readbackWordCursor;
+              pixelWord = *readbackWordCursor;
               readbackWordCursor = readbackWordCursor + 1;
-              *accumShortCursor = (short)((int)(iVar28 * (uVar13 >> 9 & 0x7f80 | uVar13 >> 0x11 & 0x7f)) >>
+              *accumShortCursor = (short)((int)(fixedValue * (pixelWord >> 9 & 0x7f80 | pixelWord >> 0x11 & 0x7f)) >>
                                 0xf) + *accumShortCursor;
-              accumShortCursor[3] = (short)((int)(iVar28 * (uVar13 >> 0x11 & 0x7f80 | uVar13 >> 0x19)) >> 0xf
+              accumShortCursor[3] = (short)((int)(fixedValue * (pixelWord >> 0x11 & 0x7f80 | pixelWord >> 0x19)) >> 0xf
                                   ) + accumShortCursor[3];
-              accumShortCursor[1] = (short)((int)(iVar28 * (uVar13 >> 1 & 0x7f80 | uVar13 >> 9 & 0x7f)) >>
+              accumShortCursor[1] = (short)((int)(fixedValue * (pixelWord >> 1 & 0x7f80 | pixelWord >> 9 & 0x7f)) >>
                                   0xf) + accumShortCursor[1];
-              accumShortCursor[2] = (short)((int)(iVar28 * ((uVar13 & 0xff) << 7 | uVar13 >> 1 & 0x7f)) >>
+              accumShortCursor[2] = (short)((int)(fixedValue * ((pixelWord & 0xff) << 7 | pixelWord >> 1 & 0x7f)) >>
                                   0xf) + accumShortCursor[2];
             }
-            iVar19 = iVar19 + 1;
-            iVar23 = iVar23 - paddedRowPixels;
-          } while (uVar31 - uVar29 != iVar19);
+            rowCounter = rowCounter + 1;
+            rectXThenRowStart = rectXThenRowStart - paddedRowPixels;
+          } while (rectBottomA - rectTop != rowCounter);
         }
       }
     }
     else {
-      iVar28 = *(int *)(glContext + 0x10);
-      if (((unsigned char *)0x00003190)[iVar28] == '\0') {
-        iVar19 = *(int *)(glContext + 0x15c);
-        iVar26 = *(int *)(glContext + 0x160);
-        iVar23 = 0;
-        uVar29 = 0;
-        uVar20 = iVar19 + 7U & 0xfffffff8;
-        iVar28 = iVar26;
+      engineState = *(int *)(glContext + 0x10);
+      if (((unsigned char *)0x00003190)[engineState] == '\0') {
+        fullWidth = *(int *)(glContext + 0x15c);
+        fullHeight = *(int *)(glContext + 0x160);
+        rectXThenRowStart = 0;
+        rectTop = 0;
+        rectWidth = fullWidth + 7U & 0xfffffff8;
+        rectHeight = fullHeight;
       }
       else {
-        iVar23 = *(int *)(((unsigned char *)0x00003180) + iVar28);
-        iVar26 = *(int *)(glContext + 0x160);
-        uVar20 = iVar23 + *(int *)(((unsigned char *)0x00003188) + iVar28);
-        uVar29 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar28) + *(int *)(((unsigned char *)0x00003184) + iVar28));
-        iVar28 = *(int *)(((unsigned char *)0x0000318c) + iVar28) + uVar29;
-        if (iVar23 < 0) {
-          iVar23 = 0;
+        rectXThenRowStart = *(int *)(((unsigned char *)0x00003180) + engineState);
+        fullHeight = *(int *)(glContext + 0x160);
+        rectWidth = rectXThenRowStart + *(int *)(((unsigned char *)0x00003188) + engineState);
+        rectTop = fullHeight - (*(int *)(((unsigned char *)0x0000318c) + engineState) + *(int *)(((unsigned char *)0x00003184) + engineState));
+        engineState = *(int *)(((unsigned char *)0x0000318c) + engineState) + rectTop;
+        if (rectXThenRowStart < 0) {
+          rectXThenRowStart = 0;
         }
-        if ((int)uVar29 < 0) {
-          uVar29 = 0;
+        if ((int)rectTop < 0) {
+          rectTop = 0;
         }
-        iVar19 = *(int *)(glContext + 0x15c);
-        uVar31 = iVar19 + 7U & 0xfffffff8;
-        if ((int)uVar31 < (int)uVar20) {
-          uVar20 = uVar31;
+        fullWidth = *(int *)(glContext + 0x15c);
+        paddedWidthA = fullWidth + 7U & 0xfffffff8;
+        if ((int)paddedWidthA < (int)rectWidth) {
+          rectWidth = paddedWidthA;
         }
-        iVar34 = iVar26;
-        if (iVar28 <= iVar26) {
-          iVar34 = iVar28;
+        rectBottomClamp = fullHeight;
+        if (engineState <= fullHeight) {
+          rectBottomClamp = engineState;
         }
-        uVar20 = uVar20 - iVar23;
-        iVar28 = iVar34 - uVar29;
+        rectWidth = rectWidth - rectXThenRowStart;
+        rectHeight = rectBottomClamp - rectTop;
       }
-      if (uVar20 == 0) {
+      if (rectWidth == 0) {
         return;
       }
-      if (iVar28 == 0) {
+      if (rectHeight == 0) {
         return;
       }
-      readbackPixels = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 2);
-      FUN_00029290(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
+      readbackPixels = _malloc((fullWidth + 7U & 0xfffffff8) * fullHeight * 2);
+      glReadPixels_entry(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
                    *(undefined4 *)(glContext + 0x160),0x80e1,0x8366,readbackPixels,2,0);
-      uVar31 = uVar29 + iVar28;
+      rectBottomA = rectTop + rectHeight;
       if (value < (double)FLOAT_001aa0d4) {
         *(undefined1 *)(glContext + 0x140) = 1;
       }
       paddedRowPixels = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
-      iVar23 = iVar23 + paddedRowPixels * ((*(int *)(glContext + 0x160) - uVar29) + -1);
+      rectXThenRowStart = rectXThenRowStart + paddedRowPixels * ((*(int *)(glContext + 0x160) - rectTop) + -1);
       if (*(char *)(glContext + 0x141) == '\x01') {
-        sStack_262 = (short)(int)(value * (double)FLOAT_001aa0d8);
-        iVar28 = (int)sStack_262;
-        if (uVar29 < uVar31) {
-          iVar19 = 0;
+        accumFixedValueA8S16 = (short)(int)(value * (double)FLOAT_001aa0d8);
+        fixedValue = (int)accumFixedValueA8S16;
+        if (rectTop < rectBottomA) {
+          rowCounter = 0;
           do {
-            readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
-            accumByteCursor = (char *)(iVar23 * 4 + *(int *)(glContext + 0x148));
-            accumByteEnd = accumByteCursor + uVar20 * 4;
+            readbackHalfCursor = (ushort *)((int)readbackPixels + rectXThenRowStart * 2);
+            accumByteCursor = (char *)(rectXThenRowStart * 4 + *(int *)(glContext + 0x148));
+            accumByteEnd = accumByteCursor + rectWidth * 4;
             for (; accumByteCursor < accumByteEnd; accumByteCursor = accumByteCursor + 4) {
-              uVar27 = *readbackHalfCursor;
+              texel16 = *readbackHalfCursor;
               readbackHalfCursor = readbackHalfCursor + 1;
-              uVar13 = (uint)uVar27 << 5;
-              accumByteCursor[1] = (char)((int)(iVar28 * (uVar13 & 0x7c00 | uVar27 & 0x3e0 |
-                                                 uVar27 >> 5 & 0x1f)) >> 0x17) + accumByteCursor[1];
-              accumByteCursor[3] = (char)((int)(iVar28 * (-(uint)(uVar27 >> 0xf) & 0x7fff)) >> 0x17) +
+              texelShl5 = (uint)texel16 << 5;
+              accumByteCursor[1] = (char)((int)(fixedValue * (texelShl5 & 0x7c00 | texel16 & 0x3e0 |
+                                                 texel16 >> 5 & 0x1f)) >> 0x17) + accumByteCursor[1];
+              accumByteCursor[3] = (char)((int)(fixedValue * (-(uint)(texel16 >> 0xf) & 0x7fff)) >> 0x17) +
                            accumByteCursor[3];
-              *accumByteCursor = (char)((int)(iVar28 * (uVar27 & 0x7c00 | uVar27 >> 5 & 0x3e0 |
-                                               uVar27 >> 10 & 0x1f)) >> 0x17) + *accumByteCursor;
-              accumByteCursor[2] = (char)((int)(iVar28 * ((uVar27 & 0x1f) << 10 | uVar13 & 0x3e0 |
-                                                 uVar27 & 0x1f)) >> 0x17) + accumByteCursor[2];
+              *accumByteCursor = (char)((int)(fixedValue * (texel16 & 0x7c00 | texel16 >> 5 & 0x3e0 |
+                                               texel16 >> 10 & 0x1f)) >> 0x17) + *accumByteCursor;
+              accumByteCursor[2] = (char)((int)(fixedValue * ((texel16 & 0x1f) << 10 | texelShl5 & 0x3e0 |
+                                                 texel16 & 0x1f)) >> 0x17) + accumByteCursor[2];
             }
-            iVar19 = iVar19 + 1;
-            iVar23 = iVar23 - paddedRowPixels;
-          } while (uVar31 - uVar29 != iVar19);
+            rowCounter = rowCounter + 1;
+            rectXThenRowStart = rectXThenRowStart - paddedRowPixels;
+          } while (rectBottomA - rectTop != rowCounter);
         }
       }
       else {
-        sStack_25a = (short)(int)(value * (double)FLOAT_001aa0d8);
-        iVar28 = (int)sStack_25a;
-        if (uVar29 < uVar31) {
-          iVar19 = 0;
+        accumFixedValueA16S16 = (short)(int)(value * (double)FLOAT_001aa0d8);
+        fixedValue = (int)accumFixedValueA16S16;
+        if (rectTop < rectBottomA) {
+          rowCounter = 0;
           do {
-            readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
-            accumShortCursor = (short *)(iVar23 * 8 + *(int *)(glContext + 0x148));
-            accumShortEnd = accumShortCursor + uVar20 * 4;
+            readbackHalfCursor = (ushort *)((int)readbackPixels + rectXThenRowStart * 2);
+            accumShortCursor = (short *)(rectXThenRowStart * 8 + *(int *)(glContext + 0x148));
+            accumShortEnd = accumShortCursor + rectWidth * 4;
             for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
-              uVar27 = *readbackHalfCursor;
+              texel16 = *readbackHalfCursor;
               readbackHalfCursor = readbackHalfCursor + 1;
-              uVar13 = (uint)uVar27 << 5;
-              accumShortCursor[1] = (short)((int)(iVar28 * (uVar13 & 0x7c00 | uVar27 & 0x3e0 |
-                                                  uVar27 >> 5 & 0x1f)) >> 0xf) + accumShortCursor[1];
-              accumShortCursor[3] = (short)((int)(iVar28 * (-(uint)(uVar27 >> 0xf) & 0x7fff)) >> 0xf) +
+              texelShl5 = (uint)texel16 << 5;
+              accumShortCursor[1] = (short)((int)(fixedValue * (texelShl5 & 0x7c00 | texel16 & 0x3e0 |
+                                                  texel16 >> 5 & 0x1f)) >> 0xf) + accumShortCursor[1];
+              accumShortCursor[3] = (short)((int)(fixedValue * (-(uint)(texel16 >> 0xf) & 0x7fff)) >> 0xf) +
                            accumShortCursor[3];
-              *accumShortCursor = (short)((int)(iVar28 * (uVar27 & 0x7c00 | uVar27 >> 5 & 0x3e0 |
-                                                uVar27 >> 10 & 0x1f)) >> 0xf) + *accumShortCursor;
-              accumShortCursor[2] = (short)((int)(iVar28 * ((uVar27 & 0x1f) << 10 | uVar13 & 0x3e0 |
-                                                  uVar27 & 0x1f)) >> 0xf) + accumShortCursor[2];
+              *accumShortCursor = (short)((int)(fixedValue * (texel16 & 0x7c00 | texel16 >> 5 & 0x3e0 |
+                                                texel16 >> 10 & 0x1f)) >> 0xf) + *accumShortCursor;
+              accumShortCursor[2] = (short)((int)(fixedValue * ((texel16 & 0x1f) << 10 | texelShl5 & 0x3e0 |
+                                                  texel16 & 0x1f)) >> 0xf) + accumShortCursor[2];
             }
-            iVar19 = iVar19 + 1;
-            iVar23 = iVar23 - paddedRowPixels;
-          } while (uVar31 - uVar29 != iVar19);
+            rowCounter = rowCounter + 1;
+            rectXThenRowStart = rectXThenRowStart - paddedRowPixels;
+          } while (rectBottomA - rectTop != rowCounter);
         }
       }
     }
     goto code_r0x00003264;
   case 0x101:
     if ((*(uint *)(glContext + 0x154) & 3) == 0) {
-      iVar28 = *(int *)(glContext + 0x10);
-      if (((unsigned char *)0x00003190)[iVar28] == '\0') {
-        iVar19 = *(int *)(glContext + 0x15c);
-        iVar26 = *(int *)(glContext + 0x160);
-        iVar23 = 0;
-        uVar29 = 0;
-        uVar20 = iVar19 + 7U & 0xfffffff8;
-        iVar28 = iVar26;
+      engineState = *(int *)(glContext + 0x10);
+      if (((unsigned char *)0x00003190)[engineState] == '\0') {
+        fullWidth = *(int *)(glContext + 0x15c);
+        fullHeight = *(int *)(glContext + 0x160);
+        rectXThenRowStart = 0;
+        rectTop = 0;
+        rectWidth = fullWidth + 7U & 0xfffffff8;
+        rectHeight = fullHeight;
       }
       else {
-        iVar23 = *(int *)(((unsigned char *)0x00003180) + iVar28);
-        iVar26 = *(int *)(glContext + 0x160);
-        uVar20 = iVar23 + *(int *)(((unsigned char *)0x00003188) + iVar28);
-        uVar29 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar28) + *(int *)(((unsigned char *)0x00003184) + iVar28));
-        iVar28 = *(int *)(((unsigned char *)0x0000318c) + iVar28) + uVar29;
-        if (iVar23 < 0) {
-          iVar23 = 0;
+        rectXThenRowStart = *(int *)(((unsigned char *)0x00003180) + engineState);
+        fullHeight = *(int *)(glContext + 0x160);
+        rectWidth = rectXThenRowStart + *(int *)(((unsigned char *)0x00003188) + engineState);
+        rectTop = fullHeight - (*(int *)(((unsigned char *)0x0000318c) + engineState) + *(int *)(((unsigned char *)0x00003184) + engineState));
+        engineState = *(int *)(((unsigned char *)0x0000318c) + engineState) + rectTop;
+        if (rectXThenRowStart < 0) {
+          rectXThenRowStart = 0;
         }
-        if ((int)uVar29 < 0) {
-          uVar29 = 0;
+        if ((int)rectTop < 0) {
+          rectTop = 0;
         }
-        iVar19 = *(int *)(glContext + 0x15c);
-        uVar31 = iVar19 + 7U & 0xfffffff8;
-        if ((int)uVar31 < (int)uVar20) {
-          uVar20 = uVar31;
+        fullWidth = *(int *)(glContext + 0x15c);
+        paddedWidthA = fullWidth + 7U & 0xfffffff8;
+        if ((int)paddedWidthA < (int)rectWidth) {
+          rectWidth = paddedWidthA;
         }
-        iVar34 = iVar26;
-        if (iVar28 <= iVar26) {
-          iVar34 = iVar28;
+        rectBottomClamp = fullHeight;
+        if (engineState <= fullHeight) {
+          rectBottomClamp = engineState;
         }
-        uVar20 = uVar20 - iVar23;
-        iVar28 = iVar34 - uVar29;
+        rectWidth = rectWidth - rectXThenRowStart;
+        rectHeight = rectBottomClamp - rectTop;
       }
-      if (uVar20 == 0) {
+      if (rectWidth == 0) {
         return;
       }
-      if (iVar28 == 0) {
+      if (rectHeight == 0) {
         return;
       }
-      readbackPixels = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 4);
-      FUN_00029290(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
+      readbackPixels = _malloc((fullWidth + 7U & 0xfffffff8) * fullHeight * 4);
+      glReadPixels_entry(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
                    *(undefined4 *)(glContext + 0x160),0x80e1,0x8367,readbackPixels,2,0);
-      uVar31 = uVar29 + iVar28;
+      rectBottomA = rectTop + rectHeight;
       if (value < (double)FLOAT_001aa0d4) {
         *(undefined1 *)(glContext + 0x140) = 1;
       }
       paddedRowPixels = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
-      iVar23 = iVar23 + paddedRowPixels * ((*(int *)(glContext + 0x160) - uVar29) + -1);
+      rectXThenRowStart = rectXThenRowStart + paddedRowPixels * ((*(int *)(glContext + 0x160) - rectTop) + -1);
       if (*(char *)(glContext + 0x141) == '\x01') {
         if (value == (double)FLOAT_001aa0e8) {
-          if (uVar29 < uVar31) {
-            iVar28 = 0;
+          if (rectTop < rectBottomA) {
+            rowCounterLoad = 0;
             do {
-              readbackWordCursor = (uint *)((int)readbackPixels + iVar23 * 4);
-              pbVar35 = (byte *)(iVar23 * 4 + *(int *)(glContext + 0x148));
-              pbVar32 = pbVar35 + uVar20 * 4;
-              for (; pbVar35 < pbVar32; pbVar35 = pbVar35 + 4) {
-                uVar13 = *readbackWordCursor;
+              readbackWordCursor = (uint *)((int)readbackPixels + rectXThenRowStart * 4);
+              accumUByteCursor = (byte *)(rectXThenRowStart * 4 + *(int *)(glContext + 0x148));
+              accumUByteEnd = accumUByteCursor + rectWidth * 4;
+              for (; accumUByteCursor < accumUByteEnd; accumUByteCursor = accumUByteCursor + 4) {
+                pixelWord = *readbackWordCursor;
                 readbackWordCursor = readbackWordCursor + 1;
-                *pbVar35 = (byte)(uVar13 >> 0x11) & 0x7f;
-                pbVar35[3] = (byte)(uVar13 >> 0x19);
-                pbVar35[1] = (byte)(uVar13 >> 9) & 0x7f;
-                pbVar35[2] = (byte)(uVar13 >> 1) & 0x7f;
+                *accumUByteCursor = (byte)(pixelWord >> 0x11) & 0x7f;
+                accumUByteCursor[3] = (byte)(pixelWord >> 0x19);
+                accumUByteCursor[1] = (byte)(pixelWord >> 9) & 0x7f;
+                accumUByteCursor[2] = (byte)(pixelWord >> 1) & 0x7f;
               }
-              iVar28 = iVar28 + 1;
-              iVar23 = iVar23 - paddedRowPixels;
-            } while (uVar31 - uVar29 != iVar28);
+              rowCounterLoad = rowCounterLoad + 1;
+              rectXThenRowStart = rectXThenRowStart - paddedRowPixels;
+            } while (rectBottomA - rectTop != rowCounterLoad);
           }
         }
         else {
-          sStack_232 = (short)(int)(value * (double)FLOAT_001aa0d8);
-          iVar28 = (int)sStack_232;
-          if (uVar29 < uVar31) {
-            iVar19 = 0;
+          loadFixedValueA8S32 = (short)(int)(value * (double)FLOAT_001aa0d8);
+          fixedValue = (int)loadFixedValueA8S32;
+          if (rectTop < rectBottomA) {
+            rowCounter = 0;
             do {
-              readbackWordCursor = (uint *)((int)readbackPixels + iVar23 * 4);
-              puVar24 = (undefined1 *)(iVar23 * 4 + *(int *)(glContext + 0x148));
-              puVar47 = puVar24 + uVar20 * 4;
-              for (; puVar24 < puVar47; puVar24 = puVar24 + 4) {
-                uVar13 = *readbackWordCursor;
+              readbackWordCursor = (uint *)((int)readbackPixels + rectXThenRowStart * 4);
+              accumRawByteCursor = (undefined1 *)(rectXThenRowStart * 4 + *(int *)(glContext + 0x148));
+              accumRawByteEnd = accumRawByteCursor + rectWidth * 4;
+              for (; accumRawByteCursor < accumRawByteEnd; accumRawByteCursor = accumRawByteCursor + 4) {
+                pixelWord = *readbackWordCursor;
                 readbackWordCursor = readbackWordCursor + 1;
-                *puVar24 = (char)((int)(iVar28 * (uVar13 >> 9 & 0x7f80 | uVar13 >> 0x11 & 0x7f)) >>
+                *accumRawByteCursor = (char)((int)(fixedValue * (pixelWord >> 9 & 0x7f80 | pixelWord >> 0x11 & 0x7f)) >>
                                  0x17);
-                puVar24[3] = (char)((int)(iVar28 * (uVar13 >> 0x11 & 0x7f80 | uVar13 >> 0x19)) >>
+                accumRawByteCursor[3] = (char)((int)(fixedValue * (pixelWord >> 0x11 & 0x7f80 | pixelWord >> 0x19)) >>
                                    0x17);
-                puVar24[1] = (char)((int)(iVar28 * (uVar13 >> 1 & 0x7f80 | uVar13 >> 9 & 0x7f)) >>
+                accumRawByteCursor[1] = (char)((int)(fixedValue * (pixelWord >> 1 & 0x7f80 | pixelWord >> 9 & 0x7f)) >>
                                    0x17);
-                puVar24[2] = (char)((int)(iVar28 * ((uVar13 & 0xff) << 7 | uVar13 >> 1 & 0x7f)) >>
+                accumRawByteCursor[2] = (char)((int)(fixedValue * ((pixelWord & 0xff) << 7 | pixelWord >> 1 & 0x7f)) >>
                                    0x17);
               }
-              iVar19 = iVar19 + 1;
-              iVar23 = iVar23 - paddedRowPixels;
-            } while (uVar31 - uVar29 != iVar19);
+              rowCounter = rowCounter + 1;
+              rectXThenRowStart = rectXThenRowStart - paddedRowPixels;
+            } while (rectBottomA - rectTop != rowCounter);
           }
         }
       }
       else if (value == (double)FLOAT_001aa0e8) {
-        if (uVar29 < uVar31) {
-          iVar28 = 0;
+        if (rectTop < rectBottomA) {
+          rowCounterLoad = 0;
           do {
-            readbackWordCursor = (uint *)((int)readbackPixels + iVar23 * 4);
-            readbackHalfCursor = (ushort *)(iVar23 * 8 + *(int *)(glContext + 0x148));
-            puVar33 = readbackHalfCursor + uVar20 * 4;
-            for (; readbackHalfCursor < puVar33; readbackHalfCursor = readbackHalfCursor + 4) {
-              uVar13 = *readbackWordCursor;
+            readbackWordCursor = (uint *)((int)readbackPixels + rectXThenRowStart * 4);
+            accumHalfCursor = (ushort *)(rectXThenRowStart * 8 + *(int *)(glContext + 0x148));
+            accumHalfEnd = accumHalfCursor + rectWidth * 4;
+            for (; accumHalfCursor < accumHalfEnd; accumHalfCursor = accumHalfCursor + 4) {
+              pixelWord = *readbackWordCursor;
               readbackWordCursor = readbackWordCursor + 1;
-              uVar10 = (ushort)(uVar13 >> 0x10);
-              uVar21 = uVar10 >> 1;
-              uVar27 = (ushort)(uVar13 >> 9);
-              uVar41 = (ushort)(uVar13 >> 1);
-              readbackHalfCursor[3] = uVar21 & 0x7f80 | uVar10 >> 9;
-              *readbackHalfCursor = uVar27 & 0x7f80 | uVar21 & 0x7f;
-              readbackHalfCursor[1] = uVar41 & 0x7f80 | uVar27 & 0x7f;
-              readbackHalfCursor[2] = (ushort)(uVar13 << 7) & 0x7f80 | uVar41 & 0x7f;
+              pixelShr16 = (ushort)(pixelWord >> 0x10);
+              pixelShr17 = pixelShr16 >> 1;
+              pixelShr9 = (ushort)(pixelWord >> 9);
+              pixelShr1 = (ushort)(pixelWord >> 1);
+              accumHalfCursor[3] = pixelShr17 & 0x7f80 | pixelShr16 >> 9;
+              *accumHalfCursor = pixelShr9 & 0x7f80 | pixelShr17 & 0x7f;
+              accumHalfCursor[1] = pixelShr1 & 0x7f80 | pixelShr9 & 0x7f;
+              accumHalfCursor[2] = (ushort)(pixelWord << 7) & 0x7f80 | pixelShr1 & 0x7f;
             }
-            iVar28 = iVar28 + 1;
-            iVar23 = iVar23 - paddedRowPixels;
-          } while (uVar31 - uVar29 != iVar28);
+            rowCounterLoad = rowCounterLoad + 1;
+            rectXThenRowStart = rectXThenRowStart - paddedRowPixels;
+          } while (rectBottomA - rectTop != rowCounterLoad);
         }
       }
       else {
-        sStack_22a = (short)(int)(value * (double)FLOAT_001aa0d8);
-        iVar28 = (int)sStack_22a;
-        if (uVar29 < uVar31) {
-          iVar19 = 0;
+        loadFixedValueA16S32 = (short)(int)(value * (double)FLOAT_001aa0d8);
+        fixedValue = (int)loadFixedValueA16S32;
+        if (rectTop < rectBottomA) {
+          rowCounter = 0;
           do {
-            readbackWordCursor = (uint *)((int)readbackPixels + iVar23 * 4);
-            puVar25 = (undefined2 *)(iVar23 * 8 + *(int *)(glContext + 0x148));
-            puVar49 = puVar25 + uVar20 * 4;
-            for (; puVar25 < puVar49; puVar25 = puVar25 + 4) {
-              uVar13 = *readbackWordCursor;
+            readbackWordCursor = (uint *)((int)readbackPixels + rectXThenRowStart * 4);
+            accumRaw16Cursor = (undefined2 *)(rectXThenRowStart * 8 + *(int *)(glContext + 0x148));
+            accumRaw16End = accumRaw16Cursor + rectWidth * 4;
+            for (; accumRaw16Cursor < accumRaw16End; accumRaw16Cursor = accumRaw16Cursor + 4) {
+              pixelWord = *readbackWordCursor;
               readbackWordCursor = readbackWordCursor + 1;
-              *puVar25 = (short)((int)(iVar28 * (uVar13 >> 9 & 0x7f80 | uVar13 >> 0x11 & 0x7f)) >>
+              *accumRaw16Cursor = (short)((int)(fixedValue * (pixelWord >> 9 & 0x7f80 | pixelWord >> 0x11 & 0x7f)) >>
                                 0xf);
-              puVar25[3] = (short)((int)(iVar28 * (uVar13 >> 0x11 & 0x7f80 | uVar13 >> 0x19)) >> 0xf
+              accumRaw16Cursor[3] = (short)((int)(fixedValue * (pixelWord >> 0x11 & 0x7f80 | pixelWord >> 0x19)) >> 0xf
                                   );
-              puVar25[1] = (short)((int)(iVar28 * (uVar13 >> 1 & 0x7f80 | uVar13 >> 9 & 0x7f)) >>
+              accumRaw16Cursor[1] = (short)((int)(fixedValue * (pixelWord >> 1 & 0x7f80 | pixelWord >> 9 & 0x7f)) >>
                                   0xf);
-              puVar25[2] = (short)((int)(iVar28 * ((uVar13 & 0xff) << 7 | uVar13 >> 1 & 0x7f)) >>
+              accumRaw16Cursor[2] = (short)((int)(fixedValue * ((pixelWord & 0xff) << 7 | pixelWord >> 1 & 0x7f)) >>
                                   0xf);
             }
-            iVar19 = iVar19 + 1;
-            iVar23 = iVar23 - paddedRowPixels;
-          } while (uVar31 - uVar29 != iVar19);
+            rowCounter = rowCounter + 1;
+            rectXThenRowStart = rectXThenRowStart - paddedRowPixels;
+          } while (rectBottomA - rectTop != rowCounter);
         }
       }
     }
     else {
-      iVar28 = *(int *)(glContext + 0x10);
-      if (((unsigned char *)0x00003190)[iVar28] == '\0') {
-        iVar19 = *(int *)(glContext + 0x15c);
-        iVar26 = *(int *)(glContext + 0x160);
-        iVar23 = 0;
-        uVar29 = 0;
-        uVar20 = iVar19 + 7U & 0xfffffff8;
-        iVar28 = iVar26;
+      engineState = *(int *)(glContext + 0x10);
+      if (((unsigned char *)0x00003190)[engineState] == '\0') {
+        fullWidth = *(int *)(glContext + 0x15c);
+        fullHeight = *(int *)(glContext + 0x160);
+        rectXThenRowStart = 0;
+        rectTop = 0;
+        rectWidth = fullWidth + 7U & 0xfffffff8;
+        rectHeight = fullHeight;
       }
       else {
-        iVar23 = *(int *)(((unsigned char *)0x00003180) + iVar28);
-        iVar26 = *(int *)(glContext + 0x160);
-        uVar20 = iVar23 + *(int *)(((unsigned char *)0x00003188) + iVar28);
-        uVar29 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar28) + *(int *)(((unsigned char *)0x00003184) + iVar28));
-        iVar28 = *(int *)(((unsigned char *)0x0000318c) + iVar28) + uVar29;
-        if (iVar23 < 0) {
-          iVar23 = 0;
+        rectXThenRowStart = *(int *)(((unsigned char *)0x00003180) + engineState);
+        fullHeight = *(int *)(glContext + 0x160);
+        rectWidth = rectXThenRowStart + *(int *)(((unsigned char *)0x00003188) + engineState);
+        rectTop = fullHeight - (*(int *)(((unsigned char *)0x0000318c) + engineState) + *(int *)(((unsigned char *)0x00003184) + engineState));
+        engineState = *(int *)(((unsigned char *)0x0000318c) + engineState) + rectTop;
+        if (rectXThenRowStart < 0) {
+          rectXThenRowStart = 0;
         }
-        if ((int)uVar29 < 0) {
-          uVar29 = 0;
+        if ((int)rectTop < 0) {
+          rectTop = 0;
         }
-        iVar19 = *(int *)(glContext + 0x15c);
-        uVar31 = iVar19 + 7U & 0xfffffff8;
-        if ((int)uVar31 < (int)uVar20) {
-          uVar20 = uVar31;
+        fullWidth = *(int *)(glContext + 0x15c);
+        paddedWidthA = fullWidth + 7U & 0xfffffff8;
+        if ((int)paddedWidthA < (int)rectWidth) {
+          rectWidth = paddedWidthA;
         }
-        iVar34 = iVar26;
-        if (iVar28 <= iVar26) {
-          iVar34 = iVar28;
+        rectBottomClamp = fullHeight;
+        if (engineState <= fullHeight) {
+          rectBottomClamp = engineState;
         }
-        uVar20 = uVar20 - iVar23;
-        iVar28 = iVar34 - uVar29;
+        rectWidth = rectWidth - rectXThenRowStart;
+        rectHeight = rectBottomClamp - rectTop;
       }
-      if (uVar20 == 0) {
+      if (rectWidth == 0) {
         return;
       }
-      if (iVar28 == 0) {
+      if (rectHeight == 0) {
         return;
       }
-      readbackPixels = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 2);
-      FUN_00029290(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
+      readbackPixels = _malloc((fullWidth + 7U & 0xfffffff8) * fullHeight * 2);
+      glReadPixels_entry(glContext,0,0,*(int *)(glContext + 0x15c) + 7U & 0xfffffff8,
                    *(undefined4 *)(glContext + 0x160),0x80e1,0x8366,readbackPixels,2,0);
-      uVar31 = uVar29 + iVar28;
+      rectBottomA = rectTop + rectHeight;
       if (value < (double)FLOAT_001aa0d4) {
         *(undefined1 *)(glContext + 0x140) = 1;
       }
       paddedRowPixels = *(int *)(glContext + 0x15c) + 7U & 0xfffffff8;
-      iVar23 = iVar23 + paddedRowPixels * ((*(int *)(glContext + 0x160) - uVar29) + -1);
+      rectXThenRowStart = rectXThenRowStart + paddedRowPixels * ((*(int *)(glContext + 0x160) - rectTop) + -1);
       if (*(char *)(glContext + 0x141) == '\x01') {
         if (value == (double)FLOAT_001aa0e8) {
-          if (uVar29 < uVar31) {
-            iVar28 = 0;
+          if (rectTop < rectBottomA) {
+            rowCounterLoad = 0;
             do {
-              readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
-              pbVar35 = (byte *)(iVar23 * 4 + *(int *)(glContext + 0x148));
-              pbVar32 = pbVar35 + uVar20 * 4;
-              for (; pbVar35 < pbVar32; pbVar35 = pbVar35 + 4) {
-                uVar27 = *readbackHalfCursor;
+              readbackHalfCursor = (ushort *)((int)readbackPixels + rectXThenRowStart * 2);
+              accumUByteCursor = (byte *)(rectXThenRowStart * 4 + *(int *)(glContext + 0x148));
+              accumUByteEnd = accumUByteCursor + rectWidth * 4;
+              for (; accumUByteCursor < accumUByteEnd; accumUByteCursor = accumUByteCursor + 4) {
+                texel16 = *readbackHalfCursor;
                 readbackHalfCursor = readbackHalfCursor + 1;
-                bVar3 = (byte)(uVar27 >> 8);
-                bVar4 = (byte)(uVar27 >> 3);
-                pbVar35[2] = ((byte)uVar27 & 0x1f) << 2 | bVar4 & 3;
-                pbVar35[3] = (char)bVar3 >> 7 & 0x7f;
-                *pbVar35 = bVar3 & 0x7c | bVar3 >> 5 & 3;
-                pbVar35[1] = bVar4 & 0x7c | bVar3 & 3;
+                texelShr8 = (byte)(texel16 >> 8);
+                texelShr3 = (byte)(texel16 >> 3);
+                accumUByteCursor[2] = ((byte)texel16 & 0x1f) << 2 | texelShr3 & 3;
+                accumUByteCursor[3] = (char)texelShr8 >> 7 & 0x7f;
+                *accumUByteCursor = texelShr8 & 0x7c | texelShr8 >> 5 & 3;
+                accumUByteCursor[1] = texelShr3 & 0x7c | texelShr8 & 3;
               }
-              iVar28 = iVar28 + 1;
-              iVar23 = iVar23 - paddedRowPixels;
-            } while (uVar31 - uVar29 != iVar28);
+              rowCounterLoad = rowCounterLoad + 1;
+              rectXThenRowStart = rectXThenRowStart - paddedRowPixels;
+            } while (rectBottomA - rectTop != rowCounterLoad);
           }
         }
         else {
-          sStack_242 = (short)(int)(value * (double)FLOAT_001aa0d8);
-          iVar28 = (int)sStack_242;
-          if (uVar29 < uVar31) {
-            iVar19 = 0;
+          loadFixedValueA8S16 = (short)(int)(value * (double)FLOAT_001aa0d8);
+          fixedValue = (int)loadFixedValueA8S16;
+          if (rectTop < rectBottomA) {
+            rowCounter = 0;
             do {
-              readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
-              puVar24 = (undefined1 *)(iVar23 * 4 + *(int *)(glContext + 0x148));
-              puVar47 = puVar24 + uVar20 * 4;
-              for (; puVar24 < puVar47; puVar24 = puVar24 + 4) {
-                uVar27 = *readbackHalfCursor;
+              readbackHalfCursor = (ushort *)((int)readbackPixels + rectXThenRowStart * 2);
+              accumRawByteCursor = (undefined1 *)(rectXThenRowStart * 4 + *(int *)(glContext + 0x148));
+              accumRawByteEnd = accumRawByteCursor + rectWidth * 4;
+              for (; accumRawByteCursor < accumRawByteEnd; accumRawByteCursor = accumRawByteCursor + 4) {
+                texel16 = *readbackHalfCursor;
                 readbackHalfCursor = readbackHalfCursor + 1;
-                uVar13 = (uint)uVar27 << 5;
-                puVar24[1] = (char)((int)(iVar28 * (uVar13 & 0x7c00 | uVar27 & 0x3e0 |
-                                                   uVar27 >> 5 & 0x1f)) >> 0x17);
-                puVar24[3] = (char)((int)(iVar28 * (-(uint)(uVar27 >> 0xf) & 0x7fff)) >> 0x17);
-                *puVar24 = (char)((int)(iVar28 * (uVar27 & 0x7c00 | uVar27 >> 5 & 0x3e0 |
-                                                 uVar27 >> 10 & 0x1f)) >> 0x17);
-                puVar24[2] = (char)((int)(iVar28 * ((uVar27 & 0x1f) << 10 | uVar13 & 0x3e0 |
-                                                   uVar27 & 0x1f)) >> 0x17);
+                texelShl5 = (uint)texel16 << 5;
+                accumRawByteCursor[1] = (char)((int)(fixedValue * (texelShl5 & 0x7c00 | texel16 & 0x3e0 |
+                                                   texel16 >> 5 & 0x1f)) >> 0x17);
+                accumRawByteCursor[3] = (char)((int)(fixedValue * (-(uint)(texel16 >> 0xf) & 0x7fff)) >> 0x17);
+                *accumRawByteCursor = (char)((int)(fixedValue * (texel16 & 0x7c00 | texel16 >> 5 & 0x3e0 |
+                                                 texel16 >> 10 & 0x1f)) >> 0x17);
+                accumRawByteCursor[2] = (char)((int)(fixedValue * ((texel16 & 0x1f) << 10 | texelShl5 & 0x3e0 |
+                                                   texel16 & 0x1f)) >> 0x17);
               }
-              iVar19 = iVar19 + 1;
-              iVar23 = iVar23 - paddedRowPixels;
-            } while (uVar31 - uVar29 != iVar19);
+              rowCounter = rowCounter + 1;
+              rectXThenRowStart = rectXThenRowStart - paddedRowPixels;
+            } while (rectBottomA - rectTop != rowCounter);
           }
         }
       }
       else if (value == (double)FLOAT_001aa0e8) {
-        if (uVar29 < uVar31) {
-          iVar28 = 0;
+        if (rectTop < rectBottomA) {
+          rowCounterLoad = 0;
           do {
-            readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
-            puVar33 = (ushort *)(iVar23 * 8 + *(int *)(glContext + 0x148));
-            puVar48 = puVar33 + uVar20 * 4;
-            for (; puVar33 < puVar48; puVar33 = puVar33 + 4) {
-              uVar27 = *readbackHalfCursor;
+            readbackHalfCursor = (ushort *)((int)readbackPixels + rectXThenRowStart * 2);
+            accumHalfCursorSrc16 = (ushort *)(rectXThenRowStart * 8 + *(int *)(glContext + 0x148));
+            accumHalfEndSrc16 = accumHalfCursorSrc16 + rectWidth * 4;
+            for (; accumHalfCursorSrc16 < accumHalfEndSrc16; accumHalfCursorSrc16 = accumHalfCursorSrc16 + 4) {
+              texel16 = *readbackHalfCursor;
               readbackHalfCursor = readbackHalfCursor + 1;
-              puVar33[1] = uVar27 << 5 & 0x7c00 | uVar27 & 0x3e0 | uVar27 >> 5 & 0x1f;
-              puVar33[2] = (uVar27 & 0x1f) << 10 | uVar27 << 5 & 0x3e0 | uVar27 & 0x1f;
-              *puVar33 = uVar27 & 0x7c00 | uVar27 >> 5 & 0x3e0 | uVar27 >> 10 & 0x1f;
-              puVar33[3] = (short)uVar27 >> 0xf & 0x7fff;
+              accumHalfCursorSrc16[1] = texel16 << 5 & 0x7c00 | texel16 & 0x3e0 | texel16 >> 5 & 0x1f;
+              accumHalfCursorSrc16[2] = (texel16 & 0x1f) << 10 | texel16 << 5 & 0x3e0 | texel16 & 0x1f;
+              *accumHalfCursorSrc16 = texel16 & 0x7c00 | texel16 >> 5 & 0x3e0 | texel16 >> 10 & 0x1f;
+              accumHalfCursorSrc16[3] = (short)texel16 >> 0xf & 0x7fff;
             }
-            iVar28 = iVar28 + 1;
-            iVar23 = iVar23 - paddedRowPixels;
-          } while (uVar31 - uVar29 != iVar28);
+            rowCounterLoad = rowCounterLoad + 1;
+            rectXThenRowStart = rectXThenRowStart - paddedRowPixels;
+          } while (rectBottomA - rectTop != rowCounterLoad);
         }
       }
       else {
-        sStack_23a = (short)(int)(value * (double)FLOAT_001aa0d8);
-        iVar28 = (int)sStack_23a;
-        if (uVar29 < uVar31) {
-          iVar19 = 0;
+        loadFixedValueA16S16 = (short)(int)(value * (double)FLOAT_001aa0d8);
+        fixedValue = (int)loadFixedValueA16S16;
+        if (rectTop < rectBottomA) {
+          rowCounter = 0;
           do {
-            readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
-            puVar25 = (undefined2 *)(iVar23 * 8 + *(int *)(glContext + 0x148));
-            puVar49 = puVar25 + uVar20 * 4;
-            for (; puVar25 < puVar49; puVar25 = puVar25 + 4) {
-              uVar27 = *readbackHalfCursor;
+            readbackHalfCursor = (ushort *)((int)readbackPixels + rectXThenRowStart * 2);
+            accumRaw16Cursor = (undefined2 *)(rectXThenRowStart * 8 + *(int *)(glContext + 0x148));
+            accumRaw16End = accumRaw16Cursor + rectWidth * 4;
+            for (; accumRaw16Cursor < accumRaw16End; accumRaw16Cursor = accumRaw16Cursor + 4) {
+              texel16 = *readbackHalfCursor;
               readbackHalfCursor = readbackHalfCursor + 1;
-              uVar13 = (uint)uVar27 << 5;
-              puVar25[1] = (short)((int)(iVar28 * (uVar13 & 0x7c00 | uVar27 & 0x3e0 |
-                                                  uVar27 >> 5 & 0x1f)) >> 0xf);
-              puVar25[3] = (short)((int)(iVar28 * (-(uint)(uVar27 >> 0xf) & 0x7fff)) >> 0xf);
-              *puVar25 = (short)((int)(iVar28 * (uVar27 & 0x7c00 | uVar27 >> 5 & 0x3e0 |
-                                                uVar27 >> 10 & 0x1f)) >> 0xf);
-              puVar25[2] = (short)((int)(iVar28 * ((uVar27 & 0x1f) << 10 | uVar13 & 0x3e0 |
-                                                  uVar27 & 0x1f)) >> 0xf);
+              texelShl5 = (uint)texel16 << 5;
+              accumRaw16Cursor[1] = (short)((int)(fixedValue * (texelShl5 & 0x7c00 | texel16 & 0x3e0 |
+                                                  texel16 >> 5 & 0x1f)) >> 0xf);
+              accumRaw16Cursor[3] = (short)((int)(fixedValue * (-(uint)(texel16 >> 0xf) & 0x7fff)) >> 0xf);
+              *accumRaw16Cursor = (short)((int)(fixedValue * (texel16 & 0x7c00 | texel16 >> 5 & 0x3e0 |
+                                                texel16 >> 10 & 0x1f)) >> 0xf);
+              accumRaw16Cursor[2] = (short)((int)(fixedValue * ((texel16 & 0x1f) << 10 | texelShl5 & 0x3e0 |
+                                                  texel16 & 0x1f)) >> 0xf);
             }
-            iVar19 = iVar19 + 1;
-            iVar23 = iVar23 - paddedRowPixels;
-          } while (uVar31 - uVar29 != iVar19);
+            rowCounter = rowCounter + 1;
+            rectXThenRowStart = rectXThenRowStart - paddedRowPixels;
+          } while (rectBottomA - rectTop != rowCounter);
         }
       }
     }
@@ -1668,178 +1729,178 @@ code_r0x00003264:
     return;
   case 0x102:
     if ((*(uint *)(glContext + 0x154) & 3) == 0) {
-      iVar28 = *(int *)(glContext + 0x10);
-      if (*(int *)(((unsigned char *)0x00002e40U) + iVar28) != 0) {
-        if (((unsigned char *)0x00003190)[iVar28] == '\0') {
-          iVar19 = *(int *)(glContext + 0x15c);
-          iVar26 = *(int *)(glContext + 0x160);
-          iVar23 = 0;
-          uVar29 = 0;
-          uVar20 = iVar19 + 7U & 0xfffffff8;
-          iVar28 = iVar26;
+      engineState = *(int *)(glContext + 0x10);
+      if (*(int *)(((unsigned char *)0x00002e40U) + engineState) != 0) {
+        if (((unsigned char *)0x00003190)[engineState] == '\0') {
+          fullWidth = *(int *)(glContext + 0x15c);
+          fullHeight = *(int *)(glContext + 0x160);
+          rectXThenRowStart = 0;
+          rectTop = 0;
+          rectWidth = fullWidth + 7U & 0xfffffff8;
+          rectHeight = fullHeight;
         }
         else {
-          iVar23 = *(int *)(((unsigned char *)0x00003180) + iVar28);
-          iVar26 = *(int *)(glContext + 0x160);
-          uVar20 = iVar23 + *(int *)(((unsigned char *)0x00003188) + iVar28);
-          uVar29 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar28) + *(int *)(((unsigned char *)0x00003184) + iVar28));
-          iVar28 = *(int *)(((unsigned char *)0x0000318c) + iVar28) + uVar29;
-          if (iVar23 < 0) {
-            iVar23 = 0;
+          rectXThenRowStart = *(int *)(((unsigned char *)0x00003180) + engineState);
+          fullHeight = *(int *)(glContext + 0x160);
+          rectWidth = rectXThenRowStart + *(int *)(((unsigned char *)0x00003188) + engineState);
+          rectTop = fullHeight - (*(int *)(((unsigned char *)0x0000318c) + engineState) + *(int *)(((unsigned char *)0x00003184) + engineState));
+          engineState = *(int *)(((unsigned char *)0x0000318c) + engineState) + rectTop;
+          if (rectXThenRowStart < 0) {
+            rectXThenRowStart = 0;
           }
-          if ((int)uVar29 < 0) {
-            uVar29 = 0;
+          if ((int)rectTop < 0) {
+            rectTop = 0;
           }
-          iVar19 = *(int *)(glContext + 0x15c);
-          uVar31 = iVar19 + 7U & 0xfffffff8;
-          if ((int)uVar31 < (int)uVar20) {
-            uVar20 = uVar31;
+          fullWidth = *(int *)(glContext + 0x15c);
+          paddedWidthA = fullWidth + 7U & 0xfffffff8;
+          if ((int)paddedWidthA < (int)rectWidth) {
+            rectWidth = paddedWidthA;
           }
-          iVar34 = iVar26;
-          if (iVar28 <= iVar26) {
-            iVar34 = iVar28;
+          rectBottomClamp = fullHeight;
+          if (engineState <= fullHeight) {
+            rectBottomClamp = engineState;
           }
-          uVar20 = uVar20 - iVar23;
-          iVar28 = iVar34 - uVar29;
+          rectWidth = rectWidth - rectXThenRowStart;
+          rectHeight = rectBottomClamp - rectTop;
         }
-        if ((uVar20 != 0) && (iVar28 != 0)) {
-          readbackPixels = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 4);
-          iVar26 = *(int *)(glContext + 0x160);
-          paddedRowPixels = uVar29 + iVar28;
-          iVar19 = *(int *)(glContext + 0x15c);
-          uVar31 = iVar19 + 7U & 0xfffffff8;
-          cVar14 = *(char *)(glContext + 0x140);
-          iVar34 = iVar23 + uVar31 * ((iVar26 - uVar29) + -1);
+        if ((rectWidth != 0) && (rectHeight != 0)) {
+          readbackPixels = _malloc((fullWidth + 7U & 0xfffffff8) * fullHeight * 4);
+          fullHeight = *(int *)(glContext + 0x160);
+          rectBottomRet = rectTop + rectHeight;
+          fullWidth = *(int *)(glContext + 0x15c);
+          paddedWidthA = fullWidth + 7U & 0xfffffff8;
+          hasNegativeValues = *(char *)(glContext + 0x140);
+          rowStartPixelRetB = rectXThenRowStart + paddedWidthA * ((fullHeight - rectTop) + -1);
           if (*(char *)(glContext + 0x141) == '\x01') {
             if (value == (double)FLOAT_001aa0e8) {
-              if (uVar29 < paddedRowPixels) {
-                iVar36 = *(int *)(glContext + 0x148);
-                iVar40 = 0;
+              if (rectTop < rectBottomRet) {
+                accumBufferC = *(int *)(glContext + 0x148);
+                rowCounterD = 0;
                 do {
-                  pbVar35 = (byte *)(iVar34 * 4 + iVar36);
-                  readbackWordCursor = (uint *)((int)readbackPixels + iVar34 * 4);
-                  pbVar32 = pbVar35 + uVar20 * 4;
-                  if (cVar14 == '\0') {
-                    for (; pbVar35 < pbVar32; pbVar35 = pbVar35 + 4) {
-                      *readbackWordCursor = (uint)pbVar35[3] << 0x19 | (*pbVar35 & 0x7f) << 0x11 |
-                                 (pbVar35[1] & 0x7f) << 9 | (pbVar35[2] & 0x7f) << 1;
+                  accumUByteCursor = (byte *)(rowStartPixelRetB * 4 + accumBufferC);
+                  readbackWordCursor = (uint *)((int)readbackPixels + rowStartPixelRetB * 4);
+                  accumUByteEnd = accumUByteCursor + rectWidth * 4;
+                  if (hasNegativeValues == '\0') {
+                    for (; accumUByteCursor < accumUByteEnd; accumUByteCursor = accumUByteCursor + 4) {
+                      *readbackWordCursor = (uint)accumUByteCursor[3] << 0x19 | (*accumUByteCursor & 0x7f) << 0x11 |
+                                 (accumUByteCursor[1] & 0x7f) << 9 | (accumUByteCursor[2] & 0x7f) << 1;
                       readbackWordCursor = readbackWordCursor + 1;
                     }
                   }
                   else {
-                    for (; pbVar35 < pbVar32; pbVar35 = pbVar35 + 4) {
-                      uVar13 = 0;
-                      if (-1 < (char)*pbVar35) {
-                        uVar13 = (int)(char)*pbVar35;
+                    for (; accumUByteCursor < accumUByteEnd; accumUByteCursor = accumUByteCursor + 4) {
+                      redClamped8to32 = 0;
+                      if (-1 < (char)*accumUByteCursor) {
+                        redClamped8to32 = (int)(char)*accumUByteCursor;
                       }
-                      uVar44 = 0;
-                      if (-1 < (char)pbVar35[1]) {
-                        uVar44 = (int)(char)pbVar35[1];
+                      greenClamped8to32 = 0;
+                      if (-1 < (char)accumUByteCursor[1]) {
+                        greenClamped8to32 = (int)(char)accumUByteCursor[1];
                       }
-                      uVar46 = 0;
-                      if (-1 < (char)pbVar35[2]) {
-                        uVar46 = (int)(char)pbVar35[2];
+                      blueClamped8to32 = 0;
+                      if (-1 < (char)accumUByteCursor[2]) {
+                        blueClamped8to32 = (int)(char)accumUByteCursor[2];
                       }
-                      iVar15 = 0;
-                      if (-1 < (char)pbVar35[3]) {
-                        iVar15 = (int)(char)pbVar35[3];
+                      alphaClamped8to32 = 0;
+                      if (-1 < (char)accumUByteCursor[3]) {
+                        alphaClamped8to32 = (int)(char)accumUByteCursor[3];
                       }
-                      *readbackWordCursor = iVar15 << 0x19 | (uVar13 & 0x7f) << 0x11 | (uVar44 & 0x7f) << 9 |
-                                 (uVar46 & 0x7f) << 1;
+                      *readbackWordCursor = alphaClamped8to32 << 0x19 | (redClamped8to32 & 0x7f) << 0x11 | (greenClamped8to32 & 0x7f) << 9 |
+                                 (blueClamped8to32 & 0x7f) << 1;
                       readbackWordCursor = readbackWordCursor + 1;
                     }
                   }
-                  iVar40 = iVar40 + 1;
-                  iVar34 = iVar34 - uVar31;
-                } while (iVar40 != paddedRowPixels - uVar29);
+                  rowCounterD = rowCounterD + 1;
+                  rowStartPixelRetB = rowStartPixelRetB - paddedWidthA;
+                } while (rowCounterD != rectBottomRet - rectTop);
               }
             }
             else {
-              fVar1 = (float)(value * (double)FLOAT_001aa0dc);
-              if (uVar29 < paddedRowPixels) {
-                iVar40 = *(int *)(glContext + 0x148);
-                iVar36 = 0;
+              valueScale = (float)(value * (double)FLOAT_001aa0dc);
+              if (rectTop < rectBottomRet) {
+                accumBufferD = *(int *)(glContext + 0x148);
+                rowCounterC = 0;
                 do {
-                  dVar51 = DOUBLE_001aa1e0;
-                  accumByteEnd = (char *)(iVar34 * 4 + iVar40);
-                  readbackWordCursor = (uint *)((int)readbackPixels + iVar34 * 4);
-                  accumByteCursor = accumByteEnd + uVar20 * 4;
-                  if (accumByteEnd < accumByteCursor) {
-                    dVar52 = (double)FLOAT_001aa0d4;
-                    dVar53 = (double)FLOAT_001aa0f0;
+                  intBiasD = DOUBLE_001aa1e0;
+                  accumByteCursorRet = (char *)(rowStartPixelRetB * 4 + accumBufferD);
+                  readbackWordCursor = (uint *)((int)readbackPixels + rowStartPixelRetB * 4);
+                  accumByteEndRet = accumByteCursorRet + rectWidth * 4;
+                  if (accumByteCursorRet < accumByteEndRet) {
+                    clampMinD = (double)FLOAT_001aa0d4;
+                    channelMax255D = (double)FLOAT_001aa0f0;
                     do {
-                      dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                         (int)*accumByteEnd ^ 0x80000000)
-                                                       - dVar51));
-                      fVar2 = FLOAT_001aa0d4;
-                      if (dVar52 <= dVar50) {
-                        fVar2 = (float)(dVar50 * dVar53);
+                      scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
+                                                                         (int)*accumByteCursorRet ^ 0x80000000)
+                                                       - intBiasD));
+                      redOut = FLOAT_001aa0d4;
+                      if (clampMinD <= scaledSampleD) {
+                        redOut = (float)(scaledSampleD * channelMax255D);
                       }
-                      dVar55 = (double)FLOAT_001aa0d4;
-                      dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                         (int)accumByteEnd[1] ^
-                                                                         0x80000000) - dVar51));
-                      if (dVar55 <= dVar50) {
-                        dVar55 = (double)(float)(dVar50 * dVar53);
+                      greenOut = (double)FLOAT_001aa0d4;
+                      scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
+                                                                         (int)accumByteCursorRet[1] ^
+                                                                         0x80000000) - intBiasD));
+                      if (greenOut <= scaledSampleD) {
+                        greenOut = (double)(float)(scaledSampleD * channelMax255D);
                       }
-                      dVar54 = (double)FLOAT_001aa0d4;
-                      dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                         (int)accumByteEnd[2] ^
-                                                                         0x80000000) - dVar51));
-                      if (dVar54 <= dVar50) {
-                        dVar54 = (double)(float)(dVar50 * dVar53);
+                      blueOut = (double)FLOAT_001aa0d4;
+                      scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
+                                                                         (int)accumByteCursorRet[2] ^
+                                                                         0x80000000) - intBiasD));
+                      if (blueOut <= scaledSampleD) {
+                        blueOut = (double)(float)(scaledSampleD * channelMax255D);
                       }
-                      dVar56 = (double)FLOAT_001aa0d4;
-                      dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                         (int)accumByteEnd[3] ^
-                                                                         0x80000000) - dVar51));
-                      if (dVar56 <= dVar50) {
-                        dVar56 = (double)(float)(dVar50 * dVar53);
+                      alphaOut = (double)FLOAT_001aa0d4;
+                      scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
+                                                                         (int)accumByteCursorRet[3] ^
+                                                                         0x80000000) - intBiasD));
+                      if (alphaOut <= scaledSampleD) {
+                        alphaOut = (double)(float)(scaledSampleD * channelMax255D);
                       }
-                      if (DOUBLE_001aa1e8 <= dVar56) {
-                        iVar15 = (int)(dVar56 - DOUBLE_001aa1e8) + -0x80000000;
-                      }
-                      else {
-                        iVar15 = (int)dVar56;
-                      }
-                      if (DOUBLE_001aa1e8 <= (double)fVar2) {
-                        iVar16 = (int)((double)fVar2 - DOUBLE_001aa1e8) + -0x80000000;
+                      if (DOUBLE_001aa1e8 <= alphaOut) {
+                        alphaByte = (int)(alphaOut - DOUBLE_001aa1e8) + -0x80000000;
                       }
                       else {
-                        iVar16 = (int)fVar2;
+                        alphaByte = (int)alphaOut;
                       }
-                      if (DOUBLE_001aa1e8 <= dVar55) {
-                        iVar17 = (int)(dVar55 - DOUBLE_001aa1e8) + -0x80000000;
-                      }
-                      else {
-                        iVar17 = (int)dVar55;
-                      }
-                      if (DOUBLE_001aa1e8 <= dVar54) {
-                        uVar13 = (int)(dVar54 - DOUBLE_001aa1e8) + 0x80000000;
+                      if (DOUBLE_001aa1e8 <= (double)redOut) {
+                        redByte = (int)((double)redOut - DOUBLE_001aa1e8) + -0x80000000;
                       }
                       else {
-                        uVar13 = (uint)(int)dVar54;
+                        redByte = (int)redOut;
                       }
-                      accumByteEnd = accumByteEnd + 4;
-                      *readbackWordCursor = iVar15 << 0x18 | iVar16 << 0x10 | iVar17 << 8 | uVar13;
+                      if (DOUBLE_001aa1e8 <= greenOut) {
+                        greenByte = (int)(greenOut - DOUBLE_001aa1e8) + -0x80000000;
+                      }
+                      else {
+                        greenByte = (int)greenOut;
+                      }
+                      if (DOUBLE_001aa1e8 <= blueOut) {
+                        blueByte = (int)(blueOut - DOUBLE_001aa1e8) + 0x80000000;
+                      }
+                      else {
+                        blueByte = (uint)(int)blueOut;
+                      }
+                      accumByteCursorRet = accumByteCursorRet + 4;
+                      *readbackWordCursor = alphaByte << 0x18 | redByte << 0x10 | greenByte << 8 | blueByte;
                       readbackWordCursor = readbackWordCursor + 1;
-                    } while (accumByteEnd < accumByteCursor);
+                    } while (accumByteCursorRet < accumByteEndRet);
                   }
-                  iVar36 = iVar36 + 1;
-                  iVar34 = iVar34 - uVar31;
-                } while (iVar36 != paddedRowPixels - uVar29);
+                  rowCounterC = rowCounterC + 1;
+                  rowStartPixelRetB = rowStartPixelRetB - paddedWidthA;
+                } while (rowCounterC != rectBottomRet - rectTop);
               }
             }
           }
           else if (value == (double)FLOAT_001aa0e8) {
-            if (uVar29 < paddedRowPixels) {
-              iVar36 = *(int *)(glContext + 0x148);
-              iVar40 = 0;
+            if (rectTop < rectBottomRet) {
+              accumBufferC = *(int *)(glContext + 0x148);
+              rowCounterD = 0;
               do {
-                accumShortCursor = (short *)(iVar34 * 8 + iVar36);
-                readbackWordCursor = (uint *)((int)readbackPixels + iVar34 * 4);
-                accumShortEnd = accumShortCursor + uVar20 * 4;
-                if (cVar14 == '\0') {
+                accumShortCursor = (short *)(rowStartPixelRetB * 8 + accumBufferC);
+                readbackWordCursor = (uint *)((int)readbackPixels + rowStartPixelRetB * 4);
+                accumShortEnd = accumShortCursor + rectWidth * 4;
+                if (hasNegativeValues == '\0') {
                   for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
                     *readbackWordCursor = ((int)accumShortCursor[3] & 0x7f80U) << 0x11 | ((int)*accumShortCursor & 0x7f80U) << 9
                                | ((int)accumShortCursor[1] & 0x7f80U) << 1 |
@@ -1849,358 +1910,358 @@ code_r0x00003264:
                 }
                 else {
                   for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
-                    uVar13 = 0;
+                    redClamped16to32 = 0;
                     if (-1 < *accumShortCursor) {
-                      uVar13 = (int)*accumShortCursor;
+                      redClamped16to32 = (int)*accumShortCursor;
                     }
-                    uVar44 = 0;
+                    greenClamped16to32 = 0;
                     if (-1 < accumShortCursor[1]) {
-                      uVar44 = (int)accumShortCursor[1];
+                      greenClamped16to32 = (int)accumShortCursor[1];
                     }
-                    uVar46 = 0;
+                    blueClamped16to32 = 0;
                     if (-1 < accumShortCursor[2]) {
-                      uVar46 = (int)accumShortCursor[2] >> 7;
+                      blueClamped16to32 = (int)accumShortCursor[2] >> 7;
                     }
-                    uVar18 = 0;
+                    alphaClamped16to32 = 0;
                     if (-1 < accumShortCursor[3]) {
-                      uVar18 = (int)accumShortCursor[3];
+                      alphaClamped16to32 = (int)accumShortCursor[3];
                     }
-                    *readbackWordCursor = (uVar18 & 0x7f80) << 0x11 | (uVar13 & 0x7f80) << 9 |
-                               (uVar44 & 0x7f80) << 1 | uVar46 & 0xff;
+                    *readbackWordCursor = (alphaClamped16to32 & 0x7f80) << 0x11 | (redClamped16to32 & 0x7f80) << 9 |
+                               (greenClamped16to32 & 0x7f80) << 1 | blueClamped16to32 & 0xff;
                     readbackWordCursor = readbackWordCursor + 1;
                   }
                 }
-                iVar40 = iVar40 + 1;
-                iVar34 = iVar34 - uVar31;
-              } while (iVar40 != paddedRowPixels - uVar29);
+                rowCounterD = rowCounterD + 1;
+                rowStartPixelRetB = rowStartPixelRetB - paddedWidthA;
+              } while (rowCounterD != rectBottomRet - rectTop);
             }
           }
           else {
-            fVar1 = (float)(value * (double)FLOAT_001aa0e4);
-            if (uVar29 < paddedRowPixels) {
-              iVar40 = *(int *)(glContext + 0x148);
-              iVar36 = 0;
+            valueScale = (float)(value * (double)FLOAT_001aa0e4);
+            if (rectTop < rectBottomRet) {
+              accumBufferD = *(int *)(glContext + 0x148);
+              rowCounterC = 0;
               do {
-                dVar51 = DOUBLE_001aa1e0;
-                accumShortEnd = (short *)(iVar34 * 8 + iVar40);
-                readbackWordCursor = (uint *)((int)readbackPixels + iVar34 * 4);
-                accumShortCursor = accumShortEnd + uVar20 * 4;
-                if (accumShortEnd < accumShortCursor) {
-                  dVar52 = (double)FLOAT_001aa0d4;
-                  dVar53 = (double)FLOAT_001aa0f0;
+                intBiasD = DOUBLE_001aa1e0;
+                accumShortCursorRet = (short *)(rowStartPixelRetB * 8 + accumBufferD);
+                readbackWordCursor = (uint *)((int)readbackPixels + rowStartPixelRetB * 4);
+                accumShortEndRet = accumShortCursorRet + rectWidth * 4;
+                if (accumShortCursorRet < accumShortEndRet) {
+                  clampMinD = (double)FLOAT_001aa0d4;
+                  channelMax255D = (double)FLOAT_001aa0f0;
                   do {
-                    dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                       (int)*accumShortEnd ^ 0x80000000) -
-                                                     dVar51));
-                    fVar2 = FLOAT_001aa0d4;
-                    if (dVar52 <= dVar50) {
-                      fVar2 = (float)(dVar50 * dVar53);
+                    scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
+                                                                       (int)*accumShortCursorRet ^ 0x80000000) -
+                                                     intBiasD));
+                    redOut = FLOAT_001aa0d4;
+                    if (clampMinD <= scaledSampleD) {
+                      redOut = (float)(scaledSampleD * channelMax255D);
                     }
-                    dVar55 = (double)FLOAT_001aa0d4;
-                    dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                       (int)accumShortEnd[1] ^ 0x80000000)
-                                                     - dVar51));
-                    if (dVar55 <= dVar50) {
-                      dVar55 = (double)(float)(dVar50 * dVar53);
+                    greenOut = (double)FLOAT_001aa0d4;
+                    scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
+                                                                       (int)accumShortCursorRet[1] ^ 0x80000000)
+                                                     - intBiasD));
+                    if (greenOut <= scaledSampleD) {
+                      greenOut = (double)(float)(scaledSampleD * channelMax255D);
                     }
-                    dVar54 = (double)FLOAT_001aa0d4;
-                    dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                       (int)accumShortEnd[2] ^ 0x80000000)
-                                                     - dVar51));
-                    if (dVar54 <= dVar50) {
-                      dVar54 = (double)(float)(dVar50 * dVar53);
+                    blueOut = (double)FLOAT_001aa0d4;
+                    scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
+                                                                       (int)accumShortCursorRet[2] ^ 0x80000000)
+                                                     - intBiasD));
+                    if (blueOut <= scaledSampleD) {
+                      blueOut = (double)(float)(scaledSampleD * channelMax255D);
                     }
-                    dVar56 = (double)FLOAT_001aa0d4;
-                    dVar50 = (double)(fVar1 * (float)((double)CONCAT44(0x43300000,
-                                                                       (int)accumShortEnd[3] ^ 0x80000000)
-                                                     - dVar51));
-                    if (dVar56 <= dVar50) {
-                      dVar56 = (double)(float)(dVar50 * dVar53);
+                    alphaOut = (double)FLOAT_001aa0d4;
+                    scaledSampleD = (double)(valueScale * (float)((double)CONCAT44(0x43300000,
+                                                                       (int)accumShortCursorRet[3] ^ 0x80000000)
+                                                     - intBiasD));
+                    if (alphaOut <= scaledSampleD) {
+                      alphaOut = (double)(float)(scaledSampleD * channelMax255D);
                     }
-                    if (DOUBLE_001aa1e8 <= dVar56) {
-                      iVar15 = (int)(dVar56 - DOUBLE_001aa1e8) + -0x80000000;
-                    }
-                    else {
-                      iVar15 = (int)dVar56;
-                    }
-                    if (DOUBLE_001aa1e8 <= (double)fVar2) {
-                      iVar16 = (int)((double)fVar2 - DOUBLE_001aa1e8) + -0x80000000;
+                    if (DOUBLE_001aa1e8 <= alphaOut) {
+                      alphaByte = (int)(alphaOut - DOUBLE_001aa1e8) + -0x80000000;
                     }
                     else {
-                      iVar16 = (int)fVar2;
+                      alphaByte = (int)alphaOut;
                     }
-                    if (DOUBLE_001aa1e8 <= dVar55) {
-                      iVar17 = (int)(dVar55 - DOUBLE_001aa1e8) + -0x80000000;
-                    }
-                    else {
-                      iVar17 = (int)dVar55;
-                    }
-                    if (DOUBLE_001aa1e8 <= dVar54) {
-                      uVar13 = (int)(dVar54 - DOUBLE_001aa1e8) + 0x80000000;
+                    if (DOUBLE_001aa1e8 <= (double)redOut) {
+                      redByte = (int)((double)redOut - DOUBLE_001aa1e8) + -0x80000000;
                     }
                     else {
-                      uVar13 = (uint)(int)dVar54;
+                      redByte = (int)redOut;
                     }
-                    accumShortEnd = accumShortEnd + 4;
-                    *readbackWordCursor = iVar15 << 0x18 | iVar16 << 0x10 | iVar17 << 8 | uVar13;
+                    if (DOUBLE_001aa1e8 <= greenOut) {
+                      greenByte = (int)(greenOut - DOUBLE_001aa1e8) + -0x80000000;
+                    }
+                    else {
+                      greenByte = (int)greenOut;
+                    }
+                    if (DOUBLE_001aa1e8 <= blueOut) {
+                      blueByte = (int)(blueOut - DOUBLE_001aa1e8) + 0x80000000;
+                    }
+                    else {
+                      blueByte = (uint)(int)blueOut;
+                    }
+                    accumShortCursorRet = accumShortCursorRet + 4;
+                    *readbackWordCursor = alphaByte << 0x18 | redByte << 0x10 | greenByte << 8 | blueByte;
                     readbackWordCursor = readbackWordCursor + 1;
-                  } while (accumShortEnd < accumShortCursor);
+                  } while (accumShortCursorRet < accumShortEndRet);
                 }
-                iVar36 = iVar36 + 1;
-                iVar34 = iVar34 - uVar31;
-              } while (iVar36 != paddedRowPixels - uVar29);
+                rowCounterC = rowCounterC + 1;
+                rowStartPixelRetB = rowStartPixelRetB - paddedWidthA;
+              } while (rowCounterC != rectBottomRet - rectTop);
             }
           }
-          FUN_000198b0(glContext,iVar23,uVar29,uVar20,iVar28,0x8367,
+          gld_drawPixelsAtRasterPos(glContext,rectXThenRowStart,rectTop,rectWidth,rectHeight,0x8367,
                        (void *)((int)readbackPixels +
-                               (((iVar26 - uVar29) - iVar28) * (iVar19 + 7U & 0xfffffff8) + iVar23)
+                               (((fullHeight - rectTop) - rectHeight) * (fullWidth + 7U & 0xfffffff8) + rectXThenRowStart)
                                * 4));
           goto code_r0x00003264;
         }
       }
     }
     else {
-      iVar28 = *(int *)(glContext + 0x10);
-      if (*(int *)(((unsigned char *)0x00002e40U) + iVar28) != 0) {
-        if (((unsigned char *)0x00003190)[iVar28] == '\0') {
-          iVar19 = *(int *)(glContext + 0x15c);
-          iVar26 = *(int *)(glContext + 0x160);
-          uVar29 = 0;
-          uVar31 = 0;
-          uVar20 = iVar19 + 7U & 0xfffffff8;
-          iVar28 = iVar26;
+      engineState = *(int *)(glContext + 0x10);
+      if (*(int *)(((unsigned char *)0x00002e40U) + engineState) != 0) {
+        if (((unsigned char *)0x00003190)[engineState] == '\0') {
+          fullWidth = *(int *)(glContext + 0x15c);
+          fullHeight = *(int *)(glContext + 0x160);
+          rectXB = 0;
+          rectTopB = 0;
+          rectWidth = fullWidth + 7U & 0xfffffff8;
+          rectHeight = fullHeight;
         }
         else {
-          uVar29 = *(uint *)(((unsigned char *)0x00003180) + iVar28);
-          iVar26 = *(int *)(glContext + 0x160);
-          uVar20 = uVar29 + *(int *)(((unsigned char *)0x00003188) + iVar28);
-          uVar31 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar28) + *(int *)(((unsigned char *)0x00003184) + iVar28));
-          iVar28 = *(int *)(((unsigned char *)0x0000318c) + iVar28) + uVar31;
-          if ((int)uVar29 < 0) {
-            uVar29 = 0;
+          rectXB = *(uint *)(((unsigned char *)0x00003180) + engineState);
+          fullHeight = *(int *)(glContext + 0x160);
+          rectWidth = rectXB + *(int *)(((unsigned char *)0x00003188) + engineState);
+          rectTopB = fullHeight - (*(int *)(((unsigned char *)0x0000318c) + engineState) + *(int *)(((unsigned char *)0x00003184) + engineState));
+          engineState = *(int *)(((unsigned char *)0x0000318c) + engineState) + rectTopB;
+          if ((int)rectXB < 0) {
+            rectXB = 0;
           }
-          if ((int)uVar31 < 0) {
-            uVar31 = 0;
+          if ((int)rectTopB < 0) {
+            rectTopB = 0;
           }
-          iVar19 = *(int *)(glContext + 0x15c);
-          paddedRowPixels = iVar19 + 7U & 0xfffffff8;
-          if ((int)paddedRowPixels < (int)uVar20) {
-            uVar20 = paddedRowPixels;
+          fullWidth = *(int *)(glContext + 0x15c);
+          paddedRowPixels = fullWidth + 7U & 0xfffffff8;
+          if ((int)paddedRowPixels < (int)rectWidth) {
+            rectWidth = paddedRowPixels;
           }
-          iVar23 = iVar26;
-          if (iVar28 <= iVar26) {
-            iVar23 = iVar28;
+          rectBottomClampB = fullHeight;
+          if (engineState <= fullHeight) {
+            rectBottomClampB = engineState;
           }
-          uVar20 = uVar20 - uVar29;
-          iVar28 = iVar23 - uVar31;
+          rectWidth = rectWidth - rectXB;
+          rectHeight = rectBottomClampB - rectTopB;
         }
-        if ((uVar20 != 0) && (iVar28 != 0)) {
-          readbackPixels = _malloc((iVar19 + 7U & 0xfffffff8) * iVar26 * 2);
-          fVar1 = FLOAT_001aa0e0;
-          iVar26 = *(int *)(glContext + 0x160);
-          uVar44 = uVar29 + uVar20;
-          iVar19 = *(int *)(glContext + 0x15c);
-          cVar14 = *(char *)(glContext + 0x140);
-          paddedRowPixels = iVar19 + 7U & 0xfffffff8;
-          uVar13 = uVar31 + iVar28;
-          iVar23 = uVar29 + paddedRowPixels * ((iVar26 - uVar31) + -1);
+        if ((rectWidth != 0) && (rectHeight != 0)) {
+          readbackPixels = _malloc((fullWidth + 7U & 0xfffffff8) * fullHeight * 2);
+          alphaScale = FLOAT_001aa0e0;
+          fullHeight = *(int *)(glContext + 0x160);
+          rectRight = rectXB + rectWidth;
+          fullWidth = *(int *)(glContext + 0x15c);
+          hasNegativeValues = *(char *)(glContext + 0x140);
+          paddedRowPixels = fullWidth + 7U & 0xfffffff8;
+          rectBottomRet2 = rectTopB + rectHeight;
+          rowStartPixelRet = rectXB + paddedRowPixels * ((fullHeight - rectTopB) + -1);
           if (*(char *)(glContext + 0x141) == '\x01') {
             if (value == (double)FLOAT_001aa0e8) {
-              if (uVar31 < uVar13) {
-                iVar34 = *(int *)(glContext + 0x148);
-                iVar36 = 0;
+              if (rectTopB < rectBottomRet2) {
+                accumBufferB = *(int *)(glContext + 0x148);
+                rowCounterC = 0;
                 do {
-                  pbVar35 = (byte *)(iVar23 * 4 + iVar34);
-                  readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
-                  pbVar32 = pbVar35 + uVar20 * 4;
-                  if (cVar14 == '\0') {
-                    for (; pbVar35 < pbVar32; pbVar35 = pbVar35 + 4) {
-                      *readbackHalfCursor = ((short)(char)pbVar35[3] & 0x40U) << 9 | (*pbVar35 & 0x7c) << 8 |
-                                 (pbVar35[1] & 0x7c) << 3 | pbVar35[2] >> 2 & 0x1f;
+                  accumUByteCursor = (byte *)(rowStartPixelRet * 4 + accumBufferB);
+                  readbackHalfCursor = (ushort *)((int)readbackPixels + rowStartPixelRet * 2);
+                  accumUByteEnd = accumUByteCursor + rectWidth * 4;
+                  if (hasNegativeValues == '\0') {
+                    for (; accumUByteCursor < accumUByteEnd; accumUByteCursor = accumUByteCursor + 4) {
+                      *readbackHalfCursor = ((short)(char)accumUByteCursor[3] & 0x40U) << 9 | (*accumUByteCursor & 0x7c) << 8 |
+                                 (accumUByteCursor[1] & 0x7c) << 3 | accumUByteCursor[2] >> 2 & 0x1f;
                       readbackHalfCursor = readbackHalfCursor + 1;
                     }
                   }
                   else {
-                    for (; pbVar35 < pbVar32; pbVar35 = pbVar35 + 4) {
-                      iVar40 = 0;
-                      if (-1 < (char)*pbVar35) {
-                        iVar40 = (int)(char)*pbVar35;
+                    for (; accumUByteCursor < accumUByteEnd; accumUByteCursor = accumUByteCursor + 4) {
+                      redClamped8to16 = 0;
+                      if (-1 < (char)*accumUByteCursor) {
+                        redClamped8to16 = (int)(char)*accumUByteCursor;
                       }
-                      iVar15 = 0;
-                      if (-1 < (char)pbVar35[1]) {
-                        iVar15 = (int)(char)pbVar35[1];
+                      greenClamped8to16 = 0;
+                      if (-1 < (char)accumUByteCursor[1]) {
+                        greenClamped8to16 = (int)(char)accumUByteCursor[1];
                       }
-                      uVar27 = 0;
-                      if (-1 < (char)pbVar35[2]) {
-                        uVar27 = (ushort)((int)(char)pbVar35[2] >> 2);
+                      blueClamped8to16 = 0;
+                      if (-1 < (char)accumUByteCursor[2]) {
+                        blueClamped8to16 = (ushort)((int)(char)accumUByteCursor[2] >> 2);
                       }
-                      iVar16 = 0;
-                      if (-1 < (char)pbVar35[3]) {
-                        iVar16 = (int)(char)pbVar35[3];
+                      alphaClamped8to16 = 0;
+                      if (-1 < (char)accumUByteCursor[3]) {
+                        alphaClamped8to16 = (int)(char)accumUByteCursor[3];
                       }
-                      *readbackHalfCursor = (ushort)(iVar16 << 9) & 0x8000 | (ushort)(iVar40 << 8) & 0x7c00 |
-                                 (ushort)(iVar15 << 3) & 0x3e0 | uVar27 & 0x1f;
+                      *readbackHalfCursor = (ushort)(alphaClamped8to16 << 9) & 0x8000 | (ushort)(redClamped8to16 << 8) & 0x7c00 |
+                                 (ushort)(greenClamped8to16 << 3) & 0x3e0 | blueClamped8to16 & 0x1f;
                       readbackHalfCursor = readbackHalfCursor + 1;
                     }
                   }
-                  iVar36 = iVar36 + 1;
-                  iVar23 = iVar23 - paddedRowPixels;
-                } while (uVar13 - uVar31 != iVar36);
+                  rowCounterC = rowCounterC + 1;
+                  rowStartPixelRet = rowStartPixelRet - paddedRowPixels;
+                } while (rectBottomRet2 - rectTopB != rowCounterC);
               }
             }
             else {
-              fVar2 = (float)(value * (double)FLOAT_001aa0dc);
-              if (uVar31 < uVar13) {
-                iVar34 = *(int *)(glContext + 0x148);
-                iVar36 = 0;
+              valueScaleB = (float)(value * (double)FLOAT_001aa0dc);
+              if (rectTopB < rectBottomRet2) {
+                accumBufferB = *(int *)(glContext + 0x148);
+                rowCounterC = 0;
                 do {
-                  dVar51 = DOUBLE_001aa1e0;
-                  fVar12 = FLOAT_001aa0ec;
-                  fVar11 = FLOAT_001aa0d4;
-                  accumByteCursor = (char *)(iVar23 * 4 + iVar34);
-                  readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
-                  iVar40 = uVar44 - uVar29;
-                  if (uVar29 < uVar44) {
+                  intBiasD = DOUBLE_001aa1e0;
+                  channelMax31 = FLOAT_001aa0ec;
+                  zeroF = FLOAT_001aa0d4;
+                  accumByteCursor = (char *)(rowStartPixelRet * 4 + accumBufferB);
+                  readbackHalfCursor = (ushort *)((int)readbackPixels + rowStartPixelRet * 2);
+                  rectWidthPixels = rectRight - rectXB;
+                  if (rectXB < rectRight) {
                     do {
-                      fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,(int)*accumByteCursor ^ 0x80000000
-                                                              ) - dVar51);
-                      fVar9 = FLOAT_001aa0d4;
-                      if (fVar11 <= fVar5) {
-                        fVar9 = fVar5 * fVar12;
+                      scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,(int)*accumByteCursor ^ 0x80000000
+                                                              ) - intBiasD);
+                      red5Out = FLOAT_001aa0d4;
+                      if (zeroF <= scaledSample) {
+                        red5Out = scaledSample * channelMax31;
                       }
-                      fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,
+                      scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,
                                                                (int)accumByteCursor[1] ^ 0x80000000) -
-                                             dVar51);
-                      fVar7 = FLOAT_001aa0d4;
-                      if (FLOAT_001aa0d4 <= fVar5) {
-                        fVar7 = fVar5 * fVar12;
+                                             intBiasD);
+                      green5Out = FLOAT_001aa0d4;
+                      if (FLOAT_001aa0d4 <= scaledSample) {
+                        green5Out = scaledSample * channelMax31;
                       }
-                      fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,
+                      scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,
                                                                (int)accumByteCursor[2] ^ 0x80000000) -
-                                             dVar51);
-                      fVar8 = FLOAT_001aa0d4;
-                      if (FLOAT_001aa0d4 <= fVar5) {
-                        fVar8 = fVar5 * fVar12;
+                                             intBiasD);
+                      blue5Out = FLOAT_001aa0d4;
+                      if (FLOAT_001aa0d4 <= scaledSample) {
+                        blue5Out = scaledSample * channelMax31;
                       }
-                      fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,
+                      scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,
                                                                (int)accumByteCursor[3] ^ 0x80000000) -
-                                             dVar51);
-                      fVar6 = FLOAT_001aa0d4;
-                      if (FLOAT_001aa0d4 <= fVar5) {
-                        fVar6 = fVar5 * fVar1;
+                                             intBiasD);
+                      alpha1Out = FLOAT_001aa0d4;
+                      if (FLOAT_001aa0d4 <= scaledSample) {
+                        alpha1Out = scaledSample * alphaScale;
                       }
                       accumByteCursor = accumByteCursor + 4;
-                      *readbackHalfCursor = (ushort)(int)fVar8 |
-                                 (ushort)((int)fVar6 << 0xf) | (ushort)((int)fVar9 << 10) |
-                                 (ushort)((int)fVar7 << 5);
+                      *readbackHalfCursor = (ushort)(int)blue5Out |
+                                 (ushort)((int)alpha1Out << 0xf) | (ushort)((int)red5Out << 10) |
+                                 (ushort)((int)green5Out << 5);
                       readbackHalfCursor = readbackHalfCursor + 1;
-                      iVar40 = iVar40 + -1;
-                    } while (iVar40 != 0);
+                      rectWidthPixels = rectWidthPixels + -1;
+                    } while (rectWidthPixels != 0);
                   }
-                  iVar36 = iVar36 + 1;
-                  iVar23 = iVar23 - paddedRowPixels;
-                } while (uVar13 - uVar31 != iVar36);
+                  rowCounterC = rowCounterC + 1;
+                  rowStartPixelRet = rowStartPixelRet - paddedRowPixels;
+                } while (rectBottomRet2 - rectTopB != rowCounterC);
               }
             }
           }
           else if (value == (double)FLOAT_001aa0e8) {
-            if (uVar31 < uVar13) {
-              iVar34 = *(int *)(glContext + 0x148);
-              iVar36 = 0;
+            if (rectTopB < rectBottomRet2) {
+              accumBufferB = *(int *)(glContext + 0x148);
+              rowCounterC = 0;
               do {
-                readbackHalfCursor = (ushort *)(iVar23 * 8 + iVar34);
-                puVar33 = (ushort *)((int)readbackPixels + iVar23 * 2);
-                puVar48 = readbackHalfCursor + uVar20 * 4;
-                if (cVar14 == '\0') {
-                  for (; readbackHalfCursor < puVar48; readbackHalfCursor = readbackHalfCursor + 4) {
-                    *puVar33 = (readbackHalfCursor[3] & 0x4000) << 1 | *readbackHalfCursor & 0x7c00 |
-                               (ushort)((uint)(int)(short)readbackHalfCursor[1] >> 5) & 0x3e0 |
-                               (ushort)((uint)(int)(short)readbackHalfCursor[2] >> 10) & 0x1f;
-                    puVar33 = puVar33 + 1;
+                accumHalfCursor = (ushort *)(rowStartPixelRet * 8 + accumBufferB);
+                readbackHalfDestCursor = (ushort *)((int)readbackPixels + rowStartPixelRet * 2);
+                accumHalfEndRet = accumHalfCursor + rectWidth * 4;
+                if (hasNegativeValues == '\0') {
+                  for (; accumHalfCursor < accumHalfEndRet; accumHalfCursor = accumHalfCursor + 4) {
+                    *readbackHalfDestCursor = (accumHalfCursor[3] & 0x4000) << 1 | *accumHalfCursor & 0x7c00 |
+                               (ushort)((uint)(int)(short)accumHalfCursor[1] >> 5) & 0x3e0 |
+                               (ushort)((uint)(int)(short)accumHalfCursor[2] >> 10) & 0x1f;
+                    readbackHalfDestCursor = readbackHalfDestCursor + 1;
                   }
                 }
                 else {
-                  for (; readbackHalfCursor < puVar48; readbackHalfCursor = readbackHalfCursor + 4) {
-                    uVar27 = 0;
-                    if (-1 < (short)*readbackHalfCursor) {
-                      uVar27 = *readbackHalfCursor & 0x7c00;
+                  for (; accumHalfCursor < accumHalfEndRet; accumHalfCursor = accumHalfCursor + 4) {
+                    redClamped16to16 = 0;
+                    if (-1 < (short)*accumHalfCursor) {
+                      redClamped16to16 = *accumHalfCursor & 0x7c00;
                     }
-                    uVar41 = 0;
-                    if (-1 < (short)readbackHalfCursor[1]) {
-                      uVar41 = (short)readbackHalfCursor[1] >> 5;
+                    greenClamped16to16 = 0;
+                    if (-1 < (short)accumHalfCursor[1]) {
+                      greenClamped16to16 = (short)accumHalfCursor[1] >> 5;
                     }
-                    uVar21 = 0;
-                    if (-1 < (short)readbackHalfCursor[2]) {
-                      uVar21 = (short)readbackHalfCursor[2] >> 10;
+                    blueClamped16to16 = 0;
+                    if (-1 < (short)accumHalfCursor[2]) {
+                      blueClamped16to16 = (short)accumHalfCursor[2] >> 10;
                     }
-                    iVar40 = 0;
-                    if (-1 < (short)readbackHalfCursor[3]) {
-                      iVar40 = (int)(short)readbackHalfCursor[3];
+                    alphaClamped16to16 = 0;
+                    if (-1 < (short)accumHalfCursor[3]) {
+                      alphaClamped16to16 = (int)(short)accumHalfCursor[3];
                     }
-                    *puVar33 = uVar27 | (ushort)(iVar40 << 1) & 0x8000 | uVar41 & 0x3e0 |
-                               uVar21 & 0x1f;
-                    puVar33 = puVar33 + 1;
+                    *readbackHalfDestCursor = redClamped16to16 | (ushort)(alphaClamped16to16 << 1) & 0x8000 | greenClamped16to16 & 0x3e0 |
+                               blueClamped16to16 & 0x1f;
+                    readbackHalfDestCursor = readbackHalfDestCursor + 1;
                   }
                 }
-                iVar36 = iVar36 + 1;
-                iVar23 = iVar23 - paddedRowPixels;
-              } while (uVar13 - uVar31 != iVar36);
+                rowCounterC = rowCounterC + 1;
+                rowStartPixelRet = rowStartPixelRet - paddedRowPixels;
+              } while (rectBottomRet2 - rectTopB != rowCounterC);
             }
           }
           else {
-            fVar2 = (float)(value * (double)FLOAT_001aa0e4);
-            if (uVar31 < uVar13) {
-              iVar34 = *(int *)(glContext + 0x148);
-              iVar36 = 0;
+            valueScaleB = (float)(value * (double)FLOAT_001aa0e4);
+            if (rectTopB < rectBottomRet2) {
+              accumBufferB = *(int *)(glContext + 0x148);
+              rowCounterC = 0;
               do {
-                dVar51 = DOUBLE_001aa1e0;
-                fVar12 = FLOAT_001aa0ec;
-                fVar11 = FLOAT_001aa0d4;
-                accumShortCursor = (short *)(iVar23 * 8 + iVar34);
-                readbackHalfCursor = (ushort *)((int)readbackPixels + iVar23 * 2);
-                iVar40 = uVar44 - uVar29;
-                if (uVar29 < uVar44) {
+                intBiasD = DOUBLE_001aa1e0;
+                channelMax31 = FLOAT_001aa0ec;
+                zeroF = FLOAT_001aa0d4;
+                accumShortCursor = (short *)(rowStartPixelRet * 8 + accumBufferB);
+                readbackHalfCursor = (ushort *)((int)readbackPixels + rowStartPixelRet * 2);
+                rectWidthPixels = rectRight - rectXB;
+                if (rectXB < rectRight) {
                   do {
-                    fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,(int)*accumShortCursor ^ 0x80000000)
-                                           - dVar51);
-                    fVar9 = FLOAT_001aa0d4;
-                    if (fVar11 <= fVar5) {
-                      fVar9 = fVar5 * fVar12;
+                    scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,(int)*accumShortCursor ^ 0x80000000)
+                                           - intBiasD);
+                    red5Out = FLOAT_001aa0d4;
+                    if (zeroF <= scaledSample) {
+                      red5Out = scaledSample * channelMax31;
                     }
-                    fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,(int)accumShortCursor[1] ^ 0x80000000
-                                                            ) - dVar51);
-                    fVar7 = FLOAT_001aa0d4;
-                    if (FLOAT_001aa0d4 <= fVar5) {
-                      fVar7 = fVar5 * fVar12;
+                    scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,(int)accumShortCursor[1] ^ 0x80000000
+                                                            ) - intBiasD);
+                    green5Out = FLOAT_001aa0d4;
+                    if (FLOAT_001aa0d4 <= scaledSample) {
+                      green5Out = scaledSample * channelMax31;
                     }
-                    fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,(int)accumShortCursor[2] ^ 0x80000000
-                                                            ) - dVar51);
-                    fVar8 = FLOAT_001aa0d4;
-                    if (FLOAT_001aa0d4 <= fVar5) {
-                      fVar8 = fVar5 * fVar12;
+                    scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,(int)accumShortCursor[2] ^ 0x80000000
+                                                            ) - intBiasD);
+                    blue5Out = FLOAT_001aa0d4;
+                    if (FLOAT_001aa0d4 <= scaledSample) {
+                      blue5Out = scaledSample * channelMax31;
                     }
-                    fVar5 = fVar2 * (float)((double)CONCAT44(0x43300000,(int)accumShortCursor[3] ^ 0x80000000
-                                                            ) - dVar51);
-                    fVar6 = FLOAT_001aa0d4;
-                    if (FLOAT_001aa0d4 <= fVar5) {
-                      fVar6 = fVar5 * fVar1;
+                    scaledSample = valueScaleB * (float)((double)CONCAT44(0x43300000,(int)accumShortCursor[3] ^ 0x80000000
+                                                            ) - intBiasD);
+                    alpha1Out = FLOAT_001aa0d4;
+                    if (FLOAT_001aa0d4 <= scaledSample) {
+                      alpha1Out = scaledSample * alphaScale;
                     }
                     accumShortCursor = accumShortCursor + 4;
-                    *readbackHalfCursor = (ushort)(int)fVar8 |
-                               (ushort)((int)fVar6 << 0xf) | (ushort)((int)fVar9 << 10) |
-                               (ushort)((int)fVar7 << 5);
+                    *readbackHalfCursor = (ushort)(int)blue5Out |
+                               (ushort)((int)alpha1Out << 0xf) | (ushort)((int)red5Out << 10) |
+                               (ushort)((int)green5Out << 5);
                     readbackHalfCursor = readbackHalfCursor + 1;
-                    iVar40 = iVar40 + -1;
-                  } while (iVar40 != 0);
+                    rectWidthPixels = rectWidthPixels + -1;
+                  } while (rectWidthPixels != 0);
                 }
-                iVar36 = iVar36 + 1;
-                iVar23 = iVar23 - paddedRowPixels;
-              } while (uVar13 - uVar31 != iVar36);
+                rowCounterC = rowCounterC + 1;
+                rowStartPixelRet = rowStartPixelRet - paddedRowPixels;
+              } while (rectBottomRet2 - rectTopB != rowCounterC);
             }
           }
-          FUN_000198b0(glContext,uVar29,uVar31,uVar20,iVar28,0x8366,
+          gld_drawPixelsAtRasterPos(glContext,rectXB,rectTopB,rectWidth,rectHeight,0x8366,
                        (void *)((int)readbackPixels +
-                               (((iVar26 - uVar31) - iVar28) * (iVar19 + 7U & 0xfffffff8) + uVar29)
+                               (((fullHeight - rectTopB) - rectHeight) * (fullWidth + 7U & 0xfffffff8) + rectXB)
                                * 2));
           goto code_r0x00003264;
         }
@@ -2208,109 +2269,109 @@ code_r0x00003264:
     }
     break;
   case 0x103:
-    iVar19 = *(int *)(glContext + 0x10);
-    if (((unsigned char *)0x00003190)[iVar19] == '\0') {
-      iVar23 = *(int *)(glContext + 0x15c);
-      iVar19 = *(int *)(glContext + 0x160);
-      iVar34 = 0;
-      iVar36 = 0;
-      uVar20 = iVar23 + 7U & 0xfffffff8;
-      iVar26 = iVar19;
+    engineStateB = *(int *)(glContext + 0x10);
+    if (((unsigned char *)0x00003190)[engineStateB] == '\0') {
+      fullWidthB = *(int *)(glContext + 0x15c);
+      rectHeightThenBottom = *(int *)(glContext + 0x160);
+      rectXThenRowStartB = 0;
+      rectTopMul = 0;
+      rectWidth = fullWidthB + 7U & 0xfffffff8;
+      fullHeightB = rectHeightThenBottom;
     }
     else {
-      iVar34 = *(int *)(((unsigned char *)0x00003180) + iVar19);
-      iVar26 = *(int *)(glContext + 0x160);
-      uVar20 = iVar34 + *(int *)(((unsigned char *)0x00003188) + iVar19);
-      iVar36 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar19) + *(int *)(((unsigned char *)0x00003184) + iVar19));
-      iVar40 = *(int *)(((unsigned char *)0x0000318c) + iVar19) + iVar36;
-      if (iVar34 < 0) {
-        iVar34 = 0;
+      rectXThenRowStartB = *(int *)(((unsigned char *)0x00003180) + engineStateB);
+      fullHeightB = *(int *)(glContext + 0x160);
+      rectWidth = rectXThenRowStartB + *(int *)(((unsigned char *)0x00003188) + engineStateB);
+      rectTopMul = fullHeightB - (*(int *)(((unsigned char *)0x0000318c) + engineStateB) + *(int *)(((unsigned char *)0x00003184) + engineStateB));
+      rectBottomRaw = *(int *)(((unsigned char *)0x0000318c) + engineStateB) + rectTopMul;
+      if (rectXThenRowStartB < 0) {
+        rectXThenRowStartB = 0;
       }
-      if (iVar36 < 0) {
-        iVar36 = 0;
+      if (rectTopMul < 0) {
+        rectTopMul = 0;
       }
-      iVar23 = *(int *)(glContext + 0x15c);
-      uVar29 = iVar23 + 7U & 0xfffffff8;
-      if ((int)uVar29 < (int)uVar20) {
-        uVar20 = uVar29;
+      fullWidthB = *(int *)(glContext + 0x15c);
+      paddedWidthB = fullWidthB + 7U & 0xfffffff8;
+      if ((int)paddedWidthB < (int)rectWidth) {
+        rectWidth = paddedWidthB;
       }
-      iVar19 = iVar26;
-      if (iVar40 <= iVar26) {
-        iVar19 = iVar40;
+      rectHeightThenBottom = fullHeightB;
+      if (rectBottomRaw <= fullHeightB) {
+        rectHeightThenBottom = rectBottomRaw;
       }
-      uVar20 = uVar20 - iVar34;
-      iVar19 = iVar19 - iVar36;
+      rectWidth = rectWidth - rectXThenRowStartB;
+      rectHeightThenBottom = rectHeightThenBottom - rectTopMul;
     }
-    if ((int)uVar20 < 1) {
+    if ((int)rectWidth < 1) {
       return;
     }
-    if (iVar19 < 1) {
+    if (rectHeightThenBottom < 1) {
       return;
     }
-    iVar40 = uVar20 * 4;
-    iVar19 = iVar36 + iVar19;
-    dVar51 = (double)FLOAT_001aa0d4;
-    if (value < dVar51) {
+    rowBytes = rectWidth * 4;
+    rectHeightThenBottom = rectTopMul + rectHeightThenBottom;
+    zeroD = (double)FLOAT_001aa0d4;
+    if (value < zeroD) {
       *(undefined1 *)(glContext + 0x140) = 1;
     }
-    uVar29 = iVar23 + 7U & 0xfffffff8;
-    iVar34 = iVar34 + uVar29 * ((iVar26 - iVar36) + -1);
-    if (value != dVar51) {
-      fVar1 = (float)((double)FLOAT_001aa0e8 / value);
-      if ((((fVar1 == FLOAT_001aa0f8) || (fVar1 == FLOAT_001aa0fc)) || (fVar1 == FLOAT_001aa100)) ||
-         ((fVar1 == FLOAT_001aa104 || (fVar1 == FLOAT_001aa108)))) {
-        iVar26 = (int)((double)FLOAT_001aa0e8 / value);
-        iVar23 = 2;
-        if (iVar26 != 4) {
-          if (iVar26 < 5) {
-            iVar23 = 1;
-            if (iVar26 == 2) goto code_r0x00004f90;
+    paddedWidthB = fullWidthB + 7U & 0xfffffff8;
+    rectXThenRowStartB = rectXThenRowStartB + paddedWidthB * ((fullHeightB - rectTopMul) + -1);
+    if (value != zeroD) {
+      reciprocalValue = (float)((double)FLOAT_001aa0e8 / value);
+      if ((((reciprocalValue == FLOAT_001aa0f8) || (reciprocalValue == FLOAT_001aa0fc)) || (reciprocalValue == FLOAT_001aa100)) ||
+         ((reciprocalValue == FLOAT_001aa104 || (reciprocalValue == FLOAT_001aa108)))) {
+        divisor = (int)((double)FLOAT_001aa0e8 / value);
+        shiftCount = 2;
+        if (divisor != 4) {
+          if (divisor < 5) {
+            shiftCount = 1;
+            if (divisor == 2) goto code_r0x00004f90;
           }
           else {
-            iVar23 = 3;
-            if ((iVar26 == 8) || (iVar23 = 4, iVar26 == 0x10)) goto code_r0x00004f90;
+            shiftCount = 3;
+            if ((divisor == 8) || (shiftCount = 4, divisor == 0x10)) goto code_r0x00004f90;
           }
-          iVar23 = 5;
+          shiftCount = 5;
         }
 code_r0x00004f90:
         if (*(char *)(glContext + 0x141) == '\x01') {
-          if (iVar19 <= iVar36) {
+          if (rectHeightThenBottom <= rectTopMul) {
             return;
           }
-          iVar26 = 0;
+          rowCounterB = 0;
           while( true ) {
-            accumByteCursor = (char *)(iVar34 * 4 + iVar28);
-            accumByteEnd = accumByteCursor + iVar40;
+            accumByteCursor = (char *)(rectXThenRowStartB * 4 + accumBuffer);
+            accumByteEnd = accumByteCursor + rowBytes;
             for (; accumByteCursor < accumByteEnd; accumByteCursor = accumByteCursor + 4) {
-              *accumByteCursor = (char)((int)*accumByteCursor >> iVar23);
-              accumByteCursor[1] = (char)((int)accumByteCursor[1] >> iVar23);
-              accumByteCursor[2] = (char)((int)accumByteCursor[2] >> iVar23);
-              accumByteCursor[3] = (char)((int)accumByteCursor[3] >> iVar23);
+              *accumByteCursor = (char)((int)*accumByteCursor >> shiftCount);
+              accumByteCursor[1] = (char)((int)accumByteCursor[1] >> shiftCount);
+              accumByteCursor[2] = (char)((int)accumByteCursor[2] >> shiftCount);
+              accumByteCursor[3] = (char)((int)accumByteCursor[3] >> shiftCount);
             }
-            iVar26 = iVar26 + 1;
-            iVar34 = iVar34 - uVar29;
-            if (iVar26 == iVar19 - iVar36) break;
-            iVar28 = *(int *)(glContext + 0x148);
+            rowCounterB = rowCounterB + 1;
+            rectXThenRowStartB = rectXThenRowStartB - paddedWidthB;
+            if (rowCounterB == rectHeightThenBottom - rectTopMul) break;
+            accumBuffer = *(int *)(glContext + 0x148);
           }
           return;
         }
-        if (iVar19 <= iVar36) {
+        if (rectHeightThenBottom <= rectTopMul) {
           return;
         }
-        iVar26 = 0;
+        rowCounterB = 0;
         while( true ) {
-          accumShortCursor = (short *)(iVar34 * 8 + iVar28);
-          accumShortEnd = accumShortCursor + uVar20 * 4;
+          accumShortCursor = (short *)(rectXThenRowStartB * 8 + accumBuffer);
+          accumShortEnd = accumShortCursor + rectWidth * 4;
           for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
-            *accumShortCursor = (short)((int)*accumShortCursor >> iVar23);
-            accumShortCursor[1] = (short)((int)accumShortCursor[1] >> iVar23);
-            accumShortCursor[2] = (short)((int)accumShortCursor[2] >> iVar23);
-            accumShortCursor[3] = (short)((int)accumShortCursor[3] >> iVar23);
+            *accumShortCursor = (short)((int)*accumShortCursor >> shiftCount);
+            accumShortCursor[1] = (short)((int)accumShortCursor[1] >> shiftCount);
+            accumShortCursor[2] = (short)((int)accumShortCursor[2] >> shiftCount);
+            accumShortCursor[3] = (short)((int)accumShortCursor[3] >> shiftCount);
           }
-          iVar26 = iVar26 + 1;
-          iVar34 = iVar34 - uVar29;
-          if (iVar26 == iVar19 - iVar36) break;
-          iVar28 = *(int *)(glContext + 0x148);
+          rowCounterB = rowCounterB + 1;
+          rectXThenRowStartB = rectXThenRowStartB - paddedWidthB;
+          if (rowCounterB == rectHeightThenBottom - rectTopMul) break;
+          accumBuffer = *(int *)(glContext + 0x148);
         }
         return;
       }
@@ -2319,202 +2380,202 @@ code_r0x00004f90:
         (value != (double)FLOAT_001aa100)) &&
        ((value != (double)FLOAT_001aa104 && (value != (double)FLOAT_001aa108)))) {
       if (*(char *)(glContext + 0x141) == '\x01') {
-        if (iVar19 <= iVar36) {
+        if (rectHeightThenBottom <= rectTopMul) {
           return;
         }
-        iVar26 = 0;
+        rowCounterB = 0;
         while( true ) {
-          dVar51 = DOUBLE_001aa1e0;
-          accumByteCursor = (char *)(iVar34 * 4 + iVar28);
-          accumByteEnd = accumByteCursor + iVar40;
+          intBiasD = DOUBLE_001aa1e0;
+          accumByteCursor = (char *)(rectXThenRowStartB * 4 + accumBuffer);
+          accumByteEnd = accumByteCursor + rowBytes;
           for (; accumByteCursor < accumByteEnd; accumByteCursor = accumByteCursor + 4) {
             *accumByteCursor = (char)(int)(value *
                                   (double)(float)((double)CONCAT44(0x43300000,
                                                                    (int)*accumByteCursor ^ 0x80000000) -
-                                                 dVar51));
+                                                 intBiasD));
             accumByteCursor[1] = (char)(int)(value *
                                     (double)(float)((double)CONCAT44(0x43300000,
                                                                      (int)accumByteCursor[1] ^ 0x80000000) -
-                                                   dVar51));
+                                                   intBiasD));
             accumByteCursor[2] = (char)(int)(value *
                                     (double)(float)((double)CONCAT44(0x43300000,
                                                                      (int)accumByteCursor[2] ^ 0x80000000) -
-                                                   dVar51));
+                                                   intBiasD));
             accumByteCursor[3] = (char)(int)(value *
                                     (double)(float)((double)CONCAT44(0x43300000,
                                                                      (int)accumByteCursor[3] ^ 0x80000000) -
-                                                   dVar51));
+                                                   intBiasD));
           }
-          iVar26 = iVar26 + 1;
-          iVar34 = iVar34 - uVar29;
-          if (iVar26 == iVar19 - iVar36) break;
-          iVar28 = *(int *)(glContext + 0x148);
+          rowCounterB = rowCounterB + 1;
+          rectXThenRowStartB = rectXThenRowStartB - paddedWidthB;
+          if (rowCounterB == rectHeightThenBottom - rectTopMul) break;
+          accumBuffer = *(int *)(glContext + 0x148);
         }
         return;
       }
-      if (iVar19 <= iVar36) {
+      if (rectHeightThenBottom <= rectTopMul) {
         return;
       }
-      iVar26 = 0;
+      rowCounterB = 0;
       while( true ) {
-        dVar51 = DOUBLE_001aa1e0;
-        accumShortCursor = (short *)(iVar34 * 8 + iVar28);
-        accumShortEnd = accumShortCursor + uVar20 * 4;
+        intBiasD = DOUBLE_001aa1e0;
+        accumShortCursor = (short *)(rectXThenRowStartB * 8 + accumBuffer);
+        accumShortEnd = accumShortCursor + rectWidth * 4;
         for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
           *accumShortCursor = (short)(int)(value *
                                  (double)(float)((double)CONCAT44(0x43300000,
                                                                   (int)*accumShortCursor ^ 0x80000000) -
-                                                dVar51));
+                                                intBiasD));
           accumShortCursor[1] = (short)(int)(value *
                                    (double)(float)((double)CONCAT44(0x43300000,
                                                                     (int)accumShortCursor[1] ^ 0x80000000) -
-                                                  dVar51));
+                                                  intBiasD));
           accumShortCursor[2] = (short)(int)(value *
                                    (double)(float)((double)CONCAT44(0x43300000,
                                                                     (int)accumShortCursor[2] ^ 0x80000000) -
-                                                  dVar51));
+                                                  intBiasD));
           accumShortCursor[3] = (short)(int)(value *
                                    (double)(float)((double)CONCAT44(0x43300000,
                                                                     (int)accumShortCursor[3] ^ 0x80000000) -
-                                                  dVar51));
+                                                  intBiasD));
         }
-        iVar26 = iVar26 + 1;
-        iVar34 = iVar34 - uVar29;
-        if (iVar26 == iVar19 - iVar36) break;
-        iVar28 = *(int *)(glContext + 0x148);
+        rowCounterB = rowCounterB + 1;
+        rectXThenRowStartB = rectXThenRowStartB - paddedWidthB;
+        if (rowCounterB == rectHeightThenBottom - rectTopMul) break;
+        accumBuffer = *(int *)(glContext + 0x148);
       }
       return;
     }
-    iVar26 = (int)value;
-    iVar23 = 2;
-    if (iVar26 != 4) {
-      if (iVar26 < 5) {
-        iVar23 = 1;
-        if (iVar26 != 2) {
+    multiplierInt = (int)value;
+    shiftCount = 2;
+    if (multiplierInt != 4) {
+      if (multiplierInt < 5) {
+        shiftCount = 1;
+        if (multiplierInt != 2) {
 code_r0x0000510c:
-          iVar23 = 5;
+          shiftCount = 5;
         }
       }
       else {
-        iVar23 = 3;
-        if ((iVar26 != 8) && (iVar23 = 4, iVar26 != 0x10)) goto code_r0x0000510c;
+        shiftCount = 3;
+        if ((multiplierInt != 8) && (shiftCount = 4, multiplierInt != 0x10)) goto code_r0x0000510c;
       }
     }
     if (*(char *)(glContext + 0x141) == '\x01') {
-      if (iVar36 < iVar19) {
-        iVar26 = 0;
+      if (rectTopMul < rectHeightThenBottom) {
+        rowCounterB = 0;
         while( true ) {
-          accumByteCursor = (char *)(iVar34 * 4 + iVar28);
-          accumByteEnd = accumByteCursor + iVar40;
+          accumByteCursor = (char *)(rectXThenRowStartB * 4 + accumBuffer);
+          accumByteEnd = accumByteCursor + rowBytes;
           for (; accumByteCursor < accumByteEnd; accumByteCursor = accumByteCursor + 4) {
-            *accumByteCursor = *accumByteCursor << iVar23;
-            accumByteCursor[1] = accumByteCursor[1] << iVar23;
-            accumByteCursor[2] = accumByteCursor[2] << iVar23;
-            accumByteCursor[3] = accumByteCursor[3] << iVar23;
+            *accumByteCursor = *accumByteCursor << shiftCount;
+            accumByteCursor[1] = accumByteCursor[1] << shiftCount;
+            accumByteCursor[2] = accumByteCursor[2] << shiftCount;
+            accumByteCursor[3] = accumByteCursor[3] << shiftCount;
           }
-          iVar26 = iVar26 + 1;
-          iVar34 = iVar34 - uVar29;
-          if (iVar26 == iVar19 - iVar36) break;
-          iVar28 = *(int *)(glContext + 0x148);
+          rowCounterB = rowCounterB + 1;
+          rectXThenRowStartB = rectXThenRowStartB - paddedWidthB;
+          if (rowCounterB == rectHeightThenBottom - rectTopMul) break;
+          accumBuffer = *(int *)(glContext + 0x148);
         }
       }
     }
-    else if (iVar36 < iVar19) {
-      iVar26 = 0;
+    else if (rectTopMul < rectHeightThenBottom) {
+      rowCounterB = 0;
       while( true ) {
-        accumShortCursor = (short *)(iVar34 * 8 + iVar28);
-        accumShortEnd = accumShortCursor + uVar20 * 4;
+        accumShortCursor = (short *)(rectXThenRowStartB * 8 + accumBuffer);
+        accumShortEnd = accumShortCursor + rectWidth * 4;
         for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
-          *accumShortCursor = (short)((int)*accumShortCursor << iVar23);
-          accumShortCursor[1] = (short)((int)accumShortCursor[1] << iVar23);
-          accumShortCursor[2] = (short)((int)accumShortCursor[2] << iVar23);
-          accumShortCursor[3] = (short)((int)accumShortCursor[3] << iVar23);
+          *accumShortCursor = (short)((int)*accumShortCursor << shiftCount);
+          accumShortCursor[1] = (short)((int)accumShortCursor[1] << shiftCount);
+          accumShortCursor[2] = (short)((int)accumShortCursor[2] << shiftCount);
+          accumShortCursor[3] = (short)((int)accumShortCursor[3] << shiftCount);
         }
-        iVar26 = iVar26 + 1;
-        iVar34 = iVar34 - uVar29;
-        if (iVar26 == iVar19 - iVar36) break;
-        iVar28 = *(int *)(glContext + 0x148);
+        rowCounterB = rowCounterB + 1;
+        rectXThenRowStartB = rectXThenRowStartB - paddedWidthB;
+        if (rowCounterB == rectHeightThenBottom - rectTopMul) break;
+        accumBuffer = *(int *)(glContext + 0x148);
       }
     }
     break;
   case 0x104:
-    iVar19 = *(int *)(glContext + 0x10);
-    if (((unsigned char *)0x00003190)[iVar19] == '\0') {
-      iVar23 = *(int *)(glContext + 0x15c);
-      iVar19 = *(int *)(glContext + 0x160);
-      iVar34 = 0;
-      iVar36 = 0;
-      uVar20 = iVar23 + 7U & 0xfffffff8;
-      iVar26 = iVar19;
+    engineStateB = *(int *)(glContext + 0x10);
+    if (((unsigned char *)0x00003190)[engineStateB] == '\0') {
+      fullWidthB = *(int *)(glContext + 0x15c);
+      rectHeightThenBottom = *(int *)(glContext + 0x160);
+      rectXThenRowStartB = 0;
+      rectTopAdd = 0;
+      rectWidth = fullWidthB + 7U & 0xfffffff8;
+      fullHeightB = rectHeightThenBottom;
     }
     else {
-      iVar34 = *(int *)(((unsigned char *)0x00003180) + iVar19);
-      iVar26 = *(int *)(glContext + 0x160);
-      uVar20 = iVar34 + *(int *)(((unsigned char *)0x00003188) + iVar19);
-      iVar36 = iVar26 - (*(int *)(((unsigned char *)0x0000318c) + iVar19) + *(int *)(((unsigned char *)0x00003184) + iVar19));
-      iVar40 = *(int *)(((unsigned char *)0x0000318c) + iVar19) + iVar36;
-      if (iVar34 < 0) {
-        iVar34 = 0;
+      rectXThenRowStartB = *(int *)(((unsigned char *)0x00003180) + engineStateB);
+      fullHeightB = *(int *)(glContext + 0x160);
+      rectWidth = rectXThenRowStartB + *(int *)(((unsigned char *)0x00003188) + engineStateB);
+      rectTopAdd = fullHeightB - (*(int *)(((unsigned char *)0x0000318c) + engineStateB) + *(int *)(((unsigned char *)0x00003184) + engineStateB));
+      rectBottomRaw = *(int *)(((unsigned char *)0x0000318c) + engineStateB) + rectTopAdd;
+      if (rectXThenRowStartB < 0) {
+        rectXThenRowStartB = 0;
       }
-      if (iVar36 < 0) {
-        iVar36 = 0;
+      if (rectTopAdd < 0) {
+        rectTopAdd = 0;
       }
-      iVar23 = *(int *)(glContext + 0x15c);
-      uVar29 = iVar23 + 7U & 0xfffffff8;
-      if ((int)uVar29 < (int)uVar20) {
-        uVar20 = uVar29;
+      fullWidthB = *(int *)(glContext + 0x15c);
+      paddedWidthB = fullWidthB + 7U & 0xfffffff8;
+      if ((int)paddedWidthB < (int)rectWidth) {
+        rectWidth = paddedWidthB;
       }
-      iVar19 = iVar26;
-      if (iVar40 <= iVar26) {
-        iVar19 = iVar40;
+      rectHeightThenBottom = fullHeightB;
+      if (rectBottomRaw <= fullHeightB) {
+        rectHeightThenBottom = rectBottomRaw;
       }
-      uVar20 = uVar20 - iVar34;
-      iVar19 = iVar19 - iVar36;
+      rectWidth = rectWidth - rectXThenRowStartB;
+      rectHeightThenBottom = rectHeightThenBottom - rectTopAdd;
     }
-    if ((0 < (int)uVar20) && (0 < iVar19)) {
-      iVar19 = iVar36 + iVar19;
+    if ((0 < (int)rectWidth) && (0 < rectHeightThenBottom)) {
+      rectHeightThenBottom = rectTopAdd + rectHeightThenBottom;
       if (value < (double)FLOAT_001aa0d4) {
         *(undefined1 *)(glContext + 0x140) = 1;
       }
-      uVar29 = iVar23 + 7U & 0xfffffff8;
-      iVar34 = iVar34 + uVar29 * ((iVar26 - iVar36) + -1);
+      paddedWidthB = fullWidthB + 7U & 0xfffffff8;
+      rectXThenRowStartB = rectXThenRowStartB + paddedWidthB * ((fullHeightB - rectTopAdd) + -1);
       if (*(char *)(glContext + 0x141) == '\x01') {
-        cVar14 = (char)(int)(value * (double)FLOAT_001aa0f4);
-        if (iVar36 < iVar19) {
-          iVar26 = 0;
+        valueByte = (char)(int)(value * (double)FLOAT_001aa0f4);
+        if (rectTopAdd < rectHeightThenBottom) {
+          rowCounterB = 0;
           while( true ) {
-            accumByteCursor = (char *)(iVar34 * 4 + iVar28);
-            accumByteEnd = accumByteCursor + uVar20 * 4;
+            accumByteCursor = (char *)(rectXThenRowStartB * 4 + accumBuffer);
+            accumByteEnd = accumByteCursor + rectWidth * 4;
             for (; accumByteCursor < accumByteEnd; accumByteCursor = accumByteCursor + 4) {
-              *accumByteCursor = cVar14 + *accumByteCursor;
-              accumByteCursor[1] = cVar14 + accumByteCursor[1];
-              accumByteCursor[2] = cVar14 + accumByteCursor[2];
-              accumByteCursor[3] = cVar14 + accumByteCursor[3];
+              *accumByteCursor = valueByte + *accumByteCursor;
+              accumByteCursor[1] = valueByte + accumByteCursor[1];
+              accumByteCursor[2] = valueByte + accumByteCursor[2];
+              accumByteCursor[3] = valueByte + accumByteCursor[3];
             }
-            iVar26 = iVar26 + 1;
-            iVar34 = iVar34 - uVar29;
-            if (iVar26 == iVar19 - iVar36) break;
-            iVar28 = *(int *)(glContext + 0x148);
+            rowCounterB = rowCounterB + 1;
+            rectXThenRowStartB = rectXThenRowStartB - paddedWidthB;
+            if (rowCounterB == rectHeightThenBottom - rectTopAdd) break;
+            accumBuffer = *(int *)(glContext + 0x148);
           }
         }
       }
       else {
-        sStack_da = (short)(int)(value * (double)FLOAT_001aa0d8);
-        if (iVar36 < iVar19) {
-          iVar26 = 0;
+        addFixedValueA8 = (short)(int)(value * (double)FLOAT_001aa0d8);
+        if (rectTopAdd < rectHeightThenBottom) {
+          rowCounterB = 0;
           while( true ) {
-            accumShortCursor = (short *)(iVar34 * 8 + iVar28);
-            accumShortEnd = accumShortCursor + uVar20 * 4;
+            accumShortCursor = (short *)(rectXThenRowStartB * 8 + accumBuffer);
+            accumShortEnd = accumShortCursor + rectWidth * 4;
             for (; accumShortCursor < accumShortEnd; accumShortCursor = accumShortCursor + 4) {
-              *accumShortCursor = sStack_da + *accumShortCursor;
-              accumShortCursor[1] = sStack_da + accumShortCursor[1];
-              accumShortCursor[2] = sStack_da + accumShortCursor[2];
-              accumShortCursor[3] = sStack_da + accumShortCursor[3];
+              *accumShortCursor = addFixedValueA8 + *accumShortCursor;
+              accumShortCursor[1] = addFixedValueA8 + accumShortCursor[1];
+              accumShortCursor[2] = addFixedValueA8 + accumShortCursor[2];
+              accumShortCursor[3] = addFixedValueA8 + accumShortCursor[3];
             }
-            iVar26 = iVar26 + 1;
-            iVar34 = iVar34 - uVar29;
-            if (iVar26 == iVar19 - iVar36) break;
-            iVar28 = *(int *)(glContext + 0x148);
+            rowCounterB = rowCounterB + 1;
+            rectXThenRowStartB = rectXThenRowStartB - paddedWidthB;
+            if (rowCounterB == rectHeightThenBottom - rectTopAdd) break;
+            accumBuffer = *(int *)(glContext + 0x148);
           }
         }
       }
