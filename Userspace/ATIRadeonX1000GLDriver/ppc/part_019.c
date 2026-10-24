@@ -1,19 +1,19 @@
 #include "decls.h"
 
 /* scDumpPixelProgramPsn @ 0xd4e08 (92 bytes) */
-int scDumpPixelProgramPsn(sinkRecord, shaderState, param_3, param_4, param_5, param_6, param_7, param_8)
+int scDumpPixelProgramPsn(sinkRecord, shaderState, param_3, argR6, argR7, argR8, param_7, argR10)
   undefined4 *sinkRecord;
   int shaderState;
   undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 argR6;
+  undefined4 argR7;
+  undefined4 argR8;
   undefined4 param_7;
-  undefined4 param_8;
+  undefined4 argR10;
 {
   DAT_001fa61c = *sinkRecord;
   DAT_001fa618 = sinkRecord[1];
-  FUN_000d183c(shaderState + 0x64c,"SC Generated Shader",0,param_4,param_5,param_6,DAT_001fa618,param_8)
+  FUN_000d183c(shaderState + 0x64c,"SC Generated Shader",0,argR6,argR7,argR8,DAT_001fa618,argR10)
   ;
   return 1;
 }
@@ -28,13 +28,13 @@ int scDumpPixelProgramToStringStub()
 }
 
 /* scDumpPixelProgram @ 0xd4e8c (60 bytes) */
-int scDumpPixelProgram(sinkContext, shaderState, optionsArg, sinkFn, param_5, param_6, param_7)
+int scDumpPixelProgram(sinkContext, shaderState, optionsArg, sinkFn, argR7, argR8, param_7)
   undefined4 sinkContext;
   undefined4 shaderState;
   undefined4 optionsArg;
   undefined4 sinkFn;
-  undefined4 param_5;
-  undefined4 param_6;
+  undefined4 argR7;
+  undefined4 argR8;
   undefined4 param_7;
 {
   undefined4 sinkFnCopy;
@@ -46,7 +46,7 @@ int scDumpPixelProgram(sinkContext, shaderState, optionsArg, sinkFn, param_5, pa
   psnClearSinkRecord2(&sinkFnField);
   sinkFnField = sinkFn;
   sinkContextField = sinkContext;
-  ((int (*)())scDumpPixelProgramPsn)(&sinkFnField,shaderState,optionsArg,sinkFnCopy,param_5,param_6,param_7,in_r10);
+  ((int (*)())scDumpPixelProgramPsn)(&sinkFnField,shaderState,optionsArg,sinkFnCopy,argR7,argR8,param_7,in_r10);
   return 0;
 }
 
@@ -3007,39 +3007,39 @@ int ildisFlushLine(disassembler, passThroughR4, passThroughR5, fmtArgR6, fmtArgR
 }
 
 /* FUN_000da9fc @ 0xda9fc (180 bytes) */
-int FUN_000da9fc(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  int param_1;
+int FUN_000da9fc(disassembler, param_2, param_3, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  int disassembler;
   int param_2;
   undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
-  undefined4 param_8;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  undefined4 fmtArgR9;
+  undefined4 fmtArgR10;
 {
-  unsigned int ghidra_home[8] = { param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { disassembler, param_2, param_3, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint uVar1;
   undefined4 uVar2;
   int iVar3;
   undefined1 auStack_234 [540];
   
-  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = param_4;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = param_6;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
-  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = param_8;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = fmtArgR6;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = fmtArgR7;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 20)) = fmtArgR8;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = fmtArgR9;
+  (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = fmtArgR10;
   if (0 < param_2) {
     iVar3 = 0;
     uVar2 = param_3;
     do {
       iVar3 = iVar3 + 1;
-      ((int (*)())ildisAppendf)(param_1,"    ",uVar2,param_4,param_5,param_6,param_7,param_8);
+      ((int (*)())ildisAppendf)(disassembler,"    ",uVar2,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
     } while (param_2 != iVar3);
   }
-  printf_LDBLStub_1a3428(auStack_234,0x200,param_3,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)),param_5,param_6,param_7,param_8);
-  uVar1 = _strlen(param_1 + 0x10);
+  printf_LDBLStub_1a3428(auStack_234,0x200,param_3,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)),fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
+  uVar1 = _strlen(disassembler + 0x10);
   if (uVar1 <= 0x1ff - uVar1) {
-    _strcat(param_1 + 0x10,auStack_234);
+    _strcat(disassembler + 0x10,auStack_234);
   }
   return;
 }

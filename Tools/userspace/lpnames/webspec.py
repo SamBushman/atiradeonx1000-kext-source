@@ -23,14 +23,15 @@ for pf in sorted(glob.glob(os.path.join(d, 'part_*.c'))):
     if first: break
 nodes, entry = F.build_cfg(body, brace)
 ws, er = F.webs(nodes, entry, var)
-R = []
+R = []; UR = []
 for l in open(rules):
     if not l.strip() or l.startswith('#'): continue
     c = l.rstrip('\n').split('\t')
+    if c[0].startswith('@'): UR.append((c[0][1:], re.compile(c[1]), c[2] if len(c) > 2 else '')); continue   # use rule: any line of the web
     R.append((c[0], re.compile(c[1]), c[2] if len(c) > 2 else ''))
 DEF = re.compile(r'(?<![\w.>*])%s\s*=(?!=)\s*(.*)' % re.escape(var))
 OPEN = re.compile(r'\b%s\b' % re.escape(var))
-EV = {n.lstrip('~'): e for n, _, e in R}
+EV = {n.lstrip('~'): e for n, _, e in R + UR}
 
 
 def rule_for(t):
@@ -67,6 +68,10 @@ for k, ls in enumerate(ws):
     if not defs:
         print('web %2d %-26s lines %s' % (k, 'ENTRY', desc)); bad.append(k); continue
     names = [rule_for(t) for _, t in defs]
+    if None in names:                                   # defs gave no name: the web's lines may (constructor called on it, ...)
+        for n, rx, ev in UR:
+            if any(rx.search(body[x]) for x in ls):
+                names = [n if q is None else q for q in names]; break
     strong = {n for n in names if n is not None and not n.startswith('~')}
     if None not in names and len(strong) == 1 and len(set(names)) > 1 and not (len(defs) == 2 and OPEN.search(defs[1][1])):
         names = [next(iter(strong))] * len(names)       # weak defs (rule names starting with ~: a default 0 ...) join the web's one strong role

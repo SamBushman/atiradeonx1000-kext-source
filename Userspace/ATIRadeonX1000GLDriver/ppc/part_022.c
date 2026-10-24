@@ -2340,22 +2340,22 @@ int FUN_000e83bc(param_1)
 }
 
 /* FUN_000e8424 @ 0xe8424 (216 bytes) */
-int FUN_000e8424(param_1, param_2)
-  int param_1;
+int FUN_000e8424(block, param_2)
+  int block;
   int param_2;
 {
   int *piVar1;
   int iVar2;
   int *piVar3;
   
-  if (*(int *)(*(int *)(*(int *)(*(int *)(param_1 + 200) + 8) + 0x88) + 8) == 0x8e) {
-    piVar1 = *(int **)(param_1 + 0x98);
-    for (piVar3 = (int *)(*(int **)(param_1 + 0x98))[2]; piVar3 != (int *)0x0;
+  if (*(int *)(*(int *)(*(int *)(*(int *)(block + 200) + 8) + 0x88) + 8) == 0x8e) {
+    piVar1 = *(int **)(block + 0x98);
+    for (piVar3 = (int *)(*(int **)(block + 0x98))[2]; piVar3 != (int *)0x0;
         piVar3 = (int *)piVar3[2]) {
       if (((piVar1[5] & 1U) != 0) && (*(int *)(piVar1[0x22] + 8) != 0x8e)) {
         iVar2 = (**(code **)(*piVar1 + 0x34))(piVar1);
         if (iVar2 == 0) {
-          ((int (*)())Block__insertInstBefore)(param_1,piVar1,param_2);
+          ((int (*)())Block__insertInstBefore)(block,piVar1,param_2);
           return;
         }
         piVar3 = (int *)piVar1[2];
@@ -2364,8 +2364,8 @@ int FUN_000e8424(param_1, param_2)
     }
   }
   else {
-    DList__insertAfter(param_2,*(int *)(param_1 + 200));
-    *(int *)(param_2 + 0x158) = param_1;
+    DList__insertAfter(param_2,*(int *)(block + 200));
+    *(int *)(param_2 + 0x158) = block;
   }
   return;
 }

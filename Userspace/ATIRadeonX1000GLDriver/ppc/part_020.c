@@ -391,15 +391,15 @@ int ildisPrintZeroOp(disassembler, zeroOpWord, passThroughR5, fmtArgR6, fmtArgR7
 }
 
 /* ildisPrintOutputTopology @ 0xdc658 (196 bytes) */
-int ildisPrintOutputTopology(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
+int ildisPrintOutputTopology(disassembler, param_2, fmtArgR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  undefined4 disassembler;
   uint param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  char *param_7;
-  undefined4 param_8;
+  undefined4 fmtArgR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  char *fmtArgR9;
+  undefined4 fmtArgR10;
 {
   uint uVar1;
   char local_38 [4];
@@ -409,13 +409,13 @@ int ildisPrintOutputTopology(param_1, param_2, param_3, param_4, param_5, param_
   
   uVar1 = param_2 >> 0x10 & 0x3fff;
   if (uVar1 == 1) {
-    param_7 = "_line_strip";
+    fmtArgR9 = "_line_strip";
     *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_strip_001a82c4) + 0));
     *(unsigned int *)local_34 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_strip_001a82c4) + 4));
     *(unsigned int *)local_30 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_strip_001a82c4) + 8));
   }
   else if (uVar1 == 0) {
-    param_7 = "_point_list";
+    fmtArgR9 = "_point_list";
     *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_list_001a82b8) + 0));
     *(unsigned int *)local_34 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_list_001a82b8) + 4));
     *(unsigned int *)local_30 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_list_001a82b8) + 8));
@@ -425,22 +425,22 @@ int ildisPrintOutputTopology(param_1, param_2, param_3, param_4, param_5, param_
     *(unsigned int *)local_34 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 4));
     *(unsigned int *)local_30 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 8));
     (*(unsigned int *)((unsigned char *)&(local_2c) + 0)) = (*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 12));
-    param_7 = (char *)(*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 0));
-    param_8 = (*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 12));
+    fmtArgR9 = (char *)(*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 0));
+    fmtArgR10 = (*(unsigned int *)((unsigned char *)&(s__triangle_strip_001a82d0) + 12));
   }
-  return ildisAppendf(param_1,local_38,param_3,param_4,param_5,param_6,param_7,param_8);
+  return ildisAppendf(disassembler,local_38,fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
 }
 
 /* ildisPrintInputPrimitive @ 0xdc71c (268 bytes) */
-int ildisPrintInputPrimitive(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
-  undefined4 param_1;
+int ildisPrintInputPrimitive(disassembler, param_2, fmtArgR5, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10)
+  undefined4 disassembler;
   uint param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  char *param_7;
-  uint param_8;
+  undefined4 fmtArgR5;
+  undefined4 fmtArgR6;
+  undefined4 fmtArgR7;
+  undefined4 fmtArgR8;
+  char *fmtArgR9;
+  uint fmtArgR10;
 {
   char local_38 [4];
   char local_34;
@@ -450,37 +450,37 @@ int ildisPrintInputPrimitive(param_1, param_2, param_3, param_4, param_5, param_
   
   switch(param_2 >> 0x10 & 0x3fff) {
   case 0:
-    param_7 = "_point";
+    fmtArgR9 = "_point";
     *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__point_001a82e0) + 0));
     (*(unsigned short *)((unsigned char *)&(acStack_33) + 0)) = (*(unsigned short *)((unsigned char *)&(s__point_001a82e0) + 5));
     local_34 = s__point_001a82e0[4];
     break;
   case 1:
-    param_7 = "_line";
+    fmtArgR9 = "_line";
     *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_001a82e8) + 0));
     local_34 = (*(unsigned short *)((unsigned char *)&(s__line_001a82e8) + 4));
     break;
   case 2:
-    param_7 = "_triangle";
+    fmtArgR9 = "_triangle";
     *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_001a82f0) + 0));
     local_34 = (*(unsigned int *)((unsigned char *)&(s__triangle_001a82f0) + 4));
     (*(unsigned short *)((unsigned char *)&(local_30) + 0)) = (*(unsigned short *)((unsigned char *)&(s__triangle_001a82f0) + 8));
     break;
   case 3:
-    param_7 = "_line_adj";
+    fmtArgR9 = "_line_adj";
     *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__line_adj_001a82fc) + 0));
     local_34 = (*(unsigned int *)((unsigned char *)&(s__line_adj_001a82fc) + 4));
     (*(unsigned short *)((unsigned char *)&(local_30) + 0)) = (*(unsigned short *)((unsigned char *)&(s__line_adj_001a82fc) + 8));
     break;
   case 4:
-    param_8 = (uint)(ushort)(*(unsigned short *)((unsigned char *)&(s__triangle_adj_001a8308) + 12));
+    fmtArgR10 = (uint)(ushort)(*(unsigned short *)((unsigned char *)&(s__triangle_adj_001a8308) + 12));
     *(unsigned int *)local_38 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_adj_001a8308) + 0));
     local_34 = (*(unsigned int *)((unsigned char *)&(s__triangle_adj_001a8308) + 4));
     *(unsigned int *)local_30 = (unsigned int)(*(unsigned int *)((unsigned char *)&(s__triangle_adj_001a8308) + 8));
     (*(unsigned short *)((unsigned char *)&(local_2c) + 0)) = (*(unsigned short *)((unsigned char *)&(s__triangle_adj_001a8308) + 12));
-    param_7 = (char *)(*(unsigned int *)((unsigned char *)&(s__triangle_adj_001a8308) + 0));
+    fmtArgR9 = (char *)(*(unsigned int *)((unsigned char *)&(s__triangle_adj_001a8308) + 0));
   }
-  ildisAppendf(param_1,local_38,param_3,param_4,param_5,param_6,param_7,param_8);
+  ildisAppendf(disassembler,local_38,fmtArgR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   return;
 }
 
@@ -994,14 +994,14 @@ LAB_000dd1f4:
 }
 
 /* ildisPrintSourceOperand @ 0xdd1f8 (1220 bytes) */
-int ildisPrintSourceOperand(disassembler, passThroughR4, printedValue, fmtArgR6, fmtArgR7, fmtArgR8, param_7)
+int ildisPrintSourceOperand(disassembler, passThroughR4, printedValue, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9)
   int *disassembler;
   undefined4 passThroughR4;
   uint printedValue;
   undefined4 fmtArgR6;
   undefined4 fmtArgR7;
   undefined4 fmtArgR8;
-  uint *param_7;
+  uint *fmtArgR9;
 {
   undefined4 componentChar;
   uint divCompSelect;
@@ -1041,13 +1041,13 @@ int ildisPrintSourceOperand(disassembler, passThroughR4, printedValue, fmtArgR6,
     indexPrinted = false;
     loopIndex = 0;
     do {
-      ((int (*)())ildisPrintRegisterType)(disassembler,operandWord >> 0x10 & 0x3f,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7);
+      ((int (*)())ildisPrintRegisterType)(disassembler,operandWord >> 0x10 & 0x3f,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
       if (((undefined4 *)(operandWord & 0x3f0000) == 0x001b0000) ||
          ((undefined4 *)(operandWord & 0x3f0000) == (undefined4 *)0x1c0000)) {
         printedValue = operandWord & 0xffff;
-        printf_LDBLStub_1a32d0(formatBuffer,"%d",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+        printf_LDBLStub_1a32d0(formatBuffer,"%d",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
         indexPrinted = true;
-        ildisAppendf(disassembler,formatBuffer,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+        ildisAppendf(disassembler,formatBuffer,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
       }
 LAB_000dd324:
       if (relativeMode == 0) {
@@ -1057,38 +1057,38 @@ LAB_000dd324:
             printedValue = *(uint *)disassembler[2];
             disassembler[2] = (int)((uint *)disassembler[2] + 1);
           }
-          printf_LDBLStub_1a32d0(formatBuffer,"[%lu]",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
-          ildisAppendf(disassembler,formatBuffer,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+          printf_LDBLStub_1a32d0(formatBuffer,"[%lu]",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
+          ildisAppendf(disassembler,formatBuffer,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
         }
         else {
           if (extraOperandBit == 0) {
             printedValue = operandWord & 0xffff;
-            printf_LDBLStub_1a32d0(formatBuffer,"%d",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+            printf_LDBLStub_1a32d0(formatBuffer,"%d",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
           }
           else {
             printedValue = operandWord & 0xffff;
-            printf_LDBLStub_1a32d0(formatBuffer,"[%d]",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+            printf_LDBLStub_1a32d0(formatBuffer,"[%d]",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
           }
-          ildisAppendf(disassembler,formatBuffer,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+          ildisAppendf(disassembler,formatBuffer,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
         }
       }
       else {
         if (relativeMode == 0x800000) {
-          ildisAppendf(disassembler,"[",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+          ildisAppendf(disassembler,"[",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
           if ((unaff_r23 & 0x10000) == 0) {
             addressRegisterIndex = unaff_r23 & 0xffff;
-            printf_LDBLStub_1a32d0(formatBuffer,"a%d",addressRegisterIndex,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
-            ildisAppendf(disassembler,formatBuffer,addressRegisterIndex,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+            printf_LDBLStub_1a32d0(formatBuffer,"a%d",addressRegisterIndex,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
+            ildisAppendf(disassembler,formatBuffer,addressRegisterIndex,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
             if ((unaff_r23 & 0xe0000) != 0) {
               letterStyle = returnZero_da8fc(disassembler,operandWord);
               componentChar = ildisComponentSelectChar(disassembler,unaff_r23 >> 0x11 & 7,letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,
-                                   param_7,in_r10);
-              printf_LDBLStub_1a32d0(formatBuffer,".%c",componentChar,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
-              ildisAppendf(disassembler,formatBuffer,componentChar,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+                                   fmtArgR9,in_r10);
+              printf_LDBLStub_1a32d0(formatBuffer,".%c",componentChar,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
+              ildisAppendf(disassembler,formatBuffer,componentChar,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
             }
           }
           else {
-            ildisAppendf(disassembler,"al",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+            ildisAppendf(disassembler,"al",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
           }
           if (indexPrinted) {
             printedValue = 0;
@@ -1097,40 +1097,40 @@ LAB_000dd324:
               disassembler[2] = (int)((uint *)disassembler[2] + 1);
             }
 LAB_000dd4f0:
-            printf_LDBLStub_1a32d0(formatBuffer2,"+%lu",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
-            ildisAppendf(disassembler,formatBuffer2,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+            printf_LDBLStub_1a32d0(formatBuffer2,"+%lu",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
+            ildisAppendf(disassembler,formatBuffer2,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
           }
           else {
             printedValue = operandWord & 0xffff;
             if (printedValue != 0) {
-              printf_LDBLStub_1a32d0(formatBuffer,"+%d",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
-              ildisAppendf(disassembler,formatBuffer,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+              printf_LDBLStub_1a32d0(formatBuffer,"+%d",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
+              ildisAppendf(disassembler,formatBuffer,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
             }
           }
         }
         else {
           if (relativeMode != 0x1000000) goto LAB_000dd51c;
           formatBuffer2[0] = 0x5b00;
-          ildisAppendf(disassembler,formatBuffer2,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
-          ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7);
+          ildisAppendf(disassembler,formatBuffer2,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
+          ((int (*)())ildisPrintSourceOperand)(disassembler,extraout_r4,printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
           if ((operandWord & 0x4000000) != 0) {
             printedValue = *(uint *)disassembler[2];
             disassembler[2] = (int)((uint *)disassembler[2] + 1);
             goto LAB_000dd4f0;
           }
         }
-        ildisAppendf(disassembler,"]",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+        ildisAppendf(disassembler,"]",printedValue,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
       }
 LAB_000dd51c:
       loopIndex = loopIndex + 1;
       if (extraOperandCount + 1 <= loopIndex) goto LAB_000dd530;
     } while (loopIndex == 0);
-    param_7 = (uint *)disassembler[2];
-    operandWord = *param_7;
-    disassembler[2] = (int)(param_7 + 1);
+    fmtArgR9 = (uint *)disassembler[2];
+    operandWord = *fmtArgR9;
+    disassembler[2] = (int)(fmtArgR9 + 1);
     if ((operandWord & 0x400000) != 0) {
-      unaff_r28 = param_7[1];
-      disassembler[2] = (int)(param_7 + 2);
+      unaff_r28 = fmtArgR9[1];
+      disassembler[2] = (int)(fmtArgR9 + 2);
     }
     relativeMode = operandWord & 0x1800000;
     extraOperandCount = operandWord >> 0x19 & 1;
@@ -1145,52 +1145,52 @@ LAB_000dd530:
     return;
   }
   letterStyle = returnZero_da8fc(disassembler,operandWord);
-  ildisPrintSwizzle(disassembler,unaff_r28,letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
-  ildisPrintNegateComponents(disassembler,unaff_r28,letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+  ildisPrintSwizzle(disassembler,unaff_r28,letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
+  ildisPrintNegateComponents(disassembler,unaff_r28,letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
   if ((unaff_r28 & 0x10000) != 0) {
-    ildisAppendf(disassembler,"_invert",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+    ildisAppendf(disassembler,"_invert",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
   }
   if ((unaff_r28 & 0x80000) != 0) {
-    ildisAppendf(disassembler,"_sign",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+    ildisAppendf(disassembler,"_sign",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
   }
   if ((unaff_r28 & 0x100000) != 0) {
-    ildisAppendf(disassembler,"_abs",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+    ildisAppendf(disassembler,"_abs",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
   }
   if ((unaff_r28 & 0x20000) != 0) {
-    ildisAppendf(disassembler,"_bias",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+    ildisAppendf(disassembler,"_bias",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
   }
   if ((unaff_r28 & 0x40000) != 0) {
-    ildisAppendf(disassembler,"_x2",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+    ildisAppendf(disassembler,"_x2",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
   }
   if ((unaff_r28 & 0xe00000) == 0) {
     return;
   }
-  ildisAppendf(disassembler,"_divcomp(",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+  ildisAppendf(disassembler,"_divcomp(",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
   divCompSelect = unaff_r28 >> 0x15 & 7;
   if (divCompSelect == 2) {
-    ildisAppendf(disassembler,"z",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+    ildisAppendf(disassembler,"z",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
     goto LAB_000dd630;
   }
   if (divCompSelect < 3) {
     if (divCompSelect == 1) {
-      ildisAppendf(disassembler,"y",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+      ildisAppendf(disassembler,"y",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
       goto LAB_000dd630;
     }
   }
   else {
     if (divCompSelect == 3) {
-      ildisAppendf(disassembler,"w",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+      ildisAppendf(disassembler,"w",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
       goto LAB_000dd630;
     }
     if (divCompSelect == 4) {
-      ildisAppendf(disassembler,"unknown",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+      ildisAppendf(disassembler,"unknown",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
       goto LAB_000dd630;
     }
   }
-  ildisAppendf(disassembler,"!!!invalid!!!",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+  ildisAppendf(disassembler,"!!!invalid!!!",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
   *disassembler = *disassembler + 1;
 LAB_000dd630:
-  ildisAppendf(disassembler,")",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,param_7,in_r10);
+  ildisAppendf(disassembler,")",letterStyle,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,in_r10);
   return;
 }
 
@@ -3921,15 +3921,15 @@ int Compiler__fail(compiler, errorCode)
 }
 
 /* FUN_000e1564 @ 0xe1564 (84 bytes) */
-int FUN_000e1564(param_1, param_2)
-  int param_1;
+int FUN_000e1564(compiler, param_2)
+  int compiler;
   uint param_2;
 {
   int iVar1;
   
-  iVar1 = (**(code **)(param_1 + 0x350))(*(undefined4 *)(param_1 + 0x354),param_2);
+  iVar1 = (**(code **)(compiler + 0x350))(*(undefined4 *)(compiler + 0x354),param_2);
   if (iVar1 == 0) {
-    ((int (*)())Compiler__fail)(param_1,2);
+    ((int (*)())Compiler__fail)(compiler,2);
   }
   return iVar1;
 }

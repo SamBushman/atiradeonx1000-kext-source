@@ -906,16 +906,16 @@ int FUN_000f3ae0(inst)
 }
 
 /* FUN_000f3b10 @ 0xf3b10 (88 bytes) */
-int FUN_000f3b10(inst, param_2)
+int FUN_000f3b10(inst, operandIndex)
   undefined4 inst;
-  undefined4 param_2;
+  undefined4 operandIndex;
 {
   int operandRecord;
   int iVar1;
   int iVar2;
   undefined4 local_28 [10];
   
-  operandRecord = IRInst__getOperandRecord(inst,param_2);
+  operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   iVar1 = 0;
   local_28[0] = *(undefined4 *)(operandRecord + 0x10);
   iVar2 = 4;
@@ -930,16 +930,16 @@ int FUN_000f3b10(inst, param_2)
 }
 
 /* FUN_000f3b68 @ 0xf3b68 (88 bytes) */
-int FUN_000f3b68(inst, param_2)
+int FUN_000f3b68(inst, operandIndex)
   undefined4 inst;
-  undefined4 param_2;
+  undefined4 operandIndex;
 {
   int operandRecord;
   int iVar1;
   int iVar2;
   undefined4 local_28 [10];
   
-  operandRecord = IRInst__getOperandRecord(inst,param_2);
+  operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   iVar1 = 0;
   local_28[0] = *(undefined4 *)(operandRecord + 0x10);
   iVar2 = 4;
@@ -954,33 +954,33 @@ int FUN_000f3b68(inst, param_2)
 }
 
 /* FUN_000f3bc0 @ 0xf3bc0 (112 bytes) */
-int FUN_000f3bc0(inst, param_2)
+int FUN_000f3bc0(inst, operandIndex)
   undefined4 inst;
-  int param_2;
+  int operandIndex;
 {
   int operandRecord;
   bool bVar2;
   
-  if (param_2 == 0) {
+  if (operandIndex == 0) {
     operandRecord = IRInst__getOperandRecord(inst,0);
     bVar2 = *(int *)(operandRecord + 0x10) == _UNK_001aa84c;
   }
   else {
-    operandRecord = IRInst__getOperandRecord(inst,param_2);
+    operandRecord = IRInst__getOperandRecord(inst,operandIndex);
     bVar2 = *(int *)(operandRecord + 0x10) == _UNK_001aa848;
   }
   return 1 - (uint)bVar2;
 }
 
 /* FUN_000f3c30 @ 0xf3c30 (972 bytes) */
-int FUN_000f3c30(param_1, inst, param_3, param_4, param_5)
+int FUN_000f3c30(param_1, inst, operandIndex, param_4, param_5)
   byte *param_1;
   int *inst;
-  int param_3;
+  int operandIndex;
   int param_4;
   undefined4 param_5;
 {
-  unsigned int ghidra_home[8] = { param_1, inst, param_3, param_4, param_5, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
+  unsigned int ghidra_home[8] = { param_1, inst, operandIndex, param_4, param_5, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   uint uVar2;
   byte *pbVar3;
@@ -992,15 +992,15 @@ int FUN_000f3c30(param_1, inst, param_3, param_4, param_5)
   undefined4 local_34 [7];
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 16)) = param_5;
-  (**(code **)(*inst + 0x14))(inst,inst,param_3,param_4,param_5);
+  (**(code **)(*inst + 0x14))(inst,inst,operandIndex,param_4,param_5);
   param_1[0] = 0;
   param_1[1] = 0;
   param_1[2] = 0;
   param_1[3] = 0;
-  if (0 < param_3) {
-    iVar4 = IRInst__getOperandSource(inst,param_3);
+  if (0 < operandIndex) {
+    iVar4 = IRInst__getOperandSource(inst,operandIndex);
     if (iVar4 == 0) {
-      iVar4 = *(int *)(inst[param_3 * 6 + 0x23] + 4);
+      iVar4 = *(int *)(inst[operandIndex * 6 + 0x23] + 4);
     }
     else {
       iVar4 = *(int *)(iVar4 + 0x98);
@@ -1012,9 +1012,9 @@ int FUN_000f3c30(param_1, inst, param_3, param_4, param_5)
   case 0:
     break;
   case 1:
-    if (param_3 == 2) goto switchD_000f3cf4_caseD_b;
-    if (param_3 != 3) {
-      if (param_3 != 1) {
+    if (operandIndex == 2) goto switchD_000f3cf4_caseD_b;
+    if (operandIndex != 3) {
+      if (operandIndex != 1) {
         return param_1;
       }
       param_1[3] = 1;
@@ -1028,7 +1028,7 @@ switchD_000f3cf4_caseD_2:
     param_1[1] = 1;
     return param_1;
   case 3:
-    if (param_3 != 3) {
+    if (operandIndex != 3) {
       param_1[1] = 1;
       *param_1 = 1;
       return param_1;
@@ -1041,7 +1041,7 @@ LAB_000f3fe8:
   default:
     goto switchD_000f3cf4_caseD_5;
   case 6:
-    if (param_3 == 1) {
+    if (operandIndex == 1) {
       iVar4 = 0;
       pbVar3 = param_1;
       do {
@@ -1058,7 +1058,7 @@ LAB_000f3fe8:
     }
     goto switchD_000f3cf4_caseD_5;
   case 7:
-    if (2 < param_3) {
+    if (2 < operandIndex) {
 LAB_000f3ff4:
       param_1[3] = 1;
       return param_1;
@@ -1097,7 +1097,7 @@ switchD_000f3cf4_caseD_4:
   case 0xb:
     goto switchD_000f3cf4_caseD_b;
   case 0xc:
-    iVar4 = IRInst__getOperandRecord(inst,param_3);
+    iVar4 = IRInst__getOperandRecord(inst,operandIndex);
     iVar7 = 0;
     pcVar6 = &(*(unsigned int *)((unsigned char *)ghidra_home + 16));
     local_34[0] = *(undefined4 *)(iVar4 + 0x10);
@@ -1114,14 +1114,14 @@ switchD_000f3cf4_caseD_4:
     } while (iVar4 != 0);
     return param_1;
   case 0xd:
-    if (param_3 != 2) goto switchD_000f3cf4_caseD_5;
+    if (operandIndex != 2) goto switchD_000f3cf4_caseD_5;
 switchD_000f3cf4_caseD_b:
     *param_1 = 1;
     return param_1;
   case 0xe:
-    if (param_3 != 1) {
-      if (param_3 != 2) {
-        if (param_3 != 3) {
+    if (operandIndex != 1) {
+      if (operandIndex != 2) {
+        if (operandIndex != 3) {
           return param_1;
         }
         goto switchD_000f3cf4_caseD_5;
@@ -1131,17 +1131,17 @@ switchD_000f3cf4_caseD_b:
     break;
   case 0xf:
     if (*(int *)(inst[0x22] + 8) == 0xb4) {
-      if (param_3 == 2) goto LAB_000f3fe8;
-      if (param_3 < 3) {
-        if (param_3 != 1) {
+      if (operandIndex == 2) goto LAB_000f3fe8;
+      if (operandIndex < 3) {
+        if (operandIndex != 1) {
           return param_1;
         }
         *param_1 = 1;
         param_1[1] = 1;
         return param_1;
       }
-      if (param_3 == 3) goto LAB_000f3ff4;
-      if (param_3 != 4) {
+      if (operandIndex == 3) goto LAB_000f3ff4;
+      if (operandIndex != 4) {
         return param_1;
       }
     }
@@ -1160,10 +1160,10 @@ switchD_000f3cf4_caseD_5:
 }
 
 /* FUN_000f403c @ 0xf403c (1404 bytes) */
-int FUN_000f403c(param_1, inst, param_3, param_4, param_5)
+int FUN_000f403c(param_1, inst, operandIndex, param_4, param_5)
   undefined4 *param_1;
   int *inst;
-  int param_3;
+  int operandIndex;
   undefined4 param_4;
   int param_5;
 {
@@ -1189,8 +1189,8 @@ int FUN_000f403c(param_1, inst, param_3, param_4, param_5)
   undefined4 local_28;
   undefined4 local_24 [3];
   
-  (**(code **)(*inst + 0x14))(inst,inst,param_3,param_4,param_5);
-  operandRecord = IRInst__getOperandRecord(inst,param_3);
+  (**(code **)(*inst + 0x14))(inst,inst,operandIndex,param_4,param_5);
+  operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   local_58 = *(uint *)(operandRecord + 0x10);
   *param_1 = 0;
   uVar5 = OpcodeInfo__getResultMode(inst[0x22],inst,param_5);
@@ -1211,9 +1211,9 @@ int FUN_000f403c(param_1, inst, param_3, param_4, param_5)
     } while (iVar7 != 0);
     break;
   case 1:
-    if (param_3 == 2) goto switchD_000f40d0_caseD_b;
-    if (param_3 != 3) {
-      if (param_3 != 1) {
+    if (operandIndex == 2) goto switchD_000f40d0_caseD_b;
+    if (operandIndex != 3) {
+      if (operandIndex != 1) {
         return param_1;
       }
       *(undefined1 *)((int)param_1 + (local_58 & 0xff)) = 1;
@@ -1227,12 +1227,12 @@ switchD_000f40d0_caseD_2:
     *(undefined1 *)((int)param_1 + (local_58 & 0xff)) = 1;
     return param_1;
   case 3:
-    if (param_3 - 1U < 2) {
+    if (operandIndex - 1U < 2) {
       ((int (*)())laneMask__fromSelectBytes)(&local_40,local_58,2);
       *param_1 = local_40;
       return param_1;
     }
-    if (param_3 != 3) {
+    if (operandIndex != 3) {
       return param_1;
     }
     goto LAB_000f4584;
@@ -1245,7 +1245,7 @@ switchD_000f40d0_caseD_2:
     *param_1 = local_38;
     break;
   case 6:
-    if (param_3 == 1) {
+    if (operandIndex == 1) {
       iVar4 = 0;
       do {
         operandRecord2 = IRInst__getOperandRecord(inst,0);
@@ -1263,7 +1263,7 @@ switchD_000f40d0_caseD_2:
     }
     break;
   case 7:
-    if (param_3 < 3) {
+    if (operandIndex < 3) {
       ((int (*)())laneMask__fromSelectBytes)(&local_30,local_58,3);
       *param_1 = local_30;
       return param_1;
@@ -1365,7 +1365,7 @@ switchD_000f40d0_caseD_a:
     } while (iVar7 != 0);
     break;
   case 0xd:
-    if (param_3 != 2) {
+    if (operandIndex != 2) {
 LAB_000f45a4:
       *(undefined1 *)((int)param_1 + (uint)(*(unsigned char *)((unsigned char *)&(local_58) + 0))) = 1;
       *(undefined1 *)((int)param_1 + (uint)(*(unsigned char *)((unsigned char *)&(local_58) + 1))) = 1;
@@ -1375,7 +1375,7 @@ LAB_000f45a4:
     }
     goto switchD_000f40d0_caseD_b;
   case 0xe:
-    if (param_3 == 1) {
+    if (operandIndex == 1) {
       operandRecord = IRInst__getOperandRecord(inst,0);
       ((int (*)())SelectWord__selectWhereMasked)(&local_48,*(undefined4 *)(operandRecord + 0x10),param_4);
       iVar4 = 0;
@@ -1390,8 +1390,8 @@ LAB_000f45a4:
       } while (iVar7 != 0);
       return param_1;
     }
-    if (param_3 != 2) {
-      if (param_3 != 3) {
+    if (operandIndex != 2) {
+      if (operandIndex != 3) {
         return param_1;
       }
       goto LAB_000f45a4;
@@ -1401,17 +1401,17 @@ switchD_000f40d0_caseD_b:
     break;
   case 0xf:
     if (*(int *)(inst[0x22] + 8) != 0xb4) goto switchD_000f40d0_caseD_a;
-    if (param_3 != 2) {
-      if (param_3 < 3) {
-        if (param_3 != 1) {
+    if (operandIndex != 2) {
+      if (operandIndex < 3) {
+        if (operandIndex != 1) {
           return param_1;
         }
         *(undefined1 *)((int)param_1 + (uint)(*(unsigned char *)((unsigned char *)&(local_58) + 0))) = 1;
         *(undefined1 *)((int)param_1 + (uint)(*(unsigned char *)((unsigned char *)&(local_58) + 1))) = 1;
         return param_1;
       }
-      if (param_3 != 3) {
-        if (param_3 != 4) {
+      if (operandIndex != 3) {
+        if (operandIndex != 4) {
           return param_1;
         }
         goto LAB_000f45a4;
@@ -1425,9 +1425,9 @@ LAB_000f4584:
 }
 
 /* FUN_000f45f8 @ 0xf45f8 (160 bytes) */
-int FUN_000f45f8(param_1, param_2, inst, param_4)
+int FUN_000f45f8(param_1, operandIndex, inst, param_4)
   undefined4 param_1;
-  undefined4 param_2;
+  undefined4 operandIndex;
   undefined4 inst;
   undefined4 param_4;
 {
@@ -1437,7 +1437,7 @@ int FUN_000f45f8(param_1, param_2, inst, param_4)
   undefined4 local_28 [4];
   undefined4 local_18 [2];
   
-  ((int (*)())FUN_000f403c)(local_18,param_1,param_2,DAT_001aa840,param_4);
+  ((int (*)())FUN_000f403c)(local_18,param_1,operandIndex,DAT_001aa840,param_4);
   iVar3 = 0;
   local_28[0] = local_18[0];
   while ((*(char *)((int)local_28 + iVar3) == '\0' ||
@@ -1452,9 +1452,9 @@ int FUN_000f45f8(param_1, param_2, inst, param_4)
 }
 
 /* FUN_000f4698 @ 0xf4698 (148 bytes) */
-int FUN_000f4698(inst, param_2, param_3)
+int FUN_000f4698(inst, operandIndex, param_3)
   int inst;
-  int param_2;
+  int operandIndex;
   undefined4 param_3;
 {
   int operandRecord;
@@ -1462,14 +1462,14 @@ int FUN_000f4698(inst, param_2, param_3)
   undefined4 local_14;
   
   operandRecord = IRInst__getOperandRecord(inst,0);
-  ((int (*)())FUN_000f3c30)(&local_18,inst,param_2,param_3,*(undefined4 *)(operandRecord + 0x10));
-  operandRecord = IRInst__getOperandRecord(inst,param_2);
+  ((int (*)())FUN_000f3c30)(&local_18,inst,operandIndex,param_3,*(undefined4 *)(operandRecord + 0x10));
+  operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   ((int (*)())SelectWord__maskUnused)(&local_14,*(undefined4 *)(operandRecord + 0x10),local_18);
-  if (param_2 == 0) {
+  if (operandIndex == 0) {
     *(undefined4 *)(inst + 0x9c) = local_14;
   }
   else {
-    operandRecord = IRInst__getOperandRecord(inst,param_2);
+    operandRecord = IRInst__getOperandRecord(inst,operandIndex);
     *(undefined4 *)(operandRecord + 0x10) = local_14;
   }
   return;
@@ -1542,9 +1542,9 @@ int FUN_000f47a8(param_1, inst, inst2)
 }
 
 /* FUN_000f485c @ 0xf485c (144 bytes) */
-int FUN_000f485c(inst, param_2)
+int FUN_000f485c(inst, operandIndex)
   undefined4 inst;
-  undefined4 param_2;
+  undefined4 operandIndex;
 {
   bool bVar1;
   byte bVar2;
@@ -1553,8 +1553,8 @@ int FUN_000f485c(inst, param_2)
   int iVar5;
   undefined4 local_38 [9];
   
-  operandVReg = IRInst__getOperandSource(inst,param_2);
-  operandRecord = IRInst__getOperandRecord(inst,param_2);
+  operandVReg = IRInst__getOperandSource(inst,operandIndex);
+  operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   iVar5 = 0;
   local_38[0] = *(undefined4 *)(operandRecord + 0x10);
   while ((bVar2 = *(byte *)((int)local_38 + iVar5), bVar2 == 4 ||
@@ -1569,9 +1569,9 @@ int FUN_000f485c(inst, param_2)
 }
 
 /* IRInst__sourceLanesAllWritten @ 0xf48ec (144 bytes) */
-int IRInst__sourceLanesAllWritten(inst, param_2)
+int IRInst__sourceLanesAllWritten(inst, operandIndex)
   undefined4 inst;
-  undefined4 param_2;
+  undefined4 operandIndex;
 {
   bool bVar1;
   byte bVar2;
@@ -1580,8 +1580,8 @@ int IRInst__sourceLanesAllWritten(inst, param_2)
   int iVar5;
   undefined4 local_38 [9];
   
-  operandVReg = IRInst__getOperandSource(inst,param_2);
-  operandRecord = IRInst__getOperandRecord(inst,param_2);
+  operandVReg = IRInst__getOperandSource(inst,operandIndex);
+  operandRecord = IRInst__getOperandRecord(inst,operandIndex);
   iVar5 = 0;
   local_38[0] = *(undefined4 *)(operandRecord + 0x10);
   while ((bVar2 = *(byte *)((int)local_38 + iVar5), bVar2 == 4 ||
