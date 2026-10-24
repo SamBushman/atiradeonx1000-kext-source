@@ -249,7 +249,7 @@ use	TGenericLinker__RemoveUnreachableFunctions	uVar6	lastOp	INFERRED	every defin
 use	TGenericLinker__FixOutputReads	iVar3	compareResult	INFERRED	every definition is the result of a call whose name says it returns this	#93	+1	all	all
 use	TGenericLinker__FixOutputReads	uVar4	maxIndex	INFERRED	every definition is the result of a call whose name says it returns this	#58	+1	all	all
 use	TGenericLinker__FixOutputReads	uVar4	functionName	INFERRED	every definition is the result of a call whose name says it returns this	#92	+1	all	all
-use	TGenericLinker__OptimizeFunctionIO	pcVar4	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*pcVar4\ =\ \(char\ \*\)_malloc\(iVar3\ \+\ 9\);$	+62	all	all
+use	TGenericLinker__OptimizeFunctionIO	pcVar4	paramName	INFERRED	every definition is the result of a call whose name says it returns this	^\s*pcVar4\ =\ \(char\ \*\)_malloc\(iVar3\ \+\ 9\);$	+62	all	all
 use	TGenericLinker__GetRemapTableString	iVar3	length	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ _strlen\(_linkUtilString\);$	+0	all	all
 use	TGenericLinker__GetRemapTableString	iVar3	length	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar3\ =\ iVar3\ \+\ 2;$	+0	rhs	rhs
 use	TGenericLinker__GetRemapTableString	pcVar5	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*pcVar5\ =\ \(char\ \*\)_malloc\(iVar3\);$	+28	all	all

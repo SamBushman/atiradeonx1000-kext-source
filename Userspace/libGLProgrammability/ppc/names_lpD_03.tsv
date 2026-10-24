@@ -1,4 +1,4 @@
-local	TGenericLinker__OptimizeFunctionIO	a0	r3In0	UNKNOWN	Ghidra input-register variable: r3 as left by the previous call, forwarded to the next call
+local	TGenericLinker__OptimizeFunctionIO	a0	functionName	UNKNOWN	Ghidra input-register variable: r3 as left by the previous call, forwarded to the next call
 local	TGenericLinker__GetBindingTableString	a3	r6In0	UNKNOWN	Ghidra input-register variable: r6 as left by the previous call, forwarded to the next call
 local	TGenericLinker__GetBindingTableString	a4	r7In0	UNKNOWN	Ghidra input-register variable: r7 as left by the previous call, forwarded to the next call
 local	TGenericLinker__GetBindingTableString	a5	r8In0	UNKNOWN	Ghidra input-register variable: r8 as left by the previous call, forwarded to the next call

@@ -1137,176 +1137,186 @@ LAB_97bb40a4:
 int TGenericLinker__OptimizeFunctionIO(this)
   unsigned char * this;
 {
-  bool bVar1;
-  int iVar2;
-  int r3In0;
-  int iVar3;
-  char *allocation;
-  unsigned char * pPVar5;
-  uint uVar6;
-  int iVar7;
-  uint uVar8;
-  undefined4 uVar9;
-  int iVar10;
-  int iVar11;
-  char *p0;
-  int iVar12;
-  int iVar13;
-  uint uVar14;
-  uint uVar15;
-  unsigned char * p_Var16;
-  void *this_00;
-  unsigned char * p_Var17;
-  int iVar18;
-  int local_70;
-  int local_6c;
-  uint local_60;
-  int local_5c;
+  unsigned char *opChunk;
+  unsigned char *nextOp;
+  uint srcOperandWord;
+  uint lastOpIndex;
+  int formatLength;
+  int nameCompare;
+  int functionIsEmpty;
+  int paramChunk;
+  int nameLength;
+  int numParams;
+  bool scanEnded;
+  int stageByteOffset;
+  int functionName;
+  int mainCompare;
+  char *paramName;
+  unsigned char * paramSymbol;
+  uint vec4Count;
+  int isEmptyFunction;
+  uint firstOpIndex;
+  undefined4 ppStream;
+  int shaderNameLength;
+  int functionNameLength;
+  char *message;
+  int stage;
+  int paramIndex;
+  uint elementIndex;
+  uint opHeader;
+  unsigned char *bodyNextOp;
+  void *infoSink;
+  unsigned char *bodyOp;
+  int functionIndex;
+  int outDestWord0;
+  int outDestWord1;
+  uint inSourceWord0;
+  int inSourceWord1;
   
-  iVar12 = 0;
+  stage = 0;
   do {
-    iVar2 = iVar12 * 4;
-    iVar18 = 0;
-    if ((*(int *)(this + iVar2 + 0x38) != 0) && (0 < *(int *)(*(int *)(this + iVar2 + 0x38) + 4))) {
+    stageByteOffset = stage * 4;
+    functionIndex = 0;
+    if ((*(int *)(this + stageByteOffset + 0x38) != 0) && (0 < *(int *)(*(int *)(this + stageByteOffset + 0x38) + 4))) {
       do {
-        iVar13 = 0;
-        r3In0 = FunctionTable__getFunctionName(*(unsigned char **)(this + iVar2 + 0x38),iVar18);
-        iVar3 = _memcmp(r3In0,"main(",6);
-        if (iVar3 != 0) {
-          for (; iVar3 = FunctionTable__getNumParams
-                                   (*(unsigned char **)(this + iVar2 + 0x38),iVar18), iVar13 < iVar3
-              ; iVar13 = iVar13 + 1) {
-            iVar3 = _strlen(r3In0);
-            allocation = (char *)_malloc(iVar3 + 9);
-            _sprintf(allocation,"%s_%i",r3In0,iVar13);
-            for (pPVar5 = (unsigned char *)
+        paramIndex = 0;
+        functionName = FunctionTable__getFunctionName(*(unsigned char **)(this + stageByteOffset + 0x38),functionIndex);
+        mainCompare = _memcmp(functionName,"main(",6);
+        if (mainCompare != 0) {
+          for (; numParams = FunctionTable__getNumParams
+                                   (*(unsigned char **)(this + stageByteOffset + 0x38),functionIndex), paramIndex < numParams
+              ; paramIndex = paramIndex + 1) {
+            nameLength = _strlen(functionName);
+            paramName = (char *)_malloc(nameLength + 9);
+            _sprintf(paramName,"%s_%i",functionName,paramIndex);
+            for (paramSymbol = (unsigned char *)
                           ParseSymbolTable__FindNextParamSymbolByName
-                                    (*(unsigned char **)(this + iVar2 + 0x28),(unsigned char *)0x0,
-                                     allocation); pPVar5 != (unsigned char *)0x0;
-                pPVar5 = (unsigned char *)
+                                    (*(unsigned char **)(this + stageByteOffset + 0x28),(unsigned char *)0x0,
+                                     paramName); paramSymbol != (unsigned char *)0x0;
+                paramSymbol = (unsigned char *)
                          ParseSymbolTable__FindNextParamSymbolByName
-                                   (*(unsigned char **)(this + iVar2 + 0x28),pPVar5,allocation)) {
-              uVar14 = 0;
-              uVar6 = ((int (*)())GetVec4sForType)((uint)*(ushort *)(pPVar5 + 0x2c));
-              iVar3 = *(int *)pPVar5;
-              if (uVar6 != 0) {
+                                   (*(unsigned char **)(this + stageByteOffset + 0x28),paramSymbol,paramName)) {
+              elementIndex = 0;
+              vec4Count = ((int (*)())GetVec4sForType)((uint)*(ushort *)(paramSymbol + 0x2c));
+              paramChunk = *(int *)paramSymbol;
+              if (vec4Count != 0) {
                 do {
-                  local_60 = 0;
-                  local_5c = 0;
-                  local_70 = 0;
-                  local_6c = 0;
-                  p_Var17 = (unsigned char *)**(int **)(*(int *)(this + iVar2 + 0x30) + 0x20);
-                  iVar7 = FunctionTable__getEmpty(*(unsigned char **)(this + iVar2 + 0x38),iVar18);
-                  if (iVar7 == 0) {
-                    for (; bVar1 = p_Var17 == (unsigned char *)0x0, !bVar1;
-                        p_Var17 = *(unsigned char **)(p_Var17 + 8)) {
-                      uVar15 = *(uint *)(p_Var17 + 0xc);
-                      uVar8 = FunctionTable__getFirstOp
-                                        (*(unsigned char **)(this + iVar2 + 0x38),iVar18);
-                      if ((uVar15 & 0x3ffff) == uVar8) goto LAB_97bb43a0;
+                  inSourceWord0 = 0;
+                  inSourceWord1 = 0;
+                  outDestWord0 = 0;
+                  outDestWord1 = 0;
+                  bodyOp = (unsigned char *)**(int **)(*(int *)(this + stageByteOffset + 0x30) + 0x20);
+                  isEmptyFunction = FunctionTable__getEmpty(*(unsigned char **)(this + stageByteOffset + 0x38),functionIndex);
+                  if (isEmptyFunction == 0) {
+                    for (; scanEnded = bodyOp == (unsigned char *)0x0, !scanEnded;
+                        bodyOp = *(unsigned char **)(bodyOp + 8)) {
+                      opHeader = *(uint *)(bodyOp + 0xc);
+                      firstOpIndex = FunctionTable__getFirstOp
+                                        (*(unsigned char **)(this + stageByteOffset + 0x38),functionIndex);
+                      if ((opHeader & 0x3ffff) == firstOpIndex) goto LAB_97bb43a0;
                     }
-                    iVar7 = _strlen(DAT_a7b7baec);
-                    iVar10 = _strlen((&_shaderString)[iVar12]);
-                    iVar11 = _strlen(r3In0);
-                    p0 = (char *)_malloc(iVar7 + iVar10 + iVar11 + 9);
-                    uVar8 = FunctionTable__getFirstOp(*(unsigned char **)(this + iVar2 + 0x38),iVar18);
-                    _sprintf(p0,DAT_a7b7baec,r3In0,(&_shaderString)[iVar12],uVar8);
-                    this_00 = *(void **)(this + 0x84);
+                    formatLength = _strlen(DAT_a7b7baec);
+                    shaderNameLength = _strlen((&_shaderString)[stage]);
+                    functionNameLength = _strlen(functionName);
+                    message = (char *)_malloc(formatLength + shaderNameLength + functionNameLength + 9);
+                    firstOpIndex = FunctionTable__getFirstOp(*(unsigned char **)(this + stageByteOffset + 0x38),functionIndex);
+                    _sprintf(message,DAT_a7b7baec,functionName,(&_shaderString)[stage],firstOpIndex);
+                    infoSink = *(void **)(this + 0x84);
                     
-                    __ZN13TInfoSinkBase6appendEPKc(this_00,"INTERNAL ERROR: ");
-                    __ZN13TInfoSinkBase6appendEPKc(this_00,p0);
-                    __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
-                    _free(p0);
+                    __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
+                    __ZN13TInfoSinkBase6appendEPKc(infoSink,message);
+                    __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
+                    _free(message);
                   }
 LAB_97bb44d0:
-                  p_Var17 = (unsigned char *)
-                            **(undefined4 **)(*(int *)(this + iVar2 + 0x30) + 0x20);
+                  nextOp = (unsigned char *)
+                            **(undefined4 **)(*(int *)(this + stageByteOffset + 0x30) + 0x20);
 joined_r0x97bb44e4:
-                  while (p_Var16 = p_Var17, p_Var16 != (unsigned char *)0x0) {
-                    p_Var17 = *(unsigned char **)(p_Var16 + 8);
-                    if ((*(uint *)(p_Var16 + 0xc) & 0x3fc0000) != 0) goto code_r0x97bb456c;
-                    if (((*(uint *)(p_Var16 + 0x1c) & 0x3800000) == 0x800000) &&
-                       ((uint)*(ushort *)(p_Var16 + 0x22) == *(ushort *)(iVar3 + 0x12) + uVar14))
+                  while (opChunk = nextOp, opChunk != (unsigned char *)0x0) {
+                    nextOp = *(unsigned char **)(opChunk + 8);
+                    if ((*(uint *)(opChunk + 0xc) & 0x3fc0000) != 0) goto code_r0x97bb456c;
+                    if (((*(uint *)(opChunk + 0x1c) & 0x3800000) == 0x800000) &&
+                       ((uint)*(ushort *)(opChunk + 0x22) == *(ushort *)(paramChunk + 0x12) + elementIndex))
                     goto code_r0x97bb4598;
-                    if (((*(uint *)(p_Var16 + 0x14) & 0xe0000) == 0x20000) &&
-                       ((uint)*(ushort *)(p_Var16 + 0x1a) == *(ushort *)(iVar3 + 0x12) + uVar14)) {
-                      if (local_70 == 0 && local_6c == 0) goto code_r0x97bb45b4;
-                      *(int *)(p_Var16 + 0x18) = local_6c;
-                      *(int *)(p_Var16 + 0x14) = local_70;
+                    if (((*(uint *)(opChunk + 0x14) & 0xe0000) == 0x20000) &&
+                       ((uint)*(ushort *)(opChunk + 0x1a) == *(ushort *)(paramChunk + 0x12) + elementIndex)) {
+                      if (outDestWord0 == 0 && outDestWord1 == 0) goto code_r0x97bb45b4;
+                      *(int *)(opChunk + 0x18) = outDestWord1;
+                      *(int *)(opChunk + 0x14) = outDestWord0;
                     }
                   }
-                  uVar14 = uVar14 + 1;
-                } while (uVar14 < uVar6);
+                  elementIndex = elementIndex + 1;
+                } while (elementIndex < vec4Count);
               }
             }
-            _free(allocation);
+            _free(paramName);
           }
-          p_Var17 = (unsigned char *)**(undefined4 **)(*(int *)(this + iVar2 + 0x30) + 0x20);
-          while (p_Var16 = p_Var17, p_Var16 != (unsigned char *)0x0) {
-            p_Var17 = *(unsigned char **)(p_Var16 + 8);
-            iVar3 = FunctionTable__getEmpty(*(unsigned char **)(this + iVar2 + 0x38),iVar18);
-            if ((((iVar3 != 0) && ((*(uint *)(p_Var16 + 0xc) & 0x3fc0000) == 0x1300000)) &&
-                (*(int *)(p_Var16 + 0x40) != 0)) && (iVar3 = _strcmp(p_Var16 + 0x44,r3In0), iVar3 == 0)
+          nextOp = (unsigned char *)**(undefined4 **)(*(int *)(this + stageByteOffset + 0x30) + 0x20);
+          while (opChunk = nextOp, opChunk != (unsigned char *)0x0) {
+            nextOp = *(unsigned char **)(opChunk + 8);
+            functionIsEmpty = FunctionTable__getEmpty(*(unsigned char **)(this + stageByteOffset + 0x38),functionIndex);
+            if ((((functionIsEmpty != 0) && ((*(uint *)(opChunk + 0xc) & 0x3fc0000) == 0x1300000)) &&
+                (*(int *)(opChunk + 0x40) != 0)) && (nameCompare = _strcmp(opChunk + 0x44,functionName), nameCompare == 0)
                ) {
               FunctionTable__updateForRemovingChunk
-                        (*(unsigned char **)(this + iVar2 + 0x38),p_Var16);
-              _PPStreamRemoveOperation(*(undefined4 *)(this + iVar2 + 0x30),p_Var16);
+                        (*(unsigned char **)(this + stageByteOffset + 0x38),opChunk);
+              _PPStreamRemoveOperation(*(undefined4 *)(this + stageByteOffset + 0x30),opChunk);
             }
           }
         }
-        iVar18 = iVar18 + 1;
-      } while ((*(int *)(this + iVar2 + 0x38) != 0) &&
-              (iVar18 < *(int *)(*(int *)(this + iVar2 + 0x38) + 4)));
+        functionIndex = functionIndex + 1;
+      } while ((*(int *)(this + stageByteOffset + 0x38) != 0) &&
+              (functionIndex < *(int *)(*(int *)(this + stageByteOffset + 0x38) + 4)));
     }
-    iVar12 = iVar12 + 1;
-    if (1 < iVar12) {
+    stage = stage + 1;
+    if (1 < stage) {
       return;
     }
   } while( true );
 LAB_97bb43a0:
-  if (((bVar1) ||
-      (uVar15 = *(uint *)(p_Var17 + 0xc),
-      uVar8 = FunctionTable__getLastOp(*(unsigned char **)(this + iVar2 + 0x38),iVar18),
-      uVar8 < (uVar15 & 0x3ffff))) || ((*(uint *)(p_Var17 + 0xc) & 0x3ffff) == 0))
+  if (((scanEnded) ||
+      (opHeader = *(uint *)(bodyOp + 0xc),
+      lastOpIndex = FunctionTable__getLastOp(*(unsigned char **)(this + stageByteOffset + 0x38),functionIndex),
+      lastOpIndex < (opHeader & 0x3ffff))) || ((*(uint *)(bodyOp + 0xc) & 0x3ffff) == 0))
   goto LAB_97bb44d0;
-  p_Var16 = *(unsigned char **)(p_Var17 + 8);
-  if ((*(uint *)(p_Var17 + 0xc) & 0x3fc0000) == 0) {
-    uVar8 = *(uint *)(p_Var17 + 0x1c);
-    if (((uVar8 & 0x3800000) == 0x800000) &&
-       ((uint)*(ushort *)(p_Var17 + 0x22) == *(ushort *)(iVar3 + 0x12) + uVar14)) {
-      local_6c = *(int *)(p_Var17 + 0x18);
-      local_70 = *(int *)(p_Var17 + 0x14);
-      FunctionTable__updateForRemovingChunk(*(unsigned char **)(this + iVar2 + 0x38),p_Var17);
-      uVar9 = *(undefined4 *)(this + iVar2 + 0x30);
+  bodyNextOp = *(unsigned char **)(bodyOp + 8);
+  if ((*(uint *)(bodyOp + 0xc) & 0x3fc0000) == 0) {
+    srcOperandWord = *(uint *)(bodyOp + 0x1c);
+    if (((srcOperandWord & 0x3800000) == 0x800000) &&
+       ((uint)*(ushort *)(bodyOp + 0x22) == *(ushort *)(paramChunk + 0x12) + elementIndex)) {
+      outDestWord1 = *(int *)(bodyOp + 0x18);
+      outDestWord0 = *(int *)(bodyOp + 0x14);
+      FunctionTable__updateForRemovingChunk(*(unsigned char **)(this + stageByteOffset + 0x38),bodyOp);
+      ppStream = *(undefined4 *)(this + stageByteOffset + 0x30);
     }
     else {
-      if (((*(uint *)(p_Var17 + 0x14) & 0xe0000) != 0x20000) ||
-         ((uint)*(ushort *)(p_Var17 + 0x1a) != *(ushort *)(iVar3 + 0x12) + uVar14))
+      if (((*(uint *)(bodyOp + 0x14) & 0xe0000) != 0x20000) ||
+         ((uint)*(ushort *)(bodyOp + 0x1a) != *(ushort *)(paramChunk + 0x12) + elementIndex))
       goto LAB_97bb4398;
-      local_5c = *(int *)(p_Var17 + 0x20);
-      FunctionTable__updateForRemovingChunk(*(unsigned char **)(this + iVar2 + 0x38),p_Var17);
-      uVar9 = *(undefined4 *)(this + iVar2 + 0x30);
-      local_60 = uVar8;
+      inSourceWord1 = *(int *)(bodyOp + 0x20);
+      FunctionTable__updateForRemovingChunk(*(unsigned char **)(this + stageByteOffset + 0x38),bodyOp);
+      ppStream = *(undefined4 *)(this + stageByteOffset + 0x30);
+      inSourceWord0 = srcOperandWord;
     }
-    _PPStreamRemoveOperation(uVar9,p_Var17);
+    _PPStreamRemoveOperation(ppStream,bodyOp);
   }
 LAB_97bb4398:
-  bVar1 = p_Var16 == (unsigned char *)0x0;
-  p_Var17 = p_Var16;
+  scanEnded = bodyNextOp == (unsigned char *)0x0;
+  bodyOp = bodyNextOp;
   goto LAB_97bb43a0;
 code_r0x97bb456c:
-  if ((((*(uint *)(p_Var16 + 0xc) & 0x3fc0000) == 0x1b40000) &&
-      ((*(uint *)(p_Var16 + 0x1c) & 0x3800000) == 0x800000)) &&
-     ((uint)*(ushort *)(p_Var16 + 0x22) == *(ushort *)(iVar3 + 0x12) + uVar14)) {
+  if ((((*(uint *)(opChunk + 0xc) & 0x3fc0000) == 0x1b40000) &&
+      ((*(uint *)(opChunk + 0x1c) & 0x3800000) == 0x800000)) &&
+     ((uint)*(ushort *)(opChunk + 0x22) == *(ushort *)(paramChunk + 0x12) + elementIndex)) {
 code_r0x97bb4598:
-    if (local_60 == 0 && local_5c == 0) {
+    if (inSourceWord0 == 0 && inSourceWord1 == 0) {
 code_r0x97bb45b4:
-      FunctionTable__updateForRemovingChunk(*(unsigned char **)(this + iVar2 + 0x38),p_Var16);
-      _PPStreamRemoveOperation(*(undefined4 *)(this + iVar2 + 0x30),p_Var16);
+      FunctionTable__updateForRemovingChunk(*(unsigned char **)(this + stageByteOffset + 0x38),opChunk);
+      _PPStreamRemoveOperation(*(undefined4 *)(this + stageByteOffset + 0x30),opChunk);
     }
     else {
-      *(int *)(p_Var16 + 0x20) = local_5c;
-      *(uint *)(p_Var16 + 0x1c) = local_60;
+      *(int *)(opChunk + 0x20) = inSourceWord1;
+      *(uint *)(opChunk + 0x1c) = inSourceWord0;
     }
   }
   goto joined_r0x97bb44e4;
