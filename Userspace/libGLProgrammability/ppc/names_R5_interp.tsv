@@ -107,7 +107,6 @@ local	_InterpreterRun	fVar7	viewportZScale	CONFIRMED	GL state +0x1b78
 local	_InterpreterRun	fVar9	viewportXBias	CONFIRMED	GL state +0x1b80
 local	_InterpreterRun	fVar10	viewportYBias	CONFIRMED	GL state +0x1b84
 local	_InterpreterRun	fVar6	viewportZBias	CONFIRMED	GL state +0x1b88
-local	_InterpreterRun	uVar21	clipOrMask	INFERRED	OR of the clip codes of all vertices run
 local	_InterpreterRun	uVar22	clipAndMask	INFERRED	AND of the clip codes (all-outside test)
 local	_InterpreterRun	pfVar16	vertexOutput	INFERRED	current output vertex record (emulator+0xd88): [4..7] clip position, [0x1f] clip code
 local	_InterpreterRun	fVar3	clipX	INFERRED	clip-space x of the vertex

@@ -19,10 +19,11 @@ int __ZN17TPPStreamCompilerD4Ev(this, deleteFlags)
   void *this;
   uint deleteFlags;
 {
+  int stringRep;
   int atomicStore;
   int *refCountPtr;
   int oldRefCount;
-  int sizeOrStringRep;
+  int emptyTest;
   void *owned;
   char reservation;
   byte cr0Reg;
@@ -31,11 +32,11 @@ int __ZN17TPPStreamCompilerD4Ev(this, deleteFlags)
   *(int *)this = DAT_a7b7bd98 + 8;
   ConstantAllocationList__clear((unsigned char *)((int)this + 0x44));
   while( true ) {
-    sizeOrStringRep = size((unsigned char *)((int)this + 0x4c));
-    if (sizeOrStringRep == 0) break;
+    emptyTest = size((unsigned char *)((int)this + 0x4c));
+    if (emptyTest == 0) break;
     fetch((unsigned char *)((int)this + 0x4c));
   }
-  while (sizeOrStringRep = ParseFunctionStack__empty((unsigned char *)((int)this + 0x58)), sizeOrStringRep == 0) {
+  while (emptyTest = ParseFunctionStack__empty((unsigned char *)((int)this + 0x58)), emptyTest == 0) {
     ParseFunctionStack__pop((unsigned char *)((int)this + 0x58));
   }
   owned = *(void **)((int)this + 0x6c);
@@ -78,8 +79,8 @@ int __ZN17TPPStreamCompilerD4Ev(this, deleteFlags)
   if (*(int *)((int)this + 0x74) != 0) {
     _free(*(int *)((int)this + 0x74));
   }
-  sizeOrStringRep = *(int *)((int)this + 0xb8);
-  refCountPtr = (int *)(sizeOrStringRep + -4);
+  stringRep = *(int *)((int)this + 0xb8);
+  refCountPtr = (int *)(stringRep + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -89,10 +90,10 @@ int __ZN17TPPStreamCompilerD4Ev(this, deleteFlags)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(sizeOrStringRep + -0xc),stringAllocator);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stringRep + -0xc),stringAllocator);
   }
-  sizeOrStringRep = *(int *)((int)this + 0xb0);
-  refCountPtr = (int *)(sizeOrStringRep + -4);
+  stringRep = *(int *)((int)this + 0xb0);
+  refCountPtr = (int *)(stringRep + -4);
   do {
     oldRefCount = *refCountPtr;
     if (reservation != '\0') {
@@ -102,7 +103,7 @@ int __ZN17TPPStreamCompilerD4Ev(this, deleteFlags)
     }
   } while (!(bool)(cr0Reg >> 1 & 1));
   if (oldRefCount < 1) {
-    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(sizeOrStringRep + -0xc),stringAllocator);
+    __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stringRep + -0xc),stringAllocator);
   }
   __ZN22ConstantAllocationListD1Ev((unsigned char *)((int)this + 0x44));
   *(undefined ***)this = &PTR___ZN9TCompilerD1Ev_a7b7d850;
@@ -354,9 +355,10 @@ int TPPStreamCompiler__compile(this, intermNode)
   unsigned char * this;
   unsigned char * intermNode;
 {
+  int compileResult;
+  int opChunk;
   int parseIntermediateTreeResult;
   uint opWord;
-  int opChunkOrResult;
   int ppStream;
   undefined4 allocation;
   char *pPStreamString;
@@ -368,14 +370,14 @@ int TPPStreamCompiler__compile(this, intermNode)
   if (parseIntermediateTreeResult != 0) {
     ppStream = *(int *)(this + 0x70);
     carryBits = 0;
-    opChunkOrResult = **(int **)(ppStream + 0x20);
-    if (opChunkOrResult != 0) {
+    opChunk = **(int **)(ppStream + 0x20);
+    if (opChunk != 0) {
       do {
-        opWord = *(uint *)(opChunkOrResult + 0xc);
-        *(uint *)(opChunkOrResult + 0xc) = carryBits << 0x1a | opWord & 0xe3ffffff;
+        opWord = *(uint *)(opChunk + 0xc);
+        *(uint *)(opChunk + 0xc) = carryBits << 0x1a | opWord & 0xe3ffffff;
         carryBits = opWord >> 0x1d;
-        opChunkOrResult = *(int *)(opChunkOrResult + 8);
-      } while (opChunkOrResult != 0);
+        opChunk = *(int *)(opChunk + 8);
+      } while (opChunk != 0);
       ppStream = *(int *)(this + 0x70);
     }
     _PPStreamResolveBranches(ppStream);
@@ -390,18 +392,18 @@ int TPPStreamCompiler__compile(this, intermNode)
       _PPStreamGetStream(*(undefined4 *)(this + 0x70),allocation,streamEntryCount);
     }
   }
-  opChunkOrResult = *(int *)(this + 0xc);
-  if ((opChunkOrResult != 0) && ((*(uint *)(this + 0xc0) & 0x10) != 0)) {
+  compileResult = *(int *)(this + 0xc);
+  if ((compileResult != 0) && ((*(uint *)(this + 0xc0) & 0x10) != 0)) {
     ((int (*)())TPPStreamCompiler__dumpSymbolTableInfo)(this,2);
-    opChunkOrResult = *(int *)(this + 0xc);
+    compileResult = *(int *)(this + 0xc);
   }
-  if ((opChunkOrResult != 0) && ((*(uint *)(this + 0xc0) & 2) != 0)) {
+  if ((compileResult != 0) && ((*(uint *)(this + 0xc0) & 2) != 0)) {
     __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,DAT_a7b7bd80);
     pPStreamString = (char *)(**(code **)(*(int *)this + 0x28))(this);
     __ZN13TInfoSinkBase6appendEPKc(this + 0xb0,pPStreamString);
-    opChunkOrResult = *(int *)(this + 0xc);
+    compileResult = *(int *)(this + 0xc);
   }
-  return opChunkOrResult;
+  return compileResult;
 }
 
 /* TPPStreamCompiler__getStatsString @ 0x97bca090 (108 bytes) */
@@ -5515,6 +5517,8 @@ int _InterpreterWriteFinalFragmentToBuffer(machine, operandWord1, operandWord2, 
 /* _InterpreterRun @ 0x97bd31e0 (1020 bytes) */
 void _InterpreterRun(int emulator,int elementCount,double scratchF1,double scratchF2,double scratchF3,double scratchF4,double scratchF5,double scratchF6,double scratchF7,double scratchF8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
+  int fragmentListHead;
+  int currentProgramTarget;
   int programTarget;
   bool wSafeToDivide;
   float vertexW;
@@ -5530,7 +5534,7 @@ void _InterpreterRun(int emulator,int elementCount,double scratchF1,double scrat
   float negW;
   double one;
   float zero;
-  int viewportOrTarget;
+  int viewportState;
   float *vertexOutput;
   uint testFlags;
   int inst;
@@ -5543,7 +5547,7 @@ void _InterpreterRun(int emulator,int elementCount,double scratchF1,double scrat
   undefined4 leftoverR8;
   int itemsLeft;
   int programInfo;
-  uint clipOrMask;
+  uint clipCodeUnion;
   uint clipAndMask;
   int machine;
   double vertexWDouble;
@@ -5562,9 +5566,9 @@ void _InterpreterRun(int emulator,int elementCount,double scratchF1,double scrat
   one = DOUBLE_97c30a60;
   programTarget = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
   machine = *(int *)(emulator + 0xdf0);
-  viewportOrTarget = *(int *)(emulator + 0xd9c);
+  viewportState = *(int *)(emulator + 0xd9c);
   clipAndMask = 0xff;
-  clipOrMask = 0;
+  clipCodeUnion = 0;
   if ((programTarget == 0x8804) || (programTarget == 0x8b30)) {
     invWBias = (double)*(float *)(*(int *)(emulator + 0xda0) + 0xc);
     xBias = (double)*(float *)(*(int *)(emulator + 0xda0) + 8);
@@ -5582,23 +5586,23 @@ void _InterpreterRun(int emulator,int elementCount,double scratchF1,double scrat
     xScale = invWScale;
     xBias = invWScale;
     invWBias = invWScale;
-    viewportZBias = *(float *)(viewportOrTarget + 0x1b88);
-    viewportZScale = *(float *)(viewportOrTarget + 0x1b78);
-    viewportXScale = *(float *)(viewportOrTarget + 0x1b70);
-    viewportXBias = *(float *)(viewportOrTarget + 0x1b80);
-    viewportYBias = *(float *)(viewportOrTarget + 0x1b84);
-    viewportYScale = *(float *)(viewportOrTarget + 0x1b74);
+    viewportZBias = *(float *)(viewportState + 0x1b88);
+    viewportZScale = *(float *)(viewportState + 0x1b78);
+    viewportXScale = *(float *)(viewportState + 0x1b70);
+    viewportXBias = *(float *)(viewportState + 0x1b80);
+    viewportYBias = *(float *)(viewportState + 0x1b84);
+    viewportYScale = *(float *)(viewportState + 0x1b74);
   }
-  viewportOrTarget = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
-  if ((viewportOrTarget == 0x8804) || (viewportOrTarget == 0x8b30)) {
+  currentProgramTarget = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
+  if ((currentProgramTarget == 0x8804) || (currentProgramTarget == 0x8b30)) {
     *(undefined4 *)(machine + 0xa30) = 0;
     *(float *)(machine + 0xa38) = (float)xBias;
     *(float *)(machine + 0xa3c) = (float)(one / invWBias);
   }
-  viewportOrTarget = machine + 0xa5c;
+  fragmentListHead = machine + 0xa5c;
   *(undefined1 *)(machine + 0xa47) = 0;
   *(undefined4 *)(machine + 0xa68) = 0;
-  *(int *)(machine + 0xa6c) = viewportOrTarget;
+  *(int *)(machine + 0xa6c) = fragmentListHead;
   *(undefined1 *)(machine + 0xa44) = 0;
   *(undefined1 *)(machine + 0xa45) = 0;
   *(undefined1 *)(machine + 0xa46) = 0;
@@ -5610,14 +5614,14 @@ void _InterpreterRun(int emulator,int elementCount,double scratchF1,double scrat
   itemsLeft = elementCount;
   do {
     if (itemsLeft == 0) {
-      viewportOrTarget = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
-      if ((viewportOrTarget == 0x8804) || (viewportOrTarget == 0x8b30)) {
-        clipOrMask = 0;
+      currentProgramTarget = *(int *)(*(int *)(emulator + 0xd80) + 0x38);
+      if ((currentProgramTarget == 0x8804) || (currentProgramTarget == 0x8b30)) {
+        clipCodeUnion = 0;
       }
       else {
-        clipOrMask = clipAndMask << 8 | clipOrMask;
+        clipCodeUnion = clipAndMask << 8 | clipCodeUnion;
       }
-      _restf20(clipOrMask);
+      _restf20(clipCodeUnion);
       return;
     }
     itemsLeft = itemsLeft + -1;
@@ -5644,7 +5648,7 @@ void _InterpreterRun(int emulator,int elementCount,double scratchF1,double scrat
     }
     if ((*(int *)(programInfo + 0x38) == 0x8804) || (*(int *)(programInfo + 0x38) == 0x8b30)) {
       if (*(int *)(machine + 0xa58) == 0) {
-        scratchF1 = (double)((int (*)())_InterpreterWriteFinalFragmentToBuffer)(machine,elementCount,leftoverR5,leftoverR6,leftoverR7,leftoverR8,viewportOrTarget);
+        scratchF1 = (double)((int (*)())_InterpreterWriteFinalFragmentToBuffer)(machine,elementCount,leftoverR5,leftoverR6,leftoverR7,leftoverR8,fragmentListHead);
         programInfo = *(int *)(emulator + 0xd80);
         elementCount = extraOut3;
       }
@@ -5699,12 +5703,12 @@ void _InterpreterRun(int emulator,int elementCount,double scratchF1,double scrat
       }
       programInfo = *(int *)(emulator + 0xd80);
       clipAndMask = clipAndMask & testFlags;
-      clipOrMask = clipOrMask | testFlags;
+      clipCodeUnion = clipCodeUnion | testFlags;
     }
     *(int *)(emulator + 0xd8c) = *(int *)(emulator + 0xd8c) + *(int *)(programInfo + 0xbc);
     *(int *)(emulator + 0xd88) = *(int *)(emulator + 0xd88) + *(int *)(programInfo + 0xb8);
-    viewportOrTarget = *(int *)(emulator + 0xda8) + *(int *)(programInfo + 0xd8);
-    *(int *)(emulator + 0xda8) = viewportOrTarget;
+    fragmentListHead = *(int *)(emulator + 0xda8) + *(int *)(programInfo + 0xd8);
+    *(int *)(emulator + 0xda8) = fragmentListHead;
     *(int *)(emulator + 0xdac) = *(int *)(emulator + 0xdac) + *(int *)(programInfo + 0xdc);
     if ((*(int *)(programInfo + 0x38) == 0x8804) || (*(int *)(programInfo + 0x38) == 0x8b30)) {
       vertexW = (float)((double)*(float *)(machine + 0xa30) + one);

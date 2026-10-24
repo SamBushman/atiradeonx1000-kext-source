@@ -1,6 +1,5 @@
 local	_InterpreterRun	fVar2	vertexW	INFERRED	clip-space w of the vertex output
 local	_InterpreterRun	dVar24	vertexWDouble	INFERRED	vertex w widened to double for the viewport scale
-local	_InterpreterRun	iVar15	viewportOrTarget	INFERRED	emulator+0xd9c viewport state (z scale/bias at +0x1b88..), later the program target; forwarded as a dead vararg
 local	_InterpreterRun	uVar17	testFlags	INFERRED	clip-test or depth-test result bits OR-ed into machine+0xa58
 local	_InterpreterRun	iVar18	inst	INFERRED	current instruction record (next from _InterpreterEmulateOp; NULL at the end)
 local	_InterpreterRun	iVar20	programInfo	INFERRED	emulator+0xd80 program info (+0x34 state bits, +0x38 target, +0x3c raster stage flags, +0x120 first instruction)

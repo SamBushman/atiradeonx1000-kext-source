@@ -42,15 +42,19 @@ for l in open(spec):
         frm = rx + ('@%d' % nth if nth > 1 else '')
         # end: if the last line is taken whole, `to` = the next line (taken not at all); with a partial last line, `to` = the last line itself
         if lp == 'all':
-            k = ib + 1
-            while k < len(body) and not body[k].strip(): k += 1
-            if k >= len(body) or body[k].strip() == '}' and k == len(body) - 1 or k >= len(body): to = ''; lastp = 'none'
-            else: to = anchor(body, brace, k, ia)[0]; lastp = 'none'
+            vre = re.compile(r'\b%s\b' % re.escape(var))
+            k = ib + 1; to = ''; lastp = 'none'
+            while k < len(body):
+                if not body[k].strip(): k += 1; continue
+                if body[k].strip() == '}' and k == len(body) - 1: break
+                rx2 = re.compile(anchor(body, brace, k, ia)[0])
+                hit = next((q for q in range(ia + 1, len(body)) if rx2.match(body[q])), None)
+                if hit == k: to = anchor(body, brace, k, ia)[0]; break
+                if vre.search(body[k]): sys.exit('no unique to-line before the next use of %s: %s %s' % (var, fn, rgi))
+                k += 1       # next line is not unique after the start: extend over variable-free lines until one is
         else:
             to = anchor(body, brace, ib, ia)[0]; lastp = lp
-        if to:
-            rxto = re.compile(to)
-            hit = next((k for k in range(ia + 1 if lp != 'all' or True else ia, len(body)) if rxto.match(body[k])), None)
-            want = ib if lp != 'all' else ib + 1
-            if hit is None or (hit != want and not (lp == 'all' and hit > ib)): print('# WARN to-anchor of %s %s matches line %s not %s' % (fn, rg, hit and hit + first, want + first), file=sys.stderr)
+            rx2 = re.compile(to)
+            hit = next((q for q in range(ia + 1, len(body)) if rx2.match(body[q])), None)
+            if hit != ib: print('# WARN %s %s: last-line anchor matches line %s not %s' % (fn, rgi, hit and hit + first, b), file=sys.stderr)
         print('\t'.join(['use', fn, var, new, tier, ev, frm, to, fp if fp != 'all' else 'all', lastp]))

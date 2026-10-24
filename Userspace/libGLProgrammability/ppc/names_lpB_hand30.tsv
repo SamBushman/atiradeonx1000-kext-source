@@ -39,7 +39,6 @@ local	FunctionTable__updateForRemovingChunk	iVar3	entries	INFERRED	function entr
 local	FunctionTable__updateForRemovingChunk	iVar4	entry	INFERRED	function entry being fixed up
 local	FunctionTable__updateForRemovingChunk	uVar5	chunkWord	INFERRED	removed chunk word 0 (index in the low 18 bits)
 local	TPPStreamCompiler__compile	uVar1	opWord	INFERRED	operation chunk word 0 before the carry is merged in
-local	TPPStreamCompiler__compile	iVar2	opChunkOrResult	INFERRED	operation chunk being renumbered, then this->compileResult (+0xc)
 local	TPPStreamCompiler__compile	iVar3	ppStream	INFERRED	this->ppStream (+0x70)
 local	TPPStreamCompiler__compile	uVar6	carryBits	INFERRED	precision bits carried from the previous operation chunk (word >> 29)
 local	TPPStreamCompiler__compile	local_20	streamEntryCount	INFERRED	entry count from _PPStreamGetStream

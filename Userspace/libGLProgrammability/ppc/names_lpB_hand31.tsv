@@ -1,5 +1,4 @@
 local	__ZN17TPPStreamCompilerD4Ev	param_2	deleteFlags	INFERRED	bit 0: also free the object (deleting destructor)
-local	__ZN17TPPStreamCompilerD4Ev	iVar4	sizeOrStringRep	INFERRED	stack size, then the std::string representation pointers released
 local	__ZN17TPPStreamCompilerD4Ev	pvVar5	owned	INFERRED	owned sub-object destroyed and deleted
 local	TPPStreamCompiler__reset	puVar1	ppStream	INFERRED	this->ppStream (+0x70); word 0 gets the shader enum
 local	TPPStreamCompiler__reset	uVar2	shaderEnum	INFERRED	0x8b31 vertex or 0x8b30 fragment shader enum
