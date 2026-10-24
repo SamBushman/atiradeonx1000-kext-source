@@ -55,17 +55,6 @@ use	_HashSetAdd	iVar2	equalsResult	CONFIRMED	equalsFunction(entry, element): 0 =
 use	_HashSetAdd	uVar3	firstFreeSlot	CONFIRMED	index of the first free entry slot seen, 0xffffffff = none	^\s*uVar3\ =\ 0xffffffff;$	^\s*uVar3\ =\ \*puVar5;$	all	none
 use	_HashSetAdd	uVar3	oldEntryCount	CONFIRMED	bucket entry count before growing	^\s*uVar3\ =\ \*puVar5;$	^\s*uVar3\ =\ _realloc\(uVar1,\(uVar3\ \+\ 1\)\ \*\ 4\);$	all	rhs
 use	_HashSetAdd	uVar3	firstFreeSlot	CONFIRMED	free slot index used when the bucket did not need to grow	^\s*\*\(undefined4\ \*\)\(uVar1\ \+\ uVar3\ \*\ 4\)\ =\ param_2;$		all	none
-local	_HashSetGet	param_2	element	CONFIRMED	hashes the element and returns the stored entry that the equals callback matches, else 0
-local	_HashSetGet	puVar3	bucket	CONFIRMED	hashes the element and returns the stored entry that the equals callback matches, else 0
-local	_HashSetGet	a6	buckets	CONFIRMED	hashes the element and returns the stored entry that the equals callback matches, else 0
-local	_HashSetGet	in_r5	unusedArg5	CONFIRMED	hashes the element and returns the stored entry that the equals callback matches, else 0
-local	_HashSetGet	in_r6	unusedArg6	CONFIRMED	hashes the element and returns the stored entry that the equals callback matches, else 0
-local	_HashSetGet	in_r7	unusedArg7	CONFIRMED	hashes the element and returns the stored entry that the equals callback matches, else 0
-local	_HashSetGet	in_r8	unusedArg8	CONFIRMED	hashes the element and returns the stored entry that the equals callback matches, else 0
-use	_HashSetGet	uVar1	hashCode	CONFIRMED	result of hashFunction(element)	^\s*uVar1\ =\ \(\*\(code\ \*\)param_1\[2\]\)\(param_2,param_2\);$	^\s*if\ \(\*\(int\ \*\)\(a6\ \+\ iVar2\)\ !=\ 0\)\ \{$	all	none
-use	_HashSetGet	uVar1	bucketEntries	CONFIRMED	bucket[1], the bucket's entries array	^\s*uVar1\ =\ puVar3\[1\];$		all	none
-use	_HashSetGet	iVar2	bucketOffset	CONFIRMED	(hash % bucketCount) * 8	^\s*iVar2\ =\ \(uVar1\ \-\ \(uVar1\ /\ \*param_1\)\ \*\ \*param_1\)\ \*\ 8;$	^\s*iVar2\ =\ \*\(int\ \*\)\(uVar1\ \+\ uVar4\ \*\ 4\);$	all	none
-use	_HashSetGet	iVar2	entryOrEqualsResult	CONFIRMED	entries[loopIndex], then (same line, same slot) the equalsFunction result: one compiler slot for both	^\s*iVar2\ =\ \*\(int\ \*\)\(uVar1\ \+\ uVar4\ \*\ 4\);$		all	none
 local	_HashSetRemove	param_2	element	CONFIRMED	hashes the element, clears and returns the matching entry in the bucket, else 0
 local	_HashSetRemove	puVar5	bucket	CONFIRMED	hashes the element, clears and returns the matching entry in the bucket, else 0
 local	_HashSetRemove	a6	buckets	CONFIRMED	hashes the element, clears and returns the matching entry in the bucket, else 0
@@ -88,3 +77,12 @@ local	_HashSetIteratorNext	iVar2	entryOffset	CONFIRMED	iterator = {hashSet, buck
 use	_HashSetIteratorNext	uVar1	bucketIndex	CONFIRMED	iterator[1]	^\s*uVar1\ =\ param_1\[1\];$	^\s*uVar1\ =\ puVar4\[1\];$	all	none
 use	_HashSetIteratorNext	uVar1	bucketEntries	CONFIRMED	bucket[1], the bucket's entries array	^\s*uVar1\ =\ puVar4\[1\];$	^\s*uVar1\ =\ param_1\[1\]\ \+\ 1;$	all	none
 use	_HashSetIteratorNext	uVar1	bucketIndex	CONFIRMED	iterator[1] + 1: the next bucket	^\s*uVar1\ =\ param_1\[1\]\ \+\ 1;$		all	none
+local	_HashSetGet	param_2	element	CONFIRMED	hashes the element and returns the stored entry that the equals callback matches, else 0
+local	_HashSetGet	puVar3	bucket	CONFIRMED	hashes the element and returns the stored entry that the equals callback matches, else 0
+local	_HashSetGet	a6	buckets	CONFIRMED	hashes the element and returns the stored entry that the equals callback matches, else 0
+local	_HashSetGet	in_r5	unusedArg5	CONFIRMED	hashes the element and returns the stored entry that the equals callback matches, else 0
+local	_HashSetGet	in_r6	unusedArg6	CONFIRMED	hashes the element and returns the stored entry that the equals callback matches, else 0
+local	_HashSetGet	in_r7	unusedArg7	CONFIRMED	hashes the element and returns the stored entry that the equals callback matches, else 0
+local	_HashSetGet	in_r8	unusedArg8	CONFIRMED	hashes the element and returns the stored entry that the equals callback matches, else 0
+use	_HashSetGet	uVar1	hashCode	CONFIRMED	result of hashFunction(element)	^\s*uVar1\ =\ \(\*\(code\ \*\)param_1\[2\]\)\(param_2,param_2\);$	^\s*if\ \(\*\(int\ \*\)\(a6\ \+\ iVar2\)\ !=\ 0\)\ \{$	all	none
+use	_HashSetGet	uVar1	bucketEntries	CONFIRMED	bucket[1], the bucket's entries array	^\s*uVar1\ =\ puVar3\[1\];$		all	none

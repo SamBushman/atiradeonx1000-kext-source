@@ -13,7 +13,7 @@ named way), INFERRED (the role is clear from use, nothing names it) or UNKNOWN (
 `from`/`to` are regexes over the function's lines AS GHIDRA WROTE THEM (lines are matched with every rename of the function taken back, so a table
 stays valid after it was applied). `from` may end in @N (Nth matching line, default 1); the segment starts at that line and runs up to, not
 including, the first later line matching `to` (empty `to` = end of function). One `new` name belongs to one `old` per function; a function with
-`use` rows for a variable must not also have a `local` row for it. `from` = `*` names every occurrence of `old` the earlier rows left (the rest of the function; such a row must come last: table files apply in name order). The declaration of `new` is added next to old's (same type); old's declaration is
+`use` rows for a variable must not also have a `local` row for it. `first`/`last` (the two columns after `to`, default all/none) may also be lhs | rhs | oN+M (only the Nth and Mth occurrence of `old` on that line). `from` = `*` names every occurrence of `old` the earlier rows left (the rest of the function; such a row must come last: table files apply in name order). The declaration of `new` is added next to old's (same type); old's declaration is
 dropped when nothing uses it any more. Only locals (declared after the `{`) can be split.
 
     func<TAB>OLDNAME<TAB>NEWNAME<TAB>tier<TAB>evidence     rename the FUNCTION `OLDNAME` (its Ghidra name, normally FUN_<addr>) to NEWNAME everywhere the corpus names it:
@@ -118,7 +118,7 @@ def split_assign(l):
 
 def part_text(l, part):
     """the part of a line a `first`/`last` flag talks about: all | lhs (left of the first assignment) | rhs (right of it, or the whole line when it has no assignment)"""
-    if part == 'all': return l
+    if part == 'all' or part.startswith('o'): return l
     i = split_assign(l)
     if part == 'lhs': return l[:i] if i >= 0 else ''
     return l[i + 1:] if i >= 0 else l
@@ -126,6 +126,12 @@ def part_text(l, part):
 
 def sub_part(l, part, old, new):
     if part == 'all': return re.sub(wb(old), new, l)
+    if part.startswith('o'):       # `o1+3`: only the 1st and 3rd occurrence of `old` in the line (x = f(x), x == 0 on one line)
+        want = {int(k) for k in part[1:].split('+')}; cnt = [0]
+        def pick(m):
+            cnt[0] += 1
+            return new if cnt[0] in want else m.group(0)
+        return re.sub(wb(old), pick, l)
     i = split_assign(l)
     if part == 'lhs': return re.sub(wb(old), new, l[:i]) + l[i:] if i >= 0 else l
     return (l[:i + 1] + re.sub(wb(old), new, l[i + 1:])) if i >= 0 else re.sub(wb(old), new, l)

@@ -338,10 +338,11 @@ int _HashSetGet(hashSet, element)
   uint *hashSet;
   undefined4 element;
 {
-  int entryOrEqualsResult;
+  int equalsResult;
+  int entry;
+  int bucketOffset;
   uint bucketEntries;
   uint hashCode;
-  int bucketOffset;
   undefined4 unusedArg5;
   undefined4 unusedArg6;
   undefined4 unusedArg7;
@@ -358,9 +359,9 @@ int _HashSetGet(hashSet, element)
   if (*(int *)(buckets + bucketOffset) != 0) {
     do {
       bucketEntries = bucket[1];
-      entryOrEqualsResult = *(int *)(bucketEntries + loopIndex * 4);
-      if ((entryOrEqualsResult != 0) &&
-         (entryOrEqualsResult = (*(code *)hashSet[3])(entryOrEqualsResult,element,unusedArg5,unusedArg6,unusedArg7,unusedArg8,buckets), entryOrEqualsResult == 0)) {
+      entry = *(int *)(bucketEntries + loopIndex * 4);
+      if ((entry != 0) &&
+         (equalsResult = (*(code *)hashSet[3])(entry,element,unusedArg5,unusedArg6,unusedArg7,unusedArg8,buckets), equalsResult == 0)) {
         return *(undefined4 *)(bucketEntries + loopIndex * 4);
       }
       loopIndex = loopIndex + 1;

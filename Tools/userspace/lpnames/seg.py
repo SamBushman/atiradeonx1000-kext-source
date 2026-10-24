@@ -29,6 +29,8 @@ for l in open(spec):
     fn, var, new, rg, tier, ev = l.rstrip('\n').split('\t')[:6]
     body, brace, first = info(fn)
     for rgi in rg.split(','):
+        if rgi == '*':
+            print('\t'.join(['use', fn, var, new, tier, ev, '*', '', 'all', 'none'])); continue
         parts = rgi.split(':'); a, _, b = parts[0].partition('-'); a = int(a); b = int(b) if b else a
         fp = lp = 'all'
         for p in parts[1:]:

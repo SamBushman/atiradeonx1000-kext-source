@@ -255,7 +255,7 @@ int TType__copyType(this, copyOf, remapper)
   unsigned char * newFieldType;
   unsigned char * newStructure;
   void *stringAlloc;
-  undefined4 *typeListOrNull;
+  undefined4 *constructedTypeList;
   undefined4 srcWord1c;
   uint srcNominalSizeBits;
   char *srcChars;
@@ -291,16 +291,16 @@ int TType__copyType(this, copyOf, remapper)
     if (findResult[0] == remapperEnd) {
       poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
       newTypeList = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
-      typeListOrNull = (undefined4 *)0x0;
+      constructedTypeList = (undefined4 *)0x0;
       if (newTypeList != (undefined4 *)0x0) {
         listAllocator = GetGlobalPoolAllocator();
         newTypeList[3] = 0;
         newTypeList[1] = 0;
         newTypeList[2] = 0;
         *newTypeList = listAllocator;
-        typeListOrNull = newTypeList;
+        constructedTypeList = newTypeList;
       }
-      *(undefined4 **)(this + 8) = typeListOrNull;
+      *(undefined4 **)(this + 8) = constructedTypeList;
       for (memberIndex = 0; srcMembers = *(int *)(*(int *)(copyOf + 8) + 4),
           memberIndex < (uint)(*(int *)(*(int *)(copyOf + 8) + 8) - srcMembers >> 3); memberIndex = memberIndex + 1) {
         typeLineLine = *(undefined4 *)(srcMembers + memberIndex * 8 + 4);

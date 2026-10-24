@@ -373,7 +373,6 @@ local	_EmulateOp	puVar20	operandWordCursor	INFERRED	walks the source operand wor
 local	_EmulateOp	piVar17	operandKey	CONFIRMED	address of the 5-int lookup key {register id (ushort), type...} passed to _HashSetGet/_GetRegisterTypeInfo
 local	_EmulateOp	bVar1	noDestination	CONFIRMED	true when the instruction has no destination register info (no 0x1e000 bits or lookup failed)
 local	_EmulateOp	bVar6	foldFailed	INFERRED	set when an opcode could not be folded; checked before marking the destination unknown
-local	_EmulateOp	bVar2	foldFailedOrCompare	INFERRED	reused: fold-failed flag and the result of an operand compare (src1[3] <= src0[3])
 local	_EmulateOp	uStack_8c	intToFloatLow	INFERRED	low word of the 0x43300000:xxxxxxxx double used by the 2^52 int-to-double trick
 local	_EmulateOp	local_88	intPairHi	INFERRED	64-bit scratch holding the converted integer pair (shift/convert opcodes)
 local	_EmulateOp	local_80	intPairLo	INFERRED	second 64-bit scratch of the integer conversion

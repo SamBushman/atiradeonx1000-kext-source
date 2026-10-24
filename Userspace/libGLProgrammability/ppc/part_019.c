@@ -736,6 +736,7 @@ int _EmulateOp(compileContext, inst, hashSet)
   int inst;
   undefined4 hashSet;
 {
+  bool wCompareResult;
   float clampLoweredW;
   float clampLowered;
   float clampLowW;
@@ -784,7 +785,7 @@ int _EmulateOp(compileContext, inst, hashSet)
   int loopIndex;
   int allocation;
   bool noDestination;
-  bool foldFailedOrCompare;
+  bool resultKnown;
   float litYSave;
   float src0X;
   float src1Y;
@@ -874,7 +875,7 @@ int _EmulateOp(compileContext, inst, hashSet)
   foldFailed = true;
   isBadUsage = ((int (*)())_IsBadUsage)(inst);
   destValue = (float *)(destInfo + 0x18);
-  foldFailedOrCompare = false;
+  resultKnown = false;
   if (isBadUsage != 0) goto LAB_97c0ee84;
   if (((validArgCount != 1) || (noDestination)) || (src0 == (float *)0x0)) goto LAB_97c0d82c;
   foldFailed = false;
@@ -1605,7 +1606,7 @@ LAB_97c0e090:
       resultZBits = 0;
     }
     *(undefined4 *)(destInfo + 0x20) = resultZBits;
-    foldFailedOrCompare = src1[3] <= src0[3];
+    wCompareResult = src1[3] <= src0[3];
     goto LAB_97c0e36c;
   case 0x33:
     if (*src0 <= *src1) {
@@ -1651,10 +1652,10 @@ LAB_97c0e3e4:
       resultZBits = 0;
     }
     *(undefined4 *)(destInfo + 0x20) = resultZBits;
-    foldFailedOrCompare = src0[3] <= src1[3];
+    wCompareResult = src0[3] <= src1[3];
 LAB_97c0e36c:
     resultWBits = 0x3f800000;
-    if (!foldFailedOrCompare) goto LAB_97c0e454;
+    if (!wCompareResult) goto LAB_97c0e454;
     goto LAB_97c0e458;
   case 0x35:
     if (*src1 <= *src0) {
@@ -1818,10 +1819,10 @@ LAB_97c0e6f8:
   }
 LAB_97c0e77c:
   if (foldFailed) goto LAB_97c0eea8;
-  foldFailedOrCompare = false;
+  resultKnown = false;
   if ((((validArgCount != 3) || (noDestination)) || (src0 == (float *)0x0)) ||
      ((src1 == (float *)0x0 || (src2 == (float *)0x0)))) goto LAB_97c0ee84;
-  foldFailedOrCompare = false;
+  resultKnown = false;
   switch(*instWords >> 0x12 & 0xff) {
   case 0x3b:
     accumulator = 0.0;
@@ -1973,11 +1974,11 @@ LAB_97c0eb30:
     }
     scalarResult = scalarResult * scalarResult * (3.0 - (scalarResult + scalarResult));
 LAB_97c0ee74:
-    foldFailedOrCompare = true;
+    resultKnown = true;
     *(float *)(destInfo + 0x24) = scalarResult;
     goto LAB_97c0ee84;
   default:
-    foldFailedOrCompare = true;
+    resultKnown = true;
     goto LAB_97c0ee80;
   case 0x68:
     scalarResult = 0.0;
@@ -2002,13 +2003,13 @@ LAB_97c0ee74:
     *(float *)(destInfo + 0x1c) = 0.0;
     *(float *)(destInfo + 0x20) = 0.0;
 LAB_97c0ee80:
-    foldFailedOrCompare = !foldFailedOrCompare;
+    resultKnown = !resultKnown;
     goto LAB_97c0ee84;
   }
-  foldFailedOrCompare = true;
+  resultKnown = true;
   *(float *)(destInfo + 0x24) = resultW;
 LAB_97c0ee84:
-  if (foldFailedOrCompare) {
+  if (resultKnown) {
 LAB_97c0eea8:
     if (!noDestination) {
       *(undefined4 *)(destInfo + 0x14) = 1;
@@ -3807,7 +3808,7 @@ int _PPParserParseBranchCondition(parser, conditionWord, opcode)
   uint patchedWord;
   uint newConditionWord;
   int tokenLength;
-  int conditionCodeOrCompare;
+  int conditionCode;
   char *swizzleCursor;
   char token [256];
   
@@ -3834,58 +3835,58 @@ int _PPParserParseBranchCondition(parser, conditionWord, opcode)
   else if (tokenLength != 2) {
     return 0x10;
   }
-  conditionCodeOrCompare = _memcmp(token,"TR",2);
-  if (conditionCodeOrCompare == 0) {
+  conditionCode = _memcmp(token,"TR",2);
+  if (conditionCode == 0) {
     newConditionWord = *conditionWord & 0x8fffffff;
   }
   else {
-    conditionCodeOrCompare = _memcmp(token,"EQ",2);
-    if (conditionCodeOrCompare == 0) {
+    conditionCode = _memcmp(token,"EQ",2);
+    if (conditionCode == 0) {
       newConditionWord = *conditionWord;
-      conditionCodeOrCompare = 1;
+      conditionCode = 1;
     }
     else {
-      conditionCodeOrCompare = _memcmp(token,"GE",2);
-      if (conditionCodeOrCompare == 0) {
+      conditionCode = _memcmp(token,"GE",2);
+      if (conditionCode == 0) {
         newConditionWord = *conditionWord;
-        conditionCodeOrCompare = 2;
+        conditionCode = 2;
       }
       else {
-        conditionCodeOrCompare = _memcmp(token,"GT",2);
-        if (conditionCodeOrCompare == 0) {
+        conditionCode = _memcmp(token,"GT",2);
+        if (conditionCode == 0) {
           newConditionWord = *conditionWord;
-          conditionCodeOrCompare = 3;
+          conditionCode = 3;
         }
         else {
-          conditionCodeOrCompare = _memcmp(token,"LE",2);
-          if (conditionCodeOrCompare == 0) {
+          conditionCode = _memcmp(token,"LE",2);
+          if (conditionCode == 0) {
             newConditionWord = *conditionWord;
-            conditionCodeOrCompare = 4;
+            conditionCode = 4;
           }
           else {
-            conditionCodeOrCompare = _memcmp(token,"LT",2);
-            if (conditionCodeOrCompare == 0) {
+            conditionCode = _memcmp(token,"LT",2);
+            if (conditionCode == 0) {
               newConditionWord = *conditionWord;
-              conditionCodeOrCompare = 5;
+              conditionCode = 5;
             }
             else {
-              conditionCodeOrCompare = _memcmp(token,"NE",2);
-              if (conditionCodeOrCompare != 0) {
-                conditionCodeOrCompare = _memcmp(token,"FL",2);
-                if (conditionCodeOrCompare != 0) {
+              conditionCode = _memcmp(token,"NE",2);
+              if (conditionCode != 0) {
+                conditionCode = _memcmp(token,"FL",2);
+                if (conditionCode != 0) {
                   return 0x10;
                 }
                 newConditionWord = *conditionWord | 0x70000000;
                 goto LAB_97c1180c;
               }
               newConditionWord = *conditionWord;
-              conditionCodeOrCompare = 6;
+              conditionCode = 6;
             }
           }
         }
       }
     }
-    newConditionWord = conditionCodeOrCompare << 0x1c | newConditionWord & 0x8fffffff;
+    newConditionWord = conditionCode << 0x1c | newConditionWord & 0x8fffffff;
   }
 LAB_97c1180c:
   *conditionWord = newConditionWord;

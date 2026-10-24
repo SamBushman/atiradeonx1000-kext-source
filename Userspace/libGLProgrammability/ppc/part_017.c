@@ -298,11 +298,11 @@ LAB_97bf2d5c:
 }
 
 /* _glpSourceComponents @ 0x97bf2dcc (504 bytes) */
-int _glpSourceComponents(inst, out, operandIndex, destSwizzleOrComponent, printFlags)
+int _glpSourceComponents(inst, out, operandIndex, destSelector, printFlags)
   int inst;
   char *out;
   int operandIndex;
-  uint destSwizzleOrComponent;
+  uint destSelector;
   uint printFlags;
 {
   int componentCount;
@@ -325,7 +325,7 @@ int _glpSourceComponents(inst, out, operandIndex, destSwizzleOrComponent, printF
   }
   finalSwizzle = sourceSwizzle;
   if ((printFlags & 0xc) != 0) {
-    destSwizzle = destSwizzleOrComponent;
+    destSwizzle = destSelector;
     if ((printFlags & 4) == 0) {
       destSwizzle = *(uint *)(inst + 8);
       destSwizzle = (destSwizzle & 0xc) << 10 | (destSwizzle & 0x30) << 4 | destSwizzle >> 2 & 0x30 | destSwizzle >> 8 & 3;
@@ -381,19 +381,19 @@ int _glpSourceComponents(inst, out, operandIndex, destSwizzleOrComponent, printF
       copyIndex = copyIndex + 1;
     }
     textCursor = out + copyIndex;
-    if (destSwizzleOrComponent == 1) {
+    if (destSelector == 1) {
       finalSwizzle = (int)finalSwizzle >> 4;
     }
-    else if ((int)destSwizzleOrComponent < 2) {
-      if (destSwizzleOrComponent != 0) {
+    else if ((int)destSelector < 2) {
+      if (destSelector != 0) {
         return textCursor;
       }
     }
-    else if (destSwizzleOrComponent == 2) {
+    else if (destSelector == 2) {
       finalSwizzle = (int)finalSwizzle >> 8;
     }
     else {
-      if (destSwizzleOrComponent != 3) {
+      if (destSelector != 3) {
         return textCursor;
       }
       finalSwizzle = (int)finalSwizzle >> 0xc;
@@ -465,14 +465,14 @@ int _glpWriteComponentsWithDestinationSwizzle(inst, out)
 }
 
 /* _glpWriteSourceOperand_97bf30b8 @ 0x97bf30b8 (128 bytes) */
-int _glpWriteSourceOperand_97bf30b8(inst, out, paramNumberMap, paramArrayMap, operandIndex, rowOffset, destSwizzleOrComponent, printFlags)
+int _glpWriteSourceOperand_97bf30b8(inst, out, paramNumberMap, paramArrayMap, operandIndex, rowOffset, destSelector, printFlags)
   undefined4 inst;
   undefined4 out;
   undefined4 paramNumberMap;
   undefined4 paramArrayMap;
   undefined4 operandIndex;
   undefined4 rowOffset;
-  undefined4 destSwizzleOrComponent;
+  undefined4 destSelector;
   undefined4 printFlags;
 {
   undefined4 glpSourceComponentsResult;
@@ -481,7 +481,7 @@ int _glpWriteSourceOperand_97bf30b8(inst, out, paramNumberMap, paramArrayMap, op
   
   glpSourceSignResult = ((int (*)())_glpSourceSign)(inst,out,operandIndex,printFlags);
   glpSourceTypeResult = ((int (*)())_glpSourceType)(inst,glpSourceSignResult,paramNumberMap,paramArrayMap,operandIndex,rowOffset,printFlags);
-  glpSourceComponentsResult = ((int (*)())_glpSourceComponents)(inst,glpSourceTypeResult,operandIndex,destSwizzleOrComponent,printFlags);
+  glpSourceComponentsResult = ((int (*)())_glpSourceComponents)(inst,glpSourceTypeResult,operandIndex,destSelector,printFlags);
   return glpSourceComponentsResult;
 }
 

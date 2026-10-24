@@ -842,7 +842,7 @@ use	_glpSourceType	uVar2	addressComponent	CONFIRMED	operand word0 >> 0x1c & 3: c
 local	_glpSourceComponents	param_1	inst	CONFIRMED	compact instruction: 8-byte operand entries from +0 (indexed by operandIndex * 8); word 2 (+8) holds the destination write-mask/swizzle bits
 local	_glpSourceComponents	param_2	out	CONFIRMED	output position; the component letters x/y/z/w are appended and the end position returned
 local	_glpSourceComponents	param_3	operandIndex	CONFIRMED	operand entry number whose swizzle fields (word0 bits 3.., 9.., 15.., 21..) are packed into sourceSwizzle
-local	_glpSourceComponents	param_4	destSwizzleOrComponent	INFERRED	with flag 4 set: a ready-made destination swizzle (identity 0x3210); with flag 2: the single component index 0..3 to print
+local	_glpSourceComponents	param_4	destSelector	INFERRED	parameter: with flag 4 a ready-made destination swizzle, with flag 2 the single component index (one slot, meaning chosen by the flag)
 local	_glpSourceComponents	param_5	printFlags	INFERRED	0x40 = print identity source swizzle, 0xc = combine with the destination swizzle (4 = use param_4), 2 = print a single component
 use	_glpSourceComponents	uVar2	bitShift	CONFIRMED	nibbleShift & 0x3f: shift count for merging one 2-bit component	^\s*uVar2\ =\ uVar9\ \&\ 0x3f;$	+1
 use	_glpSourceComponents	uVar2	bitShift	CONFIRMED	nibbleShift & 0x3f: shift count for merging one 2-bit component	^\s*uVar8\ =\ uVar8\ \|\ uVar5\ \&\ 3\ <<\ uVar2;$	+1
@@ -1139,7 +1139,7 @@ local	_glpWriteSourceOperand_97bf30b8	param_3	paramNumberMap	CONFIRMED	third arg
 local	_glpWriteSourceOperand_97bf30b8	param_4	paramArrayMap	CONFIRMED	fourth argument of _glpSourceType: register -> parameter-array position table
 local	_glpWriteSourceOperand_97bf30b8	param_5	operandIndex	CONFIRMED	operand entry number passed to all three writers
 local	_glpWriteSourceOperand_97bf30b8	param_6	rowOffset	INFERRED	passed as _glpSourceType's rowOffset: register offset added for matrix rows
-local	_glpWriteSourceOperand_97bf30b8	param_7	destSwizzleOrComponent	INFERRED	passed as _glpSourceComponents' fourth argument: destination swizzle or single component
+local	_glpWriteSourceOperand_97bf30b8	param_7	destSelector	INFERRED	forwarded unchanged as _glpSourceComponents' destSelector
 local	_glpWriteSourceOperand_97bf30b8	param_8	printFlags	CONFIRMED	flag word passed to all three writers (sign invert bit 0, 0x10 swizzle component, 0x40/0xc/2 component printing)
 use	_glpPPShaderToProgramString	iVar17	shaderTarget	CONFIRMED	*shader: target enum (0x8804/0x8620 ARB program, 0x8b30/0x8b31 GLSL shader), passed to _glpDisassemble2Op as the shader type	^\s*iVar17\ =\ \*param_1;$	+1
 use	_glpPPShaderToProgramString	iVar17	shaderTarget	CONFIRMED	*shader: target enum (0x8804/0x8620 ARB program, 0x8b30/0x8b31 GLSL shader), passed to _glpDisassemble2Op as the shader type	^\s*if\ \(iVar17\ ==\ 0x8b30\)\ \{$	+1

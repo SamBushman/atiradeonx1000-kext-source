@@ -27,5 +27,5 @@ use	TType__copyType	iVar6	finishCursor	CONFIRMED	finish of the new member vector
 use	TType__copyType	iVar6	srcFieldName	CONFIRMED	copyOf +0xc: the field name TString*	iVar6 = \*\(int \*\)\(param_2 \+ 0xc\);	iVar6 = \*\(int \*\)\(param_2 \+ 0x10\);
 use	TType__copyType	iVar6	srcTypeName	CONFIRMED	copyOf +0x10: the type name TString*	iVar6 = \*\(int \*\)\(param_2 \+ 0x10\);	iVar6 = \*\(int \*\)\(param_2 \+ 0x14\);
 use	TType__copyType	iVar6	srcMangled	INFERRED	copyOf +0x14: the third name TString* (the mangled name in 3Dlabs TType)	iVar6 = \*\(int \*\)\(param_2 \+ 0x14\);	
-use	TType__copyType	puVar11	typeListOrNull	CONFIRMED	newTypeList when the allocation succeeded, else NULL	puVar11 = \(undefined4 \*\)0x0;	puVar11 = \*\(undefined4 \*\*\)\(this_01 \+ 8\);
+use	TType__copyType	puVar11	constructedTypeList	CONFIRMED	newTypeList when the allocation succeeded, else NULL	puVar11 = \(undefined4 \*\)0x0;	puVar11 = \*\(undefined4 \*\*\)\(this_01 \+ 8\);
 use	TType__copyType	puVar11	memberFinish	CONFIRMED	finish pointer of the new member vector	puVar11 = \*\(undefined4 \*\*\)\(this_01 \+ 8\);	
