@@ -18,12 +18,6 @@ local	_InterpreterTextureSamplerSampleTexel1D	local_70	texelNextLevelr	INFERRED	
 local	_InterpreterTextureSamplerSampleTexel1D	local_6c	texelNextLevelg	INFERRED	float[4] filled by SampleTexel1DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
 local	_InterpreterTextureSamplerSampleTexel1D	local_68	texelNextLevelb	INFERRED	float[4] filled by SampleTexel1DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
 local	_InterpreterTextureSamplerSampleTexel1D	local_64	texelNextLevela	INFERRED	float[4] filled by SampleTexel1DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
-use	_InterpreterTextureSamplerSampleTexel1D	dVar4	lambda	INFERRED	level of detail returned by CalculateLambda	^\s*dVar4\ =\ \(double\)\(\(double\ \(\*\)\(\)\)_InterpreterTextureSamplerCalculateLambda1D\)\(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,$	+4
-use	_InterpreterTextureSamplerSampleTexel1D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ fparam_1;$	+1
-use	_InterpreterTextureSamplerSampleTexel1D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ \(double\)GH_U2F\(\(unsigned\ int\)\(piVar2\[8\]\)\);$	+1
-use	_InterpreterTextureSamplerSampleTexel1D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*if\ \(DOUBLE_97c30a78\ <=\ dVar4\)\ \{$	+3
-use	_InterpreterTextureSamplerSampleTexel1D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*uVar3\ =\ \(uint\)\(int\)dVar4;$	+1
-use	_InterpreterTextureSamplerSampleTexel1D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ \(double\)\(float\)\(dVar4\ \-\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uVar3\)\ \-$	+7
 local	_InterpreterTextureSamplerSampleTexel2D	param_1	sampler	CONFIRMED	texture sampler state ([0] object table, [10] set to 1 when a level of detail was computed)
 local	_InterpreterTextureSamplerSampleTexel2D	param_2	textureUnit	CONFIRMED	texture unit: index into the object table *sampler
 local	_InterpreterTextureSamplerSampleTexel2D	param_3	unusedArg3	UNKNOWN	not read
@@ -44,12 +38,6 @@ local	_InterpreterTextureSamplerSampleTexel2D	local_70	texelNextLevelr	INFERRED	
 local	_InterpreterTextureSamplerSampleTexel2D	local_6c	texelNextLevelg	INFERRED	float[4] filled by SampleTexel2DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
 local	_InterpreterTextureSamplerSampleTexel2D	local_68	texelNextLevelb	INFERRED	float[4] filled by SampleTexel2DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
 local	_InterpreterTextureSamplerSampleTexel2D	local_64	texelNextLevela	INFERRED	float[4] filled by SampleTexel2DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
-use	_InterpreterTextureSamplerSampleTexel2D	dVar4	lambda	INFERRED	level of detail returned by CalculateLambda	^\s*dVar4\ =\ \(double\)\(\(double\ \(\*\)\(\)\)_InterpreterTextureSamplerCalculateLambda2D\)\(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,$	+4
-use	_InterpreterTextureSamplerSampleTexel2D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ fparam_1;$	+1
-use	_InterpreterTextureSamplerSampleTexel2D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ \(double\)GH_U2F\(\(unsigned\ int\)\(piVar2\[8\]\)\);$	+1
-use	_InterpreterTextureSamplerSampleTexel2D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*if\ \(DOUBLE_97c30a78\ <=\ dVar4\)\ \{$	+3
-use	_InterpreterTextureSamplerSampleTexel2D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*uVar3\ =\ \(uint\)\(int\)dVar4;$	+1
-use	_InterpreterTextureSamplerSampleTexel2D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ \(double\)\(float\)\(dVar4\ \-\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uVar3\)\ \-$	+7
 local	_InterpreterTextureSamplerSampleTexel3D	param_1	sampler	CONFIRMED	texture sampler state ([0] object table, [10] set to 1 when a level of detail was computed)
 local	_InterpreterTextureSamplerSampleTexel3D	param_2	textureUnit	CONFIRMED	texture unit: index into the object table *sampler
 local	_InterpreterTextureSamplerSampleTexel3D	param_3	unusedArg3	UNKNOWN	not read
@@ -70,9 +58,3 @@ local	_InterpreterTextureSamplerSampleTexel3D	local_70	texelNextLevelr	INFERRED	
 local	_InterpreterTextureSamplerSampleTexel3D	local_6c	texelNextLevelg	INFERRED	float[4] filled by SampleTexel3DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
 local	_InterpreterTextureSamplerSampleTexel3D	local_68	texelNextLevelb	INFERRED	float[4] filled by SampleTexel3DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
 local	_InterpreterTextureSamplerSampleTexel3D	local_64	texelNextLevela	INFERRED	float[4] filled by SampleTexel3DFromLevel for mip level baseLevel / baseLevel+1; blended by the final lerp
-use	_InterpreterTextureSamplerSampleTexel3D	dVar4	lambda	INFERRED	level of detail returned by CalculateLambda	^\s*dVar4\ =\ \(double\)\(\(double\ \(\*\)\(\)\)_InterpreterTextureSamplerCalculateLambda3D\)\(param_1,param_4,param_2,fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,$	+4
-use	_InterpreterTextureSamplerSampleTexel3D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ fparam_1;$	+1
-use	_InterpreterTextureSamplerSampleTexel3D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ \(double\)GH_U2F\(\(unsigned\ int\)\(piVar2\[8\]\)\);$	+1
-use	_InterpreterTextureSamplerSampleTexel3D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*if\ \(DOUBLE_97c30a78\ <=\ dVar4\)\ \{$	+3
-use	_InterpreterTextureSamplerSampleTexel3D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*uVar3\ =\ \(uint\)\(int\)dVar4;$	+1
-use	_InterpreterTextureSamplerSampleTexel3D	dVar4	lodOrFrac	INFERRED	clamped level of detail, then reused for its fractional part (x = f(x))	^\s*dVar4\ =\ \(double\)\(float\)\(dVar4\ \-\ \(double\)\(float\)\(\(double\)CONCAT44\(0x43300000,uVar3\)\ \-$	+7

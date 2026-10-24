@@ -9,13 +9,14 @@ void _InterpreterTextureSamplerAttachDerivatives(int sampler,undefined4 derivati
 }
 
 /* _InterpreterTextureSamplerSampleTexel1D @ 0x97bd3620 (512 bytes) */
-void _InterpreterTextureSamplerSampleTexel1D(int *sampler,int textureUnit,undefined4 unusedArg3,undefined4 texCoord,float *texelOut,double clampedLodOrScratchF1,double scratchF2,double scratchF3,double scratchF4,double scratchF5,double scratchF6,double scratchF7,double scratchF8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
+void _InterpreterTextureSamplerSampleTexel1D(int *sampler,int textureUnit,undefined4 unusedArg3,undefined4 texCoord,float *texelOut,double lodBias,double scratchF2,double scratchF3,double scratchF4,double scratchF5,double scratchF6,double scratchF7,double scratchF8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
-  double lodOrFrac;
+  double lodFrac;
+  double clampedLod;
+  double lambda;
   float oneMinusLodFrac;
   int *textureObject;
   uint baseLevel;
-  double lambda;
   double levelSampleResult;
   double leftoverStackArg0;
   double leftoverStackArg1;
@@ -36,40 +37,40 @@ void _InterpreterTextureSamplerSampleTexel1D(int *sampler,int textureUnit,undefi
   textureObject = *(int **)(*sampler + textureUnit * 4);
   if ((uint)(*(ushort *)(*textureObject + 0x16) - 0x2700) < 4) {
     sampler[10] = 1;
-    lambda = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda1D)(sampler,texCoord,textureUnit,clampedLodOrScratchF1,scratchF2,scratchF3,scratchF4,scratchF5,
+    lambda = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda1D)(sampler,texCoord,textureUnit,lodBias,scratchF2,scratchF3,scratchF4,scratchF5,
                                scratchF6,scratchF7,scratchF8,leftoverStackArg0,leftoverStackArg1,
                                leftoverStackArg2,leftoverStackArg3);
-    lodBiasedClamped = (float)((double)(float)(lambda + (double)GH_U2F((unsigned int)(textureObject[0x10]))) + clampedLodOrScratchF1);
+    lodBiasedClamped = (float)((double)(float)(lambda + (double)GH_U2F((unsigned int)(textureObject[0x10]))) + lodBias);
     if (lodBiasedClamped < GH_U2F((unsigned int)(textureObject[0xc]))) {
       lodBiasedClamped = GH_U2F((unsigned int)(textureObject[0xc]));
     }
-    clampedLodOrScratchF1 = (double)lodBiasedClamped;
-    lodOrFrac = clampedLodOrScratchF1;
-    if ((double)GH_U2F((unsigned int)(textureObject[8])) < clampedLodOrScratchF1) {
-      lodOrFrac = (double)GH_U2F((unsigned int)(textureObject[8]));
+    lodBias = (double)lodBiasedClamped;
+    clampedLod = lodBias;
+    if ((double)GH_U2F((unsigned int)(textureObject[8])) < lodBias) {
+      clampedLod = (double)GH_U2F((unsigned int)(textureObject[8]));
     }
-    if (DOUBLE_97c30a78 <= lodOrFrac) {
-      intCastScratchB = (longlong)(int)(lodOrFrac - DOUBLE_97c30a78);
-      baseLevel = (int)(lodOrFrac - DOUBLE_97c30a78) ^ 0x80000000;
+    if (DOUBLE_97c30a78 <= clampedLod) {
+      intCastScratchB = (longlong)(int)(clampedLod - DOUBLE_97c30a78);
+      baseLevel = (int)(clampedLod - DOUBLE_97c30a78) ^ 0x80000000;
     }
     else {
-      baseLevel = (uint)(int)lodOrFrac;
+      baseLevel = (uint)(int)clampedLod;
       intCastScratchA = (longlong)(int)baseLevel;
     }
     if (1 < *(ushort *)(*textureObject + 0x16) - 0x2700) {
-      levelSampleResult = (double)((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(sampler,textureUnit,baseLevel,texCoord,&texelBaseLevelr,clampedLodOrScratchF1,scratchF2,
+      levelSampleResult = (double)((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(sampler,textureUnit,baseLevel,texCoord,&texelBaseLevelr,lodBias,scratchF2,
                                        scratchF3,scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,
                                        leftoverStackArg0,leftoverStackArg1,leftoverStackArg2);
       ((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(sampler,textureUnit,baseLevel + 1,texCoord,&texelNextLevelr,levelSampleResult,scratchF2,scratchF3,scratchF4,
                  scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,leftoverStackArg1,
                  leftoverStackArg2);
-      lodOrFrac = (double)(float)(lodOrFrac - (double)(float)((double)CONCAT44(0x43300000,baseLevel) -
+      lodFrac = (double)(float)(clampedLod - (double)(float)((double)CONCAT44(0x43300000,baseLevel) -
                                                      DOUBLE_97c30a68));
-      oneMinusLodFrac = (float)(DOUBLE_97c30a60 - lodOrFrac);
-      *texelOut = oneMinusLodFrac * texelBaseLevelr + (float)(lodOrFrac * (double)texelNextLevelr);
-      texelOut[3] = oneMinusLodFrac * texelBaseLevela + (float)(lodOrFrac * (double)texelNextLevela);
-      texelOut[1] = oneMinusLodFrac * texelBaseLevelg + (float)(lodOrFrac * (double)texelNextLevelg);
-      texelOut[2] = oneMinusLodFrac * texelBaseLevelb + (float)(lodOrFrac * (double)texelNextLevelb);
+      oneMinusLodFrac = (float)(DOUBLE_97c30a60 - lodFrac);
+      *texelOut = oneMinusLodFrac * texelBaseLevelr + (float)(lodFrac * (double)texelNextLevelr);
+      texelOut[3] = oneMinusLodFrac * texelBaseLevela + (float)(lodFrac * (double)texelNextLevela);
+      texelOut[1] = oneMinusLodFrac * texelBaseLevelg + (float)(lodFrac * (double)texelNextLevelg);
+      texelOut[2] = oneMinusLodFrac * texelBaseLevelb + (float)(lodFrac * (double)texelNextLevelb);
       return;
     }
   }
@@ -77,19 +78,20 @@ void _InterpreterTextureSamplerSampleTexel1D(int *sampler,int textureUnit,undefi
     baseLevel = 0;
     sampler[10] = 0;
   }
-  ((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(sampler,textureUnit,baseLevel,texCoord,texelOut,clampedLodOrScratchF1,scratchF2,scratchF3,scratchF4,scratchF5,
+  ((double (*)())_InterpreterTextureSamplerSampleTexel1DFromLevel)(sampler,textureUnit,baseLevel,texCoord,texelOut,lodBias,scratchF2,scratchF3,scratchF4,scratchF5,
              scratchF6,scratchF7,scratchF8,leftoverStackArg0,leftoverStackArg1,leftoverStackArg2);
   return;
 }
 
 /* _InterpreterTextureSamplerSampleTexel2D @ 0x97bd3820 (512 bytes) */
-void _InterpreterTextureSamplerSampleTexel2D(int *sampler,int textureUnit,undefined4 unusedArg3,undefined4 texCoord,float *texelOut,double clampedLodOrScratchF1,double scratchF2,double scratchF3,double scratchF4,double scratchF5,double scratchF6,double scratchF7,double scratchF8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
+void _InterpreterTextureSamplerSampleTexel2D(int *sampler,int textureUnit,undefined4 unusedArg3,undefined4 texCoord,float *texelOut,double lodBias,double scratchF2,double scratchF3,double scratchF4,double scratchF5,double scratchF6,double scratchF7,double scratchF8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12,double unusedFloatArg13)
 {
-  double lodOrFrac;
+  double lodFrac;
+  double clampedLod;
+  double lambda;
   float oneMinusLodFrac;
   int *textureObject;
   uint baseLevel;
-  double lambda;
   double levelSampleResult;
   double leftoverStackArg0;
   double leftoverStackArg1;
@@ -111,41 +113,41 @@ void _InterpreterTextureSamplerSampleTexel2D(int *sampler,int textureUnit,undefi
   textureObject = *(int **)(*sampler + textureUnit * 4);
   if ((uint)(*(ushort *)(*textureObject + 0x16) - 0x2700) < 4) {
     sampler[10] = 1;
-    lambda = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda2D)(sampler,texCoord,textureUnit,clampedLodOrScratchF1,scratchF2,scratchF3,scratchF4,scratchF5,
+    lambda = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda2D)(sampler,texCoord,textureUnit,lodBias,scratchF2,scratchF3,scratchF4,scratchF5,
                                scratchF6,scratchF7,scratchF8,leftoverStackArg0,leftoverStackArg1,
                                leftoverStackArg2,leftoverStackArg3);
-    lodBiasedClamped = (float)((double)(float)(lambda + (double)GH_U2F((unsigned int)(textureObject[0x10]))) + clampedLodOrScratchF1);
+    lodBiasedClamped = (float)((double)(float)(lambda + (double)GH_U2F((unsigned int)(textureObject[0x10]))) + lodBias);
     if (lodBiasedClamped < GH_U2F((unsigned int)(textureObject[0xc]))) {
       lodBiasedClamped = GH_U2F((unsigned int)(textureObject[0xc]));
     }
-    clampedLodOrScratchF1 = (double)lodBiasedClamped;
-    lodOrFrac = clampedLodOrScratchF1;
-    if ((double)GH_U2F((unsigned int)(textureObject[8])) < clampedLodOrScratchF1) {
-      lodOrFrac = (double)GH_U2F((unsigned int)(textureObject[8]));
+    lodBias = (double)lodBiasedClamped;
+    clampedLod = lodBias;
+    if ((double)GH_U2F((unsigned int)(textureObject[8])) < lodBias) {
+      clampedLod = (double)GH_U2F((unsigned int)(textureObject[8]));
     }
-    if (DOUBLE_97c30a78 <= lodOrFrac) {
-      intCastScratchB = (longlong)(int)(lodOrFrac - DOUBLE_97c30a78);
-      baseLevel = (int)(lodOrFrac - DOUBLE_97c30a78) ^ 0x80000000;
+    if (DOUBLE_97c30a78 <= clampedLod) {
+      intCastScratchB = (longlong)(int)(clampedLod - DOUBLE_97c30a78);
+      baseLevel = (int)(clampedLod - DOUBLE_97c30a78) ^ 0x80000000;
     }
     else {
-      baseLevel = (uint)(int)lodOrFrac;
+      baseLevel = (uint)(int)clampedLod;
       intCastScratchA = (longlong)(int)baseLevel;
     }
     if (1 < *(ushort *)(*textureObject + 0x16) - 0x2700) {
-      levelSampleResult = (double)((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(sampler,textureUnit,baseLevel,texCoord,&texelBaseLevelr,clampedLodOrScratchF1,scratchF2,
+      levelSampleResult = (double)((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(sampler,textureUnit,baseLevel,texCoord,&texelBaseLevelr,lodBias,scratchF2,
                                        scratchF3,scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,
                                        leftoverStackArg0,leftoverStackArg1,leftoverStackArg2,
                                        leftoverStackArg3,leftoverStackArg4);
       ((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(sampler,textureUnit,baseLevel + 1,texCoord,&texelNextLevelr,levelSampleResult,scratchF2,scratchF3,scratchF4,
                  scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,leftoverStackArg1,
                  leftoverStackArg2,leftoverStackArg3,leftoverStackArg4);
-      lodOrFrac = (double)(float)(lodOrFrac - (double)(float)((double)CONCAT44(0x43300000,baseLevel) -
+      lodFrac = (double)(float)(clampedLod - (double)(float)((double)CONCAT44(0x43300000,baseLevel) -
                                                      DOUBLE_97c30a68));
-      oneMinusLodFrac = (float)(DOUBLE_97c30a60 - lodOrFrac);
-      *texelOut = oneMinusLodFrac * texelBaseLevelr + (float)(lodOrFrac * (double)texelNextLevelr);
-      texelOut[3] = oneMinusLodFrac * texelBaseLevela + (float)(lodOrFrac * (double)texelNextLevela);
-      texelOut[1] = oneMinusLodFrac * texelBaseLevelg + (float)(lodOrFrac * (double)texelNextLevelg);
-      texelOut[2] = oneMinusLodFrac * texelBaseLevelb + (float)(lodOrFrac * (double)texelNextLevelb);
+      oneMinusLodFrac = (float)(DOUBLE_97c30a60 - lodFrac);
+      *texelOut = oneMinusLodFrac * texelBaseLevelr + (float)(lodFrac * (double)texelNextLevelr);
+      texelOut[3] = oneMinusLodFrac * texelBaseLevela + (float)(lodFrac * (double)texelNextLevela);
+      texelOut[1] = oneMinusLodFrac * texelBaseLevelg + (float)(lodFrac * (double)texelNextLevelg);
+      texelOut[2] = oneMinusLodFrac * texelBaseLevelb + (float)(lodFrac * (double)texelNextLevelb);
       return;
     }
   }
@@ -153,20 +155,21 @@ void _InterpreterTextureSamplerSampleTexel2D(int *sampler,int textureUnit,undefi
     baseLevel = 0;
     sampler[10] = 0;
   }
-  ((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(sampler,textureUnit,baseLevel,texCoord,texelOut,clampedLodOrScratchF1,scratchF2,scratchF3,scratchF4,scratchF5,
+  ((double (*)())_InterpreterTextureSamplerSampleTexel2DFromLevel)(sampler,textureUnit,baseLevel,texCoord,texelOut,lodBias,scratchF2,scratchF3,scratchF4,scratchF5,
              scratchF6,scratchF7,scratchF8,leftoverStackArg0,leftoverStackArg1,leftoverStackArg2,
              leftoverStackArg3,leftoverStackArg4);
   return;
 }
 
 /* _InterpreterTextureSamplerSampleTexel3D @ 0x97bd3a20 (512 bytes) */
-void _InterpreterTextureSamplerSampleTexel3D(int *sampler,int textureUnit,undefined4 unusedArg3,undefined4 texCoord,float *texelOut,double clampedLodOrScratchF1,double scratchF2,double scratchF3,double scratchF4,double scratchF5,double scratchF6,double scratchF7,double scratchF8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
+void _InterpreterTextureSamplerSampleTexel3D(int *sampler,int textureUnit,undefined4 unusedArg3,undefined4 texCoord,float *texelOut,double lodBias,double scratchF2,double scratchF3,double scratchF4,double scratchF5,double scratchF6,double scratchF7,double scratchF8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
-  double lodOrFrac;
+  double lodFrac;
+  double clampedLod;
+  double lambda;
   float oneMinusLodFrac;
   int *textureObject;
   uint baseLevel;
-  double lambda;
   double levelSampleResult;
   double leftoverStackArg0;
   double leftoverStackArg1;
@@ -187,40 +190,40 @@ void _InterpreterTextureSamplerSampleTexel3D(int *sampler,int textureUnit,undefi
   textureObject = *(int **)(*sampler + textureUnit * 4);
   if ((uint)(*(ushort *)(*textureObject + 0x16) - 0x2700) < 4) {
     sampler[10] = 1;
-    lambda = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda3D)(sampler,texCoord,textureUnit,clampedLodOrScratchF1,scratchF2,scratchF3,scratchF4,scratchF5,
+    lambda = (double)((double (*)())_InterpreterTextureSamplerCalculateLambda3D)(sampler,texCoord,textureUnit,lodBias,scratchF2,scratchF3,scratchF4,scratchF5,
                                scratchF6,scratchF7,scratchF8,leftoverStackArg0,leftoverStackArg1,
                                leftoverStackArg2,leftoverStackArg3);
-    lodBiasedClamped = (float)((double)(float)(lambda + (double)GH_U2F((unsigned int)(textureObject[0x10]))) + clampedLodOrScratchF1);
+    lodBiasedClamped = (float)((double)(float)(lambda + (double)GH_U2F((unsigned int)(textureObject[0x10]))) + lodBias);
     if (lodBiasedClamped < GH_U2F((unsigned int)(textureObject[0xc]))) {
       lodBiasedClamped = GH_U2F((unsigned int)(textureObject[0xc]));
     }
-    clampedLodOrScratchF1 = (double)lodBiasedClamped;
-    lodOrFrac = clampedLodOrScratchF1;
-    if ((double)GH_U2F((unsigned int)(textureObject[8])) < clampedLodOrScratchF1) {
-      lodOrFrac = (double)GH_U2F((unsigned int)(textureObject[8]));
+    lodBias = (double)lodBiasedClamped;
+    clampedLod = lodBias;
+    if ((double)GH_U2F((unsigned int)(textureObject[8])) < lodBias) {
+      clampedLod = (double)GH_U2F((unsigned int)(textureObject[8]));
     }
-    if (DOUBLE_97c30a78 <= lodOrFrac) {
-      intCastScratchB = (longlong)(int)(lodOrFrac - DOUBLE_97c30a78);
-      baseLevel = (int)(lodOrFrac - DOUBLE_97c30a78) ^ 0x80000000;
+    if (DOUBLE_97c30a78 <= clampedLod) {
+      intCastScratchB = (longlong)(int)(clampedLod - DOUBLE_97c30a78);
+      baseLevel = (int)(clampedLod - DOUBLE_97c30a78) ^ 0x80000000;
     }
     else {
-      baseLevel = (uint)(int)lodOrFrac;
+      baseLevel = (uint)(int)clampedLod;
       intCastScratchA = (longlong)(int)baseLevel;
     }
     if (1 < *(ushort *)(*textureObject + 0x16) - 0x2700) {
-      levelSampleResult = (double)((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(sampler,textureUnit,baseLevel,texCoord,&texelBaseLevelr,clampedLodOrScratchF1,scratchF2,
+      levelSampleResult = (double)((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(sampler,textureUnit,baseLevel,texCoord,&texelBaseLevelr,lodBias,scratchF2,
                                        scratchF3,scratchF4,scratchF5,scratchF6,scratchF7,scratchF8,
                                        leftoverStackArg0,leftoverStackArg1,leftoverStackArg2);
       ((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(sampler,textureUnit,baseLevel + 1,texCoord,&texelNextLevelr,levelSampleResult,scratchF2,scratchF3,scratchF4,
                  scratchF5,scratchF6,scratchF7,scratchF8,leftoverStackArg0,leftoverStackArg1,
                  leftoverStackArg2);
-      lodOrFrac = (double)(float)(lodOrFrac - (double)(float)((double)CONCAT44(0x43300000,baseLevel) -
+      lodFrac = (double)(float)(clampedLod - (double)(float)((double)CONCAT44(0x43300000,baseLevel) -
                                                      DOUBLE_97c30a68));
-      oneMinusLodFrac = (float)(DOUBLE_97c30a60 - lodOrFrac);
-      *texelOut = oneMinusLodFrac * texelBaseLevelr + (float)(lodOrFrac * (double)texelNextLevelr);
-      texelOut[3] = oneMinusLodFrac * texelBaseLevela + (float)(lodOrFrac * (double)texelNextLevela);
-      texelOut[1] = oneMinusLodFrac * texelBaseLevelg + (float)(lodOrFrac * (double)texelNextLevelg);
-      texelOut[2] = oneMinusLodFrac * texelBaseLevelb + (float)(lodOrFrac * (double)texelNextLevelb);
+      oneMinusLodFrac = (float)(DOUBLE_97c30a60 - lodFrac);
+      *texelOut = oneMinusLodFrac * texelBaseLevelr + (float)(lodFrac * (double)texelNextLevelr);
+      texelOut[3] = oneMinusLodFrac * texelBaseLevela + (float)(lodFrac * (double)texelNextLevela);
+      texelOut[1] = oneMinusLodFrac * texelBaseLevelg + (float)(lodFrac * (double)texelNextLevelg);
+      texelOut[2] = oneMinusLodFrac * texelBaseLevelb + (float)(lodFrac * (double)texelNextLevelb);
       return;
     }
   }
@@ -228,7 +231,7 @@ void _InterpreterTextureSamplerSampleTexel3D(int *sampler,int textureUnit,undefi
     baseLevel = 0;
     sampler[10] = 0;
   }
-  ((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(sampler,textureUnit,baseLevel,texCoord,texelOut,clampedLodOrScratchF1,scratchF2,scratchF3,scratchF4,scratchF5,
+  ((double (*)())_InterpreterTextureSamplerSampleTexel3DFromLevel)(sampler,textureUnit,baseLevel,texCoord,texelOut,lodBias,scratchF2,scratchF3,scratchF4,scratchF5,
              scratchF6,scratchF7,scratchF8,leftoverStackArg0,leftoverStackArg1,leftoverStackArg2);
   return;
 }
@@ -364,15 +367,17 @@ LAB_97bd3e30:
 /* _InterpreterTextureSamplerCalculateLambda1D @ 0x97bd3e38 (276 bytes) */
 double _InterpreterTextureSamplerCalculateLambda1D(int *sampler,float *texCoord,int textureUnit,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
+  float dsdy;
+  float dsdx;
   float maxGradientLength;
   double lambda;
   float q;
-  float neighbourXQOrDsdx;
-  float neighbourYQOrDsdy;
+  float neighbourXQ;
+  float neighbourYQ;
   float coordS;
   float neighbourXS;
   float neighbourYS;
-  float baseWidthOrDsdy;
+  float baseWidth;
   int neighbourY;
   int neighbourX;
   double gradientLengthX;
@@ -380,19 +385,19 @@ double _InterpreterTextureSamplerCalculateLambda1D(int *sampler,float *texCoord,
   
   q = texCoord[3];
   neighbourX = textureUnit * 0x10 + sampler[3];
-  neighbourXQOrDsdx = *(float *)(neighbourX + 0x4c);
+  neighbourXQ = *(float *)(neighbourX + 0x4c);
   neighbourY = textureUnit * 0x10 + sampler[3] + 0xc0;
-  neighbourYQOrDsdy = *(float *)(neighbourY + 0x4c);
+  neighbourYQ = *(float *)(neighbourY + 0x4c);
   coordS = *texCoord;
   neighbourXS = *(float *)(neighbourX + 0x40);
   neighbourYS = *(float *)(neighbourY + 0x40);
-  baseWidthOrDsdy = *(float *)(*(int *)(textureUnit * 4 + *sampler) + 0x120);
-  neighbourXQOrDsdx = -((coordS - neighbourXS) * (float)(DOUBLE_97c30a60 / (double)(q - neighbourXQOrDsdx)) -
-           (coordS + neighbourXS) * (float)(DOUBLE_97c30a60 / (double)(q + neighbourXQOrDsdx))) * baseWidthOrDsdy;
-  baseWidthOrDsdy = -((coordS - neighbourYS) * (float)(DOUBLE_97c30a60 / (double)(q - neighbourYQOrDsdy)) -
-           (coordS + neighbourYS) * (float)(DOUBLE_97c30a60 / (double)(q + neighbourYQOrDsdy))) * baseWidthOrDsdy;
-  gradientLengthX = _sqrt((double)(neighbourXQOrDsdx * neighbourXQOrDsdx));
-  gradientLengthY = _sqrt((double)(baseWidthOrDsdy * baseWidthOrDsdy));
+  baseWidth = *(float *)(*(int *)(textureUnit * 4 + *sampler) + 0x120);
+  dsdx = -((coordS - neighbourXS) * (float)(DOUBLE_97c30a60 / (double)(q - neighbourXQ)) -
+           (coordS + neighbourXS) * (float)(DOUBLE_97c30a60 / (double)(q + neighbourXQ))) * baseWidth;
+  dsdy = -((coordS - neighbourYS) * (float)(DOUBLE_97c30a60 / (double)(q - neighbourYQ)) -
+           (coordS + neighbourYS) * (float)(DOUBLE_97c30a60 / (double)(q + neighbourYQ))) * baseWidth;
+  gradientLengthX = _sqrt((double)(dsdx * dsdx));
+  gradientLengthY = _sqrt((double)(dsdy * dsdy));
   maxGradientLength = (float)gradientLengthY;
   if ((float)gradientLengthY < (float)gradientLengthX) {
     maxGradientLength = (float)gradientLengthX;
@@ -404,16 +409,20 @@ double _InterpreterTextureSamplerCalculateLambda1D(int *sampler,float *texCoord,
 /* _InterpreterTextureSamplerCalculateLambda2D @ 0x97bd3f4c (348 bytes) */
 double _InterpreterTextureSamplerCalculateLambda2D(int *sampler,float *texCoord,int textureUnit,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
+  float dtdy;
+  float dsdy;
+  float invQMinusY;
   float maxGradientLength;
+  float dsdx;
+  float invQPlusX;
   double lambda;
-  float invQPlusXOrDsdx;
   float invQMinusX;
   float invQPlusY;
-  float qOrInvQMinusY;
+  float q;
   float coordS;
   float coordT;
-  float baseHeightOrDtdy;
-  float baseWidthOrDsdy;
+  float baseHeight;
+  float baseWidth;
   float dtdx;
   int textureObject;
   int neighbourX;
@@ -421,28 +430,28 @@ double _InterpreterTextureSamplerCalculateLambda2D(int *sampler,float *texCoord,
   double gradientLengthX;
   double gradientLengthY;
   
-  qOrInvQMinusY = texCoord[3];
+  q = texCoord[3];
   neighbourX = textureUnit * 0x10 + sampler[3];
   neighbourY = textureUnit * 0x10 + sampler[3] + 0xc0;
   coordS = *texCoord;
   coordT = texCoord[1];
   textureObject = *(int *)(textureUnit * 4 + *sampler);
-  baseHeightOrDtdy = *(float *)(textureObject + 0x124);
-  baseWidthOrDsdy = *(float *)(textureObject + 0x120);
-  invQPlusXOrDsdx = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY + *(float *)(neighbourX + 0x4c)));
-  invQMinusX = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY - *(float *)(neighbourX + 0x4c)));
-  invQPlusY = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY + *(float *)(neighbourY + 0x4c)));
-  qOrInvQMinusY = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY - *(float *)(neighbourY + 0x4c)));
+  baseHeight = *(float *)(textureObject + 0x124);
+  baseWidth = *(float *)(textureObject + 0x120);
+  invQPlusX = (float)(DOUBLE_97c30a60 / (double)(q + *(float *)(neighbourX + 0x4c)));
+  invQMinusX = (float)(DOUBLE_97c30a60 / (double)(q - *(float *)(neighbourX + 0x4c)));
+  invQPlusY = (float)(DOUBLE_97c30a60 / (double)(q + *(float *)(neighbourY + 0x4c)));
+  invQMinusY = (float)(DOUBLE_97c30a60 / (double)(q - *(float *)(neighbourY + 0x4c)));
   dtdx = -((coordT - *(float *)(neighbourX + 0x44)) * invQMinusX -
-           (coordT + *(float *)(neighbourX + 0x44)) * invQPlusXOrDsdx) * baseHeightOrDtdy;
-  invQPlusXOrDsdx = -((coordS - *(float *)(neighbourX + 0x40)) * invQMinusX -
-           (coordS + *(float *)(neighbourX + 0x40)) * invQPlusXOrDsdx) * baseWidthOrDsdy;
-  baseWidthOrDsdy = -((coordS - *(float *)(neighbourY + 0x40)) * qOrInvQMinusY -
-           (coordS + *(float *)(neighbourY + 0x40)) * invQPlusY) * baseWidthOrDsdy;
-  baseHeightOrDtdy = -((coordT - *(float *)(neighbourY + 0x44)) * qOrInvQMinusY -
-           (coordT + *(float *)(neighbourY + 0x44)) * invQPlusY) * baseHeightOrDtdy;
-  gradientLengthX = _sqrt((double)(invQPlusXOrDsdx * invQPlusXOrDsdx + dtdx * dtdx));
-  gradientLengthY = _sqrt((double)(baseWidthOrDsdy * baseWidthOrDsdy + baseHeightOrDtdy * baseHeightOrDtdy));
+           (coordT + *(float *)(neighbourX + 0x44)) * invQPlusX) * baseHeight;
+  dsdx = -((coordS - *(float *)(neighbourX + 0x40)) * invQMinusX -
+           (coordS + *(float *)(neighbourX + 0x40)) * invQPlusX) * baseWidth;
+  dsdy = -((coordS - *(float *)(neighbourY + 0x40)) * invQMinusY -
+           (coordS + *(float *)(neighbourY + 0x40)) * invQPlusY) * baseWidth;
+  dtdy = -((coordT - *(float *)(neighbourY + 0x44)) * invQMinusY -
+           (coordT + *(float *)(neighbourY + 0x44)) * invQPlusY) * baseHeight;
+  gradientLengthX = _sqrt((double)(dsdx * dsdx + dtdx * dtdx));
+  gradientLengthY = _sqrt((double)(dsdy * dsdy + dtdy * dtdy));
   maxGradientLength = (float)gradientLengthY;
   if ((float)gradientLengthY < (float)gradientLengthX) {
     maxGradientLength = (float)gradientLengthX;
@@ -454,46 +463,50 @@ double _InterpreterTextureSamplerCalculateLambda2D(int *sampler,float *texCoord,
 /* _InterpreterTextureSamplerCalculateLambda3D @ 0x97bd40a8 (360 bytes) */
 double _InterpreterTextureSamplerCalculateLambda3D(int *sampler,float *texCoord,int textureUnit,double unusedFloatArg1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11,double unusedFloatArg12)
 {
+  float drdxSquared;
+  float invQMinusY;
+  float dsdy;
+  float dsdx;
   float maxGradientLength;
   float dtdy;
-  double lambda;
   float invQPlusX;
-  float invQMinusXOrDsdx;
-  float invQPlusYOrDsdy;
-  float qOrInvQMinusY;
+  double lambda;
+  float invQMinusX;
+  float invQPlusY;
+  float q;
   float coordS;
   float coordT;
   float dtdx;
-  float drdxOrDrdxSquared;
+  float drdx;
   int textureObject;
   int neighbourX;
   int neighbourY;
   double gradientLengthX;
   double gradientLengthY;
   
-  qOrInvQMinusY = texCoord[3];
+  q = texCoord[3];
   neighbourX = textureUnit * 0x10 + sampler[3];
   neighbourY = textureUnit * 0x10 + sampler[3] + 0xc0;
   coordS = *texCoord;
   coordT = texCoord[1];
   textureObject = *(int *)(textureUnit * 4 + *sampler);
-  invQPlusX = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY + *(float *)(neighbourX + 0x4c)));
-  invQMinusXOrDsdx = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY - *(float *)(neighbourX + 0x4c)));
-  invQPlusYOrDsdy = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY + *(float *)(neighbourY + 0x4c)));
-  qOrInvQMinusY = (float)(DOUBLE_97c30a60 / (double)(qOrInvQMinusY - *(float *)(neighbourY + 0x4c)));
-  dtdx = -((coordT - *(float *)(neighbourX + 0x44)) * invQMinusXOrDsdx -
+  invQPlusX = (float)(DOUBLE_97c30a60 / (double)(q + *(float *)(neighbourX + 0x4c)));
+  invQMinusX = (float)(DOUBLE_97c30a60 / (double)(q - *(float *)(neighbourX + 0x4c)));
+  invQPlusY = (float)(DOUBLE_97c30a60 / (double)(q + *(float *)(neighbourY + 0x4c)));
+  invQMinusY = (float)(DOUBLE_97c30a60 / (double)(q - *(float *)(neighbourY + 0x4c)));
+  dtdx = -((coordT - *(float *)(neighbourX + 0x44)) * invQMinusX -
            (coordT + *(float *)(neighbourX + 0x44)) * invQPlusX) * *(float *)(textureObject + 0x124);
-  drdxOrDrdxSquared = -((texCoord[2] - *(float *)(neighbourX + 0x48)) * invQMinusXOrDsdx -
+  drdx = -((texCoord[2] - *(float *)(neighbourX + 0x48)) * invQMinusX -
            (texCoord[2] + *(float *)(neighbourX + 0x48)) * invQPlusX) * *(float *)(textureObject + 0x128);
-  invQMinusXOrDsdx = -((coordS - *(float *)(neighbourX + 0x40)) * invQMinusXOrDsdx -
+  dsdx = -((coordS - *(float *)(neighbourX + 0x40)) * invQMinusX -
            (coordS + *(float *)(neighbourX + 0x40)) * invQPlusX) * *(float *)(textureObject + 0x120);
-  drdxOrDrdxSquared = drdxOrDrdxSquared * drdxOrDrdxSquared;
-  dtdy = -((coordT - *(float *)(neighbourY + 0x44)) * qOrInvQMinusY -
-           (coordT + *(float *)(neighbourY + 0x44)) * invQPlusYOrDsdy) * *(float *)(textureObject + 0x124);
-  invQPlusYOrDsdy = -((coordS - *(float *)(neighbourY + 0x40)) * qOrInvQMinusY -
-           (coordS + *(float *)(neighbourY + 0x40)) * invQPlusYOrDsdy) * *(float *)(textureObject + 0x120);
-  gradientLengthX = _sqrt((double)(invQMinusXOrDsdx * invQMinusXOrDsdx + dtdx * dtdx + drdxOrDrdxSquared));
-  gradientLengthY = _sqrt((double)(invQPlusYOrDsdy * invQPlusYOrDsdy + dtdy * dtdy + drdxOrDrdxSquared));
+  drdxSquared = drdx * drdx;
+  dtdy = -((coordT - *(float *)(neighbourY + 0x44)) * invQMinusY -
+           (coordT + *(float *)(neighbourY + 0x44)) * invQPlusY) * *(float *)(textureObject + 0x124);
+  dsdy = -((coordS - *(float *)(neighbourY + 0x40)) * invQMinusY -
+           (coordS + *(float *)(neighbourY + 0x40)) * invQPlusY) * *(float *)(textureObject + 0x120);
+  gradientLengthX = _sqrt((double)(dsdx * dsdx + dtdx * dtdx + drdxSquared));
+  gradientLengthY = _sqrt((double)(dsdy * dsdy + dtdy * dtdy + drdxSquared));
   maxGradientLength = (float)gradientLengthY;
   if ((float)gradientLengthY < (float)gradientLengthX) {
     maxGradientLength = (float)gradientLengthX;
@@ -826,9 +839,12 @@ LAB_97bd479c:
 /* _InterpreterTextureSamplerSampleTexel3DFromLevel @ 0x97bd4a28 (1768 bytes) */
 double _InterpreterTextureSamplerSampleTexel3DFromLevel(int *sampler,uint textureUnit,int level,float *texCoord,float *texelOut,double scratchF1,double unusedFloatArg2,double unusedFloatArg3,double unusedFloatArg4,double unusedFloatArg5,double unusedFloatArg6,double unusedFloatArg7,double unusedFloatArg8,double unusedFloatArg9,double unusedFloatArg10,double unusedFloatArg11)
 {
+  float weightHHL;
+  float scaledS;
+  float levelWidth;
   float scaledR;
   float scaledT;
-  float levelWidthOrScaledS;
+  float nearestDepthF;
   float nearestWidthF;
   int linearRecordIndex;
   int linearTexelData;
@@ -836,7 +852,6 @@ double _InterpreterTextureSamplerSampleTexel3DFromLevel(int *sampler,uint textur
   double fracR;
   float floatValue;
   float linearHeightF;
-  float nearestDepthF;
   double floorResult;
   bool isLinearFilterCode;
   float weightLHH;
@@ -844,7 +859,6 @@ double _InterpreterTextureSamplerSampleTexel3DFromLevel(int *sampler,uint textur
   float weightLLH;
   float weightHLL;
   float weightHLH;
-  float weightHHL;
   float weightHHH;
   float weightLHL;
   ushort minFilter;
@@ -969,20 +983,20 @@ LAB_97bd4b00:
   }
   if (((*(short *)(textureState + 0x10) == -0x7ed3) || (*(short *)(textureState + 0x12) == -0x7ed3)) ||
      (*(short *)(textureState + 0x14) == -0x7ed3)) {
-    levelWidthOrScaledS = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+    levelWidth = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
     linearTexelData = textureObject[level * 0x34 + 0x71];
   }
   else {
     if (((*(short *)(textureState + 0x10) != 0x2900) && (*(short *)(textureState + 0x12) != 0x2900)) &&
        (*(short *)(textureState + 0x14) != 0x2900)) {
-      levelWidthOrScaledS = *levelInfo;
+      levelWidth = *levelInfo;
       linearRecordIndex = level * 0x34 + 0x50;
       linearTexelData = textureObject[level * 0x34 + 0x70];
       linearHeightF = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x49]));
       floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x4a]));
       goto LAB_97bd4cb4;
     }
-    levelWidthOrScaledS = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
+    levelWidth = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5c]));
     linearTexelData = textureObject[level * 0x34 + 0x72];
   }
   linearRecordIndex = level * 0x34 + 100;
@@ -990,10 +1004,10 @@ LAB_97bd4b00:
   floatValue = GH_U2F((unsigned int)(textureObject[level * 0x34 + 0x5e]));
 LAB_97bd4cb4:
   textureObject = textureObject + linearRecordIndex;
-  levelWidthOrScaledS = (float)((double)(coordS * levelWidthOrScaledS) + DOUBLE_97c30a88);
+  scaledS = (float)((double)(coordS * levelWidth) + DOUBLE_97c30a88);
   scaledT = (float)((double)(coordT * linearHeightF) + DOUBLE_97c30a88);
   scaledR = (float)((double)(coordR * floatValue) + DOUBLE_97c30a88);
-  floorResult = _floor((double)levelWidthOrScaledS);
+  floorResult = _floor((double)scaledS);
   texelCoordS = (uint)(int)floorResult;
   intCastScratch = (longlong)(int)texelCoordS;
   floorResult = _floor((double)scaledT);
@@ -1005,7 +1019,7 @@ LAB_97bd4cb4:
   i2dHi1 = 0x43300000;
   i2dLo1 = texelCoordR ^ 0x80000000;
   sampleCoordT = texelCoordT;
-  fracS = (double)(levelWidthOrScaledS - (float)((double)CONCAT44(0x43300000,texelCoordS ^ 0x80000000) -
+  fracS = (double)(scaledS - (float)((double)CONCAT44(0x43300000,texelCoordS ^ 0x80000000) -
                                    DOUBLE_97c30a58));
   sampleCoordS = texelCoordS;
   fracT = (double)(scaledT - (float)((double)CONCAT44(0x43300000,texelCoordT ^ 0x80000000) -
@@ -1620,8 +1634,10 @@ double _InterpreterNoiseGeneratorInterpolatedNoise2D(int noise,float *point)
 /* _InterpreterNoiseGeneratorInterpolatedNoise3D @ 0x97bd5db8 (784 bytes) */
 double _InterpreterNoiseGeneratorInterpolatedNoise3D(int noise,float *point)
 {
+  uint permX1Y1;
+  uint cellY1;
   int permRow1;
-  uint cellY1OrPermX1Y1;
+  uint cellY;
   uint permX1Y0;
   uint cellZ;
   uint cellY0;
@@ -1629,7 +1645,6 @@ double _InterpreterNoiseGeneratorInterpolatedNoise3D(int noise,float *point)
   uint permX0Y0;
   uint cellX;
   uint permX0Y1;
-  uint cellY;
   int permRow0;
   double floorResult;
   float fracX;
@@ -1674,22 +1689,22 @@ double _InterpreterNoiseGeneratorInterpolatedNoise3D(int noise,float *point)
   fracY = point[1] - (float)((double)CONCAT44(0x43300000,cellY ^ 0x80000000) - DOUBLE_97c30a58)
   ;
   ((int (*)())_InterpreterNoiseGeneratorSmoothHermiteCurve)(noise,&fracX,&smoothX);
-  cellY1OrPermX1Y1 = cellY0 + 1 & 0xff;
+  cellY1 = cellY0 + 1 & 0xff;
   cellZ1 = cellZ + 1 & 0xff;
   permRow0 = (uint)*(byte *)(noise + (cellX & 0xff)) + noise;
   permX0Y0 = (uint)*(byte *)(permRow0 + cellY0);
-  permX0Y1 = (uint)*(byte *)(permRow0 + cellY1OrPermX1Y1);
+  permX0Y1 = (uint)*(byte *)(permRow0 + cellY1);
   lerpA0 = *(float *)(((permX0Y0 + cellZ) * 4 & 0x3fc) + noise + 0x210);
   lerpA1 = *(undefined4 *)(((permX0Y1 + cellZ) * 4 & 0x3fc) + noise + 0x210);
   lerpA2 = *(undefined4 *)(((permX0Y0 + cellZ1) * 4 & 0x3fc) + noise + 0x210);
   lerpA3 = *(undefined4 *)(((permX0Y1 + cellZ1) * 4 & 0x3fc) + noise + 0x210);
   permRow1 = (uint)*(byte *)(noise + ((cellX & 0xff) + 1 & 0xff)) + noise;
   permX1Y0 = (uint)*(byte *)(permRow1 + cellY0);
-  cellY1OrPermX1Y1 = (uint)*(byte *)(permRow1 + cellY1OrPermX1Y1);
+  permX1Y1 = (uint)*(byte *)(permRow1 + cellY1);
   lerpB0 = *(undefined4 *)(((permX1Y0 + cellZ) * 4 & 0x3fc) + noise + 0x210);
-  lerpB1 = *(undefined4 *)(((cellY1OrPermX1Y1 + cellZ) * 4 & 0x3fc) + noise + 0x210);
+  lerpB1 = *(undefined4 *)(((permX1Y1 + cellZ) * 4 & 0x3fc) + noise + 0x210);
   lerpB2 = *(float *)(((permX1Y0 + cellZ1) * 4 & 0x3fc) + noise + 0x210);
-  lerpB3 = *(float *)(((cellY1OrPermX1Y1 + cellZ1) * 4 & 0x3fc) + noise + 0x210);
+  lerpB3 = *(float *)(((permX1Y1 + cellZ1) * 4 & 0x3fc) + noise + 0x210);
   lerpWeight3 = smoothX;
   lerpWeight0 = smoothX;
   lerpWeight1 = smoothX;
@@ -1928,7 +1943,7 @@ int _InterpreterRasterOpMachine_DepthAndStencilTest(machine)
   int *machine;
 {
   bool writeMasksUnrestricted;
-  bool depthLessOrEqual;
+  bool depthOrEqualPassed;
   float fragDepth;
   uint stencilRef;
   bool stencilEnabled;
@@ -2010,7 +2025,7 @@ int _InterpreterRasterOpMachine_DepthAndStencilTest(machine)
     testPassed = (uint)(fragDepth == *depthBufferPtr);
     break;
   case 3:
-    depthLessOrEqual = fragDepth <= *depthBufferPtr;
+    depthOrEqualPassed = fragDepth <= *depthBufferPtr;
     goto LAB_97bd67ac;
   case 4:
     testPassed = (uint)(*depthBufferPtr < fragDepth);
@@ -2019,9 +2034,9 @@ int _InterpreterRasterOpMachine_DepthAndStencilTest(machine)
     testPassed = (uint)(fragDepth != *depthBufferPtr);
     break;
   case 6:
-    depthLessOrEqual = *depthBufferPtr <= fragDepth;
+    depthOrEqualPassed = *depthBufferPtr <= fragDepth;
 LAB_97bd67ac:
-    testPassed = (uint)depthLessOrEqual;
+    testPassed = (uint)depthOrEqualPassed;
     break;
   case 7:
     testPassed = 1;

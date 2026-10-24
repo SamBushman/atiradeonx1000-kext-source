@@ -168,7 +168,7 @@ local	_InterpreterRasterOpMachine_DepthAndStencilTest	bVar5	stencilEnabled	INFER
 local	_InterpreterRasterOpMachine_DepthAndStencilTest	fVar3	fragDepth	INFERRED	fragment depth read from the fragment block (+0xa38)
 local	_InterpreterRasterOpMachine_DepthAndStencilTest	pfVar14	depthBufferPtr	INFERRED	emulator+0xda8: address of the current depth sample
 local	_InterpreterRasterOpMachine_DepthAndStencilTest	pbVar8	stencilBufferPtr	INFERRED	emulator+0xdac: address of the current stencil sample
-local	_InterpreterRasterOpMachine_DepthAndStencilTest	bVar2	depthLessOrEqual	INFERRED	fragment depth <= stored depth (GL_LEQUAL) or the reverse for GL_GEQUAL
+local	_InterpreterRasterOpMachine_DepthAndStencilTest	bVar2	depthOrEqualPassed	INFERRED	result of the depth func compare in the or-equal cases: LEQUAL (frag <= buffer) and GEQUAL (buffer <= frag); one bool, shared by both branches
 local	_InterpreterRasterOpMachine_DepthAndStencilTest	uVar15	testPassed	INFERRED	result of the stencil comparison, then of the depth comparison (state+0x50 & 7: NEVER, LESS, EQUAL, LEQUAL, GREATER, NOTEQUAL, GEQUAL, ALWAYS)
 local	_InterpreterRasterOpMachineUpdateStencilBuffer	param_1	stencilOp	INFERRED	stencil operation code 0 ZERO, 1 KEEP, 2 REPLACE, 3 INCR (saturating), 4 DECR (saturating), 5 INVERT, 6 INCR_WRAP, 7 DECR_WRAP - the switch implements exactly these
 local	_InterpreterRasterOpMachineUpdateStencilBuffer	param_2	referenceValue	INFERRED	stencil reference used by REPLACE

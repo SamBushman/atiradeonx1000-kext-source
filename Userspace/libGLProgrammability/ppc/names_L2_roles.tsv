@@ -244,7 +244,6 @@ use	_InterpreterTextureSamplerSampleTexel2DFromLevel	dVar12	floorResult	INFERRED
 use	_InterpreterTextureSamplerSampleTexel2DFromLevel	fVar4	nearestHeightF	INFERRED	every definition is the result of a call whose name says it returns this	#26	+9	all	all
 use	_InterpreterTextureSamplerSampleTexel2DFromLevel	fVar5	linearHeightF	INFERRED	every definition is the result of a call whose name says it returns this	#66	+12	all	all
 use	_InterpreterTextureSamplerSampleTexel3DFromLevel	dVar15	floorResult	INFERRED	every definition is the result of a call whose name says it returns this	#89	+7	all	all
-use	_InterpreterTextureSamplerSampleTexel3DFromLevel	fVar7	nearestDepthF	INFERRED	every definition is the result of a call whose name says it returns this	#31	+11	all	all
 use	_InterpreterTextureSamplerSampleTexel3DFromLevel	fVar8	linearHeightF	INFERRED	every definition is the result of a call whose name says it returns this	#74	+8	all	all
 use	_InterpreterTextureSamplerSampleTexel3DFromLevel	fVar8	linearHeightF	INFERRED	every definition is the result of a call whose name says it returns this	#87	+0	rhs	rhs
 use	_InterpreterTextureSamplerSampleTexel3DFromLevel	fVar9	floatValue	INFERRED	every definition is the result of a call whose name says it returns this	#30	+53	all	all

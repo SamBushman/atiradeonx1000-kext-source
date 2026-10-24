@@ -34,14 +34,6 @@ use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar5	cellX	INFERRED	floor(x) 
 use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar5	permX1Y0	INFERRED	perm[perm[x+1] + y]: hash of the lattice corner	^\s*uVar5\ =\ \(uint\)\*\(byte\ \*\)\(iVar8\ \+\ uVar2\);$	+1
 use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar5	permX1Y0	INFERRED	perm[perm[x+1] + y]: hash of the lattice corner	^\s*local_40\ =\ \*\(undefined4\ \*\)\(\(\(uVar5\ \+\ uVar1\)\ \*\ 4\ \&\ 0x3fc\)\ \+\ param_1\ \+\ 0x210\);$	+1
 use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar5	permX1Y0	INFERRED	perm[perm[x+1] + y]: hash of the lattice corner	^\s*local_38\ =\ \*\(float\ \*\)\(\(\(uVar5\ \+\ uVar3\)\ \*\ 4\ \&\ 0x3fc\)\ \+\ param_1\ \+\ 0x210\);$	+1
-use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY	INFERRED	floor(y) as integer	^\s*uVar7\ =\ \(uint\)\(int\)dVar9;$	+2
-use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY	INFERRED	floor(y) as integer	^\s*uVar2\ =\ uVar7\ \&\ 0xff;$	+1
-use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY	INFERRED	floor(y) as integer	^\s*local_7c\ =\ param_2\[1\]\ \-\ \(float\)\(\(double\)CONCAT44\(0x43300000,uVar7\ \^\ 0x80000000\)\ \-\ DOUBLE_97c30a58\)$	+1
-use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY1OrPermX1Y1	INFERRED	(y+1)&0xff, then reused for perm[perm[x+1] + y+1]	^\s*uVar7\ =\ uVar2\ \+\ 1\ \&\ 0xff;$	+1
-use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY1OrPermX1Y1	INFERRED	(y+1)&0xff, then reused for perm[perm[x+1] + y+1]	^\s*uVar6\ =\ \(uint\)\*\(byte\ \*\)\(iVar8\ \+\ uVar7\);$	+1
-use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY1OrPermX1Y1	INFERRED	(y+1)&0xff, then reused for perm[perm[x+1] + y+1]	^\s*uVar7\ =\ \(uint\)\*\(byte\ \*\)\(iVar8\ \+\ uVar7\);$	+1
-use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY1OrPermX1Y1	INFERRED	(y+1)&0xff, then reused for perm[perm[x+1] + y+1]	^\s*local_3c\ =\ \*\(undefined4\ \*\)\(\(\(uVar7\ \+\ uVar1\)\ \*\ 4\ \&\ 0x3fc\)\ \+\ param_1\ \+\ 0x210\);$	+1
-use	_InterpreterNoiseGeneratorInterpolatedNoise3D	uVar7	cellY1OrPermX1Y1	INFERRED	(y+1)&0xff, then reused for perm[perm[x+1] + y+1]	^\s*local_34\ =\ \*\(float\ \*\)\(\(\(uVar7\ \+\ uVar3\)\ \*\ 4\ \&\ 0x3fc\)\ \+\ param_1\ \+\ 0x210\);$	+1
 use	_InterpreterNoiseGeneratorInterpolatedNoise3D	iVar8	permRow0	INFERRED	noise + perm[x & 0xff]: row of the permutation table for x	^\s*iVar8\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ \(uVar5\ \&\ 0xff\)\)\ \+\ param_1;$	+3
 use	_InterpreterNoiseGeneratorInterpolatedNoise3D	iVar8	permRow1	INFERRED	noise + perm[(x+1) & 0xff]	^\s*iVar8\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ \(\(uVar5\ \&\ 0xff\)\ \+\ 1\ \&\ 0xff\)\)\ \+\ param_1;$	+3
 local	_InterpreterNoiseGeneratorInterpolatedNoise2D	param_1	noise	CONFIRMED	noise generator state built by _InterpreterNoiseGeneratorInitialise: permutation bytes at +0, gradient floats at +0x210
