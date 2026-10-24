@@ -88,19 +88,9 @@ local	TIntermConstantUnion__fold	a1_08	r4In9	UNKNOWN	Ghidra input-register varia
 local	TIntermConstantUnion__fold	a1_09	r4In10	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next virtual call
 local	TIntermConstantUnion__fold	a1_10	r4In11	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next virtual call
 local	TIntermConstantUnion__fold	a1_11	r4In12	UNKNOWN	Ghidra input-register variable: r4 as left by the previous call, forwarded to the next virtual call
-local	TIntermConstantUnion__fold	uVar21	typeBitsOrLoc	INFERRED	reused across the function: TType bit-field word (basic type in bits 19-24), packed source location from getLine()/this+4, and op-0x13 (binary operator index)
-local	TIntermConstantUnion__fold	uVar10	bitsOrLine	INFERRED	reused across the function: line number (packed location & 0xffff), TType qualifier bits (& 0xfe000000), integer operand of the folded operation
-local	TIntermConstantUnion__fold	puVar8	refCountOrVtable	INFERRED	reused across the function: std::string rep refcount read by the decrement loop; TType vtable address (+8) stored into the new node
 local	TIntermConstantUnion__fold	fVar5	leftValue	INFERRED	reused across the function: left float operand (this element, or the right constant when the operands are swapped) and accumulating result
-local	TIntermConstantUnion__fold	fVar6	rightOrResultValue	INFERRED	reused across the function: right float operand and the float result (or FLT_MAX / bool encoding) stored into the result array
-local	TIntermConstantUnion__fold	bVar31	flagOrCompare	INFERRED	reused across the function: right operand is a scalar to splat, comparison result, std::string refcount still positive
 local	TIntermConstantUnion__fold	bVar1	sizeFlag	INFERRED	iVar17 == 1 / iVar17 == 0 flag on the right constant size
-local	TIntermConstantUnion__fold	iVar12	sizeOrArrayOrIndex	INFERRED	reused across the function: object size of this/param_3, getAsConstantUnion result, allocated result array, component loop index
-local	TIntermConstantUnion__fold	iVar13	resultOrOffset	INFERRED	reused across the function: allocated result array pointer, loop index, byte offset into the union array
-local	TIntermConstantUnion__fold	iVar14	countOrResult	INFERRED	reused across the function: object size, countdown, integer quotient/result of the folded operation, loop index
-local	TIntermConstantUnion__fold	iVar17	sizeOrIndex	INFERRED	reused across the function: object size (vtable +0x4c), nominal size (+0x48), loop index, constant 2/3, param_5 copy
 local	TIntermConstantUnion__fold	iVar23	columnOffset	INFERRED	reused across the function: running element offset (0, += size) and countdown of the matrix multiply
-local	TIntermConstantUnion__fold	iVar28	sizeOrLoopIndex	INFERRED	reused across the function: object size (vtable +0x4c/+0x58), per-case loop index, byte offset (index << 2), integer quotient
 local	TIntermConstantUnion__fold	iVar33	columnsLeft	INFERRED	countdown (starts as the size, += -1) of the matrix multiply
 local	TIntermConstantUnion__fold	local_140	rightTypeOverlay	INFERRED	address-taken frame array: the stack TType temporary and the std::string rep for the location text occupy the same slot in different lifetimes
 local	TIntermConstantUnion__fold	aaStack_130	locTextBuf	INFERRED	char buffer of the "%d:%d" / "%d:? " sprintf of the source location (16 bytes), then the std::string text

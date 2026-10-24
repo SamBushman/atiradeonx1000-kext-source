@@ -473,3 +473,772 @@ use	TIntermConstantUnion__fold	uVar25	rightFirstComponent	INFERRED	first compone
 use	TIntermConstantUnion__fold	uVar25	rightFirstComponent	INFERRED	first component of the right operand union array (**(uint**)(+0x30))	^\s*if\ \(\(int\)uVar10\ <=\ \(int\)uVar25\)\ goto\ LAB_97b94b68;$	+1
 use	TIntermConstantUnion__fold	uVar25	rightFirstComponent	INFERRED	first component of the right operand union array (**(uint**)(+0x30))	^\s*if\ \(\(int\)uVar25\ <\ \(int\)uVar10\)\ goto\ LAB_97b94b68;$	+1
 use	TIntermConstantUnion__fold	uVar25	rightFirstComponent	INFERRED	first component of the right operand union array (**(uint**)(+0x30))	^\s*if\ \(\(int\)uVar10\ <\ \(int\)uVar25\)\ goto\ LAB_97b94b68;$	+1
+use	TIntermConstantUnion__fold	bVar31	canFold	INFERRED	fold precondition flag, set when operand types allow the fold	^\s*bVar31\ =\ false;$	+1
+use	TIntermConstantUnion__fold	bVar31	canFold	INFERRED	fold precondition flag, set when operand types allow the fold	^\s*bVar31\ =\ true;$	+1
+use	TIntermConstantUnion__fold	bVar31	canFold	INFERRED	fold precondition flag, set when operand types allow the fold	^\s*if\ \(!bVar31\)\ goto\ LAB_97b92a7c;$	+1
+use	TIntermConstantUnion__fold	bVar31	canFold	INFERRED	fold precondition flag, set when operand types allow the fold	^\s*bVar31\ =\ false;$@2	+1
+use	TIntermConstantUnion__fold	bVar31	canFold	INFERRED	fold precondition flag, set when operand types allow the fold	^\s*bVar31\ =\ true;$@2	+1
+use	TIntermConstantUnion__fold	bVar31	canFold	INFERRED	fold precondition flag, set when operand types allow the fold	^\s*\*puVar15\ =\ \(uint\)!bVar31;$	+1
+use	TIntermConstantUnion__fold	bVar31	canFold	INFERRED	fold precondition flag, set when operand types allow the fold	^\s*bVar31\ =\ false;$@3	+1
+use	TIntermConstantUnion__fold	bVar31	canFold	INFERRED	fold precondition flag, set when operand types allow the fold	^\s*bVar31\ =\ true;$@3	+1
+use	TIntermConstantUnion__fold	bVar31	canFold	INFERRED	fold precondition flag, set when operand types allow the fold	^\s*if\ \(!bVar31\)\ \{$	+1
+use	TIntermConstantUnion__fold	bVar31	canFold	INFERRED	fold precondition flag, set when operand types allow the fold	^\s*bVar31\ =\ false;$@4	+1
+use	TIntermConstantUnion__fold	bVar31	canFold	INFERRED	fold precondition flag, set when operand types allow the fold	^\s*bVar31\ =\ \(local_11c\ >>\ 0x13\ \&\ 0x3f\)\ !=\ 0xe;$	+1
+use	TIntermConstantUnion__fold	bVar31	canFold	INFERRED	fold precondition flag, set when operand types allow the fold	^\s*if\ \(!bVar31\)\ \{$@2	+1
+use	TIntermConstantUnion__fold	bVar31	refCountPositive	INFERRED	std::string refcount > 0 test	^\s*bVar31\ =\ 0\ <\ \(int\)puVar8;$	+1
+use	TIntermConstantUnion__fold	bVar31	refCountPositive	INFERRED	std::string refcount > 0 test	^\s*bVar31\ =\ 0\ <\ \(int\)puVar8;$@2	+1
+use	TIntermConstantUnion__fold	bVar31	refCountPositive	INFERRED	std::string refcount > 0 test	^\s*bVar31\ =\ 0\ <\ \(int\)puVar8;$@3	+1
+use	TIntermConstantUnion__fold	bVar31	refCountPositive	INFERRED	std::string refcount > 0 test	^\s*if\ \(!bVar31\)\ goto\ code_r0x97b95524;$	+1
+use	TIntermConstantUnion__fold	bVar31	equalityResult	INFERRED	compared components equal	^\s*bVar31\ =\ uVar21\ ==\ uVar10;$	+1
+use	TIntermConstantUnion__fold	bVar31	equalityResult	INFERRED	compared components equal	^\s*\*pfVar26\ =\ GH_U2F\(\(unsigned\ int\)\(\(1\ \-\ \(uint\)bVar31\)\)\);$	+1
+use	TIntermConstantUnion__fold	bVar31	equalityResult	INFERRED	compared components equal	^\s*bVar31\ =\ uVar21\ ==\ 0;$	+1
+use	TIntermConstantUnion__fold	bVar31	lessEqualResult	INFERRED	float <= compare result	^\s*bVar31\ =\ fVar5\ <=\ fVar6;$	+1
+use	TIntermConstantUnion__fold	bVar31	lessEqualResult	INFERRED	float <= compare result	^\s*bVar31\ =\ fVar6\ <=\ fVar5;$	+1
+use	TIntermConstantUnion__fold	bVar31	lessEqualResult	INFERRED	float <= compare result	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uint\)bVar31\)\);$	+1
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*uVar10\ =\ local_1ac\ \&\ 0xfe000000;$	+2
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*puVar11\[0xb\]\ =\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x7ffff;$	+1
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*puVar11\[0xb\]\ =\ uVar21\ \|\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x7ff;$	+1
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*puVar11\[0xb\]\ =\ uVar3\ \|\ uVar21\ \|\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x3ff;$	+1
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*puVar11\[0xb\]\ =\ \(local_1ac\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|\ uVar3\ \|\ uVar21\ \|\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x1ff;$	+1
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*uVar10\ =\ uVar21\ \&\ 0xfe000000;$	+2
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*puVar11\[0xb\]\ =\ uVar21\ \|\ uVar10\ \|\ uVar25\ \&\ 0x7ffff;$	+3
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*puVar11\[0xb\]\ =\ uVar21\ \|\ uVar10\ \|\ uVar25\ \&\ 0x1ff\ \|\ 0x800;$	+1
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*uVar10\ =\ local_17c\ \&\ 0xfe000000;$	+2
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x7ffff;$	+1
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x7ff;$	+1
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar3\ \|\ uVar21\ \|\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x3ff;$	+1
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*\(local_17c\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|\ uVar3\ \|\ uVar21\ \|\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x1ff;$	+1
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*uVar10\ =\ local_14c\ \&\ 0xfe000000;$	+2
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x7ffff;$@2	+1
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x7ff;$@2	+1
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar3\ \|\ uVar21\ \|\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x3ff;$@2	+1
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*\(local_14c\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|\ uVar3\ \|\ uVar21\ \|\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x1ff;$	+1
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*uVar10\ =\ uVar21\ \&\ 0xfe000000;$@2	+2
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar10\ \|\ uVar25\ \&\ 0x7ffff;$	+3
+use	TIntermConstantUnion__fold	uVar10	qualifierBits	INFERRED	qualifier field in place (bits 31..25) of the type bits	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar10\ \|\ uVar25\ \&\ 0x1ff\ \|\ 0x800;$	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_1c0,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@2	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@3	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@2	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@4	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@3	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@5	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@4	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@6	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@5	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@7	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)local_140,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@8	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@6	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@9	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@10	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@2	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@11	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@3	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@12	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@4	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@13	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@5	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@14	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@6	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@15	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@7	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@16	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@8	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@17	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)aaStack_130,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@18	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(acStack_d0,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@19	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_100,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@20	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(\(char\ \*\)\&local_100,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@2	+1
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@21	+3
+use	TIntermConstantUnion__fold	uVar10	sourceLine	INFERRED	line number half of the source location word	^\s*_sprintf\(acStack_90,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar10	foldNodeBits	INFERRED	bit-field word (+0x2c) of the new node	^\s*uVar10\ =\ \*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\);$	+2
+use	TIntermConstantUnion__fold	uVar10	foldNodeBits	INFERRED	bit-field word (+0x2c) of the new node	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar10\ \&\ 0x7ffff\ \|\ 0x4000000;$	+3
+use	TIntermConstantUnion__fold	uVar10	foldNodeBits	INFERRED	bit-field word (+0x2c) of the new node	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar10\ \&\ 0x1ff\ \|\ 0x4000000\ \|\ 0x800;$	+1
+use	TIntermConstantUnion__fold	uVar10	foldNodeBits	INFERRED	bit-field word (+0x2c) of the new node	^\s*uVar10\ =\ \*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\);$@2	+2
+use	TIntermConstantUnion__fold	uVar10	foldNodeBits	INFERRED	bit-field word (+0x2c) of the new node	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar10\ \&\ 0x7ffff\ \|\ 0x4000000;$@2	+3
+use	TIntermConstantUnion__fold	uVar10	foldNodeBits	INFERRED	bit-field word (+0x2c) of the new node	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar10\ \&\ 0x1ff\ \|\ 0x4000000\ \|\ 0x800;$@2	+1
+use	TIntermConstantUnion__fold	uVar10	foldNodeBits	INFERRED	bit-field word (+0x2c) of the new node	^\s*uVar10\ =\ \*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\);$@3	+2
+use	TIntermConstantUnion__fold	uVar10	foldNodeBits	INFERRED	bit-field word (+0x2c) of the new node	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar10\ \&\ 0x7ffff\ \|\ 0x4000000;$@3	+3
+use	TIntermConstantUnion__fold	uVar10	foldNodeBits	INFERRED	bit-field word (+0x2c) of the new node	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar10\ \&\ 0x1ff\ \|\ 0x4000000\ \|\ 0x800;$@3	+1
+use	TIntermConstantUnion__fold	uVar10	foldNodeBits	INFERRED	bit-field word (+0x2c) of the new node	^\s*uVar10\ =\ \*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\);$@4	+2
+use	TIntermConstantUnion__fold	uVar10	foldNodeBits	INFERRED	bit-field word (+0x2c) of the new node	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar10\ \&\ 0x7ffff\ \|\ 0x4000000;$@4	+3
+use	TIntermConstantUnion__fold	uVar10	foldNodeBits	INFERRED	bit-field word (+0x2c) of the new node	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar10\ \&\ 0x1ff\ \|\ 0x4000000\ \|\ 0x800;$@4	+1
+use	TIntermConstantUnion__fold	uVar10	rightFirstValue	INFERRED	first component of the right operand union array	^\s*uVar10\ =\ \*\*\(uint\ \*\*\)\(iVar17\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	uVar10	rightFirstValue	INFERRED	first component of the right operand union array	^\s*bVar31\ =\ uVar21\ ==\ uVar10;$	+1
+use	TIntermConstantUnion__fold	uVar10	rightFirstValue	INFERRED	first component of the right operand union array	^\s*uVar21\ =\ uVar21\ \|\ uVar10;$	+1
+use	TIntermConstantUnion__fold	uVar10	rightFirstValue	INFERRED	first component of the right operand union array	^\s*uVar21\ =\ uVar21\ \&\ uVar10;$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*uVar10\ =\ \*\*\(uint\ \*\*\)\(this\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ \+\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ \-\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ \*\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*\(this,uVar21,pTVar18,a3,iVar17,param_6,uVar21\ \*\ 4,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(int\)uVar10\ /\ \(int\)uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ \-\ \(\(int\)uVar10\ /\ \(int\)uVar25\)\ \*\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(int\)uVar10\ >>\ \(uVar25\ \&\ 0x3f\)\)\)\);$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ <<\ \(uVar25\ \&\ 0x3f\)\)\)\);$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ \&\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ \|\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ \^\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uint\)\(uVar10\ ==\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*\*pfVar26\ =\ GH_U2F\(\(unsigned\ int\)\(\(uint\)\(uVar10\ !=\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*if\ \(\(int\)uVar25\ <=\ \(int\)uVar10\)\ \{$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*if\ \(\(int\)uVar10\ <=\ \(int\)uVar25\)\ goto\ LAB_97b94b68;$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*if\ \(\(int\)uVar25\ <\ \(int\)uVar10\)\ goto\ LAB_97b94b68;$	+1
+use	TIntermConstantUnion__fold	uVar10	thisFirstComponent	INFERRED	first component of this union array	^\s*if\ \(\(int\)uVar10\ <\ \(int\)uVar25\)\ goto\ LAB_97b94b68;$	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*puVar8\ =\ PTR_vtable_a7b7c0c8;$	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*\*puVar11\ =\ puVar8\ \+\ 8;$	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*puVar8\ =\ PTR_vtable_a7b7c0c8;$@2	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*\*puVar11\ =\ puVar8\ \+\ 8;$@2	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*puVar8\ =\ PTR_vtable_a7b7c0c8;$@3	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*\*\(undefined\ \*\*\)pTVar18\ =\ puVar8\ \+\ 8;$	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*puVar8\ =\ PTR_vtable_a7b7c0c8;$@4	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*\*\(undefined\ \*\*\)pTVar18\ =\ puVar8\ \+\ 8;$@2	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*puVar8\ =\ PTR_vtable_a7b7c0c8;$@5	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*\*\(undefined\ \*\*\)pTVar18\ =\ puVar8\ \+\ 8;$@3	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*puVar8\ =\ PTR_vtable_a7b7c0c8;$@6	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*\*\(undefined\ \*\*\)pTVar18\ =\ puVar8\ \+\ 8;$@4	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*puVar8\ =\ PTR_vtable_a7b7c0c8;$@7	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*\*\(undefined\ \*\*\)pTVar18\ =\ puVar8\ \+\ 8;$@5	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*puVar8\ =\ PTR_vtable_a7b7c0c8;$@8	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*\*\(undefined\ \*\*\)pTVar18\ =\ puVar8\ \+\ 8;$@6	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*puVar8\ =\ PTR_vtable_a7b7c0c8;$@9	+1
+use	TIntermConstantUnion__fold	puVar8	constUnionVtable	INFERRED	vtable words loaded for the new TIntermConstantUnion (+8 stored as vptr)	^\s*\*\(undefined\ \*\*\)pTVar18\ =\ puVar8\ \+\ 8;$@7	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar4;$	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar4\);$	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar4;$@2	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar4\);$@2	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@6	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@6	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*bVar31\ =\ 0\ <\ \(int\)puVar8;$	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@2	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@2	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@2	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@3	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@3	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@3	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@4	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@4	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@4	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@5	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@5	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@5	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@7	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@7	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*bVar31\ =\ 0\ <\ \(int\)puVar8;$@2	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@8	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@8	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@6	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@9	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@9	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@7	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar4;$@3	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar4\);$@3	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*bVar31\ =\ 0\ <\ \(int\)puVar8;$@3	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@10	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@10	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@8	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@11	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@11	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@9	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar8\ =\ \*ppuVar29;$@12	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*puVar2\ =\ \(undefined\ \*\)storeWordConditionalIndexed\(puVar8\ \+\ \-1,0,ppuVar29\);$@12	+1
+use	TIntermConstantUnion__fold	puVar8	oldRefCount	INFERRED	std::string _Rep refcount read before the atomic decrement	^\s*if\ \(\(int\)puVar8\ <\ 1\)\ \{$@10	+1
+use	TIntermConstantUnion__fold	puVar8	typeVtable	INFERRED	TType vtable pointer	^\s*puVar8\ =\ \&TType__vtable;$	+1
+use	TIntermConstantUnion__fold	puVar8	typeVtable	INFERRED	TType vtable pointer	^\s*puVar8\ =\ \(undefined\ \*\)\(local_4c\ \-\ 0x4744\);$	+1
+use	TIntermConstantUnion__fold	puVar8	typeVtable	INFERRED	TType vtable pointer	^\s*local_170\ =\ \(undefined\ \*\*\)\(puVar8\ \+\ 8\);$	+1
+use	TIntermConstantUnion__fold	iVar12	componentIndex	INFERRED	component loop index	^\s*iVar12\ =\ 0;$	+1
+use	TIntermConstantUnion__fold	iVar12	componentIndex	INFERRED	component loop index	^\s*for\ \(;\ iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\),\ iVar12\ <\ iVar17;\ iVar12\ =\ iVar12\ \+\ 1$	+2
+use	TIntermConstantUnion__fold	iVar12	componentIndex	INFERRED	component loop index	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\-\*\(int\ \*\)\(pcVar27\ \+\ iVar12\ \*\ 4\)\)\);$	+1
+use	TIntermConstantUnion__fold	iVar12	componentIndex	INFERRED	component loop index	^\s*pfVar26\[iVar12\]\ =\ \-\*\(float\ \*\)\(pcVar27\ \+\ iVar12\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar12	componentIndex	INFERRED	component loop index	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\*\(uint\ \*\)\(pcVar27\ \+\ iVar12\ \*\ 4\)\ \^\ 1\)\)\);$	+1
+use	TIntermConstantUnion__fold	iVar12	componentIndex	INFERRED	component loop index	^\s*pfVar26\[iVar12\]\ =\ fVar6;$	+1
+use	TIntermConstantUnion__fold	iVar12	componentIndex	INFERRED	component loop index	^\s*for\ \(iVar12\ =\ 0;$	+5
+use	TIntermConstantUnion__fold	iVar12	componentIndex	INFERRED	component loop index	^\s*for\ \(iVar12\ =\ 0;$@2	+6
+use	TIntermConstantUnion__fold	iVar12	componentIndex	INFERRED	component loop index	^\s*for\ \(iVar12\ =\ 0;$@3	+5
+use	TIntermConstantUnion__fold	iVar12	componentIndex	INFERRED	component loop index	^\s*for\ \(iVar12\ =\ 0;$@4	+5
+use	TIntermConstantUnion__fold	iVar12	componentIndex	INFERRED	component loop index	^\s*for\ \(iVar12\ =\ 0;$@5	+5
+use	TIntermConstantUnion__fold	iVar12	componentIndex	INFERRED	component loop index	^\s*for\ \(iVar12\ =\ 0;$@6	+5
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_3\ \+\ 0x18\)\)\(param_3\);$@2	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*\*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ \+\ \*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*\*\(float\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ \+\ \*\*\(float\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*fVar5\ =\ \*\*\(float\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*fVar6\ =\ \*\*\(float\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*iVar14\ =\ \*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\)\ \-\ \*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*iVar14\ =\ \*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ \-\ \*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*fVar6\ =\ \*\*\(float\ \*\*\)\(iVar12\ \+\ 0x30\)\ /\ \*\(float\ \*\)\(pcVar27\ \+\ iVar17\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*if\ \(\*\*\(float\ \*\*\)\(iVar12\ \+\ 0x30\)\ ==\ 0\.0\)\ \{$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*fVar6\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar28\)\ /\ \*\*\(float\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*iVar28\ =\ \*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\)\ /\ \*\(int\ \*\)\(pcVar27\ \+\ iVar17\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*if\ \(\*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\)\ ==\ 0\)\ \{$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*iVar14\ =\ \*\(int\ \*\)\(pcVar27\ \+\ iVar28\)\ /\ \*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*\*\(float\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ \*\ \*\*\(float\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*\*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ \*\ \*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*if\ \(\(\*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ !=\ 0\)\ \|\|\ \(\*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\)\ !=\ 0\)\)\ \{$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*uVar21\ =\ \*\(uint\ \*\)\(pcVar27\ \+\ iVar14\ \*\ 4\)\ \^\ \*\*\(uint\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*if\ \(\(\*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ !=\ 0\)\ \&\&\ \(\*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\)\ !=\ 0\)\)\ \{$	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_3\ \+\ 0x18\)\)\(param_3\);$@3	+2
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_3\ \+\ 0x18\)\)\(param_3\);$@4	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*fVar6\ =\ \*\*\(float\ \*\*\)\(iVar12\ \+\ 0x30\);$@2	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_3\ \+\ 0x18\)\)\(param_3\);$@5	+1
+use	TIntermConstantUnion__fold	iVar12	rightUnionNode	INFERRED	right operand getAsConstantUnion() (vtable +0x18)	^\s*uVar25\ =\ \*\*\(uint\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	iVar12	sizeQuery	INFERRED	getSize() result (vtable +0x4c)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\);$	+1
+use	TIntermConstantUnion__fold	iVar12	sizeQuery	INFERRED	getSize() result (vtable +0x4c)	^\s*if\ \(iVar12\ <\ 2\)\ \{$	+1
+use	TIntermConstantUnion__fold	iVar12	sizeQuery	INFERRED	getSize() result (vtable +0x4c)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar21,pTVar18,a3,iVar17,param_6,iVar28\);$	+1
+use	TIntermConstantUnion__fold	iVar12	sizeQuery	INFERRED	getSize() result (vtable +0x4c)	^\s*uVar34\ =\ TPoolAllocator__allocate\(pTVar16,iVar12\ <<\ 2\);$	+1
+use	TIntermConstantUnion__fold	iVar12	sizeQuery	INFERRED	getSize() result (vtable +0x4c)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\);$@2	+1
+use	TIntermConstantUnion__fold	iVar12	sizeQuery	INFERRED	getSize() result (vtable +0x4c)	^\s*uVar34\ =\ TPoolAllocator__allocate\(pTVar16,iVar12\ <<\ 2\);$@2	+1
+use	TIntermConstantUnion__fold	iVar12	sizeQuery	INFERRED	getSize() result (vtable +0x4c)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\);$@3	+1
+use	TIntermConstantUnion__fold	iVar12	sizeQuery	INFERRED	getSize() result (vtable +0x4c)	^\s*uVar34\ =\ TPoolAllocator__allocate\(pTVar16,iVar12\ <<\ 2\);$@3	+1
+use	TIntermConstantUnion__fold	iVar12	sizeQuery	INFERRED	getSize() result (vtable +0x4c)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\);$@4	+1
+use	TIntermConstantUnion__fold	iVar12	sizeQuery	INFERRED	getSize() result (vtable +0x4c)	^\s*uVar34\ =\ TPoolAllocator__allocate\(pTVar16,iVar12\ <<\ 2\);$@4	+1
+use	TIntermConstantUnion__fold	iVar12	sizeQuery	INFERRED	getSize() result (vtable +0x4c)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\);$@6	+2
+use	TIntermConstantUnion__fold	iVar12	sizeQuery	INFERRED	getSize() result (vtable +0x4c)	^\s*if\ \(\(\(local_14c\ >>\ 0x13\ \&\ 0x3f\)\ !=\ 0xe\)\ \&\&$	+2
+use	TIntermConstantUnion__fold	iVar12	sizeQuery	INFERRED	getSize() result (vtable +0x4c) of the right/this operand	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_3\ \+\ 0x18\)\)\(param_3\);$	+2
+use	TIntermConstantUnion__fold	iVar12	sizeQuery	INFERRED	getSize() result (vtable +0x4c) of the right/this operand	^\s*if\ \(\(\(local_1ac\ >>\ 0x13\ \&\ 0x3f\)\ !=\ 0xe\)\ \&\&$	+2
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*iVar12\ =\ 0;$@2	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*iVar12\ =\ \(int\)\(\(ulonglong\)uVar34\ >>\ 0x20\);$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(int\ \*\)\(iVar12\ \+\ iVar28\ \*\ 4\)\ =\ \*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ \+\ \(int\)GH_F2U\(pfVar26\[iVar28\]\);$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(float\ \*\)\(iVar12\ \+\ iVar28\ \*\ 4\)\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ \+\ pfVar26\[iVar28\];$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*iVar12\ =\ \(int\)\(\(ulonglong\)uVar34\ >>\ 0x20\);$@2	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(float\ \*\)\(iVar12\ \+\ iVar28\ \*\ 4\)\ =\ fVar6\ \-\ fVar5;$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(int\ \*\)\(iVar12\ \+\ iVar28\ \*\ 4\)\ =\ \(int\)GH_F2U\(fVar6\)\ \-\ \(int\)GH_F2U\(fVar5\);$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*iVar12\ =\ TPoolAllocator__allocate\(pTVar16,iVar28\ <<\ 2\);$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(float\ \*\)\(iVar12\ \+\ iVar13\ \*\ 4\)\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar13\ \*\ 4\)\ \*\ pfVar26\[iVar13\];$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(int\ \*\)\(iVar12\ \+\ iVar13\ \*\ 4\)\ =\ \*\(int\ \*\)\(pcVar27\ \+\ iVar13\ \*\ 4\)\ \*\ \(int\)GH_F2U\(pfVar26\[iVar13\]\);$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*iVar12\ =\ TPoolAllocator__allocate\(pTVar16,iVar17\ <<\ 2\);$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(int\ \*\)\(iVar17\ \*\ 4\ \+\ iVar12\)\ =\ iVar28;$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(float\ \*\)\(iVar17\ \*\ 4\ \+\ iVar12\)\ =\ fVar5;$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*iVar12\ =\ TPoolAllocator__allocate\(pTVar16,iVar17\ <<\ 2\);$@2	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(undefined4\ \*\)\(iVar14\ \+\ iVar12\)\ =\ 0;$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(float\ \*\)\(iVar14\ \+\ iVar12\)\ =\ fVar6\ \*\ fVar5\ \+\ \*\(float\ \*\)\(iVar14\ \+\ iVar12\);$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*iVar12\ =\ TPoolAllocator__allocate\(pTVar16,iVar17\ <<\ 2\);$@3	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ iVar12\)\ =\ 0;$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(float\ \*\)\(iVar13\ \+\ iVar12\)\ =\ fVar6\ \*\ fVar5\ \+\ \*\(float\ \*\)\(iVar13\ \+\ iVar12\);$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*iVar12\ =\ \(int\)\(\(ulonglong\)uVar34\ >>\ 0x20\);$@3	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(undefined4\ \*\)\(iVar28\ \*\ 4\ \+\ iVar12\)\ =\ uVar19;$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*iVar12\ =\ \(int\)\(\(ulonglong\)uVar34\ >>\ 0x20\);$@4	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(uint\ \*\)\(iVar28\ \+\ iVar12\)\ =\ \(uint\)\(\*\(float\ \*\)\(pcVar27\ \+\ iVar28\)\ !=\ pfVar26\[iVar13\]\);$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\);$@5	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*iVar12\ =\ TPoolAllocator__allocate\(pTVar16,iVar12\ <<\ 2\);$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(undefined4\ \*\)\(iVar28\ \*\ 4\ \+\ iVar12\)\ =\ uVar19;$@2	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*iVar12\ =\ TPoolAllocator__allocate\(pTVar16,iVar17\ \*\ iVar17\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ iVar12\)\ =\ 0;$@2	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(float\ \*\)\(iVar12\ \+\ iVar13\)\ =\ fVar6\ \*\ fVar5\ \+\ \*\(float\ \*\)\(iVar12\ \+\ iVar13\);$	+1
+use	TIntermConstantUnion__fold	iVar12	allocatedArray	INFERRED	array pointer from the allocator result pair (initial 0 in the same web)	^\s*\*\(int\ \*\)\(pTVar18\ \+\ 0x30\)\ =\ iVar12;$	+1
+use	TIntermConstantUnion__fold	iVar13	elementCount	INFERRED	this->getSize() element count	^\s*for\ \(iVar28\ =\ 0;\ iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar19\),\ iVar28\ <\ iVar13;$	+2
+use	TIntermConstantUnion__fold	iVar13	elementCount	INFERRED	this->getSize() element count	^\s*for\ \(iVar28\ =\ 0;\ iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar19\),\ iVar28\ <\ iVar13;$@2	+2
+use	TIntermConstantUnion__fold	iVar13	elementCount	INFERRED	this->getSize() element count	^\s*for\ \(iVar28\ =\ 0;\ iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar19\),\ iVar28\ <\ iVar13;$@3	+2
+use	TIntermConstantUnion__fold	iVar13	elementCount	INFERRED	this->getSize() element count	^\s*for\ \(iVar28\ =\ 0;\ iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\),\ iVar28\ <\ iVar13;$	+2
+use	TIntermConstantUnion__fold	iVar13	elementCount	INFERRED	this->getSize() element count	^\s*iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\);$	+1
+use	TIntermConstantUnion__fold	iVar13	elementCount	INFERRED	this->getSize() element count	^\s*uVar34\ =\ TPoolAllocator__allocate\(pTVar16,iVar13\ <<\ 2\);$	+1
+use	TIntermConstantUnion__fold	iVar13	scanIndex	INFERRED	component scan index / cursor offset	^\s*iVar13\ =\ 0;$	+1
+use	TIntermConstantUnion__fold	iVar13	scanIndex	INFERRED	component scan index / cursor offset	^\s*\*\(float\ \*\)\(iVar12\ \+\ iVar13\ \*\ 4\)\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar13\ \*\ 4\)\ \*\ pfVar26\[iVar13\];$	+1
+use	TIntermConstantUnion__fold	iVar13	scanIndex	INFERRED	component scan index / cursor offset	^\s*\*\(int\ \*\)\(iVar12\ \+\ iVar13\ \*\ 4\)\ =\ \*\(int\ \*\)\(pcVar27\ \+\ iVar13\ \*\ 4\)\ \*\ \(int\)GH_F2U\(pfVar26\[iVar13\]\);$	+1
+use	TIntermConstantUnion__fold	iVar13	scanIndex	INFERRED	component scan index / cursor offset	^\s*iVar13\ =\ iVar13\ \+\ 1;$	+2
+use	TIntermConstantUnion__fold	iVar13	scanIndex	INFERRED	component scan index / cursor offset	^\s*iVar13\ =\ 0;$@2	+1
+use	TIntermConstantUnion__fold	iVar13	scanIndex	INFERRED	component scan index / cursor offset	^\s*pfVar24\ =\ pfVar26\ \+\ iVar13;$	+1
+use	TIntermConstantUnion__fold	iVar13	scanIndex	INFERRED	component scan index / cursor offset	^\s*iVar13\ =\ iVar13\ \+\ iVar17;$	+1
+use	TIntermConstantUnion__fold	iVar13	scanIndex	INFERRED	component scan index / cursor offset	^\s*iVar13\ =\ 0;$@3	+1
+use	TIntermConstantUnion__fold	iVar13	scanIndex	INFERRED	component scan index / cursor offset	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ iVar12\)\ =\ 0;$	+1
+use	TIntermConstantUnion__fold	iVar13	scanIndex	INFERRED	component scan index / cursor offset	^\s*pcVar9\ =\ pcVar27\ \+\ iVar13;$	+1
+use	TIntermConstantUnion__fold	iVar13	scanIndex	INFERRED	component scan index / cursor offset	^\s*\*\(float\ \*\)\(iVar13\ \+\ iVar12\)\ =\ fVar6\ \*\ fVar5\ \+\ \*\(float\ \*\)\(iVar13\ \+\ iVar12\);$	+1
+use	TIntermConstantUnion__fold	iVar13	scanIndex	INFERRED	component scan index / cursor offset	^\s*iVar13\ =\ iVar13\ \+\ 4;$	+1
+use	TIntermConstantUnion__fold	iVar13	scanIndex	INFERRED	component scan index / cursor offset	^\s*for\ \(iVar13\ =\ 0;$	+3
+use	TIntermConstantUnion__fold	iVar13	scanIndex	INFERRED	component scan index / cursor offset	^\s*iVar28\ =\ iVar13\ \*\ 4;$	+2
+use	TIntermConstantUnion__fold	iVar13	byteOffset	INFERRED	byte offset into the component array	^\s*iVar13\ =\ iVar28\ \*\ 4;$	+1
+use	TIntermConstantUnion__fold	iVar13	byteOffset	INFERRED	byte offset into the component array	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ iVar12\)\ =\ 0;$@2	+1
+use	TIntermConstantUnion__fold	iVar13	byteOffset	INFERRED	byte offset into the component array	^\s*\*\(float\ \*\)\(iVar12\ \+\ iVar13\)\ =\ fVar6\ \*\ fVar5\ \+\ \*\(float\ \*\)\(iVar12\ \+\ iVar13\);$	+1
+use	TIntermConstantUnion__fold	iVar13	byteOffset	INFERRED	byte offset into the component array	^\s*iVar13\ =\ iVar13\ \+\ iVar17\ \*\ 4;$	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*iVar13\ =\ TPoolAllocator__allocate\(pTVar16,iVar28\ <<\ 2\);$	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*\*\(int\ \*\)\(iVar28\ \*\ 4\ \+\ iVar13\)\ =$	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*\*\(float\ \*\)\(iVar13\ \+\ iVar28\ \*\ 4\)\ =$	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*iVar13\ =\ TPoolAllocator__allocate\(pTVar16,iVar28\ <<\ 2\);$@2	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*\*\(float\ \*\)\(iVar13\ \+\ iVar28\ \*\ 4\)\ =\ fVar5\ \-\ fVar6;$	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*\*\(int\ \*\)\(iVar28\ \*\ 4\ \+\ iVar13\)\ =\ iVar14;$	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*iVar13\ =\ TPoolAllocator__allocate\(pTVar16,iVar17\ <<\ 2\);$	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*\*\(float\ \*\)\(iVar17\ \*\ 4\ \+\ iVar13\)\ =\ fVar6;$	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*\*\(float\ \*\)\(iVar13\ \+\ iVar28\)\ =\ fVar6;$	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*\*\(int\ \*\)\(iVar17\ \*\ 4\ \+\ iVar13\)\ =\ iVar28;$	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*\*\(int\ \*\)\(iVar28\ \+\ iVar13\)\ =\ iVar14;$	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*iVar13\ =\ \(int\)\(\(ulonglong\)uVar34\ >>\ 0x20\);$	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*\*\(float\ \*\)\(iVar13\ \+\ iVar28\ \*\ 4\)\ =$@2	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*\*\(int\ \*\)\(iVar28\ \*\ 4\ \+\ iVar13\)\ =$@2	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*iVar13\ =\ \(int\)\(\(ulonglong\)uVar34\ >>\ 0x20\);$@2	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*\*\(undefined4\ \*\)\(iVar28\ \*\ 4\ \+\ iVar13\)\ =\ uVar19;$	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*iVar13\ =\ \(int\)\(\(ulonglong\)uVar34\ >>\ 0x20\);$@3	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*\*\(uint\ \*\)\(iVar14\ \*\ 4\ \+\ iVar13\)\ =\ uVar21\ \-\ \(iVar28\ \+\ \(uint\)\(uVar21\ ==\ 0\)\);$	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*iVar13\ =\ TPoolAllocator__allocate\(pTVar16,iVar28\ <<\ 2\);$@3	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*\*\(undefined4\ \*\)\(iVar28\ \*\ 4\ \+\ iVar13\)\ =\ uVar19;$@2	+1
+use	TIntermConstantUnion__fold	iVar13	newComponentArray	INFERRED	pool-allocated array pointer	^\s*\*\(int\ \*\)\(pTVar18\ \+\ 0x30\)\ =\ iVar13;$	+1
+use	TIntermConstantUnion__fold	iVar14	minValue	INFERRED	integer min/divide/sub reduction accumulator	^\s*iVar14\ =\ 0x7fffffff;$	+1
+use	TIntermConstantUnion__fold	iVar14	minValue	INFERRED	integer min/divide/sub reduction accumulator	^\s*iVar14\ =\ \*\(int\ \*\)\(pcVar27\ \+\ iVar28\)\ /\ \*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	iVar14	minValue	INFERRED	integer min/divide/sub reduction accumulator	^\s*\*\(int\ \*\)\(iVar28\ \+\ iVar13\)\ =\ iVar14;$	+1
+use	TIntermConstantUnion__fold	iVar14	componentCounter	INFERRED	component scan index	^\s*for\ \(iVar14\ =\ 0;$	+4
+use	TIntermConstantUnion__fold	iVar14	componentCounter	INFERRED	component scan index	^\s*uVar21\ =\ \*\(uint\ \*\)\(pcVar27\ \+\ iVar14\ \*\ 4\)\ \^\ \*\*\(uint\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	iVar14	componentCounter	INFERRED	component scan index	^\s*\*\(uint\ \*\)\(iVar14\ \*\ 4\ \+\ iVar13\)\ =\ uVar21\ \-\ \(iVar28\ \+\ \(uint\)\(uVar21\ ==\ 0\)\);$	+1
+use	TIntermConstantUnion__fold	iVar14	strideOffset	INFERRED	byte offset iVar28*4	^\s*iVar14\ =\ iVar28\ \*\ 4;$	+2
+use	TIntermConstantUnion__fold	iVar14	strideOffset	INFERRED	byte offset iVar28*4	^\s*\*\(float\ \*\)\(iVar14\ \+\ iVar12\)\ =\ fVar6\ \*\ fVar5\ \+\ \*\(float\ \*\)\(iVar14\ \+\ iVar12\);$	+1
+use	TIntermConstantUnion__fold	iVar14	cursorOffset	INFERRED	offset copied from the component count and stepped back	^\s*iVar14\ =\ iVar17;$	+1
+use	TIntermConstantUnion__fold	iVar14	cursorOffset	INFERRED	offset copied from the component count and stepped back	^\s*iVar14\ =\ iVar14\ \+\ \-1;$	+2
+use	TIntermConstantUnion__fold	iVar14	cursorOffset	INFERRED	offset copied from the component count and stepped back	^\s*iVar14\ =\ iVar17;$@2	+1
+use	TIntermConstantUnion__fold	iVar14	cursorOffset	INFERRED	offset copied from the component count and stepped back	^\s*iVar14\ =\ iVar14\ \+\ \-1;$@2	+1
+use	TIntermConstantUnion__fold	iVar14	cursorOffset	INFERRED	offset copied from the component count and stepped back	^\s*\}\ while\ \(iVar14\ !=\ 0\);$@2	+1
+use	TIntermConstantUnion__fold	iVar14	loopBound	INFERRED	this->getSize() loop bound (register reused for a subtraction result in the same web)	^\s*for\ \(iVar28\ =\ 0;\ iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\),\ iVar28\ <\ iVar14;$	+2
+use	TIntermConstantUnion__fold	iVar14	loopBound	INFERRED	this->getSize() loop bound (register reused for a subtraction result in the same web)	^\s*for\ \(iVar28\ =\ 0;\ iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\),\ iVar28\ <\ iVar14;$@2	+2
+use	TIntermConstantUnion__fold	iVar14	loopBound	INFERRED	this->getSize() loop bound (register reused for a subtraction result in the same web)	^\s*iVar14\ =\ \*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\)\ \-\ \*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar14	loopBound	INFERRED	this->getSize() loop bound (register reused for a subtraction result in the same web)	^\s*iVar14\ =\ \*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ \-\ \*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	iVar14	loopBound	INFERRED	this->getSize() loop bound (register reused for a subtraction result in the same web)	^\s*\*\(int\ \*\)\(iVar28\ \*\ 4\ \+\ iVar13\)\ =\ iVar14;$	+1
+use	TIntermConstantUnion__fold	iVar14	loopBound	INFERRED	this->getSize() loop bound (register reused for a subtraction result in the same web)	^\s*for\ \(iVar28\ =\ 0;\ iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar19\),\ iVar28\ <\ iVar14;$	+2
+use	TIntermConstantUnion__fold	iVar14	loopBound	INFERRED	this->getSize() loop bound (register reused for a subtraction result in the same web)	^\s*for\ \(iVar28\ =\ 0;\ iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar19\),\ iVar28\ <\ iVar14;$@2	+2
+use	TIntermConstantUnion__fold	iVar14	loopBound	INFERRED	this->getSize() loop bound (register reused for a subtraction result in the same web)	^\s*for\ \(iVar28\ =\ 0;\ iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\),\ iVar28\ <\ iVar14;$@3	+2
+use	TIntermConstantUnion__fold	iVar14	loopBound	INFERRED	this->getSize() loop bound (register reused for a subtraction result in the same web)	^\s*int\ iVar14;$	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*uVar21\ =\ local_1ac\ >>\ 0x13\ \&\ 0x3f;$	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ !=\ 1\)\ \{$	+2
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*uVar21\ =\ local_1ac\ >>\ 0x13\ \&\ 0x3f;$@2	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ ==\ 1\)\ \{$	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ ==\ 2\)\ \{$@2	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*uVar21\ =\ local_17c\ >>\ 0x13\ \&\ 0x3f;$	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ !=\ 1\)\ \{$@2	+2
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*uVar21\ =\ local_17c\ >>\ 0x13\ \&\ 0x3f;$@2	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ ==\ 1\)\ \{$@2	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ !=\ 2\)\ \{$	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*uVar21\ =\ local_17c\ >>\ 0x13\ \&\ 0x3f;$@3	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ ==\ 1\)\ \{$@3	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ !=\ 2\)\ \{$@2	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*uVar21\ =\ local_17c\ >>\ 0x13\ \&\ 0x3f;$@4	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ ==\ 1\)\ \{$@4	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ !=\ 2\)\ \{$@3	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*uVar21\ =\ local_14c\ >>\ 0x13\ \&\ 0x3f;$	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ !=\ 1\)\ \{$@3	+2
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*uVar21\ =\ local_14c\ >>\ 0x13\ \&\ 0x3f;$@2	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ ==\ 1\)\ \{$@5	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ !=\ 2\)\ \{$@4	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*uVar21\ =\ local_14c\ >>\ 0x13\ \&\ 0x3f;$@3	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ ==\ 1\)\ \{$@6	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ !=\ 2\)\ \{$@5	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*uVar21\ =\ local_14c\ >>\ 0x13\ \&\ 0x3f;$@4	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ !=\ 1\)\ \{$@4	+2
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*uVar21\ =\ local_14c\ >>\ 0x13\ \&\ 0x3f;$@5	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ ==\ 2\)\ \{$@6	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(2\ <\ uVar21\)\ \{$	+2
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ !=\ 0xe\)\ goto\ LAB_97b9414c;$	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ ==\ 1\)\ \{$@7	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*uVar21\ =\ local_14c\ >>\ 0x13\ \&\ 0x3f;$@6	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ ==\ 2\)\ \{$@7	+1
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*else\ if\ \(uVar21\ <\ 3\)\ \{$	+2
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ !=\ 3\)\ \{$	+2
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*uVar21\ =\ local_ec\ >>\ 0x13\ \&\ 0x3f;$	+4
+use	TIntermConstantUnion__fold	uVar21	typeBasicTypeField	INFERRED	basic type field (bits 24..19) of a TType temporary	^\s*if\ \(uVar21\ !=\ 1\)\ \{$@6	+1
+use	TIntermConstantUnion__fold	uVar21	nominalSizeInPlace	INFERRED	nominal size field in place (bits 18..11)	^\s*uVar21\ =\ local_1ac\ \&\ 0x7f800;$	+2
+use	TIntermConstantUnion__fold	uVar21	nominalSizeInPlace	INFERRED	nominal size field in place (bits 18..11)	^\s*puVar11\[0xb\]\ =\ uVar3\ \|\ uVar21\ \|\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x3ff;$	+1
+use	TIntermConstantUnion__fold	uVar21	nominalSizeInPlace	INFERRED	nominal size field in place (bits 18..11)	^\s*puVar11\[0xb\]\ =\ \(local_1ac\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|\ uVar3\ \|\ uVar21\ \|\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x1ff;$	+1
+use	TIntermConstantUnion__fold	uVar21	nominalSizeInPlace	INFERRED	nominal size field in place (bits 18..11)	^\s*uVar21\ =\ local_17c\ \&\ 0x7f800;$	+2
+use	TIntermConstantUnion__fold	uVar21	nominalSizeInPlace	INFERRED	nominal size field in place (bits 18..11)	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar3\ \|\ uVar21\ \|\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x3ff;$	+1
+use	TIntermConstantUnion__fold	uVar21	nominalSizeInPlace	INFERRED	nominal size field in place (bits 18..11)	^\s*\(local_17c\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|\ uVar3\ \|\ uVar21\ \|\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x1ff;$	+1
+use	TIntermConstantUnion__fold	uVar21	nominalSizeInPlace	INFERRED	nominal size field in place (bits 18..11)	^\s*uVar21\ =\ local_14c\ \&\ 0x7f800;$	+2
+use	TIntermConstantUnion__fold	uVar21	nominalSizeInPlace	INFERRED	nominal size field in place (bits 18..11)	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar3\ \|\ uVar21\ \|\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x3ff;$@2	+1
+use	TIntermConstantUnion__fold	uVar21	nominalSizeInPlace	INFERRED	nominal size field in place (bits 18..11)	^\s*\(local_14c\ >>\ 9\ \&\ 1\)\ <<\ 9\ \|\ uVar3\ \|\ uVar21\ \|\ uVar25\ \|\ uVar10\ \|\ uVar7\ \&\ 0x1ff;$	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*uVar21\ =\ param_2\ \-\ 0x13;$	+4
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*iVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar21,pTVar18,a3,iVar17,param_6,iVar28\);$	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*iVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar21\);$	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*uVar21\ =\ param_2\ \-\ 0x13;$@2	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*if\ \(0x43\ <\ uVar21\)\ \{$	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*iVar28\ =\ uVar21\ \*\ 4;$@2	+2
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar21,pTVar18,a3,iVar17,param_6,iVar28\);$	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x40\)\)\(a0,uVar21\);$	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*uVar21\ =\ param_2\ \-\ 0x13;$@4	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*if\ \(0x11\ <\ uVar21\)\ \{$@2	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*switch\(uVar21\)\ \{$@4	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1,pTVar18,a3,iVar17,param_6,local_4c\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@2	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@5	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_04,pTVar18,a3,iVar17,param_6,local_4c\)$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_03,pTVar18,a3,iVar17,param_6,local_4c\)$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_02,pTVar18,a3,iVar17,param_6,local_4c\)$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@3	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@3	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$@2	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@2	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@4	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@4	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$@3	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@3	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@6	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@5	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$@4	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@4	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@7	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@6	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$@5	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@5	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)$@2	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@7	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)local_140,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)local_140,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@8	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@8	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$@6	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_190,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@6	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@9	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@9	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@17	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_05,pTVar18,a3,iVar17,param_6,local_4c\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@10	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$@2	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@2	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_06,pTVar18,a3,iVar17,param_6,local_4c\)$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@11	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$@3	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@3	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)$@3	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@12	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$@4	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@4	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@10	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@11	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@13	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$@5	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@5	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@12	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@14	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$@6	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@6	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_11,pTVar18,a3,iVar17,param_6,local_4c\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_10,pTVar18,a3,iVar17,param_6,local_4c\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_09,pTVar18,a3,iVar17,param_6,local_4c\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@13	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@14	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@15	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$@7	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@7	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@15	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@16	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$@8	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)\&local_160,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@8	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@16	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_08,pTVar18,a3,iVar17,param_6,local_4c\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@17	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)aaStack_130,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(\(char\ \*\)aaStack_130,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@18	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@18	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(acStack_d0,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(acStack_d0,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)$@4	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@21	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(acStack_90,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	this->getLine() source location word	^\s*_sprintf\(acStack_90,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	componentXor	INFERRED	logical xor of a component pair	^\s*uVar21\ =\ \*\(uint\ \*\)\(pcVar27\ \+\ iVar14\ \*\ 4\)\ \^\ \*\*\(uint\ \*\*\)\(iVar12\ \+\ 0x30\);$	+3
+use	TIntermConstantUnion__fold	uVar21	scalarBits	INFERRED	scalar component bits kept in local_4c	^\s*uVar21\ =\ local_4c;$	+5
+use	TIntermConstantUnion__fold	uVar21	scalarBits	INFERRED	scalar component bits kept in local_4c	^\s*uVar21\ =\ local_4c;$@2	+5
+use	TIntermConstantUnion__fold	uVar21	basicTypeInPlaceBits	INFERRED	basic type field of a TType bit word, in place (bits 24..19)	^\s*uVar21\ =\ \(local_14c\ >>\ 0x13\ \&\ 0x3f\)\ <<\ 0x13;$	+4
+use	TIntermConstantUnion__fold	uVar21	basicTypeInPlaceBits	INFERRED	basic type field of a TType bit word, in place (bits 24..19)	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar10\ \&\ 0x1ff\ \|\ 0x4000000\ \|\ 0x800;$	+1
+use	TIntermConstantUnion__fold	uVar21	basicTypeInPlaceBits	INFERRED	basic type field of a TType bit word, in place (bits 24..19)	^\s*uVar21\ =\ \(local_ec\ >>\ 0x13\ \&\ 0x3f\)\ <<\ 0x13;$	+4
+use	TIntermConstantUnion__fold	uVar21	basicTypeInPlaceBits	INFERRED	basic type field of a TType bit word, in place (bits 24..19)	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar10\ \&\ 0x1ff\ \|\ 0x4000000\ \|\ 0x800;$@2	+1
+use	TIntermConstantUnion__fold	uVar21	basicTypeInPlaceBits	INFERRED	basic type field of a TType bit word, in place (bits 24..19)	^\s*uVar21\ =\ \(local_ec\ >>\ 0x13\ \&\ 0x3f\)\ <<\ 0x13;$@2	+4
+use	TIntermConstantUnion__fold	uVar21	basicTypeInPlaceBits	INFERRED	basic type field of a TType bit word, in place (bits 24..19)	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar10\ \&\ 0x1ff\ \|\ 0x4000000\ \|\ 0x800;$@3	+1
+use	TIntermConstantUnion__fold	uVar21	basicTypeInPlaceBits	INFERRED	basic type field of a TType bit word, in place (bits 24..19)	^\s*uVar21\ =\ \(local_ec\ >>\ 0x13\ \&\ 0x3f\)\ <<\ 0x13;$@3	+4
+use	TIntermConstantUnion__fold	uVar21	basicTypeInPlaceBits	INFERRED	basic type field of a TType bit word, in place (bits 24..19)	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar10\ \&\ 0x1ff\ \|\ 0x4000000\ \|\ 0x800;$@4	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	source location word (getLine() or the node line word +4)	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	source location word (getLine() or the node line word +4)	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@2	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	source location word (getLine() or the node line word +4)	^\s*uVar21\ =\ \*\(uint\ \*\)\(this\ \+\ 4\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	source location word (getLine() or the node line word +4)	^\s*uVar21\ =\ \*\(uint\ \*\)\(this\ \+\ 4\);$@2	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	source location word (getLine() or the node line word +4)	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	source location word (getLine() or the node line word +4)	^\s*_sprintf\(\(char\ \*\)\&local_1c0,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	source location word (getLine() or the node line word +4)	^\s*_sprintf\(\(char\ \*\)\&local_1c0,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	source location word (getLine() or the node line word +4)	^\s*uVar21\ =\ \*\(uint\ \*\)\(this\ \+\ 4\);$@3	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	source location word (getLine() or the node line word +4)	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@19	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	source location word (getLine() or the node line word +4)	^\s*_sprintf\(\(char\ \*\)\&local_100,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	source location word (getLine() or the node line word +4)	^\s*_sprintf\(\(char\ \*\)\&local_100,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$	+1
+use	TIntermConstantUnion__fold	uVar21	sourceLoc	INFERRED	source location word (getLine() or the node line word +4)	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this\);$@19	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*uVar21\ =\ param_2\ \-\ 0x13;$@3	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*if\ \(0x11\ <\ uVar21\)\ \{$	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*switch\(uVar21\)\ \{$@3	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,uVar21,pTVar18,a3,iVar17,param_6,uVar21\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*uVar10\ =\ uVar21\ \&\ 0xffff;$@20	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*_sprintf\(\(char\ \*\)\&local_100,"%d:\?\ ",\(int\)uVar21\ >>\ 0x10\);$@2	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	operator code minus the first arithmetic operator (switch index)	^\s*_sprintf\(\(char\ \*\)\&local_100,"%d:%d",\(int\)uVar21\ >>\ 0x10,uVar10\);$@2	+1
+use	TIntermConstantUnion__fold	uVar21	retypedBits	INFERRED	type bit word rebuilt with a new basic type / nominal size	^\s*uVar21\ =\ local_1ac\ \&\ 0x7ff\ \|\ 0x4080000;$	+1
+use	TIntermConstantUnion__fold	uVar21	retypedBits	INFERRED	type bit word rebuilt with a new basic type / nominal size	^\s*uVar21\ =\ iVar17\ <<\ 0x13\ \|\ local_1ac\ \&\ 0xfff\ \|\ 0x4000000;$	+1
+use	TIntermConstantUnion__fold	uVar21	retypedBits	INFERRED	type bit word rebuilt with a new basic type / nominal size	^\s*local_1ac\ =\ uVar21\ \&\ 0xfffff9ff\ \|\ 0x800;$	+1
+use	TIntermConstantUnion__fold	uVar21	retypedBits	INFERRED	type bit word rebuilt with a new basic type / nominal size	^\s*uVar10\ =\ uVar21\ \&\ 0xfe000000;$	+1
+use	TIntermConstantUnion__fold	uVar21	retypedBits	INFERRED	type bit word rebuilt with a new basic type / nominal size	^\s*uVar21\ =\ \(uVar21\ >>\ 0x13\ \&\ 0x3f\)\ <<\ 0x13;$	+4
+use	TIntermConstantUnion__fold	uVar21	retypedBits	INFERRED	type bit word rebuilt with a new basic type / nominal size	^\s*puVar11\[0xb\]\ =\ uVar21\ \|\ uVar10\ \|\ uVar25\ \&\ 0x1ff\ \|\ 0x800;$	+1
+use	TIntermConstantUnion__fold	uVar21	retypedBits	INFERRED	type bit word rebuilt with a new basic type / nominal size	^\s*uVar21\ =\ local_ec\ \&\ 0x7ff\ \|\ 0x4080000;$	+1
+use	TIntermConstantUnion__fold	uVar21	retypedBits	INFERRED	type bit word rebuilt with a new basic type / nominal size	^\s*uVar21\ =\ local_ec\ \&\ 0xfff\ \|\ 0x4100000;$	+1
+use	TIntermConstantUnion__fold	uVar21	retypedBits	INFERRED	type bit word rebuilt with a new basic type / nominal size	^\s*local_ec\ =\ uVar21\ \&\ 0xfffff9ff\ \|\ 0x800;$	+1
+use	TIntermConstantUnion__fold	uVar21	retypedBits	INFERRED	type bit word rebuilt with a new basic type / nominal size	^\s*uVar10\ =\ uVar21\ \&\ 0xfe000000;$@2	+1
+use	TIntermConstantUnion__fold	uVar21	retypedBits	INFERRED	type bit word rebuilt with a new basic type / nominal size	^\s*uVar21\ =\ uVar21\ \&\ 0x1f80000;$	+4
+use	TIntermConstantUnion__fold	uVar21	retypedBits	INFERRED	type bit word rebuilt with a new basic type / nominal size	^\s*\*\(uint\ \*\)\(pTVar18\ \+\ 0x2c\)\ =\ uVar21\ \|\ uVar10\ \|\ uVar25\ \&\ 0x1ff\ \|\ 0x800;$	+1
+use	TIntermConstantUnion__fold	uVar21	bitwiseResult	INFERRED	logical and/or of two component words, or first component of this union	^\s*uVar21\ =\ \*\*\(uint\ \*\*\)\(this\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	uVar21	bitwiseResult	INFERRED	logical and/or of two component words, or first component of this union	^\s*bVar31\ =\ uVar21\ ==\ uVar10;$	+1
+use	TIntermConstantUnion__fold	uVar21	bitwiseResult	INFERRED	logical and/or of two component words, or first component of this union	^\s*uVar21\ =\ uVar21\ \|\ uVar10;$	+1
+use	TIntermConstantUnion__fold	uVar21	bitwiseResult	INFERRED	logical and/or of two component words, or first component of this union	^\s*bVar31\ =\ uVar21\ ==\ 0;$	+1
+use	TIntermConstantUnion__fold	uVar21	bitwiseResult	INFERRED	logical and/or of two component words, or first component of this union	^\s*uVar21\ =\ uVar21\ \&\ uVar10;$	+1
+use	TIntermConstantUnion__fold	iVar17	thisSizeValue	INFERRED	this->getSize() (vtable +0x4c)	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,param_2\);$	+1
+use	TIntermConstantUnion__fold	iVar17	thisSizeValue	INFERRED	this->getSize() (vtable +0x4c)	^\s*pfVar26\ =\ \(float\ \*\)TPoolAllocator__allocate\(pTVar16,iVar17\ <<\ 2\);$	+1
+use	TIntermConstantUnion__fold	iVar17	thisSizeValue	INFERRED	this->getSize() (vtable +0x4c)	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\);$	+4
+use	TIntermConstantUnion__fold	iVar17	thisSizeValue	INFERRED	this->getSize() (vtable +0x4c)	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\);$@2	+1
+use	TIntermConstantUnion__fold	iVar17	thisSizeValue	INFERRED	this->getSize() (vtable +0x4c)	^\s*iVar13\ =\ TPoolAllocator__allocate\(pTVar16,iVar17\ <<\ 2\);$	+1
+use	TIntermConstantUnion__fold	iVar17	thisSizeValue	INFERRED	this->getSize() (vtable +0x4c)	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\);$@3	+1
+use	TIntermConstantUnion__fold	iVar17	thisSizeValue	INFERRED	this->getSize() (vtable +0x4c)	^\s*iVar12\ =\ TPoolAllocator__allocate\(pTVar16,iVar17\ <<\ 2\);$	+1
+use	TIntermConstantUnion__fold	iVar17	smallCode	INFERRED	small constant code (2 or 3)	^\s*iVar17\ =\ 2;$	+1
+use	TIntermConstantUnion__fold	iVar17	smallCode	INFERRED	small constant code (2 or 3)	^\s*iVar17\ =\ 3;$	+1
+use	TIntermConstantUnion__fold	iVar17	smallCode	INFERRED	small constant code (2 or 3)	^\s*uVar21\ =\ iVar17\ <<\ 0x13\ \|\ local_1ac\ \&\ 0xfff\ \|\ 0x4000000;$	+1
+use	TIntermConstantUnion__fold	iVar17	foldNodeVtable	INFERRED	vtable pointer word of the allocated fold result node	^\s*iVar17\ =\ \*\(int\ \*\)pTVar18;$	+1
+use	TIntermConstantUnion__fold	iVar17	foldNodeVtable	INFERRED	vtable pointer word of the allocated fold result node	^\s*\(\*\*\(code\ \*\*\)\(iVar17\ \+\ 4\)\)\(pTVar18,uVar19\);$	+1
+use	TIntermConstantUnion__fold	iVar17	foldNodeVtable	INFERRED	vtable pointer word of the allocated fold result node	^\s*iVar17\ =\ \*\(int\ \*\)pTVar18;$@2	+1
+use	TIntermConstantUnion__fold	iVar17	foldNodeVtable	INFERRED	vtable pointer word of the allocated fold result node	^\s*\(\*\*\(code\ \*\*\)\(iVar17\ \+\ 4\)\)\(pTVar18,uVar19\);$@2	+1
+use	TIntermConstantUnion__fold	iVar17	foldNodeVtable	INFERRED	vtable pointer word of the allocated fold result node	^\s*iVar17\ =\ \*\(int\ \*\)pTVar18;$@3	+1
+use	TIntermConstantUnion__fold	iVar17	foldNodeVtable	INFERRED	vtable pointer word of the allocated fold result node	^\s*\(\*\*\(code\ \*\*\)\(iVar17\ \+\ 4\)\)\(pTVar18,uVar19\);$@3	+1
+use	TIntermConstantUnion__fold	iVar17	foldNodeVtable	INFERRED	vtable pointer word of the allocated fold result node	^\s*iVar17\ =\ \*\(int\ \*\)pTVar18;$@4	+1
+use	TIntermConstantUnion__fold	iVar17	foldNodeVtable	INFERRED	vtable pointer word of the allocated fold result node	^\s*\(\*\*\(code\ \*\*\)\(iVar17\ \+\ 4\)\)\(pTVar18,uVar19\);$@4	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*iVar17\ =\ param_5;$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*iVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar21,pTVar18,a3,iVar17,param_6,iVar28\);$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1,pTVar18,a3,iVar17,param_6,local_4c\);$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*\(this,a1_01,pTVar18,a3,iVar17,param_6,local_4c\);$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*\(this,a1_00,pTVar18,a3,iVar17,param_6,local_4c\);$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_04,pTVar18,a3,iVar17,param_6,local_4c\)$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*for\ \(iVar14\ =\ 0;$	+4
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_03,pTVar18,a3,iVar17,param_6,local_4c\)$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_02,pTVar18,a3,iVar17,param_6,local_4c\)$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*\(param_3,uVar19,pTVar18,a3,iVar17,param_6,param_7\);$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar21,pTVar18,a3,iVar17,param_6,iVar28\);$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_05,pTVar18,a3,iVar17,param_6,local_4c\);$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_06,pTVar18,a3,iVar17,param_6,local_4c\)$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*\(this,a1_07,pTVar18,a3,iVar17,param_6,local_4c\);$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*for\ \(iVar12\ =\ 0;$	+3
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*for\ \(iVar12\ =\ 0;$@2	+4
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*for\ \(iVar12\ =\ 0;$@3	+4
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*for\ \(iVar12\ =\ 0;$@4	+3
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*for\ \(iVar12\ =\ 0;$@5	+4
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*for\ \(iVar12\ =\ 0;$@6	+3
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_08,pTVar18,a3,iVar17,param_6,local_4c\);$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_11,pTVar18,a3,iVar17,param_6,local_4c\);$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*for\ \(iVar13\ =\ 0;$	+3
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_10,pTVar18,a3,iVar17,param_6,local_4c\);$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,a1_09,pTVar18,a3,iVar17,param_6,local_4c\);$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*if\ \(\(\(local_14c\ >>\ 0x13\ \&\ 0x3f\)\ !=\ 1\)\ \|\|$	+2
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*uVar21\ =\ \(\*\(code\ \*\)\*\*\(undefined4\ \*\*\)this\)\(this,uVar21,pTVar18,a3,iVar17,param_6,uVar21\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*\(this,uVar21,pTVar18,a3,iVar17,param_6,uVar21\ \*\ 4,uVar10\);$	+1
+use	TIntermConstantUnion__fold	iVar17	operandTypeQuery	INFERRED	operand getBasicType() / forwarded swapOperands argument	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x40\)\)\(a0,uVar21\);$	+2
+use	TIntermConstantUnion__fold	iVar17	structuresEqual	INFERRED	compareStructure() result	^\s*iVar17\ =\ \(\(int\ \(\*\)\(\)\)compareStructure\)\(\(unsigned\ char\ \*\)\&local_170,pcVar9,pcVar27,\&local_50\);$	+2
+use	TIntermConstantUnion__fold	iVar17	structuresEqual	INFERRED	compareStructure() result	^\s*iVar17\ =\ \(\(int\ \(\*\)\(\)\)compareStructure\)\(\(unsigned\ char\ \*\)\&local_170,pcVar9,pcVar27,\&local_50\);$@2	+2
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x48\)\)\(this,a1_08\);$	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*iVar12\ =\ TPoolAllocator__allocate\(pTVar16,iVar17\ <<\ 2\);$@2	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x48\)\)\(this\);$	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*if\ \(0\ <\ iVar17\)\ \{$	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*if\ \(0\ <\ iVar17\)\ \{$@2	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*iVar23\ =\ iVar17;$	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*iVar13\ =\ iVar13\ \+\ iVar17;$	+2
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x48\)\)\(this\);$@2	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*iVar12\ =\ TPoolAllocator__allocate\(pTVar16,iVar17\ <<\ 2\);$@3	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x48\)\)\(this\);$@3	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*if\ \(0\ <\ iVar17\)\ \{$@3	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*if\ \(0\ <\ iVar17\)\ \{$@4	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*iVar14\ =\ iVar17;$	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*pcVar9\ =\ pcVar9\ \+\ iVar17\ \*\ 4;$	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*\}\ while\ \(iVar28\ <\ iVar17\);$@2	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x48\)\)\(this,uVar19\);$	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*iVar12\ =\ TPoolAllocator__allocate\(pTVar16,iVar17\ \*\ iVar17\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*if\ \(0\ <\ iVar17\)\ \{$@5	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*if\ \(0\ <\ iVar17\)\ \{$@6	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*iVar14\ =\ iVar17;$@2	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*if\ \(0\ <\ iVar17\)\ \{$@7	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*iVar33\ =\ iVar17;$	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*pcVar9\ =\ pcVar9\ \+\ iVar17\ \*\ 4;$@2	+1
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*iVar23\ =\ iVar23\ \+\ iVar17;$	+2
+use	TIntermConstantUnion__fold	iVar17	thisNominalSize	INFERRED	this->getNominalSize() (vtable +0x48)	^\s*\}\ while\ \(iVar28\ <\ iVar17\);$@3	+1
+use	TIntermConstantUnion__fold	iVar17	rightUnionPtr	INFERRED	right operand getAsConstantUnion()	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_3\ \+\ 0x18\)\)\(param_3\);$	+2
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*for\ \(iVar17\ =\ 0;\ iVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\),\ iVar17\ <\ iVar28;$	+2
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*if\ \(\*\(float\ \*\)\(pcVar27\ \+\ iVar17\ \*\ 4\)\ ==\ 0\.0\)\ \{$	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*fVar6\ =\ \*\*\(float\ \*\*\)\(iVar12\ \+\ 0x30\)\ /\ \*\(float\ \*\)\(pcVar27\ \+\ iVar17\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*\*\(float\ \*\)\(iVar17\ \*\ 4\ \+\ iVar13\)\ =\ fVar6;$	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*iVar28\ =\ iVar17\ <<\ 2;$	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*iVar28\ =\ iVar17\ \*\ 4;$	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*if\ \(\*\(int\ \*\)\(pcVar27\ \+\ iVar17\ \*\ 4\)\ ==\ 0\)\ \{$	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*iVar28\ =\ \*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\)\ /\ \*\(int\ \*\)\(pcVar27\ \+\ iVar17\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*\*\(int\ \*\)\(iVar17\ \*\ 4\ \+\ iVar13\)\ =\ iVar28;$	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*iVar28\ =\ iVar17\ <<\ 2;$@2	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*iVar28\ =\ iVar17\ \*\ 4;$@2	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*for\ \(iVar17\ =\ 0;\ iVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\),\ iVar17\ <\ iVar28;$@2	+2
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*fVar6\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar17\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*fVar5\ =\ pfVar26\[iVar17\];$	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*fVar6\ =\ pfVar26\[iVar17\];$	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*fVar5\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar17\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*\*\(int\ \*\)\(iVar17\ \*\ 4\ \+\ iVar12\)\ =\ iVar28;$	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*fVar6\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar17\ \*\ 4\);$@2	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*fVar5\ =\ pfVar26\[iVar17\];$@2	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*fVar6\ =\ pfVar26\[iVar17\];$@2	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*fVar5\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar17\ \*\ 4\);$@2	+1
+use	TIntermConstantUnion__fold	iVar17	loopIndex	INFERRED	component loop index (loop bound reloaded in the same statement)	^\s*\*\(float\ \*\)\(iVar17\ \*\ 4\ \+\ iVar12\)\ =\ fVar5;$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*for\ \(iVar28\ =\ 0;\ iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\),\ iVar28\ <\ iVar14;$	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\*\(int\ \*\)\(iVar28\ \*\ 4\ \+\ iVar13\)\ =$	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\*\(float\ \*\)\(iVar13\ \+\ iVar28\ \*\ 4\)\ =$	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*for\ \(iVar28\ =\ 0;\ iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\),\ iVar28\ <\ iVar14;$@2	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*fVar6\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*fVar5\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\*\(float\ \*\)\(iVar13\ \+\ iVar28\ \*\ 4\)\ =\ fVar5\ \-\ fVar6;$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*iVar14\ =\ \*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\)\ \-\ \*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*iVar14\ =\ \*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ \-\ \*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\*\(int\ \*\)\(iVar28\ \*\ 4\ \+\ iVar13\)\ =\ iVar14;$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*for\ \(iVar28\ =\ 0;\ iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar19\),\ iVar28\ <\ iVar14;$	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\*\(float\ \*\)\(iVar13\ \+\ iVar28\ \*\ 4\)\ =$@2	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\*\(int\ \*\)\(iVar28\ \*\ 4\ \+\ iVar13\)\ =$@2	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*for\ \(iVar28\ =\ 0;\ iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar19\),\ iVar28\ <\ iVar14;$@2	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*if\ \(\(\*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ !=\ 0\)\ \|\|\ \(\*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\)\ !=\ 0\)\)\ \{$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\*\(undefined4\ \*\)\(iVar28\ \*\ 4\ \+\ iVar13\)\ =\ uVar19;$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*for\ \(iVar28\ =\ 0;\ iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\),\ iVar28\ <\ iVar14;$@3	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*if\ \(\(\*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ !=\ 0\)\ \&\&\ \(\*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\)\ !=\ 0\)\)\ \{$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\*\(undefined4\ \*\)\(iVar28\ \*\ 4\ \+\ iVar13\)\ =\ uVar19;$@2	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*for\ \(iVar28\ =\ 0;\ iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar19\),\ iVar28\ <\ iVar13;$	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\*\(int\ \*\)\(iVar12\ \+\ iVar28\ \*\ 4\)\ =\ \*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ \+\ \(int\)GH_F2U\(pfVar26\[iVar28\]\);$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\*\(float\ \*\)\(iVar12\ \+\ iVar28\ \*\ 4\)\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ \+\ pfVar26\[iVar28\];$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*for\ \(iVar28\ =\ 0;\ iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar19\),\ iVar28\ <\ iVar13;$@2	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*fVar6\ =\ pfVar26\[iVar28\];$	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*fVar6\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\);$@2	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\*\(float\ \*\)\(iVar12\ \+\ iVar28\ \*\ 4\)\ =\ fVar6\ \-\ fVar5;$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*fVar6\ =\ pfVar26\[iVar28\];$@2	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*fVar6\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\);$@3	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\*\(int\ \*\)\(iVar12\ \+\ iVar28\ \*\ 4\)\ =\ \(int\)GH_F2U\(fVar6\)\ \-\ \(int\)GH_F2U\(fVar5\);$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*iVar28\ =\ 0;$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*iVar14\ =\ iVar28\ \*\ 4;$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*iVar28\ =\ iVar28\ \+\ 1;$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\}\ while\ \(iVar28\ <\ iVar17\);$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*iVar28\ =\ 0;$@2	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*iVar28\ =\ iVar28\ \+\ 1;$@2	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\}\ while\ \(iVar28\ <\ iVar17\);$@2	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*for\ \(iVar28\ =\ 0;\ iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar19\),\ iVar28\ <\ iVar13;$@3	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*if\ \(\(\*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ !=\ 0\)\ \|\|\ \(pfVar26\[iVar28\]\ !=\ 0\.0\)\)\ \{$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\*\(undefined4\ \*\)\(iVar28\ \*\ 4\ \+\ iVar12\)\ =\ uVar19;$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*for\ \(iVar28\ =\ 0;\ iVar13\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\),\ iVar28\ <\ iVar13;$	+2
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*if\ \(\(\*\(int\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\)\ !=\ 0\)\ \&\&\ \(pfVar26\[iVar28\]\ !=\ 0\.0\)\)\ \{$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*\*\(undefined4\ \*\)\(iVar28\ \*\ 4\ \+\ iVar12\)\ =\ uVar19;$@2	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*iVar28\ =\ 0;$@3	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*iVar13\ =\ iVar28\ \*\ 4;$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*pcVar9\ =\ pcVar27\ \+\ iVar28\ \*\ 4;$	+1
+use	TIntermConstantUnion__fold	iVar28	componentLoopIndex	INFERRED	component loop index	^\s*iVar28\ =\ iVar28\ \+\ 1;$@3	+2
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count	^\s*iVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\);$	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count	^\s*iVar13\ =\ TPoolAllocator__allocate\(pTVar16,iVar28\ <<\ 2\);$@2	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count	^\s*iVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\);$@2	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count	^\s*uVar34\ =\ TPoolAllocator__allocate\(pTVar16,iVar28\ <<\ 2\);$	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count	^\s*iVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\);$@3	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count	^\s*uVar34\ =\ TPoolAllocator__allocate\(pTVar16,iVar28\ <<\ 2\);$@2	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count	^\s*iVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar21\);$	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count	^\s*iVar13\ =\ TPoolAllocator__allocate\(pTVar16,iVar28\ <<\ 2\);$@3	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count	^\s*iVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\);$@4	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count	^\s*iVar12\ =\ TPoolAllocator__allocate\(pTVar16,iVar28\ <<\ 2\);$	+2
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count	^\s*\}\ while\ \(iVar13\ <\ iVar28\);$	+1
+use	TIntermConstantUnion__fold	iVar28	thisIsVector	INFERRED	this->isVector() (vtable +0x58)	^\s*iVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x58\)\)\(this\);$	+2
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*iVar28\ =\ uVar21\ \*\ 4;$	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*iVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar21,pTVar18,a3,iVar17,param_6,iVar28\);$	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*iVar13\ =\ TPoolAllocator__allocate\(pTVar16,iVar28\ <<\ 2\);$	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*for\ \(iVar17\ =\ 0;\ iVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\),\ iVar17\ <\ iVar28;$	+2
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*iVar28\ =\ iVar17\ <<\ 2;$	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*iVar28\ =\ iVar17\ \*\ 4;$	+2
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*\*\(float\ \*\)\(iVar13\ \+\ iVar28\)\ =\ fVar6;$	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*iVar28\ =\ 0x7fffffff;$	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*iVar28\ =\ \*\*\(int\ \*\*\)\(iVar12\ \+\ 0x30\)\ /\ \*\(int\ \*\)\(pcVar27\ \+\ iVar17\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*\*\(int\ \*\)\(iVar17\ \*\ 4\ \+\ iVar13\)\ =\ iVar28;$	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*iVar28\ =\ iVar17\ <<\ 2;$@2	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*iVar28\ =\ iVar17\ \*\ 4;$@2	+2
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*\*\(int\ \*\)\(iVar28\ \+\ iVar13\)\ =\ iVar14;$	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*for\ \(iVar14\ =\ 0;$	+4
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*iVar28\ =\ uVar21\ \-\ 1;$	+2
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*iVar28\ =\ uVar21\ \*\ 4;$@2	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*iVar12\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this,uVar21,pTVar18,a3,iVar17,param_6,iVar28\);$	+1
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*for\ \(iVar17\ =\ 0;\ iVar28\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)this\ \+\ 0x4c\)\)\(this\),\ iVar17\ <\ iVar28;$@2	+2
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*for\ \(iVar12\ =\ 0;$	+3
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*for\ \(iVar12\ =\ 0;$@2	+4
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*for\ \(iVar12\ =\ 0;$@3	+4
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*for\ \(iVar12\ =\ 0;$@4	+3
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*for\ \(iVar12\ =\ 0;$@5	+4
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*for\ \(iVar12\ =\ 0;$@6	+3
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*for\ \(iVar13\ =\ 0;$	+3
+use	TIntermConstantUnion__fold	iVar28	thisElementCount	INFERRED	this->getSize() element count / jump table byte offset reused	^\s*iVar28\ =\ iVar13\ \*\ 4;$	+2
+use	TIntermConstantUnion__fold	iVar28	divisionResult	INFERRED	integer division result with INT_MAX fallback	^\s*iVar28\ =\ \(int\)GH_F2U\(fVar5\)\ /\ \(int\)GH_F2U\(fVar6\);$	+1
+use	TIntermConstantUnion__fold	iVar28	divisionResult	INFERRED	integer division result with INT_MAX fallback	^\s*iVar28\ =\ 0x7fffffff;$@2	+1
+use	TIntermConstantUnion__fold	iVar28	divisionResult	INFERRED	integer division result with INT_MAX fallback	^\s*\*\(int\ \*\)\(iVar17\ \*\ 4\ \+\ iVar12\)\ =\ iVar28;$	+1
+use	TIntermConstantUnion__fold	fVar6	unaryResult	INFERRED	unary minus / not result as float bits	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\-\*\(int\ \*\)\(pcVar27\ \+\ iVar12\ \*\ 4\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	unaryResult	INFERRED	unary minus / not result as float bits	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\*\(uint\ \*\)\(pcVar27\ \+\ iVar12\ \*\ 4\)\ \^\ 1\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	unaryResult	INFERRED	unary minus / not result as float bits	^\s*pfVar26\[iVar12\]\ =\ fVar6;$	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ \*\*\(float\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*\*\(float\ \*\)\(iVar13\ \+\ iVar28\ \*\ 4\)\ =\ fVar5\ \-\ fVar6;$	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ pfVar26\[iVar28\];$	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\);$@2	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*\*\(float\ \*\)\(iVar12\ \+\ iVar28\ \*\ 4\)\ =\ fVar6\ \-\ fVar5;$	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ pfVar26\[iVar28\];$@2	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar28\ \*\ 4\);$@3	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*\*\(int\ \*\)\(iVar12\ \+\ iVar28\ \*\ 4\)\ =\ \(int\)GH_F2U\(fVar6\)\ \-\ \(int\)GH_F2U\(fVar5\);$	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar17\ \*\ 4\);$	+2
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*iVar28\ =\ \(int\)GH_F2U\(fVar5\)\ /\ \(int\)GH_F2U\(fVar6\);$	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ pfVar26\[iVar17\];$	+2
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar17\ \*\ 4\);$@2	+2
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar5\ =\ fVar5\ /\ fVar6;$	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ pfVar26\[iVar17\];$@2	+2
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(local_4c\)\);$	+6
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(local_4c\)\);$@2	+7
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(local_4c\)\);$@3	+6
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(local_4c\)\);$@4	+6
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ \*\(float\ \*\)pcVar9;$	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*\*\(float\ \*\)\(iVar14\ \+\ iVar12\)\ =\ fVar6\ \*\ fVar5\ \+\ \*\(float\ \*\)\(iVar14\ \+\ iVar12\);$	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ \*\(float\ \*\)pcVar9;$@2	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*\*\(float\ \*\)\(iVar13\ \+\ iVar12\)\ =\ fVar6\ \*\ fVar5\ \+\ \*\(float\ \*\)\(iVar13\ \+\ iVar12\);$	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*fVar6\ =\ \*\(float\ \*\)pcVar9;$@3	+1
+use	TIntermConstantUnion__fold	fVar6	operandValue	INFERRED	loaded operand component value	^\s*\*\(float\ \*\)\(iVar12\ \+\ iVar13\)\ =\ fVar6\ \*\ fVar5\ \+\ \*\(float\ \*\)\(iVar12\ \+\ iVar13\);$	+1
+use	TIntermConstantUnion__fold	fVar6	quotientValue	INFERRED	float division result with FLT_MAX fallback	^\s*fVar6\ =\ 3\.4028235e\+38;$	+1
+use	TIntermConstantUnion__fold	fVar6	quotientValue	INFERRED	float division result with FLT_MAX fallback	^\s*fVar6\ =\ \*\*\(float\ \*\*\)\(iVar12\ \+\ 0x30\)\ /\ \*\(float\ \*\)\(pcVar27\ \+\ iVar17\ \*\ 4\);$	+1
+use	TIntermConstantUnion__fold	fVar6	quotientValue	INFERRED	float division result with FLT_MAX fallback	^\s*\*\(float\ \*\)\(iVar17\ \*\ 4\ \+\ iVar13\)\ =\ fVar6;$	+1
+use	TIntermConstantUnion__fold	fVar6	quotientValue	INFERRED	float division result with FLT_MAX fallback	^\s*fVar6\ =\ 3\.4028235e\+38;$@2	+1
+use	TIntermConstantUnion__fold	fVar6	quotientValue	INFERRED	float division result with FLT_MAX fallback	^\s*fVar6\ =\ \*\(float\ \*\)\(pcVar27\ \+\ iVar28\)\ /\ \*\*\(float\ \*\*\)\(iVar12\ \+\ 0x30\);$	+1
+use	TIntermConstantUnion__fold	fVar6	quotientValue	INFERRED	float division result with FLT_MAX fallback	^\s*\*\(float\ \*\)\(iVar13\ \+\ iVar28\)\ =\ fVar6;$	+1
+use	TIntermConstantUnion__fold	fVar6	foldedValue	INFERRED	folded float result (operand reload, equality compare result)	^\s*fVar6\ =\ \*\*\(float\ \*\*\)\(iVar12\ \+\ 0x30\);$@2	+1
+use	TIntermConstantUnion__fold	fVar6	foldedValue	INFERRED	folded float result (operand reload, equality compare result)	^\s*fVar5\ =\ fVar5\ \+\ fVar6;$	+1
+use	TIntermConstantUnion__fold	fVar6	foldedValue	INFERRED	folded float result (operand reload, equality compare result)	^\s*fVar5\ =\ fVar5\ \-\ fVar6;$	+1
+use	TIntermConstantUnion__fold	fVar6	foldedValue	INFERRED	folded float result (operand reload, equality compare result)	^\s*fVar5\ =\ fVar5\ \*\ fVar6;$	+1
+use	TIntermConstantUnion__fold	fVar6	foldedValue	INFERRED	folded float result (operand reload, equality compare result)	^\s*if\ \(fVar6\ ==\ 0\.0\)\ \{$@3	+1
+use	TIntermConstantUnion__fold	fVar6	foldedValue	INFERRED	folded float result (operand reload, equality compare result)	^\s*fVar5\ =\ fVar5\ /\ fVar6;$@2	+1
+use	TIntermConstantUnion__fold	fVar6	foldedValue	INFERRED	folded float result (operand reload, equality compare result)	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uint\)\(fVar5\ ==\ fVar6\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	foldedValue	INFERRED	folded float result (operand reload, equality compare result)	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uint\)\(fVar5\ !=\ fVar6\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	foldedValue	INFERRED	folded float result (operand reload, equality compare result)	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uint\)\(fVar5\ <\ fVar6\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	foldedValue	INFERRED	folded float result (operand reload, equality compare result)	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uint\)\(fVar6\ <\ fVar5\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	foldedValue	INFERRED	folded float result (operand reload, equality compare result)	^\s*bVar31\ =\ fVar5\ <=\ fVar6;$	+1
+use	TIntermConstantUnion__fold	fVar6	foldedValue	INFERRED	folded float result (operand reload, equality compare result)	^\s*bVar31\ =\ fVar6\ <=\ fVar5;$	+1
+use	TIntermConstantUnion__fold	fVar6	foldedValue	INFERRED	folded float result (operand reload, equality compare result)	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uint\)bVar31\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	foldedValue	INFERRED	folded float result (operand reload, equality compare result)	^\s*\*pfVar26\ =\ fVar6;$	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ \+\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ \-\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ \*\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ GH_U2F\(0x7fffffffU\);$	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(int\)uVar10\ /\ \(int\)uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ \-\ \(\(int\)uVar10\ /\ \(int\)uVar25\)\ \*\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(int\)uVar10\ >>\ \(uVar25\ \&\ 0x3f\)\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ <<\ \(uVar25\ \&\ 0x3f\)\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ \&\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ \|\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uVar10\ \^\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*\*pfVar26\ =\ fVar6;$@3	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(uint\)\(uVar10\ ==\ uVar25\)\)\);$	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ 1\.4013e\-45;$	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ 0\.0;$	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ 1\.4013e\-45;$@2	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ 1\.4013e\-45;$@3	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*fVar6\ =\ 1\.4013e\-45;$@4	+1
+use	TIntermConstantUnion__fold	fVar6	integerResult	INFERRED	integer fold result viewed as float bits	^\s*\*pfVar26\ =\ fVar6;$@2	+1
+use	TIntermConstantUnion__fold	uVar21	operatorOffset	INFERRED	stale 2nd argument and jump-table byte offset still hold the operator offset (op - 0x13)	^\s*\(this,uVar21,pTVar18,a3,iVar17,param_6,uVar21\ \*\ 4,uVar10\);$	+1
