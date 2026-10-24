@@ -1,0 +1,26 @@
+func	FUN_001745ac	ValueKey__rebuild	INFERRED	memset(key+0xb4, 0, 0x15c) then ValueKey__fillSourceLaneUsage and ValueKey__fill: clears and recomputes the key
+func	FUN_00176324	signToCompareCode	INFERRED	maps the sign of its argument to a code: 0 -> 3, positive -> 5, negative -> 1
+func	FUN_00176280	IROperand__copyRegisterAndSelect	INFERRED	copies the byte at +8 and the words at +0xc and +0x10 (register, register offset, select word of an operand record) from the second record to the first
+func	FUN_00193f20	DListNode__unlinkAndDelete	CONFIRMED	relinks prev/next of the node (fields 2 and 1) and calls vtable slot 1 (deleting destructor) of DListNode
+func	FUN_00193d18	List__freeAllNodes	INFERRED	walks the singly linked list from list[1], releases every node through the arena object's vtable slot 0xd3 and zeroes the list fields
+func	FUN_00146de0	Inst__opcodeOrSourcesDiffer	INFERRED	returns 1 when the opcodes of the two instructions differ or any of their sources differs, 0 when they are the same operation on the same sources (only when both pass the vtable slot 0x5c test)
+func	FUN_00177064	Inst__writtenLanesAllMatchValue	INFERRED	for each of the 4 lanes whose destination select byte is not 1, the table entry [row*4 + lane] at +0x168 must equal the value; returns 1 when all do
+func	FUN_00179c44	Inst__allWrittenLanesSatisfy	INFERRED	for each of the 4 lanes whose destination select byte is not 1, FUN_00179608(key, lane, a, b) must be nonzero; returns 1 when all are
+local	FUN_001745ac	param_1	valueKey	INFERRED	the key being rebuilt
+local	FUN_00176324	param_1	value	INFERRED	signed value whose sign is mapped
+local	FUN_00176280	param_1	dstRecord	INFERRED	destination operand record
+local	FUN_00176280	param_2	srcRecord	INFERRED	source operand record
+local	FUN_00193f20	param_1	node	CONFIRMED	the DListNode removed from its list
+local	FUN_00193d18	param_1	list	INFERRED	list header: [1] first node, nodes chained through their first word
+local	FUN_00177064	param_1	valueKey	INFERRED	the ValueKey whose +0xb0 is the instruction
+local	FUN_00177064	param_2	value	INFERRED	value every written lane's table entry must equal
+local	FUN_00177064	param_3	row	INFERRED	table row (4 lane entries at row*0x10 + 0x168)
+local	FUN_00179c44	param_1	valueKey	INFERRED	the ValueKey whose +0xb0 is the instruction
+func	FUN_001a322c	_savef14	CONFIRMED	FPR save millicode: stfd fN,-0x90.. (r1), entry for the run starting at that register; Mach-O disassembly (otool) of 0x1a322c-0x1a327c
+func	FUN_001a324c	_savef22	CONFIRMED	FPR save millicode: stfd fN,-0x90.. (r1), entry for the run starting at that register; Mach-O disassembly (otool) of 0x1a322c-0x1a327c
+func	FUN_001a3254	_savef24	CONFIRMED	FPR save millicode: stfd fN,-0x90.. (r1), entry for the run starting at that register; Mach-O disassembly (otool) of 0x1a322c-0x1a327c
+func	FUN_001a3258	_savef25	CONFIRMED	FPR save millicode: stfd fN,-0x90.. (r1), entry for the run starting at that register; Mach-O disassembly (otool) of 0x1a322c-0x1a327c
+func	FUN_001a325c	_savef26	CONFIRMED	FPR save millicode: stfd fN,-0x90.. (r1), entry for the run starting at that register; Mach-O disassembly (otool) of 0x1a322c-0x1a327c
+func	FUN_001a3260	_savef27	CONFIRMED	FPR save millicode: stfd fN,-0x90.. (r1), entry for the run starting at that register; Mach-O disassembly (otool) of 0x1a322c-0x1a327c
+func	FUN_001a3264	_savef28	CONFIRMED	FPR save millicode: stfd fN,-0x90.. (r1), entry for the run starting at that register; Mach-O disassembly (otool) of 0x1a322c-0x1a327c (the last entry also stores r0 at 8(r1) and returns)
+func	FUN_001a327c	_restf14	CONFIRMED	FPR restore millicode: lfd f14..f31 from -0x90(r1).., reloads the saved lr from 8(r1) and returns (otool disassembly of 0x1a327c)

@@ -161,7 +161,7 @@ int ValueKey__foldDot3SingleLaneSource(ctx)
             iVar6 = *(int *)(*(int *)(ctx + 0xb0) + 0x124);
 LAB_0017c0b0:
             ((int (*)())FUN_0017bd78)(ctx,(loopRemaining == 1) + 1,loopIndex,iVar6);
-            FUN_001745ac(ctx);
+            ValueKey__rebuild(ctx);
             return 1;
           }
           iVar6 = ((int (*)())outputScaleExponent)((double)*pfVar4);
@@ -228,7 +228,7 @@ int ValueKey__foldDot4UnitVectorSource(ctx)
           uVar4 = *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x124);
 LAB_0017c1c4:
           ((int (*)())FUN_0017bd78)(ctx,iVar2,uVar3,uVar4);
-          FUN_001745ac(ctx);
+          ValueKey__rebuild(ctx);
           return 1;
         }
         if ((iVar9 == iVar6) && (iVar5 == *(int *)(iVar1 + 0x174))) {
@@ -338,13 +338,13 @@ int ValueKey__replaceWithSource2IfSourcesEqual23(ctx)
   int callResult;
   uint uVar3;
   
-  callResult = FUN_00179c44(ctx,2,3);
+  callResult = Inst__allWrittenLanesSatisfy(ctx,2,3);
   if (callResult != 0) {
     uVar3 = *(uint *)(*(int *)(ctx + 0xb0) + 0xe8);
     uVar1 = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
     if (((uVar1 & 1) == (uVar3 & 1)) && ((uVar1 >> 1 & 1) == (uVar3 >> 1 & 1))) {
       ((int (*)())FUN_0017c244)(ctx,2);
-      FUN_001745ac(ctx);
+      ValueKey__rebuild(ctx);
       return 1;
     }
   }
@@ -363,8 +363,8 @@ int FUN_0017c4a4(ctx)
   
   a0 = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
   iVar3 = (**(code **)(*a0 + 0x88))(a0);
-  if (((iVar3 == 0) || (iVar3 = FUN_00179c44(ctx,2,3), iVar3 == 0)) ||
-     (iVar3 = FUN_00179c44(ctx,1,3), iVar3 == 0)) {
+  if (((iVar3 == 0) || (iVar3 = Inst__allWrittenLanesSatisfy(ctx,2,3), iVar3 == 0)) ||
+     (iVar3 = Inst__allWrittenLanesSatisfy(ctx,1,3), iVar3 == 0)) {
     return 0;
   }
   iVar3 = *(int *)(ctx + 0xb0);
@@ -407,7 +407,7 @@ int FUN_0017c4a4(ctx)
   mask = 2;
 LAB_0017c5b4:
   IROperand__setModifierBits(iVar3 + 0xa4,mask,1);
-  FUN_001745ac(ctx);
+  ValueKey__rebuild(ctx);
   return 1;
 }
 
@@ -429,7 +429,7 @@ int FUN_0017c5e0(ctx)
   int iVar9;
   
   bVar2 = false;
-  iVar3 = FUN_00176324(0);
+  iVar3 = signToCompareCode(0);
   loopIndex = 0;
   iVar7 = -1;
   iVar9 = ctx;
@@ -440,7 +440,7 @@ int FUN_0017c5e0(ctx)
       iVar6 = *(int *)(iVar9 + 0x178);
       if (iVar6 < 0) {
         puVar5 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar6);
-        iVar6 = FUN_00176324(*puVar5);
+        iVar6 = signToCompareCode(*puVar5);
         inst = *(int *)(ctx + 0xb0);
       }
       else {
@@ -486,7 +486,7 @@ int FUN_0017c5e0(ctx)
         *(int *)(iVar7 + 0x134) = *(int *)(iVar7 + 0x134) + 1;
       }
       ((int (*)())FUN_0017c244)(ctx,iVar6);
-      FUN_001745ac(ctx);
+      ValueKey__rebuild(ctx);
       return 1;
     }
   } while( true );
@@ -506,10 +506,10 @@ int ValueKey__foldMulByPlusMinusOne(ctx)
   exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),0x3f800000);
   uVar4 = *(undefined4 *)(exprRecord + 4);
   do {
-    iVar2 = FUN_00177064(ctx,uVar4,loopIndex);
+    iVar2 = Inst__writtenLanesAllMatchValue(ctx,uVar4,loopIndex);
     if (iVar2 != 0) {
       ((int (*)())FUN_0017c244)(ctx,(loopIndex == 1) + 1);
-      FUN_001745ac(ctx);
+      ValueKey__rebuild(ctx);
       return 1;
     }
     bVar1 = loopIndex != 2;
@@ -519,13 +519,13 @@ int ValueKey__foldMulByPlusMinusOne(ctx)
   exprRecord = Compiler__valueNumberForExpr(*(undefined4 *)(ctx + 0x238),0xbf800000);
   uVar4 = *(undefined4 *)(exprRecord + 4);
   do {
-    iVar2 = FUN_00177064(ctx,uVar4,loopIndex);
+    iVar2 = Inst__writtenLanesAllMatchValue(ctx,uVar4,loopIndex);
     if (iVar2 != 0) {
       iVar2 = (loopIndex == 1) + 1;
       ((int (*)())FUN_0017c244)(ctx,iVar2);
       IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,1,
                    *(uint *)(iVar2 * 0x18 + *(int *)(ctx + 0xb0) + 0xa0) & 1 ^ 1);
-      FUN_001745ac(ctx);
+      ValueKey__rebuild(ctx);
       return 1;
     }
     bVar1 = loopIndex != 2;
@@ -542,13 +542,13 @@ int ValueKey__replaceWithSource1IfSourcesEqual(ctx)
   int callResult;
   uint uVar3;
   
-  callResult = FUN_00179c44(ctx,1,2);
+  callResult = Inst__allWrittenLanesSatisfy(ctx,1,2);
   if (callResult != 0) {
     uVar3 = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
     uVar1 = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
     if (((uVar1 & 1) == (uVar3 & 1)) && ((uVar1 >> 1 & 1) == (uVar3 >> 1 & 1))) {
       ((int (*)())FUN_0017c244)(ctx,1);
-      FUN_001745ac(ctx);
+      ValueKey__rebuild(ctx);
       return 1;
     }
   }
@@ -593,7 +593,7 @@ int FUN_0017c910(ctx)
         iVar6 = *piVar13;
         if (iVar6 < 0) {
           puVar5 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar6);
-          iVar6 = FUN_00176324(*puVar5);
+          iVar6 = signToCompareCode(*puVar5);
           *loopPtr2 = iVar6;
         }
         else {
@@ -650,7 +650,7 @@ int FUN_0017c910(ctx)
         *(int *)(iVar8 + 0x134) = *(int *)(iVar8 + 0x134) + 1;
       }
       ((int (*)())FUN_0017c244)(ctx,iVar9);
-      FUN_001745ac(ctx);
+      ValueKey__rebuild(ctx);
       return 1;
     }
   } while( true );
@@ -694,7 +694,7 @@ int FUN_0017cb14(ctx)
         iVar6 = *piVar13;
         if (iVar6 < 0) {
           puVar5 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar6);
-          iVar6 = FUN_00176324(*puVar5);
+          iVar6 = signToCompareCode(*puVar5);
           *loopPtr2 = iVar6;
         }
         else {
@@ -751,7 +751,7 @@ int FUN_0017cb14(ctx)
         *(int *)(iVar8 + 0x134) = *(int *)(iVar8 + 0x134) + 1;
       }
       ((int (*)())FUN_0017c244)(ctx,iVar9);
-      FUN_001745ac(ctx);
+      ValueKey__rebuild(ctx);
       return 1;
     }
   } while( true );
@@ -770,7 +770,7 @@ int FUN_0017cd18(param_1)
   loopIndex = 1;
   uVar3 = *(undefined4 *)(callResult + 4);
   do {
-    callResult = FUN_00177064(param_1,uVar3,loopIndex);
+    callResult = Inst__writtenLanesAllMatchValue(param_1,uVar3,loopIndex);
     if (callResult != 0) {
       callResult = FUN_0017737c(param_1,0,3);
       if (callResult == 0) {
@@ -779,7 +779,7 @@ int FUN_0017cd18(param_1)
       else {
         FUN_00177548(param_1);
       }
-      FUN_001745ac(param_1);
+      ValueKey__rebuild(param_1);
       return 1;
     }
     bVar1 = loopIndex != 2;
@@ -803,7 +803,7 @@ int FUN_0017cdbc(param_1)
   do {
     uVar3 = 2;
     do {
-      callResult = FUN_00177064(param_1,uVar4,loopIndex);
+      callResult = Inst__writtenLanesAllMatchValue(param_1,uVar4,loopIndex);
       if (callResult != 0) {
         callResult = FUN_0017737c(param_1,0,uVar3);
         if (callResult == 0) {
@@ -812,7 +812,7 @@ int FUN_0017cdbc(param_1)
         else {
           FUN_00177548(param_1);
         }
-        FUN_001745ac(param_1);
+        ValueKey__rebuild(param_1);
         return 1;
       }
       loopIndex = loopIndex + 1;
@@ -1078,7 +1078,7 @@ int ValueKey__foldCompareSameSourcesToConstant(param_1)
   int loopRemaining2;
   undefined4 local_28 [8];
   
-  loopRemaining = FUN_00179c44(param_1,1,2);
+  loopRemaining = Inst__allWrittenLanesSatisfy(param_1,1,2);
   if (loopRemaining != 0) {
     loopRemaining = *(int *)(param_1 + 0xb0);
     if (((*(uint *)(loopRemaining + 0xb8) & 1) == (*(uint *)(loopRemaining + 0xd0) & 1)) &&
@@ -1103,7 +1103,7 @@ int ValueKey__foldCompareSameSourcesToConstant(param_1)
         loopRemaining2 = loopRemaining2 + -1;
       } while (loopRemaining2 != 0);
       ((int (*)())FUN_0017d26c)(param_1,local_28);
-      FUN_001745ac(param_1);
+      ValueKey__rebuild(param_1);
       return 1;
     }
   }
@@ -1132,7 +1132,7 @@ int ValueKey__replaceWithZeroIfSourcesEqual(ctx)
       local_24 = 0;
       local_20 = 0;
       ((int (*)())FUN_0017d26c)(ctx,&local_28);
-      FUN_001745ac(ctx);
+      ValueKey__rebuild(ctx);
       return 1;
     }
   }
@@ -1156,14 +1156,14 @@ int ValueKey__foldMulByZero(param_1)
   loopIndex = 1;
   uVar3 = *(undefined4 *)(callResult + 4);
   do {
-    callResult = FUN_00177064(param_1,uVar3,loopIndex);
+    callResult = Inst__writtenLanesAllMatchValue(param_1,uVar3,loopIndex);
     if (callResult != 0) {
       local_2c = 0;
       local_38 = 0;
       local_34 = 0;
       local_30 = 0;
       ((int (*)())FUN_0017d26c)(param_1,&local_38);
-      FUN_001745ac(param_1);
+      ValueKey__rebuild(param_1);
       return 1;
     }
     bVar1 = loopIndex != 2;
@@ -1184,7 +1184,7 @@ int FUN_0017d610(ctx)
   undefined4 local_20;
   undefined4 local_1c;
   
-  callResult = FUN_00179c44(ctx,1,2);
+  callResult = Inst__allWrittenLanesSatisfy(ctx,1,2);
   if (callResult != 0) {
     uVar3 = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
     uVar1 = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
@@ -1194,7 +1194,7 @@ int FUN_0017d610(ctx)
       local_24 = 0;
       local_20 = 0;
       ((int (*)())FUN_0017d26c)(ctx,&local_28);
-      FUN_001745ac(ctx);
+      ValueKey__rebuild(ctx);
       return 1;
     }
   }
@@ -1390,7 +1390,7 @@ int FUN_0017d9b8(ctx)
         iVar9 = *piVar13;
         if (iVar9 < 0) {
           puVar6 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar9);
-          iVar9 = FUN_00176324(*puVar6);
+          iVar9 = signToCompareCode(*puVar6);
           *loopPtr3 = iVar9;
         }
         else {
@@ -1447,7 +1447,7 @@ LAB_0017dbc4:
       loopIndex = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
       *(int *)(loopIndex + 0x134) = *(int *)(loopIndex + 0x134) + 1;
     }
-    FUN_001745ac(ctx);
+    ValueKey__rebuild(ctx);
     uVar8 = 1;
   }
   return uVar8;
@@ -1612,14 +1612,14 @@ LAB_0017dd38:
   if ((loopIndex == 0) && (!bVar1)) {
     loopIndex = ((int (*)())FUN_0017d6ac)(ctx,param_2);
     if (loopIndex != 0) {
-      FUN_001745ac(ctx);
+      ValueKey__rebuild(ctx);
       return 1;
     }
     loopIndex = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
     *(int *)(loopIndex + 0x138) = *(int *)(loopIndex + 0x138) + 1;
     if ((*(int *)(*(int *)(ctx + 0xb0) + 0x120) != 0) && (iVar2 == 0)) {
       *(undefined4 *)(*(int *)(ctx + 0xb0) + 0x120) = 0;
-      FUN_001745ac(ctx);
+      ValueKey__rebuild(ctx);
       return 0;
     }
   }
@@ -1748,7 +1748,7 @@ int ValueKey__foldMulPowerOfTwoIntoOutputScale(ctx)
             IROperand__setModifierBits(iVar3 + 0xc,1,(*(uint *)(iVar3 + 0x20) ^ 1) & 1);
           }
           ((int (*)())FUN_0017e02c)(ctx,loopIndex,iVar2);
-          FUN_001745ac(ctx);
+          ValueKey__rebuild(ctx);
           return 1;
         }
       }
@@ -1770,7 +1770,7 @@ int FUN_0017e338(ctx)
   undefined4 in_r8;
   int a1;
   
-  iVar1 = FUN_00179c44(ctx,1,2);
+  iVar1 = Inst__allWrittenLanesSatisfy(ctx,1,2);
   if (iVar1 != 0) {
     iVar1 = *(int *)(ctx + 0xb0);
     if (((*(uint *)(iVar1 + 0xb8) & 1) == (*(uint *)(iVar1 + 0xd0) & 1)) &&
@@ -1780,7 +1780,7 @@ int FUN_0017e338(ctx)
       iVar1 = (**(code **)(*a0 + 0xfc))(a0,a1,iVar1,in_r6,in_r7,in_r8,*(int *)(iVar1 + 0x124));
       if (iVar1 != 0) {
         ((int (*)())FUN_0017e02c)(ctx,2,a1);
-        FUN_001745ac(ctx);
+        ValueKey__rebuild(ctx);
         return 1;
       }
     }
@@ -1898,10 +1898,10 @@ int ValueKey__foldMadZeroAddend(param_1)
   int callResult;
   
   callResult = Compiler__valueNumberForExpr(*(undefined4 *)(param_1 + 0x238),0);
-  callResult = FUN_00177064(param_1,*(undefined4 *)(callResult + 4),3);
+  callResult = Inst__writtenLanesAllMatchValue(param_1,*(undefined4 *)(callResult + 4),3);
   if (callResult != 0) {
     ((int (*)())FUN_0017e3f4)(param_1,0x13,1,2);
-    FUN_001745ac(param_1);
+    ValueKey__rebuild(param_1);
   }
   return callResult != 0;
 }
@@ -1919,10 +1919,10 @@ int ValueKey__foldMadByPlusMinusOne(ctx)
   loopIndex = 1;
   uVar3 = *(undefined4 *)(callResult + 4);
   do {
-    callResult = FUN_00177064(ctx,uVar3,loopIndex);
+    callResult = Inst__writtenLanesAllMatchValue(ctx,uVar3,loopIndex);
     if (callResult != 0) {
       ((int (*)())FUN_0017e3f4)(ctx,0x12,(loopIndex == 1) + 1,3);
-      FUN_001745ac(ctx);
+      ValueKey__rebuild(ctx);
       return 1;
     }
     bVar1 = loopIndex != 2;
@@ -1932,12 +1932,12 @@ int ValueKey__foldMadByPlusMinusOne(ctx)
   loopIndex = 1;
   uVar3 = *(undefined4 *)(callResult + 4);
   do {
-    callResult = FUN_00177064(ctx,uVar3,loopIndex);
+    callResult = Inst__writtenLanesAllMatchValue(ctx,uVar3,loopIndex);
     if (callResult != 0) {
       ((int (*)())FUN_0017e3f4)(ctx,0x12,(loopIndex == 1) + 1,3);
       IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,1,
                    (*(uint *)(*(int *)(ctx + 0xb0) + 0xb8) ^ 1) & 1);
-      FUN_001745ac(ctx);
+      ValueKey__rebuild(ctx);
       return 1;
     }
     bVar1 = loopIndex != 2;
@@ -2332,7 +2332,7 @@ int FUN_0017ee68(ctx)
     loopIndex = IRInst__getOperandRecord(loopIndex,2);
     *(undefined4 *)(loopIndex + 0x10) = uVar8;
   }
-  FUN_001745ac(ctx);
+  ValueKey__rebuild(ctx);
   return 1;
 }
 
@@ -2451,7 +2451,7 @@ int ValueKey__foldMinMaxOfNegatedPair(ctx, param_2)
   int loopIndex;
   undefined4 local_38 [6];
   
-  iVar3 = FUN_00179c44(ctx,1,2);
+  iVar3 = Inst__allWrittenLanesSatisfy(ctx,1,2);
   if (iVar3 != 0) {
     inst = *(int *)(ctx + 0xb0);
     if (((*(uint *)(inst + 0xb8) & 1) != (*(uint *)(inst + 0xd0) & 1)) &&
@@ -2474,7 +2474,7 @@ LAB_0017f514:
             ((int (*)())FUN_0017c244)(ctx,1);
             IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,2,1);
             IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,1,param_2 ^ 1);
-            FUN_001745ac(ctx);
+            ValueKey__rebuild(ctx);
             return 1;
           }
           puVar4 = (uint *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(int *)(iVar3 + 0x178));
@@ -2491,7 +2491,7 @@ LAB_0017f514:
           ((int (*)())FUN_0017c244)(ctx,1);
           IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,1,(uint)(param_2 == uVar5));
           IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xa4,2,0);
-          FUN_001745ac(ctx);
+          ValueKey__rebuild(ctx);
           return 1;
         }
       } while( true );
@@ -2573,7 +2573,7 @@ int FUN_0017f5a4(ctx)
       IRInst__setOperandRef(inst,inst[0x21],operandRef);
       VReg__addUse(operandRef,inst[0x21],inst);
     }
-    FUN_001745ac(ctx);
+    ValueKey__rebuild(ctx);
     Block__insertInstAfter(*(undefined4 *)(*(int *)(ctx + 0xb0) + 0x158),*(int *)(ctx + 0xb0),inst);
     return;
   }

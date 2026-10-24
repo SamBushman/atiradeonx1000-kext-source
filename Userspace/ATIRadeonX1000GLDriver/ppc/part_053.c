@@ -126,7 +126,7 @@ LAB_0019dab0:
             (predicatedInst,(loopStackEntry - ((loopStackEntry - 1) + (uint)(loopStackEntry == 0))) + 2,a2,selectByte,compiler,a5,loopStackEntry - 1)
   ;
   Block__appendInst(node,predicatedInst);
-  FUN_00193f20(branchInst);
+  DListNode__unlinkAndDelete(branchInst);
   *(undefined4 *)(node + 0x130) = 0;
 LAB_0019dc0c:
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));
@@ -532,7 +532,7 @@ LAB_0019e3d4:
     IROperand__setModifierBits(predSetInst + loopIndex * 6 + 0x23,1,1);
   }
   Block__appendInst(node,predSetInst);
-  FUN_00193f20(branchInst);
+  DListNode__unlinkAndDelete(branchInst);
   *(undefined4 *)(node + 0x130) = 0;
 LAB_0019e5d0:
   (**(code **)(*this + 0x34))(this,block,*(undefined4 *)(node + 0xdc));

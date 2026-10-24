@@ -7383,7 +7383,7 @@ LAB_0009fb60:
       iVar34 = iVar34 + 4;
     } while (uVar32 < uVar27);
   }
-  FUN_001a327c();
+  _restf14();
   return;
 }
 

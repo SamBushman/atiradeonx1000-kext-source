@@ -975,50 +975,50 @@ int R520MachineAssembler__vslot37_closeBranch(this, node)
   return;
 }
 
-/* FUN_001a322c @ 0x1a322c (32 bytes) */
-int FUN_001a322c()
+/* _savef14 @ 0x1a322c (32 bytes) */
+int _savef14()
 {
   return;
 }
 
-/* FUN_001a324c @ 0x1a324c (8 bytes) */
-int FUN_001a324c()
+/* _savef22 @ 0x1a324c (8 bytes) */
+int _savef22()
 {
   return;
 }
 
-/* FUN_001a3254 @ 0x1a3254 (4 bytes) */
-int FUN_001a3254()
+/* _savef24 @ 0x1a3254 (4 bytes) */
+int _savef24()
 {
   return;
 }
 
-/* FUN_001a3258 @ 0x1a3258 (4 bytes) */
-int FUN_001a3258()
+/* _savef25 @ 0x1a3258 (4 bytes) */
+int _savef25()
 {
   return;
 }
 
-/* FUN_001a325c @ 0x1a325c (4 bytes) */
-int FUN_001a325c()
+/* _savef26 @ 0x1a325c (4 bytes) */
+int _savef26()
 {
   return;
 }
 
-/* FUN_001a3260 @ 0x1a3260 (4 bytes) */
-int FUN_001a3260()
+/* _savef27 @ 0x1a3260 (4 bytes) */
+int _savef27()
 {
   return;
 }
 
-/* FUN_001a3264 @ 0x1a3264 (24 bytes) */
-int FUN_001a3264()
+/* _savef28 @ 0x1a3264 (24 bytes) */
+int _savef28()
 {
   return;
 }
 
-/* FUN_001a327c @ 0x1a327c (84 bytes) */
-int FUN_001a327c()
+/* _restf14 @ 0x1a327c (84 bytes) */
+int _restf14()
 {
   return;
 }

@@ -510,7 +510,7 @@ int FUN_000e1fe4(param_1, param_2)
   iVar1 = param_1;
   do {
     if (*(int *)(iVar1 + 0x370) != 0) {
-      FUN_00193d18(*(int *)(iVar1 + 0x370));
+      List__freeAllNodes(*(int *)(iVar1 + 0x370));
       (**(code **)(param_1 + 0x34c))
                 (*(undefined4 *)(param_1 + 0x354),*(undefined4 *)(iVar1 + 0x370));
       *(undefined4 *)(iVar1 + 0x370) = 0;
@@ -597,9 +597,9 @@ int FUN_000e2094(compiler, param_2)
       ((int (*)())FUN_000e4934)(puVar7);
       Arena__free(*puVar3,puVar3);
     }
-    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
+    List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     FUN_00122de8(*(undefined4 *)(compiler + COMP_currentProgram));
-    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
+    List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     reduceDepEnabled = Compiler__isOptionEnabled(compiler,0xf);
     if (reduceDepEnabled != 0) {
       FUN_0013d3b8(*(undefined4 *)(compiler + COMP_currentProgram));
@@ -653,20 +653,20 @@ int FUN_000e2094(compiler, param_2)
       FUN_00139d40(*(undefined4 *)(compiler + COMP_currentProgram));
     }
     FUN_000f29f4(*(undefined4 *)(compiler + COMP_currentProgram));
-    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
+    List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     Scheduler__run(*(undefined4 *)(compiler + COMP_currentProgram));
-    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
+    List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     FUN_00120cd4(*(undefined4 *)(compiler + COMP_currentProgram));
-    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
+    List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     FUN_00134658(*(undefined4 *)(compiler + COMP_currentProgram));
-    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
+    List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     FUN_000f60c4(*(undefined4 *)(compiler + COMP_currentProgram),compiler);
     *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) =
          *(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) | 0x10000;
     pass_optimize_control_flow(*(undefined4 *)(compiler + COMP_currentProgram));
     ((int (*)())FUN_000e36bc)(*(undefined4 *)(compiler + COMP_currentProgram),*(int *)(compiler + 0x52c) * 4 + compiler + 0x484,
                  *(int *)(compiler + 0x52c));
-    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
+    List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     FUN_0013061c(*(undefined4 *)(compiler + COMP_currentProgram),0);
     (**(code **)(**(int **)(compiler + COMP_target) + 0x38))
               (*(int **)(compiler + COMP_target),*(undefined4 *)(compiler + 0x52c),compiler);
@@ -681,8 +681,8 @@ int FUN_000e2094(compiler, param_2)
       FUN_000ecfac(iVar1);
       Arena__free(*(undefined4 *)(iVar1 + -4),iVar1 + -4);
     }
-    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaA));
-    FUN_00193d18(*(undefined4 *)(compiler + COMP_arenaB));
+    List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaA));
+    List__freeAllNodes(*(undefined4 *)(compiler + COMP_arenaB));
     iVar1 = *(int *)(compiler + 0x52c) + -1;
     *(int *)(compiler + 0x52c) = iVar1;
   }

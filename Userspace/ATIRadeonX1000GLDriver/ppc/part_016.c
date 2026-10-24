@@ -601,7 +601,7 @@ LAB_000a89c0:
     *(undefined1 *)(param_1 + 0x29) = 1;
     *(uint *)(param_1 + 0x38) = *(uint *)(param_1 + 0x38) | 0x80;
   }
-  FUN_001a327c(fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
+  _restf14(fparam_1,fparam_2,fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8);
   return;
 }
 

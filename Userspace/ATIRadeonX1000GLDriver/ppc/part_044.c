@@ -2672,7 +2672,7 @@ int Inst__collapseAlgebraic_0015ceb0(node, pass)
         } while (newSource3 != 0);
         if (((((a0[0x2e] & 1U) == (node[0x2e] & 1U)) && ((a0[0x34] & 1U) == (node[0x34] & 1U))
              ) && (((uint)a0[0x2e] >> 1 & 1) == ((uint)node[0x2e] >> 1 & 1))) &&
-           (iVar24 = FUN_00146de0(piVar15,piVar9), iVar24 == 0)) {
+           (iVar24 = Inst__opcodeOrSourcesDiffer(piVar15,piVar9), iVar24 == 0)) {
           *(int *)(pass + 0x280) = *(int *)(pass + 0x280) + 1;
           SelectWord__mergeWrittenLanes(&local_68,local_100,local_fc);
           local_104 = local_68;
@@ -5082,7 +5082,7 @@ int FUN_00161748(inst, inst2, pass)
   if ((iVar7 != 0) && (iVar7 = (**(code **)(*inst2 + 100))(inst2), iVar7 != 0)) {
     sourceDef = IRInst__getOperandSource(inst,1);
     sourceDef5 = IRInst__getOperandSource(inst2,1);
-    iVar7 = FUN_00146de0(sourceDef,sourceDef5);
+    iVar7 = Inst__opcodeOrSourcesDiffer(sourceDef,sourceDef5);
     if (iVar7 == 0) {
       sourceDef4 = IRInst__getOperandSource(inst,1);
       iVar10 = IRInst__getOperandSource(inst2,1);

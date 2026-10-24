@@ -773,13 +773,13 @@ LAB_00174410:
   return;
 }
 
-/* FUN_001745ac @ 0x1745ac (68 bytes) */
-int FUN_001745ac(param_1)
-  int param_1;
+/* ValueKey__rebuild @ 0x1745ac (68 bytes) */
+int ValueKey__rebuild(valueKey)
+  int valueKey;
 {
-  _memset(param_1 + 0xb4,0,0x15c);
-  ((int (*)())ValueKey__fillSourceLaneUsage)(param_1);
-  return ((int (*)())ValueKey__fill)(param_1);
+  _memset(valueKey + 0xb4,0,0x15c);
+  ((int (*)())ValueKey__fillSourceLaneUsage)(valueKey);
+  return ((int (*)())ValueKey__fill)(valueKey);
 }
 
 /* FUN_001745f0 @ 0x1745f0 (216 bytes) */
@@ -794,23 +794,23 @@ int FUN_001745f0(ctx)
   if (callResult != 0) {
     callResult = ValueKey__canonicalizeConstantSources(ctx);
     if (callResult != 0) {
-      ((int (*)())FUN_001745ac)(ctx);
+      ((int (*)())ValueKey__rebuild)(ctx);
     }
     do {
       callResult = FUN_0017f7ec(ctx);
     } while (callResult != 0);
     callResult = FUN_0017b96c(ctx);
     if (callResult != 0) {
-      ((int (*)())FUN_001745ac)(ctx);
+      ((int (*)())ValueKey__rebuild)(ctx);
     }
     callResult = (**(code **)(**(int **)(ctx + 0xb0) + 0x24))(*(int **)(ctx + 0xb0));
     if ((callResult != 0) && (callResult = ValueKey__mixLiteralSources(ctx), callResult != 0)) {
-      ((int (*)())FUN_001745ac)(ctx);
+      ((int (*)())ValueKey__rebuild)(ctx);
     }
     callResult = ValueKey__simplifyModifiersAndAddressing(ctx);
     uVar2 = 1;
     if (callResult != 0) {
-      ((int (*)())FUN_001745ac)(ctx);
+      ((int (*)())ValueKey__rebuild)(ctx);
       uVar2 = 1;
     }
   }
@@ -1832,7 +1832,7 @@ LAB_00175e58:
         FUN_00180154(*keyRef);
         canonicalizeCommutativeOperandsResult = ((int (*)())ValueKey__canonicalizeCommutativeOperands)(*keyRef);
         if (canonicalizeCommutativeOperandsResult != 0) {
-          ((int (*)())FUN_001745ac)(*keyRef);
+          ((int (*)())ValueKey__rebuild)(*keyRef);
         }
         iVar1 = ((int (*)())FUN_001758d8)(*keyRef,valueNumber,param_3,program);
         ((int (*)())FUN_00175b40)(*keyRef);
@@ -1953,19 +1953,19 @@ int Ptr__equalNonNull(param_1, param_2)
   return 0;
 }
 
-/* FUN_00176280 @ 0x176280 (28 bytes) */
-int FUN_00176280(param_1, param_2)
-  int param_1;
-  int param_2;
+/* IROperand__copyRegisterAndSelect @ 0x176280 (28 bytes) */
+int IROperand__copyRegisterAndSelect(dstRecord, srcRecord)
+  int dstRecord;
+  int srcRecord;
 {
   undefined1 uVar1;
   undefined4 uVar2;
   
-  uVar1 = *(undefined1 *)(param_2 + 8);
-  uVar2 = *(undefined4 *)(param_2 + 0xc);
-  *(undefined4 *)(param_1 + 0x10) = *(undefined4 *)(param_2 + 0x10);
-  *(undefined1 *)(param_1 + 8) = uVar1;
-  *(undefined4 *)(param_1 + 0xc) = uVar2;
+  uVar1 = *(undefined1 *)(srcRecord + 8);
+  uVar2 = *(undefined4 *)(srcRecord + 0xc);
+  *(undefined4 *)(dstRecord + 0x10) = *(undefined4 *)(srcRecord + 0x10);
+  *(undefined1 *)(dstRecord + 8) = uVar1;
+  *(undefined4 *)(dstRecord + 0xc) = uVar2;
   return;
 }
 
@@ -2008,17 +2008,17 @@ double KhanPs__vslot56_scaleFloat(double fparam_1)
   return (double)(float)(fparam_1 * (double)FLOAT_001aa1cc);
 }
 
-/* FUN_00176324 @ 0x176324 (44 bytes) */
-int FUN_00176324(param_1)
-  int param_1;
+/* signToCompareCode @ 0x176324 (44 bytes) */
+int signToCompareCode(value)
+  int value;
 {
-  if (param_1 == 0) {
+  if (value == 0) {
     return 3;
   }
-  if (0 < param_1) {
+  if (0 < value) {
     return 5;
   }
-  if (param_1 < 0) {
+  if (value < 0) {
     return 1;
   }
   return 0;
@@ -2248,7 +2248,7 @@ int FUN_001766bc(ctx)
     iVar1 = *(int *)(ctx + 0xb0);
     opcodeInfo = Opcode__getInfo(0x1c);
     *(undefined4 *)(iVar1 + 0x88) = opcodeInfo;
-    ((int (*)())FUN_001745ac)(ctx);
+    ((int (*)())ValueKey__rebuild)(ctx);
     uVar2 = 1;
   }
   return uVar2;

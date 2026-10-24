@@ -641,7 +641,7 @@ int KhanPs__vslot75_registerConstantMultiples(this, constRecord, compiler, param
   }
   if (((kindFlags & 1) == 0) || ((kindFlags & 2) != 0)) {
     *(undefined4 *)(exprRecord2 + 0x20) = 0x31;
-    FUN_00176280(exprRecord2,constRecord);
+    IROperand__copyRegisterAndSelect(exprRecord2,constRecord);
     recordValue = constRecord[5];
     *(undefined1 *)(exprRecord2 + 9) = 1;
     *(float *)(exprRecord2 + 0x14) = recordValue;
@@ -659,7 +659,7 @@ LAB_00128e98:
       if ((((kindFlags & 1) == 0) || ((kindFlags & 2) != 0)) && (((kindFlags & 2) == 0 || ((kindFlags & 1) != 0))))
       {
         *(undefined4 *)(exprRecord + 0x20) = 0x31;
-        FUN_00176280(exprRecord,constRecord);
+        IROperand__copyRegisterAndSelect(exprRecord,constRecord);
         recordValue = constRecord[5];
         *(int *)(exprRecord + 0x1c) = multiple;
         *(undefined1 *)(exprRecord + 9) = 2;
@@ -682,7 +682,7 @@ LAB_00128e98:
         exprRecord = Compiler__valueNumberForExpr(compiler,GH_F2U(-*constRecord * *multipleCursor));
         if (*(char *)(exprRecord + 8) == '\0') {
           *(undefined4 *)(exprRecord + 0x20) = 0x31;
-          FUN_00176280(exprRecord,constRecord);
+          IROperand__copyRegisterAndSelect(exprRecord,constRecord);
           recordValue = constRecord[5];
           *(undefined1 *)(exprRecord + 9) = 3;
           *(float *)(exprRecord + 0x14) = recordValue;
@@ -1687,7 +1687,7 @@ int KhanVs__vslot75_registerConstantMultiples(this, constRecord, compiler, param
     }
     if (((kindFlags & 1) == 0) || ((kindFlags & 2) != 0)) {
       *(undefined4 *)(exprRecord + 0x20) = 0x31;
-      FUN_00176280(exprRecord,constRecord);
+      IROperand__copyRegisterAndSelect(exprRecord,constRecord);
       recordValueBits = *(undefined4 *)(constRecord + 0x14);
       *(undefined1 *)(exprRecord + 9) = 1;
       *(undefined4 *)(exprRecord + 0x14) = recordValueBits;

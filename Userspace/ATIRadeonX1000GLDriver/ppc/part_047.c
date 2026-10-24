@@ -90,21 +90,21 @@ int FUN_00176fd4(ctx, param_2, param_3)
   return 0;
 }
 
-/* FUN_00177064 @ 0x177064 (128 bytes) */
-int FUN_00177064(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int param_3;
+/* Inst__writtenLanesAllMatchValue @ 0x177064 (128 bytes) */
+int Inst__writtenLanesAllMatchValue(valueKey, value, row)
+  int valueKey;
+  int value;
+  int row;
 {
   bool bVar1;
   int iVar2;
   int loopIndex;
   int *loopPtr2;
   
-  loopPtr2 = (int *)(param_3 * 0x10 + param_1 + 0x168);
+  loopPtr2 = (int *)(row * 0x10 + valueKey + 0x168);
   loopIndex = 0;
-  while ((iVar2 = IRInst__getOperandRecord(*(undefined4 *)(param_1 + 0xb0),0),
-         *(char *)(loopIndex + iVar2 + 0x10) == '\x01' || (*loopPtr2 == param_2))) {
+  while ((iVar2 = IRInst__getOperandRecord(*(undefined4 *)(valueKey + 0xb0),0),
+         *(char *)(loopIndex + iVar2 + 0x10) == '\x01' || (*loopPtr2 == value))) {
     bVar1 = loopIndex == 3;
     loopPtr2 = loopPtr2 + 1;
     loopIndex = loopIndex + 1;
@@ -254,7 +254,7 @@ LAB_00177330:
       }
       else {
 LAB_00177304:
-        iVar2 = FUN_00176324(*puVar3);
+        iVar2 = signToCompareCode(*puVar3);
       }
       if (*(int *)(param_1[0x2c] + 0x120) == 0) {
         loopPtr2[0x20] = iVar2;
@@ -449,7 +449,7 @@ int FUN_00177748(ctx)
         iVar8 = *(int *)(iVar10 + 0x178);
         if (iVar8 < 0) {
           puVar7 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar8);
-          iVar8 = FUN_00176324(*puVar7);
+          iVar8 = signToCompareCode(*puVar7);
         }
         else {
           if (iVar8 < 1) {
@@ -586,7 +586,7 @@ int ValueKey__cancelNegatedSourcePair(ctx)
   else {
     IROperand__setModifierBits(member0xb0 + 0xa4,1,0);
     IROperand__setModifierBits(*(int *)(ctx + 0xb0) + 0xbc,1,0);
-    FUN_001745ac(ctx);
+    ValueKey__rebuild(ctx);
     uVar2 = 1;
   }
   return uVar2;
@@ -963,7 +963,7 @@ int FUN_00178648(ctx, param_2)
       iVar4 = *piVar8;
       if (iVar4 < 0) {
         puVar3 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar4);
-        iVar4 = FUN_00176324(*puVar3);
+        iVar4 = signToCompareCode(*puVar3);
         *loopPtr = iVar4;
       }
       else {
@@ -1826,9 +1826,9 @@ int FUN_00179bbc(ctx, param_2)
   return 1;
 }
 
-/* FUN_00179c44 @ 0x179c44 (124 bytes) */
-int FUN_00179c44(param_1, param_2, param_3)
-  int param_1;
+/* Inst__allWrittenLanesSatisfy @ 0x179c44 (124 bytes) */
+int Inst__allWrittenLanesSatisfy(valueKey, param_2, param_3)
+  int valueKey;
   undefined4 param_2;
   undefined4 param_3;
 {
@@ -1837,9 +1837,9 @@ int FUN_00179c44(param_1, param_2, param_3)
   int loopIndex;
   
   loopIndex = 0;
-  while ((iVar2 = IRInst__getOperandRecord(*(undefined4 *)(param_1 + 0xb0),0),
+  while ((iVar2 = IRInst__getOperandRecord(*(undefined4 *)(valueKey + 0xb0),0),
          *(char *)(loopIndex + iVar2 + 0x10) == '\x01' ||
-         (iVar2 = ((int (*)())FUN_00179608)(param_1,loopIndex,param_2,param_3), iVar2 != 0))) {
+         (iVar2 = ((int (*)())FUN_00179608)(valueKey,loopIndex,param_2,param_3), iVar2 != 0))) {
     bVar1 = loopIndex == 3;
     loopIndex = loopIndex + 1;
     if (bVar1) {
@@ -2194,7 +2194,7 @@ int FUN_0017a3d4(ctx)
         if (iVar11 < 0) {
           pfVar9 = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar11);
           *loopPtr4 = *pfVar9;
-          iVar11 = FUN_00176324(*(unsigned int *)pfVar9);
+          iVar11 = signToCompareCode(*(unsigned int *)pfVar9);
           *loopPtr5 = iVar11;
         }
         else {
@@ -2316,7 +2316,7 @@ int FUN_0017a748(ctx)
   int loopIndex;
   undefined4 local_38 [8];
   
-  loopRemaining = ((int (*)())FUN_00179c44)(ctx,1,2);
+  loopRemaining = ((int (*)())Inst__allWrittenLanesSatisfy)(ctx,1,2);
   if (loopRemaining != 0) {
     uVar6 = *(uint *)(*(int *)(ctx + 0xb0) + 0xd0);
     uVar2 = *(uint *)(*(int *)(ctx + 0xb0) + 0xb8);
@@ -2336,7 +2336,7 @@ int FUN_0017a748(ctx)
         loopRemaining = loopRemaining + 4;
         loopIndex = loopIndex + -1;
       } while (loopIndex != 0);
-      loopRemaining = FUN_00176324(0);
+      loopRemaining = signToCompareCode(0);
       loopIndex = 0;
       do {
         operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
@@ -2354,7 +2354,7 @@ int FUN_0017a748(ctx)
         loopIndex = loopIndex + 1;
       } while (bVar1);
       ((int (*)())FUN_0017a294)(ctx,local_38,*(undefined4 *)(ctx + 0x238));
-      FUN_001745ac(ctx);
+      ValueKey__rebuild(ctx);
       return 1;
     }
   }
@@ -2397,7 +2397,7 @@ int FUN_0017a8a4(ctx)
     loopRemaining = loopRemaining + 4;
     loopRemaining2 = loopRemaining2 + -1;
   } while (loopRemaining2 != 0);
-  loopRemaining2 = FUN_00176324(0);
+  loopRemaining2 = signToCompareCode(0);
   bVar3 = false;
   fVar2 = -1.0;
   bVar4 = true;
@@ -2410,7 +2410,7 @@ int FUN_0017a8a4(ctx)
       iVar6 = *(int *)(loopRemaining + 0x178);
       if (iVar6 < 0) {
         puVar7 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar6);
-        iVar6 = FUN_00176324(*puVar7);
+        iVar6 = signToCompareCode(*puVar7);
         inst = *(int *)(ctx + 0xb0);
       }
       else {
@@ -2537,7 +2537,7 @@ int ValueKey__foldDotPowerOfTwoIntoOutputScale(ctx)
             iVar5 = *(int *)(ctx + 0xb0) + ((loopIndex == 1) - 1) * 0x18 + 0xb0;
             IROperand__setModifierBits(iVar5 + 0xc,1,(*(uint *)(iVar5 + 0x20) ^ 1) & 1);
           }
-          FUN_001745ac(ctx);
+          ValueKey__rebuild(ctx);
           return 1;
         }
       }

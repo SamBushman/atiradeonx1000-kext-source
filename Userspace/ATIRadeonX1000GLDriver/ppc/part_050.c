@@ -1397,24 +1397,24 @@ int Arena__free(arena, ptr)
   return;
 }
 
-/* FUN_00193d18 @ 0x193d18 (124 bytes) */
-int FUN_00193d18(param_1)
-  int *param_1;
+/* List__freeAllNodes @ 0x193d18 (124 bytes) */
+int List__freeAllNodes(list)
+  int *list;
 {
   int *piVar1;
   int iVar2;
   
-  piVar1 = (int *)param_1[1];
+  piVar1 = (int *)list[1];
   while (piVar1 != (int *)0x0) {
     iVar2 = *piVar1;
-    (**(code **)(*param_1 + 0x34c))(*(undefined4 *)(*param_1 + 0x354),piVar1);
+    (**(code **)(*list + 0x34c))(*(undefined4 *)(*list + 0x354),piVar1);
     piVar1 = (int *)iVar2;
   }
-  param_1[3] = 0;
-  param_1[1] = 0;
-  param_1[5] = 0;
-  param_1[4] = 0;
-  param_1[2] = 0;
+  list[3] = 0;
+  list[1] = 0;
+  list[5] = 0;
+  list[4] = 0;
+  list[2] = 0;
   return;
 }
 
@@ -1509,17 +1509,17 @@ int DList__isEmpty(param_1)
   return *(int *)(param_1 + 8) == param_1 + 0xc;
 }
 
-/* FUN_00193f20 @ 0x193f20 (36 bytes) */
-int FUN_00193f20(param_1)
-  int *param_1;
+/* DListNode__unlinkAndDelete @ 0x193f20 (36 bytes) */
+int DListNode__unlinkAndDelete(node)
+  int *node;
 {
   int iVar1;
   int iVar2;
   
-  iVar2 = param_1[2];
-  iVar1 = *param_1;
-  *(int *)(iVar2 + 4) = param_1[1];
-  *(int *)(param_1[1] + 8) = iVar2;
+  iVar2 = node[2];
+  iVar1 = *node;
+  *(int *)(iVar2 + 4) = node[1];
+  *(int *)(node[1] + 8) = iVar2;
                     
                     
   (**(code **)(iVar1 + 4))();

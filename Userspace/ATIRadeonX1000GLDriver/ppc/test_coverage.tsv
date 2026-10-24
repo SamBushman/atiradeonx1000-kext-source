@@ -2583,7 +2583,7 @@
 0x14699c	FUN_0014699c	368	yes	
 0x146b0c	FUN_00146b0c	460	yes	
 0x146cd8	FUN_00146cd8	264	yes	
-0x146de0	FUN_00146de0	252	no	indirect call (driver context / vtable / callback)
+0x146de0	Inst__opcodeOrSourcesDiffer	252	no	indirect call (driver context / vtable / callback)
 0x146edc	FUN_00146edc	304	yes	
 0x14700c	FUN_0014700c	56	yes	
 0x147044	FUN_00147044	152	no	indirect call (driver context / vtable / callback)
@@ -2774,7 +2774,7 @@
 0x173cdc	FUN_00173cdc	308	yes	
 0x173e10	Compiler__valueNumberForExpr	268	yes	
 0x173f1c	ValueKey__fill	1680	no	indirect call (driver context / vtable / callback)
-0x1745ac	FUN_001745ac	68	yes	
+0x1745ac	ValueKey__rebuild	68	yes	
 0x1745f0	FUN_001745f0	216	no	indirect call (driver context / vtable / callback)
 0x1746c8	FUN_001746c8	252	yes	
 0x1747c4	FUN_001747c4	196	yes	
@@ -2788,12 +2788,12 @@
 0x175b40	FUN_00175b40	620	no	indirect call (driver context / vtable / callback)
 0x175dac	Program__valueNumberInst	1208	no	indirect call (driver context / vtable / callback)
 0x176264	Ptr__equalNonNull	28	yes	
-0x176280	FUN_00176280	28	yes	
+0x176280	IROperand__copyRegisterAndSelect	28	yes	
 0x17629c	FUN_0017629c	32	yes	
 0x1762bc	noop_1762bc	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1762c0	FUN_001762c0	68	yes	
 0x176304	KhanPs__vslot56_scaleFloat	32	yes	
-0x176324	FUN_00176324	44	yes	
+0x176324	signToCompareCode	44	yes	
 0x176350	classifyConstantRange	148	yes	
 0x1763e4	ValueKey__rowLanesAllEqual	144	yes	
 0x176474	ValueKey__findOrInsertLiteral	104	yes	
@@ -2823,7 +2823,7 @@
 0x176f0c	FUN_00176f0c	56	yes	
 0x176f44	FUN_00176f44	144	yes	
 0x176fd4	FUN_00176fd4	144	yes	
-0x177064	FUN_00177064	128	yes	
+0x177064	Inst__writtenLanesAllMatchValue	128	yes	
 0x1770e4	FUN_001770e4	204	yes	
 0x1771b0	FUN_001771b0	236	yes	
 0x17729c	FUN_0017729c	224	yes	
@@ -2861,7 +2861,7 @@
 0x179a34	FUN_00179a34	244	yes	
 0x179b28	FUN_00179b28	148	yes	
 0x179bbc	FUN_00179bbc	136	yes	
-0x179c44	FUN_00179c44	124	yes	
+0x179c44	Inst__allWrittenLanesSatisfy	124	yes	
 0x179cc0	FUN_00179cc0	240	yes	
 0x179db0	FUN_00179db0	196	yes	
 0x179e74	FUN_00179e74	196	yes	
@@ -3021,13 +3021,13 @@
 0x193be8	FUN_00193be8	24	yes	
 0x193c00	FUN_00193c00	160	yes	
 0x193cc0	Arena__free	88	yes	
-0x193d18	FUN_00193d18	124	yes	
+0x193d18	List__freeAllNodes	124	yes	
 0x193d98	Arena__grow	128	yes	
 0x193e18	Arena__alloc	92	yes	
 0x193e74	FUN_00193e74	68	yes	
 0x193eb8	Arena__bytesInUse	76	yes	
 0x193f08	DList__isEmpty	24	yes	
-0x193f20	FUN_00193f20	36	yes	
+0x193f20	DListNode__unlinkAndDelete	36	yes	
 0x193f44	DList__insertBefore	32	yes	
 0x193f64	DList__pushBack	16	yes	
 0x193f74	DList__insertAfter	32	yes	
@@ -3255,14 +3255,14 @@
 0x1a2db0	R520MachineAssembler__appendLoopRecord	308	no	indirect call (driver context / vtable / callback)
 0x1a2ee4	R520MachineAssembler__vslot25_assembleLoop	284	no	indirect call (driver context / vtable / callback)
 0x1a3000	R520MachineAssembler__vslot37_closeBranch	556	no	indirect call (driver context / vtable / callback)
-0x1a322c	FUN_001a322c	32	no	tiny (32 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1a324c	FUN_001a324c	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1a3254	FUN_001a3254	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1a3258	FUN_001a3258	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1a325c	FUN_001a325c	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1a3260	FUN_001a3260	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1a3264	FUN_001a3264	24	no	tiny (24 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1a327c	FUN_001a327c	84	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x1a322c	_savef14	32	no	tiny (32 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x1a324c	_savef22	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x1a3254	_savef24	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x1a3258	_savef25	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x1a325c	_savef26	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x1a3260	_savef27	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x1a3264	_savef28	24	no	tiny (24 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x1a327c	_restf14	84	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x1a32d0	printf_LDBLStub_1a32d0	172	yes	
 0x1a337c	printf_LDBLStub_1a337c	172	yes	
 0x1a3428	printf_LDBLStub_1a3428	172	yes	
