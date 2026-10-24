@@ -543,8 +543,8 @@ use	_extract_cie_info	iVar5	length	INFERRED	every definition is the result of a 
 use	_get_cie_encoding	iVar2	length	INFERRED	every definition is the result of a call whose name says it returns this	#6	+1	all	all
 use	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4EPKcRKS2_	sVar2	length	INFERRED	every definition is the result of a call whose name says it returns this	#4	+1	all	all
 use	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep9_S_createEmRKS2_	puVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#15	+4	all	all
-use	std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux	pvVar5	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#7	+11	all	all
-use	std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gnu_cxx____normal_iterator_TIntermNode___std__vector_TIntermNode__pool_allocator_TIntermNode_____	pvVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#14	+10	all	all
+use	std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux	pvVar5	newStart	INFERRED	every definition is the result of a call whose name says it returns this	#7	+11	all	all
+use	std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gnu_cxx____normal_iterator_TIntermNode___std__vector_TIntermNode__pool_allocator_TIntermNode_____	pvVar7	newStart	INFERRED	every definition is the result of a call whose name says it returns this	#14	+10	all	all
 use	__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC4ERKS3_mm	uVar4	poolAllocator	INFERRED	every definition is the result of a call whose name says it returns this	#13	+1	all	all
 use	__ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc	sVar1	length	INFERRED	every definition is the result of a call whose name says it returns this	#5	+8	all	all
 use	__ZStplIcSt11char_traitsIcE14pool_allocatorIcEESbIT_T0_T1_EPKS4_RKS7_	sVar5	length	INFERRED	every definition is the result of a call whose name says it returns this	#4	+23	all	all

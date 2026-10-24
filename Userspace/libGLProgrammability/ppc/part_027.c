@@ -507,173 +507,178 @@ int __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE6assignERKS3_(this, text)
 }
 
 /* std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux @ 0x97c31678 (252 bytes) */
-int std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux(this, param_2, intermNode)
+int std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux(this, position, x)
   unsigned char * this;
-  undefined4 *param_2;
-  undefined4 *intermNode;
+  undefined4 *position;
+  undefined4 *x;
 {
-  int finish2;
-  uint uVar1;
-  int iVar2;
+  int finishAfterCopy;
+  int oldFinish;
+  uint tailBytes;
+  int oldSize;
   undefined4 *finish;
-  int iVar4;
-  void *allocation;
-  void *pvVar6;
-  undefined4 uVar7;
-  size_t sVar8;
+  int newLen;
+  void *newStart;
+  void *newFinish;
+  undefined4 xCopy;
+  size_t prefixBytes;
   
   finish = *(undefined4 **)(this + 8);
   if (finish == *(undefined4 **)(this + 0xc)) {
-    iVar4 = 1;
-    iVar2 = (int)finish - *(int *)(this + 4) >> 2;
-    if (iVar2 != 0) {
-      iVar4 = iVar2 << 1;
+    newLen = 1;
+    oldSize = (int)finish - *(int *)(this + 4) >> 2;
+    if (oldSize != 0) {
+      newLen = oldSize << 1;
     }
-    allocation = (void *)TPoolAllocator__allocate(*(unsigned char **)this,iVar4 * 4);
-    sVar8 = (int)param_2 - (int)*(void **)(this + 4);
-    _memmove(allocation,*(void **)(this + 4),sVar8);
-    if ((int)allocation + sVar8 != 0) {
-      *(undefined4 *)((int)allocation + sVar8) = *intermNode;
+    newStart = (void *)TPoolAllocator__allocate(*(unsigned char **)this,newLen * 4);
+    prefixBytes = (int)position - (int)*(void **)(this + 4);
+    _memmove(newStart,*(void **)(this + 4),prefixBytes);
+    if ((int)newStart + prefixBytes != 0) {
+      *(undefined4 *)((int)newStart + prefixBytes) = *x;
     }
-    finish2 = *(int *)(this + 8);
-    pvVar6 = (void *)((int)allocation + sVar8 + 4);
-    _memmove(pvVar6,param_2,finish2 - (int)param_2);
-    *(void **)(this + 0xc) = (void *)((int)allocation + iVar4 * 4);
-    *(int *)(this + 8) = (int)pvVar6 + (finish2 - (int)param_2);
-    *(void **)(this + 4) = allocation;
+    oldFinish = *(int *)(this + 8);
+    newFinish = (void *)((int)newStart + prefixBytes + 4);
+    _memmove(newFinish,position,oldFinish - (int)position);
+    *(void **)(this + 0xc) = (void *)((int)newStart + newLen * 4);
+    *(int *)(this + 8) = (int)newFinish + (oldFinish - (int)position);
+    *(void **)(this + 4) = newStart;
   }
   else {
-    iVar4 = 0;
+    finishAfterCopy = 0;
     if (finish != (undefined4 *)0x0) {
       *finish = finish[-1];
-      iVar4 = *(int *)(this + 8);
+      finishAfterCopy = *(int *)(this + 8);
     }
-    *(int *)(this + 8) = iVar4 + 4;
-    uVar1 = (iVar4 + -4) - (int)param_2 & 0xfffffffc;
-    uVar7 = *intermNode;
-    _memmove((void *)(iVar4 - uVar1),param_2,uVar1);
-    *param_2 = uVar7;
+    *(int *)(this + 8) = finishAfterCopy + 4;
+    tailBytes = (finishAfterCopy + -4) - (int)position & 0xfffffffc;
+    xCopy = *x;
+    _memmove((void *)(finishAfterCopy - tailBytes),position,tailBytes);
+    *position = xCopy;
   }
   return;
 }
 
 /* std__vector_TIntermNode__pool_allocator_TIntermNode_____erase @ 0x97c31774 (96 bytes) */
-int std__vector_TIntermNode__pool_allocator_TIntermNode_____erase(this, param_2, param_3)
-  undefined4 *this;
-  int param_2;
-  void *param_3;
+int std__vector_TIntermNode__pool_allocator_TIntermNode_____erase(retIter, vec, position)
+  undefined4 *retIter;
+  int vec;
+  void *position;
 {
-  void *pvVar1;
-  void *pvVar2;
+  void *next;
+  void *finish;
   
-  pvVar2 = *(void **)(param_2 + 8);
-  pvVar1 = (void *)((int)param_3 + 4);
-  if (pvVar1 != pvVar2) {
-    _memmove(param_3,pvVar1,(int)pvVar2 - (int)pvVar1);
-    pvVar2 = *(void **)(param_2 + 8);
+  finish = *(void **)(vec + 8);
+  next = (void *)((int)position + 4);
+  if (next != finish) {
+    _memmove(position,next,(int)finish - (int)next);
+    finish = *(void **)(vec + 8);
   }
-  *(int *)(param_2 + 8) = (int)pvVar2 + -4;
-  *this = param_3;
-  return this;
+  *(int *)(vec + 8) = (int)finish + -4;
+  *retIter = position;
+  return retIter;
 }
 
 /* std__vector_TIntermNode__pool_allocator_TIntermNode_____insert @ 0x97c317d4 (152 bytes) */
-int std__vector_TIntermNode__pool_allocator_TIntermNode_____insert(this, param_2, intermNode, param_4)
-  int *this;
-  unsigned char * param_2;
-  undefined4 *intermNode;
-  undefined4 *param_4;
+int std__vector_TIntermNode__pool_allocator_TIntermNode_____insert(retIter, vec, position, x)
+  int *retIter;
+  unsigned char * vec;
+  undefined4 *position;
+  undefined4 *x;
 {
-  int iVar1;
-  undefined4 *puVar2;
-  int iVar3;
+  int offsetBytes;
+  undefined4 *finish;
+  int start;
   
-  puVar2 = *(undefined4 **)(param_2 + 8);
-  iVar3 = *(int *)(param_2 + 4);
-  iVar1 = (int)intermNode - iVar3;
-  if ((puVar2 == *(undefined4 **)(param_2 + 0xc)) || (intermNode != puVar2)) {
-    ((int (*)())std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux)(param_2,intermNode,param_4);
-    iVar3 = *(int *)(param_2 + 4);
+  finish = *(undefined4 **)(vec + 8);
+  start = *(int *)(vec + 4);
+  offsetBytes = (int)position - start;
+  if ((finish == *(undefined4 **)(vec + 0xc)) || (position != finish)) {
+    ((int (*)())std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux)(vec,position,x);
+    start = *(int *)(vec + 4);
   }
   else {
-    if (intermNode != (undefined4 *)0x0) {
-      *intermNode = *param_4;
-      iVar3 = *(int *)(param_2 + 4);
-      puVar2 = *(undefined4 **)(param_2 + 8);
+    if (position != (undefined4 *)0x0) {
+      *position = *x;
+      start = *(int *)(vec + 4);
+      finish = *(undefined4 **)(vec + 8);
     }
-    *(undefined4 **)(param_2 + 8) = puVar2 + 1;
+    *(undefined4 **)(vec + 8) = finish + 1;
   }
-  *this = iVar3 + (iVar1 >> 2) * 4;
-  return this;
+  *retIter = start + (offsetBytes >> 2) * 4;
+  return retIter;
 }
 
 /* std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gnu_cxx____normal_iterator_TIntermNode___std__vector_TIntermNode__pool_allocator_TIntermNode_____ @ 0x97c3186c (424 bytes) */
-int std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gnu_cxx____normal_iterator_TIntermNode___std__vector_TIntermNode__pool_allocator_TIntermNode_____(this, param_2, param_3, param_4)
-  undefined4 *this;
-  void *param_2;
-  void *param_3;
-  void *param_4;
+int std__vector_TIntermNode__pool_allocator_TIntermNode______M_range_insert___gnu_cxx____normal_iterator_TIntermNode___std__vector_TIntermNode__pool_allocator_TIntermNode_____(vec, position, first, last)
+  undefined4 *vec;
+  void *position;
+  void *first;
+  void *last;
 {
-  void *allocation;
-  ulong uVar1;
-  undefined4 *puVar2;
-  void *pvVar3;
-  size_t sVar4;
-  size_t sVar5;
-  uint uVar6;
-  void *pvVar7;
-  uint *puVar8;
-  void *pvVar9;
-  int iVar10;
-  uint local_40;
-  uint local_3c [5];
+  void *splitPoint;
+  uint moveBytes;
+  void *newFinish;
+  void *tailSrc;
+  void *newStart;
+  ulong newBytes;
+  undefined4 *result;
+  void *newInsertPoint;
+  size_t prefixBytes;
+  size_t rangeBytes;
+  uint elemsAfter;
+  void *oldFinish;
+  uint *minRef;
+  void *newTailDst;
+  int finishAtCopy;
+  uint oldSize;
+  uint n [5];
   
-  puVar2 = this;
-  if (param_3 != param_4) {
-    sVar5 = (int)param_4 - (int)param_3;
-    pvVar7 = (void *)this[2];
-    local_3c[0] = (int)sVar5 >> 2;
-    if ((uint)(this[3] - (int)pvVar7 >> 2) < local_3c[0]) {
-      puVar8 = local_3c;
-      local_40 = (int)pvVar7 - this[1] >> 2;
-      if (local_3c[0] <= local_40) {
-        puVar8 = &local_40;
+  result = vec;
+  if (first != last) {
+    rangeBytes = (int)last - (int)first;
+    oldFinish = (void *)vec[2];
+    n[0] = (int)rangeBytes >> 2;
+    if ((uint)(vec[3] - (int)oldFinish >> 2) < n[0]) {
+      minRef = n;
+      oldSize = (int)oldFinish - vec[1] >> 2;
+      if (n[0] <= oldSize) {
+        minRef = &oldSize;
       }
-      uVar1 = (local_40 + *puVar8) * 4;
-      allocation = (void *)TPoolAllocator__allocate((unsigned char *)*this,uVar1);
-      sVar4 = (int)param_2 - (int)this[1];
-      pvVar3 = (void *)((int)allocation + sVar4);
-      _memmove(allocation,(void *)this[1],sVar4);
-      pvVar9 = (void *)((int)pvVar3 + sVar5);
-      _memmove(pvVar3,param_3,sVar5);
-      iVar10 = this[2];
-      puVar2 = _memmove(pvVar9,param_2,iVar10 - (int)param_2);
-      this[3] = (void *)((int)allocation + uVar1);
-      this[2] = (int)pvVar9 + (iVar10 - (int)param_2);
-      this[1] = allocation;
+      newBytes = (oldSize + *minRef) * 4;
+      newStart = (void *)TPoolAllocator__allocate((unsigned char *)*vec,newBytes);
+      prefixBytes = (int)position - (int)vec[1];
+      newInsertPoint = (void *)((int)newStart + prefixBytes);
+      _memmove(newStart,(void *)vec[1],prefixBytes);
+      newTailDst = (void *)((int)newInsertPoint + rangeBytes);
+      _memmove(newInsertPoint,first,rangeBytes);
+      finishAtCopy = vec[2];
+      result = _memmove(newTailDst,position,finishAtCopy - (int)position);
+      vec[3] = (void *)((int)newStart + newBytes);
+      vec[2] = (int)newTailDst + (finishAtCopy - (int)position);
+      vec[1] = newStart;
     }
     else {
-      uVar6 = (int)pvVar7 - (int)param_2 >> 2;
-      if (local_3c[0] < uVar6) {
-        pvVar3 = (void *)((int)pvVar7 + local_3c[0] * -4);
-        _memmove(pvVar7,pvVar3,(int)pvVar7 - (int)pvVar3);
-        this[2] = this[2] + local_3c[0] * 4;
-        uVar6 = (int)pvVar7 + (local_3c[0] * -4 - (int)param_2) & 0xfffffffc;
-        _memmove((void *)((int)pvVar7 - uVar6),param_2,uVar6);
+      elemsAfter = (int)oldFinish - (int)position >> 2;
+      if (n[0] < elemsAfter) {
+        tailSrc = (void *)((int)oldFinish + n[0] * -4);
+        _memmove(oldFinish,tailSrc,(int)oldFinish - (int)tailSrc);
+        vec[2] = vec[2] + n[0] * 4;
+        moveBytes = (int)oldFinish + (n[0] * -4 - (int)position) & 0xfffffffc;
+        _memmove((void *)((int)oldFinish - moveBytes),position,moveBytes);
       }
       else {
-        pvVar9 = (void *)((int)param_3 + uVar6 * 4);
-        _memmove(pvVar7,pvVar9,(int)param_4 - (int)pvVar9);
-        pvVar3 = (void *)(this[2] + (local_3c[0] - uVar6) * 4);
-        this[2] = pvVar3;
-        _memmove(pvVar3,param_2,(int)pvVar7 - (int)param_2);
-        sVar5 = (int)pvVar9 - (int)param_3;
-        this[2] = this[2] + uVar6 * 4;
+        splitPoint = (void *)((int)first + elemsAfter * 4);
+        _memmove(oldFinish,splitPoint,(int)last - (int)splitPoint);
+        newFinish = (void *)(vec[2] + (n[0] - elemsAfter) * 4);
+        vec[2] = newFinish;
+        _memmove(newFinish,position,(int)oldFinish - (int)position);
+        rangeBytes = (int)splitPoint - (int)first;
+        vec[2] = vec[2] + elemsAfter * 4;
       }
-      puVar2 = _memmove(param_2,param_3,sVar5);
+      result = _memmove(position,first,rangeBytes);
     }
   }
-  return puVar2;
+  return result;
 }
 
 /* std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string_____operator_ @ 0x97c31a14 (280 bytes) */
