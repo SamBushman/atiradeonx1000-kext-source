@@ -1990,3 +1990,18 @@ local	gldTextureFormatLookup	param_7	outBytesPerTexel	INFERRED	1 << (entry word 
 local	gldTextureFormatLookup	param_8	outBits23	INFERRED	entry word +0x18 >> 0x17 & 0x1f
 local	gldTextureFormatLookup	param_9	outBits30	INFERRED	entry word +0x18 >> 0x1e
 local	gldTextureFormatLookup	iVar1	entryOffset	CONFIRMED	(formatIndex & 0xff) * 0x24: offset into the format table
+local	gld_drawPixelsAtRasterPos	param_1	ctx	CONFIRMED	GL context (+0x160 drawable height, engine state flag at +0x2b7c selects the y flip)
+local	gld_drawPixelsAtRasterPos	param_2	rasterX	CONFIRMED	window x of the raster position (converted to float)
+local	gld_drawPixelsAtRasterPos	param_3	rasterY	CONFIRMED	window y of the raster position (flipped against the drawable height when the +0x2b7c flag is set)
+local	gld_drawPixelsAtRasterPos	param_4	imageWidth	CONFIRMED	pixels per row passed to glDrawPixels_impl
+local	gld_drawPixelsAtRasterPos	param_5	imageHeight	CONFIRMED	rows passed to glDrawPixels_impl
+local	gld_drawPixelsAtRasterPos	param_6	pixelType	CONFIRMED	GL pixel type enum passed on (format is fixed to 0x80e1 GL_BGRA)
+local	gld_drawPixelsAtRasterPos	param_7	pixels	CONFIRMED	pixel data passed on
+local	gld_drawPixelsAtRasterPos	uVar1	rasterYBits	INFERRED	y (or height-y) xor 0x80000000 low word of the int-to-double conversion used for the raster y
+local	gld_drawPixelsAtRasterPos	fStack_128	rasterPosX	INFERRED	x of the {x, y, z} raster position array whose address is passed to glDrawPixels_impl
+local	gld_drawPixelsAtRasterPos	fStack_124	rasterPosY	INFERRED	y of that array
+local	gld_drawPixelsAtRasterPos	uStack_120	rasterPosZ	INFERRED	z of that array (0)
+local	gld_drawPixelsAtRasterPos	uStack_14	yBitsDirect	INFERRED	y ^ 0x80000000 (int-to-double low word, unflipped)
+local	gld_drawPixelsAtRasterPos	uStack_18	yHiDirect	INFERRED	0x43300000 (int-to-double high word, unflipped)
+local	gld_drawPixelsAtRasterPos	uStack_1c	yBitsFlipped	INFERRED	(drawable height - y) ^ 0x80000000 (int-to-double low word, flipped)
+local	gld_drawPixelsAtRasterPos	uStack_20	yHiFlipped	INFERRED	0x43300000 (int-to-double high word, flipped)

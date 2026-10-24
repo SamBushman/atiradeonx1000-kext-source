@@ -10812,42 +10812,42 @@ LAB_000194f4:
 }
 
 /* gld_drawPixelsAtRasterPos @ 0x198b0 (228 bytes) */
-int gld_drawPixelsAtRasterPos(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  uint param_2;
-  uint param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
-  undefined4 param_7;
+int gld_drawPixelsAtRasterPos(ctx, rasterX, rasterY, imageWidth, imageHeight, pixelType, pixels)
+  int ctx;
+  uint rasterX;
+  uint rasterY;
+  undefined4 imageWidth;
+  undefined4 imageHeight;
+  undefined4 pixelType;
+  undefined4 pixels;
 {
-  uint uVar1;
-  float fStack_128;
-  float fStack_124;
-  undefined4 uStack_120;
+  uint rasterYBits;
+  float rasterPosX;
+  float rasterPosY;
+  undefined4 rasterPosZ;
   undefined4 i2dHi1;
   uint i2dLo1;
-  undefined4 uStack_20;
-  uint uStack_1c;
-  undefined4 uStack_18;
-  uint uStack_14;
+  undefined4 yHiFlipped;
+  uint yBitsFlipped;
+  undefined4 yHiDirect;
+  uint yBitsDirect;
   
-  i2dLo1 = param_2 ^ 0x80000000;
+  i2dLo1 = rasterX ^ 0x80000000;
   i2dHi1 = 0x43300000;
-  fStack_128 = (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_001aa1e0);
-  if (((unsigned char *)0x00002b7c)[param_1] == '\0') {
-    uStack_14 = param_3 ^ 0x80000000;
-    uStack_18 = 0x43300000;
-    uVar1 = uStack_14;
+  rasterPosX = (float)((double)CONCAT44(0x43300000,i2dLo1) - DOUBLE_001aa1e0);
+  if (((unsigned char *)0x00002b7c)[ctx] == '\0') {
+    yBitsDirect = rasterY ^ 0x80000000;
+    yHiDirect = 0x43300000;
+    rasterYBits = yBitsDirect;
   }
   else {
-    uStack_20 = 0x43300000;
-    uStack_1c = *(int *)(param_1 + 0x160) - param_3 ^ 0x80000000;
-    uVar1 = uStack_1c;
+    yHiFlipped = 0x43300000;
+    yBitsFlipped = *(int *)(ctx + 0x160) - rasterY ^ 0x80000000;
+    rasterYBits = yBitsFlipped;
   }
-  fStack_124 = (float)((double)CONCAT44(0x43300000,uVar1) - DOUBLE_001aa1e0);
-  uStack_120 = 0;
-  ((int (*)())glDrawPixels_impl)(param_1,&fStack_128,param_4,param_5,0x80e1,param_6,param_7,1,1);
+  rasterPosY = (float)((double)CONCAT44(0x43300000,rasterYBits) - DOUBLE_001aa1e0);
+  rasterPosZ = 0;
+  ((int (*)())glDrawPixels_impl)(ctx,&rasterPosX,imageWidth,imageHeight,0x80e1,pixelType,pixels,1,1);
   return;
 }
 
