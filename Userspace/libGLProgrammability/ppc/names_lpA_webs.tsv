@@ -156,14 +156,6 @@ use	PrintParam	uVar4	bindingBits14	INFERRED	binding word bits 14..15	^\s*if\ \(u
 use	PrintParam	uVar4	bindingBits14	INFERRED	binding word bits 14..15	^\s*if\ \(uVar4\ ==\ 3\)\ \{$@2	+1
 use	__ZN7BindingC2ERKS_	bVar4	isBuiltIn	INFERRED	Binding::IsBuiltIn() of the source	^\s*bVar4\ =\ \(bool\)\(\(int\ \(\*\)\(\)\)Binding__IsBuiltIn\)\(param_2\);$	+2
 use	__ZN7BindingC1ERKS_	bVar4	isBuiltIn	INFERRED	Binding::IsBuiltIn() of the source	^\s*bVar4\ =\ \(bool\)\(\(int\ \(\*\)\(\)\)Binding__IsBuiltIn\)\(param_2\);$	+2
-use	Binding__SetNameFromArrayName	iVar2	nameLen	INFERRED	strlen of the new name	^\s*if\ \(\(param_2\ !=\ \(char\ \*\)0x0\)\ \&\&\ \(iVar2\ =\ _strlen\(param_2\),\ 0\ <\ iVar2\)\)\ \{$	+3
-use	Binding__SetNameFromArrayName	iVar2	nameLengthCountdown	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar2\ =\ \*\(int\ \*\)\(this\ \+\ 0x10\);$	+2
-use	Binding__SetNameFromArrayName	iVar2	nameLengthCountdown	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar6\ =\ iVar2\ \+\ \-1;$	+1
-use	Binding__SetNameFromArrayName	iVar2	nameLengthCountdown	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar2\ =\ iVar6;$@2	+1
-use	Binding__SetNameFromArrayName	iVar2	nameLengthCountdown	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*if\ \(iVar2\ !=\ 0\)\ \{$	+1
-use	Binding__SetNameFromArrayName	iVar2	nameLengthCountdown	INFERRED	flow-joined: name length, then position of the '[' used as the new length and loop count	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
-use	Binding__SetNameFromArrayName	iVar2	clearIdx	INFERRED	index while clearing the name tail	^\s*iVar2\ =\ iVar6;$	+1
-use	Binding__SetNameFromArrayName	iVar2	clearIdx	INFERRED	index while clearing the name tail	^\s*\*\(undefined1\ \*\)\(\*\(int\ \*\)\(this\ \+\ 8\)\ \+\ iVar2\)\ =\ 0;$	+3
 use	Binding__SetNameFromArrayName	iVar4	nameData	INFERRED	copied name (+8)	^\s*iVar4\ =\ \*\(int\ \*\)\(this\ \+\ 8\);$	+1
 use	Binding__SetNameFromArrayName	iVar4	nameData	INFERRED	copied name (+8)	^\s*if\ \(\*\(char\ \*\)\(iVar4\ \+\ iVar2\ \+\ \-1\)\ ==\ '\]'\)\ \{$	+1
 use	Binding__SetNameFromArrayName	iVar4	nameData	INFERRED	copied name (+8)	^\s*if\ \(\*\(char\ \*\)\(iVar4\ \+\ iVar6\)\ ==\ '\['\)\ \{$	+1

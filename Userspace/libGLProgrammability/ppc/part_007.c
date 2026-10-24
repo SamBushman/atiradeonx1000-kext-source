@@ -2075,12 +2075,12 @@ int Binding__SetNameFromArrayName(this, str)
   unsigned char * this;
   char *str;
 {
-  int charIdx;
   int clearIdx;
   int nameLengthCountdown;
+  int charIdx;
+  int nameLen;
   char *allocation;
   bool foundBracket;
-  int nameLen;
   char *chPtr;
   int nameData;
   undefined4 arrayIndex;

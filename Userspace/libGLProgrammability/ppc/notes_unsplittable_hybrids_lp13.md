@@ -1,37 +1,49 @@
-# libGLProgrammability: joined / overlay names that cannot be split (lp13, parts 004/005/007/008/009/011)
+# libGLProgrammability: names that stay joined or overlaid (lp13, parts 004/005/007/008/009/011)
 
-Every entry says why the gate (`gate.sh`, split_equiv + `-Wuninitialized`) or the storage layout forbids one name per role. Where a role list was
-possible the name now describes the storage (`...Overlay`, `...Scratch`, `...Reg`) instead of listing roles with `Or`.
+Evidence is measured: `find_webs.py` output on the base tree (`53da6b7`, renames of the variable taken back) and gate messages from `~/g5logs/lpM*.log`
+(`gate.sh`, split_equiv + `-Wuninitialized`). "web count" = first line of `find_webs.py DIR FN VAR`.
 
-## Address-taken frame storage shared by different lifetimes (apply_names cannot split address-taken locals)
+## A. Gate rejected the split (measured)
 
-| function | variable | what shares the slot |
+| function / variable | name now | measured evidence |
 |---|---|---|
-| `OutputConstantUnion` | `typeTemp1Overlay` | getType() TType temporary, then the `%d (%s)` sprintf buffer and the std::string rep |
-| `TIntermBinary__promote`, `TIntermediate__promoteConstantUnion`, `TParseContext__addConstVectorNode`, `TIntermBinary__indirectNode` | `typeTempOverlay` | TType temporary (getType out parameter) and the `[%d]` / location text buffer |
-| `TIntermBinary__compileNode` | `operandDescOverlay` | first word of the 8-byte operand descriptor out-parameter and the `[%d]` sprintf buffer |
-| `TParseContext__extensionErrorCheck` | `allocatorOverlay`, `mapIterOverlay`, `mapEndOverlay` | pool allocator argument block / lower_bound iterator / insert result / message strings |
-| `TParseContext__arrayErrorCheck` | `stackTypeBitsOverlay`, `stackTypeStructureOverlay`, `stackTypeTypeNameOverlay`, `stackTypeWord14Overlay`, `stackTypeWord1cOverlay`, `stackTypeWord20Overlay` | fake-struct words of two stack TType temporaries (stackType and stackTypeB) at the same stack offsets |
-| `TIntermConstantUnion__fold` | `unaryTypeWord4Overlay`, `binaryTypeWord4Overlay`, `compareTypeWord4Overlay`, `tailTypeWord4Overlay`, `rightTypeOverlay` | stack TType temporaries whose word 4 / rep also hold the `%d:%d` location text |
-| `TGenericLinker__FixOutputReads` | `opChunkScratchWord` | op chunk cursor in the scan loop, then the packed (register, index) halfword pair read through `&` |
+| `ParseSymbolTable__FindNextParamSymbolByName` `iVar2` | `matchResult` | split into symbol cursor + strncmp result: gate **lpM1** `part_011: DATAFLOW _ParseSymbolTable__FindNextParamSymbolByName 1 loads reached by different stores; first at 107 lwz r0,64(r30) \| lwz r0,64(r30)`, `162 functions compared, 1 problems` |
+| `TPoolAllocator__allocate` `iVar6` | `allocationResult` | split into entry offset + returned address: gate **lpM3** `part_005: DATAFLOW _TPoolAllocator__allocate 1 loads reached by different stores; first at 225 lwz r0,64(r30) \| lwz r0,96(r30)` and `UNINIT TPoolAllocator__allocate 0 -> 1`; find_webs: `iVar6: 1 webs` |
+| `TIntermBinary__promote` stale r10 argument at the `case 0x1d..0x24` entry | `sizeInBytes` (not `leftIsMatrixQuery`/`operatorCode`) | gate **lpM5** `part_004: DATAFLOW _TIntermBinary__promote 1 loads reached by different stores; first at 1236 lwz r9,164(r30) \| lwz r9,232(r30)`, `UNINIT TIntermBinary__promote 15 -> 16`; `-Wuninitialized` named `'leftIsMatrixQuery'`, and with `operatorCode` `'operatorCode'`, as used uninitialized; the switch value is `nominalSize*4` (= `sizeInBytes`, like the other stale uses at the same case labels) |
+| `TParseContext__executeInitializer` first split attempt | (fixed, not joined) | gate **lpM2** `part_005: DATAFLOW _TParseContext__executeInitializer 1 loads reached by different stores; first at 2149 lwz r2,292(r30)` + `UNINIT 10 -> 11`: the rhs of `x = *(x + 0x30)` had been left on the old name; fixed, gate lpM3 clean for this function |
 
-## One web (the gate rejected the split, or both defs reach the same use)
+## B. find_webs reports exactly one web (all defs reach the same uses)
 
-| function | name | reason |
+| function / variable | name | find_webs (base `53da6b7`) |
 |---|---|---|
-| `Binding__SetNameFromArrayName` | `nameLengthCountdown` | def at the strlen copy and def `= bracketPos` both reach the checksum loop (`goto LAB_97bb0358`): same web |
-| `TIntermAggregate__compileNode` | `lastCallArg3Ptr` | op-header pointer (AddOperation arg 3) and param-slot pointer (assignOperands arg 3) both reach the later stale-r5 forwards |
-| `TIntermUnary__compileNode` | `opWordScratch` | operator code, PP stream type and op2 header word reach the shared `emitFinalOp` stale r10 argument |
-| `TParseContext__parseMatrixFields` | `fieldTextLengthReg` | length def and the two terminator-char defs all reach the stale 7th argument of `error()` |
-| `TParseContext__constructorErrorCheck` | `savedR10`, `paramSizeResult` | `savedR10`: three defs of the r10 spill slot; `paramSizeResult`: r4 carrier (size query results and `extraout_r4_N` stale reloads) |
-| `ParseSymbolTable__FindNextParamSymbolByName` | `matchResult` | split into symbol cursor / strncmp result failed gate lpM1 (DATAFLOW) |
-| `TPoolAllocator__allocate` | `allocationResult` | split into entry offset / returned address failed gates lpM3 (UNINIT, DATAFLOW): the entry def reaches the fast-path return |
-| `TParseContext__integerErrorCheck` | `basicTypeThenSize` | `if (x == 2 && (x = f(), x == 1))` on one line: lhs/rhs cannot separate the use of the first value from the def of the second |
-| `TGenericLinker__AllocateTextureUnitsForVaryings` | `typeOrVec4Count` | `while (x = GetVec4sForType(x), vec4Index < x)`: argument, result and compare are one statement |
+| `TParseContext__parseMatrixFields` `uVar4` | `fieldTextLengthReg` | `uVar4: 1 webs` |
+| `TParseContext__integerErrorCheck` `iVar1` | `basicTypeThenSize` | `iVar1: 1 webs`; also a one-line `if (x == 2 && (x = f(), x == 1))` |
+| `TGenericLinker__AllocateTextureUnitsForVaryings` `uVar9` | `typeOrVec4Count` | find_webs refuses the function: `do without while`; the joined use is `while (x = GetVec4sForType(x), vec4Index < x)` |
+| `TIntermAggregate__compileNode` `a2` | `lastCallArg3Ptr` | `a2: 1 webs  (some use reached from ENTRY)` |
+| `TParseContext__constructorErrorCheck` `local_8c` | `savedR10` | `local_8c: 1 webs  (some use reached from ENTRY)` |
+| `TParseContext__constructorErrorCheck` `iVar10` | `paramSizeResult` (r4 carrier); the other 3 webs are `paramTypeVtable` / `paramIsArray` / `argBasicType` | `iVar10: 4 webs`; web 0 spans lines 76-357 (`iVar10 = param_2`, every `extraout_r4_N` reload) |
+| `Binding__SetNameFromArrayName` `iVar2` | `nameLengthCountdown` (+ `nameLen`, `clearIdx` split off) | `iVar2: 3 webs`: w0 `strlen` result, w1 lines 22-56 (length def .. checksum loop), w2 lines 37-42 (clear loop index); gate **lpM11** SPLIT-EQUIVALENT with the three names |
+| `TGenericLinker__FixOutputReads` `local_9c` | `opChunkScratchWord` | find_webs refuses: `do without while`; halfword reads through `&` (3 address-of lines in the corpus text) |
 
-## Still joined (work not finished): `TIntermConstantUnion__fold`
+## C. Address-taken or overlapping frame storage (apply_names rule: address-taken locals cannot be split)
 
-15 whole-function locals (`rightOrResultValue`, `refCountOrVtable`, `thisOrRightCursor`, `bitsOrLine`, `nodeOrVtable`, `sizeOrArrayOrIndex`,
-`resultOrOffset`, `countOrResult`, `sizeOrIndex`, `newNodeOrRightArg`, `typeBitsOrLoc`, `typeFieldOrInt`, `resultOrRightFloats`, `sizeOrLoopIndex`,
-`flagOrCompare`) = 240 def-use webs (find_webs). They are not unsplittable; the split needs a name per web (idioms: `bits >> 0x13 & 0x3f` basic type
-field, `(*(code*)**this)(this)` source location, `puVar = PTR_vtable` refcount destroy idiom, `param_2 - 0x13` operator offset, ...). Tracked as open.
+Measured by `grep` over the part files: declaration kind and number of lines that take the address of / cast the variable.
+
+| name | declaration | address-of/cast lines | find_webs (base) |
+|---|---|---|---|
+| `typeTemp1Overlay` (OutputConstantUnion) | `undefined **x [4]` | 2 | `local_1c0: 1 webs` |
+| `typeTempOverlay` (promote, promoteConstantUnion, addConstVectorNode, indirectNode) | `undefined **x [4]` | 7 | indirectNode `local_60: 1 webs` |
+| `operandDescOverlay` (TIntermBinary::compileNode) | `uint` first word of an 8-byte out-parameter | 19 | `local_80: 1 webs` |
+| `allocatorOverlay` / `mapIterOverlay` / `mapEndOverlay` (extensionErrorCheck) | `int x [4]` / `int` / `int` | 2 / 3 / 3 | `local_1c0: 1 webs`, `local_1b0: 2 webs`, `local_1a0: address taken in "(&local_1a0,pTVar8,local_180,&local_70);"` |
+| `binaryTypeWord4Overlay` / `compareTypeWord4Overlay` / `unaryTypeWord4Overlay` / `tailTypeWord4Overlay` / `rightTypeOverlay` (fold) | stack TType words, `rightTypeOverlay` is `undefined **x [4]` | 23 / 24 / 3 / 10 / 5 | n/a (fake-struct words of `&xTypeVtbl`) |
+| `stackType*Overlay` x6 (arrayErrorCheck) | scalar fake-struct words, no direct `&` | 0; the base `&stackType` is passed to getType / TString calls | `local_10c` 4 webs, `local_118` 7, `local_120` 6, `local_11c` 4, `local_114` 4, `local_110` 5 (each `some use reached from ENTRY`) |
+
+The six `stackType*Overlay` words have webs, so a split is possible in principle. It was **not** attempted: each web is read through the address of the
+surrounding TType block (`&stackType`) that the callees fill, and the table rows say the slots are reused as TStrings. This is the one entry in this file
+that is not backed by a gate run, and it is still open.
+
+## D. Verified splits that replaced earlier joined names
+
+`promote` `iVar7` (30 webs, gate lpM6), `executeInitializer` / `arraySetMaxSize` / `ParseSymbol` level lookups (lpM3..lpM6), `extensionErrorCheck` `iVar10`
+(lpM2/lpM3), `TIntermUnary::compileNode` `uVar8` (5 webs: w1 operator code incl. the stale r10 argument, w2..w4 PP stream type; gate **lpM11**),
+`fold` all 15 whole-function locals (lpM8 for 5, lpM9 for 6, lpM10 for 4; rules in `Tools/userspace/lpnames/classwebs.py` usage).

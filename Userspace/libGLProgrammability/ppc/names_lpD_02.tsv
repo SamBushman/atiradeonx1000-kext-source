@@ -38,4 +38,3 @@ use	TIntermUnary__compileNode	iVar9	opReload	INFERRED	this->op (+0x30) re-read a
 use	TIntermUnary__compileNode	iVar9	resultQualifier	CONFIRMED	resultParseType->getQualifier() (vtable +0x24); 0xd (uniform) sets compiler+0xa4	^\s*iVar9\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x24\)\)\(a0,a1_01,pPVar6,param_4,param_5,param_6,pPVar7,iVar9\);$	+5	lhs
 use	TIntermUnary__compileNode	iVar9	opReload	INFERRED	this->op (+0x30) tested for 5 (logical not: flips operand+0x28) and 8 (bitwise not: unsupported)	^\s*iVar9\ =\ \*\(int\ \*\)\(this\ \+\ 0x30\);$@2	+36
 use	TIntermUnary__compileNode	iVar9	logicalSize	CONFIRMED	ParseOperand__GetLogicalSize(sizeOperand)	^\s*iVar9\ =\ ParseOperand__GetLogicalSize\(pPVar7\);$	+2
-local	TIntermUnary__compileNode	uVar8	opWordScratch	INFERRED	operator code (this+0x30), PP stream type, op2 header word and the r10 stale argument forwarded to getOperandAsSourceVar share one web via the emitFinalOp join (2699): cannot be split
