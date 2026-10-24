@@ -1963,3 +1963,86 @@ local	FUN_00052cc0	param_1	glContext	INFERRED	the GL context state object embedd
 local	FUN_00052e60	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
 local	FUN_00053000	param_1	glContext	INFERRED	the GL context state object embedded at GLDContext+0x240 (the object gldValidate* call glContext): shadow registers at +0x1c8c.., dirty words +0x38/+0x3c, register-dirty word +0x1930, stream callbacks +0x2758/+0x275c
 
+use	extvsAppendSymbol	uVar2	entryIndex	INFERRED	index of the entry being appended: *symbolList (the current symbol count)	^\s*uVar2\ =\ \*param_2;$	+2
+use	extvsAppendSymbol	uVar2	entryIndex	INFERRED	index of the entry being appended: *symbolList (the current symbol count)	^\s*uVar2\ =\ \*param_2;$@2	+1
+use	extvsAppendSymbol	uVar2	entryIndex	INFERRED	index of the entry being appended: *symbolList (the current symbol count)	^\s*uVar2\ =\ 0;$	+1
+use	extvsAppendSymbol	uVar2	entryIndex	INFERRED	index of the entry being appended: *symbolList (the current symbol count)	^\s*_memcpy\(param_2\[1\]\ \+\ uVar2\ \*\ 0x54,param_3,0x54\);$	+1
+use	extvsAppendSymbol	uVar2	entryIndex	INFERRED	index of the entry being appended: *symbolList (the current symbol count)	^\s*\*\(undefined1\ \*\)\(uVar2\ \*\ 0x54\ \+\ param_2\[1\]\ \+\ 0x3c\)\ =\ 0;$	+1
+use	extvsAppendSymbol	uVar2	entryIndex	INFERRED	index of the entry being appended: *symbolList (the current symbol count)	^\s*\*\(uint\ \*\)\(uVar1\ \*\ 4\ \+\ param_2\[2\]\)\ =\ uVar2;$	+1
+use	extvsAppendSymbol	uVar2	entryIndex	INFERRED	index of the entry being appended: *symbolList (the current symbol count)	^\s*return\ uVar2;$	+1
+use	extvsAppendSymbol	uVar2	entryIndex	INFERRED	index of the entry being appended: *symbolList (the current symbol count)	^\s*uVar2\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(\(\(unsigned\ char\ \*\)0x00001500\)\ \+\ uVar2\ \*\ 0x54\);$	+1	rhs	none
+use	extvsAppendSymbol	uVar2	newEntries	INFERRED	result of the ctx allocator callback (+0xc): the grown 0x54-byte-entry array that replaces symbolList[1]	^\s*if\ \(uVar2\ !=\ 0\)\ \{$	+1
+use	extvsAppendSymbol	uVar2	newEntries	INFERRED	result of the ctx allocator callback (+0xc): the grown 0x54-byte-entry array that replaces symbolList[1]	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(uVar2,param_2\[1\],\*param_2\ \*\ 0x54\);$	+1
+use	extvsAppendSymbol	uVar2	newEntries	INFERRED	result of the ctx allocator callback (+0xc): the grown 0x54-byte-entry array that replaces symbolList[1]	^\s*param_2\[1\]\ =\ uVar2;$	+1
+use	extvsAppendSymbol	uVar2	newEntries	INFERRED	result of the ctx allocator callback (+0xc): the grown 0x54-byte-entry array that replaces symbolList[1]	^\s*uVar2\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(\(\(unsigned\ char\ \*\)0x00001500\)\ \+\ uVar2\ \*\ 0x54\);$	+1	lhs	none
+use	extvsAppendSymbol	uVar1	symbolId	INFERRED	symbol +0x20: the symbol's id	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_3\ \+\ 0x20\);$	+1
+use	extvsAppendSymbol	uVar1	symbolId	INFERRED	symbol +0x20: the symbol's id	^\s*if\ \(param_2\[3\]\ <=\ uVar1\)\ \{$	+1
+use	extvsAppendSymbol	uVar1	symbolId	INFERRED	symbol +0x20: the symbol's id	^\s*uVar1\ =\ \*\(uint\ \*\)\(param_3\ \+\ 0x20\);$@2	+1
+use	extvsAppendSymbol	uVar1	symbolId	INFERRED	symbol +0x20: the symbol's id	^\s*\*\(uint\ \*\)\(uVar1\ \*\ 4\ \+\ param_2\[2\]\)\ =\ uVar2;$	+1
+use	extvsAppendSymbol	uVar1	symbolId	INFERRED	symbol +0x20: the symbol's id	^\s*uVar1\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(uVar1\ \+\ 0x40,4\);$	+1	rhs	none
+use	extvsAppendSymbol	uVar1	newIdIndex	INFERRED	result of the ctx zeroing allocator callback (+0x10): the grown id-to-entry index array that replaces symbolList[2]	^\s*if\ \(uVar1\ ==\ 0\)\ goto\ LAB_00054f2c;$	+1
+use	extvsAppendSymbol	uVar1	newIdIndex	INFERRED	result of the ctx zeroing allocator callback (+0x10): the grown id-to-entry index array that replaces symbolList[2]	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(uVar1,param_2\[2\],param_2\[3\]\ <<\ 2\);$	+1
+use	extvsAppendSymbol	uVar1	newIdIndex	INFERRED	result of the ctx zeroing allocator callback (+0x10): the grown id-to-entry index array that replaces symbolList[2]	^\s*param_2\[2\]\ =\ uVar1;$	+1
+use	extvsAppendSymbol	uVar1	newIdIndex	INFERRED	result of the ctx zeroing allocator callback (+0x10): the grown id-to-entry index array that replaces symbolList[2]	^\s*uVar1\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(uVar1\ \+\ 0x40,4\);$	+1	lhs	none
+local	extvsAppendSymbol	param_1	ctx	INFERRED	GL context: +0xc/+0x10/+0x18 allocator callbacks (alloc, zeroing alloc, free), +0x1344 memcpy-style callback
+local	extvsAppendSymbol	param_2	symbolList	INFERRED	symbol list {count, entries (0x54 bytes each), idIndex array, idIndexCapacity}: shader[7] of the EXT_vertex_shader object
+local	extvsAppendSymbol	param_3	symbol	INFERRED	0x54-byte symbol entry copied into the list; +0x20 holds the symbol id
+local	extvsCreateSymbol	iVar5	symbolIdState	INFERRED	*(ctx + 0x116c): record whose +0x24 is the next symbol id (incremented per created symbol, skipping 0x610e..0x6111 and 0x879a..0x87be)
+local	extvsCreateSymbol	iVar6	entryOffset	INFERRED	entryIndex * 0x54: byte offset of the new entry in symbolList[1]
+local	extvsCreateSymbol	uVar4	entryIndex	INFERRED	index of the new entry: *symbolList (the current symbol count)
+use	extvsCreateSymbol	uVar2	entriesBase	INFERRED	symbolList[1]: the entry array base	^\s*uVar2\ =\ param_2\[1\];$	+1
+use	extvsCreateSymbol	uVar2	entriesBase	INFERRED	symbolList[1]: the entry array base	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ uVar2\ \+\ 0x38\)\ =\ uVar3;$	+1
+use	extvsCreateSymbol	uVar2	symbolId	INFERRED	the id assigned to the new symbol: symbolIdState[+0x24]	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 0x24\);$	+4
+use	extvsCreateSymbol	uVar2	symbolId	INFERRED	the id assigned to the new symbol: symbolIdState[+0x24]	^\s*\(\*\*\(code\ \*\*\)\(\(\(unsigned\ char\ \*\)0x00001344\)\ \+\ param_1\)\)\(uVar2,param_2\[2\],param_2\[3\]\ <<\ 2\);$	+1
+use	extvsCreateSymbol	uVar2	symbolId	INFERRED	the id assigned to the new symbol: symbolIdState[+0x24]	^\s*param_2\[2\]\ =\ uVar2;$	+1
+use	extvsCreateSymbol	uVar2	symbolId	INFERRED	the id assigned to the new symbol: symbolIdState[+0x24]	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 0x24\);$@2	+1
+use	extvsCreateSymbol	uVar2	symbolId	INFERRED	the id assigned to the new symbol: symbolIdState[+0x24]	^\s*\*\(uint\ \*\)\(uVar2\ \*\ 4\ \+\ param_2\[2\]\)\ =\ uVar4;$	+1
+local	extvsCreateSymbol	param_1	ctx	INFERRED	GL context: +0xc alloc, +0x10 zeroing alloc, +0x18 free callbacks, +0x116c symbol id state
+local	extvsCreateSymbol	param_2	symbolList	INFERRED	symbol list {count, entries (0x54 bytes each), idIndex array, idIndexCapacity}
+local	extvsCreateSymbol	param_3	dataType	INFERRED	EXT_vertex_shader data type: SCALAR_EXT 0x87be / VECTOR_EXT 0x87bf / MATRIX_EXT 0x87c0 (sizes 4/0x10/0x40 bytes)
+local	extvsCreateSymbol	param_4	storageClass	INFERRED	storage class stored at entry +0x28; -4/-3/-2 select the built-in variant/invariant forms (0x87c1 VARIANT_EXT / 0x87c2 INVARIANT_EXT)
+local	extvsCreateSymbol	param_5	entryWord2c	INFERRED	stored unchanged at entry +0x2c
+local	extvsCreateSymbol	param_6	baseId	INFERRED	stored at entry +0x30; defaults to the symbol's own id (+0x20) when 0
+local	extvsCreateSymbol	param_7	elementCount	INFERRED	stored at entry +0x34; values above 1 force the explicit baseId path
+local	extvsCreateSymbol	param_8	constantIndex	INFERRED	register index into the constant table (param_8 * 0x10 + table base) for the invariant forms
+local	extvsAttachSharedState	param_1	ctx	INFERRED	GL context whose shared shader state (+0x116c) is released and replaced
+local	extvsAttachSharedState	param_2	sourceCtx	INFERRED	GL context whose shared shader state (+0x116c) is adopted
+local	extvsAttachSharedState	piVar6	sharedState	INFERRED	*(sourceCtx + 0x116c): shared shader state {[0] reference count, [1] shader count, [3] shader object array (0x7c bytes each), [4] id count}
+use	extvsAttachSharedState	iVar1	contextSlot	INFERRED	sharedState[4] before increment: the slot this context gets (stored at ctx+0x118c)	^\s*iVar1\ =\ piVar6\[4\];$	+3
+use	extvsAttachSharedState	iVar1	shaderOffset	INFERRED	byte offset of the shader object in sharedState[3], advanced by 0x7c per shader	^\s*iVar1\ =\ 0;$	+1
+use	extvsAttachSharedState	iVar1	shaderOffset	INFERRED	byte offset of the shader object in sharedState[3], advanced by 0x7c per shader	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ iVar5\);$	+1
+use	extvsAttachSharedState	iVar1	shaderOffset	INFERRED	byte offset of the shader object in sharedState[3], advanced by 0x7c per shader	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ iVar5\)\ =\ uVar2;$	+2
+use	extvsAttachSharedState	iVar1	shaderOffset	INFERRED	byte offset of the shader object in sharedState[3], advanced by 0x7c per shader	^\s*\(param_1,iVar1\ \+\ piVar6\[3\],\*\(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x0000118c\)\ \+\ param_1\)\);$	+1
+use	extvsAttachSharedState	iVar1	shaderOffset	INFERRED	byte offset of the shader object in sharedState[3], advanced by 0x7c per shader	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ iVar5\ \+\ 4\);$	+1
+use	extvsAttachSharedState	iVar1	shaderOffset	INFERRED	byte offset of the shader object in sharedState[3], advanced by 0x7c per shader	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ iVar5\ \+\ 4\)\ =\ uVar2;$	+3
+use	extvsAttachSharedState	iVar5	shaderArray	INFERRED	sharedState[3]: the shader object array	^\s*iVar5\ =\ piVar6\[3\];$	+1
+use	extvsAttachSharedState	iVar5	shaderArray	INFERRED	sharedState[3]: the shader object array	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ iVar5\);$	+1
+use	extvsAttachSharedState	iVar5	shaderArray	INFERRED	sharedState[3]: the shader object array	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ iVar5\)\ =\ uVar2;$	+1
+use	extvsAttachSharedState	iVar5	shaderArray	INFERRED	sharedState[3]: the shader object array	^\s*iVar5\ =\ piVar6\[3\];$@2	+2
+use	extvsAttachSharedState	iVar5	shaderArray	INFERRED	sharedState[3]: the shader object array	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ iVar5\ \+\ 4\)\ =\ uVar2;$	+1
+use	extvsAttachSharedState	iVar5	shaderEntry	INFERRED	sharedState[3] + shaderOffset: the shader object being resized	^\s*iVar5\ =\ piVar6\[3\]\ \+\ iVar1;$	+1
+use	extvsAttachSharedState	iVar5	shaderEntry	INFERRED	sharedState[3] + shaderOffset: the shader object being resized	^\s*_memcpy\(\*\(undefined4\ \*\)\(iVar5\ \+\ 4\),uVar4,piVar6\[4\]\ \+\ \-1\);$	+1
+use	extvsAttachSharedState	uVar2	newWordArray	INFERRED	zeroing-allocated replacement of the shader's per-id word array (idCount words)	^\s*uVar2\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(piVar6\[4\],4\);$	+2
+use	extvsAttachSharedState	uVar2	newByteArray	INFERRED	zeroing-allocated replacement of the shader's per-id byte array (idCount bytes)	^\s*uVar2\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x10\)\)\(piVar6\[4\],1\);$	+2
+use	extvsAttachSharedState	uVar4	oldWordArray	INFERRED	previous per-id word array of the shader, copied into the new one and freed	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ iVar5\);$	+1
+use	extvsAttachSharedState	uVar4	oldWordArray	INFERRED	previous per-id word array of the shader, copied into the new one and freed	^\s*_memcpy\(\*\(undefined4\ \*\)\(piVar6\[3\]\ \+\ iVar1\),uVar4,piVar6\[4\]\ \*\ 4\ \+\ \-4\);$	+2
+use	extvsAttachSharedState	uVar4	oldByteArray	INFERRED	previous per-id byte array of the shader, copied into the new one and freed	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar1\ \+\ iVar5\ \+\ 4\);$	+1
+use	extvsAttachSharedState	uVar4	oldByteArray	INFERRED	previous per-id byte array of the shader, copied into the new one and freed	^\s*_memcpy\(\*\(undefined4\ \*\)\(iVar5\ \+\ 4\),uVar4,piVar6\[4\]\ \+\ \-1\);$	+2
+local	extvsFreeDeadTempSlots	bVar1	writesX	INFERRED	this instruction writes component X of the temp slot (destination register equals the slot's X register, or the destination write-mask byte)
+local	extvsFreeDeadTempSlots	bVar2	writesY	INFERRED	this instruction writes component Y of the temp slot
+local	extvsFreeDeadTempSlots	bVar3	writesZ	INFERRED	this instruction writes component Z of the temp slot
+local	extvsFreeDeadTempSlots	bVar4	writesW	INFERRED	this instruction writes component W of the temp slot
+local	extvsFreeDeadTempSlots	bVar8	writtenX	INFERRED	component X written by some later instruction (accumulated over the scan)
+local	extvsFreeDeadTempSlots	bVar9	writtenY	INFERRED	component Y written by some later instruction (accumulated over the scan)
+local	extvsFreeDeadTempSlots	bVar10	writtenZ	INFERRED	component Z written by some later instruction (accumulated over the scan)
+local	extvsFreeDeadTempSlots	bVar11	writtenW	INFERRED	component W written by some later instruction (accumulated over the scan)
+local	extvsFreeDeadTempSlots	bVar5	noLaterRead	INFERRED	true while no later instruction reads the temp slot; the slot is only freed when it stays true
+local	extvsFreeDeadTempSlots	bVar21	stopScan	INFERRED	ends the scan: a later instruction reads the slot, or all four components have been rewritten
+local	extvsFreeDeadTempSlots	iVar13	slotRegX	INFERRED	the temp slot's register for component X (slot +0x18); slot +0x1c/+0x20/+0x24 hold Y/Z/W
+local	extvsFreeDeadTempSlots	iVar16	slotOffset	INFERRED	slotIndex * 0x28: byte offset of the temp slot in programState[0x4c]
+local	extvsFreeDeadTempSlots	uVar18	scanIndex	INFERRED	index of the later instruction being scanned
+local	extvsInitShaderObject	param_1	ctx	INFERRED	GL context: +0x10 zeroing allocator callback, +0x116c shared shader state, +0x11a4 symbol-id callback
+local	extvsInitShaderObject	param_2	shader	INFERRED	EXT_vertex_shader object being initialised: [0] per-id word array, [1] per-id byte array, [4] dirty byte, shader[7] the symbol list
+local	extvsInitShaderObject	uVar2	allocatedArray	INFERRED	zero-filled array from the ctx allocator (+0x10) sized by the shared state's id count, stored into shader[0] / shader[1]
+local	extvsInitShaderObject	puVar1	byteCursor	INFERRED	cursor stepped one byte at a time over the shader object while its per-unit and per-slot flag bytes are cleared
+local	extvsInitShaderObject	iVar3	remaining	INFERRED	countdown of flag bytes still to clear
