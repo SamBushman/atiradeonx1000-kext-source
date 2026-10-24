@@ -1,0 +1,390 @@
+use	yyparse	pTVar3	conditionNode	INFERRED	while-loop condition expression node ($k.node)	^\s*pTVar3\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ \-0x50\);$@4	+1
+use	yyparse	pTVar3	conditionNode	INFERRED	while-loop condition expression node ($k.node)	^\s*pTVar3\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ \-0x50\);$@5	+1
+use	yyparse	pTVar3	conditionNode	INFERRED	while-loop condition expression node ($k.node)	^\s*TIntermediate__addLoop\(pTVar15,pTVar20,pTVar3,\(unsigned\ char\ \*\)0x0,param_5,uVar57\);$	+1
+use	yyparse	pTVar3	functionHeader	INFERRED	function header node taken from the value stack (TFunction being defined)	^\s*pTVar3\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ \-0x1c\);$	+1
+use	yyparse	pTVar3	functionHeader	INFERRED	function header node taken from the value stack (TFunction being defined)	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar3\ \+\ 8\)\ =\ \(unsigned\ char\ \*\)\(iVar55\ \+\ 1U\);$	+1
+use	yyparse	pTVar3	functionHeader	INFERRED	function header node taken from the value stack (TFunction being defined)	^\s*local_870\ =\ pTVar3;$@2	+1
+use	yyparse	pTVar3	functionHeader	INFERRED	function header node taken from the value stack (TFunction being defined)	^\s*\(\*\*\(code\ \*\*\)\(\*\(unsigned\ char\ \*\*\)pTVar3\ \+\ 8\)\)$	+2
+use	yyparse	pTVar3	functionHeader	INFERRED	function header node taken from the value stack (TFunction being defined)	^\s*local_308\ =\ pTVar3;$	+1
+use	yyparse	iVar6	paramQualifier1	INFERRED	TType::getQualifier() of the first function's parameter type	^\s*iVar6\ =\ \*piVar61;$	+2
+use	yyparse	iVar6	paramQualifier1	INFERRED	TType::getQualifier() of the first function's parameter type	^\s*if\ \(iVar6\ !=\ iVar26\)\ \{$	+1
+use	yyparse	iVar26	paramQualifier2	INFERRED	TType::getQualifier() of the second function's parameter type	^\s*iVar26\ =\ \*piVar61;$	+2
+use	yyparse	iVar26	paramQualifier2	INFERRED	TType::getQualifier() of the second function's parameter type	^\s*if\ \(iVar6\ !=\ iVar26\)\ \{$	+1
+use	yyparse	pTVar7	newVariableNode	INFERRED	new pool-allocated TVariable/symbol node being initialised	^\s*pTVar7\ =\ \(unsigned\ char\ \*\)\(\(ulonglong\)uVar64\ >>\ 0x20\);$	+1
+use	yyparse	pTVar7	newVariableNode	INFERRED	new pool-allocated TVariable/symbol node being initialised	^\s*\*\(undefined\ \*\*\*\)\(pTVar7\ \+\ 0xc\)\ =\ \&PTR___ZN5TTypeD1Ev_a7b7d640;$	+12
+use	yyparse	pTVar7	newVariableNode	INFERRED	new pool-allocated TVariable/symbol node being initialised	^\s*\*\(uint\ \*\)\(pTVar7\ \+\ 0x30\)\ =\ uVar28\ \|\ uVar2\ \&\ 0x1ffffff;$	+1
+use	yyparse	pTVar7	newVariableNode	INFERRED	new pool-allocated TVariable/symbol node being initialised	^\s*\*\(uint\ \*\)\(pTVar7\ \+\ 0x30\)\ =\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x7ffff;$	+1
+use	yyparse	pTVar7	newVariableNode	INFERRED	new pool-allocated TVariable/symbol node being initialised	^\s*\*\(uint\ \*\)\(pTVar7\ \+\ 0x30\)\ =\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x7ff;$	+1
+use	yyparse	pTVar7	newVariableNode	INFERRED	new pool-allocated TVariable/symbol node being initialised	^\s*\*\(uint\ \*\)\(pTVar7\ \+\ 0x30\)\ =\ uVar58\ \|\ uVar57\ \|\ uVar53\ \|\ uVar28\ \|\ uVar2\ \&\ 0x3ff;$	+2
+use	yyparse	pTVar7	newVariableNode	INFERRED	new pool-allocated TVariable/symbol node being initialised	^\s*\*\(uint\ \*\)\(pTVar7\ \+\ 0x34\)\ =\ 0;$	+3
+use	yyparse	pTVar7	newVariableNode	INFERRED	new pool-allocated TVariable/symbol node being initialised	^\s*\*\(uint\ \*\)\(pTVar7\ \+\ 8\)\ =\ iVar55\ \+\ 1U;$	+1
+use	yyparse	pTVar7	newVariableNode	INFERRED	new pool-allocated TVariable/symbol node being initialised	^\s*\(\*\*\(code\ \*\*\)\(\*\(uint\ \*\)pTVar7\ \+\ 8\)\)$	+2
+use	yyparse	pTVar7	newVariableNode	INFERRED	new pool-allocated TVariable/symbol node being initialised	^\s*local_7f8\ =\ pTVar7;$	+1
+use	yyparse	pTVar7	newVariableNode	INFERRED	new pool-allocated TVariable/symbol node being initialised	^\s*pTVar3\ =\ pTVar7;$	+1
+use	yyparse	pTVar7	typeBitsWord2	INFERRED	TType bit-field word (+0x24) with the array/matrix bits cleared	^\s*pTVar7\ =\ \(unsigned\ char\ \*\)\(\(uint\)\*\(unsigned\ char\ \*\*\)\(pTVar33\ \+\ 0x24\)\ \&\ 0x9ff\ \|\ 0x800\);$	+2
+use	yyparse	pTVar7	typeBitsWord2	INFERRED	TType bit-field word (+0x24) with the array/matrix bits cleared	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar33\ \+\ 0x24\)\ =\ pTVar7;$	+1
+use	yyparse	pTVar7	indexConstant	INFERRED	constant integer index value from the constant union	^\s*pTVar7\ =\ \(unsigned\ char\ \*\)\*\*\(uint\ \*\*\)\(iVar55\ \+\ 0x30\);$	+1
+use	yyparse	pTVar7	indexConstant	INFERRED	constant integer index value from the constant union	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar3\ \+\ 4\)\ =\ pTVar7;$	+1
+use	yyparse	pTVar8	arrayOperand	INFERRED	symbol node passed to TParseContext::arraySetMaxSize	^\s*pTVar8\ =\ \(unsigned\ char\ \*\)$	+1
+use	yyparse	pTVar8	arrayOperand	INFERRED	symbol node passed to TParseContext::arraySetMaxSize	^\s*pTVar8\ =\ \(unsigned\ char\ \*\)$@2	+1
+use	yyparse	pTVar8	arrayOperand	INFERRED	symbol node passed to TParseContext::arraySetMaxSize	^\s*\(param_1,pTVar8,pTVar12,iVar55,\(uint\)!bVar37,\(int\)pTVar33\);$	+1
+use	yyparse	pTVar12	operandTypePtr	INFERRED	TType pointer of the array operand	^\s*pTVar12\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x3c\)\)$	+1
+use	yyparse	pTVar12	operandTypePtr	INFERRED	TType pointer of the array operand	^\s*pTVar12\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x3c\)\)$@2	+1
+use	yyparse	pTVar12	operandTypePtr	INFERRED	TType pointer of the array operand	^\s*\(param_1,pTVar8,pTVar12,iVar55,\(uint\)!bVar37,\(int\)pTVar33\);$	+1
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*pcVar9\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar3\ \+\ 0x38\);$	+1
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*pcVar9\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,4\);$	+2
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*pcVar9\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,4\);$@2	+2
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*pcVar9\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,4\);$@3	+2
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*pcVar9\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,4\);$@4	+2
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*pcVar9\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,4\);$@5	+1
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*\*\(unsigned\ char\ \*\*\)pcVar9\ =\ local_848\ \+\ \(int\)local_844\ \*\ iVar55;$	+1
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*\(\*\(unsigned\ char\ \*\*\)param_1,pcVar9,\(unsigned\ char\ \*\)\&local_840,$	+2
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*pcVar9\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,4\);$@6	+2
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*\(\*\(unsigned\ char\ \*\*\)param_1,pcVar9,\(unsigned\ char\ \*\)\&local_840,$@2	+2
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*pcVar9\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,4\);$@7	+2
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*\(\*\(unsigned\ char\ \*\*\)param_1,pcVar9,\(unsigned\ char\ \*\)\&local_800,$	+2
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*pcVar9\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,4\);$@8	+2
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*\(\*\(unsigned\ char\ \*\*\)param_1,pcVar9,\(unsigned\ char\ \*\)\&local_850,\(int\)param_4\);$	+1
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*pcVar9\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,4\);$@9	+2
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*TIntermediate__addConstantUnion\(pTVar15,pcVar9,\(unsigned\ char\ \*\)\&local_850,\(int\)param_4\);$	+1
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*pcVar9\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,4\);$@10	+2
+use	yyparse	pcVar9	constArray	INFERRED	pool-allocated one-element constUnion array	^\s*\(\*\(unsigned\ char\ \*\*\)param_1,pcVar9,\(unsigned\ char\ \*\)\&local_820,$	+2
+use	yyparse	pvVar14	typeListMem	INFERRED	pool-allocated TTypeList (0x10 bytes)	^\s*pvVar14\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,0x10\);$	+2
+use	yyparse	pvVar14	typeListMem	INFERRED	pool-allocated TTypeList (0x10 bytes)	^\s*if\ \(pvVar14\ !=\ \(unsigned\ char\ \*\)0x0\)\ \{$	+1
+use	yyparse	pvVar14	typeListMem	INFERRED	pool-allocated TTypeList (0x10 bytes)	^\s*\*\(undefined4\ \*\)\(pvVar14\ \+\ 0xc\)\ =\ 0;$	+5
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*pTVar15\ =\ \*\(unsigned\ char\ \*\*\)param_1;$	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*pTVar15\ =\ \*\(unsigned\ char\ \*\*\)param_1;$@2	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*pTVar15\ =\ \*\(unsigned\ char\ \*\*\)param_1;$@3	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*uVar64\ =\ TIntermediate__addIndex\(pTVar15,uVar16,param_3,param_4,param_5\);$	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*pTVar15\ =\ \*\(unsigned\ char\ \*\*\)param_1;$@4	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*pTVar15\ =\ \*\(unsigned\ char\ \*\*\)param_1;$@5	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)TIntermediate__growAggregate\(pTVar15,pTVar22,pTVar20,\(int\)param_4\);$	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*pTVar15\ =\ \*\(unsigned\ char\ \*\*\)param_1;$@6	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*TIntermediate__addConstantUnion\(pTVar15,pcVar9,\(unsigned\ char\ \*\)\&local_850,\(int\)param_4\);$	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*pTVar15\ =\ \*\(unsigned\ char\ \*\*\)param_1;$@7	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*pTVar15\ =\ \*\(unsigned\ char\ \*\*\)param_1;$@8	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*pTVar15\ =\ \*\(unsigned\ char\ \*\*\)param_1;$@9	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)TIntermediate__makeAggregate\(pTVar15,pTVar20,uVar57\);$	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*pTVar15\ =\ \*\(unsigned\ char\ \*\*\)param_1;$@10	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*pTVar15\ =\ \*\(unsigned\ char\ \*\*\)param_1;$@11	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*pTVar15\ =\ \*\(unsigned\ char\ \*\*\)param_1;$@12	+1
+use	yyparse	pTVar15	intermediate	INFERRED	parse context's TIntermediate* (*parseContext)	^\s*TIntermediate__addLoop\(pTVar15,pTVar20,pTVar3,\(unsigned\ char\ \*\)0x0,param_5,uVar57\);$	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_7fc\ \+\ \-0xc\);$	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@2	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@3	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@4	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@5	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@6	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@7	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@8	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@9	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@10	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@11	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@12	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@13	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@14	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@15	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@16	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@17	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@18	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@19	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@20	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_\(paVar11,ppTVar24\);$	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@21	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@22	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_\(paVar11,ppTVar24\);$@2	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@23	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@24	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@25	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@26	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_\(paVar11,ppTVar24\);$@3	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@27	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEE4_Rep10_M_destroyERKS2_\(paVar11,ppTVar24\);$@4	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_84c\ \+\ \-0xc\);$@28	+1
+use	yyparse	paVar11	destroyRep	INFERRED	std::string rep (data - 0xc) to destroy when its refcount drops to zero	^\s*paVar11\ =\ \(unsigned\ char\ \*\)\(local_30c\ \+\ \-0xc\);$	+1
+use	yyparse	uVar16	lastLevel	INFERRED	innermost symbol table level (last element of the level vector)	^\s*uVar16\ =\ \*\(undefined4\ \*\)\(\*piVar61\ \+\ \(\(piVar61\[1\]\ \-\ \*piVar61\ \&\ 0xfffffffcU\)\ \-\ 4\)\);$	+1
+use	yyparse	uVar16	lastLevel	INFERRED	innermost symbol table level (last element of the level vector)	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique\(\(unsigned\ char\ \*\)\&local_810,uVar16,\&local_800\);$	+1
+use	yyparse	uVar16	lastLevel	INFERRED	innermost symbol table level (last element of the level vector)	^\s*uVar16\ =\ \*\(undefined4\ \*\)\(\*piVar50\ \+\ \(\(piVar50\[1\]\ \-\ \*piVar50\ \&\ 0xfffffffcU\)\ \-\ 4\)\);$	+1
+use	yyparse	uVar16	lastLevel	INFERRED	innermost symbol table level (last element of the level vector)	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique\(\(unsigned\ char\ \*\)\&local_840,uVar16,\&local_1e0\);$	+1
+use	yyparse	uVar16	lastLevel	INFERRED	innermost symbol table level (last element of the level vector)	^\s*uVar16\ =\ \*\(undefined4\ \*\)\(\*piVar50\ \+\ \(\(piVar50\[1\]\ \-\ \*piVar50\ \&\ 0xfffffffcU\)\ \-\ 4\)\);$@2	+1
+use	yyparse	uVar16	lastLevel	INFERRED	innermost symbol table level (last element of the level vector)	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique\(\(unsigned\ char\ \*\)\&local_840,uVar16,\&local_f0\);$	+1
+use	yyparse	uVar16	indexOpCode	INFERRED	operator code for the index node (0x2d direct, 0x2e indirect)	^\s*uVar16\ =\ 0x2d;$	+1
+use	yyparse	uVar16	indexOpCode	INFERRED	operator code for the index node (0x2d direct, 0x2e indirect)	^\s*uVar16\ =\ 0x2e;$	+1
+use	yyparse	uVar16	indexOpCode	INFERRED	operator code for the index node (0x2d direct, 0x2e indirect)	^\s*uVar64\ =\ TIntermediate__addIndex\(pTVar15,uVar16,param_3,param_4,param_5\);$	+1
+use	yyparse	uVar16	staleR4Value	INFERRED	r4 value left by the previous call forwarded to the virtual call	^\s*uVar16\ =\ extraout_r4_06;$	+1
+use	yyparse	uVar16	staleR4Value	INFERRED	r4 value left by the previous call forwarded to the virtual call	^\s*uVar16\ =\ extraout_r4_12;$	+1
+use	yyparse	uVar16	staleR4Value	INFERRED	r4 value left by the previous call forwarded to the virtual call	^\s*uVar16\ =\ extraout_r4_13;$	+1
+use	yyparse	uVar16	staleR4Value	INFERRED	r4 value left by the previous call forwarded to the virtual call	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(iVar6\ \+\ 0x24\)\)\(piVar61,uVar16,pcVar29,param_4,param_5,pTVar33,iVar6\);$	+1
+use	yyparse	uVar16	staleR4Value	INFERRED	r4 value left by the previous call forwarded to the virtual call	^\s*uVar16\ =\ extraout_r4_14;$	+1
+use	yyparse	uVar16	staleR4Value	INFERRED	r4 value left by the previous call forwarded to the virtual call	^\s*uVar16\ =\ extraout_r4_15;$	+1
+use	yyparse	uVar16	staleR4Value	INFERRED	r4 value left by the previous call forwarded to the virtual call	^\s*\(pTVar3,uVar16,pcVar29,param_4,param_5,pTVar33,piVar61\);$	+1
+use	yyparse	uVar16	staleR4Value	INFERRED	r4 value left by the previous call forwarded to the virtual call	^\s*iVar55\ =\ \(\*\*\(code\ \*\*\)\(iVar55\ \+\ 0x1c\)\)\(piVar61,uVar16,param_3,param_4,param_5,pTVar33,iVar55\);$	+1
+use	yyparse	uVar16	staleR4Value	INFERRED	r4 value left by the previous call forwarded to the virtual call	^\s*uVar16\ =\ extraout_r4_07;$	+1
+use	yyparse	uVar16	mangledName	INFERRED	TSymbol::getMangledName() of the function symbol	^\s*uVar16\ =\ \(\*\*\(code\ \*\*\)\(\*\(unsigned\ char\ \*\*\)pTVar3\ \+\ 8\)\)\(pTVar3\);$	+2
+use	yyparse	uVar16	mangledName	INFERRED	TSymbol::getMangledName() of the function symbol	^\s*uVar16\ =\ \(\*\*\(code\ \*\*\)\(\*piVar61\ \+\ 8\)\)\(piVar61\);$	+1
+use	yyparse	uVar16	mangledName	INFERRED	TSymbol::getMangledName() of the function symbol	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______find\(\(unsigned\ char\ \*\)local_320,iVar60,uVar16\);$	+1
+use	yyparse	uVar16	picBaseArg	INFERRED	PIC base constant 0xa7b8374c forwarded as an argument	^\s*uVar16\ =\ 0xa7b8374c;$	+1
+use	yyparse	uVar16	picBaseArg	INFERRED	PIC base constant 0xa7b8374c forwarded as an argument	^\s*\(local_7ec,\(int\)uVar64,pTVar7,param_4,param_5,uVar16,\*\(uint\ \*\)local_7ec\);$	+1
+use	yyparse	uVar16	picBaseArg	INFERRED	PIC base constant 0xa7b8374c forwarded as an argument	^\s*uVar16\ =\ 0xa7b8374c;$@2	+1
+use	yyparse	uVar16	picBaseArg	INFERRED	PIC base constant 0xa7b8374c forwarded as an argument	^\s*\(\(int\)param_1,\*\(char\ \*\*\)\(pTVar56\ \+\ \-0x58\),"cannot\ declare\ arrays\ of\ this\ type",$	+2
+use	yyparse	uVar16	picBaseArg	INFERRED	PIC base constant 0xa7b8374c forwarded as an argument	^\s*uVar16\ =\ 0xa7b8374c;$@3	+1
+use	yyparse	uVar16	picBaseArg	INFERRED	PIC base constant 0xa7b8374c forwarded as an argument	^\s*\(\(int\)param_1,\*\(char\ \*\*\)\(pTVar56\ \+\ \-0x58\),"cannot\ declare\ arrays\ of\ this\ type",$@2	+2
+use	yyparse	uVar16	indexValue	INFERRED	constant index value	^\s*uVar16\ =\ \*\*\(undefined4\ \*\*\)\(iVar55\ \+\ 0x30\);$	+1
+use	yyparse	uVar16	indexValue	INFERRED	constant index value	^\s*\*\(undefined4\ \*\)\(pTVar12\ \+\ 4\)\ =\ uVar16;$	+1
+use	yyparse	uVar16	indexValue	INFERRED	constant index value	^\s*uVar16\ =\ \*\*\(undefined4\ \*\*\)\(iVar55\ \+\ 0x30\);$@2	+1
+use	yyparse	uVar16	indexValue	INFERRED	constant index value	^\s*\*\(undefined4\ \*\)\(pTVar12\ \+\ 4\)\ =\ uVar16;$@2	+1
+use	yyparse	uVar16	userTypeName	INFERRED	TType::getTypeName() of the user-defined type	^\s*uVar16\ =\ \(\*\*\(code\ \*\*\)\(\*piVar61\ \+\ 0x18\)\)$	+1
+use	yyparse	uVar16	userTypeName	INFERRED	TType::getTypeName() of the user-defined type	^\s*\(\*\*\(code\ \*\*\)\(iVar55\ \+\ 0x10\)\)\(piVar50,uVar16\);$	+1
+use	yyparse	uVar16	branchOp	INFERRED	branch operator (0x65 continue / 100 break)	^\s*uVar16\ =\ 0x65;$	+1
+use	yyparse	uVar16	branchOp	INFERRED	branch operator (0x65 continue / 100 break)	^\s*uVar16\ =\ 100;$	+1
+use	yyparse	uVar16	branchOp	INFERRED	branch operator (0x65 continue / 100 break)	^\s*uVar16\ =\ 0x62;$	+1
+use	yyparse	uVar16	branchOp	INFERRED	branch operator (0x65 continue / 100 break)	^\s*__ZN13TIntermediate9addBranchE9TOperatori\(pvVar23,uVar16,\*\(uint\ \*\)\(pTVar56\ \+\ \-0x2c\)\);$	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*undefined4\ \*puVar18;$	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*puVar18\ =\ \*\(undefined4\ \*\*\)\(uVar57\ \+\ 0x14\);$	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*if\ \(puVar18\ ==\ \*\(undefined4\ \*\*\)\(uVar57\ \+\ 0x18\)\)\ \{$	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*if\ \(puVar18\ !=\ \(undefined4\ \*\)0x0\)\ \{$	+3
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*puVar18\ =\ \*\(undefined4\ \*\*\)\(uVar57\ \+\ 0x14\);$@2	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*if\ \(puVar18\ ==\ \*\(undefined4\ \*\*\)\(uVar57\ \+\ 0x18\)\)\ \{$@2	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*if\ \(puVar18\ !=\ \(undefined4\ \*\)0x0\)\ \{$@2	+3
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*puVar18\ =\ \*\(undefined4\ \*\*\)\(local_870\ \+\ 8\);$	+2
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*\(piVar61,puVar18,param_3,param_4,param_5,pTVar33,iVar54\);$	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*if\ \(puVar18\ ==\ \*\(undefined4\ \*\*\)\(local_870\ \+\ 0xc\)\)\ \{$	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*\(\(unsigned\ char\ \*\)local_870,puVar18,param_3\);$	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*if\ \(puVar18\ !=\ \(undefined4\ \*\)0x0\)\ \{$@3	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*\*puVar18\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(\*\(uint\ \*\)\(pTVar56\ \+\ 0x10\)\ \+\ 4\)\ \+\ iVar55\);$	+2
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*puVar18\ =\ \(undefined4\ \*\)TPoolAllocator__allocate\(pTVar17,0x10\);$	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*\*puVar18\ =\ local_170;$	+2
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*puVar18\[2\]\ =\ 0;$	+2
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*\*\(undefined4\ \*\)\(puVar18\[1\]\ \+\ 4\)\ =\ 0;$	+3
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*local_160\[0\]\ =\ puVar18;$	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*\*piVar61\ =\ \(int\)puVar18;$	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*puVar18\ =\ \(undefined4\ \*\)TPoolAllocator__allocate\(pTVar17,0x10\);$@2	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*puVar18\ =\ \(undefined4\ \*\)TPoolAllocator__allocate\(pTVar17,0x10\);$@3	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*\*puVar18\ =\ pTVar17;$	+2
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*puVar18\[2\]\ =\ 0;$@2	+2
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*\*\(undefined4\ \*\)\(puVar18\[1\]\ \+\ 4\)\ =\ 0;$@2	+3
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*local_160\[0\]\ =\ puVar18;$@2	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*\*puVar19\ =\ puVar18;$	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*puVar18\ =\ \(undefined4\ \*\)TPoolAllocator__allocate\(pTVar17,0x10\);$@4	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*\*puVar18\ =\ local_130;$	+2
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*puVar18\[2\]\ =\ 0;$@3	+2
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*\*\(undefined4\ \*\)\(puVar18\[1\]\ \+\ 4\)\ =\ 0;$@3	+3
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*local_160\[0\]\ =\ puVar18;$@3	+1
+use	yyparse	puVar18	elementPtr	INFERRED	std::vector finish pointer where the new element is stored (TParameter / TTypeLine)	^\s*\*puVar19\ =\ puVar18;$@2	+1
+use	yyparse	puVar19	treeNodeMem	INFERRED	pool-allocated red-black tree header node (0x1c bytes)	^\s*puVar19\ =\ \(undefined4\ \*\)TPoolAllocator__allocate\(local_170,0x1c\);$	+1
+use	yyparse	puVar19	treeNodeMem	INFERRED	pool-allocated red-black tree header node (0x1c bytes)	^\s*puVar18\[1\]\ =\ puVar19;$	+2
+use	yyparse	puVar19	treeNodeMem	INFERRED	pool-allocated red-black tree header node (0x1c bytes)	^\s*puVar19\ =\ \(undefined4\ \*\)TPoolAllocator__allocate\(pTVar17,0x1c\);$	+1
+use	yyparse	puVar19	treeNodeMem	INFERRED	pool-allocated red-black tree header node (0x1c bytes)	^\s*puVar18\[1\]\ =\ puVar19;$@2	+2
+use	yyparse	puVar19	treeNodeMem	INFERRED	pool-allocated red-black tree header node (0x1c bytes)	^\s*puVar19\ =\ \(undefined4\ \*\)TPoolAllocator__allocate\(local_130,0x1c\);$	+1
+use	yyparse	puVar19	treeNodeMem	INFERRED	pool-allocated red-black tree header node (0x1c bytes)	^\s*puVar18\[1\]\ =\ puVar19;$@3	+2
+use	yyparse	puVar19	treeFinish	INFERRED	symbol table level vector finish pointer	^\s*puVar19\ =\ \*\(undefined4\ \*\*\)\(pvVar51\ \+\ 4\);$	+1
+use	yyparse	puVar19	treeFinish	INFERRED	symbol table level vector finish pointer	^\s*if\ \(puVar19\ ==\ \*\(undefined4\ \*\*\)\(pvVar51\ \+\ 8\)\)\ \{$	+1
+use	yyparse	puVar19	treeFinish	INFERRED	symbol table level vector finish pointer	^\s*\(pvVar51,puVar19,local_160\);$	+1
+use	yyparse	puVar19	treeFinish	INFERRED	symbol table level vector finish pointer	^\s*if\ \(puVar19\ !=\ \(undefined4\ \*\)0x0\)\ \{$	+2
+use	yyparse	puVar19	treeFinish	INFERRED	symbol table level vector finish pointer	^\s*puVar19\ =\ \*\(undefined4\ \*\*\)\(pvVar51\ \+\ 4\);$@2	+1
+use	yyparse	puVar19	treeFinish	INFERRED	symbol table level vector finish pointer	^\s*if\ \(puVar19\ ==\ \*\(undefined4\ \*\*\)\(pvVar51\ \+\ 8\)\)\ \{$@2	+1
+use	yyparse	puVar19	treeFinish	INFERRED	symbol table level vector finish pointer	^\s*\(pvVar51,puVar19,local_160\);$@2	+1
+use	yyparse	puVar19	treeFinish	INFERRED	symbol table level vector finish pointer	^\s*if\ \(puVar19\ !=\ \(undefined4\ \*\)0x0\)\ \{$@2	+2
+use	yyparse	pTVar20	operandNode	INFERRED	aggregate operand node ($k.node or getAsAggregate out-parameter)	^\s*pTVar20\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ 8\);$	+1
+use	yyparse	pTVar20	operandNode	INFERRED	aggregate operand node ($k.node or getAsAggregate out-parameter)	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)TIntermediate__growAggregate\(pTVar15,pTVar22,pTVar20,\(int\)param_4\);$	+1
+use	yyparse	pTVar20	operandNode	INFERRED	aggregate operand node ($k.node or getAsAggregate out-parameter)	^\s*pTVar20\ =\ local_80;$	+1
+use	yyparse	pTVar20	operandNode	INFERRED	aggregate operand node ($k.node or getAsAggregate out-parameter)	^\s*pTVar20\ =\ local_7c;$	+1
+use	yyparse	pTVar20	operandNode	INFERRED	aggregate operand node ($k.node or getAsAggregate out-parameter)	^\s*pTVar20\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ 8\);$@2	+1
+use	yyparse	pTVar20	operandNode	INFERRED	aggregate operand node ($k.node or getAsAggregate out-parameter)	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)TIntermediate__makeAggregate\(pTVar15,pTVar20,uVar57\);$	+1
+use	yyparse	pTVar20	operandNode	INFERRED	aggregate operand node ($k.node or getAsAggregate out-parameter)	^\s*pTVar20\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ 8\);$@3	+1
+use	yyparse	pTVar20	loopBodyNode	INFERRED	loop body node	^\s*pTVar20\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ 8\);$@4	+1
+use	yyparse	pTVar20	loopBodyNode	INFERRED	loop body node	^\s*pTVar20\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ \-0xd4\);$	+1
+use	yyparse	pTVar20	loopBodyNode	INFERRED	loop body node	^\s*TIntermediate__addLoop\(pTVar15,pTVar20,pTVar3,\(unsigned\ char\ \*\)0x0,param_5,uVar57\);$	+1
+use	yyparse	pTVar20	newDeclNode	INFERRED	pool-allocated 0x6c-byte intermediate node being initialised	^\s*pTVar20\ =\ \(unsigned\ char\ \*\)TPoolAllocator__allocate\(pTVar17,0x6c\);$	+1
+use	yyparse	pTVar20	newDeclNode	INFERRED	pool-allocated 0x6c-byte intermediate node being initialised	^\s*\*\(undefined4\ \*\)\(pTVar20\ \+\ 4\)\ =\ 0;$	+16
+use	yyparse	pTVar20	newDeclNode	INFERRED	pool-allocated 0x6c-byte intermediate node being initialised	^\s*\*\(uint\ \*\)\(pTVar20\ \+\ 0x2c\)\ =\ uVar57\ \&\ 0x1ff\ \|\ 0x80800;$	+3
+use	yyparse	pTVar20	newDeclNode	INFERRED	pool-allocated 0x6c-byte intermediate node being initialised	^\s*\*\(undefined4\ \*\)\(pTVar20\ \+\ 0x40\)\ =\ 0;$	+4
+use	yyparse	pTVar20	newDeclNode	INFERRED	pool-allocated 0x6c-byte intermediate node being initialised	^\s*\*\(undefined4\ \*\)\(pTVar20\ \+\ 0x44\)\ =\ local_110;$	+1
+use	yyparse	pTVar20	newDeclNode	INFERRED	pool-allocated 0x6c-byte intermediate node being initialised	^\s*\*\(undefined4\ \*\)\(pTVar20\ \+\ 0x50\)\ =\ 0;$	+2
+use	yyparse	pTVar20	newDeclNode	INFERRED	pool-allocated 0x6c-byte intermediate node being initialised	^\s*\*\(undefined4\ \*\)\(pTVar20\ \+\ 0x4c\)\ =\ 0;$	+1
+use	yyparse	pTVar20	newDeclNode	INFERRED	pool-allocated 0x6c-byte intermediate node being initialised	^\s*\*\(int\ \*\)\(pTVar20\ \+\ 0x58\)\ =\ iVar55\ \+\ 0xc;$	+4
+use	yyparse	pTVar20	newDeclNode	INFERRED	pool-allocated 0x6c-byte intermediate node being initialised	^\s*pTVar20\ =\ \(unsigned\ char\ \*\)$@2	+1
+use	yyparse	pTVar20	newDeclNode	INFERRED	pool-allocated 0x6c-byte intermediate node being initialised	^\s*\(\*\(unsigned\ char\ \*\*\)param_1,pTVar20,pTVar22,\*\(uint\ \*\)pTVar56\);$	+1
+use	yyparse	pTVar20	newDeclNode	INFERRED	pool-allocated 0x6c-byte intermediate node being initialised	^\s*pTVar20\ =\ \(unsigned\ char\ \*\)$@3	+1
+use	yyparse	pTVar20	newDeclNode	INFERRED	pool-allocated 0x6c-byte intermediate node being initialised	^\s*\(\*\(unsigned\ char\ \*\*\)param_1,pTVar20,pTVar22,\*\(uint\ \*\)pTVar56\);$@2	+1
+use	yyparse	pTVar20	newDeclNode	INFERRED	pool-allocated 0x6c-byte intermediate node being initialised	^\s*TIntermediate__setAggregateOperator\(\*\(unsigned\ char\ \*\*\)param_1,pTVar20,4,param_4\);$	+2
+use	yyparse	psVar21	mangledString	INFERRED	pool-allocated TString holding the function's mangled name (or NULL)	^\s*psVar21\ =\ \(unsigned\ char\ \*\)0x0;$	+1
+use	yyparse	psVar21	mangledString	INFERRED	pool-allocated TString holding the function's mangled name (or NULL)	^\s*psVar21\ =\ psVar10;$	+1
+use	yyparse	psVar21	mangledString	INFERRED	pool-allocated TString holding the function's mangled name (or NULL)	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar3\ \+\ 0x14\)\ =\ psVar21;$	+2
+use	yyparse	psVar21	mangledString	INFERRED	pool-allocated TString holding the function's mangled name (or NULL)	^\s*psVar21\ =\ \(unsigned\ char\ \*\)0x0;$@2	+1
+use	yyparse	psVar21	mangledString	INFERRED	pool-allocated TString holding the function's mangled name (or NULL)	^\s*psVar21\ =\ psVar10;$@2	+1
+use	yyparse	psVar21	mangledString	INFERRED	pool-allocated TString holding the function's mangled name (or NULL)	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar3\ \+\ 0x14\)\ =\ psVar21;$@2	+2
+use	yyparse	psVar21	mangledString	INFERRED	pool-allocated TString holding the function's mangled name (or NULL)	^\s*psVar21\ =\ \(unsigned\ char\ \*\)0x0;$@3	+1
+use	yyparse	psVar21	mangledString	INFERRED	pool-allocated TString holding the function's mangled name (or NULL)	^\s*psVar21\ =\ psVar10;$@3	+1
+use	yyparse	psVar21	mangledString	INFERRED	pool-allocated TString holding the function's mangled name (or NULL)	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar12\ \+\ 0x14\)\ =\ psVar21;$	+2
+use	yyparse	psVar21	mangledString	INFERRED	pool-allocated TString holding the function's mangled name (or NULL)	^\s*psVar21\ =\ \(unsigned\ char\ \*\)0x0;$@4	+1
+use	yyparse	psVar21	mangledString	INFERRED	pool-allocated TString holding the function's mangled name (or NULL)	^\s*psVar21\ =\ psVar10;$@4	+1
+use	yyparse	psVar21	mangledString	INFERRED	pool-allocated TString holding the function's mangled name (or NULL)	^\s*\*\(unsigned\ char\ \*\*\)\(pTVar12\ \+\ 0x14\)\ =\ psVar21;$@2	+2
+use	yyparse	psVar21	keyString	INFERRED	TString key copied into the symbol table map pair	^\s*psVar21\ =\ \(unsigned\ char\ \*\)$	+1
+use	yyparse	psVar21	keyString	INFERRED	TString key copied into the symbol table map pair	^\s*__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_\(\&local_800,psVar21\);$	+1
+use	yyparse	psVar21	keyString	INFERRED	TString key copied into the symbol table map pair	^\s*psVar21\ =\ \(unsigned\ char\ \*\)$@2	+1
+use	yyparse	psVar21	keyString	INFERRED	TString key copied into the symbol table map pair	^\s*__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_\(\&local_1e0,psVar21\);$	+1
+use	yyparse	psVar21	keyString	INFERRED	TString key copied into the symbol table map pair	^\s*psVar21\ =\ \(unsigned\ char\ \*\)\(\*\*\(code\ \*\*\)\(\*a0_00\ \+\ 8\)\)\(a0_00,iVar26,iVar30,a3,a4_00,a5,piVar50\);$	+2
+use	yyparse	psVar21	keyString	INFERRED	TString key copied into the symbol table map pair	^\s*psVar21\ =\ \(unsigned\ char\ \*\)$@4	+1
+use	yyparse	psVar21	keyString	INFERRED	TString key copied into the symbol table map pair	^\s*__ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1ERKS3_\(\&local_310,psVar21\);$	+1
+use	yyparse	psVar21	identifierString3	INFERRED	identifier TString used in the error message	^\s*psVar21\ =\ \(unsigned\ char\ \*\)$@3	+1
+use	yyparse	psVar21	identifierString3	INFERRED	identifier TString used in the error message	^\s*\(param_1,\*\(uint\ \*\)\(pTVar56\ \+\ \-0x30\),psVar21,\(unsigned\ char\ \*\)param_4\);$	+1
+use	yyparse	pTVar22	leftNode	INFERRED	left operand node	^\s*pTVar22\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ \-0x50\);$	+1
+use	yyparse	pTVar22	leftNode	INFERRED	left operand node	^\s*pTVar3\ =\ \(unsigned\ char\ \*\)TIntermediate__growAggregate\(pTVar15,pTVar22,pTVar20,\(int\)param_4\);$	+1
+use	yyparse	pTVar22	leftNode	INFERRED	left operand node	^\s*pTVar22\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ \-0xa8\);$	+1
+use	yyparse	pTVar22	leftNode	INFERRED	left operand node	^\s*pTVar22\ =\ \*\(unsigned\ char\ \*\*\)\(pTVar56\ \+\ \-0x24\);$	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*pvVar23\ =\ \(void\ \*\)0x0;$	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*pvVar23\ =\ pvVar13;$	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*\*\(void\ \*\*\)\(pTVar12\ \+\ 0x10\)\ =\ pvVar23;$	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*pvVar23\ =\ \(void\ \*\)0x0;$@2	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*pvVar23\ =\ pvVar13;$@2	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*\*\(void\ \*\*\)\(pTVar12\ \+\ 0x10\)\ =\ pvVar23;$@2	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*pvVar23\ =\ \(void\ \*\)0x0;$@3	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*pvVar23\ =\ pvVar13;$@3	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*\*\(void\ \*\*\)\(pTVar12\ \+\ 0x10\)\ =\ pvVar23;$@3	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*pvVar23\ =\ \(void\ \*\)0x0;$@4	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*pvVar23\ =\ pvVar13;$@4	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*\*\(void\ \*\*\)\(pTVar12\ \+\ 0x10\)\ =\ pvVar23;$@4	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*pvVar23\ =\ \(void\ \*\)0x0;$@5	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*pvVar23\ =\ pvVar13;$@5	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*\*\(void\ \*\*\)\(pTVar12\ \+\ 0x10\)\ =\ pvVar23;$@5	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*pvVar23\ =\ \(void\ \*\)0x0;$@6	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*pvVar23\ =\ pvVar13;$@6	+1
+use	yyparse	pvVar23	fieldTypeName	INFERRED	pool-allocated TString copy of the struct field's type name (or NULL)	^\s*\*\(void\ \*\*\)\(pTVar12\ \+\ 0x10\)\ =\ pvVar23;$@6	+1
+use	yyparse	pvVar23	poppedLevel	INFERRED	symbol table level being popped and destroyed	^\s*pvVar23\ =\ \*\(void\ \*\*\)\(\*piVar61\ \+\ \(\(iVar55\ \-\ \*piVar61\ \&\ 0xfffffffcU\)\ \-\ 4\)\);$	+3
+use	yyparse	pvVar23	poppedLevel	INFERRED	symbol table level being popped and destroyed	^\s*pvVar23\ =\ \*\(void\ \*\*\)\(\*piVar61\ \+\ \(\(iVar55\ \-\ \*piVar61\ \&\ 0xfffffffcU\)\ \-\ 4\)\);$@2	+3
+use	yyparse	pvVar23	poppedLevel	INFERRED	symbol table level being popped and destroyed	^\s*pvVar23\ =\ \*\(void\ \*\*\)\(\*piVar61\ \+\ \(\(iVar55\ \-\ \*piVar61\ \&\ 0xfffffffcU\)\ \-\ 4\)\);$@3	+3
+use	yyparse	pvVar23	poppedLevel	INFERRED	symbol table level being popped and destroyed	^\s*pvVar23\ =\ \*\(void\ \*\*\)\(\*piVar61\ \+\ \(\(iVar55\ \-\ \*piVar61\ \&\ 0xfffffffcU\)\ \-\ 4\)\);$@4	+3
+use	yyparse	pvVar23	intermediateForBranch	INFERRED	TIntermediate* (*parseContext) used for addBranch	^\s*pvVar23\ =\ \*\(void\ \*\*\)param_1;$	+1
+use	yyparse	pvVar23	intermediateForBranch	INFERRED	TIntermediate* (*parseContext) used for addBranch	^\s*pvVar23\ =\ \*\(void\ \*\*\)param_1;$@2	+1
+use	yyparse	pvVar23	intermediateForBranch	INFERRED	TIntermediate* (*parseContext) used for addBranch	^\s*pvVar23\ =\ \*\(void\ \*\*\)param_1;$@3	+1
+use	yyparse	pvVar23	intermediateForBranch	INFERRED	TIntermediate* (*parseContext) used for addBranch	^\s*__ZN13TIntermediate9addBranchE9TOperatori\(pvVar23,uVar16,\*\(uint\ \*\)\(pTVar56\ \+\ \-0x2c\)\);$	+1
+use	yyparse	puVar25	elementEnd	INFERRED	std::vector finish pointer checked against the end of storage before the push_back	^\s*puVar25\ =\ \*\(uint\ \*\*\)\(uVar57\ \+\ 0x14\);$	+2
+use	yyparse	puVar25	elementEnd	INFERRED	std::vector finish pointer checked against the end of storage before the push_back	^\s*if\ \(puVar25\ !=\ \(uint\ \*\)0x0\)\ \{$	+1
+use	yyparse	puVar25	elementEnd	INFERRED	std::vector finish pointer checked against the end of storage before the push_back	^\s*\*puVar25\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ 0x10\);$	+2
+use	yyparse	puVar25	elementEnd	INFERRED	std::vector finish pointer checked against the end of storage before the push_back	^\s*puVar25\ =\ \*\(uint\ \*\*\)\(uVar57\ \+\ 0x14\);$@2	+2
+use	yyparse	puVar25	elementEnd	INFERRED	std::vector finish pointer checked against the end of storage before the push_back	^\s*if\ \(puVar25\ !=\ \(uint\ \*\)0x0\)\ \{$@2	+1
+use	yyparse	puVar25	elementEnd	INFERRED	std::vector finish pointer checked against the end of storage before the push_back	^\s*\*puVar25\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ 0x10\);$@2	+2
+use	yyparse	puVar25	elementEnd	INFERRED	std::vector finish pointer checked against the end of storage before the push_back	^\s*puVar25\ =\ \*\(uint\ \*\*\)\(local_870\ \+\ 8\);$	+2
+use	yyparse	puVar25	elementEnd	INFERRED	std::vector finish pointer checked against the end of storage before the push_back	^\s*\(\(unsigned\ char\ \*\)local_870,puVar25,pTVar56\ \+\ 0x10\);$	+1
+use	yyparse	puVar25	elementEnd	INFERRED	std::vector finish pointer checked against the end of storage before the push_back	^\s*if\ \(puVar25\ !=\ \(uint\ \*\)0x0\)\ \{$@3	+1
+use	yyparse	puVar25	elementEnd	INFERRED	std::vector finish pointer checked against the end of storage before the push_back	^\s*\*puVar25\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ 0x10\);$@3	+2
+use	yyparse	puVar25	typeSpecifierInit	INFERRED	static TPublicType initialiser (type_specifier rules)	^\s*puVar25\ =\ \&DAT_97c356fc;$	+1
+use	yyparse	puVar25	typeSpecifierInit	INFERRED	static TPublicType initialiser (type_specifier rules)	^\s*puVar25\ =\ \&DAT_97c35718;$	+1
+use	yyparse	puVar25	typeSpecifierInit	INFERRED	static TPublicType initialiser (type_specifier rules)	^\s*puVar25\ =\ \&DAT_97c35750;$	+1
+use	yyparse	puVar25	typeSpecifierInit	INFERRED	static TPublicType initialiser (type_specifier rules)	^\s*local_858\ =\ \(unsigned\ char\ \*\)puVar25\[6\];$	+5
+use	yyparse	puVar25	typeSpecifierInit	INFERRED	static TPublicType initialiser (type_specifier rules)	^\s*local_870\ =\ \(unsigned\ char\ \*\)\*puVar25;$	+2
+use	yyparse	puVar25	typeSpecifierInit	INFERRED	static TPublicType initialiser (type_specifier rules)	^\s*local_850\ =\ \(unsigned\ char\ \*\)\*puVar25;$	+2
+use	yyparse	puVar25	shorterLenPtr	INFERRED	pointer to the shorter of the two name lengths	^\s*puVar25\ =\ \&local_74;$	+1
+use	yyparse	puVar25	shorterLenPtr	INFERRED	pointer to the shorter of the two name lengths	^\s*puVar25\ =\ \&local_78;$	+1
+use	yyparse	puVar25	shorterLenPtr	INFERRED	pointer to the shorter of the two name lengths	^\s*param_3\ =\ \(char\ \*\)\*puVar25;$	+1
+use	yyparse	puVar25	shorterLenPtr	INFERRED	pointer to the shorter of the two name lengths	^\s*puVar25\ =\ \&local_8c;$	+1
+use	yyparse	puVar25	shorterLenPtr	INFERRED	pointer to the shorter of the two name lengths	^\s*puVar25\ =\ \&local_90;$	+1
+use	yyparse	puVar25	shorterLenPtr	INFERRED	pointer to the shorter of the two name lengths	^\s*param_3\ =\ \(char\ \*\)\*puVar25;$@2	+1
+use	yyparse	uVar28	basicTypeBits3	INFERRED	basic-type field of the TType bit-field	^\s*uVar28\ =\ local_7bc\ >>\ 0x13;$	+1
+use	yyparse	uVar28	basicTypeBits3	INFERRED	basic-type field of the TType bit-field	^\s*if\ \(\(\(int\)\(uVar57\ \|\ uVar28\)\ >>\ 0x18\ <=\ \*\*\(int\ \*\*\)\(iVar55\ \+\ 0x30\)\)\ \&\&$	+3
+use	yyparse	uVar28	paramQualifierArg	INFERRED	parameter qualifier passed to paramErrorCheck	^\s*uVar28\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ \-0x44\);$	+1
+use	yyparse	uVar28	paramQualifierArg	INFERRED	parameter qualifier passed to paramErrorCheck	^\s*uVar28\ =\ 0;$	+1
+use	yyparse	uVar28	paramQualifierArg	INFERRED	parameter qualifier passed to paramErrorCheck	^\s*iVar55\ =\ TParseContext__paramErrorCheck\(param_1,uVar57,uVar28,param_4,local_86c\);$	+1
+use	yyparse	uVar28	nodeOpArg	INFERRED	operator argument stored into the out-args block	^\s*uVar28\ =\ 0;$@2	+1
+use	yyparse	uVar28	nodeOpArg	INFERRED	operator argument stored into the out-args block	^\s*uVar28\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ \-0x24\);$	+1
+use	yyparse	uVar28	nodeOpArg	INFERRED	operator argument stored into the out-args block	^\s*puVar4\[0x10\]\ =\ uVar28;$	+1
+use	yyparse	uVar28	declaredNameLen2	INFERRED	length of the declared name	^\s*uVar28\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar55\ \+\ 4\)\ \+\ \-0xc\);$	+2
+use	yyparse	uVar28	declaredNameLen2	INFERRED	length of the declared name	^\s*if\ \(uVar28\ <=\ uVar53\)\ \{$	+1
+use	yyparse	uVar28	declaredNameLen2	INFERRED	length of the declared name	^\s*iVar55\ =\ uVar28\ \-\ uVar53;$	+1
+use	yyparse	pcVar29	errorLine2	INFERRED	source line passed to TParseContext::error	^\s*pcVar29\ =\ \*\(char\ \*\*\)\(pTVar56\ \+\ \-0x2c\);$	+1
+use	yyparse	pcVar29	errorLine2	INFERRED	source line passed to TParseContext::error	^\s*pcVar29\ =\ \*\(char\ \*\*\)\(pTVar56\ \+\ \-0x2c\);$@2	+1
+use	yyparse	pcVar29	errorLine2	INFERRED	source line passed to TParseContext::error	^\s*TParseContext__error\(\(int\)param_1,pcVar29,pcVar62,param_4,"",pTVar33,pTVar34,param_8\);$	+1
+use	yyparse	pcVar29	messageSource	INFERRED	token text passed as the error's token	^\s*pcVar29\ =\ \(char\ \*\)\(\*\*\(code\ \*\*\)\*\*\(undefined4\ \*\*\)\(pTVar56\ \+\ 8\)\)$	+1
+use	yyparse	pcVar29	messageSource	INFERRED	token text passed as the error's token	^\s*\(\(int\)param_1,pcVar29,$	+3
+use	yyparse	pcVar29	errorText	INFERRED	function name text or the "overloaded functions must have the same return type" message	^\s*pcVar29\ =\ pcVar62;$	+1
+use	yyparse	pcVar29	errorText	INFERRED	function name text or the "overloaded functions must have the same return type" message	^\s*pcVar29\ =\ "overloaded\ functions\ must\ have\ the\ same\ return\ type";$	+1
+use	yyparse	pcVar29	errorText	INFERRED	function name text or the "overloaded functions must have the same return type" message	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(iVar6\ \+\ 0x24\)\)\(piVar61,uVar16,pcVar29,param_4,param_5,pTVar33,iVar6\);$	+1
+use	yyparse	pcVar29	errorText	INFERRED	function name text or the "overloaded functions must have the same return type" message	^\s*iVar26\ =\ \(\*\*\(code\ \*\*\)\(iVar26\ \+\ 0x24\)\)\(piVar61,a1_08,pcVar29,param_4,param_5,pTVar33,iVar26\);$	+1
+use	yyparse	pcVar29	errorText	INFERRED	function name text or the "overloaded functions must have the same return type" message	^\s*pcVar29\ =\ "overloaded\ functions\ must\ have\ the\ same\ parameter\ qualifiers";$	+1
+use	yyparse	pcVar29	errorText	INFERRED	function name text or the "overloaded functions must have the same return type" message	^\s*\(pTVar3,uVar16,pcVar29,param_4,param_5,pTVar33,piVar61\);$	+1
+use	yyparse	pTVar33	nodeVtableWord	INFERRED	vtable of yyvalNode	^\s*pTVar33\ =\ \*\(unsigned\ char\ \*\*\)local_878;$	+1
+use	yyparse	pTVar33	nodeVtableWord	INFERRED	vtable of yyvalNode	^\s*\(\*\*\(code\ \*\*\)\(pTVar33\ \+\ 0x34\)\)$	+1
+use	yyparse	ppuVar35	typeVtablePtr	INFERRED	address of the TType vtable import	^\s*ppuVar35\ =\ \&PTR___ZN5TTypeD1Ev_a7b7d640;$	+1
+use	yyparse	ppuVar35	typeVtablePtr	INFERRED	address of the TType vtable import	^\s*ppuVar35\ =\ \&PTR___ZN5TTypeD1Ev_a7b7d640;$@2	+1
+use	yyparse	ppuVar35	typeVtablePtr	INFERRED	address of the TType vtable import	^\s*\(\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x24\),a1_12,param_3,param_4,param_5,pTVar33,$	+2
+use	yyparse	ppuVar35	typeVtablePtr	INFERRED	address of the TType vtable import	^\s*ppuVar35\ =\ \*\(undefined\ \*\*\*\)\(pTVar7\ \+\ 4\);$	+1
+use	yyparse	ppuVar35	typeVtablePtr	INFERRED	address of the TType vtable import	^\s*\(local_878,ppuVar35\[uVar57\ \*\ 2\],param_3,param_4,param_5,pTVar3,ppuVar35\);$	+1
+use	yyparse	ppuVar35	typeVtablePtr	INFERRED	address of the TType vtable import	^\s*ppuVar35\ =\ \*\(undefined\ \*\*\*\)\(pTVar7\ \+\ 4\);$@2	+2
+use	yyparse	ppuVar35	typeVtablePtr	INFERRED	address of the TType vtable import	^\s*\(\*pcVar40\)\(pTVar33,puVar5,param_3,param_4,param_5,pTVar3,ppuVar35\);$	+1
+use	yyparse	pcVar40	nodeMethod	INFERRED	virtual method pointer called on the node	^\s*pcVar40\ =\ \*\(code\ \*\*\)\(\*\(unsigned\ char\ \*\*\)pTVar33\ \+\ 0x14\);$	+1
+use	yyparse	pcVar40	nodeMethod	INFERRED	virtual method pointer called on the node	^\s*pcVar40\ =\ \*\(code\ \*\*\)\(\*\(unsigned\ char\ \*\*\)pTVar33\ \+\ 0x28\);$	+1
+use	yyparse	pcVar40	nodeMethod	INFERRED	virtual method pointer called on the node	^\s*pcVar40\ =\ \*\(code\ \*\*\)\(\*\(unsigned\ char\ \*\*\)pTVar33\ \+\ 0x34\);$	+1
+use	yyparse	pcVar40	nodeMethod	INFERRED	virtual method pointer called on the node	^\s*\(\*pcVar40\)\(pTVar33,puVar5,param_3,param_4,param_5,pTVar3,ppuVar35\);$	+1
+use	yyparse	uVar49	lastLevel2	INFERRED	innermost symbol table level	^\s*uVar49\ =\ \*\(undefined4\ \*\)\(\*piVar61\ \+\ \(\(piVar61\[1\]\ \-\ \*piVar61\ \&\ 0xfffffffcU\)\ \-\ 4\)\);$	+1
+use	yyparse	uVar49	lastLevel2	INFERRED	innermost symbol table level	^\s*std___Rb_tree_std__string_std__pair_std__string_const_TSymbol___std___Select1st_std__pair_std__string_const_TSymbol____std__less_std__string__pool_allocator_std__pair_std__string_const_TSymbol______insert_unique\(\(unsigned\ char\ \*\)\&local_840,uVar49,\&local_310\);$	+1
+use	yyparse	piVar50	paramEntry	INFERRED	parameter / field entry object	^\s*piVar50\ =\ \*\(int\ \*\*\)\(\*\(uint\ \*\)\(pTVar3\ \+\ 0x10\)\ \+\ iVar55\ \*\ 8\ \+\ 4\);$	+2
+use	yyparse	piVar50	paramEntry	INFERRED	parameter / field entry object	^\s*\(piVar50,piVar61,pcVar62,param_4,param_5,pTVar33,iVar54\);$	+1
+use	yyparse	piVar50	paramEntry	INFERRED	parameter / field entry object	^\s*piVar50\ =\ \*\(int\ \*\*\)\(\*\(uint\ \*\)\(local_870\ \+\ 4\)\ \+\ uVar57\ \*\ 8\);$	+2
+use	yyparse	piVar50	paramEntry	INFERRED	parameter / field entry object	^\s*\(\*\*\(code\ \*\*\)\(iVar55\ \+\ 0x10\)\)\(piVar50,uVar16\);$	+1
+use	yyparse	piVar50	refCountPtr4	INFERRED	refcount word (rep+8) of the shared empty string rep	^\s*piVar50\ =\ \(int\ \*\)\(iVar55\ \+\ 8\);$	+1
+use	yyparse	piVar50	refCountPtr4	INFERRED	refcount word (rep+8) of the shared empty string rep	^\s*iVar54\ =\ storeWordConditionalIndexed\(\*piVar50\ \+\ 1,0,piVar50\);$	+2
+use	yyparse	uVar53	nameLenB	INFERRED	length of the second name string	^\s*uVar53\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar54\ \+\ 4\)\ \+\ \-0xc\);$	+2
+use	yyparse	uVar53	nameLenB	INFERRED	length of the second name string	^\s*if\ \(uVar53\ <=\ uVar58\)\ \{$	+1
+use	yyparse	uVar53	nameLenB	INFERRED	length of the second name string	^\s*iVar54\ =\ uVar53\ \-\ uVar58;$	+1
+use	yyparse	uVar53	nameLenB	INFERRED	length of the second name string	^\s*uVar53\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(\*\(uint\ \*\)\(pTVar56\ \+\ 4\)\ \+\ 4\)\ \+\ \-0xc\);$	+2
+use	yyparse	uVar53	nameLenB	INFERRED	length of the second name string	^\s*if\ \(uVar28\ <=\ uVar53\)\ \{$	+1
+use	yyparse	uVar53	nameLenB	INFERRED	length of the second name string	^\s*iVar55\ =\ uVar28\ \-\ uVar53;$	+1
+use	yyparse	iVar54	qualifier1	INFERRED	TType::getQualifier() result	^\s*iVar54\ =\ \*piVar50;$	+4
+use	yyparse	iVar54	qualifier1	INFERRED	TType::getQualifier() result	^\s*local_84\ =\ iVar54;$	+1
+use	yyparse	iVar54	qualifier1	INFERRED	TType::getQualifier() result	^\s*\*piVar61\ =\ iVar54;$@3	+1
+use	yyparse	iVar54	levelIdx	INFERRED	index of the symbol table level (counts down)	^\s*iVar54\ =\ \(piVar61\[1\]\ \-\ iVar55\ >>\ 2\)\ \+\ \-1;$	+1
+use	yyparse	iVar54	levelIdx	INFERRED	index of the symbol table level (counts down)	^\s*iVar54\ =\ \(piVar50\[1\]\ \-\ iVar55\ >>\ 2\)\ \+\ \-1;$	+1
+use	yyparse	iVar54	levelIdx	INFERRED	index of the symbol table level (counts down)	^\s*iVar60\ =\ \*\(int\ \*\)\(iVar55\ \+\ iVar54\ \*\ 4\);$	+1
+use	yyparse	iVar54	levelIdx	INFERRED	index of the symbol table level (counts down)	^\s*iVar54\ =\ iVar54\ \+\ \-1;$	+2
+use	yyparse	iVar54	levelIdx	INFERRED	index of the symbol table level (counts down)	^\s*iVar60\ =\ \*\(int\ \*\)\(iVar55\ \+\ iVar54\ \*\ 4\);$@2	+1
+use	yyparse	iVar54	levelIdx	INFERRED	index of the symbol table level (counts down)	^\s*iVar54\ =\ iVar54\ \+\ \-1;$@2	+1
+use	yyparse	iVar54	levelIdx	INFERRED	index of the symbol table level (counts down)	^\s*if\ \(\-1\ <\ iVar54\)\ goto\ LAB_97ba8334;$	+1
+use	yyparse	iVar54	fieldNameStr3	INFERRED	name string of the struct field	^\s*iVar54\ =\ \*piVar61;$	+3
+use	yyparse	iVar54	fieldNameStr3	INFERRED	name string of the struct field	^\s*uVar53\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar54\ \+\ 4\)\ \+\ \-0xc\);$	+1
+use	yyparse	iVar54	fieldNameStr3	INFERRED	name string of the struct field	^\s*iVar54\ =\ _memcmp\(\*\(undefined4\ \*\)\(iVar54\ \+\ 4\),\*\(undefined4\ \*\)\(iVar60\ \+\ 4\),param_3\);$	+4
+use	yyparse	iVar54	fieldNameStr3	INFERRED	name string of the struct field	^\s*if\ \(iVar54\ ==\ 0\)\ \{$@2	+1
+use	yyparse	iVar54	fieldNameStr3	INFERRED	name string of the struct field	^\s*iVar54\ =\ \*piVar61;$@2	+3
+use	yyparse	iVar54	fieldNameStr3	INFERRED	name string of the struct field	^\s*\*\(unsigned\ char\ \*\)\(\*\(int\ \*\)\(iVar54\ \+\ 4\)\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar54\ \+\ 4\)\ \+\ \-0xc\)\)\ =\ \*pTVar7;$	+2
+use	yyparse	iVar54	mainNameCompare	INFERRED	std::string::compare(name, "main") result	^\s*iVar54\ =\ __ZNKSbIcSt11char_traitsIcE14pool_allocatorIcEE7compareEPKc\(\(void\ \*\)piVar61\[1\],"main"\);$	+1
+use	yyparse	iVar54	mainNameCompare	INFERRED	std::string::compare(name, "main") result	^\s*if\ \(iVar54\ ==\ 0\)\ \{$@3	+1
+use	yyparse	iVar54	paramCount	INFERRED	number of parameters (vector size >> 3)	^\s*iVar54\ =\ piVar61\[5\]\ \-\ piVar61\[4\]\ >>\ 3;$	+3
+use	yyparse	iVar54	bodyQuery	INFERRED	virtual query on the function's body	^\s*iVar54\ =\ \(\*\*\(code\ \*\*\)\(piVar61\[7\]\ \+\ 0x20\)\)\(piVar61\ \+\ 7\);$	+2
+use	yyparse	iVar54	levelsFinish2	INFERRED	symbol table level vector finish pointer before the push_back	^\s*iVar54\ =\ 0;$	+1
+use	yyparse	iVar54	levelsFinish2	INFERRED	symbol table level vector finish pointer before the push_back	^\s*iVar54\ =\ \*\(int\ \*\)\(pvVar51\ \+\ 4\);$	+1
+use	yyparse	iVar54	levelsFinish2	INFERRED	symbol table level vector finish pointer before the push_back	^\s*\*\(int\ \*\)\(pvVar51\ \+\ 4\)\ =\ iVar54\ \+\ 4;$	+1
+use	yyparse	iVar54	paramByteOffset	INFERRED	byte offset of the parameter (paramIdx * 8)	^\s*iVar54\ =\ iVar55\ \*\ 8;$	+2
+use	yyparse	iVar54	paramByteOffset	INFERRED	byte offset of the parameter (paramIdx * 8)	^\s*\(\*\(unsigned\ char\ \*\*\)param_1,0,\(unsigned\ char\ \*\)\&local_850,$	+2
+use	yyparse	iVar54	paramByteOffset	INFERRED	byte offset of the parameter (paramIdx * 8)	^\s*iVar36\ =\ \*\(int\ \*\)\(iVar60\ \+\ iVar54\ \+\ 4\);$	+2
+use	yyparse	iVar54	paramByteOffset	INFERRED	byte offset of the parameter (paramIdx * 8)	^\s*\*\(undefined4\ \*\)\(iVar60\ \+\ iVar54\)\ =\ 0;$	+1
+use	yyparse	iVar54	returnTypePtr	INFERRED	pointer to the function's return type (+0x1c)	^\s*iVar54\ =\ iVar55\ \+\ 0x1c;$	+1
+use	yyparse	iVar54	returnTypePtr	INFERRED	pointer to the function's return type (+0x1c)	^\s*\(\(int\)param_1,\*\(char\ \*\*\)pTVar56,$	+3
+use	yyparse	iVar55	queryResult2	INFERRED	result of a virtual query on the left operand	^\s*iVar55\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x50\)\ \+\ 0x50\)\)$	+1
+use	yyparse	iVar55	queryResult2	INFERRED	result of a virtual query on the left operand	^\s*if\ \(iVar55\ ==\ 0\)\ \{$@6	+3
+use	yyparse	uVar57	basicTypeValue	INFERRED	TIntermTyped::getBasicType() of the operand	^\s*uVar57\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x40\)\)$	+1
+use	yyparse	uVar57	basicTypeValue	INFERRED	TIntermTyped::getBasicType() of the operand	^\s*\(\(uVar28\ \&\ 0xff\)\ <<\ 0xb\ \|$	+2
+use	yyparse	uVar57	basicTypeValue	INFERRED	TIntermTyped::getBasicType() of the operand	^\s*uVar57\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x40\)\)$@2	+1
+use	yyparse	uVar57	basicTypeValue	INFERRED	TIntermTyped::getBasicType() of the operand	^\s*local_7cc\ =\ \(uVar57\ \&\ 0x3f\)\ <<\ 0x13\ \|\ local_7cc\ \&\ 0x9ff\ \|\ 0x4000000\ \|\ 0x800;$	+1
+use	yyparse	uVar57	declaredFunction	INFERRED	function symbol taken from the value stack	^\s*uVar57\ =\ \*\(uint\ \*\)\(pTVar56\ \+\ \-0x1c\);$@3	+1
+use	yyparse	uVar57	declaredFunction	INFERRED	function symbol taken from the value stack	^\s*if\ \(\(\(\*\(uint\ \*\)\(iVar55\ \+\ 0x40\)\ \&\ 0x1fffe00\)\ ==\ \(\*\(uint\ \*\)\(uVar57\ \+\ 0x40\)\ \&\ 0x1fffe00\)\)\ \&\&$	+2
+use	yyparse	uVar57	declaredFunction	INFERRED	function symbol taken from the value stack	^\s*param_4\ =\ \(char\ \*\)TType__getBasicString\(\*\(uint\ \*\)\(uVar57\ \+\ 0x40\)\ >>\ 0x13\ \&\ 0x3f\);$	+1
+use	yyparse	uVar57	declaredFunction	INFERRED	function symbol taken from the value stack	^\s*\(\(int\)param_1,\*\(char\ \*\*\)pTVar56,$	+3
+use	yyparse	uVar57	declaredFunction	INFERRED	function symbol taken from the value stack	^\s*\(\(int\)param_1,\*\(char\ \*\*\)pTVar56,$@2	+3
+use	yyparse	piVar61	callTarget	INFERRED	object whose virtual method is called	^\s*piVar61\ =\ extraout_r4_10;$	+1
+use	yyparse	piVar61	callTarget	INFERRED	object whose virtual method is called	^\s*\(piVar50,piVar61,pcVar62,param_4,param_5,pTVar33,iVar54\);$	+1
+use	yyparse	piVar61	callTarget	INFERRED	object whose virtual method is called	^\s*piVar61\ =\ \*\(int\ \*\*\)\(this\ \+\ 8\);$	+1
+use	yyparse	piVar61	callTarget	INFERRED	object whose virtual method is called	^\s*if\ \(piVar61\ ==\ \*\(int\ \*\*\)\(this\ \+\ 0xc\)\)\ \{$	+1
+use	yyparse	piVar61	callTarget	INFERRED	object whose virtual method is called	^\s*std__vector_int_pool_allocator_int_____M_insert_aux\(this,piVar61,pcVar62\);$	+2
+use	yyparse	piVar61	callTarget	INFERRED	object whose virtual method is called	^\s*if\ \(piVar61\ !=\ \(int\ \*\)0x0\)\ \{$	+2
+use	yyparse	piVar61	currentFunctionObj	INFERRED	current function type object (parse context +0x28)	^\s*piVar61\ =\ \*\(int\ \*\*\)\(param_8\ \+\ 4\);$	+1
+use	yyparse	piVar61	currentFunctionObj	INFERRED	current function type object (parse context +0x28)	^\s*\*\(unsigned\ char\ \*\)\(\(int\)piVar61\ \+\ piVar61\[\-3\]\)\ =\ \*DAT_a7b7ba88;$	+1
+use	yyparse	piVar61	currentFunctionObj	INFERRED	current function type object (parse context +0x28)	^\s*piVar61\ =\ \(int\ \*\)\*\*\(undefined4\ \*\*\)\(\(int\)param_1\ \+\ 0x28\);$	+4
+use	yyparse	piVar61	currentFunctionObj	INFERRED	current function type object (parse context +0x28)	^\s*piVar61\ =\ \*\(int\ \*\*\)\(\(int\)param_1\ \+\ 0x28\);$	+1
+use	yyparse	piVar61	currentFunctionObj	INFERRED	current function type object (parse context +0x28)	^\s*iVar55\ =\ \(\*\*\(code\ \*\*\)\(\*piVar61\ \+\ 0x20\)\)$	+2
+use	yyparse	piVar61	currentFunctionObj	INFERRED	current function type object (parse context +0x28)	^\s*piVar61\ =\ \(int\ \*\)0x0;$	+1
+use	yyparse	piVar61	currentFunctionObj	INFERRED	current function type object (parse context +0x28)	^\s*TParseContext__error\(\(int\)param_1,pcVar62,pcVar29,param_4,"",pTVar33,piVar61,param_8\);$	+1
+use	yyparse	piVar61	treeFinish2	INFERRED	symbol table level vector finish pointer	^\s*piVar61\ =\ \*\(int\ \*\*\)\(pvVar51\ \+\ 4\);$	+1
+use	yyparse	piVar61	treeFinish2	INFERRED	symbol table level vector finish pointer	^\s*if\ \(piVar61\ ==\ \*\(int\ \*\*\)\(pvVar51\ \+\ 8\)\)\ \{$	+1
+use	yyparse	piVar61	treeFinish2	INFERRED	symbol table level vector finish pointer	^\s*\(pvVar51,piVar61,local_160\);$	+1
+use	yyparse	piVar61	treeFinish2	INFERRED	symbol table level vector finish pointer	^\s*if\ \(piVar61\ !=\ \(int\ \*\)0x0\)\ \{$@4	+2
