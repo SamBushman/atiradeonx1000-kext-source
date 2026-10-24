@@ -187,7 +187,7 @@ int TParseContext__insertBuiltInArrayAtGlobalLevel(this)
   undefined *variableVtable;
   uint oldTypeBits;
   unsigned char * pTVar7;
-  void *this_00;
+  void *newNameString;
   int *a0;
   unsigned char * variableNameRef;
   char *errorMessage;
@@ -218,14 +218,14 @@ int TParseContext__insertBuiltInArrayAtGlobalLevel(this)
   undefined4 destroyAllocatorArg [5];
   
   pTVar7 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
-  this_00 = (void *)((int (*)())TPoolAllocator__allocate)(pTVar7,8);
-  cr0Flags = (this_00 == (void *)0x0) << 1;
+  newNameString = (void *)((int (*)())TPoolAllocator__allocate)(pTVar7,8);
+  cr0Flags = (newNameString == (void *)0x0) << 1;
   nameString = (void *)0x0;
-  if (this_00 != (void *)0x0) {
+  if (newNameString != (void *)0x0) {
     allocatorArg[0] = ((int (*)())GetGlobalPoolAllocator)();
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-              (this_00,"gl_TexCoord",(unsigned char *)allocatorArg);
-    nameString = this_00;
+              (newNameString,"gl_TexCoord",(unsigned char *)allocatorArg);
+    nameString = newNameString;
   }
   symbolTable = *(int **)(this + 4);
   levelsBegin = *symbolTable;
@@ -839,7 +839,7 @@ int TParseContext__arraySetMaxSize(this, intermSymbol, type, maxSize, updateFlag
   int levelIndex;
   void *symbolNameString;
   int lineCopy;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   int levelsBeginOrVariable;
   undefined4 scratchR10;
   int *symbolTable;
@@ -946,8 +946,8 @@ LAB_97b9cf8c:
         else {
           componentCount = *(int *)(levelsBeginOrVariable2 + 0x24);
         }
-        this_00 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
-        constArray = (int *)((int (*)())TPoolAllocator__allocate)(this_00,componentCount << 2);
+        poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
+        constArray = (int *)((int (*)())TPoolAllocator__allocate)(poolAllocator,componentCount << 2);
         *(int **)(levelsBeginOrVariable2 + 0x38) = constArray;
       }
       if (maxSize < *constArray) goto LAB_97b9cf8c;
@@ -1024,7 +1024,7 @@ int TParseContext__nonInitErrorCheck(this, sourceLoc, text, publicType)
   unsigned char * pTVar10;
   int *a0;
   int structTypeNameRef;
-  void *this_00;
+  void *newTypeNameString;
   unsigned char * variableNameRef;
   undefined4 r4Out0;
   undefined4 a1;
@@ -1119,16 +1119,16 @@ int TParseContext__nonInitErrorCheck(this, sourceLoc, text, publicType)
     structTypeNameChars = *(char **)(structTypeNameRef + 4);
     pTVar10 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
     typeNameAllocation = ((int (*)())TPoolAllocator__allocate)(pTVar10,8);
-    this_00 = (void *)((ulonglong)typeNameAllocation >> 0x20);
+    newTypeNameString = (void *)((ulonglong)typeNameAllocation >> 0x20);
     a1 = (undefined4)typeNameAllocation;
-    cr0Reg = (this_00 == (void *)0x0) << 1;
+    cr0Reg = (newTypeNameString == (void *)0x0) << 1;
     typeNameString = (void *)0x0;
-    if (this_00 != (void *)0x0) {
+    if (newTypeNameString != (void *)0x0) {
       allocatorArg[0] = ((int (*)())GetGlobalPoolAllocator)();
       a2 = (unsigned char *)allocatorArg;
-      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(this_00,structTypeNameChars,a2);
+      __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_(newTypeNameString,structTypeNameChars,a2);
       a1 = r4Out0;
-      typeNameString = this_00;
+      typeNameString = newTypeNameString;
     }
   }
   stackTypeTypeName = typeNameString;
@@ -1268,7 +1268,7 @@ int TParseContext__extensionErrorCheck(this, sourceLoc, str)
   undefined4 scratchR8;
   undefined4 scratchR10;
   unsigned char * pTVar8;
-  void *this_00;
+  void *infoSink;
   uint nodeKeyLength;
   int mapNodeThenBehavior;
   uint keyLength;
@@ -1375,7 +1375,7 @@ LAB_97b9d574:
               ((unsigned char *)(extensionKeyChars + -0xc),keyDestroyArg);
   }
   if (mapNodeThenBehavior == 2) {
-    this_00 = *(void **)(this + 8);
+    infoSink = *(void **)(this + 8);
     allocatorArg2[0] = ((int (*)())GetGlobalPoolAllocator)();
     __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
               (&strCopy,str,(unsigned char *)allocatorArg2);
@@ -1389,7 +1389,7 @@ LAB_97b9d574:
     messageChars = msgChars;
     msgChars[*(int *)(msgChars + -0xc)] = *DAT_a7b7ba18;
                     
-    __ZN13TInfoSinkBase6appendEPKc(this_00,"WARNING: ");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
     lineInString = sourceLoc & 0xffff;
     cr0Flags = (lineInString == 0) << 1;
     if (lineInString == 0) {
@@ -1400,7 +1400,7 @@ LAB_97b9d574:
     }
     __ZNSsC1EPKcRKSaIcE(locString,locTextBuf,allocatorDummy);
     locString[0][*(int *)(locString[0] + -0xc)] = *PTR__S_terminal_a7b7c0b8;
-    __ZN13TInfoSinkBase6appendEPKc(this_00,locString[0]);
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,locString[0]);
     refCountPtr = (int *)(locString[0] + -4);
     do {
       oldRefCount = *refCountPtr;
@@ -1413,9 +1413,9 @@ LAB_97b9d574:
     if (oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(locString[0] + -0xc));
     }
-    __ZN13TInfoSinkBase6appendEPKc(this_00,": ");
-    __ZN13TInfoSinkBase6appendEPKc(this_00,messageChars);
-    __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,messageChars);
+    __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
     refCountPtr = (int *)(msgChars + -4);
     msgDestroyArg[0] = mapIterOrMsgString;
     do {
@@ -1662,8 +1662,8 @@ int TParseContext__executeInitializer(this, line, identifier, publicType, initia
   unsigned char * poolAllocator;
   unsigned char * variableNameString;
   undefined **structTypeNameString;
-  undefined **this_00;
-  unsigned char * this_01;
+  undefined **newStructTypeName;
+  unsigned char * intermediate;
   unsigned char * assignNode;
   undefined4 r4Out0;
   undefined4 r4Out1;
@@ -2069,7 +2069,7 @@ LAB_97b9e184:
                              stackTypeWord14);
           symbolTableArg = *(undefined4 *)(this + 4);
           passThroughR4 = *(undefined4 *)(constantArrayPtr + 0x30);
-          this_01 = *(unsigned char **)this;
+          intermediate = *(unsigned char **)this;
           singleConstantParam = 1;
           goto LAB_97b9e6d8;
         }
@@ -2097,11 +2097,11 @@ LAB_97b9e184:
                          stackTypeStructureSize,stackTypeFieldName,stackTypeWord14);
       symbolTableArg = *(undefined4 *)(this + 4);
       passThroughR4 = *(undefined4 *)(constantArrayPtr + 0x30);
-      this_01 = *(unsigned char **)this;
+      intermediate = *(unsigned char **)this;
       singleConstantParam = 0;
 LAB_97b9e6d8:
       parseResult = TIntermediate__parseConstTree
-                        (this_01,line,(unsigned char *)initializer,variableConstPointer,passThroughR4,symbolTableArg,
+                        (intermediate,line,(unsigned char *)initializer,variableConstPointer,passThroughR4,symbolTableArg,
                          (unsigned char *)&stackType,singleConstantParam);
       stackType = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
       *intermNode = (unsigned char *)0x0;
@@ -2218,15 +2218,15 @@ LAB_97b9e6d8:
         typeNameChars = *(char **)(structTypeNameStringRef + 4);
         poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
         typeNameAllocation = ((int (*)())TPoolAllocator__allocate)(poolAllocator,8);
-        this_00 = (undefined **)((ulonglong)typeNameAllocation >> 0x20);
+        newStructTypeName = (undefined **)((ulonglong)typeNameAllocation >> 0x20);
         ptSizeCopy = (undefined **)typeNameAllocation;
         structTypeNameString = (undefined **)0x0;
-        if (this_00 != (undefined **)0x0) {
+        if (newStructTypeName != (undefined **)0x0) {
           poolAllocatorArg3[0] = ((int (*)())GetGlobalPoolAllocator)();
           __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                    (this_00,typeNameChars,(unsigned char *)poolAllocatorArg3);
+                    (newStructTypeName,typeNameChars,(unsigned char *)poolAllocatorArg3);
           ptSizeCopy = r4Out3;
-          structTypeNameString = this_00;
+          structTypeNameString = newStructTypeName;
         }
       }
       stackTypeTypeName = structTypeNameString;
@@ -2271,21 +2271,21 @@ int TParseContext__canNodeBeRemoved(this, intermNode)
 {
   int sequence;
   undefined4 result;
-  unsigned char * this_00;
+  unsigned char * operatorNode;
   int isConstructorResult;
   int *a0;
   int constUnionTest;
   undefined4 *childCursor;
   
-  this_00 = (unsigned char *)(**(code **)(*(int *)intermNode + 0x1c))(intermNode,intermNode);
+  operatorNode = (unsigned char *)(**(code **)(*(int *)intermNode + 0x1c))(intermNode,intermNode);
   result = 0;
-  if (this_00 != (unsigned char *)0x0) {
-    isConstructorResult = TIntermOperator__isConstructor(this_00);
-    if ((isConstructorResult == 0) || (*(int *)(this_00 + 0x30) == 0x75)) {
+  if (operatorNode != (unsigned char *)0x0) {
+    isConstructorResult = TIntermOperator__isConstructor(operatorNode);
+    if ((isConstructorResult == 0) || (*(int *)(operatorNode + 0x30) == 0x75)) {
       result = 0;
     }
     else {
-      sequence = (**(code **)(*(int *)this_00 + 100))(this_00);
+      sequence = (**(code **)(*(int *)operatorNode + 100))(operatorNode);
       for (childCursor = *(undefined4 **)(sequence + 4); childCursor != *(undefined4 **)(sequence + 8);
           childCursor = childCursor + 1) {
         a0 = (int *)(**(code **)(*(int *)*childCursor + 0x14))((int *)*childCursor);
@@ -2607,7 +2607,7 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
   undefined4 scratchR9;
   undefined4 scratchR10;
   unsigned char * constArray;
-  void *this_00;
+  void *infoSink;
   int lineCopy;
   char reservation;
   byte cr0Flags;
@@ -2623,9 +2623,9 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
   if (constUnionNode != 0) {
     constArray = *(unsigned char **)(constUnionNode + 0x30);
     if (constArray == (unsigned char *)0x0) {
-      this_00 = *(void **)(this + 8);
+      infoSink = *(void **)(this + 8);
                     
-      __ZN13TInfoSinkBase6appendEPKc(this_00,"INTERNAL ERROR: ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
       a1_01 = line & 0xffff;
       cr0Flags = (a1_01 == 0) << 1;
       if (a1_01 == 0) {
@@ -2636,7 +2636,7 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
       }
       __ZNSsC1EPKcRKSaIcE(typeTempOrTextBuf,locTextBuf,allocatorDummy);
       *(undefined *)((int)typeTempOrTextBuf[0] + (int)typeTempOrTextBuf[0][-3]) = *PTR__S_terminal_a7b7c0b8;
-      __ZN13TInfoSinkBase6appendEPKc(this_00,(char *)typeTempOrTextBuf[0]);
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)typeTempOrTextBuf[0]);
       refCountPtr = typeTempOrTextBuf[0] + -1;
       do {
         oldRefCount = *refCountPtr;
@@ -2649,10 +2649,10 @@ int TParseContext__addConstVectorNode(this, vectorFields, intermTyped, line, scr
       if ((int)oldRefCount < 1) {
         __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(typeTempOrTextBuf[0] + -3),locTextBuf);
       }
-      __ZN13TInfoSinkBase6appendEPKc(this_00,": ");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
       __ZN13TInfoSinkBase6appendEPKc
-                (this_00,"constUnion not initialized in addConstVectorNode function");
-      __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
+                (infoSink,"constUnion not initialized in addConstVectorNode function");
+      __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
       TParseContext__recover(this);
       return intermTyped;
     }
@@ -2755,7 +2755,7 @@ int TParseContext__addConstMatrixNode(this, columnIndex, intermTyped, line)
   int *constUnionNode;
   unsigned char * a1;
   undefined4 resultNode;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   unsigned char * newConstArray;
   undefined4 a1_00;
   char *a2;
@@ -2813,8 +2813,8 @@ int TParseContext__addConstMatrixNode(this, columnIndex, intermTyped, line)
     objectSize = (int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18;
     objectSize = objectSize * objectSize;
   }
-  this_00 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
-  newConstArray = (unsigned char *)((int (*)())TPoolAllocator__allocate)(this_00,objectSize << 2);
+  poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
+  newConstArray = (unsigned char *)((int (*)())TPoolAllocator__allocate)(poolAllocator,objectSize << 2);
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   (**(code **)(*(int *)a1 + 0x38))((unsigned char *)typeTemp,a1);
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
@@ -2872,8 +2872,8 @@ int TParseContext__addConstStruct(this, text, intermTyped, line, scratchR7, scra
   int lineCopy;
   unsigned char * pTVar2;
   unsigned char * a1;
-  unsigned char * this_00;
-  unsigned char * this_01;
+  unsigned char * structFieldType;
+  unsigned char * poolAllocator;
   int *fieldType;
   undefined4 resultNode;
   undefined4 a1_00;
@@ -2920,12 +2920,12 @@ int TParseContext__addConstStruct(this, text, intermTyped, line, scratchR7, scra
       fieldTypeBegin = fieldNameLen - nameLength;
     }
     if (fieldTypeBegin == 0) break;
-    this_00 = *(unsigned char **)(*(int *)(typeTempStructure + 4) + fieldIndex * 8);
-    if (*(unsigned char **)(this_00 + 8) == (unsigned char *)0x0) {
-      fieldSize = (**(code **)(*(int *)this_00 + 0x30))(this_00);
+    structFieldType = *(unsigned char **)(*(int *)(typeTempStructure + 4) + fieldIndex * 8);
+    if (*(unsigned char **)(structFieldType + 8) == (unsigned char *)0x0) {
+      fieldSize = (**(code **)(*(int *)structFieldType + 0x30))(structFieldType);
     }
     else {
-      fieldSize = TType__setStructSize(this_00,*(unsigned char **)(this_00 + 8));
+      fieldSize = TType__setStructSize(structFieldType,*(unsigned char **)(structFieldType + 8));
     }
     componentOffset = componentOffset + fieldSize;
   }
@@ -2942,8 +2942,8 @@ int TParseContext__addConstStruct(this, text, intermTyped, line, scratchR7, scra
     return 0;
   }
   (**(code **)(*(int *)a1 + 0x38))(typeTemp,a1);
-  this_01 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
-  constArray = (unsigned char *)((int (*)())TPoolAllocator__allocate)(this_01,typeTempStructureSize << 2);
+  poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
+  constArray = (unsigned char *)((int (*)())TPoolAllocator__allocate)(poolAllocator,typeTempStructureSize << 2);
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7d4d0;
   nodeAggregate = (int *)(**(code **)(*(int *)a1 + 0x1c))(a1);
   sequence = (**(code **)(*nodeAggregate + 100))(nodeAggregate);
@@ -3101,15 +3101,15 @@ int FreeGlobalPools()
 {
   undefined4 scratchR3;
   unsigned char * this;
-  void *this_00;
+  void *globalPoolAllocator;
   
   if (_gPollAllocThreadData != (void *)0x0) {
     this = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
     ((int (*)())TPoolAllocator__popAll)(this);
-    this_00 = (void *)((int (*)())GetGlobalPoolAllocator)();
-    if (this_00 != (void *)0x0) {
-      ((int (*)())__ZN14TPoolAllocatorD1Ev)(this_00);
-      __ZdlPv(this_00);
+    globalPoolAllocator = (void *)((int (*)())GetGlobalPoolAllocator)();
+    if (globalPoolAllocator != (void *)0x0) {
+      ((int (*)())__ZN14TPoolAllocatorD1Ev)(globalPoolAllocator);
+      __ZdlPv(globalPoolAllocator);
     }
     scratchR3 = __ZdlPv(_gPollAllocThreadData);
     _gPollAllocThreadData = (void *)0x0;
@@ -3838,11 +3838,11 @@ int generateBuiltInSymbolTable(builtInResource, infoSink, symbolTable, language)
   unsigned char * symbolTable;
   undefined4 language;
 {
-  unsigned char aTStack_30 [28];
+  unsigned char builtIns [28];
   
-  __ZN9TBuiltIns10initializeERK16TBuiltInResource(aTStack_30,builtInResource);
-  ((int (*)())initializeSymbolTable)((unsigned char *)aTStack_30,0,infoSink,builtInResource,symbolTable);
-  ((int (*)())initializeSymbolTable)((unsigned char *)aTStack_30,1,infoSink,builtInResource,symbolTable);
+  __ZN9TBuiltIns10initializeERK16TBuiltInResource(builtIns,builtInResource);
+  ((int (*)())initializeSymbolTable)((unsigned char *)builtIns,0,infoSink,builtInResource,symbolTable);
+  ((int (*)())initializeSymbolTable)((unsigned char *)builtIns,1,infoSink,builtInResource,symbolTable);
   return 1;
 }
 
@@ -3868,7 +3868,7 @@ int initializeSymbolTable(builtIns, language, infoSink, builtInResource, symbolT
   int *emptyRepRefCount;
   int levelCount;
   unsigned char * this;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   undefined4 *newLevel;
   undefined4 *levelRoot;
   uint numStringArrays;
@@ -3960,8 +3960,8 @@ int initializeSymbolTable(builtIns, language, infoSink, builtInResource, symbolT
                "/SourceCache/OpenGL/OpenGL-4.7.14/GLProgrammability/glslang/MachineIndependent/ShaderLang.cpp"
                ,0x110,"symbolTable->isEmpty() || symbolTable->atSharedBuiltInLevel()");
   }
-  this_00 = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
-  newLevel = (undefined4 *)((int (*)())TPoolAllocator__allocate)(this_00,0x10);
+  poolAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
+  newLevel = (undefined4 *)((int (*)())TPoolAllocator__allocate)(poolAllocator,0x10);
   levelAllocator = (unsigned char *)((int (*)())GetGlobalPoolAllocator)();
   *newLevel = levelAllocator;
   newLevel[1] = 0;
@@ -4475,7 +4475,7 @@ int _ShLink(handle, shaderHandles, numShaders, linkerWord80, linkerWord7c)
   char *messagePrefix;
   char *messageText;
   int shaderIndexThenLinkResult;
-  void *this_00;
+  void *infoSink;
   
   if ((handle != (int *)0x0) &&
      (this = (unsigned char *)(**(code **)(*handle + 0xc))(handle), this != (unsigned char *)0x0
@@ -4490,19 +4490,19 @@ int _ShLink(handle, shaderHandles, numShaders, linkerWord80, linkerWord7c)
       do {
         shaderHandleThenCompiler = shaderHandles[shaderIndexThenLinkResult];
         if (shaderHandleThenCompiler == (int *)0x0) {
-          this_00 = *(void **)(this + 0x84);
+          infoSink = *(void **)(this + 0x84);
           messageText = "Invalid shader passed to linker (internal error).";
           messagePrefix = "INTERNAL ERROR: ";
                     
 LAB_97ba1bf0:
-          __ZN13TInfoSinkBase6appendEPKc(this_00,messagePrefix);
-          __ZN13TInfoSinkBase6appendEPKc(this_00,messageText);
-          __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,messagePrefix);
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,messageText);
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
           return 0;
         }
         shaderHandleThenCompiler = (int *)(**(code **)(*shaderHandleThenCompiler + 8))(shaderHandleThenCompiler);
         if ((shaderHandleThenCompiler != (int *)0x0) && (hasObjectCode = (**(code **)(*shaderHandleThenCompiler + 0x20))(shaderHandleThenCompiler), hasObjectCode == 0)) {
-          this_00 = *(void **)(this + 0x84);
+          infoSink = *(void **)(this + 0x84);
           messageText = "Not all shaders have valid object code.";
                     
           messagePrefix = "ERROR: ";

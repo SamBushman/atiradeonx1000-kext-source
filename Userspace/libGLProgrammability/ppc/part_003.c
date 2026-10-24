@@ -2778,7 +2778,7 @@ int TIntermediate__addSymbol(this, id, text, type, line)
   int typeArraySize;
   uint oldTypeBits;
   int *emptyRepRefCount;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   int *a0;
   int typeWord20;
   int typeWord1c;
@@ -2790,8 +2790,8 @@ int TIntermediate__addSymbol(this, id, text, type, line)
   char reservation;
   byte cr0Reg;
   
-  this_00 = (unsigned char *)GetGlobalPoolAllocator();
-  a0 = (int *)TPoolAllocator__allocate(this_00,0x3c);
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  a0 = (int *)TPoolAllocator__allocate(poolAllocator,0x3c);
   a0[1] = 0;
   *a0 = (int)&PTR_getLine_a7b7cf90;
   typeArraySize = *(int *)(type + 4);
@@ -2870,7 +2870,7 @@ int TIntermediate__addBinaryMath(this, op, intermTyped1, intermTyped2, line, sym
   undefined *intermBinaryVtable;
   uint oldTypeBits;
   int *rightOperand;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   int *a0;
   int promoteResult;
   int rightConstantUnion;
@@ -3042,8 +3042,8 @@ LAB_97b8d098:
     }
   }
   typeTemp2[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  this_00 = (unsigned char *)GetGlobalPoolAllocator();
-  a0 = (int *)TPoolAllocator__allocate(this_00,0x3c);
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  a0 = (int *)TPoolAllocator__allocate(poolAllocator,0x3c);
   stackTypeBits = stackTypeBits & 0x1ff | 0x80800;
   stackTypeArraySize = 0;
   stackTypeFieldName = 0;
@@ -3175,7 +3175,7 @@ int TIntermediate__addAssign(this, op, intermTyped1, intermTyped2, line)
   int convertedRight;
   undefined *intermBinaryVtable;
   uint oldTypeBits;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   int *a0;
   int rightConstUnion;
   unsigned char * rightConstUnionNode;
@@ -3191,8 +3191,8 @@ int TIntermediate__addAssign(this, op, intermTyped1, intermTyped2, line)
   undefined4 stackTypeWord20;
   uint stackTypeBits;
   
-  this_00 = (unsigned char *)GetGlobalPoolAllocator();
-  a0 = (int *)TPoolAllocator__allocate(this_00,0x3c);
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  a0 = (int *)TPoolAllocator__allocate(poolAllocator,0x3c);
   stackTypeBits = stackTypeBits & 0x1ff | 0x80800;
   stackTypeArraySize = 0;
   stackTypeFieldName = 0;
@@ -3261,11 +3261,11 @@ int TIntermediate__addIndex(this, op, intermTyped1, intermTyped2, line)
 {
   undefined *intermBinaryVtable;
   uint oldTypeBits;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   int *a0;
   
-  this_00 = (unsigned char *)GetGlobalPoolAllocator();
-  a0 = (int *)TPoolAllocator__allocate(this_00,0x3c);
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  a0 = (int *)TPoolAllocator__allocate(poolAllocator,0x3c);
   a0[1] = 0;
   *a0 = (int)&PTR_getLine_a7b7cf90;
   a0[3] = 0;
@@ -3328,7 +3328,7 @@ int TIntermediate__addUnaryMath(this, op, intermNode, sourceLoc, symbolTable, sc
   unsigned char * pTVar12;
   unsigned char * pTVar13;
   int *a0;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   int *a0_00;
   undefined4 r4Out0;
   undefined4 r4Out1;
@@ -3339,7 +3339,7 @@ int TIntermediate__addUnaryMath(this, op, intermNode, sourceLoc, symbolTable, sc
   undefined4 r4Out5;
   undefined4 r4Out6;
   unsigned char * a4;
-  void *this_01;
+  void *infoSink;
   char reservation;
   byte cr0Flags;
   undefined **stackType;
@@ -3363,9 +3363,9 @@ int TIntermediate__addUnaryMath(this, op, intermNode, sourceLoc, symbolTable, sc
   a1 = (int *)(**(code **)(*intermNode + 0x14))
                         (intermNode,op,intermNode,sourceLoc,symbolTable,scratchR8,scratchR9);
   if (a1 == (int *)0x0) {
-    this_01 = *(void **)this;
+    infoSink = *(void **)this;
                     
-    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_01,"INTERNAL ERROR: ");
+    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,"INTERNAL ERROR: ");
     lineInString = sourceLoc & 0xffff;
     cr0Flags = (lineInString == 0) << 1;
     if (lineInString == 0) {
@@ -3376,7 +3376,7 @@ int TIntermediate__addUnaryMath(this, op, intermNode, sourceLoc, symbolTable, sc
     }
     __ZNSsC1EPKcRKSaIcE(&stackType,stackTypeTailBytes,allocatorDummy);
     *(undefined *)((int)stackType + (int)stackType[-3]) = *PTR__S_terminal_a7b7c0b8;
-    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_01,(char *)stackType);
+    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,(char *)stackType);
     refCountPtr = stackType + -1;
     do {
       oldRefCount = *refCountPtr;
@@ -3389,9 +3389,9 @@ int TIntermediate__addUnaryMath(this, op, intermNode, sourceLoc, symbolTable, sc
     if ((int)oldRefCount < 1) {
       __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(stackType + -3),stackTypeTailBytes);
     }
-    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_01,": ");
-    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_01,"Bad type in AddUnaryMath");
-    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(this_01,"\n");
+    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,": ");
+    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,"Bad type in AddUnaryMath");
+    ((int (*)())__ZN13TInfoSinkBase6appendEPKc)(infoSink,"\n");
     return (int *)0x0;
   }
   if (op == 6) {
@@ -3529,8 +3529,8 @@ LAB_97b8decc:
       }
     }
     a0 = (int *)(**(code **)(*a1 + 0x18))(a1);
-    this_00 = (unsigned char *)GetGlobalPoolAllocator();
-    a0_00 = (int *)TPoolAllocator__allocate(this_00,0x38);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    a0_00 = (int *)TPoolAllocator__allocate(poolAllocator,0x38);
     stackTypeBits = stackTypeBits & 0x1ff | 0x80800;
     stackTypeArraySize = 0;
     stackTypeStructure = 0;
@@ -3614,7 +3614,7 @@ int TIntermediate__setAggregateOperator(this, intermNode, op, line)
   unsigned char * poolAllocator;
   int sequenceAllocator;
   int atomicStore;
-  unsigned char * this_00;
+  unsigned char * sequence;
   undefined4 *sequenceFinish;
   code *getSequenceFn;
   char reservation;
@@ -3723,19 +3723,19 @@ int TIntermediate__setAggregateOperator(this, intermNode, op, line)
       getSequenceFn = *(code **)(*a0 + 100);
       a0[0x1a] = 0;
       a0[0x17] = 0;
-      this_00 = (unsigned char *)(*getSequenceFn)(a0);
-      sequenceFinish = *(undefined4 **)(this_00 + 8);
-      if (sequenceFinish == *(undefined4 **)(this_00 + 0xc)) {
+      sequence = (unsigned char *)(*getSequenceFn)(a0);
+      sequenceFinish = *(undefined4 **)(sequence + 8);
+      if (sequenceFinish == *(undefined4 **)(sequence + 0xc)) {
         std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
-                  (this_00,sequenceFinish,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)));
+                  (sequence,sequenceFinish,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)));
       }
       else {
         sequenceFinishValue = 0;
         if (sequenceFinish != (undefined4 *)0x0) {
           *sequenceFinish = intermNodeSpill;
-          sequenceFinishValue = *(int *)(this_00 + 8);
+          sequenceFinishValue = *(int *)(sequence + 8);
         }
-        *(int *)(this_00 + 8) = sequenceFinishValue + 4;
+        *(int *)(sequence + 8) = sequenceFinishValue + 4;
       }
       noLine = false;
       if (line == 0) {
@@ -4177,7 +4177,7 @@ int TIntermediate__growAggregate(this, intermNode1, intermNode2, line)
   uint oldTypeBits;
   int *emptyRepRefCount;
   int *a0;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   int sequenceAllocator;
   int atomicStore;
   unsigned char * sequence;
@@ -4197,8 +4197,8 @@ int TIntermediate__growAggregate(this, intermNode1, intermNode2, line)
     cr0Reg = (a0 == (int *)0x0) << 1;
     if ((a0 != (int *)0x0) && (a0[0xc] == 0)) goto LAB_97b8f5cc;
   }
-  this_00 = (unsigned char *)GetGlobalPoolAllocator();
-  a0 = (int *)TPoolAllocator__allocate(this_00,0x6c);
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  a0 = (int *)TPoolAllocator__allocate(poolAllocator,0x6c);
   a0[1] = 0;
   *a0 = (int)&PTR_getLine_a7b7cf90;
   a0[3] = 0;
@@ -4299,10 +4299,10 @@ int TIntermediate__makeAggregate(this, intermNode, line)
   uint oldTypeBits;
   int *emptyRepRefCount;
   int *a0;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   int sequenceAllocator;
   int atomicStore;
-  unsigned char * this_01;
+  unsigned char * sequence;
   undefined4 *a1;
   undefined4 *r4Out0;
   code *getSequenceFn;
@@ -4313,8 +4313,8 @@ int TIntermediate__makeAggregate(this, intermNode, line)
   a0 = (int *)0x0;
   if (intermNode != (unsigned char *)0x0) {
     intermNodeSpill = intermNode;
-    this_00 = (unsigned char *)GetGlobalPoolAllocator();
-    a0 = (int *)TPoolAllocator__allocate(this_00,0x6c);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    a0 = (int *)TPoolAllocator__allocate(poolAllocator,0x6c);
     a0[1] = 0;
     *a0 = (int)&PTR_getLine_a7b7cf90;
     a0[3] = 0;
@@ -4360,20 +4360,20 @@ int TIntermediate__makeAggregate(this, intermNode, line)
     getSequenceFn = *(code **)(*a0 + 100);
     a0[0x1a] = 0;
     a0[0x17] = 0;
-    this_01 = (unsigned char *)(*getSequenceFn)(a0);
-    a1 = *(undefined4 **)(this_01 + 8);
-    if (a1 == *(undefined4 **)(this_01 + 0xc)) {
+    sequence = (unsigned char *)(*getSequenceFn)(a0);
+    a1 = *(undefined4 **)(sequence + 8);
+    if (a1 == *(undefined4 **)(sequence + 0xc)) {
       std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
-                (this_01,a1,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)));
+                (sequence,a1,&(*(unsigned int *)((unsigned char *)ghidra_home + 4)));
       a1 = r4Out0;
     }
     else {
       sequenceFinishValue = 0;
       if (a1 != (undefined4 *)0x0) {
         *a1 = intermNodeSpill;
-        sequenceFinishValue = *(int *)(this_01 + 8);
+        sequenceFinishValue = *(int *)(sequence + 8);
       }
-      *(int *)(this_01 + 8) = sequenceFinishValue + 4;
+      *(int *)(sequence + 8) = sequenceFinishValue + 4;
     }
     if (line == 0) {
       nodeVtable = *a0;
@@ -4516,7 +4516,7 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1,
   uint oldTypeBits;
   int constantUnionTest;
   int lineCopy;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   unsigned char * pTVar9;
   undefined4 a1;
   undefined ***a2;
@@ -4561,8 +4561,8 @@ int __ZN13TIntermediate12addSelectionEP12TIntermTypedS1_S1_i(this, intermTyped1,
   constantUnionTest = (**(code **)(*(int *)intermTyped1 + 0x18))(intermTyped1,a1);
   if (((constantUnionTest == 0) || (constantUnionTest = (**(code **)(*(int *)intermTyped2 + 0x18))(intermTyped2), constantUnionTest == 0)) ||
      (constantUnionTest = (**(code **)(*(int *)a0_00 + 0x18))(a0_00), constantUnionTest == 0)) {
-    this_00 = (unsigned char *)GetGlobalPoolAllocator();
-    pTVar9 = (unsigned char *)TPoolAllocator__allocate(this_00,0x3c);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    pTVar9 = (unsigned char *)TPoolAllocator__allocate(poolAllocator,0x3c);
     (**(code **)(*(int *)intermTyped2 + 0x38))(&stackType,intermTyped2);
     *(int *)(pTVar9 + 4) = 0;
     *(undefined ***)pTVar9 = &PTR_getLine_a7b7cf90;
@@ -4618,7 +4618,7 @@ int TIntermediate__addConstantUnion(this, constUnion, type, line)
   undefined4 typeArraySize;
   uint oldTypeBits;
   undefined *constantUnionVtable;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   undefined4 *a0;
   undefined4 typeWord20;
   undefined4 a2;
@@ -4630,8 +4630,8 @@ int TIntermediate__addConstantUnion(this, constUnion, type, line)
   undefined4 a7;
   code *setLineFn;
   
-  this_00 = (unsigned char *)GetGlobalPoolAllocator();
-  a0 = (undefined4 *)TPoolAllocator__allocate(this_00,0x34);
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  a0 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x34);
   a0[1] = 0;
   *a0 = &PTR_getLine_a7b7cf90;
   typeArraySize = *(undefined4 *)(type + 4);
@@ -4684,7 +4684,7 @@ int TIntermediate__addSwizzle(this, vectorFields, line)
   int sequenceFinishValue;
   unsigned char * poolAllocator;
   int *a0;
-  unsigned char * this_00;
+  unsigned char * sequence;
   unsigned char * constUnionValue;
   undefined4 *sequenceFinish;
   code *setLineFn;
@@ -4765,7 +4765,7 @@ int TIntermediate__addSwizzle(this, vectorFields, line)
   setLineFn = *(code **)(*a0 + 4);
   a0[0x1a] = 0;
   (*setLineFn)(a0,line);
-  this_00 = (unsigned char *)(**(code **)(*a0 + 100))(a0);
+  sequence = (unsigned char *)(**(code **)(*a0 + 100))(a0);
   if (0 < *(int *)(vectorFields + 0x10)) {
     pTVar10 = vectorFields;
     do {
@@ -4785,18 +4785,18 @@ int TIntermediate__addSwizzle(this, vectorFields, line)
       stackTypeWord20 = 0;
       constantNodeSlot[0] = ((int (*)())TIntermediate__addConstantUnion)(this,constUnionValue,(unsigned char *)&stackType,line);
       stackType = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-      sequenceFinish = *(undefined4 **)(this_00 + 8);
-      if (sequenceFinish == *(undefined4 **)(this_00 + 0xc)) {
+      sequenceFinish = *(undefined4 **)(sequence + 8);
+      if (sequenceFinish == *(undefined4 **)(sequence + 0xc)) {
         std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
-                  (this_00,sequenceFinish,constantNodeSlot);
+                  (sequence,sequenceFinish,constantNodeSlot);
       }
       else {
         sequenceFinishValue = 0;
         if (sequenceFinish != (undefined4 *)0x0) {
           *sequenceFinish = constantNodeSlot[0];
-          sequenceFinishValue = *(int *)(this_00 + 8);
+          sequenceFinishValue = *(int *)(sequence + 8);
         }
-        *(int *)(this_00 + 8) = sequenceFinishValue + 4;
+        *(int *)(sequence + 8) = sequenceFinishValue + 4;
       }
       fieldIndex = fieldIndex + 1;
     } while (fieldIndex < *(int *)(vectorFields + 0x10));
@@ -4814,12 +4814,12 @@ int TIntermediate__addLoop(this, intermNode, intermTyped1, intermTyped2, testFir
   int line;
 {
   undefined *intermLoopVtable;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   undefined4 *a0;
   code *setLineFn;
   
-  this_00 = (unsigned char *)GetGlobalPoolAllocator();
-  a0 = (undefined4 *)TPoolAllocator__allocate(this_00,0x18);
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  a0 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x18);
   intermLoopVtable = PTR_vtable_a7b7c0c4;
   a0[1] = 0;
   a0[2] = intermNode;
@@ -4849,12 +4849,12 @@ int __ZN13TIntermediate9addBranchE9TOperatorP12TIntermTypedi(this, op, intermTyp
   undefined4 line;
 {
   undefined *intermBranchVtable;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   undefined4 *a0;
   code *setLineFn;
   
-  this_00 = (unsigned char *)GetGlobalPoolAllocator();
-  a0 = (undefined4 *)TPoolAllocator__allocate(this_00,0x10);
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  a0 = (undefined4 *)TPoolAllocator__allocate(poolAllocator,0x10);
   intermBranchVtable = PTR_vtable_a7b7c0c0;
   a0[1] = 0;
   a0[2] = op;

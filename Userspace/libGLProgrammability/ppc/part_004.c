@@ -2616,7 +2616,7 @@ int TIntermediate__changeAggrToTempConst(this, intermAggregate, symbolTable, lin
   int childConstUnion;
   int childSequence;
   int objectSize;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   int *a0;
   int lineCopy;
   undefined4 constNode;
@@ -2640,8 +2640,8 @@ int TIntermediate__changeAggrToTempConst(this, intermAggregate, symbolTable, lin
     objectSize = (int)(typeTempBits << 0xd | typeTempBits >> 0x13) >> 0x18;
     objectSize = objectSize * objectSize;
   }
-  this_00 = (unsigned char *)GetGlobalPoolAllocator();
-  constArrayAlloc = TPoolAllocator__allocate(this_00,objectSize << 2);
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  constArrayAlloc = TPoolAllocator__allocate(poolAllocator,objectSize << 2);
   constArray = (unsigned char *)((ulonglong)constArrayAlloc >> 0x20);
   typeTemp[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
   childSequence = (**(code **)(*(int *)intermAggregate + 100))
@@ -2680,7 +2680,7 @@ int TIntermediate__copyConstUnion(this, intermConstantUnion)
 {
   int byteOffset;
   int objectSize;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   int newConstArray;
   unsigned char * pTVar4;
   int componentIndex;
@@ -2714,8 +2714,8 @@ int TIntermediate__copyConstUnion(this, intermConstantUnion)
       }
     }
     typeTemp2[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-    this_00 = (unsigned char *)GetGlobalPoolAllocator();
-    newConstArray = TPoolAllocator__allocate(this_00,objectSize << 2);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    newConstArray = TPoolAllocator__allocate(poolAllocator,objectSize << 2);
     componentIndex = 0;
     if (0 < objectSize) {
       do {
@@ -2744,7 +2744,7 @@ int TIntermediate__promoteConstantUnion(this, basicType, intermConstantUnion)
   int componentCount;
   undefined **refCountPtr;
   undefined *oldRefCount;
-  unsigned char * this_00;
+  unsigned char * poolAllocator;
   unsigned char * newConstArray;
   uint srcBasicType;
   undefined4 constNode;
@@ -2760,7 +2760,7 @@ int TIntermediate__promoteConstantUnion(this, basicType, intermConstantUnion)
   int srcConstArray;
   char *errorText;
   int componentIndex;
-  void *this_01;
+  void *infoSink;
   char reservation;
   byte cr0Flags;
   double i2dBias;
@@ -2792,9 +2792,9 @@ int TIntermediate__promoteConstantUnion(this, basicType, intermConstantUnion)
     componentCount = componentCount * componentCount;
   }
   typeTempOrTextBuf[0] = &PTR___ZN5TTypeD1Ev_a7b7cff8;
-  this_00 = (unsigned char *)GetGlobalPoolAllocator();
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
   componentIndex = 0;
-  newConstArray = (unsigned char *)TPoolAllocator__allocate(this_00,componentCount << 2);
+  newConstArray = (unsigned char *)TPoolAllocator__allocate(poolAllocator,componentCount << 2);
   if (0 < componentCount) {
     do {
       if (basicType == 2) {
@@ -2812,7 +2812,7 @@ LAB_97b96230:
           }
           if (srcBasicType != 1) {
 LAB_97b96174:
-            this_01 = *(void **)this;
+            infoSink = *(void **)this;
             errorText = "Cannot promote";
             sourceLoc = (**(code **)*intermConstantUnion)(intermConstantUnion);
                     
@@ -2827,12 +2827,12 @@ LAB_97b9625c:
       else if ((int)basicType < 3) {
         if (basicType != 1) {
 LAB_97b962b8:
-          this_01 = *(void **)this;
+          infoSink = *(void **)this;
           errorText = "Incorrect data type found";
           sourceLoc = (**(code **)*intermConstantUnion)(intermConstantUnion);
                     
 override_jmp_97b960f0_case_0:
-          __ZN13TInfoSinkBase6appendEPKc(this_01,"INTERNAL ERROR: ");
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,"INTERNAL ERROR: ");
           a1_02 = sourceLoc & 0xffff;
           cr0Flags = (a1_02 == 0) << 1;
           if (a1_02 == 0) {
@@ -2843,7 +2843,7 @@ override_jmp_97b960f0_case_0:
           }
           __ZNSsC1EPKcRKSaIcE(typeTempOrTextBuf,(char *)&stackType,allocatorDummy);
           *(undefined *)((int)typeTempOrTextBuf[0] + (int)typeTempOrTextBuf[0][-3]) = *PTR__S_terminal_a7b7c0b8;
-          __ZN13TInfoSinkBase6appendEPKc(this_01,(char *)typeTempOrTextBuf[0]);
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,(char *)typeTempOrTextBuf[0]);
           refCountPtr = typeTempOrTextBuf[0] + -1;
           do {
             oldRefCount = *refCountPtr;
@@ -2856,9 +2856,9 @@ override_jmp_97b960f0_case_0:
           if ((int)oldRefCount < 1) {
             __ZNSs4_Rep10_M_destroyERKSaIcE((unsigned char *)(typeTempOrTextBuf[0] + -3),allocatorDummy);
           }
-          __ZN13TInfoSinkBase6appendEPKc(this_01,": ");
-          __ZN13TInfoSinkBase6appendEPKc(this_01,errorText);
-          __ZN13TInfoSinkBase6appendEPKc(this_01,"\n");
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,": ");
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,errorText);
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
           return 0;
         }
         (**(code **)(*intermConstantUnion + 0x38))(typeTempOrTextBuf,intermConstantUnion);
@@ -2876,7 +2876,7 @@ override_jmp_97b960f0_case_0:
             i2dBias = 4503599627370496.0;
             goto LAB_97b96098;
           }
-          this_01 = *(void **)this;
+          infoSink = *(void **)this;
           errorText = "Cannot promote";
           sourceLoc = (**(code **)*intermConstantUnion)(intermConstantUnion,a1,a2,scratchR6,scratchR7,scratchR8,scratchR9);
                     
@@ -2903,7 +2903,7 @@ LAB_97b96098:
             }
           }
           else if (srcBasicType == 3) goto LAB_97b96230;
-          this_01 = *(void **)this;
+          infoSink = *(void **)this;
           errorText = "Cannot promote";
           sourceLoc = (**(code **)*intermConstantUnion)(intermConstantUnion,a1_00,a2,scratchR6,scratchR7,scratchR8,scratchR9);
                     
@@ -3093,7 +3093,7 @@ int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggrega
   int prevFinish;
   int typeObjectSize;
   int *a0;
-  unsigned char * this_00;
+  unsigned char * childSequence;
   int firstChildVtable;
   int elementSequence;
   undefined4 a1;
@@ -3116,24 +3116,24 @@ int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggrega
   else {
     typeObjectSize = (**(code **)(*(int *)type + 0x30))(type);
     a0 = (int *)(**(code **)(*(int *)intermTyped + 0x1c))(intermTyped);
-    this_00 = (unsigned char *)(**(code **)(*a0 + 100))(a0);
+    childSequence = (unsigned char *)(**(code **)(*a0 + 100))(a0);
     checkSequence = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
     if (*(int *)(checkSequence + 8) - *(int *)(checkSequence + 4) >> 2 == 1) {
-      removeMatrixConstNodeResult = ((int (*)())TIntermediate__removeMatrixConstNode)(this,(unsigned char *)this_00,type,intermAggregate,1);
+      removeMatrixConstNodeResult = ((int (*)())TIntermediate__removeMatrixConstNode)(this,(unsigned char *)childSequence,type,intermAggregate,1);
       if (removeMatrixConstNodeResult == 0) {
         aggregateSequence = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
-        sequenceFinish = *(undefined4 **)(this_00 + 8);
-        if (sequenceFinish == *(undefined4 **)(this_00 + 0xc)) {
+        sequenceFinish = *(undefined4 **)(childSequence + 8);
+        if (sequenceFinish == *(undefined4 **)(childSequence + 0xc)) {
           std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
-                    (this_00,sequenceFinish,*(undefined4 **)(aggregateSequence + 4));
+                    (childSequence,sequenceFinish,*(undefined4 **)(aggregateSequence + 4));
         }
         else {
           elementIndex = 0;
           if (sequenceFinish != (undefined4 *)0x0) {
             *sequenceFinish = **(undefined4 **)(aggregateSequence + 4);
-            elementIndex = *(int *)(this_00 + 8);
+            elementIndex = *(int *)(childSequence + 8);
           }
-          *(int *)(this_00 + 8) = elementIndex + 4;
+          *(int *)(childSequence + 8) = elementIndex + 4;
         }
       }
     }
@@ -3142,25 +3142,25 @@ int __ZN13TIntermediate15removeChildNodeEP12TIntermTypedP5TTypeP16TIntermAggrega
       if (0 < typeObjectSize) {
         do {
           elementSequence = (**(code **)(*(int *)intermAggregate + 100))(intermAggregate);
-          sequenceFinish = *(undefined4 **)(this_00 + 8);
-          if (sequenceFinish == *(undefined4 **)(this_00 + 0xc)) {
+          sequenceFinish = *(undefined4 **)(childSequence + 8);
+          if (sequenceFinish == *(undefined4 **)(childSequence + 0xc)) {
             std__vector_TIntermNode__pool_allocator_TIntermNode______M_insert_aux
-                      (this_00,sequenceFinish,*(int *)(elementSequence + 4) + elementIndex * 4);
+                      (childSequence,sequenceFinish,*(int *)(elementSequence + 4) + elementIndex * 4);
           }
           else {
             prevFinish = 0;
             if (sequenceFinish != (undefined4 *)0x0) {
               *sequenceFinish = *(undefined4 *)(*(int *)(elementSequence + 4) + elementIndex * 4);
-              prevFinish = *(int *)(this_00 + 8);
+              prevFinish = *(int *)(childSequence + 8);
             }
-            *(int *)(this_00 + 8) = prevFinish + 4;
+            *(int *)(childSequence + 8) = prevFinish + 4;
           }
           elementIndex = elementIndex + 1;
         } while (elementIndex < typeObjectSize);
       }
     }
     std__vector_TIntermNode__pool_allocator_TIntermNode_____erase
-              (eraseResultSlot,this_00,*(undefined4 *)(this_00 + 4));
+              (eraseResultSlot,childSequence,*(undefined4 *)(childSequence + 4));
   }
   return intermTyped;
 }
@@ -3309,8 +3309,8 @@ int TIntermAggregate__addToPragmaTable(this, map)
   unsigned char * this;
   unsigned char * map;
 {
-  unsigned char * this_00;
-  unsigned char * this_01;
+  unsigned char * pragmaTable;
+  unsigned char * poolAllocator;
   int *headerNode;
   int existingPragmaTable;
   
@@ -3320,20 +3320,20 @@ int TIntermAggregate__addToPragmaTable(this, map)
                "/SourceCache/OpenGL/OpenGL-4.7.14/GLProgrammability/glslang/MachineIndependent/Intermediate.cpp"
                ,0x865,"!pragmaTable");
   }
-  this_00 = operator_new(0x10);
-  this_01 = (unsigned char *)GetGlobalPoolAllocator();
-  *(unsigned char **)this_00 = this_01;
-  *(int *)(this_00 + 4) = existingPragmaTable;
-  headerNode = (int *)TPoolAllocator__allocate(this_01,0x20);
-  *(int *)(this_00 + 8) = existingPragmaTable;
-  *(int **)(this_00 + 4) = headerNode;
+  pragmaTable = operator_new(0x10);
+  poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+  *(unsigned char **)pragmaTable = poolAllocator;
+  *(int *)(pragmaTable + 4) = existingPragmaTable;
+  headerNode = (int *)TPoolAllocator__allocate(poolAllocator,0x20);
+  *(int *)(pragmaTable + 8) = existingPragmaTable;
+  *(int **)(pragmaTable + 4) = headerNode;
   *headerNode = existingPragmaTable;
-  *(int *)(*(int *)(this_00 + 4) + 4) = existingPragmaTable;
-  *(int *)(*(int *)(this_00 + 4) + 8) = *(int *)(this_00 + 4);
-  *(int *)(*(int *)(this_00 + 4) + 0xc) = *(int *)(this_00 + 4);
+  *(int *)(*(int *)(pragmaTable + 4) + 4) = existingPragmaTable;
+  *(int *)(*(int *)(pragmaTable + 4) + 8) = *(int *)(pragmaTable + 4);
+  *(int *)(*(int *)(pragmaTable + 4) + 0xc) = *(int *)(pragmaTable + 4);
   *(unsigned char
-    **)(this + 0x68) = this_00;
-  return std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string_____operator_(this_00,(unsigned char *)map);
+    **)(this + 0x68) = pragmaTable;
+  return std___Rb_tree_std__string_std__pair_std__string_const_std__string__std___Select1st_std__pair_std__string_const_std__string___std__less_std__string__pool_allocator_std__pair_std__string_const_std__string_____operator_(pragmaTable,(unsigned char *)map);
 }
 
 /* TType__getCompleteString @ 0x97b96dd0 (276 bytes) */
@@ -6299,8 +6299,8 @@ int TParseContext__constructorErrorCheck(this, sourceLoc, intermNode, function, 
   int *paramType;
   int ctorNominalSize;
   unsigned char * functionName;
-  unsigned char * this_00;
-  void *this_01;
+  unsigned char * poolAllocator;
+  void *newTypeNameString;
   uint *a0;
   int paramSizeOrScratchR4;
   int r4Out0;
@@ -6475,18 +6475,18 @@ LAB_97b9b4a0:
     stackTypeStructureSize = TType__setStructSize((unsigned char *)&stackType,pTVar20);
     structNameChars = nameCopy2Chars;
     nameCopy2Chars[*(int *)(nameCopy2Chars + -0xc)] = *DAT_a7b7ba18;
-    this_00 = (unsigned char *)GetGlobalPoolAllocator();
-    allocPair = TPoolAllocator__allocate(this_00,8);
-    this_01 = (void *)((ulonglong)allocPair >> 0x20);
+    poolAllocator = (unsigned char *)GetGlobalPoolAllocator();
+    allocPair = TPoolAllocator__allocate(poolAllocator,8);
+    newTypeNameString = (void *)((ulonglong)allocPair >> 0x20);
     paramSizeOrScratchR4 = (int)allocPair;
-    cr0Flags = (this_01 == (void *)0x0) << 1;
+    cr0Flags = (newTypeNameString == (void *)0x0) << 1;
     stackTypeTypeName = (void *)0x0;
-    if (this_01 != (void *)0x0) {
+    if (newTypeNameString != (void *)0x0) {
       allocatorArg[0] = GetGlobalPoolAllocator();
       pTVar12 = (unsigned char *)allocatorArg;
       __ZNSbIcSt11char_traitsIcE14pool_allocatorIcEEC1EPKcRKS2_
-                (this_01,structNameChars,(unsigned char *)pTVar12);
-      stackTypeTypeName = this_01;
+                (newTypeNameString,structNameChars,(unsigned char *)pTVar12);
+      stackTypeTypeName = newTypeNameString;
       paramSizeOrScratchR4 = r4Out0;
     }
     refCountPtr = (int *)(nameCopy2Chars + -4);
