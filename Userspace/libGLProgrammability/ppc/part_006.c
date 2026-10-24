@@ -1666,9 +1666,11 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   undefined *scratchR9;
   uint scratchR10;
 {
-  unsigned char *typeAt840Word14;
   unsigned char *typeAt840Structure;
+  unsigned char *pubCopy850Line;
   unsigned char *typeAt850Word18;
+  unsigned char *typeAt840Word14;
+  unsigned char *typeTmp1Word18OrPubLine;
   unsigned char *typeAt840ArraySize;
   int yylen;
   int yytoken;
@@ -2079,7 +2081,6 @@ int yyparse(parseContext, scratchR4, scratchR5, scratchR6, scratchR7, scratchR8,
   unsigned char * typeTmp1Word0cOrPubMatrix;
   unsigned char * typeTmp1TypeNameOrStr2Alloc;
   unsigned char * typeTmp1Word14OrStr2Data;
-  unsigned char * typeTmp1Word18OrPubLine;
   unsigned char * typeTmp1MaxArraySize;
   unsigned char * typeTmp1Word20OrPubType;
   unsigned char * typeTmp1BitsOrPubQualifier;
@@ -4022,7 +4023,7 @@ LAB_97ba97d8:
     yyval = *(uint *)yyvsp;
     typeTmp1ArraySizeOrStr1Data = yyvalQualifierOrParamType;
     typeTmp1Word14OrStr2Data = yyvalUserDef;
-    typeTmp1Word18OrPubLine = yyvalTypeLine;
+    pubCopy850Line = yyvalTypeLine;
     typeTmp1BitsOrPubQualifier = yyvalQualifierOrParamType;
     typeTmp2ArraySizeOrPubUserDef = yyvalUserDef;
     typeTmp2StructureOrPubLine = yyvalTypeLine;
@@ -6312,7 +6313,7 @@ LAB_97ba9874:
     typeTmp1Word0cOrPubMatrix = yyvalMatrix;
     typeTmp1TypeNameOrStr2Alloc = yyvalArray;
     typeTmp1Word14OrStr2Data = yyvalUserDef;
-    typeTmp1Word18OrPubLine = yyvalTypeLine;
+    pubCopy850Line = yyvalTypeLine;
     yyOutArgs[0x10] = 0;
     yyOutArgs[0xf] = yyvalTypeLine;
     goto LAB_97ba9a08;
@@ -6346,7 +6347,7 @@ LAB_97ba99f8:
     typeTmp1Word0cOrPubMatrix = yyvalMatrix;
     typeTmp1TypeNameOrStr2Alloc = yyvalArray;
     typeTmp1Word14OrStr2Data = yyvalUserDef;
-    typeTmp1Word18OrPubLine = yyvalTypeLine;
+    pubCopy850Line = yyvalTypeLine;
 LAB_97ba9a08:
     yyOutArgs[0xe] = typeTmp1Word14OrStr2Data;
     scratchR6 = (char *)typeTmp1VtableOrStr1Alloc;
@@ -6357,7 +6358,7 @@ LAB_97ba9a08:
     yyvalMatrix = typeTmp1Word0cOrPubMatrix;
     yyvalArray = typeTmp1TypeNameOrStr2Alloc;
     yyvalUserDef = typeTmp1Word14OrStr2Data;
-    yyvalTypeLine = typeTmp1Word18OrPubLine;
+    yyvalTypeLine = pubCopy850Line;
     errorCheckResult = TParseContext__arrayErrorCheck
                        ((int)parseContext,leftBracketLine2,identifierValue,typeTmp1VtableOrStr1Alloc,typeTmp1ArraySizeOrStr1Data,typeTmp1StructureOrPubSize,typeTmp1Word0cOrPubMatrix,
                         typeTmp1TypeNameOrStr2Alloc,yyOutArgs[0xe],yyOutArgs[0xf],yyOutArgs[0x10]);
@@ -6518,7 +6519,7 @@ LAB_97ba9da4:
     typeTmp1Word0cOrPubMatrix = yyvalMatrix;
     typeTmp1TypeNameOrStr2Alloc = yyvalArray;
     typeTmp1Word14OrStr2Data = (unsigned char *)scratchR7;
-    typeTmp1Word18OrPubLine = yyvalTypeLine;
+    pubCopy850Line = yyvalTypeLine;
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
     typeTmp7VtableReg = typeTmp7Vtable[0];
     break;
@@ -6544,7 +6545,7 @@ LAB_97ba9da4:
     yyvalArray = (unsigned char *)0x0;
     yyvalQualifierOrParamType = typeTmp1BitsOrPubQualifier;
     typeTmp1ArraySizeOrStr1Data = typeTmp1BitsOrPubQualifier;
-    typeTmp1Word18OrPubLine = yyvalTypeLine;
+    pubCopy850Line = yyvalTypeLine;
     typeTmp2StructureOrPubLine = yyvalTypeLine;
     break;
   case 0x85:
@@ -6662,7 +6663,7 @@ LAB_97baa0ec:
     yyvalQualifierOrParamType = typeTmp1BitsOrPubQualifier;
     typeTmp1ArraySizeOrStr1Data = typeTmp1BitsOrPubQualifier;
     typeTmp1StructureOrPubSize = yyvalSize;
-    typeTmp1Word18OrPubLine = yyvalTypeLine;
+    pubCopy850Line = yyvalTypeLine;
     pubSize = yyvalSize;
     typeTmp2StructureOrPubLine = yyvalTypeLine;
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
@@ -6844,7 +6845,7 @@ LAB_97baa46c:
     yyvalQualifierOrParamType = typeTmp1BitsOrPubQualifier;
     typeTmp1ArraySizeOrStr1Data = typeTmp1BitsOrPubQualifier;
     typeTmp1Word14OrStr2Data = yyvalUserDef;
-    typeTmp1Word18OrPubLine = yyvalTypeLine;
+    pubCopy850Line = yyvalTypeLine;
     typeTmp2ArraySizeOrPubUserDef = yyvalUserDef;
     typeTmp2StructureOrPubLine = yyvalTypeLine;
     break;
@@ -7001,7 +7002,7 @@ LAB_97baa46c:
     yyvalNodeReg = yyvalNode;
     yyvalUserDef = (unsigned char *)newType;
     typeTmp1Word14OrStr2Data = (unsigned char *)newType;
-    typeTmp1Word18OrPubLine = yyvalTypeLine;
+    pubCopy850Line = yyvalTypeLine;
     typeTmp2ArraySizeOrPubUserDef = (unsigned char *)newType;
     typeTmp2StructureOrPubLine = yyvalTypeLine;
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
@@ -7087,7 +7088,7 @@ LAB_97baa46c:
     yyvalNodeReg = yyvalNode;
     yyvalUserDef = (unsigned char *)newType;
     typeTmp1Word14OrStr2Data = (unsigned char *)newType;
-    typeTmp1Word18OrPubLine = yyvalTypeLine;
+    pubCopy850Line = yyvalTypeLine;
     typeTmp2ArraySizeOrPubUserDef = (unsigned char *)newType;
     typeTmp2StructureOrPubLine = yyvalTypeLine;
     typeTmp3VtableReg = typeTmp3VtableOrPub3Array;
