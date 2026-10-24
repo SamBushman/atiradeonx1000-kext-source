@@ -1963,3 +1963,30 @@ use	gldTextureHasNonPowerOfTwoSize2	uVar6	leftoverBits	CONFIRMED	dimension & (di
 use	gldTextureHasNonPowerOfTwoSize2	uVar6	levelWidth	CONFIRMED	level width minus twice the border, clamped to >= 1	^\s*uVar6\ =\ uVar6\ \&\ uVar6\ \-\ 1;$	^\s*\}$	rhs	none
 use	gldTextureHasNonPowerOfTwoSize2	uVar6	leftoverBits	CONFIRMED	dimension & (dimension - 1): non-zero when that dimension is not a power of two	^\s*uVar6\ =\ uVar6\ \&\ uVar6\ \-\ 1;$	^\s*\}$	lhs	none
 use	gldTextureHasNonPowerOfTwoSize2	uVar6	leftoverBits	CONFIRMED	dimension & (dimension - 1): non-zero when that dimension is not a power of two	^\s*if\ \(uVar6\ !=\ 0\)\ \{$	^\s*return\ 1;$	all	none
+local	gldTextureFormatCodeMatchesType	param_1	glFormat	CONFIRMED	GL pixel format enum (0x1909 LUMINANCE, 0x1906 ALPHA, 0x1907 RGB, 0x80e1 BGRA...)
+local	gldTextureFormatCodeMatchesType	param_2	glType	CONFIRMED	GL pixel type enum (0x1401 UNSIGNED_BYTE, 0x1406 FLOAT, 0x8363 UNSIGNED_SHORT_5_6_5, 0x8367 UNSIGNED_INT_8_8_8_8_REV...)
+local	gldTextureFormatCodeMatchesType	param_3	formatCode	INFERRED	driver texture format code (index into the 0x24-byte format table at DAT_001d9f34)
+local	gldTextureFormatCodeMatchesType	bVar1	typeMatches	INFERRED	type equals the GL type that goes with (format, formatCode)
+local	gldTextureFormatCodeFromFormatType	param_1	glFormat	CONFIRMED	GL pixel format enum
+local	gldTextureFormatCodeFromFormatType	param_2	glType	CONFIRMED	GL pixel type enum
+local	gldTextureFormatCodeFromFormatType	uVar1	formatCode	INFERRED	driver texture format code chosen for (format, type); 0 when there is none
+local	gldTextureFormatEntryForLevel	param_1	ctx	INFERRED	GL context (+0x10 engine state holds the 0x30b0/0x30b4 state flags)
+local	gldTextureFormatEntryForLevel	param_2	texture	INFERRED	texture object: +0x30 image header block, byte +0x38 format index
+local	gldTextureFormatEntryForLevel	param_3	faceIndex	INFERRED	cube face / slice: level records are 0xb4 shorts apart per face
+local	gldTextureFormatEntryForLevel	param_4	levelIndex	INFERRED	mipmap level: level records are 0xc shorts apart
+local	gldTextureFormatEntryForLevel	param_5	modeFlag	INFERRED	0 selects the extra engine-state checks (flags at +0x30b0/+0x30b4 and the 0x400 images flag)
+local	gldTextureFormatEntryForLevel	bVar1	modeFlagIsZero	INFERRED	modeFlag == 0
+local	gldTextureFormatEntryForLevel	puVar5	texImages	CONFIRMED	texture[0xc]: image/level header block
+local	gldTextureFormatEntryForLevel	uVar2	imagesFlags	INFERRED	first ushort of the image header: low nibble target kind, bit 0x400
+local	gldTextureFormatEntryForLevel	iVar3	formatEntryOffset	CONFIRMED	format index * 0x24: offset into the format table
+local	gldTextureFormatEntryForLevel	puVar4	formatEntry	CONFIRMED	format table entry (DAT_001d9f34 + offset)
+local	gldTextureFormatLookup	param_1	formatIndex	CONFIRMED	driver texture format code (low byte) selecting a 0x24-byte entry of the format table at DAT_001d9f34
+local	gldTextureFormatLookup	param_2	unusedArg2	INFERRED	passed by callers but not read
+local	gldTextureFormatLookup	param_3	outDesc	INFERRED	texture descriptor being filled: +0x18/+0x1c from entry word +0x10, +0x24 masked by entry word +0x0c
+local	gldTextureFormatLookup	param_4	outSizeLog2	INFERRED	entry word +0x14 & 7: log2 of the texel size in bytes
+local	gldTextureFormatLookup	param_5	outBits20	INFERRED	entry word +0x18 >> 0x14 & 7
+local	gldTextureFormatLookup	param_6	outBits17	INFERRED	entry word +0x18 >> 0x11 & 7
+local	gldTextureFormatLookup	param_7	outBytesPerTexel	INFERRED	1 << (entry word +0x14 & 7)
+local	gldTextureFormatLookup	param_8	outBits23	INFERRED	entry word +0x18 >> 0x17 & 0x1f
+local	gldTextureFormatLookup	param_9	outBits30	INFERRED	entry word +0x18 >> 0x1e
+local	gldTextureFormatLookup	iVar1	entryOffset	CONFIRMED	(formatIndex & 0xff) * 0x24: offset into the format table

@@ -817,292 +817,292 @@ int window_mode_to_ati_format(param_1)
 }
 
 /* gldTextureFormatCodeMatchesType @ 0x2f4d0 (708 bytes) */
-int gldTextureFormatCodeMatchesType(param_1, param_2, param_3)
-  uint param_1;
-  undefined *param_2;
-  int param_3;
+int gldTextureFormatCodeMatchesType(glFormat, glType, formatCode)
+  uint glFormat;
+  undefined *glType;
+  int formatCode;
 {
-  bool bVar1;
+  bool typeMatches;
   
-  if (param_1 == 0x1909) {
-    if (param_3 == 1) {
+  if (glFormat == 0x1909) {
+    if (formatCode == 1) {
 LAB_0002f7a0:
-      return param_2 == ((unsigned char *)0x00001401);
+      return glType == ((unsigned char *)0x00001401);
     }
-    if (param_3 == 0x13) goto LAB_0002f790;
-    if (param_3 == 0x1f) {
+    if (formatCode == 0x13) goto LAB_0002f790;
+    if (formatCode == 0x1f) {
 LAB_0002f6c0:
-      if (param_2 == ((unsigned char *)0x0000140b)) {
+      if (glType == ((unsigned char *)0x0000140b)) {
         return true;
       }
       return false;
     }
-    if (param_3 != 0x19) {
+    if (formatCode != 0x19) {
       return false;
     }
   }
-  else if (param_1 < 0x190a) {
-    if (param_1 == 0x1907) {
-      if (param_3 == 5) {
-        if (param_2 != (undefined *)0x8363) {
+  else if (glFormat < 0x190a) {
+    if (glFormat == 0x1907) {
+      if (formatCode == 5) {
+        if (glType != (undefined *)0x8363) {
           return false;
         }
         return true;
       }
-      if (param_3 == 0x28) {
-        if (param_2 == (undefined *)0x8032) {
+      if (formatCode == 0x28) {
+        if (glType == (undefined *)0x8032) {
           return true;
         }
         return false;
       }
       return false;
     }
-    if (param_1 < 0x1908) {
-      if (param_1 != 0x1906) {
+    if (glFormat < 0x1908) {
+      if (glFormat != 0x1906) {
         return false;
       }
-      if (param_3 == 2) goto LAB_0002f7a0;
-      if (param_3 == 0x14) goto LAB_0002f790;
-      if (param_3 == 0x20) goto LAB_0002f6c0;
-      if (param_3 != 0x1a) {
+      if (formatCode == 2) goto LAB_0002f7a0;
+      if (formatCode == 0x14) goto LAB_0002f790;
+      if (formatCode == 0x20) goto LAB_0002f6c0;
+      if (formatCode != 0x1a) {
         return false;
       }
     }
     else {
-      if (param_3 == 0x12) {
+      if (formatCode == 0x12) {
 LAB_0002f790:
-        return param_2 == ((unsigned char *)0x00001406);
+        return glType == ((unsigned char *)0x00001406);
       }
-      if (param_3 == 0x1e) {
-        return param_2 == ((unsigned char *)0x0000140b);
+      if (formatCode == 0x1e) {
+        return glType == ((unsigned char *)0x0000140b);
       }
-      if (param_3 == 10) {
-        return param_2 == (undefined *)0x8367;
+      if (formatCode == 10) {
+        return glType == (undefined *)0x8367;
       }
-      if (param_3 == 9) {
+      if (formatCode == 9) {
 LAB_0002f5d0:
-        if (param_2 == (undefined *)0x8035) {
+        if (glType == (undefined *)0x8035) {
           return true;
         }
-        if (param_2 == ((unsigned char *)0x00001401)) {
+        if (glType == ((unsigned char *)0x00001401)) {
           return true;
         }
         return false;
       }
-      if (param_3 == 0x23) {
+      if (formatCode == 0x23) {
 LAB_0002f5fc:
-        if (param_2 == (undefined *)0x8368) {
+        if (glType == (undefined *)0x8368) {
           return true;
         }
         return false;
       }
-      if (param_3 != 0x18) {
+      if (formatCode != 0x18) {
         return false;
       }
     }
   }
   else {
-    if (param_1 == 0x80e1) {
-      if (param_3 == 7) {
-        bVar1 = param_2 == (undefined *)0x8366;
+    if (glFormat == 0x80e1) {
+      if (formatCode == 7) {
+        typeMatches = glType == (undefined *)0x8366;
       }
-      else if (param_3 == 6) {
-        bVar1 = param_2 == (undefined *)0x8365;
+      else if (formatCode == 6) {
+        typeMatches = glType == (undefined *)0x8365;
       }
-      else if (param_3 == 0xb) {
-        bVar1 = param_2 == (undefined *)0x8367;
+      else if (formatCode == 0xb) {
+        typeMatches = glType == (undefined *)0x8367;
       }
       else {
-        if (param_3 == 8) goto LAB_0002f5d0;
-        bVar1 = false;
-        if (param_3 == 0x24) goto LAB_0002f5fc;
-        if (param_3 == 0x11) {
-          if (param_2 == ((unsigned char *)0x00001406)) {
+        if (formatCode == 8) goto LAB_0002f5d0;
+        typeMatches = false;
+        if (formatCode == 0x24) goto LAB_0002f5fc;
+        if (formatCode == 0x11) {
+          if (glType == ((unsigned char *)0x00001406)) {
             return true;
           }
-          return bVar1;
+          return typeMatches;
         }
-        if (param_3 == 0x1d) {
-          if (param_2 == ((unsigned char *)0x0000140b)) {
+        if (formatCode == 0x1d) {
+          if (glType == ((unsigned char *)0x0000140b)) {
             return true;
           }
           return false;
         }
       }
-      if (param_3 != 0x17) {
-        return bVar1;
+      if (formatCode != 0x17) {
+        return typeMatches;
       }
-      if (param_2 == ((unsigned char *)0x00001403)) {
+      if (glType == ((unsigned char *)0x00001403)) {
         return true;
       }
-      return bVar1;
+      return typeMatches;
     }
-    if (param_1 == 0x85b9) {
-      if (param_3 == 0x27) {
-        if (param_2 == (undefined *)0x85ba) {
+    if (glFormat == 0x85b9) {
+      if (formatCode == 0x27) {
+        if (glType == (undefined *)0x85ba) {
           return true;
         }
         return false;
       }
-      if (param_3 != 0x26) {
+      if (formatCode != 0x26) {
         return false;
       }
-      if (param_2 == (undefined *)0x85bb) {
+      if (glType == (undefined *)0x85bb) {
         return true;
       }
       return false;
     }
-    if (param_1 != 0x190a) {
+    if (glFormat != 0x190a) {
       return false;
     }
-    if (param_3 == 4) goto LAB_0002f7a0;
-    if (param_3 == 0x16) {
-      return param_2 == ((unsigned char *)0x00001406);
+    if (formatCode == 4) goto LAB_0002f7a0;
+    if (formatCode == 0x16) {
+      return glType == ((unsigned char *)0x00001406);
     }
-    if (param_3 == 0x22) goto LAB_0002f6c0;
-    if (param_3 != 0x1c) {
+    if (formatCode == 0x22) goto LAB_0002f6c0;
+    if (formatCode != 0x1c) {
       return false;
     }
   }
-  if (param_2 == ((unsigned char *)0x00001403)) {
+  if (glType == ((unsigned char *)0x00001403)) {
     return true;
   }
   return false;
 }
 
 /* gldTextureFormatCodeFromFormatType @ 0x2f7c0 (716 bytes) */
-int gldTextureFormatCodeFromFormatType(param_1, param_2)
-  uint param_1;
-  undefined *param_2;
+int gldTextureFormatCodeFromFormatType(glFormat, glType)
+  uint glFormat;
+  undefined *glType;
 {
-  undefined4 uVar1;
+  undefined4 formatCode;
   
-  if (param_1 == 0x1909) {
-    uVar1 = 1;
-    if (param_2 != ((unsigned char *)0x00001401)) {
-      if (param_2 == ((unsigned char *)0x00001406)) {
+  if (glFormat == 0x1909) {
+    formatCode = 1;
+    if (glType != ((unsigned char *)0x00001401)) {
+      if (glType == ((unsigned char *)0x00001406)) {
         return 0x13;
       }
-      uVar1 = 0;
-      if (param_2 == ((unsigned char *)0x0000140b)) {
+      formatCode = 0;
+      if (glType == ((unsigned char *)0x0000140b)) {
         return 0x1f;
       }
     }
-    if (param_2 != ((unsigned char *)0x00001403)) {
-      return uVar1;
+    if (glType != ((unsigned char *)0x00001403)) {
+      return formatCode;
     }
     return 0x19;
   }
-  if (param_1 < 0x190a) {
-    if (param_1 == 0x1907) {
-      if (param_2 == (undefined *)0x8363) {
+  if (glFormat < 0x190a) {
+    if (glFormat == 0x1907) {
+      if (glType == (undefined *)0x8363) {
         return 5;
       }
-      if (param_2 != (undefined *)0x8032) {
+      if (glType != (undefined *)0x8032) {
         return 0;
       }
       return 0x28;
     }
-    if (param_1 < 0x1908) {
-      if (param_1 != 0x1906) {
+    if (glFormat < 0x1908) {
+      if (glFormat != 0x1906) {
         return 0;
       }
-      uVar1 = 2;
-      if (param_2 != ((unsigned char *)0x00001401)) {
-        if (param_2 == ((unsigned char *)0x00001406)) {
+      formatCode = 2;
+      if (glType != ((unsigned char *)0x00001401)) {
+        if (glType == ((unsigned char *)0x00001406)) {
           return 0x14;
         }
-        uVar1 = 0;
-        if (param_2 == ((unsigned char *)0x0000140b)) {
+        formatCode = 0;
+        if (glType == ((unsigned char *)0x0000140b)) {
           return 0x20;
         }
       }
-      if (param_2 != ((unsigned char *)0x00001403)) {
-        return uVar1;
+      if (glType != ((unsigned char *)0x00001403)) {
+        return formatCode;
       }
       return 0x1a;
     }
-    uVar1 = 0x12;
-    if ((param_2 == ((unsigned char *)0x00001406)) || (uVar1 = 0, param_2 != ((unsigned char *)0x0000140b))) {
-      if (param_2 != (undefined *)0x8035) goto LAB_0002f8fc;
-      uVar1 = 9;
+    formatCode = 0x12;
+    if ((glType == ((unsigned char *)0x00001406)) || (formatCode = 0, glType != ((unsigned char *)0x0000140b))) {
+      if (glType != (undefined *)0x8035) goto LAB_0002f8fc;
+      formatCode = 9;
     }
     else {
-      uVar1 = 0x1e;
+      formatCode = 0x1e;
 LAB_0002f8fc:
-      if (param_2 == (undefined *)0x8367) {
-        uVar1 = 10;
+      if (glType == (undefined *)0x8367) {
+        formatCode = 10;
         goto LAB_0002f934;
       }
     }
-    if (param_2 == ((unsigned char *)0x00001401)) {
+    if (glType == ((unsigned char *)0x00001401)) {
       return 9;
     }
 LAB_0002f934:
-    if (param_2 == (undefined *)0x8368) {
+    if (glType == (undefined *)0x8368) {
       return 0x23;
     }
-    if (param_2 != ((unsigned char *)0x00001403)) {
-      return uVar1;
+    if (glType != ((unsigned char *)0x00001403)) {
+      return formatCode;
     }
     return 0x18;
   }
-  if (param_1 != 0x80e1) {
-    if (param_1 == 0x85b9) {
-      if (param_2 == (undefined *)0x85ba) {
+  if (glFormat != 0x80e1) {
+    if (glFormat == 0x85b9) {
+      if (glType == (undefined *)0x85ba) {
         return 0x27;
       }
-      if (param_2 != (undefined *)0x85bb) {
+      if (glType != (undefined *)0x85bb) {
         return 0;
       }
       return 0x26;
     }
-    if (param_1 != 0x190a) {
+    if (glFormat != 0x190a) {
       return 0;
     }
-    uVar1 = 4;
-    if (param_2 != ((unsigned char *)0x00001401)) {
-      if (param_2 == ((unsigned char *)0x00001406)) {
+    formatCode = 4;
+    if (glType != ((unsigned char *)0x00001401)) {
+      if (glType == ((unsigned char *)0x00001406)) {
         return 0x16;
       }
-      uVar1 = 0;
-      if (param_2 == ((unsigned char *)0x0000140b)) {
+      formatCode = 0;
+      if (glType == ((unsigned char *)0x0000140b)) {
         return 0x22;
       }
     }
-    if (param_2 != ((unsigned char *)0x00001403)) {
-      return uVar1;
+    if (glType != ((unsigned char *)0x00001403)) {
+      return formatCode;
     }
     return 0x1c;
   }
-  uVar1 = 7;
-  if ((param_2 == (undefined *)0x8366) || (uVar1 = 0, param_2 != (undefined *)0x8365)) {
-    if (param_2 != (undefined *)0x8035) goto LAB_0002f84c;
-    uVar1 = 8;
+  formatCode = 7;
+  if ((glType == (undefined *)0x8366) || (formatCode = 0, glType != (undefined *)0x8365)) {
+    if (glType != (undefined *)0x8035) goto LAB_0002f84c;
+    formatCode = 8;
   }
   else {
-    uVar1 = 6;
+    formatCode = 6;
 LAB_0002f84c:
-    if (param_2 == (undefined *)0x8367) {
-      uVar1 = 0xb;
+    if (glType == (undefined *)0x8367) {
+      formatCode = 0xb;
       goto LAB_0002f884;
     }
   }
-  if (param_2 == ((unsigned char *)0x00001401)) {
+  if (glType == ((unsigned char *)0x00001401)) {
     return 8;
   }
 LAB_0002f884:
-  if (param_2 == (undefined *)0x8368) {
-    uVar1 = 0x24;
+  if (glType == (undefined *)0x8368) {
+    formatCode = 0x24;
   }
-  else if (param_2 == ((unsigned char *)0x00001406)) {
+  else if (glType == ((unsigned char *)0x00001406)) {
     return 0x11;
   }
-  if (param_2 == ((unsigned char *)0x0000140b)) {
+  if (glType == ((unsigned char *)0x0000140b)) {
     return 0x1d;
   }
-  if (param_2 != ((unsigned char *)0x00001403)) {
-    return uVar1;
+  if (glType != ((unsigned char *)0x00001403)) {
+    return formatCode;
   }
   return 0x17;
 }
@@ -2168,67 +2168,67 @@ LAB_000310c0:
 }
 
 /* gldTextureFormatLookup @ 0x31170 (164 bytes) */
-int gldTextureFormatLookup(param_1, param_2, param_3, param_4, param_5, param_6, param_7, param_8, param_9)
-  uint param_1;
-  undefined4 param_2;
-  int param_3;
-  uint *param_4;
-  uint *param_5;
-  uint *param_6;
-  int *param_7;
-  uint *param_8;
-  uint *param_9;
+int gldTextureFormatLookup(formatIndex, unusedArg2, outDesc, outSizeLog2, outBits20, outBits17, outBytesPerTexel, outBits23, outBits30)
+  uint formatIndex;
+  undefined4 unusedArg2;
+  int outDesc;
+  uint *outSizeLog2;
+  uint *outBits20;
+  uint *outBits17;
+  int *outBytesPerTexel;
+  uint *outBits23;
+  uint *outBits30;
 {
-  int iVar1;
+  int entryOffset;
   
-  iVar1 = (param_1 & 0xff) * 0x24;
-  *(uint *)(param_3 + 0x18) = *(uint *)(&DAT_001d9f44 + iVar1) >> 0x1b;
-  *(uint *)(param_3 + 0x1c) = *(uint *)(&DAT_001d9f44 + iVar1) >> 0x16 & 0x1f;
-  *param_8 = *(uint *)(&DAT_001d9f4c + iVar1) >> 0x17 & 0x1f;
-  *param_9 = *(uint *)(&DAT_001d9f4c + iVar1) >> 0x1e;
-  *param_4 = *(uint *)(&DAT_001d9f48 + iVar1) & 7;
-  *param_5 = *(uint *)(&DAT_001d9f4c + iVar1) >> 0x14 & 7;
-  *param_6 = *(uint *)(&DAT_001d9f4c + iVar1) >> 0x11 & 7;
-  *param_7 = 1 << (*(uint *)(&DAT_001d9f48 + iVar1) & 7);
-  *(uint *)(param_3 + 0x24) = *(uint *)(param_3 + 0x24) & *(uint *)(&DAT_001d9f40 + iVar1);
+  entryOffset = (formatIndex & 0xff) * 0x24;
+  *(uint *)(outDesc + 0x18) = *(uint *)(&DAT_001d9f44 + entryOffset) >> 0x1b;
+  *(uint *)(outDesc + 0x1c) = *(uint *)(&DAT_001d9f44 + entryOffset) >> 0x16 & 0x1f;
+  *outBits23 = *(uint *)(&DAT_001d9f4c + entryOffset) >> 0x17 & 0x1f;
+  *outBits30 = *(uint *)(&DAT_001d9f4c + entryOffset) >> 0x1e;
+  *outSizeLog2 = *(uint *)(&DAT_001d9f48 + entryOffset) & 7;
+  *outBits20 = *(uint *)(&DAT_001d9f4c + entryOffset) >> 0x14 & 7;
+  *outBits17 = *(uint *)(&DAT_001d9f4c + entryOffset) >> 0x11 & 7;
+  *outBytesPerTexel = 1 << (*(uint *)(&DAT_001d9f48 + entryOffset) & 7);
+  *(uint *)(outDesc + 0x24) = *(uint *)(outDesc + 0x24) & *(uint *)(&DAT_001d9f40 + entryOffset);
   return;
 }
 
 /* gldTextureFormatEntryForLevel @ 0x31220 (280 bytes) */
-int gldTextureFormatEntryForLevel(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int param_3;
-  uint param_4;
-  int param_5;
+int gldTextureFormatEntryForLevel(ctx, texture, faceIndex, levelIndex, modeFlag)
+  int ctx;
+  int texture;
+  int faceIndex;
+  uint levelIndex;
+  int modeFlag;
 {
-  bool bVar1;
-  ushort uVar2;
-  int iVar3;
-  undefined *puVar4;
-  ushort *puVar5;
+  bool modeFlagIsZero;
+  ushort imagesFlags;
+  int formatEntryOffset;
+  undefined *formatEntry;
+  ushort *texImages;
   
-  puVar5 = *(ushort **)(param_2 + 0x30);
-  if (*(char *)(param_2 + 0x38) == '\0') {
-    ((int (*)())FUN_0002fac0)(param_1,param_2);
+  texImages = *(ushort **)(texture + 0x30);
+  if (*(char *)(texture + 0x38) == '\0') {
+    ((int (*)())FUN_0002fac0)(ctx,texture);
   }
-  bVar1 = param_5 == 0;
-  if ((((!bVar1) ||
-       ((((*(uint *)(((unsigned char *)0x000030b0) + *(int *)(param_1 + 0x10)) & 0x1ff) == 0 &&
-         ((*(uint *)(((unsigned char *)0x000030b4) + *(int *)(param_1 + 0x10)) & 0xff0000) == 0)) &&
-        ((*(uint *)(((unsigned char *)0x000030b4) + *(int *)(param_1 + 0x10)) & 0xff1) == 0)))) &&
-      ((*(char *)(puVar5 + param_3 * 0xb4 + param_4 * 0xc + 0x55) == '\0' &&
-       (uVar2 = *puVar5, (uVar2 & 0xf) != 4)))) && ((!bVar1 || ((uVar2 & 0x400) == 0)))) {
-    iVar3 = (uint)*(byte *)(param_2 + 0x38) * 0x24;
-    puVar4 = &DAT_001d9f34 + iVar3;
-    if (((*(uint *)(*(int *)(param_2 + 0x30) + 0x48) & 0x8000) == 0) && (bVar1)) {
-      return puVar4;
+  modeFlagIsZero = modeFlag == 0;
+  if ((((!modeFlagIsZero) ||
+       ((((*(uint *)(((unsigned char *)0x000030b0) + *(int *)(ctx + 0x10)) & 0x1ff) == 0 &&
+         ((*(uint *)(((unsigned char *)0x000030b4) + *(int *)(ctx + 0x10)) & 0xff0000) == 0)) &&
+        ((*(uint *)(((unsigned char *)0x000030b4) + *(int *)(ctx + 0x10)) & 0xff1) == 0)))) &&
+      ((*(char *)(texImages + faceIndex * 0xb4 + levelIndex * 0xc + 0x55) == '\0' &&
+       (imagesFlags = *texImages, (imagesFlags & 0xf) != 4)))) && ((!modeFlagIsZero || ((imagesFlags & 0x400) == 0)))) {
+    formatEntryOffset = (uint)*(byte *)(texture + 0x38) * 0x24;
+    formatEntry = &DAT_001d9f34 + formatEntryOffset;
+    if (((*(uint *)(*(int *)(texture + 0x30) + 0x48) & 0x8000) == 0) && (modeFlagIsZero)) {
+      return formatEntry;
     }
-    if (param_4 != *(byte *)(*(int *)(param_2 + 0x30) + 0x5e)) {
-      return puVar4;
+    if (levelIndex != *(byte *)(*(int *)(texture + 0x30) + 0x5e)) {
+      return formatEntry;
     }
-    if ((*(uint *)(&DAT_001d9f54 + iVar3) & 0x1000000) != 0) {
-      return puVar4;
+    if ((*(uint *)(&DAT_001d9f54 + formatEntryOffset) & 0x1000000) != 0) {
+      return formatEntry;
     }
   }
   return (undefined *)0x0;
