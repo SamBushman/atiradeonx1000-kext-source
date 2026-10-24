@@ -1,0 +1,9 @@
+local	FUN_000d8450	uVar3	newTokenBuffer	INFERRED	result of the context allocator callback (ctx+0xc) called with capacity*4+0x200 each time the token buffer is full, copied over and installed at ilBuilder+0xc
+local	FUN_000d8450	uVar10	unit	INFERRED	loop counter over the texture units; masked & 0xffff into source/dest register numbers and tested against ctx+0x20 bit (uVar10 & 0x3f)
+local	FUN_000d8450	iVar5	texEnvRecord	INFERRED	induction pointer ctx + 0x450 + unit*0xcc: the unit texture-environment record (mode halfword at +0, combine fields beyond)
+local	FUN_000d8450	iVar6	unitByteCursor	INFERRED	induction pointer ctx + unit: indexes the per-unit byte table at +0x21
+local	FUN_000d8450	iVar7	unitPtrCursor	INFERRED	induction pointer ctx + unit*4: indexes the bound-texture pointer table at +0x13f8
+local	FUN_000d8450	iVar8	unitRecordCursor	INFERRED	induction pointer ctx + unit*0xcc: the unit record whose +0x450 field is read
+local	FUN_000d8450	pcVar9	unitFlagPtr	INFERRED	= ctx + unit + 0x21: per-unit flag byte read in the unit loop
+local	FUN_000d8450	puVar14	countPtr	INFERRED	= ilBuilder+4: the token count word (ffpsEmitTexEnvCombine names it countPtr)
+local	FUN_000d8450	uVar12	ilOpcode	INFERRED	IL opcode stored as the first token word of the emitted instruction (constants 5, 0x15, 0x24, 0x42, 0x50, 0x51)

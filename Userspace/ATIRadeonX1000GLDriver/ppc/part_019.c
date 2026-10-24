@@ -1649,549 +1649,550 @@ int FUN_000d8450(ctx, ilBuilder, param_3)
   int ilBuilder;
   int param_3;
 {
+  uint tokenIndex;
   bool bVar1;
   uint uVar2;
-  undefined4 uVar3;
-  uint uVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
-  char *pcVar9;
-  uint uVar10;
+  undefined4 newTokenBuffer;
+  uint textureUnitCount;
+  int texEnvRecord;
+  int unitByteCursor;
+  int unitPtrCursor;
+  int unitRecordCursor;
+  char *unitFlagPtr;
+  uint unit;
   uint uVar11;
-  uint uVar12;
+  uint ilOpcode;
   undefined *puVar13;
-  uint *puVar14;
+  uint *countPtr;
   int iStack00000020;
   char acStack_68 [28];
   
-  puVar14 = (uint *)(ilBuilder + 4);
-  uVar4 = (uint)(byte)((unsigned char *)0x000013b2)[ctx];
-  if (uVar4 != 0) {
-    uVar10 = 0;
-    iVar5 = ctx + 0x450;
-    iVar6 = ctx;
-    iVar7 = ctx;
-    iVar8 = ctx;
+  countPtr = (uint *)(ilBuilder + 4);
+  textureUnitCount = (uint)(byte)((unsigned char *)0x000013b2)[ctx];
+  if (textureUnitCount != 0) {
+    unit = 0;
+    texEnvRecord = ctx + 0x450;
+    unitByteCursor = ctx;
+    unitPtrCursor = ctx;
+    unitRecordCursor = ctx;
     iStack00000020 = param_3;
     do {
-      if (*(int *)(((unsigned char *)0x000013f8) + iVar7) != 0) {
+      if (*(int *)(((unsigned char *)0x000013f8) + unitPtrCursor) != 0) {
         bVar1 = false;
         if ((*(uint *)(ctx + 0x44) & 0x100000) != 0) {
-          bVar1 = *(char *)(uVar10 + *(int *)(((unsigned char *)0x00001168) + ctx) + 0x71) == '\0';
+          bVar1 = *(char *)(unit + *(int *)(((unsigned char *)0x00001168) + ctx) + 0x71) == '\0';
         }
-        if (((int)(uint)*(byte *)(ctx + 0x20) >> (uVar10 & 0x3f) & 1U) == 0) {
-          if ((*(short *)(iVar8 + 0x450) != -0x7a90) || (*(short *)(iVar5 + 4) != -0x7885)) {
-            uVar4 = *puVar14;
-            if (*(uint *)(ilBuilder + 8) <= uVar4) {
-              uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+        if (((int)(uint)*(byte *)(ctx + 0x20) >> (unit & 0x3f) & 1U) == 0) {
+          if ((*(short *)(unitRecordCursor + 0x450) != -0x7a90) || (*(short *)(texEnvRecord + 4) != -0x7885)) {
+            tokenIndex = *countPtr;
+            if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+              newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
               if (*(int *)(ilBuilder + 0xc) != 0) {
-                _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+                _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
                 (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
               }
-              *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-              uVar4 = *puVar14;
+              *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+              tokenIndex = *countPtr;
               *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
             }
-            *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = (uVar10 & 0xff) << 0x10 | 0x800005d;
-            uVar4 = *puVar14 + 1;
-            *puVar14 = uVar4;
-            if (*(uint *)(ilBuilder + 8) <= uVar4) {
-              uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+            *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = (unit & 0xff) << 0x10 | 0x800005d;
+            tokenIndex = *countPtr + 1;
+            *countPtr = tokenIndex;
+            if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+              newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
               if (*(int *)(ilBuilder + 0xc) != 0) {
-                _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+                _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
                 (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
               }
-              *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-              uVar4 = *puVar14;
+              *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+              tokenIndex = *countPtr;
               *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
             }
-            *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = uVar10 & 0xffff | 0x40000;
-            uVar4 = *puVar14 + 1;
-            *puVar14 = uVar4;
-            if ((iStack00000020 == 0) || (acStack_68[uVar10] == '\0')) {
+            *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = unit & 0xffff | 0x40000;
+            tokenIndex = *countPtr + 1;
+            *countPtr = tokenIndex;
+            if ((iStack00000020 == 0) || (acStack_68[unit] == '\0')) {
               if ((bVar1) &&
                  (((*(uint *)(ctx + 0x44) & 0x20000000) == 0 ||
-                  ((1 << (uVar10 & 0x3f) & *(uint *)(ctx + 0xec)) == 0)))) {
+                  ((1 << (unit & 0x3f) & *(uint *)(ctx + 0xec)) == 0)))) {
                 uVar11 = 0x10011;
               }
               else {
-                uVar11 = uVar10 & 0xffff | 0x110000;
+                uVar11 = unit & 0xffff | 0x110000;
               }
             }
             else {
-              uVar11 = uVar10 + (uint)(byte)((unsigned char *)0x000013b2)[ctx] * 2 & 0xffff | 0x40000;
+              uVar11 = unit + (uint)(byte)((unsigned char *)0x000013b2)[ctx] * 2 & 0xffff | 0x40000;
             }
-            if (*(uint *)(ilBuilder + 8) <= uVar4) {
-              uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+            if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+              newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
               if (*(int *)(ilBuilder + 0xc) != 0) {
-                _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+                _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
                 (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
               }
-              *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-              uVar4 = *puVar14;
+              *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+              tokenIndex = *countPtr;
               *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
             }
-            *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = uVar11 | 0x400000;
-            uVar4 = *puVar14 + 1;
-            *puVar14 = uVar4;
-            if (*(uint *)(ilBuilder + 8) <= uVar4) {
-              uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+            *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar11 | 0x400000;
+            tokenIndex = *countPtr + 1;
+            *countPtr = tokenIndex;
+            if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+              newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
               if (*(int *)(ilBuilder + 0xc) != 0) {
-                _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+                _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
                 (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
               }
-              *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-              uVar4 = *puVar14;
+              *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+              tokenIndex = *countPtr;
               *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
             }
-            *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x603210;
-            *puVar14 = *puVar14 + 1;
-            uVar4 = (uint)(byte)((unsigned char *)0x000013b2)[ctx];
+            *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x603210;
+            *countPtr = *countPtr + 1;
+            textureUnitCount = (uint)(byte)((unsigned char *)0x000013b2)[ctx];
           }
         }
         else {
-          uVar4 = *puVar14;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          tokenIndex = *countPtr;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x49;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x49;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          uVar11 = uVar10 & 0xffff;
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x40020;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          uVar11 = unit & 0xffff;
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x40020;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
           uVar2 = uVar11 + 0x14 & 0xffff;
-          *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = uVar11 | 0x110000;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar11 | 0x110000;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          pcVar9 = (char *)(iVar6 + 0x21);
-          *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = uVar2 | 0x410000;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(char *)(iVar6 + 0x21) == '\x01') {
-            uVar12 = 0x50;
+          unitFlagPtr = (char *)(unitByteCursor + 0x21);
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar2 | 0x410000;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(char *)(unitByteCursor + 0x21) == '\x01') {
+            ilOpcode = 0x50;
           }
           else {
-            uVar12 = 5;
+            ilOpcode = 5;
           }
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = uVar12 | 0x5500;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = ilOpcode | 0x5500;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = (uVar10 & 0xff) << 0x10 | 0x800005d;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = (unit & 0xff) << 0x10 | 0x800005d;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x40020;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x40020;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x440020;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x440020;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x603210;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x603210;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x40;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x40;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x40021;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x40021;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = uVar11 | 0x110000;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar11 | 0x110000;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = uVar2 | 0x410000;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*pcVar9 == '\x01') {
-            uVar12 = 0x51;
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar2 | 0x410000;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*unitFlagPtr == '\x01') {
+            ilOpcode = 0x51;
           }
           else {
-            uVar12 = 0x15;
+            ilOpcode = 0x15;
           }
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = uVar12 | 0x5500;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = ilOpcode | 0x5500;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = uVar2 | 0x410000;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*pcVar9 == '\x01') {
-            uVar12 = 0x42;
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar2 | 0x410000;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*unitFlagPtr == '\x01') {
+            ilOpcode = 0x42;
           }
           else {
-            uVar12 = 0x24;
+            ilOpcode = 0x24;
           }
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = uVar12 | 0x4400;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = ilOpcode | 0x4400;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) =
-               ((uVar10 & 0xff) + 8) * 0x10000 & 0xff0000 | 0x800005d;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) =
+               ((unit & 0xff) + 8) * 0x10000 & 0xff0000 | 0x800005d;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x40021;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x40021;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x440021;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x440021;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x603210;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x603210;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x5b;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x5b;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x40022;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x40022;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = uVar11 | 0x510000;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*pcVar9 == '\x01') {
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar11 | 0x510000;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*unitFlagPtr == '\x01') {
             puVar13 = (undefined *)0x0;
           }
           else {
             puVar13 = ((unsigned char *)0x00001111);
           }
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined **)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = puVar13;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined **)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = puVar13;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = uVar2 | 0x410000;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar2 | 0x410000;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined **)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = ((unsigned char *)0x00003333);
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined **)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = ((unsigned char *)0x00003333);
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x3000d;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x3000d;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = uVar11 | 0x40000;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar11 | 0x40000;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x40022;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x40022;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x40021;
-          uVar4 = *puVar14 + 1;
-          *puVar14 = uVar4;
-          if (*(uint *)(ilBuilder + 8) <= uVar4) {
-            uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x40021;
+          tokenIndex = *countPtr + 1;
+          *countPtr = tokenIndex;
+          if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
+            newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
             if (*(int *)(ilBuilder + 0xc) != 0) {
-              _memcpy(uVar3,*(int *)(ilBuilder + 0xc),*puVar14 << 2);
+              _memcpy(newTokenBuffer,*(int *)(ilBuilder + 0xc),*countPtr << 2);
               (**(code **)(ctx + 0x18))(*(undefined4 *)(ilBuilder + 0xc));
             }
-            *(undefined4 *)(ilBuilder + 0xc) = uVar3;
-            uVar4 = *puVar14;
+            *(undefined4 *)(ilBuilder + 0xc) = newTokenBuffer;
+            tokenIndex = *countPtr;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(undefined4 *)(uVar4 * 4 + *(int *)(ilBuilder + 0xc)) = 0x40020;
-          *puVar14 = *puVar14 + 1;
-          uVar4 = (uint)(byte)((unsigned char *)0x000013b2)[ctx];
+          *(undefined4 *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = 0x40020;
+          *countPtr = *countPtr + 1;
+          textureUnitCount = (uint)(byte)((unsigned char *)0x000013b2)[ctx];
         }
       }
-      uVar10 = uVar10 + 1;
-      iVar5 = iVar5 + 0xcc;
-      iVar7 = iVar7 + 4;
-      iVar8 = iVar8 + 0xcc;
-      iVar6 = iVar6 + 1;
-    } while ((int)uVar10 < (int)uVar4);
+      unit = unit + 1;
+      texEnvRecord = texEnvRecord + 0xcc;
+      unitPtrCursor = unitPtrCursor + 4;
+      unitRecordCursor = unitRecordCursor + 0xcc;
+      unitByteCursor = unitByteCursor + 1;
+    } while ((int)unit < (int)textureUnitCount);
   }
   return;
 }
