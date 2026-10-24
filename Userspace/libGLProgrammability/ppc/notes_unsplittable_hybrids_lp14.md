@@ -31,15 +31,25 @@ Renamed (they were per-rule value-stack segments whose symbol has a known `%unio
 `typeQualifierQualifier`, `typeSpecifierType`, `typeSpecifierQualifier`, `typeSpecifierQualifier2` (`interm.type`, +0x10 type / +0x14 qualifier),
 `parameterDeclarationParamType`, `parameterDeclarationParamType2` (`interm.param`, +0x14 type), `structDeclarationListTypeList` (`interm.typeList`, +0x10).
 
-What remains joined in yyparse is the frame-area overlay and the yyval union words:
-* `yyvalTypeOrFunction` (`local_870`, yyval+0x10) and `yyvalQualifierOrParamType` (`local_86c`, yyval+0x14) are the words of the `%union` member the default action copies
-  from `$1` (`yyval = yyvsp[1-yylen]`) before the case code runs: the same variable carries `type`, `function`, `param`... depending on the rule (notes_ttype_layout.md line 18);
-  the main web spans every case (find_webs: 2 webs, the first with 60+ lines).
-* The stack areas A..D (`local_850..local_82c`, `local_820..local_7fc`, `local_7f0..local_7cc`, `local_7bc/7b0/7ac`) hold C++ temporaries of different types built at the same frame
-  offsets in different grammar actions: a `TType` (getType()/TType(TPublicType) target), a `TPublicType` copy, `std::string` objects (`getCompleteString()` results). The base slots are
-  address-taken (`&local_850`, `&local_840`, `&local_830`, `&local_820`, `&local_800`, `&local_7f0`, `&local_7e0`, `&local_7b0`: listed below) and cannot be split; the interior words are
-  the fields of those objects (written by constructors through the pointer, read as `local_83c`...), so a per-case split of the words alone would give each new variable a read with no
-  visible definition. wt-lp1 tried the per-case split of the string-pair slots (`local_850/84c/840/83c`) and the gate reported `UNINIT yyparse 61 -> 63`.
+What remains joined in yyparse (MEASURED in lpN7-lpN10, replacing the earlier argued text):
+
+* Address-taken base slots (cannot be split, `find_webs.py` refuses: `local_850 local_840 local_830 local_820 local_800 local_7f0 local_7e0 local_7b0`, eight, not nine):
+  e.g. `local_850: address taken in "...(&local_850,*(int **)(pTVar56 + -0x7c))"`.
+* Interior words (21 of them: the other `typeTmp*` names). `Tools/userspace/lpnames/splitarea.py` split every web of at most 3 lines off the big web of each
+  interior word (test names `local_84c_wK`; the large web keeps the joined name through a final `*` row). Gates against 1b2f819:
+  area A (`local_84c 848 844 83c 838 82c`) lpN7 SPLIT-EQUIVALENT, 0 problems (54 renames); area B (`local_81c 818 814 810 80c 808 7fc`) lpN8 SPLIT-EQUIVALENT (20 renames);
+  area C (`local_7ec 7e8 7dc 7d8 7d4 7d0 7cc`) lpN9 SPLIT-EQUIVALENT (23 renames); area D (`local_7bc 7ac`) and the yyval words (`local_870 local_86c`) have no web of
+  at most 3 lines with a definition besides the large one, so nothing to split (lpN10 had no row changes; it does not count as a test).
+  So the earlier claim "a per-case split leaves reads with no visible definition" is FALSE for the small webs: the compiler's frame-slot mapping tolerates them. They are
+  mechanically splittable (about 100 webs, mostly single `local_838 = 0` / `= pTVar3` stores). They are NOT renamed in the final tree because a role name per web needs the case's
+  evidence (TType temp field vs TPublicType field vs std::string field) and I did not derive it per web; the test names would be worse than the joined names.
+* The big web of every interior word (e.g. `local_84c` web 0: 136 lines, 34 definitions; `local_838` 32 webs of which 30 are 1-2 lines) is ONE def-use web
+  (`find_webs.py`): its uses after the switch (the common `*yyvsp = yyval` copy-down) are reached by definitions from many cases, so no case-by-case naming of that web exists
+  at the dataflow level: a use reached by two definitions needs one name. This is the measured basis for keeping a single name there; the joined name is the union of the two views of
+  the word (the stack `TType` temporary and the `TPublicType` copy that the value-stack copy-down reads).
+* NOT reproduced: wt-lp1's `UNINIT yyparse 61 -> 63` on the string-pair slots. Its split used `local_850`/`local_840`, which are address-taken (the tool refuses those), and its
+  rows were not kept. Splitting the small webs of `local_84c`/`local_83c` (the interior half of that pair) did NOT raise any UNINIT (lpN7 problems: 0). The claim is therefore unverified and removed from the argument.
+* Open work: give the ~100 splittable small webs role names from per-case evidence, then re-gate; the rows are on branch `lp14-test-splits` (commits after 1b2f819).
 
 | name | Ghidra var | find_webs |
 |---|---|---|
