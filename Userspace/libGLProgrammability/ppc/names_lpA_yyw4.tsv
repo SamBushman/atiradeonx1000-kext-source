@@ -1,4 +1,3 @@
-use	yyparse	iVar55	aggregateNode22	INFERRED	TIntermNode::getAsAggregate() of yyvalNode	^\s*iVar55\ =\ \(\*\*\(code\ \*\*\)\(\*\(uint\ \*\)local_878\ \+\ 0x1c\)\)\(local_878\);$@2	+2
 use	yyparse	iVar6	paramArrayBegin	INFERRED	begin pointer of the parameter array (paramList+4)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar60\ \+\ 4\);$	+2
 use	yyparse	iVar6	paramArrayBegin	INFERRED	begin pointer of the parameter array (paramList+4)	^\s*\(piVar61,a1_07,pcVar62,param_4,param_5,pTVar33,iVar6\);$	+1
 use	yyparse	iVar6	paramArrayBegin	INFERRED	begin pointer of the parameter array (paramList+4)	^\s*\(param_1,iVar60,"assign",\(unsigned\ char\ \*\)param_4,param_5,pTVar33,iVar6,$	+2

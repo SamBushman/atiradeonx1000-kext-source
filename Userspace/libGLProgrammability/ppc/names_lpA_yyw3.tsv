@@ -360,8 +360,6 @@ use	yyparse	iVar54	paramByteOffset	INFERRED	byte offset of the parameter (paramI
 use	yyparse	iVar54	paramByteOffset	INFERRED	byte offset of the parameter (paramIdx * 8)	^\s*\*\(undefined4\ \*\)\(iVar60\ \+\ iVar54\)\ =\ 0;$	+1
 use	yyparse	iVar54	returnTypePtr	INFERRED	pointer to the function's return type (+0x1c)	^\s*iVar54\ =\ iVar55\ \+\ 0x1c;$	+1
 use	yyparse	iVar54	returnTypePtr	INFERRED	pointer to the function's return type (+0x1c)	^\s*\(\(int\)param_1,\*\(char\ \*\*\)pTVar56,$	+3
-use	yyparse	iVar55	queryResult2	INFERRED	result of a virtual query on the left operand	^\s*iVar55\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x50\)\ \+\ 0x50\)\)$	+1
-use	yyparse	iVar55	queryResult2	INFERRED	result of a virtual query on the left operand	^\s*if\ \(iVar55\ ==\ 0\)\ \{$@6	+3
 use	yyparse	uVar57	basicTypeValue	INFERRED	TIntermTyped::getBasicType() of the operand	^\s*uVar57\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x40\)\)$	+1
 use	yyparse	uVar57	basicTypeValue	INFERRED	TIntermTyped::getBasicType() of the operand	^\s*\(\(uVar28\ \&\ 0xff\)\ <<\ 0xb\ \|$	+2
 use	yyparse	uVar57	basicTypeValue	INFERRED	TIntermTyped::getBasicType() of the operand	^\s*uVar57\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(pTVar56\ \+\ \-0x7c\)\ \+\ 0x40\)\)$@2	+1
