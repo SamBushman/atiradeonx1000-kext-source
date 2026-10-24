@@ -6812,6 +6812,7 @@ int arbEmitIlMad(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint *src2Select;
   uint *src2Negate;
 {
+  int allocator;
   uint dstToken;
   uint src2NegateY;
   uint src2SelectW;
@@ -6847,7 +6848,7 @@ int arbEmitIlMad(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
   uint src2Packed;
   uint src1Packed;
   uint src0Packed;
-  int allocator;
+  int dstMaskW;
   uint *instrCountPtr;
   
   dstToken = (dstFile & 0x3f) << 0x10 | dstIndex & 0xffff;
@@ -6861,28 +6862,28 @@ int arbEmitIlMad(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, src0Selec
     dstMaskWord = 0x55;
   }
   if (*dstMask == 0) {
-    allocator = dstMask[3];
+    dstMaskW = dstMask[3];
     dstMaskY = dstMask[1];
     dstMaskZ = dstMask[2];
 LAB_00067bc0:
     dstToken = dstToken | 0x400000;
-    dstMaskWord = (uint)(allocator != 0) * 0x40 |
+    dstMaskWord = (uint)(dstMaskW != 0) * 0x40 |
              (uint)(dstMaskZ != 0) * 0x10 | (uint)(dstMaskY != 0) * 4 | (uint)(*dstMask != 0);
   }
   else {
     dstMaskY = dstMask[1];
     if (dstMaskY == 0) {
-      allocator = dstMask[3];
+      dstMaskW = dstMask[3];
       dstMaskZ = dstMask[2];
       goto LAB_00067bc0;
     }
     dstMaskZ = dstMask[2];
     if (dstMaskZ == 0) {
-      allocator = dstMask[3];
+      dstMaskW = dstMask[3];
       goto LAB_00067bc0;
     }
     if (dstMask[3] == 0) {
-      allocator = 0;
+      dstMaskW = 0;
       goto LAB_00067bc0;
     }
   }
@@ -7246,6 +7247,7 @@ int arbEmitIlAddMad3Src(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, sr
   uint *src2Words;
   uint *src2Flags;
 {
+  int dstMaskW;
   uint nextTokenIndex;
   uint src2Words2;
   uint src1Words1;
@@ -7360,28 +7362,28 @@ int arbEmitIlAddMad3Src(ctx, dstFile, dstIndex, dstMask, src0File, src0Index, sr
     uVar15 = 0x55;
   }
   if (*dstMask == 0) {
-    allocator = dstMask[3];
+    dstMaskW = dstMask[3];
     dstMaskY = dstMask[1];
     dstMaskZ = dstMask[2];
 LAB_00068a20:
     uVar10 = uVar10 | 0x400000;
-    uVar15 = (uint)(allocator != 0) * 0x40 |
+    uVar15 = (uint)(dstMaskW != 0) * 0x40 |
              (uint)(dstMaskZ != 0) * 0x10 | (uint)(dstMaskY != 0) * 4 | (uint)(*dstMask != 0);
   }
   else {
     dstMaskY = dstMask[1];
     if (dstMaskY == 0) {
-      allocator = dstMask[3];
+      dstMaskW = dstMask[3];
       dstMaskZ = dstMask[2];
       goto LAB_00068a20;
     }
     dstMaskZ = dstMask[2];
     if (dstMaskZ == 0) {
-      allocator = dstMask[3];
+      dstMaskW = dstMask[3];
       goto LAB_00068a20;
     }
     if (dstMask[3] == 0) {
-      allocator = 0;
+      dstMaskW = 0;
       goto LAB_00068a20;
     }
   }
@@ -7737,6 +7739,7 @@ int arbEmitIlMulMaxMin2Src(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   uint *src2Words;
   uint *src2Flags;
 {
+  int dstMaskW;
   uint nextTokenIndex;
   uint dstToken;
   uint src2Flags2A;
@@ -8109,29 +8112,29 @@ LAB_000695f0:
     uVar13 = 0x55;
   }
   if (*dstMask == 0) {
-    allocator = dstMask[3];
+    dstMaskW = dstMask[3];
     dstMaskY = dstMask[1];
     dstMaskZ = dstMask[2];
   }
   else {
     dstMaskY = dstMask[1];
     if (dstMaskY == 0) {
-      allocator = dstMask[3];
+      dstMaskW = dstMask[3];
       dstMaskZ = dstMask[2];
     }
     else {
       dstMaskZ = dstMask[2];
       if (dstMaskZ == 0) {
-        allocator = dstMask[3];
+        dstMaskW = dstMask[3];
       }
       else {
         if (dstMask[3] != 0) goto LAB_00069f70;
-        allocator = 0;
+        dstMaskW = 0;
       }
     }
   }
   dstToken = dstToken | 0x400000;
-  uVar13 = (uint)(allocator != 0) * 0x40 |
+  uVar13 = (uint)(dstMaskW != 0) * 0x40 |
            (uint)(dstMaskZ != 0) * 0x10 | (uint)(dstMaskY != 0) * 4 | (uint)(*dstMask != 0);
 LAB_00069f70:
   src2FlagsValue = *src2Flags;

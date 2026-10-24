@@ -116,13 +116,10 @@ local	FUN_0006ec10	puVar17	instrCountPtr	INFERRED	&*(ctx+0x754): the instruction
 local	FUN_0006ec10	iVar15	allocator	INFERRED	*(ctx+0x3d4): allocator record used to grow the instruction word buffer
 local	FUN_00069330	param_1	ctx	INFERRED	ctx fields +0x748 (callback), +0x754 (word count), +0x758 (capacity), +0x75c (word buffer), +0x3d4 (allocator with alloc at +0xc, free at +0x18) form a growable instruction word buffer; when count>=capacity the buffer is reallocated to capacity*4+0x200 bytes and memcpy'd
 local	FUN_00069330	puVar17	instrCountPtr	INFERRED	&*(ctx+0x754): the instruction word count that is advanced as words are appended
-local	FUN_00069330	iVar18	allocator	INFERRED	*(ctx+0x3d4): allocator record used to grow the instruction word buffer
 local	FUN_000684c0	param_1	ctx	INFERRED	ctx fields +0x748 (callback), +0x754 (word count), +0x758 (capacity), +0x75c (word buffer), +0x3d4 (allocator with alloc at +0xc, free at +0x18) form a growable instruction word buffer; when count>=capacity the buffer is reallocated to capacity*4+0x200 bytes and memcpy'd
 local	FUN_000684c0	puVar21	instrCountPtr	INFERRED	&*(ctx+0x754): the instruction word count that is advanced as words are appended
-local	FUN_000684c0	iVar20	allocator	INFERRED	*(ctx+0x3d4): allocator record used to grow the instruction word buffer
 local	FUN_00067ac0	param_1	ctx	INFERRED	ctx fields +0x748 (callback), +0x754 (word count), +0x758 (capacity), +0x75c (word buffer), +0x3d4 (allocator with alloc at +0xc, free at +0x18) form a growable instruction word buffer; when count>=capacity the buffer is reallocated to capacity*4+0x200 bytes and memcpy'd
 local	FUN_00067ac0	puVar20	instrCountPtr	INFERRED	&*(ctx+0x754): the instruction word count that is advanced as words are appended
-local	FUN_00067ac0	iVar19	allocator	INFERRED	*(ctx+0x3d4): allocator record used to grow the instruction word buffer
 local	FUN_0006ec10	uVar4	newBuffer	INFERRED	allocation of capacity*4+0x200 bytes that receives the old instruction words
 local	FUN_0006ec10	uVar10	instrWord	INFERRED	uStack_84 & 0xffff (halfword result of the ctx+0x748 callback) or-ed into every emitted word (0x440000 flag)
 local	FUN_0006ec10	param_7	src0Words	INFERRED	four-word operand record (word [0..3]); param_8 holds its companion flags
