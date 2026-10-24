@@ -2821,6 +2821,30 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
   float *outValue;
   undefined4 unused;
 {
+  float factorB;
+  float factorA;
+  float pivotRowElem7Value;
+  float pivotRowElem6Value;
+  float pivotRowElem5Value;
+  float pivotRowElem4Value;
+  float pivotRowElem3;
+  float pivotRowElem2;
+  float pivotRowElem1;
+  float *eliminateRowB;
+  float *eliminateRowA;
+  float halfVectorZ;
+  float lightDirY;
+  float lightDirX;
+  float materialSpecularB;
+  float materialSpecularG;
+  float materialSpecularR;
+  float materialDiffuseB;
+  float materialDiffuseG;
+  float materialDiffuseR;
+  float materialAmbientB;
+  float materialAmbientG;
+  float materialAmbientR;
+  float materialShininess;
   float fVar1;
   float fVar2;
   float fVar3;
@@ -2828,22 +2852,22 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
   float fVar5;
   float fVar6;
   float *pfVar7;
-  float *pfVar8;
+  float *pivotRowElem5;
   int lightOrFace;
-  float *pfVar10;
+  float *pivotRowElem4;
   float *pfVar11;
-  float *pfVar12;
+  float *pivotRow;
   int stateOwner;
   float *pfVar14;
   float *pfVar15;
   int stateBlock;
-  float *pfVar17;
+  float *eliminateRowC;
   int kind;
-  float *pfVar19;
-  float *pfVar20;
+  float *pivotRowElem6;
+  float *pivotRowElem7;
   double length;
   double depthNear;
-  float local_e8 [4];
+  float matrixCopy [4];
   float local_d8;
   float local_d4;
   float local_d0;
@@ -2939,12 +2963,12 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
     break;
   case 9:
     if (lightOrFace == 0) {
-      fVar1 = *(float *)(stateBlock + 0x2900);
+      materialShininess = *(float *)(stateBlock + 0x2900);
     }
     else {
-      fVar1 = *(float *)(((unsigned char *)0x00002b40) + stateBlock);
+      materialShininess = *(float *)(((unsigned char *)0x00002b40) + stateBlock);
     }
-    *outValue = fVar1;
+    *outValue = materialShininess;
     outValue[3] = 1.0;
     outValue[1] = 0.0;
     outValue[2] = 0.0;
@@ -2986,18 +3010,18 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
     outValue[3] = *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x250c);
     break;
   case 0x10:
-    fVar2 = *(float *)(lightOrFace * 0x80 + stateBlock + 0x24f0);
-    *outValue = fVar2;
-    fVar3 = *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24f4);
-    outValue[1] = fVar3;
-    fVar5 = *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24f8) + fVar1;
-    outValue[2] = fVar5;
-    length = _sqrt((double)(fVar5 * fVar5 + fVar2 * fVar2 + fVar3 * fVar3));
+    lightDirX = *(float *)(lightOrFace * 0x80 + stateBlock + 0x24f0);
+    *outValue = lightDirX;
+    lightDirY = *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24f4);
+    outValue[1] = lightDirY;
+    halfVectorZ = *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24f8) + fVar1;
+    outValue[2] = halfVectorZ;
+    length = _sqrt((double)(halfVectorZ * halfVectorZ + lightDirX * lightDirX + lightDirY * lightDirY));
     outValue[3] = fVar1;
     fVar1 = fVar1 / (float)length;
-    outValue[2] = fVar5 * fVar1;
-    *outValue = fVar1 * fVar2;
-    outValue[1] = fVar3 * fVar1;
+    outValue[2] = halfVectorZ * fVar1;
+    *outValue = fVar1 * lightDirX;
+    outValue[1] = lightDirY * fVar1;
     break;
   case 0x11:
     *outValue = *(float *)(stateBlock + 0x24b0);
@@ -3027,26 +3051,26 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
     break;
   case 0x13:
     if (*(int *)(element + 0x10) == 0) {
-      fVar1 = *(float *)(stateBlock + 0x28c0);
+      materialAmbientR = *(float *)(stateBlock + 0x28c0);
     }
     else {
-      fVar1 = *(float *)(stateBlock + 0x2b00);
+      materialAmbientR = *(float *)(stateBlock + 0x2b00);
     }
-    *outValue = fVar1 * *(float *)(lightOrFace * 0x80 + stateBlock + 0x24c0);
+    *outValue = materialAmbientR * *(float *)(lightOrFace * 0x80 + stateBlock + 0x24c0);
     if (*(int *)(element + 0x10) == 0) {
-      fVar1 = *(float *)(stateBlock + 0x28c4);
+      materialAmbientG = *(float *)(stateBlock + 0x28c4);
     }
     else {
-      fVar1 = *(float *)(stateBlock + 0x2b04);
+      materialAmbientG = *(float *)(stateBlock + 0x2b04);
     }
-    outValue[1] = fVar1 * *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24c4);
+    outValue[1] = materialAmbientG * *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24c4);
     if (*(int *)(element + 0x10) == 0) {
-      fVar1 = *(float *)(stateBlock + 0x28c8);
+      materialAmbientB = *(float *)(stateBlock + 0x28c8);
     }
     else {
-      fVar1 = *(float *)(stateBlock + 0x2b08);
+      materialAmbientB = *(float *)(stateBlock + 0x2b08);
     }
-    outValue[2] = fVar1 * *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24c8);
+    outValue[2] = materialAmbientB * *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24c8);
     if (*(int *)(element + 0x10) == 0) {
       fVar1 = *(float *)(stateBlock + 0x28cc);
     }
@@ -3056,26 +3080,26 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
     goto LAB_0008f398;
   case 0x14:
     if (*(int *)(element + 0x10) == 0) {
-      fVar1 = *(float *)(stateBlock + 0x28d0);
+      materialDiffuseR = *(float *)(stateBlock + 0x28d0);
     }
     else {
-      fVar1 = *(float *)(stateBlock + 0x2b10);
+      materialDiffuseR = *(float *)(stateBlock + 0x2b10);
     }
-    *outValue = fVar1 * *(float *)(lightOrFace * 0x80 + stateBlock + 0x24d0);
+    *outValue = materialDiffuseR * *(float *)(lightOrFace * 0x80 + stateBlock + 0x24d0);
     if (*(int *)(element + 0x10) == 0) {
-      fVar1 = *(float *)(stateBlock + 0x28d4);
+      materialDiffuseG = *(float *)(stateBlock + 0x28d4);
     }
     else {
-      fVar1 = *(float *)(stateBlock + 0x2b14);
+      materialDiffuseG = *(float *)(stateBlock + 0x2b14);
     }
-    outValue[1] = fVar1 * *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24d4);
+    outValue[1] = materialDiffuseG * *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24d4);
     if (*(int *)(element + 0x10) == 0) {
-      fVar1 = *(float *)(stateBlock + 0x28d8);
+      materialDiffuseB = *(float *)(stateBlock + 0x28d8);
     }
     else {
-      fVar1 = *(float *)(stateBlock + 0x2b18);
+      materialDiffuseB = *(float *)(stateBlock + 0x2b18);
     }
-    outValue[2] = fVar1 * *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24d8);
+    outValue[2] = materialDiffuseB * *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24d8);
     if (*(int *)(element + 0x10) == 0) {
       fVar1 = *(float *)(stateBlock + 0x28dc);
     }
@@ -3085,26 +3109,26 @@ int arbfpFetchParameterValue(context, element, outValue, unused)
     goto LAB_0008f398;
   case 0x15:
     if (*(int *)(element + 0x10) == 0) {
-      fVar1 = *(float *)(stateBlock + 0x28e0);
+      materialSpecularR = *(float *)(stateBlock + 0x28e0);
     }
     else {
-      fVar1 = *(float *)(stateBlock + 0x2b20);
+      materialSpecularR = *(float *)(stateBlock + 0x2b20);
     }
-    *outValue = fVar1 * *(float *)(lightOrFace * 0x80 + stateBlock + 0x24e0);
+    *outValue = materialSpecularR * *(float *)(lightOrFace * 0x80 + stateBlock + 0x24e0);
     if (*(int *)(element + 0x10) == 0) {
-      fVar1 = *(float *)(stateBlock + 0x28e4);
+      materialSpecularG = *(float *)(stateBlock + 0x28e4);
     }
     else {
-      fVar1 = *(float *)(stateBlock + 0x2b24);
+      materialSpecularG = *(float *)(stateBlock + 0x2b24);
     }
-    outValue[1] = fVar1 * *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24e4);
+    outValue[1] = materialSpecularG * *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24e4);
     if (*(int *)(element + 0x10) == 0) {
-      fVar1 = *(float *)(stateBlock + 0x28e8);
+      materialSpecularB = *(float *)(stateBlock + 0x28e8);
     }
     else {
-      fVar1 = *(float *)(stateBlock + 0x2b28);
+      materialSpecularB = *(float *)(stateBlock + 0x2b28);
     }
-    outValue[2] = fVar1 * *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24e8);
+    outValue[2] = materialSpecularB * *(float *)(*(int *)(element + 0xc) * 0x80 + stateBlock + 0x24e8);
     if (*(int *)(element + 0x10) == 0) {
       fVar1 = *(float *)(stateBlock + 0x28ec);
     }
@@ -3179,7 +3203,7 @@ LAB_0008f398:
 LAB_0008f444:
     lightOrFace = 0;
     stateOwner = 0x10;
-    pfVar7 = local_e8;
+    pfVar7 = matrixCopy;
     do {
       iVar4 = lightOrFace * 4;
       lightOrFace = lightOrFace + 1;
@@ -3193,12 +3217,12 @@ LAB_0008f444:
       local_a8[0xd] = 1.0;
       local_a8[1] = local_d8;
       local_a8[2] = local_c8;
-      local_68 = local_e8[2];
-      local_a8[0] = local_e8[0];
+      local_68 = matrixCopy[2];
+      local_a8[0] = matrixCopy[0];
       local_a8[7] = FLOAT_001aa0d4;
       local_a8[6] = FLOAT_001aa0d4;
       local_a8[5] = FLOAT_001aa0d4;
-      local_a8[8] = local_e8[1];
+      local_a8[8] = matrixCopy[1];
       local_6c = FLOAT_001aa0d4;
       local_a8[3] = local_b8;
       local_a8[9] = local_d4;
@@ -3218,188 +3242,188 @@ LAB_0008f444:
       local_38 = FLOAT_001aa0d4;
       local_44 = local_cc;
       local_40 = local_bc;
-      local_48 = local_e8[3];
+      local_48 = matrixCopy[3];
       local_3c = local_ac;
-      pfVar7 = &STACKARG(0xffffffb8);
-      pfVar17 = &STACKARG(0xffffff98);
-      if (ABS(local_e8[3]) <= ABS(local_e8[2])) {
-        pfVar7 = &STACKARG(0xffffff98);
-        pfVar17 = &STACKARG(0xffffffb8);
+      eliminateRowA = &STACKARG(0xffffffb8);
+      eliminateRowC = &STACKARG(0xffffff98);
+      if (ABS(matrixCopy[3]) <= ABS(matrixCopy[2])) {
+        eliminateRowA = &STACKARG(0xffffff98);
+        eliminateRowC = &STACKARG(0xffffffb8);
       }
-      pfVar11 = local_a8 + 8;
-      fVar1 = *pfVar7;
-      if (ABS(*pfVar7) <= ABS(local_e8[1])) {
-        pfVar11 = pfVar7;
-        pfVar7 = local_a8 + 8;
-        fVar1 = local_e8[1];
+      eliminateRowB = local_a8 + 8;
+      fVar1 = *eliminateRowA;
+      if (ABS(*eliminateRowA) <= ABS(matrixCopy[1])) {
+        eliminateRowB = eliminateRowA;
+        eliminateRowA = local_a8 + 8;
+        fVar1 = matrixCopy[1];
       }
-      pfVar12 = local_a8;
-      if (ABS(local_e8[0]) < ABS(fVar1)) {
-        pfVar12 = pfVar7;
-        pfVar7 = local_a8;
+      pivotRow = local_a8;
+      if (ABS(matrixCopy[0]) < ABS(fVar1)) {
+        pivotRow = eliminateRowA;
+        eliminateRowA = local_a8;
       }
-      fVar1 = *pfVar12;
+      fVar1 = *pivotRow;
       if (fVar1 != FLOAT_001aa0d4) {
-        fVar2 = pfVar12[1];
-        pfVar10 = pfVar12 + 4;
-        fVar3 = *pfVar7 / fVar1;
-        fVar5 = *pfVar11 / fVar1;
-        fVar1 = *pfVar17 / fVar1;
-        pfVar7[1] = -(fVar3 * fVar2 - pfVar7[1]);
-        pfVar11[1] = -(fVar5 * fVar2 - pfVar11[1]);
-        pfVar17[1] = -(fVar1 * fVar2 - pfVar17[1]);
-        fVar2 = pfVar12[2];
-        pfVar7[2] = -(fVar3 * fVar2 - pfVar7[2]);
-        pfVar11[2] = -(fVar5 * fVar2 - pfVar11[2]);
-        pfVar17[2] = -(fVar1 * fVar2 - pfVar17[2]);
-        fVar2 = pfVar12[3];
-        pfVar7[3] = -(fVar3 * fVar2 - pfVar7[3]);
-        pfVar11[3] = -(fVar5 * fVar2 - pfVar11[3]);
-        pfVar17[3] = -(fVar1 * fVar2 - pfVar17[3]);
-        fVar2 = pfVar12[4];
-        if (fVar2 != FLOAT_001aa0d4) {
-          pfVar7[4] = -(fVar3 * fVar2 - pfVar7[4]);
-          pfVar11[4] = -(fVar5 * fVar2 - pfVar11[4]);
-          pfVar17[4] = -(fVar1 * fVar2 - pfVar17[4]);
+        pivotRowElem1 = pivotRow[1];
+        pivotRowElem4 = pivotRow + 4;
+        factorA = *eliminateRowA / fVar1;
+        factorB = *eliminateRowB / fVar1;
+        fVar1 = *eliminateRowC / fVar1;
+        eliminateRowA[1] = -(factorA * pivotRowElem1 - eliminateRowA[1]);
+        eliminateRowB[1] = -(factorB * pivotRowElem1 - eliminateRowB[1]);
+        eliminateRowC[1] = -(fVar1 * pivotRowElem1 - eliminateRowC[1]);
+        pivotRowElem2 = pivotRow[2];
+        eliminateRowA[2] = -(factorA * pivotRowElem2 - eliminateRowA[2]);
+        eliminateRowB[2] = -(factorB * pivotRowElem2 - eliminateRowB[2]);
+        eliminateRowC[2] = -(fVar1 * pivotRowElem2 - eliminateRowC[2]);
+        pivotRowElem3 = pivotRow[3];
+        eliminateRowA[3] = -(factorA * pivotRowElem3 - eliminateRowA[3]);
+        eliminateRowB[3] = -(factorB * pivotRowElem3 - eliminateRowB[3]);
+        eliminateRowC[3] = -(fVar1 * pivotRowElem3 - eliminateRowC[3]);
+        pivotRowElem4Value = pivotRow[4];
+        if (pivotRowElem4Value != FLOAT_001aa0d4) {
+          eliminateRowA[4] = -(factorA * pivotRowElem4Value - eliminateRowA[4]);
+          eliminateRowB[4] = -(factorB * pivotRowElem4Value - eliminateRowB[4]);
+          eliminateRowC[4] = -(fVar1 * pivotRowElem4Value - eliminateRowC[4]);
         }
-        fVar2 = pfVar12[5];
-        pfVar8 = pfVar12 + 5;
-        if (fVar2 != FLOAT_001aa0d4) {
-          pfVar7[5] = -(fVar3 * fVar2 - pfVar7[5]);
-          pfVar11[5] = -(fVar5 * fVar2 - pfVar11[5]);
-          pfVar17[5] = -(fVar1 * fVar2 - pfVar17[5]);
+        pivotRowElem5Value = pivotRow[5];
+        pivotRowElem5 = pivotRow + 5;
+        if (pivotRowElem5Value != FLOAT_001aa0d4) {
+          eliminateRowA[5] = -(factorA * pivotRowElem5Value - eliminateRowA[5]);
+          eliminateRowB[5] = -(factorB * pivotRowElem5Value - eliminateRowB[5]);
+          eliminateRowC[5] = -(fVar1 * pivotRowElem5Value - eliminateRowC[5]);
         }
-        fVar2 = pfVar12[6];
-        pfVar19 = pfVar12 + 6;
-        if (fVar2 != FLOAT_001aa0d4) {
-          pfVar7[6] = -(fVar3 * fVar2 - pfVar7[6]);
-          pfVar11[6] = -(fVar5 * fVar2 - pfVar11[6]);
-          pfVar17[6] = -(fVar1 * fVar2 - pfVar17[6]);
+        pivotRowElem6Value = pivotRow[6];
+        pivotRowElem6 = pivotRow + 6;
+        if (pivotRowElem6Value != FLOAT_001aa0d4) {
+          eliminateRowA[6] = -(factorA * pivotRowElem6Value - eliminateRowA[6]);
+          eliminateRowB[6] = -(factorB * pivotRowElem6Value - eliminateRowB[6]);
+          eliminateRowC[6] = -(fVar1 * pivotRowElem6Value - eliminateRowC[6]);
         }
-        fVar2 = pfVar12[7];
-        pfVar20 = pfVar12 + 7;
-        if (fVar2 != FLOAT_001aa0d4) {
-          pfVar7[7] = -(fVar3 * fVar2 - pfVar7[7]);
-          pfVar11[7] = -(fVar5 * fVar2 - pfVar11[7]);
-          pfVar17[7] = -(fVar1 * fVar2 - pfVar17[7]);
+        pivotRowElem7Value = pivotRow[7];
+        pivotRowElem7 = pivotRow + 7;
+        if (pivotRowElem7Value != FLOAT_001aa0d4) {
+          eliminateRowA[7] = -(factorA * pivotRowElem7Value - eliminateRowA[7]);
+          eliminateRowB[7] = -(factorB * pivotRowElem7Value - eliminateRowB[7]);
+          eliminateRowC[7] = -(fVar1 * pivotRowElem7Value - eliminateRowC[7]);
         }
-        pfVar15 = pfVar11;
-        if (ABS(pfVar11[1]) < ABS(pfVar17[1])) {
-          pfVar15 = pfVar17;
-          pfVar17 = pfVar11;
+        pfVar15 = eliminateRowB;
+        if (ABS(eliminateRowB[1]) < ABS(eliminateRowC[1])) {
+          pfVar15 = eliminateRowC;
+          eliminateRowC = eliminateRowB;
         }
         fVar1 = pfVar15[1];
-        fVar2 = pfVar7[1];
-        pfVar11 = pfVar7 + 1;
+        fVar2 = eliminateRowA[1];
+        pfVar11 = eliminateRowA + 1;
         pfVar14 = pfVar15;
         if (ABS(fVar2) < ABS(fVar1)) {
           pfVar11 = pfVar15 + 1;
-          pfVar14 = pfVar7;
-          pfVar7 = pfVar15;
+          pfVar14 = eliminateRowA;
+          eliminateRowA = pfVar15;
           fVar2 = fVar1;
         }
         if (fVar2 != FLOAT_001aa0d4) {
           fVar3 = pfVar14[1] / fVar2;
-          fVar2 = pfVar17[1] / fVar2;
-          pfVar14[2] = -(fVar3 * pfVar7[2] - pfVar14[2]);
-          pfVar17[2] = -(fVar2 * pfVar7[2] - pfVar17[2]);
-          pfVar14[3] = -(fVar3 * pfVar7[3] - pfVar14[3]);
-          pfVar17[3] = -(fVar2 * pfVar7[3] - pfVar17[3]);
-          fVar1 = pfVar7[4];
+          fVar2 = eliminateRowC[1] / fVar2;
+          pfVar14[2] = -(fVar3 * eliminateRowA[2] - pfVar14[2]);
+          eliminateRowC[2] = -(fVar2 * eliminateRowA[2] - eliminateRowC[2]);
+          pfVar14[3] = -(fVar3 * eliminateRowA[3] - pfVar14[3]);
+          eliminateRowC[3] = -(fVar2 * eliminateRowA[3] - eliminateRowC[3]);
+          fVar1 = eliminateRowA[4];
           if (fVar1 != FLOAT_001aa0d4) {
             pfVar14[4] = -(fVar3 * fVar1 - pfVar14[4]);
-            pfVar17[4] = -(fVar2 * fVar1 - pfVar17[4]);
+            eliminateRowC[4] = -(fVar2 * fVar1 - eliminateRowC[4]);
           }
-          fVar1 = pfVar7[5];
+          fVar1 = eliminateRowA[5];
           if (fVar1 != FLOAT_001aa0d4) {
             pfVar14[5] = -(fVar3 * fVar1 - pfVar14[5]);
-            pfVar17[5] = -(fVar2 * fVar1 - pfVar17[5]);
+            eliminateRowC[5] = -(fVar2 * fVar1 - eliminateRowC[5]);
           }
-          fVar1 = pfVar7[6];
+          fVar1 = eliminateRowA[6];
           if (fVar1 != FLOAT_001aa0d4) {
             pfVar14[6] = -(fVar3 * fVar1 - pfVar14[6]);
-            pfVar17[6] = -(fVar2 * fVar1 - pfVar17[6]);
+            eliminateRowC[6] = -(fVar2 * fVar1 - eliminateRowC[6]);
           }
-          fVar1 = pfVar7[7];
+          fVar1 = eliminateRowA[7];
           if (fVar1 != FLOAT_001aa0d4) {
             pfVar14[7] = -(fVar3 * fVar1 - pfVar14[7]);
-            pfVar17[7] = -(fVar2 * fVar1 - pfVar17[7]);
+            eliminateRowC[7] = -(fVar2 * fVar1 - eliminateRowC[7]);
           }
           pfVar15 = pfVar14;
-          if (ABS(pfVar14[2]) < ABS(pfVar17[2])) {
-            pfVar15 = pfVar17;
-            pfVar17 = pfVar14;
+          if (ABS(pfVar14[2]) < ABS(eliminateRowC[2])) {
+            pfVar15 = eliminateRowC;
+            eliminateRowC = pfVar14;
           }
           fVar1 = pfVar15[2];
           if (fVar1 != FLOAT_001aa0d4) {
-            fVar1 = pfVar17[2] / fVar1;
-            fVar2 = -(fVar1 * pfVar15[3] - pfVar17[3]);
-            pfVar17[3] = fVar2;
-            fVar3 = -(fVar1 * pfVar15[4] - pfVar17[4]);
-            pfVar17[4] = fVar3;
-            fVar6 = -(fVar1 * pfVar15[5] - pfVar17[5]);
-            pfVar17[5] = fVar6;
-            fVar5 = -(fVar1 * pfVar15[6] - pfVar17[6]);
-            pfVar17[6] = fVar5;
-            fVar1 = -(fVar1 * pfVar15[7] - pfVar17[7]);
-            pfVar17[7] = fVar1;
+            fVar1 = eliminateRowC[2] / fVar1;
+            fVar2 = -(fVar1 * pfVar15[3] - eliminateRowC[3]);
+            eliminateRowC[3] = fVar2;
+            fVar3 = -(fVar1 * pfVar15[4] - eliminateRowC[4]);
+            eliminateRowC[4] = fVar3;
+            fVar6 = -(fVar1 * pfVar15[5] - eliminateRowC[5]);
+            eliminateRowC[5] = fVar6;
+            fVar5 = -(fVar1 * pfVar15[6] - eliminateRowC[6]);
+            eliminateRowC[6] = fVar5;
+            fVar1 = -(fVar1 * pfVar15[7] - eliminateRowC[7]);
+            eliminateRowC[7] = fVar1;
             if (fVar2 != FLOAT_001aa0d4) {
               fVar2 = FLOAT_001aa0e8 / fVar2;
               fVar3 = fVar2 * fVar3;
-              pfVar17[4] = fVar3;
-              pfVar17[7] = fVar2 * fVar1;
-              pfVar17[5] = fVar2 * fVar6;
-              pfVar17[6] = fVar2 * fVar5;
+              eliminateRowC[4] = fVar3;
+              eliminateRowC[7] = fVar2 * fVar1;
+              eliminateRowC[5] = fVar2 * fVar6;
+              eliminateRowC[6] = fVar2 * fVar5;
               fVar1 = pfVar15[3];
               fVar2 = FLOAT_001aa0e8 / pfVar15[2];
               pfVar15[4] = fVar2 * -(fVar1 * fVar3 - pfVar15[4]);
-              pfVar15[5] = fVar2 * -(fVar1 * pfVar17[5] - pfVar15[5]);
-              pfVar15[6] = fVar2 * -(fVar1 * pfVar17[6] - pfVar15[6]);
-              pfVar15[7] = fVar2 * -(fVar1 * pfVar17[7] - pfVar15[7]);
-              fVar1 = pfVar7[3];
-              pfVar7[4] = -(fVar1 * pfVar17[4] - pfVar7[4]);
-              pfVar7[5] = -(fVar1 * pfVar17[5] - pfVar7[5]);
-              pfVar7[6] = -(fVar1 * pfVar17[6] - pfVar7[6]);
-              pfVar7[7] = -(fVar1 * pfVar17[7] - pfVar7[7]);
-              fVar1 = pfVar12[3];
-              *pfVar10 = -(fVar1 * pfVar17[4] - *pfVar10);
-              *pfVar8 = -(fVar1 * pfVar17[5] - *pfVar8);
-              *pfVar19 = -(fVar1 * pfVar17[6] - *pfVar19);
-              *pfVar20 = -(fVar1 * pfVar17[7] - *pfVar20);
-              fVar1 = pfVar7[2];
+              pfVar15[5] = fVar2 * -(fVar1 * eliminateRowC[5] - pfVar15[5]);
+              pfVar15[6] = fVar2 * -(fVar1 * eliminateRowC[6] - pfVar15[6]);
+              pfVar15[7] = fVar2 * -(fVar1 * eliminateRowC[7] - pfVar15[7]);
+              fVar1 = eliminateRowA[3];
+              eliminateRowA[4] = -(fVar1 * eliminateRowC[4] - eliminateRowA[4]);
+              eliminateRowA[5] = -(fVar1 * eliminateRowC[5] - eliminateRowA[5]);
+              eliminateRowA[6] = -(fVar1 * eliminateRowC[6] - eliminateRowA[6]);
+              eliminateRowA[7] = -(fVar1 * eliminateRowC[7] - eliminateRowA[7]);
+              fVar1 = pivotRow[3];
+              *pivotRowElem4 = -(fVar1 * eliminateRowC[4] - *pivotRowElem4);
+              *pivotRowElem5 = -(fVar1 * eliminateRowC[5] - *pivotRowElem5);
+              *pivotRowElem6 = -(fVar1 * eliminateRowC[6] - *pivotRowElem6);
+              *pivotRowElem7 = -(fVar1 * eliminateRowC[7] - *pivotRowElem7);
+              fVar1 = eliminateRowA[2];
               fVar2 = FLOAT_001aa0e8 / *pfVar11;
-              pfVar7[4] = fVar2 * -(fVar1 * pfVar15[4] - pfVar7[4]);
-              pfVar7[5] = fVar2 * -(fVar1 * pfVar15[5] - pfVar7[5]);
-              pfVar7[6] = fVar2 * -(fVar1 * pfVar15[6] - pfVar7[6]);
-              pfVar7[7] = fVar2 * -(fVar1 * pfVar15[7] - pfVar7[7]);
-              fVar1 = pfVar12[2];
-              *pfVar10 = -(fVar1 * pfVar15[4] - *pfVar10);
-              *pfVar8 = -(fVar1 * pfVar15[5] - *pfVar8);
-              *pfVar19 = -(fVar1 * pfVar15[6] - *pfVar19);
-              *pfVar20 = -(fVar1 * pfVar15[7] - *pfVar20);
-              fVar1 = pfVar12[1];
-              fVar2 = FLOAT_001aa0e8 / *pfVar12;
-              *pfVar10 = fVar2 * -(fVar1 * pfVar7[4] - *pfVar10);
-              *pfVar8 = fVar2 * -(fVar1 * pfVar7[5] - *pfVar8);
-              *pfVar19 = fVar2 * -(fVar1 * pfVar7[6] - *pfVar19);
-              local_b8 = fVar2 * -(fVar1 * pfVar7[7] - *pfVar20);
-              *pfVar20 = local_b8;
-              local_e8[0] = *pfVar10;
-              local_d8 = *pfVar8;
-              local_c8 = *pfVar19;
-              local_e8[1] = pfVar7[4];
-              local_d4 = pfVar7[5];
-              local_c4 = pfVar7[6];
-              local_b4 = pfVar7[7];
-              local_e8[2] = pfVar15[4];
+              eliminateRowA[4] = fVar2 * -(fVar1 * pfVar15[4] - eliminateRowA[4]);
+              eliminateRowA[5] = fVar2 * -(fVar1 * pfVar15[5] - eliminateRowA[5]);
+              eliminateRowA[6] = fVar2 * -(fVar1 * pfVar15[6] - eliminateRowA[6]);
+              eliminateRowA[7] = fVar2 * -(fVar1 * pfVar15[7] - eliminateRowA[7]);
+              fVar1 = pivotRow[2];
+              *pivotRowElem4 = -(fVar1 * pfVar15[4] - *pivotRowElem4);
+              *pivotRowElem5 = -(fVar1 * pfVar15[5] - *pivotRowElem5);
+              *pivotRowElem6 = -(fVar1 * pfVar15[6] - *pivotRowElem6);
+              *pivotRowElem7 = -(fVar1 * pfVar15[7] - *pivotRowElem7);
+              fVar1 = pivotRow[1];
+              fVar2 = FLOAT_001aa0e8 / *pivotRow;
+              *pivotRowElem4 = fVar2 * -(fVar1 * eliminateRowA[4] - *pivotRowElem4);
+              *pivotRowElem5 = fVar2 * -(fVar1 * eliminateRowA[5] - *pivotRowElem5);
+              *pivotRowElem6 = fVar2 * -(fVar1 * eliminateRowA[6] - *pivotRowElem6);
+              local_b8 = fVar2 * -(fVar1 * eliminateRowA[7] - *pivotRowElem7);
+              *pivotRowElem7 = local_b8;
+              matrixCopy[0] = *pivotRowElem4;
+              local_d8 = *pivotRowElem5;
+              local_c8 = *pivotRowElem6;
+              matrixCopy[1] = eliminateRowA[4];
+              local_d4 = eliminateRowA[5];
+              local_c4 = eliminateRowA[6];
+              local_b4 = eliminateRowA[7];
+              matrixCopy[2] = pfVar15[4];
               local_d0 = pfVar15[5];
               local_c0 = pfVar15[6];
               lightOrFace = *(int *)(element + 0x10);
               local_b0 = pfVar15[7];
-              local_e8[3] = pfVar17[4];
-              local_cc = pfVar17[5];
-              local_bc = pfVar17[6];
-              local_ac = pfVar17[7];
+              matrixCopy[3] = eliminateRowC[4];
+              local_cc = eliminateRowC[5];
+              local_bc = eliminateRowC[6];
+              local_ac = eliminateRowC[7];
               goto LAB_0008eb2c;
             }
           }
@@ -3412,7 +3436,7 @@ LAB_0008eb2c:
       if (lightOrFace < 2) {
         lightOrFace = 0;
         stateBlock = 4;
-        pfVar7 = local_e8 + kind;
+        pfVar7 = matrixCopy + kind;
         do {
           fVar1 = *pfVar7;
           pfVar7 = pfVar7 + 4;
@@ -3423,7 +3447,7 @@ LAB_0008eb2c:
       }
       else if (lightOrFace < 4) {
         lightOrFace = 0;
-        pfVar7 = local_e8 + kind * 4;
+        pfVar7 = matrixCopy + kind * 4;
         stateBlock = 4;
         do {
           fVar1 = *pfVar7;
@@ -4339,222 +4363,230 @@ int FUN_00090990(param_1, param_2)
   return;
 }
 
-/* FUN_00090ca0 @ 0x90ca0 (1240 bytes) */
-int FUN_00090ca0(param_1, param_2, param_3)
-  int param_1;
-  int param_2;
-  int *param_3;
+/* ffvpAllocTempRegister @ 0x90ca0 (1240 bytes) */
+int ffvpAllocTempRegister(allocState, componentCount, resultOperand)
+  int allocState;
+  int componentCount;
+  int *resultOperand;
 {
+  int resultWord6Staged;
+  int resultWord7StagedB;
+  int resultWord3Staged;
+  int resultWord7Staged;
+  int resultWord8StagedB;
+  int resultWord4Staged;
+  int resultWord8Staged;
+  int resultWord9Staged;
   char *pcVar1;
   char cVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
+  int resultWord5Staged;
+  int regFlags;
+  int flagCursor;
+  int regCountdown;
   uint loopIndex;
   
-  *param_3 = param_2;
-  if (param_2 == 1) {
-    iVar6 = *(int *)(param_1 + 1000);
-    if (iVar6 != 0) {
+  *resultOperand = componentCount;
+  if (componentCount == 1) {
+    regCountdown = *(int *)(allocState + 1000);
+    if (regCountdown != 0) {
       loopIndex = 0;
-      iVar5 = param_1;
+      flagCursor = allocState;
       do {
-        if (((*(char *)(iVar5 + 0x6c4) == '\0') && (*(char *)(iVar5 + 0x6c5) == '\0')) &&
-           (*(char *)(iVar5 + 0x6c6) == '\0')) {
-          param_3[1] = loopIndex;
-          iVar3 = DAT_001dbd90;
-          iVar5 = DAT_001dbd8c;
-          iVar6 = DAT_001dbd88;
-          iVar4 = loopIndex * 4 + param_1;
-          param_3[2] = DAT_001dbd84;
-          param_3[5] = iVar3;
-          param_3[3] = iVar6;
-          param_3[4] = iVar5;
-          iVar3 = DAT_001dbd80;
-          iVar5 = DAT_001dbd7c;
-          iVar6 = DAT_001dbd78;
-          param_3[6] = DAT_001dbd74;
-          param_3[9] = iVar3;
-          param_3[7] = iVar6;
-          param_3[8] = iVar5;
-          *(undefined1 *)(iVar4 + 0x6c6) = 1;
-          *(undefined1 *)(iVar4 + 0x6c4) = 1;
-          *(undefined1 *)(iVar4 + 0x6c5) = 1;
-          if (loopIndex < *(uint *)(param_1 + 0x3d0)) {
+        if (((*(char *)(flagCursor + 0x6c4) == '\0') && (*(char *)(flagCursor + 0x6c5) == '\0')) &&
+           (*(char *)(flagCursor + 0x6c6) == '\0')) {
+          resultOperand[1] = loopIndex;
+          resultWord5Staged = DAT_001dbd90;
+          resultWord4Staged = DAT_001dbd8c;
+          resultWord3Staged = DAT_001dbd88;
+          regFlags = loopIndex * 4 + allocState;
+          resultOperand[2] = DAT_001dbd84;
+          resultOperand[5] = resultWord5Staged;
+          resultOperand[3] = resultWord3Staged;
+          resultOperand[4] = resultWord4Staged;
+          resultWord9Staged = DAT_001dbd80;
+          resultWord8StagedB = DAT_001dbd7c;
+          resultWord7StagedB = DAT_001dbd78;
+          resultOperand[6] = DAT_001dbd74;
+          resultOperand[9] = resultWord9Staged;
+          resultOperand[7] = resultWord7StagedB;
+          resultOperand[8] = resultWord8StagedB;
+          *(undefined1 *)(regFlags + 0x6c6) = 1;
+          *(undefined1 *)(regFlags + 0x6c4) = 1;
+          *(undefined1 *)(regFlags + 0x6c5) = 1;
+          if (loopIndex < *(uint *)(allocState + 0x3d0)) {
             return 0;
           }
           goto LAB_00090e50;
         }
         loopIndex = loopIndex + 1;
-        iVar5 = iVar5 + 4;
-        iVar6 = iVar6 + -1;
-      } while (iVar6 != 0);
+        flagCursor = flagCursor + 4;
+        regCountdown = regCountdown + -1;
+      } while (regCountdown != 0);
     }
   }
-  else if (param_2 == 0) {
-    iVar6 = *(int *)(param_1 + 1000);
-    if (iVar6 != 0) {
+  else if (componentCount == 0) {
+    regCountdown = *(int *)(allocState + 1000);
+    if (regCountdown != 0) {
       loopIndex = 0;
-      iVar5 = param_1;
+      flagCursor = allocState;
       do {
-        if (((*(char *)(iVar5 + 0x6c4) == '\0') && (*(char *)(iVar5 + 0x6c5) == '\0')) &&
-           ((*(char *)(iVar5 + 0x6c6) == '\0' && (*(char *)(iVar5 + 0x6c7) == '\0')))) {
-          param_3[1] = loopIndex;
-          iVar3 = DAT_001dbd30;
-          iVar5 = DAT_001dbd2c;
-          iVar6 = DAT_001dbd28;
-          iVar4 = loopIndex * 4 + param_1;
-          param_3[2] = DAT_001dbd24;
-          param_3[5] = iVar3;
-          param_3[3] = iVar6;
-          param_3[4] = iVar5;
-          iVar3 = DAT_001dbd20;
-          iVar5 = DAT_001dbd1c;
-          iVar6 = DAT_001dbd18;
-          param_3[6] = DAT_001dbd14;
-          param_3[9] = iVar3;
-          param_3[7] = iVar6;
-          param_3[8] = iVar5;
-          *(undefined1 *)(iVar4 + 0x6c7) = 1;
-          *(undefined1 *)(iVar4 + 0x6c4) = 1;
-          *(undefined1 *)(iVar4 + 0x6c5) = 1;
-          *(undefined1 *)(iVar4 + 0x6c6) = 1;
-          if (loopIndex < *(uint *)(param_1 + 0x3d0)) {
+        if (((*(char *)(flagCursor + 0x6c4) == '\0') && (*(char *)(flagCursor + 0x6c5) == '\0')) &&
+           ((*(char *)(flagCursor + 0x6c6) == '\0' && (*(char *)(flagCursor + 0x6c7) == '\0')))) {
+          resultOperand[1] = loopIndex;
+          resultWord5Staged = DAT_001dbd30;
+          resultWord4Staged = DAT_001dbd2c;
+          resultWord3Staged = DAT_001dbd28;
+          regFlags = loopIndex * 4 + allocState;
+          resultOperand[2] = DAT_001dbd24;
+          resultOperand[5] = resultWord5Staged;
+          resultOperand[3] = resultWord3Staged;
+          resultOperand[4] = resultWord4Staged;
+          resultWord9Staged = DAT_001dbd20;
+          resultWord8StagedB = DAT_001dbd1c;
+          resultWord7StagedB = DAT_001dbd18;
+          resultOperand[6] = DAT_001dbd14;
+          resultOperand[9] = resultWord9Staged;
+          resultOperand[7] = resultWord7StagedB;
+          resultOperand[8] = resultWord8StagedB;
+          *(undefined1 *)(regFlags + 0x6c7) = 1;
+          *(undefined1 *)(regFlags + 0x6c4) = 1;
+          *(undefined1 *)(regFlags + 0x6c5) = 1;
+          *(undefined1 *)(regFlags + 0x6c6) = 1;
+          if (loopIndex < *(uint *)(allocState + 0x3d0)) {
             return 0;
           }
 LAB_00090e50:
-          *(uint *)(param_1 + 0x3d0) = loopIndex + 1;
+          *(uint *)(allocState + 0x3d0) = loopIndex + 1;
           return 0;
         }
         loopIndex = loopIndex + 1;
-        iVar5 = iVar5 + 4;
-        iVar6 = iVar6 + -1;
-      } while (iVar6 != 0);
+        flagCursor = flagCursor + 4;
+        regCountdown = regCountdown + -1;
+      } while (regCountdown != 0);
     }
   }
   else {
-    if (param_2 != 2) {
+    if (componentCount != 2) {
       return 4;
     }
-    iVar6 = *(int *)(param_1 + 1000);
-    if (iVar6 != 0) {
+    regCountdown = *(int *)(allocState + 1000);
+    if (regCountdown != 0) {
       loopIndex = 0;
-      if (*(char *)(param_1 + 0x6c4) == '\0') {
+      if (*(char *)(allocState + 0x6c4) == '\0') {
 LAB_00090e7c:
-        param_3[1] = loopIndex;
-        iVar3 = DAT_001dbd10;
-        iVar5 = DAT_001dbd0c;
-        iVar6 = DAT_001dbd08;
-        param_3[2] = DAT_001dbd04;
-        param_3[5] = iVar3;
-        param_3[3] = iVar6;
-        param_3[4] = iVar5;
-        iVar3 = DAT_001fa600;
-        iVar5 = DAT_001fa5fc;
-        iVar6 = DAT_001fa5f8;
-        param_3[9] = DAT_001fa604;
-        param_3[7] = iVar5;
-        param_3[6] = iVar6;
-        param_3[8] = iVar3;
-        *(undefined1 *)(loopIndex * 4 + param_1 + 0x6c4) = 1;
-        if (*(uint *)(param_1 + 0x3d0) <= loopIndex) goto LAB_00091070;
+        resultOperand[1] = loopIndex;
+        resultWord5Staged = DAT_001dbd10;
+        resultWord4Staged = DAT_001dbd0c;
+        resultWord3Staged = DAT_001dbd08;
+        resultOperand[2] = DAT_001dbd04;
+        resultOperand[5] = resultWord5Staged;
+        resultOperand[3] = resultWord3Staged;
+        resultOperand[4] = resultWord4Staged;
+        resultWord8Staged = DAT_001fa600;
+        resultWord7Staged = DAT_001fa5fc;
+        resultWord6Staged = DAT_001fa5f8;
+        resultOperand[9] = DAT_001fa604;
+        resultOperand[7] = resultWord7Staged;
+        resultOperand[6] = resultWord6Staged;
+        resultOperand[8] = resultWord8Staged;
+        *(undefined1 *)(loopIndex * 4 + allocState + 0x6c4) = 1;
+        if (*(uint *)(allocState + 0x3d0) <= loopIndex) goto LAB_00091070;
       }
-      else if (*(char *)(param_1 + 0x6c5) == '\0') {
+      else if (*(char *)(allocState + 0x6c5) == '\0') {
 LAB_00090efc:
-        param_3[1] = loopIndex;
-        iVar3 = DAT_001dbd70;
-        iVar5 = DAT_001dbd6c;
-        iVar6 = DAT_001dbd68;
-        param_3[2] = DAT_001dbd64;
-        param_3[5] = iVar3;
-        param_3[3] = iVar6;
-        param_3[4] = iVar5;
-        iVar3 = DAT_001dbcec;
-        iVar5 = DAT_001dbce8;
-        iVar6 = DAT_001dbce4;
-        param_3[9] = DAT_001dbcf0;
-        param_3[7] = iVar5;
-        param_3[6] = iVar6;
-        param_3[8] = iVar3;
-        *(undefined1 *)(loopIndex * 4 + param_1 + 0x6c5) = 1;
-        if (*(uint *)(param_1 + 0x3d0) <= loopIndex) goto LAB_00091070;
+        resultOperand[1] = loopIndex;
+        resultWord5Staged = DAT_001dbd70;
+        resultWord4Staged = DAT_001dbd6c;
+        resultWord3Staged = DAT_001dbd68;
+        resultOperand[2] = DAT_001dbd64;
+        resultOperand[5] = resultWord5Staged;
+        resultOperand[3] = resultWord3Staged;
+        resultOperand[4] = resultWord4Staged;
+        resultWord8Staged = DAT_001dbcec;
+        resultWord7Staged = DAT_001dbce8;
+        resultWord6Staged = DAT_001dbce4;
+        resultOperand[9] = DAT_001dbcf0;
+        resultOperand[7] = resultWord7Staged;
+        resultOperand[6] = resultWord6Staged;
+        resultOperand[8] = resultWord8Staged;
+        *(undefined1 *)(loopIndex * 4 + allocState + 0x6c5) = 1;
+        if (*(uint *)(allocState + 0x3d0) <= loopIndex) goto LAB_00091070;
       }
-      else if (*(char *)(param_1 + 0x6c6) == '\0') {
+      else if (*(char *)(allocState + 0x6c6) == '\0') {
 LAB_00090f7c:
-        param_3[1] = loopIndex;
-        iVar3 = DAT_001dbd60;
-        iVar5 = DAT_001dbd5c;
-        iVar6 = DAT_001dbd58;
-        param_3[2] = DAT_001dbd54;
-        param_3[5] = iVar3;
-        param_3[3] = iVar6;
-        param_3[4] = iVar5;
-        iVar3 = DAT_001dbcfc;
-        iVar5 = DAT_001dbcf8;
-        iVar6 = DAT_001dbcf4;
-        param_3[9] = DAT_001dbd00;
-        param_3[7] = iVar5;
-        param_3[6] = iVar6;
-        param_3[8] = iVar3;
-        *(undefined1 *)(loopIndex * 4 + param_1 + 0x6c6) = 1;
-        if (*(uint *)(param_1 + 0x3d0) <= loopIndex) {
+        resultOperand[1] = loopIndex;
+        resultWord5Staged = DAT_001dbd60;
+        resultWord4Staged = DAT_001dbd5c;
+        resultWord3Staged = DAT_001dbd58;
+        resultOperand[2] = DAT_001dbd54;
+        resultOperand[5] = resultWord5Staged;
+        resultOperand[3] = resultWord3Staged;
+        resultOperand[4] = resultWord4Staged;
+        resultWord8Staged = DAT_001dbcfc;
+        resultWord7Staged = DAT_001dbcf8;
+        resultWord6Staged = DAT_001dbcf4;
+        resultOperand[9] = DAT_001dbd00;
+        resultOperand[7] = resultWord7Staged;
+        resultOperand[6] = resultWord6Staged;
+        resultOperand[8] = resultWord8Staged;
+        *(undefined1 *)(loopIndex * 4 + allocState + 0x6c6) = 1;
+        if (*(uint *)(allocState + 0x3d0) <= loopIndex) {
 LAB_00091070:
-          *(uint *)(param_1 + 0x3d0) = loopIndex + 1;
+          *(uint *)(allocState + 0x3d0) = loopIndex + 1;
           return 0;
         }
       }
       else {
-        cVar2 = *(char *)(param_1 + 0x6c7);
-        iVar5 = param_1;
+        cVar2 = *(char *)(allocState + 0x6c7);
+        flagCursor = allocState;
         while (cVar2 != '\0') {
           loopIndex = loopIndex + 1;
-          iVar6 = iVar6 + -1;
-          if (iVar6 == 0) goto LAB_00091090;
-          if (*(char *)(iVar5 + 0x6c8) == '\0') goto LAB_00090e7c;
-          if (*(char *)(iVar5 + 0x6c9) == '\0') goto LAB_00090efc;
-          if (*(char *)(iVar5 + 0x6ca) == '\0') goto LAB_00090f7c;
-          pcVar1 = (char *)(iVar5 + 0x6cb);
-          iVar5 = iVar5 + 4;
+          regCountdown = regCountdown + -1;
+          if (regCountdown == 0) goto LAB_00091090;
+          if (*(char *)(flagCursor + 0x6c8) == '\0') goto LAB_00090e7c;
+          if (*(char *)(flagCursor + 0x6c9) == '\0') goto LAB_00090efc;
+          if (*(char *)(flagCursor + 0x6ca) == '\0') goto LAB_00090f7c;
+          pcVar1 = (char *)(flagCursor + 0x6cb);
+          flagCursor = flagCursor + 4;
           cVar2 = *pcVar1;
         }
-        param_3[1] = loopIndex;
-        iVar3 = DAT_001dbd50;
-        iVar5 = DAT_001dbd4c;
-        iVar6 = DAT_001dbd48;
-        param_3[2] = DAT_001dbd44;
-        param_3[5] = iVar3;
-        param_3[3] = iVar6;
-        param_3[4] = iVar5;
-        iVar3 = DAT_001dbcdc;
-        iVar5 = DAT_001dbcd8;
-        iVar6 = DAT_001dbcd4;
-        param_3[9] = DAT_001dbce0;
-        param_3[7] = iVar5;
-        param_3[6] = iVar6;
-        param_3[8] = iVar3;
-        *(undefined1 *)(loopIndex * 4 + param_1 + 0x6c7) = 1;
-        if (*(uint *)(param_1 + 0x3d0) <= loopIndex) goto LAB_00091070;
+        resultOperand[1] = loopIndex;
+        resultWord5Staged = DAT_001dbd50;
+        resultWord4Staged = DAT_001dbd4c;
+        resultWord3Staged = DAT_001dbd48;
+        resultOperand[2] = DAT_001dbd44;
+        resultOperand[5] = resultWord5Staged;
+        resultOperand[3] = resultWord3Staged;
+        resultOperand[4] = resultWord4Staged;
+        resultWord8Staged = DAT_001dbcdc;
+        resultWord7Staged = DAT_001dbcd8;
+        resultWord6Staged = DAT_001dbcd4;
+        resultOperand[9] = DAT_001dbce0;
+        resultOperand[7] = resultWord7Staged;
+        resultOperand[6] = resultWord6Staged;
+        resultOperand[8] = resultWord8Staged;
+        *(undefined1 *)(loopIndex * 4 + allocState + 0x6c7) = 1;
+        if (*(uint *)(allocState + 0x3d0) <= loopIndex) goto LAB_00091070;
       }
       return 0;
     }
   }
 LAB_00091090:
-  param_3[1] = -1;
-  iVar3 = DAT_001fa614;
-  iVar5 = DAT_001fa610;
-  iVar6 = DAT_001fa60c;
-  param_3[2] = DAT_001fa608;
-  param_3[5] = iVar3;
-  param_3[3] = iVar6;
-  param_3[4] = iVar5;
-  iVar3 = DAT_001dbd40;
-  iVar5 = DAT_001dbd3c;
-  iVar6 = DAT_001dbd38;
-  param_3[6] = DAT_001dbd34;
-  param_3[9] = iVar3;
-  param_3[7] = iVar6;
-  param_3[8] = iVar5;
+  resultOperand[1] = -1;
+  resultWord5Staged = DAT_001fa614;
+  resultWord4Staged = DAT_001fa610;
+  resultWord3Staged = DAT_001fa60c;
+  resultOperand[2] = DAT_001fa608;
+  resultOperand[5] = resultWord5Staged;
+  resultOperand[3] = resultWord3Staged;
+  resultOperand[4] = resultWord4Staged;
+  resultWord9Staged = DAT_001dbd40;
+  resultWord8StagedB = DAT_001dbd3c;
+  resultWord7StagedB = DAT_001dbd38;
+  resultOperand[6] = DAT_001dbd34;
+  resultOperand[9] = resultWord9Staged;
+  resultOperand[7] = resultWord7StagedB;
+  resultOperand[8] = resultWord8StagedB;
   return 7;
 }
 
@@ -4707,7 +4739,7 @@ int FUN_000914e0(param_1)
   uVar1 = 0;
   iVar3 = *(int *)(param_1 + 0x3d4);
   if (*(int *)(param_1 + 0x3f8) == -1) {
-    iVar2 = ((int (*)())FUN_00090ca0)(param_1,0,param_1 + 0x3f4);
+    iVar2 = ((int (*)())ffvpAllocTempRegister)(param_1,0,param_1 + 0x3f4);
     uVar1 = 7;
     if (iVar2 == 0) {
       uVar4 = **(undefined4 **)(param_1 + 0x3f0);
@@ -4751,7 +4783,7 @@ int FUN_000916d0(param_1)
   uVar1 = 0;
   iVar3 = *(int *)(param_1 + 0x3d4);
   if (*(int *)(param_1 + 0x3f8) == -1) {
-    iVar2 = ((int (*)())FUN_00090ca0)(param_1,0,param_1 + 0x3f4);
+    iVar2 = ((int (*)())ffvpAllocTempRegister)(param_1,0,param_1 + 0x3f4);
     uVar1 = 7;
     if (iVar2 == 0) {
       uVar1 = *(undefined4 *)(*(int *)(param_1 + 0x3ec) + 8);
@@ -4799,7 +4831,7 @@ int FUN_00091880(param_1)
         return 2;
       }
     }
-    iVar2 = ((int (*)())FUN_00090ca0)(param_1,2,param_1 + 0x50c);
+    iVar2 = ((int (*)())ffvpAllocTempRegister)(param_1,2,param_1 + 0x50c);
     uVar1 = 7;
     if (iVar2 == 0) {
       (**(code **)(((unsigned char *)0x000012e4) + iVar3))
@@ -4824,7 +4856,7 @@ int FUN_00091980(param_1, param_2, param_3)
   uVar1 = 0;
   iVar3 = *(int *)(param_1 + 0x3d4);
   if (*(int *)(param_1 + 0x6a0) == -1) {
-    iVar2 = ((int (*)())FUN_00090ca0)(param_1,2,param_1 + 0x69c);
+    iVar2 = ((int (*)())ffvpAllocTempRegister)(param_1,2,param_1 + 0x69c);
     uVar1 = 7;
     if (iVar2 == 0) {
       (**(code **)(((unsigned char *)0x00001314) + iVar3))
@@ -4851,7 +4883,7 @@ int FUN_00091a30(param_1)
   uVar1 = 0;
   iVar3 = *(int *)(param_1 + 0x3d4);
   if (*(int *)(param_1 + 0x448) == -1) {
-    iVar2 = ((int (*)())FUN_00090ca0)(param_1,1,param_1 + 0x444);
+    iVar2 = ((int (*)())ffvpAllocTempRegister)(param_1,1,param_1 + 0x444);
     uVar1 = 7;
     if (iVar2 == 0) {
       uVar1 = *(undefined4 *)(*(int *)(param_1 + 0x3ec) + 8);
@@ -4896,7 +4928,7 @@ int FUN_00091b90(param_1)
   if (*(char *)(iVar3 + 0x12a) == '\0') {
     iVar4 = *(int *)(param_1 + 4);
     uVar2 = *(undefined4 *)(*(int *)(param_1 + 0x3ec) + 4);
-    iVar1 = ((int (*)())FUN_00090ca0)(param_1,1,param_1 + 0x494);
+    iVar1 = ((int (*)())ffvpAllocTempRegister)(param_1,1,param_1 + 0x494);
     if (iVar1 != 0) {
       return 7;
     }
@@ -4913,7 +4945,7 @@ int FUN_00091b90(param_1)
     uVar2 = **(undefined4 **)(param_1 + 0x3ec);
     _memcpy(param_1 + 0x494,param_1 + 0x444,0x28);
   }
-  iVar1 = ((int (*)())FUN_00090ca0)(param_1,2,auStack_68);
+  iVar1 = ((int (*)())ffvpAllocTempRegister)(param_1,2,auStack_68);
   if (iVar1 != 0) {
     return 7;
   }
@@ -4942,7 +4974,7 @@ int FUN_00091d70(param_1)
   iVar2 = *(int *)(param_1 + 0x3d4);
   if (*(int *)(param_1 + 0x470) == -1) {
     if (*(char *)(iVar2 + 0x12a) == '\0') {
-      iVar1 = ((int (*)())FUN_00090ca0)(param_1,2,param_1 + 0x46c);
+      iVar1 = ((int (*)())ffvpAllocTempRegister)(param_1,2,param_1 + 0x46c);
       if (iVar1 != 0) {
         return 7;
       }
@@ -4993,7 +5025,7 @@ int FUN_00091eb0(param_1, param_2, param_3)
   uVar1 = 0;
   iVar6 = *(int *)(param_1 + 0x3d4);
   if (*(int *)(param_1 + 0x560) == -1) {
-    iVar2 = ((int (*)())FUN_00090ca0)(param_1,0,param_1 + 0x55c);
+    iVar2 = ((int (*)())ffvpAllocTempRegister)(param_1,0,param_1 + 0x55c);
     uVar1 = 7;
     if (iVar2 == 0) {
       uVar5 = *(undefined4 *)(param_1 + 0x560);
@@ -5077,7 +5109,7 @@ int FUN_00092150(param_1)
         return 2;
       }
     }
-    iVar2 = ((int (*)())FUN_00090ca0)(param_1,2,param_1 + 0x534);
+    iVar2 = ((int (*)())ffvpAllocTempRegister)(param_1,2,param_1 + 0x534);
     uVar1 = 7;
     if (iVar2 == 0) {
       (**(code **)(((unsigned char *)0x00001318) + iVar3))
@@ -5124,7 +5156,7 @@ LAB_0009226c:
       }
       if (*(int *)(param_1 + 0x3f8) == -1) goto LAB_00092320;
     }
-    iVar2 = ((int (*)())FUN_00090ca0)(param_1,1,param_1 + 0x41c);
+    iVar2 = ((int (*)())ffvpAllocTempRegister)(param_1,1,param_1 + 0x41c);
     uVar1 = 7;
     if (iVar2 == 0) {
       iVarS1 = *(int *)((int)param_1 + 1016);
@@ -5189,10 +5221,10 @@ int FUN_00092350(param_1)
     return 2;
   }
 LAB_00092420:
-  iVar4 = ((int (*)())FUN_00090ca0)(param_1,1,param_1 + 0x4bc);
+  iVar4 = ((int (*)())ffvpAllocTempRegister)(param_1,1,param_1 + 0x4bc);
   if (iVar4 == 0) {
     uVar1 = *(undefined4 *)(param_1 + 0x4c0);
-    iVar4 = ((int (*)())FUN_00090ca0)(param_1,2,auStack_68);
+    iVar4 = ((int (*)())ffvpAllocTempRegister)(param_1,2,auStack_68);
     if (iVar4 == 0) {
       uVar6 = **(undefined4 **)(param_1 + 0x3ec);
       uVar5 = **(undefined4 **)(param_1 + 0x3f0);
@@ -5258,12 +5290,12 @@ int FUN_00092570(param_1)
        (((int (*)())FUN_00092350)(param_1), *(int *)(param_1 + 0x4c0) == -1)) {
       return 2;
     }
-    iVar2 = ((int (*)())FUN_00090ca0)(param_1,1,param_1 + 0x4e4);
+    iVar2 = ((int (*)())ffvpAllocTempRegister)(param_1,1,param_1 + 0x4e4);
     if (iVar2 == 0) {
       uVar1 = *(undefined4 *)(param_1 + 0x4e8);
-      iVar2 = ((int (*)())FUN_00090ca0)(param_1,2,auStack_a8);
+      iVar2 = ((int (*)())ffvpAllocTempRegister)(param_1,2,auStack_a8);
       if (iVar2 == 0) {
-        iVar2 = ((int (*)())FUN_00090ca0)(param_1,2,auStack_80);
+        iVar2 = ((int (*)())ffvpAllocTempRegister)(param_1,2,auStack_80);
         if (iVar2 == 0) {
           uVar5 = **(undefined4 **)(param_1 + 0x3ec);
           uVar4 = **(undefined4 **)(param_1 + 0x3f0);
@@ -5379,10 +5411,10 @@ int FUN_000928a0(param_1)
         puVar2 = &DAT_001dbd14;
       }
     }
-    iVar1 = ((int (*)())FUN_00090ca0)(param_1,2,param_1 + 0x584);
+    iVar1 = ((int (*)())ffvpAllocTempRegister)(param_1,2,param_1 + 0x584);
     if (iVar1 == 0) {
       uVar5 = *(undefined4 *)(param_1 + 0x588);
-      iVar1 = ((int (*)())FUN_00090ca0)(param_1,2,auStack_68);
+      iVar1 = ((int (*)())ffvpAllocTempRegister)(param_1,2,auStack_68);
       if (iVar1 == 0) {
         iVar4 = *(int *)(param_1 + 0x3d4);
         iVar1 = *(int *)(*(int *)(iVar4 + 4) + 0x10);
@@ -5451,7 +5483,7 @@ int FUN_00092bf0(param_1, param_2, param_3)
     _memset(iVar1 + 0x3f4,0xffffffff,0x2d0);
     _memset(iVar1 + 0x6c4,0,0x80);
     *(undefined1 *)(iVar1 + 0x744) = (undefined1)param_3;
-    *(code **)(iVar1 + 0x748) = FUN_00090ca0;
+    *(code **)(iVar1 + 0x748) = ffvpAllocTempRegister;
     *(code **)(iVar1 + 0x74c) = FUN_000911a0;
     if (*(code **)(((unsigned char *)0x000012d4) + param_1) != (code *)0x0) {
       (**(code **)(((unsigned char *)0x000012d4) + param_1))(param_1,iVar1);
@@ -5697,7 +5729,7 @@ int FUN_00093390(param_1)
   uVar1 = 1;
   if ((param_1 != 0) && (uVar1 = 2, *(int *)(param_1 + 8) != -1)) {
     iVar3 = *(int *)(param_1 + 0x3d4);
-    iVar2 = ((int (*)())FUN_00090ca0)(param_1,0,auStack_68);
+    iVar2 = ((int (*)())ffvpAllocTempRegister)(param_1,0,auStack_68);
     uVar1 = 7;
     if (iVar2 == 0) {
       uVar5 = *(undefined4 *)(param_1 + 8);

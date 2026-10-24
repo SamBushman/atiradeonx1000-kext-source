@@ -349,7 +349,7 @@ void FUN_00083870(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
     if (iVar3 == 0) {
       FUN_0009d080(param_1,(int)uVar18,param_3,param_4,param_5,param_6);
       uVar8 = FUN_0009bd00(param_1);
-      iVar15 = FUN_0009d410(param_1,0,&local_38,local_34,uVar8,param_6,iVar15,in_r10);
+      iVar15 = ffvpBuildProgram(param_1,0,&local_38,local_34,uVar8,param_6,iVar15,in_r10);
       iVar3 = FUN_0009c800(param_1,param_1 + 0x1874,iVar15,(uint)*(byte *)(param_1 + 0x131),local_38
                            ,local_34[0],uVar8,(uint)*(byte *)(param_1 + 0x126));
       puVar9 = (undefined4 *)
@@ -535,14 +535,40 @@ int arbEmitRecord3Src_op44(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   uint *src2Select;
   uint *src2Negate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  uint src2NegateXBits;
+  uint src1SelectWBits;
+  uint src0SelectWBits;
+  uint src1NegateW;
+  uint src0NegateW;
+  uint src2FileField;
+  uint src1NegateZBits;
+  uint src2NegateZBits;
+  uint src1NegateYBits;
+  uint src2NegateYBits;
+  uint src1NegateXBits;
+  uint src2SelectWBits;
+  uint src1SelectZBits;
+  uint src0SelectZBits;
+  uint src2SelectZBits;
+  uint src1SelectYBits;
+  uint src0SelectYBits;
+  uint src2IndexBits;
+  uint src0SelectXBits;
+  uint src2SelectYBits;
+  uint src1IndexBits;
+  uint src2SelectXBits;
+  uint src1SelectXBits;
+  uint src0IndexBits;
+  int instr;
+  int oldArrayBytes;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint src0NegateXBits;
+  uint src0NegateYBits;
+  uint src0NegateZBits;
   int instrOffset;
   uint src0FileField;
   uint src1FileField;
@@ -552,116 +578,116 @@ int arbEmitRecord3Src_op44(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   int instrArray;
   uint oldWord2;
   uint oldWord3;
-  int instr;
+  int instrCount;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0x44;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   oldWord2 = *(uint *)(instr + 8);
   src0FileField = src0File & 0xf;
   src1FileField = src1File & 0xf;
-  uVar1 = (src0Index & 0xff) << 5;
-  uVar2 = (src1Index & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
-  uVar3 = (*src0Select & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
-  uVar4 = (src0Select[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
-  uVar5 = (src0Select[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
-  oldWord0 = (src0Select[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
-  uVar6 = (*src0Negate & 1) << 0x19;
+  src0IndexBits = (src0Index & 0xff) << 5;
+  src1IndexBits = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = src0IndexBits | src0FileField | oldWord1 & 0xffffe000;
+  src0SelectXBits = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffff0000;
+  src0SelectYBits = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfff80000;
+  src0SelectZBits = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffc00000;
+  src0SelectWBits = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfe000000;
+  src0NegateXBits = (*src0Negate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
-  uVar7 = (src0Negate[1] & 1) << 0x1a;
+       src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfc000000;
+  src0NegateYBits = (src0Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
-  uVar8 = (src0Negate[2] & 1) << 0x1b;
+       src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf8000000;
+  src0NegateZBits = (src0Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf0000000
   ;
-  oldWord1 = src0Negate[3];
-  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  src0NegateW = src0Negate[3];
+  *(uint *)(instr + 8) = src1IndexBits | src1FileField | oldWord2 & 0xffffe000;
   oldWord3 = *(uint *)(instr + 0xc);
   *(uint *)(instr + 4) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
-  uVar1 = (*src1Select & 7) << 0xd;
-  src0FileField = src2File & 0xf;
-  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
-  uVar3 = (src2Index & 0xff) << 5;
-  uVar4 = (src1Select[1] & 7) << 0x10;
-  *(uint *)(instr + 8) = uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
-  uVar5 = (src1Select[2] & 7) << 0x13;
-  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
-  oldWord0 = (src1Select[3] & 7) << 0x16;
-  *(uint *)(instr + 8) = oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
-  uVar6 = (*src1Negate & 1) << 0x19;
+       (src0NegateW & 1) << 0x1c |
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField;
+  src1SelectXBits = (*src1Select & 7) << 0xd;
+  src2FileField = src2File & 0xf;
+  *(uint *)(instr + 8) = src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffff0000;
+  src2IndexBits = (src2Index & 0xff) << 5;
+  src1SelectYBits = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfff80000;
+  src1SelectZBits = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffc00000;
+  src1SelectWBits = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfe000000;
+  src1NegateXBits = (*src1Negate & 1) << 0x19;
   *(uint *)(instr + 8) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
-  uVar7 = (src1Negate[1] & 1) << 0x1a;
+       src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfc000000;
+  src1NegateYBits = (src1Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 8) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
-  uVar8 = (src1Negate[2] & 1) << 0x1b;
+       src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf8000000;
+  src1NegateZBits = (src1Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 8) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf0000000
   ;
-  oldWord1 = src1Negate[3];
-  *(uint *)(instr + 0xc) = uVar3 | src0FileField | oldWord3 & 0xffffe000;
+  src1NegateW = src1Negate[3];
+  *(uint *)(instr + 0xc) = src2IndexBits | src2FileField | oldWord3 & 0xffffe000;
   *(uint *)(instr + 8) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField;
-  uVar1 = (*src2Select & 7) << 0xd;
-  *(uint *)(instr + 0xc) = uVar1 | uVar3 | src0FileField | oldWord3 & 0xffff0000;
-  uVar2 = (src2Select[1] & 7) << 0x10;
-  *(uint *)(instr + 0xc) = uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfff80000;
-  uVar4 = (src2Select[2] & 7) << 0x13;
-  *(uint *)(instr + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xffc00000;
-  uVar5 = (src2Select[3] & 7) << 0x16;
-  *(uint *)(instr + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfe000000;
-  oldWord0 = (*src2Negate & 1) << 0x19;
+       (src1NegateW & 1) << 0x1c |
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField;
+  src2SelectXBits = (*src2Select & 7) << 0xd;
+  *(uint *)(instr + 0xc) = src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xffff0000;
+  src2SelectYBits = (src2Select[1] & 7) << 0x10;
+  *(uint *)(instr + 0xc) = src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xfff80000;
+  src2SelectZBits = (src2Select[2] & 7) << 0x13;
+  *(uint *)(instr + 0xc) = src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xffc00000;
+  src2SelectWBits = (src2Select[3] & 7) << 0x16;
+  *(uint *)(instr + 0xc) = src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xfe000000;
+  src2NegateXBits = (*src2Negate & 1) << 0x19;
   *(uint *)(instr + 0xc) =
-       oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfc000000;
-  uVar6 = (src2Negate[1] & 1) << 0x1a;
+       src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xfc000000;
+  src2NegateYBits = (src2Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 0xc) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf8000000;
-  uVar7 = (src2Negate[2] & 1) << 0x1b;
+       src2NegateYBits | src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xf8000000;
+  src2NegateZBits = (src2Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 0xc) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf0000000
+       src2NegateZBits | src2NegateYBits | src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xf0000000
   ;
   *(uint *)(instr + 0xc) =
        (src2Negate[3] & 1) << 0x1c |
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField;
+       src2NegateZBits | src2NegateYBits | src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -681,107 +707,124 @@ int arbEmitRecord2Src_op01(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   uint *src1Select;
   uint *src1Negate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  int instr;
+  int oldArrayBytes;
+  uint src1NegateXBits;
+  uint src0SelectWBits;
+  uint src0NegateW;
+  uint src1NegateZBits;
+  uint src1NegateYBits;
+  uint src1SelectWBits;
+  uint src0SelectZBits;
+  uint src1SelectZBits;
+  uint src0SelectYBits;
+  uint src1SelectYBits;
+  uint src0SelectXBits;
+  uint src1IndexBits;
+  uint src1Word;
+  uint src1SelectXBits;
+  uint src0IndexBits;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint src0NegateXBits;
+  uint src0NegateYBits;
+  uint src0NegateZBits;
   int instrOffset;
   uint src0FileField;
   uint src1FileField;
   uint oldWord1;
   uint oldWord0;
   undefined4 newStorage;
-  int instr;
+  int instrCount;
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 1;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   oldWord2 = *(uint *)(instr + 8);
   src0FileField = src0File & 0xf;
   src1FileField = src1File & 0xf;
-  uVar1 = (src0Index & 0xff) << 5;
-  uVar2 = (src1Index & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
-  uVar3 = (*src0Select & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
-  uVar4 = (src0Select[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
-  uVar5 = (src0Select[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
-  oldWord0 = (src0Select[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
-  uVar6 = (*src0Negate & 1) << 0x19;
+  src0IndexBits = (src0Index & 0xff) << 5;
+  src1IndexBits = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = src0IndexBits | src0FileField | oldWord1 & 0xffffe000;
+  src0SelectXBits = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffff0000;
+  src0SelectYBits = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfff80000;
+  src0SelectZBits = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffc00000;
+  src0SelectWBits = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfe000000;
+  src0NegateXBits = (*src0Negate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
-  uVar7 = (src0Negate[1] & 1) << 0x1a;
+       src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfc000000;
+  src0NegateYBits = (src0Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
-  uVar8 = (src0Negate[2] & 1) << 0x1b;
+       src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf8000000;
+  src0NegateZBits = (src0Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf0000000
   ;
-  oldWord1 = src0Negate[3];
-  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  src0NegateW = src0Negate[3];
+  *(uint *)(instr + 8) = src1IndexBits | src1FileField | oldWord2 & 0xffffe000;
   *(uint *)(instr + 4) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
-  uVar1 = (*src1Select & 7) << 0xd;
-  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
-  uVar3 = (src1Select[1] & 7) << 0x10;
-  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
-  uVar4 = (src1Select[2] & 7) << 0x13;
-  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
-  uVar5 = (src1Select[3] & 7) << 0x16;
-  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
-  oldWord0 = (*src1Negate & 1) << 0x19;
+       (src0NegateW & 1) << 0x1c |
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField;
+  src1SelectXBits = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffff0000;
+  src1SelectYBits = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfff80000;
+  src1SelectZBits = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffc00000;
+  src1SelectWBits = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfe000000;
+  src1NegateXBits = (*src1Negate & 1) << 0x19;
   *(uint *)(instr + 8) =
-       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
-  uVar6 = (src1Negate[1] & 1) << 0x1a;
+       src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfc000000;
+  src1NegateYBits = (src1Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 8) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
-  uVar7 = (src1Negate[2] & 1) << 0x1b;
+       src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf8000000;
+  src1NegateZBits = (src1Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 8) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (src1Negate[3] & 1) << 0x1c |
-          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
-  *(uint *)(instr + 0xc) = uVar1;
-  *(uint *)(instr + 8) = uVar1;
+  src1Word = (src1Negate[3] & 1) << 0x1c |
+          src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField;
+  *(uint *)(instr + 0xc) = src1Word;
+  *(uint *)(instr + 8) = src1Word;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -797,18 +840,25 @@ int arbEmitRecord1Src_op02(param_1, dstFile, dstIndex, dstMask, src0File, src0In
   uint *src0Select;
   uint *src0Negate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
+  uint src0NegateYBits;
+  uint src0NegateXBits;
+  uint src0SelectWBits;
+  uint src0SelectZBits;
+  uint src0SelectYBits;
+  uint src0SelectXBits;
+  int instr;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint src0NegateZBits;
   int iVar7;
-  uint uVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
-  uint uVar12;
+  uint src0FileField;
+  uint src0IndexBits;
+  uint src0IndexBitsB;
+  uint oldWord0;
+  uint oldWord1;
   undefined4 allocation;
   int iVar14;
   int iVar15;
@@ -827,51 +877,51 @@ int arbEmitRecord1Src_op02(param_1, dstFile, dstIndex, dstMask, src0File, src0In
   }
   iVar15 = *(int *)(param_1 + 0x3c8);
   iVar7 = iVar14 * 0x10;
-  uVar8 = src0File & 0xf;
+  src0FileField = src0File & 0xf;
   *(int *)(param_1 + 0x3cc) = iVar14 + 1;
-  iVar14 = iVar7 + iVar15;
-  *(int *)(param_1 + 0x3dc) = iVar14;
+  instr = iVar7 + iVar15;
+  *(int *)(param_1 + 0x3dc) = instr;
   *(undefined4 *)(iVar7 + iVar15) = 0;
-  *(undefined1 *)(iVar14 + 3) = 2;
-  uVar11 = *(uint *)(iVar7 + iVar15);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(iVar7 + iVar15) = uVar2 | uVar1 | uVar11 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(iVar7 + iVar15) = uVar3 | uVar2 | uVar1 | uVar11 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(iVar7 + iVar15) = uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(iVar7 + iVar15) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xff8010ff;
+  *(undefined1 *)(instr + 3) = 2;
+  oldWord0 = *(uint *)(iVar7 + iVar15);
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(iVar7 + iVar15) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(iVar7 + iVar15) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(iVar7 + iVar15) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(iVar7 + iVar15) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(iVar7 + iVar15) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar11 & 0xff0010ff;
-  uVar12 = *(uint *)(iVar14 + 4);
-  uVar10 = (src0Index & 0xff) << 5;
-  *(uint *)(iVar14 + 4) = uVar10 | uVar8 | uVar12 & 0xffffe000;
-  uVar1 = (*src0Select & 7) << 0xd;
-  uVar9 = (src0Index & 0xff) << 5 | uVar8 | 0x16da000;
-  *(uint *)(iVar14 + 4) = uVar1 | uVar10 | uVar8 | uVar12 & 0xffff0000;
-  uVar2 = (src0Select[1] & 7) << 0x10;
-  *(uint *)(iVar14 + 4) = uVar2 | uVar1 | uVar10 | uVar8 | uVar12 & 0xfff80000;
-  uVar3 = (src0Select[2] & 7) << 0x13;
-  *(uint *)(iVar14 + 4) = uVar3 | uVar2 | uVar1 | uVar10 | uVar8 | uVar12 & 0xffc00000;
-  uVar4 = (src0Select[3] & 7) << 0x16;
-  *(uint *)(iVar14 + 4) = uVar4 | uVar3 | uVar2 | uVar1 | uVar10 | uVar8 | uVar12 & 0xfe000000;
-  uVar5 = (*src0Negate & 1) << 0x19;
-  *(uint *)(iVar14 + 4) =
-       uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar10 | uVar8 | uVar12 & 0xfc000000;
-  uVar11 = (src0Negate[1] & 1) << 0x1a;
-  *(uint *)(iVar14 + 4) =
-       uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar10 | uVar8 | uVar12 & 0xf8000000;
-  uVar6 = (src0Negate[2] & 1) << 0x1b;
-  *(uint *)(iVar14 + 4) =
-       uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar10 | uVar8 | uVar12 & 0xf0000000
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
+  oldWord1 = *(uint *)(instr + 4);
+  src0IndexBitsB = (src0Index & 0xff) << 5;
+  *(uint *)(instr + 4) = src0IndexBitsB | src0FileField | oldWord1 & 0xffffe000;
+  src0SelectXBits = (*src0Select & 7) << 0xd;
+  src0IndexBits = (src0Index & 0xff) << 5 | src0FileField | 0x16da000;
+  *(uint *)(instr + 4) = src0SelectXBits | src0IndexBitsB | src0FileField | oldWord1 & 0xffff0000;
+  src0SelectYBits = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = src0SelectYBits | src0SelectXBits | src0IndexBitsB | src0FileField | oldWord1 & 0xfff80000;
+  src0SelectZBits = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBitsB | src0FileField | oldWord1 & 0xffc00000;
+  src0SelectWBits = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBitsB | src0FileField | oldWord1 & 0xfe000000;
+  src0NegateXBits = (*src0Negate & 1) << 0x19;
+  *(uint *)(instr + 4) =
+       src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBitsB | src0FileField | oldWord1 & 0xfc000000;
+  src0NegateYBits = (src0Negate[1] & 1) << 0x1a;
+  *(uint *)(instr + 4) =
+       src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBitsB | src0FileField | oldWord1 & 0xf8000000;
+  src0NegateZBits = (src0Negate[2] & 1) << 0x1b;
+  *(uint *)(instr + 4) =
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBitsB | src0FileField | oldWord1 & 0xf0000000
   ;
-  *(uint *)(iVar14 + 4) =
+  *(uint *)(instr + 4) =
        (src0Negate[3] & 1) << 0x1c |
-       uVar6 | uVar11 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | uVar10 | uVar8;
-  *(uint *)(iVar14 + 8) = uVar9;
-  *(uint *)(iVar14 + 0xc) = uVar9;
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBitsB | src0FileField;
+  *(uint *)(instr + 8) = src0IndexBits;
+  *(uint *)(instr + 0xc) = src0IndexBits;
   *(int *)(param_1 + 0x3dc) = *(int *)(param_1 + 0x3dc) + 0x10;
   return;
 }
@@ -891,107 +941,124 @@ int arbEmitRecord2Src_op02(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   uint *src1Select;
   uint *src1Negate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  int instr;
+  int oldArrayBytes;
+  uint src1NegateXBits;
+  uint src0SelectWBits;
+  uint src0NegateW;
+  uint src1NegateZBits;
+  uint src1NegateYBits;
+  uint src1SelectWBits;
+  uint src0SelectZBits;
+  uint src1SelectZBits;
+  uint src0SelectYBits;
+  uint src1SelectYBits;
+  uint src0SelectXBits;
+  uint src1IndexBits;
+  uint src1Word;
+  uint src1SelectXBits;
+  uint src0IndexBits;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint src0NegateXBits;
+  uint src0NegateYBits;
+  uint src0NegateZBits;
   int instrOffset;
   uint src0FileField;
   uint src1FileField;
   uint oldWord1;
   uint oldWord0;
   undefined4 newStorage;
-  int instr;
+  int instrCount;
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 2;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   oldWord2 = *(uint *)(instr + 8);
   src0FileField = src0File & 0xf;
   src1FileField = src1File & 0xf;
-  uVar1 = (src0Index & 0xff) << 5;
-  uVar2 = (src1Index & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
-  uVar3 = (*src0Select & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
-  uVar4 = (src0Select[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
-  uVar5 = (src0Select[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
-  oldWord0 = (src0Select[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
-  uVar6 = (*src0Negate & 1) << 0x19;
+  src0IndexBits = (src0Index & 0xff) << 5;
+  src1IndexBits = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = src0IndexBits | src0FileField | oldWord1 & 0xffffe000;
+  src0SelectXBits = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffff0000;
+  src0SelectYBits = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfff80000;
+  src0SelectZBits = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffc00000;
+  src0SelectWBits = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfe000000;
+  src0NegateXBits = (*src0Negate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
-  uVar7 = (src0Negate[1] & 1) << 0x1a;
+       src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfc000000;
+  src0NegateYBits = (src0Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
-  uVar8 = (src0Negate[2] & 1) << 0x1b;
+       src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf8000000;
+  src0NegateZBits = (src0Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf0000000
   ;
-  oldWord1 = src0Negate[3];
-  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  src0NegateW = src0Negate[3];
+  *(uint *)(instr + 8) = src1IndexBits | src1FileField | oldWord2 & 0xffffe000;
   *(uint *)(instr + 4) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
-  uVar1 = (*src1Select & 7) << 0xd;
-  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
-  uVar3 = (src1Select[1] & 7) << 0x10;
-  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
-  uVar4 = (src1Select[2] & 7) << 0x13;
-  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
-  uVar5 = (src1Select[3] & 7) << 0x16;
-  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
-  oldWord0 = (*src1Negate & 1) << 0x19;
+       (src0NegateW & 1) << 0x1c |
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField;
+  src1SelectXBits = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffff0000;
+  src1SelectYBits = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfff80000;
+  src1SelectZBits = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffc00000;
+  src1SelectWBits = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfe000000;
+  src1NegateXBits = (*src1Negate & 1) << 0x19;
   *(uint *)(instr + 8) =
-       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
-  uVar6 = (src1Negate[1] & 1) << 0x1a;
+       src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfc000000;
+  src1NegateYBits = (src1Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 8) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
-  uVar7 = (src1Negate[2] & 1) << 0x1b;
+       src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf8000000;
+  src1NegateZBits = (src1Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 8) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (src1Negate[3] & 1) << 0x1c |
-          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
-  *(uint *)(instr + 0xc) = uVar1;
-  *(uint *)(instr + 8) = uVar1;
+  src1Word = (src1Negate[3] & 1) << 0x1c |
+          src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField;
+  *(uint *)(instr + 0xc) = src1Word;
+  *(uint *)(instr + 8) = src1Word;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -1011,107 +1078,124 @@ int arbEmitRecord2Src_op03(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   uint *src1Select;
   uint *src1Negate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  int instr;
+  int oldArrayBytes;
+  uint src1NegateXBits;
+  uint src0SelectWBits;
+  uint src0NegateW;
+  uint src1NegateZBits;
+  uint src1NegateYBits;
+  uint src1SelectWBits;
+  uint src0SelectZBits;
+  uint src1SelectZBits;
+  uint src0SelectYBits;
+  uint src1SelectYBits;
+  uint src0SelectXBits;
+  uint src1IndexBits;
+  uint src1Word;
+  uint src1SelectXBits;
+  uint src0IndexBits;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint src0NegateXBits;
+  uint src0NegateYBits;
+  uint src0NegateZBits;
   int instrOffset;
   uint src0FileField;
   uint src1FileField;
   uint oldWord1;
   uint oldWord0;
   undefined4 newStorage;
-  int instr;
+  int instrCount;
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 3;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   oldWord2 = *(uint *)(instr + 8);
   src0FileField = src0File & 0xf;
   src1FileField = src1File & 0xf;
-  uVar1 = (src0Index & 0xff) << 5;
-  uVar2 = (src1Index & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
-  uVar3 = (*src0Select & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
-  uVar4 = (src0Select[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
-  uVar5 = (src0Select[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
-  oldWord0 = (src0Select[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
-  uVar6 = (*src0Negate & 1) << 0x19;
+  src0IndexBits = (src0Index & 0xff) << 5;
+  src1IndexBits = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = src0IndexBits | src0FileField | oldWord1 & 0xffffe000;
+  src0SelectXBits = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffff0000;
+  src0SelectYBits = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfff80000;
+  src0SelectZBits = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffc00000;
+  src0SelectWBits = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfe000000;
+  src0NegateXBits = (*src0Negate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
-  uVar7 = (src0Negate[1] & 1) << 0x1a;
+       src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfc000000;
+  src0NegateYBits = (src0Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
-  uVar8 = (src0Negate[2] & 1) << 0x1b;
+       src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf8000000;
+  src0NegateZBits = (src0Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf0000000
   ;
-  oldWord1 = src0Negate[3];
-  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  src0NegateW = src0Negate[3];
+  *(uint *)(instr + 8) = src1IndexBits | src1FileField | oldWord2 & 0xffffe000;
   *(uint *)(instr + 4) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
-  uVar1 = (*src1Select & 7) << 0xd;
-  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
-  uVar3 = (src1Select[1] & 7) << 0x10;
-  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
-  uVar4 = (src1Select[2] & 7) << 0x13;
-  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
-  uVar5 = (src1Select[3] & 7) << 0x16;
-  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
-  oldWord0 = (*src1Negate & 1) << 0x19;
+       (src0NegateW & 1) << 0x1c |
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField;
+  src1SelectXBits = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffff0000;
+  src1SelectYBits = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfff80000;
+  src1SelectZBits = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffc00000;
+  src1SelectWBits = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfe000000;
+  src1NegateXBits = (*src1Negate & 1) << 0x19;
   *(uint *)(instr + 8) =
-       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
-  uVar6 = (src1Negate[1] & 1) << 0x1a;
+       src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfc000000;
+  src1NegateYBits = (src1Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 8) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
-  uVar7 = (src1Negate[2] & 1) << 0x1b;
+       src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf8000000;
+  src1NegateZBits = (src1Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 8) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (src1Negate[3] & 1) << 0x1c |
-          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
-  *(uint *)(instr + 0xc) = uVar1;
-  *(uint *)(instr + 8) = uVar1;
+  src1Word = (src1Negate[3] & 1) << 0x1c |
+          src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField;
+  *(uint *)(instr + 0xc) = src1Word;
+  *(uint *)(instr + 8) = src1Word;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -1135,14 +1219,40 @@ int arbEmitRecord3Src_op04(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   uint *src2Select;
   uint *src2Negate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  uint src2NegateXBits;
+  uint src1SelectWBits;
+  uint src0SelectWBits;
+  uint src1NegateW;
+  uint src0NegateW;
+  uint src2FileField;
+  uint src1NegateZBits;
+  uint src2NegateZBits;
+  uint src1NegateYBits;
+  uint src2NegateYBits;
+  uint src1NegateXBits;
+  uint src2SelectWBits;
+  uint src1SelectZBits;
+  uint src0SelectZBits;
+  uint src2SelectZBits;
+  uint src1SelectYBits;
+  uint src0SelectYBits;
+  uint src2IndexBits;
+  uint src0SelectXBits;
+  uint src2SelectYBits;
+  uint src1IndexBits;
+  uint src2SelectXBits;
+  uint src1SelectXBits;
+  uint src0IndexBits;
+  int instr;
+  int oldArrayBytes;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint src0NegateXBits;
+  uint src0NegateYBits;
+  uint src0NegateZBits;
   int instrOffset;
   uint src0FileField;
   uint src1FileField;
@@ -1152,116 +1262,116 @@ int arbEmitRecord3Src_op04(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   int instrArray;
   uint oldWord2;
   uint oldWord3;
-  int instr;
+  int instrCount;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 4;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   oldWord2 = *(uint *)(instr + 8);
   src0FileField = src0File & 0xf;
   src1FileField = src1File & 0xf;
-  uVar1 = (src0Index & 0xff) << 5;
-  uVar2 = (src1Index & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
-  uVar3 = (*src0Select & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
-  uVar4 = (src0Select[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
-  uVar5 = (src0Select[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
-  oldWord0 = (src0Select[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
-  uVar6 = (*src0Negate & 1) << 0x19;
+  src0IndexBits = (src0Index & 0xff) << 5;
+  src1IndexBits = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = src0IndexBits | src0FileField | oldWord1 & 0xffffe000;
+  src0SelectXBits = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffff0000;
+  src0SelectYBits = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfff80000;
+  src0SelectZBits = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffc00000;
+  src0SelectWBits = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfe000000;
+  src0NegateXBits = (*src0Negate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
-  uVar7 = (src0Negate[1] & 1) << 0x1a;
+       src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfc000000;
+  src0NegateYBits = (src0Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
-  uVar8 = (src0Negate[2] & 1) << 0x1b;
+       src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf8000000;
+  src0NegateZBits = (src0Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf0000000
   ;
-  oldWord1 = src0Negate[3];
-  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  src0NegateW = src0Negate[3];
+  *(uint *)(instr + 8) = src1IndexBits | src1FileField | oldWord2 & 0xffffe000;
   oldWord3 = *(uint *)(instr + 0xc);
   *(uint *)(instr + 4) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
-  uVar1 = (*src1Select & 7) << 0xd;
-  src0FileField = src2File & 0xf;
-  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
-  uVar3 = (src2Index & 0xff) << 5;
-  uVar4 = (src1Select[1] & 7) << 0x10;
-  *(uint *)(instr + 8) = uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
-  uVar5 = (src1Select[2] & 7) << 0x13;
-  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
-  oldWord0 = (src1Select[3] & 7) << 0x16;
-  *(uint *)(instr + 8) = oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
-  uVar6 = (*src1Negate & 1) << 0x19;
+       (src0NegateW & 1) << 0x1c |
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField;
+  src1SelectXBits = (*src1Select & 7) << 0xd;
+  src2FileField = src2File & 0xf;
+  *(uint *)(instr + 8) = src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffff0000;
+  src2IndexBits = (src2Index & 0xff) << 5;
+  src1SelectYBits = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfff80000;
+  src1SelectZBits = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffc00000;
+  src1SelectWBits = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfe000000;
+  src1NegateXBits = (*src1Negate & 1) << 0x19;
   *(uint *)(instr + 8) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
-  uVar7 = (src1Negate[1] & 1) << 0x1a;
+       src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfc000000;
+  src1NegateYBits = (src1Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 8) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
-  uVar8 = (src1Negate[2] & 1) << 0x1b;
+       src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf8000000;
+  src1NegateZBits = (src1Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 8) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf0000000
   ;
-  oldWord1 = src1Negate[3];
-  *(uint *)(instr + 0xc) = uVar3 | src0FileField | oldWord3 & 0xffffe000;
+  src1NegateW = src1Negate[3];
+  *(uint *)(instr + 0xc) = src2IndexBits | src2FileField | oldWord3 & 0xffffe000;
   *(uint *)(instr + 8) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField;
-  uVar1 = (*src2Select & 7) << 0xd;
-  *(uint *)(instr + 0xc) = uVar1 | uVar3 | src0FileField | oldWord3 & 0xffff0000;
-  uVar2 = (src2Select[1] & 7) << 0x10;
-  *(uint *)(instr + 0xc) = uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfff80000;
-  uVar4 = (src2Select[2] & 7) << 0x13;
-  *(uint *)(instr + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xffc00000;
-  uVar5 = (src2Select[3] & 7) << 0x16;
-  *(uint *)(instr + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfe000000;
-  oldWord0 = (*src2Negate & 1) << 0x19;
+       (src1NegateW & 1) << 0x1c |
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField;
+  src2SelectXBits = (*src2Select & 7) << 0xd;
+  *(uint *)(instr + 0xc) = src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xffff0000;
+  src2SelectYBits = (src2Select[1] & 7) << 0x10;
+  *(uint *)(instr + 0xc) = src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xfff80000;
+  src2SelectZBits = (src2Select[2] & 7) << 0x13;
+  *(uint *)(instr + 0xc) = src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xffc00000;
+  src2SelectWBits = (src2Select[3] & 7) << 0x16;
+  *(uint *)(instr + 0xc) = src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xfe000000;
+  src2NegateXBits = (*src2Negate & 1) << 0x19;
   *(uint *)(instr + 0xc) =
-       oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfc000000;
-  uVar6 = (src2Negate[1] & 1) << 0x1a;
+       src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xfc000000;
+  src2NegateYBits = (src2Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 0xc) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf8000000;
-  uVar7 = (src2Negate[2] & 1) << 0x1b;
+       src2NegateYBits | src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xf8000000;
+  src2NegateZBits = (src2Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 0xc) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf0000000
+       src2NegateZBits | src2NegateYBits | src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xf0000000
   ;
   *(uint *)(instr + 0xc) =
        (src2Negate[3] & 1) << 0x1c |
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField;
+       src2NegateZBits | src2NegateYBits | src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -1285,14 +1395,40 @@ int arbEmitRecord3Src_op0b(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   uint *src2Select;
   uint *src2Negate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  uint src2NegateXBits;
+  uint src1SelectWBits;
+  uint src0SelectWBits;
+  uint src1NegateW;
+  uint src0NegateW;
+  uint src2FileField;
+  uint src1NegateZBits;
+  uint src2NegateZBits;
+  uint src1NegateYBits;
+  uint src2NegateYBits;
+  uint src1NegateXBits;
+  uint src2SelectWBits;
+  uint src1SelectZBits;
+  uint src0SelectZBits;
+  uint src2SelectZBits;
+  uint src1SelectYBits;
+  uint src0SelectYBits;
+  uint src2IndexBits;
+  uint src0SelectXBits;
+  uint src2SelectYBits;
+  uint src1IndexBits;
+  uint src2SelectXBits;
+  uint src1SelectXBits;
+  uint src0IndexBits;
+  int instr;
+  int oldArrayBytes;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint src0NegateXBits;
+  uint src0NegateYBits;
+  uint src0NegateZBits;
   int instrOffset;
   uint src0FileField;
   uint src1FileField;
@@ -1302,116 +1438,116 @@ int arbEmitRecord3Src_op0b(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   int instrArray;
   uint oldWord2;
   uint oldWord3;
-  int instr;
+  int instrCount;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0xb;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   oldWord2 = *(uint *)(instr + 8);
   src0FileField = src0File & 0xf;
   src1FileField = src1File & 0xf;
-  uVar1 = (src0Index & 0xff) << 5;
-  uVar2 = (src1Index & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
-  uVar3 = (*src0Select & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
-  uVar4 = (src0Select[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
-  uVar5 = (src0Select[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
-  oldWord0 = (src0Select[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
-  uVar6 = (*src0Negate & 1) << 0x19;
+  src0IndexBits = (src0Index & 0xff) << 5;
+  src1IndexBits = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = src0IndexBits | src0FileField | oldWord1 & 0xffffe000;
+  src0SelectXBits = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffff0000;
+  src0SelectYBits = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfff80000;
+  src0SelectZBits = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffc00000;
+  src0SelectWBits = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfe000000;
+  src0NegateXBits = (*src0Negate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
-  uVar7 = (src0Negate[1] & 1) << 0x1a;
+       src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfc000000;
+  src0NegateYBits = (src0Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
-  uVar8 = (src0Negate[2] & 1) << 0x1b;
+       src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf8000000;
+  src0NegateZBits = (src0Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf0000000
   ;
-  oldWord1 = src0Negate[3];
-  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  src0NegateW = src0Negate[3];
+  *(uint *)(instr + 8) = src1IndexBits | src1FileField | oldWord2 & 0xffffe000;
   oldWord3 = *(uint *)(instr + 0xc);
   *(uint *)(instr + 4) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
-  uVar1 = (*src1Select & 7) << 0xd;
-  src0FileField = src2File & 0xf;
-  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
-  uVar3 = (src2Index & 0xff) << 5;
-  uVar4 = (src1Select[1] & 7) << 0x10;
-  *(uint *)(instr + 8) = uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
-  uVar5 = (src1Select[2] & 7) << 0x13;
-  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
-  oldWord0 = (src1Select[3] & 7) << 0x16;
-  *(uint *)(instr + 8) = oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
-  uVar6 = (*src1Negate & 1) << 0x19;
+       (src0NegateW & 1) << 0x1c |
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField;
+  src1SelectXBits = (*src1Select & 7) << 0xd;
+  src2FileField = src2File & 0xf;
+  *(uint *)(instr + 8) = src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffff0000;
+  src2IndexBits = (src2Index & 0xff) << 5;
+  src1SelectYBits = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfff80000;
+  src1SelectZBits = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffc00000;
+  src1SelectWBits = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfe000000;
+  src1NegateXBits = (*src1Negate & 1) << 0x19;
   *(uint *)(instr + 8) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
-  uVar7 = (src1Negate[1] & 1) << 0x1a;
+       src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfc000000;
+  src1NegateYBits = (src1Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 8) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
-  uVar8 = (src1Negate[2] & 1) << 0x1b;
+       src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf8000000;
+  src1NegateZBits = (src1Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 8) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf0000000
   ;
-  oldWord1 = src1Negate[3];
-  *(uint *)(instr + 0xc) = uVar3 | src0FileField | oldWord3 & 0xffffe000;
+  src1NegateW = src1Negate[3];
+  *(uint *)(instr + 0xc) = src2IndexBits | src2FileField | oldWord3 & 0xffffe000;
   *(uint *)(instr + 8) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField;
-  uVar1 = (*src2Select & 7) << 0xd;
-  *(uint *)(instr + 0xc) = uVar1 | uVar3 | src0FileField | oldWord3 & 0xffff0000;
-  uVar2 = (src2Select[1] & 7) << 0x10;
-  *(uint *)(instr + 0xc) = uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfff80000;
-  uVar4 = (src2Select[2] & 7) << 0x13;
-  *(uint *)(instr + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xffc00000;
-  uVar5 = (src2Select[3] & 7) << 0x16;
-  *(uint *)(instr + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfe000000;
-  oldWord0 = (*src2Negate & 1) << 0x19;
+       (src1NegateW & 1) << 0x1c |
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField;
+  src2SelectXBits = (*src2Select & 7) << 0xd;
+  *(uint *)(instr + 0xc) = src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xffff0000;
+  src2SelectYBits = (src2Select[1] & 7) << 0x10;
+  *(uint *)(instr + 0xc) = src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xfff80000;
+  src2SelectZBits = (src2Select[2] & 7) << 0x13;
+  *(uint *)(instr + 0xc) = src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xffc00000;
+  src2SelectWBits = (src2Select[3] & 7) << 0x16;
+  *(uint *)(instr + 0xc) = src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xfe000000;
+  src2NegateXBits = (*src2Negate & 1) << 0x19;
   *(uint *)(instr + 0xc) =
-       oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfc000000;
-  uVar6 = (src2Negate[1] & 1) << 0x1a;
+       src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xfc000000;
+  src2NegateYBits = (src2Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 0xc) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf8000000;
-  uVar7 = (src2Negate[2] & 1) << 0x1b;
+       src2NegateYBits | src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xf8000000;
+  src2NegateZBits = (src2Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 0xc) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf0000000
+       src2NegateZBits | src2NegateYBits | src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xf0000000
   ;
   *(uint *)(instr + 0xc) =
        (src2Negate[3] & 1) << 0x1c |
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField;
+       src2NegateZBits | src2NegateYBits | src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -1435,14 +1571,40 @@ int arbEmitRecord3Src_op0c(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   uint *src2Select;
   uint *src2Negate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  uint src2NegateXBits;
+  uint src1SelectWBits;
+  uint src0SelectWBits;
+  uint src1NegateW;
+  uint src0NegateW;
+  uint src2FileField;
+  uint src1NegateZBits;
+  uint src2NegateZBits;
+  uint src1NegateYBits;
+  uint src2NegateYBits;
+  uint src1NegateXBits;
+  uint src2SelectWBits;
+  uint src1SelectZBits;
+  uint src0SelectZBits;
+  uint src2SelectZBits;
+  uint src1SelectYBits;
+  uint src0SelectYBits;
+  uint src2IndexBits;
+  uint src0SelectXBits;
+  uint src2SelectYBits;
+  uint src1IndexBits;
+  uint src2SelectXBits;
+  uint src1SelectXBits;
+  uint src0IndexBits;
+  int instr;
+  int oldArrayBytes;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint src0NegateXBits;
+  uint src0NegateYBits;
+  uint src0NegateZBits;
   int instrOffset;
   uint src0FileField;
   uint src1FileField;
@@ -1452,116 +1614,116 @@ int arbEmitRecord3Src_op0c(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   int instrArray;
   uint oldWord2;
   uint oldWord3;
-  int instr;
+  int instrCount;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0xc;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   oldWord2 = *(uint *)(instr + 8);
   src0FileField = src0File & 0xf;
   src1FileField = src1File & 0xf;
-  uVar1 = (src0Index & 0xff) << 5;
-  uVar2 = (src1Index & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
-  uVar3 = (*src0Select & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
-  uVar4 = (src0Select[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
-  uVar5 = (src0Select[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
-  oldWord0 = (src0Select[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
-  uVar6 = (*src0Negate & 1) << 0x19;
+  src0IndexBits = (src0Index & 0xff) << 5;
+  src1IndexBits = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = src0IndexBits | src0FileField | oldWord1 & 0xffffe000;
+  src0SelectXBits = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffff0000;
+  src0SelectYBits = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfff80000;
+  src0SelectZBits = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffc00000;
+  src0SelectWBits = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfe000000;
+  src0NegateXBits = (*src0Negate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
-  uVar7 = (src0Negate[1] & 1) << 0x1a;
+       src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfc000000;
+  src0NegateYBits = (src0Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
-  uVar8 = (src0Negate[2] & 1) << 0x1b;
+       src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf8000000;
+  src0NegateZBits = (src0Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf0000000
   ;
-  oldWord1 = src0Negate[3];
-  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  src0NegateW = src0Negate[3];
+  *(uint *)(instr + 8) = src1IndexBits | src1FileField | oldWord2 & 0xffffe000;
   oldWord3 = *(uint *)(instr + 0xc);
   *(uint *)(instr + 4) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
-  uVar1 = (*src1Select & 7) << 0xd;
-  src0FileField = src2File & 0xf;
-  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
-  uVar3 = (src2Index & 0xff) << 5;
-  uVar4 = (src1Select[1] & 7) << 0x10;
-  *(uint *)(instr + 8) = uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
-  uVar5 = (src1Select[2] & 7) << 0x13;
-  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
-  oldWord0 = (src1Select[3] & 7) << 0x16;
-  *(uint *)(instr + 8) = oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
-  uVar6 = (*src1Negate & 1) << 0x19;
+       (src0NegateW & 1) << 0x1c |
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField;
+  src1SelectXBits = (*src1Select & 7) << 0xd;
+  src2FileField = src2File & 0xf;
+  *(uint *)(instr + 8) = src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffff0000;
+  src2IndexBits = (src2Index & 0xff) << 5;
+  src1SelectYBits = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfff80000;
+  src1SelectZBits = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffc00000;
+  src1SelectWBits = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfe000000;
+  src1NegateXBits = (*src1Negate & 1) << 0x19;
   *(uint *)(instr + 8) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
-  uVar7 = (src1Negate[1] & 1) << 0x1a;
+       src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfc000000;
+  src1NegateYBits = (src1Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 8) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
-  uVar8 = (src1Negate[2] & 1) << 0x1b;
+       src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf8000000;
+  src1NegateZBits = (src1Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 8) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf0000000
   ;
-  oldWord1 = src1Negate[3];
-  *(uint *)(instr + 0xc) = uVar3 | src0FileField | oldWord3 & 0xffffe000;
+  src1NegateW = src1Negate[3];
+  *(uint *)(instr + 0xc) = src2IndexBits | src2FileField | oldWord3 & 0xffffe000;
   *(uint *)(instr + 8) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar1 | uVar2 | src1FileField;
-  uVar1 = (*src2Select & 7) << 0xd;
-  *(uint *)(instr + 0xc) = uVar1 | uVar3 | src0FileField | oldWord3 & 0xffff0000;
-  uVar2 = (src2Select[1] & 7) << 0x10;
-  *(uint *)(instr + 0xc) = uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfff80000;
-  uVar4 = (src2Select[2] & 7) << 0x13;
-  *(uint *)(instr + 0xc) = uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xffc00000;
-  uVar5 = (src2Select[3] & 7) << 0x16;
-  *(uint *)(instr + 0xc) = uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfe000000;
-  oldWord0 = (*src2Negate & 1) << 0x19;
+       (src1NegateW & 1) << 0x1c |
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField;
+  src2SelectXBits = (*src2Select & 7) << 0xd;
+  *(uint *)(instr + 0xc) = src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xffff0000;
+  src2SelectYBits = (src2Select[1] & 7) << 0x10;
+  *(uint *)(instr + 0xc) = src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xfff80000;
+  src2SelectZBits = (src2Select[2] & 7) << 0x13;
+  *(uint *)(instr + 0xc) = src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xffc00000;
+  src2SelectWBits = (src2Select[3] & 7) << 0x16;
+  *(uint *)(instr + 0xc) = src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xfe000000;
+  src2NegateXBits = (*src2Negate & 1) << 0x19;
   *(uint *)(instr + 0xc) =
-       oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xfc000000;
-  uVar6 = (src2Negate[1] & 1) << 0x1a;
+       src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xfc000000;
+  src2NegateYBits = (src2Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 0xc) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf8000000;
-  uVar7 = (src2Negate[2] & 1) << 0x1b;
+       src2NegateYBits | src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xf8000000;
+  src2NegateZBits = (src2Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 0xc) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField | oldWord3 & 0xf0000000
+       src2NegateZBits | src2NegateYBits | src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField | oldWord3 & 0xf0000000
   ;
   *(uint *)(instr + 0xc) =
        (src2Negate[3] & 1) << 0x1c |
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar2 | uVar1 | uVar3 | src0FileField;
+       src2NegateZBits | src2NegateYBits | src2NegateXBits | src2SelectWBits | src2SelectZBits | src2SelectYBits | src2SelectXBits | src2IndexBits | src2FileField;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -1581,107 +1743,124 @@ int arbEmitRecord2Src_op08(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   uint *src1Select;
   uint *src1Negate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  int instr;
+  int oldArrayBytes;
+  uint src1NegateXBits;
+  uint src0SelectWBits;
+  uint src0NegateW;
+  uint src1NegateZBits;
+  uint src1NegateYBits;
+  uint src1SelectWBits;
+  uint src0SelectZBits;
+  uint src1SelectZBits;
+  uint src0SelectYBits;
+  uint src1SelectYBits;
+  uint src0SelectXBits;
+  uint src1IndexBits;
+  uint src1Word;
+  uint src1SelectXBits;
+  uint src0IndexBits;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint src0NegateXBits;
+  uint src0NegateYBits;
+  uint src0NegateZBits;
   int instrOffset;
   uint src0FileField;
   uint src1FileField;
   uint oldWord1;
   uint oldWord0;
   undefined4 newStorage;
-  int instr;
+  int instrCount;
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 8;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   oldWord2 = *(uint *)(instr + 8);
   src0FileField = src0File & 0xf;
   src1FileField = src1File & 0xf;
-  uVar1 = (src0Index & 0xff) << 5;
-  uVar2 = (src1Index & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
-  uVar3 = (*src0Select & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
-  uVar4 = (src0Select[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
-  uVar5 = (src0Select[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
-  oldWord0 = (src0Select[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
-  uVar6 = (*src0Negate & 1) << 0x19;
+  src0IndexBits = (src0Index & 0xff) << 5;
+  src1IndexBits = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = src0IndexBits | src0FileField | oldWord1 & 0xffffe000;
+  src0SelectXBits = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffff0000;
+  src0SelectYBits = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfff80000;
+  src0SelectZBits = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffc00000;
+  src0SelectWBits = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfe000000;
+  src0NegateXBits = (*src0Negate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
-  uVar7 = (src0Negate[1] & 1) << 0x1a;
+       src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfc000000;
+  src0NegateYBits = (src0Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
-  uVar8 = (src0Negate[2] & 1) << 0x1b;
+       src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf8000000;
+  src0NegateZBits = (src0Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf0000000
   ;
-  oldWord1 = src0Negate[3];
-  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  src0NegateW = src0Negate[3];
+  *(uint *)(instr + 8) = src1IndexBits | src1FileField | oldWord2 & 0xffffe000;
   *(uint *)(instr + 4) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
-  uVar1 = (*src1Select & 7) << 0xd;
-  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
-  uVar3 = (src1Select[1] & 7) << 0x10;
-  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
-  uVar4 = (src1Select[2] & 7) << 0x13;
-  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
-  uVar5 = (src1Select[3] & 7) << 0x16;
-  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
-  oldWord0 = (*src1Negate & 1) << 0x19;
+       (src0NegateW & 1) << 0x1c |
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField;
+  src1SelectXBits = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffff0000;
+  src1SelectYBits = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfff80000;
+  src1SelectZBits = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffc00000;
+  src1SelectWBits = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfe000000;
+  src1NegateXBits = (*src1Negate & 1) << 0x19;
   *(uint *)(instr + 8) =
-       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
-  uVar6 = (src1Negate[1] & 1) << 0x1a;
+       src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfc000000;
+  src1NegateYBits = (src1Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 8) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
-  uVar7 = (src1Negate[2] & 1) << 0x1b;
+       src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf8000000;
+  src1NegateZBits = (src1Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 8) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (src1Negate[3] & 1) << 0x1c |
-          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
-  *(uint *)(instr + 0xc) = uVar1;
-  *(uint *)(instr + 8) = uVar1;
+  src1Word = (src1Negate[3] & 1) << 0x1c |
+          src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField;
+  *(uint *)(instr + 0xc) = src1Word;
+  *(uint *)(instr + 8) = src1Word;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -1701,107 +1880,124 @@ int arbEmitRecord2Src_op07(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   uint *src1Select;
   uint *src1Negate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  int instr;
+  int oldArrayBytes;
+  uint src1NegateXBits;
+  uint src0SelectWBits;
+  uint src0NegateW;
+  uint src1NegateZBits;
+  uint src1NegateYBits;
+  uint src1SelectWBits;
+  uint src0SelectZBits;
+  uint src1SelectZBits;
+  uint src0SelectYBits;
+  uint src1SelectYBits;
+  uint src0SelectXBits;
+  uint src1IndexBits;
+  uint src1Word;
+  uint src1SelectXBits;
+  uint src0IndexBits;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint src0NegateXBits;
+  uint src0NegateYBits;
+  uint src0NegateZBits;
   int instrOffset;
   uint src0FileField;
   uint src1FileField;
   uint oldWord1;
   uint oldWord0;
   undefined4 newStorage;
-  int instr;
+  int instrCount;
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 7;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   oldWord2 = *(uint *)(instr + 8);
   src0FileField = src0File & 0xf;
   src1FileField = src1File & 0xf;
-  uVar1 = (src0Index & 0xff) << 5;
-  uVar2 = (src1Index & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
-  uVar3 = (*src0Select & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
-  uVar4 = (src0Select[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
-  uVar5 = (src0Select[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
-  oldWord0 = (src0Select[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
-  uVar6 = (*src0Negate & 1) << 0x19;
+  src0IndexBits = (src0Index & 0xff) << 5;
+  src1IndexBits = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = src0IndexBits | src0FileField | oldWord1 & 0xffffe000;
+  src0SelectXBits = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffff0000;
+  src0SelectYBits = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfff80000;
+  src0SelectZBits = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffc00000;
+  src0SelectWBits = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfe000000;
+  src0NegateXBits = (*src0Negate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
-  uVar7 = (src0Negate[1] & 1) << 0x1a;
+       src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfc000000;
+  src0NegateYBits = (src0Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
-  uVar8 = (src0Negate[2] & 1) << 0x1b;
+       src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf8000000;
+  src0NegateZBits = (src0Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf0000000
   ;
-  oldWord1 = src0Negate[3];
-  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  src0NegateW = src0Negate[3];
+  *(uint *)(instr + 8) = src1IndexBits | src1FileField | oldWord2 & 0xffffe000;
   *(uint *)(instr + 4) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
-  uVar1 = (*src1Select & 7) << 0xd;
-  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
-  uVar3 = (src1Select[1] & 7) << 0x10;
-  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
-  uVar4 = (src1Select[2] & 7) << 0x13;
-  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
-  uVar5 = (src1Select[3] & 7) << 0x16;
-  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
-  oldWord0 = (*src1Negate & 1) << 0x19;
+       (src0NegateW & 1) << 0x1c |
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField;
+  src1SelectXBits = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffff0000;
+  src1SelectYBits = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfff80000;
+  src1SelectZBits = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffc00000;
+  src1SelectWBits = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfe000000;
+  src1NegateXBits = (*src1Negate & 1) << 0x19;
   *(uint *)(instr + 8) =
-       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
-  uVar6 = (src1Negate[1] & 1) << 0x1a;
+       src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfc000000;
+  src1NegateYBits = (src1Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 8) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
-  uVar7 = (src1Negate[2] & 1) << 0x1b;
+       src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf8000000;
+  src1NegateZBits = (src1Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 8) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (src1Negate[3] & 1) << 0x1c |
-          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
-  *(uint *)(instr + 0xc) = uVar1;
-  *(uint *)(instr + 8) = uVar1;
+  src1Word = (src1Negate[3] & 1) << 0x1c |
+          src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField;
+  *(uint *)(instr + 0xc) = src1Word;
+  *(uint *)(instr + 8) = src1Word;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -1821,107 +2017,124 @@ int arbEmitRecord2Src_op0a(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   uint *src1Select;
   uint *src1Negate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  int instr;
+  int oldArrayBytes;
+  uint src1NegateXBits;
+  uint src0SelectWBits;
+  uint src0NegateW;
+  uint src1NegateZBits;
+  uint src1NegateYBits;
+  uint src1SelectWBits;
+  uint src0SelectZBits;
+  uint src1SelectZBits;
+  uint src0SelectYBits;
+  uint src1SelectYBits;
+  uint src0SelectXBits;
+  uint src1IndexBits;
+  uint src1Word;
+  uint src1SelectXBits;
+  uint src0IndexBits;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint src0NegateXBits;
+  uint src0NegateYBits;
+  uint src0NegateZBits;
   int instrOffset;
   uint src0FileField;
   uint src1FileField;
   uint oldWord1;
   uint oldWord0;
   undefined4 newStorage;
-  int instr;
+  int instrCount;
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 10;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   oldWord2 = *(uint *)(instr + 8);
   src0FileField = src0File & 0xf;
   src1FileField = src1File & 0xf;
-  uVar1 = (src0Index & 0xff) << 5;
-  uVar2 = (src1Index & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
-  uVar3 = (*src0Select & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
-  uVar4 = (src0Select[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
-  uVar5 = (src0Select[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
-  oldWord0 = (src0Select[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
-  uVar6 = (*src0Negate & 1) << 0x19;
+  src0IndexBits = (src0Index & 0xff) << 5;
+  src1IndexBits = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = src0IndexBits | src0FileField | oldWord1 & 0xffffe000;
+  src0SelectXBits = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffff0000;
+  src0SelectYBits = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfff80000;
+  src0SelectZBits = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffc00000;
+  src0SelectWBits = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfe000000;
+  src0NegateXBits = (*src0Negate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
-  uVar7 = (src0Negate[1] & 1) << 0x1a;
+       src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfc000000;
+  src0NegateYBits = (src0Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
-  uVar8 = (src0Negate[2] & 1) << 0x1b;
+       src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf8000000;
+  src0NegateZBits = (src0Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf0000000
   ;
-  oldWord1 = src0Negate[3];
-  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  src0NegateW = src0Negate[3];
+  *(uint *)(instr + 8) = src1IndexBits | src1FileField | oldWord2 & 0xffffe000;
   *(uint *)(instr + 4) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
-  uVar1 = (*src1Select & 7) << 0xd;
-  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
-  uVar3 = (src1Select[1] & 7) << 0x10;
-  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
-  uVar4 = (src1Select[2] & 7) << 0x13;
-  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
-  uVar5 = (src1Select[3] & 7) << 0x16;
-  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
-  oldWord0 = (*src1Negate & 1) << 0x19;
+       (src0NegateW & 1) << 0x1c |
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField;
+  src1SelectXBits = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffff0000;
+  src1SelectYBits = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfff80000;
+  src1SelectZBits = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffc00000;
+  src1SelectWBits = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfe000000;
+  src1NegateXBits = (*src1Negate & 1) << 0x19;
   *(uint *)(instr + 8) =
-       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
-  uVar6 = (src1Negate[1] & 1) << 0x1a;
+       src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfc000000;
+  src1NegateYBits = (src1Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 8) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
-  uVar7 = (src1Negate[2] & 1) << 0x1b;
+       src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf8000000;
+  src1NegateZBits = (src1Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 8) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (src1Negate[3] & 1) << 0x1c |
-          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
-  *(uint *)(instr + 0xc) = uVar1;
-  *(uint *)(instr + 8) = uVar1;
+  src1Word = (src1Negate[3] & 1) << 0x1c |
+          src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField;
+  *(uint *)(instr + 0xc) = src1Word;
+  *(uint *)(instr + 8) = src1Word;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -1941,107 +2154,124 @@ int arbEmitRecord2Src_op09(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   uint *src1Select;
   uint *src1Negate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  int instr;
+  int oldArrayBytes;
+  uint src1NegateXBits;
+  uint src0SelectWBits;
+  uint src0NegateW;
+  uint src1NegateZBits;
+  uint src1NegateYBits;
+  uint src1SelectWBits;
+  uint src0SelectZBits;
+  uint src1SelectZBits;
+  uint src0SelectYBits;
+  uint src1SelectYBits;
+  uint src0SelectXBits;
+  uint src1IndexBits;
+  uint src1Word;
+  uint src1SelectXBits;
+  uint src0IndexBits;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint src0NegateXBits;
+  uint src0NegateYBits;
+  uint src0NegateZBits;
   int instrOffset;
   uint src0FileField;
   uint src1FileField;
   uint oldWord1;
   uint oldWord0;
   undefined4 newStorage;
-  int instr;
+  int instrCount;
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 9;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   oldWord2 = *(uint *)(instr + 8);
   src0FileField = src0File & 0xf;
   src1FileField = src1File & 0xf;
-  uVar1 = (src0Index & 0xff) << 5;
-  uVar2 = (src1Index & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
-  uVar3 = (*src0Select & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
-  uVar4 = (src0Select[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
-  uVar5 = (src0Select[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
-  oldWord0 = (src0Select[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
-  uVar6 = (*src0Negate & 1) << 0x19;
+  src0IndexBits = (src0Index & 0xff) << 5;
+  src1IndexBits = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = src0IndexBits | src0FileField | oldWord1 & 0xffffe000;
+  src0SelectXBits = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffff0000;
+  src0SelectYBits = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfff80000;
+  src0SelectZBits = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffc00000;
+  src0SelectWBits = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfe000000;
+  src0NegateXBits = (*src0Negate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
-  uVar7 = (src0Negate[1] & 1) << 0x1a;
+       src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfc000000;
+  src0NegateYBits = (src0Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
-  uVar8 = (src0Negate[2] & 1) << 0x1b;
+       src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf8000000;
+  src0NegateZBits = (src0Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf0000000
   ;
-  oldWord1 = src0Negate[3];
-  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  src0NegateW = src0Negate[3];
+  *(uint *)(instr + 8) = src1IndexBits | src1FileField | oldWord2 & 0xffffe000;
   *(uint *)(instr + 4) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
-  uVar1 = (*src1Select & 7) << 0xd;
-  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
-  uVar3 = (src1Select[1] & 7) << 0x10;
-  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
-  uVar4 = (src1Select[2] & 7) << 0x13;
-  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
-  uVar5 = (src1Select[3] & 7) << 0x16;
-  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
-  oldWord0 = (*src1Negate & 1) << 0x19;
+       (src0NegateW & 1) << 0x1c |
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField;
+  src1SelectXBits = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffff0000;
+  src1SelectYBits = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfff80000;
+  src1SelectZBits = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffc00000;
+  src1SelectWBits = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfe000000;
+  src1NegateXBits = (*src1Negate & 1) << 0x19;
   *(uint *)(instr + 8) =
-       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
-  uVar6 = (src1Negate[1] & 1) << 0x1a;
+       src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfc000000;
+  src1NegateYBits = (src1Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 8) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
-  uVar7 = (src1Negate[2] & 1) << 0x1b;
+       src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf8000000;
+  src1NegateZBits = (src1Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 8) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (src1Negate[3] & 1) << 0x1c |
-          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
-  *(uint *)(instr + 0xc) = uVar1;
-  *(uint *)(instr + 8) = uVar1;
+  src1Word = (src1Negate[3] & 1) << 0x1c |
+          src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField;
+  *(uint *)(instr + 0xc) = src1Word;
+  *(uint *)(instr + 8) = src1Word;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -2057,78 +2287,87 @@ int arbEmitRecord1Src_op0e(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, s
   uint *srcSelect;
   uint *srcNegate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
+  uint srcNegateXBits;
+  uint srcSelectWBits;
+  uint srcSelectZBits;
+  uint srcSelectYBits;
+  uint srcSelectXBits;
+  uint srcWord;
+  uint srcIndexBits;
+  int instr;
+  int oldArrayBytes;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint srcNegateYBits;
+  uint srcNegateZBits;
   int instrOffset;
   uint srcFileField;
   uint oldWord1;
   uint oldWord0;
   undefined4 newStorage;
-  int instr;
+  int instrCount;
   int instrArray;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0xe;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   srcFileField = srcFile & 0xf;
-  uVar1 = (srcIndex & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | srcFileField | oldWord1 & 0xffffe000;
-  uVar2 = (*srcSelect & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar2 | uVar1 | srcFileField | oldWord1 & 0xffff0000;
-  uVar3 = (srcSelect[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfff80000;
-  uVar4 = (srcSelect[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xffc00000;
-  uVar5 = (srcSelect[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfe000000;
-  oldWord0 = (*srcNegate & 1) << 0x19;
+  srcIndexBits = (srcIndex & 0xff) << 5;
+  *(uint *)(instr + 4) = srcIndexBits | srcFileField | oldWord1 & 0xffffe000;
+  srcSelectXBits = (*srcSelect & 7) << 0xd;
+  *(uint *)(instr + 4) = srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xffff0000;
+  srcSelectYBits = (srcSelect[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xfff80000;
+  srcSelectZBits = (srcSelect[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xffc00000;
+  srcSelectWBits = (srcSelect[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xfe000000;
+  srcNegateXBits = (*srcNegate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfc000000;
-  uVar6 = (srcNegate[1] & 1) << 0x1a;
+       srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xfc000000;
+  srcNegateYBits = (srcNegate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf8000000;
-  uVar7 = (srcNegate[2] & 1) << 0x1b;
+       srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xf8000000;
+  srcNegateZBits = (srcNegate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf0000000;
-  uVar1 = (srcNegate[3] & 1) << 0x1c |
-          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField;
-  *(uint *)(instr + 4) = uVar1;
-  *(uint *)(instr + 8) = uVar1;
-  *(uint *)(instr + 0xc) = uVar1;
+       srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xf0000000;
+  srcWord = (srcNegate[3] & 1) << 0x1c |
+          srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField;
+  *(uint *)(instr + 4) = srcWord;
+  *(uint *)(instr + 8) = srcWord;
+  *(uint *)(instr + 0xc) = srcWord;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -2144,78 +2383,87 @@ int arbEmitRecord1Src_op47(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, s
   uint *srcSelect;
   uint *srcNegate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
+  uint srcNegateXBits;
+  uint srcSelectWBits;
+  uint srcSelectZBits;
+  uint srcSelectYBits;
+  uint srcSelectXBits;
+  uint srcWord;
+  uint srcIndexBits;
+  int instr;
+  int oldArrayBytes;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint srcNegateYBits;
+  uint srcNegateZBits;
   int instrOffset;
   uint srcFileField;
   uint oldWord1;
   uint oldWord0;
   undefined4 newStorage;
-  int instr;
+  int instrCount;
   int instrArray;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0x47;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   srcFileField = srcFile & 0xf;
-  uVar1 = (srcIndex & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | srcFileField | oldWord1 & 0xffffe000;
-  uVar2 = (*srcSelect & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar2 | uVar1 | srcFileField | oldWord1 & 0xffff0000;
-  uVar3 = (srcSelect[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfff80000;
-  uVar4 = (srcSelect[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xffc00000;
-  uVar5 = (srcSelect[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfe000000;
-  oldWord0 = (*srcNegate & 1) << 0x19;
+  srcIndexBits = (srcIndex & 0xff) << 5;
+  *(uint *)(instr + 4) = srcIndexBits | srcFileField | oldWord1 & 0xffffe000;
+  srcSelectXBits = (*srcSelect & 7) << 0xd;
+  *(uint *)(instr + 4) = srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xffff0000;
+  srcSelectYBits = (srcSelect[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xfff80000;
+  srcSelectZBits = (srcSelect[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xffc00000;
+  srcSelectWBits = (srcSelect[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xfe000000;
+  srcNegateXBits = (*srcNegate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfc000000;
-  uVar6 = (srcNegate[1] & 1) << 0x1a;
+       srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xfc000000;
+  srcNegateYBits = (srcNegate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf8000000;
-  uVar7 = (srcNegate[2] & 1) << 0x1b;
+       srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xf8000000;
+  srcNegateZBits = (srcNegate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf0000000;
-  uVar1 = (srcNegate[3] & 1) << 0x1c |
-          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField;
-  *(uint *)(instr + 4) = uVar1;
-  *(uint *)(instr + 8) = uVar1;
-  *(uint *)(instr + 0xc) = uVar1;
+       srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xf0000000;
+  srcWord = (srcNegate[3] & 1) << 0x1c |
+          srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField;
+  *(uint *)(instr + 4) = srcWord;
+  *(uint *)(instr + 8) = srcWord;
+  *(uint *)(instr + 0xc) = srcWord;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -2231,78 +2479,87 @@ int arbEmitRecord1Src_op49(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, s
   uint *srcSelect;
   uint *srcNegate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
+  uint srcNegateXBits;
+  uint srcSelectWBits;
+  uint srcSelectZBits;
+  uint srcSelectYBits;
+  uint srcSelectXBits;
+  uint srcWord;
+  uint srcIndexBits;
+  int instr;
+  int oldArrayBytes;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint srcNegateYBits;
+  uint srcNegateZBits;
   int instrOffset;
   uint srcFileField;
   uint oldWord1;
   uint oldWord0;
   undefined4 newStorage;
-  int instr;
+  int instrCount;
   int instrArray;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0x49;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   srcFileField = srcFile & 0xf;
-  uVar1 = (srcIndex & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | srcFileField | oldWord1 & 0xffffe000;
-  uVar2 = (*srcSelect & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar2 | uVar1 | srcFileField | oldWord1 & 0xffff0000;
-  uVar3 = (srcSelect[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfff80000;
-  uVar4 = (srcSelect[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xffc00000;
-  uVar5 = (srcSelect[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfe000000;
-  oldWord0 = (*srcNegate & 1) << 0x19;
+  srcIndexBits = (srcIndex & 0xff) << 5;
+  *(uint *)(instr + 4) = srcIndexBits | srcFileField | oldWord1 & 0xffffe000;
+  srcSelectXBits = (*srcSelect & 7) << 0xd;
+  *(uint *)(instr + 4) = srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xffff0000;
+  srcSelectYBits = (srcSelect[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xfff80000;
+  srcSelectZBits = (srcSelect[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xffc00000;
+  srcSelectWBits = (srcSelect[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xfe000000;
+  srcNegateXBits = (*srcNegate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfc000000;
-  uVar6 = (srcNegate[1] & 1) << 0x1a;
+       srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xfc000000;
+  srcNegateYBits = (srcNegate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf8000000;
-  uVar7 = (srcNegate[2] & 1) << 0x1b;
+       srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xf8000000;
+  srcNegateZBits = (srcNegate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf0000000;
-  uVar1 = (srcNegate[3] & 1) << 0x1c |
-          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField;
-  *(uint *)(instr + 4) = uVar1;
-  *(uint *)(instr + 8) = uVar1;
-  *(uint *)(instr + 0xc) = uVar1;
+       srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xf0000000;
+  srcWord = (srcNegate[3] & 1) << 0x1c |
+          srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField;
+  *(uint *)(instr + 4) = srcWord;
+  *(uint *)(instr + 8) = srcWord;
+  *(uint *)(instr + 0xc) = srcWord;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -2318,78 +2575,87 @@ int arbEmitRecord1Src_op4b(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, s
   uint *srcSelect;
   uint *srcNegate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
+  uint srcNegateXBits;
+  uint srcSelectWBits;
+  uint srcSelectZBits;
+  uint srcSelectYBits;
+  uint srcSelectXBits;
+  uint srcWord;
+  uint srcIndexBits;
+  int instr;
+  int oldArrayBytes;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint srcNegateYBits;
+  uint srcNegateZBits;
   int instrOffset;
   uint srcFileField;
   uint oldWord1;
   uint oldWord0;
   undefined4 newStorage;
-  int instr;
+  int instrCount;
   int instrArray;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0x4b;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   srcFileField = srcFile & 0xf;
-  uVar1 = (srcIndex & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | srcFileField | oldWord1 & 0xffffe000;
-  uVar2 = (*srcSelect & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar2 | uVar1 | srcFileField | oldWord1 & 0xffff0000;
-  uVar3 = (srcSelect[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfff80000;
-  uVar4 = (srcSelect[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xffc00000;
-  uVar5 = (srcSelect[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfe000000;
-  oldWord0 = (*srcNegate & 1) << 0x19;
+  srcIndexBits = (srcIndex & 0xff) << 5;
+  *(uint *)(instr + 4) = srcIndexBits | srcFileField | oldWord1 & 0xffffe000;
+  srcSelectXBits = (*srcSelect & 7) << 0xd;
+  *(uint *)(instr + 4) = srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xffff0000;
+  srcSelectYBits = (srcSelect[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xfff80000;
+  srcSelectZBits = (srcSelect[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xffc00000;
+  srcSelectWBits = (srcSelect[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xfe000000;
+  srcNegateXBits = (*srcNegate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfc000000;
-  uVar6 = (srcNegate[1] & 1) << 0x1a;
+       srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xfc000000;
+  srcNegateYBits = (srcNegate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf8000000;
-  uVar7 = (srcNegate[2] & 1) << 0x1b;
+       srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xf8000000;
+  srcNegateZBits = (srcNegate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf0000000;
-  uVar1 = (srcNegate[3] & 1) << 0x1c |
-          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField;
-  *(uint *)(instr + 4) = uVar1;
-  *(uint *)(instr + 8) = uVar1;
-  *(uint *)(instr + 0xc) = uVar1;
+       srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xf0000000;
+  srcWord = (srcNegate[3] & 1) << 0x1c |
+          srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField;
+  *(uint *)(instr + 4) = srcWord;
+  *(uint *)(instr + 8) = srcWord;
+  *(uint *)(instr + 0xc) = srcWord;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -2405,78 +2671,87 @@ int arbEmitRecord1Src_op43(ctx, dstFile, dstIndex, dstMask, srcFile, srcIndex, s
   uint *srcSelect;
   uint *srcNegate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
+  uint srcNegateXBits;
+  uint srcSelectWBits;
+  uint srcSelectZBits;
+  uint srcSelectYBits;
+  uint srcSelectXBits;
+  uint srcWord;
+  uint srcIndexBits;
+  int instr;
+  int oldArrayBytes;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint srcNegateYBits;
+  uint srcNegateZBits;
   int instrOffset;
   uint srcFileField;
   uint oldWord1;
   uint oldWord0;
   undefined4 newStorage;
-  int instr;
+  int instrCount;
   int instrArray;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0x43;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   srcFileField = srcFile & 0xf;
-  uVar1 = (srcIndex & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | srcFileField | oldWord1 & 0xffffe000;
-  uVar2 = (*srcSelect & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar2 | uVar1 | srcFileField | oldWord1 & 0xffff0000;
-  uVar3 = (srcSelect[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfff80000;
-  uVar4 = (srcSelect[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xffc00000;
-  uVar5 = (srcSelect[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfe000000;
-  oldWord0 = (*srcNegate & 1) << 0x19;
+  srcIndexBits = (srcIndex & 0xff) << 5;
+  *(uint *)(instr + 4) = srcIndexBits | srcFileField | oldWord1 & 0xffffe000;
+  srcSelectXBits = (*srcSelect & 7) << 0xd;
+  *(uint *)(instr + 4) = srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xffff0000;
+  srcSelectYBits = (srcSelect[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xfff80000;
+  srcSelectZBits = (srcSelect[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xffc00000;
+  srcSelectWBits = (srcSelect[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xfe000000;
+  srcNegateXBits = (*srcNegate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xfc000000;
-  uVar6 = (srcNegate[1] & 1) << 0x1a;
+       srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xfc000000;
+  srcNegateYBits = (srcNegate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf8000000;
-  uVar7 = (srcNegate[2] & 1) << 0x1b;
+       srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xf8000000;
+  srcNegateZBits = (srcNegate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField | oldWord1 & 0xf0000000;
-  uVar1 = (srcNegate[3] & 1) << 0x1c |
-          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | srcFileField;
-  *(uint *)(instr + 4) = uVar1;
-  *(uint *)(instr + 8) = uVar1;
-  *(uint *)(instr + 0xc) = uVar1;
+       srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField | oldWord1 & 0xf0000000;
+  srcWord = (srcNegate[3] & 1) << 0x1c |
+          srcNegateZBits | srcNegateYBits | srcNegateXBits | srcSelectWBits | srcSelectZBits | srcSelectYBits | srcSelectXBits | srcIndexBits | srcFileField;
+  *(uint *)(instr + 4) = srcWord;
+  *(uint *)(instr + 8) = srcWord;
+  *(uint *)(instr + 0xc) = srcWord;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -2496,107 +2771,124 @@ int arbEmitRecord2Src_op45(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   uint *src1Select;
   uint *src1Negate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  int instr;
+  int oldArrayBytes;
+  uint src1NegateXBits;
+  uint src0SelectWBits;
+  uint src0NegateW;
+  uint src1NegateZBits;
+  uint src1NegateYBits;
+  uint src1SelectWBits;
+  uint src0SelectZBits;
+  uint src1SelectZBits;
+  uint src0SelectYBits;
+  uint src1SelectYBits;
+  uint src0SelectXBits;
+  uint src1IndexBits;
+  uint src1Word;
+  uint src1SelectXBits;
+  uint src0IndexBits;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint src0NegateXBits;
+  uint src0NegateYBits;
+  uint src0NegateZBits;
   int instrOffset;
   uint src0FileField;
   uint src1FileField;
   uint oldWord1;
   uint oldWord0;
   undefined4 newStorage;
-  int instr;
+  int instrCount;
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0x45;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   oldWord2 = *(uint *)(instr + 8);
   src0FileField = src0File & 0xf;
   src1FileField = src1File & 0xf;
-  uVar1 = (src0Index & 0xff) << 5;
-  uVar2 = (src1Index & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
-  uVar3 = (*src0Select & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
-  uVar4 = (src0Select[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
-  uVar5 = (src0Select[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
-  oldWord0 = (src0Select[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
-  uVar6 = (*src0Negate & 1) << 0x19;
+  src0IndexBits = (src0Index & 0xff) << 5;
+  src1IndexBits = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = src0IndexBits | src0FileField | oldWord1 & 0xffffe000;
+  src0SelectXBits = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffff0000;
+  src0SelectYBits = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfff80000;
+  src0SelectZBits = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffc00000;
+  src0SelectWBits = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfe000000;
+  src0NegateXBits = (*src0Negate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
-  uVar7 = (src0Negate[1] & 1) << 0x1a;
+       src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfc000000;
+  src0NegateYBits = (src0Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
-  uVar8 = (src0Negate[2] & 1) << 0x1b;
+       src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf8000000;
+  src0NegateZBits = (src0Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf0000000
   ;
-  oldWord1 = src0Negate[3];
-  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  src0NegateW = src0Negate[3];
+  *(uint *)(instr + 8) = src1IndexBits | src1FileField | oldWord2 & 0xffffe000;
   *(uint *)(instr + 4) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
-  uVar1 = (*src1Select & 7) << 0xd;
-  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
-  uVar3 = (src1Select[1] & 7) << 0x10;
-  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
-  uVar4 = (src1Select[2] & 7) << 0x13;
-  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
-  uVar5 = (src1Select[3] & 7) << 0x16;
-  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
-  oldWord0 = (*src1Negate & 1) << 0x19;
+       (src0NegateW & 1) << 0x1c |
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField;
+  src1SelectXBits = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffff0000;
+  src1SelectYBits = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfff80000;
+  src1SelectZBits = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffc00000;
+  src1SelectWBits = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfe000000;
+  src1NegateXBits = (*src1Negate & 1) << 0x19;
   *(uint *)(instr + 8) =
-       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
-  uVar6 = (src1Negate[1] & 1) << 0x1a;
+       src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfc000000;
+  src1NegateYBits = (src1Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 8) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
-  uVar7 = (src1Negate[2] & 1) << 0x1b;
+       src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf8000000;
+  src1NegateZBits = (src1Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 8) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (src1Negate[3] & 1) << 0x1c |
-          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
-  *(uint *)(instr + 0xc) = uVar1;
-  *(uint *)(instr + 8) = uVar1;
+  src1Word = (src1Negate[3] & 1) << 0x1c |
+          src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField;
+  *(uint *)(instr + 0xc) = src1Word;
+  *(uint *)(instr + 8) = src1Word;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }
@@ -2616,107 +2908,124 @@ int arbEmitRecord2Src_op4f(ctx, dstFile, dstIndex, dstMask, src0File, src0Index,
   uint *src1Select;
   uint *src1Negate;
 {
-  uint uVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  uint uVar6;
-  uint uVar7;
-  uint uVar8;
+  int instr;
+  int oldArrayBytes;
+  uint src1NegateXBits;
+  uint src0SelectWBits;
+  uint src0NegateW;
+  uint src1NegateZBits;
+  uint src1NegateYBits;
+  uint src1SelectWBits;
+  uint src0SelectZBits;
+  uint src1SelectZBits;
+  uint src0SelectYBits;
+  uint src1SelectYBits;
+  uint src0SelectXBits;
+  uint src1IndexBits;
+  uint src1Word;
+  uint src1SelectXBits;
+  uint src0IndexBits;
+  uint dstFileBits;
+  uint dstIndexBits;
+  uint dstMaskXBits;
+  uint dstMaskYBits;
+  uint dstMaskZBits;
+  uint src0NegateXBits;
+  uint src0NegateYBits;
+  uint src0NegateZBits;
   int instrOffset;
   uint src0FileField;
   uint src1FileField;
   uint oldWord1;
   uint oldWord0;
   undefined4 newStorage;
-  int instr;
+  int instrCount;
   int instrArray;
   uint oldWord2;
   
-  instr = *(int *)(ctx + ARB_instrCount);
-  if (*(uint *)(ctx + ARB_instrCapacity) < instr + 1U) {
-    instr = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
-    newStorage = _calloc(instr + 0x200,1);
-    if (instr != 0) {
-      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),instr);
+  instrCount = *(int *)(ctx + ARB_instrCount);
+  if (*(uint *)(ctx + ARB_instrCapacity) < instrCount + 1U) {
+    oldArrayBytes = *(uint *)(ctx + ARB_instrCapacity) * 0x10;
+    newStorage = _calloc(oldArrayBytes + 0x200,1);
+    if (oldArrayBytes != 0) {
+      _memcpy(newStorage,*(undefined4 *)(ctx + ARB_instrArray),oldArrayBytes);
       _free(*(undefined4 *)(ctx + ARB_instrArray));
     }
     *(undefined4 *)(ctx + ARB_instrArray) = newStorage;
-    instr = *(int *)(ctx + ARB_instrCount);
+    instrCount = *(int *)(ctx + ARB_instrCount);
     *(int *)(ctx + ARB_instrCapacity) = *(int *)(ctx + ARB_instrCapacity) + 0x20;
   }
   instrArray = *(int *)(ctx + ARB_instrArray);
-  instrOffset = instr * 0x10;
-  *(int *)(ctx + ARB_instrCount) = instr + 1;
+  instrOffset = instrCount * 0x10;
+  *(int *)(ctx + ARB_instrCount) = instrCount + 1;
   instr = instrOffset + instrArray;
   *(int *)(ctx + ARB_currentInstr) = instr;
   *(undefined4 *)(instrOffset + instrArray) = 0;
   *(undefined1 *)(instr + 3) = 0x4f;
   oldWord0 = *(uint *)(instrOffset + instrArray);
-  uVar1 = (dstFile & 0xf) << 8;
-  uVar2 = (dstIndex & 0x7f) << 0xd;
-  *(uint *)(instrOffset + instrArray) = uVar2 | uVar1 | oldWord0 & 0xfff010ff;
-  uVar3 = (*dstMask & 1) << 0x14;
-  *(uint *)(instrOffset + instrArray) = uVar3 | uVar2 | uVar1 | oldWord0 & 0xffe010ff;
-  uVar4 = (dstMask[1] & 1) << 0x15;
-  *(uint *)(instrOffset + instrArray) = uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xffc010ff;
-  uVar5 = (dstMask[2] & 1) << 0x16;
-  *(uint *)(instrOffset + instrArray) = uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff8010ff;
+  dstFileBits = (dstFile & 0xf) << 8;
+  dstIndexBits = (dstIndex & 0x7f) << 0xd;
+  *(uint *)(instrOffset + instrArray) = dstIndexBits | dstFileBits | oldWord0 & 0xfff010ff;
+  dstMaskXBits = (*dstMask & 1) << 0x14;
+  *(uint *)(instrOffset + instrArray) = dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffe010ff;
+  dstMaskYBits = (dstMask[1] & 1) << 0x15;
+  *(uint *)(instrOffset + instrArray) = dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xffc010ff;
+  dstMaskZBits = (dstMask[2] & 1) << 0x16;
+  *(uint *)(instrOffset + instrArray) = dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff8010ff;
   *(uint *)(instrOffset + instrArray) =
-       (dstMask[3] & 1) << 0x17 | uVar5 | uVar4 | uVar3 | uVar2 | uVar1 | oldWord0 & 0xff0010ff;
+       (dstMask[3] & 1) << 0x17 | dstMaskZBits | dstMaskYBits | dstMaskXBits | dstIndexBits | dstFileBits | oldWord0 & 0xff0010ff;
   oldWord1 = *(uint *)(instr + 4);
   oldWord2 = *(uint *)(instr + 8);
   src0FileField = src0File & 0xf;
   src1FileField = src1File & 0xf;
-  uVar1 = (src0Index & 0xff) << 5;
-  uVar2 = (src1Index & 0xff) << 5;
-  *(uint *)(instr + 4) = uVar1 | src0FileField | oldWord1 & 0xffffe000;
-  uVar3 = (*src0Select & 7) << 0xd;
-  *(uint *)(instr + 4) = uVar3 | uVar1 | src0FileField | oldWord1 & 0xffff0000;
-  uVar4 = (src0Select[1] & 7) << 0x10;
-  *(uint *)(instr + 4) = uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfff80000;
-  uVar5 = (src0Select[2] & 7) << 0x13;
-  *(uint *)(instr + 4) = uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xffc00000;
-  oldWord0 = (src0Select[3] & 7) << 0x16;
-  *(uint *)(instr + 4) = oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfe000000;
-  uVar6 = (*src0Negate & 1) << 0x19;
+  src0IndexBits = (src0Index & 0xff) << 5;
+  src1IndexBits = (src1Index & 0xff) << 5;
+  *(uint *)(instr + 4) = src0IndexBits | src0FileField | oldWord1 & 0xffffe000;
+  src0SelectXBits = (*src0Select & 7) << 0xd;
+  *(uint *)(instr + 4) = src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffff0000;
+  src0SelectYBits = (src0Select[1] & 7) << 0x10;
+  *(uint *)(instr + 4) = src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfff80000;
+  src0SelectZBits = (src0Select[2] & 7) << 0x13;
+  *(uint *)(instr + 4) = src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xffc00000;
+  src0SelectWBits = (src0Select[3] & 7) << 0x16;
+  *(uint *)(instr + 4) = src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfe000000;
+  src0NegateXBits = (*src0Negate & 1) << 0x19;
   *(uint *)(instr + 4) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xfc000000;
-  uVar7 = (src0Negate[1] & 1) << 0x1a;
+       src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xfc000000;
+  src0NegateYBits = (src0Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 4) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf8000000;
-  uVar8 = (src0Negate[2] & 1) << 0x1b;
+       src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf8000000;
+  src0NegateZBits = (src0Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 4) =
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField | oldWord1 & 0xf0000000
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField | oldWord1 & 0xf0000000
   ;
-  oldWord1 = src0Negate[3];
-  *(uint *)(instr + 8) = uVar2 | src1FileField | oldWord2 & 0xffffe000;
+  src0NegateW = src0Negate[3];
+  *(uint *)(instr + 8) = src1IndexBits | src1FileField | oldWord2 & 0xffffe000;
   *(uint *)(instr + 4) =
-       (oldWord1 & 1) << 0x1c |
-       uVar8 | uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | src0FileField;
-  uVar1 = (*src1Select & 7) << 0xd;
-  *(uint *)(instr + 8) = uVar1 | uVar2 | src1FileField | oldWord2 & 0xffff0000;
-  uVar3 = (src1Select[1] & 7) << 0x10;
-  *(uint *)(instr + 8) = uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfff80000;
-  uVar4 = (src1Select[2] & 7) << 0x13;
-  *(uint *)(instr + 8) = uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xffc00000;
-  uVar5 = (src1Select[3] & 7) << 0x16;
-  *(uint *)(instr + 8) = uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfe000000;
-  oldWord0 = (*src1Negate & 1) << 0x19;
+       (src0NegateW & 1) << 0x1c |
+       src0NegateZBits | src0NegateYBits | src0NegateXBits | src0SelectWBits | src0SelectZBits | src0SelectYBits | src0SelectXBits | src0IndexBits | src0FileField;
+  src1SelectXBits = (*src1Select & 7) << 0xd;
+  *(uint *)(instr + 8) = src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffff0000;
+  src1SelectYBits = (src1Select[1] & 7) << 0x10;
+  *(uint *)(instr + 8) = src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfff80000;
+  src1SelectZBits = (src1Select[2] & 7) << 0x13;
+  *(uint *)(instr + 8) = src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xffc00000;
+  src1SelectWBits = (src1Select[3] & 7) << 0x16;
+  *(uint *)(instr + 8) = src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfe000000;
+  src1NegateXBits = (*src1Negate & 1) << 0x19;
   *(uint *)(instr + 8) =
-       oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xfc000000;
-  uVar6 = (src1Negate[1] & 1) << 0x1a;
+       src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xfc000000;
+  src1NegateYBits = (src1Negate[1] & 1) << 0x1a;
   *(uint *)(instr + 8) =
-       uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf8000000;
-  uVar7 = (src1Negate[2] & 1) << 0x1b;
+       src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf8000000;
+  src1NegateZBits = (src1Negate[2] & 1) << 0x1b;
   *(uint *)(instr + 8) =
-       uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField | oldWord2 & 0xf0000000
+       src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField | oldWord2 & 0xf0000000
   ;
-  uVar1 = (src1Negate[3] & 1) << 0x1c |
-          uVar7 | uVar6 | oldWord0 | uVar5 | uVar4 | uVar3 | uVar1 | uVar2 | src1FileField;
-  *(uint *)(instr + 0xc) = uVar1;
-  *(uint *)(instr + 8) = uVar1;
+  src1Word = (src1Negate[3] & 1) << 0x1c |
+          src1NegateZBits | src1NegateYBits | src1NegateXBits | src1SelectWBits | src1SelectZBits | src1SelectYBits | src1SelectXBits | src1IndexBits | src1FileField;
+  *(uint *)(instr + 0xc) = src1Word;
+  *(uint *)(instr + 8) = src1Word;
   *(int *)(ctx + ARB_currentInstr) = *(int *)(ctx + ARB_currentInstr) + 0x10;
   return;
 }

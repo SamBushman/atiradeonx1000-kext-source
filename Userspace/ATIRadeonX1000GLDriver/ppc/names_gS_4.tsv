@@ -1,0 +1,295 @@
+local	FUN_0009d410	param_1	ctx	INFERRED	GL context: +4 -> state, +0x44 flags, +0x88 light enable mask, +0x3a8 per-light control words
+local	FUN_0009d410	param_2	passThroughArg2	INFERRED	only forwarded to the program-record constructor FUN_00092bf0
+local	FUN_0009d410	param_3	passThroughArg3	INFERRED	only forwarded to the ctx hook at +0x12c0
+local	FUN_0009d410	param_4	constRegCountOut	INFERRED	receives the number of constant registers allocated (*param_4 = nextConstReg)
+local	FUN_0009d410	param_5	paramList	INFERRED	state-parameter list {kinds, element indices, count} consumed by programFillStateConstants
+local	FUN_0009d410	param_6	unusedArg6	INFERRED	never read
+local	FUN_0009d410	param_7	unusedArg7	INFERRED	never read
+local	FUN_0009d410	param_8	unusedArg8	INFERRED	never read
+use	FUN_0009d410	bVar1	matrixCountByte	INFERRED	byte at state+0x4300: number of tracked matrices; (1<<n)-1 masks the matrix loop	^\s*bVar1\ =\ \(\(unsigned\ char\ \*\)0x00004300\)\[iVar20\];$	+1
+use	FUN_0009d410	bVar1	matrixCountByte	INFERRED	byte at state+0x4300: number of tracked matrices; (1<<n)-1 masks the matrix loop	^\s*if\ \(\(\(1\ <<\ \(bVar1\ \&\ 0x3f\)\)\ \-\ 1U\ \&\ 1\ <<\ \(uVar4\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
+use	FUN_0009d410	bVar1	lightEnableByte	INFERRED	ctx byte +0x1135/+0x11d3: per-unit enable bits	^\s*bVar1\ =\ \(\(unsigned\ char\ \*\)0x00001135\)\[param_1\];$	+1
+use	FUN_0009d410	bVar1	lightEnableByte	INFERRED	ctx byte +0x1135/+0x11d3: per-unit enable bits	^\s*bVar1\ =\ \(\(unsigned\ char\ \*\)0x000011d3\)\[param_1\];$	+1
+use	FUN_0009d410	bVar1	lightEnableByte	INFERRED	ctx byte +0x1135/+0x11d3: per-unit enable bits	^\s*if\ \(\(\(uint\)bVar1\ \&\ 1\ <<\ \(uVar6\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
+local	FUN_0009d410	sVar2	fogMode	INFERRED	state+0x2e04 compared with GL_EXP2 0x801, GL_LINEAR 0x2601, GL_EXP 0x800
+local	FUN_0009d410	bVar3	needsLightModelParam	INFERRED	set when a light's control word is 0xc0000000-class; adds parameter kind 0x1b
+use	FUN_0009d410	uVar4	ctxFlags8c	INFERRED	ctx+0x8c	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x8c\);$	+2
+use	FUN_0009d410	uVar4	ctxFlags8c	INFERRED	ctx+0x8c	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x8c\);$@2	+1
+use	FUN_0009d410	uVar4	ctxFlags8c	INFERRED	ctx+0x8c	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x8c\);$@3	+1
+use	FUN_0009d410	uVar4	ctxFlags8c	INFERRED	ctx+0x8c	^\s*if\ \(\(uVar4\ \&\ 0x800000\)\ !=\ 0\)\ \{$	+1
+use	FUN_0009d410	uVar4	matrixIndex	INFERRED	loop counter over the tracked matrices	^\s*uVar4\ =\ 0;$	+1
+use	FUN_0009d410	uVar4	matrixIndex	INFERRED	loop counter over the tracked matrices	^\s*if\ \(\(\(1\ <<\ \(bVar1\ \&\ 0x3f\)\)\ \-\ 1U\ \&\ 1\ <<\ \(uVar4\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
+use	FUN_0009d410	uVar4	matrixIndex	INFERRED	loop counter over the tracked matrices	^\s*\*\(uint\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ uVar4;$	+1
+use	FUN_0009d410	uVar4	matrixIndex	INFERRED	loop counter over the tracked matrices	^\s*\*\(uint\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ uVar4;$@2	+1
+use	FUN_0009d410	uVar4	matrixIndex	INFERRED	loop counter over the tracked matrices	^\s*\*\(uint\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ uVar4;$@3	+1
+use	FUN_0009d410	uVar4	matrixIndex	INFERRED	loop counter over the tracked matrices	^\s*uVar4\ =\ uVar4\ \+\ 1;$	+1
+use	FUN_0009d410	uVar4	unitMask	INFERRED	0xff or the enable byte at ctx+0x1135/+0x11d3	^\s*uVar4\ =\ 0xff;$	+1
+use	FUN_0009d410	uVar4	unitMask	INFERRED	0xff or the enable byte at ctx+0x1135/+0x11d3	^\s*uVar4\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00001135\)\[param_1\];$	+1
+use	FUN_0009d410	uVar4	unitMask	INFERRED	0xff or the enable byte at ctx+0x1135/+0x11d3	^\s*uVar4\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000011d3\)\[param_1\];$	+1
+use	FUN_0009d410	uVar4	unitMask	INFERRED	0xff or the enable byte at ctx+0x1135/+0x11d3	^\s*if\ \(\(uVar4\ \&\ 1\ <<\ \(uVar9\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
+use	FUN_0009d410	uVar4	ctxFlags44	INFERRED	ctx+0x44	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+2
+use	FUN_0009d410	uVar4	ctxFlags44	INFERRED	ctx+0x44	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@2	+1
+use	FUN_0009d410	uVar4	ctxFlags44	INFERRED	ctx+0x44	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@3	+1
+use	FUN_0009d410	uVar4	ctxFlags44	INFERRED	ctx+0x44	^\s*if\ \(\(\(uVar4\ \&\ 0x1000000\)\ !=\ 0\)\ \&\&\ \(\*\(char\ \*\)\(param_1\ \+\ 0x121\)\ ==\ '\\0'\)\)\ \{$	+1
+use	FUN_0009d410	uVar4	lightMaskShifting	INFERRED	ctx+0x88 light enable mask, shifted right each light	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x88\);$	+2
+use	FUN_0009d410	uVar4	lightMaskShifting	INFERRED	ctx+0x88 light enable mask, shifted right each light	^\s*if\ \(\(\(uVar4\ \&\ 1\)\ !=\ 0\)\ \&\&$	+2
+use	FUN_0009d410	uVar4	lightMaskShifting	INFERRED	ctx+0x88 light enable mask, shifted right each light	^\s*uVar4\ =\ uVar4\ >>\ 1;$	+1
+use	FUN_0009d410	uVar4	lightMaskShifting	INFERRED	ctx+0x88 light enable mask, shifted right each light	^\s*\}\ while\ \(uVar4\ !=\ 0\);$	+1
+use	FUN_0009d410	uVar4	tableCount	INFERRED	ctx byte +0x90: number of entries copied from the byte table at +0x13a9	^\s*uVar4\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x90\);$	+2
+use	FUN_0009d410	uVar4	tableCount	INFERRED	ctx byte +0x90: number of entries copied from the byte table at +0x13a9	^\s*if\ \(uVar4\ ==\ 0\)\ \{$@2	+2
+use	FUN_0009d410	uVar4	tableCount	INFERRED	ctx byte +0x90: number of entries copied from the byte table at +0x13a9	^\s*uVar4\ =\ uVar4\ \-\ 1;$	+1
+use	FUN_0009d410	uVar4	tableCount	INFERRED	ctx byte +0x90: number of entries copied from the byte table at +0x13a9	^\s*\}\ while\ \(uVar4\ !=\ 0\);$@2	+1
+use	FUN_0009d410	uVar4	texUnitLimit	INFERRED	ctx byte +0x2b clipped against the unit count byte +0x13b0	^\s*uVar4\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x2b\);$	+1
+use	FUN_0009d410	uVar4	texUnitLimit	INFERRED	ctx byte +0x2b clipped against the unit count byte +0x13b0	^\s*uVar4\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b0\)\[param_1\];$	+1
+use	FUN_0009d410	uVar4	texUnitLimit	INFERRED	ctx byte +0x2b clipped against the unit count byte +0x13b0	^\s*if\ \(uVar4\ ==\ 0\)\ goto\ LAB_0009e8dc;$	+1
+use	FUN_0009d410	uVar4	texUnitLimit	INFERRED	ctx byte +0x2b clipped against the unit count byte +0x13b0	^\s*\}\ while\ \(uVar4\ !=\ uVar6\);$	+1
+use	FUN_0009d410	uVar4	texUnitCount	INFERRED	ctx byte +0x13b0	^\s*uVar4\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b0\)\[param_1\];$@2	+2
+use	FUN_0009d410	uVar4	texUnitCount	INFERRED	ctx byte +0x13b0	^\s*uVar4\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013b0\)\[param_1\];$@3	+1
+use	FUN_0009d410	uVar4	texUnitCount	INFERRED	ctx byte +0x13b0	^\s*\}\ while\ \(\(int\)uVar6\ <\ \(int\)uVar4\);$	+1
+use	FUN_0009d410	uVar4	lightMaskCopy	INFERRED	copy of ctx+0x88 shifted right each light	^\s*uVar4\ =\ uVar6;$	+1
+use	FUN_0009d410	uVar4	lightMaskCopy	INFERRED	copy of ctx+0x88 shifted right each light	^\s*if\ \(\(\(uVar4\ \&\ 1\)\ !=\ 0\)\ \&\&\ \(\(\*puVar22\ \&\ 0xfc000000\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_0009d410	uVar4	lightMaskCopy	INFERRED	copy of ctx+0x88 shifted right each light	^\s*uVar4\ =\ uVar4\ >>\ 1;$@2	+1
+use	FUN_0009d410	uVar4	lightMaskCopy	INFERRED	copy of ctx+0x88 shifted right each light	^\s*\}\ while\ \(uVar4\ !=\ 0\);$@3	+1
+use	FUN_0009d410	uVar4	lightMaskCopy	INFERRED	copy of ctx+0x88 shifted right each light	^\s*if\ \(\(\(uVar6\ \&\ 1\)\ !=\ 0\)\ \&\&\ \(uVar4\ =\ \*puVar22,\ \(uVar4\ \&\ 0xfc000000\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_0009d410	uVar4	lightMaskCopy	INFERRED	copy of ctx+0x88 shifted right each light	^\s*\(\(int\ \(\*\)\(\)\)FUN_00097440\)\(iVar7,iVar16,\(uint\)\(iVar20\ ==\ 0\),\(uint\)\(iVar16\ ==\ iVar8\),uVar4\ >>\ 0x1e,$	+2
+use	FUN_0009d410	uVar4	lightMaskCopy	INFERRED	copy of ctx+0x88 shifted right each light	^\s*\(\(int\ \(\*\)\(\)\)FUN_00098500\)\(iVar7,iVar16,\(uint\)\(iVar20\ ==\ 0\),\(uint\)\(iVar16\ ==\ iVar8\),uVar4\ >>\ 0x19\ \&\ 1,$	+3
+local	FUN_0009d410	uVar5	texGenFlags	INFERRED	per-unit flags (+0x48): bits 0x20/0x40/0x80/0x100 select the S/T/R/Q planes
+use	FUN_0009d410	uVar6	ctxFlags44B	INFERRED	ctx+0x44	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+1
+use	FUN_0009d410	uVar6	ctxFlags44B	INFERRED	ctx+0x44	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@2	+1
+use	FUN_0009d410	uVar6	ctxFlags44B	INFERRED	ctx+0x44	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@3	+2
+use	FUN_0009d410	uVar6	ctxFlags44B	INFERRED	ctx+0x44	^\s*if\ \(\(uVar6\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+1
+use	FUN_0009d410	uVar6	ctxFlags44B	INFERRED	ctx+0x44	^\s*if\ \(\(\(uVar6\ \&\ 0x400\)\ ==\ 0\)\ \|\|\ \(uVar18\ =\ 1,\ \(\*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x000013c0\)\ \+\ param_1\)\ \&\ 2\)\ ==\ 0\)\)\ \{$	+1
+use	FUN_0009d410	uVar6	ctxByte11d2	INFERRED	ctx byte +0x11d2, forwarded to the program section builders	^\s*uVar6\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000011d2\)\[param_1\];$	+1
+use	FUN_0009d410	uVar6	ctxByte11d2	INFERRED	ctx byte +0x11d2, forwarded to the program section builders	^\s*FUN_00092d40\(iVar7,uVar18,uVar6\);$	+1
+use	FUN_0009d410	uVar6	ctxByte11d2	INFERRED	ctx byte +0x11d2, forwarded to the program section builders	^\s*\(\(int\ \(\*\)\(\)\)FUN_00095dd0\)\(iVar7,uVar18,uVar6\);$	+1
+use	FUN_0009d410	uVar6	ctxByte11d2	INFERRED	ctx byte +0x11d2, forwarded to the program section builders	^\s*\(\(int\ \(\*\)\(\)\)FUN_00093a40\)\(iVar7,local_74,\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x91\),$	+2
+use	FUN_0009d410	uVar6	ctxByte11d2	INFERRED	ctx byte +0x11d2, forwarded to the program section builders	^\s*\(\(int\ \(\*\)\(\)\)FUN_00095610\)\(iVar7,uVar18,uVar6\);$	+1
+use	FUN_0009d410	uVar6	ctxFlags44B	INFERRED	ctx+0x44 reloaded	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@4	+3
+use	FUN_0009d410	uVar6	ctxFlags44B	INFERRED	ctx+0x44 reloaded	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@5	+1
+use	FUN_0009d410	uVar6	ctxFlags44B	INFERRED	ctx+0x44 reloaded	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@6	+1
+use	FUN_0009d410	uVar6	ctxFlags44B	INFERRED	ctx+0x44 reloaded	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@7	+1
+use	FUN_0009d410	uVar6	ctxFlags44B	INFERRED	ctx+0x44 reloaded	^\s*if\ \(\(uVar6\ \&\ 0x20000\)\ ==\ 0\)\ \{$@2	+1
+use	FUN_0009d410	uVar6	ctxFlags44B	INFERRED	ctx+0x44 reloaded	^\s*if\ \(\(uVar6\ \&\ 0x2000\)\ ==\ 0\)\ \{$@2	+1
+use	FUN_0009d410	uVar6	ctxFlags44B	INFERRED	ctx+0x44 reloaded	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@8	+1
+use	FUN_0009d410	uVar6	ctxFlags44B	INFERRED	ctx+0x44 reloaded	^\s*if\ \(\(int\)uVar6\ <\ 0\)\ \{$	+1
+use	FUN_0009d410	uVar6	texUnitIndex	INFERRED	loop counter over texture units	^\s*uVar6\ =\ 0;$	+1
+use	FUN_0009d410	uVar6	texUnitIndex	INFERRED	loop counter over texture units	^\s*\(\(int\ \(\*\)\(\)\)FUN_00096600\)\(iVar7,uVar6,0,uVar6,\(uint\)\*\(byte\ \*\)\(iVar20\ \+\ 0x153\),uVar6,\*puVar24\ >>\ 2\ \&\ 0xfff$	+2
+use	FUN_0009d410	uVar6	texUnitIndex	INFERRED	loop counter over texture units	^\s*uVar6\ =\ uVar6\ \+\ 1;$	+1
+use	FUN_0009d410	uVar6	texUnitIndex	INFERRED	loop counter over texture units	^\s*\}\ while\ \(uVar4\ !=\ uVar6\);$	+1
+use	FUN_0009d410	uVar6	texUnitIndex	INFERRED	loop counter over texture units	^\s*uVar6\ =\ 0;$@2	+1
+use	FUN_0009d410	uVar6	texUnitIndex	INFERRED	loop counter over texture units	^\s*if\ \(\(\(uint\)bVar1\ \&\ 1\ <<\ \(uVar6\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+3
+use	FUN_0009d410	uVar6	texUnitIndex	INFERRED	loop counter over texture units	^\s*uVar6\ =\ uVar6\ \+\ 1;$@2	+1
+use	FUN_0009d410	uVar6	texUnitIndex	INFERRED	loop counter over texture units	^\s*\}\ while\ \(\(int\)uVar6\ <\ \(int\)uVar4\);$	+1
+use	FUN_0009d410	uVar6	lightMaskLoop	INFERRED	ctx+0x88 shifted right each light	^\s*uVar6\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x88\);$	+2
+use	FUN_0009d410	uVar6	lightMaskLoop	INFERRED	ctx+0x88 shifted right each light	^\s*uVar4\ =\ uVar6;$	+1
+use	FUN_0009d410	uVar6	lightMaskLoop	INFERRED	ctx+0x88 shifted right each light	^\s*if\ \(\(\(uVar6\ \&\ 1\)\ !=\ 0\)\ \&\&\ \(uVar4\ =\ \*puVar22,\ \(uVar4\ \&\ 0xfc000000\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_0009d410	uVar6	lightMaskLoop	INFERRED	ctx+0x88 shifted right each light	^\s*uVar6\ =\ uVar6\ >>\ 1;$	+1
+use	FUN_0009d410	uVar6	lightMaskLoop	INFERRED	ctx+0x88 shifted right each light	^\s*\}\ while\ \(uVar6\ !=\ 0\);$	+1
+local	FUN_0009d410	iVar7	programRecord	INFERRED	program record returned by FUN_00092bf0: +0xa4 parameter map, +0x2d8.. fixed state-parameter registers, +0x3d8 flag
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*iVar8\ =\ 0;$	+1
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*iVar8\ =\ 4;$	+1
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0xb4\)\ =\ iVar8;$	+3
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*iVar8\ =\ 0;$@2	+1
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*\*piVar11\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*piVar11\[4\]\ =\ iVar8;$	+3
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0xd4\)\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*piVar11\[0xa9\]\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*piVar11\[0xaa\]\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*piVar11\[0xab\]\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*piVar11\[0xac\]\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*piVar13\[0xd\]\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*iVar16\ =\ iVar8;$	+1
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*iVar16\ =\ iVar8;$@2	+1
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*piVar21\[0x16\]\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*piVar21\[0x18\]\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*piVar21\[0x19\]\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*piVar21\[0x17\]\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*piVar21\[0x1b\]\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*piVar21\[0x1c\]\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*piVar21\[0x1a\]\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*piVar21\[0x1e\]\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*piVar21\[0x1f\]\ =\ iVar8\ \+\ 1;$	+1
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*iVar14\ =\ iVar8\ \+\ 3;$	+1
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*iVar8\ =\ iVar16;$	+1
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*iVar8\ =\ iVar16\ \+\ 1;$	+1
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x32c\)\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x330\)\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x334\)\ =\ iVar8;$	+4
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x344\)\ =\ iVar8;$	+2
+use	FUN_0009d410	iVar8	nextConstReg	INFERRED	next free constant register, advanced as parameters are appended	^\s*\*param_4\ =\ iVar8;$	+1
+use	FUN_0009d410	iVar8	texUnitEnableCursor	INFERRED	ctx pointer advanced one byte per unit through the enable table at +0x1438	^\s*iVar8\ =\ param_1;$	+1
+use	FUN_0009d410	iVar8	texUnitEnableCursor	INFERRED	ctx pointer advanced one byte per unit through the enable table at +0x1438	^\s*local_74\[iVar20\]\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013a9\)\[iVar8\];$	+1
+use	FUN_0009d410	iVar8	texUnitEnableCursor	INFERRED	ctx pointer advanced one byte per unit through the enable table at +0x1438	^\s*iVar8\ =\ iVar8\ \+\ 1;$@14	+1
+use	FUN_0009d410	iVar8	texUnitEnableCursor	INFERRED	ctx pointer advanced one byte per unit through the enable table at +0x1438	^\s*iVar8\ =\ param_1;$@2	+1
+use	FUN_0009d410	iVar8	texUnitEnableCursor	INFERRED	ctx pointer advanced one byte per unit through the enable table at +0x1438	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00001438\)\[iVar8\]\ !=\ '\\0'\)\ \{$	+1
+use	FUN_0009d410	iVar8	texUnitEnableCursor	INFERRED	ctx pointer advanced one byte per unit through the enable table at +0x1438	^\s*iVar8\ =\ iVar8\ \+\ 1;$@15	+1
+use	FUN_0009d410	iVar8	lastActiveLight	INFERRED	index of the last light with a non-zero control word	^\s*iVar8\ =\ 0;$@3	+1
+use	FUN_0009d410	iVar8	lastActiveLight	INFERRED	index of the last light with a non-zero control word	^\s*iVar8\ =\ iVar20;$	+1
+use	FUN_0009d410	iVar8	lastActiveLight	INFERRED	index of the last light with a non-zero control word	^\s*\(\(int\ \(\*\)\(\)\)FUN_00097440\)\(iVar7,iVar16,\(uint\)\(iVar20\ ==\ 0\),\(uint\)\(iVar16\ ==\ iVar8\),uVar4\ >>\ 0x1e,$	+2
+use	FUN_0009d410	iVar8	lastActiveLight	INFERRED	index of the last light with a non-zero control word	^\s*\(\(int\ \(\*\)\(\)\)FUN_00098500\)\(iVar7,iVar16,\(uint\)\(iVar20\ ==\ 0\),\(uint\)\(iVar16\ ==\ iVar8\),uVar4\ >>\ 0x19\ \&\ 1,$	+3
+use	FUN_0009d410	uVar9	texUnitIndexMap	INFERRED	loop counter of the 8-unit parameter loop	^\s*uVar9\ =\ 0;$	+1
+use	FUN_0009d410	uVar9	texUnitIndexMap	INFERRED	loop counter of the 8-unit parameter loop	^\s*if\ \(\(uVar4\ \&\ 1\ <<\ \(uVar9\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
+use	FUN_0009d410	uVar9	texUnitIndexMap	INFERRED	loop counter of the 8-unit parameter loop	^\s*\*\(uint\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ uVar9;$	+1
+use	FUN_0009d410	uVar9	texUnitIndexMap	INFERRED	loop counter of the 8-unit parameter loop	^\s*uVar9\ =\ uVar9\ \+\ 1;$	+1
+use	FUN_0009d410	uVar9	lightControlWord	INFERRED	per-light control word (ctx+0x3a8+i*4), masked as it is decoded	^\s*if\ \(\(\(uVar4\ \&\ 1\)\ !=\ 0\)\ \&\&$	+4
+use	FUN_0009d410	uVar9	lightControlWord	INFERRED	per-light control word (ctx+0x3a8+i*4), masked as it is decoded	^\s*else\ if\ \(uVar9\ ==\ 0xc0000000\)\ \{$	+1
+use	FUN_0009d410	uVar9	lightControlWord	INFERRED	per-light control word (ctx+0x3a8+i*4), masked as it is decoded	^\s*uVar9\ =\ \*puVar22;$	+2
+use	FUN_0009d410	uVar9	lightControlWord	INFERRED	per-light control word (ctx+0x3a8+i*4), masked as it is decoded	^\s*uVar9\ =\ \*puVar22;$@2	+1
+use	FUN_0009d410	uVar9	lightControlWord	INFERRED	per-light control word (ctx+0x3a8+i*4), masked as it is decoded	^\s*uVar9\ =\ \*puVar22;$@3	+1
+use	FUN_0009d410	uVar9	lightControlWord	INFERRED	per-light control word (ctx+0x3a8+i*4), masked as it is decoded	^\s*if\ \(\(uVar9\ \&\ 0xc000000\)\ ==\ 0x8000000\)\ \{$	+1
+use	FUN_0009d410	uVar10	programFlag	INFERRED	0 or 1: argument of the program-record constructor	^\s*uVar10\ =\ 0;$	+1
+use	FUN_0009d410	uVar10	programFlag	INFERRED	0 or 1: argument of the program-record constructor	^\s*uVar10\ =\ 1;$	+1
+use	FUN_0009d410	uVar10	programFlag	INFERRED	0 or 1: argument of the program-record constructor	^\s*iVar7\ =\ FUN_00092bf0\(param_1,param_2,uVar10\);$	+1
+use	FUN_0009d410	uVar10	paramKind	INFERRED	state-parameter kind 10 or 0xc	^\s*uVar10\ =\ 10;$	+1
+use	FUN_0009d410	uVar10	paramKind	INFERRED	state-parameter kind 10 or 0xc	^\s*uVar10\ =\ 0xc;$	+1
+use	FUN_0009d410	uVar10	paramKind	INFERRED	state-parameter kind 10 or 0xc	^\s*\*\(undefined4\ \*\)\(iVar16\ \*\ 4\ \+\ iVar17\)\ =\ uVar10;$	+1
+local	FUN_0009d410	piVar11	mapCursorA	INFERRED	cursor into the parameter map (+1 per matrix, +4 per unit)
+use	FUN_0009d410	fVar12	matrixCursor	INFERRED	address of the tracked matrix (state+0x1960, +0x40 per iteration) held through the GH_U2F helper	^\s*fVar12\ =\ GH_U2F\(\(unsigned\ int\)\(\(iVar20\ \+\ 0x1960\)\)\);$	+1
+use	FUN_0009d410	fVar12	matrixCursor	INFERRED	address of the tracked matrix (state+0x1960, +0x40 per iteration) held through the GH_U2F helper	^\s*if\ \(\(\(\(\(\(local_74\[0\]\ !=\ 0\ \|\|\ local_74\[1\]\ !=\ 0\)\ \|\|\ local_74\[2\]\ !=\ 0\)\ \|\|$@2	+6
+use	FUN_0009d410	fVar12	matrixCursor	INFERRED	address of the tracked matrix (state+0x1960, +0x40 per iteration) held through the GH_U2F helper	^\s*local_78\ =\ fVar12;$	+1
+use	FUN_0009d410	fVar12	matrixCursor	INFERRED	address of the tracked matrix (state+0x1960, +0x40 per iteration) held through the GH_U2F helper	^\s*fVar12\ =\ GH_U2F\(\(unsigned\ int\)\(\(\(int\)GH_F2U\(fVar12\)\ \+\ 0x40\)\)\);$	+1
+use	FUN_0009d410	fVar12	zeroConst	INFERRED	FLOAT_001aa0d4 (0.0)	^\s*fVar12\ =\ FLOAT_001aa0d4;$	+1
+use	FUN_0009d410	fVar12	zeroConst	INFERRED	FLOAT_001aa0d4 (0.0)	^\s*if\ \(\*\(float\ \*\)\(iVar15\ \+\ 0x24fc\)\ !=\ fVar12\)\ \{$	+1
+use	FUN_0009d410	fVar12	zeroConst	INFERRED	FLOAT_001aa0d4 (0.0)	^\s*if\ \(\*\(float\ \*\)\(iVar15\ \+\ 0x251c\)\ !=\ fVar12\)\ \{$	+1
+use	FUN_0009d410	fVar12	zeroConst	INFERRED	FLOAT_001aa0d4 (0.0)	^\s*fVar12\ =\ FLOAT_001aa0d4;$@2	+1
+use	FUN_0009d410	fVar12	zeroConst	INFERRED	FLOAT_001aa0d4 (0.0)	^\s*if\ \(\*\(float\ \*\)\(iVar19\ \+\ 0x24fc\)\ ==\ fVar12\)\ \{$	+1
+local	FUN_0009d410	piVar13	mapCursorB	INFERRED	second cursor into the parameter map (+1 per unit)
+local	FUN_0009d410	iVar14	regAfterLightPair	INFERRED	constant register after the first two light parameters
+use	FUN_0009d410	iVar15	regAfterFour	INFERRED	nextConstReg + 4	^\s*iVar15\ =\ iVar8\ \+\ 4;$	+1
+use	FUN_0009d410	iVar15	regAfterFour	INFERRED	nextConstReg + 4	^\s*piVar11\[8\]\ =\ iVar15;$	+1
+use	FUN_0009d410	iVar15	texUnitStateCursor	INFERRED	ctx+0x450 + 0xcc per unit	^\s*iVar15\ =\ param_1\ \+\ 0x450;$	+1
+use	FUN_0009d410	iVar15	texUnitStateCursor	INFERRED	ctx+0x450 + 0xcc per unit	^\s*if\ \(\(\(uVar5\ \&\ 0x20\)\ !=\ 0\)\ \&\&\ \(\(ushort\)\(\*\(short\ \*\)\(iVar15\ \+\ 0x3c\)\ \+\ 0xdc00U\)\ <\ 2\)\)\ \{$	+1
+use	FUN_0009d410	iVar15	texUnitStateCursor	INFERRED	ctx+0x450 + 0xcc per unit	^\s*if\ \(\(\(uVar5\ \&\ 0x40\)\ !=\ 0\)\ \&\&\ \(\(ushort\)\(\*\(short\ \*\)\(iVar15\ \+\ 0x60\)\ \+\ 0xdc00U\)\ <\ 2\)\)\ \{$	+1
+use	FUN_0009d410	iVar15	texUnitStateCursor	INFERRED	ctx+0x450 + 0xcc per unit	^\s*if\ \(\(\(uVar5\ \&\ 0x80\)\ !=\ 0\)\ \&\&\ \(\(ushort\)\(\*\(short\ \*\)\(iVar15\ \+\ 0x84\)\ \+\ 0xdc00U\)\ <\ 2\)\)\ \{$	+1
+use	FUN_0009d410	iVar15	texUnitStateCursor	INFERRED	ctx+0x450 + 0xcc per unit	^\s*if\ \(\(\(uVar5\ \&\ 0x100\)\ !=\ 0\)\ \&\&\ \(\(ushort\)\(\*\(short\ \*\)\(iVar15\ \+\ 0xa8\)\ \+\ 0xdc00U\)\ <\ 2\)\)\ \{$	+1
+use	FUN_0009d410	iVar15	texUnitStateCursor	INFERRED	ctx+0x450 + 0xcc per unit	^\s*iVar15\ =\ iVar15\ \+\ 0xcc;$	+1
+use	FUN_0009d410	iVar15	lightStateCursor	INFERRED	state block advanced 0x80 per light	^\s*iVar15\ =\ iVar20;$	+1
+use	FUN_0009d410	iVar15	lightStateCursor	INFERRED	state block advanced 0x80 per light	^\s*if\ \(\*\(float\ \*\)\(iVar15\ \+\ 0x24fc\)\ !=\ fVar12\)\ \{$	+1
+use	FUN_0009d410	iVar15	lightStateCursor	INFERRED	state block advanced 0x80 per light	^\s*if\ \(\*\(float\ \*\)\(iVar15\ \+\ 0x251c\)\ !=\ fVar12\)\ \{$	+1
+use	FUN_0009d410	iVar15	lightStateCursor	INFERRED	state block advanced 0x80 per light	^\s*iVar15\ =\ iVar15\ \+\ 0x80;$	+1
+use	FUN_0009d410	iVar16	regPlus4	INFERRED	nextConstReg + 4	^\s*iVar16\ =\ iVar8\ \+\ 4;$	+1
+use	FUN_0009d410	iVar16	regPlus4	INFERRED	nextConstReg + 4	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0xc4\)\ =\ iVar16;$	+1
+use	FUN_0009d410	iVar16	matrixLoopCount	INFERRED	countdown over the 4 tracked matrices	^\s*iVar16\ =\ 4;$	+1
+use	FUN_0009d410	iVar16	matrixLoopCount	INFERRED	countdown over the 4 tracked matrices	^\s*iVar16\ =\ iVar16\ \+\ \-1;$	+2
+use	FUN_0009d410	iVar16	ctxCursor	INFERRED	ctx pointer advanced 4 per unit (per-unit flags at +0x150)	^\s*iVar16\ =\ param_1;$	+1
+use	FUN_0009d410	iVar16	ctxCursor	INFERRED	ctx pointer advanced 4 per unit (per-unit flags at +0x150)	^\s*uVar5\ =\ \*\(uint\ \*\)\(iVar16\ \+\ 0x48\);$	+1
+use	FUN_0009d410	iVar16	ctxCursor	INFERRED	ctx pointer advanced 4 per unit (per-unit flags at +0x150)	^\s*if\ \(\*\(int\ \*\)\(iVar16\ \+\ 0x150\)\ !=\ 0\)\ \{$	+1
+use	FUN_0009d410	iVar16	ctxCursor	INFERRED	ctx pointer advanced 4 per unit (per-unit flags at +0x150)	^\s*iVar16\ =\ iVar16\ \+\ 4;$	+1
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*iVar16\ =\ iVar8;$	+1
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*iVar16\ =\ iVar8;$@2	+1
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*iVar16\ =\ iVar14;$	+1
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*iVar16\ =\ iVar14;$@2	+1
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*iVar16\ =\ iVar14\ \+\ 1;$	+1
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*piVar21\[0x23\]\ =\ iVar16;$	+2
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*iVar8\ =\ iVar16;$	+1
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x2d8\)\ =\ iVar16;$	+2
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x2dc\)\ =\ iVar16;$	+2
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x2e0\)\ =\ iVar16;$	+2
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x2ec\)\ =\ iVar16;$	+2
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x2f8\)\ =\ iVar16;$	+2
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*\*\(int\ \*\)\(iVar7\ \+\ 800\)\ =\ iVar16;$	+2
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x2fc\)\ =\ iVar16;$	+2
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x300\)\ =\ iVar16;$	+2
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x304\)\ =\ iVar16;$	+2
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x310\)\ =\ iVar16;$	+2
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x31c\)\ =\ iVar16;$	+2
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x324\)\ =\ iVar16;$	+2
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x328\)\ =\ iVar16;$	+2
+use	FUN_0009d410	iVar16	regCursor	INFERRED	nextConstReg value carried between light iterations	^\s*iVar8\ =\ iVar16\ \+\ 2;$	+1
+use	FUN_0009d410	iVar16	paramCountSnapshot	INFERRED	paramList count before appending	^\s*iVar16\ =\ param_5\[2\];$	+1
+use	FUN_0009d410	iVar16	paramCountSnapshot	INFERRED	paramList count before appending	^\s*iVar16\ =\ param_5\[2\];$@2	+1
+use	FUN_0009d410	iVar16	paramCountSnapshot	INFERRED	paramList count before appending	^\s*\*\(undefined4\ \*\)\(iVar16\ \*\ 4\ \+\ iVar17\)\ =\ uVar10;$	+1
+use	FUN_0009d410	iVar16	regPlus1	INFERRED	nextConstReg + 1	^\s*iVar16\ =\ iVar8\ \+\ 1;$	+1
+use	FUN_0009d410	iVar16	regPlus1	INFERRED	nextConstReg + 1	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x338\)\ =\ iVar16;$	+1
+use	FUN_0009d410	iVar16	emittedLightIndex	INFERRED	light slot index passed to the light emitters	^\s*iVar16\ =\ 0;$	+1
+use	FUN_0009d410	iVar16	emittedLightIndex	INFERRED	light slot index passed to the light emitters	^\s*\(\(int\ \(\*\)\(\)\)FUN_00097440\)\(iVar7,iVar16,\(uint\)\(iVar20\ ==\ 0\),\(uint\)\(iVar16\ ==\ iVar8\),uVar4\ >>\ 0x1e,$	+2
+use	FUN_0009d410	iVar16	emittedLightIndex	INFERRED	light slot index passed to the light emitters	^\s*\(\(int\ \(\*\)\(\)\)FUN_00098500\)\(iVar7,iVar16,\(uint\)\(iVar20\ ==\ 0\),\(uint\)\(iVar16\ ==\ iVar8\),uVar4\ >>\ 0x19\ \&\ 1,$	+3
+use	FUN_0009d410	iVar16	emittedLightIndex	INFERRED	light slot index passed to the light emitters	^\s*iVar16\ =\ iVar16\ \+\ 1;$@13	+1
+local	FUN_0009d410	iVar17	paramKinds	INFERRED	*paramList: kinds array
+use	FUN_0009d410	iVar19	stateBlock	INFERRED	*(ctx+4)+0x10 state block, advanced 0x80 per light in the final light loop	^\s*iVar19\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+1
+use	FUN_0009d410	iVar19	stateBlock	INFERRED	*(ctx+4)+0x10 state block, advanced 0x80 per light in the final light loop	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00004301\)\[iVar19\]\ ==\ '\\0'\)\ \{$	+2
+use	FUN_0009d410	iVar19	stateBlock	INFERRED	*(ctx+4)+0x10 state block, advanced 0x80 per light in the final light loop	^\s*\(\(int\ \(\*\)\(\)\)FUN_000955e0\)\(iVar7,\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x91\),\(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x00004302\)\[iVar19\]\);$	+1
+use	FUN_0009d410	iVar19	stateBlock	INFERRED	*(ctx+4)+0x10 state block, advanced 0x80 per light in the final light loop	^\s*\(\(int\ \(\*\)\(\)\)FUN_00093a40\)\(iVar7,local_74,\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x91\),$	+2
+use	FUN_0009d410	iVar19	stateBlock	INFERRED	*(ctx+4)+0x10 state block, advanced 0x80 per light in the final light loop	^\s*\(\(int\ \(\*\)\(\)\)FUN_00094840\)\(iVar7,local_74,\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x91\),$	+2
+use	FUN_0009d410	iVar19	stateBlock	INFERRED	*(ctx+4)+0x10 state block, advanced 0x80 per light in the final light loop	^\s*\(\(int\ \(\*\)\(\)\)FUN_00093510\)\(iVar7,local_74,\(uint\)\*\(byte\ \*\)\(param_1\ \+\ 0x91\),$	+2
+use	FUN_0009d410	iVar19	stateBlock	INFERRED	*(ctx+4)+0x10 state block, advanced 0x80 per light in the final light loop	^\s*sVar2\ =\ \*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e04\)\ \+\ iVar19\);$	+1
+use	FUN_0009d410	iVar19	stateBlock	INFERRED	*(ctx+4)+0x10 state block, advanced 0x80 per light in the final light loop	^\s*if\ \(\*\(float\ \*\)\(iVar19\ \+\ 0x24fc\)\ ==\ fVar12\)\ \{$	+1
+use	FUN_0009d410	iVar19	stateBlock	INFERRED	*(ctx+4)+0x10 state block, advanced 0x80 per light in the final light loop	^\s*iVar19\ =\ iVar19\ \+\ 0x80;$	+1
+use	FUN_0009d410	iVar19	programTypeResult	INFERRED	FUN_0009a910(programRecord) result, 6 marks a program that needs the point-sprite/clip flag	^\s*iVar19\ =\ \(\(int\ \(\*\)\(\)\)FUN_0009a910\)\(iVar7\);$	+2
+use	FUN_0009d410	iVar20	stateBlockCopy	INFERRED	*(ctx+4)+0x10 state block	^\s*iVar20\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+1
+use	FUN_0009d410	iVar20	stateBlockCopy	INFERRED	*(ctx+4)+0x10 state block	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00004301\)\[iVar20\]\ ==\ '\\0'\)\ \{$	+2
+use	FUN_0009d410	iVar20	stateBlockCopy	INFERRED	*(ctx+4)+0x10 state block	^\s*bVar1\ =\ \(\(unsigned\ char\ \*\)0x00004300\)\[iVar20\];$	+1
+use	FUN_0009d410	iVar20	stateBlockCopy	INFERRED	*(ctx+4)+0x10 state block	^\s*fVar12\ =\ GH_U2F\(\(unsigned\ int\)\(\(iVar20\ \+\ 0x1960\)\)\);$	+1
+use	FUN_0009d410	iVar20	stateBlockCopy	INFERRED	*(ctx+4)+0x10 state block	^\s*iVar15\ =\ iVar20;$	+1
+use	FUN_0009d410	iVar20	stateBlockCopy	INFERRED	*(ctx+4)+0x10 state block	^\s*if\ \(\(\(\(unsigned\ char\ \*\)0x00002d48\)\[iVar20\ \+\ 4\]\ !=\ '\\0'\)\ \&\&\ \(7\ <\ \*\(uint\ \*\)\(param_1\ \+\ 0x284\)\)\)\ \{$	+1
+use	FUN_0009d410	iVar20	stateBlockCopy	INFERRED	*(ctx+4)+0x10 state block	^\s*if\ \(\(piVar21\[0x18\]\ ==\ \-1\)\ \|\|$	+2
+use	FUN_0009d410	iVar20	stateBlockCopy	INFERRED	*(ctx+4)+0x10 state block	^\s*if\ \(\(\(\(unsigned\ char\ \*\)0x00002d48\)\[iVar20\ \+\ 4\]\ !=\ '\\0'\)\ \&\&\ \(7\ <\ \*\(uint\ \*\)\(param_1\ \+\ 0x28c\)\)\)\ \{$	+1
+use	FUN_0009d410	iVar20	stateBlockCopy	INFERRED	*(ctx+4)+0x10 state block	^\s*if\ \(\(piVar21\[0x1b\]\ ==\ \-1\)\ \|\|$	+2
+use	FUN_0009d410	iVar20	stateBlockCopy	INFERRED	*(ctx+4)+0x10 state block	^\s*if\ \(\(\(unsigned\ char\ \*\)0x00002d48\)\[iVar20\ \+\ 4\]\ !=\ '\\0'\)\ \{$	+1
+use	FUN_0009d410	iVar20	lastParamReg	INFERRED	register of the last fixed parameter (stored at programRecord+0x340)	^\s*iVar20\ =\ iVar8\ \+\ 2;$	+1
+use	FUN_0009d410	iVar20	lastParamReg	INFERRED	register of the last fixed parameter (stored at programRecord+0x340)	^\s*\*\(int\ \*\)\(iVar7\ \+\ 0x340\)\ =\ iVar20;$	+1
+use	FUN_0009d410	iVar20	genIndex	INFERRED	index into the byte table copied from ctx+0x13a9	^\s*iVar20\ =\ 0;$	+1
+use	FUN_0009d410	iVar20	genIndex	INFERRED	index into the byte table copied from ctx+0x13a9	^\s*local_74\[iVar20\]\ =\ \(uint\)\(byte\)\(\(unsigned\ char\ \*\)0x000013a9\)\[iVar8\];$	+1
+use	FUN_0009d410	iVar20	genIndex	INFERRED	index into the byte table copied from ctx+0x13a9	^\s*iVar20\ =\ iVar20\ \+\ 1;$	+1
+use	FUN_0009d410	iVar20	texUnitCtxCursor	INFERRED	ctx pointer advanced 4 per unit (unit records at +0x153)	^\s*iVar20\ =\ param_1;$	+1
+use	FUN_0009d410	iVar20	texUnitCtxCursor	INFERRED	ctx pointer advanced 4 per unit (unit records at +0x153)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00096600\)\(iVar7,uVar6,0,uVar6,\(uint\)\*\(byte\ \*\)\(iVar20\ \+\ 0x153\),uVar6,\*puVar24\ >>\ 2\ \&\ 0xfff$	+2
+use	FUN_0009d410	iVar20	texUnitCtxCursor	INFERRED	ctx pointer advanced 4 per unit (unit records at +0x153)	^\s*iVar20\ =\ iVar20\ \+\ 4;$	+1
+use	FUN_0009d410	iVar20	texUnitCtxCursor	INFERRED	ctx pointer advanced 4 per unit (unit records at +0x153)	^\s*iVar20\ =\ param_1;$@2	+1
+use	FUN_0009d410	iVar20	texUnitCtxCursor	INFERRED	ctx pointer advanced 4 per unit (unit records at +0x153)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00096600\)\(iVar7,uVar6,0,uVar6,\(uint\)\*\(byte\ \*\)\(iVar20\ \+\ 0x153\),uVar6,\*puVar24\ >>\ 2\ \&\ 0xfff$@2	+2
+use	FUN_0009d410	iVar20	texUnitCtxCursor	INFERRED	ctx pointer advanced 4 per unit (unit records at +0x153)	^\s*iVar20\ =\ iVar20\ \+\ 4;$@2	+1
+use	FUN_0009d410	iVar20	activeLightCount	INFERRED	count of lights emitted	^\s*iVar20\ =\ 0;$@2	+1
+use	FUN_0009d410	iVar20	activeLightCount	INFERRED	count of lights emitted	^\s*iVar20\ =\ 0;$@4	+1
+use	FUN_0009d410	iVar20	activeLightCount	INFERRED	count of lights emitted	^\s*\(\(int\ \(\*\)\(\)\)FUN_00097440\)\(iVar7,iVar16,\(uint\)\(iVar20\ ==\ 0\),\(uint\)\(iVar16\ ==\ iVar8\),uVar4\ >>\ 0x1e,$	+2
+use	FUN_0009d410	iVar20	activeLightCount	INFERRED	count of lights emitted	^\s*\(\(int\ \(\*\)\(\)\)FUN_00098500\)\(iVar7,iVar16,\(uint\)\(iVar20\ ==\ 0\),\(uint\)\(iVar16\ ==\ iVar8\),uVar4\ >>\ 0x19\ \&\ 1,$	+3
+use	FUN_0009d410	iVar20	activeLightCount	INFERRED	count of lights emitted	^\s*iVar20\ =\ iVar20\ \+\ 1;$@3	+1
+use	FUN_0009d410	iVar20	activeLightCount	INFERRED	count of lights emitted	^\s*\(\(int\ \(\*\)\(\)\)FUN_0009b430\)\(iVar7,iVar20\);$	+1
+use	FUN_0009d410	iVar20	activeLightCount	INFERRED	count of lights emitted	^\s*iVar20\ =\ 0;$@3	+1
+use	FUN_0009d410	iVar20	activeLightCount	INFERRED	count of lights emitted	^\s*iVar8\ =\ iVar20;$	+1
+use	FUN_0009d410	iVar20	activeLightCount	INFERRED	count of lights emitted	^\s*iVar20\ =\ iVar20\ \+\ 1;$@2	+1
+local	FUN_0009d410	piVar21	paramMapCursor	INFERRED	programRecord+0xa4 parameter map (0x324 bytes of -1), advanced 0xf words per light
+use	FUN_0009d410	puVar22	lightControlPtr	INFERRED	pointer to the light control word (ctx+0x3a8 + 4 per light)	^\s*puVar22\ =\ \(uint\ \*\)\(iVar25\ \*\ 4\ \+\ param_1\ \+\ 0x3a8\);$	+1
+use	FUN_0009d410	puVar22	lightControlPtr	INFERRED	pointer to the light control word (ctx+0x3a8 + 4 per light)	^\s*uVar9\ =\ \*puVar22;$	+1
+use	FUN_0009d410	puVar22	lightControlPtr	INFERRED	pointer to the light control word (ctx+0x3a8 + 4 per light)	^\s*uVar9\ =\ \*puVar22;$@2	+1
+use	FUN_0009d410	puVar22	lightControlPtr	INFERRED	pointer to the light control word (ctx+0x3a8 + 4 per light)	^\s*uVar9\ =\ \*puVar22;$@3	+1
+use	FUN_0009d410	puVar22	lightControlPtr	INFERRED	pointer to the light control word (ctx+0x3a8 + 4 per light)	^\s*if\ \(\(\*puVar22\ \&\ 0x2000000\)\ !=\ 0\)\ \{$	+2
+use	FUN_0009d410	puVar22	lightControlPtr	INFERRED	pointer to the light control word (ctx+0x3a8 + 4 per light)	^\s*puVar22\ =\ \(uint\ \*\)\(param_1\ \+\ 0x3a8\);$	+1
+use	FUN_0009d410	puVar22	lightControlPtr	INFERRED	pointer to the light control word (ctx+0x3a8 + 4 per light)	^\s*if\ \(\(\(uVar4\ \&\ 1\)\ !=\ 0\)\ \&\&\ \(\(\*puVar22\ \&\ 0xfc000000\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_0009d410	puVar22	lightControlPtr	INFERRED	pointer to the light control word (ctx+0x3a8 + 4 per light)	^\s*puVar22\ =\ puVar22\ \+\ 1;$	+1
+use	FUN_0009d410	puVar22	lightControlPtr	INFERRED	pointer to the light control word (ctx+0x3a8 + 4 per light)	^\s*puVar22\ =\ \(uint\ \*\)\(param_1\ \+\ 0x3a8\);$@2	+1
+use	FUN_0009d410	puVar22	lightControlPtr	INFERRED	pointer to the light control word (ctx+0x3a8 + 4 per light)	^\s*if\ \(\(\(uVar6\ \&\ 1\)\ !=\ 0\)\ \&\&\ \(uVar4\ =\ \*puVar22,\ \(uVar4\ \&\ 0xfc000000\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_0009d410	puVar22	lightControlPtr	INFERRED	pointer to the light control word (ctx+0x3a8 + 4 per light)	^\s*puVar22\ =\ puVar22\ \+\ 1;$@2	+1
+use	FUN_0009d410	iVar23	unitKindIndex	INFERRED	index counter advanced 4 per unit (texgen plane index base)	^\s*iVar23\ =\ 0;$	+1
+use	FUN_0009d410	iVar23	unitKindIndex	INFERRED	index counter advanced 4 per unit (texgen plane index base)	^\s*\*\(int\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar23;$	+1
+use	FUN_0009d410	iVar23	unitKindIndex	INFERRED	index counter advanced 4 per unit (texgen plane index base)	^\s*\*\(int\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar23\ \+\ 1;$	+1
+use	FUN_0009d410	iVar23	unitKindIndex	INFERRED	index counter advanced 4 per unit (texgen plane index base)	^\s*\*\(int\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar23\ \+\ 2;$	+1
+use	FUN_0009d410	iVar23	unitKindIndex	INFERRED	index counter advanced 4 per unit (texgen plane index base)	^\s*\*\(int\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar23\ \+\ 3;$	+1
+use	FUN_0009d410	iVar23	unitKindIndex	INFERRED	index counter advanced 4 per unit (texgen plane index base)	^\s*iVar23\ =\ iVar23\ \+\ 4;$	+1
+use	FUN_0009d410	iVar23	ctxUnitCursor	INFERRED	ctx pointer advanced 0x6c per light (per-light flags at +0x150c)	^\s*iVar23\ =\ param_1;$	+1
+use	FUN_0009d410	iVar23	ctxUnitCursor	INFERRED	ctx pointer advanced 0x6c per light (per-light flags at +0x150c)	^\s*if\ \(\(\(unsigned\ char\ \*\)0x0000150c\)\[iVar23\]\ !=\ '\\0'\)\ \{$	+1
+use	FUN_0009d410	iVar23	ctxUnitCursor	INFERRED	ctx pointer advanced 0x6c per light (per-light flags at +0x150c)	^\s*iVar23\ =\ iVar23\ \+\ 0x6c;$	+1
+use	FUN_0009d410	puVar24	texCoordMapPtr	INFERRED	ctx+0x187c: per-unit 16-bit texgen/coordinate words, one per unit	^\s*puVar24\ =\ \(ushort\ \*\)\(param_1\ \+\ 0x187c\);$	+1
+use	FUN_0009d410	puVar24	texCoordMapPtr	INFERRED	ctx+0x187c: per-unit 16-bit texgen/coordinate words, one per unit	^\s*\(\(int\ \(\*\)\(\)\)FUN_00096600\)\(iVar7,uVar6,0,uVar6,\(uint\)\*\(byte\ \*\)\(iVar20\ \+\ 0x153\),uVar6,\*puVar24\ >>\ 2\ \&\ 0xfff$	+2
+use	FUN_0009d410	puVar24	texCoordMapPtr	INFERRED	ctx+0x187c: per-unit 16-bit texgen/coordinate words, one per unit	^\s*puVar24\ =\ puVar24\ \+\ 1;$	+1
+use	FUN_0009d410	puVar24	texCoordMapPtr	INFERRED	ctx+0x187c: per-unit 16-bit texgen/coordinate words, one per unit	^\s*puVar24\ =\ \(ushort\ \*\)\(param_1\ \+\ 0x187c\);$@2	+1
+use	FUN_0009d410	puVar24	texCoordMapPtr	INFERRED	ctx+0x187c: per-unit 16-bit texgen/coordinate words, one per unit	^\s*\(\(int\ \(\*\)\(\)\)FUN_00096600\)\(iVar7,uVar6,0,uVar6,\(uint\)\*\(byte\ \*\)\(iVar20\ \+\ 0x153\),uVar6,\*puVar24\ >>\ 2\ \&\ 0xfff$@2	+2
+use	FUN_0009d410	puVar24	texCoordMapPtr	INFERRED	ctx+0x187c: per-unit 16-bit texgen/coordinate words, one per unit	^\s*puVar24\ =\ puVar24\ \+\ 1;$@2	+1
+use	FUN_0009d410	iVar25	unitCountdown	INFERRED	countdown over the 8 units	^\s*iVar25\ =\ 8;$	+1
+use	FUN_0009d410	iVar25	unitCountdown	INFERRED	countdown over the 8 units	^\s*iVar25\ =\ iVar25\ \+\ \-1;$	+2
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*iVar25\ =\ 0;$	+1
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*puVar22\ =\ \(uint\ \*\)\(iVar25\ \*\ 4\ \+\ param_1\ \+\ 0x3a8\);$	+1
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*if\ \(\(\(uVar4\ \&\ 1\)\ !=\ 0\)\ \&\&$	+2
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*\*\(int\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar25;$	+1
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*\*\(int\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar25\ <<\ 1;$	+1
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*\*\(uint\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar25\ <<\ 1\ \|\ 1;$	+1
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*\*\(int\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar25;$@2	+1
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*\*\(int\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar25\ <<\ 1;$@2	+1
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*\*\(uint\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar25\ <<\ 1\ \|\ 1;$@2	+1
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*\*\(int\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar25;$@3	+1
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*\*\(int\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar25;$@4	+1
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*\*\(int\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar25;$@5	+1
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*\*\(int\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar25;$@6	+1
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*\*\(int\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar25;$@7	+1
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*\*\(int\ \*\)\(param_5\[2\]\ \*\ 4\ \+\ param_5\[1\]\)\ =\ iVar25;$@8	+1
+use	FUN_0009d410	iVar25	lightIndex	INFERRED	light index	^\s*iVar25\ =\ iVar25\ \+\ 1;$	+1
+local	FUN_0009d410	uVar18	ctxFlag400Active	INFERRED	1 when ctx flag 0x400 is set and bit 2 of ctx+0x13c0 is set; forwarded to the section builders
+func	FUN_0009d410	ffvpBuildProgram	INFERRED	builds a fixed-function vertex program: creates the program record (FUN_00092bf0), appends one (kind, element) pair per needed GL state parameter to the parameter list consumed by programFillStateConstants (matrix, light, texgen-plane, fog, clip-plane parameters), then runs the section builders (FUN_00092d40, FUN_00093a40, FUN_00094840, ffvpEmitLight per enabled light, fog by mode GL_EXP/EXP2/LINEAR)

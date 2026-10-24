@@ -814,7 +814,7 @@
 0x90840	FUN_00090840	264	no	indirect call (driver context / vtable / callback)
 0x90960	FUN_00090960	48	yes	
 0x90990	FUN_00090990	772	yes	
-0x90ca0	FUN_00090ca0	1240	yes	
+0x90ca0	ffvpAllocTempRegister	1240	yes	
 0x911a0	FUN_000911a0	316	yes	
 0x912f0	FUN_000912f0	208	yes	
 0x913e0	FUN_000913e0	224	no	no static blocker: a test could reach it (needs arguments / state no test builds)
@@ -881,10 +881,10 @@
 0x9d080	FUN_0009d080	596	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x9d2e0	FUN_0009d2e0	184	yes	
 0x9d3b0	FUN_0009d3b0	64	yes	
-0x9d410	FUN_0009d410	5944	no	indirect call (driver context / vtable / callback)
+0x9d410	ffvpBuildProgram	5944	no	indirect call (driver context / vtable / callback)
 0x9eb90	fpVariantCacheGrow	560	no	indirect call (driver context / vtable / callback)
 0x9edd0	FUN_0009edd0	708	yes	
-0x9f0b0	FUN_0009f0b0	4444	no	indirect call (driver context / vtable / callback)
+0x9f0b0	programFillStateConstants	4444	no	indirect call (driver context / vtable / callback)
 0xa0290	arbProgramFindIndex	96	yes	
 0xa0300	glProgramStringARB_impl	80	yes	
 0xa0350	FUN_000a0350	36	yes	

@@ -5227,7 +5227,7 @@ LAB_00065500:
     FUN_0009d080(param_1,uVar3,in_r5,in_r6,in_r7,in_r8);
     uVar3 = FUN_0009bd00(param_1);
     (**(code **)(((unsigned char *)0x000012b4) + param_1))(param_1);
-    in_r5 = FUN_0009d410(param_1,1,&local_38,local_34,uVar3,in_r8,iVar4,in_r10);
+    in_r5 = ffvpBuildProgram(param_1,1,&local_38,local_34,uVar3,in_r8,iVar4,in_r10);
     in_r6 = (uint)*(byte *)(param_1 + 0x131);
     uVar5 = FUN_0009c800(param_1,param_1 + 0x1874,in_r5,in_r6,local_38,local_34[0],uVar3,
                          (uint)*(byte *)(param_1 + 0x126));
@@ -5454,7 +5454,7 @@ void FUN_000659d0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
     iVar3 = 0;
     if (*(int *)(param_2 + 0x48) != 0) {
       uVar7 = *(undefined4 *)(param_2 + 0x4c);
-      ((void (*)())FUN_0009f0b0)(param_1,param_2,param_3,param_4,param_5,param_6,iVar4,param_8,fparam_1,fparam_2,
+      ((void (*)())programFillStateConstants)(param_1,param_2,param_3,param_4,param_5,param_6,iVar4,param_8,fparam_1,fparam_2,
                    fparam_3,fparam_4,fparam_5,fparam_6,fparam_7,fparam_8,in_stack_ffffffa8,
                    in_stack_ffffffb0,in_stack_ffffffb8,in_stack_ffffffc0,in_stack_ffffffc8);
       _memcpy(puVar8,uVar7,*(int *)(param_2 + 0x48) << 4);
