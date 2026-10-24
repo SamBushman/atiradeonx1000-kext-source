@@ -2,7 +2,7 @@
 
 Tables: `names_gW_1.tsv` (autoweb, callee-parameter names), `names_gW_2.tsv`/`_3`/`_4` (the use-pair exchange patterns), `names_gW_5.tsv` (PackState), `names_gW_6.tsv` (Program__valueNumberInst),
 `names_gW_7.tsv` (millicode + small helpers), `names_gW_8.tsv` (ValueKey params), `names_gW_9.tsv`/`_10.tsv` (inline arena-vector temporaries), `names_gW_11.tsv` (IRInst field loads), `names_gW_12.tsv` (use predicates).
-Tools: `Tools/userspace/lpnames/autoweb.py` (modes: callee parameter names, `--vec`, `--instfield`), `ptrloop.py`, `ren2.py`.
+Tools: `Tools/userspace/lpnames/autoweb_callee.py` (modes: callee parameter names, `--vec`, `--instfield`), `ptrloop.py`, `ren2.py`.
 
 ## Layouts recovered (all INFERRED from several functions; offsets from the code)
 
@@ -25,7 +25,7 @@ Tools: `Tools/userspace/lpnames/autoweb.py` (modes: callee parameter names, `--v
 ## Still open in this range
 
 * The other peephole giants (FUN_00152ea8, FUN_0015f44c, FUN_001541f0, FUN_00156d48, FUN_001621c8, FUN_00161748, FUN_00159b58, FUN_00184ef0, Inst__takeOutCommonFactor, R300MachineAssembler__assembleAluInstruction, FUN_00181f00's
-  non-vector webs, FUN_00160eb0, FUN_00174e0c): names need a function-by-function read; the cheap rules (callee parameter names, inline vector idiom, IRInst field loads) are exhausted by `autoweb.py`.
-* `FUN_00186a88` keeps pointer-valued `loopIndex*` names: renaming them to `loopPtr*` breaks 23 anchors of `names_I1_p049.tsv`/`names_gW_1.tsv` rows (anchors encode intermediate names) and was reverted for that function only.
-* `FUN_00161748` and `FUN_00189c24`: the autoweb rows were rejected by the gate (UNINIT / DATAFLOW) and removed; they keep their placeholders.
+  non-vector webs, FUN_00160eb0, FUN_00174e0c): names need a function-by-function read; the cheap rules (callee parameter names, inline vector idiom, IRInst field loads) are exhausted by `autoweb_callee.py`.
+* `FUN_00186a88` kept pointer-valued `loopIndex*` names: renaming them to `loopPtr*` breaks 23 anchors of `names_I1_p049.tsv`/`names_gW_1.tsv` rows (anchors encode intermediate names) and was reverted for that function only.
+* `FUN_00161748` and `FUN_00189c24`: the autoweb_callee rows were rejected by the gate (UNINIT / DATAFLOW) and removed; they keep their placeholders.
 * `FUN_000f2da8` (select-word compatibility test, 3 call sites here) is outside this range (part_025).

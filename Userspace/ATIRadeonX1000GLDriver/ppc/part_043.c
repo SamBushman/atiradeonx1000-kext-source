@@ -4582,6 +4582,8 @@ int Inst__swapSharedTermBetweenUses(useA, useB, pass, allowRewrite, allowOperand
   int allowRewrite;
   int allowOperandSwap;
 {
+  int lane3Flag;
+  uint lane0Flag;
   int termIndexB;
   int termIndexA;
   int operandSlotAddrB;
@@ -4607,19 +4609,19 @@ int Inst__swapSharedTermBetweenUses(useA, useB, pass, allowRewrite, allowOperand
   int operandRecord;
   int sourceDef3;
   bool consumerIsMul;
-  int iVar2;
+  int lane2Flag;
   undefined4 operandVReg2;
   undefined4 uVar4;
   int selectsCompatibleA;
   int *operandVReg;
-  uint uVar7;
-  uint uVar8;
+  uint firstSourceSelect;
+  uint secondSourceSelect;
   uint termB;
   undefined4 compilerCtx;
   int nextTermSlotA;
   int nextTermSlotACopy;
   uint *puVar13;
-  int iVar14;
+  int lane1Flag;
   int termByteOffsetB;
   int iVar16;
   int nextTermIndexA;
@@ -4825,26 +4827,26 @@ LAB_0014edd0:
             }
             operandVReg2 = IRInst__getOperandSource(*useB,useB[1]);
             operandRecord = IRInst__getOperandRecord(operandVReg2,1);
-            uVar7 = *(uint *)(operandRecord + 0x10);
+            firstSourceSelect = *(uint *)(operandRecord + 0x10);
             operandVReg2 = IRInst__getOperandSource(*useB,useB[1]);
             iVar16 = IRInst__getOperandRecord(operandVReg2,2);
-            uVar8 = *(uint *)(iVar16 + 0x10);
+            secondSourceSelect = *(uint *)(iVar16 + 0x10);
             operandVReg2 = IRInst__getOperandSource(*useB,useB[1]);
             IRInst__getOperandRecord(operandVReg2,0);
-            if ((uVar7 >> 0x18 != 4) || (iVar16 = 1, uVar8 >> 0x18 != 4)) {
-              iVar16 = 0;
+            if ((firstSourceSelect >> 0x18 != 4) || (lane3Flag = 1, secondSourceSelect >> 0x18 != 4)) {
+              lane3Flag = 0;
             }
-            if (((uVar7 >> 0x10 & 0xff) != 4) || (iVar2 = 1, (uVar8 >> 0x10 & 0xff) != 4)) {
-              iVar2 = 0;
+            if (((firstSourceSelect >> 0x10 & 0xff) != 4) || (lane2Flag = 1, (secondSourceSelect >> 0x10 & 0xff) != 4)) {
+              lane2Flag = 0;
             }
-            if (((uVar7 >> 8 & 0xff) != 4) || (iVar14 = 1, (uVar8 >> 8 & 0xff) != 4)) {
-              iVar14 = 0;
+            if (((firstSourceSelect >> 8 & 0xff) != 4) || (lane1Flag = 1, (secondSourceSelect >> 8 & 0xff) != 4)) {
+              lane1Flag = 0;
             }
-            if (((uVar7 & 0xff) != 4) || (uVar7 = 1, (uVar8 & 0xff) != 4)) {
-              uVar7 = 0;
+            if (((firstSourceSelect & 0xff) != 4) || (lane0Flag = 1, (secondSourceSelect & 0xff) != 4)) {
+              lane0Flag = 0;
             }
             sourceDef3 = IRInst__getOperandSource(*useB,useB[1]);
-            *(uint *)(sourceDef3 + 0x9c) = uVar7 | iVar14 << 8 | iVar2 << 0x10 | iVar16 << 0x18;
+            *(uint *)(sourceDef3 + 0x9c) = lane0Flag | lane1Flag << 8 | lane2Flag << 0x10 | lane3Flag << 0x18;
             operandVReg2 = IRInst__getOperandSource(*useA,useA[1]);
             ((int (*)())FUN_001474c8)(pass,operandVReg2,pass);
             if (allowOperandSwap != 0) {
@@ -4885,6 +4887,7 @@ int Inst__swapMatchedOperandsBetweenUses(useA, useB, pass, allowRewrite, allowOp
   int allowRewrite;
   int allowOperandSwap;
 {
+  uint lane0Flag;
   uint *termPtrA;
   uint *termB;
   int lane3Flag;
@@ -4941,7 +4944,7 @@ int Inst__swapMatchedOperandsBetweenUses(useA, useB, pass, allowRewrite, allowOp
   int matchCandidateByteOffsetA;
   int *updatedSourceInst;
   uint useOperandIndexA;
-  uint uVar10;
+  uint firstSourceSelect;
   int compilerCtx;
   uint *termA;
   int nextTermSlotB;
@@ -5357,48 +5360,48 @@ LAB_0014fad0:
   }
   sourceDef = IRInst__getOperandSource(*useA,useA[1]);
   operandRecord = IRInst__getOperandRecord(sourceDef,1);
-  uVar10 = *(uint *)(operandRecord + 0x10);
+  firstSourceSelect = *(uint *)(operandRecord + 0x10);
   sourceDef = IRInst__getOperandSource(*useA,useA[1]);
   iVar19 = IRInst__getOperandRecord(sourceDef,2);
   secondSourceSelect = *(uint *)(iVar19 + 0x10);
   sourceDef = IRInst__getOperandSource(*useA,useA[1]);
   IRInst__getOperandRecord(sourceDef,0);
-  if ((uVar10 >> 0x18 != 4) || (lane3Flag = 1, secondSourceSelect >> 0x18 != 4)) {
+  if ((firstSourceSelect >> 0x18 != 4) || (lane3Flag = 1, secondSourceSelect >> 0x18 != 4)) {
     lane3Flag = 0;
   }
-  if (((uVar10 >> 0x10 & 0xff) != 4) || (lane2Flag = 1, (secondSourceSelect >> 0x10 & 0xff) != 4)) {
+  if (((firstSourceSelect >> 0x10 & 0xff) != 4) || (lane2Flag = 1, (secondSourceSelect >> 0x10 & 0xff) != 4)) {
     lane2Flag = 0;
   }
-  if (((uVar10 >> 8 & 0xff) != 4) || (lane1Flag = 1, (secondSourceSelect >> 8 & 0xff) != 4)) {
+  if (((firstSourceSelect >> 8 & 0xff) != 4) || (lane1Flag = 1, (secondSourceSelect >> 8 & 0xff) != 4)) {
     lane1Flag = 0;
   }
-  if (((uVar10 & 0xff) != 4) || (uVar10 = 1, (secondSourceSelect & 0xff) != 4)) {
-    uVar10 = 0;
+  if (((firstSourceSelect & 0xff) != 4) || (lane0Flag = 1, (secondSourceSelect & 0xff) != 4)) {
+    lane0Flag = 0;
   }
   sourceDef3 = IRInst__getOperandSource(*useA,useA[1]);
-  *(uint *)(sourceDef3 + 0x9c) = uVar10 | lane1Flag << 8 | lane2Flag << 0x10 | lane3Flag << 0x18;
+  *(uint *)(sourceDef3 + 0x9c) = lane0Flag | lane1Flag << 8 | lane2Flag << 0x10 | lane3Flag << 0x18;
   sourceDef = IRInst__getOperandSource(*useB,useB[1]);
   operandRecord = IRInst__getOperandRecord(sourceDef,1);
-  uVar10 = *(uint *)(operandRecord + 0x10);
+  firstSourceSelect = *(uint *)(operandRecord + 0x10);
   sourceDef = IRInst__getOperandSource(*useB,useB[1]);
   iVar19 = IRInst__getOperandRecord(sourceDef,2);
   secondSourceSelect = *(uint *)(iVar19 + 0x10);
   sourceDef = IRInst__getOperandSource(*useB,useB[1]);
   IRInst__getOperandRecord(sourceDef,0);
-  if ((uVar10 >> 0x18 != 4) || (lane3Flag = 1, secondSourceSelect >> 0x18 != 4)) {
+  if ((firstSourceSelect >> 0x18 != 4) || (lane3Flag = 1, secondSourceSelect >> 0x18 != 4)) {
     lane3Flag = 0;
   }
-  if (((uVar10 >> 0x10 & 0xff) != 4) || (lane2Flag = 1, (secondSourceSelect >> 0x10 & 0xff) != 4)) {
+  if (((firstSourceSelect >> 0x10 & 0xff) != 4) || (lane2Flag = 1, (secondSourceSelect >> 0x10 & 0xff) != 4)) {
     lane2Flag = 0;
   }
-  if (((uVar10 >> 8 & 0xff) != 4) || (lane1Flag = 1, (secondSourceSelect >> 8 & 0xff) != 4)) {
+  if (((firstSourceSelect >> 8 & 0xff) != 4) || (lane1Flag = 1, (secondSourceSelect >> 8 & 0xff) != 4)) {
     lane1Flag = 0;
   }
-  if (((uVar10 & 0xff) != 4) || (uVar10 = 1, (secondSourceSelect & 0xff) != 4)) {
-    uVar10 = 0;
+  if (((firstSourceSelect & 0xff) != 4) || (lane0Flag = 1, (secondSourceSelect & 0xff) != 4)) {
+    lane0Flag = 0;
   }
   sourceDef3 = IRInst__getOperandSource(*useB,useB[1]);
-  *(uint *)(sourceDef3 + 0x9c) = uVar10 | lane1Flag << 8 | lane2Flag << 0x10 | lane3Flag << 0x18;
+  *(uint *)(sourceDef3 + 0x9c) = lane0Flag | lane1Flag << 8 | lane2Flag << 0x10 | lane3Flag << 0x18;
   sourceDef = IRInst__getOperandSource(*useB,useB[1]);
   ((int (*)())FUN_001474c8)(programHome,sourceDef,programHome);
   sourceDef = IRInst__getOperandSource(*useA,useA[1]);

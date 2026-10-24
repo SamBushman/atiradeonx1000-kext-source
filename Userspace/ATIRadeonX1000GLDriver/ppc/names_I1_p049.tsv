@@ -18,16 +18,16 @@ use	FUN_00186a88	piVar11	destSelectCursor	INFERRED	walks the four destination se
 use	FUN_00186a88	piVar11	destSelectCursor	INFERRED	walks the four destination select bytes at inst + 0x9c	^\s*if\ \(\(uint\)\(\*\(byte\ \*\)\(piVar11\ \+\ 0x27\)\ \-\ 2\)\ <\ 2\)\ goto\ LAB_001874d4;$	+2	all	none
 use	FUN_00186a88	loopIndex	isPresub	CONFIRMED	IRInst vslot 23 (isPresub) of the producer	^\s*(?:iVar4|loopIndex)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:param_3|inst2)\ \+\ 0x5c\)\)\((?:param_3|inst2)\);$	+2	all	none
 use	FUN_00186a88	loopIndex	sourceNumber	INFERRED	source operand number 1..inst2[0x21]	^\s*(?:iVar4|loopIndex)\ =\ 1;$	+1	all	none
-use	FUN_00186a88	loopIndex	sourceNumber	INFERRED	source operand number 1..inst2[0x21]	^\s*(?:piVar6|loopIndex4)\ =\ \(int\ \*\)FUN_00105594\((?:param_3|inst2),(?:iVar4|loopIndex)\);$	+1	all	none
+use	FUN_00186a88	loopIndex	sourceNumber	INFERRED	source operand number 1..inst2[0x21]	^\s*(?:piVar6|loopPtr4)\ =\ \(int\ \*\)FUN_00105594\((?:param_3|inst2),(?:iVar4|loopIndex)\);$	+1	all	none
 use	FUN_00186a88	loopIndex	sourceNumber	INFERRED	source operand number 1..inst2[0x21]	^\s*(?:iVar4|loopIndex)\ =\ (?:iVar4|loopIndex)\ \+\ 1;$	+2	all	none
-use	FUN_00186a88	loopIndex4	producerSource	INFERRED	IRInst__getOperandSource(inst2, sourceNumber)	^\s*(?:piVar6|loopIndex4)\ =\ \(int\ \*\)FUN_00105594\((?:param_3|inst2),(?:iVar4|loopIndex)\);$	+2	all	none
+use	FUN_00186a88	loopPtr4	producerSource	INFERRED	IRInst__getOperandSource(inst2, sourceNumber)	^\s*(?:piVar6|loopPtr4)\ =\ \(int\ \*\)FUN_00105594\((?:param_3|inst2),(?:iVar4|loopIndex)\);$	+2	all	none
 use	FUN_00186a88	loopIndex	opcodeInfo	INFERRED	inst2[0x22]: opcode info, +8 is the opcode (0x12 add, 0x31 mov, 0x14 mul-add)	^\s*(?:iVar4|loopIndex)\ =\ (?:param_3|inst2)\[0x22\];$	+1	all	none
 use	FUN_00186a88	loopIndex	opcodeInfo	INFERRED	inst2[0x22]: opcode info, +8 is the opcode (0x12 add, 0x31 mov, 0x14 mul-add)	^\s*if\ \(\*\(int\ \*\)\((?:iVar4|loopIndex)\ \+\ 8\)\ ==\ 0x12\)\ \{$	+1	all	none
 use	FUN_00186a88	loopIndex	opcodeInfo	INFERRED	inst2[0x22]: opcode info, +8 is the opcode (0x12 add, 0x31 mov, 0x14 mul-add)	^\s*if\ \(\*\(int\ \*\)\((?:iVar4|loopIndex)\ \+\ 8\)\ ==\ 0x31\)\ \{$	+1	all	none
 use	FUN_00186a88	loopIndex	opcodeInfo	INFERRED	inst2[0x22]: opcode info, +8 is the opcode (0x12 add, 0x31 mov, 0x14 mul-add)	^\s*(?:iVar4|loopIndex)\ =\ (?:param_3|inst2)\[0x22\];$@2	+1	all	none
 use	FUN_00186a88	loopIndex	opcodeInfo	INFERRED	inst2[0x22]: opcode info, +8 is the opcode (0x12 add, 0x31 mov, 0x14 mul-add)	^\s*if\ \(\*\(int\ \*\)\((?:iVar4|loopIndex)\ \+\ 8\)\ !=\ 0x14\)\ \{$	+1	all	none
 use	FUN_00186a88	uVar13	destSelect	INFERRED	destination select word of the producer (record + 0x10)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\((?:iVar5|loopIndex2)\ \+\ 0x10\);$	+1	all	none
-use	FUN_00186a88	uVar13	destSelect	INFERRED	destination select word of the producer (record + 0x10)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_000f5cf0\((?:param_3|inst2),2,uVar13,(?:piVar6|loopIndex4)\);$	+1	all	none
+use	FUN_00186a88	uVar13	destSelect	INFERRED	destination select word of the producer (record + 0x10)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_000f5cf0\((?:param_3|inst2),2,uVar13,(?:piVar6|loopPtr4)\);$	+1	all	none
 use	FUN_00186a88	uVar13	destSelect	INFERRED	destination select word of the producer (record + 0x10)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_000f5c0c\((?:param_3|inst2),2,uVar13,local_a4\ \+\ 6\);$	+1	all	none
 use	FUN_00186a88	uVar13	destSelect	INFERRED	destination select word of the producer (record + 0x10)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_000f5c0c\((?:param_3|inst2),3,uVar13,local_a4\ \+\ 2\);$	+1	all	none
 use	FUN_00186a88	loopIndex	operandRecord	INFERRED	IRInst__getOperandRecord(inst2, 1)	^\s*(?:iVar4|loopIndex)\ =\ FUN_001054ec\((?:param_3|inst2),1\);$	+1	all	none
@@ -44,20 +44,20 @@ use	FUN_00186a88	loopRemaining	firstSourceIsPresub	CONFIRMED	IRInst vslot 23 (is
 use	FUN_00186a88	uVar14	valueNumberTable	INFERRED	program + 0x3ac	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 0x3ac\);$	+2	all	none
 use	FUN_00186a88	uVar14	valueNumberTable	INFERRED	program + 0x3ac	^\s*local_a8\ =\ \(int\ \*\)FUN_000f57f0\(uVar14,local_7c,local_a4,(?:iVar7|loopRemaining)\);$	+1	all	none
 use	FUN_00186a88	uVar13	programValueTable	INFERRED	program + 0x3ac	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 0x3ac\);$	+2	all	none
-use	FUN_00186a88	uVar13	programValueTable	INFERRED	program + 0x3ac	^\s*local_a4\[1\]\ =\ \(int\ \*\)FUN_000f57f0\(uVar13,local_7c,local_a4,(?:piVar6|loopIndex4)\);$	+1	all	none
-use	FUN_00186a88	loopIndex4	laneCursor	INFERRED	walks constLanes while the lane values are collected	^\s*(?:piVar6|loopIndex4)\ =\ local_7c;$	+1	all	none
-use	FUN_00186a88	loopIndex4	laneCursor	INFERRED	walks constLanes while the lane values are collected	^\s*\*(?:piVar6|loopIndex4)\ =\ local_a8\[uVar2\ \*\ 6\ \+\ 8\];$	+1	all	none
-use	FUN_00186a88	loopIndex4	laneCursor	INFERRED	walks constLanes while the lane values are collected	^\s*(?:piVar6|loopIndex4)\ =\ (?:piVar6|loopIndex4)\ \+\ 1;$	+1	all	none
-use	FUN_00186a88	loopIndex4	laneCursor	INFERRED	walks constLanes while the lane values are collected	^\s*local_a8\ =\ \(int\ \*\)FUN_000f5f94\(uVar14,local_7c,local_a4,(?:iVar7|loopRemaining),uVar10,uVar9,(?:piVar6|loopIndex4)\);$	+1	all	none
-use	FUN_00186a88	loopIndex4	selectWord	INFERRED	select word saved before the value-number lookup	^\s*(?:piVar6|loopIndex4)\ =\ local_a4\[0\];$	+1	all	none
-use	FUN_00186a88	loopIndex4	selectWord	INFERRED	select word saved before the value-number lookup	^\s*\*\(int\ \*\*\)\((?:iVar7|loopRemaining)\ \+\ 0x10\)\ =\ (?:piVar6|loopIndex4);$	+1	all	none
-use	FUN_00186a88	loopIndex4	selectWord	INFERRED	select word saved before the value-number lookup	^\s*(?:piVar6|loopIndex4)\ =\ local_a4\[0\];$@2	+1	all	none
-use	FUN_00186a88	loopIndex4	selectWord	INFERRED	select word saved before the value-number lookup	^\s*\*\(int\ \*\*\)\((?:iVar7|loopRemaining)\ \+\ 0x10\)\ =\ (?:piVar6|loopIndex4);$@2	+1	all	none
-use	FUN_00186a88	loopRemaining	uniformConstantFound	CONFIRMED	IRInst__getUniformSourceConstant result	^\s*(?:iVar7|loopRemaining)\ =\ FUN_000f5cf0\((?:param_3|inst2),2,uVar13,(?:piVar6|loopIndex4)\);$	+2	all	none
+use	FUN_00186a88	uVar13	programValueTable	INFERRED	program + 0x3ac	^\s*local_a4\[1\]\ =\ \(int\ \*\)FUN_000f57f0\(uVar13,local_7c,local_a4,(?:piVar6|loopPtr4)\);$	+1	all	none
+use	FUN_00186a88	loopPtr4	laneCursor	INFERRED	walks constLanes while the lane values are collected	^\s*(?:piVar6|loopPtr4)\ =\ local_7c;$	+1	all	none
+use	FUN_00186a88	loopPtr4	laneCursor	INFERRED	walks constLanes while the lane values are collected	^\s*\*(?:piVar6|loopPtr4)\ =\ local_a8\[uVar2\ \*\ 6\ \+\ 8\];$	+1	all	none
+use	FUN_00186a88	loopPtr4	laneCursor	INFERRED	walks constLanes while the lane values are collected	^\s*(?:piVar6|loopPtr4)\ =\ (?:piVar6|loopPtr4)\ \+\ 1;$	+1	all	none
+use	FUN_00186a88	loopPtr4	laneCursor	INFERRED	walks constLanes while the lane values are collected	^\s*local_a8\ =\ \(int\ \*\)FUN_000f5f94\(uVar14,local_7c,local_a4,(?:iVar7|loopRemaining),uVar10,uVar9,(?:piVar6|loopPtr4)\);$	+1	all	none
+use	FUN_00186a88	loopPtr4	selectWord	INFERRED	select word saved before the value-number lookup	^\s*(?:piVar6|loopPtr4)\ =\ local_a4\[0\];$	+1	all	none
+use	FUN_00186a88	loopPtr4	selectWord	INFERRED	select word saved before the value-number lookup	^\s*\*\(int\ \*\*\)\((?:iVar7|loopRemaining)\ \+\ 0x10\)\ =\ (?:piVar6|loopPtr4);$	+1	all	none
+use	FUN_00186a88	loopPtr4	selectWord	INFERRED	select word saved before the value-number lookup	^\s*(?:piVar6|loopPtr4)\ =\ local_a4\[0\];$@2	+1	all	none
+use	FUN_00186a88	loopPtr4	selectWord	INFERRED	select word saved before the value-number lookup	^\s*\*\(int\ \*\*\)\((?:iVar7|loopRemaining)\ \+\ 0x10\)\ =\ (?:piVar6|loopPtr4);$@2	+1	all	none
+use	FUN_00186a88	loopRemaining	uniformConstantFound	CONFIRMED	IRInst__getUniformSourceConstant result	^\s*(?:iVar7|loopRemaining)\ =\ FUN_000f5cf0\((?:param_3|inst2),2,uVar13,(?:piVar6|loopPtr4)\);$	+2	all	none
 use	FUN_00186a88	loopRemaining	uniformConstantFound	CONFIRMED	IRInst__getUniformSourceConstant result	^\s*if\ \(\(\(\(local_68\ ==\ 0\.5\)\ \|\|\ \(local_68\ ==\ \-0\.5\)\)\ \&\&$	+3	all	none
-use	FUN_00186a88	loopIndex4	constantKindPtr	INFERRED	&constantKind	^\s*(?:piVar6|loopIndex4)\ =\ \&local_6c;$	+2	all	none
-use	FUN_00186a88	loopIndex4	constantKindPtr	INFERRED	&constantKind	^\s*local_a4\[1\]\ =\ \(int\ \*\)FUN_000f5f94\(uVar13,local_7c,local_a4,(?:piVar6|loopIndex4),uVar10,uVar9,(?:piVar12|loopIndex3)\);$	+1	all	none
-use	FUN_00186a88	loopIndex4	constantKindPtr	INFERRED	&constantKind	^\s*local_a4\[1\]\ =\ \(int\ \*\)FUN_000f57f0\(uVar13,local_7c,local_a4,(?:piVar6|loopIndex4)\);$	+1	all	none
+use	FUN_00186a88	loopPtr4	constantKindPtr	INFERRED	&constantKind	^\s*(?:piVar6|loopPtr4)\ =\ \&local_6c;$	+2	all	none
+use	FUN_00186a88	loopPtr4	constantKindPtr	INFERRED	&constantKind	^\s*local_a4\[1\]\ =\ \(int\ \*\)FUN_000f5f94\(uVar13,local_7c,local_a4,(?:piVar6|loopPtr4),uVar10,uVar9,(?:piVar12|loopPtr3)\);$	+1	all	none
+use	FUN_00186a88	loopPtr4	constantKindPtr	INFERRED	&constantKind	^\s*local_a4\[1\]\ =\ \(int\ \*\)FUN_000f57f0\(uVar13,local_7c,local_a4,(?:piVar6|loopPtr4)\);$	+1	all	none
 use	FUN_00186a88	loopRemaining	destRecord	INFERRED	IRInst__getOperandRecord(inst3, 0)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_001054ec\((?:pvVar8|inst3),0\);$	+3	all	none
 use	FUN_00186a88	loopRemaining	destRecord	INFERRED	IRInst__getOperandRecord(inst3, 0)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_001054ec\((?:pvVar8|inst3),0\);$@2	+3	all	none
 use	FUN_00186a88	loopRemaining	destRecord	INFERRED	IRInst__getOperandRecord(inst3, 0)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_001054ec\((?:pvVar8|inst3),0\);$@3	+3	all	none
@@ -75,7 +75,7 @@ use	FUN_00186a88	uVar10	newRegId	INFERRED	inst3 + 0x14c	^\s*uVar10\ =\ \*\(undef
 use	FUN_00186a88	uVar10	newRegId	INFERRED	inst3 + 0x14c	^\s*\*\(undefined4\ \*\)\((?:iVar7|loopRemaining)\ \+\ 8\)\ =\ uVar10;$@5	+1	all	none
 use	FUN_00186a88	uVar10	compiler	INFERRED	program + 8	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 8\);$@2	+1	all	none
 use	FUN_00186a88	uVar10	compiler	INFERRED	program + 8	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 8\);$@3	+1	all	none
-use	FUN_00186a88	uVar10	compiler	INFERRED	program + 8	^\s*FUN_00106004\((?:pvVar8|inst3),1,(?:piVar6|loopIndex4),0,uVar10\);$	+1	all	none
+use	FUN_00186a88	uVar10	compiler	INFERRED	program + 8	^\s*FUN_00106004\((?:pvVar8|inst3),1,(?:piVar6|loopPtr4),0,uVar10\);$	+1	all	none
 use	FUN_00186a88	uVar10	presubOpcode	INFERRED	0x9b (IrPresubAdd) when the two negate bits agree, else 0x9a (IrPresubSub)	^\s*uVar10\ =\ 0x9b;$	+1	all	none
 use	FUN_00186a88	uVar10	presubOpcode	INFERRED	0x9b (IrPresubAdd) when the two negate bits agree, else 0x9a (IrPresubSub)	^\s*uVar10\ =\ 0x9a;$	+1	all	none
 use	FUN_00186a88	uVar10	presubOpcode	INFERRED	0x9b (IrPresubAdd) when the two negate bits agree, else 0x9a (IrPresubSub)	^\s*(?:pvVar8|inst3)\ =\ FUN_001043f0\(uVar10,uVar9\);$	+1	all	none
@@ -93,10 +93,10 @@ use	FUN_00186a88	loopRemaining	operandSource	INFERRED	IRInst__getOperandSource(i
 use	FUN_00186a88	loopRemaining	operandSource	INFERRED	IRInst__getOperandSource(inst2, 1)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00105594\((?:param_3|inst2),1\);$@2	+2	all	none
 use	FUN_00186a88	loopRemaining	operandSource	INFERRED	IRInst__getOperandSource(inst2, 1)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00105594\((?:param_3|inst2),1\);$@3	+2	all	none
 use	FUN_00186a88	loopRemaining	operandSource	INFERRED	IRInst__getOperandSource(inst2, 1)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00105594\((?:param_3|inst2),1\);$@4	+2	all	none
-use	FUN_00186a88	loopIndex4	operandSource2	INFERRED	IRInst__getOperandSource(inst2, 1)	^\s*(?:piVar6|loopIndex4)\ =\ \(int\ \*\)FUN_00105594\((?:param_3|inst2),1\);$	+2	all	none
-use	FUN_00186a88	loopIndex4	operandSource2	INFERRED	IRInst__getOperandSource(inst2, 1)	^\s*(?:piVar6|loopIndex4)\ =\ \(int\ \*\)FUN_00105594\((?:param_3|inst2),1\);$@2	+2	all	none
-use	FUN_00186a88	loopRemaining	firstSourceIsPresub	CONFIRMED	IRInst vslot 23 (isPresub) of operand 1's definition	^\s*(?:iVar7|loopRemaining)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:piVar6|loopIndex4)\ \+\ 0x5c\)\)\((?:piVar6|loopIndex4)\);$	+2	all	none
-use	FUN_00186a88	loopRemaining	firstSourceIsPresub	CONFIRMED	IRInst vslot 23 (isPresub) of operand 1's definition	^\s*(?:iVar7|loopRemaining)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:piVar6|loopIndex4)\ \+\ 0x5c\)\)\((?:piVar6|loopIndex4)\);$@2	+2	all	none
+use	FUN_00186a88	loopPtr4	operandSource2	INFERRED	IRInst__getOperandSource(inst2, 1)	^\s*(?:piVar6|loopPtr4)\ =\ \(int\ \*\)FUN_00105594\((?:param_3|inst2),1\);$	+2	all	none
+use	FUN_00186a88	loopPtr4	operandSource2	INFERRED	IRInst__getOperandSource(inst2, 1)	^\s*(?:piVar6|loopPtr4)\ =\ \(int\ \*\)FUN_00105594\((?:param_3|inst2),1\);$@2	+2	all	none
+use	FUN_00186a88	loopRemaining	firstSourceIsPresub	CONFIRMED	IRInst vslot 23 (isPresub) of operand 1's definition	^\s*(?:iVar7|loopRemaining)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:piVar6|loopPtr4)\ \+\ 0x5c\)\)\((?:piVar6|loopPtr4)\);$	+2	all	none
+use	FUN_00186a88	loopRemaining	firstSourceIsPresub	CONFIRMED	IRInst vslot 23 (isPresub) of operand 1's definition	^\s*(?:iVar7|loopRemaining)\ =\ \(\*\*\(code\ \*\*\)\(\*(?:piVar6|loopPtr4)\ \+\ 0x5c\)\)\((?:piVar6|loopPtr4)\);$@2	+2	all	none
 use	FUN_00186a88	loopRemaining	commitResult	INFERRED	FUN_00185da4 result: the replacement was committed	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00185da4\(param_2,uVar2,(?:param_1|inst),(?:pvVar8|inst3),(?:param_3|inst2),param_4,param_5,param_6,param_7,piVar11\)$	+1	all	none
 use	FUN_00186a88	loopRemaining	commitResult	INFERRED	FUN_00185da4 result: the replacement was committed	^\s*return\ (?:iVar7|loopRemaining);$@2	+1	all	none
 use	FUN_00186a88	loopRemaining	commitResult	INFERRED	FUN_00185da4 result: the replacement was committed	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00185da4\(param_2,\(uint\)\(local_68\ ==\ \-0\.5\),(?:param_1|inst),(?:pvVar8|inst3),(?:param_3|inst2),param_4,param_5$	+3	all	none
@@ -120,7 +120,7 @@ use	FUN_00186a88	piVar11	originalInst2	INFERRED	the original producer when a clo
 use	FUN_00186a88	piVar11	originalInst2	INFERRED	the original producer when a clone replaced it (0 otherwise)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00185da4\(param_2,\(uint\)\(local_68\ ==\ \-0\.5\),(?:param_1|inst),(?:pvVar8|inst3),(?:param_3|inst2),param_4,param_5$	+2	all	none
 use	FUN_00186a88	piVar11	originalInst2	INFERRED	the original producer when a clone replaced it (0 otherwise)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_00185da4\(param_2,uVar2,(?:param_1|inst),(?:pvVar8|inst3),(?:param_3|inst2),param_4,param_5,param_6,param_7,piVar11\)$	+1	all	none
 use	FUN_00186a88	loopRemaining	programCopy	INFERRED	copy of program passed as an argument of the value-number lookup	^\s*(?:iVar7|loopRemaining)\ =\ param_4;$	+1	all	none
-use	FUN_00186a88	loopRemaining	programCopy	INFERRED	copy of program passed as an argument of the value-number lookup	^\s*local_a8\ =\ \(int\ \*\)FUN_000f5f94\(uVar14,local_7c,local_a4,(?:iVar7|loopRemaining),uVar10,uVar9,(?:piVar6|loopIndex4)\);$	+1	all	none
+use	FUN_00186a88	loopRemaining	programCopy	INFERRED	copy of program passed as an argument of the value-number lookup	^\s*local_a8\ =\ \(int\ \*\)FUN_000f5f94\(uVar14,local_7c,local_a4,(?:iVar7|loopRemaining),uVar10,uVar9,(?:piVar6|loopPtr4)\);$	+1	all	none
 use	FUN_00186a88	loopRemaining	programCopy	INFERRED	copy of program passed as an argument of the value-number lookup	^\s*local_a8\ =\ \(int\ \*\)FUN_000f57f0\(uVar14,local_7c,local_a4,(?:iVar7|loopRemaining)\);$	+1	all	none
 use	FUN_00186a88	loopRemaining	source1Record	INFERRED	IRInst__getOperandRecord(inst2, 2)	^\s*(?:iVar7|loopRemaining)\ =\ FUN_001054ec\((?:param_3|inst2),2\);$	+1	all	none
 use	FUN_00186a88	loopRemaining	source1Record	INFERRED	IRInst__getOperandRecord(inst2, 2)	^\s*local_a4\[0\]\ =\ \*\(int\ \*\*\)\((?:iVar7|loopRemaining)\ \+\ 0x10\);$	+1	all	none

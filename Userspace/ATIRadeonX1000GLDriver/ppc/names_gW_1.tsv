@@ -2130,9 +2130,9 @@ use	FUN_00186510	piVar9	inst1	INFERRED	web passed only as callee parameter inst 
 use	FUN_00186510	piVar9	inst1	INFERRED	web passed only as callee parameter inst (5 uses, unanimous)	^\s*piVar9\[0x27\]\ =\ iVar12;$	+1
 use	FUN_00186510	piVar9	inst1	INFERRED	web passed only as callee parameter inst (5 uses, unanimous)	^\s*iVar6\ =\ FUN_001054ec\(piVar9,iVar5\);$@2	+1
 use	FUN_00186a88	uVar10	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (1 uses, unanimous)	^\s*uVar10\ =\ param_5;$	+1
-use	FUN_00186a88	uVar10	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (1 uses, unanimous)	^\s*local_a8\ =\ \(int\ \*\)FUN_000f5f94\(uVar14,local_7c,local_a4,loopRemaining,uVar10,uVar9,loopIndex4\);$	+1
+use	FUN_00186a88	uVar10	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (1 uses, unanimous)	^\s*local_a8\ =\ \(int\ \*\)FUN_000f5f94\(uVar14,local_7c,local_a4,loopRemaining,uVar10,uVar9,loopPtr4\);$	+1
 use	FUN_00186a88	uVar10	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (1 uses, unanimous)	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ 8\);$	+2
-use	FUN_00186a88	uVar10	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (1 uses, unanimous)	^\s*local_a4\[1\]\ =\ \(int\ \*\)FUN_000f5f94\(uVar13,local_7c,local_a4,loopIndex4,uVar10,uVar9,piVar12\);$	+1
+use	FUN_00186a88	uVar10	compilerCtx	INFERRED	web passed only as callee parameter compilerCtx (1 uses, unanimous)	^\s*local_a4\[1\]\ =\ \(int\ \*\)FUN_000f5f94\(uVar13,local_7c,local_a4,loopPtr4,uVar10,uVar9,piVar12\);$	+1
 local	Inst__movAndShiftUseVector	param_2	program	INFERRED	passed as parameter program of callees (1 uses, unanimous)
 use	Inst__movAndShiftUseVector	iVar1	operandIndex	INFERRED	web passed only as callee parameter operandIndex (4 uses, unanimous)	^\s*for\ \(iVar1\ =\ 0;\ iVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar13\ \+\ 0x14\)\)\(piVar13\),\ iVar1\ <=\ iVar8;$	+3
 use	Inst__movAndShiftUseVector	iVar1	operandIndex	INFERRED	web passed only as callee parameter operandIndex (4 uses, unanimous)	^\s*iVar8\ =\ FUN_001054ec\(piVar13,iVar1\);$	+1
