@@ -1807,3 +1807,159 @@ local	gld_ensureTextureAgpRefBacking	bVar1	masksCovered	INFERRED	(A | B) & ~texI
 local	gld_ensureTextureAgpRefBacking	uVar6	maskCount	INFERRED	byte at texImages+0x6c: number of mask pairs to compare
 local	gld_ensureTextureAgpRefBacking	uVar8	succeeded	INFERRED	1 when the backing is usable / was replaced
 local	gld_ensureTextureAgpRefBacking	in_cr0	cr0Bits	INFERRED	CR0 value set by the store-conditional loop test
+local	copyIndices16Swapped_prefetch	uVar1	swapWord	INFERRED	32-bit word of the scalar path: its two halfwords are swapped (uVar1<<16 | uVar1>>16) before the store
+use	copyIndices16Swapped_prefetch	puVar2	prefetchCursor	INFERRED	walks the first 0x38 words of src issuing dataCacheBlockTouch	^\s*for\ \(puVar2\ =\ param_2;\ puVar2\ <\ param_2\ \+\ 0x38;\ puVar2\ =\ puVar2\ \+\ 8\)\ \{$	+2
+use	copyIndices16Swapped_prefetch	puVar2	nextVecPtr	INFERRED	src + 4 words: the next 16-byte block in the permute chain	^\s*puVar2\ =\ param_2\ \+\ 4;$	+1
+use	copyIndices16Swapped_prefetch	puVar2	nextVecPtr	INFERRED	src + 4 words: the next 16-byte block in the permute chain	^\s*auVar8\ =\ vectorPermute\(auVar6,\*\(vec16\ \*\)\(\(uint\)puVar2\ \&\ 0xfffffff0\),auVar7\);$	+1
+use	copyIndices16Swapped_prefetch	puVar2	nextVecPtr	INFERRED	src + 4 words: the next 16-byte block in the permute chain	^\s*auVar4\ =\ vectorPermute\(\*\(vec16\ \*\)\(\(uint\)puVar2\ \&\ 0xfffffff0\),auVar9,auVar7\);$	+1
+use	copyIndices16Swapped_prefetch	puVar2	nextVecPtr	INFERRED	src + 4 words: the next 16-byte block in the permute chain	^\s*puVar2\ =\ param_2\ \+\ 4;$@2	+1
+use	copyIndices16Swapped_prefetch	puVar2	nextVecPtr	INFERRED	src + 4 words: the next 16-byte block in the permute chain	^\s*auVar6\ =\ vectorPermute\(auVar6,\*\(vec16\ \*\)\(\(uint\)puVar2\ \&\ 0xfffffff0\),auVar7\);$	+1
+use	copyIndices16Swapped_prefetch	auVar4	loadedVecA	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*auVar4\ =\ \*\(vec16\ \*\)\(\(uint\)\(param_2\ \+\ 0xc\)\ \&\ 0xfffffff0\);$	+1
+use	copyIndices16Swapped_prefetch	auVar4	loadedVecA	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*auVar5\ =\ vectorPermute\(auVar9,auVar4,auVar7\);$	+2
+use	copyIndices16Swapped_prefetch	auVar4	loadedVecA	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*\*\(vec16\ \*\)\(\(uint\)\(param_1\ \+\ 0xc\)\ \&\ 0xfffffff0\)\ =\ auVar4;$	+1
+use	copyIndices16Swapped_prefetch	auVar4	loadedVecA	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*auVar4\ =\ \*\(vec16\ \*\)\(\(uint\)\(param_2\ \+\ 4\)\ \&\ 0xfffffff0\);$	+2
+use	copyIndices16Swapped_prefetch	auVar4	loadedVecA	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*auVar4\ =\ vectorPermute\(auVar4,auVar6,auVar7\);$@2	+2
+use	copyIndices16Swapped_prefetch	auVar4	permutedVecA	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*auVar4\ =\ vectorPermute\(\*\(vec16\ \*\)\(\(uint\)puVar2\ \&\ 0xfffffff0\),auVar9,auVar7\);$	+1
+use	copyIndices16Swapped_prefetch	auVar4	permutedVecA	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*\*\(vec16\ \*\)\(\(uint\)\(param_1\ \+\ 4\)\ \&\ 0xfffffff0\)\ =\ auVar4;$	+1
+use	copyIndices16Swapped_prefetch	auVar4	permutedVecA	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*auVar4\ =\ vectorPermute\(auVar5,auVar6,auVar7\);$	+1
+use	copyIndices16Swapped_prefetch	auVar4	permutedVecA	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*\*\(vec16\ \*\)\(\(uint\)\(param_1\ \+\ 0xc\)\ \&\ 0xfffffff0\)\ =\ auVar4;$@2	+1
+use	copyIndices16Swapped_prefetch	auVar5	permutedVecB	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*auVar5\ =\ vectorPermute\(\*\(vec16\ \*\)\(\(uint\)\(param_2\ \+\ 4\)\ \&\ 0xfffffff0\),auVar9,auVar7\);$	+1
+use	copyIndices16Swapped_prefetch	auVar5	permutedVecB	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*\*\(vec16\ \*\)\(\(uint\)\(param_1\ \+\ 4\)\ \&\ 0xfffffff0\)\ =\ auVar5;$	+1
+use	copyIndices16Swapped_prefetch	auVar5	permutedVecB	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*auVar5\ =\ vectorPermute\(auVar9,auVar4,auVar7\);$	+1
+use	copyIndices16Swapped_prefetch	auVar5	permutedVecB	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*\*\(vec16\ \*\)\(\(uint\)\(param_1\ \+\ 8\)\ \&\ 0xfffffff0\)\ =\ auVar5;$	+1
+use	copyIndices16Swapped_prefetch	auVar5	loadedVecB	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*auVar5\ =\ \*\(vec16\ \*\)\(\(uint\)\(param_2\ \+\ 0xc\)\ \&\ 0xfffffff0\);$	+1
+use	copyIndices16Swapped_prefetch	auVar5	loadedVecB	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*auVar8\ =\ vectorPermute\(auVar9,auVar5,auVar7\);$	+1
+use	copyIndices16Swapped_prefetch	auVar5	loadedVecB	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*auVar4\ =\ vectorPermute\(auVar5,auVar6,auVar7\);$	+1
+local	copyIndices16Swapped_prefetch	auVar6	carryVec	INFERRED	last aligned source vector loaded, carried into the next vectorPermute
+local	copyIndices16Swapped_prefetch	auVar8	permutedVecD	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store
+local	copyIndices16Swapped_prefetch	auVar9	loadedVecE	INFERRED	16-byte aligned load from src, one link of the realign chain
+local	copyIndices16Swapped_prefetch_entry	uVar1	swapWord	INFERRED	32-bit word of the scalar path: its two halfwords are swapped (uVar1<<16 | uVar1>>16) before the store
+use	copyIndices16Swapped_prefetch_entry	puVar2	prefetchCursor	INFERRED	walks the first 0x38 words of src issuing dataCacheBlockTouch	^\s*for\ \(puVar2\ =\ param_2;\ puVar2\ <\ param_2\ \+\ 0x38;\ puVar2\ =\ puVar2\ \+\ 8\)\ \{$	+2
+use	copyIndices16Swapped_prefetch_entry	puVar2	nextVecPtr	INFERRED	src + 4 words: the next 16-byte block in the permute chain	^\s*puVar2\ =\ param_2\ \+\ 4;$	+1
+use	copyIndices16Swapped_prefetch_entry	puVar2	nextVecPtr	INFERRED	src + 4 words: the next 16-byte block in the permute chain	^\s*auVar8\ =\ vectorPermute\(auVar6,\*\(vec16\ \*\)\(\(uint\)puVar2\ \&\ 0xfffffff0\),auVar7\);$	+1
+use	copyIndices16Swapped_prefetch_entry	puVar2	nextVecPtr	INFERRED	src + 4 words: the next 16-byte block in the permute chain	^\s*auVar4\ =\ vectorPermute\(\*\(vec16\ \*\)\(\(uint\)puVar2\ \&\ 0xfffffff0\),auVar9,auVar7\);$	+1
+use	copyIndices16Swapped_prefetch_entry	puVar2	nextVecPtr	INFERRED	src + 4 words: the next 16-byte block in the permute chain	^\s*puVar2\ =\ param_2\ \+\ 4;$@2	+1
+use	copyIndices16Swapped_prefetch_entry	puVar2	nextVecPtr	INFERRED	src + 4 words: the next 16-byte block in the permute chain	^\s*auVar6\ =\ vectorPermute\(auVar6,\*\(vec16\ \*\)\(\(uint\)puVar2\ \&\ 0xfffffff0\),auVar7\);$	+1
+use	copyIndices16Swapped_prefetch_entry	auVar4	loadedVecA	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*auVar4\ =\ \*\(vec16\ \*\)\(\(uint\)\(param_2\ \+\ 0xc\)\ \&\ 0xfffffff0\);$	+1
+use	copyIndices16Swapped_prefetch_entry	auVar4	loadedVecA	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*auVar5\ =\ vectorPermute\(auVar9,auVar4,auVar7\);$	+2
+use	copyIndices16Swapped_prefetch_entry	auVar4	loadedVecA	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*\*\(vec16\ \*\)\(\(uint\)\(param_1\ \+\ 0xc\)\ \&\ 0xfffffff0\)\ =\ auVar4;$	+1
+use	copyIndices16Swapped_prefetch_entry	auVar4	loadedVecA	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*auVar4\ =\ \*\(vec16\ \*\)\(\(uint\)\(param_2\ \+\ 4\)\ \&\ 0xfffffff0\);$	+2
+use	copyIndices16Swapped_prefetch_entry	auVar4	loadedVecA	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*auVar4\ =\ vectorPermute\(auVar4,auVar6,auVar7\);$@2	+2
+use	copyIndices16Swapped_prefetch_entry	auVar4	permutedVecA	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*auVar4\ =\ vectorPermute\(\*\(vec16\ \*\)\(\(uint\)puVar2\ \&\ 0xfffffff0\),auVar9,auVar7\);$	+1
+use	copyIndices16Swapped_prefetch_entry	auVar4	permutedVecA	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*\*\(vec16\ \*\)\(\(uint\)\(param_1\ \+\ 4\)\ \&\ 0xfffffff0\)\ =\ auVar4;$	+1
+use	copyIndices16Swapped_prefetch_entry	auVar4	permutedVecA	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*auVar4\ =\ vectorPermute\(auVar5,auVar6,auVar7\);$	+1
+use	copyIndices16Swapped_prefetch_entry	auVar4	permutedVecA	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*\*\(vec16\ \*\)\(\(uint\)\(param_1\ \+\ 0xc\)\ \&\ 0xfffffff0\)\ =\ auVar4;$@2	+1
+use	copyIndices16Swapped_prefetch_entry	auVar5	permutedVecB	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*auVar5\ =\ vectorPermute\(\*\(vec16\ \*\)\(\(uint\)\(param_2\ \+\ 4\)\ \&\ 0xfffffff0\),auVar9,auVar7\);$	+1
+use	copyIndices16Swapped_prefetch_entry	auVar5	permutedVecB	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*\*\(vec16\ \*\)\(\(uint\)\(param_1\ \+\ 4\)\ \&\ 0xfffffff0\)\ =\ auVar5;$	+1
+use	copyIndices16Swapped_prefetch_entry	auVar5	permutedVecB	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*auVar5\ =\ vectorPermute\(auVar9,auVar4,auVar7\);$	+1
+use	copyIndices16Swapped_prefetch_entry	auVar5	permutedVecB	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store	^\s*\*\(vec16\ \*\)\(\(uint\)\(param_1\ \+\ 8\)\ \&\ 0xfffffff0\)\ =\ auVar5;$	+1
+use	copyIndices16Swapped_prefetch_entry	auVar5	loadedVecB	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*auVar5\ =\ \*\(vec16\ \*\)\(\(uint\)\(param_2\ \+\ 0xc\)\ \&\ 0xfffffff0\);$	+1
+use	copyIndices16Swapped_prefetch_entry	auVar5	loadedVecB	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*auVar8\ =\ vectorPermute\(auVar9,auVar5,auVar7\);$	+1
+use	copyIndices16Swapped_prefetch_entry	auVar5	loadedVecB	INFERRED	16-byte aligned load from src, one link of the realign chain	^\s*auVar4\ =\ vectorPermute\(auVar5,auVar6,auVar7\);$	+1
+local	copyIndices16Swapped_prefetch_entry	auVar6	carryVec	INFERRED	last aligned source vector loaded, carried into the next vectorPermute
+local	copyIndices16Swapped_prefetch_entry	auVar8	permutedVecD	INFERRED	vectorPermute(prev, next, alignPermute): realigned 16 bytes to store
+local	copyIndices16Swapped_prefetch_entry	auVar9	loadedVecE	INFERRED	16-byte aligned load from src, one link of the realign chain
+local	copyIndices16Swapped_dcbz	puVar1	vecPtr1	INFERRED	srcCursor + 4 words: next 16-byte source block
+local	copyIndices16Swapped_dcbz	puVar2	vecPtr2	INFERRED	srcCursor + 8 words
+local	copyIndices16Swapped_dcbz	puVar3	vecPtr3	INFERRED	srcCursor + 12 words
+use	copyIndices16Swapped_dcbz	uVar5	dcbzAddress	INFERRED	128-byte line address cleared with dataCacheBlockClearToZero before it is overwritten	^\s*for\ \(uVar5\ =\ param_1\ \+\ 0x7f\ \&\ 0xffffff80;\ uVar5\ <\ \(\(uint\)puVar7\ \&\ 0xffffff80\);$	+3
+use	copyIndices16Swapped_dcbz	uVar5	dstMisalign	INFERRED	dst & 0xf: misalignment of the destination in its 16-byte block	^\s*uVar5\ =\ param_1\ \&\ 0xf;$	+3
+use	copyIndices16Swapped_dcbz	uVar5	dstMisalign	INFERRED	dst & 0xf: misalignment of the destination in its 16-byte block	^\s*if\ \(uVar5\ !=\ 0\)\ \{$	+1
+use	copyIndices16Swapped_dcbz	uVar5	dstMisalign	INFERRED	dst & 0xf: misalignment of the destination in its 16-byte block	^\s*\(\*\(vec16\ \*\)\(\(uint\)puVar4\ \&\ 0xfffffff0\),auVar8,$	+3
+use	copyIndices16Swapped_dcbz	uVar5	swapWord	INFERRED	32-bit word of the scalar path: halfwords swapped before the store	^\s*uVar5\ =\ \*puVar6;$	+1
+use	copyIndices16Swapped_dcbz	uVar5	swapWord	INFERRED	32-bit word of the scalar path: halfwords swapped before the store	^\s*\*puVar4\ =\ uVar5\ <<\ 0x10\ \|\ uVar5\ >>\ 0x10;$	+1
+use	copyIndices16Swapped_dcbz	auVar8	tempVec	INFERRED	realigned first source vector	^\s*auVar8\ =\ vectorPermute\(\*\(vec16\ \*\)\(param_2\ \&\ 0xfffffff0\),auVar9,auVar11\);$	+1
+use	copyIndices16Swapped_dcbz	auVar8	tempVec	INFERRED	headPermuted merged into the existing destination block under the misalignment mask	^\s*auVar8\ =\ vectorConditionalSelect$	+5
+use	copyIndices16Swapped_dcbz	auVar8	tempVec	INFERRED	fourth realigned vector of the 64-byte loop step	^\s*auVar8\ =\ vectorPermute\(\*\(vec16\ \*\)\(\(uint\)puVar3\ \&\ 0xfffffff0\),auVar9,auVar11\);$	+1
+use	copyIndices16Swapped_dcbz	auVar8	tempVec	INFERRED	fourth realigned vector of the 64-byte loop step	^\s*\*\(vec16\ \*\)\(\(uint\)\(puVar4\ \+\ 0xc\)\ \&\ 0xfffffff0\)\ =\ auVar8;$	+1
+use	copyIndices16Swapped_dcbz	auVar8	tempVec	INFERRED	next aligned source vector in the 32-byte tail step	^\s*auVar8\ =\ \*\(vec16\ \*\)\(\(uint\)\(puVar6\ \+\ 4\)\ \&\ 0xfffffff0\);$	+1
+use	copyIndices16Swapped_dcbz	auVar8	tempVec	INFERRED	next aligned source vector in the 32-byte tail step	^\s*auVar9\ =\ vectorPermute\(auVar9,auVar8,auVar11\);$	+1
+use	copyIndices16Swapped_dcbz	auVar8	tempVec	INFERRED	next aligned source vector in the 32-byte tail step	^\s*auVar8\ =\ vectorPermute\(auVar8,auVar9,auVar11\);$	+2
+local	copyIndices16Swapped_dcbz	auVar9	carryVec	INFERRED	last aligned source vector loaded, carried into the next vectorPermute
+local	copyIndices16Swapped_dcbz	auVar10	outVec2	INFERRED	third realigned vector of the 64-byte loop step
+local	copyIndices16Swapped_dcbz	auVar12	outVec1	INFERRED	second realigned vector of the 64-byte loop step
+local	copyIndices16Swapped_dcbz	auVar13	outVec0	INFERRED	first realigned vector of the 64-byte loop step
+local	copyIndices16Swapped_dcbz_entry	puVar1	vecPtr1	INFERRED	srcCursor + 4 words: next 16-byte source block
+local	copyIndices16Swapped_dcbz_entry	puVar2	vecPtr2	INFERRED	srcCursor + 8 words
+local	copyIndices16Swapped_dcbz_entry	puVar3	vecPtr3	INFERRED	srcCursor + 12 words
+use	copyIndices16Swapped_dcbz_entry	uVar5	dcbzAddress	INFERRED	128-byte line address cleared with dataCacheBlockClearToZero before it is overwritten	^\s*for\ \(uVar5\ =\ param_1\ \+\ 0x7f\ \&\ 0xffffff80;\ uVar5\ <\ \(\(uint\)puVar7\ \&\ 0xffffff80\);$	+3
+use	copyIndices16Swapped_dcbz_entry	uVar5	dstMisalign	INFERRED	dst & 0xf: misalignment of the destination in its 16-byte block	^\s*uVar5\ =\ param_1\ \&\ 0xf;$	+3
+use	copyIndices16Swapped_dcbz_entry	uVar5	dstMisalign	INFERRED	dst & 0xf: misalignment of the destination in its 16-byte block	^\s*if\ \(uVar5\ !=\ 0\)\ \{$	+1
+use	copyIndices16Swapped_dcbz_entry	uVar5	dstMisalign	INFERRED	dst & 0xf: misalignment of the destination in its 16-byte block	^\s*\(\*\(vec16\ \*\)\(\(uint\)puVar4\ \&\ 0xfffffff0\),auVar8,$	+3
+use	copyIndices16Swapped_dcbz_entry	uVar5	swapWord	INFERRED	32-bit word of the scalar path: halfwords swapped before the store	^\s*uVar5\ =\ \*puVar6;$	+1
+use	copyIndices16Swapped_dcbz_entry	uVar5	swapWord	INFERRED	32-bit word of the scalar path: halfwords swapped before the store	^\s*\*puVar4\ =\ uVar5\ <<\ 0x10\ \|\ uVar5\ >>\ 0x10;$	+1
+use	copyIndices16Swapped_dcbz_entry	auVar8	tempVec	INFERRED	realigned first source vector	^\s*auVar8\ =\ vectorPermute\(\*\(vec16\ \*\)\(param_2\ \&\ 0xfffffff0\),auVar9,auVar11\);$	+1
+use	copyIndices16Swapped_dcbz_entry	auVar8	tempVec	INFERRED	headPermuted merged into the existing destination block under the misalignment mask	^\s*auVar8\ =\ vectorConditionalSelect$	+5
+use	copyIndices16Swapped_dcbz_entry	auVar8	tempVec	INFERRED	fourth realigned vector of the 64-byte loop step	^\s*auVar8\ =\ vectorPermute\(\*\(vec16\ \*\)\(\(uint\)puVar3\ \&\ 0xfffffff0\),auVar9,auVar11\);$	+1
+use	copyIndices16Swapped_dcbz_entry	auVar8	tempVec	INFERRED	fourth realigned vector of the 64-byte loop step	^\s*\*\(vec16\ \*\)\(\(uint\)\(puVar4\ \+\ 0xc\)\ \&\ 0xfffffff0\)\ =\ auVar8;$	+1
+use	copyIndices16Swapped_dcbz_entry	auVar8	tempVec	INFERRED	next aligned source vector in the 32-byte tail step	^\s*auVar8\ =\ \*\(vec16\ \*\)\(\(uint\)\(puVar6\ \+\ 4\)\ \&\ 0xfffffff0\);$	+1
+use	copyIndices16Swapped_dcbz_entry	auVar8	tempVec	INFERRED	next aligned source vector in the 32-byte tail step	^\s*auVar9\ =\ vectorPermute\(auVar9,auVar8,auVar11\);$	+1
+use	copyIndices16Swapped_dcbz_entry	auVar8	tempVec	INFERRED	next aligned source vector in the 32-byte tail step	^\s*auVar8\ =\ vectorPermute\(auVar8,auVar9,auVar11\);$	+2
+local	copyIndices16Swapped_dcbz_entry	auVar9	carryVec	INFERRED	last aligned source vector loaded, carried into the next vectorPermute
+local	copyIndices16Swapped_dcbz_entry	auVar10	outVec2	INFERRED	third realigned vector of the 64-byte loop step
+local	copyIndices16Swapped_dcbz_entry	auVar12	outVec1	INFERRED	second realigned vector of the 64-byte loop step
+local	copyIndices16Swapped_dcbz_entry	auVar13	outVec0	INFERRED	first realigned vector of the 64-byte loop step
+use	gldTextureHasNonPowerOfTwoSize	iVar3	texImages	CONFIRMED	texture+0x30: the image/level header block (target kind in the low nibble of byte +1, base level index at +0x3c)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x30\);$	^\s*iVar3\ =\ \*\(short\ \*\)\(iVar3\ \+\ 0x3c\)\ \*\ 0x18\ \+\ iVar3;$	all	rhs
+use	gldTextureHasNonPowerOfTwoSize	iVar3	levelRecord	CONFIRMED	texImages + baseLevel*0x18: the base level record (width/height/depth shorts at +0xa4/+0xa6/+0xa8, border byte +0xaa)	^\s*iVar3\ =\ \*\(short\ \*\)\(iVar3\ \+\ 0x3c\)\ \*\ 0x18\ \+\ iVar3;$		lhs	none
+use	gldTextureHasNonPowerOfTwoSize	uVar4	borderWidth	CONFIRMED	level border width (byte +0xaa of the level record): dimensions exclude twice the border	^\s*uVar4\ =\ \(uint\)\*\(byte\ \*\)\(iVar3\ \+\ 0xaa\);$	^\s*uVar4\ =\ \(uint\)\*\(ushort\ \*\)\(iVar3\ \+\ 0xa8\)\ \+\ uVar4\ \*\ \-2;$	all	rhs
+use	gldTextureHasNonPowerOfTwoSize	uVar4	levelDepth	CONFIRMED	level depth minus twice the border, clamped to >= 1	^\s*uVar4\ =\ \(uint\)\*\(ushort\ \*\)\(iVar3\ \+\ 0xa8\)\ \+\ uVar4\ \*\ \-2;$		lhs	none
+use	gldTextureHasNonPowerOfTwoSize2	iVar3	texImages	CONFIRMED	texture+0x30: the image/level header block (target kind in the low nibble of byte +1, base level index at +0x3c)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x30\);$	^\s*iVar3\ =\ \*\(short\ \*\)\(iVar3\ \+\ 0x3c\)\ \*\ 0x18\ \+\ iVar3;$	all	rhs
+use	gldTextureHasNonPowerOfTwoSize2	iVar3	levelRecord	CONFIRMED	texImages + baseLevel*0x18: the base level record (width/height/depth shorts at +0xa4/+0xa6/+0xa8, border byte +0xaa)	^\s*iVar3\ =\ \*\(short\ \*\)\(iVar3\ \+\ 0x3c\)\ \*\ 0x18\ \+\ iVar3;$		lhs	none
+use	gldTextureHasNonPowerOfTwoSize2	uVar4	borderWidth	CONFIRMED	level border width (byte +0xaa of the level record): dimensions exclude twice the border	^\s*uVar4\ =\ \(uint\)\*\(byte\ \*\)\(iVar3\ \+\ 0xaa\);$	^\s*uVar4\ =\ \(uint\)\*\(ushort\ \*\)\(iVar3\ \+\ 0xa8\)\ \+\ uVar4\ \*\ \-2;$	all	rhs
+use	gldTextureHasNonPowerOfTwoSize2	uVar4	levelDepth	CONFIRMED	level depth minus twice the border, clamped to >= 1	^\s*uVar4\ =\ \(uint\)\*\(ushort\ \*\)\(iVar3\ \+\ 0xa8\)\ \+\ uVar4\ \*\ \-2;$		lhs	none
+local	gldTextureHasNonPowerOfTwoSize	param_1	texture	INFERRED	texture object: +0x30 image header block, +0x6c receives the target kind
+local	gldTextureHasNonPowerOfTwoSize	param_2	unusedArg2	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize	param_3	unusedArg3	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize	param_4	unusedArg4	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize	param_5	unusedArg5	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize	param_6	unusedArg6	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize	uVar2	levelHeight	INFERRED	level height minus twice the border, clamped to >= 1
+local	gldTextureHasNonPowerOfTwoSize	bVar1	targetByte	INFERRED	byte +1 of the image header: target kind in the low nibble
+local	gldTextureHasNonPowerOfTwoSize	bVar5	targetKind	INFERRED	target kind (0/3 2D-like, 1 3D, 4 1D) stored at texture+0x6c
+local	gldTextureHasNonPowerOfTwoSize	param_1	texture	INFERRED	texture object: +0x30 image header block, +0x6c receives the target kind
+local	gldTextureHasNonPowerOfTwoSize	param_2	unusedArg2	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize	param_3	unusedArg3	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize	param_4	unusedArg4	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize	param_5	unusedArg5	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize	param_6	unusedArg6	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize	uVar2	levelHeight	INFERRED	level height minus twice the border, clamped to >= 1
+local	gldTextureHasNonPowerOfTwoSize	bVar1	targetByte	INFERRED	byte +1 of the image header: target kind in the low nibble
+local	gldTextureHasNonPowerOfTwoSize	bVar5	targetKind	INFERRED	target kind (0/3 2D-like, 1 3D, 4 1D) stored at texture+0x6c
+local	gldTextureHasNonPowerOfTwoSize2	param_1	texture	INFERRED	texture object: +0x30 image header block, +0x6c receives the target kind
+local	gldTextureHasNonPowerOfTwoSize2	param_2	unusedArg2	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize2	param_3	unusedArg3	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize2	param_4	unusedArg4	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize2	param_5	unusedArg5	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize2	param_6	unusedArg6	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize2	uVar2	levelHeight	INFERRED	level height minus twice the border, clamped to >= 1
+local	gldTextureHasNonPowerOfTwoSize2	bVar1	targetByte	INFERRED	byte +1 of the image header: target kind in the low nibble
+local	gldTextureHasNonPowerOfTwoSize2	bVar5	targetKind	INFERRED	target kind (0/3 2D-like, 1 3D, 4 1D) stored at texture+0x6c
+local	gldTextureHasNonPowerOfTwoSize2	param_1	texture	INFERRED	texture object: +0x30 image header block, +0x6c receives the target kind
+local	gldTextureHasNonPowerOfTwoSize2	param_2	unusedArg2	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize2	param_3	unusedArg3	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize2	param_4	unusedArg4	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize2	param_5	unusedArg5	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize2	param_6	unusedArg6	INFERRED	passed by the caller but not read (register leftovers)
+local	gldTextureHasNonPowerOfTwoSize2	uVar2	levelHeight	INFERRED	level height minus twice the border, clamped to >= 1
+local	gldTextureHasNonPowerOfTwoSize2	bVar1	targetByte	INFERRED	byte +1 of the image header: target kind in the low nibble
+local	gldTextureHasNonPowerOfTwoSize2	bVar5	targetKind	INFERRED	target kind (0/3 2D-like, 1 3D, 4 1D) stored at texture+0x6c
+use	gldTextureHasNonPowerOfTwoSize	uVar6	levelWidth	CONFIRMED	level width minus twice the border, clamped to >= 1	^\s*uVar6\ =\ \(uint\)\*\(ushort\ \*\)\(iVar3\ \+\ 0xa4\)\ \+\ uVar4\ \*\ \-2;$	^\s*if\ \(\(int\)uVar6\ <\ 1\)\ \{$	all	none
+use	gldTextureHasNonPowerOfTwoSize	uVar6	levelWidth	CONFIRMED	level width minus twice the border, clamped to >= 1	^\s*if\ \(\(int\)uVar6\ <\ 1\)\ \{$	^\s*uVar6\ =\ 1;$	all	none
+use	gldTextureHasNonPowerOfTwoSize	uVar6	levelWidth	CONFIRMED	level width minus twice the border, clamped to >= 1	^\s*uVar6\ =\ 1;$	^\s*\}$	all	none
+use	gldTextureHasNonPowerOfTwoSize	uVar6	levelWidth	CONFIRMED	level width minus twice the border, clamped to >= 1	^\s*if\ \(\(uVar6\ \&\ uVar6\ \-\ 1\)\ !=\ 0\)\ \{$	^\s*return\ 1;$	all	none
+use	gldTextureHasNonPowerOfTwoSize	uVar6	leftoverBits	CONFIRMED	dimension & (dimension - 1): non-zero when that dimension is not a power of two	^\s*uVar6\ =\ uVar4\ \&\ uVar4\ \-\ 1;$	^\s*\}$	all	none
+use	gldTextureHasNonPowerOfTwoSize	uVar6	levelWidth	CONFIRMED	level width minus twice the border, clamped to >= 1	^\s*if\ \(\(uVar6\ \&\ uVar6\ \-\ 1\)\ !=\ 0\)\ \{$@2	^\s*return\ 1;$	all	none
+use	gldTextureHasNonPowerOfTwoSize	uVar6	leftoverBits	CONFIRMED	dimension & (dimension - 1): non-zero when that dimension is not a power of two	^\s*uVar6\ =\ uVar2\ \&\ uVar2\ \-\ 1;$	^\s*\}$	all	none
+use	gldTextureHasNonPowerOfTwoSize	uVar6	levelWidth	CONFIRMED	level width minus twice the border, clamped to >= 1	^\s*uVar6\ =\ uVar6\ \&\ uVar6\ \-\ 1;$	^\s*\}$	rhs	none
+use	gldTextureHasNonPowerOfTwoSize	uVar6	leftoverBits	CONFIRMED	dimension & (dimension - 1): non-zero when that dimension is not a power of two	^\s*uVar6\ =\ uVar6\ \&\ uVar6\ \-\ 1;$	^\s*\}$	lhs	none
+use	gldTextureHasNonPowerOfTwoSize	uVar6	leftoverBits	CONFIRMED	dimension & (dimension - 1): non-zero when that dimension is not a power of two	^\s*if\ \(uVar6\ !=\ 0\)\ \{$	^\s*return\ 1;$	all	none
+use	gldTextureHasNonPowerOfTwoSize2	uVar6	levelWidth	CONFIRMED	level width minus twice the border, clamped to >= 1	^\s*uVar6\ =\ \(uint\)\*\(ushort\ \*\)\(iVar3\ \+\ 0xa4\)\ \+\ uVar4\ \*\ \-2;$	^\s*if\ \(\(int\)uVar6\ <\ 1\)\ \{$	all	none
+use	gldTextureHasNonPowerOfTwoSize2	uVar6	levelWidth	CONFIRMED	level width minus twice the border, clamped to >= 1	^\s*if\ \(\(int\)uVar6\ <\ 1\)\ \{$	^\s*uVar6\ =\ 1;$	all	none
+use	gldTextureHasNonPowerOfTwoSize2	uVar6	levelWidth	CONFIRMED	level width minus twice the border, clamped to >= 1	^\s*uVar6\ =\ 1;$	^\s*\}$	all	none
+use	gldTextureHasNonPowerOfTwoSize2	uVar6	levelWidth	CONFIRMED	level width minus twice the border, clamped to >= 1	^\s*if\ \(\(uVar6\ \&\ uVar6\ \-\ 1\)\ !=\ 0\)\ \{$	^\s*return\ 1;$	all	none
+use	gldTextureHasNonPowerOfTwoSize2	uVar6	leftoverBits	CONFIRMED	dimension & (dimension - 1): non-zero when that dimension is not a power of two	^\s*uVar6\ =\ uVar4\ \&\ uVar4\ \-\ 1;$	^\s*\}$	all	none
+use	gldTextureHasNonPowerOfTwoSize2	uVar6	levelWidth	CONFIRMED	level width minus twice the border, clamped to >= 1	^\s*if\ \(\(uVar6\ \&\ uVar6\ \-\ 1\)\ !=\ 0\)\ \{$@2	^\s*return\ 1;$	all	none
+use	gldTextureHasNonPowerOfTwoSize2	uVar6	leftoverBits	CONFIRMED	dimension & (dimension - 1): non-zero when that dimension is not a power of two	^\s*uVar6\ =\ uVar2\ \&\ uVar2\ \-\ 1;$	^\s*\}$	all	none
+use	gldTextureHasNonPowerOfTwoSize2	uVar6	levelWidth	CONFIRMED	level width minus twice the border, clamped to >= 1	^\s*uVar6\ =\ uVar6\ \&\ uVar6\ \-\ 1;$	^\s*\}$	rhs	none
+use	gldTextureHasNonPowerOfTwoSize2	uVar6	leftoverBits	CONFIRMED	dimension & (dimension - 1): non-zero when that dimension is not a power of two	^\s*uVar6\ =\ uVar6\ \&\ uVar6\ \-\ 1;$	^\s*\}$	lhs	none
+use	gldTextureHasNonPowerOfTwoSize2	uVar6	leftoverBits	CONFIRMED	dimension & (dimension - 1): non-zero when that dimension is not a power of two	^\s*if\ \(uVar6\ !=\ 0\)\ \{$	^\s*return\ 1;$	all	none

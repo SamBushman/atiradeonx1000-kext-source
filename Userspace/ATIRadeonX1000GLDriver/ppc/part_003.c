@@ -3200,86 +3200,89 @@ int copyIndices16Swapped_prefetch_entry(dst, src, count)
   uint *src;
   uint count;
 {
-  uint uVar1;
-  uint *puVar2;
+  vec16 loadedVecB;
+  vec16 permutedVecA;
+  uint *nextVecPtr;
+  uint swapWord;
+  uint *prefetchCursor;
   uint *dstEnd;
-  vec16 auVar4;
-  vec16 auVar5;
-  vec16 auVar6;
+  vec16 loadedVecA;
+  vec16 permutedVecB;
+  vec16 carryVec;
   vec16 alignPermute;
-  vec16 auVar8;
-  vec16 auVar9;
+  vec16 permutedVecD;
+  vec16 loadedVecE;
   
   dstEnd = (uint *)((int)dst + (count & 0x7ffffffe) * 2);
   for (; ((uint)dst & 0x1f) != 0; dst = dst + 1) {
-    uVar1 = *src;
+    swapWord = *src;
     src = src + 1;
-    *dst = uVar1 << 0x10 | uVar1 >> 0x10;
+    *dst = swapWord << 0x10 | swapWord >> 0x10;
   }
-  auVar6 = *(vec16 *)((uint)src & 0xfffffff0);
+  carryVec = *(vec16 *)((uint)src & 0xfffffff0);
   alignPermute = *(vec16 *)
             (((uint)src & 0xf) * 0x10 + *(int *)PTR_DAT_001e88cc & 0xfffffff0);
-  for (puVar2 = src; puVar2 < src + 0x38; puVar2 = puVar2 + 8) {
-    dataCacheBlockTouch(puVar2);
+  for (prefetchCursor = src; prefetchCursor < src + 0x38; prefetchCursor = prefetchCursor + 8) {
+    dataCacheBlockTouch(prefetchCursor);
   }
   for (; dst < dstEnd + -0x40; dst = dst + 0x10) {
     dataCacheBlockTouch(src + 0x38);
-    auVar4 = *(vec16 *)((uint)(src + 0xc) & 0xfffffff0);
-    auVar9 = *(vec16 *)((uint)(src + 8) & 0xfffffff0);
-    auVar8 = vectorPermute(auVar6,*(vec16 *)((uint)(src + 4) & 0xfffffff0),alignPermute);
+    loadedVecA = *(vec16 *)((uint)(src + 0xc) & 0xfffffff0);
+    loadedVecE = *(vec16 *)((uint)(src + 8) & 0xfffffff0);
+    permutedVecD = vectorPermute(carryVec,*(vec16 *)((uint)(src + 4) & 0xfffffff0),alignPermute);
     dataCacheBlockTouch(src + 0x40);
-    auVar6 = *(vec16 *)((uint)(src + 0x10) & 0xfffffff0);
-    auVar5 = vectorPermute(*(vec16 *)((uint)(src + 4) & 0xfffffff0),auVar9,alignPermute);
+    carryVec = *(vec16 *)((uint)(src + 0x10) & 0xfffffff0);
+    permutedVecB = vectorPermute(*(vec16 *)((uint)(src + 4) & 0xfffffff0),loadedVecE,alignPermute);
     dataCacheBlockAllocate(dst);
-    *(vec16 *)((uint)dst & 0xfffffff0) = auVar8;
-    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = auVar5;
-    auVar5 = vectorPermute(auVar9,auVar4,alignPermute);
-    auVar4 = vectorPermute(auVar4,auVar6,alignPermute);
+    *(vec16 *)((uint)dst & 0xfffffff0) = permutedVecD;
+    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = permutedVecB;
+    permutedVecB = vectorPermute(loadedVecE,loadedVecA,alignPermute);
+    loadedVecA = vectorPermute(loadedVecA,carryVec,alignPermute);
     dataCacheBlockAllocate(dst + 8);
-    *(vec16 *)((uint)(dst + 8) & 0xfffffff0) = auVar5;
-    *(vec16 *)((uint)(dst + 0xc) & 0xfffffff0) = auVar4;
+    *(vec16 *)((uint)(dst + 8) & 0xfffffff0) = permutedVecB;
+    *(vec16 *)((uint)(dst + 0xc) & 0xfffffff0) = loadedVecA;
     src = src + 0x10;
   }
   for (; dst < dstEnd + -0x10; dst = dst + 0x10) {
-    puVar2 = src + 4;
-    auVar9 = *(vec16 *)((uint)(src + 8) & 0xfffffff0);
-    auVar5 = *(vec16 *)((uint)(src + 0xc) & 0xfffffff0);
+    nextVecPtr = src + 4;
+    loadedVecE = *(vec16 *)((uint)(src + 8) & 0xfffffff0);
+    loadedVecB = *(vec16 *)((uint)(src + 0xc) & 0xfffffff0);
     src = src + 0x10;
-    auVar8 = vectorPermute(auVar6,*(vec16 *)((uint)puVar2 & 0xfffffff0),alignPermute);
-    auVar6 = *(vec16 *)((uint)src & 0xfffffff0);
-    auVar4 = vectorPermute(*(vec16 *)((uint)puVar2 & 0xfffffff0),auVar9,alignPermute);
+    permutedVecD = vectorPermute(carryVec,*(vec16 *)((uint)nextVecPtr & 0xfffffff0),alignPermute);
+    carryVec = *(vec16 *)((uint)src & 0xfffffff0);
+    permutedVecA = vectorPermute(*(vec16 *)((uint)nextVecPtr & 0xfffffff0),loadedVecE,alignPermute);
     dataCacheBlockAllocate(dst);
-    *(vec16 *)((uint)dst & 0xfffffff0) = auVar8;
-    auVar8 = vectorPermute(auVar9,auVar5,alignPermute);
-    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = auVar4;
-    auVar4 = vectorPermute(auVar5,auVar6,alignPermute);
+    *(vec16 *)((uint)dst & 0xfffffff0) = permutedVecD;
+    permutedVecD = vectorPermute(loadedVecE,loadedVecB,alignPermute);
+    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = permutedVecA;
+    permutedVecA = vectorPermute(loadedVecB,carryVec,alignPermute);
     dataCacheBlockAllocate(dst + 8);
-    *(vec16 *)((uint)(dst + 8) & 0xfffffff0) = auVar8;
-    *(vec16 *)((uint)(dst + 0xc) & 0xfffffff0) = auVar4;
+    *(vec16 *)((uint)(dst + 8) & 0xfffffff0) = permutedVecD;
+    *(vec16 *)((uint)(dst + 0xc) & 0xfffffff0) = permutedVecA;
   }
   if (dst + 8 < dstEnd) {
-    auVar4 = *(vec16 *)((uint)(src + 4) & 0xfffffff0);
-    auVar6 = vectorPermute(auVar6,auVar4,alignPermute);
+    loadedVecA = *(vec16 *)((uint)(src + 4) & 0xfffffff0);
+    carryVec = vectorPermute(carryVec,loadedVecA,alignPermute);
     dataCacheBlockAllocate(dst);
-    *(vec16 *)((uint)dst & 0xfffffff0) = auVar6;
+    *(vec16 *)((uint)dst & 0xfffffff0) = carryVec;
     src = src + 8;
-    auVar6 = *(vec16 *)((uint)src & 0xfffffff0);
-    auVar4 = vectorPermute(auVar4,auVar6,alignPermute);
-    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = auVar4;
+    carryVec = *(vec16 *)((uint)src & 0xfffffff0);
+    loadedVecA = vectorPermute(loadedVecA,carryVec,alignPermute);
+    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = loadedVecA;
     dst = dst + 8;
   }
   if (dst + 4 < dstEnd) {
-    puVar2 = src + 4;
+    nextVecPtr = src + 4;
     src = src + 4;
-    auVar6 = vectorPermute(auVar6,*(vec16 *)((uint)puVar2 & 0xfffffff0),alignPermute);
-    *(vec16 *)((uint)dst & 0xfffffff0) = auVar6;
+    carryVec = vectorPermute(carryVec,*(vec16 *)((uint)nextVecPtr & 0xfffffff0),alignPermute);
+    *(vec16 *)((uint)dst & 0xfffffff0) = carryVec;
     dst = dst + 4;
   }
   else if (dstEnd <= dst) goto LAB_0001eabc;
   do {
-    uVar1 = *src;
+    swapWord = *src;
     src = src + 1;
-    *dst = uVar1 << 0x10 | uVar1 >> 0x10;
+    *dst = swapWord << 0x10 | swapWord >> 0x10;
     dst = dst + 1;
   } while (dst < dstEnd);
 LAB_0001eabc:
@@ -3295,86 +3298,89 @@ int copyIndices16Swapped_prefetch(dst, src, count)
   uint *src;
   uint count;
 {
-  uint uVar1;
-  uint *puVar2;
+  vec16 loadedVecB;
+  vec16 permutedVecA;
+  uint *nextVecPtr;
+  uint swapWord;
+  uint *prefetchCursor;
   uint *dstEnd;
-  vec16 auVar4;
-  vec16 auVar5;
-  vec16 auVar6;
+  vec16 loadedVecA;
+  vec16 permutedVecB;
+  vec16 carryVec;
   vec16 alignPermute;
-  vec16 auVar8;
-  vec16 auVar9;
+  vec16 permutedVecD;
+  vec16 loadedVecE;
   
   dstEnd = (uint *)((int)dst + (count & 0x7ffffffe) * 2);
   for (; ((uint)dst & 0x1f) != 0; dst = dst + 1) {
-    uVar1 = *src;
+    swapWord = *src;
     src = src + 1;
-    *dst = uVar1 << 0x10 | uVar1 >> 0x10;
+    *dst = swapWord << 0x10 | swapWord >> 0x10;
   }
-  auVar6 = *(vec16 *)((uint)src & 0xfffffff0);
+  carryVec = *(vec16 *)((uint)src & 0xfffffff0);
   alignPermute = *(vec16 *)
             (((uint)src & 0xf) * 0x10 + *(int *)PTR_DAT_001e88cc & 0xfffffff0);
-  for (puVar2 = src; puVar2 < src + 0x38; puVar2 = puVar2 + 8) {
-    dataCacheBlockTouch(puVar2);
+  for (prefetchCursor = src; prefetchCursor < src + 0x38; prefetchCursor = prefetchCursor + 8) {
+    dataCacheBlockTouch(prefetchCursor);
   }
   for (; dst < dstEnd + -0x40; dst = dst + 0x10) {
     dataCacheBlockTouch(src + 0x38);
-    auVar4 = *(vec16 *)((uint)(src + 0xc) & 0xfffffff0);
-    auVar9 = *(vec16 *)((uint)(src + 8) & 0xfffffff0);
-    auVar8 = vectorPermute(auVar6,*(vec16 *)((uint)(src + 4) & 0xfffffff0),alignPermute);
+    loadedVecA = *(vec16 *)((uint)(src + 0xc) & 0xfffffff0);
+    loadedVecE = *(vec16 *)((uint)(src + 8) & 0xfffffff0);
+    permutedVecD = vectorPermute(carryVec,*(vec16 *)((uint)(src + 4) & 0xfffffff0),alignPermute);
     dataCacheBlockTouch(src + 0x40);
-    auVar6 = *(vec16 *)((uint)(src + 0x10) & 0xfffffff0);
-    auVar5 = vectorPermute(*(vec16 *)((uint)(src + 4) & 0xfffffff0),auVar9,alignPermute);
+    carryVec = *(vec16 *)((uint)(src + 0x10) & 0xfffffff0);
+    permutedVecB = vectorPermute(*(vec16 *)((uint)(src + 4) & 0xfffffff0),loadedVecE,alignPermute);
     dataCacheBlockAllocate(dst);
-    *(vec16 *)((uint)dst & 0xfffffff0) = auVar8;
-    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = auVar5;
-    auVar5 = vectorPermute(auVar9,auVar4,alignPermute);
-    auVar4 = vectorPermute(auVar4,auVar6,alignPermute);
+    *(vec16 *)((uint)dst & 0xfffffff0) = permutedVecD;
+    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = permutedVecB;
+    permutedVecB = vectorPermute(loadedVecE,loadedVecA,alignPermute);
+    loadedVecA = vectorPermute(loadedVecA,carryVec,alignPermute);
     dataCacheBlockAllocate(dst + 8);
-    *(vec16 *)((uint)(dst + 8) & 0xfffffff0) = auVar5;
-    *(vec16 *)((uint)(dst + 0xc) & 0xfffffff0) = auVar4;
+    *(vec16 *)((uint)(dst + 8) & 0xfffffff0) = permutedVecB;
+    *(vec16 *)((uint)(dst + 0xc) & 0xfffffff0) = loadedVecA;
     src = src + 0x10;
   }
   for (; dst < dstEnd + -0x10; dst = dst + 0x10) {
-    puVar2 = src + 4;
-    auVar9 = *(vec16 *)((uint)(src + 8) & 0xfffffff0);
-    auVar5 = *(vec16 *)((uint)(src + 0xc) & 0xfffffff0);
+    nextVecPtr = src + 4;
+    loadedVecE = *(vec16 *)((uint)(src + 8) & 0xfffffff0);
+    loadedVecB = *(vec16 *)((uint)(src + 0xc) & 0xfffffff0);
     src = src + 0x10;
-    auVar8 = vectorPermute(auVar6,*(vec16 *)((uint)puVar2 & 0xfffffff0),alignPermute);
-    auVar6 = *(vec16 *)((uint)src & 0xfffffff0);
-    auVar4 = vectorPermute(*(vec16 *)((uint)puVar2 & 0xfffffff0),auVar9,alignPermute);
+    permutedVecD = vectorPermute(carryVec,*(vec16 *)((uint)nextVecPtr & 0xfffffff0),alignPermute);
+    carryVec = *(vec16 *)((uint)src & 0xfffffff0);
+    permutedVecA = vectorPermute(*(vec16 *)((uint)nextVecPtr & 0xfffffff0),loadedVecE,alignPermute);
     dataCacheBlockAllocate(dst);
-    *(vec16 *)((uint)dst & 0xfffffff0) = auVar8;
-    auVar8 = vectorPermute(auVar9,auVar5,alignPermute);
-    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = auVar4;
-    auVar4 = vectorPermute(auVar5,auVar6,alignPermute);
+    *(vec16 *)((uint)dst & 0xfffffff0) = permutedVecD;
+    permutedVecD = vectorPermute(loadedVecE,loadedVecB,alignPermute);
+    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = permutedVecA;
+    permutedVecA = vectorPermute(loadedVecB,carryVec,alignPermute);
     dataCacheBlockAllocate(dst + 8);
-    *(vec16 *)((uint)(dst + 8) & 0xfffffff0) = auVar8;
-    *(vec16 *)((uint)(dst + 0xc) & 0xfffffff0) = auVar4;
+    *(vec16 *)((uint)(dst + 8) & 0xfffffff0) = permutedVecD;
+    *(vec16 *)((uint)(dst + 0xc) & 0xfffffff0) = permutedVecA;
   }
   if (dst + 8 < dstEnd) {
-    auVar4 = *(vec16 *)((uint)(src + 4) & 0xfffffff0);
-    auVar6 = vectorPermute(auVar6,auVar4,alignPermute);
+    loadedVecA = *(vec16 *)((uint)(src + 4) & 0xfffffff0);
+    carryVec = vectorPermute(carryVec,loadedVecA,alignPermute);
     dataCacheBlockAllocate(dst);
-    *(vec16 *)((uint)dst & 0xfffffff0) = auVar6;
+    *(vec16 *)((uint)dst & 0xfffffff0) = carryVec;
     src = src + 8;
-    auVar6 = *(vec16 *)((uint)src & 0xfffffff0);
-    auVar4 = vectorPermute(auVar4,auVar6,alignPermute);
-    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = auVar4;
+    carryVec = *(vec16 *)((uint)src & 0xfffffff0);
+    loadedVecA = vectorPermute(loadedVecA,carryVec,alignPermute);
+    *(vec16 *)((uint)(dst + 4) & 0xfffffff0) = loadedVecA;
     dst = dst + 8;
   }
   if (dst + 4 < dstEnd) {
-    puVar2 = src + 4;
+    nextVecPtr = src + 4;
     src = src + 4;
-    auVar6 = vectorPermute(auVar6,*(vec16 *)((uint)puVar2 & 0xfffffff0),alignPermute);
-    *(vec16 *)((uint)dst & 0xfffffff0) = auVar6;
+    carryVec = vectorPermute(carryVec,*(vec16 *)((uint)nextVecPtr & 0xfffffff0),alignPermute);
+    *(vec16 *)((uint)dst & 0xfffffff0) = carryVec;
     dst = dst + 4;
   }
   else if (dstEnd <= dst) goto LAB_0001eabc;
   do {
-    uVar1 = *src;
+    swapWord = *src;
     src = src + 1;
-    *dst = uVar1 << 0x10 | uVar1 >> 0x10;
+    *dst = swapWord << 0x10 | swapWord >> 0x10;
     dst = dst + 1;
   } while (dst < dstEnd);
 LAB_0001eabc:
@@ -3390,81 +3396,83 @@ int copyIndices16Swapped_dcbz_entry(dst, src, count)
   uint src;
   uint count;
 {
-  uint *puVar1;
-  uint *puVar2;
-  uint *puVar3;
+  vec16 tempVec;
+  uint swapWord;
+  uint dstMisalign;
+  uint *vecPtr1;
+  uint *vecPtr2;
+  uint *vecPtr3;
   uint *dstCursor;
-  uint uVar5;
+  uint dcbzAddress;
   uint *srcCursor;
   uint *dstEnd;
-  vec16 auVar8;
-  vec16 auVar9;
-  vec16 auVar10;
+  vec16 carryVec;
+  vec16 outVec2;
   vec16 alignPermute;
-  vec16 auVar12;
-  vec16 auVar13;
+  vec16 outVec1;
+  vec16 outVec0;
   
   dstEnd = (uint *)(dst + (count & 0x7ffffffe) * 2);
-  for (uVar5 = dst + 0x7f & 0xffffff80; uVar5 < ((uint)dstEnd & 0xffffff80);
-      uVar5 = uVar5 + 0x80) {
-    dataCacheBlockClearToZero(uVar5);
+  for (dcbzAddress = dst + 0x7f & 0xffffff80; dcbzAddress < ((uint)dstEnd & 0xffffff80);
+      dcbzAddress = dcbzAddress + 0x80) {
+    dataCacheBlockClearToZero(dcbzAddress);
   }
-  uVar5 = dst & 0xf;
-  dstCursor = (uint *)(dst - uVar5);
-  srcCursor = (uint *)(src - uVar5);
+  dstMisalign = dst & 0xf;
+  dstCursor = (uint *)(dst - dstMisalign);
+  srcCursor = (uint *)(src - dstMisalign);
   alignPermute = *(vec16 *)
              (*(int *)PTR_DAT_001e88cc + ((int)srcCursor * 0x10 & 0xf0U) & 0xfffffff0);
-  auVar9 = *(vec16 *)(src & 0xfffffff0);
-  if (uVar5 != 0) {
-    auVar9 = *(vec16 *)((uint)(srcCursor + 4) & 0xfffffff0);
+  carryVec = *(vec16 *)(src & 0xfffffff0);
+  if (dstMisalign != 0) {
+    carryVec = *(vec16 *)((uint)(srcCursor + 4) & 0xfffffff0);
     srcCursor = srcCursor + 4;
-    auVar8 = vectorPermute(*(vec16 *)(src & 0xfffffff0),auVar9,alignPermute);
-    auVar8 = vectorConditionalSelect
-                       (*(vec16 *)((uint)dstCursor & 0xfffffff0),auVar8,
+    tempVec = vectorPermute(*(vec16 *)(src & 0xfffffff0),carryVec,alignPermute);
+    tempVec = vectorConditionalSelect
+                       (*(vec16 *)((uint)dstCursor & 0xfffffff0),tempVec,
                         *(vec16 *)
-                         (*(int *)PTR_DAT_001e88cc + uVar5 * 0x10 + 0x100 & 0xfffffff0));
-    *(vec16 *)((uint)dstCursor & 0xfffffff0) = auVar8;
+                         (*(int *)PTR_DAT_001e88cc + dstMisalign * 0x10 + 0x100 & 0xfffffff0));
+    *(vec16 *)((uint)dstCursor & 0xfffffff0) = tempVec;
     dstCursor = dstCursor + 4;
   }
   for (; dstCursor < dstEnd + -0x10; dstCursor = dstCursor + 0x10) {
-    puVar1 = srcCursor + 4;
-    puVar2 = srcCursor + 8;
-    puVar3 = srcCursor + 0xc;
+    vecPtr1 = srcCursor + 4;
+    vecPtr2 = srcCursor + 8;
+    vecPtr3 = srcCursor + 0xc;
     srcCursor = srcCursor + 0x10;
-    auVar13 = vectorPermute(auVar9,*(vec16 *)((uint)puVar1 & 0xfffffff0),alignPermute);
-    auVar9 = *(vec16 *)((uint)srcCursor & 0xfffffff0);
-    auVar12 = vectorPermute(*(vec16 *)((uint)puVar1 & 0xfffffff0),
-                            *(vec16 *)((uint)puVar2 & 0xfffffff0),alignPermute);
-    auVar10 = vectorPermute(*(vec16 *)((uint)puVar2 & 0xfffffff0),
-                            *(vec16 *)((uint)puVar3 & 0xfffffff0),alignPermute);
-    auVar8 = vectorPermute(*(vec16 *)((uint)puVar3 & 0xfffffff0),auVar9,alignPermute);
-    *(vec16 *)((uint)dstCursor & 0xfffffff0) = auVar13;
-    *(vec16 *)((uint)(dstCursor + 4) & 0xfffffff0) = auVar12;
-    *(vec16 *)((uint)(dstCursor + 8) & 0xfffffff0) = auVar10;
-    *(vec16 *)((uint)(dstCursor + 0xc) & 0xfffffff0) = auVar8;
+    outVec0 = vectorPermute(carryVec,*(vec16 *)((uint)vecPtr1 & 0xfffffff0),alignPermute);
+    carryVec = *(vec16 *)((uint)srcCursor & 0xfffffff0);
+    outVec1 = vectorPermute(*(vec16 *)((uint)vecPtr1 & 0xfffffff0),
+                            *(vec16 *)((uint)vecPtr2 & 0xfffffff0),alignPermute);
+    outVec2 = vectorPermute(*(vec16 *)((uint)vecPtr2 & 0xfffffff0),
+                            *(vec16 *)((uint)vecPtr3 & 0xfffffff0),alignPermute);
+    tempVec = vectorPermute(*(vec16 *)((uint)vecPtr3 & 0xfffffff0),carryVec,alignPermute);
+    *(vec16 *)((uint)dstCursor & 0xfffffff0) = outVec0;
+    *(vec16 *)((uint)(dstCursor + 4) & 0xfffffff0) = outVec1;
+    *(vec16 *)((uint)(dstCursor + 8) & 0xfffffff0) = outVec2;
+    *(vec16 *)((uint)(dstCursor + 0xc) & 0xfffffff0) = tempVec;
   }
   if (dstCursor + 8 < dstEnd) {
-    auVar8 = *(vec16 *)((uint)(srcCursor + 4) & 0xfffffff0);
+    tempVec = *(vec16 *)((uint)(srcCursor + 4) & 0xfffffff0);
     srcCursor = srcCursor + 8;
-    auVar9 = vectorPermute(auVar9,auVar8,alignPermute);
-    *(vec16 *)((uint)dstCursor & 0xfffffff0) = auVar9;
-    auVar9 = *(vec16 *)((uint)srcCursor & 0xfffffff0);
-    auVar8 = vectorPermute(auVar8,auVar9,alignPermute);
-    *(vec16 *)((uint)(dstCursor + 4) & 0xfffffff0) = auVar8;
+    carryVec = vectorPermute(carryVec,tempVec,alignPermute);
+    *(vec16 *)((uint)dstCursor & 0xfffffff0) = carryVec;
+    carryVec = *(vec16 *)((uint)srcCursor & 0xfffffff0);
+    tempVec = vectorPermute(tempVec,carryVec,alignPermute);
+    *(vec16 *)((uint)(dstCursor + 4) & 0xfffffff0) = tempVec;
     dstCursor = dstCursor + 8;
   }
   if (dstCursor + 4 < dstEnd) {
-    puVar1 = srcCursor + 4;
+    vecPtr1 = srcCursor + 4;
     srcCursor = srcCursor + 4;
-    auVar9 = vectorPermute(auVar9,*(vec16 *)((uint)puVar1 & 0xfffffff0),alignPermute);
-    *(vec16 *)((uint)dstCursor & 0xfffffff0) = auVar9;
+    carryVec = vectorPermute(carryVec,*(vec16 *)((uint)vecPtr1 & 0xfffffff0),alignPermute);
+    *(vec16 *)((uint)dstCursor & 0xfffffff0) = carryVec;
     dstCursor = dstCursor + 4;
   }
   else if (dstEnd <= dstCursor) goto LAB_0001ecac;
   do {
-    uVar5 = *srcCursor;
+    swapWord = *srcCursor;
     srcCursor = srcCursor + 1;
-    *dstCursor = uVar5 << 0x10 | uVar5 >> 0x10;
+    *dstCursor = swapWord << 0x10 | swapWord >> 0x10;
     dstCursor = dstCursor + 1;
   } while (dstCursor < dstEnd);
 LAB_0001ecac:
@@ -3480,81 +3488,83 @@ int copyIndices16Swapped_dcbz(dst, src, count)
   uint src;
   uint count;
 {
-  uint *puVar1;
-  uint *puVar2;
-  uint *puVar3;
+  vec16 tempVec;
+  uint swapWord;
+  uint dstMisalign;
+  uint *vecPtr1;
+  uint *vecPtr2;
+  uint *vecPtr3;
   uint *dstCursor;
-  uint uVar5;
+  uint dcbzAddress;
   uint *srcCursor;
   uint *dstEnd;
-  vec16 auVar8;
-  vec16 auVar9;
-  vec16 auVar10;
+  vec16 carryVec;
+  vec16 outVec2;
   vec16 alignPermute;
-  vec16 auVar12;
-  vec16 auVar13;
+  vec16 outVec1;
+  vec16 outVec0;
   
   dstEnd = (uint *)(dst + (count & 0x7ffffffe) * 2);
-  for (uVar5 = dst + 0x7f & 0xffffff80; uVar5 < ((uint)dstEnd & 0xffffff80);
-      uVar5 = uVar5 + 0x80) {
-    dataCacheBlockClearToZero(uVar5);
+  for (dcbzAddress = dst + 0x7f & 0xffffff80; dcbzAddress < ((uint)dstEnd & 0xffffff80);
+      dcbzAddress = dcbzAddress + 0x80) {
+    dataCacheBlockClearToZero(dcbzAddress);
   }
-  uVar5 = dst & 0xf;
-  dstCursor = (uint *)(dst - uVar5);
-  srcCursor = (uint *)(src - uVar5);
+  dstMisalign = dst & 0xf;
+  dstCursor = (uint *)(dst - dstMisalign);
+  srcCursor = (uint *)(src - dstMisalign);
   alignPermute = *(vec16 *)
              (*(int *)PTR_DAT_001e88cc + ((int)srcCursor * 0x10 & 0xf0U) & 0xfffffff0);
-  auVar9 = *(vec16 *)(src & 0xfffffff0);
-  if (uVar5 != 0) {
-    auVar9 = *(vec16 *)((uint)(srcCursor + 4) & 0xfffffff0);
+  carryVec = *(vec16 *)(src & 0xfffffff0);
+  if (dstMisalign != 0) {
+    carryVec = *(vec16 *)((uint)(srcCursor + 4) & 0xfffffff0);
     srcCursor = srcCursor + 4;
-    auVar8 = vectorPermute(*(vec16 *)(src & 0xfffffff0),auVar9,alignPermute);
-    auVar8 = vectorConditionalSelect
-                       (*(vec16 *)((uint)dstCursor & 0xfffffff0),auVar8,
+    tempVec = vectorPermute(*(vec16 *)(src & 0xfffffff0),carryVec,alignPermute);
+    tempVec = vectorConditionalSelect
+                       (*(vec16 *)((uint)dstCursor & 0xfffffff0),tempVec,
                         *(vec16 *)
-                         (*(int *)PTR_DAT_001e88cc + uVar5 * 0x10 + 0x100 & 0xfffffff0));
-    *(vec16 *)((uint)dstCursor & 0xfffffff0) = auVar8;
+                         (*(int *)PTR_DAT_001e88cc + dstMisalign * 0x10 + 0x100 & 0xfffffff0));
+    *(vec16 *)((uint)dstCursor & 0xfffffff0) = tempVec;
     dstCursor = dstCursor + 4;
   }
   for (; dstCursor < dstEnd + -0x10; dstCursor = dstCursor + 0x10) {
-    puVar1 = srcCursor + 4;
-    puVar2 = srcCursor + 8;
-    puVar3 = srcCursor + 0xc;
+    vecPtr1 = srcCursor + 4;
+    vecPtr2 = srcCursor + 8;
+    vecPtr3 = srcCursor + 0xc;
     srcCursor = srcCursor + 0x10;
-    auVar13 = vectorPermute(auVar9,*(vec16 *)((uint)puVar1 & 0xfffffff0),alignPermute);
-    auVar9 = *(vec16 *)((uint)srcCursor & 0xfffffff0);
-    auVar12 = vectorPermute(*(vec16 *)((uint)puVar1 & 0xfffffff0),
-                            *(vec16 *)((uint)puVar2 & 0xfffffff0),alignPermute);
-    auVar10 = vectorPermute(*(vec16 *)((uint)puVar2 & 0xfffffff0),
-                            *(vec16 *)((uint)puVar3 & 0xfffffff0),alignPermute);
-    auVar8 = vectorPermute(*(vec16 *)((uint)puVar3 & 0xfffffff0),auVar9,alignPermute);
-    *(vec16 *)((uint)dstCursor & 0xfffffff0) = auVar13;
-    *(vec16 *)((uint)(dstCursor + 4) & 0xfffffff0) = auVar12;
-    *(vec16 *)((uint)(dstCursor + 8) & 0xfffffff0) = auVar10;
-    *(vec16 *)((uint)(dstCursor + 0xc) & 0xfffffff0) = auVar8;
+    outVec0 = vectorPermute(carryVec,*(vec16 *)((uint)vecPtr1 & 0xfffffff0),alignPermute);
+    carryVec = *(vec16 *)((uint)srcCursor & 0xfffffff0);
+    outVec1 = vectorPermute(*(vec16 *)((uint)vecPtr1 & 0xfffffff0),
+                            *(vec16 *)((uint)vecPtr2 & 0xfffffff0),alignPermute);
+    outVec2 = vectorPermute(*(vec16 *)((uint)vecPtr2 & 0xfffffff0),
+                            *(vec16 *)((uint)vecPtr3 & 0xfffffff0),alignPermute);
+    tempVec = vectorPermute(*(vec16 *)((uint)vecPtr3 & 0xfffffff0),carryVec,alignPermute);
+    *(vec16 *)((uint)dstCursor & 0xfffffff0) = outVec0;
+    *(vec16 *)((uint)(dstCursor + 4) & 0xfffffff0) = outVec1;
+    *(vec16 *)((uint)(dstCursor + 8) & 0xfffffff0) = outVec2;
+    *(vec16 *)((uint)(dstCursor + 0xc) & 0xfffffff0) = tempVec;
   }
   if (dstCursor + 8 < dstEnd) {
-    auVar8 = *(vec16 *)((uint)(srcCursor + 4) & 0xfffffff0);
+    tempVec = *(vec16 *)((uint)(srcCursor + 4) & 0xfffffff0);
     srcCursor = srcCursor + 8;
-    auVar9 = vectorPermute(auVar9,auVar8,alignPermute);
-    *(vec16 *)((uint)dstCursor & 0xfffffff0) = auVar9;
-    auVar9 = *(vec16 *)((uint)srcCursor & 0xfffffff0);
-    auVar8 = vectorPermute(auVar8,auVar9,alignPermute);
-    *(vec16 *)((uint)(dstCursor + 4) & 0xfffffff0) = auVar8;
+    carryVec = vectorPermute(carryVec,tempVec,alignPermute);
+    *(vec16 *)((uint)dstCursor & 0xfffffff0) = carryVec;
+    carryVec = *(vec16 *)((uint)srcCursor & 0xfffffff0);
+    tempVec = vectorPermute(tempVec,carryVec,alignPermute);
+    *(vec16 *)((uint)(dstCursor + 4) & 0xfffffff0) = tempVec;
     dstCursor = dstCursor + 8;
   }
   if (dstCursor + 4 < dstEnd) {
-    puVar1 = srcCursor + 4;
+    vecPtr1 = srcCursor + 4;
     srcCursor = srcCursor + 4;
-    auVar9 = vectorPermute(auVar9,*(vec16 *)((uint)puVar1 & 0xfffffff0),alignPermute);
-    *(vec16 *)((uint)dstCursor & 0xfffffff0) = auVar9;
+    carryVec = vectorPermute(carryVec,*(vec16 *)((uint)vecPtr1 & 0xfffffff0),alignPermute);
+    *(vec16 *)((uint)dstCursor & 0xfffffff0) = carryVec;
     dstCursor = dstCursor + 4;
   }
   else if (dstEnd <= dstCursor) goto LAB_0001ecac;
   do {
-    uVar5 = *srcCursor;
+    swapWord = *srcCursor;
     srcCursor = srcCursor + 1;
-    *dstCursor = uVar5 << 0x10 | uVar5 >> 0x10;
+    *dstCursor = swapWord << 0x10 | swapWord >> 0x10;
     dstCursor = dstCursor + 1;
   } while (dstCursor < dstEnd);
 LAB_0001ecac:

@@ -1,61 +1,64 @@
 #include "decls.h"
 
 /* gldTextureHasNonPowerOfTwoSize2 @ 0x2dcf0 (236 bytes) */
-int gldTextureHasNonPowerOfTwoSize2(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+int gldTextureHasNonPowerOfTwoSize2(texture, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6)
+  int texture;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
 {
-  byte bVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  byte bVar5;
-  uint uVar6;
+  uint leftoverBits;
+  uint levelDepth;
+  int levelRecord;
+  byte targetByte;
+  uint levelHeight;
+  int texImages;
+  uint borderWidth;
+  byte targetKind;
+  uint levelWidth;
   
-  iVar3 = *(int *)(param_1 + 0x30);
-  bVar1 = *(byte *)(iVar3 + 1);
-  bVar5 = bVar1 & 0xf;
-  *(byte *)(param_1 + 0x6c) = bVar5;
-  iVar3 = *(short *)(iVar3 + 0x3c) * 0x18 + iVar3;
-  uVar4 = (uint)*(byte *)(iVar3 + 0xaa);
-  uVar6 = (uint)*(ushort *)(iVar3 + 0xa4) + uVar4 * -2;
-  if ((int)uVar6 < 1) {
-    uVar6 = 1;
+  texImages = *(int *)(texture + 0x30);
+  targetByte = *(byte *)(texImages + 1);
+  targetKind = targetByte & 0xf;
+  *(byte *)(texture + 0x6c) = targetKind;
+  levelRecord = *(short *)(texImages + 0x3c) * 0x18 + texImages;
+  borderWidth = (uint)*(byte *)(levelRecord + 0xaa);
+  levelWidth = (uint)*(ushort *)(levelRecord + 0xa4) + borderWidth * -2;
+  if ((int)levelWidth < 1) {
+    levelWidth = 1;
   }
-  uVar2 = (uint)*(ushort *)(iVar3 + 0xa6) + uVar4 * -2;
-  if ((int)uVar2 < 1) {
-    uVar2 = 1;
+  levelHeight = (uint)*(ushort *)(levelRecord + 0xa6) + borderWidth * -2;
+  if ((int)levelHeight < 1) {
+    levelHeight = 1;
   }
-  uVar4 = (uint)*(ushort *)(iVar3 + 0xa8) + uVar4 * -2;
-  if ((int)uVar4 < 1) {
-    uVar4 = 1;
+  levelDepth = (uint)*(ushort *)(levelRecord + 0xa8) + borderWidth * -2;
+  if ((int)levelDepth < 1) {
+    levelDepth = 1;
   }
-  if (bVar5 == 1) {
-    if ((uVar6 & uVar6 - 1) != 0) {
+  if (targetKind == 1) {
+    if ((levelWidth & levelWidth - 1) != 0) {
       return 1;
     }
-    if ((uVar2 & uVar2 - 1) != 0) {
+    if ((levelHeight & levelHeight - 1) != 0) {
       return 1;
     }
-    uVar6 = uVar4 & uVar4 - 1;
+    leftoverBits = levelDepth & levelDepth - 1;
   }
-  else if (((bVar1 & 0xf) == 0) || (bVar5 == 3)) {
-    if ((uVar6 & uVar6 - 1) != 0) {
+  else if (((targetByte & 0xf) == 0) || (targetKind == 3)) {
+    if ((levelWidth & levelWidth - 1) != 0) {
       return 1;
     }
-    uVar6 = uVar2 & uVar2 - 1;
+    leftoverBits = levelHeight & levelHeight - 1;
   }
   else {
-    if (bVar5 != 4) {
+    if (targetKind != 4) {
       return 1;
     }
-    uVar6 = uVar6 & uVar6 - 1;
+    leftoverBits = levelWidth & levelWidth - 1;
   }
-  if (uVar6 != 0) {
+  if (leftoverBits != 0) {
     return 1;
   }
   return 0;
@@ -1899,61 +1902,64 @@ int FUN_00030a60(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* gldTextureHasNonPowerOfTwoSize @ 0x30b50 (236 bytes) */
-int gldTextureHasNonPowerOfTwoSize(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  undefined4 param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+int gldTextureHasNonPowerOfTwoSize(texture, unusedArg2, unusedArg3, unusedArg4, unusedArg5, unusedArg6)
+  int texture;
+  undefined4 unusedArg2;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
+  undefined4 unusedArg6;
 {
-  byte bVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  byte bVar5;
-  uint uVar6;
+  uint leftoverBits;
+  uint levelDepth;
+  int levelRecord;
+  byte targetByte;
+  uint levelHeight;
+  int texImages;
+  uint borderWidth;
+  byte targetKind;
+  uint levelWidth;
   
-  iVar3 = *(int *)(param_1 + 0x30);
-  bVar1 = *(byte *)(iVar3 + 1);
-  bVar5 = bVar1 & 0xf;
-  *(byte *)(param_1 + 0x6c) = bVar5;
-  iVar3 = *(short *)(iVar3 + 0x3c) * 0x18 + iVar3;
-  uVar4 = (uint)*(byte *)(iVar3 + 0xaa);
-  uVar6 = (uint)*(ushort *)(iVar3 + 0xa4) + uVar4 * -2;
-  if ((int)uVar6 < 1) {
-    uVar6 = 1;
+  texImages = *(int *)(texture + 0x30);
+  targetByte = *(byte *)(texImages + 1);
+  targetKind = targetByte & 0xf;
+  *(byte *)(texture + 0x6c) = targetKind;
+  levelRecord = *(short *)(texImages + 0x3c) * 0x18 + texImages;
+  borderWidth = (uint)*(byte *)(levelRecord + 0xaa);
+  levelWidth = (uint)*(ushort *)(levelRecord + 0xa4) + borderWidth * -2;
+  if ((int)levelWidth < 1) {
+    levelWidth = 1;
   }
-  uVar2 = (uint)*(ushort *)(iVar3 + 0xa6) + uVar4 * -2;
-  if ((int)uVar2 < 1) {
-    uVar2 = 1;
+  levelHeight = (uint)*(ushort *)(levelRecord + 0xa6) + borderWidth * -2;
+  if ((int)levelHeight < 1) {
+    levelHeight = 1;
   }
-  uVar4 = (uint)*(ushort *)(iVar3 + 0xa8) + uVar4 * -2;
-  if ((int)uVar4 < 1) {
-    uVar4 = 1;
+  levelDepth = (uint)*(ushort *)(levelRecord + 0xa8) + borderWidth * -2;
+  if ((int)levelDepth < 1) {
+    levelDepth = 1;
   }
-  if (bVar5 == 1) {
-    if ((uVar6 & uVar6 - 1) != 0) {
+  if (targetKind == 1) {
+    if ((levelWidth & levelWidth - 1) != 0) {
       return 1;
     }
-    if ((uVar2 & uVar2 - 1) != 0) {
+    if ((levelHeight & levelHeight - 1) != 0) {
       return 1;
     }
-    uVar6 = uVar4 & uVar4 - 1;
+    leftoverBits = levelDepth & levelDepth - 1;
   }
-  else if (((bVar1 & 0xf) == 0) || (bVar5 == 3)) {
-    if ((uVar6 & uVar6 - 1) != 0) {
+  else if (((targetByte & 0xf) == 0) || (targetKind == 3)) {
+    if ((levelWidth & levelWidth - 1) != 0) {
       return 1;
     }
-    uVar6 = uVar2 & uVar2 - 1;
+    leftoverBits = levelHeight & levelHeight - 1;
   }
   else {
-    if (bVar5 != 4) {
+    if (targetKind != 4) {
       return 1;
     }
-    uVar6 = uVar6 & uVar6 - 1;
+    leftoverBits = levelWidth & levelWidth - 1;
   }
-  if (uVar6 != 0) {
+  if (leftoverBits != 0) {
     return 1;
   }
   return 0;
