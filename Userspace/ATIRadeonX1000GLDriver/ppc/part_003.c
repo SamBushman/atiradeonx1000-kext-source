@@ -2282,230 +2282,243 @@ LAB_0001c78c:
 }
 
 /* dxtDecompressImage @ 0x1d1e0 (808 bytes) */
-int dxtDecompressImage(param_1, param_2, param_3, param_4, param_5, param_6)
-  uint param_1;
-  uint param_2;
-  uint param_3;
-  int param_4;
-  int param_5;
-  int param_6;
+int dxtDecompressImage(width, height, depth, format, blocks, dstCursor)
+  uint width;
+  uint height;
+  uint depth;
+  int format;
+  int blocks;
+  int dstCursor;
 {
-  int iVar1;
-  int iVar2;
-  byte bVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
-  uint uVar7;
-  int iVar8;
-  uint loopIndex3;
-  int iVar10;
-  int iVar11;
-  uint uVar12;
-  uint loopIndex;
-  uint loopIndex2;
+  uint alphaIndex;
+  int blockOffset;
+  int blocksPerRowSafe;
+  byte alphaPair;
+  uint alpha0;
+  int columnInBlockDxt1;
+  int blockPtrDxt5;
+  int blockColumnDxt5;
+  int alphaWeightA;
+  int columnInBlockDxt5;
+  int blockPtr;
+  int blockRowDxt1;
+  int dstPixel;
+  int blockColumn;
+  int alphaWeightB;
+  byte alphaByte;
+  uint alphaIndexBits;
+  uint columnInBlockDxt3;
+  int blockIndex;
+  uint alpha1;
+  int blockRow;
+  uint sliceIndex;
+  int blocksPerRow;
+  int rowInBlock;
+  uint pixelInBlock;
+  uint rowIndex;
+  uint columnIndex;
   
-  if (param_4 == 0xd) {
-    if (param_3 != 0) {
-      iVar10 = ((int)param_1 >> 2) + (uint)((int)param_1 < 0 && (param_1 & 3) != 0);
-      loopIndex3 = 0;
+  if (format == 0xd) {
+    if (depth != 0) {
+      blocksPerRow = ((int)width >> 2) + (uint)((int)width < 0 && (width & 3) != 0);
+      sliceIndex = 0;
       do {
-        if (param_2 != 0) {
-          loopIndex = 0;
+        if (height != 0) {
+          rowIndex = 0;
           do {
-            if (param_1 != 0) {
-              iVar8 = ((int)loopIndex >> 2) + (uint)((int)loopIndex < 0 && (loopIndex & 3) != 0);
-              loopIndex2 = 0;
-              iVar11 = loopIndex + iVar8 * -4;
+            if (width != 0) {
+              blockRow = ((int)rowIndex >> 2) + (uint)((int)rowIndex < 0 && (rowIndex & 3) != 0);
+              columnIndex = 0;
+              rowInBlock = rowIndex + blockRow * -4;
               do {
-                iVar2 = iVar10;
-                if (iVar10 == 0) {
-                  iVar2 = 1;
+                blocksPerRowSafe = blocksPerRow;
+                if (blocksPerRow == 0) {
+                  blocksPerRowSafe = 1;
                 }
-                iVar1 = ((int)loopIndex2 >> 2) + (uint)((int)loopIndex2 < 0 && (loopIndex2 & 3) != 0);
-                iVar6 = iVar1 + iVar2 * iVar8;
-                uVar5 = loopIndex2 + iVar1 * -4;
-                iVar2 = iVar6 * 0x10;
-                iVar1 = param_5 + iVar2;
-                ((int (*)())dxt1DecodeColorIndex)((uint)CONCAT11(*(undefined1 *)(iVar1 + 9),*(undefined1 *)(iVar1 + 8)),
-                             (uint)CONCAT11(*(undefined1 *)(iVar1 + 0xb),*(undefined1 *)(iVar1 + 10)
+                blockColumn = ((int)columnIndex >> 2) + (uint)((int)columnIndex < 0 && (columnIndex & 3) != 0);
+                blockIndex = blockColumn + blocksPerRowSafe * blockRow;
+                columnInBlockDxt3 = columnIndex + blockColumn * -4;
+                blockOffset = blockIndex * 0x10;
+                blockPtr = blocks + blockOffset;
+                ((int (*)())dxt1DecodeColorIndex)((uint)CONCAT11(*(undefined1 *)(blockPtr + 9),*(undefined1 *)(blockPtr + 8)),
+                             (uint)CONCAT11(*(undefined1 *)(blockPtr + 0xb),*(undefined1 *)(blockPtr + 10)
                                            ),
-                             (int)(uint)*(byte *)(iVar2 + iVar11 + param_5 + 0xc) >>
-                             (uVar5 * 2 & 0x3e) & 3,param_6);
-                bVar3 = *(byte *)((iVar6 * 8 + iVar11) * 2 + param_5 + ((int)uVar5 >> 1));
-                if ((uVar5 & 1) == 0) {
-                  bVar3 = bVar3 << 4;
+                             (int)(uint)*(byte *)(blockOffset + rowInBlock + blocks + 0xc) >>
+                             (columnInBlockDxt3 * 2 & 0x3e) & 3,dstCursor);
+                alphaPair = *(byte *)((blockIndex * 8 + rowInBlock) * 2 + blocks + ((int)columnInBlockDxt3 >> 1));
+                if ((columnInBlockDxt3 & 1) == 0) {
+                  alphaPair = alphaPair << 4;
                 }
-                loopIndex2 = loopIndex2 + 1;
-                *(byte *)(param_6 + 3) = bVar3 & 0xf0;
-                param_6 = param_6 + 4;
-              } while (loopIndex2 < param_1);
+                columnIndex = columnIndex + 1;
+                *(byte *)(dstCursor + 3) = alphaPair & 0xf0;
+                dstCursor = dstCursor + 4;
+              } while (columnIndex < width);
             }
-            loopIndex = loopIndex + 1;
-          } while (loopIndex < param_2);
+            rowIndex = rowIndex + 1;
+          } while (rowIndex < height);
         }
-        loopIndex3 = loopIndex3 + 1;
-      } while (loopIndex3 < param_3);
+        sliceIndex = sliceIndex + 1;
+      } while (sliceIndex < depth);
     }
   }
-  else if (param_4 == 0xe) {
-    if (param_3 != 0) {
-      iVar10 = ((int)param_1 >> 1) + (uint)((int)param_1 < 0 && (param_1 & 1) != 0);
-      loopIndex3 = 0;
+  else if (format == 0xe) {
+    if (depth != 0) {
+      blocksPerRow = ((int)width >> 1) + (uint)((int)width < 0 && (width & 1) != 0);
+      sliceIndex = 0;
       do {
-        if (param_2 != 0) {
-          loopIndex = 0;
+        if (height != 0) {
+          rowIndex = 0;
           do {
-            if (param_1 != 0) {
-              iVar8 = ((int)loopIndex >> 2) + (uint)((int)loopIndex < 0 && (loopIndex & 3) != 0);
-              loopIndex2 = 0;
-              iVar11 = loopIndex + iVar8 * -4;
+            if (width != 0) {
+              blockRow = ((int)rowIndex >> 2) + (uint)((int)rowIndex < 0 && (rowIndex & 3) != 0);
+              columnIndex = 0;
+              rowInBlock = rowIndex + blockRow * -4;
               do {
-                iVar2 = iVar10;
-                if (iVar10 == 0) {
-                  iVar2 = 1;
+                blocksPerRowSafe = blocksPerRow;
+                if (blocksPerRow == 0) {
+                  blocksPerRowSafe = 1;
                 }
-                iVar6 = ((int)loopIndex2 >> 2) + (uint)((int)loopIndex2 < 0 && (loopIndex2 & 3) != 0);
-                iVar1 = loopIndex2 + iVar6 * -4;
-                iVar2 = (iVar6 + iVar2 * iVar8) * 0x10;
-                uVar12 = iVar1 + iVar11 * 4;
-                iVar6 = param_5 + iVar2;
-                ((int (*)())dxt1DecodeColorIndex)((uint)CONCAT11(*(undefined1 *)(iVar6 + 9),*(undefined1 *)(iVar6 + 8)),
-                             (uint)CONCAT11(*(undefined1 *)(iVar6 + 0xb),*(undefined1 *)(iVar6 + 10)
+                blockColumnDxt5 = ((int)columnIndex >> 2) + (uint)((int)columnIndex < 0 && (columnIndex & 3) != 0);
+                columnInBlockDxt5 = columnIndex + blockColumnDxt5 * -4;
+                blockOffset = (blockColumnDxt5 + blocksPerRowSafe * blockRow) * 0x10;
+                pixelInBlock = columnInBlockDxt5 + rowInBlock * 4;
+                blockPtrDxt5 = blocks + blockOffset;
+                ((int (*)())dxt1DecodeColorIndex)((uint)CONCAT11(*(undefined1 *)(blockPtrDxt5 + 9),*(undefined1 *)(blockPtrDxt5 + 8)),
+                             (uint)CONCAT11(*(undefined1 *)(blockPtrDxt5 + 0xb),*(undefined1 *)(blockPtrDxt5 + 10)
                                            ),
-                             (int)(uint)*(byte *)(iVar2 + iVar11 + param_5 + 0xc) >>
-                             (iVar1 * 2 & 0x3eU) & 3,param_6);
-                bVar3 = *(byte *)(param_5 + iVar2);
-                uVar5 = (uint)bVar3;
-                uVar7 = (uint)*(byte *)(iVar6 + 1);
-                if (iVar11 < 2) {
-                  uVar4 = (uint)*(byte *)(iVar6 + 4) << 0x10 | (uint)*(byte *)(iVar6 + 3) << 8 |
-                          (uint)*(byte *)(iVar6 + 2);
+                             (int)(uint)*(byte *)(blockOffset + rowInBlock + blocks + 0xc) >>
+                             (columnInBlockDxt5 * 2 & 0x3eU) & 3,dstCursor);
+                alphaByte = *(byte *)(blocks + blockOffset);
+                alpha0 = (uint)alphaByte;
+                alpha1 = (uint)*(byte *)(blockPtrDxt5 + 1);
+                if (rowInBlock < 2) {
+                  alphaIndexBits = (uint)*(byte *)(blockPtrDxt5 + 4) << 0x10 | (uint)*(byte *)(blockPtrDxt5 + 3) << 8 |
+                          (uint)*(byte *)(blockPtrDxt5 + 2);
                 }
                 else {
-                  uVar4 = (uint)*(byte *)(iVar6 + 7) << 0x10 | (uint)*(byte *)(iVar6 + 6) << 8 |
-                          (uint)*(byte *)(iVar6 + 5);
+                  alphaIndexBits = (uint)*(byte *)(blockPtrDxt5 + 7) << 0x10 | (uint)*(byte *)(blockPtrDxt5 + 6) << 8 |
+                          (uint)*(byte *)(blockPtrDxt5 + 5);
                 }
-                uVar12 = uVar4 >> ((uVar12 + (((int)uVar12 >> 3) +
-                                             (uint)((int)uVar12 < 0 && (uVar12 & 7) != 0)) * -8) * 3
+                alphaIndex = alphaIndexBits >> ((pixelInBlock + (((int)pixelInBlock >> 3) +
+                                             (uint)((int)pixelInBlock < 0 && (pixelInBlock & 7) != 0)) * -8) * 3
                                   & 0x3f) & 7;
-                if (uVar5 <= uVar7) {
-                  switch(uVar12) {
+                if (alpha0 <= alpha1) {
+                  switch(alphaIndex) {
                   case 0:
                     goto code_r0x0001d62c;
                   case 1:
                     goto code_r0x0001d634;
                   case 2:
-                    bVar3 = (byte)(uint)((ulonglong)
-                                         ((longlong)(int)(uVar5 * 4 + uVar7) * 0x92492493) >> 0x22);
+                    alphaByte = (byte)(uint)((ulonglong)
+                                         ((longlong)(int)(alpha0 * 4 + alpha1) * 0x92492493) >> 0x22);
                     break;
                   case 3:
-                    iVar1 = uVar5 * 3;
-                    iVar2 = uVar7 << 1;
+                    alphaWeightA = alpha0 * 3;
+                    alphaWeightB = alpha1 << 1;
                     goto code_r0x0001d594;
                   case 4:
-                    iVar1 = uVar7 * 3;
-                    iVar2 = uVar5 << 1;
+                    alphaWeightA = alpha1 * 3;
+                    alphaWeightB = alpha0 << 1;
                     goto code_r0x0001d670;
                   case 5:
-                    bVar3 = (byte)(uint)((ulonglong)
-                                         ((longlong)(int)(uVar5 + uVar7 * 4) * 0x92492493) >> 0x22);
+                    alphaByte = (byte)(uint)((ulonglong)
+                                         ((longlong)(int)(alpha0 + alpha1 * 4) * 0x92492493) >> 0x22);
                     break;
                   default:
                     goto LAB_0001d6b0;
                   case 7:
-                    bVar3 = 0xff;
+                    alphaByte = 0xff;
                   }
                   goto code_r0x0001d6b4;
                 }
-                switch(uVar12) {
+                switch(alphaIndex) {
                 case 0:
 code_r0x0001d62c:
                   break;
                 case 1:
 code_r0x0001d634:
-                  bVar3 = *(byte *)(iVar6 + 1);
+                  alphaByte = *(byte *)(blockPtrDxt5 + 1);
                   break;
                 case 2:
-                  bVar3 = (byte)(uint)((ulonglong)((longlong)(int)(uVar5 * 6 + uVar7) * 0x92492493)
+                  alphaByte = (byte)(uint)((ulonglong)((longlong)(int)(alpha0 * 6 + alpha1) * 0x92492493)
                                       >> 0x22);
                   break;
                 case 3:
-                  iVar1 = uVar5 * 5;
-                  iVar2 = uVar7 << 1;
+                  alphaWeightA = alpha0 * 5;
+                  alphaWeightB = alpha1 << 1;
                   goto code_r0x0001d594;
                 case 4:
-                  iVar1 = uVar7 * 3;
-                  iVar2 = uVar5 << 2;
+                  alphaWeightA = alpha1 * 3;
+                  alphaWeightB = alpha0 << 2;
                   goto code_r0x0001d670;
                 case 5:
-                  iVar1 = uVar5 * 3;
-                  iVar2 = uVar7 << 2;
+                  alphaWeightA = alpha0 * 3;
+                  alphaWeightB = alpha1 << 2;
 code_r0x0001d594:
-                  bVar3 = (byte)(uint)((ulonglong)((longlong)(iVar1 + iVar2) * 0x92492493) >> 0x22);
+                  alphaByte = (byte)(uint)((ulonglong)((longlong)(alphaWeightA + alphaWeightB) * 0x92492493) >> 0x22);
                   break;
                 case 6:
-                  iVar1 = uVar7 * 5;
-                  iVar2 = uVar5 << 1;
+                  alphaWeightA = alpha1 * 5;
+                  alphaWeightB = alpha0 << 1;
 code_r0x0001d670:
-                  bVar3 = (byte)(uint)((ulonglong)((longlong)(iVar2 + iVar1) * 0x92492493) >> 0x22);
+                  alphaByte = (byte)(uint)((ulonglong)((longlong)(alphaWeightB + alphaWeightA) * 0x92492493) >> 0x22);
                   break;
                 case 7:
-                  bVar3 = (byte)(uint)((ulonglong)((longlong)(int)(uVar5 + uVar7 * 6) * 0x92492493)
+                  alphaByte = (byte)(uint)((ulonglong)((longlong)(int)(alpha0 + alpha1 * 6) * 0x92492493)
                                       >> 0x22);
                   break;
                 default:
 LAB_0001d6b0:
-                  bVar3 = 0;
+                  alphaByte = 0;
                 }
 code_r0x0001d6b4:
-                loopIndex2 = loopIndex2 + 1;
-                *(byte *)(param_6 + 3) = bVar3;
-                param_6 = param_6 + 4;
-              } while (loopIndex2 < param_1);
+                columnIndex = columnIndex + 1;
+                *(byte *)(dstCursor + 3) = alphaByte;
+                dstCursor = dstCursor + 4;
+              } while (columnIndex < width);
             }
-            loopIndex = loopIndex + 1;
-          } while (loopIndex < param_2);
+            rowIndex = rowIndex + 1;
+          } while (rowIndex < height);
         }
-        loopIndex3 = loopIndex3 + 1;
-      } while (loopIndex3 < param_3);
+        sliceIndex = sliceIndex + 1;
+      } while (sliceIndex < depth);
     }
   }
-  else if ((param_4 == 0xc) && (param_3 != 0)) {
-    iVar10 = ((int)param_1 >> 2) + (uint)((int)param_1 < 0 && (param_1 & 3) != 0);
-    loopIndex3 = 0;
+  else if ((format == 0xc) && (depth != 0)) {
+    blocksPerRow = ((int)width >> 2) + (uint)((int)width < 0 && (width & 3) != 0);
+    sliceIndex = 0;
     do {
-      if (param_2 != 0) {
-        loopIndex = 0;
+      if (height != 0) {
+        rowIndex = 0;
         do {
-          if (param_1 != 0) {
-            iVar11 = ((int)loopIndex >> 2) + (uint)((int)loopIndex < 0 && (loopIndex & 3) != 0);
-            loopIndex2 = 0;
-            iVar8 = param_6;
+          if (width != 0) {
+            blockRowDxt1 = ((int)rowIndex >> 2) + (uint)((int)rowIndex < 0 && (rowIndex & 3) != 0);
+            columnIndex = 0;
+            dstPixel = dstCursor;
             do {
-              iVar2 = iVar10;
-              if (iVar10 == 0) {
-                iVar2 = 1;
+              blocksPerRowSafe = blocksPerRow;
+              if (blocksPerRow == 0) {
+                blocksPerRowSafe = 1;
               }
-              iVar1 = ((int)loopIndex2 >> 2) + (uint)((int)loopIndex2 < 0 && (loopIndex2 & 3) != 0);
-              param_6 = iVar8 + 4;
-              iVar6 = loopIndex2 + iVar1 * -4;
-              loopIndex2 = loopIndex2 + 1;
-              iVar2 = (iVar1 + iVar2 * iVar11) * 8;
-              iVar1 = param_5 + iVar2;
-              ((int (*)())dxt1DecodeColorIndex)((uint)CONCAT11(*(undefined1 *)(iVar1 + 1),
-                                          *(undefined1 *)(param_5 + iVar2)),
-                           (uint)CONCAT11(*(undefined1 *)(iVar1 + 3),*(undefined1 *)(iVar1 + 2)),
-                           (int)(uint)*(byte *)(loopIndex + iVar11 * -4 + iVar2 + param_5 + 4) >>
-                           (iVar6 * 2 & 0x3eU) & 3,iVar8);
-              iVar8 = param_6;
-            } while (loopIndex2 < param_1);
+              blockColumn = ((int)columnIndex >> 2) + (uint)((int)columnIndex < 0 && (columnIndex & 3) != 0);
+              dstCursor = dstPixel + 4;
+              columnInBlockDxt1 = columnIndex + blockColumn * -4;
+              columnIndex = columnIndex + 1;
+              blockOffset = (blockColumn + blocksPerRowSafe * blockRowDxt1) * 8;
+              blockPtr = blocks + blockOffset;
+              ((int (*)())dxt1DecodeColorIndex)((uint)CONCAT11(*(undefined1 *)(blockPtr + 1),
+                                          *(undefined1 *)(blocks + blockOffset)),
+                           (uint)CONCAT11(*(undefined1 *)(blockPtr + 3),*(undefined1 *)(blockPtr + 2)),
+                           (int)(uint)*(byte *)(rowIndex + blockRowDxt1 * -4 + blockOffset + blocks + 4) >>
+                           (columnInBlockDxt1 * 2 & 0x3eU) & 3,dstPixel);
+              dstPixel = dstCursor;
+            } while (columnIndex < width);
           }
-          loopIndex = loopIndex + 1;
-        } while (loopIndex < param_2);
+          rowIndex = rowIndex + 1;
+        } while (rowIndex < height);
       }
-      loopIndex3 = loopIndex3 + 1;
-    } while (loopIndex3 < param_3);
+      sliceIndex = sliceIndex + 1;
+    } while (sliceIndex < depth);
   }
   return;
 }

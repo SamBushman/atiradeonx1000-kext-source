@@ -1190,3 +1190,104 @@ use	glAccum_impl	iVar28	rowCounterLoad	INFERRED	rows done so far in the GL_LOAD 
 use	glAccum_impl	iVar28	rowCounterLoad	INFERRED	rows done so far in the GL_LOAD row loop	^\s*\}\ while\ \(uVar31\ \-\ uVar29\ !=\ iVar28\);$@4	+1
 func	FUN_00029290	glReadPixels_entry	INFERRED	4-byte entry stub at the start of glReadPixels (FUN_00029294 / glReadPixels_impl): glAccum calls it as the read-back helper with (ctx,x,y,w,h,format,type,buffer,...)
 func	FUN_000198b0	gld_drawPixelsAtRasterPos	INFERRED	sets the raster position {x, y (flipped by drawable height when the +0x2b7c flag is set), 0} and calls glDrawPixels_impl with format 0x80e1 (GL_BGRA) and the caller's type/pixels: glAccum GL_RETURN writes the staging buffer back through it
+local	dxtDecompressImage	param_1	width	CONFIRMED	horizontal pixel count: inner loop bound and the block pitch width/4
+local	dxtDecompressImage	param_2	height	CONFIRMED	vertical pixel count: middle loop bound
+local	dxtDecompressImage	param_3	depth	INFERRED	slice count: outer loop bound (the image decoder loops x, y, z)
+local	dxtDecompressImage	param_4	format	CONFIRMED	compressed format code: 0xc DXT1 (8-byte blocks), 0xd DXT3 (16-byte blocks, 4-bit explicit alpha), 0xe DXT5 (16-byte blocks, interpolated alpha)
+local	dxtDecompressImage	param_5	blocks	CONFIRMED	compressed source blocks
+local	dxtDecompressImage	param_6	dstCursor	CONFIRMED	output RGBA8 buffer, advanced 4 bytes per pixel
+local	dxtDecompressImage	iVar10	blocksPerRow	INFERRED	width/4 blocks per row (DXT5 path computes width>>1 as decompiled), clamped to >= 1 where used
+use	dxtDecompressImage	iVar8	blockRow	CONFIRMED	rowIndex >> 2: 4x4 block row	^\s*iVar8\ =\ \(\(int\)uVar13\ >>\ 2\)\ \+\ \(uint\)\(\(int\)uVar13\ <\ 0\ \&\&\ \(uVar13\ \&\ 3\)\ !=\ 0\);$	+1
+use	dxtDecompressImage	iVar8	blockRow	CONFIRMED	rowIndex >> 2: 4x4 block row	^\s*iVar11\ =\ uVar13\ \+\ iVar8\ \*\ \-4;$	+1
+use	dxtDecompressImage	iVar8	blockRow	CONFIRMED	rowIndex >> 2: 4x4 block row	^\s*iVar6\ =\ iVar1\ \+\ iVar2\ \*\ iVar8;$	+1
+use	dxtDecompressImage	iVar8	blockRow	CONFIRMED	rowIndex >> 2: 4x4 block row	^\s*iVar8\ =\ \(\(int\)uVar13\ >>\ 2\)\ \+\ \(uint\)\(\(int\)uVar13\ <\ 0\ \&\&\ \(uVar13\ \&\ 3\)\ !=\ 0\);$@2	+1
+use	dxtDecompressImage	iVar8	blockRow	CONFIRMED	rowIndex >> 2: 4x4 block row	^\s*iVar11\ =\ uVar13\ \+\ iVar8\ \*\ \-4;$@2	+1
+use	dxtDecompressImage	iVar8	blockRow	CONFIRMED	rowIndex >> 2: 4x4 block row	^\s*iVar2\ =\ \(iVar6\ \+\ iVar2\ \*\ iVar8\)\ \*\ 0x10;$	+1
+use	dxtDecompressImage	iVar8	dstPixel	INFERRED	output pointer of the pixel being decoded (param_6 before the +4 step), passed as the dxt1DecodeColorIndex output	^\s*iVar8\ =\ param_6;$	+1
+use	dxtDecompressImage	iVar8	dstPixel	INFERRED	output pointer of the pixel being decoded (param_6 before the +4 step), passed as the dxt1DecodeColorIndex output	^\s*param_6\ =\ iVar8\ \+\ 4;$	+1
+use	dxtDecompressImage	iVar8	dstPixel	INFERRED	output pointer of the pixel being decoded (param_6 before the +4 step), passed as the dxt1DecodeColorIndex output	^\s*\(\(int\ \(\*\)\(\)\)FUN_0001c1c0\)\(\(uint\)CONCAT11\(\*\(undefined1\ \*\)\(iVar1\ \+\ 1\),$	+6
+use	dxtDecompressImage	iVar11	rowInBlock	CONFIRMED	rowIndex - blockRow*4: row inside the 4x4 block	^\s*iVar11\ =\ uVar13\ \+\ iVar8\ \*\ \-4;$	+1
+use	dxtDecompressImage	iVar11	rowInBlock	CONFIRMED	rowIndex - blockRow*4: row inside the 4x4 block	^\s*\(\(int\ \(\*\)\(\)\)FUN_0001c1c0\)\(\(uint\)CONCAT11\(\*\(undefined1\ \*\)\(iVar1\ \+\ 9\),\*\(undefined1\ \*\)\(iVar1\ \+\ 8\)\),$	+6
+use	dxtDecompressImage	iVar11	rowInBlock	CONFIRMED	rowIndex - blockRow*4: row inside the 4x4 block	^\s*iVar11\ =\ uVar13\ \+\ iVar8\ \*\ \-4;$@2	+1
+use	dxtDecompressImage	iVar11	rowInBlock	CONFIRMED	rowIndex - blockRow*4: row inside the 4x4 block	^\s*uVar12\ =\ iVar1\ \+\ iVar11\ \*\ 4;$	+1
+use	dxtDecompressImage	iVar11	rowInBlock	CONFIRMED	rowIndex - blockRow*4: row inside the 4x4 block	^\s*\(\(int\ \(\*\)\(\)\)FUN_0001c1c0\)\(\(uint\)CONCAT11\(\*\(undefined1\ \*\)\(iVar6\ \+\ 9\),\*\(undefined1\ \*\)\(iVar6\ \+\ 8\)\),$	+5
+use	dxtDecompressImage	iVar11	rowInBlock	CONFIRMED	rowIndex - blockRow*4: row inside the 4x4 block	^\s*if\ \(iVar11\ <\ 2\)\ \{$	+1
+use	dxtDecompressImage	iVar11	blockRowDxt1	CONFIRMED	rowIndex >> 2: 4x4 block row (DXT1 path)	^\s*iVar11\ =\ \(\(int\)uVar13\ >>\ 2\)\ \+\ \(uint\)\(\(int\)uVar13\ <\ 0\ \&\&\ \(uVar13\ \&\ 3\)\ !=\ 0\);$	+1
+use	dxtDecompressImage	iVar11	blockRowDxt1	CONFIRMED	rowIndex >> 2: 4x4 block row (DXT1 path)	^\s*iVar2\ =\ \(iVar1\ \+\ iVar2\ \*\ iVar11\)\ \*\ 8;$	+1
+use	dxtDecompressImage	iVar11	blockRowDxt1	CONFIRMED	rowIndex >> 2: 4x4 block row (DXT1 path)	^\s*\(\(int\ \(\*\)\(\)\)FUN_0001c1c0\)\(\(uint\)CONCAT11\(\*\(undefined1\ \*\)\(iVar1\ \+\ 1\),$	+5
+use	dxtDecompressImage	iVar1	blockColumn	CONFIRMED	columnIndex >> 2: 4x4 block column	^\s*iVar1\ =\ \(\(int\)uVar14\ >>\ 2\)\ \+\ \(uint\)\(\(int\)uVar14\ <\ 0\ \&\&\ \(uVar14\ \&\ 3\)\ !=\ 0\);$	+3
+use	dxtDecompressImage	iVar1	blockColumn	CONFIRMED	columnIndex >> 2: 4x4 block column	^\s*iVar1\ =\ \(\(int\)uVar14\ >>\ 2\)\ \+\ \(uint\)\(\(int\)uVar14\ <\ 0\ \&\&\ \(uVar14\ \&\ 3\)\ !=\ 0\);$@2	+1
+use	dxtDecompressImage	iVar1	blockColumn	CONFIRMED	columnIndex >> 2: 4x4 block column	^\s*iVar6\ =\ uVar14\ \+\ iVar1\ \*\ \-4;$	+1
+use	dxtDecompressImage	iVar1	blockColumn	CONFIRMED	columnIndex >> 2: 4x4 block column	^\s*iVar2\ =\ \(iVar1\ \+\ iVar2\ \*\ iVar11\)\ \*\ 8;$	+1
+use	dxtDecompressImage	iVar1	blockPtr	CONFIRMED	address of the current block (blocks + blockOffset): colour endpoints at +8 (DXT3/5) or +0 (DXT1)	^\s*iVar1\ =\ param_5\ \+\ iVar2;$	+6
+use	dxtDecompressImage	iVar1	blockPtr	CONFIRMED	address of the current block (blocks + blockOffset): colour endpoints at +8 (DXT3/5) or +0 (DXT1)	^\s*iVar1\ =\ param_5\ \+\ iVar2;$@2	+6
+use	dxtDecompressImage	iVar1	columnInBlockDxt5	CONFIRMED	columnIndex - blockColumn*4 (DXT5 path)	^\s*iVar1\ =\ uVar14\ \+\ iVar6\ \*\ \-4;$	+1
+use	dxtDecompressImage	iVar1	columnInBlockDxt5	CONFIRMED	columnIndex - blockColumn*4 (DXT5 path)	^\s*uVar12\ =\ iVar1\ \+\ iVar11\ \*\ 4;$	+1
+use	dxtDecompressImage	iVar1	columnInBlockDxt5	CONFIRMED	columnIndex - blockColumn*4 (DXT5 path)	^\s*\(\(int\ \(\*\)\(\)\)FUN_0001c1c0\)\(\(uint\)CONCAT11\(\*\(undefined1\ \*\)\(iVar6\ \+\ 9\),\*\(undefined1\ \*\)\(iVar6\ \+\ 8\)\),$	+5
+use	dxtDecompressImage	iVar1	alphaWeightA	INFERRED	first weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*iVar1\ =\ uVar5\ \*\ 3;$	+1
+use	dxtDecompressImage	iVar1	alphaWeightA	INFERRED	first weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*iVar1\ =\ uVar5\ \*\ 5;$	+1
+use	dxtDecompressImage	iVar1	alphaWeightA	INFERRED	first weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*iVar1\ =\ uVar5\ \*\ 3;$@2	+1
+use	dxtDecompressImage	iVar1	alphaWeightA	INFERRED	first weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*bVar3\ =\ \(byte\)\(uint\)\(\(ulonglong\)\(\(longlong\)\(iVar1\ \+\ iVar2\)\ \*\ 0x92492493\)\ >>\ 0x22\);$	+1
+use	dxtDecompressImage	iVar1	alphaWeightA	INFERRED	first weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*iVar1\ =\ uVar7\ \*\ 3;$	+1
+use	dxtDecompressImage	iVar1	alphaWeightA	INFERRED	first weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*iVar1\ =\ uVar7\ \*\ 3;$@2	+1
+use	dxtDecompressImage	iVar1	alphaWeightA	INFERRED	first weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*iVar1\ =\ uVar7\ \*\ 5;$	+1
+use	dxtDecompressImage	iVar1	alphaWeightA	INFERRED	first weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*bVar3\ =\ \(byte\)\(uint\)\(\(ulonglong\)\(\(longlong\)\(iVar2\ \+\ iVar1\)\ \*\ 0x92492493\)\ >>\ 0x22\);$	+1
+use	dxtDecompressImage	iVar6	blockIndex	CONFIRMED	blockColumn + blocksPerRow*blockRow	^\s*iVar6\ =\ iVar1\ \+\ iVar2\ \*\ iVar8;$	+1
+use	dxtDecompressImage	iVar6	blockIndex	CONFIRMED	blockColumn + blocksPerRow*blockRow	^\s*iVar2\ =\ iVar6\ \*\ 0x10;$	+1
+use	dxtDecompressImage	iVar6	blockIndex	CONFIRMED	blockColumn + blocksPerRow*blockRow	^\s*bVar3\ =\ \*\(byte\ \*\)\(\(iVar6\ \*\ 8\ \+\ iVar11\)\ \*\ 2\ \+\ param_5\ \+\ \(\(int\)uVar5\ >>\ 1\)\);$	+1
+use	dxtDecompressImage	iVar6	blockColumnDxt5	CONFIRMED	columnIndex >> 2 (DXT5 path)	^\s*iVar6\ =\ \(\(int\)uVar14\ >>\ 2\)\ \+\ \(uint\)\(\(int\)uVar14\ <\ 0\ \&\&\ \(uVar14\ \&\ 3\)\ !=\ 0\);$	+3
+use	dxtDecompressImage	iVar6	blockPtrDxt5	CONFIRMED	address of the current block (DXT5 path)	^\s*iVar6\ =\ param_5\ \+\ iVar2;$	+6
+use	dxtDecompressImage	iVar6	blockPtrDxt5	CONFIRMED	address of the current block (DXT5 path)	^\s*uVar7\ =\ \(uint\)\*\(byte\ \*\)\(iVar6\ \+\ 1\);$	+1
+use	dxtDecompressImage	iVar6	blockPtrDxt5	CONFIRMED	address of the current block (DXT5 path)	^\s*uVar4\ =\ \(uint\)\*\(byte\ \*\)\(iVar6\ \+\ 4\)\ <<\ 0x10\ \|\ \(uint\)\*\(byte\ \*\)\(iVar6\ \+\ 3\)\ <<\ 8\ \|$	+2
+use	dxtDecompressImage	iVar6	blockPtrDxt5	CONFIRMED	address of the current block (DXT5 path)	^\s*uVar4\ =\ \(uint\)\*\(byte\ \*\)\(iVar6\ \+\ 7\)\ <<\ 0x10\ \|\ \(uint\)\*\(byte\ \*\)\(iVar6\ \+\ 6\)\ <<\ 8\ \|$	+2
+use	dxtDecompressImage	iVar6	blockPtrDxt5	CONFIRMED	address of the current block (DXT5 path)	^\s*bVar3\ =\ \*\(byte\ \*\)\(iVar6\ \+\ 1\);$	+1
+use	dxtDecompressImage	iVar6	columnInBlockDxt1	CONFIRMED	columnIndex - blockColumn*4 (DXT1 path)	^\s*iVar6\ =\ uVar14\ \+\ iVar1\ \*\ \-4;$	+1
+use	dxtDecompressImage	iVar6	columnInBlockDxt1	CONFIRMED	columnIndex - blockColumn*4 (DXT1 path)	^\s*\(\(int\ \(\*\)\(\)\)FUN_0001c1c0\)\(\(uint\)CONCAT11\(\*\(undefined1\ \*\)\(iVar1\ \+\ 1\),$	+5
+use	dxtDecompressImage	iVar2	alphaWeightB	INFERRED	second weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*iVar2\ =\ uVar7\ <<\ 1;$	+1
+use	dxtDecompressImage	iVar2	alphaWeightB	INFERRED	second weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*iVar2\ =\ uVar7\ <<\ 1;$@2	+1
+use	dxtDecompressImage	iVar2	alphaWeightB	INFERRED	second weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*iVar2\ =\ uVar7\ <<\ 2;$	+1
+use	dxtDecompressImage	iVar2	alphaWeightB	INFERRED	second weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*bVar3\ =\ \(byte\)\(uint\)\(\(ulonglong\)\(\(longlong\)\(iVar1\ \+\ iVar2\)\ \*\ 0x92492493\)\ >>\ 0x22\);$	+1
+use	dxtDecompressImage	iVar2	alphaWeightB	INFERRED	second weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*iVar2\ =\ uVar5\ <<\ 1;$	+1
+use	dxtDecompressImage	iVar2	alphaWeightB	INFERRED	second weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*iVar2\ =\ uVar5\ <<\ 2;$	+1
+use	dxtDecompressImage	iVar2	alphaWeightB	INFERRED	second weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*iVar2\ =\ uVar5\ <<\ 1;$@2	+1
+use	dxtDecompressImage	iVar2	alphaWeightB	INFERRED	second weighted term of the 1/7 interpolation of the two DXT5 alpha endpoints	^\s*bVar3\ =\ \(byte\)\(uint\)\(\(ulonglong\)\(\(longlong\)\(iVar2\ \+\ iVar1\)\ \*\ 0x92492493\)\ >>\ 0x22\);$	+1
+use	dxtDecompressImage	uVar5	columnInBlockDxt3	CONFIRMED	columnIndex - blockColumn*4 (DXT3 path)	^\s*uVar5\ =\ uVar14\ \+\ iVar1\ \*\ \-4;$	+1
+use	dxtDecompressImage	uVar5	columnInBlockDxt3	CONFIRMED	columnIndex - blockColumn*4 (DXT3 path)	^\s*\(\(int\ \(\*\)\(\)\)FUN_0001c1c0\)\(\(uint\)CONCAT11\(\*\(undefined1\ \*\)\(iVar1\ \+\ 9\),\*\(undefined1\ \*\)\(iVar1\ \+\ 8\)\),$	+7
+use	dxtDecompressImage	uVar5	alpha0	CONFIRMED	first DXT5 alpha endpoint (block byte 0)	^\s*uVar5\ =\ \(uint\)bVar3;$	+1
+use	dxtDecompressImage	uVar5	alpha0	CONFIRMED	first DXT5 alpha endpoint (block byte 0)	^\s*if\ \(uVar5\ <=\ uVar7\)\ \{$	+1
+use	dxtDecompressImage	uVar5	alpha0	CONFIRMED	first DXT5 alpha endpoint (block byte 0)	^\s*bVar3\ =\ \(byte\)\(uint\)\(\(ulonglong\)$	+2
+use	dxtDecompressImage	uVar5	alpha0	CONFIRMED	first DXT5 alpha endpoint (block byte 0)	^\s*iVar1\ =\ uVar5\ \*\ 3;$	+1
+use	dxtDecompressImage	uVar5	alpha0	CONFIRMED	first DXT5 alpha endpoint (block byte 0)	^\s*iVar2\ =\ uVar5\ <<\ 1;$	+1
+use	dxtDecompressImage	uVar5	alpha0	CONFIRMED	first DXT5 alpha endpoint (block byte 0)	^\s*bVar3\ =\ \(byte\)\(uint\)\(\(ulonglong\)$@2	+2
+use	dxtDecompressImage	uVar5	alpha0	CONFIRMED	first DXT5 alpha endpoint (block byte 0)	^\s*bVar3\ =\ \(byte\)\(uint\)\(\(ulonglong\)\(\(longlong\)\(int\)\(uVar5\ \*\ 6\ \+\ uVar7\)\ \*\ 0x92492493\)$	+2
+use	dxtDecompressImage	uVar5	alpha0	CONFIRMED	first DXT5 alpha endpoint (block byte 0)	^\s*iVar1\ =\ uVar5\ \*\ 5;$	+1
+use	dxtDecompressImage	uVar5	alpha0	CONFIRMED	first DXT5 alpha endpoint (block byte 0)	^\s*iVar2\ =\ uVar5\ <<\ 2;$	+1
+use	dxtDecompressImage	uVar5	alpha0	CONFIRMED	first DXT5 alpha endpoint (block byte 0)	^\s*iVar1\ =\ uVar5\ \*\ 3;$@2	+1
+use	dxtDecompressImage	uVar5	alpha0	CONFIRMED	first DXT5 alpha endpoint (block byte 0)	^\s*iVar2\ =\ uVar5\ <<\ 1;$@2	+1
+use	dxtDecompressImage	uVar5	alpha0	CONFIRMED	first DXT5 alpha endpoint (block byte 0)	^\s*bVar3\ =\ \(byte\)\(uint\)\(\(ulonglong\)\(\(longlong\)\(int\)\(uVar5\ \+\ uVar7\ \*\ 6\)\ \*\ 0x92492493\)$	+2
+local	dxtDecompressImage	uVar7	alpha1	CONFIRMED	second DXT5 alpha endpoint (block byte 1)
+local	dxtDecompressImage	uVar4	alphaIndexBits	CONFIRMED	24 bits holding eight 3-bit DXT5 alpha indices (block bytes 2-4 for rows 0-1, 5-7 for rows 2-3)
+use	dxtDecompressImage	bVar3	alphaByte	CONFIRMED	DXT5: first alpha endpoint (block byte 0); replaced by the interpolated alpha (case 0 keeps the endpoint) and stored at pixel+3	^\s*bVar3\ =\ \*\(byte\ \*\)\(param_5\ \+\ iVar2\);$	+2
+use	dxtDecompressImage	bVar3	alphaByte	CONFIRMED	DXT5: first alpha endpoint (block byte 0); replaced by the interpolated alpha (case 0 keeps the endpoint) and stored at pixel+3	^\s*bVar3\ =\ \(byte\)\(uint\)\(\(ulonglong\)$	+2
+use	dxtDecompressImage	bVar3	alphaByte	CONFIRMED	DXT5: first alpha endpoint (block byte 0); replaced by the interpolated alpha (case 0 keeps the endpoint) and stored at pixel+3	^\s*bVar3\ =\ \(byte\)\(uint\)\(\(ulonglong\)$@2	+2
+use	dxtDecompressImage	bVar3	alphaByte	CONFIRMED	DXT5: first alpha endpoint (block byte 0); replaced by the interpolated alpha (case 0 keeps the endpoint) and stored at pixel+3	^\s*bVar3\ =\ 0xff;$	+1
+use	dxtDecompressImage	bVar3	alphaByte	CONFIRMED	DXT5: first alpha endpoint (block byte 0); replaced by the interpolated alpha (case 0 keeps the endpoint) and stored at pixel+3	^\s*bVar3\ =\ \*\(byte\ \*\)\(iVar6\ \+\ 1\);$	+1
+use	dxtDecompressImage	bVar3	alphaByte	CONFIRMED	DXT5: first alpha endpoint (block byte 0); replaced by the interpolated alpha (case 0 keeps the endpoint) and stored at pixel+3	^\s*bVar3\ =\ \(byte\)\(uint\)\(\(ulonglong\)\(\(longlong\)\(int\)\(uVar5\ \*\ 6\ \+\ uVar7\)\ \*\ 0x92492493\)$	+2
+use	dxtDecompressImage	bVar3	alphaByte	CONFIRMED	DXT5: first alpha endpoint (block byte 0); replaced by the interpolated alpha (case 0 keeps the endpoint) and stored at pixel+3	^\s*bVar3\ =\ \(byte\)\(uint\)\(\(ulonglong\)\(\(longlong\)\(iVar1\ \+\ iVar2\)\ \*\ 0x92492493\)\ >>\ 0x22\);$	+1
+use	dxtDecompressImage	bVar3	alphaByte	CONFIRMED	DXT5: first alpha endpoint (block byte 0); replaced by the interpolated alpha (case 0 keeps the endpoint) and stored at pixel+3	^\s*bVar3\ =\ \(byte\)\(uint\)\(\(ulonglong\)\(\(longlong\)\(iVar2\ \+\ iVar1\)\ \*\ 0x92492493\)\ >>\ 0x22\);$	+1
+use	dxtDecompressImage	bVar3	alphaByte	CONFIRMED	DXT5: first alpha endpoint (block byte 0); replaced by the interpolated alpha (case 0 keeps the endpoint) and stored at pixel+3	^\s*bVar3\ =\ \(byte\)\(uint\)\(\(ulonglong\)\(\(longlong\)\(int\)\(uVar5\ \+\ uVar7\ \*\ 6\)\ \*\ 0x92492493\)$	+2
+use	dxtDecompressImage	bVar3	alphaByte	CONFIRMED	DXT5: first alpha endpoint (block byte 0); replaced by the interpolated alpha (case 0 keeps the endpoint) and stored at pixel+3	^\s*bVar3\ =\ 0;$	+1
+use	dxtDecompressImage	bVar3	alphaByte	CONFIRMED	DXT5: first alpha endpoint (block byte 0); replaced by the interpolated alpha (case 0 keeps the endpoint) and stored at pixel+3	^\s*\*\(byte\ \*\)\(param_6\ \+\ 3\)\ =\ bVar3;$	+1
+use	dxtDecompressImage	bVar3	alphaPair	CONFIRMED	DXT3 explicit alpha byte holding two 4-bit alphas (shifted left 4 for even columns)	^\s*bVar3\ =\ \*\(byte\ \*\)\(\(iVar6\ \*\ 8\ \+\ iVar11\)\ \*\ 2\ \+\ param_5\ \+\ \(\(int\)uVar5\ >>\ 1\)\);$	+1
+use	dxtDecompressImage	bVar3	alphaPair	CONFIRMED	DXT3 explicit alpha byte holding two 4-bit alphas (shifted left 4 for even columns)	^\s*bVar3\ =\ bVar3\ <<\ 4;$	+1
+use	dxtDecompressImage	bVar3	alphaPair	CONFIRMED	DXT3 explicit alpha byte holding two 4-bit alphas (shifted left 4 for even columns)	^\s*\*\(byte\ \*\)\(param_6\ \+\ 3\)\ =\ bVar3\ \&\ 0xf0;$	+1
+use	dxtDecompressImage	iVar2	blocksPerRowSafe	CONFIRMED	blocksPerRow with 0 replaced by 1	^\s*iVar2\ =\ iVar10;$	^\s*uVar5\ =\ uVar14\ \+\ iVar1\ \*\ \-4;$	all	none
+use	dxtDecompressImage	iVar2	blockOffset	CONFIRMED	blockIndex*16: byte offset of the block (DXT3)	^\s*iVar2\ =\ iVar6\ \*\ 0x10;$	^\s*bVar3\ =\ \*\(byte\ \*\)\(\(iVar6\ \*\ 8\ \+\ iVar11\)\ \*\ 2\ \+\ param_5\ \+\ \(\(int\)uVar5\ >>\ 1\)\);$	all	none
+use	dxtDecompressImage	iVar2	blocksPerRowSafe	CONFIRMED	blocksPerRow with 0 replaced by 1	^\s*iVar2\ =\ iVar10;$@2	^\s*iVar2\ =\ \(iVar6\ \+\ iVar2\ \*\ iVar8\)\ \*\ 0x10;$	all	rhs
+use	dxtDecompressImage	iVar2	blockOffset	CONFIRMED	(blockColumn + blocksPerRow*blockRow)*16: byte offset of the block (DXT5)	^\s*iVar2\ =\ \(iVar6\ \+\ iVar2\ \*\ iVar8\)\ \*\ 0x10;$	^\s*uVar5\ =\ \(uint\)bVar3;$	lhs	none
+use	dxtDecompressImage	iVar2	blocksPerRowSafe	CONFIRMED	blocksPerRow with 0 replaced by 1	^\s*iVar2\ =\ iVar10;$@3	^\s*iVar2\ =\ \(iVar1\ \+\ iVar2\ \*\ iVar11\)\ \*\ 8;$	all	rhs
+use	dxtDecompressImage	iVar2	blockOffset	CONFIRMED	(blockColumn + blocksPerRow*blockRow)*8: byte offset of the block (DXT1)	^\s*iVar2\ =\ \(iVar1\ \+\ iVar2\ \*\ iVar11\)\ \*\ 8;$	^\s*\(iVar6\ \*\ 2\ \&\ 0x3eU\)\ \&\ 3,iVar8\);$	lhs	none
+use	dxtDecompressImage	uVar12	pixelInBlock	CONFIRMED	columnInBlock + rowInBlock*4: pixel number inside the 4x4 block	^\s*uVar12\ =\ iVar1\ \+\ iVar11\ \*\ 4;$	^\s*uVar12\ =\ uVar4\ >>\ \(\(uVar12\ \+\ \(\(\(int\)uVar12\ >>\ 3\)\ \+$	all	none
+use	dxtDecompressImage	uVar12	pixelInBlock	CONFIRMED	columnInBlock + rowInBlock*4: pixel number inside the 4x4 block	^\s*uVar12\ =\ uVar4\ >>\ \(\(uVar12\ \+\ \(\(\(int\)uVar12\ >>\ 3\)\ \+$	^\s*if\ \(uVar5\ <=\ uVar7\)\ \{$	rhs	none
+use	dxtDecompressImage	uVar12	alphaIndex	CONFIRMED	the pixel's 3-bit DXT5 alpha index	^\s*uVar12\ =\ uVar4\ >>\ \(\(uVar12\ \+\ \(\(\(int\)uVar12\ >>\ 3\)\ \+$	^\s*\(uint\)\(\(int\)uVar12\ <\ 0\ \&\&\ \(uVar12\ \&\ 7\)\ !=\ 0\)\)\ \*\ \-8\)\ \*\ 3$	lhs	none
+use	dxtDecompressImage	uVar12	alphaIndex	CONFIRMED	the pixel's 3-bit DXT5 alpha index	^\s*if\ \(uVar5\ <=\ uVar7\)\ \{$	^\s*>>\ 0x22\);$	all	none
