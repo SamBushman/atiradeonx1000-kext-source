@@ -701,11 +701,12 @@ int PostLoopFooter__ctor_ea828(this, param_2, param_3, param_4, compiler)
   int param_4;
   int compiler;
 {
+  undefined4 arena;
   undefined4 *allocation;
   int iVar2;
   int *piVar3;
   int iVar4;
-  undefined4 arena;
+  undefined4 uVar5;
   undefined4 *puVar6;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
@@ -734,13 +735,13 @@ int PostLoopFooter__ctor_ea828(this, param_2, param_3, param_4, compiler)
   this[0x55] = puVar6;
   Block__connect(this[0x54],this);
   if (param_4 == 0) {
-    arena = IRInst__create(0x81,compiler);
-    this[0x52] = arena;
-    iVar2 = IRInst__getOperandRecord(arena,0);
+    uVar5 = IRInst__create(0x81,compiler);
+    this[0x52] = uVar5;
+    iVar2 = IRInst__getOperandRecord(uVar5,0);
     *(undefined4 *)(iVar2 + 8) = param_2;
     *(undefined4 *)(iVar2 + 0xc) = 0x27;
-    arena = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,param_2,0);
-    IRInst__setOperandRef(this[0x52],1,arena);
+    uVar5 = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,param_2,0);
+    IRInst__setOperandRef(this[0x52],1,uVar5);
   }
   else {
     arena = *(undefined4 *)(compiler + COMP_arenaA);
@@ -769,9 +770,9 @@ int PostLoopFooter__ctor_ea828(this, param_2, param_3, param_4, compiler)
     *(byte *)(iVar4 + 0x15c) = *(byte *)(iVar4 + 0x15c) | 1;
     *(undefined4 *)(iVar4 + 0x1c) = 3;
     IRInst__setOperandRef(this[0x52],1,iVar2);
-    arena = DAT_001aa7fc;
+    uVar5 = DAT_001aa7fc;
     iVar2 = IRInst__getOperandRecord(this[0x52],1);
-    *(undefined4 *)(iVar2 + 0x10) = arena;
+    *(undefined4 *)(iVar2 + 0x10) = uVar5;
   }
   Block__appendInst(this,this[0x52]);
   return;
@@ -1131,11 +1132,12 @@ int PostLoopFooter__ctor_eb3c8(this, param_2, param_3, param_4, compiler)
   int param_4;
   int compiler;
 {
+  undefined4 arena;
   undefined4 *allocation;
   int iVar2;
   int *piVar3;
   int iVar4;
-  undefined4 arena;
+  undefined4 uVar5;
   undefined4 *puVar6;
   
   ((int (*)())Block__ctor_ea148)(this,compiler);
@@ -1164,13 +1166,13 @@ int PostLoopFooter__ctor_eb3c8(this, param_2, param_3, param_4, compiler)
   this[0x55] = puVar6;
   Block__connect(this[0x54],this);
   if (param_4 == 0) {
-    arena = IRInst__create(0x81,compiler);
-    this[0x52] = arena;
-    iVar2 = IRInst__getOperandRecord(arena,0);
+    uVar5 = IRInst__create(0x81,compiler);
+    this[0x52] = uVar5;
+    iVar2 = IRInst__getOperandRecord(uVar5,0);
     *(undefined4 *)(iVar2 + 8) = param_2;
     *(undefined4 *)(iVar2 + 0xc) = 0x27;
-    arena = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,param_2,0);
-    IRInst__setOperandRef(this[0x52],1,arena);
+    uVar5 = FUN_00127608(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),4,param_2,0);
+    IRInst__setOperandRef(this[0x52],1,uVar5);
   }
   else {
     arena = *(undefined4 *)(compiler + COMP_arenaA);
@@ -1199,9 +1201,9 @@ int PostLoopFooter__ctor_eb3c8(this, param_2, param_3, param_4, compiler)
     *(byte *)(iVar4 + 0x15c) = *(byte *)(iVar4 + 0x15c) | 1;
     *(undefined4 *)(iVar4 + 0x1c) = 3;
     IRInst__setOperandRef(this[0x52],1,iVar2);
-    arena = DAT_001aa7fc;
+    uVar5 = DAT_001aa7fc;
     iVar2 = IRInst__getOperandRecord(this[0x52],1);
-    *(undefined4 *)(iVar2 + 0x10) = arena;
+    *(undefined4 *)(iVar2 + 0x10) = uVar5;
   }
   Block__appendInst(this,this[0x52]);
   return;

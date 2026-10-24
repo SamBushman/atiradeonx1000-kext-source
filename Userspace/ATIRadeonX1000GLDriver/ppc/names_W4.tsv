@@ -231,7 +231,6 @@ local	_gldCreateQuery	param_2	queryOut	CONFIRMED	receives the malloc(4) query re
 local	_gldCreateQuery	iVar1	wordIndex	CONFIRMED	index of the bitmap word with a free bit
 local	_gldCreateQuery	piVar2	query	CONFIRMED	malloc(4): [0] = id
 local	_gldCreateQuery	iVar3	wordByteOffset	CONFIRMED	wordIndex*4; reused for call results and sizes
-local	_gldCreateQuery	uVar4	allocation	CONFIRMED	malloc result for storage / bitmap
 local	_gldCreateQuery	puVar5	bitmap	CONFIRMED	*(ctx+0x22c) id bitmap
 local	_gldCreateQuery	uVar6	bitmapWord	CONFIRMED	bitmap word under inspection; later capacity
 local	_gldCreateQuery	puVar7	bitmapCursor	CONFIRMED	walks the bitmap words

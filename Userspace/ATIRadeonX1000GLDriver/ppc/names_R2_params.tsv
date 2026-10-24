@@ -359,9 +359,6 @@ local	FUN_00191b30	param_2	inst	INFERRED	FUN_00191b30 passes it as arg 0 of FUN_
 local	FUN_001922c4	param_3	inst	INFERRED	FUN_001922c4 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_0019286c	param_2	inst	INFERRED	FUN_0019286c passes it as arg 0 of FUN_0014a918 (typed Inst)
 local	FUN_0019286c	param_4	inst2	INFERRED	FUN_0019286c passes it as arg 0 of FUN_00105594 (typed Inst)
-local	FUN_00193cc0	param_1	arena	CONFIRMED	seed: FUN_00193cc0 reads/writes it as Arena
-local	FUN_00193d98	param_1	arena	CONFIRMED	seed: FUN_00193d98 reads/writes it as Arena
-local	FUN_00193e18	param_1	arena	CONFIRMED	seed: FUN_00193e18 reads/writes it as Arena
 local	FUN_0019423c	param_1	vector	CONFIRMED	seed: FUN_0019423c reads/writes it as Vector
 local	FUN_0019649c	param_3	inst	INFERRED	FUN_0019649c passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_0019651c	param_2	inst	INFERRED	FUN_0019651c passes it as arg 0 of FUN_001054ec (typed Inst)

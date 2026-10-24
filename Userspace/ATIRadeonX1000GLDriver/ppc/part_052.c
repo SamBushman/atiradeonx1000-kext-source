@@ -1582,8 +1582,9 @@ int R300VMachineAssembler__init(this, program, allocatorArg, compiler)
   undefined4 allocatorArg;
   int compiler;
 {
-  int programInstructionLimit;
   undefined4 allocation;
+  int programInstructionLimit;
+  undefined4 uVar2;
   int maxInstructions;
   
   *(int *)(this + 0xc) = compiler;
@@ -1602,9 +1603,9 @@ int R300VMachineAssembler__init(this, program, allocatorArg, compiler)
   *(undefined4 *)(this + 0x54) = allocation;
   allocation = Arena__alloc(*(undefined4 *)(compiler + COMP_arenaA),*(int *)(compiler + COMP_nextInstId) << 3);
   *(undefined4 *)(this + 8) = allocation;
-  allocation = FUN_000e14e4(compiler,0x28,allocatorArg);
-  *(undefined4 *)(this + 0x50) = allocation;
-  _memset(allocation,0,0x28);
+  uVar2 = FUN_000e14e4(compiler,0x28,allocatorArg);
+  *(undefined4 *)(this + 0x50) = uVar2;
+  _memset(uVar2,0,0x28);
   **(int **)(this + 0x50) = maxInstructions;
   *(undefined4 *)(*(int *)(this + 0x50) + 4) = *(undefined4 *)(this + 0x44);
   *(undefined4 *)(*(int *)(this + 0x50) + 8) = *(undefined4 *)(this + 0x54);

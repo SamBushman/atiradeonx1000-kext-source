@@ -763,9 +763,10 @@ int IRInst__newOpcode8c(operandWord2, compiler)
   undefined4 operandWord2;
   int compiler;
 {
+  undefined4 arena;
   undefined4 *allocation;
   int operandRecord;
-  undefined4 arena;
+  undefined4 uVar3;
   undefined4 *newInst;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
@@ -776,9 +777,9 @@ int IRInst__newOpcode8c(operandWord2, compiler)
   operandRecord = IRInst__getOperandRecord(newInst,1);
   *(undefined4 *)(operandRecord + 8) = operandWord2;
   *(undefined4 *)(operandRecord + 0xc) = 0;
-  arena = UNK_001af9d4;
+  uVar3 = UNK_001af9d4;
   operandRecord = IRInst__getOperandRecord(newInst,1);
-  *(undefined4 *)(operandRecord + 0x10) = arena;
+  *(undefined4 *)(operandRecord + 0x10) = uVar3;
   allocation[0x4c] = 0;
   return newInst;
 }
@@ -835,12 +836,13 @@ int IRInst__cloneIfPresub(inst, program, trackUses)
   int program;
   int trackUses;
 {
+  undefined4 *allocation;
   int operandIndex2;
   int operandIndex;
   int operandRecord;
   int needsClone;
   int *result;
-  undefined4 *allocation;
+  undefined4 *puVar3;
   uint userCount;
   int sourceInst;
   undefined4 arena;
@@ -872,13 +874,13 @@ int IRInst__cloneIfPresub(inst, program, trackUses)
         userCount = userVector[1];
         if (userCount < *userVector) {
           _memset(userCount * 4 + userVector[2],0,4);
-          allocation = (undefined4 *)(userCount * 4 + userVector[2]);
+          puVar3 = (undefined4 *)(userCount * 4 + userVector[2]);
           userVector[1] = userCount + 1;
         }
         else {
-          allocation = (undefined4 *)Vector__elementRefGrow(userVector,userCount);
+          puVar3 = (undefined4 *)Vector__elementRefGrow(userVector,userCount);
         }
-        *allocation = result;
+        *puVar3 = result;
       }
     }
     for (operandIndex2 = 1; sourceInst = (**(code **)(*result + 0x14))(result), operandIndex2 <= sourceInst; operandIndex2 = operandIndex2 + 1
@@ -1344,24 +1346,25 @@ int IRInst__retargetOpcodeFromOperands(inst, compiler)
 /* IRInst__setLiteralOperandAndSource @ 0x10bd50 (332 bytes) */
 void IRInst__setLiteralOperandAndSource(int inst,undefined4 unusedArg2,int operandIndex,int compiler,double value)
 {
+  undefined4 arena;
   int operandRecord;
   int *elementRef;
   undefined4 *allocation;
   int vreg;
-  undefined4 arena;
+  undefined4 uVar4;
   int defInst;
   undefined4 *valueKey;
   
   *(int *)(inst + 0x84) = operandIndex;
   ((void (*)())IRInst__makeLiteralVec4Float)(inst,*(undefined4 *)(compiler + 0x6c4),operandIndex,value,value,value,value)
   ;
-  arena = DAT_001af9fc;
+  uVar4 = DAT_001af9fc;
   if (operandIndex == 0) {
     *(undefined4 *)(inst + 0x9c) = DAT_001af9fc;
   }
   else {
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-    *(undefined4 *)(operandRecord + 0x10) = arena;
+    *(undefined4 *)(operandRecord + 0x10) = uVar4;
   }
   if ((*(uint *)(*(int *)(compiler + 0x6c4) + 0x30) & 8) == 0) {
     vreg = *(int *)(operandIndex * 0x18 + inst + 0x8c);

@@ -1503,6 +1503,7 @@ int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, param_4, s
   undefined4 param_9;
   int compiler;
 {
+  undefined4 arena;
   int loadRecord;
   undefined4 operandIndexC;
   undefined4 operandIndexB;
@@ -1517,12 +1518,12 @@ int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, param_4, s
   undefined4 aux2;
   undefined4 *allocation;
   int compilerCopy;
-  undefined4 arena;
+  undefined4 uVar8;
   undefined4 *loadInst;
   int newRegNumber;
   
   compilerCopy = compiler;
-  arena = *(undefined4 *)(compiler + COMP_currentProgram);
+  uVar8 = *(undefined4 *)(compiler + COMP_currentProgram);
   switch(compareKind) {
   case 0:
     opcode = 0x27;
@@ -1555,7 +1556,7 @@ int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, param_4, s
   sourcesInOrder = !swapRequested;
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = param_7;
   compareInst = IRInst__create(opcode,compiler);
-  aux1 = FUN_000ec208(arena,param_4);
+  aux1 = FUN_000ec208(uVar8,param_4);
   operandRecord = IRInst__getOperandRecord(compareInst,2 - (uint)sourcesInOrder);
   *(undefined4 *)(operandRecord + 0xc) = aux1;
   *(undefined4 *)(operandRecord + 8) = src1Register;
@@ -1565,7 +1566,7 @@ int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, param_4, s
   else {
     operandIndexA = 1;
   }
-  aux2 = FUN_000ec208(arena,param_6);
+  aux2 = FUN_000ec208(uVar8,param_6);
   operandRecord = IRInst__getOperandRecord(compareInst,operandIndexA);
   *(undefined4 *)(operandRecord + 0xc) = aux2;
   *(undefined4 *)(operandRecord + 8) = src2Register;
@@ -1575,20 +1576,20 @@ int KhanVs__vslot9_createCompareInst(this, compareKind, src1Register, param_4, s
   else {
     operandIndexB = 2;
   }
-  FUN_000f8aa0(arena,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),**(undefined4 **)(param_8 + 0x6c),operandIndexB,compareInst);
+  FUN_000f8aa0(uVar8,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),**(undefined4 **)(param_8 + 0x6c),operandIndexB,compareInst);
   if (sourcesInOrder) {
     operandIndexC = 2;
   }
   else {
     operandIndexC = 1;
   }
-  FUN_000f8aa0(arena,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),*(undefined4 *)(*(int *)(param_8 + 0x6c) + 4),operandIndexC,compareInst);
+  FUN_000f8aa0(uVar8,&(*(unsigned int *)((unsigned char *)ghidra_home + 24)),*(undefined4 *)(*(int *)(param_8 + 0x6c) + 4),operandIndexC,compareInst);
   newRegNumber = *(int *)(compilerCopy + 0x3ac) + -1;
   *(int *)(compilerCopy + 0x3ac) = newRegNumber;
   operandRecord = IRInst__getOperandRecord(compareInst,0);
   *(undefined4 *)(operandRecord + 0xc) = 0;
   *(int *)(operandRecord + 8) = newRegNumber;
-  FUN_000f92fc(arena,compareInst,param_9);
+  FUN_000f92fc(uVar8,compareInst,param_9);
   arena = *(undefined4 *)(compilerCopy + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
   loadInst = allocation + 1;

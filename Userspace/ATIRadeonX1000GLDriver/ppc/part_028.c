@@ -503,9 +503,12 @@ int IRInst__getOrCreateOperandRecord(inst, operandIndex, srcRecord, compiler)
   undefined4 *srcRecord;
   int compiler;
 {
-  uint extraIndex;
-  undefined4 arena;
   undefined4 *allocation;
+  undefined4 vectorData;
+  undefined4 arena;
+  uint extraIndex;
+  undefined4 uVar1;
+  undefined4 *puVar2;
   int *newSlot;
   uint oldCount;
   undefined4 recWord1;
@@ -515,7 +518,7 @@ int IRInst__getOrCreateOperandRecord(inst, operandIndex, srcRecord, compiler)
   uint *extraVector;
   
   if (operandIndex < 5) {
-    allocation = (undefined4 *)(operandIndex * 0x18 + inst + 0x8c);
+    puVar2 = (undefined4 *)(operandIndex * 0x18 + inst + 0x8c);
   }
   else {
     extraVector = *(uint **)(inst + 0x118);
@@ -527,8 +530,8 @@ int IRInst__getOrCreateOperandRecord(inst, operandIndex, srcRecord, compiler)
       allocation[1] = 2;
       allocation[2] = 0;
       allocation[4] = arena;
-      arena = Arena__alloc(arena,8);
-      allocation[3] = arena;
+      vectorData = Arena__alloc(arena,8);
+      allocation[3] = vectorData;
       *(uint **)(inst + 0x118) = extraVector;
     }
     if ((int)extraVector[1] < (int)(operandIndex - 4U)) {
@@ -559,24 +562,24 @@ int IRInst__getOrCreateOperandRecord(inst, operandIndex, srcRecord, compiler)
         _memset((void *)(oldCount * 4 + extraVector[2]),0,(extraIndex - oldCount) * 4 + 4);
         extraVector[1] = operandIndex - 4U;
       }
-      allocation = (undefined4 *)(extraIndex * 4 + extraVector[2]);
+      puVar2 = (undefined4 *)(extraIndex * 4 + extraVector[2]);
     }
     else {
-      allocation = (undefined4 *)Vector__elementRefGrow(extraVector,extraIndex);
+      puVar2 = (undefined4 *)Vector__elementRefGrow(extraVector,extraIndex);
     }
-    allocation = (undefined4 *)*allocation;
+    puVar2 = (undefined4 *)*puVar2;
   }
-  IROperand__setModifierBits(allocation,1,srcRecord[5] & 1);
-  IROperand__setModifierBits(allocation,2,(uint)srcRecord[5] >> 1 & 1);
-  arena = *srcRecord;
+  IROperand__setModifierBits(puVar2,1,srcRecord[5] & 1);
+  IROperand__setModifierBits(puVar2,2,(uint)srcRecord[5] >> 1 & 1);
+  uVar1 = *srcRecord;
   recWord1 = srcRecord[1];
   recWord2 = srcRecord[2];
   recWord3 = srcRecord[3];
-  allocation[4] = srcRecord[4];
-  *allocation = arena;
-  allocation[1] = recWord1;
-  allocation[2] = recWord2;
-  allocation[3] = recWord3;
+  puVar2[4] = srcRecord[4];
+  *puVar2 = uVar1;
+  puVar2[1] = recWord1;
+  puVar2[2] = recWord2;
+  puVar2[3] = recWord3;
   return;
 }
 

@@ -272,7 +272,6 @@ local	FUN_0019ac2c	iVar1	entry	INFERRED	entry kind stored at +8
 local	FUN_0019acb0	param_1	this	CONFIRMED	allocation sizes from the code
 local	FUN_0019acb0	param_2	program	CONFIRMED	allocation sizes from the code
 local	FUN_0019acb0	param_3	allocatorArg	CONFIRMED	allocation sizes from the code
-local	FUN_0019acb0	uVar2	allocation	CONFIRMED	allocation sizes from the code
 local	FUN_0019acb0	iVar3	maxInstructions	CONFIRMED	allocation sizes from the code
 local	FUN_0019acb0	iVar1	programInstructionLimit	CONFIRMED	allocation sizes from the code
 local	FUN_0019adf8	param_1	this	INFERRED	0xc bytes per level

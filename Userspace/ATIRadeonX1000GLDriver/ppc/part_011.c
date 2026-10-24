@@ -1382,8 +1382,8 @@ int regBindingClear(ctx, reg, compIndex)
 }
 
 /* chunkArenaAlloc @ 0x78e00 (228 bytes) */
-int chunkArenaAlloc(arena, size)
-  undefined4 *arena;
+int chunkArenaAlloc(param_1, size)
+  undefined4 *param_1;
   uint size;
 {
   undefined4 uVar1;
@@ -1391,31 +1391,31 @@ int chunkArenaAlloc(arena, size)
   uint uVar3;
   int iVar4;
   
-  uVar3 = arena[0x105];
+  uVar3 = param_1[0x105];
   if (uVar3 < size) {
-    uVar3 = arena[0x102];
-    uVar2 = arena[0x104];
+    uVar3 = param_1[0x102];
+    uVar2 = param_1[0x104];
     if (uVar3 <= uVar2) {
       if (0xfe < uVar3) {
         return 0;
       }
-      uVar1 = (*(code *)*arena)(0x1000);
-      iVar4 = arena[0x102];
-      arena[uVar3 + 2] = uVar1;
-      if (arena[iVar4 + 2] == 0) {
+      uVar1 = (*(code *)*param_1)(0x1000);
+      iVar4 = param_1[0x102];
+      param_1[uVar3 + 2] = uVar1;
+      if (param_1[iVar4 + 2] == 0) {
         return 0;
       }
-      uVar2 = arena[0x104];
-      arena[0x102] = iVar4 + 1;
+      uVar2 = param_1[0x104];
+      param_1[0x102] = iVar4 + 1;
     }
     uVar3 = 0x1000;
-    arena[0x105] = 0x1000;
-    arena[0x104] = uVar2 + 1;
-    arena[0x103] = arena[uVar2 + 2];
+    param_1[0x105] = 0x1000;
+    param_1[0x104] = uVar2 + 1;
+    param_1[0x103] = param_1[uVar2 + 2];
   }
-  iVar4 = arena[0x103];
-  arena[0x105] = uVar3 - size;
-  arena[0x103] = size + iVar4;
+  iVar4 = param_1[0x103];
+  param_1[0x105] = uVar3 - size;
+  param_1[0x103] = size + iVar4;
   return (size + iVar4) - size;
 }
 

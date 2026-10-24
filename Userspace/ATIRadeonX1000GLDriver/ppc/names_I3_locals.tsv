@@ -322,7 +322,6 @@ local	copyIndices16Swapped_dcbz_entry	puVar7	dstEnd	INFERRED	dst + (count & ~1) 
 local	copyIndices16Swapped_dcbz_entry	puVar4	dstCursor	INFERRED	aligned destination write cursor
 local	copyIndices16Swapped_dcbz_entry	puVar6	srcCursor	INFERRED	source read cursor, advanced in step with dstCursor
 local	copyIndices16Swapped_dcbz_entry	auVar11	alignPermute	INFERRED	permute control vector for the source misalignment
-local	chunkArenaAlloc	param_1	arena	CONFIRMED	allocator callback at [0], chunk count [0x102], current chunk [0x103], chunks [0x104]/[0x105] bytes left
 local	chunkArenaAlloc	param_2	size	CONFIRMED	bytes requested
 local	depListRemove	param_1	listHead	CONFIRMED	address of the list head pointer
 local	depListRemove	param_2	node	CONFIRMED	node to unlink (next pointer at +0x10)

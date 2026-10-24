@@ -148,6 +148,7 @@ int LoopInfo__convertToHardwareLoop(loopInfo, boundOnRight, passThroughR5, passT
   undefined4 passThroughR8;
   undefined4 passThroughR9;
 {
+  undefined4 arena;
   int iVar1;
   int constRegister;
   int oldSource;
@@ -160,14 +161,14 @@ int LoopInfo__convertToHardwareLoop(loopInfo, boundOnRight, passThroughR5, passT
   undefined4 extraout_r4_01;
   undefined4 *puVar8;
   uint uVar9;
-  undefined4 arena;
+  undefined4 uVar10;
   int iVar11;
   undefined8 predecessor;
   
   constRegister = FUN_000f4a84(*(undefined4 *)(loopInfo[0x10] + 0x3ac),3,1,passThroughR6,passThroughR7,passThroughR8,passThroughR9);
   if (constRegister < 0) {
 LAB_0012ba38:
-    arena = 0;
+    uVar10 = 0;
   }
   else {
     oldSource = IRInst__getOperandSource(loopInfo[0xf],1);
@@ -204,7 +205,7 @@ LAB_0012ba38:
       newConstInst[8] = 3;
       newConstInst[9] = loopInfo[6];
     }
-    arena = 0;
+    uVar10 = 0;
     IRInst__setOperandSource(loopInfo[0xf],1,puVar8,0,oldSource);
     constRegister = Block__getPredecessor(loopInfo[10],0);
     if (boundOnRight == 0) {
@@ -270,15 +271,15 @@ LAB_0012ba38:
       (**(code **)(*(int *)loopInfo[0xc] + 0xc))((int *)loopInfo[0xc],0);
       uVar6 = extraout_r4_01;
     }
-    callResult = (int *)Block__getBranchInst(loopInfo[10],uVar6,puVar8,arena,oldSource,passThroughR8,uVar9);
+    callResult = (int *)Block__getBranchInst(loopInfo[10],uVar6,puVar8,uVar10,oldSource,passThroughR8,uVar9);
     if (callResult != (int *)0x0) {
       (**(code **)(*callResult + 0xc))(callResult,0,*(undefined4 *)(loopInfo[0x10] + 8));
       *(undefined4 *)(loopInfo[10] + 0x130) = 0;
     }
     Block__detach(loopInfo[10]);
-    arena = 1;
+    uVar10 = 1;
   }
-  return arena;
+  return uVar10;
 }
 
 /* LoopInfo__init @ 0x12ba58 (240 bytes) */
@@ -1885,6 +1886,7 @@ int IfFooter__ctor_12e56c(param_1, param_2, compiler)
   int *param_2;
   int compiler;
 {
+  undefined4 arena;
   int operandRecord;
   undefined4 arenaAt3742;
   undefined *vtable;
@@ -1899,7 +1901,7 @@ int IfFooter__ctor_12e56c(param_1, param_2, compiler)
   undefined4 *puVar10;
   undefined4 uVar11;
   undefined4 *puVar12;
-  undefined4 arena;
+  undefined4 uVar13;
   undefined4 arenaAt374;
   undefined4 *puVar15;
   
@@ -1916,12 +1918,12 @@ int IfFooter__ctor_12e56c(param_1, param_2, compiler)
     operandRecord = IRInst__getOperandRecord(puVar6,1);
     vtable = PTR_DAT_001e8b8c;
     *(undefined4 *)(operandRecord + 0xc) = 0;
-    arena = *(undefined4 *)vtable;
+    uVar13 = *(undefined4 *)vtable;
     *(undefined4 *)(operandRecord + 8) = param_1;
     operandRecord = IRInst__getOperandRecord(puVar6,1);
-    *(undefined4 *)(operandRecord + 0x10) = arena;
+    *(undefined4 *)(operandRecord + 0x10) = uVar13;
     uVar11 = *(undefined4 *)(iVar7 + 0xb8);
-    arena = Block__getSuccessor(iVar7,0);
+    uVar13 = Block__getSuccessor(iVar7,0);
     arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arenaAt374,0x130);
     puVar8 = allocation + 1;
@@ -1929,7 +1931,7 @@ int IfFooter__ctor_12e56c(param_1, param_2, compiler)
     Block__ctor_ea020(puVar8,compiler);
     allocation[0x2f] = uVar11;
     FUN_000ec3ac(uVar5,iVar7,puVar8);
-    FUN_000e977c(iVar7,arena,puVar8);
+    FUN_000e977c(iVar7,uVar13,puVar8);
     uVar11 = FUN_0012b140(iVar7);
     arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arenaAt374,0x130);
@@ -1965,7 +1967,7 @@ int IfFooter__ctor_12e56c(param_1, param_2, compiler)
     Block__connect(puVar12,puVar9);
     Block__connect(puVar10,puVar15);
     Block__connect(puVar9,*(undefined4 *)(iVar7 + 0x154));
-    Block__connect(puVar15,arena);
+    Block__connect(puVar15,uVar13);
     FUN_000ed63c(uVar5,puVar6);
     return;
   }
@@ -2030,6 +2032,8 @@ int FUN_0012e8c0(param_1, block, param_3)
 int FUN_0012eacc(param_1)
   int param_1;
 {
+  undefined4 vectorData;
+  undefined4 arena;
   int isSimple;
   undefined4 newInst2;
   undefined4 predecessor2;
@@ -2068,7 +2072,7 @@ int FUN_0012eacc(param_1)
   uint uVar22;
   int iVar23;
   int iVar24;
-  undefined4 arena;
+  undefined4 uVar25;
   uint loopIndex;
   double fparam_1;
   
@@ -2081,17 +2085,17 @@ int FUN_0012eacc(param_1)
   allocation[1] = 2;
   allocation[4] = arena;
   allocation[2] = 0;
-  arena = Arena__alloc(arena,8);
-  allocation[3] = arena;
+  vectorData = Arena__alloc(arena,8);
+  allocation[3] = vectorData;
   iVar23 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar23;
-  arena = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-  operandRecord3 = IRInst__getOperandRecord(arena,0);
+  uVar25 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
+  operandRecord3 = IRInst__getOperandRecord(uVar25,0);
   *(int *)(operandRecord3 + 8) = iVar23;
   fparam_1 = (double)FLOAT_001aa0d4;
   *(undefined4 *)(operandRecord3 + 0xc) = 0;
-  ((void (*)())IRInst__makeLiteralVec4Float)(arena,param_1,1,fparam_1,fparam_1,fparam_1,fparam_1);
-  FUN_000f92fc(param_1,arena,*(undefined4 *)(param_1 + 0x3a0));
+  ((void (*)())IRInst__makeLiteralVec4Float)(uVar25,param_1,1,fparam_1,fparam_1,fparam_1,fparam_1);
+  FUN_000f92fc(param_1,uVar25,*(undefined4 *)(param_1 + 0x3a0));
   iVar24 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
   *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar24;
   newInst = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
@@ -2119,7 +2123,7 @@ int FUN_0012eacc(param_1)
         iVar5 = (**(code **)(*piVar12 + 0x28))(piVar12);
         if (((iVar5 != 0) || (iVar5 = (**(code **)(*piVar12 + 0x34))(piVar12), iVar5 != 0)) &&
            (iVar5 = Block__findSimpleSuccessor(piVar12), iVar5 == 0)) {
-          arena = Block__getSuccessor(piVar12,0);
+          uVar25 = Block__getSuccessor(piVar12,0);
           arenaAt374 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
           allocation = (undefined4 *)Arena__alloc(arenaAt374,0x130);
           *allocation = arenaAt374;
@@ -2127,12 +2131,12 @@ int FUN_0012eacc(param_1)
           Block__ctor_ea020(puVar8,*(undefined4 *)(param_1 + 8));
           allocation[0x2f] = piVar12[0x2e];
           FUN_000ec3ac(param_1,piVar12,puVar8);
-          FUN_000e9adc(piVar12,arena,puVar8);
+          FUN_000e9adc(piVar12,uVar25,puVar8);
         }
         iVar5 = (**(code **)(*piVar12 + 0x24))(piVar12);
         if (((iVar5 != 0) || (iVar5 = (**(code **)(*piVar12 + 0x2c))(piVar12), iVar5 != 0)) &&
            (iVar5 = Block__findSimplePredecessor(piVar12), iVar5 == 0)) {
-          arena = Block__getPredecessor(piVar12,0);
+          uVar25 = Block__getPredecessor(piVar12,0);
           arenaAt374 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
           allocation = (undefined4 *)Arena__alloc(arenaAt374,0x130);
           *allocation = arenaAt374;
@@ -2140,7 +2144,7 @@ int FUN_0012eacc(param_1)
           Block__ctor_ea020(puVar8,*(undefined4 *)(param_1 + 8));
           allocation[0x2f] = piVar12[0x2e];
           FUN_000ec370(param_1,piVar12,puVar8);
-          FUN_000e9adc(arena,piVar12,puVar8);
+          FUN_000e9adc(uVar25,piVar12,puVar8);
         }
       } while (piVar12 != piVar14);
       return;
@@ -2162,7 +2166,7 @@ int FUN_0012eacc(param_1)
 LAB_0012ed5c:
       uVar17 = 0;
       if (iVar6 != 0) {
-        uVar17 = FUN_0012b248(arena,iVar6,param_1);
+        uVar17 = FUN_0012b248(uVar25,iVar6,param_1);
       }
     }
     else {
@@ -2285,6 +2289,8 @@ int FUN_0012f0f8(pass, param_2, block, param_4, param_5, param_6)
   int *param_5;
   int *param_6;
 {
+  undefined4 vectorData;
+  undefined4 arena;
   int cloneResult;
   int isLoopHeader;
   bool bVar1;
@@ -2312,7 +2318,7 @@ int FUN_0012f0f8(pass, param_2, block, param_4, param_5, param_6)
   int iVar23;
   uint uVar24;
   int iVar25;
-  undefined4 arena;
+  undefined4 uVar26;
   int *piVar27;
   uint *puVar28;
   undefined8 isIfHeader;
@@ -2329,12 +2335,12 @@ int FUN_0012f0f8(pass, param_2, block, param_4, param_5, param_6)
     iVar6 = FUN_000e8c7c(block);
     iVar7 = FUN_000e8c14(block);
     iVar8 = FUN_000e8bac(block);
-    arena = *(undefined4 *)(pass + 8);
+    uVar26 = *(undefined4 *)(pass + 8);
     iVar5 = iVar8;
     iVar4 = block;
-    iVar9 = FUN_0012aa78(arena,iVar6,iVar7,iVar8,block);
+    iVar9 = FUN_0012aa78(uVar26,iVar6,iVar7,iVar8,block);
     if (iVar9 == 0) {
-      FUN_0012aae0(arena,iVar6);
+      FUN_0012aae0(uVar26,iVar6);
       *(int *)(pass + 0x98) = *(int *)(pass + 0x98) + 1;
       findSimplePredecessorResult = Block__findSimplePredecessor(block);
       local_60 = *(undefined4 *)(block + 8);
@@ -2403,8 +2409,8 @@ int FUN_0012f0f8(pass, param_2, block, param_4, param_5, param_6)
         *allocation = arena;
         allocation[2] = 0;
         allocation[4] = arena;
-        arena = Arena__alloc(arena,8);
-        allocation[3] = arena;
+        vectorData = Arena__alloc(arena,8);
+        allocation[3] = vectorData;
         if (1 < iVar6) {
           local_68 = 1;
           iVar25 = iVar9;
@@ -2511,7 +2517,7 @@ int FUN_0012f0f8(pass, param_2, block, param_4, param_5, param_6)
                       puVar17 = (undefined4 *)Vector__elementRefGrow(puVar28,uVar24);
                       uVar20 = *puVar28;
                     }
-                    arena = *puVar17;
+                    uVar26 = *puVar17;
                     uVar16 = *(uint *)(iVar3 + 0xc0);
                     if (uVar16 < uVar20) {
                       uVar20 = allocation[2];
@@ -2524,7 +2530,7 @@ int FUN_0012f0f8(pass, param_2, block, param_4, param_5, param_6)
                     else {
                       puVar17 = (undefined4 *)Vector__elementRefGrow(puVar28,uVar16);
                     }
-                    Block__connect(arena,*puVar17);
+                    Block__connect(uVar26,*puVar17);
                   }
                   iVar22 = iVar22 + 4;
                 }
@@ -3637,9 +3643,10 @@ int FUN_001311cc(param_1, param_2, newSource, param_4, afterInst, compiler)
   int afterInst;
   int compiler;
 {
+  undefined4 arena;
   undefined4 *allocation;
   int operandRecord;
-  undefined4 arena;
+  undefined4 uVar3;
   undefined4 *puVar4;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
@@ -3647,18 +3654,18 @@ int FUN_001311cc(param_1, param_2, newSource, param_4, afterInst, compiler)
   puVar4 = allocation + 1;
   *allocation = arena;
   IRMemLoad__ctor_107980(puVar4,0xfb,compiler);
-  arena = UNK_001affe4;
+  uVar3 = UNK_001affe4;
   allocation[0x27] = 0;
-  allocation[0x28] = arena;
+  allocation[0x28] = uVar3;
   allocation[0x26] = param_1;
   IRInst__setOperandSource(puVar4,1,newSource,0,compiler);
-  arena = UNK_001affe0;
+  uVar3 = UNK_001affe0;
   operandRecord = IRInst__getOperandRecord(puVar4,1);
-  *(undefined4 *)(operandRecord + 0x10) = arena;
+  *(undefined4 *)(operandRecord + 0x10) = uVar3;
   IRInst__setOperandSource(puVar4,2,param_4,0,compiler);
-  arena = UNK_001affdc;
+  uVar3 = UNK_001affdc;
   operandRecord = IRInst__getOperandRecord(puVar4,2);
-  *(undefined4 *)(operandRecord + 0x10) = arena;
+  *(undefined4 *)(operandRecord + 0x10) = uVar3;
   Block__insertInstAfter(*(undefined4 *)(afterInst + 0x158),afterInst,puVar4);
   allocation[6] = allocation[6] | 0x8001000;
   return puVar4;
@@ -3672,12 +3679,13 @@ int FUN_001312f4(inst, newSource, param_3, ref, compiler)
   int ref;
   int compiler;
 {
+  undefined4 arena;
   bool bVar1;
   int operandRecord;
   int operandRecord2;
   undefined4 *allocation;
   int iVar5;
-  undefined4 arena;
+  undefined4 uVar6;
   undefined4 *puVar7;
   undefined4 local_48 [4];
   undefined4 local_38;
@@ -3704,23 +3712,23 @@ int FUN_001312f4(inst, newSource, param_3, ref, compiler)
   puVar7 = allocation + 1;
   *allocation = arena;
   IRMemStore__ctor_1071fc(puVar7,0xfc,compiler);
-  arena = *(undefined4 *)(newSource + 0x94);
+  uVar6 = *(undefined4 *)(newSource + 0x94);
   allocation[0x27] = 0x3b;
-  allocation[0x26] = arena;
+  allocation[0x26] = uVar6;
   FUN_000f36b8(local_34,local_38);
   allocation[0x28] = local_34[0];
   IRInst__setOperandSource(puVar7,1,inst,0,compiler);
   operandRecord = IRInst__getOperandRecord(puVar7,1);
   *(undefined4 *)(operandRecord + 0x10) = local_38;
   IRInst__setOperandSource(puVar7,2,param_3,0,compiler);
-  arena = UNK_001affdc;
+  uVar6 = UNK_001affdc;
   operandRecord = IRInst__getOperandRecord(puVar7,2);
-  *(undefined4 *)(operandRecord + 0x10) = arena;
+  *(undefined4 *)(operandRecord + 0x10) = uVar6;
   IRInst__setOperandSource(puVar7,3,newSource,0,compiler);
-  arena = *(undefined4 *)(ref + 0x158);
+  uVar6 = *(undefined4 *)(ref + 0x158);
   allocation[6] = allocation[6] | 0x1000;
   DList__insertAfter(puVar7,ref);
-  allocation[0x57] = arena;
+  allocation[0x57] = uVar6;
   return;
 }
 
