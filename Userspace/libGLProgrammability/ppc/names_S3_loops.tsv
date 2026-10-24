@@ -33,7 +33,7 @@ use	__ZN12BindingTableC4Ej	uVar4	loopIndex	INFERRED	initialised to a literal, st
 use	BindingTable__GetString	uVar10	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#80	+42	all	all
 use	TGenericLinker__RemoveUnreachableFunctions	iVar9	stage	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+104	all	all
 use	TGenericLinker__FixOutputReads	iVar8	stage	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#22	+139	all	all
-use	TGenericLinker__AllocateTextureUnitsForVaryings	uVar2	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#345	+359	all	all
+use	TGenericLinker__AllocateTextureUnitsForVaryings	uVar2	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	^\s*uVar2\ =\ 0;$	+359	all	all
 use	TGenericLinker__link	iVar2	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	^\s*iVar2\ =\ 0;$	+17	all	all
 use	AddressTempAllocator__getTemporary	uVar9	slot	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+51	all	all
 use	TemporaryAllocator__getTemporary	uVar10	loopIndex	INFERRED	initialised to a literal, stepped by one, compared in a loop or if condition: a loop counter	#0	+57	all	all

@@ -1,0 +1,65 @@
+local	TGenericLinker__RemoveExtraVertexOutputs	pcVar6	message	CONFIRMED	malloc'd formatted warning text
+local	TGenericLinker__RemoveExtraVertexOutputs	pcVar7	formatString	CONFIRMED	printf format chosen for the warning (no fragment shader vs. output not read by it)
+local	TGenericLinker__RemoveExtraVertexOutputs	pcVar8	symbolName	CONFIRMED	name of the vertex output symbol (symbol +0x14)
+local	TGenericLinker__RemoveExtraVertexOutputs	pPVar3	nextSymbol	CONFIRMED	symbol after the current one, fetched before the current one is examined
+local	TGenericLinker__RemoveExtraVertexOutputs	pPVar2	parseSymbol	CONFIRMED	vertex-stage symbol being examined (kind 0 with +0x5c set)
+local	TGenericLinker__RemoveExtraVertexOutputs	bVar1	emitWarning	CONFIRMED	a warning is printed: there is no fragment shader, or it does not read this vertex output
+local	TGenericLinker__RemoveExtraVertexOutputs	this_00	infoSink	CONFIRMED	the linker's info sink (this+0x84)
+local	TGenericLinker__RemoveExtraVertexOutputs	iVar5	nameLength	CONFIRMED	strlen of the symbol name
+local	TGenericLinker__RemoveUnusedRegisters	this_00	symbol	CONFIRMED	ParseSymbol being checked for references
+local	TGenericLinker__RemoveUnusedRegisters	pPVar4	nextSymbol	CONFIRMED	symbol after the current one (fetched before the current one may be removed)
+local	TGenericLinker__RemoveUnusedRegisters	uVar6	chunkList	CONFIRMED	the stage PP stream's chunk list for the chunk kind (+4 temps, +0x10 constants, +0x18 varyings, +0x1c outputs) from which the register chunk is removed
+local	TGenericLinker__RemoveUnusedRegisters	iVar7	operandPtr	CONFIRMED	cursor over the op's operand words (first operand at op +0x10, 8 bytes each)
+local	TGenericLinker__RemoveUnusedRegisters	bVar8	chunkKind	CONFIRMED	kind byte of the symbol's first register chunk (0 temp, 2 varying, 3 constant, 4 output)
+local	TGenericLinker__RemoveUnusedRegisters	iVar9	stageByteOffset	CONFIRMED	stage * 4: offset into the per-stage arrays
+local	TGenericLinker__RemoveUnusedRegisters	iVar10	stage	CONFIRMED	0 = vertex, 1 = fragment
+local	TGenericLinker__RemoveUnusedRegisters	pTVar11	stageSlot	CONFIRMED	this + stage*4
+local	TGenericLinker__RemoveUnusedRegisters	pbVar12	chunk	CONFIRMED	the symbol's register chunk currently examined/removed (chunk +8 = next)
+local	TGenericLinker__RemoveUnusedRegisters	iVar13	elementIndex	CONFIRMED	vec4 element of the symbol being matched (0 .. GetVec4sForType-1)
+local	TGenericLinker__RemoveUnusedRegisters	pbVar15	nextChunk	CONFIRMED	chunk following the one being removed
+local	TGenericLinker__RemoveUnusedRegisters	uVar3	classBits	CONFIRMED	register class bits (0x20000 temp, 0x40000 constant, 0x60000 output) compared with the operand word
+use	TGenericLinker__RemoveUnusedRegisters	bVar1	unreferenced	CONFIRMED	no operand has referenced the symbol so far (loop continues while true)	^\s*bVar1\ =\ iVar16\ ==\ 0;$	+1
+use	TGenericLinker__RemoveUnusedRegisters	bVar1	unreferenced	CONFIRMED	no operand has referenced the symbol so far (loop continues while true)	^\s*if\ \(!bVar1\)\ goto\ LAB_97bb3b10;$	+1
+use	TGenericLinker__RemoveUnusedRegisters	bVar1	unreferenced	CONFIRMED	no operand has referenced the symbol so far (loop continues while true)	^\s*bVar1\ =\ iVar16\ ==\ 0;$@2	+2
+use	TGenericLinker__RemoveUnusedRegisters	bVar1	unreferenced	CONFIRMED	no operand has referenced the symbol so far (loop continues while true)	^\s*while\ \(\(iVar5\ =\ \(\(int\ \(\*\)\(\)\)GetVec4sForType\)\(\(uint\)\*\(ushort\ \*\)\(this_00\ \+\ 0x2c\)\),\ iVar13\ <\ iVar5\ \&\&$	+2
+use	TGenericLinker__RemoveUnusedRegisters	bVar1	unreferenced	CONFIRMED	no operand has referenced the symbol so far (loop continues while true)	^\s*bVar1\ =\ iVar16\ ==\ 0;$@3	+1
+use	TGenericLinker__RemoveUnusedRegisters	bVar1	unreferenced	CONFIRMED	no operand has referenced the symbol so far (loop continues while true)	^\s*\}\ while\ \(bVar1\);$	+1
+use	TGenericLinker__RemoveUnusedRegisters	bVar1	operandClassMatches	CONFIRMED	operand register-class field (word bits 25..23) equals the symbol chunk kind	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar7\ \+\ 0xc\)\ >>\ 0x17\ \&\ 7\)\ ==\ 1;$	+1
+use	TGenericLinker__RemoveUnusedRegisters	bVar1	operandClassMatches	CONFIRMED	operand register-class field (word bits 25..23) equals the symbol chunk kind	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar7\ \+\ 0xc\)\ >>\ 0x17\ \&\ 7\)\ ==\ 2;$	+1
+use	TGenericLinker__RemoveUnusedRegisters	bVar1	operandClassMatches	CONFIRMED	operand register-class field (word bits 25..23) equals the symbol chunk kind	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar7\ \+\ 0xc\)\ >>\ 0x17\ \&\ 7\)\ ==\ 3;$	+1
+use	TGenericLinker__RemoveUnusedRegisters	bVar1	operandClassMatches	CONFIRMED	operand register-class field (word bits 25..23) equals the symbol chunk kind	^\s*if\ \(bVar1\)\ goto\ LAB_97bb393c;$	+1
+use	TGenericLinker__RemoveUnusedRegisters	uVar2	operandCount	CONFIRMED	number of operands of the op (header bits 31..29)	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0xc\)\ >>\ 0x1d;$	+2
+use	TGenericLinker__RemoveUnusedRegisters	uVar2	operandCount	CONFIRMED	number of operands of the op (header bits 31..29)	^\s*\}\ while\ \(\(iVar5\ <\ \(int\)uVar2\)\ \&\&\ \(iVar16\ ==\ 0\)\);$	+1
+use	TGenericLinker__RemoveUnusedRegisters	uVar2	destWord	CONFIRMED	the op destination operand word (+0x14)	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x14\);$	+1
+use	TGenericLinker__RemoveUnusedRegisters	uVar2	destWord	CONFIRMED	the op destination operand word (+0x14)	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x14\);$@2	+1
+use	TGenericLinker__RemoveUnusedRegisters	uVar2	destWord	CONFIRMED	the op destination operand word (+0x14)	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x14\);$@3	+1
+use	TGenericLinker__RemoveUnusedRegisters	uVar2	destWord	CONFIRMED	the op destination operand word (+0x14)	^\s*if\ \(\(uVar2\ \&\ 0xe0000\)\ ==\ uVar3\)\ goto\ LAB_97bb39f0;$	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar14	opChunk	CONFIRMED	cursor over the stage's operation chunk list (chunk +8 = next)	^\s*iVar14\ =\ \*\*\(int\ \*\*\)\(\*\(int\ \*\)\(pTVar11\ \+\ 0x30\)\ \+\ 0x20\);$	+2
+use	TGenericLinker__RemoveUnusedRegisters	iVar14	opChunk	CONFIRMED	cursor over the stage's operation chunk list (chunk +8 = next)	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0xc\)\ >>\ 0x1d;$	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar14	opChunk	CONFIRMED	cursor over the stage's operation chunk list (chunk +8 = next)	^\s*iVar7\ =\ iVar14\ \+\ 0x10;$	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar14	opChunk	CONFIRMED	cursor over the stage's operation chunk list (chunk +8 = next)	^\s*if\ \(\(\*\(uint\ \*\)\(iVar14\ \+\ 0x14\)\ \&\ 0xe0000\)\ !=\ 0\)\ goto\ LAB_97bb3a08;$	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar14	opChunk	CONFIRMED	cursor over the stage's operation chunk list (chunk +8 = next)	^\s*if\ \(\(uint\)\*\(ushort\ \*\)\(iVar14\ \+\ 0x1a\)\ !=$	+2
+use	TGenericLinker__RemoveUnusedRegisters	iVar14	opChunk	CONFIRMED	cursor over the stage's operation chunk list (chunk +8 = next)	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x14\);$	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar14	opChunk	CONFIRMED	cursor over the stage's operation chunk list (chunk +8 = next)	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x14\);$@2	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar14	opChunk	CONFIRMED	cursor over the stage's operation chunk list (chunk +8 = next)	^\s*uVar2\ =\ \*\(uint\ \*\)\(iVar14\ \+\ 0x14\);$@3	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar14	opChunk	CONFIRMED	cursor over the stage's operation chunk list (chunk +8 = next)	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar14\ \+\ 8\);$	+2
+use	TGenericLinker__RemoveUnusedRegisters	iVar14	slotIndex	CONFIRMED	counter over the symbol's vec4 slots while its register chunks are removed	^\s*for\ \(iVar14\ =\ 0;\ iVar16\ =\ \(\(int\ \(\*\)\(\)\)GetVec4sForType\)\(\(uint\)\*\(ushort\ \*\)\(this_00\ \+\ 0x2c\)\),$	+2
+use	TGenericLinker__RemoveUnusedRegisters	iVar5	vec4Count	CONFIRMED	GetVec4sForType of the symbol's type: number of vec4 elements	^\s*while\ \(\(iVar5\ =\ \(\(int\ \(\*\)\(\)\)GetVec4sForType\)\(\(uint\)\*\(ushort\ \*\)\(this_00\ \+\ 0x2c\)\),\ iVar13\ <\ iVar5\ \&\&$	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar5	operandIndex	CONFIRMED	index over the op operands	^\s*iVar5\ =\ 0;$	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar5	operandIndex	CONFIRMED	index over the op operands	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar5	operandIndex	CONFIRMED	index over the op operands	^\s*\}\ while\ \(\(iVar5\ <\ \(int\)uVar2\)\ \&\&\ \(iVar16\ ==\ 0\)\);$	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar16	referenced	CONFIRMED	symbol +0x54 (kept regardless), then set to 1 once an operation references the symbol	^\s*iVar16\ =\ \*\(int\ \*\)\(this_00\ \+\ 0x54\);$	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar16	referenced	CONFIRMED	symbol +0x54 (kept regardless), then set to 1 once an operation references the symbol	^\s*bVar1\ =\ iVar16\ ==\ 0;$	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar16	referenced	CONFIRMED	symbol +0x54 (kept regardless), then set to 1 once an operation references the symbol	^\s*bVar1\ =\ iVar16\ ==\ 0;$@2	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar16	referenced	CONFIRMED	symbol +0x54 (kept regardless), then set to 1 once an operation references the symbol	^\s*if\ \(iVar16\ <\ \(int\)uVar2\)\ \{$	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar16	referenced	CONFIRMED	symbol +0x54 (kept regardless), then set to 1 once an operation references the symbol	^\s*iVar16\ =\ 1;$	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar16	referenced	CONFIRMED	symbol +0x54 (kept regardless), then set to 1 once an operation references the symbol	^\s*\}\ while\ \(\(iVar5\ <\ \(int\)uVar2\)\ \&\&\ \(iVar16\ ==\ 0\)\);$	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar16	referenced	CONFIRMED	symbol +0x54 (kept regardless), then set to 1 once an operation references the symbol	^\s*iVar16\ =\ 1;$@2	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar16	referenced	CONFIRMED	symbol +0x54 (kept regardless), then set to 1 once an operation references the symbol	^\s*bVar1\ =\ iVar16\ ==\ 0;$@3	+1
+use	TGenericLinker__RemoveUnusedRegisters	iVar16	removeCount	CONFIRMED	GetVec4sForType of the symbol: number of register chunks to remove	^\s*for\ \(iVar14\ =\ 0;\ iVar16\ =\ \(\(int\ \(\*\)\(\)\)GetVec4sForType\)\(\(uint\)\*\(ushort\ \*\)\(this_00\ \+\ 0x2c\)\),$	+2
+use	TGenericLinker__RemoveExtraVertexOutputs	iVar4	formatLength	CONFIRMED	strlen of the warning format string	^\s*iVar4\ =\ _strlen\(DAT_a7b7bae0\);$	+1
+use	TGenericLinker__RemoveExtraVertexOutputs	iVar4	formatLength	CONFIRMED	strlen of the warning format string	^\s*pcVar6\ =\ \(char\ \*\)_malloc\(iVar4\ \+\ iVar5\ \+\ 1\);$	+1
+use	TGenericLinker__RemoveExtraVertexOutputs	iVar4	fragmentSymbol	CONFIRMED	ParseSymbolTable__FindGlobalSymbolByName in the fragment table: null when the fragment shader does not declare it	^\s*iVar4\ =\ ParseSymbolTable__FindGlobalSymbolByName$	+1
+use	TGenericLinker__RemoveExtraVertexOutputs	iVar4	fragmentSymbol	CONFIRMED	ParseSymbolTable__FindGlobalSymbolByName in the fragment table: null when the fragment shader does not declare it	^\s*bVar1\ =\ iVar4\ ==\ 0;$	+1
+use	TGenericLinker__RemoveExtraVertexOutputs	iVar4	formatLength	CONFIRMED	strlen of the warning format string	^\s*iVar4\ =\ _strlen\(DAT_a7b7bad8\);$	+1
+use	TGenericLinker__RemoveExtraVertexOutputs	iVar4	formatLength	CONFIRMED	strlen of the warning format string	^\s*pcVar6\ =\ \(char\ \*\)_malloc\(iVar4\ \+\ iVar5\ \+\ 1\);$@2	+1

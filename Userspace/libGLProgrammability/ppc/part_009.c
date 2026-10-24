@@ -708,174 +708,179 @@ int TGenericLinker__RenumberLabels(this, chunk, oldLabel, newLabel)
 int TGenericLinker__RemoveUnusedRegisters(this)
   unsigned char * this;
 {
-  bool bVar1;
-  unsigned char * this_00;
-  uint uVar2;
-  uint uVar3;
-  unsigned char * pPVar4;
-  int iVar5;
-  undefined4 uVar6;
-  int iVar7;
-  byte bVar8;
-  int iVar9;
-  int iVar10;
-  unsigned char * pTVar11;
-  byte *pbVar12;
-  int iVar13;
-  int iVar14;
-  byte *pbVar15;
-  int iVar16;
+  int removeCount;
+  int operandIndex;
+  int slotIndex;
+  uint destWord;
+  bool operandClassMatches;
+  bool unreferenced;
+  unsigned char * symbol;
+  uint operandCount;
+  uint classBits;
+  unsigned char * nextSymbol;
+  int vec4Count;
+  undefined4 chunkList;
+  int operandPtr;
+  byte chunkKind;
+  int stageByteOffset;
+  int stage;
+  unsigned char * stageSlot;
+  byte *chunk;
+  int elementIndex;
+  int opChunk;
+  byte *nextChunk;
+  int referenced;
   
-  iVar10 = 0;
-  iVar9 = 0;
-  pTVar11 = this;
+  stage = 0;
+  stageByteOffset = 0;
+  stageSlot = this;
   do {
-    if (*(unsigned char **)(pTVar11 + 0x28) != (unsigned char *)0x0) {
-      pPVar4 = (unsigned char *)
+    if (*(unsigned char **)(stageSlot + 0x28) != (unsigned char *)0x0) {
+      nextSymbol = (unsigned char *)
                ParseSymbolTable__NextSymbol
-                         (*(unsigned char **)(pTVar11 + 0x28),(unsigned char *)0x0);
-      while (this_00 = pPVar4, this_00 != (unsigned char *)0x0) {
-        iVar16 = *(int *)(this_00 + 0x54);
-        pbVar12 = *(byte **)this_00;
-        iVar14 = **(int **)(*(int *)(pTVar11 + 0x30) + 0x20);
-        if (iVar14 == 0) {
-          bVar1 = iVar16 == 0;
+                         (*(unsigned char **)(stageSlot + 0x28),(unsigned char *)0x0);
+      while (symbol = nextSymbol, symbol != (unsigned char *)0x0) {
+        referenced = *(int *)(symbol + 0x54);
+        chunk = *(byte **)symbol;
+        opChunk = **(int **)(*(int *)(stageSlot + 0x30) + 0x20);
+        if (opChunk == 0) {
+          unreferenced = referenced == 0;
 LAB_97bb3a3c:
-          if (!bVar1) goto LAB_97bb3b10;
-          pPVar4 = (unsigned char *)
-                   ParseSymbolTable__NextSymbol(*(unsigned char **)(pTVar11 + 0x28),this_00);
-          ParseSymbolTable__RemoveSymbol(*(unsigned char **)(pTVar11 + 0x28),this_00);
-          for (iVar14 = 0; iVar16 = ((int (*)())GetVec4sForType)((uint)*(ushort *)(this_00 + 0x2c)),
-              iVar14 < iVar16; iVar14 = iVar14 + 1) {
-            bVar8 = *pbVar12;
-            pbVar15 = *(byte **)(pbVar12 + 8);
-            if (bVar8 == 2) {
-              uVar6 = *(undefined4 *)(*(int *)(this + iVar9 + 0x30) + 0x18);
+          if (!unreferenced) goto LAB_97bb3b10;
+          nextSymbol = (unsigned char *)
+                   ParseSymbolTable__NextSymbol(*(unsigned char **)(stageSlot + 0x28),symbol);
+          ParseSymbolTable__RemoveSymbol(*(unsigned char **)(stageSlot + 0x28),symbol);
+          for (slotIndex = 0; removeCount = ((int (*)())GetVec4sForType)((uint)*(ushort *)(symbol + 0x2c)),
+              slotIndex < removeCount; slotIndex = slotIndex + 1) {
+            chunkKind = *chunk;
+            nextChunk = *(byte **)(chunk + 8);
+            if (chunkKind == 2) {
+              chunkList = *(undefined4 *)(*(int *)(this + stageByteOffset + 0x30) + 0x18);
 LAB_97bb3ad8:
-              _PPStreamChunkListRemoveChunk(uVar6,pbVar12);
+              _PPStreamChunkListRemoveChunk(chunkList,chunk);
             }
             else {
-              if (2 < bVar8) {
-                if (bVar8 == 3) {
-                  uVar6 = *(undefined4 *)(*(int *)(this + iVar9 + 0x30) + 0x10);
+              if (2 < chunkKind) {
+                if (chunkKind == 3) {
+                  chunkList = *(undefined4 *)(*(int *)(this + stageByteOffset + 0x30) + 0x10);
                 }
                 else {
-                  if (bVar8 != 4) goto LAB_97bb3adc;
-                  uVar6 = *(undefined4 *)(*(int *)(this + iVar9 + 0x30) + 0x1c);
+                  if (chunkKind != 4) goto LAB_97bb3adc;
+                  chunkList = *(undefined4 *)(*(int *)(this + stageByteOffset + 0x30) + 0x1c);
                 }
                 goto LAB_97bb3ad8;
               }
-              if (bVar8 == 0) {
-                uVar6 = *(undefined4 *)(*(int *)(this + iVar9 + 0x30) + 4);
+              if (chunkKind == 0) {
+                chunkList = *(undefined4 *)(*(int *)(this + stageByteOffset + 0x30) + 4);
                 goto LAB_97bb3ad8;
               }
             }
 LAB_97bb3adc:
-            pbVar12 = pbVar15;
+            chunk = nextChunk;
           }
-          if (this_00 != (unsigned char *)0x0) {
-            __ZN11ParseSymbolD1Ev(this_00);
-            __ZdlPv(this_00);
+          if (symbol != (unsigned char *)0x0) {
+            __ZN11ParseSymbolD1Ev(symbol);
+            __ZdlPv(symbol);
           }
         }
         else {
-          bVar1 = iVar16 == 0;
-          if (bVar1) {
+          unreferenced = referenced == 0;
+          if (unreferenced) {
             do {
-              iVar13 = 0;
-              while ((iVar5 = ((int (*)())GetVec4sForType)((uint)*(ushort *)(this_00 + 0x2c)), iVar13 < iVar5 &&
-                     (bVar1))) {
-                iVar5 = 0;
-                uVar2 = *(uint *)(iVar14 + 0xc) >> 0x1d;
-                if (iVar16 < (int)uVar2) {
-                  bVar8 = *pbVar12;
-                  iVar7 = iVar14 + 0x10;
+              elementIndex = 0;
+              while ((vec4Count = ((int (*)())GetVec4sForType)((uint)*(ushort *)(symbol + 0x2c)), elementIndex < vec4Count &&
+                     (unreferenced))) {
+                operandIndex = 0;
+                operandCount = *(uint *)(opChunk + 0xc) >> 0x1d;
+                if (referenced < (int)operandCount) {
+                  chunkKind = *chunk;
+                  operandPtr = opChunk + 0x10;
                   do {
-                    if (bVar8 == 2) {
-                      if (*(int *)(this_00 + 0x34) != 0) {
-                        if ((*(uint *)(iVar7 + 0xc) & 0x3800000) != 0) goto LAB_97bb3954;
+                    if (chunkKind == 2) {
+                      if (*(int *)(symbol + 0x34) != 0) {
+                        if ((*(uint *)(operandPtr + 0xc) & 0x3800000) != 0) goto LAB_97bb3954;
 LAB_97bb393c:
-                        if ((uint)*(ushort *)(iVar7 + 0x12) !=
-                            (uint)*(ushort *)(pbVar12 + 0x12) + iVar13) goto LAB_97bb3954;
+                        if ((uint)*(ushort *)(operandPtr + 0x12) !=
+                            (uint)*(ushort *)(chunk + 0x12) + elementIndex) goto LAB_97bb3954;
                       }
 LAB_97bb3950:
-                      iVar16 = 1;
+                      referenced = 1;
                     }
-                    else if (bVar8 < 3) {
-                      if (bVar8 == 0) {
-                        bVar1 = (*(uint *)(iVar7 + 0xc) >> 0x17 & 7) == 1;
+                    else if (chunkKind < 3) {
+                      if (chunkKind == 0) {
+                        operandClassMatches = (*(uint *)(operandPtr + 0xc) >> 0x17 & 7) == 1;
                         goto LAB_97bb3938;
                       }
                     }
                     else {
-                      if (bVar8 == 3) {
-                        if (*(int *)(this_00 + 0x34) == 0) goto LAB_97bb3950;
-                        bVar1 = (*(uint *)(iVar7 + 0xc) >> 0x17 & 7) == 2;
+                      if (chunkKind == 3) {
+                        if (*(int *)(symbol + 0x34) == 0) goto LAB_97bb3950;
+                        operandClassMatches = (*(uint *)(operandPtr + 0xc) >> 0x17 & 7) == 2;
                       }
                       else {
-                        if (bVar8 != 4) goto LAB_97bb3954;
-                        bVar1 = (*(uint *)(iVar7 + 0xc) >> 0x17 & 7) == 3;
+                        if (chunkKind != 4) goto LAB_97bb3954;
+                        operandClassMatches = (*(uint *)(operandPtr + 0xc) >> 0x17 & 7) == 3;
                       }
 LAB_97bb3938:
-                      if (bVar1) goto LAB_97bb393c;
+                      if (operandClassMatches) goto LAB_97bb393c;
                     }
 LAB_97bb3954:
-                    iVar5 = iVar5 + 1;
-                    iVar7 = iVar7 + 8;
-                  } while ((iVar5 < (int)uVar2) && (iVar16 == 0));
+                    operandIndex = operandIndex + 1;
+                    operandPtr = operandPtr + 8;
+                  } while ((operandIndex < (int)operandCount) && (referenced == 0));
                 }
                 else {
-                  bVar8 = *pbVar12;
+                  chunkKind = *chunk;
                 }
-                if (bVar8 == 2) {
-                  if (*(int *)(this_00 + 0x34) != 0) {
-                    if ((*(uint *)(iVar14 + 0x14) & 0xe0000) != 0) goto LAB_97bb3a08;
+                if (chunkKind == 2) {
+                  if (*(int *)(symbol + 0x34) != 0) {
+                    if ((*(uint *)(opChunk + 0x14) & 0xe0000) != 0) goto LAB_97bb3a08;
 LAB_97bb39f0:
-                    if ((uint)*(ushort *)(iVar14 + 0x1a) !=
-                        (uint)*(ushort *)(pbVar12 + 0x12) + iVar13) goto LAB_97bb3a08;
+                    if ((uint)*(ushort *)(opChunk + 0x1a) !=
+                        (uint)*(ushort *)(chunk + 0x12) + elementIndex) goto LAB_97bb3a08;
                   }
 LAB_97bb3a04:
-                  iVar16 = 1;
+                  referenced = 1;
                 }
-                else if (bVar8 < 3) {
-                  if (bVar8 == 0) {
-                    uVar2 = *(uint *)(iVar14 + 0x14);
-                    uVar3 = 0x20000;
+                else if (chunkKind < 3) {
+                  if (chunkKind == 0) {
+                    destWord = *(uint *)(opChunk + 0x14);
+                    classBits = 0x20000;
                     goto LAB_97bb39e4;
                   }
                 }
                 else {
-                  if (bVar8 == 3) {
-                    if (*(int *)(this_00 + 0x34) == 0) goto LAB_97bb3a04;
-                    uVar2 = *(uint *)(iVar14 + 0x14);
-                    uVar3 = 0x40000;
+                  if (chunkKind == 3) {
+                    if (*(int *)(symbol + 0x34) == 0) goto LAB_97bb3a04;
+                    destWord = *(uint *)(opChunk + 0x14);
+                    classBits = 0x40000;
                   }
                   else {
-                    if (bVar8 != 4) goto LAB_97bb3a08;
-                    uVar2 = *(uint *)(iVar14 + 0x14);
-                    uVar3 = 0x60000;
+                    if (chunkKind != 4) goto LAB_97bb3a08;
+                    destWord = *(uint *)(opChunk + 0x14);
+                    classBits = 0x60000;
                   }
 LAB_97bb39e4:
-                  if ((uVar2 & 0xe0000) == uVar3) goto LAB_97bb39f0;
+                  if ((destWord & 0xe0000) == classBits) goto LAB_97bb39f0;
                 }
 LAB_97bb3a08:
-                bVar1 = iVar16 == 0;
-                iVar13 = iVar13 + 1;
+                unreferenced = referenced == 0;
+                elementIndex = elementIndex + 1;
               }
-              iVar14 = *(int *)(iVar14 + 8);
-              if (iVar14 == 0) goto LAB_97bb3a3c;
-            } while (bVar1);
+              opChunk = *(int *)(opChunk + 8);
+              if (opChunk == 0) goto LAB_97bb3a3c;
+            } while (unreferenced);
           }
 LAB_97bb3b10:
-          pPVar4 = (unsigned char *)
-                   ParseSymbolTable__NextSymbol(*(unsigned char **)(pTVar11 + 0x28),this_00);
+          nextSymbol = (unsigned char *)
+                   ParseSymbolTable__NextSymbol(*(unsigned char **)(stageSlot + 0x28),symbol);
         }
       }
     }
-    iVar10 = iVar10 + 1;
-    iVar9 = iVar9 + 4;
-    pTVar11 = pTVar11 + 4;
-    if (1 < iVar10) {
+    stage = stage + 1;
+    stageByteOffset = stageByteOffset + 4;
+    stageSlot = stageSlot + 4;
+    if (1 < stage) {
       return;
     }
   } while( true );
@@ -885,51 +890,52 @@ LAB_97bb3b10:
 int TGenericLinker__RemoveExtraVertexOutputs(this)
   unsigned char * this;
 {
-  bool bVar1;
-  unsigned char * pPVar2;
-  unsigned char * pPVar3;
-  int iVar4;
-  int iVar5;
-  char *pcVar6;
-  char *pcVar7;
-  char *pcVar8;
-  void *this_00;
+  int fragmentSymbol;
+  bool emitWarning;
+  unsigned char * parseSymbol;
+  unsigned char * nextSymbol;
+  int formatLength;
+  int nameLength;
+  char *message;
+  char *formatString;
+  char *symbolName;
+  void *infoSink;
   
   if (*(unsigned char **)(this + 0x28) != (unsigned char *)0x0) {
-    pPVar3 = (unsigned char *)
+    nextSymbol = (unsigned char *)
              ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),(unsigned char *)0x0);
 joined_r0x97bb3b94:
-    pPVar2 = pPVar3;
-    if (pPVar2 != (unsigned char *)0x0) {
-      pPVar3 = (unsigned char *)
-               ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),pPVar2);
-      if ((**(char **)pPVar2 == '\0') && (*(int *)(pPVar2 + 0x5c) != 0)) {
-        pcVar8 = *(char **)(pPVar2 + 0x14);
+    parseSymbol = nextSymbol;
+    if (parseSymbol != (unsigned char *)0x0) {
+      nextSymbol = (unsigned char *)
+               ParseSymbolTable__NextSymbol(*(unsigned char **)(this + 0x28),parseSymbol);
+      if ((**(char **)parseSymbol == '\0') && (*(int *)(parseSymbol + 0x5c) != 0)) {
+        symbolName = *(char **)(parseSymbol + 0x14);
         if (*(unsigned char **)(this + 0x2c) == (unsigned char *)0x0) {
-          iVar4 = _strlen(DAT_a7b7bae0);
-          iVar5 = _strlen(pcVar8);
-          pcVar6 = (char *)_malloc(iVar4 + iVar5 + 1);
-          bVar1 = true;
-          pcVar7 = DAT_a7b7bae0;
+          formatLength = _strlen(DAT_a7b7bae0);
+          nameLength = _strlen(symbolName);
+          message = (char *)_malloc(formatLength + nameLength + 1);
+          emitWarning = true;
+          formatString = DAT_a7b7bae0;
         }
         else {
-          iVar4 = ParseSymbolTable__FindGlobalSymbolByName
-                            (*(unsigned char **)(this + 0x2c),pcVar8);
-          bVar1 = iVar4 == 0;
-          if (!bVar1) goto joined_r0x97bb3b94;
-          iVar4 = _strlen(DAT_a7b7bad8);
-          iVar5 = _strlen(pcVar8);
-          pcVar6 = (char *)_malloc(iVar4 + iVar5 + 1);
-          pcVar7 = DAT_a7b7bad8;
+          fragmentSymbol = ParseSymbolTable__FindGlobalSymbolByName
+                            (*(unsigned char **)(this + 0x2c),symbolName);
+          emitWarning = fragmentSymbol == 0;
+          if (!emitWarning) goto joined_r0x97bb3b94;
+          formatLength = _strlen(DAT_a7b7bad8);
+          nameLength = _strlen(symbolName);
+          message = (char *)_malloc(formatLength + nameLength + 1);
+          formatString = DAT_a7b7bad8;
         }
-        _sprintf(pcVar6,pcVar7,pcVar8);
-        if (bVar1) {
-          this_00 = *(void **)(this + 0x84);
+        _sprintf(message,formatString,symbolName);
+        if (emitWarning) {
+          infoSink = *(void **)(this + 0x84);
                     
-          __ZN13TInfoSinkBase6appendEPKc(this_00,"WARNING: ");
-          __ZN13TInfoSinkBase6appendEPKc(this_00,pcVar6);
-          __ZN13TInfoSinkBase6appendEPKc(this_00,"\n");
-          _free(pcVar6);
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,"WARNING: ");
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,message);
+          __ZN13TInfoSinkBase6appendEPKc(infoSink,"\n");
+          _free(message);
         }
       }
       goto joined_r0x97bb3b94;
