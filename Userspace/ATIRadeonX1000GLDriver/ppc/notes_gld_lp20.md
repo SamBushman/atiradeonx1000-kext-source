@@ -32,7 +32,6 @@ modifier, +0x10 reserved, +0x14/+0x24/+0x34 the three packed arguments (16 bytes
 
 * `FUN_000cdc3c` (float formatter): `decimalPointOrRemainder` (`local_98`) is the int whose address is passed to `_ecvt` (decimal point exponent); the scientific
   branch reuses it as the running remainder of the exponent digit loop. It is an address-taken frame slot, so `apply_names.py` cannot split it.
-* `vsDisassembleLine`: `shaderStateOrLabel` (`iVar1`) carries the disassembler state at the top of the label loop and the label entry computed by
-  `iVar1 = loopIndex * 0x1c + *(iVar1 + 0x654)` in the same web (an `x = f(x)` line); `labelTableOrLine` (`piVar5`) is read as a dead argument of the printf after
-  the loop whichever of its two values it holds. A first attempt to split them with `use` rows (gate gT7) produced mis-targeted segments (MERGE slot 76 for 80 and 84,
-  UNINIT 0 -> 2); the function was reset to its gated HEAD state. The split is open: it needs lhs/rhs rows on the `x = f(x)` line and the printf read kept on one name.
+* `vsDisassembleLine`: `iVar1` is split into `disasmState` / `labelEntry` / `length` (gate gT9 SPLIT-EQUIVALENT; the `x = f(x)` line takes an rhs row for the state and an lhs row for
+  the entry). `labelTableOrLine` (`piVar5`) stays joined: it holds the label table pointer until the loop and the entry's instruction number inside it, and the printf after the loop
+  reads it as a dead argument whichever value it holds; splitting it into two names made that read uninitialised on one path (gate gT5: UNINIT 0 -> 3).

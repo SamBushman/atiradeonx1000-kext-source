@@ -103,3 +103,4 @@ local	FUN_000ce148	in_r6	argR6	UNKNOWN	Ghidra register input passed to the sprin
 local	FUN_000ce148	in_r7	argR7	UNKNOWN	Ghidra register input
 local	FUN_000ce148	in_r8	argR8	UNKNOWN	Ghidra register input
 local	FUN_000ce148	in_r10	argR10	UNKNOWN	Ghidra register input
+local	FUN_000cff30	piVar5	labelTableOrLine	INFERRED	label table pointer, then the line number of the entry

@@ -6034,7 +6034,8 @@ int vsDisassembleLine(disassembler, instructionWords, lineBuffer, argR6, argR7, 
   undefined4 argR10;
 {
   int length;
-  int shaderStateOrLabel;
+  int labelEntry;
+  int disasmState;
   undefined4 argR6Saved;
   int *currentInstNumber;
   undefined4 argR7Saved;
@@ -6044,8 +6045,8 @@ int vsDisassembleLine(disassembler, instructionWords, lineBuffer, argR6, argR7, 
   undefined1 lineNumberText [120];
   
   *lineBuffer = 0;
-  shaderStateOrLabel = *disassembler;
-  labelTableOrLine = *(int **)(shaderStateOrLabel + 0x654);
+  disasmState = *disassembler;
+  labelTableOrLine = *(int **)(disasmState + 0x654);
   argR6Saved = argR6;
   argR7Saved = argR7;
   if ((labelTableOrLine == (int *)0x0) || (labelCount = *labelTableOrLine, labelCount < 1)) {
@@ -6055,15 +6056,15 @@ int vsDisassembleLine(disassembler, instructionWords, lineBuffer, argR6, argR7, 
     currentInstNumber = (int *)disassembler[1];
     loopIndex = 0;
     while( true ) {
-      shaderStateOrLabel = loopIndex * 0x1c + *(int *)(shaderStateOrLabel + 0x654);
-      labelTableOrLine = (int *)(*(int *)(shaderStateOrLabel + 0x14) + 1);
+      labelEntry = loopIndex * 0x1c + *(int *)(disasmState + 0x654);
+      labelTableOrLine = (int *)(*(int *)(labelEntry + 0x14) + 1);
       if (labelTableOrLine == currentInstNumber) {
-        ((int (*)())vsdisPrintFlowInstruction)(disassembler,shaderStateOrLabel + 4,currentInstNumber,argR6Saved,argR7Saved,argR8,labelTableOrLine,argR10);
+        ((int (*)())vsdisPrintFlowInstruction)(disassembler,labelEntry + 4,currentInstNumber,argR6Saved,argR7Saved,argR8,labelTableOrLine,argR10);
         currentInstNumber = (int *)disassembler[1];
       }
       loopIndex = loopIndex + 1;
       if (labelCount == loopIndex) break;
-      shaderStateOrLabel = *disassembler;
+      disasmState = *disassembler;
     }
   }
   printf_LDBLStub_1a32d0(lineNumberText,"%3d:",currentInstNumber,argR6Saved,argR7Saved,argR8,labelTableOrLine,argR10);

@@ -1,0 +1,7 @@
+use	vsDisassembleLine	iVar1	disasmState	CONFIRMED	*disassembler: the disassembler/shader state (+0x654 label table)	^\s*iVar1\ =\ \*param_1;$	+2
+use	vsDisassembleLine	iVar1	disasmState	CONFIRMED	right-hand side of the label entry address uses the state pointer	^\s*iVar1\ =\ iVar7\ \*\ 0x1c\ \+\ \*\(int\ \*\)\(iVar1\ \+\ 0x654\);$	+1	rhs	none
+use	vsDisassembleLine	iVar1	disasmState	CONFIRMED	*disassembler reloaded at the end of each label loop iteration	^\s*iVar1\ =\ \*param_1;$@2	+1
+use	vsDisassembleLine	iVar1	labelEntry	CONFIRMED	label table entry (0x1c bytes each): +4 flow record, +0x14 instruction number	^\s*iVar1\ =\ iVar7\ \*\ 0x1c\ \+\ \*\(int\ \*\)\(iVar1\ \+\ 0x654\);$	+1	lhs	none
+use	vsDisassembleLine	iVar1	labelEntry	CONFIRMED	label entry uses: instruction number at +0x14, flow record at +4	^\s*piVar5\ =\ \(int\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ 0x14\)\ \+\ 1\);$	+1
+use	vsDisassembleLine	iVar1	labelEntry	CONFIRMED	label entry uses: instruction number at +0x14, flow record at +4	^\s*\(\(int\ \(\*\)\(\)\)FUN_000cfd24\)\(param_1,iVar1\ \+\ 4,piVar3,uVar2,uVar4,param_6,piVar5,param_8\);$	+1
+use	vsDisassembleLine	iVar1	length	CONFIRMED	strlen of the line buffer: offset where the instruction text is appended	^\s*iVar1\ =\ _strlen\(param_3\);$	+2
