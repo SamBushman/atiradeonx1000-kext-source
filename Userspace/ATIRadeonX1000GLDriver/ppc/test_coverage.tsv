@@ -2849,7 +2849,7 @@
 0x178b1c	FUN_00178b1c	360	no	indirect call (driver context / vtable / callback)
 0x178c84	FUN_00178c84	244	no	indirect call (driver context / vtable / callback)
 0x178d78	FUN_00178d78	280	yes	
-0x178e90	FUN_00178e90	468	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x178e90	ValueKey__evalLitLane	468	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x179064	FUN_00179064	212	no	indirect call (driver context / vtable / callback)
 0x179138	FUN_00179138	408	no	indirect call (driver context / vtable / callback)
 0x1792f0	FUN_001792f0	232	no	indirect call (driver context / vtable / callback)
@@ -2929,7 +2929,7 @@
 0x181f00	Block__flattenAndRebuildAddMulTree	7020	no	indirect call (driver context / vtable / callback)
 0x183ac8	FUN_00183ac8	212	yes	
 0x183b9c	Block__rebuildAddMulTreesWhereProfitable	1152	yes	
-0x18401c	FUN_0018401c	256	yes	
+0x18401c	pass_height_reduction	256	yes	
 0x18413c	FUN_0018413c	2336	no	indirect call (driver context / vtable / callback)
 0x184ab4	pass_minreg_order	280	no	indirect call (driver context / vtable / callback)
 0x184bcc	compareIntsAscending	36	yes	

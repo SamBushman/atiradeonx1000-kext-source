@@ -1445,9 +1445,9 @@ fd5c8	FUN_000fd5c8	103cf4	103cf8	-	no-handler
 181f00	Block__flattenAndRebuildAddMulTree	18205c	182488	-	no-handler
 181f00	Block__flattenAndRebuildAddMulTree	1824c8	183a94	183a98	cleanup
 181f00	Block__flattenAndRebuildAddMulTree	183a98	183a9c	-	no-handler
-18401c	FUN_0018401c	184048	184064	-	no-handler
-18401c	FUN_0018401c	184088	18408c	1840ac	cleanup
-18401c	FUN_0018401c	1840c8	18413c	-	no-handler
+18401c	pass_height_reduction	184048	184064	-	no-handler
+18401c	pass_height_reduction	184088	18408c	1840ac	cleanup
+18401c	pass_height_reduction	1840c8	18413c	-	no-handler
 18413c	FUN_0018413c	184180	184184	-	no-handler
 18413c	FUN_0018413c	1841a4	1841a8	18421c	cleanup
 18413c	FUN_0018413c	1841bc	1841c0	-	no-handler

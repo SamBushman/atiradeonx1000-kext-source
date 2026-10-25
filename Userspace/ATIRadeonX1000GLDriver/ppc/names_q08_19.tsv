@@ -1,0 +1,130 @@
+use	FUN_0017c910	bVar1	laneFlag	INFERRED	lane counter == 3 test, also the result-mismatch flag	^\s*if\ \(\(iVar8\ !=\ \-1\)\ \&\&\ \(bVar1\ =\ iVar9\ !=\ iVar8,\ iVar9\ =\ iVar8,\ bVar1\)\)\ \{$	+1
+use	FUN_0017c910	bVar1	laneFlag	INFERRED	lane counter == 3 test, also the result-mismatch flag	^\s*bVar1\ =\ iVar10\ ==\ 3;$	+1
+use	FUN_0017c910	bVar1	laneFlag	INFERRED	lane counter == 3 test, also the result-mismatch flag	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_0017c910	bVar2	usedUniformConstant	INFERRED	true when an operand value came from a uniform (positive) value number	^\s*bVar2\ =\ false;$	+1
+use	FUN_0017c910	bVar2	usedUniformConstant	INFERRED	true when an operand value came from a uniform (positive) value number	^\s*bVar2\ =\ true;$	+1
+use	FUN_0017c910	bVar2	usedUniformConstant	INFERRED	true when an operand value came from a uniform (positive) value number	^\s*if\ \(bVar2\)\ \{$	+1
+use	FUN_0017c910	iVar11	laneEntryPtr	INFERRED	address of the lane entry (ctx+0x170, step 4)	^\s*iVar11\ =\ param_1\ \+\ 0x170;$	+1
+use	FUN_0017c910	iVar11	laneEntryPtr	INFERRED	address of the lane entry (ctx+0x170, step 4)	^\s*piVar13\ =\ \(int\ \*\)\(iVar11\ \+\ 8\);$	+1
+use	FUN_0017c910	iVar11	laneEntryPtr	INFERRED	address of the lane entry (ctx+0x170, step 4)	^\s*iVar11\ =\ iVar11\ \+\ 4;$	+1
+use	FUN_0017c910	iVar12	operandRecOffset	INFERRED	byte offset 0x98 + 0x18*n of the operand record	^\s*iVar12\ =\ 0x98;$	+1
+use	FUN_0017c910	iVar12	operandRecOffset	INFERRED	byte offset 0x98 + 0x18*n of the operand record	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ iVar12;$	+1
+use	FUN_0017c910	iVar12	operandRecOffset	INFERRED	byte offset 0x98 + 0x18*n of the operand record	^\s*iVar12\ =\ iVar12\ \+\ 0x18;$	+1
+use	FUN_0017c910	iVar6	operandCountOrValueNumber	INFERRED	operand count (loop header), then the value number / class of the operand	^\s*for\ \(iVar4\ =\ 1;$	+8
+use	FUN_0017c910	iVar6	operandCountOrValueNumber	INFERRED	operand count (loop header), then the value number / class of the operand	^\s*if\ \(iVar6\ <\ 1\)\ \{$	+1
+use	FUN_0017c910	iVar6	operandCountOrValueNumber	INFERRED	operand count (loop header), then the value number / class of the operand	^\s*iVar6\ =\ FUN_00173330\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),iVar6\);$	+3
+use	FUN_0017c910	iVar6	operandCountOrValueNumber	INFERRED	operand count (loop header), then the value number / class of the operand	^\s*\*piVar14\ =\ \(DAT_001e61d0\)\[iVar6\];$	+1
+use	FUN_0017c910	iVar7	operandRecAddr	INFERRED	address of the operand record	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ iVar12;$	+2
+use	FUN_0017c910	iVar7	operandRecAddr	INFERRED	address of the operand record	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar7\ \+\ 0x20\);$@2	+1
+local	FUN_0017c910	local_64	operandClasses	INFERRED	class codes of the operands (fake array, 10 words)
+use	FUN_0017c910	piVar13	valueNumberPtr	INFERRED	address of the lane value number of operand n (ctx+0x170+8, step 0x10)	^\s*piVar13\ =\ \(int\ \*\)\(iVar11\ \+\ 8\);$	+1
+use	FUN_0017c910	piVar13	valueNumberPtr	INFERRED	address of the lane value number of operand n (ctx+0x170+8, step 0x10)	^\s*iVar6\ =\ \*piVar13;$	+1
+use	FUN_0017c910	piVar13	valueNumberPtr	INFERRED	address of the lane value number of operand n (ctx+0x170+8, step 0x10)	^\s*piVar13\ =\ piVar13\ \+\ 4;$	+1
+use	FUN_0017c910	uVar3	operandFlags	INFERRED	flags word of the operand record	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar7\ \+\ 0x20\);$	+2
+use	FUN_0017c910	uVar3	operandFlags	INFERRED	flags word of the operand record	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar7\ \+\ 0x20\);$@2	+1
+use	FUN_0017c910	uVar3	operandFlags	INFERRED	flags word of the operand record	^\s*if\ \(\(uVar3\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	FUN_0017cb14	bVar1	laneFlag	INFERRED	lane counter == 3 test, also the result-mismatch flag	^\s*if\ \(\(iVar8\ !=\ \-1\)\ \&\&\ \(bVar1\ =\ iVar9\ !=\ iVar8,\ iVar9\ =\ iVar8,\ bVar1\)\)\ \{$	+1
+use	FUN_0017cb14	bVar1	laneFlag	INFERRED	lane counter == 3 test, also the result-mismatch flag	^\s*bVar1\ =\ iVar10\ ==\ 3;$	+1
+use	FUN_0017cb14	bVar1	laneFlag	INFERRED	lane counter == 3 test, also the result-mismatch flag	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_0017cb14	bVar2	usedUniformConstant	INFERRED	true when an operand value came from a uniform (positive) value number	^\s*bVar2\ =\ false;$	+1
+use	FUN_0017cb14	bVar2	usedUniformConstant	INFERRED	true when an operand value came from a uniform (positive) value number	^\s*bVar2\ =\ true;$	+1
+use	FUN_0017cb14	bVar2	usedUniformConstant	INFERRED	true when an operand value came from a uniform (positive) value number	^\s*if\ \(bVar2\)\ \{$	+1
+use	FUN_0017cb14	iVar11	laneEntryPtr	INFERRED	address of the lane entry (ctx+0x170, step 4)	^\s*iVar11\ =\ param_1\ \+\ 0x170;$	+1
+use	FUN_0017cb14	iVar11	laneEntryPtr	INFERRED	address of the lane entry (ctx+0x170, step 4)	^\s*piVar13\ =\ \(int\ \*\)\(iVar11\ \+\ 8\);$	+1
+use	FUN_0017cb14	iVar11	laneEntryPtr	INFERRED	address of the lane entry (ctx+0x170, step 4)	^\s*iVar11\ =\ iVar11\ \+\ 4;$	+1
+use	FUN_0017cb14	iVar12	operandRecOffset	INFERRED	byte offset 0x98 + 0x18*n of the operand record	^\s*iVar12\ =\ 0x98;$	+1
+use	FUN_0017cb14	iVar12	operandRecOffset	INFERRED	byte offset 0x98 + 0x18*n of the operand record	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ iVar12;$	+1
+use	FUN_0017cb14	iVar12	operandRecOffset	INFERRED	byte offset 0x98 + 0x18*n of the operand record	^\s*iVar12\ =\ iVar12\ \+\ 0x18;$	+1
+use	FUN_0017cb14	iVar6	operandCountOrValueNumber	INFERRED	operand count (loop header), then the value number / class of the operand	^\s*for\ \(iVar4\ =\ 1;$	+8
+use	FUN_0017cb14	iVar6	operandCountOrValueNumber	INFERRED	operand count (loop header), then the value number / class of the operand	^\s*if\ \(iVar6\ <\ 1\)\ \{$	+1
+use	FUN_0017cb14	iVar6	operandCountOrValueNumber	INFERRED	operand count (loop header), then the value number / class of the operand	^\s*iVar6\ =\ FUN_00173330\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),iVar6\);$	+3
+use	FUN_0017cb14	iVar6	operandCountOrValueNumber	INFERRED	operand count (loop header), then the value number / class of the operand	^\s*\*piVar14\ =\ \(DAT_001e61d0\)\[iVar6\];$	+1
+use	FUN_0017cb14	iVar7	operandRecAddr	INFERRED	address of the operand record	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ iVar12;$	+2
+use	FUN_0017cb14	iVar7	operandRecAddr	INFERRED	address of the operand record	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar7\ \+\ 0x20\);$@2	+1
+local	FUN_0017cb14	local_64	operandClasses	INFERRED	class codes of the operands (fake array, 10 words)
+use	FUN_0017cb14	piVar13	valueNumberPtr	INFERRED	address of the lane value number of operand n (ctx+0x170+8, step 0x10)	^\s*piVar13\ =\ \(int\ \*\)\(iVar11\ \+\ 8\);$	+1
+use	FUN_0017cb14	piVar13	valueNumberPtr	INFERRED	address of the lane value number of operand n (ctx+0x170+8, step 0x10)	^\s*iVar6\ =\ \*piVar13;$	+1
+use	FUN_0017cb14	piVar13	valueNumberPtr	INFERRED	address of the lane value number of operand n (ctx+0x170+8, step 0x10)	^\s*piVar13\ =\ piVar13\ \+\ 4;$	+1
+use	FUN_0017cb14	uVar3	operandFlags	INFERRED	flags word of the operand record	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar7\ \+\ 0x20\);$	+2
+use	FUN_0017cb14	uVar3	operandFlags	INFERRED	flags word of the operand record	^\s*uVar3\ =\ \*\(uint\ \*\)\(iVar7\ \+\ 0x20\);$@2	+1
+use	FUN_0017cb14	uVar3	operandFlags	INFERRED	flags word of the operand record	^\s*if\ \(\(uVar3\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+local	FUN_0018401c	param_1	rebuildState	INFERRED	RebuildState: [0] compiler, [1] program, [2] resource model, [7] per-instruction node vector
+local	FUN_0018401c	param_2	program	INFERRED	Program being optimised (+8 compiler, +900 block list, +0x3c4 instruction vector)
+local	FUN_0018401c	param_3	staleArg3	INFERRED	unused stale argument register forwarded to the per-block callee
+local	FUN_0018401c	param_4	staleArg4	INFERRED	unused stale argument register forwarded to the per-block callee
+local	FUN_0018401c	param_5	staleArg5	INFERRED	unused stale argument register forwarded to the per-block callee
+local	FUN_0018401c	param_6	staleArg6	INFERRED	unused stale argument register forwarded to the per-block callee
+local	FUN_0018401c	param_7	staleArg7	INFERRED	unused stale argument register forwarded to the per-block callee
+local	FUN_0018401c	extraout_r4	nextPassName	INFERRED	stale r4 value reused as the pass name argument of later iterations
+use	FUN_0018401c	iVar1	nextBlockNode	INFERRED	list node after the current block node (+8)	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\);$	+2
+use	FUN_0018401c	iVar1	nextBlockNode	INFERRED	list node after the current block node (+8)	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\);$@2	+1
+use	FUN_0018401c	iVar1	vectorByteOffset	INFERRED	byte offset into the instruction vector (4 per element)	^\s*iVar1\ =\ 0;$	+1
+use	FUN_0018401c	iVar1	vectorByteOffset	INFERRED	byte offset into the instruction vector (4 per element)	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 8\)\ \+\ iVar1\);$	+1
+use	FUN_0018401c	iVar1	vectorByteOffset	INFERRED	byte offset into the instruction vector (4 per element)	^\s*iVar1\ =\ iVar1\ \+\ 4;$	+1
+use	FUN_0018401c	iVar3	compiler	INFERRED	program+8: the compiler	^\s*iVar3\ =\ \*\(int\ \*\)\(param_2\ \+\ 8\);$	+4
+use	FUN_0018401c	iVar3	blockNode	INFERRED	current block list node (program+900 list, +8 next)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\[1\]\ \+\ 900\);$	+2
+use	FUN_0018401c	iVar3	blockNode	INFERRED	current block list node (program+900 list, +8 next)	^\s*iVar1\ =\ FUN_00194034\(iVar3\ \+\ 0x90\);$	+1
+use	FUN_0018401c	iVar3	blockNode	INFERRED	current block list node (program+900 list, +8 next)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00183b9c\)\(param_1,iVar3,param_3,param_4,param_5,param_6,param_7\);$	+1
+use	FUN_0018401c	iVar3	blockNode	INFERRED	current block list node (program+900 list, +8 next)	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\);$	+2
+use	FUN_0018401c	iVar3	nodeVector	INFERRED	rebuildState[7]: the per-instruction node vector header	^\s*iVar3\ =\ param_1\[7\];$	+4
+use	FUN_0018401c	iVar3	nextPassNode	INFERRED	node after the current pass list node	^\s*iVar3\ =\ piVar7\[2\];$	+2
+use	FUN_0018401c	iVar3	nextPassNode	INFERRED	node after the current pass list node	^\s*iVar3\ =\ piVar7\[2\];$@2	+1
+use	FUN_0018401c	iVar3	instVector	INFERRED	program+0x3c4: the instruction vector	^\s*iVar3\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x3c4\);$	+1
+use	FUN_0018401c	iVar3	instVector	INFERRED	program+0x3c4: the instruction vector	^\s*for\ \(uVar8\ =\ 1;\ uVar8\ <=\ \*\(uint\ \*\)\(iVar3\ \+\ 4\);\ uVar8\ =\ uVar8\ \+\ 1\)\ \{$	+2
+use	FUN_0018401c	iVar3	instVector	INFERRED	program+0x3c4: the instruction vector	^\s*iVar3\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x3c4\);$@2	+1
+use	FUN_0018401c	pcVar5	passName	INFERRED	pass name string passed to the pass virtual method (+0x48)	^\s*pcVar5\ =\ "height_reduction";$	+1
+use	FUN_0018401c	pcVar5	passName	INFERRED	pass name string passed to the pass virtual method (+0x48)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x48\)\)\(piVar7,pcVar5\);$	+1
+use	FUN_0018401c	pcVar5	passName	INFERRED	pass name string passed to the pass virtual method (+0x48)	^\s*pcVar5\ =\ extraout_r4;$	+1
+use	FUN_0018401c	piVar7	passListNode	INFERRED	node of the pass list (program+900 list head, then next)	^\s*piVar7\ =\ \*\(int\ \*\*\)\(param_2\ \+\ 900\);$	+2
+use	FUN_0018401c	piVar7	passListNode	INFERRED	node of the pass list (program+900 list head, then next)	^\s*\(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x48\)\)\(piVar7,pcVar5\);$	+2
+use	FUN_0018401c	piVar7	passListNode	INFERRED	node of the pass list (program+900 list head, then next)	^\s*iVar3\ =\ piVar7\[2\];$@2	+1
+local	FUN_00178e90	param_1	resultOut	INFERRED	out: float result of the lane (returned)
+local	FUN_00178e90	param_2	key	INFERRED	ValueKey being folded (+0xb0 instruction, +0x178 lane value numbers)
+local	FUN_00178e90	param_3	lane	INFERRED	lane index 0..3 of the LIT result (opcode 0x32)
+local	FUN_00178e90	param_4	staleArg4	INFERRED	unused stale argument register
+local	FUN_00178e90	local_58	litInputs	INFERRED	input constants of the LIT instruction: [0] x, [1] y, [3] w (exponent)
+use	FUN_00178e90	dVar6	logOrPow	INFERRED	log(y) / log(2), then pow(2, w * log2(y))	^\s*dVar6\ =\ _log\(\(double\)local_58\[1\]\);$	+1
+use	FUN_00178e90	dVar6	logOrPow	INFERRED	log(y) / log(2), then pow(2, w * log2(y))	^\s*dVar6\ =\ _pow\(2\.0,\(double\)\(fVar1\ \*\ \(float\)\(dVar6\ /\ dVar7\)\)\);$	+2
+use	FUN_00178e90	dVar7	logTwo	INFERRED	log(2.0)	^\s*dVar7\ =\ _log\(2\.0\);$	+2
+use	FUN_00178e90	fVar1	clampedX	INFERRED	x clamped to >= 0 (max(x,0))	^\s*fVar1\ =\ fVar3;$	+1
+use	FUN_00178e90	fVar1	clampedX	INFERRED	x clamped to >= 0 (max(x,0))	^\s*fVar1\ =\ 0\.0;$	+1
+use	FUN_00178e90	fVar1	clampedX	INFERRED	x clamped to >= 0 (max(x,0))	^\s*fVar2\ =\ fVar1;$	+1
+use	FUN_00178e90	fVar1	clampedExponent	INFERRED	exponent w clamped to [-128, 128]	^\s*fVar1\ =\ \-128\.0;$	+1
+use	FUN_00178e90	fVar1	clampedExponent	INFERRED	exponent w clamped to [-128, 128]	^\s*fVar1\ =\ local_58\[3\];$	+1
+use	FUN_00178e90	fVar1	clampedExponent	INFERRED	exponent w clamped to [-128, 128]	^\s*fVar1\ =\ fVar3;$@2	+1
+use	FUN_00178e90	fVar1	clampedExponent	INFERRED	exponent w clamped to [-128, 128]	^\s*dVar6\ =\ _pow\(2\.0,\(double\)\(fVar1\ \*\ \(float\)\(dVar6\ /\ dVar7\)\)\);$	+1
+use	FUN_00178e90	fVar2	laneOneResult	INFERRED	result of lane 1: max(x,0) when x > 0, else 0	^\s*fVar2\ =\ 0\.0;$	+1
+use	FUN_00178e90	fVar2	laneOneResult	INFERRED	result of lane 1: max(x,0) when x > 0, else 0	^\s*fVar2\ =\ fVar1;$	+1
+use	FUN_00178e90	fVar2	laneOneResult	INFERRED	result of lane 1: max(x,0) when x > 0, else 0	^\s*\*param_1\ =\ fVar2;$	+1
+use	FUN_00178e90	fVar3	xValue	INFERRED	constant x of the LIT instruction	^\s*fVar3\ =\ \*pfVar4;$	+3
+use	FUN_00178e90	fVar3	xValue	INFERRED	constant x of the LIT instruction	^\s*if\ \(\-fVar3\ <\ 0\.0\)\ \{$	+1
+use	FUN_00178e90	fVar3	clampHigh	INFERRED	upper clamp 128.0 or the exponent value	^\s*fVar3\ =\ 128\.0;$	+1
+use	FUN_00178e90	fVar3	clampHigh	INFERRED	upper clamp 128.0 or the exponent value	^\s*fVar3\ =\ local_58\[3\];$	+1
+use	FUN_00178e90	fVar3	clampHigh	INFERRED	upper clamp 128.0 or the exponent value	^\s*fVar1\ =\ fVar3;$@2	+1
+local	FUN_0017d6ac	param_2	laneConstants	INFERRED	four lane constants (floats) of the key instruction
+local	FUN_0017d6ac	afStack_44	negatedConstantsTail	INFERRED	last three words of negatedConstants (fake array continuation)
+local	FUN_0017d6ac	local_54	negatedConstants	INFERRED	four negated lane constants (first word; continues in negatedConstantsTail)
+local	FUN_0017d6ac	local_58	destSelectMask	INFERRED	masked destination select word passed to the limits check
+local	FUN_0017d6ac	local_38	writeMaskOut	INFERRED	out-parameter of WriteMask__fromSelectWord
+local	FUN_0017d6ac	local_34	maskedSelect	INFERRED	out-parameter of SelectWord__maskUnused
+use	FUN_0017d6ac	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*bVar1\ =\ iVar5\ !=\ 3;$	+1
+use	FUN_0017d6ac	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0017d6ac	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*bVar1\ =\ iVar5\ !=\ 3;$@2	+1
+use	FUN_0017d6ac	bVar1	moreLanes	INFERRED	lane counter != 3	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	FUN_0017d6ac	bVar2	valueFlags	INFERRED	flag byte (+9) of the value-number record: negate / abs / scale flags	^\s*bVar2\ =\ \*\(byte\ \*\)\(iVar5\ \+\ 9\);$	+2
+use	FUN_0017d6ac	bVar2	valueFlags	INFERRED	flag byte (+9) of the value-number record: negate / abs / scale flags	^\s*bVar2\ =\ \*\(byte\ \*\)\(iVar5\ \+\ 9\);$@2	+2
+use	FUN_0017d6ac	bVar2	valueFlags	INFERRED	flag byte (+9) of the value-number record: negate / abs / scale flags	^\s*bVar2\ =\ \*\(byte\ \*\)\(iVar5\ \+\ 9\);$@3	+1
+use	FUN_0017d6ac	bVar2	valueFlags	INFERRED	flag byte (+9) of the value-number record: negate / abs / scale flags	^\s*if\ \(\(bVar2\ \&\ 2\)\ !=\ 0\)\ \{$	+1
+use	FUN_0017d6ac	fVar10	commonValue	INFERRED	constant common to all written lanes (0x7fff0000 until the first lane)	^\s*fVar10\ =\ GH_U2F\(0x7fff0000U\);$	+1
+use	FUN_0017d6ac	fVar10	commonValue	INFERRED	constant common to all written lanes (0x7fff0000 until the first lane)	^\s*if\ \(\(GH_F2U\(fVar10\)\ ==\ 0x7fff0000U\)\)\ \{$	+2
+use	FUN_0017d6ac	fVar10	commonValue	INFERRED	constant common to all written lanes (0x7fff0000 until the first lane)	^\s*else\ if\ \(fVar10\ !=\ \*pfVar3\)\ \{$	+1
+use	FUN_0017d6ac	fVar10	commonValue	INFERRED	constant common to all written lanes (0x7fff0000 until the first lane)	^\s*iVar5\ =\ FUN_00173e10\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),\ GH_F2U\(fVar10\)\);$	+1
+use	FUN_0017d6ac	fVar10	commonValue	INFERRED	constant common to all written lanes (0x7fff0000 until the first lane)	^\s*\*\(float\ \*\)\(\(int\)param_2\ \+\ iVar5\)\ =\ fVar10;$	+1
+use	FUN_0017d6ac	iVar4	byteOffset	INFERRED	byte offset into the constant vector while it is filled	^\s*iVar4\ =\ 0;$	+1
+use	FUN_0017d6ac	iVar4	byteOffset	INFERRED	byte offset into the constant vector while it is filled	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ \(int\)\&local_54\)\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x14\);$	+2
+local	FUN_0017d6ac	in_r7	staleArg5	INFERRED	stale argument register r7 forwarded to the limits check
+local	FUN_0017d6ac	in_r8	staleArg6	INFERRED	stale argument register r8 forwarded to the limits check
+use	FUN_0017d6ac	piVar7	hwLimits	INFERRED	compiler->+0x30c: hardware limits object (vtable +0x154 checks constants against the limits)	^\s*piVar7\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x238\)\ \+\ 0x30c\);$	+4
+use	FUN_0017d6ac	uVar8	limitsFailed	INFERRED	argument for FUN_0017d06c: 1 when only the negated vector fits, 0 otherwise	^\s*uVar8\ =\ 1;$	+1
+use	FUN_0017d6ac	uVar8	limitsFailed	INFERRED	argument for FUN_0017d06c: 1 when only the negated vector fits, 0 otherwise	^\s*uVar8\ =\ 0;$	+1
+use	FUN_0017d6ac	uVar8	limitsFailed	INFERRED	argument for FUN_0017d06c: 1 when only the negated vector fits, 0 otherwise	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_0017d06c\)\(param_1,iVar5,\&local_58,uVar8\);$	+1
