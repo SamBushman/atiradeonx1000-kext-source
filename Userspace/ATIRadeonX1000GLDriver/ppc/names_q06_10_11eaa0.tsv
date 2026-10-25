@@ -1,0 +1,89 @@
+local	FUN_0011eaa0	param_1	program	INFERRED	the Program; +8 compiler, +0x3ac virtual register list, +0x3b0 live-out bitset, +0x3bc block table
+use	FUN_0011eaa0	iVar15	blockCount	INFERRED	number of blocks (size of the two block bitsets)	^\s*iVar15\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x3bc\)\ \+\ 4\);$	+1
+use	FUN_0011eaa0	iVar15	blockCount	INFERRED	number of blocks (size of the two block bitsets)	^\s*uVar18\ =\ iVar15\ \+\ 0x1fU\ >>\ 5;$	+1
+use	FUN_0011eaa0	iVar15	blockCount	INFERRED	number of blocks (size of the two block bitsets)	^\s*puVar4\[2\]\ =\ iVar15;$	+1
+use	FUN_0011eaa0	iVar15	blockCount	INFERRED	number of blocks (size of the two block bitsets)	^\s*puVar5\[2\]\ =\ iVar15;$	+1
+use	FUN_0011eaa0	iVar15	clearCountA	INFERRED	words left to clear in the visited bitset	^\s*iVar15\ =\ \*piVar1;$	+2
+use	FUN_0011eaa0	iVar15	clearCountA	INFERRED	words left to clear in the visited bitset	^\s*if\ \(iVar15\ ==\ 0\)\ \{$	+2
+use	FUN_0011eaa0	iVar15	clearCountA	INFERRED	words left to clear in the visited bitset	^\s*iVar15\ =\ iVar15\ \+\ \-1;$	+2
+use	FUN_0011eaa0	iVar15	clearCountB	INFERRED	words left to clear in the defined-in bitset	^\s*iVar15\ =\ \*piVar11;$	+2
+use	FUN_0011eaa0	iVar15	clearCountB	INFERRED	words left to clear in the defined-in bitset	^\s*if\ \(iVar15\ ==\ 0\)\ \{$@2	+2
+use	FUN_0011eaa0	iVar15	clearCountB	INFERRED	words left to clear in the defined-in bitset	^\s*iVar15\ =\ iVar15\ \+\ \-1;$@2	+2
+use	FUN_0011eaa0	iVar15	defByteOffset	INFERRED	byte offset into the register's definition list	^\s*iVar15\ =\ 0;$	+1
+use	FUN_0011eaa0	iVar15	defByteOffset	INFERRED	byte offset into the register's definition list	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar13\ \+\ 0x18\)\ \+\ 8\)\ \+\ iVar15\);$	+1
+use	FUN_0011eaa0	iVar15	defByteOffset	INFERRED	byte offset into the register's definition list	^\s*iVar15\ =\ iVar15\ \+\ 4;$	+1
+use	FUN_0011eaa0	iVar15	defByteOffsetB	INFERRED	byte offset into the register's definition list	^\s*iVar15\ =\ 0;$@2	+1
+use	FUN_0011eaa0	iVar15	defByteOffsetB	INFERRED	byte offset into the register's definition list	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar13\ \+\ 0x18\)\ \+\ 8\)\ \+\ iVar15\);$@2	+1
+use	FUN_0011eaa0	iVar15	defByteOffsetB	INFERRED	byte offset into the register's definition list	^\s*iVar15\ =\ iVar15\ \+\ 4;$@2	+1
+use	FUN_0011eaa0	uVar18	bitsetWordCount	INFERRED	(block count + 31) >> 5	^\s*uVar18\ =\ iVar15\ \+\ 0x1fU\ >>\ 5;$	+2
+use	FUN_0011eaa0	uVar18	bitsetWordCount	INFERRED	(block count + 31) >> 5	^\s*puVar4\[1\]\ =\ uVar18;$	+1
+use	FUN_0011eaa0	uVar18	bitsetWordCount	INFERRED	(block count + 31) >> 5	^\s*if\ \(uVar18\ !=\ 0\)\ \{$	+1
+use	FUN_0011eaa0	uVar18	bitsetWordCount	INFERRED	(block count + 31) >> 5	^\s*uVar17\ =\ uVar18;$	+2
+use	FUN_0011eaa0	uVar18	bitsetWordCount	INFERRED	(block count + 31) >> 5	^\s*puVar5\[1\]\ =\ uVar18;$	+1
+use	FUN_0011eaa0	uVar18	bitsetWordCount	INFERRED	(block count + 31) >> 5	^\s*if\ \(uVar18\ !=\ 0\)\ \{$@2	+1
+use	FUN_0011eaa0	uVar18	bitsetWordCount	INFERRED	(block count + 31) >> 5	^\s*if\ \(uVar18\ ==\ 0\)\ \{$@2	+2
+use	FUN_0011eaa0	uVar18	bitsetWordCount	INFERRED	(block count + 31) >> 5	^\s*uVar18\ =\ uVar18\ \-\ 1;$	+2
+use	FUN_0011eaa0	uVar18	registerId	INFERRED	virtual register id of the register being processed (+0x1c)	^\s*uVar18\ =\ \*\(uint\ \*\)\(iVar13\ \+\ 0x1c\);$	+1
+use	FUN_0011eaa0	uVar18	registerId	INFERRED	virtual register id of the register being processed (+0x1c)	^\s*if\ \(\(\(\(\-1\ <\ \(int\)uVar18\)\ \&\&$	+4
+use	FUN_0011eaa0	iVar13	bitsetByteSize	INFERRED	bitset size in bytes including the 12-byte header	^\s*iVar13\ =\ uVar18\ \*\ 4\ \+\ 0xc;$	+2
+use	FUN_0011eaa0	iVar13	bitsetByteSize	INFERRED	bitset size in bytes including the 12-byte header	^\s*puVar5\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar16,iVar13\);$	+1
+use	FUN_0011eaa0	iVar13	registerRecord	INFERRED	virtual register record taken from the iterator	^\s*iVar13\ =\ local_50;$	+8
+use	FUN_0011eaa0	iVar13	registerRecord	INFERRED	virtual register record taken from the iterator	^\s*for\ \(uVar18\ =\ 1;\ uVar18\ <=\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar13\ \+\ 0x18\)\ \+\ 4\);\ uVar18\ =\ uVar18\ \+\ 1\)\ \{$	+2
+use	FUN_0011eaa0	iVar13	registerRecord	INFERRED	virtual register record taken from the iterator	^\s*for\ \(uVar18\ =\ 1;\ uVar18\ <=\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar13\ \+\ 0x18\)\ \+\ 4\);\ uVar18\ =\ uVar18\ \+\ 1\)\ \{$@2	+2
+use	FUN_0011eaa0	iVar13	registerRecord	INFERRED	virtual register record taken from the iterator	^\s*FUN_001046c8\(puVar14,0,iVar13\);$	+2
+use	FUN_0011eaa0	iVar13	registerRecord	INFERRED	virtual register record taken from the iterator	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012306c\)\(iVar13,puVar14\);$	+1
+use	FUN_0011eaa0	iVar13	registerRecord	INFERRED	virtual register record taken from the iterator	^\s*iVar13\ =\ local_50;$@2	+1
+use	FUN_0011eaa0	piVar1	definedInBlocksAlias	INFERRED	pointer to the first bitset, before it is repointed at the visited bitset	^\s*piVar1\ =\ piVar11;$	+1
+use	FUN_0011eaa0	piVar1	definedInBlocksAlias	INFERRED	pointer to the first bitset, before it is repointed at the visited bitset	^\s*piVar1\[2\]\ =\ 0;$	+2
+use	FUN_0011eaa0	piVar1	visitedBlocks	INFERRED	bitset of blocks that already received a phi for this register	^\s*piVar1\ =\ puVar5\ \+\ 1;$	+1
+use	FUN_0011eaa0	piVar1	visitedBlocks	INFERRED	bitset of blocks that already received a phi for this register	^\s*piVar8\ =\ piVar1;$	+1
+use	FUN_0011eaa0	piVar1	visitedBlocks	INFERRED	bitset of blocks that already received a phi for this register	^\s*iVar15\ =\ \*piVar1;$	+1
+use	FUN_0011eaa0	piVar1	visitedBlocks	INFERRED	bitset of blocks that already received a phi for this register	^\s*piVar8\ =\ piVar1;$@2	+1
+use	FUN_0011eaa0	piVar1	visitedBlocks	INFERRED	bitset of blocks that already received a phi for this register	^\s*if\ \(\(\*\(uint\ \*\)\(\(int\)piVar1\ \+\ uVar12\ \+\ 8\)\ >>\ uVar9\ \&\ 1\)\ ==\ 0\)\ \{$	+1
+use	FUN_0011eaa0	piVar1	visitedBlocks	INFERRED	bitset of blocks that already received a phi for this register	^\s*\*\(uint\ \*\)\(\(int\)piVar1\ \+\ uVar12\ \+\ 8\)\ =\ 1\ <<\ uVar9\ \|\ \*\(uint\ \*\)\(\(int\)piVar1\ \+\ uVar12\ \+\ 8\)$	+1
+use	FUN_0011eaa0	piVar1	visitedBlocks	INFERRED	bitset of blocks that already received a phi for this register	^\s*if\ \(piVar1\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_0011eaa0	piVar11	definedInBlocks	INFERRED	bitset of blocks that define the register	^\s*piVar11\ =\ puVar4\ \+\ 1;$	+1
+use	FUN_0011eaa0	piVar11	definedInBlocks	INFERRED	bitset of blocks that define the register	^\s*piVar1\ =\ piVar11;$	+1
+use	FUN_0011eaa0	piVar11	definedInBlocks	INFERRED	bitset of blocks that define the register	^\s*iVar15\ =\ \*piVar11;$	+1
+use	FUN_0011eaa0	piVar11	definedInBlocks	INFERRED	bitset of blocks that define the register	^\s*piVar8\ =\ piVar11;$	+1
+use	FUN_0011eaa0	piVar11	definedInBlocks	INFERRED	bitset of blocks that define the register	^\s*\*\(uint\ \*\)\(\(int\)piVar11\ \+\ uVar9\ \+\ 8\)\ =$	+2
+use	FUN_0011eaa0	piVar11	definedInBlocks	INFERRED	bitset of blocks that define the register	^\s*uVar7\ =\ \*\(uint\ \*\)\(\(int\)piVar11\ \+\ uVar12\ \+\ 8\);$	+1
+use	FUN_0011eaa0	piVar11	definedInBlocks	INFERRED	bitset of blocks that define the register	^\s*\*\(uint\ \*\)\(\(int\)piVar11\ \+\ uVar12\ \+\ 8\)\ =\ 1\ <<\ uVar9\ \|\ uVar7;$	+1
+use	FUN_0011eaa0	piVar11	definedInBlocks	INFERRED	bitset of blocks that define the register	^\s*if\ \(piVar11\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_0011eaa0	puVar5	visitedBitsetAlloc	INFERRED	arena block of the visited bitset	^\s*puVar5\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar16,iVar13\);$	+5
+use	FUN_0011eaa0	puVar5	visitedBitsetAlloc	INFERRED	arena block of the visited bitset	^\s*FUN_00193cc0\(\*puVar5,puVar5\);$	+1
+use	FUN_0011eaa0	iVar2	defInstA	INFERRED	definition instruction of the register	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar13\ \+\ 0x18\)\ \+\ 8\)\ \+\ iVar15\);$	+3
+use	FUN_0011eaa0	iVar2	defInstB	INFERRED	definition instruction of the register	^\s*iVar2\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar13\ \+\ 0x18\)\ \+\ 8\)\ \+\ iVar15\);$@2	+3
+use	FUN_0011eaa0	iVar2	defInstB	INFERRED	definition instruction of the register	^\s*for\ \(uVar17\ =\ 1;\ iVar3\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0xf8\),\ uVar17\ <=\ \*\(uint\ \*\)\(iVar3\ \+\ 4\);$	+2
+use	FUN_0011eaa0	iVar3	dominanceFrontier	INFERRED	vector of the definition block's dominance frontier (+0xf8)	^\s*for\ \(uVar17\ =\ 1;\ iVar3\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0xf8\),\ uVar17\ <=\ \*\(uint\ \*\)\(iVar3\ \+\ 4\);$	+3
+use	FUN_0011eaa0	uVar7	definedBitWord	INFERRED	word of the defined-in bitset at the frontier block	^\s*uVar7\ =\ \*\(uint\ \*\)\(\(int\)piVar11\ \+\ uVar12\ \+\ 8\);$	+3
+use	FUN_0011eaa0	piVar8	visitedBitsetCursor	INFERRED	cursor clearing the visited bitset	^\s*piVar8\ =\ piVar1;$	+1
+use	FUN_0011eaa0	piVar8	visitedBitsetCursor	INFERRED	cursor clearing the visited bitset	^\s*piVar8\[2\]\ =\ 0;$	+2
+use	FUN_0011eaa0	piVar8	visitedBitsetCursor	INFERRED	cursor clearing the visited bitset	^\s*piVar8\ =\ piVar1;$@2	+1
+use	FUN_0011eaa0	piVar8	visitedBitsetCursor	INFERRED	cursor clearing the visited bitset	^\s*piVar8\[2\]\ =\ 0;$@2	+2
+use	FUN_0011eaa0	piVar8	definedBitsetCursor	INFERRED	cursor clearing the defined-in bitset	^\s*piVar8\ =\ piVar11;$	+1
+use	FUN_0011eaa0	piVar8	definedBitsetCursor	INFERRED	cursor clearing the defined-in bitset	^\s*piVar8\[2\]\ =\ 0;$@3	+2
+use	FUN_0011eaa0	piVar8	frontierBlock	INFERRED	block of the dominance frontier	^\s*piVar8\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar3\ \+\ 8\)\ \+\ iVar10\);$	+3
+use	FUN_0011eaa0	piVar8	frontierBlock	INFERRED	block of the dominance frontier	^\s*uVar16\ =\ FUN_000e79dc\(piVar8\);$	+1
+use	FUN_0011eaa0	piVar8	frontierBlock	INFERRED	block of the dominance frontier	^\s*FUN_000e76c4\(piVar8,puVar14\);$	+2
+use	FUN_0011eaa0	uVar9	defBlockWordOffset	INFERRED	bitset word offset of the definition block	^\s*uVar9\ =\ uVar17\ >>\ 3\ \&\ 0x1ffffffc;$	+3
+use	FUN_0011eaa0	uVar9	frontierBitIndex	INFERRED	bit position of the frontier block in its word	^\s*uVar9\ =\ piVar8\[0x2d\]\ \&\ 0x1f;$	+2
+use	FUN_0011eaa0	uVar9	frontierBitIndex	INFERRED	bit position of the frontier block in its word	^\s*if\ \(\(uVar7\ >>\ uVar9\ \&\ 1\)\ ==\ 0\)\ \{$	+2
+use	FUN_0011eaa0	uVar9	frontierBitIndex	INFERRED	bit position of the frontier block in its word	^\s*\*\(uint\ \*\)\(\(int\)piVar1\ \+\ uVar12\ \+\ 8\)\ =\ 1\ <<\ uVar9\ \|\ \*\(uint\ \*\)\(\(int\)piVar1\ \+\ uVar12\ \+\ 8\)$	+1
+use	FUN_0011eaa0	iVar10	frontierByteOffset	INFERRED	byte offset into the frontier vector	^\s*iVar10\ =\ 0;$	+1
+use	FUN_0011eaa0	iVar10	frontierByteOffset	INFERRED	byte offset into the frontier vector	^\s*piVar8\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar3\ \+\ 8\)\ \+\ iVar10\);$	+1
+use	FUN_0011eaa0	iVar10	frontierByteOffset	INFERRED	byte offset into the frontier vector	^\s*iVar10\ =\ iVar10\ \+\ 4;$	+1
+use	FUN_0011eaa0	uVar12	frontierWordOffset	INFERRED	bitset word offset of the frontier block	^\s*uVar12\ =\ \(uint\)piVar8\[0x2d\]\ >>\ 3\ \&\ 0x1ffffffc;$	+1
+use	FUN_0011eaa0	uVar12	frontierWordOffset	INFERRED	bitset word offset of the frontier block	^\s*if\ \(\(\*\(uint\ \*\)\(\(int\)piVar1\ \+\ uVar12\ \+\ 8\)\ >>\ uVar9\ \&\ 1\)\ ==\ 0\)\ \{$	+1
+use	FUN_0011eaa0	uVar12	frontierWordOffset	INFERRED	bitset word offset of the frontier block	^\s*uVar7\ =\ \*\(uint\ \*\)\(\(int\)piVar11\ \+\ uVar12\ \+\ 8\);$	+1
+use	FUN_0011eaa0	uVar12	frontierWordOffset	INFERRED	bitset word offset of the frontier block	^\s*\*\(uint\ \*\)\(\(int\)piVar11\ \+\ uVar12\ \+\ 8\)\ =\ 1\ <<\ uVar9\ \|\ uVar7;$	+1
+use	FUN_0011eaa0	uVar12	frontierWordOffset	INFERRED	bitset word offset of the frontier block	^\s*\*\(uint\ \*\)\(\(int\)piVar1\ \+\ uVar12\ \+\ 8\)\ =\ 1\ <<\ uVar9\ \|\ \*\(uint\ \*\)\(\(int\)piVar1\ \+\ uVar12\ \+\ 8\)$	+1
+use	FUN_0011eaa0	uVar16	predecessorCount	INFERRED	predecessor count of the frontier block (stored in the phi)	^\s*uVar16\ =\ FUN_000e79dc\(piVar8\);$	+2
+use	FUN_0011eaa0	uVar17	clearCountC	INFERRED	words left to clear in the defined-in bitset	^\s*uVar17\ =\ uVar18;$	+1
+use	FUN_0011eaa0	uVar17	clearCountC	INFERRED	words left to clear in the defined-in bitset	^\s*uVar17\ =\ 1;$	+1
+use	FUN_0011eaa0	uVar17	clearCountC	INFERRED	words left to clear in the defined-in bitset	^\s*uVar17\ =\ uVar17\ \-\ 1;$	+2
+use	FUN_0011eaa0	uVar17	defBlockNumber	INFERRED	block number of the instruction's block (+0xb4)	^\s*uVar17\ =\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 0x158\)\ \+\ 0xb4\);$	+2
+use	FUN_0011eaa0	uVar17	defBlockNumber	INFERRED	block number of the instruction's block (+0xb4)	^\s*1\ <<\ \(uVar17\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(\(int\)piVar11\ \+\ uVar9\ \+\ 8\);$	+1
+use	FUN_0011eaa0	uVar17	frontierNumber	INFERRED	frontier entry number 1..count	^\s*for\ \(uVar17\ =\ 1;\ iVar3\ =\ \*\(int\ \*\)\(iVar2\ \+\ 0xf8\),\ uVar17\ <=\ \*\(uint\ \*\)\(iVar3\ \+\ 4\);$	+2
+local	FUN_0011eaa0	auStack_60	iteratorState	INFERRED	iterator state object for FUN_00194938 / FUN_00194a94 (5 words)
+local	FUN_0011eaa0	local_50	iteratorCurrent	INFERRED	current element word of the iterator (auStack_60 + 0x10)

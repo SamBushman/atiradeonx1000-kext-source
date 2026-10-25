@@ -110,173 +110,187 @@ int ValueKey__loadSourceDefinitions(ctx, param_2)
 }
 
 /* FUN_0011eaa0 @ 0x11eaa0 (672 bytes) */
-int FUN_0011eaa0(param_1)
-  int param_1;
+int FUN_0011eaa0(program)
+  int program;
 {
+  uint frontierNumber;
+  uint defBlockNumber;
+  uint frontierBitIndex;
+  int *frontierBlock;
+  int *definedBitsetCursor;
+  int defInstB;
+  int *visitedBlocks;
+  int registerRecord;
+  int bitsetByteSize;
+  uint registerId;
+  int defByteOffsetB;
+  int defByteOffset;
+  int clearCountB;
+  int clearCountA;
   undefined4 arena;
   uint loopIndex;
-  int *piVar1;
-  int iVar2;
-  int iVar3;
+  int *definedInBlocksAlias;
+  int defInstA;
+  int dominanceFrontier;
   undefined4 *allocation;
-  undefined4 *puVar5;
+  undefined4 *visitedBitsetAlloc;
   undefined4 *instAlloc;
-  uint uVar7;
-  int *piVar8;
-  uint uVar9;
-  int iVar10;
-  int *piVar11;
-  uint uVar12;
+  uint definedBitWord;
+  int *visitedBitsetCursor;
+  uint defBlockWordOffset;
+  int frontierByteOffset;
+  int *definedInBlocks;
+  uint frontierWordOffset;
   int iVar13;
   undefined4 *puVar14;
-  int iVar15;
-  undefined4 uVar16;
-  uint uVar17;
-  uint uVar18;
-  /* issue #64 live-repro: auStack_60 is the iterator state object passed to FUN_00194938/
-   * FUN_00194a94, which read/write param_1[0..4] - 5 words, 0x14 bytes. auStack_60 was declared
-   * only 16 bytes (4 words); local_50 sits exactly at the missing 5th word by its own hex name
-   * (0x60-0x50=0x10). The main loop below re-reads local_50 as its own continuation value
-   * (iVar13 = local_50) right after each FUN_00194938 call - with the two locals not contiguous,
-   * that call's real update to param_1[4] never reaches local_50, so iVar13 never changes and the
+  int blockCount;
+  undefined4 predecessorCount;
+  uint clearCountC;
+  uint bitsetWordCount;
+  /* issue #64 live-repro: iteratorState is the iterator state object passed to FUN_00194938/
+   * FUN_00194a94, which read/write program[0..4] - 5 words, 0x14 bytes. iteratorState was declared
+   * only 16 bytes (4 words); iteratorCurrent sits exactly at the missing 5th word by its own hex name
+   * (0x60-0x50=0x10). The main loop below re-reads iteratorCurrent as its own continuation value
+   * (iVar13 = iteratorCurrent) right after each FUN_00194938 call - with the two locals not contiguous,
+   * that call's real update to program[4] never reaches iteratorCurrent, so iVar13 never changes and the
    * while(iVar13!=0) loop spins forever (confirmed live: the rebuilt driver hangs at 99% CPU
    * inside FUN_00194938, never returning). Merged into one 0x14-byte buffer. */
-  unsigned char auStack_60 [0x14];
-#define local_50 (*(int *)(auStack_60 + 0x10))
+  unsigned char iteratorState [0x14];
+#define iteratorCurrent (*(int *)(iteratorState + 0x10))
   
-  iVar15 = *(int *)(*(int *)(param_1 + 0x3bc) + 4);
-  arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
-  uVar18 = iVar15 + 0x1fU >> 5;
-  iVar13 = uVar18 * 4 + 0xc;
-  allocation = (undefined4 *)Arena__alloc(arena,iVar13);
-  piVar11 = allocation + 1;
+  blockCount = *(int *)(*(int *)(program + 0x3bc) + 4);
+  arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  bitsetWordCount = blockCount + 0x1fU >> 5;
+  bitsetByteSize = bitsetWordCount * 4 + 0xc;
+  allocation = (undefined4 *)Arena__alloc(arena,bitsetByteSize);
+  definedInBlocks = allocation + 1;
   *allocation = arena;
-  allocation[1] = uVar18;
-  allocation[2] = iVar15;
-  if (uVar18 != 0) {
-    piVar1 = piVar11;
-    uVar17 = uVar18;
-    if (uVar18 == 0) {
-      uVar17 = 1;
+  allocation[1] = bitsetWordCount;
+  allocation[2] = blockCount;
+  if (bitsetWordCount != 0) {
+    definedInBlocksAlias = definedInBlocks;
+    clearCountC = bitsetWordCount;
+    if (bitsetWordCount == 0) {
+      clearCountC = 1;
     }
     do {
-      piVar1[2] = 0;
-      piVar1 = piVar1 + 1;
-      uVar17 = uVar17 - 1;
-    } while (uVar17 != 0);
+      definedInBlocksAlias[2] = 0;
+      definedInBlocksAlias = definedInBlocksAlias + 1;
+      clearCountC = clearCountC - 1;
+    } while (clearCountC != 0);
   }
-  arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
-  puVar5 = (undefined4 *)Arena__alloc(arena,iVar13);
-  piVar1 = puVar5 + 1;
-  *puVar5 = arena;
-  puVar5[1] = uVar18;
-  puVar5[2] = iVar15;
-  if (uVar18 != 0) {
-    piVar8 = piVar1;
-    if (uVar18 == 0) {
-      uVar18 = 1;
+  arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  visitedBitsetAlloc = (undefined4 *)Arena__alloc(arena,bitsetByteSize);
+  visitedBlocks = visitedBitsetAlloc + 1;
+  *visitedBitsetAlloc = arena;
+  visitedBitsetAlloc[1] = bitsetWordCount;
+  visitedBitsetAlloc[2] = blockCount;
+  if (bitsetWordCount != 0) {
+    visitedBitsetCursor = visitedBlocks;
+    if (bitsetWordCount == 0) {
+      bitsetWordCount = 1;
     }
     do {
-      piVar8[2] = 0;
-      piVar8 = piVar8 + 1;
-      uVar18 = uVar18 - 1;
-    } while (uVar18 != 0);
+      visitedBitsetCursor[2] = 0;
+      visitedBitsetCursor = visitedBitsetCursor + 1;
+      bitsetWordCount = bitsetWordCount - 1;
+    } while (bitsetWordCount != 0);
   }
-  FUN_00194a94(auStack_60,*(undefined4 *)(*(int *)(param_1 + 0x3ac) + 4));
-  iVar13 = local_50;
-  while (iVar13 != 0) {
-    uVar18 = *(uint *)(iVar13 + 0x1c);
-    local_50 = iVar13;
-    if ((((-1 < (int)uVar18) &&
-         ((*(uint *)((uVar18 >> 3 & 0x1ffffffc) + *(int *)(param_1 + 0x3b0) + 8) >> (uVar18 & 0x1f)
-          & 1) != 0)) || (*(int *)(iVar13 + 4) == 0x3b)) ||
-       ((*(int *)(iVar13 + 4) == 0x2c && (*(int *)(param_1 + 0x3b4) != 0)))) {
-      iVar15 = *piVar1;
-      if (iVar15 != 0) {
-        piVar8 = piVar1;
-        if (iVar15 == 0) {
-          iVar15 = 1;
+  FUN_00194a94(iteratorState,*(undefined4 *)(*(int *)(program + 0x3ac) + 4));
+  registerRecord = iteratorCurrent;
+  while (registerRecord != 0) {
+    registerId = *(uint *)(registerRecord + 0x1c);
+    iteratorCurrent = registerRecord;
+    if ((((-1 < (int)registerId) &&
+         ((*(uint *)((registerId >> 3 & 0x1ffffffc) + *(int *)(program + 0x3b0) + 8) >> (registerId & 0x1f)
+          & 1) != 0)) || (*(int *)(registerRecord + 4) == 0x3b)) ||
+       ((*(int *)(registerRecord + 4) == 0x2c && (*(int *)(program + 0x3b4) != 0)))) {
+      clearCountA = *visitedBlocks;
+      if (clearCountA != 0) {
+        visitedBitsetCursor = visitedBlocks;
+        if (clearCountA == 0) {
+          clearCountA = 1;
         }
         do {
-          piVar8[2] = 0;
-          piVar8 = piVar8 + 1;
-          iVar15 = iVar15 + -1;
-        } while (iVar15 != 0);
+          visitedBitsetCursor[2] = 0;
+          visitedBitsetCursor = visitedBitsetCursor + 1;
+          clearCountA = clearCountA + -1;
+        } while (clearCountA != 0);
       }
-      iVar15 = *piVar11;
-      if (iVar15 != 0) {
-        piVar8 = piVar11;
-        if (iVar15 == 0) {
-          iVar15 = 1;
+      clearCountB = *definedInBlocks;
+      if (clearCountB != 0) {
+        definedBitsetCursor = definedInBlocks;
+        if (clearCountB == 0) {
+          clearCountB = 1;
         }
         do {
-          piVar8[2] = 0;
-          piVar8 = piVar8 + 1;
-          iVar15 = iVar15 + -1;
-        } while (iVar15 != 0);
+          definedBitsetCursor[2] = 0;
+          definedBitsetCursor = definedBitsetCursor + 1;
+          clearCountB = clearCountB + -1;
+        } while (clearCountB != 0);
       }
-      iVar15 = 0;
-      for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(iVar13 + 0x18) + 4); loopIndex = loopIndex + 1) {
-        iVar2 = *(int *)(*(int *)(*(int *)(iVar13 + 0x18) + 8) + iVar15);
-        if ((*(uint *)(iVar2 + 0x14) & 1) != 0) {
-          uVar17 = *(uint *)(*(int *)(iVar2 + 0x158) + 0xb4);
-          uVar9 = uVar17 >> 3 & 0x1ffffffc;
-          *(uint *)((int)piVar11 + uVar9 + 8) =
-               1 << (uVar17 & 0x1f) | *(uint *)((int)piVar11 + uVar9 + 8);
+      defByteOffset = 0;
+      for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(registerRecord + 0x18) + 4); loopIndex = loopIndex + 1) {
+        defInstA = *(int *)(*(int *)(*(int *)(registerRecord + 0x18) + 8) + defByteOffset);
+        if ((*(uint *)(defInstA + 0x14) & 1) != 0) {
+          defBlockNumber = *(uint *)(*(int *)(defInstA + 0x158) + 0xb4);
+          defBlockWordOffset = defBlockNumber >> 3 & 0x1ffffffc;
+          *(uint *)((int)definedInBlocks + defBlockWordOffset + 8) =
+               1 << (defBlockNumber & 0x1f) | *(uint *)((int)definedInBlocks + defBlockWordOffset + 8);
         }
-        iVar15 = iVar15 + 4;
+        defByteOffset = defByteOffset + 4;
       }
-      iVar15 = 0;
-      for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(iVar13 + 0x18) + 4); loopIndex = loopIndex + 1) {
-        iVar2 = *(int *)(*(int *)(*(int *)(iVar13 + 0x18) + 8) + iVar15);
-        if ((*(uint *)(iVar2 + 0x14) & 1) != 0) {
-          iVar2 = *(int *)(iVar2 + 0x158);
-          iVar10 = 0;
-          for (uVar17 = 1; iVar3 = *(int *)(iVar2 + 0xf8), uVar17 <= *(uint *)(iVar3 + 4);
-              uVar17 = uVar17 + 1) {
-            piVar8 = *(int **)(*(int *)(iVar3 + 8) + iVar10);
-            uVar12 = (uint)piVar8[0x2d] >> 3 & 0x1ffffffc;
-            uVar9 = piVar8[0x2d] & 0x1f;
-            if ((*(uint *)((int)piVar1 + uVar12 + 8) >> uVar9 & 1) == 0) {
-              arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
+      defByteOffsetB = 0;
+      for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(registerRecord + 0x18) + 4); loopIndex = loopIndex + 1) {
+        defInstB = *(int *)(*(int *)(*(int *)(registerRecord + 0x18) + 8) + defByteOffsetB);
+        if ((*(uint *)(defInstB + 0x14) & 1) != 0) {
+          defInstB = *(int *)(defInstB + 0x158);
+          frontierByteOffset = 0;
+          for (frontierNumber = 1; dominanceFrontier = *(int *)(defInstB + 0xf8), frontierNumber <= *(uint *)(dominanceFrontier + 4);
+              frontierNumber = frontierNumber + 1) {
+            frontierBlock = *(int **)(*(int *)(dominanceFrontier + 8) + frontierByteOffset);
+            frontierWordOffset = (uint)frontierBlock[0x2d] >> 3 & 0x1ffffffc;
+            frontierBitIndex = frontierBlock[0x2d] & 0x1f;
+            if ((*(uint *)((int)visitedBlocks + frontierWordOffset + 8) >> frontierBitIndex & 1) == 0) {
+              arena = *(undefined4 *)(*(int *)(program + 8) + 0x374);
               instAlloc = (undefined4 *)Arena__alloc(arena,0x168);
               *instAlloc = arena;
               puVar14 = instAlloc + 1;
-              IRPhiNode__ctor_10a398(puVar14,*(undefined4 *)(param_1 + 8));
-              uVar16 = Block__predecessorCount(piVar8);
-              instAlloc[0x22] = uVar16;
-              IRInst__setOperandRef(puVar14,0,iVar13);
-              if (*(int *)(iVar13 + 4) == 0x2c) {
+              IRPhiNode__ctor_10a398(puVar14,*(undefined4 *)(program + 8));
+              predecessorCount = Block__predecessorCount(frontierBlock);
+              instAlloc[0x22] = predecessorCount;
+              IRInst__setOperandRef(puVar14,0,registerRecord);
+              if (*(int *)(registerRecord + 4) == 0x2c) {
                 instAlloc[0x28] = UNK_001afee0;
               }
-              uVar7 = *(uint *)((int)piVar11 + uVar12 + 8);
-              if ((uVar7 >> uVar9 & 1) == 0) {
-                *(uint *)((int)piVar11 + uVar12 + 8) = 1 << uVar9 | uVar7;
-                ((int (*)())FUN_0012306c)(iVar13,puVar14);
+              definedBitWord = *(uint *)((int)definedInBlocks + frontierWordOffset + 8);
+              if ((definedBitWord >> frontierBitIndex & 1) == 0) {
+                *(uint *)((int)definedInBlocks + frontierWordOffset + 8) = 1 << frontierBitIndex | definedBitWord;
+                ((int (*)())FUN_0012306c)(registerRecord,puVar14);
               }
-              Block__prependInst(piVar8,puVar14);
-              (**(code **)(*piVar8 + 0x48))(piVar8);
-              *(uint *)((int)piVar1 + uVar12 + 8) = 1 << uVar9 | *(uint *)((int)piVar1 + uVar12 + 8)
+              Block__prependInst(frontierBlock,puVar14);
+              (**(code **)(*frontierBlock + 0x48))(frontierBlock);
+              *(uint *)((int)visitedBlocks + frontierWordOffset + 8) = 1 << frontierBitIndex | *(uint *)((int)visitedBlocks + frontierWordOffset + 8)
               ;
             }
-            iVar10 = iVar10 + 4;
+            frontierByteOffset = frontierByteOffset + 4;
           }
         }
-        iVar15 = iVar15 + 4;
+        defByteOffsetB = defByteOffsetB + 4;
       }
     }
-    FUN_00194938(auStack_60);
-    iVar13 = local_50;
+    FUN_00194938(iteratorState);
+    registerRecord = iteratorCurrent;
   }
-  if (piVar11 != (int *)0x0) {
+  if (definedInBlocks != (int *)0x0) {
     Arena__free(*allocation,allocation);
   }
-  if (piVar1 != (int *)0x0) {
-    Arena__free(*puVar5,puVar5);
+  if (visitedBlocks != (int *)0x0) {
+    Arena__free(*visitedBitsetAlloc,visitedBitsetAlloc);
   }
   return;
 }
-#undef local_50
+#undef iteratorCurrent
 
 /* ValueKey__foldMovSources @ 0x11eec8 (1072 bytes) */
 int ValueKey__foldMovSources(ctx, param_2)
