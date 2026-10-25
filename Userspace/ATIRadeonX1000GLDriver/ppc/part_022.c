@@ -1,7 +1,7 @@
 #include "decls.h"
 
-/* FUN_000e4c40 @ 0xe4c40 (1764 bytes) */
-int FUN_000e4c40(ilReader, param_2, param_3)
+/* ILReader__decodeInstruction @ 0xe4c40 (1764 bytes) */
+int ILReader__decodeInstruction(ilReader, param_2, param_3)
   int ilReader;
   int *param_2;
   int param_3;
@@ -36,7 +36,7 @@ int FUN_000e4c40(ilReader, param_2, param_3)
   *(undefined4 *)(ilReader + 0x60) = 0;
   iVar10 = *param_2;
   *param_2 = iVar10 + 1;
-  iVar10 = FUN_000e4a38(ilReader,iVar10);
+  iVar10 = ILReader__fetchToken(ilReader,iVar10);
   if (iVar10 == 0) {
     *(int *)(ilReader + 0x34) = *(int *)(ilReader + 0x34) + 1;
     if ((*(int *)(ilReader + 0x30) != 0) && (*(int *)(ilReader + 0x84) == 0)) {
@@ -47,13 +47,13 @@ int FUN_000e4c40(ilReader, param_2, param_3)
     }
     return 0;
   }
-  uVar6 = FUN_000e4408(ilReader);
+  uVar6 = ILReader__currentOpcode(ilReader);
   puVar15 = (uint *)(ilReader + 0x8c);
   iVar10 = FUN_000f89a4(uVar6,*(undefined4 *)(*(int *)(param_3 + 0x30c) + 0xc));
   if (iVar10 == 6) {
     *(ushort *)(ilReader + 0x8e) =
          ((ushort)((uint)*(undefined4 *)(ilReader + 0x8c) >> 0x10) & 0x3fff) + 0xcf;
-    uVar6 = FUN_000e4408(ilReader);
+    uVar6 = ILReader__currentOpcode(ilReader);
   }
   switch(uVar6) {
   case 0x76:
@@ -63,14 +63,14 @@ int FUN_000e4c40(ilReader, param_2, param_3)
       iVar11 = *param_2;
       iVar10 = *(int *)(ilReader + 0x74);
       *param_2 = iVar11 + 1;
-      FUN_000e4a38(ilReader,iVar11);
+      ILReader__fetchToken(ilReader,iVar11);
       iVar11 = *param_2;
       loopIndex7 = 0;
       iVar8 = *(int *)(iVar11 * 4 + ilReader + 0x88);
       if (0 < iVar8) {
         while( true ) {
           loopIndex7 = loopIndex7 + 1;
-          FUN_000e4a38(ilReader,iVar11);
+          ILReader__fetchToken(ilReader,iVar11);
           if (iVar8 == loopIndex7) break;
           iVar11 = *param_2;
         }
@@ -133,7 +133,7 @@ LAB_000e4e74:
         iVar11 = *param_2;
         loopIndex6 = loopIndex6 + 1;
         *param_2 = iVar11 + 1;
-        FUN_000e4a38(ilReader,iVar11);
+        ILReader__fetchToken(ilReader,iVar11);
       } while (iVar10 != loopIndex6);
     }
   }
@@ -148,44 +148,44 @@ LAB_000e4e74:
   **(int **)(ilReader + 100) = iVar12 * 4 + ilReader + 0x8c;
   iVar10 = *param_2;
   *param_2 = iVar10 + 1;
-  FUN_000e4a38(ilReader,iVar10);
+  ILReader__fetchToken(ilReader,iVar10);
   iVar10 = *param_2;
   iVar16 = ilReader + iVar10 * 4 + 0x7c;
   uVar3 = *(uint *)(iVar16 + 0xc);
   if ((uVar3 & 0x400000) != 0) {
     *param_2 = iVar10 + 1;
-    FUN_000e4a38(ilReader,iVar10);
+    ILReader__fetchToken(ilReader,iVar10);
     iVar10 = *param_2;
     uVar3 = *(uint *)(iVar16 + 0xc);
   }
   if ((uVar3 & 0x23f0000) == 0x21e0000) {
     *param_2 = iVar10 + 1;
-    FUN_000e4a38(ilReader,iVar10);
+    ILReader__fetchToken(ilReader,iVar10);
     uVar3 = *(uint *)(iVar16 + 0xc);
     iVar10 = *param_2;
   }
   if ((uVar3 & 0x1800000) == 0x800000) {
 LAB_000e5044:
     *param_2 = iVar10 + 1;
-    FUN_000e4a38(ilReader,iVar10);
+    ILReader__fetchToken(ilReader,iVar10);
     iVar10 = *param_2;
   }
   else if ((uVar3 & 0x1800000) == 0x1000000) {
     *param_2 = iVar10 + 1;
-    FUN_000e4a38(ilReader,iVar10);
+    ILReader__fetchToken(ilReader,iVar10);
     iVar10 = *param_2;
     iVar13 = ilReader + iVar10 * 4 + 0x7c;
     uVar3 = *(uint *)(iVar13 + 0xc);
     if ((uVar3 & 0x400000) != 0) {
       *param_2 = iVar10 + 1;
-      FUN_000e4a38(ilReader,iVar10);
+      ILReader__fetchToken(ilReader,iVar10);
       iVar10 = *param_2;
       uVar3 = *(uint *)(iVar13 + 0xc);
     }
     if (((uVar3 & 0x1800000) == 0) && (uVar4 = 0, (uVar3 & 0x2000000) != 0)) {
       while( true ) {
         *param_2 = iVar10 + 1;
-        FUN_000e4a38(ilReader,iVar10);
+        ILReader__fetchToken(ilReader,iVar10);
         uVar3 = *(uint *)(iVar13 + 0xc);
         uVar4 = uVar4 + 1;
         if ((uVar3 >> 0x19 & 1) <= uVar4) break;
@@ -200,7 +200,7 @@ LAB_000e5044:
   }
   if ((*(uint *)(iVar16 + 0xc) & 0x4000000) != 0) {
     *param_2 = iVar10 + 1;
-    FUN_000e4a38(ilReader,iVar10);
+    ILReader__fetchToken(ilReader,iVar10);
     iVar10 = *param_2;
   }
   if (0 < iVar8) {
@@ -231,7 +231,7 @@ LAB_000e50f4:
       *(int *)(*(int *)(ilReader + 0x6c) + iVar13) = iVar8 * 4 + ilReader + 0x8c;
       iVar10 = *param_2;
       *param_2 = iVar10 + 1;
-      FUN_000e4a38(ilReader,iVar10);
+      ILReader__fetchToken(ilReader,iVar10);
       uVar3 = **(uint **)(iVar13 + *(int *)(ilReader + 0x6c)) >> 0x19 & 1;
       if (uVar3 == 0xffffffff) {
         iVar10 = *param_2;
@@ -244,7 +244,7 @@ LAB_000e5190:
         uVar4 = *(uint *)(iVar18 + 0xc);
         if ((uVar4 & 0x400000) != 0) {
           *param_2 = iVar10 + 1;
-          FUN_000e4a38(ilReader,iVar10);
+          ILReader__fetchToken(ilReader,iVar10);
           uVar4 = *(uint *)(iVar18 + 0xc);
           iVar10 = *param_2;
         }
@@ -253,18 +253,18 @@ LAB_000e5190:
           if (uVar4 == 0x800000) {
 LAB_000e523c:
             *param_2 = iVar10 + 1;
-            FUN_000e4a38(ilReader,iVar10);
+            ILReader__fetchToken(ilReader,iVar10);
             iVar10 = *param_2;
           }
           else if (uVar4 == 0x1000000) {
             *param_2 = iVar10 + 1;
-            FUN_000e4a38(ilReader,iVar10);
+            ILReader__fetchToken(ilReader,iVar10);
             iVar10 = *param_2;
             iVar19 = ilReader + iVar10 * 4 + 0x7c;
             uVar4 = *(uint *)(iVar19 + 0xc);
             if ((uVar4 & 0x400000) != 0) {
               *param_2 = iVar10 + 1;
-              FUN_000e4a38(ilReader,iVar10);
+              ILReader__fetchToken(ilReader,iVar10);
               uVar4 = *(uint *)(iVar19 + 0xc);
               iVar10 = *param_2;
             }
@@ -273,14 +273,14 @@ LAB_000e523c:
         }
         if ((*(uint *)(iVar18 + 0xc) & 0x4000000) != 0) {
           *param_2 = iVar10 + 1;
-          FUN_000e4a38(ilReader,iVar10);
+          ILReader__fetchToken(ilReader,iVar10);
           iVar10 = *param_2;
         }
         loopIndex3 = loopIndex3 + 1;
         if (loopIndex3 != uVar3 + 1) {
           if (0 < loopIndex3) {
             *param_2 = iVar10 + 1;
-            FUN_000e4a38(ilReader,iVar10);
+            ILReader__fetchToken(ilReader,iVar10);
             iVar10 = *param_2;
           }
           goto LAB_000e5190;
@@ -315,149 +315,157 @@ LAB_000e523c:
     do {
       iVar5 = *param_2;
       *param_2 = iVar5 + 1;
-      FUN_000e4a38(ilReader,iVar5);
+      ILReader__fetchToken(ilReader,iVar5);
       loopIndex5 = loopIndex5 + 1;
     } while (loopIndex5 < *(int *)(ilReader + 0x5c));
   }
   return 1;
 }
 
-/* FUN_000e5384 @ 0xe5384 (248 bytes) */
-int FUN_000e5384(ilReader, param_2, param_3, param_4, argR7, param_6)
+/* ILReader__beginRewrittenReplay_e5384 @ 0xe5384 (248 bytes) */
+int ILReader__beginRewrittenReplay_e5384(ilReader, opcodeToken, tokenIndex, replacementToken, argR7, param_6)
   int ilReader;
-  undefined4 param_2;
-  int param_3;
-  undefined4 param_4;
+  undefined4 opcodeToken;
+  int tokenIndex;
+  undefined4 replacementToken;
   undefined4 argR7;
   undefined4 param_6;
 {
+  undefined4 windowToken;
   int loopIndex;
-  int iVar1;
-  undefined4 *puVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 *puVar5;
-  uint uVar6;
-  uint *puVar7;
+  int tokenSlot;
+  undefined4 *firstReplaySlot;
+  undefined4 savedReadState;
+  undefined4 savedSkipMode;
+  undefined4 *windowCursor;
+  uint replayStackCount;
+  uint *replayStack;
   
-  iVar1 = param_3 * 4 + ilReader;
-  uVar4 = *(undefined4 *)(ilReader + 0x80);
-  uVar3 = *(undefined4 *)(ilReader + 0x7c);
-  *(undefined2 *)(ilReader + 0x8e) = (*(unsigned short *)((unsigned char *)&(param_2) + 2));
-  *(int *)(iVar1 + 0xa4) = *(int *)(ilReader + 0x74) - *(int *)(ilReader + 0x2c) >> 2;
-  *(undefined4 *)(iVar1 + 0x8c) = param_4;
-  *(undefined4 *)(iVar1 + 0x90) = argR7;
-  *(undefined4 *)(iVar1 + 0x94) = 0x29;
-  *(undefined4 *)(iVar1 + 0x98) = 0xffffffff;
-  *(undefined4 *)(iVar1 + 0x9c) = uVar4;
-  *(undefined4 *)(iVar1 + 0xa0) = uVar3;
-  if (-1 < param_3 + 6) {
+  tokenSlot = tokenIndex * 4 + ilReader;
+  savedSkipMode = *(undefined4 *)(ilReader + 0x80);
+  savedReadState = *(undefined4 *)(ilReader + 0x7c);
+  *(undefined2 *)(ilReader + 0x8e) = (*(unsigned short *)((unsigned char *)&(opcodeToken) + 2));
+  *(int *)(tokenSlot + 0xa4) = *(int *)(ilReader + 0x74) - *(int *)(ilReader + 0x2c) >> 2;
+  *(undefined4 *)(tokenSlot + 0x8c) = replacementToken;
+  *(undefined4 *)(tokenSlot + 0x90) = argR7;
+  *(undefined4 *)(tokenSlot + 0x94) = 0x29;
+  *(undefined4 *)(tokenSlot + 0x98) = 0xffffffff;
+  *(undefined4 *)(tokenSlot + 0x9c) = savedSkipMode;
+  *(undefined4 *)(tokenSlot + 0xa0) = savedReadState;
+  if (-1 < tokenIndex + 6) {
     loopIndex = 0;
-    puVar5 = (undefined4 *)((param_3 + 6) * 4 + ilReader + 0x8c);
+    windowCursor = (undefined4 *)((tokenIndex + 6) * 4 + ilReader + 0x8c);
     do {
-      puVar7 = *(uint **)(ilReader + 0x88);
-      uVar3 = *puVar5;
-      uVar6 = puVar7[1];
-      if (uVar6 < *puVar7) {
-        _memset(uVar6 * 4 + puVar7[2],0,4);
-        puVar2 = (undefined4 *)(uVar6 * 4 + puVar7[2]);
-        puVar7[1] = uVar6 + 1;
+      replayStack = *(uint **)(ilReader + 0x88);
+      windowToken = *windowCursor;
+      replayStackCount = replayStack[1];
+      if (replayStackCount < *replayStack) {
+        _memset(replayStackCount * 4 + replayStack[2],0,4);
+        firstReplaySlot = (undefined4 *)(replayStackCount * 4 + replayStack[2]);
+        replayStack[1] = replayStackCount + 1;
       }
       else {
-        puVar2 = (undefined4 *)Vector__elementRefGrow(puVar7,uVar6);
+        firstReplaySlot = (undefined4 *)Vector__elementRefGrow(replayStack,replayStackCount);
       }
       loopIndex = loopIndex + 1;
-      *puVar2 = uVar3;
-      puVar5 = puVar5 + -1;
-    } while (param_3 + 7 != loopIndex);
+      *firstReplaySlot = windowToken;
+      windowCursor = windowCursor + -1;
+    } while (tokenIndex + 7 != loopIndex);
   }
   *(undefined4 *)(ilReader + 0x7c) = 1;
   return;
 }
 
-/* FUN_000e547c @ 0xe547c (244 bytes) */
-int FUN_000e547c(ilReader, param_2, param_3, param_4, argR7, param_6)
+/* ILReader__beginRewrittenReplay_e547c @ 0xe547c (244 bytes) */
+int ILReader__beginRewrittenReplay_e547c(ilReader, opcodeToken, tokenIndex, replacementToken, argR7, param_6)
   int ilReader;
-  undefined4 param_2;
-  int param_3;
-  undefined4 param_4;
+  undefined4 opcodeToken;
+  int tokenIndex;
+  undefined4 replacementToken;
   undefined4 argR7;
   undefined4 param_6;
 {
+  undefined4 windowToken;
   int loopIndex;
-  int iVar1;
-  undefined4 *puVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  undefined4 *puVar5;
-  uint uVar6;
-  uint *puVar7;
+  int tokenSlot;
+  undefined4 *firstReplaySlot;
+  undefined4 savedReadState;
+  undefined4 savedSkipMode;
+  undefined4 *windowCursor;
+  uint replayStackCount;
+  uint *replayStack;
   
-  iVar1 = param_3 * 4 + ilReader;
-  uVar4 = *(undefined4 *)(ilReader + 0x80);
-  uVar3 = *(undefined4 *)(ilReader + 0x7c);
-  *(undefined2 *)(ilReader + 0x8e) = (*(unsigned short *)((unsigned char *)&(param_2) + 2));
-  *(int *)(iVar1 + 0xa0) = *(int *)(ilReader + 0x74) - *(int *)(ilReader + 0x2c) >> 2;
-  *(undefined4 *)(iVar1 + 0x8c) = param_4;
-  *(undefined4 *)(iVar1 + 0x90) = 0x29;
-  *(undefined4 *)(iVar1 + 0x94) = 0xffffffff;
-  *(undefined4 *)(iVar1 + 0x98) = uVar4;
-  *(undefined4 *)(iVar1 + 0x9c) = uVar3;
-  if (-1 < param_3 + 5) {
+  tokenSlot = tokenIndex * 4 + ilReader;
+  savedSkipMode = *(undefined4 *)(ilReader + 0x80);
+  savedReadState = *(undefined4 *)(ilReader + 0x7c);
+  *(undefined2 *)(ilReader + 0x8e) = (*(unsigned short *)((unsigned char *)&(opcodeToken) + 2));
+  *(int *)(tokenSlot + 0xa0) = *(int *)(ilReader + 0x74) - *(int *)(ilReader + 0x2c) >> 2;
+  *(undefined4 *)(tokenSlot + 0x8c) = replacementToken;
+  *(undefined4 *)(tokenSlot + 0x90) = 0x29;
+  *(undefined4 *)(tokenSlot + 0x94) = 0xffffffff;
+  *(undefined4 *)(tokenSlot + 0x98) = savedSkipMode;
+  *(undefined4 *)(tokenSlot + 0x9c) = savedReadState;
+  if (-1 < tokenIndex + 5) {
     loopIndex = 0;
-    puVar5 = (undefined4 *)((param_3 + 5) * 4 + ilReader + 0x8c);
+    windowCursor = (undefined4 *)((tokenIndex + 5) * 4 + ilReader + 0x8c);
     do {
-      puVar7 = *(uint **)(ilReader + 0x88);
-      uVar3 = *puVar5;
-      uVar6 = puVar7[1];
-      if (uVar6 < *puVar7) {
-        _memset(uVar6 * 4 + puVar7[2],0,4);
-        puVar2 = (undefined4 *)(uVar6 * 4 + puVar7[2]);
-        puVar7[1] = uVar6 + 1;
+      replayStack = *(uint **)(ilReader + 0x88);
+      windowToken = *windowCursor;
+      replayStackCount = replayStack[1];
+      if (replayStackCount < *replayStack) {
+        _memset(replayStackCount * 4 + replayStack[2],0,4);
+        firstReplaySlot = (undefined4 *)(replayStackCount * 4 + replayStack[2]);
+        replayStack[1] = replayStackCount + 1;
       }
       else {
-        puVar2 = (undefined4 *)Vector__elementRefGrow(puVar7,uVar6);
+        firstReplaySlot = (undefined4 *)Vector__elementRefGrow(replayStack,replayStackCount);
       }
       loopIndex = loopIndex + 1;
-      *puVar2 = uVar3;
-      puVar5 = puVar5 + -1;
-    } while (param_3 + 6 != loopIndex);
+      *firstReplaySlot = windowToken;
+      windowCursor = windowCursor + -1;
+    } while (tokenIndex + 6 != loopIndex);
   }
   *(undefined4 *)(ilReader + 0x7c) = 1;
   return;
 }
 
-/* FUN_000e5570 @ 0xe5570 (992 bytes) */
-int FUN_000e5570(param_1, param_2, param_3)
-  int *param_1;
-  int param_2;
-  int param_3;
+/* ILReader__ctor_e5570 @ 0xe5570 (992 bytes) */
+int ILReader__ctor_e5570(ilReader, tokenStream, compiler)
+  int *ilReader;
+  int tokenStream;
+  int compiler;
 {
+  undefined4 *intConstSentinel;
+  undefined4 *floatConstSentinel;
+  undefined4 *boolConstSentinel;
+  int tokenCursor;
+  int intConstList;
+  int floatConstList;
   int allocation2;
   undefined4 arenaAt378;
   undefined4 *vectorAlloc;
-  undefined4 *puVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int iVar4;
+  undefined4 *replayStackSlot;
+  undefined4 *firstReplaySlot;
+  int boolConstList;
+  int tokenStart;
   undefined4 allocation;
-  uint uVar6;
-  uint *puVar7;
+  uint replayStackCount;
+  uint *replayStack;
   
-  param_1[0x1d] = param_2;
-  param_1[9] = param_2;
-  param_1[10] = param_2;
-  *param_1 = param_3;
-  param_1[0xc] = 0;
-  param_1[0xd] = 0;
-  param_1[0xe] = 0;
-  param_1[0x12] = 0;
-  param_1[0x13] = 0;
-  param_1[0x14] = 0;
-  param_1[0x1f] = 0;
-  param_1[0x20] = 0;
-  param_1[0x21] = 0;
-  arenaAt378 = *(undefined4 *)(param_3 + 0x378);
+  ilReader[0x1d] = tokenStream;
+  ilReader[9] = tokenStream;
+  ilReader[10] = tokenStream;
+  *ilReader = compiler;
+  ilReader[0xc] = 0;
+  ilReader[0xd] = 0;
+  ilReader[0xe] = 0;
+  ilReader[0x12] = 0;
+  ilReader[0x13] = 0;
+  ilReader[0x14] = 0;
+  ilReader[0x1f] = 0;
+  ilReader[0x20] = 0;
+  ilReader[0x21] = 0;
+  arenaAt378 = *(undefined4 *)(compiler + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -465,59 +473,59 @@ int FUN_000e5570(param_1, param_2, param_3)
   vectorAlloc[4] = arenaAt378;
   allocation = Arena__alloc(arenaAt378,8);
   vectorAlloc[3] = allocation;
-  param_1[0x22] = (int)(vectorAlloc + 1);
-  uVar6 = vectorAlloc[2];
-  if (uVar6 < (uint)vectorAlloc[1]) {
-    _memset(uVar6 * 4 + vectorAlloc[3],0,4);
-    puVar2 = (undefined4 *)(uVar6 * 4 + vectorAlloc[3]);
-    vectorAlloc[2] = uVar6 + 1;
+  ilReader[0x22] = (int)(vectorAlloc + 1);
+  replayStackCount = vectorAlloc[2];
+  if (replayStackCount < (uint)vectorAlloc[1]) {
+    _memset(replayStackCount * 4 + vectorAlloc[3],0,4);
+    firstReplaySlot = (undefined4 *)(replayStackCount * 4 + vectorAlloc[3]);
+    vectorAlloc[2] = replayStackCount + 1;
   }
   else {
-    puVar2 = (undefined4 *)Vector__elementRefGrow(vectorAlloc + 1,uVar6);
+    firstReplaySlot = (undefined4 *)Vector__elementRefGrow(vectorAlloc + 1,replayStackCount);
   }
-  *puVar2 = 0;
-  puVar7 = (uint *)param_1[0x22];
-  uVar6 = puVar7[1];
-  if (uVar6 < *puVar7) {
-    _memset(uVar6 * 4 + puVar7[2],0,4);
-    puVar1 = (undefined4 *)(uVar6 * 4 + puVar7[2]);
-    puVar7[1] = uVar6 + 1;
-  }
-  else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar7,uVar6);
-  }
-  *puVar1 = 2;
-  puVar7 = (uint *)param_1[0x22];
-  uVar6 = puVar7[1];
-  if (uVar6 < *puVar7) {
-    _memset(uVar6 * 4 + puVar7[2],0,4);
-    puVar1 = (undefined4 *)(uVar6 * 4 + puVar7[2]);
-    puVar7[1] = uVar6 + 1;
+  *firstReplaySlot = 0;
+  replayStack = (uint *)ilReader[0x22];
+  replayStackCount = replayStack[1];
+  if (replayStackCount < *replayStack) {
+    _memset(replayStackCount * 4 + replayStack[2],0,4);
+    replayStackSlot = (undefined4 *)(replayStackCount * 4 + replayStack[2]);
+    replayStack[1] = replayStackCount + 1;
   }
   else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar7,uVar6);
+    replayStackSlot = (undefined4 *)Vector__elementRefGrow(replayStack,replayStackCount);
   }
-  *puVar1 = 0;
-  puVar7 = (uint *)param_1[0x22];
-  uVar6 = puVar7[1];
-  if (uVar6 < *puVar7) {
-    _memset(uVar6 * 4 + puVar7[2],0,4);
-    puVar1 = (undefined4 *)(uVar6 * 4 + puVar7[2]);
-    puVar7[1] = uVar6 + 1;
+  *replayStackSlot = 2;
+  replayStack = (uint *)ilReader[0x22];
+  replayStackCount = replayStack[1];
+  if (replayStackCount < *replayStack) {
+    _memset(replayStackCount * 4 + replayStack[2],0,4);
+    replayStackSlot = (undefined4 *)(replayStackCount * 4 + replayStack[2]);
+    replayStack[1] = replayStackCount + 1;
   }
   else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar7,uVar6);
+    replayStackSlot = (undefined4 *)Vector__elementRefGrow(replayStack,replayStackCount);
   }
-  *puVar1 = 0xffffffff;
-  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x50);
-  param_1[0x19] = allocation2;
-  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x50);
-  param_1[0x1b] = allocation2;
-  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),400);
-  param_1[0x1a] = allocation2;
-  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),400);
-  param_1[0x1c] = allocation2;
-  arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
+  *replayStackSlot = 0;
+  replayStack = (uint *)ilReader[0x22];
+  replayStackCount = replayStack[1];
+  if (replayStackCount < *replayStack) {
+    _memset(replayStackCount * 4 + replayStack[2],0,4);
+    replayStackSlot = (undefined4 *)(replayStackCount * 4 + replayStack[2]);
+    replayStack[1] = replayStackCount + 1;
+  }
+  else {
+    replayStackSlot = (undefined4 *)Vector__elementRefGrow(replayStack,replayStackCount);
+  }
+  *replayStackSlot = 0xffffffff;
+  allocation2 = Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0x50);
+  ilReader[0x19] = allocation2;
+  allocation2 = Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0x50);
+  ilReader[0x1b] = allocation2;
+  allocation2 = Arena__alloc(*(undefined4 *)(*ilReader + 0x378),400);
+  ilReader[0x1a] = allocation2;
+  allocation2 = Arena__alloc(*(undefined4 *)(*ilReader + 0x378),400);
+  ilReader[0x1c] = allocation2;
+  arenaAt378 = *(undefined4 *)(*ilReader + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -525,8 +533,8 @@ int FUN_000e5570(param_1, param_2, param_3)
   vectorAlloc[2] = 0;
   allocation = Arena__alloc(arenaAt378,8);
   vectorAlloc[3] = allocation;
-  param_1[0xf] = (int)(vectorAlloc + 1);
-  arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
+  ilReader[0xf] = (int)(vectorAlloc + 1);
+  arenaAt378 = *(undefined4 *)(*ilReader + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -534,8 +542,8 @@ int FUN_000e5570(param_1, param_2, param_3)
   vectorAlloc[2] = 0;
   allocation = Arena__alloc(arenaAt378,8);
   vectorAlloc[3] = allocation;
-  param_1[0x11] = (int)(vectorAlloc + 1);
-  arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
+  ilReader[0x11] = (int)(vectorAlloc + 1);
+  arenaAt378 = *(undefined4 *)(*ilReader + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -543,90 +551,96 @@ int FUN_000e5570(param_1, param_2, param_3)
   vectorAlloc[4] = arenaAt378;
   allocation = Arena__alloc(arenaAt378,8);
   vectorAlloc[3] = allocation;
-  param_1[0x10] = (int)(vectorAlloc + 1);
-  param_1[0x15] = 0;
-  puVar1 = (undefined4 *)Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0xc);
-  param_1[3] = (int)puVar1;
-  *puVar1 = 0xffffffff;
-  *(undefined4 *)(param_1[3] + 4) = 0;
-  *(undefined4 *)(param_1[3] + 8) = 0;
-  iVar3 = param_1[3];
-  param_1[4] = iVar3;
-  *(int *)(iVar3 + 8) = iVar3;
-  puVar1 = (undefined4 *)Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x18);
-  param_1[7] = (int)puVar1;
-  *puVar1 = 0xffffffff;
-  *(undefined4 *)(param_1[7] + 4) = 0;
-  *(undefined4 *)(param_1[7] + 8) = 0;
-  *(undefined4 *)(param_1[7] + 0xc) = 0;
-  *(undefined4 *)(param_1[7] + 0x10) = 0;
-  *(undefined4 *)(param_1[7] + 0x14) = 0;
-  iVar3 = param_1[7];
-  param_1[8] = iVar3;
-  *(int *)(iVar3 + 0x14) = iVar3;
-  puVar1 = (undefined4 *)Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x18);
-  param_1[5] = (int)puVar1;
-  *puVar1 = 0xffffffff;
-  *(undefined4 *)(param_1[5] + 4) = 0;
-  *(undefined4 *)(param_1[5] + 8) = 0;
-  *(undefined4 *)(param_1[5] + 0xc) = 0;
-  *(undefined4 *)(param_1[5] + 0x10) = 0;
-  *(undefined4 *)(param_1[5] + 0x14) = 0;
-  iVar3 = param_1[5];
-  param_1[6] = iVar3;
-  *(int *)(iVar3 + 0x14) = iVar3;
-  iVar3 = param_1[9];
-  param_1[1] = iVar3;
-  if (iVar3 == 0) {
-    iVar3 = 0;
+  ilReader[0x10] = (int)(vectorAlloc + 1);
+  ilReader[0x15] = 0;
+  boolConstSentinel = (undefined4 *)Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0xc);
+  ilReader[3] = (int)boolConstSentinel;
+  *boolConstSentinel = 0xffffffff;
+  *(undefined4 *)(ilReader[3] + 4) = 0;
+  *(undefined4 *)(ilReader[3] + 8) = 0;
+  boolConstList = ilReader[3];
+  ilReader[4] = boolConstList;
+  *(int *)(boolConstList + 8) = boolConstList;
+  floatConstSentinel = (undefined4 *)Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0x18);
+  ilReader[7] = (int)floatConstSentinel;
+  *floatConstSentinel = 0xffffffff;
+  *(undefined4 *)(ilReader[7] + 4) = 0;
+  *(undefined4 *)(ilReader[7] + 8) = 0;
+  *(undefined4 *)(ilReader[7] + 0xc) = 0;
+  *(undefined4 *)(ilReader[7] + 0x10) = 0;
+  *(undefined4 *)(ilReader[7] + 0x14) = 0;
+  floatConstList = ilReader[7];
+  ilReader[8] = floatConstList;
+  *(int *)(floatConstList + 0x14) = floatConstList;
+  intConstSentinel = (undefined4 *)Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0x18);
+  ilReader[5] = (int)intConstSentinel;
+  *intConstSentinel = 0xffffffff;
+  *(undefined4 *)(ilReader[5] + 4) = 0;
+  *(undefined4 *)(ilReader[5] + 8) = 0;
+  *(undefined4 *)(ilReader[5] + 0xc) = 0;
+  *(undefined4 *)(ilReader[5] + 0x10) = 0;
+  *(undefined4 *)(ilReader[5] + 0x14) = 0;
+  intConstList = ilReader[5];
+  ilReader[6] = intConstList;
+  *(int *)(intConstList + 0x14) = intConstList;
+  tokenCursor = ilReader[9];
+  ilReader[1] = tokenCursor;
+  if (tokenCursor == 0) {
+    tokenCursor = 0;
   }
   else {
-    iVar3 = iVar3 + 4;
-    param_1[9] = iVar3;
+    tokenCursor = tokenCursor + 4;
+    ilReader[9] = tokenCursor;
   }
-  param_1[2] = iVar3;
-  iVar4 = 0;
-  if (iVar3 != 0) {
-    FUN_0019ee74(iVar3,*param_1);
-    iVar4 = param_1[9] + 4;
-    param_1[9] = iVar4;
+  ilReader[2] = tokenCursor;
+  tokenStart = 0;
+  if (tokenCursor != 0) {
+    FUN_0019ee74(tokenCursor,*ilReader);
+    tokenStart = ilReader[9] + 4;
+    ilReader[9] = tokenStart;
   }
-  param_1[0x1d] = iVar4;
-  param_1[0xb] = iVar4;
+  ilReader[0x1d] = tokenStart;
+  ilReader[0xb] = tokenStart;
   return;
 }
 
-/* FUN_000e59f0 @ 0xe59f0 (992 bytes) */
-int FUN_000e59f0(param_1, param_2, param_3)
-  int *param_1;
-  int param_2;
-  int param_3;
+/* ILReader__ctor_e59f0 @ 0xe59f0 (992 bytes) */
+int ILReader__ctor_e59f0(ilReader, tokenStream, compiler)
+  int *ilReader;
+  int tokenStream;
+  int compiler;
 {
+  undefined4 *intConstSentinel;
+  undefined4 *floatConstSentinel;
+  undefined4 *boolConstSentinel;
+  int tokenCursor;
+  int intConstList;
+  int floatConstList;
   int allocation2;
   undefined4 arenaAt378;
   undefined4 *vectorAlloc;
-  undefined4 *puVar1;
-  undefined4 *puVar2;
-  int iVar3;
-  int iVar4;
+  undefined4 *replayStackSlot;
+  undefined4 *firstReplaySlot;
+  int boolConstList;
+  int tokenStart;
   undefined4 allocation;
-  uint uVar6;
-  uint *puVar7;
+  uint replayStackCount;
+  uint *replayStack;
   
-  param_1[0x1d] = param_2;
-  param_1[9] = param_2;
-  param_1[10] = param_2;
-  *param_1 = param_3;
-  param_1[0xc] = 0;
-  param_1[0xd] = 0;
-  param_1[0xe] = 0;
-  param_1[0x12] = 0;
-  param_1[0x13] = 0;
-  param_1[0x14] = 0;
-  param_1[0x1f] = 0;
-  param_1[0x20] = 0;
-  param_1[0x21] = 0;
-  arenaAt378 = *(undefined4 *)(param_3 + 0x378);
+  ilReader[0x1d] = tokenStream;
+  ilReader[9] = tokenStream;
+  ilReader[10] = tokenStream;
+  *ilReader = compiler;
+  ilReader[0xc] = 0;
+  ilReader[0xd] = 0;
+  ilReader[0xe] = 0;
+  ilReader[0x12] = 0;
+  ilReader[0x13] = 0;
+  ilReader[0x14] = 0;
+  ilReader[0x1f] = 0;
+  ilReader[0x20] = 0;
+  ilReader[0x21] = 0;
+  arenaAt378 = *(undefined4 *)(compiler + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -634,59 +648,59 @@ int FUN_000e59f0(param_1, param_2, param_3)
   vectorAlloc[4] = arenaAt378;
   allocation = Arena__alloc(arenaAt378,8);
   vectorAlloc[3] = allocation;
-  param_1[0x22] = (int)(vectorAlloc + 1);
-  uVar6 = vectorAlloc[2];
-  if (uVar6 < (uint)vectorAlloc[1]) {
-    _memset(uVar6 * 4 + vectorAlloc[3],0,4);
-    puVar2 = (undefined4 *)(uVar6 * 4 + vectorAlloc[3]);
-    vectorAlloc[2] = uVar6 + 1;
+  ilReader[0x22] = (int)(vectorAlloc + 1);
+  replayStackCount = vectorAlloc[2];
+  if (replayStackCount < (uint)vectorAlloc[1]) {
+    _memset(replayStackCount * 4 + vectorAlloc[3],0,4);
+    firstReplaySlot = (undefined4 *)(replayStackCount * 4 + vectorAlloc[3]);
+    vectorAlloc[2] = replayStackCount + 1;
   }
   else {
-    puVar2 = (undefined4 *)Vector__elementRefGrow(vectorAlloc + 1,uVar6);
+    firstReplaySlot = (undefined4 *)Vector__elementRefGrow(vectorAlloc + 1,replayStackCount);
   }
-  *puVar2 = 0;
-  puVar7 = (uint *)param_1[0x22];
-  uVar6 = puVar7[1];
-  if (uVar6 < *puVar7) {
-    _memset(uVar6 * 4 + puVar7[2],0,4);
-    puVar1 = (undefined4 *)(uVar6 * 4 + puVar7[2]);
-    puVar7[1] = uVar6 + 1;
-  }
-  else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar7,uVar6);
-  }
-  *puVar1 = 2;
-  puVar7 = (uint *)param_1[0x22];
-  uVar6 = puVar7[1];
-  if (uVar6 < *puVar7) {
-    _memset(uVar6 * 4 + puVar7[2],0,4);
-    puVar1 = (undefined4 *)(uVar6 * 4 + puVar7[2]);
-    puVar7[1] = uVar6 + 1;
+  *firstReplaySlot = 0;
+  replayStack = (uint *)ilReader[0x22];
+  replayStackCount = replayStack[1];
+  if (replayStackCount < *replayStack) {
+    _memset(replayStackCount * 4 + replayStack[2],0,4);
+    replayStackSlot = (undefined4 *)(replayStackCount * 4 + replayStack[2]);
+    replayStack[1] = replayStackCount + 1;
   }
   else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar7,uVar6);
+    replayStackSlot = (undefined4 *)Vector__elementRefGrow(replayStack,replayStackCount);
   }
-  *puVar1 = 0;
-  puVar7 = (uint *)param_1[0x22];
-  uVar6 = puVar7[1];
-  if (uVar6 < *puVar7) {
-    _memset(uVar6 * 4 + puVar7[2],0,4);
-    puVar1 = (undefined4 *)(uVar6 * 4 + puVar7[2]);
-    puVar7[1] = uVar6 + 1;
+  *replayStackSlot = 2;
+  replayStack = (uint *)ilReader[0x22];
+  replayStackCount = replayStack[1];
+  if (replayStackCount < *replayStack) {
+    _memset(replayStackCount * 4 + replayStack[2],0,4);
+    replayStackSlot = (undefined4 *)(replayStackCount * 4 + replayStack[2]);
+    replayStack[1] = replayStackCount + 1;
   }
   else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar7,uVar6);
+    replayStackSlot = (undefined4 *)Vector__elementRefGrow(replayStack,replayStackCount);
   }
-  *puVar1 = 0xffffffff;
-  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x50);
-  param_1[0x19] = allocation2;
-  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x50);
-  param_1[0x1b] = allocation2;
-  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),400);
-  param_1[0x1a] = allocation2;
-  allocation2 = Arena__alloc(*(undefined4 *)(*param_1 + 0x378),400);
-  param_1[0x1c] = allocation2;
-  arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
+  *replayStackSlot = 0;
+  replayStack = (uint *)ilReader[0x22];
+  replayStackCount = replayStack[1];
+  if (replayStackCount < *replayStack) {
+    _memset(replayStackCount * 4 + replayStack[2],0,4);
+    replayStackSlot = (undefined4 *)(replayStackCount * 4 + replayStack[2]);
+    replayStack[1] = replayStackCount + 1;
+  }
+  else {
+    replayStackSlot = (undefined4 *)Vector__elementRefGrow(replayStack,replayStackCount);
+  }
+  *replayStackSlot = 0xffffffff;
+  allocation2 = Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0x50);
+  ilReader[0x19] = allocation2;
+  allocation2 = Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0x50);
+  ilReader[0x1b] = allocation2;
+  allocation2 = Arena__alloc(*(undefined4 *)(*ilReader + 0x378),400);
+  ilReader[0x1a] = allocation2;
+  allocation2 = Arena__alloc(*(undefined4 *)(*ilReader + 0x378),400);
+  ilReader[0x1c] = allocation2;
+  arenaAt378 = *(undefined4 *)(*ilReader + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -694,8 +708,8 @@ int FUN_000e59f0(param_1, param_2, param_3)
   vectorAlloc[2] = 0;
   allocation = Arena__alloc(arenaAt378,8);
   vectorAlloc[3] = allocation;
-  param_1[0xf] = (int)(vectorAlloc + 1);
-  arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
+  ilReader[0xf] = (int)(vectorAlloc + 1);
+  arenaAt378 = *(undefined4 *)(*ilReader + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -703,8 +717,8 @@ int FUN_000e59f0(param_1, param_2, param_3)
   vectorAlloc[2] = 0;
   allocation = Arena__alloc(arenaAt378,8);
   vectorAlloc[3] = allocation;
-  param_1[0x11] = (int)(vectorAlloc + 1);
-  arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
+  ilReader[0x11] = (int)(vectorAlloc + 1);
+  arenaAt378 = *(undefined4 *)(*ilReader + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x14);
   *vectorAlloc = arenaAt378;
   vectorAlloc[1] = 2;
@@ -712,61 +726,61 @@ int FUN_000e59f0(param_1, param_2, param_3)
   vectorAlloc[4] = arenaAt378;
   allocation = Arena__alloc(arenaAt378,8);
   vectorAlloc[3] = allocation;
-  param_1[0x10] = (int)(vectorAlloc + 1);
-  param_1[0x15] = 0;
-  puVar1 = (undefined4 *)Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0xc);
-  param_1[3] = (int)puVar1;
-  *puVar1 = 0xffffffff;
-  *(undefined4 *)(param_1[3] + 4) = 0;
-  *(undefined4 *)(param_1[3] + 8) = 0;
-  iVar3 = param_1[3];
-  param_1[4] = iVar3;
-  *(int *)(iVar3 + 8) = iVar3;
-  puVar1 = (undefined4 *)Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x18);
-  param_1[7] = (int)puVar1;
-  *puVar1 = 0xffffffff;
-  *(undefined4 *)(param_1[7] + 4) = 0;
-  *(undefined4 *)(param_1[7] + 8) = 0;
-  *(undefined4 *)(param_1[7] + 0xc) = 0;
-  *(undefined4 *)(param_1[7] + 0x10) = 0;
-  *(undefined4 *)(param_1[7] + 0x14) = 0;
-  iVar3 = param_1[7];
-  param_1[8] = iVar3;
-  *(int *)(iVar3 + 0x14) = iVar3;
-  puVar1 = (undefined4 *)Arena__alloc(*(undefined4 *)(*param_1 + 0x378),0x18);
-  param_1[5] = (int)puVar1;
-  *puVar1 = 0xffffffff;
-  *(undefined4 *)(param_1[5] + 4) = 0;
-  *(undefined4 *)(param_1[5] + 8) = 0;
-  *(undefined4 *)(param_1[5] + 0xc) = 0;
-  *(undefined4 *)(param_1[5] + 0x10) = 0;
-  *(undefined4 *)(param_1[5] + 0x14) = 0;
-  iVar3 = param_1[5];
-  param_1[6] = iVar3;
-  *(int *)(iVar3 + 0x14) = iVar3;
-  iVar3 = param_1[9];
-  param_1[1] = iVar3;
-  if (iVar3 == 0) {
-    iVar3 = 0;
+  ilReader[0x10] = (int)(vectorAlloc + 1);
+  ilReader[0x15] = 0;
+  boolConstSentinel = (undefined4 *)Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0xc);
+  ilReader[3] = (int)boolConstSentinel;
+  *boolConstSentinel = 0xffffffff;
+  *(undefined4 *)(ilReader[3] + 4) = 0;
+  *(undefined4 *)(ilReader[3] + 8) = 0;
+  boolConstList = ilReader[3];
+  ilReader[4] = boolConstList;
+  *(int *)(boolConstList + 8) = boolConstList;
+  floatConstSentinel = (undefined4 *)Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0x18);
+  ilReader[7] = (int)floatConstSentinel;
+  *floatConstSentinel = 0xffffffff;
+  *(undefined4 *)(ilReader[7] + 4) = 0;
+  *(undefined4 *)(ilReader[7] + 8) = 0;
+  *(undefined4 *)(ilReader[7] + 0xc) = 0;
+  *(undefined4 *)(ilReader[7] + 0x10) = 0;
+  *(undefined4 *)(ilReader[7] + 0x14) = 0;
+  floatConstList = ilReader[7];
+  ilReader[8] = floatConstList;
+  *(int *)(floatConstList + 0x14) = floatConstList;
+  intConstSentinel = (undefined4 *)Arena__alloc(*(undefined4 *)(*ilReader + 0x378),0x18);
+  ilReader[5] = (int)intConstSentinel;
+  *intConstSentinel = 0xffffffff;
+  *(undefined4 *)(ilReader[5] + 4) = 0;
+  *(undefined4 *)(ilReader[5] + 8) = 0;
+  *(undefined4 *)(ilReader[5] + 0xc) = 0;
+  *(undefined4 *)(ilReader[5] + 0x10) = 0;
+  *(undefined4 *)(ilReader[5] + 0x14) = 0;
+  intConstList = ilReader[5];
+  ilReader[6] = intConstList;
+  *(int *)(intConstList + 0x14) = intConstList;
+  tokenCursor = ilReader[9];
+  ilReader[1] = tokenCursor;
+  if (tokenCursor == 0) {
+    tokenCursor = 0;
   }
   else {
-    iVar3 = iVar3 + 4;
-    param_1[9] = iVar3;
+    tokenCursor = tokenCursor + 4;
+    ilReader[9] = tokenCursor;
   }
-  param_1[2] = iVar3;
-  iVar4 = 0;
-  if (iVar3 != 0) {
-    FUN_0019ee74(iVar3,*param_1);
-    iVar4 = param_1[9] + 4;
-    param_1[9] = iVar4;
+  ilReader[2] = tokenCursor;
+  tokenStart = 0;
+  if (tokenCursor != 0) {
+    FUN_0019ee74(tokenCursor,*ilReader);
+    tokenStart = ilReader[9] + 4;
+    ilReader[9] = tokenStart;
   }
-  param_1[0x1d] = iVar4;
-  param_1[0xb] = iVar4;
+  ilReader[0x1d] = tokenStart;
+  ilReader[0xb] = tokenStart;
   return;
 }
 
-/* FUN_000e5e70 @ 0xe5e70 (5640 bytes) */
-int FUN_000e5e70(ilReader)
+/* ILReader__nextInstruction @ 0xe5e70 (5640 bytes) */
+int ILReader__nextInstruction(ilReader)
   int *ilReader;
 {
   uint ifResultStackSizeB;
@@ -864,7 +878,7 @@ LAB_000e5e9c:
       ilReader[0x1f] = 0;
       ilReader[0xb] = writeCursor;
     }
-    tokenReadOk = ((int (*)())FUN_000e4c40)(ilReader,&local_68,*ilReader);
+    tokenReadOk = ((int (*)())ILReader__decodeInstruction)(ilReader,&local_68,*ilReader);
     if (tokenReadOk == 0) {
       return 0;
     }
@@ -927,7 +941,7 @@ LAB_000e6ac4:
   }
   ilReader[9] = (int)(ilReader + 0x23);
   if (iVar4 == 4) {
-    iVar4 = FUN_000e4408(ilReader);
+    iVar4 = ILReader__currentOpcode(ilReader);
     if ((iVar4 != 0x6d) && (iVar4 != 0x69)) goto LAB_000e5e9c;
     replayStackVec = ilReader[0x22];
     replayStackTop = (int *)0x0;
@@ -940,7 +954,7 @@ LAB_000e6ac4:
     ilReader[0x20] = iVar4;
   }
   if (iVar4 == 5) {
-    iVar4 = FUN_000e4408(ilReader);
+    iVar4 = ILReader__currentOpcode(ilReader);
     if (iVar4 != 0x6d) goto LAB_000e5e9c;
     iVar4 = ilReader[0x22];
     replayStackTop = (int *)0x0;
@@ -967,7 +981,7 @@ LAB_000e6ac4:
     if (0 < ifSkipDepth) goto LAB_000e5e9c;
     ilReader[0xe] = 0;
   }
-  dispatchOpcode = FUN_000e4408(ilReader);
+  dispatchOpcode = ILReader__currentOpcode(ilReader);
   switch(dispatchOpcode) {
   case 6:
     scopeStackTopEntry = (undefined4 *)0x0;
@@ -1007,7 +1021,7 @@ LAB_000e6ac4:
     goto switchD_000e61ac_caseD_a;
   case 7:
     local_64 = 6;
-    ((int (*)())FUN_000e547c)(ilReader,0x34,local_68,6,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x34,local_68,6,argR7,in_r8);
     break;
   case 8:
     replayStack = (uint *)ilReader[0x22];
@@ -1108,7 +1122,7 @@ LAB_000e6ac4:
     iVar4 = local_68 + -1;
     argR7 = ilReader[local_68 + 0x22];
     local_68 = iVar4;
-    ((int (*)())FUN_000e5384)(ilReader,0x35,iVar4,8,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x35,iVar4,8,argR7,in_r8);
     break;
   default:
     goto switchD_000e61ac_caseD_a;
@@ -1118,7 +1132,7 @@ LAB_000e6ac4:
       loopCounter = 0;
       do {
         loopCounter = loopCounter + 1;
-        FUN_000e4a38(ilReader,0);
+        ILReader__fetchToken(ilReader,0);
       } while (skipCount != loopCounter);
     }
     break;
@@ -1130,11 +1144,11 @@ LAB_000e6ac4:
         constantRegister = (int)(short)**(uint **)ilReader[0x19];
         destRegisterFile = **(uint **)ilReader[0x19] >> 0x10 & 0x3f;
         if (destRegisterFile == 1) {
-          ((void (*)())FUN_000e4780)(ilReader,constantRegister,(double)GH_U2F((unsigned int)(ilReader[0x25])),(double)GH_U2F((unsigned int)(ilReader[0x26])),
+          ((void (*)())ILReader__appendFloatConst)(ilReader,constantRegister,(double)GH_U2F((unsigned int)(ilReader[0x25])),(double)GH_U2F((unsigned int)(ilReader[0x26])),
                        (double)GH_U2F((unsigned int)(ilReader[0x27])),(double)GH_U2F((unsigned int)(ilReader[0x28])));
         }
         else if (destRegisterFile == 2) {
-          FUN_000e4450(ilReader,constantRegister,ilReader[0x25],ilReader[0x26],ilReader[0x27],ilReader[0x28]);
+          ILReader__appendIntConst(ilReader,constantRegister,ilReader[0x25],ilReader[0x26],ilReader[0x27],ilReader[0x28]);
         }
       }
       goto switchD_000e61ac_caseD_a;
@@ -1147,7 +1161,7 @@ LAB_000e6ac4:
       firstDestToken = *(int *)ilReader[0x19];
       preprocessConstantIfsEnabled2 = Compiler__isOptionEnabled(*ilReader,1);
       if (preprocessConstantIfsEnabled2 != 0) {
-        FUN_000e4724(ilReader,(uint)*(ushort *)(firstDestToken + 2),(uint)(tokenWord2Snapshot != 0));
+        ILReader__appendBoolConst(ilReader,(uint)*(ushort *)(firstDestToken + 2),(uint)(tokenWord2Snapshot != 0));
       }
       goto switchD_000e61ac_caseD_a;
     }
@@ -1212,8 +1226,8 @@ LAB_000e6ac4:
     }
     if ((((firstRegisterFile != (secondOperandToken >> 0x10 & 0x3f)) || (firstRegisterFile != 1)) ||
         (iVar4 = Compiler__isOptionEnabled(*ilReader,1), iVar4 == 0)) ||
-       ((iVar4 = FUN_000e44c4(ilReader,(int)(short)tokenWord1Snapshot,&local_64,extraOperandA), iVar4 == 0 ||
-        (iVar4 = FUN_000e44c4(ilReader,(int)(short)secondOperandToken,local_54,extraOperandB), iVar4 == 0)))) {
+       ((iVar4 = ILReader__readFloatConst(ilReader,(int)(short)tokenWord1Snapshot,&local_64,extraOperandA), iVar4 == 0 ||
+        (iVar4 = ILReader__readFloatConst(ilReader,(int)(short)secondOperandToken,local_54,extraOperandB), iVar4 == 0)))) {
       ifResultStack = (uint *)ilReader[0xf];
       ifResultStackSizeB = ifResultStack[1];
       if (ifResultStackSizeB < *ifResultStack) {
@@ -1270,7 +1284,7 @@ switchD_000e67b4_default:
     break;
   case 0x35:
     operandRegister = *(short *)((int)ilReader + 0x92);
-    labelValue = FUN_000e4410(ilReader,(int)operandRegister);
+    labelValue = ILReader__lookupBoolConst(ilReader,(int)operandRegister);
     if (labelValue == -1) {
       ifResultStack = (uint *)ilReader[0xf];
       ifResultStackSizeB = ifResultStack[1];
@@ -1286,7 +1300,7 @@ switchD_000e67b4_default:
       ilReader[0x12] = ilReader[0x12] + 1;
       goto switchD_000e61ac_caseD_a;
     }
-    iVar4 = FUN_000e4410(ilReader,(int)operandRegister);
+    iVar4 = ILReader__lookupBoolConst(ilReader,(int)operandRegister);
     if (iVar4 == 0) {
       ifResultStack = (uint *)ilReader[0xf];
       ilReader[0x20] = 2;
@@ -1342,25 +1356,25 @@ LAB_000e6870:
     goto switchD_000e61ac_caseD_53;
   case 0x65:
     local_64 = 6;
-    ((int (*)())FUN_000e547c)(ilReader,0x6f,local_68,6,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x6f,local_68,6,argR7,in_r8);
     break;
   case 0x66:
     local_64 = 6;
-    ((int (*)())FUN_000e547c)(ilReader,0x70,local_68,6,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x70,local_68,6,argR7,in_r8);
     break;
   case 0x67:
     local_64 = 8;
     iVar4 = local_68 + -1;
     argR7 = ilReader[local_68 + 0x22];
     local_68 = iVar4;
-    ((int (*)())FUN_000e5384)(ilReader,0x6f,iVar4,8,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x6f,iVar4,8,argR7,in_r8);
     break;
   case 0x68:
     local_64 = 8;
     iVar4 = local_68 + -1;
     argR7 = ilReader[local_68 + 0x22];
     local_68 = iVar4;
-    ((int (*)())FUN_000e5384)(ilReader,0x70,iVar4,8,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e5384)(ilReader,0x70,iVar4,8,argR7,in_r8);
     break;
   case 0x69:
     scopeStackTop = (int *)0x0;
@@ -1645,11 +1659,11 @@ switchD_000e61ac_caseD_53:
     break;
   case 0x74:
     local_64 = 0x73;
-    ((int (*)())FUN_000e547c)(ilReader,0x6f,local_68,0x73,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x6f,local_68,0x73,argR7,in_r8);
     break;
   case 0x75:
     local_64 = 0x73;
-    ((int (*)())FUN_000e547c)(ilReader,0x70,local_68,0x73,argR7,in_r8);
+    ((int (*)())ILReader__beginRewrittenReplay_e547c)(ilReader,0x70,local_68,0x73,argR7,in_r8);
   }
   goto LAB_000e5e9c;
 LAB_000e7400:

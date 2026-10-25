@@ -3837,7 +3837,7 @@ int FUN_000fb230(program, ilReader)
     iVar4 = 0;
     do {
       FUN_000da070(*(undefined4 *)(*(int *)(program + 8) + 0x398),uVar2,iVar4,1,&local_48);
-      FUN_000e4724(ilReader,iVar4,(uint)(local_48 != 0));
+      ILReader__appendBoolConst(ilReader,iVar4,(uint)(local_48 != 0));
       iVar3 = iVar4 + 1;
       ((int (*)())FUN_000fafa4)(program,0,iVar4,1,&local_48);
       iVar4 = iVar3;
@@ -3848,7 +3848,7 @@ int FUN_000fb230(program, ilReader)
     iVar4 = 0;
     do {
       FUN_000da028(*(undefined4 *)(*(int *)(program + 8) + 0x398),uVar2,iVar4,4,&local_48);
-      FUN_000e4450(ilReader,iVar4,local_48,local_44,local_40,local_3c);
+      ILReader__appendIntConst(ilReader,iVar4,local_48,local_44,local_40,local_3c);
       iVar3 = iVar4 + 1;
       ((int (*)())FUN_000fafa4)(program,2,iVar4,4,&local_48);
       iVar4 = iVar3;
@@ -3859,7 +3859,7 @@ int FUN_000fb230(program, ilReader)
     iVar4 = 0;
     do {
       FUN_000d9fe0(*(undefined4 *)(*(int *)(program + 8) + 0x398),uVar2,iVar4,4,&local_38);
-      ((void (*)())FUN_000e4780)(ilReader,iVar4,(double)local_38,(double)local_34,(double)local_30,(double)local_2c
+      ((void (*)())ILReader__appendFloatConst)(ilReader,iVar4,(double)local_38,(double)local_34,(double)local_30,(double)local_2c
                   );
       iVar3 = iVar4 + 1;
       ((int (*)())FUN_000fafa4)(program,1,iVar4,4,&local_38);
@@ -5369,7 +5369,7 @@ int FUN_000fd5c8(program, ilReader)
   local_a4 = (uint *****)0x0;
   local_ac = 0;
 switchD_000fdaf0_caseD_2:
-  iVar34 = FUN_000e5e70(ilReader);
+  iVar34 = ILReader__nextInstruction(ilReader);
   if (iVar34 == 0) {
 code_r0x00103c40:
     FUN_000ec728(program);
@@ -5423,11 +5423,11 @@ code_r0x00103c40:
     }
     hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
     (**(code **)(*hwDescription + 0x17c))(hwDescription,program);
-    FUN_000e5e70(ilReader);
+    ILReader__nextInstruction(ilReader);
   }
   tokenWords = ilReader + 0x23;
   *(undefined4 *)(program + 0x47c) = 0;
-  ilOpcode = FUN_000e4408(ilReader);
+  ilOpcode = ILReader__currentOpcode(ilReader);
   if (ilOpcode == 0x52) {
     *(uint *)(program + 0x30) = *(uint *)(program + 0x30) | 0x100;
   }

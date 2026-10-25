@@ -2889,16 +2889,16 @@ e3640	e3644	millicode	FUN_000e3544	1
 e369c	e36bc	eh-pad	FUN_000e3544	8	0x193cc0,__Unwind_Resume
 e3948	e395c	eh-pad	FUN_000e36bc	5	0xe3308,__Unwind_Resume
 e42c0	e42c4	eh-pad	FUN_000e3b88	1	__Unwind_Resume
-e4d2c	e4d8c	table	FUN_000e4c40	24	
-e5638	e5654	other	FUN_000e5570	7	0x193cc0
-e5874	e5878	millicode	FUN_000e5570	1	
-e5970	e59ac	eh-pad	FUN_000e5570	15	0x193cc0,__Unwind_Resume
-e5ab8	e5ad4	other	FUN_000e59f0	7	0x193cc0
-e5cf4	e5cf8	millicode	FUN_000e59f0	1	
-e5df0	e5e2c	eh-pad	FUN_000e59f0	15	0x193cc0,__Unwind_Resume
-e61b0	e6370	table	FUN_000e5e70	112	
-e67b8	e67d0	table	FUN_000e5e70	6	
-e7650	e7658	other	FUN_000e5e70	2	
+e4d2c	e4d8c	table	ILReader__decodeInstruction	24	
+e5638	e5654	other	ILReader__ctor_e5570	7	0x193cc0
+e5874	e5878	millicode	ILReader__ctor_e5570	1	
+e5970	e59ac	eh-pad	ILReader__ctor_e5570	15	0x193cc0,__Unwind_Resume
+e5ab8	e5ad4	other	ILReader__ctor_e59f0	7	0x193cc0
+e5cf4	e5cf8	millicode	ILReader__ctor_e59f0	1	
+e5df0	e5e2c	eh-pad	ILReader__ctor_e59f0	15	0x193cc0,__Unwind_Resume
+e61b0	e6370	table	ILReader__nextInstruction	112	
+e67b8	e67d0	table	ILReader__nextInstruction	6	
+e7650	e7658	other	ILReader__nextInstruction	2	
 e86d0	e86f0	millicode	Block__verify	8	
 e87dc	e87e4	millicode	LoopHeader__verify	2	
 e89bc	e89dc	eh-pad	FUN_000e8938	8	0x193cc0,__Unwind_Resume

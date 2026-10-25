@@ -1307,24 +1307,24 @@
 0xe3b88	FUN_000e3b88	2144	no	indirect call (driver context / vtable / callback)
 0xe43ec	FUN_000e43ec	20	yes	
 0xe4400	setWord30	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0xe4408	FUN_000e4408	8	yes	
-0xe4410	FUN_000e4410	64	yes	
-0xe4450	FUN_000e4450	116	yes	
-0xe44c4	FUN_000e44c4	456	yes	
+0xe4408	ILReader__currentOpcode	8	yes	
+0xe4410	ILReader__lookupBoolConst	64	yes	
+0xe4450	ILReader__appendIntConst	116	yes	
+0xe44c4	ILReader__readFloatConst	456	yes	
 0xe468c	FUN_000e468c	132	yes	
 0xe4710	FUN_000e4710	20	yes	
-0xe4724	FUN_000e4724	92	yes	
-0xe4780	FUN_000e4780	116	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xe4724	ILReader__appendBoolConst	92	yes	
+0xe4780	ILReader__appendFloatConst	116	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xe47f4	FUN_000e47f4	60	yes	
-0xe4830	FUN_000e4830	260	yes	
-0xe4934	FUN_000e4934	260	yes	
-0xe4a38	FUN_000e4a38	520	yes	
-0xe4c40	FUN_000e4c40	1764	yes	
-0xe5384	FUN_000e5384	248	yes	
-0xe547c	FUN_000e547c	244	yes	
-0xe5570	FUN_000e5570	1060	yes	
-0xe59f0	FUN_000e59f0	1060	yes	
-0xe5e70	FUN_000e5e70	5640	yes	
+0xe4830	ILReader__dtor_e4830	260	yes	
+0xe4934	ILReader__dtor_e4934	260	yes	
+0xe4a38	ILReader__fetchToken	520	yes	
+0xe4c40	ILReader__decodeInstruction	1764	yes	
+0xe5384	ILReader__beginRewrittenReplay_e5384	248	yes	
+0xe547c	ILReader__beginRewrittenReplay_e547c	244	yes	
+0xe5570	ILReader__ctor_e5570	1060	yes	
+0xe59f0	ILReader__ctor_e59f0	1060	yes	
+0xe5e70	ILReader__nextInstruction	5640	yes	
 0xe7658	Block__detach	48	yes	
 0xe7688	Block__appendInst	60	yes	
 0xe76c4	Block__prependInst	60	yes	
