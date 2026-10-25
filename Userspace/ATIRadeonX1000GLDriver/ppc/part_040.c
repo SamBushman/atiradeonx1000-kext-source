@@ -148,42 +148,49 @@ int LoopInfo__convertToHardwareLoop(loopInfo, boundOnRight, passThroughR5, passT
   undefined4 passThroughR8;
   undefined4 passThroughR9;
 {
+  int predecessorByteOffset;
+  undefined4 staleArg4B;
+  int footerBlockCursor;
+  int bodyBlockCursor;
+  int predecessorIndex;
+  int keptSuccessor;
+  undefined4 staleArg5;
   undefined4 arena;
-  int iVar1;
+  int predecessorEntry;
   int constRegister;
   int oldSource;
-  int iVar4;
+  int counterUseCount;
   undefined4 *newConstInst;
-  undefined4 uVar6;
+  undefined4 staleArg4A;
   int *callResult;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
-  undefined4 *puVar8;
-  uint uVar9;
-  undefined4 uVar10;
-  int iVar11;
+  undefined4 staleArg4C;
+  undefined4 staleArg4D;
+  undefined4 staleArg4E;
+  undefined4 *constInst;
+  uint predecessorNumber;
+  undefined4 conversionResult;
+  int inputBase;
   undefined8 predecessor;
   
   constRegister = FUN_000f4a84(*(undefined4 *)(loopInfo[0x10] + 0x3ac),3,1,passThroughR6,passThroughR7,passThroughR8,passThroughR9);
   if (constRegister < 0) {
 LAB_0012ba38:
-    uVar10 = 0;
+    conversionResult = 0;
   }
   else {
     oldSource = IRInst__getOperandSource(loopInfo[0xf],1);
     *(int *)(*(int *)(loopInfo[0xf] + 0x158) + 0x138) =
          *(int *)(*(int *)(loopInfo[0xf] + 0x158) + 0x138) + -1;
-    iVar11 = *(int *)(loopInfo[0x10] + 0x478);
-    iVar4 = IRInst__useCount(oldSource,loopInfo[0x10]);
-    *(int *)(oldSource + 0x160) = iVar11 + iVar4 + -1;
+    inputBase = *(int *)(loopInfo[0x10] + 0x478);
+    counterUseCount = IRInst__useCount(oldSource,loopInfo[0x10]);
+    *(int *)(oldSource + 0x160) = inputBase + counterUseCount + -1;
     oldSource = *(int *)(loopInfo[0x10] + 8);
     arena = *(undefined4 *)(oldSource + 0x374);
     newConstInst = (undefined4 *)Arena__alloc(arena,0x168);
-    puVar8 = newConstInst + 1;
+    constInst = newConstInst + 1;
     *newConstInst = arena;
-    IRLoadConst__ctor_109938(puVar8,oldSource);
-    Block__appendInst(*(undefined4 *)(loopInfo[0x10] + 0x3a0),puVar8);
+    IRLoadConst__ctor_109938(constInst,oldSource);
+    Block__appendInst(*(undefined4 *)(loopInfo[0x10] + 0x3a0),constInst);
     newConstInst[0x26] = constRegister;
     newConstInst[0x27] = 4;
     *(byte *)(newConstInst + 0x58) = *(byte *)(newConstInst + 0x58) | 1;
@@ -205,81 +212,81 @@ LAB_0012ba38:
       newConstInst[8] = 3;
       newConstInst[9] = loopInfo[6];
     }
-    uVar10 = 0;
-    IRInst__setOperandSource(loopInfo[0xf],1,puVar8,0,oldSource);
+    staleArg5 = 0;
+    IRInst__setOperandSource(loopInfo[0xf],1,constInst,0,oldSource);
     constRegister = Block__getPredecessor(loopInfo[10],0);
     if (boundOnRight == 0) {
-      iVar4 = Block__getSuccessor(*(undefined4 *)(loopInfo[10] + 0x13c),0);
+      keptSuccessor = Block__getSuccessor(*(undefined4 *)(loopInfo[10] + 0x13c),0);
     }
     else {
-      iVar4 = *(int *)(loopInfo[10] + 0x134);
+      keptSuccessor = *(int *)(loopInfo[10] + 0x134);
       ((int (*)())FUN_0012b64c)(*(undefined4 *)(loopInfo[10] + 0x13c));
     }
     *(undefined4 *)(*(int *)(constRegister + 0xd0) + 4) = 0;
-    *(undefined4 *)(*(int *)(iVar4 + 0xd4) + 4) = 0;
-    Block__connect(constRegister,iVar4);
+    *(undefined4 *)(*(int *)(keptSuccessor + 0xd4) + 4) = 0;
+    Block__connect(constRegister,keptSuccessor);
     constRegister = Block__getSuccessor(loopInfo[9],0);
-    iVar4 = 0;
-    iVar11 = 0;
-    for (uVar9 = 1; uVar9 <= *(uint *)(*(int *)(constRegister + 0xd4) + 4); uVar9 = uVar9 + 1) {
-      iVar1 = *(int *)(*(int *)(*(int *)(constRegister + 0xd4) + 8) + iVar11);
-      if (iVar1 != 0) {
-        if (iVar1 == loopInfo[9]) {
-          Vector__removeAt(*(undefined4 *)(constRegister + 0xd4),iVar4);
+    predecessorIndex = 0;
+    predecessorByteOffset = 0;
+    for (predecessorNumber = 1; predecessorNumber <= *(uint *)(*(int *)(constRegister + 0xd4) + 4); predecessorNumber = predecessorNumber + 1) {
+      predecessorEntry = *(int *)(*(int *)(*(int *)(constRegister + 0xd4) + 8) + predecessorByteOffset);
+      if (predecessorEntry != 0) {
+        if (predecessorEntry == loopInfo[9]) {
+          Vector__removeAt(*(undefined4 *)(constRegister + 0xd4),predecessorIndex);
           break;
         }
-        iVar4 = iVar4 + 1;
+        predecessorIndex = predecessorIndex + 1;
       }
-      iVar11 = iVar11 + 4;
+      predecessorByteOffset = predecessorByteOffset + 4;
     }
     if (boundOnRight == 0) {
-      iVar4 = Block__getPredecessor(loopInfo[9],0);
+      bodyBlockCursor = Block__getPredecessor(loopInfo[9],0);
       Block__detach(loopInfo[9]);
       constRegister = loopInfo[10];
-      uVar6 = extraout_r4_00;
-      if (iVar4 != constRegister) {
+      staleArg4A = staleArg4D;
+      if (bodyBlockCursor != constRegister) {
         do {
-          Block__detach(iVar4);
-          predecessor = Block__getPredecessor(iVar4,0);
-          iVar4 = (int)((ulonglong)predecessor >> 0x20);
-          uVar6 = (undefined4)predecessor;
+          Block__detach(bodyBlockCursor);
+          predecessor = Block__getPredecessor(bodyBlockCursor,0);
+          bodyBlockCursor = (int)((ulonglong)predecessor >> 0x20);
+          staleArg4A = (undefined4)predecessor;
           constRegister = loopInfo[10];
-        } while (constRegister != iVar4);
+        } while (constRegister != bodyBlockCursor);
       }
-      iVar4 = *(int *)(constRegister + 0x13c);
-      if (constRegister != iVar4) {
+      footerBlockCursor = *(int *)(constRegister + 0x13c);
+      if (constRegister != footerBlockCursor) {
         do {
-          Block__detach(iVar4);
-          predecessor = Block__getPredecessor(iVar4,0);
-          iVar4 = (int)((ulonglong)predecessor >> 0x20);
-          uVar6 = (undefined4)predecessor;
-        } while (iVar4 != loopInfo[10]);
+          Block__detach(footerBlockCursor);
+          predecessor = Block__getPredecessor(footerBlockCursor,0);
+          footerBlockCursor = (int)((ulonglong)predecessor >> 0x20);
+          staleArg4A = (undefined4)predecessor;
+        } while (footerBlockCursor != loopInfo[10]);
       }
     }
     else {
       Block__detach(*(undefined4 *)(loopInfo[10] + 0x13c));
-      uVar6 = Block__getPredecessor(loopInfo[9],0);
-      Block__detach(uVar6);
+      staleArg4B = Block__getPredecessor(loopInfo[9],0);
+      Block__detach(staleArg4B);
       Block__detach(loopInfo[9]);
-      uVar6 = extraout_r4;
+      staleArg4A = staleArg4C;
     }
     if (*loopInfo == 0) {
       (**(code **)(*(int *)loopInfo[0xd] + 0xc))
                 ((int *)loopInfo[0xd],0,*(undefined4 *)(loopInfo[0x10] + 8));
-      uVar9 = loopInfo[0x10];
-      puVar8 = *(undefined4 **)(uVar9 + 8);
+      predecessorNumber = loopInfo[0x10];
+      constInst = *(undefined4 **)(predecessorNumber + 8);
       (**(code **)(*(int *)loopInfo[0xc] + 0xc))((int *)loopInfo[0xc],0);
-      uVar6 = extraout_r4_01;
+      staleArg4A = staleArg4E;
     }
-    callResult = (int *)Block__getBranchInst(loopInfo[10],uVar6,puVar8,uVar10,oldSource,passThroughR8,uVar9);
+    callResult = (int *)Block__getBranchInst(loopInfo[10],staleArg4A,constInst,staleArg5,oldSource,passThroughR8,predecessorNumber);
     if (callResult != (int *)0x0) {
       (**(code **)(*callResult + 0xc))(callResult,0,*(undefined4 *)(loopInfo[0x10] + 8));
       *(undefined4 *)(loopInfo[10] + 0x130) = 0;
     }
     Block__detach(loopInfo[10]);
-    uVar10 = 1;
+    conversionResult = 1;
   }
-  return uVar10;
+  return conversionResult;
 }
 
 /* LoopInfo__init @ 0x12ba58 (240 bytes) */

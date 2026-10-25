@@ -717,105 +717,107 @@ int FUN_0011f7fc(param_1, param_2, vector)
 }
 
 /* FUN_0011f8a0 @ 0x11f8a0 (756 bytes) */
-int FUN_0011f8a0(vector, param_2, param_3, param_4, param_5, block, compiler, param_8, vector2, param_10)
+int FUN_0011f8a0(vector, destRegister, writeMaskRef, markPinned, sourceIndex, block, compiler, recordResultFlag, vector2, resultIndex)
   uint *vector;
-  int param_2;
-  int *param_3;
-  int param_4;
-  uint param_5;
+  int destRegister;
+  int *writeMaskRef;
+  int markPinned;
+  uint sourceIndex;
   int block;
   int compiler;
-  int param_8;
+  int recordResultFlag;
   uint *vector2;
-  uint param_10;
+  uint resultIndex;
 {
+  int laneIndex;
+  int defaultWriteMask;
   uint vectorCount;
   undefined4 *vectorElementRef;
-  bool bVar1;
+  bool moreLanes;
   int *newInst;
-  uint uVar3;
-  undefined4 *puVar4;
-  int iVar5;
+  uint resultVectorCount;
+  undefined4 *resultSlotRef;
+  int targetQuery20;
   int operandRecord;
-  undefined4 uVar7;
-  code *pcVar8;
-  int *piVar9;
+  undefined4 copyId;
+  code *targetQueryFn;
+  int *targetObj;
   
   newInst = (int *)IRInst__create(0x31,compiler);
-  newInst[0x25] = param_2;
+  newInst[0x25] = destRegister;
   newInst[0x26] = 0;
-  if (param_5 < *vector) {
+  if (sourceIndex < *vector) {
     vectorCount = vector[1];
-    if (vectorCount <= param_5) {
-      _memset(vectorCount * 4 + vector[2],0,(param_5 - vectorCount) * 4 + 4);
-      vector[1] = param_5 + 1;
+    if (vectorCount <= sourceIndex) {
+      _memset(vectorCount * 4 + vector[2],0,(sourceIndex - vectorCount) * 4 + 4);
+      vector[1] = sourceIndex + 1;
     }
   }
   else {
-    Vector__elementRefGrow(vector,param_5);
+    Vector__elementRefGrow(vector,sourceIndex);
   }
-  if (param_5 < *vector) {
+  if (sourceIndex < *vector) {
     vectorCount = vector[1];
-    if (vectorCount <= param_5) {
-      _memset(vectorCount * 4 + vector[2],0,(param_5 - vectorCount) * 4 + 4);
-      vector[1] = param_5 + 1;
+    if (vectorCount <= sourceIndex) {
+      _memset(vectorCount * 4 + vector[2],0,(sourceIndex - vectorCount) * 4 + 4);
+      vector[1] = sourceIndex + 1;
     }
-    vectorElementRef = (undefined4 *)(param_5 * 4 + vector[2]);
+    vectorElementRef = (undefined4 *)(sourceIndex * 4 + vector[2]);
   }
   else {
-    vectorElementRef = (undefined4 *)Vector__elementRefGrow(vector,param_5);
+    vectorElementRef = (undefined4 *)Vector__elementRefGrow(vector,sourceIndex);
   }
   IRInst__setOperandSource(newInst,1,*vectorElementRef,0,compiler);
-  if (param_4 != 0) {
+  if (markPinned != 0) {
     newInst[5] = newInst[5] | 0x40;
   }
-  piVar9 = *(int **)(*(int *)(compiler + COMP_target) + 100);
-  pcVar8 = *(code **)(*piVar9 + 0x20);
-  if (param_5 < *vector) {
+  targetObj = *(int **)(*(int *)(compiler + COMP_target) + 100);
+  targetQueryFn = *(code **)(*targetObj + 0x20);
+  if (sourceIndex < *vector) {
     vectorCount = vector[1];
-    if (vectorCount <= param_5) {
-      _memset(vectorCount * 4 + vector[2],0,(param_5 - vectorCount) * 4 + 4);
-      vector[1] = param_5 + 1;
+    if (vectorCount <= sourceIndex) {
+      _memset(vectorCount * 4 + vector[2],0,(sourceIndex - vectorCount) * 4 + 4);
+      vector[1] = sourceIndex + 1;
     }
-    vectorElementRef = (undefined4 *)(param_5 * 4 + vector[2]);
+    vectorElementRef = (undefined4 *)(sourceIndex * 4 + vector[2]);
   }
   else {
-    vectorElementRef = (undefined4 *)Vector__elementRefGrow(vector,param_5);
+    vectorElementRef = (undefined4 *)Vector__elementRefGrow(vector,sourceIndex);
   }
-  iVar5 = (*pcVar8)(piVar9,*vectorElementRef);
-  if ((iVar5 != 0) && ((*(uint *)(block + 0xc) & 0x200) == 0)) {
+  targetQuery20 = (*targetQueryFn)(targetObj,*vectorElementRef);
+  if ((targetQuery20 != 0) && ((*(uint *)(block + 0xc) & 0x200) == 0)) {
     newInst[5] = newInst[5] | 0x1000;
     *(uint *)(block + 0xc) = *(uint *)(block + 0xc) | 0x200;
   }
   Block__appendInst(block,newInst);
-  iVar5 = DAT_001afee4;
+  defaultWriteMask = DAT_001afee4;
   newInst[5] = newInst[5] | 0x40000000;
-  if (*param_3 != iVar5) {
-    newInst[0x27] = *param_3;
-    iVar5 = 0;
+  if (*writeMaskRef != defaultWriteMask) {
+    newInst[0x27] = *writeMaskRef;
+    laneIndex = 0;
     do {
       operandRecord = IRInst__getOperandRecord(newInst,0);
-      if (*(char *)(iVar5 + operandRecord + 0x10) == '\x01') {
-        (**(code **)(*newInst + 0x88))(newInst,1,iVar5,4);
+      if (*(char *)(laneIndex + operandRecord + 0x10) == '\x01') {
+        (**(code **)(*newInst + 0x88))(newInst,1,laneIndex,4);
       }
-      bVar1 = iVar5 != 3;
-      iVar5 = iVar5 + 1;
-    } while (bVar1);
+      moreLanes = laneIndex != 3;
+      laneIndex = laneIndex + 1;
+    } while (moreLanes);
   }
-  if (param_8 != 0) {
-    if (param_10 < *vector2) {
-      uVar3 = vector2[1];
-      if (uVar3 <= param_10) {
-        _memset(uVar3 * 4 + vector2[2],0,(param_10 - uVar3) * 4 + 4);
-        vector2[1] = param_10 + 1;
+  if (recordResultFlag != 0) {
+    if (resultIndex < *vector2) {
+      resultVectorCount = vector2[1];
+      if (resultVectorCount <= resultIndex) {
+        _memset(resultVectorCount * 4 + vector2[2],0,(resultIndex - resultVectorCount) * 4 + 4);
+        vector2[1] = resultIndex + 1;
       }
-      puVar4 = (undefined4 *)(param_10 * 4 + vector2[2]);
+      resultSlotRef = (undefined4 *)(resultIndex * 4 + vector2[2]);
     }
     else {
-      puVar4 = (undefined4 *)Vector__elementRefGrow(vector2,param_10);
+      resultSlotRef = (undefined4 *)Vector__elementRefGrow(vector2,resultIndex);
     }
-    uVar7 = ((int (*)())FUN_0011f7fc)(*(undefined4 *)(compiler + COMP_currentProgram),newInst,vector);
-    *puVar4 = uVar7;
+    copyId = ((int (*)())FUN_0011f7fc)(*(undefined4 *)(compiler + COMP_currentProgram),newInst,vector);
+    *resultSlotRef = copyId;
   }
   return;
 }

@@ -4306,55 +4306,60 @@ int FUN_00137e98(inst, operandIndex, param_3)
 }
 
 /* FUN_00137f14 @ 0x137f14 (364 bytes) */
-int FUN_00137f14(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int FUN_00137f14(liveness, inst, liveBits)
+  int liveness;
+  int *inst;
+  int liveBits;
 {
-  int iVar1;
-  int iVar2;
-  int *piVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
+  int copyLiveOutWordAddr;
+  uint copySourceRegisterId;
+  int copySourceVReg;
+  int instQuery78;
+  int defBitWordAddr;
+  int operandCountdown;
+  int liveOutWordAddr;
+  int *operandSlotCursor;
+  uint sourceRegisterId;
+  uint bitWordOffset;
+  int sourceVReg;
   
-  iVar1 = param_2[0x21];
-  if (0 < iVar1) {
-    piVar3 = param_2 + iVar1 * 6 + 0x23;
+  operandCountdown = inst[0x21];
+  if (0 < operandCountdown) {
+    operandSlotCursor = inst + operandCountdown * 6 + 0x23;
     do {
-      iVar6 = *piVar3;
-      uVar4 = *(uint *)(iVar6 + 0x1c);
-      if ((int)uVar4 < 0) {
-        if (*(int *)(iVar6 + 4) == 0x2c) {
-          *(undefined4 *)(param_1 + 0x3b4) = 1;
-          *(uint *)(iVar6 + 0x24) = *(uint *)(iVar6 + 0x24) | 1;
+      sourceVReg = *operandSlotCursor;
+      sourceRegisterId = *(uint *)(sourceVReg + 0x1c);
+      if ((int)sourceRegisterId < 0) {
+        if (*(int *)(sourceVReg + 4) == 0x2c) {
+          *(undefined4 *)(liveness + 0x3b4) = 1;
+          *(uint *)(sourceVReg + 0x24) = *(uint *)(sourceVReg + 0x24) | 1;
         }
       }
       else {
-        uVar5 = uVar4 >> 3 & 0x1ffffffc;
-        if ((*(uint *)(uVar5 + param_3 + 8) >> (uVar4 & 0x1f) & 1) == 0) {
-          iVar2 = uVar5 + *(int *)(param_1 + 0x3b0);
-          *(uint *)(iVar2 + 8) = 1 << (uVar4 & 0x1f) | *(uint *)(iVar2 + 8);
-          *(uint *)(iVar6 + 0x24) = *(uint *)(iVar6 + 0x24) | 1;
+        bitWordOffset = sourceRegisterId >> 3 & 0x1ffffffc;
+        if ((*(uint *)(bitWordOffset + liveBits + 8) >> (sourceRegisterId & 0x1f) & 1) == 0) {
+          liveOutWordAddr = bitWordOffset + *(int *)(liveness + 0x3b0);
+          *(uint *)(liveOutWordAddr + 8) = 1 << (sourceRegisterId & 0x1f) | *(uint *)(liveOutWordAddr + 8);
+          *(uint *)(sourceVReg + 0x24) = *(uint *)(sourceVReg + 0x24) | 1;
         }
       }
-      piVar3 = piVar3 + -6;
-      iVar1 = iVar1 + -1;
-    } while (iVar1 != 0);
+      operandSlotCursor = operandSlotCursor + -6;
+      operandCountdown = operandCountdown + -1;
+    } while (operandCountdown != 0);
   }
-  if (((0 < param_2[0x20]) && ((param_2[5] & 2U) == 0)) &&
-     (uVar4 = *(uint *)(param_2[0x23] + 0x1c), -1 < (int)uVar4)) {
-    iVar1 = (uVar4 >> 3 & 0x1ffffffc) + param_3;
-    *(uint *)(iVar1 + 8) = 1 << (uVar4 & 0x1f) | *(uint *)(iVar1 + 8);
+  if (((0 < inst[0x20]) && ((inst[5] & 2U) == 0)) &&
+     (sourceRegisterId = *(uint *)(inst[0x23] + 0x1c), -1 < (int)sourceRegisterId)) {
+    defBitWordAddr = (sourceRegisterId >> 3 & 0x1ffffffc) + liveBits;
+    *(uint *)(defBitWordAddr + 8) = 1 << (sourceRegisterId & 0x1f) | *(uint *)(defBitWordAddr + 8);
   }
-  iVar1 = (**(code **)(*param_2 + 0x78))(param_2);
-  if (iVar1 != 0) {
-    iVar1 = param_2[0x29];
-    uVar4 = *(uint *)(iVar1 + 0x1c);
-    if (-1 < (int)uVar4) {
-      iVar6 = (uVar4 >> 3 & 0x1ffffffc) + *(int *)(param_1 + 0x3b0);
-      *(uint *)(iVar6 + 8) = 1 << (uVar4 & 0x1f) | *(uint *)(iVar6 + 8);
-      *(uint *)(iVar1 + 0x24) = *(uint *)(iVar1 + 0x24) | 1;
+  instQuery78 = (**(code **)(*inst + 0x78))(inst);
+  if (instQuery78 != 0) {
+    copySourceVReg = inst[0x29];
+    copySourceRegisterId = *(uint *)(copySourceVReg + 0x1c);
+    if (-1 < (int)copySourceRegisterId) {
+      copyLiveOutWordAddr = (copySourceRegisterId >> 3 & 0x1ffffffc) + *(int *)(liveness + 0x3b0);
+      *(uint *)(copyLiveOutWordAddr + 8) = 1 << (copySourceRegisterId & 0x1f) | *(uint *)(copyLiveOutWordAddr + 8);
+      *(uint *)(copySourceVReg + 0x24) = *(uint *)(copySourceVReg + 0x24) | 1;
     }
   }
   return;
