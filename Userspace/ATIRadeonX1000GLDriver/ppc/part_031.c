@@ -1881,104 +1881,112 @@ int FUN_0010ea30(param_1)
 }
 
 /* FUN_0010ead4 @ 0x10ead4 (484 bytes) */
-int FUN_0010ead4(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
-  int param_1;
-  int param_2;
+int FUN_0010ead4(hwState, program, param_3, param_4, param_5, param_6, param_7)
+  int hwState;
+  int program;
   undefined4 param_3;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
   undefined4 param_7;
 {
-  int *piVar1;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int *piVar7;
-  int *piVar8;
-  int local_a8 [16];
-  int local_68 [18];
+  int otherExportInst;
+  int outputBaseC;
+  int outputBaseA;
+  int colorExportInst;
+  int exportKind;
+  int laneKindOfLane0;
+  int *otherExportCursor;
+  int *colorExportCursor;
+  int *nextInstLink;
+  int *nextInstAdvance;
+  int instQuery68;
+  int outputBaseB;
+  int otherExportCount;
+  int colorExportCount;
+  int *depthExport;
+  int *exportInst;
+  int colorExports [16];
+  int otherExports [18];
   
-  piVar8 = *(int **)(*(int *)(param_2 + 0x3a8) + 0x98);
-  piVar1 = (int *)piVar8[2];
-  if (piVar1 == (int *)0x0) {
-    piVar7 = (int *)0x0;
-    iVar5 = 0;
-    iVar6 = 0;
+  exportInst = *(int **)(*(int *)(program + 0x3a8) + 0x98);
+  nextInstLink = (int *)exportInst[2];
+  if (nextInstLink == (int *)0x0) {
+    depthExport = (int *)0x0;
+    otherExportCount = 0;
+    colorExportCount = 0;
   }
   else {
-    piVar7 = (int *)0x0;
-    iVar5 = 0;
-    iVar6 = 0;
+    depthExport = (int *)0x0;
+    otherExportCount = 0;
+    colorExportCount = 0;
     do {
-      piVar2 = piVar1;
-      if ((piVar8[5] & 1U) == 0) goto LAB_0010ebe4;
-      iVar3 = (**(code **)(*piVar8 + 0x68))(piVar8);
-      if (iVar3 == 0) {
+      nextInstAdvance = nextInstLink;
+      if ((exportInst[5] & 1U) == 0) goto LAB_0010ebe4;
+      instQuery68 = (**(code **)(*exportInst + 0x68))(exportInst);
+      if (instQuery68 == 0) {
 LAB_0010ebe0:
-        piVar2 = (int *)piVar8[2];
+        nextInstAdvance = (int *)exportInst[2];
       }
       else {
-        iVar3 = IRLoadInterp__laneKind_104ee4(piVar8,0);
-        if (((iVar3 == 0xb) || (iVar3 = IRLoadInterp__laneKind_104ee4(piVar8,0), iVar3 == 0xc)) ||
-           (iVar3 = IRLoadInterp__laneKind_104ee4(piVar8,0), iVar3 == 1)) {
-          *(undefined4 *)(param_1 + 0x17c8) = 1;
+        laneKindOfLane0 = IRLoadInterp__laneKind_104ee4(exportInst,0);
+        if (((laneKindOfLane0 == 0xb) || (laneKindOfLane0 = IRLoadInterp__laneKind_104ee4(exportInst,0), laneKindOfLane0 == 0xc)) ||
+           (laneKindOfLane0 = IRLoadInterp__laneKind_104ee4(exportInst,0), laneKindOfLane0 == 1)) {
+          *(undefined4 *)(hwState + 0x17c8) = 1;
         }
-        iVar3 = piVar8[0x4f];
-        if (iVar3 == 6) goto LAB_0010ebe0;
-        if (iVar3 == 0x18) {
-          piVar2 = (int *)piVar8[2];
-          piVar7 = piVar8;
+        exportKind = exportInst[0x4f];
+        if (exportKind == 6) goto LAB_0010ebe0;
+        if (exportKind == 0x18) {
+          nextInstAdvance = (int *)exportInst[2];
+          depthExport = exportInst;
         }
         else {
-          if (iVar3 == 7) goto LAB_0010ebe0;
-          if (iVar3 - 0x16U < 2) {
-            local_a8[iVar6] = (int)piVar8;
-            iVar6 = iVar6 + 1;
-            piVar2 = (int *)piVar8[2];
+          if (exportKind == 7) goto LAB_0010ebe0;
+          if (exportKind - 0x16U < 2) {
+            colorExports[colorExportCount] = (int)exportInst;
+            colorExportCount = colorExportCount + 1;
+            nextInstAdvance = (int *)exportInst[2];
           }
           else {
-            local_68[iVar5] = (int)piVar8;
-            piVar2 = (int *)piVar8[2];
-            iVar5 = iVar5 + 1;
+            otherExports[otherExportCount] = (int)exportInst;
+            nextInstAdvance = (int *)exportInst[2];
+            otherExportCount = otherExportCount + 1;
           }
         }
       }
 LAB_0010ebe4:
-      piVar1 = (int *)piVar2[2];
-      piVar8 = piVar2;
-    } while ((int *)piVar2[2] != (int *)0x0);
+      nextInstLink = (int *)nextInstAdvance[2];
+      exportInst = nextInstAdvance;
+    } while ((int *)nextInstAdvance[2] != (int *)0x0);
   }
-  if (*(int *)(param_2 + 0x3e4) != 0) {
-    *(int *)(param_2 + 0x3f0) = -*(int *)(param_2 + 1000);
-    if (0 < iVar6) {
-      piVar1 = local_a8;
+  if (*(int *)(program + 0x3e4) != 0) {
+    *(int *)(program + 0x3f0) = -*(int *)(program + 1000);
+    if (0 < colorExportCount) {
+      colorExportCursor = colorExports;
       do {
-        iVar3 = *piVar1;
-        piVar1 = piVar1 + 1;
-        iVar4 = *(int *)(param_2 + 0x3f0);
-        *(undefined4 *)(iVar3 + 0x98) = 5;
-        *(int *)(iVar3 + 0x94) = *(int *)(iVar3 + 0x140) + iVar4;
-        iVar6 = iVar6 + -1;
-      } while (iVar6 != 0);
+        colorExportInst = *colorExportCursor;
+        colorExportCursor = colorExportCursor + 1;
+        outputBaseB = *(int *)(program + 0x3f0);
+        *(undefined4 *)(colorExportInst + 0x98) = 5;
+        *(int *)(colorExportInst + 0x94) = *(int *)(colorExportInst + 0x140) + outputBaseB;
+        colorExportCount = colorExportCount + -1;
+      } while (colorExportCount != 0);
     }
-    if (piVar7 != (int *)0x0) {
-      iVar6 = *(int *)(param_2 + 0x3f0);
-      piVar7[0x26] = 5;
-      piVar7[0x25] = piVar7[0x50] + iVar6;
+    if (depthExport != (int *)0x0) {
+      outputBaseC = *(int *)(program + 0x3f0);
+      depthExport[0x26] = 5;
+      depthExport[0x25] = depthExport[0x50] + outputBaseC;
     }
-    if (0 < iVar5) {
-      piVar1 = local_68;
+    if (0 < otherExportCount) {
+      otherExportCursor = otherExports;
       do {
-        iVar6 = *piVar1;
-        piVar1 = piVar1 + 1;
-        iVar3 = *(int *)(param_2 + 0x3f0);
-        *(undefined4 *)(iVar6 + 0x98) = 5;
-        *(int *)(iVar6 + 0x94) = *(int *)(iVar6 + 0x140) + iVar3;
-        iVar5 = iVar5 + -1;
-      } while (iVar5 != 0);
+        otherExportInst = *otherExportCursor;
+        otherExportCursor = otherExportCursor + 1;
+        outputBaseA = *(int *)(program + 0x3f0);
+        *(undefined4 *)(otherExportInst + 0x98) = 5;
+        *(int *)(otherExportInst + 0x94) = *(int *)(otherExportInst + 0x140) + outputBaseA;
+        otherExportCount = otherExportCount + -1;
+      } while (otherExportCount != 0);
     }
   }
   return;

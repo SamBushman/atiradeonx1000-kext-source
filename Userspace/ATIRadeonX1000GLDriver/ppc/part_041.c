@@ -2533,72 +2533,73 @@ int FUN_00135278(param_1)
 }
 
 /* FUN_00135334 @ 0x135334 (552 bytes) */
-int FUN_00135334(param_1, param_2, param_3)
-  int param_1;
-  uint param_2;
-  uint param_3;
+int FUN_00135334(graph, nodeA, nodeB)
+  int graph;
+  uint nodeA;
+  uint nodeB;
 {
-  int iVar1;
-  uint uVar2;
-  undefined4 *puVar3;
-  uint *puVar4;
-  undefined1 auStack_38 [4];
-  undefined1 auStack_34 [28];
+  undefined4 *nodeBRef;
+  int alreadyInterfere;
+  uint nodeVectorCount;
+  undefined4 *nodeARef;
+  uint *nodeVector;
+  undefined1 neighbourLocation [4];
+  undefined1 neighbourLocationRest [28];
   
-  if ((param_2 != param_3) && (iVar1 = ((int (*)())InterferenceMatrix__testPair)(param_1,param_2,param_3), iVar1 == 0)) {
-    ((int (*)())InterferenceMatrix__setPair)(param_1,param_2,param_3);
-    puVar4 = *(uint **)(param_1 + 4);
-    if (param_2 < *puVar4) {
-      uVar2 = puVar4[1];
-      if (uVar2 <= param_2) {
-        _memset(uVar2 * 4 + puVar4[2],0,(param_2 - uVar2) * 4 + 4);
-        puVar4[1] = param_2 + 1;
+  if ((nodeA != nodeB) && (alreadyInterfere = ((int (*)())InterferenceMatrix__testPair)(graph,nodeA,nodeB), alreadyInterfere == 0)) {
+    ((int (*)())InterferenceMatrix__setPair)(graph,nodeA,nodeB);
+    nodeVector = *(uint **)(graph + 4);
+    if (nodeA < *nodeVector) {
+      nodeVectorCount = nodeVector[1];
+      if (nodeVectorCount <= nodeA) {
+        _memset(nodeVectorCount * 4 + nodeVector[2],0,(nodeA - nodeVectorCount) * 4 + 4);
+        nodeVector[1] = nodeA + 1;
       }
-      puVar3 = (undefined4 *)(param_2 * 4 + puVar4[2]);
+      nodeARef = (undefined4 *)(nodeA * 4 + nodeVector[2]);
     }
     else {
-      puVar3 = (undefined4 *)Vector__elementRefGrow(puVar4,param_2);
+      nodeARef = (undefined4 *)Vector__elementRefGrow(nodeVector,nodeA);
     }
-    ((int (*)())FUN_00134ab8)(*puVar3,auStack_38,auStack_34);
-    puVar4 = *(uint **)(param_1 + 4);
-    if (param_2 < *puVar4) {
-      uVar2 = puVar4[1];
-      if (uVar2 <= param_2) {
-        _memset(uVar2 * 4 + puVar4[2],0,(param_2 - uVar2) * 4 + 4);
-        puVar4[1] = param_2 + 1;
+    ((int (*)())FUN_00134ab8)(*nodeARef,neighbourLocation,neighbourLocationRest);
+    nodeVector = *(uint **)(graph + 4);
+    if (nodeA < *nodeVector) {
+      nodeVectorCount = nodeVector[1];
+      if (nodeVectorCount <= nodeA) {
+        _memset(nodeVectorCount * 4 + nodeVector[2],0,(nodeA - nodeVectorCount) * 4 + 4);
+        nodeVector[1] = nodeA + 1;
       }
-      puVar3 = (undefined4 *)(param_2 * 4 + puVar4[2]);
+      nodeARef = (undefined4 *)(nodeA * 4 + nodeVector[2]);
     }
     else {
-      puVar3 = (undefined4 *)Vector__elementRefGrow(puVar4,param_2);
+      nodeARef = (undefined4 *)Vector__elementRefGrow(nodeVector,nodeA);
     }
-    ((int (*)())storeAfterLocate)(*puVar3,param_3,auStack_38,auStack_34,*(undefined4 *)(param_1 + 0x2c));
-    puVar4 = *(uint **)(param_1 + 4);
-    if (param_3 < *puVar4) {
-      uVar2 = puVar4[1];
-      if (uVar2 <= param_3) {
-        _memset(uVar2 * 4 + puVar4[2],0,(param_3 - uVar2) * 4 + 4);
-        puVar4[1] = param_3 + 1;
+    ((int (*)())storeAfterLocate)(*nodeARef,nodeB,neighbourLocation,neighbourLocationRest,*(undefined4 *)(graph + 0x2c));
+    nodeVector = *(uint **)(graph + 4);
+    if (nodeB < *nodeVector) {
+      nodeVectorCount = nodeVector[1];
+      if (nodeVectorCount <= nodeB) {
+        _memset(nodeVectorCount * 4 + nodeVector[2],0,(nodeB - nodeVectorCount) * 4 + 4);
+        nodeVector[1] = nodeB + 1;
       }
-      puVar3 = (undefined4 *)(param_3 * 4 + puVar4[2]);
+      nodeBRef = (undefined4 *)(nodeB * 4 + nodeVector[2]);
     }
     else {
-      puVar3 = (undefined4 *)Vector__elementRefGrow(puVar4,param_3);
+      nodeBRef = (undefined4 *)Vector__elementRefGrow(nodeVector,nodeB);
     }
-    ((int (*)())FUN_00134ab8)(*puVar3,auStack_38,auStack_34);
-    puVar4 = *(uint **)(param_1 + 4);
-    if (param_3 < *puVar4) {
-      uVar2 = puVar4[1];
-      if (uVar2 <= param_3) {
-        _memset(uVar2 * 4 + puVar4[2],0,(param_3 - uVar2) * 4 + 4);
-        puVar4[1] = param_3 + 1;
+    ((int (*)())FUN_00134ab8)(*nodeBRef,neighbourLocation,neighbourLocationRest);
+    nodeVector = *(uint **)(graph + 4);
+    if (nodeB < *nodeVector) {
+      nodeVectorCount = nodeVector[1];
+      if (nodeVectorCount <= nodeB) {
+        _memset(nodeVectorCount * 4 + nodeVector[2],0,(nodeB - nodeVectorCount) * 4 + 4);
+        nodeVector[1] = nodeB + 1;
       }
-      puVar3 = (undefined4 *)(param_3 * 4 + puVar4[2]);
+      nodeBRef = (undefined4 *)(nodeB * 4 + nodeVector[2]);
     }
     else {
-      puVar3 = (undefined4 *)Vector__elementRefGrow(puVar4,param_3);
+      nodeBRef = (undefined4 *)Vector__elementRefGrow(nodeVector,nodeB);
     }
-    ((int (*)())storeAfterLocate)(*puVar3,param_2,auStack_38,auStack_34,*(undefined4 *)(param_1 + 0x2c));
+    ((int (*)())storeAfterLocate)(*nodeBRef,nodeA,neighbourLocation,neighbourLocationRest,*(undefined4 *)(graph + 0x2c));
   }
   return;
 }
@@ -3953,99 +3954,107 @@ int FUN_00137474(param_1)
 }
 
 /* FUN_00137694 @ 0x137694 (456 bytes) */
-int FUN_00137694(param_1, param_2)
-  int *param_1;
-  int param_2;
+int FUN_00137694(this, extraNodeCount)
+  int *this;
+  int extraNodeCount;
 {
+  uint nodeVectorCount;
+  uint pairBitIndex;
+  uint edgeWordCount;
+  int oldNodeArray;
+  int copyCountdown;
+  int newNodeArray;
+  int rowNode;
+  int edgeBitCount;
   undefined4 *allocation;
   int loopIndex;
-  int iVar1;
-  undefined4 *puVar2;
-  int *piVar3;
-  int iVar4;
-  undefined4 *puVar5;
-  uint uVar6;
-  int iVar7;
-  int iVar8;
+  int newBitsetWordAddr;
+  undefined4 *bitsetClearCursor;
+  int *nodeSlotRef;
+  int newNodeCount;
+  undefined4 *newEdgeBitset;
+  uint pairWordOffset;
+  int oldEdgeBitset;
+  int oldNodeCount;
   undefined4 arena;
-  uint *puVar10;
-  uint uVar11;
-  int iVar12;
+  uint *nodeVector;
+  uint nodePairProduct;
+  int copyByteOffset;
   
-  iVar8 = param_1[3];
-  iVar4 = iVar8 + param_2;
-  iVar7 = *param_1;
-  param_1[3] = iVar4;
-  arena = *(undefined4 *)(param_1[0xb] + 0x378);
-  uVar11 = iVar4 * iVar4 - iVar4;
-  iVar4 = ((int)uVar11 >> 1) + (uint)((int)uVar11 < 0 && (uVar11 & 1) != 0);
-  uVar11 = iVar4 + 0x1fU >> 5;
-  allocation = (undefined4 *)Arena__alloc(arena,uVar11 * 4 + 0xc);
-  puVar5 = allocation + 1;
+  oldNodeCount = this[3];
+  newNodeCount = oldNodeCount + extraNodeCount;
+  oldEdgeBitset = *this;
+  this[3] = newNodeCount;
+  arena = *(undefined4 *)(this[0xb] + 0x378);
+  nodePairProduct = newNodeCount * newNodeCount - newNodeCount;
+  edgeBitCount = ((int)nodePairProduct >> 1) + (uint)((int)nodePairProduct < 0 && (nodePairProduct & 1) != 0);
+  edgeWordCount = edgeBitCount + 0x1fU >> 5;
+  allocation = (undefined4 *)Arena__alloc(arena,edgeWordCount * 4 + 0xc);
+  newEdgeBitset = allocation + 1;
   *allocation = arena;
-  allocation[1] = uVar11;
-  allocation[2] = iVar4;
-  if (uVar11 != 0) {
-    puVar2 = puVar5;
-    if (uVar11 == 0) {
-      uVar11 = 1;
+  allocation[1] = edgeWordCount;
+  allocation[2] = edgeBitCount;
+  if (edgeWordCount != 0) {
+    bitsetClearCursor = newEdgeBitset;
+    if (edgeWordCount == 0) {
+      edgeWordCount = 1;
     }
     do {
-      puVar2[2] = 0;
-      puVar2 = puVar2 + 1;
-      uVar11 = uVar11 - 1;
-    } while (uVar11 != 0);
+      bitsetClearCursor[2] = 0;
+      bitsetClearCursor = bitsetClearCursor + 1;
+      edgeWordCount = edgeWordCount - 1;
+    } while (edgeWordCount != 0);
   }
-  *param_1 = (int)puVar5;
-  if (0 < iVar8) {
-    iVar4 = 0;
-    while (iVar4 = iVar4 + 1, iVar8 != iVar4) {
-      if (0 < iVar4) {
+  *this = (int)newEdgeBitset;
+  if (0 < oldNodeCount) {
+    rowNode = 0;
+    while (rowNode = rowNode + 1, oldNodeCount != rowNode) {
+      if (0 < rowNode) {
         loopIndex = 0;
         do {
-          uVar11 = ((int (*)())pairIndex)(param_1,loopIndex,iVar4);
-          uVar6 = uVar11 >> 3 & 0x1ffffffc;
-          if ((*(uint *)(uVar6 + iVar7 + 8) >> (uVar11 & 0x1f) & 1) != 0) {
-            iVar1 = uVar6 + *param_1;
-            *(uint *)(iVar1 + 8) = 1 << (uVar11 & 0x1f) | *(uint *)(iVar1 + 8);
+          pairBitIndex = ((int (*)())pairIndex)(this,loopIndex,rowNode);
+          pairWordOffset = pairBitIndex >> 3 & 0x1ffffffc;
+          if ((*(uint *)(pairWordOffset + oldEdgeBitset + 8) >> (pairBitIndex & 0x1f) & 1) != 0) {
+            newBitsetWordAddr = pairWordOffset + *this;
+            *(uint *)(newBitsetWordAddr + 8) = 1 << (pairBitIndex & 0x1f) | *(uint *)(newBitsetWordAddr + 8);
           }
           loopIndex = loopIndex + 1;
-        } while (iVar4 != loopIndex);
+        } while (rowNode != loopIndex);
       }
     }
   }
-  iVar7 = param_1[8];
-  iVar4 = Arena__alloc(*(undefined4 *)(param_1[0xb] + 0x378),param_1[3] << 2);
-  param_1[8] = iVar4;
-  if (0 < iVar8) {
-    iVar12 = 0;
-    iVar4 = iVar8;
+  oldNodeArray = this[8];
+  newNodeArray = Arena__alloc(*(undefined4 *)(this[0xb] + 0x378),this[3] << 2);
+  this[8] = newNodeArray;
+  if (0 < oldNodeCount) {
+    copyByteOffset = 0;
+    copyCountdown = oldNodeCount;
     do {
-      *(undefined4 *)(iVar12 + param_1[8]) = *(undefined4 *)(iVar7 + iVar12);
-      iVar12 = iVar12 + 4;
-      iVar4 = iVar4 + -1;
-    } while (iVar4 != 0);
+      *(undefined4 *)(copyByteOffset + this[8]) = *(undefined4 *)(oldNodeArray + copyByteOffset);
+      copyByteOffset = copyByteOffset + 4;
+      copyCountdown = copyCountdown + -1;
+    } while (copyCountdown != 0);
   }
-  Arena__free(*(undefined4 *)(param_1[0xb] + 0x378),iVar7);
-  if (iVar8 < param_1[3]) {
+  Arena__free(*(undefined4 *)(this[0xb] + 0x378),oldNodeArray);
+  if (oldNodeCount < this[3]) {
     do {
-      puVar10 = (uint *)param_1[1];
-      arena = *(undefined4 *)(param_1[0xb] + 0x378);
+      nodeVector = (uint *)this[1];
+      arena = *(undefined4 *)(this[0xb] + 0x378);
       allocation = (undefined4 *)Arena__alloc(arena,0x28);
       *allocation = arena;
-      ((int (*)())FUN_001351c4)(allocation + 1,iVar8,0,param_1,param_1[0xb]);
-      uVar11 = puVar10[1];
-      if (uVar11 < *puVar10) {
-        _memset((void *)(uVar11 * 4 + puVar10[2]),0,4);
-        piVar3 = (int *)(uVar11 * 4 + puVar10[2]);
-        puVar10[1] = uVar11 + 1;
+      ((int (*)())FUN_001351c4)(allocation + 1,oldNodeCount,0,this,this[0xb]);
+      nodeVectorCount = nodeVector[1];
+      if (nodeVectorCount < *nodeVector) {
+        _memset((void *)(nodeVectorCount * 4 + nodeVector[2]),0,4);
+        nodeSlotRef = (int *)(nodeVectorCount * 4 + nodeVector[2]);
+        nodeVector[1] = nodeVectorCount + 1;
       }
       else {
-        piVar3 = (int *)Vector__elementRefGrow(puVar10,uVar11);
+        nodeSlotRef = (int *)Vector__elementRefGrow(nodeVector,nodeVectorCount);
       }
-      *piVar3 = (int)(allocation + 1);
-      iVar8 = iVar8 + 1;
-    } while (iVar8 < param_1[3]);
+      *nodeSlotRef = (int)(allocation + 1);
+      oldNodeCount = oldNodeCount + 1;
+    } while (oldNodeCount < this[3]);
   }
   return;
 }
