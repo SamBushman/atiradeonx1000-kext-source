@@ -21,8 +21,8 @@ use	FUN_0003f850	iVar2	allocation	INFERRED	every definition is the result of a c
 use	FUN_0003f850	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#38	+0	all	all
 use	FUN_0003f9f0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#27	+5	all	all
 use	FUN_0003f9f0	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#48	+0	all	all
-use	FUN_0003fbf0	iVar6	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#18	+5	all	all
-use	FUN_0003fbf0	iVar6	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#35	+0	all	all
+use	FUN_0003fbf0	iVar6	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*iVar6\ =\ _malloc\(uVar2\ <<\ 2\);$	+5	all	all
+use	FUN_0003fbf0	iVar6	allocation	INFERRED	every definition is the result of a call whose name says it returns this	^\s*\*piVar8\ =\ iVar6;$	+0	all	all
 use	FUN_0003fd80	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#21	+5	all	all
 use	FUN_0003fd80	iVar7	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#38	+0	all	all
 use	FUN_0003ff40	iVar2	allocation	INFERRED	every definition is the result of a call whose name says it returns this	#51	+5	all	all
