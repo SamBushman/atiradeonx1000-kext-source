@@ -1742,24 +1742,31 @@ int Program__eliminateDeadInstsAndRecountUses(program, verifyCounts)
   int program;
   int verifyCounts;
 {
+  int *lookaheadInst;
+  int *topElementPtr;
+  int liveRoot;
+  int block;
+  int instByteOffset;
+  int clampedUseCount;
+  int nextInstCursor;
   uint countBefore;
   int slotByteOffset;
   int operandSource;
   int loopIndex;
   bool skipVerify;
   int instVector;
-  int iVar3;
-  int iVar4;
-  int *piVar5;
+  int nextInstScan;
+  int nextBlock;
+  int *curNext;
   int savedUseCounts;
-  int *piVar7;
-  uint uVar8;
-  int iVar9;
-  int iVar10;
+  int *elementPtr;
+  uint topIndex;
+  int compiler;
+  int instScan;
   int iVar11;
   uint loopIndex2;
   undefined4 consistent;
-  int *piVar14;
+  int *inst;
   /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with Vector__elementRefGrow - vecCapacity/vecCount/vecData/vecArena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
   unsigned char local_54_buf [0x10];
   #define vecCapacity (*(uint *)(local_54_buf + 0x00))
@@ -1769,72 +1776,72 @@ int Program__eliminateDeadInstsAndRecountUses(program, verifyCounts)
   
   skipVerify = verifyCounts == 0;
   iVar11 = *(int *)(program + 0x2ac);
-  iVar9 = *(int *)(program + PROG_compiler);
+  compiler = *(int *)(program + PROG_compiler);
   *(int *)(program + 0x2ac) = iVar11 + 1;
-  instVector = *(int *)(iVar9 + 0x324);
+  instVector = *(int *)(compiler + 0x324);
   if (skipVerify) {
     savedUseCounts = 0;
   }
   else {
-    savedUseCounts = Arena__alloc(*(undefined4 *)(iVar9 + 0x378),instVector << 2);
-    iVar9 = *(int *)(program + PROG_blockListHead);
-    for (iVar4 = *(int *)(*(int *)(program + PROG_blockListHead) + 8); iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
-      iVar3 = *(int *)(*(int *)(iVar9 + 0x98) + 8);
-      iVar10 = *(int *)(iVar9 + 0x98);
-      if (iVar3 != 0) {
+    savedUseCounts = Arena__alloc(*(undefined4 *)(compiler + 0x378),instVector << 2);
+    block = *(int *)(program + PROG_blockListHead);
+    for (nextBlock = *(int *)(*(int *)(program + PROG_blockListHead) + 8); nextBlock != 0; nextBlock = *(int *)(nextBlock + 8)) {
+      nextInstScan = *(int *)(*(int *)(block + 0x98) + 8);
+      instScan = *(int *)(block + 0x98);
+      if (nextInstScan != 0) {
         do {
-          iVar4 = iVar3;
-          if ((*(uint *)(iVar10 + 0x14) & 1) != 0) {
-            iVar4 = *(int *)(iVar10 + 0x160) - *(int *)(program + PROG_useEpoch);
-            if (iVar4 < 0) {
-              iVar4 = 0;
+          nextInstCursor = nextInstScan;
+          if ((*(uint *)(instScan + 0x14) & 1) != 0) {
+            clampedUseCount = *(int *)(instScan + 0x160) - *(int *)(program + PROG_useEpoch);
+            if (clampedUseCount < 0) {
+              clampedUseCount = 0;
             }
-            *(int *)(*(int *)(iVar10 + 0x14c) * 4 + savedUseCounts) = iVar4;
-            iVar4 = *(int *)(iVar10 + 8);
+            *(int *)(*(int *)(instScan + 0x14c) * 4 + savedUseCounts) = clampedUseCount;
+            nextInstCursor = *(int *)(instScan + 8);
           }
-          iVar3 = *(int *)(iVar4 + 8);
-          iVar10 = iVar4;
-        } while (*(int *)(iVar4 + 8) != 0);
-        iVar4 = *(int *)(iVar9 + 8);
+          nextInstScan = *(int *)(nextInstCursor + 8);
+          instScan = nextInstCursor;
+        } while (*(int *)(nextInstCursor + 8) != 0);
+        nextBlock = *(int *)(block + 8);
       }
-      iVar9 = iVar4;
+      block = nextBlock;
     }
-    iVar9 = *(int *)(program + PROG_compiler);
+    compiler = *(int *)(program + PROG_compiler);
   }
-  iVar4 = 0;
+  instByteOffset = 0;
   *(int *)(program + PROG_visitStamp) = *(int *)(program + PROG_visitStamp) + 1;
   *(int *)(program + PROG_useEpoch) = instVector * 4 + *(int *)(program + PROG_useEpoch);
-  vecArena = *(undefined4 *)(iVar9 + 0x378);
+  vecArena = *(undefined4 *)(compiler + 0x378);
   vecCapacity = 2;
   vecCount = 0;
   vecData = Arena__alloc(vecArena,8);
   instVector = *(int *)(program + PROG_instructionVector);
   for (loopIndex2 = 1; loopIndex2 <= *(uint *)(instVector + 4); loopIndex2 = loopIndex2 + 1) {
-    iVar9 = *(int *)(*(int *)(instVector + 8) + iVar4);
-    if ((*(uint *)(iVar9 + 0x14) & 1) != 0) {
-      instVector = IRInst__getOperandRecord(iVar9,0);
+    liveRoot = *(int *)(*(int *)(instVector + 8) + instByteOffset);
+    if ((*(uint *)(liveRoot + 0x14) & 1) != 0) {
+      instVector = IRInst__getOperandRecord(liveRoot,0);
       countBefore = vecCount;
       if ((*(int *)(instVector + 0x10) != DAT_001b0014) &&
-         (*(int *)(program + PROG_visitStamp) != *(int *)(iVar9 + 0x150))) {
-        *(int *)(iVar9 + 0x150) = *(int *)(program + PROG_visitStamp);
+         (*(int *)(program + PROG_visitStamp) != *(int *)(liveRoot + 0x150))) {
+        *(int *)(liveRoot + 0x150) = *(int *)(program + PROG_visitStamp);
         if (vecCount < vecCapacity) {
           instVector = vecCount * 4;
           _memset(instVector + vecData,0,4);
           vecCount = countBefore + 1;
-          piVar7 = (int *)(instVector + vecData);
+          elementPtr = (int *)(instVector + vecData);
         }
         else {
-          piVar7 = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
+          elementPtr = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
         }
-        *piVar7 = iVar9;
+        *elementPtr = liveRoot;
         do {
-          uVar8 = vecCount - 1;
-          piVar7 = (int *)0x0;
-          if (uVar8 < vecCount) {
-            piVar7 = (int *)(uVar8 * 4 + vecData);
+          topIndex = vecCount - 1;
+          topElementPtr = (int *)0x0;
+          if (topIndex < vecCount) {
+            topElementPtr = (int *)(topIndex * 4 + vecData);
           }
-          instVector = *piVar7;
-          Vector__removeAt(&vecCapacity,uVar8);
+          instVector = *topElementPtr;
+          Vector__removeAt(&vecCapacity,topIndex);
           if (0 < *(int *)(instVector + 0x84)) {
             loopIndex = 1;
             do {
@@ -1853,12 +1860,12 @@ int Program__eliminateDeadInstsAndRecountUses(program, verifyCounts)
                     slotByteOffset = vecCount * 4;
                     _memset(slotByteOffset + vecData,0,4);
                     vecCount = countBefore + 1;
-                    piVar7 = (int *)(slotByteOffset + vecData);
+                    elementPtr = (int *)(slotByteOffset + vecData);
                   }
                   else {
-                    piVar7 = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
+                    elementPtr = (int *)Vector__elementRefGrow(&vecCapacity,vecCount);
                   }
-                  *piVar7 = operandSource;
+                  *elementPtr = operandSource;
                 }
               }
               loopIndex = loopIndex + 1;
@@ -1868,7 +1875,7 @@ int Program__eliminateDeadInstsAndRecountUses(program, verifyCounts)
       }
       instVector = *(int *)(program + PROG_instructionVector);
     }
-    iVar4 = iVar4 + 4;
+    instByteOffset = instByteOffset + 4;
   }
   instVector = *(int *)(*(int *)(program + PROG_blockListHead) + 8);
   if (instVector == 0) {
@@ -1877,47 +1884,47 @@ int Program__eliminateDeadInstsAndRecountUses(program, verifyCounts)
   else {
     consistent = 1;
     iVar11 = iVar11 * 4 + program;
-    iVar9 = *(int *)(program + PROG_blockListHead);
+    block = *(int *)(program + PROG_blockListHead);
     do {
-      iVar4 = instVector;
-      piVar7 = (int *)(*(int **)(iVar9 + 0x98))[2];
-      piVar14 = *(int **)(iVar9 + 0x98);
-      if (piVar7 != (int *)0x0) {
+      nextBlock = instVector;
+      lookaheadInst = (int *)(*(int **)(block + 0x98))[2];
+      inst = *(int **)(block + 0x98);
+      if (lookaheadInst != (int *)0x0) {
         do {
-          piVar5 = piVar7;
-          if ((piVar14[5] & 1U) != 0) {
-            instVector = (**(code **)(*piVar14 + 0x34))(piVar14);
-            if ((instVector == 0) && (instVector = (**(code **)(*piVar14 + 0x38))(piVar14), instVector == 0)) {
-              if ((!skipVerify) && (instVector = (**(code **)(*piVar14 + 0x48))(piVar14), instVector == 0)) {
-                instVector = piVar14[0x58] - *(int *)(program + PROG_useEpoch);
+          curNext = lookaheadInst;
+          if ((inst[5] & 1U) != 0) {
+            instVector = (**(code **)(*inst + 0x34))(inst);
+            if ((instVector == 0) && (instVector = (**(code **)(*inst + 0x38))(inst), instVector == 0)) {
+              if ((!skipVerify) && (instVector = (**(code **)(*inst + 0x48))(inst), instVector == 0)) {
+                instVector = inst[0x58] - *(int *)(program + PROG_useEpoch);
                 if (instVector < 0) {
                   instVector = 0;
                 }
-                if (*(int *)(piVar14[0x53] * 4 + savedUseCounts) != instVector) {
+                if (*(int *)(inst[0x53] * 4 + savedUseCounts) != instVector) {
                   consistent = 0;
                 }
               }
-              if (((*(int *)(program + PROG_visitStamp) != piVar14[0x54]) && ((piVar14[5] & 8U) == 0)) &&
-                 ((piVar14[5] & 0x10U) == 0)) {
-                (**(code **)(*piVar14 + 0x10))(piVar14,*(undefined4 *)(program + PROG_compiler));
-                if ((piVar14[0x26] != 2) && (piVar14[0x26] != 0x33)) {
+              if (((*(int *)(program + PROG_visitStamp) != inst[0x54]) && ((inst[5] & 8U) == 0)) &&
+                 ((inst[5] & 0x10U) == 0)) {
+                (**(code **)(*inst + 0x10))(inst,*(undefined4 *)(program + PROG_compiler));
+                if ((inst[0x26] != 2) && (inst[0x26] != 0x33)) {
                   *(int *)(iVar11 + 0x2b0) = *(int *)(iVar11 + 0x2b0) + 1;
-                  piVar5 = (int *)piVar14[2];
+                  curNext = (int *)inst[2];
                   goto LAB_0013c188;
                 }
               }
             }
-            piVar5 = (int *)piVar14[2];
+            curNext = (int *)inst[2];
           }
 LAB_0013c188:
-          piVar7 = (int *)piVar5[2];
-          piVar14 = piVar5;
-        } while ((int *)piVar5[2] != (int *)0x0);
-        iVar4 = *(int *)(iVar9 + 8);
+          lookaheadInst = (int *)curNext[2];
+          inst = curNext;
+        } while ((int *)curNext[2] != (int *)0x0);
+        nextBlock = *(int *)(block + 8);
       }
-      instVector = *(int *)(iVar4 + 8);
-      iVar9 = iVar4;
-    } while (*(int *)(iVar4 + 8) != 0);
+      instVector = *(int *)(nextBlock + 8);
+      block = nextBlock;
+    } while (*(int *)(nextBlock + 8) != 0);
   }
   if (!skipVerify) {
     Arena__free(*(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaB),savedUseCounts);
