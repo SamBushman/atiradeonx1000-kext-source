@@ -62,7 +62,7 @@ for fn, addr in funcs.items():
     cur = F.CURRENT
     text = '\n'.join(cur)
     idents = set(re.findall(r'[A-Za-z_]\w*', text))
-    first = next((i for i in range(brace + 1, len(cur)) if cur[i].strip() and not re.match(r'^\s*[\w ]+[\s\*]+\w+(\[\d+\])?;$', cur[i])), brace + 1)
+    first = next((i for i in range(brace + 1, len(cur)) if cur[i].strip() and not re.match(r'^\s*[\w ]+[\s\*]+\w+ ?(\[\w+\])?;$', cur[i])), brace + 1)
     # element sizes of pointer parameters/locals
     decl = {}
     for l in cur[:first]:
