@@ -1329,7 +1329,7 @@ void FUN_000a9ac0(char *stream,uint *dirtyBits,char *dirtyBitsArg,undefined *scr
   dirtyBitsWord8 = (char *)dirtyBits[2];
   if ((((uVar27 & 0x20000180) != 0) || (*(int *)(streamPtr4_2 + 0x2a48) != *(int *)(streamPtr4_2 + 0x15c))) ||
      (puVar16 = dirtyBits, *(int *)(streamPtr4_2 + 0x2a4c) != *(int *)(streamPtr4_2 + 0x160))) {
-    fparam_1 = (double)FUN_00019c50(streamPtr4_2);
+    fparam_1 = (double)gld_updateSampleConfig(streamPtr4_2);
     puVar16 = extraout_r4;
   }
   if (*(char *)(streamPtr4_2 + 0x2a43) != '\0') {

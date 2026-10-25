@@ -179,7 +179,7 @@
 0x199a0	gld_drawPixelsDispatch	68	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x199f0	FUN_000199f0	212	yes	
 0x19ad0	FUN_00019ad0	360	yes	
-0x19c50	FUN_00019c50	308	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x19c50	gld_updateSampleConfig	308	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x19db0	FUN_00019db0	544	no	calls an import (io_connect_method_scalarI_structureI)
 0x1a010	FUN_0001a010	176	yes	
 0x1a0d0	gld_isStampRetired	32	yes	
@@ -191,17 +191,17 @@
 0x1a670	gld_signalFence	216	yes	
 0x1a750	glFinish_impl	636	no	calls an import (io_connect_method_scalarI_structureI); indirect call (driver context / vtable / callback)
 0x1a9d0	FUN_0001a9d0	588	no	calls an import (io_connect_method_scalarI_structureI); indirect call (driver context / vtable / callback)
-0x1ac30	FUN_0001ac30	464	yes	
-0x1ae20	FUN_0001ae20	768	yes	
-0x1b150	FUN_0001b150	88	yes	
+0x1ac30	gld_validatePixelFormat	464	yes	
+0x1ae20	gld_expandPixelFormatVariants	768	yes	
+0x1b150	gld_fillMaxPixelFormat	88	yes	
 0x1b1b0	_gldFreeVertexBuffer	20	yes	
 0x1b1d0	_gldCompleteVertexBuffer	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1b1e0	_gldAllocVertexBuffer	676	no	atomic / cache / barrier instruction; calls an import (io_connect_method_structureI_structureO)
-0x1b4b0	FUN_0001b4b0	44	yes	
+0x1b4b0	gld_updateYInvertedFlag	44	yes	
 0x1b4f0	noop_1b4f0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1b500	returnOne_1b500	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1b510	FUN_0001b510	1304	yes	
-0x1bac0	FUN_0001bac0	904	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
+0x1bac0	gld_emitFramebufferState	904	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
 0x1be50	dxt5EncodeAlphaBlock	868	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x1c1c0	dxt1DecodeColorIndex	416	yes	
 0x1c380	FUN_0001c380	3664	yes	

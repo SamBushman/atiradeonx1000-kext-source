@@ -555,7 +555,7 @@ int _gldDestroyFramebuffer(ctx, framebuffer)
   int framebuffer;
 {
   if (*(int *)(ctx + GLD_boundFramebuffer) == framebuffer) {
-    FUN_0001b4b0(ctx);
+    gld_updateYInvertedFlag(ctx);
     *(undefined4 *)(ctx + GLD_boundFramebuffer) = 0;
   }
   _free(framebuffer);
@@ -577,8 +577,8 @@ int FUN_00007d50(ctx, dispatch, dirtyBits, scratchR6, scratchR7, scratchR8)
   int iVar4;
   int *piVar5;
   int *piVar6;
-  char in_RESERVE;
-  byte in_cr0;
+  char reservation;
+  byte crField0;
   int iVar7;
   
   iVar4 = *(int *)(ctx + 0x150);
@@ -590,12 +590,12 @@ int FUN_00007d50(ctx, dispatch, dirtyBits, scratchR6, scratchR7, scratchR8)
       if (*(int *)(iVar4 + 0x4c) != 0) {
         piVar5 = (int *)(*(int *)(iVar4 + 0x4c) + 0x10);
         do {
-          if (in_RESERVE != '\0') {
+          if (reservation != '\0') {
             iVar3 = storeWordConditionalIndexed(*piVar5 + -0x10000,0,piVar5);
             *piVar5 = iVar3;
-            in_cr0 = 2;
+            crField0 = 2;
           }
-        } while (!(bool)(in_cr0 >> 1 & 1));
+        } while (!(bool)(crField0 >> 1 & 1));
       }
       iVar4 = iVar4 + 4;
       iVar7 = iVar7 + -1;
@@ -621,19 +621,19 @@ LAB_00007e28:
       if (piVar6[0x13] != 0) {
         piVar5 = (int *)(piVar6[0x13] + 0x10);
         do {
-          if (in_RESERVE != '\0') {
+          if (reservation != '\0') {
             iVar7 = storeWordConditionalIndexed(*piVar5 + 0x10000,0,piVar5);
             *piVar5 = iVar7;
-            in_cr0 = 2;
+            crField0 = 2;
           }
-        } while (!(bool)(in_cr0 >> 1 & 1));
+        } while (!(bool)(crField0 >> 1 & 1));
       }
       piVar6 = piVar6 + 1;
       iVar4 = iVar4 + -1;
     } while (iVar4 != 0);
   }
   if ((*(int *)(*(int *)(ctx + 0x18) + 0x1a0) == 0) && (bVar1)) {
-    FUN_0001b4b0(ctx);
+    gld_updateYInvertedFlag(ctx);
     return;
   }
   return;
@@ -944,7 +944,7 @@ LAB_00008798:
                 pfDisplayMask = redSize;
                 pfRendererId = FUN_00017720(depthSize);
                 pfRendererId = pfRendererId | depthSize << 0x18;
-                serviceOrNewRows = FUN_0001ae20(candidateRow,minimumPolicy,maximumPolicy);
+                serviceOrNewRows = gld_expandPixelFormatVariants(candidateRow,minimumPolicy,maximumPolicy);
                 if (serviceOrNewRows != 0) {
                   formatCount = formatCount + serviceOrNewRows;
                   newList = (int *)_malloc(formatCount * 0x34);
@@ -1324,7 +1324,7 @@ LAB_00008ad4:
         rendererInfo[5] = 0x808000;
         *(undefined1 *)((int)rendererInfo + 0x2a) = 0;
         rendererInfo[7] = 0x80;
-        FUN_0001b150(rendererInfo);
+        gld_fillMaxPixelFormat(rendererInfo);
         _IOServiceClose(connection);
         returnCode = 0;
       }
@@ -2100,9 +2100,9 @@ int FUN_0000979c(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x80 + 0x24c0;
+  *param_3 = staleArgR11 * 0x80 + 0x24c0;
   return;
 }
 
@@ -2112,9 +2112,9 @@ int FUN_000097ac(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x80 + 0x24d0;
+  *param_3 = staleArgR11 * 0x80 + 0x24d0;
   return;
 }
 
@@ -2124,9 +2124,9 @@ int FUN_000097bc(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x80 + 0x24e0;
+  *param_3 = staleArgR11 * 0x80 + 0x24e0;
   return;
 }
 
@@ -2136,9 +2136,9 @@ int FUN_000097cc(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x80 + 0x24f0;
+  *param_3 = staleArgR11 * 0x80 + 0x24f0;
   return;
 }
 
@@ -2148,9 +2148,9 @@ int FUN_000097dc(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x80 + 0x2500;
+  *param_3 = staleArgR11 * 0x80 + 0x2500;
   return;
 }
 
@@ -2160,9 +2160,9 @@ int FUN_000097ec(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x80 + 0x2510;
+  *param_3 = staleArgR11 * 0x80 + 0x2510;
   return;
 }
 
@@ -2172,9 +2172,9 @@ int FUN_000097fc(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x80 + 0x2520;
+  *param_3 = staleArgR11 * 0x80 + 0x2520;
   return;
 }
 
@@ -2232,9 +2232,9 @@ int FUN_000098c8(param_1, param_2, param_3)
   undefined4 param_2;
   int *param_3;
 {
-  int in_r11;
+  int staleArgR11;
   
-  *param_3 = in_r11 * 0x240 + 0x28c0;
+  *param_3 = staleArgR11 * 0x240 + 0x28c0;
   return;
 }
 
