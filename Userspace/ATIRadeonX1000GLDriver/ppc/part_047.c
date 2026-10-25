@@ -2504,68 +2504,71 @@ int FUN_0017a8a4(ctx)
 int ValueKey__foldDotPowerOfTwoIntoOutputScale(ctx)
   int ctx;
 {
-  bool bVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 uVar4;
-  undefined4 in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  int operandRecAddr;
+  int keyInst;
+  bool moreOperands;
+  bool notNegative;
+  int scaleCodeOrFlag;
+  int limitsOk;
+  undefined4 literalValueNumber;
+  undefined4 staleArg4;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
   int *a0;
-  int iVar5;
+  int operandRecOffset;
   int loopIndex;
   undefined4 *loopPtr2;
-  double fparam_1;
-  undefined4 local_58;
-  undefined4 local_54;
-  undefined4 local_50;
-  undefined4 local_4c;
-  float local_48 [7];
+  double absValue;
+  undefined4 unitConst0;
+  undefined4 unitConst1;
+  undefined4 unitConst2;
+  undefined4 unitConst3;
+  float laneValue [7];
   
   loopIndex = 1;
-  iVar5 = 0x98;
+  operandRecOffset = 0x98;
   loopPtr2 = (undefined4 *)(ctx + 0x214);
   do {
-    ((int (*)())FUN_00178d78)(local_48,ctx,loopIndex);
-    if ((GH_F2U(local_48[0]) != 0x7ffffffeU)) {
-      bVar1 = -1 < (int)GH_F2U(local_48[0]);
-      if (bVar1) {
-        fparam_1 = (double)local_48[0];
+    ((int (*)())FUN_00178d78)(laneValue,ctx,loopIndex);
+    if ((GH_F2U(laneValue[0]) != 0x7ffffffeU)) {
+      notNegative = -1 < (int)GH_F2U(laneValue[0]);
+      if (notNegative) {
+        absValue = (double)laneValue[0];
       }
       else {
-        fparam_1 = -(double)local_48[0];
+        absValue = -(double)laneValue[0];
       }
-      if ((fparam_1 != 1.0) && (iVar2 = ((undefined4 (*)())isOutputScaleValue)(fparam_1), iVar2 != 0)) {
-        iVar2 = ((int (*)())outputScaleExponent)(fparam_1);
+      if ((absValue != 1.0) && (scaleCodeOrFlag = ((undefined4 (*)())isOutputScaleValue)(absValue), scaleCodeOrFlag != 0)) {
+        scaleCodeOrFlag = ((int (*)())outputScaleExponent)(absValue);
         a0 = *(int **)(*(int *)(ctx + 0x238) + 0x30c);
-        iVar2 = iVar2 + *(int *)(*(int *)(ctx + 0xb0) + 0x124);
-        iVar3 = (**(code **)(*a0 + 0xfc))(a0,iVar2,*(int *)(ctx + 0xb0),in_r6,in_r7,in_r8,a0);
-        if (iVar3 != 0) {
-          local_58 = 0x3f800000;
-          local_54 = 0x3f800000;
-          local_50 = 0x3f800000;
-          local_4c = 0x3f800000;
-          uVar4 = ((int (*)())FUN_0017a130)(loopIndex,&local_58,*(undefined4 *)(ctx + 0xb0),
+        scaleCodeOrFlag = scaleCodeOrFlag + *(int *)(*(int *)(ctx + 0xb0) + 0x124);
+        limitsOk = (**(code **)(*a0 + 0xfc))(a0,scaleCodeOrFlag,*(int *)(ctx + 0xb0),staleArg4,staleArg5,staleArg6,a0);
+        if (limitsOk != 0) {
+          unitConst0 = 0x3f800000;
+          unitConst1 = 0x3f800000;
+          unitConst2 = 0x3f800000;
+          unitConst3 = 0x3f800000;
+          literalValueNumber = ((int (*)())FUN_0017a130)(loopIndex,&unitConst0,*(undefined4 *)(ctx + 0xb0),
                                *(undefined4 *)(ctx + 0x238));
-          iVar3 = *(int *)(ctx + 0xb0);
-          *loopPtr2 = uVar4;
-          *(int *)(iVar3 + 0x124) = iVar2;
-          IROperand__setModifierBits(iVar5 + *(int *)(ctx + 0xb0) + 0xc,1,0);
-          IROperand__setModifierBits(iVar5 + *(int *)(ctx + 0xb0) + 0xc,2,0);
-          if (!bVar1) {
-            iVar5 = *(int *)(ctx + 0xb0) + ((loopIndex == 1) - 1) * 0x18 + 0xb0;
-            IROperand__setModifierBits(iVar5 + 0xc,1,(*(uint *)(iVar5 + 0x20) ^ 1) & 1);
+          keyInst = *(int *)(ctx + 0xb0);
+          *loopPtr2 = literalValueNumber;
+          *(int *)(keyInst + 0x124) = scaleCodeOrFlag;
+          IROperand__setModifierBits(operandRecOffset + *(int *)(ctx + 0xb0) + 0xc,1,0);
+          IROperand__setModifierBits(operandRecOffset + *(int *)(ctx + 0xb0) + 0xc,2,0);
+          if (!notNegative) {
+            operandRecAddr = *(int *)(ctx + 0xb0) + ((loopIndex == 1) - 1) * 0x18 + 0xb0;
+            IROperand__setModifierBits(operandRecAddr + 0xc,1,(*(uint *)(operandRecAddr + 0x20) ^ 1) & 1);
           }
           ValueKey__rebuild(ctx);
           return 1;
         }
       }
     }
-    bVar1 = loopIndex != 2;
+    moreOperands = loopIndex != 2;
     loopPtr2 = loopPtr2 + 1;
-    iVar5 = iVar5 + 0x18;
+    operandRecOffset = operandRecOffset + 0x18;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
+  } while (moreOperands);
   return 0;
 }
 
