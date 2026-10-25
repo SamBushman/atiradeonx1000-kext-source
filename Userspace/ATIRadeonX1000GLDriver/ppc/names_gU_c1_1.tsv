@@ -8,6 +8,14 @@ local	FUN_000e5384	param_5	argR7	INFERRED	every one of the 3 call site(s) passes
 local	Block__isInVectorD4Of	param_1	fromBlock	INFERRED	every one of the 1 call site(s) passes a value its caller names fromBlock
 local	Block__isInVectorD4Of	param_2	toBlock	INFERRED	every one of the 1 call site(s) passes a value its caller names toBlock
 local	FUN_000eec50	param_1	program	INFERRED	every one of the 1 call site(s) passes a value its caller names program
+local	FUN_000fb3d4	param_1	program	INFERRED	every one of the 3 call site(s) passes a value its caller names program
+local	FUN_000fb3d4	param_3	tokenWords	INFERRED	every one of the 3 call site(s) passes a value its caller names tokenWords
+local	FUN_000fb3d4	param_6	argR8	INFERRED	every one of the 3 call site(s) passes a value its caller names argR8
+local	FUN_000fb3d4	param_7	movByRegisterPtr	INFERRED	callers pass &movByRegister: the address of the vector pointer
+local	FUN_000fd50c	param_1	program	INFERRED	every one of the 5 call site(s) passes a value its caller names program
+local	FUN_000fd50c	param_3	templateCursorPtr	INFERRED	callers pass &templateCursor: the address of the cursor
+local	PostLoopFooter__ctor_ea828	param_3	enclosingLoopHeader	INFERRED	every one of the 1 call site(s) passes a value its caller names enclosingLoopHeader
+local	PostLoopFooter__ctor_ea828	param_4	argR6	INFERRED	every one of the 1 call site(s) passes a value its caller names argR6
 local	Compiler__getOrCreateConstVectorN	param_1	owner	INFERRED	every one of the 4 call site(s) passes a value its caller names owner
 local	Compiler__getOrCreateConstVectorN	param_3	operandWord0	INFERRED	every one of the 4 call site(s) passes a value its caller names operandWord0
 local	Compiler__getOrCreateConstVectorN	param_4	operandWord1	INFERRED	every one of the 4 call site(s) passes a value its caller names operandWord1
@@ -22,16 +30,8 @@ local	FUN_000ec728	param_1	program	INFERRED	every one of the 1 call site(s) pass
 local	FUN_000e43ec	param_1	ilReader	INFERRED	every one of the 1 call site(s) passes a value its caller names ilReader
 local	FUN_000ec27c	param_1	program	INFERRED	every one of the 4 call site(s) passes a value its caller names program
 local	IRInst__makeLiteralVec4Int	param_2	program	INFERRED	every one of the 2 call site(s) passes a value its caller names program
-local	FUN_000fb3d4	param_1	program	INFERRED	every one of the 3 call site(s) passes a value its caller names program
-local	FUN_000fb3d4	param_3	tokenWords	INFERRED	every one of the 3 call site(s) passes a value its caller names tokenWords
-local	FUN_000fb3d4	param_6	argR8	INFERRED	every one of the 3 call site(s) passes a value its caller names argR8
-local	FUN_000fb3d4	param_7	movByRegisterPtr	INFERRED	callers pass &movByRegister: the address of the vector pointer
 local	FUN_000f8980	param_1	ilOpcode	INFERRED	every one of the 1 call site(s) passes a value its caller names ilOpcode
 local	FUN_000e47f4	param_1	ilReader	INFERRED	every one of the 3 call site(s) passes a value its caller names ilReader
-local	FUN_000fd50c	param_1	program	INFERRED	every one of the 5 call site(s) passes a value its caller names program
-local	FUN_000fd50c	param_3	templateCursorPtr	INFERRED	callers pass &templateCursor: the address of the cursor
-local	PostLoopFooter__ctor_ea828	param_3	enclosingLoopHeader	INFERRED	every one of the 1 call site(s) passes a value its caller names enclosingLoopHeader
-local	PostLoopFooter__ctor_ea828	param_4	argR6	INFERRED	every one of the 1 call site(s) passes a value its caller names argR6
 local	FUN_000f9140	param_1	program	INFERRED	every one of the 2 call site(s) passes a value its caller names program
 local	FUN_000f9140	param_2	ilOpcode	INFERRED	every one of the 2 call site(s) passes a value its caller names ilOpcode
 local	FUN_000f5248	param_2	constVec0	INFERRED	every one of the 1 call site(s) passes a value its caller names constVec0

@@ -1359,6 +1359,8 @@ LAB_0013b3c4:
 int Program__hoistFetchInsts(param_1)
   int param_1;
 {
+  undefined4 vectorData;
+  undefined4 arena;
   undefined4 *vectorAlloc;
   uint loopIndex3;
   undefined *puVar1;
@@ -1381,7 +1383,7 @@ int Program__hoistFetchInsts(param_1)
   int loopIndex2;
   int *piVar19;
   int *piVar20;
-  undefined4 arena;
+  undefined4 uVar21;
   int *piVar22;
   int iVar23;
   uint uVar24;
@@ -1400,8 +1402,8 @@ int Program__hoistFetchInsts(param_1)
   allocation[1] = 2;
   allocation[2] = 0;
   allocation[4] = arena;
-  arena = Arena__alloc(arena,8);
-  allocation[3] = arena;
+  vectorData = Arena__alloc(arena,8);
+  allocation[3] = vectorData;
   iVar23 = *(int *)(param_1 + 900);
   for (iVar4 = *(int *)(*(int *)(param_1 + 900) + 8); iVar4 != 0; iVar4 = *(int *)(iVar4 + 8)) {
     if (iVar23 != iVar15) {
@@ -1570,9 +1572,9 @@ code_r0x0013ba08:
   vectorAlloc[1] = 2;
   vectorAlloc[2] = 0;
   vectorAlloc[4] = arena;
-  arena = Arena__alloc(arena,8);
-  vectorAlloc[3] = arena;
-  arena = IRInst__getOperandSource(iVar23,1);
+  vectorData = Arena__alloc(arena,8);
+  vectorAlloc[3] = vectorData;
+  uVar21 = IRInst__getOperandSource(iVar23,1);
   uVar24 = vectorAlloc[2];
   if (uVar24 < (uint)vectorAlloc[1]) {
     _memset((void *)(uVar24 * 4 + vectorAlloc[3]),0,4);
@@ -1582,7 +1584,7 @@ code_r0x0013ba08:
   else {
     puVar10 = (undefined4 *)Vector__elementRefGrow(puVar17,uVar24);
   }
-  *puVar10 = arena;
+  *puVar10 = uVar21;
   uVar24 = vectorAlloc[2];
   if (uVar24 != 0) {
     uVar11 = 0;
@@ -1640,7 +1642,7 @@ code_r0x0013ba08:
             Block__prependInst(piVar22,piVar20);
             for (iVar23 = 1; iVar4 = (**(code **)(*piVar20 + 0x14))(piVar20), iVar23 < iVar4;
                 iVar23 = iVar23 + 1) {
-              arena = IRInst__getOperandSource(piVar20,iVar23);
+              uVar21 = IRInst__getOperandSource(piVar20,iVar23);
               uVar24 = vectorAlloc[2];
               if (uVar24 < *puVar17) {
                 _memset((void *)(uVar24 * 4 + vectorAlloc[3]),0,4);
@@ -1650,7 +1652,7 @@ code_r0x0013ba08:
               else {
                 puVar10 = (undefined4 *)Vector__elementRefGrow(puVar17,uVar24);
               }
-              *puVar10 = arena;
+              *puVar10 = uVar21;
             }
           }
         }
@@ -2739,6 +2741,9 @@ int FUN_0013d820(inst, param_2)
 int FUN_0013da3c(program)
   int program;
 {
+  undefined4 *allocation;
+  undefined4 vectorData;
+  undefined4 arena;
   int flagBit8Result;
   int cloneResult;
   int instFlagBit2Result;
@@ -2759,7 +2764,7 @@ int FUN_0013da3c(program)
   uint uVar6;
   int *piVar7;
   int iVar8;
-  undefined4 *allocation;
+  undefined4 *puVar9;
   int disjointSetFindRootResult;
   int iVar11;
   int iVar12;
@@ -2769,7 +2774,7 @@ int FUN_0013da3c(program)
   int iVar16;
   int iVar17;
   int iVar18;
-  undefined4 arena;
+  undefined4 uVar19;
   int *piVar20;
   uint *puVar21;
   uint uVar22;
@@ -2780,13 +2785,13 @@ int FUN_0013da3c(program)
   undefined4 local_c0;
   undefined4 local_bc;
   int local_b8;
-  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with Vector__elementRefGrow - vecCapacity/vecCount/vecData/vecArena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
+  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/uVar19) used with Vector__elementRefGrow - vecCapacity/vecCount/vecData/vecArena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
   unsigned char local_b4_buf [0x10];
   #define vecCapacity (*(uint *)(local_b4_buf + 0x00))
   #define vecCount (*(uint *)(local_b4_buf + 0x04))
   #define vecData (*(int *)(local_b4_buf + 0x08))
   #define vecArena (*(undefined4 *)(local_b4_buf + 0x0c))
-  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with Vector__elementRefGrow - vec2Capacity/vec2Count/vec2Data/vec2Arena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
+  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/uVar19) used with Vector__elementRefGrow - vec2Capacity/vec2Count/vec2Data/vec2Arena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
   unsigned char local_a4_buf [0x10];
   #define vec2Capacity (*(undefined4 *)(local_a4_buf + 0x00))
   #define vec2Count (*(uint *)(local_a4_buf + 0x04))
@@ -2840,13 +2845,13 @@ int FUN_0013da3c(program)
     }
     while (vec2Count != 0) {
       uVar6 = vec2Count - 1;
-      allocation = (undefined4 *)0x0;
+      puVar9 = (undefined4 *)0x0;
       if (uVar6 < vec2Count) {
-        allocation = (undefined4 *)(uVar6 * 4 + vec2Data);
+        puVar9 = (undefined4 *)(uVar6 * 4 + vec2Data);
       }
-      arena = *allocation;
+      uVar19 = *puVar9;
       Vector__removeAt(&vec2Capacity,uVar6);
-      Program__removeInst(program,arena);
+      Program__removeInst(program,uVar19);
     }
   }
   else {
@@ -2879,13 +2884,13 @@ int FUN_0013da3c(program)
     }
     while (vec2Count != 0) {
       uVar6 = vec2Count - 1;
-      allocation = (undefined4 *)0x0;
+      puVar9 = (undefined4 *)0x0;
       if (uVar6 < vec2Count) {
-        allocation = (undefined4 *)(uVar6 * 4 + vec2Data);
+        puVar9 = (undefined4 *)(uVar6 * 4 + vec2Data);
       }
-      arena = *allocation;
+      uVar19 = *puVar9;
       Vector__removeAt(&vec2Capacity,uVar6);
-      Program__removeInst(program,arena);
+      Program__removeInst(program,uVar19);
     }
   }
   Arena__free(vec2Arena,vec2Data);
@@ -2920,8 +2925,8 @@ LAB_0013dcf0:
           allocation[1] = 2;
           allocation[2] = 0;
           allocation[4] = arena;
-          arena = Arena__alloc(arena,8);
-          allocation[3] = arena;
+          vectorData = Arena__alloc(arena,8);
+          allocation[3] = vectorData;
           piVar15 = (int *)piVar20[2];
           piVar20[4] = (int)(allocation + 1);
         }
@@ -3076,13 +3081,13 @@ LAB_0013dcf0:
                                 uVar6 = puVar21[1];
                                 if (uVar6 < *puVar21) {
                                   _memset(uVar6 * 4 + puVar21[2],0,4);
-                                  allocation = (undefined4 *)(uVar6 * 4 + puVar21[2]);
+                                  puVar9 = (undefined4 *)(uVar6 * 4 + puVar21[2]);
                                   puVar21[1] = uVar6 + 1;
                                 }
                                 else {
-                                  allocation = (undefined4 *)Vector__elementRefGrow(puVar21,uVar6);
+                                  puVar9 = (undefined4 *)Vector__elementRefGrow(puVar21,uVar6);
                                 }
-                                *allocation = piVar20;
+                                *puVar9 = piVar20;
                               }
                               ((int (*)())IRInst__markOpcode13After12)(piVar7,piVar20);
                               goto code_r0x0013e80c;
@@ -3091,32 +3096,32 @@ LAB_0013dcf0:
                             uVar6 = puVar21[1];
                             if (uVar6 < *puVar21) {
                               _memset(uVar6 * 4 + puVar21[2],0,4);
-                              allocation = (undefined4 *)(uVar6 * 4 + puVar21[2]);
+                              puVar9 = (undefined4 *)(uVar6 * 4 + puVar21[2]);
                               puVar21[1] = uVar6 + 1;
                             }
                             else {
-                              allocation = (undefined4 *)Vector__elementRefGrow(puVar21,uVar6);
+                              puVar9 = (undefined4 *)Vector__elementRefGrow(puVar21,uVar6);
                             }
-                            *allocation = piVar20;
+                            *puVar9 = piVar20;
                           }
                         }
                         else {
                           isProjectionOfClass26or3a = IRInst__isProjectionOfClass26or3a(piVar20);
-                          arena = DAT_001b0004;
+                          uVar19 = DAT_001b0004;
                           if (isProjectionOfClass26or3a != 0) {
-                            arena = DAT_001b001c;
+                            uVar19 = DAT_001b001c;
                           }
                           instFlagBit2Result = OpcodeTraits__instFlagBit2(*(undefined4 *)(program + PROG_compiler),piVar20);
                           if (instFlagBit2Result != 0) {
                             if (iVar11 == 1) {
-                              allocation = &UNK_001b0018;
+                              puVar9 = &UNK_001b0018;
                             }
                             else {
-                              allocation = &DAT_001b001c;
+                              puVar9 = &DAT_001b001c;
                             }
-                            arena = *allocation;
+                            uVar19 = *puVar9;
                           }
-                          SelectWord__maskUnused(&local_68,arena,uVar6);
+                          SelectWord__maskUnused(&local_68,uVar19,uVar6);
                           iVar12 = local_68;
                           sourceDef = IRInst__getOperandSource(piVar20,iVar11);
                           puVar21 = *(uint **)(sourceDef + 0x10);
@@ -3128,20 +3133,20 @@ LAB_0013dcf0:
                             allocation[1] = 2;
                             allocation[2] = 0;
                             allocation[4] = arena;
-                            arena = Arena__alloc(arena,8);
-                            allocation[3] = arena;
+                            vectorData = Arena__alloc(arena,8);
+                            allocation[3] = vectorData;
                             *(uint **)(sourceDef + 0x10) = puVar21;
                           }
                           uVar6 = puVar21[1];
                           if (uVar6 < *puVar21) {
                             _memset(uVar6 * 4 + puVar21[2],0,4);
-                            allocation = (undefined4 *)(uVar6 * 4 + puVar21[2]);
+                            puVar9 = (undefined4 *)(uVar6 * 4 + puVar21[2]);
                             puVar21[1] = uVar6 + 1;
                           }
                           else {
-                            allocation = (undefined4 *)Vector__elementRefGrow(puVar21,uVar6);
+                            puVar9 = (undefined4 *)Vector__elementRefGrow(puVar21,uVar6);
                           }
-                          *allocation = piVar20;
+                          *puVar9 = piVar20;
 code_r0x0013e80c:
                           operandRecord = IRInst__getOperandRecord(piVar20,iVar11);
                           if (iVar12 != *(int *)(operandRecord + 0x10)) {
@@ -3229,13 +3234,13 @@ code_r0x0013e80c:
                       uVar6 = puVar21[1];
                       if (uVar6 < *puVar21) {
                         _memset(uVar6 * 4 + puVar21[2],0,4);
-                        allocation = (undefined4 *)(uVar6 * 4 + puVar21[2]);
+                        puVar9 = (undefined4 *)(uVar6 * 4 + puVar21[2]);
                         puVar21[1] = uVar6 + 1;
                       }
                       else {
-                        allocation = (undefined4 *)Vector__elementRefGrow(puVar21,uVar6);
+                        puVar9 = (undefined4 *)Vector__elementRefGrow(puVar21,uVar6);
                       }
-                      *allocation = piVar20;
+                      *puVar9 = piVar20;
                       *(uint *)(iVar17 + 0x14) = *(uint *)(iVar17 + 0x14) | 0x400000;
                     }
                   }
@@ -3250,8 +3255,8 @@ code_r0x0013e80c:
                     allocation[1] = 2;
                     allocation[2] = 0;
                     allocation[4] = arena;
-                    arena = Arena__alloc(arena,8);
-                    allocation[3] = arena;
+                    vectorData = Arena__alloc(arena,8);
+                    allocation[3] = vectorData;
                     *(undefined4 **)(cloneResult + 0x10) = allocation + 1;
                     Block__insertInstBefore(iVar14,piVar20,cloneResult);
                     iVar17 = piVar20[4];
@@ -3261,8 +3266,8 @@ code_r0x0013e80c:
                     piVar20[0x25] = piVar20[0x53];
                     piVar20[0x26] = 0;
                     IRInst__setOperandSource(piVar20,1,cloneResult,0,*(undefined4 *)(program + PROG_compiler));
-                    arena = IRInst__getOperandSource(cloneResult,*(undefined4 *)(cloneResult + 0x84));
-                    IRInst__setExtraOperandSource(piVar20,arena,0,*(undefined4 *)(program + PROG_compiler));
+                    uVar19 = IRInst__getOperandSource(cloneResult,*(undefined4 *)(cloneResult + 0x84));
+                    IRInst__setExtraOperandSource(piVar20,uVar19,0,*(undefined4 *)(program + PROG_compiler));
                     iVar17 = DAT_001b0000;
                     if (piVar20[0x21] == 0) {
                       piVar20[0x27] = DAT_001b0000;
@@ -3275,13 +3280,13 @@ code_r0x0013e80c:
                     uVar6 = puVar21[1];
                     if (uVar6 < *puVar21) {
                       _memset(uVar6 * 4 + puVar21[2],0,4);
-                      allocation = (undefined4 *)(uVar6 * 4 + puVar21[2]);
+                      puVar9 = (undefined4 *)(uVar6 * 4 + puVar21[2]);
                       puVar21[1] = uVar6 + 1;
                     }
                     else {
-                      allocation = (undefined4 *)Vector__elementRefGrow(puVar21,uVar6);
+                      puVar9 = (undefined4 *)Vector__elementRefGrow(puVar21,uVar6);
                     }
-                    *allocation = piVar20;
+                    *puVar9 = piVar20;
                     IRInst__setOperandSource(cloneResult,*(undefined4 *)(cloneResult + 0x84),0,0,
                                  *(undefined4 *)(program + PROG_compiler));
                     iVar17 = *(int *)(cloneResult + 0x84) + -1;
@@ -3401,12 +3406,12 @@ code_r0x0013e80c:
                   iVar8 = vecCount * 4;
                   _memset(iVar8 + vecData,0,4);
                   vecCount = uVar6 + 1;
-                  allocation = (undefined4 *)(iVar8 + vecData);
+                  puVar9 = (undefined4 *)(iVar8 + vecData);
                 }
                 else {
-                  allocation = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
+                  puVar9 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
                 }
-                *allocation = piVar7;
+                *puVar9 = piVar7;
               }
               if (((((piVar7[0x20] != 0) && (iVar8 = RegKind__flagBit0(piVar7[0x26]), iVar8 != 0)) &&
                    ((piVar7[5] & 2U) == 0)) &&
@@ -3427,13 +3432,13 @@ code_r0x0013f320:
                       if (vecCount < vecCapacity) {
                         iVar23 = vecCount * 4;
                         _memset(iVar23 + vecData,0,4);
-                        allocation = (undefined4 *)(iVar23 + vecData);
+                        puVar9 = (undefined4 *)(iVar23 + vecData);
                         vecCount = uVar6 + 1;
                       }
                       else {
-                        allocation = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
+                        puVar9 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
                       }
-                      *allocation = piVar20;
+                      *puVar9 = piVar20;
                     }
                     vec2Capacity = piVar20[3];
                     if ((*(char *)((int)&local_c0 + iVar8) != '\0') &&
@@ -3467,17 +3472,17 @@ code_r0x0013f320:
         } while( true );
       }
       uVar6 = vecCount - 1;
-      allocation = (undefined4 *)0x0;
+      puVar9 = (undefined4 *)0x0;
       if (uVar6 < vecCount) {
-        allocation = (undefined4 *)(uVar6 * 4 + vecData);
+        puVar9 = (undefined4 *)(uVar6 * 4 + vecData);
       }
-      piVar7 = (int *)*allocation;
+      piVar7 = (int *)*puVar9;
       Vector__removeAt(&vecCapacity,uVar6);
       iVar14 = (**(code **)(*piVar7 + 0x30))(piVar7);
       if (((iVar14 != 0) && (-1 < piVar7[0x4d])) &&
          (*(int *)(piVar7[0x4d] * 0xc + *(int *)(program + 0x78) + 4) - 10U < 2)) {
-        arena = IRInst__getOperandSource(piVar7,1);
-        piVar20 = (int *)FUN_001382b8(arena,3,&local_b8);
+        uVar19 = IRInst__getOperandSource(piVar7,1);
+        piVar20 = (int *)FUN_001382b8(uVar19,3,&local_b8);
         if ((piVar20 != (int *)0x0) && (iVar14 = (**(code **)(*piVar20 + 0x50))(), iVar14 != 0)) {
           (**(code **)(*piVar7 + 0x88))(piVar7,1,3,4);
         }
@@ -3601,12 +3606,12 @@ code_r0x0013e0ac:
                 iVar23 = vecCount * 4;
                 _memset(iVar23 + vecData,0,4);
                 vecCount = uVar22 + 1;
-                allocation = (undefined4 *)(iVar23 + vecData);
+                puVar9 = (undefined4 *)(iVar23 + vecData);
               }
               else {
-                allocation = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
+                puVar9 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
               }
-              *allocation = operandVReg;
+              *puVar9 = operandVReg;
             }
             if (bVar1) break;
             iVar23 = IRInst__isProjectionOfOpcode2a(operandVReg);
@@ -3640,9 +3645,9 @@ code_r0x0013e0ac:
 #undef vecArena
 
 /* FUN_0013f3d4 @ 0x13f3d4 (2148 bytes) */
-int FUN_0013f3d4(inst, param_2)
+int FUN_0013f3d4(inst, program)
   int *inst;
-  int param_2;
+  int program;
 {
   undefined4 sourceDef4;
   int sourceDef3;
@@ -3744,7 +3749,7 @@ int FUN_0013f3d4(inst, param_2)
         SelectWord__mergeWrittenLanes(local_38,local_48,*(undefined4 *)(operandRecord2 + 0x10));
         inst[0x27] = local_38[0];
         local_48 = local_38[0];
-        piVar9 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,local_38[0],iVar6,param_2,*(undefined4 *)(param_2 + 8),
+        piVar9 = (int *)((int (*)())IRInst__createWithConstantOperands)(2,local_38[0],iVar6,program,*(undefined4 *)(program + 8),
                                      (double)FLOAT_001aa0d4);
         do {
           if (*(char *)((int)&local_48 + iVar13) == '\0') {
@@ -3773,7 +3778,7 @@ int FUN_0013f3d4(inst, param_2)
           bVar1 = iVar13 != 3;
           iVar13 = iVar13 + 1;
         } while (bVar1);
-        IRInst__setOperandSource(inst,uVar14,piVar9,1,*(undefined4 *)(param_2 + 8));
+        IRInst__setOperandSource(inst,uVar14,piVar9,1,*(undefined4 *)(program + 8));
         Block__insertInstBefore(inst[0x56],inst,piVar9);
         if (((inst[5] & 0x200U) == 0) || ((piVar4[5] & 0x200U) != 0)) {
           if (((inst[5] & 0x200U) == 0) || ((piVar4[5] & 0x200U) == 0)) {
@@ -3800,13 +3805,13 @@ int FUN_0013f3d4(inst, param_2)
                     iVar7 = iVar7 + 1) {
                   operandVReg = (int *)IRInst__getOperandSource(piVar9,iVar7);
                   if (piVar4 == operandVReg) {
-                    IRInst__setOperandSource(piVar9,iVar7,inst,1,*(undefined4 *)(param_2 + 8));
+                    IRInst__setOperandSource(piVar9,iVar7,inst,1,*(undefined4 *)(program + 8));
                     goto LAB_0013fad0;
                   }
                 }
                 if (((piVar9[5] & 0x200U) != 0) &&
                    (operandVReg = (int *)IRInst__getOperandSource(piVar9,piVar9[0x21]), piVar4 == operandVReg)) {
-                  IRInst__setExtraOperandSource(piVar9,inst,1,*(undefined4 *)(param_2 + 8));
+                  IRInst__setExtraOperandSource(piVar9,inst,1,*(undefined4 *)(program + 8));
                 }
 LAB_0013fad0:
                 loopIndex2 = loopIndex2 + 1;
@@ -3816,7 +3821,7 @@ LAB_0013fad0:
                 puVar19 = (uint *)piVar4[4];
               } while( true );
             }
-            uVar14 = *(undefined4 *)(param_2 + 8);
+            uVar14 = *(undefined4 *)(program + 8);
             sourceDef = IRInst__getOperandSource(piVar4,piVar4[0x21]);
             puVar19 = *(uint **)(sourceDef + 0x10);
             uVar3 = puVar19[1];
@@ -3859,7 +3864,7 @@ LAB_0013fad0:
               bVar1 = iVar7 != 3;
               iVar7 = iVar7 + 1;
             } while (bVar1);
-            uVar14 = *(undefined4 *)(param_2 + 8);
+            uVar14 = *(undefined4 *)(program + 8);
             sourceDef = IRInst__getOperandSource(inst,inst[0x21]);
             puVar19 = *(uint **)(sourceDef + 0x10);
             uVar3 = puVar19[1];
@@ -3892,7 +3897,7 @@ LAB_0013fad0:
             inst[5] = inst[5] & 0xfffffdff;
             if (bVar1) {
               sourceDef4 = IRInst__getOperandSource(piVar4,piVar4[0x21]);
-              IRInst__setExtraOperandSource(inst,sourceDef4,1,*(undefined4 *)(param_2 + 8));
+              IRInst__setExtraOperandSource(inst,sourceDef4,1,*(undefined4 *)(program + 8));
               iVar6 = local_40[0];
               if (inst[0x21] == 0) {
                 inst[0x27] = local_40[0];
@@ -3905,7 +3910,7 @@ LAB_0013fad0:
           }
         }
         else {
-          uVar14 = *(undefined4 *)(param_2 + 8);
+          uVar14 = *(undefined4 *)(program + 8);
           sourceDef = IRInst__getOperandSource(inst,inst[0x21]);
           puVar19 = *(uint **)(sourceDef + 0x10);
           uVar3 = puVar19[1];
@@ -3937,7 +3942,7 @@ LAB_0013fad0:
           inst[5] = inst[5] & 0xfffffdff;
         }
         if (*(int *)(piVar4[4] + 4) == 0) {
-          (**(code **)(*piVar4 + 0xc))(piVar4,1,*(undefined4 *)(param_2 + 8));
+          (**(code **)(*piVar4 + 0xc))(piVar4,1,*(undefined4 *)(program + 8));
         }
         if (bVar16 == false) {
           inst[5] = inst[5] | 0x400000;
@@ -3954,6 +3959,8 @@ LAB_0013fad0:
 int FUN_0013fc38(pass)
   int pass;
 {
+  undefined4 vectorData;
+  undefined4 arena;
   int sourceDef;
   int operandRecord;
   int operandRecord2;
@@ -3994,13 +4001,13 @@ int FUN_0013fc38(pass)
   int *piVar31;
   uint uVar32;
   undefined4 uVar33;
-  undefined4 arena;
+  undefined4 uVar34;
   uint uVar35;
   undefined4 local_88;
   uint local_84;
   undefined4 local_80;
   undefined4 local_7c;
-  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with Vector__elementRefGrow - vecCapacity/vecCount/vecData/vecArena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
+  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/uVar34) used with Vector__elementRefGrow - vecCapacity/vecCount/vecData/vecArena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
   unsigned char local_78_buf [0x10];
   #define vecCapacity (*(uint *)(local_78_buf + 0x00))
   #define vecCount (*(uint *)(local_78_buf + 0x04))
@@ -4021,16 +4028,16 @@ int FUN_0013fc38(pass)
   allocation[1] = 2;
   allocation[4] = arena;
   allocation[2] = 0;
-  arena = Arena__alloc(arena,8);
-  allocation[3] = arena;
+  vectorData = Arena__alloc(arena,8);
+  allocation[3] = vectorData;
   arena = *(undefined4 *)(*(int *)(pass + 8) + 0x378);
   vectorAlloc = (undefined4 *)Arena__alloc(arena,0x14);
   *vectorAlloc = arena;
   vectorAlloc[1] = 2;
   vectorAlloc[4] = arena;
   vectorAlloc[2] = 0;
-  arena = Arena__alloc(arena,8);
-  vectorAlloc[3] = arena;
+  vectorData = Arena__alloc(arena,8);
+  vectorAlloc[3] = vectorData;
   vecArena = *(undefined4 *)(*(int *)(pass + 8) + 0x378);
   vecCount = 0;
   vecCapacity = 2;
@@ -4111,7 +4118,7 @@ LAB_0013fe30:
               } while (uVar26 < uVar32);
             }
 LAB_0013ff84:
-            arena = ((int (*)())FUN_0013a644)(piVar11);
+            uVar34 = ((int (*)())FUN_0013a644)(piVar11);
             uVar32 = allocation[2];
             if (uVar32 < *puVar28) {
               _memset(uVar32 * 4 + allocation[3],0,4);
@@ -4131,7 +4138,7 @@ LAB_0013ff84:
             else {
               puVar12 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
             }
-            *puVar12 = arena;
+            *puVar12 = uVar34;
             piVar5 = (int *)piVar11[2];
             goto LAB_00140024;
           }
@@ -4286,7 +4293,7 @@ LAB_00140128:
             uVar35 = 0;
             puVar12 = &local_88;
             *(int *)(pass + 0x278) = *(int *)(pass + 0x278) + 1;
-            arena = 0;
+            uVar34 = 0;
             do {
               if ((((int)(uVar26 & uVar29) >> (uVar35 & 0x3f) & 1U) != 0) && ((int)uVar18 < 4)) {
                 uVar24 = uVar18;
@@ -4427,7 +4434,7 @@ LAB_001405bc:
                               (piVar11,iVar9,iVar21,
                                (uint)*(byte *)((int)&local_7c +
                                               (uint)*(byte *)((int)&local_84 + iVar21)),puVar12,
-                               arena,(int)&local_88 + (uint)*(byte *)((int)&local_84 + iVar21));
+                               uVar34,(int)&local_88 + (uint)*(byte *)((int)&local_84 + iVar21));
                   }
                   else {
                     (**(code **)(*piVar11 + 0x88))(piVar11,iVar9,3,4);

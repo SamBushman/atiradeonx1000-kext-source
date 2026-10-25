@@ -106,6 +106,9 @@ local	FUN_0010bd50	fparam_1	value	INFERRED
 local	FUN_0010bd50	piVar1	elementRef	INFERRED	element 0 of the register's definition vector
 local	FUN_0010bd50	iVar5	defInst	INFERRED	the defining instruction taken from the vector
 local	FUN_0010bd50	puVar6	valueKey	INFERRED	the 0x240-byte ValueKey (allocation+1)
+use	FUN_0010bd50	iVar3	vreg	INFERRED	the operand's virtual register	^\s*iVar3\ =\ \*\(int\ \*\)\(param_3\ \*\ 0x18\ \+\ param_1\ \+\ 0x8c\);$	+2
+use	FUN_0010bd50	iVar3	vreg	INFERRED	the operand's virtual register	^\s*if\ \(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x2c\)\ \+\ 4\)\ ==\ 0\)\ \{$	+1
+use	FUN_0010bd50	iVar3	vreg	INFERRED	the operand's virtual register	^\s*FUN_00123424\(iVar3,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar5\ \+\ 0x158\)\ \+\ 0xb0\),puVar6\);$	+1
 use	IRInst__swapOperands	iVar1	vslotArgA	INFERRED	operandA passed through the virtual call	^\s*iVar1\ =\ param_2;$	+1
 use	IRInst__swapOperands	iVar1	vslotArgA	INFERRED	operandA passed through the virtual call	^\s*iVar1\ =\ extraout_r4;$	+1
 use	IRInst__swapOperands	iVar1	vslotArgA	INFERRED	operandA passed through the virtual call	^\s*\(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x14\)\)\(param_1,iVar1,iVar2,param_4\);$	+1
@@ -135,6 +138,3 @@ use	IRInst__isOperandConstZero	iVar3	operandRecord2	INFERRED	operand record	^\s*
 use	FUN_0010bc78	iVar3	operandCount	INFERRED	virtual slot 0x14	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x14\)\)\(param_1\);$	+1
 use	FUN_0010bc78	iVar3	operandCount	INFERRED	virtual slot 0x14	^\s*if\ \(1\ <\ iVar3\)\ \{$	+1
 use	FUN_0010bc78	iVar3	operandCount	INFERRED	virtual slot 0x14	^\s*if\ \(2\ <\ iVar3\)\ \{$	+1
-use	FUN_0010bd50	iVar3	vreg	INFERRED	the operand's virtual register	^\s*iVar3\ =\ \*\(int\ \*\)\(param_3\ \*\ 0x18\ \+\ param_1\ \+\ 0x8c\);$	+2
-use	FUN_0010bd50	iVar3	vreg	INFERRED	the operand's virtual register	^\s*if\ \(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x2c\)\ \+\ 4\)\ ==\ 0\)\ \{$	+1
-use	FUN_0010bd50	iVar3	vreg	INFERRED	the operand's virtual register	^\s*FUN_00123424\(iVar3,\*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar5\ \+\ 0x158\)\ \+\ 0xb0\),puVar6\);$	+1

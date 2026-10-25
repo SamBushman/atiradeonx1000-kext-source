@@ -70,10 +70,11 @@ int ExportSlot__ctor_12622c(this, param_2, param_3, param_4, compiler)
   undefined4 param_4;
   int compiler;
 {
+  undefined4 arena;
   undefined4 *allocation;
   int operandRecord;
   undefined4 *puVar3;
-  undefined4 arena;
+  undefined4 uVar4;
   
   VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
   this[4] = param_2;
@@ -89,9 +90,9 @@ int ExportSlot__ctor_12622c(this, param_2, param_3, param_4, compiler)
     IRInst__setOperandRef(puVar3,0,this);
     FUN_0012306c(this,puVar3);
     IRInst__setOperandRef(puVar3,1,this);
-    arena = DAT_001afeec;
+    uVar4 = DAT_001afeec;
     operandRecord = IRInst__getOperandRecord(puVar3,1);
-    *(undefined4 *)(operandRecord + 0x10) = arena;
+    *(undefined4 *)(operandRecord + 0x10) = uVar4;
     VReg__addUse(this,1,puVar3);
     Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),puVar3);
     Block__appendInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a8),puVar3);
@@ -107,10 +108,11 @@ int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
   undefined4 param_4;
   int compiler;
 {
+  undefined4 arena;
   undefined4 *allocation;
   int operandRecord;
   undefined4 *puVar3;
-  undefined4 arena;
+  undefined4 uVar4;
   
   VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
   this[4] = param_2;
@@ -126,9 +128,9 @@ int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
     IRInst__setOperandRef(puVar3,0,this);
     FUN_0012306c(this,puVar3);
     IRInst__setOperandRef(puVar3,1,this);
-    arena = DAT_001afeec;
+    uVar4 = DAT_001afeec;
     operandRecord = IRInst__getOperandRecord(puVar3,1);
-    *(undefined4 *)(operandRecord + 0x10) = arena;
+    *(undefined4 *)(operandRecord + 0x10) = uVar4;
     VReg__addUse(this,1,puVar3);
     Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),puVar3);
     Block__appendInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a8),puVar3);

@@ -1384,15 +1384,15 @@ int FUN_00193c00(param_1, param_2)
 }
 
 /* Arena__free @ 0x193cc0 (88 bytes) */
-int Arena__free(arena, ptr)
-  int arena;
+int Arena__free(param_1, ptr)
+  int param_1;
   int ptr;
 {
   int lastAllocation;
   
-  if ((*(int *)(arena + 0x28) != 0) && (lastAllocation = *(int *)(arena + 0x14), lastAllocation == ptr)) {
-    _memset(lastAllocation,0,*(int *)(arena + 8) - lastAllocation);
-    *(undefined4 *)(arena + 8) = *(undefined4 *)(arena + 0x14);
+  if ((*(int *)(param_1 + 0x28) != 0) && (lastAllocation = *(int *)(param_1 + 0x14), lastAllocation == ptr)) {
+    _memset(lastAllocation,0,*(int *)(param_1 + 8) - lastAllocation);
+    *(undefined4 *)(param_1 + 8) = *(undefined4 *)(param_1 + 0x14);
   }
   return;
 }
@@ -1419,8 +1419,8 @@ int List__freeAllNodes(list)
 }
 
 /* Arena__grow @ 0x193d98 (128 bytes) */
-int Arena__grow(arena, param_2)
-  undefined4 *arena;
+int Arena__grow(param_1, param_2)
+  undefined4 *param_1;
   int param_2;
 {
   undefined *puVar1;
@@ -1434,33 +1434,33 @@ int Arena__grow(arena, param_2)
   if (0x2fd7 < (int)puVar1) {
     puVar4 = puVar1;
   }
-  uVar5 = arena[1];
-  puVar2 = (undefined4 *)Compiler__allocateOrFail(*arena,(uint)(puVar4 + 8));
-  arena[1] = puVar2;
+  uVar5 = param_1[1];
+  puVar2 = (undefined4 *)Compiler__allocateOrFail(*param_1,(uint)(puVar4 + 8));
+  param_1[1] = puVar2;
   *puVar2 = uVar5;
-  *(undefined **)(arena[1] + 4) = puVar4 + 8;
-  iVar3 = arena[1] + 8;
-  arena[5] = iVar3;
-  arena[4] = puVar4 + arena[1] + 8;
-  arena[2] = iVar3;
+  *(undefined **)(param_1[1] + 4) = puVar4 + 8;
+  iVar3 = param_1[1] + 8;
+  param_1[5] = iVar3;
+  param_1[4] = puVar4 + param_1[1] + 8;
+  param_1[2] = iVar3;
   return;
 }
 
 /* Arena__alloc @ 0x193e18 (92 bytes) */
-int Arena__alloc(arena, size)
-  int arena;
+int Arena__alloc(param_1, size)
+  int param_1;
   int size;
 {
   uint alignedSize;
   int result;
   
   alignedSize = size + 3U & 0xfffffffc;
-  if (*(uint *)(arena + 0x10) < alignedSize + *(int *)(arena + 8)) {
-    ((int (*)())Arena__grow)(arena,alignedSize);
+  if (*(uint *)(param_1 + 0x10) < alignedSize + *(int *)(param_1 + 8)) {
+    ((int (*)())Arena__grow)(param_1,alignedSize);
   }
-  result = *(int *)(arena + 8);
-  *(int *)(arena + 0x14) = result;
-  *(uint *)(arena + 8) = alignedSize + result;
+  result = *(int *)(param_1 + 8);
+  *(int *)(param_1 + 0x14) = result;
+  *(uint *)(param_1 + 8) = alignedSize + result;
   return result;
 }
 

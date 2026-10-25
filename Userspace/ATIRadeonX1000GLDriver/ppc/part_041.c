@@ -9,6 +9,7 @@ int FUN_001315f8(param_1, inst, newSource, param_4, beforeInst, block)
   undefined4 beforeInst;
   int block;
 {
+  undefined4 arena;
   int newInst;
   int loopIndex;
   uint *puVar1;
@@ -17,7 +18,7 @@ int FUN_001315f8(param_1, inst, newSource, param_4, beforeInst, block)
   int iVar4;
   int iVar5;
   int *piVar6;
-  undefined4 arena;
+  undefined4 uVar7;
   undefined4 *allocation;
   uint uVar9;
   uint uVar10;
@@ -104,8 +105,8 @@ int FUN_001315f8(param_1, inst, newSource, param_4, beforeInst, block)
       do {
         if ((*(uint *)((uVar11 >> 3 & 0x1ffffffc) + *(int *)(block + 0x104) + 8) >>
              (uVar11 & 0x1f) & 1) != 0) {
-          arena = ((int (*)())FUN_00134bf0)(param_1,loopIndex,1);
-          ((int (*)())FUN_00135334)(param_1,iVar12,arena);
+          uVar7 = ((int (*)())FUN_00134bf0)(param_1,loopIndex,1);
+          ((int (*)())FUN_00135334)(param_1,iVar12,uVar7);
           iVar5 = *param_4;
           break;
         }
@@ -203,8 +204,9 @@ int FUN_001319d0(param_1, param_2)
 int FUN_00131a80(param_1)
   int param_1;
 {
-  int iVar1;
   undefined4 *allocation;
+  int iVar1;
+  undefined4 *puVar2;
   uint uVar3;
   int iVar4;
   undefined4 arena;
@@ -249,12 +251,12 @@ LAB_00131ae0:
       _memset((void *)(uVar3 * 4 + puVar7[2]),0,(uVar6 - uVar3) * 4 + 4);
       puVar7[1] = uVar6 + 1;
     }
-    allocation = (undefined4 *)(uVar6 * 4 + puVar7[2]);
+    puVar2 = (undefined4 *)(uVar6 * 4 + puVar7[2]);
   }
   else {
-    allocation = (undefined4 *)Vector__elementRefGrow(puVar7,uVar6);
+    puVar2 = (undefined4 *)Vector__elementRefGrow(puVar7,uVar6);
   }
-  *allocation = 0;
+  *puVar2 = 0;
   return uVar6;
 }
 
@@ -313,6 +315,8 @@ int FUN_00131d08(param_1, param_2, param_3, param_4, param_5)
   undefined4 param_4;
   int param_5;
 {
+  undefined4 *allocation;
+  undefined4 arena;
   int allocation2;
   int operandRecord;
   int loopIndex;
@@ -320,9 +324,9 @@ int FUN_00131d08(param_1, param_2, param_3, param_4, param_5)
   int *piVar2;
   int iVar3;
   int iVar4;
-  undefined4 arena;
+  undefined4 uVar5;
   int *piVar6;
-  undefined4 *allocation;
+  undefined4 *puVar7;
   undefined4 *puVar8;
   uint in_r8;
   uint uVar9;
@@ -474,12 +478,12 @@ LAB_00131f98:
   if (0 < *(int *)(*(int *)(iVar4 + 0x30c) + 0x14)) {
     in_r10 = (int *)0x0;
     in_r8 = 0;
-    allocation = puVar8;
+    puVar7 = puVar8;
     do {
-      *allocation = 0;
+      *puVar7 = 0;
       in_r10 = (int *)((int)in_r10 + 1);
       iVar4 = *(int *)(param_1 + 8);
-      allocation = allocation + 1;
+      puVar7 = puVar7 + 1;
     } while ((int)in_r10 < *(int *)(*(int *)(iVar4 + 0x30c) + 0x14));
   }
   iVar3 = *(int *)(*(int *)(param_1 + 900) + 8);
@@ -540,12 +544,12 @@ LAB_00131f98:
     } while (*(int *)(iVar4 + 8) != 0);
     iVar4 = *(int *)(param_1 + 8);
   }
-  arena = 0;
+  uVar5 = 0;
   *(undefined4 *)(param_1 + 0x34) = 4;
   Arena__free(*(undefined4 *)(iVar4 + 0x378),piVar6);
   return Compiler__logf(*(undefined4 *)(param_1 + 8),
-               "Register allocation : Repartition -> %d physical + %d virtual = %d regs\n",param_3,
-               param_2,param_4,in_r8,arena,in_r10);
+               "Register puVar7 : Repartition -> %d physical + %d virtual = %d regs\n",param_3,
+               param_2,param_4,in_r8,uVar5,in_r10);
 }
 
 /* HwLimits__buildInterferenceGraph @ 0x1322a8 (416 bytes) */
@@ -557,6 +561,7 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
   int useCoalesced;
   int compiler;
 {
+  undefined4 arena;
   uint walkFlags;
   uint poppedReg;
   uint cursorFlags;
@@ -610,7 +615,7 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
   int *liveWords;
   uint *worklistVecHeader;
   int rowIndex;
-  undefined4 arena;
+  undefined4 uVar18;
   undefined4 allocArena;
   int nextRow;
   uint wordOff;
@@ -665,8 +670,8 @@ int HwLimits__buildInterferenceGraph(this, graph, fixedRegCount, regCount, useCo
   worklist[1] = 2;
   worklist[2] = 0;
   worklist[4] = allocArena;
-  arena = Arena__alloc(allocArena,8);
-  worklist[3] = arena;
+  uVar18 = Arena__alloc(allocArena,8);
+  worklist[3] = uVar18;
   inWorklistWordCount = regCount + 0x1fU >> 5;
   inWorklistAlloc = (undefined4 *)Arena__alloc(allocArena,inWorklistWordCount * 4 + 0xc);
   inWorklistWords = inWorklistAlloc + 1;
@@ -857,14 +862,14 @@ code_r0x0013299c:
                        (((cursorInst[5] & 2U) == 0 &&
                         (nextBlock = (**(code **)(*cursorInst + 0x50))(cursorInst), nextBlock == 0)))) {
                       src1Inst = IRInst__getOperandSource(walkInst,1);
-                      arena = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
-                      ((int (*)())FUN_00135334)(graph,regNode,arena);
+                      uVar18 = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
+                      ((int (*)())FUN_00135334)(graph,regNode,uVar18);
                     }
                     isVertexFetchResult = (**(code **)(*walkInst + 0x2c))(walkInst);
                     if (isVertexFetchResult == 0) goto code_r0x00132adc;
                     src1Inst = IRInst__getOperandSource(walkInst,1);
-                    arena = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
-                    ((int (*)())FUN_00135334)(graph,regNode,arena);
+                    uVar18 = ((int (*)())FUN_00134bf0)(graph,*(undefined4 *)(src1Inst + 0x94),useCoalesced);
+                    ((int (*)())FUN_00135334)(graph,regNode,uVar18);
                     instFlags = walkInst[5];
                   }
                 }
@@ -948,8 +953,8 @@ code_r0x00132ca8: ;
             do {
               innerIndexOrScratch = FUN_0013097c(liveWords,componentIdx);
               if (innerIndexOrScratch != 0) {
-                arena = ((int (*)())FUN_00134bf0)(graph,componentIdx,useCoalesced);
-                ((int (*)())FUN_00135334)(graph,poppedReg,arena);
+                uVar18 = ((int (*)())FUN_00134bf0)(graph,componentIdx,useCoalesced);
+                ((int (*)())FUN_00135334)(graph,poppedReg,uVar18);
               }
               componentIdx = componentIdx + 1;
             } while (regCount != componentIdx);
@@ -1080,6 +1085,8 @@ int FUN_0013323c(pass, param_2)
   int pass;
   undefined4 param_2;
 {
+  undefined4 *allocation;
+  undefined4 arena;
   uint *puVar1;
   bool bVar2;
   int iVar3;
@@ -1094,7 +1101,7 @@ int FUN_0013323c(pass, param_2)
   int iVar12;
   int iVar13;
   int *piVar14;
-  undefined4 *allocation;
+  undefined4 *puVar15;
   uint uVar16;
   uint uVar17;
   uint uVar18;
@@ -1104,17 +1111,17 @@ int FUN_0013323c(pass, param_2)
   undefined4 uVar22;
   int *piVar23;
   uint *puVar24;
-  undefined4 arena;
+  undefined4 uVar25;
   int *piVar26;
   undefined4 local_98;
   int *local_94;
-  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with Vector__elementRefGrow - vecCapacity/vecCount/vecData/vecArena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
+  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/uVar25) used with Vector__elementRefGrow - vecCapacity/vecCount/vecData/vecArena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
   unsigned char local_90_buf [0x10];
   #define vecCapacity (*(uint *)(local_90_buf + 0x00))
   #define vecCount (*(uint *)(local_90_buf + 0x04))
   #define vecData (*(int *)(local_90_buf + 0x08))
   #define vecArena (*(undefined4 *)(local_90_buf + 0x0c))
-  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with Vector__elementRefGrow - vec2Capacity/vec2Count/vec2Data/vec2Arena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
+  /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/uVar25) used with Vector__elementRefGrow - vec2Capacity/vec2Count/vec2Data/vec2Arena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
   unsigned char local_80_buf [0x10];
   #define vec2Capacity (*(uint *)(local_80_buf + 0x00))
   #define vec2Count (*(uint *)(local_80_buf + 0x04))
@@ -1135,7 +1142,7 @@ int FUN_0013323c(pass, param_2)
   vecData = Arena__alloc(vecArena,8);
   iVar6 = FUN_000ee7a0(pass);
   iVar3 = *(int *)(pass + 0x248);
-  arena = 0;
+  uVar25 = 0;
   do {
     *(undefined4 *)(pass + 0x250) = 0;
     if (0 < iVar3) {
@@ -1148,7 +1155,7 @@ int FUN_0013323c(pass, param_2)
     piVar7 = *(int **)(*(int *)(pass + 8) + 0x30c);
     (**(code **)(*piVar7 + 0x148))
               (piVar7,param_2,*(undefined4 *)(pass + 0x46c),*(undefined4 *)(pass + 0x464),
-               arena,*(int *)(pass + 8),iVar3);
+               uVar25,*(int *)(pass + 8),iVar3);
     iVar19 = 0;
     for (iVar3 = 0; iVar8 = DList__count(pass + 0x37c), iVar3 < iVar8; iVar3 = iVar3 + 1) {
       bVar20 = false;
@@ -1201,12 +1208,12 @@ int FUN_0013323c(pass, param_2)
                         iVar9 = vecCount * 4;
                         _memset(iVar9 + vecData,0,4);
                         vecCount = uVar16 + 1;
-                        allocation = (undefined4 *)(iVar9 + vecData);
+                        puVar15 = (undefined4 *)(iVar9 + vecData);
                       }
                       else {
-                        allocation = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
+                        puVar15 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
                       }
-                      *allocation = piVar26;
+                      *puVar15 = piVar26;
                       break;
                     }
                     bVar2 = iVar21 != 3;
@@ -1298,12 +1305,12 @@ int FUN_0013323c(pass, param_2)
                           iVar19 = vec2Count * 4;
                           _memset(iVar19 + vec2Data,0,4);
                           vec2Count = uVar16 + 1;
-                          allocation = (undefined4 *)(iVar19 + vec2Data);
+                          puVar15 = (undefined4 *)(iVar19 + vec2Data);
                         }
                         else {
-                          allocation = (undefined4 *)Vector__elementRefGrow(&vec2Capacity,vec2Count);
+                          puVar15 = (undefined4 *)Vector__elementRefGrow(&vec2Capacity,vec2Count);
                         }
-                        *allocation = piVar26;
+                        *puVar15 = piVar26;
                         iVar19 = 1;
                         uVar16 = piVar26[5] | 0x80000000;
                         piVar26[5] = uVar16;
@@ -1376,7 +1383,7 @@ LAB_00133348: ;
     }
     iVar19 = *(int *)(pass + 8);
     if (*(int *)(iVar19 + 0x678) <= iVar3) break;
-    arena = 1;
+    uVar25 = 1;
   } while( true );
   bVar20 = true;
 LAB_00133af8:
@@ -1385,11 +1392,11 @@ LAB_00133af8:
 LAB_00133bf0:
     if (vec2Count != 0) {
       uVar16 = vec2Count - 1;
-      allocation = (undefined4 *)0x0;
+      puVar15 = (undefined4 *)0x0;
       if (uVar16 < vec2Count) {
-        allocation = (undefined4 *)(uVar16 * 4 + vec2Data);
+        puVar15 = (undefined4 *)(uVar16 * 4 + vec2Data);
       }
-      piVar14 = (int *)*allocation;
+      piVar14 = (int *)*puVar15;
       Vector__removeAt(&vec2Capacity,uVar16);
       iVar3 = ((int (*)())FUN_00134bf0)(param_2,piVar14[0x25],0);
       piVar7 = (int *)IRInst__getOperandSource(piVar14,1);
@@ -1414,30 +1421,30 @@ LAB_00133bd0:
       uVar16 = vecCount;
       while (vecCount != 0) {
         uVar17 = vecCount - 1;
-        allocation = (undefined4 *)0x0;
+        puVar15 = (undefined4 *)0x0;
         if (uVar17 < vecCount) {
-          allocation = (undefined4 *)(uVar17 * 4 + vecData);
+          puVar15 = (undefined4 *)(uVar17 * 4 + vecData);
         }
-        uVar22 = *allocation;
+        uVar22 = *puVar15;
         Vector__removeAt(&vecCapacity,uVar17);
         *(int *)(pass + 600) = *(int *)(pass + 600) + 1;
-        arena = IRInst__getOperandSource(uVar22,1);
-        piVar14 = (int *)FUN_00130c8c(param_2,uVar22,arena,pass + 0x464);
+        uVar25 = IRInst__getOperandSource(uVar22,1);
+        piVar14 = (int *)FUN_00130c8c(param_2,uVar22,uVar25,pass + 0x464);
         iVar3 = IRInst__getOperandRecord(uVar22,1);
         FUN_000f366c(&local_64,*(undefined4 *)(iVar3 + 0x10));
         piVar14[0x27] = local_64;
         FUN_000f370c(&local_60,local_64);
-        arena = local_60;
+        uVar25 = local_60;
         iVar3 = IRInst__getOperandRecord(piVar14,1);
-        *(undefined4 *)(iVar3 + 0x10) = arena;
-        SelectWord__readMask(local_5c,arena);
+        *(undefined4 *)(iVar3 + 0x10) = uVar25;
+        SelectWord__readMask(local_5c,uVar25);
         local_98 = local_5c[0];
-        arena = IRInst__getOperandSource(piVar14,1);
+        uVar25 = IRInst__getOperandSource(piVar14,1);
         iVar3 = 0;
         piVar7 = piVar14;
         do {
           if ((*(char *)((int)&local_98 + iVar3) != '\0') &&
-             (iVar6 = ((int (*)())FUN_001382b8)(arena,iVar3,&local_94), iVar6 == 0)) {
+             (iVar6 = ((int (*)())FUN_001382b8)(uVar25,iVar3,&local_94), iVar6 == 0)) {
             *(undefined1 *)(piVar7 + 0x27) = 1;
             (**(code **)(*piVar14 + 0x88))(piVar14,1,iVar3,4);
           }
@@ -1543,6 +1550,8 @@ LAB_00133bd0:
 int FUN_00133fe4(param_1)
   int param_1;
 {
+  undefined4 vectorData;
+  undefined4 arena;
   int operandRecord;
   int *operandVReg;
   int loopIndex;
@@ -1562,7 +1571,7 @@ int FUN_00133fe4(param_1)
   uint uVar14;
   int iVar15;
   int *piVar16;
-  undefined4 arena;
+  undefined4 uVar17;
   int *piVar18;
   uint uVar19;
   
@@ -1575,16 +1584,16 @@ int FUN_00133fe4(param_1)
   allocation[1] = 2;
   allocation[2] = 0;
   allocation[4] = arena;
-  arena = Arena__alloc(arena,8);
-  allocation[3] = arena;
-  arena = 0;
+  vectorData = Arena__alloc(arena,8);
+  allocation[3] = vectorData;
+  uVar17 = 0;
   iVar12 = *(int *)(iVar10 + 900);
   iVar7 = *(int *)(*(int *)(iVar10 + 900) + 8);
   do {
     if (iVar7 == 0) {
       iVar12 = allocation[2];
       if (0 < iVar12) {
-        arena = 1;
+        uVar17 = 1;
       }
       if (iVar12 == 0) {
         iVar7 = *(int *)(iVar10 + 0x454);
@@ -1608,7 +1617,7 @@ int FUN_00133fe4(param_1)
         } while (iVar12 != 0);
       }
       ((int (*)())FUN_00131c74)(iVar10,uVar1,iVar7 << 2);
-      return arena;
+      return uVar17;
     }
     piVar16 = (int *)(*(int **)(iVar12 + 0x98))[2];
     piVar18 = *(int **)(iVar12 + 0x98);
@@ -1669,7 +1678,7 @@ int FUN_00133fe4(param_1)
                       *puVar4 = operandVReg;
                     }
                     else {
-                      arena = 1;
+                      uVar17 = 1;
                       uVar5 = FUN_00130904(piVar18);
                       FUN_00130da0(param_1,piVar18,loopIndex,uVar5,*(undefined4 *)(param_1 + 0x2c));
                     }
@@ -2904,6 +2913,7 @@ int ColorGraph__removeNodeUpdateDegrees(graph, node, workList, colorLimit, regis
 int pass_color_graph(colorGraph)
   int colorGraph;
 {
+  undefined4 *allocation;
   bool slotWrapped;
   int neighborByteOffset;
   int classIndexOrNodeCount;
@@ -2916,7 +2926,7 @@ int pass_color_graph(colorGraph)
   int lowDegreeWorklists;
   int usedColorBits;
   int *classNodeCount;
-  undefined4 *allocation;
+  undefined4 *puVar12;
   int *elementRef;
   int *neighborElementRef;
   int programOrNodeRecord;
@@ -2996,13 +3006,13 @@ int pass_color_graph(colorGraph)
       allocation[1] = nodeIdOrBitsetWords;
       allocation[2] = programOrClassOffset;
       if (nodeIdOrBitsetWords != 0) {
-        allocation = bitsetData;
+        puVar12 = bitsetData;
         if (nodeIdOrBitsetWords == 0) {
           nodeIdOrBitsetWords = 1;
         }
         do {
-          allocation[2] = 0;
-          allocation = allocation + 1;
+          puVar12[2] = 0;
+          puVar12 = puVar12 + 1;
           nodeIdOrBitsetWords = nodeIdOrBitsetWords - 1;
         } while (nodeIdOrBitsetWords != 0);
       }
@@ -3060,12 +3070,12 @@ int pass_color_graph(colorGraph)
             _memset(nodeOrCount * 4 + elementDest[2],0,(nodeIdOrBitsetWords - nodeOrCount) * 4 + 4);
             elementDest[1] = nextIdOrAffinityIndex;
           }
-          allocation = (undefined4 *)(byteOffset + elementDest[2]);
+          puVar12 = (undefined4 *)(byteOffset + elementDest[2]);
         }
         else {
-          allocation = (undefined4 *)Vector__elementRefGrow(elementDest,nodeIdOrBitsetWords);
+          puVar12 = (undefined4 *)Vector__elementRefGrow(elementDest,nodeIdOrBitsetWords);
         }
-        arenaOrScratch = ((int (*)())ColorGraph__countSameClassNeighbors)(*allocation,nodeIdOrBitsetWords,*(undefined4 *)(*(int *)(colorGraph + 0x28) + 0x45c),
+        arenaOrScratch = ((int (*)())ColorGraph__countSameClassNeighbors)(*puVar12,nodeIdOrBitsetWords,*(undefined4 *)(*(int *)(colorGraph + 0x28) + 0x45c),
                               colorGraph);
         *(undefined4 *)(classIndexOrNodeCount + 0xc) = arenaOrScratch;
         vectorHeader = *(uint **)(colorGraph + 4);
@@ -3341,13 +3351,13 @@ code_r0x001367c0:
               _memset(colorOrNextId * 4 + vectorHeader[2],0,(nextIdOrAffinityIndex - colorOrNextId) * 4 + 4);
               vectorHeader[1] = nextIdOrAffinityIndex + 1;
             }
-            allocation = (undefined4 *)(nextIdOrAffinityIndex * 4 + vectorHeader[2]);
+            puVar12 = (undefined4 *)(nextIdOrAffinityIndex * 4 + vectorHeader[2]);
           }
           else {
-            allocation = (undefined4 *)Vector__elementRefGrow(vectorHeader,nextIdOrAffinityIndex);
+            puVar12 = (undefined4 *)Vector__elementRefGrow(vectorHeader,nextIdOrAffinityIndex);
           }
           chunkOrBitsetOrCount = *(int *)(colorGraph + 0x28);
-          colorOrNextId = *(uint *)(*(int *)*allocation * 4 + *(int *)(chunkOrBitsetOrCount + 0x458));
+          colorOrNextId = *(uint *)(*(int *)*puVar12 * 4 + *(int *)(chunkOrBitsetOrCount + 0x458));
           if ((-1 < (int)colorOrNextId) &&
              ((*(uint *)((colorOrNextId >> 3 & 0x1ffffffc) + *workSlot + 8) >> (colorOrNextId & 0x1f) & 1) == 0)) {
             *(int *)(chunkOrBitsetOrCount + 0x260) = *(int *)(chunkOrBitsetOrCount + 0x260) + 1;
@@ -3482,11 +3492,12 @@ int FUN_00136ec4(param_1, param_2, param_3, param_4, compiler)
   int param_4;
   int compiler;
 {
+  undefined4 *allocation;
   int allocation2;
   int loopIndex2;
   int loopIndex;
   int iVar1;
-  undefined4 *allocation;
+  undefined4 *puVar2;
   undefined4 *puVar3;
   int iVar4;
   uint *puVar5;
@@ -3543,13 +3554,13 @@ int FUN_00136ec4(param_1, param_2, param_3, param_4, compiler)
     allocation[1] = uVar7;
     allocation[2] = iVar1;
     if (uVar7 != 0) {
-      allocation = puVar3;
+      puVar2 = puVar3;
       if (uVar7 == 0) {
         uVar7 = 1;
       }
       do {
-        allocation[2] = 0;
-        allocation = allocation + 1;
+        puVar2[2] = 0;
+        puVar2 = puVar2 + 1;
         uVar7 = uVar7 - 1;
       } while (uVar7 != 0);
     }
@@ -3579,10 +3590,10 @@ int FUN_00136ec4(param_1, param_2, param_3, param_4, compiler)
     iVar1 = 0x80;
     *puVar3 = arena;
     puVar3[2] = 0x1000;
-    allocation = puVar3 + 1;
+    puVar2 = puVar3 + 1;
     do {
-      allocation[2] = 0;
-      allocation = allocation + 1;
+      puVar2[2] = 0;
+      puVar2 = puVar2 + 1;
       iVar1 = iVar1 + -1;
     } while (iVar1 != 0);
     param_1[9] = (int)(puVar3 + 1);
@@ -3598,11 +3609,12 @@ int FUN_0013719c(param_1, param_2, param_3, param_4, compiler)
   int param_4;
   int compiler;
 {
+  undefined4 *allocation;
   int allocation2;
   int loopIndex2;
   int loopIndex;
   int iVar1;
-  undefined4 *allocation;
+  undefined4 *puVar2;
   undefined4 *puVar3;
   int iVar4;
   uint *puVar5;
@@ -3659,13 +3671,13 @@ int FUN_0013719c(param_1, param_2, param_3, param_4, compiler)
     allocation[1] = uVar7;
     allocation[2] = iVar1;
     if (uVar7 != 0) {
-      allocation = puVar3;
+      puVar2 = puVar3;
       if (uVar7 == 0) {
         uVar7 = 1;
       }
       do {
-        allocation[2] = 0;
-        allocation = allocation + 1;
+        puVar2[2] = 0;
+        puVar2 = puVar2 + 1;
         uVar7 = uVar7 - 1;
       } while (uVar7 != 0);
     }
@@ -3695,10 +3707,10 @@ int FUN_0013719c(param_1, param_2, param_3, param_4, compiler)
     iVar1 = 0x80;
     *puVar3 = arena;
     puVar3[2] = 0x1000;
-    allocation = puVar3 + 1;
+    puVar2 = puVar3 + 1;
     do {
-      allocation[2] = 0;
-      allocation = allocation + 1;
+      puVar2[2] = 0;
+      puVar2 = puVar2 + 1;
       iVar1 = iVar1 + -1;
     } while (iVar1 != 0);
     param_1[9] = (int)(puVar3 + 1);
@@ -3710,9 +3722,10 @@ int FUN_0013719c(param_1, param_2, param_3, param_4, compiler)
 int FUN_00137474(param_1)
   int *param_1;
 {
+  undefined4 *allocation;
   uint loopIndex;
   uint uVar1;
-  undefined4 *allocation;
+  undefined4 *puVar2;
   int *piVar3;
   int iVar4;
   int iVar5;
@@ -3737,13 +3750,13 @@ int FUN_00137474(param_1)
   allocation[1] = uVar1;
   allocation[2] = iVar4;
   if (uVar1 != 0) {
-    allocation = puVar6;
+    puVar2 = puVar6;
     if (uVar1 == 0) {
       uVar1 = 1;
     }
     do {
-      allocation[2] = 0;
-      allocation = allocation + 1;
+      puVar2[2] = 0;
+      puVar2 = puVar2 + 1;
       uVar1 = uVar1 - 1;
     } while (uVar1 != 0);
   }
@@ -3801,9 +3814,10 @@ int FUN_00137694(param_1, param_2)
   int *param_1;
   int param_2;
 {
+  undefined4 *allocation;
   int loopIndex;
   int iVar1;
-  undefined4 *allocation;
+  undefined4 *puVar2;
   int *piVar3;
   int iVar4;
   undefined4 *puVar5;
@@ -3829,13 +3843,13 @@ int FUN_00137694(param_1, param_2)
   allocation[1] = uVar11;
   allocation[2] = iVar4;
   if (uVar11 != 0) {
-    allocation = puVar5;
+    puVar2 = puVar5;
     if (uVar11 == 0) {
       uVar11 = 1;
     }
     do {
-      allocation[2] = 0;
-      allocation = allocation + 1;
+      puVar2[2] = 0;
+      puVar2 = puVar2 + 1;
       uVar11 = uVar11 - 1;
     } while (uVar11 != 0);
   }
@@ -4440,6 +4454,7 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
   int program;
   int compiler;
 {
+  undefined4 *allocation;
   uint bitIndex;
   uint instFlags;
   uint newLiveIn;
@@ -4485,7 +4500,7 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
   int alreadyDefined;
   int *srcWordPtr;
   int blockCount;
-  undefined4 *allocation;
+  undefined4 *puVar11;
   undefined4 *blockListCursor;
   uint bitsetWordCount;
   int sourceIndex;
@@ -4510,11 +4525,11 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
   while( true ) {
     blockCount = DList__count(program + 0x37c);
     if (blockCount < blockIndex) {
-      allocation = (undefined4 *)FUN_000ec5b8(program);
+      puVar11 = (undefined4 *)FUN_000ec5b8(program);
       do {
         liveInChangedAny = false;
         blockOrdinal = 1;
-        blockListCursor = allocation;
+        blockListCursor = puVar11;
         while( true ) {
           blockListCursor = blockListCursor + 1;
           blockCountNow = DList__count(program + 0x37c);
@@ -4615,14 +4630,14 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
     allocation[1] = bitsetWordCount;
     allocation[2] = bitCount;
     if (bitsetHasWords) {
-      allocation = bitsetWords;
+      puVar11 = bitsetWords;
       zeroWordsLeft = bitsetWordCount;
       if (bitsetWordCount == 0) {
         zeroWordsLeft = 1;
       }
       do {
-        allocation[2] = 0;
-        allocation = allocation + 1;
+        puVar11[2] = 0;
+        puVar11 = puVar11 + 1;
         zeroWordsLeft = zeroWordsLeft - 1;
       } while (zeroWordsLeft != 0);
     }
@@ -4634,14 +4649,14 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
     allocation[1] = bitsetWordCount;
     allocation[2] = bitCount;
     if (bitsetHasWords) {
-      allocation = bitsetWords;
+      puVar11 = bitsetWords;
       zeroWordsLeft = bitsetWordCount;
       if (bitsetWordCount == 0) {
         zeroWordsLeft = 1;
       }
       do {
-        allocation[2] = 0;
-        allocation = allocation + 1;
+        puVar11[2] = 0;
+        puVar11 = puVar11 + 1;
         zeroWordsLeft = zeroWordsLeft - 1;
       } while (zeroWordsLeft != 0);
     }
@@ -4653,14 +4668,14 @@ int HwLimits__computeBlockLiveness(this, regCount, program, compiler)
     allocation[1] = bitsetWordCount;
     allocation[2] = bitCount;
     if (bitsetHasWords) {
-      allocation = bitsetWords;
+      puVar11 = bitsetWords;
       zeroWordsLeft = bitsetWordCount;
       if (bitsetWordCount == 0) {
         zeroWordsLeft = 1;
       }
       do {
-        allocation[2] = 0;
-        allocation = allocation + 1;
+        puVar11[2] = 0;
+        puVar11 = puVar11 + 1;
         zeroWordsLeft = zeroWordsLeft - 1;
       } while (zeroWordsLeft != 0);
     }

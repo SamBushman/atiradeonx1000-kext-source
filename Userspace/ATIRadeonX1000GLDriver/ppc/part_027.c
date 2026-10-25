@@ -1064,9 +1064,12 @@ int IRInst__ctor_10502c(this, opcode, compiler)
   undefined4 opcode;
   int compiler;
 {
-  bool bVar1;
-  undefined4 arena;
   undefined4 *allocation;
+  undefined4 vectorData;
+  undefined4 arena;
+  bool bVar1;
+  undefined4 uVar2;
+  undefined4 *puVar3;
   int iVar4;
   
   this[0x1f] = 0;
@@ -1074,12 +1077,12 @@ int IRInst__ctor_10502c(this, opcode, compiler)
   this[2] = 0;
   *this = &PTR_FUN_001e9fc8;
   iVar4 = 5;
-  allocation = this + 0x23;
+  puVar3 = this + 0x23;
   do {
-    *allocation = 0;
-    allocation[1] = 0;
-    allocation[5] = 0;
-    allocation = allocation + 6;
+    *puVar3 = 0;
+    puVar3[1] = 0;
+    puVar3[5] = 0;
+    puVar3 = puVar3 + 6;
     iVar4 = iVar4 + -1;
   } while (iVar4 != 0);
   iVar4 = *(int *)(compiler + COMP_nextInstId);
@@ -1090,15 +1093,15 @@ int IRInst__ctor_10502c(this, opcode, compiler)
   this[0x54] = 0;
   this[0x56] = 0;
   *(undefined1 *)(this + 0x57) = 0;
-  allocation = this;
+  puVar3 = this;
   do {
     bVar1 = iVar4 != 1;
-    allocation[5] = 0;
+    puVar3[5] = 0;
     iVar4 = iVar4 + 1;
-    allocation = allocation + 1;
+    puVar3 = puVar3 + 1;
   } while (bVar1);
-  arena = Opcode__getInfo(opcode);
-  this[0x22] = arena;
+  uVar2 = Opcode__getInfo(opcode);
+  this[0x22] = uVar2;
   this[5] = this[5] | 1;
   ((int (*)())IRInst__resetFields)(this,compiler);
   (*(code *)**(undefined4 **)this[0x22])((undefined4 *)this[0x22],this,compiler);
@@ -1109,8 +1112,8 @@ int IRInst__ctor_10502c(this, opcode, compiler)
     allocation[1] = 2;
     allocation[2] = 0;
     allocation[4] = arena;
-    arena = Arena__alloc(arena,8);
-    allocation[3] = arena;
+    vectorData = Arena__alloc(arena,8);
+    allocation[3] = vectorData;
     this[4] = allocation + 1;
   }
   return;
@@ -1122,9 +1125,12 @@ int IRInst__ctor_1051b0(this, opcode, compiler)
   undefined4 opcode;
   int compiler;
 {
-  bool bVar1;
-  undefined4 arena;
   undefined4 *allocation;
+  undefined4 vectorData;
+  undefined4 arena;
+  bool bVar1;
+  undefined4 uVar2;
+  undefined4 *puVar3;
   int iVar4;
   
   this[0x1f] = 0;
@@ -1132,12 +1138,12 @@ int IRInst__ctor_1051b0(this, opcode, compiler)
   this[2] = 0;
   *this = &PTR_FUN_001e9fc8;
   iVar4 = 5;
-  allocation = this + 0x23;
+  puVar3 = this + 0x23;
   do {
-    *allocation = 0;
-    allocation[1] = 0;
-    allocation[5] = 0;
-    allocation = allocation + 6;
+    *puVar3 = 0;
+    puVar3[1] = 0;
+    puVar3[5] = 0;
+    puVar3 = puVar3 + 6;
     iVar4 = iVar4 + -1;
   } while (iVar4 != 0);
   iVar4 = *(int *)(compiler + COMP_nextInstId);
@@ -1148,15 +1154,15 @@ int IRInst__ctor_1051b0(this, opcode, compiler)
   this[0x54] = 0;
   this[0x56] = 0;
   *(undefined1 *)(this + 0x57) = 0;
-  allocation = this;
+  puVar3 = this;
   do {
     bVar1 = iVar4 != 1;
-    allocation[5] = 0;
+    puVar3[5] = 0;
     iVar4 = iVar4 + 1;
-    allocation = allocation + 1;
+    puVar3 = puVar3 + 1;
   } while (bVar1);
-  arena = Opcode__getInfo(opcode);
-  this[0x22] = arena;
+  uVar2 = Opcode__getInfo(opcode);
+  this[0x22] = uVar2;
   this[5] = this[5] | 1;
   ((int (*)())IRInst__resetFields)(this,compiler);
   (*(code *)**(undefined4 **)this[0x22])((undefined4 *)this[0x22],this,compiler);
@@ -1167,8 +1173,8 @@ int IRInst__ctor_1051b0(this, opcode, compiler)
     allocation[1] = 2;
     allocation[2] = 0;
     allocation[4] = arena;
-    arena = Arena__alloc(arena,8);
-    allocation[3] = arena;
+    vectorData = Arena__alloc(arena,8);
+    allocation[3] = vectorData;
     this[4] = allocation + 1;
   }
   return;

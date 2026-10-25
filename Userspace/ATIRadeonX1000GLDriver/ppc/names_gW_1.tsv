@@ -1187,6 +1187,16 @@ use	Scheduler__computeBlockRegisterSets	iVar9	operandIndex2	INFERRED	web passed 
 use	Scheduler__computeBlockRegisterSets	iVar9	operandIndex2	INFERRED	web passed only as callee parameter operandIndex (1 uses, unanimous)	^\s*iVar9\ =\ \(uVar4\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ \*\(int\ \*\)\(iVar17\ \+\ 0x100\);$	+1
 use	Scheduler__computeBlockRegisterSets	iVar9	operandIndex2	INFERRED	web passed only as callee parameter operandIndex (1 uses, unanimous)	^\s*iVar9\ =\ \(uVar4\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ \*\(int\ \*\)\(\*piVar10\ \+\ 0x104\);$	+1
 use	Scheduler__computeBlockRegisterSets	iVar9	operandIndex2	INFERRED	web passed only as callee parameter operandIndex (1 uses, unanimous)	^\s*\*\(uint\ \*\)\(iVar9\ \+\ 8\)\ =\ 1\ <<\ \(uVar4\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(iVar9\ \+\ 8\);$	+1
+use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*if\ \(\(\(\(piVar9\[2\]\ ==\ 0\)\ \&\&\ \(iVar17\ =\ \*piVar9,\ iVar22\ !=\ iVar17\)\)\ \&\&$	+6
+use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*iVar17\ =\ \*piVar12;$	+4
+use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\[2\]\ \+\ 0x78\)\)\(\(int\ \*\)param_1\[2\]\);$	+2
+use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*\*piVar12\ =\ iVar17;$	+1
+use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0x38\)\ \+\ 0xc\)\ =\ piVar9\[6\];$	+4
+use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*FUN_00106004\(\*\(undefined4\ \*\)\(iVar23\ \+\ 0x38\),piVar9\[4\],$	+2
+use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*iVar14\ =\ iVar17;$	+1
+use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*\*piVar9\ =\ iVar17;$@2	+2
+use	Scheduler__selectNextNode	puVar21	vector1	INFERRED	web passed only as callee parameter vector (1 uses, unanimous)	^\s*puVar21\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x40\);$	+6
+use	Scheduler__selectNextNode	puVar21	vector1	INFERRED	web passed only as callee parameter vector (1 uses, unanimous)	^\s*puVar15\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar11\);$	+1
 use	FUN_00165604	piVar5	inst1	INFERRED	web passed only as callee parameter inst (3 uses, unanimous)	^\s*piVar5\ =\ \*\(int\ \*\*\)\(iVar1\ \+\ 0x10\);$	+2
 use	FUN_00165604	piVar5	inst1	INFERRED	web passed only as callee parameter inst (3 uses, unanimous)	^\s*if\ \(\(\(\*\(int\ \*\)\(piVar5\[0x22\]\ \+\ 8\)\ ==\ \*\(int\ \*\)\(param_2\[0x22\]\ \+\ 8\)\)\ \&\&$	+3
 use	FUN_00165604	piVar5	inst1	INFERRED	web passed only as callee parameter inst (3 uses, unanimous)	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x14\)\)\(piVar5\);$	+1
@@ -1237,16 +1247,6 @@ use	FUN_0016c1fc	piVar8	inst2	INFERRED	web passed only as callee parameter inst 
 use	FUN_0016c1fc	piVar8	inst2	INFERRED	web passed only as callee parameter inst (2 uses, unanimous)	^\s*if\ \(\(\(iVar5\ !=\ 0\)\ \&\&\ \(iVar4\ =\ FUN_00126760\(piVar8\[0x26\]\),\ iVar4\ !=\ 0\)\)\ \&\&$	+3
 use	FUN_0016c1fc	piVar8	inst2	INFERRED	web passed only as callee parameter inst (2 uses, unanimous)	^\s*uVar3\ =\ piVar8\[5\];$@2	+1
 use	FUN_0016c1fc	piVar8	inst2	INFERRED	web passed only as callee parameter inst (2 uses, unanimous)	^\s*piVar8\[0x25\]\ =\ iVar4;$	+1
-use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*if\ \(\(\(\(piVar9\[2\]\ ==\ 0\)\ \&\&\ \(iVar17\ =\ \*piVar9,\ iVar22\ !=\ iVar17\)\)\ \&\&$	+6
-use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*iVar17\ =\ \*piVar12;$	+4
-use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*iVar17\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_1\[2\]\ \+\ 0x78\)\)\(\(int\ \*\)param_1\[2\]\);$	+2
-use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*\*piVar12\ =\ iVar17;$	+1
-use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*\*\(int\ \*\)\(\*\(int\ \*\)\(iVar17\ \+\ 0x38\)\ \+\ 0xc\)\ =\ piVar9\[6\];$	+4
-use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*FUN_00106004\(\*\(undefined4\ \*\)\(iVar23\ \+\ 0x38\),piVar9\[4\],$	+2
-use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*iVar14\ =\ iVar17;$	+1
-use	Scheduler__selectNextNode	iVar17	node1	INFERRED	web passed only as callee parameter node (1 uses, unanimous)	^\s*\*piVar9\ =\ iVar17;$@2	+2
-use	Scheduler__selectNextNode	puVar21	vector1	INFERRED	web passed only as callee parameter vector (1 uses, unanimous)	^\s*puVar21\ =\ \*\(uint\ \*\*\)\(iVar17\ \+\ 0x40\);$	+6
-use	Scheduler__selectNextNode	puVar21	vector1	INFERRED	web passed only as callee parameter vector (1 uses, unanimous)	^\s*puVar15\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar21,uVar11\);$	+1
 local	FUN_001725c4	param_2	operandIndex2	INFERRED	passed as parameter operandIndex of callees (3 uses, unanimous)
 use	FUN_001725c4	iVar4	block	INFERRED	web passed only as callee parameter block (3 uses, unanimous)	^\s*iVar4\ =\ param_1\[0x56\];$	+1
 use	FUN_001725c4	iVar4	block	INFERRED	web passed only as callee parameter block (3 uses, unanimous)	^\s*iVar3\ =\ FUN_00165604\(iVar4,iVar2\);$	+1

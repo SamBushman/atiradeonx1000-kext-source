@@ -30,6 +30,9 @@ local	FUN_000f04d4	param_2	inst	INFERRED	FUN_000f04d4 passes it as arg 0 of FUN_
 local	FUN_000f07a8	param_3	inst	INFERRED	FUN_000f07a8 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_000f14f8	param_2	inst	INFERRED	FUN_000f14f8 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_000f14f8	param_3	inst2	INFERRED	FUN_000f14f8 passes it as arg 0 of FUN_00105594 (typed Inst)
+local	FUN_000fd50c	param_6	vector	INFERRED	FUN_000fd50c passes it as arg 0 of FUN_0019423c (typed Vector)
+local	FUN_0010bd50	param_1	inst	INFERRED	FUN_0010bd50 passes it as arg 0 of FUN_001054ec (typed Inst)
+local	FUN_0016ff54	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
 local	FUN_000f1d7c	param_3	inst	INFERRED	FUN_000f1d7c passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_000f35c4	param_1	inst	INFERRED	FUN_000f35c4 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_000f3a30	param_1	inst	INFERRED	FUN_000f3a30 passes it as arg 0 of FUN_001054ec (typed Inst)
@@ -62,7 +65,6 @@ local	FUN_000f92fc	param_2	inst	INFERRED	FUN_000f92fc passes it as arg 0 of FUN_
 local	FUN_000fa958	param_5	inst	INFERRED	FUN_000fa958 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_000fadc4	param_2	inst	INFERRED	FUN_000fadc4 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_000fadc4	param_5	vector	INFERRED	FUN_000fadc4 passes it as arg 0 of FUN_0019423c (typed Vector)
-local	FUN_000fd50c	param_6	vector	INFERRED	FUN_000fd50c passes it as arg 0 of FUN_0019423c (typed Vector)
 local	FUN_001043f0	param_2	compiler	CONFIRMED	seed: FUN_001043f0 reads/writes it as Compiler
 local	FUN_001046c8	param_1	inst	CONFIRMED	seed: FUN_001046c8 reads/writes it as Inst
 local	FUN_00104be8	param_1	inst	CONFIRMED	seed: FUN_00104be8 reads/writes it as Inst
@@ -111,7 +113,6 @@ local	FUN_00108918	param_2	compiler	INFERRED	FUN_00108918 passes it as arg 2 of 
 local	FUN_0010b184	param_1	inst	INFERRED	FUN_0010b184 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_0010b32c	param_5	compiler	INFERRED	FUN_0010b32c passes it as arg 1 of FUN_001043f0 (typed Compiler)
 local	FUN_0010b498	param_1	inst	INFERRED	FUN_0010b498 passes it as arg 0 of FUN_001054ec (typed Inst)
-local	FUN_0010bd50	param_1	inst	INFERRED	FUN_0010bd50 passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_0010c010	param_1	inst	INFERRED	FUN_0010c010 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_0010c37c	param_1	inst	INFERRED	FUN_0010c37c passes it as arg 0 of FUN_001054ec (typed Inst)
 local	FUN_0010c47c	param_1	inst	INFERRED	FUN_0010c47c passes it as arg 0 of FUN_00105594 (typed Inst)
@@ -304,7 +305,6 @@ local	FUN_00168468	param_3	inst	INFERRED	FUN_00168468 passes it as arg 0 of FUN_
 local	FUN_00169e30	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
 local	FUN_0016a568	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
 local	FUN_0016c1fc	param_1	compiler	INFERRED	accessed at Compiler-only field offsets
-local	FUN_0016ff54	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
 local	FUN_00170e6c	param_1	scheduler	INFERRED	Scheduler object: [0]=compiler, [1]=program, [2]=resourceModel, [3]=threadModel, [4]=current block, [5]/[6]=node vectors (pass_sched_preprocess_and_schedule_inst, notes_compiler_scheduler.md)
 local	FUN_00171714	param_1	scheduler	INFERRED	param_1 is the scheduler object, not the compiler: [0] = compiler, [1] = program, [2]/[3] = target+0x60/+0x64, strings 'Scheduler : Total cycles %d' at [100]=+0x190 and 'Total dot-product transformed %d' at [0x6a]=+0x1a8
 local	FUN_00171714	param_2	program	INFERRED	FUN_00171714 passes it as arg 1 of FUN_00184ab4 (typed Program)
@@ -359,9 +359,6 @@ local	FUN_00191b30	param_2	inst	INFERRED	FUN_00191b30 passes it as arg 0 of FUN_
 local	FUN_001922c4	param_3	inst	INFERRED	FUN_001922c4 passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_0019286c	param_2	inst	INFERRED	FUN_0019286c passes it as arg 0 of FUN_0014a918 (typed Inst)
 local	FUN_0019286c	param_4	inst2	INFERRED	FUN_0019286c passes it as arg 0 of FUN_00105594 (typed Inst)
-local	FUN_00193cc0	param_1	arena	CONFIRMED	seed: FUN_00193cc0 reads/writes it as Arena
-local	FUN_00193d98	param_1	arena	CONFIRMED	seed: FUN_00193d98 reads/writes it as Arena
-local	FUN_00193e18	param_1	arena	CONFIRMED	seed: FUN_00193e18 reads/writes it as Arena
 local	FUN_0019423c	param_1	vector	CONFIRMED	seed: FUN_0019423c reads/writes it as Vector
 local	FUN_0019649c	param_3	inst	INFERRED	FUN_0019649c passes it as arg 0 of FUN_00105594 (typed Inst)
 local	FUN_0019651c	param_2	inst	INFERRED	FUN_0019651c passes it as arg 0 of FUN_001054ec (typed Inst)

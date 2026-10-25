@@ -2386,7 +2386,7 @@ int _gldCreateQuery(ctx, queryOut)
   int wordIndex;
   int *query;
   int wordByteOffset;
-  undefined4 allocation;
+  undefined4 uVar4;
   uint *bitmap;
   uint bitmapWord;
   uint *bitmapCursor;
@@ -2430,9 +2430,9 @@ LAB_0000a010:
     if (*(int *)(ctx + GLD_queryPoolBytes) == 0) {
       *(undefined4 *)(ctx + GLD_queryCapacity) = 0x20;
       *(undefined4 *)(ctx + GLD_queryPoolBytes) = 0x610;
-      allocation = _malloc(0x610);
-      *(undefined4 *)(ctx + GLD_queryPool) = allocation;
-      _memset(allocation,0,*(undefined4 *)(ctx + GLD_queryPoolBytes));
+      uVar4 = _malloc(0x610);
+      *(undefined4 *)(ctx + GLD_queryPool) = uVar4;
+      _memset(uVar4,0,*(undefined4 *)(ctx + GLD_queryPoolBytes));
     }
     else {
       if (**(int **)(ctx + GLD_queryRecord) != 0) {
@@ -2452,9 +2452,9 @@ LAB_0000a010:
     bitmapWord = *(uint *)(ctx + GLD_queryCapacity);
     scanCounter = bitmapWord >> 3;
     if (*(int *)(ctx + GLD_queryBitmap) == 0) {
-      allocation = _malloc(scanCounter);
-      *(undefined4 *)(ctx + GLD_queryBitmap) = allocation;
-      _memset(allocation,0,scanCounter);
+      uVar4 = _malloc(scanCounter);
+      *(undefined4 *)(ctx + GLD_queryBitmap) = uVar4;
+      _memset(uVar4,0,scanCounter);
     }
     else {
       wordByteOffset = _realloc(*(int *)(ctx + GLD_queryBitmap),scanCounter);

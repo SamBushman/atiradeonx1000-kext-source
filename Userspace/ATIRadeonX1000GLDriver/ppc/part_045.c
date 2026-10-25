@@ -738,6 +738,7 @@ int Scheduler__tryReuseLoopIndexLoad(scheduler, node)
   int *scheduler;
   int node;
 {
+  undefined4 arena;
   int newLoadNode;
   bool lastFreeSlot;
   int *freeSlotCursor;
@@ -757,7 +758,7 @@ int Scheduler__tryReuseLoopIndexLoad(scheduler, node)
   int *loadSlotCursor;
   undefined4 *newLoadInst;
   int loadBaseReg;
-  undefined4 arena;
+  undefined4 uVar14;
   code *setSourceFn;
   int loadInst;
   
@@ -814,14 +815,14 @@ LAB_0016ddd8:
           allocation[0x27] = 0x45;
           allocation[0x26] = loopIndex;
           sourceDef = IRInst__getOperandSource(inst,1);
-          arena = DAT_001b0194;
+          uVar14 = DAT_001b0194;
           allocation[0x4d] = *(undefined4 *)(sourceDef + 0x94);
           allocation[0x4c] = 0x10;
           allocation[0x4e] = (((int)requestedIndex2 >> 4) + (uint)((int)requestedIndex2 < 0 && (requestedIndex2 & 0xf) != 0)) * 0x10;
-          allocation[4] = arena;
+          allocation[4] = uVar14;
           setSourceFn = *(code **)(allocation[1] + 0x94);
-          arena = IRInst__getOperandSource(inst,1);
-          (*setSourceFn)(newLoadInst,arena,*scheduler);
+          uVar14 = IRInst__getOperandSource(inst,1);
+          (*setSourceFn)(newLoadInst,uVar14,*scheduler);
           newLoadNode = Scheduler__createNode(scheduler,newLoadInst,node + 0xc,scheduler[0xb]);
           compiler = *scheduler;
           scheduler[loopIndex + 0x62] = newLoadNode;
@@ -3156,6 +3157,9 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
   int *scheduler;
   int program;
 {
+  undefined4 *allocation;
+  undefined4 vectorData;
+  undefined4 arena;
   int *nextComponentCursor;
   int *componentCursor;
   int *followingInst;
@@ -3194,7 +3198,7 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
   uint wordCount;
   undefined *deadVtable;
   int iVar4;
-  undefined4 *allocation;
+  undefined4 *puVar5;
   undefined4 *bundleAlloc;
   int *target;
   int fileSize1;
@@ -3205,7 +3209,7 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
   undefined4 in_r7;
   undefined4 in_r8;
   undefined4 in_r10;
-  undefined4 arena;
+  undefined4 uVar12;
   int *bitSetCursor;
   int *handledInst;
   int *inst;
@@ -3223,8 +3227,8 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
   allocation[1] = 2;
   allocation[4] = arena;
   allocation[2] = 0;
-  arena = Arena__alloc(arena,8);
-  allocation[3] = arena;
+  vectorData = Arena__alloc(arena,8);
+  allocation[3] = vectorData;
   scheduler[5] = (int)(allocation + 1);
   arena = *(undefined4 *)(*scheduler + 0x378);
   allocation = (undefined4 *)Arena__alloc(arena,0x14);
@@ -3232,18 +3236,18 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
   allocation[1] = 2;
   allocation[2] = 0;
   allocation[4] = arena;
-  arena = Arena__alloc(arena,8);
-  allocation[3] = arena;
+  vectorData = Arena__alloc(arena,8);
+  allocation[3] = vectorData;
   scheduler[6] = (int)(allocation + 1);
   arena = *(undefined4 *)(*scheduler + 0x378);
   bundleAlloc = (undefined4 *)Arena__alloc(arena,0x30);
   *bundleAlloc = arena;
   DListNode__init(bundleAlloc + 6);
   slotsLeft = 5;
-  allocation = bundleAlloc + 1;
+  puVar5 = bundleAlloc + 1;
   do {
-    *allocation = 0;
-    allocation = allocation + 1;
+    *puVar5 = 0;
+    puVar5 = puVar5 + 1;
     slotsLeft = slotsLeft + -1;
   } while (slotsLeft != 0);
   scheduler[0xc] = (int)(bundleAlloc + 1);
@@ -3307,13 +3311,13 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
   entrySuccessorCount = Block__successorCount(*(undefined4 *)(scheduler[1] + 0x3a0));
   if (entrySuccessorCount == 1) {
     programAlias = scheduler[1];
-    allocation = (undefined4 *)0x0;
+    puVar5 = (undefined4 *)0x0;
     registerCount = *(int *)(*(int *)(programAlias + 0x3a0) + 0xd0);
     if (*(int *)(registerCount + 4) != 0) {
-      allocation = *(undefined4 **)(registerCount + 8);
+      puVar5 = *(undefined4 **)(registerCount + 8);
     }
     inst = *(int **)(*(int *)(programAlias + 0x3a0) + 0xa0);
-    arena = *allocation;
+    uVar12 = *puVar5;
     followingInst = (int *)inst[1];
     if (followingInst != (int *)0x0) {
       do {
@@ -3321,25 +3325,25 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
         isEntry = (**(code **)(*inst + 0x34))(inst);
         if ((isEntry == 0) && (isEntry = (**(code **)(*inst + 0x38))(inst), isEntry == 0)) {
           DList__unlink(inst);
-          Block__prependInst(arena,inst);
+          Block__prependInst(uVar12,inst);
         }
         followingInst = (int *)handledInst[1];
         inst = handledInst;
       } while (followingInst != (int *)0x0);
       programAlias = scheduler[1];
     }
-    *(undefined4 *)(programAlias + 0x3a4) = arena;
+    *(undefined4 *)(programAlias + 0x3a4) = uVar12;
   }
   exitPredecessorCount = Block__predecessorCount(*(undefined4 *)(scheduler[1] + 0x3a8));
   if (exitPredecessorCount == 1) {
     programAlias = scheduler[1];
-    allocation = (undefined4 *)0x0;
+    puVar5 = (undefined4 *)0x0;
     registerCount = *(int *)(*(int *)(programAlias + 0x3a8) + 0xd4);
     if (*(int *)(registerCount + 4) != 0) {
-      allocation = *(undefined4 **)(registerCount + 8);
+      puVar5 = *(undefined4 **)(registerCount + 8);
     }
     inst = *(int **)(*(int *)(programAlias + 0x3a8) + 0x98);
-    arena = *allocation;
+    uVar12 = *puVar5;
     followingInst = (int *)inst[2];
     if (followingInst == (int *)0x0) goto code_r0x00171ba0;
     do {
@@ -3353,7 +3357,7 @@ int pass_sched_preprocess_and_schedule_inst(scheduler, program)
           if (isUndefined != 0) goto code_r0x00171b84;
         }
         DList__unlink(inst);
-        Block__appendInst(arena,inst);
+        Block__appendInst(uVar12,inst);
       }
 code_r0x00171b84:
       followingInst = (int *)handledInst[2];

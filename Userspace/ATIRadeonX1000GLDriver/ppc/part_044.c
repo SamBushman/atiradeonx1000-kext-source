@@ -7704,6 +7704,7 @@ int Scheduler__addDataDependencyEdge(scheduler, fromNode, toNode, operandIndex, 
   undefined4 componentMask;
   uint param_7;
 {
+  undefined4 arena;
   uint *toPredEdges;
   unsigned int ghidra_home[8] = { scheduler, fromNode, toNode, operandIndex, subOperandIndex, componentMask, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined4 *edgeAlloc;
@@ -7716,7 +7717,7 @@ int Scheduler__addDataDependencyEdge(scheduler, fromNode, toNode, operandIndex, 
   char *maskByte;
   uint vectorCount;
   uint *fromSuccEdges;
-  undefined4 arena;
+  undefined4 uVar7;
   int componentsLeft;
   
   arena = *(undefined4 *)(*scheduler + 0x378);
@@ -7735,14 +7736,14 @@ int Scheduler__addDataDependencyEdge(scheduler, fromNode, toNode, operandIndex, 
   edgeAlloc[8] = 0;
   edgeAlloc[2] = toNode;
   a2 = *(undefined4 *)(toNode + 0x38);
-  arena = operandIndex;
+  uVar7 = operandIndex;
   latency = ((int (*)())Scheduler__getDependencyLatency)(scheduler,*(undefined4 *)(fromNode + 0x38),a2,0,operandIndex,0);
   edgeAlloc[5] = operandIndex;
   edgeAlloc[4] = latency;
   edgeAlloc[6] = subOperandIndex;
-  arena = (**(code **)(*(int *)scheduler[3] + 0x20))
-                    ((int *)scheduler[3],*(undefined4 *)(fromNode + 0x38),a2,a3,arena,a5,a6);
-  edgeAlloc[8] = arena;
+  uVar7 = (**(code **)(*(int *)scheduler[3] + 0x20))
+                    ((int *)scheduler[3],*(undefined4 *)(fromNode + 0x38),a2,a3,uVar7,a5,a6);
+  edgeAlloc[8] = uVar7;
   edgeAlloc[7] = (*(unsigned int *)((unsigned char *)ghidra_home + 20));
   fromSuccEdges = *(uint **)(fromNode + 0x40);
   vectorCount = fromSuccEdges[1];
@@ -7787,6 +7788,7 @@ int Scheduler__createNode(scheduler, inst, priorityRecord, readyCycle)
   undefined4 *priorityRecord;
   undefined4 readyCycle;
 {
+  undefined4 arena;
   undefined4 priorityPosition;
   undefined4 resourceClass;
   undefined4 nodeIndex;
@@ -7803,7 +7805,7 @@ int Scheduler__createNode(scheduler, inst, priorityRecord, readyCycle)
   uint vectorCount;
   undefined4 uVar9;
   uint *nodeVector;
-  undefined4 arena;
+  undefined4 uVar11;
   undefined4 *node;
   int fieldsLeft;
   
@@ -7870,7 +7872,7 @@ int Scheduler__createNode(scheduler, inst, priorityRecord, readyCycle)
   nodeAlloc[0xc] = 0xffffffff;
   nodeAlloc[0xe] = 0;
   nodeAlloc[0xd] = readyCycle;
-  arena = priorityRecord[7];
+  uVar11 = priorityRecord[7];
   priorityPosition = priorityRecord[1];
   priorityDepth = priorityRecord[2];
   priorityDescendantsA = priorityRecord[5];
@@ -7880,7 +7882,7 @@ int Scheduler__createNode(scheduler, inst, priorityRecord, readyCycle)
   nodeAlloc[6] = priorityDepth;
   nodeAlloc[9] = priorityDescendantsA;
   nodeAlloc[10] = priorityDescendantsB;
-  nodeAlloc[0xb] = arena;
+  nodeAlloc[0xb] = uVar11;
   nodeVector = (uint *)scheduler[6];
   vectorCount = nodeVector[1];
   if (vectorCount < *nodeVector) {
@@ -8681,6 +8683,7 @@ LAB_issue76_skip_166cfc:
 int Scheduler__computeNodePriorities(scheduler)
   int *scheduler;
 {
+  undefined4 arena;
   uint *heightCursor;
   uint *predEdges;
   uint *succEdges;
@@ -8734,7 +8737,7 @@ int Scheduler__computeNodePriorities(scheduler)
   uint *descendantMask;
   uint succEdgeCount;
   uint nodeCount;
-  undefined4 arena;
+  undefined4 uVar19;
   uint *allNodes;
   int maxHeight;
   int neighbourNode;
@@ -8813,18 +8816,18 @@ int Scheduler__computeNodePriorities(scheduler)
       balanceEnabled = Compiler__isOptionEnabled(*scheduler,0x28);
       if (balanceEnabled == 0) {
 LAB_001672b8:
-        arena = 0;
+        uVar19 = 0;
       }
       else {
         selectsRewritable = (**(code **)(*(int *)scheduler[2] + 0x34))((int *)scheduler[2],node);
-        arena = 1;
+        uVar19 = 1;
         if (selectsRewritable == 0) goto LAB_001672b8;
       }
-      *(undefined4 *)(node + 0x5c) = arena;
+      *(undefined4 *)(node + 0x5c) = uVar19;
       succEdgeIndex = 0;
-      arena = (**(code **)(*(int *)scheduler[2] + 0x4c))
+      uVar19 = (**(code **)(*(int *)scheduler[2] + 0x4c))
                          ((int *)scheduler[2],*(undefined4 *)(node + 0x38));
-      *(undefined4 *)(node + 0x58) = arena;
+      *(undefined4 *)(node + 0x58) = uVar19;
       (**(code **)(*(int *)scheduler[2] + 0x48))((int *)scheduler[2],node);
       (**(code **)(*(int *)scheduler[2] + 0x44))((int *)scheduler[2],node);
       SchedModel__countIssuedNode(scheduler[2],node);
@@ -8902,16 +8905,16 @@ LAB_0016753c:
       if (*(int *)(node + 0x1c) == 0) {
         resourceSlot10Result = (**(code **)(*(int *)scheduler[2] + 0x28))
                           ((int *)scheduler[2],*(undefined4 *)(node + 0x38));
-        arena = 0;
+        uVar19 = 0;
         if (resourceSlot10Result != 0) goto LAB_00167574;
       }
       else {
 LAB_00167574:
-        arena = 1;
+        uVar19 = 1;
       }
       predEdges = *(uint **)(node + 0x44);
       predEdgeIndex = 0;
-      *(undefined4 *)(node + 0x1c) = arena;
+      *(undefined4 *)(node + 0x1c) = uVar19;
       vectorCount = predEdges[1];
       if (0 < (int)vectorCount) {
         do {
@@ -8940,10 +8943,10 @@ LAB_00167574:
               producerCountCursor = producerCountCursor + 4;
               neighbourNode = neighbourNode + -1;
             } while (neighbourNode != 0);
-            if ((*(int *)(edge + 0x1c) != 0) || (arena = 0, *(int *)(node + 0x1c) != 0)) {
-              arena = 1;
+            if ((*(int *)(edge + 0x1c) != 0) || (uVar19 = 0, *(int *)(node + 0x1c) != 0)) {
+              uVar19 = 1;
             }
-            *(undefined4 *)(edge + 0x1c) = arena;
+            *(undefined4 *)(edge + 0x1c) = uVar19;
             threadIsFetchClass = (**(code **)(*(int *)scheduler[3] + 0x20))
                               ((int *)scheduler[3],*(undefined4 *)(node + 0x38));
             if ((threadIsFetchClass == 0) &&
@@ -9482,6 +9485,7 @@ int Scheduler__addOperandDependencyEdges(scheduler, consumerNode, inst, operandI
   int operandIndex;
   int subOperandIndex;
 {
+  undefined4 arena;
   uint remainingLanes;
   uint vectorCount2;
   undefined4 *singleEdgeAlloc;
@@ -9519,7 +9523,7 @@ int Scheduler__addOperandDependencyEdges(scheduler, consumerNode, inst, operandI
   int numSources;
   int isExternalProducer;
   uint producerIndex;
-  undefined4 arena;
+  undefined4 uVar18;
   uint *allNodes;
   undefined4 local_88;
   undefined4 coveredLanes;
@@ -9564,7 +9568,7 @@ int Scheduler__addOperandDependencyEdges(scheduler, consumerNode, inst, operandI
     numSources = (**(code **)(*inst + 0x14))(inst);
     if (effectiveOperandIndex <= numSources) {
       operandRecord = IRInst__getOperandRecord(inst,effectiveOperandIndex);
-      arena = *(undefined4 *)(operandRecord + 0x10);
+      uVar18 = *(undefined4 *)(operandRecord + 0x10);
       if (hasSubOperand) {
         operandRecord = IRInst__getOperandRecord(*(undefined4 *)(consumerNode + 0x38),operandIndex);
         SelectWord__readMask(&local_68,*(undefined4 *)(operandRecord + 0x10));
@@ -9582,10 +9586,10 @@ int Scheduler__addOperandDependencyEdges(scheduler, consumerNode, inst, operandI
           SelectWord__readMask(&local_60,local_64);
           local_68 = local_60;
         }
-        SelectWord__maskUnused(&local_5c,arena,local_68);
-        arena = local_5c;
+        SelectWord__maskUnused(&local_5c,uVar18,local_68);
+        uVar18 = local_5c;
       }
-      SelectWord__readMask(local_58,arena);
+      SelectWord__readMask(local_58,uVar18);
       producerInBlock = isExternalProducer == 0;
       local_88 = local_58[0];
       edgeCount = 0;
@@ -9607,8 +9611,8 @@ LAB_00168844:
           edgeAlloc[6] = 0;
           edgeAlloc[8] = 0;
           edgeAlloc[2] = consumerNode;
-          arena = ((int (*)())Scheduler__getDependencyLatency)(scheduler,operandVReg,inst,0,operandIndex,0);
-          edgeAlloc[4] = arena;
+          uVar18 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,operandVReg,inst,0,operandIndex,0);
+          edgeAlloc[4] = uVar18;
           edgeAlloc[5] = operandIndex;
           edgeAlloc[6] = subOperandIndex;
           edgeAlloc[7] = coveredLanes;
@@ -9622,8 +9626,8 @@ LAB_00168844:
             if ((isPresub != 0) && (operandVReg[0x21] != 0)) {
               maskSource = (int *)IRInst__getOperandSource(operandVReg,1);
             }
-            arena = (**(code **)(*(int *)scheduler[3] + 0x20))((int *)scheduler[3],maskSource);
-            edgeAlloc[8] = arena;
+            uVar18 = (**(code **)(*(int *)scheduler[3] + 0x20))((int *)scheduler[3],maskSource);
+            edgeAlloc[8] = uVar18;
           }
           producerSuccEdges = *(uint **)(producerNode + 0x40);
           vectorCount2 = producerSuccEdges[1];
@@ -9698,11 +9702,11 @@ LAB_00168ab0:
                   edge[5] = 0;
                   edge[6] = 0;
                   edge[8] = 0;
-                  arena = ((int (*)())Scheduler__getDependencyLatency)(scheduler,*(undefined4 *)(partialWriterB + 0x38),
+                  uVar18 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,*(undefined4 *)(partialWriterB + 0x38),
                                         *(undefined4 *)(partialWriterA + 0x38),0,0,3);
                   partialWriterB = *edgeB;
                   partialWriterA = *edgeA;
-                  edge[4] = arena;
+                  edge[4] = uVar18;
                   edge[7] = *(uint *)(*(int *)(partialWriterA + 0x38) + 0xc) &
                                *(uint *)(*(int *)(partialWriterB + 0x38) + 0xc);
                   writerBSuccEdges = *(uint **)(edge[1] + 0x40);
@@ -9758,9 +9762,9 @@ LAB_00168ab0:
     singleEdgeAlloc[6] = 0;
     singleEdgeAlloc[8] = 0;
     singleEdgeAlloc[2] = consumerNode;
-    arena = ((int (*)())Scheduler__getDependencyLatency)(scheduler,operandVReg,inst,0,operandIndex,0);
+    uVar18 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,operandVReg,inst,0,operandIndex,0);
     singleEdgeAlloc[5] = operandIndex;
-    singleEdgeAlloc[4] = arena;
+    singleEdgeAlloc[4] = uVar18;
     singleEdgeAlloc[6] = subOperandIndex;
     singleEdgeAlloc[7] = operandVReg[3];
   }
@@ -9782,8 +9786,8 @@ LAB_00168ab0:
     singleEdgeAlloc[5] = 0;
     singleEdgeAlloc[6] = 0;
     singleEdgeAlloc[2] = consumerNode;
-    arena = ((int (*)())Scheduler__getDependencyLatency)(scheduler,operandVReg,inst,0,0,3);
-    singleEdgeAlloc[4] = arena;
+    uVar18 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,operandVReg,inst,0,0,3);
+    singleEdgeAlloc[4] = uVar18;
     singleEdgeAlloc[7] = inst[3];
   }
   producerSuccEdges = *(uint **)(producerNode + 0x40);
@@ -10697,6 +10701,8 @@ int Scheduler__buildDependencyGraph(scheduler, block)
   int *scheduler;
   int block;
 {
+  undefined4 vectorData;
+  undefined4 arena;
   int resourceSlot10Result;
   uint *listNodePredEdges;
   int listNext;
@@ -10801,7 +10807,7 @@ int Scheduler__buildDependencyGraph(scheduler, block)
   int latestSlot11Node;
   undefined4 *schedNode;
   uint *lastWriterSet;
-  undefined4 arena;
+  undefined4 uVar26;
   uint *nodeVector;
   /* issue #64 live-repro (crash #11, past the 0x275c dropped-arg fix): auStack_78 is declared
    * as only 8 bytes, but DListNode__init(auStack_78) - a sentinel-node doubly-linked-list
@@ -10896,8 +10902,8 @@ int Scheduler__buildDependencyGraph(scheduler, block)
             predVectorAlloc[1] = 2;
             predVectorAlloc[4] = arena;
             predVectorAlloc[2] = 0;
-            arena = Arena__alloc(arena,8);
-            predVectorAlloc[3] = arena;
+            vectorData = Arena__alloc(arena,8);
+            predVectorAlloc[3] = vectorData;
             nodeAlloc[0x12] = predVectorAlloc + 1;
             arena = *(undefined4 *)(*scheduler + 0x378);
             succVectorAlloc = (undefined4 *)Arena__alloc(arena,0x14);
@@ -10905,8 +10911,8 @@ int Scheduler__buildDependencyGraph(scheduler, block)
             succVectorAlloc[1] = 2;
             succVectorAlloc[2] = 0;
             succVectorAlloc[4] = arena;
-            arena = Arena__alloc(arena,8);
-            succVectorAlloc[3] = arena;
+            vectorData = Arena__alloc(arena,8);
+            succVectorAlloc[3] = vectorData;
             nodeAlloc[0x11] = succVectorAlloc + 1;
             if (0 < inst[0x21]) {
               operandIndex = 1;
@@ -10919,8 +10925,8 @@ int Scheduler__buildDependencyGraph(scheduler, block)
                   sourceDef = (int *)IRInst__getOperandSource(inst,operandIndex);
                   isMix = (**(code **)(*sourceDef + 0x60))(sourceDef);
                   if (isMix != 0) goto LAB_0016a958;
-                  arena = IRInst__getOperandSource(inst,operandIndex);
-                  isProjectionOfClass26or3a = IRInst__isProjectionOfClass26or3a(arena);
+                  uVar26 = IRInst__getOperandSource(inst,operandIndex);
+                  isProjectionOfClass26or3a = IRInst__isProjectionOfClass26or3a(uVar26);
                   if ((isProjectionOfClass26or3a != 0) &&
                      (targetSlot53Result = (**(code **)(**(int **)(*scheduler + 0x30c) + 0xd4))
                                          (*(int **)(*scheduler + 0x30c)), targetSlot53Result != 0))
@@ -10942,8 +10948,8 @@ LAB_0016a958:
                     ((int (*)())Scheduler__addOperandDependencyEdges)(scheduler,schedNode,sourceDef,operandIndex,sourceOperandIndex);
                   }
                 }
-                arena = IRInst__getOperandSource(inst,operandIndex);
-                sourceIsLoopIndexLoad = IRInst__isProjectionOfClass44(arena);
+                uVar26 = IRInst__getOperandSource(inst,operandIndex);
+                sourceIsLoopIndexLoad = IRInst__isProjectionOfClass44(uVar26);
                 if (sourceIsLoopIndexLoad != 0) {
                   hasLoopIndexSource = true;
                 }
@@ -10997,9 +11003,9 @@ LAB_0016a958:
                           edgeAlloc[6] = 0;
                           edgeAlloc[8] = 0;
                           edgeAlloc[2] = loopIndexProducer;
-                          arena = ((int (*)())Scheduler__getDependencyLatency)(scheduler,*(undefined4 *)(operandProducer + 0x38),
+                          uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,*(undefined4 *)(operandProducer + 0x38),
                                                 *(undefined4 *)(loopIndexProducer + 0x38),0,0,5);
-                          edgeAlloc[4] = arena;
+                          edgeAlloc[4] = uVar26;
                           producerSuccEdges = *(uint **)(operandProducer + 0x40);
                           edgeVectorCount = producerSuccEdges[1];
                           if (edgeVectorCount < *producerSuccEdges) {
@@ -11069,8 +11075,8 @@ LAB_0016a958:
                     edgeAlloc[6] = 0;
                     edgeAlloc[2] = schedNode;
                     edgeAlloc[3] = 1;
-                    arena = ((int (*)())Scheduler__getDependencyLatency)(scheduler,chainNodeInst,inst,0,0,1);
-                    edgeAlloc[4] = arena;
+                    uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,chainNodeInst,inst,0,0,1);
+                    edgeAlloc[4] = uVar26;
                     chainNodeSuccEdges = *(uint **)(chainNode + 0x40);
                     elementCount = chainNodeSuccEdges[1];
                     if (elementCount < *chainNodeSuccEdges) {
@@ -11128,8 +11134,8 @@ LAB_0016a958:
                 edgeAlloc[5] = 0;
                 edgeAlloc[6] = 0;
                 edgeAlloc[2] = schedNode;
-                arena = ((int (*)())Scheduler__getDependencyLatency)(scheduler,prevNodeInst,inst,0,0,1);
-                edgeAlloc[4] = arena;
+                uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,prevNodeInst,inst,0,0,1);
+                edgeAlloc[4] = uVar26;
                 prevNodeSuccEdges = *(uint **)(prevNode + 0x40);
                 countWord = prevNodeSuccEdges[1];
                 if (countWord < *prevNodeSuccEdges) {
@@ -11218,9 +11224,9 @@ LAB_0016b038:
       } while (sizeAttemptsLeft != 0);
       *lastWriterSet = dotProductLimit;
       hashAlloc[2] = 0;
-      arena = Arena__alloc(arena,*lastWriterSet << 2);
-      hashAlloc[3] = arena;
-      _memset(arena,0,*lastWriterSet << 2);
+      vectorData = Arena__alloc(arena,*lastWriterSet << 2);
+      hashAlloc[3] = vectorData;
+      _memset(vectorData,0,*lastWriterSet << 2);
       nodeIndex = nodeIndex - 1;
       if (-1 < (int)nodeIndex) {
         nodeByteOffset = nodeIndex * 4;
@@ -11295,8 +11301,8 @@ LAB_0016b038:
               nodeAlloc[8] = 0;
               nodeAlloc[2] = laterWriterNode;
               nodeAlloc[3] = 1;
-              arena = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,laterWriterInst,0,0,1);
-              nodeAlloc[4] = arena;
+              uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,laterWriterInst,0,0,1);
+              nodeAlloc[4] = uVar26;
               curSuccEdges = *(uint **)(curNode + 0x40);
               vectorCount = curSuccEdges[1];
               if (vectorCount < *curSuccEdges) {
@@ -11337,8 +11343,8 @@ LAB_0016b038:
             nodeAlloc[8] = 0;
             nodeAlloc[2] = carriedSlot10Node;
             nodeAlloc[3] = 4;
-            arena = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(carriedSlot10Node + 0x38),0,0,4);
-            nodeAlloc[4] = arena;
+            uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(carriedSlot10Node + 0x38),0,0,4);
+            nodeAlloc[4] = uVar26;
             curSuccEdges = *(uint **)(curNode + 0x40);
             vectorCount = curSuccEdges[1];
             if (vectorCount < *curSuccEdges) {
@@ -11376,8 +11382,8 @@ LAB_0016b038:
             nodeAlloc[8] = 0;
             nodeAlloc[2] = carriedSlot11Node;
             nodeAlloc[3] = 4;
-            arena = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(carriedSlot11Node + 0x38),0,0,4);
-            nodeAlloc[4] = arena;
+            uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(carriedSlot11Node + 0x38),0,0,4);
+            nodeAlloc[4] = uVar26;
             curSuccEdges = *(uint **)(curNode + 0x40);
             vectorCount = curSuccEdges[1];
             if (vectorCount < *curSuccEdges) {
@@ -11404,11 +11410,11 @@ LAB_0016b038:
           if (0 < curInst[0x21]) {
             sourceNumber = 1;
             do {
-              arena = IRInst__getOperandSource(curInst,sourceNumber);
-              sourceWritesTracked = ((int (*)())IRInst__writesTrackedRegister)(arena);
+              uVar26 = IRInst__getOperandSource(curInst,sourceNumber);
+              sourceWritesTracked = ((int (*)())IRInst__writesTrackedRegister)(uVar26);
               if (sourceWritesTracked != 0) {
-                arena = IRInst__getOperandSource(curInst,sourceNumber);
-                readerWriterInst = (int *)HashTable__find(lastWriterSet,arena);
+                uVar26 = IRInst__getOperandSource(curInst,sourceNumber);
+                readerWriterInst = (int *)HashTable__find(lastWriterSet,uVar26);
                 if ((readerWriterInst != (int *)0x0) && (curInst != readerWriterInst)) {
                   nodeVector = (uint *)scheduler[6];
                   readerWriterIndex = readerWriterInst[0x54];
@@ -11435,8 +11441,8 @@ LAB_0016b038:
                   nodeAlloc[6] = 0;
                   nodeAlloc[8] = 0;
                   nodeAlloc[2] = readerWriterNode;
-                  arena = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,readerWriterInst,sourceNumber,0,2);
-                  nodeAlloc[4] = arena;
+                  uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,readerWriterInst,sourceNumber,0,2);
+                  nodeAlloc[4] = uVar26;
                   curSuccEdges = *(uint **)(curNode + 0x40);
                   vectorCount = curSuccEdges[1];
                   if (vectorCount < *curSuccEdges) {
@@ -11477,8 +11483,8 @@ LAB_0016b038:
             nodeAlloc[8] = 0;
             nodeAlloc[2] = latestSlot11Node;
             nodeAlloc[3] = 4;
-            arena = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(latestSlot11Node + 0x38),0,0,4);
-            nodeAlloc[4] = arena;
+            uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(latestSlot11Node + 0x38),0,0,4);
+            nodeAlloc[4] = uVar26;
             curSuccEdges = *(uint **)(curNode + 0x40);
             vectorCount = curSuccEdges[1];
             if (vectorCount < *curSuccEdges) {
@@ -11515,8 +11521,8 @@ LAB_0016b038:
             nodeAlloc[6] = 0;
             nodeAlloc[2] = latestSlot10Node;
             nodeAlloc[3] = 4;
-            arena = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(latestSlot10Node + 0x38),0,0,4);
-            nodeAlloc[4] = arena;
+            uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(latestSlot10Node + 0x38),0,0,4);
+            nodeAlloc[4] = uVar26;
             curSuccEdges = *(uint **)(curNode + 0x40);
             vectorCount = curSuccEdges[1];
             if (vectorCount < *curSuccEdges) {
@@ -11556,8 +11562,8 @@ LAB_0016b038:
               nodeAlloc[8] = 0;
               nodeAlloc[2] = listNode;
               nodeAlloc[3] = 4;
-              arena = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(listNode + 0x38),0,0,4);
-              nodeAlloc[4] = arena;
+              uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(listNode + 0x38),0,0,4);
+              nodeAlloc[4] = uVar26;
               curSuccEdges = *(uint **)(curNode + 0x40);
               vectorCount = curSuccEdges[1];
               if (vectorCount < *curSuccEdges) {
@@ -11604,8 +11610,8 @@ LAB_0016b038:
                 nodeAlloc[6] = 0;
                 nodeAlloc[8] = 0;
                 nodeAlloc[2] = listNode;
-                arena = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(listNode + 0x38),0,0,2);
-                nodeAlloc[4] = arena;
+                uVar26 = ((int (*)())Scheduler__getDependencyLatency)(scheduler,curInst,*(undefined4 *)(listNode + 0x38),0,0,2);
+                nodeAlloc[4] = uVar26;
                 curSuccEdges = *(uint **)(curNode + 0x40);
                 vectorCount = curSuccEdges[1];
                 if (vectorCount < *curSuccEdges) {
@@ -11672,6 +11678,7 @@ LAB_issue76_skip_pair:
 int Scheduler__buildCoScheduleGroups(scheduler)
   int *scheduler;
 {
+  undefined4 *allocation;
   uint stackCountBeforeSibling;
   int *siblingEdge;
   uint consumerPredCount;
@@ -11690,7 +11697,7 @@ int Scheduler__buildCoScheduleGroups(scheduler)
   uint uVar3;
   int *nodeSlot;
   int iVar5;
-  undefined4 *allocation;
+  undefined4 *puVar6;
   uint succEdgeCount;
   uint vectorCount2;
   int siblingNode;
@@ -11821,13 +11828,13 @@ int Scheduler__buildCoScheduleGroups(scheduler)
                         _memset(vectorCount2 * 4 + consumerPredEdges[2],0,(loopIndex3 - vectorCount2) * 4 + 4);
                         consumerPredEdges[1] = loopIndex3 + 1;
                       }
-                      allocation = (undefined4 *)(loopIndex3 * 4 + consumerPredEdges[2]);
+                      puVar6 = (undefined4 *)(loopIndex3 * 4 + consumerPredEdges[2]);
                     }
                     else {
-                      allocation = (undefined4 *)Vector__elementRefGrow(consumerPredEdges,loopIndex3);
+                      puVar6 = (undefined4 *)Vector__elementRefGrow(consumerPredEdges,loopIndex3);
                     }
                     stackCountBeforeSibling = local_64_vec;
-                    siblingEdge = (int *)*allocation;
+                    siblingEdge = (int *)*puVar6;
                     if (((siblingEdge[2] == 0) && (siblingEdge[4] == *(int *)(succEdge + 0x10))) &&
                        ((siblingEdge[5] == *(int *)(succEdge + 0x14) && (*(int *)(*siblingEdge + 0x60) == 0))))
                     {

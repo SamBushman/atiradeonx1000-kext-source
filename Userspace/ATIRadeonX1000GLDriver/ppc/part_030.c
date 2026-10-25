@@ -763,9 +763,10 @@ int IRInst__newOpcode8c(operandWord2, compiler)
   undefined4 operandWord2;
   int compiler;
 {
+  undefined4 arena;
   undefined4 *allocation;
   int operandRecord;
-  undefined4 arena;
+  undefined4 uVar3;
   undefined4 *newInst;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
@@ -776,9 +777,9 @@ int IRInst__newOpcode8c(operandWord2, compiler)
   operandRecord = IRInst__getOperandRecord(newInst,1);
   *(undefined4 *)(operandRecord + 8) = operandWord2;
   *(undefined4 *)(operandRecord + 0xc) = 0;
-  arena = UNK_001af9d4;
+  uVar3 = UNK_001af9d4;
   operandRecord = IRInst__getOperandRecord(newInst,1);
-  *(undefined4 *)(operandRecord + 0x10) = arena;
+  *(undefined4 *)(operandRecord + 0x10) = uVar3;
   allocation[0x4c] = 0;
   return newInst;
 }
@@ -835,12 +836,13 @@ int IRInst__cloneIfPresub(inst, program, trackUses)
   int program;
   int trackUses;
 {
+  undefined4 *allocation;
   int operandIndex2;
   int operandIndex;
   int operandRecord;
   int needsClone;
   int *result;
-  undefined4 *allocation;
+  undefined4 *puVar3;
   uint userCount;
   int sourceInst;
   undefined4 arena;
@@ -872,13 +874,13 @@ int IRInst__cloneIfPresub(inst, program, trackUses)
         userCount = userVector[1];
         if (userCount < *userVector) {
           _memset(userCount * 4 + userVector[2],0,4);
-          allocation = (undefined4 *)(userCount * 4 + userVector[2]);
+          puVar3 = (undefined4 *)(userCount * 4 + userVector[2]);
           userVector[1] = userCount + 1;
         }
         else {
-          allocation = (undefined4 *)Vector__elementRefGrow(userVector,userCount);
+          puVar3 = (undefined4 *)Vector__elementRefGrow(userVector,userCount);
         }
-        *allocation = result;
+        *puVar3 = result;
       }
     }
     for (operandIndex2 = 1; sourceInst = (**(code **)(*result + 0x14))(result), operandIndex2 <= sourceInst; operandIndex2 = operandIndex2 + 1
