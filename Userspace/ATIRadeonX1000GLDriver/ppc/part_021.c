@@ -572,7 +572,7 @@ int FUN_000e2094(compiler, param_2)
     arenaAt374 = *(undefined4 *)(compiler + COMP_arenaA);
     puVar3 = (undefined4 *)Arena__alloc(arenaAt374,0x484);
     *puVar3 = arenaAt374;
-    FUN_000ee29c(puVar3 + 1,compiler);
+    Program__ctor_ee29c(puVar3 + 1,compiler);
     arenaAt378 = *(undefined4 *)(compiler + COMP_arenaB);
     *(undefined4 **)(compiler + COMP_currentProgram) = puVar3 + 1;
     puVar3 = (undefined4 *)Arena__alloc(arenaAt378,0x290);

@@ -1476,8 +1476,8 @@
 0xed63c	FUN_000ed63c	424	no	indirect call (driver context / vtable / callback)
 0xed7e4	Program__beginPass	184	no	indirect call (driver context / vtable / callback)
 0xed89c	FUN_000ed89c	1244	no	indirect call (driver context / vtable / callback)
-0xedd98	FUN_000edd98	1216	yes	
-0xee29c	FUN_000ee29c	1216	yes	
+0xedd98	Program__ctor_edd98	1216	yes	
+0xee29c	Program__ctor_ee29c	1216	yes	
 0xee7a0	FUN_000ee7a0	492	yes	
 0xee9ac	Program__addInst	120	yes	
 0xeea24	FUN_000eea24	556	no	indirect call (driver context / vtable / callback)
@@ -1578,7 +1578,7 @@
 0xf6760	Compiler__getOrCreateConstVector2	352	yes	
 0xf68c0	Compiler__getOrCreateConstVector1	324	yes	
 0xf6a04	FUN_000f6a04	752	yes	
-0xf6d14	FUN_000f6d14	2568	yes	
+0xf6d14	IRInst__setConstantOperand	2568	yes	
 0xf771c	IRInst__makeLiteralVec4Int	340	yes	
 0xf7870	FUN_000f7870	340	yes	
 0xf79c4	IRInst__makeLiteralVec4Float	332	no	no static blocker: a test could reach it (needs arguments / state no test builds)
