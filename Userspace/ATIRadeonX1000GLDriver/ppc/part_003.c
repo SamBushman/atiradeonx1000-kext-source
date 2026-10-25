@@ -4532,7 +4532,7 @@ int FUN_00020330(param_1, param_2)
     uVar2 = uVar2 & 0xfffffeff;
   }
   if ((uVar2 & 0x200) != 0) {
-    FUN_000027d0(param_1,iVar1);
+    gld_clearSoftwareColorBuffer(param_1,iVar1);
   }
   if ((uVar2 & 0x4000) != 0) {
     uVar2 = uVar2 & 0xffffbfff;

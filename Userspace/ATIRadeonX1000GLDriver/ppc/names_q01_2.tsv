@@ -1,0 +1,109 @@
+local	FUN_00001770	param_1	symbolName	CONFIRMED	passed unchanged to the dyld `_dyld_func_lookup` function pointer (DAT_001e8744); callers pass the "__dyld_*" symbol name strings
+local	FUN_00001770	param_2	addressOut	CONFIRMED	second argument of _dyld_func_lookup: where the resolved function address is stored (callers pass &imageCountFn etc.)
+local	FUN_0000222c	param_1	atexit_globals	CONFIRMED	forwarded unchanged to run_routines(atexit_globals, stopNode)
+local	FUN_0000222c	param_2	stopNode	CONFIRMED	forwarded unchanged to run_routines
+local	FUN_00001830	local_2818	checkState	CONFIRMED	two-word struct {flag, real_atexit_fn}: cxa_atexit_check_1 reaches the second word by pointer arithmetic on the first (see the comment above it)
+use	FUN_000018fc	uVar1	lastLookupResult	INFERRED	return value of the last dyld_func_lookup_stub call; only forwarded as a stale first argument to the __dyld_image_count function	^\s*uVar1\ =\ \(\(int\ \(\*\)\(\)\)FUN_00001770\)\(\(int\)"__dyld_NSAddressOfSymbol",\(uint\)local_24\);$	+1
+use	FUN_000018fc	uVar1	lastLookupResult	INFERRED	return value of the last dyld_func_lookup_stub call; only forwarded as a stale first argument to the __dyld_image_count function	^\s*uVar2\ =\ \(\*local_34\)\(uVar1\);$	+1
+use	FUN_000018fc	uVar1	imageName	CONFIRMED	result of __dyld_get_image_name(index), compared with "/usr/lib/libSystem.B.dylib"	^\s*uVar1\ =\ \(\*local_30\)\(local_38\);$	+2
+use	FUN_000018fc	uVar1	atexitAddress	CONFIRMED	result of __dyld_NSAddressOfSymbol(symbol): the address of libSystem's _atexit, returned	^\s*uVar1\ =\ \(\*local_24\[0\]\)\(iVar3\);$	+2
+use	FUN_000018fc	iVar3	imageHeader	CONFIRMED	result of __dyld_get_image_header(index) for libSystem	^\s*iVar3\ =\ \(\*local_2c\)\(local_38\);$	+2
+use	FUN_000018fc	iVar3	imageHeader	CONFIRMED	image header passed to __dyld_NSLookupSymbolInImage	^\s*iVar3\ =\ \(\*local_28\)\(iVar3,"_FUN_00002748",4\);$	+1	rhs	none
+use	FUN_000018fc	iVar3	atexitSymbol	CONFIRMED	NSSymbol of "_atexit" found by __dyld_NSLookupSymbolInImage(header, "_atexit", 4)	^\s*iVar3\ =\ \(\*local_28\)\(iVar3,"_FUN_00002748",4\);$	+1	lhs	none
+use	FUN_000018fc	iVar3	atexitSymbol	CONFIRMED	NSSymbol test before __dyld_NSAddressOfSymbol	^\s*if\ \(iVar3\ !=\ 0\)\ \{$	+1
+local	FUN_00001f70	in_r5	staleArgR5	INFERRED	r5 left over from the previous call, forwarded by the indirect call of the registered routine (the routine takes one argument)
+local	FUN_00001f70	in_r6	staleArgR6	INFERRED	stale register forwarded by the indirect call (see staleArgR5)
+local	FUN_00001f70	in_r7	staleArgR7	INFERRED	stale register forwarded by the indirect call (see staleArgR5)
+local	FUN_00001f70	in_r8	staleArgR8	INFERRED	stale register forwarded by the indirect call (see staleArgR5)
+local	FUN_000020f4	extraout_r4	r4AfterGetAndLock	INFERRED	r4 as left by __keymgr_get_and_lock_processwide_ptr; forwarded as the (ignored) second argument of the registered routine
+local	FUN_000020f4	extraout_r4_00	r4AfterSetAndUnlock	INFERRED	r4 as left by __keymgr_set_and_unlock_processwide_ptr; same use
+local	FUN_000020f4	in_r5	staleArgR5	INFERRED	r5 left over from the previous call, forwarded by the indirect call of the registered routine
+local	FUN_000020f4	in_r6	staleArgR6	INFERRED	stale register forwarded by the indirect call
+local	FUN_000020f4	in_r7	staleArgR7	INFERRED	stale register forwarded by the indirect call
+local	FUN_000020f4	in_r8	staleArgR8	INFERRED	stale register forwarded by the indirect call
+local	FUN_000023a8	uVar2	argument	INFERRED	entry word 2 copied into the heap copy (add_routine names the same word `argument`)
+local	FUN_000023a8	uVar4	kind	INFERRED	entry word 1 copied into the heap copy (add_routine names it `kind`)
+local	FUN_000023a8	in_r6	staleArgR6	INFERRED	stale register forwarded by the indirect call of the registered routine
+local	FUN_000023a8	in_r7	staleArgR7	INFERRED	stale register forwarded by the indirect call
+local	FUN_000023a8	in_r8	staleArgR8	INFERRED	stale register forwarded by the indirect call
+local	FUN_00001af4	param_1	s1	CONFIRMED	forwarded to _strcmp
+local	FUN_00001af4	param_2	s2	CONFIRMED	forwarded to _strcmp
+local	FUN_00001d64	param_1	cxaAtexitFn	CONFIRMED	same body as check_cxa_atexit: first argument is the __cxa_atexit pointer called with cxa_atexit_check_1
+local	FUN_00001d64	param_2	cxaFinalizeFn	CONFIRMED	second argument, the __cxa_finalize pointer
+local	FUN_00001d64	iVar1	status	CONFIRMED	result of the probing __cxa_atexit call (check_cxa_atexit: status)
+local	FUN_00001d64	pcStack00000018	cxaAtexitFnHome	CONFIRMED	stack home of param_1 (check_cxa_atexit: cxaAtexitFnHome)
+local	FUN_00001d64	pcStack0000001c	cxaFinalizeFnHome	CONFIRMED	stack home of param_2 (check_cxa_atexit: cxaFinalizeFnHome)
+local	FUN_00001d64	iStack_28	flag	CONFIRMED	first word of checkState in check_cxa_atexit
+local	FUN_00001d64	pcStack_24	realAtexitFn	CONFIRMED	second word of checkState in check_cxa_atexit
+local	FUN_00001d64	iStack_18	result	CONFIRMED	return value
+local	FUN_00001da4	uStack_38	imageIndex	CONFIRMED	same body as find_atexit_10_3: loop index over dyld images
+local	FUN_00001da4	pcStack_34	imageCountFn	CONFIRMED	__dyld_image_count
+local	FUN_00001da4	pcStack_30	imageNameFn	CONFIRMED	__dyld_get_image_name
+local	FUN_00001da4	pcStack_2c	imageHeaderFn	CONFIRMED	__dyld_get_image_header
+local	FUN_00001da4	pcStack_28	lookupSymbolFn	CONFIRMED	__dyld_NSLookupSymbolInImage
+local	FUN_00001da4	apcStack_24	addressOfSymbolFn	CONFIRMED	__dyld_NSAddressOfSymbol
+local	FUN_00001da4	uVar1	imageCount	CONFIRMED	result of __dyld_image_count, loop bound
+local	FUN_00001da4	pcVar2	imageName	CONFIRMED	result of __dyld_get_image_name(index)
+local	FUN_00001da4	uVar4	atexitAddress	CONFIRMED	result of __dyld_NSAddressOfSymbol: libSystem's _atexit
+use	FUN_00001da4	iVar3	imageHeader	CONFIRMED	result of __dyld_get_image_header(index) for libSystem	^\s*iVar3\ =\ \(\*pcStack_2c\)\(uStack_38\);$	+2
+use	FUN_00001da4	iVar3	imageHeader	CONFIRMED	image header passed to __dyld_NSLookupSymbolInImage	^\s*iVar3\ =\ \(\*pcStack_28\)\(iVar3,"_FUN_00002748",4\);$	+1	rhs	none
+use	FUN_00001da4	iVar3	atexitSymbol	CONFIRMED	NSSymbol of "_atexit"	^\s*iVar3\ =\ \(\*pcStack_28\)\(iVar3,"_FUN_00002748",4\);$	+1	lhs	none
+use	FUN_00001da4	iVar3	atexitSymbol	CONFIRMED	NSSymbol passed to __dyld_NSAddressOfSymbol	^\s*if\ \(iVar3\ !=\ 0\)\ \{$	+2
+local	FUN_00002368	param_1	atexit_globals	CONFIRMED	same body as run_routines
+local	FUN_00002368	param_2	stopNode	CONFIRMED	same body as run_routines
+local	FUN_00002368	puVar1	node	CONFIRMED	list node being run
+local	FUN_00002368	uVar2	kindMask	CONFIRMED	1 << kind
+local	FUN_00002368	iStack00000018	globalsHome	CONFIRMED	stack home of param_1
+local	FUN_00002368	puStack0000001c	stopNodeHome	CONFIRMED	stack home of param_2
+local	FUN_00002688	param_1	atexit_globals	CONFIRMED	same body as add_routine
+local	FUN_00002688	param_2	routine	CONFIRMED	same body as add_routine
+local	FUN_00002688	uVar1	argument	CONFIRMED	routine word 2 copied into the new node
+local	FUN_00002688	uVar4	kind	CONFIRMED	routine word 1 copied into the new node
+local	FUN_00002688	iVar3	unlockResult	CONFIRMED	result of __keymgr_set_and_unlock_processwide_ptr
+local	FUN_00002688	iStack00000018	globalsHome	CONFIRMED	stack home of param_1
+local	FUN_00002688	puStack0000001c	routineHome	CONFIRMED	stack home of param_2
+local	FUN_00002688	uStack_18	status	CONFIRMED	0 or -1 depending on the OS version / unlock result
+local	FUN_00002688	uStack_14	result	CONFIRMED	return value
+local	FUN_000026a8	iVar1	libSystemHandle	CONFIRMED	same body as get_globals: dlopen("/usr/lib/libSystem.B.dylib")
+local	FUN_000026a8	uVar2	symbolAddress	CONFIRMED	dlsym / find_atexit_10_3 result stored into the globals
+local	FUN_000026a8	iVar3	checkResult	CONFIRMED	check_cxa_atexit result
+local	FUN_000026a8	pvStack_20	atexit_globals	CONFIRMED	locked process-wide globals block (keymgr key 0xe)
+local	FUN_000026a8	pvStack_18	result	CONFIRMED	return value
+local	FUN_00002728	param_1	atexit_entry	CONFIRMED	same body as atexit_common
+local	FUN_00002728	param_2	dsoHandle	CONFIRMED	same body as atexit_common
+local	FUN_00002728	pcVar1	registerFn	CONFIRMED	the libSystem __cxa_atexit / atexit pointer from the globals block
+local	FUN_00002728	uVar2	argument	CONFIRMED	entry word 2 copied into the heap copy
+local	FUN_00002728	iVar3	unlockResult	CONFIRMED	result of __keymgr_set_and_unlock_processwide_ptr
+local	FUN_00002728	uVar5	kind	CONFIRMED	entry word 1 copied into the heap copy
+local	FUN_00002728	puStack00000018	entryHome	CONFIRMED	stack home of param_1
+local	FUN_00002728	uStack0000001c	dsoHandleHome	CONFIRMED	stack home of param_2
+local	FUN_00002728	uStack_18	result	CONFIRMED	return value
+local	FUN_000027a4	param_1	atexit_entry	CONFIRMED	same body as atexit_common
+local	FUN_000027a4	param_2	dsoHandle	CONFIRMED	same body as atexit_common
+local	FUN_000027a4	pcVar1	registerFn	CONFIRMED	the libSystem __cxa_atexit / atexit pointer from the globals block
+local	FUN_000027a4	uVar2	argument	CONFIRMED	entry word 2 copied into the heap copy
+local	FUN_000027a4	iVar3	unlockResult	CONFIRMED	result of __keymgr_set_and_unlock_processwide_ptr
+local	FUN_000027a4	uVar5	kind	CONFIRMED	entry word 1 copied into the heap copy
+local	FUN_000027a4	puStack00000018	entryHome	CONFIRMED	stack home of param_1
+local	FUN_000027a4	uStack0000001c	dsoHandleHome	CONFIRMED	stack home of param_2
+local	FUN_000027a4	uStack_18	result	CONFIRMED	return value
+func	FUN_00001af4	_strcmp_stub_00001af4	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to _strcmp at 0x1a3720; the decompiled body is a copy of that function
+func	FUN_00001b14	dyld_func_lookup_stub_00001b14	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to dyld_func_lookup at 0x1770; the decompiled body is a copy of that function
+func	FUN_00001d44	__keymgr_set_and_unlock_processwide_ptr_stub_00001d44	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to __keymgr_set_and_unlock_processwide_ptr at 0x1a36c0; the decompiled body is a copy of that function
+func	FUN_00001d64	check_cxa_atexit_stub_00001d64	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to check_cxa_atexit at 0x1830; the decompiled body is a copy of that function
+func	FUN_00001da4	find_atexit_10_3_stub_00001da4	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to find_atexit_10_3 at 0x18fc; the decompiled body is a copy of that function
+func	FUN_00001e04	__keymgr_get_and_lock_processwide_ptr_stub_00001e04	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to __keymgr_get_and_lock_processwide_ptr at 0x1a3680; the decompiled body is a copy of that function
+func	FUN_00001f30	__keymgr_set_and_unlock_processwide_ptr_stub_00001f30	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to __keymgr_set_and_unlock_processwide_ptr at 0x1a36c0; the decompiled body is a copy of that function
+func	FUN_00002094	__keymgr_get_and_lock_processwide_ptr_stub_00002094	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to __keymgr_get_and_lock_processwide_ptr at 0x1a3680; the decompiled body is a copy of that function
+func	FUN_000020d4	__keymgr_set_and_unlock_processwide_ptr_stub_000020d4	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to __keymgr_set_and_unlock_processwide_ptr at 0x1a36c0; the decompiled body is a copy of that function
+func	FUN_0000224c	__keymgr_set_and_unlock_processwide_ptr_stub_0000224c	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to __keymgr_set_and_unlock_processwide_ptr at 0x1a36c0; the decompiled body is a copy of that function
+func	FUN_0000226c	__keymgr_get_and_lock_processwide_ptr_stub_0000226c	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to __keymgr_get_and_lock_processwide_ptr at 0x1a3680; the decompiled body is a copy of that function
+func	FUN_00002348	__keymgr_set_and_unlock_processwide_ptr_stub_00002348	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to __keymgr_set_and_unlock_processwide_ptr at 0x1a36c0; the decompiled body is a copy of that function
+func	FUN_00002368	run_routines_stub_00002368	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to run_routines at 0x1f70; the decompiled body is a copy of that function
+func	FUN_00002388	__keymgr_get_and_lock_processwide_ptr_stub_00002388	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to __keymgr_get_and_lock_processwide_ptr at 0x1a3680; the decompiled body is a copy of that function
+func	FUN_00002668	__keymgr_set_and_unlock_processwide_ptr_stub_00002668	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to __keymgr_set_and_unlock_processwide_ptr at 0x1a36c0; the decompiled body is a copy of that function
+func	FUN_00002688	add_routine_stub_00002688	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to add_routine at 0x1e24; the decompiled body is a copy of that function
+func	FUN_000026a8	get_globals_stub_000026a8	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to get_globals at 0x1b34; the decompiled body is a copy of that function
+func	FUN_00002728	atexit_common_stub_00002728	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to atexit_common at 0x23a8; the decompiled body is a copy of that function
+func	FUN_000027a4	atexit_common_stub_000027a4	CONFIRMED	32-byte local stub (mflr/bcl/mfspr/addis/addi/mtctr/bctr): tail-jumps to atexit_common at 0x23a8; the decompiled body is a copy of that function
+use	FUN_000018fc	iVar3	atexitSymbol	CONFIRMED	NSSymbol passed to __dyld_NSAddressOfSymbol	^\s*uVar1\ =\ \(\*local_24\[0\]\)\(iVar3\);$	+1

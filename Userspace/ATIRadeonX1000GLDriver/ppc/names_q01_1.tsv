@@ -1,0 +1,54 @@
+local	FUN_000027d0	param_2	glContext	INFERRED	second argument: GL context whose clear colour (+0x2d90..+0x2d9c floats) and scissor box (+0x3180..+0x318c, enable byte +0x3190) are read; its offsets exceed the 0x2b98-byte GLDContext
+local	FUN_000027d0	uVar1	rowStridePixels	INFERRED	(renderWidth + 7) & ~7: row stride of the software buffer in pixels, added to the row-start pointer after each row
+local	FUN_000027d0	uVar2	clearPixelRgba8	INFERRED	four clear-colour floats scaled by FLOAT_001aa0cc (127.99999) and packed into one 32-bit pixel for the 8-bit-per-channel software buffer (softwareBufferFormat 1)
+local	FUN_000027d0	uVar3	clearPixelRgba16	INFERRED	four clear-colour floats scaled by FLOAT_001aa0d0 (32767.998) and packed into one 64-bit pixel for the 16-bit-per-channel software buffer (softwareBufferFormat 2)
+local	FUN_000027d0	uVar4	hasNegativeClearComponent	INFERRED	1 when any clear-colour component is below 0.0 (FLOAT_001aa0d4); stored to ctx+0x140
+local	FUN_000027d0	iVar5	rectTop	INFERRED	first cleared row counted from the top: 0 without scissor, renderHeight - (scissorY + scissorHeight) with scissor
+local	FUN_000027d0	iVar10	clampedBottomEdge	INFERRED	scissor bottom edge clamped to renderHeight
+local	FUN_000027d0	puVar6	pixelCursor32	INFERRED	write cursor into the 32-bit-pixel software buffer
+local	FUN_000027d0	puVar7	rowStart32	INFERRED	start of the current row of the 32-bit buffer; advanced by rowStridePixels per row
+local	FUN_000027d0	puVar8	pixelCursor64	INFERRED	write cursor into the 64-bit-pixel software buffer
+local	FUN_000027d0	puVar9	rowStart64	INFERRED	start of the current row of the 64-bit buffer
+local	FUN_000027d0	uVar16	pixelsLeftInRow	INFERRED	inner-loop countdown reloaded with the rectangle width for every row
+local	FUN_000027d0	uStack_66	clearGreen16High	INFERRED	high byte of the 16-bit green clear component (packed into clearPixelRgba16)
+local	FUN_000027d0	uStack_65	clearGreen16Low	INFERRED	low byte of the 16-bit green clear component
+use	FUN_000027d0	uVar12	rectWidth	INFERRED	number of pixels per cleared row (aligned width without scissor, right edge - rectLeft with scissor)	^\s*uVar12\ =\ iVar15\ \+\ 7U\ \&\ 0xfffffff8;$	+1
+use	FUN_000027d0	uVar12	rectWidth	INFERRED	number of pixels per cleared row (aligned width without scissor, right edge - rectLeft with scissor)	^\s*uVar12\ =\ uVar12\ \-\ iVar14;$	+1	lhs	none
+use	FUN_000027d0	uVar12	rectWidth	INFERRED	number of pixels per cleared row (aligned width without scissor, right edge - rectLeft with scissor)	^\s*if\ \(\(0\ <\ \(int\)uVar12\)\ \&\&\ \(0\ <\ iVar13\)\)\ \{$	+1
+use	FUN_000027d0	uVar12	rectWidth	INFERRED	number of pixels per cleared row (aligned width without scissor, right edge - rectLeft with scissor)	^\s*if\ \(\(iVar13\ ==\ 1\)\ \|\|\ \(uVar12\ ==\ uVar1\)\)\ \{$	+2
+use	FUN_000027d0	uVar12	rectWidth	INFERRED	number of pixels per cleared row (aligned width without scissor, right edge - rectLeft with scissor)	^\s*uVar16\ =\ uVar12;$	+1
+use	FUN_000027d0	uVar12	rectWidth	INFERRED	number of pixels per cleared row (aligned width without scissor, right edge - rectLeft with scissor)	^\s*uVar16\ =\ uVar12;$@2	+1
+use	FUN_000027d0	uVar12	rectWidth	INFERRED	number of pixels per cleared row (aligned width without scissor, right edge - rectLeft with scissor)	^\s*if\ \(\(iVar13\ ==\ 1\)\ \|\|\ \(uVar12\ ==\ uVar1\)\)\ \{$@2	+2
+use	FUN_000027d0	uVar12	rectWidth	INFERRED	number of pixels per cleared row (aligned width without scissor, right edge - rectLeft with scissor)	^\s*uVar16\ =\ uVar12;$@3	+1
+use	FUN_000027d0	uVar12	rectWidth	INFERRED	number of pixels per cleared row (aligned width without scissor, right edge - rectLeft with scissor)	^\s*uVar16\ =\ uVar12;$@4	+1
+use	FUN_000027d0	uVar12	rectRightEdge	INFERRED	scissor right edge (x + width) clamped to the aligned width	^\s*uVar12\ =\ iVar14\ \+\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00003188\)\ \+\ param_2\);$	+1
+use	FUN_000027d0	uVar12	rectRightEdge	INFERRED	scissor right edge (x + width) clamped to the aligned width	^\s*if\ \(\(int\)uVar1\ <\ \(int\)uVar12\)\ \{$	+2
+use	FUN_000027d0	uVar12	rectRightEdge	INFERRED	scissor right edge (x + width) clamped to the aligned width	^\s*uVar12\ =\ uVar12\ \-\ iVar14;$	+1	rhs	none
+use	FUN_000027d0	iVar14	rectLeft	INFERRED	first cleared column: 0 without scissor, scissor x clamped to >= 0	^\s*iVar14\ =\ 0;$	+1
+use	FUN_000027d0	iVar14	rectLeft	INFERRED	first cleared column: 0 without scissor, scissor x clamped to >= 0	^\s*iVar14\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00003180\)\ \+\ param_2\);$	+2
+use	FUN_000027d0	iVar14	rectLeft	INFERRED	first cleared column: 0 without scissor, scissor x clamped to >= 0	^\s*if\ \(iVar14\ <\ 0\)\ \{$	+2
+use	FUN_000027d0	iVar14	rectLeft	INFERRED	first cleared column: 0 without scissor, scissor x clamped to >= 0	^\s*uVar12\ =\ uVar12\ \-\ iVar14;$	+1
+use	FUN_000027d0	iVar14	rectLeft	INFERRED	first cleared column: 0 without scissor, scissor x clamped to >= 0	^\s*iVar14\ =\ iVar14\ \+\ uVar1\ \*\ \(iVar11\ \-\ \(iVar5\ \+\ iVar13\)\);$	+1	rhs	none
+use	FUN_000027d0	iVar13	rectBottomEdge	INFERRED	scissor bottom edge in rows from the top (rectTop + scissor height), clamped to renderHeight before the height is derived	^\s*iVar13\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x0000318c\)\ \+\ param_2\)\ \+\ iVar5;$	+1
+use	FUN_000027d0	iVar13	rectBottomEdge	INFERRED	scissor bottom edge in rows from the top (rectTop + scissor height), clamped to renderHeight before the height is derived	^\s*if\ \(iVar13\ <=\ iVar11\)\ \{$	+1
+use	FUN_000027d0	iVar13	rectBottomEdge	INFERRED	scissor bottom edge in rows from the top (rectTop + scissor height), clamped to renderHeight before the height is derived	^\s*iVar10\ =\ iVar13;$	+1
+use	FUN_000027d0	iVar13	rectHeight	INFERRED	number of rows to clear: renderHeight without scissor, clamped bottom edge - rectTop with scissor	^\s*iVar13\ =\ iVar11;$	+1
+use	FUN_000027d0	iVar13	rectHeight	INFERRED	number of rows to clear: renderHeight without scissor, clamped bottom edge - rectTop with scissor	^\s*iVar13\ =\ iVar10\ \-\ iVar5;$	+1
+use	FUN_000027d0	iVar13	rectHeight	INFERRED	number of rows to clear: renderHeight without scissor, clamped bottom edge - rectTop with scissor	^\s*if\ \(\(0\ <\ \(int\)uVar12\)\ \&\&\ \(0\ <\ iVar13\)\)\ \{$	+1
+use	FUN_000027d0	iVar13	rectHeight	INFERRED	number of rows to clear: renderHeight without scissor, clamped bottom edge - rectTop with scissor	^\s*iVar14\ =\ iVar14\ \+\ uVar1\ \*\ \(iVar11\ \-\ \(iVar5\ \+\ iVar13\)\);$	+1
+use	FUN_000027d0	iVar13	rectHeight	INFERRED	number of rows to clear: renderHeight without scissor, clamped bottom edge - rectTop with scissor	^\s*if\ \(\(iVar13\ ==\ 1\)\ \|\|\ \(uVar12\ ==\ uVar1\)\)\ \{$	+1
+use	FUN_000027d0	iVar13	rectHeight	INFERRED	number of rows to clear: renderHeight without scissor, clamped bottom edge - rectTop with scissor	^\s*iVar13\ =\ uVar12\ \*\ iVar13;$	+1	rhs	none
+use	FUN_000027d0	iVar13	rectHeight	INFERRED	number of rows to clear: renderHeight without scissor, clamped bottom edge - rectTop with scissor	^\s*\}\ while\ \(iVar13\ !=\ iVar14\);$	+1
+use	FUN_000027d0	iVar13	rectHeight	INFERRED	number of rows to clear: renderHeight without scissor, clamped bottom edge - rectTop with scissor	^\s*if\ \(\(iVar13\ ==\ 1\)\ \|\|\ \(uVar12\ ==\ uVar1\)\)\ \{$@2	+1
+use	FUN_000027d0	iVar13	rectHeight	INFERRED	number of rows to clear: renderHeight without scissor, clamped bottom edge - rectTop with scissor	^\s*iVar13\ =\ uVar12\ \*\ iVar13;$@2	+1	rhs	none
+use	FUN_000027d0	iVar13	rectHeight	INFERRED	number of rows to clear: renderHeight without scissor, clamped bottom edge - rectTop with scissor	^\s*\}\ while\ \(iVar13\ !=\ iVar14\);$@2	+1
+use	FUN_000027d0	iVar13	pixelsToFill	INFERRED	pixel count to fill (rectWidth * rectHeight) when the rectangle is one row or as wide as the row stride; counted down to 0	^\s*iVar13\ =\ uVar12\ \*\ iVar13;$	+1	lhs	none
+use	FUN_000027d0	iVar13	pixelsToFill	INFERRED	pixel count to fill (rectWidth * rectHeight) when the rectangle is one row or as wide as the row stride; counted down to 0	^\s*if\ \(0\ <\ iVar13\)\ \{$	+1
+use	FUN_000027d0	iVar13	pixelsToFill	INFERRED	pixel count to fill (rectWidth * rectHeight) when the rectangle is one row or as wide as the row stride; counted down to 0	^\s*iVar13\ =\ iVar13\ \+\ \-1;$	+2
+use	FUN_000027d0	iVar13	pixelsToFill	INFERRED	pixel count to fill (rectWidth * rectHeight) when the rectangle is one row or as wide as the row stride; counted down to 0	^\s*iVar13\ =\ uVar12\ \*\ iVar13;$@2	+1	lhs	none
+use	FUN_000027d0	iVar13	pixelsToFill	INFERRED	pixel count to fill (rectWidth * rectHeight) when the rectangle is one row or as wide as the row stride; counted down to 0	^\s*if\ \(0\ <\ iVar13\)\ \{$@2	+1
+use	FUN_000027d0	iVar13	pixelsToFill	INFERRED	pixel count to fill (rectWidth * rectHeight) when the rectangle is one row or as wide as the row stride; counted down to 0	^\s*iVar13\ =\ iVar13\ \+\ \-1;$@2	+2
+use	FUN_000027d0	iVar14	pixelOffset	INFERRED	pixel index of the first cleared pixel: rectLeft + rowStridePixels * (renderHeight - (rectTop + rectHeight))	^\s*iVar14\ =\ iVar14\ \+\ uVar1\ \*\ \(iVar11\ \-\ \(iVar5\ \+\ iVar13\)\);$	+1	lhs	none
+use	FUN_000027d0	iVar14	pixelOffset	INFERRED	pixel index of the first cleared pixel: rectLeft + rowStridePixels * (renderHeight - (rectTop + rectHeight))	^\s*puVar6\ =\ \(undefined4\ \*\)\(iVar14\ \*\ 4\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x148\)\);$	+1
+use	FUN_000027d0	iVar14	pixelOffset	INFERRED	pixel index of the first cleared pixel: rectLeft + rowStridePixels * (renderHeight - (rectTop + rectHeight))	^\s*puVar8\ =\ \(undefined8\ \*\)\(iVar14\ \*\ 8\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x148\)\);$	+1
+func	FUN_000027d0	gld_clearSoftwareColorBuffer	INFERRED	fills the software colour buffer (ctx+0x148, softwareBufferFormat 1 = 8-bit, 2 = 16-bit signed channels) with the packed clear colour inside the scissor box (+0x3180..+0x318c) or the whole render area
