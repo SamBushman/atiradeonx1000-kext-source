@@ -1893,9 +1893,9 @@ int FUN_000f7cd8(param_1, param_2)
   return;
 }
 
-/* FUN_000f7dbc @ 0xf7dbc (352 bytes) */
-int FUN_000f7dbc(param_1)
-  int param_1;
+/* DominatorTree__computeDominanceFrontiers @ 0xf7dbc (352 bytes) */
+int DominatorTree__computeDominanceFrontiers(domInfo)
+  int domInfo;
 {
   int iVar1;
   int *piVar2;
@@ -1908,8 +1908,8 @@ int FUN_000f7dbc(param_1)
   uint loopIndex2;
   uint uVar10;
   
-  piVar2 = (int *)Program__getBlocksArray(*(undefined4 *)(param_1 + 0x20));
-  if (*(int *)(param_1 + 0x1c) != 0) {
+  piVar2 = (int *)Program__getBlocksArray(*(undefined4 *)(domInfo + 0x20));
+  if (*(int *)(domInfo + 0x1c) != 0) {
     loopIndex = 1;
     do {
       piVar2 = piVar2 + 1;
@@ -1918,7 +1918,7 @@ int FUN_000f7dbc(param_1)
       loopCounter = 0;
       for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(iVar6 + 0xd0) + 4); loopIndex2 = loopIndex2 + 1) {
         iVar3 = *(int *)(loopCounter + *(int *)(*(int *)(iVar6 + 0xd0) + 8));
-        if ((iVar3 != 0) && (iVar5 != *(int *)(*(int *)(iVar3 + 0xe4) * 4 + *(int *)(param_1 + 8))))
+        if ((iVar3 != 0) && (iVar5 != *(int *)(*(int *)(iVar3 + 0xe4) * 4 + *(int *)(domInfo + 8))))
         {
           FUN_000e910c(iVar6,iVar3);
         }
@@ -1931,7 +1931,7 @@ int FUN_000f7dbc(param_1)
         for (uVar10 = 1; iVar1 = *(int *)(iVar3 + 0xf8), uVar10 <= *(uint *)(iVar1 + 4);
             uVar10 = uVar10 + 1) {
           iVar1 = *(int *)(loopCounterB + *(int *)(iVar1 + 8));
-          if (iVar5 != *(int *)(*(int *)(iVar1 + 0xe4) * 4 + *(int *)(param_1 + 8))) {
+          if (iVar5 != *(int *)(*(int *)(iVar1 + 0xe4) * 4 + *(int *)(domInfo + 8))) {
             FUN_000e910c(iVar6,iVar1);
           }
           loopCounterB = loopCounterB + 4;
@@ -1939,7 +1939,7 @@ int FUN_000f7dbc(param_1)
         loopCounter = loopCounter + 4;
       }
       loopIndex = loopIndex + 1;
-    } while (loopIndex <= *(uint *)(param_1 + 0x1c));
+    } while (loopIndex <= *(uint *)(domInfo + 0x1c));
   }
   return;
 }
@@ -2022,10 +2022,10 @@ int FUN_000f8044(param_1)
   return;
 }
 
-/* FUN_000f816c @ 0xf816c (236 bytes) */
-int FUN_000f816c(param_1, param_2)
-  int *param_1;
-  int param_2;
+/* DominatorTree__dfsNumber @ 0xf816c (236 bytes) */
+int DominatorTree__dfsNumber(domInfo, rootBlock)
+  int *domInfo;
+  int rootBlock;
 {
   int loopCounter;
   int vectorData;
@@ -2038,8 +2038,8 @@ int FUN_000f816c(param_1, param_2)
   int iVar6;
   uint uVar7;
   
-  *(int *)(param_1[8] + 0x474) = *(int *)(param_1[8] + 0x474) + 1;
-  arena = *(int *)(param_1[9] + 0x378);
+  *(int *)(domInfo[8] + 0x474) = *(int *)(domInfo[8] + 0x474) + 1;
+  arena = *(int *)(domInfo[9] + 0x378);
   allocation = (int *)Arena__alloc(arena,0x14);
   puVar5 = (uint *)(allocation + 1);
   *allocation = arena;
@@ -2048,9 +2048,9 @@ int FUN_000f816c(param_1, param_2)
   allocation[2] = 0;
   vectorData = Arena__alloc(arena,8);
   allocation[3] = vectorData;
-  *(undefined4 *)(param_2 + 0xe4) = 1;
-  *(undefined4 *)(*param_1 + 4) = 0;
-  *(int *)(*(int *)(param_2 + 0xe4) * 4 + param_1[6]) = param_2;
+  *(undefined4 *)(rootBlock + 0xe4) = 1;
+  *(undefined4 *)(*domInfo + 4) = 0;
+  *(int *)(*(int *)(rootBlock + 0xe4) * 4 + domInfo[6]) = rootBlock;
   uVar7 = allocation[2];
   if (uVar7 < (uint)allocation[1]) {
     _memset((void *)(uVar7 * 4 + allocation[3]),0,4);
@@ -2060,13 +2060,13 @@ int FUN_000f816c(param_1, param_2)
   else {
     piVar3 = (int *)Vector__elementRefGrow(puVar5,uVar7);
   }
-  *piVar3 = param_2;
+  *piVar3 = rootBlock;
   loopCounter = 2;
-  *(int *)(*(int *)(param_2 + 0xe4) * 4 + param_1[1]) = *(int *)(param_2 + 0xe4);
-  *(int *)(*(int *)(param_2 + 0xe4) * 4 + param_1[4]) = *(int *)(param_2 + 0xe4);
+  *(int *)(*(int *)(rootBlock + 0xe4) * 4 + domInfo[1]) = *(int *)(rootBlock + 0xe4);
+  *(int *)(*(int *)(rootBlock + 0xe4) * 4 + domInfo[4]) = *(int *)(rootBlock + 0xe4);
   while( true ) {
     while( true ) {
-      iVar4 = FUN_000e80cc(param_2,*(undefined4 *)(param_1[8] + 0x474));
+      iVar4 = FUN_000e80cc(rootBlock,*(undefined4 *)(domInfo[8] + 0x474));
       if (iVar4 == 0) break;
       uVar7 = allocation[2];
       if (uVar7 < *puVar5) {
@@ -2081,12 +2081,12 @@ int FUN_000f816c(param_1, param_2)
       iVar1 = loopCounter * 4;
       *(int *)(iVar4 + 0xe4) = loopCounter;
       loopCounter = loopCounter + 1;
-      *(undefined4 *)(iVar1 + *param_1) = *(undefined4 *)(param_2 + 0xe4);
-      *(int *)(*(int *)(iVar4 + 0xe4) * 4 + param_1[6]) = iVar4;
-      *(undefined4 *)(iVar4 + 0x118) = *(undefined4 *)(param_1[8] + 0x474);
-      *(int *)(*(int *)(iVar4 + 0xe4) * 4 + param_1[1]) = *(int *)(iVar4 + 0xe4);
-      *(int *)(*(int *)(iVar4 + 0xe4) * 4 + param_1[4]) = *(int *)(iVar4 + 0xe4);
-      param_2 = iVar4;
+      *(undefined4 *)(iVar1 + *domInfo) = *(undefined4 *)(rootBlock + 0xe4);
+      *(int *)(*(int *)(iVar4 + 0xe4) * 4 + domInfo[6]) = iVar4;
+      *(undefined4 *)(iVar4 + 0x118) = *(undefined4 *)(domInfo[8] + 0x474);
+      *(int *)(*(int *)(iVar4 + 0xe4) * 4 + domInfo[1]) = *(int *)(iVar4 + 0xe4);
+      *(int *)(*(int *)(iVar4 + 0xe4) * 4 + domInfo[4]) = *(int *)(iVar4 + 0xe4);
+      rootBlock = iVar4;
     }
     uVar7 = allocation[2];
     if (uVar7 == 0) break;
@@ -2094,7 +2094,7 @@ int FUN_000f816c(param_1, param_2)
     if (uVar7 - 1 < uVar7) {
       piVar3 = (int *)((uVar7 - 1) * 4 + allocation[3]);
     }
-    param_2 = *piVar3;
+    rootBlock = *piVar3;
     Vector__removeAt(puVar5,uVar7 - 1);
   }
   if (puVar5 != (uint *)0x0) {
@@ -2109,10 +2109,10 @@ int FUN_000f816c(param_1, param_2)
   return;
 }
 
-/* FUN_000f83cc @ 0xf83cc (100 bytes) */
-int FUN_000f83cc(param_1, param_2)
-  int param_1;
-  int param_2;
+/* DominatorTree__compress @ 0xf83cc (100 bytes) */
+int DominatorTree__compress(domInfo, vertex)
+  int domInfo;
+  int vertex;
 {
   int vectorData;
   int arena;
@@ -2126,7 +2126,7 @@ int FUN_000f83cc(param_1, param_2)
   uint *puVar8;
   int iVar9;
   
-  arena = *(int *)(*(int *)(param_1 + 0x24) + 0x378);
+  arena = *(int *)(*(int *)(domInfo + 0x24) + 0x378);
   allocation = (int *)Arena__alloc(arena,0x14);
   puVar8 = (uint *)(allocation + 1);
   *allocation = arena;
@@ -2135,8 +2135,8 @@ int FUN_000f83cc(param_1, param_2)
   allocation[4] = arena;
   vectorData = Arena__alloc(arena,8);
   allocation[3] = vectorData;
-  iVar9 = *(int *)(param_1 + 0xc);
-  while (*(int *)(*(int *)(param_2 * 4 + iVar9) * 4 + iVar9) != 0) {
+  iVar9 = *(int *)(domInfo + 0xc);
+  while (*(int *)(*(int *)(vertex * 4 + iVar9) * 4 + iVar9) != 0) {
     uVar2 = allocation[2];
     if (uVar2 < *puVar8) {
       _memset((void *)(uVar2 * 4 + allocation[3]),0,4);
@@ -2146,9 +2146,9 @@ int FUN_000f83cc(param_1, param_2)
     else {
       piVar4 = (int *)Vector__elementRefGrow(puVar8,uVar2);
     }
-    *piVar4 = param_2;
-    iVar9 = *(int *)(param_1 + 0xc);
-    param_2 = *(int *)(param_2 * 4 + iVar9);
+    *piVar4 = vertex;
+    iVar9 = *(int *)(domInfo + 0xc);
+    vertex = *(int *)(vertex * 4 + iVar9);
   }
   while (allocation[2] != 0) {
     uVar2 = allocation[2] - 1;
@@ -2158,15 +2158,15 @@ int FUN_000f83cc(param_1, param_2)
     }
     iVar9 = *piVar4;
     Vector__removeAt(puVar8,allocation[2] - 1);
-    iVar6 = *(int *)(param_1 + 0xc);
+    iVar6 = *(int *)(domInfo + 0xc);
     iVar9 = iVar9 * 4;
-    iVar7 = *(int *)(param_1 + 0x10);
+    iVar7 = *(int *)(domInfo + 0x10);
     iVar1 = *(int *)(iVar6 + iVar9) * 4;
     iVar5 = *(int *)(iVar7 + iVar1);
-    if (*(uint *)(iVar5 * 4 + *(int *)(param_1 + 4)) <
-        *(uint *)(*(int *)(iVar9 + iVar7) * 4 + *(int *)(param_1 + 4))) {
+    if (*(uint *)(iVar5 * 4 + *(int *)(domInfo + 4)) <
+        *(uint *)(*(int *)(iVar9 + iVar7) * 4 + *(int *)(domInfo + 4))) {
       *(int *)(iVar9 + iVar7) = iVar5;
-      iVar6 = *(int *)(param_1 + 0xc);
+      iVar6 = *(int *)(domInfo + 0xc);
     }
     *(undefined4 *)(iVar9 + iVar6) = *(undefined4 *)(iVar1 + iVar6);
   }
@@ -2182,136 +2182,147 @@ int FUN_000f83cc(param_1, param_2)
   return;
 }
 
-/* lazyEntryGet @ 0xf8588 (72 bytes) */
-int lazyEntryGet(param_1, param_2)
-  int param_1;
-  int param_2;
+/* DominatorTree__eval @ 0xf8588 (72 bytes) */
+int DominatorTree__eval(domInfo, vertex)
+  int domInfo;
+  int vertex;
 {
-  if (*(int *)(*(int *)(param_1 + 0xc) + param_2 * 4) != 0) {
-    ((int (*)())FUN_000f83cc)(param_1,param_2);
+  if (*(int *)(*(int *)(domInfo + 0xc) + vertex * 4) != 0) {
+    ((int (*)())DominatorTree__compress)(domInfo,vertex);
   }
-  return *(undefined4 *)(param_2 * 4 + *(int *)(param_1 + 0x10));
+  return *(undefined4 *)(vertex * 4 + *(int *)(domInfo + 0x10));
 }
 
-/* FUN_000f85d0 @ 0xf85d0 (740 bytes) */
-int FUN_000f85d0(param_1)
-  int *param_1;
+/* DominatorTree__compute @ 0xf85d0 (740 bytes) */
+int DominatorTree__compute(domInfo)
+  int *domInfo;
 {
+  uint vertexCount;
+  int vertexArray;
+  int idomBlock;
+  int idomArray;
+  int bucketByteOffset;
+  int vertexBlock2;
+  int blockCursor3;
+  int blockCursor2;
+  int vertexBlock;
+  int vertexByteOffset2;
+  int vertexByteOffset;
   uint loopCounterB;
   int loopCounter;
   uint loopIndex;
-  uint uVar1;
-  int iVar2;
+  uint predSemi;
+  int predecessorBlock;
   undefined4 *allocation;
-  int iVar4;
-  int iVar5;
-  uint uVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
+  int blockCursor;
+  int entryBlock;
+  uint vertexNumber;
+  int nextBlock;
+  int evalResult;
+  int semiArray;
   undefined4 arenaB;
-  uint uVar11;
-  int *piVar12;
+  uint predIndex;
+  int *bucketNode;
   
-  iVar5 = *(int *)(param_1[8] + 0x3a0);
-  if (*(int *)(iVar5 + 0xe4) == 0) {
-    iVar4 = *(int *)(param_1[8] + 900);
-    for (iVar7 = *(int *)(iVar4 + 8); iVar7 != 0; iVar7 = *(int *)(iVar7 + 8)) {
-      *(undefined4 *)(iVar4 + 0xe8) = *(undefined4 *)(iVar4 + 0xe4);
-      iVar4 = iVar7;
+  entryBlock = *(int *)(domInfo[8] + 0x3a0);
+  if (*(int *)(entryBlock + 0xe4) == 0) {
+    blockCursor = *(int *)(domInfo[8] + 900);
+    for (nextBlock = *(int *)(blockCursor + 8); nextBlock != 0; nextBlock = *(int *)(nextBlock + 8)) {
+      *(undefined4 *)(blockCursor + 0xe8) = *(undefined4 *)(blockCursor + 0xe4);
+      blockCursor = nextBlock;
     }
   }
-  ((int (*)())FUN_000f816c)(param_1,iVar5);
-  FUN_000ec468(param_1[8],param_1[6],param_1[7]);
-  uVar6 = param_1[7];
-  if (1 < uVar6) {
-    iVar4 = uVar6 << 2;
+  ((int (*)())DominatorTree__dfsNumber)(domInfo,entryBlock);
+  FUN_000ec468(domInfo[8],domInfo[6],domInfo[7]);
+  vertexNumber = domInfo[7];
+  if (1 < vertexNumber) {
+    vertexByteOffset = vertexNumber << 2;
     do {
       loopCounter = 0;
-      iVar7 = *(int *)(param_1[6] + iVar4);
-      for (uVar11 = 1; iVar2 = *(int *)(iVar7 + 0xd4), uVar11 <= *(uint *)(iVar2 + 4);
-          uVar11 = uVar11 + 1) {
-        iVar2 = *(int *)(loopCounter + *(int *)(iVar2 + 8));
-        if (iVar2 != 0) {
-          iVar9 = param_1[1];
-          iVar2 = ((int (*)())lazyEntryGet)(param_1,*(undefined4 *)(iVar2 + 0xe4));
-          uVar1 = *(uint *)(iVar2 * 4 + iVar9);
-          if (uVar1 < *(uint *)(iVar4 + param_1[1])) {
-            *(uint *)(iVar4 + param_1[1]) = uVar1;
+      vertexBlock2 = *(int *)(domInfo[6] + vertexByteOffset);
+      for (predIndex = 1; predecessorBlock = *(int *)(vertexBlock2 + 0xd4), predIndex <= *(uint *)(predecessorBlock + 4);
+          predIndex = predIndex + 1) {
+        predecessorBlock = *(int *)(loopCounter + *(int *)(predecessorBlock + 8));
+        if (predecessorBlock != 0) {
+          semiArray = domInfo[1];
+          predecessorBlock = ((int (*)())DominatorTree__eval)(domInfo,*(undefined4 *)(predecessorBlock + 0xe4));
+          predSemi = *(uint *)(predecessorBlock * 4 + semiArray);
+          if (predSemi < *(uint *)(vertexByteOffset + domInfo[1])) {
+            *(uint *)(vertexByteOffset + domInfo[1]) = predSemi;
           }
         }
         loopCounter = loopCounter + 4;
       }
-      arenaB = *(undefined4 *)(param_1[9] + 0x378);
+      arenaB = *(undefined4 *)(domInfo[9] + 0x378);
       allocation = (undefined4 *)Arena__alloc(arenaB,0xc);
       *allocation = arenaB;
-      allocation[1] = uVar6;
+      allocation[1] = vertexNumber;
       allocation[2] = 0;
-      allocation[2] = *(undefined4 *)(*(int *)(iVar4 + param_1[1]) * 4 + param_1[5]);
-      *(undefined4 **)(*(int *)(iVar4 + param_1[1]) * 4 + param_1[5]) = allocation + 1;
-      *(undefined4 *)(iVar4 + param_1[3]) = *(undefined4 *)(iVar4 + *param_1);
-      for (piVar12 = *(int **)(*(int *)(iVar4 + *param_1) * 4 + param_1[5]); piVar12 != (int *)0x0;
-          piVar12 = (int *)piVar12[1]) {
-        iVar7 = *piVar12 * 4;
-        iVar8 = ((int (*)())lazyEntryGet)(param_1,*piVar12);
-        iVar2 = *(int *)(param_1[1] + iVar7);
-        if (iVar2 == *(int *)(iVar8 * 4 + param_1[1])) {
-          *(int *)(iVar7 + param_1[2]) = iVar2;
+      allocation[2] = *(undefined4 *)(*(int *)(vertexByteOffset + domInfo[1]) * 4 + domInfo[5]);
+      *(undefined4 **)(*(int *)(vertexByteOffset + domInfo[1]) * 4 + domInfo[5]) = allocation + 1;
+      *(undefined4 *)(vertexByteOffset + domInfo[3]) = *(undefined4 *)(vertexByteOffset + *domInfo);
+      for (bucketNode = *(int **)(*(int *)(vertexByteOffset + *domInfo) * 4 + domInfo[5]); bucketNode != (int *)0x0;
+          bucketNode = (int *)bucketNode[1]) {
+        bucketByteOffset = *bucketNode * 4;
+        evalResult = ((int (*)())DominatorTree__eval)(domInfo,*bucketNode);
+        predecessorBlock = *(int *)(domInfo[1] + bucketByteOffset);
+        if (predecessorBlock == *(int *)(evalResult * 4 + domInfo[1])) {
+          *(int *)(bucketByteOffset + domInfo[2]) = predecessorBlock;
         }
         else {
-          *(int *)(iVar7 + param_1[2]) = iVar8;
+          *(int *)(bucketByteOffset + domInfo[2]) = evalResult;
         }
       }
-      uVar6 = uVar6 - 1;
-      iVar4 = iVar4 + -4;
-    } while (1 < uVar6);
+      vertexNumber = vertexNumber - 1;
+      vertexByteOffset = vertexByteOffset + -4;
+    } while (1 < vertexNumber);
   }
-  *(undefined4 *)(param_1[2] + 4) = 0;
-  uVar6 = param_1[7];
-  if (1 < uVar6) {
+  *(undefined4 *)(domInfo[2] + 4) = 0;
+  vertexCount = domInfo[7];
+  if (1 < vertexCount) {
     loopCounterB = 2;
     do {
-      iVar4 = loopCounterB * 4;
-      iVar7 = param_1[2];
-      if (*(int *)(iVar4 + iVar7) != *(int *)(iVar4 + param_1[1])) {
-        *(undefined4 *)(iVar4 + iVar7) = *(undefined4 *)(*(int *)(iVar4 + iVar7) * 4 + iVar7);
-        uVar6 = param_1[7];
+      vertexByteOffset2 = loopCounterB * 4;
+      idomArray = domInfo[2];
+      if (*(int *)(vertexByteOffset2 + idomArray) != *(int *)(vertexByteOffset2 + domInfo[1])) {
+        *(undefined4 *)(vertexByteOffset2 + idomArray) = *(undefined4 *)(*(int *)(vertexByteOffset2 + idomArray) * 4 + idomArray);
+        vertexCount = domInfo[7];
       }
       loopCounterB = loopCounterB + 1;
-    } while (loopCounterB <= uVar6);
+    } while (loopCounterB <= vertexCount);
   }
-  if (uVar6 != 0) {
-    iVar8 = param_1[6];
-    iVar7 = 0;
+  if (vertexCount != 0) {
+    vertexArray = domInfo[6];
+    idomBlock = 0;
     loopIndex = 1;
-    iVar4 = 4;
+    vertexBlock = 4;
     while( true ) {
-      iVar4 = *(int *)(iVar4 + iVar8);
-      *(int *)(iVar4 + 0xf0) = iVar7;
-      if (iVar7 != 0) {
-        FUN_000e8ce4(iVar7,iVar4);
+      vertexBlock = *(int *)(vertexBlock + vertexArray);
+      *(int *)(vertexBlock + 0xf0) = idomBlock;
+      if (idomBlock != 0) {
+        FUN_000e8ce4(idomBlock,vertexBlock);
       }
       loopIndex = loopIndex + 1;
-      if ((uint)param_1[7] < loopIndex) break;
+      if ((uint)domInfo[7] < loopIndex) break;
       if (loopIndex == 1) {
-        iVar8 = param_1[6];
-        iVar7 = 0;
-        iVar4 = 4;
+        vertexArray = domInfo[6];
+        idomBlock = 0;
+        vertexBlock = 4;
       }
       else {
-        iVar4 = loopIndex * 4;
-        iVar8 = param_1[6];
-        iVar7 = *(int *)(*(int *)(iVar4 + param_1[2]) * 4 + iVar8);
+        vertexBlock = loopIndex * 4;
+        vertexArray = domInfo[6];
+        idomBlock = *(int *)(*(int *)(vertexBlock + domInfo[2]) * 4 + vertexArray);
       }
     }
   }
-  ((int (*)())FUN_000f7dbc)(param_1);
-  if (*(int *)(iVar5 + 0xe8) == 0) {
-    iVar5 = *(int *)(param_1[8] + 900);
-    for (iVar4 = *(int *)(*(int *)(param_1[8] + 900) + 8); iVar4 != 0; iVar4 = *(int *)(iVar4 + 8))
+  ((int (*)())DominatorTree__computeDominanceFrontiers)(domInfo);
+  if (*(int *)(entryBlock + 0xe8) == 0) {
+    blockCursor3 = *(int *)(domInfo[8] + 900);
+    for (blockCursor2 = *(int *)(*(int *)(domInfo[8] + 900) + 8); blockCursor2 != 0; blockCursor2 = *(int *)(blockCursor2 + 8))
     {
-      *(undefined4 *)(iVar5 + 0xe4) = *(undefined4 *)(iVar5 + 0xe8);
-      iVar5 = iVar4;
+      *(undefined4 *)(blockCursor3 + 0xe4) = *(undefined4 *)(blockCursor3 + 0xe8);
+      blockCursor3 = blockCursor2;
     }
   }
   return;
@@ -2331,7 +2342,7 @@ int FUN_000f88b4(param_1)
   *allocation = arena;
   piVar2 = allocation + 1;
   ((int (*)())FUN_000f7cd8)(piVar2,param_1);
-  ((int (*)())FUN_000f85d0)(piVar2);
+  ((int (*)())DominatorTree__compute)(piVar2);
   if (piVar2 == (int *)0x0) {
     return;
   }
@@ -3500,11 +3511,11 @@ LAB_000fa744:
 }
 
 /* FUN_000fa958 @ 0xfa958 (1132 bytes) */
-int FUN_000fa958(param_1, param_2, operandIndex, param_4, inst, param_6, param_7, param_8, param_9, param_10, block)
-  int param_1;
-  int param_2;
+int FUN_000fa958(program, opcodeIndex, operandIndex, translateState, inst, param_6, param_7, param_8, param_9, param_10, block)
+  int program;
+  int opcodeIndex;
   int operandIndex;
-  int param_4;
+  int translateState;
   int inst;
   undefined4 param_6;
   undefined4 param_7;
@@ -3513,6 +3524,14 @@ int FUN_000fa958(param_1, param_2, operandIndex, param_4, inst, param_6, param_7
   undefined4 param_10;
   undefined4 block;
 {
+  uint registerType2;
+  uint registerType;
+  uint *destDescriptor;
+  int registerIndex2;
+  int splitMov;
+  int resultInst;
+  int foldedResult;
+  int fullSelectWord;
   undefined4 registerFileB;
   undefined4 registerFile;
   int loopCounter;
@@ -3523,143 +3542,143 @@ int FUN_000fa958(param_1, param_2, operandIndex, param_4, inst, param_6, param_7
   int operandRecord;
   int operandRecord3;
   int loopIndex;
-  int iVar1;
+  int splitTempIndex;
   undefined4 uVar2;
-  int iVar3;
+  int compiler;
   int loopCounterB;
-  uint *puVar5;
+  uint *sourceDescriptorPtr;
   int newTempIndex;
-  int iVar7;
-  uint uVar8;
-  undefined4 uVar9;
-  uint *puVar10;
-  uint uVar11;
-  undefined4 local_48;
+  int registerIndex;
+  uint useDestTable;
+  undefined4 laneSelectEntry;
+  uint *descriptor;
+  uint operandSlotInfo;
+  undefined4 destSelectWord;
   undefined4 local_44;
   
-  uVar11 = *(uint *)(PTR_DAT_001e8b88 + param_2 * 4);
+  operandSlotInfo = *(uint *)(PTR_DAT_001e8b88 + opcodeIndex * 4);
   if (operandIndex != 0) {
-    uVar8 = uVar11 >> 0x1c & 1;
+    useDestTable = operandSlotInfo >> 0x1c & 1;
 LAB_000fabd8:
-    if (uVar8 == 0) {
-      puVar5 = *(uint **)(((uVar11 >> 0x17 & 7) * 5 + (uVar11 >> 0x1d)) * 4 +
-                         *(int *)(param_4 + 0x6c));
-      puVar10 = puVar5;
+    if (useDestTable == 0) {
+      sourceDescriptorPtr = *(uint **)(((operandSlotInfo >> 0x17 & 7) * 5 + (operandSlotInfo >> 0x1d)) * 4 +
+                         *(int *)(translateState + 0x6c));
+      descriptor = sourceDescriptorPtr;
     }
     else {
-      puVar5 = (uint *)0x0;
-      puVar10 = *(uint **)(((uVar11 >> 0x17 & 7) * 5 + (uVar11 >> 0x1d)) * 4 +
-                          *(int *)(param_4 + 100));
-      local_44 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_44) + 0)),(short)*puVar10);
-      local_44 = *puVar10 & 0x1800000 | *puVar10 & 0x3f0000 | local_44 & 0xfe40ffff;
-      puVar10 = &local_44;
+      sourceDescriptorPtr = (uint *)0x0;
+      descriptor = *(uint **)(((operandSlotInfo >> 0x17 & 7) * 5 + (operandSlotInfo >> 0x1d)) * 4 +
+                          *(int *)(translateState + 100));
+      local_44 = CONCAT22((*(unsigned short *)((unsigned char *)&(local_44) + 0)),(short)*descriptor);
+      local_44 = *descriptor & 0x1800000 | *descriptor & 0x3f0000 | local_44 & 0xfe40ffff;
+      descriptor = &local_44;
     }
-    uVar8 = *puVar10 >> 0x10 & 0x3f;
-    iVar3 = *(int *)(param_1 + 8);
-    if ((((*puVar10 & 0x3f0000) == 0x100000) && (iVar3 != 0)) &&
-       ((*(uint *)(*(int *)(iVar3 + 0x30c) + 8) & 0x80) != 0)) {
-      iVar7 = 0xf;
+    registerType = *descriptor >> 0x10 & 0x3f;
+    compiler = *(int *)(program + 8);
+    if ((((*descriptor & 0x3f0000) == 0x100000) && (compiler != 0)) &&
+       ((*(uint *)(*(int *)(compiler + 0x30c) + 8) & 0x80) != 0)) {
+      registerIndex = 0xf;
     }
     else {
-      iVar7 = (int)(short)*puVar10;
+      registerIndex = (int)(short)*descriptor;
     }
-    if ((uVar8 == 0x12) && ((uVar11 & 0x3800000) != 0)) {
-      iVar7 = 0;
-      uVar8 = 0x13;
+    if ((registerType == 0x12) && ((operandSlotInfo & 0x3800000) != 0)) {
+      registerIndex = 0;
+      registerType = 0x13;
     }
-    if (((uVar11 >> 0x1b & 1) == 0) && ((uVar8 == 1 || (uVar8 == 0x22)))) {
-      iVar1 = *(int *)(iVar3 + 0x3ac) + -1;
-      *(int *)(iVar3 + 0x3ac) = iVar1;
-      newInst2 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
+    if (((operandSlotInfo >> 0x1b & 1) == 0) && ((registerType == 1 || (registerType == 0x22)))) {
+      splitTempIndex = *(int *)(compiler + 0x3ac) + -1;
+      *(int *)(compiler + 0x3ac) = splitTempIndex;
+      newInst2 = IRInst__create(0x31,*(undefined4 *)(program + 8));
       operandRecord = IRInst__getOperandRecord(newInst2,0);
       *(undefined4 *)(operandRecord + 0xc) = 0;
-      *(int *)(operandRecord + 8) = iVar1;
-      registerFileB = Program__registerFileOfIlType(param_1,uVar8);
+      *(int *)(operandRecord + 8) = splitTempIndex;
+      registerFileB = Program__registerFileOfIlType(program,registerType);
       operandRecord = IRInst__getOperandRecord(newInst2,1);
       *(undefined4 *)(operandRecord + 0xc) = registerFileB;
-      *(int *)(operandRecord + 8) = iVar7;
-      ((int (*)())Program__applySourceTokenToOperand)(param_1,param_8,puVar10,operandIndex,newInst2);
-      ((int (*)())Program__appendInst)(param_1,newInst2,block);
-      uVar8 = 4;
-      *puVar10 = *puVar10 & 0xfe3fffff;
-      *(short *)((int)puVar10 + 2) = (short)iVar1;
-      *puVar10 = *puVar10 & 0xffc0ffff | 0x40000;
-      iVar7 = iVar1;
+      *(int *)(operandRecord + 8) = registerIndex;
+      ((int (*)())Program__applySourceTokenToOperand)(program,param_8,descriptor,operandIndex,newInst2);
+      ((int (*)())Program__appendInst)(program,newInst2,block);
+      registerType = 4;
+      *descriptor = *descriptor & 0xfe3fffff;
+      *(short *)((int)descriptor + 2) = (short)splitTempIndex;
+      *descriptor = *descriptor & 0xffc0ffff | 0x40000;
+      registerIndex = splitTempIndex;
     }
     else {
-      ((int (*)())Program__applySourceTokenToOperand)(param_1,param_8,puVar5,operandIndex,inst);
+      ((int (*)())Program__applySourceTokenToOperand)(program,param_8,sourceDescriptorPtr,operandIndex,inst);
     }
-    registerFile = Program__registerFileOfIlType(param_1,uVar8);
+    registerFile = Program__registerFileOfIlType(program,registerType);
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
     *(undefined4 *)(operandRecord + 0xc) = registerFile;
-    *(int *)(operandRecord + 8) = iVar7;
+    *(int *)(operandRecord + 8) = registerIndex;
     return 0;
   }
-  uVar8 = 0;
-  if ((uVar11 >> 0x1c & 1) == 0) goto LAB_000fabd8;
-  puVar10 = *(uint **)(((uVar11 >> 0x17 & 7) * 5 + (uVar11 >> 0x1d)) * 4 + *(int *)(param_4 + 100));
-  iVar7 = (int)(short)*puVar10;
-  uVar8 = *puVar10 >> 0x10 & 0x3f;
-  registerFile = Program__registerFileOfIlType(param_1,uVar8);
+  useDestTable = 0;
+  if ((operandSlotInfo >> 0x1c & 1) == 0) goto LAB_000fabd8;
+  destDescriptor = *(uint **)(((operandSlotInfo >> 0x17 & 7) * 5 + (operandSlotInfo >> 0x1d)) * 4 + *(int *)(translateState + 100));
+  registerIndex2 = (int)(short)*destDescriptor;
+  registerType2 = *destDescriptor >> 0x10 & 0x3f;
+  registerFile = Program__registerFileOfIlType(program,registerType2);
   operandRecord = IRInst__getOperandRecord(inst,0);
   *(undefined4 *)(operandRecord + 0xc) = registerFile;
   uVar2 = 0;
-  *(int *)(operandRecord + 8) = iVar7;
-  iVar3 = inst;
-  ((int (*)())FUN_000f8d50)(param_1,param_9,param_7,puVar10,0,inst,param_10);
-  iVar3 = FUN_00113734(*(undefined4 *)(param_1 + 8),inst,param_7,puVar10,uVar2,iVar3,param_10);
-  if (iVar3 != 0) {
+  *(int *)(operandRecord + 8) = registerIndex2;
+  foldedResult = inst;
+  ((int (*)())FUN_000f8d50)(program,param_9,param_7,destDescriptor,0,inst,param_10);
+  foldedResult = FUN_00113734(*(undefined4 *)(program + 8),inst,param_7,destDescriptor,uVar2,foldedResult,param_10);
+  if (foldedResult != 0) {
     operandRecord4 = IRInst__getOperandRecord(inst,0);
     loopIndex = 0;
-    iVar3 = 0;
+    resultInst = 0;
     loopCounter = 0;
-    local_48 = *(undefined4 *)(operandRecord4 + 0x10);
+    destSelectWord = *(undefined4 *)(operandRecord4 + 0x10);
     loopCounterB = 4;
     do {
-      if (*(char *)((int)&local_48 + loopCounter) == '\0') {
+      if (*(char *)((int)&destSelectWord + loopCounter) == '\0') {
         loopIndex = loopIndex + 1;
-        iVar3 = loopCounter;
+        resultInst = loopCounter;
       }
       loopCounter = loopCounter + 1;
       loopCounterB = loopCounterB + -1;
     } while (loopCounterB != 0);
     if (1 < loopIndex) {
       local_44 = DAT_001aa9e0;
-      *(undefined1 *)((int)&local_44 + iVar3) = 0;
-      uVar9 = *(undefined4 *)(iVar3 * 4 + 0x1dc7bc);
-      iVar3 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-      registerFile = Program__registerFileOfIlType(param_1,uVar8);
-      operandRecord3 = IRInst__getOperandRecord(iVar3,0);
+      *(undefined1 *)((int)&local_44 + resultInst) = 0;
+      laneSelectEntry = *(undefined4 *)(resultInst * 4 + 0x1dc7bc);
+      splitMov = IRInst__create(0x31,*(undefined4 *)(program + 8));
+      registerFile = Program__registerFileOfIlType(program,registerType2);
+      operandRecord3 = IRInst__getOperandRecord(splitMov,0);
       *(undefined4 *)(operandRecord3 + 0xc) = registerFile;
-      *(int *)(operandRecord3 + 8) = iVar7;
-      *(undefined4 *)(iVar3 + 0x9c) = local_48;
-      registerFile = Program__registerFileOfIlType(param_1,uVar8);
-      operandRecord3 = IRInst__getOperandRecord(iVar3,1);
+      *(int *)(operandRecord3 + 8) = registerIndex2;
+      *(undefined4 *)(splitMov + 0x9c) = destSelectWord;
+      registerFile = Program__registerFileOfIlType(program,registerType2);
+      operandRecord3 = IRInst__getOperandRecord(splitMov,1);
       *(undefined4 *)(operandRecord3 + 0xc) = registerFile;
-      *(int *)(operandRecord3 + 8) = iVar7;
-      operandRecord3 = IRInst__getOperandRecord(iVar3,1);
-      *(undefined4 *)(operandRecord3 + 0x10) = uVar9;
+      *(int *)(operandRecord3 + 8) = registerIndex2;
+      operandRecord3 = IRInst__getOperandRecord(splitMov,1);
+      *(undefined4 *)(operandRecord3 + 0x10) = laneSelectEntry;
       *(uint *)(inst + 0x9c) = local_44;
       goto LAB_000fab1c;
     }
   }
-  iVar3 = 0;
+  splitMov = 0;
 LAB_000fab1c:
-  if ((uVar11 >> 0x1a & 1) != 0) {
-    return iVar3;
+  if ((operandSlotInfo >> 0x1a & 1) != 0) {
+    return splitMov;
   }
   operandRecord4 = IRInst__getOperandRecord(inst,0);
-  iVar1 = DAT_001aa9dc;
+  fullSelectWord = DAT_001aa9dc;
   if (*(int *)(operandRecord4 + 0x10) == DAT_001aa9dc) {
-    return iVar3;
+    return splitMov;
   }
-  newInst = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-  newTempIndex = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-  *(int *)(*(int *)(param_1 + 8) + 0x3ac) = newTempIndex;
-  registerFile = Program__registerFileOfIlType(param_1,uVar8);
+  newInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
+  newTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+  *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex;
+  registerFile = Program__registerFileOfIlType(program,registerType2);
   operandRecord4 = IRInst__getOperandRecord(newInst,0);
   *(undefined4 *)(operandRecord4 + 0xc) = registerFile;
-  *(int *)(operandRecord4 + 8) = iVar7;
+  *(int *)(operandRecord4 + 8) = registerIndex2;
   operandRecord2 = IRInst__getOperandRecord(newInst,1);
   *(undefined4 *)(operandRecord2 + 0xc) = 0;
   *(int *)(operandRecord2 + 8) = newTempIndex;
@@ -3668,7 +3687,7 @@ LAB_000fab1c:
   *(int *)(operandRecord2 + 8) = newTempIndex;
   operandRecord2 = IRInst__getOperandRecord(inst,0);
   *(undefined4 *)(newInst + 0x9c) = *(undefined4 *)(operandRecord2 + 0x10);
-  *(int *)(inst + 0x9c) = iVar1;
+  *(int *)(inst + 0x9c) = fullSelectWord;
   return newInst;
 }
 
@@ -3743,130 +3762,134 @@ int FUN_000fadc4(param_1, inst, param_3, param_4, vector, param_6, param_7)
   return puVar6;
 }
 
-/* FUN_000fafa4 @ 0xfafa4 (652 bytes) */
-int FUN_000fafa4(program, param_2, param_3, param_4, param_5)
+/* Program__createConstantVReg @ 0xfafa4 (652 bytes) */
+int Program__createConstantVReg(program, ilRegisterType, registerIndex, valueCount, values)
   int program;
-  int param_2;
-  undefined4 param_3;
-  int param_4;
-  undefined4 *param_5;
+  int ilRegisterType;
+  undefined4 registerIndex;
+  int valueCount;
+  undefined4 *values;
 {
+  undefined4 replicatedValue;
+  undefined4 laneValue0;
+  int *registerListSlot;
+  int laneRecord;
   uint loopCounter;
   undefined4 registerFile;
   int virtualRegister;
-  uint uVar1;
-  byte bVar2;
-  undefined4 uVar3;
-  int iVar4;
-  int *piVar5;
-  int iVar6;
-  uint *puVar7;
-  undefined4 uVar8;
-  uint uVar9;
+  uint laneBit;
+  byte usedLaneMask;
+  undefined4 laneValue;
+  int registerMap;
+  int *firstRecordSlot;
+  int constRecord;
+  uint *registerList;
+  undefined4 registerMapArg;
+  uint registerListCount;
   
-  uVar8 = *(undefined4 *)(program + 0x3ac);
-  registerFile = Program__registerFileOfIlType(program,param_2);
-  virtualRegister = FUN_00127608(uVar8,registerFile,param_3,0);
-  piVar5 = *(int **)(virtualRegister + 0x18);
-  if (*piVar5 == 0) {
-    piVar5 = (int *)Vector__elementRefGrow(piVar5,0);
+  registerMapArg = *(undefined4 *)(program + 0x3ac);
+  registerFile = Program__registerFileOfIlType(program,ilRegisterType);
+  virtualRegister = FUN_00127608(registerMapArg,registerFile,registerIndex,0);
+  firstRecordSlot = *(int **)(virtualRegister + 0x18);
+  if (*firstRecordSlot == 0) {
+    firstRecordSlot = (int *)Vector__elementRefGrow(firstRecordSlot,0);
   }
   else {
-    if (piVar5[1] == 0) {
-      *(undefined4 *)piVar5[2] = 0;
-      piVar5[1] = 1;
+    if (firstRecordSlot[1] == 0) {
+      *(undefined4 *)firstRecordSlot[2] = 0;
+      firstRecordSlot[1] = 1;
     }
-    piVar5 = (int *)piVar5[2];
+    firstRecordSlot = (int *)firstRecordSlot[2];
   }
-  iVar4 = *(int *)(program + 0x3ac);
-  iVar6 = *piVar5;
-  puVar7 = *(uint **)(iVar4 + 0x20);
-  uVar9 = puVar7[1];
-  if (uVar9 < *puVar7) {
-    _memset(uVar9 * 4 + puVar7[2],0,4);
-    piVar5 = (int *)(uVar9 * 4 + puVar7[2]);
-    puVar7[1] = uVar9 + 1;
+  registerMap = *(int *)(program + 0x3ac);
+  constRecord = *firstRecordSlot;
+  registerList = *(uint **)(registerMap + 0x20);
+  registerListCount = registerList[1];
+  if (registerListCount < *registerList) {
+    _memset(registerListCount * 4 + registerList[2],0,4);
+    registerListSlot = (int *)(registerListCount * 4 + registerList[2]);
+    registerList[1] = registerListCount + 1;
   }
   else {
-    piVar5 = (int *)Vector__elementRefGrow(puVar7,uVar9);
+    registerListSlot = (int *)Vector__elementRefGrow(registerList,registerListCount);
   }
-  *piVar5 = iVar6;
-  *(int *)(iVar4 + 0x1c) = *(int *)(iVar4 + 0x1c) + 1;
-  if (param_2 == 1) {
-    if (0 < param_4) {
+  *registerListSlot = constRecord;
+  *(int *)(registerMap + 0x1c) = *(int *)(registerMap + 0x1c) + 1;
+  if (ilRegisterType == 1) {
+    if (0 < valueCount) {
       loopCounter = 0;
-      iVar4 = iVar6;
+      laneRecord = constRecord;
       do {
-        uVar3 = param_5[loopCounter];
-        *(undefined4 *)(iVar4 + 0x1c) = 2;
-        *(undefined4 *)(iVar4 + 0x20) = uVar3;
-        uVar1 = loopCounter & 0x3f;
+        laneValue = values[loopCounter];
+        *(undefined4 *)(laneRecord + 0x1c) = 2;
+        *(undefined4 *)(laneRecord + 0x20) = laneValue;
+        laneBit = loopCounter & 0x3f;
         loopCounter = loopCounter + 1;
-        iVar4 = iVar4 + 0x18;
-        *(byte *)(iVar6 + 0x15c) = (byte)(1 << uVar1) | *(byte *)(iVar6 + 0x15c);
-        param_4 = param_4 + -1;
-      } while (param_4 != 0);
+        laneRecord = laneRecord + 0x18;
+        *(byte *)(constRecord + 0x15c) = (byte)(1 << laneBit) | *(byte *)(constRecord + 0x15c);
+        valueCount = valueCount + -1;
+      } while (valueCount != 0);
     }
   }
-  else if (param_2 < 2) {
-    if (param_2 == 0) {
-      if (param_4 < 1) {
-        bVar2 = *(byte *)(iVar6 + 0x15c);
+  else if (ilRegisterType < 2) {
+    if (ilRegisterType == 0) {
+      if (valueCount < 1) {
+        usedLaneMask = *(byte *)(constRecord + 0x15c);
       }
       else {
         loopCounter = 0;
-        iVar4 = iVar6;
+        laneRecord = constRecord;
         do {
-          uVar3 = *param_5;
-          *(undefined4 *)(iVar4 + 0x1c) = 4;
-          *(undefined4 *)(iVar4 + 0x20) = uVar3;
-          uVar1 = loopCounter & 0x3f;
+          laneValue0 = *values;
+          *(undefined4 *)(laneRecord + 0x1c) = 4;
+          *(undefined4 *)(laneRecord + 0x20) = laneValue0;
+          laneBit = loopCounter & 0x3f;
           loopCounter = loopCounter + 1;
-          iVar4 = iVar4 + 0x18;
-          bVar2 = (byte)(1 << uVar1) | *(byte *)(iVar6 + 0x15c);
-          *(byte *)(iVar6 + 0x15c) = bVar2;
-          param_4 = param_4 + -1;
-        } while (param_4 != 0);
+          laneRecord = laneRecord + 0x18;
+          usedLaneMask = (byte)(1 << laneBit) | *(byte *)(constRecord + 0x15c);
+          *(byte *)(constRecord + 0x15c) = usedLaneMask;
+          valueCount = valueCount + -1;
+        } while (valueCount != 0);
       }
-      uVar3 = *(undefined4 *)(iVar6 + 0x20);
-      *(undefined4 *)(iVar6 + 100) = 4;
-      *(byte *)(iVar6 + 0x15c) = bVar2 | 0xe;
-      *(undefined4 *)(iVar6 + 0x68) = uVar3;
-      *(undefined4 *)(iVar6 + 0x38) = uVar3;
-      *(undefined4 *)(iVar6 + 0x50) = uVar3;
-      *(undefined4 *)(iVar6 + 0x34) = 4;
-      *(undefined4 *)(iVar6 + 0x4c) = 4;
+      replicatedValue = *(undefined4 *)(constRecord + 0x20);
+      *(undefined4 *)(constRecord + 100) = 4;
+      *(byte *)(constRecord + 0x15c) = usedLaneMask | 0xe;
+      *(undefined4 *)(constRecord + 0x68) = replicatedValue;
+      *(undefined4 *)(constRecord + 0x38) = replicatedValue;
+      *(undefined4 *)(constRecord + 0x50) = replicatedValue;
+      *(undefined4 *)(constRecord + 0x34) = 4;
+      *(undefined4 *)(constRecord + 0x4c) = 4;
     }
   }
-  else if (param_2 == 2) {
-    if (0 < param_4) {
+  else if (ilRegisterType == 2) {
+    if (0 < valueCount) {
       loopCounter = 0;
-      iVar4 = iVar6;
+      laneRecord = constRecord;
       do {
-        uVar3 = param_5[loopCounter];
-        *(undefined4 *)(iVar4 + 0x1c) = 3;
-        *(undefined4 *)(iVar4 + 0x20) = uVar3;
-        uVar1 = loopCounter & 0x3f;
+        laneValue = values[loopCounter];
+        *(undefined4 *)(laneRecord + 0x1c) = 3;
+        *(undefined4 *)(laneRecord + 0x20) = laneValue;
+        laneBit = loopCounter & 0x3f;
         loopCounter = loopCounter + 1;
-        iVar4 = iVar4 + 0x18;
-        *(byte *)(iVar6 + 0x15c) = (byte)(1 << uVar1) | *(byte *)(iVar6 + 0x15c);
-        param_4 = param_4 + -1;
-      } while (param_4 != 0);
+        laneRecord = laneRecord + 0x18;
+        *(byte *)(constRecord + 0x15c) = (byte)(1 << laneBit) | *(byte *)(constRecord + 0x15c);
+        valueCount = valueCount + -1;
+      } while (valueCount != 0);
     }
   }
-  else if ((param_2 == 0x1d) && (0 < param_4)) {
+  else if ((ilRegisterType == 0x1d) && (0 < valueCount)) {
     loopCounter = 0;
-    iVar4 = iVar6;
+    laneRecord = constRecord;
     do {
-      uVar3 = param_5[loopCounter];
-      *(undefined4 *)(iVar4 + 0x1c) = 3;
-      *(undefined4 *)(iVar4 + 0x20) = uVar3;
-      uVar1 = loopCounter & 0x3f;
+      laneValue = values[loopCounter];
+      *(undefined4 *)(laneRecord + 0x1c) = 3;
+      *(undefined4 *)(laneRecord + 0x20) = laneValue;
+      laneBit = loopCounter & 0x3f;
       loopCounter = loopCounter + 1;
-      iVar4 = iVar4 + 0x18;
-      *(byte *)(iVar6 + 0x15c) = (byte)(1 << uVar1) | *(byte *)(iVar6 + 0x15c);
-      param_4 = param_4 + -1;
-    } while (param_4 != 0);
+      laneRecord = laneRecord + 0x18;
+      *(byte *)(constRecord + 0x15c) = (byte)(1 << laneBit) | *(byte *)(constRecord + 0x15c);
+      valueCount = valueCount + -1;
+    } while (valueCount != 0);
   }
   return;
 }
@@ -3897,7 +3920,7 @@ int FUN_000fb230(program, ilReader)
       FUN_000da070(*(undefined4 *)(*(int *)(program + 8) + 0x398),uVar2,iVar4,1,&local_48);
       ILReader__appendBoolConst(ilReader,iVar4,(uint)(local_48 != 0));
       iVar3 = iVar4 + 1;
-      ((int (*)())FUN_000fafa4)(program,0,iVar4,1,&local_48);
+      ((int (*)())Program__createConstantVReg)(program,0,iVar4,1,&local_48);
       iVar4 = iVar3;
     } while (iVar1 != iVar3);
   }
@@ -3908,7 +3931,7 @@ int FUN_000fb230(program, ilReader)
       FUN_000da028(*(undefined4 *)(*(int *)(program + 8) + 0x398),uVar2,iVar4,4,&local_48);
       ILReader__appendIntConst(ilReader,iVar4,local_48,local_44,local_40,local_3c);
       iVar3 = iVar4 + 1;
-      ((int (*)())FUN_000fafa4)(program,2,iVar4,4,&local_48);
+      ((int (*)())Program__createConstantVReg)(program,2,iVar4,4,&local_48);
       iVar4 = iVar3;
     } while (iVar1 != iVar3);
   }
@@ -3920,7 +3943,7 @@ int FUN_000fb230(program, ilReader)
       ((void (*)())ILReader__appendFloatConst)(ilReader,iVar4,(double)local_38,(double)local_34,(double)local_30,(double)local_2c
                   );
       iVar3 = iVar4 + 1;
-      ((int (*)())FUN_000fafa4)(program,1,iVar4,4,&local_38);
+      ((int (*)())Program__createConstantVReg)(program,1,iVar4,4,&local_38);
       iVar4 = iVar3;
     } while (iVar1 != iVar3);
   }
@@ -5855,7 +5878,7 @@ code_r0x000fed00:
         } while (ppppppuVar49 != (uint ******)0x0);
       }
       argR7 = (uint ******)&local_124;
-      ((int (*)())FUN_000fafa4)(program,(uint)pppuVar42 >> 0x10 & 0x3f,(int)registerIndex2,argR6,argR7);
+      ((int (*)())Program__createConstantVReg)(program,(uint)pppuVar42 >> 0x10 & 0x3f,(int)registerIndex2,argR6,argR7);
       goto switchD_000fdaf0_caseD_2;
     case 0x42:
       compilerArenaA = *(undefined4 *)(compiler + 0x374);

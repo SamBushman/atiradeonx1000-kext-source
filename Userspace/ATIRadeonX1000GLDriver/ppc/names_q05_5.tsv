@@ -521,8 +521,6 @@ use	ffpsEmitTexEnvCombine	iVar9	loopCounter	INFERRED	role read off the defining 
 use	ffpsEmitTexEnvCombine	iVar9	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+2
 use	ffpsEmitTexEnvCombine	iVar9	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar9\ =\ 0;$@2	+1
 use	ffpsEmitTexEnvCombine	iVar9	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar9\ =\ iVar9\ \+\ 1;$@2	+2
-
-
 use	FUN_000d9b58	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ 0;$	+1
 use	FUN_000d9b58	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*return\ iVar4\ \+\ iVar3;$	+1
 use	FUN_000d9b58	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*bVar1\ =\ iVar3\ !=\ 0xe0;$	+1
@@ -530,21 +528,6 @@ use	FUN_000d9b58	iVar3	loopCounter	INFERRED	role read off the defining expressio
 use	FUN_000d9b58	iVar4	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ 0;$	+1
 use	FUN_000d9b58	iVar4	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*return\ iVar4\ \+\ iVar3;$	+1
 use	FUN_000d9b58	iVar4	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 use	ildisAppendIndentedf	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ 0;$	+1
 use	ildisAppendIndentedf	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
 use	ildisAppendIndentedf	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*\}\ while\ \(param_2\ !=\ iVar3\);$	+1
@@ -552,16 +535,6 @@ use	ildisPrintFixedPoint	uVar4	loopCounter	INFERRED	role read off the defining e
 use	ildisPrintFixedPoint	uVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar2\ =\ uVar4\ \&\ 0x3f;$	+2
 use	ildisPrintFixedPoint	uVar6	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar6\ =\ 0;$	+1
 use	ildisPrintFixedPoint	uVar6	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar7\ =\ uVar6\ \&\ 0x3f;$	+2
-
-
-
-
-
-
-
-
-
-
 use	FUN_000e0e28	iVar1	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar1\ =\ 0;$	+1
 use	FUN_000e0e28	iVar1	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*_memcpy\(auStack_b8,iVar1\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x3a0\),0x80\);$	+2
 use	FUN_000e0e28	iVar1	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*\}\ while\ \(iVar1\ <\ \*\(int\ \*\)\(param_1\ \+\ 0x3a4\)\);$	+1
@@ -570,35 +543,10 @@ use	Compiler__setOption	iVar4	loopCounter	INFERRED	role read off the defining ex
 use	Compiler__setOption	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ iVar4\ \+\ 1;$	+1
 use	Compiler__setOption	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000e0794\)\(param_1,iVar4\);$	+1
 use	Compiler__setOption	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000e07b8\)\(param_1,iVar4\);$	+1
-
-
-
-
-
-
-
-
-
-
 use	FUN_000e1888	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ 0;$	+1
 use	FUN_000e1888	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000e180c\)\(param_1,iVar2\);$	+3
 use	FUN_000e1888	iVar4	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ 0x14;$	+1
 use	FUN_000e1888	iVar4	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 use	FUN_000e2c78	uVar7	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar7\ =\ 0;$	+1
 use	FUN_000e2c78	uVar7	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*if\ \(\(\(int\)\*\(char\ \*\)\(param_1\ \+\ 0x15c\)\ >>\ \(uVar7\ \&\ 0x3f\)\ \&\ 1U\)\ !=\ 0\)\ \{$	+1
 use	FUN_000e2c78	uVar7	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*FUN_000d9d74\(uVar15,uVar12,\(uint\)\(iVar16\ ==\ 1\),uVar7,uVar5,0\);$	+1
@@ -616,7 +564,6 @@ use	FUN_000e2c78	uVar7	loopCounter	INFERRED	role read off the defining expressio
 use	FUN_000e2c78	uVar7	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*\(\(undefined4\ \(\*\)\(\)\)FUN_000d9bac\)\(uVar15,uVar12,iVar3,uVar7,uVar5,\(uint\)\(iVar4\ ==\ 0xc\),\(double\)fVar6\);$	+1
 use	FUN_000e2c78	uVar7	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*bVar1\ =\ uVar7\ !=\ 3;$@3	+1
 use	FUN_000e2c78	uVar7	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar7\ =\ uVar7\ \+\ 1;$@3	+1
-
 use	MachineAssembler__vslot34_declareDestinationLanesByClass	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ 0;$	+1
 use	MachineAssembler__vslot34_declareDestinationLanesByClass	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*if\ \(\*\(char\ \*\)\(iVar2\ \+\ iVar4\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+1
 use	MachineAssembler__vslot34_declareDestinationLanesByClass	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*bVar1\ =\ iVar2\ !=\ 3;$	+2
@@ -626,28 +573,12 @@ use	MachineAssembler__vslot34_declareDestinationLanesByClass	iVar2	loopCounter	I
 use	MachineAssembler__vslot34_declareDestinationLanesByClass	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ 0;$@3	+1
 use	MachineAssembler__vslot34_declareDestinationLanesByClass	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*if\ \(\*\(char\ \*\)\(iVar2\ \+\ iVar4\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$@3	+1
 use	MachineAssembler__vslot34_declareDestinationLanesByClass	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*bVar1\ =\ iVar2\ !=\ 3;$@3	+2
-
-
-
-
-
-
 use	FUN_000e3968	iVar1	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar1\ =\ 0;$	+1
 use	FUN_000e3968	iVar1	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*if\ \(\*\(char\ \*\)\(\(int\)local_38\ \+\ iVar1\)\ ==\ '\\x01'\)\ \{$	+2
 use	FUN_000e3968	iVar1	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*\*\(undefined1\ \*\)\(\(int\)local_38\ \+\ iVar1\)\ =\ 1;$	+1
 use	FUN_000e3968	iVar1	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar1\ =\ iVar1\ \+\ 1;$	+1
 use	FUN_000e3968	iVar5	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ 4;$	+1
 use	FUN_000e3968	iVar5	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
-
-
-
-
-
-
-
-
-
-
 use	Block__isInVectorD4Of	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ 0;$	+1
 use	Block__isInVectorD4Of	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_2\ \+\ 0xd4\)\ \+\ 8\)\);$	+1
 use	Block__isInVectorD4Of	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ iVar4\ \+\ 4;$	+1
@@ -667,7 +598,6 @@ use	Block__predecessorIndex	iVar2	loopCounter	INFERRED	role read off the definin
 use	Block__predecessorIndex	iVar4	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ 0;$	+1
 use	Block__predecessorIndex	iVar4	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xd4\)\ \+\ 8\)\ \+\ iVar4\);$	+1
 use	Block__predecessorIndex	iVar4	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ iVar4\ \+\ 4;$	+1
-
 use	FUN_000e80cc	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ 0;$	+1
 use	FUN_000e80cc	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xd0\)\ \+\ 8\)\ \+\ iVar3\);$	+1
 use	FUN_000e80cc	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ iVar3\ \+\ 4;$	+1
@@ -683,8 +613,6 @@ use	FUN_000e8124	uVar3	loopCounter	INFERRED	role read off the defining expressio
 use	FUN_000e8124	uVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*\}\ while\ \(\(\*\(uint\ \*\)\(\(int\)puVar7\ \+\ \(uVar3\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ 8\)\ >>\ \(uVar3\ \&\ 0x1f\)\ \&\ 1\)\ !=\ 0\);$	+2
 use	FUN_000e8124	uVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar3\ =\ 0;$@4	+1
 use	FUN_000e8124	uVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar9\ =\ uVar3\ >>\ 3\ \&\ 0x1ffffffc;$	+3
-
-
 use	Block__verify	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ 0;$	+1
 use	Block__verify	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar4\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0xd4\)\ \+\ 8\)\);$	+1
 use	Block__verify	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ iVar4\ \+\ 4;$	+1
@@ -693,14 +621,6 @@ use	Block__verify	iVar4	loopCounter	INFERRED	role read off the defining expressi
 use	Block__verify	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ iVar4\ \+\ 4;$@2	+1
 use	Block__verify	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ 0;$@3	+1
 use	Block__verify	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*bVar1\ =\ iVar4\ ==\ 0;$	+2
-
-
-
-
-
-
-
-
 use	FUN_000e8eac	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ 0;$	+1
 use	FUN_000e8eac	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0xd4\)\ \+\ 8\)\ \+\ iVar4\);$	+1
 use	FUN_000e8eac	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ iVar4\ \+\ 4;$	+1
@@ -713,8 +633,6 @@ use	FUN_000e8eac	iVar7	loopCounterB	INFERRED	role read off the defining expressi
 use	FUN_000e8eac	iVar7	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar7\ =\ iVar7\ \+\ 4;$	+1
 use	FUN_000e8eac	iVar7	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar7\ \+\ \*\(int\ \*\)\(iVar4\ \+\ 8\)\);$@2	+1
 use	FUN_000e8eac	iVar7	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar7\ =\ iVar7\ \+\ 4;$@2	+1
-
-
 use	Block__bypass	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ 0;$	+1
 use	Block__bypass	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*FUN_00194208\(iVar5,iVar3\);$	+1
 use	Block__bypass	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
@@ -757,52 +675,22 @@ use	FUN_000e9948	iVar5	loopCounterB	INFERRED	role read off the defining expressi
 use	FUN_000e9948	iVar6	loopCounterC	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar6\ =\ 0;$	+1
 use	FUN_000e9948	iVar6	loopCounterC	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar5\ \+\ 8\)\ \+\ iVar6\);$	+1
 use	FUN_000e9948	iVar6	loopCounterC	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar6\ =\ iVar6\ \+\ 4;$	+1
-
-
-
-
-
 use	Block__ctor_ea020	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ 0x20;$	+1
 use	Block__ctor_ea020	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
 use	Block__ctor_ea148	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ 0x20;$	+1
 use	Block__ctor_ea148	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
-
-
-
-
-
-
-
-
-
-
 use	PostLoopFooter__ctor_eb3c8	iVar2	operandRecord	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ FUN_001054ec\(uVar5,0\);$	+3
 use	PostLoopFooter__ctor_eb3c8	iVar2	operandRecord	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ FUN_001054ec\(puVar6,0\);$	+3
 use	PostLoopFooter__ctor_eb3c8	iVar2	operandRecord	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ FUN_001054ec\(param_1\[0x52\],1\);$	+2
 use	PostLoopFooter__ctor_eb3c8	iVar2	virtualRegister	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_5\ \+\ COMP_currentProgram\)\ \+\ 0x3ac\),4,0,0\);$	+2
 use	PostLoopFooter__ctor_eb3c8	iVar2	virtualRegister	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*FUN_001046c8\(param_1\[0x52\],1,iVar2\);$	+1
 use	PostLoopFooter__ctor_eb3c8	uVar5	virtualRegisterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar5\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_5\ \+\ COMP_currentProgram\)\ \+\ 0x3ac\),4,param_2,0\);$	+2
-
-
-
-
-
 use	FUN_000ec468	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ 0;$	+1
 use	FUN_000ec468	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x394\)\ \+\ iVar2\)\ =\ \*\(undefined4\ \*\)\(param_2\ \+\ iVar2\);$	+2
-
-
-
-
 use	FUN_000ec728	iVar11	newTempIndex	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar11\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$	+3
 use	FUN_000ec920	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ 0;$	+1
 use	FUN_000ec920	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar1\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(piVar8\[0x34\]\ \+\ 8\)\ \+\ iVar5\);$	+1
 use	FUN_000ec920	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ iVar5\ \+\ 4;$	+1
-
-
-
-
-
-
 use	FUN_000ed63c	iVar8	newTempIndex	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar8\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$	+2
 use	FUN_000ed63c	iVar8	newTempIndex	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*\*\(int\ \*\)\(iVar4\ \+\ 8\)\ =\ iVar8;$	+1
 use	Program__beginPass	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ 0;$	+1
@@ -814,14 +702,12 @@ use	FUN_000ed89c	uVar16	virtualRegister	INFERRED	role read off the defining expr
 use	FUN_000ed89c	uVar16	virtualRegister	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*FUN_001046c8\(puVar7,1,uVar16\);$	+1
 use	FUN_000ed89c	uVar16	virtualRegister	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*FUN_001236e4\(uVar16,1,puVar7\);$	+1
 use	FUN_000ed89c	uVar16	virtualRegister	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*FUN_001049e8\(piVar15\[1\],uVar16\);$	+2
-
 use	FUN_000eea24	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ 0;$	+1
 use	FUN_000eea24	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ 0x18\)\ \+\ 8\)\);$	+1
 use	FUN_000eea24	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ iVar5\ \+\ 4;$	+1
 use	FUN_000eea24	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ 0;$@2	+1
 use	FUN_000eea24	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar5\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar1\ \+\ 0x18\)\ \+\ 8\)\);$@2	+1
 use	FUN_000eea24	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ iVar5\ \+\ 4;$@2	+1
-
 use	FUN_000ef204	iVar7	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar7\ =\ 0;$	+1
 use	FUN_000ef204	iVar7	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*if\ \(\*\(char\ \*\)\(iVar7\ \+\ iVar6\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+1
 use	FUN_000ef204	iVar7	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*bVar1\ =\ iVar7\ !=\ 3;$	+1
@@ -829,24 +715,18 @@ use	FUN_000ef204	iVar7	loopCounter	INFERRED	role read off the defining expressio
 use	FUN_000ef498	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ 0;$	+1
 use	FUN_000ef498	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar2\ \+\ 8\)\ \+\ iVar3\);$	+1
 use	FUN_000ef498	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ iVar3\ \+\ 4;$	+1
-
 use	FUN_000efde4	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ 0;$	+1
 use	FUN_000efde4	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar7\ \+\ 0xf4\)\ \+\ 8\)\ \+\ iVar5\);$	+1
 use	FUN_000efde4	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ iVar5\ \+\ 4;$	+1
 use	FUN_000efde4	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ 0;$@2	+1
 use	FUN_000efde4	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar7\ \+\ 0xf4\)\ \+\ 8\)\ \+\ iVar5\);$@2	+1
 use	FUN_000efde4	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ iVar5\ \+\ 4;$@2	+1
-
 use	FUN_000f04d4	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ 4;$	+1
 use	FUN_000f04d4	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
 use	FUN_000f04d4	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ 0;$	+1
 use	FUN_000f04d4	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*if\ \(\*\(char\ \*\)\(iVar3\ \+\ iVar4\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+1
 use	FUN_000f04d4	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar8\ =\ \(uint\)\*\(byte\ \*\)\(iVar3\ \+\ iVar4\ \+\ 0x10\);$	+1
 use	FUN_000f04d4	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*bVar1\ =\ iVar3\ !=\ 3;$	+2
-
-
-
-
 use	SelectWord__isSplat	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ 4;$	+1
 use	SelectWord__isSplat	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+1
 use	SelectWord__isSplat	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*if\ \(iVar5\ ==\ 0\)\ \{$	+1
@@ -855,8 +735,6 @@ use	FUN_000f2cac	iVar2	loopCounter	INFERRED	role read off the defining expressio
 use	FUN_000f2cac	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
 use	FUN_000f2cac	iVar3	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ 4;$	+1
 use	FUN_000f2cac	iVar3	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
-
-
 use	laneBytes__mapTwoThreeToOne	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ 4;$	+1
 use	laneBytes__mapTwoThreeToOne	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
 use	laneBytes__mergeOneAndTwo	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ 4;$	+1
@@ -882,10 +760,6 @@ use	SelectWord__firstUnwrittenComponent	iVar2	loopCounter	INFERRED	role read off
 use	SelectWord__firstUnwrittenComponent	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ iVar2\ \+\ 1;$	+1
 use	SelectWord__firstUnwrittenComponent	iVar3	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ 4;$	+1
 use	SelectWord__firstUnwrittenComponent	iVar3	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
-
-
-
-
 use	FUN_000f33f8	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ 0;$	+1
 use	FUN_000f33f8	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*\*pcVar2\ =\ \*\(char\ \*\)\(\(int\)\&\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 4\)\)\ \+\ iVar3\);$	+1
 use	FUN_000f33f8	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
@@ -907,16 +781,12 @@ use	FUN_000f370c	iVar3	loopCounter	INFERRED	role read off the defining expressio
 use	FUN_000f370c	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
 use	laneBytes__clearSetLanes	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ 4;$	+1
 use	laneBytes__clearSetLanes	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
-
-
-
 use	IRInst__countWrittenComponents	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ 0;$	+1
 use	IRInst__countWrittenComponents	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+1
 use	IRInst__countWrittenComponents	iVar3	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*return\ iVar3;$	+1
 use	IRInst__countWrittenComponents	iVar4	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ 0;$	+1
 use	IRInst__countWrittenComponents	iVar4	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*if\ \(\*\(char\ \*\)\(iVar4\ \+\ iVar2\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+1
 use	IRInst__countWrittenComponents	iVar4	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*bVar1\ =\ iVar4\ !=\ 3;$	+2
-
 use	FUN_000f3b10	iVar1	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar1\ =\ 0;$	+1
 use	FUN_000f3b10	iVar1	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*if\ \(\*\(byte\ \*\)\(\(int\)local_28\ \+\ iVar1\)\ <\ 3\)\ \{$	+1
 use	FUN_000f3b10	iVar1	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar1\ =\ iVar1\ \+\ 1;$	+1
@@ -927,7 +797,6 @@ use	FUN_000f3b68	iVar1	loopCounter	INFERRED	role read off the defining expressio
 use	FUN_000f3b68	iVar1	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar1\ =\ iVar1\ \+\ 1;$	+1
 use	FUN_000f3b68	iVar2	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ 4;$	+1
 use	FUN_000f3b68	iVar2	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+2
-
 use	FUN_000f3c30	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ 0;$	+1
 use	FUN_000f3c30	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*if\ \(\*\(char\ \*\)\(\(int\)local_34\ \+\ iVar4\ \+\ \-4\)\ !=\ '\\x01'\)\ \{$	+1
 use	FUN_000f3c30	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*bVar1\ =\ iVar4\ !=\ 3;$	+1
@@ -984,9 +853,6 @@ use	FUN_000f485c	iVar5	loopCounter	INFERRED	role read off the defining expressio
 use	FUN_000f485c	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*while\ \(\(bVar2\ =\ \*\(byte\ \*\)\(\(int\)local_38\ \+\ iVar5\),\ bVar2\ ==\ 4\ \|\|$	+4
 use	IRInst__sourceLanesAllWritten	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ 0;$	+1
 use	IRInst__sourceLanesAllWritten	iVar5	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*while\ \(\(bVar2\ =\ \*\(byte\ \*\)\(\(int\)local_38\ \+\ iVar5\),\ bVar2\ ==\ 4\ \|\|$	+4
-
-
-
 use	BitSet__findFirstSet	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ 0;$	+1
 use	BitSet__findFirstSet	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ iVar2\ \+\ 0x20;$	+1
 use	BitSet__findFirstSet	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*return\ iVar2;$	+1
@@ -1030,7 +896,6 @@ use	Compiler__getOrCreateLoadConstN	iVar9	loopCounterB	INFERRED	role read off th
 use	Compiler__getOrCreateLoadConstN	iVar9	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar9\ =\ iVar9\ \+\ \-1;$	+2
 use	Compiler__getOrCreateLoadConstN	iVar9	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar9\ =\ 4;$@2	+1
 use	Compiler__getOrCreateLoadConstN	iVar9	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar9\ =\ iVar9\ \+\ \-1;$@2	+2
-
 use	FUN_000f57f0	iVar6	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar6\ =\ 0;$	+1
 use	FUN_000f57f0	iVar6	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*while\ \(\(\(\(\(int\)\*\(char\ \*\)\(iVar10\ \+\ 0x15c\)\ >>\ \(uVar4\ \&\ 0x3f\)\ \&\ 1U\)\ ==\ 0\ \|\|$	+3
 use	FUN_000f57f0	iVar6	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*bVar1\ =\ iVar6\ !=\ 0xc;$	+1
@@ -1085,7 +950,6 @@ use	Compiler__getOrCreateConstVectorN	iVar7	loopCounterC	INFERRED	role read off 
 use	Compiler__getOrCreateConstVectorN	iVar7	loopCounterC	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar7\ =\ iVar7\ \+\ \-1;$	+2
 use	Compiler__getOrCreateConstVectorN	iVar8	loopCounterD	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar8\ =\ 4;$	+1
 use	Compiler__getOrCreateConstVectorN	iVar8	loopCounterD	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar8\ =\ iVar8\ \+\ \-1;$	+2
-
 use	FUN_000f6a04	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ 4;$	+1
 use	FUN_000f6a04	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ iVar2\ \+\ \-1;$	+1
 use	FUN_000f6a04	iVar2	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*if\ \(iVar2\ ==\ 0\)\ \{$	+1
@@ -1129,9 +993,6 @@ use	IRInst__setConstantOperand	iVar15	loopCounterD	INFERRED	role read off the de
 use	IRInst__setConstantOperand	iVar15	loopCounterD	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar15\ =\ 0;$@3	+1
 use	IRInst__setConstantOperand	iVar15	loopCounterD	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_280\ \+\ iVar15\)\ =$	+3
 use	IRInst__setConstantOperand	iVar15	operandRecordB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar15\ =\ FUN_001054ec\(param_1,\(\*\(unsigned\ int\ \*\)\(\(unsigned\ char\ \*\)ghidra_home\ \+\ 8\)\)\);$	+2
-
-
-
 use	FUN_000f7dbc	iVar7	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar7\ =\ 0;$	+1
 use	FUN_000f7dbc	iVar7	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar7\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar6\ \+\ 0xd0\)\ \+\ 8\)\);$	+1
 use	FUN_000f7dbc	iVar7	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar7\ =\ iVar7\ \+\ 4;$	+1
@@ -1141,22 +1002,14 @@ use	FUN_000f7dbc	iVar7	loopCounter	INFERRED	role read off the defining expressio
 use	FUN_000f7dbc	iVar8	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar8\ =\ 0;$	+1
 use	FUN_000f7dbc	iVar8	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar8\ \+\ \*\(int\ \*\)\(iVar1\ \+\ 8\)\);$	+1
 use	FUN_000f7dbc	iVar8	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar8\ =\ iVar8\ \+\ 4;$	+1
-
-
 use	FUN_000f816c	iVar6	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar6\ =\ 2;$	+1
 use	FUN_000f816c	iVar6	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar1\ =\ iVar6\ \*\ 4;$	+3
-
 use	FUN_000f85d0	iVar8	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar8\ =\ 0;$	+1
 use	FUN_000f85d0	iVar8	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar8\ \+\ \*\(int\ \*\)\(iVar2\ \+\ 8\)\);$	+1
 use	FUN_000f85d0	iVar8	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar8\ =\ iVar8\ \+\ 4;$	+1
 use	FUN_000f85d0	uVar11	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar11\ =\ 2;$	+1
 use	FUN_000f85d0	uVar11	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ uVar11\ \*\ 4;$	+1
 use	FUN_000f85d0	uVar11	loopCounterB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar11\ =\ uVar11\ \+\ 1;$	+2
-
-
-
-
-
 use	FUN_000f8d50	iVar4	registerFile	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ FUN_000ec208\(param_1,\*param_4\ >>\ 0x10\ \&\ 0x3f\);$	+2
 use	FUN_000f8d50	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ 0;$	+1
 use	FUN_000f8d50	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*cVar3\ =\ local_38\[iVar4\];$	+1
@@ -1171,13 +1024,10 @@ use	FUN_000f8d50	iVar12	loopCounterB	INFERRED	role read off the defining express
 use	FUN_000f8d50	uVar5	registerFileB	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar5\ =\ FUN_000ec208\(param_1,uVar6\ >>\ 0x10\ \&\ 0x3f\);$	+2
 use	IRInst__applyDescriptorSwizzle	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar4\ =\ 0;$	+1
 use	IRInst__applyDescriptorSwizzle	iVar4	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar3\ =\ FUN_0019e9fc\(param_1,iVar4\);$	+4
-
-
 use	Program__appendInst	iVar5	newTempIndex	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$	+2
 use	Program__appendInst	iVar5	newTempIndex	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*\*\(int\ \*\)\(iVar2\ \+\ 8\)\ =\ iVar5;$	+1
 use	Program__appendInst	iVar5	newTempIndex	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*\*\(int\ \*\)\(iVar2\ \+\ 8\)\ =\ iVar5;$@2	+1
 use	Program__appendInst	iVar5	newTempIndex	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*\*\(int\ \*\)\(iVar2\ \+\ 8\)\ =\ iVar5;$@3	+1
-
 use	FUN_000f9a58	uVar17	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar17\ =\ 0;$	+1
 use	FUN_000f9a58	uVar17	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar5\ =\ FUN_0019e990\(param_3,uVar17\);$	+4
 use	FUN_000f9a58	uVar17	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar17\ =\ 0;$@2	+1
@@ -1227,14 +1077,12 @@ use	FUN_000fafa4	uVar9	loopCounter	INFERRED	role read off the defining expressio
 use	FUN_000fafa4	uVar9	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar9\ =\ 0;$@4	+1
 use	FUN_000fafa4	uVar9	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar3\ =\ param_5\[uVar9\];$@3	+1
 use	FUN_000fafa4	uVar9	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*uVar1\ =\ uVar9\ \&\ 0x3f;$@4	+2
-
 use	FUN_000fb3d4	iVar20	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar20\ =\ 1;$	+1
 use	FUN_000fb3d4	iVar20	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar20\ =\ 2;$	+1
 use	FUN_000fb3d4	iVar20	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar20\ =\ iVar20\ \+\ 1;$	+1
 use	FUN_000fb3d4	iVar20	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*pdVar29\ =\ param_4\ \+\ iVar20;$	+1
 use	FUN_000fb3d4	iVar20	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*pdVar32\ =\ \(dword\ \*\)param_4\[iVar20\ \+\ 2\];$	+1
 use	FUN_000fb3d4	iVar20	loopCounter	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*pdVar32\ =\ \(dword\ \*\)param_4\[iVar20\];$	+1
-
 use	FUN_000fd5c8	iVar20	operandRecordLast	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar20\ =\ FUN_001054ec\(ppppppuVar48,0\);$	+3
 use	FUN_000fd5c8	iVar20	operandRecordLast	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar20\ =\ FUN_001054ec\(ppppppuVar38,ppppppuVar40\);$	+3
 use	FUN_000fd5c8	iVar20	operandRecordLast	INFERRED	role read off the defining expressions of the web (loop counter, compiler option query, operand record lookup, virtual register, fresh temporary index)	^\s*iVar20\ =\ FUN_001054ec\(ppppppuVar38,ppppppuVar40\);$@2	+3
@@ -1394,3 +1242,589 @@ local	RegisterMap__findConstVectorExact	param_2	values	INFERRED	four float value
 local	RegisterMap__findConstVectorExact	param_3	selectBytes	INFERRED	four lane select bytes (4 = unused)
 local	IRInst__canFoldConstantSource	param_4	program	INFERRED	Program (+8 compiler)
 local	IRInst__isForwardable	param_2	selectWord	INFERRED	select word of the use
+use	FUN_000ed89c	bVar1	noGroupsYet	INFERRED	true until the first group record has been created for the block	^\s*bVar1\ =\ true;$	+1
+use	FUN_000ed89c	bVar1	noGroupsYet	INFERRED	true until the first group record has been created for the block	^\s*if\ \(!bVar1\)\ \{$	+1
+use	FUN_000ed89c	bVar1	noGroupsYet	INFERRED	true until the first group record has been created for the block	^\s*bVar1\ =\ piVar3\ ==\ \(int\ \*\)0x0;$	+1
+use	FUN_000ed89c	bVar1	noGroupsYet	INFERRED	true until the first group record has been created for the block	^\s*if\ \(!bVar1\)\ \{$@2	+1
+use	FUN_000ed89c	iVar2	block	INFERRED	current block of the walk over program+900 (next link +8)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\ \+\ 900\);$	+1
+use	FUN_000ed89c	iVar2	block	INFERRED	current block of the walk over program+900 (next link +8)	^\s*piVar3\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar2\ \+\ 0x98\)\)\[2\];$	+1
+use	FUN_000ed89c	iVar2	block	INFERRED	current block of the walk over program+900 (next link +8)	^\s*piVar10\ =\ \*\(int\ \*\*\)\(iVar2\ \+\ 0x98\);$	+1
+use	FUN_000ed89c	iVar2	block	INFERRED	current block of the walk over program+900 (next link +8)	^\s*FUN_000e7738\(iVar2,piVar15\[7\],puVar7\);$	+1
+use	FUN_000ed89c	iVar2	block	INFERRED	current block of the walk over program+900 (next link +8)	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\);$	+1
+use	FUN_000ed89c	iVar2	block	INFERRED	current block of the walk over program+900 (next link +8)	^\s*iVar2\ =\ iVar5;$	+1
+use	FUN_000ed89c	iVar5	nextBlock	INFERRED	next block of the list	^\s*iVar5\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 900\)\ \+\ 8\);$	+1
+use	FUN_000ed89c	iVar5	nextBlock	INFERRED	next block of the list	^\s*if\ \(iVar5\ ==\ 0\)\ \{$	+1
+use	FUN_000ed89c	iVar5	nextBlock	INFERRED	next block of the list	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\);$	+1
+use	FUN_000ed89c	iVar5	nextBlock	INFERRED	next block of the list	^\s*iVar2\ =\ iVar5;$	+2
+use	FUN_000ed89c	iVar5	isSelectableLoad	INFERRED	virtual slots 0x28 and 0x2c both accept the instruction	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x28\)\)\(piVar10\);$	+3
+use	FUN_000ed89c	iVar5	sourceSelectWord	INFERRED	select word (+0x10) of source operand 1: part of the grouping key	^\s*iVar5\ =\ FUN_001054ec\(piVar10,1\);$	+2
+use	FUN_000ed89c	iVar5	sourceSelectWord	INFERRED	select word (+0x10) of source operand 1: part of the grouping key	^\s*if\ \(\(\(\*piVar3\ ==\ local_58\)\ \&\&\ \(iVar13\ ==\ piVar3\[1\]\)\)\ \&\&\ \(piVar3\[2\]\ ==\ iVar5\)\)\ \{$	+1
+use	FUN_000ed89c	iVar5	sourceSelectWord	INFERRED	select word (+0x10) of source operand 1: part of the grouping key	^\s*puVar7\[3\]\ =\ iVar5;$	+1
+use	FUN_000ed89c	iVar5	memberInstRef	INFERRED	member instruction taken from the group record, later its destination record	^\s*iVar5\ =\ piVar15\[3\];$	+1
+use	FUN_000ed89c	iVar5	memberInstRef	INFERRED	member instruction taken from the group record, later its destination record	^\s*piVar15\[7\]\ =\ iVar5;$	+1
+use	FUN_000ed89c	iVar5	memberInstRef	INFERRED	member instruction taken from the group record, later its destination record	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x8c\);$	+3
+use	FUN_000ed89c	iVar5	memberExtent	INFERRED	end of the member's range relative to the group's base (offset + size - group+0x24)	^\s*iVar5\ =\ \(iVar9\ \+\ iVar8\)\ \-\ \*\(int\ \*\)\(iVar18\ \+\ 0x24\);$	+1
+use	FUN_000ed89c	iVar5	memberExtent	INFERRED	end of the member's range relative to the group's base (offset + size - group+0x24)	^\s*if\ \(\*\(int\ \*\)\(iVar18\ \+\ 0x28\)\ <\ iVar5\)\ \{$	+3
+use	FUN_000ed89c	iVar5	memberExtent	INFERRED	end of the member's range relative to the group's base (offset + size - group+0x24)	^\s*else\ if\ \(iVar5\ <\ 9\)\ \{$	+4
+use	FUN_000ed89c	iVar8	memberSize	INFERRED	size word (record +0xc) of the member being merged	^\s*iVar8\ =\ piVar15\[3\];$	+2
+use	FUN_000ed89c	iVar8	memberSize	INFERRED	size word (record +0xc) of the member being merged	^\s*iVar8\ =\ piVar15\[3\];$@2	+1
+use	FUN_000ed89c	iVar8	memberSize	INFERRED	size word (record +0xc) of the member being merged	^\s*if\ \(\*\(int\ \*\)\(iVar18\ \+\ 0x18\)\ <\ iVar9\ \+\ iVar8\)\ \{$	+2
+use	FUN_000ed89c	iVar9	memberOffset	INFERRED	offset word (record +8) of the member being merged	^\s*iVar9\ =\ piVar15\[2\];$	+1
+use	FUN_000ed89c	iVar9	memberOffset	INFERRED	offset word (record +8) of the member being merged	^\s*iVar5\ =\ \(iVar9\ \+\ iVar8\)\ \-\ \*\(int\ \*\)\(iVar18\ \+\ 0x24\);$	+1
+use	FUN_000ed89c	iVar9	memberOffset	INFERRED	offset word (record +8) of the member being merged	^\s*if\ \(iVar9\ <\ \*\(int\ \*\)\(iVar18\ \+\ 0x14\)\)\ \{$	+1
+use	FUN_000ed89c	iVar9	memberOffset	INFERRED	offset word (record +8) of the member being merged	^\s*iVar9\ =\ piVar15\[2\];$@2	+1
+use	FUN_000ed89c	iVar9	memberOffset	INFERRED	offset word (record +8) of the member being merged	^\s*if\ \(\*\(int\ \*\)\(iVar18\ \+\ 0x18\)\ <\ iVar9\ \+\ iVar8\)\ \{$	+2
+use	FUN_000ed89c	iVar13	loadKind	INFERRED	instruction field +0xb0: 0x1f, 0xd, 0xe or 0xf select the loads that are grouped	^\s*iVar13\ =\ piVar10\[0x2c\];$	+1
+use	FUN_000ed89c	iVar13	loadKind	INFERRED	instruction field +0xb0: 0x1f, 0xd, 0xe or 0xf select the loads that are grouped	^\s*if\ \(\(\(iVar5\ ==\ 0\)\ \|\|\ \(iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x2c\)\)\(piVar10\),\ iVar5\ ==\ 0\)\)\ \|\|$	+2
+use	FUN_000ed89c	iVar13	loadKind	INFERRED	instruction field +0xb0: 0x1f, 0xd, 0xe or 0xf select the loads that are grouped	^\s*if\ \(\(\(\*piVar3\ ==\ local_58\)\ \&\&\ \(iVar13\ ==\ piVar3\[1\]\)\)\ \&\&\ \(piVar3\[2\]\ ==\ iVar5\)\)\ \{$	+1
+use	FUN_000ed89c	iVar13	loadKind	INFERRED	instruction field +0xb0: 0x1f, 0xd, 0xe or 0xf select the loads that are grouped	^\s*puVar7\[2\]\ =\ iVar13;$	+1
+use	FUN_000ed89c	iVar13	memberInst	INFERRED	instruction stored in the member record (+4)	^\s*iVar13\ =\ piVar15\[1\];$	+1
+use	FUN_000ed89c	iVar13	memberInst	INFERRED	instruction stored in the member record (+4)	^\s*if\ \(iVar13\ ==\ \*\(int\ \*\)\(iVar18\ \+\ 0x1c\)\)\ \{$	+1
+use	FUN_000ed89c	iVar13	memberInst	INFERRED	instruction stored in the member record (+4)	^\s*\*\(int\ \*\)\(iVar13\ \+\ 0x13c\)\ =\ iVar5;$	+1
+use	FUN_000ed89c	iVar13	memberInst	INFERRED	instruction stored in the member record (+4)	^\s*iVar13\ =\ piVar15\[1\];$@2	+1
+use	FUN_000ed89c	iVar13	memberInst	INFERRED	instruction stored in the member record (+4)	^\s*FUN_0019401c\(iVar13\);$	+1
+use	FUN_000ed89c	iVar13	memberInst	INFERRED	instruction stored in the member record (+4)	^\s*\*\(int\ \*\)\(iVar18\ \+\ 0xc\)\ =\ iVar13;$	+1
+use	FUN_000ed89c	iVar18	group	INFERRED	group record the member belongs to (+0x24 base, +0x28 extent, +0x10 count, ...)	^\s*iVar18\ =\ \*piVar15;$	+1
+use	FUN_000ed89c	iVar18	group	INFERRED	group record the member belongs to (+0x24 base, +0x28 extent, +0x10 count, ...)	^\s*iVar5\ =\ \(iVar9\ \+\ iVar8\)\ \-\ \*\(int\ \*\)\(iVar18\ \+\ 0x24\);$	+1
+use	FUN_000ed89c	iVar18	group	INFERRED	group record the member belongs to (+0x24 base, +0x28 extent, +0x10 count, ...)	^\s*if\ \(iVar13\ ==\ \*\(int\ \*\)\(iVar18\ \+\ 0x1c\)\)\ \{$	+1
+use	FUN_000ed89c	iVar18	group	INFERRED	group record the member belongs to (+0x24 base, +0x28 extent, +0x10 count, ...)	^\s*if\ \(\*\(int\ \*\)\(iVar18\ \+\ 0x28\)\ <\ iVar5\)\ \{$	+2
+use	FUN_000ed89c	iVar18	group	INFERRED	group record the member belongs to (+0x24 base, +0x28 extent, +0x10 count, ...)	^\s*if\ \(\*\(int\ \*\)\(iVar18\ \+\ 0x28\)\ <\ iVar5\)\ \{$@2	+3
+use	FUN_000ed89c	iVar18	group	INFERRED	group record the member belongs to (+0x24 base, +0x28 extent, +0x10 count, ...)	^\s*FUN_00193f74\(piVar15\[1\],\*\(undefined4\ \*\)\(iVar18\ \+\ 0x20\)\);$	+1
+use	FUN_000ed89c	iVar18	group	INFERRED	group record the member belongs to (+0x24 base, +0x28 extent, +0x10 count, ...)	^\s*if\ \(iVar9\ <\ \*\(int\ \*\)\(iVar18\ \+\ 0x14\)\)\ \{$	+3
+use	FUN_000ed89c	iVar18	group	INFERRED	group record the member belongs to (+0x24 base, +0x28 extent, +0x10 count, ...)	^\s*if\ \(\*\(int\ \*\)\(iVar18\ \+\ 0x18\)\ <\ iVar9\ \+\ iVar8\)\ \{$	+2
+use	FUN_000ed89c	iVar18	group	INFERRED	group record the member belongs to (+0x24 base, +0x28 extent, +0x10 count, ...)	^\s*\*\(int\ \*\)\(iVar18\ \+\ 0x10\)\ =\ \*\(int\ \*\)\(iVar18\ \+\ 0x10\)\ \+\ 1;$	+1
+use	FUN_000ed89c	piVar3	nextInst	INFERRED	instruction after the current one in the block list	^\s*piVar3\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar2\ \+\ 0x98\)\)\[2\];$	+2
+use	FUN_000ed89c	piVar3	nextInst	INFERRED	instruction after the current one in the block list	^\s*piVar4\ =\ piVar3;$	+1
+use	FUN_000ed89c	piVar3	nextInst	INFERRED	instruction after the current one in the block list	^\s*piVar3\ =\ \(int\ \*\)piVar4\[2\];$	+1
+use	FUN_000ed89c	piVar3	groupCursor	INFERRED	walks the group records while looking for a matching key	^\s*piVar3\ =\ piVar15;$	+1
+use	FUN_000ed89c	piVar3	groupCursor	INFERRED	walks the group records while looking for a matching key	^\s*if\ \(\(\(\*piVar3\ ==\ local_58\)\ \&\&\ \(iVar13\ ==\ piVar3\[1\]\)\)\ \&\&\ \(piVar3\[2\]\ ==\ iVar5\)\)\ \{$	+4
+use	FUN_000ed89c	piVar3	groupCursor	INFERRED	walks the group records while looking for a matching key	^\s*if\ \(piVar3\[6\]\ <\ local_54\ \+\ local_50\[0\]\)\ \{$	+2
+use	FUN_000ed89c	piVar3	groupCursor	INFERRED	walks the group records while looking for a matching key	^\s*piVar3\[4\]\ =\ piVar3\[4\]\ \+\ 1;$	+1
+use	FUN_000ed89c	piVar3	groupCursor	INFERRED	walks the group records while looking for a matching key	^\s*piVar12\ =\ piVar3\ \+\ 0xb;$	+2
+use	FUN_000ed89c	piVar3	groupCursor	INFERRED	walks the group records while looking for a matching key	^\s*piVar3\ =\ puVar7\ \+\ 1;$	+2
+use	FUN_000ed89c	piVar3	groupCursor	INFERRED	walks the group records while looking for a matching key	^\s*piVar15\ =\ piVar3;$	+1
+use	FUN_000ed89c	piVar3	groupCursor	INFERRED	walks the group records while looking for a matching key	^\s*puVar6\[1\]\ =\ piVar3;$	+1
+use	FUN_000ed89c	piVar3	splitGroupList	INFERRED	groups whose range exceeded 8 words and were split off	^\s*piVar3\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_000ed89c	piVar3	splitGroupList	INFERRED	groups whose range exceeded 8 words and were split off	^\s*piVar15\[0xb\]\ =\ \(int\)piVar3;$	+1
+use	FUN_000ed89c	piVar3	splitGroupList	INFERRED	groups whose range exceeded 8 words and were split off	^\s*piVar3\ =\ piVar15;$@2	+1
+use	FUN_000ed89c	piVar3	splitGroupList	INFERRED	groups whose range exceeded 8 words and were split off	^\s*piVar15\ =\ piVar3;$@2	+2
+use	FUN_000ed89c	piVar4	followingInst	INFERRED	instruction after the current candidate	^\s*piVar4\ =\ piVar3;$	+1
+use	FUN_000ed89c	piVar4	followingInst	INFERRED	instruction after the current candidate	^\s*piVar4\ =\ \(int\ \*\)piVar10\[2\];$	+1
+use	FUN_000ed89c	piVar4	followingInst	INFERRED	instruction after the current candidate	^\s*piVar4\ =\ \(int\ \*\)piVar10\[2\];$@2	+1
+use	FUN_000ed89c	piVar4	followingInst	INFERRED	instruction after the current candidate	^\s*piVar3\ =\ \(int\ \*\)piVar4\[2\];$	+3
+use	FUN_000ed89c	piVar4	nextMember	INFERRED	next member record of the list (+0x10)	^\s*piVar4\ =\ \(int\ \*\)piVar15\[4\];$	+1
+use	FUN_000ed89c	piVar4	nextMember	INFERRED	next member record of the list (+0x10)	^\s*piVar15\ =\ piVar4;$	+1
+use	FUN_000ed89c	piVar4	nextMember	INFERRED	next member record of the list (+0x10)	^\s*piVar15\ =\ piVar4;$@2	+1
+use	FUN_000ed89c	piVar4	nextMember	INFERRED	next member record of the list (+0x10)	^\s*piVar15\ =\ piVar4;$@3	+1
+use	FUN_000ed89c	piVar10	inst	INFERRED	instruction being examined	^\s*piVar10\ =\ \*\(int\ \*\*\)\(iVar2\ \+\ 0x98\);$	+1
+use	FUN_000ed89c	piVar10	inst	INFERRED	instruction being examined	^\s*if\ \(\(piVar10\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+6
+use	FUN_000ed89c	piVar10	inst	INFERRED	instruction being examined	^\s*puVar6\[2\]\ =\ piVar10;$	+3
+use	FUN_000ed89c	piVar10	inst	INFERRED	instruction being examined	^\s*FUN_00104364\(piVar10,\&local_58,\&local_54,local_50\);$	+1
+use	FUN_000ed89c	piVar10	inst	INFERRED	instruction being examined	^\s*piVar3\[3\]\ =\ \(int\)piVar10;$	+1
+use	FUN_000ed89c	piVar10	inst	INFERRED	instruction being examined	^\s*puVar7\[4\]\ =\ piVar10;$	+1
+use	FUN_000ed89c	piVar10	inst	INFERRED	instruction being examined	^\s*piVar4\ =\ \(int\ \*\)piVar10\[2\];$@2	+1
+use	FUN_000ed89c	piVar10	inst	INFERRED	instruction being examined	^\s*piVar10\ =\ piVar4;$	+1
+use	FUN_000ed89c	piVar10	nextGroup	INFERRED	next group record (+0x2c)	^\s*piVar10\ =\ \(int\ \*\)piVar15\[0xb\];$	+1
+use	FUN_000ed89c	piVar10	nextGroup	INFERRED	next group record (+0x2c)	^\s*piVar15\ =\ piVar10;$	+2
+use	FUN_000ed89c	piVar10	prevMember	INFERRED	previously processed member record	^\s*piVar10\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_000ed89c	piVar10	prevMember	INFERRED	previously processed member record	^\s*while\ \(piVar12\ =\ piVar10,\ piVar15\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_000ed89c	piVar10	prevMember	INFERRED	previously processed member record	^\s*piVar10\ =\ piVar12;$	+1
+use	FUN_000ed89c	piVar10	prevMember	INFERRED	previously processed member record	^\s*piVar10\ =\ piVar15;$	+1
+use	FUN_000ed89c	piVar12	memberList	INFERRED	0x18-byte member records collected for the block (+0x14 links to the previous)	^\s*piVar12\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_000ed89c	piVar12	memberList	INFERRED	0x18-byte member records collected for the block (+0x14 links to the previous)	^\s*puVar6\[5\]\ =\ piVar12;$	+1
+use	FUN_000ed89c	piVar12	memberList	INFERRED	0x18-byte member records collected for the block (+0x14 links to the previous)	^\s*piVar12\ =\ puVar6\ \+\ 1;$	+1
+use	FUN_000ed89c	piVar12	memberList	INFERRED	0x18-byte member records collected for the block (+0x14 links to the previous)	^\s*piVar15\ =\ piVar12;$	+2
+use	FUN_000ed89c	piVar12	memberList	INFERRED	0x18-byte member records collected for the block (+0x14 links to the previous)	^\s*piVar10\ =\ piVar12;$	+1
+use	FUN_000ed89c	piVar12	memberList	INFERRED	0x18-byte member records collected for the block (+0x14 links to the previous)	^\s*piVar15\[4\]\ =\ \(int\)piVar12;$	+1
+use	FUN_000ed89c	piVar12	groupNextLink	INFERRED	address of a group record's next link (+0x2c)	^\s*piVar12\ =\ piVar3\ \+\ 0xb;$	+3
+use	FUN_000ed89c	piVar15	groupList	INFERRED	head of the 0x34-byte group records (+0x2c links)	^\s*piVar15\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_000ed89c	piVar15	groupList	INFERRED	head of the 0x34-byte group records (+0x2c links)	^\s*piVar3\ =\ piVar15;$	+1
+use	FUN_000ed89c	piVar15	groupList	INFERRED	head of the 0x34-byte group records (+0x2c links)	^\s*puVar7\[0xc\]\ =\ piVar15;$	+1
+use	FUN_000ed89c	piVar15	groupList	INFERRED	head of the 0x34-byte group records (+0x2c links)	^\s*piVar15\ =\ piVar3;$	+1
+use	FUN_000ed89c	piVar15	groupList	INFERRED	head of the 0x34-byte group records (+0x2c links)	^\s*iVar5\ =\ piVar15\[3\];$	+4
+use	FUN_000ed89c	piVar15	groupList	INFERRED	head of the 0x34-byte group records (+0x2c links)	^\s*FUN_001046c8\(piVar15\[7\],0,uVar16\);$	+3
+use	FUN_000ed89c	piVar15	groupList	INFERRED	head of the 0x34-byte group records (+0x2c links)	^\s*FUN_000e7738\(iVar2,piVar15\[7\],puVar7\);$	+13
+use	FUN_000ed89c	piVar15	groupList	INFERRED	head of the 0x34-byte group records (+0x2c links)	^\s*piVar15\ =\ piVar10;$	+1
+use	FUN_000ed89c	piVar15	groupList	INFERRED	head of the 0x34-byte group records (+0x2c links)	^\s*piVar15\ =\ piVar3;$@2	+1
+use	FUN_000ed89c	piVar15	memberCursor	INFERRED	walks the member records / groups while merging them	^\s*piVar15\ =\ piVar12;$	+8
+use	FUN_000ed89c	piVar15	memberCursor	INFERRED	walks the member records / groups while merging them	^\s*piVar15\ =\ piVar4;$	+1
+use	FUN_000ed89c	piVar15	memberCursor	INFERRED	walks the member records / groups while merging them	^\s*iVar13\ =\ piVar15\[1\];$@2	+1
+use	FUN_000ed89c	piVar15	memberCursor	INFERRED	walks the member records / groups while merging them	^\s*FUN_00193f74\(piVar15\[1\],\*\(undefined4\ \*\)\(iVar18\ \+\ 0x20\)\);$	+4
+use	FUN_000ed89c	piVar15	memberCursor	INFERRED	walks the member records / groups while merging them	^\s*\*\(int\ \*\)\(iVar18\ \+\ 0x14\)\ =\ piVar15\[2\];$	+3
+use	FUN_000ed89c	piVar15	memberCursor	INFERRED	walks the member records / groups while merging them	^\s*piVar15\[4\]\ =\ \(int\)piVar12;$	+3
+use	FUN_000ed89c	puVar7	newGroup	INFERRED	new 0x34-byte group record (key, kind, select word, first inst, count, range)	^\s*puVar7\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar16,0x34\);$	+3
+use	FUN_000ed89c	puVar7	newGroup	INFERRED	new 0x34-byte group record (key, kind, select word, first inst, count, range)	^\s*puVar7\[2\]\ =\ iVar13;$	+8
+use	FUN_000ed89c	puVar7	projectionInst	INFERRED	IRProjection (opcode 0x84) created for the group's virtual register	^\s*puVar7\ =\ puVar6\ \+\ 1;$	+3
+use	FUN_000ed89c	puVar7	projectionInst	INFERRED	IRProjection (opcode 0x84) created for the group's virtual register	^\s*FUN_001046c8\(puVar7,1,uVar16\);$	+5
+use	FUN_000ed89c	puVar7	projectionInst	INFERRED	IRProjection (opcode 0x84) created for the group's virtual register	^\s*piVar15\[8\]\ =\ \(int\)puVar7;$	+1
+use	FUN_000ed89c	uVar11	destSelectWord	INFERRED	select word of the group head's destination	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\);$	+1
+use	FUN_000ed89c	uVar11	destSelectWord	INFERRED	select word of the group head's destination	^\s*puVar6\[0x28\]\ =\ uVar11;$	+1
+use	FUN_000ed89c	uVar14	groupSourceVReg	INFERRED	virtual register of the group head instruction (+0x8c)	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x8c\);$	+1
+use	FUN_000ed89c	uVar14	groupSourceVReg	INFERRED	virtual register of the group head instruction (+0x8c)	^\s*FUN_001046c8\(puVar7,0,uVar14\);$	+1
+use	FUN_000ed89c	uVar14	groupSourceVReg	INFERRED	virtual register of the group head instruction (+0x8c)	^\s*FUN_0012306c\(uVar14,puVar7\);$	+1
+local	FUN_000f403c	param_1	laneMask	INFERRED	4-byte output: lane i is 1 when lane i of the source is read
+local	FUN_000f403c	param_4	destWriteMask	INFERRED	write mask of the destination, used to restrict the destination select word
+local	FUN_000f403c	param_5	program	INFERRED	Program (+0x78 register record table)
+local	FUN_000f403c	local_58	sourceSelect	INFERRED	select word (+0x10) of the source operand
+local	FUN_000f403c	local_54	maskedSelect	INFERRED	destination select word after SelectWord__selectWhereMasked; bytes are indexed relative to it
+local	FUN_000f403c	uVar3	laneIndex	INFERRED	select byte used as an index into laneMask
+local	FUN_000f403c	uVar5	resultMode	INFERRED	OpcodeInfo result mode of the instruction: selects how the source lanes map to read lanes
+local	FUN_000f403c	uVar6	resultFlags	INFERRED	flag word from the opcode table DAT_001dc58c (bits 0-3: lanes a-d are read)
+local	FUN_000f403c	pbVar2	selectBytePtr	INFERRED	pointer to the current select byte
+local	FUN_000f403c	bVar1	notLastLane	INFERRED	loop condition over the four lanes
+use	FUN_000f403c	iVar4	opcodeClassIndex	INFERRED	index into the opcode table (instruction field +0x134 -> record +4), 0 when absent	^\s*iVar4\ =\ 0;$@3	+1
+use	FUN_000f403c	iVar4	opcodeClassIndex	INFERRED	index into the opcode table (instruction field +0x134 -> record +4), 0 when absent	^\s*iVar4\ =\ \*\(int\ \*\)\(param_2\[0x4d\]\ \*\ 0xc\ \+\ \*\(int\ \*\)\(param_5\ \+\ 0x78\)\ \+\ 4\);$	+2
+use	FUN_000f403c	iVar4	opcodeClassIndex	INFERRED	index into the opcode table (instruction field +0x134 -> record +4), 0 when absent	^\s*uVar6\ =\ \(DAT_001dc58c\)\[iVar4\ \*\ 2\];$	+1
+use	FUN_000f403c	iVar4	opcodeNumber	INFERRED	opcode number (opcode info +8)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_2\[0x22\]\ \+\ 8\);$	+3
+use	FUN_000f403c	iVar4	opcodeNumber	INFERRED	opcode number (opcode info +8)	^\s*if\ \(iVar4\ !=\ 0x6e\)\ \{$	+2
+use	FUN_000f403c	iVar4	opcodeNumber	INFERRED	opcode number (opcode info +8)	^\s*if\ \(1\ <\ iVar4\ \-\ 0x75U\)\ \{$	+1
+use	FUN_000f403c	iVar4	opcodeNumber	INFERRED	opcode number (opcode info +8)	^\s*if\ \(iVar4\ ==\ 0xae\)\ goto\ switchD_000f40d0_caseD_2;$	+2
+use	FUN_000f403c	iVar4	opcodeNumber	INFERRED	opcode number (opcode info +8)	^\s*if\ \(2\ <\ iVar4\ \-\ 0x100U\)\ \{$	+1
+func	FUN_000f403c	IRInst__computeSourceReadMask	INFERRED	sibling of IRInst__computeSourceLaneMask: builds the 4-byte read mask of source operandIndex from the opcode result mode and the operand select word
+local	FUN_000fa958	param_1	program	INFERRED	Program (+8 compiler)
+local	FUN_000fa958	param_2	opcodeIndex	INFERRED	index into the per-opcode operand descriptor table PTR_DAT_001e8b88
+local	FUN_000fa958	param_4	translateState	INFERRED	IL translation state: +0x64 / +0x6c are the destination / source descriptor tables
+use	FUN_000fa958	iVar1	splitTempIndex	INFERRED	fresh temporary index (compiler+0x3ac counts downwards)	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x3ac\)\ \+\ \-1;$	+2
+use	FUN_000fa958	iVar1	splitTempIndex	INFERRED	fresh temporary index (compiler+0x3ac counts downwards)	^\s*\*\(int\ \*\)\(iVar3\ \+\ 8\)\ =\ iVar1;$	+1
+use	FUN_000fa958	iVar1	splitTempIndex	INFERRED	fresh temporary index (compiler+0x3ac counts downwards)	^\s*\*\(short\ \*\)\(\(int\)puVar10\ \+\ 2\)\ =\ \(short\)iVar1;$	+1
+use	FUN_000fa958	iVar1	splitTempIndex	INFERRED	fresh temporary index (compiler+0x3ac counts downwards)	^\s*iVar7\ =\ iVar1;$	+1
+use	FUN_000fa958	iVar1	fullSelectWord	INFERRED	select word constant DAT_001aa9dc compared with the destination select word	^\s*iVar1\ =\ DAT_001aa9dc;$	+1
+use	FUN_000fa958	iVar1	fullSelectWord	INFERRED	select word constant DAT_001aa9dc compared with the destination select word	^\s*\*\(int\ \*\)\(param_5\ \+\ 0x9c\)\ =\ iVar1;$	+1
+use	FUN_000fa958	iVar3	compiler	INFERRED	program+8	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+3
+use	FUN_000fa958	iVar3	compiler	INFERRED	program+8	^\s*iVar1\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x3ac\)\ \+\ \-1;$	+2
+use	FUN_000fa958	iVar3	foldedResult	INFERRED	0 or the instruction produced by the fold attempt (FUN_00113734)	^\s*iVar3\ =\ param_5;$	+1
+use	FUN_000fa958	iVar3	foldedResult	INFERRED	0 or the instruction produced by the fold attempt (FUN_00113734)	^\s*iVar3\ =\ FUN_00113734\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),param_5,param_7,puVar10,uVar2,iVar3,param_10\);$	+2
+use	FUN_000fa958	iVar3	resultInst	INFERRED	instruction returned to the caller (0 unless a mov was created)	^\s*iVar3\ =\ 0;$	+1
+use	FUN_000fa958	iVar3	resultInst	INFERRED	instruction returned to the caller (0 unless a mov was created)	^\s*iVar3\ =\ iVar1;$	+1
+use	FUN_000fa958	iVar3	resultInst	INFERRED	instruction returned to the caller (0 unless a mov was created)	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_44\ \+\ iVar3\)\ =\ 0;$	+2
+use	FUN_000fa958	iVar3	splitMov	INFERRED	mov created to split a destination written in more than one lane	^\s*iVar3\ =\ FUN_001043f0\(0x31,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_000fa958	iVar3	splitMov	INFERRED	mov created to split a destination written in more than one lane	^\s*iVar1\ =\ FUN_001054ec\(iVar3,0\);$	+1
+use	FUN_000fa958	iVar3	splitMov	INFERRED	mov created to split a destination written in more than one lane	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x9c\)\ =\ local_48;$	+1
+use	FUN_000fa958	iVar3	splitMov	INFERRED	mov created to split a destination written in more than one lane	^\s*iVar1\ =\ FUN_001054ec\(iVar3,1\);$	+1
+use	FUN_000fa958	iVar3	splitMov	INFERRED	mov created to split a destination written in more than one lane	^\s*iVar1\ =\ FUN_001054ec\(iVar3,1\);$@2	+1
+use	FUN_000fa958	iVar3	splitMov	INFERRED	mov created to split a destination written in more than one lane	^\s*iVar3\ =\ 0;$@2	+1
+use	FUN_000fa958	iVar3	splitMov	INFERRED	mov created to split a destination written in more than one lane	^\s*return\ iVar3;$	+1
+use	FUN_000fa958	iVar3	splitMov	INFERRED	mov created to split a destination written in more than one lane	^\s*return\ iVar3;$@2	+1
+use	FUN_000fa958	iVar7	registerIndex	INFERRED	register number of the descriptor (or 0xf for the special type 0x10 with hardware flag 0x80)	^\s*iVar7\ =\ 0xf;$	+1
+use	FUN_000fa958	iVar7	registerIndex	INFERRED	register number of the descriptor (or 0xf for the special type 0x10 with hardware flag 0x80)	^\s*iVar7\ =\ \(int\)\(short\)\*puVar10;$	+1
+use	FUN_000fa958	iVar7	registerIndex	INFERRED	register number of the descriptor (or 0xf for the special type 0x10 with hardware flag 0x80)	^\s*iVar7\ =\ 0;$	+1
+use	FUN_000fa958	iVar7	registerIndex	INFERRED	register number of the descriptor (or 0xf for the special type 0x10 with hardware flag 0x80)	^\s*\*\(int\ \*\)\(iVar3\ \+\ 8\)\ =\ iVar7;$	+1
+use	FUN_000fa958	iVar7	registerIndex	INFERRED	register number of the descriptor (or 0xf for the special type 0x10 with hardware flag 0x80)	^\s*iVar7\ =\ iVar1;$	+1
+use	FUN_000fa958	iVar7	registerIndex	INFERRED	register number of the descriptor (or 0xf for the special type 0x10 with hardware flag 0x80)	^\s*\*\(int\ \*\)\(iVar3\ \+\ 8\)\ =\ iVar7;$@2	+1
+use	FUN_000fa958	iVar7	registerIndex2	INFERRED	register number of the destination descriptor (low 16 bits)	^\s*iVar7\ =\ \(int\)\(short\)\*puVar10;$@2	+1
+use	FUN_000fa958	iVar7	registerIndex2	INFERRED	register number of the destination descriptor (low 16 bits)	^\s*\*\(int\ \*\)\(iVar3\ \+\ 8\)\ =\ iVar7;$@3	+1
+use	FUN_000fa958	iVar7	registerIndex2	INFERRED	register number of the destination descriptor (low 16 bits)	^\s*\*\(int\ \*\)\(iVar1\ \+\ 8\)\ =\ iVar7;$	+1
+use	FUN_000fa958	iVar7	registerIndex2	INFERRED	register number of the destination descriptor (low 16 bits)	^\s*\*\(int\ \*\)\(iVar1\ \+\ 8\)\ =\ iVar7;$@2	+1
+use	FUN_000fa958	iVar7	registerIndex2	INFERRED	register number of the destination descriptor (low 16 bits)	^\s*\*\(int\ \*\)\(iVar4\ \+\ 8\)\ =\ iVar7;$	+1
+local	FUN_000fa958	local_48	destSelectWord	INFERRED	select word of destination operand 0
+local	FUN_000fa958	puVar5	sourceDescriptorPtr	INFERRED	descriptor word used as the source (0 when the destination table entry is used)
+use	FUN_000fa958	puVar10	descriptor	INFERRED	descriptor word looked up from the operand slot table (copied to local_44 for the destination table)	^\s*puVar10\ =\ puVar5;$	+1
+use	FUN_000fa958	puVar10	descriptor	INFERRED	descriptor word looked up from the operand slot table (copied to local_44 for the destination table)	^\s*puVar10\ =\ \&local_44;$	+1
+use	FUN_000fa958	puVar10	descriptor	INFERRED	descriptor word looked up from the operand slot table (copied to local_44 for the destination table)	^\s*uVar8\ =\ \*puVar10\ >>\ 0x10\ \&\ 0x3f;$	+1
+use	FUN_000fa958	puVar10	descriptor	INFERRED	descriptor word looked up from the operand slot table (copied to local_44 for the destination table)	^\s*if\ \(\(\(\(\*puVar10\ \&\ 0x3f0000\)\ ==\ 0x100000\)\ \&\&\ \(iVar3\ !=\ 0\)\)\ \&\&$	+2
+use	FUN_000fa958	puVar10	descriptor	INFERRED	descriptor word looked up from the operand slot table (copied to local_44 for the destination table)	^\s*iVar7\ =\ \(int\)\(short\)\*puVar10;$	+1
+use	FUN_000fa958	puVar10	descriptor	INFERRED	descriptor word looked up from the operand slot table (copied to local_44 for the destination table)	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f8aa0\)\(param_1,param_8,puVar10,param_3,uVar2\);$	+1
+use	FUN_000fa958	puVar10	descriptor	INFERRED	descriptor word looked up from the operand slot table (copied to local_44 for the destination table)	^\s*\*puVar10\ =\ \*puVar10\ \&\ 0xfe3fffff;$	+3
+use	FUN_000fa958	puVar10	descriptor	INFERRED	descriptor word looked up from the operand slot table (copied to local_44 for the destination table)	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(\(\(uVar11\ >>\ 0x17\ \&\ 7\)\ \*\ 5\ \+\ \(uVar11\ >>\ 0x1d\)\)\ \*\ 4\ \+$	+4
+use	FUN_000fa958	puVar10	destDescriptor	INFERRED	destination descriptor word from the table at +0x64	^\s*puVar10\ =\ \*\(uint\ \*\*\)\(\(\(uVar11\ >>\ 0x17\ \&\ 7\)\ \*\ 5\ \+\ \(uVar11\ >>\ 0x1d\)\)\ \*\ 4\ \+\ \*\(int\ \*\)\(param_4\ \+\ 100\)\);$	+3
+use	FUN_000fa958	puVar10	destDescriptor	INFERRED	destination descriptor word from the table at +0x64	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f8d50\)\(param_1,param_9,param_7,puVar10,0,param_5,param_10\);$	+2
+use	FUN_000fa958	uVar8	useDestTable	INFERRED	bit 28 of the slot info: take the descriptor from the destination table	^\s*uVar8\ =\ uVar11\ >>\ 0x1c\ \&\ 1;$	+1
+use	FUN_000fa958	uVar8	useDestTable	INFERRED	bit 28 of the slot info: take the descriptor from the destination table	^\s*if\ \(uVar8\ ==\ 0\)\ \{$	+1
+use	FUN_000fa958	uVar8	useDestTable	INFERRED	bit 28 of the slot info: take the descriptor from the destination table	^\s*uVar8\ =\ 0;$	+1
+use	FUN_000fa958	uVar8	registerType	INFERRED	IL register type of the descriptor (bits 16..21); 0x13 for the special case, 4 after a temporary was substituted	^\s*uVar8\ =\ \*puVar10\ >>\ 0x10\ \&\ 0x3f;$	+1
+use	FUN_000fa958	uVar8	registerType	INFERRED	IL register type of the descriptor (bits 16..21); 0x13 for the special case, 4 after a temporary was substituted	^\s*if\ \(\(uVar8\ ==\ 0x12\)\ \&\&\ \(\(uVar11\ \&\ 0x3800000\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_000fa958	uVar8	registerType	INFERRED	IL register type of the descriptor (bits 16..21); 0x13 for the special case, 4 after a temporary was substituted	^\s*uVar8\ =\ 0x13;$	+1
+use	FUN_000fa958	uVar8	registerType	INFERRED	IL register type of the descriptor (bits 16..21); 0x13 for the special case, 4 after a temporary was substituted	^\s*if\ \(\(\(uVar11\ >>\ 0x1b\ \&\ 1\)\ ==\ 0\)\ \&\&\ \(\(uVar8\ ==\ 1\ \|\|\ \(uVar8\ ==\ 0x22\)\)\)\)\ \{$	+1
+use	FUN_000fa958	uVar8	registerType	INFERRED	IL register type of the descriptor (bits 16..21); 0x13 for the special case, 4 after a temporary was substituted	^\s*uVar9\ =\ FUN_000ec208\(param_1,uVar8\);$	+1
+use	FUN_000fa958	uVar8	registerType	INFERRED	IL register type of the descriptor (bits 16..21); 0x13 for the special case, 4 after a temporary was substituted	^\s*uVar8\ =\ 4;$	+1
+use	FUN_000fa958	uVar8	registerType	INFERRED	IL register type of the descriptor (bits 16..21); 0x13 for the special case, 4 after a temporary was substituted	^\s*uVar2\ =\ FUN_000ec208\(param_1,uVar8\);$	+1
+use	FUN_000fa958	uVar8	registerType2	INFERRED	IL register type of the destination descriptor	^\s*uVar8\ =\ \*puVar10\ >>\ 0x10\ \&\ 0x3f;$@2	+2
+use	FUN_000fa958	uVar8	registerType2	INFERRED	IL register type of the destination descriptor	^\s*uVar2\ =\ FUN_000ec208\(param_1,uVar8\);$@3	+1
+use	FUN_000fa958	uVar8	registerType2	INFERRED	IL register type of the destination descriptor	^\s*uVar2\ =\ FUN_000ec208\(param_1,uVar8\);$@4	+1
+use	FUN_000fa958	uVar8	registerType2	INFERRED	IL register type of the destination descriptor	^\s*uVar2\ =\ FUN_000ec208\(param_1,uVar8\);$@5	+1
+use	FUN_000fa958	uVar9	laneSelectEntry	INFERRED	select word from the table at 0x1dc7bc indexed by the remaining lane	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(iVar3\ \*\ 4\ \+\ 0x1dc7bc\);$	+1
+use	FUN_000fa958	uVar9	laneSelectEntry	INFERRED	select word from the table at 0x1dc7bc indexed by the remaining lane	^\s*\*\(undefined4\ \*\)\(iVar1\ \+\ 0x10\)\ =\ uVar9;$	+1
+local	FUN_000fa958	uVar11	operandSlotInfo	INFERRED	word from PTR_DAT_001e8b88[opcodeIndex]: bit 28 destination, bits 23..25 / 29.. index the descriptor tables, bit 27/26 flags
+local	FUN_000f85d0	param_1	domInfo	INFERRED	dominator-analysis object (Lengauer-Tarjan): [0] parent, [1] semi, [2] idom, [3] ancestor/label, [5] buckets, [6] vertex array, [7] vertex count, [8] Program
+use	FUN_000f85d0	iVar2	predecessorBlock	INFERRED	predecessor block read from the predecessor vector (+0xd4) of the vertex block	^\s*for\ \(uVar11\ =\ 1;\ iVar2\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0xd4\),\ uVar11\ <=\ \*\(uint\ \*\)\(iVar2\ \+\ 4\);$	+4
+use	FUN_000f85d0	iVar2	predecessorBlock	INFERRED	predecessor block read from the predecessor vector (+0xd4) of the vertex block	^\s*iVar2\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f8588\)\(param_1,\*\(undefined4\ \*\)\(iVar2\ \+\ 0xe4\)\);$	+2
+use	FUN_000f85d0	iVar2	predecessorBlock	INFERRED	predecessor block read from the predecessor vector (+0xd4) of the vertex block	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\[1\]\ \+\ iVar7\);$	+3
+use	FUN_000f85d0	iVar4	blockCursor	INFERRED	walks the block list of the program (next link +8) for the dominator-number reset	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\[8\]\ \+\ 900\);$	+4
+use	FUN_000f85d0	iVar4	vertexByteOffset	INFERRED	vertex number * 4 (counts down from the last vertex to 2)	^\s*iVar4\ =\ uVar6\ <<\ 2;$	+1
+use	FUN_000f85d0	iVar4	vertexByteOffset	INFERRED	vertex number * 4 (counts down from the last vertex to 2)	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\[6\]\ \+\ iVar4\);$	+1
+use	FUN_000f85d0	iVar4	vertexByteOffset	INFERRED	vertex number * 4 (counts down from the last vertex to 2)	^\s*if\ \(uVar1\ <\ \*\(uint\ \*\)\(iVar4\ \+\ param_1\[1\]\)\)\ \{$	+2
+use	FUN_000f85d0	iVar4	vertexByteOffset	INFERRED	vertex number * 4 (counts down from the last vertex to 2)	^\s*puVar3\[2\]\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ param_1\[1\]\)\ \*\ 4\ \+\ param_1\[5\]\);$	+5
+use	FUN_000f85d0	iVar4	vertexByteOffset	INFERRED	vertex number * 4 (counts down from the last vertex to 2)	^\s*iVar4\ =\ iVar4\ \+\ \-4;$	+1
+use	FUN_000f85d0	iVar4	vertexByteOffset2	INFERRED	index * 4 of the vertex whose idom is corrected	^\s*iVar4\ =\ uVar11\ \*\ 4;$	+1
+use	FUN_000f85d0	iVar4	vertexByteOffset2	INFERRED	index * 4 of the vertex whose idom is corrected	^\s*if\ \(\*\(int\ \*\)\(iVar4\ \+\ iVar7\)\ !=\ \*\(int\ \*\)\(iVar4\ \+\ param_1\[1\]\)\)\ \{$	+2
+use	FUN_000f85d0	iVar4	vertexBlock	INFERRED	block of the vertex being linked into the dominator tree (+0xf0 = immediate dominator block)	^\s*iVar4\ =\ 4;$	+1
+use	FUN_000f85d0	iVar4	vertexBlock	INFERRED	block of the vertex being linked into the dominator tree (+0xf0 = immediate dominator block)	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar4\ \+\ iVar8\);$	+2
+use	FUN_000f85d0	iVar4	vertexBlock	INFERRED	block of the vertex being linked into the dominator tree (+0xf0 = immediate dominator block)	^\s*FUN_000e8ce4\(iVar7,iVar4\);$	+1
+use	FUN_000f85d0	iVar4	vertexBlock	INFERRED	block of the vertex being linked into the dominator tree (+0xf0 = immediate dominator block)	^\s*iVar4\ =\ 4;$@2	+1
+use	FUN_000f85d0	iVar4	vertexBlock	INFERRED	block of the vertex being linked into the dominator tree (+0xf0 = immediate dominator block)	^\s*iVar4\ =\ uVar6\ \*\ 4;$	+1
+use	FUN_000f85d0	iVar4	vertexBlock	INFERRED	block of the vertex being linked into the dominator tree (+0xf0 = immediate dominator block)	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ param_1\[2\]\)\ \*\ 4\ \+\ iVar8\);$	+1
+use	FUN_000f85d0	iVar4	blockCursor2	INFERRED	walks the block list of the program for the final number reset	^\s*for\ \(iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\[8\]\ \+\ 900\)\ \+\ 8\);\ iVar4\ !=\ 0;\ iVar4\ =\ \*\(int\ \*\)\(iVar4\ \+\ 8\)\)$	+1
+use	FUN_000f85d0	iVar4	blockCursor2	INFERRED	walks the block list of the program for the final number reset	^\s*iVar5\ =\ iVar4;$	+1
+use	FUN_000f85d0	iVar5	entryBlock	INFERRED	program entry block (+0x3a0): its +0xe4/+0xe8 hold the block numbers saved and restored around the computation	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\[8\]\ \+\ 0x3a0\);$	+2
+use	FUN_000f85d0	iVar5	entryBlock	INFERRED	program entry block (+0x3a0): its +0xe4/+0xe8 hold the block numbers saved and restored around the computation	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f816c\)\(param_1,iVar5\);$	+1
+use	FUN_000f85d0	iVar5	entryBlock	INFERRED	program entry block (+0x3a0): its +0xe4/+0xe8 hold the block numbers saved and restored around the computation	^\s*if\ \(\*\(int\ \*\)\(iVar5\ \+\ 0xe8\)\ ==\ 0\)\ \{$	+1
+use	FUN_000f85d0	iVar5	blockCursor3	INFERRED	walks the block list (+8) restoring the numbering	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\[8\]\ \+\ 900\);$	+1
+use	FUN_000f85d0	iVar5	blockCursor3	INFERRED	walks the block list (+8) restoring the numbering	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0xe4\)\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0xe8\);$	+2
+use	FUN_000f85d0	iVar7	nextBlock	INFERRED	next block of the list	^\s*for\ \(iVar7\ =\ \*\(int\ \*\)\(iVar4\ \+\ 8\);\ iVar7\ !=\ 0;\ iVar7\ =\ \*\(int\ \*\)\(iVar7\ \+\ 8\)\)\ \{$	+1
+use	FUN_000f85d0	iVar7	nextBlock	INFERRED	next block of the list	^\s*iVar4\ =\ iVar7;$	+1
+use	FUN_000f85d0	iVar7	vertexBlock2	INFERRED	block of the vertex being processed	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\[6\]\ \+\ iVar4\);$	+3
+use	FUN_000f85d0	iVar7	bucketByteOffset	INFERRED	index * 4 of the bucket member	^\s*iVar7\ =\ \*piVar12\ \*\ 4;$	+1
+use	FUN_000f85d0	iVar7	bucketByteOffset	INFERRED	index * 4 of the bucket member	^\s*iVar2\ =\ \*\(int\ \*\)\(param_1\[1\]\ \+\ iVar7\);$	+1
+use	FUN_000f85d0	iVar7	bucketByteOffset	INFERRED	index * 4 of the bucket member	^\s*\*\(int\ \*\)\(iVar7\ \+\ param_1\[2\]\)\ =\ iVar2;$	+1
+use	FUN_000f85d0	iVar7	bucketByteOffset	INFERRED	index * 4 of the bucket member	^\s*\*\(int\ \*\)\(iVar7\ \+\ param_1\[2\]\)\ =\ iVar8;$	+1
+use	FUN_000f85d0	iVar7	idomArray	INFERRED	idom array (domInfo[2])	^\s*iVar7\ =\ param_1\[2\];$	+3
+use	FUN_000f85d0	iVar7	idomBlock	INFERRED	immediate dominator block of the vertex (0 for the root)	^\s*iVar7\ =\ 0;$	+1
+use	FUN_000f85d0	iVar7	idomBlock	INFERRED	immediate dominator block of the vertex (0 for the root)	^\s*\*\(int\ \*\)\(iVar4\ \+\ 0xf0\)\ =\ iVar7;$	+3
+use	FUN_000f85d0	iVar7	idomBlock	INFERRED	immediate dominator block of the vertex (0 for the root)	^\s*iVar7\ =\ 0;$@2	+1
+use	FUN_000f85d0	iVar7	idomBlock	INFERRED	immediate dominator block of the vertex (0 for the root)	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ param_1\[2\]\)\ \*\ 4\ \+\ iVar8\);$	+1
+use	FUN_000f85d0	iVar8	evalResult	INFERRED	vertex returned by the link/eval helper (lazyEntryGet) for a bucket member	^\s*iVar8\ =\ \(\(int\ \(\*\)\(\)\)FUN_000f8588\)\(param_1,\*piVar12\);$	+1
+use	FUN_000f85d0	iVar8	evalResult	INFERRED	vertex returned by the link/eval helper (lazyEntryGet) for a bucket member	^\s*if\ \(iVar2\ ==\ \*\(int\ \*\)\(iVar8\ \*\ 4\ \+\ param_1\[1\]\)\)\ \{$	+1
+use	FUN_000f85d0	iVar8	evalResult	INFERRED	vertex returned by the link/eval helper (lazyEntryGet) for a bucket member	^\s*\*\(int\ \*\)\(iVar7\ \+\ param_1\[2\]\)\ =\ iVar8;$	+1
+use	FUN_000f85d0	iVar8	vertexArray	INFERRED	domInfo[6]	^\s*iVar8\ =\ param_1\[6\];$	+1
+use	FUN_000f85d0	iVar8	vertexArray	INFERRED	domInfo[6]	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar4\ \+\ iVar8\);$	+1
+use	FUN_000f85d0	iVar8	vertexArray	INFERRED	domInfo[6]	^\s*iVar8\ =\ param_1\[6\];$@2	+1
+use	FUN_000f85d0	iVar8	vertexArray	INFERRED	domInfo[6]	^\s*iVar8\ =\ param_1\[6\];$@3	+2
+use	FUN_000f85d0	iVar9	semiArray	INFERRED	domInfo[1]: semidominator number per vertex	^\s*iVar9\ =\ param_1\[1\];$	+1
+use	FUN_000f85d0	iVar9	semiArray	INFERRED	domInfo[1]: semidominator number per vertex	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar2\ \*\ 4\ \+\ iVar9\);$	+1
+use	FUN_000f85d0	piVar12	bucketNode	INFERRED	node of the bucket list of a vertex ({vertex, next})	^\s*for\ \(piVar12\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(iVar4\ \+\ \*param_1\)\ \*\ 4\ \+\ param_1\[5\]\);\ piVar12\ !=\ \(int\ \*\)0x0;$	+4
+use	FUN_000f85d0	uVar1	predSemi	INFERRED	semidominator number of the evaluated predecessor	^\s*uVar1\ =\ \*\(uint\ \*\)\(iVar2\ \*\ 4\ \+\ iVar9\);$	+3
+use	FUN_000f85d0	uVar6	vertexNumber	INFERRED	current vertex number (domInfo[7] down to 2)	^\s*uVar6\ =\ param_1\[7\];$	+3
+use	FUN_000f85d0	uVar6	vertexNumber	INFERRED	current vertex number (domInfo[7] down to 2)	^\s*puVar3\[1\]\ =\ uVar6;$	+1
+use	FUN_000f85d0	uVar6	vertexNumber	INFERRED	current vertex number (domInfo[7] down to 2)	^\s*uVar6\ =\ uVar6\ \-\ 1;$	+1
+use	FUN_000f85d0	uVar6	vertexNumber	INFERRED	current vertex number (domInfo[7] down to 2)	^\s*\}\ while\ \(1\ <\ uVar6\);$	+1
+use	FUN_000f85d0	uVar6	vertexCount	INFERRED	domInfo[7]: number of vertices	^\s*uVar6\ =\ param_1\[7\];$@2	+2
+use	FUN_000f85d0	uVar6	vertexCount	INFERRED	domInfo[7]: number of vertices	^\s*uVar6\ =\ param_1\[7\];$@3	+1
+use	FUN_000f85d0	uVar6	vertexCount	INFERRED	domInfo[7]: number of vertices	^\s*\}\ while\ \(uVar11\ <=\ uVar6\);$	+1
+use	FUN_000f85d0	uVar6	vertexCount	INFERRED	domInfo[7]: number of vertices	^\s*if\ \(uVar6\ !=\ 0\)\ \{$	+1
+use	FUN_000f85d0	uVar11	predIndex	INFERRED	1-based index into the predecessor vector	^\s*for\ \(uVar11\ =\ 1;\ iVar2\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0xd4\),\ uVar11\ <=\ \*\(uint\ \*\)\(iVar2\ \+\ 4\);$	+2
+func	FUN_000f85d0	DominatorTree__compute	INFERRED	Lengauer-Tarjan dominator computation over the blocks of the program: semidominators from the predecessor vectors, buckets, idom correction, then stores each block's immediate dominator at +0xf0 and links it with FUN_000e8ce4
+func	FUN_000f816c	DominatorTree__dfsNumber	INFERRED	depth-first numbering for the Lengauer-Tarjan computation: numbers the blocks from the root through FUN_000e80cc (next unvisited successor), fills parent [0], vertex [6], semi [1] and label [4]
+func	FUN_000f83cc	DominatorTree__compress	INFERRED	path compression of the ancestor chain of a vertex (ancestor [3], label [4], semi [1])
+func	lazyEntryGet	DominatorTree__eval	INFERRED	Lengauer-Tarjan EVAL: compresses the path when the vertex has an ancestor and returns its label
+func	FUN_000f7dbc	DominatorTree__computeDominanceFrontiers	INFERRED	for every block adds the successors (+0xd0) and the successors of its dominator-tree children (+0xf4/+0xf8) that it does not immediately dominate to its frontier through FUN_000e910c
+local	DominatorTree__dfsNumber	param_1	domInfo	INFERRED	dominator-analysis object
+local	DominatorTree__dfsNumber	param_2	rootBlock	INFERRED	block the walk starts at (updated to the block being expanded)
+local	DominatorTree__compress	param_1	domInfo	INFERRED	dominator-analysis object
+local	DominatorTree__compress	param_2	vertex	INFERRED	vertex number whose ancestor chain is compressed
+local	DominatorTree__eval	param_1	domInfo	INFERRED	dominator-analysis object
+local	DominatorTree__eval	param_2	vertex	INFERRED	vertex number
+local	DominatorTree__computeDominanceFrontiers	param_1	domInfo	INFERRED	dominator-analysis object (+8 idom array, +0x1c vertex count, +0x20 Program)
+local	FUN_000fafa4	param_2	ilRegisterType	INFERRED	IL register type of the constant register (0, 1, 2 and 0x1d are handled)
+local	FUN_000fafa4	param_3	registerIndex	INFERRED	register number within its file
+local	FUN_000fafa4	param_4	valueCount	INFERRED	number of lane values supplied
+local	FUN_000fafa4	param_5	values	INFERRED	lane values (one 32-bit word per lane)
+use	FUN_000fafa4	bVar2	usedLaneMask	INFERRED	bit i set when lane i of the constant record holds a value (record +0x15c)	^\s*bVar2\ =\ \*\(byte\ \*\)\(iVar6\ \+\ 0x15c\);$	+1
+use	FUN_000fafa4	bVar2	usedLaneMask	INFERRED	bit i set when lane i of the constant record holds a value (record +0x15c)	^\s*bVar2\ =\ \(byte\)\(1\ <<\ uVar1\)\ \|\ \*\(byte\ \*\)\(iVar6\ \+\ 0x15c\);$	+2
+use	FUN_000fafa4	bVar2	usedLaneMask	INFERRED	bit i set when lane i of the constant record holds a value (record +0x15c)	^\s*\*\(byte\ \*\)\(iVar6\ \+\ 0x15c\)\ =\ bVar2\ \|\ 0xe;$	+1
+use	FUN_000fafa4	iVar4	registerMap	INFERRED	program+0x3ac register map: +0x1c count, +0x20 vector of constant records	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3ac\);$	+1
+use	FUN_000fafa4	iVar4	registerMap	INFERRED	program+0x3ac register map: +0x1c count, +0x20 vector of constant records	^\s*puVar7\ =\ \*\(uint\ \*\*\)\(iVar4\ \+\ 0x20\);$	+1
+use	FUN_000fafa4	iVar4	registerMap	INFERRED	program+0x3ac register map: +0x1c count, +0x20 vector of constant records	^\s*\*\(int\ \*\)\(iVar4\ \+\ 0x1c\)\ =\ \*\(int\ \*\)\(iVar4\ \+\ 0x1c\)\ \+\ 1;$	+1
+use	FUN_000fafa4	iVar4	laneRecord	INFERRED	lane i of the constant record (stride 0x18): kind at +0x1c, value at +0x20	^\s*iVar4\ =\ iVar6;$	+1
+use	FUN_000fafa4	iVar4	laneRecord	INFERRED	lane i of the constant record (stride 0x18): kind at +0x1c, value at +0x20	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x1c\)\ =\ 2;$	+2
+use	FUN_000fafa4	iVar4	laneRecord	INFERRED	lane i of the constant record (stride 0x18): kind at +0x1c, value at +0x20	^\s*iVar4\ =\ iVar4\ \+\ 0x18;$	+1
+use	FUN_000fafa4	iVar4	laneRecord	INFERRED	lane i of the constant record (stride 0x18): kind at +0x1c, value at +0x20	^\s*iVar4\ =\ iVar6;$@2	+1
+use	FUN_000fafa4	iVar4	laneRecord	INFERRED	lane i of the constant record (stride 0x18): kind at +0x1c, value at +0x20	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x1c\)\ =\ 4;$	+2
+use	FUN_000fafa4	iVar4	laneRecord	INFERRED	lane i of the constant record (stride 0x18): kind at +0x1c, value at +0x20	^\s*iVar4\ =\ iVar4\ \+\ 0x18;$@2	+1
+use	FUN_000fafa4	iVar4	laneRecord	INFERRED	lane i of the constant record (stride 0x18): kind at +0x1c, value at +0x20	^\s*iVar4\ =\ iVar6;$@3	+1
+use	FUN_000fafa4	iVar4	laneRecord	INFERRED	lane i of the constant record (stride 0x18): kind at +0x1c, value at +0x20	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x1c\)\ =\ 3;$	+2
+use	FUN_000fafa4	iVar4	laneRecord	INFERRED	lane i of the constant record (stride 0x18): kind at +0x1c, value at +0x20	^\s*iVar4\ =\ iVar4\ \+\ 0x18;$@3	+1
+use	FUN_000fafa4	iVar4	laneRecord	INFERRED	lane i of the constant record (stride 0x18): kind at +0x1c, value at +0x20	^\s*iVar4\ =\ iVar6;$@4	+1
+use	FUN_000fafa4	iVar4	laneRecord	INFERRED	lane i of the constant record (stride 0x18): kind at +0x1c, value at +0x20	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x1c\)\ =\ 3;$@2	+2
+use	FUN_000fafa4	iVar4	laneRecord	INFERRED	lane i of the constant record (stride 0x18): kind at +0x1c, value at +0x20	^\s*iVar4\ =\ iVar4\ \+\ 0x18;$@4	+1
+use	FUN_000fafa4	iVar6	constRecord	INFERRED	constant record of the new virtual register (first element of its vector at +0x18)	^\s*iVar6\ =\ \*piVar5;$	+1
+use	FUN_000fafa4	iVar6	constRecord	INFERRED	constant record of the new virtual register (first element of its vector at +0x18)	^\s*\*piVar5\ =\ iVar6;$	+1
+use	FUN_000fafa4	iVar6	constRecord	INFERRED	constant record of the new virtual register (first element of its vector at +0x18)	^\s*iVar4\ =\ iVar6;$	+1
+use	FUN_000fafa4	iVar6	constRecord	INFERRED	constant record of the new virtual register (first element of its vector at +0x18)	^\s*\*\(byte\ \*\)\(iVar6\ \+\ 0x15c\)\ =\ \(byte\)\(1\ <<\ uVar1\)\ \|\ \*\(byte\ \*\)\(iVar6\ \+\ 0x15c\);$	+1
+use	FUN_000fafa4	iVar6	constRecord	INFERRED	constant record of the new virtual register (first element of its vector at +0x18)	^\s*bVar2\ =\ \*\(byte\ \*\)\(iVar6\ \+\ 0x15c\);$	+1
+use	FUN_000fafa4	iVar6	constRecord	INFERRED	constant record of the new virtual register (first element of its vector at +0x18)	^\s*iVar4\ =\ iVar6;$@2	+1
+use	FUN_000fafa4	iVar6	constRecord	INFERRED	constant record of the new virtual register (first element of its vector at +0x18)	^\s*bVar2\ =\ \(byte\)\(1\ <<\ uVar1\)\ \|\ \*\(byte\ \*\)\(iVar6\ \+\ 0x15c\);$	+2
+use	FUN_000fafa4	iVar6	constRecord	INFERRED	constant record of the new virtual register (first element of its vector at +0x18)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x20\);$	+8
+use	FUN_000fafa4	iVar6	constRecord	INFERRED	constant record of the new virtual register (first element of its vector at +0x18)	^\s*iVar4\ =\ iVar6;$@3	+1
+use	FUN_000fafa4	iVar6	constRecord	INFERRED	constant record of the new virtual register (first element of its vector at +0x18)	^\s*\*\(byte\ \*\)\(iVar6\ \+\ 0x15c\)\ =\ \(byte\)\(1\ <<\ uVar1\)\ \|\ \*\(byte\ \*\)\(iVar6\ \+\ 0x15c\);$@2	+1
+use	FUN_000fafa4	iVar6	constRecord	INFERRED	constant record of the new virtual register (first element of its vector at +0x18)	^\s*iVar4\ =\ iVar6;$@4	+1
+use	FUN_000fafa4	iVar6	constRecord	INFERRED	constant record of the new virtual register (first element of its vector at +0x18)	^\s*\*\(byte\ \*\)\(iVar6\ \+\ 0x15c\)\ =\ \(byte\)\(1\ <<\ uVar1\)\ \|\ \*\(byte\ \*\)\(iVar6\ \+\ 0x15c\);$@3	+1
+use	FUN_000fafa4	piVar5	firstRecordSlot	INFERRED	slot of the first element of the virtual register's record vector	^\s*piVar5\ =\ \*\(int\ \*\*\)\(iVar4\ \+\ 0x18\);$	+3
+use	FUN_000fafa4	piVar5	firstRecordSlot	INFERRED	slot of the first element of the virtual register's record vector	^\s*if\ \(piVar5\[1\]\ ==\ 0\)\ \{$	+3
+use	FUN_000fafa4	piVar5	firstRecordSlot	INFERRED	slot of the first element of the virtual register's record vector	^\s*piVar5\ =\ \(int\ \*\)piVar5\[2\];$	+1
+use	FUN_000fafa4	piVar5	firstRecordSlot	INFERRED	slot of the first element of the virtual register's record vector	^\s*iVar6\ =\ \*piVar5;$	+1
+use	FUN_000fafa4	piVar5	registerListSlot	INFERRED	slot pushed on the register map's constant list	^\s*piVar5\ =\ \(int\ \*\)\(uVar9\ \*\ 4\ \+\ puVar7\[2\]\);$	+1
+use	FUN_000fafa4	piVar5	registerListSlot	INFERRED	slot pushed on the register map's constant list	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar7,uVar9\);$	+1
+use	FUN_000fafa4	piVar5	registerListSlot	INFERRED	slot pushed on the register map's constant list	^\s*\*piVar5\ =\ iVar6;$	+1
+use	FUN_000fafa4	puVar7	registerList	INFERRED	vector header at registerMap+0x20	^\s*puVar7\ =\ \*\(uint\ \*\*\)\(iVar4\ \+\ 0x20\);$	+6
+use	FUN_000fafa4	puVar7	registerList	INFERRED	vector header at registerMap+0x20	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar7,uVar9\);$	+1
+local	FUN_000fafa4	uVar1	laneBit	INFERRED	lane index masked to 6 bits, used as the shift for the used-lane mask
+use	FUN_000fafa4	uVar3	laneValue	INFERRED	value of lane i from the values array	^\s*uVar3\ =\ param_5\[uVar9\];$	+1
+use	FUN_000fafa4	uVar3	laneValue	INFERRED	value of lane i from the values array	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x20\)\ =\ uVar3;$	+1
+use	FUN_000fafa4	uVar3	laneValue	INFERRED	value of lane i from the values array	^\s*uVar3\ =\ param_5\[uVar9\];$@2	+1
+use	FUN_000fafa4	uVar3	laneValue	INFERRED	value of lane i from the values array	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x20\)\ =\ uVar3;$@3	+1
+use	FUN_000fafa4	uVar3	laneValue	INFERRED	value of lane i from the values array	^\s*uVar3\ =\ param_5\[uVar9\];$@3	+1
+use	FUN_000fafa4	uVar3	laneValue	INFERRED	value of lane i from the values array	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x20\)\ =\ uVar3;$@4	+1
+use	FUN_000fafa4	uVar3	laneValue0	INFERRED	value of lane 0 (replicated for type 0)	^\s*uVar3\ =\ \*param_5;$	+1
+use	FUN_000fafa4	uVar3	laneValue0	INFERRED	value of lane 0 (replicated for type 0)	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0x20\)\ =\ uVar3;$@2	+1
+use	FUN_000fafa4	uVar3	replicatedValue	INFERRED	lane-1 value copied to the replicated slots (+0x38, +0x50, +0x68)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x20\);$	+1
+use	FUN_000fafa4	uVar3	replicatedValue	INFERRED	lane-1 value copied to the replicated slots (+0x38, +0x50, +0x68)	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x68\)\ =\ uVar3;$	+3
+use	FUN_000fafa4	uVar8	registerMapArg	INFERRED	program+0x3ac register map passed to the virtual register creation	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\);$	+1
+use	FUN_000fafa4	uVar8	registerMapArg	INFERRED	program+0x3ac register map passed to the virtual register creation	^\s*iVar4\ =\ FUN_00127608\(uVar8,uVar3,param_3,0\);$	+1
+use	FUN_000fafa4	uVar9	registerListCount	INFERRED	element count of the register list before the push	^\s*uVar9\ =\ puVar7\[1\];$	+5
+use	FUN_000fafa4	uVar9	registerListCount	INFERRED	element count of the register list before the push	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar7,uVar9\);$	+1
+func	FUN_000fafa4	Program__createConstantVReg	INFERRED	creates the virtual register for an IL constant register of the given type, appends its first constant record to the register map list and fills the lane kinds (2 float, 3 int, 4 ...) and values
+local	FUN_000e2c78	param_1	constRecord	INFERRED	constant record: +0x94 destination register, +0x98 record kind (2, 3, 4, 0xc), +0x15c used-lane mask, four lane entries of 0x18 bytes from +0x1c
+local	FUN_000e2c78	param_2	hwDescription	INFERRED	hardware description (virtual slot 0x8c converts a lane value to a float)
+local	FUN_000e2c78	param_3	program	INFERRED	Program (+0x398 holds the emit context)
+local	FUN_000e2c78	bVar1	notLastLane	INFERRED	loop condition over the four lanes
+use	FUN_000e2c78	iVar3	recordKind	INFERRED	constant record kind (+0x98)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x98\);$	+2
+use	FUN_000e2c78	iVar3	recordKind	INFERRED	constant record kind (+0x98)	^\s*if\ \(iVar3\ <\ 4\)\ \{$	+2
+use	FUN_000e2c78	iVar3	recordKind	INFERRED	constant record kind (+0x98)	^\s*if\ \(iVar3\ ==\ 4\)\ \{$	+1
+use	FUN_000e2c78	iVar3	recordKind	INFERRED	constant record kind (+0x98)	^\s*if\ \(iVar3\ !=\ 0xc\)\ \{$	+1
+use	FUN_000e2c78	iVar3	laneRecord0	INFERRED	walks the lane entries (stride 0x18) from the record start	^\s*iVar3\ =\ param_1;$	+1
+use	FUN_000e2c78	iVar3	laneRecord0	INFERRED	walks the lane entries (stride 0x18) from the record start	^\s*iVar16\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x20\);$	+1
+use	FUN_000e2c78	iVar3	laneRecord0	INFERRED	walks the lane entries (stride 0x18) from the record start	^\s*iVar3\ =\ iVar3\ \+\ 0x18;$	+1
+use	FUN_000e2c78	iVar3	laneRecordB	INFERRED	walks the lane entries (stride 0x18) from the record start	^\s*iVar3\ =\ param_1;$@2	+1
+use	FUN_000e2c78	iVar3	laneRecordB	INFERRED	walks the lane entries (stride 0x18) from the record start	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x94\);$	+1
+use	FUN_000e2c78	iVar3	laneRecordB	INFERRED	walks the lane entries (stride 0x18) from the record start	^\s*iVar3\ =\ iVar3\ \+\ 0x18;$@2	+1
+use	FUN_000e2c78	iVar3	programArg	INFERRED	program, passed on as an argument to the constant store	^\s*iVar3\ =\ param_3;$	+1
+use	FUN_000e2c78	iVar3	programArg	INFERRED	program, passed on as an argument to the constant store	^\s*iVar3\ =\ \(int\)\*\(short\ \*\)\(iVar16\ \+\ 0x20\);$	+1
+use	FUN_000e2c78	iVar3	programArg	INFERRED	program, passed on as an argument to the constant store	^\s*FUN_000d9e58\(uVar15,uVar12,iVar3,\(int\)sVar2,uVar7,uVar5\);$	+1
+use	FUN_000e2c78	iVar3	programArg	INFERRED	program, passed on as an argument to the constant store	^\s*\(\(undefined4\ \(\*\)\(\)\)FUN_000d9bac\)\(uVar15,uVar12,iVar3,uVar7,uVar5,\(uint\)\(iVar4\ ==\ 0xc\),\(double\)fVar6\);$	+1
+use	FUN_000e2c78	iVar4	laneKind	INFERRED	kind word (+0x1c) of the lane entry: 3 = scalar integer constant	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar16\ \+\ 0x1c\);$	+2
+use	FUN_000e2c78	iVar4	laneKind	INFERRED	kind word (+0x1c) of the lane entry: 3 = scalar integer constant	^\s*FUN_000d9e98\(uVar14,uVar13,uVar7,iVar4,uVar10,uVar8,uVar15,uVar12,uVar11,uVar5\);$	+1
+use	FUN_000e2c78	iVar4	recordKind2	INFERRED	constant record kind (+0x98): 0xc compares as a boolean flag	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x98\);$	+1
+use	FUN_000e2c78	iVar4	recordKind2	INFERRED	constant record kind (+0x98): 0xc compares as a boolean flag	^\s*\(\(undefined4\ \(\*\)\(\)\)FUN_000d9bac\)\(uVar15,uVar12,iVar3,uVar7,uVar5,\(uint\)\(iVar4\ ==\ 0xc\),\(double\)fVar6\);$	+1
+use	FUN_000e2c78	iVar9	laneValuePtr	INFERRED	address of the lane's value word (+0x1c, stride 0x18)	^\s*iVar9\ =\ param_1\ \+\ 0x1c;$	+1
+use	FUN_000e2c78	iVar9	laneValuePtr	INFERRED	address of the lane's value word (+0x1c, stride 0x18)	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x8c\)\)\(param_2,iVar9\)\)\);$	+1
+use	FUN_000e2c78	iVar9	laneValuePtr	INFERRED	address of the lane's value word (+0x1c, stride 0x18)	^\s*iVar9\ =\ iVar9\ \+\ 0x18;$	+1
+local	FUN_000e2c78	iVar16	laneRecord	INFERRED	current lane entry of the constant record (stride 0x18)
+use	FUN_000e2c78	sVar2	laneHigh	INFERRED	high 16 bits of the lane's packed integer value (+0x22)	^\s*sVar2\ =\ \*\(short\ \*\)\(iVar16\ \+\ 0x22\);$	+1
+use	FUN_000e2c78	sVar2	laneHigh	INFERRED	high 16 bits of the lane's packed integer value (+0x22)	^\s*FUN_000d9e58\(uVar15,uVar12,iVar3,\(int\)sVar2,uVar7,uVar5\);$	+1
+use	FUN_000e2c78	fVar6	laneFloat	INFERRED	lane value converted to float through the hardware description	^\s*fVar6\ =\ GH_U2F\(\(unsigned\ int\)\(\(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x8c\)\)\(param_2,iVar9\)\)\);$	+1
+use	FUN_000e2c78	fVar6	laneFloat	INFERRED	lane value converted to float through the hardware description	^\s*\(\(undefined4\ \(\*\)\(\)\)FUN_000d9bac\)\(uVar15,uVar12,iVar3,uVar7,uVar5,\(uint\)\(iVar4\ ==\ 0xc\),\(double\)fVar6\);$	+1
+local	FUN_000e2c78	uVar5	targetBlock	INFERRED	block chosen by Compiler__selectBlockByProgramFlags for the constant store
+use	FUN_000e2c78	uVar8	emitContext2	INFERRED	program+0x398 emit context (argument staging)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 0x398\);$	+1
+use	FUN_000e2c78	uVar8	emitContext2	INFERRED	program+0x398 emit context (argument staging)	^\s*FUN_000d9c90\(uVar8,uVar15,uVar12,uVar7,uVar5,0\);$	+1
+use	FUN_000e2c78	uVar8	laneValue1	INFERRED	lane entry word +0x24	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(iVar16\ \+\ 0x24\);$	+1
+use	FUN_000e2c78	uVar8	laneValue1	INFERRED	lane entry word +0x24	^\s*FUN_000d9e98\(uVar14,uVar13,uVar7,iVar4,uVar10,uVar8,uVar15,uVar12,uVar11,uVar5\);$	+1
+use	FUN_000e2c78	uVar10	laneValue0	INFERRED	lane entry word +0x20	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(iVar16\ \+\ 0x20\);$	+1
+use	FUN_000e2c78	uVar10	laneValue0	INFERRED	lane entry word +0x20	^\s*FUN_000d9e98\(uVar14,uVar13,uVar7,iVar4,uVar10,uVar8,uVar15,uVar12,uVar11,uVar5\);$	+1
+use	FUN_000e2c78	uVar11	laneValue4	INFERRED	lane entry word +0x30	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(iVar16\ \+\ 0x30\);$	+1
+use	FUN_000e2c78	uVar11	laneValue4	INFERRED	lane entry word +0x30	^\s*FUN_000d9e98\(uVar14,uVar13,uVar7,iVar4,uVar10,uVar8,uVar15,uVar12,uVar11,uVar5\);$	+1
+use	FUN_000e2c78	uVar12	destRegisterId	INFERRED	destination register id (+0x94 of the record)	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x94\);$	+1
+use	FUN_000e2c78	uVar12	destRegisterId	INFERRED	destination register id (+0x94 of the record)	^\s*FUN_000d9d74\(uVar15,uVar12,\(uint\)\(iVar16\ ==\ 1\),uVar7,uVar5,0\);$	+1
+use	FUN_000e2c78	uVar12	destRegisterId	INFERRED	destination register id (+0x94 of the record)	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x94\);$@2	+1
+use	FUN_000e2c78	uVar12	destRegisterId	INFERRED	destination register id (+0x94 of the record)	^\s*FUN_000d9e58\(uVar15,uVar12,iVar3,\(int\)sVar2,uVar7,uVar5\);$	+1
+use	FUN_000e2c78	uVar12	destRegisterId	INFERRED	destination register id (+0x94 of the record)	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x94\);$@3	+1
+use	FUN_000e2c78	uVar12	destRegisterId	INFERRED	destination register id (+0x94 of the record)	^\s*\(\(undefined4\ \(\*\)\(\)\)FUN_000d9bac\)\(uVar15,uVar12,iVar3,uVar7,uVar5,\(uint\)\(iVar4\ ==\ 0xc\),\(double\)fVar6\);$	+1
+use	FUN_000e2c78	uVar12	laneValueInt	INFERRED	integer lane value (+0x20 of the lane entry)	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(iVar16\ \+\ 0x20\);$	+1
+use	FUN_000e2c78	uVar12	laneValueInt	INFERRED	integer lane value (+0x20 of the lane entry)	^\s*FUN_000d9c90\(uVar8,uVar15,uVar12,uVar7,uVar5,0\);$	+1
+use	FUN_000e2c78	uVar12	laneValue3	INFERRED	lane entry word +0x2c	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(iVar16\ \+\ 0x2c\);$	+1
+use	FUN_000e2c78	uVar12	laneValue3	INFERRED	lane entry word +0x2c	^\s*FUN_000d9e98\(uVar14,uVar13,uVar7,iVar4,uVar10,uVar8,uVar15,uVar12,uVar11,uVar5\);$	+1
+use	FUN_000e2c78	uVar13	destRegisterId2	INFERRED	destination register id (+0x94 of the record)	^\s*uVar13\ =\ \*\(undefined4\ \*\)\(iVar3\ \+\ 0x94\);$	+1
+use	FUN_000e2c78	uVar13	destRegisterId2	INFERRED	destination register id (+0x94 of the record)	^\s*FUN_000d9e98\(uVar14,uVar13,uVar7,iVar4,uVar10,uVar8,uVar15,uVar12,uVar11,uVar5\);$	+1
+use	FUN_000e2c78	uVar14	emitContext3	INFERRED	program+0x398 emit context (argument staging)	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 0x398\);$	+1
+use	FUN_000e2c78	uVar14	emitContext3	INFERRED	program+0x398 emit context (argument staging)	^\s*FUN_000d9e98\(uVar14,uVar13,uVar7,iVar4,uVar10,uVar8,uVar15,uVar12,uVar11,uVar5\);$	+1
+use	FUN_000e2c78	uVar15	emitContext	INFERRED	program+0x398 emit context	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 0x398\);$	+1
+use	FUN_000e2c78	uVar15	emitContext	INFERRED	program+0x398 emit context	^\s*FUN_000d9d74\(uVar15,uVar12,\(uint\)\(iVar16\ ==\ 1\),uVar7,uVar5,0\);$	+1
+use	FUN_000e2c78	uVar15	emitContext	INFERRED	program+0x398 emit context	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 0x398\);$@2	+1
+use	FUN_000e2c78	uVar15	emitContext	INFERRED	program+0x398 emit context	^\s*FUN_000d9e58\(uVar15,uVar12,iVar3,\(int\)sVar2,uVar7,uVar5\);$	+1
+use	FUN_000e2c78	uVar15	emitContext	INFERRED	program+0x398 emit context	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 0x398\);$@3	+1
+use	FUN_000e2c78	uVar15	emitContext	INFERRED	program+0x398 emit context	^\s*\(\(undefined4\ \(\*\)\(\)\)FUN_000d9bac\)\(uVar15,uVar12,iVar3,uVar7,uVar5,\(uint\)\(iVar4\ ==\ 0xc\),\(double\)fVar6\);$	+1
+use	FUN_000e2c78	uVar15	destRegisterId3	INFERRED	destination register id (+0x94 of the record)	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x94\);$	+1
+use	FUN_000e2c78	uVar15	destRegisterId3	INFERRED	destination register id (+0x94 of the record)	^\s*FUN_000d9c90\(uVar8,uVar15,uVar12,uVar7,uVar5,0\);$	+1
+use	FUN_000e2c78	uVar15	laneValue2	INFERRED	lane entry word +0x28	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(iVar16\ \+\ 0x28\);$	+1
+use	FUN_000e2c78	uVar15	laneValue2	INFERRED	lane entry word +0x28	^\s*FUN_000d9e98\(uVar14,uVar13,uVar7,iVar4,uVar10,uVar8,uVar15,uVar12,uVar11,uVar5\);$	+1
+func	FUN_000e2c78	ConstRecord__emitStores	INFERRED	emits the constant stores for every used lane of a constant record into the shader program being built, by record kind (3 -> FUN_000d9d74, 4 -> FUN_000d9c90/FUN_000d9e98, 2/0xc -> FUN_000d9e58 or scStoreConstantComponent)
+local	FUN_000e1c50	param_1	program	INFERRED	Program being optimised (+8 compiler, +0x30 flags, +900 block list)
+use	FUN_000e1c50	iVar1	block	INFERRED	current block of the walk over the block list	^\s*iVar1\ =\ \*\(int\ \*\)\(param_1\ \+\ 900\);$	+1
+use	FUN_000e1c50	iVar1	block	INFERRED	current block of the walk over the block list	^\s*piVar2\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar1\ \+\ 0x98\)\)\[2\];$	+2
+use	FUN_000e1c50	iVar1	block	INFERRED	current block of the walk over the block list	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar1\ \+\ 8\);$	+1
+use	FUN_000e1c50	iVar1	block	INFERRED	current block of the walk over the block list	^\s*iVar1\ =\ iVar4;$	+1
+use	FUN_000e1c50	iVar4	nextBlock	INFERRED	next block of the list	^\s*for\ \(iVar4\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 900\)\ \+\ 8\);\ iVar4\ !=\ 0;\ iVar4\ =\ \*\(int\ \*\)\(iVar4\ \+\ 8\)\)\ \{$	+1
+use	FUN_000e1c50	iVar4	nextBlock	INFERRED	next block of the list	^\s*iVar4\ =\ \*\(int\ \*\)\(iVar1\ \+\ 8\);$	+1
+use	FUN_000e1c50	iVar4	nextBlock	INFERRED	next block of the list	^\s*iVar1\ =\ iVar4;$	+1
+use	FUN_000e1c50	iVar4	userByteOffset	INFERRED	user index * 4 into the instruction's user vector	^\s*iVar4\ =\ uVar10\ \*\ 4;$	+1
+use	FUN_000e1c50	iVar4	userByteOffset	INFERRED	user index * 4 into the instruction's user vector	^\s*piVar3\ =\ \(int\ \*\)\(iVar4\ \+\ puVar12\[2\]\);$	+1
+use	FUN_000e1c50	iVar4	userByteOffset	INFERRED	user index * 4 into the instruction's user vector	^\s*iVar4\ =\ iVar4\ \+\ \-4;$	+1
+use	FUN_000e1c50	iVar4	userByteOffset	INFERRED	user index * 4 into the instruction's user vector	^\s*iVar4\ =\ uVar10\ \*\ 4;$@2	+1
+use	FUN_000e1c50	iVar4	userByteOffset	INFERRED	user index * 4 into the instruction's user vector	^\s*piVar3\ =\ \(int\ \*\)\(iVar4\ \+\ puVar12\[2\]\);$@2	+1
+use	FUN_000e1c50	iVar4	userByteOffset	INFERRED	user index * 4 into the instruction's user vector	^\s*iVar4\ =\ iVar4\ \+\ \-4;$@2	+1
+use	FUN_000e1c50	iVar13	userInst	INFERRED	instruction that uses the multiply result	^\s*iVar13\ =\ \*piVar3;$	+2
+use	FUN_000e1c50	iVar13	userInst	INFERRED	instruction that uses the multiply result	^\s*piVar3\ =\ \(int\ \*\)FUN_00105594\(iVar13,iVar11\);$	+1
+use	FUN_000e1c50	iVar13	userInst	INFERRED	instruction that uses the multiply result	^\s*FUN_00106004\(iVar13,iVar11,piVar2,1,uVar6\);$	+1
+use	FUN_000e1c50	iVar13	userInst	INFERRED	instruction that uses the multiply result	^\s*\}\ while\ \(iVar11\ <=\ \*\(int\ \*\)\(iVar13\ \+\ 0x84\)\);$	+1
+use	FUN_000e1c50	iVar13	userInst	INFERRED	instruction that uses the multiply result	^\s*iVar13\ =\ \*piVar3;$@2	+2
+use	FUN_000e1c50	iVar13	userInst	INFERRED	instruction that uses the multiply result	^\s*piVar3\ =\ \(int\ \*\)FUN_00105594\(iVar13,iVar11\);$@2	+1
+use	FUN_000e1c50	iVar13	userInst	INFERRED	instruction that uses the multiply result	^\s*FUN_00106004\(iVar13,iVar11,piVar2,1,uVar6\);$@2	+1
+use	FUN_000e1c50	iVar13	userInst	INFERRED	instruction that uses the multiply result	^\s*\}\ while\ \(iVar11\ <=\ \*\(int\ \*\)\(iVar13\ \+\ 0x84\)\);$@2	+1
+use	FUN_000e1c50	piVar2	nextInst	INFERRED	instruction after the current one	^\s*piVar2\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar1\ \+\ 0x98\)\)\[2\];$	+1
+use	FUN_000e1c50	piVar2	nextInst	INFERRED	instruction after the current one	^\s*if\ \(piVar2\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_000e1c50	piVar2	nextInst	INFERRED	instruction after the current one	^\s*piVar3\ =\ piVar2;$	+1
+use	FUN_000e1c50	piVar2	nextInst	INFERRED	instruction after the current one	^\s*piVar2\ =\ \(int\ \*\)piVar3\[2\];$	+1
+use	FUN_000e1c50	piVar2	replacementSource	INFERRED	non-constant source operand that replaces the multiply result in its users	^\s*piVar2\ =\ \(int\ \*\)FUN_00105594\(piVar9,1\);$	+1
+use	FUN_000e1c50	piVar2	replacementSource	INFERRED	non-constant source operand that replaces the multiply result in its users	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar2\ \+\ 0x4c\)\)\(piVar2\);$	+5
+use	FUN_000e1c50	piVar2	replacementSource	INFERRED	non-constant source operand that replaces the multiply result in its users	^\s*piVar2\ =\ piVar3;$	+1
+use	FUN_000e1c50	piVar2	replacementSource	INFERRED	non-constant source operand that replaces the multiply result in its users	^\s*FUN_00106004\(iVar13,iVar11,piVar2,1,uVar6\);$	+1
+use	FUN_000e1c50	piVar3	followingInst	INFERRED	instruction after the current one (list walk)	^\s*piVar3\ =\ piVar2;$	+1
+use	FUN_000e1c50	piVar3	followingInst	INFERRED	instruction after the current one (list walk)	^\s*piVar3\ =\ \(int\ \*\)piVar9\[2\];$	+1
+use	FUN_000e1c50	piVar3	followingInst	INFERRED	instruction after the current one (list walk)	^\s*piVar2\ =\ \(int\ \*\)piVar3\[2\];$	+3
+use	FUN_000e1c50	piVar3	userSlot	INFERRED	slot of the user in the user vector (inst+0x10)	^\s*piVar3\ =\ \(int\ \*\)\(iVar4\ \+\ puVar12\[2\]\);$	+1
+use	FUN_000e1c50	piVar3	userSlot	INFERRED	slot of the user in the user vector (inst+0x10)	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar12,uVar10\);$	+1
+use	FUN_000e1c50	piVar3	userSlot	INFERRED	slot of the user in the user vector (inst+0x10)	^\s*iVar13\ =\ \*piVar3;$	+1
+use	FUN_000e1c50	piVar3	userSlot	INFERRED	slot of the user in the user vector (inst+0x10)	^\s*piVar3\ =\ \(int\ \*\)\(iVar4\ \+\ puVar12\[2\]\);$@2	+1
+use	FUN_000e1c50	piVar3	userSlot	INFERRED	slot of the user in the user vector (inst+0x10)	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar12,uVar10\);$@2	+1
+use	FUN_000e1c50	piVar3	userSlot	INFERRED	slot of the user in the user vector (inst+0x10)	^\s*iVar13\ =\ \*piVar3;$@2	+1
+use	FUN_000e1c50	piVar9	inst	INFERRED	instruction being examined	^\s*piVar9\ =\ \*\(int\ \*\*\)\(iVar1\ \+\ 0x98\);$	+1
+use	FUN_000e1c50	piVar9	inst	INFERRED	instruction being examined	^\s*if\ \(\(piVar9\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+4
+use	FUN_000e1c50	piVar9	inst	INFERRED	instruction being examined	^\s*puVar12\ =\ \(uint\ \*\)piVar9\[4\];$	+1
+use	FUN_000e1c50	piVar9	inst	INFERRED	instruction being examined	^\s*if\ \(piVar9\ ==\ piVar3\)\ \{$	+1
+use	FUN_000e1c50	piVar9	inst	INFERRED	instruction being examined	^\s*puVar12\ =\ \(uint\ \*\)piVar9\[4\];$@2	+1
+use	FUN_000e1c50	piVar9	inst	INFERRED	instruction being examined	^\s*iVar4\ =\ \(\*\*\(code\ \*\*\)\(\*piVar9\ \+\ 100\)\)\(piVar9\);$	+3
+use	FUN_000e1c50	piVar9	inst	INFERRED	instruction being examined	^\s*puVar12\ =\ \(uint\ \*\)piVar9\[4\];$@3	+1
+use	FUN_000e1c50	piVar9	inst	INFERRED	instruction being examined	^\s*if\ \(piVar9\ ==\ piVar3\)\ \{$@2	+1
+use	FUN_000e1c50	piVar9	inst	INFERRED	instruction being examined	^\s*puVar12\ =\ \(uint\ \*\)piVar9\[4\];$@4	+1
+use	FUN_000e1c50	piVar9	inst	INFERRED	instruction being examined	^\s*piVar3\ =\ \(int\ \*\)piVar9\[2\];$	+1
+use	FUN_000e1c50	piVar9	inst	INFERRED	instruction being examined	^\s*piVar9\ =\ piVar3;$	+1
+use	FUN_000e1c50	puVar12	userVector	INFERRED	vector header of the users of the instruction (inst+0x10)	^\s*puVar12\ =\ \(uint\ \*\)piVar9\[4\];$	+2
+use	FUN_000e1c50	puVar12	userVector	INFERRED	vector header of the users of the instruction (inst+0x10)	^\s*if\ \(uVar10\ <\ \*puVar12\)\ \{$	+2
+use	FUN_000e1c50	puVar12	userVector	INFERRED	vector header of the users of the instruction (inst+0x10)	^\s*_memset\(uVar5\ \*\ 4\ \+\ puVar12\[2\],0,\(uVar10\ \-\ uVar5\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_000e1c50	puVar12	userVector	INFERRED	vector header of the users of the instruction (inst+0x10)	^\s*piVar3\ =\ \(int\ \*\)\(iVar4\ \+\ puVar12\[2\]\);$	+1
+use	FUN_000e1c50	puVar12	userVector	INFERRED	vector header of the users of the instruction (inst+0x10)	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar12,uVar10\);$	+1
+use	FUN_000e1c50	puVar12	userVector	INFERRED	vector header of the users of the instruction (inst+0x10)	^\s*puVar12\ =\ \(uint\ \*\)piVar9\[4\];$@2	+1
+use	FUN_000e1c50	puVar12	userVector	INFERRED	vector header of the users of the instruction (inst+0x10)	^\s*puVar12\ =\ \(uint\ \*\)piVar9\[4\];$@3	+2
+use	FUN_000e1c50	puVar12	userVector	INFERRED	vector header of the users of the instruction (inst+0x10)	^\s*if\ \(uVar10\ <\ \*puVar12\)\ \{$@2	+2
+use	FUN_000e1c50	puVar12	userVector	INFERRED	vector header of the users of the instruction (inst+0x10)	^\s*_memset\(uVar5\ \*\ 4\ \+\ puVar12\[2\],0,\(uVar10\ \-\ uVar5\)\ \*\ 4\ \+\ 4\);$@2	+2
+use	FUN_000e1c50	puVar12	userVector	INFERRED	vector header of the users of the instruction (inst+0x10)	^\s*piVar3\ =\ \(int\ \*\)\(iVar4\ \+\ puVar12\[2\]\);$@2	+1
+use	FUN_000e1c50	puVar12	userVector	INFERRED	vector header of the users of the instruction (inst+0x10)	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar12,uVar10\);$@2	+1
+use	FUN_000e1c50	puVar12	userVector	INFERRED	vector header of the users of the instruction (inst+0x10)	^\s*puVar12\ =\ \(uint\ \*\)piVar9\[4\];$@4	+1
+use	FUN_000e1c50	uVar5	userCountCheck	INFERRED	count word of the user vector, compared with the index while growing	^\s*uVar5\ =\ puVar12\[1\];$	+3
+use	FUN_000e1c50	uVar5	userCountCheck	INFERRED	count word of the user vector, compared with the index while growing	^\s*uVar5\ =\ puVar12\[1\];$@2	+3
+use	FUN_000e1c50	uVar6	compiler	INFERRED	program+8	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_000e1c50	uVar6	compiler	INFERRED	program+8	^\s*FUN_00106004\(iVar13,iVar11,piVar2,1,uVar6\);$	+1
+use	FUN_000e1c50	uVar6	compiler	INFERRED	program+8	^\s*FUN_00106004\(iVar13,iVar11,piVar2,1,uVar6\);$@2	+1
+use	FUN_000e1c50	uVar7	userCount	INFERRED	number of users of the instruction	^\s*uVar7\ =\ puVar12\[1\];$	+2
+use	FUN_000e1c50	uVar7	userCount	INFERRED	number of users of the instruction	^\s*if\ \(uVar7\ ==\ uVar8\)\ break;$	+1
+use	FUN_000e1c50	uVar7	userCount	INFERRED	number of users of the instruction	^\s*uVar7\ =\ puVar12\[1\];$@2	+2
+use	FUN_000e1c50	uVar7	userCount	INFERRED	number of users of the instruction	^\s*if\ \(uVar8\ ==\ uVar7\)\ break;$	+1
+use	FUN_000e1c50	uVar10	userIndex	INFERRED	index of the user, walked from the last to the first	^\s*uVar10\ =\ uVar7\ \-\ 1;$	+3
+use	FUN_000e1c50	uVar10	userIndex	INFERRED	index of the user, walked from the last to the first	^\s*if\ \(uVar10\ <\ \*puVar12\)\ \{$	+1
+use	FUN_000e1c50	uVar10	userIndex	INFERRED	index of the user, walked from the last to the first	^\s*if\ \(uVar5\ <=\ uVar10\)\ \{$	+3
+use	FUN_000e1c50	uVar10	userIndex	INFERRED	index of the user, walked from the last to the first	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar12,uVar10\);$	+1
+use	FUN_000e1c50	uVar10	userIndex	INFERRED	index of the user, walked from the last to the first	^\s*uVar10\ =\ uVar10\ \-\ 1;$	+1
+use	FUN_000e1c50	uVar10	userIndex	INFERRED	index of the user, walked from the last to the first	^\s*uVar10\ =\ uVar7\ \-\ 1;$@2	+3
+use	FUN_000e1c50	uVar10	userIndex	INFERRED	index of the user, walked from the last to the first	^\s*if\ \(uVar10\ <\ \*puVar12\)\ \{$@2	+1
+use	FUN_000e1c50	uVar10	userIndex	INFERRED	index of the user, walked from the last to the first	^\s*if\ \(uVar5\ <=\ uVar10\)\ \{$@2	+3
+use	FUN_000e1c50	uVar10	userIndex	INFERRED	index of the user, walked from the last to the first	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar12,uVar10\);$@2	+1
+use	FUN_000e1c50	uVar10	userIndex	INFERRED	index of the user, walked from the last to the first	^\s*uVar10\ =\ uVar10\ \-\ 1;$@2	+1
+func	FUN_000e1c50	Program__forwardMulOperandToUsers	INFERRED	pixel-program pass (flag 0x2000, gated by option 0x10): for each opcode 0x13 instruction whose sources satisfy virtual slots 0x4c/0x48, replaces its uses by one source; also handles instructions that expose a copy through virtual slot 100
+local	FUN_000e8124	param_1	program	INFERRED	Program: +0x3bc is the 1024-bit bitset (capacity words, bit count, data), +8 the compiler
+use	FUN_000e8124	iVar10	bitsToClear	INFERRED	number of newly added bits cleared when the bit count grows	^\s*iVar10\ =\ uVar2\ \-\ uVar9;$	+1
+use	FUN_000e8124	iVar10	bitsToClear	INFERRED	number of newly added bits cleared when the bit count grows	^\s*iVar10\ =\ iVar10\ \+\ \-1;$	+2
+use	FUN_000e8124	iVar10	wordsLeft	INFERRED	loop counter while the old bitset words are copied into the grown set	^\s*iVar10\ =\ \*piVar4;$	+4
+use	FUN_000e8124	iVar10	wordsLeft	INFERRED	loop counter while the old bitset words are copied into the grown set	^\s*iVar10\ =\ iVar10\ \+\ \-1;$@2	+2
+use	FUN_000e8124	piVar4	newBitSetData	INFERRED	data words of the grown bitset block (allocation + 1)	^\s*piVar4\ =\ puVar5\ \+\ 1;$	+1
+use	FUN_000e8124	piVar4	newBitSetData	INFERRED	data words of the grown bitset block (allocation + 1)	^\s*piVar6\ =\ piVar4;$	+1
+use	FUN_000e8124	piVar4	newBitSetData	INFERRED	data words of the grown bitset block (allocation + 1)	^\s*\*\(int\ \*\*\)\(param_1\ \+\ 0x3bc\)\ =\ piVar4;$	+2
+use	FUN_000e8124	piVar4	newBitSetData	INFERRED	data words of the grown bitset block (allocation + 1)	^\s*piVar4\[2\]\ =\ piVar4\[2\]\ \|\ \*puVar1;$	+2
+use	FUN_000e8124	piVar6	clearCursor	INFERRED	walks the data words of the new bitset while they are cleared	^\s*piVar6\ =\ piVar4;$	+1
+use	FUN_000e8124	piVar6	clearCursor	INFERRED	walks the data words of the new bitset while they are cleared	^\s*piVar6\[2\]\ =\ 0;$	+2
+use	FUN_000e8124	puVar1	oldWordPtr	INFERRED	address of the old bitset word being OR-ed into the new set	^\s*puVar1\ =\ puVar7\ \+\ 2;$	+1
+use	FUN_000e8124	puVar1	oldWordPtr	INFERRED	address of the old bitset word being OR-ed into the new set	^\s*piVar4\[2\]\ =\ piVar4\[2\]\ \|\ \*puVar1;$	+1
+use	FUN_000e8124	puVar5	newBitSetAlloc	INFERRED	bitset block allocated in arena A when the set has to grow (header word + count + words)	^\s*puVar5\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar8,uVar2\ \*\ 4\ \+\ 0xc\);$	+5
+use	FUN_000e8124	puVar7	bitSet	INFERRED	bitset header (word capacity, bit count at +4, words from +8)	^\s*puVar7\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x3bc\);$	+2
+use	FUN_000e8124	puVar7	bitSet	INFERRED	bitset header (word capacity, bit count at +4, words from +8)	^\s*if\ \(uVar9\ \+\ 0x20\ >>\ 5\ ==\ \*puVar7\)\ \{$	+2
+use	FUN_000e8124	puVar7	bitSet	INFERRED	bitset header (word capacity, bit count at +4, words from +8)	^\s*\*\(uint\ \*\)\(\(int\)puVar7\ \+\ uVar3\ \+\ 8\)\ =\ \*\(uint\ \*\)\(\(int\)puVar7\ \+\ uVar3\ \+\ 8\)\ \&\ \~\(1\ <<\ uVar2\);$	+1
+use	FUN_000e8124	puVar7	bitSet	INFERRED	bitset header (word capacity, bit count at +4, words from +8)	^\s*puVar7\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x3bc\);$@2	+2
+use	FUN_000e8124	puVar7	bitSet	INFERRED	bitset header (word capacity, bit count at +4, words from +8)	^\s*if\ \(\(puVar7\[2\]\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	FUN_000e8124	puVar7	bitSet	INFERRED	bitset header (word capacity, bit count at +4, words from +8)	^\s*\}\ while\ \(\(\*\(uint\ \*\)\(\(int\)puVar7\ \+\ \(uVar3\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ 8\)\ >>\ \(uVar3\ \&\ 0x1f\)\ \&\ 1\)\ !=$	+2
+use	FUN_000e8124	puVar7	bitSet	INFERRED	bitset header (word capacity, bit count at +4, words from +8)	^\s*puVar1\ =\ puVar7\ \+\ 2;$	+2
+use	FUN_000e8124	puVar7	bitSet	INFERRED	bitset header (word capacity, bit count at +4, words from +8)	^\s*puVar7\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x3bc\);$@3	+2
+use	FUN_000e8124	puVar7	bitSet	INFERRED	bitset header (word capacity, bit count at +4, words from +8)	^\s*if\ \(\(puVar7\[2\]\ \&\ 1\)\ !=\ 0\)\ \{$@2	+1
+use	FUN_000e8124	puVar7	bitSet	INFERRED	bitset header (word capacity, bit count at +4, words from +8)	^\s*\}\ while\ \(\(\*\(uint\ \*\)\(\(int\)puVar7\ \+\ \(uVar3\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ 8\)\ >>\ \(uVar3\ \&\ 0x1f\)\ \&\ 1\)\ !=$@2	+2
+use	FUN_000e8124	puVar7	bitSet	INFERRED	bitset header (word capacity, bit count at +4, words from +8)	^\s*if\ \(\(puVar7\[2\]\ \&\ 1\)\ !=\ 0\)\ \{$@3	+1
+use	FUN_000e8124	puVar7	bitSet	INFERRED	bitset header (word capacity, bit count at +4, words from +8)	^\s*\}\ while\ \(\(\*\(uint\ \*\)\(\(int\)puVar7\ \+\ \(uVar3\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ 8\)\ >>\ \(uVar3\ \&\ 0x1f\)\ \&\ 1\)\ !=\ 0\);$	+1
+use	FUN_000e8124	puVar7	bitSet	INFERRED	bitset header (word capacity, bit count at +4, words from +8)	^\s*\*\(uint\ \*\)\(\(int\)puVar7\ \+\ uVar9\ \+\ 8\)\ =\ 1\ <<\ \(uVar3\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(\(int\)puVar7\ \+\ uVar9\ \+\ 8\);$	+1
+use	FUN_000e8124	uVar2	newBitCount	INFERRED	bit count + 1 after the allocation of one more bit	^\s*uVar2\ =\ uVar9\ \+\ 1;$	+1
+use	FUN_000e8124	uVar2	newBitCount	INFERRED	bit count + 1 after the allocation of one more bit	^\s*puVar7\[1\]\ =\ uVar2;$	+3
+use	FUN_000e8124	uVar2	bitInWord	INFERRED	bit position inside its word (index & 0x1f)	^\s*uVar2\ =\ uVar9\ \&\ 0x1f;$	+1
+use	FUN_000e8124	uVar2	bitInWord	INFERRED	bit position inside its word (index & 0x1f)	^\s*\*\(uint\ \*\)\(\(int\)puVar7\ \+\ uVar3\ \+\ 8\)\ =\ \*\(uint\ \*\)\(\(int\)puVar7\ \+\ uVar3\ \+\ 8\)\ \&\ \~\(1\ <<\ uVar2\);$	+1
+use	FUN_000e8124	uVar2	newWordCapacity	INFERRED	words needed for the grown bitset ((bits + 0x41f) >> 5)	^\s*uVar2\ =\ uVar9\ \+\ 0x41f\ >>\ 5;$	+1
+use	FUN_000e8124	uVar2	newWordCapacity	INFERRED	words needed for the grown bitset ((bits + 0x41f) >> 5)	^\s*puVar5\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar8,uVar2\ \*\ 4\ \+\ 0xc\);$	+1
+use	FUN_000e8124	uVar2	newWordCapacity	INFERRED	words needed for the grown bitset ((bits + 0x41f) >> 5)	^\s*puVar5\[1\]\ =\ uVar2;$	+1
+use	FUN_000e8124	uVar2	newWordCapacity	INFERRED	words needed for the grown bitset ((bits + 0x41f) >> 5)	^\s*if\ \(uVar2\ !=\ 0\)\ \{$	+1
+use	FUN_000e8124	uVar2	newWordCapacity	INFERRED	words needed for the grown bitset ((bits + 0x41f) >> 5)	^\s*if\ \(uVar2\ ==\ 0\)\ \{$	+2
+use	FUN_000e8124	uVar2	newWordCapacity	INFERRED	words needed for the grown bitset ((bits + 0x41f) >> 5)	^\s*uVar2\ =\ uVar2\ \-\ 1;$	+2
+use	FUN_000e8124	uVar2	bitsLeft3	INFERRED	bit index returned / being tested	^\s*uVar2\ =\ uVar9;$	+1
+use	FUN_000e8124	uVar2	bitsLeft3	INFERRED	bit index returned / being tested	^\s*uVar2\ =\ uVar2\ \-\ 1;$@2	+2
+use	FUN_000e8124	uVar3	wordByteOffset	INFERRED	byte offset of the word holding the bit ((bit >> 3) & ~3)	^\s*uVar3\ =\ uVar9\ >>\ 3\ \&\ 0x1ffffffc;$	+1
+use	FUN_000e8124	uVar3	wordByteOffset	INFERRED	byte offset of the word holding the bit ((bit >> 3) & ~3)	^\s*\*\(uint\ \*\)\(\(int\)puVar7\ \+\ uVar3\ \+\ 8\)\ =\ \*\(uint\ \*\)\(\(int\)puVar7\ \+\ uVar3\ \+\ 8\)\ \&\ \~\(1\ <<\ uVar2\);$	+1
+use	FUN_000e8124	uVar9	bitCount	INFERRED	number of bits currently in the set (header +4)	^\s*uVar9\ =\ puVar7\[1\];$	+2
+use	FUN_000e8124	uVar9	bitCount	INFERRED	number of bits currently in the set (header +4)	^\s*uVar2\ =\ uVar9\ \+\ 1;$	+2
+use	FUN_000e8124	uVar9	bitCount	INFERRED	number of bits currently in the set (header +4)	^\s*if\ \(uVar9\ <\ uVar2\)\ \{$	+2
+use	FUN_000e8124	uVar9	bitCount	INFERRED	number of bits currently in the set (header +4)	^\s*uVar3\ =\ uVar9\ >>\ 3\ \&\ 0x1ffffffc;$	+3
+use	FUN_000e8124	uVar9	bitCount	INFERRED	number of bits currently in the set (header +4)	^\s*uVar2\ =\ uVar9\ \+\ 0x41f\ >>\ 5;$	+1
+use	FUN_000e8124	uVar9	bitCount	INFERRED	number of bits currently in the set (header +4)	^\s*puVar5\[2\]\ =\ uVar9\ \+\ 0x400;$	+1
+use	FUN_000e8124	uVar9	bitCount	INFERRED	number of bits currently in the set (header +4)	^\s*uVar2\ =\ uVar9;$	+1
+use	FUN_000e8124	uVar9	bitsLeft	INFERRED	bits still to scan for a clear bit	^\s*uVar9\ =\ puVar7\[1\];$@2	+2
+use	FUN_000e8124	uVar9	bitsLeft	INFERRED	bits still to scan for a clear bit	^\s*uVar9\ =\ uVar9\ \-\ 1;$	+2
+use	FUN_000e8124	uVar9	bitsLeft2	INFERRED	bits still to scan for a clear bit (after the set was grown)	^\s*uVar9\ =\ puVar7\[1\];$@3	+2
+use	FUN_000e8124	uVar9	bitsLeft2	INFERRED	bits still to scan for a clear bit (after the set was grown)	^\s*uVar9\ =\ uVar9\ \-\ 1;$@2	+2
+use	FUN_000e8124	uVar9	wordOffsetOfBit	INFERRED	byte offset of the word of the found bit	^\s*uVar9\ =\ uVar3\ >>\ 3\ \&\ 0x1ffffffc;$	+2
+func	FUN_000e8124	Program__allocateBitSetIndex	INFERRED	finds the first clear bit of the program bitset at +0x3bc (growing the set in arena A when it is full), sets it and returns its index (-1 when none)
+local	FUN_000efde4	param_1	program	INFERRED	Program (+0x30 flags, +0x33c marker instruction, +0x344 extra instruction, +0x3a8 exit block)
+use	FUN_000efde4	iVar5	markerInstRef	INFERRED	program+0x33c: the marker instruction just created (+0x94/+0x98 destination, +300 flag)	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x33c\);$	+3
+use	FUN_000efde4	iVar5	blockCursor	INFERRED	block walked from the exit block up the immediate-dominator chain (+0xf0)	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x3a8\);$	+2
+use	FUN_000efde4	iVar5	blockCursor	INFERRED	block walked from the exit block up the immediate-dominator chain (+0xf0)	^\s*iVar7\ =\ iVar5;$	+3
+use	FUN_000efde4	iVar5	blockCursor	INFERRED	block walked from the exit block up the immediate-dominator chain (+0xf0)	^\s*uVar6\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 0xc\);$	+1
+use	FUN_000efde4	iVar5	blockCursor	INFERRED	block walked from the exit block up the immediate-dominator chain (+0xf0)	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0xc\)\ =\ uVar6\ \|\ 8;$	+2
+use	FUN_000efde4	iVar5	isSpecialInst	INFERRED	virtual slots 0x7c / 0x34 of the instruction in the block's instruction list	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x7c\)\)\(piVar4\);$	+2
+use	FUN_000efde4	iVar7	markerBlock	INFERRED	block at the end of the chain that receives the marker instruction	^\s*iVar7\ =\ iVar5;$	+2
+use	FUN_000efde4	iVar7	markerBlock	INFERRED	block at the end of the chain that receives the marker instruction	^\s*\*\(uint\ \*\)\(iVar7\ \+\ 0xc\)\ =\ \*\(uint\ \*\)\(iVar7\ \+\ 0xc\)\ \|\ 8;$	+1
+use	FUN_000efde4	iVar7	markerBlock	INFERRED	block at the end of the chain that receives the marker instruction	^\s*if\ \(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar7\ \+\ 0xd4\)\ \+\ 4\)\ ==\ 1\)\ \{$	+1
+use	FUN_000efde4	iVar7	markerBlock	INFERRED	block at the end of the chain that receives the marker instruction	^\s*iVar7\ =\ iVar5;$@2	+1
+use	FUN_000efde4	iVar7	markerBlock	INFERRED	block at the end of the chain that receives the marker instruction	^\s*piVar4\ =\ \*\(int\ \*\*\)\(iVar7\ \+\ 0x98\);$	+2
+use	FUN_000efde4	iVar7	markerBlock	INFERRED	block at the end of the chain that receives the marker instruction	^\s*\*\(uint\ \*\)\(iVar7\ \+\ 0xc\)\ =\ \*\(uint\ \*\)\(iVar7\ \+\ 0xc\)\ \|\ 8;$@2	+1
+use	FUN_000efde4	iVar7	markerBlock	INFERRED	block at the end of the chain that receives the marker instruction	^\s*for\ \(uVar6\ =\ 1;\ uVar6\ <=\ \*\(uint\ \*\)\(\*\(int\ \*\)\(iVar7\ \+\ 0xf4\)\ \+\ 4\);\ uVar6\ =\ uVar6\ \+\ 1\)\ \{$	+2
+use	FUN_000efde4	iVar7	markerBlock	INFERRED	block at the end of the chain that receives the marker instruction	^\s*FUN_000e7700\(iVar7,piVar4,\*\(undefined4\ \*\)\(param_1\ \+\ 0x33c\)\);$	+1
+use	FUN_000efde4	iVar7	queuedBlock	INFERRED	block taken from the front of the work queue	^\s*iVar7\ =\ \*piVar4;$	+1
+use	FUN_000efde4	iVar7	queuedBlock	INFERRED	block taken from the front of the work queue	^\s*\*\(uint\ \*\)\(iVar7\ \+\ 0xc\)\ =\ \*\(uint\ \*\)\(iVar7\ \+\ 0xc\)\ \|\ 8;$@3	+3
+use	FUN_000efde4	piVar1	nextInst	INFERRED	next instruction of the marker block's list	^\s*piVar1\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar7\ \+\ 0x98\)\)\[2\];$	+1
+use	FUN_000efde4	piVar1	nextInst	INFERRED	next instruction of the marker block's list	^\s*if\ \(piVar1\ ==\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_000efde4	piVar1	nextInst	INFERRED	next instruction of the marker block's list	^\s*piVar1\ =\ \(int\ \*\)piVar4\[2\];$	+1
+use	FUN_000efde4	piVar1	nextInst	INFERRED	next instruction of the marker block's list	^\s*piVar4\ =\ piVar1;$	+2
+use	FUN_000efde4	piVar4	inst	INFERRED	instruction of the marker block being examined	^\s*piVar4\ =\ \*\(int\ \*\*\)\(iVar7\ \+\ 0x98\);$	+1
+use	FUN_000efde4	piVar4	inst	INFERRED	instruction of the marker block being examined	^\s*if\ \(\(piVar4\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+4
+use	FUN_000efde4	piVar4	inst	INFERRED	instruction of the marker block being examined	^\s*piVar1\ =\ \(int\ \*\)piVar4\[2\];$	+1
+use	FUN_000efde4	piVar4	inst	INFERRED	instruction of the marker block being examined	^\s*piVar4\ =\ piVar1;$	+1
+use	FUN_000efde4	piVar4	queueFront	INFERRED	front element of the work queue	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(puVar8,0\);$	+1
+use	FUN_000efde4	piVar4	queueFront	INFERRED	front element of the work queue	^\s*piVar4\ =\ \(int\ \*\)puVar2\[3\];$	+1
+use	FUN_000efde4	piVar4	queueFront	INFERRED	front element of the work queue	^\s*iVar7\ =\ \*piVar4;$	+1
+use	FUN_000efde4	puVar2	markerObject	INFERRED	IRInst created with opcode 0x95 (pixel program) or 0x96, stored at program+0x33c	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar9,0x168\);$	+4
+use	FUN_000efde4	puVar2	markerObject	INFERRED	IRInst created with opcode 0x95 (pixel program) or 0x96, stored at program+0x33c	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar9,0x168\);$@2	+4
+use	FUN_000efde4	puVar2	markerObject	INFERRED	IRInst created with opcode 0x95 (pixel program) or 0x96, stored at program+0x33c	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0x33c\)\ =\ puVar2;$	+1
+use	FUN_000efde4	puVar3	queueSlot	INFERRED	slot of the child block pushed on the work queue	^\s*puVar3\ =\ \(undefined4\ \*\)\(uVar10\ \*\ 4\ \+\ puVar2\[3\]\);$	+1
+use	FUN_000efde4	puVar3	queueSlot	INFERRED	slot of the child block pushed on the work queue	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,uVar10\);$	+1
+use	FUN_000efde4	puVar3	queueSlot	INFERRED	slot of the child block pushed on the work queue	^\s*\*puVar3\ =\ uVar9;$	+1
+use	FUN_000efde4	puVar3	queueSlot	INFERRED	slot of the child block pushed on the work queue	^\s*puVar3\ =\ \(undefined4\ \*\)\(uVar10\ \*\ 4\ \+\ puVar2\[3\]\);$@2	+1
+use	FUN_000efde4	puVar3	queueSlot	INFERRED	slot of the child block pushed on the work queue	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,uVar10\);$@2	+1
+use	FUN_000efde4	puVar3	queueSlot	INFERRED	slot of the child block pushed on the work queue	^\s*\*puVar3\ =\ uVar9;$@2	+1
+use	FUN_000efde4	puVar8	queue	INFERRED	header of the work queue vector (allocation + 1)	^\s*puVar8\ =\ puVar2\ \+\ 1;$	+1
+use	FUN_000efde4	puVar8	queue	INFERRED	header of the work queue vector (allocation + 1)	^\s*if\ \(uVar10\ <\ \*puVar8\)\ \{$	+1
+use	FUN_000efde4	puVar8	queue	INFERRED	header of the work queue vector (allocation + 1)	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,uVar10\);$	+1
+use	FUN_000efde4	puVar8	queue	INFERRED	header of the work queue vector (allocation + 1)	^\s*if\ \(\*puVar8\ ==\ 0\)\ \{$	+2
+use	FUN_000efde4	puVar8	queue	INFERRED	header of the work queue vector (allocation + 1)	^\s*FUN_00194208\(puVar8,0\);$	+1
+use	FUN_000efde4	puVar8	queue	INFERRED	header of the work queue vector (allocation + 1)	^\s*if\ \(uVar10\ <\ \*puVar8\)\ \{$@2	+1
+use	FUN_000efde4	puVar8	queue	INFERRED	header of the work queue vector (allocation + 1)	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,uVar10\);$@2	+1
+use	FUN_000efde4	uVar6	blockFlags	INFERRED	flags word (+0xc) of the block above in the chain: 1, 2 or 4 stop the walk	^\s*uVar6\ =\ \*\(uint\ \*\)\(iVar5\ \+\ 0xc\);$	+2
+use	FUN_000efde4	uVar6	blockFlags	INFERRED	flags word (+0xc) of the block above in the chain: 1, 2 or 4 stop the walk	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0xc\)\ =\ uVar6\ \|\ 8;$	+1
+use	FUN_000efde4	uVar9	childBlock	INFERRED	dominator-tree child block read from the children vector (+0xf4)	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar7\ \+\ 0xf4\)\ \+\ 8\)\ \+\ iVar5\);$	+1
+use	FUN_000efde4	uVar9	childBlock	INFERRED	dominator-tree child block read from the children vector (+0xf4)	^\s*\*puVar3\ =\ uVar9;$	+1
+use	FUN_000efde4	uVar9	childBlock	INFERRED	dominator-tree child block read from the children vector (+0xf4)	^\s*uVar9\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar7\ \+\ 0xf4\)\ \+\ 8\)\ \+\ iVar5\);$@2	+1
+use	FUN_000efde4	uVar9	childBlock	INFERRED	dominator-tree child block read from the children vector (+0xf4)	^\s*\*puVar3\ =\ uVar9;$@2	+1
+use	FUN_000efde4	uVar10	queueCount	INFERRED	element count of the work queue before the push	^\s*uVar10\ =\ puVar2\[2\];$	+5
+use	FUN_000efde4	uVar10	queueCount	INFERRED	element count of the work queue before the push	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,uVar10\);$	+1
+use	FUN_000efde4	uVar10	queueCount	INFERRED	element count of the work queue before the push	^\s*uVar10\ =\ puVar2\[2\];$@2	+5
+use	FUN_000efde4	uVar10	queueCount	INFERRED	element count of the work queue before the push	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,uVar10\);$@2	+1
+func	FUN_000efde4	Program__insertExitMarkerAndFlagBlocks	INFERRED	creates the marker instruction (0x95 for pixel programs, else 0x96) at program+0x33c, flags (bit 8) the exit block and the chain of immediate dominators above it, inserts the marker, then flags every dominator-tree descendant breadth-first

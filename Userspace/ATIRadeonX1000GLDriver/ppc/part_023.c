@@ -337,7 +337,7 @@ int Block__ctor_e9d68(this, param_2)
   this[0x41] = 0;
   FUN_000e8a08(this);
   Block__createEntryExitInsts(this);
-  uVar1 = FUN_000e8124(this[0x2b],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5);
+  uVar1 = Program__allocateBitSetIndex(this[0x2b],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5);
   this[0x2d] = uVar1;
   return;
 }
@@ -405,7 +405,7 @@ int Block__ctor_e9f00(this, param_2)
   this[0x41] = 0;
   FUN_000e8a08(this);
   Block__createEntryExitInsts(this);
-  uVar1 = FUN_000e8124(this[0x2b],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5);
+  uVar1 = Program__allocateBitSetIndex(this[0x2b],extraout_r4,in_r5,in_r6,in_r7,uVar3,uVar5);
   this[0x2d] = uVar1;
   return;
 }
@@ -460,7 +460,7 @@ int Block__ctor_ea020(this, compiler)
     puVar1 = puVar1 + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  uVar2 = FUN_000e8124(*(undefined4 *)(this[0x2a] + 0x6c4),extraout_r4,in_r5,in_r6,in_r7,in_r8,
+  uVar2 = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),extraout_r4,in_r5,in_r6,in_r7,in_r8,
                        0x20);
   this[0x2d] = uVar2;
   return;
@@ -516,7 +516,7 @@ int Block__ctor_ea148(this, compiler)
     puVar1 = puVar1 + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  uVar2 = FUN_000e8124(*(undefined4 *)(this[0x2a] + 0x6c4),extraout_r4,in_r5,in_r6,in_r7,in_r8,
+  uVar2 = Program__allocateBitSetIndex(*(undefined4 *)(this[0x2a] + 0x6c4),extraout_r4,in_r5,in_r6,in_r7,in_r8,
                        0x20);
   this[0x2d] = uVar2;
   return;
