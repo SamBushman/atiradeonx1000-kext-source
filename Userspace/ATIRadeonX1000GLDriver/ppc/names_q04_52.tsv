@@ -1,0 +1,2 @@
+local	FUN_000a4490	param_1	glContext	INFERRED	callers pass their variable `glContext` here (1 call site(s), e.g. in FUN_000a4550)
+local	FUN_000ac540	param_1	glContext	INFERRED	callers pass their variable `glContext` here (2 call site(s), e.g. in FUN_000ac720)

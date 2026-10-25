@@ -1,0 +1,143 @@
+local	fragmentProgramToIL	piVar21	program	INFERRED	*translator: the ARB program object (target at [0], tables at [8],[10],[0xc],[0x12],[0x14], see notes_shader_formats.md section 1)
+local	fragmentProgramToIL	dVar8	intToDoubleBias	INFERRED	DOUBLE_001aa1e0: the 2^52 + 2^31 bias of the int-to-double conversion idiom used to convert integer constants to floats
+local	fragmentProgramToIL	local_78	intToDoubleHiA	INFERRED	high word 0x43300000 of the int-to-double idiom for constant component 0
+local	fragmentProgramToIL	uStack_74	intToDoubleLoA	INFERRED	low word (integer ^ 0x80000000) of the int-to-double idiom for constant component 0
+local	fragmentProgramToIL	local_70	intToDoubleHiB	INFERRED	high word 0x43300000 of the int-to-double idiom for constant component 1
+local	fragmentProgramToIL	uStack_6c	intToDoubleLoB	INFERRED	low word of the int-to-double idiom for constant component 1
+local	fragmentProgramToIL	local_68	intToDoubleHiC	INFERRED	high word 0x43300000 of the int-to-double idiom for constant component 2
+local	fragmentProgramToIL	uStack_64	intToDoubleLoC	INFERRED	low word of the int-to-double idiom for constant component 2
+local	fragmentProgramToIL	local_60	intToDoubleHiD	INFERRED	high word 0x43300000 of the int-to-double idiom for constant component 3
+local	fragmentProgramToIL	uStack_5c	intToDoubleLoD	INFERRED	low word of the int-to-double idiom for constant component 3
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _malloc\(uVar9\ <<\ 2\);$	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _realloc\(\*piVar21,uVar9\ <<\ 2\);$	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar12\ !=\ 0\)\ \{$	+2
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _malloc\(uVar9\ <<\ 2\);$@2	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _realloc\(\*piVar21,uVar9\ <<\ 2\);$@2	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar12\ ==\ 0\)\ goto\ LAB_0004a55c;$	+2
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _malloc\(uVar23\ <<\ 2\);$	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _realloc\(\*piVar21,uVar23\ <<\ 2\);$	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar12\ ==\ 0\)\ goto\ LAB_0004a55c;$@2	+2
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _malloc\(uVar9\ <<\ 2\);$@3	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _realloc\(\*piVar21,uVar9\ <<\ 2\);$@3	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar12\ ==\ 0\)\ \{$@2	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*\*piVar21\ =\ iVar12;$@4	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _malloc\(uVar18\ <<\ 2\);$	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _realloc\(\*piVar21,uVar18\ <<\ 2\);$	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar12\ ==\ 0\)\ \{$@4	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*\*piVar21\ =\ iVar12;$@5	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _malloc\(uVar18\ <<\ 2\);$@2	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _realloc\(\*piVar21,uVar18\ <<\ 2\);$@2	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar12\ ==\ 0\)\ \{$@7	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*\*piVar21\ =\ iVar12;$@6	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _malloc\(uVar18\ <<\ 2\);$@3	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _realloc\(\*piVar21,uVar18\ <<\ 2\);$@3	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar12\ ==\ 0\)\ \{$@10	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*\*piVar21\ =\ iVar12;$@7	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _malloc\(uVar18\ <<\ 2\);$@4	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _realloc\(\*piVar21,uVar18\ <<\ 2\);$@4	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar12\ ==\ 0\)\ goto\ LAB_00049f94;$	+2
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _malloc\(uVar18\ <<\ 2\);$@5	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _realloc\(\*piVar21,uVar18\ <<\ 2\);$@5	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar12\ ==\ 0\)\ goto\ LAB_0004a188;$	+2
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _malloc\(uVar18\ <<\ 2\);$@6	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _realloc\(\*piVar21,uVar18\ <<\ 2\);$@6	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar12\ ==\ 0\)\ \{$@14	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*\*piVar21\ =\ iVar12;$@10	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _malloc\(uVar18\ <<\ 2\);$@7	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _realloc\(\*piVar21,uVar18\ <<\ 2\);$@7	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar12\ ==\ 0\)\ \{$@17	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*\*piVar21\ =\ iVar12;$@11	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _malloc\(uVar11\ <<\ 2\);$	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _realloc\(\*piVar21,uVar11\ <<\ 2\);$	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar12\ ==\ 0\)\ goto\ LAB_0004a55c;$@3	+2
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _malloc\(uVar18\ <<\ 2\);$@8	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _realloc\(\*piVar21,uVar18\ <<\ 2\);$@8	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar12\ ==\ 0\)\ goto\ LAB_0004a55c;$@4	+2
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _malloc\(uVar9\ <<\ 2\);$@4	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar12\ =\ _realloc\(\*piVar21,uVar9\ <<\ 2\);$@4	+1
+use	fragmentProgramToIL	iVar12	allocation	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar12\ !=\ 0\)\ \{$@4	+2
+use	fragmentProgramToIL	iVar27	allocation2	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar27\ =\ _malloc\(uVar9\ <<\ 2\);$	+1
+use	fragmentProgramToIL	iVar27	allocation2	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar27\ =\ _realloc\(\*piVar21,uVar9\ <<\ 2\);$	+1
+use	fragmentProgramToIL	iVar27	allocation2	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar27\ ==\ 0\)\ goto\ LAB_0004a55c;$	+2
+use	fragmentProgramToIL	iVar27	allocation2	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar27\ =\ _malloc\(uVar9\ <<\ 2\);$@2	+1
+use	fragmentProgramToIL	iVar27	allocation2	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*iVar27\ =\ _realloc\(\*piVar21,uVar9\ <<\ 2\);$@2	+1
+use	fragmentProgramToIL	iVar27	allocation2	INFERRED	result of _malloc/_realloc in the inline token-vector growth	^\s*if\ \(iVar27\ !=\ 0\)\ \{$	+2
+use	fragmentProgramToIL	iVar13	optionCount	INFERRED	program[0x12] (+0x48): number of OPTION entries	^\s*iVar13\ =\ \*\(int\ \*\)\(iVar27\ \+\ 0x48\);$	+1
+use	fragmentProgramToIL	iVar13	optionCount	INFERRED	program[0x12] (+0x48): number of OPTION entries	^\s*if\ \(0\ <\ iVar13\)\ \{$	+1
+use	fragmentProgramToIL	iVar13	optionCount	INFERRED	program[0x12] (+0x48): number of OPTION entries	^\s*iVar13\ =\ iVar13\ \+\ \-1;$	+1
+use	fragmentProgramToIL	iVar13	optionCount	INFERRED	program[0x12] (+0x48): number of OPTION entries	^\s*\}\ while\ \(iVar13\ !=\ 0\);$	+1
+use	fragmentProgramToIL	iVar12	optionEntry	INFERRED	cursor over the 8-byte OPTION entries (table at program[0x13]); byte 3 is the option id	^\s*iVar12\ =\ iVar27\ \+\ \*\(int\ \*\)\(iVar27\ \+\ 0x4c\)\ \*\ 8;$	+1
+use	fragmentProgramToIL	iVar12	optionEntry	INFERRED	cursor over the 8-byte OPTION entries (table at program[0x13]); byte 3 is the option id	^\s*switch\(\*\(undefined1\ \*\)\(iVar12\ \+\ 3\)\)\ \{$	+1
+use	fragmentProgramToIL	iVar12	optionEntry	INFERRED	cursor over the 8-byte OPTION entries (table at program[0x13]); byte 3 is the option id	^\s*iVar12\ =\ iVar12\ \+\ 8;$	+1
+use	fragmentProgramToIL	iVar12	outputRemaining	INFERRED	program[0xc] (+0x30): OUTPUT entry count, counted down while scanning for a colour output	^\s*iVar12\ =\ \*\(int\ \*\)\(iVar27\ \+\ 0x30\);$	+1
+use	fragmentProgramToIL	iVar12	outputRemaining	INFERRED	program[0xc] (+0x30): OUTPUT entry count, counted down while scanning for a colour output	^\s*if\ \(0\ <\ iVar12\)\ \{$	+1
+use	fragmentProgramToIL	iVar12	outputRemaining	INFERRED	program[0xc] (+0x30): OUTPUT entry count, counted down while scanning for a colour output	^\s*iVar12\ =\ iVar12\ \+\ \-1;$	+2
+use	fragmentProgramToIL	puVar10	outputScanEntry	INFERRED	cursor over the OUTPUT table (program[0xd])	^\s*puVar10\ =\ \(uint\ \*\)\(iVar27\ \+\ \*\(int\ \*\)\(iVar27\ \+\ 0x34\)\ \*\ 8\);$	+1
+use	fragmentProgramToIL	puVar10	outputScanEntry	INFERRED	cursor over the OUTPUT table (program[0xd])	^\s*if\ \(\(\(\*puVar10\ >>\ 0x10\ \&\ 0xf\)\ ==\ 4\)\ \&\&\ \(\(\*puVar10\ \&\ 0xe\)\ !=\ 0\)\)\ \{$	+1
+use	fragmentProgramToIL	puVar10	outputScanEntry	INFERRED	cursor over the OUTPUT table (program[0xd])	^\s*puVar10\ =\ puVar10\ \+\ 2;$	+1
+use	fragmentProgramToIL	iVar12	attribRemaining	INFERRED	program[8] (+0x20): ATTRIB entry count, counted down while emitting the input declaration tokens	^\s*iVar12\ =\ \*\(int\ \*\)\(iVar27\ \+\ 0x20\);$	+1
+use	fragmentProgramToIL	iVar12	attribRemaining	INFERRED	program[8] (+0x20): ATTRIB entry count, counted down while emitting the input declaration tokens	^\s*uVar14\ =\ iVar12\ \*\ 2\ \+\ iVar13;$	+1
+use	fragmentProgramToIL	iVar12	attribRemaining	INFERRED	program[8] (+0x20): ATTRIB entry count, counted down while emitting the input declaration tokens	^\s*param_1\[0xb\]\ =\ iVar12\ \*\ 2\ \+\ iVar13;$	+1
+use	fragmentProgramToIL	iVar12	attribRemaining	INFERRED	program[8] (+0x20): ATTRIB entry count, counted down while emitting the input declaration tokens	^\s*if\ \(iVar12\ <\ 1\)\ \{$	+1
+use	fragmentProgramToIL	iVar12	attribRemaining	INFERRED	program[8] (+0x20): ATTRIB entry count, counted down while emitting the input declaration tokens	^\s*iVar12\ =\ iVar12\ \+\ \-1;$@2	+1
+use	fragmentProgramToIL	iVar12	attribRemaining	INFERRED	program[8] (+0x20): ATTRIB entry count, counted down while emitting the input declaration tokens	^\s*\}\ while\ \(iVar12\ !=\ 0\);$@2	+1
+use	fragmentProgramToIL	puVar10	attribEntry	INFERRED	cursor over the ATTRIB table (program[9]); low 4 bits of the first halfword select the binding	^\s*puVar10\ =\ \(uint\ \*\)\(iVar27\ \+\ \*\(int\ \*\)\(iVar27\ \+\ 0x24\)\ \*\ 8\);$	+1
+use	fragmentProgramToIL	puVar10	attribEntry	INFERRED	cursor over the ATTRIB table (program[9]); low 4 bits of the first halfword select the binding	^\s*uVar4\ =\ \*\(ushort\ \*\)puVar10;$	+1
+use	fragmentProgramToIL	puVar10	attribEntry	INFERRED	cursor over the ATTRIB table (program[9]); low 4 bits of the first halfword select the binding	^\s*puVar22\ =\ \(undefined\ \*\)\(\*puVar10\ \&\ 0x1f\ \|\ 0x110000\);$	+1
+use	fragmentProgramToIL	puVar10	attribEntry	INFERRED	cursor over the ATTRIB table (program[9]); low 4 bits of the first halfword select the binding	^\s*puVar10\ =\ puVar10\ \+\ 2;$@2	+1
+use	fragmentProgramToIL	uVar4	attribBinding	INFERRED	first halfword of the ATTRIB entry; & 0xf selects position/colour/fogcoord/texcoord	^\s*uVar4\ =\ \*\(ushort\ \*\)puVar10;$	+2
+use	fragmentProgramToIL	uVar4	attribBinding	INFERRED	first halfword of the ATTRIB entry; & 0xf selects position/colour/fogcoord/texcoord	^\s*switch\(uVar4\ \&\ 0xf\)\ \{$	+1
+use	fragmentProgramToIL	uVar14	requiredTokenWords	INFERRED	attribCount * 2 + token count: capacity the declaration tokens need	^\s*uVar14\ =\ iVar12\ \*\ 2\ \+\ iVar13;$	+1
+use	fragmentProgramToIL	uVar14	requiredTokenWords	INFERRED	attribCount * 2 + token count: capacity the declaration tokens need	^\s*if\ \(uVar9\ <\ uVar14\)\ \{$	+1
+use	fragmentProgramToIL	uVar14	requiredTokenWords	INFERRED	attribCount * 2 + token count: capacity the declaration tokens need	^\s*for\ \(;\ uVar9\ <\ uVar14;\ uVar9\ =\ uVar9\ <<\ 1\)\ \{$	+1
+use	fragmentProgramToIL	uVar9	paramCount	INFERRED	program[10] (+0x28): number of PARAM entries	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar27\ \+\ 0x28\);$	+1
+use	fragmentProgramToIL	uVar9	paramCount	INFERRED	program[10] (+0x28): number of PARAM entries	^\s*if\ \(0\ <\ \(int\)uVar9\)\ \{$	+1
+use	fragmentProgramToIL	uVar9	paramCount	INFERRED	program[10] (+0x28): number of PARAM entries	^\s*\}\ while\ \(uVar9\ !=\ uVar14\);$	+1
+use	fragmentProgramToIL	puVar10	paramEntry	INFERRED	cursor over the PARAM table (program[0xb])	^\s*puVar10\ =\ \(uint\ \*\)\(iVar27\ \+\ \*\(int\ \*\)\(iVar27\ \+\ 0x2c\)\ \*\ 8\);$	+1
+use	fragmentProgramToIL	puVar10	paramEntry	INFERRED	cursor over the PARAM table (program[0xb])	^\s*uVar23\ =\ \*puVar10\ \&\ 0x1c000000;$	+2
+use	fragmentProgramToIL	puVar10	paramEntry	INFERRED	cursor over the PARAM table (program[0xb])	^\s*uVar23\ =\ \(uint\)\(ushort\)\*puVar10;$	+2
+use	fragmentProgramToIL	puVar10	paramEntry	INFERRED	cursor over the PARAM table (program[0xb])	^\s*else\ if\ \(\(\*puVar10\ \&\ 0x1c000000\)\ ==\ 0x10000000\)\ \{$	+1
+use	fragmentProgramToIL	puVar10	paramEntry	INFERRED	cursor over the PARAM table (program[0xb])	^\s*puVar10\ =\ puVar10\ \+\ 2;$@3	+1
+use	fragmentProgramToIL	uVar14	paramIndex	INFERRED	index of the PARAM entry being converted to a constant token	^\s*uVar14\ =\ 0;$	+1
+use	fragmentProgramToIL	uVar14	paramIndex	INFERRED	index of the PARAM entry being converted to a constant token	^\s*puVar19\[1\]\ =\ uVar14\ \&\ 0xffff\ \|\ 0x10000;$	+1
+use	fragmentProgramToIL	uVar14	paramIndex	INFERRED	index of the PARAM entry being converted to a constant token	^\s*uVar14\ =\ uVar14\ \+\ 1;$	+1
+use	fragmentProgramToIL	uVar14	paramIndex	INFERRED	index of the PARAM entry being converted to a constant token	^\s*\}\ while\ \(uVar9\ !=\ uVar14\);$	+1
+use	fragmentProgramToIL	uVar23	paramTypeBits	INFERRED	PARAM entry word & 0x1c000000: constant kind (float, int, bool)	^\s*uVar23\ =\ \*puVar10\ \&\ 0x1c000000;$	+1
+use	fragmentProgramToIL	uVar23	paramTypeBits	INFERRED	PARAM entry word & 0x1c000000: constant kind (float, int, bool)	^\s*if\ \(\(\(\(uVar23\ !=\ 0xc000000\)\ \&\&\ \(uVar23\ !=\ 0x4000000\)\)\ \&\&\ \(uVar23\ !=\ 0x10000000\)\)\ \&\&$	+2
+use	fragmentProgramToIL	uVar23	constantIndex	INFERRED	ushort index of the entry in the constant pool (16 bytes per constant)	^\s*uVar23\ =\ \(uint\)\(ushort\)\*puVar10;$	+1
+use	fragmentProgramToIL	uVar23	constantIndex	INFERRED	ushort index of the entry in the constant pool (16 bytes per constant)	^\s*iVar13\ =\ iVar27\ \+\ uVar23\ \*\ 0x10;$	+2
+use	fragmentProgramToIL	uVar23	constantIndex	INFERRED	ushort index of the entry in the constant pool (16 bytes per constant)	^\s*iVar13\ =\ iVar27\ \+\ uVar23\ \*\ 0x10;$@2	+2
+use	fragmentProgramToIL	uVar23	constantIndex	INFERRED	ushort index of the entry in the constant pool (16 bytes per constant)	^\s*iVar13\ =\ iVar27\ \+\ uVar23\ \*\ 0x10;$@3	+2
+use	fragmentProgramToIL	uVar18	paramKind	INFERRED	PARAM entry word >> 0x10 & 0x1f: kind (0x11 = constant vector)	^\s*uVar18\ =\ \*puVar10\ >>\ 0x10\ \&\ 0x1f;$	+1
+use	fragmentProgramToIL	uVar18	paramKind	INFERRED	PARAM entry word >> 0x10 & 0x1f: kind (0x11 = constant vector)	^\s*if\ \(uVar18\ ==\ 0x11\)\ \{$	+1
+use	fragmentProgramToIL	uVar18	paramKind	INFERRED	PARAM entry word >> 0x10 & 0x1f: kind (0x11 = constant vector)	^\s*uVar18\ =\ iVar27\ \*\ 4\ \+\ \*piVar21;$	+1
+use	fragmentProgramToIL	uVar18	paramKind	INFERRED	PARAM entry word >> 0x10 & 0x1f: kind (0x11 = constant vector)	^\s*\*\(undefined4\ \*\)\(iVar27\ \+\ uVar18\)\ =\ 0x4b;$	+1
+use	fragmentProgramToIL	uVar18	paramKind	INFERRED	PARAM entry word >> 0x10 & 0x1f: kind (0x11 = constant vector)	^\s*iVar12\ =\ \(\(int\ \(\*\)\(\)\)FUN_00046e90\)\(param_1,in_r4,in_r5,in_r6,puVar15,iVar12,uVar18,puVar19\);$	+1
+use	fragmentProgramToIL	uVar9	outputCount	INFERRED	program[0xc] (+0x30): number of OUTPUT entries	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar12\ \+\ 0x30\);$	+1
+use	fragmentProgramToIL	uVar9	outputCount	INFERRED	program[0xc] (+0x30): number of OUTPUT entries	^\s*if\ \(0\ <\ \(int\)uVar9\)\ \{$@2	+1
+use	fragmentProgramToIL	uVar9	outputCount	INFERRED	program[0xc] (+0x30): number of OUTPUT entries	^\s*\}\ while\ \(uVar9\ !=\ uVar14\);$@2	+1
+use	fragmentProgramToIL	puVar10	outputEntry	INFERRED	cursor over the OUTPUT table (program[0xd])	^\s*puVar10\ =\ \(uint\ \*\)\(iVar12\ \+\ \*\(int\ \*\)\(iVar12\ \+\ 0x34\)\ \*\ 8\);$	+1
+use	fragmentProgramToIL	puVar10	outputEntry	INFERRED	cursor over the OUTPUT table (program[0xd])	^\s*if\ \(\(\*\(ushort\ \*\)puVar10\ \&\ 0xf\)\ ==\ 4\)\ \{$	+1
+use	fragmentProgramToIL	puVar10	outputEntry	INFERRED	cursor over the OUTPUT table (program[0xd])	^\s*uVar25\ =\ \*puVar10\ >>\ 1\ \&\ 7\ \|\ 0x570000;$	+1
+use	fragmentProgramToIL	puVar10	outputEntry	INFERRED	cursor over the OUTPUT table (program[0xd])	^\s*if\ \(\(\*\(ushort\ \*\)puVar10\ \&\ 0xf\)\ !=\ 7\)\ goto\ switchD_00049180_caseD_0;$	+1
+use	fragmentProgramToIL	puVar10	outputEntry	INFERRED	cursor over the OUTPUT table (program[0xd])	^\s*puVar10\ =\ puVar10\ \+\ 2;$@4	+1
+use	fragmentProgramToIL	uVar14	outputIndex	INFERRED	index of the OUTPUT entry being converted	^\s*uVar14\ =\ 0;$@2	+1
+use	fragmentProgramToIL	uVar14	outputIndex	INFERRED	index of the OUTPUT entry being converted	^\s*if\ \(\(1\ <<\ \(uVar14\ \&\ 0x3f\)\ \&\ param_1\[4\]\)\ !=\ 0\)\ \{$	+1
+use	fragmentProgramToIL	uVar14	outputIndex	INFERRED	index of the OUTPUT entry being converted	^\s*uVar23\ =\ uVar14\ \+\ \*\(int\ \*\)\(\*param_1\ \+\ 0x10\)\ \+\ 1\ \&\ 0xffff\ \|\ 0x440000;$	+1
+use	fragmentProgramToIL	uVar14	outputIndex	INFERRED	index of the OUTPUT entry being converted	^\s*sVar5\ =\ \(short\)uVar14;$	+1
+use	fragmentProgramToIL	uVar14	outputIndex	INFERRED	index of the OUTPUT entry being converted	^\s*uVar14\ =\ uVar14\ \+\ 1;$@2	+1
+use	fragmentProgramToIL	uVar14	outputIndex	INFERRED	index of the OUTPUT entry being converted	^\s*\}\ while\ \(uVar9\ !=\ uVar14\);$@2	+1
+use	fragmentProgramToIL	uVar18	fogMode	INFERRED	translator[5] >> 0x1b & 3: fog mode chosen by the OPTION entries (1 exp, 2 exp2, 3 linear)	^\s*uVar18\ =\ \(uint\)param_1\[5\]\ >>\ 0x1b\ \&\ 3;$	+1
+use	fragmentProgramToIL	uVar18	fogMode	INFERRED	translator[5] >> 0x1b & 3: fog mode chosen by the OPTION entries (1 exp, 2 exp2, 3 linear)	^\s*if\ \(uVar18\ ==\ 1\)\ \{$	+1
+use	fragmentProgramToIL	uVar18	fogMode	INFERRED	translator[5] >> 0x1b & 3: fog mode chosen by the OPTION entries (1 exp, 2 exp2, 3 linear)	^\s*if\ \(\(uVar18\ ==\ 0\)\ \|\|\ \(3\ <\ uVar18\)\)\ goto\ LAB_0004a474;$	+1
+use	fragmentProgramToIL	uVar18	translatorFlags	INFERRED	translator[5]: flag word (bit 0x80000000/0x40000000 set while emitting fog and depth output code)	^\s*uVar18\ =\ param_1\[5\];$	+2
+use	fragmentProgramToIL	uVar18	translatorFlags	INFERRED	translator[5]: flag word (bit 0x80000000/0x40000000 set while emitting fog and depth output code)	^\s*if\ \(\(uVar18\ \&\ 0x18000000\)\ !=\ 0\)\ \{$	+1
+use	fragmentProgramToIL	uVar18	translatorFlags	INFERRED	translator[5]: flag word (bit 0x80000000/0x40000000 set while emitting fog and depth output code)	^\s*uVar18\ =\ param_1\[5\];$@2	+1
+use	fragmentProgramToIL	uVar18	translatorFlags	INFERRED	translator[5]: flag word (bit 0x80000000/0x40000000 set while emitting fog and depth output code)	^\s*param_1\[5\]\ =\ uVar18\ \|\ 0x40000000;$	+1
+use	fragmentProgramToIL	uVar18	translatorFlags	INFERRED	translator[5]: flag word (bit 0x80000000/0x40000000 set while emitting fog and depth output code)	^\s*if\ \(\(uVar18\ \&\ 0x20000000\)\ ==\ 0\)\ \{$	+1
+use	fragmentProgramToIL	uVar18	channelIndex	INFERRED	0 .. 3: index of the colour output channel being written	^\s*uVar18\ =\ 0;$	+1
+use	fragmentProgramToIL	uVar18	channelIndex	INFERRED	0 .. 3: index of the colour output channel being written	^\s*if\ \(\(\(int\)\(\*\(uint\ \*\)\(param_1\[0xd\]\ \+\ 0x20\)\ >>\ 0x12\ \&\ 0xf\)\ >>\ \(uVar18\ \&\ 0x3f\)\ \&\ 1U\)\ !=\ 0$	+2
+use	fragmentProgramToIL	uVar18	channelIndex	INFERRED	0 .. 3: index of the colour output channel being written	^\s*uVar25\ =\ uVar18\ \&\ 0xffff\ \|\ uVar25\ \&\ 0xffff0000;$	+1
+use	fragmentProgramToIL	uVar18	channelIndex	INFERRED	0 .. 3: index of the colour output channel being written	^\s*bVar3\ =\ uVar18\ !=\ 3;$	+2
+use	fragmentProgramToIL	bVar3	moreChannels	INFERRED	channelIndex != 3	^\s*bVar3\ =\ uVar18\ !=\ 3;$	+1
+use	fragmentProgramToIL	bVar3	moreChannels	INFERRED	channelIndex != 3	^\s*\}\ while\ \(bVar3\);$	+1

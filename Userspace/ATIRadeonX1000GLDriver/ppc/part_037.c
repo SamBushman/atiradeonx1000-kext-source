@@ -3448,168 +3448,178 @@ int Interpolator__vslot10(this, param_2, param_3)
 }
 
 /* FUN_00123c08 @ 0x123c08 (984 bytes) */
-int FUN_00123c08(compiler, param_2, param_3)
+int FUN_00123c08(compiler, block, param_3)
   int compiler;
-  int *param_2;
+  int *block;
   uint param_3;
 {
+  int *keyVectorElemRef;
+  int newVRegId;
+  undefined4 undefVReg;
+  undefined4 *undefKeyAlloc;
+  undefined4 *constKeyAlloc;
+  undefined4 movResultVReg;
+  undefined4 constMoveDestReg;
+  undefined4 constDefInst;
+  int newVRegIdB;
+  int constRegister;
   undefined4 *allocation;
   undefined4 arena;
   int valueNumberEnabled;
   int valueNumberEnabled2;
   int operandRecord;
   undefined4 arenaAt378;
-  bool bVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 uVar4;
-  int *piVar5;
-  undefined4 *puVar6;
-  int iVar7;
-  int iVar8;
-  int iVar9;
-  int iVar10;
-  undefined4 *a1;
-  uint uVar11;
-  uint *puVar12;
-  undefined4 uVar13;
+  bool hasUndefinedLane;
+  int laneDefaultKind;
+  int laneKindCursor;
+  undefined4 constMoveInst;
+  int *defVector;
+  undefined4 *defVectorElemRef;
+  int compilerPtr;
+  int laneByteOffset;
+  int laneNumber;
+  int program;
+  undefined4 *undefInst;
+  uint keyVectorCount;
+  uint *keyVector;
+  undefined4 constMoveRegA;
   undefined4 arenaAt374;
-  uint uVar15;
-  int iVar16;
-  undefined4 *local_58;
-  undefined4 local_54;
-  uint local_50;
-  float fStack_4c;
-  float fStack_48;
-  float fStack_44;
+  uint lastKeyIndex;
+  int laneCountdown;
+  undefined4 *valueKeyOut;
+  undefined4 undefLaneMask;
+  uint laneConstant0;
+  float laneConstant1;
+  float laneConstant2;
+  float laneConstant3;
   
   if (*(int *)(compiler + COMP_arenaB) == 0) {
-    iVar7 = *(int *)(compiler + 8);
-    iVar10 = *(int *)(iVar7 + 0x6c4);
-    bVar1 = false;
-    local_54 = 0;
-    iVar9 = 0;
-    iVar8 = 0;
-    iVar16 = 4;
-    iVar3 = iVar10;
+    compilerPtr = *(int *)(compiler + 8);
+    program = *(int *)(compilerPtr + 0x6c4);
+    hasUndefinedLane = false;
+    undefLaneMask = 0;
+    laneNumber = 0;
+    laneByteOffset = 0;
+    laneCountdown = 4;
+    laneKindCursor = program;
     do {
-      iVar2 = *(int *)(iVar3 + 0x10);
-      if (iVar2 == 1) {
-        *(undefined4 *)((int)&local_50 + iVar8) = 0;
+      laneDefaultKind = *(int *)(laneKindCursor + 0x10);
+      if (laneDefaultKind == 1) {
+        *(undefined4 *)((int)&laneConstant0 + laneByteOffset) = 0;
       }
-      else if (iVar2 == 2) {
-        *(undefined4 *)((int)&local_50 + iVar8) = 0x3f800000;
+      else if (laneDefaultKind == 2) {
+        *(undefined4 *)((int)&laneConstant0 + laneByteOffset) = 0x3f800000;
       }
-      else if (iVar2 == 0) {
-        bVar1 = true;
-        *(undefined4 *)((int)&local_50 + iVar8) = 0;
-        *(undefined1 *)((int)&local_54 + iVar9) = 1;
+      else if (laneDefaultKind == 0) {
+        hasUndefinedLane = true;
+        *(undefined4 *)((int)&laneConstant0 + laneByteOffset) = 0;
+        *(undefined1 *)((int)&undefLaneMask + laneNumber) = 1;
       }
-      iVar9 = iVar9 + 1;
-      iVar8 = iVar8 + 4;
-      iVar3 = iVar3 + 4;
-      iVar16 = iVar16 + -1;
-    } while (iVar16 != 0);
-    uVar4 = IRMov__new_1084b8(0x31,iVar7);
-    *(undefined4 *)(compiler + COMP_arenaB) = uVar4;
-    ((void (*)())IRInst__makeLiteralVec4Float)(uVar4,*(undefined4 *)(*(int *)(compiler + 8) + 0x6c4),1,(double)GH_U2F((unsigned int)(local_50)),
-                 (double)fStack_4c,(double)fStack_48,(double)fStack_44);
-    iVar3 = *(int *)(*(int *)(compiler + COMP_arenaB) + 0xa4);
-    piVar5 = *(int **)(iVar3 + 0x18);
-    if (*piVar5 == 0) {
-      puVar6 = (undefined4 *)Vector__elementRefGrow(piVar5,0);
+      laneNumber = laneNumber + 1;
+      laneByteOffset = laneByteOffset + 4;
+      laneKindCursor = laneKindCursor + 4;
+      laneCountdown = laneCountdown + -1;
+    } while (laneCountdown != 0);
+    constMoveInst = IRMov__new_1084b8(0x31,compilerPtr);
+    *(undefined4 *)(compiler + COMP_arenaB) = constMoveInst;
+    ((void (*)())IRInst__makeLiteralVec4Float)(constMoveInst,*(undefined4 *)(*(int *)(compiler + 8) + 0x6c4),1,(double)GH_U2F((unsigned int)(laneConstant0)),
+                 (double)laneConstant1,(double)laneConstant2,(double)laneConstant3);
+    constRegister = *(int *)(*(int *)(compiler + COMP_arenaB) + 0xa4);
+    defVector = *(int **)(constRegister + 0x18);
+    if (*defVector == 0) {
+      defVectorElemRef = (undefined4 *)Vector__elementRefGrow(defVector,0);
     }
     else {
-      if (piVar5[1] == 0) {
-        *(undefined4 *)piVar5[2] = 0;
-        piVar5[1] = 1;
+      if (defVector[1] == 0) {
+        *(undefined4 *)defVector[2] = 0;
+        defVector[1] = 1;
       }
-      puVar6 = (undefined4 *)piVar5[2];
+      defVectorElemRef = (undefined4 *)defVector[2];
     }
-    uVar4 = *puVar6;
-    if (*(int *)(*(int *)(iVar3 + 0x2c) + 4) == 0) {
+    constDefInst = *defVectorElemRef;
+    if (*(int *)(*(int *)(constRegister + 0x2c) + 4) == 0) {
       arena = *(undefined4 *)(*(int *)(compiler + 8) + 0x378);
-      puVar6 = (undefined4 *)Arena__alloc(arena,0x240);
-      *puVar6 = arena;
-      puVar6 = puVar6 + 1;
-      ValueKey__init(puVar6,uVar4,*(undefined4 *)(compiler + 8));
+      constKeyAlloc = (undefined4 *)Arena__alloc(arena,0x240);
+      *constKeyAlloc = arena;
+      constKeyAlloc = constKeyAlloc + 1;
+      ValueKey__init(constKeyAlloc,constDefInst,*(undefined4 *)(compiler + 8));
       valueNumberEnabled = Compiler__isOptionEnabled(*(undefined4 *)(compiler + 8),7);
       if (valueNumberEnabled != 0) {
-        FUN_00174e0c(puVar6);
-        ValueKey__propagateLaneValues(puVar6);
+        FUN_00174e0c(constKeyAlloc);
+        ValueKey__propagateLaneValues(constKeyAlloc);
       }
-      ((int (*)())VReg__pushDefinition)(iVar3,param_2[0x2c],puVar6);
+      ((int (*)())VReg__pushDefinition)(constRegister,block[0x2c],constKeyAlloc);
     }
-    uVar13 = uVar4;
-    ((int (*)())VReg__addUse)(iVar3,1,uVar4);
-    if (bVar1) {
+    constMoveRegA = constDefInst;
+    ((int (*)())VReg__addUse)(constRegister,1,constDefInst);
+    if (hasUndefinedLane) {
       arenaAt374 = *(undefined4 *)(*(int *)(compiler + 8) + 0x374);
       allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
       *allocation = arenaAt374;
-      a1 = allocation + 1;
-      IRUndefined__ctor_108fb0(a1,*(undefined4 *)(compiler + 8));
-      (**(code **)(**(int **)(compiler + 0x3a0) + 0xc))(*(int **)(compiler + 0x3a0),a1,uVar13);
-      iVar7 = *(int *)(*(int *)(compiler + 8) + 0x3ac) + -1;
-      *(int *)(*(int *)(compiler + 8) + 0x3ac) = iVar7;
-      uVar13 = FUN_00127608(*(undefined4 *)(iVar10 + 0x3ac),0,iVar7,0);
-      allocation[0x24] = uVar13;
-      operandRecord = IRInst__getOperandRecord(a1,0);
-      *(int *)(operandRecord + 8) = iVar7;
+      undefInst = allocation + 1;
+      IRUndefined__ctor_108fb0(undefInst,*(undefined4 *)(compiler + 8));
+      (**(code **)(**(int **)(compiler + 0x3a0) + 0xc))(*(int **)(compiler + 0x3a0),undefInst,constMoveRegA);
+      newVRegId = *(int *)(*(int *)(compiler + 8) + 0x3ac) + -1;
+      *(int *)(*(int *)(compiler + 8) + 0x3ac) = newVRegId;
+      undefVReg = FUN_00127608(*(undefined4 *)(program + 0x3ac),0,newVRegId,0);
+      allocation[0x24] = undefVReg;
+      operandRecord = IRInst__getOperandRecord(undefInst,0);
+      *(int *)(operandRecord + 8) = newVRegId;
       *(undefined4 *)(operandRecord + 0xc) = 0;
       arenaAt378 = *(undefined4 *)(*(int *)(compiler + 8) + 0x378);
-      puVar6 = (undefined4 *)Arena__alloc(arenaAt378,0x240);
-      *puVar6 = arenaAt378;
-      puVar6 = puVar6 + 1;
-      ValueKey__init(puVar6,a1,*(undefined4 *)(compiler + 8));
+      undefKeyAlloc = (undefined4 *)Arena__alloc(arenaAt378,0x240);
+      *undefKeyAlloc = arenaAt378;
+      undefKeyAlloc = undefKeyAlloc + 1;
+      ValueKey__init(undefKeyAlloc,undefInst,*(undefined4 *)(compiler + 8));
       valueNumberEnabled2 = Compiler__isOptionEnabled(*(undefined4 *)(compiler + 8),7);
       if (valueNumberEnabled2 != 0) {
-        FUN_00174e0c(puVar6);
-        ValueKey__propagateLaneValues(puVar6);
+        FUN_00174e0c(undefKeyAlloc);
+        ValueKey__propagateLaneValues(undefKeyAlloc);
       }
-      ((int (*)())FUN_0012306c)(uVar13,a1);
-      Block__recordDefinition(param_2,uVar13,puVar6);
-      *(undefined4 *)(*(int *)(compiler + COMP_arenaB) + 0x9c) = local_54;
-      IRInst__setExtraOperandSource(*(undefined4 *)(compiler + COMP_arenaB),a1,0,*(undefined4 *)(compiler + 8));
-      *(undefined4 *)(*(int *)(compiler + COMP_arenaB) + 0xbc) = uVar13;
-      ((int (*)())VReg__addUse)(uVar13,2,*(undefined4 *)(compiler + COMP_arenaB));
+      ((int (*)())FUN_0012306c)(undefVReg,undefInst);
+      Block__recordDefinition(block,undefVReg,undefKeyAlloc);
+      *(undefined4 *)(*(int *)(compiler + COMP_arenaB) + 0x9c) = undefLaneMask;
+      IRInst__setExtraOperandSource(*(undefined4 *)(compiler + COMP_arenaB),undefInst,0,*(undefined4 *)(compiler + 8));
+      *(undefined4 *)(*(int *)(compiler + COMP_arenaB) + 0xbc) = undefVReg;
+      ((int (*)())VReg__addUse)(undefVReg,2,*(undefined4 *)(compiler + COMP_arenaB));
     }
-    IRInst__setOperandSource(*(undefined4 *)(compiler + COMP_arenaB),1,uVar4,0,*(undefined4 *)(compiler + 8));
-    uVar4 = *(undefined4 *)(*(int *)(compiler + COMP_arenaB) + 0x14c);
+    IRInst__setOperandSource(*(undefined4 *)(compiler + COMP_arenaB),1,constDefInst,0,*(undefined4 *)(compiler + 8));
+    constMoveDestReg = *(undefined4 *)(*(int *)(compiler + COMP_arenaB) + 0x14c);
     operandRecord = IRInst__getOperandRecord(*(int *)(compiler + COMP_arenaB),0);
     *(undefined4 *)(operandRecord + 0xc) = 0;
-    *(undefined4 *)(operandRecord + 8) = uVar4;
-    iVar3 = *(int *)(*(int *)(compiler + 8) + 0x3ac) + -1;
-    *(int *)(*(int *)(compiler + 8) + 0x3ac) = iVar3;
-    uVar4 = FUN_00127608(*(undefined4 *)(compiler + 0x3ac),0,iVar3,0);
-    *(undefined4 *)(*(int *)(compiler + COMP_arenaB) + 0x8c) = uVar4;
-    ((int (*)())FUN_0012306c)(uVar4,*(undefined4 *)(compiler + COMP_arenaB));
-    (**(code **)(*param_2 + 0xc))(param_2,*(undefined4 *)(compiler + COMP_arenaB),iVar3);
+    *(undefined4 *)(operandRecord + 8) = constMoveDestReg;
+    newVRegIdB = *(int *)(*(int *)(compiler + 8) + 0x3ac) + -1;
+    *(int *)(*(int *)(compiler + 8) + 0x3ac) = newVRegIdB;
+    movResultVReg = FUN_00127608(*(undefined4 *)(compiler + 0x3ac),0,newVRegIdB,0);
+    *(undefined4 *)(*(int *)(compiler + COMP_arenaB) + 0x8c) = movResultVReg;
+    ((int (*)())FUN_0012306c)(movResultVReg,*(undefined4 *)(compiler + COMP_arenaB));
+    (**(code **)(*block + 0xc))(block,*(undefined4 *)(compiler + COMP_arenaB),newVRegIdB);
     arena = *(undefined4 *)(*(int *)(compiler + 8) + 0x378);
     allocation = (undefined4 *)Arena__alloc(arena,0x240);
     *allocation = arena;
     ValueKey__init(allocation + 1,*(undefined4 *)(compiler + COMP_arenaB),*(undefined4 *)(compiler + 8));
-    local_58 = allocation + 1;
-    Program__valueNumberInst(iVar10,0,0,&local_58,param_2);
-    Block__recordDefinition(param_2,uVar4,local_58);
-    ((int (*)())FUN_00122f28)(uVar4,*(undefined4 *)(compiler + COMP_arenaB));
+    valueKeyOut = allocation + 1;
+    Program__valueNumberInst(program,0,0,&valueKeyOut,block);
+    Block__recordDefinition(block,movResultVReg,valueKeyOut);
+    ((int (*)())FUN_00122f28)(movResultVReg,*(undefined4 *)(compiler + COMP_arenaB));
   }
   else {
-    puVar12 = *(uint **)(*(int *)(*(int *)(compiler + COMP_arenaB) + 0x8c) + 0x2c);
-    uVar11 = puVar12[1];
-    uVar15 = uVar11 - 1;
-    if (uVar15 < *puVar12) {
-      if (uVar11 <= uVar15) {
-        _memset(uVar11 * 4 + puVar12[2],0,(uVar15 - uVar11) * 4 + 4);
-        puVar12[1] = uVar11;
+    keyVector = *(uint **)(*(int *)(*(int *)(compiler + COMP_arenaB) + 0x8c) + 0x2c);
+    keyVectorCount = keyVector[1];
+    lastKeyIndex = keyVectorCount - 1;
+    if (lastKeyIndex < *keyVector) {
+      if (keyVectorCount <= lastKeyIndex) {
+        _memset(keyVectorCount * 4 + keyVector[2],0,(lastKeyIndex - keyVectorCount) * 4 + 4);
+        keyVector[1] = keyVectorCount;
       }
-      piVar5 = (int *)(uVar15 * 4 + puVar12[2]);
+      keyVectorElemRef = (int *)(lastKeyIndex * 4 + keyVector[2]);
     }
     else {
-      piVar5 = (int *)Vector__elementRefGrow(puVar12,uVar15);
+      keyVectorElemRef = (int *)Vector__elementRefGrow(keyVector,lastKeyIndex);
     }
-    local_58 = (undefined4 *)*piVar5;
+    valueKeyOut = (undefined4 *)*keyVectorElemRef;
   }
-  return local_58;
+  return valueKeyOut;
 }
 
 /* TempValue__clone @ 0x1240a8 (180 bytes) */

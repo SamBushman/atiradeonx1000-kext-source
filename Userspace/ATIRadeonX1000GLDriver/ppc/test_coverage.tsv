@@ -119,12 +119,12 @@
 0xa0f0	FUN_0000a0f0	48	yes	
 0xa120	gldFormatAlphaBits	92	yes	
 0xa180	FUN_0000a180	344	yes	
-0xa2f0	FUN_0000a2f0	184	yes	
+0xa2f0	gld_textureVariantClass	184	yes	
 0xa3f0	gldPixelUnitBytes	592	yes	
 0xa670	gldPixelRowBytes	100	yes	
-0xa6e0	FUN_0000a6e0	292	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0xa820	FUN_0000a820	452	yes	
-0xa9f0	FUN_0000a9f0	244	yes	
+0xa6e0	gld_computePixelStoreLayout	292	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xa820	gld_resolveBoundTextures	452	yes	
+0xa9f0	gld_textureMemoryBytes	244	yes	
 0xaaf0	gld_waitTextureStamp	244	yes	
 0xabf0	FUN_0000abf0	184	yes	
 0xacb0	gld_ensureTextureBackingSized2	568	no	atomic / cache / barrier instruction; calls an import (io_connect_method_scalarI_structureI); calls an import (io_connect_method_structureI_structureO)
@@ -147,7 +147,7 @@
 0xbd60	gld_setVertexArrayNewTextureBacking	264	no	atomic / cache / barrier instruction; calls an import (io_connect_method_scalarI_structureI); calls an import (io_connect_method_structureI_structureO)
 0xbe70	powerOfTenDouble	272	yes	
 0xbfa0	textPrintDoubleShortest	1332	no	calls an import (round)
-0xc500	FUN_0000c500	892	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0xc500	parseDecimalDouble	892	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0xc8a0	textBufferEnsureRoom	136	no	calls an import (realloc)
 0xc930	arbIrPrintCcAndSaturateSuffix	284	yes	
 0xca50	arbIrPrintPrecisionSuffix	312	yes	
@@ -169,9 +169,9 @@
 0x17720	FUN_00017720	36	yes	
 0x17750	gld_fillCapsBlock	748	yes	
 0x17a40	FUN_00017a40	200	yes	
-0x17b20	FUN_00017b20	740	no	calls an import (CFDictionaryCreate); calls an import (CFNotificationCenterAddObserver); calls an import (CFNotificationCenterGetDistributedCenter)
+0x17b20	gld_postDisplayNotification	740	no	calls an import (CFDictionaryCreate); calls an import (CFNotificationCenterAddObserver); calls an import (CFNotificationCenterGetDistributedCenter)
 0x17e10	gldRemoveDisplayNotificationObserver	204	no	calls an import (CFNotificationCenterGetDistributedCenter); calls an import (CFNotificationCenterRemoveObserver); calls an import (CFRelease)
-0x17ee0	FUN_00017ee0	432	no	calls an import (fgets); calls an import (free); calls an import (getpid)
+0x17ee0	gld_printApplicationPath	432	no	calls an import (fgets); calls an import (free); calls an import (getpid)
 0x18090	FUN_00018090	100	yes	
 0x18120	glCopyPixels_impl	6016	no	calls an import (malloc); indirect call (driver context / vtable / callback)
 0x18a40	glDrawPixels_impl	3636	no	calls an import (free); calls an import (glgConvertType); calls an import (glgPixelCenters)
@@ -207,14 +207,14 @@
 0x1c380	FUN_0001c380	3664	yes	
 0x1d1e0	dxtDecompressImage	1376	yes	
 0x1d7c0	floatToHalfBits	148	yes	
-0x1d880	FUN_0001d880	704	yes	
+0x1d880	gld_validateVertexArrayStreams	704	yes	
 0x1db50	gldComputeVertexChunking	180	yes	
-0x1dc10	FUN_0001dc10	976	yes	
+0x1dc10	gld_prepareVertexArrayBacking	976	yes	
 0x1dff0	gld_startPacket	140	no	indirect call (driver context / vtable / callback)
 0x1e080	_gldPageoffBuffer	480	no	calls an import (io_connect_method_scalarI_structureI); calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x1e270	returnZero_1e270	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1e280	FUN_0001e280	1184	yes	
-0x1e730	FUN_0001e730	332	yes	
+0x1e280	gld_prepareBufferBacking	1184	yes	
+0x1e730	gld_prepareVertexArrayBuffers	332	yes	
 0x1e890	copyIndices16Swapped_prefetch_entry	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1e8a0	copyIndices16Swapped_prefetch	564	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x1eae0	copyIndices16Swapped_dcbz_entry	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -250,7 +250,7 @@
 0x247f0	gldPrimWrapperLines_24190	104	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x24870	gldPrimWrapperLineLoop_23a24	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x248f0	gldPrimWrapperLineStrip_23a24	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x24970	FUN_00024970	1588	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
+0x24970	gld_drawElementsImmediate	1588	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
 0x24fb0	FUN_00024fb0	16	yes	
 0x24fc0	noop_24fc0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x24fd0	noop_24fd0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -363,12 +363,12 @@
 0x3e600	atifsReplayColorAlphaOps	1352	yes	
 0x3eb70	atifsReplayProgram	296	yes	
 0x3eca0	fpilEmitAngleConstants	164	yes	
-0x3ed50	FUN_0003ed50	60	yes	
+0x3ed50	fpilClassifyDestination	60	yes	
 0x3ed90	fpilBuildDestinationToken	160	yes	
 0x3ee30	fpilSetComponentSelect	88	yes	
 0x3eea0	fpilEmitScalarConstant	168	yes	
 0x3ef50	fpilReserveTokens	240	no	calls an import (malloc); calls an import (realloc)
-0x3f050	FUN_0003f050	336	yes	
+0x3f050	fpilMapConstantRegister	336	yes	
 0x3f1c0	fpilTranslateSource	700	yes	
 0x3f4e0	fpilTranslateSourceWithSwizzle	232	yes	
 0x3f5d0	freeIfNonNull	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -2936,7 +2936,7 @@
 0x184bf0	FUN_00184bf0	232	no	indirect call (driver context / vtable / callback)
 0x184cd8	FUN_00184cd8	164	no	indirect call (driver context / vtable / callback)
 0x184d7c	Inst__splitAndMerge	372	yes	
-0x184ef0	FUN_00184ef0	2760	no	indirect call (driver context / vtable / callback)
+0x184ef0	IRInst__foldResultScaleIntoUsers	2760	no	indirect call (driver context / vtable / callback)
 0x1859bc	Inst__tryDp3Add	996	yes	
 0x185da4	FUN_00185da4	1900	no	indirect call (driver context / vtable / callback)
 0x186510	FUN_00186510	1400	no	indirect call (driver context / vtable / callback)

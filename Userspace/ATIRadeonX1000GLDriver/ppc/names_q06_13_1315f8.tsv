@@ -1,0 +1,57 @@
+local	FUN_001315f8	param_1	allocator	INFERRED	register allocator object; +0x2c pass (program at +0x6c4, arena at +0x378), +0x18 counters
+local	FUN_001315f8	param_4	registerCountRef	INFERRED	in/out register count; the new copy takes the old value as its destination register
+use	FUN_001315f8	uVar7	rootRegister	INFERRED	FUN_00134bf0 root of a register whose usage is propagated to the new register	^\s*uVar7\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134bf0\)\(param_1,iVar14,1\);$	+2
+use	FUN_001315f8	iVar5	registerCountAfter	INFERRED	register count after the new register was added	^\s*iVar5\ =\ \*param_4;$	+1
+use	FUN_001315f8	iVar5	registerCountAfter	INFERRED	register count after the new register was added	^\s*uVar11\ =\ iVar5\ \*\ 4\ \+\ 0x1fU\ >>\ 5;$	+1
+use	FUN_001315f8	iVar5	registerCountAfter	INFERRED	register count after the new register was added	^\s*puVar8\[2\]\ =\ iVar5\ \*\ 4;$	+1
+use	FUN_001315f8	iVar5	registerCountAfter	INFERRED	register count after the new register was added	^\s*iVar5\ =\ \*param_4;$@2	+1
+use	FUN_001315f8	iVar5	registerCountAfter	INFERRED	register count after the new register was added	^\s*if\ \(0\ <\ iVar5\)\ \{$	+1
+use	FUN_001315f8	iVar5	registerCountAfter	INFERRED	register count after the new register was added	^\s*iVar5\ =\ \*param_4;$@3	+1
+use	FUN_001315f8	iVar5	registerCountAfter	INFERRED	register count after the new register was added	^\s*\}\ while\ \(iVar14\ <\ iVar5\);$	+1
+use	FUN_001315f8	iVar14	program	INFERRED	pass->program	^\s*iVar14\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x2c\)\ \+\ 0x6c4\);$	+1
+use	FUN_001315f8	iVar14	program	INFERRED	pass->program	^\s*\*\(undefined4\ \*\)\(\*param_4\ \*\ 4\ \+\ \*\(int\ \*\)\(iVar14\ \+\ 0x45c\)\)\ =\ 0;$	+1
+use	FUN_001315f8	iVar14	program	INFERRED	pass->program	^\s*iVar13\ =\ \*\(int\ \*\)\(iVar14\ \+\ 900\);$	+2
+use	FUN_001315f8	iVar14	bitsetWordsLeft	INFERRED	words left to merge into the new bitset	^\s*iVar14\ =\ \*piVar6;$	+4
+use	FUN_001315f8	iVar14	bitsetWordsLeft	INFERRED	words left to merge into the new bitset	^\s*iVar14\ =\ iVar14\ \+\ \-1;$	+2
+use	FUN_001315f8	piVar6	newBitsetWords	INFERRED	cursor over the new, larger usage bitset (allocation + 1)	^\s*piVar6\ =\ puVar8\ \+\ 1;$	+1
+use	FUN_001315f8	piVar6	newBitsetWords	INFERRED	cursor over the new, larger usage bitset (allocation + 1)	^\s*piVar3\ =\ piVar6;$	+1
+use	FUN_001315f8	piVar6	newBitsetWords	INFERRED	cursor over the new, larger usage bitset (allocation + 1)	^\s*\*\(int\ \*\*\)\(iVar13\ \+\ 0x104\)\ =\ piVar6;$	+2
+use	FUN_001315f8	piVar6	newBitsetWords	INFERRED	cursor over the new, larger usage bitset (allocation + 1)	^\s*piVar6\[2\]\ =\ piVar6\[2\]\ \|\ \*puVar1;$	+2
+use	FUN_001315f8	puVar1	oldBitsetNextWord	INFERRED	address of the next word of the old bitset	^\s*puVar1\ =\ puVar15\ \+\ 2;$	+1
+use	FUN_001315f8	puVar1	oldBitsetNextWord	INFERRED	address of the next word of the old bitset	^\s*piVar6\[2\]\ =\ piVar6\[2\]\ \|\ \*puVar1;$	+1
+use	FUN_001315f8	uVar2	bitWordOffset	INFERRED	bitset word offset of the bit being cleared	^\s*uVar2\ =\ uVar9\ >>\ 3\ \&\ 0x1ffffffc;$	+3
+use	FUN_001315f8	piVar3	newBitsetClearCursor	INFERRED	cursor clearing the new bitset's words	^\s*piVar3\ =\ piVar6;$	+1
+use	FUN_001315f8	piVar3	newBitsetClearCursor	INFERRED	cursor clearing the new bitset's words	^\s*piVar3\[2\]\ =\ 0;$	+2
+use	FUN_001315f8	iVar4	bitsLeftInRow	INFERRED	bits left in the current register's four-lane group	^\s*iVar4\ =\ iVar13\ \+\ iVar14\ \*\ \-4;$	+1
+use	FUN_001315f8	iVar4	bitsLeftInRow	INFERRED	bits left in the current register's four-lane group	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	FUN_001315f8	uVar9	oldBitCount	INFERRED	bit count of the block's old usage bitset	^\s*uVar9\ =\ puVar15\[1\];$	+3
+use	FUN_001315f8	uVar9	oldBitCount	INFERRED	bit count of the block's old usage bitset	^\s*for\ \(;\ uVar9\ <\ uVar10;\ uVar9\ =\ uVar9\ \+\ 1\)\ \{$	+2
+use	FUN_001315f8	uVar9	oldBitCount	INFERRED	bit count of the block's old usage bitset	^\s*\*\(uint\ \*\)\(\(int\)puVar15\ \+\ uVar2\ \+\ 8\)\ \&\ \~\(1\ <<\ \(uVar9\ \&\ 0x1f\)\);$	+1
+use	FUN_001315f8	uVar9	clearWordCount	INFERRED	words to clear in the new bitset	^\s*uVar9\ =\ uVar11;$	+1
+use	FUN_001315f8	uVar9	clearWordCount	INFERRED	words to clear in the new bitset	^\s*uVar9\ =\ 1;$	+1
+use	FUN_001315f8	uVar9	clearWordCount	INFERRED	words to clear in the new bitset	^\s*uVar9\ =\ uVar9\ \-\ 1;$	+2
+use	FUN_001315f8	uVar10	newBitCount	INFERRED	old bit count + 1	^\s*uVar10\ =\ uVar9\ \+\ 1;$	+1
+use	FUN_001315f8	uVar10	newBitCount	INFERRED	old bit count + 1	^\s*puVar15\[1\]\ =\ uVar10;$	+2
+use	FUN_001315f8	uVar11	newBitsetWordCount	INFERRED	words needed for four bits per register	^\s*uVar11\ =\ iVar5\ \*\ 4\ \+\ 0x1fU\ >>\ 5;$	+1
+use	FUN_001315f8	uVar11	newBitsetWordCount	INFERRED	words needed for four bits per register	^\s*puVar8\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar7,uVar11\ \*\ 4\ \+\ 0xc\);$	+1
+use	FUN_001315f8	uVar11	newBitsetWordCount	INFERRED	words needed for four bits per register	^\s*puVar8\[1\]\ =\ uVar11;$	+1
+use	FUN_001315f8	uVar11	newBitsetWordCount	INFERRED	words needed for four bits per register	^\s*if\ \(uVar11\ !=\ 0\)\ \{$	+1
+use	FUN_001315f8	uVar11	newBitsetWordCount	INFERRED	words needed for four bits per register	^\s*uVar9\ =\ uVar11;$	+2
+use	FUN_001315f8	uVar11	laneBitIndex	INFERRED	bit index register * 4 + lane while scanning the usage bitset	^\s*uVar11\ =\ iVar14\ \*\ 4;$	+1
+use	FUN_001315f8	uVar11	laneBitIndex	INFERRED	bit index register * 4 + lane while scanning the usage bitset	^\s*if\ \(\(\*\(uint\ \*\)\(\(uVar11\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ \*\(int\ \*\)\(param_6\ \+\ 0x104\)\ \+\ 8\)\ >>$	+2
+use	FUN_001315f8	uVar11	laneBitIndex	INFERRED	bit index register * 4 + lane while scanning the usage bitset	^\s*uVar11\ =\ uVar11\ \+\ 1;$	+1
+use	FUN_001315f8	iVar12	newRegister	INFERRED	register number given to the copy's destination	^\s*iVar12\ =\ \*param_4;$	+1
+use	FUN_001315f8	iVar12	newRegister	INFERRED	register number given to the copy's destination	^\s*\*\(int\ \*\)\(iVar5\ \+\ 0x94\)\ =\ iVar12;$	+1
+use	FUN_001315f8	iVar12	newRegister	INFERRED	register number given to the copy's destination	^\s*\(\(int\ \(\*\)\(\)\)FUN_00135334\)\(param_1,iVar12,uVar7\);$	+1
+use	FUN_001315f8	iVar13	blockCursor	INFERRED	block whose usage bitset is widened	^\s*iVar13\ =\ \*\(int\ \*\)\(iVar14\ \+\ 900\);$	+1
+use	FUN_001315f8	iVar13	blockCursor	INFERRED	block whose usage bitset is widened	^\s*if\ \(\*\(int\ \*\)\(iVar13\ \+\ 8\)\ !=\ 0\)\ \{$	+1
+use	FUN_001315f8	iVar13	blockCursor	INFERRED	block whose usage bitset is widened	^\s*puVar15\ =\ \*\(uint\ \*\*\)\(iVar13\ \+\ 0x104\);$	+1
+use	FUN_001315f8	iVar13	blockCursor	INFERRED	block whose usage bitset is widened	^\s*\*\(int\ \*\*\)\(iVar13\ \+\ 0x104\)\ =\ piVar6;$	+1
+use	FUN_001315f8	iVar13	blockCursor	INFERRED	block whose usage bitset is widened	^\s*iVar13\ =\ \*\(int\ \*\)\(iVar13\ \+\ 8\);$	+2
+use	FUN_001315f8	iVar13	rowBitLimit	INFERRED	running bit limit of the current register's lane group	^\s*iVar13\ =\ 4;$	+1
+use	FUN_001315f8	iVar13	rowBitLimit	INFERRED	running bit limit of the current register's lane group	^\s*iVar4\ =\ iVar13\ \+\ iVar14\ \*\ \-4;$	+1
+use	FUN_001315f8	iVar13	rowBitLimit	INFERRED	running bit limit of the current register's lane group	^\s*iVar13\ =\ iVar13\ \+\ 4;$	+1
+use	FUN_001315f8	puVar15	oldBitset	INFERRED	old per-block usage bitset (block +0x104)	^\s*puVar15\ =\ \*\(uint\ \*\*\)\(iVar13\ \+\ 0x104\);$	+2
+use	FUN_001315f8	puVar15	oldBitset	INFERRED	old per-block usage bitset (block +0x104)	^\s*if\ \(uVar9\ \+\ 0x20\ >>\ 5\ ==\ \*puVar15\)\ \{$	+2
+use	FUN_001315f8	puVar15	oldBitset	INFERRED	old per-block usage bitset (block +0x104)	^\s*\*\(uint\ \*\)\(\(int\)puVar15\ \+\ uVar2\ \+\ 8\)\ =$	+2
+use	FUN_001315f8	puVar15	oldBitset	INFERRED	old per-block usage bitset (block +0x104)	^\s*puVar1\ =\ puVar15\ \+\ 2;$	+2

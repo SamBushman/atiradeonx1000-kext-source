@@ -1,0 +1,114 @@
+local	ValueKey__simplifyModifiersAndAddressing	aiStack_94	constVecOrInsts	INFERRED	stack overlay: first the four-word constant vector (with local_98) passed to the limits check, later the array of created copy instructions
+local	ValueKey__simplifyModifiersAndAddressing	local_98	constVecLane0	INFERRED	first word of the constant vector (overlay with aiStack_94)
+local	ValueKey__simplifyModifiersAndAddressing	local_9c	laneMask	INFERRED	lane mask in/out of the limits check (vtable +0x154), also the lanes still to be covered
+local	ValueKey__simplifyModifiersAndAddressing	local_4c	maskScratch	INFERRED	out-parameter of SelectWord__maskUnused
+local	ValueKey__simplifyModifiersAndAddressing	local_50	valueNumberOut1	INFERRED	out-parameter of FUN_001770e4
+local	ValueKey__simplifyModifiersAndAddressing	local_54	valueNumberOut2	INFERRED	out-parameter of FUN_001769f4
+local	ValueKey__simplifyModifiersAndAddressing	local_58	valueNumberOut3	INFERRED	out-parameter of FUN_00178d78
+local	ValueKey__simplifyModifiersAndAddressing	local_5c	valueNumberOut4	INFERRED	out-parameter of FUN_00178c84
+local	ValueKey__simplifyModifiersAndAddressing	local_60	selectWordOut2	INFERRED	out-parameter of FUN_000f370c (select word of the lane mask)
+local	ValueKey__simplifyModifiersAndAddressing	local_64	clearedLanesOut2	INFERRED	out-parameter of laneBytes__clearSetLanes
+local	ValueKey__simplifyModifiersAndAddressing	local_68	writeMaskOut2	INFERRED	out-parameter of WriteMask__fromSelectWord
+local	ValueKey__simplifyModifiersAndAddressing	local_6c	selectWordOut	INFERRED	out-parameter of FUN_000f370c (select word of the lane mask)
+local	ValueKey__simplifyModifiersAndAddressing	local_70	clearedLanesOut	INFERRED	out-parameter of laneBytes__clearSetLanes
+local	ValueKey__simplifyModifiersAndAddressing	local_74	writeMaskOut	INFERRED	out-parameter of WriteMask__fromSelectWord
+local	ValueKey__simplifyModifiersAndAddressing	local_78	readMaskOut	INFERRED	out-parameter of SelectWord__readMask
+local	ValueKey__simplifyModifiersAndAddressing	local_80	floorAsInt64	INFERRED	floor(value) converted to 64 bit (truncating address record)
+local	ValueKey__simplifyModifiersAndAddressing	local_88	roundAsInt64	INFERRED	floor(value + 0.5) converted to 64 bit (rounding address record)
+use	ValueKey__simplifyModifiersAndAddressing	bVar1	moreChannels	INFERRED	channel counter != 3	^\s*bVar1\ =\ iVar4\ !=\ 3;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar1	moreChannels	INFERRED	channel counter != 3	^\s*\}\ while\ \(bVar1\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar2	absIsNoOp	INFERRED	true while every enabled lane is of a kind that makes the abs modifier redundant	^\s*bVar2\ =\ true;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar2	absIsNoOp	INFERRED	true while every enabled lane is of a kind that makes the abs modifier redundant	^\s*bVar2\ =\ false;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar2	absIsNoOp	INFERRED	true while every enabled lane is of a kind that makes the abs modifier redundant	^\s*if\ \(!bVar2\)\ goto\ LAB_00180a10;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar2	absIsNoOp	INFERRED	true while every enabled lane is of a kind that makes the abs modifier redundant	^\s*if\ \(bVar2\)\ \{$	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar2	moreWords	INFERRED	word counter != 0xc	^\s*bVar2\ =\ iVar10\ !=\ 0xc;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar2	moreWords	INFERRED	word counter != 0xc	^\s*\}\ while\ \(bVar2\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar3	negateAbsIsNoOp	INFERRED	true while no lane is of the other kind	^\s*bVar3\ =\ true;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar3	negateAbsIsNoOp	INFERRED	true while no lane is of the other kind	^\s*if\ \(\(iVar19\ ==\ 0\)\ \|\|\ \(!bVar3\)\)\ \{$	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar3	negateAbsIsNoOp	INFERRED	true while no lane is of the other kind	^\s*bVar3\ =\ false;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar3	negateAbsIsNoOp	INFERRED	true while no lane is of the other kind	^\s*else\ if\ \(\(bVar3\)\ \&\&\ \(\(piVar24\[iVar17\ \*\ 6\ \+\ 0x28\]\ \&\ 1U\)\ !=\ 0\)\)\ \{$	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar3	allConstant	INFERRED	true while every enabled source value number is a constant (negative)	^\s*bVar3\ =\ true;$@2	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar3	allConstant	INFERRED	true while every enabled source value number is a constant (negative)	^\s*bVar3\ =\ false;$@2	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar3	allConstant	INFERRED	true while every enabled source value number is a constant (negative)	^\s*if\ \(bVar3\)\ \{$	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar3	moreChannels2	INFERRED	channel counter != 3	^\s*bVar3\ =\ iVar28\ !=\ 3;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	bVar3	moreChannels2	INFERRED	channel counter != 3	^\s*\}\ while\ \(bVar3\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	keyWordPtr3	INFERRED	address of the key word array (key, then key+4*n)	^\s*iVar17\ =\ param_1;$@3	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	keyWordPtr3	INFERRED	address of the key word array (key, then key+4*n)	^\s*FUN_000f3340\(local_4c,0x10203,\*\(undefined4\ \*\)\(iVar17\ \+\ 0x228\)\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	keyWordPtr3	INFERRED	address of the key word array (key, then key+4*n)	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ 0x214\)\ =\ uVar15;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	keyWordPtr3	INFERRED	address of the key word array (key, then key+4*n)	^\s*iVar17\ =\ iVar17\ \+\ 4;$@3	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	vslot40Result	INFERRED	result of the virtual call at vtable +0x40	^\s*iVar19\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x40\)\)\(piVar12\);$	+2
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	exprSlotPtr	INFERRED	address of the per-operand value-number slot (key+0x170, step 0x10)	^\s*iVar19\ =\ param_1\ \+\ 0x170;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	exprSlotPtr	INFERRED	address of the per-operand value-number slot (key+0x170, step 0x10)	^\s*piVar24\ =\ \(int\ \*\)\(iVar19\ \+\ 8\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	exprSlotPtr	INFERRED	address of the per-operand value-number slot (key+0x170, step 0x10)	^\s*iVar19\ =\ iVar19\ \+\ 0x10;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar18	lastEntryIndex	INFERRED	filled count of the defining-instruction vector minus 1	^\s*uVar18\ =\ uVar21\ \-\ 1;$	+4
+use	ValueKey__simplifyModifiersAndAddressing	uVar18	lastEntryIndex	INFERRED	filled count of the defining-instruction vector minus 1	^\s*puVar11\ =\ \(undefined4\ \*\)\(uVar18\ \*\ 4\ \+\ puVar27\[2\]\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar18	lastEntryIndex	INFERRED	filled count of the defining-instruction vector minus 1	^\s*puVar11\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar27,uVar18\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar18	lastEntryIndex	INFERRED	filled count of the defining-instruction vector minus 1	^\s*uVar18\ =\ uVar21\ \-\ 1;$@2	+4
+use	ValueKey__simplifyModifiersAndAddressing	uVar18	lastEntryIndex	INFERRED	filled count of the defining-instruction vector minus 1	^\s*piVar24\ =\ \(int\ \*\)\(uVar18\ \*\ 4\ \+\ puVar27\[2\]\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar18	lastEntryIndex	INFERRED	filled count of the defining-instruction vector minus 1	^\s*piVar24\ =\ \(int\ \*\)FUN_0019423c\(puVar27,uVar18\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar18	creatorWriteMask	INFERRED	write mask of the defining instruction (local_74)	^\s*uVar18\ =\ local_74;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar18	creatorWriteMask	INFERRED	write mask of the defining instruction (local_74)	^\s*uVar21\ =\ \~\(uVar18\ \&\ local_9c\);$	+2
+use	ValueKey__simplifyModifiersAndAddressing	uVar18	lanesCovered	INFERRED	write mask & lanes still to cover, then its complement	^\s*uVar18\ =\ local_68\ \&\ local_9c;$	+2
+use	ValueKey__simplifyModifiersAndAddressing	uVar18	lanesCovered	INFERRED	write mask & lanes still to cover, then its complement	^\s*uVar18\ =\ \~uVar18;$	+3
+use	ValueKey__simplifyModifiersAndAddressing	uVar18	firstEnabledSelect	INFERRED	select byte of the first enabled lane (or 0)	^\s*uVar18\ =\ \(uint\)\*\(byte\ \*\)\(iVar14\ \+\ iVar10\ \+\ 0x10\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar18	firstEnabledSelect	INFERRED	select byte of the first enabled lane (or 0)	^\s*uVar18\ =\ 0;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar18	firstEnabledSelect	INFERRED	select byte of the first enabled lane (or 0)	^\s*piVar24\ =\ \(int\ \*\)FUN_00173360\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),$	+2
+use	ValueKey__simplifyModifiersAndAddressing	uVar20	sourceRegister	INFERRED	register field of the operand (or of its source)	^\s*uVar20\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ iVar16\ \+\ 0x98\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar20	sourceRegister	INFERRED	register field of the operand (or of its source)	^\s*uVar20\ =\ \*\(undefined4\ \*\)\(iVar16\ \+\ 0x98\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar20	sourceRegister	INFERRED	register field of the operand (or of its source)	^\s*iVar16\ =\ FUN_00126708\(uVar20\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar20	negatedPass	INFERRED	0 for the first limits check, 1 after the constants were negated	^\s*uVar20\ =\ 0;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar20	negatedPass	INFERRED	0 for the first limits check, 1 after the constants were negated	^\s*iVar28\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x11c\)\)\(piVar12,piVar24,iVar16,iVar10,0,uVar20\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar20	negatedPass	INFERRED	0 for the first limits check, 1 after the constants were negated	^\s*uVar15\ =\ FUN_0017ae28\(param_1,iVar16,iVar10,local_9c,uVar20,0,$	+2
+use	ValueKey__simplifyModifiersAndAddressing	uVar20	negatedPass	INFERRED	0 for the first limits check, 1 after the constants were negated	^\s*uVar20\ =\ 1;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar21	lastEntryIndex2	INFERRED	filled count of the defining-instruction vector minus 1	^\s*uVar21\ =\ uVar18\ \-\ 1;$	+4
+use	ValueKey__simplifyModifiersAndAddressing	uVar21	lastEntryIndex2	INFERRED	filled count of the defining-instruction vector minus 1	^\s*piVar24\ =\ \(int\ \*\)\(uVar21\ \*\ 4\ \+\ puVar27\[2\]\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar21	lastEntryIndex2	INFERRED	filled count of the defining-instruction vector minus 1	^\s*piVar24\ =\ \(int\ \*\)FUN_0019423c\(puVar27,uVar21\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar21	invertedWriteMask	INFERRED	complement of the write mask	^\s*uVar21\ =\ \~local_74;$	+3
+use	ValueKey__simplifyModifiersAndAddressing	uVar21	invertedLanes	INFERRED	complement of the covered lanes	^\s*uVar21\ =\ \~\(uVar18\ \&\ local_9c\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar21	invertedLanes	INFERRED	complement of the covered lanes	^\s*local_9c\ =\ \(uVar21\ <<\ 0x18\ \|\ \(uVar21\ \&\ 0xff00\)\ <<\ 8\ \|\ uVar21\ >>\ 8\ \&\ 0xff00\ \|$	+2
+use	ValueKey__simplifyModifiersAndAddressing	uVar22	definingKey	INFERRED	defining entry read from the last element of the defining vector	^\s*uVar22\ =\ \*puVar11;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar22	definingKey	INFERRED	defining entry read from the last element of the defining vector	^\s*iVar19\ =\ FUN_00176518\(uVar22,\(uint\)\*\(byte\ \*\)\(iVar4\ \+\ iVar19\ \+\ 0x10\)\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar22	definingKey	INFERRED	defining entry read from the last element of the defining vector	^\s*iVar19\ =\ FUN_001764fc\(uVar22,\(uint\)\*\(byte\ \*\)\(iVar4\ \+\ iVar19\ \+\ 0x10\)\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar22	copySelectWord	INFERRED	select word of the lane mask	^\s*uVar22\ =\ local_6c;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar22	copySelectWord	INFERRED	select word of the lane mask	^\s*\*\(undefined4\ \*\)\(iVar19\ \+\ 0x10\)\ =\ uVar22;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar22	copySelectWord2	INFERRED	select word of the lane mask	^\s*uVar22\ =\ local_60;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar22	copySelectWord2	INFERRED	select word of the lane mask	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\)\ =\ uVar22;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar22	currentProgram	INFERRED	compiler->+0x6c4: the Program being compiled	^\s*uVar22\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x238\)\ \+\ 0x6c4\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar22	currentProgram	INFERRED	compiler->+0x6c4: the Program being compiled	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar24\ \+\ 0x154\)\)\(piVar24,uVar22,\&local_98,\&local_9c\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar22	currentProgram	INFERRED	compiler->+0x6c4: the Program being compiled	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar24\ \+\ 0x154\)\)\(piVar24,uVar22,\&local_98,\&local_9c\);$@2	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar22	currentProgram	INFERRED	compiler->+0x6c4: the Program being compiled	^\s*iVar10\ =\ \(\*\*\(code\ \*\*\)\(\*piVar24\ \+\ 0x154\)\)\(piVar24,uVar22,\&local_98,\&local_9c\);$@3	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar23	lastEntryIndex3	INFERRED	filled count of the defining-instruction vector minus 1	^\s*uVar23\ =\ uVar21\ \-\ 1;$	+4
+use	ValueKey__simplifyModifiersAndAddressing	uVar23	lastEntryIndex3	INFERRED	filled count of the defining-instruction vector minus 1	^\s*piVar24\ =\ \(int\ \*\)\(uVar23\ \*\ 4\ \+\ puVar27\[2\]\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	uVar23	lastEntryIndex3	INFERRED	filled count of the defining-instruction vector minus 1	^\s*piVar24\ =\ \(int\ \*\)FUN_0019423c\(puVar27,uVar23\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	optionEnabled	INFERRED	Compiler__isOptionEnabled(10) result	^\s*iVar17\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),10\);$	+2
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	keyWordPtr	INFERRED	address of the key word array (key, then key+4*n); +0x214 is the per-operand source slot	^\s*iVar17\ =\ param_1;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	keyWordPtr	INFERRED	address of the key word array (key, then key+4*n); +0x214 is the per-operand source slot	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ 0x214\)\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0xb0\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	keyWordPtr	INFERRED	address of the key word array (key, then key+4*n); +0x214 is the per-operand source slot	^\s*iVar17\ =\ iVar17\ \+\ 4;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	isOpcode8bOr8c	INFERRED	IRInst__isOpcode8bOr8c result	^\s*if\ \(\(\(piVar24\[5\]\ \&\ 2U\)\ !=\ 0\)\ \|\|\ \(iVar17\ =\ FUN_001789d4\(piVar24\),\ iVar17\ !=\ 0\)\)$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	testResult	INFERRED	flagBit0 / virtual-call test result	^\s*iVar17\ =\ FUN_00126760\(piVar24\[0x26\]\);$	+3
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	keyWordPtr2	INFERRED	address of the key word array (key, then key+4*n)	^\s*iVar17\ =\ param_1;$@2	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	keyWordPtr2	INFERRED	address of the key word array (key, then key+4*n)	^\s*\*\(int\ \*\)\(iVar17\ \+\ 0x214\)\ =\ iVar19;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	keyWordPtr2	INFERRED	address of the key word array (key, then key+4*n)	^\s*\*\(void\ \*\*\)\(iVar17\ \+\ 0x214\)\ =\ pvVar7;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	keyWordPtr2	INFERRED	address of the key word array (key, then key+4*n)	^\s*\*\(int\ \*\)\(iVar17\ \+\ 0x214\)\ =\ iVar19;$@2	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	keyWordPtr2	INFERRED	address of the key word array (key, then key+4*n)	^\s*iVar17\ =\ iVar17\ \+\ 4;$@2	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	testResult	INFERRED	flagBit0 / virtual-call test result	^\s*iVar17\ =\ FUN_00126760\(piVar24\[0x26\]\);$@2	+3
+use	ValueKey__simplifyModifiersAndAddressing	iVar17	isOpcode8bOr8c	INFERRED	IRInst__isOpcode8bOr8c result	^\s*if\ \(\(\(piVar24\[5\]\ \&\ 2U\)\ ==\ 0\)\ \&\&\ \(iVar17\ =\ FUN_001789d4\(piVar24\),\ iVar17\ ==\ 0\)\)\ \{$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	sourceKindTest	INFERRED	operand record, then ValueKey__sourceKindIs4 / Is1 result	^\s*iVar19\ =\ FUN_001054ec\(piVar24,iVar17\);$	+6
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	operandNumber	INFERRED	operand number 1..n of the key instruction	^\s*for\ \(iVar19\ =\ 1;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	operandNumber	INFERRED	operand number 1..n of the key instruction	^\s*iVar19\ <=\ iVar6;\ iVar19\ =\ iVar19\ \+\ 1\)\ \{$	+2
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	operandNumber	INFERRED	operand number 1..n of the key instruction	^\s*iVar16\ =\ FUN_00105c5c\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xb0\),iVar19\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	operandNumber	INFERRED	operand number 1..n of the key instruction	^\s*if\ \(\(iVar19\ <\ 1\)\ \|\|\ \(iVar14\ =\ FUN_00105594\(iVar16,iVar19\),\ iVar14\ ==\ 0\)\)\ \{$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	operandNumber	INFERRED	operand number 1..n of the key instruction	^\s*iVar16\ =\ FUN_00105594\(iVar16,iVar19\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	operandNumber	INFERRED	operand number 1..n of the key instruction	^\s*FUN_001046c8\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xb0\),iVar19,uVar22\);$	+2
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	kindTest	INFERRED	virtual call (+0x74) / operandKindClass test result	^\s*iVar19\ =\ \(\*\*\(code\ \*\*\)\(\*piVar24\ \+\ 0x74\)\)\(piVar24\);$	+3
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	operandRecordTmp	INFERRED	IRInst__getOperandRecord result	^\s*iVar19\ =\ FUN_001054ec\(\*\(undefined4\ \*\)\(param_1\ \+\ 0xb0\),iVar4\);$	+2
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	newSourceInst	INFERRED	IRInst__getOperandSource(loopPtr7,1): source of the producing copy	^\s*iVar19\ =\ FUN_00105594\(piVar12,1\);$	+3
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	copyIndex	INFERRED	index into the array of created copy instructions	^\s*iVar19\ =\ 0;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	copyIndex	INFERRED	index into the array of created copy instructions	^\s*piVar24\ =\ aiStack_94\ \+\ iVar19\ \+\ \-1;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	copyIndex	INFERRED	index into the array of created copy instructions	^\s*\}\ while\ \(iVar19\ \+\ 1\ !=\ iVar6\);$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	copyIndex	INFERRED	index into the array of created copy instructions	^\s*iVar19\ =\ iVar6;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	copyIndex	INFERRED	index into the array of created copy instructions	^\s*iVar6\ =\ iVar19\ \+\ 1;$	+1
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	copyIndex	INFERRED	index into the array of created copy instructions	^\s*if\ \(iVar19\ \+\ 1\ ==\ 0\)\ goto\ LAB_00181220;$	+2
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	zeroInst	INFERRED	instruction defining the zero constant (+0xb0 of FUN_00123c08 result)	^\s*iVar19\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x238\)\ \+\ 0x6c4\);$	+3
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	zeroInst	INFERRED	instruction defining the zero constant (+0xb0 of FUN_00123c08 result)	^\s*\*\(int\ \*\)\(iVar17\ \+\ 0x214\)\ =\ iVar19;$@2	+2
+use	ValueKey__simplifyModifiersAndAddressing	iVar19	operandCount	INFERRED	operand count of the key instruction (virtual call +0x14), loop bound	^\s*for\ \(iVar4\ =\ 1;\ iVar19\ =\ \(\*\*\(code\ \*\*\)\(\*piVar24\ \+\ 0x14\)\)\(piVar24\),\ iVar4\ <=\ iVar19;$	+2

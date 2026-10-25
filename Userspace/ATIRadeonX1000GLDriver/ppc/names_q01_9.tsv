@@ -1,0 +1,171 @@
+func	FUN_0001e280	gld_prepareBufferBacking	INFERRED	gives a vertex/index buffer object a hardware backing (new-texture or AGP-ref), emits its register packets and flushes the data cache range; returns 1 on success
+func	FUN_0001e730	gld_prepareVertexArrayBuffers	INFERRED	validates the vertex array and prepares the buffer object of every attribute that is enabled in the pending masks (FUN_0001e280), then the element buffer
+local	FUN_0001e280	param_2	bufferObject	INFERRED	buffer object: [0] data descriptor {address, size, ..., kind short at +0xc}, [1] dirty-state word block, [2] backing record, [3] byte flag, [4] backing kind (6 = AGP ref, 7 = new texture)
+local	FUN_0001e280	param_3	mode	INFERRED	0 = default mode (marks the object used)
+local	FUN_0001e280	bVar1	isDefaultMode	INFERRED	mode == 0
+local	FUN_0001e280	puVar12	bufferDesc	INFERRED	*bufferObject: {[0] address, [1] size in bytes, [2] flush length, [3] kind}
+local	FUN_0001e280	puVar6	dirtyState	INFERRED	bufferObject[1]: dirty bit word, cleared on exit
+local	FUN_0001e280	piVar11	commandBuffer	INFERRED	backing record +4: private command buffer receiving the 0x1393 / 0x5c8 / 0x574 / 0x575 packets
+local	FUN_0001e280	puVar9	packetCursor	INFERRED	write cursor after the register packets (extended by the 0x48-word fill in non-default mode)
+local	FUN_0001e280	uVar10	tailBytes	INFERRED	size in bytes of the partial last chunk (0 = none)
+local	FUN_0001e280	local_48	tailMode	INFERRED	gldComputeVertexChunking tailMode output
+local	FUN_0001e280	local_44	chunkCount	INFERRED	number of full chunks
+local	FUN_0001e280	local_40	chunkDwords	INFERRED	chunk size in dwords
+local	FUN_0001e280	local_3c	chunkVerts	INFERRED	vertices (bytes) per chunk
+local	FUN_0001e730	iVar7	arrayDesc	INFERRED	vertexArray[0]: attribute masks at +0x300/+0x304 and available masks at +0x308/+0x30c
+local	FUN_0001e730	iVar6	dirtyState	INFERRED	vertexArray[1]: dirty words +0x84/+0x88, current buffer +0x80
+local	FUN_0001e730	uVar5	pendingMask	INFERRED	attributes whose buffer objects still have to be prepared
+local	FUN_0001e730	iVar8	attrIndex	INFERRED	attribute number (0..0x1f)
+local	FUN_0001e730	uVar9	attrBit	INFERRED	one-bit mask of the attribute (table at DAT_001d91f0)
+local	FUN_0001e730	bVar1	nonePending	INFERRED	pendingMask == 0
+local	FUN_0001e730	iVar3	validateResult	INFERRED	gld_validateVertexArrayStreams result
+local	FUN_0001e730	uVar2	isReady	INFERRED	1 when every attribute buffer is prepared
+local	FUN_00018120	puVar51	packetBase	INFERRED	start of the 0x31000000 draw packet allocated from the command stream (after the optional 0x5c8 wait-until pair)
+local	FUN_00018120	puVar35	packetAlloc	INFERRED	command-stream slot returned by the allocate callback (ctx+0x2998)
+local	FUN_00018120	puVar31	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length
+local	FUN_00018120	dVar23	doubleBias	INFERRED	DOUBLE_001aa1e0 (2^52+2^31 bias) kept in a register for the int-to-double conversions
+local	FUN_00018120	uVar8	bufferWidth16	INFERRED	ctx+0x11e: 16-bit width limit of the copy surface
+local	FUN_00018120	uVar9	bufferHeight16	INFERRED	ctx+0x122: 16-bit height limit of the copy surface
+use	FUN_00018120	puVar30	previousHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length	^\s*puVar30\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x1d8\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\ =\ puVar51\ \+\ 0x4a5;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*\*puVar30\ =\ 0x31080;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\ =\ puVar51\ \+\ 0x4b1;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*\*puVar30\ =\ uVar44;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[2\]\ =\ uVar26;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[4\]\ =\ 0x31080;$	+4
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[7\]\ =\ \(uint\)GH_F2U\(\(float\)\(\(fVar5\ \*\ \(fVar4\ \-\ fVar7\)\)\)\);$	+9
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*\*puVar31\ =\ \(int\)puVar30\ \-\ \(int\)puVar31\ >>\ 2\ \|\ \*puVar31;$	+11
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[10\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000010faU\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xc\]\ =\ 0xc0001000;$	+4
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x11\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001008U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x13\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000010e9U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x15\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000013c7U\);$	+4
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x19\]\ =\ 0x850;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x1b\]\ =\ 0x887;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xbd\]\ =\ 0x82c;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x1d\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000010aeU\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x1f\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001394U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x21\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001380U\);$	+5
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x25\]\ =\ 0x824;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x27\]\ =\ 0x825;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x29\]\ =\ 0x82d;$	+4
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x2d\]\ =\ 0x878;$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x2f\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000013c0U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x31\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000012f0U\);$	+3
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x32\]\ =\ puVar30\[0x32\]\ \&\ 0xfffffffe;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x33\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000012f5U\);$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x34\]\ =\ uVar41;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x34\]\ =\ uVar41\ \&\ 0xfffff7ff;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x35\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000010a2U\);$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x37\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001381U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x38\]\ =\ uVar41;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x38\]\ =\ uVar41\ \&\ 0xfffffffc;$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x39\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x0000109eU\);$	+1
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x3b\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001096U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x3d\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001041U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x3f\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001046U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x41\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001094U\);$	+24
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x8d\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000011aaU\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x8f\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000011abU\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x91\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000011acU\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x93\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000010c0U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x95\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000010c1U\);$	+4
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0x9b\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x0000138aU\);$	+10
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xa5\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001110U\);$	+4
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xa9\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001130U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xab\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001140U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xad\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x000010f4U\);$	+4
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xb1\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001386U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xb3\]\ =\ 0x110f8;$	+3
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xb6\]\ =\ \(uint\)\(\(unsigned\ char\ \*\)0x00001087U\);$	+2
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*puVar30\[0xb8\]\ =\ 0x31080;$	+13
+use	FUN_00018120	puVar30	packetCursor	INFERRED	write cursor through the quad vertex records and the trailing state-restore register pairs	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x299c\)\)\(iVar34,puVar30\ \+\ 0xca\);$	+1
+use	FUN_00018120	uVar25	writeMaskNibble	INFERRED	RB3D_ROPCNTL>>8 & 0xf (0xc without a colour mask): per-channel write mask of the copy	^\s*uVar25\ =\ 0xc;$	+1
+use	FUN_00018120	uVar25	writeMaskNibble	INFERRED	RB3D_ROPCNTL>>8 & 0xf (0xc without a colour mask): per-channel write mask of the copy	^\s*uVar25\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1d38\)\ >>\ 8\ \&\ 0xf;$	+2
+use	FUN_00018120	uVar25	writeMaskNibble	INFERRED	RB3D_ROPCNTL>>8 & 0xf (0xc without a colour mask): per-channel write mask of the copy	^\s*FUN_00020b30\(param_1,param_3,param_4,param_5,param_6,uVar41,uVar43,uVar32,uVar25\ \|\ uVar28\);$	+1
+use	FUN_00018120	uVar28	writeMaskByte	INFERRED	writeMaskNibble << 4 (0xc0 without a colour mask): second copy of the mask	^\s*uVar28\ =\ 0xc0;$	+1
+use	FUN_00018120	uVar28	writeMaskByte	INFERRED	writeMaskNibble << 4 (0xc0 without a colour mask): second copy of the mask	^\s*uVar28\ =\ uVar25\ <<\ 4;$	+1
+use	FUN_00018120	uVar28	writeMaskByte	INFERRED	writeMaskNibble << 4 (0xc0 without a colour mask): second copy of the mask	^\s*FUN_00020b30\(param_1,param_3,param_4,param_5,param_6,uVar41,uVar43,uVar32,uVar25\ \|\ uVar28\);$	+1
+use	FUN_00018120	uVar25	surfaceWidth	INFERRED	bufferWidth16 widened: copy surface width in pixels	^\s*uVar25\ =\ \(uint\)uVar8;$	+1
+use	FUN_00018120	uVar25	surfaceWidth	INFERRED	bufferWidth16 widened: copy surface width in pixels	^\s*if\ \(\(uVar25\ <\ 0x1001\)\ \&\&\ \(uVar28\ <\ 0x1001\)\)\ \{$	+1
+use	FUN_00018120	uVar25	surfaceWidth	INFERRED	bufferWidth16 widened: copy surface width in pixels	^\s*uVar47\ =\ uVar25\ \-\ 1;$	+1
+use	FUN_00018120	uVar25	surfaceWidth	INFERRED	bufferWidth16 widened: copy surface width in pixels	^\s*if\ \(uVar25\ !=\ 0\)\ \{$	+1
+use	FUN_00018120	uVar25	surfaceWidth	INFERRED	bufferWidth16 widened: copy surface width in pixels	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,uVar25\ \^\ 0x80000000\)\ \-\ DOUBLE_001aa1e0\);$	+1
+use	FUN_00018120	uVar25	surfaceWidth	INFERRED	bufferWidth16 widened: copy surface width in pixels	^\s*uVar39\ =\ uVar25\ \-\ uVar43;$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*uVar28\ =\ \(uint\)uVar9;$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*if\ \(\(uVar25\ <\ 0x1001\)\ \&\&\ \(uVar28\ <\ 0x1001\)\)\ \{$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*if\ \(\(0x40\ <\ uVar28\)\ \&\&\ \(uVar41\ =\ uVar9\ \&\ 0xffc0,\ \(int\)\(uVar28\ \-\ uVar41\)\ <\ 0x40\)\)\ \{$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*uVar48\ =\ uVar28\ \-\ 1;$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*if\ \(uVar28\ !=\ 0\)\ \{$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*\(float\)\(\(double\)CONCAT44\(0x43300000,uVar28\ \^\ 0x80000000\)\ \-\ DOUBLE_001aa1e0\);$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*uVar36\ =\ uVar28\ \-\ uVar46;$	+1
+use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*if\ \(\(int\)\(uVar37\ \+\ 0x1000\)\ <=\ \(int\)uVar28\)\ \{$	+1
+use	FUN_00018120	uVar25	surfaceWidth	INFERRED	bufferWidth16 widened: copy surface width in pixels	^\s*if\ \(\(int\)\(uVar44\ \+\ 0x1000\)\ <=\ \(int\)uVar25\)\ \{$	+1
+local	FUN_0002ddf0	piVar30	hwState	INFERRED	texture+0x3c: the texture's hardware register shadow words (+0x50 filter, +0x58 format, +0x60 size/layout ...), passed to FUN_0002d030/FUN_0002d210 and gldPackColorForSurfaceFormat
+local	FUN_0002ddf0	puVar27	texImages	CONFIRMED	texture[0xc]: the image-level record array (same object as texImages in gldTextureMakeResident)
+local	FUN_0002ddf0	bVar25	textureTarget	INFERRED	(texImages+1) & 0xf: 0 = 1D-like, 1 = 2D-like, 2 = 3D, 3 = cube, 4 = rectangle; selects the size derivation
+func	FUN_00024970	gld_drawElementsImmediate	INFERRED	copies a client index array (UNSIGNED_BYTE/SHORT/INT) into the command stream as packed 16-bit indices, subtracting a bias, after the 0x26000000 vertex-fetch state packet and a 0x82c/0xc0003600 index-draw header
+local	FUN_00024970	param_2	glStateBlock	INFERRED	pointer into the GL state block (negative offsets -0x74/-0x68/-0x64 reach the current vertex-array bindings and engine register shadows)
+local	FUN_00024970	param_3	primitiveMode	CONFIRMED	GL primitive mode (0..9); also indexes the primitive-flags table at DAT_001d97e8
+local	FUN_00024970	param_4	indexBias	INFERRED	value subtracted from every index (base vertex) before it is written
+local	FUN_00024970	param_5	indexCount	CONFIRMED	number of indices; forwarded to FUN_0002cc30 which returns the trimmed count
+local	FUN_00024970	param_6	indexType	CONFIRMED	GL index type: 0x1401 UNSIGNED_BYTE, 0x1403 UNSIGNED_SHORT, 0x1405 UNSIGNED_INT
+local	FUN_00024970	param_7	indices	CONFIRMED	client index array
+local	FUN_00024970	puVar2	packetBody	INFERRED	32-byte aligned body of the 0x26000000 vertex-fetch state packet
+local	FUN_00024970	puVar5	packetTail	INFERRED	end of the state packet: the 0x82c / 0xc0003600 index-draw header is written here
+local	FUN_00024970	uVar6	registerValue	INFERRED	value copied into the register pair being written
+local	FUN_00024970	iVar8	indexDwords	INFERRED	(trimmed count + 1) >> 1: number of dwords holding the packed 16-bit indices
+use	FUN_00024970	puVar4	packetAlloc	INFERRED	command-stream slot returned by the allocate callback (ctx+0x2998)	^\s*puVar4\ =\ \(uint\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2998\)\)\(param_1\ \+\ 0x240,uVar10\);$	+2
+use	FUN_00024970	puVar4	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x1d8\);$	+1
+use	FUN_00024970	puVar4	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length	^\s*\*puVar4\ =\ \(int\)puVar2\ \-\ \(int\)puVar4\ >>\ 2\ \|\ \*puVar4;$	+1
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\ =\ puVar5\ \+\ 4;$	+1
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ \(uint\)\*\(ushort\ \*\)puVar7\ \-\ param_4\ \&\ 0xffff\ \|$	+1
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\ =\ puVar4\ \+\ 1;$	+1
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ \(uint\)\*\(ushort\ \*\)\(uVar10\ \*\ 2\ \+\ \(int\)param_7\)\ \-\ param_4\ \&\ 0xffff;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[1\]\ =\ param_7\[2\]\ \|\ param_7\[3\]\ <<\ 0x10;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[3\]\ =\ param_7\[6\]\ \|\ param_7\[7\]\ <<\ 0x10;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[5\]\ =\ param_7\[10\]\ \|\ param_7\[0xb\]\ <<\ 0x10;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[6\]\ =\ \*puVar1\ \|\ \*puVar7\ <<\ 0x10;$	+3
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ uVar11\ \|\ \*puVar7\ <<\ 0x10;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ \(uint\)\(ushort\)\*param_7;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[1\]\ =\ param_7\[2\]\ \-\ param_4\ \|\ \(param_7\[3\]\ \-\ param_4\)\ \*\ 0x10000;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[3\]\ =\ \(param_7\[7\]\ \-\ param_4\)\ \*\ 0x10000\ \|\ param_7\[6\]\ \-\ param_4\ \&\ 0xffff;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[5\]\ =\ \(param_7\[0xb\]\ \-\ param_4\)\ \*\ 0x10000\ \|\ param_7\[10\]\ \-\ param_4\ \&\ 0xffff;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[6\]\ =\ \(\*puVar1\ \-\ param_4\)\ \*\ 0x10000\ \|\ \*puVar7\ \-\ param_4\ \&\ 0xffff;$	+3
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ \(\*puVar7\ \-\ param_4\)\ \*\ 0x10000\ \|\ uVar11\ \-\ param_4\ \&\ 0xffff;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ \*param_7\ \-\ param_4\ \&\ 0xffff;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ \(uint\)\*\(byte\ \*\)puVar7\ \-\ param_4\ \&\ 0xffff\ \|$	+1
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\ =\ puVar4\ \+\ 1;$@7	+1
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_7\ \+\ uVar10\)\ \-\ param_4\ \&\ 0xffff;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[1\]\ =\ 0;$	+4
+use	FUN_00024970	uVar12	cacheLineSize	CONFIRMED	ctx+8 cacheLineSize: stride of the dcbz loop that pre-zeroes the packet	^\s*uVar12\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_00024970	uVar12	cacheLineSize	CONFIRMED	ctx+8 cacheLineSize: stride of the dcbz loop that pre-zeroes the packet	^\s*if\ \(uVar12\ !=\ 0x20\)\ \{$	+1
+use	FUN_00024970	uVar12	cacheLineSize	CONFIRMED	ctx+8 cacheLineSize: stride of the dcbz loop that pre-zeroes the packet	^\s*uVar10\ =\ uVar12;$	+1
+use	FUN_00024970	uVar12	cacheLineSize	CONFIRMED	ctx+8 cacheLineSize: stride of the dcbz loop that pre-zeroes the packet	^\s*uVar10\ =\ uVar10\ \+\ uVar12;$	+1
+use	FUN_00024970	uVar12	primitiveFlags	INFERRED	DAT_001d97e8[primitiveMode]: primitive type bits of the draw header	^\s*uVar12\ =\ \*\(uint\ \*\)\(param_3\ \*\ 4\ \+\ 0x1d97e8\);$	+1
+use	FUN_00024970	uVar12	primitiveFlags	INFERRED	DAT_001d97e8[primitiveMode]: primitive type bits of the draw header	^\s*puVar5\[3\]\ =\ iVar3\ <<\ 0x10\ \|\ uVar12\ \&\ 0xf\ \|\ 0x10;$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*uVar12\ =\ iVar3\ \-\ 1;$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(uVar12\ !=\ 0\)\ \{$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*\}\ while\ \(uVar10\ <\ uVar12\);$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(\(uVar12\ \&\ 1\)\ ==\ 0\)\ \{$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*iVar3\ =\ \(int\)uVar12\ >>\ 4;$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(\(uVar12\ \&\ 0xf\)\ !=\ 0\)\ \{$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*\}\ while\ \(uVar10\ <\ \(uVar12\ \&\ 0xf\)\);$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(\(uVar12\ \&\ 1\)\ ==\ 0\)\ \{$@2	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(\(uVar12\ \&\ 0xf\)\ !=\ 0\)\ \{$@2	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*\}\ while\ \(uVar10\ <\ \(uVar12\ \&\ 0xf\)\);$@2	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(\(uVar12\ \&\ 1\)\ ==\ 0\)\ \{$@3	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(uVar12\ !=\ 0\)\ \{$@2	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*\}\ while\ \(uVar10\ <\ uVar12\);$@2	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(\(uVar12\ \&\ 1\)\ ==\ 0\)\ \{$@4	+1
+use	FUN_00024970	iVar3	trimmedCount	INFERRED	index count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)	^\s*iVar3\ =\ \(\(uint\ \(\*\)\(\)\)FUN_0002cc30\)\(param_1,1,param_3,param_5,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4$	+1
+use	FUN_00024970	iVar3	trimmedCount	INFERRED	index count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)	^\s*if\ \(iVar3\ !=\ 0\)\ \{$	+1
+use	FUN_00024970	iVar3	trimmedCount	INFERRED	index count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)	^\s*iVar8\ =\ iVar3\ \+\ 1\ >>\ 1;$	+1
+use	FUN_00024970	iVar3	trimmedCount	INFERRED	index count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)	^\s*puVar5\[3\]\ =\ iVar3\ <<\ 0x10\ \|\ uVar12\ \&\ 0xf\ \|\ 0x10;$	+2
+use	FUN_00024970	iVar3	blockCount	INFERRED	number of 16-index blocks copied by the unrolled loop	^\s*iVar3\ =\ \(int\)uVar12\ >>\ 4;$	+1
+use	FUN_00024970	iVar3	blockCount	INFERRED	number of 16-index blocks copied by the unrolled loop	^\s*if\ \(iVar3\ !=\ 0\)\ \{$@2	+3
+use	FUN_00024970	iVar3	blockCount	INFERRED	number of 16-index blocks copied by the unrolled loop	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
+use	FUN_00024970	iVar3	blockCount	INFERRED	number of 16-index blocks copied by the unrolled loop	^\s*if\ \(iVar3\ !=\ 0\)\ \{$@3	+3
+use	FUN_00024970	iVar3	blockCount	INFERRED	number of 16-index blocks copied by the unrolled loop	^\s*iVar3\ =\ iVar3\ \+\ \-1;$@2	+2
+use	FUN_00024970	puVar4	packetAlloc	INFERRED	command-stream slot returned by the allocate callback (ctx+0x2998)	^\s*dataCacheBlockClearToZero\(\(int\)puVar4\ \+\ uVar10\);$	+1
+use	FUN_00024970	puVar4	packetAlloc	INFERRED	command-stream slot returned by the allocate callback (ctx+0x2998)	^\s*puVar2\ =\ \(undefined4\ \*\)\(\(uint\)\(puVar4\ \+\ 0xb\)\ \&\ 0xffffffe0\);$	+3

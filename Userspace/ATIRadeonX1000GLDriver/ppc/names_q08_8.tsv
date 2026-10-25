@@ -1,0 +1,69 @@
+local	ValueKey__mixLiteralSources	local_138	literalMovTable	INFERRED	stack record: word 0 scratch select word, words 1..5 the literal move instruction created per operand (zeroed at entry)
+local	ValueKey__mixLiteralSources	local_120	literalCountPad	INFERRED	first word of the per-operand highest-literal-index array (with local_11c)
+local	ValueKey__mixLiteralSources	local_11c	literalCountByOperand	INFERRED	per-operand highest literal slot index used (starts at 1)
+local	ValueKey__mixLiteralSources	local_10c	identitySelects	INFERRED	per-operand select word, initialised to 0x01010101 (identity)
+local	ValueKey__mixLiteralSources	uStack_fc	identitySelectsTail	INFERRED	last word of identitySelects (indexed up to operand 4)
+local	ValueKey__mixLiteralSources	local_f8	defaultSelects	INFERRED	per-operand select word initialised to 0x04040404
+local	ValueKey__mixLiteralSources	local_e4	literalPool	INFERRED	five rows of four floats initialised to -1.0 (0xbf800000): literal pool searched by ValueKey__findOrInsertLiteral
+local	ValueKey__mixLiteralSources	local_88	foldedValue	INFERRED	out-parameter of IRInst__foldCompareConstResult
+local	ValueKey__mixLiteralSources	local_68	literalMovTableAlias	INFERRED	pointer copy of literalMovTable
+local	ValueKey__mixLiteralSources	local_6c	picBaseA	INFERRED	PIC base (&DAT_001ab134) for the data table words
+local	ValueKey__mixLiteralSources	local_74	picBaseB	INFERRED	PIC base (&DAT_001ab134) for the data table words
+local	ValueKey__mixLiteralSources	local_70	literalPoolAlias	INFERRED	pointer copy of literalPool
+local	ValueKey__mixLiteralSources	local_78	literalCountAlias	INFERRED	pointer copy of literalCountByOperand
+local	ValueKey__mixLiteralSources	local_7c	literalCountPadAlias	INFERRED	pointer copy of literalCountPad
+local	ValueKey__mixLiteralSources	local_80	literalMovAlias	INFERRED	pointer to literalMovTable[2] (operand 1 entry)
+use	ValueKey__mixLiteralSources	bVar1	moreIterations	INFERRED	loop continues while the counter is not at its last value	^\s*bVar1\ =\ iVar5\ !=\ 4;$	+1
+use	ValueKey__mixLiteralSources	bVar1	moreIterations	INFERRED	loop continues while the counter is not at its last value	^\s*\}\ while\ \(bVar1\);$	+1
+use	ValueKey__mixLiteralSources	bVar1	moreIterations	INFERRED	loop continues while the counter is not at its last value	^\s*bVar1\ =\ iVar7\ !=\ 3;$	+1
+use	ValueKey__mixLiteralSources	bVar1	moreIterations	INFERRED	loop continues while the counter is not at its last value	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	ValueKey__mixLiteralSources	bVar1	moreIterations	INFERRED	loop continues while the counter is not at its last value	^\s*bVar1\ =\ iVar7\ !=\ 3;$@2	+1
+use	ValueKey__mixLiteralSources	bVar1	moreIterations	INFERRED	loop continues while the counter is not at its last value	^\s*\}\ while\ \(bVar1\);$@3	+1
+use	ValueKey__mixLiteralSources	bVar1	moreIterations	INFERRED	loop continues while the counter is not at its last value	^\s*bVar1\ =\ iVar21\ !=\ 3;$	+1
+use	ValueKey__mixLiteralSources	bVar1	moreIterations	INFERRED	loop continues while the counter is not at its last value	^\s*\}\ while\ \(bVar1\);$@4	+1
+use	ValueKey__mixLiteralSources	bVar2	laneSelectByte	INFERRED	select byte of the current lane (operand record +0x10 byte)	^\s*bVar2\ =\ \*\(byte\ \*\)\(iVar7\ \+\ iVar10\ \+\ 0x10\);$	+2
+use	ValueKey__mixLiteralSources	bVar2	laneSelectByte	INFERRED	select byte of the current lane (operand record +0x10 byte)	^\s*\*\(byte\ \*\)\(\(int\)local_68\ \+\ iVar10\ \+\ 0x40\)\ =\ bVar2;$	+1
+use	ValueKey__mixLiteralSources	bVar2	laneSelectByte	INFERRED	select byte of the current lane (operand record +0x10 byte)	^\s*\(\*a6\)\(\(int\ \*\)\*piVar8,iVar6,\(uint\)bVar2,iVar7,in_r7,in_r8,a6\);$	+1
+use	ValueKey__mixLiteralSources	fparam_1	literalValueArg	INFERRED	literal value passed in the first FPR argument	^\s*fparam_1\ =\ \(double\)local_88;$	+2
+use	ValueKey__mixLiteralSources	fparam_1	literalValueArg	INFERRED	literal value passed in the first FPR argument	^\s*\(\(void\ \(\*\)\(\)\)FUN_0010bd50\)\(\*piVar8,\(int\)uVar22,iVar7,\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),fparam_1$	+2
+local	ValueKey__mixLiteralSources	in_r7	staleArg5	INFERRED	stale argument register r7 forwarded to the indirect call
+local	ValueKey__mixLiteralSources	in_r8	staleArg6	INFERRED	stale argument register r8 forwarded to the indirect call
+use	ValueKey__mixLiteralSources	piVar3	literalMovTableBase	INFERRED	copy of literalMovTableAlias	^\s*piVar3\ =\ local_68;$	+1
+use	ValueKey__mixLiteralSources	piVar3	literalMovTableBase	INFERRED	copy of literalMovTableAlias	^\s*\*\(undefined1\ \*\)\(\(int\)piVar3\ \+\ iVar10\ \+\ 0x40\)\ =\ 4;$	+1
+use	ValueKey__mixLiteralSources	iVar14	laneUsedPtr	INFERRED	address of the lane-used flags of operand n (key+0x224+4n)	^\s*iVar14\ =\ param_1\ \+\ 0x224;$	+1
+use	ValueKey__mixLiteralSources	iVar14	laneUsedPtr	INFERRED	address of the lane-used flags of operand n (key+0x224+4n)	^\s*pcVar19\ =\ \(char\ \*\)\(iVar14\ \+\ 4\);$	+1
+use	ValueKey__mixLiteralSources	iVar14	laneUsedPtr	INFERRED	address of the lane-used flags of operand n (key+0x224+4n)	^\s*iVar14\ =\ iVar14\ \+\ 4;$	+1
+use	ValueKey__mixLiteralSources	iVar14	valueNumber	INFERRED	value number read from the defining instruction (+0x20)	^\s*iVar14\ =\ \*\(int\ \*\)\(iVar21\ \*\ 4\ \+\ iVar15\ \+\ 0x20\);$	+3
+use	ValueKey__mixLiteralSources	iVar14	isRepresentable	INFERRED	result of the limits object test (vtable +0xf0) on the literal	^\s*iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x238\)\ \+\ 0x30c\)\ \+\ 0xf0\)\)$	+1
+use	ValueKey__mixLiteralSources	iVar14	isRepresentable	INFERRED	result of the limits object test (vtable +0xf0) on the literal	^\s*if\ \(iVar14\ !=\ 0\)\ \{$	+1
+use	ValueKey__mixLiteralSources	iVar14	isForwardableMov	INFERRED	result of the virtual call at vtable +0x60	^\s*iVar14\ =\ \(\*\*\(code\ \*\*\)\(\*piVar12\ \+\ 0x60\)\)\(piVar12\);$	+2
+use	ValueKey__mixLiteralSources	iVar14	operandNumber	INFERRED	operand number 1..count	^\s*for\ \(iVar14\ =\ 1;$@2	+3
+use	ValueKey__mixLiteralSources	iVar6	movOrFlag	INFERRED	limits-test result, replaced by the new literal move instruction when none exists yet	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x238\)\ \+\ 0x30c\)\ \+\ 0xf0\)\)$	+1
+use	ValueKey__mixLiteralSources	iVar6	movOrFlag	INFERRED	limits-test result, replaced by the new literal move instruction when none exists yet	^\s*if\ \(iVar6\ !=\ 0\)\ \{$	+1
+use	ValueKey__mixLiteralSources	iVar6	movOrFlag	INFERRED	limits-test result, replaced by the new literal move instruction when none exists yet	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_00179138\)\(param_1,iVar15\);$	+2
+use	ValueKey__mixLiteralSources	iVar6	movOrFlag	INFERRED	limits-test result, replaced by the new literal move instruction when none exists yet	^\s*uVar22\ =\ \(\(int\ \(\*\)\(\)\)FUN_00176474\)\(iVar6,local_70,iVar15,\(double\)\*pfVar9\);$	+1
+use	ValueKey__mixLiteralSources	iVar6	literalIndex	INFERRED	literal index returned by ValueKey__findOrInsertLiteral (high word)	^\s*iVar6\ =\ \(int\)\(\(ulonglong\)uVar22\ >>\ 0x20\);$	+5
+use	ValueKey__mixLiteralSources	iVar6	literalIndex	INFERRED	literal index returned by ValueKey__findOrInsertLiteral (high word)	^\s*\(\*a6\)\(\(int\ \*\)\*piVar8,iVar6,\(uint\)bVar2,iVar7,in_r7,in_r8,a6\);$	+1
+use	ValueKey__mixLiteralSources	uVar16	lastEntryIndex	INFERRED	filled count of the defining-instruction vector minus 1	^\s*uVar16\ =\ uVar18\ \-\ 1;$	+4
+use	ValueKey__mixLiteralSources	uVar16	lastEntryIndex	INFERRED	filled count of the defining-instruction vector minus 1	^\s*piVar8\ =\ \(int\ \*\)\(uVar16\ \*\ 4\ \+\ puVar20\[2\]\);$	+1
+use	ValueKey__mixLiteralSources	uVar16	lastEntryIndex	INFERRED	filled count of the defining-instruction vector minus 1	^\s*piVar8\ =\ \(int\ \*\)FUN_0019423c\(puVar20,uVar16\);$	+1
+use	ValueKey__mixLiteralSources	uVar18	lastEntryIndex2	INFERRED	filled count of the defining-instruction vector minus 1	^\s*uVar18\ =\ uVar16\ \-\ 1;$	+4
+use	ValueKey__mixLiteralSources	uVar18	lastEntryIndex2	INFERRED	filled count of the defining-instruction vector minus 1	^\s*puVar13\ =\ \(undefined4\ \*\)\(uVar18\ \*\ 4\ \+\ puVar20\[2\]\);$	+1
+use	ValueKey__mixLiteralSources	uVar18	lastEntryIndex2	INFERRED	filled count of the defining-instruction vector minus 1	^\s*puVar13\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar20,uVar18\);$	+1
+use	ValueKey__mixLiteralSources	uVar22	literalResult	INFERRED	64-bit result of ValueKey__findOrInsertLiteral (index in the high word)	^\s*uVar22\ =\ \(\(int\ \(\*\)\(\)\)FUN_00176474\)\(iVar6,local_70,iVar15,\(double\)\*pfVar9\);$	+2
+use	ValueKey__mixLiteralSources	uVar22	literalResult	INFERRED	64-bit result of ValueKey__findOrInsertLiteral (index in the high word)	^\s*\(\(void\ \(\*\)\(\)\)FUN_0010bd50\)\(\*piVar8,\(int\)uVar22,iVar6,\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),$	+2
+use	ValueKey__mixLiteralSources	uVar22	literalResult	INFERRED	64-bit result of ValueKey__findOrInsertLiteral (index in the high word)	^\s*uVar22\ =\ \(\(int\ \(\*\)\(\)\)FUN_00176474\)\(uVar4,local_70,iVar14,fparam_1\);$	+2
+use	ValueKey__mixLiteralSources	uVar22	literalResult	INFERRED	64-bit result of ValueKey__findOrInsertLiteral (index in the high word)	^\s*\(\(void\ \(\*\)\(\)\)FUN_0010bd50\)\(\*piVar8,\(int\)uVar22,iVar7,\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),fparam_1$	+2
+use	ValueKey__mixLiteralSources	uVar4	operandRegisterKind	INFERRED	register field of the operand (or of its source)	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ iVar7\ \+\ 0x98\);$	+1
+use	ValueKey__mixLiteralSources	uVar4	operandRegisterKind	INFERRED	register field of the operand (or of its source)	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0x98\);$	+1
+use	ValueKey__mixLiteralSources	uVar4	operandRegisterKind	INFERRED	register field of the operand (or of its source)	^\s*iVar7\ =\ FUN_0012678c\(uVar4\);$	+1
+use	ValueKey__mixLiteralSources	uVar4	defaultSelectWord	INFERRED	select word read from the data table	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\(\(unsigned\ char\ \*\)0x000050a8\)\ \+\ \(int\)local_74\);$	+1
+use	ValueKey__mixLiteralSources	uVar4	defaultSelectWord	INFERRED	select word read from the data table	^\s*\*\(undefined4\ \*\)\(\(int\)local_f8\ \+\ iVar5\)\ =\ uVar4;$	+1
+use	ValueKey__mixLiteralSources	uVar4	foldedHandle	INFERRED	result of IRInst__foldCompareConstResult	^\s*uVar4\ =\ FUN_0010b93c\(\&local_88,\ \*\(undefined4\ \*\)\(param_1\ \+\ 0xb0\),\ iVar14,\ \*\(unsigned\ int\ \*\)pfVar9,\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x238\)\);$	+1
+use	ValueKey__mixLiteralSources	uVar4	foldedHandle	INFERRED	result of IRInst__foldCompareConstResult	^\s*uVar22\ =\ \(\(int\ \(\*\)\(\)\)FUN_00176474\)\(uVar4,local_70,iVar14,fparam_1\);$	+1
+use	ValueKey__mixLiteralSources	uVar4	savedIdentitySelect	INFERRED	identitySelects entry for the operand	^\s*uVar4\ =\ \(\&uStack_fc\)\[iVar21\];$	+1
+use	ValueKey__mixLiteralSources	uVar4	savedIdentitySelect	INFERRED	identitySelects entry for the operand	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar4;$	+1
+use	ValueKey__mixLiteralSources	uVar4	operandKey	INFERRED	ValueKey element of the operand	^\s*uVar4\ =\ \*puVar13;$	+6
+use	ValueKey__mixLiteralSources	iVar10	operandSource	INFERRED	IRInst__getOperandSource result tested for null	^\s*if\ \(\(iVar15\ <\ 1\)\ \|\|\ \(iVar10\ =\ FUN_00105594\(iVar7,iVar15\),\ iVar10\ ==\ 0\)\)\ \{$	+1
+use	ValueKey__mixLiteralSources	iVar10	slotOffset	INFERRED	lane select byte + operand index * 4: slot in the per-operand tables	^\s*iVar10\ =\ \(uint\)bVar2\ \+\ iVar15\ \*\ 4;$	+3
+use	ValueKey__mixLiteralSources	iVar10	slotOffset	INFERRED	lane select byte + operand index * 4: slot in the per-operand tables	^\s*\*\(undefined1\ \*\)\(\(int\)piVar3\ \+\ iVar10\ \+\ 0x40\)\ =\ 4;$	+1
