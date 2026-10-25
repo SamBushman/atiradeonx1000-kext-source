@@ -1042,7 +1042,7 @@ int Inst__takeOutCommonFactor(param_1, pass)
   int *chainHeadSlotC;
   int *chainHeadSlotB;
   int *chainEndSlotC;
-  undefined4 uVar23;
+  undefined4 maskedSelect;
   uint uVar24;
   uint *modPtr;
   int *inst8;
@@ -1152,7 +1152,7 @@ LAB_0015a760:
     } while (userCount != userIndex);
     if (1 < iVar17) {
       iVar17 = 0;
-      uVar23 = 0;
+      maskedSelect = 0;
       do {
         slotOffset = iVar17 * 4;
         chainHeadSlotB = (int *)(allocation2 + slotOffset);
@@ -1372,9 +1372,9 @@ LAB_0015b040:
                     operandRecord = IRInst__getOperandRecord(newMul,0);
                     WriteMask__fromSelectWord(&writeMaskOut,*(undefined4 *)(operandRecord + 0x10));
                     SelectWord__maskUnused(&maskedSelectOut,0x10203,writeMaskOut);
-                    uVar23 = maskedSelectOut;
+                    maskedSelect = maskedSelectOut;
                     operandRecord = IRInst__getOperandRecord(newMul,2);
-                    *(undefined4 *)(operandRecord + 0x10) = uVar23;
+                    *(undefined4 *)(operandRecord + 0x10) = maskedSelect;
                     Block__insertInstAfter(*(undefined4 *)(*chainEndSlotC + 0x158),*chainEndSlotC,newMul);
                     if (*chainHeadSlotB == *chainEndSlotA) {
                       newSource3 = (int *)*chainEndSlotC;
@@ -1471,11 +1471,11 @@ LAB_0015b3f0:
                       *chainHeadSlotC = 0;
                     }
                     if ((*(uint *)(*chainHeadSlotB + 0x14) & 1) == 0) {
-                      uVar23 = 1;
+                      maskedSelect = 1;
                       iVar17 = nextIndex;
                       break;
                     }
-                    uVar23 = 1;
+                    maskedSelect = 1;
                   }
                 }
               }
@@ -1491,7 +1491,7 @@ LAB_0015b3f0:
           Arena__free(*(undefined4 *)(*(int *)(pass + 8) + 0x378),allocation);
           Arena__free(*(undefined4 *)(*(int *)(pass + 8) + 0x378),allocation3);
           Arena__free(*(undefined4 *)(*(int *)(pass + 8) + 0x378),allocation2);
-          return uVar23;
+          return maskedSelect;
         }
       } while( true );
     }

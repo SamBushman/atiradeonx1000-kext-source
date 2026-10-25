@@ -1602,7 +1602,7 @@ int FUN_000a3be0(glContext, primitiveMode, param_3, unusedArgR6, param_5, extraA
   *(undefined4 *)(glContext + 0x1ba8) = *(undefined4 *)(glContext + 0x1ba0);
   if (!bVar1) goto LAB_000a41d0;
   if ((*(uint *)(glContext + 0x44) & 0x100000) == 0) {
-    FUN_000900a0(glContext);
+    ffvpComputeOutputMasks(glContext);
   }
   else {
     FUN_00064720(glContext);
@@ -3397,9 +3397,9 @@ LAB_000a6564:
 }
 
 /* FUN_000a6860 @ 0xa6860 (1096 bytes) */
-int FUN_000a6860(glContext, param_2)
+int FUN_000a6860(glContext, dirtyMask)
   int glContext;
-  uint param_2;
+  uint dirtyMask;
 {
   undefined4 glContextWord1b84;
   uint uVar1;
@@ -3456,10 +3456,10 @@ int FUN_000a6860(glContext, param_2)
   fVar3 = (float)((double)CONCAT44(0x43300000,i2dLo2) - DOUBLE_001aa1e0);
   fVar4 = (float)((double)CONCAT44(0x43300000,uStack_7c) - DOUBLE_001aa1e0);
   fVar5 = (float)((double)CONCAT44(0x43300000,uStack_84) - DOUBLE_001aa1e0);
-  if (((param_2 & 0x400) == 0) || (iVar20 = 1, ((unsigned char *)0x00001491)[glContext] == '\0')) {
+  if (((dirtyMask & 0x400) == 0) || (iVar20 = 1, ((unsigned char *)0x00001491)[glContext] == '\0')) {
     iVar20 = 0;
   }
-  if (((param_2 & 0x100) == 0) || (iVar21 = 1, ((unsigned char *)0x00001490)[glContext] == '\0')) {
+  if (((dirtyMask & 0x100) == 0) || (iVar21 = 1, ((unsigned char *)0x00001490)[glContext] == '\0')) {
     iVar21 = 0;
   }
   iVar16 = iVar21;
@@ -3670,26 +3670,26 @@ int noop_a6f80()
 }
 
 /* FUN_000a6f90 @ 0xa6f90 (168 bytes) */
-void FUN_000a6f90(float *param_1,float *param_2,double fpPassThrough1)
+void FUN_000a6f90(float *outVector,float *inVector,double fpPassThrough1)
 {
   float fVar1;
   float fVar2;
   double dVar3;
   
   fVar1 = FLOAT_001aa0d4;
-  fVar2 = *param_2;
-  dVar3 = (double)(param_2[2] * param_2[2] + fVar2 * fVar2 + param_2[1] * param_2[1]);
+  fVar2 = *inVector;
+  dVar3 = (double)(inVector[2] * inVector[2] + fVar2 * fVar2 + inVector[1] * inVector[1]);
   if (dVar3 <= (double)FLOAT_001aa0d4) {
-    param_1[2] = FLOAT_001aa0d4;
-    *param_1 = fVar1;
-    param_1[1] = fVar1;
+    outVector[2] = FLOAT_001aa0d4;
+    *outVector = fVar1;
+    outVector[1] = fVar1;
   }
   else {
     dVar3 = _sqrt(dVar3);
     fVar1 = (float)(DOUBLE_001aa200 / dVar3);
-    *param_1 = fVar2 * fVar1;
-    param_1[1] = fVar1 * param_2[1];
-    param_1[2] = fVar1 * param_2[2];
+    *outVector = fVar2 * fVar1;
+    outVector[1] = fVar1 * inVector[1];
+    outVector[2] = fVar1 * inVector[2];
   }
   return;
 }

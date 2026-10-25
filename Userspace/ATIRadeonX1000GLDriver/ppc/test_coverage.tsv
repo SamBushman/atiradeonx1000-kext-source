@@ -204,7 +204,7 @@
 0x1bac0	gld_emitFramebufferState	904	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
 0x1be50	dxt5EncodeAlphaBlock	868	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x1c1c0	dxt1DecodeColorIndex	416	yes	
-0x1c380	FUN_0001c380	3664	yes	
+0x1c380	dxtCompressImage	3664	yes	
 0x1d1e0	dxtDecompressImage	1376	yes	
 0x1d7c0	floatToHalfBits	148	yes	
 0x1d880	gld_validateVertexArrayStreams	704	yes	
@@ -265,7 +265,7 @@
 0x26f80	FUN_00026f80	460	no	calls an import (io_connect_method_scalarI_scalarO)
 0x27150	gld_drawArraysStream	564	yes	
 0x273a0	gld_reserveDrawSpace	1484	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x27990	FUN_00027990	2360	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x27990	gld_buildVertexStreamCache	2360	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x28350	gld_readPixelsViaBlit	3820	no	atomic / cache / barrier instruction; calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x29290	glReadPixels_entry	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x29294	glReadPixels_impl	2376	no	calls an import (glgConvertType); calls an import (glgProcessPixels); calls an import (io_connect_method_structureI_structureO)
@@ -288,7 +288,7 @@
 0x2c020	gld_revalidateStreamProgram	148	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x2c0c0	gld_emitVapStreamControl	180	yes	
 0x2c180	gld_emitStreamAddressRegisters	164	yes	
-0x2c230	FUN_0002c230	1144	no	calls an import (io_connect_method_scalarI_structureI); indirect call (driver context / vtable / callback)
+0x2c230	gld_validateStreamState	1144	no	calls an import (io_connect_method_scalarI_structureI); indirect call (driver context / vtable / callback)
 0x2c6c0	FUN_0002c6c0	184	no	calls an import (exit)
 0x2c790	gld_initContextHardwareState	932	no	calls an import (io_connect_method_scalarI_scalarO); calls an import (malloc)
 0x2cb40	gldContextFreeResources	200	no	calls an import (free); calls an import (vfree)
@@ -306,7 +306,7 @@
 0x2f410	window_mode_to_ati_format	148	yes	
 0x2f4d0	gldTextureFormatCodeMatchesType	708	yes	
 0x2f7c0	gldTextureFormatCodeFromFormatType	716	yes	
-0x2fac0	FUN_0002fac0	2252	yes	
+0x2fac0	gld_selectTextureHardwareFormat	2252	yes	
 0x303d0	gldCompressedImageBytes	68	yes	
 0x30420	FUN_00030420	392	yes	
 0x305b0	FUN_000305b0	492	yes	
@@ -329,7 +329,7 @@
 0x32100	gldTextureMakeResident	8252	yes	
 0x341a0	FUN_000341a0	92	yes	
 0x34200	glGenerateMipmap_impl	4472	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock); indirect call (driver context / vtable / callback)
-0x353a0	FUN_000353a0	5656	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock); indirect call (driver context / vtable / callback)
+0x353a0	glCopyTexSubImage_impl	5656	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock); indirect call (driver context / vtable / callback)
 0x369f0	glTexSubImage_impl	9972	no	atomic / cache / barrier instruction; calls an import (glgConvertType); calls an import (glgProcessPixels)
 0x39100	gld_testRendererAvailable	188	yes	
 0x391d0	gldRendererFamilyString	28	yes	
@@ -447,7 +447,7 @@
 0x4f550	gldValidateScissor	452	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x4f720	gldInitStateDefaults	1348	yes	
 0x4fc80	FUN_0004fc80	252	yes	
-0x4fd80	FUN_0004fd80	492	no	indirect call (driver context / vtable / callback)
+0x4fd80	extvsUpdateVertexAttributeConstants	492	no	indirect call (driver context / vtable / callback)
 0x4ff70	gldValidateAlphaTest	416	yes	
 0x50140	FUN_00050140	424	yes	
 0x50300	gldEmitHardwareState	3048	no	indirect call (driver context / vtable / callback)
@@ -555,7 +555,7 @@
 0x5e0d0	extvsEmitFogOutput	1676	no	indirect call (driver context / vtable / callback)
 0x5e770	popFirstNonNull32	108	yes	
 0x5e7f0	extvsAssignVertexInputs	3156	no	indirect call (driver context / vtable / callback)
-0x5f540	FUN_0005f540	688	no	indirect call (driver context / vtable / callback)
+0x5f540	extvsRewriteHardwareInstructions	688	no	indirect call (driver context / vtable / callback)
 0x5f810	extvsPrepareHardwareProgram	9624	no	indirect call (driver context / vtable / callback)
 0x61dc0	vpUploadConstantArray	224	no	indirect call (driver context / vtable / callback)
 0x61eb0	vpUploadConstantsWithFog	604	no	indirect call (driver context / vtable / callback)
@@ -568,7 +568,7 @@
 0x62510	FUN_00062510	92	no	indirect call (driver context / vtable / callback)
 0x62570	extvsStateCacheCreate	616	no	indirect call (driver context / vtable / callback)
 0x627e4	extvsStateCacheFreeAll	328	no	indirect call (driver context / vtable / callback)
-0x62940	FUN_00062940	276	no	indirect call (driver context / vtable / callback)
+0x62940	extvsUploadSingleConstant	276	no	indirect call (driver context / vtable / callback)
 0x62a60	noop_62a60	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x62a70	extvsStateCacheInsert	116	yes	
 0x62af0	extvsBuildStreamDescriptors	5624	yes	
@@ -808,8 +808,8 @@
 0x8f760	arbfpLoadDefaultProgram	144	yes	
 0x8f7f0	FUN_0008f7f0	884	no	indirect call (driver context / vtable / callback)
 0x8fb70	FUN_0008fb70	248	no	indirect call (driver context / vtable / callback)
-0x8fc70	FUN_0008fc70	1028	yes	
-0x900a0	FUN_000900a0	944	no	indirect call (driver context / vtable / callback)
+0x8fc70	ffvpAssignOutputSlots	1028	yes	
+0x900a0	ffvpComputeOutputMasks	944	no	indirect call (driver context / vtable / callback)
 0x90470	gldValidateState	952	no	indirect call (driver context / vtable / callback)
 0x90840	FUN_00090840	264	no	indirect call (driver context / vtable / callback)
 0x90960	FUN_00090960	48	yes	
@@ -2965,7 +2965,7 @@
 0x189be4	R300SchedModel__vslot15	64	yes	
 0x189c24	FUN_00189c24	188	no	indirect call (driver context / vtable / callback)
 0x189ce0	FUN_00189ce0	276	no	indirect call (driver context / vtable / callback)
-0x189df4	FUN_00189df4	480	no	indirect call (driver context / vtable / callback)
+0x189df4	SchedModel__classifySlotUse	480	no	indirect call (driver context / vtable / callback)
 0x189fd4	R300SchedModel__vslot19	172	no	indirect call (driver context / vtable / callback)
 0x18a080	R300SchedModel__vslot34	364	no	indirect call (driver context / vtable / callback)
 0x18a1ec	R300SchedModel__vslot26	596	no	indirect call (driver context / vtable / callback)
