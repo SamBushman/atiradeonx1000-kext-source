@@ -4,13 +4,14 @@
 int ValueKey__canonicalizeCommutativeOperands(ctx)
   int ctx;
 {
+  int flagBit0Result;
   int iVar1;
   int loopIndex;
   int loopRemaining;
   
-  iVar1 = OpcodeTraits__flagBit0(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
+  flagBit0Result = OpcodeTraits__flagBit0(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8),
                        *(undefined4 *)(ctx + 0x238));
-  if (iVar1 != 0) {
+  if (flagBit0Result != 0) {
     loopRemaining = 4;
     iVar1 = ctx;
     loopIndex = ctx;
@@ -38,14 +39,15 @@ int FUN_0017343c(ctx, param_2)
   int ctx;
   int param_2;
 {
+  int vcall18Result;
   int iVar1;
   int iVar2;
   int *a0;
   uint uVar3;
   
   a0 = *(int **)(*(int *)(ctx + 0xb0) + 0x8c);
-  iVar1 = (**(code **)(*a0 + 0x18))(a0,param_2);
-  if (iVar1 != 0) {
+  vcall18Result = (**(code **)(*a0 + 0x18))(a0,param_2);
+  if (vcall18Result != 0) {
     iVar2 = *(int *)(ctx + 0xb0);
     uVar3 = a0[7];
     iVar1 = *(int *)(param_2 + 0x128);
@@ -493,6 +495,7 @@ int Compiler__valueNumberForExpr(param_1, param_2)
 int ValueKey__fill(ctx)
   int ctx;
 {
+  undefined8 operandSource;
   bool moreComponents;
   dword *operandIndex2;
   bool bVar1;
@@ -516,7 +519,7 @@ int ValueKey__fill(ctx)
   uint uVar14;
   uint *loopPtr7;
   char *loopPtr4;
-  undefined8 uVar17;
+  undefined8 vcall14Result;
   undefined4 local_58 [4];
   undefined4 local_48;
   undefined4 local_44;
@@ -624,9 +627,9 @@ LAB_00173fa0:
     operandIndex2 = ((unsigned char *)0x0);
     while( true ) {
       operandIndex2 = (dword *)((int)operandIndex2 + 1);
-      uVar17 = (**(code **)(*loopPtr5 + 0x14))(loopPtr5);
-      uVar4 = (undefined4)uVar17;
-      if ((int)((ulonglong)uVar17 >> 0x20) < (int)operandIndex2) break;
+      vcall14Result = (**(code **)(*loopPtr5 + 0x14))(loopPtr5);
+      uVar4 = (undefined4)vcall14Result;
+      if ((int)((ulonglong)vcall14Result >> 0x20) < (int)operandIndex2) break;
       loopPtr5 = *(int **)(ctx + 0xb0);
       loopPtr7 = *(uint **)(loopPtr5[(int)operandIndex2 * 6 + 0x23] + 0x2c);
       uVar14 = loopPtr7[1];
@@ -693,9 +696,9 @@ LAB_00173fa0:
     uVar4 = extraout_r4;
     if (0 < *(int *)(loopIndex + 0x84)) {
       do {
-        uVar17 = IRInst__getOperandSource(loopIndex,loopIndex3);
-        uVar4 = (undefined4)uVar17;
-        if ((int)((ulonglong)uVar17 >> 0x20) == 0) {
+        operandSource = IRInst__getOperandSource(loopIndex,loopIndex3);
+        uVar4 = (undefined4)operandSource;
+        if ((int)((ulonglong)operandSource >> 0x20) == 0) {
           loopIndex2 = 4;
           loopPtr8 = (undefined4 *)(loopIndex3 * 0x10 + ctx + 0x168);
           do {
@@ -1023,6 +1026,8 @@ int FUN_00174b04(ctx, param_2, param_3)
   uint param_2;
   int param_3;
 {
+  int vcall18Result;
+  int vcall14Result;
   uint vectorFilledCount;
   int *piVar1;
   int *piVar2;
@@ -1043,13 +1048,13 @@ int FUN_00174b04(ctx, param_2, param_3)
   piVar2 = *(int **)(ctx + 0xb0);
   vector = *(uint **)(*(int *)(*(int *)(ctx + 0x238) + 0x6c4) + 0x410);
   do {
-    iVar5 = (**(code **)(*piVar2 + 0x14))(piVar2);
-    if (iVar5 < loopIndex) {
+    vcall14Result = (**(code **)(*piVar2 + 0x14))(piVar2);
+    if (vcall14Result < loopIndex) {
       return;
     }
     piVar2 = *(int **)(iVar9 + *(int *)(ctx + 0xb0) + 0x8c);
-    iVar5 = (**(code **)(*piVar2 + 0x18))(piVar2);
-    if ((iVar5 != 0) && (uVar8 = piVar2[7], param_3 <= (int)param_2)) {
+    vcall18Result = (**(code **)(*piVar2 + 0x18))(piVar2);
+    if ((vcall18Result != 0) && (uVar8 = piVar2[7], param_3 <= (int)param_2)) {
       iVar5 = param_2 << 2;
       uVar12 = param_2;
       do {
@@ -1164,6 +1169,7 @@ int FUN_00174ce0(param_1, param_2, param_3)
 int FUN_00174e0c(valueKey)
   int *valueKey;
 {
+  int returnZero_172f24Result;
   bool isLast;
   bool moreComponents;
   undefined4 inst2;
@@ -1173,8 +1179,8 @@ int FUN_00174e0c(valueKey)
   undefined4 uVar1;
   int loopIndex2;
   int *loopPtr4;
-  undefined4 *puVar4;
-  float *pfVar5;
+  undefined4 *exprRecordForValueNumberResultB;
+  float *exprRecordForValueNumberResult;
   int iVar6;
   uint loopIndex5;
   bool bVar8;
@@ -1324,8 +1330,8 @@ LAB_00174efc:
      ((loopIndex2 = ((int (*)())FUN_00173a48)(valueKey[0x2c],valueKey[0x8e]), loopIndex2 == 0 &&
       (loopIndex2 = ((int (*)())FUN_0017356c)(valueKey), loopIndex2 == 0)))) {
     loopIndex2 = valueKey[0x2c];
-    iVar9 = returnZero_172f24(loopIndex2);
-    if (iVar9 == 0) {
+    returnZero_172f24Result = returnZero_172f24(loopIndex2);
+    if (returnZero_172f24Result == 0) {
       uVar1 = 0;
       loopIndex = 0;
       iVar9 = 0;
@@ -1356,14 +1362,14 @@ LAB_00174efc:
                 }
               }
               else {
-                pfVar5 = (float *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopPtr3[0x5e]);
-                local_30 = *pfVar5;
+                exprRecordForValueNumberResult = (float *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopPtr3[0x5e]);
+                local_30 = *exprRecordForValueNumberResult;
                 loopIndex2 = ((bool (*)())evaluateCompareFloats)(valueKey[0x2c],(double)local_30,0.0);
                 loopIndex2 = (loopIndex2 == 0) + 2;
                 loopRemaining = valueKey[loopIndex2 * 4 + loopIndex + 0x5a];
                 if (loopRemaining < 0) {
-                  puVar4 = (undefined4 *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopRemaining);
-                  IRInst__scaleByOutputScale(&local_40,valueKey[0x2c],*puVar4);
+                  exprRecordForValueNumberResultB = (undefined4 *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopRemaining);
+                  IRInst__scaleByOutputScale(&local_40,valueKey[0x2c],*exprRecordForValueNumberResultB);
                   loopIndex2 = local_40;
                   IRInst__clampOutputValue(local_3c,valueKey[0x2c],local_40);
                   loopRemaining = local_3c[0];
@@ -1386,8 +1392,8 @@ LAB_001757a0:
             else {
               loopRemaining = loopPtr3[0x5e];
               if (loopRemaining < 0) {
-                puVar4 = (undefined4 *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopRemaining);
-                IRInst__scaleByOutputScale(&local_48,valueKey[0x2c],*puVar4);
+                exprRecordForValueNumberResultB = (undefined4 *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopRemaining);
+                IRInst__scaleByOutputScale(&local_48,valueKey[0x2c],*exprRecordForValueNumberResultB);
                 loopIndex2 = local_48;
                 IRInst__clampOutputValue(&local_44,valueKey[0x2c],local_48);
                 loopRemaining = local_44;
@@ -1467,15 +1473,15 @@ LAB_0017547c:
     else {
       loopPtr3 = valueKey + iVar9;
       if (loopPtr3[0x5e] < 0) {
-        pfVar5 = (float *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopPtr3[0x5e]);
-        local_30 = *pfVar5;
+        exprRecordForValueNumberResult = (float *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopPtr3[0x5e]);
+        local_30 = *exprRecordForValueNumberResult;
         loopIndex2 = ((bool (*)())evaluateCompareFloats)(valueKey[0x2c],(double)local_30,0.0);
         loopIndex2 = (loopIndex2 == 0) + 2;
         loopIndex = valueKey[loopIndex2 * 4 + iVar9 + 0x5a];
         if (loopIndex < 0) {
           bVar8 = false;
-          puVar4 = (undefined4 *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopIndex);
-          IRInst__scaleByOutputScale(&local_50,valueKey[0x2c],*puVar4);
+          exprRecordForValueNumberResultB = (undefined4 *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopIndex);
+          IRInst__scaleByOutputScale(&local_50,valueKey[0x2c],*exprRecordForValueNumberResultB);
           IRInst__clampOutputValue(&local_4c,valueKey[0x2c],local_50);
           local_54 = local_4c;
           if (local_4c != local_50) goto LAB_00175348;
@@ -1524,8 +1530,8 @@ LAB_0017547c:
     loopIndex = valueKey[iVar9 + 0x5e];
     if (loopIndex < 0) {
       bVar8 = false;
-      puVar4 = (undefined4 *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopIndex);
-      IRInst__scaleByOutputScale(local_68 + 4,valueKey[0x2c],*puVar4);
+      exprRecordForValueNumberResultB = (undefined4 *)Compiler__exprRecordForValueNumber(valueKey[0x8e],loopIndex);
+      IRInst__scaleByOutputScale(local_68 + 4,valueKey[0x2c],*exprRecordForValueNumberResultB);
       IRInst__clampOutputValue(&local_54,valueKey[0x2c],local_68[4]);
       local_50 = local_68[4];
       if (local_54 != local_68[4]) {
@@ -2331,7 +2337,7 @@ int FUN_001768d4(param_1, param_2)
 {
   bool isLast;
   int iVar2;
-  int *piVar3;
+  int *exprRecordForValueNumberResult;
   int loopIndex;
   int *piVar5;
   
@@ -2339,7 +2345,7 @@ int FUN_001768d4(param_1, param_2)
   piVar5 = (int *)(iVar2 + 0x178);
   loopIndex = 1;
   while ((-1 < *piVar5 ||
-         (piVar3 = (int *)Compiler__exprRecordForValueNumber(*(undefined4 *)(param_1 + 0x238),*piVar5), *piVar3 != 0))) {
+         (exprRecordForValueNumberResult = (int *)Compiler__exprRecordForValueNumber(*(undefined4 *)(param_1 + 0x238),*piVar5), *exprRecordForValueNumberResult != 0))) {
     isLast = loopIndex == 2;
     piVar5 = piVar5 + 4;
     loopIndex = loopIndex + 1;
@@ -2347,7 +2353,7 @@ int FUN_001768d4(param_1, param_2)
       return 0;
     }
   }
-  *(int **)(iVar2 + 0x30) = piVar3;
+  *(int **)(iVar2 + 0x30) = exprRecordForValueNumberResult;
   return 1;
 }
 
@@ -2356,17 +2362,17 @@ int FUN_00176954(ctx, param_2)
   int ctx;
   int param_2;
 {
-  float *pfVar1;
-  float *pfVar2;
+  float *exprRecordForValueNumberResult;
+  float *exprRecordForValueNumberResultB;
   undefined4 valueNumberForExprResult;
   undefined4 uVar4;
   int iVar5;
   
   iVar5 = param_2 * 4 + ctx;
   if ((*(int *)(iVar5 + 0x178) < 0) && (*(int *)(iVar5 + 0x188) < 0)) {
-    pfVar1 = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(int *)(iVar5 + 0x178));
-    pfVar2 = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(iVar5 + 0x188));
-    iVar5 = ((bool (*)())evaluateCompareFloats)(*(undefined4 *)(ctx + 0xb0),(double)*pfVar1,(double)*pfVar2);
+    exprRecordForValueNumberResult = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(int *)(iVar5 + 0x178));
+    exprRecordForValueNumberResultB = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),*(undefined4 *)(iVar5 + 0x188));
+    iVar5 = ((bool (*)())evaluateCompareFloats)(*(undefined4 *)(ctx + 0xb0),(double)*exprRecordForValueNumberResult,(double)*exprRecordForValueNumberResultB);
     uVar4 = 0x3f800000;
     if (iVar5 == 0) {
       uVar4 = 0;
@@ -2388,7 +2394,7 @@ int FUN_001769f4(param_1, param_2, param_3)
   int param_3;
 {
   int iVar1;
-  undefined4 *puVar2;
+  undefined4 *exprRecordForValueNumberResult;
   
   iVar1 = OpcodeTraits__instFlagBit2(*(undefined4 *)(param_2 + 0x238),*(undefined4 *)(param_2 + 0xb0));
   if ((iVar1 == 0) || ((iVar1 = 3, param_3 != 1 && (iVar1 = 1, param_3 != 3)))) {
@@ -2396,8 +2402,8 @@ int FUN_001769f4(param_1, param_2, param_3)
   }
   iVar1 = *(int *)((param_3 * 4 + iVar1) * 4 + param_2 + 0x168);
   if (iVar1 < 0) {
-    puVar2 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(param_2 + 0x238),iVar1);
-    *param_1 = *puVar2;
+    exprRecordForValueNumberResult = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(param_2 + 0x238),iVar1);
+    *param_1 = *exprRecordForValueNumberResult;
   }
   else {
     *param_1 = 0x7ffffffe;
@@ -2499,7 +2505,7 @@ int FUN_00176c40(param_1, valueKey, param_3, param_4)
   int param_3;
   undefined4 *param_4;
 {
-  undefined4 *puVar1;
+  undefined4 *exprRecordForValueNumberResult;
   int callResult;
   int *a0;
   undefined4 in_r7;
@@ -2528,8 +2534,8 @@ int FUN_00176c40(param_1, valueKey, param_3, param_4)
     callResult = (**(code **)(**(int **)(valueKey + 0xb0) + 0x14))(*(int **)(valueKey + 0xb0));
     if (callResult < loopIndex) break;
     loopIndex = loopIndex + 1;
-    puVar1 = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(valueKey + 0x238),*puVar4);
-    *loopPtr2 = *puVar1;
+    exprRecordForValueNumberResult = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(valueKey + 0x238),*puVar4);
+    *loopPtr2 = *exprRecordForValueNumberResult;
     puVar4 = puVar4 + 4;
   }
   a0 = *(int **)(*(int *)(valueKey + 0xb0) + 0x88);
@@ -2553,14 +2559,14 @@ int FUN_00176d6c(param_1, param_2, param_3)
   int param_2;
   undefined4 param_3;
 {
-  int iVar1;
-  int iVar2;
+  int findInPtrSetResult;
+  int findInPtrSetResultB;
   undefined4 uVar3;
   
-  if ((((param_1 < 1) || (param_2 < 1)) || (iVar1 = Compiler__findInPtrSet(param_3,param_1), iVar1 == 0)) ||
-     ((iVar2 = Compiler__findInPtrSet(param_3,param_2), iVar2 == 0 ||
-      (((*(int *)(iVar1 + 0x20) == 0 || (param_2 != *(int *)(iVar1 + 0x24))) &&
-       ((*(int *)(iVar2 + 0x20) == 0 || (param_1 != *(int *)(iVar2 + 0x24))))))))) {
+  if ((((param_1 < 1) || (param_2 < 1)) || (findInPtrSetResult = Compiler__findInPtrSet(param_3,param_1), findInPtrSetResult == 0)) ||
+     ((findInPtrSetResultB = Compiler__findInPtrSet(param_3,param_2), findInPtrSetResultB == 0 ||
+      (((*(int *)(findInPtrSetResult + 0x20) == 0 || (param_2 != *(int *)(findInPtrSetResult + 0x24))) &&
+       ((*(int *)(findInPtrSetResultB + 0x20) == 0 || (param_1 != *(int *)(findInPtrSetResultB + 0x24))))))))) {
     uVar3 = 0;
   }
   else {
@@ -2575,14 +2581,14 @@ int FUN_00176e20(param_1, param_2, param_3)
   int param_2;
   undefined4 param_3;
 {
-  int iVar1;
-  int iVar2;
+  int findInPtrSetResult;
+  int findInPtrSetResultB;
   undefined4 uVar3;
   
-  if ((((param_1 < 1) || (param_2 < 1)) || (iVar1 = Compiler__findInPtrSet(param_3,param_1), iVar1 == 0)) ||
-     ((iVar2 = Compiler__findInPtrSet(param_3,param_2), iVar2 == 0 ||
-      (((*(int *)(iVar1 + 0x28) == 0 || (param_2 != *(int *)(iVar1 + 0x2c))) &&
-       ((*(int *)(iVar2 + 0x28) == 0 || (param_1 != *(int *)(iVar2 + 0x2c))))))))) {
+  if ((((param_1 < 1) || (param_2 < 1)) || (findInPtrSetResult = Compiler__findInPtrSet(param_3,param_1), findInPtrSetResult == 0)) ||
+     ((findInPtrSetResultB = Compiler__findInPtrSet(param_3,param_2), findInPtrSetResultB == 0 ||
+      (((*(int *)(findInPtrSetResult + 0x28) == 0 || (param_2 != *(int *)(findInPtrSetResult + 0x2c))) &&
+       ((*(int *)(findInPtrSetResultB + 0x28) == 0 || (param_1 != *(int *)(findInPtrSetResultB + 0x2c))))))))) {
     uVar3 = 0;
   }
   else {

@@ -738,6 +738,7 @@ int Scheduler__tryReuseLoopIndexLoad(scheduler, node)
   int *scheduler;
   int node;
 {
+  undefined4 operandSource;
   undefined4 arena;
   int newLoadNode;
   bool lastFreeSlot;
@@ -821,8 +822,8 @@ LAB_0016ddd8:
           allocation[0x4e] = (((int)requestedIndex2 >> 4) + (uint)((int)requestedIndex2 < 0 && (requestedIndex2 & 0xf) != 0)) * 0x10;
           allocation[4] = uVar14;
           setSourceFn = *(code **)(allocation[1] + 0x94);
-          uVar14 = IRInst__getOperandSource(inst,1);
-          (*setSourceFn)(newLoadInst,uVar14,*scheduler);
+          operandSource = IRInst__getOperandSource(inst,1);
+          (*setSourceFn)(newLoadInst,operandSource,*scheduler);
           newLoadNode = Scheduler__createNode(scheduler,newLoadInst,node + 0xc,scheduler[0xb]);
           compiler = *scheduler;
           scheduler[loopIndex + 0x62] = newLoadNode;
@@ -1461,6 +1462,7 @@ int Scheduler__onNodeReady(scheduler, node)
   undefined4 *scheduler;
   int node;
 {
+  int isNodeReadyResult;
   int balanceEnabled;
   int iVar1;
   int iVar2;
@@ -1486,8 +1488,8 @@ LAB_0016ef04:
     ((int (*)())SchedModel__countIssuedNode)(scheduler[2],node);
   }
 LAB_0016ef60:
-  iVar1 = Scheduler__isNodeReady(scheduler,node);
-  if (iVar1 != 0) {
+  isNodeReadyResult = Scheduler__isNodeReady(scheduler,node);
+  if (isNodeReadyResult != 0) {
     ((int (*)())Scheduler__enqueueReadyNode)(scheduler,node);
     return;
   }
@@ -2565,12 +2567,12 @@ int Scheduler__scheduleCycle(scheduler)
   int bucketNumber;
   int cycleLimit;
   bool moreBuckets;
-  int iVar2;
+  int isEmptyResult;
   int iVar3;
   int bucketEmpty;
   undefined4 bucketNode;
   
-  if (((*(int *)(scheduler + 0x118) == 0) && (iVar2 = DList__isEmpty(scheduler + 0x4c), iVar2 == 0)) &&
+  if (((*(int *)(scheduler + 0x118) == 0) && (isEmptyResult = DList__isEmpty(scheduler + 0x4c), isEmptyResult == 0)) &&
      (*(int *)(scheduler + 0x20) != 0)) {
     cycleLimit = *(int *)(*(int *)(scheduler + 0x54) + 0x10);
     iVar3 = (**(code **)(**(int **)(scheduler + 8) + 0x84))(*(int **)(scheduler + 8));
@@ -3626,20 +3628,20 @@ int FUN_00172204(param_1, param_2)
   int *param_1;
   undefined4 param_2;
 {
-  int iVar1;
-  int iVar2;
+  int vcall4cResult;
+  int vcall30Result;
   
-  iVar1 = (**(code **)(*param_1 + 0x4c))(param_1,param_2);
-  iVar2 = (**(code **)(*param_1 + 0x30))(param_1,param_2);
-  if (iVar1 == 3) {
+  vcall4cResult = (**(code **)(*param_1 + 0x4c))(param_1,param_2);
+  vcall30Result = (**(code **)(*param_1 + 0x30))(param_1,param_2);
+  if (vcall4cResult == 3) {
     param_1[3] = param_1[3] + 1;
     param_1[4] = param_1[4] + 1;
   }
-  else if (iVar2 == 0) {
-    if (iVar1 == 1) {
+  else if (vcall30Result == 0) {
+    if (vcall4cResult == 1) {
       param_1[3] = param_1[3] + 1;
     }
-    else if (iVar1 == 2) {
+    else if (vcall4cResult == 2) {
       param_1[4] = param_1[4] + 1;
     }
   }
@@ -3800,19 +3802,19 @@ int ResourceModel__vslot11(this, param_2)
   int *this;
   int param_2;
 {
-  int iVar1;
+  int vcallcResult;
   
   ((int (*)())SchedModel__uncountNode)(this,param_2);
   (**(code **)(*this + 0x38))(this,param_2);
-  iVar1 = (**(code **)(*this + 0xc))(this,*(undefined4 *)(param_2 + 0x38));
-  if (iVar1 == 0) {
+  vcallcResult = (**(code **)(*this + 0xc))(this,*(undefined4 *)(param_2 + 0x38));
+  if (vcallcResult == 0) {
     (**(code **)(*this + 0x38))(this,param_2);
     ((int (*)())SchedModel__countIssuedNode)(this,param_2);
   }
   else {
     ((int (*)())SchedModel__countIssuedNode)(this,param_2);
   }
-  return iVar1 != 0;
+  return vcallcResult != 0;
 }
 
 /* FUN_001725c4 @ 0x1725c4 (600 bytes) */
@@ -3824,7 +3826,7 @@ int FUN_001725c4(inst, operandIndex2, compiler)
   int operandRecord;
   int newInst;
   undefined4 operandVReg;
-  int iVar2;
+  int vcall28Result;
   int iVar3;
   int block;
   int operandIndex;
@@ -3856,14 +3858,14 @@ int FUN_001725c4(inst, operandIndex2, compiler)
   operandIndex = 1;
   if (*(int *)(iVar3 + 0x158) == 0) {
     *(int *)(*(int *)(compiler + 0x6c4) + 0x238) = *(int *)(*(int *)(compiler + 0x6c4) + 0x238) + 1;
-    iVar2 = (**(code **)(*inst + 0x28))(inst);
-    if (iVar2 == 0) {
+    vcall28Result = (**(code **)(*inst + 0x28))(inst);
+    if (vcall28Result == 0) {
       Block__insertInstBefore(block,inst,iVar3);
     }
     else {
       for (afterInst = (int *)inst[1]; afterInst != (int *)0x0; afterInst = (int *)afterInst[1]) {
-        iVar2 = (**(code **)(*afterInst + 0x28))(afterInst);
-        if (iVar2 == 0) {
+        vcall28Result = (**(code **)(*afterInst + 0x28))(afterInst);
+        if (vcall28Result == 0) {
           Block__insertInstAfter(block,afterInst,iVar3);
           return iVar3;
         }
