@@ -2971,6 +2971,8 @@ int FUN_000bda40(stream, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord
   undefined4 param_7;
   undefined4 dirtyWord4;
 {
+  uint streamWord44;
+  byte streamByte13b0;
   byte bVar1;
   ushort uVar2;
   short sVar3;
@@ -2981,7 +2983,7 @@ int FUN_000bda40(stream, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord
   int iVar8;
   uint uVar9;
   int iVar10;
-  uint uVar11;
+  uint streamWord8c;
   uint uVar12;
   uint uVar13;
   uint uVar14;
@@ -2996,23 +2998,23 @@ int FUN_000bda40(stream, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord
   int iVar23;
   uint uVar24;
   
-  uVar14 = *(uint *)(stream + 0x44);
-  if (((((uVar14 & 0x2000) == 0) || ((*(byte *)(stream + 0x2e) & 1) != 0)) ||
+  streamWord44 = *(uint *)(stream + 0x44);
+  if (((((streamWord44 & 0x2000) == 0) || ((*(byte *)(stream + 0x2e) & 1) != 0)) ||
       ((*(uint *)(stream + 0x38) & 0x8000) != 0)) || (*(short *)(stream + 0x42) != 0)) {
-    bVar1 = ((unsigned char *)0x000013b0)[stream];
+    streamByte13b0 = ((unsigned char *)0x000013b0)[stream];
     iVar16 = stream + 0x44;
     *(uint *)(stream + 0x8c) = *(uint *)(stream + 0x8c) & 0xf07fffff;
     *(uint *)(stream + 0x1874) = *(uint *)(stream + 0x1874) & 0xfdffffff;
     uVar24 = (uint)*(byte *)(stream + 0x2b);
-    if ((uint)bVar1 < (uint)*(byte *)(stream + 0x2b)) {
-      uVar24 = (uint)bVar1;
+    if ((uint)streamByte13b0 < (uint)*(byte *)(stream + 0x2b)) {
+      uVar24 = (uint)streamByte13b0;
     }
-    if ((uVar14 & 0x20000) == 0) {
+    if ((streamWord44 & 0x20000) == 0) {
       *(undefined1 *)(stream + 0x1878) = 0;
       uVar21 = 0;
     }
     else {
-      if ((uVar14 & 0x2000) == 0) {
+      if ((streamWord44 & 0x2000) == 0) {
         bVar1 = ((unsigned char *)0x00001135)[stream];
       }
       else {
@@ -3029,7 +3031,7 @@ int FUN_000bda40(stream, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord
       iVar23 = stream;
       while( true ) {
         uVar6 = *(uint *)(iVar16 + 4) & 0x1e0;
-        if ((uVar14 & 0x20000) == 0) {
+        if ((streamWord44 & 0x20000) == 0) {
           uVar14 = *(uint *)(iVar16 + 4) & 0x1f;
         }
         else {
@@ -3083,19 +3085,19 @@ int FUN_000bda40(stream, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord
             uVar13 = uVar17 | uVar4;
             *(ushort *)(iVar15 + 0x187c) =
                  *(ushort *)(iVar15 + 0x187c) & 0xc003 | (ushort)(uVar12 << 2) & 0x3ffc;
-            uVar11 = *(uint *)(stream + 0x8c);
-            uVar17 = (uVar17 | uVar11 >> 0x1b & 1) << 0x1b;
+            streamWord8c = *(uint *)(stream + 0x8c);
+            uVar17 = (uVar17 | streamWord8c >> 0x1b & 1) << 0x1b;
             *(uint *)(stream + 0x1874) =
                  (uVar13 | *(uint *)(stream + 0x1874) >> 0x19 & 1) << 0x19 |
                  *(uint *)(stream + 0x1874) & 0xfdffffff;
-            uVar12 = (uVar4 | (uVar11 & 0xf7ffffff) >> 0x1a & 1) << 0x1a;
-            *(uint *)(stream + 0x8c) = uVar12 | uVar17 | uVar11 & 0xf3ffffff;
-            uVar14 = ((uVar11 & 0x2000000) >> 0x19 |
+            uVar12 = (uVar4 | (streamWord8c & 0xf7ffffff) >> 0x1a & 1) << 0x1a;
+            *(uint *)(stream + 0x8c) = uVar12 | uVar17 | streamWord8c & 0xf3ffffff;
+            uVar14 = ((streamWord8c & 0x2000000) >> 0x19 |
                      uVar13 | *(short *)(iVar10 + 0x3c) == 0x2400 & uVar14 |
                               *(short *)(iVar10 + 0x60) == 0x2400 & uVar20 |
                               *(short *)(iVar10 + 0x84) == 0x2400 & uVar19 |
                               (uint)(*(short *)(iVar10 + 0xa8) == 0x2400) & uVar6 >> 8) << 0x19 |
-                     uVar12 | uVar17 | uVar11 & 0xf1ffffff;
+                     uVar12 | uVar17 | streamWord8c & 0xf1ffffff;
             *(uint *)(stream + 0x8c) = uVar14;
           }
           *(uint *)(stream + 0x8c) = uVar14 | 0x800000;
@@ -3117,7 +3119,7 @@ int FUN_000bda40(stream, param_2, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord
         iVar23 = iVar23 + 1;
         uVar24 = uVar24 - 1;
         if (uVar24 == 0) break;
-        uVar14 = *(uint *)(stream + 0x44);
+        streamWord44 = *(uint *)(stream + 0x44);
       }
     }
     *(int *)(stream + 0x94) = iVar18;
@@ -3772,7 +3774,7 @@ int FUN_000bef40(psnProgram, param_2, param_3, param_4, param_5)
   uint loopIndex;
   dword *pdVar19;
   ushort *puVar20;
-  uint uVar21;
+  uint psnProgramWord8;
   ushort *puVar22;
   ushort *puVar23;
   char *pcVar24;
@@ -3795,7 +3797,7 @@ int FUN_000bef40(psnProgram, param_2, param_3, param_4, param_5)
             if (*(ushort *)(psnProgram + 0x22) < 0x40) {
               if (*(ushort *)(psnProgram + 0x24) < 0x40) {
                 pdVar16 = &(*(GhidraMachOCommand *)0x0000001c).filesize;
-                uVar21 = *(uint *)(psnProgram + 8);
+                psnProgramWord8 = *(uint *)(psnProgram + 8);
                 iVar7 = 0;
                 iVar31 = 0x40;
                 do {
@@ -3803,7 +3805,7 @@ int FUN_000bef40(psnProgram, param_2, param_3, param_4, param_5)
                   iVar7 = iVar7 + 4;
                   iVar31 = iVar31 + -1;
                 } while (iVar31 != 0);
-                if ((uVar21 != 0) &&
+                if ((psnProgramWord8 != 0) &&
                    (pdVar14 = (dword *)(psnProgram + 0x48), param_5 = pdVar14,
                    *(int *)(psnProgram + 0x48) == 1)) {
                   pdVar19 = (dword *)(psnProgram + 0x90);
@@ -3824,7 +3826,7 @@ int FUN_000bef40(psnProgram, param_2, param_3, param_4, param_5)
                       bVar1 = true;
                     }
                     loopIndex = loopIndex + 1;
-                    if (uVar21 < loopIndex) break;
+                    if (psnProgramWord8 < loopIndex) break;
                     dVar4 = *pdVar19;
                     pdVar19 = pdVar19 + 0x12;
                     pdVar27 = pdVar13 + 0x12;
@@ -3958,7 +3960,7 @@ LAB_000bf33c:
                       pdVar19 = pdVar19 + 0x12;
                       param_5 = param_5 + 0x12;
                       pcVar17 = pcVar17 + 0x48;
-                    } while (loopIndex <= uVar21);
+                    } while (loopIndex <= psnProgramWord8);
                   }
                 }
                 ((int (*)())FUN_000be460)(psnProgram,param_2,param_3,1,param_5,aiStack_148,pdVar16);
@@ -4494,6 +4496,10 @@ int FUN_000bfed0(psnProgram, param_2, param_3)
   uint *param_2;
   uint *param_3;
 {
+  uint psnProgramWord8;
+  ushort psnProgramShort22;
+  ushort psnProgramShort28;
+  ushort psnProgramShort12;
   byte bVar1;
   byte bVar2;
   byte bVar3;
@@ -4581,8 +4587,8 @@ int FUN_000bfed0(psnProgram, param_2, param_3)
     return 0x80000013;
   }
   ((int (*)())FUN_000bf400)(psnProgram,1,puVar60,in_r6,in_r7,in_r8,(uint)*(ushort *)(psnProgram + 0x20));
-  uVar55 = *(uint *)(psnProgram + 8);
-  if ((*(int *)(psnProgram + 0x48) == 1) && (uVar55 != 0)) {
+  psnProgramWord8 = *(uint *)(psnProgram + 8);
+  if ((*(int *)(psnProgram + 0x48) == 1) && (psnProgramWord8 != 0)) {
     piVar46 = (int *)(psnProgram + 0x90);
     uVar59 = 1;
     piVar39 = piVar46;
@@ -4614,7 +4620,7 @@ int FUN_000bfed0(psnProgram, param_2, param_3)
       piVar39 = piVar45 + 0x12;
       uVar43 = uVar48;
       piVar52 = piVar45;
-    } while (uVar59 <= uVar55);
+    } while (uVar59 <= psnProgramWord8);
     uVar43 = uVar48 & 0xff;
     if (uVar48 == 0) goto LAB_000c004c;
   }
@@ -4627,7 +4633,7 @@ LAB_000c004c:
   uVar43 = uVar43 - 1 & 0xf;
   *param_2 = uVar43;
   *param_2 = (*(byte *)(psnProgram + 0xd) & 7) << 5 | uVar43;
-  if (uVar55 < uVar59) {
+  if (psnProgramWord8 < uVar59) {
     iVar56 = 0;
     bVar58 = 0;
     iVar53 = 0;
@@ -4900,7 +4906,7 @@ LAB_000c004c:
       puVar60 = puVar60 + 0x12;
       *(uint *)(param_3[4] + iVar49) = uVar48;
       iVar49 = iVar49 + 0x18;
-    } while (uVar59 <= uVar55);
+    } while (uVar59 <= psnProgramWord8);
     iVar49 = iVar56;
     if (!bVar25) goto LAB_000c07dc;
     iVar53 = iVar56 * 0x18;
@@ -4922,15 +4928,15 @@ LAB_000c07dc:
   param_3[3] = (iVar49 + -1) * 0x10000 & 0x1ff0000;
   uVar55 = *(ushort *)(psnProgram + 0x10) & 0x1ff;
   param_3[2] = uVar55;
-  uVar24 = *(ushort *)(psnProgram + 0x12);
+  psnProgramShort12 = *(ushort *)(psnProgram + 0x12);
   param_3[1] = 0;
-  param_3[2] = (uVar24 & 0x1ff) << 0x10 | uVar55;
-  uVar24 = *(ushort *)(psnProgram + 0x28);
+  param_3[2] = (psnProgramShort12 & 0x1ff) << 0x10 | uVar55;
+  psnProgramShort28 = *(ushort *)(psnProgram + 0x28);
   *param_3 = 0;
-  param_3[1] = (uint)uVar24 << 0x1f;
-  uVar24 = *(ushort *)(psnProgram + 0x22);
+  param_3[1] = (uint)psnProgramShort28 << 0x1f;
+  psnProgramShort22 = *(ushort *)(psnProgram + 0x22);
   param_3[5] = (uint)(bVar58 != 0);
-  *param_3 = uVar24 & 0x7f;
+  *param_3 = psnProgramShort22 & 0x7f;
   return 0;
 }
 
