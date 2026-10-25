@@ -2070,8 +2070,8 @@ int KhanPs__vslot87_assignInterpolatorBindings(this, program)
 }
 
 /* FUN_0010ef68 @ 0x10ef68 (1052 bytes) */
-int FUN_0010ef68(param_1, program, param_3, param_4, param_5, param_6, param_7)
-  int *param_1;
+int FUN_0010ef68(psBackend, program, param_3, param_4, param_5, param_6, param_7)
+  int *psBackend;
   int program;
   undefined4 param_3;
   undefined4 param_4;
@@ -2079,156 +2079,163 @@ int FUN_0010ef68(param_1, program, param_3, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
+  int loadInst;
+  int isInterpLoadB;
+  int laneIndexValue;
+  uint remainingLaneMask;
+  uint nextFreeRegister;
+  int laneUsedB;
+  int laneKind;
   int operandRecord;
-  bool bVar1;
-  int *piVar2;
-  int *piVar3;
-  int iVar4;
-  undefined4 uVar5;
-  int *piVar6;
-  undefined4 uVar7;
-  uint uVar8;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
-  int iVar12;
-  uint uVar13;
-  int iVar14;
-  code *pcVar15;
-  int iVar16;
+  bool moreLanes;
+  int *nextInstLink;
+  int *inst;
+  int isInterpLoad;
+  undefined4 interpolatorCode;
+  int *cursorInst;
+  undefined4 compiler;
+  uint followingLane;
+  uint laneGroupMask;
+  uint assignedRegister;
+  uint fixedRegister;
+  int regLimitOrScratch;
+  uint savedNextFreeRegister;
+  int fixedRegBase;
+  code *bindInterpolatorFn;
+  int fixedStreamKey;
   uint loopIndex;
-  int iVar18;
-  undefined1 local_58 [20];
+  int entryBlock;
+  undefined1 laneSelects [20];
   
-  iVar18 = *(int *)(program + 0x3a4);
-  if (iVar18 == 0) {
-    iVar18 = *(int *)(program + 0x3a0);
+  entryBlock = *(int *)(program + 0x3a4);
+  if (entryBlock == 0) {
+    entryBlock = *(int *)(program + 0x3a0);
   }
-  uVar7 = *(undefined4 *)(program + 8);
-  iVar16 = *(int *)(program + 0x3f4);
-  iVar14 = *(int *)(program + 1000);
-  iVar12 = *(int *)(program + 0x3ec);
+  compiler = *(undefined4 *)(program + 8);
+  fixedStreamKey = *(int *)(program + 0x3f4);
+  fixedRegBase = *(int *)(program + 1000);
+  regLimitOrScratch = *(int *)(program + 0x3ec);
   if (*(int *)(program + 0x3e4) != 0) {
-    piVar3 = *(int **)(iVar18 + 0x98);
-    piVar2 = (int *)piVar3[2];
-    if ((int *)piVar3[2] == (int *)0x0) goto LAB_0010f084;
+    inst = *(int **)(entryBlock + 0x98);
+    nextInstLink = (int *)inst[2];
+    if ((int *)inst[2] == (int *)0x0) goto LAB_0010f084;
     do {
-      piVar6 = piVar2;
-      if ((piVar3[5] & 1U) != 0) {
-        iVar4 = (**(code **)(*piVar3 + 0x4c))(piVar3);
-        if ((((iVar4 == 0) || (iVar4 = piVar3[0x52], iVar16 != piVar3[0x51])) || (iVar4 < iVar14))
-           || (iVar12 <= iVar4)) {
-          piVar6 = (int *)piVar3[2];
+      cursorInst = nextInstLink;
+      if ((inst[5] & 1U) != 0) {
+        isInterpLoad = (**(code **)(*inst + 0x4c))(inst);
+        if ((((isInterpLoad == 0) || (isInterpLoad = inst[0x52], fixedStreamKey != inst[0x51])) || (isInterpLoad < fixedRegBase))
+           || (regLimitOrScratch <= isInterpLoad)) {
+          cursorInst = (int *)inst[2];
         }
         else {
-          uVar11 = iVar4 - iVar14;
-          Program__markHwRegUsed(program,uVar11);
-          FUN_00130bd4(program,uVar11);
-          piVar3[0x25] = uVar11;
-          piVar3[0x26] = 0;
-          piVar3[5] = piVar3[5] | 0x40;
-          if (*(int *)(program + 0x80) < (int)uVar11) {
-            *(uint *)(program + 0x80) = uVar11;
+          fixedRegister = isInterpLoad - fixedRegBase;
+          Program__markHwRegUsed(program,fixedRegister);
+          FUN_00130bd4(program,fixedRegister);
+          inst[0x25] = fixedRegister;
+          inst[0x26] = 0;
+          inst[5] = inst[5] | 0x40;
+          if (*(int *)(program + 0x80) < (int)fixedRegister) {
+            *(uint *)(program + 0x80) = fixedRegister;
           }
-          *(uint *)(program + 0x88) = 1 << (uVar11 & 0x3f) | *(uint *)(program + 0x88);
-          piVar6 = (int *)piVar3[2];
+          *(uint *)(program + 0x88) = 1 << (fixedRegister & 0x3f) | *(uint *)(program + 0x88);
+          cursorInst = (int *)inst[2];
         }
       }
-      piVar2 = (int *)piVar6[2];
-      piVar3 = piVar6;
-    } while ((int *)piVar6[2] != (int *)0x0);
+      nextInstLink = (int *)cursorInst[2];
+      inst = cursorInst;
+    } while ((int *)cursorInst[2] != (int *)0x0);
   }
-  piVar3 = *(int **)(iVar18 + 0x98);
+  inst = *(int **)(entryBlock + 0x98);
 LAB_0010f084:
-  if ((int *)piVar3[2] != (int *)0x0) {
-    piVar2 = (int *)piVar3[2];
-    uVar11 = 0;
+  if ((int *)inst[2] != (int *)0x0) {
+    nextInstLink = (int *)inst[2];
+    nextFreeRegister = 0;
     do {
-      piVar6 = piVar2;
-      uVar13 = uVar11;
-      if ((piVar3[5] & 1U) != 0) {
-        iVar18 = (**(code **)(*piVar3 + 0x4c))(piVar3);
-        if (iVar18 != 0) {
-          iVar18 = (**(code **)(*piVar3 + 0x80))(piVar3);
-          if (((*(uint *)(iVar18 + 0x14) & 0x40) == 0) || (*(int *)(iVar18 + 0x98) != 0)) {
-            for (; iVar12 = (**(code **)(*param_1 + 0x138))(param_1,*(undefined4 *)(program + 8)),
-                (int)uVar11 < iVar12; uVar11 = uVar11 + 1) {
-              iVar12 = Program__isHwRegAllowed(program,uVar11);
-              if ((iVar12 != 0) && (iVar12 = FUN_00130478(program,uVar11), iVar12 != 0)) {
-                uVar13 = uVar11 + 1;
-                uVar10 = uVar11;
+      cursorInst = nextInstLink;
+      savedNextFreeRegister = nextFreeRegister;
+      if ((inst[5] & 1U) != 0) {
+        isInterpLoadB = (**(code **)(*inst + 0x4c))(inst);
+        if (isInterpLoadB != 0) {
+          loadInst = (**(code **)(*inst + 0x80))(inst);
+          if (((*(uint *)(loadInst + 0x14) & 0x40) == 0) || (*(int *)(loadInst + 0x98) != 0)) {
+            for (; regLimitOrScratch = (**(code **)(*psBackend + 0x138))(psBackend,*(undefined4 *)(program + 8)),
+                (int)nextFreeRegister < regLimitOrScratch; nextFreeRegister = nextFreeRegister + 1) {
+              regLimitOrScratch = Program__isHwRegAllowed(program,nextFreeRegister);
+              if ((regLimitOrScratch != 0) && (regLimitOrScratch = FUN_00130478(program,nextFreeRegister), regLimitOrScratch != 0)) {
+                savedNextFreeRegister = nextFreeRegister + 1;
+                assignedRegister = nextFreeRegister;
                 goto LAB_0010f168;
               }
             }
-            uVar10 = 0xffffffff;
-            uVar13 = uVar11;
+            assignedRegister = 0xffffffff;
+            savedNextFreeRegister = nextFreeRegister;
 LAB_0010f168:
-            Program__markHwRegUsed(program,uVar10);
-            *(undefined4 *)(iVar18 + 0x98) = 0;
-            *(uint *)(iVar18 + 0x94) = uVar10;
-            if (*(int *)(program + 0x80) < (int)uVar10) {
-              *(uint *)(program + 0x80) = uVar10;
+            Program__markHwRegUsed(program,assignedRegister);
+            *(undefined4 *)(loadInst + 0x98) = 0;
+            *(uint *)(loadInst + 0x94) = assignedRegister;
+            if (*(int *)(program + 0x80) < (int)assignedRegister) {
+              *(uint *)(program + 0x80) = assignedRegister;
             }
-            *(uint *)(program + 0x88) = 1 << (uVar10 & 0x3f) | *(uint *)(program + 0x88);
-            *(uint *)(iVar18 + 0x14) = *(uint *)(iVar18 + 0x14) | 0x40;
+            *(uint *)(program + 0x88) = 1 << (assignedRegister & 0x3f) | *(uint *)(program + 0x88);
+            *(uint *)(loadInst + 0x14) = *(uint *)(loadInst + 0x14) | 0x40;
           }
           else {
-            uVar10 = *(uint *)(iVar18 + 0x94);
+            assignedRegister = *(uint *)(loadInst + 0x94);
           }
-          if (((int)uVar10 < 0) ||
-             (iVar12 = (**(code **)(*param_1 + 0x138))(param_1,*(undefined4 *)(program + 8)),
-             iVar12 <= (int)uVar10)) {
-            Compiler__fail(uVar7,4);
+          if (((int)assignedRegister < 0) ||
+             (regLimitOrScratch = (**(code **)(*psBackend + 0x138))(psBackend,*(undefined4 *)(program + 8)),
+             regLimitOrScratch <= (int)assignedRegister)) {
+            Compiler__fail(compiler,4);
           }
-          iVar12 = *(int *)(iVar18 + 0x144);
-          if ((iVar12 != 0x1b) && (iVar12 != 0x23)) {
-            if (iVar12 == 0x24) {
-              *(uint *)(iVar18 + 0x148) = uVar10;
+          regLimitOrScratch = *(int *)(loadInst + 0x144);
+          if ((regLimitOrScratch != 0x1b) && (regLimitOrScratch != 0x23)) {
+            if (regLimitOrScratch == 0x24) {
+              *(uint *)(loadInst + 0x148) = assignedRegister;
             }
-            uVar11 = 0xf;
+            remainingLaneMask = 0xf;
             loopIndex = 0;
             do {
-              iVar12 = IRLoadInterp__laneUsed(iVar18,loopIndex);
-              if ((iVar12 != 0) && (uVar9 = 1 << (loopIndex & 0x3f), (uVar9 & uVar11) != 0)) {
-                iVar14 = IRLoadInterp__laneKind(iVar18,loopIndex);
-                iVar16 = IRLoadInterp__laneIndex(iVar18,loopIndex);
-                iVar12 = 1;
-                if (iVar14 != 7) {
-                  iVar12 = iVar16;
+              regLimitOrScratch = IRLoadInterp__laneUsed(loadInst,loopIndex);
+              if ((regLimitOrScratch != 0) && (laneGroupMask = 1 << (loopIndex & 0x3f), (laneGroupMask & remainingLaneMask) != 0)) {
+                laneKind = IRLoadInterp__laneKind(loadInst,loopIndex);
+                laneIndexValue = IRLoadInterp__laneIndex(loadInst,loopIndex);
+                regLimitOrScratch = 1;
+                if (laneKind != 7) {
+                  regLimitOrScratch = laneIndexValue;
                 }
-                uVar8 = loopIndex + 1;
-                if ((int)uVar8 < 4) {
+                followingLane = loopIndex + 1;
+                if ((int)followingLane < 4) {
                   do {
-                    iVar4 = IRLoadInterp__laneUsed(iVar18,uVar8);
-                    if (((iVar4 != 0) && (iVar4 = IRLoadInterp__laneKind(iVar18,uVar8), iVar4 == iVar14)) &&
-                       (iVar4 = IRLoadInterp__laneIndex(iVar18,uVar8), iVar16 == iVar4)) {
-                      uVar9 = uVar9 | 1 << (uVar8 & 0x3f);
+                    laneUsedB = IRLoadInterp__laneUsed(loadInst,followingLane);
+                    if (((laneUsedB != 0) && (laneUsedB = IRLoadInterp__laneKind(loadInst,followingLane), laneUsedB == laneKind)) &&
+                       (laneUsedB = IRLoadInterp__laneIndex(loadInst,followingLane), laneIndexValue == laneUsedB)) {
+                      laneGroupMask = laneGroupMask | 1 << (followingLane & 0x3f);
                     }
-                    bVar1 = uVar8 != 3;
-                    uVar8 = uVar8 + 1;
-                  } while (bVar1);
+                    moreLanes = followingLane != 3;
+                    followingLane = followingLane + 1;
+                  } while (moreLanes);
                 }
-                if (uVar9 != 0) {
-                  IRLoadInterp__laneSelects(local_58,iVar18);
-                  pcVar15 = *(code **)(*param_1 + 0x54);
-                  uVar11 = uVar11 - uVar9;
-                  uVar5 = Table__interpolatorKindToCode(program,iVar14);
-                  operandRecord = IRInst__getOperandRecord(iVar18,1);
-                  uVar9 = *(uint *)(iVar18 + 0x13c);
-                  (*pcVar15)(param_1,uVar10,uVar5,iVar12,*(undefined4 *)(operandRecord + 0x10),uVar9 & 1,
-                             uVar9 >> 2 & 1,uVar9 >> 1 & 1);
+                if (laneGroupMask != 0) {
+                  IRLoadInterp__laneSelects(laneSelects,loadInst);
+                  bindInterpolatorFn = *(code **)(*psBackend + 0x54);
+                  remainingLaneMask = remainingLaneMask - laneGroupMask;
+                  interpolatorCode = Table__interpolatorKindToCode(program,laneKind);
+                  operandRecord = IRInst__getOperandRecord(loadInst,1);
+                  laneGroupMask = *(uint *)(loadInst + 0x13c);
+                  (*bindInterpolatorFn)(psBackend,assignedRegister,interpolatorCode,regLimitOrScratch,*(undefined4 *)(operandRecord + 0x10),laneGroupMask & 1,
+                             laneGroupMask >> 2 & 1,laneGroupMask >> 1 & 1);
                 }
               }
               loopIndex = loopIndex + 1;
             } while ((int)loopIndex < 4);
           }
         }
-        piVar6 = (int *)piVar3[2];
+        cursorInst = (int *)inst[2];
       }
-      piVar2 = (int *)piVar6[2];
-      uVar11 = uVar13;
-      piVar3 = piVar6;
-    } while ((int *)piVar6[2] != (int *)0x0);
+      nextInstLink = (int *)cursorInst[2];
+      nextFreeRegister = savedNextFreeRegister;
+      inst = cursorInst;
+    } while ((int *)cursorInst[2] != (int *)0x0);
   }
   return;
 }

@@ -1189,6 +1189,33 @@ int FUN_0012cfa4(param_1, param_2, param_3, param_4)
 int pass_flatten_ifs(flattenPass)
   int flattenPass;
 {
+  undefined8 predElementRefPair;
+  int walkSuccessor;
+  int inputBase;
+  int laneCountdown;
+  int thenBlock;
+  undefined4 compilerArg;
+  undefined4 defaultSelectSwizzle;
+  int walkBlock;
+  int instQuery38;
+  int instQuery34b;
+  int conditionHasNoUses;
+  int instQuery34;
+  int selectSource3Record;
+  int selectSource2Record;
+  int selectSource1Record;
+  int phiSlotOffset;
+  int phiSource2Record;
+  int phiSource1Record;
+  int laneByteIndex;
+  int phiDestRecord;
+  int conditionDefOpcode;
+  int operandNumber;
+  int compiler;
+  int *trailingInstCursor;
+  int *branchInst;
+  int *thenBlockVectorAtD4;
+  int *predecessorVector;
   int *elseBlockVectorAtd4;
   int *thenEndBlockVectorAtd0;
   int *elseEndBlockVectorAtd0;
@@ -1204,20 +1231,20 @@ int pass_flatten_ifs(flattenPass)
   bool changedAny;
   int *phiInst;
   int *nextInst;
-  undefined4 uVar4;
-  int iVar5;
-  int iVar6;
+  undefined4 savedConditionSwizzle;
+  int blockQuery28;
+  int targetCanFlatten;
   uint conditionNegate;
   int *conditionSource;
   undefined4 phiSource1;
   undefined4 phiSource2;
-  undefined4 extraout_r4;
-  uint in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg4b;
+  uint staleArg6;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
   int blockBeforeIfCopy;
-  code *pcVar12;
-  undefined4 uVar13;
+  code *releaseFn;
+  undefined4 staleArg4;
   uint conditionAbs;
   undefined4 phiSource2Swizzle;
   int ifHeader;
@@ -1227,36 +1254,36 @@ int pass_flatten_ifs(flattenPass)
   int *block;
   int elseBlock;
   int thenEndBlock;
-  int *piVar23;
+  int *nextBlock;
   uint *footerPredVector;
   uint *footerPredVectorAlias;
   int elseEndBlock;
-  undefined8 uVar27;
-  undefined1 auStack_68 [4];
-  undefined4 local_64;
-  int local_60 [2];
+  undefined8 canFlattenResult;
+  undefined1 canFlattenOut [4];
+  undefined4 conditionSwizzle;
+  int destMaskWord [2];
   int blockBeforeIf;
-  int *local_54;
+  int *blockInstSentinel;
   
   block = *(int **)(flattenPass + 900);
-  piVar23 = (int *)block[2];
-  if (piVar23 != (int *)0x0) {
+  nextBlock = (int *)block[2];
+  if (nextBlock != (int *)0x0) {
     changedAny = false;
     do {
-      iVar5 = (**(code **)(*block + 0x28))(block);
-      if ((iVar5 != 0) && (iVar5 = (**(code **)(*block + 0x40))(block), iVar5 == 0)) {
-        iVar5 = *(int *)(flattenPass + 8);
-        if (*(int *)(iVar5 + 0x6a8) <= *(int *)(*(int *)(iVar5 + 0x6c4) + 0x15c)) break;
+      blockQuery28 = (**(code **)(*block + 0x28))(block);
+      if ((blockQuery28 != 0) && (blockQuery28 = (**(code **)(*block + 0x40))(block), blockQuery28 == 0)) {
+        compiler = *(int *)(flattenPass + 8);
+        if (*(int *)(compiler + 0x6a8) <= *(int *)(*(int *)(compiler + 0x6c4) + 0x15c)) break;
         ifHeader = block[0x4b];
-        iVar6 = (**(code **)(**(int **)(iVar5 + 0x30c) + 0x114))(*(int **)(iVar5 + 0x30c),ifHeader);
-        if (iVar6 == 0) break;
-        uVar27 = IfHeader__canFlatten(ifHeader,auStack_68);
-        if ((int)((ulonglong)uVar27 >> 0x20) != 0) break;
+        targetCanFlatten = (**(code **)(**(int **)(compiler + 0x30c) + 0x114))(*(int **)(compiler + 0x30c),ifHeader);
+        if (targetCanFlatten == 0) break;
+        canFlattenResult = IfHeader__canFlatten(ifHeader,canFlattenOut);
+        if ((int)((ulonglong)canFlattenResult >> 0x20) != 0) break;
         footerPredVector = (uint *)block[0x35];
-        iVar6 = *(int *)(ifHeader + 0x134);
+        thenBlock = *(int *)(ifHeader + 0x134);
         elseBlock = *(int *)(ifHeader + 0x138);
         if (*footerPredVector == 0) {
-          uVar27 = Vector__elementRefGrow(footerPredVector,0);
+          canFlattenResult = Vector__elementRefGrow(footerPredVector,0);
           footerPredVectorAlias = (uint *)block[0x35];
         }
         else {
@@ -1266,147 +1293,147 @@ int pass_flatten_ifs(flattenPass)
             footerPredVector[1] = 1;
             footerPredVectorAlias = (uint *)block[0x35];
           }
-          uVar27 = CONCAT44(footerPredVector[2],(int)uVar27);
+          canFlattenResult = CONCAT44(footerPredVector[2],(int)canFlattenResult);
         }
-        uVar13 = (undefined4)uVar27;
-        thenEndBlock = *(int *)((ulonglong)uVar27 >> 0x20);
+        staleArg4 = (undefined4)canFlattenResult;
+        thenEndBlock = *(int *)((ulonglong)canFlattenResult >> 0x20);
         if (*footerPredVectorAlias < 2) {
-          uVar27 = Vector__elementRefGrow(footerPredVectorAlias,1);
+          predElementRefPair = Vector__elementRefGrow(footerPredVectorAlias,1);
         }
         else {
           conditionNegate = footerPredVectorAlias[1];
           if (conditionNegate < 2) {
-            iVar5 = (1 - conditionNegate) * 4 + 4;
-            _memset(conditionNegate * 4 + footerPredVectorAlias[2],0,iVar5);
+            compiler = (1 - conditionNegate) * 4 + 4;
+            _memset(conditionNegate * 4 + footerPredVectorAlias[2],0,compiler);
             footerPredVectorAlias[1] = 2;
-            uVar13 = extraout_r4;
+            staleArg4 = staleArg4b;
           }
-          uVar27 = CONCAT44(footerPredVectorAlias[2] + 4,uVar13);
+          predElementRefPair = CONCAT44(footerPredVectorAlias[2] + 4,staleArg4);
         }
         ifHeaderVectorAtd4 = *(int **)(ifHeader + 0xd4);
-        elseEndBlock = *(int *)((ulonglong)uVar27 >> 0x20);
+        elseEndBlock = *(int *)((ulonglong)predElementRefPair >> 0x20);
         if (*ifHeaderVectorAtd4 == 0) {
-          uVar27 = Vector__elementRefGrow(ifHeaderVectorAtd4,0);
+          predElementRefPair = Vector__elementRefGrow(ifHeaderVectorAtd4,0);
         }
         else {
           if (ifHeaderVectorAtd4[1] == 0) {
             *(undefined4 *)ifHeaderVectorAtd4[2] = 0;
             ifHeaderVectorAtd4[1] = 1;
           }
-          uVar27 = CONCAT44(ifHeaderVectorAtd4[2],(int)uVar27);
+          predElementRefPair = CONCAT44(ifHeaderVectorAtd4[2],(int)predElementRefPair);
         }
-        blockBeforeIf = *(int *)((ulonglong)uVar27 >> 0x20);
-        piVar23 = (int *)block[0x34];
-        if (*piVar23 == 0) {
-          uVar27 = Vector__elementRefGrow(piVar23,0);
+        blockBeforeIf = *(int *)((ulonglong)predElementRefPair >> 0x20);
+        predecessorVector = (int *)block[0x34];
+        if (*predecessorVector == 0) {
+          predElementRefPair = Vector__elementRefGrow(predecessorVector,0);
         }
         else {
-          if (piVar23[1] == 0) {
-            *(undefined4 *)piVar23[2] = 0;
-            piVar23[1] = 1;
+          if (predecessorVector[1] == 0) {
+            *(undefined4 *)predecessorVector[2] = 0;
+            predecessorVector[1] = 1;
           }
-          uVar27 = CONCAT44(piVar23[2],(int)uVar27);
+          predElementRefPair = CONCAT44(predecessorVector[2],(int)predElementRefPair);
         }
-        blockAfterIf = *(int *)((ulonglong)uVar27 >> 0x20);
+        blockAfterIf = *(int *)((ulonglong)predElementRefPair >> 0x20);
         blockBeforeIfVectorAtd0 = *(int **)(blockBeforeIf + 0xd0);
         blockBeforeIfCopy = blockBeforeIf;
         if (*blockBeforeIfVectorAtd0 == 0) {
-          uVar27 = Vector__elementRefGrow(blockBeforeIfVectorAtd0,0);
+          predElementRefPair = Vector__elementRefGrow(blockBeforeIfVectorAtd0,0);
         }
         else {
           if (blockBeforeIfVectorAtd0[1] == 0) {
             *(undefined4 *)blockBeforeIfVectorAtd0[2] = 0;
             blockBeforeIfVectorAtd0[1] = 1;
           }
-          uVar27 = CONCAT44(blockBeforeIfVectorAtd0[2],(int)uVar27);
+          predElementRefPair = CONCAT44(blockBeforeIfVectorAtd0[2],(int)predElementRefPair);
         }
-        *(int *)((ulonglong)uVar27 >> 0x20) = iVar6;
-        piVar23 = *(int **)(iVar6 + 0xd4);
-        if (*piVar23 == 0) {
-          uVar27 = Vector__elementRefGrow(piVar23,0);
+        *(int *)((ulonglong)predElementRefPair >> 0x20) = thenBlock;
+        thenBlockVectorAtD4 = *(int **)(thenBlock + 0xd4);
+        if (*thenBlockVectorAtD4 == 0) {
+          predElementRefPair = Vector__elementRefGrow(thenBlockVectorAtD4,0);
         }
         else {
-          if (piVar23[1] == 0) {
-            *(undefined4 *)piVar23[2] = 0;
-            piVar23[1] = 1;
+          if (thenBlockVectorAtD4[1] == 0) {
+            *(undefined4 *)thenBlockVectorAtD4[2] = 0;
+            thenBlockVectorAtD4[1] = 1;
           }
-          uVar27 = CONCAT44(piVar23[2],(int)uVar27);
+          predElementRefPair = CONCAT44(thenBlockVectorAtD4[2],(int)predElementRefPair);
         }
-        *(int *)((ulonglong)uVar27 >> 0x20) = blockBeforeIf;
+        *(int *)((ulonglong)predElementRefPair >> 0x20) = blockBeforeIf;
         blockAfterIfVectorAtd4 = *(int **)(blockAfterIf + 0xd4);
         if (*blockAfterIfVectorAtd4 == 0) {
-          uVar27 = Vector__elementRefGrow(blockAfterIfVectorAtd4,0);
+          predElementRefPair = Vector__elementRefGrow(blockAfterIfVectorAtd4,0);
         }
         else {
           if (blockAfterIfVectorAtd4[1] == 0) {
             *(undefined4 *)blockAfterIfVectorAtd4[2] = 0;
             blockAfterIfVectorAtd4[1] = 1;
           }
-          uVar27 = CONCAT44(blockAfterIfVectorAtd4[2],(int)uVar27);
+          predElementRefPair = CONCAT44(blockAfterIfVectorAtd4[2],(int)predElementRefPair);
         }
-        *(int *)((ulonglong)uVar27 >> 0x20) = elseEndBlock;
+        *(int *)((ulonglong)predElementRefPair >> 0x20) = elseEndBlock;
         elseEndBlockVectorAtd0 = *(int **)(elseEndBlock + 0xd0);
         if (*elseEndBlockVectorAtd0 == 0) {
-          uVar27 = Vector__elementRefGrow(elseEndBlockVectorAtd0,0);
+          predElementRefPair = Vector__elementRefGrow(elseEndBlockVectorAtd0,0);
         }
         else {
           if (elseEndBlockVectorAtd0[1] == 0) {
             *(undefined4 *)elseEndBlockVectorAtd0[2] = 0;
             elseEndBlockVectorAtd0[1] = 1;
           }
-          uVar27 = CONCAT44(elseEndBlockVectorAtd0[2],(int)uVar27);
+          predElementRefPair = CONCAT44(elseEndBlockVectorAtd0[2],(int)predElementRefPair);
         }
-        *(int *)((ulonglong)uVar27 >> 0x20) = blockAfterIf;
+        *(int *)((ulonglong)predElementRefPair >> 0x20) = blockAfterIf;
         thenEndBlockVectorAtd0 = *(int **)(thenEndBlock + 0xd0);
         if (*thenEndBlockVectorAtd0 == 0) {
-          uVar27 = Vector__elementRefGrow(thenEndBlockVectorAtd0,0);
+          predElementRefPair = Vector__elementRefGrow(thenEndBlockVectorAtd0,0);
         }
         else {
           if (thenEndBlockVectorAtd0[1] == 0) {
             *(undefined4 *)thenEndBlockVectorAtd0[2] = 0;
             thenEndBlockVectorAtd0[1] = 1;
           }
-          uVar27 = CONCAT44(thenEndBlockVectorAtd0[2],(int)uVar27);
+          predElementRefPair = CONCAT44(thenEndBlockVectorAtd0[2],(int)predElementRefPair);
         }
-        *(int *)((ulonglong)uVar27 >> 0x20) = elseBlock;
+        *(int *)((ulonglong)predElementRefPair >> 0x20) = elseBlock;
         elseBlockVectorAtd4 = *(int **)(elseBlock + 0xd4);
         if (*elseBlockVectorAtd4 == 0) {
-          uVar27 = Vector__elementRefGrow(elseBlockVectorAtd4,0);
+          predElementRefPair = Vector__elementRefGrow(elseBlockVectorAtd4,0);
         }
         else {
           if (elseBlockVectorAtd4[1] == 0) {
             *(undefined4 *)elseBlockVectorAtd4[2] = 0;
             elseBlockVectorAtd4[1] = 1;
           }
-          uVar27 = CONCAT44(elseBlockVectorAtd4[2],(int)uVar27);
+          predElementRefPair = CONCAT44(elseBlockVectorAtd4[2],(int)predElementRefPair);
         }
-        *(int *)((ulonglong)uVar27 >> 0x20) = thenEndBlock;
-        *(int *)(iVar6 + 0xf0) = blockBeforeIf;
+        *(int *)((ulonglong)predElementRefPair >> 0x20) = thenEndBlock;
+        *(int *)(thenBlock + 0xf0) = blockBeforeIf;
         *(int *)(elseBlock + 0xf0) = thenEndBlock;
         *(int *)(blockAfterIf + 0xf0) = elseEndBlock;
-        piVar23 = (int *)Block__getBranchInst(ifHeader,(int)uVar27,iVar5,in_r6,in_r7,in_r8,blockBeforeIfCopy);
-        if (*(int *)(piVar23[0x22] + 8) == 0x8b) {
-          isOperandConstZero = IRInst__isOperandConstZero(piVar23,2);
+        branchInst = (int *)Block__getBranchInst(ifHeader,(int)predElementRefPair,compiler,staleArg6,staleArg7,staleArg8,blockBeforeIfCopy);
+        if (*(int *)(branchInst[0x22] + 8) == 0x8b) {
+          isOperandConstZero = IRInst__isOperandConstZero(branchInst,2);
           if (isOperandConstZero == 0) {
-            isOperandConstZero = IRInst__isOperandConstZero(piVar23,1);
+            isOperandConstZero = IRInst__isOperandConstZero(branchInst,1);
             if (isOperandConstZero == 0) {
               conditionSource = IRInst__create(0x12,*(undefined4 *)(flattenPass + 8));
               conditionSource[0x26] = 0;
               conditionSource[0x25] = conditionSource[0x53];
-              operandRecord2 = IRInst__getOperandRecord(piVar23,1);
+              operandRecord2 = IRInst__getOperandRecord(branchInst,1);
               IRInst__getOrCreateOperandRecord(conditionSource,1,operandRecord2,*(undefined4 *)(flattenPass + 8));
-              operandRecord2 = IRInst__getOperandRecord(piVar23,2);
-              in_r6 = *(uint *)(flattenPass + 8);
-              IRInst__getOrCreateOperandRecord(conditionSource,2,operandRecord2,in_r6);
-              IROperand__setModifierBits(conditionSource + 0x2f,1,piVar23[0x34] & 1U ^ 1);
+              operandRecord2 = IRInst__getOperandRecord(branchInst,2);
+              staleArg6 = *(uint *)(flattenPass + 8);
+              IRInst__getOrCreateOperandRecord(conditionSource,2,operandRecord2,staleArg6);
+              IROperand__setModifierBits(conditionSource + 0x2f,1,branchInst[0x34] & 1U ^ 1);
               Block__prependInst(blockAfterIf,conditionSource);
               IRInst__addToUseLists(conditionSource,flattenPass);
-              uVar13 = 0x10203;
-              for (iVar5 = 1; iVar6 = (**(code **)(*conditionSource + 0x14))(conditionSource), iVar5 <= iVar6;
-                  iVar5 = iVar5 + 1) {
-                operandVReg = (int *)IRInst__getOperandSource(conditionSource,iVar5);
-                iVar6 = (**(code **)(*operandVReg + 0x5c))(operandVReg);
-                if (iVar6 != 0) {
+              defaultSelectSwizzle = 0x10203;
+              for (operandNumber = 1; thenBlock = (**(code **)(*conditionSource + 0x14))(conditionSource), operandNumber <= thenBlock;
+                  operandNumber = operandNumber + 1) {
+                operandVReg = (int *)IRInst__getOperandSource(conditionSource,operandNumber);
+                thenBlock = (**(code **)(*operandVReg + 0x5c))(operandVReg);
+                if (thenBlock != 0) {
                   DList__unlink(operandVReg);
                   Block__insertInstBefore(blockAfterIf,conditionSource,operandVReg);
                 }
@@ -1417,108 +1444,108 @@ int pass_flatten_ifs(flattenPass)
             }
             else {
               insertAfterInst = *(int **)(blockAfterIf + 200);
-              conditionSource = (int *)IRInst__getOperandSource(piVar23,2);
-              operandRecord = IRInst__getOperandRecord(piVar23,2);
-              uVar13 = *(undefined4 *)(operandRecord + 0x10);
-              conditionNegate = piVar23[0x34] & 1;
-              conditionAbs = (uint)piVar23[0x34] >> 1 & 1;
-              compareCondition = IRInst__getCompareCondition(piVar23);
-              IRInst__setCompareCondition(piVar23,*(undefined4 *)(PTR_DAT_001e90f8 + compareCondition * 4));
+              conditionSource = (int *)IRInst__getOperandSource(branchInst,2);
+              operandRecord = IRInst__getOperandRecord(branchInst,2);
+              defaultSelectSwizzle = *(undefined4 *)(operandRecord + 0x10);
+              conditionNegate = branchInst[0x34] & 1;
+              conditionAbs = (uint)branchInst[0x34] >> 1 & 1;
+              compareCondition = IRInst__getCompareCondition(branchInst);
+              IRInst__setCompareCondition(branchInst,*(undefined4 *)(PTR_DAT_001e90f8 + compareCondition * 4));
             }
           }
           else {
             insertAfterInst = *(int **)(blockAfterIf + 200);
-            conditionSource = (int *)IRInst__getOperandSource(piVar23,1);
-            operandRecord = IRInst__getOperandRecord(piVar23,1);
-            uVar13 = *(undefined4 *)(operandRecord + 0x10);
-            conditionNegate = piVar23[0x2e] & 1;
-            conditionAbs = (uint)piVar23[0x2e] >> 1 & 1;
+            conditionSource = (int *)IRInst__getOperandSource(branchInst,1);
+            operandRecord = IRInst__getOperandRecord(branchInst,1);
+            defaultSelectSwizzle = *(undefined4 *)(operandRecord + 0x10);
+            conditionNegate = branchInst[0x2e] & 1;
+            conditionAbs = (uint)branchInst[0x2e] >> 1 & 1;
           }
         }
         else {
           insertAfterInst = *(int **)(blockAfterIf + 200);
-          conditionSource = (int *)IRInst__getOperandSource(piVar23,1);
-          operandRecord3 = IRInst__getOperandRecord(piVar23,1);
-          iVar5 = *(int *)(conditionSource[0x22] + 8);
-          uVar13 = *(undefined4 *)(operandRecord3 + 0x10);
-          conditionNegate = piVar23[0x2e] & 1U ^ 1;
-          if ((((iVar5 == 0x27) || (iVar5 == 0x29)) || (iVar5 == 0x2a)) ||
-             (conditionAbs = 1, iVar5 == 0x28)) {
+          conditionSource = (int *)IRInst__getOperandSource(branchInst,1);
+          operandRecord3 = IRInst__getOperandRecord(branchInst,1);
+          conditionDefOpcode = *(int *)(conditionSource[0x22] + 8);
+          defaultSelectSwizzle = *(undefined4 *)(operandRecord3 + 0x10);
+          conditionNegate = branchInst[0x2e] & 1U ^ 1;
+          if ((((conditionDefOpcode == 0x27) || (conditionDefOpcode == 0x29)) || (conditionDefOpcode == 0x2a)) ||
+             (conditionAbs = 1, conditionDefOpcode == 0x28)) {
             conditionAbs = 0;
           }
         }
-        local_54 = block + 0x24;
+        blockInstSentinel = block + 0x24;
         phiInst = (int *)block[0x26];
         for (nextInst = (int *)((int *)block[0x26])[2]; nextInst != (int *)0x0;
             nextInst = (int *)nextInst[2]) {
           if (*(int *)(phiInst[0x22] + 8) == 0x8e) {
-            iVar5 = IRInst__getOperandRecord(phiInst,0);
-            local_60[0] = *(int *)(iVar5 + 0x10);
+            phiDestRecord = IRInst__getOperandRecord(phiInst,0);
+            destMaskWord[0] = *(int *)(phiDestRecord + 0x10);
             phiSource1 = IRInst__getOperandSource(phiInst,1);
             phiSource2 = IRInst__getOperandSource(phiInst,2);
-            iVar6 = 4;
-            iVar5 = 0;
-            local_64 = uVar13;
+            laneCountdown = 4;
+            laneByteIndex = 0;
+            conditionSwizzle = defaultSelectSwizzle;
             do {
-              if (*(char *)((int)local_60 + iVar5) == '\x01') {
-                *(undefined1 *)((int)local_60 + iVar5 + -4) = 4;
+              if (*(char *)((int)destMaskWord + laneByteIndex) == '\x01') {
+                *(undefined1 *)((int)destMaskWord + laneByteIndex + -4) = 4;
               }
-              iVar5 = iVar5 + 1;
-              iVar6 = iVar6 + -1;
-            } while (iVar6 != 0);
-            iVar5 = IRInst__getOperandRecord(phiInst,1);
-            phiSource1Swizzle = *(undefined4 *)(iVar5 + 0x10);
-            iVar5 = IRInst__getOperandRecord(phiInst,2);
-            phiSource2Swizzle = *(undefined4 *)(iVar5 + 0x10);
-            iVar5 = phiInst[0x58] - *(int *)(flattenPass + 0x478);
-            if (iVar5 < 0) {
-              iVar5 = 0;
+              laneByteIndex = laneByteIndex + 1;
+              laneCountdown = laneCountdown + -1;
+            } while (laneCountdown != 0);
+            phiSource1Record = IRInst__getOperandRecord(phiInst,1);
+            phiSource1Swizzle = *(undefined4 *)(phiSource1Record + 0x10);
+            phiSource2Record = IRInst__getOperandRecord(phiInst,2);
+            phiSource2Swizzle = *(undefined4 *)(phiSource2Record + 0x10);
+            phiSlotOffset = phiInst[0x58] - *(int *)(flattenPass + 0x478);
+            if (phiSlotOffset < 0) {
+              phiSlotOffset = 0;
             }
             elseBlock = phiInst[4];
             IRInst__detachWhenTracking(phiInst,flattenPass);
             DList__unlink(phiInst);
             IRInst__reinitAsTrinary(phiInst,0x25,*(undefined4 *)(flattenPass + 8));
             Block__insertInstAfter(blockAfterIf,insertAfterInst,phiInst);
-            iVar6 = *(int *)(flattenPass + 0x478);
+            inputBase = *(int *)(flattenPass + 0x478);
             phiInst[4] = elseBlock;
-            phiInst[0x58] = iVar5 + iVar6;
+            phiInst[0x58] = phiSlotOffset + inputBase;
             phiInst[0x25] = phiInst[0x53];
             phiInst[0x26] = 0;
-            phiInst[0x27] = local_60[0];
+            phiInst[0x27] = destMaskWord[0];
             IRInst__setOperandSource(phiInst,1,conditionSource,*(uint *)(flattenPass + 0x30) >> 7 & 1,
                          *(undefined4 *)(flattenPass + 8));
-            uVar4 = local_64;
-            iVar5 = IRInst__getOperandRecord(phiInst,1);
-            *(undefined4 *)(iVar5 + 0x10) = uVar4;
+            savedConditionSwizzle = conditionSwizzle;
+            selectSource1Record = IRInst__getOperandRecord(phiInst,1);
+            *(undefined4 *)(selectSource1Record + 0x10) = savedConditionSwizzle;
             IROperand__setModifierBits(phiInst + 0x29,1,conditionNegate);
             IROperand__setModifierBits(phiInst + 0x29,2,conditionAbs);
             IRInst__setOperandSource(phiInst,2,phiSource1,*(uint *)(flattenPass + 0x30) >> 7 & 1,
                          *(undefined4 *)(flattenPass + 8));
-            iVar5 = IRInst__getOperandRecord(phiInst,2);
-            *(undefined4 *)(iVar5 + 0x10) = phiSource1Swizzle;
-            in_r7 = *(undefined4 *)(flattenPass + 8);
-            in_r6 = *(uint *)(flattenPass + 0x30) >> 7 & 1;
-            IRInst__setOperandSource(phiInst,3,phiSource2,in_r6,in_r7);
-            iVar5 = IRInst__getOperandRecord(phiInst,3);
-            *(undefined4 *)(iVar5 + 0x10) = phiSource2Swizzle;
+            selectSource2Record = IRInst__getOperandRecord(phiInst,2);
+            *(undefined4 *)(selectSource2Record + 0x10) = phiSource1Swizzle;
+            staleArg7 = *(undefined4 *)(flattenPass + 8);
+            staleArg6 = *(uint *)(flattenPass + 0x30) >> 7 & 1;
+            IRInst__setOperandSource(phiInst,3,phiSource2,staleArg6,staleArg7);
+            selectSource3Record = IRInst__getOperandRecord(phiInst,3);
+            *(undefined4 *)(selectSource3Record + 0x10) = phiSource2Swizzle;
             insertAfterInst = phiInst;
-            if (*(int *)(piVar23[0x22] + 8) == 0x8b) {
-              ((int (*)())FUN_0012b3f8)(piVar23,phiInst,*(undefined4 *)(flattenPass + 8));
+            if (*(int *)(branchInst[0x22] + 8) == 0x8b) {
+              ((int (*)())FUN_0012b3f8)(branchInst,phiInst,*(undefined4 *)(flattenPass + 8));
             }
           }
           else {
-            iVar5 = (**(code **)(*phiInst + 0x34))(phiInst);
-            if (iVar5 == 0) break;
+            instQuery34 = (**(code **)(*phiInst + 0x34))(phiInst);
+            if (instQuery34 == 0) break;
           }
           phiInst = nextInst;
         }
-        Program__removeInst(flattenPass,piVar23);
-        piVar23[5] = piVar23[5] & 0xffffffef;
-        pcVar12 = *(code **)(*piVar23 + 0xc);
-        uVar13 = *(undefined4 *)(flattenPass + 8);
-        (*pcVar12)(piVar23,*(uint *)(flattenPass + 0x30) >> 7 & 1);
-        iVar5 = IRInst__hasNoUses(conditionSource,flattenPass,uVar13,in_r6,in_r7,in_r8,pcVar12);
-        if (iVar5 != 0) {
+        Program__removeInst(flattenPass,branchInst);
+        branchInst[5] = branchInst[5] & 0xffffffef;
+        releaseFn = *(code **)(*branchInst + 0xc);
+        compilerArg = *(undefined4 *)(flattenPass + 8);
+        (*releaseFn)(branchInst,*(uint *)(flattenPass + 0x30) >> 7 & 1);
+        conditionHasNoUses = IRInst__hasNoUses(conditionSource,flattenPass,compilerArg,staleArg6,staleArg7,staleArg8,releaseFn);
+        if (conditionHasNoUses != 0) {
           (**(code **)(*conditionSource + 0xc))
                     (conditionSource,*(uint *)(flattenPass + 0x30) >> 7 & 1,*(undefined4 *)(flattenPass + 8));
         }
@@ -1527,35 +1554,35 @@ int pass_flatten_ifs(flattenPass)
           *(undefined4 *)(*(int *)(ifHeader + 0x140) + 0x144) = 1;
         }
         Block__detach(ifHeader);
-        piVar23 = (int *)local_54[2];
-        for (conditionSource = (int *)((int *)local_54[2])[2]; conditionSource != (int *)0x0;
+        trailingInstCursor = (int *)blockInstSentinel[2];
+        for (conditionSource = (int *)((int *)blockInstSentinel[2])[2]; conditionSource != (int *)0x0;
             conditionSource = (int *)conditionSource[2]) {
-          iVar5 = (**(code **)(*piVar23 + 0x34))(piVar23);
-          if (iVar5 == 0) {
-            iVar5 = (**(code **)(*piVar23 + 0x38))(piVar23);
-            if (iVar5 != 0) break;
-            DList__unlink(piVar23);
-            Block__insertInstAfter(blockAfterIf,insertAfterInst,piVar23);
-            insertAfterInst = piVar23;
+          instQuery34b = (**(code **)(*trailingInstCursor + 0x34))(trailingInstCursor);
+          if (instQuery34b == 0) {
+            instQuery38 = (**(code **)(*trailingInstCursor + 0x38))(trailingInstCursor);
+            if (instQuery38 != 0) break;
+            DList__unlink(trailingInstCursor);
+            Block__insertInstAfter(blockAfterIf,insertAfterInst,trailingInstCursor);
+            insertAfterInst = trailingInstCursor;
           }
-          piVar23 = conditionSource;
+          trailingInstCursor = conditionSource;
         }
         Block__detach(block);
-        iVar5 = blockBeforeIf;
+        walkBlock = blockBeforeIf;
         do {
           changedAny = true;
-          iVar6 = Block__findSimpleSuccessor(iVar5);
-          if (((blockAfterIf != iVar6) && (changedAny = false, iVar6 == 0)) ||
-             (iVar6 = FUN_0012aef0(flattenPass,iVar5,iVar6), iVar6 == 0)) {
-            iVar5 = *(int *)(iVar5 + 8);
+          walkSuccessor = Block__findSimpleSuccessor(walkBlock);
+          if (((blockAfterIf != walkSuccessor) && (changedAny = false, walkSuccessor == 0)) ||
+             (walkSuccessor = FUN_0012aef0(flattenPass,walkBlock,walkSuccessor), walkSuccessor == 0)) {
+            walkBlock = *(int *)(walkBlock + 8);
           }
-        } while ((!changedAny) && (iVar5 != blockAfterIf));
+        } while ((!changedAny) && (walkBlock != blockAfterIf));
         changedAny = true;
-        piVar23 = *(int **)(blockBeforeIf + 8);
+        nextBlock = *(int **)(blockBeforeIf + 8);
       }
-      block = piVar23;
-      piVar23 = (int *)block[2];
-    } while (piVar23 != (int *)0x0);
+      block = nextBlock;
+      nextBlock = (int *)block[2];
+    } while (nextBlock != (int *)0x0);
     if (changedAny) {
       Program__freeWorkArrays(flattenPass);
       Program__beginPass(flattenPass,(int)"flatten_ifs");
