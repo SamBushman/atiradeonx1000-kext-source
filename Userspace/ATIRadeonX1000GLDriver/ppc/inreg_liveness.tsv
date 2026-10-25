@@ -244,7 +244,7 @@
 2c230	FUN_0002c230	r6	PASS-indirect	2c2f8 bl 0x90990
 2c230	FUN_0002c230	r7	PASS-indirect	2c2f8 bl 0x90990
 2c230	FUN_0002c230	r8	PASS-indirect	2c2f8 bl 0x90990
-2cc30	FUN_0002cc30	r9	PASS-no	2ccd8 bl 0x2bf30
+2cc30	gld_prepareDrawCount	r9	PASS-no	2ccd8 bl 0x2bf30
 2ce40	FUN_0002ce40	r5	PASS-indirect	2cfb4 bctrl 
 2ce40	FUN_0002ce40	r6	PASS-indirect	2cfb4 bctrl 
 34200	glGenerateMipmap_impl	r8	PASS-no	34244 bl 0x1a3940	; symbol stub for: _pthread_mut

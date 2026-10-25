@@ -1774,12 +1774,12 @@ int FUN_00030840(ctx, param_2, texture)
   iVar3 = ctx;
   do {
     if (*(int *)(iVar3 + 0x1c8) != 0) {
-      param_2 = FUN_0002cd50(ctx,0,iVar2,param_2);
+      param_2 = gld_emitUnitObjectPacket(ctx,0,iVar2,param_2);
     }
     iVar2 = iVar2 + -1;
     iVar3 = iVar3 + -4;
   } while (iVar2 != 0);
-  uVar1 = FUN_0002cd50(ctx,texture,0,param_2);
+  uVar1 = gld_emitUnitObjectPacket(ctx,texture,0,param_2);
   return uVar1;
 }
 
@@ -1816,7 +1816,7 @@ int FUN_000308c0(ctx, param_2)
     }
 LAB_0003093c:
     if ((loopIndex == 0) || (iVar3 != 0)) {
-      param_2 = FUN_0002cd50(ctx,iVar3,loopIndex,param_2);
+      param_2 = gld_emitUnitObjectPacket(ctx,iVar3,loopIndex,param_2);
     }
     bVar1 = loopIndex == 0xf;
     iVar4 = iVar4 + 0x14;
@@ -1854,7 +1854,7 @@ int FUN_000309c0(param_1, param_2, param_3)
   *(undefined4 *)(param_3 * 4 + iVar2 + 0x18c) = param_2;
   uVar1 = (**(code **)(iVar2 + 0x2998))(param_1,0xe,param_3);
   *(undefined4 *)(iVar2 + 0x298c) = uVar1;
-  uVar1 = FUN_0002cd50(iVar2,param_2,param_3,uVar1);
+  uVar1 = gld_emitUnitObjectPacket(iVar2,param_2,param_3,uVar1);
   *(undefined4 *)(iVar2 + 0x298c) = uVar1;
                     
                     
@@ -7319,7 +7319,7 @@ void gldPrimInlineLineStrip(int ctx,uint data,undefined4 elementCount,undefined4
   undefined4 staleArgR9;
   
   topology = 3;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,primFlag,3,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,primFlag,3,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4
                        ,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
@@ -7336,7 +7336,7 @@ void gldPrimInlineLineStrip(int ctx,uint data,undefined4 elementCount,undefined4
       *(code **)(ctx + 0x2680) = 0x00001e24 + ctx;
       *(int *)(ctx + 0x2684) = ctx + 0x1e44;
       *(undefined4 *)(0x000026c8 + ctx + 4) = *(undefined4 *)(ctx + 0x1ee4);
-      ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
+      ringStart = (undefined4 *)gld_emitVapStreamControl(ctx,ringStart);
     }
     if (*(char *)(ctx + 0x2a42) == '\0') {
       *ringStart = 0x5c8;
@@ -7447,7 +7447,7 @@ void gldPrimInlineTriangleFan(int ctx,uint fanCenterData,uint data,undefined4 el
   undefined4 staleArgR9;
   
   topology = 6;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,6,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,6,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
                        staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffff98);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
@@ -7464,7 +7464,7 @@ void gldPrimInlineTriangleFan(int ctx,uint fanCenterData,uint data,undefined4 el
       *(code **)(ctx + 0x2680) = 0x00001e24 + ctx;
       *(int *)(ctx + 0x2684) = ctx + 0x1e44;
       *(undefined4 *)(0x000026c8 + ctx + 4) = *(undefined4 *)(ctx + 0x1ee4);
-      ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
+      ringStart = (undefined4 *)gld_emitVapStreamControl(ctx,ringStart);
     }
     if (*(char *)(ctx + 0x2a42) == '\0') {
       *ringStart = 0x5c8;
@@ -7619,7 +7619,7 @@ void gldPrimInlineTriangles(int ctx,uint data,undefined4 elementCount,undefined4
   undefined4 staleArgR9;
   
   topology = 4;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,4,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,4,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
                        staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
@@ -7636,7 +7636,7 @@ void gldPrimInlineTriangles(int ctx,uint data,undefined4 elementCount,undefined4
       *(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) = 0x00001e24 + ctx;
       *(int *)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr) = ctx + 0x1e44;
       *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
-      ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
+      ringStart = (undefined4 *)gld_emitVapStreamControl(ctx,ringStart);
     }
     if (*(char *)(ctx + GLD_needsWaitIdle) == '\0') {
       *ringStart = 0x5c8;
@@ -7737,7 +7737,7 @@ void gldPrimInlineTriangleStrip(int ctx,uint data,undefined4 elementCount,undefi
   undefined4 staleArgR9;
   
   topology = 5;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,5,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,5,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
                        staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
@@ -7754,7 +7754,7 @@ void gldPrimInlineTriangleStrip(int ctx,uint data,undefined4 elementCount,undefi
       *(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) = 0x00001e24 + ctx;
       *(int *)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr) = ctx + 0x1e44;
       *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
-      ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
+      ringStart = (undefined4 *)gld_emitVapStreamControl(ctx,ringStart);
     }
     if (*(char *)(ctx + GLD_needsWaitIdle) == '\0') {
       *ringStart = 0x5c8;
@@ -7855,7 +7855,7 @@ void gldPrimInlineQuads(int ctx,uint data,undefined4 elementCount,undefined4 ext
   undefined4 staleArgR9;
   
   topology = 7;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,7,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,7,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
                        staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
@@ -7872,7 +7872,7 @@ void gldPrimInlineQuads(int ctx,uint data,undefined4 elementCount,undefined4 ext
       *(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) = 0x00001e24 + ctx;
       *(int *)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr) = ctx + 0x1e44;
       *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
-      ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
+      ringStart = (undefined4 *)gld_emitVapStreamControl(ctx,ringStart);
     }
     if (*(char *)(ctx + GLD_needsWaitIdle) == '\0') {
       *ringStart = 0x5c8;
@@ -7973,7 +7973,7 @@ void gldPrimInlineQuadStrip(int ctx,uint data,undefined4 elementCount,undefined4
   undefined4 staleArgR9;
   
   topology = 8;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,8,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,8,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
                        staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
@@ -7990,7 +7990,7 @@ void gldPrimInlineQuadStrip(int ctx,uint data,undefined4 elementCount,undefined4
       *(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) = 0x00001e24 + ctx;
       *(int *)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr) = ctx + 0x1e44;
       *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
-      ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
+      ringStart = (undefined4 *)gld_emitVapStreamControl(ctx,ringStart);
     }
     if (*(char *)(ctx + GLD_needsWaitIdle) == '\0') {
       *ringStart = 0x5c8;
@@ -8091,7 +8091,7 @@ void gldPrimInlinePolygon(int ctx,uint data,undefined4 elementCount,undefined4 e
   undefined4 staleArgR9;
   
   topology = 9;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,9,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,9,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
                        staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
@@ -8108,7 +8108,7 @@ void gldPrimInlinePolygon(int ctx,uint data,undefined4 elementCount,undefined4 e
       *(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) = 0x00001e24 + ctx;
       *(int *)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr) = ctx + 0x1e44;
       *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
-      ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
+      ringStart = (undefined4 *)gld_emitVapStreamControl(ctx,ringStart);
     }
     if (*(char *)(ctx + GLD_needsWaitIdle) == '\0') {
       *ringStart = 0x5c8;
@@ -8210,7 +8210,7 @@ void gldPrimInlinePoints(int ctx,uint data,undefined4 elementCount,undefined4 pr
   undefined4 staleArgR9;
   
   topology = 0;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,0,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,0,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
                        staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
@@ -8227,7 +8227,7 @@ void gldPrimInlinePoints(int ctx,uint data,undefined4 elementCount,undefined4 pr
       *(code **)(ctx + 0x2680) = 0x00001e24 + ctx;
       *(int *)(ctx + 0x2684) = ctx + 0x1e44;
       *(undefined4 *)(0x000026c8 + ctx + 4) = *(undefined4 *)(ctx + 0x1ee4);
-      ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
+      ringStart = (undefined4 *)gld_emitVapStreamControl(ctx,ringStart);
     }
     if (*(char *)(ctx + 0x2a42) == '\0') {
       *ringStart = 0x5c8;
@@ -8328,7 +8328,7 @@ void gldPrimInlineLines(int ctx,uint data,undefined4 elementCount,undefined4 ext
   undefined4 staleArgR9;
   
   topology = 1;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,1,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,1,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
                        staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
@@ -8345,7 +8345,7 @@ void gldPrimInlineLines(int ctx,uint data,undefined4 elementCount,undefined4 ext
       *(code **)(ctx + GLD_vap_prog_stream_cntl_0_ptr) = 0x00001e24 + ctx;
       *(int *)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr) = ctx + 0x1e44;
       *(undefined4 *)(0x000026c8 + ctx + GLD_connect) = *(undefined4 *)(ctx + 0x1ee4);
-      ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
+      ringStart = (undefined4 *)gld_emitVapStreamControl(ctx,ringStart);
     }
     if (*(char *)(ctx + GLD_needsWaitIdle) == '\0') {
       *ringStart = 0x5c8;
@@ -8447,7 +8447,7 @@ void gldPrimInlineLineLoop(int ctx,uint data,undefined4 elementCount,undefined4 
   undefined4 staleArgR9;
   
   topology = 2;
-  unitCount = ((uint (*)())FUN_0002cc30)(ctx,primFlag,2,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4
+  unitCount = ((uint (*)())gld_prepareDrawCount)(ctx,primFlag,2,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4
                        ,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   if (unitCount != 0) {
     programState = *(int *)(ctx + 0x29e8);
@@ -8464,7 +8464,7 @@ void gldPrimInlineLineLoop(int ctx,uint data,undefined4 elementCount,undefined4 
       *(code **)(ctx + 0x2680) = 0x00001e24 + ctx;
       *(int *)(ctx + 0x2684) = ctx + 0x1e44;
       *(undefined4 *)(0x000026c8 + ctx + 4) = *(undefined4 *)(ctx + 0x1ee4);
-      ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
+      ringStart = (undefined4 *)gld_emitVapStreamControl(ctx,ringStart);
     }
     if (*(char *)(ctx + 0x2a42) == '\0') {
       *ringStart = 0x5c8;

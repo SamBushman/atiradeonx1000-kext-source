@@ -3741,11 +3741,11 @@ LAB_0001ef30:
   }
 LAB_0001ef50:
   uStack00000030 = drawFlags;
-  /* hidden-argument defect (found auditing #70/FUN_0002cc30): this is the one real caller (of
+  /* hidden-argument defect (found auditing #70/gld_prepareDrawCount): this is the one real caller (of
    * 25) that supplies a genuine 7th argument - verified via real stock disassembly
    * (`lwz r9,0xa8(r10)`, matching this stack store just above). */
   puVar19 = (undefined *)
-            ((uint (*)())FUN_0002cc30)(ctx,1,primitiveMode,count,count,puVar19,drawFlags,staleFpr1,staleFpr2,staleFpr3,staleFpr4,staleFpr5,
+            ((uint (*)())gld_prepareDrawCount)(ctx,1,primitiveMode,count,count,puVar19,drawFlags,staleFpr1,staleFpr2,staleFpr3,staleFpr4,staleFpr5,
                          staleFpr6,staleFpr7,staleFpr8,staleStackArg_ffffff68);
   bVar2 = 0 < (int)puVar19;
   hasElements = puVar19 != (undefined *)0x0;
@@ -3858,7 +3858,7 @@ code_r0x0001f1ac:
       if (*(int *)(ctx + GLD_vap_prog_stream_cntl_0_ptr) != ctx + 0x2630) {
         *(int *)(ctx + GLD_vap_prog_stream_cntl_0_ptr) = ctx + 0x2630;
         *(int *)(ctx + GLD_vap_prog_stream_cntl_ext_0_ptr) = ctx + 0x2650;
-        packetPtr = (uint *)FUN_0002c0c0(ctx,packetPtr);
+        packetPtr = (uint *)gld_emitVapStreamControl(ctx,packetPtr);
       }
       if (needStatePacket) {
         uVar17 = *(undefined4 *)(((unsigned char *)0x000027c8) + ctx);
@@ -3975,7 +3975,7 @@ code_r0x0001f1ac:
           *(undefined4 *)(ctx + 0x26d4) = 0;
         }
         else {
-          packetPtr = (uint *)FUN_0002c180(ctx,packetPtr);
+          packetPtr = (uint *)gld_emitStreamAddressRegisters(ctx,packetPtr);
         }
         ringHeaderZero = drawPacket + 7;
         drawPacket[6] = (int)packetPtr + (4 - (int)drawPacket) >> 2;
@@ -6315,7 +6315,7 @@ int gld_emitPrimitiveVertices(ctx, hwPrimType, extraVertexAttribs, vertexAttribs
     *(int *)(ctx + 0x2440) = ctx + 0x1be4;
     *(int *)(ctx + 0x2444) = ctx + 0x1c04;
     *(undefined4 *)(ctx + 0x248c) = *(undefined4 *)(ctx + 0x1ca4);
-    packetStart = (undefined4 *)FUN_0002c0c0(connection,packetStart);
+    packetStart = (undefined4 *)gld_emitVapStreamControl(connection,packetStart);
   }
   if (*(char *)(ctx + 0x2802) == '\0') {
     *packetStart = 0x5c8;
@@ -6473,7 +6473,7 @@ int FUN_00024190(param_1, param_2, param_3, param_4, param_5)
     *(int *)(param_1 + 0x2440) = param_1 + 0x1be4;
     *(int *)(param_1 + 0x2444) = param_1 + 0x1c04;
     *(undefined4 *)(param_1 + 0x248c) = *(undefined4 *)(param_1 + 0x1ca4);
-    puVar2 = (undefined4 *)FUN_0002c0c0(uVar5,puVar2);
+    puVar2 = (undefined4 *)gld_emitVapStreamControl(uVar5,puVar2);
   }
   if (*(char *)(param_1 + 0x2802) == '\0') {
     *puVar2 = 0x5c8;
@@ -6509,7 +6509,7 @@ int FUN_00024190(param_1, param_2, param_3, param_4, param_5)
 
 /* FUN_000242f0: same duplicated-body defect as #77: the real 116-byte wrapper had been overwritten with
  * unrelated gldPrimInlineLineStrip-family content. Rewritten from real stock disassembly. Also corrects an earlier
- * misreading of this function's own real 7th argument (see FUN_0002cc30): no real caller here sets r9
+ * misreading of this function's own real 7th argument (see gld_prepareDrawCount): no real caller here sets r9
  * either, it just forwards garbage like the rest of the dispatch-wrapper family. */
 /* FUN_000242f0 @ 0x242f0 (116 bytes) */
 void FUN_000242f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8)
@@ -6517,7 +6517,7 @@ void FUN_000242f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
   uint uVar1;
   undefined4 staleArgR9;
 
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,4,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8);
+  uVar1 = ((uint (*)())gld_prepareDrawCount)(param_1,0,4,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8);
   if (uVar1 != 0) {
     return gld_emitPrimitiveVertices(param_1 + 0x240,4,0,param_2,uVar1,param_4);
   }
@@ -6533,7 +6533,7 @@ void FUN_00024370(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
   uint uVar1;
   undefined4 staleArgR9;
 
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,5,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  uVar1 = ((uint (*)())gld_prepareDrawCount)(param_1,0,5,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
   if (uVar1 != 0) {
     return gld_emitPrimitiveVertices(param_1 + 0x240,6,0,param_2,uVar1,param_4);
   }

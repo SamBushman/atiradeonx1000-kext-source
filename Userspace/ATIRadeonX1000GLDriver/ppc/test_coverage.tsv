@@ -285,16 +285,16 @@
 0x2be90	FUN_0002be90	12	no	tiny (12 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x2bea0	gldTrimVertexCountToPrimitive	116	yes	
 0x2bf30	gldTrimVertexCountToPrimitiveMin	180	yes	
-0x2c020	FUN_0002c020	148	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x2c0c0	FUN_0002c0c0	180	yes	
-0x2c180	FUN_0002c180	164	yes	
+0x2c020	gld_revalidateStreamProgram	148	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x2c0c0	gld_emitVapStreamControl	180	yes	
+0x2c180	gld_emitStreamAddressRegisters	164	yes	
 0x2c230	FUN_0002c230	1144	no	calls an import (io_connect_method_scalarI_structureI); indirect call (driver context / vtable / callback)
 0x2c6c0	FUN_0002c6c0	184	no	calls an import (exit)
 0x2c790	gld_initContextHardwareState	932	no	calls an import (io_connect_method_scalarI_scalarO); calls an import (malloc)
 0x2cb40	gldContextFreeResources	200	no	calls an import (free); calls an import (vfree)
 0x2cc10	FUN_0002cc10	28	yes	
-0x2cc30	FUN_0002cc30	276	yes	
-0x2cd50	FUN_0002cd50	236	yes	
+0x2cc30	gld_prepareDrawCount	276	yes	
+0x2cd50	gld_emitUnitObjectPacket	236	yes	
 0x2ce40	FUN_0002ce40	492	no	indirect call (driver context / vtable / callback)
 0x2d030	FUN_0002d030	456	yes	
 0x2d210	FUN_0002d210	140	yes	

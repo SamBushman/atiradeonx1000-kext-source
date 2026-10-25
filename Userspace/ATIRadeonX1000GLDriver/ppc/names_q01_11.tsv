@@ -1,0 +1,77 @@
+local	gldPrimWrapperTriangleFan_23a24	param_1	ctx	CONFIRMED	GLDContext; ctx+0x240 is the embedded command stream
+local	gldPrimWrapperTriangleFan_23a24	uVar1	vertexCount	CONFIRMED	vertex count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)
+local	gldPrimWrapperTriangleFan_23a24	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_0002cc30 and gld_emitPrimitiveVertices
+local	gldPrimWrapperTriangleFan_23a24	param_6	staleArgR8	INFERRED	forwarded to FUN_0002cc30; unused
+local	gldPrimWrapperQuads_23a24	param_1	ctx	CONFIRMED	GLDContext; ctx+0x240 is the embedded command stream
+local	gldPrimWrapperQuads_23a24	uVar1	vertexCount	CONFIRMED	vertex count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)
+local	gldPrimWrapperQuads_23a24	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_0002cc30
+local	gldPrimWrapperQuads_23a24	param_6	staleArgR8	INFERRED	forwarded to FUN_0002cc30; unused
+local	gldPrimWrapperQuadStrip_23a24	param_1	ctx	CONFIRMED	GLDContext; ctx+0x240 is the embedded command stream
+local	gldPrimWrapperQuadStrip_23a24	uVar1	vertexCount	CONFIRMED	vertex count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)
+local	gldPrimWrapperQuadStrip_23a24	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_0002cc30
+local	gldPrimWrapperQuadStrip_23a24	param_6	staleArgR8	INFERRED	forwarded to FUN_0002cc30; unused
+local	gldPrimWrapperPolygon_23a24	param_1	ctx	CONFIRMED	GLDContext; ctx+0x240 is the embedded command stream
+local	gldPrimWrapperPolygon_23a24	uVar1	vertexCount	CONFIRMED	vertex count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)
+local	gldPrimWrapperPolygon_23a24	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_0002cc30
+local	gldPrimWrapperPolygon_23a24	param_6	staleArgR8	INFERRED	forwarded to FUN_0002cc30; unused
+local	gldPrimWrapperPoints_23a24	param_1	ctx	CONFIRMED	GLDContext; ctx+0x240 is the embedded command stream
+local	gldPrimWrapperPoints_23a24	uVar1	vertexCount	CONFIRMED	vertex count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)
+local	gldPrimWrapperPoints_23a24	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_0002cc30
+local	gldPrimWrapperPoints_23a24	param_6	staleArgR8	INFERRED	forwarded to FUN_0002cc30; unused
+local	gldPrimWrapperLines_23a24	param_1	ctx	CONFIRMED	GLDContext; ctx+0x240 is the embedded command stream
+local	gldPrimWrapperLines_23a24	uVar1	vertexCount	CONFIRMED	vertex count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)
+local	gldPrimWrapperLines_23a24	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_0002cc30
+local	gldPrimWrapperLines_23a24	param_6	staleArgR8	INFERRED	forwarded to FUN_0002cc30; unused
+local	gldPrimWrapperLineLoop_23a24	param_1	ctx	CONFIRMED	GLDContext; ctx+0x240 is the embedded command stream
+local	gldPrimWrapperLineLoop_23a24	uVar1	vertexCount	CONFIRMED	vertex count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)
+local	gldPrimWrapperLineLoop_23a24	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_0002cc30
+local	gldPrimWrapperLineLoop_23a24	param_6	staleArgR8	INFERRED	forwarded to FUN_0002cc30; unused
+local	gldPrimWrapperLineStrip_23a24	param_1	ctx	CONFIRMED	GLDContext; ctx+0x240 is the embedded command stream
+local	gldPrimWrapperLineStrip_23a24	uVar1	vertexCount	CONFIRMED	vertex count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)
+local	gldPrimWrapperLineStrip_23a24	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_0002cc30
+local	gldPrimWrapperLineStrip_23a24	param_6	staleArgR8	INFERRED	forwarded to FUN_0002cc30; unused
+local	gldPrimWrapperPolygon_24190	param_1	ctx	CONFIRMED	GLDContext; ctx+0x240 is the embedded command stream
+local	gldPrimWrapperPolygon_24190	uVar1	vertexCount	CONFIRMED	vertex count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)
+local	gldPrimWrapperPolygon_24190	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_0002cc30
+local	gldPrimWrapperPolygon_24190	param_6	staleArgR8	INFERRED	forwarded to FUN_0002cc30; unused
+local	gldPrimWrapperPoints_24190	param_1	ctx	CONFIRMED	GLDContext; ctx+0x240 is the embedded command stream
+local	gldPrimWrapperPoints_24190	uVar1	vertexCount	CONFIRMED	vertex count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)
+local	gldPrimWrapperPoints_24190	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_0002cc30
+local	gldPrimWrapperPoints_24190	param_6	staleArgR8	INFERRED	forwarded to FUN_0002cc30; unused
+local	gldPrimWrapperLines_24190	param_1	ctx	CONFIRMED	GLDContext; ctx+0x240 is the embedded command stream
+local	gldPrimWrapperLines_24190	uVar1	vertexCount	CONFIRMED	vertex count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)
+local	gldPrimWrapperLines_24190	param_5	extraArg4	INFERRED	forwarded unchanged to FUN_0002cc30
+local	gldPrimWrapperLines_24190	param_6	staleArgR8	INFERRED	forwarded to FUN_0002cc30; unused
+local	gldPrimWrapperTriangleFan_23a24	param_2	extraVertexAttribs	CONFIRMED	forwarded to gld_emitPrimitiveVertices
+local	gldPrimWrapperTriangleFan_23a24	param_3	vertexAttribs	CONFIRMED	forwarded to gld_emitPrimitiveVertices
+local	gldPrimWrapperTriangleFan_23a24	param_4	elementCount	CONFIRMED	vertex count passed to FUN_0002cc30
+local	gldPrimWrapperQuads_23a24	param_2	vertexAttribs	CONFIRMED	forwarded to gld_emitPrimitiveVertices
+local	gldPrimWrapperQuads_23a24	param_3	elementCount	CONFIRMED	vertex count passed to FUN_0002cc30
+local	gldPrimWrapperQuads_23a24	param_4	extraArg	CONFIRMED	forwarded to gld_emitPrimitiveVertices as extraArg
+local	gldPrimWrapperQuadStrip_23a24	param_2	vertexAttribs	CONFIRMED	forwarded to gld_emitPrimitiveVertices
+local	gldPrimWrapperQuadStrip_23a24	param_3	elementCount	CONFIRMED	vertex count passed to FUN_0002cc30
+local	gldPrimWrapperQuadStrip_23a24	param_4	extraArg	CONFIRMED	forwarded to gld_emitPrimitiveVertices as extraArg
+local	gldPrimWrapperPolygon_23a24	param_2	vertexAttribs	CONFIRMED	forwarded to gld_emitPrimitiveVertices
+local	gldPrimWrapperPolygon_23a24	param_3	elementCount	CONFIRMED	vertex count passed to FUN_0002cc30
+local	gldPrimWrapperPolygon_23a24	param_4	extraArg	CONFIRMED	forwarded to gld_emitPrimitiveVertices as extraArg
+local	gldPrimWrapperPoints_23a24	param_2	vertexAttribs	CONFIRMED	forwarded to gld_emitPrimitiveVertices
+local	gldPrimWrapperPoints_23a24	param_3	elementCount	CONFIRMED	vertex count passed to FUN_0002cc30
+local	gldPrimWrapperPoints_23a24	param_4	staleArgR6	INFERRED	incoming register, unused
+local	gldPrimWrapperLines_23a24	param_2	vertexAttribs	CONFIRMED	forwarded to gld_emitPrimitiveVertices
+local	gldPrimWrapperLines_23a24	param_3	elementCount	CONFIRMED	vertex count passed to FUN_0002cc30
+local	gldPrimWrapperLines_23a24	param_4	staleArgR6	INFERRED	incoming register, unused
+local	gldPrimWrapperLineLoop_23a24	param_2	vertexAttribs	CONFIRMED	forwarded to gld_emitPrimitiveVertices
+local	gldPrimWrapperLineLoop_23a24	param_3	elementCount	CONFIRMED	vertex count passed to FUN_0002cc30
+local	gldPrimWrapperLineLoop_23a24	param_4	closeFlag	INFERRED	selector passed to FUN_0002cc30 and the last argument of gld_emitPrimitiveVertices
+local	gldPrimWrapperLineStrip_23a24	param_2	vertexAttribs	CONFIRMED	forwarded to gld_emitPrimitiveVertices
+local	gldPrimWrapperLineStrip_23a24	param_3	elementCount	CONFIRMED	vertex count passed to FUN_0002cc30
+local	gldPrimWrapperLineStrip_23a24	param_4	closeFlag	INFERRED	selector passed to FUN_0002cc30 and the last argument of gld_emitPrimitiveVertices
+local	gldPrimWrapperPolygon_24190	param_2	vertexData	CONFIRMED	client vertex data passed to FUN_00024190
+local	gldPrimWrapperPolygon_24190	param_3	elementCount	CONFIRMED	vertex count passed to FUN_0002cc30
+local	gldPrimWrapperPolygon_24190	param_4	extraArg	INFERRED	incoming register, unused
+local	gldPrimWrapperPoints_24190	param_2	vertexData	CONFIRMED	client vertex data passed to FUN_00024190
+local	gldPrimWrapperPoints_24190	param_3	elementCount	CONFIRMED	vertex count passed to FUN_0002cc30
+local	gldPrimWrapperPoints_24190	param_4	staleArgR6	INFERRED	incoming register, unused
+local	gldPrimWrapperLines_24190	param_2	vertexData	CONFIRMED	client vertex data passed to FUN_00024190
+local	gldPrimWrapperLines_24190	param_3	elementCount	CONFIRMED	vertex count passed to FUN_0002cc30
+local	gldPrimWrapperLines_24190	param_4	staleArgR6	INFERRED	incoming register, unused

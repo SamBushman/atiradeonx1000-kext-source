@@ -1,144 +1,144 @@
 #include "decls.h"
 
 /* gldPrimWrapperTriangleFan_23a24 @ 0x243f0 (112 bytes) */
-void gldPrimWrapperTriangleFan_23a24(int param_1,undefined4 param_2,int param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperTriangleFan_23a24(int ctx,undefined4 extraVertexAttribs,int vertexAttribs,undefined4 elementCount,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  uint uVar1;
+  uint vertexCount;
   undefined4 staleArgR9;
   
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,6,param_4,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
-  if (uVar1 != 0) {
-    return gld_emitPrimitiveVertices(param_1 + 0x240,5,param_2,param_3,uVar1,param_5);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,6,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  if (vertexCount != 0) {
+    return gld_emitPrimitiveVertices(ctx + 0x240,5,extraVertexAttribs,vertexAttribs,vertexCount,extraArg4);
   }
   return;
 }
 
 /* gldPrimWrapperQuads_23a24 @ 0x24470 (112 bytes) */
-void gldPrimWrapperQuads_23a24(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperQuads_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  uint uVar1;
+  uint vertexCount;
   undefined4 staleArgR9;
   
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,7,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
-  if (uVar1 != 0) {
-    return gld_emitPrimitiveVertices(param_1 + 0x240,13,0,param_2,uVar1,param_4);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,7,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  if (vertexCount != 0) {
+    return gld_emitPrimitiveVertices(ctx + 0x240,13,0,vertexAttribs,vertexCount,extraArg);
   }
   return;
 }
 
 /* gldPrimWrapperQuadStrip_23a24 @ 0x244f0 (112 bytes) */
-void gldPrimWrapperQuadStrip_23a24(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperQuadStrip_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  uint uVar1;
+  uint vertexCount;
   undefined4 staleArgR9;
   
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,8,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
-  if (uVar1 != 0) {
-    return gld_emitPrimitiveVertices(param_1 + 0x240,14,0,param_2,uVar1,param_4);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,8,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  if (vertexCount != 0) {
+    return gld_emitPrimitiveVertices(ctx + 0x240,14,0,vertexAttribs,vertexCount,extraArg);
   }
   return;
 }
 
 /* gldPrimWrapperPolygon_23a24 @ 0x24570 (112 bytes) */
-void gldPrimWrapperPolygon_23a24(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperPolygon_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  uint uVar1;
+  uint vertexCount;
   undefined4 staleArgR9;
   
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,9,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
-  if (uVar1 != 0) {
-    return gld_emitPrimitiveVertices(param_1 + 0x240,15,0,param_2,uVar1,param_4);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,9,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  if (vertexCount != 0) {
+    return gld_emitPrimitiveVertices(ctx + 0x240,15,0,vertexAttribs,vertexCount,extraArg);
   }
   return;
 }
 
 /* gldPrimWrapperPolygon_24190 @ 0x245f0 (108 bytes) */
-void gldPrimWrapperPolygon_24190(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperPolygon_24190(int ctx,undefined4 *vertexData,undefined4 elementCount,undefined4 extraArg,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  uint uVar1;
+  uint vertexCount;
   undefined4 staleArgR9;
   
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,9,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
-  if (uVar1 != 0) {
-    return FUN_00024190(param_1 + 0x240,15,param_2,uVar1,param_4);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,9,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  if (vertexCount != 0) {
+    return FUN_00024190(ctx + 0x240,15,vertexData,vertexCount,extraArg);
   }
   return;
 }
 
 /* gldPrimWrapperPoints_23a24 @ 0x24670 (108 bytes) */
-void gldPrimWrapperPoints_23a24(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperPoints_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 staleArgR6,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  uint uVar1;
+  uint vertexCount;
   undefined4 staleArgR9;
   
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,0,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
-  if (uVar1 != 0) {
-    return gld_emitPrimitiveVertices(param_1 + 0x240,1,0,param_2,uVar1,0);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,0,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  if (vertexCount != 0) {
+    return gld_emitPrimitiveVertices(ctx + 0x240,1,0,vertexAttribs,vertexCount,0);
   }
   return;
 }
 
 /* gldPrimWrapperPoints_24190 @ 0x246f0 (104 bytes) */
-void gldPrimWrapperPoints_24190(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperPoints_24190(int ctx,undefined4 *vertexData,undefined4 elementCount,undefined4 staleArgR6,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  uint uVar1;
+  uint vertexCount;
   undefined4 staleArgR9;
   
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,0,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
-  if (uVar1 != 0) {
-    return FUN_00024190(param_1 + 0x240,1,param_2,uVar1,0);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,0,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  if (vertexCount != 0) {
+    return FUN_00024190(ctx + 0x240,1,vertexData,vertexCount,0);
   }
   return;
 }
 
 /* gldPrimWrapperLines_23a24 @ 0x24770 (108 bytes) */
-void gldPrimWrapperLines_23a24(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperLines_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 staleArgR6,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  uint uVar1;
+  uint vertexCount;
   undefined4 staleArgR9;
   
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,1,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
-  if (uVar1 != 0) {
-    return gld_emitPrimitiveVertices(param_1 + 0x240,2,0,param_2,uVar1,0);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,1,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  if (vertexCount != 0) {
+    return gld_emitPrimitiveVertices(ctx + 0x240,2,0,vertexAttribs,vertexCount,0);
   }
   return;
 }
 
 /* gldPrimWrapperLines_24190 @ 0x247f0 (104 bytes) */
-void gldPrimWrapperLines_24190(int param_1,undefined4 *param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperLines_24190(int ctx,undefined4 *vertexData,undefined4 elementCount,undefined4 staleArgR6,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  uint uVar1;
+  uint vertexCount;
   undefined4 staleArgR9;
   
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,0,1,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
-  if (uVar1 != 0) {
-    return FUN_00024190(param_1 + 0x240,2,param_2,uVar1,0);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,0,1,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  if (vertexCount != 0) {
+    return FUN_00024190(ctx + 0x240,2,vertexData,vertexCount,0);
   }
   return;
 }
 
 /* gldPrimWrapperLineLoop_23a24 @ 0x24870 (112 bytes) */
-void gldPrimWrapperLineLoop_23a24(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperLineLoop_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 closeFlag,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  uint uVar1;
+  uint vertexCount;
   undefined4 staleArgR9;
   
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,param_4,2,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
-  if (uVar1 != 0) {
-    return gld_emitPrimitiveVertices(param_1 + 0x240,12,0,param_2,uVar1,param_4);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,closeFlag,2,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  if (vertexCount != 0) {
+    return gld_emitPrimitiveVertices(ctx + 0x240,12,0,vertexAttribs,vertexCount,closeFlag);
   }
   return;
 }
 
 /* gldPrimWrapperLineStrip_23a24 @ 0x248f0 (112 bytes) */
-void gldPrimWrapperLineStrip_23a24(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+void gldPrimWrapperLineStrip_23a24(int ctx,int vertexAttribs,undefined4 elementCount,undefined4 closeFlag,undefined4 extraArg4,undefined4 staleArgR8,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  uint uVar1;
+  uint vertexCount;
   undefined4 staleArgR9;
   
-  uVar1 = ((uint (*)())FUN_0002cc30)(param_1,param_4,3,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
-  if (uVar1 != 0) {
-    return gld_emitPrimitiveVertices(param_1 + 0x240,3,0,param_2,uVar1,param_4);
+  vertexCount = ((uint (*)())gld_prepareDrawCount)(ctx,closeFlag,3,elementCount,extraArg4,staleArgR8,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleFprArg9);
+  if (vertexCount != 0) {
+    return gld_emitPrimitiveVertices(ctx + 0x240,3,0,vertexAttribs,vertexCount,closeFlag);
   }
   return;
 }
@@ -169,7 +169,7 @@ void gld_drawElementsImmediate(int ctx,int glStateBlock,int primitiveMode,int in
 
   cacheLineSize = (uint)*(byte *)(ctx + 8);
   dataCacheBlockTouch(*(undefined4 *)(ctx + 0x1d8));
-  trimmedCount = ((uint (*)())FUN_0002cc30)(ctx,1,primitiveMode,indexCount,indexCount,indexType,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4
+  trimmedCount = ((uint (*)())gld_prepareDrawCount)(ctx,1,primitiveMode,indexCount,indexCount,indexType,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4
                        ,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffff88);
   if (trimmedCount != 0) {
     iVar9 = 5;
@@ -1561,7 +1561,7 @@ LAB_00026ea8:
         *(int *)(param_1 + 0x2680) = iVar7;
         *(int *)(param_1 + 0x2684) = iVar12;
         *(undefined4 *)(0x000026c8 + param_1 + 4) = uVar10;
-        puVar6 = (undefined4 *)((int (*)())FUN_0002c0c0)(param_1,puVar6);
+        puVar6 = (undefined4 *)((int (*)())gld_emitVapStreamControl)(param_1,puVar6);
       }
     }
     if (*(char *)(param_1 + 0x2a42) == '\0') {
@@ -1605,7 +1605,7 @@ LAB_00026ea8:
     *(int *)(param_1 + 0x26d4) = param_1 + 0x2880;
     *(int *)(param_1 + 0x26d8) = param_1 + 0x28a0;
     *(undefined4 *)(param_1 + 0x26d0) = *(undefined4 *)(param_1 + 0x283c);
-    puVar6 = (undefined4 *)((int (*)())FUN_0002c180)(param_1,puVar6 + 4);
+    puVar6 = (undefined4 *)((int (*)())gld_emitStreamAddressRegisters)(param_1,puVar6 + 4);
     iVar4 = param_1 + 0x2840;
     if (*(int *)(param_1 + 0x2680) != iVar4) {
       iVar2 = param_1 + 0x2860;
@@ -1616,14 +1616,14 @@ LAB_00026ea8:
     *(int *)(param_1 + 0x26d4) = param_1 + 0x2924;
     *(int *)(param_1 + 0x26d8) = param_1 + 0x2944;
     *(undefined4 *)(param_1 + 0x26d0) = *(undefined4 *)(param_1 + 0x283c);
-    puVar6 = (undefined4 *)((int (*)())FUN_0002c180)(param_1,puVar6 + 4);
+    puVar6 = (undefined4 *)((int (*)())gld_emitStreamAddressRegisters)(param_1,puVar6 + 4);
     iVar4 = param_1 + 0x28e4;
     if (*(int *)(param_1 + 0x2680) != iVar4) {
       iVar2 = param_1 + 0x2904;
 LAB_00026d64:
       *(int *)(param_1 + 0x2680) = iVar4;
       *(int *)(param_1 + 0x2684) = iVar2;
-      puVar6 = (undefined4 *)((int (*)())FUN_0002c0c0)(param_1,puVar6);
+      puVar6 = (undefined4 *)((int (*)())gld_emitVapStreamControl)(param_1,puVar6);
     }
   }
   if (*(char *)(param_1 + 0x2a42) != '\0') {
@@ -1675,7 +1675,7 @@ void FUN_00026f80(int ctx,uint *param_2,uint *param_3,undefined4 param_4,undefin
     staleFprArg1 = (double)((int (*)())FUN_0002be90)(ctx,1,param_2,param_4,param_5,param_6,param_7);
   }
   if (*(int *)(ctx + 0x1b68) != 0) {
-    ((void (*)())FUN_0002c020)(ctx + 0x240,param_2,activeCountPtr,param_4,param_5,param_6,param_7,staleFprArg1,staleFprArg2,
+    ((void (*)())gld_revalidateStreamProgram)(ctx + 0x240,param_2,activeCountPtr,param_4,param_5,param_6,param_7,staleFprArg1,staleFprArg2,
                  staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffff98);
   }
   if ((*param_3 == 0) || (*(int *)(*(int *)(ctx + 0x14) + 0x120) == 0)) {
@@ -1774,7 +1774,7 @@ int FUN_00027150(param_1, param_2, param_3, param_4)
       if (*(int *)(param_1 + 0x2680) != param_1 + 0x2840) {
         *(int *)(param_1 + 0x2680) = param_1 + 0x2840;
         *(int *)(param_1 + 0x2684) = param_1 + 0x2860;
-        puVar6 = (undefined4 *)((int (*)())FUN_0002c0c0)(param_1,puVar6);
+        puVar6 = (undefined4 *)((int (*)())gld_emitVapStreamControl)(param_1,puVar6);
       }
       puVar3 = *(uint **)(param_1 + 0x1d8);
       iVar11 = param_1 + 0x2880;
@@ -1784,7 +1784,7 @@ int FUN_00027150(param_1, param_2, param_3, param_4)
       if (*(int *)(param_1 + 0x2680) != param_1 + 0x28e4) {
         *(int *)(param_1 + 0x2680) = param_1 + 0x28e4;
         *(int *)(param_1 + 0x2684) = param_1 + 0x2904;
-        puVar6 = (undefined4 *)((int (*)())FUN_0002c0c0)(param_1,puVar6);
+        puVar6 = (undefined4 *)((int (*)())gld_emitVapStreamControl)(param_1,puVar6);
       }
       puVar3 = *(uint **)(param_1 + 0x1d8);
       iVar11 = param_1 + 0x2924;
@@ -1800,7 +1800,7 @@ int FUN_00027150(param_1, param_2, param_3, param_4)
     *(int *)(param_1 + 0x26d4) = iVar11;
     *(int *)(param_1 + 0x26d8) = iVar9;
     *(undefined4 *)(param_1 + 0x26d0) = *(undefined4 *)(param_1 + 0x283c);
-    puVar7 = (undefined4 *)((int (*)())FUN_0002c180)(param_1,puVar6 + 4);
+    puVar7 = (undefined4 *)((int (*)())gld_emitStreamAddressRegisters)(param_1,puVar6 + 4);
     uVar2 = *(uint *)(&DAT_001d9888 + param_3 * 4);
     *puVar7 = 0x82c;
     uVar4 = *(undefined4 *)(0x00001dc4 + param_1);
@@ -1843,7 +1843,7 @@ uint FUN_000273a0(int param_1,uint *param_2,uint *param_3,undefined4 param_4,und
     staleFprArg1 = (double)((int (*)())FUN_0002be90)(param_1,1,param_2,param_4,param_5,param_6,param_7);
   }
   if (*(int *)(param_1 + 0x1b68) != 0) {
-    ((void (*)())FUN_0002c020)(param_1 + 0x240,param_2,puVar7,param_4,param_5,param_6,param_7,staleFprArg1,staleFprArg2,
+    ((void (*)())gld_revalidateStreamProgram)(param_1 + 0x240,param_2,puVar7,param_4,param_5,param_6,param_7,staleFprArg1,staleFprArg2,
                  staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffff98);
   }
   if ((*param_3 == 0) || (*(int *)(*(int *)(param_1 + 0x14) + 0x120) == 0)) {
@@ -2842,13 +2842,13 @@ LAB_000284b0:
   iVar24 = ctx;
   do {
     if (*(int *)(iVar24 + 0x1c8) != 0) {
-      streamPtr = ((int (*)())FUN_0002cd50)(ctx,0,unitIndex,streamPtr);
+      streamPtr = ((int (*)())gld_emitUnitObjectPacket)(ctx,0,unitIndex,streamPtr);
     }
     unitIndex = unitIndex + -1;
     bVar42 = (unitIndex == 0) << 1;
     iVar24 = iVar24 + -4;
   } while (unitIndex != 0);
-  packetRaw = (uint *)((int (*)())FUN_0002cd50)(ctx,0,0,streamPtr);
+  packetRaw = (uint *)((int (*)())gld_emitUnitObjectPacket)(ctx,0,0,streamPtr);
   packet = (undefined4 *)((uint)(packetRaw + 0xb) & 0xffffffe0);
   *packetRaw = (((int)packet - (int)packetRaw) + -8) * 0x4000 | 0xc0001000;
   packet[-1] = (int)packet - (int)packetRaw;
@@ -3136,7 +3136,7 @@ LAB_000284b0:
     }
 LAB_0002918c:
     if ((unitIndex == 0) || (unitObject != 0)) {
-      packet = (undefined4 *)((int (*)())FUN_0002cd50)(ctx,unitObject,unitIndex,packet);
+      packet = (undefined4 *)((int (*)())gld_emitUnitObjectPacket)(ctx,unitObject,unitIndex,packet);
     }
     lastUnit = unitIndex == 0xf;
     unitOffset = unitOffset + 0x14;
@@ -4642,13 +4642,13 @@ LAB_0002a520:
       unitSlotPtr = ctx;
       do {
         if (*(int *)(unitSlotPtr + 0x1c8) != 0) {
-          uVar25 = ((int (*)())FUN_0002cd50)(ctx,0,unitIndex,uVar25);
+          uVar25 = ((int (*)())gld_emitUnitObjectPacket)(ctx,0,unitIndex,uVar25);
         }
         unitIndex = unitIndex + -1;
         bVar35 = (unitIndex == 0) << 1;
         unitSlotPtr = unitSlotPtr + -4;
       } while (unitIndex != 0);
-      packetRaw = (uint *)((int (*)())FUN_0002cd50)(ctx,0,0,uVar25);
+      packetRaw = (uint *)((int (*)())gld_emitUnitObjectPacket)(ctx,0,0,uVar25);
       packet = (undefined4 *)((uint)(packetRaw + 0xb) & 0xffffffe0);
       *packetRaw = (((int)packet - (int)packetRaw) + -8) * 0x4000 | 0xc0001000;
       packet[-1] = (int)packet - (int)packetRaw;
@@ -4979,7 +4979,7 @@ LAB_0002a520:
         }
 LAB_0002b2fc:
         if ((unitOffset == 0) || (unitObject != 0)) {
-          packet = (undefined4 *)((int (*)())FUN_0002cd50)(ctx,unitObject,unitOffset,packet);
+          packet = (undefined4 *)((int (*)())gld_emitUnitObjectPacket)(ctx,unitObject,unitOffset,packet);
         }
         lastUnit = unitOffset != 0xf;
         iVar26 = iVar26 + 0x14;
@@ -5637,8 +5637,8 @@ int gldTrimVertexCountToPrimitiveMin(ctx, mode, count)
   return 0;
 }
 
-/* FUN_0002c020 @ 0x2c020 (148 bytes) */
-void FUN_0002c020(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,uint param_7,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gld_revalidateStreamProgram @ 0x2c020 (148 bytes) */
+void gld_revalidateStreamProgram(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,uint param_7,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   uint uVar1;
   int iVar2;
@@ -5663,8 +5663,8 @@ void FUN_0002c020(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
   return;
 }
 
-/* FUN_0002c0c0 @ 0x2c0c0 (180 bytes) */
-int FUN_0002c0c0(param_1, param_2)
+/* gld_emitVapStreamControl @ 0x2c0c0 (180 bytes) */
+int gld_emitVapStreamControl(param_1, param_2)
   int param_1;
   uint *param_2;
 {
@@ -5708,8 +5708,8 @@ int FUN_0002c0c0(param_1, param_2)
   return puVar5 + 2;
 }
 
-/* FUN_0002c180 @ 0x2c180 (164 bytes) */
-int FUN_0002c180(ctx, packetPtr)
+/* gld_emitStreamAddressRegisters @ 0x2c180 (164 bytes) */
+int gld_emitStreamAddressRegisters(ctx, packetPtr)
   int ctx;
   uint *packetPtr;
 {
@@ -5881,7 +5881,7 @@ LAB_0002c610:
        * hardware, this exact call resolves to FUN_0002be60(param_1, dirtyBits) - a simple setter,
        * `*(*(param_1+4)+0x1dc) = dirtyBits;` - and with no 2nd argument ever pushed by the caller,
        * dirtyBits read whatever was left in r4 by earlier, unrelated code: the literal integer 1.
-       * That single wild write is what every downstream consumer (FUN_0002be00, FUN_0002cd50)
+       * That single wild write is what every downstream consumer (FUN_0002be00, gld_emitUnitObjectPacket)
        * was tripping over. Fixed by passing the value the call site had already prepared. */
       (*pcVar3)(param_1,*(undefined4 *)(0x00002748 + param_1 + 4));
     }
@@ -6145,7 +6145,7 @@ int FUN_0002cc10(ctx)
   return gld_submitRing(ctx,0x1000000);
 }
 
-/* FUN_0002cc30: hidden-argument + read-before-write defect (found auditing #70): real stock r9 at entry is
+/* gld_prepareDrawCount: hidden-argument + read-before-write defect (found auditing #70): real stock r9 at entry is
  * a genuine 7th argument (param_7) - the `if (param_4 < 4)` path never touches r9 at all, so it reaches
  * the shared code below still holding whatever the caller passed; the `else` path recomputes it (`param_3
  * & 1`) for its own use before falling into the same shared code. The corpus previously modelled both as
@@ -6153,61 +6153,61 @@ int FUN_0002cc10(ctx)
  * sites, only gld_drawVertexArray supplies a genuine non-zero value here (a real field read); every other
  * caller (including this file's own dispatch-wrapper family) passes 0, matching what real stock callers
  * themselves forward. */
-/* FUN_0002cc30 @ 0x2cc30 (276 bytes) */
-uint FUN_0002cc30(int ctx,undefined4 param_2,uint primitiveMode,uint param_4,undefined4 param_5,undefined4 extraArg5,uint drawFlags,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gld_prepareDrawCount @ 0x2cc30 (276 bytes) */
+uint gld_prepareDrawCount(int ctx,undefined4 closeFlag,uint primitiveMode,uint vertexCount,undefined4 extraArg4,undefined4 extraArg5,uint drawFlags,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
-  int iVar1;
-  uint uVar2;
-  uint uVar3;
+  int primitiveClassBits;
+  uint modeForward;
+  uint vertexCountForward;
   uint staleArgR9;
-  uint uVar4;
+  uint trimmedCount;
   double f1AfterCall;
   double staleStackArg_ffffffa8;
 
   staleArgR9 = drawFlags;
-  uVar3 = param_4;
-  if ((int)param_4 < 4) {
-    uVar4 = ((int (*)())gldTrimVertexCountToPrimitiveMin)(ctx,primitiveMode,param_4);
-    uVar2 = param_4;
+  vertexCountForward = vertexCount;
+  if ((int)vertexCount < 4) {
+    trimmedCount = ((int (*)())gldTrimVertexCountToPrimitiveMin)(ctx,primitiveMode,vertexCount);
+    modeForward = vertexCount;
     staleFprArg1 = f1AfterCall;
   }
   else {
     staleArgR9 = primitiveMode & 1;
-    iVar1 = (primitiveMode >> 3 & 1) + (primitiveMode >> 2 & 1) + (primitiveMode >> 1 & 1) + staleArgR9;
-    uVar2 = primitiveMode;
-    uVar4 = param_4;
-    if (((iVar1 == 2) || (iVar1 == 0)) || (primitiveMode == 2)) goto LAB_0002cce8;
-    if (iVar1 == 3) {
-      uVar4 = param_4 & 0xfffffffc;
+    primitiveClassBits = (primitiveMode >> 3 & 1) + (primitiveMode >> 2 & 1) + (primitiveMode >> 1 & 1) + staleArgR9;
+    modeForward = primitiveMode;
+    trimmedCount = vertexCount;
+    if (((primitiveClassBits == 2) || (primitiveClassBits == 0)) || (primitiveMode == 2)) goto LAB_0002cce8;
+    if (primitiveClassBits == 3) {
+      trimmedCount = vertexCount & 0xfffffffc;
     }
     else if (primitiveMode == 4) {
-      uVar4 = ((int)param_4 / 3) * 3;
+      trimmedCount = ((int)vertexCount / 3) * 3;
     }
     else {
-      uVar4 = param_4 & 0xfffffffe;
+      trimmedCount = vertexCount & 0xfffffffe;
     }
   }
-  if (uVar4 == 0) {
+  if (trimmedCount == 0) {
     return 0;
   }
 LAB_0002cce8:
   if (((unsigned char *)0x00002b80)[ctx] != '\0') {
-    staleFprArg1 = (double)FUN_000a3be0(ctx + GLD_commandStream,primitiveMode,uVar2,uVar3,param_5,extraArg5,staleArgR9);
+    staleFprArg1 = (double)FUN_000a3be0(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,staleArgR9);
   }
   if (*(int *)(ctx + 0x1b68) != 0) {
-    ((void (*)())FUN_0002c020)(ctx + GLD_commandStream,primitiveMode,uVar2,uVar3,param_5,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,
+    ((void (*)())gld_revalidateStreamProgram)(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,
                  staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   }
   *(undefined1 *)(ctx + GLD_inDrawPixels) = 1;
-  return uVar4;
+  return trimmedCount;
 }
 
-/* FUN_0002cd50 @ 0x2cd50 (236 bytes) */
-int FUN_0002cd50(ctx, unitObject, param_3, param_4)
+/* gld_emitUnitObjectPacket @ 0x2cd50 (236 bytes) */
+int gld_emitUnitObjectPacket(ctx, unitObject, opcodeCount, packetCursor)
   int ctx;
   int unitObject;
-  int param_3;
-  uint *param_4;
+  int opcodeCount;
+  uint *packetCursor;
 {
   int iVar1;
   int *piVar2;
@@ -6219,18 +6219,18 @@ int FUN_0002cd50(ctx, unitObject, param_3, param_4)
   
   if (unitObject == 0) {
     puVar5 = *(uint **)(ctx + 0x1d8);
-    *puVar5 = (int)param_4 - (int)puVar5 >> 2 | *puVar5;
-    *(uint **)(ctx + 0x1d8) = param_4;
-    *param_4 = param_3 * 0x1000000 + 0x16000000;
-    return param_4 + 1;
+    *puVar5 = (int)packetCursor - (int)puVar5 >> 2 | *puVar5;
+    *(uint **)(ctx + 0x1d8) = packetCursor;
+    *packetCursor = opcodeCount * 0x1000000 + 0x16000000;
+    return packetCursor + 1;
   }
-  piVar2 = (int *)((uint)(param_4 + 0xb) & 0xffffffe0);
-  *param_4 = (((int)piVar2 - (int)param_4) + -8) * 0x4000 | 0xc0001000;
-  piVar2[-1] = (int)piVar2 - (int)param_4;
+  piVar2 = (int *)((uint)(packetCursor + 0xb) & 0xffffffe0);
+  *packetCursor = (((int)piVar2 - (int)packetCursor) + -8) * 0x4000 | 0xc0001000;
+  piVar2[-1] = (int)piVar2 - (int)packetCursor;
   puVar5 = *(uint **)(ctx + 0x1d8);
   *puVar5 = (int)piVar2 - (int)puVar5 >> 2 | *puVar5;
   *(int **)(ctx + 0x1d8) = piVar2;
-  *piVar2 = param_3 * 0x1000000 + 0x6000000;
+  *piVar2 = opcodeCount * 0x1000000 + 0x6000000;
   piVar2[1] = **(int **)(unitObject + 0x34);
   piVar6 = (int *)(*(int *)(unitObject + 0x34) + 0x10);
   bVar3 = false;
@@ -6306,7 +6306,7 @@ int FUN_0002ce40(param_1, param_2)
     iVar6 = iVar5;
     do {
       if ((uVar7 & 1) != 0) {
-        uVar3 = ((int (*)())FUN_0002cd50)(iVar5,*(undefined4 *)(iVar6 + 0x18c),iVar4,uVar3);
+        uVar3 = ((int (*)())gld_emitUnitObjectPacket)(iVar5,*(undefined4 *)(iVar6 + 0x18c),iVar4,uVar3);
       }
       uVar7 = uVar7 >> 1;
       iVar4 = iVar4 + 1;
