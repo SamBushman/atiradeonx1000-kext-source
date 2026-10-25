@@ -1315,86 +1315,90 @@ LAB_0013ae10: ;
 }
 
 /* FUN_0013b1e8 @ 0x13b1e8 (520 bytes) */
-int FUN_0013b1e8(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_0013b1e8(producer, program)
+  int producer;
+  int program;
 {
-  bool bVar1;
-  int iVar2;
-  uint uVar3;
-  int *piVar4;
+  int *userBlock;
+  int successorCount;
+  int userInst;
+  int userBlockDepth;
+  bool noCommonYet;
+  int operandCursor;
+  uint userCount;
+  int *elementPtr;
   int operandVReg;
   int iVar6;
-  int *piVar7;
+  int *commonBlock;
   uint loopIndex;
-  int *piVar9;
-  uint *puVar10;
-  int iVar11;
+  int *nextCommonBlock;
+  uint *userVec;
+  int operandIdx;
   
-  piVar7 = (int *)0x0;
-  for (loopIndex = 0; iVar6 = IRInst__useCount(param_1,param_2), (int)loopIndex < iVar6; loopIndex = loopIndex + 1) {
-    puVar10 = *(uint **)(param_1 + 0x10);
-    if (loopIndex < *puVar10) {
-      uVar3 = puVar10[1];
-      if (uVar3 <= loopIndex) {
-        _memset(uVar3 * 4 + puVar10[2],0,(loopIndex - uVar3) * 4 + 4);
-        puVar10[1] = loopIndex + 1;
+  commonBlock = (int *)0x0;
+  for (loopIndex = 0; iVar6 = IRInst__useCount(producer,program), (int)loopIndex < iVar6; loopIndex = loopIndex + 1) {
+    userVec = *(uint **)(producer + 0x10);
+    if (loopIndex < *userVec) {
+      userCount = userVec[1];
+      if (userCount <= loopIndex) {
+        _memset(userCount * 4 + userVec[2],0,(loopIndex - userCount) * 4 + 4);
+        userVec[1] = loopIndex + 1;
       }
-      piVar4 = (int *)(loopIndex * 4 + puVar10[2]);
+      elementPtr = (int *)(loopIndex * 4 + userVec[2]);
     }
     else {
-      piVar4 = (int *)Vector__elementRefGrow(puVar10,loopIndex);
+      elementPtr = (int *)Vector__elementRefGrow(userVec,loopIndex);
     }
-    iVar6 = *piVar4;
-    piVar4 = *(int **)(iVar6 + 0x158);
-    if ((piVar4[3] & 0x40U) != 0) goto LAB_0013b3c4;
-    if (*(int *)(*(int *)(iVar6 + 0x88) + 8) == 0x8e) {
-      iVar2 = 0;
+    userInst = *elementPtr;
+    userBlock = *(int **)(userInst + 0x158);
+    if ((userBlock[3] & 0x40U) != 0) goto LAB_0013b3c4;
+    if (*(int *)(*(int *)(userInst + 0x88) + 8) == 0x8e) {
+      operandCursor = 0;
       do {
-        iVar11 = iVar2;
-        if (*(int *)(iVar6 + 0x84) <= iVar11) goto LAB_0013b2d8;
-        operandVReg = IRInst__getOperandSource(iVar6,iVar11 + 1);
-        iVar2 = iVar11 + 1;
-      } while (param_1 != operandVReg);
-      piVar4 = (int *)Block__getPredecessor(piVar4,iVar11);
+        operandIdx = operandCursor;
+        if (*(int *)(userInst + 0x84) <= operandIdx) goto LAB_0013b2d8;
+        operandVReg = IRInst__getOperandSource(userInst,operandIdx + 1);
+        operandCursor = operandIdx + 1;
+      } while (producer != operandVReg);
+      userBlock = (int *)Block__getPredecessor(userBlock,operandIdx);
     }
 LAB_0013b2d8:
-    iVar6 = (**(code **)(*piVar4 + 0x24))(piVar4);
-    if ((iVar6 != 0) && (piVar4 = (int *)Block__getPredecessor(piVar4,0), piVar4 == (int *)0x0))
+    iVar6 = (**(code **)(*userBlock + 0x24))(userBlock);
+    if ((iVar6 != 0) && (userBlock = (int *)Block__getPredecessor(userBlock,0), userBlock == (int *)0x0))
     goto LAB_0013b3c4;
-    bVar1 = piVar7 == (int *)0x0;
-    piVar9 = piVar4;
-    if ((!bVar1) && (piVar9 = piVar7, piVar7 != piVar4)) {
+    noCommonYet = commonBlock == (int *)0x0;
+    nextCommonBlock = userBlock;
+    if ((!noCommonYet) && (nextCommonBlock = commonBlock, commonBlock != userBlock)) {
       do {
-        iVar2 = piVar4[0x2f];
-        iVar6 = piVar7[0x2f];
-        if (iVar6 < iVar2) {
-          piVar4 = (int *)piVar4[0x3c];
+        userBlockDepth = userBlock[0x2f];
+        iVar6 = commonBlock[0x2f];
+        if (iVar6 < userBlockDepth) {
+          userBlock = (int *)userBlock[0x3c];
 LAB_0013b318:
-          if (piVar4 == (int *)0x0) goto LAB_0013b3c4;
-          bVar1 = piVar7 == (int *)0x0;
+          if (userBlock == (int *)0x0) goto LAB_0013b3c4;
+          noCommonYet = commonBlock == (int *)0x0;
         }
-        else if (iVar2 < iVar6) {
-          piVar7 = (int *)piVar7[0x3c];
-          bVar1 = piVar7 == (int *)0x0;
+        else if (userBlockDepth < iVar6) {
+          commonBlock = (int *)commonBlock[0x3c];
+          noCommonYet = commonBlock == (int *)0x0;
         }
-        else if (iVar2 == iVar6) {
-          piVar4 = (int *)piVar4[0x3c];
-          piVar7 = (int *)piVar7[0x3c];
+        else if (userBlockDepth == iVar6) {
+          userBlock = (int *)userBlock[0x3c];
+          commonBlock = (int *)commonBlock[0x3c];
           goto LAB_0013b318;
         }
-        piVar9 = piVar4;
-      } while ((!bVar1) && (piVar9 = piVar7, piVar7 != piVar4));
+        nextCommonBlock = userBlock;
+      } while ((!noCommonYet) && (nextCommonBlock = commonBlock, commonBlock != userBlock));
     }
-    piVar7 = piVar9;
+    commonBlock = nextCommonBlock;
   }
-  iVar6 = Block__successorCount(piVar7);
-  if (((1 < iVar6) && (piVar7 = (int *)Block__getPredecessor(piVar7,0), piVar7 == *(int **)(param_1 + 0x158))
-      ) || (iVar6 = ((int (*)())FUN_00139294)(piVar7,*(undefined4 *)(param_2 + 0x3a0)), iVar6 == 0)) {
+  successorCount = Block__successorCount(commonBlock);
+  if (((1 < successorCount) && (commonBlock = (int *)Block__getPredecessor(commonBlock,0), commonBlock == *(int **)(producer + 0x158))
+      ) || (successorCount = ((int (*)())FUN_00139294)(commonBlock,*(undefined4 *)(program + 0x3a0)), successorCount == 0)) {
 LAB_0013b3c4:
-    piVar7 = (int *)0x0;
+    commonBlock = (int *)0x0;
   }
-  return piVar7;
+  return commonBlock;
 }
 
 /* Program__hoistFetchInsts @ 0x13b3f0 (172 bytes) */
