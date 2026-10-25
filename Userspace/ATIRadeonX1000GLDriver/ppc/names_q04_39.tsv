@@ -1,0 +1,9 @@
+local	FUN_000c5e60	uVar11	maxRegister	INFERRED	running maximum of the register numbers read by the walked records (updated with `if (uVar11 < reg) uVar11 = reg`)
+local	FUN_000c5e60	uVar29	kind1Count	INFERRED	number of kind-1 records seen (incremented in case 1, masked to 16 bits)
+local	FUN_000c5e60	local_64	kind2Count	INFERRED	number of kind-2 records seen (incremented in case 2, masked to 16 bits)
+local	FUN_000c5e60	local_70	noKind2Yet	INFERRED	1 until the first kind-2 record has been counted, then 0
+local	FUN_000c5e60	local_60	maxFlaggedRegister	INFERRED	running maximum of the register numbers whose operand word has bit 0x8000 set (value & 0x7fff)
+local	FUN_000c5e60	local_98_arr	fileUseCounts	INFERRED	16 ushort counters indexed by the file byte (<0x10) of a kind-2 record (the real-storage array replacing the old local_98..local_7c cluster)
+local	FUN_000b4400	param_2	compileOutput	INFERRED	zero-initialised result block written by this function (*param_2 = glContext, then the fields of the compiled program); callers pass a large stack buffer
+local	FUN_000a6860	param_2	dirtyMask	INFERRED	bit mask tested (& 0x400 ...) to decide which state groups to re-emit
+local	FUN_000a8630	param_2	engineState	INFERRED	indexed like FUN_000a9ac0's engineState (byte/word tables at 0x3e28, fields at +0x1920..0x195c)

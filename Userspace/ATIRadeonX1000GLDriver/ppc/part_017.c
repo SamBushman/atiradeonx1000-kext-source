@@ -9772,7 +9772,7 @@ int FUN_000c5e60(psnProgram)
   int iVar8;
   char *pcVar9;
   ushort *puVar10;
-  ushort uVar11;
+  ushort maxRegister;
   uint uVar12;
   ushort *puVar13;
   byte *pbVar14;
@@ -9790,14 +9790,14 @@ int FUN_000c5e60(psnProgram)
   ushort *cursor6;
   char *pcVar27;
   char *cursor;
-  uint uVar29;
+  uint kind1Count;
   int remaining;
   /* issue #64 live-repro (crash #8, past the ilRewriteForTextureState fixes): local_98/local_94/local_90/
    * local_8c/local_88/local_84/local_80/local_7c were 8 separately-declared 4-byte locals,
    * each initialized to the same value below, that a later loop (`*(short*)((int)&local_98 +
    * iVar8) = ...`, iVar8 running 0..30) treats as one contiguous 32-byte/16-ushort array -
    * the same Ghidra local-splitting defect class already fixed in FUN_000fd5c8,
-   * FUN_000b6580's local_68 cluster, and this session's own FUN_000f4d80 local_2c cluster.
+   * FUN_000b6580's local_68 cluster, and this session's own ConstRecord__findInTable local_2c cluster.
    * Only local_98's OWN 4 bytes are real storage; the walk past it (needed to reach what
    * should be local_94/local_90/.../local_7c) ran off local_98's real bounds into whatever
    * gcc actually placed next on the stack. Live-verified on real hardware via a hardware
@@ -9806,17 +9806,17 @@ int FUN_000c5e60(psnProgram)
    * write corrupting that slot, which is what caused FUN_000b4400's r30 to read back as
    * 0xff00ff and crash on its next stack-relative access. Fixed by giving the cluster real,
    * guaranteed-contiguous storage as an array (local_7c is kept as its own separate variable
-   * too, since it is independently used above for the early-return check; local_98_arr[7] is
+   * too, since it is independently used above for the early-return check; fileUseCounts[7] is
    * initialized to the same value alongside it so the walk's last slot still gets it). */
-  uint local_98_arr[8];
+  uint fileUseCounts[8];
   uint local_7c;
   uint local_78;
   uint local_74;
-  int local_70;
+  int noKind2Yet;
   uint local_6c;
   uint local_68;
-  uint local_64;
-  undefined4 local_60;
+  uint kind2Count;
+  undefined4 maxFlaggedRegister;
   uint local_5c;
   uint local_58;
   
@@ -9825,36 +9825,36 @@ int FUN_000c5e60(psnProgram)
     return;
   }
   local_58 = psnProgram[2];
-  local_98_arr[0] = local_7c;
-  local_98_arr[1] = local_7c;
-  local_98_arr[2] = local_7c;
-  local_98_arr[3] = local_7c;
-  local_98_arr[4] = local_7c;
-  local_98_arr[5] = local_7c;
-  local_98_arr[6] = local_7c;
-  local_98_arr[7] = local_7c;
+  fileUseCounts[0] = local_7c;
+  fileUseCounts[1] = local_7c;
+  fileUseCounts[2] = local_7c;
+  fileUseCounts[3] = local_7c;
+  fileUseCounts[4] = local_7c;
+  fileUseCounts[5] = local_7c;
+  fileUseCounts[6] = local_7c;
+  fileUseCounts[7] = local_7c;
   if (local_58 == 0) {
     local_5c = local_58;
     local_74 = local_58;
     local_6c = local_58;
     local_78 = local_58;
-    local_70 = 1;
-    local_60 = 0;
+    noKind2Yet = 1;
+    maxFlaggedRegister = 0;
     local_68 = local_58;
-    local_64 = local_58;
-    uVar11 = 0;
+    kind2Count = local_58;
+    maxRegister = 0;
   }
   else {
     puVar21 = (ushort *)((int)psnProgram + 0x62);
-    uVar29 = 0;
-    local_64 = 0;
-    local_70 = 1;
+    kind1Count = 0;
+    kind2Count = 0;
+    noKind2Yet = 1;
     local_68 = 0;
     local_78 = 0;
     local_6c = 0;
     local_5c = 0;
     local_74 = 0;
-    local_60 = 0;
+    maxFlaggedRegister = 0;
     pcVar23 = (char *)(psnProgram + 0x1a);
     puVar24 = (ushort *)((int)psnProgram + 0x5a);
     puVar4 = (ushort *)(psnProgram + 0x16);
@@ -9871,7 +9871,7 @@ int FUN_000c5e60(psnProgram)
     puVar6 = (ushort *)((int)psnProgram + 0x4e);
     pcVar9 = (char *)((int)psnProgram + 0x53);
     loopIndex = 1;
-    uVar11 = 0;
+    maxRegister = 0;
     cursor2 = puVar5;
     cursor3 = puVar4;
     cursor4 = puVar21;
@@ -9883,16 +9883,16 @@ int FUN_000c5e60(psnProgram)
       cursor7 = cursor7 + 0x12;
       switch(*cursor7) {
       case 1:
-        if ((*pcVar9 != '\0') && (uVar11 < *puVar6)) {
-          uVar11 = *puVar6;
+        if ((*pcVar9 != '\0') && (maxRegister < *puVar6)) {
+          maxRegister = *puVar6;
         }
-        if ((*pcVar7 != '\0') && (uVar11 < *puVar10)) {
-          uVar11 = *puVar10;
+        if ((*pcVar7 != '\0') && (maxRegister < *puVar10)) {
+          maxRegister = *puVar10;
         }
-        uVar29 = uVar29 + 1 & 0xffff;
+        kind1Count = kind1Count + 1 & 0xffff;
         break;
       case 2:
-        if (local_70 == 0) {
+        if (noKind2Yet == 0) {
           if (*cursor != '\0') {
             local_5c = local_5c + 1 & 0xffff;
             local_78 = local_78 + 1 & 0xffff;
@@ -9907,106 +9907,106 @@ int FUN_000c5e60(psnProgram)
             if ((uVar1 & 4) == 0) {
               if ((uVar1 & 0x40) != 0) {
                 uVar2 = *cursor3;
-                if (*cursor3 <= uVar11) {
-                  uVar2 = uVar11;
+                if (*cursor3 <= maxRegister) {
+                  uVar2 = maxRegister;
                 }
-                uVar11 = *puVar24;
+                maxRegister = *puVar24;
                 if (*puVar24 <= uVar2) {
-                  uVar11 = uVar2;
+                  maxRegister = uVar2;
                 }
                 goto LAB_000c60a8;
               }
             }
-            else if (uVar11 < *cursor2) {
-              uVar11 = *cursor2;
+            else if (maxRegister < *cursor2) {
+              maxRegister = *cursor2;
             }
           }
           else {
 LAB_000c60a8:
-            if (uVar11 < *cursor2) {
-              uVar11 = *cursor2;
+            if (maxRegister < *cursor2) {
+              maxRegister = *cursor2;
             }
-            if (uVar11 < *puVar15) {
-              uVar11 = *puVar15;
+            if (maxRegister < *puVar15) {
+              maxRegister = *puVar15;
             }
             if (*pbVar14 < 0x10) {
               iVar8 = (uint)*pbVar14 * 2;
-              *(short *)((int)local_98_arr + iVar8) = *(short *)((int)local_98_arr + iVar8) + 1;
+              *(short *)((int)fileUseCounts + iVar8) = *(short *)((int)fileUseCounts + iVar8) + 1;
             }
           }
         }
-        local_70 = 0;
-        local_64 = local_64 + 1 & 0xffff;
+        noKind2Yet = 0;
+        kind2Count = kind2Count + 1 & 0xffff;
         break;
       case 3:
       case 4:
         if (local_5c == 0) {
           local_5c = 1;
         }
-        if ((*pcVar27 != '\0') && (uVar11 < *cursor6)) {
-          uVar11 = *cursor6;
+        if ((*pcVar27 != '\0') && (maxRegister < *cursor6)) {
+          maxRegister = *cursor6;
         }
         uVar2 = *puVar5;
         if ((uVar2 & 0x8000) == 0) {
-          if (uVar11 < uVar2) {
-            uVar11 = uVar2;
+          if (maxRegister < uVar2) {
+            maxRegister = uVar2;
           }
         }
-        else if (local_60 < (uVar2 & 0x7fff)) {
-          local_60 = uVar2 & 0x7fff;
+        else if (maxFlaggedRegister < (uVar2 & 0x7fff)) {
+          maxFlaggedRegister = uVar2 & 0x7fff;
         }
         uVar2 = *puVar4;
         if ((uVar2 & 0x8000) == 0) {
-          if (uVar11 < uVar2) {
-            uVar11 = uVar2;
+          if (maxRegister < uVar2) {
+            maxRegister = uVar2;
           }
         }
-        else if (local_60 < (uVar2 & 0x7fff)) {
-          local_60 = uVar2 & 0x7fff;
+        else if (maxFlaggedRegister < (uVar2 & 0x7fff)) {
+          maxFlaggedRegister = uVar2 & 0x7fff;
         }
         uVar2 = *cursor5;
         if ((uVar2 & 0x8000) == 0) {
-          if (uVar11 < uVar2) {
-            uVar11 = uVar2;
+          if (maxRegister < uVar2) {
+            maxRegister = uVar2;
           }
         }
-        else if (local_60 < (uVar2 & 0x7fff)) {
-          local_60 = uVar2 & 0x7fff;
+        else if (maxFlaggedRegister < (uVar2 & 0x7fff)) {
+          maxFlaggedRegister = uVar2 & 0x7fff;
         }
-        if ((*pcVar23 != '\0') && (uVar11 < *puVar13)) {
-          uVar11 = *puVar13;
+        if ((*pcVar23 != '\0') && (maxRegister < *puVar13)) {
+          maxRegister = *puVar13;
         }
         uVar2 = *cursor4;
         if ((uVar2 & 0x8000) == 0) {
-          if (uVar11 < uVar2) {
-            uVar11 = uVar2;
+          if (maxRegister < uVar2) {
+            maxRegister = uVar2;
           }
         }
-        else if (local_60 < (uVar2 & 0x7fff)) {
-          local_60 = uVar2 & 0x7fff;
+        else if (maxFlaggedRegister < (uVar2 & 0x7fff)) {
+          maxFlaggedRegister = uVar2 & 0x7fff;
         }
         uVar2 = *puVar18;
         if ((uVar2 & 0x8000) == 0) {
-          if (uVar11 < uVar2) {
-            uVar11 = uVar2;
+          if (maxRegister < uVar2) {
+            maxRegister = uVar2;
           }
         }
-        else if (local_60 < (uVar2 & 0x7fff)) {
-          local_60 = uVar2 & 0x7fff;
+        else if (maxFlaggedRegister < (uVar2 & 0x7fff)) {
+          maxFlaggedRegister = uVar2 & 0x7fff;
         }
         uVar2 = *puVar17;
         if ((uVar2 & 0x8000) == 0) {
-          if (uVar11 < uVar2) {
-            uVar11 = uVar2;
+          if (maxRegister < uVar2) {
+            maxRegister = uVar2;
           }
         }
-        else if (local_60 < (uVar2 & 0x7fff)) {
-          local_60 = uVar2 & 0x7fff;
+        else if (maxFlaggedRegister < (uVar2 & 0x7fff)) {
+          maxFlaggedRegister = uVar2 & 0x7fff;
         }
         if (*pcVar16 != '\0') {
           local_74 = local_74 + 1 & 0xffff;
         }
-        local_70 = 1;
+        noKind2Yet = 1;
         local_68 = local_68 + 1 & 0xffff;
         break;
       case 5:
@@ -10036,47 +10036,47 @@ LAB_000c60a8:
       puVar6 = puVar6 + 0x24;
       pcVar9 = pcVar9 + 0x48;
     } while (loopIndex <= local_58);
-    if (uVar29 != 0) goto LAB_000c6350;
+    if (kind1Count != 0) goto LAB_000c6350;
   }
-  uVar29 = 1;
+  kind1Count = 1;
 LAB_000c6350:
   if (local_5c == 0) {
     local_5c = 1;
     local_68 = 1;
   }
-  if (local_70 == 0) {
+  if (noKind2Yet == 0) {
     local_68 = local_68 + 1 & 0xffff;
   }
   uVar12 = (local_68 + local_78 & 0xffff) + local_74 & 0xffff;
-  if (uVar12 < local_64) {
-    uVar12 = local_64;
+  if (uVar12 < kind2Count) {
+    uVar12 = kind2Count;
   }
   if (uVar12 < local_6c) {
     uVar12 = local_6c;
   }
-  if (uVar12 < uVar29) {
-    uVar12 = uVar29;
+  if (uVar12 < kind1Count) {
+    uVar12 = kind1Count;
   }
-  *(ushort *)((int)psnProgram + 0x22) = uVar11;
+  *(ushort *)((int)psnProgram + 0x22) = maxRegister;
   *(short *)((int)psnProgram + 0x26) = (short)uVar12;
   *(short *)((int)psnProgram + 0x1e) = (short)(local_68 + local_78);
-  *(short *)(psnProgram + 6) = (short)uVar29;
+  *(short *)(psnProgram + 6) = (short)kind1Count;
   *(short *)((int)psnProgram + 0x16) = (short)local_5c;
   *(undefined2 *)(psnProgram + 10) = 0;
   *(short *)(psnProgram + 8) = (short)local_6c;
   loopIndex2 = 0;
   remaining = 0x10;
   *(short *)(psnProgram + 7) = (short)local_68;
-  *(short *)((int)psnProgram + 0x1a) = (short)local_64;
-  *(undefined2 *)(psnProgram + 9) = (*(unsigned short *)((unsigned char *)&(local_60) + 2));
+  *(short *)((int)psnProgram + 0x1a) = (short)kind2Count;
+  *(undefined2 *)(psnProgram + 9) = (*(unsigned short *)((unsigned char *)&(maxFlaggedRegister) + 2));
   puVar3 = psnProgram;
   do {
-    uVar11 = *(ushort *)((int)local_98_arr + loopIndex2);
-    if (0xff < uVar11) {
-      uVar11 = 0xff;
-      *(undefined2 *)((int)local_98_arr + loopIndex2) = 0xff;
+    maxRegister = *(ushort *)((int)fileUseCounts + loopIndex2);
+    if (0xff < maxRegister) {
+      maxRegister = 0xff;
+      *(undefined2 *)((int)fileUseCounts + loopIndex2) = 0xff;
     }
-    *(char *)((int)puVar3 + 0x2a) = (char)uVar11;
+    *(char *)((int)puVar3 + 0x2a) = (char)maxRegister;
     loopIndex2 = loopIndex2 + 2;
     puVar3 = (undefined4 *)((int)puVar3 + 1);
     remaining = remaining + -1;

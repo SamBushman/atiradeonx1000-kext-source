@@ -957,7 +957,7 @@ int IRLoadConst__removeFromListEx(this, unusedArg2, compiler)
   
   instKind = *(int *)(this + 0x98);
   if (instKind == 0xc) {
-    FUN_000f4d80(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),this);
+    ConstRecord__findInTable(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3ac),this);
     instKind = *(int *)(this + 0x98);
   }
   if ((instKind != 2) && (instKind != 0x33)) {

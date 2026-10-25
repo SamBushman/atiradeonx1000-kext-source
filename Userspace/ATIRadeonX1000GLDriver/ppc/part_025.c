@@ -1875,45 +1875,45 @@ int ConstKey__countPresentOperands(param_1, param_2, param_3, param_4, param_5, 
   return;
 }
 
-/* FUN_000f4d80 @ 0xf4d80 (92 bytes) */
-int FUN_000f4d80(param_1, param_2)
-  int param_1;
-  int param_2;
+/* ConstRecord__findInTable @ 0xf4d80 (92 bytes) */
+int ConstRecord__findInTable(constTables, constRecord)
+  int constTables;
+  int constRecord;
 {
   uint loopCounterB;
-  undefined4 *puVar2;
+  undefined4 *selectedTable;
   int loopCounter;
   /* issue #64 live-repro (crash #4, past the case-0x28 fix): local_2c/local_28/local_24/
-   * local_20/local_1c were 5 SEPARATELY declared locals that puVar2's pointer arithmetic
-   * (`puVar2 = puVar2 + 1`, below) treats as one contiguous 5-word array - the same
+   * local_20/local_1c were 5 SEPARATELY declared locals that selectedTable's pointer arithmetic
+   * (`selectedTable = selectedTable + 1`, below) treats as one contiguous 5-word array - the same
    * Ghidra local-splitting defect class already fixed in FUN_000fd5c8 and FUN_000b6580's
    * local_68 cluster. An initial fix just gave local_2c a value (matching the +4-per-slot
-   * source pattern the other four follow: local_28=param_1+8, local_24=+0xc, local_20=+0x10,
+   * source pattern the other four follow: local_28=constTables+8, local_24=+0xc, local_20=+0x10,
    * local_1c=+0x14, so local_2c=+4) but that alone was insufficient: live-verified via a real
    * disassembly of this rebuild that gcc placed local_2c at frame offset 84 while
    * local_28/local_24/local_20/local_1c landed at offsets 68/64/60/56 - contiguous with EACH
-   * OTHer but 16 bytes away from local_2c - so puVar2's forward walk from &local_2c by separate
+   * OTHer but 16 bytes away from local_2c - so selectedTable's forward walk from &local_2c by separate
    * declared locals never actually reaches them; it walks off into unrelated stack space,
    * which happened to read back as 0 and crashed three frames down in FUN_00194720
-   * (param_1[4]() through a NULL dispatch pointer). Fixed properly this time by giving the
+   * (constTables[4]() through a NULL dispatch pointer). Fixed properly this time by giving the
    * cluster real, guaranteed-contiguous storage as an array, per this project's own
    * established fix pattern for this exact defect class. */
   undefined4 local_cluster[5];
 
   loopCounterB = 0;
-  puVar2 = local_cluster;
+  selectedTable = local_cluster;
   loopCounter = 4;
   do {
-    if (((int)*(char *)(param_2 + 0x15c) >> (loopCounterB & 0x3f) & 1U) == 0) break;
+    if (((int)*(char *)(constRecord + 0x15c) >> (loopCounterB & 0x3f) & 1U) == 0) break;
     loopCounterB = loopCounterB + 1;
-    puVar2 = puVar2 + 1;
+    selectedTable = selectedTable + 1;
     loopCounter = loopCounter + -1;
   } while (loopCounter != 0);
-  local_cluster[0] = *(undefined4 *)(param_1 + 4);
-  local_cluster[1] = *(undefined4 *)(param_1 + 8);
-  local_cluster[2] = *(undefined4 *)(param_1 + 0xc);
-  local_cluster[3] = *(undefined4 *)(param_1 + 0x10);
-  local_cluster[4] = *(undefined4 *)(param_1 + 0x14);
-  return FUN_00194720(*puVar2,param_2);
+  local_cluster[0] = *(undefined4 *)(constTables + 4);
+  local_cluster[1] = *(undefined4 *)(constTables + 8);
+  local_cluster[2] = *(undefined4 *)(constTables + 0xc);
+  local_cluster[3] = *(undefined4 *)(constTables + 0x10);
+  local_cluster[4] = *(undefined4 *)(constTables + 0x14);
+  return FUN_00194720(*selectedTable,constRecord);
 }
 

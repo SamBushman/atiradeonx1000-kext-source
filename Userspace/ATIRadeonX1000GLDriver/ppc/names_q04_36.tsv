@@ -1,0 +1,19 @@
+local	FUN_000a9ac0	dVar31	vecX	INFERRED	first component of the 3-float vector at 0x14a0+record+4 that is normalised in place with a fast reciprocal square root (0x5f375a00 magic + one Newton step)
+local	FUN_000a9ac0	dVar32	vecY	INFERRED	second component (record+8) of the same vector
+local	FUN_000a9ac0	dVar33	vecZ	INFERRED	third component (record+0xc) of the same vector
+local	FUN_000a9ac0	dVar30	vecXYSq	INFERRED	vecX*vecX + vecY*vecY, the partial sum of the squared length
+local	FUN_000a9ac0	dVar34	invLength	INFERRED	reciprocal square root of the squared length (Newton step result); 0.0 when the length is 0
+use	FUN_000a9ac0	fVar4	lengthSq	INFERRED	squared length of the vector (x*x + y*y + z*z), then y^2*x-style Newton intermediate in the same variable	^\s*fVar4\ =\ \(float\)\(dVar33\ \*\ dVar33\ \+\ dVar30\);$	+3
+use	FUN_000a9ac0	fVar4	lengthSq	INFERRED	squared length of the vector (x*x + y*y + z*z), then y^2*x-style Newton intermediate in the same variable	^\s*fVar7\ =\ \(float\)\(0x5f375a00\ \-\ \(\(uint\)GH_F2U\(fVar4\)\ >>\ 1\)\);$	+4
+use	FUN_000a9ac0	fVar4	lengthSq	INFERRED	squared length of the vector (x*x + y*y + z*z), then y^2*x-style Newton intermediate in the same variable	^\s*fVar4\ =\ \(float\)\(fparam_8\ \*\ fparam_8\ \+\ dVar30\);$	+1
+use	FUN_000a9ac0	fVar4	lengthSq	INFERRED	squared length of the vector (x*x + y*y + z*z), then y^2*x-style Newton intermediate in the same variable	^\s*if\ \(0\.0\ <\ fVar4\)\ \{$@2	+2
+use	FUN_000a9ac0	fVar4	lengthSq	INFERRED	squared length of the vector (x*x + y*y + z*z), then y^2*x-style Newton intermediate in the same variable	^\s*fVar7\ =\ \(float\)\(0x5f375a00\ \-\ \(\(uint\)GH_F2U\(fVar4\)\ >>\ 1\)\);$@2	+4
+use	FUN_000a9ac0	fVar7	rsqrtGuess	INFERRED	0x5f375a00 - (bits(lengthSq) >> 1): initial reciprocal-square-root guess	^\s*fVar7\ =\ \(float\)\(0x5f375a00\ \-\ \(\(uint\)GH_F2U\(fVar4\)\ >>\ 1\)\);$	+2
+use	FUN_000a9ac0	fVar7	rsqrtGuess	INFERRED	0x5f375a00 - (bits(lengthSq) >> 1): initial reciprocal-square-root guess	^\s*dVar34\ =\ \(double\)\(fVar3\ \*\ fVar7\ \*\ 0\.0625\ \*\ \-\(fVar3\ \*\ fVar4\ \*\ fVar3\ \-\ 12\.0\)\);$	+1
+use	FUN_000a9ac0	fVar7	rsqrtGuess	INFERRED	0x5f375a00 - (bits(lengthSq) >> 1): initial reciprocal-square-root guess	^\s*fVar7\ =\ \(float\)\(0x5f375a00\ \-\ \(\(uint\)GH_F2U\(fVar4\)\ >>\ 1\)\);$@2	+2
+use	FUN_000a9ac0	fVar7	rsqrtGuess	INFERRED	0x5f375a00 - (bits(lengthSq) >> 1): initial reciprocal-square-root guess	^\s*dVar34\ =\ \(double\)\(fVar3\ \*\ fVar7\ \*\ 0\.0625\ \*\ \-\(fVar3\ \*\ fVar4\ \*\ fVar3\ \-\ 12\.0\)\);$@2	+1
+local	FUN_000a9ac0	fVar8	rsqrtGuessB	INFERRED	same magic-constant guess for the second (engine-state) vector
+use	FUN_000a9ac0	fVar3	newtonTerm	INFERRED	3.0 - guess^2 * length: the Newton correction term	^\s*fVar3\ =\ 3\.0\ \-\ fVar4;$	+2
+use	FUN_000a9ac0	fVar3	newtonTerm	INFERRED	3.0 - guess^2 * length: the Newton correction term	^\s*fVar3\ =\ 3\.0\ \-\ fVar4;$@2	+2
+local	FUN_000a9ac0	uVar23	engineState	INFERRED	*(gld+0x10) with gld = *(stream+4): GLD_engineState (the byte tables at 0x2d48/0x3180/0x318c are indexed through it)
+local	FUN_000a9ac0	pcVar18	stateWord44Copy	INFERRED	copy of stream+0x44 taken before the mode bits are rewritten
