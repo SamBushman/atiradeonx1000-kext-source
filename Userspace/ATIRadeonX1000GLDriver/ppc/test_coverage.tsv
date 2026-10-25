@@ -250,7 +250,7 @@
 0x247f0	gldPrimWrapperLines_24190	104	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x24870	gldPrimWrapperLineLoop_23a24	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x248f0	gldPrimWrapperLineStrip_23a24	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x24970	FUN_00024970	1588	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
+0x24970	gld_drawElementsImmediate	1588	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
 0x24fb0	FUN_00024fb0	16	yes	
 0x24fc0	noop_24fc0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x24fd0	noop_24fd0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises

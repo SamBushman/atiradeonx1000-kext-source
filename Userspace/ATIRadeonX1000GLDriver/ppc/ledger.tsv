@@ -249,7 +249,7 @@
 0x247f0	104	gldPrimWrapperLines_24190	part_004	converted
 0x24870	112	gldPrimWrapperLineLoop_23a24	part_004	converted
 0x248f0	112	gldPrimWrapperLineStrip_23a24	part_004	converted
-0x24970	1588	FUN_00024970	part_004	converted
+0x24970	1588	gld_drawElementsImmediate	part_004	converted
 0x24fb0	16	FUN_00024fb0	part_004	converted
 0x24fc0	4	noop_24fc0	part_004	converted
 0x24fd0	4	noop_24fd0	part_004	converted

@@ -474,7 +474,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 248e4	248f0	padding	gldPrimWrapperLineLoop_23a24	3	
 2494c	24950	padding	gldPrimWrapperLineStrip_23a24	1	
 24964	24970	padding	gldPrimWrapperLineStrip_23a24	3	
-24fa4	24fb0	padding	FUN_00024970	3	
+24fa4	24fb0	padding	gld_drawElementsImmediate	3	
 24fc4	24fd0	padding	noop_24fc0	3	
 24fd4	24fe0	padding	noop_24fd0	3	
 2529c	252b4	table	FUN_00024fe0	6	

@@ -101,3 +101,71 @@ use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surf
 use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*uVar36\ =\ uVar28\ \-\ uVar46;$	+1
 use	FUN_00018120	uVar28	surfaceHeight	INFERRED	bufferHeight16 widened: copy surface height in pixels	^\s*if\ \(\(int\)\(uVar37\ \+\ 0x1000\)\ <=\ \(int\)uVar28\)\ \{$	+1
 use	FUN_00018120	uVar25	surfaceWidth	INFERRED	bufferWidth16 widened: copy surface width in pixels	^\s*if\ \(\(int\)\(uVar44\ \+\ 0x1000\)\ <=\ \(int\)uVar25\)\ \{$	+1
+local	FUN_0002ddf0	piVar30	hwState	INFERRED	texture+0x3c: the texture's hardware register shadow words (+0x50 filter, +0x58 format, +0x60 size/layout ...), passed to FUN_0002d030/FUN_0002d210 and gldPackColorForSurfaceFormat
+local	FUN_0002ddf0	puVar27	texImages	CONFIRMED	texture[0xc]: the image-level record array (same object as texImages in gldTextureMakeResident)
+local	FUN_0002ddf0	bVar25	textureTarget	INFERRED	(texImages+1) & 0xf: 0 = 1D-like, 1 = 2D-like, 2 = 3D, 3 = cube, 4 = rectangle; selects the size derivation
+func	FUN_00024970	gld_drawElementsImmediate	INFERRED	copies a client index array (UNSIGNED_BYTE/SHORT/INT) into the command stream as packed 16-bit indices, subtracting a bias, after the 0x26000000 vertex-fetch state packet and a 0x82c/0xc0003600 index-draw header
+local	FUN_00024970	param_2	glStateBlock	INFERRED	pointer into the GL state block (negative offsets -0x74/-0x68/-0x64 reach the current vertex-array bindings and engine register shadows)
+local	FUN_00024970	param_3	primitiveMode	CONFIRMED	GL primitive mode (0..9); also indexes the primitive-flags table at DAT_001d97e8
+local	FUN_00024970	param_4	indexBias	INFERRED	value subtracted from every index (base vertex) before it is written
+local	FUN_00024970	param_5	indexCount	CONFIRMED	number of indices; forwarded to FUN_0002cc30 which returns the trimmed count
+local	FUN_00024970	param_6	indexType	CONFIRMED	GL index type: 0x1401 UNSIGNED_BYTE, 0x1403 UNSIGNED_SHORT, 0x1405 UNSIGNED_INT
+local	FUN_00024970	param_7	indices	CONFIRMED	client index array
+local	FUN_00024970	puVar2	packetBody	INFERRED	32-byte aligned body of the 0x26000000 vertex-fetch state packet
+local	FUN_00024970	puVar5	packetTail	INFERRED	end of the state packet: the 0x82c / 0xc0003600 index-draw header is written here
+local	FUN_00024970	uVar6	registerValue	INFERRED	value copied into the register pair being written
+local	FUN_00024970	iVar8	indexDwords	INFERRED	(trimmed count + 1) >> 1: number of dwords holding the packed 16-bit indices
+use	FUN_00024970	puVar4	packetAlloc	INFERRED	command-stream slot returned by the allocate callback (ctx+0x2998)	^\s*puVar4\ =\ \(uint\ \*\)\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x2998\)\)\(param_1\ \+\ 0x240,uVar10\);$	+2
+use	FUN_00024970	puVar4	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length	^\s*puVar4\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x1d8\);$	+1
+use	FUN_00024970	puVar4	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length	^\s*\*puVar4\ =\ \(int\)puVar2\ \-\ \(int\)puVar4\ >>\ 2\ \|\ \*puVar4;$	+1
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\ =\ puVar5\ \+\ 4;$	+1
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ \(uint\)\*\(ushort\ \*\)puVar7\ \-\ param_4\ \&\ 0xffff\ \|$	+1
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\ =\ puVar4\ \+\ 1;$	+1
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ \(uint\)\*\(ushort\ \*\)\(uVar10\ \*\ 2\ \+\ \(int\)param_7\)\ \-\ param_4\ \&\ 0xffff;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[1\]\ =\ param_7\[2\]\ \|\ param_7\[3\]\ <<\ 0x10;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[3\]\ =\ param_7\[6\]\ \|\ param_7\[7\]\ <<\ 0x10;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[5\]\ =\ param_7\[10\]\ \|\ param_7\[0xb\]\ <<\ 0x10;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[6\]\ =\ \*puVar1\ \|\ \*puVar7\ <<\ 0x10;$	+3
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ uVar11\ \|\ \*puVar7\ <<\ 0x10;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ \(uint\)\(ushort\)\*param_7;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[1\]\ =\ param_7\[2\]\ \-\ param_4\ \|\ \(param_7\[3\]\ \-\ param_4\)\ \*\ 0x10000;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[3\]\ =\ \(param_7\[7\]\ \-\ param_4\)\ \*\ 0x10000\ \|\ param_7\[6\]\ \-\ param_4\ \&\ 0xffff;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[5\]\ =\ \(param_7\[0xb\]\ \-\ param_4\)\ \*\ 0x10000\ \|\ param_7\[10\]\ \-\ param_4\ \&\ 0xffff;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[6\]\ =\ \(\*puVar1\ \-\ param_4\)\ \*\ 0x10000\ \|\ \*puVar7\ \-\ param_4\ \&\ 0xffff;$	+3
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ \(\*puVar7\ \-\ param_4\)\ \*\ 0x10000\ \|\ uVar11\ \-\ param_4\ \&\ 0xffff;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ \*param_7\ \-\ param_4\ \&\ 0xffff;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ \(uint\)\*\(byte\ \*\)puVar7\ \-\ param_4\ \&\ 0xffff\ \|$	+1
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\ =\ puVar4\ \+\ 1;$@7	+1
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*\*puVar4\ =\ \(uint\)\*\(byte\ \*\)\(\(int\)param_7\ \+\ uVar10\)\ \-\ param_4\ \&\ 0xffff;$	+2
+use	FUN_00024970	puVar4	indexCursor	INFERRED	write cursor through the packed index dwords	^\s*puVar4\[1\]\ =\ 0;$	+4
+use	FUN_00024970	uVar12	cacheLineSize	CONFIRMED	ctx+8 cacheLineSize: stride of the dcbz loop that pre-zeroes the packet	^\s*uVar12\ =\ \(uint\)\*\(byte\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_00024970	uVar12	cacheLineSize	CONFIRMED	ctx+8 cacheLineSize: stride of the dcbz loop that pre-zeroes the packet	^\s*if\ \(uVar12\ !=\ 0x20\)\ \{$	+1
+use	FUN_00024970	uVar12	cacheLineSize	CONFIRMED	ctx+8 cacheLineSize: stride of the dcbz loop that pre-zeroes the packet	^\s*uVar10\ =\ uVar12;$	+1
+use	FUN_00024970	uVar12	cacheLineSize	CONFIRMED	ctx+8 cacheLineSize: stride of the dcbz loop that pre-zeroes the packet	^\s*uVar10\ =\ uVar10\ \+\ uVar12;$	+1
+use	FUN_00024970	uVar12	primitiveFlags	INFERRED	DAT_001d97e8[primitiveMode]: primitive type bits of the draw header	^\s*uVar12\ =\ \*\(uint\ \*\)\(param_3\ \*\ 4\ \+\ 0x1d97e8\);$	+1
+use	FUN_00024970	uVar12	primitiveFlags	INFERRED	DAT_001d97e8[primitiveMode]: primitive type bits of the draw header	^\s*puVar5\[3\]\ =\ iVar3\ <<\ 0x10\ \|\ uVar12\ \&\ 0xf\ \|\ 0x10;$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*uVar12\ =\ iVar3\ \-\ 1;$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(uVar12\ !=\ 0\)\ \{$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*\}\ while\ \(uVar10\ <\ uVar12\);$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(\(uVar12\ \&\ 1\)\ ==\ 0\)\ \{$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*iVar3\ =\ \(int\)uVar12\ >>\ 4;$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(\(uVar12\ \&\ 0xf\)\ !=\ 0\)\ \{$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*\}\ while\ \(uVar10\ <\ \(uVar12\ \&\ 0xf\)\);$	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(\(uVar12\ \&\ 1\)\ ==\ 0\)\ \{$@2	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(\(uVar12\ \&\ 0xf\)\ !=\ 0\)\ \{$@2	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*\}\ while\ \(uVar10\ <\ \(uVar12\ \&\ 0xf\)\);$@2	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(\(uVar12\ \&\ 1\)\ ==\ 0\)\ \{$@3	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(uVar12\ !=\ 0\)\ \{$@2	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*\}\ while\ \(uVar10\ <\ uVar12\);$@2	+1
+use	FUN_00024970	uVar12	lastIndex	INFERRED	trimmed index count - 1	^\s*if\ \(\(uVar12\ \&\ 1\)\ ==\ 0\)\ \{$@4	+1
+use	FUN_00024970	iVar3	trimmedCount	INFERRED	index count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)	^\s*iVar3\ =\ \(\(uint\ \(\*\)\(\)\)FUN_0002cc30\)\(param_1,1,param_3,param_5,param_5,param_6,in_r9,fparam_1,fparam_2,fparam_3,fparam_4$	+1
+use	FUN_00024970	iVar3	trimmedCount	INFERRED	index count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)	^\s*if\ \(iVar3\ !=\ 0\)\ \{$	+1
+use	FUN_00024970	iVar3	trimmedCount	INFERRED	index count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)	^\s*iVar8\ =\ iVar3\ \+\ 1\ >>\ 1;$	+1
+use	FUN_00024970	iVar3	trimmedCount	INFERRED	index count after FUN_0002cc30 trimmed it to whole primitives (0 = nothing to draw)	^\s*puVar5\[3\]\ =\ iVar3\ <<\ 0x10\ \|\ uVar12\ \&\ 0xf\ \|\ 0x10;$	+2
+use	FUN_00024970	iVar3	blockCount	INFERRED	number of 16-index blocks copied by the unrolled loop	^\s*iVar3\ =\ \(int\)uVar12\ >>\ 4;$	+1
+use	FUN_00024970	iVar3	blockCount	INFERRED	number of 16-index blocks copied by the unrolled loop	^\s*if\ \(iVar3\ !=\ 0\)\ \{$@2	+3
+use	FUN_00024970	iVar3	blockCount	INFERRED	number of 16-index blocks copied by the unrolled loop	^\s*iVar3\ =\ iVar3\ \+\ \-1;$	+2
+use	FUN_00024970	iVar3	blockCount	INFERRED	number of 16-index blocks copied by the unrolled loop	^\s*if\ \(iVar3\ !=\ 0\)\ \{$@3	+3
+use	FUN_00024970	iVar3	blockCount	INFERRED	number of 16-index blocks copied by the unrolled loop	^\s*iVar3\ =\ iVar3\ \+\ \-1;$@2	+2
+use	FUN_00024970	puVar4	packetAlloc	INFERRED	command-stream slot returned by the allocate callback (ctx+0x2998)	^\s*dataCacheBlockClearToZero\(\(int\)puVar4\ \+\ uVar10\);$	+1
+use	FUN_00024970	puVar4	packetAlloc	INFERRED	command-stream slot returned by the allocate callback (ctx+0x2998)	^\s*puVar2\ =\ \(undefined4\ \*\)\(\(uint\)\(puVar4\ \+\ 0xb\)\ \&\ 0xffffffe0\);$	+3
