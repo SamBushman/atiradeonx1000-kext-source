@@ -1,0 +1,43 @@
+use	FUN_00123c08	puVar6	defVectorElemRef	INFERRED	first element reference of the definition vector of the default register	^\s*puVar6\ =\ \(undefined4\ \*\)FUN_0019423c\(piVar5,0\);$	+1
+use	FUN_00123c08	puVar6	defVectorElemRef	INFERRED	first element reference of the definition vector of the default register	^\s*puVar6\ =\ \(undefined4\ \*\)piVar5\[2\];$	+1
+use	FUN_00123c08	puVar6	defVectorElemRef	INFERRED	first element reference of the definition vector of the default register	^\s*uVar4\ =\ \*puVar6;$	+1
+use	FUN_00123c08	puVar6	constKeyAlloc	INFERRED	arena block (0x240 bytes) of the ValueKey of the constant move	^\s*puVar6\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar13,0x240\);$	+4
+use	FUN_00123c08	puVar6	constKeyAlloc	INFERRED	arena block (0x240 bytes) of the ValueKey of the constant move	^\s*FUN_00174e0c\(puVar6\);$	+2
+use	FUN_00123c08	puVar6	constKeyAlloc	INFERRED	arena block (0x240 bytes) of the ValueKey of the constant move	^\s*\(\(int\ \(\*\)\(\)\)FUN_00123424\)\(iVar3,param_2\[0x2c\],puVar6\);$	+1
+use	FUN_00123c08	puVar6	undefKeyAlloc	INFERRED	arena block (0x240 bytes) of the ValueKey of the undefined-value instruction	^\s*puVar6\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar14,0x240\);$	+4
+use	FUN_00123c08	puVar6	undefKeyAlloc	INFERRED	arena block (0x240 bytes) of the ValueKey of the undefined-value instruction	^\s*FUN_00174e0c\(puVar6\);$@2	+2
+use	FUN_00123c08	puVar6	undefKeyAlloc	INFERRED	arena block (0x240 bytes) of the ValueKey of the undefined-value instruction	^\s*FUN_000e9c00\(param_2,uVar13,puVar6\);$	+1
+use	FUN_00123c08	uVar13	constMoveRegA	INFERRED	virtual register of the constant move, kept as an argument	^\s*uVar13\ =\ uVar4;$	+1
+use	FUN_00123c08	uVar13	constMoveRegA	INFERRED	virtual register of the constant move, kept as an argument	^\s*\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_1\ \+\ 0x3a0\)\ \+\ 0xc\)\)\(\*\(int\ \*\*\)\(param_1\ \+\ 0x3a0\),a1,uVar13\);$	+1
+use	FUN_00123c08	uVar13	undefVReg	INFERRED	virtual register defined by the undefined-value instruction	^\s*uVar13\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(iVar10\ \+\ 0x3ac\),0,iVar7,0\);$	+2
+use	FUN_00123c08	uVar13	undefVReg	INFERRED	virtual register defined by the undefined-value instruction	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012306c\)\(uVar13,a1\);$	+2
+use	FUN_00123c08	uVar13	undefVReg	INFERRED	virtual register defined by the undefined-value instruction	^\s*\*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ COMP_arenaB\)\ \+\ 0xbc\)\ =\ uVar13;$	+2
+use	FUN_00123c08	iVar7	compilerPtr	INFERRED	program->compiler	^\s*iVar7\ =\ \*\(int\ \*\)\(param_1\ \+\ 8\);$	+2
+use	FUN_00123c08	iVar7	compilerPtr	INFERRED	program->compiler	^\s*uVar4\ =\ FUN_001084b8\(0x31,iVar7\);$	+1
+use	FUN_00123c08	iVar7	newVRegId	INFERRED	freshly allocated virtual register id (compiler counter - 1)	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$	+3
+use	FUN_00123c08	iVar7	newVRegId	INFERRED	freshly allocated virtual register id (compiler counter - 1)	^\s*\*\(int\ \*\)\(iVar3\ \+\ 8\)\ =\ iVar7;$	+1
+use	FUN_00123c08	piVar5	defVector	INFERRED	definition vector of the default register	^\s*piVar5\ =\ \*\(int\ \*\*\)\(iVar3\ \+\ 0x18\);$	+3
+use	FUN_00123c08	piVar5	defVector	INFERRED	definition vector of the default register	^\s*if\ \(piVar5\[1\]\ ==\ 0\)\ \{$	+3
+use	FUN_00123c08	piVar5	defVector	INFERRED	definition vector of the default register	^\s*puVar6\ =\ \(undefined4\ \*\)piVar5\[2\];$	+1
+use	FUN_00123c08	piVar5	keyVectorElemRef	INFERRED	element reference into the value key vector	^\s*piVar5\ =\ \(int\ \*\)\(uVar15\ \*\ 4\ \+\ puVar12\[2\]\);$	+1
+use	FUN_00123c08	piVar5	keyVectorElemRef	INFERRED	element reference into the value key vector	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar12,uVar15\);$	+1
+use	FUN_00123c08	piVar5	keyVectorElemRef	INFERRED	element reference into the value key vector	^\s*local_58\ =\ \(undefined4\ \*\)\*piVar5;$	+1
+use	FUN_00123c08	iVar10	program	INFERRED	compiler->currentProgram	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar7\ \+\ 0x6c4\);$	+1
+use	FUN_00123c08	iVar10	program	INFERRED	compiler->currentProgram	^\s*iVar3\ =\ iVar10;$	+1
+use	FUN_00123c08	iVar10	program	INFERRED	compiler->currentProgram	^\s*uVar13\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(iVar10\ \+\ 0x3ac\),0,iVar7,0\);$	+1
+use	FUN_00123c08	iVar10	program	INFERRED	compiler->currentProgram	^\s*FUN_00175dac\(iVar10,0,0,\&local_58,param_2\);$	+1
+use	FUN_00123c08	a1	undefInst	INFERRED	IRUndefined instruction (allocation + 1)	^\s*a1\ =\ puVar6\ \+\ 1;$	+3
+use	FUN_00123c08	a1	undefInst	INFERRED	IRUndefined instruction (allocation + 1)	^\s*iVar3\ =\ FUN_001054ec\(a1,0\);$	+1
+use	FUN_00123c08	a1	undefInst	INFERRED	IRUndefined instruction (allocation + 1)	^\s*FUN_00173938\(puVar6,a1,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_00123c08	a1	undefInst	INFERRED	IRUndefined instruction (allocation + 1)	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012306c\)\(uVar13,a1\);$	+1
+use	FUN_00123c08	a1	undefInst	INFERRED	IRUndefined instruction (allocation + 1)	^\s*FUN_00106804\(\*\(undefined4\ \*\)\(param_1\ \+\ COMP_arenaB\),a1,0,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_00123c08	uVar11	keyVectorCount	INFERRED	filled count of the value key vector	^\s*uVar11\ =\ puVar12\[1\];$	+2
+use	FUN_00123c08	uVar11	keyVectorCount	INFERRED	filled count of the value key vector	^\s*if\ \(uVar11\ <=\ uVar15\)\ \{$	+3
+use	FUN_00123c08	puVar12	keyVector	INFERRED	value key vector of the move's destination register (+0x2c)	^\s*puVar12\ =\ \*\(uint\ \*\*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ COMP_arenaB\)\ \+\ 0x8c\)\ \+\ 0x2c\);$	+2
+use	FUN_00123c08	puVar12	keyVector	INFERRED	value key vector of the move's destination register (+0x2c)	^\s*if\ \(uVar15\ <\ \*puVar12\)\ \{$	+1
+use	FUN_00123c08	puVar12	keyVector	INFERRED	value key vector of the move's destination register (+0x2c)	^\s*_memset\(uVar11\ \*\ 4\ \+\ puVar12\[2\],0,\(uVar15\ \-\ uVar11\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_00123c08	puVar12	keyVector	INFERRED	value key vector of the move's destination register (+0x2c)	^\s*piVar5\ =\ \(int\ \*\)\(uVar15\ \*\ 4\ \+\ puVar12\[2\]\);$	+1
+use	FUN_00123c08	puVar12	keyVector	INFERRED	value key vector of the move's destination register (+0x2c)	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar12,uVar15\);$	+1
+use	FUN_00123c08	uVar15	lastKeyIndex	INFERRED	index of the last value key	^\s*uVar15\ =\ uVar11\ \-\ 1;$	+4
+use	FUN_00123c08	uVar15	lastKeyIndex	INFERRED	index of the last value key	^\s*piVar5\ =\ \(int\ \*\)\(uVar15\ \*\ 4\ \+\ puVar12\[2\]\);$	+1
+use	FUN_00123c08	uVar15	lastKeyIndex	INFERRED	index of the last value key	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar12,uVar15\);$	+1

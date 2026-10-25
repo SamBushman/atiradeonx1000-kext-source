@@ -1,0 +1,3 @@
+local	scDisassembleIL	param_1	sinkArg	INFERRED	forwarded unchanged to parameter `sinkArg` of scDisassembleILImpl (1 call(s), unanimous)
+local	scDisassembleIL	param_2	tokenStart	INFERRED	forwarded unchanged to parameter `tokenStart` of scDisassembleILImpl (1 call(s), unanimous)
+local	scDisassembleIL	param_3	tokenCount	INFERRED	forwarded unchanged to parameter `tokenCount` of scDisassembleILImpl (1 call(s), unanimous)

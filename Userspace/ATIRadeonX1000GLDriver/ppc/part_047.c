@@ -2722,6 +2722,16 @@ int FUN_0017b020(ctx, param_2)
 int ValueKey__mixLiteralSources(key)
   int key;
 {
+  int slotOffset;
+  undefined4 operandKey;
+  undefined4 savedIdentitySelect;
+  undefined4 foldedHandle;
+  undefined4 defaultSelectWord;
+  int literalIndex;
+  int operandNumber;
+  int isForwardableMov;
+  int isRepresentable;
+  int valueNumber;
   uint vectorFilledCount2;
   uint vectorFilledCount;
   uint *vector2;
@@ -2732,48 +2742,48 @@ int ValueKey__mixLiteralSources(key)
   undefined4 sourceDef;
   int operandRecord;
   int operandRecord2;
-  bool bVar1;
-  byte bVar2;
-  int *piVar3;
-  undefined4 uVar4;
+  bool moreIterations;
+  byte laneSelectByte;
+  int *literalMovTableBase;
+  undefined4 operandRegisterKind;
   int loopIndex2;
-  int iVar6;
+  int movOrFlag;
   int loopIndex3;
   int *loopPtr7;
   float *literalRecord;
-  int iVar10;
+  int operandSource;
   int *loopPtr5;
   int *loopPtr6;
   undefined4 *loopPtr8;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArg5;
+  undefined4 staleArg6;
   code *a6;
-  int iVar14;
+  int laneUsedPtr;
   int operandIndex2;
-  uint uVar16;
+  uint lastEntryIndex;
   undefined1 *loopPtr9;
-  uint uVar18;
+  uint lastEntryIndex2;
   char *loopPtr4;
   uint *vector;
   int loopIndex;
-  double fparam_1;
-  undefined8 uVar22;
-  int local_138 [6];
-  undefined1 local_120 [4];
-  int local_11c [4];
-  undefined4 local_10c [4];
-  undefined4 uStack_fc;
-  undefined4 local_f8 [5];
-  undefined4 local_e4 [23];
-  float local_88;
+  double literalValueArg;
+  undefined8 literalResult;
+  int literalMovTable [6];
+  undefined1 literalCountPad [4];
+  int literalCountByOperand [4];
+  undefined4 identitySelects [4];
+  undefined4 identitySelectsTail;
+  undefined4 defaultSelects [5];
+  undefined4 literalPool [23];
+  float foldedValue;
   int changed;
-  int *local_80;
-  undefined1 *local_7c;
-  int *local_78;
-  undefined *local_74;
-  undefined4 *local_70;
-  undefined *local_6c;
-  int *local_68;
+  int *literalMovAlias;
+  undefined1 *literalCountPadAlias;
+  int *literalCountAlias;
+  undefined *picBaseB;
+  undefined4 *literalPoolAlias;
+  undefined *picBaseA;
+  int *literalMovTableAlias;
   
   loopIndex2 = Compiler__isOptionEnabled(*(undefined4 *)(key + 0x238),0xb);
   if (((loopIndex2 == 0) || (loopIndex2 = Compiler__isOptionEnabled(*(undefined4 *)(key + 0x238),0x3a), loopIndex2 == 0)) ||
@@ -2782,98 +2792,98 @@ int ValueKey__mixLiteralSources(key)
     changed = 0;
   }
   else {
-    local_70 = local_e4;
+    literalPoolAlias = literalPool;
     loopIndex2 = 0;
     do {
-      loopPtr8 = local_70 + loopIndex2 * 4;
+      loopPtr8 = literalPoolAlias + loopIndex2 * 4;
       loopIndex = 4;
       do {
         *loopPtr8 = 0xbf800000;
         loopPtr8 = loopPtr8 + 1;
         loopIndex = loopIndex + -1;
       } while (loopIndex != 0);
-      bVar1 = loopIndex2 != 4;
+      moreIterations = loopIndex2 != 4;
       loopIndex2 = loopIndex2 + 1;
-    } while (bVar1);
-    local_74 = &DAT_001ab134;
-    local_7c = local_120;
+    } while (moreIterations);
+    picBaseB = &DAT_001ab134;
+    literalCountPadAlias = literalCountPad;
     loopIndex = 5;
-    local_6c = &DAT_001ab134;
+    picBaseA = &DAT_001ab134;
     loopIndex2 = 0;
     do {
-      *(undefined4 *)((int)local_138 + loopIndex2 + 4) = 0;
-      loopPtr9 = local_7c;
-      *(undefined4 *)((int)local_10c + loopIndex2) = 0x1010101;
+      *(undefined4 *)((int)literalMovTable + loopIndex2 + 4) = 0;
+      loopPtr9 = literalCountPadAlias;
+      *(undefined4 *)((int)identitySelects + loopIndex2) = 0x1010101;
       *(undefined4 *)(loopPtr9 + loopIndex2) = 0;
-      *(undefined4 *)((int)local_f8 + loopIndex2) = 0x4040404;
+      *(undefined4 *)((int)defaultSelects + loopIndex2) = 0x4040404;
       loopIndex2 = loopIndex2 + 4;
       loopIndex = loopIndex + -1;
     } while (loopIndex != 0);
-    loopPtr7 = local_138 + 2;
-    loopPtr6 = local_11c;
-    local_68 = local_138;
+    loopPtr7 = literalMovTable + 2;
+    loopPtr6 = literalCountByOperand;
+    literalMovTableAlias = literalMovTable;
     loopIndex = key + 0x170;
-    iVar14 = key + 0x224;
+    laneUsedPtr = key + 0x224;
     loopIndex2 = 0x18;
     changed = 0;
-    local_80 = loopPtr7;
-    local_78 = loopPtr6;
+    literalMovAlias = loopPtr7;
+    literalCountAlias = loopPtr6;
     for (operandIndex2 = 1;
         loopIndex3 = (**(code **)(**(int **)(key + 0xb0) + 0x14))(*(int **)(key + 0xb0)),
         operandIndex2 <= loopIndex3; operandIndex2 = operandIndex2 + 1) {
       loopIndex3 = *(int *)(key + 0xb0);
-      if ((operandIndex2 < 1) || (iVar10 = IRInst__getOperandSource(loopIndex3,operandIndex2), iVar10 == 0)) {
-        uVar4 = *(undefined4 *)(loopIndex2 + loopIndex3 + 0x98);
+      if ((operandIndex2 < 1) || (operandSource = IRInst__getOperandSource(loopIndex3,operandIndex2), operandSource == 0)) {
+        operandRegisterKind = *(undefined4 *)(loopIndex2 + loopIndex3 + 0x98);
       }
       else {
         loopIndex3 = IRInst__getOperandSource(loopIndex3,operandIndex2);
-        uVar4 = *(undefined4 *)(loopIndex3 + 0x98);
+        operandRegisterKind = *(undefined4 *)(loopIndex3 + 0x98);
       }
-      loopIndex3 = RegKind__flagBit6(uVar4);
+      loopIndex3 = RegKind__flagBit6(operandRegisterKind);
       if (loopIndex3 == 0) {
-        loopPtr4 = (char *)(iVar14 + 4);
+        loopPtr4 = (char *)(laneUsedPtr + 4);
         loopPtr5 = (int *)(loopIndex + 8);
         loopIndex3 = 0;
         do {
           if (*loopPtr4 != '\0') {
             operandRecord2 = IRInst__getOperandRecord(*(undefined4 *)(key + 0xb0),operandIndex2);
-            piVar3 = local_68;
-            bVar2 = *(byte *)(loopIndex3 + operandRecord2 + 0x10);
-            iVar10 = (uint)bVar2 + operandIndex2 * 4;
-            *(undefined1 *)((int)local_68 + iVar10 + 0x2c) = 0;
-            *(byte *)((int)local_68 + iVar10 + 0x40) = bVar2;
+            literalMovTableBase = literalMovTableAlias;
+            laneSelectByte = *(byte *)(loopIndex3 + operandRecord2 + 0x10);
+            slotOffset = (uint)laneSelectByte + operandIndex2 * 4;
+            *(undefined1 *)((int)literalMovTableAlias + slotOffset + 0x2c) = 0;
+            *(byte *)((int)literalMovTableAlias + slotOffset + 0x40) = laneSelectByte;
             if (*loopPtr5 < 0) {
               literalRecord = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(key + 0x238),*loopPtr5);
-              iVar6 = (**(code **)(**(int **)(*(int *)(key + 0x238) + 0x30c) + 0xf0))
+              movOrFlag = (**(code **)(**(int **)(*(int *)(key + 0x238) + 0x30c) + 0xf0))
                                 ((double)*literalRecord);
-              if (iVar6 != 0) {
+              if (movOrFlag != 0) {
                 if (*loopPtr7 == 0) {
-                  iVar6 = ((int (*)())FUN_00179138)(key,operandIndex2);
-                  *loopPtr7 = iVar6;
+                  movOrFlag = ((int (*)())FUN_00179138)(key,operandIndex2);
+                  *loopPtr7 = movOrFlag;
                   *loopPtr6 = 1;
                   changed = 1;
                 }
-                uVar22 = ((int (*)())ValueKey__findOrInsertLiteral)(iVar6,local_70,operandIndex2,(double)*literalRecord);
-                iVar6 = (int)((ulonglong)uVar22 >> 0x20);
-                if (*loopPtr6 < iVar6) {
-                  ((void (*)())IRInst__setLiteralOperandAndSource)(*loopPtr7,(int)uVar22,iVar6,*(undefined4 *)(key + 0x238),
+                literalResult = ((int (*)())ValueKey__findOrInsertLiteral)(movOrFlag,literalPoolAlias,operandIndex2,(double)*literalRecord);
+                literalIndex = (int)((ulonglong)literalResult >> 0x20);
+                if (*loopPtr6 < literalIndex) {
+                  ((void (*)())IRInst__setLiteralOperandAndSource)(*loopPtr7,(int)literalResult,literalIndex,*(undefined4 *)(key + 0x238),
                                (double)*literalRecord);
-                  *loopPtr6 = iVar6;
+                  *loopPtr6 = literalIndex;
                 }
                 a6 = *(code **)(*(int *)*loopPtr7 + 0x88);
-                (*a6)((int *)*loopPtr7,iVar6,(uint)bVar2,loopIndex3,in_r7,in_r8,a6);
-                *(undefined1 *)((int)piVar3 + iVar10 + 0x40) = 4;
+                (*a6)((int *)*loopPtr7,literalIndex,(uint)laneSelectByte,loopIndex3,staleArg5,staleArg6,a6);
+                *(undefined1 *)((int)literalMovTableBase + slotOffset + 0x40) = 4;
               }
             }
           }
-          bVar1 = loopIndex3 != 3;
+          moreIterations = loopIndex3 != 3;
           loopPtr4 = loopPtr4 + 1;
           loopPtr5 = loopPtr5 + 1;
           loopIndex3 = loopIndex3 + 1;
-        } while (bVar1);
+        } while (moreIterations);
       }
       loopIndex2 = loopIndex2 + 0x18;
-      iVar14 = iVar14 + 4;
+      laneUsedPtr = laneUsedPtr + 4;
       loopIndex = loopIndex + 0x10;
       loopPtr7 = loopPtr7 + 1;
       loopPtr6 = loopPtr6 + 1;
@@ -2881,12 +2891,12 @@ int ValueKey__mixLiteralSources(key)
     loopIndex2 = 0;
     loopIndex = 5;
     do {
-      loopPtr9 = local_7c;
-      if (*(int *)((int)local_138 + loopIndex2 + 4) == 0) {
-        uVar4 = *(undefined4 *)(((unsigned char *)0x000050a8) + (int)local_74);
-        *(undefined4 *)((int)local_10c + loopIndex2) = *(undefined4 *)(((unsigned char *)0x0000509c) + (int)local_6c);
+      loopPtr9 = literalCountPadAlias;
+      if (*(int *)((int)literalMovTable + loopIndex2 + 4) == 0) {
+        defaultSelectWord = *(undefined4 *)(((unsigned char *)0x000050a8) + (int)picBaseB);
+        *(undefined4 *)((int)identitySelects + loopIndex2) = *(undefined4 *)(((unsigned char *)0x0000509c) + (int)picBaseA);
         *(undefined4 *)(loopPtr9 + loopIndex2) = 0;
-        *(undefined4 *)((int)local_f8 + loopIndex2) = uVar4;
+        *(undefined4 *)((int)defaultSelects + loopIndex2) = defaultSelectWord;
       }
       loopIndex2 = loopIndex2 + 4;
       loopIndex = loopIndex + -1;
@@ -2903,30 +2913,30 @@ int ValueKey__mixLiteralSources(key)
             inst = *(int *)(key + 0xb0);
             vector = *(uint **)(*(int *)(*(int *)(inst + 0x84) * 0x18 + inst + 0x8c) + 0x2c);
             vectorFilledCount2 = vector[1];
-            uVar16 = vectorFilledCount2 - 1;
-            if (uVar16 < *vector) {
-              if (vectorFilledCount2 <= uVar16) {
-                _memset(vectorFilledCount2 * 4 + vector[2],0,(uVar16 - vectorFilledCount2) * 4 + 4);
+            lastEntryIndex = vectorFilledCount2 - 1;
+            if (lastEntryIndex < *vector) {
+              if (vectorFilledCount2 <= lastEntryIndex) {
+                _memset(vectorFilledCount2 * 4 + vector[2],0,(lastEntryIndex - vectorFilledCount2) * 4 + 4);
                 vector[1] = vectorFilledCount2;
                 inst = *(int *)(key + 0xb0);
               }
-              loopPtr7 = (int *)(uVar16 * 4 + vector[2]);
+              loopPtr7 = (int *)(lastEntryIndex * 4 + vector[2]);
             }
             else {
-              loopPtr7 = (int *)Vector__elementRefGrow(vector,uVar16);
+              loopPtr7 = (int *)Vector__elementRefGrow(vector,lastEntryIndex);
               inst = *(int *)(key + 0xb0);
             }
             operandIndex2 = *loopPtr7;
             operandRecord = IRInst__getOperandRecord(inst,0);
-            local_138[0] = *(int *)(operandRecord + 0x10);
-            iVar14 = *(int *)(loopIndex * 4 + operandIndex2 + 0x20);
-            if (iVar14 < 0) {
-              literalRecord = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(key + 0x238),iVar14);
-              iVar14 = (**(code **)(**(int **)(*(int *)(key + 0x238) + 0x30c) + 0xf0))
+            literalMovTable[0] = *(int *)(operandRecord + 0x10);
+            valueNumber = *(int *)(loopIndex * 4 + operandIndex2 + 0x20);
+            if (valueNumber < 0) {
+              literalRecord = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(key + 0x238),valueNumber);
+              isRepresentable = (**(code **)(**(int **)(*(int *)(key + 0x238) + 0x30c) + 0xf0))
                                  ((double)*literalRecord);
-              if (iVar14 != 0) {
-                loopPtr7 = local_80;
-                loopPtr6 = local_78;
+              if (isRepresentable != 0) {
+                loopPtr7 = literalMovAlias;
+                loopPtr6 = literalCountAlias;
                 for (operandIndex = 1;
                     operandIndex2 = (**(code **)(**(int **)(key + 0xb0) + 0x14))
                                        (*(int **)(key + 0xb0)), operandIndex <= operandIndex2;
@@ -2936,42 +2946,42 @@ int ValueKey__mixLiteralSources(key)
                     operandIndex2 = operandIndex * 4;
                     *loopPtr7 = loopIndex3;
                     *loopPtr6 = 1;
-                    loopPtr9 = (undefined1 *)((int)local_f8 + operandIndex * 4);
-                    loopPtr8 = local_10c + operandIndex;
+                    loopPtr9 = (undefined1 *)((int)defaultSelects + operandIndex * 4);
+                    loopPtr8 = identitySelects + operandIndex;
                     loopIndex3 = 0;
                     do {
-                      if (*(char *)((int)local_138 + loopIndex3) == '\0') {
+                      if (*(char *)((int)literalMovTable + loopIndex3) == '\0') {
                         operandRecord2 = IRInst__getOperandRecord(*(undefined4 *)(key + 0xb0),operandIndex);
                         *loopPtr9 = *(undefined1 *)(loopIndex3 + operandRecord2 + 0x10);
                         *(undefined1 *)loopPtr8 = 0;
                         (**(code **)(**(int **)(key + 0xb0) + 0x88))
                                   (*(int **)(key + 0xb0),operandIndex,loopIndex3,loopIndex3);
                       }
-                      bVar1 = loopIndex3 != 3;
+                      moreIterations = loopIndex3 != 3;
                       loopPtr9 = loopPtr9 + 1;
                       loopPtr8 = (undefined4 *)((int)loopPtr8 + 1);
                       loopIndex3 = loopIndex3 + 1;
-                    } while (bVar1);
+                    } while (moreIterations);
                     changed = 1;
                   }
                   else {
                     operandIndex2 = operandIndex << 2;
                   }
-                  uVar4 = IRInst__foldCompareConstResult(&local_88, *(undefined4 *)(key + 0xb0), operandIndex, *(unsigned int *)literalRecord, *(undefined4 *)(key + 0x238));
-                  fparam_1 = (double)local_88;
-                  uVar22 = ((int (*)())ValueKey__findOrInsertLiteral)(uVar4,local_70,operandIndex,fparam_1);
-                  loopIndex3 = (int)((ulonglong)uVar22 >> 0x20);
+                  foldedHandle = IRInst__foldCompareConstResult(&foldedValue, *(undefined4 *)(key + 0xb0), operandIndex, *(unsigned int *)literalRecord, *(undefined4 *)(key + 0x238));
+                  literalValueArg = (double)foldedValue;
+                  literalResult = ((int (*)())ValueKey__findOrInsertLiteral)(foldedHandle,literalPoolAlias,operandIndex,literalValueArg);
+                  loopIndex3 = (int)((ulonglong)literalResult >> 0x20);
                   if (*loopPtr6 < loopIndex3) {
-                    ((void (*)())IRInst__setLiteralOperandAndSource)(*loopPtr7,(int)uVar22,loopIndex3,*(undefined4 *)(key + 0x238),fparam_1
+                    ((void (*)())IRInst__setLiteralOperandAndSource)(*loopPtr7,(int)literalResult,loopIndex3,*(undefined4 *)(key + 0x238),literalValueArg
                                 );
                     *loopPtr6 = loopIndex3;
                   }
                   loopPtr6 = loopPtr6 + 1;
-                  firstUnwrittenComponentResult = SelectWord__firstUnwrittenComponent(*(undefined4 *)((int)local_10c + operandIndex2));
+                  firstUnwrittenComponentResult = SelectWord__firstUnwrittenComponent(*(undefined4 *)((int)identitySelects + operandIndex2));
                   loopPtr5 = (int *)*loopPtr7;
                   loopPtr7 = loopPtr7 + 1;
                   (**(code **)(*loopPtr5 + 0x88))(loopPtr5,loopIndex3,firstUnwrittenComponentResult,firstUnwrittenComponentResult);
-                  *(undefined1 *)((int)local_10c + firstUnwrittenComponentResult + operandIndex2) = 0;
+                  *(undefined1 *)((int)identitySelects + firstUnwrittenComponentResult + operandIndex2) = 0;
                   (**(code **)(**(int **)(key + 0xb0) + 0x88))
                             (*(int **)(key + 0xb0),operandIndex,loopIndex,firstUnwrittenComponentResult);
                 }
@@ -2980,69 +2990,69 @@ int ValueKey__mixLiteralSources(key)
               }
             }
           }
-          bVar1 = loopIndex != 3;
+          moreIterations = loopIndex != 3;
           loopIndex2 = loopIndex2 + 4;
           loopIndex = loopIndex + 1;
-        } while (bVar1);
+        } while (moreIterations);
       }
       loopPtr7 = *(int **)(key + 0xb0);
     }
     loopIndex2 = 1;
     while (loopIndex = (**(code **)(*loopPtr7 + 0x14))(loopPtr7), loopIndex2 <= loopIndex) {
       loopIndex = loopIndex2 + 1;
-      inst2 = local_138[loopIndex];
+      inst2 = literalMovTable[loopIndex];
       if (inst2 != 0) {
-        *(int *)(inst2 + 0x9c) = local_11c[loopIndex2 + 4];
-        uVar4 = (&uStack_fc)[loopIndex];
+        *(int *)(inst2 + 0x9c) = literalCountByOperand[loopIndex2 + 4];
+        savedIdentitySelect = (&identitySelectsTail)[loopIndex];
         loopIndex2 = IRInst__getOperandRecord(inst2,1);
-        *(undefined4 *)(loopIndex2 + 0x10) = uVar4;
+        *(undefined4 *)(loopIndex2 + 0x10) = savedIdentitySelect;
         IRInst__removeDefaultSelectOperands(inst2,*(undefined4 *)(key + 0x238));
       }
       loopPtr7 = *(int **)(key + 0xb0);
       loopIndex2 = loopIndex;
     }
-    loopPtr7 = local_138 + 2;
+    loopPtr7 = literalMovTable + 2;
     for (loopIndex2 = 1;
         loopIndex = (**(code **)(**(int **)(key + 0xb0) + 0x14))(*(int **)(key + 0xb0)),
         loopIndex2 <= loopIndex; loopIndex2 = loopIndex2 + 1) {
       loopIndex = *loopPtr7;
       if (loopIndex != 0) {
         loopPtr6 = (int *)IRInst__getOperandSource(loopIndex,1);
-        iVar14 = (**(code **)(*loopPtr6 + 0x60))(loopPtr6);
-        if (iVar14 != 0) {
+        isForwardableMov = (**(code **)(*loopPtr6 + 0x60))(loopPtr6);
+        if (isForwardableMov != 0) {
           sourceDef = IRInst__getOperandSource(loopIndex,1);
           FUN_0010c670(sourceDef,loopIndex,*(undefined4 *)(key + 0x238));
         }
       }
       loopPtr7 = loopPtr7 + 1;
     }
-    loopPtr7 = local_138 + 2;
+    loopPtr7 = literalMovTable + 2;
     loopIndex = 0x18;
     loopIndex2 = key;
-    for (iVar14 = 1;
+    for (operandNumber = 1;
         operandIndex2 = (**(code **)(**(int **)(key + 0xb0) + 0x14))(*(int **)(key + 0xb0)),
-        iVar14 <= operandIndex2; iVar14 = iVar14 + 1) {
+        operandNumber <= operandIndex2; operandNumber = operandNumber + 1) {
       operandIndex2 = *loopPtr7;
       if (operandIndex2 != 0) {
         vector2 = *(uint **)(*(int *)(loopIndex + *(int *)(key + 0xb0) + 0x8c) + 0x2c);
         vectorFilledCount = vector2[1];
-        uVar18 = vectorFilledCount - 1;
-        if (uVar18 < *vector2) {
-          if (vectorFilledCount <= uVar18) {
-            _memset(vectorFilledCount * 4 + vector2[2],0,(uVar18 - vectorFilledCount) * 4 + 4);
+        lastEntryIndex2 = vectorFilledCount - 1;
+        if (lastEntryIndex2 < *vector2) {
+          if (vectorFilledCount <= lastEntryIndex2) {
+            _memset(vectorFilledCount * 4 + vector2[2],0,(lastEntryIndex2 - vectorFilledCount) * 4 + 4);
             vector2[1] = vectorFilledCount;
           }
-          loopPtr8 = (undefined4 *)(uVar18 * 4 + vector2[2]);
+          loopPtr8 = (undefined4 *)(lastEntryIndex2 * 4 + vector2[2]);
         }
         else {
-          loopPtr8 = (undefined4 *)Vector__elementRefGrow(vector2,uVar18);
+          loopPtr8 = (undefined4 *)Vector__elementRefGrow(vector2,lastEntryIndex2);
         }
-        uVar4 = *loopPtr8;
-        ValueKey__fillSourceLaneUsage(uVar4);
-        ValueKey__fill(uVar4);
-        FUN_00174e0c(uVar4);
-        FUN_00175b40(uVar4);
-        ValueKey__propagateLaneValues(uVar4);
+        operandKey = *loopPtr8;
+        ValueKey__fillSourceLaneUsage(operandKey);
+        ValueKey__fill(operandKey);
+        FUN_00174e0c(operandKey);
+        FUN_00175b40(operandKey);
+        ValueKey__propagateLaneValues(operandKey);
         *(int *)(loopIndex2 + 0x214) = operandIndex2;
       }
       loopPtr7 = loopPtr7 + 1;

@@ -9,7 +9,7 @@ int FUN_000f4ddc(param_1, param_2, param_3)
   char cVar1;
   uint uVar2;
   int iVar3;
-  uint uVar4;
+  uint loopCounterB;
   uint *puVar5;
   int *piVar6;
   undefined4 uVar7;
@@ -18,7 +18,7 @@ int FUN_000f4ddc(param_1, param_2, param_3)
   int iVar10;
   uint *puVar11;
   int *piVar12;
-  int iVar13;
+  int loopCounter;
   uint local_1d8 [4];
   undefined4 local_1c8 [4];
   undefined4 local_1b8 [24];
@@ -29,23 +29,23 @@ int FUN_000f4ddc(param_1, param_2, param_3)
   cVar1 = *(char *)(param_3 + 0x15c);
   puVar9 = local_1b8;
   puVar11 = local_1d8;
-  uVar4 = 0;
-  iVar13 = 4;
+  loopCounterB = 0;
+  loopCounter = 4;
   puVar5 = puVar11;
   puVar8 = puVar9;
   iVar10 = param_3;
   do {
-    uVar2 = uVar4 & 0x3f;
+    uVar2 = loopCounterB & 0x3f;
     uVar7 = *(undefined4 *)(iVar10 + 0x20);
     *puVar8 = *(undefined4 *)(iVar10 + 0x1c);
-    uVar4 = uVar4 + 1;
+    loopCounterB = loopCounterB + 1;
     puVar8[1] = uVar7;
     iVar10 = iVar10 + 0x18;
     *puVar5 = (int)cVar1 >> uVar2 & 1;
     puVar8 = puVar8 + 6;
     puVar5 = puVar5 + 1;
-    iVar13 = iVar13 + -1;
-  } while (iVar13 != 0);
+    loopCounter = loopCounter + -1;
+  } while (loopCounter != 0);
   local_1c8[0] = *(undefined4 *)(param_1 + 8);
   local_1c8[1] = *(undefined4 *)(param_1 + 0xc);
   local_1c8[2] = *(undefined4 *)(param_1 + 0x10);
@@ -53,8 +53,8 @@ int FUN_000f4ddc(param_1, param_2, param_3)
   if (*(int *)(&DAT_001aa86c + (4 - param_2) * 4) < 0xf) {
     piVar12 = aiStack_158 + *(int *)(&DAT_001aa86c + (4 - param_2) * 4) * 5;
     do {
-      iVar13 = 4;
-      uVar4 = 0;
+      loopCounter = 4;
+      loopCounterB = 0;
       piVar6 = piVar12;
       iVar10 = param_3;
       do {
@@ -62,26 +62,26 @@ int FUN_000f4ddc(param_1, param_2, param_3)
         if (iVar3 < 0) {
           *(undefined4 *)(iVar10 + 0x1c) = 0;
           *(undefined4 *)(iVar10 + 0x20) = 0;
-          *(byte *)(param_3 + 0x15c) = *(byte *)(param_3 + 0x15c) & ~(byte)(1 << (uVar4 & 0x3f));
+          *(byte *)(param_3 + 0x15c) = *(byte *)(param_3 + 0x15c) & ~(byte)(1 << (loopCounterB & 0x3f));
         }
         else {
           uVar7 = local_1b8[iVar3 * 6];
           *(undefined4 *)(iVar10 + 0x20) = local_1b8[iVar3 * 6 + 1];
           *(undefined4 *)(iVar10 + 0x1c) = uVar7;
-          *(byte *)(param_3 + 0x15c) = (byte)(1 << (uVar4 & 0x3f)) | *(byte *)(param_3 + 0x15c);
+          *(byte *)(param_3 + 0x15c) = (byte)(1 << (loopCounterB & 0x3f)) | *(byte *)(param_3 + 0x15c);
         }
-        uVar4 = uVar4 + 1;
+        loopCounterB = loopCounterB + 1;
         piVar6 = piVar6 + 1;
         iVar10 = iVar10 + 0x18;
-        iVar13 = iVar13 + -1;
-      } while (iVar13 != 0);
+        loopCounter = loopCounter + -1;
+      } while (loopCounter != 0);
       iVar10 = *piVar12;
       piVar12 = piVar12 + 5;
       HashTable__insert(local_1c8[iVar10],param_3);
     } while (piVar12 != aiStack_2c);
   }
-  iVar13 = 4;
-  uVar4 = 0;
+  loopCounter = 4;
+  loopCounterB = 0;
   iVar10 = param_3;
   do {
     uVar7 = puVar9[1];
@@ -90,16 +90,16 @@ int FUN_000f4ddc(param_1, param_2, param_3)
     uVar2 = *puVar11;
     puVar11 = puVar11 + 1;
     if (uVar2 == 0) {
-      *(byte *)(param_3 + 0x15c) = *(byte *)(param_3 + 0x15c) & ~(byte)(1 << (uVar4 & 0x3f));
+      *(byte *)(param_3 + 0x15c) = *(byte *)(param_3 + 0x15c) & ~(byte)(1 << (loopCounterB & 0x3f));
     }
     else {
-      *(byte *)(param_3 + 0x15c) = (byte)(1 << (uVar4 & 0x3f)) | *(byte *)(param_3 + 0x15c);
+      *(byte *)(param_3 + 0x15c) = (byte)(1 << (loopCounterB & 0x3f)) | *(byte *)(param_3 + 0x15c);
     }
-    uVar4 = uVar4 + 1;
+    loopCounterB = loopCounterB + 1;
     puVar9 = puVar9 + 6;
     iVar10 = iVar10 + 0x18;
-    iVar13 = iVar13 + -1;
-  } while (iVar13 != 0);
+    loopCounter = loopCounter + -1;
+  } while (loopCounter != 0);
   return;
 }
 
@@ -121,9 +121,9 @@ int Compiler__getOrCreateLoadConstN(compiler, param_2, param_3, param_4, param_5
   undefined4 *allocation;
   int *piVar5;
   undefined4 *puVar6;
-  int iVar7;
+  int loopCounter;
   uint loopIndex;
-  int iVar9;
+  int loopCounterB;
   undefined4 uStack00000020;
   undefined4 uStack00000024;
   undefined4 uStack00000028;
@@ -141,8 +141,8 @@ int Compiler__getOrCreateLoadConstN(compiler, param_2, param_3, param_4, param_5
   
   aiStack_9c[1] = compiler[2];
   aiStack_9c[2] = compiler[3];
-  iVar9 = 4;
-  iVar7 = 0;
+  loopCounterB = 4;
+  loopCounter = 0;
   loopIndex = 0;
   local_88[0] = param_3;
   local_88[1] = param_4;
@@ -152,9 +152,9 @@ int Compiler__getOrCreateLoadConstN(compiler, param_2, param_3, param_4, param_5
   do {
     if ((int)loopIndex < param_2) {
       *(byte *)(compiler[10] + 0x15c) = (byte)(1 << (loopIndex & 0x3f)) | *(byte *)(compiler[10] + 0x15c);
-      uVar1 = *(undefined4 *)((int)puVar6 + iVar7);
-      iVar2 = iVar7 + 0x10 + compiler[10];
-      *(undefined4 *)(iVar2 + 0x10) = *(undefined4 *)((int)local_88 + iVar7 + 4);
+      uVar1 = *(undefined4 *)((int)puVar6 + loopCounter);
+      iVar2 = loopCounter + 0x10 + compiler[10];
+      *(undefined4 *)(iVar2 + 0x10) = *(undefined4 *)((int)local_88 + loopCounter + 4);
       *(undefined4 *)(iVar2 + 0xc) = uVar1;
     }
     else {
@@ -162,9 +162,9 @@ int Compiler__getOrCreateLoadConstN(compiler, param_2, param_3, param_4, param_5
       ;
     }
     loopIndex = loopIndex + 1;
-    iVar7 = iVar7 + 0x18;
-    iVar9 = iVar9 + -1;
-  } while (iVar9 != 0);
+    loopCounter = loopCounter + 0x18;
+    loopCounterB = loopCounterB + -1;
+  } while (loopCounterB != 0);
   uStack00000020 = param_3;
   uStack00000024 = param_4;
   uStack00000028 = param_5;
@@ -184,29 +184,29 @@ int Compiler__getOrCreateLoadConstN(compiler, param_2, param_3, param_4, param_5
       allocation[0x27] = 0xc;
     }
     else {
-      uVar1 = FUN_000f4a84(compiler,local_88[0],0,puVar6,iVar7,loopIndex,*compiler);
+      uVar1 = FUN_000f4a84(compiler,local_88[0],0,puVar6,loopCounter,loopIndex,*compiler);
       allocation[0x26] = uVar1;
       allocation[0x27] = 0xc;
     }
     loopIndex = 0;
-    iVar9 = 4;
+    loopCounterB = 4;
     puVar6 = allocation + 5;
-    iVar7 = 0;
+    loopCounter = 0;
     do {
       if ((int)loopIndex < param_2) {
         *(byte *)(allocation + 0x58) = (byte)(1 << (loopIndex & 0x3f)) | *(byte *)(allocation + 0x58);
-        uVar1 = *(undefined4 *)((int)local_88 + iVar7);
-        puVar6[4] = *(undefined4 *)((int)local_88 + iVar7 + 4);
+        uVar1 = *(undefined4 *)((int)local_88 + loopCounter);
+        puVar6[4] = *(undefined4 *)((int)local_88 + loopCounter + 4);
         puVar6[3] = uVar1;
       }
       else {
         *(byte *)(allocation + 0x58) = *(byte *)(allocation + 0x58) & ~(byte)(1 << (loopIndex & 0x3f));
       }
       loopIndex = loopIndex + 1;
-      iVar7 = iVar7 + 0x18;
+      loopCounter = loopCounter + 0x18;
       puVar6 = puVar6 + 6;
-      iVar9 = iVar9 + -1;
-    } while (iVar9 != 0);
+      loopCounterB = loopCounterB + -1;
+    } while (loopCounterB != 0);
     piVar5 = *(int **)(*(int *)(*compiler + 0x6c4) + 0x3a0);
     (**(code **)(*piVar5 + 0xc))(piVar5,puVar3);
     ((int (*)())FUN_000f4ddc)(compiler,param_2,puVar3);
@@ -337,6 +337,8 @@ int FUN_000f57f0(param_1, param_2, param_3, param_4)
   char *param_3;
   undefined4 param_4;
 {
+  uint loopCounterC;
+  int loopCounter;
   bool bVar1;
   float fVar2;
   int iVar3;
@@ -347,7 +349,7 @@ int FUN_000f57f0(param_1, param_2, param_3, param_4)
   uint loopIndex;
   uint *puVar9;
   int iVar10;
-  int iVar11;
+  int loopCounterB;
   undefined4 local_38 [8];
   
   if (param_1[7] != 0) {
@@ -366,51 +368,51 @@ int FUN_000f57f0(param_1, param_2, param_3, param_4)
         piVar5 = (int *)Vector__elementRefGrow(puVar9,loopIndex);
       }
       iVar10 = *piVar5;
-      iVar6 = 0;
+      loopCounter = 0;
       pcVar7 = param_3;
       do {
         if (*pcVar7 != '\x04') {
-          uVar4 = 0;
-          iVar11 = 4;
+          loopCounterC = 0;
+          loopCounterB = 4;
           iVar3 = iVar10;
-          while (((((int)*(char *)(iVar10 + 0x15c) >> (uVar4 & 0x3f) & 1U) == 0 ||
+          while (((((int)*(char *)(iVar10 + 0x15c) >> (loopCounterC & 0x3f) & 1U) == 0 ||
                   (*(int *)(iVar3 + 0x1c) != 2)) ||
-                 (*(float *)(iVar3 + 0x20) != *(float *)(param_2 + iVar6)))) {
-            uVar4 = uVar4 + 1;
+                 (*(float *)(iVar3 + 0x20) != *(float *)(param_2 + loopCounter)))) {
+            loopCounterC = loopCounterC + 1;
             iVar3 = iVar3 + 0x18;
-            iVar11 = iVar11 + -1;
-            if (iVar11 == 0) goto LAB_000f59bc;
+            loopCounterB = loopCounterB + -1;
+            if (loopCounterB == 0) goto LAB_000f59bc;
           }
         }
-        bVar1 = iVar6 != 0xc;
+        bVar1 = loopCounter != 0xc;
         pcVar7 = pcVar7 + 1;
-        iVar6 = iVar6 + 4;
+        loopCounter = loopCounter + 4;
       } while (bVar1);
-      iVar6 = 0;
+      loopCounter = 0;
       local_38[0] = *(undefined4 *)param_3;
       pcVar7 = param_3;
       do {
-        uVar4 = (uint)*(byte *)((int)local_38 + iVar6);
+        uVar4 = (uint)*(byte *)((int)local_38 + loopCounter);
         if (((uVar4 != 4) && (((int)*(char *)(iVar10 + 0x15c) >> (uVar4 & 0x3f) & 1U) != 0)) &&
-           (fVar2 = *(float *)(param_2 + iVar6 * 4),
+           (fVar2 = *(float *)(param_2 + loopCounter * 4),
            *(float *)(uVar4 * 0x18 + iVar10 + 0x20) != fVar2)) {
-          iVar11 = 4;
-          uVar4 = 0;
+          loopCounterB = 4;
+          loopCounterC = 0;
           iVar3 = iVar10;
           do {
-            if (((((int)*(char *)(iVar10 + 0x15c) >> (uVar4 & 0x3f) & 1U) != 0) &&
+            if (((((int)*(char *)(iVar10 + 0x15c) >> (loopCounterC & 0x3f) & 1U) != 0) &&
                 (*(int *)(iVar3 + 0x1c) == 2)) && (*(float *)(iVar3 + 0x20) == fVar2)) {
-              *pcVar7 = (char)uVar4;
+              *pcVar7 = (char)loopCounterC;
               break;
             }
-            uVar4 = uVar4 + 1;
+            loopCounterC = loopCounterC + 1;
             iVar3 = iVar3 + 0x18;
-            iVar11 = iVar11 + -1;
-          } while (iVar11 != 0);
+            loopCounterB = loopCounterB + -1;
+          } while (loopCounterB != 0);
         }
-        bVar1 = iVar6 != 3;
+        bVar1 = loopCounter != 3;
         pcVar7 = pcVar7 + 1;
-        iVar6 = iVar6 + 1;
+        loopCounter = loopCounter + 1;
       } while (bVar1);
       iVar6 = (**(code **)(**(int **)(*param_1 + 0x30c) + 0x100))
                         (*(int **)(*param_1 + 0x30c),param_3);
@@ -441,7 +443,7 @@ int FUN_000f5a0c(inst, operandIndex, inst2, param_4)
   int iVar5;
   uint uVar6;
   int *piVar7;
-  int iVar8;
+  int loopCounter;
   double dVar9;
   
   iVar3 = FUN_0011379c(*(undefined4 *)(param_4 + 8),inst2);
@@ -454,12 +456,12 @@ int FUN_000f5a0c(inst, operandIndex, inst2, param_4)
 LAB_000f5b30:
     sourceDef = IRInst__getOperandSource(inst,operandIndex);
     piVar7 = *(int **)(*(int *)(param_4 + 8) + 0x30c);
-    iVar8 = 0;
+    loopCounter = 0;
     do {
       operandRecord = IRInst__getOperandRecord(inst2,0);
-      if (*(char *)(iVar8 + operandRecord + 0x10) != '\x01') {
+      if (*(char *)(loopCounter + operandRecord + 0x10) != '\x01') {
         operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-        uVar6 = (uint)*(byte *)(iVar8 + operandRecord + 0x10);
+        uVar6 = (uint)*(byte *)(loopCounter + operandRecord + 0x10);
         if (uVar6 != 4) {
           if (((int)*(char *)(sourceDef + 0x15c) >> (uVar6 & 0x3f) & 1U) == 0) goto LAB_000f5a8c;
           if (uVar2 == 0) {
@@ -472,8 +474,8 @@ LAB_000f5b30:
           if (iVar5 == 0) goto LAB_000f5a8c;
         }
       }
-      bVar1 = iVar8 != 3;
-      iVar8 = iVar8 + 1;
+      bVar1 = loopCounter != 3;
+      loopCounter = loopCounter + 1;
     } while (bVar1);
 LAB_000f5b28:
     uVar4 = 1;
@@ -482,20 +484,20 @@ LAB_000f5b28:
     if (iVar3 == 0x33) {
       if (uVar2 == 0) {
         sourceDef = IRInst__getOperandSource(inst,operandIndex);
-        iVar8 = 0;
+        loopCounter = 0;
         piVar7 = *(int **)(*(int *)(param_4 + 8) + 0x30c);
         do {
           operandRecord = IRInst__getOperandRecord(inst2,0);
-          if (*(char *)(iVar8 + operandRecord + 0x10) != '\x01') {
+          if (*(char *)(loopCounter + operandRecord + 0x10) != '\x01') {
             iVar5 = IRInst__getOperandRecord(inst,operandIndex);
-            uVar2 = (uint)*(byte *)(iVar8 + iVar5 + 0x10);
+            uVar2 = (uint)*(byte *)(loopCounter + iVar5 + 0x10);
             if ((uVar2 != 4) &&
                (iVar5 = (**(code **)(*piVar7 + 0xf0))
                                   ((double)*(float *)(uVar2 * 0x18 + sourceDef + 0x20),piVar7),
                iVar5 == 0)) goto LAB_000f5a8c;
           }
-          bVar1 = iVar8 != 3;
-          iVar8 = iVar8 + 1;
+          bVar1 = loopCounter != 3;
+          loopCounter = loopCounter + 1;
         } while (bVar1);
         goto LAB_000f5b28;
       }
@@ -514,12 +516,14 @@ int IRInst__sourceMatchesConstant(inst, operandIndex, param_3, param_4)
   undefined4 param_3;
   int *param_4;
 {
+  int loopCounter;
+  int operandRecord;
   unsigned int ghidra_home[8] = { inst, operandIndex, param_3, param_4, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint uVar1;
   int *a0;
   int iVar2;
   undefined4 uVar3;
-  int iVar4;
+  int loopCounterB;
   char *pcVar5;
   undefined4 local_38 [9];
   
@@ -531,20 +535,20 @@ LAB_000f5cd8:
     uVar3 = 0;
   }
   else {
-    iVar2 = IRInst__getOperandRecord(inst,operandIndex);
-    iVar4 = 0;
+    operandRecord = IRInst__getOperandRecord(inst,operandIndex);
+    loopCounterB = 0;
     pcVar5 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
-    local_38[0] = *(undefined4 *)(iVar2 + 0x10);
-    iVar2 = 4;
+    local_38[0] = *(undefined4 *)(operandRecord + 0x10);
+    loopCounter = 4;
     do {
-      if (((*pcVar5 == '\0') && (uVar1 = (uint)*(byte *)((int)local_38 + iVar4), uVar1 < 4)) &&
+      if (((*pcVar5 == '\0') && (uVar1 = (uint)*(byte *)((int)local_38 + loopCounterB), uVar1 < 4)) &&
          ((((int)*(char *)(a0 + 0x57) >> (uVar1 & 0x3f) & 1U) == 0 ||
           (a0[uVar1 * 6 + 8] != *param_4)))) goto LAB_000f5cd8;
-      iVar4 = iVar4 + 1;
+      loopCounterB = loopCounterB + 1;
       pcVar5 = pcVar5 + 1;
       param_4 = param_4 + 1;
-      iVar2 = iVar2 + -1;
-    } while (iVar2 != 0);
+      loopCounter = loopCounter + -1;
+    } while (loopCounter != 0);
     uVar3 = 1;
   }
   return uVar3;
@@ -636,11 +640,12 @@ int FUN_000f5e8c(inst, operandIndex)
   undefined4 inst;
   undefined4 operandIndex;
 {
+  int loopCounter;
   int operandRecord;
   int *a0;
   int iVar1;
   undefined4 uVar2;
-  int iVar3;
+  int loopCounterB;
   uint uVar4;
   undefined4 local_38;
   int local_34;
@@ -658,11 +663,11 @@ LAB_000f5f7c:
   }
   else {
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-    iVar3 = 0;
+    loopCounterB = 0;
     local_38 = *(undefined4 *)(operandRecord + 0x10);
-    iVar1 = 4;
+    loopCounter = 4;
     do {
-      uVar4 = (uint)*(byte *)((int)&local_38 + iVar3);
+      uVar4 = (uint)*(byte *)((int)&local_38 + loopCounterB);
       if (uVar4 < 4) {
         local_30 = GH_U2F((unsigned int)(a0[uVar4 * 6 + 8]));
         local_2c = a0[uVar4 * 6 + 9];
@@ -673,9 +678,9 @@ LAB_000f5f7c:
         if (((a0[uVar4 * 6 + 7] != 2) || (((int)*(char *)(a0 + 0x57) >> (uVar4 & 0x3f) & 1U) == 0))
            || (GH_U2F((unsigned int)(a0[uVar4 * 6 + 8])) < 0.0)) goto LAB_000f5f7c;
       }
-      iVar3 = iVar3 + 1;
-      iVar1 = iVar1 + -1;
-    } while (iVar1 != 0);
+      loopCounterB = loopCounterB + 1;
+      loopCounter = loopCounter + -1;
+    } while (loopCounter != 0);
     uVar2 = 1;
   }
   return uVar2;
@@ -695,11 +700,11 @@ int FUN_000f5f94(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
   int *piVar2;
   int iVar3;
   int iVar4;
-  int iVar5;
+  int loopCounter;
   byte *pbVar6;
   uint loopIndex;
   uint *puVar8;
-  int iVar9;
+  int loopCounterB;
   
   if (*(int *)(param_1 + 0x1c) != 0) {
     loopIndex = 0;
@@ -717,17 +722,17 @@ int FUN_000f5f94(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
         piVar2 = (int *)Vector__elementRefGrow(puVar8,loopIndex);
       }
       iVar3 = *piVar2;
-      iVar9 = 4;
-      iVar5 = 0;
+      loopCounterB = 4;
+      loopCounter = 0;
       pbVar6 = param_3;
       while ((uVar1 = (uint)*pbVar6, uVar1 == 4 ||
              (((((int)*(char *)(iVar3 + 0x15c) >> (uVar1 & 0x3f) & 1U) != 0 &&
                (iVar4 = uVar1 * 0x18 + iVar3, *(int *)(iVar4 + 0x1c) == 2)) &&
-              (*(float *)(iVar4 + 0x20) == *(float *)(iVar5 + param_2)))))) {
+              (*(float *)(iVar4 + 0x20) == *(float *)(loopCounter + param_2)))))) {
         pbVar6 = pbVar6 + 1;
-        iVar5 = iVar5 + 4;
-        iVar9 = iVar9 + -1;
-        if (iVar9 == 0) {
+        loopCounter = loopCounter + 4;
+        loopCounterB = loopCounterB + -1;
+        if (loopCounterB == 0) {
           *(undefined4 *)(iVar3 + 0x9c) = DAT_001aa860;
           return iVar3;
         }
@@ -743,6 +748,7 @@ int FUN_000f60c4(param_1, param_2)
   int param_1;
   int param_2;
 {
+  uint loopCounter;
   bool bVar1;
   uint uVar2;
   int *piVar3;
@@ -777,7 +783,7 @@ int FUN_000f60c4(param_1, param_2)
       iVar11 = *piVar3;
       if ((((*(uint *)(iVar11 + 0x14) & 1) != 0) && ((*(byte *)(iVar11 + 0x15c) & 1) != 0)) &&
          (*(int *)(iVar11 + 0x98) == 0xc)) {
-        uVar2 = 0;
+        loopCounter = 0;
         uVar4 = (**(code **)(**(int **)(param_2 + 0x30c) + 0x158))
                           (*(int **)(param_2 + 0x30c),*(undefined4 *)(iVar11 + 0x94),
                            *(undefined4 *)(iVar11 + 0x1c),0,param_2);
@@ -788,11 +794,11 @@ int FUN_000f60c4(param_1, param_2)
         pcVar8 = "k";
         Compiler__logf(param_2,"(%d)  %d, regnum = %s[%d]: ",puVar6,uVar7,"k",uVar4,in_r9,in_r10);
         do {
-          if (((int)*(char *)(iVar11 + 0x15c) >> (uVar2 & 0x3f) & 1U) == 0) break;
+          if (((int)*(char *)(iVar11 + 0x15c) >> (loopCounter & 0x3f) & 1U) == 0) break;
           puVar6 = auStack_b8;
           Compiler__logf(param_2,"  %s ",puVar6,uVar7,pcVar8,uVar4,in_r9,in_r10);
-          bVar1 = uVar2 != 3;
-          uVar2 = uVar2 + 1;
+          bVar1 = loopCounter != 3;
+          loopCounter = loopCounter + 1;
         } while (bVar1);
         Compiler__logf(param_2,"\n",puVar6,uVar7,pcVar8,uVar4,in_r9,in_r10);
       }
@@ -814,6 +820,9 @@ int Compiler__getOrCreateConstVectorN(owner, param_2, operandWord0, operandWord1
   undefined4 operandWord4;
   undefined4 operandWord5;
 {
+  int loopCounterC;
+  int loopCounterB;
+  int loopCounter;
   int foundEntry;
   undefined4 uVar1;
   int iVar2;
@@ -822,7 +831,7 @@ int Compiler__getOrCreateConstVectorN(owner, param_2, operandWord0, operandWord1
   uint loopIndex;
   int iVar6;
   int iVar7;
-  int iVar8;
+  int loopCounterD;
   undefined4 uStack00000020;
   undefined4 uStack00000024;
   undefined4 uStack00000028;
@@ -846,8 +855,8 @@ int Compiler__getOrCreateConstVectorN(owner, param_2, operandWord0, operandWord1
   
   auStack_8c[1] = *(undefined4 *)(owner + 8);
   auStack_8c[2] = *(undefined4 *)(owner + 0xc);
-  iVar7 = 4;
-  iVar4 = 0;
+  loopCounterC = 4;
+  loopCounterB = 0;
   loopIndex = 0;
   local_78[0] = operandWord0;
   local_78[1] = operandWord1;
@@ -857,9 +866,9 @@ int Compiler__getOrCreateConstVectorN(owner, param_2, operandWord0, operandWord1
     if ((int)loopIndex < param_2) {
       *(byte *)(*(int *)(owner + 0x28) + 0x15c) =
            (byte)(1 << (loopIndex & 0x3f)) | *(byte *)(*(int *)(owner + 0x28) + 0x15c);
-      uVar1 = *(undefined4 *)((int)local_78 + iVar4);
-      iVar2 = iVar4 + 0x10 + *(int *)(owner + 0x28);
-      *(undefined4 *)(iVar2 + 0x10) = *(undefined4 *)((int)local_78 + iVar4 + 4);
+      uVar1 = *(undefined4 *)((int)local_78 + loopCounterB);
+      iVar2 = loopCounterB + 0x10 + *(int *)(owner + 0x28);
+      *(undefined4 *)(iVar2 + 0x10) = *(undefined4 *)((int)local_78 + loopCounterB + 4);
       *(undefined4 *)(iVar2 + 0xc) = uVar1;
     }
     else {
@@ -867,9 +876,9 @@ int Compiler__getOrCreateConstVectorN(owner, param_2, operandWord0, operandWord1
            *(byte *)(*(int *)(owner + 0x28) + 0x15c) & ~(byte)(1 << (loopIndex & 0x3f));
     }
     loopIndex = loopIndex + 1;
-    iVar4 = iVar4 + 0x18;
-    iVar7 = iVar7 + -1;
-  } while (iVar7 != 0);
+    loopCounterB = loopCounterB + 0x18;
+    loopCounterC = loopCounterC + -1;
+  } while (loopCounterC != 0);
   uStack00000020 = operandWord0;
   uStack00000024 = operandWord1;
   uStack00000028 = operandWord2;
@@ -892,25 +901,25 @@ int Compiler__getOrCreateConstVectorN(owner, param_2, operandWord0, operandWord1
       piVar3 = (int *)piVar3[2];
     }
     iVar7 = *piVar3;
-    iVar8 = 4;
+    loopCounterD = 4;
     loopIndex = 0;
     iVar6 = iVar7 + 0x10;
-    iVar2 = 0;
+    loopCounter = 0;
     do {
       if ((int)loopIndex < param_2) {
         *(byte *)(iVar7 + 0x15c) = (byte)(1 << (loopIndex & 0x3f)) | *(byte *)(iVar7 + 0x15c);
-        uVar1 = *(undefined4 *)((int)local_78 + iVar2);
-        *(undefined4 *)(iVar6 + 0x10) = *(undefined4 *)((int)local_78 + iVar2 + 4);
+        uVar1 = *(undefined4 *)((int)local_78 + loopCounter);
+        *(undefined4 *)(iVar6 + 0x10) = *(undefined4 *)((int)local_78 + loopCounter + 4);
         *(undefined4 *)(iVar6 + 0xc) = uVar1;
       }
       else {
         *(byte *)(iVar7 + 0x15c) = *(byte *)(iVar7 + 0x15c) & ~(byte)(1 << (loopIndex & 0x3f));
       }
       loopIndex = loopIndex + 1;
-      iVar2 = iVar2 + 0x18;
+      loopCounter = loopCounter + 0x18;
       iVar6 = iVar6 + 0x18;
-      iVar8 = iVar8 + -1;
-    } while (iVar8 != 0);
+      loopCounterD = loopCounterD + -1;
+    } while (loopCounterD != 0);
     ((int (*)())FUN_000f4ddc)(owner,param_2,iVar7);
   }
   else {
@@ -1041,6 +1050,10 @@ int FUN_000f6a04(param_1, param_2, param_3)
   undefined4 param_2;
   undefined4 param_3;
 {
+  uint loopCounterE;
+  uint loopCounterD;
+  int loopCounterC;
+  int loopCounter;
   undefined4 *allocation;
   undefined4 arena;
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
@@ -1051,7 +1064,7 @@ int FUN_000f6a04(param_1, param_2, param_3)
   int *piVar5;
   undefined4 *puVar6;
   char *pcVar7;
-  int iVar8;
+  int loopCounterB;
   int iVar9;
   undefined4 *puVar10;
   uint uVar11;
@@ -1069,36 +1082,36 @@ int FUN_000f6a04(param_1, param_2, param_3)
   if (iVar2 != 0) {
     FUN_000f4a24(param_2,local_94);
     iVar2 = *(int *)(param_1 + 0x3ac);
-    uVar13 = 0;
+    loopCounterE = 0;
     uVar11 = *(uint *)(*(int *)(iVar2 + 0x18) + 4);
     if (0 < (int)uVar11) {
       while( true ) {
         puVar14 = *(uint **)(iVar2 + 0x18);
-        if (uVar13 < *puVar14) {
+        if (loopCounterE < *puVar14) {
           uVar3 = puVar14[1];
-          if (uVar3 <= uVar13) {
-            _memset(uVar3 * 4 + puVar14[2],0,(uVar13 - uVar3) * 4 + 4);
-            puVar14[1] = uVar13 + 1;
+          if (uVar3 <= loopCounterE) {
+            _memset(uVar3 * 4 + puVar14[2],0,(loopCounterE - uVar3) * 4 + 4);
+            puVar14[1] = loopCounterE + 1;
           }
-          piVar5 = (int *)(uVar13 * 4 + puVar14[2]);
+          piVar5 = (int *)(loopCounterE * 4 + puVar14[2]);
         }
         else {
-          piVar5 = (int *)Vector__elementRefGrow(puVar14,uVar13);
+          piVar5 = (int *)Vector__elementRefGrow(puVar14,loopCounterE);
         }
         puVar10 = (undefined4 *)*piVar5;
         if (puVar10[0x4b] == local_98) {
           pcVar7 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
           puVar6 = puVar10 + 4;
-          iVar8 = 0;
-          iVar2 = 4;
+          loopCounterB = 0;
+          loopCounter = 4;
           while ((*pcVar7 == '\x04' ||
-                 ((puVar6[3] == *(int *)((int)local_94 + iVar8) &&
-                  (puVar6[4] == *(int *)((int)local_94 + iVar8 + 4)))))) {
-            iVar2 = iVar2 + -1;
-            iVar8 = iVar8 + 0x18;
+                 ((puVar6[3] == *(int *)((int)local_94 + loopCounterB) &&
+                  (puVar6[4] == *(int *)((int)local_94 + loopCounterB + 4)))))) {
+            loopCounter = loopCounter + -1;
+            loopCounterB = loopCounterB + 0x18;
             puVar6 = puVar6 + 6;
             pcVar7 = pcVar7 + 1;
-            if (iVar2 == 0) {
+            if (loopCounter == 0) {
               if (puVar10 != (undefined4 *)0x0) {
                 return puVar10;
               }
@@ -1106,8 +1119,8 @@ int FUN_000f6a04(param_1, param_2, param_3)
             }
           }
         }
-        uVar13 = uVar13 + 1;
-        if (uVar11 == uVar13) break;
+        loopCounterE = loopCounterE + 1;
+        if (uVar11 == loopCounterE) break;
         iVar2 = *(int *)(param_1 + 0x3ac);
       }
     }
@@ -1152,22 +1165,22 @@ LAB_000f6b68:
       piVar5 = (int *)Vector__elementRefGrow(puVar14,uVar11);
     }
     *piVar5 = (int)puVar10;
-    iVar9 = 4;
-    uVar11 = 0;
+    loopCounterC = 4;
+    loopCounterD = 0;
     puVar6 = puVar10 + 4;
-    iVar2 = 0;
+    loopCounter = 0;
     do {
-      puVar1 = (undefined4 *)((int)local_94 + iVar2);
-      uVar4 = *(undefined4 *)((int)local_94 + iVar2 + 4);
-      iVar2 = iVar2 + 0x18;
+      puVar1 = (undefined4 *)((int)local_94 + loopCounter);
+      uVar4 = *(undefined4 *)((int)local_94 + loopCounter + 4);
+      loopCounter = loopCounter + 0x18;
       puVar6[3] = *puVar1;
       puVar6[4] = uVar4;
-      uVar13 = uVar11 & 0x3f;
-      uVar11 = uVar11 + 1;
+      uVar13 = loopCounterD & 0x3f;
+      loopCounterD = loopCounterD + 1;
       puVar6 = puVar6 + 6;
       *(byte *)(puVar10 + 0x57) = (byte)(1 << uVar13) | *(byte *)(puVar10 + 0x57);
-      iVar9 = iVar9 + -1;
-    } while (iVar9 != 0);
+      loopCounterC = loopCounterC + -1;
+    } while (loopCounterC != 0);
   }
   return puVar10;
 }
@@ -1198,6 +1211,11 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
   int constOperand3Kind;
   undefined4 constOperand3Value;
 {
+  int operandRecordB;
+  int loopCounterD;
+  int loopCounterC;
+  int operandRecord;
+  int loopCounter;
   uint programFlags;
   uint operandKindA;
   int existingConstInst;
@@ -1212,7 +1230,7 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
   uint uVar3;
   int iVar4;
   int **ppiVar5;
-  int iVar6;
+  int loopCounterB;
   int iVar7;
   undefined4 loadConstSource;
   int *piVar9;
@@ -1358,13 +1376,13 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = constOperand0Word3;
   (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = constOperand0Word4;
   if ((((constOperand0Kind == 2) && (constOperand1Kind == 2)) && (constOperand2Kind == 2)) && (constOperand3Kind == 2)) {
-    iVar15 = 4;
+    loopCounterD = 4;
     ppiVar5 = operandPtrTable + 7;
     do {
       *ppiVar5 = (int *)0x7ffffffe;
       ppiVar5 = ppiVar5 + 1;
-      iVar15 = iVar15 + -1;
-    } while (iVar15 != 0);
+      loopCounterD = loopCounterD + -1;
+    } while (loopCounterD != 0);
     operandPtrTable[8] = (int *)constOperand1Value;
     operandPtrTable[9] = (int *)constOperand2Value;
     operandPtrTable[10] = (int *)constOperand3Value;
@@ -1380,18 +1398,18 @@ int IRInst__setConstantOperand(inst, program, operandIndex, constOperand0Kind, c
       existingInstRecord = IRInst__getOperandRecord(existingConstInst,0);
       local_288 = *(int *)(existingInstRecord + 0x10);
       if (local_288 != DAT_001aa860) {
-        iVar6 = 0;
+        loopCounterB = 0;
         do {
-          iVar7 = IRInst__getOperandRecord(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
-          if (*(byte *)(iVar6 + iVar7 + 0x10) < 4) {
-            iVar7 = IRInst__getOperandRecord(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
-            uVar3 = (uint)*(byte *)(iVar6 + iVar7 + 0x10);
+          operandRecord = IRInst__getOperandRecord(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
+          if (*(byte *)(loopCounterB + operandRecord + 0x10) < 4) {
+            operandRecord = IRInst__getOperandRecord(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
+            uVar3 = (uint)*(byte *)(loopCounterB + operandRecord + 0x10);
             auStack_284[uVar3 - 4] = 0;
             *(byte *)(existingConstInst + uVar3 + 0xc) =
                  (byte)(1 << (uVar3 & 0x3f)) | *(byte *)(existingConstInst + uVar3 + 0xc);
           }
-          notLastWord = iVar6 != 3;
-          iVar6 = iVar6 + 1;
+          notLastWord = loopCounterB != 3;
+          loopCounterB = loopCounterB + 1;
         } while (notLastWord);
         *(int *)(existingConstInst + 0x9c) = local_288;
       }
@@ -1429,8 +1447,8 @@ LAB_000f6f58:
         if (0 < uniqueCount) {
           do {
             iVar11 = iVar7 + 1;
-            iVar4 = 0;
-            iVar15 = 0;
+            loopCounter = 0;
+            loopCounterD = 0;
             ppiVar5 = operandPtrTable + 4;
             if (iVar7 < 0) {
               iVar11 = 1;
@@ -1451,36 +1469,36 @@ LAB_000f6f58:
                 operandLess = operandKindA < *operandB;
               }
               if (operandLess) {
-                uVar2 = *(undefined1 *)((int)&local_278 + iVar4);
-                uVar1 = *(undefined1 *)((int)&local_278 + iVar15 + 1);
+                uVar2 = *(undefined1 *)((int)&local_278 + loopCounter);
+                uVar1 = *(undefined1 *)((int)&local_278 + loopCounterD + 1);
                 *ppiVar5 = (int *)operandA;
-                *(undefined1 *)((int)&local_278 + iVar15 + 1) = uVar2;
+                *(undefined1 *)((int)&local_278 + loopCounterD + 1) = uVar2;
                 ppiVar5[-1] = (int *)operandB;
-                *(undefined1 *)((int)&local_278 + iVar4) = uVar1;
+                *(undefined1 *)((int)&local_278 + loopCounter) = uVar1;
               }
-              iVar4 = iVar4 + 1;
+              loopCounter = loopCounter + 1;
               ppiVar5 = ppiVar5 + 1;
-              iVar15 = iVar15 + 1;
+              loopCounterD = loopCounterD + 1;
             }
             moreToSort = 0 < iVar7;
             iVar7 = iVar7 + -1;
           } while (moreToSort);
-          iVar7 = 0;
+          loopCounterC = 0;
           iVar15 = uniqueCount;
           do {
-            auStack_284[*(byte *)((int)&local_278 + iVar7)] = (char)iVar7;
-            iVar7 = iVar7 + 1;
+            auStack_284[*(byte *)((int)&local_278 + loopCounterC)] = (char)loopCounterC;
+            loopCounterC = loopCounterC + 1;
             iVar15 = iVar15 + -1;
           } while (iVar15 != 0);
         }
-        iVar15 = 0;
-        iVar7 = 4;
+        loopCounterD = 0;
+        loopCounterC = 4;
         do {
-          *(undefined1 *)((int)&local_280 + iVar15) =
-               auStack_284[*(byte *)((int)&local_27c + iVar15)];
-          iVar15 = iVar15 + 1;
-          iVar7 = iVar7 + -1;
-        } while (iVar7 != 0);
+          *(undefined1 *)((int)&local_280 + loopCounterD) =
+               auStack_284[*(byte *)((int)&local_27c + loopCounterD)];
+          loopCounterD = loopCounterD + 1;
+          loopCounterC = loopCounterC + -1;
+        } while (loopCounterC != 0);
         programFlags = *(uint *)(program + 0x30);
         if ((programFlags & 8) == 0) {
           if (uniqueCount == 2) {
@@ -1658,20 +1676,20 @@ LAB_000f70d4:
         }
         IRInst__setOperandSource(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)),loadConstSource,programFlags >> 7 & 1,compiler);
 LAB_000f76c8:
-        iVar15 = IRInst__getOperandRecord(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
-        *(undefined4 *)(iVar15 + 0x10) = local_280;
+        operandRecordB = IRInst__getOperandRecord(inst,(*(unsigned int *)((unsigned char *)ghidra_home + 8)));
+        *(undefined4 *)(operandRecordB + 0x10) = local_280;
         return;
       }
     } while (uniqueCount < 0);
     if (uniqueCount != 0) {
       piVar9 = *ppiVar5;
-      iVar4 = 0;
-      while ((*operandPtrTable[iVar4 + 3] != *piVar9 || (operandPtrTable[iVar4 + 3][1] != piVar9[1]))) {
-        iVar4 = iVar4 + 1;
-        if (uniqueCount < iVar4) goto LAB_000f6f58;
-        if (iVar4 == uniqueCount) goto LAB_000f6f18;
+      loopCounter = 0;
+      while ((*operandPtrTable[loopCounter + 3] != *piVar9 || (operandPtrTable[loopCounter + 3][1] != piVar9[1]))) {
+        loopCounter = loopCounter + 1;
+        if (uniqueCount < loopCounter) goto LAB_000f6f58;
+        if (loopCounter == uniqueCount) goto LAB_000f6f18;
       }
-      *(char *)((int)&local_27c + iVar11 + 1) = (char)iVar4;
+      *(char *)((int)&local_27c + iVar11 + 1) = (char)loopCounter;
       goto LAB_000f6f58;
     }
     piVar9 = *ppiVar5;
@@ -1885,8 +1903,8 @@ int FUN_000f7dbc(param_1)
   uint loopIndex;
   int iVar5;
   int iVar6;
-  int iVar7;
-  int iVar8;
+  int loopCounter;
+  int loopCounterB;
   uint loopIndex2;
   uint uVar10;
   
@@ -1897,28 +1915,28 @@ int FUN_000f7dbc(param_1)
       piVar2 = piVar2 + 1;
       iVar6 = *piVar2;
       iVar5 = *(int *)(iVar6 + 0xe4);
-      iVar7 = 0;
+      loopCounter = 0;
       for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(iVar6 + 0xd0) + 4); loopIndex2 = loopIndex2 + 1) {
-        iVar3 = *(int *)(iVar7 + *(int *)(*(int *)(iVar6 + 0xd0) + 8));
+        iVar3 = *(int *)(loopCounter + *(int *)(*(int *)(iVar6 + 0xd0) + 8));
         if ((iVar3 != 0) && (iVar5 != *(int *)(*(int *)(iVar3 + 0xe4) * 4 + *(int *)(param_1 + 8))))
         {
           FUN_000e910c(iVar6,iVar3);
         }
-        iVar7 = iVar7 + 4;
+        loopCounter = loopCounter + 4;
       }
-      iVar7 = 0;
+      loopCounter = 0;
       for (loopIndex2 = 1; loopIndex2 <= *(uint *)(*(int *)(iVar6 + 0xf4) + 4); loopIndex2 = loopIndex2 + 1) {
-        iVar8 = 0;
-        iVar3 = *(int *)(iVar7 + *(int *)(*(int *)(iVar6 + 0xf4) + 8));
+        loopCounterB = 0;
+        iVar3 = *(int *)(loopCounter + *(int *)(*(int *)(iVar6 + 0xf4) + 8));
         for (uVar10 = 1; iVar1 = *(int *)(iVar3 + 0xf8), uVar10 <= *(uint *)(iVar1 + 4);
             uVar10 = uVar10 + 1) {
-          iVar1 = *(int *)(iVar8 + *(int *)(iVar1 + 8));
+          iVar1 = *(int *)(loopCounterB + *(int *)(iVar1 + 8));
           if (iVar5 != *(int *)(*(int *)(iVar1 + 0xe4) * 4 + *(int *)(param_1 + 8))) {
             FUN_000e910c(iVar6,iVar1);
           }
-          iVar8 = iVar8 + 4;
+          loopCounterB = loopCounterB + 4;
         }
-        iVar7 = iVar7 + 4;
+        loopCounter = loopCounter + 4;
       }
       loopIndex = loopIndex + 1;
     } while (loopIndex <= *(uint *)(param_1 + 0x1c));
@@ -2009,6 +2027,7 @@ int FUN_000f816c(param_1, param_2)
   int *param_1;
   int param_2;
 {
+  int loopCounter;
   int vectorData;
   int arena;
   int iVar1;
@@ -2042,7 +2061,7 @@ int FUN_000f816c(param_1, param_2)
     piVar3 = (int *)Vector__elementRefGrow(puVar5,uVar7);
   }
   *piVar3 = param_2;
-  iVar6 = 2;
+  loopCounter = 2;
   *(int *)(*(int *)(param_2 + 0xe4) * 4 + param_1[1]) = *(int *)(param_2 + 0xe4);
   *(int *)(*(int *)(param_2 + 0xe4) * 4 + param_1[4]) = *(int *)(param_2 + 0xe4);
   while( true ) {
@@ -2059,9 +2078,9 @@ int FUN_000f816c(param_1, param_2)
         piVar3 = (int *)Vector__elementRefGrow(puVar5,uVar7);
       }
       *piVar3 = iVar4;
-      iVar1 = iVar6 * 4;
-      *(int *)(iVar4 + 0xe4) = iVar6;
-      iVar6 = iVar6 + 1;
+      iVar1 = loopCounter * 4;
+      *(int *)(iVar4 + 0xe4) = loopCounter;
+      loopCounter = loopCounter + 1;
       *(undefined4 *)(iVar1 + *param_1) = *(undefined4 *)(param_2 + 0xe4);
       *(int *)(*(int *)(iVar4 + 0xe4) * 4 + param_1[6]) = iVar4;
       *(undefined4 *)(iVar4 + 0x118) = *(undefined4 *)(param_1[8] + 0x474);
@@ -2178,6 +2197,8 @@ int lazyEntryGet(param_1, param_2)
 int FUN_000f85d0(param_1)
   int *param_1;
 {
+  uint loopCounterB;
+  int loopCounter;
   uint loopIndex;
   uint uVar1;
   int iVar2;
@@ -2206,11 +2227,11 @@ int FUN_000f85d0(param_1)
   if (1 < uVar6) {
     iVar4 = uVar6 << 2;
     do {
-      iVar8 = 0;
+      loopCounter = 0;
       iVar7 = *(int *)(param_1[6] + iVar4);
       for (uVar11 = 1; iVar2 = *(int *)(iVar7 + 0xd4), uVar11 <= *(uint *)(iVar2 + 4);
           uVar11 = uVar11 + 1) {
-        iVar2 = *(int *)(iVar8 + *(int *)(iVar2 + 8));
+        iVar2 = *(int *)(loopCounter + *(int *)(iVar2 + 8));
         if (iVar2 != 0) {
           iVar9 = param_1[1];
           iVar2 = ((int (*)())lazyEntryGet)(param_1,*(undefined4 *)(iVar2 + 0xe4));
@@ -2219,7 +2240,7 @@ int FUN_000f85d0(param_1)
             *(uint *)(iVar4 + param_1[1]) = uVar1;
           }
         }
-        iVar8 = iVar8 + 4;
+        loopCounter = loopCounter + 4;
       }
       arenaB = *(undefined4 *)(param_1[9] + 0x378);
       allocation = (undefined4 *)Arena__alloc(arenaB,0xc);
@@ -2248,16 +2269,16 @@ int FUN_000f85d0(param_1)
   *(undefined4 *)(param_1[2] + 4) = 0;
   uVar6 = param_1[7];
   if (1 < uVar6) {
-    uVar11 = 2;
+    loopCounterB = 2;
     do {
-      iVar4 = uVar11 * 4;
+      iVar4 = loopCounterB * 4;
       iVar7 = param_1[2];
       if (*(int *)(iVar4 + iVar7) != *(int *)(iVar4 + param_1[1])) {
         *(undefined4 *)(iVar4 + iVar7) = *(undefined4 *)(*(int *)(iVar4 + iVar7) * 4 + iVar7);
         uVar6 = param_1[7];
       }
-      uVar11 = uVar11 + 1;
-    } while (uVar11 <= uVar6);
+      loopCounterB = loopCounterB + 1;
+    } while (loopCounterB <= uVar6);
   }
   if (uVar6 != 0) {
     iVar8 = param_1[6];
@@ -2518,6 +2539,9 @@ int FUN_000f8d50(param_1, param_2, param_3, descriptor, param_5, inst, param_7)
   int inst;
   int param_7;
 {
+  undefined4 registerFileB;
+  int loopCounter;
+  int registerFile;
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, descriptor, param_5, inst, param_7, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   undefined *puVar1;
   undefined1 uVar2;
@@ -2530,7 +2554,7 @@ int FUN_000f8d50(param_1, param_2, param_3, descriptor, param_5, inst, param_7)
   code *pcVar9;
   undefined4 uVar10;
   int *piVar11;
-  int iVar12;
+  int loopCounterB;
   char local_38 [28];
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
@@ -2557,11 +2581,11 @@ int FUN_000f8d50(param_1, param_2, param_3, descriptor, param_5, inst, param_7)
     if (((uVar6 & 0x400000) != 0) && ((descriptor[1] & 0x100) != 0)) {
       piVar11 = *(int **)(*(int *)(param_1 + 8) + 0x30c);
       pcVar9 = *(code **)(*piVar11 + 0x78);
-      uVar5 = Program__registerFileOfIlType(param_1,uVar6 >> 0x10 & 0x3f);
-      iVar4 = (*pcVar9)(piVar11,uVar5);
+      registerFileB = Program__registerFileOfIlType(param_1,uVar6 >> 0x10 & 0x3f);
+      iVar4 = (*pcVar9)(piVar11,registerFileB);
       if (iVar4 == 0) {
-        iVar4 = Program__registerFileOfIlType(param_1,*descriptor >> 0x10 & 0x3f);
-        if (iVar4 != 9) {
+        registerFile = Program__registerFileOfIlType(param_1,*descriptor >> 0x10 & 0x3f);
+        if (registerFile != 9) {
           Program__registerFileOfIlType(param_1,*descriptor >> 0x10 & 0x3f);
         }
       }
@@ -2580,36 +2604,36 @@ int FUN_000f8d50(param_1, param_2, param_3, descriptor, param_5, inst, param_7)
     local_38[3] = (char)*(undefined4 *)(puVar1 + iVar4 * 4);
   }
   if (param_7 == 0) {
-    iVar12 = 4;
-    iVar4 = 0;
+    loopCounterB = 4;
+    loopCounter = 0;
     pcVar8 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
     do {
-      cVar3 = local_38[iVar4];
+      cVar3 = local_38[loopCounter];
       if (*pcVar8 != '\0') {
         cVar3 = *pcVar8;
       }
       *(char *)(inst + 0x9c) = cVar3;
-      iVar4 = iVar4 + 1;
+      loopCounter = loopCounter + 1;
       pcVar8 = pcVar8 + 1;
       inst = inst + 1;
-      iVar12 = iVar12 + -1;
-    } while (iVar12 != 0);
+      loopCounterB = loopCounterB + -1;
+    } while (loopCounterB != 0);
   }
   else {
-    iVar12 = 4;
-    iVar4 = 0;
+    loopCounterB = 4;
+    loopCounter = 0;
     puVar7 = (undefined1 *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
     do {
       uVar2 = 1;
-      if (local_38[iVar4] != '\x01') {
+      if (local_38[loopCounter] != '\x01') {
         uVar2 = *puVar7;
       }
       *(undefined1 *)(inst + 0x9c) = uVar2;
-      iVar4 = iVar4 + 1;
+      loopCounter = loopCounter + 1;
       puVar7 = puVar7 + 1;
       inst = inst + 1;
-      iVar12 = iVar12 + -1;
-    } while (iVar12 != 0);
+      loopCounterB = loopCounterB + -1;
+    } while (loopCounterB != 0);
   }
   return;
 }
@@ -2622,15 +2646,15 @@ int IRInst__applyDescriptorSwizzle(descriptor, inst)
   bool bVar1;
   undefined *puVar2;
   int psnPackedLaneSourceResult;
-  int iVar4;
+  int loopCounter;
   
   puVar2 = PTR_DAT_001e8bb8;
-  iVar4 = 0;
+  loopCounter = 0;
   do {
-    psnPackedLaneSourceResult = psnPackedLaneSource(descriptor,iVar4);
-    (**(code **)(*inst + 0x88))(inst,1,iVar4,*(undefined4 *)(puVar2 + psnPackedLaneSourceResult * 4));
-    bVar1 = iVar4 != 3;
-    iVar4 = iVar4 + 1;
+    psnPackedLaneSourceResult = psnPackedLaneSource(descriptor,loopCounter);
+    (**(code **)(*inst + 0x88))(inst,1,loopCounter,*(undefined4 *)(puVar2 + psnPackedLaneSourceResult * 4));
+    bVar1 = loopCounter != 3;
+    loopCounter = loopCounter + 1;
   } while (bVar1);
   if ((*descriptor & 0x400000) != 0) {
     descriptor[1] = descriptor[1] & 0xffff8888 | 0x3210;
@@ -2732,7 +2756,7 @@ int Program__appendInst(program, inst, block)
   int iVar2;
   int *piVar3;
   void *inst2;
-  int iVar5;
+  int newTempIndex;
   int iVar6;
   int iVar7;
   
@@ -2741,11 +2765,11 @@ int Program__appendInst(program, inst, block)
      (piVar3 = *(int **)(*(int *)(program + 8) + 0x30c),
      iVar2 = (**(code **)(*piVar3 + 0x168))(piVar3,program,inst), iVar2 != 0)) {
     inst2 = IRInst__create(0x13,*(undefined4 *)(program + 8));
-    iVar5 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
-    *(int *)(*(int *)(program + 8) + 0x3ac) = iVar5;
+    newTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+    *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex;
     operandRecord = IRInst__getOperandRecord(inst2,0);
     *(undefined4 *)(operandRecord + 0xc) = 0;
-    *(int *)(operandRecord + 8) = iVar5;
+    *(int *)(operandRecord + 8) = newTempIndex;
     uVar1 = inst[0x4d];
     ((int (*)())IRInst__makeLiteralVec4Int)(inst2,program,1,uVar1 & 0xffff | 0x60000,uVar1 & 0xffff | 0x70000,
                  uVar1 & 0xffff | 0x70000,uVar1 & 0xffff | 0x70000);
@@ -2758,7 +2782,7 @@ int Program__appendInst(program, inst, block)
     inst2 = IRInst__create(0x31,*(undefined4 *)(program + 8));
     operandRecord = IRInst__getOperandRecord(inst2,0);
     *(undefined4 *)(operandRecord + 0xc) = 0;
-    *(int *)(operandRecord + 8) = iVar5;
+    *(int *)(operandRecord + 8) = newTempIndex;
     *(undefined4 *)((int)inst2 + 0x9c) = 0x1010000;
     iVar6 = inst[0x2b];
     iVar7 = inst[0x2c];
@@ -2768,7 +2792,7 @@ int Program__appendInst(program, inst, block)
     ((int (*)())Program__appendInst)(program,inst2,block);
     operandRecord = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(operandRecord + 0xc) = 0;
-    *(int *)(operandRecord + 8) = iVar5;
+    *(int *)(operandRecord + 8) = newTempIndex;
   }
   Block__appendInst(block,inst);
   FUN_000ed63c(program,inst);
@@ -2981,6 +3005,19 @@ int FUN_000f9a58(pass, list, descriptor, param_4, param_5)
   undefined4 param_4;
   int param_5;
 {
+  uint loopCounter;
+  int sourceNumber;
+  int tempId;
+  int destRegisterFile;
+  int laneIndex;
+  int newTempIndex;
+  int laneCount;
+  undefined4 instWord0xac;
+  undefined4 operandSelectWord;
+  undefined4 instWord0xc4;
+  undefined4 virtualRegister;
+  undefined4 arenaA;
+  undefined4 registerMap;
   int psnPackedLaneComponentResult;
   void *newInst;
   int operandRecord2;
@@ -2988,17 +3025,17 @@ int FUN_000f9a58(pass, list, descriptor, param_4, param_5)
   int operandRecord3;
   bool bVar1;
   bool bVar2;
-  void *pvVar3;
-  void *pvVar4;
+  void *writeMaskCursor;
+  void *setupInst;
   int iVar5;
-  undefined4 uVar6;
+  undefined4 registerFile;
   undefined4 *allocation;
-  int iVar8;
-  uint *puVar9;
-  uint uVar10;
+  int destRegisterIndex;
+  uint *sourceDescriptor;
+  uint destRegisterType;
   uint uVar11;
   uint uVar12;
-  int iVar13;
+  int newTempIndex2;
   uint uVar14;
   code *pcVar15;
   uint uVar16;
@@ -3011,99 +3048,99 @@ int FUN_000f9a58(pass, list, descriptor, param_4, param_5)
   undefined4 local_68;
   undefined4 local_64 [7];
   
-  iVar8 = (int)(short)*descriptor;
-  uVar10 = *descriptor >> 0x10 & 0x3f;
+  destRegisterIndex = (int)(short)*descriptor;
+  destRegisterType = *descriptor >> 0x10 & 0x3f;
   if (((*descriptor & 0x400000) == 0) || (uVar14 = descriptor[1] >> 9 & 0xf, uVar14 == 0)) {
-    pvVar4 = (void *)0x0;
-    iVar20 = 0;
+    setupInst = (void *)0x0;
+    laneIndex = 0;
   }
   else {
-    iVar20 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
-    *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar20;
-    *(short *)((int)descriptor + 2) = (short)iVar20;
+    laneIndex = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
+    *(int *)(*(int *)(pass + 8) + 0x3ac) = laneIndex;
+    *(short *)((int)descriptor + 2) = (short)laneIndex;
     *descriptor = *descriptor & 0xffc0ffff | 0x40000;
-    pvVar4 = IRInst__create(0x13,*(undefined4 *)(pass + 8));
-    operandRecord2 = IRInst__getOperandRecord(pvVar4,0);
+    setupInst = IRInst__create(0x13,*(undefined4 *)(pass + 8));
+    operandRecord2 = IRInst__getOperandRecord(setupInst,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
-    *(int *)(operandRecord2 + 8) = iVar20;
-    operandRecord2 = IRInst__getOperandRecord(pvVar4,1);
+    *(int *)(operandRecord2 + 8) = laneIndex;
+    operandRecord2 = IRInst__getOperandRecord(setupInst,1);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     fparam_1 = (double)*(float *)(&DAT_001aa9fc + uVar14 * 4);
-    *(int *)(operandRecord2 + 8) = iVar20;
-    ((void (*)())IRInst__makeLiteralVec4Float)(pvVar4,pass,2,fparam_1,fparam_1,fparam_1,fparam_1);
-    DList__pushBack(list,pvVar4);
+    *(int *)(operandRecord2 + 8) = laneIndex;
+    ((void (*)())IRInst__makeLiteralVec4Float)(setupInst,pass,2,fparam_1,fparam_1,fparam_1,fparam_1);
+    DList__pushBack(list,setupInst);
   }
   uVar14 = 0;
-  uVar17 = 0;
+  loopCounter = 0;
   do {
-    psnPackedLaneComponentResult = psnPackedLaneComponent(descriptor,uVar17);
-    bVar1 = uVar17 != 3;
-    uVar14 = uVar14 | (uint)(psnPackedLaneComponentResult == 2) << (uVar17 & 0x3f);
-    uVar17 = uVar17 + 1;
+    psnPackedLaneComponentResult = psnPackedLaneComponent(descriptor,loopCounter);
+    bVar1 = loopCounter != 3;
+    uVar14 = uVar14 | (uint)(psnPackedLaneComponentResult == 2) << (loopCounter & 0x3f);
+    loopCounter = loopCounter + 1;
   } while (bVar1);
   if (uVar14 != 0) {
-    if (pvVar4 == (void *)0x0) {
-      iVar20 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
-      *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar20;
-      *(short *)((int)descriptor + 2) = (short)iVar20;
+    if (setupInst == (void *)0x0) {
+      laneIndex = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
+      *(int *)(*(int *)(pass + 8) + 0x3ac) = laneIndex;
+      *(short *)((int)descriptor + 2) = (short)laneIndex;
       *descriptor = *descriptor & 0xffc0ffff | 0x40000;
     }
-    pvVar4 = IRInst__create(0x31,*(undefined4 *)(pass + 8));
-    operandRecord2 = IRInst__getOperandRecord(pvVar4,0);
+    setupInst = IRInst__create(0x31,*(undefined4 *)(pass + 8));
+    operandRecord2 = IRInst__getOperandRecord(setupInst,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
-    *(int *)(operandRecord2 + 8) = iVar20;
-    ((void (*)())IRInst__makeLiteralVec4Float)(pvVar4,pass,1,0.0,0.0,0.0,0.0);
-    iVar5 = 4;
-    uVar17 = 0;
-    pvVar3 = pvVar4;
+    *(int *)(operandRecord2 + 8) = laneIndex;
+    ((void (*)())IRInst__makeLiteralVec4Float)(setupInst,pass,1,0.0,0.0,0.0,0.0);
+    laneCount = 4;
+    loopCounter = 0;
+    writeMaskCursor = setupInst;
     do {
-      if (((int)uVar14 >> (uVar17 & 0x3f) & 1U) == 0) {
-        *(undefined1 *)((int)pvVar3 + 0x9c) = 1;
+      if (((int)uVar14 >> (loopCounter & 0x3f) & 1U) == 0) {
+        *(undefined1 *)((int)writeMaskCursor + 0x9c) = 1;
       }
       else {
-        *(undefined1 *)((int)pvVar3 + 0x9c) = 0;
+        *(undefined1 *)((int)writeMaskCursor + 0x9c) = 0;
       }
-      uVar17 = uVar17 + 1;
-      pvVar3 = (void *)((int)pvVar3 + 1);
-      iVar5 = iVar5 + -1;
-    } while (iVar5 != 0);
-    DList__pushBack(list,pvVar4);
+      loopCounter = loopCounter + 1;
+      writeMaskCursor = (void *)((int)writeMaskCursor + 1);
+      laneCount = laneCount + -1;
+    } while (laneCount != 0);
+    DList__pushBack(list,setupInst);
   }
   uVar14 = 0;
-  uVar17 = 0;
+  loopCounter = 0;
   do {
-    psnPackedLaneComponentResult = psnPackedLaneComponent(descriptor,uVar17);
-    bVar1 = uVar17 != 3;
-    uVar14 = uVar14 | (uint)(psnPackedLaneComponentResult == 3) << (uVar17 & 0x3f);
-    uVar17 = uVar17 + 1;
+    psnPackedLaneComponentResult = psnPackedLaneComponent(descriptor,loopCounter);
+    bVar1 = loopCounter != 3;
+    uVar14 = uVar14 | (uint)(psnPackedLaneComponentResult == 3) << (loopCounter & 0x3f);
+    loopCounter = loopCounter + 1;
   } while (bVar1);
   if (uVar14 != 0) {
-    if (pvVar4 == (void *)0x0) {
-      iVar20 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
-      *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar20;
-      *(short *)((int)descriptor + 2) = (short)iVar20;
+    if (setupInst == (void *)0x0) {
+      laneIndex = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
+      *(int *)(*(int *)(pass + 8) + 0x3ac) = laneIndex;
+      *(short *)((int)descriptor + 2) = (short)laneIndex;
       *descriptor = *descriptor & 0xffc0ffff | 0x40000;
     }
-    pvVar4 = IRInst__create(0x31,*(undefined4 *)(pass + 8));
-    operandRecord2 = IRInst__getOperandRecord(pvVar4,0);
+    setupInst = IRInst__create(0x31,*(undefined4 *)(pass + 8));
+    operandRecord2 = IRInst__getOperandRecord(setupInst,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
-    *(int *)(operandRecord2 + 8) = iVar20;
-    ((void (*)())IRInst__makeLiteralVec4Float)(pvVar4,pass,1,1.0,1.0,1.0,1.0);
-    iVar5 = 4;
-    uVar17 = 0;
-    pvVar3 = pvVar4;
+    *(int *)(operandRecord2 + 8) = laneIndex;
+    ((void (*)())IRInst__makeLiteralVec4Float)(setupInst,pass,1,1.0,1.0,1.0,1.0);
+    laneCount = 4;
+    loopCounter = 0;
+    writeMaskCursor = setupInst;
     do {
-      if (((int)uVar14 >> (uVar17 & 0x3f) & 1U) == 0) {
-        *(undefined1 *)((int)pvVar3 + 0x9c) = 1;
+      if (((int)uVar14 >> (loopCounter & 0x3f) & 1U) == 0) {
+        *(undefined1 *)((int)writeMaskCursor + 0x9c) = 1;
       }
       else {
-        *(undefined1 *)((int)pvVar3 + 0x9c) = 0;
+        *(undefined1 *)((int)writeMaskCursor + 0x9c) = 0;
       }
-      uVar17 = uVar17 + 1;
-      pvVar3 = (void *)((int)pvVar3 + 1);
-      iVar5 = iVar5 + -1;
-    } while (iVar5 != 0);
-    DList__pushBack(list,pvVar4);
+      loopCounter = loopCounter + 1;
+      writeMaskCursor = (void *)((int)writeMaskCursor + 1);
+      laneCount = laneCount + -1;
+    } while (laneCount != 0);
+    DList__pushBack(list,setupInst);
   }
   uVar14 = 0;
   if ((*descriptor & 0x400000) != 0) {
@@ -3114,14 +3151,14 @@ int FUN_000f9a58(pass, list, descriptor, param_4, param_5)
   }
   iVar5 = FUN_0019eb30(descriptor);
   if (iVar5 != 0) {
-    pvVar4 = IRInst__create(0x31,*(undefined4 *)(pass + 8));
-    operandRecord2 = IRInst__getOperandRecord(pvVar4,0);
+    setupInst = IRInst__create(0x31,*(undefined4 *)(pass + 8));
+    operandRecord2 = IRInst__getOperandRecord(setupInst,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
-    *(int *)(operandRecord2 + 8) = iVar20;
-    operandRecord2 = IRInst__getOperandRecord(pvVar4,1);
+    *(int *)(operandRecord2 + 8) = laneIndex;
+    operandRecord2 = IRInst__getOperandRecord(setupInst,1);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
-    *(int *)(operandRecord2 + 8) = iVar20;
-    DList__pushBack(list,pvVar4);
+    *(int *)(operandRecord2 + 8) = laneIndex;
+    DList__pushBack(list,setupInst);
   }
   uVar17 = *descriptor;
   if (((uVar17 & 0x400000) == 0) || ((descriptor[1] & 0x100) == 0)) {
@@ -3131,11 +3168,11 @@ LAB_000f9f08:
   else {
     piVar18 = *(int **)(*(int *)(pass + 8) + 0x30c);
     pcVar15 = *(code **)(*piVar18 + 0x78);
-    uVar6 = Program__registerFileOfIlType(pass,uVar10);
-    iVar5 = (*pcVar15)(piVar18,uVar6);
+    registerFile = Program__registerFileOfIlType(pass,destRegisterType);
+    iVar5 = (*pcVar15)(piVar18,registerFile);
     if (iVar5 == 0) {
-      iVar20 = Program__registerFileOfIlType(pass,*descriptor >> 0x10 & 0x3f);
-      if (iVar20 == 9) {
+      destRegisterFile = Program__registerFileOfIlType(pass,*descriptor >> 0x10 & 0x3f);
+      if (destRegisterFile == 9) {
         uVar17 = *descriptor;
         goto LAB_000f9f08;
       }
@@ -3147,13 +3184,13 @@ LAB_000f9f08:
       piVar18 = *(int **)(*(int *)(pass + 8) + 0x30c);
       iVar5 = (**(code **)(*piVar18 + 0x80))(piVar18);
       if (iVar5 == 0) {
-        if (pvVar4 == (void *)0x0) {
-          iVar20 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
-          *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar20;
-          *(short *)((int)descriptor + 2) = (short)iVar20;
+        if (setupInst == (void *)0x0) {
+          laneIndex = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
+          *(int *)(*(int *)(pass + 8) + 0x3ac) = laneIndex;
+          *(short *)((int)descriptor + 2) = (short)laneIndex;
           *descriptor = *descriptor & 0xffc0ffff | 0x40000;
         }
-        pvVar4 = (void *)((int (*)())FUN_000f9038)(pass,iVar20,list);
+        setupInst = (void *)((int (*)())FUN_000f9038)(pass,laneIndex,list);
         uVar17 = *descriptor;
         if ((uVar17 & 0x400000) == 0) goto LAB_000f9f08;
         bVar1 = false;
@@ -3165,55 +3202,55 @@ LAB_000f9f08:
       }
     }
   }
-  if (pvVar4 != (void *)0x0) {
+  if (setupInst != (void *)0x0) {
     if ((uVar17 & 0x1800000) == 0x800000) {
       if (*(int *)(pass + 0x3e4) == 0) {
         *(undefined4 *)(pass + 0x3e4) = 1;
-        uVar6 = Program__registerFileOfIlType(pass,uVar10);
-        *(undefined4 *)(pass + 0x3f4) = uVar6;
+        registerFile = Program__registerFileOfIlType(pass,destRegisterType);
+        *(undefined4 *)(pass + 0x3f4) = registerFile;
       }
       else {
-        Program__registerFileOfIlType(pass,uVar10);
+        Program__registerFileOfIlType(pass,destRegisterType);
       }
-      uVar6 = *(undefined4 *)(pass + 0x3ac);
-      iVar20 = *(int *)(*(int *)(pass + 8) + 0x3c0) + 1;
-      *(int *)(*(int *)(pass + 8) + 0x3c0) = iVar20;
-      iVar20 = FUN_00127608(uVar6,0x2a,iVar20,0);
-      *(int *)(iVar20 + 0x30) = iVar8;
-      IRInst__setOperandRef(pvVar4,0,iVar20);
+      registerMap = *(undefined4 *)(pass + 0x3ac);
+      tempId = *(int *)(*(int *)(pass + 8) + 0x3c0) + 1;
+      *(int *)(*(int *)(pass + 8) + 0x3c0) = tempId;
+      tempId = FUN_00127608(registerMap,0x2a,tempId,0);
+      *(int *)(tempId + 0x30) = destRegisterIndex;
+      IRInst__setOperandRef(setupInst,0,tempId);
       *descriptor = *descriptor & 0xfe7fffff;
     }
     else {
-      uVar6 = Program__registerFileOfIlType(pass,uVar10);
-      operandRecord = IRInst__getOperandRecord(pvVar4,0);
-      *(undefined4 *)(operandRecord + 0xc) = uVar6;
-      *(int *)(operandRecord + 8) = iVar8;
+      registerFile = Program__registerFileOfIlType(pass,destRegisterType);
+      operandRecord = IRInst__getOperandRecord(setupInst,0);
+      *(undefined4 *)(operandRecord + 0xc) = registerFile;
+      *(int *)(operandRecord + 8) = destRegisterIndex;
     }
     if (bVar1) {
-      *(undefined4 *)((int)pvVar4 + 0x120) = 1;
+      *(undefined4 *)((int)setupInst + 0x120) = 1;
     }
     if ((*descriptor & 0x400000) != 0) {
       descriptor[1] = descriptor[1] & 0xfffffeff;
     }
-    iVar20 = 0;
+    laneIndex = 0;
     do {
-      psnPackedLaneComponentResult = psnPackedLaneComponent(descriptor,iVar20);
+      psnPackedLaneComponentResult = psnPackedLaneComponent(descriptor,laneIndex);
       if (psnPackedLaneComponentResult == 0) {
-        *(undefined1 *)((int)pvVar4 + 0x9c) = 1;
+        *(undefined1 *)((int)setupInst + 0x9c) = 1;
       }
       else {
-        *(undefined1 *)((int)pvVar4 + 0x9c) = 0;
+        *(undefined1 *)((int)setupInst + 0x9c) = 0;
       }
-      bVar1 = iVar20 != 3;
-      pvVar4 = (void *)((int)pvVar4 + 1);
-      iVar20 = iVar20 + 1;
+      bVar1 = laneIndex != 3;
+      setupInst = (void *)((int)setupInst + 1);
+      laneIndex = laneIndex + 1;
     } while (bVar1);
     uVar17 = *descriptor;
     if ((uVar17 & 0x400000) != 0) {
       descriptor[1] = descriptor[1] & 0xffffff00 | 0x55;
     }
   }
-  if ((uVar10 != 0x1f) || ((*(uint *)(pass + 0x30) & 0x4000) == 0)) {
+  if ((destRegisterType != 0x1f) || ((*(uint *)(pass + 0x30) & 0x4000) == 0)) {
     bVar1 = false;
     bVar2 = false;
   }
@@ -3222,126 +3259,126 @@ LAB_000f9f08:
     bVar2 = true;
   }
   if (((undefined4 *)(uVar17 & 0x3f0000) != 0x001b0000) && (!bVar1)) goto LAB_000fa744;
-  iVar20 = 1;
-  iVar5 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
-  *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar5;
+  sourceNumber = 1;
+  newTempIndex = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
+  *(int *)(*(int *)(pass + 8) + 0x3ac) = newTempIndex;
   uVar17 = *descriptor;
   uVar12 = (uint)(ushort)*descriptor;
   uVar11 = uVar17 >> 0x10 & 0x3f;
   if ((int)uVar17 < 0) {
-    iVar20 = 2;
+    sourceNumber = 2;
     uVar12 = uVar12 | descriptor[1] << 0x10;
   }
   if ((uVar17 & 0x400000) != 0) {
-    iVar20 = iVar20 + 1;
+    sourceNumber = sourceNumber + 1;
   }
   if ((uVar17 & 0x1800000) == 0x1000000) {
-    puVar9 = descriptor + iVar20;
+    sourceDescriptor = descriptor + sourceNumber;
     if (!bVar2) {
-      uVar6 = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
-      allocation = (undefined4 *)Arena__alloc(uVar6,0x168);
-      *allocation = uVar6;
+      arenaA = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
+      allocation = (undefined4 *)Arena__alloc(arenaA,0x168);
+      *allocation = arenaA;
       puVar21 = allocation + 1;
       IRMemStore__ctor_1071fc(puVar21,0xfc,*(undefined4 *)(pass + 8));
-      uVar6 = Program__registerFileOfIlType(pass,uVar11);
+      registerFile = Program__registerFileOfIlType(pass,uVar11);
       operandRecord3 = IRInst__getOperandRecord(puVar21,0);
-      *(undefined4 *)(operandRecord3 + 0xc) = uVar6;
+      *(undefined4 *)(operandRecord3 + 0xc) = registerFile;
       *(uint *)(operandRecord3 + 8) = uVar12;
-      uVar6 = Program__registerFileOfIlType(pass,4);
+      registerFile = Program__registerFileOfIlType(pass,4);
       operandRecord3 = IRInst__getOperandRecord(puVar21,1);
       allocation[0x28] = uVar14;
-      *(undefined4 *)(operandRecord3 + 0xc) = uVar6;
-      *(int *)(operandRecord3 + 8) = iVar5;
+      *(undefined4 *)(operandRecord3 + 0xc) = registerFile;
+      *(int *)(operandRecord3 + 8) = newTempIndex;
       if ((*descriptor & 0x4000000) == 0) goto LAB_000fa1bc;
-      iVar13 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
-      *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar13;
-      uVar17 = descriptor[iVar20 + 2];
+      newTempIndex2 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
+      *(int *)(*(int *)(pass + 8) + 0x3ac) = newTempIndex2;
+      uVar17 = descriptor[sourceNumber + 2];
       newInst = IRInst__create(0xc6,*(undefined4 *)(pass + 8));
-      uVar6 = Program__registerFileOfIlType(pass,4);
+      registerFile = Program__registerFileOfIlType(pass,4);
       operandRecord = IRInst__getOperandRecord(newInst,0);
-      *(undefined4 *)(operandRecord + 0xc) = uVar6;
-      *(int *)(operandRecord + 8) = iVar13;
-      uVar14 = *puVar9;
-      uVar6 = Program__registerFileOfIlType(pass,*puVar9 >> 0x10 & 0x3f);
+      *(undefined4 *)(operandRecord + 0xc) = registerFile;
+      *(int *)(operandRecord + 8) = newTempIndex2;
+      uVar14 = *sourceDescriptor;
+      registerFile = Program__registerFileOfIlType(pass,*sourceDescriptor >> 0x10 & 0x3f);
       operandRecord = IRInst__getOperandRecord(newInst,1);
-      *(undefined4 *)(operandRecord + 0xc) = uVar6;
+      *(undefined4 *)(operandRecord + 0xc) = registerFile;
       *(uint *)(operandRecord + 8) = (uint)(ushort)uVar14;
       ((int (*)())FUN_000f7870)(newInst,pass,2,uVar17,uVar17,uVar17,uVar17);
       DList__pushBack(list,newInst);
-      uVar6 = Program__registerFileOfIlType(pass,4);
+      registerFile = Program__registerFileOfIlType(pass,4);
       operandRecord = IRInst__getOperandRecord(puVar21,2);
-      *(undefined4 *)(operandRecord + 0xc) = uVar6;
-      *(int *)(operandRecord + 8) = iVar13;
+      *(undefined4 *)(operandRecord + 0xc) = registerFile;
+      *(int *)(operandRecord + 8) = newTempIndex2;
     }
     else {
-      uVar6 = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
-      allocation = (undefined4 *)Arena__alloc(uVar6,0x168);
-      *allocation = uVar6;
+      arenaA = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
+      allocation = (undefined4 *)Arena__alloc(arenaA,0x168);
+      *allocation = arenaA;
       puVar21 = allocation + 1;
       IRGeomExport__ctor_108a50(puVar21,0xf9,*(undefined4 *)(pass + 8));
       allocation[0x28] = uVar14;
       allocation[0x22] = 2;
       if ((*descriptor & 0x4000000) != 0) {
-        uVar12 = uVar12 + descriptor[iVar20 + 2];
+        uVar12 = uVar12 + descriptor[sourceNumber + 2];
       }
       allocation[0x51] = uVar12;
       allocation[0x50] = 0x24;
-      uVar6 = FUN_00127608(*(undefined4 *)(*(int *)(*(int *)(pass + 8) + 0x6c4) + 0x3ac),0x2c,0,0
+      virtualRegister = FUN_00127608(*(undefined4 *)(*(int *)(*(int *)(pass + 8) + 0x6c4) + 0x3ac),0x2c,0,0
                           );
-      IRInst__setOperandRef(puVar21,0,uVar6);
+      IRInst__setOperandRef(puVar21,0,virtualRegister);
       operandRecord = IRInst__getOperandRecord(puVar21,1);
       *(undefined4 *)(operandRecord + 0xc) = 0;
-      *(int *)(operandRecord + 8) = iVar5;
+      *(int *)(operandRecord + 8) = newTempIndex;
 LAB_000fa1bc:
-      uVar14 = *puVar9;
-      uVar6 = Program__registerFileOfIlType(pass,*puVar9 >> 0x10 & 0x3f);
+      uVar14 = *sourceDescriptor;
+      registerFile = Program__registerFileOfIlType(pass,*sourceDescriptor >> 0x10 & 0x3f);
       operandRecord = IRInst__getOperandRecord(puVar21,2);
-      *(undefined4 *)(operandRecord + 0xc) = uVar6;
+      *(undefined4 *)(operandRecord + 0xc) = registerFile;
       *(uint *)(operandRecord + 8) = (uint)(ushort)uVar14;
       if (bVar2) goto LAB_000fa4f8;
     }
-    uVar6 = Program__registerFileOfIlType(pass,uVar11);
+    registerFile = Program__registerFileOfIlType(pass,uVar11);
     operandRecord = IRInst__getOperandRecord(puVar21,3);
-    *(undefined4 *)(operandRecord + 0xc) = uVar6;
+    *(undefined4 *)(operandRecord + 0xc) = registerFile;
     *(uint *)(operandRecord + 8) = uVar12;
     local_64[0] = 0x10203;
-    ((int (*)())Program__applySourceTokenToOperand)(pass,local_64,puVar9,2,puVar21);
+    ((int (*)())Program__applySourceTokenToOperand)(pass,local_64,sourceDescriptor,2,puVar21);
   }
   else if ((uVar17 & 0x1800000) == 0) {
     uVar16 = 0;
     if ((uVar17 & 0x4000000) != 0) {
-      uVar16 = descriptor[iVar20];
+      uVar16 = descriptor[sourceNumber];
     }
     if (bVar2) {
-      uVar6 = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
-      allocation = (undefined4 *)Arena__alloc(uVar6,0x168);
-      *allocation = uVar6;
+      arenaA = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
+      allocation = (undefined4 *)Arena__alloc(arenaA,0x168);
+      *allocation = arenaA;
       puVar21 = allocation + 1;
       IRGeomExport__ctor_108770(puVar21,*(undefined4 *)(pass + 8));
       allocation[0x28] = uVar14;
       allocation[0x50] = 0x24;
       allocation[0x51] = uVar12;
-      uVar6 = FUN_00127608(*(undefined4 *)(*(int *)(*(int *)(pass + 8) + 0x6c4) + 0x3ac),0x2c,0,0
+      virtualRegister = FUN_00127608(*(undefined4 *)(*(int *)(*(int *)(pass + 8) + 0x6c4) + 0x3ac),0x2c,0,0
                           );
-      IRInst__setOperandRef(puVar21,0,uVar6);
+      IRInst__setOperandRef(puVar21,0,virtualRegister);
       operandRecord = IRInst__getOperandRecord(puVar21,1);
       *(undefined4 *)(operandRecord + 0xc) = 0;
-      *(int *)(operandRecord + 8) = iVar5;
+      *(int *)(operandRecord + 8) = newTempIndex;
     }
     else {
-      uVar6 = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
-      allocation = (undefined4 *)Arena__alloc(uVar6,0x168);
-      *allocation = uVar6;
+      arenaA = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
+      allocation = (undefined4 *)Arena__alloc(arenaA,0x168);
+      *allocation = arenaA;
       puVar21 = allocation + 1;
       IRMemStore__ctor_1071fc(puVar21,0xfc,*(undefined4 *)(pass + 8));
-      uVar6 = Program__registerFileOfIlType(pass,uVar11);
+      registerFile = Program__registerFileOfIlType(pass,uVar11);
       operandRecord = IRInst__getOperandRecord(puVar21,0);
-      *(undefined4 *)(operandRecord + 0xc) = uVar6;
+      *(undefined4 *)(operandRecord + 0xc) = registerFile;
       *(uint *)(operandRecord + 8) = uVar12;
-      uVar6 = Program__registerFileOfIlType(pass,4);
+      registerFile = Program__registerFileOfIlType(pass,4);
       operandRecord = IRInst__getOperandRecord(puVar21,1);
-      *(undefined4 *)(operandRecord + 0xc) = uVar6;
-      *(int *)(operandRecord + 8) = iVar5;
+      *(undefined4 *)(operandRecord + 0xc) = registerFile;
+      *(int *)(operandRecord + 8) = newTempIndex;
       ((int (*)())FUN_000f7870)(puVar21,pass,2,uVar16,uVar16,uVar16,uVar16);
       allocation[0x28] = uVar14;
     }
@@ -3355,70 +3392,70 @@ LAB_000fa4f8:
   piVar18 = *(int **)(*(int *)(pass + 8) + 0x30c);
   iVar20 = (**(code **)(*piVar18 + 0x104))(piVar18,puVar21,2,&local_68,0);
   if (iVar20 == 0) {
-    iVar13 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
-    *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar13;
+    newTempIndex2 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
+    *(int *)(*(int *)(pass + 8) + 0x3ac) = newTempIndex2;
     newInst = IRInst__create(0x31,*(undefined4 *)(pass + 8));
     uVar19 = puVar21[0x32];
-    uVar6 = puVar21[0x31];
+    instWord0xc4 = puVar21[0x31];
     operandRecord = IRInst__getOperandRecord(newInst,1);
     *(undefined4 *)(operandRecord + 0xc) = uVar19;
-    *(undefined4 *)(operandRecord + 8) = uVar6;
-    uVar6 = Program__registerFileOfIlType(pass,4);
+    *(undefined4 *)(operandRecord + 8) = instWord0xc4;
+    registerFile = Program__registerFileOfIlType(pass,4);
     operandRecord = IRInst__getOperandRecord(newInst,0);
-    *(undefined4 *)(operandRecord + 0xc) = uVar6;
-    *(int *)(operandRecord + 8) = iVar13;
+    *(undefined4 *)(operandRecord + 0xc) = registerFile;
+    *(int *)(operandRecord + 8) = newTempIndex2;
     operandRecord = IRInst__getOperandRecord(puVar21,2);
-    uVar6 = *(undefined4 *)(operandRecord + 0x10);
+    operandSelectWord = *(undefined4 *)(operandRecord + 0x10);
     operandRecord = IRInst__getOperandRecord(newInst,1);
-    *(undefined4 *)(operandRecord + 0x10) = uVar6;
+    *(undefined4 *)(operandRecord + 0x10) = operandSelectWord;
     DList__pushBack(list,newInst);
-    uVar6 = Program__registerFileOfIlType(pass,4);
+    registerFile = Program__registerFileOfIlType(pass,4);
     operandRecord = IRInst__getOperandRecord(puVar21,2);
-    *(undefined4 *)(operandRecord + 0xc) = uVar6;
-    *(int *)(operandRecord + 8) = iVar13;
+    *(undefined4 *)(operandRecord + 0xc) = registerFile;
+    *(int *)(operandRecord + 8) = newTempIndex2;
     iVar20 = IRInst__getOperandRecord(puVar21,2);
     *(undefined4 *)(iVar20 + 0x10) = 0;
   }
   if ((!bVar2) &&
      (piVar18 = *(int **)(*(int *)(pass + 8) + 0x30c),
      iVar20 = (**(code **)(*piVar18 + 0x104))(piVar18,puVar21,1,&local_68,0), iVar20 == 0)) {
-    iVar13 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
-    *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar13;
+    newTempIndex2 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
+    *(int *)(*(int *)(pass + 8) + 0x3ac) = newTempIndex2;
     newInst = IRInst__create(0x31,*(undefined4 *)(pass + 8));
     uVar19 = puVar21[0x2c];
-    uVar6 = puVar21[0x2b];
+    instWord0xac = puVar21[0x2b];
     operandRecord = IRInst__getOperandRecord(newInst,1);
     *(undefined4 *)(operandRecord + 0xc) = uVar19;
-    *(undefined4 *)(operandRecord + 8) = uVar6;
-    uVar6 = Program__registerFileOfIlType(pass,4);
+    *(undefined4 *)(operandRecord + 8) = instWord0xac;
+    registerFile = Program__registerFileOfIlType(pass,4);
     operandRecord = IRInst__getOperandRecord(newInst,0);
-    *(undefined4 *)(operandRecord + 0xc) = uVar6;
-    *(int *)(operandRecord + 8) = iVar13;
+    *(undefined4 *)(operandRecord + 0xc) = registerFile;
+    *(int *)(operandRecord + 8) = newTempIndex2;
     operandRecord = IRInst__getOperandRecord(puVar21,1);
-    uVar6 = *(undefined4 *)(operandRecord + 0x10);
+    operandSelectWord = *(undefined4 *)(operandRecord + 0x10);
     operandRecord = IRInst__getOperandRecord(newInst,1);
-    *(undefined4 *)(operandRecord + 0x10) = uVar6;
+    *(undefined4 *)(operandRecord + 0x10) = operandSelectWord;
     DList__pushBack(list,newInst);
-    uVar6 = Program__registerFileOfIlType(pass,4);
+    registerFile = Program__registerFileOfIlType(pass,4);
     operandRecord = IRInst__getOperandRecord(puVar21,1);
-    *(undefined4 *)(operandRecord + 0xc) = uVar6;
-    *(int *)(operandRecord + 8) = iVar13;
+    *(undefined4 *)(operandRecord + 0xc) = registerFile;
+    *(int *)(operandRecord + 8) = newTempIndex2;
     operandRecord = IRInst__getOperandRecord(puVar21,1);
     *(undefined4 *)(operandRecord + 0x10) = 0x10203;
   }
   DList__pushBack(list,puVar21);
   *descriptor = *descriptor & 0xffc0ffff | 0x40000;
-  *(short *)((int)descriptor + 2) = (short)iVar5;
+  *(short *)((int)descriptor + 2) = (short)newTempIndex;
 LAB_000fa744:
-  if ((uVar10 == 0x1f) && ((*(uint *)(pass + 0x30) & 0x200000) != 0)) {
-    iVar5 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
-    *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar5;
-    iVar13 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
-    *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar13;
+  if ((destRegisterType == 0x1f) && ((*(uint *)(pass + 0x30) & 0x200000) != 0)) {
+    newTempIndex = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
+    *(int *)(*(int *)(pass + 8) + 0x3ac) = newTempIndex;
+    newTempIndex2 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
+    *(int *)(*(int *)(pass + 8) + 0x3ac) = newTempIndex2;
     newInst = IRInst__create(0xcc,*(undefined4 *)(pass + 8));
     operandRecord = IRInst__getOperandRecord(newInst,0);
     *(undefined4 *)(operandRecord + 0xc) = 0;
-    *(int *)(operandRecord + 8) = iVar13;
+    *(int *)(operandRecord + 8) = newTempIndex2;
     operandRecord = IRInst__getOperandRecord(newInst,1);
     *(undefined4 *)(operandRecord + 8) = 0;
     *(undefined4 *)(operandRecord + 0xc) = 0x1f;
@@ -3440,24 +3477,24 @@ LAB_000fa744:
     }
     DList__pushBack(list,newInst);
     newInst = IRInst__create(0x24,*(undefined4 *)(pass + 8));
-    uVar6 = Program__registerFileOfIlType(pass,0x1f);
+    registerFile = Program__registerFileOfIlType(pass,0x1f);
     operandRecord = IRInst__getOperandRecord(newInst,0);
-    *(undefined4 *)(operandRecord + 0xc) = uVar6;
-    *(int *)(operandRecord + 8) = iVar8;
+    *(undefined4 *)(operandRecord + 0xc) = registerFile;
+    *(int *)(operandRecord + 8) = destRegisterIndex;
     operandRecord = IRInst__getOperandRecord(newInst,1);
     *(undefined4 *)(operandRecord + 0xc) = 0;
-    *(int *)(operandRecord + 8) = iVar13;
-    uVar6 = Program__registerFileOfIlType(pass,4);
+    *(int *)(operandRecord + 8) = newTempIndex2;
+    registerFile = Program__registerFileOfIlType(pass,4);
     operandRecord = IRInst__getOperandRecord(newInst,2);
-    *(undefined4 *)(operandRecord + 0xc) = uVar6;
-    *(int *)(operandRecord + 8) = iVar5;
-    uVar6 = Program__registerFileOfIlType(pass,0x1f);
+    *(undefined4 *)(operandRecord + 0xc) = registerFile;
+    *(int *)(operandRecord + 8) = newTempIndex;
+    registerFile = Program__registerFileOfIlType(pass,0x1f);
     operandRecord = IRInst__getOperandRecord(newInst,3);
-    *(undefined4 *)(operandRecord + 0xc) = uVar6;
-    *(int *)(operandRecord + 8) = iVar8;
+    *(undefined4 *)(operandRecord + 0xc) = registerFile;
+    *(int *)(operandRecord + 8) = destRegisterIndex;
     DList__pushBack(list,newInst);
     *descriptor = *descriptor & 0xffc0ffff | 0x40000;
-    *(short *)((int)descriptor + 2) = (short)iVar5;
+    *(short *)((int)descriptor + 2) = (short)newTempIndex;
   }
   return;
 }
@@ -3476,6 +3513,9 @@ int FUN_000fa958(param_1, param_2, operandIndex, param_4, inst, param_6, param_7
   undefined4 param_10;
   undefined4 block;
 {
+  undefined4 registerFileB;
+  undefined4 registerFile;
+  int loopCounter;
   undefined4 newInst2;
   int operandRecord2;
   int operandRecord4;
@@ -3486,9 +3526,9 @@ int FUN_000fa958(param_1, param_2, operandIndex, param_4, inst, param_6, param_7
   int iVar1;
   undefined4 uVar2;
   int iVar3;
-  int iVar4;
+  int loopCounterB;
   uint *puVar5;
-  int iVar6;
+  int newTempIndex;
   int iVar7;
   uint uVar8;
   undefined4 uVar9;
@@ -3534,9 +3574,9 @@ LAB_000fabd8:
       operandRecord = IRInst__getOperandRecord(newInst2,0);
       *(undefined4 *)(operandRecord + 0xc) = 0;
       *(int *)(operandRecord + 8) = iVar1;
-      uVar9 = Program__registerFileOfIlType(param_1,uVar8);
+      registerFileB = Program__registerFileOfIlType(param_1,uVar8);
       operandRecord = IRInst__getOperandRecord(newInst2,1);
-      *(undefined4 *)(operandRecord + 0xc) = uVar9;
+      *(undefined4 *)(operandRecord + 0xc) = registerFileB;
       *(int *)(operandRecord + 8) = iVar7;
       ((int (*)())Program__applySourceTokenToOperand)(param_1,param_8,puVar10,operandIndex,newInst2);
       ((int (*)())Program__appendInst)(param_1,newInst2,block);
@@ -3549,9 +3589,9 @@ LAB_000fabd8:
     else {
       ((int (*)())Program__applySourceTokenToOperand)(param_1,param_8,puVar5,operandIndex,inst);
     }
-    uVar2 = Program__registerFileOfIlType(param_1,uVar8);
+    registerFile = Program__registerFileOfIlType(param_1,uVar8);
     operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-    *(undefined4 *)(operandRecord + 0xc) = uVar2;
+    *(undefined4 *)(operandRecord + 0xc) = registerFile;
     *(int *)(operandRecord + 8) = iVar7;
     return 0;
   }
@@ -3560,9 +3600,9 @@ LAB_000fabd8:
   puVar10 = *(uint **)(((uVar11 >> 0x17 & 7) * 5 + (uVar11 >> 0x1d)) * 4 + *(int *)(param_4 + 100));
   iVar7 = (int)(short)*puVar10;
   uVar8 = *puVar10 >> 0x10 & 0x3f;
-  uVar2 = Program__registerFileOfIlType(param_1,uVar8);
+  registerFile = Program__registerFileOfIlType(param_1,uVar8);
   operandRecord = IRInst__getOperandRecord(inst,0);
-  *(undefined4 *)(operandRecord + 0xc) = uVar2;
+  *(undefined4 *)(operandRecord + 0xc) = registerFile;
   uVar2 = 0;
   *(int *)(operandRecord + 8) = iVar7;
   iVar3 = inst;
@@ -3572,30 +3612,30 @@ LAB_000fabd8:
     operandRecord4 = IRInst__getOperandRecord(inst,0);
     loopIndex = 0;
     iVar3 = 0;
-    iVar1 = 0;
+    loopCounter = 0;
     local_48 = *(undefined4 *)(operandRecord4 + 0x10);
-    iVar4 = 4;
+    loopCounterB = 4;
     do {
-      if (*(char *)((int)&local_48 + iVar1) == '\0') {
+      if (*(char *)((int)&local_48 + loopCounter) == '\0') {
         loopIndex = loopIndex + 1;
-        iVar3 = iVar1;
+        iVar3 = loopCounter;
       }
-      iVar1 = iVar1 + 1;
-      iVar4 = iVar4 + -1;
-    } while (iVar4 != 0);
+      loopCounter = loopCounter + 1;
+      loopCounterB = loopCounterB + -1;
+    } while (loopCounterB != 0);
     if (1 < loopIndex) {
       local_44 = DAT_001aa9e0;
       *(undefined1 *)((int)&local_44 + iVar3) = 0;
       uVar9 = *(undefined4 *)(iVar3 * 4 + 0x1dc7bc);
       iVar3 = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-      uVar2 = Program__registerFileOfIlType(param_1,uVar8);
+      registerFile = Program__registerFileOfIlType(param_1,uVar8);
       operandRecord3 = IRInst__getOperandRecord(iVar3,0);
-      *(undefined4 *)(operandRecord3 + 0xc) = uVar2;
+      *(undefined4 *)(operandRecord3 + 0xc) = registerFile;
       *(int *)(operandRecord3 + 8) = iVar7;
       *(undefined4 *)(iVar3 + 0x9c) = local_48;
-      uVar2 = Program__registerFileOfIlType(param_1,uVar8);
+      registerFile = Program__registerFileOfIlType(param_1,uVar8);
       operandRecord3 = IRInst__getOperandRecord(iVar3,1);
-      *(undefined4 *)(operandRecord3 + 0xc) = uVar2;
+      *(undefined4 *)(operandRecord3 + 0xc) = registerFile;
       *(int *)(operandRecord3 + 8) = iVar7;
       operandRecord3 = IRInst__getOperandRecord(iVar3,1);
       *(undefined4 *)(operandRecord3 + 0x10) = uVar9;
@@ -3614,18 +3654,18 @@ LAB_000fab1c:
     return iVar3;
   }
   newInst = IRInst__create(0x31,*(undefined4 *)(param_1 + 8));
-  iVar6 = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
-  *(int *)(*(int *)(param_1 + 8) + 0x3ac) = iVar6;
-  uVar2 = Program__registerFileOfIlType(param_1,uVar8);
+  newTempIndex = *(int *)(*(int *)(param_1 + 8) + 0x3ac) + -1;
+  *(int *)(*(int *)(param_1 + 8) + 0x3ac) = newTempIndex;
+  registerFile = Program__registerFileOfIlType(param_1,uVar8);
   operandRecord4 = IRInst__getOperandRecord(newInst,0);
-  *(undefined4 *)(operandRecord4 + 0xc) = uVar2;
+  *(undefined4 *)(operandRecord4 + 0xc) = registerFile;
   *(int *)(operandRecord4 + 8) = iVar7;
   operandRecord2 = IRInst__getOperandRecord(newInst,1);
   *(undefined4 *)(operandRecord2 + 0xc) = 0;
-  *(int *)(operandRecord2 + 8) = iVar6;
+  *(int *)(operandRecord2 + 8) = newTempIndex;
   operandRecord2 = IRInst__getOperandRecord(inst,0);
   *(undefined4 *)(operandRecord2 + 0xc) = 0;
-  *(int *)(operandRecord2 + 8) = iVar6;
+  *(int *)(operandRecord2 + 8) = newTempIndex;
   operandRecord2 = IRInst__getOperandRecord(inst,0);
   *(undefined4 *)(newInst + 0x9c) = *(undefined4 *)(operandRecord2 + 0x10);
   *(int *)(inst + 0x9c) = iVar1;
@@ -3645,14 +3685,14 @@ int FUN_000fadc4(param_1, inst, param_3, param_4, vector, param_6, param_7)
   undefined4 arena;
   int operandRecord2;
   undefined1 uVar1;
-  int iVar2;
+  int loopCounter;
   undefined4 *allocation;
   int operandRecord;
   int *piVar5;
   undefined4 *puVar6;
   undefined4 uVar7;
   uint uVar8;
-  int iVar9;
+  int loopCounterB;
   undefined4 local_48 [8];
   
   arena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x374);
@@ -3664,17 +3704,17 @@ int FUN_000fadc4(param_1, inst, param_3, param_4, vector, param_6, param_7)
   local_48[0] = DAT_001aa9a8;
   ((int (*)())FUN_000fa958)(param_1,5,1,param_7,inst,1,DAT_001aa9dc,local_48,param_6,1,puVar6);
   operandRecord = IRInst__getOperandRecord(inst,1);
-  iVar2 = 0;
-  iVar9 = 4;
+  loopCounter = 0;
+  loopCounterB = 4;
   (*(unsigned char *)((unsigned char *)&(local_48[0]) + 0)) = (undefined1)((uint)*(undefined4 *)(operandRecord + 0x10) >> 0x18);
   uVar1 = (*(unsigned char *)((unsigned char *)&(local_48[0]) + 0));
   local_48[0] = *(undefined4 *)(operandRecord + 0x10);
   do {
-    *(undefined1 *)((int)local_48 + iVar2) = uVar1;
+    *(undefined1 *)((int)local_48 + loopCounter) = uVar1;
     uVar7 = local_48[0];
-    iVar2 = iVar2 + 1;
-    iVar9 = iVar9 + -1;
-  } while (iVar9 != 0);
+    loopCounter = loopCounter + 1;
+    loopCounterB = loopCounterB + -1;
+  } while (loopCounterB != 0);
   operandRecord2 = IRInst__getOperandRecord(inst,1);
   *(undefined4 *)(operandRecord2 + 0x10) = uVar7;
   FUN_000ed63c(param_1,inst);
@@ -3711,6 +3751,9 @@ int FUN_000fafa4(program, param_2, param_3, param_4, param_5)
   int param_4;
   undefined4 *param_5;
 {
+  uint loopCounter;
+  undefined4 registerFile;
+  int virtualRegister;
   uint uVar1;
   byte bVar2;
   undefined4 uVar3;
@@ -3722,9 +3765,9 @@ int FUN_000fafa4(program, param_2, param_3, param_4, param_5)
   uint uVar9;
   
   uVar8 = *(undefined4 *)(program + 0x3ac);
-  uVar3 = Program__registerFileOfIlType(program,param_2);
-  iVar4 = FUN_00127608(uVar8,uVar3,param_3,0);
-  piVar5 = *(int **)(iVar4 + 0x18);
+  registerFile = Program__registerFileOfIlType(program,param_2);
+  virtualRegister = FUN_00127608(uVar8,registerFile,param_3,0);
+  piVar5 = *(int **)(virtualRegister + 0x18);
   if (*piVar5 == 0) {
     piVar5 = (int *)Vector__elementRefGrow(piVar5,0);
   }
@@ -3751,14 +3794,14 @@ int FUN_000fafa4(program, param_2, param_3, param_4, param_5)
   *(int *)(iVar4 + 0x1c) = *(int *)(iVar4 + 0x1c) + 1;
   if (param_2 == 1) {
     if (0 < param_4) {
-      uVar9 = 0;
+      loopCounter = 0;
       iVar4 = iVar6;
       do {
-        uVar3 = param_5[uVar9];
+        uVar3 = param_5[loopCounter];
         *(undefined4 *)(iVar4 + 0x1c) = 2;
         *(undefined4 *)(iVar4 + 0x20) = uVar3;
-        uVar1 = uVar9 & 0x3f;
-        uVar9 = uVar9 + 1;
+        uVar1 = loopCounter & 0x3f;
+        loopCounter = loopCounter + 1;
         iVar4 = iVar4 + 0x18;
         *(byte *)(iVar6 + 0x15c) = (byte)(1 << uVar1) | *(byte *)(iVar6 + 0x15c);
         param_4 = param_4 + -1;
@@ -3771,14 +3814,14 @@ int FUN_000fafa4(program, param_2, param_3, param_4, param_5)
         bVar2 = *(byte *)(iVar6 + 0x15c);
       }
       else {
-        uVar9 = 0;
+        loopCounter = 0;
         iVar4 = iVar6;
         do {
           uVar3 = *param_5;
           *(undefined4 *)(iVar4 + 0x1c) = 4;
           *(undefined4 *)(iVar4 + 0x20) = uVar3;
-          uVar1 = uVar9 & 0x3f;
-          uVar9 = uVar9 + 1;
+          uVar1 = loopCounter & 0x3f;
+          loopCounter = loopCounter + 1;
           iVar4 = iVar4 + 0x18;
           bVar2 = (byte)(1 << uVar1) | *(byte *)(iVar6 + 0x15c);
           *(byte *)(iVar6 + 0x15c) = bVar2;
@@ -3797,14 +3840,14 @@ int FUN_000fafa4(program, param_2, param_3, param_4, param_5)
   }
   else if (param_2 == 2) {
     if (0 < param_4) {
-      uVar9 = 0;
+      loopCounter = 0;
       iVar4 = iVar6;
       do {
-        uVar3 = param_5[uVar9];
+        uVar3 = param_5[loopCounter];
         *(undefined4 *)(iVar4 + 0x1c) = 3;
         *(undefined4 *)(iVar4 + 0x20) = uVar3;
-        uVar1 = uVar9 & 0x3f;
-        uVar9 = uVar9 + 1;
+        uVar1 = loopCounter & 0x3f;
+        loopCounter = loopCounter + 1;
         iVar4 = iVar4 + 0x18;
         *(byte *)(iVar6 + 0x15c) = (byte)(1 << uVar1) | *(byte *)(iVar6 + 0x15c);
         param_4 = param_4 + -1;
@@ -3812,14 +3855,14 @@ int FUN_000fafa4(program, param_2, param_3, param_4, param_5)
     }
   }
   else if ((param_2 == 0x1d) && (0 < param_4)) {
-    uVar9 = 0;
+    loopCounter = 0;
     iVar4 = iVar6;
     do {
-      uVar3 = param_5[uVar9];
+      uVar3 = param_5[loopCounter];
       *(undefined4 *)(iVar4 + 0x1c) = 3;
       *(undefined4 *)(iVar4 + 0x20) = uVar3;
-      uVar1 = uVar9 & 0x3f;
-      uVar9 = uVar9 + 1;
+      uVar1 = loopCounter & 0x3f;
+      loopCounter = loopCounter + 1;
       iVar4 = iVar4 + 0x18;
       *(byte *)(iVar6 + 0x15c) = (byte)(1 << uVar1) | *(byte *)(iVar6 + 0x15c);
       param_4 = param_4 + -1;
@@ -3894,6 +3937,36 @@ int FUN_000fb3d4(program, list, tokenWords, descriptor, param_5, argR8, movByReg
   dword *argR8;
   int movByRegisterPtr;
 {
+  int loopCounter;
+  undefined4 operandSelectWord2;
+  undefined4 constantSelectWord2;
+  undefined4 instWord0xc8;
+  undefined4 registerFile2;
+  uint newTempIndex2;
+  uint movTableCount;
+  uint swizzleWord;
+  uint stackTopIndex;
+  undefined4 operandSelectWord3;
+  undefined4 registerFile3;
+  undefined4 registerMap;
+  int *hwDescription;
+  dword tokenWord;
+  int virtualRegisterB;
+  int newTempIndex;
+  int createdVReg;
+  undefined4 constantSelectWord;
+  undefined4 packedLaneSource0;
+  undefined4 vectorData;
+  undefined4 arenaB;
+  undefined4 literalSelectWord;
+  undefined4 hwInputRegister;
+  undefined4 operandSelectWord;
+  undefined4 instWord0xc4;
+  undefined4 registerFile;
+  undefined4 opcodeNumber;
+  undefined4 virtualRegister;
+  undefined4 modifierSelectWord;
+  undefined4 arenaA;
   undefined4 psnPackedLaneSourceResult;
   undefined4 psnPackedLaneSourceResult2;
   void *newInst;
@@ -3909,43 +3982,43 @@ int FUN_000fb3d4(program, list, tokenWords, descriptor, param_5, argR8, movByReg
   dword dVar4;
   undefined *puVar5;
   int iVar6;
-  int *piVar7;
-  undefined4 arena;
+  int *stackTopEntry;
+  undefined4 r4Sink;
   undefined4 *allocation;
   void *inst;
   int operandRecord;
   undefined4 uVar12;
   undefined4 psnPackedLaneSourceResult3;
-  undefined4 uVar14;
+  undefined4 registerFile4;
   void *pvVar15;
   void *inst2;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  undefined4 extraout_r4_01;
-  undefined4 extraout_r4_02;
-  undefined4 extraout_r4_03;
-  undefined4 extraout_r4_04;
-  undefined4 extraout_r4_05;
-  undefined4 extraout_r4_06;
-  undefined4 extraout_r4_07;
-  undefined4 extraout_r4_08;
-  undefined4 extraout_r4_09;
-  undefined4 extraout_r4_10;
-  undefined4 extraout_r4_11;
-  undefined4 extraout_r4_12;
-  undefined4 extraout_r4_13;
-  undefined4 extraout_r4_14;
-  undefined4 extraout_r4_15;
-  undefined4 extraout_r4_16;
-  undefined4 extraout_r4_17;
+  undefined4 callResidualR4_0;
+  undefined4 callResidualR4_0B;
+  undefined4 callResidualR4_1;
+  undefined4 callResidualR4_2;
+  undefined4 callResidualR4_3;
+  undefined4 callResidualR4_4;
+  undefined4 callResidualR4_5;
+  undefined4 callResidualR4_6;
+  undefined4 callResidualR4_7;
+  undefined4 callResidualR4_8;
+  undefined4 callResidualR4_9;
+  undefined4 callResidualR4_10;
+  undefined4 callResidualR4_11;
+  undefined4 callResidualR4_12;
+  undefined4 callResidualR4_13;
+  undefined4 callResidualR4_14;
+  undefined4 callResidualR4_15;
+  undefined4 callResidualR4_16;
+  undefined4 callResidualR4_17;
   dword *pdVar17;
   dword *pdVar18;
   uint uVar19;
   int iVar20;
   undefined1 *puVar21;
-  uint uVar22;
-  uint uVar23;
-  uint uVar24;
+  uint descriptorWord;
+  uint hasExtensionWord;
+  uint registerType;
   dword *pdVar25;
   dword *pdVar26;
   dword *pdVar27;
@@ -3954,12 +4027,12 @@ int FUN_000fb3d4(program, list, tokenWords, descriptor, param_5, argR8, movByReg
   dword *pdVar30;
   dword *pdVar31;
   dword *pdVar32;
-  undefined4 *puVar33;
-  uint uVar34;
+  undefined4 *newInstObj;
+  uint registerType2;
   undefined4 uVar35;
-  code *pcVar36;
-  uint *puVar37;
-  int iVar38;
+  code *hwVirtualSlot88;
+  uint *movTableVector;
+  int newTempIndexB;
   double fparam_1;
   double fparam_2;
   double fparam_3;
@@ -3971,91 +4044,91 @@ int FUN_000fb3d4(program, list, tokenWords, descriptor, param_5, argR8, movByReg
   undefined4 local_84;
   undefined4 local_80;
   
-  uVar22 = *descriptor;
-  uVar23 = uVar22 >> 0x16 & 1;
+  descriptorWord = *descriptor;
+  hasExtensionWord = descriptorWord >> 0x16 & 1;
   iVar20 = *(int *)(program + 8);
-  if ((((uVar22 & 0x3f0000) == 0x100000) && (iVar20 != 0)) &&
+  if ((((descriptorWord & 0x3f0000) == 0x100000) && (iVar20 != 0)) &&
      ((*(uint *)(*(int *)(iVar20 + 0x30c) + 8) & 0x80) != 0)) {
     pdVar25 = (dword *)((int)((unsigned char *)0xc) + 3);
   }
   else {
     pdVar25 = (dword *)(int)(short)*descriptor;
   }
-  uVar24 = uVar22 >> 0x10 & 0x3f;
-  arena = list;
+  registerType = descriptorWord >> 0x10 & 0x3f;
+  r4Sink = list;
   pdVar17 = tokenWords;
   pdVar18 = descriptor;
   pdVar32 = argR8;
   pdVar31 = pdVar25;
-  if ((uVar22 & 0x1800000) == 0x800000) {
+  if ((descriptorWord & 0x1800000) == 0x800000) {
     iVar6 = 8;
-    if (uVar23 == 0) {
+    if (hasExtensionWord == 0) {
       iVar6 = 4;
     }
-    uVar22 = *(uint *)(iVar6 + (int)descriptor);
+    descriptorWord = *(uint *)(iVar6 + (int)descriptor);
     uVar1 = *(ushort *)((int)descriptor + iVar6 + 2);
-    if ((uVar22 & 0x10000) == 0) {
+    if ((descriptorWord & 0x10000) == 0) {
       pdVar31 = (dword *)(*(int *)(iVar20 + 0x3b4) + 1);
       *(dword **)(iVar20 + 0x3b4) = pdVar31;
-      iVar20 = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x26,pdVar31,0);
-      *(dword **)(iVar20 + 0x30) = pdVar25;
-      arena = *(undefined4 *)(*(int *)(program + 8) + 0x374);
-      allocation = (undefined4 *)Arena__alloc(arena,0x168);
-      *allocation = arena;
-      puVar33 = allocation + 1;
-      IRProjection__ctor_109e28(puVar33,0x84,*(undefined4 *)(program + 8));
-      IRInst__setOperandRef(puVar33,0,iVar20);
+      virtualRegisterB = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x26,pdVar31,0);
+      *(dword **)(virtualRegisterB + 0x30) = pdVar25;
+      arenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+      allocation = (undefined4 *)Arena__alloc(arenaA,0x168);
+      *allocation = arenaA;
+      newInstObj = allocation + 1;
+      IRProjection__ctor_109e28(newInstObj,0x84,*(undefined4 *)(program + 8));
+      IRInst__setOperandRef(newInstObj,0,virtualRegisterB);
       pdVar18 = (dword *)0x0;
-      uVar24 = 0x22;
+      registerType = 0x22;
       pdVar25 = (dword *)FUN_00127608(*(undefined4 *)(program + 0x3ac),0x25,(uint)uVar1,0);
       pdVar17 = pdVar25;
-      IRInst__setOperandRef(puVar33,1,pdVar25);
-      arena = *(undefined4 *)(PTR_DAT_001e8b8c + (uVar22 >> 0x11 & 7) * 4);
-      operandRecord2 = IRInst__getOperandRecord(puVar33,1);
-      *(undefined4 *)(operandRecord2 + 0x10) = arena;
+      IRInst__setOperandRef(newInstObj,1,pdVar25);
+      modifierSelectWord = *(undefined4 *)(PTR_DAT_001e8b8c + (descriptorWord >> 0x11 & 7) * 4);
+      operandRecord2 = IRInst__getOperandRecord(newInstObj,1);
+      *(undefined4 *)(operandRecord2 + 0x10) = modifierSelectWord;
       allocation[0x4c] = pdVar25[0xc];
-      DList__pushBack(list,puVar33);
-      arena = extraout_r4_01;
+      DList__pushBack(list,newInstObj);
+      r4Sink = callResidualR4_1;
     }
     else {
-      piVar7 = (int *)0x0;
-      uVar22 = param_5[1] - 1;
-      if (uVar22 < param_5[1]) {
-        piVar7 = (int *)(uVar22 * 4 + param_5[2]);
+      stackTopEntry = (int *)0x0;
+      stackTopIndex = param_5[1] - 1;
+      if (stackTopIndex < param_5[1]) {
+        stackTopEntry = (int *)(stackTopIndex * 4 + param_5[2]);
       }
-      iVar20 = *piVar7;
+      iVar20 = *stackTopEntry;
       *(undefined4 *)(iVar20 + 0x140) = 1;
-      arena = FUN_000e7d5c(iVar20);
-      arena = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x27,arena,0);
-      if (uVar24 == 1) {
+      virtualRegister = FUN_000e7d5c(iVar20);
+      virtualRegister = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x27,virtualRegister,0);
+      if (registerType == 1) {
         pdVar18 = (dword *)0x0;
         pdVar31 = (dword *)(*(int *)(*(int *)(program + 8) + 0x3b8) + 1);
         *(dword **)(*(int *)(program + 8) + 0x3b8) = pdVar31;
-        iVar6 = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x28,pdVar31,0);
-        *(dword **)(iVar6 + 0x30) = pdVar25;
+        createdVReg = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x28,pdVar31,0);
+        *(dword **)(createdVReg + 0x30) = pdVar25;
         arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
         *allocation = arenaAt374;
         pdVar17 = allocation + 1;
         IRInst__ctor_10502c(pdVar17,0x82,*(undefined4 *)(program + 8));
-        IRInst__setOperandRef(pdVar17,0,iVar6);
-        IRInst__setOperandRef(pdVar17,1,arena);
-        uVar24 = 0x23;
+        IRInst__setOperandRef(pdVar17,0,createdVReg);
+        IRInst__setOperandRef(pdVar17,1,virtualRegister);
+        registerType = 0x23;
         Block__appendInst(iVar20,pdVar17);
-        FUN_0012306c(iVar6,pdVar17);
-        VReg__addUse(arena,1,pdVar17);
-        arena = extraout_r4;
+        FUN_0012306c(createdVReg,pdVar17);
+        VReg__addUse(virtualRegister,1,pdVar17);
+        r4Sink = callResidualR4_0;
       }
       else {
         if ((*(uint *)(program + 0x30) & 1) == 0) {
           if ((*(uint *)(program + 0x30) & 0x2000) != 0) {
             if (*(int *)(program + 0x3e4) == 0) {
               *(undefined4 *)(program + 0x3e4) = 1;
-              uVar35 = Program__registerFileOfIlType(program,uVar24);
-              *(undefined4 *)(program + 0x3f4) = uVar35;
+              registerFile2 = Program__registerFileOfIlType(program,registerType);
+              *(undefined4 *)(program + 0x3f4) = registerFile2;
             }
             else {
-              Program__registerFileOfIlType(program,uVar24);
+              Program__registerFileOfIlType(program,registerType);
             }
           }
         }
@@ -4064,139 +4137,139 @@ int FUN_000fb3d4(program, list, tokenWords, descriptor, param_5, argR8, movByReg
         }
         pdVar31 = (dword *)(*(int *)(*(int *)(program + 8) + 0x3bc) + 1);
         *(dword **)(*(int *)(program + 8) + 0x3bc) = pdVar31;
-        uVar12 = *(undefined4 *)(program + 0x3ac);
-        uVar35 = Program__registerFileOfIlType(program,0x24);
+        registerMap = *(undefined4 *)(program + 0x3ac);
+        registerFile2 = Program__registerFileOfIlType(program,0x24);
         pdVar18 = (dword *)0x0;
-        iVar6 = FUN_00127608(uVar12,uVar35,pdVar31,0);
-        *(dword **)(iVar6 + 0x30) = pdVar25;
+        createdVReg = FUN_00127608(registerMap,registerFile2,pdVar31,0);
+        *(dword **)(createdVReg + 0x30) = pdVar25;
         arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
         *allocation = arenaAt374;
         pdVar17 = allocation + 1;
         IRInst__ctor_10502c(pdVar17,0x82,*(undefined4 *)(program + 8));
-        IRInst__setOperandRef(pdVar17,0,iVar6);
-        IRInst__setOperandRef(pdVar17,1,arena);
-        uVar24 = 0x24;
+        IRInst__setOperandRef(pdVar17,0,createdVReg);
+        IRInst__setOperandRef(pdVar17,1,virtualRegister);
+        registerType = 0x24;
         Block__appendInst(iVar20,pdVar17);
-        FUN_0012306c(iVar6,pdVar17);
-        VReg__addUse(arena,1,pdVar17);
-        arena = extraout_r4_00;
+        FUN_0012306c(createdVReg,pdVar17);
+        VReg__addUse(virtualRegister,1,pdVar17);
+        r4Sink = callResidualR4_0B;
       }
     }
-    uVar22 = *descriptor & 0xfe7fffff;
-    *descriptor = uVar22;
+    descriptorWord = *descriptor & 0xfe7fffff;
+    *descriptor = descriptorWord;
   }
-  if (((uVar22 & 0x3f0000) == 0x1c0000) &&
+  if (((descriptorWord & 0x3f0000) == 0x1c0000) &&
      ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 8) == 0)) {
-    *descriptor = uVar22 & 0xffc0ffff | 0x10000;
+    *descriptor = descriptorWord & 0xffc0ffff | 0x10000;
     pdVar25 = descriptor;
-    if ((uVar22 & 0x400000) != 0) {
+    if ((descriptorWord & 0x400000) != 0) {
       pdVar25 = descriptor + 1;
     }
     bVar3 = false;
     *(short *)((int)descriptor + 2) = (short)pdVar25[1];
-    uVar22 = *descriptor & 0xfbffffff;
-    *descriptor = uVar22;
+    descriptorWord = *descriptor & 0xfbffffff;
+    *descriptor = descriptorWord;
   }
   else {
     bVar3 = true;
   }
-  if ((uVar24 == 0x20) && (bVar2 = true, (uVar22 & 0x1800000) == 0x1000000)) {
+  if ((registerType == 0x20) && (bVar2 = true, (descriptorWord & 0x1800000) == 0x1000000)) {
 LAB_000fb800:
     pdVar25 = (dword *)(*(int *)(*(int *)(program + 8) + 0x3ac) + -1);
     *(dword **)(*(int *)(program + 8) + 0x3ac) = pdVar25;
-    uVar22 = *descriptor;
-    uVar34 = uVar22 >> 0x10 & 0x3f;
+    descriptorWord = *descriptor;
+    registerType2 = descriptorWord >> 0x10 & 0x3f;
     if (!bVar2) {
-      arena = 0xfe;
-      if (uVar34 != 0x1c) {
-        arena = 0xfb;
+      opcodeNumber = 0xfe;
+      if (registerType2 != 0x1c) {
+        opcodeNumber = 0xfb;
       }
     }
     else {
-      arena = 0x10b;
+      opcodeNumber = 0x10b;
     }
-    iVar20 = 1;
+    loopCounter = 1;
     pdVar18 = pdVar31;
-    if ((int)uVar22 < 0) {
-      iVar20 = 2;
+    if ((int)descriptorWord < 0) {
+      loopCounter = 2;
       pdVar18 = (dword *)((uint)pdVar31 | descriptor[1] << 0x10);
     }
-    if ((uVar22 & 0x400000) != 0) {
-      iVar20 = iVar20 + 1;
+    if ((descriptorWord & 0x400000) != 0) {
+      loopCounter = loopCounter + 1;
     }
-    if ((uVar22 & 0x1800000) == 0x1000000) {
-      pdVar29 = descriptor + iVar20;
+    if ((descriptorWord & 0x1800000) == 0x1000000) {
+      pdVar29 = descriptor + loopCounter;
       if (!bVar2) {
         arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
         allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
         *allocation = arenaAt374;
         allocation = allocation + 1;
-        IRMemLoad__ctor_107980(allocation,arena,*(undefined4 *)(program + 8));
-        arena = Program__registerFileOfIlType(program,uVar34);
+        IRMemLoad__ctor_107980(allocation,opcodeNumber,*(undefined4 *)(program + 8));
+        registerFile = Program__registerFileOfIlType(program,registerType2);
         pdVar17 = (dword *)((int)((unsigned char *)0x0) + 2);
         operandRecord3 = IRInst__getOperandRecord(allocation,1);
-        *(undefined4 *)(operandRecord3 + 0xc) = arena;
+        *(undefined4 *)(operandRecord3 + 0xc) = registerFile;
         *(dword **)(operandRecord3 + 8) = pdVar18;
       }
       else {
         pdVar17 = (dword *)((int)((unsigned char *)0x0) + 1);
-        allocation = IRInst__create(arena,*(undefined4 *)(program + 8));
+        allocation = IRInst__create(opcodeNumber,*(undefined4 *)(program + 8));
         allocation[0x27] = 0;
         allocation[0x50] = 0x10203;
         allocation[0x21] = 2;
-        arena = Program__registerFileOfIlType(program,uVar34);
+        registerFile = Program__registerFileOfIlType(program,registerType2);
         operandRecord3 = IRInst__getOperandRecord(allocation,2);
-        *(undefined4 *)(operandRecord3 + 0xc) = arena;
+        *(undefined4 *)(operandRecord3 + 0xc) = registerFile;
         *(undefined4 *)(operandRecord3 + 8) = 0xffffffff;
       }
-      arena = Program__registerFileOfIlType(program,4);
+      registerFile = Program__registerFileOfIlType(program,4);
       operandRecord3 = IRInst__getOperandRecord(allocation,0);
-      *(undefined4 *)(operandRecord3 + 0xc) = arena;
+      *(undefined4 *)(operandRecord3 + 0xc) = registerFile;
       *(dword **)(operandRecord3 + 8) = pdVar25;
       if ((*descriptor & 0x4000000) == 0) {
-        dVar4 = *pdVar29;
-        arena = Program__registerFileOfIlType(program,*pdVar29 >> 0x10 & 0x3f);
+        tokenWord = *pdVar29;
+        registerFile = Program__registerFileOfIlType(program,*pdVar29 >> 0x10 & 0x3f);
         operandRecord2 = IRInst__getOperandRecord(allocation,pdVar17);
-        *(undefined4 *)(operandRecord2 + 0xc) = arena;
-        *(uint *)(operandRecord2 + 8) = (uint)GH_F2U((float)((ushort)dVar4));
+        *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
+        *(uint *)(operandRecord2 + 8) = (uint)GH_F2U((float)((ushort)tokenWord));
       }
       else {
-        pdVar32 = (dword *)descriptor[iVar20 + 2];
+        pdVar32 = (dword *)descriptor[loopCounter + 2];
         inst = IRInst__create(0xc6,*(undefined4 *)(program + 8));
-        arena = Program__registerFileOfIlType(program,4);
+        registerFile = Program__registerFileOfIlType(program,4);
         operandRecord2 = IRInst__getOperandRecord(inst,0);
-        *(undefined4 *)(operandRecord2 + 0xc) = arena;
+        *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
         *(dword **)(operandRecord2 + 8) = pdVar25;
-        dVar4 = *pdVar29;
-        arena = Program__registerFileOfIlType(program,*pdVar29 >> 0x10 & 0x3f);
+        tokenWord = *pdVar29;
+        registerFile = Program__registerFileOfIlType(program,*pdVar29 >> 0x10 & 0x3f);
         operandRecord2 = IRInst__getOperandRecord(inst,1);
-        *(undefined4 *)(operandRecord2 + 0xc) = arena;
-        *(uint *)(operandRecord2 + 8) = (uint)GH_F2U((float)((ushort)dVar4));
+        *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
+        *(uint *)(operandRecord2 + 8) = (uint)GH_F2U((float)((ushort)tokenWord));
         ((int (*)())FUN_000f7870)(inst,program,2,pdVar32,pdVar32,pdVar32,pdVar32);
         DList__pushBack(list,inst);
-        arena = Program__registerFileOfIlType(program,4);
+        registerFile = Program__registerFileOfIlType(program,4);
         operandRecord2 = IRInst__getOperandRecord(allocation,pdVar17);
-        *(undefined4 *)(operandRecord2 + 0xc) = arena;
+        *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
         *(dword **)(operandRecord2 + 8) = pdVar25;
       }
       local_98 = 0x10203;
       ((int (*)())Program__applySourceTokenToOperand)(program,&local_98,pdVar29,pdVar17,allocation);
     }
-    else if ((uVar22 & 0x1800000) == 0) {
-      pdVar32 = (dword *)descriptor[iVar20];
+    else if ((descriptorWord & 0x1800000) == 0) {
+      pdVar32 = (dword *)descriptor[loopCounter];
       arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
       allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
       *allocation = arenaAt374;
       allocation = allocation + 1;
-      IRMemLoad__ctor_107980(allocation,arena,*(undefined4 *)(program + 8));
-      arena = Program__registerFileOfIlType(program,4);
+      IRMemLoad__ctor_107980(allocation,opcodeNumber,*(undefined4 *)(program + 8));
+      registerFile = Program__registerFileOfIlType(program,4);
       operandRecord2 = IRInst__getOperandRecord(allocation,0);
-      *(undefined4 *)(operandRecord2 + 0xc) = arena;
+      *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
       *(dword **)(operandRecord2 + 8) = pdVar25;
-      arena = Program__registerFileOfIlType(program,uVar34);
+      registerFile = Program__registerFileOfIlType(program,registerType2);
       operandRecord2 = IRInst__getOperandRecord(allocation,1);
-      *(undefined4 *)(operandRecord2 + 0xc) = arena;
+      *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
       *(dword **)(operandRecord2 + 8) = pdVar18;
       ((int (*)())FUN_000f7870)(allocation,program,2,pdVar32,pdVar32,pdVar32,pdVar32);
       pdVar17 = (dword *)((int)((unsigned char *)0x0) + 1);
@@ -4209,30 +4282,30 @@ LAB_000fb800:
     local_94[0] = *(dword *)(operandRecord2 + 0x10);
     pdVar18 = local_94;
     param_5 = (dword *)0x0;
-    piVar7 = *(int **)(*(int *)(program + 8) + 0x30c);
-    iVar20 = (**(code **)(*piVar7 + 0x104))(piVar7,allocation,pdVar17,pdVar18,0);
+    hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
+    iVar20 = (**(code **)(*hwDescription + 0x104))(hwDescription,allocation,pdVar17,pdVar18,0);
     if (iVar20 == 0) {
-      iVar6 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
-      *(int *)(*(int *)(program + 8) + 0x3ac) = iVar6;
+      newTempIndex = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+      *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex;
       inst = IRInst__create(0x31,*(undefined4 *)(program + 8));
-      uVar35 = allocation[0x32];
-      arena = allocation[0x31];
+      instWord0xc8 = allocation[0x32];
+      instWord0xc4 = allocation[0x31];
       operandRecord2 = IRInst__getOperandRecord(inst,1);
-      *(undefined4 *)(operandRecord2 + 0xc) = uVar35;
-      *(undefined4 *)(operandRecord2 + 8) = arena;
-      arena = Program__registerFileOfIlType(program,4);
+      *(undefined4 *)(operandRecord2 + 0xc) = instWord0xc8;
+      *(undefined4 *)(operandRecord2 + 8) = instWord0xc4;
+      registerFile = Program__registerFileOfIlType(program,4);
       operandRecord2 = IRInst__getOperandRecord(inst,0);
-      *(undefined4 *)(operandRecord2 + 0xc) = arena;
-      *(int *)(operandRecord2 + 8) = iVar6;
+      *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
+      *(int *)(operandRecord2 + 8) = newTempIndex;
       operandRecord2 = IRInst__getOperandRecord(allocation,2);
-      arena = *(undefined4 *)(operandRecord2 + 0x10);
+      operandSelectWord = *(undefined4 *)(operandRecord2 + 0x10);
       operandRecord2 = IRInst__getOperandRecord(inst,1);
-      *(undefined4 *)(operandRecord2 + 0x10) = arena;
+      *(undefined4 *)(operandRecord2 + 0x10) = operandSelectWord;
       DList__pushBack(list,inst);
-      arena = Program__registerFileOfIlType(program,4);
+      registerFile = Program__registerFileOfIlType(program,4);
       operandRecord2 = IRInst__getOperandRecord(allocation,2);
-      *(undefined4 *)(operandRecord2 + 0xc) = arena;
-      *(int *)(operandRecord2 + 8) = iVar6;
+      *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
+      *(int *)(operandRecord2 + 8) = newTempIndex;
       operandRecord2 = IRInst__getOperandRecord(allocation,2);
       *(undefined4 *)(operandRecord2 + 0x10) = 0;
     }
@@ -4240,20 +4313,20 @@ LAB_000fb800:
     bVar3 = false;
     *descriptor = *descriptor & 0xffc0ffff | 0x40000;
     *(short *)((int)descriptor + 2) = (short)pdVar25;
-    arena = extraout_r4_02;
+    r4Sink = callResidualR4_2;
   }
   else {
-    if (((undefined4 *)(uVar22 & 0x3f0000) == (undefined4 *)0x1c0000) ||
-       ((undefined4 *)(uVar22 & 0x3f0000) == 0x001b0000)) {
+    if (((undefined4 *)(descriptorWord & 0x3f0000) == (undefined4 *)0x1c0000) ||
+       ((undefined4 *)(descriptorWord & 0x3f0000) == 0x001b0000)) {
       bVar2 = false;
       goto LAB_000fb800;
     }
     pdVar25 = (dword *)0x0;
-    if ((uVar22 & 0x2000000) != 0) {
+    if ((descriptorWord & 0x2000000) != 0) {
       pdVar25 = (dword *)(*(int *)(*(int *)(program + 8) + 0x3ac) + -1);
       *(dword **)(*(int *)(program + 8) + 0x3ac) = pdVar25;
-      uVar22 = *descriptor;
-      if ((uVar22 & 0x400000) == 0) {
+      descriptorWord = *descriptor;
+      if ((descriptorWord & 0x400000) == 0) {
         pdVar32 = (dword *)((int)((unsigned char *)0x0) + 1);
         pdVar29 = (dword *)((int)((unsigned char *)0x0) + 1);
         param_5 = (dword *)((int)((unsigned char *)0x0) + 2);
@@ -4263,11 +4336,11 @@ LAB_000fb800:
         pdVar29 = (dword *)((int)((unsigned char *)0x0) + 2);
         param_5 = (dword *)((int)((unsigned char *)0x0) + 3);
       }
-      if ((uVar22 & 0x1800000) == 0x1000000) {
+      if ((descriptorWord & 0x1800000) == 0x1000000) {
         pdVar17 = descriptor + (int)pdVar29;
         pdVar18 = descriptor + (int)param_5;
         pdVar29 = (dword *)((int)pdVar32 + 2);
-        if ((uVar22 & 0x4000000) == 0) {
+        if ((descriptorWord & 0x4000000) == 0) {
           param_5 = (dword *)((int)pdVar32 + 3);
           pdVar26 = pdVar29;
         }
@@ -4299,22 +4372,22 @@ LAB_000fb800:
         if (pdVar30 != (dword *)0x0) {
           if ((pdVar18 != (dword *)0x0) || (pdVar27 == (dword *)0x0)) goto LAB_000fc43c;
           newInst4 = IRInst__create(0xe6,*(undefined4 *)(program + 8));
-          dVar4 = *descriptor;
-          piVar7 = *(int **)(*(int *)(program + 8) + 0x30c);
-          arena = (**(code **)(*piVar7 + 0x9c))(piVar7,(short)dVar4);
-          piVar7 = *(int **)(*(int *)(program + 8) + 0x30c);
-          (**(code **)(*piVar7 + 0xa0))(&local_84,piVar7,(short)dVar4);
-          uVar35 = Program__registerFileOfIlType(program,4);
+          tokenWord = *descriptor;
+          hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
+          hwInputRegister = (**(code **)(*hwDescription + 0x9c))(hwDescription,(short)tokenWord);
+          hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
+          (**(code **)(*hwDescription + 0xa0))(&local_84,hwDescription,(short)tokenWord);
+          registerFile2 = Program__registerFileOfIlType(program,4);
           operandRecord2 = IRInst__getOperandRecord(newInst4,0);
           pdVar32 = ((unsigned char *)0x4);
-          *(undefined4 *)(operandRecord2 + 0xc) = uVar35;
+          *(undefined4 *)(operandRecord2 + 0xc) = registerFile2;
           *(dword **)(operandRecord2 + 8) = pdVar25;
           ((int (*)())FUN_000f7870)(newInst4,program,1,4,4,4,4);
-          dVar4 = *pdVar30;
-          uVar35 = Program__registerFileOfIlType(program,*pdVar30 >> 0x10 & 0x3f);
+          tokenWord = *pdVar30;
+          registerFile2 = Program__registerFileOfIlType(program,*pdVar30 >> 0x10 & 0x3f);
           operandRecord2 = IRInst__getOperandRecord(newInst4,2);
-          *(undefined4 *)(operandRecord2 + 0xc) = uVar35;
-          *(uint *)(operandRecord2 + 8) = (uint)GH_F2U((float)((ushort)dVar4));
+          *(undefined4 *)(operandRecord2 + 0xc) = registerFile2;
+          *(uint *)(operandRecord2 + 8) = (uint)GH_F2U((float)((ushort)tokenWord));
           pdVar18 = (dword *)((int)((unsigned char *)0x0) + 2);
           local_98 = 0x10203;
           param_5 = newInst4;
@@ -4322,13 +4395,13 @@ LAB_000fb800:
           DList__pushBack(list,newInst4);
           if ((pdVar28 != (dword *)0x0) && (*pdVar28 != 0)) {
             inst = IRInst__create(0xc6,*(undefined4 *)(program + 8));
-            uVar35 = Program__registerFileOfIlType(program,4);
+            registerFile2 = Program__registerFileOfIlType(program,4);
             operandRecord2 = IRInst__getOperandRecord(inst,0);
-            *(undefined4 *)(operandRecord2 + 0xc) = uVar35;
+            *(undefined4 *)(operandRecord2 + 0xc) = registerFile2;
             *(dword **)(operandRecord2 + 8) = pdVar25;
-            uVar35 = Program__registerFileOfIlType(program,4);
+            registerFile2 = Program__registerFileOfIlType(program,4);
             operandRecord2 = IRInst__getOperandRecord(inst,1);
-            *(undefined4 *)(operandRecord2 + 0xc) = uVar35;
+            *(undefined4 *)(operandRecord2 + 0xc) = registerFile2;
             pdVar30 = (dword *)((int)((unsigned char *)0x0) + 2);
             *(dword **)(operandRecord2 + 8) = pdVar25;
             pdVar18 = (dword *)(*pdVar28 << 2);
@@ -4340,151 +4413,151 @@ LAB_000fb800:
             DList__pushBack(list,inst);
           }
           inst = IRInst__create(0xc6,*(undefined4 *)(program + 8));
-          uVar35 = Program__registerFileOfIlType(program,4);
+          registerFile2 = Program__registerFileOfIlType(program,4);
           operandRecord2 = IRInst__getOperandRecord(inst,0);
-          *(undefined4 *)(operandRecord2 + 0xc) = uVar35;
+          *(undefined4 *)(operandRecord2 + 0xc) = registerFile2;
           *(dword **)(operandRecord2 + 8) = pdVar25;
-          uVar35 = Program__registerFileOfIlType(program,4);
+          registerFile2 = Program__registerFileOfIlType(program,4);
           operandRecord2 = IRInst__getOperandRecord(inst,1);
-          *(undefined4 *)(operandRecord2 + 0xc) = uVar35;
+          *(undefined4 *)(operandRecord2 + 0xc) = registerFile2;
           *(dword **)(operandRecord2 + 8) = pdVar25;
           operandRecord2 = IRInst__getOperandRecord(inst,2);
           *(undefined4 *)(operandRecord2 + 0xc) = 0x1f;
-          *(undefined4 *)(operandRecord2 + 8) = arena;
+          *(undefined4 *)(operandRecord2 + 8) = hwInputRegister;
           operandRecord2 = IRInst__getOperandRecord(inst,2);
           *(undefined4 *)(operandRecord2 + 0x10) = local_84;
           DList__pushBack(list,inst);
           inst = IRInst__create(0x68,*(undefined4 *)(program + 8));
-          arena = Program__registerFileOfIlType(program,4);
+          registerFile = Program__registerFileOfIlType(program,4);
           operandRecord2 = IRInst__getOperandRecord(inst,0);
-          *(undefined4 *)(operandRecord2 + 0xc) = arena;
+          *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
           *(dword **)(operandRecord2 + 8) = pdVar25;
           *(undefined4 *)((int)inst + 0x130) = 0;
           pdVar17 = pdVar30;
 LAB_000fc3f4:
           *(undefined4 *)((int)inst + 0x140) = 0x10203;
-          arena = Program__registerFileOfIlType(program,4);
+          registerFile = Program__registerFileOfIlType(program,4);
           operandRecord2 = IRInst__getOperandRecord(inst,1);
-          *(undefined4 *)(operandRecord2 + 0xc) = arena;
+          *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
           *(dword **)(operandRecord2 + 8) = pdVar25;
           operandRecord2 = IRInst__getOperandRecord(inst,1);
           pvVar15 = (void *)0x0;
           *(undefined4 *)(operandRecord2 + 0x10) = 0;
           goto LAB_000fc74c;
         }
-        uVar22 = (uint)*(ushort *)((int)descriptor + (int)pdVar29 * 4 + 2);
+        descriptorWord = (uint)*(ushort *)((int)descriptor + (int)pdVar29 * 4 + 2);
         pdVar29 = (dword *)(uint)(ushort)*descriptor;
         if ((*(uint *)(program + 0x30) & 0x40000) == 0) {
           pvVar15 = (void *)0x0;
           inst = IRInst__create(0x68,*(undefined4 *)(program + 8));
-          arena = Program__registerFileOfIlType(program,4);
+          registerFile = Program__registerFileOfIlType(program,4);
           operandRecord2 = IRInst__getOperandRecord(inst,0);
-          *(undefined4 *)(operandRecord2 + 0xc) = arena;
+          *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
           *(dword **)(operandRecord2 + 8) = pdVar25;
           *(undefined4 *)((int)inst + 0x140) = 0x10203;
-          *(uint *)((int)inst + 0x130) = uVar22;
-          piVar7 = *(int **)(*(int *)(program + 8) + 0x30c);
-          arena = (**(code **)(*piVar7 + 0x9c))(piVar7,pdVar29);
+          *(uint *)((int)inst + 0x130) = descriptorWord;
+          hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
+          hwInputRegister = (**(code **)(*hwDescription + 0x9c))(hwDescription,pdVar29);
           pdVar18 = *(dword **)(program + 8);
           (**(code **)(*(*(int * *)(pdVar18 + (0xc3))) + 0xa0))(&local_88);
           operandRecord2 = IRInst__getOperandRecord(inst,1);
-          *(undefined4 *)(operandRecord2 + 8) = arena;
+          *(undefined4 *)(operandRecord2 + 8) = hwInputRegister;
           *(undefined4 *)(operandRecord2 + 0xc) = 0x1f;
           operandRecord2 = IRInst__getOperandRecord(inst,1);
           *(undefined4 *)(operandRecord2 + 0x10) = local_88;
           pdVar17 = pdVar29;
-          if (uVar22 == *argR8) {
+          if (descriptorWord == *argR8) {
             pdVar17 = *(dword **)(program + 8);
             uVar35 = (**(code **)(*(*(int * *)(pdVar17 + (0xc3))) + 0xa8))((*(int * *)(pdVar17 + (0xc3))),&local_98);
             pvVar15 = IRInst__create(0x31,*(undefined4 *)(program + 8));
-            arena = Program__registerFileOfIlType(program,4);
+            registerFile = Program__registerFileOfIlType(program,4);
             operandRecord2 = IRInst__getOperandRecord(pvVar15,0);
-            *(undefined4 *)(operandRecord2 + 0xc) = arena;
+            *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
             *(dword **)(operandRecord2 + 8) = pdVar25;
             *(dword *)((int)pvVar15 + 0x9c) = argR8[1];
             operandRecord2 = IRInst__getOperandRecord(pvVar15,1);
-            arena = local_98;
+            literalSelectWord = local_98;
             *(undefined4 *)(operandRecord2 + 0xc) = 0x1f;
             *(undefined4 *)(operandRecord2 + 8) = uVar35;
             operandRecord2 = IRInst__getOperandRecord(pvVar15,1);
-            *(undefined4 *)(operandRecord2 + 0x10) = arena;
+            *(undefined4 *)(operandRecord2 + 0x10) = literalSelectWord;
           }
           goto LAB_000fc74c;
         }
         iVar20 = (int)pdVar29 * 4;
-        puVar37 = *(uint **)(iVar20 + movByRegisterPtr);
-        if (puVar37 == (uint *)0x0) {
-          arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
-          allocation = (undefined4 *)Arena__alloc(arena,0x14);
-          puVar37 = allocation + 1;
-          *allocation = arena;
+        movTableVector = *(uint **)(iVar20 + movByRegisterPtr);
+        if (movTableVector == (uint *)0x0) {
+          arenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+          allocation = (undefined4 *)Arena__alloc(arenaB,0x14);
+          movTableVector = allocation + 1;
+          *allocation = arenaB;
           allocation[1] = 2;
           allocation[2] = 0;
-          allocation[4] = arena;
-          arena = Arena__alloc(arena,8);
-          allocation[3] = arena;
-          *(uint **)(iVar20 + movByRegisterPtr) = puVar37;
-          arena = extraout_r4_03;
+          allocation[4] = arenaB;
+          vectorData = Arena__alloc(arenaB,8);
+          allocation[3] = vectorData;
+          *(uint **)(iVar20 + movByRegisterPtr) = movTableVector;
+          r4Sink = callResidualR4_3;
         }
-        if (uVar22 < *puVar37) {
-          uVar34 = puVar37[1];
-          if (uVar34 <= uVar22) {
-            pdVar17 = (dword *)((uVar22 - uVar34) * 4 + 4);
-            _memset(uVar34 * 4 + puVar37[2],0,pdVar17);
-            puVar37[1] = uVar22 + 1;
-            arena = extraout_r4_04;
+        if (descriptorWord < *movTableVector) {
+          movTableCount = movTableVector[1];
+          if (movTableCount <= descriptorWord) {
+            pdVar17 = (dword *)((descriptorWord - movTableCount) * 4 + 4);
+            _memset(movTableCount * 4 + movTableVector[2],0,pdVar17);
+            movTableVector[1] = descriptorWord + 1;
+            r4Sink = callResidualR4_4;
           }
-          uVar39 = CONCAT44(uVar22 * 4 + puVar37[2],arena);
+          uVar39 = CONCAT44(descriptorWord * 4 + movTableVector[2],r4Sink);
         }
         else {
-          uVar39 = Vector__elementRefGrow(puVar37,uVar22);
+          uVar39 = Vector__elementRefGrow(movTableVector,descriptorWord);
         }
-        arena = (undefined4)uVar39;
+        r4Sink = (undefined4)uVar39;
         if (*(int *)((ulonglong)uVar39 >> 0x20) == 0) {
           iVar6 = IRLoadVertex__new_109810(0xa4,*(undefined4 *)(program + 8));
           *(uint *)(iVar6 + 0x14) = *(uint *)(iVar6 + 0x14) & 0xffff7fff;
-          iVar38 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
-          *(int *)(*(int *)(program + 8) + 0x3ac) = iVar38;
+          newTempIndexB = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+          *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndexB;
           operandRecord = IRInst__getOperandRecord(iVar6,0);
-          *(int *)(operandRecord + 8) = iVar38;
+          *(int *)(operandRecord + 8) = newTempIndexB;
           *(undefined4 *)(operandRecord + 0xc) = 0;
           *(dword **)(iVar6 + 0x130) = pdVar29;
-          *(uint *)(iVar6 + 300) = uVar22;
+          *(uint *)(iVar6 + 300) = descriptorWord;
           pdVar17 = *(dword **)(program + 0x3a0);
           ((int (*)())Program__appendInst)(program,iVar6,pdVar17);
-          puVar37 = *(uint **)(iVar20 + movByRegisterPtr);
-          if (uVar22 < *puVar37) {
-            uVar34 = puVar37[1];
-            arena = extraout_r4_05;
-            if (uVar34 <= uVar22) {
-              pdVar17 = (dword *)((uVar22 - uVar34) * 4 + 4);
-              _memset(uVar34 * 4 + puVar37[2],0,pdVar17);
-              puVar37[1] = uVar22 + 1;
-              arena = extraout_r4_06;
+          movTableVector = *(uint **)(iVar20 + movByRegisterPtr);
+          if (descriptorWord < *movTableVector) {
+            movTableCount = movTableVector[1];
+            r4Sink = callResidualR4_5;
+            if (movTableCount <= descriptorWord) {
+              pdVar17 = (dword *)((descriptorWord - movTableCount) * 4 + 4);
+              _memset(movTableCount * 4 + movTableVector[2],0,pdVar17);
+              movTableVector[1] = descriptorWord + 1;
+              r4Sink = callResidualR4_6;
             }
-            uVar39 = CONCAT44(uVar22 * 4 + puVar37[2],arena);
+            uVar39 = CONCAT44(descriptorWord * 4 + movTableVector[2],r4Sink);
           }
           else {
-            uVar39 = Vector__elementRefGrow(puVar37,uVar22);
+            uVar39 = Vector__elementRefGrow(movTableVector,descriptorWord);
           }
-          arena = (undefined4)uVar39;
+          r4Sink = (undefined4)uVar39;
           *(int *)((ulonglong)uVar39 >> 0x20) = iVar6;
         }
-        puVar37 = *(uint **)(iVar20 + movByRegisterPtr);
-        if (uVar22 < *puVar37) {
-          uVar34 = puVar37[1];
-          if (uVar34 <= uVar22) {
-            pdVar17 = (dword *)((uVar22 - uVar34) * 4 + 4);
-            _memset(uVar34 * 4 + puVar37[2],0,pdVar17);
-            puVar37[1] = uVar22 + 1;
-            arena = extraout_r4_07;
+        movTableVector = *(uint **)(iVar20 + movByRegisterPtr);
+        if (descriptorWord < *movTableVector) {
+          movTableCount = movTableVector[1];
+          if (movTableCount <= descriptorWord) {
+            pdVar17 = (dword *)((descriptorWord - movTableCount) * 4 + 4);
+            _memset(movTableCount * 4 + movTableVector[2],0,pdVar17);
+            movTableVector[1] = descriptorWord + 1;
+            r4Sink = callResidualR4_7;
           }
-          uVar39 = CONCAT44(uVar22 * 4 + puVar37[2],arena);
+          uVar39 = CONCAT44(descriptorWord * 4 + movTableVector[2],r4Sink);
         }
         else {
-          uVar39 = Vector__elementRefGrow(puVar37,uVar22);
+          uVar39 = Vector__elementRefGrow(movTableVector,descriptorWord);
         }
-        arena = (undefined4)uVar39;
+        r4Sink = (undefined4)uVar39;
         pdVar25 = *(dword **)(*(int *)((ulonglong)uVar39 >> 0x20) + 0x94);
       }
       else {
@@ -4494,52 +4567,52 @@ LAB_000fc3f4:
           ((int (*)())FUN_000f94dc)(program,list,pdVar17,pdVar18,pdVar25,4,*(undefined4 *)(program + 0x400));
           uVar1 = *(ushort *)((int)descriptor + (int)pdVar29 * 4 + 2);
           inst = IRInst__create(0x68,*(undefined4 *)(program + 8));
-          arena = Program__registerFileOfIlType(program,4);
+          registerFile = Program__registerFileOfIlType(program,4);
           operandRecord2 = IRInst__getOperandRecord(inst,0);
-          *(undefined4 *)(operandRecord2 + 0xc) = arena;
+          *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
           *(dword **)(operandRecord2 + 8) = pdVar25;
           *(uint *)((int)inst + 0x130) = (uint)uVar1;
           goto LAB_000fc3f4;
         }
 LAB_000fc43c:
         ((int (*)())FUN_000f94dc)(program,list,pdVar17,pdVar18,pdVar25,4,*(undefined4 *)(program + 0x400));
-        uVar34 = *(int *)(*(int *)(program + 8) + 0x3ac) - 1;
-        *(uint *)(*(int *)(program + 8) + 0x3ac) = uVar34;
-        uVar22 = (uint)(ushort)*pdVar30;
+        newTempIndex2 = *(int *)(*(int *)(program + 8) + 0x3ac) - 1;
+        *(uint *)(*(int *)(program + 8) + 0x3ac) = newTempIndex2;
+        swizzleWord = (uint)(ushort)*pdVar30;
         if (pdVar28 != (dword *)0x0) {
           inst = IRInst__create(0xc6,*(undefined4 *)(program + 8));
-          arena = Program__registerFileOfIlType(program,4);
+          registerFile = Program__registerFileOfIlType(program,4);
           operandRecord2 = IRInst__getOperandRecord(inst,0);
-          *(undefined4 *)(operandRecord2 + 0xc) = arena;
+          *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
           *(undefined4 *)((int)inst + 0x9c) = 0x10101;
-          *(uint *)(operandRecord2 + 8) = uVar34;
+          *(uint *)(operandRecord2 + 8) = newTempIndex2;
           uVar19 = *pdVar28;
           ((int (*)())FUN_000f7870)(inst,program,1,uVar19,uVar19,uVar19,uVar19);
-          arena = Program__registerFileOfIlType(program,*pdVar30 >> 0x10 & 0x3f);
+          registerFile = Program__registerFileOfIlType(program,*pdVar30 >> 0x10 & 0x3f);
           operandRecord2 = IRInst__getOperandRecord(inst,2);
-          *(undefined4 *)(operandRecord2 + 0xc) = arena;
-          *(uint *)(operandRecord2 + 8) = uVar22;
+          *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
+          *(uint *)(operandRecord2 + 8) = swizzleWord;
           local_94[0] = 0x10203;
           ((int (*)())Program__applySourceTokenToOperand)(program,local_94,pdVar30,2,inst);
           DList__pushBack(list,inst);
           *pdVar30 = *pdVar30 & 0xffc0ffff | 0x40000;
-          uVar22 = uVar34;
+          swizzleWord = newTempIndex2;
         }
         newInst2 = IRInst__create(0xe6,*(undefined4 *)(program + 8));
-        arena = Program__registerFileOfIlType(program,4);
+        registerFile = Program__registerFileOfIlType(program,4);
         operandRecord2 = IRInst__getOperandRecord(newInst2,0);
-        *(undefined4 *)(operandRecord2 + 0xc) = arena;
+        *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
         pdVar17 = (dword *)((int)((unsigned char *)0x0) + 1);
         newInst2[0x27] = 0x10101;
         pdVar18 = ((unsigned char *)0x4);
         param_5 = ((unsigned char *)0x4);
         pdVar32 = ((unsigned char *)0x4);
-        *(uint *)(operandRecord2 + 8) = uVar34;
+        *(uint *)(operandRecord2 + 8) = newTempIndex2;
         ((int (*)())FUN_000f7870)(newInst2,program,1,4,4,4,4);
-        arena = Program__registerFileOfIlType(program,*pdVar30 >> 0x10 & 0x3f);
+        registerFile = Program__registerFileOfIlType(program,*pdVar30 >> 0x10 & 0x3f);
         operandRecord2 = IRInst__getOperandRecord(newInst2,2);
-        *(undefined4 *)(operandRecord2 + 0xc) = arena;
-        *(uint *)(operandRecord2 + 8) = uVar22;
+        *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
+        *(uint *)(operandRecord2 + 8) = swizzleWord;
         local_98 = 0x10203;
         if (pdVar28 == (dword *)0x0) {
           pdVar18 = (dword *)((int)((unsigned char *)0x0) + 2);
@@ -4554,18 +4627,18 @@ LAB_000fc43c:
         DList__pushBack(list,newInst2);
         inst = IRInst__create(0xc6,*(undefined4 *)(program + 8));
         *(undefined4 *)((int)inst + 0x9c) = 0x10101;
-        arena = Program__registerFileOfIlType(program,4);
+        registerFile = Program__registerFileOfIlType(program,4);
         operandRecord2 = IRInst__getOperandRecord(inst,0);
-        *(undefined4 *)(operandRecord2 + 0xc) = arena;
+        *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
         *(dword **)(operandRecord2 + 8) = pdVar25;
-        arena = Program__registerFileOfIlType(program,4);
+        registerFile = Program__registerFileOfIlType(program,4);
         operandRecord2 = IRInst__getOperandRecord(inst,1);
-        *(undefined4 *)(operandRecord2 + 0xc) = arena;
+        *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
         *(dword **)(operandRecord2 + 8) = pdVar25;
-        arena = Program__registerFileOfIlType(program,4);
+        registerFile = Program__registerFileOfIlType(program,4);
         operandRecord2 = IRInst__getOperandRecord(inst,2);
-        *(undefined4 *)(operandRecord2 + 0xc) = arena;
-        *(uint *)(operandRecord2 + 8) = uVar34;
+        *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
+        *(uint *)(operandRecord2 + 8) = newTempIndex2;
         operandRecord2 = IRInst__getOperandRecord(inst,1);
         pvVar15 = (void *)0x0;
         *(undefined4 *)(operandRecord2 + 0x10) = 0;
@@ -4573,24 +4646,24 @@ LAB_000fc43c:
         *(undefined4 *)(operandRecord2 + 0x10) = 0;
         DList__pushBack(list,inst);
         inst = IRInst__create(0x68,*(undefined4 *)(program + 8));
-        arena = Program__registerFileOfIlType(program,4);
+        registerFile = Program__registerFileOfIlType(program,4);
         operandRecord2 = IRInst__getOperandRecord(inst,0);
-        *(undefined4 *)(operandRecord2 + 0xc) = arena;
+        *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
         *(dword **)(operandRecord2 + 8) = pdVar25;
         *(undefined4 *)((int)inst + 0x130) = 0;
         *(undefined4 *)((int)inst + 0x140) = 0x10203;
-        arena = Program__registerFileOfIlType(program,4);
+        registerFile = Program__registerFileOfIlType(program,4);
         operandRecord2 = IRInst__getOperandRecord(inst,1);
-        *(undefined4 *)(operandRecord2 + 0xc) = arena;
+        *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
         *(dword **)(operandRecord2 + 8) = pdVar25;
         operandRecord2 = IRInst__getOperandRecord(inst,1);
         *(undefined4 *)(operandRecord2 + 0x10) = 0;
 LAB_000fc74c:
         DList__pushBack(list,inst);
-        arena = extraout_r4_08;
+        r4Sink = callResidualR4_8;
         if (pvVar15 != (void *)0x0) {
           DList__pushBack(list,pvVar15);
-          arena = extraout_r4_09;
+          r4Sink = callResidualR4_9;
         }
       }
       bVar3 = false;
@@ -4598,13 +4671,13 @@ LAB_000fc74c:
       *(short *)((int)descriptor + 2) = (short)pdVar25;
     }
   }
-  if (uVar23 == 0) goto code_r0x000fd490;
-  uVar22 = *descriptor;
-  if (((uVar22 & 0x400000) == 0) || ((descriptor[1] & 0x4444) == 0)) {
+  if (hasExtensionWord == 0) goto code_r0x000fd490;
+  descriptorWord = *descriptor;
+  if (((descriptorWord & 0x400000) == 0) || ((descriptor[1] & 0x4444) == 0)) {
     bVar2 = false;
   }
   else {
-    arena = psnPackedLaneSource(descriptor,0);
+    packedLaneSource0 = psnPackedLaneSource(descriptor,0);
     psnPackedLaneSourceResult = psnPackedLaneSource(descriptor,1);
     psnPackedLaneSourceResult2 = psnPackedLaneSource(descriptor,2);
     psnPackedLaneSourceResult3 = psnPackedLaneSource(descriptor,3);
@@ -4615,12 +4688,12 @@ LAB_000fc74c:
     operandRecord2 = IRInst__getOperandRecord(inst,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     *(dword **)(operandRecord2 + 8) = pdVar25;
-    uVar14 = Program__registerFileOfIlType(program,uVar24);
+    registerFile4 = Program__registerFileOfIlType(program,registerType);
     operandRecord2 = IRInst__getOperandRecord(inst,1);
-    *(undefined4 *)(operandRecord2 + 0xc) = uVar14;
+    *(undefined4 *)(operandRecord2 + 0xc) = registerFile4;
     *(dword **)(operandRecord2 + 8) = pdVar31;
     local_94[0] = 0x10203;
-    fparam_1 = (double)((double (*)())FUN_000f8a30)(arena,0,&local_98,pdVar18);
+    fparam_1 = (double)((double (*)())FUN_000f8a30)(packedLaneSource0,0,&local_98,pdVar18);
     fparam_2 = (double)((double (*)())FUN_000f8a30)(psnPackedLaneSourceResult,1,&local_98,pdVar18);
     fparam_3 = (double)((double (*)())FUN_000f8a30)(psnPackedLaneSourceResult2,2,&local_98,pdVar18);
     fparam_4 = (double)((double (*)())FUN_000f8a30)(psnPackedLaneSourceResult3,3,&local_98,pdVar18);
@@ -4636,20 +4709,20 @@ LAB_000fc74c:
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,1,fparam_1,fparam_2,fparam_3,fparam_4);
     *(undefined4 *)((int)inst + 0x9c) = local_98;
     DList__pushBack(list,inst);
-    uVar22 = *descriptor;
-    arena = extraout_r4_10;
+    descriptorWord = *descriptor;
+    r4Sink = callResidualR4_10;
     pdVar31 = pdVar25;
-    if ((uVar22 & 0x400000) == 0) {
-      uVar24 = 4;
+    if ((descriptorWord & 0x400000) == 0) {
+      registerType = 4;
       bVar2 = true;
     }
     else {
-      uVar24 = 4;
+      registerType = 4;
       bVar2 = true;
       descriptor[1] = descriptor[1] & 0xffff8888 | 0x3210;
     }
   }
-  if ((uVar22 & 0x400000) == 0) goto code_r0x000fd490;
+  if ((descriptorWord & 0x400000) == 0) goto code_r0x000fd490;
   puVar21 = (undefined1 *)descriptor[1];
   pdVar29 = descriptor + 1;
   if (((uint)puVar21 & 0xffff8888) == 0) goto code_r0x000fd490;
@@ -4669,18 +4742,18 @@ LAB_000fc74c:
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     *(dword **)(operandRecord2 + 8) = pdVar26;
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,2,0.0,0.0,0.0,0.0);
-    arena = Program__registerFileOfIlType(program,uVar24);
+    registerFile = Program__registerFileOfIlType(program,registerType);
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     *(dword **)(operandRecord2 + 8) = pdVar31;
-    *(undefined4 *)(operandRecord2 + 0xc) = arena;
+    *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
     DList__pushBack(list,inst);
-    uVar22 = *descriptor;
-    arena = extraout_r4_11;
-    uVar24 = 4;
+    descriptorWord = *descriptor;
+    r4Sink = callResidualR4_11;
+    registerType = 4;
     pdVar25 = pdVar26;
   }
   pdVar31 = pdVar26;
-  if (((uVar22 & 0x400000) != 0) && ((*pdVar29 & 0x10000) != 0)) {
+  if (((descriptorWord & 0x400000) != 0) && ((*pdVar29 & 0x10000) != 0)) {
     pdVar31 = pdVar25;
     if (!bVar2) {
       puVar21 = *(undefined1 **)(program + 8);
@@ -4691,26 +4764,26 @@ LAB_000fc74c:
     operandRecord2 = IRInst__getOperandRecord(inst,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     *(dword **)(operandRecord2 + 8) = pdVar31;
-    arena = Program__registerFileOfIlType(program,uVar24);
+    registerFile = Program__registerFileOfIlType(program,registerType);
     operandRecord2 = IRInst__getOperandRecord(inst,1);
-    *(undefined4 *)(operandRecord2 + 0xc) = arena;
+    *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
     *(dword **)(operandRecord2 + 8) = pdVar26;
     IROperand__setModifierBits((int)inst + 0xa4,1,1);
     if (!bVar2) {
       ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,inst);
     }
     pdVar17 = (dword *)((int)((unsigned char *)0x0) + 2);
-    uVar24 = 4;
+    registerType = 4;
     bVar2 = true;
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,2,1.0,1.0,1.0,1.0);
     DList__pushBack(list,inst);
-    uVar22 = *descriptor;
-    arena = extraout_r4_12;
+    descriptorWord = *descriptor;
+    r4Sink = callResidualR4_12;
     pdVar25 = pdVar31;
   }
-  if ((((uVar22 & 0x400000) == 0) || ((*pdVar29 & 0x20000) == 0)) || ((*pdVar29 & 0x40000) == 0)) {
-    if (((uVar22 & 0x400000) == 0) || ((*pdVar29 & 0x20000) == 0)) {
-      if (((uVar22 & 0x400000) == 0) || ((*pdVar29 & 0x40000) == 0)) goto code_r0x000fcda8;
+  if ((((descriptorWord & 0x400000) == 0) || ((*pdVar29 & 0x20000) == 0)) || ((*pdVar29 & 0x40000) == 0)) {
+    if (((descriptorWord & 0x400000) == 0) || ((*pdVar29 & 0x20000) == 0)) {
+      if (((descriptorWord & 0x400000) == 0) || ((*pdVar29 & 0x40000) == 0)) goto code_r0x000fcda8;
       if (!bVar2) {
         puVar21 = *(undefined1 **)(program + 8);
         pdVar25 = (dword *)(*(int *)(puVar21 + 0x3ac) + -1);
@@ -4720,9 +4793,9 @@ LAB_000fc74c:
       operandRecord2 = IRInst__getOperandRecord(inst,0);
       *(undefined4 *)(operandRecord2 + 0xc) = 0;
       *(dword **)(operandRecord2 + 8) = pdVar25;
-      arena = Program__registerFileOfIlType(program,uVar24);
+      registerFile = Program__registerFileOfIlType(program,registerType);
       operandRecord2 = IRInst__getOperandRecord(inst,1);
-      *(undefined4 *)(operandRecord2 + 0xc) = arena;
+      *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
       *(dword **)(operandRecord2 + 8) = pdVar31;
       if (!bVar2) {
         ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,inst);
@@ -4741,9 +4814,9 @@ LAB_000fc74c:
       operandRecord2 = IRInst__getOperandRecord(inst,0);
       *(undefined4 *)(operandRecord2 + 0xc) = 0;
       *(dword **)(operandRecord2 + 8) = pdVar25;
-      arena = Program__registerFileOfIlType(program,uVar24);
+      registerFile = Program__registerFileOfIlType(program,registerType);
       operandRecord2 = IRInst__getOperandRecord(inst,1);
-      *(undefined4 *)(operandRecord2 + 0xc) = arena;
+      *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
       *(dword **)(operandRecord2 + 8) = pdVar31;
       if (!bVar2) {
         ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,inst);
@@ -4754,10 +4827,10 @@ LAB_000fc74c:
       pdVar31 = pdVar25;
     }
     DList__pushBack(list,inst);
-    uVar22 = *descriptor;
-    uVar24 = 4;
+    descriptorWord = *descriptor;
+    registerType = 4;
     bVar2 = true;
-    arena = extraout_r4_14;
+    r4Sink = callResidualR4_14;
     pdVar25 = pdVar31;
   }
   else {
@@ -4770,27 +4843,27 @@ LAB_000fc74c:
     operandRecord2 = IRInst__getOperandRecord(inst,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     *(dword **)(operandRecord2 + 8) = pdVar25;
-    arena = Program__registerFileOfIlType(program,uVar24);
+    registerFile = Program__registerFileOfIlType(program,registerType);
     operandRecord2 = IRInst__getOperandRecord(inst,1);
-    *(undefined4 *)(operandRecord2 + 0xc) = arena;
+    *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
     *(dword **)(operandRecord2 + 8) = pdVar31;
     if (!bVar2) {
       ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,inst);
     }
-    uVar24 = 4;
+    registerType = 4;
     bVar2 = true;
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,2,2.0,2.0,2.0,2.0);
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,3,1.0,1.0,1.0,1.0);
     pdVar17 = (dword *)((int)((unsigned char *)0x0) + 1);
     IROperand__setModifierBits((int)inst + 0xd4,1,1);
     DList__pushBack(list,inst);
-    uVar22 = *descriptor;
-    arena = extraout_r4_13;
+    descriptorWord = *descriptor;
+    r4Sink = callResidualR4_13;
     pdVar31 = pdVar25;
   }
 code_r0x000fcda8:
   pdVar26 = pdVar31;
-  if (((uVar22 & 0x400000) != 0) && ((*pdVar29 & 0x80000) != 0)) {
+  if (((descriptorWord & 0x400000) != 0) && ((*pdVar29 & 0x80000) != 0)) {
     puVar21 = *(undefined1 **)(program + 8);
     pdVar26 = (dword *)(*(int *)(puVar21 + 0x3ac) + -1);
     *(dword **)(puVar21 + 0x3ac) = pdVar26;
@@ -4798,21 +4871,21 @@ code_r0x000fcda8:
     operandRecord2 = IRInst__getOperandRecord(inst,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     *(dword **)(operandRecord2 + 8) = pdVar26;
-    arena = Program__registerFileOfIlType(program,uVar24);
+    registerFile = Program__registerFileOfIlType(program,registerType);
     operandRecord2 = IRInst__getOperandRecord(inst,1);
-    *(undefined4 *)(operandRecord2 + 0xc) = arena;
+    *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
     *(dword **)(operandRecord2 + 8) = pdVar31;
     ((void (*)())IRInst__makeLiteralVec4Float)(inst,program,2,1.0,1.0,1.0,1.0);
-    arena = Program__registerFileOfIlType(program,uVar24);
+    registerFile = Program__registerFileOfIlType(program,registerType);
     operandRecord2 = IRInst__getOperandRecord(inst,3);
-    *(undefined4 *)(operandRecord2 + 0xc) = arena;
+    *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
     *(dword **)(operandRecord2 + 8) = pdVar31;
     if (!bVar2) {
       ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,inst);
       operandRecord2 = IRInst__getOperandRecord(inst,1);
-      arena = *(undefined4 *)(operandRecord2 + 0x10);
+      operandSelectWord = *(undefined4 *)(operandRecord2 + 0x10);
       operandRecord2 = IRInst__getOperandRecord(inst,3);
-      *(undefined4 *)(operandRecord2 + 0x10) = arena;
+      *(undefined4 *)(operandRecord2 + 0x10) = operandSelectWord;
     }
     DList__pushBack(list,inst);
     inst = IRInst__create(0x25,*(undefined4 *)(program + 8));
@@ -4821,7 +4894,7 @@ code_r0x000fcda8:
     *(dword **)(operandRecord2 + 8) = pdVar26;
     operandRecord2 = IRInst__getOperandRecord(inst,1);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
-    uVar24 = 4;
+    registerType = 4;
     *(dword **)(operandRecord2 + 8) = pdVar26;
     operandRecord2 = IRInst__getOperandRecord(inst,2);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
@@ -4831,39 +4904,39 @@ code_r0x000fcda8:
     pdVar17 = (dword *)((int)((unsigned char *)0x0) + 1);
     IROperand__setModifierBits((int)inst + 0xd4,1,1);
     DList__pushBack(list,inst);
-    uVar22 = *descriptor;
-    arena = extraout_r4_15;
+    descriptorWord = *descriptor;
+    r4Sink = callResidualR4_15;
     pdVar25 = pdVar26;
   }
   pdVar27 = pdVar26;
-  if (((uVar22 & 0x400000) != 0) && (uVar23 = *pdVar29 >> 0x15 & 7, uVar23 != 0)) {
+  if (((descriptorWord & 0x400000) != 0) && (hasExtensionWord = *pdVar29 >> 0x15 & 7, hasExtensionWord != 0)) {
     puVar21 = (undefined1 *)**(undefined4 **)(*(int *)(program + 8) + 0x30c);
     uVar39 = (**(code **)(puVar21 + 0xb4))();
-    arena = (undefined4)uVar39;
+    r4Sink = (undefined4)uVar39;
     if (((int)((ulonglong)uVar39 >> 0x20) == 0) ||
        ((pdVar17 = (dword *)(uint)(ushort)*tokenWords,
         (uint *)((int)&(*(GhidraMachOSection *)0x00000098).size + 2) < pdVar17 ||
         (pdVar17 != (dword *)((*(GhidraMachOSection *)0x00000054).sectname + 9))))) {
-      if (uVar23 == 4) {
+      if (hasExtensionWord == 4) {
 code_r0x000fd284:
-        uVar22 = *descriptor;
+        descriptorWord = *descriptor;
       }
       else {
-        if (uVar23 == 1) {
-          uVar35 = 0x10101;
+        if (hasExtensionWord == 1) {
+          constantSelectWord2 = 0x10101;
           iVar20 = 1;
-          arena = 0x1000000;
+          constantSelectWord = 0x1000000;
         }
-        else if (uVar23 == 2) {
-          uVar35 = 0x101;
+        else if (hasExtensionWord == 2) {
+          constantSelectWord2 = 0x101;
           iVar20 = 2;
-          arena = 0x1010000;
+          constantSelectWord = 0x1010000;
         }
         else {
-          if (uVar23 != 3) goto code_r0x000fd284;
-          uVar35 = 1;
+          if (hasExtensionWord != 3) goto code_r0x000fd284;
+          constantSelectWord2 = 1;
           iVar20 = 3;
-          arena = 0x1010100;
+          constantSelectWord = 0x1010100;
         }
         inst = IRInst__create(0x40,*(undefined4 *)(program + 8));
         pdVar27 = (dword *)(*(int *)(*(int *)(program + 8) + 0x3ac) + -1);
@@ -4872,38 +4945,38 @@ code_r0x000fd284:
         *(undefined4 *)(operandRecord3 + 0xc) = 0;
         *(undefined4 *)((int)inst + 0x9c) = 0x1010100;
         *(dword **)(operandRecord3 + 8) = pdVar27;
-        uVar12 = Program__registerFileOfIlType(program,uVar24);
+        registerFile3 = Program__registerFileOfIlType(program,registerType);
         operandRecord3 = IRInst__getOperandRecord(inst,1);
-        *(undefined4 *)(operandRecord3 + 0xc) = uVar12;
+        *(undefined4 *)(operandRecord3 + 0xc) = registerFile3;
         *(dword **)(operandRecord3 + 8) = pdVar26;
         newInst = IRInst__create(0x13,*(undefined4 *)(program + 8));
         operandRecord3 = IRInst__getOperandRecord(newInst,0);
         *(undefined4 *)(operandRecord3 + 0xc) = 0;
         *(dword **)(operandRecord3 + 8) = pdVar27;
-        uVar12 = Program__registerFileOfIlType(program,uVar24);
+        registerFile3 = Program__registerFileOfIlType(program,registerType);
         operandRecord3 = IRInst__getOperandRecord(newInst,1);
-        *(undefined4 *)(operandRecord3 + 0xc) = uVar12;
+        *(undefined4 *)(operandRecord3 + 0xc) = registerFile3;
         *(dword **)(operandRecord3 + 8) = pdVar26;
         inst2 = IRInst__create(0x31,*(undefined4 *)(program + 8));
         operandRecord3 = IRInst__getOperandRecord(inst2,0);
         *(undefined4 *)(operandRecord3 + 0xc) = 0;
         *(dword **)(operandRecord3 + 8) = pdVar27;
-        uVar12 = Program__registerFileOfIlType(program,uVar24);
+        registerFile3 = Program__registerFileOfIlType(program,registerType);
         operandRecord3 = IRInst__getOperandRecord(inst2,1);
-        *(undefined4 *)(operandRecord3 + 0xc) = uVar12;
+        *(undefined4 *)(operandRecord3 + 0xc) = registerFile3;
         *(dword **)(operandRecord3 + 8) = pdVar26;
         if (!bVar2) {
           ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,newInst);
           operandRecord3 = IRInst__getOperandRecord(newInst,1);
-          uVar12 = *(undefined4 *)(operandRecord3 + 0x10);
+          operandSelectWord3 = *(undefined4 *)(operandRecord3 + 0x10);
           operandRecord3 = IRInst__getOperandRecord(inst2,1);
-          *(undefined4 *)(operandRecord3 + 0x10) = uVar12;
+          *(undefined4 *)(operandRecord3 + 0x10) = operandSelectWord3;
         }
         operandRecord3 = IRInst__getOperandRecord(newInst,2);
         puVar5 = PTR_DAT_001e8b8c;
         *(undefined4 *)(operandRecord3 + 0xc) = 0;
         uVar12 = *(undefined4 *)(puVar5 + 0xc);
-        uVar24 = 4;
+        registerType = 4;
         *(dword **)(operandRecord3 + 8) = pdVar27;
         operandRecord3 = IRInst__getOperandRecord(newInst,2);
         *(undefined4 *)(operandRecord3 + 0x10) = uVar12;
@@ -4914,22 +4987,22 @@ code_r0x000fd284:
         uVar12 = *(undefined4 *)(puVar5 + (uint)*(byte *)((int)&local_80 + iVar20) * 4);
         operandRecord2 = IRInst__getOperandRecord(inst,1);
         *(undefined4 *)(operandRecord2 + 0x10) = uVar12;
-        *(undefined4 *)((int)newInst + 0x9c) = uVar35;
-        *(undefined4 *)((int)inst2 + 0x9c) = arena;
+        *(undefined4 *)((int)newInst + 0x9c) = constantSelectWord2;
+        *(undefined4 *)((int)inst2 + 0x9c) = constantSelectWord;
         DList__pushBack(list,inst);
         DList__pushBack(list,newInst);
         DList__pushBack(list,inst2);
-        uVar22 = *descriptor;
-        arena = extraout_r4_17;
+        descriptorWord = *descriptor;
+        r4Sink = callResidualR4_17;
         pdVar25 = pdVar27;
       }
     }
-    else if (uVar23 == 3) {
+    else if (hasExtensionWord == 3) {
       *(undefined4 *)(program + 0x47c) = 1;
-      uVar22 = *descriptor;
+      descriptorWord = *descriptor;
     }
     else {
-      if (uVar23 != 2) goto code_r0x000fd284;
+      if (hasExtensionWord != 2) goto code_r0x000fd284;
       puVar21 = *(undefined1 **)(program + 8);
       *(undefined4 *)(program + 0x47c) = 1;
       bVar2 = true;
@@ -4939,27 +5012,27 @@ code_r0x000fd284:
       operandRecord2 = IRInst__getOperandRecord(newInst3,0);
       *(undefined4 *)(operandRecord2 + 0xc) = 0;
       *(dword **)(operandRecord2 + 8) = pdVar27;
-      arena = Program__registerFileOfIlType(program,uVar24);
+      registerFile = Program__registerFileOfIlType(program,registerType);
       operandRecord2 = IRInst__getOperandRecord(newInst3,1);
-      *(undefined4 *)(operandRecord2 + 0xc) = arena;
+      *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
       *(dword **)(operandRecord2 + 8) = pdVar26;
       ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,newInst3);
-      pcVar36 = *(code **)(*newInst3 + 0x88);
+      hwVirtualSlot88 = *(code **)(*newInst3 + 0x88);
       operandRecord2 = IRInst__getOperandRecord(newInst3,1);
       pdVar18 = (dword *)(uint)*(byte *)(operandRecord2 + 0x12);
       pdVar17 = (dword *)((int)((unsigned char *)0x0) + 3);
-      (*pcVar36)(newInst3,1);
+      (*hwVirtualSlot88)(newInst3,1);
       DList__pushBack(list,newInst3);
-      uVar22 = *descriptor;
-      arena = extraout_r4_16;
-      uVar24 = 4;
+      descriptorWord = *descriptor;
+      r4Sink = callResidualR4_16;
+      registerType = 4;
       pdVar25 = pdVar27;
     }
   }
   pdVar31 = pdVar27;
-  if (((((uVar22 & 0x400000) != 0) && ((*pdVar29 & 0x8888) != 0)) &&
-      (uVar22 = psnPackedNegateMask(descriptor,arena,pdVar17,pdVar18,param_5,pdVar32,puVar21), uVar22 != 0))
-     && (uVar22 != 0x8888)) {
+  if (((((descriptorWord & 0x400000) != 0) && ((*pdVar29 & 0x8888) != 0)) &&
+      (descriptorWord = psnPackedNegateMask(descriptor,r4Sink,pdVar17,pdVar18,param_5,pdVar32,puVar21), descriptorWord != 0))
+     && (descriptorWord != 0x8888)) {
     pdVar31 = pdVar25;
     if (!bVar2) {
       pdVar31 = (dword *)(*(int *)(*(int *)(program + 8) + 0x3ac) + -1);
@@ -4969,9 +5042,9 @@ code_r0x000fd284:
     operandRecord2 = IRInst__getOperandRecord(inst,0);
     *(dword **)(operandRecord2 + 8) = pdVar31;
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
-    arena = Program__registerFileOfIlType(program,uVar24);
+    registerFile = Program__registerFileOfIlType(program,registerType);
     operandRecord2 = IRInst__getOperandRecord(inst,1);
-    *(undefined4 *)(operandRecord2 + 0xc) = arena;
+    *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
     *(dword **)(operandRecord2 + 8) = pdVar27;
     if (!bVar2) {
       ((int (*)())IRInst__applyDescriptorSwizzle)(descriptor,inst);
@@ -4981,18 +5054,18 @@ code_r0x000fd284:
     }
     DList__pushBack(list,inst);
     operandRecord2 = IRInst__getOperandRecord(inst,1);
-    uVar35 = *(undefined4 *)(operandRecord2 + 0x10);
+    operandSelectWord2 = *(undefined4 *)(operandRecord2 + 0x10);
     inst = IRInst__create(0x31,*(undefined4 *)(program + 8));
     operandRecord2 = IRInst__getOperandRecord(inst,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     *(dword **)(operandRecord2 + 8) = pdVar31;
-    arena = Program__registerFileOfIlType(program,uVar24);
+    registerFile = Program__registerFileOfIlType(program,registerType);
     operandRecord2 = IRInst__getOperandRecord(inst,1);
-    *(undefined4 *)(operandRecord2 + 0xc) = arena;
+    *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
     *(dword **)(operandRecord2 + 8) = pdVar27;
     if (!bVar2) {
       operandRecord2 = IRInst__getOperandRecord(inst,1);
-      *(undefined4 *)(operandRecord2 + 0x10) = uVar35;
+      *(undefined4 *)(operandRecord2 + 0x10) = operandSelectWord2;
     }
     IROperand__setModifierBits((int)inst + 0xa4,1,1);
     if ((((*descriptor & 0x400000) != 0) && ((*pdVar29 & 0x100000) != 0)) &&
@@ -5000,19 +5073,19 @@ code_r0x000fd284:
       *pdVar29 = *pdVar29 & 0xffefffff;
     }
     *(uint *)((int)inst + 0x9c) =
-         uVar22 >> 0xf & 1 ^ 1 |
-         (uVar22 >> 0xb & 1 ^ 1) << 8 |
-         (uVar22 >> 7 & 1 ^ 1) << 0x10 | (uVar22 >> 3 & 1 ^ 1) << 0x18;
+         descriptorWord >> 0xf & 1 ^ 1 |
+         (descriptorWord >> 0xb & 1 ^ 1) << 8 |
+         (descriptorWord >> 7 & 1 ^ 1) << 0x10 | (descriptorWord >> 3 & 1 ^ 1) << 0x18;
     DList__pushBack(list,inst);
     if ((*descriptor & 0x400000) != 0) {
       *pdVar29 = *pdVar29 & 0xffff7777;
     }
-    uVar24 = 4;
+    registerType = 4;
   }
 code_r0x000fd490:
   if (bVar3) {
     *(short *)((int)descriptor + 2) = (short)pdVar31;
-    *descriptor = uVar24 << 0x10 | *descriptor & 0xffc0ffff;
+    *descriptor = registerType << 0x10 | *descriptor & 0xffc0ffff;
   }
   return;
 }
@@ -5058,6 +5131,19 @@ int FUN_000fd5c8(program, ilReader)
   int program;
   uint ******ilReader;
 {
+  undefined4 arenaA;
+  undefined4 registerFileB;
+  int loopCounterD;
+  int optionEnabled;
+  int virtualRegister43;
+  int loopCounterC;
+  int loopCounterB;
+  int operandRecordC;
+  int newTempIndex21;
+  int operandRecordB;
+  int loopCounter;
+  int newTempIndex20;
+  int operandRecordLast;
   undefined4 gradientYTemp;
   undefined4 coordTemp;
   undefined4 fetchResultTemp2;
@@ -5176,7 +5262,7 @@ int FUN_000fd5c8(program, ilReader)
   undefined4 *puVar24;
   int iVar25;
   undefined2 *fetchDescriptor2;
-  undefined4 uVar27;
+  undefined4 registerFile27;
   undefined2 componentSelect;
   undefined4 *vectorElementSlot2;
   undefined4 *blockObject;
@@ -5193,7 +5279,7 @@ int FUN_000fd5c8(program, ilReader)
   uint ******ppppppuVar38;
   uint ******ppppppuVar39;
   uint ******ppppppuVar40;
-  undefined4 uVar41;
+  undefined4 virtualRegisterB;
   uint ***pppuVar42;
   int iVar43;
   uint uVar44;
@@ -5410,10 +5496,10 @@ code_r0x00103c40:
   iVar34 = FUN_000e43ec(ilReader);
   if (iVar34 != 0) {
     iVar34 = *(int *)(program + 0x3c4);
-    iVar43 = 0;
+    loopCounterC = 0;
     templateCursor = (int *)0x0;
     for (uVar10 = 1; uVar10 <= *(uint *)(iVar34 + 4); uVar10 = uVar10 + 1) {
-      templateCursor = *(int **)(iVar43 + *(int *)(iVar34 + 8));
+      templateCursor = *(int **)(loopCounterC + *(int *)(iVar34 + 8));
       if ((templateCursor[5] & 1U) != 0) {
         (**(code **)(*templateCursor + 0x68))(templateCursor);
         piVar18 = templateCursor;
@@ -5435,7 +5521,7 @@ code_r0x00103c40:
         *vectorElementSlot = movFloatInst;
         iVar34 = *(int *)(program + 0x3c4);
       }
-      iVar43 = iVar43 + 4;
+      loopCounterC = loopCounterC + 4;
     }
     hwDescription = *(int **)(*(int *)(program + 8) + 0x30c);
     (**(code **)(*hwDescription + 0x17c))(hwDescription,program);
@@ -5590,16 +5676,16 @@ code_r0x000fed00:
         *(uint *)(iVar34 + 0x13c) = *(uint *)(iVar34 + 0x13c) | 2;
       }
       selectWordPtr = &stagedSelectWord;
-      iVar43 = 0;
+      loopCounterC = 0;
       do {
-        if (*(byte *)(iVar43 + (int)selectWordPtr) != 0) {
+        if (*(byte *)(loopCounterC + (int)selectWordPtr) != 0) {
           argR6 = ppppppuVar19;
           argR7 = ppppppuVar38;
-          IRLoadInterp__setLane(iVar34,iVar43,(uint)*(byte *)(iVar43 + (int)selectWordPtr),ppppppuVar19,
+          IRLoadInterp__setLane(iVar34,loopCounterC,(uint)*(byte *)(loopCounterC + (int)selectWordPtr),ppppppuVar19,
                        ppppppuVar38);
         }
-        notLastIteration = iVar43 != 3;
-        iVar43 = iVar43 + 1;
+        notLastIteration = loopCounterC != 3;
+        loopCounterC = loopCounterC + 1;
       } while (notLastIteration);
       goto switchD_000fdaf0_caseD_2;
     case 0x19:
@@ -5737,14 +5823,14 @@ code_r0x000fed00:
       virtualRegister2 = (int *)FUN_00127608(*(undefined4 *)(program + 0x3ac),registerFile,registerIndex,0);
       registerInfo = (**(code **)(*virtualRegister2 + 0x2c))();
       selectWordPtr = &stagedSelectWord;
-      iVar43 = 0;
+      loopCounterC = 0;
       do {
-        if (*(char *)(iVar43 + (int)selectWordPtr) == '\0') {
+        if (*(char *)(loopCounterC + (int)selectWordPtr) == '\0') {
           argR6 = ppppppuVar19;
-          IRLoadInterp__setLaneKindAndIndex(registerInfo,iVar43,iVar34,ppppppuVar19);
+          IRLoadInterp__setLaneKindAndIndex(registerInfo,loopCounterC,iVar34,ppppppuVar19);
         }
-        notLastIteration = iVar43 != 3;
-        iVar43 = iVar43 + 1;
+        notLastIteration = loopCounterC != 3;
+        loopCounterC = loopCounterC + 1;
       } while (notLastIteration);
       goto switchD_000fdaf0_caseD_2;
     case 0x1c:
@@ -5792,7 +5878,7 @@ code_r0x000fed00:
       }
       ppppuVar45 = *ilReader[0x1b];
       registerIndex2 = *(short *)((int)ppppuVar45 + 2);
-      uVar50 = Program__registerFileOfIlType(program,(uint)*ppppuVar45 >> 0x10 & 0x3f);
+      registerFileB = Program__registerFileOfIlType(program,(uint)*ppppuVar45 >> 0x10 & 0x3f);
       pppuVar42 = *ilReader[0x1b][1];
       if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
          ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
@@ -5801,11 +5887,11 @@ code_r0x000fed00:
       else {
         iVar34 = (int)*(short *)((int)ilReader[0x1b][1] + 2);
       }
-      uVar27 = Program__registerFileOfIlType(program,(uint)pppuVar42 >> 0x10 & 0x3f);
-      uVar41 = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x2b,0,0);
+      registerFile27 = Program__registerFileOfIlType(program,(uint)pppuVar42 >> 0x10 & 0x3f);
+      virtualRegisterB = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x2b,0,0);
       mulAddInst = IRInst__create(0x14,*(undefined4 *)(program + 8));
       operandRecord2 = IRInst__getOperandRecord(mulAddInst,1);
-      *(undefined4 *)(operandRecord2 + 0xc) = uVar50;
+      *(undefined4 *)(operandRecord2 + 0xc) = registerFileB;
       *(int *)(operandRecord2 + 8) = (int)registerIndex2;
       stagedSelectWord = (uint ******)0x10203;
       ((int (*)())Program__applySourceTokenToOperand)(program,&stagedSelectWord,ppppuVar45,1,mulAddInst);
@@ -5826,7 +5912,7 @@ code_r0x000fed00:
       ((int (*)())Program__appendInst)(program,mulAddInst,currentBlock);
       (**(code **)(*mulAddInst + 0x90))(mulAddInst,virtualRegister);
       if (bVar1) {
-        (**(code **)(*mulAddInst + 0x90))(mulAddInst,uVar41);
+        (**(code **)(*mulAddInst + 0x90))(mulAddInst,virtualRegisterB);
       }
       IRInst__setHardwareRegisterAndAdd(mulAddInst,program,0x2b,0);
       mulAddInst[0x20] = 1;
@@ -5835,9 +5921,9 @@ code_r0x000fed00:
       *(uint *******)(operandRecord2 + 8) = argR6;
       *(undefined4 *)(operandRecord2 + 0xc) = 0x2c;
       operandRecord2 = IRInst__getOperandRecord(movInst,1);
-      *(undefined4 *)(operandRecord2 + 0xc) = uVar27;
+      *(undefined4 *)(operandRecord2 + 0xc) = registerFile27;
       *(int *)(operandRecord2 + 8) = iVar34;
-      (**(code **)(*movInst + 0x90))(movInst,uVar41);
+      (**(code **)(*movInst + 0x90))(movInst,virtualRegisterB);
       ((int (*)())Program__appendInst)(program,movInst,currentBlock);
       IRInst__setHardwareRegisterAndAdd(movInst,program,0x2c,argR6);
       local_ac = 1;
@@ -6107,14 +6193,14 @@ code_r0x000fed00:
           iVar43 = (**(code **)(*virtualRegister2 + 0x2c))();
           selectWordPtr = &stagedSelectWord;
           *(uint *******)(iVar43 + 0x140) = ppppppuVar19;
-          iVar47 = 0;
+          loopCounterD = 0;
           do {
-            if (*(char *)(iVar47 + (int)selectWordPtr) == '\0') {
+            if (*(char *)(loopCounterD + (int)selectWordPtr) == '\0') {
               argR6 = ppppppuVar19;
-              IRLoadInterp__setLaneKindAndIndex(iVar43,iVar47,iVar34,ppppppuVar19);
+              IRLoadInterp__setLaneKindAndIndex(iVar43,loopCounterD,iVar34,ppppppuVar19);
             }
-            notLastIteration = iVar47 != 3;
-            iVar47 = iVar47 + 1;
+            notLastIteration = loopCounterD != 3;
+            loopCounterD = loopCounterD + 1;
           } while (notLastIteration);
         }
       }
@@ -6233,13 +6319,13 @@ code_r0x000feeb8:
           if (bVar2) {
             *(uint *)(iVar34 + 0x13c) = *(uint *)(iVar34 + 0x13c) | 2;
           }
-          iVar43 = 0;
+          loopCounterC = 0;
           do {
             argR6 = ppppppuVar19;
             argR7 = ppppppuVar48;
-            IRLoadInterp__setLane(iVar34,iVar43,1,ppppppuVar19,ppppppuVar48);
-            notLastIteration = iVar43 != 3;
-            iVar43 = iVar43 + 1;
+            IRLoadInterp__setLane(iVar34,loopCounterC,1,ppppppuVar19,ppppppuVar48);
+            notLastIteration = loopCounterC != 3;
+            loopCounterC = loopCounterC + 1;
           } while (notLastIteration);
         }
         else if ((*(uint *)(program + 0x30) & 0x40000) == 0) {
@@ -6341,18 +6427,18 @@ code_r0x000feeb8:
       remapTable = PTR_DAT_001e8b64;
       stagedSelectWord = (uint ******)0x10203;
       if (((uint)firstTokenWord & 0x1f000000) != 0x1000000) {
-        iVar34 = 0;
+        loopCounterB = 0;
         do {
           int2FInst = IRInst__create(0xe1,*(undefined4 *)(program + 8));
           IRInst__setOperandRef(int2FInst,0,virtualRegister);
           IRInst__setOperandRef(int2FInst,1,virtualRegister);
-          uVar50 = *(undefined4 *)(puVar9 + iVar34);
-          *(undefined4 *)((int)int2FInst + 0x9c) = *(undefined4 *)(remapTable + iVar34);
+          uVar50 = *(undefined4 *)(puVar9 + loopCounterB);
+          *(undefined4 *)((int)int2FInst + 0x9c) = *(undefined4 *)(remapTable + loopCounterB);
           operandRecord2 = IRInst__getOperandRecord(int2FInst,1);
           *(undefined4 *)(operandRecord2 + 0x10) = uVar50;
           ((int (*)())Program__appendInst)(program,int2FInst,currentBlock);
-          notLastIteration = iVar34 != 0xc;
-          iVar34 = iVar34 + 4;
+          notLastIteration = loopCounterB != 0xc;
+          loopCounterB = loopCounterB + 4;
         } while (notLastIteration);
       }
       ppppppuVar49 = IRInst__create(0x31,*(undefined4 *)(program + 8));
@@ -6618,9 +6704,9 @@ code_r0x001005f4:
             }
             if ((int)scopeLevel <= (int)(*pppppuVar52)[0x2e]) {
               breakTargetBlock = *(undefined4 *)(iVar43 + 0x154);
-              uVar50 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
-              blockAllocation4 = (undefined4 *)Arena__alloc(uVar50,0x138);
-              *blockAllocation4 = uVar50;
+              arenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+              blockAllocation4 = (undefined4 *)Arena__alloc(arenaA,0x138);
+              *blockAllocation4 = arenaA;
               ppppppuVar48 = (uint ******)(blockAllocation4 + 1);
               argR6 = *(uint *******)(program + 8);
               BreakBlock__ctor_ec0c8(ppppppuVar48,iVar43,*(undefined4 *)(iVar43 + 300),argR6);
@@ -6702,9 +6788,9 @@ code_r0x00103718:
         *(int *)(*(int *)(program + 8) + 0x3ac) = local_100;
       }
       iVar43 = local_100;
-      iVar20 = IRInst__getOperandRecord(ppppppuVar48,0);
-      *(int *)(iVar20 + 8) = iVar43;
-      *(undefined4 *)(iVar20 + 0xc) = 0;
+      operandRecordLast = IRInst__getOperandRecord(ppppppuVar48,0);
+      *(int *)(operandRecordLast + 8) = iVar43;
+      *(undefined4 *)(operandRecordLast + 0xc) = 0;
       pppuVar42 = **ilReader[0x1b];
       if (((((uint)pppuVar42 & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
          ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
@@ -6714,9 +6800,9 @@ code_r0x00103718:
         iVar20 = (int)*(short *)((int)*ilReader[0x1b] + 2);
       }
       registerFile = Program__registerFileOfIlType(program,(uint)pppuVar42 >> 0x10 & 0x3f);
-      iVar21 = IRInst__getOperandRecord(ppppppuVar48,1);
-      *(undefined4 *)(iVar21 + 0xc) = registerFile;
-      *(int *)(iVar21 + 8) = iVar20;
+      operandRecordB = IRInst__getOperandRecord(ppppppuVar48,1);
+      *(undefined4 *)(operandRecordB + 0xc) = registerFile;
+      *(int *)(operandRecordB + 8) = iVar20;
       argR6 = ppppppuVar40;
       argR7 = ppppppuVar48;
       ((int (*)())Program__applySourceTokenToOperand)(program,&stagedSelectWord,*ilReader[0x1b],ppppppuVar40,ppppppuVar48);
@@ -6746,9 +6832,9 @@ code_r0x001021c0:
       }
 code_r0x00102220:
       ((int (*)())Program__appendInst)(program,ppppppuVar48,currentBlock);
-      iVar20 = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
-      *(int *)(iVar20 + 8) = iVar43;
-      *(undefined4 *)(iVar20 + 0xc) = 0;
+      operandRecordLast = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
+      *(int *)(operandRecordLast + 8) = iVar43;
+      *(undefined4 *)(operandRecordLast + 0xc) = 0;
       ppppppuVar40 = (uint ******)((int)ppppppuVar40 + 1);
       local_bc = 0;
       templateCursor = (int *)((int)templateCursor + 1);
@@ -6791,10 +6877,10 @@ code_r0x00102220:
               stackElement = (int *)(uVar10 * 4 + puVar13[3]);
             }
             iVar43 = *stackElement;
-            uVar50 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+            arenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
             continueTargetBlock = *(undefined4 *)(iVar43 + 0x150);
-            blockAllocation4 = (undefined4 *)Arena__alloc(uVar50,0x138);
-            *blockAllocation4 = uVar50;
+            blockAllocation4 = (undefined4 *)Arena__alloc(arenaA,0x138);
+            *blockAllocation4 = arenaA;
             ppppppuVar48 = (uint ******)(blockAllocation4 + 1);
             argR6 = *(uint *******)(program + 8);
             ContinueBlock__ctor_ec178(ppppppuVar48,iVar43,*(undefined4 *)(iVar43 + 300),argR6);
@@ -7617,9 +7703,9 @@ code_r0x00102c90:
         ifConditionInst = (**(code **)(*hwDescription + 0x28))
                            (hwDescription,1,*(undefined4 *)*vectorElementSlot3,4,ilReader[(int)ilReader[0x16] + 0x23],
                             stagedSelectWord,ilReader,currentBlock);
-        uVar50 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
-        blockAllocation4 = (undefined4 *)Arena__alloc(uVar50,0x15c);
-        *blockAllocation4 = uVar50;
+        arenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+        blockAllocation4 = (undefined4 *)Arena__alloc(arenaA,0x15c);
+        *blockAllocation4 = arenaA;
         pppppuVar15 = (uint *****)(blockAllocation4 + 1);
         argR6 = (uint ******)0x0;
         argR7 = *(uint *******)(program + 8);
@@ -7802,9 +7888,9 @@ code_r0x00103300:
       else {
         uVar10 = 0;
       }
-      uVar50 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
-      blockAllocation4 = (undefined4 *)Arena__alloc(uVar50,0x15c);
-      *blockAllocation4 = uVar50;
+      arenaA = *(undefined4 *)(*(int *)(program + 8) + 0x374);
+      blockAllocation4 = (undefined4 *)Arena__alloc(arenaA,0x15c);
+      *blockAllocation4 = arenaA;
       blockObject = blockAllocation4 + 1;
       argR7 = *(uint *******)(program + 8);
       PostLoopFooter__ctor_ea828(blockObject,uVar10,enclosingLoopHeader,argR6,argR7);
@@ -7954,10 +8040,10 @@ code_r0x00101f74:
       uVar50 = *(undefined4 *)(program + 0x3ac);
       registerFile = Program__registerFileOfIlType(program,ilRegisterType);
       argR6 = (uint ******)0x0;
-      iVar43 = FUN_00127608(uVar50,registerFile,(int)registerIndex2,0);
+      virtualRegister43 = FUN_00127608(uVar50,registerFile,(int)registerIndex2,0);
       if (((uint)firstTokenWord >> 0x10 & 0x3fff) == 0) goto switchD_0010061c_caseD_1;
       local_bc = 0;
-      *(undefined4 *)(iVar43 + 0x30) = 1;
+      *(undefined4 *)(virtualRegister43 + 0x30) = 1;
       break;
     case 0x55:
     case 0x56:
@@ -7974,9 +8060,9 @@ code_r0x00101f74:
         *(int *)(*(int *)(program + 8) + 0x3ac) = iVar43;
         (&local_104)[templateToken - 0x55] = iVar43;
       }
-      iVar20 = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
-      *(undefined4 *)(iVar20 + 0xc) = 0;
-      *(int *)(iVar20 + 8) = iVar43;
+      operandRecordLast = IRInst__getOperandRecord(ppppppuVar38,ppppppuVar40);
+      *(undefined4 *)(operandRecordLast + 0xc) = 0;
+      *(int *)(operandRecordLast + 8) = iVar43;
       if (ppppppuVar40 == (uint ******)0x0) {
         argR6 = (uint ******)0x0;
         argR7 = (uint ******)0x0;
@@ -8013,9 +8099,9 @@ code_r0x00101f74:
       Compiler__fail(*(undefined4 *)(program + 8),0xf);
       goto code_r0x00101d1c;
     case 0x6b:
-      iVar43 = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),4);
+      optionEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),4);
       argR7 = (uint ******)PTR_DAT_001e8bd8;
-      if (iVar43 != 0) {
+      if (optionEnabled != 0) {
         argR7 = (uint ******)PTR_DAT_001e8bb0;
       }
       argR8 = ppppppuVar19;
@@ -8034,25 +8120,25 @@ code_r0x00101f74:
       if (iVar20 != iVar43) {
         registerMap = *(undefined4 *)(program + 0x3ac);
         argR6 = (uint ******)0x0;
-        iVar21 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
-        *(int *)(*(int *)(program + 8) + 0x3ac) = iVar21;
-        virtualRegister = FUN_00127608(registerMap,0,iVar21,0);
+        newTempIndex21 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+        *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex21;
+        virtualRegister = FUN_00127608(registerMap,0,newTempIndex21,0);
         movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
         IRInst__setOperandRef(movFloatInst,1,virtualRegister);
         pppppuVar52 = ppppppuVar38[0x25];
         pppppuVar15 = ppppppuVar38[0x26];
-        iVar21 = IRInst__getOperandRecord(movFloatInst,0);
-        *(uint ******)(iVar21 + 0xc) = pppppuVar15;
-        *(uint ******)(iVar21 + 8) = pppppuVar52;
-        iVar21 = IRInst__getOperandRecord(movFloatInst,1);
-        *(int *)(iVar21 + 0x10) = iVar20;
-        iVar21 = IRInst__getOperandRecord(ppppppuVar38,0);
-        *(undefined4 *)((int)movFloatInst + 0x9c) = *(undefined4 *)(iVar21 + 0x10);
+        operandRecordB = IRInst__getOperandRecord(movFloatInst,0);
+        *(uint ******)(operandRecordB + 0xc) = pppppuVar15;
+        *(uint ******)(operandRecordB + 8) = pppppuVar52;
+        operandRecordB = IRInst__getOperandRecord(movFloatInst,1);
+        *(int *)(operandRecordB + 0x10) = iVar20;
+        operandRecordB = IRInst__getOperandRecord(ppppppuVar38,0);
+        *(undefined4 *)((int)movFloatInst + 0x9c) = *(undefined4 *)(operandRecordB + 0x10);
         IRInst__setOperandRef(ppppppuVar38,0,virtualRegister);
         FUN_000f32cc(&local_d4,iVar20);
         ppppppuVar38[0x27] = (uint *****)local_d4;
-        iVar20 = IRInst__getOperandRecord(ppppppuVar38,1);
-        *(int *)(iVar20 + 0x10) = iVar43;
+        operandRecordLast = IRInst__getOperandRecord(ppppppuVar38,1);
+        *(int *)(operandRecordLast + 0x10) = iVar43;
         DList__pushFront(local_6c,movFloatInst);
         goto code_r0x00101d1c;
       }
@@ -8124,25 +8210,25 @@ code_r0x00101d1c:
   ppppppuVar38 = (uint ******)(iVar43 + 1);
   if (1 < (int)ppppppuVar38) {
     ppppppuVar40 = (uint ******)((int)((unsigned char *)0x0) + 1);
-    iVar43 = 0;
+    loopCounterC = 0;
     local_60 = &DAT_001ad5d8;
     do {
       stagedSelectWord = *(uint *******)(local_60 + -0x2c30);
       argR8 = (uint ******)&local_174;
-      ((int (*)())FUN_000fb3d4)(program,local_68,tokenWords,*(undefined4 *)(iVar43 + (int)ilReader[0x1b]),
+      ((int (*)())FUN_000fb3d4)(program,local_68,tokenWords,*(undefined4 *)(loopCounterC + (int)ilReader[0x1b]),
                    loopStackData,&local_174,&movByRegister);
-      uVar10 = **(uint **)(iVar43 + (int)ilReader[0x1b]);
+      uVar10 = **(uint **)(loopCounterC + (int)ilReader[0x1b]);
       if ((((uVar10 & 0x3f0000) == 0x100000) && (*(int *)(program + 8) != 0)) &&
          ((*(uint *)(*(int *)(*(int *)(program + 8) + 0x30c) + 8) & 0x80) != 0)) {
         iVar47 = 0xf;
       }
       else {
-        iVar47 = (int)(short)**(uint **)(iVar43 + (int)ilReader[0x1b]);
+        iVar47 = (int)(short)**(uint **)(loopCounterC + (int)ilReader[0x1b]);
       }
       registerFile = Program__registerFileOfIlType(program,uVar10 >> 0x10 & 0x3f);
-      iVar20 = IRInst__getOperandRecord(ppppppuVar19,ppppppuVar40);
-      *(undefined4 *)(iVar20 + 0xc) = registerFile;
-      *(int *)(iVar20 + 8) = iVar47;
+      operandRecordLast = IRInst__getOperandRecord(ppppppuVar19,ppppppuVar40);
+      *(undefined4 *)(operandRecordLast + 0xc) = registerFile;
+      *(int *)(operandRecordLast + 8) = iVar47;
       if ((!isTranslationKind7) &&
          (iVar47 = OpcodeTraits__instFlagBit2(*(undefined4 *)(program + 8),ppppppuVar19), iVar47 != 0)) {
         if (ppppppuVar40 == (uint ******)((int)((unsigned char *)0x0) + 1U)) {
@@ -8155,20 +8241,20 @@ code_r0x00101d1c:
       }
       argR6 = ppppppuVar40;
       argR7 = ppppppuVar19;
-      ((int (*)())Program__applySourceTokenToOperand)(program,&stagedSelectWord,*(undefined4 *)(iVar43 + (int)ilReader[0x1b]),ppppppuVar40,
+      ((int (*)())Program__applySourceTokenToOperand)(program,&stagedSelectWord,*(undefined4 *)(loopCounterC + (int)ilReader[0x1b]),ppppppuVar40,
                    ppppppuVar19);
       ppppppuVar40 = (uint ******)((int)ppppppuVar40 + 1);
-      iVar43 = iVar43 + 4;
+      loopCounterC = loopCounterC + 4;
     } while (ppppppuVar38 != ppppppuVar40);
   }
   local_b8 = IRInst__countWrittenComponents(ppppppuVar19);
   if (isTranslationKind7) {
-    iVar20 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
-    *(int *)(*(int *)(program + 8) + 0x3ac) = iVar20;
+    newTempIndex20 = *(int *)(*(int *)(program + 8) + 0x3ac) + -1;
+    *(int *)(*(int *)(program + 8) + 0x3ac) = newTempIndex20;
     pppppuVar52 = ppppppuVar19[0x25];
     pppppuVar15 = ppppppuVar19[0x26];
     operandRecord2 = IRInst__getOperandRecord(ppppppuVar19,0);
-    *(int *)(operandRecord2 + 8) = iVar20;
+    *(int *)(operandRecord2 + 8) = newTempIndex20;
     *(undefined4 *)(operandRecord2 + 0xc) = 0;
     iVar43 = OpcodeTraits__instFlagBit2(*(undefined4 *)(program + 8),ppppppuVar19);
     iVar47 = IRInst__getOperandRecord(ppppppuVar19,0);
@@ -8188,8 +8274,8 @@ code_r0x00101d1c:
             argR6 = ppppppuVar48;
             IRInst__copyOperandFrom(iVar22,ppppppuVar48,ppppppuVar19,ppppppuVar48);
             if (iVar43 != 0) {
-              iVar23 = IRInst__getOperandRecord(iVar22,ppppppuVar48);
-              pppppuVar11 = *(uint ******)(iVar23 + 0x10);
+              operandRecordC = IRInst__getOperandRecord(iVar22,ppppppuVar48);
+              pppppuVar11 = *(uint ******)(operandRecordC + 0x10);
               if (ppppppuVar48 == (uint ******)((int)((unsigned char *)0x0) + 1U)) {
                 local_124 = (uint *****)
                             CONCAT31((int3)((uint)pppppuVar11 >> 8),
@@ -8254,7 +8340,7 @@ code_r0x00101d1c:
     *(uint ******)(operandRecord + 8) = pppppuVar52;
     *(uint *******)((int)movFloatInst + 0x9c) = ppppppuVar40;
     operandRecord = IRInst__getOperandRecord(movFloatInst,1);
-    *(int *)(operandRecord + 8) = iVar20;
+    *(int *)(operandRecord + 8) = newTempIndex20;
     *(undefined4 *)(operandRecord + 0xc) = 0;
     DList__pushFront(local_6c,movFloatInst);
   }
@@ -8267,36 +8353,36 @@ code_r0x001002dc:
   else {
     operandRecord = IRInst__getOperandRecord(ppppppuVar19,0);
     iVar47 = 0;
-    iVar43 = 0;
+    loopCounterC = 0;
     stagedSelectWord = *(uint *******)(operandRecord + 0x10);
     argR8 = (uint ******)&local_104;
     local_104 = *(uint *******)(operandRecord + 0x10);
-    iVar20 = 4;
+    loopCounter = 4;
     argR7 = (uint ******)&stagedSelectWord;
     iVar34 = -1;
     do {
       iVar21 = iVar34;
-      if (*(char *)(iVar43 + (int)argR8) == '\0') {
-        iVar21 = iVar43;
+      if (*(char *)(loopCounterC + (int)argR8) == '\0') {
+        iVar21 = loopCounterC;
         if ((iVar47 != 0) && (iVar21 = iVar34, 0 < iVar47)) {
-          *(undefined1 *)(iVar43 + (int)argR7) = 1;
+          *(undefined1 *)(loopCounterC + (int)argR7) = 1;
         }
         iVar47 = iVar47 + 1;
       }
-      iVar43 = iVar43 + 1;
-      iVar20 = iVar20 + -1;
+      loopCounterC = loopCounterC + 1;
+      loopCounter = loopCounter + -1;
       iVar34 = iVar21;
-    } while (iVar20 != 0);
+    } while (loopCounter != 0);
     if (iVar47 < 2) goto code_r0x001002dc;
-    iVar43 = 4;
+    loopCounterC = 4;
     ppppppuVar19[0x27] = (uint *****)stagedSelectWord;
-    iVar34 = 0;
+    loopCounterB = 0;
     argR7 = (uint ******)&local_124;
     do {
-      *(char *)(iVar34 + (int)argR7) = (char)iVar21;
-      iVar34 = iVar34 + 1;
-      iVar43 = iVar43 + -1;
-    } while (iVar43 != 0);
+      *(char *)(loopCounterB + (int)argR7) = (char)iVar21;
+      loopCounterB = loopCounterB + 1;
+      loopCounterC = loopCounterC + -1;
+    } while (loopCounterC != 0);
     movFloatInst = IRInst__create(0x31,*(undefined4 *)(program + 8));
     pppppuVar15 = ppppppuVar19[0x25];
     pppppuVar52 = ppppppuVar19[0x26];
