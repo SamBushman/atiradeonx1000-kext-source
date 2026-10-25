@@ -1,0 +1,94 @@
+local	fragmentInstructionToIL	param_2	unusedArg2	INFERRED	stack/register argument the function never reads; the only caller passes the translator
+local	fragmentInstructionToIL	param_3	unusedArg3	INFERRED	argument the function never reads
+local	fragmentInstructionToIL	param_4	unusedArg4	INFERRED	argument the function never reads
+local	fragmentInstructionToIL	param_5	unusedArg5	INFERRED	argument the function never reads
+local	fragmentInstructionToIL	param_6	unusedArg6	INFERRED	argument the function never reads
+local	fragmentInstructionToIL	param_7	unusedArg7	INFERRED	argument the function never reads
+local	fragmentInstructionToIL	param_8	unusedArg8	INFERRED	argument the function never reads
+local	fragmentInstructionToIL	iVar16	instructionCount	INFERRED	*(program + 0x50): number of instructions of the program (the loop ends when instructionIndex reaches it)
+local	fragmentInstructionToIL	iVar17	instructionIndex	INFERRED	0 .. instructionCount: instruction being translated, incremented once per loop iteration
+local	fragmentInstructionToIL	iVar18	recordIndex	INFERRED	index of the current instruction's first 8-byte record inside the instruction block; advanced by recordSpan per instruction
+local	fragmentInstructionToIL	iVar15	recordSpan	INFERRED	operandCount + 2: number of 8-byte records one instruction occupies (header record, destination record, one per source)
+local	fragmentInstructionToIL	puVar20	instructionRecords	INFERRED	program + *(program + 0x54) * 8: the instruction block (8-byte records)
+local	fragmentInstructionToIL	puVar19	currentRecord	INFERRED	instructionRecords + recordIndex * 2: header record of the instruction being translated
+use	fragmentInstructionToIL	uVar11	operandCount	INFERRED	*currentRecord >> 0x1d: source operand count (3 bits); recordSpan = operandCount + 2	^\s*uVar11\ =\ \*puVar19\ >>\ 0x1d;$	+2
+use	fragmentInstructionToIL	uVar11	operandCount	INFERRED	*currentRecord >> 0x1d: source operand count (3 bits); recordSpan = operandCount + 2	^\s*if\ \(uVar11\ !=\ 0\)\ \{$	+1
+use	fragmentInstructionToIL	uVar11	operandCount	INFERRED	*currentRecord >> 0x1d: source operand count (3 bits); recordSpan = operandCount + 2	^\s*\}\ while\ \(uVar11\ !=\ uVar13\);$	+1
+use	fragmentInstructionToIL	uVar11	operandCount	INFERRED	*currentRecord >> 0x1d: source operand count (3 bits); recordSpan = operandCount + 2	^\s*uVar11\ =\ uVar11\ \-\ 1;$	+1
+use	fragmentInstructionToIL	uVar11	operandCount	INFERRED	*currentRecord >> 0x1d: source operand count (3 bits); recordSpan = operandCount + 2	^\s*iVar6\ =\ uVar11\ \*\ 2\ \+\ 1;$	+1
+use	fragmentInstructionToIL	uVar11	operandCount	INFERRED	*currentRecord >> 0x1d: source operand count (3 bits); recordSpan = operandCount + 2	^\s*iVar6\ =\ uVar11\ \*\ 2\ \+\ 3;$	+1
+use	fragmentInstructionToIL	uVar11	operandCount	INFERRED	*currentRecord >> 0x1d: source operand count (3 bits); recordSpan = operandCount + 2	^\s*if\ \(1\ <\ \(int\)uVar11\)\ \{$	+1
+use	fragmentInstructionToIL	uVar11	operandCount	INFERRED	*currentRecord >> 0x1d: source operand count (3 bits); recordSpan = operandCount + 2	^\s*if\ \(2\ <\ \(int\)uVar11\)\ \{$	+1
+use	fragmentInstructionToIL	iVar5	program	INFERRED	*translator: the ATI fragment program object (instruction count at +0x50, instruction block offset at +0x54)	^\s*iVar5\ =\ \*param_1;$	+4
+use	fragmentInstructionToIL	iVar5	program	INFERRED	*translator: the ATI fragment program object (instruction count at +0x50, instruction block offset at +0x54)	^\s*uVar22\ =\ \*\(uint\ \*\)\(iVar5\ \+\ iVar8\)\ >>\ 0x12\ \&\ 0xff;$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar5\ =\ 0;$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*uVar13\ =\ \*\(uint\ \*\)\(iVar5\ \+\ iVar6\)\ >>\ 0x12\ \&\ 0xff;$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar24\ =\ iVar6\ \+\ iVar5;$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*\(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,iVar24\ \+\ 8,\&local_ac,\&local_a8,$	+2
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*if\ \(\(\(\(\*\(uint\ \*\)\(\&DAT_001dac34\ \+\ iVar8\)\ >>\ 0x11\ \&\ 0xf\)\ !=\ 3\)\ \&\&$	+8
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*\(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,\(int\)puVar20\ \+\ iVar5\ \+\ 8,\&local_d0,\&local_cc,uVar9\);$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,\(int\)puVar20\ \+\ iVar5\ \+\ 8,\&local_108,\&local_104,uVar9\);$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f4e0\)\(param_1,\(int\)puVar20\ \+\ iVar5\ \+\ 0x10,\&local_100,\&local_fc,$	+2
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f1c0\)\(param_1,\(int\)puVar20\ \+\ iVar5\ \+\ 0x10,\&local_100,\&local_fc\);$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f1c0\)\(param_1,\(int\)puVar20\ \+\ iVar5\ \+\ 0x18,\&local_100,\&local_fc\);$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f1c0\)\(param_1,\(int\)puVar20\ \+\ iVar5\ \+\ 0x20,\&local_100,\&local_fc\);$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar23\ =\ iVar5\ \+\ iVar24;$	+2
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,iVar23\ \+\ iVar5\ \+\ 8,\&local_f8,\&local_f4,$	+2
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar24\ =\ iVar23\ \+\ iVar5;$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar23\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,iVar24\ \+\ 8,\&local_d0,\&local_cc,$	+2
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar23\ =\ iVar14\ \+\ iVar5;$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar24\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,iVar24,\&local_ac,\&local_a8,$	+2
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar23\ =\ iVar23\ \+\ iVar6\ \*\ 8\ \+\ iVar5;$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar23\ =\ iVar23\ \+\ iVar6\ \*\ 8\ \+\ iVar5;$@2	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*local_78\ =\ \*\(uint\ \*\)\(iVar6\ \+\ iVar5\ \+\ 0x10\)\ >>\ 0xe\ \&\ 1;$	+2
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*puVar26\ =\ \(uint\ \*\)\(iVar5\ \+\ iVar6\ \+\ 0x10\);$	+3
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*local_b0\ =\ \(uint\)\(\(\*\(uint\ \*\)\(iVar5\ \+\ iVar6\)\ \&\ 0x3fc0000\)\ ==\ 0xc40000\)\ <<\ 0x10\ \|$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*if\ \(\(\*\(uint\ \*\)\(iVar5\ \+\ iVar6\)\ \&\ 0x3fc0000\)\ !=\ 0xc40000\)\ \{$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,iVar23\ \+\ iVar6\ \*\ 8\ \+\ iVar5\ \+\ 8,\&local_d0,\&local_cc,1\)$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*\(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,iVar5\ \+\ iVar6\ \+\ 8,\&local_ac,\&local_a8,0\);$	+1
+use	fragmentInstructionToIL	iVar5	recordByteOffset	INFERRED	recordIndex * 8: byte offset of the current instruction from instructionRecords	^\s*iVar5\ =\ iVar18\ \*\ 8;$	+1
+use	fragmentInstructionToIL	iVar8	instructionBlockOffset	INFERRED	*(program + 0x54) * 8: byte offset of the instruction block	^\s*iVar8\ =\ \*\(int\ \*\)\(iVar5\ \+\ 0x54\)\ \*\ 8;$	+2
+use	fragmentInstructionToIL	iVar8	instructionBlockOffset	INFERRED	*(program + 0x54) * 8: byte offset of the instruction block	^\s*uVar22\ =\ \*\(uint\ \*\)\(iVar5\ \+\ iVar8\)\ >>\ 0x12\ \&\ 0xff;$	+1
+use	fragmentInstructionToIL	iVar8	opcodeInfoOffset	INFERRED	opcode * 0x10: offset into the 16-byte opcode info table at DAT_001dac34	^\s*iVar8\ =\ uVar22\ \*\ 0x10;$	+3
+use	fragmentInstructionToIL	iVar8	opcodeInfoOffset	INFERRED	opcode * 0x10: offset into the 16-byte opcode info table at DAT_001dac34	^\s*if\ \(\(\(\(\*\(uint\ \*\)\(\&DAT_001dac34\ \+\ iVar8\)\ >>\ 0x11\ \&\ 0xf\)\ !=\ 3\)\ \&\&$	+7
+use	fragmentInstructionToIL	iVar8	opcodeInfoOffset	INFERRED	opcode * 0x10: offset into the 16-byte opcode info table at DAT_001dac34	^\s*local_d4\ =\ CONCAT22\(\(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_d4\)\ \+\ 0\)\),\(short\)\(\*\(uint\ \*\)\(\&DAT_001dac34\ \+\ iVar8\)\ >>\ 1\)\);$	+5
+use	fragmentInstructionToIL	iVar8	opcodeInfoOffset	INFERRED	opcode * 0x10: offset into the 16-byte opcode info table at DAT_001dac34	^\s*\(\*\*\(code\ \*\*\)\(\&DAT_001dac3c\ \+\ iVar8\)\)\(param_1,iVar18,local_60\);$	+1
+use	fragmentInstructionToIL	iVar8	opcodeInfoOffset	INFERRED	opcode * 0x10: offset into the 16-byte opcode info table at DAT_001dac34	^\s*uVar7\ =\ \*\(uint\ \*\)\(\&DAT_001dac34\ \+\ iVar8\);$	+2
+use	fragmentInstructionToIL	iVar8	opcodeInfoOffset	INFERRED	opcode * 0x10: offset into the 16-byte opcode info table at DAT_001dac34	^\s*if\ \(\(\*\(uint\ \*\)\(\&DAT_001dac34\ \+\ iVar8\)\ >>\ 0x11\ \&\ 0xf\)\ !=\ 3\)\ \{$	+3
+use	fragmentInstructionToIL	iVar8	opcodeInfoOffset	INFERRED	opcode * 0x10: offset into the 16-byte opcode info table at DAT_001dac34	^\s*if\ \(\(\*\(uint\ \*\)\(\&DAT_001dac34\ \+\ iVar8\)\ >>\ 0x11\ \&\ 0xf\)\ ==\ 4\)\ \{$	+1
+use	fragmentInstructionToIL	iVar8	opcodeInfoOffset	INFERRED	opcode * 0x10: offset into the 16-byte opcode info table at DAT_001dac34	^\s*uVar13\ =\ \*\(uint\ \*\)\(\&DAT_001dac34\ \+\ iVar8\)\ >>\ 0x11\ \&\ 0xf;$@2	+1
+use	fragmentInstructionToIL	iVar8	opcodeInfoOffset	INFERRED	opcode * 0x10: offset into the 16-byte opcode info table at DAT_001dac34	^\s*iVar8\ =\ uVar22\ \*\ 0x10;$@2	+4
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*uVar22\ =\ \*\(uint\ \*\)\(iVar5\ \+\ iVar8\)\ >>\ 0x12\ \&\ 0xff;$	+2
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*if\ \(uVar22\ !=\ 0x4d\)\ \{$	+1
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*if\ \(uVar22\ ==\ 0\)\ \{$	+1
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*if\ \(uVar22\ ==\ 0x40\)\ \{$	+1
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*if\ \(uVar22\ ==\ 0x22\)\ \{$	+1
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*if\ \(\(\(uVar22\ \-\ 0x1f\ <\ 2\)\ \|\|\ \(uVar22\ ==\ 0x23\)\)\ \|\|\ \(uVar22\ ==\ 0x3a\)\)\ \{$	+1
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*if\ \(uVar22\ ==\ 0x6c\)\ \{$	+1
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*if\ \(uVar22\ ==\ 8\)\ \{$	+1
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*if\ \(uVar22\ ==\ 9\)\ \{$	+1
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*if\ \(uVar22\ ==\ 10\)\ \{$	+1
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*if\ \(uVar22\ ==\ 0x26\)\ \{$	+1
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*if\ \(uVar22\ ==\ 0x39\)\ \{$	+1
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*if\ \(uVar22\ ==\ 0x6d\)\ \{$	+1
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*if\ \(\(uVar22\ ==\ 0x31\)\ \|\|\ \(uVar22\ ==\ 0x36\)\)\ \{$	+1
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*if\ \(uVar22\ !=\ 0x4d\)\ break;$	+1
+use	fragmentInstructionToIL	uVar22	opcode	INFERRED	currentRecord header >> 0x12 & 0xff: ATI_fragment_shader/ARB program opcode, the key of the opcode info table (0x1dac34)	^\s*uVar22\ =\ puVar20\[iVar18\ \*\ 2\]\ >>\ 0x12\ \&\ 0xff;$	+2
+local	fragmentInstructionToIL	local_5c	ilInstAPtr	INFERRED	always &local_b0: pointer to the first IL instruction record passed to fpilEmitInstruction
+local	fragmentInstructionToIL	local_60	ilInstBPtr	INFERRED	always &local_d4: pointer to the second IL instruction record passed to fpilEmitInstruction
+local	fragmentInstructionToIL	local_b0	ilInstAOpcode	INFERRED	word 0 of the 0x24-byte IL instruction record A (opcode in the low half, written last 16 bits = modifiers)
+local	fragmentInstructionToIL	local_ac	ilInstADst	INFERRED	word 1 of record A: destination register word (set from fpilTranslateDestination)
+local	fragmentInstructionToIL	local_a8	ilInstADstMask	INFERRED	word 2 of record A: destination write mask word
+local	fragmentInstructionToIL	local_a4	ilInstASrc0	INFERRED	word 3 of record A: source 0 register word (fpilTranslateSource first output)
+local	fragmentInstructionToIL	local_a0	ilInstASrc1	INFERRED	word 4 of record A: source 1 register word
+local	fragmentInstructionToIL	local_9c	ilInstASrc2	INFERRED	word 5 of record A: source 2 register word
+local	fragmentInstructionToIL	local_98	ilInstASwz0	INFERRED	word 6 of record A: source 0 swizzle/modifier word (fpilTranslateSource second output)
+local	fragmentInstructionToIL	local_94	ilInstASwz1	INFERRED	word 7 of record A: source 1 swizzle/modifier word
+local	fragmentInstructionToIL	local_90	ilInstASwz2	INFERRED	word 8 of record A: source 2 swizzle/modifier word
+local	fragmentInstructionToIL	local_d4	ilInstBOpcode	INFERRED	word 0 of the second 0x24-byte IL instruction record B
+local	fragmentInstructionToIL	local_d0	ilInstBDst	INFERRED	word 1 of record B: destination register word
+local	fragmentInstructionToIL	local_cc	ilInstBDstMask	INFERRED	word 2 of record B: destination write mask word
+local	fragmentInstructionToIL	local_c8	ilInstBSrc0	INFERRED	word 3 of record B: source 0 register word
+local	fragmentInstructionToIL	local_c4	ilInstBSrc1	INFERRED	word 4 of record B: source 1 register word
+local	fragmentInstructionToIL	local_bc	ilInstBSwz0	INFERRED	word 6 of record B: source 0 swizzle/modifier word
+local	fragmentInstructionToIL	local_b8	ilInstBSwz12	INFERRED	words 7 and 8 of record B (swizzle/modifier words of sources 1 and 2; 2-element array)

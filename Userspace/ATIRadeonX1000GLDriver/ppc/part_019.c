@@ -244,7 +244,7 @@ int FUN_000d5390(param_1, param_2, param_3, param_4, param_5)
   uint uVar2;
   uint uVar3;
   uint uVar4;
-  uint uVar5;
+  uint loopCounter;
   
   uVar3 = 0x170000;
   if (param_3 == 0) {
@@ -253,11 +253,11 @@ int FUN_000d5390(param_1, param_2, param_3, param_4, param_5)
   else {
     uVar4 = 0x120000;
   }
-  uVar5 = 0;
+  loopCounter = 0;
   do {
-    if ((1 << (uVar5 & 0x3f) & param_5) != 0) {
+    if ((1 << (loopCounter & 0x3f) & param_5) != 0) {
       uVar2 = *param_2;
-      uVar3 = uVar5 & 0xffff | uVar3 & 0xffff0000;
+      uVar3 = loopCounter & 0xffff | uVar3 & 0xffff0000;
       if (param_2[1] <= uVar2) {
         uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
         if (param_2[2] != 0) {
@@ -297,8 +297,8 @@ int FUN_000d5390(param_1, param_2, param_3, param_4, param_5)
       *(uint *)(uVar2 * 4 + param_2[2]) = uVar4;
       *param_2 = *param_2 + 1;
     }
-    bVar1 = uVar5 != 3;
-    uVar5 = uVar5 + 1;
+    bVar1 = loopCounter != 3;
+    loopCounter = loopCounter + 1;
   } while (bVar1);
   return;
 }
@@ -398,7 +398,7 @@ int ffpsEmitDeclarations(ctx, ilBuilder)
   undefined4 newTokenBuffer;
   uint tokenIndex;
   uint uVar4;
-  uint uVar5;
+  uint loopCounter;
   int iVar6;
   uint loopIndex;
   uint *puVar8;
@@ -463,7 +463,7 @@ int ffpsEmitDeclarations(ctx, ilBuilder)
   bVar1 = false;
   if (uVar4 != 0) {
     loopIndex = 0;
-    uVar5 = 0x80000;
+    loopCounter = 0x80000;
     iVar6 = ctx;
     do {
       if (((*(uint *)(ctx + 0x44) & 0x100000) != 0) &&
@@ -524,14 +524,14 @@ int ffpsEmitDeclarations(ctx, ilBuilder)
             tokenIndex = *puVar8;
             *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
           }
-          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar5 | 0x19;
+          *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = loopCounter | 0x19;
           tokenIndex = *puVar8 + 1;
           *puVar8 = tokenIndex;
           uVar4 = (uint)(byte)((unsigned char *)0x000013b2)[ctx];
         }
       }
       loopIndex = loopIndex + 1;
-      uVar5 = uVar5 + 0x10000;
+      loopCounter = loopCounter + 0x10000;
       iVar6 = iVar6 + 4;
     } while ((int)loopIndex < (int)uVar4);
   }
@@ -655,6 +655,7 @@ int ffpsEmitTexEnvCombine(ctx, ilBuilder, baseFormat, unit, textureObject, isFir
   undefined4 isFirstUnit;
   undefined4 previousUnit;
 {
+  int loopCounter;
   uint tokenIndex;
   bool bVar1;
   byte textureUnitCount;
@@ -877,7 +878,7 @@ LAB_000d6840:
   tokenIndex = *countPtr + 1;
   *countPtr = tokenIndex;
   if (argCount != 0) {
-    iVar9 = 0;
+    loopCounter = 0;
     piVar12 = argOrder;
     do {
       iVar5 = *piVar12;
@@ -912,8 +913,8 @@ LAB_000d6840:
         tokenIndex = *countPtr + 1;
         *countPtr = tokenIndex;
       }
-      iVar9 = iVar9 + 1;
-    } while (argCount != iVar9);
+      loopCounter = loopCounter + 1;
+    } while (argCount != loopCounter);
   }
   if ((*(short *)(unitState + 0x454) == -0x78bf) || (*(short *)(unitState + 0x454) == -0x7951)) {
     if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
@@ -1138,7 +1139,7 @@ LAB_000d7214:
   tokenIndex = *countPtr + 1;
   *countPtr = tokenIndex;
   if (unitState != 0) {
-    iVar9 = 0;
+    loopCounter = 0;
     piVar12 = argOrder;
     do {
       argCount = *piVar12;
@@ -1173,8 +1174,8 @@ LAB_000d7214:
         tokenIndex = *countPtr + 1;
         *countPtr = tokenIndex;
       }
-      iVar9 = iVar9 + 1;
-    } while (unitState != iVar9);
+      loopCounter = loopCounter + 1;
+    } while (unitState != loopCounter);
   }
   return;
 }
@@ -2214,28 +2215,28 @@ int FUN_000d9b58(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 {
   bool bVar1;
   uint uVar2;
-  int iVar3;
-  int iVar4;
+  int loopCounter;
+  int loopCounterB;
   
-  iVar3 = 0;
+  loopCounter = 0;
   do {
     uVar2 = *param_2;
     if (uVar2 != 0) {
-      iVar4 = 0;
+      loopCounterB = 0;
       do {
         if ((uVar2 & 1) != 0) {
           if (param_3 == 0) {
-            return iVar4 + iVar3;
+            return loopCounterB + loopCounter;
           }
           param_3 = param_3 + -1;
         }
         uVar2 = uVar2 >> 1;
-        iVar4 = iVar4 + 1;
+        loopCounterB = loopCounterB + 1;
       } while (uVar2 != 0);
     }
-    bVar1 = iVar3 != 0xe0;
+    bVar1 = loopCounter != 0xe0;
     param_2 = param_2 + 1;
-    iVar3 = iVar3 + 0x20;
+    loopCounter = loopCounter + 0x20;
   } while (bVar1);
   return -1;
 }
@@ -3026,7 +3027,7 @@ int ildisAppendIndentedf(disassembler, indentLevel, format, fmtArgR6, fmtArgR7, 
   unsigned int ghidra_home[8] = { disassembler, indentLevel, format, fmtArgR6, fmtArgR7, fmtArgR8, fmtArgR9, fmtArgR10 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   uint uVar1;
   undefined4 uVar2;
-  int iVar3;
+  int loopCounter;
   undefined1 auStack_234 [540];
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 12)) = fmtArgR6;
@@ -3035,12 +3036,12 @@ int ildisAppendIndentedf(disassembler, indentLevel, format, fmtArgR6, fmtArgR7, 
   (*(unsigned int *)((unsigned char *)ghidra_home + 24)) = fmtArgR9;
   (*(unsigned int *)((unsigned char *)ghidra_home + 28)) = fmtArgR10;
   if (0 < indentLevel) {
-    iVar3 = 0;
+    loopCounter = 0;
     uVar2 = format;
     do {
-      iVar3 = iVar3 + 1;
+      loopCounter = loopCounter + 1;
       ((int (*)())ildisAppendf)(disassembler,"    ",uVar2,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
-    } while (indentLevel != iVar3);
+    } while (indentLevel != loopCounter);
   }
   printf_LDBLStub_1a3428(auStack_234,0x200,format,&(*(unsigned int *)((unsigned char *)ghidra_home + 12)),fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   uVar1 = _strlen(disassembler + 0x10);
@@ -3544,10 +3545,11 @@ int ildisPrintUsage(disassembler, usageCode, passThroughR5, fmtArgR6, fmtArgR7, 
 /* ildisPrintFixedPoint @ 0xdb574 (352 bytes) */
 void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBits,uint fractionBits,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
 {
+  uint loopCounterB;
   float integerPart;
   uint uVar2;
   int iVar3;
-  uint uVar4;
+  uint loopCounter;
   undefined1 *textBufferPtr;
   undefined4 in_r7;
   undefined4 in_r8;
@@ -3569,11 +3571,11 @@ void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBit
     iVar3 = integerBits - 1;
     integerField = 0;
     if (iVar3 != 0) {
-      uVar6 = 0;
+      loopCounterB = 0;
       integerField = 0;
       do {
-        uVar7 = uVar6 & 0x3f;
-        uVar6 = uVar6 + 1;
+        uVar7 = loopCounterB & 0x3f;
+        loopCounterB = loopCounterB + 1;
         integerField = integerField | 1 << uVar7;
         iVar3 = iVar3 + -1;
       } while (iVar3 != 0);
@@ -3590,12 +3592,12 @@ void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBit
   fractionField = 0;
   uVar6 = integerField;
   if (fractionBits != 0) {
-    uVar4 = 0;
+    loopCounter = 0;
     uVar6 = 0;
     uVar7 = fractionBits;
     do {
-      uVar2 = uVar4 & 0x3f;
-      uVar4 = uVar4 + 1;
+      uVar2 = loopCounter & 0x3f;
+      loopCounter = loopCounter + 1;
       uVar6 = uVar6 | 1 << uVar2;
       uVar7 = uVar7 - 1;
     } while (uVar7 != 0);

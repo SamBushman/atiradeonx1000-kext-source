@@ -93,23 +93,23 @@ int FUN_0002ddf0(ctxSaved, texture)
   uint uVar22;
   uint uVar23;
   char cVar24;
-  byte bVar25;
+  byte textureTarget;
   int iVar26;
-  ushort *puVar27;
+  ushort *texImages;
   char cVar29;
   int iVar28;
-  int *piVar30;
+  int *hwState;
   double dVar31;
   double dVar32;
   
-  piVar30 = texture + 0xf;
+  hwState = texture + 0xf;
   texture[0x2e] = (int)texture;
   dVar31 = DOUBLE_001aa240;
-  puVar27 = (ushort *)texture[0xc];
-  *(byte *)((int)texture + 0x3d) = (byte)(-(uint)puVar27[0x2e] >> 0x1f);
-  uVar15 = (uint)(int)((double)*(float *)(puVar27 + 0x18) + dVar31);
-  uVar17 = (uint)(int)((double)*(float *)(puVar27 + 0x1a) + dVar31);
-  uVar14 = (uint)*(byte *)(puVar27 + 0x2f);
+  texImages = (ushort *)texture[0xc];
+  *(byte *)((int)texture + 0x3d) = (byte)(-(uint)texImages[0x2e] >> 0x1f);
+  uVar15 = (uint)(int)((double)*(float *)(texImages + 0x18) + dVar31);
+  uVar17 = (uint)(int)((double)*(float *)(texImages + 0x1a) + dVar31);
+  uVar14 = (uint)*(byte *)(texImages + 0x2f);
   uVar16 = uVar15 + uVar14;
   if ((int)uVar16 < 0) {
     uVar16 = 0;
@@ -117,13 +117,13 @@ int FUN_0002ddf0(ctxSaved, texture)
   if ((int)uVar14 < (int)uVar16) {
     uVar14 = uVar16;
   }
-  uVar22 = (uint)(short)puVar27[0x1e];
+  uVar22 = (uint)(short)texImages[0x1e];
   uVar16 = uVar17 + uVar22;
   if (((int)uVar16 < (int)uVar14) && (uVar14 = uVar22, (int)uVar22 < (int)uVar16)) {
     uVar14 = uVar16;
   }
-  uVar16 = (uint)*(byte *)((int)puVar27 + 0x5f);
-  if ((int)uVar14 <= (int)(uint)*(byte *)((int)puVar27 + 0x5f)) {
+  uVar16 = (uint)*(byte *)((int)texImages + 0x5f);
+  if ((int)uVar14 <= (int)(uint)*(byte *)((int)texImages + 0x5f)) {
     uVar16 = uVar14;
   }
   if ((int)uVar15 < 0) {
@@ -132,27 +132,27 @@ int FUN_0002ddf0(ctxSaved, texture)
   if ((int)uVar15 < (int)uVar17) {
     uVar17 = uVar15;
   }
-  if ((int)((int)(short)puVar27[0x1f] - uVar22) < (int)uVar17) {
-    uVar17 = (int)(short)puVar27[0x1f] - uVar22;
+  if ((int)((int)(short)texImages[0x1f] - uVar22) < (int)uVar17) {
+    uVar17 = (int)(short)texImages[0x1f] - uVar22;
   }
   uVar15 = uVar17;
-  if ((int)(uint)*(byte *)(puVar27 + 0x32) < (int)uVar17) {
-    uVar15 = (uint)*(byte *)(puVar27 + 0x32);
+  if ((int)(uint)*(byte *)(texImages + 0x32) < (int)uVar17) {
+    uVar15 = (uint)*(byte *)(texImages + 0x32);
   }
   if ((int)uVar15 < 0) {
     uVar15 = 0;
   }
   uVar15 = uVar15 & 0xff;
   uVar14 = uVar17;
-  if ((int)(uint)*(byte *)((int)puVar27 + 0x65) < (int)uVar17) {
-    uVar14 = (uint)*(byte *)((int)puVar27 + 0x65);
+  if ((int)(uint)*(byte *)((int)texImages + 0x65) < (int)uVar17) {
+    uVar14 = (uint)*(byte *)((int)texImages + 0x65);
   }
   if ((int)uVar14 < 0) {
     uVar14 = 0;
   }
   uVar14 = uVar14 & 0xff;
-  if ((int)(uint)*(byte *)(puVar27 + 0x33) < (int)uVar17) {
-    uVar17 = (uint)*(byte *)(puVar27 + 0x33);
+  if ((int)(uint)*(byte *)(texImages + 0x33) < (int)uVar17) {
+    uVar17 = (uint)*(byte *)(texImages + 0x33);
   }
   if ((int)uVar17 < 0) {
     uVar17 = 0;
@@ -166,25 +166,25 @@ int FUN_0002ddf0(ctxSaved, texture)
   uVar22 = (uint)uVar7;
   uVar8 = *(ushort *)(texture + 0x1e);
   uVar21 = (uint)uVar8;
-  *(undefined1 *)((int)texture + 0x6e) = *(undefined1 *)(puVar27 + 0x35);
+  *(undefined1 *)((int)texture + 0x6e) = *(undefined1 *)(texImages + 0x35);
   bVar2 = *(byte *)(texture + 0x1b);
-  *(ushort *)(texture + 0x1d) = puVar27[1];
+  *(ushort *)(texture + 0x1d) = texImages[1];
   uVar20 = (uint)*(byte *)(texture + 0xe);
   *(byte *)((int)texture + 0x73) = *(byte *)(texture + 0xe);
-  uVar17 = (uint)*(byte *)(puVar27 + 0x33) - (uVar17 & 0xff);
+  uVar17 = (uint)*(byte *)(texImages + 0x33) - (uVar17 & 0xff);
   *(short *)((int)texture + 0x7a) = (short)uVar17;
-  uVar9 = puVar27[1];
+  uVar9 = texImages[1];
   uVar19 = (uint)uVar9;
   *(ushort *)(texture + 0x1f) = *(ushort *)((int)texture + 0x3e);
   *(ushort *)(texture + 0x1d) = uVar9;
-  bVar25 = *(byte *)(texture[0xc] + 1) & 0xf;
-  *(byte *)(texture + 0x1b) = bVar25;
+  textureTarget = *(byte *)(texture[0xc] + 1) & 0xf;
+  *(byte *)(texture + 0x1b) = textureTarget;
   dVar31 = DOUBLE_001aa250;
-  switch(bVar25) {
+  switch(textureTarget) {
   case 0:
-    uVar22 = 1 << (*(byte *)(puVar27 + 0x32) - uVar15 & 0x3f);
+    uVar22 = 1 << (*(byte *)(texImages + 0x32) - uVar15 & 0x3f);
     *(short *)((int)texture + 0x76) = (short)uVar22;
-    bVar3 = *(byte *)((int)puVar27 + 0x65);
+    bVar3 = *(byte *)((int)texImages + 0x65);
     *(undefined1 *)((int)texture + 0x6d) = 2;
     uVar21 = 1 << (bVar3 - uVar14 & 0x3f);
     *(short *)(texture + 0x1e) = (short)uVar21;
@@ -192,9 +192,9 @@ int FUN_0002ddf0(ctxSaved, texture)
     texture[0x21] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,uVar21 & 0xffff) - dVar31));
     break;
   case 1:
-    uVar22 = 1 << (*(byte *)(puVar27 + 0x32) - uVar15 & 0x3f);
+    uVar22 = 1 << (*(byte *)(texImages + 0x32) - uVar15 & 0x3f);
     *(short *)((int)texture + 0x76) = (short)uVar22;
-    bVar3 = *(byte *)((int)puVar27 + 0x65);
+    bVar3 = *(byte *)((int)texImages + 0x65);
     *(undefined1 *)((int)texture + 0x6d) = 3;
     uVar21 = 1 << (bVar3 - uVar14 & 0x3f);
     *(short *)(texture + 0x1e) = (short)uVar21;
@@ -202,11 +202,11 @@ int FUN_0002ddf0(ctxSaved, texture)
     texture[0x21] = (int)GH_F2U((float)((double)CONCAT44(0x43300000,uVar21 & 0xffff) - dVar31));
     break;
   case 2:
-    uVar22 = (uint)puVar27[uVar16 * 0xc + 0x52] +
-             (uint)*(byte *)(puVar27 + uVar16 * 0xc + 0x55) * -2;
+    uVar22 = (uint)texImages[uVar16 * 0xc + 0x52] +
+             (uint)*(byte *)(texImages + uVar16 * 0xc + 0x55) * -2;
     *(short *)((int)texture + 0x76) = (short)uVar22;
-    bVar3 = *(byte *)(puVar27 + uVar16 * 0xc + 0x55);
-    uVar9 = puVar27[uVar16 * 0xc + 0x53];
+    bVar3 = *(byte *)(texImages + uVar16 * 0xc + 0x55);
+    uVar9 = texImages[uVar16 * 0xc + 0x53];
     *(undefined1 *)((int)texture + 0x6d) = 2;
     uVar21 = (uint)uVar9 + (uint)bVar3 * -2;
     *(short *)(texture + 0x1e) = (short)uVar21;
@@ -216,21 +216,21 @@ int FUN_0002ddf0(ctxSaved, texture)
   case 3:
     iVar26 = ((int (*)())gldTextureHasNonPowerOfTwoSize2)(texture,uVar18,uVar19,uVar22,uVar20,uVar21);
     if (iVar26 == 0) {
-      *(short *)((int)texture + 0x76) = (short)(1 << (*(byte *)(puVar27 + 0x32) - uVar15 & 0x3f));
-      *(short *)(texture + 0x1e) = (short)(1 << (*(byte *)((int)puVar27 + 0x65) - uVar14 & 0x3f));
+      *(short *)((int)texture + 0x76) = (short)(1 << (*(byte *)(texImages + 0x32) - uVar15 & 0x3f));
+      *(short *)(texture + 0x1e) = (short)(1 << (*(byte *)((int)texImages + 0x65) - uVar14 & 0x3f));
     }
     else {
       *(ushort *)((int)texture + 0x76) =
-           puVar27[uVar16 * 0xc + 0x52] + (ushort)*(byte *)(puVar27 + uVar16 * 0xc + 0x55) * -2;
+           texImages[uVar16 * 0xc + 0x52] + (ushort)*(byte *)(texImages + uVar16 * 0xc + 0x55) * -2;
       *(ushort *)(texture + 0x1e) =
-           puVar27[uVar16 * 0xc + 0x53] + (ushort)*(byte *)(puVar27 + uVar16 * 0xc + 0x55) * -2;
+           texImages[uVar16 * 0xc + 0x53] + (ushort)*(byte *)(texImages + uVar16 * 0xc + 0x55) * -2;
     }
     dVar31 = DOUBLE_001aa250;
     uVar22 = (uint)*(ushort *)((int)texture + 0x76);
     uVar21 = (uint)*(ushort *)(texture + 0x1e);
     *(undefined1 *)((int)texture + 0x6d) = 2;
     uVar20 = (uint)*(byte *)((int)texture + 0x73);
-    bVar25 = *(byte *)(texture + 0x1b);
+    textureTarget = *(byte *)(texture + 0x1b);
     uVar17 = (uint)*(ushort *)((int)texture + 0x7a);
     uVar19 = (uint)*(ushort *)(texture + 0x1d);
     uVar18 = (uint)*(ushort *)(texture + 0x1f);
@@ -242,11 +242,11 @@ int FUN_0002ddf0(ctxSaved, texture)
   case 4:
     iVar26 = ((int (*)())gldTextureHasNonPowerOfTwoSize2)(texture,uVar18,uVar19,uVar22,uVar20,uVar21);
     if (iVar26 == 0) {
-      *(short *)((int)texture + 0x76) = (short)(1 << (*(byte *)(puVar27 + 0x32) - uVar15 & 0x3f));
+      *(short *)((int)texture + 0x76) = (short)(1 << (*(byte *)(texImages + 0x32) - uVar15 & 0x3f));
     }
     else {
       *(ushort *)((int)texture + 0x76) =
-           puVar27[uVar16 * 0xc + 0x52] + (ushort)*(byte *)(puVar27 + uVar16 * 0xc + 0x55) * -2;
+           texImages[uVar16 * 0xc + 0x52] + (ushort)*(byte *)(texImages + uVar16 * 0xc + 0x55) * -2;
     }
     uVar22 = (uint)*(ushort *)((int)texture + 0x76);
     uVar21 = 1;
@@ -254,7 +254,7 @@ int FUN_0002ddf0(ctxSaved, texture)
     texture[0x21] = 0x3f800000;
     *(undefined1 *)((int)texture + 0x6d) = 1;
     uVar20 = (uint)*(byte *)((int)texture + 0x73);
-    bVar25 = *(byte *)(texture + 0x1b);
+    textureTarget = *(byte *)(texture + 0x1b);
     uVar17 = (uint)*(ushort *)((int)texture + 0x7a);
     uVar19 = (uint)*(ushort *)(texture + 0x1d);
     uVar18 = (uint)*(ushort *)(texture + 0x1f);
@@ -262,7 +262,7 @@ int FUN_0002ddf0(ctxSaved, texture)
          (int)GH_F2U((float)((double)CONCAT44(0x43300000,(uint)*(ushort *)((int)texture + 0x76)) -
                      DOUBLE_001aa250));
   }
-  if (((((bVar1 != uVar20) || (bVar2 != bVar25)) || ((uint)uVar7 != (uVar22 & 0xffff))) ||
+  if (((((bVar1 != uVar20) || (bVar2 != textureTarget)) || ((uint)uVar7 != (uVar22 & 0xffff))) ||
       (((uint)uVar8 != (uVar21 & 0xffff) || ((uint)uVar5 != (uVar17 & 0xffff))))) ||
      ((uVar4 != uVar19 || (uVar6 != uVar18)))) {
     *(undefined1 *)((int)texture + 0x71) = 0;
@@ -298,7 +298,7 @@ int FUN_0002ddf0(ctxSaved, texture)
     uVar15 = (*(uint *)(puVar13 + uVar20 * 0x24 + 0x20) >> 0x19 & 1) << 0x16;
     texture[0x17] = uVar15 | uVar17 & 0xff3fffff;
     *(byte *)((int)texture + 0x71) = (puVar13[uVar20 * 0x24 + 0x20] ^ 1) & 1;
-    if (bVar25 == 0) {
+    if (textureTarget == 0) {
       texture[0x17] = uVar15 | uVar17 & 0xf93fffff | 0x4000000;
     }
     else if (*(char *)((int)texture + 0x6d) == '\x03') {
@@ -313,7 +313,7 @@ int FUN_0002ddf0(ctxSaved, texture)
   }
   uVar15 = (uint)texture[0x32] >> 0x16;
   if (*texture == 0) {
-    if ((*puVar27 & 0x400) == 0) {
+    if ((*texImages & 0x400) == 0) {
       texture[0x10] = uVar15 << 0x1e;
     }
     else {
@@ -352,13 +352,13 @@ int FUN_0002ddf0(ctxSaved, texture)
     if (*(char *)((int)texture + 0x71) != *(char *)(texture + 0x1c)) goto LAB_0002e690;
 LAB_0002e6d8:
     *(short *)((int)texture + 0xa2) = (short)uVar15;
-    FUN_0002d210(piVar30,uVar15);
+    FUN_0002d210(hwState,uVar15);
     cVar24 = *(char *)((int)texture + 0x71);
   }
   else {
 LAB_0002e690:
     *(ushort *)(texture + 0x28) = uVar4;
-    FUN_0002d030(piVar30,(uint)uVar4);
+    FUN_0002d030(hwState,(uint)uVar4);
     *(byte *)((int)texture + 0x3d) = (byte)(-(uint)*(ushort *)(texture[0xc] + 0x5c) >> 0x1f);
     uVar15 = (uint)*(ushort *)(iVar26 + 0x18);
     if ((*(ushort *)((int)texture + 0xa2) != uVar15) ||
@@ -475,7 +475,7 @@ LAB_0002e708:
     uVar15 = (uint)(int)fVar12;
   }
   texture[0x13] = iVar26 << 0x10 | uVar15;
-  ((void (*)())gldPackColorForSurfaceFormat)(piVar30,(double)*(float *)(iVar28 + 0x1c),(double)*(float *)(iVar28 + 0x20),
+  ((void (*)())gldPackColorForSurfaceFormat)(hwState,(double)*(float *)(iVar28 + 0x1c),(double)*(float *)(iVar28 + 0x20),
                (double)*(float *)(iVar28 + 0x24),(double)*(float *)(iVar28 + 0x28));
   uVar14 = (uint)*(byte *)((int)texture + 0xa5);
   uVar15 = (uint)(int)(*(float *)(iVar28 + 0x34) + FLOAT_001aa10c);
@@ -4902,7 +4902,7 @@ LAB_00035740:
     _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
     return 0;
   }
-  iVar33 = FUN_0000a2f0((uint)*(ushort *)(((unsigned char *)0x00002db8) + *(int *)(ctx + 0x10)),
+  iVar33 = gld_textureVariantClass((uint)*(ushort *)(((unsigned char *)0x00002db8) + *(int *)(ctx + 0x10)),
                         *(undefined4 *)(ctx + 0x154));
   bVar12 = *(short *)(iVar47 + 2) != 0x1902;
   if ((!bVar12) &&
@@ -6022,7 +6022,7 @@ LAB_00037c6c:
                 procChannelSize = uStack_230;
                 procWidth = width;
                 puStack_10c = puStack_22c;
-                FUN_0000a6e0(ctx,pixelFormat,pixelType,width,height,puStack_bc,puStack_c4,
+                gld_computePixelStoreLayout(ctx,pixelFormat,pixelType,width,height,puStack_bc,puStack_c4,
                              piStack_c8,unpackState);
                 srcRowBytesCopy = srcRowBytes;
                 puStack_23c = (uint *)(pixels + srcSkipBytes + rowsDone * srcRowBytes);
@@ -6684,7 +6684,7 @@ LAB_00038698:
               piVar36 = piStack_c8;
               puVar38 = puStack_c4;
               procPitch = rowPitchB;
-              FUN_0000a6e0(ctx,pixelFormat,pixelType,width,height,puStack_bc,piStack_c8,
+              gld_computePixelStoreLayout(ctx,pixelFormat,pixelType,width,height,puStack_bc,piStack_c8,
                            puStack_c4,unpackState);
               puVar33 = puStack_b8;
               _glgConvertType(pixelFormat,pixelType,puStack_b8,puStack_b4,uVar44,puVar37,piVar36,puVar38
@@ -6735,7 +6735,7 @@ LAB_00037930:
     return 0;
   }
   sizeOutPtr = &uStack_248;
-  FUN_0000a6e0(ctx,pixelFormat,pixelType,width,height,sizeOutPtr,&srcBytesPerPixel,&srcSkipBytes,
+  gld_computePixelStoreLayout(ctx,pixelFormat,pixelType,width,height,sizeOutPtr,&srcBytesPerPixel,&srcSkipBytes,
                ((unsigned char *)0x00002e6c) + *(int *)(ctx + GLD_engineState));
   sourceBase = *(int *)*sourceSurface;
   srcData = pixels + srcSkipBytes;
@@ -6826,7 +6826,7 @@ LAB_00037930:
   if (((((*(byte *)((int)texture + 0x39) & 7) != 0) &&
        (iVar22 = ((int (*)())gldTextureMakeResident)(ctx,texture,iVar22,*(byte *)((int)texture + 0x39) & 7,"",sizeOutPtr),
        iVar22 == 0)) ||
-      ((*(int *)sourceSurface[1] != 0 && (iVar22 = FUN_0001e280(ctx,sourceSurface,1), iVar22 == 0)))) ||
+      ((*(int *)sourceSurface[1] != 0 && (iVar22 = gld_prepareBufferBacking(ctx,sourceSurface,1), iVar22 == 0)))) ||
      (((int *)sourceSurface[2] == (int *)0x0 || (iVar22 = *(int *)sourceSurface[2], iVar22 == 0))))
   goto LAB_00037930;
   if (*(char *)(iVar22 + 0x16) != '\x06') {

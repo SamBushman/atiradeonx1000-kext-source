@@ -1,0 +1,216 @@
+local	FUN_0009edd0	bVar1	hashFullKey	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009edd0	iVar5	bucketEntry	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009edd0	iVar7	compareResult	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009edd0	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009edd0	param_2	key	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009edd0	puVar3	keyCursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009edd0	puVar8	keyEnd	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009edd0	puVar9	keyTail	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009edd0	uVar2	rotateAmount	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009edd0	uVar4	hash	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009edd0	uVar6	rotateCounter	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009edd0	uVar10	bucketCount	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	fpVariantCacheGrow	iVar3	newBuckets	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	fpVariantCacheGrow	iVar4	oldBuckets	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001118\)\ \+\ param_1\);$	+1
+use	fpVariantCacheGrow	iVar4	oldBuckets	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001118\)\ \+\ param_1\);$@2	+1
+use	fpVariantCacheGrow	iVar4	oldBuckets	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar5\ =\ \*\(uint\ \*\*\)\(iVar12\ \*\ 4\ \+\ iVar4\);$	+1
+use	fpVariantCacheGrow	iVar4	oldBuckets	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ \*\(int\ \*\)\(\(\(unsigned\ char\ \*\)0x00001118\)\ \+\ param_1\);$@3	+1
+use	fpVariantCacheGrow	iVar4	oldBuckets	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\*\*\(code\ \*\*\)\(param_1\ \+\ 0x18\)\)\(iVar4\);$	+1
+use	fpVariantCacheGrow	iVar4	newBucketIndex	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar4\ =\ \(uVar7\ \-\ \(uVar7\ /\ \*\(uint\ \*\)\(\(\(unsigned\ char\ \*\)0x0000111c\)\ \+\ param_1\)\)\ \*$	+4
+local	fpVariantCacheGrow	iVar11	oldBucketCount	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	fpVariantCacheGrow	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	fpVariantCacheGrow	param_2	growBy	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	fpVariantCacheGrow	puVar5	entry	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	fpVariantCacheGrow	puVar6	keyCursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	fpVariantCacheGrow	puVar8	keyCursorB	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	fpVariantCacheGrow	puVar9	keyBlockEnd	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar9\ =\ puVar5\ \+\ 0xb;$	+1
+use	fpVariantCacheGrow	puVar9	keyBlockEnd	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar6\ =\ puVar9;$	+1
+use	fpVariantCacheGrow	puVar9	keyBlockEnd	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar9\ =\ puVar6\ \+\ 0xb;$	+1
+use	fpVariantCacheGrow	puVar9	keyTail	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar9\ =\ puVar6\ \+\ 5;$	+2
+use	fpVariantCacheGrow	puVar9	keyTail	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar9\ =\ puVar6;$	+1
+use	fpVariantCacheGrow	puVar9	keyTail	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*for\ \(;\ puVar9\ <\ puVar10;\ puVar9\ =\ puVar9\ \+\ 1\)\ \{$	+1
+use	fpVariantCacheGrow	puVar9	keyTail	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ uVar7\ \^\ \(\*puVar9\ <<\ uVar1\ \|\ \*puVar9\ >>\ 0x20\ \-\ uVar1\);$	+1
+use	fpVariantCacheGrow	puVar10	keyEnd	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar10\ =\ puVar5\ \+\ 0xc;$	+2
+use	fpVariantCacheGrow	puVar10	keyEnd	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(puVar6\ \+\ 0xb\ <=\ puVar10\);$	+1
+use	fpVariantCacheGrow	puVar10	keyEnd	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(puVar10\ <\ puVar9\)\ \{$	+1
+use	fpVariantCacheGrow	puVar10	keyEnd	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*for\ \(;\ puVar9\ <\ puVar10;\ puVar9\ =\ puVar9\ \+\ 1\)\ \{$	+1
+use	fpVariantCacheGrow	puVar10	nextEntry	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar10\ =\ \(uint\ \*\)puVar5\[0x17\];$	+1
+use	fpVariantCacheGrow	puVar10	nextEntry	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*puVar5\ =\ puVar10;$	+2
+local	fpVariantCacheGrow	uVar1	rotate	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	fpVariantCacheGrow	uVar2	rotateCounter	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	fpVariantCacheGrow	uVar7	hash	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	iVar6	entry	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	iVar7	newParamList	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	iVar11	bucketIndex	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	param_2	key	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	param_3	program	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	param_4	dependencyA	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	param_5	dependencyB	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	param_6	constRegCount	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	param_7	paramList	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	param_8	flag	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	puVar2	keyCursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	puVar9	keyEnd	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	puVar10	keyTail	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	uVar1	rotate	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_0009c800	uVar3	programInstrCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_3\ \+\ 0x3d0\);$	+1
+use	FUN_0009c800	uVar3	programInstrCount	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x44\)\ =\ uVar3;$	+1
+use	FUN_0009c800	uVar3	constBytes	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ \(\*\*\(code\ \*\*\)\(param_1\ \+\ 0xc\)\)\(param_6\ <<\ 4\);$	+2
+local	FUN_0009c800	uVar4	hash	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	uVar5	rotateCounter	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009c800	uVar8	entrySerial	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	fpVariantCacheFlush	iVar1	bucketOffset	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	fpVariantCacheFlush	iVar2	bucketTable	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	fpVariantCacheFlush	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cb10	iVar2	depStatus	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cb10	iVar4	program	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cb10	local_30	outDepB	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cb10	local_34	outDepA	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cb10	local_38	newInstrCount	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cb10	local_2c	outDepC	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cb10	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cb10	param_2	entry	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cb10	param_3	depRecord	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cb10	param_4	instrBytes	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cb10	uVar1	scratchCopy	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cb10	uVar3	instrCount	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	iVar1	slotOffset	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	iVar2	slot	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	param_1	keepOrder	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	param_2	table	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	uVar3	elem5	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	uVar4	elem14	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	uVar5	elem1	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	uVar6	elem12	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	uVar7	elem4	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	uVar8	elem8	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	uVar9	elem15	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	uVar10	elem9	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	uVar11	elem11	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	uVar12	elem7	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	uVar13	elem3	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	uVar14	elem10	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	uVar15	elem6	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	uVar16	elem2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bc10	uVar17	elem13	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bd00	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bd00	piVar2	vector	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bd00	uVar1	slotCount	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bd60	iVar1	cursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bd60	iVar2	countdown	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bd60	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009bd60	param_2	flag131	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009d2e0	iVar1	hookArg	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009d2e0	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009d3b0	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009d3b0	param_2	arg2	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009d080	bVar1	anyDirectionalLight	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009d080	bVar2	anyPositionalLight	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_0009d080	bVar7	separateSpecularLight	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(\*puVar9\ \&\ 0xc000000\)\ ==\ 0\)\ \|\|\ \(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002d48\)\ \+\ iVar6\)\ !=\ \-0x7e06\)\)\ \|\|$	+3
+use	FUN_0009d080	bVar7	separateSpecularLight	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(byte\ \*\)\(param_1\ \+\ 0x130\)\ =\ bVar7\ \|\ \*\(byte\ \*\)\(param_1\ \+\ 0x130\);$	+1
+use	FUN_0009d080	bVar7	separateSpecularLight	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar4\ ==\ 0\)\ \|\|\ \(bVar7\ =\ 1,\ \(\(unsigned\ char\ \*\)0x00002d48\)\[iVar6\ \+\ 5\]\ ==\ '\\0'\)\)\ \{$	+2
+use	FUN_0009d080	bVar7	separateSpecularLight	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar7\ =\ \*\(byte\ \*\)\(param_1\ \+\ 0x130\)\ \|\ bVar7;$	+3
+use	FUN_0009d080	bVar7	secondaryColorFlag	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\*\(char\ \*\)\(param_1\ \+\ 0x12f\)\ !=\ '\\0'\)\ \|\|\ \(bVar7\ =\ 1,\ \-1\ <\ \*\(int\ \*\)\(param_1\ \+\ 0x44\)\)\)\ \{$	+2
+use	FUN_0009d080	bVar7	secondaryColorFlag	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(byte\ \*\)\(param_1\ \+\ 0x12a\)\ =\ bVar7\ \|\ \(byte\)uVar4;$	+1
+local	FUN_0009d080	bVar10	lightIsDirectional	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009d080	fVar3	zeroConst	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009d080	iVar6	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009d080	iVar8	lightStateCursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009d080	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009d080	puVar9	lightControlCursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_0009d080	uVar4	packedMaterialSources	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x26c\);$	+1
+use	FUN_0009d080	uVar4	packedMaterialSources	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x278\)\ =\ uVar4\ >>\ 4\ \&\ 0xf;$	+7
+use	FUN_0009d080	uVar4	packedMaterialSources	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x284\)\ =\ uVar4\ >>\ 0x18\ \&\ 0xf;$	+1
+use	FUN_0009d080	uVar4	lightMaskShifting	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x88\);$	+2
+use	FUN_0009d080	uVar4	lightMaskShifting	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar4\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	FUN_0009d080	uVar4	lightMaskShifting	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ uVar4\ >>\ 1;$	+1
+use	FUN_0009d080	uVar4	lightMaskShifting	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(uVar4\ !=\ 0\);$	+1
+use	FUN_0009d080	uVar4	texGenNeedsNormal	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar4\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x8c\)\ >>\ 0x1b\ \&\ 1\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x8c\)\ >>\ 0x1a\ \&\ 1;$	+2
+use	FUN_0009d080	uVar4	texGenNeedsNormal	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(\(uVar4\ ==\ 0\)\ \&\&\ \(!bVar2\)\)\ \&\&\ \(!bVar1\)\)\ \|\|\ \(uVar5\ =\ 1,\ \*\(char\ \*\)\(iVar6\ \+\ 0x24ad\)\ ==\ '\\0'\)\)\ \{$	+1
+use	FUN_0009d080	uVar4	texGenNeedsNormal	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(byte\ \*\)\(param_1\ \+\ 0x12a\)\ =\ bVar7\ \|\ \(byte\)uVar4;$	+1
+local	FUN_0009d080	uVar5	normalizeFlag	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	bVar4	anyDirectionalLight	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	bVar20	anyPositionalLight	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	bVar24	lightIsDirectional	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	fVar13	zeroConst	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	fVar14	oneConst	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	iVar17	lightWordOffset	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_0009cc30	iVar19	lightStateCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar19\ =\ iVar23;$	+1
+use	FUN_0009cc30	iVar19	lightStateCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*bVar24\ =\ \*\(float\ \*\)\(iVar19\ \+\ 0x24fc\)\ ==\ FLOAT_001aa0d4;$	+1
+use	FUN_0009cc30	iVar19	lightStateCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar19\ =\ iVar19\ \+\ 0x80;$	+1
+use	FUN_0009cc30	iVar19	lightsKeyBit	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar21\ !=\ 0\)\ \|\|\ \(bVar20\)\)\ \|\|\ \(iVar19\ =\ 0,\ bVar4\)\)\ \{$	+2
+use	FUN_0009cc30	iVar19	lightsKeyBit	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar21\ =\ iVar19\ <<\ 0x18;$	+1
+use	FUN_0009cc30	iVar19	lightControlBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar19\ =\ param_1\ \+\ 0x3a8;$	+1
+use	FUN_0009cc30	iVar19	lightControlBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar8\ =\ \(ushort\)\(\(uint\)\*\(undefined4\ \*\)\(iVar19\ \+\ iVar17\)\ >>\ 0x11\)\ \&\ 0x6000;$	+1
+use	FUN_0009cc30	iVar19	lightControlBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar9\ =\ \(\*\(byte\ \*\)\(iVar19\ \+\ iVar17\)\ \&\ 0x30\)\ <<\ 7;$	+1
+use	FUN_0009cc30	iVar19	lightControlBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar10\ =\ \(\*\(byte\ \*\)\(iVar19\ \+\ iVar17\)\ \&\ 0xc\)\ <<\ 7;$	+1
+use	FUN_0009cc30	iVar19	lightControlBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar12\ =\ \(ushort\)\(\(uint\)\*\(undefined4\ \*\)\(iVar19\ \+\ iVar17\)\ >>\ 0x15\)\ \&\ 0x10;$	+1
+use	FUN_0009cc30	iVar19	lightControlBase	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar11\ \|\ uVar7\ \|\ \(\*\(byte\ \*\)\(iVar19\ \+\ iVar17\)\ \&\ 1\)\ <<\ 3;$	+1
+use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar23\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 4\)\ \+\ 0x10\);$	+2
+use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar19\ =\ iVar23;$	+1
+use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar2\ =\ \(\(byte\)\(\(unsigned\ char\ \*\)0x00002d48\)\[iVar23\ \+\ 5\]\ \&\ 1\)\ <<\ 0x1d;$	+1
+use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ \(uint\)\(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002d48\)\ \+\ iVar23\)\ ==\ \-0x7e06\)\ <<\ 10;$	+1
+use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\(\(byte\)\(\(unsigned\ char\ \*\)0x00002d48\)\[iVar23\ \+\ 4\]\ \&\ 1\)\ <<\ 9\ \|$	+1
+use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar5\ =\ \(ushort\)\(\*\(float\ \*\)\(iVar23\ \+\ 0x24fc\)\ !=\ fVar13\)\ <<\ 8;$	+1
+use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar6\ =\ \(ushort\)\(\*\(float\ \*\)\(iVar23\ \+\ 0x24fc\)\ ==\ fVar14\)\ <<\ 7;$	+1
+use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar7\ =\ \(ushort\)\(\*\(float\ \*\)\(iVar23\ \+\ 0x251c\)\ !=\ fVar13\)\ <<\ 5;$	+1
+use	FUN_0009cc30	iVar23	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar23\ =\ iVar23\ \+\ 0x80;$	+1
+use	FUN_0009cc30	iVar23	lightCountdown	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar23\ =\ 8;$	+1
+use	FUN_0009cc30	iVar23	lightCountdown	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*iVar23\ =\ iVar23\ \+\ \-1;$	+2
+local	FUN_0009cc30	iVar25	lightCountdownB	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	puVar22	lightKeyCursor	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	uVar1	oldLightKey	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	uVar2	keyBit29	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	uVar3	keyBit26	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	uVar5	lightKeyBit8	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	uVar6	lightKeyBit7	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	uVar7	lightKeyBit5	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	uVar8	lightKeyBits13to14	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	uVar9	lightKeyBits11to12	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	uVar10	lightKeyBits9to10	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	uVar11	lightKeyBit6	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	uVar12	lightKeyBit4	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cc30	uVar15	oldKey	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_0009cc30	uVar16	keyPartial	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ uVar21\ \|\ uVar3\ \|\ uVar2\ \|\ uVar15\ \&\ 0xdaffffff;$	+2
+use	FUN_0009cc30	uVar16	keyPartial	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1874\)\ =\ uVar16\ \|\ 0x800;$	+1
+use	FUN_0009cc30	uVar16	keyBit10	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ =\ \(uint\)\(\*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002d48\)\ \+\ iVar23\)\ ==\ \-0x7e06\)\ <<\ 10;$	+2
+use	FUN_0009cc30	uVar16	keyBit10	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ \|\ uVar21\ \|\ uVar3\ \|\ uVar2\ \|\ uVar15\ \&\ 0xdafff8ff\ \|\ 0x800;$	+1
+use	FUN_0009cc30	uVar18	ctxFlags44	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$	+1
+use	FUN_0009cc30	uVar18	ctxFlags44	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x44\);$@2	+2
+use	FUN_0009cc30	uVar18	ctxFlags44	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(int\)uVar18\ <\ 0\)\ \{$	+1
+use	FUN_0009cc30	uVar18	ctxFlags44	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\-\(uVar18\ \&\ 0xa10000\)\ >>\ 0x18\ \&\ 0x80\ \|\ uVar21\ \|\ uVar3\ \|\ uVar2\ \|\ uVar15\ \&\ 0xdafff07f;$	+1
+use	FUN_0009cc30	uVar18	lightMaskCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x88\);$	+1
+use	FUN_0009cc30	uVar18	lightMaskCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar18\ \&\ 1\)\ ==\ 0\)\ \{$	+1
+use	FUN_0009cc30	uVar18	lightMaskCursor	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar18\ =\ uVar18\ >>\ 1;$	+1
+use	FUN_0009cc30	uVar21	colorMaterialLights	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar21\ =\ 0;$	+1
+use	FUN_0009cc30	uVar21	colorMaterialLights	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar21\ =\ \-\(uint\)\(\*\(uint\ \*\)\(param_1\ \+\ 0x8c\)\ \&\ 0xc000000\)\ >>\ 0x1f;$	+1
+use	FUN_0009cc30	uVar21	colorMaterialLights	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(uVar21\ !=\ 0\)\ \|\|\ \(bVar20\)\)\ \|\|\ \(iVar19\ =\ 0,\ bVar4\)\)\ \{$	+1
+use	FUN_0009cc30	uVar21	lightMaskCursorB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(\(int\)uVar18\ <\ 0\)\ \&\&\ \(uVar21\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x88\),\ uVar21\ !=\ 0\)\)\ \{$	+1
+use	FUN_0009cc30	uVar21	lightMaskCursorB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(uVar21\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	FUN_0009cc30	uVar21	lightMaskCursorB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar21\ =\ uVar21\ >>\ 1;$	+1
+use	FUN_0009cc30	uVar21	lightMaskCursorB	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\}\ while\ \(uVar21\ !=\ 0\);$	+1
+use	FUN_0009cc30	uVar21	keyBit24	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar21\ =\ iVar19\ <<\ 0x18;$	+2
+use	FUN_0009cc30	uVar21	keyBit24	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1874\)\ =\ uVar16\ \|\ uVar21\ \|\ uVar3\ \|\ uVar2\ \|\ uVar15\ \&\ 0xdafffbff\ \|\ 0x800;$	+1
+use	FUN_0009cc30	uVar21	keyBit24	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar16\ \|\ uVar21\ \|\ uVar3\ \|\ uVar2\ \|\ uVar15\ \&\ 0xdafff8ff\ \|\ 0x800;$	+1
+use	FUN_0009cc30	uVar21	keyBit24	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\-\(uVar18\ \&\ 0xa10000\)\ >>\ 0x18\ \&\ 0x80\ \|\ uVar21\ \|\ uVar3\ \|\ uVar2\ \|\ uVar15\ \&\ 0xdafff07f;$	+1
+local	FUN_0009cff0	bVar1	blendFlag13a9	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cff0	bVar2	blendFlag13aa	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cff0	iVar4	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cff0	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cff0	uVar3	oldKey	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cf10	iVar2	stateBlock	INFERRED	role read off the function body (see notes_gld_q03.md)
+local	FUN_0009cf10	param_1	ctx	INFERRED	role read off the function body (see notes_gld_q03.md)
+use	FUN_0009cf10	sVar1	fogMode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*sVar1\ =\ \*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e04\)\ \+\ iVar2\);$	+1
+use	FUN_0009cf10	sVar1	fogMode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(sVar1\ !=\ 0x801\)\ \&\&\ \(uVar3\ =\ 3,\ sVar1\ !=\ 0x2601\)\)\ \{$	+2
+use	FUN_0009cf10	sVar1	fogDistanceMode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*sVar1\ =\ \*\(short\ \*\)\(\(\(unsigned\ char\ \*\)0x00002e08\)\ \+\ iVar2\);$	+2
+use	FUN_0009cf10	sVar1	fogDistanceMode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(sVar1\ ==\ \-0x7aa4\)\ \{$	+1
+use	FUN_0009cf10	sVar1	fogDistanceMode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*else\ if\ \(sVar1\ ==\ 0x2502\)\ \{$	+1
+use	FUN_0009cf10	uVar3	fogCode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ 2;$	+1
+use	FUN_0009cf10	uVar3	fogCode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*if\ \(\(sVar1\ !=\ 0x801\)\ \&\&\ \(uVar3\ =\ 3,\ sVar1\ !=\ 0x2601\)\)\ \{$	+2
+use	FUN_0009cf10	uVar3	fogCode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ <<\ 5\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x1874\)\ \&\ 0xffffff8f;$	+1
+use	FUN_0009cf10	uVar3	fogCode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ 2;$@2	+1
+use	FUN_0009cf10	uVar3	fogCode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ 0;$	+1
+use	FUN_0009cf10	uVar3	fogCode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*uVar3\ =\ 1;$	+1
+use	FUN_0009cf10	uVar3	fogCode	INFERRED	role read off the function body (see notes_gld_q03.md)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1878\)\ =\ uVar3\ <<\ 0x12\ \|\ \*\(uint\ \*\)\(param_1\ \+\ 0x1878\)\ \&\ 0xfff3ffff;$	+1

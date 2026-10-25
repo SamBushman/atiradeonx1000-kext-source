@@ -1,0 +1,1 @@
+func	FUN_00184ef0	IRInst__foldResultScaleIntoUsers	INFERRED	checks that every user of the instruction (inst[4]) can absorb a power-of-two result scale (limits check at compiler+0x30c vtable +0xfc/+0xe8), then rescales them (constants, mad rebuild) and adds the exponent to the result scale code +0x124

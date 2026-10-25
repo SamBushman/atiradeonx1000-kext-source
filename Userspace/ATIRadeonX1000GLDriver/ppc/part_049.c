@@ -1396,7 +1396,7 @@ int Inst__movAndShiftUseVector(inst, program)
   }
 LAB_00188a5c:
   sourceDef2 = IRInst__getOperandSource(inst,1);
-  iVar1 = FUN_00184ef0(sourceDef2,inst[0x49],program);
+  iVar1 = IRInst__foldResultScaleIntoUsers(sourceDef2,inst[0x49],program);
   if (iVar1 != 0) {
     *(int *)(program + 0x160) = *(int *)(program + 0x160) + 1;
     sourceDef2 = IRInst__getOperandSource(inst,1);

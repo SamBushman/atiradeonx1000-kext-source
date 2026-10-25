@@ -1,0 +1,115 @@
+local	fragmentInstructionToIL	puVar25	srcOutCursor	INFERRED	running pointer into the local source-token output array (&local_c8); fpilTranslateSource writes {token, swizzle} through it per source
+use	fragmentInstructionToIL	puVar21	sourceRecordCursor	INFERRED	instructionRecords + recordIndex * 2 + 4: walks the source operand records of the instruction	^\s*puVar21\ =\ puVar20\ \+\ iVar18\ \*\ 2\ \+\ 4;$	+1
+use	fragmentInstructionToIL	puVar21	sourceRecordCursor	INFERRED	instructionRecords + recordIndex * 2 + 4: walks the source operand records of the instruction	^\s*\(\(int\ \(\*\)\(\)\)FUN_0003f1c0\)\(param_1,puVar21,puVar25,puVar25\ \+\ 3\);$	+1
+use	fragmentInstructionToIL	puVar21	sourceRecordCursor	INFERRED	instructionRecords + recordIndex * 2 + 4: walks the source operand records of the instruction	^\s*puVar21\ =\ puVar21\ \+\ 2;$	+1
+use	fragmentInstructionToIL	puVar21	dstOutPair	INFERRED	&dstToken: address of the destination token/mask output pair	^\s*puVar21\ =\ \&local_108;$	+1
+use	fragmentInstructionToIL	puVar21	dstOutPair	INFERRED	&dstToken: address of the destination token/mask output pair	^\s*puVar21\[0xd\]\ =\ puVar21\[0xd\]\ \&\ 0xffc0ffff\ \|\ 0x40000;$	+2
+use	fragmentInstructionToIL	puVar21	dstOutPair	INFERRED	&dstToken: address of the destination token/mask output pair	^\s*puVar21\[7\]\ =\ puVar21\[7\]\ \&\ 0xffc0ffff\ \|\ 0x40000;$	+4
+use	fragmentInstructionToIL	puVar21	src0OperandPtr	INFERRED	instruction record + 0x10: first source operand record	^\s*puVar21\ =\ \(uint\ \*\)\(iVar24\ \+\ 0x10\);$	+1
+use	fragmentInstructionToIL	puVar21	src0OperandPtr	INFERRED	instruction record + 0x10: first source operand record	^\s*if\ \(\(\(iVar23\ !=\ 0\)\ \|\|$	+4
+use	fragmentInstructionToIL	puVar21	src0OperandPtr	INFERRED	instruction record + 0x10: first source operand record	^\s*iVar23\ =\ \(\*puVar21\ >>\ 0xc\ \&\ 3\)\ \+\ 1;$	+1
+use	fragmentInstructionToIL	puVar21	src0OperandPtr	INFERRED	instruction record + 0x10: first source operand record	^\s*uVar22\ =\ \*puVar21\ >>\ 0xc\ \&\ 3;$	+1
+use	fragmentInstructionToIL	puVar21	src0OperandPtr	INFERRED	instruction record + 0x10: first source operand record	^\s*if\ \(\(\*puVar21\ \&\ 0x4000\)\ ==\ 0\)\ \{$	+1
+use	fragmentInstructionToIL	puVar21	src0OperandPtr	INFERRED	instruction record + 0x10: first source operand record	^\s*uVar22\ =\ \*puVar21\ >>\ 0xc\ \&\ 3;$@2	+1
+use	fragmentInstructionToIL	puVar21	src1OperandPtr	INFERRED	instruction record + 0x18: second source operand record	^\s*puVar21\ =\ \(uint\ \*\)\(iVar5\ \+\ iVar6\ \+\ 0x18\);$	+1
+use	fragmentInstructionToIL	puVar21	src1OperandPtr	INFERRED	instruction record + 0x18: second source operand record	^\s*local_88\ =\ \(\*puVar21\ >>\ 0xc\ \&\ 3\)\ \+\ 1;$	+1
+use	fragmentInstructionToIL	puVar21	src1OperandPtr	INFERRED	instruction record + 0x18: second source operand record	^\s*if\ \(\(iVar23\ ==\ 0\)\ \&\&$	+2
+use	fragmentInstructionToIL	uVar9	saturate	INFERRED	last argument of fpilTranslateDestination: instruction bit 0x100000 or opcode info bit 0x10000000	^\s*if\ \(\(\(puVar19\[1\]\ \&\ 0x100000\)\ !=\ 0\)\ \|\|$	+3
+use	fragmentInstructionToIL	uVar9	saturate	INFERRED	last argument of fpilTranslateDestination: instruction bit 0x100000 or opcode info bit 0x10000000	^\s*\(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,\(int\)puVar20\ \+\ iVar5\ \+\ 8,\&local_d0,\&local_cc,uVar9\);$	+1
+use	fragmentInstructionToIL	uVar9	saturate	INFERRED	last argument of fpilTranslateDestination: instruction bit 0x100000 or opcode info bit 0x10000000	^\s*if\ \(\(\(puVar19\[1\]\ \&\ 0x100000\)\ !=\ 0\)\ \|\|$@2	+3
+use	fragmentInstructionToIL	uVar9	saturate	INFERRED	last argument of fpilTranslateDestination: instruction bit 0x100000 or opcode info bit 0x10000000	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,\(int\)puVar20\ \+\ iVar5\ \+\ 8,\&local_108,\&local_104,uVar9\);$	+1
+use	fragmentInstructionToIL	uVar9	emittedSourceCount	INFERRED	nSrc argument of fpilEmitInstruction: 1 source, or 2 when the destination class is 2	^\s*uVar9\ =\ 1;$@3	+1
+use	fragmentInstructionToIL	uVar9	emittedSourceCount	INFERRED	nSrc argument of fpilEmitInstruction: 1 source, or 2 when the destination class is 2	^\s*uVar9\ =\ 2;$	+1
+use	fragmentInstructionToIL	uVar9	emittedSourceCount	INFERRED	nSrc argument of fpilEmitInstruction: 1 source, or 2 when the destination class is 2	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003fbf0\)\(param_1,local_5c,1,uVar9\);$	+1
+use	fragmentInstructionToIL	uVar10	tempRegisterHalf	INFERRED	(undefined2) translator[8]: low half of the temporary register word being built	^\s*uVar10\ =\ \(undefined2\)param_1\[8\];$	+2
+use	fragmentInstructionToIL	uVar10	tempRegisterHalf	INFERRED	(undefined2) translator[8]: low half of the temporary register word being built	^\s*local_c8\ =\ CONCAT22\(4,uVar10\);$	+1
+use	fragmentInstructionToIL	uVar10	ilSelectOpcode	INFERRED	IL opcode of the second record: 0x49, or 3 when the instruction is not opcode 0x31	^\s*uVar10\ =\ 0x49;$	+1
+use	fragmentInstructionToIL	uVar10	ilSelectOpcode	INFERRED	IL opcode of the second record: 0x49, or 3 when the instruction is not opcode 0x31	^\s*uVar10\ =\ 3;$	+1
+use	fragmentInstructionToIL	uVar10	ilSelectOpcode	INFERRED	IL opcode of the second record: 0x49, or 3 when the instruction is not opcode 0x31	^\s*local_d4\ =\ CONCAT22\(\(\*\(unsigned\ short\ \*\)\(\(unsigned\ char\ \*\)\&\(local_d4\)\ \+\ 0\)\),uVar10\);$	+1
+use	fragmentInstructionToIL	sVar3	tempRegisterIndex	INFERRED	(short) translator[8] + loop index: register index of the temporary written in this iteration	^\s*sVar3\ =\ \(short\)iVar6\ \+\ \(short\)iVar24;$	+1
+use	fragmentInstructionToIL	sVar3	tempRegisterIndex	INFERRED	(short) translator[8] + loop index: register index of the temporary written in this iteration	^\s*\*\(short\ \*\)\(\(int\)puVar21\ \+\ 0x36\)\ =\ sVar3;$	+1
+use	fragmentInstructionToIL	sVar3	tempRegisterIndex	INFERRED	(short) translator[8] + loop index: register index of the temporary written in this iteration	^\s*\*\(short\ \*\)\(\(int\)puVar21\ \+\ 0x1e\)\ =\ sVar3;$	+1
+use	fragmentInstructionToIL	sVar3	tempRegisterBase	INFERRED	(short) translator[8]: first free temporary register	^\s*sVar3\ =\ \(short\)param_1\[8\];$	+2
+use	fragmentInstructionToIL	sVar3	tempRegisterBase	INFERRED	(short) translator[8]: first free temporary register	^\s*local_c4\ =\ CONCAT22\(4,sVar3\ \+\ 1\);$	+2
+use	fragmentInstructionToIL	bVar1	moreSources	INFERRED	iVar6 != 8: more source operands remain in the copy loop	^\s*bVar1\ =\ iVar6\ !=\ 8;$	+1
+use	fragmentInstructionToIL	bVar1	moreSources	INFERRED	iVar6 != 8: more source operands remain in the copy loop	^\s*\}\ while\ \(bVar1\);$	+1
+use	fragmentInstructionToIL	bVar1	moreTemps	INFERRED	index != 2: more temporaries remain in the initialisation loop	^\s*bVar1\ =\ iVar24\ !=\ 2;$	+1
+use	fragmentInstructionToIL	bVar1	moreTemps	INFERRED	index != 2: more temporaries remain in the initialisation loop	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	fragmentInstructionToIL	bVar1	advanceSrc0	INFERRED	src0Advances != 0	^\s*bVar1\ =\ local_78\ !=\ 0;$	+2
+use	fragmentInstructionToIL	bVar1	advanceSrc0	INFERRED	src0Advances != 0	^\s*if\ \(bVar1\)\ \{$@2	+1
+local	fragmentInstructionToIL	bVar2	advanceSrc1	INFERRED	src1Advances != 0
+local	fragmentInstructionToIL	puVar12	adjustedSwizzle	INFERRED	local_98 (source 0 swizzle) after the scalar-source modifier bits are rewritten
+use	fragmentInstructionToIL	iVar14	tempRegister	INFERRED	translator[8]: next free temporary register	^\s*iVar14\ =\ param_1\[8\];$	+1
+use	fragmentInstructionToIL	iVar14	tempRegister	INFERRED	translator[8]: next free temporary register	^\s*local_ac\ =\ CONCAT22\(4,\(short\)iVar14\);$	+1
+use	fragmentInstructionToIL	iVar14	tempRegister	INFERRED	translator[8]: next free temporary register	^\s*local_9c\ =\ CONCAT22\(4,\(short\)iVar14\);$	+1
+use	fragmentInstructionToIL	iVar14	instructionBlock4	INFERRED	*translator + *(*translator + 0x54) * 8: base of the instruction block	^\s*iVar14\ =\ \*param_1\ \+\ \*\(int\ \*\)\(\*param_1\ \+\ 0x54\)\ \*\ 8;$	+1
+use	fragmentInstructionToIL	iVar14	instructionBlock4	INFERRED	*translator + *(*translator + 0x54) * 8: base of the instruction block	^\s*iVar23\ =\ iVar14\ \+\ iVar5;$	+1
+use	fragmentInstructionToIL	iVar14	instructionBlock4	INFERRED	*translator + *(*translator + 0x54) * 8: base of the instruction block	^\s*iVar24\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,iVar24,\&local_ac,\&local_a8,$	+2
+use	fragmentInstructionToIL	iVar6	instructionBlock	INFERRED	*translator + *(*translator + 0x54) * 8: base address of the instruction block	^\s*iVar6\ =\ \*param_1\ \+\ \*\(int\ \*\)\(\*param_1\ \+\ 0x54\)\ \*\ 8;$	+2
+use	fragmentInstructionToIL	iVar6	instructionBlock	INFERRED	*translator + *(*translator + 0x54) * 8: base address of the instruction block	^\s*iVar24\ =\ iVar6\ \+\ iVar5;$	+1
+use	fragmentInstructionToIL	iVar6	instructionBlock	INFERRED	*translator + *(*translator + 0x54) * 8: base address of the instruction block	^\s*\(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,iVar24\ \+\ 8,\&local_ac,\&local_a8,$	+2
+use	fragmentInstructionToIL	iVar6	instructionBlock	INFERRED	*translator + *(*translator + 0x54) * 8: base address of the instruction block	^\s*iVar6\ =\ \*param_1\ \+\ \*\(int\ \*\)\(\*param_1\ \+\ 0x54\)\ \*\ 8;$@2	+1
+use	fragmentInstructionToIL	iVar6	instructionBlock	INFERRED	*translator + *(*translator + 0x54) * 8: base address of the instruction block	^\s*local_78\ =\ \*\(uint\ \*\)\(iVar6\ \+\ iVar5\ \+\ 0x10\)\ >>\ 0xe\ \&\ 1;$	+2
+use	fragmentInstructionToIL	iVar6	instructionBlock	INFERRED	*translator + *(*translator + 0x54) * 8: base address of the instruction block	^\s*puVar26\ =\ \(uint\ \*\)\(iVar5\ \+\ iVar6\ \+\ 0x10\);$	+3
+use	fragmentInstructionToIL	iVar6	instructionBlock	INFERRED	*translator + *(*translator + 0x54) * 8: base address of the instruction block	^\s*local_b0\ =\ \(uint\)\(\(\*\(uint\ \*\)\(iVar5\ \+\ iVar6\)\ \&\ 0x3fc0000\)\ ==\ 0xc40000\)\ <<\ 0x10\ \|$	+1
+use	fragmentInstructionToIL	iVar6	instructionBlock	INFERRED	*translator + *(*translator + 0x54) * 8: base address of the instruction block	^\s*if\ \(\(\*\(uint\ \*\)\(iVar5\ \+\ iVar6\)\ \&\ 0x3fc0000\)\ !=\ 0xc40000\)\ \{$	+1
+use	fragmentInstructionToIL	iVar6	instructionBlock	INFERRED	*translator + *(*translator + 0x54) * 8: base address of the instruction block	^\s*\(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,iVar5\ \+\ iVar6\ \+\ 8,\&local_ac,\&local_a8,0\);$	+1
+use	fragmentInstructionToIL	iVar6	tokenWordCount	INFERRED	operandCount * 2 + 1 (or + 3): words reserved for the IL instruction	^\s*iVar6\ =\ uVar11\ \*\ 2\ \+\ 1;$	+1
+use	fragmentInstructionToIL	iVar6	tokenWordCount	INFERRED	operandCount * 2 + 1 (or + 3): words reserved for the IL instruction	^\s*iVar6\ =\ uVar11\ \*\ 2\ \+\ 3;$	+1
+use	fragmentInstructionToIL	iVar6	tokenWordCount	INFERRED	operandCount * 2 + 1 (or + 3): words reserved for the IL instruction	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003ef50\)\(param_1,iVar6,\&local_f0\);$	+2
+use	fragmentInstructionToIL	iVar6	srcSwizzleStatus	INFERRED	return code of fpilTranslateSourceWithSwizzle	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f4e0\)\(param_1,\(int\)puVar20\ \+\ iVar5\ \+\ 0x10,\&local_100,\&local_fc,$	+2
+use	fragmentInstructionToIL	iVar6	srcSwizzleStatus	INFERRED	return code of fpilTranslateSourceWithSwizzle	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f1c0\)\(param_1,\(int\)puVar20\ \+\ iVar5\ \+\ 0x10,\&local_100,\&local_fc\);$	+1
+use	fragmentInstructionToIL	iVar6	srcSwizzleStatus	INFERRED	return code of fpilTranslateSourceWithSwizzle	^\s*if\ \(iVar6\ !=\ 0\)\ goto\ LAB_00048d74;$@3	+1
+use	fragmentInstructionToIL	iVar6	srcWordOffset	INFERRED	byte offset 0, 4, 8 into the three source word pairs	^\s*iVar6\ =\ 0;$	+1
+use	fragmentInstructionToIL	iVar6	srcWordOffset	INFERRED	byte offset 0, 4, 8 into the three source word pairs	^\s*iVar24\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f1c0\)\(param_1,iVar23,iVar6\ \+\ \(int\)local_5c,\(int\)\&local_e0\ \+\ iVar6\);$	+1
+use	fragmentInstructionToIL	iVar6	srcWordOffset	INFERRED	byte offset 0, 4, 8 into the three source word pairs	^\s*bVar1\ =\ iVar6\ !=\ 8;$	+1
+use	fragmentInstructionToIL	iVar6	srcWordOffset	INFERRED	byte offset 0, 4, 8 into the three source word pairs	^\s*iVar6\ =\ iVar6\ \+\ 4;$	+1
+use	fragmentInstructionToIL	iVar6	tempRegBase	INFERRED	translator[8]: first free temporary register at this point	^\s*iVar6\ =\ param_1\[8\];$	+1
+use	fragmentInstructionToIL	iVar6	tempRegBase	INFERRED	translator[8]: first free temporary register at this point	^\s*sVar3\ =\ \(short\)iVar6\ \+\ \(short\)iVar24;$	+1
+use	fragmentInstructionToIL	iVar6	tempRegBase	INFERRED	translator[8]: first free temporary register at this point	^\s*iVar6\ =\ param_1\[8\];$@3	+1
+use	fragmentInstructionToIL	iVar6	tempRegBase	INFERRED	translator[8]: first free temporary register at this point	^\s*local_ac\ =\ CONCAT22\(4,\(short\)iVar6\);$	+1
+use	fragmentInstructionToIL	iVar6	tempRegBase	INFERRED	translator[8]: first free temporary register at this point	^\s*local_9c\ =\ CONCAT22\(4,\(short\)iVar6\);$	+1
+use	fragmentInstructionToIL	iVar6	arraySourceCount	INFERRED	number of the two sources that have bit 0xe set (array/indexed operands)	^\s*iVar6\ =\ \(\*\(uint\ \*\)\(iVar24\ \+\ 0x10\)\ >>\ 0xe\ \&\ 1\)\ \+\ \(\*\(uint\ \*\)\(iVar24\ \+\ 0x18\)\ >>\ 0xe\ \&\ 1\);$	+4
+use	fragmentInstructionToIL	iVar6	arraySourceCount	INFERRED	number of the two sources that have bit 0xe set (array/indexed operands)	^\s*if\ \(iVar6\ ==\ 0\)\ \{$@10	+1
+use	fragmentInstructionToIL	iVar6	arraySourceCount	INFERRED	number of the two sources that have bit 0xe set (array/indexed operands)	^\s*else\ if\ \(iVar6\ !=\ 1\)\ \{$	+1
+use	fragmentInstructionToIL	iVar6	newTempBase	INFERRED	temporary register base after reserving regSpan registers (written back to translator[8])	^\s*iVar6\ =\ iVar23\ \+\ param_1\[8\];$	+1
+use	fragmentInstructionToIL	iVar6	newTempBase	INFERRED	temporary register base after reserving regSpan registers (written back to translator[8])	^\s*param_1\[8\]\ =\ iVar6;$	+1
+use	fragmentInstructionToIL	iVar6	newTempBase	INFERRED	temporary register base after reserving regSpan registers (written back to translator[8])	^\s*iVar6\ =\ param_1\[8\];$@2	+1
+use	fragmentInstructionToIL	iVar6	newTempBase	INFERRED	temporary register base after reserving regSpan registers (written back to translator[8])	^\s*param_1\[8\]\ =\ iVar6\ \-\ iVar23;$	+1
+use	fragmentInstructionToIL	iVar6	instBlockOffset	INFERRED	*(program + 0x54): offset of the instruction block	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar23\ \+\ 0x54\);$	+1
+use	fragmentInstructionToIL	iVar6	instBlockOffset	INFERRED	*(program + 0x54): offset of the instruction block	^\s*iVar23\ =\ iVar23\ \+\ iVar6\ \*\ 8\ \+\ iVar5;$	+1
+use	fragmentInstructionToIL	iVar6	instBlockOffset	INFERRED	*(program + 0x54): offset of the instruction block	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar23\ \+\ 0x54\);$@2	+1
+use	fragmentInstructionToIL	iVar6	instBlockOffset	INFERRED	*(program + 0x54): offset of the instruction block	^\s*iVar23\ =\ iVar23\ \+\ iVar6\ \*\ 8\ \+\ iVar5;$@2	+1
+use	fragmentInstructionToIL	iVar6	instBlockOffset	INFERRED	*(program + 0x54): offset of the instruction block	^\s*iVar6\ =\ \*\(int\ \*\)\(iVar23\ \+\ 0x54\);$@3	+1
+use	fragmentInstructionToIL	iVar6	instBlockOffset	INFERRED	*(program + 0x54): offset of the instruction block	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,iVar23\ \+\ iVar6\ \*\ 8\ \+\ iVar5\ \+\ 8,\&local_d0,\&local_cc,1\)$	+1
+use	fragmentInstructionToIL	iVar6	instBlockOffset	INFERRED	*(program + 0x54): offset of the instruction block	^\s*if\ \(iVar6\ ==\ 0\)\ \{$@15	+1
+use	fragmentInstructionToIL	iVar23	instructionBlock2	INFERRED	*translator + *(*translator + 0x54) * 8: base address of the instruction block	^\s*iVar23\ =\ \*param_1\ \+\ \*\(int\ \*\)\(\*param_1\ \+\ 0x54\)\ \*\ 8;$	+3
+use	fragmentInstructionToIL	iVar23	instructionBlock2	INFERRED	*translator + *(*translator + 0x54) * 8: base address of the instruction block	^\s*iVar23\ =\ iVar18\ \*\ 8\ \+\ iVar23\ \+\ 0x10;$	+1
+use	fragmentInstructionToIL	iVar23	instructionBlock2	INFERRED	*translator + *(*translator + 0x54) * 8: base address of the instruction block	^\s*iVar24\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f1c0\)\(param_1,iVar23,iVar6\ \+\ \(int\)local_5c,\(int\)\&local_e0\ \+\ iVar6\);$	+1
+use	fragmentInstructionToIL	iVar23	instructionBlock2	INFERRED	*translator + *(*translator + 0x54) * 8: base address of the instruction block	^\s*iVar23\ =\ iVar23\ \+\ 8;$	+1
+use	fragmentInstructionToIL	iVar23	instructionBlock2	INFERRED	*translator + *(*translator + 0x54) * 8: base address of the instruction block	^\s*iVar23\ =\ \*param_1\ \+\ \*\(int\ \*\)\(\*param_1\ \+\ 0x54\)\ \*\ 8;$@2	+2
+use	fragmentInstructionToIL	iVar23	instructionBlock2	INFERRED	*translator + *(*translator + 0x54) * 8: base address of the instruction block	^\s*iVar23\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,iVar24\ \+\ 8,\&local_d0,\&local_cc,$	+6
+use	fragmentInstructionToIL	iVar23	programPtr	INFERRED	*translator: the program object	^\s*iVar23\ =\ \*param_1;$	+2
+use	fragmentInstructionToIL	iVar23	programPtr	INFERRED	*translator: the program object	^\s*iVar23\ =\ iVar23\ \+\ iVar6\ \*\ 8\ \+\ iVar5;$	+1
+use	fragmentInstructionToIL	iVar23	programPtr	INFERRED	*translator: the program object	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,iVar23\ \+\ 8,\&local_ac,\&local_a8,1\);$	+1
+use	fragmentInstructionToIL	iVar23	programPtr	INFERRED	*translator: the program object	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f1c0\)\(param_1,iVar23\ \+\ 0x10,\&local_a0,\&local_94\);$	+1
+use	fragmentInstructionToIL	iVar23	programPtr	INFERRED	*translator: the program object	^\s*iVar23\ =\ \*param_1;$@2	+2
+use	fragmentInstructionToIL	iVar23	programPtr	INFERRED	*translator: the program object	^\s*iVar23\ =\ iVar23\ \+\ iVar6\ \*\ 8\ \+\ iVar5;$@2	+1
+use	fragmentInstructionToIL	iVar23	programPtr	INFERRED	*translator: the program object	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f1c0\)\(param_1,iVar23\ \+\ 0x10,\&local_a4,\&local_98\);$	+4
+use	fragmentInstructionToIL	iVar23	programPtr	INFERRED	*translator: the program object	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,iVar23\ \+\ 8,\&local_ac,\&local_a8,1\);$@2	+1
+use	fragmentInstructionToIL	iVar23	programPtr	INFERRED	*translator: the program object	^\s*iVar23\ =\ \*param_1;$@3	+2
+use	fragmentInstructionToIL	iVar23	programPtr	INFERRED	*translator: the program object	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_0003f750\)\(param_1,iVar23\ \+\ iVar6\ \*\ 8\ \+\ iVar5\ \+\ 8,\&local_d0,\&local_cc,1\)$	+1
+use	fragmentInstructionToIL	iVar23	regSpan	INFERRED	(src0 operand >> 0xc & 3) + 1: registers covered by the first source in the repeat loop	^\s*iVar23\ =\ \(\*puVar21\ >>\ 0xc\ \&\ 3\)\ \+\ 1;$	+2
+use	fragmentInstructionToIL	iVar23	regSpan	INFERRED	(src0 operand >> 0xc & 3) + 1: registers covered by the first source in the repeat loop	^\s*if\ \(iVar23\ !=\ 0\)\ \{$@3	+1
+use	fragmentInstructionToIL	iVar23	regSpan	INFERRED	(src0 operand >> 0xc & 3) + 1: registers covered by the first source in the repeat loop	^\s*\}\ while\ \(iVar23\ !=\ iVar6\);$	+1
+use	fragmentInstructionToIL	iVar23	regSpan	INFERRED	(src0 operand >> 0xc & 3) + 1: registers covered by the first source in the repeat loop	^\s*param_1\[8\]\ =\ iVar6\ \-\ iVar23;$	+1
+use	fragmentInstructionToIL	iVar23	regSpan	INFERRED	(src0 operand >> 0xc & 3) + 1: registers covered by the first source in the repeat loop	^\s*if\ \(iVar23\ !=\ 0\)\ \{$@4	+1
+use	fragmentInstructionToIL	iVar23	regSpan	INFERRED	(src0 operand >> 0xc & 3) + 1: registers covered by the first source in the repeat loop	^\s*\}\ while\ \(iVar23\ !=\ iVar6\);$@2	+1
+use	fragmentInstructionToIL	iVar23	maxRegSpan	INFERRED	the larger of src0RegSpan and src1RegSpan	^\s*iVar23\ =\ local_84;$	+1
+use	fragmentInstructionToIL	iVar23	maxRegSpan	INFERRED	the larger of src0RegSpan and src1RegSpan	^\s*iVar23\ =\ local_88;$	+1
+use	fragmentInstructionToIL	iVar23	maxRegSpan	INFERRED	the larger of src0RegSpan and src1RegSpan	^\s*if\ \(\(\(bVar1\)\ \|\|\ \(local_7c\ !=\ 0\)\)\ \&\&\ \(1\ <\ iVar23\)\)\ \{$	+1
+use	fragmentInstructionToIL	iVar23	maxRegSpan	INFERRED	the larger of src0RegSpan and src1RegSpan	^\s*\}\ while\ \(iVar23\ !=\ iVar6\);$@3	+1
+use	fragmentInstructionToIL	iVar23	maxRegSpan	INFERRED	the larger of src0RegSpan and src1RegSpan	^\s*iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_00046180\)\(param_1,iVar18,iVar23\);$	+1
+use	fragmentInstructionToIL	iVar8	returnCode	INFERRED	0 at the normal end; otherwise translator error word (3 for the unsupported-opcode path)	^\s*iVar8\ =\ 0;$	+1
+use	fragmentInstructionToIL	iVar8	returnCode	INFERRED	0 at the normal end; otherwise translator error word (3 for the unsupported-opcode path)	^\s*iVar8\ =\ param_1\[9\];$	+3
+use	fragmentInstructionToIL	iVar8	returnCode	INFERRED	0 at the normal end; otherwise translator error word (3 for the unsupported-opcode path)	^\s*return\ iVar8;$	+1
