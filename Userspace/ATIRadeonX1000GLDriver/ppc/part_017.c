@@ -2927,7 +2927,7 @@ LAB_000bd970:
 }
 
 /* FUN_000bd9a0 @ 0xbd9a0 (160 bytes) */
-void FUN_000bd9a0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fparam_1)
+void FUN_000bd9a0(int glContext,undefined4 param_2,undefined4 param_3,undefined4 param_4,double fparam_1)
 {
   code *pcVar1;
   int iVar2;
@@ -2937,21 +2937,21 @@ void FUN_000bd9a0(int param_1,undefined4 param_2,undefined4 param_3,undefined4 p
   undefined4 in_r8;
   int a6;
   
-  if ((*(uint *)(param_1 + 0x44) & 0x100000) == 0) {
-    puVar3 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,2);
-    *(undefined4 **)(0x00002748 + param_1 + 4) = puVar3;
+  if ((*(uint *)(glContext + 0x44) & 0x100000) == 0) {
+    puVar3 = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,2);
+    *(undefined4 **)(0x00002748 + glContext + 4) = puVar3;
     *puVar3 = 0x860;
-    a6 = *(int *)(0x00002748 + param_1 + 4);
-    *(undefined4 *)(a6 + 4) = *(undefined4 *)(param_1 + 0x1b78);
-    iVar2 = *(int *)(0x00002748 + param_1 + 4);
-    pcVar1 = *(code **)(param_1 + 0x275c);
-    *(int *)(0x00002748 + param_1 + 4) = iVar2 + 8;
-    (*pcVar1)(param_1,iVar2 + 8,param_3,param_4,in_r7,in_r8,a6);
-    FUN_0009be00(param_1);
-    fparam_1 = (double)FUN_0009cc30(param_1);
+    a6 = *(int *)(0x00002748 + glContext + 4);
+    *(undefined4 *)(a6 + 4) = *(undefined4 *)(glContext + 0x1b78);
+    iVar2 = *(int *)(0x00002748 + glContext + 4);
+    pcVar1 = *(code **)(glContext + 0x275c);
+    *(int *)(0x00002748 + glContext + 4) = iVar2 + 8;
+    (*pcVar1)(glContext,iVar2 + 8,param_3,param_4,in_r7,in_r8,a6);
+    FUN_0009be00(glContext);
+    fparam_1 = (double)FUN_0009cc30(glContext);
     param_2 = extraout_r4;
   }
-  ((void (*)())FUN_0004d620)(param_1,param_2,param_3,param_4,fparam_1);
+  ((void (*)())FUN_0004d620)(glContext,param_2,param_3,param_4,fparam_1);
   return;
 }
 
@@ -5212,14 +5212,14 @@ int psnDecRecomputeSourceUsage(entry)
 }
 
 /* psnDecCanonicalizeEntry @ 0xc0fd0 (1936 bytes) */
-int psnDecCanonicalizeEntry(entry, param_2, param_3, param_4, param_5, param_6, param_7, param_8)
+int psnDecCanonicalizeEntry(entry, param_2, param_3, param_4, oldAddressOffset, param_6, sourceSwizzlePtr, param_8)
   int entry;
   undefined4 param_2;
   undefined4 param_3;
   undefined4 param_4;
-  undefined4 param_5;
+  undefined4 oldAddressOffset;
   undefined4 param_6;
-  undefined4 param_7;
+  undefined4 sourceSwizzlePtr;
   undefined4 param_8;
 {
   ushort maskWord;
@@ -9686,8 +9686,8 @@ int psnRaAssignDefinition(param_1, param_2, param_3, param_4, param_5, param_6, 
 }
 
 /* FUN_000c5e60 @ 0xc5e60 (1524 bytes) */
-int FUN_000c5e60(param_1)
-  undefined4 *param_1;
+int FUN_000c5e60(psnProgram)
+  undefined4 *psnProgram;
 {
   uint loopIndex;
   uint uVar1;
@@ -9748,11 +9748,11 @@ int FUN_000c5e60(param_1)
   uint local_5c;
   uint local_58;
   
-  local_7c = (uint)*(ushort *)(param_1 + 5);
+  local_7c = (uint)*(ushort *)(psnProgram + 5);
   if (local_7c != 0) {
     return;
   }
-  local_58 = param_1[2];
+  local_58 = psnProgram[2];
   local_98_arr[0] = local_7c;
   local_98_arr[1] = local_7c;
   local_98_arr[2] = local_7c;
@@ -9773,7 +9773,7 @@ int FUN_000c5e60(param_1)
     uVar11 = 0;
   }
   else {
-    puVar21 = (ushort *)((int)param_1 + 0x62);
+    puVar21 = (ushort *)((int)psnProgram + 0x62);
     uVar29 = 0;
     local_64 = 0;
     local_70 = 1;
@@ -9783,21 +9783,21 @@ int FUN_000c5e60(param_1)
     local_5c = 0;
     local_74 = 0;
     local_60 = 0;
-    pcVar23 = (char *)(param_1 + 0x1a);
-    puVar24 = (ushort *)((int)param_1 + 0x5a);
-    puVar4 = (ushort *)(param_1 + 0x16);
-    puVar5 = (ushort *)((int)param_1 + 0x56);
-    puVar15 = (ushort *)(param_1 + 0x15);
-    pcVar16 = (char *)(param_1 + 0x1f);
-    puVar17 = (ushort *)((int)param_1 + 0x66);
-    puVar18 = (ushort *)(param_1 + 0x19);
-    puVar13 = (ushort *)(param_1 + 0x18);
-    pcVar27 = (char *)(param_1 + 0x17);
-    pbVar14 = (byte *)((int)param_1 + 0x61);
-    puVar10 = (ushort *)(param_1 + 0x13);
-    pcVar7 = (char *)((int)param_1 + 0x51);
-    puVar6 = (ushort *)((int)param_1 + 0x4e);
-    pcVar9 = (char *)((int)param_1 + 0x53);
+    pcVar23 = (char *)(psnProgram + 0x1a);
+    puVar24 = (ushort *)((int)psnProgram + 0x5a);
+    puVar4 = (ushort *)(psnProgram + 0x16);
+    puVar5 = (ushort *)((int)psnProgram + 0x56);
+    puVar15 = (ushort *)(psnProgram + 0x15);
+    pcVar16 = (char *)(psnProgram + 0x1f);
+    puVar17 = (ushort *)((int)psnProgram + 0x66);
+    puVar18 = (ushort *)(psnProgram + 0x19);
+    puVar13 = (ushort *)(psnProgram + 0x18);
+    pcVar27 = (char *)(psnProgram + 0x17);
+    pbVar14 = (byte *)((int)psnProgram + 0x61);
+    puVar10 = (ushort *)(psnProgram + 0x13);
+    pcVar7 = (char *)((int)psnProgram + 0x51);
+    puVar6 = (ushort *)((int)psnProgram + 0x4e);
+    pcVar9 = (char *)((int)psnProgram + 0x53);
     loopIndex = 1;
     uVar11 = 0;
     puVar19 = puVar5;
@@ -9806,7 +9806,7 @@ int FUN_000c5e60(param_1)
     puVar25 = puVar24;
     puVar26 = puVar15;
     pcVar28 = pcVar23;
-    puVar3 = param_1;
+    puVar3 = psnProgram;
     do {
       puVar3 = puVar3 + 0x12;
       switch(*puVar3) {
@@ -9985,19 +9985,19 @@ LAB_000c6350:
   if (uVar12 < uVar29) {
     uVar12 = uVar29;
   }
-  *(ushort *)((int)param_1 + 0x22) = uVar11;
-  *(short *)((int)param_1 + 0x26) = (short)uVar12;
-  *(short *)((int)param_1 + 0x1e) = (short)(local_68 + local_78);
-  *(short *)(param_1 + 6) = (short)uVar29;
-  *(short *)((int)param_1 + 0x16) = (short)local_5c;
-  *(undefined2 *)(param_1 + 10) = 0;
-  *(short *)(param_1 + 8) = (short)local_6c;
+  *(ushort *)((int)psnProgram + 0x22) = uVar11;
+  *(short *)((int)psnProgram + 0x26) = (short)uVar12;
+  *(short *)((int)psnProgram + 0x1e) = (short)(local_68 + local_78);
+  *(short *)(psnProgram + 6) = (short)uVar29;
+  *(short *)((int)psnProgram + 0x16) = (short)local_5c;
+  *(undefined2 *)(psnProgram + 10) = 0;
+  *(short *)(psnProgram + 8) = (short)local_6c;
   iVar8 = 0;
   iVar30 = 0x10;
-  *(short *)(param_1 + 7) = (short)local_68;
-  *(short *)((int)param_1 + 0x1a) = (short)local_64;
-  *(undefined2 *)(param_1 + 9) = (*(unsigned short *)((unsigned char *)&(local_60) + 2));
-  puVar3 = param_1;
+  *(short *)(psnProgram + 7) = (short)local_68;
+  *(short *)((int)psnProgram + 0x1a) = (short)local_64;
+  *(undefined2 *)(psnProgram + 9) = (*(unsigned short *)((unsigned char *)&(local_60) + 2));
+  puVar3 = psnProgram;
   do {
     uVar11 = *(ushort *)((int)local_98_arr + iVar8);
     if (0xff < uVar11) {
@@ -10009,7 +10009,7 @@ LAB_000c6350:
     puVar3 = (undefined4 *)((int)puVar3 + 1);
     iVar30 = iVar30 + -1;
   } while (iVar30 != 0);
-  *(undefined2 *)(param_1 + 5) = 1;
+  *(undefined2 *)(psnProgram + 5) = 1;
   return;
 }
 
@@ -10504,8 +10504,8 @@ int scCallbackFread(param_1, param_2, param_3, param_4)
 }
 
 /* FUN_000c6ff0 @ 0xc6ff0 (464 bytes) */
-int FUN_000c6ff0(param_1, param_2)
-  int param_1;
+int FUN_000c6ff0(ctx, param_2)
+  int ctx;
   int param_2;
 {
   undefined *puVar1;
@@ -10514,14 +10514,14 @@ int FUN_000c6ff0(param_1, param_2)
   undefined4 local_84;
   undefined4 local_80;
   /* issue #64 live-repro: FUN_000cd05c (called below via &local_7c) reads its first argument at
-   * byte offsets up to +0x4c (*(param_1+0x30)/+0x34/+0x38/+0x40/+0x44/+0x48/+0x4c), i.e. it expects
+   * byte offsets up to +0x4c (*(ctx+0x30)/+0x34/+0x38/+0x40/+0x44/+0x48/+0x4c), i.e. it expects
    * local_7c through local_30 (and local_54/local_50/local_4c above them) to be ONE contiguous
    * 0x54-byte buffer - confirmed directly by this function's own "_memset(&local_7c,0,0x54)" a few
    * lines down, not a guess. Left as separate scalars (same defect class as auStack_c148 and
    * local_194 in _gldChoosePixelFormat, both fixed earlier this session), the -O0 rebuild does not
    * place them contiguously, so FUN_000cd05c's offset reads miss into whatever real stack slot
    * happens to be there instead - confirmed live: corrupts far enough to zero this function's own
-   * param_1, crashing on the *(param_1+0x186c)=uVar2 store a few lines below. Merged into one
+   * ctx, crashing on the *(ctx+0x186c)=uVar2 store a few lines below. Merged into one
    * 0x54-byte buffer (offsets confirmed per each name's own hex value, e.g. 0x7c-0x30=0x4c). */
   unsigned char local_7c_buf[0x54];
 #define local_54 (*(undefined4 *)(local_7c_buf + 0x28))
@@ -10538,14 +10538,14 @@ int FUN_000c6ff0(param_1, param_2)
 #define local_78 (*(undefined4 *)(local_7c_buf + 0x04))
   
   _memset(local_7c_buf,0,0x54);
-  local_78 = *(undefined4 *)(param_1 + 0x23d8);
+  local_78 = *(undefined4 *)(ctx + 0x23d8);
   local_80 = 0;
   local_88 = 0;
   if (param_2 == 0) {
     local_7c = 0x2c;
   }
   else {
-    puVar1 = *(undefined **)(param_1 + 0x23d4);
+    puVar1 = *(undefined **)(ctx + 0x23d4);
     if (((puVar1 + -0x7240 < ((unsigned char *)0x10)) || (puVar1 + -0x7100 < ((unsigned char *)0x10))) ||
        (((((puVar1 != (undefined *)0x71c0 &&
            ((((puVar1 != (undefined *)0x71c2 && (puVar1 != (undefined *)0x71c6)) &&
@@ -10575,10 +10575,10 @@ int FUN_000c6ff0(param_1, param_2)
   local_38 = scCallbackFclose;
   local_34 = scCallbackFwrite;
   local_30 = scCallbackFread;
-  local_50 = (undefined4 *)(param_1 + 0x186c);
+  local_50 = (undefined4 *)(ctx + 0x186c);
   uVar2 = FUN_000cd05c(&local_7c,&local_88,0x10001);
-  *(undefined4 *)(param_1 + 0x186c) = uVar2;
-  *(undefined4 *)(param_1 + 0x1870) = local_84;
+  *(undefined4 *)(ctx + 0x186c) = uVar2;
+  *(undefined4 *)(ctx + 0x1870) = local_84;
   return;
 }
 #undef local_54

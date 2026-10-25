@@ -188,14 +188,14 @@ int ilEmitShadowCompare(programRecord, param_2, coordinateOperand, coordinateExt
 }
 
 /* FUN_000c7930 @ 0xc7930 (2004 bytes) */
-int FUN_000c7930(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
+int FUN_000c7930(param_1, param_2, scanTokenWord, param_4, param_5, param_6, opcodeTimes4)
   undefined4 *param_1;
   int param_2;
-  undefined4 param_3;
+  undefined4 scanTokenWord;
   undefined4 param_4;
   undefined4 param_5;
   undefined4 param_6;
-  uint param_7;
+  uint opcodeTimes4;
 {
   uint uVar1;
   int iVar2;
@@ -212,8 +212,8 @@ int FUN_000c7930(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
         uVar1 = *(uint *)(iVar2 + 0x21e0);
         param_1[2] = 0x115;
         param_1[1] = uVar1 & 0xffff | 0x440000;
-        param_7 = *(uint *)(iVar2 + 0x21e0) & 0xffff | 0x40000;
-        param_1[3] = param_7;
+        opcodeTimes4 = *(uint *)(iVar2 + 0x21e0) & 0xffff | 0x40000;
+        param_1[3] = opcodeTimes4;
         param_1 = param_1 + 4;
       }
       iVar2 = iVar2 + 4;
@@ -227,7 +227,7 @@ int FUN_000c7930(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
       param_1[1] = uVar1 & 0xffff | 0x440000;
       uVar1 = *(uint *)(param_2 + 0x2304);
       param_1[4] = 0x2222;
-      param_1[3] = uVar1 & 0xffff | param_7 & 0xffc00000 | 0x10000 | 0x400000;
+      param_1[3] = uVar1 & 0xffff | opcodeTimes4 & 0xffc00000 | 0x10000 | 0x400000;
       uVar4 = 0;
       param_1[5] = *(uint *)(param_2 + 0x68) & 0xffff | 0x510000;
       if (*(int *)(param_2 + 0x230c) == 0) {
@@ -250,7 +250,7 @@ int FUN_000c7930(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
       param_1[1] = uVar1 & 0xffff | 0x440000;
       uVar1 = *(uint *)(param_2 + 0x2304);
       param_1[4] = ((unsigned char *)0x00003333);
-      param_1[3] = uVar1 & 0xffff | param_7 & 0xffc00000 | 0x10000 | 0x400000;
+      param_1[3] = uVar1 & 0xffff | opcodeTimes4 & 0xffc00000 | 0x10000 | 0x400000;
       uVar4 = 0;
       param_1[5] = *(uint *)(param_2 + 0x68) & 0xffff | 0x510000;
       if (*(int *)(param_2 + 0x230c) == 0) {
@@ -577,11 +577,11 @@ int ilEmitPrologue(outCursor, programRecord, passThroughR5, passThroughR6, passT
 }
 
 /* FUN_000c8600 @ 0xc8600 (316 bytes) */
-int FUN_000c8600(param_1, param_2, param_3, param_4, param_5)
+int FUN_000c8600(param_1, param_2, param_3, destinationExtraWord, param_5)
   uint param_1;
   int param_2;
   int *param_3;
-  uint param_4;
+  uint destinationExtraWord;
   int param_5;
 {
   int iVar1;
@@ -600,8 +600,8 @@ int FUN_000c8600(param_1, param_2, param_3, param_4, param_5)
 LAB_000c8650:
   if (param_2 == 0x17) {
     param_3[param_1 + 0x87c] = 1;
-    if (((((param_4 & 3) != 1) && ((param_4 & 0xc) != 4)) && ((param_4 & 0x30) != 0x10)) &&
-       (((param_4 & 0xc0) != 0x40 && (param_5 != 0)))) {
+    if (((((destinationExtraWord & 3) != 1) && ((destinationExtraWord & 0xc) != 4)) && ((destinationExtraWord & 0x30) != 0x10)) &&
+       (((destinationExtraWord & 0xc0) != 0x40 && (param_5 != 0)))) {
       return;
     }
     param_3[0x889] = 1;
@@ -4114,15 +4114,15 @@ int scDestroy(param_1)
 }
 
 /* FUN_000cd1b0 @ 0xcd1b0 (20 bytes) */
-int FUN_000cd1b0(param_1, param_2, param_3)
-  int param_1;
+int FUN_000cd1b0(compilerHandle, param_2, param_3)
+  int compilerHandle;
   undefined4 param_2;
   undefined4 param_3;
 {
   undefined4 uVar1;
   
-  if (param_1 != 0) {
-    uVar1 = scSetCallbackTables(param_1,param_2,param_3);
+  if (compilerHandle != 0) {
+    uVar1 = scSetCallbackTables(compilerHandle,param_2,param_3);
     return uVar1;
   }
   return 3;
