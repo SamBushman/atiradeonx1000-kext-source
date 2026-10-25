@@ -1317,7 +1317,7 @@ void FUN_000a9ac0(char *param_1,uint *dirtyBits,char *dirtyBitsArg,undefined *sc
   pcVar25 = (char *)dirtyBits[2];
   if ((((uVar27 & 0x20000180) != 0) || (*(int *)(iVar26 + 0x2a48) != *(int *)(iVar26 + 0x15c))) ||
      (puVar16 = dirtyBits, *(int *)(iVar26 + 0x2a4c) != *(int *)(iVar26 + 0x160))) {
-    fparam_1 = (double)FUN_00019c50(iVar26);
+    fparam_1 = (double)gld_updateSampleConfig(iVar26);
     puVar16 = extraout_r4;
   }
   if (*(char *)(iVar26 + 0x2a43) != '\0') {

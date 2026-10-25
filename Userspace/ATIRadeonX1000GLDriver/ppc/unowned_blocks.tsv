@@ -297,10 +297,10 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 19ac4	19ad0	padding	glCopyPixels_impl	3	
 19c24	19c30	padding	FUN_00019ad0	3	
 19c44	19c50	padding	glCopyPixels_impl	3	
-19cc4	19cd0	padding	FUN_00019c50	3	
-19ce8	19cf0	padding	FUN_00019c50	2	
-19d18	19d20	padding	FUN_00019c50	2	
-19d2c	19d30	padding	FUN_00019c50	1	
+19cc4	19cd0	padding	gld_updateSampleConfig	3	
+19ce8	19cf0	padding	gld_updateSampleConfig	2	
+19d18	19d20	padding	gld_updateSampleConfig	2	
+19d2c	19d30	padding	gld_updateSampleConfig	1	
 19da4	19db0	padding	glCopyPixels_impl	3	
 19e38	19e40	padding	FUN_00019db0	2	
 19e94	19ea0	padding	FUN_00019db0	3	

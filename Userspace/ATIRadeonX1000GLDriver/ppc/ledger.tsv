@@ -178,7 +178,7 @@
 0x199a0	68	gld_drawPixelsDispatch	part_002	converted
 0x199f0	212	FUN_000199f0	part_002	converted
 0x19ad0	360	FUN_00019ad0	part_002	converted
-0x19c50	308	FUN_00019c50	part_003	converted
+0x19c50	308	gld_updateSampleConfig	part_003	converted
 0x19db0	544	FUN_00019db0	part_003	converted
 0x1a010	176	FUN_0001a010	part_003	converted
 0x1a0d0	32	gld_isStampRetired	part_003	converted

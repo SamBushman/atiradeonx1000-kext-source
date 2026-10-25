@@ -5994,7 +5994,7 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   }
   *(undefined1 *)(ctx + 0x2a43) = 1;
   *(undefined1 *)(ctx + 0x2a5e) = 1;
-  FUN_00019c50(ctx);
+  gld_updateSampleConfig(ctx);
   *(undefined4 *)(ctx + 0x261c) = 1;
   *(undefined4 *)(ctx + 0x2610) = 1;
   uVar5 = 0;

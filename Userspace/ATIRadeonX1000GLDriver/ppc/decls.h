@@ -385,7 +385,7 @@ extern int gld_drawPixelsAtRasterPos();
 extern int gld_drawPixelsDispatch();
 extern int FUN_000199f0();
 extern int FUN_00019ad0();
-extern int FUN_00019c50();
+extern int gld_updateSampleConfig();
 extern int FUN_00019db0();
 extern int FUN_0001a010();
 extern int gld_isStampRetired();
