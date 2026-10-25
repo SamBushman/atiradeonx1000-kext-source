@@ -199,10 +199,10 @@
 4c560	FUN_0004c560	r8	PASS-indirect	GARBAGE	
 4d100	FUN_0004d100	r5	PASS-indirect	GARBAGE-REVIEWED (terminals are ctx+0xc allocator calls `li r3,size`; the +0xc slot is shared with unrelated structs)	supply=SUPPLIED [DEF:1ef5c in 1ecd0 DEF:24318 in 242f0 DEF:24398 in 24370 DEF:24418 in 243f0 DEF:24498 in 24470 DEF:24518 in 244f0 DEF:24598 in 24570 DEF:24618 in 245f0 DEF:2469]; 4b9dc bctrl via +0xc (argument registers up to r5)
 4d100	FUN_0004d100	r6	PASS-indirect	GARBAGE	
-4fd80	FUN_0004fd80	r5	PASS-indirect	GARBAGE	
-4fd80	FUN_0004fd80	r6	PASS-indirect	GARBAGE	
-4fd80	FUN_0004fd80	r7	PASS-indirect	GARBAGE	
-4fd80	FUN_0004fd80	r8	PASS-indirect	GARBAGE	
+4fd80	extvsUpdateVertexAttributeConstants	r5	PASS-indirect	GARBAGE	
+4fd80	extvsUpdateVertexAttributeConstants	r6	PASS-indirect	GARBAGE	
+4fd80	extvsUpdateVertexAttributeConstants	r7	PASS-indirect	GARBAGE	
+4fd80	extvsUpdateVertexAttributeConstants	r8	PASS-indirect	GARBAGE	
 50300	gldEmitHardwareState	r5	PASS-indirect	GARBAGE	
 50300	gldEmitHardwareState	r6	PASS-indirect	GARBAGE	
 50300	gldEmitHardwareState	r7	PASS-indirect	GARBAGE	

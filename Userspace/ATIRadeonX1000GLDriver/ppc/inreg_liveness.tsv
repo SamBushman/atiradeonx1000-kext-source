@@ -260,10 +260,10 @@
 4c560	FUN_0004c560	r8	PASS-indirect	4c5d0 bl 0x4dc30
 4d100	FUN_0004d100	r5	PASS-indirect	4d314 bl 0x4ce30
 4d100	FUN_0004d100	r6	PASS-indirect	4d314 bl 0x4ce30
-4fd80	FUN_0004fd80	r5	PASS-indirect	4fef0 bctrl 
-4fd80	FUN_0004fd80	r6	PASS-indirect	4fef0 bctrl 
-4fd80	FUN_0004fd80	r7	PASS-indirect	4fef0 bctrl 
-4fd80	FUN_0004fd80	r8	PASS-indirect	4fef0 bctrl 
+4fd80	extvsUpdateVertexAttributeConstants	r5	PASS-indirect	4fef0 bctrl 
+4fd80	extvsUpdateVertexAttributeConstants	r6	PASS-indirect	4fef0 bctrl 
+4fd80	extvsUpdateVertexAttributeConstants	r7	PASS-indirect	4fef0 bctrl 
+4fd80	extvsUpdateVertexAttributeConstants	r8	PASS-indirect	4fef0 bctrl 
 50300	gldEmitHardwareState	r5	PASS-indirect	50358 bctrl 
 50300	gldEmitHardwareState	r6	PASS-indirect	50358 bctrl 
 50300	gldEmitHardwareState	r7	PASS-indirect	50358 bctrl 

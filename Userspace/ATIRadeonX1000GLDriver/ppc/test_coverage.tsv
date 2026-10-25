@@ -447,7 +447,7 @@
 0x4f550	gldValidateScissor	452	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x4f720	gldInitStateDefaults	1348	yes	
 0x4fc80	FUN_0004fc80	252	yes	
-0x4fd80	FUN_0004fd80	492	no	indirect call (driver context / vtable / callback)
+0x4fd80	extvsUpdateVertexAttributeConstants	492	no	indirect call (driver context / vtable / callback)
 0x4ff70	gldValidateAlphaTest	416	yes	
 0x50140	FUN_00050140	424	yes	
 0x50300	gldEmitHardwareState	3048	no	indirect call (driver context / vtable / callback)
@@ -555,7 +555,7 @@
 0x5e0d0	extvsEmitFogOutput	1676	no	indirect call (driver context / vtable / callback)
 0x5e770	popFirstNonNull32	108	yes	
 0x5e7f0	extvsAssignVertexInputs	3156	no	indirect call (driver context / vtable / callback)
-0x5f540	FUN_0005f540	688	no	indirect call (driver context / vtable / callback)
+0x5f540	extvsRewriteHardwareInstructions	688	no	indirect call (driver context / vtable / callback)
 0x5f810	extvsPrepareHardwareProgram	9624	no	indirect call (driver context / vtable / callback)
 0x61dc0	vpUploadConstantArray	224	no	indirect call (driver context / vtable / callback)
 0x61eb0	vpUploadConstantsWithFog	604	no	indirect call (driver context / vtable / callback)
@@ -568,7 +568,7 @@
 0x62510	FUN_00062510	92	no	indirect call (driver context / vtable / callback)
 0x62570	extvsStateCacheCreate	616	no	indirect call (driver context / vtable / callback)
 0x627e4	extvsStateCacheFreeAll	328	no	indirect call (driver context / vtable / callback)
-0x62940	FUN_00062940	276	no	indirect call (driver context / vtable / callback)
+0x62940	extvsUploadSingleConstant	276	no	indirect call (driver context / vtable / callback)
 0x62a60	noop_62a60	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x62a70	extvsStateCacheInsert	116	yes	
 0x62af0	extvsBuildStreamDescriptors	5624	yes	

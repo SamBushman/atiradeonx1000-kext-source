@@ -1050,7 +1050,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 4f994	4f9a0	padding	gldInitStateDefaults	3	
 4f9b4	4f9c0	padding	gldInitStateDefaults	3	
 4fd1c	4fd20	padding	FUN_0004fc80	1	
-4ff6c	4ff70	padding	FUN_0004fd80	1	
+4ff6c	4ff70	padding	extvsUpdateVertexAttributeConstants	1	
 4ffcc	4ffe8	table	gldValidateAlphaTest	7	
 4fff4	50000	padding	gldValidateAlphaTest	3	
 5010c	50110	padding	gldValidateAlphaTest	1	
@@ -1242,10 +1242,10 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 5ee3c	5ee80	table	extvsAssignVertexInputs	17	
 5efa4	5efb0	padding	extvsAssignVertexInputs	3	
 5f534	5f540	padding	extvsAssignVertexInputs	3	
-5f654	5f660	padding	FUN_0005f540	3	
-5f6bc	5f6c0	padding	FUN_0005f540	1	
-5f71c	5f720	padding	FUN_0005f540	1	
-5f804	5f810	padding	FUN_0005f540	3	
+5f654	5f660	padding	extvsRewriteHardwareInstructions	3	
+5f6bc	5f6c0	padding	extvsRewriteHardwareInstructions	1	
+5f71c	5f720	padding	extvsRewriteHardwareInstructions	1	
+5f804	5f810	padding	extvsRewriteHardwareInstructions	3	
 5f868	5f870	padding	extvsPrepareHardwareProgram	2	
 60214	60220	padding	extvsPrepareHardwareProgram	3	
 61dbc	61dc0	padding	extvsPrepareHardwareProgram	1	

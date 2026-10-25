@@ -887,9 +887,9 @@ PTR_FUN_001e89d0	0x1e89d0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_LAB_001e89d4	0x1e89d4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_LAB_001e89d4 asm("PTR_LAB_001e89d4");	pointer -> _raw_entry_772f0	data.s
 PTR_FUN_001e89d8	0x1e89d8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89d8 asm("PTR_FUN_001e89d8");	pointer -> extvsInitLimits	data.s
 PTR_FUN_001e89dc	0x1e89dc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89dc asm("PTR_FUN_001e89dc");	pointer -> noop_70c60	data.s
-PTR_FUN_001e89e0	0x1e89e0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e0 asm("PTR_FUN_001e89e0");	pointer -> FUN_00062940	data.s
+PTR_FUN_001e89e0	0x1e89e0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e0 asm("PTR_FUN_001e89e0");	pointer -> extvsUploadSingleConstant	data.s
 PTR_FUN_001e89e4	0x1e89e4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e4 asm("PTR_FUN_001e89e4");	pointer -> evsAssignVertexInputs	data.s
-PTR_FUN_001e89e8	0x1e89e8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e8 asm("PTR_FUN_001e89e8");	pointer -> FUN_0005f540	data.s
+PTR_FUN_001e89e8	0x1e89e8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e8 asm("PTR_FUN_001e89e8");	pointer -> extvsRewriteHardwareInstructions	data.s
 PTR_FUN_001e89ec	0x1e89ec	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89ec asm("PTR_FUN_001e89ec");	pointer -> extvsApplyStreamDescriptors	data.s
 PTR_FUN_001e89f0	0x1e89f0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89f0 asm("PTR_FUN_001e89f0");	pointer -> atifsCompileCurrentShader	data.s
 PTR_FUN_001e89f4	0x1e89f4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89f4 asm("PTR_FUN_001e89f4");	pointer -> FUN_0004c560	data.s
