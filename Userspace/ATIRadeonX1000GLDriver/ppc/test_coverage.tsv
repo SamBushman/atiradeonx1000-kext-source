@@ -808,8 +808,8 @@
 0x8f760	arbfpLoadDefaultProgram	144	yes	
 0x8f7f0	FUN_0008f7f0	884	no	indirect call (driver context / vtable / callback)
 0x8fb70	FUN_0008fb70	248	no	indirect call (driver context / vtable / callback)
-0x8fc70	FUN_0008fc70	1028	yes	
-0x900a0	FUN_000900a0	944	no	indirect call (driver context / vtable / callback)
+0x8fc70	ffvpAssignOutputSlots	1028	yes	
+0x900a0	ffvpComputeOutputMasks	944	no	indirect call (driver context / vtable / callback)
 0x90470	gldValidateState	952	no	indirect call (driver context / vtable / callback)
 0x90840	FUN_00090840	264	no	indirect call (driver context / vtable / callback)
 0x90960	FUN_00090960	48	yes	
