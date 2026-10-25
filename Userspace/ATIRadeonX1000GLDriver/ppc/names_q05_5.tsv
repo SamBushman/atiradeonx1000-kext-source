@@ -1,0 +1,492 @@
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,uVar10\);$	^\s*if\ \(iVar5\ ==\ 0\)\ \{$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,uVar10\);$@2	^\s*\}$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,uVar10\);$@3	^\s*iVar20\ =\ FUN_001054ec\(pvVar4,0\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar6;$	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar8;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,uVar11\);$	^\s*iVar13\ =\ FUN_001054ec\(puVar21,0\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0xc\)\ =\ uVar6;$	^\s*\*\(uint\ \*\)\(iVar13\ \+\ 8\)\ =\ uVar12;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,4\);$	^\s*iVar13\ =\ FUN_001054ec\(puVar21,1\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0xc\)\ =\ uVar6;$@2	^\s*\*\(int\ \*\)\(iVar13\ \+\ 8\)\ =\ iVar5;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,4\);$@2	^\s*iVar20\ =\ FUN_001054ec\(pvVar4,0\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar6;$@2	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar13;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,\*puVar9\ >>\ 0x10\ \&\ 0x3f\);$	^\s*iVar20\ =\ FUN_001054ec\(pvVar4,1\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar6;$@3	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ \(uint\)\(ushort\)uVar14;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,4\);$@3	^\s*iVar20\ =\ FUN_001054ec\(puVar21,2\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar6;$@4	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar13;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,\*puVar9\ >>\ 0x10\ \&\ 0x3f\);$@2	^\s*iVar20\ =\ FUN_001054ec\(puVar21,2\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar6;$@5	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ \(uint\)\(ushort\)uVar14;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,uVar11\);$@2	^\s*iVar20\ =\ FUN_001054ec\(puVar21,3\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar6;$@6	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar12;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,uVar11\);$@3	^\s*iVar20\ =\ FUN_001054ec\(puVar21,0\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar6;$@7	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar12;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,4\);$@4	^\s*iVar20\ =\ FUN_001054ec\(puVar21,1\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar6;$@8	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar5;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,4\);$@5	^\s*iVar20\ =\ FUN_001054ec\(pvVar4,0\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar6;$@9	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar13;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,4\);$@6	^\s*iVar20\ =\ FUN_001054ec\(puVar21,2\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar6;$@10	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar13;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,4\);$@7	^\s*iVar20\ =\ FUN_001054ec\(pvVar4,0\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar6;$@11	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar13;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,4\);$@8	^\s*iVar20\ =\ FUN_001054ec\(puVar21,1\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar6;$@12	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar13;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,0x1f\);$	^\s*iVar20\ =\ FUN_001054ec\(pvVar4,0\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar6;$@13	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar8;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,4\);$@9	^\s*iVar20\ =\ FUN_001054ec\(pvVar4,2\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar6;$@14	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar5;$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar6\ =\ FUN_000ec208\(param_1,0x1f\);$@2	^\s*iVar20\ =\ FUN_001054ec\(pvVar4,3\);$	all	none
+use	FUN_000f9a58	uVar6	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar6;$@15	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar8;$	all	none
+use	FUN_000f9a58	uVar6	registerMap	INFERRED	program register map (+0x3ac)	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\);$	^\s*iVar20\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3c0\)\ \+\ 1;$	all	none
+use	FUN_000f9a58	uVar6	registerMap	INFERRED	program register map (+0x3ac)	^\s*iVar20\ =\ FUN_00127608\(uVar6,0x2a,iVar20,0\);$	^\s*\*\(int\ \*\)\(iVar20\ \+\ 0x30\)\ =\ iVar8;$	all	none
+use	FUN_000f9a58	uVar6	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x374\);$	^\s*puVar21\ =\ puVar7\ \+\ 1;$	all	none
+use	FUN_000f9a58	uVar6	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x374\);$@2	^\s*puVar21\ =\ puVar7\ \+\ 1;$	all	none
+use	FUN_000f9a58	uVar6	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x374\);$@3	^\s*puVar21\ =\ puVar7\ \+\ 1;$	all	none
+use	FUN_000f9a58	uVar6	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x374\);$@4	^\s*puVar21\ =\ puVar7\ \+\ 1;$	all	none
+use	FUN_000f9a58	uVar6	virtualRegister	INFERRED	virtual register created from the register map	^\s*uVar6\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x6c4\)\ \+\ 0x3ac\),0x2c,0,0$	^\s*iVar20\ =\ FUN_001054ec\(puVar21,1\);$	all	none
+use	FUN_000f9a58	uVar6	virtualRegister	INFERRED	virtual register created from the register map	^\s*uVar6\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x6c4\)\ \+\ 0x3ac\),0x2c,0,0$@2	^\s*iVar20\ =\ FUN_001054ec\(puVar21,1\);$	all	none
+use	FUN_000f9a58	uVar6	instWord0xc4	INFERRED	instruction word at +0xc4	^\s*uVar6\ =\ puVar21\[0x31\];$	^\s*iVar20\ =\ FUN_001054ec\(pvVar4,1\);$	all	none
+use	FUN_000f9a58	uVar6	instWord0xc4	INFERRED	instruction word at +0xc4	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar6;$	^\s*uVar6\ =\ FUN_000ec208\(param_1,4\);$	all	none
+use	FUN_000f9a58	uVar6	operandSelectWord	INFERRED	select word (+0x10) of an operand record	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(iVar20\ \+\ 0x10\);$	^\s*iVar20\ =\ FUN_001054ec\(pvVar4,1\);$	all	none
+use	FUN_000f9a58	uVar6	operandSelectWord	INFERRED	select word (+0x10) of an operand record	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0x10\)\ =\ uVar6;$	^\s*FUN_00193f64\(param_2,pvVar4\);$	all	none
+use	FUN_000f9a58	uVar6	operandSelectWord	INFERRED	select word (+0x10) of an operand record	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(iVar20\ \+\ 0x10\);$@2	^\s*iVar20\ =\ FUN_001054ec\(pvVar4,1\);$	all	none
+use	FUN_000f9a58	uVar6	operandSelectWord	INFERRED	select word (+0x10) of an operand record	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0x10\)\ =\ uVar6;$@2	^\s*FUN_00193f64\(param_2,pvVar4\);$	all	none
+use	FUN_000f9a58	uVar6	instWord0xac	INFERRED	instruction word at +0xac	^\s*uVar6\ =\ puVar21\[0x2b\];$	^\s*iVar20\ =\ FUN_001054ec\(pvVar4,1\);$	all	none
+use	FUN_000f9a58	uVar6	instWord0xac	INFERRED	instruction word at +0xac	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar6;$@2	^\s*uVar6\ =\ FUN_000ec208\(param_1,4\);$	all	none
+use	FUN_000f9a58	iVar5	laneCount	INFERRED	4 lanes walked by the do/while loop	^\s*iVar5\ =\ 4;$	+1
+use	FUN_000f9a58	iVar5	laneCount	INFERRED	4 lanes walked by the do/while loop	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	FUN_000f9a58	iVar5	laneCount	INFERRED	4 lanes walked by the do/while loop	^\s*iVar5\ =\ 4;$@2	+1
+use	FUN_000f9a58	iVar5	laneCount	INFERRED	4 lanes walked by the do/while loop	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@2	+2
+use	FUN_000f9a58	iVar5	newTempIndex	INFERRED	fresh temporary index (compiler+0x3ac counts downwards)	^\s*iVar5\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$	+2
+use	FUN_000f9a58	iVar5	newTempIndex	INFERRED	fresh temporary index (compiler+0x3ac counts downwards)	^\s*\*\(int\ \*\)\(iVar13\ \+\ 8\)\ =\ iVar5;$	+1
+use	FUN_000f9a58	iVar5	newTempIndex	INFERRED	fresh temporary index (compiler+0x3ac counts downwards)	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar5;$	+1
+use	FUN_000f9a58	iVar5	newTempIndex	INFERRED	fresh temporary index (compiler+0x3ac counts downwards)	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar5;$@2	+1
+use	FUN_000f9a58	iVar5	newTempIndex	INFERRED	fresh temporary index (compiler+0x3ac counts downwards)	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar5;$@3	+1
+use	FUN_000f9a58	iVar5	newTempIndex	INFERRED	fresh temporary index (compiler+0x3ac counts downwards)	^\s*\*\(short\ \*\)\(\(int\)param_3\ \+\ 2\)\ =\ \(short\)iVar5;$	+1
+use	FUN_000f9a58	iVar5	newTempIndex	INFERRED	fresh temporary index (compiler+0x3ac counts downwards)	^\s*iVar5\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$@2	+2
+use	FUN_000f9a58	iVar5	newTempIndex	INFERRED	fresh temporary index (compiler+0x3ac counts downwards)	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar5;$@4	+1
+use	FUN_000f9a58	iVar5	newTempIndex	INFERRED	fresh temporary index (compiler+0x3ac counts downwards)	^\s*\*\(short\ \*\)\(\(int\)param_3\ \+\ 2\)\ =\ \(short\)iVar5;$@2	+1
+use	FUN_000f9a58	iVar13	newTempIndex2	INFERRED	fresh temporary index (compiler+0x3ac counts downwards) for the inserted instruction	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$	+2
+use	FUN_000f9a58	iVar13	newTempIndex2	INFERRED	fresh temporary index (compiler+0x3ac counts downwards) for the inserted instruction	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar13;$	+1
+use	FUN_000f9a58	iVar13	newTempIndex2	INFERRED	fresh temporary index (compiler+0x3ac counts downwards) for the inserted instruction	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar13;$@2	+1
+use	FUN_000f9a58	iVar13	newTempIndex2	INFERRED	fresh temporary index (compiler+0x3ac counts downwards) for the inserted instruction	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$@2	+2
+use	FUN_000f9a58	iVar13	newTempIndex2	INFERRED	fresh temporary index (compiler+0x3ac counts downwards) for the inserted instruction	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar13;$@3	+1
+use	FUN_000f9a58	iVar13	newTempIndex2	INFERRED	fresh temporary index (compiler+0x3ac counts downwards) for the inserted instruction	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar13;$@4	+1
+use	FUN_000f9a58	iVar13	newTempIndex2	INFERRED	fresh temporary index (compiler+0x3ac counts downwards) for the inserted instruction	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$@3	+2
+use	FUN_000f9a58	iVar13	newTempIndex2	INFERRED	fresh temporary index (compiler+0x3ac counts downwards) for the inserted instruction	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar13;$@5	+1
+use	FUN_000f9a58	iVar13	newTempIndex2	INFERRED	fresh temporary index (compiler+0x3ac counts downwards) for the inserted instruction	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar13;$@6	+1
+use	FUN_000f9a58	iVar13	newTempIndex2	INFERRED	fresh temporary index (compiler+0x3ac counts downwards) for the inserted instruction	^\s*iVar13\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$@4	+2
+use	FUN_000f9a58	iVar13	newTempIndex2	INFERRED	fresh temporary index (compiler+0x3ac counts downwards) for the inserted instruction	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar13;$@7	+1
+use	FUN_000f9a58	iVar13	newTempIndex2	INFERRED	fresh temporary index (compiler+0x3ac counts downwards) for the inserted instruction	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar13;$@8	+1
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*iVar20\ =\ 0;$	+1
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*iVar20\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$	+3
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*\*\(int\ \*\)\(iVar5\ \+\ 8\)\ =\ iVar20;$	+1
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*\*\(int\ \*\)\(iVar5\ \+\ 8\)\ =\ iVar20;$@2	+1
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*iVar20\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$@2	+3
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*\*\(int\ \*\)\(iVar5\ \+\ 8\)\ =\ iVar20;$@3	+1
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*iVar20\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$@3	+3
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*\*\(int\ \*\)\(iVar5\ \+\ 8\)\ =\ iVar20;$@4	+1
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*\*\(int\ \*\)\(iVar5\ \+\ 8\)\ =\ iVar20;$@5	+1
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*\*\(int\ \*\)\(iVar5\ \+\ 8\)\ =\ iVar20;$@6	+1
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*iVar20\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$@4	+3
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*pvVar4\ =\ \(void\ \*\)\(\(int\ \(\*\)\(\)\)FUN_000f9038\)\(param_1,iVar20,param_2\);$	+1
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*iVar20\ =\ 0;$@2	+1
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*iVar5\ =\ FUN_0019e990\(param_3,iVar20\);$	+1
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*bVar1\ =\ iVar20\ !=\ 3;$	+1
+use	FUN_000f9a58	iVar20	laneIndex	INFERRED	lane counter of the loops over the four components	^\s*iVar20\ =\ iVar20\ \+\ 1;$	+1
+use	FUN_000f9a58	iVar20	destRegisterFile	INFERRED	register file of the destination type (Program__registerFileOfIlType)	^\s*iVar20\ =\ FUN_000ec208\(param_1,\*param_3\ >>\ 0x10\ \&\ 0x3f\);$	+2
+use	FUN_000f9a58	iVar20	tempId	INFERRED	compiler+0x3c0 counter after the increment: id of the temporary	^\s*iVar20\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3c0\)\ \+\ 1;$	+5
+use	FUN_000f9a58	iVar20	sourceNumber	INFERRED	index of the source descriptor processed (starts at 1)	^\s*iVar20\ =\ 1;$	+1
+use	FUN_000f9a58	iVar20	sourceNumber	INFERRED	index of the source descriptor processed (starts at 1)	^\s*iVar20\ =\ 2;$	+1
+use	FUN_000f9a58	iVar20	sourceNumber	INFERRED	index of the source descriptor processed (starts at 1)	^\s*iVar20\ =\ iVar20\ \+\ 1;$@2	+1
+use	FUN_000f9a58	iVar20	sourceNumber	INFERRED	index of the source descriptor processed (starts at 1)	^\s*puVar9\ =\ param_3\ \+\ iVar20;$	+1
+use	FUN_000f9a58	iVar20	sourceNumber	INFERRED	index of the source descriptor processed (starts at 1)	^\s*uVar17\ =\ param_3\[iVar20\ \+\ 2\];$	+1
+use	FUN_000f9a58	iVar20	sourceNumber	INFERRED	index of the source descriptor processed (starts at 1)	^\s*uVar12\ =\ uVar12\ \+\ param_3\[iVar20\ \+\ 2\];$	+1
+use	FUN_000f9a58	iVar20	sourceNumber	INFERRED	index of the source descriptor processed (starts at 1)	^\s*uVar16\ =\ param_3\[iVar20\];$	+1
+local	FUN_000f9a58	iVar8	destRegisterIndex	INFERRED	low 16 bits of the destination descriptor word: register number
+local	FUN_000f9a58	uVar10	destRegisterType	INFERRED	bits 16..21 of the destination descriptor word: IL register type
+local	FUN_000f9a58	puVar9	sourceDescriptor	INFERRED	descriptor word of the current source (param_3 + sourceNumber)
+local	FUN_000f9a58	pvVar3	writeMaskCursor	INFERRED	walks the four write-mask bytes of the new instruction
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*pvVar4\ =\ \(void\ \*\)0x0;$	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*pvVar4\ =\ FUN_001043f0\(0x13,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+2
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*iVar5\ =\ FUN_001054ec\(pvVar4,1\);$	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*\(\(void\ \(\*\)\(\)\)FUN_000f79c4\)\(pvVar4,param_1,2,fparam_1,fparam_1,fparam_1,fparam_1\);$	+2
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*if\ \(pvVar4\ ==\ \(void\ \*\)0x0\)\ \{$	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*pvVar4\ =\ FUN_001043f0\(0x31,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+2
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*\(\(void\ \(\*\)\(\)\)FUN_000f79c4\)\(pvVar4,param_1,1,0\.0,0\.0,0\.0,0\.0\);$	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*pvVar3\ =\ pvVar4;$	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*FUN_00193f64\(param_2,pvVar4\);$@2	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*if\ \(pvVar4\ ==\ \(void\ \*\)0x0\)\ \{$@2	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*pvVar4\ =\ FUN_001043f0\(0x31,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$@2	+2
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*\(\(void\ \(\*\)\(\)\)FUN_000f79c4\)\(pvVar4,param_1,1,1\.0,1\.0,1\.0,1\.0\);$	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*pvVar3\ =\ pvVar4;$@2	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*FUN_00193f64\(param_2,pvVar4\);$@3	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*pvVar4\ =\ FUN_001043f0\(0x31,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$@3	+2
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*iVar5\ =\ FUN_001054ec\(pvVar4,1\);$@2	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*FUN_00193f64\(param_2,pvVar4\);$@4	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*if\ \(pvVar4\ ==\ \(void\ \*\)0x0\)\ \{$@3	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*pvVar4\ =\ \(void\ \*\)\(\(int\ \(\*\)\(\)\)FUN_000f9038\)\(param_1,iVar20,param_2\);$	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*if\ \(pvVar4\ !=\ \(void\ \*\)0x0\)\ \{$	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*FUN_001046c8\(pvVar4,0,iVar20\);$	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*iVar20\ =\ FUN_001054ec\(pvVar4,0\);$	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*\*\(undefined4\ \*\)\(\(int\)pvVar4\ \+\ 0x120\)\ =\ 1;$	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*\*\(undefined1\ \*\)\(\(int\)pvVar4\ \+\ 0x9c\)\ =\ 1;$	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*\*\(undefined1\ \*\)\(\(int\)pvVar4\ \+\ 0x9c\)\ =\ 0;$	+1
+use	FUN_000f9a58	pvVar4	setupInst	INFERRED	instruction created for the destination setup (0 until needed)	^\s*pvVar4\ =\ \(void\ \*\)\(\(int\)pvVar4\ \+\ 1\);$	+1
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ param_2;$	^\s*pdVar17\ =\ param_3;$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_01;$	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4;$	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_00;$	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_02;$	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_03;$	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_04;$	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar39\ =\ CONCAT44\(uVar22\ \*\ 4\ \+\ puVar37\[2\],uVar8\);$	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ \(undefined4\)uVar39;$@3	^\s*pdVar25\ =\ \*\(dword\ \*\*\)\(\*\(int\ \*\)\(\(ulonglong\)uVar39\ >>\ 0x20\)\ \+\ 0x94\);$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_08;$	^\s*if\ \(pvVar15\ !=\ \(void\ \*\)0x0\)\ \{$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_09;$	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_10;$	^\s*pdVar31\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_11;$	^\s*uVar24\ =\ 4;$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_12;$	^\s*pdVar25\ =\ pdVar31;$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_14;$	^\s*pdVar25\ =\ pdVar31;$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_13;$	^\s*pdVar31\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_15;$	^\s*pdVar25\ =\ pdVar26;$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ \(undefined4\)uVar39;$@4	^\s*if\ \(\(\(int\)\(\(ulonglong\)uVar39\ >>\ 0x20\)\ ==\ 0\)\ \|\|$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_17;$	^\s*pdVar25\ =\ pdVar27;$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_16;$	^\s*uVar24\ =\ 4;$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*if\ \(\(\(\(\(uVar22\ \&\ 0x400000\)\ !=\ 0\)\ \&\&\ \(\(\*pdVar29\ \&\ 0x8888\)\ !=\ 0\)\)\ \&\&$	^\s*pdVar31\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ \(undefined4\)uVar39;$	^\s*if\ \(\*\(int\ \*\)\(\(ulonglong\)uVar39\ >>\ 0x20\)\ ==\ 0\)\ \{$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ \(undefined4\)uVar39;$@2	^\s*\*\(int\ \*\)\(\(ulonglong\)uVar39\ >>\ 0x20\)\ =\ iVar6;$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_07;$	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar39\ =\ CONCAT44\(uVar22\ \*\ 4\ \+\ puVar37\[2\],uVar8\);$@3	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_05;$	^\s*if\ \(uVar34\ <=\ uVar22\)\ \{$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar8\ =\ extraout_r4_06;$	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	r4Sink	INFERRED	dead carry of the r4 value (param_2 on entry, then Ghidra-recovered call residuals)	^\s*uVar39\ =\ CONCAT44\(uVar22\ \*\ 4\ \+\ puVar37\[2\],uVar8\);$@2	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x374\);$	^\s*puVar33\ =\ puVar9\ \+\ 1;$	all	none
+use	FUN_000fb3d4	uVar8	modifierSelectWord	INFERRED	select word looked up in a table indexed by source modifier bits 17..19	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b8c\ \+\ \(uVar22\ >>\ 0x11\ \&\ 7\)\ \*\ 4\);$	^\s*iVar20\ =\ FUN_001054ec\(puVar33,1\);$	all	none
+use	FUN_000fb3d4	uVar8	modifierSelectWord	INFERRED	select word looked up in a table indexed by source modifier bits 17..19	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0x10\)\ =\ uVar8;$	^\s*puVar9\[0x4c\]\ =\ pdVar25\[0xc\];$	all	none
+use	FUN_000fb3d4	uVar8	virtualRegister	INFERRED	virtual register created from the register map	^\s*uVar8\ =\ FUN_000e7d5c\(iVar20\);$	^\s*if\ \(uVar24\ ==\ 1\)\ \{$	all	none
+use	FUN_000fb3d4	uVar8	virtualRegister	INFERRED	virtual register created from the register map	^\s*FUN_001046c8\(pdVar17,1,uVar8\);$	^\s*uVar24\ =\ 0x23;$	all	none
+use	FUN_000fb3d4	uVar8	virtualRegister	INFERRED	virtual register created from the register map	^\s*FUN_001236e4\(uVar8,1,pdVar17\);$	^\s*uVar8\ =\ extraout_r4;$	all	none
+use	FUN_000fb3d4	uVar8	virtualRegister	INFERRED	virtual register created from the register map	^\s*FUN_001046c8\(pdVar17,1,uVar8\);$@2	^\s*uVar24\ =\ 0x24;$	all	none
+use	FUN_000fb3d4	uVar8	virtualRegister	INFERRED	virtual register created from the register map	^\s*FUN_001236e4\(uVar8,1,pdVar17\);$@2	^\s*uVar8\ =\ extraout_r4_00;$	all	none
+use	FUN_000fb3d4	uVar8	opcodeNumber	INFERRED	IR opcode number passed to IRInst__create	^\s*uVar8\ =\ 0xfe;$	^\s*if\ \(uVar34\ !=\ 0x1c\)\ \{$	all	none
+use	FUN_000fb3d4	uVar8	opcodeNumber	INFERRED	IR opcode number passed to IRInst__create	^\s*uVar8\ =\ 0xfb;$	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	opcodeNumber	INFERRED	IR opcode number passed to IRInst__create	^\s*uVar8\ =\ 0x10b;$	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	opcodeNumber	INFERRED	IR opcode number passed to IRInst__create	^\s*FUN_00107980\(puVar9,uVar8,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar34\);$	all	none
+use	FUN_000fb3d4	uVar8	opcodeNumber	INFERRED	IR opcode number passed to IRInst__create	^\s*puVar9\ =\ FUN_001043f0\(uVar8,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	^\s*puVar9\[0x27\]\ =\ 0;$	all	none
+use	FUN_000fb3d4	uVar8	opcodeNumber	INFERRED	IR opcode number passed to IRInst__create	^\s*FUN_00107980\(puVar9,uVar8,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$@2	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar34\);$	^\s*pdVar17\ =\ \(dword\ \*\)\(\(int\)\(\(unsigned\ char\ \*\)0x0\)\ \+\ 2\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0xc\)\ =\ uVar8;$	^\s*\*\(dword\ \*\*\)\(iVar6\ \+\ 8\)\ =\ pdVar18;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar34\);$@2	^\s*iVar6\ =\ FUN_001054ec\(puVar9,2\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0xc\)\ =\ uVar8;$@2	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 8\)\ =\ 0xffffffff;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$	^\s*iVar6\ =\ FUN_001054ec\(puVar9,0\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0xc\)\ =\ uVar8;$@3	^\s*\*\(dword\ \*\*\)\(iVar6\ \+\ 8\)\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,\*pdVar29\ >>\ 0x10\ \&\ 0x3f\);$	^\s*iVar20\ =\ FUN_001054ec\(puVar9,pdVar17\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ \(uint\)GH_F2U\(\(float\)\(\(ushort\)dVar4\)\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@2	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,0\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@2	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,\*pdVar29\ >>\ 0x10\ \&\ 0x3f\);$@2	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,1\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@3	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ \(uint\)GH_F2U\(\(float\)\(\(ushort\)dVar4\)\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@3	^\s*iVar20\ =\ FUN_001054ec\(puVar9,pdVar17\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@4	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@4	^\s*iVar20\ =\ FUN_001054ec\(puVar9,0\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@5	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar34\);$@3	^\s*iVar20\ =\ FUN_001054ec\(puVar9,1\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@6	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar18;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@5	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,0\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@7	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar6;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@6	^\s*iVar20\ =\ FUN_001054ec\(puVar9,2\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@8	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar6;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@7	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,0\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@9	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@8	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,1\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@10	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@9	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,0\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@11	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@10	^\s*iVar20\ =\ FUN_001054ec\(pvVar15,0\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@12	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@11	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,0\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@13	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@12	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,0\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@14	^\s*\*\(undefined4\ \*\)\(\(int\)pvVar10\ \+\ 0x9c\)\ =\ 0x10101;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,\*pdVar30\ >>\ 0x10\ \&\ 0x3f\);$	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,2\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@15	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar22;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@13	^\s*iVar20\ =\ FUN_001054ec\(pdVar29,0\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@16	^\s*pdVar17\ =\ \(dword\ \*\)\(\(int\)\(\(unsigned\ char\ \*\)0x0\)\ \+\ 1\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,\*pdVar30\ >>\ 0x10\ \&\ 0x3f\);$@2	^\s*iVar20\ =\ FUN_001054ec\(pdVar29,2\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@17	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar22;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@14	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,0\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@18	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@15	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,1\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@19	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@16	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,2\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@20	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar34;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@17	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,0\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@21	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$@18	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,1\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@22	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar25;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,1\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@23	^\s*FUN_00193f64\(param_2,pvVar10\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@2	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,1\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@24	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar26;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@3	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,1\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@25	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar31;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@4	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,1\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@26	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar31;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@5	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,1\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@27	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar31;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@6	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,1\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@28	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar31;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@7	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,3\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@29	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar31;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@8	^\s*iVar20\ =\ FUN_001054ec\(piVar7,1\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@30	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar26;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@9	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,1\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@31	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar27;$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@10	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,1\);$	all	none
+use	FUN_000fb3d4	uVar8	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar8;$@32	^\s*\*\(dword\ \*\*\)\(iVar20\ \+\ 8\)\ =\ pdVar27;$	all	none
+use	FUN_000fb3d4	uVar8	instWord0xc4	INFERRED	instruction word at +0xc4	^\s*uVar8\ =\ puVar9\[0x31\];$	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,1\);$	all	none
+use	FUN_000fb3d4	uVar8	instWord0xc4	INFERRED	instruction word at +0xc4	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar8;$	^\s*uVar8\ =\ FUN_000ec208\(param_1,4\);$	all	none
+use	FUN_000fb3d4	uVar8	operandSelectWord	INFERRED	select word (+0x10) of an operand record	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(iVar20\ \+\ 0x10\);$	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,1\);$	all	none
+use	FUN_000fb3d4	uVar8	operandSelectWord	INFERRED	select word (+0x10) of an operand record	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0x10\)\ =\ uVar8;$@2	^\s*FUN_00193f64\(param_2,pvVar10\);$	all	none
+use	FUN_000fb3d4	uVar8	operandSelectWord	INFERRED	select word (+0x10) of an operand record	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(iVar20\ \+\ 0x10\);$@2	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,3\);$	all	none
+use	FUN_000fb3d4	uVar8	operandSelectWord	INFERRED	select word (+0x10) of an operand record	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0x10\)\ =\ uVar8;$@4	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	hwInputRegister	INFERRED	hardware description virtual slot 0x9c: hardware register of an input	^\s*uVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x9c\)\)\(piVar7,\(short\)dVar4\);$	^\s*piVar7\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\);$	all	none
+use	FUN_000fb3d4	uVar8	hwInputRegister	INFERRED	hardware description virtual slot 0x9c: hardware register of an input	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar8;$@2	^\s*iVar20\ =\ FUN_001054ec\(pvVar10,2\);$	all	none
+use	FUN_000fb3d4	uVar8	hwInputRegister	INFERRED	hardware description virtual slot 0x9c: hardware register of an input	^\s*uVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x9c\)\)\(piVar7,pdVar29\);$	^\s*pdVar18\ =\ \*\(dword\ \*\*\)\(param_1\ \+\ 8\);$	all	none
+use	FUN_000fb3d4	uVar8	hwInputRegister	INFERRED	hardware description virtual slot 0x9c: hardware register of an input	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar8;$@3	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ 0x1f;$	all	none
+use	FUN_000fb3d4	uVar8	literalSelectWord	INFERRED	select word produced by the literal-vector helper (FUN_000f8a30, out parameter local_98)	^\s*uVar8\ =\ local_98;$	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ 0x1f;$	all	none
+use	FUN_000fb3d4	uVar8	literalSelectWord	INFERRED	select word produced by the literal-vector helper (FUN_000f8a30, out parameter local_98)	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0x10\)\ =\ uVar8;$@3	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	arenaB	INFERRED	compiler arena B (+0x378)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x378\);$	^\s*puVar37\ =\ puVar9\ \+\ 1;$	all	none
+use	FUN_000fb3d4	uVar8	arenaB	INFERRED	compiler arena B (+0x378)	^\s*\*puVar9\ =\ uVar8;$@2	^\s*puVar9\[1\]\ =\ 2;$	all	none
+use	FUN_000fb3d4	uVar8	arenaB	INFERRED	compiler arena B (+0x378)	^\s*puVar9\[4\]\ =\ uVar8;$	^\s*uVar8\ =\ FUN_00193e18\(uVar8,8\);$	all	rhs
+use	FUN_000fb3d4	uVar8	vectorData	INFERRED	first data block (8 bytes) of a growable vector	^\s*uVar8\ =\ FUN_00193e18\(uVar8,8\);$	^\s*\*\(uint\ \*\*\)\(iVar20\ \+\ param_7\)\ =\ puVar37;$	lhs	none
+use	FUN_000fb3d4	uVar8	packedLaneSource0	INFERRED	lane-0 source of the packed destination descriptor	^\s*uVar8\ =\ FUN_0019e9fc\(param_4,0\);$	^\s*uVar35\ =\ FUN_0019e9fc\(param_4,1\);$	all	none
+use	FUN_000fb3d4	uVar8	packedLaneSource0	INFERRED	lane-0 source of the packed destination descriptor	^\s*fparam_1\ =\ \(double\)\(\(double\ \(\*\)\(\)\)FUN_000f8a30\)\(uVar8,0,\&local_98,pdVar18\);$	^\s*fparam_2\ =\ \(double\)\(\(double\ \(\*\)\(\)\)FUN_000f8a30\)\(uVar35,1,\&local_98,pdVar18\);$	all	none
+use	FUN_000fb3d4	uVar8	constantSelectWord	INFERRED	constant select word (component selector pattern) stored in an operand record or instruction field	^\s*uVar8\ =\ 0x1000000;$	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	constantSelectWord	INFERRED	constant select word (component selector pattern) stored in an operand record or instruction field	^\s*uVar8\ =\ 0x1010000;$	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	constantSelectWord	INFERRED	constant select word (component selector pattern) stored in an operand record or instruction field	^\s*uVar8\ =\ 0x1010100;$	^\s*\}$	all	none
+use	FUN_000fb3d4	uVar8	constantSelectWord	INFERRED	constant select word (component selector pattern) stored in an operand record or instruction field	^\s*\*\(undefined4\ \*\)\(\(int\)pvVar16\ \+\ 0x9c\)\ =\ uVar8;$	^\s*FUN_00193f64\(param_2,pvVar10\);$	all	none
+use	FUN_000fb3d4	extraout_r4	callResidualR4_0	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4;$	+1
+use	FUN_000fb3d4	extraout_r4_00	callResidualR4_0B	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_00;$	+1
+use	FUN_000fb3d4	extraout_r4_01	callResidualR4_1	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_01;$	+1
+use	FUN_000fb3d4	extraout_r4_02	callResidualR4_2	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_02;$	+1
+use	FUN_000fb3d4	extraout_r4_03	callResidualR4_3	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_03;$	+1
+use	FUN_000fb3d4	extraout_r4_04	callResidualR4_4	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_04;$	+1
+use	FUN_000fb3d4	extraout_r4_05	callResidualR4_5	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_05;$	+1
+use	FUN_000fb3d4	extraout_r4_06	callResidualR4_6	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_06;$	+1
+use	FUN_000fb3d4	extraout_r4_07	callResidualR4_7	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_07;$	+1
+use	FUN_000fb3d4	extraout_r4_08	callResidualR4_8	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_08;$	+1
+use	FUN_000fb3d4	extraout_r4_09	callResidualR4_9	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_09;$	+1
+use	FUN_000fb3d4	extraout_r4_10	callResidualR4_10	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_10;$	+1
+use	FUN_000fb3d4	extraout_r4_11	callResidualR4_11	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_11;$	+1
+use	FUN_000fb3d4	extraout_r4_12	callResidualR4_12	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_12;$	+1
+use	FUN_000fb3d4	extraout_r4_13	callResidualR4_13	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_13;$	+1
+use	FUN_000fb3d4	extraout_r4_14	callResidualR4_14	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_14;$	+1
+use	FUN_000fb3d4	extraout_r4_15	callResidualR4_15	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_15;$	+1
+use	FUN_000fb3d4	extraout_r4_16	callResidualR4_16	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_16;$	+1
+use	FUN_000fb3d4	extraout_r4_17	callResidualR4_17	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*uVar8\ =\ extraout_r4_17;$	+1
+use	FUN_000fb3d4	iVar6	createdVReg	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*iVar6\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),0x28,pdVar31,0\);$	+2
+use	FUN_000fb3d4	iVar6	createdVReg	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*FUN_001046c8\(pdVar17,0,iVar6\);$	+1
+use	FUN_000fb3d4	iVar6	createdVReg	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*FUN_0012306c\(iVar6,pdVar17\);$	+1
+use	FUN_000fb3d4	iVar6	createdVReg	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*iVar6\ =\ FUN_00127608\(uVar12,uVar35,pdVar31,0\);$	+2
+use	FUN_000fb3d4	iVar6	createdVReg	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*FUN_001046c8\(pdVar17,0,iVar6\);$@2	+1
+use	FUN_000fb3d4	iVar6	createdVReg	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*FUN_0012306c\(iVar6,pdVar17\);$@2	+1
+use	FUN_000fb3d4	iVar6	newTempIndex	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*iVar6\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$	+2
+use	FUN_000fb3d4	iVar6	newTempIndex	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar6;$	+1
+use	FUN_000fb3d4	iVar6	newTempIndex	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*\*\(int\ \*\)\(iVar20\ \+\ 8\)\ =\ iVar6;$@2	+1
+use	FUN_000fb3d4	iVar20	virtualRegisterB	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*iVar20\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),0x26,pdVar31,0\);$	+2
+use	FUN_000fb3d4	iVar20	virtualRegisterB	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*FUN_001046c8\(puVar33,0,iVar20\);$	+1
+use	FUN_000fb3d4	iVar38	newTempIndexB	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*iVar38\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$	+2
+use	FUN_000fb3d4	iVar38	newTempIndexB	INFERRED	role read off the defining call: operand record lookups, virtual register creation, fresh temporary index, r4 residuals	^\s*\*\(int\ \*\)\(iVar11\ \+\ 8\)\ =\ iVar38;$	+1
+use	FUN_000fb3d4	dVar4	tokenWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*dVar4\ =\ \*pdVar29;$	+1
+use	FUN_000fb3d4	dVar4	tokenWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ \(uint\)GH_F2U\(\(float\)\(\(ushort\)dVar4\)\);$	+1
+use	FUN_000fb3d4	dVar4	tokenWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*dVar4\ =\ \*pdVar29;$@2	+1
+use	FUN_000fb3d4	dVar4	tokenWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ \(uint\)GH_F2U\(\(float\)\(\(ushort\)dVar4\)\);$@2	+1
+use	FUN_000fb3d4	dVar4	tokenWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*dVar4\ =\ \*param_4;$	+1
+use	FUN_000fb3d4	dVar4	tokenWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar8\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x9c\)\)\(piVar7,\(short\)dVar4\);$	+1
+use	FUN_000fb3d4	dVar4	tokenWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0xa0\)\)\(\&local_84,piVar7,\(short\)dVar4\);$	+1
+use	FUN_000fb3d4	dVar4	tokenWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*dVar4\ =\ \*pdVar30;$	+1
+use	FUN_000fb3d4	dVar4	tokenWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ \(uint\)GH_F2U\(\(float\)\(\(ushort\)dVar4\)\);$@3	+1
+use	FUN_000fb3d4	pcVar36	hwVirtualSlot88	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*pcVar36\ =\ \*\(code\ \*\*\)\(\*piVar7\ \+\ 0x88\);$	+1
+use	FUN_000fb3d4	pcVar36	hwVirtualSlot88	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\(\*pcVar36\)\(piVar7,1\);$	+1
+use	FUN_000fb3d4	piVar7	stackTopEntry	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*piVar7\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_000fb3d4	piVar7	stackTopEntry	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*piVar7\ =\ \(int\ \*\)\(uVar22\ \*\ 4\ \+\ param_5\[2\]\);$	+1
+use	FUN_000fb3d4	piVar7	stackTopEntry	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*iVar20\ =\ \*piVar7;$	+1
+use	FUN_000fb3d4	piVar7	hwDescription	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*piVar7\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\);$	+2
+use	FUN_000fb3d4	piVar7	hwDescription	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*piVar7\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\);$@2	+2
+use	FUN_000fb3d4	piVar7	hwDescription	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*piVar7\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\);$@3	+2
+use	FUN_000fb3d4	piVar7	hwDescription	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*piVar7\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\);$@4	+2
+use	FUN_000fb3d4	puVar33	newInstObj	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*puVar33\ =\ puVar9\ \+\ 1;$	+3
+use	FUN_000fb3d4	puVar33	newInstObj	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*FUN_001046c8\(puVar33,1,pdVar25\);$	+1
+use	FUN_000fb3d4	puVar33	newInstObj	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*iVar20\ =\ FUN_001054ec\(puVar33,1\);$	+1
+use	FUN_000fb3d4	puVar33	newInstObj	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*FUN_00193f64\(param_2,puVar33\);$	+1
+use	FUN_000fb3d4	puVar37	movTableVector	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*puVar37\ =\ \*\(uint\ \*\*\)\(iVar20\ \+\ param_7\);$	+2
+use	FUN_000fb3d4	puVar37	movTableVector	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*puVar37\ =\ puVar9\ \+\ 1;$	+1
+use	FUN_000fb3d4	puVar37	movTableVector	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(uint\ \*\*\)\(iVar20\ \+\ param_7\)\ =\ puVar37;$	+1
+use	FUN_000fb3d4	puVar37	movTableVector	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar22\ <\ \*puVar37\)\ \{$	+2
+use	FUN_000fb3d4	puVar37	movTableVector	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*_memset\(uVar34\ \*\ 4\ \+\ puVar37\[2\],0,pdVar17\);$	+2
+use	FUN_000fb3d4	puVar37	movTableVector	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar39\ =\ CONCAT44\(uVar22\ \*\ 4\ \+\ puVar37\[2\],uVar8\);$	+1
+use	FUN_000fb3d4	puVar37	movTableVector	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar39\ =\ FUN_0019423c\(puVar37,uVar22\);$	+1
+use	FUN_000fb3d4	puVar37	movTableVector	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*puVar37\ =\ \*\(uint\ \*\*\)\(iVar20\ \+\ param_7\);$@2	+3
+use	FUN_000fb3d4	puVar37	movTableVector	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*_memset\(uVar34\ \*\ 4\ \+\ puVar37\[2\],0,pdVar17\);$@2	+2
+use	FUN_000fb3d4	puVar37	movTableVector	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar39\ =\ CONCAT44\(uVar22\ \*\ 4\ \+\ puVar37\[2\],uVar8\);$@2	+1
+use	FUN_000fb3d4	puVar37	movTableVector	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar39\ =\ FUN_0019423c\(puVar37,uVar22\);$@2	+1
+use	FUN_000fb3d4	puVar37	movTableVector	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*puVar37\ =\ \*\(uint\ \*\*\)\(iVar20\ \+\ param_7\);$@3	+3
+use	FUN_000fb3d4	puVar37	movTableVector	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*_memset\(uVar34\ \*\ 4\ \+\ puVar37\[2\],0,pdVar17\);$@3	+2
+use	FUN_000fb3d4	puVar37	movTableVector	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar39\ =\ CONCAT44\(uVar22\ \*\ 4\ \+\ puVar37\[2\],uVar8\);$@3	+1
+use	FUN_000fb3d4	puVar37	movTableVector	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar39\ =\ FUN_0019423c\(puVar37,uVar22\);$@3	+1
+use	FUN_000fb3d4	uVar12	registerMap	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\);$	+1
+use	FUN_000fb3d4	uVar12	registerMap	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*iVar6\ =\ FUN_00127608\(uVar12,uVar35,pdVar31,0\);$	+1
+use	FUN_000fb3d4	uVar12	registerFile3	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar12\ =\ FUN_000ec208\(param_1,uVar24\);$	+1
+use	FUN_000fb3d4	uVar12	registerFile3	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0xc\)\ =\ uVar12;$	+1
+use	FUN_000fb3d4	uVar12	registerFile3	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar12\ =\ FUN_000ec208\(param_1,uVar24\);$@2	+1
+use	FUN_000fb3d4	uVar12	registerFile3	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0xc\)\ =\ uVar12;$@2	+1
+use	FUN_000fb3d4	uVar12	registerFile3	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar12\ =\ FUN_000ec208\(param_1,uVar24\);$@3	+1
+use	FUN_000fb3d4	uVar12	registerFile3	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0xc\)\ =\ uVar12;$@3	+1
+use	FUN_000fb3d4	uVar12	operandSelectWord3	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\);$	+1
+use	FUN_000fb3d4	uVar12	operandSelectWord3	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\)\ =\ uVar12;$	+1
+use	FUN_000fb3d4	uVar14	registerFile4	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar14\ =\ FUN_000ec208\(param_1,uVar24\);$	+1
+use	FUN_000fb3d4	uVar14	registerFile4	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar14;$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4;$	+2
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(\(\(uVar22\ \&\ 0x3f0000\)\ ==\ 0x100000\)\ \&\&\ \(iVar20\ !=\ 0\)\)\ \&\&$	+2
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar24\ =\ uVar22\ >>\ 0x10\ \&\ 0x3f;$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(uVar22\ \&\ 0x1800000\)\ ==\ 0x800000\)\ \{$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4\ \&\ 0xfe7fffff;$	+2
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(\(uVar22\ \&\ 0x3f0000\)\ ==\ 0x1c0000\)\ \&\&$	+3
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(uVar22\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4\ \&\ 0xfbffffff;$	+2
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(uVar24\ ==\ 0x20\)\ \&\&\ \(bVar2\ =\ true,\ \(uVar22\ \&\ 0x1800000\)\ ==\ 0x1000000\)\)\ \{$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(\(undefined4\ \*\)\(uVar22\ \&\ 0x3f0000\)\ ==\ \(undefined4\ \*\)0x1c0000\)\ \|\|$	+2
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(uVar22\ \&\ 0x2000000\)\ !=\ 0\)\ \{$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*\(uint\ \*\)\(iVar6\ \+\ \(int\)param_4\);$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(uVar22\ \&\ 0x10000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b8c\ \+\ \(uVar22\ >>\ 0x11\ \&\ 7\)\ \*\ 4\);$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4;$@2	+2
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(int\)uVar22\ <\ 0\)\ \{$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(uVar22\ \&\ 0x400000\)\ !=\ 0\)\ \{$@2	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(uVar22\ \&\ 0x1800000\)\ ==\ 0x1000000\)\ \{$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*else\ if\ \(\(uVar22\ \&\ 0x1800000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4;$@3	+2
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(uVar22\ \&\ 0x1800000\)\ ==\ 0x1000000\)\ \{$@2	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(uVar22\ \&\ 0x4000000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \(uint\)\*\(ushort\ \*\)\(\(int\)param_4\ \+\ \(int\)pdVar29\ \*\ 4\ \+\ 2\);$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(uint\ \*\)\(\(int\)pvVar10\ \+\ 0x130\)\ =\ uVar22;$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar22\ ==\ \*param_6\)\ \{$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar22\ <\ \*puVar37\)\ \{$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar34\ <=\ uVar22\)\ \{$	+2
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*puVar37\[1\]\ =\ uVar22\ \+\ 1;$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar39\ =\ CONCAT44\(uVar22\ \*\ 4\ \+\ puVar37\[2\],uVar8\);$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar39\ =\ FUN_0019423c\(puVar37,uVar22\);$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 300\)\ =\ uVar22;$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar22\ <\ \*puVar37\)\ \{$@2	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar34\ <=\ uVar22\)\ \{$@2	+2
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*puVar37\[1\]\ =\ uVar22\ \+\ 1;$@2	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar39\ =\ CONCAT44\(uVar22\ \*\ 4\ \+\ puVar37\[2\],uVar8\);$@2	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar39\ =\ FUN_0019423c\(puVar37,uVar22\);$@2	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar22\ <\ \*puVar37\)\ \{$@3	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar34\ <=\ uVar22\)\ \{$@3	+2
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*puVar37\[1\]\ =\ uVar22\ \+\ 1;$@3	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar39\ =\ CONCAT44\(uVar22\ \*\ 4\ \+\ puVar37\[2\],uVar8\);$@3	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar39\ =\ FUN_0019423c\(puVar37,uVar22\);$@3	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4;$@4	+2
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4;$@5	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(uVar22\ \&\ 0x400000\)\ ==\ 0\)\ \{$@2	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(uVar22\ \&\ 0x400000\)\ ==\ 0\)\ goto\ code_r0x000fd490;$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4;$@6	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(\(uVar22\ \&\ 0x400000\)\ !=\ 0\)\ \&\&\ \(\(\*pdVar29\ \&\ 0x10000\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4;$@7	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(\(\(uVar22\ \&\ 0x400000\)\ ==\ 0\)\ \|\|\ \(\(\*pdVar29\ \&\ 0x20000\)\ ==\ 0\)\)\ \|\|\ \(\(\*pdVar29\ \&\ 0x40000\)\ ==\ 0\)\)\ \{$	+3
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4;$@8	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4;$@9	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(\(uVar22\ \&\ 0x400000\)\ !=\ 0\)\ \&\&\ \(\(\*pdVar29\ \&\ 0x80000\)\ !=\ 0\)\)\ \{$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4;$@10	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(\(uVar22\ \&\ 0x400000\)\ !=\ 0\)\ \&\&\ \(uVar23\ =\ \*pdVar29\ >>\ 0x15\ \&\ 7,\ uVar23\ !=\ 0\)\)\ \{$	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4;$@11	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4;$@12	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4;$@13	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \*param_4;$@14	+1
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(\(\(\(uVar22\ \&\ 0x400000\)\ !=\ 0\)\ \&\&\ \(\(\*pdVar29\ \&\ 0x8888\)\ !=\ 0\)\)\ \&\&$	+3
+use	FUN_000fb3d4	uVar22	descriptorWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ >>\ 0xf\ \&\ 1\ \^\ 1\ \|$	+3
+use	FUN_000fb3d4	uVar22	stackTopIndex	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ param_5\[1\]\ \-\ 1;$	+3
+use	FUN_000fb3d4	uVar22	swizzleWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ \(uint\)\(ushort\)\*pdVar30;$	+1
+use	FUN_000fb3d4	uVar22	swizzleWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar22;$	+1
+use	FUN_000fb3d4	uVar22	swizzleWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ uVar34;$	+1
+use	FUN_000fb3d4	uVar22	swizzleWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar22;$@2	+1
+use	FUN_000fb3d4	uVar23	hasExtensionWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar23\ =\ uVar22\ >>\ 0x16\ \&\ 1;$	+1
+use	FUN_000fb3d4	uVar23	hasExtensionWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar23\ ==\ 0\)\ \{$	+1
+use	FUN_000fb3d4	uVar23	hasExtensionWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar23\ ==\ 0\)\ goto\ code_r0x000fd490;$	+1
+use	FUN_000fb3d4	uVar23	hasExtensionWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(\(uVar22\ \&\ 0x400000\)\ !=\ 0\)\ \&\&\ \(uVar23\ =\ \*pdVar29\ >>\ 0x15\ \&\ 7,\ uVar23\ !=\ 0\)\)\ \{$	+1
+use	FUN_000fb3d4	uVar23	hasExtensionWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar23\ ==\ 4\)\ \{$	+1
+use	FUN_000fb3d4	uVar23	hasExtensionWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar23\ ==\ 1\)\ \{$	+1
+use	FUN_000fb3d4	uVar23	hasExtensionWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*else\ if\ \(uVar23\ ==\ 2\)\ \{$	+1
+use	FUN_000fb3d4	uVar23	hasExtensionWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar23\ !=\ 3\)\ goto\ code_r0x000fd284;$	+1
+use	FUN_000fb3d4	uVar23	hasExtensionWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*else\ if\ \(uVar23\ ==\ 3\)\ \{$	+1
+use	FUN_000fb3d4	uVar23	hasExtensionWord	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar23\ !=\ 2\)\ goto\ code_r0x000fd284;$	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar24\ =\ uVar22\ >>\ 0x10\ \&\ 0x3f;$	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar24\ =\ 0x22;$	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar24\ ==\ 1\)\ \{$	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar24\ =\ 0x23;$	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar35\ =\ FUN_000ec208\(param_1,uVar24\);$	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*FUN_000ec208\(param_1,uVar24\);$	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar24\ =\ 0x24;$	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(\(uVar24\ ==\ 0x20\)\ \&\&\ \(bVar2\ =\ true,\ \(uVar22\ \&\ 0x1800000\)\ ==\ 0x1000000\)\)\ \{$	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar14\ =\ FUN_000ec208\(param_1,uVar24\);$	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar24\ =\ 4;$	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar24\ =\ 4;$@2	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar24\ =\ 4;$@3	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@2	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar24\ =\ 4;$@4	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@3	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@4	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar24\ =\ 4;$@5	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@5	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar24\ =\ 4;$@6	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@6	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@7	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar24\ =\ 4;$@7	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar12\ =\ FUN_000ec208\(param_1,uVar24\);$	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar12\ =\ FUN_000ec208\(param_1,uVar24\);$@2	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar12\ =\ FUN_000ec208\(param_1,uVar24\);$@3	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar24\ =\ 4;$@8	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@8	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar24\ =\ 4;$@9	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@9	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar24\);$@10	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar24\ =\ 4;$@10	+1
+use	FUN_000fb3d4	uVar24	registerType	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*param_4\ =\ uVar24\ <<\ 0x10\ \|\ \*param_4\ \&\ 0xffc0ffff;$	+1
+use	FUN_000fb3d4	uVar34	registerType2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar34\ =\ uVar22\ >>\ 0x10\ \&\ 0x3f;$	+1
+use	FUN_000fb3d4	uVar34	registerType2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar34\ !=\ 0x1c\)\ \{$	+1
+use	FUN_000fb3d4	uVar34	registerType2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar34\);$	+1
+use	FUN_000fb3d4	uVar34	registerType2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar34\);$@2	+1
+use	FUN_000fb3d4	uVar34	registerType2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar8\ =\ FUN_000ec208\(param_1,uVar34\);$@3	+1
+use	FUN_000fb3d4	uVar34	movTableCount	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar34\ =\ puVar37\[1\];$	+4
+use	FUN_000fb3d4	uVar34	movTableCount	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar34\ =\ puVar37\[1\];$@2	+1
+use	FUN_000fb3d4	uVar34	movTableCount	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*if\ \(uVar34\ <=\ uVar22\)\ \{$@2	+3
+use	FUN_000fb3d4	uVar34	movTableCount	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar34\ =\ puVar37\[1\];$@3	+4
+use	FUN_000fb3d4	uVar34	newTempIndex2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar34\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \-\ 1;$	+2
+use	FUN_000fb3d4	uVar34	newTempIndex2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar34;$	+1
+use	FUN_000fb3d4	uVar34	newTempIndex2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar22\ =\ uVar34;$	+1
+use	FUN_000fb3d4	uVar34	newTempIndex2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar34;$@2	+1
+use	FUN_000fb3d4	uVar34	newTempIndex2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(uint\ \*\)\(iVar20\ \+\ 8\)\ =\ uVar34;$@3	+1
+use	FUN_000fb3d4	uVar35	registerFile2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar35\ =\ FUN_000ec208\(param_1,uVar24\);$	+2
+use	FUN_000fb3d4	uVar35	registerFile2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar35\ =\ FUN_000ec208\(param_1,0x24\);$	+1
+use	FUN_000fb3d4	uVar35	registerFile2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*iVar6\ =\ FUN_00127608\(uVar12,uVar35,pdVar31,0\);$	+1
+use	FUN_000fb3d4	uVar35	registerFile2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar35\ =\ FUN_000ec208\(param_1,4\);$	+1
+use	FUN_000fb3d4	uVar35	registerFile2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar35;$@2	+1
+use	FUN_000fb3d4	uVar35	registerFile2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar35\ =\ FUN_000ec208\(param_1,\*pdVar30\ >>\ 0x10\ \&\ 0x3f\);$	+1
+use	FUN_000fb3d4	uVar35	registerFile2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar35;$@3	+1
+use	FUN_000fb3d4	uVar35	registerFile2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar35\ =\ FUN_000ec208\(param_1,4\);$@2	+1
+use	FUN_000fb3d4	uVar35	registerFile2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar35;$@4	+1
+use	FUN_000fb3d4	uVar35	registerFile2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar35\ =\ FUN_000ec208\(param_1,4\);$@3	+1
+use	FUN_000fb3d4	uVar35	registerFile2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar35;$@5	+1
+use	FUN_000fb3d4	uVar35	registerFile2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar35\ =\ FUN_000ec208\(param_1,4\);$@4	+1
+use	FUN_000fb3d4	uVar35	registerFile2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar35;$@6	+1
+use	FUN_000fb3d4	uVar35	registerFile2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar35\ =\ FUN_000ec208\(param_1,4\);$@5	+1
+use	FUN_000fb3d4	uVar35	registerFile2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar35;$@7	+1
+use	FUN_000fb3d4	uVar35	instWord0xc8	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar35\ =\ puVar9\[0x32\];$	+1
+use	FUN_000fb3d4	uVar35	instWord0xc8	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0xc\)\ =\ uVar35;$	+1
+use	FUN_000fb3d4	uVar35	constantSelectWord2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar35\ =\ 0x10101;$	+1
+use	FUN_000fb3d4	uVar35	constantSelectWord2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar35\ =\ 0x101;$	+1
+use	FUN_000fb3d4	uVar35	constantSelectWord2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar35\ =\ 1;$	+1
+use	FUN_000fb3d4	uVar35	constantSelectWord2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(undefined4\ \*\)\(\(int\)pvVar15\ \+\ 0x9c\)\ =\ uVar35;$	+1
+use	FUN_000fb3d4	uVar35	operandSelectWord2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*uVar35\ =\ \*\(undefined4\ \*\)\(iVar20\ \+\ 0x10\);$	+1
+use	FUN_000fb3d4	uVar35	operandSelectWord2	INFERRED	FUN_000fb3d4 (source operand translation): role read off the defining expression of the web	^\s*\*\(undefined4\ \*\)\(iVar20\ \+\ 0x10\)\ =\ uVar35;$	+1
