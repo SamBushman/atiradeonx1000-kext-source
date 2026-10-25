@@ -7844,161 +7844,222 @@ int FUN_0014532c(param_1, param_2)
 int pass_post_pack_insts(param_1)
   int *param_1;
 {
+  uint lastScanIndex;
+  uint minCapacityB;
+  uint grownCapacityC;
+  uint curCount;
+  uint copyIndexG;
+  uint scanIndex;
+  uint newVecSizeC;
+  uint minCapacity;
+  uint keptCountB;
+  uint scoreIndex;
+  uint copyIndexE;
+  uint grownCapacityB;
+  uint keptCount;
+  uint nextPairIndex;
+  uint copyIndexD;
+  uint grownCapacity;
+  uint recordCount;
+  uint newVecSizeB;
+  uint copyIndexC;
+  uint lastIndex;
+  uint bestIndex;
+  uint copyIndexB;
+  uint copyIndex;
+  uint vecCapacity;
+  int grownDataD;
+  int copyDestB;
+  int copyOffsetG;
+  int replacedInst;
+  int copyOffsetF;
+  int resultElement;
+  int oldData;
+  int scoreOffset;
+  int candidateTotal;
+  int copyOffsetE;
+  int candidateRecord;
+  int candidateOffset;
+  int copySourceB;
+  int grownDataC;
+  int packable;
+  int copyOffsetD;
+  int vecData;
+  int lastOffset;
+  int copyOffsetC;
+  int bestOffset;
+  int grownDataB;
+  int candidateScore;
+  int scanData;
+  int laneCountdown;
+  int nextInst;
+  int nextBlock;
+  int candInstA;
+  int copyDest;
+  int copySource;
+  int buildResult;
+  int copyOffsetB;
+  int grownData;
+  int resultData;
+  int copyOffset;
+  int bestScore;
+  int lookaheadInst;
+  bool candidateLimitHit;
   int allocation3;
   int allocation;
   int operandRecord;
-  bool bVar1;
+  bool atScanStart;
   int iVar2;
-  uint uVar3;
-  int iVar4;
+  uint laneIndex;
+  int nextInstB;
   int iVar5;
   int iVar6;
-  int iVar7;
+  int block;
   int iVar8;
   undefined4 arenaAt378;
-  uint uVar10;
-  uint uVar11;
-  int *piVar12;
-  uint uVar13;
-  uint uVar14;
+  uint candidateCount;
+  uint vecSize;
+  int *bestCandidate;
+  uint newVecSize;
+  uint recordIndex;
   uint uVar15;
   uint uVar16;
-  int iVar17;
-  int iVar18;
-  uint uVar19;
+  int candidateByteOffset;
+  int inst;
+  uint copyIndexF;
   uint uVar20;
-  int iVar21;
-  int *piVar22;
-  undefined4 local_68;
+  int instA;
+  int *arenaPtr;
+  undefined4 packedWriteMask;
   undefined4 local_64 [3];
-  undefined4 local_58;
-  int local_54;
+  undefined4 packResult;
+  int replacementInst;
   
-  iVar7 = *(int *)(param_1[1] + 900);
-  for (iVar6 = *(int *)(*(int *)(param_1[1] + 900) + 8); iVar6 != 0; iVar6 = *(int *)(iVar6 + 8)) {
-    iVar2 = *(int *)(*(int *)(iVar7 + 0x98) + 8);
-    iVar18 = *(int *)(iVar7 + 0x98);
-    if (iVar2 != 0) {
+  block = *(int *)(param_1[1] + 900);
+  for (nextBlock = *(int *)(*(int *)(param_1[1] + 900) + 8); nextBlock != 0; nextBlock = *(int *)(nextBlock + 8)) {
+    lookaheadInst = *(int *)(*(int *)(block + 0x98) + 8);
+    inst = *(int *)(block + 0x98);
+    if (lookaheadInst != 0) {
       do {
-        iVar6 = iVar2;
-        if ((*(uint *)(iVar18 + 0x14) & 1) != 0) {
-          ((int (*)())FUN_00141044)(&local_58,param_1,iVar18);
-          local_68 = local_58;
-          if ((*(uint *)(iVar18 + 0x14) & 0x200) != 0) {
-            operandRecord = IRInst__getOperandRecord(iVar18,*(undefined4 *)(iVar18 + 0x84));
-            uVar3 = 0;
+        nextInst = lookaheadInst;
+        if ((*(uint *)(inst + 0x14) & 1) != 0) {
+          ((int (*)())FUN_00141044)(&packResult,param_1,inst);
+          packedWriteMask = packResult;
+          if ((*(uint *)(inst + 0x14) & 0x200) != 0) {
+            operandRecord = IRInst__getOperandRecord(inst,*(undefined4 *)(inst + 0x84));
+            laneIndex = 0;
             local_64[0] = *(undefined4 *)(operandRecord + 0x10);
-            iVar6 = 4;
+            laneCountdown = 4;
             do {
-              if (*(byte *)((int)local_64 + uVar3) == uVar3) {
-                *(undefined1 *)((int)local_64 + (uVar3 - 4)) = 1;
+              if (*(byte *)((int)local_64 + laneIndex) == laneIndex) {
+                *(undefined1 *)((int)local_64 + (laneIndex - 4)) = 1;
               }
-              uVar3 = uVar3 + 1;
-              iVar6 = iVar6 + -1;
-            } while (iVar6 != 0);
+              laneIndex = laneIndex + 1;
+              laneCountdown = laneCountdown + -1;
+            } while (laneCountdown != 0);
           }
-          iVar6 = *(int *)(iVar18 + 8);
-          *(undefined4 *)(iVar18 + 0xc) = local_68;
+          nextInst = *(int *)(inst + 8);
+          *(undefined4 *)(inst + 0xc) = packedWriteMask;
         }
-        iVar2 = *(int *)(iVar6 + 8);
-        iVar18 = iVar6;
-      } while (*(int *)(iVar6 + 8) != 0);
-      iVar6 = *(int *)(iVar7 + 8);
+        lookaheadInst = *(int *)(nextInst + 8);
+        inst = nextInst;
+      } while (*(int *)(nextInst + 8) != 0);
+      nextBlock = *(int *)(block + 8);
     }
-    iVar7 = iVar6;
+    block = nextBlock;
   }
   arenaAt378 = *(undefined4 *)(*param_1 + 0x378);
-  iVar7 = Arena__alloc(arenaAt378,0x2c0);
+  vecData = Arena__alloc(arenaAt378,0x2c0);
   iVar2 = param_1[1];
   iVar6 = *(int *)(*(int *)(iVar2 + 900) + 8);
   if (iVar6 != 0) {
-    uVar10 = 0;
-    iVar18 = 0;
-    uVar3 = 0x10;
-    uVar11 = 0;
+    candidateCount = 0;
+    candidateTotal = 0;
+    vecCapacity = 0x10;
+    vecSize = 0;
     iVar2 = *(int *)(iVar2 + 900);
     do {
       iVar5 = iVar6;
       iVar6 = *(int *)(*(int *)(iVar2 + 0x98) + 8);
-      iVar21 = *(int *)(iVar2 + 0x98);
+      instA = *(int *)(iVar2 + 0x98);
       if (iVar6 != 0) {
         do {
           iVar5 = iVar6;
-          if ((*(uint *)(iVar21 + 0x14) & 1) != 0) {
-            iVar6 = FUN_0011379c(*(undefined4 *)(param_1[1] + 8),iVar21);
+          if ((*(uint *)(instA + 0x14) & 1) != 0) {
+            iVar6 = FUN_0011379c(*(undefined4 *)(param_1[1] + 8),instA);
             if (iVar6 != 0) {
-              bVar1 = true;
+              atScanStart = true;
               iVar6 = *(int *)(param_1[1] + 900);
               for (iVar5 = *(int *)(*(int *)(param_1[1] + 900) + 8); iVar5 != 0;
                   iVar5 = *(int *)(iVar5 + 8)) {
                 iVar8 = *(int *)(*(int *)(iVar6 + 0x98) + 8);
                 if (iVar8 != 0) {
-                  iVar17 = uVar10 * 0x2c;
+                  candidateByteOffset = candidateCount * 0x2c;
                   iVar5 = *(int *)(iVar6 + 0x98);
                   do {
-                    iVar4 = iVar8;
+                    nextInstB = iVar8;
                     if ((*(uint *)(iVar5 + 0x14) & 1) != 0) {
-                      if (bVar1) {
-                        iVar4 = *(int *)(iVar21 + 8);
-                        bVar1 = false;
+                      if (atScanStart) {
+                        nextInstB = *(int *)(instA + 8);
+                        atScanStart = false;
                         iVar6 = iVar2;
                       }
                       else {
-                        iVar8 = FUN_0011379c(*(undefined4 *)(param_1[1] + 8),iVar5);
-                        if (iVar8 == 0) {
-                          iVar4 = *(int *)(iVar5 + 8);
+                        packable = FUN_0011379c(*(undefined4 *)(param_1[1] + 8),iVar5);
+                        if (packable == 0) {
+                          nextInstB = *(int *)(iVar5 + 8);
                         }
                         else {
-                          bVar1 = 0x3ff < iVar18;
-                          iVar18 = iVar18 + 1;
-                          if (bVar1) goto LAB_00146530;
-                          uVar13 = uVar11;
-                          iVar8 = iVar7;
-                          if ((uVar11 <= uVar10) && (uVar13 = uVar10 + 1, uVar3 < uVar13)) {
-                            uVar3 = (uVar3 << 4) / 10;
-                            if (uVar3 < uVar13) {
-                              uVar3 = uVar13;
+                          candidateLimitHit = 0x3ff < candidateTotal;
+                          candidateTotal = candidateTotal + 1;
+                          if (candidateLimitHit) goto LAB_00146530;
+                          newVecSize = vecSize;
+                          grownDataC = vecData;
+                          if ((vecSize <= candidateCount) && (newVecSize = candidateCount + 1, vecCapacity < newVecSize)) {
+                            vecCapacity = (vecCapacity << 4) / 10;
+                            if (vecCapacity < newVecSize) {
+                              vecCapacity = newVecSize;
                             }
-                            iVar8 = Arena__alloc(arenaAt378,uVar3 * 0x2c);
-                            if (uVar11 != 0) {
-                              uVar19 = 0;
-                              iVar4 = 0;
+                            grownDataC = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
+                            if (vecSize != 0) {
+                              copyIndexF = 0;
+                              copyOffsetB = 0;
                               do {
-                                uVar19 = uVar19 + 1;
-                                _memcpy(iVar8 + iVar4,iVar7 + iVar4,0x2c);
-                                iVar4 = iVar4 + 0x2c;
-                              } while (uVar11 != uVar19);
+                                copyIndexF = copyIndexF + 1;
+                                _memcpy(grownDataC + copyOffsetB,vecData + copyOffsetB,0x2c);
+                                copyOffsetB = copyOffsetB + 0x2c;
+                              } while (vecSize != copyIndexF);
                             }
-                            Arena__free(arenaAt378,iVar7);
+                            Arena__free(arenaAt378,vecData);
                           }
-                          iVar4 = ((int (*)())PostPack__buildCandidate)(param_1,iVar21,iVar5,iVar8 + iVar17);
-                          uVar11 = uVar13;
-                          iVar7 = iVar8;
-                          if (iVar4 == 0) {
-                            iVar4 = *(int *)(iVar5 + 8);
-                            bVar1 = false;
+                          buildResult = ((int (*)())PostPack__buildCandidate)(param_1,instA,iVar5,grownDataC + candidateByteOffset);
+                          vecSize = newVecSize;
+                          vecData = grownDataC;
+                          if (buildResult == 0) {
+                            nextInstB = *(int *)(iVar5 + 8);
+                            atScanStart = false;
                           }
                           else {
-                            iVar4 = *(int *)(iVar5 + 8);
-                            uVar10 = uVar10 + 1;
-                            iVar17 = iVar17 + 0x2c;
-                            bVar1 = false;
+                            nextInstB = *(int *)(iVar5 + 8);
+                            candidateCount = candidateCount + 1;
+                            candidateByteOffset = candidateByteOffset + 0x2c;
+                            atScanStart = false;
                           }
                         }
                       }
                     }
-                    iVar8 = *(int *)(iVar4 + 8);
-                    iVar5 = iVar4;
-                  } while (*(int *)(iVar4 + 8) != 0);
+                    iVar8 = *(int *)(nextInstB + 8);
+                    iVar5 = nextInstB;
+                  } while (*(int *)(nextInstB + 8) != 0);
                   iVar5 = *(int *)(iVar6 + 8);
                 }
                 iVar6 = iVar5;
               }
             }
-            iVar5 = *(int *)(iVar21 + 8);
+            iVar5 = *(int *)(instA + 8);
           }
           iVar6 = *(int *)(iVar5 + 8);
-          iVar21 = iVar5;
+          instA = iVar5;
         } while (*(int *)(iVar5 + 8) != 0);
         iVar5 = *(int *)(iVar2 + 8);
       }
@@ -8007,474 +8068,474 @@ int pass_post_pack_insts(param_1)
     } while (*(int *)(iVar5 + 8) != 0);
 LAB_00146530:
     do {
-      if ((int)uVar10 < 1) goto LAB_00146538;
-      uVar13 = 0xffffffff;
-      iVar2 = 0;
-      iVar18 = 0;
-      uVar19 = 0;
-      iVar6 = iVar7;
+      if ((int)candidateCount < 1) goto LAB_00146538;
+      bestIndex = 0xffffffff;
+      bestScore = 0;
+      scoreOffset = 0;
+      scoreIndex = 0;
+      scanData = vecData;
       do {
-        uVar15 = uVar11;
-        iVar7 = iVar6;
-        if ((uVar11 <= uVar19) && (uVar15 = uVar19 + 1, uVar3 < uVar15)) {
-          uVar3 = (uVar3 << 4) / 10;
-          if (uVar3 < uVar15) {
-            uVar3 = uVar15;
+        newVecSizeB = vecSize;
+        vecData = scanData;
+        if ((vecSize <= scoreIndex) && (newVecSizeB = scoreIndex + 1, vecCapacity < newVecSizeB)) {
+          vecCapacity = (vecCapacity << 4) / 10;
+          if (vecCapacity < newVecSizeB) {
+            vecCapacity = newVecSizeB;
           }
-          iVar7 = Arena__alloc(arenaAt378,uVar3 * 0x2c);
-          if (uVar11 != 0) {
-            uVar20 = 0;
-            iVar21 = 0;
+          vecData = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
+          if (vecSize != 0) {
+            copyIndexG = 0;
+            copyOffsetG = 0;
             do {
-              uVar20 = uVar20 + 1;
-              _memcpy(iVar7 + iVar21,iVar6 + iVar21,0x2c);
-              iVar21 = iVar21 + 0x2c;
-            } while (uVar11 != uVar20);
+              copyIndexG = copyIndexG + 1;
+              _memcpy(vecData + copyOffsetG,scanData + copyOffsetG,0x2c);
+              copyOffsetG = copyOffsetG + 0x2c;
+            } while (vecSize != copyIndexG);
           }
-          Arena__free(arenaAt378,iVar6);
+          Arena__free(arenaAt378,scanData);
         }
-        iVar6 = ((int (*)())FUN_00143e40)(param_1,iVar7 + iVar18);
-        if ((uVar13 == 0xffffffff) || (iVar2 < iVar6)) {
-          uVar13 = uVar19;
-          iVar2 = iVar6;
+        candidateScore = ((int (*)())FUN_00143e40)(param_1,vecData + scoreOffset);
+        if ((bestIndex == 0xffffffff) || (bestScore < candidateScore)) {
+          bestIndex = scoreIndex;
+          bestScore = candidateScore;
         }
-        uVar19 = uVar19 + 1;
-        iVar18 = iVar18 + 0x2c;
-      } while (((int)uVar19 < (int)uVar10) && (uVar11 = uVar15, iVar6 = iVar7, uVar19 != 0x80));
-      if ((uVar13 == 0xffffffff) || (iVar2 < 0)) goto LAB_00146538;
-      uVar11 = uVar15;
-      if ((uVar15 <= uVar13) && (uVar11 = uVar13 + 1, uVar3 < uVar11)) {
-        uVar3 = (uVar3 << 4) / 10;
-        if (uVar3 < uVar11) {
-          uVar3 = uVar11;
+        scoreIndex = scoreIndex + 1;
+        scoreOffset = scoreOffset + 0x2c;
+      } while (((int)scoreIndex < (int)candidateCount) && (vecSize = newVecSizeB, scanData = vecData, scoreIndex != 0x80));
+      if ((bestIndex == 0xffffffff) || (bestScore < 0)) goto LAB_00146538;
+      vecSize = newVecSizeB;
+      if ((newVecSizeB <= bestIndex) && (vecSize = bestIndex + 1, vecCapacity < vecSize)) {
+        vecCapacity = (vecCapacity << 4) / 10;
+        if (vecCapacity < vecSize) {
+          vecCapacity = vecSize;
         }
-        iVar6 = Arena__alloc(arenaAt378,uVar3 * 0x2c);
-        if (uVar15 != 0) {
-          uVar19 = 0;
-          iVar2 = 0;
+        grownDataB = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
+        if (newVecSizeB != 0) {
+          copyIndexF = 0;
+          copyOffset = 0;
           do {
-            uVar19 = uVar19 + 1;
-            _memcpy(iVar6 + iVar2,iVar7 + iVar2,0x2c);
-            iVar2 = iVar2 + 0x2c;
-          } while (uVar19 != uVar15);
+            copyIndexF = copyIndexF + 1;
+            _memcpy(grownDataB + copyOffset,vecData + copyOffset,0x2c);
+            copyOffset = copyOffset + 0x2c;
+          } while (copyIndexF != newVecSizeB);
         }
-        Arena__free(arenaAt378,iVar7);
-        iVar7 = iVar6;
+        Arena__free(arenaAt378,vecData);
+        vecData = grownDataB;
       }
-      iVar6 = uVar13 * 0x2c;
-      piVar12 = (int *)(iVar7 + iVar6);
-      ((int (*)())FUN_0014532c)(param_1,piVar12);
+      bestOffset = bestIndex * 0x2c;
+      bestCandidate = (int *)(vecData + bestOffset);
+      ((int (*)())FUN_0014532c)(param_1,bestCandidate);
       if (0x17 < param_1[2]) goto LAB_00146538;
-      piVar22 = param_1 + 3;
-      uVar19 = 0;
-      uVar15 = param_1[4];
-      if (uVar15 != 0) {
-        uVar14 = 0;
-        uVar20 = uVar15;
-        uVar16 = uVar19;
+      arenaPtr = param_1 + 3;
+      keptCountB = 0;
+      recordCount = param_1[4];
+      if (recordCount != 0) {
+        recordIndex = 0;
+        curCount = recordCount;
+        keptCount = keptCountB;
         while( true ) {
-          if (uVar20 <= uVar14) {
-            uVar19 = uVar14 + 1;
-            if ((uint)param_1[5] < uVar19) {
-              uVar20 = (uint)(param_1[5] << 4) / 10;
-              param_1[5] = uVar20;
-              if (uVar20 < uVar19) {
-                param_1[5] = uVar19;
+          if (curCount <= recordIndex) {
+            minCapacity = recordIndex + 1;
+            if ((uint)param_1[5] < minCapacity) {
+              grownCapacityC = (uint)(param_1[5] << 4) / 10;
+              param_1[5] = grownCapacityC;
+              if (grownCapacityC < minCapacity) {
+                param_1[5] = minCapacity;
               }
-              iVar18 = param_1[6];
-              allocation = Arena__alloc(*piVar22,param_1[5] * 0x2c);
+              oldData = param_1[6];
+              allocation = Arena__alloc(*arenaPtr,param_1[5] * 0x2c);
               param_1[6] = allocation;
               if (param_1[4] != 0) {
-                uVar20 = 0;
-                iVar2 = 0;
+                copyIndexG = 0;
+                copyOffset = 0;
                 do {
-                  iVar5 = iVar18 + iVar2;
-                  uVar20 = uVar20 + 1;
-                  iVar21 = param_1[6] + iVar2;
-                  iVar2 = iVar2 + 0x2c;
-                  _memcpy(iVar21,iVar5,0x2c);
-                } while (uVar20 < (uint)param_1[4]);
+                  copySource = oldData + copyOffset;
+                  copyIndexG = copyIndexG + 1;
+                  copyDestB = param_1[6] + copyOffset;
+                  copyOffset = copyOffset + 0x2c;
+                  _memcpy(copyDestB,copySource,0x2c);
+                } while (copyIndexG < (uint)param_1[4]);
               }
-              Arena__free(*piVar22,iVar18);
+              Arena__free(*arenaPtr,oldData);
             }
-            param_1[4] = uVar19;
+            param_1[4] = minCapacity;
           }
-          iVar2 = param_1[6];
-          iVar18 = uVar14 * 0x2c + iVar2;
-          uVar19 = uVar16;
-          if ((*(int *)(iVar18 + 0x24) != 0) && (uVar19 = uVar16 + 1, uVar16 < uVar14)) {
-            if ((uint)param_1[4] <= uVar16) {
-              if ((uint)param_1[5] < uVar19) {
-                uVar20 = (uint)(param_1[5] << 4) / 10;
-                param_1[5] = uVar20;
-                if (uVar20 < uVar19) {
-                  param_1[5] = uVar19;
+          resultData = param_1[6];
+          resultElement = recordIndex * 0x2c + resultData;
+          keptCountB = keptCount;
+          if ((*(int *)(resultElement + 0x24) != 0) && (keptCountB = keptCount + 1, keptCount < recordIndex)) {
+            if ((uint)param_1[4] <= keptCount) {
+              if ((uint)param_1[5] < keptCountB) {
+                grownCapacityC = (uint)(param_1[5] << 4) / 10;
+                param_1[5] = grownCapacityC;
+                if (grownCapacityC < keptCountB) {
+                  param_1[5] = keptCountB;
                 }
-                allocation3 = Arena__alloc(*piVar22,param_1[5] * 0x2c);
+                allocation3 = Arena__alloc(*arenaPtr,param_1[5] * 0x2c);
                 param_1[6] = allocation3;
                 if (param_1[4] != 0) {
-                  uVar20 = 0;
-                  iVar21 = 0;
+                  copyIndexG = 0;
+                  copyOffsetG = 0;
                   do {
-                    iVar8 = iVar2 + iVar21;
-                    uVar20 = uVar20 + 1;
-                    iVar5 = param_1[6] + iVar21;
-                    iVar21 = iVar21 + 0x2c;
-                    _memcpy(iVar5,iVar8,0x2c);
-                  } while (uVar20 < (uint)param_1[4]);
+                    copySourceB = resultData + copyOffsetG;
+                    copyIndexG = copyIndexG + 1;
+                    copyDest = param_1[6] + copyOffsetG;
+                    copyOffsetG = copyOffsetG + 0x2c;
+                    _memcpy(copyDest,copySourceB,0x2c);
+                  } while (copyIndexG < (uint)param_1[4]);
                 }
-                Arena__free(*piVar22,iVar2);
-                iVar2 = param_1[6];
+                Arena__free(*arenaPtr,resultData);
+                resultData = param_1[6];
               }
-              param_1[4] = uVar19;
+              param_1[4] = keptCountB;
             }
-            _memcpy(uVar16 * 0x2c + iVar2,iVar18,0x2c);
+            _memcpy(keptCount * 0x2c + resultData,resultElement,0x2c);
           }
-          uVar14 = uVar14 + 1;
-          if (uVar15 == uVar14) break;
-          uVar20 = param_1[4];
-          uVar16 = uVar19;
+          recordIndex = recordIndex + 1;
+          if (recordCount == recordIndex) break;
+          curCount = param_1[4];
+          keptCount = keptCountB;
         }
       }
-      if ((uint)param_1[5] < uVar19) {
-        uVar15 = (uint)(param_1[5] << 4) / 10;
-        param_1[5] = uVar15;
-        if (uVar15 < uVar19) {
-          param_1[5] = uVar19;
+      if ((uint)param_1[5] < keptCountB) {
+        grownCapacity = (uint)(param_1[5] << 4) / 10;
+        param_1[5] = grownCapacity;
+        if (grownCapacity < keptCountB) {
+          param_1[5] = keptCountB;
         }
-        iVar18 = param_1[6];
-        allocation = Arena__alloc(*piVar22,param_1[5] * 0x2c);
+        oldData = param_1[6];
+        allocation = Arena__alloc(*arenaPtr,param_1[5] * 0x2c);
         param_1[6] = allocation;
         if (param_1[4] != 0) {
-          uVar15 = 0;
-          iVar2 = 0;
+          copyIndexD = 0;
+          copyOffset = 0;
           do {
-            iVar5 = iVar18 + iVar2;
-            uVar15 = uVar15 + 1;
-            iVar21 = param_1[6] + iVar2;
-            iVar2 = iVar2 + 0x2c;
-            _memcpy(iVar21,iVar5,0x2c);
-          } while (uVar15 < (uint)param_1[4]);
+            copySource = oldData + copyOffset;
+            copyIndexD = copyIndexD + 1;
+            copyDestB = param_1[6] + copyOffset;
+            copyOffset = copyOffset + 0x2c;
+            _memcpy(copyDestB,copySource,0x2c);
+          } while (copyIndexD < (uint)param_1[4]);
         }
-        Arena__free(*piVar22,iVar18);
+        Arena__free(*arenaPtr,oldData);
       }
-      param_1[4] = uVar19;
-      if (uVar19 != 0) {
+      param_1[4] = keptCountB;
+      if (keptCountB != 0) {
         uVar15 = 0;
         do {
-          uVar20 = uVar15 + 1;
+          minCapacityB = uVar15 + 1;
           if ((uint)param_1[4] <= uVar15) {
-            if ((uint)param_1[5] < uVar20) {
-              uVar16 = (uint)(param_1[5] << 4) / 10;
-              param_1[5] = uVar16;
-              if (uVar16 < uVar20) {
-                param_1[5] = uVar20;
+            if ((uint)param_1[5] < minCapacityB) {
+              grownCapacityB = (uint)(param_1[5] << 4) / 10;
+              param_1[5] = grownCapacityB;
+              if (grownCapacityB < minCapacityB) {
+                param_1[5] = minCapacityB;
               }
-              iVar18 = param_1[6];
-              allocation = Arena__alloc(*piVar22,param_1[5] * 0x2c);
+              oldData = param_1[6];
+              allocation = Arena__alloc(*arenaPtr,param_1[5] * 0x2c);
               param_1[6] = allocation;
               if (param_1[4] != 0) {
-                uVar16 = 0;
-                iVar2 = 0;
+                copyIndexE = 0;
+                copyOffset = 0;
                 do {
-                  iVar5 = iVar18 + iVar2;
-                  uVar16 = uVar16 + 1;
-                  iVar21 = param_1[6] + iVar2;
-                  iVar2 = iVar2 + 0x2c;
-                  _memcpy(iVar21,iVar5,0x2c);
-                } while (uVar16 < (uint)param_1[4]);
+                  copySource = oldData + copyOffset;
+                  copyIndexE = copyIndexE + 1;
+                  copyDestB = param_1[6] + copyOffset;
+                  copyOffset = copyOffset + 0x2c;
+                  _memcpy(copyDestB,copySource,0x2c);
+                } while (copyIndexE < (uint)param_1[4]);
               }
-              Arena__free(*piVar22,iVar18);
+              Arena__free(*arenaPtr,oldData);
             }
-            param_1[4] = uVar20;
+            param_1[4] = minCapacityB;
           }
           *(undefined4 *)(uVar15 * 0x2c + param_1[6] + 0x28) = 0;
-          uVar15 = uVar20;
-        } while (uVar20 < uVar19);
+          uVar15 = minCapacityB;
+        } while (minCapacityB < keptCountB);
       }
-      uVar19 = uVar11;
-      iVar2 = iVar7;
-      if ((uVar11 <= uVar13) && (uVar19 = uVar13 + 1, uVar3 < uVar19)) {
-        uVar3 = (uVar3 << 4) / 10;
-        if (uVar3 < uVar19) {
-          uVar3 = uVar19;
+      newVecSizeC = vecSize;
+      grownData = vecData;
+      if ((vecSize <= bestIndex) && (newVecSizeC = bestIndex + 1, vecCapacity < newVecSizeC)) {
+        vecCapacity = (vecCapacity << 4) / 10;
+        if (vecCapacity < newVecSizeC) {
+          vecCapacity = newVecSizeC;
         }
-        iVar2 = Arena__alloc(arenaAt378,uVar3 * 0x2c);
-        if (uVar11 != 0) {
-          uVar15 = 0;
-          iVar18 = 0;
+        grownData = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
+        if (vecSize != 0) {
+          copyIndexD = 0;
+          copyOffsetF = 0;
           do {
-            uVar15 = uVar15 + 1;
-            _memcpy(iVar2 + iVar18,iVar7 + iVar18,0x2c);
-            iVar18 = iVar18 + 0x2c;
-          } while (uVar15 != uVar11);
+            copyIndexD = copyIndexD + 1;
+            _memcpy(grownData + copyOffsetF,vecData + copyOffsetF,0x2c);
+            copyOffsetF = copyOffsetF + 0x2c;
+          } while (copyIndexD != vecSize);
         }
-        Arena__free(arenaAt378,iVar7);
-        piVar12 = (int *)(iVar2 + iVar6);
+        Arena__free(arenaAt378,vecData);
+        bestCandidate = (int *)(grownData + bestOffset);
       }
-      local_54 = *piVar12;
-      uVar11 = uVar19;
-      iVar7 = iVar2;
-      if ((uVar19 <= uVar13) && (uVar11 = uVar13 + 1, uVar3 < uVar11)) {
-        uVar3 = (uVar3 << 4) / 10;
-        if (uVar3 < uVar11) {
-          uVar3 = uVar11;
+      replacementInst = *bestCandidate;
+      vecSize = newVecSizeC;
+      vecData = grownData;
+      if ((newVecSizeC <= bestIndex) && (vecSize = bestIndex + 1, vecCapacity < vecSize)) {
+        vecCapacity = (vecCapacity << 4) / 10;
+        if (vecCapacity < vecSize) {
+          vecCapacity = vecSize;
         }
-        iVar7 = Arena__alloc(arenaAt378,uVar3 * 0x2c);
-        if (uVar19 != 0) {
-          uVar15 = 0;
-          iVar18 = 0;
+        vecData = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
+        if (newVecSizeC != 0) {
+          copyIndexD = 0;
+          copyOffsetF = 0;
           do {
-            uVar15 = uVar15 + 1;
-            _memcpy(iVar7 + iVar18,iVar2 + iVar18,0x2c);
-            iVar18 = iVar18 + 0x2c;
-          } while (uVar15 != uVar19);
+            copyIndexD = copyIndexD + 1;
+            _memcpy(vecData + copyOffsetF,grownData + copyOffsetF,0x2c);
+            copyOffsetF = copyOffsetF + 0x2c;
+          } while (copyIndexD != newVecSizeC);
         }
-        Arena__free(arenaAt378,iVar2);
-        piVar12 = (int *)(iVar7 + iVar6);
+        Arena__free(arenaAt378,grownData);
+        bestCandidate = (int *)(vecData + bestOffset);
       }
-      iVar18 = piVar12[1];
-      uVar19 = uVar11;
-      iVar2 = iVar7;
-      if ((uVar11 <= uVar13) && (uVar19 = uVar13 + 1, uVar3 < uVar19)) {
-        uVar3 = (uVar3 << 4) / 10;
-        if (uVar3 < uVar19) {
-          uVar3 = uVar19;
+      replacedInst = bestCandidate[1];
+      newVecSizeC = vecSize;
+      grownData = vecData;
+      if ((vecSize <= bestIndex) && (newVecSizeC = bestIndex + 1, vecCapacity < newVecSizeC)) {
+        vecCapacity = (vecCapacity << 4) / 10;
+        if (vecCapacity < newVecSizeC) {
+          vecCapacity = newVecSizeC;
         }
-        iVar2 = Arena__alloc(arenaAt378,uVar3 * 0x2c);
-        if (uVar11 != 0) {
-          uVar15 = 0;
-          iVar21 = 0;
+        grownData = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
+        if (vecSize != 0) {
+          copyIndexD = 0;
+          copyOffsetG = 0;
           do {
-            uVar15 = uVar15 + 1;
-            _memcpy(iVar21 + iVar2,iVar21 + iVar7,0x2c);
-            iVar21 = iVar21 + 0x2c;
-          } while (uVar15 != uVar11);
+            copyIndexD = copyIndexD + 1;
+            _memcpy(copyOffsetG + grownData,copyOffsetG + vecData,0x2c);
+            copyOffsetG = copyOffsetG + 0x2c;
+          } while (copyIndexD != vecSize);
         }
-        Arena__free(arenaAt378,iVar7);
-        piVar12 = (int *)(iVar2 + iVar6);
+        Arena__free(arenaAt378,vecData);
+        bestCandidate = (int *)(grownData + bestOffset);
       }
-      if (piVar12[4] != 0) {
-        uVar11 = uVar19;
-        iVar7 = iVar2;
-        if ((uVar19 <= uVar13) && (uVar11 = uVar13 + 1, uVar3 < uVar11)) {
-          uVar3 = (uVar3 << 4) / 10;
-          if (uVar3 < uVar11) {
-            uVar3 = uVar11;
+      if (bestCandidate[4] != 0) {
+        vecSize = newVecSizeC;
+        vecData = grownData;
+        if ((newVecSizeC <= bestIndex) && (vecSize = bestIndex + 1, vecCapacity < vecSize)) {
+          vecCapacity = (vecCapacity << 4) / 10;
+          if (vecCapacity < vecSize) {
+            vecCapacity = vecSize;
           }
-          iVar7 = Arena__alloc(arenaAt378,uVar3 * 0x2c);
-          if (uVar19 != 0) {
-            uVar15 = 0;
-            iVar18 = 0;
+          vecData = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
+          if (newVecSizeC != 0) {
+            copyIndexD = 0;
+            copyOffsetF = 0;
             do {
-              uVar15 = uVar15 + 1;
-              _memcpy(iVar18 + iVar7,iVar18 + iVar2,0x2c);
-              iVar18 = iVar18 + 0x2c;
-            } while (uVar15 != uVar19);
+              copyIndexD = copyIndexD + 1;
+              _memcpy(copyOffsetF + vecData,copyOffsetF + grownData,0x2c);
+              copyOffsetF = copyOffsetF + 0x2c;
+            } while (copyIndexD != newVecSizeC);
           }
-          Arena__free(arenaAt378,iVar2);
-          piVar12 = (int *)(iVar7 + iVar6);
+          Arena__free(arenaAt378,grownData);
+          bestCandidate = (int *)(vecData + bestOffset);
         }
-        local_54 = piVar12[1];
-        uVar19 = uVar11;
-        iVar2 = iVar7;
-        if ((uVar11 <= uVar13) && (uVar19 = uVar13 + 1, uVar3 < uVar19)) {
-          uVar3 = (uVar3 << 4) / 10;
-          if (uVar3 < uVar19) {
-            uVar3 = uVar19;
+        replacementInst = bestCandidate[1];
+        newVecSizeC = vecSize;
+        grownData = vecData;
+        if ((vecSize <= bestIndex) && (newVecSizeC = bestIndex + 1, vecCapacity < newVecSizeC)) {
+          vecCapacity = (vecCapacity << 4) / 10;
+          if (vecCapacity < newVecSizeC) {
+            vecCapacity = newVecSizeC;
           }
-          iVar2 = Arena__alloc(arenaAt378,uVar3 * 0x2c);
-          if (uVar11 != 0) {
-            uVar15 = 0;
-            iVar18 = 0;
+          grownData = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
+          if (vecSize != 0) {
+            copyIndexD = 0;
+            copyOffsetF = 0;
             do {
-              uVar15 = uVar15 + 1;
-              _memcpy(iVar18 + iVar2,iVar18 + iVar7,0x2c);
-              iVar18 = iVar18 + 0x2c;
-            } while (uVar15 != uVar11);
+              copyIndexD = copyIndexD + 1;
+              _memcpy(copyOffsetF + grownData,copyOffsetF + vecData,0x2c);
+              copyOffsetF = copyOffsetF + 0x2c;
+            } while (copyIndexD != vecSize);
           }
-          Arena__free(arenaAt378,iVar7);
-          piVar12 = (int *)(iVar2 + iVar6);
+          Arena__free(arenaAt378,vecData);
+          bestCandidate = (int *)(grownData + bestOffset);
         }
-        iVar18 = *piVar12;
+        replacedInst = *bestCandidate;
       }
-      uVar15 = uVar19;
-      iVar21 = iVar2;
-      if ((uVar19 <= uVar13) && (uVar15 = uVar13 + 1, uVar3 < uVar15)) {
-        uVar3 = (uVar3 << 4) / 10;
-        if (uVar3 < uVar15) {
-          uVar3 = uVar15;
+      newVecSizeB = newVecSizeC;
+      grownDataD = grownData;
+      if ((newVecSizeC <= bestIndex) && (newVecSizeB = bestIndex + 1, vecCapacity < newVecSizeB)) {
+        vecCapacity = (vecCapacity << 4) / 10;
+        if (vecCapacity < newVecSizeB) {
+          vecCapacity = newVecSizeB;
         }
-        iVar21 = Arena__alloc(arenaAt378,uVar3 * 0x2c);
-        if (uVar19 != 0) {
-          uVar11 = 0;
-          iVar7 = 0;
+        grownDataD = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
+        if (newVecSizeC != 0) {
+          copyIndexB = 0;
+          copyOffsetD = 0;
           do {
-            uVar11 = uVar11 + 1;
-            _memcpy(iVar7 + iVar21,iVar7 + iVar2,0x2c);
-            iVar7 = iVar7 + 0x2c;
-          } while (uVar11 != uVar19);
+            copyIndexB = copyIndexB + 1;
+            _memcpy(copyOffsetD + grownDataD,copyOffsetD + grownData,0x2c);
+            copyOffsetD = copyOffsetD + 0x2c;
+          } while (copyIndexB != newVecSizeC);
         }
-        Arena__free(arenaAt378,iVar2);
-        piVar12 = (int *)(iVar21 + iVar6);
+        Arena__free(arenaAt378,grownData);
+        bestCandidate = (int *)(grownDataD + bestOffset);
       }
-      uVar13 = uVar10 - 1;
-      uVar11 = uVar15;
-      iVar7 = iVar21;
-      if ((uVar15 <= uVar13) && (uVar11 = uVar10, uVar3 < uVar10)) {
-        uVar3 = (uVar3 << 4) / 10;
-        if (uVar3 < uVar10) {
-          uVar3 = uVar10;
+      lastIndex = candidateCount - 1;
+      vecSize = newVecSizeB;
+      vecData = grownDataD;
+      if ((newVecSizeB <= lastIndex) && (vecSize = candidateCount, vecCapacity < candidateCount)) {
+        vecCapacity = (vecCapacity << 4) / 10;
+        if (vecCapacity < candidateCount) {
+          vecCapacity = candidateCount;
         }
-        iVar7 = Arena__alloc(arenaAt378,uVar3 * 0x2c);
-        if (uVar15 != 0) {
-          uVar10 = 0;
-          iVar6 = 0;
+        vecData = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
+        if (newVecSizeB != 0) {
+          copyIndex = 0;
+          copyOffsetC = 0;
           do {
-            uVar10 = uVar10 + 1;
-            _memcpy(iVar6 + iVar7,iVar6 + iVar21,0x2c);
-            iVar6 = iVar6 + 0x2c;
-          } while (uVar10 != uVar15);
+            copyIndex = copyIndex + 1;
+            _memcpy(copyOffsetC + vecData,copyOffsetC + grownDataD,0x2c);
+            copyOffsetC = copyOffsetC + 0x2c;
+          } while (copyIndex != newVecSizeB);
         }
-        Arena__free(arenaAt378,iVar21);
+        Arena__free(arenaAt378,grownDataD);
       }
-      iVar6 = uVar13 * 0x2c;
-      _memcpy(piVar12,iVar6 + iVar7,0x2c);
-      if ((int)uVar13 < 1) goto LAB_00146538;
-      uVar19 = 0;
-      uVar15 = 1;
+      lastOffset = lastIndex * 0x2c;
+      _memcpy(bestCandidate,lastOffset + vecData,0x2c);
+      if ((int)lastIndex < 1) goto LAB_00146538;
+      scanIndex = 0;
+      nextPairIndex = 1;
       do {
-        uVar10 = uVar11;
-        iVar2 = iVar7;
-        if ((uVar11 <= uVar19) && (uVar10 = uVar15, uVar3 < uVar15)) {
-          uVar3 = (uVar3 << 4) / 10;
-          if (uVar3 < uVar15) {
-            uVar3 = uVar15;
+        candidateCount = vecSize;
+        grownData = vecData;
+        if ((vecSize <= scanIndex) && (candidateCount = nextPairIndex, vecCapacity < nextPairIndex)) {
+          vecCapacity = (vecCapacity << 4) / 10;
+          if (vecCapacity < nextPairIndex) {
+            vecCapacity = nextPairIndex;
           }
-          iVar2 = Arena__alloc(arenaAt378,uVar3 * 0x2c);
-          if (uVar11 != 0) {
-            uVar20 = 0;
-            iVar21 = 0;
+          grownData = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
+          if (vecSize != 0) {
+            copyIndexG = 0;
+            copyOffsetG = 0;
             do {
-              uVar20 = uVar20 + 1;
-              _memcpy(iVar2 + iVar21,iVar7 + iVar21,0x2c);
-              iVar21 = iVar21 + 0x2c;
-            } while (uVar20 != uVar11);
+              copyIndexG = copyIndexG + 1;
+              _memcpy(grownData + copyOffsetG,vecData + copyOffsetG,0x2c);
+              copyOffsetG = copyOffsetG + 0x2c;
+            } while (copyIndexG != vecSize);
           }
-          Arena__free(arenaAt378,iVar7);
+          Arena__free(arenaAt378,vecData);
         }
-        iVar8 = uVar19 * 0x2c;
-        iVar17 = iVar2 + iVar8;
-        iVar5 = *(int *)(iVar2 + iVar8);
-        uVar20 = uVar10;
-        iVar21 = iVar2;
-        if ((uVar10 <= uVar19) && (uVar20 = uVar15, uVar3 < uVar15)) {
-          uVar3 = (uVar3 << 4) / 10;
-          if (uVar3 < uVar15) {
-            uVar3 = uVar15;
+        candidateOffset = scanIndex * 0x2c;
+        candidateRecord = grownData + candidateOffset;
+        candInstA = *(int *)(grownData + candidateOffset);
+        uVar20 = candidateCount;
+        grownDataD = grownData;
+        if ((candidateCount <= scanIndex) && (uVar20 = nextPairIndex, vecCapacity < nextPairIndex)) {
+          vecCapacity = (vecCapacity << 4) / 10;
+          if (vecCapacity < nextPairIndex) {
+            vecCapacity = nextPairIndex;
           }
-          iVar21 = Arena__alloc(arenaAt378,uVar3 * 0x2c);
-          if (uVar10 != 0) {
-            uVar11 = 0;
-            iVar7 = 0;
+          grownDataD = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
+          if (candidateCount != 0) {
+            copyIndexB = 0;
+            copyOffsetD = 0;
             do {
-              uVar11 = uVar11 + 1;
-              _memcpy(iVar21 + iVar7,iVar2 + iVar7,0x2c);
-              iVar7 = iVar7 + 0x2c;
-            } while (uVar11 != uVar10);
+              copyIndexB = copyIndexB + 1;
+              _memcpy(grownDataD + copyOffsetD,grownData + copyOffsetD,0x2c);
+              copyOffsetD = copyOffsetD + 0x2c;
+            } while (copyIndexB != candidateCount);
           }
-          Arena__free(arenaAt378,iVar2);
-          iVar17 = iVar21 + iVar8;
+          Arena__free(arenaAt378,grownData);
+          candidateRecord = grownDataD + candidateOffset;
         }
-        if (iVar18 == iVar5) {
-          iVar5 = local_54;
+        if (replacedInst == candInstA) {
+          candInstA = replacementInst;
         }
-        iVar2 = *(int *)(iVar17 + 4);
-        if (iVar18 == *(int *)(iVar17 + 4)) {
-          iVar2 = local_54;
+        iVar2 = *(int *)(candidateRecord + 4);
+        if (replacedInst == *(int *)(candidateRecord + 4)) {
+          iVar2 = replacementInst;
         }
-        uVar11 = uVar20;
-        iVar7 = iVar21;
-        if (iVar5 == iVar2) {
+        vecSize = uVar20;
+        vecData = grownDataD;
+        if (candInstA == iVar2) {
 LAB_001463fc:
-          uVar20 = uVar19 - 1;
-          uVar15 = uVar15 - 1;
-          uVar16 = uVar11;
-          iVar2 = iVar7;
-          if ((uVar11 <= uVar19) && (uVar16 = uVar19 + 1, uVar3 < uVar16)) {
-            uVar3 = (uVar3 << 4) / 10;
-            if (uVar3 < uVar16) {
-              uVar3 = uVar16;
+          lastScanIndex = scanIndex - 1;
+          nextPairIndex = nextPairIndex - 1;
+          uVar16 = vecSize;
+          iVar2 = vecData;
+          if ((vecSize <= scanIndex) && (uVar16 = scanIndex + 1, vecCapacity < uVar16)) {
+            vecCapacity = (vecCapacity << 4) / 10;
+            if (vecCapacity < uVar16) {
+              vecCapacity = uVar16;
             }
-            iVar2 = Arena__alloc(arenaAt378,uVar3 * 0x2c);
-            if (uVar11 != 0) {
-              uVar10 = 0;
-              iVar21 = 0;
+            iVar2 = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
+            if (vecSize != 0) {
+              copyIndex = 0;
+              copyOffsetG = 0;
               do {
-                uVar10 = uVar10 + 1;
-                _memcpy(iVar2 + iVar21,iVar7 + iVar21,0x2c);
-                iVar21 = iVar21 + 0x2c;
-              } while (uVar10 != uVar11);
+                copyIndex = copyIndex + 1;
+                _memcpy(iVar2 + copyOffsetG,vecData + copyOffsetG,0x2c);
+                copyOffsetG = copyOffsetG + 0x2c;
+              } while (copyIndex != vecSize);
             }
-            Arena__free(arenaAt378,iVar7);
-            iVar17 = iVar2 + iVar8;
+            Arena__free(arenaAt378,vecData);
+            candidateRecord = iVar2 + candidateOffset;
           }
-          uVar10 = uVar13 - 1;
-          iVar6 = iVar6 + -0x2c;
-          uVar11 = uVar16;
-          iVar7 = iVar2;
-          if ((uVar16 <= uVar10) && (uVar11 = uVar13, uVar3 < uVar13)) {
-            uVar3 = (uVar3 << 4) / 10;
-            if (uVar3 < uVar13) {
-              uVar3 = uVar13;
+          candidateCount = lastIndex - 1;
+          lastOffset = lastOffset + -0x2c;
+          vecSize = uVar16;
+          vecData = iVar2;
+          if ((uVar16 <= candidateCount) && (vecSize = lastIndex, vecCapacity < lastIndex)) {
+            vecCapacity = (vecCapacity << 4) / 10;
+            if (vecCapacity < lastIndex) {
+              vecCapacity = lastIndex;
             }
-            iVar7 = Arena__alloc(arenaAt378,uVar3 * 0x2c);
+            vecData = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
             if (uVar16 != 0) {
-              uVar13 = 0;
-              iVar21 = 0;
+              copyIndexC = 0;
+              copyOffsetG = 0;
               do {
-                uVar13 = uVar13 + 1;
-                _memcpy(iVar7 + iVar21,iVar2 + iVar21,0x2c);
-                iVar21 = iVar21 + 0x2c;
-              } while (uVar13 != uVar16);
+                copyIndexC = copyIndexC + 1;
+                _memcpy(vecData + copyOffsetG,iVar2 + copyOffsetG,0x2c);
+                copyOffsetG = copyOffsetG + 0x2c;
+              } while (copyIndexC != uVar16);
             }
             Arena__free(arenaAt378,iVar2);
           }
-          _memcpy(iVar17,iVar6 + iVar7,0x2c);
+          _memcpy(candidateRecord,lastOffset + vecData,0x2c);
         }
         else {
-          if ((uVar20 <= uVar19) && (uVar11 = uVar15, uVar3 < uVar15)) {
-            uVar3 = (uVar3 << 4) / 10;
-            if (uVar3 < uVar15) {
-              uVar3 = uVar15;
+          if ((uVar20 <= scanIndex) && (vecSize = nextPairIndex, vecCapacity < nextPairIndex)) {
+            vecCapacity = (vecCapacity << 4) / 10;
+            if (vecCapacity < nextPairIndex) {
+              vecCapacity = nextPairIndex;
             }
-            iVar7 = Arena__alloc(arenaAt378,uVar3 * 0x2c);
+            vecData = Arena__alloc(arenaAt378,vecCapacity * 0x2c);
             if (uVar20 != 0) {
-              uVar10 = 0;
-              iVar17 = 0;
+              copyIndex = 0;
+              copyOffsetE = 0;
               do {
-                uVar10 = uVar10 + 1;
-                _memcpy(iVar7 + iVar17,iVar21 + iVar17,0x2c);
-                iVar17 = iVar17 + 0x2c;
-              } while (uVar10 != uVar20);
+                copyIndex = copyIndex + 1;
+                _memcpy(vecData + copyOffsetE,grownDataD + copyOffsetE,0x2c);
+                copyOffsetE = copyOffsetE + 0x2c;
+              } while (copyIndex != uVar20);
             }
-            Arena__free(arenaAt378,iVar21);
-            iVar17 = iVar7 + iVar8;
+            Arena__free(arenaAt378,grownDataD);
+            candidateRecord = vecData + candidateOffset;
           }
-          iVar2 = ((int (*)())PostPack__buildCandidate)(param_1,iVar5,iVar2,iVar17);
-          uVar10 = uVar13;
-          uVar20 = uVar19;
+          iVar2 = ((int (*)())PostPack__buildCandidate)(param_1,candInstA,iVar2,candidateRecord);
+          candidateCount = lastIndex;
+          lastScanIndex = scanIndex;
           if (iVar2 == 0) goto LAB_001463fc;
         }
-        uVar19 = uVar20 + 1;
-        uVar15 = uVar15 + 1;
-        uVar13 = uVar10;
-      } while ((int)uVar19 < (int)uVar10);
+        scanIndex = lastScanIndex + 1;
+        nextPairIndex = nextPairIndex + 1;
+        lastIndex = candidateCount;
+      } while ((int)scanIndex < (int)candidateCount);
     } while( true );
   }
 LAB_0014653c:
   Program__beginPass(iVar2,(int)"post_pack_insts");
-  Arena__free(arenaAt378,iVar7);
+  Arena__free(arenaAt378,vecData);
   return;
 LAB_00146538:
   iVar2 = param_1[1];
