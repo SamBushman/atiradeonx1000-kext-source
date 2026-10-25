@@ -563,114 +563,119 @@ int Program__tryEliminateRedundantCopy(param_1, inst, param_3)
 }
 
 /* FUN_0011f578 @ 0x11f578 (588 bytes) */
-int FUN_0011f578(param_1)
-  int param_1;
+int FUN_0011f578(program)
+  int program;
 {
-  uint uVar1;
-  int iVar2;
-  undefined4 *puVar3;
-  int *a0;
-  int iVar4;
-  undefined4 uVar5;
-  int *piVar6;
+  undefined4 *workSlotRefB;
+  undefined4 *workFirstRef;
+  int inheritedWeight;
+  int successorQuery28;
+  int blockQuery24;
+  uint parentWeight;
+  int successorQuery34;
+  undefined4 *workSlotRef;
+  int *successor;
+  int successorByteOffset;
+  undefined4 entryBlock;
+  int *block;
   uint loopIndex;
-  /* issue #64 live-repro: &local_44 is the same small growable-array header (capacity/count/
-   * data-pointer) Vector__elementRefGrow/Vector__removeAt use elsewhere in this file - local_44, local_40 and
-   * local_3c are exactly its three words by their own hex offsets (0x44-0x40=4, 0x40-0x3c=4).
-   * local_38 is a separate, unrelated value (assigned from param_1 before this header is even
+  /* issue #64 live-repro: &workCapacity is the same small growable-array header (capacity/count/
+   * data-pointer) Vector__elementRefGrow/Vector__removeAt use elsewhere in this file - workCapacity, workCount and
+   * workData are exactly its three words by their own hex offsets (0x44-0x40=4, 0x40-0x3c=4).
+   * workArena is a separate, unrelated value (assigned from program before this header is even
    * built) and stays its own declaration. Left as separate scalars, Vector__removeAt's shrink inside
-   * the do-loop below never reaches the same memory local_40/local_44's own loop condition reads,
+   * the do-loop below never reaches the same memory workCount/workCapacity's own loop condition reads,
    * so the loop never sees the array become empty and spins forever (confirmed live: the rebuilt
    * driver hangs at 99-100% CPU inside Vector__removeAt, stuck at its own return statement, never
    * making real progress). Merged the three header words into one 0xc-byte buffer. */
   unsigned char local_44_buf [0xc];
-#define local_44 (*(uint *)(local_44_buf + 0x00))
-#define local_40 (*(uint *)(local_44_buf + 0x04))
-#define local_3c (*(undefined4 **)(local_44_buf + 0x08))
-  undefined4 local_38;
+#define workCapacity (*(uint *)(local_44_buf + 0x00))
+#define workCount (*(uint *)(local_44_buf + 0x04))
+#define workData (*(undefined4 **)(local_44_buf + 0x08))
+  undefined4 workArena;
   
-  local_38 = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
-  local_44 = 2;
-  local_40 = 0;
-  local_3c = (undefined4 *)Arena__alloc(local_38,8);
-  *(undefined4 *)(*(int *)(param_1 + 0x3a0) + 0x114) = 0x10;
-  uVar5 = *(undefined4 *)(param_1 + 0x3a0);
-  if (local_40 < local_44) {
-    local_3c[local_40] = 0;
-    puVar3 = local_3c + local_40;
-    local_40 = local_40 + 1;
+  workArena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  workCapacity = 2;
+  workCount = 0;
+  workData = (undefined4 *)Arena__alloc(workArena,8);
+  *(undefined4 *)(*(int *)(program + 0x3a0) + 0x114) = 0x10;
+  entryBlock = *(undefined4 *)(program + 0x3a0);
+  if (workCount < workCapacity) {
+    workData[workCount] = 0;
+    workSlotRef = workData + workCount;
+    workCount = workCount + 1;
   }
   else {
-    puVar3 = (undefined4 *)Vector__elementRefGrow(&local_44,local_40);
+    workSlotRef = (undefined4 *)Vector__elementRefGrow(&workCapacity,workCount);
   }
-  *puVar3 = uVar5;
+  *workSlotRef = entryBlock;
   do {
-    if (local_44 == 0) {
-      puVar3 = (undefined4 *)Vector__elementRefGrow(&local_44,0);
+    if (workCapacity == 0) {
+      workFirstRef = (undefined4 *)Vector__elementRefGrow(&workCapacity,0);
     }
     else {
-      puVar3 = local_3c;
-      if (local_40 == 0) {
-        *local_3c = 0;
-        local_40 = 1;
+      workFirstRef = workData;
+      if (workCount == 0) {
+        *workData = 0;
+        workCount = 1;
       }
     }
-    piVar6 = (int *)*puVar3;
-    Vector__removeAt(&local_44,0);
-    iVar4 = 0;
-    for (loopIndex = 1; loopIndex <= *(uint *)(piVar6[0x34] + 4); loopIndex = loopIndex + 1) {
-      a0 = *(int **)(*(int *)(piVar6[0x34] + 8) + iVar4);
-      if ((a0 != (int *)0x0) && (a0[0x45] == 0)) {
-        if (piVar6[0x2e] < a0[0x2e]) {
-          a0[0x45] = piVar6[0x45] << 2;
+    block = (int *)*workFirstRef;
+    Vector__removeAt(&workCapacity,0);
+    successorByteOffset = 0;
+    for (loopIndex = 1; loopIndex <= *(uint *)(block[0x34] + 4); loopIndex = loopIndex + 1) {
+      successor = *(int **)(*(int *)(block[0x34] + 8) + successorByteOffset);
+      if ((successor != (int *)0x0) && (successor[0x45] == 0)) {
+        if (block[0x2e] < successor[0x2e]) {
+          successor[0x45] = block[0x45] << 2;
         }
         else {
-          iVar2 = (**(code **)(*a0 + 0x34))(a0);
-          if (iVar2 == 0) {
-            iVar2 = (**(code **)(*piVar6 + 0x24))(piVar6);
-            if (iVar2 == 0) {
-              iVar2 = (**(code **)(*a0 + 0x28))(a0);
-              if (iVar2 != 0) {
-                a0[0x45] = piVar6[0x45] << 1;
+          successorQuery34 = (**(code **)(*successor + 0x34))(successor);
+          if (successorQuery34 == 0) {
+            blockQuery24 = (**(code **)(*block + 0x24))(block);
+            if (blockQuery24 == 0) {
+              successorQuery28 = (**(code **)(*successor + 0x28))(successor);
+              if (successorQuery28 != 0) {
+                successor[0x45] = block[0x45] << 1;
                 goto LAB_0011f744;
               }
-              iVar2 = piVar6[0x45];
+              inheritedWeight = block[0x45];
             }
             else {
-              uVar1 = piVar6[0x45];
-              iVar2 = ((int)uVar1 >> 1) + (uint)((int)uVar1 < 0 && (uVar1 & 1) != 0);
-              if (iVar2 < 1) {
-                iVar2 = 1;
+              parentWeight = block[0x45];
+              inheritedWeight = ((int)parentWeight >> 1) + (uint)((int)parentWeight < 0 && (parentWeight & 1) != 0);
+              if (inheritedWeight < 1) {
+                inheritedWeight = 1;
               }
             }
-            a0[0x45] = iVar2;
+            successor[0x45] = inheritedWeight;
           }
           else {
-            a0[0x45] = *(int *)(a0[0x4b] + 0x114);
+            successor[0x45] = *(int *)(successor[0x4b] + 0x114);
           }
         }
 LAB_0011f744:
-        if (local_40 < local_44) {
-          local_3c[local_40] = 0;
-          puVar3 = local_3c + local_40;
-          local_40 = local_40 + 1;
+        if (workCount < workCapacity) {
+          workData[workCount] = 0;
+          workSlotRefB = workData + workCount;
+          workCount = workCount + 1;
         }
         else {
-          puVar3 = (undefined4 *)Vector__elementRefGrow(&local_44,local_40);
+          workSlotRefB = (undefined4 *)Vector__elementRefGrow(&workCapacity,workCount);
         }
-        *puVar3 = a0;
+        *workSlotRefB = successor;
       }
-      iVar4 = iVar4 + 4;
+      successorByteOffset = successorByteOffset + 4;
     }
-    if (local_40 == 0) {
-      Arena__free(local_38,local_3c);
+    if (workCount == 0) {
+      Arena__free(workArena,workData);
       return;
     }
   } while( true );
 }
-#undef local_44
-#undef local_40
-#undef local_3c
+#undef workCapacity
+#undef workCount
+#undef workData
 
 /* FUN_0011f7fc @ 0x11f7fc (164 bytes) */
 int FUN_0011f7fc(param_1, param_2, vector)

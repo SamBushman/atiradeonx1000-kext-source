@@ -1,0 +1,57 @@
+local	FUN_0010ead4	param_1	hwState	INFERRED	hardware state object; +0x17c8 is set when a lane kind needs the extra output flag
+local	FUN_0010ead4	param_2	program	INFERRED	the Program (+0x3a8 last block, +0x3e4 fixed layout flag, +0x3f0 output base, +1000 first fixed register)
+use	FUN_0010ead4	piVar8	exportInst	INFERRED	output instruction being classified	^\s*piVar8\ =\ \*\(int\ \*\*\)\(\*\(int\ \*\)\(param_2\ \+\ 0x3a8\)\ \+\ 0x98\);$	+2
+use	FUN_0010ead4	piVar8	exportInst	INFERRED	output instruction being classified	^\s*if\ \(\(piVar8\[5\]\ \&\ 1U\)\ ==\ 0\)\ goto\ LAB_0010ebe4;$	+2
+use	FUN_0010ead4	piVar8	exportInst	INFERRED	output instruction being classified	^\s*piVar2\ =\ \(int\ \*\)piVar8\[2\];$	+1
+use	FUN_0010ead4	piVar8	exportInst	INFERRED	output instruction being classified	^\s*iVar3\ =\ FUN_00104ee4\(piVar8,0\);$	+3
+use	FUN_0010ead4	piVar8	exportInst	INFERRED	output instruction being classified	^\s*iVar3\ =\ piVar8\[0x4f\];$	+1
+use	FUN_0010ead4	piVar8	exportInst	INFERRED	output instruction being classified	^\s*piVar2\ =\ \(int\ \*\)piVar8\[2\];$@2	+2
+use	FUN_0010ead4	piVar8	exportInst	INFERRED	output instruction being classified	^\s*local_a8\[iVar6\]\ =\ \(int\)piVar8;$	+1
+use	FUN_0010ead4	piVar8	exportInst	INFERRED	output instruction being classified	^\s*piVar2\ =\ \(int\ \*\)piVar8\[2\];$@3	+1
+use	FUN_0010ead4	piVar8	exportInst	INFERRED	output instruction being classified	^\s*local_68\[iVar5\]\ =\ \(int\)piVar8;$	+2
+use	FUN_0010ead4	piVar8	exportInst	INFERRED	output instruction being classified	^\s*piVar8\ =\ piVar2;$	+1
+use	FUN_0010ead4	piVar1	nextInstLink	INFERRED	link following the list head	^\s*piVar1\ =\ \(int\ \*\)piVar8\[2\];$	+2
+use	FUN_0010ead4	piVar1	nextInstLink	INFERRED	link following the list head	^\s*piVar2\ =\ piVar1;$	+1
+use	FUN_0010ead4	piVar1	nextInstLink	INFERRED	link following the list head	^\s*piVar1\ =\ \(int\ \*\)piVar2\[2\];$	+1
+use	FUN_0010ead4	piVar1	colorExportCursor	INFERRED	cursor over the collected colour exports	^\s*piVar1\ =\ local_a8;$	+1
+use	FUN_0010ead4	piVar1	colorExportCursor	INFERRED	cursor over the collected colour exports	^\s*iVar3\ =\ \*piVar1;$	+2
+use	FUN_0010ead4	piVar1	otherExportCursor	INFERRED	cursor over the other collected exports	^\s*piVar1\ =\ local_68;$	+1
+use	FUN_0010ead4	piVar1	otherExportCursor	INFERRED	cursor over the other collected exports	^\s*iVar6\ =\ \*piVar1;$	+2
+use	FUN_0010ead4	piVar2	nextInstAdvance	INFERRED	instruction after the cursor	^\s*piVar2\ =\ piVar1;$	+1
+use	FUN_0010ead4	piVar2	nextInstAdvance	INFERRED	instruction after the cursor	^\s*piVar2\ =\ \(int\ \*\)piVar8\[2\];$	+1
+use	FUN_0010ead4	piVar2	nextInstAdvance	INFERRED	instruction after the cursor	^\s*piVar2\ =\ \(int\ \*\)piVar8\[2\];$@2	+1
+use	FUN_0010ead4	piVar2	nextInstAdvance	INFERRED	instruction after the cursor	^\s*piVar2\ =\ \(int\ \*\)piVar8\[2\];$@3	+1
+use	FUN_0010ead4	piVar2	nextInstAdvance	INFERRED	instruction after the cursor	^\s*piVar2\ =\ \(int\ \*\)piVar8\[2\];$@4	+1
+use	FUN_0010ead4	piVar2	nextInstAdvance	INFERRED	instruction after the cursor	^\s*piVar1\ =\ \(int\ \*\)piVar2\[2\];$	+3
+use	FUN_0010ead4	iVar3	instQuery68	INFERRED	instruction vtable slot 0x68 test (output write)	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x68\)\)\(piVar8\);$	+2
+use	FUN_0010ead4	iVar3	laneKindOfLane0	INFERRED	IRLoadInterp lane kind of lane 0	^\s*iVar3\ =\ FUN_00104ee4\(piVar8,0\);$	+3
+use	FUN_0010ead4	iVar3	exportKind	INFERRED	output kind word 0x4f (6, 7, 0x16, 0x17, 0x18, ...)	^\s*iVar3\ =\ piVar8\[0x4f\];$	+3
+use	FUN_0010ead4	iVar3	exportKind	INFERRED	output kind word 0x4f (6, 7, 0x16, 0x17, 0x18, ...)	^\s*if\ \(iVar3\ ==\ 7\)\ goto\ LAB_0010ebe0;$	+2
+use	FUN_0010ead4	iVar3	colorExportInst	INFERRED	colour export taken from the collected list	^\s*iVar3\ =\ \*piVar1;$	+1
+use	FUN_0010ead4	iVar3	colorExportInst	INFERRED	colour export taken from the collected list	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 0x98\)\ =\ 5;$	+2
+use	FUN_0010ead4	iVar3	outputBaseA	INFERRED	program output base (+0x3f0)	^\s*iVar3\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x3f0\);$	+1
+use	FUN_0010ead4	iVar3	outputBaseA	INFERRED	program output base (+0x3f0)	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x94\)\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x140\)\ \+\ iVar3;$	+1
+use	FUN_0010ead4	iVar4	outputBaseB	INFERRED	program output base (+0x3f0)	^\s*iVar4\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x3f0\);$	+1
+use	FUN_0010ead4	iVar4	outputBaseB	INFERRED	program output base (+0x3f0)	^\s*\*\(int\ \*\)\(iVar3\ \+\ 0x94\)\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x140\)\ \+\ iVar4;$	+1
+use	FUN_0010ead4	iVar5	otherExportCount	INFERRED	number of exports of the remaining kinds	^\s*iVar5\ =\ 0;$	+1
+use	FUN_0010ead4	iVar5	otherExportCount	INFERRED	number of exports of the remaining kinds	^\s*iVar5\ =\ 0;$@2	+1
+use	FUN_0010ead4	iVar5	otherExportCount	INFERRED	number of exports of the remaining kinds	^\s*local_68\[iVar5\]\ =\ \(int\)piVar8;$	+1
+use	FUN_0010ead4	iVar5	otherExportCount	INFERRED	number of exports of the remaining kinds	^\s*iVar5\ =\ iVar5\ \+\ 1;$	+1
+use	FUN_0010ead4	iVar5	otherExportCount	INFERRED	number of exports of the remaining kinds	^\s*if\ \(0\ <\ iVar5\)\ \{$	+1
+use	FUN_0010ead4	iVar5	otherExportCount	INFERRED	number of exports of the remaining kinds	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+2
+use	FUN_0010ead4	iVar6	colorExportCount	INFERRED	number of exports of kind 0x16 or 0x17	^\s*iVar6\ =\ 0;$	+1
+use	FUN_0010ead4	iVar6	colorExportCount	INFERRED	number of exports of kind 0x16 or 0x17	^\s*iVar6\ =\ 0;$@2	+1
+use	FUN_0010ead4	iVar6	colorExportCount	INFERRED	number of exports of kind 0x16 or 0x17	^\s*local_a8\[iVar6\]\ =\ \(int\)piVar8;$	+2
+use	FUN_0010ead4	iVar6	colorExportCount	INFERRED	number of exports of kind 0x16 or 0x17	^\s*if\ \(0\ <\ iVar6\)\ \{$	+1
+use	FUN_0010ead4	iVar6	colorExportCount	INFERRED	number of exports of kind 0x16 or 0x17	^\s*iVar6\ =\ iVar6\ \+\ \-1;$	+2
+use	FUN_0010ead4	iVar6	outputBaseC	INFERRED	program output base (+0x3f0)	^\s*iVar6\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x3f0\);$	+1
+use	FUN_0010ead4	iVar6	outputBaseC	INFERRED	program output base (+0x3f0)	^\s*piVar7\[0x25\]\ =\ piVar7\[0x50\]\ \+\ iVar6;$	+1
+use	FUN_0010ead4	iVar6	otherExportInst	INFERRED	other export taken from the collected list	^\s*iVar6\ =\ \*piVar1;$	+1
+use	FUN_0010ead4	iVar6	otherExportInst	INFERRED	other export taken from the collected list	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x98\)\ =\ 5;$	+2
+use	FUN_0010ead4	piVar7	depthExport	INFERRED	the export of kind 0x18 (placed at its own word 0x50)	^\s*piVar7\ =\ \(int\ \*\)0x0;$	+1
+use	FUN_0010ead4	piVar7	depthExport	INFERRED	the export of kind 0x18 (placed at its own word 0x50)	^\s*piVar7\ =\ \(int\ \*\)0x0;$@2	+1
+use	FUN_0010ead4	piVar7	depthExport	INFERRED	the export of kind 0x18 (placed at its own word 0x50)	^\s*piVar7\ =\ piVar8;$	+1
+use	FUN_0010ead4	piVar7	depthExport	INFERRED	the export of kind 0x18 (placed at its own word 0x50)	^\s*if\ \(piVar7\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_0010ead4	piVar7	depthExport	INFERRED	the export of kind 0x18 (placed at its own word 0x50)	^\s*piVar7\[0x26\]\ =\ 5;$	+2
+local	FUN_0010ead4	local_a8	colorExports	INFERRED	exports of kind 0x16 / 0x17
+local	FUN_0010ead4	local_68	otherExports	INFERRED	exports of every other kind
