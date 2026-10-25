@@ -4055,151 +4055,161 @@ int TempValue__ctor_124e04(this, param_2, param_3, param_4, compiler)
 }
 
 /* ExportValue__ctor_124e68 @ 0x124e68 (552 bytes) */
-int ExportValue__ctor_124e68(this, indexValue, param_3, param_4, compiler)
+int ExportValue__ctor_124e68(this, indexValue, interpolatorKind, baseCtorArg4, compiler)
   undefined4 *this;
   undefined4 indexValue;
-  int param_3;
-  undefined4 param_4;
+  int interpolatorKind;
+  undefined4 baseCtorArg4;
   int compiler;
 {
+  undefined4 colorConstantWord;
+  undefined4 vregList;
+  undefined4 laneKind3;
+  undefined4 laneKind2;
+  undefined4 laneKind1;
   undefined4 arena;
   int operandRecord;
   undefined4 *allocation;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
-  undefined4 *puVar5;
-  undefined4 local_28 [3];
+  int newVRegId;
+  undefined4 laneKind0;
+  int program;
+  undefined4 *exportInst;
+  undefined4 defaultWordsOut [3];
   
-  ((int (*)())VRegInfo__ctor_12379c)(this,indexValue,param_3,param_4,compiler);
+  ((int (*)())VRegInfo__ctor_12379c)(this,indexValue,interpolatorKind,baseCtorArg4,compiler);
   this[0xd] = 0;
   *this = &PTR_FUN_001ea748;
   this[0xc] = 0;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
-  puVar5 = allocation + 1;
+  exportInst = allocation + 1;
   *allocation = arena;
-  IRExport__ctor_108918(puVar5,compiler);
-  iVar4 = *(int *)(compiler + COMP_currentProgram);
-  Block__prependInst(*(undefined4 *)(iVar4 + 0x3a8),puVar5);
-  IRInst__setOperandRef(puVar5,0,this);
-  ((int (*)())FUN_0012306c)(this,puVar5);
-  this[0xc] = puVar5;
-  allocation[0x50] = param_3;
+  IRExport__ctor_108918(exportInst,compiler);
+  program = *(int *)(compiler + COMP_currentProgram);
+  Block__prependInst(*(undefined4 *)(program + 0x3a8),exportInst);
+  IRInst__setOperandRef(exportInst,0,this);
+  ((int (*)())FUN_0012306c)(this,exportInst);
+  this[0xc] = exportInst;
+  allocation[0x50] = interpolatorKind;
   allocation[0x51] = indexValue;
-  uVar3 = Program__interpSlotOfIlType(iVar4,param_3);
-  uVar3 = Program__laneKindOfInterpSlot(iVar4,uVar3);
-  IRLoadInterp__setLaneKindAndIndex(puVar5,0,uVar3,indexValue);
-  uVar3 = Program__interpSlotOfIlType(iVar4,param_3);
-  uVar3 = Program__laneKindOfInterpSlot(iVar4,uVar3);
-  IRLoadInterp__setLaneKindAndIndex(puVar5,1,uVar3,indexValue);
-  uVar3 = Program__interpSlotOfIlType(iVar4,param_3);
-  uVar3 = Program__laneKindOfInterpSlot(iVar4,uVar3);
-  IRLoadInterp__setLaneKindAndIndex(puVar5,2,uVar3,indexValue);
-  uVar3 = Program__interpSlotOfIlType(iVar4,param_3);
-  uVar3 = Program__laneKindOfInterpSlot(iVar4,uVar3);
-  IRLoadInterp__setLaneKindAndIndex(puVar5,3,uVar3,indexValue);
-  uVar3 = *(undefined4 *)(iVar4 + 0x3ac);
-  iVar2 = *(int *)(compiler + 0x3ac) + -1;
-  *(int *)(compiler + 0x3ac) = iVar2;
-  uVar3 = FUN_001275a0(uVar3,0,iVar2,0);
-  this[0xd] = uVar3;
-  IRInst__setOperandRef(puVar5,1,uVar3);
-  ((int (*)())VReg__addUse)(this[0xd],1,puVar5);
-  uVar3 = DAT_001afeec;
-  if (param_3 == 8) {
-    operandRecord = IRInst__getOperandRecord(puVar5,1);
-    *(undefined4 *)(operandRecord + 0x10) = uVar3;
-    (**(code **)(**(int **)(compiler + COMP_target) + 0x118))(local_28);
-    allocation[0x28] = local_28[0];
-    *(undefined4 **)(iVar4 + 0x34c) = puVar5;
+  laneKind0 = Program__interpSlotOfIlType(program,interpolatorKind);
+  laneKind0 = Program__laneKindOfInterpSlot(program,laneKind0);
+  IRLoadInterp__setLaneKindAndIndex(exportInst,0,laneKind0,indexValue);
+  laneKind1 = Program__interpSlotOfIlType(program,interpolatorKind);
+  laneKind1 = Program__laneKindOfInterpSlot(program,laneKind1);
+  IRLoadInterp__setLaneKindAndIndex(exportInst,1,laneKind1,indexValue);
+  laneKind2 = Program__interpSlotOfIlType(program,interpolatorKind);
+  laneKind2 = Program__laneKindOfInterpSlot(program,laneKind2);
+  IRLoadInterp__setLaneKindAndIndex(exportInst,2,laneKind2,indexValue);
+  laneKind3 = Program__interpSlotOfIlType(program,interpolatorKind);
+  laneKind3 = Program__laneKindOfInterpSlot(program,laneKind3);
+  IRLoadInterp__setLaneKindAndIndex(exportInst,3,laneKind3,indexValue);
+  vregList = *(undefined4 *)(program + 0x3ac);
+  newVRegId = *(int *)(compiler + 0x3ac) + -1;
+  *(int *)(compiler + 0x3ac) = newVRegId;
+  vregList = FUN_001275a0(vregList,0,newVRegId,0);
+  this[0xd] = vregList;
+  IRInst__setOperandRef(exportInst,1,vregList);
+  ((int (*)())VReg__addUse)(this[0xd],1,exportInst);
+  colorConstantWord = DAT_001afeec;
+  if (interpolatorKind == 8) {
+    operandRecord = IRInst__getOperandRecord(exportInst,1);
+    *(undefined4 *)(operandRecord + 0x10) = colorConstantWord;
+    (**(code **)(**(int **)(compiler + COMP_target) + 0x118))(defaultWordsOut);
+    allocation[0x28] = defaultWordsOut[0];
+    *(undefined4 **)(program + 0x34c) = exportInst;
   }
-  else if (param_3 == 9) {
+  else if (interpolatorKind == 9) {
     if (this[2] == 0) {
-      *(undefined4 **)(iVar4 + 0x348) = puVar5;
+      *(undefined4 **)(program + 0x348) = exportInst;
     }
   }
-  else if (param_3 == 6) {
-    *(undefined4 **)(iVar4 + 0x358) = puVar5;
+  else if (interpolatorKind == 6) {
+    *(undefined4 **)(program + 0x358) = exportInst;
   }
-  else if (param_3 == 7) {
-    *(undefined4 **)(iVar4 + 0x35c) = puVar5;
-    *(undefined4 *)(iVar4 + 0x368) = 1;
+  else if (interpolatorKind == 7) {
+    *(undefined4 **)(program + 0x35c) = exportInst;
+    *(undefined4 *)(program + 0x368) = 1;
   }
   return;
 }
 
 /* ExportValue__ctor_1250dc @ 0x1250dc (552 bytes) */
-int ExportValue__ctor_1250dc(this, indexValue, param_3, param_4, compiler)
+int ExportValue__ctor_1250dc(this, indexValue, interpolatorKind, baseCtorArg4, compiler)
   undefined4 *this;
   undefined4 indexValue;
-  int param_3;
-  undefined4 param_4;
+  int interpolatorKind;
+  undefined4 baseCtorArg4;
   int compiler;
 {
+  undefined4 colorConstantWord;
+  undefined4 vregList;
+  undefined4 laneKind3;
+  undefined4 laneKind2;
+  undefined4 laneKind1;
   undefined4 arena;
   int operandRecord;
   undefined4 *allocation;
-  int iVar2;
-  undefined4 uVar3;
-  int iVar4;
-  undefined4 *puVar5;
-  undefined4 local_28 [3];
+  int newVRegId;
+  undefined4 laneKind0;
+  int program;
+  undefined4 *exportInst;
+  undefined4 defaultWordsOut [3];
   
-  ((int (*)())VRegInfo__ctor_12379c)(this,indexValue,param_3,param_4,compiler);
+  ((int (*)())VRegInfo__ctor_12379c)(this,indexValue,interpolatorKind,baseCtorArg4,compiler);
   this[0xd] = 0;
   *this = &PTR_FUN_001ea748;
   this[0xc] = 0;
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
-  puVar5 = allocation + 1;
+  exportInst = allocation + 1;
   *allocation = arena;
-  IRExport__ctor_108918(puVar5,compiler);
-  iVar4 = *(int *)(compiler + COMP_currentProgram);
-  Block__prependInst(*(undefined4 *)(iVar4 + 0x3a8),puVar5);
-  IRInst__setOperandRef(puVar5,0,this);
-  ((int (*)())FUN_0012306c)(this,puVar5);
-  this[0xc] = puVar5;
-  allocation[0x50] = param_3;
+  IRExport__ctor_108918(exportInst,compiler);
+  program = *(int *)(compiler + COMP_currentProgram);
+  Block__prependInst(*(undefined4 *)(program + 0x3a8),exportInst);
+  IRInst__setOperandRef(exportInst,0,this);
+  ((int (*)())FUN_0012306c)(this,exportInst);
+  this[0xc] = exportInst;
+  allocation[0x50] = interpolatorKind;
   allocation[0x51] = indexValue;
-  uVar3 = Program__interpSlotOfIlType(iVar4,param_3);
-  uVar3 = Program__laneKindOfInterpSlot(iVar4,uVar3);
-  IRLoadInterp__setLaneKindAndIndex(puVar5,0,uVar3,indexValue);
-  uVar3 = Program__interpSlotOfIlType(iVar4,param_3);
-  uVar3 = Program__laneKindOfInterpSlot(iVar4,uVar3);
-  IRLoadInterp__setLaneKindAndIndex(puVar5,1,uVar3,indexValue);
-  uVar3 = Program__interpSlotOfIlType(iVar4,param_3);
-  uVar3 = Program__laneKindOfInterpSlot(iVar4,uVar3);
-  IRLoadInterp__setLaneKindAndIndex(puVar5,2,uVar3,indexValue);
-  uVar3 = Program__interpSlotOfIlType(iVar4,param_3);
-  uVar3 = Program__laneKindOfInterpSlot(iVar4,uVar3);
-  IRLoadInterp__setLaneKindAndIndex(puVar5,3,uVar3,indexValue);
-  uVar3 = *(undefined4 *)(iVar4 + 0x3ac);
-  iVar2 = *(int *)(compiler + 0x3ac) + -1;
-  *(int *)(compiler + 0x3ac) = iVar2;
-  uVar3 = FUN_001275a0(uVar3,0,iVar2,0);
-  this[0xd] = uVar3;
-  IRInst__setOperandRef(puVar5,1,uVar3);
-  ((int (*)())VReg__addUse)(this[0xd],1,puVar5);
-  uVar3 = DAT_001afeec;
-  if (param_3 == 8) {
-    operandRecord = IRInst__getOperandRecord(puVar5,1);
-    *(undefined4 *)(operandRecord + 0x10) = uVar3;
-    (**(code **)(**(int **)(compiler + COMP_target) + 0x118))(local_28);
-    allocation[0x28] = local_28[0];
-    *(undefined4 **)(iVar4 + 0x34c) = puVar5;
+  laneKind0 = Program__interpSlotOfIlType(program,interpolatorKind);
+  laneKind0 = Program__laneKindOfInterpSlot(program,laneKind0);
+  IRLoadInterp__setLaneKindAndIndex(exportInst,0,laneKind0,indexValue);
+  laneKind1 = Program__interpSlotOfIlType(program,interpolatorKind);
+  laneKind1 = Program__laneKindOfInterpSlot(program,laneKind1);
+  IRLoadInterp__setLaneKindAndIndex(exportInst,1,laneKind1,indexValue);
+  laneKind2 = Program__interpSlotOfIlType(program,interpolatorKind);
+  laneKind2 = Program__laneKindOfInterpSlot(program,laneKind2);
+  IRLoadInterp__setLaneKindAndIndex(exportInst,2,laneKind2,indexValue);
+  laneKind3 = Program__interpSlotOfIlType(program,interpolatorKind);
+  laneKind3 = Program__laneKindOfInterpSlot(program,laneKind3);
+  IRLoadInterp__setLaneKindAndIndex(exportInst,3,laneKind3,indexValue);
+  vregList = *(undefined4 *)(program + 0x3ac);
+  newVRegId = *(int *)(compiler + 0x3ac) + -1;
+  *(int *)(compiler + 0x3ac) = newVRegId;
+  vregList = FUN_001275a0(vregList,0,newVRegId,0);
+  this[0xd] = vregList;
+  IRInst__setOperandRef(exportInst,1,vregList);
+  ((int (*)())VReg__addUse)(this[0xd],1,exportInst);
+  colorConstantWord = DAT_001afeec;
+  if (interpolatorKind == 8) {
+    operandRecord = IRInst__getOperandRecord(exportInst,1);
+    *(undefined4 *)(operandRecord + 0x10) = colorConstantWord;
+    (**(code **)(**(int **)(compiler + COMP_target) + 0x118))(defaultWordsOut);
+    allocation[0x28] = defaultWordsOut[0];
+    *(undefined4 **)(program + 0x34c) = exportInst;
   }
-  else if (param_3 == 9) {
+  else if (interpolatorKind == 9) {
     if (this[2] == 0) {
-      *(undefined4 **)(iVar4 + 0x348) = puVar5;
+      *(undefined4 **)(program + 0x348) = exportInst;
     }
   }
-  else if (param_3 == 6) {
-    *(undefined4 **)(iVar4 + 0x358) = puVar5;
+  else if (interpolatorKind == 6) {
+    *(undefined4 **)(program + 0x358) = exportInst;
   }
-  else if (param_3 == 7) {
-    *(undefined4 **)(iVar4 + 0x35c) = puVar5;
-    *(undefined4 *)(iVar4 + 0x368) = 1;
+  else if (interpolatorKind == 7) {
+    *(undefined4 **)(program + 0x35c) = exportInst;
+    *(undefined4 *)(program + 0x368) = 1;
   }
   return;
 }

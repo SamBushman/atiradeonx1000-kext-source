@@ -985,20 +985,24 @@ LAB_0012cc9c:
 int pass_loop_trans(program)
   int program;
 {
+  int *footerCursor;
+  int *staleFooterArg;
+  undefined4 staleArg4;
+  undefined4 counterStepSource;
   bool changed;
   int nextInst;
   int phiInst;
-  int iVar4;
-  undefined4 uVar5;
-  int *piVar6;
-  undefined4 extraout_r4;
-  undefined4 extraout_r4_00;
-  int *in_r5;
-  int *in_r6;
-  undefined4 in_r7;
-  undefined4 in_r8;
-  undefined4 in_r9;
-  int *piVar7;
+  int counterInitMatched;
+  undefined4 counterInitSource;
+  int *exitCandidateBlock;
+  undefined4 staleArg4A;
+  undefined4 staleArg4B;
+  int *exitBlock;
+  int *boundOnRightPtr;
+  undefined4 staleArg7;
+  undefined4 staleArg8;
+  undefined4 staleArg9;
+  int *nextBlockLink;
   int *nextBlock;
   int *block;
   int boundOnRight;
@@ -1006,62 +1010,62 @@ int pass_loop_trans(program)
   undefined4 loopInfoCounterInit;
   int loopInfoProgram;
   
-  piVar7 = (int *)(*(int **)(program + PROG_blockListHead))[2];
-  if (piVar7 != (int *)0x0) {
+  nextBlockLink = (int *)(*(int **)(program + PROG_blockListHead))[2];
+  if (nextBlockLink != (int *)0x0) {
     changed = false;
     block = *(int **)(program + PROG_blockListHead);
     loopInfoProgram = program;
     do {
-      nextBlock = piVar7;
+      nextBlock = nextBlockLink;
       phiInst = (**(code **)(*block + 0x2c))(block);
       if ((phiInst != 0) && (phiInst = ((int (*)())LoopInfo__init)(loopInfo,block), phiInst != 0)) {
         loopInfo[0] = 0;
         phiInst = block[0x26];
         for (nextInst = *(int *)(block[0x26] + 8); nextInst != 0; nextInst = *(int *)(nextInst + 8)) {
           if ((*(int *)(*(int *)(phiInst + 0x88) + 8) == 0x8e) &&
-             (iVar4 = ((int (*)())LoopInfo__setCounterPhi)(loopInfo,phiInst), iVar4 != 0)) {
-            uVar5 = IRInst__getOperandSource(phiInst,2);
-            iVar4 = ((int (*)())LoopInfo__matchCounterInit)(loopInfo,uVar5);
-            if (iVar4 != 0) {
-              uVar5 = IRInst__getOperandSource(phiInst,1);
-              phiInst = ((int (*)())LoopInfo__matchCounterStep)(loopInfo,uVar5);
+             (counterInitMatched = ((int (*)())LoopInfo__setCounterPhi)(loopInfo,phiInst), counterInitMatched != 0)) {
+            counterInitSource = IRInst__getOperandSource(phiInst,2);
+            counterInitMatched = ((int (*)())LoopInfo__matchCounterInit)(loopInfo,counterInitSource);
+            if (counterInitMatched != 0) {
+              counterStepSource = IRInst__getOperandSource(phiInst,1);
+              phiInst = ((int (*)())LoopInfo__matchCounterStep)(loopInfo,counterStepSource);
               if (phiInst != 0) {
-                loopInfoCounterInit = uVar5;
-                piVar6 = (int *)Block__getSuccessor(block,0);
-                phiInst = (**(code **)(*piVar6 + 0x24))(piVar6);
-                uVar5 = extraout_r4;
-                piVar7 = in_r5;
+                loopInfoCounterInit = counterStepSource;
+                exitCandidateBlock = (int *)Block__getSuccessor(block,0);
+                phiInst = (**(code **)(*exitCandidateBlock + 0x24))(exitCandidateBlock);
+                staleArg4 = staleArg4A;
+                staleFooterArg = exitBlock;
                 if (phiInst == 0) {
-                  phiInst = Block__isSimple(piVar6);
+                  phiInst = Block__isSimple(exitCandidateBlock);
                   if (phiInst != 0) {
-                    phiInst = DList__count(piVar6 + 0x24);
-                    if ((phiInst < 3) || (phiInst = DList__count(piVar6 + 0x24), phiInst == 3)) {
-                      piVar6 = (int *)Block__getSuccessor(piVar6,0);
-                      phiInst = (**(code **)(*piVar6 + 0x24))(piVar6);
-                      uVar5 = extraout_r4_00;
-                      piVar7 = in_r5;
+                    phiInst = DList__count(exitCandidateBlock + 0x24);
+                    if ((phiInst < 3) || (phiInst = DList__count(exitCandidateBlock + 0x24), phiInst == 3)) {
+                      exitCandidateBlock = (int *)Block__getSuccessor(exitCandidateBlock,0);
+                      phiInst = (**(code **)(*exitCandidateBlock + 0x24))(exitCandidateBlock);
+                      staleArg4 = staleArg4B;
+                      staleFooterArg = exitBlock;
                       if (phiInst != 0) goto LAB_0012ce40;
                     }
                   }
                 }
                 else {
 LAB_0012ce40:
-                  in_r5 = piVar6;
-                  uVar5 = Block__getBranchInst(in_r5,uVar5,piVar7,in_r6,in_r7,in_r8,in_r9);
-                  piVar7 = (int *)in_r5[0x4f];
-                  in_r6 = &boundOnRight;
+                  exitBlock = exitCandidateBlock;
+                  staleArg4 = Block__getBranchInst(exitBlock,staleArg4,staleFooterArg,boundOnRightPtr,staleArg7,staleArg8,staleArg9);
+                  footerCursor = (int *)exitBlock[0x4f];
+                  boundOnRightPtr = &boundOnRight;
                   boundOnRight = 0;
-                  phiInst = ((int (*)())LoopInfo__matchExit)(loopInfo,uVar5,in_r5,in_r6);
+                  phiInst = ((int (*)())LoopInfo__matchExit)(loopInfo,staleArg4,exitBlock,boundOnRightPtr);
                   if (phiInst != 0) {
-                    if ((boundOnRight == 0) && (piVar6 = (int *)block[0x54], piVar7 != piVar6)) {
+                    if ((boundOnRight == 0) && (exitCandidateBlock = (int *)block[0x54], footerCursor != exitCandidateBlock)) {
                       phiInst = 0;
                       do {
-                        iVar4 = (**(code **)(*piVar7 + 0x2c))(piVar7);
-                        if (iVar4 == 0) {
-                          iVar4 = (**(code **)(*piVar7 + 0x30))(piVar7);
-                          if (iVar4 == 0) {
+                        counterInitMatched = (**(code **)(*footerCursor + 0x2c))(footerCursor);
+                        if (counterInitMatched == 0) {
+                          counterInitMatched = (**(code **)(*footerCursor + 0x30))(footerCursor);
+                          if (counterInitMatched == 0) {
                             if (phiInst == 0) {
-                              (**(code **)(*piVar7 + 0x38))(piVar7);
+                              (**(code **)(*footerCursor + 0x38))(footerCursor);
                             }
                           }
                           else {
@@ -1071,10 +1075,10 @@ LAB_0012ce40:
                         else {
                           phiInst = phiInst + 1;
                         }
-                        piVar7 = (int *)piVar7[2];
-                      } while (piVar6 != piVar7);
+                        footerCursor = (int *)footerCursor[2];
+                      } while (exitCandidateBlock != footerCursor);
                     }
-                    phiInst = ((int (*)())LoopInfo__convertToHardwareLoop)(loopInfo,boundOnRight,in_r5,in_r6,in_r7,in_r8,in_r9);
+                    phiInst = ((int (*)())LoopInfo__convertToHardwareLoop)(loopInfo,boundOnRight,exitBlock,boundOnRightPtr,staleArg7,staleArg8,staleArg9);
                     changed = changed || phiInst != 0;
                     if (phiInst != 0) {
                       Program__beginPass(program,(int)"loop_trans");
@@ -1087,9 +1091,9 @@ LAB_0012ce40:
           phiInst = nextInst;
         }
       }
-      piVar7 = (int *)nextBlock[2];
+      nextBlockLink = (int *)nextBlock[2];
       block = nextBlock;
-    } while (piVar7 != (int *)0x0);
+    } while (nextBlockLink != (int *)0x0);
     if (changed) {
       Program__freeWorkArrays(program);
       Program__eliminateDeadInstsAndRecountUses(program,0);

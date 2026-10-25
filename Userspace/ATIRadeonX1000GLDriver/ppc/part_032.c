@@ -72,85 +72,85 @@ int FUN_0010f704(param_1, vector, compiler)
 }
 
 /* FUN_0010f87c @ 0x10f87c (424 bytes) */
-int FUN_0010f87c(param_1, param_2, vector)
-  int param_1;
+int FUN_0010f87c(program, param_2, vector)
+  int program;
   undefined4 param_2;
   uint *vector;
 {
   uint vectorCount;
   int operandRecord;
-  bool bVar1;
-  uint uVar2;
+  bool moreLanes;
+  uint laneRecordCount;
   undefined4 *vectorElementRef;
-  int iVar4;
-  int *piVar5;
-  uint uVar6;
-  uint uVar7;
-  int iVar8;
-  int iVar9;
+  int laneKind;
+  int *laneRecordRef;
+  uint nextExportIndex;
+  uint exportIndex;
+  int laneNumber;
+  int exportInst;
   uint loopIndex;
-  uint *puVar11;
-  int iVar12;
-  int iVar13;
+  uint *laneRecordVector;
+  int recordKindOrIndex;
+  int laneRecord;
   
   vectorCount = vector[1];
   if (vectorCount != 0) {
-    uVar7 = 0;
+    exportIndex = 0;
     do {
-      if (uVar7 < *vector) {
-        if (vectorCount <= uVar7) {
-          _memset(vectorCount * 4 + vector[2],0,(uVar7 - vectorCount) * 4 + 4);
-          vector[1] = uVar7 + 1;
+      if (exportIndex < *vector) {
+        if (vectorCount <= exportIndex) {
+          _memset(vectorCount * 4 + vector[2],0,(exportIndex - vectorCount) * 4 + 4);
+          vector[1] = exportIndex + 1;
         }
-        vectorElementRef = (undefined4 *)(uVar7 * 4 + vector[2]);
+        vectorElementRef = (undefined4 *)(exportIndex * 4 + vector[2]);
       }
       else {
-        vectorElementRef = (undefined4 *)Vector__elementRefGrow(vector,uVar7);
+        vectorElementRef = (undefined4 *)Vector__elementRefGrow(vector,exportIndex);
       }
-      uVar6 = uVar7 + 1;
-      iVar9 = *(int *)*vectorElementRef;
-      if (*(uint *)(iVar9 + 0x94) != uVar7) {
-        operandRecord = IRInst__getOperandRecord(iVar9,0);
-        iVar8 = 0;
-        *(uint *)(operandRecord + 8) = uVar7;
+      nextExportIndex = exportIndex + 1;
+      exportInst = *(int *)*vectorElementRef;
+      if (*(uint *)(exportInst + 0x94) != exportIndex) {
+        operandRecord = IRInst__getOperandRecord(exportInst,0);
+        laneNumber = 0;
+        *(uint *)(operandRecord + 8) = exportIndex;
         do {
-          puVar11 = *(uint **)(param_1 + 0x418);
-          uVar2 = puVar11[1];
-          if (uVar2 != 0) {
+          laneRecordVector = *(uint **)(program + 0x418);
+          laneRecordCount = laneRecordVector[1];
+          if (laneRecordCount != 0) {
             loopIndex = 0;
             do {
-              if (loopIndex < *puVar11) {
-                if (uVar2 <= loopIndex) {
-                  _memset(uVar2 * 4 + puVar11[2],0,(loopIndex - uVar2) * 4 + 4);
-                  puVar11[1] = loopIndex + 1;
+              if (loopIndex < *laneRecordVector) {
+                if (laneRecordCount <= loopIndex) {
+                  _memset(laneRecordCount * 4 + laneRecordVector[2],0,(loopIndex - laneRecordCount) * 4 + 4);
+                  laneRecordVector[1] = loopIndex + 1;
                 }
-                piVar5 = (int *)(loopIndex * 4 + puVar11[2]);
+                laneRecordRef = (int *)(loopIndex * 4 + laneRecordVector[2]);
               }
               else {
-                piVar5 = (int *)Vector__elementRefGrow(puVar11,loopIndex);
+                laneRecordRef = (int *)Vector__elementRefGrow(laneRecordVector,loopIndex);
               }
-              iVar13 = *piVar5;
-              iVar12 = *(int *)(iVar13 + 4);
-              iVar4 = IRLoadInterp__laneKind_104ee4(iVar9,iVar8);
-              if (((iVar12 == iVar4) &&
-                  (iVar12 = *(int *)(iVar13 + 8), iVar4 = IRLoadInterp__laneIndex_104180(iVar9,iVar8), iVar12 == iVar4
-                  )) && (*(int *)(iVar13 + 0x18) == iVar8)) {
-                *(uint *)(iVar13 + 0xc) = uVar7;
-                *(uint *)(iVar13 + 0x14) = uVar7;
+              laneRecord = *laneRecordRef;
+              recordKindOrIndex = *(int *)(laneRecord + 4);
+              laneKind = IRLoadInterp__laneKind_104ee4(exportInst,laneNumber);
+              if (((recordKindOrIndex == laneKind) &&
+                  (recordKindOrIndex = *(int *)(laneRecord + 8), laneKind = IRLoadInterp__laneIndex_104180(exportInst,laneNumber), recordKindOrIndex == laneKind
+                  )) && (*(int *)(laneRecord + 0x18) == laneNumber)) {
+                *(uint *)(laneRecord + 0xc) = exportIndex;
+                *(uint *)(laneRecord + 0x14) = exportIndex;
                 break;
               }
-              puVar11 = *(uint **)(param_1 + 0x418);
+              laneRecordVector = *(uint **)(program + 0x418);
               loopIndex = loopIndex + 1;
-              uVar2 = puVar11[1];
-            } while (loopIndex < uVar2);
+              laneRecordCount = laneRecordVector[1];
+            } while (loopIndex < laneRecordCount);
           }
-          bVar1 = iVar8 != 3;
-          iVar8 = iVar8 + 1;
-        } while (bVar1);
+          moreLanes = laneNumber != 3;
+          laneNumber = laneNumber + 1;
+        } while (moreLanes);
       }
       vectorCount = vector[1];
-      uVar7 = uVar6;
-    } while (uVar6 < vectorCount);
+      exportIndex = nextExportIndex;
+    } while (nextExportIndex < vectorCount);
   }
   return;
 }
