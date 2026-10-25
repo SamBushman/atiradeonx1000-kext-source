@@ -1214,16 +1214,27 @@ int extvsAllocConstantRegisters(ctx, shader, programState, symbol)
   int programState;
   int symbol;
 {
-  bool bVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  undefined4 uVar5;
-  undefined1 uVar6;
+  int oldSlotCount;
+  int growRowIndex;
+  undefined4 slotFoundFlag2;
+  int slotEntryPtr2;
+  int growRowsLeft;
+  int slotEntryPtr;
+  int oldSlotCountBeforeGrow;
+  int newSlotByteOffset;
+  int rowIndex;
+  int slotEntryAddr;
+  int slotByteOffset;
+  bool searching;
+  int assignedSlot;
+  int assignedSlot2;
+  int symbolKind;
+  undefined4 newSlotArray;
+  undefined1 slotFoundFlag;
   uint slotIndex;
-  int iVar8;
-  undefined4 uVar9;
-  int iVar10;
+  int matrixSlotOffset;
+  undefined4 newSlotArray2;
+  int rowsLeft;
   
   if (*(int *)(symbol + 0x28) == 0x87c2) {
     *(int *)(shader + 0x5c) = *(int *)(shader + 0x5c) + 1;
@@ -1233,103 +1244,103 @@ int extvsAllocConstantRegisters(ctx, shader, programState, symbol)
     else {
       *(int *)(programState + 0x22c) = *(int *)(programState + 0x22c) + 1;
     }
-    iVar4 = *(int *)(symbol + 0x24);
+    symbolKind = *(int *)(symbol + 0x24);
     *(undefined1 *)(symbol + 0x3d) = 1;
-    if (iVar4 == 0x87bf) {
-      uVar6 = 0;
+    if (symbolKind == 0x87bf) {
+      slotFoundFlag = 0;
       slotIndex = 0;
-      iVar4 = 0;
-      bVar1 = true;
+      slotByteOffset = 0;
+      searching = true;
       *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
       while (slotIndex < *(uint *)(programState + 0x58)) {
-        if (!bVar1) goto LAB_00055f2c;
-        if (*(char *)(iVar4 + *(int *)(programState + 0x54) + 0x10) == '\0') {
-          uVar6 = 1;
-          bVar1 = false;
+        if (!searching) goto LAB_00055f2c;
+        if (*(char *)(slotByteOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
+          slotFoundFlag = 1;
+          searching = false;
         }
         else {
           slotIndex = slotIndex + 1;
-          iVar4 = iVar4 + 0x28;
+          slotByteOffset = slotByteOffset + 0x28;
         }
       }
       goto LAB_00055f28;
     }
-    if (iVar4 == 0x87c0) {
+    if (symbolKind == 0x87c0) {
       slotIndex = 0;
-      iVar4 = 0;
-      bVar1 = true;
+      slotByteOffset = 0;
+      searching = true;
       *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
       while (slotIndex < *(int *)(programState + 0x58) - 3U) {
-        if (!bVar1) goto LAB_00055fac;
-        if (*(char *)(iVar4 + *(int *)(programState + 0x54) + 0x10) == '\0') {
-          bVar1 = false;
+        if (!searching) goto LAB_00055fac;
+        if (*(char *)(slotByteOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
+          searching = false;
         }
         else {
           slotIndex = slotIndex + 1;
-          iVar4 = iVar4 + 0x28;
+          slotByteOffset = slotByteOffset + 0x28;
         }
       }
-      if (!bVar1) {
+      if (!searching) {
 LAB_00055fac:
-        iVar8 = slotIndex * 0x28;
-        iVar4 = iVar8 + *(int *)(programState + 0x54);
-        if (((*(char *)(iVar4 + 0x38) == '\0') && (*(char *)(iVar4 + 0x60) == '\0')) &&
-           (*(char *)(iVar4 + 0x88) == '\0')) {
-          iVar4 = 0;
-          iVar10 = 4;
+        matrixSlotOffset = slotIndex * 0x28;
+        slotEntryAddr = matrixSlotOffset + *(int *)(programState + 0x54);
+        if (((*(char *)(slotEntryAddr + 0x38) == '\0') && (*(char *)(slotEntryAddr + 0x60) == '\0')) &&
+           (*(char *)(slotEntryAddr + 0x88) == '\0')) {
+          rowIndex = 0;
+          rowsLeft = 4;
           do {
-            iVar2 = slotIndex + iVar4;
-            iVar4 = iVar4 + 1;
-            *(int *)(symbol + 0x10) = iVar2;
+            assignedSlot = slotIndex + rowIndex;
+            rowIndex = rowIndex + 1;
+            *(int *)(symbol + 0x10) = assignedSlot;
             symbol = symbol + 4;
-            iVar2 = *(int *)(programState + 0x54) + iVar8;
-            iVar8 = iVar8 + 0x28;
-            *(undefined1 *)(iVar2 + 0x10) = 1;
-            iVar10 = iVar10 + -1;
-          } while (iVar10 != 0);
+            slotEntryPtr = *(int *)(programState + 0x54) + matrixSlotOffset;
+            matrixSlotOffset = matrixSlotOffset + 0x28;
+            *(undefined1 *)(slotEntryPtr + 0x10) = 1;
+            rowsLeft = rowsLeft + -1;
+          } while (rowsLeft != 0);
           return;
         }
       }
       *(undefined1 *)(shader + 0x10) = 0;
-      iVar10 = *(int *)(programState + 0x58);
-      uVar9 = (**(code **)(ctx + 0x10))(iVar10 + 0x10,0x28);
+      oldSlotCount = *(int *)(programState + 0x58);
+      newSlotArray2 = (**(code **)(ctx + 0x10))(oldSlotCount + 0x10,0x28);
       (**(code **)(((unsigned char *)0x00001344) + ctx))
-                (uVar9,*(undefined4 *)(programState + 0x54),*(int *)(programState + 0x58) * 0x28);
+                (newSlotArray2,*(undefined4 *)(programState + 0x54),*(int *)(programState + 0x58) * 0x28);
       (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
-      *(undefined4 *)(programState + 0x54) = uVar9;
-      iVar4 = iVar10 * 0x28;
-      iVar2 = 4;
-      iVar8 = 0;
+      *(undefined4 *)(programState + 0x54) = newSlotArray2;
+      newSlotByteOffset = oldSlotCount * 0x28;
+      growRowsLeft = 4;
+      growRowIndex = 0;
       *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
       do {
-        iVar3 = iVar10 + iVar8;
-        iVar8 = iVar8 + 1;
-        *(int *)(symbol + 0x10) = iVar3;
+        assignedSlot2 = oldSlotCount + growRowIndex;
+        growRowIndex = growRowIndex + 1;
+        *(int *)(symbol + 0x10) = assignedSlot2;
         symbol = symbol + 4;
-        iVar3 = *(int *)(programState + 0x54) + iVar4;
-        iVar4 = iVar4 + 0x28;
-        *(undefined1 *)(iVar3 + 0x10) = 1;
-        iVar2 = iVar2 + -1;
-      } while (iVar2 != 0);
+        slotEntryPtr2 = *(int *)(programState + 0x54) + newSlotByteOffset;
+        newSlotByteOffset = newSlotByteOffset + 0x28;
+        *(undefined1 *)(slotEntryPtr2 + 0x10) = 1;
+        growRowsLeft = growRowsLeft + -1;
+      } while (growRowsLeft != 0);
       return;
     }
-    if (iVar4 != 0x87be) {
+    if (symbolKind != 0x87be) {
       return;
     }
-    uVar9 = 0;
+    slotFoundFlag2 = 0;
     slotIndex = 0;
-    iVar4 = 0;
-    bVar1 = true;
+    slotByteOffset = 0;
+    searching = true;
     *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
     while (slotIndex < *(uint *)(programState + 0x58)) {
-      if (!bVar1) goto LAB_0005618c;
-      if (*(char *)(iVar4 + *(int *)(programState + 0x54) + 0x10) == '\0') {
-        uVar9 = 1;
-        bVar1 = false;
+      if (!searching) goto LAB_0005618c;
+      if (*(char *)(slotByteOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
+        slotFoundFlag2 = 1;
+        searching = false;
       }
       else {
         slotIndex = slotIndex + 1;
-        iVar4 = iVar4 + 0x28;
+        slotByteOffset = slotByteOffset + 0x28;
       }
     }
   }
@@ -1339,33 +1350,33 @@ LAB_00055fac:
     }
     *(int *)(shader + 0x60) = *(int *)(shader + 0x60) + 1;
     *(undefined1 *)(symbol + 0x3d) = 1;
-    iVar4 = *(int *)(symbol + 0x24);
-    if (iVar4 == 0x87bf) {
-      uVar6 = 0;
+    symbolKind = *(int *)(symbol + 0x24);
+    if (symbolKind == 0x87bf) {
+      slotFoundFlag = 0;
       slotIndex = 0;
-      iVar4 = 0;
-      bVar1 = true;
+      slotByteOffset = 0;
+      searching = true;
       *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
       while (slotIndex < *(uint *)(programState + 0x58)) {
-        if (!bVar1) goto LAB_00055f2c;
-        if (*(char *)(iVar4 + *(int *)(programState + 0x54) + 0x10) == '\0') {
-          uVar6 = 1;
-          bVar1 = false;
+        if (!searching) goto LAB_00055f2c;
+        if (*(char *)(slotByteOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
+          slotFoundFlag = 1;
+          searching = false;
         }
         else {
           slotIndex = slotIndex + 1;
-          iVar4 = iVar4 + 0x28;
+          slotByteOffset = slotByteOffset + 0x28;
         }
       }
 LAB_00055f28:
-      if (bVar1) {
-        *(undefined1 *)(shader + 0x10) = uVar6;
-        iVar4 = *(int *)(programState + 0x58);
-        uVar9 = (**(code **)(ctx + 0x10))(iVar4 + 0x10,0x28);
+      if (searching) {
+        *(undefined1 *)(shader + 0x10) = slotFoundFlag;
+        oldSlotCountBeforeGrow = *(int *)(programState + 0x58);
+        newSlotArray2 = (**(code **)(ctx + 0x10))(oldSlotCountBeforeGrow + 0x10,0x28);
         (**(code **)(((unsigned char *)0x00001344) + ctx))
-                  (uVar9,*(undefined4 *)(programState + 0x54),*(int *)(programState + 0x58) * 0x28);
+                  (newSlotArray2,*(undefined4 *)(programState + 0x54),*(int *)(programState + 0x58) * 0x28);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
-        *(undefined4 *)(programState + 0x54) = uVar9;
+        *(undefined4 *)(programState + 0x54) = newSlotArray2;
         *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
         goto LAB_000562e8;
       }
@@ -1373,98 +1384,98 @@ LAB_00055f2c:
       *(uint *)(symbol + 4) = slotIndex;
       goto LAB_00055f30;
     }
-    if (iVar4 == 0x87c0) {
+    if (symbolKind == 0x87c0) {
       slotIndex = 0;
-      iVar4 = 0;
-      bVar1 = true;
+      slotByteOffset = 0;
+      searching = true;
       *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 4;
       while (slotIndex < *(int *)(programState + 0x58) - 3U) {
-        if (!bVar1) goto LAB_0005636c;
-        if (*(char *)(iVar4 + *(int *)(programState + 0x54) + 0x10) == '\0') {
-          bVar1 = false;
+        if (!searching) goto LAB_0005636c;
+        if (*(char *)(slotByteOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
+          searching = false;
         }
         else {
           slotIndex = slotIndex + 1;
-          iVar4 = iVar4 + 0x28;
+          slotByteOffset = slotByteOffset + 0x28;
         }
       }
-      if (!bVar1) {
+      if (!searching) {
 LAB_0005636c:
-        iVar8 = slotIndex * 0x28;
-        iVar4 = iVar8 + *(int *)(programState + 0x54);
-        if (((*(char *)(iVar4 + 0x38) == '\0') && (*(char *)(iVar4 + 0x60) == '\0')) &&
-           (*(char *)(iVar4 + 0x88) == '\0')) {
-          iVar4 = 0;
-          iVar10 = 4;
+        matrixSlotOffset = slotIndex * 0x28;
+        slotEntryAddr = matrixSlotOffset + *(int *)(programState + 0x54);
+        if (((*(char *)(slotEntryAddr + 0x38) == '\0') && (*(char *)(slotEntryAddr + 0x60) == '\0')) &&
+           (*(char *)(slotEntryAddr + 0x88) == '\0')) {
+          rowIndex = 0;
+          rowsLeft = 4;
           do {
-            iVar2 = slotIndex + iVar4;
-            iVar4 = iVar4 + 1;
-            *(int *)(symbol + 0x10) = iVar2;
+            assignedSlot = slotIndex + rowIndex;
+            rowIndex = rowIndex + 1;
+            *(int *)(symbol + 0x10) = assignedSlot;
             symbol = symbol + 4;
-            iVar2 = *(int *)(programState + 0x54) + iVar8;
-            iVar8 = iVar8 + 0x28;
-            *(undefined1 *)(iVar2 + 0x10) = 1;
-            iVar10 = iVar10 + -1;
-          } while (iVar10 != 0);
+            slotEntryPtr = *(int *)(programState + 0x54) + matrixSlotOffset;
+            matrixSlotOffset = matrixSlotOffset + 0x28;
+            *(undefined1 *)(slotEntryPtr + 0x10) = 1;
+            rowsLeft = rowsLeft + -1;
+          } while (rowsLeft != 0);
           return;
         }
       }
       *(undefined1 *)(shader + 0x10) = 0;
-      iVar10 = *(int *)(programState + 0x58);
-      uVar9 = (**(code **)(ctx + 0x10))(iVar10 + 0x10,0x28);
+      oldSlotCount = *(int *)(programState + 0x58);
+      newSlotArray2 = (**(code **)(ctx + 0x10))(oldSlotCount + 0x10,0x28);
       (**(code **)(((unsigned char *)0x00001344) + ctx))
-                (uVar9,*(undefined4 *)(programState + 0x54),*(int *)(programState + 0x58) * 0x28);
+                (newSlotArray2,*(undefined4 *)(programState + 0x54),*(int *)(programState + 0x58) * 0x28);
       (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
-      *(undefined4 *)(programState + 0x54) = uVar9;
-      iVar4 = iVar10 * 0x28;
-      iVar2 = 4;
-      iVar8 = 0;
+      *(undefined4 *)(programState + 0x54) = newSlotArray2;
+      newSlotByteOffset = oldSlotCount * 0x28;
+      growRowsLeft = 4;
+      growRowIndex = 0;
       *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
       do {
-        iVar3 = iVar10 + iVar8;
-        iVar8 = iVar8 + 1;
-        *(int *)(symbol + 0x10) = iVar3;
+        assignedSlot2 = oldSlotCount + growRowIndex;
+        growRowIndex = growRowIndex + 1;
+        *(int *)(symbol + 0x10) = assignedSlot2;
         symbol = symbol + 4;
-        iVar3 = *(int *)(programState + 0x54) + iVar4;
-        iVar4 = iVar4 + 0x28;
-        *(undefined1 *)(iVar3 + 0x10) = 1;
-        iVar2 = iVar2 + -1;
-      } while (iVar2 != 0);
+        slotEntryPtr2 = *(int *)(programState + 0x54) + newSlotByteOffset;
+        newSlotByteOffset = newSlotByteOffset + 0x28;
+        *(undefined1 *)(slotEntryPtr2 + 0x10) = 1;
+        growRowsLeft = growRowsLeft + -1;
+      } while (growRowsLeft != 0);
       return;
     }
-    if (iVar4 != 0x87be) {
+    if (symbolKind != 0x87be) {
       return;
     }
-    uVar9 = 0;
+    slotFoundFlag2 = 0;
     slotIndex = 0;
-    iVar4 = 0;
-    bVar1 = true;
+    slotByteOffset = 0;
+    searching = true;
     *(int *)(programState + 0x5c) = *(int *)(programState + 0x5c) + 1;
     while (slotIndex < *(uint *)(programState + 0x58)) {
-      if (!bVar1) goto LAB_0005618c;
-      if (*(char *)(iVar4 + *(int *)(programState + 0x54) + 0x10) == '\0') {
-        uVar9 = 1;
-        bVar1 = false;
+      if (!searching) goto LAB_0005618c;
+      if (*(char *)(slotByteOffset + *(int *)(programState + 0x54) + 0x10) == '\0') {
+        slotFoundFlag2 = 1;
+        searching = false;
       }
       else {
         slotIndex = slotIndex + 1;
-        iVar4 = iVar4 + 0x28;
+        slotByteOffset = slotByteOffset + 0x28;
       }
     }
   }
-  if (bVar1) {
-    *(char *)(shader + 0x10) = (char)uVar9;
-    iVar4 = *(int *)(programState + 0x58);
-    uVar5 = (**(code **)(ctx + 0x10))(iVar4 + 0x10,0x28);
+  if (searching) {
+    *(char *)(shader + 0x10) = (char)slotFoundFlag2;
+    oldSlotCountBeforeGrow = *(int *)(programState + 0x58);
+    newSlotArray = (**(code **)(ctx + 0x10))(oldSlotCountBeforeGrow + 0x10,0x28);
     (**(code **)(((unsigned char *)0x00001344) + ctx))
-              (uVar5,*(undefined4 *)(programState + 0x54),*(int *)(programState + 0x58) * 0x28);
+              (newSlotArray,*(undefined4 *)(programState + 0x54),*(int *)(programState + 0x58) * 0x28);
     (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x54));
-    *(undefined4 *)(programState + 0x54) = uVar5;
+    *(undefined4 *)(programState + 0x54) = newSlotArray;
     *(int *)(programState + 0x58) = *(int *)(programState + 0x58) + 0x10;
-    *(undefined4 *)(symbol + 8) = uVar9;
+    *(undefined4 *)(symbol + 8) = slotFoundFlag2;
 LAB_000562e8:
-    *(int *)(symbol + 4) = iVar4;
-    *(undefined1 *)(iVar4 * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
+    *(int *)(symbol + 4) = oldSlotCountBeforeGrow;
+    *(undefined1 *)(oldSlotCountBeforeGrow * 0x28 + *(int *)(programState + 0x54) + 0x10) = 1;
     return;
   }
 LAB_0005618c:
@@ -2470,17 +2481,19 @@ int extvsEmitIndex(ctx, shader, instRecord)
   int *shader;
   int instRecord;
 {
+  int instSlotSeq;
+  int instCountLocal;
   int src1Operand;
   int instCount;
   int instSlot;
   undefined4 tempIndex;
   uint extvsOperandDataTypeResult;
-  uint uVar1;
+  uint swizzleWord;
   undefined4 newInstArray;
   int hwProgram;
   int dstOperand;
   int *symbolList;
-  int iVar6;
+  int hwProgramLocal;
   undefined4 tmpOperand0Kind;
   undefined4 tmpOperand0Index;
   undefined4 tmpOperand0Comp0;
@@ -2502,17 +2515,17 @@ int extvsEmitIndex(ctx, shader, instRecord)
   if (0x87bd < extvsOperandDataTypeResult) {
     if (extvsOperandDataTypeResult < 0x87c0) {
       hwProgram = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
-      iVar6 = *(int *)(hwProgram + 0x18);
-      if (0x100 < iVar6 + 2U) {
+      instCountLocal = *(int *)(hwProgram + 0x18);
+      if (0x100 < instCountLocal + 2U) {
         *(undefined1 *)(shader + 4) = 0;
-        iVar6 = *(int *)(hwProgram + 0x18);
-        if (*(uint *)(hwProgram + 0x20) < iVar6 + 2U) {
+        instCountLocal = *(int *)(hwProgram + 0x18);
+        if (*(uint *)(hwProgram + 0x20) < instCountLocal + 2U) {
           newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgram + 0x20) * 0x10 + 0x100);
           (**(code **)(((unsigned char *)0x00001344) + ctx))
                     (newInstArray,*(undefined4 *)(hwProgram + 0x1c),*(int *)(hwProgram + 0x20) << 4);
           (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgram + 0x1c));
           *(undefined4 *)(hwProgram + 0x1c) = newInstArray;
-          iVar6 = *(int *)(hwProgram + 0x18);
+          instCountLocal = *(int *)(hwProgram + 0x18);
           *(int *)(hwProgram + 0x20) = *(int *)(hwProgram + 0x20) + 0x10;
         }
       }
@@ -2522,7 +2535,7 @@ int extvsEmitIndex(ctx, shader, instRecord)
       tmpOperand0Comp2 = 0;
       tmpOperand0Comp3 = 0;
       tmpOperand0Flag = 0;
-      instSlot = iVar6 * 0x10 + *(int *)(hwProgram + 0x1c);
+      instSlot = instCountLocal * 0x10 + *(int *)(hwProgram + 0x1c);
       tmpOperand0Kind = 5;
       ((int (*)())extvsEncodeSourceOperand)(ctx,shader,&tmpOperand0Kind,instSlot,0xd,0,0);
       ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,instRecord + 0x20,instSlot + 4,0);
@@ -2530,34 +2543,34 @@ int extvsEmitIndex(ctx, shader, instRecord)
       *(undefined4 *)(instSlot + 8) = *(undefined4 *)(instSlot + 4);
       ((int (*)())extvsEncodeSourceOperand)(ctx,shader,dstOperand,instSlot + 0x10,3,0,0);
       ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,instRecord + 0x3c,instSlot + 0x14,0);
-      uVar1 = *(uint *)(instSlot + 0x14);
-      if ((uVar1 & 7) != 2) {
+      swizzleWord = *(uint *)(instSlot + 0x14);
+      if ((swizzleWord & 7) != 2) {
         *(undefined1 *)(shader + 4) = 0;
-        uVar1 = *(uint *)(instSlot + 0x14);
+        swizzleWord = *(uint *)(instSlot + 0x14);
       }
-      *(uint *)(instSlot + 0x14) = uVar1 & 0x9fffffff | 0x10;
-      uVar1 = uVar1 & 0x9e001fff | 0x1248010;
-      *(uint *)(instSlot + 0x1c) = uVar1;
-      *(uint *)(instSlot + 0x18) = uVar1;
+      *(uint *)(instSlot + 0x14) = swizzleWord & 0x9fffffff | 0x10;
+      swizzleWord = swizzleWord & 0x9e001fff | 0x1248010;
+      *(uint *)(instSlot + 0x1c) = swizzleWord;
+      *(uint *)(instSlot + 0x18) = swizzleWord;
       return 2;
     }
     if (extvsOperandDataTypeResult == 0x87c0) {
-      iVar6 = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
-      instCount = *(int *)(iVar6 + 0x18);
+      hwProgramLocal = **(int **)(*(int *)(((unsigned char *)0x0000118c) + ctx) * 4 + *shader);
+      instCount = *(int *)(hwProgramLocal + 0x18);
       if (0x100 < instCount + 7U) {
         *(undefined1 *)(shader + 4) = 0;
-        instCount = *(int *)(iVar6 + 0x18);
-        if (*(uint *)(iVar6 + 0x20) < instCount + 7U) {
-          newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(iVar6 + 0x20) * 0x10 + 0x100);
+        instCount = *(int *)(hwProgramLocal + 0x18);
+        if (*(uint *)(hwProgramLocal + 0x20) < instCount + 7U) {
+          newInstArray = (**(code **)(ctx + 0xc))(*(uint *)(hwProgramLocal + 0x20) * 0x10 + 0x100);
           (**(code **)(((unsigned char *)0x00001344) + ctx))
-                    (newInstArray,*(undefined4 *)(iVar6 + 0x1c),*(int *)(iVar6 + 0x20) << 4);
-          (**(code **)(ctx + 0x18))(*(undefined4 *)(iVar6 + 0x1c));
-          *(undefined4 *)(iVar6 + 0x1c) = newInstArray;
-          instCount = *(int *)(iVar6 + 0x18);
-          *(int *)(iVar6 + 0x20) = *(int *)(iVar6 + 0x20) + 0x10;
+                    (newInstArray,*(undefined4 *)(hwProgramLocal + 0x1c),*(int *)(hwProgramLocal + 0x20) << 4);
+          (**(code **)(ctx + 0x18))(*(undefined4 *)(hwProgramLocal + 0x1c));
+          *(undefined4 *)(hwProgramLocal + 0x1c) = newInstArray;
+          instCount = *(int *)(hwProgramLocal + 0x18);
+          *(int *)(hwProgramLocal + 0x20) = *(int *)(hwProgramLocal + 0x20) + 0x10;
         }
       }
-      iVar6 = instCount * 0x10 + *(int *)(iVar6 + 0x1c);
+      instSlotSeq = instCount * 0x10 + *(int *)(hwProgramLocal + 0x1c);
       src1Operand = instRecord + 0x3c;
       tempIndex = ((int (*)())extvsAllocTempSlot)(ctx,shader);
       tmpOperand0Kind = 3;
@@ -2567,13 +2580,13 @@ int extvsEmitIndex(ctx, shader, instRecord)
       tmpOperand0Comp3 = 0;
       tmpOperand0Flag = 0;
       tmpOperand0Index = tempIndex;
-      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,&tmpOperand0Kind,iVar6,1,0,0);
-      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,instRecord + 0x20,iVar6 + 4,0);
-      uVar1 = *(uint *)(iVar6 + 4) & 0xfe001fff | 0x16da000;
-      *(uint *)(iVar6 + 4) = uVar1;
-      *(uint *)(iVar6 + 0xc) = uVar1;
-      *(uint *)(iVar6 + 8) = uVar1;
-      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,&tmpOperand0Kind,iVar6 + 0x10,2,0,0);
+      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,&tmpOperand0Kind,instSlotSeq,1,0,0);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,instRecord + 0x20,instSlotSeq + 4,0);
+      swizzleWord = *(uint *)(instSlotSeq + 4) & 0xfe001fff | 0x16da000;
+      *(uint *)(instSlotSeq + 4) = swizzleWord;
+      *(uint *)(instSlotSeq + 0xc) = swizzleWord;
+      *(uint *)(instSlotSeq + 8) = swizzleWord;
+      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,&tmpOperand0Kind,instSlotSeq + 0x10,2,0,0);
       tmpOperand1Kind = 3;
       tmpOperand1Flag = 0;
       tmpOperand1Comp3 = 0x87d5;
@@ -2581,9 +2594,9 @@ int extvsEmitIndex(ctx, shader, instRecord)
       tmpOperand1Comp1 = 0x87d5;
       tmpOperand1Comp2 = 0x87d5;
       tmpOperand1Index = tempIndex;
-      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,&tmpOperand1Kind,iVar6 + 0x14,0);
-      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,instRecord + 0x20,iVar6 + 0x18,0);
-      *(undefined4 *)(iVar6 + 0x1c) = *(undefined4 *)(iVar6 + 0x18);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,&tmpOperand1Kind,instSlotSeq + 0x14,0);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,instRecord + 0x20,instSlotSeq + 0x18,0);
+      *(undefined4 *)(instSlotSeq + 0x1c) = *(undefined4 *)(instSlotSeq + 0x18);
       tmpOperand0Kind = 5;
       tmpOperand0Comp0 = 1;
       tmpOperand0Index = 0;
@@ -2591,42 +2604,42 @@ int extvsEmitIndex(ctx, shader, instRecord)
       tmpOperand0Comp2 = 0;
       tmpOperand0Comp3 = 0;
       tmpOperand0Flag = 0;
-      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,&tmpOperand0Kind,iVar6 + 0x20,0xd,0,0);
-      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,&tmpOperand1Kind,iVar6 + 0x24,0);
-      *(undefined4 *)(iVar6 + 0x2c) = *(undefined4 *)(iVar6 + 0x24);
-      *(undefined4 *)(iVar6 + 0x28) = *(undefined4 *)(iVar6 + 0x24);
-      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,dstOperand,iVar6 + 0x30,3,0,0);
-      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src1Operand,iVar6 + 0x34,0);
-      uVar1 = *(uint *)(iVar6 + 0x34);
-      if ((uVar1 & 7) != 2) {
+      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,&tmpOperand0Kind,instSlotSeq + 0x20,0xd,0,0);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,&tmpOperand1Kind,instSlotSeq + 0x24,0);
+      *(undefined4 *)(instSlotSeq + 0x2c) = *(undefined4 *)(instSlotSeq + 0x24);
+      *(undefined4 *)(instSlotSeq + 0x28) = *(undefined4 *)(instSlotSeq + 0x24);
+      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,dstOperand,instSlotSeq + 0x30,3,0,0);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src1Operand,instSlotSeq + 0x34,0);
+      swizzleWord = *(uint *)(instSlotSeq + 0x34);
+      if ((swizzleWord & 7) != 2) {
         *(undefined1 *)(shader + 4) = 0;
-        uVar1 = *(uint *)(iVar6 + 0x34);
+        swizzleWord = *(uint *)(instSlotSeq + 0x34);
       }
-      *(uint *)(iVar6 + 0x34) = uVar1 & 0x9fffffff | 0x10;
-      uVar1 = uVar1 & 0x9e001fff | 0x1248010;
-      *(uint *)(iVar6 + 0x3c) = uVar1;
-      *(uint *)(iVar6 + 0x38) = uVar1;
-      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,dstOperand,iVar6 + 0x40,3,0,1);
-      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src1Operand,iVar6 + 0x44,1);
-      uVar1 = *(uint *)(iVar6 + 0x44);
-      *(uint *)(iVar6 + 0x44) = uVar1 & 0x9fffffff | 0x10;
-      uVar1 = uVar1 & 0x9e001fff | 0x1248010;
-      *(uint *)(iVar6 + 0x4c) = uVar1;
-      *(uint *)(iVar6 + 0x48) = uVar1;
-      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,dstOperand,iVar6 + 0x50,3,0,2);
-      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src1Operand,iVar6 + 0x54,2);
-      uVar1 = *(uint *)(iVar6 + 0x54);
-      *(uint *)(iVar6 + 0x54) = uVar1 & 0x9fffffff | 0x10;
-      uVar1 = uVar1 & 0x9e001fff | 0x1248010;
-      *(uint *)(iVar6 + 0x5c) = uVar1;
-      *(uint *)(iVar6 + 0x58) = uVar1;
-      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,dstOperand,iVar6 + 0x60,3,0,3);
-      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src1Operand,iVar6 + 100,3);
-      uVar1 = *(uint *)(iVar6 + 100);
-      *(uint *)(iVar6 + 100) = uVar1 & 0x9fffffff | 0x10;
-      uVar1 = uVar1 & 0x9e001fff | 0x1248010;
-      *(uint *)(iVar6 + 0x6c) = uVar1;
-      *(uint *)(iVar6 + 0x68) = uVar1;
+      *(uint *)(instSlotSeq + 0x34) = swizzleWord & 0x9fffffff | 0x10;
+      swizzleWord = swizzleWord & 0x9e001fff | 0x1248010;
+      *(uint *)(instSlotSeq + 0x3c) = swizzleWord;
+      *(uint *)(instSlotSeq + 0x38) = swizzleWord;
+      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,dstOperand,instSlotSeq + 0x40,3,0,1);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src1Operand,instSlotSeq + 0x44,1);
+      swizzleWord = *(uint *)(instSlotSeq + 0x44);
+      *(uint *)(instSlotSeq + 0x44) = swizzleWord & 0x9fffffff | 0x10;
+      swizzleWord = swizzleWord & 0x9e001fff | 0x1248010;
+      *(uint *)(instSlotSeq + 0x4c) = swizzleWord;
+      *(uint *)(instSlotSeq + 0x48) = swizzleWord;
+      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,dstOperand,instSlotSeq + 0x50,3,0,2);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src1Operand,instSlotSeq + 0x54,2);
+      swizzleWord = *(uint *)(instSlotSeq + 0x54);
+      *(uint *)(instSlotSeq + 0x54) = swizzleWord & 0x9fffffff | 0x10;
+      swizzleWord = swizzleWord & 0x9e001fff | 0x1248010;
+      *(uint *)(instSlotSeq + 0x5c) = swizzleWord;
+      *(uint *)(instSlotSeq + 0x58) = swizzleWord;
+      ((int (*)())extvsEncodeSourceOperand)(ctx,shader,dstOperand,instSlotSeq + 0x60,3,0,3);
+      ((int (*)())extvsEncodeSourceSwizzle)(shader,symbolList,src1Operand,instSlotSeq + 100,3);
+      swizzleWord = *(uint *)(instSlotSeq + 100);
+      *(uint *)(instSlotSeq + 100) = swizzleWord & 0x9fffffff | 0x10;
+      swizzleWord = swizzleWord & 0x9e001fff | 0x1248010;
+      *(uint *)(instSlotSeq + 0x6c) = swizzleWord;
+      *(uint *)(instSlotSeq + 0x68) = swizzleWord;
       return 7;
     }
   }
