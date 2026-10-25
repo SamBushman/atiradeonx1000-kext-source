@@ -204,7 +204,7 @@
 0x1bac0	gld_emitFramebufferState	904	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
 0x1be50	dxt5EncodeAlphaBlock	868	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x1c1c0	dxt1DecodeColorIndex	416	yes	
-0x1c380	FUN_0001c380	3664	yes	
+0x1c380	dxtCompressImage	3664	yes	
 0x1d1e0	dxtDecompressImage	1376	yes	
 0x1d7c0	floatToHalfBits	148	yes	
 0x1d880	gld_validateVertexArrayStreams	704	yes	
@@ -329,7 +329,7 @@
 0x32100	gldTextureMakeResident	8252	yes	
 0x341a0	FUN_000341a0	92	yes	
 0x34200	glGenerateMipmap_impl	4472	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock); indirect call (driver context / vtable / callback)
-0x353a0	FUN_000353a0	5656	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock); indirect call (driver context / vtable / callback)
+0x353a0	glCopyTexSubImage_impl	5656	no	calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock); indirect call (driver context / vtable / callback)
 0x369f0	glTexSubImage_impl	9972	no	atomic / cache / barrier instruction; calls an import (glgConvertType); calls an import (glgProcessPixels)
 0x39100	gld_testRendererAvailable	188	yes	
 0x391d0	gldRendererFamilyString	28	yes	
