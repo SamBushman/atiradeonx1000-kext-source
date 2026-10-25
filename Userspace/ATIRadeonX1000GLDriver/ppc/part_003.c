@@ -5544,7 +5544,7 @@ LAB_000225e8:
     }
     if ((uVar26 & 0x10000000) != *(uint *)(ctx + GLD_lastDirtyBit28) ||
         (uVar26 != 0 || ((dirtyWord2 != 0 || (dirtyWord0 != 0 || dirtyWord1 != 0)) || dirtyWord4 != 0))) {
-      FUN_0002c230(ctx + GLD_commandStream,dirtyBits);
+      gld_validateStreamState(ctx + GLD_commandStream,dirtyBits);
       framebufferObj = r4Out5;
     }
     puVar7 = PTR_FUN_001e8980;

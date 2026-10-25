@@ -265,7 +265,7 @@
 0x26f80	FUN_00026f80	460	no	calls an import (io_connect_method_scalarI_scalarO)
 0x27150	gld_drawArraysStream	564	yes	
 0x273a0	gld_reserveDrawSpace	1484	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x27990	FUN_00027990	2360	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x27990	gld_buildVertexStreamCache	2360	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x28350	gld_readPixelsViaBlit	3820	no	atomic / cache / barrier instruction; calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x29290	glReadPixels_entry	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x29294	glReadPixels_impl	2376	no	calls an import (glgConvertType); calls an import (glgProcessPixels); calls an import (io_connect_method_structureI_structureO)
@@ -288,7 +288,7 @@
 0x2c020	gld_revalidateStreamProgram	148	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x2c0c0	gld_emitVapStreamControl	180	yes	
 0x2c180	gld_emitStreamAddressRegisters	164	yes	
-0x2c230	FUN_0002c230	1144	no	calls an import (io_connect_method_scalarI_structureI); indirect call (driver context / vtable / callback)
+0x2c230	gld_validateStreamState	1144	no	calls an import (io_connect_method_scalarI_structureI); indirect call (driver context / vtable / callback)
 0x2c6c0	FUN_0002c6c0	184	no	calls an import (exit)
 0x2c790	gld_initContextHardwareState	932	no	calls an import (io_connect_method_scalarI_scalarO); calls an import (malloc)
 0x2cb40	gldContextFreeResources	200	no	calls an import (free); calls an import (vfree)
@@ -306,7 +306,7 @@
 0x2f410	window_mode_to_ati_format	148	yes	
 0x2f4d0	gldTextureFormatCodeMatchesType	708	yes	
 0x2f7c0	gldTextureFormatCodeFromFormatType	716	yes	
-0x2fac0	FUN_0002fac0	2252	yes	
+0x2fac0	gld_selectTextureHardwareFormat	2252	yes	
 0x303d0	gldCompressedImageBytes	68	yes	
 0x30420	FUN_00030420	392	yes	
 0x305b0	FUN_000305b0	492	yes	

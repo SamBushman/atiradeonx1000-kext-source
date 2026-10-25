@@ -1,3 +1,4 @@
 # GLDriver parts 000-005: names that could not be split (fork q01)
 
 * `dxt1DecodeColorIndex` (0x1c1c0): `uVar2/uVar3/uVar5/uVar6` carry red0/green0/red1/green1 in the 4-colour branch and a different assignment in the 3-colour branch; `iVar4` is blue0, then the blue interpolation numerator, then `texelIndex*3`. Every split tried (per-branch names, a 3-way iVar4 split, a two-way iVar9 split) is rejected by the compile gate (`ADDRESS-TAKEN split ... 24`, `MERGE slot 24 stands for 28 and 24`, DATAFLOW): the 32-byte `endpointRgb` stack array is addressed relative to its neighbours. Only the single-role variables are named; the five hybrids keep their Ghidra names.
+* `gld_buildVertexStreamCache` (0x27990): `pairIndexOrFormatIndex` is one C variable that first holds streamIndex >> 1 and later the per-attribute format index; `bVar1`, `bVar2`, `uVar33`, `iVar14`, `iVar10` are likewise reused for several roles (flags, running sums, pointers) and stay unnamed.
