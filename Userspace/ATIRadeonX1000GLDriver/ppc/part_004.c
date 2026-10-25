@@ -1453,7 +1453,7 @@ int FUN_000269a0(arg0, arg1, arg2, arg3)
   piVar1 = arg3;
   _pthread_mutex_lock(*(undefined4 *)(arg0 + 0xc));
   if (((arg1 != (int *)0x0) && (*arg1 != 0)) && (*(int *)(*arg1 + 4) != 0)) {
-    FUN_0000a820(arg0,0xffff,uVar3,piVar1,staleArgR7,staleArgR8);
+    gld_resolveBoundTextures(arg0,0xffff,uVar3,piVar1,staleArgR7,staleArgR8);
     FUN_000a7ee0(arg0,0xffff);
     ((int (*)())FUN_00026650)(arg0,arg1);
     psVar2 = (short *)*arg1;
@@ -2695,7 +2695,7 @@ LAB_000284b0:
   lastHeader = &rowBytes;
   widthArg = width;
   heightArg = height;
-  FUN_0000a6e0(ctx,format,pixelType,width,height,lastHeader,auStack_104,packOffsets,
+  gld_computePixelStoreLayout(ctx,format,pixelType,width,height,lastHeader,auStack_104,packOffsets,
                ((unsigned char *)0x00002e50) + *(int *)(ctx + GLD_engineState));
   dstAddress = pixels + packOffsets[0];
   if ((int)width < 1) {
@@ -2857,7 +2857,7 @@ LAB_000284b0:
   } while (!(bool)(bVar42 >> 1 & 1));
   packet[2] = *surfaceObject;
   packet[3] = dstAddress - *(int *)*surfaceInfo;
-  readSurfaceCode = FUN_0000a2f0((uint)*(ushort *)(((unsigned char *)0x00002db8) + *(int *)(ctx + GLD_engineState)),
+  readSurfaceCode = gld_textureVariantClass((uint)*(ushort *)(((unsigned char *)0x00002db8) + *(int *)(ctx + GLD_engineState)),
                         *(undefined4 *)(ctx + GLD_renderFlags));
   packet[4] = readSurfaceCode;
   _memcpy(packet + 5,PTR_DAT_001e88d0,0x2f4);
@@ -3251,7 +3251,7 @@ int glReadPixels_entry(ctx, rectX, rectY, width, height, format, pixelType, pixe
   uStack_88 = 0;
   transferMode8 = transferMode & 0xff;
   engineState = *(int *)(ctx + GLD_engineState);
-  readSurfaceCode = FUN_0000a2f0((uint)*(ushort *)(((unsigned char *)0x00002db8) + engineState),*(undefined4 *)(ctx + GLD_renderFlags));
+  readSurfaceCode = gld_textureVariantClass((uint)*(ushort *)(((unsigned char *)0x00002db8) + engineState),*(undefined4 *)(ctx + GLD_renderFlags));
   if (((((*(uint *)(((unsigned char *)0x000030b0) + engineState) & 0x1ff) == 0) &&
        ((*(uint *)(((unsigned char *)0x000030b4) + engineState) & 0xff0000) == 0)) || (format - 0x1901U < 2)) ||
      (transferMode8 == 2)) {
@@ -3284,7 +3284,7 @@ LAB_000293b0:
     puVar13 = &uStack_e8;
     piVar20 = &iStack_e4;
     iVar17 = height;
-    FUN_0000a6e0(ctx,format,pixelType,width - iVar6,height,puVar13,piVar20,aiStack_e0,packStateArg);
+    gld_computePixelStoreLayout(ctx,format,pixelType,width - iVar6,height,puVar13,piVar20,aiStack_e0,packStateArg);
     dstAddress = pixels + aiStack_e0[0];
     if (rectY < 0) {
       height = height + rectY;
@@ -3650,7 +3650,7 @@ int glReadPixels_impl(ctx, rectX, rectY, width, height, format, pixelType, pixel
   uStack_88 = 0;
   flags = transferMode & 0xff;
   ctxState = *(int *)(ctx + GLD_engineState);
-  readSurfaceCode = (dword *)FUN_0000a2f0((uint)*(ushort *)(((unsigned char *)0x00002db8) + ctxState),
+  readSurfaceCode = (dword *)gld_textureVariantClass((uint)*(ushort *)(((unsigned char *)0x00002db8) + ctxState),
                                  *(undefined4 *)(ctx + GLD_renderFlags));
   if (((((*(uint *)(((unsigned char *)0x000030b0) + ctxState) & 0x1ff) == 0) &&
        ((*(uint *)(((unsigned char *)0x000030b4) + ctxState) & 0xff0000) == 0)) || (format - 0x1901U < 2)) ||
@@ -3684,7 +3684,7 @@ LAB_000293b0:
     a5 = &uStack_e8;
     piVar24 = &iStack_e4;
     savedHeight = height;
-    FUN_0000a6e0(ctx,format,pixelType,width - iVar6,height,a5,piVar24,aiStack_e0,packStateArg);
+    gld_computePixelStoreLayout(ctx,format,pixelType,width - iVar6,height,a5,piVar24,aiStack_e0,packStateArg);
     dstOffsetAddress = pixels + aiStack_e0[0];
     if (rectY < 0) {
       height = height + rectY;
@@ -4544,7 +4544,7 @@ LAB_0002a520:
   else {
     unpackState = (undefined *)0x0;
   }
-  FUN_0000a6e0(ctx,format,pixelType,width,height,&local_108,auStack_104,local_100,unpackState);
+  gld_computePixelStoreLayout(ctx,format,pixelType,width,height,&local_108,auStack_104,local_100,unpackState);
   surfaceBase = *(int *)*surfaceInfo;
   dstAddress = pixels + local_100[0];
   if (((((int)local_108 < 0x1001) && ((int)height < 0x1001)) &&
@@ -5990,7 +5990,7 @@ int gld_initContextHardwareState(ctx, pixelFormat)
   FUN_00020b00(ctx);
   *(undefined4 *)(ctx + 0x2a64) = *(undefined4 *)(pixelFormat + 0x30);
   if (*(char *)(ctx + 0x2a6a) == '\0') {
-    FUN_00017b20(ctx);
+    gld_postDisplayNotification(ctx);
   }
   *(undefined1 *)(ctx + 0x2a43) = 1;
   *(undefined1 *)(ctx + 0x2a5e) = 1;

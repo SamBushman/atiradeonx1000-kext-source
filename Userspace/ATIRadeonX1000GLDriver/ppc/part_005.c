@@ -4902,7 +4902,7 @@ LAB_00035740:
     _pthread_mutex_unlock(*(undefined4 *)(ctx + 0xc));
     return 0;
   }
-  iVar33 = FUN_0000a2f0((uint)*(ushort *)(((unsigned char *)0x00002db8) + *(int *)(ctx + 0x10)),
+  iVar33 = gld_textureVariantClass((uint)*(ushort *)(((unsigned char *)0x00002db8) + *(int *)(ctx + 0x10)),
                         *(undefined4 *)(ctx + 0x154));
   bVar12 = *(short *)(iVar47 + 2) != 0x1902;
   if ((!bVar12) &&
@@ -6022,7 +6022,7 @@ LAB_00037c6c:
                 procChannelSize = uStack_230;
                 procWidth = width;
                 puStack_10c = puStack_22c;
-                FUN_0000a6e0(ctx,pixelFormat,pixelType,width,height,puStack_bc,puStack_c4,
+                gld_computePixelStoreLayout(ctx,pixelFormat,pixelType,width,height,puStack_bc,puStack_c4,
                              piStack_c8,unpackState);
                 srcRowBytesCopy = srcRowBytes;
                 puStack_23c = (uint *)(pixels + srcSkipBytes + rowsDone * srcRowBytes);
@@ -6684,7 +6684,7 @@ LAB_00038698:
               piVar36 = piStack_c8;
               puVar38 = puStack_c4;
               procPitch = rowPitchB;
-              FUN_0000a6e0(ctx,pixelFormat,pixelType,width,height,puStack_bc,piStack_c8,
+              gld_computePixelStoreLayout(ctx,pixelFormat,pixelType,width,height,puStack_bc,piStack_c8,
                            puStack_c4,unpackState);
               puVar33 = puStack_b8;
               _glgConvertType(pixelFormat,pixelType,puStack_b8,puStack_b4,uVar44,puVar37,piVar36,puVar38
@@ -6735,7 +6735,7 @@ LAB_00037930:
     return 0;
   }
   sizeOutPtr = &uStack_248;
-  FUN_0000a6e0(ctx,pixelFormat,pixelType,width,height,sizeOutPtr,&srcBytesPerPixel,&srcSkipBytes,
+  gld_computePixelStoreLayout(ctx,pixelFormat,pixelType,width,height,sizeOutPtr,&srcBytesPerPixel,&srcSkipBytes,
                ((unsigned char *)0x00002e6c) + *(int *)(ctx + GLD_engineState));
   sourceBase = *(int *)*sourceSurface;
   srcData = pixels + srcSkipBytes;

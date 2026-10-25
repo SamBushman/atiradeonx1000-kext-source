@@ -1513,11 +1513,11 @@ int _gldGetTextureLevelInfo(ctx, texture, face, level, pname, valueOut)
   
   FUN_00030f60(ctx,texture,face,level,&infoComponents);
   if ((**(ushort **)(texture + 0x30) & 0x100) != 0) {
-    residentSize = FUN_0000a9f0(ctx,texture);
+    residentSize = gld_textureMemoryBytes(ctx,texture);
     boundSlotCursor = ctx;
     do {
       if (*(int *)(boundSlotCursor + 0x18c) != 0) {
-        boundTextureSize = FUN_0000a9f0(ctx,*(int *)(boundSlotCursor + 0x18c));
+        boundTextureSize = gld_textureMemoryBytes(ctx,*(int *)(boundSlotCursor + 0x18c));
         residentSize = residentSize + boundTextureSize;
       }
       boundSlotCursor = boundSlotCursor + 4;

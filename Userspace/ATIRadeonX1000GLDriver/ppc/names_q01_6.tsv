@@ -33,7 +33,7 @@ local	gld_fillCapsBlock	in_r8	staleArgR8	INFERRED	Ghidra pseudo-register: in_r8 
 local	FUN_00017ee0	in_r6	staleArgR6	INFERRED	Ghidra pseudo-register: in_r6 (a register the function reads without having written it; no source-level role)
 local	FUN_00017ee0	in_r7	staleArgR7	INFERRED	Ghidra pseudo-register: in_r7 (a register the function reads without having written it; no source-level role)
 local	FUN_00017ee0	in_r8	staleArgR8	INFERRED	Ghidra pseudo-register: in_r8 (a register the function reads without having written it; no source-level role)
-local	FUN_00017ee0	in_r9	staleArgR9	INFERRED	Ghidra pseudo-register: in_r9 (a register the function reads without having written it; no source-level role)
+local	FUN_00017ee0	in_r9	scanIndex	INFERRED	Ghidra pseudo-register: in_r9 (a register the function reads without having written it; no source-level role)
 local	FUN_00017ee0	in_r10	staleArgR10	INFERRED	Ghidra pseudo-register: in_r10 (a register the function reads without having written it; no source-level role)
 local	glCopyPixels_impl	in_r10	staleArgR10	INFERRED	Ghidra pseudo-register: in_r10 (a register the function reads without having written it; no source-level role)
 local	glDrawPixels_impl	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register: extraout_r4 (a register the function reads without having written it; no source-level role)

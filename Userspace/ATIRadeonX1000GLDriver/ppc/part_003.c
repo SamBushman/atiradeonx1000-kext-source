@@ -4619,7 +4619,7 @@ int gldDisplayNotificationCallback(param_1, param_2, param_3, param_4, param_5, 
         if (((iVar9 != 0) && (iVar9 = _CFNumberGetValue(iVar9,3,&iStack_60), iVar9 != 0)) &&
            (iStack_60 != 0)) {
           _puts("\nATI R300 GL Driver Notification Callback");
-          FUN_00017ee0(param_2);
+          gld_printApplicationPath(param_2);
         }
         iVar9 = _CFDictionaryGetValue(param_5,iVar1);
         value2 = _CFDictionaryGetValue(param_5,iVar2);
