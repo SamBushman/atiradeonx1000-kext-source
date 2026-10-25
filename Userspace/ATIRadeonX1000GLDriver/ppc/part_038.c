@@ -741,37 +741,37 @@ int FUN_0012740c(param_1)
 }
 
 /* FUN_00127470 @ 0x127470 (196 bytes) */
-int FUN_00127470(param_1)
-  int param_1;
+int FUN_00127470(owner)
+  int owner;
 {
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
-  uint *puVar4;
+  uint bucketCount;
+  int bucketChain;
+  uint bucketArray;
+  uint *hashTable;
   uint loopIndex;
   
-  ((int (*)())FUN_0012740c)(param_1);
-  puVar4 = *(uint **)(param_1 + 4);
-  if (puVar4 != (uint *)0x0) {
-    uVar1 = *puVar4;
-    if (uVar1 == 0) {
-      uVar3 = puVar4[2];
+  ((int (*)())FUN_0012740c)(owner);
+  hashTable = *(uint **)(owner + 4);
+  if (hashTable != (uint *)0x0) {
+    bucketCount = *hashTable;
+    if (bucketCount == 0) {
+      bucketArray = hashTable[2];
     }
     else {
-      uVar3 = puVar4[2];
+      bucketArray = hashTable[2];
       loopIndex = 0;
       do {
-        iVar2 = *(int *)(loopIndex * 4 + uVar3);
-        if (iVar2 != 0) {
-          Arena__free(puVar4[5],iVar2);
-          uVar1 = *puVar4;
-          uVar3 = puVar4[2];
+        bucketChain = *(int *)(loopIndex * 4 + bucketArray);
+        if (bucketChain != 0) {
+          Arena__free(hashTable[5],bucketChain);
+          bucketCount = *hashTable;
+          bucketArray = hashTable[2];
         }
         loopIndex = loopIndex + 1;
-      } while (loopIndex < uVar1);
+      } while (loopIndex < bucketCount);
     }
-    Arena__free(puVar4[5],uVar3);
-    Arena__free(puVar4[-1],puVar4 + -1);
+    Arena__free(hashTable[5],bucketArray);
+    Arena__free(hashTable[-1],hashTable + -1);
     return;
   }
   return;
@@ -947,37 +947,37 @@ int FUN_00127850(param_1)
 #undef local_28
 
 /* FUN_001278d0 @ 0x1278d0 (196 bytes) */
-int FUN_001278d0(param_1)
-  int param_1;
+int FUN_001278d0(owner)
+  int owner;
 {
-  uint uVar1;
-  int iVar2;
-  uint uVar3;
-  uint *puVar4;
+  uint bucketCount;
+  int bucketChain;
+  uint bucketArray;
+  uint *hashTable;
   uint loopIndex;
   
-  ((int (*)())FUN_0012740c)(param_1);
-  puVar4 = *(uint **)(param_1 + 4);
-  if (puVar4 != (uint *)0x0) {
-    uVar1 = *puVar4;
-    if (uVar1 == 0) {
-      uVar3 = puVar4[2];
+  ((int (*)())FUN_0012740c)(owner);
+  hashTable = *(uint **)(owner + 4);
+  if (hashTable != (uint *)0x0) {
+    bucketCount = *hashTable;
+    if (bucketCount == 0) {
+      bucketArray = hashTable[2];
     }
     else {
-      uVar3 = puVar4[2];
+      bucketArray = hashTable[2];
       loopIndex = 0;
       do {
-        iVar2 = *(int *)(loopIndex * 4 + uVar3);
-        if (iVar2 != 0) {
-          Arena__free(puVar4[5],iVar2);
-          uVar1 = *puVar4;
-          uVar3 = puVar4[2];
+        bucketChain = *(int *)(loopIndex * 4 + bucketArray);
+        if (bucketChain != 0) {
+          Arena__free(hashTable[5],bucketChain);
+          bucketCount = *hashTable;
+          bucketArray = hashTable[2];
         }
         loopIndex = loopIndex + 1;
-      } while (loopIndex < uVar1);
+      } while (loopIndex < bucketCount);
     }
-    Arena__free(puVar4[5],uVar3);
-    Arena__free(puVar4[-1],puVar4 + -1);
+    Arena__free(hashTable[5],bucketArray);
+    Arena__free(hashTable[-1],hashTable + -1);
     return;
   }
   return;

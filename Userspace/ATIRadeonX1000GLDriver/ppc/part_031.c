@@ -1219,29 +1219,29 @@ int HwLimits__vslot20_createInstWithOwner(this, owner, compiler)
 }
 
 /* FUN_0010dd54 @ 0x10dd54 (120 bytes) */
-int FUN_0010dd54(param_1)
-  int param_1;
+int FUN_0010dd54(hwLimits)
+  int hwLimits;
 {
-  undefined *puVar1;
-  undefined *puVar2;
-  undefined *puVar3;
-  int iVar4;
+  undefined *defaultDataA;
+  undefined *defaultFunction;
+  undefined *defaultDataB;
+  int limitsBlock;
   
-  iVar4 = *(int *)(param_1 + 0xc);
-  *(undefined4 *)(iVar4 + 0xc78) = 0;
-  *(undefined4 *)(iVar4 + 0x2a0) = 0;
-  puVar3 = PTR_DAT_001e8c84;
-  puVar2 = PTR_FUN_001e8c7c;
-  puVar1 = PTR_DAT_001e8c78;
-  *(undefined4 *)(iVar4 + 0xc60) = 0x4c;
-  *(undefined **)(iVar4 + 0xd08) = puVar1;
-  *(undefined **)(iVar4 + 0xc9c) = puVar3;
-  *(undefined4 *)(iVar4 + 0xc70) = 4;
-  *(undefined **)(iVar4 + 0xc74) = puVar2;
-  *(undefined4 *)(iVar4 + 0x288) = 0x4d;
-  *(undefined4 *)(iVar4 + 0x298) = 4;
-  *(undefined **)(iVar4 + 0x29c) = puVar2;
-  *(undefined **)(*(int *)(param_1 + 0xc) + 0xe28) = puVar3;
+  limitsBlock = *(int *)(hwLimits + 0xc);
+  *(undefined4 *)(limitsBlock + 0xc78) = 0;
+  *(undefined4 *)(limitsBlock + 0x2a0) = 0;
+  defaultDataB = PTR_DAT_001e8c84;
+  defaultFunction = PTR_FUN_001e8c7c;
+  defaultDataA = PTR_DAT_001e8c78;
+  *(undefined4 *)(limitsBlock + 0xc60) = 0x4c;
+  *(undefined **)(limitsBlock + 0xd08) = defaultDataA;
+  *(undefined **)(limitsBlock + 0xc9c) = defaultDataB;
+  *(undefined4 *)(limitsBlock + 0xc70) = 4;
+  *(undefined **)(limitsBlock + 0xc74) = defaultFunction;
+  *(undefined4 *)(limitsBlock + 0x288) = 0x4d;
+  *(undefined4 *)(limitsBlock + 0x298) = 4;
+  *(undefined **)(limitsBlock + 0x29c) = defaultFunction;
+  *(undefined **)(*(int *)(hwLimits + 0xc) + 0xe28) = defaultDataB;
   return;
 }
 
@@ -1496,28 +1496,28 @@ int FUN_0010e368(regKind)
 }
 
 /* FUN_0010e3b4 @ 0x10e3b4 (88 bytes) */
-int FUN_0010e3b4(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_0010e3b4(valueTable, position)
+  int valueTable;
+  int position;
 {
-  int *piVar1;
-  int iVar2;
-  int iVar3;
+  int *nextEntryRef;
+  int foundIndex;
+  int searchedValue;
   
-  if (0 < param_2) {
-    iVar2 = 0;
-    iVar3 = *(int *)(param_2 * 4 + param_1 + 4);
-    if (iVar3 == *(int *)(param_1 + 4)) {
-      return iVar2;
+  if (0 < position) {
+    foundIndex = 0;
+    searchedValue = *(int *)(position * 4 + valueTable + 4);
+    if (searchedValue == *(int *)(valueTable + 4)) {
+      return foundIndex;
     }
     while( true ) {
-      iVar2 = iVar2 + 1;
-      param_2 = param_2 + -1;
-      if (param_2 == 0) break;
-      piVar1 = (int *)(param_1 + 8);
-      param_1 = param_1 + 4;
-      if (iVar3 == *piVar1) {
-        return iVar2;
+      foundIndex = foundIndex + 1;
+      position = position + -1;
+      if (position == 0) break;
+      nextEntryRef = (int *)(valueTable + 8);
+      valueTable = valueTable + 4;
+      if (searchedValue == *nextEntryRef) {
+        return foundIndex;
       }
     }
   }
@@ -1785,30 +1785,30 @@ int FUN_0010e8c4(param_1, param_2)
 }
 
 /* FUN_0010e8e4 @ 0x10e8e4 (120 bytes) */
-int FUN_0010e8e4(param_1, param_2)
-  undefined4 *param_1;
-  undefined4 *param_2;
+int FUN_0010e8e4(packEntry, sourceLaneCursor)
+  undefined4 *packEntry;
+  undefined4 *sourceLaneCursor;
 {
   int operandRecord;
-  bool bVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 *puVar4;
+  bool moreLanes;
+  int laneCount;
+  int laneIndex;
+  undefined4 *laneSlotCursor;
   
-  iVar3 = 0;
-  puVar4 = param_1;
+  laneIndex = 0;
+  laneSlotCursor = packEntry;
   do {
-    operandRecord = IRInst__getOperandRecord(*param_1,0);
-    if (*(char *)(iVar3 + operandRecord + 0x10) != '\x01') {
-      iVar2 = param_1[5];
-      puVar4[1] = *param_2;
-      param_1[5] = iVar2 + 1;
+    operandRecord = IRInst__getOperandRecord(*packEntry,0);
+    if (*(char *)(laneIndex + operandRecord + 0x10) != '\x01') {
+      laneCount = packEntry[5];
+      laneSlotCursor[1] = *sourceLaneCursor;
+      packEntry[5] = laneCount + 1;
     }
-    bVar1 = iVar3 != 3;
-    param_2 = param_2 + 1;
-    puVar4 = puVar4 + 1;
-    iVar3 = iVar3 + 1;
-  } while (bVar1);
+    moreLanes = laneIndex != 3;
+    sourceLaneCursor = sourceLaneCursor + 1;
+    laneSlotCursor = laneSlotCursor + 1;
+    laneIndex = laneIndex + 1;
+  } while (moreLanes);
   return;
 }
 

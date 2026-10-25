@@ -1986,46 +1986,52 @@ int IfHeader__swapArms(program, ifHeader)
 }
 
 /* FUN_0012ac58 @ 0x12ac58 (452 bytes) */
-int FUN_0012ac58(param_1, block)
-  int param_1;
+int FUN_0012ac58(targetLoop, block)
+  int targetLoop;
   int *block;
 {
+  int successorQuery20;
+  int successorQuery28;
+  int currentQuery38;
+  int successorQuery2c;
+  int successorQuery24;
+  int footerQuery2c;
   int *predecessor;
-  int *a0;
-  int iVar1;
+  int *successor;
+  int successorLoopInfo;
   int *piVar2;
   
   piVar2 = (int *)block[0x4b];
   while( true ) {
     while( true ) {
       while( true ) {
-        a0 = (int *)Block__getSuccessor(block,0);
-        iVar1 = (**(code **)(*a0 + 0x10))(a0);
-        if ((iVar1 != 0) && (*(int *)(iVar1 + 300) == param_1)) {
-          iVar1 = (**(code **)(*piVar2 + 0x2c))(piVar2);
-          predecessor = (int *)Block__getPredecessor(piVar2,(uint)(iVar1 != 0));
+        successor = (int *)Block__getSuccessor(block,0);
+        successorLoopInfo = (**(code **)(*successor + 0x10))(successor);
+        if ((successorLoopInfo != 0) && (*(int *)(successorLoopInfo + 300) == targetLoop)) {
+          footerQuery2c = (**(code **)(*piVar2 + 0x2c))(piVar2);
+          predecessor = (int *)Block__getPredecessor(piVar2,(uint)(footerQuery2c != 0));
           return predecessor;
         }
-        iVar1 = (**(code **)(*a0 + 0x24))(a0);
-        if (iVar1 == 0) break;
-        block = (int *)a0[0x4f];
+        successorQuery24 = (**(code **)(*successor + 0x24))(successor);
+        if (successorQuery24 == 0) break;
+        block = (int *)successor[0x4f];
       }
-      iVar1 = (**(code **)(*a0 + 0x2c))(a0);
-      if (iVar1 == 0) break;
-      block = (int *)a0[0x55];
+      successorQuery2c = (**(code **)(*successor + 0x2c))(successor);
+      if (successorQuery2c == 0) break;
+      block = (int *)successor[0x55];
     }
-    iVar1 = (**(code **)(*block + 0x38))(block);
-    if ((iVar1 != 0) || (iVar1 = (**(code **)(*block + 0x3c))(block), iVar1 != 0)) break;
-    iVar1 = (**(code **)(*a0 + 0x28))(a0);
-    if ((iVar1 == 0) && (iVar1 = (**(code **)(*a0 + 0x30))(a0), iVar1 == 0)) {
-      iVar1 = (**(code **)(*a0 + 0x20))(a0);
-      if (iVar1 == 0) {
+    currentQuery38 = (**(code **)(*block + 0x38))(block);
+    if ((currentQuery38 != 0) || (currentQuery38 = (**(code **)(*block + 0x3c))(block), currentQuery38 != 0)) break;
+    successorQuery28 = (**(code **)(*successor + 0x28))(successor);
+    if ((successorQuery28 == 0) && (successorQuery28 = (**(code **)(*successor + 0x30))(successor), successorQuery28 == 0)) {
+      successorQuery20 = (**(code **)(*successor + 0x20))(successor);
+      if (successorQuery20 == 0) {
         block = (int *)Block__getSuccessor(block,0);
       }
     }
     else {
-      piVar2 = (int *)a0[0x4b];
-      block = a0;
+      piVar2 = (int *)successor[0x4b];
+      block = successor;
     }
   }
   return block;
