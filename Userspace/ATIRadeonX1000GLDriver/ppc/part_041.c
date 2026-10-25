@@ -3986,188 +3986,198 @@ int FUN_00137694(param_1, param_2)
 }
 
 /* FUN_001378e8 @ 0x1378e8 (1420 bytes) */
-int FUN_001378e8(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_001378e8(regInfoOwner, pass)
+  int regInfoOwner;
+  int pass;
 {
+  uint regInfoCount;
+  int operandNumberB;
+  int useWeight;
+  int operandNumberA;
+  int instQuery40;
+  uint sourceRegister;
+  uint destRegister;
+  int *regInfoRef;
+  int *inst;
+  int loopDepthWeight;
   int sourceDef;
   int *operandVReg;
-  int *piVar1;
-  uint uVar2;
-  int iVar3;
-  uint uVar4;
-  int *piVar5;
+  int *nextInstLink;
+  uint instFlags;
+  int copySource;
+  uint clearedFlags;
+  int *operandCursor;
   int iVar6;
-  int iVar7;
-  int iVar8;
-  int *piVar9;
-  uint *puVar10;
+  int nextBlock;
+  int block;
+  int *instListHead;
+  uint *regInfoVector;
   
-  iVar8 = *(int *)(*(int *)(param_2 + 0x6c4) + 900);
-  iVar7 = *(int *)(iVar8 + 8);
+  block = *(int *)(*(int *)(pass + 0x6c4) + 900);
+  nextBlock = *(int *)(block + 8);
   do {
-    if (iVar7 == 0) {
+    if (nextBlock == 0) {
       return;
     }
-    piVar1 = (int *)(*(int **)(iVar8 + 0xa0))[1];
-    piVar9 = *(int **)(iVar8 + 0xa0);
-    if (piVar1 != (int *)0x0) {
+    nextInstLink = (int *)(*(int **)(block + 0xa0))[1];
+    instListHead = *(int **)(block + 0xa0);
+    if (nextInstLink != (int *)0x0) {
       do {
-        piVar5 = piVar1;
-        if (((piVar9 == *(int **)(iVar8 + 0x98)) || ((piVar5[5] & 4U) == 0)) &&
-           (iVar7 = *(int *)(iVar8 + 0xb8), piVar9 != (int *)0x0)) {
-          piVar1 = piVar9;
+        operandCursor = nextInstLink;
+        if (((instListHead == *(int **)(block + 0x98)) || ((operandCursor[5] & 4U) == 0)) &&
+           (loopDepthWeight = *(int *)(block + 0xb8), instListHead != (int *)0x0)) {
+          inst = instListHead;
           do {
-            uVar2 = piVar1[5];
-            if ((uVar2 & 1) != 0) {
-              iVar3 = (**(code **)(*piVar1 + 0x7c))(piVar1);
-              if (iVar3 == 0) {
-                if (((piVar1[0x20] != 0) && (iVar3 = RegKind__flagBit0(piVar1[0x26]), iVar3 != 0)) &&
-                   (((piVar1[5] & 2U) == 0 &&
-                    (iVar3 = (**(code **)(*piVar1 + 0x50))(piVar1), iVar3 == 0)))) {
-                  uVar2 = piVar1[0x25];
-                  iVar3 = (**(code **)(*piVar1 + 0x40))(piVar1);
-                  if ((iVar3 == 0) && (iVar3 = (**(code **)(*piVar1 + 0x28))(piVar1), iVar3 == 0)) {
-                    piVar1[5] = piVar1[5] | 0x20000000;
-                    piVar5 = piVar1;
-                    for (iVar3 = 1; iVar6 = (**(code **)(*piVar1 + 0x14))(piVar1), iVar3 <= iVar6;
-                        iVar3 = iVar3 + 1) {
-                      if ((iVar3 < 1) || (iVar6 = IRInst__getOperandSource(piVar1,iVar3), iVar6 == 0)) {
-                        iVar6 = piVar5[0x2c];
+            instFlags = inst[5];
+            if ((instFlags & 1) != 0) {
+              copySource = (**(code **)(*inst + 0x7c))(inst);
+              if (copySource == 0) {
+                if (((inst[0x20] != 0) && (copySource = RegKind__flagBit0(inst[0x26]), copySource != 0)) &&
+                   (((inst[5] & 2U) == 0 &&
+                    (copySource = (**(code **)(*inst + 0x50))(inst), copySource == 0)))) {
+                  destRegister = inst[0x25];
+                  instQuery40 = (**(code **)(*inst + 0x40))(inst);
+                  if ((instQuery40 == 0) && (instQuery40 = (**(code **)(*inst + 0x28))(inst), instQuery40 == 0)) {
+                    inst[5] = inst[5] | 0x20000000;
+                    operandCursor = inst;
+                    for (operandNumberA = 1; iVar6 = (**(code **)(*inst + 0x14))(inst), operandNumberA <= iVar6;
+                        operandNumberA = operandNumberA + 1) {
+                      if ((operandNumberA < 1) || (iVar6 = IRInst__getOperandSource(inst,operandNumberA), iVar6 == 0)) {
+                        iVar6 = operandCursor[0x2c];
                       }
                       else {
-                        sourceDef = IRInst__getOperandSource(piVar1,iVar3);
+                        sourceDef = IRInst__getOperandSource(inst,operandNumberA);
                         iVar6 = *(int *)(sourceDef + 0x98);
                       }
                       iVar6 = RegKind__flagBit6(iVar6);
                       if (iVar6 == 0) {
 LAB_00137af8:
-                        uVar4 = piVar1[5] & 0xdfffffff;
-                        piVar1[5] = uVar4;
+                        clearedFlags = inst[5] & 0xdfffffff;
+                        inst[5] = clearedFlags;
                         goto LAB_00137b2c;
                       }
-                      IRInst__getOperandRecord(piVar1,iVar3);
-                      piVar5 = piVar5 + 6;
-                      iVar6 = IRInst__operandKindClass(piVar1,iVar3);
+                      IRInst__getOperandRecord(inst,operandNumberA);
+                      operandCursor = operandCursor + 6;
+                      iVar6 = IRInst__operandKindClass(inst,operandNumberA);
                       if (iVar6 != 0) goto LAB_00137af8;
                     }
-                    uVar4 = piVar1[5];
+                    clearedFlags = inst[5];
                   }
                   else {
-                    puVar10 = *(uint **)(param_1 + 4);
-                    if (uVar2 < *puVar10) {
-                      uVar4 = puVar10[1];
-                      if (uVar4 <= uVar2) {
-                        _memset(uVar4 * 4 + puVar10[2],0,(uVar2 - uVar4) * 4 + 4);
-                        puVar10[1] = uVar2 + 1;
+                    regInfoVector = *(uint **)(regInfoOwner + 4);
+                    if (destRegister < *regInfoVector) {
+                      regInfoCount = regInfoVector[1];
+                      if (regInfoCount <= destRegister) {
+                        _memset(regInfoCount * 4 + regInfoVector[2],0,(destRegister - regInfoCount) * 4 + 4);
+                        regInfoVector[1] = destRegister + 1;
                       }
-                      piVar5 = (int *)(uVar2 * 4 + puVar10[2]);
+                      regInfoRef = (int *)(destRegister * 4 + regInfoVector[2]);
                     }
                     else {
-                      piVar5 = (int *)Vector__elementRefGrow(puVar10,uVar2);
+                      regInfoRef = (int *)Vector__elementRefGrow(regInfoVector,destRegister);
                     }
-                    *(undefined4 *)(*piVar5 + 0x20) = 0;
-                    uVar4 = piVar1[5];
+                    *(undefined4 *)(*regInfoRef + 0x20) = 0;
+                    clearedFlags = inst[5];
                   }
 LAB_00137b2c:
-                  if ((uVar4 & 0x20000000) != 0) {
-                    puVar10 = *(uint **)(param_1 + 4);
-                    if (uVar2 < *puVar10) {
-                      uVar4 = puVar10[1];
-                      if (uVar4 <= uVar2) {
-                        _memset(uVar4 * 4 + puVar10[2],0,(uVar2 - uVar4) * 4 + 4);
-                        puVar10[1] = uVar2 + 1;
+                  if ((clearedFlags & 0x20000000) != 0) {
+                    regInfoVector = *(uint **)(regInfoOwner + 4);
+                    if (destRegister < *regInfoVector) {
+                      regInfoCount = regInfoVector[1];
+                      if (regInfoCount <= destRegister) {
+                        _memset(regInfoCount * 4 + regInfoVector[2],0,(destRegister - regInfoCount) * 4 + 4);
+                        regInfoVector[1] = destRegister + 1;
                       }
-                      piVar5 = (int *)(uVar2 * 4 + puVar10[2]);
+                      regInfoRef = (int *)(destRegister * 4 + regInfoVector[2]);
                     }
                     else {
-                      piVar5 = (int *)Vector__elementRefGrow(puVar10,uVar2);
+                      regInfoRef = (int *)Vector__elementRefGrow(regInfoVector,destRegister);
                     }
-                    *(undefined4 *)(*piVar5 + 0x20) = 1;
+                    *(undefined4 *)(*regInfoRef + 0x20) = 1;
                   }
-                  puVar10 = *(uint **)(param_1 + 4);
-                  if (uVar2 < *puVar10) {
-                    uVar4 = puVar10[1];
-                    if (uVar4 <= uVar2) {
-                      _memset(uVar4 * 4 + puVar10[2],0,(uVar2 - uVar4) * 4 + 4);
-                      puVar10[1] = uVar2 + 1;
+                  regInfoVector = *(uint **)(regInfoOwner + 4);
+                  if (destRegister < *regInfoVector) {
+                    regInfoCount = regInfoVector[1];
+                    if (regInfoCount <= destRegister) {
+                      _memset(regInfoCount * 4 + regInfoVector[2],0,(destRegister - regInfoCount) * 4 + 4);
+                      regInfoVector[1] = destRegister + 1;
                     }
-                    piVar5 = (int *)(uVar2 * 4 + puVar10[2]);
+                    regInfoRef = (int *)(destRegister * 4 + regInfoVector[2]);
                   }
                   else {
-                    piVar5 = (int *)Vector__elementRefGrow(puVar10,uVar2);
+                    regInfoRef = (int *)Vector__elementRefGrow(regInfoVector,destRegister);
                   }
-                  if (*(int *)(*piVar5 + 0x18) == 0) {
-                    iVar3 = 0;
-                    if (((piVar1[5] & 0x20000000U) == 0) &&
-                       (iVar3 = iVar7 * 100, (piVar1[5] & 0x40U) != 0)) {
-                      iVar3 = 0x7fffffff;
+                  if (*(int *)(*regInfoRef + 0x18) == 0) {
+                    useWeight = 0;
+                    if (((inst[5] & 0x20000000U) == 0) &&
+                       (useWeight = loopDepthWeight * 100, (inst[5] & 0x40U) != 0)) {
+                      useWeight = 0x7fffffff;
                     }
-                    puVar10 = *(uint **)(param_1 + 4);
-                    if (uVar2 < *puVar10) {
-                      uVar4 = puVar10[1];
-                      if (uVar4 <= uVar2) {
-                        _memset(uVar4 * 4 + puVar10[2],0,(uVar2 - uVar4) * 4 + 4);
-                        puVar10[1] = uVar2 + 1;
+                    regInfoVector = *(uint **)(regInfoOwner + 4);
+                    if (destRegister < *regInfoVector) {
+                      regInfoCount = regInfoVector[1];
+                      if (regInfoCount <= destRegister) {
+                        _memset(regInfoCount * 4 + regInfoVector[2],0,(destRegister - regInfoCount) * 4 + 4);
+                        regInfoVector[1] = destRegister + 1;
                       }
-                      piVar5 = (int *)(uVar2 * 4 + puVar10[2]);
+                      regInfoRef = (int *)(destRegister * 4 + regInfoVector[2]);
                     }
                     else {
-                      piVar5 = (int *)Vector__elementRefGrow(puVar10,uVar2);
+                      regInfoRef = (int *)Vector__elementRefGrow(regInfoVector,destRegister);
                     }
-                    *(int *)(*piVar5 + 0x1c) = iVar3 + *(int *)(*piVar5 + 0x1c);
+                    *(int *)(*regInfoRef + 0x1c) = useWeight + *(int *)(*regInfoRef + 0x1c);
                   }
                 }
-                for (iVar3 = 1; iVar6 = (**(code **)(*piVar1 + 0x14))(piVar1), iVar3 <= iVar6;
-                    iVar3 = iVar3 + 1) {
-                  operandVReg = (int *)IRInst__getOperandSource(piVar1,iVar3);
-                  uVar2 = operandVReg[0x25];
+                for (operandNumberB = 1; iVar6 = (**(code **)(*inst + 0x14))(inst), operandNumberB <= iVar6;
+                    operandNumberB = operandNumberB + 1) {
+                  operandVReg = (int *)IRInst__getOperandSource(inst,operandNumberB);
+                  sourceRegister = operandVReg[0x25];
                   if ((((operandVReg[0x20] != 0) && (iVar6 = RegKind__flagBit0(operandVReg[0x26]), iVar6 != 0)) &&
                       ((operandVReg[5] & 2U) == 0)) &&
                      (iVar6 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar6 == 0)) {
-                    puVar10 = *(uint **)(param_1 + 4);
-                    if (uVar2 < *puVar10) {
-                      uVar4 = puVar10[1];
-                      if (uVar4 <= uVar2) {
-                        _memset(uVar4 * 4 + puVar10[2],0,(uVar2 - uVar4) * 4 + 4);
-                        puVar10[1] = uVar2 + 1;
+                    regInfoVector = *(uint **)(regInfoOwner + 4);
+                    if (sourceRegister < *regInfoVector) {
+                      regInfoCount = regInfoVector[1];
+                      if (regInfoCount <= sourceRegister) {
+                        _memset(regInfoCount * 4 + regInfoVector[2],0,(sourceRegister - regInfoCount) * 4 + 4);
+                        regInfoVector[1] = sourceRegister + 1;
                       }
-                      piVar5 = (int *)(uVar2 * 4 + puVar10[2]);
+                      regInfoRef = (int *)(sourceRegister * 4 + regInfoVector[2]);
                     }
                     else {
-                      piVar5 = (int *)Vector__elementRefGrow(puVar10,uVar2);
+                      regInfoRef = (int *)Vector__elementRefGrow(regInfoVector,sourceRegister);
                     }
-                    if (*(int *)(*piVar5 + 0x18) == 0) {
-                      puVar10 = *(uint **)(param_1 + 4);
-                      if (uVar2 < *puVar10) {
-                        uVar4 = puVar10[1];
-                        if (uVar4 <= uVar2) {
-                          _memset(uVar4 * 4 + puVar10[2],0,(uVar2 - uVar4) * 4 + 4);
-                          puVar10[1] = uVar2 + 1;
+                    if (*(int *)(*regInfoRef + 0x18) == 0) {
+                      regInfoVector = *(uint **)(regInfoOwner + 4);
+                      if (sourceRegister < *regInfoVector) {
+                        regInfoCount = regInfoVector[1];
+                        if (regInfoCount <= sourceRegister) {
+                          _memset(regInfoCount * 4 + regInfoVector[2],0,(sourceRegister - regInfoCount) * 4 + 4);
+                          regInfoVector[1] = sourceRegister + 1;
                         }
-                        piVar5 = (int *)(uVar2 * 4 + puVar10[2]);
+                        regInfoRef = (int *)(sourceRegister * 4 + regInfoVector[2]);
                       }
                       else {
-                        piVar5 = (int *)Vector__elementRefGrow(puVar10,uVar2);
+                        regInfoRef = (int *)Vector__elementRefGrow(regInfoVector,sourceRegister);
                       }
-                      *(int *)(*piVar5 + 0x1c) = iVar7 + *(int *)(*piVar5 + 0x1c);
+                      *(int *)(*regInfoRef + 0x1c) = loopDepthWeight + *(int *)(*regInfoRef + 0x1c);
                     }
                   }
                 }
               }
-              uVar2 = piVar1[5];
+              instFlags = inst[5];
             }
-            piVar1 = (int *)piVar1[2];
-          } while ((piVar1 != (int *)0x0) && ((uVar2 & 4) != 0));
-          piVar5 = (int *)piVar9[1];
+            inst = (int *)inst[2];
+          } while ((inst != (int *)0x0) && ((instFlags & 4) != 0));
+          operandCursor = (int *)instListHead[1];
         }
-        piVar1 = (int *)piVar5[1];
-        piVar9 = piVar5;
-      } while ((int *)piVar5[1] != (int *)0x0);
-      iVar7 = *(int *)(iVar8 + 8);
+        nextInstLink = (int *)operandCursor[1];
+        instListHead = operandCursor;
+      } while ((int *)operandCursor[1] != (int *)0x0);
+      nextBlock = *(int *)(block + 8);
     }
-    iVar8 = iVar7;
-    iVar7 = *(int *)(iVar7 + 8);
+    block = nextBlock;
+    nextBlock = *(int *)(nextBlock + 8);
   } while( true );
 }
 
