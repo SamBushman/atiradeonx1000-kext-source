@@ -48,6 +48,8 @@ def key(rhs, var, decl):
     if m: return m.group(3), offs(m.group(2)), kind(m.group(1))
     m = PATS[3].match(r)
     if m: return m.group(2), offs(m.group(1)), 'Byte'
+    m = re.match(r'^\*(\w+)$', r)
+    if m and m.group(1) in decl: return m.group(1), '0', 'Word'
     m = re.match(r'^(\w+)\[(0x[0-9a-f]+|\d+)\]$', r)
     if m and m.group(1) in decl and decl[m.group(1)] == 4:
         return m.group(1), offs(str(int(m.group(2), 0) * 4)), 'Word'
