@@ -343,8 +343,8 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 1b4e4	1b4f0	padding	glCopyPixels_impl	3	
 1b4f4	1b500	padding	glCopyPixels_impl	3	
 1b508	1b510	padding	glCopyPixels_impl	2	
-1b818	1b898	table	FUN_0001b510	32	
-1b8a4	1b8b0	padding	FUN_0001b510	3	
+1b818	1b898	table	gld_validateFramebuffer	32	
+1b8a4	1b8b0	padding	gld_validateFramebuffer	3	
 1bab4	1bac0	padding	glCopyPixels_impl	3	
 1bc4c	1bc50	padding	gld_emitFramebufferState	1	
 1be4c	1be50	padding	glCopyPixels_impl	1	

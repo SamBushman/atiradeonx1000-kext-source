@@ -200,7 +200,7 @@
 0x1b4b0	gld_updateYInvertedFlag	44	yes	
 0x1b4f0	noop_1b4f0	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1b500	returnOne_1b500	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1b510	FUN_0001b510	1304	yes	
+0x1b510	gld_validateFramebuffer	1304	yes	
 0x1bac0	gld_emitFramebufferState	904	no	atomic / cache / barrier instruction; indirect call (driver context / vtable / callback)
 0x1be50	dxt5EncodeAlphaBlock	868	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x1c1c0	dxt1DecodeColorIndex	416	yes	

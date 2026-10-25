@@ -199,7 +199,7 @@
 0x1b4b0	44	gld_updateYInvertedFlag	part_003	converted
 0x1b4f0	4	noop_1b4f0	part_003	converted
 0x1b500	8	returnOne_1b500	part_003	converted
-0x1b510	1304	FUN_0001b510	part_003	converted
+0x1b510	1304	gld_validateFramebuffer	part_003	converted
 0x1bac0	904	gld_emitFramebufferState	part_003	converted
 0x1be50	868	dxt5EncodeAlphaBlock	part_003	converted
 0x1c1c0	416	dxt1DecodeColorIndex	part_003	converted

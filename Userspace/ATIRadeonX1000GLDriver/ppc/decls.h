@@ -406,7 +406,7 @@ extern int _gldAllocVertexBuffer();
 extern int gld_updateYInvertedFlag();
 extern int noop_1b4f0();
 extern int returnOne_1b500();
-extern int FUN_0001b510();
+extern int gld_validateFramebuffer();
 extern int gld_emitFramebufferState();
 extern int dxt5EncodeAlphaBlock();
 extern int dxt1DecodeColorIndex();

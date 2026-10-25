@@ -1010,155 +1010,166 @@ int returnOne_1b500()
   return 1;
 }
 
-/* FUN_0001b510 @ 0x1b510 (1304 bytes) */
-int FUN_0001b510(param_1, param_2, param_3, param_4, param_5, param_6)
-  int param_1;
-  int *param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
-  undefined4 param_6;
+/* gld_validateFramebuffer @ 0x1b510 (1304 bytes) */
+int gld_validateFramebuffer(ctx, framebufferObj, staleArgR5, staleArgR6, staleArgR7, staleArgR8)
+  int ctx;
+  int *framebufferObj;
+  undefined4 staleArgR5;
+  undefined4 staleArgR6;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
 {
+  uint texelsPerRow;
+  uint colorModeBits;
+  uint formatBits;
+  int slotIndex;
+  int attachmentTexture;
+  int surfaceOffset;
+  int descOffset;
+  int scanLeft;
+  int attachLeft;
+  int depthTexture;
+  int colorTexture;
+  int clearLeft;
+  int *attachments;
   int gldTextureMakeResidentResult;
   int loopIndex;
-  bool bVar1;
-  byte bVar2;
-  char cVar3;
-  undefined *puVar4;
-  uint uVar5;
-  int iVar6;
-  int *piVar7;
-  uint uVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int *piVar12;
-  int *piVar13;
-  int *piVar14;
-  uint uVar15;
-  int iVar16;
-  int iVar17;
+  bool moreSlots;
+  byte formatIndex;
+  char depthFormat;
+  undefined *colorFormatTable;
+  int levelIndex;
+  int *attachCursor;
+  uint modeBitsTmp;
+  int levelDesc;
+  int attachment;
+  int descBlock;
+  int *fbWordCursor;
+  int *attachmentTexture2;
+  int *clearCursor;
+  uint modeBitsHigh;
+  int stencilTexture;
   
-  *(undefined4 *)(param_2[1] + 0x18) = 0;
-  iVar17 = 6;
-  piVar14 = param_2;
+  *(undefined4 *)(framebufferObj[1] + 0x18) = 0;
+  clearLeft = 6;
+  clearCursor = framebufferObj;
   do {
-    piVar14[0x13] = 0;
-    piVar14 = piVar14 + 1;
-    iVar17 = iVar17 + -1;
-  } while (iVar17 != 0);
-  *(undefined1 *)((int)param_2 + 0x11) = 0;
-  *(undefined1 *)((int)param_2 + 0x12) = 0;
-  param_2[0x12] = 0;
-  param_2[5] = 0;
-  *(undefined1 *)(param_2 + 4) = 1;
-  param_2[0xc] = 0;
-  param_2[0xd] = 0;
-  param_2[0xe] = 0;
-  param_2[0xf] = 0;
-  param_2[0x10] = 0;
-  param_2[0x11] = 0;
-  piVar14 = (int *)param_2[1];
-  if ((piVar14[4] != 0) && (piVar14[5] != 0)) goto LAB_0001b730;
-  if ((*(int *)(*(int *)(param_1 + 0x14) + 0xc) < (int)(uint)*(ushort *)(*param_2 + 0x9a)) ||
-     (*(int *)(*(int *)(param_1 + 0x14) + 0x10) < (int)(uint)*(ushort *)(*param_2 + 0x9c)))
+    clearCursor[0x13] = 0;
+    clearCursor = clearCursor + 1;
+    clearLeft = clearLeft + -1;
+  } while (clearLeft != 0);
+  *(undefined1 *)((int)framebufferObj + 0x11) = 0;
+  *(undefined1 *)((int)framebufferObj + 0x12) = 0;
+  framebufferObj[0x12] = 0;
+  framebufferObj[5] = 0;
+  *(undefined1 *)(framebufferObj + 4) = 1;
+  framebufferObj[0xc] = 0;
+  framebufferObj[0xd] = 0;
+  framebufferObj[0xe] = 0;
+  framebufferObj[0xf] = 0;
+  framebufferObj[0x10] = 0;
+  framebufferObj[0x11] = 0;
+  attachments = (int *)framebufferObj[1];
+  if ((attachments[4] != 0) && (attachments[5] != 0)) goto LAB_0001b730;
+  if ((*(int *)(*(int *)(ctx + 0x14) + 0xc) < (int)(uint)*(ushort *)(*framebufferObj + 0x9a)) ||
+     (*(int *)(*(int *)(ctx + 0x14) + 0x10) < (int)(uint)*(ushort *)(*framebufferObj + 0x9c)))
   goto LAB_0001b730;
-  iVar17 = 0;
+  colorTexture = 0;
   loopIndex = 0;
   do {
-    iVar10 = piVar14[loopIndex];
-    if (iVar10 != 0) {
+    attachment = attachments[loopIndex];
+    if (attachment != 0) {
       if (loopIndex < 4) {
-        iVar17 = iVar10;
+        colorTexture = attachment;
       }
-      gldTextureMakeResidentResult = gldTextureMakeResident(param_1,iVar10,param_3,param_4,param_5,param_6);
+      gldTextureMakeResidentResult = gldTextureMakeResident(ctx,attachment,staleArgR5,staleArgR6,staleArgR7,staleArgR8);
       if (gldTextureMakeResidentResult == 0) {
-        piVar14 = (int *)param_2[1];
+        attachments = (int *)framebufferObj[1];
         goto LAB_0001b730;
       }
-      piVar14 = (int *)param_2[1];
+      attachments = (int *)framebufferObj[1];
     }
-    puVar4 = PTR_DAT_001e88c8;
-    bVar1 = loopIndex != 5;
+    colorFormatTable = PTR_DAT_001e88c8;
+    moreSlots = loopIndex != 5;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
-  if (iVar17 == 0) {
-    param_2[9] = 0;
-    *(undefined1 *)((int)param_2 + 0x13) = 0;
-    param_2[6] = 0;
-    param_2[7] = 0;
-    param_2[8] = 0;
+  } while (moreSlots);
+  if (colorTexture == 0) {
+    framebufferObj[9] = 0;
+    *(undefined1 *)((int)framebufferObj + 0x13) = 0;
+    framebufferObj[6] = 0;
+    framebufferObj[7] = 0;
+    framebufferObj[8] = 0;
   }
   else {
-    bVar2 = *(byte *)(iVar17 + 0x38);
-    param_2[6] = *(ushort *)(PTR_DAT_001e88c8 + (uint)bVar2 * 0x24 + 0x10) & 0x3f;
-    param_2[7] = *(uint *)(puVar4 + (uint)bVar2 * 0x24 + 0x10) >> 10 & 0x3f;
-    param_2[8] = *(uint *)(puVar4 + (uint)bVar2 * 0x24 + 0x10) >> 4 & 0x3f;
-    uVar5 = *(uint *)(puVar4 + (uint)bVar2 * 0x24 + 0x10);
-    if ((((uVar5 & 0x3f0000) == 0) || ((uVar5 & 0xfc00) == 0)) || ((uVar5 & 0x3f0) == 0)) {
-      uVar5 = *(uint *)(puVar4 + (uint)bVar2 * 0x24 + 0x14);
+    formatIndex = *(byte *)(colorTexture + 0x38);
+    framebufferObj[6] = *(ushort *)(PTR_DAT_001e88c8 + (uint)formatIndex * 0x24 + 0x10) & 0x3f;
+    framebufferObj[7] = *(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x10) >> 10 & 0x3f;
+    framebufferObj[8] = *(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x10) >> 4 & 0x3f;
+    formatBits = *(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x10);
+    if ((((formatBits & 0x3f0000) == 0) || ((formatBits & 0xfc00) == 0)) || ((formatBits & 0x3f0) == 0)) {
+      formatBits = *(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x14);
 LAB_0001b6ac:
-      param_2[9] = uVar5 >> 0x1a;
+      framebufferObj[9] = formatBits >> 0x1a;
     }
     else {
-      uVar5 = *(uint *)(puVar4 + (uint)bVar2 * 0x24 + 0x14);
-      if ((uVar5 >> 0x1a == 0) || (*(short *)(*(int *)(iVar17 + 0x30) + 2) != 0x1907))
+      formatBits = *(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x14);
+      if ((formatBits >> 0x1a == 0) || (*(short *)(*(int *)(colorTexture + 0x30) + 2) != 0x1907))
       goto LAB_0001b6ac;
-      param_2[9] = 0;
+      framebufferObj[9] = 0;
     }
-    *(byte *)((int)param_2 + 0x13) =
-         (byte)(*(uint *)(puVar4 + (uint)bVar2 * 0x24 + 0x20) >> 0x17) & 1;
-    if ((*(uint *)(puVar4 + (uint)bVar2 * 0x24 + 0x18) & 0x10000) == 0) goto LAB_0001b730;
+    *(byte *)((int)framebufferObj + 0x13) =
+         (byte)(*(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x20) >> 0x17) & 1;
+    if ((*(uint *)(colorFormatTable + (uint)formatIndex * 0x24 + 0x18) & 0x10000) == 0) goto LAB_0001b730;
   }
-  iVar17 = piVar14[4];
-  if (iVar17 == 0) {
-    param_2[10] = 0;
+  depthTexture = attachments[4];
+  if (depthTexture == 0) {
+    framebufferObj[10] = 0;
   }
   else {
-    param_2[10] = *(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(iVar17 + 0x38) * 0x24 + 0x14) >> 8 &
+    framebufferObj[10] = *(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(depthTexture + 0x38) * 0x24 + 0x14) >> 8 &
                   0x3f;
-    if ((*(char *)(iVar17 + 0x38) != '\x10') && (*(char *)(iVar17 + 0x38) != ')'))
+    if ((*(char *)(depthTexture + 0x38) != '\x10') && (*(char *)(depthTexture + 0x38) != ')'))
     goto LAB_0001b730;
   }
-  iVar16 = piVar14[5];
-  if (iVar16 == 0) {
-    param_2[0xb] = 0;
+  stencilTexture = attachments[5];
+  if (stencilTexture == 0) {
+    framebufferObj[0xb] = 0;
   }
   else {
-    param_2[0xb] = *(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(iVar16 + 0x38) * 0x24 + 0x14) >> 4 &
+    framebufferObj[0xb] = *(uint *)(PTR_DAT_001e88c8 + (uint)*(byte *)(stencilTexture + 0x38) * 0x24 + 0x14) >> 4 &
                    0xf;
-    if ((*(char *)(iVar16 + 0x38) != ')') || ((iVar17 != 0 && (iVar17 != iVar16)))) {
+    if ((*(char *)(stencilTexture + 0x38) != ')') || ((depthTexture != 0 && (depthTexture != stencilTexture)))) {
 LAB_0001b730:
-      piVar14[7] = 1;
+      attachments[7] = 1;
       return 0;
     }
   }
-  iVar17 = 6;
-  piVar7 = piVar14;
-  piVar12 = param_2;
+  attachLeft = 6;
+  attachCursor = attachments;
+  fbWordCursor = framebufferObj;
   do {
-    iVar16 = *piVar7;
-    piVar7 = piVar7 + 1;
-    if (iVar16 != 0) {
-      piVar12[0x13] = *(int *)(iVar16 + 0x34);
+    attachmentTexture = *attachCursor;
+    attachCursor = attachCursor + 1;
+    if (attachmentTexture != 0) {
+      fbWordCursor[0x13] = *(int *)(attachmentTexture + 0x34);
     }
-    puVar4 = PTR_DAT_001e88c8;
-    piVar12 = piVar12 + 1;
-    iVar17 = iVar17 + -1;
-  } while (iVar17 != 0);
-  iVar17 = 4;
-  piVar7 = piVar14;
+    colorFormatTable = PTR_DAT_001e88c8;
+    fbWordCursor = fbWordCursor + 1;
+    attachLeft = attachLeft + -1;
+  } while (attachLeft != 0);
+  scanLeft = 4;
+  attachCursor = attachments;
   do {
-    if (*piVar7 != 0) {
-      switch(*(undefined1 *)(*piVar7 + 0x38)) {
+    if (*attachCursor != 0) {
+      switch(*(undefined1 *)(*attachCursor + 0x38)) {
       case 5:
-        uVar15 = 0x4000;
-        uVar5 = 5;
+        modeBitsHigh = 0x4000;
+        colorModeBits = 5;
         break;
       case 6:
       case 7:
-        uVar15 = 0x4000;
-        uVar5 = 3;
+        modeBitsHigh = 0x4000;
+        colorModeBits = 3;
         break;
       case 8:
       case 9:
@@ -1166,107 +1177,107 @@ LAB_0001b730:
       case 0xb:
       case 0x23:
       case 0x24:
-        uVar15 = 0x4000;
-        uVar5 = 4;
+        modeBitsHigh = 0x4000;
+        colorModeBits = 4;
         break;
       default:
-        uVar15 = 0x4000;
-        uVar5 = 0;
+        modeBitsHigh = 0x4000;
+        colorModeBits = 0;
         break;
       case 0x11:
       case 0x12:
-        uVar15 = 0x4000;
-        uVar5 = 0xd;
+        modeBitsHigh = 0x4000;
+        colorModeBits = 0xd;
         break;
       case 0x17:
       case 0x18:
-        uVar15 = 0x4000;
-        uVar5 = 0xb;
+        modeBitsHigh = 0x4000;
+        colorModeBits = 0xb;
         break;
       case 0x1d:
       case 0x1e:
-        uVar15 = 0x4000;
-        uVar5 = 0xc;
+        modeBitsHigh = 0x4000;
+        colorModeBits = 0xc;
       }
       goto LAB_0001b8f4;
     }
-    piVar7 = piVar7 + 1;
-    iVar17 = iVar17 + -1;
-  } while (iVar17 != 0);
-  uVar15 = 0;
-  uVar5 = 0;
+    attachCursor = attachCursor + 1;
+    scanLeft = scanLeft + -1;
+  } while (scanLeft != 0);
+  modeBitsHigh = 0;
+  colorModeBits = 0;
 LAB_0001b8f4:
-  uVar8 = uVar5;
-  if (piVar14[4] != 0) {
-    cVar3 = *(char *)(piVar14[4] + 0x38);
-    uVar15 = uVar15 | 0x100;
-    uVar8 = uVar5 | 0x40;
-    if (cVar3 == '\x10') {
-      uVar8 = uVar5 | 0x10040;
+  modeBitsTmp = colorModeBits;
+  if (attachments[4] != 0) {
+    depthFormat = *(char *)(attachments[4] + 0x38);
+    modeBitsHigh = modeBitsHigh | 0x100;
+    modeBitsTmp = colorModeBits | 0x40;
+    if (depthFormat == '\x10') {
+      modeBitsTmp = colorModeBits | 0x10040;
     }
-    else if (cVar3 == ')') {
-      uVar8 = uVar5 | 0x20040;
-    }
-  }
-  uVar5 = uVar8;
-  if (piVar14[5] != 0) {
-    uVar15 = uVar15 | 0x400;
-    uVar5 = uVar8 | 0x80;
-    if (*(char *)(piVar14[5] + 0x38) == ')') {
-      uVar5 = uVar8 | 0x30080;
+    else if (depthFormat == ')') {
+      modeBitsTmp = colorModeBits | 0x20040;
     }
   }
-  iVar16 = 0;
-  iVar17 = 0;
-  piVar7 = piVar14;
-  piVar12 = param_2;
+  colorModeBits = modeBitsTmp;
+  if (attachments[5] != 0) {
+    modeBitsHigh = modeBitsHigh | 0x400;
+    colorModeBits = modeBitsTmp | 0x80;
+    if (*(char *)(attachments[5] + 0x38) == ')') {
+      colorModeBits = modeBitsTmp | 0x30080;
+    }
+  }
+  slotIndex = 0;
+  descOffset = 0;
+  attachCursor = attachments;
+  fbWordCursor = framebufferObj;
   do {
-    piVar13 = (int *)*piVar7;
-    piVar7 = piVar7 + 1;
-    if (piVar13 == (int *)0x0) {
-      piVar12[0x25] = 0;
-      piVar12[0x2b] = -1;
-      piVar12[0x19] = 0;
-      piVar12[0x1f] = 0;
+    attachmentTexture2 = (int *)*attachCursor;
+    attachCursor = attachCursor + 1;
+    if (attachmentTexture2 == (int *)0x0) {
+      fbWordCursor[0x25] = 0;
+      fbWordCursor[0x2b] = -1;
+      fbWordCursor[0x19] = 0;
+      fbWordCursor[0x1f] = 0;
     }
     else {
-      iVar11 = *param_2;
-      iVar9 = iVar17 + iVar11;
-      iVar10 = *(int *)(iVar9 + 8);
-      if (*(char *)(piVar13[0xd] + 0x16) == '\x06') {
-        uVar8 = (uint)*(ushort *)((int)piVar13 + 0x3e) <<
-                (*(uint *)(puVar4 + (uint)*(byte *)(piVar13 + 0xe) * 0x24 + 0x14) & 7);
-        for (; iVar10 != 0; iVar10 = iVar10 + -1) {
-          uVar8 = ((int)uVar8 >> 1) + (uint)((int)uVar8 < 0 && (uVar8 & 1) != 0);
+      descBlock = *framebufferObj;
+      levelDesc = descOffset + descBlock;
+      surfaceOffset = *(int *)(levelDesc + 8);
+      if (*(char *)(attachmentTexture2[0xd] + 0x16) == '\x06') {
+        texelsPerRow = (uint)*(ushort *)((int)attachmentTexture2 + 0x3e) <<
+                (*(uint *)(colorFormatTable + (uint)*(byte *)(attachmentTexture2 + 0xe) * 0x24 + 0x14) & 7);
+        for (; surfaceOffset != 0; surfaceOffset = surfaceOffset + -1) {
+          texelsPerRow = ((int)texelsPerRow >> 1) + (uint)((int)texelsPerRow < 0 && (texelsPerRow & 1) != 0);
         }
-        iVar10 = 0;
+        surfaceOffset = 0;
       }
       else {
-        iVar6 = *(int *)(iVar9 + 4) * 0xd + iVar10;
-        uVar8 = *(uint *)(*piVar13 + 0xc);
-        for (; iVar10 != 0; iVar10 = iVar10 + -1) {
-          uVar8 = ((int)uVar8 >> 1) + (uint)((int)uVar8 < 0 && (uVar8 & 1) != 0);
+        levelIndex = *(int *)(levelDesc + 4) * 0xd + surfaceOffset;
+        texelsPerRow = *(uint *)(*attachmentTexture2 + 0xc);
+        for (; surfaceOffset != 0; surfaceOffset = surfaceOffset + -1) {
+          texelsPerRow = ((int)texelsPerRow >> 1) + (uint)((int)texelsPerRow < 0 && (texelsPerRow & 1) != 0);
         }
-        iVar10 = *(int *)(iVar9 + 0xc) * uVar8 * (uint)*(ushort *)(iVar11 + 0x9c) +
-                 *(int *)(*piVar13 + iVar6 * 0x20 + 0x48);
+        surfaceOffset = *(int *)(levelDesc + 0xc) * texelsPerRow * (uint)*(ushort *)(descBlock + 0x9c) +
+                 *(int *)(*attachmentTexture2 + levelIndex * 0x20 + 0x48);
       }
-      iVar9 = *(int *)piVar13[0xd];
-      piVar12[0x19] = iVar10;
-      piVar12[0x1f] = uVar8;
-      piVar12[0x2b] = iVar9;
-      piVar12[0x25] = (uint)*(ushort *)(iVar11 + 0x9a);
+      levelDesc = *(int *)attachmentTexture2[0xd];
+      fbWordCursor[0x19] = surfaceOffset;
+      fbWordCursor[0x1f] = texelsPerRow;
+      fbWordCursor[0x2b] = levelDesc;
+      fbWordCursor[0x25] = (uint)*(ushort *)(descBlock + 0x9a);
     }
-    bVar1 = iVar16 != 5;
-    iVar17 = iVar17 + 0x18;
-    piVar12 = piVar12 + 1;
-    iVar16 = iVar16 + 1;
-  } while (bVar1);
-  param_2[3] = uVar5;
-  param_2[2] = uVar15;
-  piVar14[7] = 0;
-  *(undefined1 *)((int)param_2 + 0xc6) = 0;
-  *(undefined1 *)((int)param_2 + 0xc5) = 1;
-  *(undefined1 *)(param_2 + 0x31) = 0;
+    moreSlots = slotIndex != 5;
+    descOffset = descOffset + 0x18;
+    fbWordCursor = fbWordCursor + 1;
+    slotIndex = slotIndex + 1;
+  } while (moreSlots);
+  framebufferObj[3] = colorModeBits;
+  framebufferObj[2] = modeBitsHigh;
+  attachments[7] = 0;
+  *(undefined1 *)((int)framebufferObj + 0xc6) = 0;
+  *(undefined1 *)((int)framebufferObj + 0xc5) = 1;
+  *(undefined1 *)(framebufferObj + 0x31) = 0;
   return 1;
 }
 

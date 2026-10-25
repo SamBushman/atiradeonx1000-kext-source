@@ -610,7 +610,7 @@ int gld_bindCurrentFramebuffer(ctx, dispatch, dirtyBits, scratchR6, scratchR7, s
       if (*(int *)(newFramebuffer[1] + 0x1c) == 0) goto LAB_00007e28;
     }
     else {
-      validateResult = FUN_0001b510(ctx,newFramebuffer,dirtyBits,scratchR6,scratchR7,scratchR8);
+      validateResult = gld_validateFramebuffer(ctx,newFramebuffer,dirtyBits,scratchR6,scratchR7,scratchR8);
       if (validateResult != 0) goto LAB_00007e28;
     }
   }
