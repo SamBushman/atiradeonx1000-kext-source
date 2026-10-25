@@ -60,7 +60,7 @@ local	FUN_00021c70	param_5	height	INFERRED	callers pass their variable `height` 
 local	FUN_000230d0	param_3	readSurfaceCode	INFERRED	callers pass their variable `readSurfaceCode` here (2 call site(s), e.g. in glReadPixels_entry)
 local	gldEmitCurrentAttributeRegisters	param_1	ctx	INFERRED	callers pass their variable `ctx` here (38 call site(s), e.g. in gld_emitPrimitiveVertices)
 local	FUN_00023870	param_1	ctx	INFERRED	callers pass their variable `ctx` here (38 call site(s), e.g. in gld_emitPrimitiveVertices)
-local	FUN_00023870	param_2	gb_aa_config	INFERRED	callers pass their variable `gb_aa_config` here (38 call site(s), e.g. in gld_emitPrimitiveVertices)
+local	FUN_00023870	param_2	attributeMask	INFERRED	callers pass their variable `gb_aa_config` here (38 call site(s), e.g. in gld_emitPrimitiveVertices)
 local	FUN_00025da0	param_1	ctx	INFERRED	callers pass their variable `ctx` here (1 call site(s), e.g. in gldContextFreeResources)
 local	FUN_000269a0	param_1	ctx	INFERRED	callers pass their variable `arg0` here (1 call site(s), e.g. in _gldGetPipelineProgramInfo)
 local	FUN_000269a0	param_2	programObject	INFERRED	callers pass their variable `arg1` here (1 call site(s), e.g. in _gldGetPipelineProgramInfo)

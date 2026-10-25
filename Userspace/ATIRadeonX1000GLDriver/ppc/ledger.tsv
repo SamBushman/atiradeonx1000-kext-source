@@ -233,11 +233,11 @@
 0x230d0	1544	FUN_000230d0	part_003	converted
 0x236f0	8	returnSecondArgument	part_003	converted
 0x23700	360	gldEmitCurrentAttributeRegisters	part_003	converted
-0x23870	420	FUN_00023870	part_003	converted
+0x23870	420	gldEmitCurrentAttributeRegistersMasked	part_003	converted
 0x23a24	1860	gld_emitPrimitiveVertices	part_003	converted
 0x24190	344	FUN_00024190	part_003	converted
-0x242f0	116	FUN_000242f0	part_003	converted
-0x24370	112	FUN_00024370	part_003	converted
+0x242f0	116	gldPrimWrapperTriangles_23a24	part_003	converted
+0x24370	112	gldPrimWrapperTriangleStrip_23a24	part_003	converted
 0x243f0	112	gldPrimWrapperTriangleFan_23a24	part_004	converted
 0x24470	112	gldPrimWrapperQuads_23a24	part_004	converted
 0x244f0	112	gldPrimWrapperQuadStrip_23a24	part_004	converted
