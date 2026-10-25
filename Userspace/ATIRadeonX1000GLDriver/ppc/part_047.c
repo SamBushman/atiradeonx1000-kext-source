@@ -2387,23 +2387,23 @@ int FUN_0017a8a4(ctx)
   int compareCondition;
   int findInPtrSetResult;
   int operandRecord;
-  bool bVar1;
-  float fVar2;
-  bool bVar3;
-  bool bVar4;
+  bool moreLanes;
+  float foldedResult;
+  bool usedUniformConstant;
+  bool lanesAgree;
   uint *loopPtr2;
-  int iVar6;
+  int compareResultOrClass;
   undefined4 *exprRecord;
   int inst;
-  int iVar9;
+  int laneByteOffset;
   int loopIndex;
-  int *piVar11;
+  int *blockRef;
   int loopRemaining;
   int loopRemaining2;
-  uint local_58;
+  uint laneResults;
   
   loopRemaining = 4;
-  loopPtr2 = &local_58;
+  loopPtr2 = &laneResults;
   do {
     *loopPtr2 = 0x7ffffffe;
     loopPtr2 = loopPtr2 + 1;
@@ -2412,88 +2412,88 @@ int FUN_0017a8a4(ctx)
   loopRemaining = 0;
   loopRemaining2 = 4;
   do {
-    *(undefined4 *)(loopRemaining + (int)&local_58) = 0;
+    *(undefined4 *)(loopRemaining + (int)&laneResults) = 0;
     loopRemaining = loopRemaining + 4;
     loopRemaining2 = loopRemaining2 + -1;
   } while (loopRemaining2 != 0);
   loopRemaining2 = signToCompareCode(0);
-  bVar3 = false;
-  fVar2 = -1.0;
-  bVar4 = true;
+  usedUniformConstant = false;
+  foldedResult = -1.0;
+  lanesAgree = true;
   loopIndex = 0;
-  iVar9 = 0;
+  laneByteOffset = 0;
   loopRemaining = ctx;
   do {
     operandRecord = IRInst__getOperandRecord(*(undefined4 *)(ctx + 0xb0),0);
     if (*(char *)(loopIndex + operandRecord + 0x10) != '\x01') {
-      iVar6 = *(int *)(loopRemaining + 0x178);
-      if (iVar6 < 0) {
-        exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar6);
-        iVar6 = signToCompareCode(*exprRecord);
+      compareResultOrClass = *(int *)(loopRemaining + 0x178);
+      if (compareResultOrClass < 0) {
+        exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),compareResultOrClass);
+        compareResultOrClass = signToCompareCode(*exprRecord);
         inst = *(int *)(ctx + 0xb0);
       }
       else {
-        if (iVar6 < 1) {
+        if (compareResultOrClass < 1) {
           return 0;
         }
-        findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar6);
+        findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),compareResultOrClass);
         inst = *(int *)(ctx + 0xb0);
-        iVar6 = *(int *)(findInPtrSetResult + 0xc);
+        compareResultOrClass = *(int *)(findInPtrSetResult + 0xc);
         if ((*(uint *)(inst + 0xb8) & 2) != 0) {
-          iVar6 = (DAT_001e61d0)[iVar6];
+          compareResultOrClass = (DAT_001e61d0)[compareResultOrClass];
         }
-        bVar3 = true;
+        usedUniformConstant = true;
         if ((*(uint *)(inst + 0xb8) & 1) != 0) {
-          iVar6 = *(int *)(&DAT_001e61b8 + iVar6 * 4);
+          compareResultOrClass = *(int *)(&DAT_001e61b8 + compareResultOrClass * 4);
         }
       }
       compareCondition = IRInst__getCompareCondition(inst);
-      iVar6 = *(int *)(&DAT_001e61e8 + (compareCondition * 6 + iVar6 * 0x30 + loopRemaining2) * 4);
-      if (iVar6 == 1) {
-        *(undefined4 *)(iVar9 + (int)&local_58) = 0;
+      compareResultOrClass = *(int *)(&DAT_001e61e8 + (compareCondition * 6 + compareResultOrClass * 0x30 + loopRemaining2) * 4);
+      if (compareResultOrClass == 1) {
+        *(undefined4 *)(laneByteOffset + (int)&laneResults) = 0;
       }
-      else if (iVar6 == 2) {
-        *(undefined4 *)(iVar9 + (int)&local_58) = 0x3f800000;
+      else if (compareResultOrClass == 2) {
+        *(undefined4 *)(laneByteOffset + (int)&laneResults) = 0x3f800000;
       }
-      else if (iVar6 == 0) {
+      else if (compareResultOrClass == 0) {
         return 0;
       }
-      if (fVar2 == -1.0) {
-        fVar2 = *(float *)(iVar9 + (int)&local_58);
+      if (foldedResult == -1.0) {
+        foldedResult = *(float *)(laneByteOffset + (int)&laneResults);
       }
-      else if (*(float *)(iVar9 + (int)&local_58) != fVar2) {
-        bVar4 = false;
+      else if (*(float *)(laneByteOffset + (int)&laneResults) != foldedResult) {
+        lanesAgree = false;
       }
     }
-    bVar1 = loopIndex != 3;
-    iVar9 = iVar9 + 4;
+    moreLanes = loopIndex != 3;
+    laneByteOffset = laneByteOffset + 4;
     loopRemaining = loopRemaining + 4;
     loopIndex = loopIndex + 1;
-  } while (bVar1);
-  if (bVar3) {
+  } while (moreLanes);
+  if (usedUniformConstant) {
     loopRemaining = *(int *)(*(int *)(ctx + 0x238) + 0x6c4);
     *(int *)(loopRemaining + 0x134) = *(int *)(loopRemaining + 0x134) + 1;
   }
-  ((int (*)())FUN_0017a294)(ctx,&local_58,*(undefined4 *)(ctx + 0x238));
+  ((int (*)())FUN_0017a294)(ctx,&laneResults,*(undefined4 *)(ctx + 0x238));
   loopRemaining = Compiler__isOptionEnabled(*(undefined4 *)(ctx + 0x238),0xd);
-  if ((loopRemaining != 0) && (bVar4)) {
-    piVar11 = *(int **)(*(int *)(ctx + 0xb0) + 0x158);
-    loopRemaining = (**(code **)(*piVar11 + 0x24))(piVar11);
+  if ((loopRemaining != 0) && (lanesAgree)) {
+    blockRef = *(int **)(*(int *)(ctx + 0xb0) + 0x158);
+    loopRemaining = (**(code **)(*blockRef + 0x24))(blockRef);
     if (loopRemaining != 0) {
-      if (fVar2 != 0.0) {
-        loopRemaining = piVar11[0x4d];
+      if (foldedResult != 0.0) {
+        loopRemaining = blockRef[0x4d];
       }
       else {
-        loopRemaining = piVar11[0x4e];
+        loopRemaining = blockRef[0x4e];
       }
-      FUN_0012cfa4(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),piVar11,loopRemaining,piVar11[0x4f]);
-      if (fVar2 != 0.0) {
+      FUN_0012cfa4(*(undefined4 *)(*(int *)(ctx + 0x238) + 0x6c4),blockRef,loopRemaining,blockRef[0x4f]);
+      if (foldedResult != 0.0) {
         loopRemaining = 2;
       }
       else {
         loopRemaining = 1;
       }
-      piVar11[0x53] = loopRemaining;
+      blockRef[0x53] = loopRemaining;
       return 1;
     }
   }
