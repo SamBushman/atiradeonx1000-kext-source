@@ -446,7 +446,7 @@
 0x4f550	452	gldValidateScissor	part_007	converted
 0x4f720	1348	gldInitStateDefaults	part_007	converted
 0x4fc80	252	FUN_0004fc80	part_007	converted
-0x4fd80	492	FUN_0004fd80	part_007	converted
+0x4fd80	492	extvsUpdateVertexAttributeConstants	part_007	converted
 0x4ff70	416	gldValidateAlphaTest	part_007	converted
 0x50140	424	FUN_00050140	part_007	converted
 0x50300	3048	gldEmitHardwareState	part_007	converted

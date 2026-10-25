@@ -2360,83 +2360,84 @@ LAB_0004fcb4:
   return;
 }
 
-/* FUN_0004fd80 @ 0x4fd80 (492 bytes) */
-int FUN_0004fd80(glContext)
+/* extvsUpdateVertexAttributeConstants @ 0x4fd80 (492 bytes) */
+int extvsUpdateVertexAttributeConstants(glContext)
   int glContext;
 {
+  int cmdEnd;
   int glContextWord1e70;
-  bool bVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
+  bool moreAttribs;
+  uint attribX;
+  uint attribY;
+  uint attribZ;
+  uint attribW;
+  int attribVectorOffset;
   code *streamSetCurrent;
-  uint *puVar8;
+  uint *cmdBuffer;
   undefined4 in_r5;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
-  undefined *puVar13;
-  uint uVar14;
-  int iVar15;
-  int iVar16;
+  int cacheEntry;
+  int cachedAttribPtr;
+  int currentShader;
+  int shaderState;
+  undefined *attribRegister;
+  uint attribIndex;
+  int ctxCursor;
+  int attribByteOffset;
   
-  iVar12 = *(int *)(((unsigned char *)0x00001154) + glContext);
-  iVar11 = iVar12 + 0x10;
+  shaderState = *(int *)(((unsigned char *)0x00001154) + glContext);
+  currentShader = shaderState + 0x10;
   if (((unsigned char *)0x00001134)[glContext] == '\0') {
-    iVar11 = *(int *)(((unsigned char *)0x00001144) + glContext);
+    currentShader = *(int *)(((unsigned char *)0x00001144) + glContext);
   }
-  uVar14 = 0;
-  puVar13 = ((unsigned char *)0x00001300U);
-  iVar16 = 0;
-  iVar15 = glContext;
+  attribIndex = 0;
+  attribRegister = ((unsigned char *)0x00001300U);
+  attribByteOffset = 0;
+  ctxCursor = glContext;
   do {
     glContextWord1e70 = *(int *)(glContext + 0x1e70);
-    if ((((1 << (uVar14 & 0x3f) & *(uint *)(((unsigned char *)0x000010b8) + glContextWord1e70)) != 0) &&
-        (*(char *)(*(int *)(iVar11 + 0x28) + iVar16) == '\0')) &&
-       (*(char *)(iVar16 + *(int *)(iVar12 + 0xc)) != '\0')) {
-      uVar2 = *(uint *)(iVar16 + *(int *)(iVar12 + 0xc) + 4);
-      iVar6 = uVar14 * 0x10;
-      iVar10 = iVar6 + glContextWord1e70;
-      uVar3 = *(uint *)(*(int *)(iVar12 + 0xc) + iVar16 + 8);
-      uVar4 = *(uint *)(iVar16 + *(int *)(iVar12 + 0xc) + 0xc);
-      uVar5 = *(uint *)(iVar16 + *(int *)(iVar12 + 0xc) + 0x10);
-      if (((uVar2 != *(uint *)(iVar10 + 0x8c)) || (uVar3 != *(uint *)(iVar10 + 0x90))) ||
-         ((uVar4 != *(uint *)(iVar10 + 0x94) || (uVar5 != *(uint *)(iVar10 + 0x98))))) {
-        *(uint *)(iVar6 + glContextWord1e70 + 0x8c) = uVar2;
-        *(uint *)(iVar6 + *(int *)(glContext + 0x1e70) + 0x90) = uVar3;
-        iVar9 = iVar6 + *(int *)(glContext + 0x1e70);
-        *(uint *)(iVar9 + 0x94) = uVar4;
-        *(uint *)(iVar6 + *(int *)(glContext + 0x1e70) + 0x98) = uVar5;
-        *(uint *)(iVar15 + 0x1f38) = uVar2;
-        *(uint *)(iVar15 + 0x1f3c) = uVar3;
-        *(uint *)(iVar15 + 8000) = uVar4;
-        *(uint *)(iVar15 + 0x1f44) = uVar5;
-        puVar8 = (uint *)(**(code **)(glContext + 0x2758))(glContext,5,in_r5,in_r6,in_r7,in_r8,iVar9);
-        *(uint **)(0x00002748 + glContext + 4) = puVar8;
-        puVar8[4] = uVar5;
-        *puVar8 = (uint)puVar13 | 0x30000;
-        puVar8[1] = uVar2;
-        puVar8[2] = uVar3;
-        puVar8[3] = uVar4;
-        iVar9 = *(int *)(0x00002748 + glContext + 4);
+    if ((((1 << (attribIndex & 0x3f) & *(uint *)(((unsigned char *)0x000010b8) + glContextWord1e70)) != 0) &&
+        (*(char *)(*(int *)(currentShader + 0x28) + attribByteOffset) == '\0')) &&
+       (*(char *)(attribByteOffset + *(int *)(shaderState + 0xc)) != '\0')) {
+      attribX = *(uint *)(attribByteOffset + *(int *)(shaderState + 0xc) + 4);
+      attribVectorOffset = attribIndex * 0x10;
+      cachedAttribPtr = attribVectorOffset + glContextWord1e70;
+      attribY = *(uint *)(*(int *)(shaderState + 0xc) + attribByteOffset + 8);
+      attribZ = *(uint *)(attribByteOffset + *(int *)(shaderState + 0xc) + 0xc);
+      attribW = *(uint *)(attribByteOffset + *(int *)(shaderState + 0xc) + 0x10);
+      if (((attribX != *(uint *)(cachedAttribPtr + 0x8c)) || (attribY != *(uint *)(cachedAttribPtr + 0x90))) ||
+         ((attribZ != *(uint *)(cachedAttribPtr + 0x94) || (attribW != *(uint *)(cachedAttribPtr + 0x98))))) {
+        *(uint *)(attribVectorOffset + glContextWord1e70 + 0x8c) = attribX;
+        *(uint *)(attribVectorOffset + *(int *)(glContext + 0x1e70) + 0x90) = attribY;
+        cacheEntry = attribVectorOffset + *(int *)(glContext + 0x1e70);
+        *(uint *)(cacheEntry + 0x94) = attribZ;
+        *(uint *)(attribVectorOffset + *(int *)(glContext + 0x1e70) + 0x98) = attribW;
+        *(uint *)(ctxCursor + 0x1f38) = attribX;
+        *(uint *)(ctxCursor + 0x1f3c) = attribY;
+        *(uint *)(ctxCursor + 8000) = attribZ;
+        *(uint *)(ctxCursor + 0x1f44) = attribW;
+        cmdBuffer = (uint *)(**(code **)(glContext + 0x2758))(glContext,5,in_r5,in_r6,in_r7,in_r8,cacheEntry);
+        *(uint **)(0x00002748 + glContext + 4) = cmdBuffer;
+        cmdBuffer[4] = attribW;
+        *cmdBuffer = (uint)attribRegister | 0x30000;
+        cmdBuffer[1] = attribX;
+        cmdBuffer[2] = attribY;
+        cmdBuffer[3] = attribZ;
+        cmdEnd = *(int *)(0x00002748 + glContext + 4);
         streamSetCurrent = *(code **)(glContext + 0x275c);
-        *(int *)(0x00002748 + glContext + 4) = iVar9 + 0x14;
-        (*streamSetCurrent)(glContext,iVar9 + 0x14);
+        *(int *)(0x00002748 + glContext + 4) = cmdEnd + 0x14;
+        (*streamSetCurrent)(glContext,cmdEnd + 0x14);
         *(undefined4 *)(glContext + 0x1e68) = 0;
       }
     }
-    bVar1 = uVar14 != 7;
-    iVar16 = iVar16 + 0x14;
-    iVar15 = iVar15 + 0x10;
-    puVar13 = puVar13 + 4;
-    uVar14 = uVar14 + 1;
-  } while (bVar1);
+    moreAttribs = attribIndex != 7;
+    attribByteOffset = attribByteOffset + 0x14;
+    ctxCursor = ctxCursor + 0x10;
+    attribRegister = attribRegister + 4;
+    attribIndex = attribIndex + 1;
+  } while (moreAttribs);
   return;
 }
 
@@ -4899,78 +4900,82 @@ int extvsGetShaderById(param_1, param_2)
 }
 
 /* extvsBindShader @ 0x53b60 (568 bytes) */
-int extvsBindShader(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int extvsBindShader(glContext, shaderId)
+  int glContext;
+  undefined4 shaderId;
 {
-  uint uVar1;
-  int iVar2;
-  int iVar3;
-  uint uVar4;
-  uint uVar5;
-  int iVar6;
+  uint ctxFlags;
+  int boundShader;
+  int newShaderArray;
+  int shaderIndex;
+  uint shaderCount;
+  int refCount;
+  int shaderEntry;
+  uint vertexProgramEnable;
+  uint oldStateWord;
+  int shaderTable;
   
-  iVar6 = *(int *)(((unsigned char *)0x0000116c) + param_1);
-  iVar2 = *(int *)(*(int *)(((unsigned char *)0x00001168) + param_1) + 0xc);
-  if (iVar2 != 0) {
-    *(int *)(*(int *)(((unsigned char *)0x00001168) + param_1) + 0xc) = iVar2 + -1;
+  shaderTable = *(int *)(((unsigned char *)0x0000116c) + glContext);
+  refCount = *(int *)(*(int *)(((unsigned char *)0x00001168) + glContext) + 0xc);
+  if (refCount != 0) {
+    *(int *)(*(int *)(((unsigned char *)0x00001168) + glContext) + 0xc) = refCount + -1;
   }
-  if (((unsigned char *)0x00001170)[param_1] == '\0') {
-    iVar2 = ((int (*)())extvsFindShaderIndex)(iVar6,param_2);
-    if (iVar2 < 0) {
-      uVar1 = *(uint *)(iVar6 + 4);
-      if ((uVar1 & 0xf) == 0) {
-        iVar2 = (**(code **)(param_1 + 0xc))(uVar1 * 0x7c + 0x7c0);
-        if (iVar2 == 0) {
+  if (((unsigned char *)0x00001170)[glContext] == '\0') {
+    shaderIndex = ((int (*)())extvsFindShaderIndex)(shaderTable,shaderId);
+    if (shaderIndex < 0) {
+      shaderCount = *(uint *)(shaderTable + 4);
+      if ((shaderCount & 0xf) == 0) {
+        newShaderArray = (**(code **)(glContext + 0xc))(shaderCount * 0x7c + 0x7c0);
+        if (newShaderArray == 0) {
           return;
         }
-        (**(code **)(((unsigned char *)0x00001344) + param_1))
-                  (iVar2,*(undefined4 *)(iVar6 + 0xc),*(int *)(iVar6 + 4) * 0x7c);
-        (**(code **)(param_1 + 0x18))(*(undefined4 *)(iVar6 + 0xc));
-        *(int *)(iVar6 + 0xc) = iVar2;
-        extvsRefreshBoundVertexPrograms(param_1);
-        uVar1 = *(uint *)(iVar6 + 4);
+        (**(code **)(((unsigned char *)0x00001344) + glContext))
+                  (newShaderArray,*(undefined4 *)(shaderTable + 0xc),*(int *)(shaderTable + 4) * 0x7c);
+        (**(code **)(glContext + 0x18))(*(undefined4 *)(shaderTable + 0xc));
+        *(int *)(shaderTable + 0xc) = newShaderArray;
+        extvsRefreshBoundVertexPrograms(glContext);
+        shaderCount = *(uint *)(shaderTable + 4);
       }
-      extvsInitShaderObject(param_1,uVar1 * 0x7c + *(int *)(iVar6 + 0xc));
-      *(undefined4 *)(*(int *)(iVar6 + 4) * 0x7c + *(int *)(iVar6 + 0xc) + 8) = param_2;
-      *(undefined4 *)(((unsigned char *)0x00001188) + param_1) = *(undefined4 *)(iVar6 + 4);
-      *(int *)(iVar6 + 4) = *(int *)(iVar6 + 4) + 1;
-      *(undefined4 *)(((unsigned char *)0x00001184) + param_1) = 0;
-      *(undefined4 *)(((unsigned char *)0x00001174) + param_1) = 0;
-      *(undefined4 *)(((unsigned char *)0x0000117c) + param_1) = 0;
-      *(undefined4 *)(((unsigned char *)0x00001178) + param_1) = 0;
-      *(undefined4 *)(((unsigned char *)0x00001180) + param_1) = 0;
+      extvsInitShaderObject(glContext,shaderCount * 0x7c + *(int *)(shaderTable + 0xc));
+      *(undefined4 *)(*(int *)(shaderTable + 4) * 0x7c + *(int *)(shaderTable + 0xc) + 8) = shaderId;
+      *(undefined4 *)(((unsigned char *)0x00001188) + glContext) = *(undefined4 *)(shaderTable + 4);
+      *(int *)(shaderTable + 4) = *(int *)(shaderTable + 4) + 1;
+      *(undefined4 *)(((unsigned char *)0x00001184) + glContext) = 0;
+      *(undefined4 *)(((unsigned char *)0x00001174) + glContext) = 0;
+      *(undefined4 *)(((unsigned char *)0x0000117c) + glContext) = 0;
+      *(undefined4 *)(((unsigned char *)0x00001178) + glContext) = 0;
+      *(undefined4 *)(((unsigned char *)0x00001180) + glContext) = 0;
     }
     else {
-      iVar3 = *(int *)(iVar6 + 0xc);
-      *(int *)(((unsigned char *)0x00001188) + param_1) = iVar2;
-      iVar3 = iVar2 * 0x7c + iVar3;
-      *(undefined4 *)(((unsigned char *)0x00001174) + param_1) = *(undefined4 *)(iVar3 + 0x54);
-      *(undefined4 *)(((unsigned char *)0x0000117c) + param_1) = *(undefined4 *)(iVar3 + 0x58);
-      *(undefined4 *)(((unsigned char *)0x00001178) + param_1) = *(undefined4 *)(iVar3 + 0x5c);
-      *(undefined4 *)(((unsigned char *)0x00001180) + param_1) = *(undefined4 *)(iVar3 + 0x60);
-      *(undefined4 *)(((unsigned char *)0x00001184) + param_1) = *(undefined4 *)(iVar3 + 100);
+      shaderEntry = *(int *)(shaderTable + 0xc);
+      *(int *)(((unsigned char *)0x00001188) + glContext) = shaderIndex;
+      shaderEntry = shaderIndex * 0x7c + shaderEntry;
+      *(undefined4 *)(((unsigned char *)0x00001174) + glContext) = *(undefined4 *)(shaderEntry + 0x54);
+      *(undefined4 *)(((unsigned char *)0x0000117c) + glContext) = *(undefined4 *)(shaderEntry + 0x58);
+      *(undefined4 *)(((unsigned char *)0x00001178) + glContext) = *(undefined4 *)(shaderEntry + 0x5c);
+      *(undefined4 *)(((unsigned char *)0x00001180) + glContext) = *(undefined4 *)(shaderEntry + 0x60);
+      *(undefined4 *)(((unsigned char *)0x00001184) + glContext) = *(undefined4 *)(shaderEntry + 100);
     }
-    iVar2 = *(int *)(((unsigned char *)0x00001188) + param_1) * 0x7c + *(int *)(iVar6 + 0xc);
-    *(int *)(((unsigned char *)0x00001168) + param_1) = iVar2;
-    *(int *)(iVar2 + 0xc) = *(int *)(iVar2 + 0xc) + 1;
-    uVar1 = *(uint *)(param_1 + 0x44);
-    if ((uVar1 & 0x800000) != 0) {
-      uVar5 = *(uint *)(param_1 + 0x18a4);
-      if ((uVar1 & 0x100000) == 0) {
-        if ((((int)uVar1 < 0) &&
-            (*(short *)(((unsigned char *)0x00002d48) + *(int *)(*(int *)(param_1 + 4) + 0x10)) == -0x7e06)) ||
-           (uVar4 = 0, (uVar1 & 0x80800000) == 0x800000)) {
-          uVar4 = 1;
+    boundShader = *(int *)(((unsigned char *)0x00001188) + glContext) * 0x7c + *(int *)(shaderTable + 0xc);
+    *(int *)(((unsigned char *)0x00001168) + glContext) = boundShader;
+    *(int *)(boundShader + 0xc) = *(int *)(boundShader + 0xc) + 1;
+    ctxFlags = *(uint *)(glContext + 0x44);
+    if ((ctxFlags & 0x800000) != 0) {
+      oldStateWord = *(uint *)(glContext + 0x18a4);
+      if ((ctxFlags & 0x100000) == 0) {
+        if ((((int)ctxFlags < 0) &&
+            (*(short *)(((unsigned char *)0x00002d48) + *(int *)(*(int *)(glContext + 4) + 0x10)) == -0x7e06)) ||
+           (vertexProgramEnable = 0, (ctxFlags & 0x80800000) == 0x800000)) {
+          vertexProgramEnable = 1;
         }
       }
       else {
-        uVar4 = *(char *)(*(int *)(((unsigned char *)0x00001168) + param_1) + 0x6e) == '\0' ^ 1;
+        vertexProgramEnable = *(char *)(*(int *)(((unsigned char *)0x00001168) + glContext) + 0x6e) == '\0' ^ 1;
       }
-      *(uint *)(param_1 + 0x18a4) = uVar4 << 2 | uVar5 & 0xfffffffb;
-      if ((uVar5 >> 2 & 1) != uVar4) {
-        *(undefined1 *)(param_1 + 0x29) = 1;
-        *(uint *)(param_1 + 0x38) = *(uint *)(param_1 + 0x38) | 0x20;
+      *(uint *)(glContext + 0x18a4) = vertexProgramEnable << 2 | oldStateWord & 0xfffffffb;
+      if ((oldStateWord >> 2 & 1) != vertexProgramEnable) {
+        *(undefined1 *)(glContext + 0x29) = 1;
+        *(uint *)(glContext + 0x38) = *(uint *)(glContext + 0x38) | 0x20;
       }
     }
   }

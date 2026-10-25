@@ -3475,83 +3475,85 @@ int vpUploadConstantArray(param_1, param_2)
 }
 
 /* vpUploadConstantsWithFog @ 0x61eb0 (604 bytes) */
-int vpUploadConstantsWithFog(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  int param_2;
-  int param_3;
-  int param_4;
-  int param_5;
+int vpUploadConstantsWithFog(glContext, shader, programState, constantBlock, uploadAll)
+  int glContext;
+  int shader;
+  int programState;
+  int constantBlock;
+  int uploadAll;
 {
-  short sVar1;
-  code *UNRECOVERED_JUMPTABLE;
-  int iVar2;
-  undefined4 *puVar3;
-  int iVar4;
-  int iVar5;
+  int cmdEnd;
+  int glStateExt;
+  short fogMode;
+  code *commitCallback;
+  int fogConstant;
+  undefined4 *cmdBuffer;
+  int constantCount;
+  int fogSlot;
   
-  iVar4 = *(int *)(param_3 + 0x5c);
-  if (iVar4 == 0) {
+  constantCount = *(int *)(programState + 0x5c);
+  if (constantCount == 0) {
     return;
   }
-  if ((*(char *)(param_2 + 0x7a) == '\0') || ((*(uint *)(param_1 + 0x44) & 0x1000000) == 0)) {
-    if (param_5 == 0) {
+  if ((*(char *)(shader + 0x7a) == '\0') || ((*(uint *)(glContext + 0x44) & 0x1000000) == 0)) {
+    if (uploadAll == 0) {
       return;
     }
   }
   else {
-    iVar5 = *(int *)(param_3 + 0x60);
-    iVar4 = *(int *)(*(int *)(param_1 + 4) + 0x10);
-    sVar1 = *(short *)(((unsigned char *)0x00002e04) + iVar4);
-    if (sVar1 == 0x801) {
-      iVar2 = param_4 + iVar5 * 0x10;
-      *(undefined4 *)(iVar2 + 4) = 0;
-      *(float *)(iVar2 + 8) =
-           -(*(float *)(((unsigned char *)0x00002df0) + iVar4) * *(float *)(((unsigned char *)0x00002df0) + iVar4));
+    fogSlot = *(int *)(programState + 0x60);
+    glStateExt = *(int *)(*(int *)(glContext + 4) + 0x10);
+    fogMode = *(short *)(((unsigned char *)0x00002e04) + glStateExt);
+    if (fogMode == 0x801) {
+      fogConstant = constantBlock + fogSlot * 0x10;
+      *(undefined4 *)(fogConstant + 4) = 0;
+      *(float *)(fogConstant + 8) =
+           -(*(float *)(((unsigned char *)0x00002df0) + glStateExt) * *(float *)(((unsigned char *)0x00002df0) + glStateExt));
     }
-    else if (sVar1 == 0x2601) {
-      iVar2 = param_4 + iVar5 * 0x10;
-      *(float *)(iVar2 + 4) = *(float *)(((unsigned char *)0x00002df8) + iVar4) * *(float *)(((unsigned char *)0x00002dfc) + iVar4);
-      *(float *)(iVar2 + 8) = -*(float *)(((unsigned char *)0x00002dfc) + iVar4);
+    else if (fogMode == 0x2601) {
+      fogConstant = constantBlock + fogSlot * 0x10;
+      *(float *)(fogConstant + 4) = *(float *)(((unsigned char *)0x00002df8) + glStateExt) * *(float *)(((unsigned char *)0x00002dfc) + glStateExt);
+      *(float *)(fogConstant + 8) = -*(float *)(((unsigned char *)0x00002dfc) + glStateExt);
     }
-    else if (sVar1 == 0x800) {
-      iVar2 = param_4 + iVar5 * 0x10;
-      *(undefined4 *)(iVar2 + 4) = 0;
-      *(float *)(iVar2 + 8) = -*(float *)(((unsigned char *)0x00002df0) + iVar4);
+    else if (fogMode == 0x800) {
+      fogConstant = constantBlock + fogSlot * 0x10;
+      *(undefined4 *)(fogConstant + 4) = 0;
+      *(float *)(fogConstant + 8) = -*(float *)(((unsigned char *)0x00002df0) + glStateExt);
     }
-    if (param_5 == 0) {
-      puVar3 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,7);
-      *(undefined4 **)(0x00002748 + param_1 + 4) = puVar3;
-      *puVar3 = 0x880;
-      iVar4 = param_4 + iVar5 * 0x10;
-      *(int *)(*(int *)(0x00002748 + param_1 + 4) + 4) =
-           iVar5 + *(int *)(param_1 + 0x2448) + *(int *)(param_3 + 0x14);
-      *(undefined4 *)(*(int *)(0x00002748 + param_1 + 4) + 8) = 0x38882;
-      *(undefined4 *)(*(int *)(0x00002748 + param_1 + 4) + 0xc) =
-           *(undefined4 *)(param_4 + iVar5 * 0x10);
-      *(undefined4 *)(*(int *)(0x00002748 + param_1 + 4) + 0x10) = *(undefined4 *)(iVar4 + 4);
-      *(undefined4 *)(*(int *)(0x00002748 + param_1 + 4) + 0x14) = *(undefined4 *)(iVar4 + 8);
-      *(undefined4 *)(*(int *)(0x00002748 + param_1 + 4) + 0x18) = *(undefined4 *)(iVar4 + 0xc);
-      UNRECOVERED_JUMPTABLE = *(code **)(param_1 + 0x275c);
-      iVar4 = *(int *)(0x00002748 + param_1 + 4) + 0x1c;
-      *(int *)(0x00002748 + param_1 + 4) = iVar4;
+    if (uploadAll == 0) {
+      cmdBuffer = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,7);
+      *(undefined4 **)(0x00002748 + glContext + 4) = cmdBuffer;
+      *cmdBuffer = 0x880;
+      cmdEnd = constantBlock + fogSlot * 0x10;
+      *(int *)(*(int *)(0x00002748 + glContext + 4) + 4) =
+           fogSlot + *(int *)(glContext + 0x2448) + *(int *)(programState + 0x14);
+      *(undefined4 *)(*(int *)(0x00002748 + glContext + 4) + 8) = 0x38882;
+      *(undefined4 *)(*(int *)(0x00002748 + glContext + 4) + 0xc) =
+           *(undefined4 *)(constantBlock + fogSlot * 0x10);
+      *(undefined4 *)(*(int *)(0x00002748 + glContext + 4) + 0x10) = *(undefined4 *)(cmdEnd + 4);
+      *(undefined4 *)(*(int *)(0x00002748 + glContext + 4) + 0x14) = *(undefined4 *)(cmdEnd + 8);
+      *(undefined4 *)(*(int *)(0x00002748 + glContext + 4) + 0x18) = *(undefined4 *)(cmdEnd + 0xc);
+      commitCallback = *(code **)(glContext + 0x275c);
+      constantCount = *(int *)(0x00002748 + glContext + 4) + 0x1c;
+      *(int *)(0x00002748 + glContext + 4) = constantCount;
       goto LAB_000620ec;
     }
-    iVar4 = *(int *)(param_3 + 0x5c);
+    constantCount = *(int *)(programState + 0x5c);
   }
-  puVar3 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,iVar4 * 4 + 3);
-  *(undefined4 **)(0x00002748 + param_1 + 4) = puVar3;
-  *puVar3 = 0x880;
-  *(int *)(*(int *)(0x00002748 + param_1 + 4) + 4) =
-       *(int *)(param_1 + 0x2448) + *(int *)(param_3 + 0x14);
-  *(uint *)(*(int *)(0x00002748 + param_1 + 4) + 8) = (iVar4 * 4 + -1) * 0x10000 | 0x8882;
-  _memcpy(*(int *)(0x00002748 + param_1 + 4) + 0xc,param_4,iVar4 * 0x10);
-  UNRECOVERED_JUMPTABLE = *(code **)(param_1 + 0x275c);
-  iVar4 = iVar4 * 0x10 + *(int *)(0x00002748 + param_1 + 4) + 0xc;
-  *(int *)(0x00002748 + param_1 + 4) = iVar4;
+  cmdBuffer = (undefined4 *)(**(code **)(glContext + 0x2758))(glContext,constantCount * 4 + 3);
+  *(undefined4 **)(0x00002748 + glContext + 4) = cmdBuffer;
+  *cmdBuffer = 0x880;
+  *(int *)(*(int *)(0x00002748 + glContext + 4) + 4) =
+       *(int *)(glContext + 0x2448) + *(int *)(programState + 0x14);
+  *(uint *)(*(int *)(0x00002748 + glContext + 4) + 8) = (constantCount * 4 + -1) * 0x10000 | 0x8882;
+  _memcpy(*(int *)(0x00002748 + glContext + 4) + 0xc,constantBlock,constantCount * 0x10);
+  commitCallback = *(code **)(glContext + 0x275c);
+  constantCount = constantCount * 0x10 + *(int *)(0x00002748 + glContext + 4) + 0xc;
+  *(int *)(0x00002748 + glContext + 4) = constantCount;
 LAB_000620ec:
                     
                     
-  (*UNRECOVERED_JUMPTABLE)(param_1,iVar4);
+  (*commitCallback)(glContext,constantCount);
   return;
 }
 
@@ -3851,68 +3853,69 @@ int extvsStateCacheCreate(ctx, shader, slotIndex)
 }
 
 /* extvsStateCacheFreeAll @ 0x627e4 (328 bytes) */
-int extvsStateCacheFreeAll(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int param_3;
+int extvsStateCacheFreeAll(ctx, slotTablePtr, freeEverything)
+  int ctx;
+  int *slotTablePtr;
+  int freeEverything;
 {
-  int *piVar1;
-  bool bVar2;
-  uint uVar3;
-  int *piVar4;
-  int iVar5;
-  int iVar6;
-  uint uVar7;
+  int chainIndex;
+  int *nextChainHead;
+  bool moreChains;
+  uint endSlot;
+  int *chainHead;
+  int slotTable;
+  int chainEntry;
+  uint firstSlot;
   int loopIndex;
-  int iVar9;
-  int *piVar10;
+  int slotByteOffset;
+  int *slotEntry;
   
-  iVar5 = *param_2;
-  if (iVar5 != 0) {
-    if (param_3 == 0) {
-      uVar7 = *(uint *)(((unsigned char *)0x0000118c) + param_1);
-      uVar3 = uVar7 + 1;
+  slotTable = *slotTablePtr;
+  if (slotTable != 0) {
+    if (freeEverything == 0) {
+      firstSlot = *(uint *)(((unsigned char *)0x0000118c) + ctx);
+      endSlot = firstSlot + 1;
     }
     else {
-      uVar7 = 0;
-      uVar3 = *(uint *)(*(int *)(((unsigned char *)0x0000116c) + param_1) + 0x10);
+      firstSlot = 0;
+      endSlot = *(uint *)(*(int *)(((unsigned char *)0x0000116c) + ctx) + 0x10);
     }
-    if (uVar7 < uVar3) {
-      iVar9 = uVar7 << 2;
+    if (firstSlot < endSlot) {
+      slotByteOffset = firstSlot << 2;
       loopIndex = 0;
       while( true ) {
-        piVar10 = *(int **)(iVar5 + iVar9);
-        if (piVar10 != (int *)0x0) {
-          if (*(char *)(*piVar10 + 0x2b0) == '\0') {
-            ((int (*)())extvsStateFree)(param_1,*piVar10);
-            *piVar10 = 0;
+        slotEntry = *(int **)(slotTable + slotByteOffset);
+        if (slotEntry != (int *)0x0) {
+          if (*(char *)(*slotEntry + 0x2b0) == '\0') {
+            ((int (*)())extvsStateFree)(ctx,*slotEntry);
+            *slotEntry = 0;
           }
-          if (param_3 != 0) {
-            iVar5 = 0;
-            piVar4 = piVar10;
+          if (freeEverything != 0) {
+            chainIndex = 0;
+            chainHead = slotEntry;
             do {
-              piVar1 = piVar4 + 1;
-              piVar4 = piVar4 + 1;
-              iVar6 = *piVar1;
-              while (iVar6 != 0) {
-                *piVar4 = *(int *)(iVar6 + 0x2b4);
-                ((int (*)())extvsStateFree)(param_1,iVar6);
-                iVar6 = *piVar4;
+              nextChainHead = chainHead + 1;
+              chainHead = chainHead + 1;
+              chainEntry = *nextChainHead;
+              while (chainEntry != 0) {
+                *chainHead = *(int *)(chainEntry + 0x2b4);
+                ((int (*)())extvsStateFree)(ctx,chainEntry);
+                chainEntry = *chainHead;
               }
-              bVar2 = iVar5 != 0x1f;
-              iVar5 = iVar5 + 1;
-            } while (bVar2);
-            if (piVar10[0x22] != 0) {
-              (**(code **)(param_1 + 0x18))(piVar10[0x22]);
+              moreChains = chainIndex != 0x1f;
+              chainIndex = chainIndex + 1;
+            } while (moreChains);
+            if (slotEntry[0x22] != 0) {
+              (**(code **)(ctx + 0x18))(slotEntry[0x22]);
             }
-            (**(code **)(param_1 + 0x18))(piVar10);
-            *(undefined4 *)(*param_2 + iVar9) = 0;
+            (**(code **)(ctx + 0x18))(slotEntry);
+            *(undefined4 *)(*slotTablePtr + slotByteOffset) = 0;
           }
         }
         loopIndex = loopIndex + 1;
-        iVar9 = iVar9 + 4;
-        if (loopIndex == uVar3 - uVar7) break;
-        iVar5 = *param_2;
+        slotByteOffset = slotByteOffset + 4;
+        if (loopIndex == endSlot - firstSlot) break;
+        slotTable = *slotTablePtr;
       }
     }
   }

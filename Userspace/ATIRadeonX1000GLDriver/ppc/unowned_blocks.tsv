@@ -1050,7 +1050,7 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 4f994	4f9a0	padding	gldInitStateDefaults	3	
 4f9b4	4f9c0	padding	gldInitStateDefaults	3	
 4fd1c	4fd20	padding	FUN_0004fc80	1	
-4ff6c	4ff70	padding	FUN_0004fd80	1	
+4ff6c	4ff70	padding	extvsUpdateVertexAttributeConstants	1	
 4ffcc	4ffe8	table	gldValidateAlphaTest	7	
 4fff4	50000	padding	gldValidateAlphaTest	3	
 5010c	50110	padding	gldValidateAlphaTest	1	

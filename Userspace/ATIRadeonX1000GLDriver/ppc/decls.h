@@ -653,7 +653,7 @@ extern void FUN_0004f2e0(int param_1,undefined4 param_2,undefined4 param_3,undef
 extern int gldValidateScissor();
 extern int gldInitStateDefaults();
 extern int FUN_0004fc80();
-extern int FUN_0004fd80();
+extern int extvsUpdateVertexAttributeConstants();
 extern int gldValidateAlphaTest();
 extern int FUN_00050140();
 extern int gldEmitHardwareState();

@@ -447,7 +447,7 @@
 0x4f550	gldValidateScissor	452	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x4f720	gldInitStateDefaults	1348	yes	
 0x4fc80	FUN_0004fc80	252	yes	
-0x4fd80	FUN_0004fd80	492	no	indirect call (driver context / vtable / callback)
+0x4fd80	extvsUpdateVertexAttributeConstants	492	no	indirect call (driver context / vtable / callback)
 0x4ff70	gldValidateAlphaTest	416	yes	
 0x50140	FUN_00050140	424	yes	
 0x50300	gldEmitHardwareState	3048	no	indirect call (driver context / vtable / callback)
