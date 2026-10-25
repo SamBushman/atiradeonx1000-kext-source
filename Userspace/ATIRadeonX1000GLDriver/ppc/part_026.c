@@ -2180,7 +2180,7 @@ int FUN_000f85d0(param_1)
   int iVar7;
   int iVar8;
   int iVar9;
-  undefined4 arena;
+  undefined4 arenaB;
   uint uVar11;
   int *piVar12;
   
@@ -2213,9 +2213,9 @@ int FUN_000f85d0(param_1)
         }
         iVar8 = iVar8 + 4;
       }
-      arena = *(undefined4 *)(param_1[9] + 0x378);
-      allocation = (undefined4 *)Arena__alloc(arena,0xc);
-      *allocation = arena;
+      arenaB = *(undefined4 *)(param_1[9] + 0x378);
+      allocation = (undefined4 *)Arena__alloc(arenaB,0xc);
+      *allocation = arenaB;
       allocation[1] = uVar6;
       allocation[2] = 0;
       allocation[2] = *(undefined4 *)(*(int *)(iVar4 + param_1[1]) * 4 + param_1[5]);
@@ -2771,8 +2771,8 @@ int Program__appendInst(program, inst, block)
 }
 
 /* FUN_000f94dc @ 0xf94dc (968 bytes) */
-int FUN_000f94dc(compiler, list, descriptor, param_4, param_5, param_6, param_7)
-  int compiler;
+int FUN_000f94dc(program, list, descriptor, param_4, param_5, param_6, param_7)
+  int program;
   undefined4 list;
   uint *descriptor;
   undefined4 param_4;
@@ -2780,180 +2780,187 @@ int FUN_000f94dc(compiler, list, descriptor, param_4, param_5, param_6, param_7)
   undefined4 param_6;
   undefined4 param_7;
 {
+  int inputTempId;
+  undefined4 *projectionInst;
+  uint descriptorWord;
+  undefined4 mergeOperandIndex;
+  undefined4 mergeOperandCount;
+  undefined4 inputSelectWord;
+  undefined4 hwInputRegister;
   undefined4 successor;
   int operandRecord2;
   undefined4 arenaAt374;
   undefined4 *instAlloc;
   uint loopIndex;
   int loopIndex2;
-  uint uVar1;
-  undefined4 uVar2;
+  uint mergeSlotCount;
+  undefined4 registerFile;
   undefined4 *allocation;
-  int iVar4;
+  int inputVReg;
   void *inst;
   int operandRecord;
-  int *piVar7;
+  int *hwDescription;
   undefined4 *puVar8;
-  uint uVar9;
-  undefined4 *puVar10;
-  int iVar11;
-  undefined4 *puVar12;
-  int iVar13;
-  undefined4 arena;
+  uint inputRegisterCount;
+  undefined4 *secondMerge;
+  int secondMergeIndex;
+  undefined4 *mergeInst;
+  int hwRegister;
+  undefined4 arenaA;
   undefined4 local_68 [4];
   undefined4 local_58 [4];
   
-  if (*(int *)(compiler + COMP_arenaA) == 0) {
-    uVar9 = 0;
+  if (*(int *)(program + 0x374) == 0) {
+    inputRegisterCount = 0;
     switch(param_7) {
     case 0:
-      uVar9 = 1;
+      inputRegisterCount = 1;
       break;
     case 1:
-      uVar9 = 2;
+      inputRegisterCount = 2;
       break;
     case 2:
-      uVar9 = 3;
+      inputRegisterCount = 3;
       break;
     case 3:
-      uVar9 = 4;
+      inputRegisterCount = 4;
       break;
     case 4:
-      uVar9 = 6;
+      inputRegisterCount = 6;
     }
-    Block__successorCount(*(undefined4 *)(compiler + 0x3a0));
-    successor = Block__getSuccessor(*(undefined4 *)(compiler + 0x3a0),0);
-    arena = *(undefined4 *)(*(int *)(compiler + 8) + 0x374);
-    allocation = (undefined4 *)Arena__alloc(arena,0x168);
-    *allocation = arena;
-    puVar12 = allocation + 1;
-    IRMerge__ctor_109cfc(puVar12,0x83,*(undefined4 *)(compiler + 8));
-    operandRecord2 = IRInst__getOperandRecord(puVar12,0);
+    Block__successorCount(*(undefined4 *)(program + PROG_entryBlock));
+    successor = Block__getSuccessor(*(undefined4 *)(program + PROG_entryBlock),0);
+    arenaA = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaA);
+    allocation = (undefined4 *)Arena__alloc(arenaA,0x168);
+    *allocation = arenaA;
+    mergeInst = allocation + 1;
+    IRMerge__ctor_109cfc(mergeInst,0x83,*(undefined4 *)(program + PROG_compiler));
+    operandRecord2 = IRInst__getOperandRecord(mergeInst,0);
     *(undefined4 *)(operandRecord2 + 0xc) = 0x39;
     *(undefined4 *)(operandRecord2 + 8) = 0;
-    uVar1 = uVar9;
-    if (3 < uVar9) {
-      uVar1 = 3;
+    mergeSlotCount = inputRegisterCount;
+    if (3 < inputRegisterCount) {
+      mergeSlotCount = 3;
     }
-    allocation[0x22] = uVar1;
-    puVar10 = (undefined4 *)0x0;
-    if (uVar9 != 0) {
+    allocation[0x22] = mergeSlotCount;
+    secondMerge = (undefined4 *)0x0;
+    if (inputRegisterCount != 0) {
       loopIndex = 0;
       loopIndex2 = 1;
-      iVar11 = -2;
+      secondMergeIndex = -2;
       do {
-        iVar13 = loopIndex + 2;
-        inst = IRInst__create(0x31,*(undefined4 *)(compiler + 8));
-        FUN_00130478(compiler,iVar13);
+        hwRegister = loopIndex + 2;
+        inst = IRInst__create(0x31,*(undefined4 *)(program + PROG_compiler));
+        FUN_00130478(program,hwRegister);
         operandRecord = IRInst__getOperandRecord(inst,0);
-        *(int *)(operandRecord + 8) = iVar13;
+        *(int *)(operandRecord + 8) = hwRegister;
         *(undefined4 *)(operandRecord + 0xc) = 0x10;
         *(undefined4 *)((int)inst + 0x9c) = 0x10101;
-        Program__markHwRegUsed(compiler,iVar13);
-        FUN_00130bd4(compiler,iVar13);
-        piVar7 = *(int **)(*(int *)(compiler + 8) + 0x30c);
-        arena = (**(code **)(*piVar7 + 0x9c))(piVar7,loopIndex,*(int *)(compiler + 8));
+        Program__markHwRegUsed(program,hwRegister);
+        FUN_00130bd4(program,hwRegister);
+        hwDescription = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
+        hwInputRegister = (**(code **)(*hwDescription + 0x9c))(hwDescription,loopIndex,*(int *)(program + PROG_compiler));
         operandRecord = IRInst__getOperandRecord(inst,1);
-        *(undefined4 *)(operandRecord + 8) = arena;
+        *(undefined4 *)(operandRecord + 8) = hwInputRegister;
         *(undefined4 *)(operandRecord + 0xc) = 0x1f;
-        piVar7 = *(int **)(*(int *)(compiler + 8) + 0x30c);
-        (**(code **)(*piVar7 + 0xa0))(local_58,piVar7,loopIndex,*(int *)(compiler + 8));
-        arena = local_58[0];
+        hwDescription = *(int **)(*(int *)(program + PROG_compiler) + COMP_target);
+        (**(code **)(*hwDescription + 0xa0))(local_58,hwDescription,loopIndex,*(int *)(program + PROG_compiler));
+        inputSelectWord = local_58[0];
         operandRecord = IRInst__getOperandRecord(inst,1);
-        *(undefined4 *)(operandRecord + 0x10) = arena;
-        ((int (*)())Program__appendInst)(compiler,inst,successor);
+        *(undefined4 *)(operandRecord + 0x10) = inputSelectWord;
+        ((int (*)())Program__appendInst)(program,inst,successor);
         if ((int)loopIndex < 3) {
-          IRInst__setOperandRef(puVar12,loopIndex2,*(undefined4 *)((int)inst + 0x8c));
+          IRInst__setOperandRef(mergeInst,loopIndex2,*(undefined4 *)((int)inst + 0x8c));
           if (loopIndex2 == 0) {
             allocation[0x28] = 0;
           }
           else {
-            operandRecord = IRInst__getOperandRecord(puVar12,loopIndex2);
+            operandRecord = IRInst__getOperandRecord(mergeInst,loopIndex2);
             *(undefined4 *)(operandRecord + 0x10) = 0;
           }
         }
         else {
-          if (puVar10 == (undefined4 *)0x0) {
-            arena = *(undefined4 *)(*(int *)(compiler + 8) + 0x374);
-            instAlloc = (undefined4 *)Arena__alloc(arena,0x168);
-            *instAlloc = arena;
-            puVar10 = instAlloc + 1;
-            IRMerge__ctor_109cfc(puVar10,0x83,*(undefined4 *)(compiler + 8));
-            operandRecord = IRInst__getOperandRecord(puVar10,0);
+          if (secondMerge == (undefined4 *)0x0) {
+            arenaA = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaA);
+            instAlloc = (undefined4 *)Arena__alloc(arenaA,0x168);
+            *instAlloc = arenaA;
+            secondMerge = instAlloc + 1;
+            IRMerge__ctor_109cfc(secondMerge,0x83,*(undefined4 *)(program + PROG_compiler));
+            operandRecord = IRInst__getOperandRecord(secondMerge,0);
             *(undefined4 *)(operandRecord + 0xc) = 0x39;
-            arena = 4;
+            mergeOperandCount = 4;
             *(undefined4 *)(operandRecord + 8) = 1;
-            if (uVar9 == 4) {
-              arena = 2;
+            if (inputRegisterCount == 4) {
+              mergeOperandCount = 2;
             }
-            instAlloc[0x22] = arena;
+            instAlloc[0x22] = mergeOperandCount;
           }
-          IRInst__setOperandRef(puVar10,iVar11,*(undefined4 *)((int)inst + 0x8c));
-          if (iVar11 == 0) {
-            puVar10[0x27] = 0;
+          IRInst__setOperandRef(secondMerge,secondMergeIndex,*(undefined4 *)((int)inst + 0x8c));
+          if (secondMergeIndex == 0) {
+            secondMerge[0x27] = 0;
           }
           else {
-            operandRecord = IRInst__getOperandRecord(puVar10,iVar11);
+            operandRecord = IRInst__getOperandRecord(secondMerge,secondMergeIndex);
             *(undefined4 *)(operandRecord + 0x10) = 0;
           }
         }
-        arena = *(undefined4 *)(*(int *)(compiler + 8) + 0x374);
-        instAlloc = (undefined4 *)Arena__alloc(arena,0x168);
-        *instAlloc = arena;
+        arenaA = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaA);
+        instAlloc = (undefined4 *)Arena__alloc(arenaA,0x168);
+        *instAlloc = arenaA;
         puVar8 = instAlloc + 1;
-        IRLoadTemp__ctor_109428(puVar8,0x7a,*(undefined4 *)(compiler + 8));
+        IRLoadTemp__ctor_109428(puVar8,0x7a,*(undefined4 *)(program + PROG_compiler));
         operandRecord = IRInst__getOperandRecord(puVar8,0);
         *(undefined4 *)(operandRecord + 0xc) = 0x10;
         loopIndex = loopIndex + 1;
-        *(int *)(operandRecord + 8) = iVar13;
+        *(int *)(operandRecord + 8) = hwRegister;
         loopIndex2 = loopIndex2 + 1;
-        iVar11 = iVar11 + 1;
-        ((int (*)())Program__appendInst)(compiler,puVar8,*(undefined4 *)(compiler + 0x3a0));
-      } while (uVar9 != loopIndex);
+        secondMergeIndex = secondMergeIndex + 1;
+        ((int (*)())Program__appendInst)(program,puVar8,*(undefined4 *)(program + PROG_entryBlock));
+      } while (inputRegisterCount != loopIndex);
     }
-    ((int (*)())Program__appendInst)(compiler,puVar12,successor);
-    if (puVar10 == (undefined4 *)0x0) {
-      *(undefined4 **)(compiler + COMP_arenaA) = puVar12;
+    ((int (*)())Program__appendInst)(program,mergeInst,successor);
+    if (secondMerge == (undefined4 *)0x0) {
+      *(undefined4 **)(program + 0x374) = mergeInst;
     }
     else {
-      arena = 2;
-      if (uVar9 != 4) {
-        arena = 4;
+      mergeOperandIndex = 2;
+      if (inputRegisterCount != 4) {
+        mergeOperandIndex = 4;
       }
-      IRInst__setOperandRef(puVar10,arena,allocation[0x24]);
-      ((int (*)())Program__appendInst)(compiler,puVar10,successor);
-      *(undefined4 **)(compiler + COMP_arenaA) = puVar10;
+      IRInst__setOperandRef(secondMerge,mergeOperandIndex,allocation[0x24]);
+      ((int (*)())Program__appendInst)(program,secondMerge,successor);
+      *(undefined4 **)(program + 0x374) = secondMerge;
     }
   }
-  arenaAt374 = *(undefined4 *)(*(int *)(compiler + 8) + 0x374);
+  arenaAt374 = *(undefined4 *)(*(int *)(program + PROG_compiler) + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arenaAt374,0x168);
   *allocation = arenaAt374;
-  puVar12 = allocation + 1;
-  IRProjection__ctor_109e28(puVar12,0x84,*(undefined4 *)(compiler + 8));
-  iVar11 = *(int *)(*(int *)(compiler + 8) + 0x3b4) + 1;
-  *(int *)(*(int *)(compiler + 8) + 0x3b4) = iVar11;
-  iVar4 = FUN_00127608(*(undefined4 *)(compiler + 0x3ac),0x3a,iVar11,0);
-  *(undefined4 *)(iVar4 + 0x30) = 2;
-  IRInst__setOperandRef(puVar12,0,iVar4);
-  uVar9 = *descriptor;
-  uVar2 = Program__registerFileOfIlType(compiler,*descriptor >> 0x10 & 0x3f);
-  operandRecord2 = IRInst__getOperandRecord(puVar12,1);
-  *(undefined4 *)(operandRecord2 + 0xc) = uVar2;
-  *(uint *)(operandRecord2 + 8) = (uint)(ushort)uVar9;
+  projectionInst = allocation + 1;
+  IRProjection__ctor_109e28(projectionInst,0x84,*(undefined4 *)(program + PROG_compiler));
+  inputTempId = *(int *)(*(int *)(program + PROG_compiler) + 0x3b4) + 1;
+  *(int *)(*(int *)(program + PROG_compiler) + 0x3b4) = inputTempId;
+  inputVReg = FUN_00127608(*(undefined4 *)(program + 0x3ac),0x3a,inputTempId,0);
+  *(undefined4 *)(inputVReg + 0x30) = 2;
+  IRInst__setOperandRef(projectionInst,0,inputVReg);
+  descriptorWord = *descriptor;
+  registerFile = Program__registerFileOfIlType(program,*descriptor >> 0x10 & 0x3f);
+  operandRecord2 = IRInst__getOperandRecord(projectionInst,1);
+  *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
+  *(uint *)(operandRecord2 + 8) = (uint)(ushort)descriptorWord;
   local_68[0] = 0x10203;
-  ((int (*)())Program__applySourceTokenToOperand)(compiler,local_68,descriptor,1,puVar12);
+  ((int (*)())Program__applySourceTokenToOperand)(program,local_68,descriptor,1,projectionInst);
   allocation[0x4d] = 1;
-  DList__pushBack(list,puVar12);
-  inst = IRInst__create(0x31,*(undefined4 *)(compiler + 8));
-  uVar2 = Program__registerFileOfIlType(compiler,param_6);
+  DList__pushBack(list,projectionInst);
+  inst = IRInst__create(0x31,*(undefined4 *)(program + PROG_compiler));
+  registerFile = Program__registerFileOfIlType(program,param_6);
   operandRecord2 = IRInst__getOperandRecord(inst,0);
-  *(undefined4 *)(operandRecord2 + 0xc) = uVar2;
+  *(undefined4 *)(operandRecord2 + 0xc) = registerFile;
   *(undefined4 *)(operandRecord2 + 8) = param_5;
   *(undefined4 *)((int)inst + 0x9c) = 0x10101;
   operandRecord2 = IRInst__getOperandRecord(inst,1);
   *(undefined4 *)(operandRecord2 + 0xc) = 0x3a;
-  *(int *)(operandRecord2 + 8) = iVar11;
-  IRInst__appendSource(inst,*(undefined4 *)(*(int *)(compiler + COMP_arenaA) + 0x8c));
+  *(int *)(operandRecord2 + 8) = inputTempId;
+  IRInst__appendSource(inst,*(undefined4 *)(*(int *)(program + 0x374) + 0x8c));
   DList__pushBack(list,inst);
   return;
 }
@@ -2976,7 +2983,7 @@ int FUN_000f9a58(pass, list, descriptor, param_4, param_5)
   void *pvVar3;
   void *pvVar4;
   int iVar5;
-  undefined4 arena;
+  undefined4 uVar6;
   undefined4 *allocation;
   int iVar8;
   uint *puVar9;
@@ -3116,8 +3123,8 @@ LAB_000f9f08:
   else {
     piVar18 = *(int **)(*(int *)(pass + 8) + 0x30c);
     pcVar15 = *(code **)(*piVar18 + 0x78);
-    arena = Program__registerFileOfIlType(pass,uVar10);
-    iVar5 = (*pcVar15)(piVar18,arena);
+    uVar6 = Program__registerFileOfIlType(pass,uVar10);
+    iVar5 = (*pcVar15)(piVar18,uVar6);
     if (iVar5 == 0) {
       iVar20 = Program__registerFileOfIlType(pass,*descriptor >> 0x10 & 0x3f);
       if (iVar20 == 9) {
@@ -3154,24 +3161,24 @@ LAB_000f9f08:
     if ((uVar17 & 0x1800000) == 0x800000) {
       if (*(int *)(pass + 0x3e4) == 0) {
         *(undefined4 *)(pass + 0x3e4) = 1;
-        arena = Program__registerFileOfIlType(pass,uVar10);
-        *(undefined4 *)(pass + 0x3f4) = arena;
+        uVar6 = Program__registerFileOfIlType(pass,uVar10);
+        *(undefined4 *)(pass + 0x3f4) = uVar6;
       }
       else {
         Program__registerFileOfIlType(pass,uVar10);
       }
-      arena = *(undefined4 *)(pass + 0x3ac);
+      uVar6 = *(undefined4 *)(pass + 0x3ac);
       iVar20 = *(int *)(*(int *)(pass + 8) + 0x3c0) + 1;
       *(int *)(*(int *)(pass + 8) + 0x3c0) = iVar20;
-      iVar20 = FUN_00127608(arena,0x2a,iVar20,0);
+      iVar20 = FUN_00127608(uVar6,0x2a,iVar20,0);
       *(int *)(iVar20 + 0x30) = iVar8;
       IRInst__setOperandRef(pvVar4,0,iVar20);
       *descriptor = *descriptor & 0xfe7fffff;
     }
     else {
-      arena = Program__registerFileOfIlType(pass,uVar10);
+      uVar6 = Program__registerFileOfIlType(pass,uVar10);
       operandRecord = IRInst__getOperandRecord(pvVar4,0);
-      *(undefined4 *)(operandRecord + 0xc) = arena;
+      *(undefined4 *)(operandRecord + 0xc) = uVar6;
       *(int *)(operandRecord + 8) = iVar8;
     }
     if (bVar1) {
@@ -3223,45 +3230,45 @@ LAB_000f9f08:
   if ((uVar17 & 0x1800000) == 0x1000000) {
     puVar9 = descriptor + iVar20;
     if (!bVar2) {
-      arena = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
-      allocation = (undefined4 *)Arena__alloc(arena,0x168);
-      *allocation = arena;
+      uVar6 = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
+      allocation = (undefined4 *)Arena__alloc(uVar6,0x168);
+      *allocation = uVar6;
       puVar21 = allocation + 1;
       IRMemStore__ctor_1071fc(puVar21,0xfc,*(undefined4 *)(pass + 8));
-      arena = Program__registerFileOfIlType(pass,uVar11);
+      uVar6 = Program__registerFileOfIlType(pass,uVar11);
       operandRecord3 = IRInst__getOperandRecord(puVar21,0);
-      *(undefined4 *)(operandRecord3 + 0xc) = arena;
+      *(undefined4 *)(operandRecord3 + 0xc) = uVar6;
       *(uint *)(operandRecord3 + 8) = uVar12;
-      arena = Program__registerFileOfIlType(pass,4);
+      uVar6 = Program__registerFileOfIlType(pass,4);
       operandRecord3 = IRInst__getOperandRecord(puVar21,1);
       allocation[0x28] = uVar14;
-      *(undefined4 *)(operandRecord3 + 0xc) = arena;
+      *(undefined4 *)(operandRecord3 + 0xc) = uVar6;
       *(int *)(operandRecord3 + 8) = iVar5;
       if ((*descriptor & 0x4000000) == 0) goto LAB_000fa1bc;
       iVar13 = *(int *)(*(int *)(pass + 8) + 0x3ac) + -1;
       *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar13;
       uVar17 = descriptor[iVar20 + 2];
       newInst = IRInst__create(0xc6,*(undefined4 *)(pass + 8));
-      arena = Program__registerFileOfIlType(pass,4);
+      uVar6 = Program__registerFileOfIlType(pass,4);
       operandRecord = IRInst__getOperandRecord(newInst,0);
-      *(undefined4 *)(operandRecord + 0xc) = arena;
+      *(undefined4 *)(operandRecord + 0xc) = uVar6;
       *(int *)(operandRecord + 8) = iVar13;
       uVar14 = *puVar9;
-      arena = Program__registerFileOfIlType(pass,*puVar9 >> 0x10 & 0x3f);
+      uVar6 = Program__registerFileOfIlType(pass,*puVar9 >> 0x10 & 0x3f);
       operandRecord = IRInst__getOperandRecord(newInst,1);
-      *(undefined4 *)(operandRecord + 0xc) = arena;
+      *(undefined4 *)(operandRecord + 0xc) = uVar6;
       *(uint *)(operandRecord + 8) = (uint)(ushort)uVar14;
       ((int (*)())FUN_000f7870)(newInst,pass,2,uVar17,uVar17,uVar17,uVar17);
       DList__pushBack(list,newInst);
-      arena = Program__registerFileOfIlType(pass,4);
+      uVar6 = Program__registerFileOfIlType(pass,4);
       operandRecord = IRInst__getOperandRecord(puVar21,2);
-      *(undefined4 *)(operandRecord + 0xc) = arena;
+      *(undefined4 *)(operandRecord + 0xc) = uVar6;
       *(int *)(operandRecord + 8) = iVar13;
     }
     else {
-      arena = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
-      allocation = (undefined4 *)Arena__alloc(arena,0x168);
-      *allocation = arena;
+      uVar6 = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
+      allocation = (undefined4 *)Arena__alloc(uVar6,0x168);
+      *allocation = uVar6;
       puVar21 = allocation + 1;
       IRGeomExport__ctor_108a50(puVar21,0xf9,*(undefined4 *)(pass + 8));
       allocation[0x28] = uVar14;
@@ -3271,23 +3278,23 @@ LAB_000f9f08:
       }
       allocation[0x51] = uVar12;
       allocation[0x50] = 0x24;
-      arena = FUN_00127608(*(undefined4 *)(*(int *)(*(int *)(pass + 8) + 0x6c4) + 0x3ac),0x2c,0,0
+      uVar6 = FUN_00127608(*(undefined4 *)(*(int *)(*(int *)(pass + 8) + 0x6c4) + 0x3ac),0x2c,0,0
                           );
-      IRInst__setOperandRef(puVar21,0,arena);
+      IRInst__setOperandRef(puVar21,0,uVar6);
       operandRecord = IRInst__getOperandRecord(puVar21,1);
       *(undefined4 *)(operandRecord + 0xc) = 0;
       *(int *)(operandRecord + 8) = iVar5;
 LAB_000fa1bc:
       uVar14 = *puVar9;
-      arena = Program__registerFileOfIlType(pass,*puVar9 >> 0x10 & 0x3f);
+      uVar6 = Program__registerFileOfIlType(pass,*puVar9 >> 0x10 & 0x3f);
       operandRecord = IRInst__getOperandRecord(puVar21,2);
-      *(undefined4 *)(operandRecord + 0xc) = arena;
+      *(undefined4 *)(operandRecord + 0xc) = uVar6;
       *(uint *)(operandRecord + 8) = (uint)(ushort)uVar14;
       if (bVar2) goto LAB_000fa4f8;
     }
-    arena = Program__registerFileOfIlType(pass,uVar11);
+    uVar6 = Program__registerFileOfIlType(pass,uVar11);
     operandRecord = IRInst__getOperandRecord(puVar21,3);
-    *(undefined4 *)(operandRecord + 0xc) = arena;
+    *(undefined4 *)(operandRecord + 0xc) = uVar6;
     *(uint *)(operandRecord + 8) = uVar12;
     local_64[0] = 0x10203;
     ((int (*)())Program__applySourceTokenToOperand)(pass,local_64,puVar9,2,puVar21);
@@ -3298,34 +3305,34 @@ LAB_000fa1bc:
       uVar16 = descriptor[iVar20];
     }
     if (bVar2) {
-      arena = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
-      allocation = (undefined4 *)Arena__alloc(arena,0x168);
-      *allocation = arena;
+      uVar6 = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
+      allocation = (undefined4 *)Arena__alloc(uVar6,0x168);
+      *allocation = uVar6;
       puVar21 = allocation + 1;
       IRGeomExport__ctor_108770(puVar21,*(undefined4 *)(pass + 8));
       allocation[0x28] = uVar14;
       allocation[0x50] = 0x24;
       allocation[0x51] = uVar12;
-      arena = FUN_00127608(*(undefined4 *)(*(int *)(*(int *)(pass + 8) + 0x6c4) + 0x3ac),0x2c,0,0
+      uVar6 = FUN_00127608(*(undefined4 *)(*(int *)(*(int *)(pass + 8) + 0x6c4) + 0x3ac),0x2c,0,0
                           );
-      IRInst__setOperandRef(puVar21,0,arena);
+      IRInst__setOperandRef(puVar21,0,uVar6);
       operandRecord = IRInst__getOperandRecord(puVar21,1);
       *(undefined4 *)(operandRecord + 0xc) = 0;
       *(int *)(operandRecord + 8) = iVar5;
     }
     else {
-      arena = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
-      allocation = (undefined4 *)Arena__alloc(arena,0x168);
-      *allocation = arena;
+      uVar6 = *(undefined4 *)(*(int *)(pass + 8) + 0x374);
+      allocation = (undefined4 *)Arena__alloc(uVar6,0x168);
+      *allocation = uVar6;
       puVar21 = allocation + 1;
       IRMemStore__ctor_1071fc(puVar21,0xfc,*(undefined4 *)(pass + 8));
-      arena = Program__registerFileOfIlType(pass,uVar11);
+      uVar6 = Program__registerFileOfIlType(pass,uVar11);
       operandRecord = IRInst__getOperandRecord(puVar21,0);
-      *(undefined4 *)(operandRecord + 0xc) = arena;
+      *(undefined4 *)(operandRecord + 0xc) = uVar6;
       *(uint *)(operandRecord + 8) = uVar12;
-      arena = Program__registerFileOfIlType(pass,4);
+      uVar6 = Program__registerFileOfIlType(pass,4);
       operandRecord = IRInst__getOperandRecord(puVar21,1);
-      *(undefined4 *)(operandRecord + 0xc) = arena;
+      *(undefined4 *)(operandRecord + 0xc) = uVar6;
       *(int *)(operandRecord + 8) = iVar5;
       ((int (*)())FUN_000f7870)(puVar21,pass,2,uVar16,uVar16,uVar16,uVar16);
       allocation[0x28] = uVar14;
@@ -3344,22 +3351,22 @@ LAB_000fa4f8:
     *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar13;
     newInst = IRInst__create(0x31,*(undefined4 *)(pass + 8));
     uVar19 = puVar21[0x32];
-    arena = puVar21[0x31];
+    uVar6 = puVar21[0x31];
     operandRecord = IRInst__getOperandRecord(newInst,1);
     *(undefined4 *)(operandRecord + 0xc) = uVar19;
-    *(undefined4 *)(operandRecord + 8) = arena;
-    arena = Program__registerFileOfIlType(pass,4);
+    *(undefined4 *)(operandRecord + 8) = uVar6;
+    uVar6 = Program__registerFileOfIlType(pass,4);
     operandRecord = IRInst__getOperandRecord(newInst,0);
-    *(undefined4 *)(operandRecord + 0xc) = arena;
+    *(undefined4 *)(operandRecord + 0xc) = uVar6;
     *(int *)(operandRecord + 8) = iVar13;
     operandRecord = IRInst__getOperandRecord(puVar21,2);
-    arena = *(undefined4 *)(operandRecord + 0x10);
+    uVar6 = *(undefined4 *)(operandRecord + 0x10);
     operandRecord = IRInst__getOperandRecord(newInst,1);
-    *(undefined4 *)(operandRecord + 0x10) = arena;
+    *(undefined4 *)(operandRecord + 0x10) = uVar6;
     DList__pushBack(list,newInst);
-    arena = Program__registerFileOfIlType(pass,4);
+    uVar6 = Program__registerFileOfIlType(pass,4);
     operandRecord = IRInst__getOperandRecord(puVar21,2);
-    *(undefined4 *)(operandRecord + 0xc) = arena;
+    *(undefined4 *)(operandRecord + 0xc) = uVar6;
     *(int *)(operandRecord + 8) = iVar13;
     iVar20 = IRInst__getOperandRecord(puVar21,2);
     *(undefined4 *)(iVar20 + 0x10) = 0;
@@ -3371,22 +3378,22 @@ LAB_000fa4f8:
     *(int *)(*(int *)(pass + 8) + 0x3ac) = iVar13;
     newInst = IRInst__create(0x31,*(undefined4 *)(pass + 8));
     uVar19 = puVar21[0x2c];
-    arena = puVar21[0x2b];
+    uVar6 = puVar21[0x2b];
     operandRecord = IRInst__getOperandRecord(newInst,1);
     *(undefined4 *)(operandRecord + 0xc) = uVar19;
-    *(undefined4 *)(operandRecord + 8) = arena;
-    arena = Program__registerFileOfIlType(pass,4);
+    *(undefined4 *)(operandRecord + 8) = uVar6;
+    uVar6 = Program__registerFileOfIlType(pass,4);
     operandRecord = IRInst__getOperandRecord(newInst,0);
-    *(undefined4 *)(operandRecord + 0xc) = arena;
+    *(undefined4 *)(operandRecord + 0xc) = uVar6;
     *(int *)(operandRecord + 8) = iVar13;
     operandRecord = IRInst__getOperandRecord(puVar21,1);
-    arena = *(undefined4 *)(operandRecord + 0x10);
+    uVar6 = *(undefined4 *)(operandRecord + 0x10);
     operandRecord = IRInst__getOperandRecord(newInst,1);
-    *(undefined4 *)(operandRecord + 0x10) = arena;
+    *(undefined4 *)(operandRecord + 0x10) = uVar6;
     DList__pushBack(list,newInst);
-    arena = Program__registerFileOfIlType(pass,4);
+    uVar6 = Program__registerFileOfIlType(pass,4);
     operandRecord = IRInst__getOperandRecord(puVar21,1);
-    *(undefined4 *)(operandRecord + 0xc) = arena;
+    *(undefined4 *)(operandRecord + 0xc) = uVar6;
     *(int *)(operandRecord + 8) = iVar13;
     operandRecord = IRInst__getOperandRecord(puVar21,1);
     *(undefined4 *)(operandRecord + 0x10) = 0x10203;
@@ -3425,20 +3432,20 @@ LAB_000fa744:
     }
     DList__pushBack(list,newInst);
     newInst = IRInst__create(0x24,*(undefined4 *)(pass + 8));
-    arena = Program__registerFileOfIlType(pass,0x1f);
+    uVar6 = Program__registerFileOfIlType(pass,0x1f);
     operandRecord = IRInst__getOperandRecord(newInst,0);
-    *(undefined4 *)(operandRecord + 0xc) = arena;
+    *(undefined4 *)(operandRecord + 0xc) = uVar6;
     *(int *)(operandRecord + 8) = iVar8;
     operandRecord = IRInst__getOperandRecord(newInst,1);
     *(undefined4 *)(operandRecord + 0xc) = 0;
     *(int *)(operandRecord + 8) = iVar13;
-    arena = Program__registerFileOfIlType(pass,4);
+    uVar6 = Program__registerFileOfIlType(pass,4);
     operandRecord = IRInst__getOperandRecord(newInst,2);
-    *(undefined4 *)(operandRecord + 0xc) = arena;
+    *(undefined4 *)(operandRecord + 0xc) = uVar6;
     *(int *)(operandRecord + 8) = iVar5;
-    arena = Program__registerFileOfIlType(pass,0x1f);
+    uVar6 = Program__registerFileOfIlType(pass,0x1f);
     operandRecord = IRInst__getOperandRecord(newInst,3);
-    *(undefined4 *)(operandRecord + 0xc) = arena;
+    *(undefined4 *)(operandRecord + 0xc) = uVar6;
     *(int *)(operandRecord + 8) = iVar8;
     DList__pushBack(list,newInst);
     *descriptor = *descriptor & 0xffc0ffff | 0x40000;
@@ -5011,18 +5018,19 @@ int FUN_000fd50c(program, param_2, templateCursorPtr, param_4, param_5, vector)
   undefined4 param_5;
   uint *vector;
 {
+  undefined4 templateCursor;
   undefined4 *allocation;
   int *piVar2;
   uint uVar3;
-  undefined4 arena;
+  undefined4 arenaB;
   
-  arena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
-  allocation = (undefined4 *)Arena__alloc(arena,0x10);
-  *allocation = arena;
+  arenaB = *(undefined4 *)(*(int *)(program + 8) + 0x378);
+  allocation = (undefined4 *)Arena__alloc(arenaB,0x10);
+  *allocation = arenaB;
   allocation[1] = param_2;
-  arena = *templateCursorPtr;
+  templateCursor = *templateCursorPtr;
   allocation[3] = param_4;
-  allocation[2] = arena;
+  allocation[2] = templateCursor;
   uVar3 = vector[1];
   if (uVar3 < *vector) {
     _memset(uVar3 * 4 + vector[2],0,4);

@@ -1476,8 +1476,8 @@
 0xed63c	424	FUN_000ed63c	part_024	converted
 0xed7e4	184	Program__beginPass	part_024	converted
 0xed89c	852	FUN_000ed89c	part_024	converted
-0xedd98	1216	FUN_000edd98	part_024	converted
-0xee29c	1216	FUN_000ee29c	part_024	converted
+0xedd98	1216	Program__ctor_edd98	part_024	converted
+0xee29c	1216	Program__ctor_ee29c	part_024	converted
 0xee7a0	144	FUN_000ee7a0	part_024	converted
 0xee9ac	120	Program__addInst	part_024	converted
 0xeea24	556	FUN_000eea24	part_024	converted

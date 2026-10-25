@@ -421,3 +421,204 @@ use	FUN_000f07a8	uVar2	consumerStackCount	INFERRED	copy-propagation worklist of 
 use	FUN_000f07a8	uVar13	consumerStackCountInit	INFERRED	copy-propagation worklist of FUN_000f07a8: consumer instructions and their select words are kept on two stack vectors (arena B); roles read off the defining expressions	^\s*uVar13\ =\ puVar5\[2\];$	+1
 use	FUN_000f07a8	uVar13	consumerStackCountInit	INFERRED	copy-propagation worklist of FUN_000f07a8: consumer instructions and their select words are kept on two stack vectors (arena B); roles read off the defining expressions	^\s*if\ \(uVar13\ <\ uVar2\)\ \{$	+4
 use	FUN_000f07a8	uVar13	consumerStackCountInit	INFERRED	copy-propagation worklist of FUN_000f07a8: consumer instructions and their select words are kept on two stack vectors (arena B); roles read off the defining expressions	^\s*puVar7\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar11,uVar13\);$	+1
+use	FUN_000edd98	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_1\[2\]\ \+\ 0x374\);$	^\s*FUN_001272cc\(puVar1\ \+\ 1,param_1\[2\]\);$	all	none
+use	FUN_000edd98	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_1\[2\]\ \+\ 0x374\);$@2	^\s*puVar2\[1\]\ =\ 0x80;$	all	none
+use	FUN_000edd98	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*\*puVar2\ =\ uVar3;$	^\s*puVar2\[2\]\ =\ 0x1000;$	all	none
+use	FUN_000edd98	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_1\[2\]\ \+\ 0x374\);$@3	^\s*puVar2\[1\]\ =\ 0x20;$	all	none
+use	FUN_000edd98	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*\*puVar2\ =\ uVar3;$@2	^\s*puVar2\[2\]\ =\ 0x400;$	all	none
+use	FUN_000edd98	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_1\[2\]\ \+\ 0x374\);$@4	^\s*puVar1\[1\]\ =\ 2;$	all	none
+use	FUN_000edd98	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*puVar1\[4\]\ =\ uVar3;$	^\s*puVar1\[2\]\ =\ 0;$	all	none
+use	FUN_000edd98	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar3\ =\ FUN_00193e18\(uVar3,8\);$	+1	rhs	none
+use	FUN_000edd98	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_1\[2\]\ \+\ 0x374\);$@5	^\s*puVar1\[1\]\ =\ 2;$	all	none
+use	FUN_000edd98	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*puVar1\[4\]\ =\ uVar3;$@2	^\s*uVar3\ =\ FUN_00193e18\(uVar3,8\);$	all	rhs
+use	FUN_000edd98	uVar3	vectorData	INFERRED	first data block (8 bytes) of a growable vector	^\s*uVar3\ =\ FUN_00193e18\(uVar3,8\);$	^\s*param_1\[0xf1\]\ =\ puVar1\ \+\ 1;$	lhs	none
+use	FUN_000edd98	uVar3	vectorData	INFERRED	first data block (8 bytes) of a growable vector	^\s*uVar3\ =\ FUN_00193e18\(uVar3,8\);$@2	^\s*iVar4\ =\ 4;$	lhs	none
+use	FUN_000ee29c	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_1\[2\]\ \+\ 0x374\);$	^\s*FUN_001272cc\(puVar1\ \+\ 1,param_1\[2\]\);$	all	none
+use	FUN_000ee29c	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_1\[2\]\ \+\ 0x374\);$@2	^\s*puVar2\[1\]\ =\ 0x80;$	all	none
+use	FUN_000ee29c	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*\*puVar2\ =\ uVar3;$	^\s*puVar2\[2\]\ =\ 0x1000;$	all	none
+use	FUN_000ee29c	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_1\[2\]\ \+\ 0x374\);$@3	^\s*puVar2\[1\]\ =\ 0x20;$	all	none
+use	FUN_000ee29c	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*\*puVar2\ =\ uVar3;$@2	^\s*puVar2\[2\]\ =\ 0x400;$	all	none
+use	FUN_000ee29c	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_1\[2\]\ \+\ 0x374\);$@4	^\s*puVar1\[1\]\ =\ 2;$	all	none
+use	FUN_000ee29c	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*puVar1\[4\]\ =\ uVar3;$	^\s*puVar1\[2\]\ =\ 0;$	all	none
+use	FUN_000ee29c	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar3\ =\ FUN_00193e18\(uVar3,8\);$	+1	rhs	none
+use	FUN_000ee29c	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(param_1\[2\]\ \+\ 0x374\);$@5	^\s*puVar1\[1\]\ =\ 2;$	all	none
+use	FUN_000ee29c	uVar3	arenaA	INFERRED	compiler arena A (+0x374)	^\s*puVar1\[4\]\ =\ uVar3;$@2	^\s*uVar3\ =\ FUN_00193e18\(uVar3,8\);$	all	rhs
+use	FUN_000ee29c	uVar3	vectorData	INFERRED	first data block (8 bytes) of a growable vector	^\s*uVar3\ =\ FUN_00193e18\(uVar3,8\);$	^\s*param_1\[0xf1\]\ =\ puVar1\ \+\ 1;$	lhs	none
+use	FUN_000ee29c	uVar3	vectorData	INFERRED	first data block (8 bytes) of a growable vector	^\s*uVar3\ =\ FUN_00193e18\(uVar3,8\);$@2	^\s*iVar4\ =\ 4;$	lhs	none
+use	FUN_000ec4f0	uVar3	arenaB	INFERRED	compiler arena B (+0x378)	^\s*uVar3\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x378\);$	^\s*puVar4\ =\ puVar2\ \+\ 1;$	all	none
+use	FUN_000eced0	uVar4	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x374\);$	^\s*FUN_0010502c\(puVar3\ \+\ 1,0x93,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	all	none
+local	FUN_000edd98	param_1	program	INFERRED	Program object being constructed (fields zeroed here; +8 compiler, +0x37c block list sentinel at +0x37c, ...)
+local	FUN_000edd98	param_2	compiler	INFERRED	stored at program+8; +0x374 is arena A used for the tables allocated here
+use	FUN_000edd98	puVar1	zeroCursor	INFERRED	walks a run of program words that are cleared in a loop	^\s*puVar1\ =\ param_1;$	+1
+use	FUN_000edd98	puVar1	zeroCursor	INFERRED	walks a run of program words that are cleared in a loop	^\s*puVar1\[0xe\]\ =\ 0;$	+2
+use	FUN_000edd98	puVar1	zeroCursor	INFERRED	walks a run of program words that are cleared in a loop	^\s*puVar1\ =\ param_1;$@2	+1
+use	FUN_000edd98	puVar1	zeroCursor	INFERRED	walks a run of program words that are cleared in a loop	^\s*puVar1\[0xac\]\ =\ 0;$	+2
+use	FUN_000edd98	puVar1	zeroCursor	INFERRED	walks a run of program words that are cleared in a loop	^\s*puVar1\ =\ param_1;$@3	+1
+use	FUN_000edd98	puVar1	zeroCursor	INFERRED	walks a run of program words that are cleared in a loop	^\s*puVar1\[4\]\ =\ 0;$	+3
+use	FUN_000edd98	puVar1	tableData	INFERRED	data words of the table block just allocated (block + 1), cleared in a loop	^\s*puVar1\ =\ puVar2\ \+\ 1;$	+1
+use	FUN_000edd98	puVar1	tableData	INFERRED	data words of the table block just allocated (block + 1), cleared in a loop	^\s*puVar1\[2\]\ =\ 0;$	+2
+use	FUN_000edd98	puVar1	tableData	INFERRED	data words of the table block just allocated (block + 1), cleared in a loop	^\s*puVar1\ =\ puVar2\ \+\ 1;$@2	+1
+use	FUN_000edd98	puVar1	tableData	INFERRED	data words of the table block just allocated (block + 1), cleared in a loop	^\s*puVar1\[2\]\ =\ 0;$@2	+2
+use	FUN_000edd98	puVar2	registerTableAlloc	INFERRED	0x20c-byte table block of 0x80 entries (capacity 0x80, limit 0x1000) stored at program+0x3b0	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar3,0x20c\);$	+2
+use	FUN_000edd98	puVar2	registerTableAlloc	INFERRED	0x20c-byte table block of 0x80 entries (capacity 0x80, limit 0x1000) stored at program+0x3b0	^\s*\*puVar2\ =\ uVar3;$	+3
+use	FUN_000edd98	puVar2	registerTableAlloc	INFERRED	0x20c-byte table block of 0x80 entries (capacity 0x80, limit 0x1000) stored at program+0x3b0	^\s*param_1\[0xec\]\ =\ puVar2\ \+\ 1;$	+1
+use	FUN_000edd98	puVar2	hwRegisterTableAlloc	INFERRED	0x8c-byte table block of 0x20 entries (limit 0x400) stored at program+0x3bc	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar3,0x8c\);$	+4
+use	FUN_000edd98	puVar2	hwRegisterTableAlloc	INFERRED	0x8c-byte table block of 0x20 entries (limit 0x400) stored at program+0x3bc	^\s*puVar1\ =\ puVar2\ \+\ 1;$@2	+1
+use	FUN_000edd98	puVar2	hwRegisterTableAlloc	INFERRED	0x8c-byte table block of 0x20 entries (limit 0x400) stored at program+0x3bc	^\s*param_1\[0xef\]\ =\ puVar2\ \+\ 1;$	+1
+use	FUN_000edd98	iVar4	clearCount0	INFERRED	0x10 words cleared from program+0x38	^\s*iVar4\ =\ 0x10;$	+1
+use	FUN_000edd98	iVar4	clearCount0	INFERRED	0x10 words cleared from program+0x38	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	FUN_000edd98	iVar4	clearCount1	INFERRED	0x20 words cleared from program+0x2b0	^\s*iVar4\ =\ 0x20;$	+1
+use	FUN_000edd98	iVar4	clearCount1	INFERRED	0x20 words cleared from program+0x2b0	^\s*iVar4\ =\ iVar4\ \+\ \-1;$@2	+2
+use	FUN_000edd98	iVar4	tableClearCount	INFERRED	0x80 entries of the register table cleared	^\s*iVar4\ =\ 0x80;$	+1
+use	FUN_000edd98	iVar4	tableClearCount	INFERRED	0x80 entries of the register table cleared	^\s*iVar4\ =\ iVar4\ \+\ \-1;$@3	+2
+use	FUN_000edd98	iVar4	hwTableClearCount	INFERRED	0x20 entries of the hardware register table cleared	^\s*iVar4\ =\ 0x20;$@2	+1
+use	FUN_000edd98	iVar4	hwTableClearCount	INFERRED	0x20 entries of the hardware register table cleared	^\s*iVar4\ =\ iVar4\ \+\ \-1;$@4	+2
+use	FUN_000edd98	iVar4	clearCount4	INFERRED	4 words cleared in two arrays at program+0x10/+0x20	^\s*iVar4\ =\ 4;$	+1
+use	FUN_000edd98	iVar4	clearCount4	INFERRED	4 words cleared in two arrays at program+0x10/+0x20	^\s*iVar4\ =\ iVar4\ \+\ \-1;$@5	+2
+local	FUN_000ee29c	param_1	program	INFERRED	Program object being constructed (twin of FUN_000edd98)
+local	FUN_000ee29c	param_2	compiler	INFERRED	stored at program+8; +0x374 is arena A used for the tables allocated here
+use	FUN_000ee29c	puVar1	zeroCursor	INFERRED	walks a run of program words that are cleared in a loop	^\s*puVar1\ =\ param_1;$	+1
+use	FUN_000ee29c	puVar1	zeroCursor	INFERRED	walks a run of program words that are cleared in a loop	^\s*puVar1\[0xe\]\ =\ 0;$	+2
+use	FUN_000ee29c	puVar1	zeroCursor	INFERRED	walks a run of program words that are cleared in a loop	^\s*puVar1\ =\ param_1;$@2	+1
+use	FUN_000ee29c	puVar1	zeroCursor	INFERRED	walks a run of program words that are cleared in a loop	^\s*puVar1\[0xac\]\ =\ 0;$	+2
+use	FUN_000ee29c	puVar1	zeroCursor	INFERRED	walks a run of program words that are cleared in a loop	^\s*puVar1\ =\ param_1;$@3	+1
+use	FUN_000ee29c	puVar1	zeroCursor	INFERRED	walks a run of program words that are cleared in a loop	^\s*puVar1\[4\]\ =\ 0;$	+3
+use	FUN_000ee29c	puVar1	tableData	INFERRED	data words of the table block just allocated (block + 1), cleared in a loop	^\s*puVar1\ =\ puVar2\ \+\ 1;$	+1
+use	FUN_000ee29c	puVar1	tableData	INFERRED	data words of the table block just allocated (block + 1), cleared in a loop	^\s*puVar1\[2\]\ =\ 0;$	+2
+use	FUN_000ee29c	puVar1	tableData	INFERRED	data words of the table block just allocated (block + 1), cleared in a loop	^\s*puVar1\ =\ puVar2\ \+\ 1;$@2	+1
+use	FUN_000ee29c	puVar1	tableData	INFERRED	data words of the table block just allocated (block + 1), cleared in a loop	^\s*puVar1\[2\]\ =\ 0;$@2	+2
+use	FUN_000ee29c	puVar2	registerTableAlloc	INFERRED	0x20c-byte table block of 0x80 entries (capacity 0x80, limit 0x1000) stored at program+0x3b0	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar3,0x20c\);$	+2
+use	FUN_000ee29c	puVar2	registerTableAlloc	INFERRED	0x20c-byte table block of 0x80 entries (capacity 0x80, limit 0x1000) stored at program+0x3b0	^\s*\*puVar2\ =\ uVar3;$	+3
+use	FUN_000ee29c	puVar2	registerTableAlloc	INFERRED	0x20c-byte table block of 0x80 entries (capacity 0x80, limit 0x1000) stored at program+0x3b0	^\s*param_1\[0xec\]\ =\ puVar2\ \+\ 1;$	+1
+use	FUN_000ee29c	puVar2	hwRegisterTableAlloc	INFERRED	0x8c-byte table block of 0x20 entries (limit 0x400) stored at program+0x3bc	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar3,0x8c\);$	+4
+use	FUN_000ee29c	puVar2	hwRegisterTableAlloc	INFERRED	0x8c-byte table block of 0x20 entries (limit 0x400) stored at program+0x3bc	^\s*puVar1\ =\ puVar2\ \+\ 1;$@2	+1
+use	FUN_000ee29c	puVar2	hwRegisterTableAlloc	INFERRED	0x8c-byte table block of 0x20 entries (limit 0x400) stored at program+0x3bc	^\s*param_1\[0xef\]\ =\ puVar2\ \+\ 1;$	+1
+use	FUN_000ee29c	iVar4	clearCount0	INFERRED	0x10 words cleared from program+0x38	^\s*iVar4\ =\ 0x10;$	+1
+use	FUN_000ee29c	iVar4	clearCount0	INFERRED	0x10 words cleared from program+0x38	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	FUN_000ee29c	iVar4	clearCount1	INFERRED	0x20 words cleared from program+0x2b0	^\s*iVar4\ =\ 0x20;$	+1
+use	FUN_000ee29c	iVar4	clearCount1	INFERRED	0x20 words cleared from program+0x2b0	^\s*iVar4\ =\ iVar4\ \+\ \-1;$@2	+2
+use	FUN_000ee29c	iVar4	tableClearCount	INFERRED	0x80 entries of the register table cleared	^\s*iVar4\ =\ 0x80;$	+1
+use	FUN_000ee29c	iVar4	tableClearCount	INFERRED	0x80 entries of the register table cleared	^\s*iVar4\ =\ iVar4\ \+\ \-1;$@3	+2
+use	FUN_000ee29c	iVar4	hwTableClearCount	INFERRED	0x20 entries of the hardware register table cleared	^\s*iVar4\ =\ 0x20;$@2	+1
+use	FUN_000ee29c	iVar4	hwTableClearCount	INFERRED	0x20 entries of the hardware register table cleared	^\s*iVar4\ =\ iVar4\ \+\ \-1;$@4	+2
+use	FUN_000ee29c	iVar4	clearCount4	INFERRED	4 words cleared in two arrays at program+0x10/+0x20	^\s*iVar4\ =\ 4;$	+1
+use	FUN_000ee29c	iVar4	clearCount4	INFERRED	4 words cleared in two arrays at program+0x10/+0x20	^\s*iVar4\ =\ iVar4\ \+\ \-1;$@5	+2
+func	FUN_000edd98	Program__ctor_edd98	INFERRED	constructs a Program: zeroes its fields, links the block list sentinel, allocates the register tables in arena A
+func	FUN_000ee29c	Program__ctor_ee29c	INFERRED	twin of Program__ctor_edd98 (same body)
+use	FUN_000f94dc	uVar14	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\ \+\ COMP_arenaA\);$	+3
+use	FUN_000f94dc	uVar14	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\ \+\ COMP_arenaA\);$@2	+3
+use	FUN_000f94dc	uVar14	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\ \+\ COMP_arenaA\);$@3	+3
+use	FUN_000f94dc	uVar14	hwInputRegister	INFERRED	hardware description virtual slot 0x9c: hardware register of input number loopIndex	^\s*uVar14\ =\ \(\*\*\(code\ \*\*\)\(\*piVar7\ \+\ 0x9c\)\)\(piVar7,uVar1,\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\);$	+1
+use	FUN_000f94dc	uVar14	hwInputRegister	INFERRED	hardware description virtual slot 0x9c: hardware register of input number loopIndex	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 8\)\ =\ uVar14;$	+1
+use	FUN_000f94dc	uVar14	inputSelectWord	INFERRED	select word returned by hardware description virtual slot 0xa0 for the input	^\s*uVar14\ =\ local_58\[0\];$	+1
+use	FUN_000f94dc	uVar14	inputSelectWord	INFERRED	select word returned by hardware description virtual slot 0xa0 for the input	^\s*\*\(undefined4\ \*\)\(iVar6\ \+\ 0x10\)\ =\ uVar14;$	+1
+use	FUN_000f94dc	uVar14	mergeOperandCount	INFERRED	number of sources of the second IRMerge: 4, or 2 when four inputs were requested	^\s*uVar14\ =\ 4;$	+1
+use	FUN_000f94dc	uVar14	mergeOperandCount	INFERRED	number of sources of the second IRMerge: 4, or 2 when four inputs were requested	^\s*uVar14\ =\ 2;$	+1
+use	FUN_000f94dc	uVar14	mergeOperandCount	INFERRED	number of sources of the second IRMerge: 4, or 2 when four inputs were requested	^\s*puVar8\[0x22\]\ =\ uVar14;$	+1
+use	FUN_000f94dc	uVar14	mergeOperandIndex	INFERRED	operand index of the extra source of the second IRMerge: 2 or 4	^\s*uVar14\ =\ 2;$@2	+1
+use	FUN_000f94dc	uVar14	mergeOperandIndex	INFERRED	operand index of the extra source of the second IRMerge: 2 or 4	^\s*uVar14\ =\ 4;$@2	+1
+use	FUN_000f94dc	uVar14	mergeOperandIndex	INFERRED	operand index of the extra source of the second IRMerge: 2 or 4	^\s*FUN_001046c8\(puVar10,uVar14,puVar3\[0x24\]\);$	+1
+use	FUN_000f94dc	uVar9	inputRegisterCount	INFERRED	number of input registers merged, from the param_7 case (1, 2, 3, 4 or 6)	^\s*uVar9\ =\ 0;$	+1
+use	FUN_000f94dc	uVar9	inputRegisterCount	INFERRED	number of input registers merged, from the param_7 case (1, 2, 3, 4 or 6)	^\s*uVar9\ =\ 1;$	+1
+use	FUN_000f94dc	uVar9	inputRegisterCount	INFERRED	number of input registers merged, from the param_7 case (1, 2, 3, 4 or 6)	^\s*uVar9\ =\ 2;$	+1
+use	FUN_000f94dc	uVar9	inputRegisterCount	INFERRED	number of input registers merged, from the param_7 case (1, 2, 3, 4 or 6)	^\s*uVar9\ =\ 3;$	+1
+use	FUN_000f94dc	uVar9	inputRegisterCount	INFERRED	number of input registers merged, from the param_7 case (1, 2, 3, 4 or 6)	^\s*uVar9\ =\ 4;$	+1
+use	FUN_000f94dc	uVar9	inputRegisterCount	INFERRED	number of input registers merged, from the param_7 case (1, 2, 3, 4 or 6)	^\s*uVar9\ =\ 6;$	+1
+use	FUN_000f94dc	uVar9	inputRegisterCount	INFERRED	number of input registers merged, from the param_7 case (1, 2, 3, 4 or 6)	^\s*uVar1\ =\ uVar9;$	+2
+use	FUN_000f94dc	uVar9	inputRegisterCount	INFERRED	number of input registers merged, from the param_7 case (1, 2, 3, 4 or 6)	^\s*if\ \(uVar9\ !=\ 0\)\ \{$	+1
+use	FUN_000f94dc	uVar9	inputRegisterCount	INFERRED	number of input registers merged, from the param_7 case (1, 2, 3, 4 or 6)	^\s*if\ \(uVar9\ ==\ 4\)\ \{$	+1
+use	FUN_000f94dc	uVar9	inputRegisterCount	INFERRED	number of input registers merged, from the param_7 case (1, 2, 3, 4 or 6)	^\s*\}\ while\ \(uVar9\ !=\ uVar1\);$	+1
+use	FUN_000f94dc	uVar9	inputRegisterCount	INFERRED	number of input registers merged, from the param_7 case (1, 2, 3, 4 or 6)	^\s*if\ \(uVar9\ !=\ 4\)\ \{$	+1
+use	FUN_000f94dc	uVar9	descriptorWord	INFERRED	first word of the source descriptor	^\s*uVar9\ =\ \*param_3;$	+1
+use	FUN_000f94dc	uVar9	descriptorWord	INFERRED	first word of the source descriptor	^\s*\*\(uint\ \*\)\(iVar4\ \+\ 8\)\ =\ \(uint\)\(ushort\)uVar9;$	+1
+local	FUN_000f94dc	puVar10	secondMerge	INFERRED	IRMerge for inputs beyond the first three (0 until needed)
+use	FUN_000f94dc	puVar12	mergeInst	INFERRED	IRMerge (opcode 0x83) that collects the input registers	^\s*puVar12\ =\ puVar3\ \+\ 1;$	+3
+use	FUN_000f94dc	puVar12	mergeInst	INFERRED	IRMerge (opcode 0x83) that collects the input registers	^\s*FUN_001046c8\(puVar12,iVar4,\*\(undefined4\ \*\)\(\(int\)pvVar5\ \+\ 0x8c\)\);$	+1
+use	FUN_000f94dc	puVar12	mergeInst	INFERRED	IRMerge (opcode 0x83) that collects the input registers	^\s*iVar6\ =\ FUN_001054ec\(puVar12,iVar4\);$	+1
+use	FUN_000f94dc	puVar12	mergeInst	INFERRED	IRMerge (opcode 0x83) that collects the input registers	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f92fc\)\(param_1,puVar12,uVar2\);$	+1
+use	FUN_000f94dc	puVar12	mergeInst	INFERRED	IRMerge (opcode 0x83) that collects the input registers	^\s*\*\(undefined4\ \*\*\)\(param_1\ \+\ 0x374\)\ =\ puVar12;$	+1
+use	FUN_000f94dc	puVar12	projectionInst	INFERRED	IRProjection (opcode 0x84) created for the descriptor source	^\s*puVar12\ =\ puVar3\ \+\ 1;$@2	+2
+use	FUN_000f94dc	puVar12	projectionInst	INFERRED	IRProjection (opcode 0x84) created for the descriptor source	^\s*FUN_001046c8\(puVar12,0,iVar4\);$	+1
+use	FUN_000f94dc	puVar12	projectionInst	INFERRED	IRProjection (opcode 0x84) created for the descriptor source	^\s*iVar4\ =\ FUN_001054ec\(puVar12,1\);$	+1
+use	FUN_000f94dc	puVar12	projectionInst	INFERRED	IRProjection (opcode 0x84) created for the descriptor source	^\s*\(\(int\ \(\*\)\(\)\)FUN_000f8aa0\)\(param_1,local_68,param_3,1,puVar12\);$	+1
+use	FUN_000f94dc	puVar12	projectionInst	INFERRED	IRProjection (opcode 0x84) created for the descriptor source	^\s*FUN_00193f64\(param_2,puVar12\);$	+1
+use	FUN_000f94dc	iVar11	secondMergeIndex	INFERRED	operand index (starts at -2) in the second merge	^\s*iVar11\ =\ \-2;$	+1
+use	FUN_000f94dc	iVar11	secondMergeIndex	INFERRED	operand index (starts at -2) in the second merge	^\s*FUN_001046c8\(puVar10,iVar11,\*\(undefined4\ \*\)\(\(int\)pvVar5\ \+\ 0x8c\)\);$	+2
+use	FUN_000f94dc	iVar11	secondMergeIndex	INFERRED	operand index (starts at -2) in the second merge	^\s*iVar6\ =\ FUN_001054ec\(puVar10,iVar11\);$	+1
+use	FUN_000f94dc	iVar11	secondMergeIndex	INFERRED	operand index (starts at -2) in the second merge	^\s*iVar11\ =\ iVar11\ \+\ 1;$	+1
+use	FUN_000f94dc	iVar11	inputTempId	INFERRED	compiler+0x3b4 counter after the increment: id of the projected temporary	^\s*iVar11\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ PROG_compiler\)\ \+\ 0x3b4\)\ \+\ 1;$	+3
+use	FUN_000f94dc	iVar11	inputTempId	INFERRED	compiler+0x3b4 counter after the increment: id of the projected temporary	^\s*\*\(int\ \*\)\(iVar4\ \+\ 8\)\ =\ iVar11;$	+1
+local	FUN_000f94dc	iVar13	hwRegister	INFERRED	hardware register loopIndex + 2 receiving input number loopIndex
+local	FUN_000f94dc	piVar7	hwDescription	INFERRED	compiler hardware description (+0x30c)
+use	FUN_000f94dc	uVar2	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar2\ =\ FUN_000ec208\(param_1,\*param_3\ >>\ 0x10\ \&\ 0x3f\);$	+1
+use	FUN_000f94dc	uVar2	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0xc\)\ =\ uVar2;$	+1
+use	FUN_000f94dc	uVar2	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*uVar2\ =\ FUN_000ec208\(param_1,param_6\);$	+1
+use	FUN_000f94dc	uVar2	registerFile	INFERRED	register file of an IL register type (Program__registerFileOfIlType)	^\s*\*\(undefined4\ \*\)\(iVar4\ \+\ 0xc\)\ =\ uVar2;$@2	+1
+use	FUN_000f94dc	iVar4	inputVReg	INFERRED	virtual register created for the projection result	^\s*iVar4\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),0x3a,iVar11,0\);$	+3
+use	FUN_000f94dc	uVar1	mergeSlotCount	INFERRED	min(inputRegisterCount, 3): source slots of the first merge	^\s*uVar1\ =\ uVar9;$	+1
+use	FUN_000f94dc	uVar1	mergeSlotCount	INFERRED	min(inputRegisterCount, 3): source slots of the first merge	^\s*uVar1\ =\ 3;$	+1
+use	FUN_000f94dc	uVar1	mergeSlotCount	INFERRED	min(inputRegisterCount, 3): source slots of the first merge	^\s*puVar3\[0x22\]\ =\ uVar1;$	+1
+use	FUN_000f019c	uVar12	arenaB	INFERRED	compiler arena B (+0x378)	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x378\);$	^\s*puVar4\[1\]\ =\ 2;$	all	none
+use	FUN_000f019c	uVar12	arenaB	INFERRED	compiler arena B (+0x378)	^\s*puVar4\[4\]\ =\ uVar12;$	^\s*uVar12\ =\ FUN_00193e18\(uVar12,8\);$	all	rhs
+use	FUN_000f019c	uVar12	vectorData	INFERRED	first data block (8 bytes) of a growable vector	^\s*uVar12\ =\ FUN_00193e18\(uVar12,8\);$	^\s*iVar5\ =\ FUN_00105594\(iVar8,1\);$	lhs	none
+use	FUN_000f85d0	uVar10	arenaB	INFERRED	compiler arena B (+0x378)	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(param_1\[9\]\ \+\ 0x378\);$	^\s*puVar3\[1\]\ =\ uVar6;$	all	none
+use	FUN_000fd50c	uVar4	arenaB	INFERRED	compiler arena B (+0x378)	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x378\);$	+3
+use	FUN_000fd50c	uVar4	templateCursor	INFERRED	current template cursor read through templateCursorPtr, stored in the record before it is reset to -1	^\s*uVar4\ =\ \*param_3;$	+1
+use	FUN_000fd50c	uVar4	templateCursor	INFERRED	current template cursor read through templateCursorPtr, stored in the record before it is reset to -1	^\s*puVar1\[2\]\ =\ uVar4;$	+1
+use	FUN_000f14f8	uVar14	arenaA	INFERRED	compiler arena A (+0x374)	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x374\);$	+3
+use	FUN_000f14f8	uVar14	placementInst	INFERRED	program+0x340: the opcode 0x93 placement instruction created here (flag +300 = 1 when two movs are folded)	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x340\);$	+1
+use	FUN_000f14f8	uVar14	placementInst	INFERRED	program+0x340: the opcode 0x93 placement instruction created here (flag +300 = 1 when two movs are folded)	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x340\);$@2	+1
+use	FUN_000f14f8	uVar14	placementInst	INFERRED	program+0x340: the opcode 0x93 placement instruction created here (flag +300 = 1 when two movs are folded)	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 0x340\);$@3	+1
+use	FUN_000f14f8	uVar14	placementInst	INFERRED	program+0x340: the opcode 0x93 placement instruction created here (flag +300 = 1 when two movs are folded)	^\s*\(\*UNRECOVERED_JUMPTABLE\)\(param_2,uVar14,uVar11\);$	+1
+use	FUN_000f14f8	uVar14	destSelectWord	INFERRED	select word (+0x10) of the destination operand record, composed with each mov source	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\);$	+1
+use	FUN_000f14f8	uVar14	destSelectWord	INFERRED	select word (+0x10) of the destination operand record, composed with each mov source	^\s*FUN_000f302c\(\&local_44,uVar14,\*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\)\);$	+1
+use	FUN_000f14f8	uVar14	hwRegisterFile	INFERRED	hardware register file of the replacement movs: 6 for the first, 7 for the second	^\s*uVar14\ =\ 6;$	+1
+use	FUN_000f14f8	uVar14	hwRegisterFile	INFERRED	hardware register file of the replacement movs: 6 for the first, 7 for the second	^\s*FUN_0010469c\(piVar5,param_1,uVar14,0\);$	+1
+use	FUN_000f14f8	uVar14	hwRegisterFile	INFERRED	hardware register file of the replacement movs: 6 for the first, 7 for the second	^\s*FUN_0010469c\(piVar10,param_1,uVar14,0\);$	+1
+use	FUN_000f14f8	uVar14	hwRegisterFile	INFERRED	hardware register file of the replacement movs: 6 for the first, 7 for the second	^\s*FUN_0010469c\(piVar8,param_1,uVar14,0\);$	+1
+use	FUN_000f14f8	uVar14	hwRegisterFile	INFERRED	hardware register file of the replacement movs: 6 for the first, 7 for the second	^\s*uVar14\ =\ 7;$	+1
+use	FUN_000f14f8	iVar4	block	INFERRED	block that contains the instruction (field +0x158)	^\s*iVar4\ =\ param_2\[0x56\];$	+1
+use	FUN_000f14f8	iVar4	block	INFERRED	block that contains the instruction (field +0x158)	^\s*iVar4\ =\ local_44;$	+1
+use	FUN_000f14f8	iVar4	block	INFERRED	block that contains the instruction (field +0x158)	^\s*piVar8\[0x27\]\ =\ iVar4;$	+1
+use	FUN_000f14f8	iVar4	block	INFERRED	block that contains the instruction (field +0x158)	^\s*FUN_000f302c\(\&local_40,iVar4,\*\(undefined4\ \*\)\(iVar12\ \+\ 0x10\)\);$	+1
+use	FUN_000f14f8	iVar4	block	INFERRED	block that contains the instruction (field +0x158)	^\s*iVar4\ =\ local_40;$	+1
+use	FUN_000f14f8	iVar4	block	INFERRED	block that contains the instruction (field +0x158)	^\s*FUN_000e8424\(iVar4,\*\(undefined4\ \*\)\(param_1\ \+\ 0x340\)\);$	+1
+use	FUN_000f14f8	iVar4	block	INFERRED	block that contains the instruction (field +0x158)	^\s*iVar4\ =\ FUN_001054ec\(piVar7,0\);$	+1
+use	FUN_000f14f8	iVar4	block	INFERRED	block that contains the instruction (field +0x158)	^\s*FUN_000f302c\(\&local_48,uVar11,\*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\)\);$	+1
+use	FUN_000f14f8	iVar4	block	INFERRED	block that contains the instruction (field +0x158)	^\s*FUN_000e8424\(iVar4,\*\(undefined4\ \*\)\(param_1\ \+\ 0x340\)\);$@2	+1
+use	FUN_000f14f8	iVar4	placementInstRef	INFERRED	program+0x340, the placement instruction	^\s*iVar4\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x340\);$	+3
+use	FUN_000f14f8	iVar4	composedSelectWord	INFERRED	select word composed by FUN_000f302c (SelectWord::compose)	^\s*iVar4\ =\ local_3c;$	+1
+use	FUN_000f14f8	iVar4	composedSelectWord	INFERRED	select word composed by FUN_000f302c (SelectWord::compose)	^\s*piVar10\[0x27\]\ =\ iVar4;$	+1
+use	FUN_000f14f8	iVar4	composedSelectWord	INFERRED	select word composed by FUN_000f302c (SelectWord::compose)	^\s*FUN_000f302c\(local_38,iVar4,\*\(undefined4\ \*\)\(iVar9\ \+\ 0x10\)\);$	+2
+use	FUN_000f14f8	iVar6	hwFoldRejects	INFERRED	hardware description virtual slot 0xb8 result: the fold is not allowed	^\s*iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x30c\)\ \+\ 0xb8\)\)\(\);$	+6
+use	FUN_000f14f8	iVar6	sourceBlock	INFERRED	block that contains the source instruction	^\s*iVar6\ =\ piVar5\[0x56\];$	+1
+use	FUN_000f14f8	iVar6	sourceBlock	INFERRED	block that contains the source instruction	^\s*FUN_00193f74\(iVar4,\*\(undefined4\ \*\)\(iVar6\ \+\ 200\)\);$	+2
+use	FUN_000f14f8	iVar6	sourceBlock	INFERRED	block that contains the source instruction	^\s*if\ \(\(\(\(iVar12\ !=\ 0\)\ \|\|$	+6
+use	FUN_000f14f8	iVar6	sourceBlock	INFERRED	block that contains the source instruction	^\s*FUN_000e7700\(iVar6,piVar5,piVar8\);$	+1
+use	FUN_000f14f8	iVar6	sourceBlock	INFERRED	block that contains the source instruction	^\s*iVar6\ =\ piVar5\[0x56\];$@2	+1
+use	FUN_000f14f8	iVar6	sourceBlock	INFERRED	block that contains the source instruction	^\s*FUN_000e76c4\(iVar6,\*\(undefined4\ \*\)\(param_1\ \+\ 0x340\)\);$	+1
+use	FUN_000f14f8	iVar6	sourceBlock	INFERRED	block that contains the source instruction	^\s*if\ \(\(\(\(iVar9\ !=\ 0\)\ \|\|$	+6
+use	FUN_000f14f8	iVar6	sourceBlock	INFERRED	block that contains the source instruction	^\s*FUN_000e7700\(iVar6,piVar5,piVar10\);$	+1
+use	FUN_000f14f8	iVar6	isStoreLike	INFERRED	virtual slot 0x7c of the source instruction	^\s*if\ \(\(\(\(piVar5\[0x56\]\ ==\ piVar7\[0x56\]\)\ \&\&$	+4
+use	FUN_000f14f8	iVar6	isStoreLike	INFERRED	virtual slot 0x7c of the source instruction	^\s*if\ \(\(\(\(\(int\)\(piVar5\[0x58\]\ \-\ uVar2\)\ <\ 0\)\ \|\|\ \(piVar5\[0x58\]\ ==\ uVar2\)\)\ \&\&$	+4
+use	FUN_000f14f8	iVar12	moveSourceSelect	INFERRED	select word (+0x10) of the mov's source operand record	^\s*iVar12\ =\ \*\(int\ \*\)\(iVar6\ \+\ 0x10\);$	+1
+use	FUN_000f14f8	iVar12	moveSourceSelect	INFERRED	select word (+0x10) of the mov's source operand record	^\s*if\ \(\(\(iVar6\ ==\ 0\)\ \&\&\ \(iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar5\ \+\ 0x7c\)\)\(piVar5\),\ iVar6\ ==\ 0\)\)\ \&\&$	+5
+use	FUN_000f14f8	iVar12	foldedCount	INFERRED	number of movs folded so far (loop ends after the second)	^\s*iVar12\ =\ 0;$	+1
+use	FUN_000f14f8	iVar12	foldedCount	INFERRED	number of movs folded so far (loop ends after the second)	^\s*bVar1\ =\ iVar12\ ==\ 1;$	+2
+local	FUN_000f14f8	piVar5	moveSource	INFERRED	source instruction of the mov (operand 1)
+use	FUN_000f14f8	piVar8	newMov	INFERRED	IRMov created to preserve a source that cannot be folded	^\s*piVar8\ =\ \(int\ \*\)FUN_001084b8\(0x31,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+7
+local	FUN_000f14f8	piVar10	newMov2	INFERRED	IRMov created to preserve a source that cannot be folded (second chain)
+use	FUN_000f14f8	uVar2	instFlags	INFERRED	instruction flags word (+0x14); 0x200 = has an appended source	^\s*uVar2\ =\ piVar5\[5\];$	+1
+use	FUN_000f14f8	uVar2	instFlags	INFERRED	instruction flags word (+0x14); 0x200 = has an appended source	^\s*if\ \(\(uVar2\ \&\ 0x200\)\ ==\ 0\)\ \{$	+1
+use	FUN_000f14f8	uVar2	instFlags	INFERRED	instruction flags word (+0x14); 0x200 = has an appended source	^\s*uVar2\ =\ piVar7\[5\];$	+1
+use	FUN_000f14f8	uVar2	instFlags	INFERRED	instruction flags word (+0x14); 0x200 = has an appended source	^\s*uVar2\ =\ piVar5\[5\];$@2	+1
+use	FUN_000f14f8	uVar2	instFlags	INFERRED	instruction flags word (+0x14); 0x200 = has an appended source	^\s*while\ \(\(uVar2\ \&\ 0x200\)\ !=\ 0\)\ \{$	+1
+use	FUN_000f14f8	uVar2	instFlags	INFERRED	instruction flags word (+0x14); 0x200 = has an appended source	^\s*uVar2\ =\ piVar8\[5\];$	+1
+use	FUN_000f14f8	uVar2	secondPassFlag	INFERRED	1 when the program+0x478 limit is above 1	^\s*uVar2\ =\ \(uint\)\(1\ <\ \*\(int\ \*\)\(param_1\ \+\ 0x478\)\);$	+5
+use	FUN_000f14f8	uVar11	compiler	INFERRED	program+8	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 8\);$	+1
+use	FUN_000f14f8	uVar11	compiler	INFERRED	program+8	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 8\);$@2	+1
+use	FUN_000f14f8	uVar11	compiler	INFERRED	program+8	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(param_1\ \+\ 8\);$@3	+1
+use	FUN_000f14f8	uVar11	compiler	INFERRED	program+8	^\s*\(\*UNRECOVERED_JUMPTABLE\)\(param_2,uVar14,uVar11\);$	+1
+use	FUN_000f14f8	uVar11	chainSelectWord	INFERRED	select word (+0x10) of the destination record of the chain head	^\s*uVar11\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\);$	+1
+use	FUN_000f14f8	uVar11	chainSelectWord	INFERRED	select word (+0x10) of the destination record of the chain head	^\s*FUN_000f302c\(\&local_48,uVar11,\*\(undefined4\ \*\)\(iVar4\ \+\ 0x10\)\);$	+1
+local	FUN_000f14f8	uVar13	destSelectWord2	INFERRED	select word (+0x10) of the destination record of the first mov
