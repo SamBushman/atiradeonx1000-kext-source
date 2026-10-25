@@ -2926,9 +2926,9 @@
 0x1819b4	FUN_001819b4	252	no	indirect call (driver context / vtable / callback)
 0x181ab0	FUN_00181ab0	208	yes	
 0x181b80	FUN_00181b80	896	no	indirect call (driver context / vtable / callback)
-0x181f00	FUN_00181f00	7020	no	indirect call (driver context / vtable / callback)
+0x181f00	Block__flattenAndRebuildAddMulTree	7020	no	indirect call (driver context / vtable / callback)
 0x183ac8	FUN_00183ac8	212	yes	
-0x183b9c	FUN_00183b9c	1152	yes	
+0x183b9c	Block__rebuildAddMulTreesWhereProfitable	1152	yes	
 0x18401c	FUN_0018401c	256	yes	
 0x18413c	FUN_0018413c	2336	no	indirect call (driver context / vtable / callback)
 0x184ab4	pass_minreg_order	280	no	indirect call (driver context / vtable / callback)

@@ -522,10 +522,10 @@ ffd5c	ffd60	FUN_000fd5c8
 17edb0	17edd0	FUN_0017ebb0
 17f03c	17f040	FUN_0017ee68
 1811d8	1811f8	ValueKey__simplifyModifiersAndAddressing
-181fdc	181ff8	FUN_00181f00
-182010	18202c	FUN_00181f00
-182040	182060	FUN_00181f00
-183a98	183a9c	FUN_00181f00
+181fdc	181ff8	Block__flattenAndRebuildAddMulTree
+182010	18202c	Block__flattenAndRebuildAddMulTree
+182040	182060	Block__flattenAndRebuildAddMulTree
+183a98	183a9c	Block__flattenAndRebuildAddMulTree
 1840ac	1840cc	FUN_0018401c
 18421c	184238	FUN_0018413c
 184250	18426c	FUN_0018413c

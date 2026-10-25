@@ -522,10 +522,10 @@
 0x17edb0	FUN_0017ebb0
 0x17f03c	FUN_0017ee68
 0x1811d8	ValueKey__simplifyModifiersAndAddressing
-0x181fdc	FUN_00181f00
-0x182010	FUN_00181f00
-0x182040	FUN_00181f00
-0x183a98	FUN_00181f00
+0x181fdc	Block__flattenAndRebuildAddMulTree
+0x182010	Block__flattenAndRebuildAddMulTree
+0x182040	Block__flattenAndRebuildAddMulTree
+0x183a98	Block__flattenAndRebuildAddMulTree
 0x1840ac	FUN_0018401c
 0x18421c	FUN_0018413c
 0x184250	FUN_0018413c
