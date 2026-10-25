@@ -3863,7 +3863,7 @@ int FUN_000a7050(param_1)
     *(undefined **)(((unsigned char *)0x0000156c) + param_1) = PTR_FUN_001e8b1c;
   }
   *(code **)(((unsigned char *)0x00001588) + param_1) = FUN_000a6f90;
-  FUN_0009bd60(iVar9,0x80);
+  ffvpInitContextState(iVar9,0x80);
   pcVar4 = *(code **)(param_1 + 0x250);
   *(undefined1 *)(param_1 + 0x2691) = 0;
   *(undefined1 *)(param_1 + 0x365) = 0;

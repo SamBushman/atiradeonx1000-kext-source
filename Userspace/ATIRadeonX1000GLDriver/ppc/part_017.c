@@ -2947,8 +2947,8 @@ void FUN_000bd9a0(int glContext,undefined4 param_2,undefined4 param_3,undefined4
     pcVar1 = *(code **)(glContext + 0x275c);
     *(int *)(0x00002748 + glContext + 4) = iVar2 + 8;
     (*pcVar1)(glContext,iVar2 + 8,param_3,param_4,in_r7,in_r8,a6);
-    FUN_0009be00(glContext);
-    fparam_1 = (double)FUN_0009cc30(glContext);
+    ffvpAnalyzeLightState(glContext);
+    fparam_1 = (double)ffvpBuildLightKey(glContext);
     param_2 = extraout_r4;
   }
   ((void (*)())FUN_0004d620)(glContext,param_2,param_3,param_4,fparam_1);
