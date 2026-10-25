@@ -2138,27 +2138,27 @@ int FUN_00134ab0(param_1)
 }
 
 /* FUN_00134ab8 @ 0x134ab8 (100 bytes) */
-int FUN_00134ab8(param_1, param_2, param_3)
-  int param_1;
-  int *param_2;
-  int *param_3;
+int FUN_00134ab8(neighbourList, slotOut, blockOut)
+  int neighbourList;
+  int *slotOut;
+  int *blockOut;
 {
-  int iVar1;
+  int nextBlockStart;
   
-  if (*(int *)(param_1 + 8) == 0) {
-    *param_3 = 0;
-    *param_2 = 6;
+  if (*(int *)(neighbourList + 8) == 0) {
+    *blockOut = 0;
+    *slotOut = 6;
     return;
   }
-  *param_2 = 0;
-  *param_3 = *(int *)(param_1 + 8);
+  *slotOut = 0;
+  *blockOut = *(int *)(neighbourList + 8);
   while( true ) {
-    iVar1 = *param_2 + 7;
-    if (*(int *)(param_1 + 4) <= iVar1) break;
-    *param_2 = iVar1;
-    *param_3 = *(int *)(*param_3 + 0x1c);
+    nextBlockStart = *slotOut + 7;
+    if (*(int *)(neighbourList + 4) <= nextBlockStart) break;
+    *slotOut = nextBlockStart;
+    *blockOut = *(int *)(*blockOut + 0x1c);
   }
-  *param_2 = (*(int *)(param_1 + 4) - *param_2) + -1;
+  *slotOut = (*(int *)(neighbourList + 4) - *slotOut) + -1;
   return;
 }
 

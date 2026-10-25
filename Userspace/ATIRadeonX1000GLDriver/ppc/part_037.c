@@ -2919,26 +2919,27 @@ int ExportValue__vslot10(this, param_2)
 }
 
 /* FUN_00122f28 @ 0x122f28 (124 bytes) */
-int FUN_00122f28(param_1, param_2)
-  int *param_1;
-  int param_2;
+int FUN_00122f28(value, inst)
+  int *value;
+  int inst;
 {
-  int iVar1;
-  int iVar2;
+  int valueRegister;
+  int valueQuery18;
+  int valueKind;
   
-  if ((param_1[9] & 2U) == 0) {
-    iVar1 = (**(code **)(*param_1 + 0x18))(param_1);
-    if (iVar1 != 0) {
-      *(undefined4 *)(param_2 + 0x98) = 0;
-      *(undefined4 *)(param_2 + 0x94) = *(undefined4 *)(param_2 + 0x14c);
+  if ((value[9] & 2U) == 0) {
+    valueQuery18 = (**(code **)(*value + 0x18))(value);
+    if (valueQuery18 != 0) {
+      *(undefined4 *)(inst + 0x98) = 0;
+      *(undefined4 *)(inst + 0x94) = *(undefined4 *)(inst + 0x14c);
     }
   }
   else {
-    iVar1 = param_1[4];
-    iVar2 = param_1[1];
-    *(uint *)(param_2 + 0x14) = *(uint *)(param_2 + 0x14) | 0x40;
-    *(int *)(param_2 + 0x94) = iVar1;
-    *(int *)(param_2 + 0x98) = iVar2;
+    valueRegister = value[4];
+    valueKind = value[1];
+    *(uint *)(inst + 0x14) = *(uint *)(inst + 0x14) | 0x40;
+    *(int *)(inst + 0x94) = valueRegister;
+    *(int *)(inst + 0x98) = valueKind;
   }
   return;
 }
@@ -2979,25 +2980,25 @@ int VReg__currentDefinition(vreg, block, createArg)
 }
 
 /* FUN_0012306c @ 0x12306c (120 bytes) */
-int FUN_0012306c(param_1, param_2)
-  int param_1;
-  undefined4 param_2;
+int FUN_0012306c(vreg, user)
+  int vreg;
+  undefined4 user;
 {
-  undefined4 *puVar1;
-  uint uVar2;
-  uint *puVar3;
+  undefined4 *listSlotRef;
+  uint listCount;
+  uint *listVector;
   
-  puVar3 = *(uint **)(param_1 + 0x18);
-  uVar2 = puVar3[1];
-  if (uVar2 < *puVar3) {
-    _memset(uVar2 * 4 + puVar3[2],0,4);
-    puVar1 = (undefined4 *)(uVar2 * 4 + puVar3[2]);
-    puVar3[1] = uVar2 + 1;
+  listVector = *(uint **)(vreg + 0x18);
+  listCount = listVector[1];
+  if (listCount < *listVector) {
+    _memset(listCount * 4 + listVector[2],0,4);
+    listSlotRef = (undefined4 *)(listCount * 4 + listVector[2]);
+    listVector[1] = listCount + 1;
   }
   else {
-    puVar1 = (undefined4 *)Vector__elementRefGrow(puVar3,uVar2);
+    listSlotRef = (undefined4 *)Vector__elementRefGrow(listVector,listCount);
   }
-  *puVar1 = param_2;
+  *listSlotRef = user;
   return;
 }
 

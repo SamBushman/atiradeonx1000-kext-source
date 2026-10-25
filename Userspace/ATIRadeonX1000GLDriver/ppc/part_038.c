@@ -916,35 +916,35 @@ int keyEqualsThreeWords(param_1, param_2)
 }
 
 /* FUN_00127850 @ 0x127850 (128 bytes) */
-int FUN_00127850(param_1)
-  int param_1;
+int FUN_00127850(owner)
+  int owner;
 {
-  int iVar1;
-  int iVar2;
+  int elementQuery18;
+  int matchCount;
   /* issue #64 live-repro: same iterator-object split as FUN_0011eaa0 (part_037.c), fixed earlier
-   * this session - auStack_38 is walked by FUN_00194938/FUN_00194a94 as param_1[0..4] (0x14 bytes)
-   * but declared only 16 bytes; local_28, the missing 5th word, is what this loop reads back as its
-   * own continuation value. Separated, FUN_00194938's real update never reached local_28, so the
-   * loop never saw it become null - not just a hang: the same (unchanging) local_28 object got
+   * this session - iteratorState is walked by FUN_00194938/FUN_00194a94 as owner[0..4] (0x14 bytes)
+   * but declared only 16 bytes; iteratorCurrent, the missing 5th word, is what this loop reads back as its
+   * own continuation value. Separated, FUN_00194938's real update never reached iteratorCurrent, so the
+   * loop never saw it become null - not just a hang: the same (unchanging) iteratorCurrent object got
    * re-passed to the vtable call on every spin instead of the real next node, repeatedly
    * re-processing/re-freeing one object - a plausible source of the unrelated heap corruption seen
    * elsewhere on this issue (FUN_00121000: an objects own vtable-like field changing under it
    * between two visits). Merged into one 0x14-byte buffer. */
-  unsigned char auStack_38 [0x14];
-#define local_28 (*(int **)(auStack_38 + 0x10))
+  unsigned char iteratorState [0x14];
+#define iteratorCurrent (*(int **)(iteratorState + 0x10))
   
-  FUN_00194a94(auStack_38,*(undefined4 *)(param_1 + 4));
-  iVar2 = 0;
-  while (local_28 != (int *)0x0) {
-    iVar1 = (**(code **)(*local_28 + 0x18))(local_28);
-    if (iVar1 != 0) {
-      iVar2 = iVar2 + 1;
+  FUN_00194a94(iteratorState,*(undefined4 *)(owner + 4));
+  matchCount = 0;
+  while (iteratorCurrent != (int *)0x0) {
+    elementQuery18 = (**(code **)(*iteratorCurrent + 0x18))(iteratorCurrent);
+    if (elementQuery18 != 0) {
+      matchCount = matchCount + 1;
     }
-    FUN_00194938(auStack_38);
+    FUN_00194938(iteratorState);
   }
-  return iVar2;
+  return matchCount;
 }
-#undef local_28
+#undef iteratorCurrent
 
 /* FUN_001278d0 @ 0x1278d0 (196 bytes) */
 int FUN_001278d0(owner)
