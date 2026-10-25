@@ -1038,10 +1038,10 @@ int gld_deleteContextProgramObjects(ctx)
   return;
 }
 
-/* FUN_00025ec0 @ 0x25ec0 (1372 bytes) */
-int FUN_00025ec0(param_1, param_2)
-  int param_1;
-  int *param_2;
+/* gld_bindFragmentProgramRecord @ 0x25ec0 (1372 bytes) */
+int gld_bindFragmentProgramRecord(ctx, programObject)
+  int ctx;
+  int *programObject;
 {
   undefined4 length;
   byte *pbVar1;
@@ -1049,145 +1049,145 @@ int FUN_00025ec0(param_1, param_2)
   bool bVar3;
   bool bVar4;
   uint uVar5;
-  int *piVar6;
-  int *piVar7;
-  undefined4 uVar8;
+  int *contextRecord;
+  int *translator;
+  undefined4 bindResult;
   undefined4 staleArgR6;
   undefined4 staleArgR7;
   int literalPool;
   int rowsMinusOne;
   int iVar9;
   int iVar10;
-  uint uVar11;
+  uint programFlags;
   int iVar12;
-  byte *pbVar13;
-  int *piVar14;
-  int *piVar15;
+  byte *constantUseCursor;
+  int *recordProgramId;
+  int *commandStream;
   
-  piVar15 = (int *)(param_1 + 0x240);
-  for (piVar6 = (int *)param_2[9]; piVar6 != param_2 + 8; piVar6 = (int *)piVar6[1]) {
-    if (param_1 == piVar6[2]) goto LAB_00025f80;
+  commandStream = (int *)(ctx + 0x240);
+  for (contextRecord = (int *)programObject[9]; contextRecord != programObject + 8; contextRecord = (int *)contextRecord[1]) {
+    if (ctx == contextRecord[2]) goto LAB_00025f80;
   }
-  piVar6 = (int *)_calloc(1,*(int *)(&DAT_001aa4c4 + param_2[7] * 4) + 0x14);
-  piVar6[3] = param_2[5] + -1;
-  iVar9 = param_2[6];
-  piVar6[2] = param_1;
-  piVar6[1] = (int)(param_2 + 8);
+  contextRecord = (int *)_calloc(1,*(int *)(&DAT_001aa4c4 + programObject[7] * 4) + 0x14);
+  contextRecord[3] = programObject[5] + -1;
+  iVar9 = programObject[6];
+  contextRecord[2] = ctx;
+  contextRecord[1] = (int)(programObject + 8);
   rowsMinusOne = iVar9 + -1;
-  piVar6[4] = rowsMinusOne;
-  *piVar6 = param_2[8];
-  param_2[8] = (int)piVar6;
-  *(int **)(*piVar6 + 4) = piVar6;
+  contextRecord[4] = rowsMinusOne;
+  *contextRecord = programObject[8];
+  programObject[8] = (int)contextRecord;
+  *(int **)(*contextRecord + 4) = contextRecord;
 LAB_00025f80:
-  iVar9 = piVar6[5];
-  piVar14 = piVar6 + 5;
+  iVar9 = contextRecord[5];
+  recordProgramId = contextRecord + 5;
   if (iVar9 == 0) {
-    glGenProgramsARB_impl(piVar15,1,piVar14);
-    iVar9 = piVar6[5];
+    glGenProgramsARB_impl(commandStream,1,recordProgramId);
+    iVar9 = contextRecord[5];
     if (iVar9 != 0) goto LAB_00025fac;
 LAB_000263d8:
-    uVar8 = 0;
+    bindResult = 0;
   }
   else {
 LAB_00025fac:
-    glBindProgramARB_impl(piVar15,0x8804,iVar9,staleArgR6,staleArgR7,literalPool,rowsMinusOne);
-    if (piVar6[3] == param_2[5]) {
-      pbVar13 = (byte *)param_2[0xe];
-      if (pbVar13 != (byte *)0x0) {
-        uVar11 = *(uint *)(pbVar13 + 0x20);
-        uVar5 = uVar11 >> 0x1b;
-        literalPool = *(int *)(*param_2 + 0x18);
+    glBindProgramARB_impl(commandStream,0x8804,iVar9,staleArgR6,staleArgR7,literalPool,rowsMinusOne);
+    if (contextRecord[3] == programObject[5]) {
+      constantUseCursor = (byte *)programObject[0xe];
+      if (constantUseCursor != (byte *)0x0) {
+        programFlags = *(uint *)(constantUseCursor + 0x20);
+        uVar5 = programFlags >> 0x1b;
+        literalPool = *(int *)(*programObject + 0x18);
         if (uVar5 == 0) {
 LAB_00026008:
           bVar3 = false;
         }
         else {
-          if ((uint)pbVar13[1] == *(uint *)(literalPool + (uint)*pbVar13 * 0x10)) {
+          if ((uint)constantUseCursor[1] == *(uint *)(literalPool + (uint)*constantUseCursor * 0x10)) {
             do {
               uVar5 = uVar5 - 1;
               if (uVar5 == 0) goto LAB_00026008;
-              pbVar1 = pbVar13 + 2;
-              pbVar2 = pbVar13 + 3;
-              pbVar13 = pbVar13 + 2;
+              pbVar1 = constantUseCursor + 2;
+              pbVar2 = constantUseCursor + 3;
+              constantUseCursor = constantUseCursor + 2;
             } while ((uint)*pbVar2 == *(uint *)(literalPool + (uint)*pbVar1 * 0x10));
           }
           bVar3 = true;
         }
-        if (((((uVar11 & 0x1000000) != 0) &&
-             ((uVar11 >> 0x17 & 1) != (uint)(byte)((unsigned char *)0x00002b7c)[param_1])) ||
-            (((uVar11 & 0x400000) == 0 &&
-             ((uVar11 >> 0x12 & 0xf) != (*(uint *)(param_1 + 0x1ae4) >> 6 & 0xffff))))) || (bVar3))
+        if (((((programFlags & 0x1000000) != 0) &&
+             ((programFlags >> 0x17 & 1) != (uint)(byte)((unsigned char *)0x00002b7c)[ctx])) ||
+            (((programFlags & 0x400000) == 0 &&
+             ((programFlags >> 0x12 & 0xf) != (*(uint *)(ctx + 0x1ae4) >> 6 & 0xffff))))) || (bVar3))
         {
-          uVar5 = param_2[0xf];
-          param_2[0xf] = uVar5 | 1;
-          param_2[5] = param_2[5] + 1;
+          uVar5 = programObject[0xf];
+          programObject[0xf] = uVar5 | 1;
+          programObject[5] = programObject[5] + 1;
           if ((uVar5 & 2) != 0) {
-            param_2[6] = param_2[6] + 1;
+            programObject[6] = programObject[6] + 1;
           }
-          param_2[0xf] = 0;
-          bVar3 = piVar6[3] != param_2[5];
+          programObject[0xf] = 0;
+          bVar3 = contextRecord[3] != programObject[5];
           if (bVar3) {
-            piVar6[3] = param_2[5];
+            contextRecord[3] = programObject[5];
           }
           goto LAB_000260dc;
         }
       }
 LAB_000263c0:
-      if (*(char *)(param_2 + 10) != '\0') goto LAB_000263d8;
+      if (*(char *)(programObject + 10) != '\0') goto LAB_000263d8;
     }
     else {
-      piVar6[3] = param_2[5];
+      contextRecord[3] = programObject[5];
       bVar3 = true;
 LAB_000260dc:
       if (!bVar3) goto LAB_000263c0;
-      *(undefined1 *)(param_2 + 10) = 0;
-      if (param_2[0xb] != 0) {
-        _glpFreePPShaderLinearize(param_2[0xb]);
-        param_2[0xb] = 0;
+      *(undefined1 *)(programObject + 10) = 0;
+      if (programObject[0xb] != 0) {
+        _glpFreePPShaderLinearize(programObject[0xb]);
+        programObject[0xb] = 0;
       }
-      if (param_2[0xc] != 0) {
-        _glpFreePPShaderToProgram(param_2[0xc]);
-        param_2[0xc] = 0;
+      if (programObject[0xc] != 0) {
+        _glpFreePPShaderToProgram(programObject[0xc]);
+        programObject[0xc] = 0;
       }
-      if (param_2[0xd] != 0) {
-        param_2[0xd] = 0;
+      if (programObject[0xd] != 0) {
+        programObject[0xd] = 0;
       }
       bVar3 = false;
       uVar5 = 0x1f9;
-      freeIfNonNull(param_2[0xe]);
-      param_2[0xe] = 0;
+      freeIfNonNull(programObject[0xe]);
+      programObject[0xe] = 0;
       while( true ) {
-        if (*(short *)*param_2 == -0x74d0) {
-          iVar9 = _glpPPShaderLinearize(*(undefined4 *)((short *)*param_2 + 2),uVar5);
-          param_2[0xb] = iVar9;
+        if (*(short *)*programObject == -0x74d0) {
+          iVar9 = _glpPPShaderLinearize(*(undefined4 *)((short *)*programObject + 2),uVar5);
+          programObject[0xb] = iVar9;
         }
-        piVar7 = (int *)fpilCreateTranslator();
-        iVar9 = param_2[0xd];
-        if (((iVar9 == 0) && (iVar9 = param_2[0xc], iVar9 == 0)) &&
-           (iVar9 = param_2[0xb], iVar9 == 0)) {
-          iVar9 = *(int *)(*param_2 + 4);
+        translator = (int *)fpilCreateTranslator();
+        iVar9 = programObject[0xd];
+        if (((iVar9 == 0) && (iVar9 = programObject[0xc], iVar9 == 0)) &&
+           (iVar9 = programObject[0xb], iVar9 == 0)) {
+          iVar9 = *(int *)(*programObject + 4);
         }
-        *piVar7 = iVar9;
-        iVar12 = *(int *)(*param_2 + 0xc);
-        piVar7[1] = *(int *)(*param_2 + 8);
-        piVar7[2] = iVar12;
-        piVar7[3] = *(int *)(*param_2 + 0x18);
-        *(uint *)(piVar7[0xd] + 0x20) =
-             ((byte)((unsigned char *)0x00002b7c)[param_1] & 1) << 0x17 |
-             *(uint *)(piVar7[0xd] + 0x20) & 0xff7fffff;
-        iVar10 = piVar7[0xd];
+        *translator = iVar9;
+        iVar12 = *(int *)(*programObject + 0xc);
+        translator[1] = *(int *)(*programObject + 8);
+        translator[2] = iVar12;
+        translator[3] = *(int *)(*programObject + 0x18);
+        *(uint *)(translator[0xd] + 0x20) =
+             ((byte)((unsigned char *)0x00002b7c)[ctx] & 1) << 0x17 |
+             *(uint *)(translator[0xd] + 0x20) & 0xff7fffff;
+        iVar10 = translator[0xd];
         *(uint *)(iVar10 + 0x20) =
-             (*(uint *)(param_1 + 0x1ae4) & 0x3c0) << 0xc | *(uint *)(iVar10 + 0x20) & 0xffc3ffff;
-        iVar9 = fragmentProgramToIL(piVar7);
+             (*(uint *)(ctx + 0x1ae4) & 0x3c0) << 0xc | *(uint *)(iVar10 + 0x20) & 0xffc3ffff;
+        iVar9 = fragmentProgramToIL(translator);
         if (iVar9 == 0) {
-          *piVar15 = 0;
-          arbfpProgramStringIL(piVar15,0,piVar7[0xb],piVar7[10]);
-          bVar3 = *piVar15 == 0;
+          *commandStream = 0;
+          arbfpProgramStringIL(commandStream,0,translator[0xb],translator[10]);
+          bVar3 = *commandStream == 0;
           bVar4 = !bVar3;
           if (!bVar4) {
-            iVar9 = piVar7[0xd];
-            piVar7[0xd] = *piVar15;
-            param_2[0xe] = iVar9;
+            iVar9 = translator[0xd];
+            translator[0xd] = *commandStream;
+            programObject[0xe] = iVar9;
             goto LAB_0002639c;
           }
         }
@@ -1195,65 +1195,65 @@ LAB_000260dc:
           bVar4 = !bVar3;
           if (!bVar4) goto LAB_0002639c;
         }
-        if ((*(short *)*param_2 != -0x74d0) || ((uVar5 & 6) == 6)) break;
+        if ((*(short *)*programObject != -0x74d0) || ((uVar5 & 6) == 6)) break;
         if ((uVar5 & 4) == 0) {
           uVar5 = uVar5 | 4;
         }
         else if ((uVar5 & 2) == 0) {
           uVar5 = uVar5 & 0xfffffffb | 2;
         }
-        if (param_2[0xb] != 0) {
-          _glpFreePPShaderLinearize(param_2[0xb]);
-          param_2[0xb] = 0;
+        if (programObject[0xb] != 0) {
+          _glpFreePPShaderLinearize(programObject[0xb]);
+          programObject[0xb] = 0;
         }
-        if (param_2[0xc] != 0) {
-          _glpFreePPShaderToProgram(param_2[0xc]);
-          param_2[0xc] = 0;
+        if (programObject[0xc] != 0) {
+          _glpFreePPShaderToProgram(programObject[0xc]);
+          programObject[0xc] = 0;
         }
-        if (param_2[0xd] != 0) {
-          param_2[0xd] = 0;
+        if (programObject[0xd] != 0) {
+          programObject[0xd] = 0;
         }
-        freeIfNonNull(param_2[0xe]);
-        param_2[0xe] = 0;
-        fpilDestroyTranslator(piVar7);
+        freeIfNonNull(programObject[0xe]);
+        programObject[0xe] = 0;
+        fpilDestroyTranslator(translator);
       }
       if (bVar4) {
-        if (*(short *)*param_2 == -0x74d0) {
+        if (*(short *)*programObject == -0x74d0) {
           bVar4 = true;
         }
         else {
-          *piVar15 = 0;
-          iVar9 = param_2[0xd];
-          if (((iVar9 == 0) && (iVar9 = param_2[0xc], iVar9 == 0)) &&
-             (iVar9 = param_2[0xb], iVar9 == 0)) {
-            iVar9 = *(int *)(*param_2 + 4);
+          *commandStream = 0;
+          iVar9 = programObject[0xd];
+          if (((iVar9 == 0) && (iVar9 = programObject[0xc], iVar9 == 0)) &&
+             (iVar9 = programObject[0xb], iVar9 == 0)) {
+            iVar9 = *(int *)(*programObject + 4);
           }
           iVar9 = arbProgramIrToText(iVar9);
           if (iVar9 == 0) {
-            glDeleteProgramsARB_impl(piVar15,1,piVar14);
-            *piVar14 = 0;
+            glDeleteProgramsARB_impl(commandStream,1,recordProgramId);
+            *recordProgramId = 0;
             return 0;
           }
           length = _strlen(iVar9);
-          glProgramStringARB_impl(piVar15,0x8804,0x8875,length,iVar9,literalPool,iVar10,iVar12);
+          glProgramStringARB_impl(commandStream,0x8804,0x8875,length,iVar9,literalPool,iVar10,iVar12);
           _free(iVar9);
-          bVar4 = *piVar15 != 0;
+          bVar4 = *commandStream != 0;
         }
       }
       else {
         bVar4 = false;
       }
 LAB_0002639c:
-      fpilDestroyTranslator(piVar7);
+      fpilDestroyTranslator(translator);
       if (bVar4) {
-        *(undefined1 *)(param_2 + 10) = 1;
+        *(undefined1 *)(programObject + 10) = 1;
         return 0;
       }
     }
-    uVar8 = 1;
-    *(int **)(param_1 + 0x29ec) = piVar6;
+    bindResult = 1;
+    *(int **)(ctx + 0x29ec) = contextRecord;
   }
-  return uVar8;
+  return bindResult;
 }
 
 /* gld_bindProgramRecord @ 0x26440 (500 bytes) */
@@ -1322,23 +1322,24 @@ LAB_000264f0:
   return 0;
 }
 
-/* FUN_00026650 @ 0x26650 (792 bytes) */
-int FUN_00026650(param_1, param_2)
-  int param_1;
-  int *param_2;
+/* gld_bindProgramObject @ 0x26650 (792 bytes) */
+int gld_bindProgramObject(ctx, programObject)
+  int ctx;
+  int *programObject;
 {
-  short sVar1;
-  uint uVar2;
-  short *psVar3;
+  uint bindResult;
+  short programKind;
+  uint pendingGenerationBits;
+  short *programHeader;
   int iVar4;
-  int *piVar5;
+  int *contextRecord;
   int iVar6;
-  int *piVar7;
+  int *recordListHead;
   
-  if (param_2[7] != 0) goto LAB_00026758;
-  psVar3 = (short *)*param_2;
-  if (psVar3[1] == 0) {
-    if ((*psVar3 == -0x79e0) || (*psVar3 == -0x74cf)) {
+  if (programObject[7] != 0) goto LAB_00026758;
+  programHeader = (short *)*programObject;
+  if (programHeader[1] == 0) {
+    if ((*programHeader == -0x79e0) || (*programHeader == -0x74cf)) {
       iVar4 = 1;
       goto LAB_00026698;
     }
@@ -1346,94 +1347,94 @@ LAB_00026694:
     iVar4 = 0;
   }
   else {
-    if (psVar3[1] != 1) goto LAB_00026694;
-    sVar1 = *psVar3;
-    if ((sVar1 == -0x77fc) || (sVar1 == -0x74d0)) {
+    if (programHeader[1] != 1) goto LAB_00026694;
+    programKind = *programHeader;
+    if ((programKind == -0x77fc) || (programKind == -0x74d0)) {
       iVar4 = 2;
     }
     else {
       iVar4 = 3;
-      if (sVar1 != -0x7e00) goto LAB_00026694;
+      if (programKind != -0x7e00) goto LAB_00026694;
     }
   }
 LAB_00026698:
-  param_2[7] = iVar4;
+  programObject[7] = iVar4;
   if (iVar4 == 0) {
     return 0;
   }
-  param_2[8] = (int)(param_2 + 8);
-  param_2[9] = (int)(param_2 + 8);
-  iVar6 = *(int *)(param_1 + 0xc);
+  programObject[8] = (int)(programObject + 8);
+  programObject[9] = (int)(programObject + 8);
+  iVar6 = *(int *)(ctx + 0xc);
   iVar4 = *(int *)(iVar6 + 0x2c);
-  param_2[4] = iVar6 + 0x2c;
-  param_2[3] = iVar4;
-  *(int **)(iVar6 + 0x2c) = param_2 + 3;
-  *(int **)(param_2[3] + 4) = param_2 + 3;
+  programObject[4] = iVar6 + 0x2c;
+  programObject[3] = iVar4;
+  *(int **)(iVar6 + 0x2c) = programObject + 3;
+  *(int **)(programObject[3] + 4) = programObject + 3;
 LAB_00026758:
-  uVar2 = param_2[0xf];
-  if (uVar2 != 0) {
-    if ((uVar2 & 1) != 0) {
-      param_2[5] = param_2[5] + 1;
+  pendingGenerationBits = programObject[0xf];
+  if (pendingGenerationBits != 0) {
+    if ((pendingGenerationBits & 1) != 0) {
+      programObject[5] = programObject[5] + 1;
     }
-    if ((uVar2 & 2) != 0) {
-      param_2[6] = param_2[6] + 1;
+    if ((pendingGenerationBits & 2) != 0) {
+      programObject[6] = programObject[6] + 1;
     }
-    param_2[0xf] = 0;
+    programObject[0xf] = 0;
   }
-  psVar3 = (short *)*param_2;
-  if (psVar3[1] == 0) {
-    if (*psVar3 == -0x79e0) {
-      uVar2 = ((int (*)())gld_bindProgramRecord)(param_1,param_2);
-      return uVar2;
+  programHeader = (short *)*programObject;
+  if (programHeader[1] == 0) {
+    if (*programHeader == -0x79e0) {
+      bindResult = ((int (*)())gld_bindProgramRecord)(ctx,programObject);
+      return bindResult;
     }
-    if (*psVar3 == -0x74cf) {
-      uVar2 = ((int (*)())gld_bindProgramRecord)(param_1,param_2);
-      return uVar2 & 0xff;
+    if (*programHeader == -0x74cf) {
+      bindResult = ((int (*)())gld_bindProgramRecord)(ctx,programObject);
+      return bindResult & 0xff;
     }
   }
-  else if (psVar3[1] == 1) {
-    sVar1 = *psVar3;
-    if (sVar1 == -0x77fc) {
-      uVar2 = ((int (*)())FUN_00025ec0)(param_1,param_2);
-      return uVar2;
+  else if (programHeader[1] == 1) {
+    programKind = *programHeader;
+    if (programKind == -0x77fc) {
+      bindResult = ((int (*)())gld_bindFragmentProgramRecord)(ctx,programObject);
+      return bindResult;
     }
-    if (sVar1 == -0x74d0) {
-      uVar2 = ((int (*)())FUN_00025ec0)(param_1,param_2);
-      return uVar2 & 0xff;
+    if (programKind == -0x74d0) {
+      bindResult = ((int (*)())gld_bindFragmentProgramRecord)(ctx,programObject);
+      return bindResult & 0xff;
     }
-    if (sVar1 == -0x7e00) {
-      piVar5 = (int *)param_2[9];
-      piVar7 = param_2 + 8;
-      if (piVar5 == piVar7) {
+    if (programKind == -0x7e00) {
+      contextRecord = (int *)programObject[9];
+      recordListHead = programObject + 8;
+      if (contextRecord == recordListHead) {
 LAB_0002687c:
-        piVar5 = (int *)_calloc(1,*(int *)(&DAT_001aa4c4 + param_2[7] * 4) + 0x14);
-        piVar5[3] = param_2[5] + -1;
-        iVar4 = param_2[6];
-        piVar5[2] = param_1;
-        piVar5[1] = (int)piVar7;
-        piVar5[4] = iVar4 + -1;
-        *piVar5 = param_2[8];
-        param_2[8] = (int)piVar5;
-        *(int **)(*piVar5 + 4) = piVar5;
+        contextRecord = (int *)_calloc(1,*(int *)(&DAT_001aa4c4 + programObject[7] * 4) + 0x14);
+        contextRecord[3] = programObject[5] + -1;
+        iVar4 = programObject[6];
+        contextRecord[2] = ctx;
+        contextRecord[1] = (int)recordListHead;
+        contextRecord[4] = iVar4 + -1;
+        *contextRecord = programObject[8];
+        programObject[8] = (int)contextRecord;
+        *(int **)(*contextRecord + 4) = contextRecord;
       }
       else {
-        iVar4 = piVar5[2];
-        while (iVar4 != param_1) {
-          piVar5 = (int *)piVar5[1];
-          if (piVar7 == piVar5) goto LAB_0002687c;
-          iVar4 = piVar5[2];
+        iVar4 = contextRecord[2];
+        while (iVar4 != ctx) {
+          contextRecord = (int *)contextRecord[1];
+          if (recordListHead == contextRecord) goto LAB_0002687c;
+          iVar4 = contextRecord[2];
         }
       }
-      iVar4 = FUN_0003e3a0(param_1 + 0x240,piVar5 + 5);
+      iVar4 = FUN_0003e3a0(ctx + 0x240,contextRecord + 5);
       if (iVar4 != 0) {
-        if (piVar5[3] != param_2[5]) {
-          piVar5[3] = param_2[5];
-          iVar4 = atifsReplayProgram(param_1 + 0x240,*(undefined4 *)(*param_2 + 4),piVar5 + 5);
+        if (contextRecord[3] != programObject[5]) {
+          contextRecord[3] = programObject[5];
+          iVar4 = atifsReplayProgram(ctx + 0x240,*(undefined4 *)(*programObject + 4),contextRecord + 5);
           if (iVar4 == 0) {
             return 0;
           }
         }
-        *(int **)(param_1 + 0x29ec) = piVar5;
+        *(int **)(ctx + 0x29ec) = contextRecord;
         return 1;
       }
     }
@@ -1462,7 +1463,7 @@ int gld_getProgramParameter(ctx, programObject, pname, params)
   if (((programObject != (int *)0x0) && (*programObject != 0)) && (*(int *)(*programObject + 4) != 0)) {
     gld_resolveBoundTextures(ctx,0xffff,pnameCopy,paramsCopy,staleArgR7,staleArgR8);
     FUN_000a7ee0(ctx,0xffff);
-    ((int (*)())FUN_00026650)(ctx,programObject);
+    ((int (*)())gld_bindProgramObject)(ctx,programObject);
     programHeader = (short *)*programObject;
     if (programHeader[1] == 0) {
       if (*programHeader == -0x79e0) {
@@ -1723,94 +1724,95 @@ void FUN_00026f80(int ctx,uint *param_2,uint *param_3,undefined4 param_4,undefin
   return;
 }
 
-/* FUN_00027150 @ 0x27150 (564 bytes) */
-int FUN_00027150(param_1, param_2, param_3, param_4)
-  int param_1;
-  undefined4 param_2;
-  int param_3;
-  int param_4;
+/* gld_drawArraysStream @ 0x27150 (564 bytes) */
+int gld_drawArraysStream(ctx, staleArgR4, primitiveMode, vertexCount)
+  int ctx;
+  undefined4 staleArgR4;
+  int primitiveMode;
+  int vertexCount;
 {
-  byte bVar1;
-  uint uVar2;
-  uint *puVar3;
+  uint primFlags;
+  byte vertexStrideWords;
+  uint streamCountWord;
+  uint *lastHeader;
   undefined4 uVar4;
-  int iVar5;
-  undefined4 *puVar6;
+  int trimmedCount;
+  undefined4 *packetBody;
   undefined4 *puVar7;
-  int iVar8;
-  int iVar9;
-  int iVar10;
-  int iVar11;
+  int dataBase;
+  int streamExtArray;
+  int dataCursorBefore;
+  int streamAddrArray;
   
-  if (param_4 < 4) {
-    iVar5 = ((int (*)())gldTrimVertexCountToPrimitiveMin)(param_1,param_3,param_4);
+  if (vertexCount < 4) {
+    trimmedCount = ((int (*)())gldTrimVertexCountToPrimitiveMin)(ctx,primitiveMode,vertexCount);
   }
   else {
-    iVar5 = ((int (*)())gldTrimVertexCountToPrimitive)(param_1,param_3,param_4);
+    trimmedCount = ((int (*)())gldTrimVertexCountToPrimitive)(ctx,primitiveMode,vertexCount);
   }
-  if (iVar5 != 0) {
-    uVar2 = *(uint *)(param_1 + 0x283c);
-    if (*(char *)(param_1 + 0x27d4) == '\0') {
-      bVar1 = *(byte *)(*(int *)(((unsigned char *)0x000027cc) + param_1) + 2);
+  if (trimmedCount != 0) {
+    streamCountWord = *(uint *)(ctx + 0x283c);
+    if (*(char *)(ctx + 0x27d4) == '\0') {
+      vertexStrideWords = *(byte *)(*(int *)(((unsigned char *)0x000027cc) + ctx) + 2);
     }
     else {
-      bVar1 = *(byte *)(*(int *)(0x000027d0 + param_1) + 2);
+      vertexStrideWords = *(byte *)(*(int *)(0x000027d0 + ctx) + 2);
     }
-    puVar7 = *(undefined4 **)(param_1 + 0x1dc);
-    iVar10 = *(int *)(param_1 + 500);
-    iVar8 = *(int *)(param_1 + 0x1fc);
-    *(uint *)(param_1 + 500) = iVar10 + (uint)bVar1 * iVar5 * 4;
-    if (*(undefined4 **)(param_1 + 0x1e0) <= puVar7 + 0x53) {
-      gld_submitRing(param_1,0x1000000);
-      puVar7 = *(undefined4 **)(param_1 + 0x1dc);
+    puVar7 = *(undefined4 **)(ctx + 0x1dc);
+    dataCursorBefore = *(int *)(ctx + 500);
+    dataBase = *(int *)(ctx + 0x1fc);
+    *(uint *)(ctx + 500) = dataCursorBefore + (uint)vertexStrideWords * trimmedCount * 4;
+    if (*(undefined4 **)(ctx + 0x1e0) <= puVar7 + 0x53) {
+      gld_submitRing(ctx,0x1000000);
+      puVar7 = *(undefined4 **)(ctx + 0x1dc);
     }
-    puVar6 = puVar7;
-    if (*(char *)(param_1 + 0x2a42) != '\0') {
-      puVar6 = puVar7 + 2;
+    packetBody = puVar7;
+    if (*(char *)(ctx + 0x2a42) != '\0') {
+      packetBody = puVar7 + 2;
       *puVar7 = 0x5c8;
       puVar7[1] = 0x10000000;
-      *(undefined1 *)(param_1 + 0x2a42) = 0;
+      *(undefined1 *)(ctx + 0x2a42) = 0;
     }
-    if (*(char *)(param_1 + 0x27d4) == '\0') {
-      if (*(int *)(param_1 + 0x2680) != param_1 + 0x2840) {
-        *(int *)(param_1 + 0x2680) = param_1 + 0x2840;
-        *(int *)(param_1 + 0x2684) = param_1 + 0x2860;
-        puVar6 = (undefined4 *)((int (*)())gld_emitVapStreamControl)(param_1,puVar6);
+    if (*(char *)(ctx + 0x27d4) == '\0') {
+      if (*(int *)(ctx + 0x2680) != ctx + 0x2840) {
+        *(int *)(ctx + 0x2680) = ctx + 0x2840;
+        *(int *)(ctx + 0x2684) = ctx + 0x2860;
+        packetBody = (undefined4 *)((int (*)())gld_emitVapStreamControl)(ctx,packetBody);
       }
-      puVar3 = *(uint **)(param_1 + 0x1d8);
-      iVar11 = param_1 + 0x2880;
-      iVar9 = param_1 + 0x28a0;
+      lastHeader = *(uint **)(ctx + 0x1d8);
+      streamAddrArray = ctx + 0x2880;
+      streamExtArray = ctx + 0x28a0;
     }
     else {
-      if (*(int *)(param_1 + 0x2680) != param_1 + 0x28e4) {
-        *(int *)(param_1 + 0x2680) = param_1 + 0x28e4;
-        *(int *)(param_1 + 0x2684) = param_1 + 0x2904;
-        puVar6 = (undefined4 *)((int (*)())gld_emitVapStreamControl)(param_1,puVar6);
+      if (*(int *)(ctx + 0x2680) != ctx + 0x28e4) {
+        *(int *)(ctx + 0x2680) = ctx + 0x28e4;
+        *(int *)(ctx + 0x2684) = ctx + 0x2904;
+        packetBody = (undefined4 *)((int (*)())gld_emitVapStreamControl)(ctx,packetBody);
       }
-      puVar3 = *(uint **)(param_1 + 0x1d8);
-      iVar11 = param_1 + 0x2924;
-      iVar9 = param_1 + 0x2944;
+      lastHeader = *(uint **)(ctx + 0x1d8);
+      streamAddrArray = ctx + 0x2924;
+      streamExtArray = ctx + 0x2944;
     }
-    *puVar3 = (int)puVar6 - (int)puVar3 >> 2 | *puVar3;
-    *(undefined4 **)(param_1 + 0x1d8) = puVar6;
-    *puVar6 = 0x36000000;
-    uVar4 = *(undefined4 *)(param_1 + 0x200);
-    puVar6[2] = uVar2 & 0x1f;
-    puVar6[3] = iVar10 - iVar8;
-    puVar6[1] = uVar4;
-    *(int *)(param_1 + 0x26d4) = iVar11;
-    *(int *)(param_1 + 0x26d8) = iVar9;
-    *(undefined4 *)(param_1 + 0x26d0) = *(undefined4 *)(param_1 + 0x283c);
-    puVar7 = (undefined4 *)((int (*)())gld_emitStreamAddressRegisters)(param_1,puVar6 + 4);
-    uVar2 = *(uint *)(&DAT_001d9888 + param_3 * 4);
+    *lastHeader = (int)packetBody - (int)lastHeader >> 2 | *lastHeader;
+    *(undefined4 **)(ctx + 0x1d8) = packetBody;
+    *packetBody = 0x36000000;
+    uVar4 = *(undefined4 *)(ctx + 0x200);
+    packetBody[2] = streamCountWord & 0x1f;
+    packetBody[3] = dataCursorBefore - dataBase;
+    packetBody[1] = uVar4;
+    *(int *)(ctx + 0x26d4) = streamAddrArray;
+    *(int *)(ctx + 0x26d8) = streamExtArray;
+    *(undefined4 *)(ctx + 0x26d0) = *(undefined4 *)(ctx + 0x283c);
+    puVar7 = (undefined4 *)((int (*)())gld_emitStreamAddressRegisters)(ctx,packetBody + 4);
+    primFlags = *(uint *)(&DAT_001d9888 + primitiveMode * 4);
     *puVar7 = 0x82c;
-    uVar4 = *(undefined4 *)(0x00001dc4 + param_1);
+    uVar4 = *(undefined4 *)(0x00001dc4 + ctx);
     puVar7[4] = ((unsigned char *)0x00001393U);
     puVar7[2] = 0xc0003400;
     puVar7[5] = 0;
     puVar7[1] = uVar4;
-    puVar7[3] = iVar5 << 0x10 | uVar2 & 0xf | 0x820;
-    *(undefined4 **)(param_1 + 0x1dc) = puVar7 + 6;
+    puVar7[3] = trimmedCount << 0x10 | primFlags & 0xf | 0x820;
+    *(undefined4 **)(ctx + 0x1dc) = puVar7 + 6;
   }
   return;
 }
@@ -6779,7 +6781,7 @@ asm(".set FUN_00026bf0, _gld_drawArraysDirect");
 asm(".globl FUN_00026f80");
 asm(".set FUN_00026f80, _FUN_00026f80");
 asm(".globl FUN_00027150");
-asm(".set FUN_00027150, _FUN_00027150");
+asm(".set FUN_00027150, _gld_drawArraysStream");
 asm(".globl FUN_000273a0");
 asm(".set FUN_000273a0, _gld_reserveDrawSpace");
 asm(".globl glReadPixels_entry");

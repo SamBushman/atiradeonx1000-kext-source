@@ -257,13 +257,13 @@
 0x24fe0	FUN_00024fe0	2908	yes	
 0x25bf0	FUN_00025bf0	408	no	calls an import (free); calls an import (glpFreePPShaderLinearize); calls an import (glpFreePPShaderToProgram)
 0x25da0	gld_deleteContextProgramObjects	264	no	calls an import (free); calls an import (pthread_mutex_lock)
-0x25ec0	FUN_00025ec0	1372	no	calls an import (calloc); calls an import (free); calls an import (glpFreePPShaderLinearize)
+0x25ec0	gld_bindFragmentProgramRecord	1372	no	calls an import (calloc); calls an import (free); calls an import (glpFreePPShaderLinearize)
 0x26440	gld_bindProgramRecord	500	no	calls an import (calloc); calls an import (glpFreePPShaderLinearize); calls an import (glpFreePPShaderToProgram)
-0x26650	FUN_00026650	792	no	calls an import (calloc)
+0x26650	gld_bindProgramObject	792	no	calls an import (calloc)
 0x269a0	gld_getProgramParameter	516	yes	
 0x26bf0	gld_drawArraysDirect	876	yes	
 0x26f80	FUN_00026f80	460	no	calls an import (io_connect_method_scalarI_scalarO)
-0x27150	FUN_00027150	564	yes	
+0x27150	gld_drawArraysStream	564	yes	
 0x273a0	gld_reserveDrawSpace	1484	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x27990	FUN_00027990	2360	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x28350	gld_readPixelsViaBlit	3820	no	atomic / cache / barrier instruction; calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
