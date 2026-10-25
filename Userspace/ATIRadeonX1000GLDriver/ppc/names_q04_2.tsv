@@ -1,1 +1,1 @@
-local	FUN_000a9ac0	param_1	stream	INFERRED	caller (gldValidateState) passes ctx + GLD_commandStream, the embedded stream object at ctx+0x240; every field access below is relative to it
+local	FUN_000a9ac0	param_1	glContext	INFERRED	caller (gldValidateState) passes ctx + GLD_commandStream, the embedded stream object at ctx+0x240; every field access below is relative to it

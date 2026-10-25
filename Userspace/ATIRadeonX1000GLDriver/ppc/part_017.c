@@ -2984,8 +2984,8 @@ void FUN_000bd9a0(int glContext,undefined4 param_2,undefined4 param_3,undefined4
 }
 
 /* FUN_000bda40 @ 0xbda40 (1016 bytes) */
-int FUN_000bda40(stream, unusedArgR4, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord1, unusedArgR9, dirtyWord4)
-  int stream;
+int FUN_000bda40(glContext, unusedArgR4, dirtyBitsArg, scratchR6, dirtyWord3, dirtyWord1, unusedArgR9, dirtyWord4)
+  int glContext;
   undefined4 unusedArgR4;
   undefined4 dirtyBitsArg;
   undefined4 scratchR6;
@@ -2994,8 +2994,8 @@ int FUN_000bda40(stream, unusedArgR4, dirtyBitsArg, scratchR6, dirtyWord3, dirty
   undefined4 unusedArgR9;
   undefined4 dirtyWord4;
 {
-  uint streamWord44;
-  byte streamByte13b0;
+  uint glContextWord44;
+  byte glContextByte13b0;
   byte bVar1;
   ushort uVar2;
   short sVar3;
@@ -3006,7 +3006,7 @@ int FUN_000bda40(stream, unusedArgR4, dirtyBitsArg, scratchR6, dirtyWord3, dirty
   int iVar8;
   uint loopIndex2;
   int iVar10;
-  uint streamWord8c;
+  uint glContextWord8c;
   uint uVar12;
   uint uVar13;
   uint uVar14;
@@ -3021,48 +3021,48 @@ int FUN_000bda40(stream, unusedArgR4, dirtyBitsArg, scratchR6, dirtyWord3, dirty
   int iVar23;
   uint uVar24;
   
-  streamWord44 = *(uint *)(stream + 0x44);
-  if (((((streamWord44 & 0x2000) == 0) || ((*(byte *)(stream + 0x2e) & 1) != 0)) ||
-      ((*(uint *)(stream + 0x38) & 0x8000) != 0)) || (*(short *)(stream + 0x42) != 0)) {
-    streamByte13b0 = ((unsigned char *)0x000013b0)[stream];
-    iVar16 = stream + 0x44;
-    *(uint *)(stream + 0x8c) = *(uint *)(stream + 0x8c) & 0xf07fffff;
-    *(uint *)(stream + 0x1874) = *(uint *)(stream + 0x1874) & 0xfdffffff;
-    uVar24 = (uint)*(byte *)(stream + 0x2b);
-    if ((uint)streamByte13b0 < (uint)*(byte *)(stream + 0x2b)) {
-      uVar24 = (uint)streamByte13b0;
+  glContextWord44 = *(uint *)(glContext + 0x44);
+  if (((((glContextWord44 & 0x2000) == 0) || ((*(byte *)(glContext + 0x2e) & 1) != 0)) ||
+      ((*(uint *)(glContext + 0x38) & 0x8000) != 0)) || (*(short *)(glContext + 0x42) != 0)) {
+    glContextByte13b0 = ((unsigned char *)0x000013b0)[glContext];
+    iVar16 = glContext + 0x44;
+    *(uint *)(glContext + 0x8c) = *(uint *)(glContext + 0x8c) & 0xf07fffff;
+    *(uint *)(glContext + 0x1874) = *(uint *)(glContext + 0x1874) & 0xfdffffff;
+    uVar24 = (uint)*(byte *)(glContext + 0x2b);
+    if ((uint)glContextByte13b0 < (uint)*(byte *)(glContext + 0x2b)) {
+      uVar24 = (uint)glContextByte13b0;
     }
-    if ((streamWord44 & 0x20000) == 0) {
-      *(undefined1 *)(stream + 0x1878) = 0;
+    if ((glContextWord44 & 0x20000) == 0) {
+      *(undefined1 *)(glContext + 0x1878) = 0;
       uVar21 = 0;
     }
     else {
-      if ((streamWord44 & 0x2000) == 0) {
-        bVar1 = ((unsigned char *)0x00001135)[stream];
+      if ((glContextWord44 & 0x2000) == 0) {
+        bVar1 = ((unsigned char *)0x00001135)[glContext];
       }
       else {
-        bVar1 = ((unsigned char *)0x000011d3)[stream];
+        bVar1 = ((unsigned char *)0x000011d3)[glContext];
       }
       uVar21 = (uint)bVar1;
-      *(byte *)(stream + 0x1878) = bVar1;
+      *(byte *)(glContext + 0x1878) = bVar1;
     }
     loopIndex = 0;
     if (uVar24 != 0) {
       loopIndex2 = 0;
-      iVar8 = stream;
-      iVar22 = stream;
-      iVar23 = stream;
+      iVar8 = glContext;
+      iVar22 = glContext;
+      iVar23 = glContext;
       while( true ) {
         uVar6 = *(uint *)(iVar16 + 4) & 0x1e0;
-        if ((streamWord44 & 0x20000) == 0) {
+        if ((glContextWord44 & 0x20000) == 0) {
           uVar14 = *(uint *)(iVar16 + 4) & 0x1f;
         }
         else {
           uVar14 = uVar21 & 1 << (loopIndex2 & 0x3f);
         }
-        iVar10 = stream + 0x450 + loopIndex2 * 0xcc;
+        iVar10 = glContext + 0x450 + loopIndex2 * 0xcc;
         if ((int)-uVar14 < 0) {
-          iVar15 = loopIndex2 * 2 + stream;
+          iVar15 = loopIndex2 * 2 + glContext;
           bVar5 = *(char *)(iVar23 + 0x2784) == '\0';
           *(uint *)(iVar8 + 0x150) = (uint)bVar5;
           uVar7 = (ushort)bVar5 << 0xe;
@@ -3070,7 +3070,7 @@ int FUN_000bda40(stream, unusedArgR4, dirtyBitsArg, scratchR6, dirtyWord3, dirty
           *(ushort *)(iVar15 + 0x187c) = uVar2 & 0xbfff | uVar7;
           if (uVar6 == 0) {
             *(ushort *)(iVar15 + 0x187c) = uVar2 & 0x8003 | uVar7;
-            uVar14 = *(uint *)(stream + 0x8c);
+            uVar14 = *(uint *)(glContext + 0x8c);
           }
           else {
             uVar19 = uVar6 >> 7 & 1;
@@ -3101,38 +3101,38 @@ int FUN_000bda40(stream, unusedArgR4, dirtyBitsArg, scratchR6, dirtyWord3, dirty
                                         (*(ushort *)(iVar22 + 0x4f8) >> 2 & 4 |
                                         *(ushort *)(iVar22 + 0x4f8) & 3) * 4) << 9;
             }
-            iVar15 = loopIndex2 * 2 + stream;
+            iVar15 = loopIndex2 * 2 + glContext;
             uVar17 = (((ushort)(*(short *)(iVar10 + 0x3c) + 0x7aefU) < 2 || sVar3 == -0x7aee) ||
                      sVar3 == -0x7aef) | uVar17;
             uVar4 = (uint)(*(short *)(iVar10 + 0x3c) == 0x2402 || sVar3 == 0x2402);
             uVar13 = uVar17 | uVar4;
             *(ushort *)(iVar15 + 0x187c) =
                  *(ushort *)(iVar15 + 0x187c) & 0xc003 | (ushort)(uVar12 << 2) & 0x3ffc;
-            streamWord8c = *(uint *)(stream + 0x8c);
-            uVar17 = (uVar17 | streamWord8c >> 0x1b & 1) << 0x1b;
-            *(uint *)(stream + 0x1874) =
-                 (uVar13 | *(uint *)(stream + 0x1874) >> 0x19 & 1) << 0x19 |
-                 *(uint *)(stream + 0x1874) & 0xfdffffff;
-            uVar12 = (uVar4 | (streamWord8c & 0xf7ffffff) >> 0x1a & 1) << 0x1a;
-            *(uint *)(stream + 0x8c) = uVar12 | uVar17 | streamWord8c & 0xf3ffffff;
-            uVar14 = ((streamWord8c & 0x2000000) >> 0x19 |
+            glContextWord8c = *(uint *)(glContext + 0x8c);
+            uVar17 = (uVar17 | glContextWord8c >> 0x1b & 1) << 0x1b;
+            *(uint *)(glContext + 0x1874) =
+                 (uVar13 | *(uint *)(glContext + 0x1874) >> 0x19 & 1) << 0x19 |
+                 *(uint *)(glContext + 0x1874) & 0xfdffffff;
+            uVar12 = (uVar4 | (glContextWord8c & 0xf7ffffff) >> 0x1a & 1) << 0x1a;
+            *(uint *)(glContext + 0x8c) = uVar12 | uVar17 | glContextWord8c & 0xf3ffffff;
+            uVar14 = ((glContextWord8c & 0x2000000) >> 0x19 |
                      uVar13 | *(short *)(iVar10 + 0x3c) == 0x2400 & uVar14 |
                               *(short *)(iVar10 + 0x60) == 0x2400 & uVar20 |
                               *(short *)(iVar10 + 0x84) == 0x2400 & uVar19 |
                               (uint)(*(short *)(iVar10 + 0xa8) == 0x2400) & uVar6 >> 8) << 0x19 |
-                     uVar12 | uVar17 | streamWord8c & 0xf1ffffff;
-            *(uint *)(stream + 0x8c) = uVar14;
+                     uVar12 | uVar17 | glContextWord8c & 0xf1ffffff;
+            *(uint *)(glContext + 0x8c) = uVar14;
           }
-          *(uint *)(stream + 0x8c) = uVar14 | 0x800000;
+          *(uint *)(glContext + 0x8c) = uVar14 | 0x800000;
           iVar10 = loopIndex * 4;
           loopIndex = loopIndex + 1;
-          *(uint *)(stream + 0x8c) =
+          *(uint *)(glContext + 0x8c) =
                (uint)(0 < (int)loopIndex2) << 0x18 | uVar14 & 0xfeffffff | 0x800000;
-          *(uint *)(iVar10 + stream + 0x98) = loopIndex2;
+          *(uint *)(iVar10 + glContext + 0x98) = loopIndex2;
         }
         else {
           *(undefined4 *)(iVar8 + 0x150) = 0;
-          iVar10 = loopIndex2 * 2 + stream;
+          iVar10 = loopIndex2 * 2 + glContext;
           *(ushort *)(iVar10 + 0x187c) = *(ushort *)(iVar10 + 0x187c) & 0x8003;
         }
         loopIndex2 = loopIndex2 + 1;
@@ -3142,10 +3142,10 @@ int FUN_000bda40(stream, unusedArgR4, dirtyBitsArg, scratchR6, dirtyWord3, dirty
         iVar23 = iVar23 + 1;
         uVar24 = uVar24 - 1;
         if (uVar24 == 0) break;
-        streamWord44 = *(uint *)(stream + 0x44);
+        glContextWord44 = *(uint *)(glContext + 0x44);
       }
     }
-    *(int *)(stream + 0x94) = loopIndex;
+    *(int *)(glContext + 0x94) = loopIndex;
   }
   return;
 }

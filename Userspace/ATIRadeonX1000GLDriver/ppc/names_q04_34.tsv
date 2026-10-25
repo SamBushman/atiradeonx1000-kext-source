@@ -11,7 +11,7 @@ local	scCallbackAppendFormatted	param_5	formatArg2	INFERRED	variadic value forwa
 local	scCallbackAppendFormatted	param_6	formatArg3	INFERRED	variadic value forwarded in r8
 local	scCallbackAppendFormatted	param_7	formatArg4	INFERRED	variadic value forwarded in r9
 local	scCallbackAppendFormatted	param_8	formatArg5	INFERRED	variadic value forwarded in r10
-local	gldMarkAllStateDirty	param_1	stream	INFERRED	the stream/state object whose +0x29 flag, +0x2c..+0x34 and +0x38/+0x3c/+0x40 dirty words FUN_000a9ac0 (stream) consumes; every dirty word is set to its full mask here
+local	gldMarkAllStateDirty	param_1	glContext	INFERRED	the stream/state object whose +0x29 flag, +0x2c..+0x34 and +0x38/+0x3c/+0x40 dirty words FUN_000a9ac0 (stream) consumes; every dirty word is set to its full mask here
 local	FUN_000cd05c	param_1	scCallbacks	INFERRED	callback block: +0x2c user data, +0x30 allocator, +0x34 free (all checked non-NULL, plus +0x38..+0x4c)
 local	FUN_000cd05c	param_3	allocTag	INFERRED	third argument handed unchanged to the allocator (+0x30) and to the free callback (+0x34)
 local	FUN_000ab940	param_1	srcKind	INFERRED	3 selects the special encodings (0x17/0x18), anything else gives type 4

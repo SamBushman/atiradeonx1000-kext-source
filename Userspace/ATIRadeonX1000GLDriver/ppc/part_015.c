@@ -4145,28 +4145,28 @@ int FUN_000a7a60(ctx)
 }
 
 /* gldMarkAllStateDirty @ 0xa7c60 (176 bytes) */
-int gldMarkAllStateDirty(stream)
-  int stream;
+int gldMarkAllStateDirty(glContext)
+  int glContext;
 {
   int iVar1;
   uint uVar2;
   
-  uVar2 = (uint)(byte)((unsigned char *)0x000013b5)[stream];
-  *(undefined1 *)(stream + 0x2d) = 0xf;
-  *(undefined1 *)(stream + 0x2e) = 3;
-  *(undefined1 *)(stream + 0x30) = 7;
-  *(undefined1 *)(stream + 0x2c) = 0xff;
-  *(undefined4 *)(stream + 0x38) = 0x7ffff;
-  *(undefined4 *)(stream + 0x40) = 0x7ffff;
-  *(undefined2 *)(stream + 0x32) = 0xffff;
-  *(undefined2 *)(stream + 0x34) = 0xffff;
-  *(undefined1 *)(stream + 0x29) = 1;
-  *(undefined4 *)(stream + 0x3c) = 0x800015ff;
-  *(undefined4 *)(stream + 0x180c) = 5;
-  *(undefined4 *)(stream + 0x1810) = 0x1f;
-  *(undefined1 *)(stream + 0x2a) = 1;
+  uVar2 = (uint)(byte)((unsigned char *)0x000013b5)[glContext];
+  *(undefined1 *)(glContext + 0x2d) = 0xf;
+  *(undefined1 *)(glContext + 0x2e) = 3;
+  *(undefined1 *)(glContext + 0x30) = 7;
+  *(undefined1 *)(glContext + 0x2c) = 0xff;
+  *(undefined4 *)(glContext + 0x38) = 0x7ffff;
+  *(undefined4 *)(glContext + 0x40) = 0x7ffff;
+  *(undefined2 *)(glContext + 0x32) = 0xffff;
+  *(undefined2 *)(glContext + 0x34) = 0xffff;
+  *(undefined1 *)(glContext + 0x29) = 1;
+  *(undefined4 *)(glContext + 0x3c) = 0x800015ff;
+  *(undefined4 *)(glContext + 0x180c) = 5;
+  *(undefined4 *)(glContext + 0x1810) = 0x1f;
+  *(undefined1 *)(glContext + 0x2a) = 1;
   if (uVar2 != 0) {
-    iVar1 = stream;
+    iVar1 = glContext;
     if (uVar2 == 0) {
       uVar2 = 1;
     }
@@ -4177,8 +4177,8 @@ int gldMarkAllStateDirty(stream)
       uVar2 = uVar2 - 1;
     } while (uVar2 != 0);
   }
-  *(undefined1 *)(stream + 0x29) = 1;
-  *(undefined1 *)(stream + 0x23ec) = 1;
+  *(undefined1 *)(glContext + 0x29) = 1;
+  *(undefined1 *)(glContext + 0x23ec) = 1;
   return;
 }
 

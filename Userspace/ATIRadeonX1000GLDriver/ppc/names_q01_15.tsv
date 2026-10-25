@@ -12,7 +12,7 @@ local	FUN_000230d0	puVar5	packetBase	INFERRED	start of the 0x30000000 copy packe
 local	FUN_000230d0	puVar3	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length
 local	FUN_000230d0	puVar2	colorFormatTable	INFERRED	PTR_DAT_001e88c8: the 0x24-byte pixel-format table, indexed by ctx colorFormatIndex
 local	FUN_000230d0	uVar4	registerValue	INFERRED	scratch holding the register value being copied into the restore packet
-local	FUN_0001fd00	param_1	stream	INFERRED	the embedded command-stream object (ctx+0x240); +0x243c is the stream count, +0x1be4/+0x23f0.. the stream-control shadows
+local	FUN_0001fd00	param_1	glContext	INFERRED	the embedded command-stream object (ctx+0x240); +0x243c is the stream count, +0x1be4/+0x23f0.. the stream-control shadows
 local	FUN_0001fd00	piVar13	vertexArray	INFERRED	current vertex array (engine object +0x1d4)
 local	FUN_0001fd00	iVar6	arrayDesc	INFERRED	vertexArray[0]: masks +0x300/+0x304/+0x308/+0x30c
 local	FUN_0001fd00	iVar18	dirtyState	INFERRED	vertexArray[1]: per-attribute buffer records
