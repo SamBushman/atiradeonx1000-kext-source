@@ -1,0 +1,78 @@
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	recordPtr	INFERRED	address of the current texture record: this[0x2a] + this[0x18]*0x48	^\s*iVar13\ =\ param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\];$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	recordPtr	INFERRED	address of the current texture record: this[0x2a] + this[0x18]*0x48	^\s*iVar13\ =\ param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\];$@2	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	recordPtr	INFERRED	address of the current texture record: this[0x2a] + this[0x18]*0x48	^\s*\*\(undefined1\ \*\)\(iVar13\ \+\ 0x1c\)\ =\ uVar2;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	recordPtr	INFERRED	address of the current texture record: this[0x2a] + this[0x18]*0x48	^\s*iVar13\ =\ param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\];$@3	+2
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	recordPtr	INFERRED	address of the current texture record: this[0x2a] + this[0x18]*0x48	^\s*iVar13\ =\ param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\];$@4	+2
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	recordPtr	INFERRED	address of the current texture record: this[0x2a] + this[0x18]*0x48	^\s*iVar13\ =\ param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\];$@5	+2
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	recordPtr	INFERRED	address of the current texture record: this[0x2a] + this[0x18]*0x48	^\s*iVar13\ =\ param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\];$@6	+2
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	recordPtr	INFERRED	address of the current texture record: this[0x2a] + this[0x18]*0x48	^\s*iVar13\ =\ param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\];$@7	+2
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	recordPtr	INFERRED	address of the current texture record: this[0x2a] + this[0x18]*0x48	^\s*iVar13\ =\ param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\];$@8	+2
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	recordPtr	INFERRED	address of the current texture record: this[0x2a] + this[0x18]*0x48	^\s*iVar13\ =\ param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\];$@9	+2
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	recordPtr	INFERRED	address of the current texture record: this[0x2a] + this[0x18]*0x48	^\s*iVar13\ =\ param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\];$@10	+2
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	recordIndex	INFERRED	current record index this[0x18]	^\s*iVar13\ =\ param_1\[0x18\];$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	recordIndex	INFERRED	current record index this[0x18]	^\s*\*\(undefined2\ \*\)\(iVar13\ \*\ 0x48\ \+\ iVar12\ \+\ 0x10\)\ =\ uVar7;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	recordIndex	INFERRED	current record index this[0x18]	^\s*iVar13\ =\ param_1\[0x18\];$@2	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	recordIndex	INFERRED	current record index this[0x18]	^\s*\*\(undefined2\ \*\)\(iVar13\ \*\ 0x48\ \+\ iVar12\ \+\ 0x12\)\ =\ uVar7;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar15	recordIndex2	INFERRED	current record index this[0x18]	^\s*iVar15\ =\ param_1\[0x18\];$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar15	recordIndex2	INFERRED	current record index this[0x18]	^\s*\*\(undefined2\ \*\)\(iVar15\ \*\ 0x48\ \+\ iVar5\ \+\ 0xc\)\ =\ uVar7;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar5	recordTable	INFERRED	texture record table base this[0x2a]	^\s*iVar5\ =\ param_1\[0x2a\];$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar5	recordTable	INFERRED	texture record table base this[0x2a]	^\s*\*\(undefined2\ \*\)\(iVar15\ \*\ 0x48\ \+\ iVar5\ \+\ 0xc\)\ =\ uVar7;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar5	src1Vslot80Result	INFERRED	result of the virtual call at vtable +0x80 on the effective first source	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar4\ \+\ 0x80\)\)\(piVar4\);$	+2
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar5	recordPtr2	INFERRED	address of the current texture record: this[0x2a] + this[0x18]*0x48	^\s*iVar5\ =\ param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\];$	+2
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar5	recordPtr2	INFERRED	address of the current texture record: this[0x2a] + this[0x18]*0x48	^\s*\*\(byte\ \*\)\(iVar5\ \+\ 0x1d\)\ =\ bVar10\ \|\ bVar8;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar5	recordPtr2	INFERRED	address of the current texture record: this[0x2a] + this[0x18]*0x48	^\s*iVar5\ =\ param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\];$@2	+2
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar5	recordPtr2	INFERRED	address of the current texture record: this[0x2a] + this[0x18]*0x48	^\s*\*\(byte\ \*\)\(iVar5\ \+\ 0x1e\)\ =\ bVar10\ \|\ \*\(char\ \*\)\(iVar13\ \+\ 0x13\)\ ==\ '\\0';$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	bVar10	formatCode	INFERRED	texture format code (0xc, 0xe, 8 or 0) chosen from the target kind	^\s*bVar10\ =\ 0xc;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	bVar10	formatCode	INFERRED	texture format code (0xc, 0xe, 8 or 0) chosen from the target kind	^\s*bVar10\ =\ 0xe;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	bVar10	formatCode	INFERRED	texture format code (0xc, 0xe, 8 or 0) chosen from the target kind	^\s*bVar10\ =\ 0;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	bVar10	formatCode	INFERRED	texture format code (0xc, 0xe, 8 or 0) chosen from the target kind	^\s*bVar10\ =\ 8;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	bVar10	formatCode	INFERRED	texture format code (0xc, 0xe, 8 or 0) chosen from the target kind	^\s*\*\(byte\ \*\)\(param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\]\ \+\ 0x1f\)\ =\ bVar10\ \&\ 7;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	bVar10	formatCode	INFERRED	texture format code (0xc, 0xe, 8 or 0) chosen from the target kind	^\s*\*\(byte\ \*\)\(param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\]\ \+\ 0x1f\)\ =\ bVar10;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	bVar10	oldRgbMask	INFERRED	previous value of record+0x1d, or-ed with the rgb lane mask	^\s*bVar10\ =\ \*\(byte\ \*\)\(iVar5\ \+\ 0x1d\);$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	bVar10	oldRgbMask	INFERRED	previous value of record+0x1d, or-ed with the rgb lane mask	^\s*\*\(byte\ \*\)\(iVar5\ \+\ 0x1d\)\ =\ bVar10\ \|\ bVar8;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	bVar10	oldAlphaMask	INFERRED	previous value of record+0x1e, or-ed with the alpha lane flag	^\s*bVar10\ =\ \*\(byte\ \*\)\(iVar5\ \+\ 0x1e\);$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	bVar10	oldAlphaMask	INFERRED	previous value of record+0x1e, or-ed with the alpha lane flag	^\s*\*\(byte\ \*\)\(iVar5\ \+\ 0x1e\)\ =\ bVar10\ \|\ \*\(char\ \*\)\(iVar13\ \+\ 0x13\)\ ==\ '\\0';$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	bVar1	isFlag138One	INFERRED	inst->+0x138 == 1: stored into record+0x18	^\s*bVar1\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x138\)\ ==\ 1;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	bVar1	isFlag138One	INFERRED	inst->+0x138 == 1: stored into record+0x18	^\s*\*\(bool\ \*\)\(param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\]\ \+\ 0x18\)\ =\ bVar1;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	bVar1	isFlag138One	INFERRED	inst->+0x138 == 1: stored into record+0x18	^\s*\*\(bool\ \*\)\(param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\]\ \+\ 0x18\)\ =\ bVar1;$@2	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar2	flag1c	INFERRED	value stored at record+0x1c (0 or 1 depending on inst flags and option 0x22)	^\s*uVar2\ =\ 0;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar2	flag1c	INFERRED	value stored at record+0x1c (0 or 1 depending on inst flags and option 0x22)	^\s*uVar2\ =\ 1;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar2	flag1c	INFERRED	value stored at record+0x1c (0 or 1 depending on inst flags and option 0x22)	^\s*\*\(undefined1\ \*\)\(iVar13\ \+\ 0x1c\)\ =\ uVar2;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar6	src1SelectWord	INFERRED	select word (+0x10) of source operand 1 of the mix instruction / of inst	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(iVar12\ \+\ 0x10\);$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar6	src1SelectWord	INFERRED	select word (+0x10) of source operand 1 of the mix instruction / of inst	^\s*FUN_000f2bdc\(\&local_48,uVar6,unaff_r22\);$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar6	src1SelectWord	INFERRED	select word (+0x10) of source operand 1 of the mix instruction / of inst	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(iVar12\ \+\ 0x10\);$@2	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar6	src1SelectWord	INFERRED	select word (+0x10) of source operand 1 of the mix instruction / of inst	^\s*\*\(undefined4\ \*\)\(iVar12\ \+\ 0x10\)\ =\ uVar6;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar7	sourceRegister16	INFERRED	register index of the first source (vtable +0x158)	^\s*uVar7\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x158\)\)\(param_1,param_2,1,param_4\);$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar7	sourceRegister16	INFERRED	register index of the first source (vtable +0x158)	^\s*\*\(undefined2\ \*\)\(param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\]\ \+\ 0xe\)\ =\ uVar7;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar7	registerIndex16	INFERRED	register index returned by FUN_00134de8 for the instruction / source	^\s*uVar7\ =\ thunk_FUN_00134de8\(\*\(undefined4\ \*\)\(param_4\ \+\ COMP_currentProgram\),param_2\);$	+2
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar7	registerIndex16	INFERRED	register index returned by FUN_00134de8 for the instruction / source	^\s*uVar7\ =\ thunk_FUN_00134de8\(uVar14,uVar6\);$	+2
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar7	registerIndex16	INFERRED	register index returned by FUN_00134de8 for the instruction / source	^\s*uVar7\ =\ thunk_FUN_00134de8\(uVar14,uVar6\);$@2	+2
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar9	src2SelectWord	INFERRED	select word of source operand 2	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar12\ \+\ 0x10\);$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar9	src2SelectWord	INFERRED	select word of source operand 2	^\s*\*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ =\ uVar9\ >>\ 10\ \&\ 0xc000\ \|\ \*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ \&\ 0xffff3fff;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar9	src2SelectWord	INFERRED	select word of source operand 2	^\s*\*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ =\ uVar9\ >>\ 4\ \&\ 0x3000\ \|\ \*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ \&\ 0xffffcfff;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar9	src2SelectWord	INFERRED	select word of source operand 2	^\s*\*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ =\ \(uVar9\ \&\ 0x300\)\ <<\ 2\ \|\ \*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ \&\ 0xfffff3ff;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar9	src2SelectWord	INFERRED	select word of source operand 2	^\s*\*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ =\ \(uVar9\ \&\ 3\)\ <<\ 8\ \|\ \*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ \&\ 0xfffffcff;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar9	src3SelectWord	INFERRED	select word of source operand 3	^\s*uVar9\ =\ \*\(uint\ \*\)\(iVar12\ \+\ 0x10\);$@2	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar9	src3SelectWord	INFERRED	select word of source operand 3	^\s*\*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ =\ uVar9\ >>\ 0x12\ \&\ 0xc0\ \|\ \*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ \&\ 0xffffff3f;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar9	src3SelectWord	INFERRED	select word of source operand 3	^\s*\*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ =\ uVar9\ >>\ 0xc\ \&\ 0x30\ \|\ \*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ \&\ 0xffffffcf;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar9	src3SelectWord	INFERRED	select word of source operand 3	^\s*\*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ =\ uVar9\ >>\ 6\ \&\ 0xc\ \|\ \*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ \&\ 0xfffffff3;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar9	src3SelectWord	INFERRED	select word of source operand 3	^\s*\*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ =\ uVar9\ \&\ 3\ \|\ \*\(uint\ \*\)\(iVar12\ \+\ 0x14\)\ \&\ 0xfffffffc;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar14	currentProgram	INFERRED	compiler->COMP_currentProgram: the Program being compiled	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ COMP_currentProgram\);$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar14	currentProgram	INFERRED	compiler->COMP_currentProgram: the Program being compiled	^\s*uVar7\ =\ thunk_FUN_00134de8\(uVar14,uVar6\);$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar14	currentProgram	INFERRED	compiler->COMP_currentProgram: the Program being compiled	^\s*uVar14\ =\ \*\(undefined4\ \*\)\(param_4\ \+\ COMP_currentProgram\);$@2	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	uVar14	currentProgram	INFERRED	compiler->COMP_currentProgram: the Program being compiled	^\s*uVar7\ =\ thunk_FUN_00134de8\(uVar14,uVar6\);$@2	+1
+local	R520MachineAssembler__vslot23_emitTexRecord	local_3c	texSelectScratch	INFERRED	out-parameter of FUN_000f3470 (select word at inst+0x140)
+local	R520MachineAssembler__vslot23_emitTexRecord	local_40	srcSelectScratch	INFERRED	out-parameter of FUN_000f3470 (select word of source 1)
+local	R520MachineAssembler__vslot23_emitTexRecord	local_44	destSelectOut	INFERRED	out-parameter of FUN_000f32cc
+local	R520MachineAssembler__vslot23_emitTexRecord	local_48	composedSelectOut	INFERRED	out-parameter of SelectWord__compose
+local	R520MachineAssembler__vslot23_emitTexRecord	local_58	mixSelectScratch	INFERRED	select array passed to vtable +0xf8
+local	R520MachineAssembler__vslot23_emitTexRecord	local_68	alphaMixWords	INFERRED	words passed to vtable +0x10c
+local	R520MachineAssembler__vslot23_emitTexRecord	local_78	rgbMixWords	INFERRED	words passed to vtable +0xf8 / +0x108
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	samplerIndex	INFERRED	inst->+0x134: sampler/texture unit index	^\s*iVar13\ =\ \*\(int\ \*\)\(param_2\ \+\ 0x134\);$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	samplerIndex	INFERRED	inst->+0x134: sampler/texture unit index	^\s*\*\(char\ \*\)\(param_1\[0x18\]\ \*\ 0x48\ \+\ param_1\[0x2a\]\ \+\ 0x19\)\ =\ \(char\)iVar13;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	samplerIndex	INFERRED	inst->+0x134: sampler/texture unit index	^\s*\*\(undefined4\ \*\)\(iVar13\ \*\ 4\ \+\ param_1\[0x2b\]\ \+\ 0x9378\)\ =\ 1;$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	samplerIndex	INFERRED	inst->+0x134: sampler/texture unit index	^\s*iVar13\ =\ \*\(int\ \*\)\(iVar13\ \*\ 0xc\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_4\ \+\ COMP_currentProgram\)\ \+\ 0x78\)\ \+\ 4\);$	+1	rhs	none
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	textureTargetKind	INFERRED	texture target kind read from the program sampler table (+0x78, entry*0xc+4): 1,2,3..4 select the format code	^\s*iVar13\ =\ \*\(int\ \*\)\(iVar13\ \*\ 0xc\ \+\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_4\ \+\ COMP_currentProgram\)\ \+\ 0x78\)\ \+\ 4\);$	+1	lhs	none
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	textureTargetKind	INFERRED	texture target kind read from the program sampler table (+0x78, entry*0xc+4): 1,2,3..4 select the format code	^\s*if\ \(iVar13\ !=\ 2\)\ \{$	+2
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	textureTargetKind	INFERRED	texture target kind read from the program sampler table (+0x78, entry*0xc+4): 1,2,3..4 select the format code	^\s*if\ \(iVar13\ !=\ 1\)\ \{$	+1
+use	R520MachineAssembler__vslot23_emitTexRecord	iVar13	textureTargetKind	INFERRED	texture target kind read from the program sampler table (+0x78, entry*0xc+4): 1,2,3..4 select the format code	^\s*if\ \(4\ <\ iVar13\)\ goto\ LAB_001a1f84;$	+1
