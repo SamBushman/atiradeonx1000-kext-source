@@ -575,14 +575,14 @@
 0x640f0	gldCurrentAttributePacketHeader	220	yes	
 0x64230	FUN_00064230	1256	no	indirect call (driver context / vtable / callback)
 0x64720	FUN_00064720	304	no	indirect call (driver context / vtable / callback)
-0x64850	FUN_00064850	436	no	indirect call (driver context / vtable / callback)
-0x64a10	FUN_00064a10	1304	no	indirect call (driver context / vtable / callback)
-0x64f40	FUN_00064f40	708	no	indirect call (driver context / vtable / callback)
-0x651e0	FUN_000651e0	400	no	indirect call (driver context / vtable / callback)
-0x65370	FUN_00065370	636	no	indirect call (driver context / vtable / callback)
+0x64850	extvsApplyStreamDescriptors	436	no	indirect call (driver context / vtable / callback)
+0x64a10	extvsUploadProgramConstants	1304	no	indirect call (driver context / vtable / callback)
+0x64f40	extvsValidateProgramState	708	no	indirect call (driver context / vtable / callback)
+0x651e0	extvsFlushConstantUploads	400	no	indirect call (driver context / vtable / callback)
+0x65370	ffvpSelectLitProgramVariant	636	no	indirect call (driver context / vtable / callback)
 0x65610	FUN_00065610	152	yes	
-0x656b0	FUN_000656b0	780	no	indirect call (driver context / vtable / callback)
-0x659d0	FUN_000659d0	612	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x656b0	ffvpSelectPassThroughVariant	780	no	indirect call (driver context / vtable / callback)
+0x659d0	vpFillConstantBank	612	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x65c40	FUN_00065c40	52	yes	
 0x65c80	noop_65c80	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x65c90	arbEmitIlHeader	328	no	indirect call (driver context / vtable / callback)
