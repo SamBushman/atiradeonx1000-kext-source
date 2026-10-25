@@ -1,0 +1,440 @@
+local	FUN_0007b0d0	iVar20	allocPlus38	INFERRED	alloc+0x38: base of the per-record dependency list heads (+0xa418 / +0xc418 / +0xe418 + 4*record) and per-record words (+0x6418, +0x8418, +0x841b)
+local	FUN_0007b0d0	pcVar21	records	INFERRED	alloc+0x1286c: the 0x10-byte instruction records (word 0 = dest file bits 8..11, index 13..19, write mask 20..23, opcode in byte 3; words 1..3 = sources)
+use	FUN_0007b0d0	puVar19	configPtr	INFERRED	*(alloc+0x34): result/config descriptor; word 0 = configFlags (bit 6, 0x10, 0x20, 0x400 select modes), +0x18 output records, +0x1c output count*, +0x20/+0x24 second output list, +0x28 max register*, +0x2c/+0x30 counters*	^\s*puVar19\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x34\);$	+2
+use	FUN_0007b0d0	puVar19	configPtr	INFERRED	*(alloc+0x34): result/config descriptor; word 0 = configFlags (bit 6, 0x10, 0x20, 0x400 select modes), +0x18 output records, +0x1c output count*, +0x20/+0x24 second output list, +0x28 max register*, +0x2c/+0x30 counters*	^\s*uVar33\ =\ \*puVar19;$@2	+1
+use	FUN_0007b0d0	puVar19	configPtr	INFERRED	*(alloc+0x34): result/config descriptor; word 0 = configFlags (bit 6, 0x10, 0x20, 0x400 select modes), +0x18 output records, +0x1c output count*, +0x20/+0x24 second output list, +0x28 max register*, +0x2c/+0x30 counters*	^\s*iVar28\ =\ \(\(int\ \(\*\)\(\)\)FUN_0007aae0\)\(param_1,local_64,9,local_b8,\&local_b4,pcVar21,\*puVar19,\*puVar19\ >>\ 6\ \&\ 1\);$	+1
+use	FUN_0007b0d0	puVar19	configPtr	INFERRED	*(alloc+0x34): result/config descriptor; word 0 = configFlags (bit 6, 0x10, 0x20, 0x400 select modes), +0x18 output records, +0x1c output count*, +0x20/+0x24 second output list, +0x28 max register*, +0x2c/+0x30 counters*	^\s*iVar28\ =\ \(\(int\ \(\*\)\(\)\)FUN_0007aae0\)\(param_1,local_64,9,local_b8,\&local_b4,pcVar21,\*puVar19,uVar4\);$	+1
+use	FUN_0007b0d0	puVar19	configPtr	INFERRED	*(alloc+0x34): result/config descriptor; word 0 = configFlags (bit 6, 0x10, 0x20, 0x400 select modes), +0x18 output records, +0x1c output count*, +0x20/+0x24 second output list, +0x28 max register*, +0x2c/+0x30 counters*	^\s*iVar30\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077800\)\(puVar23,\*puVar19\ >>\ 6\ \&\ 1\);$	+1
+use	FUN_0007b0d0	puVar19	configPtr	INFERRED	*(alloc+0x34): result/config descriptor; word 0 = configFlags (bit 6, 0x10, 0x20, 0x400 select modes), +0x18 output records, +0x1c output count*, +0x20/+0x24 second output list, +0x28 max register*, +0x2c/+0x30 counters*	^\s*if\ \(\(\*puVar19\ \&\ 0x10\)\ !=\ 0\)\ \{$	+1
+use	FUN_0007b0d0	puVar19	configPtr	INFERRED	*(alloc+0x34): result/config descriptor; word 0 = configFlags (bit 6, 0x10, 0x20, 0x400 select modes), +0x18 output records, +0x1c output count*, +0x20/+0x24 second output list, +0x28 max register*, +0x2c/+0x30 counters*	^\s*if\ \(\(\(\*puVar19\ \&\ 0x20\)\ !=\ 0\)\ \&\&\ \(iVar28\ =\ \(\(int\ \(\*\)\(\)\)FUN_00079e70\)\(param_1,1\),\ iVar28\ !=\ 0\)\)\ \{$	+1
+use	FUN_0007b0d0	puVar19	outRecordPtr	INFERRED	output record slot: config+0x18 array + outRecordCount*0x10	^\s*puVar19\ =\ \(uint\ \*\)\(uVar22\ \*\ 0x10\ \+\ \*\(int\ \*\)\(iVar28\ \+\ 0x18\)\);$	+1
+use	FUN_0007b0d0	puVar19	outRecordPtr	INFERRED	output record slot: config+0x18 array + outRecordCount*0x10	^\s*\*puVar19\ =\ uVar34;$	+4
+use	FUN_0007b0d0	puVar19	maxRegisterOut	INFERRED	config+0x28: receives the highest register used	^\s*puVar19\ =\ \*\(uint\ \*\*\)\(iVar28\ \+\ 0x28\);$	+2
+use	FUN_0007b0d0	puVar19	maxRegisterOut	INFERRED	config+0x28: receives the highest register used	^\s*\*puVar19\ =\ local_74;$	+1
+use	FUN_0007b0d0	puVar19	maxRegisterOut	INFERRED	config+0x28: receives the highest register used	^\s*\*puVar19\ =\ local_74;$@2	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar28\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x2286c\);$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*if\ \(\(\(uVar4\ !=\ 0\)\ \&\&\ \(\(uVar33\ \&\ 0x400\)\ !=\ 0\)\)\ \&\&\ \(iVar28\ !=\ 0\)\)\ \{$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*\}\ while\ \(iVar28\ !=\ iVar27\);$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*for\ \(;\ iVar28\ !=\ 0;\ iVar28\ =\ iVar28\ \+\ \-1\)\ \{$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar28\ =\ \*\(int\ \*\)pcVar39;$	+3
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*\(\(int\ \(\*\)\(\)\)FUN_00077650\)\(param_1\ \+\ 0xa450\ \+\ iVar28\ \*\ 4,piVar24\);$	+2
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*for\ \(piVar24\ =\ \*\(int\ \*\*\)\(iVar28\ \*\ 4\ \+\ iVar20\ \+\ 0xc418\);\ piVar24\ !=\ \(int\ \*\)0x0;$	+2
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*\(\(int\ \(\*\)\(\)\)FUN_00077650\)\(param_1\ \+\ 0xc450\ \+\ iVar28\ \*\ 4,piVar24\);$	+2
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*for\ \(piVar24\ =\ \*\(int\ \*\*\)\(iVar28\ \*\ 4\ \+\ iVar20\ \+\ 0xe418\);\ piVar24\ !=\ \(int\ \*\)0x0;$	+2
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*if\ \(\(\(\(\*\*\(uint\ \*\*\)\(param_1\ \+\ 0x34\)\ \&\ 0x40\)\ !=\ 0\)\ \&\&\ \(bVar1\)\)\ \&\&$	+2
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*pcVar39\ =\ pcVar21\ \+\ iVar28\ \*\ 0x10;$	+2
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*pcVar15\ =\ \(code\ \*\)\(iVar28\ \-\ iVar27\);$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*\}\ while\ \(iVar27\ !=\ iVar28\);$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar28\ =\ iVar27\ \*\ 4\ \+\ param_1;$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*\*\(uint\ \*\)\(iVar28\ \+\ 0x3348c\)\ =\ \*\(uint\ \*\)\(iVar28\ \+\ 0x3348c\)\ \&\ 0xfffeffff\ \|\ 0x20000;$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar28\ =\ \(\(int\ \(\*\)\(\)\)FUN_0007aae0\)\(param_1,local_64,9,local_b8,\&local_b4,pcVar21,\*puVar19,\*puVar19\ >>\ 6\ \&\ 1\);$	+2
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar28\ =\ \(\(int\ \(\*\)\(\)\)FUN_0007aae0\)\(param_1,local_64,9,local_b8,\&local_b4,pcVar21,\*puVar19,uVar4\);$	+2
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*pcVar39\ =\ pcVar21\ \+\ iVar28\ \*\ 0x10;$@2	+2
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*\(\(int\ \(\*\)\(\)\)FUN_0007a1a0\)\(param_1,iVar28,local_b4\);$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*\(\(int\ \(\*\)\(\)\)FUN_00078b80\)\(param_1,iVar28,local_b4\);$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar27\ =\ \(\(int\ \(\*\)\(\)\)FUN_00078f80\)\(param_1,iVar28,param_3,pcVar21,param_5\);$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar27\ =\ iVar28\ \*\ 4;$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar30\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077c40\)\(param_1,iVar28,param_3,1,param_5\);$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar27\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077ba0\)\(param_1,iVar28,param_3,uVar26,1\);$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar27\ =\ iVar28\ \*\ 4;$@2	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar27\ =\ iVar28\ \*\ 4\ \+\ param_1;$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*\*\(int\ \*\)\(iVar38\ \*\ 4\ \+\ param_1\ \+\ 0x28878\)\ =\ iVar28;$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*if\ \(\(iVar28\ ==\ \*param_5\)\ \&\&\ \(param_3\ <\ \(code\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x28874\)\ \+\ \-1\)\)\)\ \{$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar28\ =\ iVar27\ \*\ 4\ \+\ param_1;$@2	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*\*\(uint\ \*\)\(iVar28\ \+\ 0x3348c\)\ =\ \*\(uint\ \*\)\(iVar28\ \+\ 0x3348c\)\ \&\ 0xfffeffff\ \|\ 0x20000;$@2	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*iVar28\ =\ \(int\)\(\(ulonglong\)uVar42\ >>\ 0x20\);$	+1
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*if\ \(iVar28\ !=\ 0\)\ \{$	+2
+use	FUN_0007b0d0	iVar28	recordCount	INFERRED	alloc+0x2286c: number of records	^\s*if\ \(\(\(\*puVar19\ \&\ 0x20\)\ !=\ 0\)\ \&\&\ \(iVar28\ =\ \(\(int\ \(\*\)\(\)\)FUN_00079e70\)\(param_1,1\),\ iVar28\ !=\ 0\)\)\ \{$	+2
+use	FUN_0007b0d0	iVar28	retiredSlotPtr	INFERRED	pointer into the retired-record list (alloc+0x26874) at retiredCount*4	^\s*iVar28\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x28874\)\ \*\ 4\ \+\ param_1;$	+1
+use	FUN_0007b0d0	iVar28	retiredSlotPtr	INFERRED	pointer into the retired-record list (alloc+0x26874) at retiredCount*4	^\s*\*\(int\ \*\)\(iVar28\ \+\ 0x26874\)\ =\ iVar27;$	+2
+use	FUN_0007b0d0	iVar28	retiredSlotPtr	INFERRED	pointer into the retired-record list (alloc+0x26874) at retiredCount*4	^\s*iVar28\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x28874\)\ \*\ 4\ \+\ param_1;$@2	+1
+use	FUN_0007b0d0	iVar28	retiredSlotPtr	INFERRED	pointer into the retired-record list (alloc+0x26874) at retiredCount*4	^\s*\*\(int\ \*\)\(iVar28\ \+\ 0x26874\)\ =\ iVar27;$@2	+2
+use	FUN_0007b0d0	iVar28	config	INFERRED	*(alloc+0x34): the result/config descriptor (see configPtr)	^\s*iVar28\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x34\);$	+1
+use	FUN_0007b0d0	iVar28	config	INFERRED	*(alloc+0x34): the result/config descriptor (see configPtr)	^\s*puVar19\ =\ \(uint\ \*\)\(uVar22\ \*\ 0x10\ \+\ \*\(int\ \*\)\(iVar28\ \+\ 0x18\)\);$	+1
+use	FUN_0007b0d0	iVar28	config	INFERRED	*(alloc+0x34): the result/config descriptor (see configPtr)	^\s*if\ \(\(cVar25\ !=\ '\\0'\)\ \&\&\ \(iVar30\ =\ \*\(int\ \*\)\(iVar28\ \+\ 0x20\),\ local_74\ =\ uVar22,\ iVar30\ !=\ 0\)\)\ \{$	+1
+use	FUN_0007b0d0	iVar28	config	INFERRED	*(alloc+0x34): the result/config descriptor (see configPtr)	^\s*\*\*\(uint\ \*\*\)\(iVar28\ \+\ 0x1c\)\ =\ uVar22;$	+2
+use	FUN_0007b0d0	iVar28	config	INFERRED	*(alloc+0x34): the result/config descriptor (see configPtr)	^\s*if\ \(\*\(uint\ \*\*\)\(iVar28\ \+\ 0x2c\)\ !=\ \(uint\ \*\)0x0\)\ \{$	+2
+use	FUN_0007b0d0	iVar28	config	INFERRED	*(alloc+0x34): the result/config descriptor (see configPtr)	^\s*if\ \(\*\(uint\ \*\*\)\(iVar28\ \+\ 0x30\)\ !=\ \(uint\ \*\)0x0\)\ \{$	+2
+use	FUN_0007b0d0	iVar28	config	INFERRED	*(alloc+0x34): the result/config descriptor (see configPtr)	^\s*if\ \(\*\(int\ \*\)\(iVar28\ \+\ 0x20\)\ !=\ 0\)\ \{$	+2
+use	FUN_0007b0d0	uVar33	configFlags	INFERRED	*configPtr	^\s*uVar33\ =\ \*puVar19;$	+2
+use	FUN_0007b0d0	uVar33	configFlags	INFERRED	*configPtr	^\s*if\ \(\(\(uVar4\ !=\ 0\)\ \&\&\ \(\(uVar33\ \&\ 0x400\)\ !=\ 0\)\)\ \&\&\ \(iVar28\ !=\ 0\)\)\ \{$	+1
+use	FUN_0007b0d0	uVar33	configFlags	INFERRED	*configPtr	^\s*if\ \(\(\(\(\(\(uVar4\ \-\ 1\ \&\ uVar4\)\ ==\ 0\)\ \&\&$	+11
+use	FUN_0007b0d0	uVar33	configFlags	INFERRED	*configPtr	^\s*uVar33\ =\ \*puVar19;$@2	+1
+use	FUN_0007b0d0	uVar33	configFlags	INFERRED	*configPtr	^\s*pcVar15\ =\ \(code\ \*\)\(uVar33\ >>\ 6\ \&\ 1\);$	+1
+use	FUN_0007b0d0	uVar33	configFlags	INFERRED	*configPtr	^\s*if\ \(\(uVar33\ \&\ 2\)\ !=\ 0\)\ \{$	+1
+use	FUN_0007b0d0	uVar33	srcIndexField	INFERRED	source word >> 0xd: first select/index bits of the source being bound	^\s*uVar33\ =\ \(uint\)param_6\ >>\ 0xd;$	+1
+use	FUN_0007b0d0	uVar33	srcIndexField	INFERRED	source word >> 0xd: first select/index bits of the source being bound	^\s*if\ \(\(\(uVar22\ \|\ 1\ <<\ \(uVar33\ \&\ 7\)\)\ \&\ uVar29\)\ !=\ 0\)\ \{$	+1
+use	FUN_0007b0d0	uVar33	dependentRecordIndex	INFERRED	record index of a node of the dependency list (node+0)	^\s*uVar33\ =\ \*puVar35;$	+3
+use	FUN_0007b0d0	uVar33	dependentRecordIndex	INFERRED	record index of a node of the dependency list (node+0)	^\s*\*puVar16\ =\ uVar33;$	+1
+use	FUN_0007b0d0	uVar33	dependentRecordIndex	INFERRED	record index of a node of the dependency list (node+0)	^\s*else\ if\ \(uVar33\ <\ \*puVar16\)\ \{$	+2
+use	FUN_0007b0d0	uVar33	lastFile8Slot	INFERRED	output slot index of the last record whose destination file is 8 (set when config bit 6 is clear)	^\s*uVar33\ =\ 0;$@3	+1
+use	FUN_0007b0d0	uVar33	lastFile8Slot	INFERRED	output slot index of the last record whose destination file is 8 (set when config bit 6 is clear)	^\s*uVar33\ =\ 0;$@4	+1
+use	FUN_0007b0d0	uVar33	lastFile8Slot	INFERRED	output slot index of the last record whose destination file is 8 (set when config bit 6 is clear)	^\s*uVar33\ =\ uVar22;$	+1
+use	FUN_0007b0d0	uVar33	lastFile8Slot	INFERRED	output slot index of the last record whose destination file is 8 (set when config bit 6 is clear)	^\s*if\ \(local_74\ <\ uVar33\)\ \{$	+2
+use	FUN_0007b0d0	uVar4	configBit6	INFERRED	configFlags >> 6 & 1	^\s*uVar4\ =\ uVar33\ >>\ 6\ \&\ 1;$	+2
+use	FUN_0007b0d0	uVar4	configBit6	INFERRED	configFlags >> 6 & 1	^\s*if\ \(\(\(uVar4\ !=\ 0\)\ \&\&\ \(\(uVar33\ \&\ 0x400\)\ !=\ 0\)\)\ \&\&\ \(iVar28\ !=\ 0\)\)\ \{$	+1
+use	FUN_0007b0d0	uVar4	opcodeSourceMask	INFERRED	recordOpcodeSourceMask(record, 1)	^\s*uVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_00078300\)\(pcVar39,1\);$	+2
+use	FUN_0007b0d0	uVar4	writeMask	INFERRED	recordGetWriteMask(record)	^\s*uVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077850\)\(pcVar39\);$	+12
+use	FUN_0007b0d0	uVar4	recordWord0	INFERRED	word 0 of the record	^\s*uVar4\ =\ \*\(uint\ \*\)pcVar39;$	+1
+use	FUN_0007b0d0	uVar4	recordWord0	INFERRED	word 0 of the record	^\s*if\ \(\(uVar4\ \&\ 0xf00\)\ ==\ 0x500\)\ \{$	+4
+use	FUN_0007b0d0	uVar4	recordWord0	INFERRED	word 0 of the record	^\s*uVar4\ =\ \*\(uint\ \*\)pcVar39;$@2	+1
+use	FUN_0007b0d0	uVar4	recordWord0	INFERRED	word 0 of the record	^\s*if\ \(\(uVar4\ \&\ 0x200000\)\ !=\ 0\)\ \{$	+1
+use	FUN_0007b0d0	uVar4	recordWord0	INFERRED	word 0 of the record	^\s*uVar4\ =\ \*\(uint\ \*\)pcVar39;$@3	+1
+use	FUN_0007b0d0	uVar4	recordWord0	INFERRED	word 0 of the record	^\s*if\ \(\(uVar4\ \&\ 0x400000\)\ !=\ 0\)\ \{$	+1
+use	FUN_0007b0d0	uVar4	recordWord0	INFERRED	word 0 of the record	^\s*uVar4\ =\ \*\(uint\ \*\)pcVar39;$@4	+1
+use	FUN_0007b0d0	uVar4	recordWord0	INFERRED	word 0 of the record	^\s*if\ \(\(uVar4\ \&\ 0x800000\)\ !=\ 0\)\ \{$	+1
+use	FUN_0007b0d0	uVar4	sourceSlot	INFERRED	source slot counter 0..2	^\s*uVar4\ =\ 0;$@2	+1
+use	FUN_0007b0d0	uVar4	sourceSlot	INFERRED	source slot counter 0..2	^\s*if\ \(\(local_68\ \&\ 1\ <<\ \(uVar4\ \&\ 0x3f\)\)\ !=\ 0\)\ \{$	+1
+use	FUN_0007b0d0	uVar4	sourceSlot	INFERRED	source slot counter 0..2	^\s*bVar31\ =\ uVar4\ !=\ 2;$	+2
+use	FUN_0007b0d0	uVar4	configFlagsB	INFERRED	*(*(alloc+0x34))	^\s*uVar4\ =\ \*\*\(uint\ \*\*\)\(param_1\ \+\ 0x34\);$	+1
+use	FUN_0007b0d0	uVar4	configFlagsB	INFERRED	*(*(alloc+0x34))	^\s*while\ \(\(uVar4\ =\ uVar4\ >>\ 6\ \&\ 1,\ uVar4\ !=\ 0\ \&\&\ \(local_64\ <\ 0x20\)\)\)\ \{$	+1
+use	FUN_0007b0d0	uVar4	configFlagsB	INFERRED	*(*(alloc+0x34))	^\s*iVar28\ =\ \(\(int\ \(\*\)\(\)\)FUN_0007aae0\)\(param_1,local_64,9,local_b8,\&local_b4,pcVar21,\*puVar19,uVar4\);$	+1
+use	FUN_0007b0d0	uVar4	configFlagsB	INFERRED	*(*(alloc+0x34))	^\s*uVar4\ =\ \*\*\(uint\ \*\*\)\(param_1\ \+\ 0x34\);$@2	+1
+use	FUN_0007b0d0	uVar4	configBit6	INFERRED	*config >> 6 & 1	^\s*uVar4\ =\ \*puVar35\ >>\ 6\ \&\ 1;$	+2
+use	FUN_0007b0d0	uVar4	configBit6	INFERRED	*config >> 6 & 1	^\s*iVar27\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077800\)\(puVar23,uVar4\);$	+1
+use	FUN_0007b0d0	uVar4	recordFlagsOld	INFERRED	per-record flag word (alloc+0x3348c + 4*record) before the update	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar27\ \+\ 0x3348c\);$	+1
+use	FUN_0007b0d0	uVar4	recordFlagsOld	INFERRED	per-record flag word (alloc+0x3348c + 4*record) before the update	^\s*\*\(uint\ \*\)\(iVar27\ \+\ 0x3348c\)\ =\ uVar4\ \&\ 0xfffdffff\ \|\ 0x40000;$	+1
+use	FUN_0007b0d0	uVar4	configFlagsB	INFERRED	**(alloc+0x34)	^\s*uVar4\ =\ \*\*\(uint\ \*\*\)\(param_1\ \+\ 0x34\);$@3	+1
+use	FUN_0007b0d0	uVar4	configFlagsB	INFERRED	**(alloc+0x34)	^\s*else\ if\ \(\(\(uVar4\ >>\ 6\ \&\ 1\)\ !=\ 0\)\ \&\&\ \(pcVar39\[3\]\ ==\ \(code\ \*\)0xb\)\)\ \{$	+1
+use	FUN_0007b0d0	uVar4	lastFile1SourceSlot	INFERRED	output slot index of the last record with a file-1 source	^\s*uVar4\ =\ 0;$@7	+1
+use	FUN_0007b0d0	uVar4	lastFile1SourceSlot	INFERRED	output slot index of the last record with a file-1 source	^\s*uVar4\ =\ 0;$@8	+1
+use	FUN_0007b0d0	uVar4	lastFile1SourceSlot	INFERRED	output slot index of the last record with a file-1 source	^\s*uVar4\ =\ uVar22;$	+1
+use	FUN_0007b0d0	uVar4	lastFile1SourceSlot	INFERRED	output slot index of the last record with a file-1 source	^\s*\*\*\(uint\ \*\*\)\(iVar28\ \+\ 0x2c\)\ =\ uVar4;$	+1
+use	FUN_0007b0d0	uVar5	word3Before	INFERRED	record word 3 before it is rebuilt	^\s*uVar5\ =\ \*\(uint\ \*\)\(pcVar15\ \+\ 0xc\);$	+1
+use	FUN_0007b0d0	uVar5	word3Before	INFERRED	record word 3 before it is rebuilt	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar29\ \|\ uVar5\ \&\ 0xffe7ffff;$	+1
+use	FUN_0007b0d0	uVar5	word3Before	INFERRED	record word 3 before it is rebuilt	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xfe07ffff;$	+1
+use	FUN_0007b0d0	uVar5	word3Before	INFERRED	record word 3 before it is rebuilt	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xfe07fffb;$	+1
+use	FUN_0007b0d0	uVar5	word3Before	INFERRED	record word 3 before it is rebuilt	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb\ \|\ 0x8000000;$	+1
+use	FUN_0007b0d0	uVar5	word3Before	INFERRED	record word 3 before it is rebuilt	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb;$	+1
+use	FUN_0007b0d0	uVar5	word3Before	INFERRED	record word 3 before it is rebuilt	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb\ \|\ 0x10000000;$	+1
+use	FUN_0007b0d0	uVar5	word3Before	INFERRED	record word 3 before it is rebuilt	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb\ \|\ 0x18000000;$	+1
+use	FUN_0007b0d0	uVar5	srcIndexBits	INFERRED	source word & 0x1fe0 (register index field, bits 5..12)	^\s*uVar5\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x1fe0;$	+2
+use	FUN_0007b0d0	uVar5	srcIndexBits	INFERRED	source word & 0x1fe0 (register index field, bits 5..12)	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9fffe00c;$	+1
+use	FUN_0007b0d0	uVar5	srcIndexBits	INFERRED	source word & 0x1fe0 (register index field, bits 5..12)	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9dffe00c;$	+1
+use	FUN_0007b0d0	uVar5	srcIndexBits	INFERRED	source word & 0x1fe0 (register index field, bits 5..12)	^\s*uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9dff000c;$	+1
+use	FUN_0007b0d0	uVar5	srcIndexBits	INFERRED	source word & 0x1fe0 (register index field, bits 5..12)	^\s*uVar5\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x1fe0;$@2	+2
+use	FUN_0007b0d0	uVar5	srcIndexBits	INFERRED	source word & 0x1fe0 (register index field, bits 5..12)	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9fffe00c;$@2	+1
+use	FUN_0007b0d0	uVar5	srcIndexBits	INFERRED	source word & 0x1fe0 (register index field, bits 5..12)	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9bffe00c;$	+1
+use	FUN_0007b0d0	uVar5	srcIndexBits	INFERRED	source word & 0x1fe0 (register index field, bits 5..12)	^\s*uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9bf8e00c;$	+1
+use	FUN_0007b0d0	uVar6	word3BeforeB	INFERRED	word 3 of the rewritten record before this source is merged in	^\s*uVar6\ =\ \*\(uint\ \*\)pcVar37;$	+1
+use	FUN_0007b0d0	uVar6	word3BeforeB	INFERRED	word 3 of the rewritten record before this source is merged in	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar7\ \|\ uVar6\ \&\ 0xfffffffc;$	+1
+use	FUN_0007b0d0	uVar6	word3BeforeB	INFERRED	word 3 of the rewritten record before this source is merged in	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0xffffffec;$	+1
+use	FUN_0007b0d0	uVar6	word3BeforeB	INFERRED	word 3 of the rewritten record before this source is merged in	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0xffffe00c;$	+1
+use	FUN_0007b0d0	uVar6	word3BeforeB	INFERRED	word 3 of the rewritten record before this source is merged in	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9fffe00c;$	+1
+use	FUN_0007b0d0	uVar6	word3BeforeB	INFERRED	word 3 of the rewritten record before this source is merged in	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9dffe00c;$	+1
+use	FUN_0007b0d0	uVar6	word3BeforeB	INFERRED	word 3 of the rewritten record before this source is merged in	^\s*uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9dff000c;$	+1
+use	FUN_0007b0d0	uVar6	word3BeforeB	INFERRED	word 3 of the rewritten record before this source is merged in	^\s*uVar6\ =\ \*\(uint\ \*\)pcVar37;$@2	+1
+use	FUN_0007b0d0	uVar6	word3BeforeB	INFERRED	word 3 of the rewritten record before this source is merged in	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar7\ \|\ uVar6\ \&\ 0xfffffffc;$@2	+1
+use	FUN_0007b0d0	uVar6	word3BeforeB	INFERRED	word 3 of the rewritten record before this source is merged in	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0xffffffec;$@2	+1
+use	FUN_0007b0d0	uVar6	word3BeforeB	INFERRED	word 3 of the rewritten record before this source is merged in	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0xffffe00c;$@2	+1
+use	FUN_0007b0d0	uVar6	word3BeforeB	INFERRED	word 3 of the rewritten record before this source is merged in	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9fffe00c;$@2	+1
+use	FUN_0007b0d0	uVar6	word3BeforeB	INFERRED	word 3 of the rewritten record before this source is merged in	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9bffe00c;$	+1
+use	FUN_0007b0d0	uVar6	word3BeforeB	INFERRED	word 3 of the rewritten record before this source is merged in	^\s*uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9bf8e00c;$	+1
+use	FUN_0007b0d0	uVar7	srcFileBits	INFERRED	source word & 3 (register file field)	^\s*uVar7\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 3;$	+2
+use	FUN_0007b0d0	uVar7	srcFileBits	INFERRED	source word & 3 (register file field)	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0xffffffec;$	+1
+use	FUN_0007b0d0	uVar7	srcFileBits	INFERRED	source word & 3 (register file field)	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0xffffe00c;$	+1
+use	FUN_0007b0d0	uVar7	srcFileBits	INFERRED	source word & 3 (register file field)	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9fffe00c;$	+1
+use	FUN_0007b0d0	uVar7	srcFileBits	INFERRED	source word & 3 (register file field)	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9dffe00c;$	+1
+use	FUN_0007b0d0	uVar7	srcFileBits	INFERRED	source word & 3 (register file field)	^\s*uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9dff000c;$	+1
+use	FUN_0007b0d0	uVar7	srcFileBits	INFERRED	source word & 3 (register file field)	^\s*uVar7\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 3;$@2	+2
+use	FUN_0007b0d0	uVar7	srcFileBits	INFERRED	source word & 3 (register file field)	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0xffffffec;$@2	+1
+use	FUN_0007b0d0	uVar7	srcFileBits	INFERRED	source word & 3 (register file field)	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0xffffe00c;$@2	+1
+use	FUN_0007b0d0	uVar7	srcFileBits	INFERRED	source word & 3 (register file field)	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9fffe00c;$@2	+1
+use	FUN_0007b0d0	uVar7	srcFileBits	INFERRED	source word & 3 (register file field)	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9bffe00c;$	+1
+use	FUN_0007b0d0	uVar7	srcFileBits	INFERRED	source word & 3 (register file field)	^\s*uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9bf8e00c;$	+1
+use	FUN_0007b0d0	uVar17	srcFileBit4	INFERRED	source word & 0x10	^\s*uVar17\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x10;$	+2
+use	FUN_0007b0d0	uVar17	srcFileBit4	INFERRED	source word & 0x10	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0xffffe00c;$	+1
+use	FUN_0007b0d0	uVar17	srcFileBit4	INFERRED	source word & 0x10	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9fffe00c;$	+1
+use	FUN_0007b0d0	uVar17	srcFileBit4	INFERRED	source word & 0x10	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9dffe00c;$	+1
+use	FUN_0007b0d0	uVar17	srcFileBit4	INFERRED	source word & 0x10	^\s*uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9dff000c;$	+1
+use	FUN_0007b0d0	uVar17	srcFileBit4	INFERRED	source word & 0x10	^\s*uVar17\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x10;$@2	+2
+use	FUN_0007b0d0	uVar17	srcFileBit4	INFERRED	source word & 0x10	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0xffffe00c;$@2	+1
+use	FUN_0007b0d0	uVar17	srcFileBit4	INFERRED	source word & 0x10	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9fffe00c;$@2	+1
+use	FUN_0007b0d0	uVar17	srcFileBit4	INFERRED	source word & 0x10	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9bffe00c;$	+1
+use	FUN_0007b0d0	uVar17	srcFileBit4	INFERRED	source word & 0x10	^\s*uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9bf8e00c;$	+1
+use	FUN_0007b0d0	uVar3	srcTopBits	INFERRED	source word & 0x60000000	^\s*uVar3\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x60000000;$	+2
+use	FUN_0007b0d0	uVar3	srcTopBits	INFERRED	source word & 0x60000000	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9dffe00c;$	+1
+use	FUN_0007b0d0	uVar3	srcTopBits	INFERRED	source word & 0x60000000	^\s*uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9dff000c;$	+1
+use	FUN_0007b0d0	uVar3	srcTopBits	INFERRED	source word & 0x60000000	^\s*uVar3\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x60000000;$@2	+2
+use	FUN_0007b0d0	uVar3	srcTopBits	INFERRED	source word & 0x60000000	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9bffe00c;$	+1
+use	FUN_0007b0d0	uVar3	srcTopBits	INFERRED	source word & 0x60000000	^\s*uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9bf8e00c;$	+1
+use	FUN_0007b0d0	uVar29	srcBit13	INFERRED	source word >> 3 & 0x2000	^\s*uVar29\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ >>\ 3\ \&\ 0x2000000;$	+2
+use	FUN_0007b0d0	uVar29	srcBit13	INFERRED	source word >> 3 & 0x2000	^\s*uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9dff000c;$	+1
+use	FUN_0007b0d0	uVar29	srcBit14	INFERRED	source word >> 2 & 0x4000	^\s*uVar29\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ >>\ 2\ \&\ 0x4000000;$	+2
+use	FUN_0007b0d0	uVar29	srcBit14	INFERRED	source word >> 2 & 0x4000	^\s*uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9bf8e00c;$	+1
+use	FUN_0007b0d0	uVar29	destModeBits	INFERRED	(word0 & 0x6000) << 6 merged into the combined record's word 3	^\s*uVar29\ =\ \(\*\(uint\ \*\)pcVar41\ \&\ 0x6000\)\ <<\ 6;$	+2
+use	FUN_0007b0d0	uVar29	destModeBits	INFERRED	(word0 & 0x6000) << 6 merged into the combined record's word 3	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xfe07ffff;$	+1
+use	FUN_0007b0d0	uVar29	destModeBits	INFERRED	(word0 & 0x6000) << 6 merged into the combined record's word 3	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xfe07fffb;$	+1
+use	FUN_0007b0d0	uVar29	destModeBits	INFERRED	(word0 & 0x6000) << 6 merged into the combined record's word 3	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb\ \|\ 0x8000000;$	+1
+use	FUN_0007b0d0	uVar29	destModeBits	INFERRED	(word0 & 0x6000) << 6 merged into the combined record's word 3	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb;$	+1
+use	FUN_0007b0d0	uVar29	destModeBits	INFERRED	(word0 & 0x6000) << 6 merged into the combined record's word 3	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb\ \|\ 0x10000000;$	+1
+use	FUN_0007b0d0	uVar29	destModeBits	INFERRED	(word0 & 0x6000) << 6 merged into the combined record's word 3	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb\ \|\ 0x18000000;$	+1
+use	FUN_0007b0d0	uVar17	opcodeBits	INFERRED	(opcode byte & 0xf) << 0x15 merged into the combined record's word 3	^\s*uVar17\ =\ \(\(byte\)pcVar41\[3\]\ \&\ 0xf\)\ <<\ 0x15;$	+2
+use	FUN_0007b0d0	uVar17	opcodeBits	INFERRED	(opcode byte & 0xf) << 0x15 merged into the combined record's word 3	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xfe07fffb;$	+1
+use	FUN_0007b0d0	uVar17	opcodeBits	INFERRED	(opcode byte & 0xf) << 0x15 merged into the combined record's word 3	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb\ \|\ 0x8000000;$	+1
+use	FUN_0007b0d0	uVar17	opcodeBits	INFERRED	(opcode byte & 0xf) << 0x15 merged into the combined record's word 3	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb;$	+1
+use	FUN_0007b0d0	uVar17	opcodeBits	INFERRED	(opcode byte & 0xf) << 0x15 merged into the combined record's word 3	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb\ \|\ 0x10000000;$	+1
+use	FUN_0007b0d0	uVar17	opcodeBits	INFERRED	(opcode byte & 0xf) << 0x15 merged into the combined record's word 3	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb\ \|\ 0x18000000;$	+1
+use	FUN_0007b0d0	uVar7	opcodeFlagBit	INFERRED	opcode byte >> 2 & 4 merged into the combined record's word 3	^\s*uVar7\ =\ \(byte\)pcVar41\[3\]\ >>\ 2\ \&\ 4;$	+2
+use	FUN_0007b0d0	uVar7	opcodeFlagBit	INFERRED	opcode byte >> 2 & 4 merged into the combined record's word 3	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb\ \|\ 0x8000000;$	+1
+use	FUN_0007b0d0	uVar7	opcodeFlagBit	INFERRED	opcode byte >> 2 & 4 merged into the combined record's word 3	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb;$	+1
+use	FUN_0007b0d0	uVar7	opcodeFlagBit	INFERRED	opcode byte >> 2 & 4 merged into the combined record's word 3	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb\ \|\ 0x10000000;$	+1
+use	FUN_0007b0d0	uVar7	opcodeFlagBit	INFERRED	opcode byte >> 2 & 4 merged into the combined record's word 3	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb\ \|\ 0x18000000;$	+1
+local	FUN_0007b0d0	cVar2	opcodeByte	INFERRED	byte 3 of word 0 of the second record: its opcode
+use	FUN_0007b0d0	bVar1	hasLiveRecords	INFERRED	live record count (alloc+0x26870) != 0	^\s*bVar1\ =\ local_88\ !=\ 0;$	+2
+use	FUN_0007b0d0	bVar1	hasLiveRecords	INFERRED	live record count (alloc+0x26870) != 0	^\s*if\ \(\(\(\(\*\*\(uint\ \*\*\)\(param_1\ \+\ 0x34\)\ \&\ 0x40\)\ !=\ 0\)\ \&\&\ \(bVar1\)\)\ \&\&$	+2
+use	FUN_0007b0d0	bVar1	hasLiveRecords	INFERRED	live record count (alloc+0x26870) != 0	^\s*if\ \(bVar1\)\ \{$@2	+1
+use	FUN_0007b0d0	bVar1	moreSourceSlots	INFERRED	source slot loop continues (slot != 2)	^\s*bVar1\ =\ uVar29\ !=\ 2;$	+1
+use	FUN_0007b0d0	bVar1	moreSourceSlots	INFERRED	source slot loop continues (slot != 2)	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0007b0d0	bVar1	moreSourceSlots	INFERRED	source slot loop continues (slot != 2)	^\s*bVar1\ =\ uVar29\ !=\ 2;$@2	+1
+use	FUN_0007b0d0	bVar1	moreSourceSlots	INFERRED	source slot loop continues (slot != 2)	^\s*\}\ while\ \(bVar1\);$@2	+1
+use	FUN_0007b0d0	bVar1	moreSourceSlots	INFERRED	source slot loop continues (slot != 2)	^\s*bVar1\ =\ uVar29\ !=\ 2;$@3	+1
+use	FUN_0007b0d0	bVar1	moreSourceSlots	INFERRED	source slot loop continues (slot != 2)	^\s*\}\ while\ \(bVar1\);$@3	+1
+use	FUN_0007b0d0	bVar1	destIsFile8	INFERRED	destination file == 8 and config bit 6 clear	^\s*if\ \(\(\(uVar34\ \&\ 0xf00\)\ !=\ 0x800\)\ \|\|\ \(bVar1\ =\ true,\ \(\*\*\(uint\ \*\*\)\(param_1\ \+\ 0x34\)\ >>\ 6\ \&\ 1\)\ !=\ 0\)$	+3
+use	FUN_0007b0d0	bVar1	destIsFile8	INFERRED	destination file == 8 and config bit 6 clear	^\s*if\ \(bVar1\)\ \{$@3	+1
+local	FUN_0007b0d0	puVar8	newBindingNode	INFERRED	8-byte node from chunkArenaAlloc (alloc+0x12454): {+0 record index, +4 value}
+use	FUN_0007b0d0	piVar9	bindingChainHead	INFERRED	first node of the binding chain at the register slot	^\s*piVar9\ =\ \(int\ \*\)\*piVar14;$	+1
+use	FUN_0007b0d0	piVar9	bindingChainHead	INFERRED	first node of the binding chain at the register slot	^\s*piVar32\ =\ piVar9;$	+1
+use	FUN_0007b0d0	piVar9	bindingChainHead	INFERRED	first node of the binding chain at the register slot	^\s*piVar9\ =\ \(int\ \*\)piVar32\[1\];$	+1
+use	FUN_0007b0d0	piVar9	bindingChainHead	INFERRED	first node of the binding chain at the register slot	^\s*piVar9\ =\ \(int\ \*\)\*piVar14;$@2	+1
+use	FUN_0007b0d0	piVar9	bindingChainHead	INFERRED	first node of the binding chain at the register slot	^\s*piVar32\ =\ piVar9;$@2	+1
+use	FUN_0007b0d0	piVar9	bindingChainHead	INFERRED	first node of the binding chain at the register slot	^\s*piVar9\ =\ \(int\ \*\)piVar32\[1\];$@2	+1
+use	FUN_0007b0d0	piVar9	newChainNode	INFERRED	8-byte node from chunkArenaAlloc appended to the chain	^\s*piVar9\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_00078e00\)\(param_1\ \+\ 0x12454,8\);$	+3
+use	FUN_0007b0d0	piVar9	newChainNode	INFERRED	8-byte node from chunkArenaAlloc appended to the chain	^\s*piVar9\[1\]\ =\ 0;$	+2
+use	FUN_0007b0d0	piVar9	newChainNode	INFERRED	8-byte node from chunkArenaAlloc appended to the chain	^\s*piVar9\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_00078e00\)\(param_1\ \+\ 0x12454,8\);$@2	+3
+use	FUN_0007b0d0	piVar9	newChainNode	INFERRED	8-byte node from chunkArenaAlloc appended to the chain	^\s*\*piVar9\ =\ \*piVar36;$	+1
+use	FUN_0007b0d0	piVar9	newChainNode	INFERRED	8-byte node from chunkArenaAlloc appended to the chain	^\s*piVar9\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_00078e00\)\(param_1\ \+\ 0x12454,8\);$@3	+3
+use	FUN_0007b0d0	piVar9	newChainNode	INFERRED	8-byte node from chunkArenaAlloc appended to the chain	^\s*piVar9\[1\]\ =\ 0;$@2	+2
+use	FUN_0007b0d0	piVar9	newChainNode	INFERRED	8-byte node from chunkArenaAlloc appended to the chain	^\s*piVar9\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_00078e00\)\(param_1\ \+\ 0x12454,8\);$@4	+3
+use	FUN_0007b0d0	piVar9	newChainNode	INFERRED	8-byte node from chunkArenaAlloc appended to the chain	^\s*\*piVar9\ =\ \*piVar36;$@2	+1
+use	FUN_0007b0d0	bVar10	sourceFileIs1	INFERRED	recordSourceFileIs1(source)	^\s*bVar10\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077cd0\)\(pcVar15\);$	+2
+use	FUN_0007b0d0	bVar10	sourceFileIs1	INFERRED	recordSourceFileIs1(source)	^\s*bVar10\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077cd0\)\(pcVar39\);$	+2
+use	FUN_0007b0d0	bVar10	hasFile1SourceSecond	INFERRED	any source of the second record has file 1	^\s*bVar10\ =\ 0;$	+1
+use	FUN_0007b0d0	bVar10	hasFile1SourceSecond	INFERRED	any source of the second record has file 1	^\s*bVar10\ =\ bVar11\ \|\ bVar10;$	+1
+use	FUN_0007b0d0	bVar10	hasFile1SourceSecond	INFERRED	any source of the second record has file 1	^\s*if\ \(bVar10\ !=\ 0\)\ goto\ LAB_0007c484;$	+1
+use	FUN_0007b0d0	bVar11	hasFile1SourceFirst	INFERRED	any source of the first record has file 1 (OR of recordSourceFileIs1)	^\s*bVar11\ =\ 0;$	+1
+use	FUN_0007b0d0	bVar11	hasFile1SourceFirst	INFERRED	any source of the first record has file 1 (OR of recordSourceFileIs1)	^\s*bVar11\ =\ bVar10\ \|\ bVar11;$	+1
+use	FUN_0007b0d0	bVar11	hasFile1SourceFirst	INFERRED	any source of the first record has file 1 (OR of recordSourceFileIs1)	^\s*bVar11\ =\ 0;$@3	+1
+use	FUN_0007b0d0	bVar11	hasFile1SourceFirst	INFERRED	any source of the first record has file 1 (OR of recordSourceFileIs1)	^\s*bVar11\ =\ 1;$	+1
+use	FUN_0007b0d0	bVar11	hasFile1SourceFirst	INFERRED	any source of the first record has file 1 (OR of recordSourceFileIs1)	^\s*if\ \(bVar11\ !=\ 0\)\ \{$	+1
+use	FUN_0007b0d0	bVar11	hasFile1SourceFirstB	INFERRED	accumulator for the first record before the partner is scanned	^\s*bVar11\ =\ 0;$@2	+1
+use	FUN_0007b0d0	bVar11	hasFile1SourceFirstB	INFERRED	accumulator for the first record before the partner is scanned	^\s*bVar11\ =\ bVar10\ \|\ bVar11;$@2	+1
+use	FUN_0007b0d0	bVar11	hasFile1SourceFirstB	INFERRED	accumulator for the first record before the partner is scanned	^\s*if\ \(bVar11\ ==\ 0\)\ \{$	+1
+use	FUN_0007b0d0	bVar11	sourceFileIs1B	INFERRED	recordSourceFileIs1(source) of the partner record	^\s*bVar11\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077cd0\)\(pcVar39\);$	+2
+local	FUN_0007b0d0	uVar12	outWord2	INFERRED	record word 2 copied to the output list
+local	FUN_0007b0d0	uVar18	outWord1	INFERRED	record word 1 copied to the output list
+use	FUN_0007b0d0	uVar26	bindingValue	INFERRED	*puVar40: value of the register binding slot, stored into the new node	^\s*uVar26\ =\ \*puVar40;$	+1
+use	FUN_0007b0d0	uVar26	bindingValue	INFERRED	*puVar40: value of the register binding slot, stored into the new node	^\s*puVar8\[1\]\ =\ uVar26;$	+1
+use	FUN_0007b0d0	uVar26	componentMask	INFERRED	recordGetWriteMask result	^\s*uVar26\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077850\)\(puVar23\);$	+1
+use	FUN_0007b0d0	uVar26	componentMask	INFERRED	recordGetWriteMask result	^\s*iVar27\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077ba0\)\(param_1,iVar28,param_3,uVar26,1\);$	+1
+use	FUN_0007b0d0	uVar26	bindingChainLink	INFERRED	puVar40[0x1001] of the shifted binding entry	^\s*uVar26\ =\ puVar40\[0x1001\];$	+1
+use	FUN_0007b0d0	uVar26	bindingChainLink	INFERRED	puVar40[0x1001] of the shifted binding entry	^\s*puVar40\[0x1000\]\ =\ uVar26;$	+1
+use	FUN_0007b0d0	uVar26	outWord3	INFERRED	record word 3 copied to the output list	^\s*uVar26\ =\ \*\(undefined4\ \*\)\(pcVar39\ \+\ 0xc\);$	+1
+use	FUN_0007b0d0	uVar26	outWord3	INFERRED	record word 3 copied to the output list	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0xc\)\ =\ uVar26;$	+1
+use	FUN_0007b0d0	iVar13	opcodeInfoOffset	INFERRED	(opcode & 0xbf) * 0x14: index into the opcode info table at 0x1aa5f0	^\s*if\ \(\(\(\(\(\(uVar4\ \-\ 1\ \&\ uVar4\)\ ==\ 0\)\ \&\&$	+11
+use	FUN_0007b0d0	iVar13	outRecordPtrB	INFERRED	second-output record pointer	^\s*iVar13\ =\ iVar30\ \+\ iVar38;$	+1
+use	FUN_0007b0d0	iVar13	outRecordPtrB	INFERRED	second-output record pointer	^\s*\*\(undefined4\ \*\)\(iVar13\ \+\ 0xc\)\ =\ uVar26;$	+3
+use	FUN_0007b0d0	piVar14	dependencyListHead	INFERRED	*piVar24	^\s*piVar14\ =\ \(int\ \*\)\*piVar24;$	+1
+use	FUN_0007b0d0	piVar14	dependencyListHead	INFERRED	*piVar24	^\s*for\ \(;\ piVar14\ !=\ \(int\ \*\)0x0;\ piVar14\ =\ \(int\ \*\)piVar14\[4\]\)\ \{$	+2
+use	FUN_0007b0d0	piVar14	bindingListSlot	INFERRED	pointer into the per-component binding list table (alloc+0x30b7c, or register*0x10 + alloc+0x2a87c)	^\s*piVar14\ =\ \(int\ \*\)\(param_1\ \+\ 0x30b7c\);$	+1
+use	FUN_0007b0d0	piVar14	bindingListSlot	INFERRED	pointer into the per-component binding list table (alloc+0x30b7c, or register*0x10 + alloc+0x2a87c)	^\s*piVar9\ =\ \(int\ \*\)\*piVar14;$	+1
+use	FUN_0007b0d0	piVar14	bindingListSlot	INFERRED	pointer into the per-component binding list table (alloc+0x30b7c, or register*0x10 + alloc+0x2a87c)	^\s*if\ \(\*piVar14\ !=\ 0\)\ \{$	+1
+use	FUN_0007b0d0	piVar14	bindingListSlot	INFERRED	pointer into the per-component binding list table (alloc+0x30b7c, or register*0x10 + alloc+0x2a87c)	^\s*\*piVar14\ =\ \(int\)piVar9;$	+1
+use	FUN_0007b0d0	piVar14	bindingListSlot	INFERRED	pointer into the per-component binding list table (alloc+0x30b7c, or register*0x10 + alloc+0x2a87c)	^\s*\*\(undefined4\ \*\)\(\*piVar14\ \+\ 4\)\ =\ 0;$	+1
+use	FUN_0007b0d0	piVar14	bindingListSlot	INFERRED	pointer into the per-component binding list table (alloc+0x30b7c, or register*0x10 + alloc+0x2a87c)	^\s*piVar14\ =\ piVar14\ \+\ 1;$	+1
+use	FUN_0007b0d0	piVar14	bindingListSlot	INFERRED	pointer into the per-component binding list table (alloc+0x30b7c, or register*0x10 + alloc+0x2a87c)	^\s*piVar14\ =\ \(int\ \*\)\(\(\(char\)\(DAT_001aa758\)\[\*puVar23\ >>\ 8\ \&\ 0xf\]\ \*\ 0x100\ \+$	+2
+use	FUN_0007b0d0	piVar14	bindingListSlot	INFERRED	pointer into the per-component binding list table (alloc+0x30b7c, or register*0x10 + alloc+0x2a87c)	^\s*piVar9\ =\ \(int\ \*\)\*piVar14;$@2	+1
+use	FUN_0007b0d0	piVar14	bindingListSlot	INFERRED	pointer into the per-component binding list table (alloc+0x30b7c, or register*0x10 + alloc+0x2a87c)	^\s*if\ \(\*piVar14\ !=\ 0\)\ \{$@2	+1
+use	FUN_0007b0d0	piVar14	bindingListSlot	INFERRED	pointer into the per-component binding list table (alloc+0x30b7c, or register*0x10 + alloc+0x2a87c)	^\s*\*piVar14\ =\ \(int\)piVar9;$@2	+1
+use	FUN_0007b0d0	piVar14	bindingListSlot	INFERRED	pointer into the per-component binding list table (alloc+0x30b7c, or register*0x10 + alloc+0x2a87c)	^\s*\*\(undefined4\ \*\)\(\*piVar14\ \+\ 4\)\ =\ 0;$@2	+1
+use	FUN_0007b0d0	piVar14	bindingListSlot	INFERRED	pointer into the per-component binding list table (alloc+0x30b7c, or register*0x10 + alloc+0x2a87c)	^\s*piVar14\ =\ piVar14\ \+\ 1;$@2	+1
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ \(code\ \*\)\(uVar33\ >>\ 6\ \&\ 1\);$	+1
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*else\ if\ \(\(pcVar15\ !=\ \(code\ \*\)0x0\)\ \&\&\ \(pcVar39\[3\]\ ==\ \(code\ \*\)0xb\)\)\ \{$	+1
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*\(\(int\ \(\*\)\(\)\)FUN_00077560\)\(param_1,\*\(undefined4\ \*\)pcVar39,0,param_4,param_5,param_6,pcVar15\);$	+6
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ \(code\ \*\)\(iVar28\ \-\ iVar27\);$	+2
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ \(code\ \*\)\(uVar4\ >>\ 0xd\ \&\ 0x7f\);$	+2
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ \(code\ \*\)\(1\ <<\ \(\(uint\)param_6\ >>\ 0x10\ \&\ 7\)\);$	+1
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*\(uint\)pcVar15;$	+1
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ local_60;$	+1
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ \(code\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x28874\)\ \+\ 1\);$	+1
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*\*\(code\ \*\*\)\(param_1\ \+\ 0x28874\)\ =\ pcVar15;$	+1
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ \(code\ \*\)\(iVar27\ \+\ 0x30000\);$	+1
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ param_4\ \+\ iVar27\ \*\ \-4;$	+1
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*\*\(undefined4\ \*\)\(\(int\)puVar40\ \+\ \(int\)pcVar15\)\ =\ \*puVar40;$	+1
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ \(code\ \*\)\(param_1\ \+\ 0x22870\);$	+1
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*if\ \(\*\(int\ \*\)pcVar15\ !=\ 0\)\ \{$	+2
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ pcVar15\ \+\ 4;$	+1
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*pcVar15\ =\ \(code\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x28874\)\ \+\ 1\);$@2	+1
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*\*\(code\ \*\*\)\(param_1\ \+\ 0x28874\)\ =\ pcVar15;$@2	+1
+use	FUN_0007b0d0	pcVar15	configBit6Arg	INFERRED	configFlags >> 6 & 1 passed on to FUN_00077560	^\s*uVar42\ =\ \(\(int\ \(\*\)\(\)\)FUN_00079e10\)\(pcVar39,uVar26,param_3,param_4,param_5,param_6,pcVar15\);$	+1
+use	FUN_0007b0d0	pcVar15	recordA	INFERRED	first record of a combinable pair	^\s*pcVar15\ =\ pcVar39;$	+1
+use	FUN_0007b0d0	pcVar15	recordA	INFERRED	first record of a combinable pair	^\s*pcVar15\ =\ pcVar15\ \+\ 4;$@2	+1
+use	FUN_0007b0d0	pcVar15	recordA	INFERRED	first record of a combinable pair	^\s*bVar10\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077cd0\)\(pcVar15\);$	+1
+use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*pcVar15\ =\ pcVar21\ \+\ local_84\ \*\ 0x10;$	+1
+use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*pcVar15\ =\ pcVar39;$@2	+1
+use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*\*\(undefined4\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ 0;$	+2
+use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00078a10\)\(param_1,\&local_b0,pcVar15\);$	+1
+use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*if\ \(\(\(\(2\ <\ \(int\)local_b0\ \+\ \(int\)local_ac\)\ \|\|\ \(1\ <\ \(int\)local_af\ \+\ \(int\)local_ab\)\)\ \|\|$	+5
+use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar29\ \|\ uVar5\ \&\ 0xffe7ffff;$	+1
+use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xfe07ffff;$	+1
+use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xfe07fffb;$	+1
+use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb\ \|\ 0x8000000;$	+1
+use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*\*\(uint\ \*\)\(pcVar15\ \+\ 0xc\)\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb\ \|\ 0x10000000;$	+1
+use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*\*\(uint\ \*\)pcVar15\ =\ \*\(uint\ \*\)pcVar15\ \|\ 0x10000000;$	+1
+use	FUN_0007b0d0	pcVar15	combinedRecord	INFERRED	record the partner is merged into (pcVar21 + partner*0x10)	^\s*pcVar39\ =\ pcVar15;$	+1
+local	FUN_0007b0d0	puVar16	bestRecordSlot	INFERRED	pointer into the 4-entry per-component best-record array (local_a8+0xc)
+use	FUN_0007b0d0	uVar22	recordFlagsBefore	INFERRED	per-record flag word before it is modified	^\s*uVar22\ =\ \*\(uint\ \*\)\(iVar30\ \+\ iVar38\);$	+2
+use	FUN_0007b0d0	uVar22	recordFlagsBefore	INFERRED	per-record flag word before it is modified	^\s*\*\(uint\ \*\)\(iVar30\ \+\ iVar38\)\ =\ uVar22\ \|\ 0x30;$	+1
+use	FUN_0007b0d0	uVar22	recordFlagsBefore	INFERRED	per-record flag word before it is modified	^\s*uVar22\ =\ \*\(uint\ \*\)\(iVar30\ \+\ iVar38\);$@2	+2
+use	FUN_0007b0d0	uVar22	recordFlagsBefore	INFERRED	per-record flag word before it is modified	^\s*\*\(uint\ \*\)\(iVar30\ \+\ iVar38\)\ =\ uVar22\ \|\ 3;$	+1
+use	FUN_0007b0d0	uVar22	recordFlagsBefore	INFERRED	per-record flag word before it is modified	^\s*\*\(uint\ \*\)\(iVar30\ \+\ iVar38\)\ =\ uVar22\ \|\ 0x1003;$	+1
+use	FUN_0007b0d0	uVar22	sourceSelectMask	INFERRED	mask of source select components used	^\s*uVar22\ =\ 1\ <<\ \(\(uint\)param_6\ >>\ 0x16\ \&\ 7\)\ \|\ 1\ <<\ \(\(uint\)param_6\ >>\ 0x13\ \&\ 7\)\ \|$	+1
+use	FUN_0007b0d0	uVar22	sourceSelectMask	INFERRED	mask of source select components used	^\s*if\ \(\(\(uVar22\ \|\ 1\ <<\ \(uVar33\ \&\ 7\)\)\ \&\ uVar29\)\ !=\ 0\)\ \{$	+1
+use	FUN_0007b0d0	uVar22	componentIndex	INFERRED	component counter 0..3	^\s*uVar22\ =\ 0;$	+1
+use	FUN_0007b0d0	uVar22	componentIndex	INFERRED	component counter 0..3	^\s*uVar29\ =\ 1\ <<\ \(uVar22\ \&\ 0x3f\);$	+1
+use	FUN_0007b0d0	uVar22	componentIndex	INFERRED	component counter 0..3	^\s*uVar22\ =\ uVar22\ \+\ 1;$	+1
+use	FUN_0007b0d0	uVar22	outRecordCount	INFERRED	number of records written to the output list	^\s*uVar22\ =\ 0;$@2	+1
+use	FUN_0007b0d0	uVar22	outRecordCount	INFERRED	number of records written to the output list	^\s*uVar22\ =\ 0;$@3	+1
+use	FUN_0007b0d0	uVar22	outRecordCount	INFERRED	number of records written to the output list	^\s*puVar19\ =\ \(uint\ \*\)\(uVar22\ \*\ 0x10\ \+\ \*\(int\ \*\)\(iVar28\ \+\ 0x18\)\);$	+1
+use	FUN_0007b0d0	uVar22	outRecordCount	INFERRED	number of records written to the output list	^\s*if\ \(\(cVar25\ !=\ '\\0'\)\ \&\&\ \(iVar30\ =\ \*\(int\ \*\)\(iVar28\ \+\ 0x20\),\ local_74\ =\ uVar22,\ iVar30\ !=\ 0\)\)\ \{$	+1
+use	FUN_0007b0d0	uVar22	outRecordCount	INFERRED	number of records written to the output list	^\s*uVar33\ =\ uVar22;$	+1
+use	FUN_0007b0d0	uVar22	outRecordCount	INFERRED	number of records written to the output list	^\s*uVar4\ =\ uVar22;$	+1
+use	FUN_0007b0d0	uVar22	outRecordCount	INFERRED	number of records written to the output list	^\s*if\ \(uVar22\ ==\ 0x400\)\ \{$	+1
+use	FUN_0007b0d0	uVar22	outRecordCount	INFERRED	number of records written to the output list	^\s*uVar22\ =\ uVar22\ \+\ 1;$@2	+1
+use	FUN_0007b0d0	uVar22	outRecordCount	INFERRED	number of records written to the output list	^\s*\*\*\(uint\ \*\*\)\(iVar28\ \+\ 0x1c\)\ =\ uVar22;$	+1
+use	FUN_0007b0d0	puVar23	recordSlotPtr	INFERRED	alloc+0x6450 + 4*record	^\s*puVar23\ =\ \(uint\ \*\)\(iVar28\ \*\ 4\ \+\ param_1\ \+\ 0x6450\);$	+1
+use	FUN_0007b0d0	puVar23	recordSlotPtr	INFERRED	alloc+0x6450 + 4*record	^\s*if\ \(\(puVar23\[0xb40f\]\ \&\ 0x10000\)\ !=\ 0\)\ \{$	+1
+use	FUN_0007b0d0	puVar23	recordSlotPtr	INFERRED	alloc+0x6450 + 4*record	^\s*local_68\ =\ \*puVar23;$	+1
+use	FUN_0007b0d0	puVar23	recordSlotPtr	INFERRED	alloc+0x6450 + 4*record	^\s*puVar23\ =\ puVar23\ \+\ \-1;$	+1
+use	FUN_0007b0d0	puVar23	recordPtr	INFERRED	alloc+0x1286c + record*0x10	^\s*puVar23\ =\ \(uint\ \*\)\(param_1\ \+\ 0x1286c\ \+\ iVar28\ \*\ 0x10\);$	+1
+use	FUN_0007b0d0	puVar23	recordPtr	INFERRED	alloc+0x1286c + record*0x10	^\s*iVar27\ =\ \(\(int\ \(\*\)\(\)\)FUN_000777b0\)\(puVar23,uVar4\);$	+1
+use	FUN_0007b0d0	puVar23	recordPtr	INFERRED	alloc+0x1286c + record*0x10	^\s*iVar27\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077800\)\(puVar23,uVar4\);$	+1
+use	FUN_0007b0d0	puVar23	recordPtr	INFERRED	alloc+0x1286c + record*0x10	^\s*iVar27\ =\ \(\(int\ \(\*\)\(\)\)FUN_000777b0\)\(puVar23,\*\*\(uint\ \*\*\)\(param_1\ \+\ 0x34\)\ >>\ 6\ \&\ 1\);$	+1
+use	FUN_0007b0d0	puVar23	recordPtr	INFERRED	alloc+0x1286c + record*0x10	^\s*iVar30\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077800\)\(puVar23,\*puVar19\ >>\ 6\ \&\ 1\);$	+1
+use	FUN_0007b0d0	puVar23	recordPtr	INFERRED	alloc+0x1286c + record*0x10	^\s*param_3\ =\ \(code\ \*\)\(\(int\ \(\*\)\(\)\)FUN_00077850\)\(puVar23\);$	+1
+use	FUN_0007b0d0	puVar23	recordPtr	INFERRED	alloc+0x1286c + record*0x10	^\s*param_3\ =\ \(code\ \*\)\(\(char\)\(DAT_001aa758\)\[\*puVar23\ >>\ 8\ \&\ 0xf\]\ \*\ 0x100\ \+$	+3
+use	FUN_0007b0d0	puVar23	recordPtr	INFERRED	alloc+0x1286c + record*0x10	^\s*param_3\ =\ \(code\ \*\)\(\(char\)\(DAT_001aa758\)\[\*puVar23\ >>\ 8\ \&\ 0xf\]\ \*\ 0x100\ \+$@2	+2
+use	FUN_0007b0d0	puVar23	recordPtr	INFERRED	alloc+0x1286c + record*0x10	^\s*param_3\ =\ \(code\ \*\)\(\(char\)\(DAT_001aa758\)\[\*puVar23\ >>\ 8\ \&\ 0xf\]\ \*\ 0x100\ \+$@3	+2
+use	FUN_0007b0d0	puVar23	recordPtr	INFERRED	alloc+0x1286c + record*0x10	^\s*piVar14\ =\ \(int\ \*\)\(\(\(char\)\(DAT_001aa758\)\[\*puVar23\ >>\ 8\ \&\ 0xf\]\ \*\ 0x100\ \+$	+2
+use	FUN_0007b0d0	piVar24	dependencyListCursor	INFERRED	cursor of the dependency list head table (alloc+0xc450)	^\s*piVar24\ =\ \(int\ \*\)\(param_1\ \+\ 0xc450\);$	+1
+use	FUN_0007b0d0	piVar24	dependencyListCursor	INFERRED	cursor of the dependency list head table (alloc+0xc450)	^\s*piVar14\ =\ \(int\ \*\)\*piVar24;$	+1
+use	FUN_0007b0d0	piVar24	dependencyListCursor	INFERRED	cursor of the dependency list head table (alloc+0xc450)	^\s*piVar24\ =\ piVar24\ \+\ 1;$	+1
+use	FUN_0007b0d0	piVar24	dependencyNode	INFERRED	node of a per-record dependency list: {+0 record index, +4 component mask, +0x10 next}	^\s*for\ \(piVar24\ =\ \*\(int\ \*\*\)\(iVar28\ \*\ 4\ \+\ iVar20\ \+\ 0xa418\);\ piVar24\ !=\ \(int\ \*\)0x0;$	+4
+use	FUN_0007b0d0	piVar24	dependencyNode	INFERRED	node of a per-record dependency list: {+0 record index, +4 component mask, +0x10 next}	^\s*for\ \(piVar24\ =\ \*\(int\ \*\*\)\(iVar28\ \*\ 4\ \+\ iVar20\ \+\ 0xc418\);\ piVar24\ !=\ \(int\ \*\)0x0;$	+4
+use	FUN_0007b0d0	piVar24	dependencyNode	INFERRED	node of a per-record dependency list: {+0 record index, +4 component mask, +0x10 next}	^\s*for\ \(piVar24\ =\ \*\(int\ \*\*\)\(iVar28\ \*\ 4\ \+\ iVar20\ \+\ 0xe418\);\ piVar24\ !=\ \(int\ \*\)0x0;$	+4
+use	FUN_0007b0d0	piVar24	dependencyNode	INFERRED	node of a per-record dependency list: {+0 record index, +4 component mask, +0x10 next}	^\s*piVar24\ =\ \*\(int\ \*\*\)\(iVar27\ \+\ iVar20\ \+\ 0xa418\);$	+1
+use	FUN_0007b0d0	piVar24	dependencyNode	INFERRED	node of a per-record dependency list: {+0 record index, +4 component mask, +0x10 next}	^\s*if\ \(piVar24\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_0007b0d0	piVar24	dependencyNode	INFERRED	node of a per-record dependency list: {+0 record index, +4 component mask, +0x10 next}	^\s*piVar36\ =\ piVar24;$	+1
+use	FUN_0007b0d0	piVar24	dependencyNode	INFERRED	node of a per-record dependency list: {+0 record index, +4 component mask, +0x10 next}	^\s*piVar24\ =\ \*\(int\ \*\*\)\(iVar27\ \+\ iVar20\ \+\ 0xa418\);$@2	+1
+use	FUN_0007b0d0	piVar24	dependencyNode	INFERRED	node of a per-record dependency list: {+0 record index, +4 component mask, +0x10 next}	^\s*if\ \(piVar24\ !=\ \(int\ \*\)0x0\)\ \{$@2	+1
+use	FUN_0007b0d0	piVar24	dependencyNode	INFERRED	node of a per-record dependency list: {+0 record index, +4 component mask, +0x10 next}	^\s*piVar36\ =\ piVar24;$@2	+1
+local	FUN_0007b0d0	cVar25	emitToSecondList	INFERRED	per-record flag (alloc+0x841b) or partner flag: record is also appended to the second output list (config+0x20)
+use	FUN_0007b0d0	iVar30	recordFlagOffset	INFERRED	record index * 4: offset into the per-record words	^\s*iVar30\ =\ \*\(int\ \*\)\(iVar27\ \+\ \-0x7788\)\ \*\ 4;$	+1
+use	FUN_0007b0d0	iVar30	recordFlagOffset	INFERRED	record index * 4: offset into the per-record words	^\s*if\ \(\(\*\(uint\ \*\)\(iVar30\ \+\ param_1\ \+\ 0x3348c\)\ \&\ 0x100\)\ ==\ 0\)\ \{$	+1
+use	FUN_0007b0d0	iVar30	recordFlagOffset	INFERRED	record index * 4: offset into the per-record words	^\s*uVar34\ =\ \*\(uint\ \*\)\(iVar30\ \+\ iVar20\ \+\ 0x6418\);$	+1
+use	FUN_0007b0d0	iVar30	recordFlagOffset	INFERRED	record index * 4: offset into the per-record words	^\s*cVar25\ =\ \*\(char\ \*\)\(iVar30\ \+\ iVar20\ \+\ 0x841b\);$	+1
+use	FUN_0007b0d0	iVar30	recordFlagOffset	INFERRED	record index * 4: offset into the per-record words	^\s*if\ \(\(\*\(int\ \*\)\(iVar30\ \+\ iVar20\ \+\ 0x8418\)\ !=\ 0\)\ \|\|$	+2
+use	FUN_0007b0d0	iVar30	recordFlagOffset	INFERRED	record index * 4: offset into the per-record words	^\s*uVar34\ =\ \*\(uint\ \*\)\(iVar30\ \+\ iVar20\ \+\ 0x6418\);$@2	+1
+use	FUN_0007b0d0	iVar30	recordFlagOffset	INFERRED	record index * 4: offset into the per-record words	^\s*if\ \(\(cVar25\ !=\ '\\0'\)\ \&\&\ \(iVar30\ =\ \*\(int\ \*\)\(iVar28\ \+\ 0x20\),\ local_74\ =\ uVar22,\ iVar30\ !=\ 0\)\)\ \{$	+1
+use	FUN_0007b0d0	iVar30	recordFlagOffset	INFERRED	record index * 4: offset into the per-record words	^\s*iVar13\ =\ iVar30\ \+\ iVar38;$	+2
+use	FUN_0007b0d0	iVar38	secondListOffset	INFERRED	second-list count * 0x10	^\s*iVar38\ =\ local_70\ \*\ 0x10;$	+1
+use	FUN_0007b0d0	iVar38	secondListOffset	INFERRED	second-list count * 0x10	^\s*iVar13\ =\ iVar30\ \+\ iVar38;$	+2
+use	FUN_0007b0d0	pcVar39	recordPtrB	INFERRED	record pointer	^\s*pcVar39\ =\ pcVar21\ \+\ iVar27\ \*\ 0x10;$	+4
+use	FUN_0007b0d0	pcVar39	recordPtrB	INFERRED	record pointer	^\s*uVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_00078300\)\(pcVar39,1\);$	+1
+use	FUN_0007b0d0	pcVar39	recordPtrB	INFERRED	record pointer	^\s*uVar4\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077850\)\(pcVar39\);$	+12
+use	FUN_0007b0d0	pcVar39	recordPtrB	INFERRED	record pointer	^\s*pcVar39\ =\ pcVar21\ \+\ iVar28\ \*\ 0x10;$@2	+1
+use	FUN_0007b0d0	pcVar39	recordPtrB	INFERRED	record pointer	^\s*pcVar39\ =\ pcVar39\ \+\ 4;$@2	+1
+use	FUN_0007b0d0	pcVar39	recordPtrB	INFERRED	record pointer	^\s*\*\(code\ \*\*\)\(param_3\ \+\ iVar27\)\ =\ pcVar39;$	+1
+use	FUN_0007b0d0	pcVar39	recordPtrB	INFERRED	record pointer	^\s*pcVar39\ =\ pcVar21\ \+\ iVar28\ \*\ 0x10;$	+1
+use	FUN_0007b0d0	pcVar39	recordPtrB	INFERRED	record pointer	^\s*uVar4\ =\ \*\(uint\ \*\)pcVar39;$	+1
+use	FUN_0007b0d0	pcVar39	recordPtrB	INFERRED	record pointer	^\s*uVar4\ =\ \*\(uint\ \*\)pcVar39;$@2	+1
+use	FUN_0007b0d0	pcVar39	recordPtrB	INFERRED	record pointer	^\s*uVar4\ =\ \*\(uint\ \*\)pcVar39;$@3	+1
+use	FUN_0007b0d0	pcVar39	recordPtrB	INFERRED	record pointer	^\s*uVar4\ =\ \*\(uint\ \*\)pcVar39;$@4	+1
+use	FUN_0007b0d0	pcVar39	recordPtrB	INFERRED	record pointer	^\s*pcVar41\ =\ pcVar39;$	+1
+use	FUN_0007b0d0	pcVar39	recordPtrB	INFERRED	record pointer	^\s*pcVar39\ =\ pcVar39\ \+\ \-0x10;$	+1
+use	FUN_0007b0d0	pcVar39	emitRecord	INFERRED	record being emitted to the output list	^\s*pcVar39\ =\ pcVar21\ \+\ \*\(int\ \*\)\(iVar27\ \+\ \-0x7788\)\ \*\ 0x10;$	+1
+use	FUN_0007b0d0	pcVar39	emitRecord	INFERRED	record being emitted to the output list	^\s*pcVar15\ =\ pcVar39;$	+1
+use	FUN_0007b0d0	pcVar39	emitRecord	INFERRED	record being emitted to the output list	^\s*pcVar41\ =\ pcVar39;$@2	+3
+use	FUN_0007b0d0	pcVar39	emitRecord	INFERRED	record being emitted to the output list	^\s*pcVar39\ =\ pcVar39\ \+\ 4;$@3	+1
+use	FUN_0007b0d0	pcVar39	emitRecord	INFERRED	record being emitted to the output list	^\s*bVar10\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077cd0\)\(pcVar39\);$	+1
+use	FUN_0007b0d0	pcVar39	emitRecord	INFERRED	record being emitted to the output list	^\s*pcVar39\ =\ pcVar15;$	+1
+use	FUN_0007b0d0	pcVar39	emitRecord	INFERRED	record being emitted to the output list	^\s*uVar18\ =\ \*\(undefined4\ \*\)\(pcVar39\ \+\ 4\);$	+3
+use	FUN_0007b0d0	pcVar39	emitRecord	INFERRED	record being emitted to the output list	^\s*\*\(undefined4\ \*\)\(iVar30\ \+\ iVar38\)\ =\ \*\(undefined4\ \*\)pcVar39;$	+1
+use	FUN_0007b0d0	pcVar39	emitRecord	INFERRED	record being emitted to the output list	^\s*uVar34\ =\ \*\(uint\ \*\)pcVar39;$	+1
+use	FUN_0007b0d0	pcVar39	emitRecord	INFERRED	record being emitted to the output list	^\s*iVar30\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077cf0\)\(pcVar39\);$	+1
+use	FUN_0007b0d0	pcVar39	emitRecord	INFERRED	record being emitted to the output list	^\s*uVar29\ =\ \*\(uint\ \*\)\(pcVar39\ \+\ 0xc\);$	+2
+use	FUN_0007b0d0	pcVar39	emitRecord	INFERRED	record being emitted to the output list	^\s*uVar17\ =\ \*\(uint\ \*\)\(pcVar39\ \+\ 8\);$	+1
+local	FUN_0007b0d0	piVar36	chainSource	INFERRED	dependency node currently copied into the binding chain
+use	FUN_0007b0d0	puVar40	bindingEntryPtr	INFERRED	per-component binding entry (alloc+0x2a87c + register*0x10)	^\s*puVar40\ =\ \(undefined4\ \*\)\(iVar30\ \*\ 0x10\ \+\ param_1\ \+\ 0x2a87c\);$	+1
+use	FUN_0007b0d0	puVar40	bindingEntryPtr	INFERRED	per-component binding entry (alloc+0x2a87c + register*0x10)	^\s*uVar26\ =\ \*puVar40;$	+1
+use	FUN_0007b0d0	puVar40	bindingEntryPtr	INFERRED	per-component binding entry (alloc+0x2a87c + register*0x10)	^\s*\*puVar40\ =\ puVar8;$	+2
+use	FUN_0007b0d0	puVar40	bindingEntryPtr	INFERRED	per-component binding entry (alloc+0x2a87c + register*0x10)	^\s*puVar40\ =\ puVar40\ \+\ 1;$	+1
+use	FUN_0007b0d0	puVar40	dependencyNodeB	INFERRED	node of a dependency list	^\s*for\ \(puVar40\ =\ \*\(undefined4\ \*\*\)\(iVar27\ \+\ iVar20\ \+\ 0xc418\);\ puVar40\ !=\ \(undefined4\ \*\)0x0;$	+3
+use	FUN_0007b0d0	puVar40	dependencyNodeB	INFERRED	node of a dependency list	^\s*iVar30\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077c40\)\(param_1,\*puVar40,param_3,1,param_5\);$	+1
+use	FUN_0007b0d0	puVar40	dependencyNodeB	INFERRED	node of a dependency list	^\s*for\ \(puVar40\ =\ \*\(undefined4\ \*\*\)\(iVar27\ \+\ iVar20\ \+\ 0xe418\);\ puVar40\ !=\ \(undefined4\ \*\)0x0;$	+3
+use	FUN_0007b0d0	puVar40	dependencyNodeB	INFERRED	node of a dependency list	^\s*\(\(int\ \(\*\)\(\)\)FUN_00077c40\)\(param_1,\*puVar40,param_3,1,param_5\);$	+1
+use	FUN_0007b0d0	puVar40	dependencyNodeB	INFERRED	node of a dependency list	^\s*for\ \(puVar40\ =\ \*\(undefined4\ \*\*\)\(iVar27\ \+\ iVar20\ \+\ 0xe418\);\ puVar40\ !=\ \(undefined4\ \*\)0x0;$@2	+2
+use	FUN_0007b0d0	puVar40	dependencyNodeB	INFERRED	node of a dependency list	^\s*param_4\ =\ \(code\ \*\)puVar40\[1\];$	+1
+use	FUN_0007b0d0	puVar40	dependencyNodeB	INFERRED	node of a dependency list	^\s*\(\(int\ \(\*\)\(\)\)FUN_00077ba0\)\(param_1,\*puVar40,param_3,param_4,0\);$	+1
+use	FUN_0007b0d0	puVar35	depNode	INFERRED	node of the dependency list at alloc+0x38+0xc418+record*4	^\s*for\ \(puVar35\ =\ \*\(uint\ \*\*\)\(iVar27\ \+\ iVar20\ \+\ 0xc418\);\ puVar35\ !=\ \(uint\ \*\)0x0;$	+3
+use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*pcVar37\ =\ pcVar15\ \+\ 0xc;$	+1
+use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb;$	+1
+use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar7\ \|\ uVar17\ \|\ uVar29\ \|\ uVar5\ \&\ 0xe607fffb\ \|\ 0x18000000;$	+1
+use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*uVar6\ =\ \*\(uint\ \*\)pcVar37;$	+1
+use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar7\ \|\ uVar6\ \&\ 0xfffffffc;$	+1
+use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0xffffffec;$	+1
+use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0xffffe00c;$	+1
+use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9fffe00c;$	+1
+use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9dffe00c;$	+2
+use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*uVar6\ =\ \*\(uint\ \*\)pcVar37;$@2	+1
+use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar7\ \|\ uVar6\ \&\ 0xfffffffc;$@2	+1
+use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0xffffffec;$@2	+1
+use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0xffffe00c;$@2	+1
+use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9fffe00c;$@2	+1
+use	FUN_0007b0d0	pcVar37	word3Ptr	INFERRED	combinedRecord + 0xc	^\s*\*\(uint\ \*\)pcVar37\ =\ uVar29\ \|\ uVar3\ \|\ uVar5\ \|\ uVar17\ \|\ uVar7\ \|\ uVar6\ \&\ 0x9bffe00c;$	+2
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*pcVar41\ =\ pcVar39;$@2	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*pcVar41\ =\ pcVar21\ \+\ local_84\ \*\ 0x10;$	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*cVar2\ =\ pcVar41\[3\];$	+2
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*\(\(int\ \(\*\)\(\)\)FUN_00078a10\)\(param_1,\&local_ac,pcVar41\);$	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar29\ =\ \(\*\(uint\ \*\)pcVar41\ \&\ 0x6000\)\ <<\ 6;$	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar17\ =\ \(\(byte\)pcVar41\[3\]\ \&\ 0xf\)\ <<\ 0x15;$	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar7\ =\ \(byte\)pcVar41\[3\]\ >>\ 2\ \&\ 4;$	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar7\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 3;$	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar17\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x10;$	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar5\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x1fe0;$	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar3\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x60000000;$	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar29\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ >>\ 3\ \&\ 0x2000000;$	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*\*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ >>\ 9\ \&\ 0xe000\ \|$	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar7\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 3;$@2	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar17\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x10;$@2	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar5\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x1fe0;$@2	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar3\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ \&\ 0x60000000;$@2	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*uVar29\ =\ \*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ >>\ 2\ \&\ 0x4000000;$	+1
+use	FUN_0007b0d0	pcVar41	partnerRecord	INFERRED	partner record (the one whose sources are merged)	^\s*\*\(uint\ \*\)\(pcVar41\ \+\ \(uVar34\ \+\ 1\)\ \*\ 4\)\ >>\ 6\ \&\ 0x70000\ \|$	+1
+use	FUN_0007b0d0	iVar27	allocPlus30000	INFERRED	alloc+0x30000: base for the emitted-order table (-0x7788)	^\s*iVar27\ =\ param_1\ \+\ 0x30000;$	+1
+use	FUN_0007b0d0	iVar27	allocPlus30000	INFERRED	alloc+0x30000: base for the emitted-order table (-0x7788)	^\s*iVar30\ =\ \*\(int\ \*\)\(iVar27\ \+\ \-0x7788\)\ \*\ 4;$	+1
+use	FUN_0007b0d0	iVar27	allocPlus30000	INFERRED	alloc+0x30000: base for the emitted-order table (-0x7788)	^\s*pcVar39\ =\ pcVar21\ \+\ \*\(int\ \*\)\(iVar27\ \+\ \-0x7788\)\ \*\ 0x10;$	+1
+use	FUN_0007b0d0	iVar27	allocPlus30000	INFERRED	alloc+0x30000: base for the emitted-order table (-0x7788)	^\s*local_84\ =\ \*\(int\ \*\)\(iVar27\ \+\ \-0x7784\);$	+1
+use	FUN_0007b0d0	iVar27	allocPlus30000	INFERRED	alloc+0x30000: base for the emitted-order table (-0x7788)	^\s*iVar27\ =\ iVar27\ \+\ 4;$@2	+1
+use	FUN_0007b0d0	iVar27	allocPlus30000	INFERRED	alloc+0x30000: base for the emitted-order table (-0x7788)	^\s*iVar27\ =\ iVar27\ \+\ 4;$@3	+1
+use	FUN_0007b0d0	iVar27	retiredRecord	INFERRED	record index taken from the live list	^\s*iVar27\ =\ \*\(int\ \*\)pcVar41;$	+1
+use	FUN_0007b0d0	iVar27	retiredRecord	INFERRED	record index taken from the live list	^\s*\*\(int\ \*\)\(iVar28\ \+\ 0x26874\)\ =\ iVar27;$	+1
+use	FUN_0007b0d0	iVar27	retiredRecord	INFERRED	record index taken from the live list	^\s*iVar28\ =\ iVar27\ \*\ 4\ \+\ param_1;$	+1
+use	FUN_0007b0d0	iVar27	retiredRecord	INFERRED	record index taken from the live list	^\s*iVar27\ =\ \*\(int\ \*\)pcVar41;$@2	+1
+use	FUN_0007b0d0	iVar27	retiredRecord	INFERRED	record index taken from the live list	^\s*\*\(int\ \*\)\(iVar28\ \+\ 0x26874\)\ =\ iVar27;$@2	+1
+use	FUN_0007b0d0	iVar27	retiredRecord	INFERRED	record index taken from the live list	^\s*iVar28\ =\ iVar27\ \*\ 4\ \+\ param_1;$@2	+1
+use	FUN_0007b0d0	iVar27	recordOffset4	INFERRED	record index * 4	^\s*iVar27\ =\ iVar28\ \*\ 4;$	+1
+use	FUN_0007b0d0	iVar27	recordOffset4	INFERRED	record index * 4	^\s*for\ \(puVar40\ =\ \*\(undefined4\ \*\*\)\(iVar27\ \+\ iVar20\ \+\ 0xc418\);\ puVar40\ !=\ \(undefined4\ \*\)0x0;$	+2
+use	FUN_0007b0d0	iVar27	recordOffset4	INFERRED	record index * 4	^\s*for\ \(puVar40\ =\ \*\(undefined4\ \*\*\)\(iVar27\ \+\ iVar20\ \+\ 0xe418\);\ puVar40\ !=\ \(undefined4\ \*\)0x0;$	+2
+use	FUN_0007b0d0	iVar27	recordOffset4	INFERRED	record index * 4	^\s*piVar24\ =\ \*\(int\ \*\*\)\(iVar27\ \+\ iVar20\ \+\ 0xa418\);$	+1
+use	FUN_0007b0d0	iVar27	recordOffset4	INFERRED	record index * 4	^\s*iVar27\ =\ iVar28\ \*\ 4;$@2	+1
+use	FUN_0007b0d0	iVar27	recordOffset4	INFERRED	record index * 4	^\s*for\ \(puVar35\ =\ \*\(uint\ \*\*\)\(iVar27\ \+\ iVar20\ \+\ 0xc418\);\ puVar35\ !=\ \(uint\ \*\)0x0;$	+2
+use	FUN_0007b0d0	iVar27	recordOffset4	INFERRED	record index * 4	^\s*for\ \(puVar40\ =\ \*\(undefined4\ \*\*\)\(iVar27\ \+\ iVar20\ \+\ 0xe418\);\ puVar40\ !=\ \(undefined4\ \*\)0x0;$@2	+2
+use	FUN_0007b0d0	iVar27	recordOffset4	INFERRED	record index * 4	^\s*piVar24\ =\ \*\(int\ \*\*\)\(iVar27\ \+\ iVar20\ \+\ 0xa418\);$@2	+1
+use	FUN_0007b0d0	iVar27	nodeRecordIndex	INFERRED	record index of a dependency node	^\s*iVar27\ =\ \*piVar36;$	+1
+use	FUN_0007b0d0	iVar27	nodeRecordIndex	INFERRED	record index of a dependency node	^\s*\*piVar9\ =\ iVar27;$	+1
+use	FUN_0007b0d0	iVar27	nodeRecordIndex	INFERRED	record index of a dependency node	^\s*iVar27\ =\ \*piVar36;$@2	+1
+use	FUN_0007b0d0	iVar27	nodeRecordIndex	INFERRED	record index of a dependency node	^\s*\*piVar9\ =\ iVar27;$@2	+1
+use	FUN_0007b0d0	iVar27	status	INFERRED	callee status code (returned on non-zero)	^\s*iVar27\ =\ \(\(int\ \(\*\)\(\)\)FUN_00078f80\)\(param_1,iVar28,param_3,pcVar21,param_5\);$	+3
+use	FUN_0007b0d0	iVar27	status	INFERRED	callee status code (returned on non-zero)	^\s*iVar27\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077ba0\)\(param_1,iVar28,param_3,uVar26,1\);$	+3
+func	FUN_0007b0d0	recordProgramAllocateAndEmit	INFERRED	driver of the vertex-program record register allocator: pre-computes per-record flags, rewrites opcodes 4->0x80 and 0xb->0x81, binds registers record by record (FUN_0007aae0 picks the next record and register, regBindingSet/regBindingSetFixedRegister, dependency lists at alloc+0xa450/0xc450/0xe450), retires records, and finally copies the allocated records into the output list of the config descriptor (*(alloc+0x34)+0x18) with their counts and the highest register

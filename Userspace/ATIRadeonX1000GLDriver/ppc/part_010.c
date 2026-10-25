@@ -2080,126 +2080,138 @@ int evsAllocLocalConstantRegisters(ctx, shader, programState, symbol)
   int programState;
   int symbol;
 {
+  undefined4 newRegisterTableB;
+  int oldTableSize;
+  int grownRecordOffsetB;
+  int tableSize;
+  int grownRecordOffset;
+  int registerRecordPtrC;
+  int recordByteOffset;
+  int dataType;
+  int registerRecordPtrB;
+  int rowsLeft;
+  int registerRecordPtr;
+  bool noFreeRecordYet;
   bool bVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  undefined4 uVar5;
-  undefined1 uVar6;
+  int registerNumber;
+  int registerNumberB;
+  int symbolStorage;
+  undefined4 newRegisterTable;
+  undefined1 growFlagValue;
   uint loopIndex;
-  int iVar8;
+  int registerRecordOffset;
   undefined4 uVar9;
-  int iVar10;
+  int rowsLeftB;
   
-  iVar4 = *(int *)(symbol + 0x28);
-  if (iVar4 == 0x87c3) {
+  symbolStorage = *(int *)(symbol + 0x28);
+  if (symbolStorage == 0x87c3) {
     *(int *)(shader + 0x60) = *(int *)(shader + 0x60) + 1;
     *(int *)(programState + 0x118) = *(int *)(programState + 0x118) + 1;
     *(undefined1 *)(symbol + 0x3d) = 1;
-    iVar4 = *(int *)(symbol + 0x24);
-    if (iVar4 == 0x87bf) {
-      uVar6 = 0;
+    dataType = *(int *)(symbol + 0x24);
+    if (dataType == 0x87bf) {
+      growFlagValue = 0;
       loopIndex = 0;
-      iVar4 = 0;
-      bVar1 = true;
+      recordByteOffset = 0;
+      noFreeRecordYet = true;
       *(int *)(programState + 0x4c) = *(int *)(programState + 0x4c) + 1;
       while (loopIndex < *(uint *)(programState + 0x48)) {
-        if (!bVar1) goto LAB_000702bc;
-        if (*(char *)(iVar4 + *(int *)(programState + 0x44) + 0x10) == '\0') {
-          uVar6 = 1;
-          bVar1 = false;
+        if (!noFreeRecordYet) goto LAB_000702bc;
+        if (*(char *)(recordByteOffset + *(int *)(programState + 0x44) + 0x10) == '\0') {
+          growFlagValue = 1;
+          noFreeRecordYet = false;
         }
         else {
           loopIndex = loopIndex + 1;
-          iVar4 = iVar4 + 0x28;
+          recordByteOffset = recordByteOffset + 0x28;
         }
       }
       goto LAB_000702b8;
     }
-    if (iVar4 == 0x87c0) {
+    if (dataType == 0x87c0) {
       loopIndex = 0;
-      iVar4 = 0;
-      bVar1 = true;
+      recordByteOffset = 0;
+      noFreeRecordYet = true;
       *(int *)(programState + 0x4c) = *(int *)(programState + 0x4c) + 4;
       while (loopIndex < *(int *)(programState + 0x48) - 3U) {
-        if (!bVar1) goto LAB_000703cc;
-        if (*(char *)(iVar4 + *(int *)(programState + 0x44) + 0x10) == '\0') {
-          bVar1 = false;
+        if (!noFreeRecordYet) goto LAB_000703cc;
+        if (*(char *)(recordByteOffset + *(int *)(programState + 0x44) + 0x10) == '\0') {
+          noFreeRecordYet = false;
         }
         else {
           loopIndex = loopIndex + 1;
-          iVar4 = iVar4 + 0x28;
+          recordByteOffset = recordByteOffset + 0x28;
         }
       }
-      if (!bVar1) {
+      if (!noFreeRecordYet) {
 LAB_000703cc:
-        iVar8 = loopIndex * 0x28;
-        iVar4 = iVar8 + *(int *)(programState + 0x44);
-        if (((*(char *)(iVar4 + 0x38) == '\0') && (*(char *)(iVar4 + 0x60) == '\0')) &&
-           (*(char *)(iVar4 + 0x88) == '\0')) {
-          iVar4 = 0;
-          iVar10 = 4;
+        registerRecordOffset = loopIndex * 0x28;
+        registerRecordPtrC = registerRecordOffset + *(int *)(programState + 0x44);
+        if (((*(char *)(registerRecordPtrC + 0x38) == '\0') && (*(char *)(registerRecordPtrC + 0x60) == '\0')) &&
+           (*(char *)(registerRecordPtrC + 0x88) == '\0')) {
+          recordByteOffset = 0;
+          rowsLeftB = 4;
           do {
-            iVar2 = loopIndex + iVar4;
-            iVar4 = iVar4 + 1;
-            *(int *)(symbol + 0x10) = iVar2;
+            registerNumber = loopIndex + recordByteOffset;
+            recordByteOffset = recordByteOffset + 1;
+            *(int *)(symbol + 0x10) = registerNumber;
             symbol = symbol + 4;
-            iVar2 = *(int *)(programState + 0x44) + iVar8;
-            iVar8 = iVar8 + 0x28;
-            *(undefined1 *)(iVar2 + 0x10) = 1;
-            iVar10 = iVar10 + -1;
-          } while (iVar10 != 0);
+            registerRecordPtr = *(int *)(programState + 0x44) + registerRecordOffset;
+            registerRecordOffset = registerRecordOffset + 0x28;
+            *(undefined1 *)(registerRecordPtr + 0x10) = 1;
+            rowsLeftB = rowsLeftB + -1;
+          } while (rowsLeftB != 0);
           return 0;
         }
       }
       *(undefined1 *)(shader + 0x10) = 0;
-      iVar10 = *(int *)(programState + 0x48);
-      uVar9 = (**(code **)(ctx + 0x10))(iVar10 + 0x40,0x28);
+      oldTableSize = *(int *)(programState + 0x48);
+      newRegisterTableB = (**(code **)(ctx + 0x10))(oldTableSize + 0x40,0x28);
       (**(code **)(((unsigned char *)0x00001344) + ctx))
-                (uVar9,*(undefined4 *)(programState + 0x44),*(int *)(programState + 0x48) * 0x28);
+                (newRegisterTableB,*(undefined4 *)(programState + 0x44),*(int *)(programState + 0x48) * 0x28);
       (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x44));
-      *(undefined4 *)(programState + 0x44) = uVar9;
-      iVar4 = iVar10 * 0x28;
-      iVar2 = 4;
-      iVar8 = 0;
+      *(undefined4 *)(programState + 0x44) = newRegisterTableB;
+      grownRecordOffset = oldTableSize * 0x28;
+      rowsLeft = 4;
+      grownRecordOffsetB = 0;
       *(int *)(programState + 0x48) = *(int *)(programState + 0x48) + 0x40;
       do {
-        iVar3 = iVar10 + iVar8;
-        iVar8 = iVar8 + 1;
-        *(int *)(symbol + 0x10) = iVar3;
+        registerNumberB = oldTableSize + grownRecordOffsetB;
+        grownRecordOffsetB = grownRecordOffsetB + 1;
+        *(int *)(symbol + 0x10) = registerNumberB;
         symbol = symbol + 4;
-        iVar3 = *(int *)(programState + 0x44) + iVar4;
-        iVar4 = iVar4 + 0x28;
-        *(undefined1 *)(iVar3 + 0x10) = 1;
-        iVar2 = iVar2 + -1;
-      } while (iVar2 != 0);
+        registerRecordPtrB = *(int *)(programState + 0x44) + grownRecordOffset;
+        grownRecordOffset = grownRecordOffset + 0x28;
+        *(undefined1 *)(registerRecordPtrB + 0x10) = 1;
+        rowsLeft = rowsLeft + -1;
+      } while (rowsLeft != 0);
       return 0;
     }
-    if (iVar4 != 0x87be) {
+    if (dataType != 0x87be) {
       return 1;
     }
     uVar9 = 0;
     loopIndex = 0;
-    iVar4 = 0;
+    recordByteOffset = 0;
     bVar1 = true;
     *(int *)(programState + 0x4c) = *(int *)(programState + 0x4c) + 1;
     while (loopIndex < *(uint *)(programState + 0x48)) {
       if (!bVar1) goto LAB_000701ac;
-      if (*(char *)(iVar4 + *(int *)(programState + 0x44) + 0x10) == '\0') {
+      if (*(char *)(recordByteOffset + *(int *)(programState + 0x44) + 0x10) == '\0') {
         uVar9 = 1;
         bVar1 = false;
       }
       else {
         loopIndex = loopIndex + 1;
-        iVar4 = iVar4 + 0x28;
+        recordByteOffset = recordByteOffset + 0x28;
       }
     }
   }
   else {
-    if (iVar4 == 0x87c4) {
+    if (symbolStorage == 0x87c4) {
       return 0;
     }
-    if (iVar4 != 0x87c2) {
+    if (symbolStorage != 0x87c2) {
       return 1;
     }
     *(int *)(shader + 0x5c) = *(int *)(shader + 0x5c) + 1;
@@ -2209,118 +2221,118 @@ LAB_000703cc:
     else {
       *(int *)(programState + 0x120) = *(int *)(programState + 0x120) + 1;
     }
-    iVar4 = *(int *)(symbol + 0x24);
+    dataType = *(int *)(symbol + 0x24);
     *(undefined1 *)(symbol + 0x3d) = 1;
-    if (iVar4 == 0x87bf) {
-      uVar6 = 0;
+    if (dataType == 0x87bf) {
+      growFlagValue = 0;
       loopIndex = 0;
-      iVar4 = 0;
-      bVar1 = true;
+      recordByteOffset = 0;
+      noFreeRecordYet = true;
       *(int *)(programState + 0x4c) = *(int *)(programState + 0x4c) + 1;
       while (loopIndex < *(uint *)(programState + 0x48)) {
-        if (!bVar1) goto LAB_000702bc;
-        if (*(char *)(iVar4 + *(int *)(programState + 0x44) + 0x10) == '\0') {
-          uVar6 = 1;
-          bVar1 = false;
+        if (!noFreeRecordYet) goto LAB_000702bc;
+        if (*(char *)(recordByteOffset + *(int *)(programState + 0x44) + 0x10) == '\0') {
+          growFlagValue = 1;
+          noFreeRecordYet = false;
         }
         else {
           loopIndex = loopIndex + 1;
-          iVar4 = iVar4 + 0x28;
+          recordByteOffset = recordByteOffset + 0x28;
         }
       }
 LAB_000702b8:
-      if (!bVar1) {
+      if (!noFreeRecordYet) {
 LAB_000702bc:
         *(uint *)(symbol + 4) = loopIndex;
         *(undefined1 *)(loopIndex * 0x28 + *(int *)(programState + 0x44) + 0x10) = 1;
         return 0;
       }
-      *(undefined1 *)(shader + 0x10) = uVar6;
-      iVar4 = *(int *)(programState + 0x48);
-      uVar9 = (**(code **)(ctx + 0x10))(iVar4 + 0x40,0x28);
+      *(undefined1 *)(shader + 0x10) = growFlagValue;
+      tableSize = *(int *)(programState + 0x48);
+      newRegisterTableB = (**(code **)(ctx + 0x10))(tableSize + 0x40,0x28);
       (**(code **)(((unsigned char *)0x00001344) + ctx))
-                (uVar9,*(undefined4 *)(programState + 0x44),*(int *)(programState + 0x48) * 0x28);
+                (newRegisterTableB,*(undefined4 *)(programState + 0x44),*(int *)(programState + 0x48) * 0x28);
       (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x44));
-      *(undefined4 *)(programState + 0x44) = uVar9;
+      *(undefined4 *)(programState + 0x44) = newRegisterTableB;
       *(int *)(programState + 0x48) = *(int *)(programState + 0x48) + 0x40;
       goto LAB_00070350;
     }
-    if (iVar4 == 0x87c0) {
+    if (dataType == 0x87c0) {
       loopIndex = 0;
-      iVar4 = 0;
+      recordByteOffset = 0;
       bVar1 = true;
       *(int *)(programState + 0x4c) = *(int *)(programState + 0x4c) + 4;
       while (loopIndex < *(int *)(programState + 0x48) - 3U) {
         if (!bVar1) goto LAB_0006ffbc;
-        if (*(char *)(iVar4 + *(int *)(programState + 0x44) + 0x10) == '\0') {
+        if (*(char *)(recordByteOffset + *(int *)(programState + 0x44) + 0x10) == '\0') {
           bVar1 = false;
         }
         else {
           loopIndex = loopIndex + 1;
-          iVar4 = iVar4 + 0x28;
+          recordByteOffset = recordByteOffset + 0x28;
         }
       }
       if (!bVar1) {
 LAB_0006ffbc:
-        iVar8 = loopIndex * 0x28;
-        iVar4 = iVar8 + *(int *)(programState + 0x44);
-        if (((*(char *)(iVar4 + 0x38) == '\0') && (*(char *)(iVar4 + 0x60) == '\0')) &&
-           (*(char *)(iVar4 + 0x88) == '\0')) {
-          iVar4 = 0;
-          iVar10 = 4;
+        registerRecordOffset = loopIndex * 0x28;
+        registerRecordPtrC = registerRecordOffset + *(int *)(programState + 0x44);
+        if (((*(char *)(registerRecordPtrC + 0x38) == '\0') && (*(char *)(registerRecordPtrC + 0x60) == '\0')) &&
+           (*(char *)(registerRecordPtrC + 0x88) == '\0')) {
+          recordByteOffset = 0;
+          rowsLeftB = 4;
           do {
-            iVar2 = loopIndex + iVar4;
-            iVar4 = iVar4 + 1;
-            *(int *)(symbol + 0x10) = iVar2;
+            registerNumber = loopIndex + recordByteOffset;
+            recordByteOffset = recordByteOffset + 1;
+            *(int *)(symbol + 0x10) = registerNumber;
             symbol = symbol + 4;
-            iVar2 = *(int *)(programState + 0x44) + iVar8;
-            iVar8 = iVar8 + 0x28;
-            *(undefined1 *)(iVar2 + 0x10) = 1;
-            iVar10 = iVar10 + -1;
-          } while (iVar10 != 0);
+            registerRecordPtr = *(int *)(programState + 0x44) + registerRecordOffset;
+            registerRecordOffset = registerRecordOffset + 0x28;
+            *(undefined1 *)(registerRecordPtr + 0x10) = 1;
+            rowsLeftB = rowsLeftB + -1;
+          } while (rowsLeftB != 0);
           return 0;
         }
       }
       *(undefined1 *)(shader + 0x10) = 0;
-      iVar10 = *(int *)(programState + 0x48);
-      uVar9 = (**(code **)(ctx + 0x10))(iVar10 + 0x40,0x28);
+      oldTableSize = *(int *)(programState + 0x48);
+      newRegisterTableB = (**(code **)(ctx + 0x10))(oldTableSize + 0x40,0x28);
       (**(code **)(((unsigned char *)0x00001344) + ctx))
-                (uVar9,*(undefined4 *)(programState + 0x44),*(int *)(programState + 0x48) * 0x28);
+                (newRegisterTableB,*(undefined4 *)(programState + 0x44),*(int *)(programState + 0x48) * 0x28);
       (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x44));
-      *(undefined4 *)(programState + 0x44) = uVar9;
-      iVar4 = iVar10 * 0x28;
-      iVar2 = 4;
-      iVar8 = 0;
+      *(undefined4 *)(programState + 0x44) = newRegisterTableB;
+      grownRecordOffset = oldTableSize * 0x28;
+      rowsLeft = 4;
+      grownRecordOffsetB = 0;
       *(int *)(programState + 0x48) = *(int *)(programState + 0x48) + 0x40;
       do {
-        iVar3 = iVar10 + iVar8;
-        iVar8 = iVar8 + 1;
-        *(int *)(symbol + 0x10) = iVar3;
+        registerNumberB = oldTableSize + grownRecordOffsetB;
+        grownRecordOffsetB = grownRecordOffsetB + 1;
+        *(int *)(symbol + 0x10) = registerNumberB;
         symbol = symbol + 4;
-        iVar3 = iVar4 + *(int *)(programState + 0x44);
-        iVar4 = iVar4 + 0x28;
-        *(undefined1 *)(iVar3 + 0x10) = 1;
-        iVar2 = iVar2 + -1;
-      } while (iVar2 != 0);
+        registerRecordPtrB = grownRecordOffset + *(int *)(programState + 0x44);
+        grownRecordOffset = grownRecordOffset + 0x28;
+        *(undefined1 *)(registerRecordPtrB + 0x10) = 1;
+        rowsLeft = rowsLeft + -1;
+      } while (rowsLeft != 0);
       return 0;
     }
-    if (iVar4 != 0x87be) {
+    if (dataType != 0x87be) {
       return 1;
     }
     uVar9 = 0;
     loopIndex = 0;
-    iVar4 = 0;
+    recordByteOffset = 0;
     bVar1 = true;
     *(int *)(programState + 0x4c) = *(int *)(programState + 0x4c) + 1;
     while (loopIndex < *(uint *)(programState + 0x48)) {
       if (!bVar1) goto LAB_000701ac;
-      if (*(char *)(iVar4 + *(int *)(programState + 0x44) + 0x10) == '\0') {
+      if (*(char *)(recordByteOffset + *(int *)(programState + 0x44) + 0x10) == '\0') {
         uVar9 = 1;
         bVar1 = false;
       }
       else {
         loopIndex = loopIndex + 1;
-        iVar4 = iVar4 + 0x28;
+        recordByteOffset = recordByteOffset + 0x28;
       }
     }
   }
@@ -2332,17 +2344,17 @@ LAB_000701ac:
     return 0;
   }
   *(char *)(shader + 0x10) = (char)uVar9;
-  iVar4 = *(int *)(programState + 0x48);
-  uVar5 = (**(code **)(ctx + 0x10))(iVar4 + 0x40,0x28);
+  tableSize = *(int *)(programState + 0x48);
+  newRegisterTable = (**(code **)(ctx + 0x10))(tableSize + 0x40,0x28);
   (**(code **)(((unsigned char *)0x00001344) + ctx))
-            (uVar5,*(undefined4 *)(programState + 0x44),*(int *)(programState + 0x48) * 0x28);
+            (newRegisterTable,*(undefined4 *)(programState + 0x44),*(int *)(programState + 0x48) * 0x28);
   (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x44));
-  *(undefined4 *)(programState + 0x44) = uVar5;
+  *(undefined4 *)(programState + 0x44) = newRegisterTable;
   *(int *)(programState + 0x48) = *(int *)(programState + 0x48) + 0x40;
   *(undefined4 *)(symbol + 8) = uVar9;
 LAB_00070350:
-  *(int *)(symbol + 4) = iVar4;
-  *(undefined1 *)(iVar4 * 0x28 + *(int *)(programState + 0x44) + 0x10) = 1;
+  *(int *)(symbol + 4) = tableSize;
+  *(undefined1 *)(tableSize * 0x28 + *(int *)(programState + 0x44) + 0x10) = 1;
   return 0;
 }
 
@@ -2402,187 +2414,201 @@ int evsAllocLocalRegisters(ctx, shader, programState, operand)
   int programState;
   int *operand;
 {
+  int oldTableSize;
+  int registerRecordPtrE;
+  int grownRecordOffset;
+  int recordByteOffset;
+  int rowIndex;
+  int registerRecordPtrD;
+  int registerRecordPtrC;
+  int rowsLeft;
+  int registerRecordPtrB;
+  bool recordUnused;
+  bool foundScalarRecord;
+  uint tableSize;
+  int registerRecordPtr;
+  int registerRecordOffset;
   uint loopIndex2;
   uint loopIndex;
-  bool bVar1;
-  int iVar2;
-  int iVar3;
-  undefined4 uVar4;
-  uint uVar5;
-  undefined1 uVar6;
-  int iVar7;
-  int iVar8;
-  uint uVar9;
-  int iVar10;
-  int iVar11;
-  int iVar12;
+  bool noFreeRecordYet;
+  int registerNumber;
+  int registerNumberB;
+  undefined4 newRegisterTable;
+  uint scanIndex;
+  undefined1 growFlagValue;
+  int dataType;
+  int registerRecordOffsetB;
+  uint tableSizeB;
+  int symbolIndex;
+  int symbolRecord;
+  int rowsLeftB;
   
   if (*operand == 2) {
-    iVar10 = operand[1];
-    iVar11 = iVar10 * 0x54 + *(int *)(shader + 0x20);
-    if ((*(int *)(iVar11 + 0x28) == 0x87c4) && (*(char *)(iVar11 + 0x3d) == '\0')) {
-      *(undefined1 *)(iVar11 + 0x3d) = 1;
+    symbolIndex = operand[1];
+    symbolRecord = symbolIndex * 0x54 + *(int *)(shader + 0x20);
+    if ((*(int *)(symbolRecord + 0x28) == 0x87c4) && (*(char *)(symbolRecord + 0x3d) == '\0')) {
+      *(undefined1 *)(symbolRecord + 0x3d) = 1;
       *(int *)(shader + 100) = *(int *)(shader + 100) + 1;
-      iVar7 = *(int *)(iVar10 * 0x54 + *(int *)(shader + 0x20) + 0x24);
-      if (iVar7 == 0x87bf) {
-        uVar5 = 0;
-        uVar6 = 0;
-        bVar1 = true;
-        while (uVar5 < *(uint *)(programState + 0x40)) {
-          if (!bVar1) goto LAB_000708f8;
-          if (*(char *)(uVar5 * 0x28 + *(int *)(programState + 0x3c) + 0x10) == '\0') {
-            uVar6 = 1;
-            bVar1 = false;
+      dataType = *(int *)(symbolIndex * 0x54 + *(int *)(shader + 0x20) + 0x24);
+      if (dataType == 0x87bf) {
+        scanIndex = 0;
+        growFlagValue = 0;
+        noFreeRecordYet = true;
+        while (scanIndex < *(uint *)(programState + 0x40)) {
+          if (!noFreeRecordYet) goto LAB_000708f8;
+          if (*(char *)(scanIndex * 0x28 + *(int *)(programState + 0x3c) + 0x10) == '\0') {
+            growFlagValue = 1;
+            noFreeRecordYet = false;
           }
           else {
-            uVar5 = uVar5 + 1;
+            scanIndex = scanIndex + 1;
           }
         }
-        if (bVar1) {
-          *(undefined1 *)(shader + 0x10) = uVar6;
-          uVar5 = *(uint *)(programState + 0x40);
-          uVar4 = (**(code **)(ctx + 0x10))(uVar5 + 0x40,0x28);
+        if (noFreeRecordYet) {
+          *(undefined1 *)(shader + 0x10) = growFlagValue;
+          scanIndex = *(uint *)(programState + 0x40);
+          newRegisterTable = (**(code **)(ctx + 0x10))(scanIndex + 0x40,0x28);
           (**(code **)(((unsigned char *)0x00001344) + ctx))
-                    (uVar4,*(undefined4 *)(programState + 0x3c),*(int *)(programState + 0x40) * 0x28);
+                    (newRegisterTable,*(undefined4 *)(programState + 0x3c),*(int *)(programState + 0x40) * 0x28);
           (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x3c));
-          *(undefined4 *)(programState + 0x3c) = uVar4;
+          *(undefined4 *)(programState + 0x3c) = newRegisterTable;
           *(int *)(programState + 0x40) = *(int *)(programState + 0x40) + 0x40;
-          *(uint *)(iVar11 + 4) = uVar5;
+          *(uint *)(symbolRecord + 4) = scanIndex;
         }
         else {
 LAB_000708f8:
-          *(uint *)(iVar11 + 4) = uVar5;
+          *(uint *)(symbolRecord + 4) = scanIndex;
         }
-        iVar11 = uVar5 * 0x28;
-        *(undefined1 *)(*(int *)(programState + 0x3c) + iVar11 + 0x10) = 1;
-        *(undefined4 *)(iVar11 + *(int *)(programState + 0x3c) + 0x14) = 4;
-        *(int *)(iVar11 + *(int *)(programState + 0x3c) + 0x18) = iVar10;
-        *(int *)(iVar11 + *(int *)(programState + 0x3c) + 0x1c) = iVar10;
-        *(int *)(iVar11 + *(int *)(programState + 0x3c) + 0x20) = iVar10;
-        *(int *)(iVar11 + *(int *)(programState + 0x3c) + 0x24) = iVar10;
+        registerRecordOffset = scanIndex * 0x28;
+        *(undefined1 *)(*(int *)(programState + 0x3c) + registerRecordOffset + 0x10) = 1;
+        *(undefined4 *)(registerRecordOffset + *(int *)(programState + 0x3c) + 0x14) = 4;
+        *(int *)(registerRecordOffset + *(int *)(programState + 0x3c) + 0x18) = symbolIndex;
+        *(int *)(registerRecordOffset + *(int *)(programState + 0x3c) + 0x1c) = symbolIndex;
+        *(int *)(registerRecordOffset + *(int *)(programState + 0x3c) + 0x20) = symbolIndex;
+        *(int *)(registerRecordOffset + *(int *)(programState + 0x3c) + 0x24) = symbolIndex;
       }
-      else if (iVar7 == 0x87c0) {
+      else if (dataType == 0x87c0) {
         loopIndex = 0;
-        bVar1 = true;
+        noFreeRecordYet = true;
         while (loopIndex < *(int *)(programState + 0x40) - 3U) {
-          if (!bVar1) goto LAB_00070a18;
+          if (!noFreeRecordYet) goto LAB_00070a18;
           if (*(char *)(loopIndex * 0x28 + *(int *)(programState + 0x3c) + 0x10) == '\0') {
-            bVar1 = false;
+            noFreeRecordYet = false;
           }
           else {
             loopIndex = loopIndex + 1;
           }
         }
-        if (!bVar1) {
+        if (!noFreeRecordYet) {
 LAB_00070a18:
-          iVar8 = loopIndex * 0x28;
-          iVar7 = iVar8 + *(int *)(programState + 0x3c);
-          if (((*(char *)(iVar7 + 0x38) == '\0') && (*(char *)(iVar7 + 0x60) == '\0')) &&
-             (*(char *)(iVar7 + 0x88) == '\0')) {
-            iVar7 = 0;
-            iVar12 = 4;
+          registerRecordOffsetB = loopIndex * 0x28;
+          registerRecordPtrD = registerRecordOffsetB + *(int *)(programState + 0x3c);
+          if (((*(char *)(registerRecordPtrD + 0x38) == '\0') && (*(char *)(registerRecordPtrD + 0x60) == '\0')) &&
+             (*(char *)(registerRecordPtrD + 0x88) == '\0')) {
+            rowIndex = 0;
+            rowsLeftB = 4;
             do {
-              iVar2 = loopIndex + iVar7;
-              iVar7 = iVar7 + 1;
-              *(int *)(iVar11 + 0x10) = iVar2;
-              iVar11 = iVar11 + 4;
-              *(undefined1 *)(*(int *)(programState + 0x3c) + iVar8 + 0x10) = 1;
-              *(undefined4 *)(*(int *)(programState + 0x3c) + iVar8 + 0x14) = 4;
-              *(int *)(*(int *)(programState + 0x3c) + iVar8 + 0x18) = iVar10;
-              *(int *)(*(int *)(programState + 0x3c) + iVar8 + 0x1c) = iVar10;
-              *(int *)(*(int *)(programState + 0x3c) + iVar8 + 0x20) = iVar10;
-              iVar2 = *(int *)(programState + 0x3c) + iVar8;
-              iVar8 = iVar8 + 0x28;
-              *(int *)(iVar2 + 0x24) = iVar10;
-              iVar12 = iVar12 + -1;
-            } while (iVar12 != 0);
+              registerNumber = loopIndex + rowIndex;
+              rowIndex = rowIndex + 1;
+              *(int *)(symbolRecord + 0x10) = registerNumber;
+              symbolRecord = symbolRecord + 4;
+              *(undefined1 *)(*(int *)(programState + 0x3c) + registerRecordOffsetB + 0x10) = 1;
+              *(undefined4 *)(*(int *)(programState + 0x3c) + registerRecordOffsetB + 0x14) = 4;
+              *(int *)(*(int *)(programState + 0x3c) + registerRecordOffsetB + 0x18) = symbolIndex;
+              *(int *)(*(int *)(programState + 0x3c) + registerRecordOffsetB + 0x1c) = symbolIndex;
+              *(int *)(*(int *)(programState + 0x3c) + registerRecordOffsetB + 0x20) = symbolIndex;
+              registerRecordPtrB = *(int *)(programState + 0x3c) + registerRecordOffsetB;
+              registerRecordOffsetB = registerRecordOffsetB + 0x28;
+              *(int *)(registerRecordPtrB + 0x24) = symbolIndex;
+              rowsLeftB = rowsLeftB + -1;
+            } while (rowsLeftB != 0);
             return;
           }
         }
         *(undefined1 *)(shader + 0x10) = 0;
-        iVar12 = *(int *)(programState + 0x40);
-        uVar4 = (**(code **)(ctx + 0x10))(iVar12 + 0x40,0x28);
+        oldTableSize = *(int *)(programState + 0x40);
+        newRegisterTable = (**(code **)(ctx + 0x10))(oldTableSize + 0x40,0x28);
         (**(code **)(((unsigned char *)0x00001344) + ctx))
-                  (uVar4,*(undefined4 *)(programState + 0x3c),*(int *)(programState + 0x40) * 0x28);
+                  (newRegisterTable,*(undefined4 *)(programState + 0x3c),*(int *)(programState + 0x40) * 0x28);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x3c));
-        *(undefined4 *)(programState + 0x3c) = uVar4;
-        iVar8 = iVar12 * 0x28;
-        iVar2 = 4;
-        iVar7 = 0;
+        *(undefined4 *)(programState + 0x3c) = newRegisterTable;
+        grownRecordOffset = oldTableSize * 0x28;
+        rowsLeft = 4;
+        rowIndex = 0;
         *(int *)(programState + 0x40) = *(int *)(programState + 0x40) + 0x40;
         do {
-          iVar3 = iVar12 + iVar7;
-          iVar7 = iVar7 + 1;
-          *(int *)(iVar11 + 0x10) = iVar3;
-          iVar11 = iVar11 + 4;
-          *(undefined1 *)(*(int *)(programState + 0x3c) + iVar8 + 0x10) = 1;
-          *(undefined4 *)(*(int *)(programState + 0x3c) + iVar8 + 0x14) = 4;
-          *(int *)(*(int *)(programState + 0x3c) + iVar8 + 0x18) = iVar10;
-          *(int *)(*(int *)(programState + 0x3c) + iVar8 + 0x1c) = iVar10;
-          *(int *)(*(int *)(programState + 0x3c) + iVar8 + 0x20) = iVar10;
-          iVar3 = *(int *)(programState + 0x3c) + iVar8;
-          iVar8 = iVar8 + 0x28;
-          *(int *)(iVar3 + 0x24) = iVar10;
-          iVar2 = iVar2 + -1;
-        } while (iVar2 != 0);
+          registerNumberB = oldTableSize + rowIndex;
+          rowIndex = rowIndex + 1;
+          *(int *)(symbolRecord + 0x10) = registerNumberB;
+          symbolRecord = symbolRecord + 4;
+          *(undefined1 *)(*(int *)(programState + 0x3c) + grownRecordOffset + 0x10) = 1;
+          *(undefined4 *)(*(int *)(programState + 0x3c) + grownRecordOffset + 0x14) = 4;
+          *(int *)(*(int *)(programState + 0x3c) + grownRecordOffset + 0x18) = symbolIndex;
+          *(int *)(*(int *)(programState + 0x3c) + grownRecordOffset + 0x1c) = symbolIndex;
+          *(int *)(*(int *)(programState + 0x3c) + grownRecordOffset + 0x20) = symbolIndex;
+          registerRecordPtrC = *(int *)(programState + 0x3c) + grownRecordOffset;
+          grownRecordOffset = grownRecordOffset + 0x28;
+          *(int *)(registerRecordPtrC + 0x24) = symbolIndex;
+          rowsLeft = rowsLeft + -1;
+        } while (rowsLeft != 0);
       }
-      else if (iVar7 == 0x87be) {
-        uVar5 = *(uint *)(programState + 0x40);
+      else if (dataType == 0x87be) {
+        tableSize = *(uint *)(programState + 0x40);
         loopIndex2 = 0;
-        bVar1 = false;
-        iVar7 = 0;
-        while (loopIndex2 < uVar5) {
-          if (bVar1) goto LAB_0007075c;
-          iVar8 = iVar7 + *(int *)(programState + 0x3c);
-          if ((*(char *)(iVar8 + 0x10) == '\0') || (bVar1 = true, 3 < *(uint *)(iVar8 + 0x14))) {
+        foundScalarRecord = false;
+        recordByteOffset = 0;
+        while (loopIndex2 < tableSize) {
+          if (foundScalarRecord) goto LAB_0007075c;
+          registerRecordPtrE = recordByteOffset + *(int *)(programState + 0x3c);
+          if ((*(char *)(registerRecordPtrE + 0x10) == '\0') || (foundScalarRecord = true, 3 < *(uint *)(registerRecordPtrE + 0x14))) {
             loopIndex2 = loopIndex2 + 1;
-            iVar7 = iVar7 + 0x28;
-            bVar1 = false;
+            recordByteOffset = recordByteOffset + 0x28;
+            foundScalarRecord = false;
           }
         }
-        if (bVar1) {
+        if (foundScalarRecord) {
 LAB_0007075c:
-          *(uint *)(iVar11 + 4) = loopIndex2;
-          iVar7 = loopIndex2 * 0x28;
-          *(undefined4 *)(iVar11 + 8) = *(undefined4 *)(*(int *)(programState + 0x3c) + iVar7 + 0x14);
-          iVar11 = iVar7 + *(int *)(programState + 0x3c);
-          *(int *)(*(int *)(iVar11 + 0x14) * 4 + iVar11 + 0x18) = iVar10;
-          iVar7 = iVar7 + *(int *)(programState + 0x3c);
-          *(int *)(iVar7 + 0x14) = *(int *)(iVar7 + 0x14) + 1;
+          *(uint *)(symbolRecord + 4) = loopIndex2;
+          recordByteOffset = loopIndex2 * 0x28;
+          *(undefined4 *)(symbolRecord + 8) = *(undefined4 *)(*(int *)(programState + 0x3c) + recordByteOffset + 0x14);
+          registerRecordPtr = recordByteOffset + *(int *)(programState + 0x3c);
+          *(int *)(*(int *)(registerRecordPtr + 0x14) * 4 + registerRecordPtr + 0x18) = symbolIndex;
+          recordByteOffset = recordByteOffset + *(int *)(programState + 0x3c);
+          *(int *)(recordByteOffset + 0x14) = *(int *)(recordByteOffset + 0x14) + 1;
         }
         else {
-          if (uVar5 == 0) {
+          if (tableSize == 0) {
 LAB_000707f4:
             *(undefined1 *)(shader + 0x10) = 0;
-            uVar9 = *(uint *)(programState + 0x40);
-            uVar4 = (**(code **)(ctx + 0x10))(uVar9 + 0x40,0x28);
+            tableSizeB = *(uint *)(programState + 0x40);
+            newRegisterTable = (**(code **)(ctx + 0x10))(tableSizeB + 0x40,0x28);
             (**(code **)(((unsigned char *)0x00001344) + ctx))
-                      (uVar4,*(undefined4 *)(programState + 0x3c),*(int *)(programState + 0x40) * 0x28);
+                      (newRegisterTable,*(undefined4 *)(programState + 0x3c),*(int *)(programState + 0x40) * 0x28);
             (**(code **)(ctx + 0x18))(*(undefined4 *)(programState + 0x3c));
-            *(undefined4 *)(programState + 0x3c) = uVar4;
+            *(undefined4 *)(programState + 0x3c) = newRegisterTable;
             *(int *)(programState + 0x40) = *(int *)(programState + 0x40) + 0x40;
-            *(undefined4 *)(iVar11 + 8) = 0;
-            *(uint *)(iVar11 + 4) = uVar9;
+            *(undefined4 *)(symbolRecord + 8) = 0;
+            *(uint *)(symbolRecord + 4) = tableSizeB;
           }
           else {
-            uVar9 = 0;
+            tableSizeB = 0;
             do {
-              bVar1 = *(char *)(uVar9 * 0x28 + *(int *)(programState + 0x3c) + 0x10) != '\0';
-              if (bVar1) {
-                uVar9 = uVar9 + 1;
+              recordUnused = *(char *)(tableSizeB * 0x28 + *(int *)(programState + 0x3c) + 0x10) != '\0';
+              if (recordUnused) {
+                tableSizeB = tableSizeB + 1;
               }
-              if (uVar5 <= uVar9) {
-                if (bVar1) goto LAB_000707f4;
+              if (tableSize <= tableSizeB) {
+                if (recordUnused) goto LAB_000707f4;
                 break;
               }
-            } while (bVar1);
-            *(uint *)(iVar11 + 4) = uVar9;
-            *(undefined4 *)(iVar11 + 8) = 0;
+            } while (recordUnused);
+            *(uint *)(symbolRecord + 4) = tableSizeB;
+            *(undefined4 *)(symbolRecord + 8) = 0;
           }
-          iVar11 = uVar9 * 0x28;
-          *(undefined1 *)(*(int *)(programState + 0x3c) + iVar11 + 0x10) = 1;
-          *(undefined4 *)(iVar11 + *(int *)(programState + 0x3c) + 0x14) = 1;
-          *(int *)(iVar11 + *(int *)(programState + 0x3c) + 0x18) = iVar10;
+          registerRecordOffset = tableSizeB * 0x28;
+          *(undefined1 *)(*(int *)(programState + 0x3c) + registerRecordOffset + 0x10) = 1;
+          *(undefined4 *)(registerRecordOffset + *(int *)(programState + 0x3c) + 0x14) = 1;
+          *(int *)(registerRecordOffset + *(int *)(programState + 0x3c) + 0x18) = symbolIndex;
         }
       }
     }
@@ -2693,329 +2719,333 @@ int evsEmitFogOutput(ctx, tokens, programState, mode)
   int programState;
   int mode;
 {
-  short sVar1;
-  int iVar2;
-  undefined4 uVar3;
-  uint uVar4;
-  uint uVar5;
-  undefined *puVar6;
-  uint *puVar7;
+  uint tempSlotAToken;
+  uint fogReg;
+  uint tokenCapacity;
+  uint tempSlotA;
+  short fogMode;
+  int stateBlock;
+  undefined4 newTokenBuffer;
+  uint nextTokenIndex;
+  uint nextTokenIndexB;
+  undefined *tokenWord;
+  uint *tokenCountPtr;
   
-  puVar7 = (uint *)(tokens + 4);
-  iVar2 = *(int *)(*(int *)(ctx + 4) + 0x10);
+  tokenCountPtr = (uint *)(tokens + 4);
+  stateBlock = *(int *)(*(int *)(ctx + 4) + 0x10);
   if (mode == 0) {
     if (*(uint *)(tokens + 8) <= *(uint *)(tokens + 4)) {
-      uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+      newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
       if (*(int *)(tokens + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(tokens + 0xc),*(int *)(tokens + 4) << 2);
+        _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*(int *)(tokens + 4) << 2);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
       }
-      *(undefined4 *)(tokens + 0xc) = uVar3;
+      *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
       *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
     }
-    *(undefined4 *)(*puVar7 * 4 + *(int *)(tokens + 0xc)) = 0x47;
-    uVar4 = *puVar7 + 1;
-    *puVar7 = uVar4;
-    if (*(uint *)(tokens + 8) <= uVar4) {
-      uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+    *(undefined4 *)(*tokenCountPtr * 4 + *(int *)(tokens + 0xc)) = 0x47;
+    nextTokenIndex = *tokenCountPtr + 1;
+    *tokenCountPtr = nextTokenIndex;
+    if (*(uint *)(tokens + 8) <= nextTokenIndex) {
+      newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
       if (*(int *)(tokens + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+        _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
       }
-      *(undefined4 *)(tokens + 0xc) = uVar3;
-      uVar4 = *puVar7;
+      *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+      nextTokenIndex = *tokenCountPtr;
       *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
     }
-    *(undefined4 *)(uVar4 * 4 + *(int *)(tokens + 0xc)) = 0x100000;
-    uVar5 = *puVar7 + 1;
-    *puVar7 = uVar5;
-    uVar4 = *(uint *)(((unsigned char *)0x000013c0) + programState);
-    if (*(uint *)(tokens + 8) <= uVar5) {
-      uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+    *(undefined4 *)(nextTokenIndex * 4 + *(int *)(tokens + 0xc)) = 0x100000;
+    nextTokenIndexB = *tokenCountPtr + 1;
+    *tokenCountPtr = nextTokenIndexB;
+    tempSlotA = *(uint *)(((unsigned char *)0x000013c0) + programState);
+    if (*(uint *)(tokens + 8) <= nextTokenIndexB) {
+      newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
       if (*(int *)(tokens + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+        _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
       }
-      *(undefined4 *)(tokens + 0xc) = uVar3;
-      uVar5 = *puVar7;
+      *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+      nextTokenIndexB = *tokenCountPtr;
       *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
     }
-    *(uint *)(uVar5 * 4 + *(int *)(tokens + 0xc)) = uVar4 & 0xffff | 0x440000;
-    puVar6 = (undefined *)0x0;
-    uVar4 = *(uint *)(tokens + 8);
-    uVar5 = *puVar7 + 1;
-    *puVar7 = uVar5;
-    if (uVar4 <= uVar5) {
+    *(uint *)(nextTokenIndexB * 4 + *(int *)(tokens + 0xc)) = tempSlotA & 0xffff | 0x440000;
+    tokenWord = (undefined *)0x0;
+    tokenCapacity = *(uint *)(tokens + 8);
+    nextTokenIndexB = *tokenCountPtr + 1;
+    *tokenCountPtr = nextTokenIndexB;
+    if (tokenCapacity <= nextTokenIndexB) {
 LAB_00071330:
-      uVar3 = (**(code **)(ctx + 0xc))(uVar4 * 4 + 0x200);
+      newTokenBuffer = (**(code **)(ctx + 0xc))(tokenCapacity * 4 + 0x200);
       if (*(int *)(tokens + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+        _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
       }
-      *(undefined4 *)(tokens + 0xc) = uVar3;
-      uVar5 = *puVar7;
+      *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+      nextTokenIndexB = *tokenCountPtr;
       *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
     }
 LAB_00071390:
-    *(undefined **)(uVar5 * 4 + *(int *)(tokens + 0xc)) = puVar6;
-    *puVar7 = *puVar7 + 1;
+    *(undefined **)(nextTokenIndexB * 4 + *(int *)(tokens + 0xc)) = tokenWord;
+    *tokenCountPtr = *tokenCountPtr + 1;
   }
   else {
     *(undefined1 *)(tokens + 3) = 1;
-    sVar1 = *(short *)(((unsigned char *)0x00002e04) + iVar2);
-    if (sVar1 == 0x801) {
+    fogMode = *(short *)(((unsigned char *)0x00002e04) + stateBlock);
+    if (fogMode == 0x801) {
       if (*(uint *)(tokens + 8) <= *(uint *)(tokens + 4)) {
-        uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+        newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
         if (*(int *)(tokens + 0xc) != 0) {
-          _memcpy(uVar3,*(int *)(tokens + 0xc),*(int *)(tokens + 4) << 2);
+          _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*(int *)(tokens + 4) << 2);
           (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
         }
-        *(undefined4 *)(tokens + 0xc) = uVar3;
+        *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
         *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
       }
-      *(undefined4 *)(*puVar7 * 4 + *(int *)(tokens + 0xc)) = 0x49;
-      uVar5 = *puVar7 + 1;
-      *puVar7 = uVar5;
-      uVar4 = *(uint *)(((unsigned char *)0x000013c0) + programState);
-      if (*(uint *)(tokens + 8) <= uVar5) {
-        uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+      *(undefined4 *)(*tokenCountPtr * 4 + *(int *)(tokens + 0xc)) = 0x49;
+      nextTokenIndexB = *tokenCountPtr + 1;
+      *tokenCountPtr = nextTokenIndexB;
+      tempSlotA = *(uint *)(((unsigned char *)0x000013c0) + programState);
+      if (*(uint *)(tokens + 8) <= nextTokenIndexB) {
+        newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
         if (*(int *)(tokens + 0xc) != 0) {
-          _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+          _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
           (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
         }
-        *(undefined4 *)(tokens + 0xc) = uVar3;
-        uVar5 = *puVar7;
+        *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+        nextTokenIndexB = *tokenCountPtr;
         *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
       }
-      *(uint *)(uVar5 * 4 + *(int *)(tokens + 0xc)) = uVar4 & 0xffff | 0x40000;
-      uVar4 = *puVar7 + 1;
-      *puVar7 = uVar4;
-      uVar5 = *(uint *)(((unsigned char *)0x000013c0) + programState) & 0xffff | 0x40000;
-      if (*(uint *)(tokens + 8) <= uVar4) {
-        uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+      *(uint *)(nextTokenIndexB * 4 + *(int *)(tokens + 0xc)) = tempSlotA & 0xffff | 0x40000;
+      nextTokenIndex = *tokenCountPtr + 1;
+      *tokenCountPtr = nextTokenIndex;
+      tempSlotAToken = *(uint *)(((unsigned char *)0x000013c0) + programState) & 0xffff | 0x40000;
+      if (*(uint *)(tokens + 8) <= nextTokenIndex) {
+        newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
         if (*(int *)(tokens + 0xc) != 0) {
-          _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+          _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
           (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
         }
-        *(undefined4 *)(tokens + 0xc) = uVar3;
-        uVar4 = *puVar7;
+        *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+        nextTokenIndex = *tokenCountPtr;
         *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
       }
-      *(uint *)(uVar4 * 4 + *(int *)(tokens + 0xc)) = uVar5;
-      uVar4 = *puVar7 + 1;
-      *puVar7 = uVar4;
-      if (*(uint *)(tokens + 8) <= uVar4) {
-        uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+      *(uint *)(nextTokenIndex * 4 + *(int *)(tokens + 0xc)) = tempSlotAToken;
+      nextTokenIndex = *tokenCountPtr + 1;
+      *tokenCountPtr = nextTokenIndex;
+      if (*(uint *)(tokens + 8) <= nextTokenIndex) {
+        newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
         if (*(int *)(tokens + 0xc) != 0) {
-          _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+          _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
           (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
         }
-        *(undefined4 *)(tokens + 0xc) = uVar3;
-        uVar4 = *puVar7;
+        *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+        nextTokenIndex = *tokenCountPtr;
         *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
       }
-      *(uint *)(uVar4 * 4 + *(int *)(tokens + 0xc)) = uVar5;
-      uVar4 = *puVar7 + 1;
-      *puVar7 = uVar4;
+      *(uint *)(nextTokenIndex * 4 + *(int *)(tokens + 0xc)) = tempSlotAToken;
+      nextTokenIndex = *tokenCountPtr + 1;
+      *tokenCountPtr = nextTokenIndex;
     }
     else {
-      if (sVar1 == 0x2601) {
+      if (fogMode == 0x2601) {
         if (*(uint *)(tokens + 8) <= *(uint *)(tokens + 4)) {
-          uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+          newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
           if (*(int *)(tokens + 0xc) != 0) {
-            _memcpy(uVar3,*(int *)(tokens + 0xc),*(int *)(tokens + 4) << 2);
+            _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*(int *)(tokens + 4) << 2);
             (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
           }
-          *(undefined4 *)(tokens + 0xc) = uVar3;
+          *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
           *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
         }
-        *(undefined4 *)(*puVar7 * 4 + *(int *)(tokens + 0xc)) = 0x23;
-        uVar4 = *puVar7 + 1;
-        *puVar7 = uVar4;
-        if (*(uint *)(tokens + 8) <= uVar4) {
-          uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+        *(undefined4 *)(*tokenCountPtr * 4 + *(int *)(tokens + 0xc)) = 0x23;
+        nextTokenIndex = *tokenCountPtr + 1;
+        *tokenCountPtr = nextTokenIndex;
+        if (*(uint *)(tokens + 8) <= nextTokenIndex) {
+          newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
           if (*(int *)(tokens + 0xc) != 0) {
-            _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+            _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
             (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
           }
-          *(undefined4 *)(tokens + 0xc) = uVar3;
-          uVar4 = *puVar7;
+          *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+          nextTokenIndex = *tokenCountPtr;
           *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
         }
-        *(undefined4 *)(uVar4 * 4 + *(int *)(tokens + 0xc)) = 0x100000;
-        uVar5 = *puVar7 + 1;
-        *puVar7 = uVar5;
-        uVar4 = *(uint *)(((unsigned char *)0x000013c0) + programState);
-        if (*(uint *)(tokens + 8) <= uVar5) {
-          uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+        *(undefined4 *)(nextTokenIndex * 4 + *(int *)(tokens + 0xc)) = 0x100000;
+        nextTokenIndexB = *tokenCountPtr + 1;
+        *tokenCountPtr = nextTokenIndexB;
+        tempSlotA = *(uint *)(((unsigned char *)0x000013c0) + programState);
+        if (*(uint *)(tokens + 8) <= nextTokenIndexB) {
+          newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
           if (*(int *)(tokens + 0xc) != 0) {
-            _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+            _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
             (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
           }
-          *(undefined4 *)(tokens + 0xc) = uVar3;
-          uVar5 = *puVar7;
+          *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+          nextTokenIndexB = *tokenCountPtr;
           *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
         }
-        *(uint *)(uVar5 * 4 + *(int *)(tokens + 0xc)) = uVar4 & 0xffff | 0x440000;
-        uVar4 = *puVar7 + 1;
-        *puVar7 = uVar4;
-        if (*(uint *)(tokens + 8) <= uVar4) {
-          uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+        *(uint *)(nextTokenIndexB * 4 + *(int *)(tokens + 0xc)) = tempSlotA & 0xffff | 0x440000;
+        nextTokenIndex = *tokenCountPtr + 1;
+        *tokenCountPtr = nextTokenIndex;
+        if (*(uint *)(tokens + 8) <= nextTokenIndex) {
+          newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
           if (*(int *)(tokens + 0xc) != 0) {
-            _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+            _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
             (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
           }
-          *(undefined4 *)(tokens + 0xc) = uVar3;
-          uVar4 = *puVar7;
+          *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+          nextTokenIndex = *tokenCountPtr;
           *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
         }
-        *(undefined **)(uVar4 * 4 + *(int *)(tokens + 0xc)) = ((unsigned char *)0x00004054);
-        uVar5 = *puVar7 + 1;
-        *puVar7 = uVar5;
-        uVar4 = *(uint *)(((unsigned char *)0x000013c4) + programState);
-        if (*(uint *)(tokens + 8) <= uVar5) {
-          uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+        *(undefined **)(nextTokenIndex * 4 + *(int *)(tokens + 0xc)) = ((unsigned char *)0x00004054);
+        nextTokenIndexB = *tokenCountPtr + 1;
+        *tokenCountPtr = nextTokenIndexB;
+        fogReg = *(uint *)(((unsigned char *)0x000013c4) + programState);
+        if (*(uint *)(tokens + 8) <= nextTokenIndexB) {
+          newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
           if (*(int *)(tokens + 0xc) != 0) {
-            _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+            _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
             (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
           }
-          *(undefined4 *)(tokens + 0xc) = uVar3;
-          uVar5 = *puVar7;
+          *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+          nextTokenIndexB = *tokenCountPtr;
           *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
         }
-        *(uint *)(uVar5 * 4 + *(int *)(tokens + 0xc)) = uVar4 & 0xffff | 0x410000;
-        puVar6 = ((unsigned char *)0x00004214);
-        uVar4 = *(uint *)(tokens + 8);
-        uVar5 = *puVar7 + 1;
-        *puVar7 = uVar5;
-        if (uVar4 <= uVar5) goto LAB_00071330;
+        *(uint *)(nextTokenIndexB * 4 + *(int *)(tokens + 0xc)) = fogReg & 0xffff | 0x410000;
+        tokenWord = ((unsigned char *)0x00004214);
+        tokenCapacity = *(uint *)(tokens + 8);
+        nextTokenIndexB = *tokenCountPtr + 1;
+        *tokenCountPtr = nextTokenIndexB;
+        if (tokenCapacity <= nextTokenIndexB) goto LAB_00071330;
         goto LAB_00071390;
       }
-      if (sVar1 != 0x800) {
+      if (fogMode != 0x800) {
         return;
       }
-      uVar4 = *puVar7;
+      nextTokenIndex = *tokenCountPtr;
     }
-    if (*(uint *)(tokens + 8) <= uVar4) {
-      uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+    if (*(uint *)(tokens + 8) <= nextTokenIndex) {
+      newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
       if (*(int *)(tokens + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+        _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
       }
-      *(undefined4 *)(tokens + 0xc) = uVar3;
-      uVar4 = *puVar7;
+      *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+      nextTokenIndex = *tokenCountPtr;
       *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
     }
-    *(undefined4 *)(uVar4 * 4 + *(int *)(tokens + 0xc)) = 0x49;
-    uVar5 = *puVar7 + 1;
-    *puVar7 = uVar5;
-    uVar4 = *(uint *)(((unsigned char *)0x000013c0) + programState);
-    if (*(uint *)(tokens + 8) <= uVar5) {
-      uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+    *(undefined4 *)(nextTokenIndex * 4 + *(int *)(tokens + 0xc)) = 0x49;
+    nextTokenIndexB = *tokenCountPtr + 1;
+    *tokenCountPtr = nextTokenIndexB;
+    tempSlotA = *(uint *)(((unsigned char *)0x000013c0) + programState);
+    if (*(uint *)(tokens + 8) <= nextTokenIndexB) {
+      newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
       if (*(int *)(tokens + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+        _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
       }
-      *(undefined4 *)(tokens + 0xc) = uVar3;
-      uVar5 = *puVar7;
+      *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+      nextTokenIndexB = *tokenCountPtr;
       *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
     }
-    *(uint *)(uVar5 * 4 + *(int *)(tokens + 0xc)) = uVar4 & 0xffff | 0x40000;
-    uVar5 = *puVar7 + 1;
-    *puVar7 = uVar5;
-    uVar4 = *(uint *)(((unsigned char *)0x000013c0) + programState);
-    if (*(uint *)(tokens + 8) <= uVar5) {
-      uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+    *(uint *)(nextTokenIndexB * 4 + *(int *)(tokens + 0xc)) = tempSlotA & 0xffff | 0x40000;
+    nextTokenIndexB = *tokenCountPtr + 1;
+    *tokenCountPtr = nextTokenIndexB;
+    tempSlotA = *(uint *)(((unsigned char *)0x000013c0) + programState);
+    if (*(uint *)(tokens + 8) <= nextTokenIndexB) {
+      newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
       if (*(int *)(tokens + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+        _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
       }
-      *(undefined4 *)(tokens + 0xc) = uVar3;
-      uVar5 = *puVar7;
+      *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+      nextTokenIndexB = *tokenCountPtr;
       *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
     }
-    *(uint *)(uVar5 * 4 + *(int *)(tokens + 0xc)) = uVar4 & 0xffff | 0x40000;
-    uVar5 = *puVar7 + 1;
-    *puVar7 = uVar5;
-    uVar4 = *(uint *)(((unsigned char *)0x000013c4) + programState);
-    if (*(uint *)(tokens + 8) <= uVar5) {
-      uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+    *(uint *)(nextTokenIndexB * 4 + *(int *)(tokens + 0xc)) = tempSlotA & 0xffff | 0x40000;
+    nextTokenIndexB = *tokenCountPtr + 1;
+    *tokenCountPtr = nextTokenIndexB;
+    fogReg = *(uint *)(((unsigned char *)0x000013c4) + programState);
+    if (*(uint *)(tokens + 8) <= nextTokenIndexB) {
+      newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
       if (*(int *)(tokens + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+        _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
       }
-      *(undefined4 *)(tokens + 0xc) = uVar3;
-      uVar5 = *puVar7;
+      *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+      nextTokenIndexB = *tokenCountPtr;
       *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
     }
-    *(uint *)(uVar5 * 4 + *(int *)(tokens + 0xc)) = uVar4 & 0xffff | 0x410000;
-    uVar4 = *puVar7 + 1;
-    *puVar7 = uVar4;
-    if (*(uint *)(tokens + 8) <= uVar4) {
-      uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+    *(uint *)(nextTokenIndexB * 4 + *(int *)(tokens + 0xc)) = fogReg & 0xffff | 0x410000;
+    nextTokenIndex = *tokenCountPtr + 1;
+    *tokenCountPtr = nextTokenIndex;
+    if (*(uint *)(tokens + 8) <= nextTokenIndex) {
+      newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
       if (*(int *)(tokens + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+        _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
       }
-      *(undefined4 *)(tokens + 0xc) = uVar3;
-      uVar4 = *puVar7;
+      *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+      nextTokenIndex = *tokenCountPtr;
       *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
     }
-    *(undefined4 *)(uVar4 * 4 + *(int *)(tokens + 0xc)) = 0x2222;
-    uVar4 = *puVar7 + 1;
-    *puVar7 = uVar4;
-    if (*(uint *)(tokens + 8) <= uVar4) {
-      uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+    *(undefined4 *)(nextTokenIndex * 4 + *(int *)(tokens + 0xc)) = 0x2222;
+    nextTokenIndex = *tokenCountPtr + 1;
+    *tokenCountPtr = nextTokenIndex;
+    if (*(uint *)(tokens + 8) <= nextTokenIndex) {
+      newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
       if (*(int *)(tokens + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+        _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
       }
-      *(undefined4 *)(tokens + 0xc) = uVar3;
-      uVar4 = *puVar7;
+      *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+      nextTokenIndex = *tokenCountPtr;
       *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
     }
-    *(undefined4 *)(uVar4 * 4 + *(int *)(tokens + 0xc)) = 0x2c;
-    uVar4 = *puVar7 + 1;
-    *puVar7 = uVar4;
-    if (*(uint *)(tokens + 8) <= uVar4) {
-      uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+    *(undefined4 *)(nextTokenIndex * 4 + *(int *)(tokens + 0xc)) = 0x2c;
+    nextTokenIndex = *tokenCountPtr + 1;
+    *tokenCountPtr = nextTokenIndex;
+    if (*(uint *)(tokens + 8) <= nextTokenIndex) {
+      newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
       if (*(int *)(tokens + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+        _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
       }
-      *(undefined4 *)(tokens + 0xc) = uVar3;
-      uVar4 = *puVar7;
+      *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+      nextTokenIndex = *tokenCountPtr;
       *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
     }
-    *(undefined4 *)(uVar4 * 4 + *(int *)(tokens + 0xc)) = 0x100000;
-    uVar5 = *puVar7 + 1;
-    *puVar7 = uVar5;
-    uVar4 = *(uint *)(((unsigned char *)0x000013c0) + programState);
-    if (*(uint *)(tokens + 8) <= uVar5) {
-      uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+    *(undefined4 *)(nextTokenIndex * 4 + *(int *)(tokens + 0xc)) = 0x100000;
+    nextTokenIndexB = *tokenCountPtr + 1;
+    *tokenCountPtr = nextTokenIndexB;
+    tempSlotA = *(uint *)(((unsigned char *)0x000013c0) + programState);
+    if (*(uint *)(tokens + 8) <= nextTokenIndexB) {
+      newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
       if (*(int *)(tokens + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+        _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
       }
-      *(undefined4 *)(tokens + 0xc) = uVar3;
-      uVar5 = *puVar7;
+      *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+      nextTokenIndexB = *tokenCountPtr;
       *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
     }
-    *(uint *)(uVar5 * 4 + *(int *)(tokens + 0xc)) = uVar4 & 0xffff | 0x440000;
-    uVar4 = *puVar7 + 1;
-    *puVar7 = uVar4;
-    if (*(uint *)(tokens + 8) <= uVar4) {
-      uVar3 = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
+    *(uint *)(nextTokenIndexB * 4 + *(int *)(tokens + 0xc)) = tempSlotA & 0xffff | 0x440000;
+    nextTokenIndex = *tokenCountPtr + 1;
+    *tokenCountPtr = nextTokenIndex;
+    if (*(uint *)(tokens + 8) <= nextTokenIndex) {
+      newTokenBuffer = (**(code **)(ctx + 0xc))(*(uint *)(tokens + 8) * 4 + 0x200);
       if (*(int *)(tokens + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(tokens + 0xc),*puVar7 << 2);
+        _memcpy(newTokenBuffer,*(int *)(tokens + 0xc),*tokenCountPtr << 2);
         (**(code **)(ctx + 0x18))(*(undefined4 *)(tokens + 0xc));
       }
-      *(undefined4 *)(tokens + 0xc) = uVar3;
-      uVar4 = *puVar7;
+      *(undefined4 *)(tokens + 0xc) = newTokenBuffer;
+      nextTokenIndex = *tokenCountPtr;
       *(int *)(tokens + 8) = *(int *)(tokens + 8) + 0x80;
     }
-    *(undefined4 *)(uVar4 * 4 + *(int *)(tokens + 0xc)) = 0;
-    *puVar7 = *puVar7 + 1;
+    *(undefined4 *)(nextTokenIndex * 4 + *(int *)(tokens + 0xc)) = 0;
+    *tokenCountPtr = *tokenCountPtr + 1;
   }
   return;
 }

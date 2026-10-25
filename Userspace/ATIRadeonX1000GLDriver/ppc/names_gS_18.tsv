@@ -1,0 +1,96 @@
+local	recordProgramAllocateAndEmit	local_88	liveCountSnapshot	INFERRED	alloc+0x26870 live record count on entry
+local	recordProgramAllocateAndEmit	local_84	partnerIndex	INFERRED	index of the partner record of a combinable pair (alloc+0x38+0x6418.. dependency)
+local	recordProgramAllocateAndEmit	local_80	combinedPairCount	INFERRED	number of record pairs combined into one output record; stored at alloc+0x3548c
+local	recordProgramAllocateAndEmit	local_7c	emitLoopIndex	INFERRED	index into the emitted-order list (alloc+0x28878) in the output loop
+local	recordProgramAllocateAndEmit	local_78	destRegisterCount	INFERRED	highest file-0 destination register index + 1; stored to config+0x30
+local	recordProgramAllocateAndEmit	local_74	lastOutputSlot	INFERRED	output slot of the last record that needs an output register; stored to config+0x28 (max register)
+local	recordProgramAllocateAndEmit	local_70	secondListCount	INFERRED	records appended to the second output list (config+0x20)
+local	recordProgramAllocateAndEmit	local_b8	pickedNeedsRetarget	INFERRED	flag output of the record/register picker FUN_0007aae0
+local	recordProgramAllocateAndEmit	local_b4	pickedRegister	INFERRED	register output of the picker, passed to recordRetargetDestination
+local	recordProgramAllocateAndEmit	local_b0	recordAFileCount0	INFERRED	recordCountSourceRegisterFiles output for the first record, register file 0
+local	recordProgramAllocateAndEmit	local_af	recordAFileCount1	INFERRED	same, register file 1
+local	recordProgramAllocateAndEmit	local_ae	recordAFileCount2	INFERRED	same, register file 2
+local	recordProgramAllocateAndEmit	local_ad	recordAFileCount3	INFERRED	same, register file 3
+local	recordProgramAllocateAndEmit	local_ac	recordBFileCount0	INFERRED	recordCountSourceRegisterFiles output for the second record, register file 0
+local	recordProgramAllocateAndEmit	local_ab	recordBFileCount1	INFERRED	same, register file 1
+local	recordProgramAllocateAndEmit	local_aa	recordBFileCount2	INFERRED	same, register file 2
+local	recordProgramAllocateAndEmit	local_a9	recordBFileCount3	INFERRED	same, register file 3
+use	recordProgramAllocateAndEmit	iVar30	flagOffset	INFERRED	record index * 4 in the pre-pass over the per-record flag words	^\s*iVar30\ =\ 0;$	+1
+use	recordProgramAllocateAndEmit	iVar30	flagOffset	INFERRED	record index * 4 in the pre-pass over the per-record flag words	^\s*\(\(int\ \(\*\)\(\)\)FUN_00078a10\)\(param_1,iVar30\ \+\ param_1\ \+\ 0x3148c,pcVar39\);$	+1
+use	recordProgramAllocateAndEmit	iVar30	flagOffset	INFERRED	record index * 4 in the pre-pass over the per-record flag words	^\s*uVar22\ =\ \*\(uint\ \*\)\(iVar30\ \+\ iVar38\);$	+2
+use	recordProgramAllocateAndEmit	iVar30	flagOffset	INFERRED	record index * 4 in the pre-pass over the per-record flag words	^\s*\*\(uint\ \*\)\(iVar30\ \+\ iVar38\)\ =\ uVar22\ \|\ 0x30;$	+1
+use	recordProgramAllocateAndEmit	iVar30	flagOffset	INFERRED	record index * 4 in the pre-pass over the per-record flag words	^\s*uVar22\ =\ \*\(uint\ \*\)\(iVar30\ \+\ iVar38\);$@2	+2
+use	recordProgramAllocateAndEmit	iVar30	flagOffset	INFERRED	record index * 4 in the pre-pass over the per-record flag words	^\s*\*\(uint\ \*\)\(iVar30\ \+\ iVar38\)\ =\ uVar22\ \|\ 3;$	+1
+use	recordProgramAllocateAndEmit	iVar30	flagOffset	INFERRED	record index * 4 in the pre-pass over the per-record flag words	^\s*\*\(uint\ \*\)\(iVar30\ \+\ iVar38\)\ =\ uVar22\ \|\ 0x1003;$	+1
+use	recordProgramAllocateAndEmit	iVar30	flagOffset	INFERRED	record index * 4 in the pre-pass over the per-record flag words	^\s*iVar30\ =\ iVar30\ \+\ 4;$	+1
+use	recordProgramAllocateAndEmit	iVar30	srcRegisterIndex	INFERRED	register file table (DAT_001aa761) * 0x100 + source index	^\s*iVar30\ =\ DAT_001aa761\ \*\ 0x100\ \+\ \(\(uint\)param_6\ >>\ 5\ \&\ 0xff\);$	+3
+use	recordProgramAllocateAndEmit	iVar30	recordIsFixed	INFERRED	FUN_00077800 predicate of the picked record	^\s*iVar30\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077800\)\(puVar23,\*puVar19\ >>\ 6\ \&\ 1\);$	+2
+use	recordProgramAllocateAndEmit	iVar30	calleeStatus	INFERRED	callee status (returned when non-zero)	^\s*iVar30\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077c40\)\(param_1,iVar28,param_3,1,param_5\);$	+3
+use	recordProgramAllocateAndEmit	iVar30	calleeStatus	INFERRED	callee status (returned when non-zero)	^\s*iVar30\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077c40\)\(param_1,\*puVar40,param_3,1,param_5\);$	+3
+use	recordProgramAllocateAndEmit	iVar30	calleeStatus	INFERRED	callee status (returned when non-zero)	^\s*iVar30\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077ba0\)\(param_1,\*puVar40,param_3,param_4,0\);$	+3
+use	recordProgramAllocateAndEmit	iVar30	componentsLeft	INFERRED	countdown over the 4 components	^\s*iVar30\ =\ 4;$	+1
+use	recordProgramAllocateAndEmit	iVar30	componentsLeft	INFERRED	countdown over the 4 components	^\s*iVar30\ =\ iVar30\ \+\ \-1;$	+2
+use	recordProgramAllocateAndEmit	iVar30	retiredCountSnapshot	INFERRED	alloc+0x28874 retired record count	^\s*iVar30\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x28874\);$	+1
+use	recordProgramAllocateAndEmit	iVar30	retiredCountSnapshot	INFERRED	alloc+0x28874 retired record count	^\s*if\ \(iVar30\ !=\ 0\)\ \{$@5	+1
+use	recordProgramAllocateAndEmit	iVar30	retiredIndexOffset	INFERRED	offset 0x22874 + 4*i into the retired-record reason table	^\s*iVar30\ =\ 0x22874;$	+1
+use	recordProgramAllocateAndEmit	iVar30	retiredIndexOffset	INFERRED	offset 0x22874 + 4*i into the retired-record reason table	^\s*puVar40\ =\ \(undefined4\ \*\)\(param_1\ \+\ iVar30\);$	+1
+use	recordProgramAllocateAndEmit	iVar30	retiredIndexOffset	INFERRED	offset 0x22874 + 4*i into the retired-record reason table	^\s*iVar30\ =\ iVar30\ \+\ 4;$@2	+1
+use	recordProgramAllocateAndEmit	bVar31	moreComponentsB	INFERRED	component loop continues (component != 3)	^\s*bVar31\ =\ uVar34\ !=\ 3;$	+1
+use	recordProgramAllocateAndEmit	bVar31	moreComponentsB	INFERRED	component loop continues (component != 3)	^\s*\}\ while\ \(bVar31\);$	+1
+use	recordProgramAllocateAndEmit	bVar31	moreSlots	INFERRED	source slot loop continues (slot != 2)	^\s*bVar31\ =\ uVar4\ !=\ 2;$	+1
+use	recordProgramAllocateAndEmit	bVar31	moreSlots	INFERRED	source slot loop continues (slot != 2)	^\s*\}\ while\ \(bVar31\);$@2	+1
+use	recordProgramAllocateAndEmit	bVar31	moreWords	INFERRED	word copy loop continues (i != 8)	^\s*bVar31\ =\ iVar27\ !=\ 8;$	+1
+use	recordProgramAllocateAndEmit	bVar31	moreWords	INFERRED	word copy loop continues (i != 8)	^\s*\}\ while\ \(bVar31\);$@3	+1
+use	recordProgramAllocateAndEmit	bVar31	haveChainHead	INFERRED	false until the first node of the binding chain exists	^\s*bVar31\ =\ false;$	+1
+use	recordProgramAllocateAndEmit	bVar31	haveChainHead	INFERRED	false until the first node of the binding chain exists	^\s*if\ \(bVar31\)\ \{$@2	+1
+use	recordProgramAllocateAndEmit	bVar31	haveChainHead	INFERRED	false until the first node of the binding chain exists	^\s*bVar31\ =\ true;$@2	+1
+use	recordProgramAllocateAndEmit	bVar31	haveChainHead	INFERRED	false until the first node of the binding chain exists	^\s*bVar31\ =\ false;$@2	+1
+use	recordProgramAllocateAndEmit	bVar31	haveChainHead	INFERRED	false until the first node of the binding chain exists	^\s*if\ \(bVar31\)\ \{$@3	+1
+use	recordProgramAllocateAndEmit	bVar31	haveChainHead	INFERRED	false until the first node of the binding chain exists	^\s*bVar31\ =\ true;$@3	+1
+use	recordProgramAllocateAndEmit	bVar31	moreComponents	INFERRED	component loop continues (component != 3)	^\s*bVar31\ =\ uVar4\ !=\ 3;$	+1
+use	recordProgramAllocateAndEmit	bVar31	moreComponents	INFERRED	component loop continues (component != 3)	^\s*\}\ while\ \(bVar31\);$@4	+1
+use	recordProgramAllocateAndEmit	bVar31	moreComponents	INFERRED	component loop continues (component != 3)	^\s*bVar31\ =\ uVar33\ !=\ 3;$	+1
+use	recordProgramAllocateAndEmit	bVar31	moreComponents	INFERRED	component loop continues (component != 3)	^\s*\}\ while\ \(bVar31\);$@5	+1
+use	recordProgramAllocateAndEmit	bVar31	moreComponents	INFERRED	component loop continues (component != 3)	^\s*bVar31\ =\ uVar4\ !=\ 3;$@2	+1
+use	recordProgramAllocateAndEmit	bVar31	moreComponents	INFERRED	component loop continues (component != 3)	^\s*\}\ while\ \(bVar31\);$@6	+1
+use	recordProgramAllocateAndEmit	uVar4	componentCounter	INFERRED	component counter 0..3	^\s*uVar4\ =\ 0;$@3	+1
+use	recordProgramAllocateAndEmit	uVar4	componentCounter	INFERRED	component counter 0..3	^\s*if\ \(\(1\ <<\ \(uVar4\ \&\ 0x3f\)\ \&\ piVar36\[1\]\)\ !=\ 0\)\ \{$	+1
+use	recordProgramAllocateAndEmit	uVar4	componentCounter	INFERRED	component counter 0..3	^\s*bVar31\ =\ uVar4\ !=\ 3;$	+1
+use	recordProgramAllocateAndEmit	uVar4	componentCounter	INFERRED	component counter 0..3	^\s*uVar4\ =\ uVar4\ \+\ 1;$@3	+1
+use	recordProgramAllocateAndEmit	uVar4	componentCounter	INFERRED	component counter 0..3	^\s*uVar4\ =\ 0;$@5	+1
+use	recordProgramAllocateAndEmit	uVar4	componentCounter	INFERRED	component counter 0..3	^\s*if\ \(\(1\ <<\ \(uVar4\ \&\ 0x3f\)\ \&\ piVar36\[1\]\)\ !=\ 0\)\ \{$@2	+1
+use	recordProgramAllocateAndEmit	uVar4	componentCounter	INFERRED	component counter 0..3	^\s*bVar31\ =\ uVar4\ !=\ 3;$@2	+1
+use	recordProgramAllocateAndEmit	uVar4	componentCounter	INFERRED	component counter 0..3	^\s*uVar4\ =\ uVar4\ \+\ 1;$@4	+1
+use	recordProgramAllocateAndEmit	uVar4	componentsSeen	INFERRED	bit set of components that have a dependent record	^\s*uVar4\ =\ 0;$@4	+1
+use	recordProgramAllocateAndEmit	uVar4	componentsSeen	INFERRED	bit set of components that have a dependent record	^\s*if\ \(\(uVar29\ \&\ uVar4\)\ ==\ 0\)\ \{$	+1
+use	recordProgramAllocateAndEmit	uVar4	componentsSeen	INFERRED	bit set of components that have a dependent record	^\s*uVar4\ =\ uVar4\ \|\ uVar29;$	+1
+use	recordProgramAllocateAndEmit	uVar4	componentsSeen	INFERRED	bit set of components that have a dependent record	^\s*if\ \(\(uVar4\ \&\ \(uint\)param_4\)\ !=\ 0\)\ \{$	+1
+use	recordProgramAllocateAndEmit	uVar4	retiredScanIndex	INFERRED	loop counter over the retired records	^\s*uVar4\ =\ 0;$@6	+1
+use	recordProgramAllocateAndEmit	uVar4	retiredScanIndex	INFERRED	loop counter over the retired records	^\s*uVar4\ =\ uVar4\ \+\ 1;$@5	+1
+use	recordProgramAllocateAndEmit	uVar4	retiredScanIndex	INFERRED	loop counter over the retired records	^\s*\}\ while\ \(uVar4\ <\ \*\(uint\ \*\)\(param_1\ \+\ 0x28874\)\);$	+1
+local	recordProgramAllocateAndEmit	piVar32	lastChainNode	INFERRED	last node of the binding chain, to which the new node is linked
+use	recordProgramAllocateAndEmit	uVar33	componentLoopB	INFERRED	component counter 0..3	^\s*uVar33\ =\ 0;$	+1
+use	recordProgramAllocateAndEmit	uVar33	componentLoopB	INFERRED	component counter 0..3	^\s*param_4\ =\ \(code\ \*\)\(1\ <<\ \(uVar33\ \&\ 0x3f\)\);$	+1
+use	recordProgramAllocateAndEmit	uVar33	componentLoopB	INFERRED	component counter 0..3	^\s*bVar31\ =\ uVar33\ !=\ 3;$	+1
+use	recordProgramAllocateAndEmit	uVar33	componentLoopB	INFERRED	component counter 0..3	^\s*uVar33\ =\ uVar33\ \+\ 1;$	+1
+use	recordProgramAllocateAndEmit	uVar33	opcodeRewriteIndex	INFERRED	loop counter of the opcode rewrite over the live records	^\s*uVar33\ =\ 0;$@2	+1
+use	recordProgramAllocateAndEmit	uVar33	opcodeRewriteIndex	INFERRED	loop counter of the opcode rewrite over the live records	^\s*uVar33\ =\ uVar33\ \+\ 1;$@2	+1
+use	recordProgramAllocateAndEmit	uVar33	opcodeRewriteIndex	INFERRED	loop counter of the opcode rewrite over the live records	^\s*\}\ while\ \(local_88\ !=\ uVar33\);$	+1
+use	recordProgramAllocateAndEmit	puVar35	configPtrB	INFERRED	*(alloc+0x34)	^\s*puVar35\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x34\);$	+1
+use	recordProgramAllocateAndEmit	puVar35	configPtrB	INFERRED	*(alloc+0x34)	^\s*puVar35\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x34\);$@2	+2
+use	recordProgramAllocateAndEmit	puVar35	configPtrB	INFERRED	*(alloc+0x34)	^\s*puVar35\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x34\);$@3	+1
+use	recordProgramAllocateAndEmit	puVar35	configPtrB	INFERRED	*(alloc+0x34)	^\s*puVar35\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x34\);$@4	+1
+use	recordProgramAllocateAndEmit	puVar35	configPtrB	INFERRED	*(alloc+0x34)	^\s*param_5\ =\ \(int\ \*\)\(\*puVar35\ >>\ 6\ \&\ 1\);$	+1
+use	recordProgramAllocateAndEmit	pcVar37	lastChainNodeB	INFERRED	last node of the chain at alloc+0x10450	^\s*pcVar37\ =\ pcVar39;$	+1
+use	recordProgramAllocateAndEmit	pcVar37	lastChainNodeB	INFERRED	last node of the chain at alloc+0x10450	^\s*pcVar39\ =\ pcVar37;$	+1
+use	recordProgramAllocateAndEmit	pcVar37	lastChainNodeB	INFERRED	last node of the chain at alloc+0x10450	^\s*pcVar37\ =\ pcVar15;$	+1
+use	recordProgramAllocateAndEmit	pcVar37	lastChainNodeB	INFERRED	last node of the chain at alloc+0x10450	^\s*pcVar37\ =\ pcVar41;$	+1
+use	recordProgramAllocateAndEmit	puVar40	bestRecordCursor	INFERRED	cursor over the 4 per-component best-record entries	^\s*puVar40\ =\ \(undefined4\ \*\)\(local_a8\ \+\ 0xc\);$	+1
+use	recordProgramAllocateAndEmit	puVar40	bestRecordCursor	INFERRED	cursor over the 4 per-component best-record entries	^\s*iVar30\ =\ \(\(int\ \(\*\)\(\)\)FUN_00077ba0\)\(param_1,\*puVar40,param_3,param_4,0\);$	+1
+use	recordProgramAllocateAndEmit	puVar40	bestRecordCursor	INFERRED	cursor over the 4 per-component best-record entries	^\s*puVar40\ =\ puVar40\ \+\ 1;$@2	+1
+use	recordProgramAllocateAndEmit	puVar40	retiredMoveCursor	INFERRED	cursor in the retired-record reason table while compacting	^\s*puVar40\ =\ \(undefined4\ \*\)\(param_1\ \+\ iVar30\);$	+1
+use	recordProgramAllocateAndEmit	puVar40	retiredMoveCursor	INFERRED	cursor in the retired-record reason table while compacting	^\s*uVar26\ =\ puVar40\[0x1001\];$	+4
+use	recordProgramAllocateAndEmit	uVar7	outWord1B	INFERRED	record word 1 copied to the output list	^\s*uVar7\ =\ \*\(uint\ \*\)\(pcVar39\ \+\ 4\);$	+1
+use	recordProgramAllocateAndEmit	uVar7	outWord1B	INFERRED	record word 1 copied to the output list	^\s*puVar19\[1\]\ =\ uVar7;$	+1
+use	recordProgramAllocateAndEmit	uVar17	outWord2B	INFERRED	record word 2 copied to the output list	^\s*uVar17\ =\ \*\(uint\ \*\)\(pcVar39\ \+\ 8\);$	+1
+use	recordProgramAllocateAndEmit	uVar17	outWord2B	INFERRED	record word 2 copied to the output list	^\s*puVar19\[2\]\ =\ uVar17;$	+1
