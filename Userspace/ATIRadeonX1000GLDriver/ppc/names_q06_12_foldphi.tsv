@@ -1,0 +1,80 @@
+use	Program__foldUselessPhis	iVar5	blockCursor	INFERRED	block being scanned for phi instructions	^\s*iVar5\ =\ \*\(int\ \*\)\(param_1\ \+\ 900\);$	+1
+use	Program__foldUselessPhis	iVar5	blockCursor	INFERRED	block being scanned for phi instructions	^\s*piVar8\ =\ \*\(int\ \*\*\)\(iVar5\ \+\ 0x98\);$	+1
+use	Program__foldUselessPhis	iVar5	blockCursor	INFERRED	block being scanned for phi instructions	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar5\ \+\ 8\);$	+1
+use	Program__foldUselessPhis	iVar5	blockCursor	INFERRED	block being scanned for phi instructions	^\s*iVar5\ =\ iVar3;$	+1
+use	Program__foldUselessPhis	iVar9	workByteOffset	INFERRED	byte offset of the new work list slot	^\s*iVar9\ =\ local_34\ \*\ 4;$	+2
+use	Program__foldUselessPhis	iVar9	workByteOffset	INFERRED	byte offset of the new work list slot	^\s*piVar4\ =\ \(int\ \*\)\(iVar9\ \+\ local_30\);$	+1
+use	Program__foldUselessPhis	iVar9	sourceOperandNumber	INFERRED	operand number 1..count while rewriting a user's sources	^\s*iVar9\ =\ 1;$	+1
+use	Program__foldUselessPhis	iVar9	sourceOperandNumber	INFERRED	operand number 1..count while rewriting a user's sources	^\s*for\ \(;\ iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x14\)\)\(piVar8\),\ iVar9\ <=\ iVar3;\ iVar9\ =\ iVar9\ \+\ 1\)\ \{$	+2
+use	Program__foldUselessPhis	iVar9	sourceOperandNumber	INFERRED	operand number 1..count while rewriting a user's sources	^\s*FUN_00106004\(piVar8,iVar9,iVar5,1,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$@2	+1
+use	Program__foldUselessPhis	piVar1	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar1\ =\ piVar4;$	+1
+use	Program__foldUselessPhis	piVar1	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar1\ =\ \(int\ \*\)piVar8\[2\];$	+1
+use	Program__foldUselessPhis	piVar1	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar1\ =\ \(int\ \*\)piVar8\[2\];$@2	+1
+use	Program__foldUselessPhis	piVar1	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar4\ =\ \(int\ \*\)piVar1\[2\];$	+3
+use	Program__foldUselessPhis	piVar1	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar1\ =\ \(int\ \*\)FUN_00105594\(piVar8,iVar9\);$	+2
+use	Program__foldUselessPhis	piVar1	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*if\ \(\(\(\*\(int\ \*\)\(iVar3\ \+\ 8\)\ ==\ 0x8e\)\ \&\&$	+3
+use	Program__foldUselessPhis	piVar1	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*piVar1\ =\ \(int\ \*\)FUN_00105594\(piVar8,iVar9\);$@2	+2
+use	Program__foldUselessPhis	piVar1	nextInstLink	INFERRED	link to the instruction after the cursor	^\s*if\ \(\(\(piVar8\[5\]\ \&\ 0x200U\)\ !=\ 0\)\ \&\&$	+2
+use	Program__foldUselessPhis	puVar2	workTopRef	INFERRED	last element reference of the work list	^\s*puVar2\ =\ \(undefined4\ \*\)0x0;$	+1
+use	Program__foldUselessPhis	puVar2	workTopRef	INFERRED	last element reference of the work list	^\s*puVar2\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ local_30\);$	+1
+use	Program__foldUselessPhis	puVar2	workTopRef	INFERRED	last element reference of the work list	^\s*piVar4\ =\ \(int\ \*\)\*puVar2;$	+1
+use	Program__foldUselessPhis	puVar2	userListElemRef	INFERRED	element reference into the phi's user list	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(piVar8,0\);$	+1
+use	Program__foldUselessPhis	puVar2	userListElemRef	INFERRED	element reference into the phi's user list	^\s*puVar2\ =\ \(undefined4\ \*\)piVar8\[2\];$	+1
+use	Program__foldUselessPhis	puVar2	userListElemRef	INFERRED	element reference into the phi's user list	^\s*piVar8\ =\ \(int\ \*\)\*puVar2;$	+1
+use	Program__foldUselessPhis	puVar2	workSlotRef	INFERRED	slot reference in the work list	^\s*puVar2\ =\ \(undefined4\ \*\)\(iVar3\ \+\ local_30\);$	+1
+use	Program__foldUselessPhis	puVar2	workSlotRef	INFERRED	slot reference in the work list	^\s*puVar2\ =\ \(undefined4\ \*\)FUN_0019423c\(\&local_38,local_34\);$	+1
+use	Program__foldUselessPhis	puVar2	workSlotRef	INFERRED	slot reference in the work list	^\s*\*puVar2\ =\ uVar6;$	+1
+use	Program__foldUselessPhis	iVar3	nextBlock	INFERRED	next block in the block list	^\s*for\ \(iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 900\)\ \+\ 8\);\ iVar3\ !=\ 0;\ iVar3\ =\ \*\(int\ \*\)\(iVar3\ \+\ 8\)\)\ \{$	+1
+use	Program__foldUselessPhis	iVar3	nextBlock	INFERRED	next block in the block list	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar5\ \+\ 8\);$	+1
+use	Program__foldUselessPhis	iVar3	nextBlock	INFERRED	next block in the block list	^\s*iVar5\ =\ iVar3;$	+1
+use	Program__foldUselessPhis	iVar3	phiOfInst	INFERRED	instruction vtable slot 0x7c result: the phi defined by the instruction	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x7c\)\)\(piVar8\);$	+1
+use	Program__foldUselessPhis	iVar3	phiOfInst	INFERRED	instruction vtable slot 0x7c result: the phi defined by the instruction	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
+use	Program__foldUselessPhis	iVar3	phiOfInst	INFERRED	instruction vtable slot 0x7c result: the phi defined by the instruction	^\s*\*piVar4\ =\ iVar3;$	+2
+use	Program__foldUselessPhis	iVar3	userOpcodeInfo	INFERRED	opcode record of the user (+0x88)	^\s*iVar3\ =\ piVar8\[0x22\];$	+2
+use	Program__foldUselessPhis	iVar3	userOpcodeInfo	INFERRED	opcode record of the user (+0x88)	^\s*iVar3\ =\ piVar8\[0x22\];$@2	+1
+use	Program__foldUselessPhis	iVar3	userOpcodeInfo	INFERRED	opcode record of the user (+0x88)	^\s*if\ \(\(\(\*\(int\ \*\)\(iVar3\ \+\ 8\)\ ==\ 0x8e\)\ \&\&$	+3
+use	Program__foldUselessPhis	iVar3	userOpcodeInfo	INFERRED	opcode record of the user (+0x88)	^\s*for\ \(;\ iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x14\)\)\(piVar8\),\ iVar9\ <=\ iVar3;\ iVar9\ =\ iVar9\ \+\ 1\)\ \{$	+1
+use	Program__foldUselessPhis	iVar3	workByteOffsetB	INFERRED	byte offset of the new work list slot	^\s*iVar3\ =\ local_34\ \*\ 4;$	+2
+use	Program__foldUselessPhis	iVar3	workByteOffsetB	INFERRED	byte offset of the new work list slot	^\s*puVar2\ =\ \(undefined4\ \*\)\(iVar3\ \+\ local_30\);$	+1
+use	Program__foldUselessPhis	iVar3	userPhi	INFERRED	phi defined by the user instruction	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x7c\)\)\(piVar8\);$@2	+2
+use	Program__foldUselessPhis	piVar4	nextInstLinkB	INFERRED	link to the instruction after the cursor	^\s*piVar4\ =\ \(int\ \*\)piVar8\[2\];$	+1
+use	Program__foldUselessPhis	piVar4	nextInstLinkB	INFERRED	link to the instruction after the cursor	^\s*piVar1\ =\ piVar4;$	+1
+use	Program__foldUselessPhis	piVar4	nextInstLinkB	INFERRED	link to the instruction after the cursor	^\s*piVar4\ =\ \(int\ \*\)piVar1\[2\];$	+1
+use	Program__foldUselessPhis	piVar4	workSlotRefB	INFERRED	slot reference in the work list	^\s*piVar4\ =\ \(int\ \*\)\(iVar9\ \+\ local_30\);$	+1
+use	Program__foldUselessPhis	piVar4	workSlotRefB	INFERRED	slot reference in the work list	^\s*piVar4\ =\ \(int\ \*\)FUN_0019423c\(\&local_38,local_34\);$	+1
+use	Program__foldUselessPhis	piVar4	workSlotRefB	INFERRED	slot reference in the work list	^\s*\*piVar4\ =\ iVar3;$	+1
+use	Program__foldUselessPhis	piVar4	uselessPhi	INFERRED	phi popped from the work list, a candidate for removal	^\s*piVar4\ =\ \(int\ \*\)\*puVar2;$	+1
+use	Program__foldUselessPhis	piVar4	uselessPhi	INFERRED	phi popped from the work list, a candidate for removal	^\s*piVar4\[0x4d\]\ =\ 0;$	+2
+use	Program__foldUselessPhis	piVar4	uselessPhi	INFERRED	phi popped from the work list, a candidate for removal	^\s*while\ \(piVar8\ =\ \(int\ \*\)piVar4\[4\],\ piVar8\[1\]\ !=\ 0\)\ \{$	+1
+use	Program__foldUselessPhis	piVar4	uselessPhi	INFERRED	phi popped from the work list, a candidate for removal	^\s*if\ \(piVar1\ ==\ piVar4\)\ \{$	+1
+use	Program__foldUselessPhis	piVar4	uselessPhi	INFERRED	phi popped from the work list, a candidate for removal	^\s*if\ \(\(\(\*\(int\ \*\)\(iVar3\ \+\ 8\)\ ==\ 0x8e\)\ \&\&$	+3
+use	Program__foldUselessPhis	piVar4	uselessPhi	INFERRED	phi popped from the work list, a candidate for removal	^\s*if\ \(piVar1\ ==\ piVar4\)\ \{$@2	+1
+use	Program__foldUselessPhis	piVar4	uselessPhi	INFERRED	phi popped from the work list, a candidate for removal	^\s*if\ \(\(\(piVar8\[5\]\ \&\ 0x200U\)\ !=\ 0\)\ \&\&$	+2
+use	Program__foldUselessPhis	piVar4	uselessPhi	INFERRED	phi popped from the work list, a candidate for removal	^\s*FUN_00104054\(piVar4,param_1\);$	+2
+use	Program__foldUselessPhis	uVar6	userPhiValue	INFERRED	phi defined by a user phi that must be re-queued	^\s*uVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x7c\)\)\(piVar8\);$	+1
+use	Program__foldUselessPhis	uVar6	userPhiValue	INFERRED	phi defined by a user phi that must be re-queued	^\s*\*puVar2\ =\ uVar6;$	+1
+use	Program__foldUselessPhis	uVar7	workCountSnapshotA	INFERRED	work list count before the push	^\s*uVar7\ =\ local_34;$	+1
+use	Program__foldUselessPhis	uVar7	workCountSnapshotA	INFERRED	work list count before the push	^\s*local_34\ =\ uVar7\ \+\ 1;$	+1
+use	Program__foldUselessPhis	uVar7	lastWorkIndex	INFERRED	index of the last work list element	^\s*uVar7\ =\ local_34\ \-\ 1;$	+1
+use	Program__foldUselessPhis	uVar7	lastWorkIndex	INFERRED	index of the last work list element	^\s*if\ \(uVar7\ <\ local_34\)\ \{$	+2
+use	Program__foldUselessPhis	uVar7	lastWorkIndex	INFERRED	index of the last work list element	^\s*FUN_00194208\(\&local_38,uVar7\);$	+1
+use	Program__foldUselessPhis	uVar7	workCountSnapshotB	INFERRED	work list count before the push	^\s*uVar7\ =\ local_34;$@2	+1
+use	Program__foldUselessPhis	uVar7	workCountSnapshotB	INFERRED	work list count before the push	^\s*local_34\ =\ uVar7\ \+\ 1;$@2	+1
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*piVar8\ =\ \*\(int\ \*\*\)\(iVar5\ \+\ 0x98\);$	+3
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*if\ \(\(piVar8\[5\]\ \&\ 1U\)\ !=\ 0\)\ \{$	+2
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*piVar1\ =\ \(int\ \*\)piVar8\[2\];$	+1
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*piVar1\ =\ \(int\ \*\)piVar8\[2\];$@2	+1
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*piVar8\ =\ piVar1;$	+1
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*while\ \(piVar8\ =\ \(int\ \*\)piVar4\[4\],\ piVar8\[1\]\ !=\ 0\)\ \{$	+3
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*puVar2\ =\ \(undefined4\ \*\)piVar8\[2\];$	+1
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*piVar8\ =\ \(int\ \*\)\*puVar2;$	+1
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*iVar3\ =\ piVar8\[0x22\];$	+1
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*if\ \(0\ <\ piVar8\[0x21\]\)\ \{$	+1
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*piVar1\ =\ \(int\ \*\)FUN_00105594\(piVar8,iVar9\);$	+1
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*FUN_00106004\(piVar8,iVar9,iVar5,1,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*\}\ while\ \(iVar9\ <=\ piVar8\[0x21\]\);$	+2
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*if\ \(\(\(\*\(int\ \*\)\(iVar3\ \+\ 8\)\ ==\ 0x8e\)\ \&\&$	+4
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x7c\)\)\(piVar8\);$@2	+1
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*for\ \(;\ iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar8\ \+\ 0x14\)\)\(piVar8\),\ iVar9\ <=\ iVar3;\ iVar9\ =\ iVar9\ \+\ 1\)\ \{$	+2
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*FUN_00106004\(piVar8,iVar9,iVar5,1,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$@2	+1
+use	Program__foldUselessPhis	piVar8	instOrUser	INFERRED	instruction in the block's list, later a user of the useless phi	^\s*if\ \(\(\(piVar8\[5\]\ \&\ 0x200U\)\ !=\ 0\)\ \&\&$	+3

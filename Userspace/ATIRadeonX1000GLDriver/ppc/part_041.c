@@ -1,121 +1,125 @@
 #include "decls.h"
 
 /* FUN_001315f8 @ 0x1315f8 (684 bytes) */
-int FUN_001315f8(param_1, inst, newSource, param_4, beforeInst, block)
-  int param_1;
+int FUN_001315f8(allocator, inst, newSource, registerCountRef, beforeInst, block)
+  int allocator;
   int inst;
   undefined4 newSource;
-  int *param_4;
+  int *registerCountRef;
   undefined4 beforeInst;
   int block;
 {
+  int rowBitLimit;
+  uint laneBitIndex;
+  uint clearWordCount;
+  int bitsetWordsLeft;
   undefined4 arena;
   int newInst;
   int loopIndex;
-  uint *puVar1;
-  uint uVar2;
-  int *piVar3;
-  int iVar4;
-  int iVar5;
-  int *piVar6;
-  undefined4 uVar7;
+  uint *oldBitsetNextWord;
+  uint bitWordOffset;
+  int *newBitsetClearCursor;
+  int bitsLeftInRow;
+  int registerCountAfter;
+  int *newBitsetWords;
+  undefined4 rootRegister;
   undefined4 *allocation;
-  uint uVar9;
-  uint uVar10;
-  uint uVar11;
-  int iVar12;
-  int iVar13;
-  int iVar14;
-  uint *puVar15;
+  uint oldBitCount;
+  uint newBitCount;
+  uint newBitsetWordCount;
+  int newRegister;
+  int blockCursor;
+  int program;
+  uint *oldBitset;
   
-  iVar14 = *(int *)(*(int *)(param_1 + 0x2c) + 0x6c4);
-  newInst = IRInst__create(0x31,*(int *)(param_1 + 0x2c));
-  iVar12 = *param_4;
+  program = *(int *)(*(int *)(allocator + 0x2c) + 0x6c4);
+  newInst = IRInst__create(0x31,*(int *)(allocator + 0x2c));
+  newRegister = *registerCountRef;
   *(undefined4 *)(newInst + 0x98) = *(undefined4 *)(inst + 0x98);
-  *(int *)(newInst + 0x94) = iVar12;
-  IRInst__setOperandSource(newInst,1,newSource,0,*(undefined4 *)(param_1 + 0x2c));
+  *(int *)(newInst + 0x94) = newRegister;
+  IRInst__setOperandSource(newInst,1,newSource,0,*(undefined4 *)(allocator + 0x2c));
   *(uint *)(newInst + 0x14) = *(uint *)(newInst + 0x14) & 0xffffffbf | 0x80000000;
   Block__insertInstBefore(block,beforeInst,newInst);
-  IRInst__setExtraOperandSource(inst,newInst,0,*(undefined4 *)(param_1 + 0x2c));
-  ((int (*)())FUN_00137474)(param_1);
-  *(undefined4 *)(*param_4 * 4 + *(int *)(iVar14 + 0x45c)) = 0;
-  **(int **)(param_1 + 0x18) = **(int **)(param_1 + 0x18) + 1;
-  *param_4 = *param_4 + 1;
-  iVar13 = *(int *)(iVar14 + 900);
-  *(int *)(iVar14 + 600) = *(int *)(iVar14 + 600) + 1;
-  iVar5 = *param_4;
-  if (*(int *)(iVar13 + 8) != 0) {
-    uVar11 = iVar5 * 4 + 0x1fU >> 5;
+  IRInst__setExtraOperandSource(inst,newInst,0,*(undefined4 *)(allocator + 0x2c));
+  ((int (*)())FUN_00137474)(allocator);
+  *(undefined4 *)(*registerCountRef * 4 + *(int *)(program + 0x45c)) = 0;
+  **(int **)(allocator + 0x18) = **(int **)(allocator + 0x18) + 1;
+  *registerCountRef = *registerCountRef + 1;
+  blockCursor = *(int *)(program + 900);
+  *(int *)(program + 600) = *(int *)(program + 600) + 1;
+  registerCountAfter = *registerCountRef;
+  if (*(int *)(blockCursor + 8) != 0) {
+    newBitsetWordCount = registerCountAfter * 4 + 0x1fU >> 5;
     do {
-      puVar15 = *(uint **)(iVar13 + 0x104);
-      uVar9 = puVar15[1];
-      uVar10 = uVar9 + 1;
-      if (uVar9 + 0x20 >> 5 == *puVar15) {
-        puVar15[1] = uVar10;
-        for (; uVar9 < uVar10; uVar9 = uVar9 + 1) {
-          uVar2 = uVar9 >> 3 & 0x1ffffffc;
-          *(uint *)((int)puVar15 + uVar2 + 8) =
-               *(uint *)((int)puVar15 + uVar2 + 8) & ~(1 << (uVar9 & 0x1f));
+      oldBitset = *(uint **)(blockCursor + 0x104);
+      oldBitCount = oldBitset[1];
+      newBitCount = oldBitCount + 1;
+      if (oldBitCount + 0x20 >> 5 == *oldBitset) {
+        oldBitset[1] = newBitCount;
+        for (; oldBitCount < newBitCount; oldBitCount = oldBitCount + 1) {
+          bitWordOffset = oldBitCount >> 3 & 0x1ffffffc;
+          *(uint *)((int)oldBitset + bitWordOffset + 8) =
+               *(uint *)((int)oldBitset + bitWordOffset + 8) & ~(1 << (oldBitCount & 0x1f));
         }
       }
       else {
-        arena = *(undefined4 *)(*(int *)(param_1 + 0x2c) + 0x378);
-        allocation = (undefined4 *)Arena__alloc(arena,uVar11 * 4 + 0xc);
-        piVar6 = allocation + 1;
+        arena = *(undefined4 *)(*(int *)(allocator + 0x2c) + 0x378);
+        allocation = (undefined4 *)Arena__alloc(arena,newBitsetWordCount * 4 + 0xc);
+        newBitsetWords = allocation + 1;
         *allocation = arena;
-        allocation[1] = uVar11;
-        allocation[2] = iVar5 * 4;
-        if (uVar11 != 0) {
-          piVar3 = piVar6;
-          uVar9 = uVar11;
-          if (uVar11 == 0) {
-            uVar9 = 1;
+        allocation[1] = newBitsetWordCount;
+        allocation[2] = registerCountAfter * 4;
+        if (newBitsetWordCount != 0) {
+          newBitsetClearCursor = newBitsetWords;
+          clearWordCount = newBitsetWordCount;
+          if (newBitsetWordCount == 0) {
+            clearWordCount = 1;
           }
           do {
-            piVar3[2] = 0;
-            piVar3 = piVar3 + 1;
-            uVar9 = uVar9 - 1;
-          } while (uVar9 != 0);
+            newBitsetClearCursor[2] = 0;
+            newBitsetClearCursor = newBitsetClearCursor + 1;
+            clearWordCount = clearWordCount - 1;
+          } while (clearWordCount != 0);
         }
-        *(int **)(iVar13 + 0x104) = piVar6;
-        iVar14 = *piVar6;
-        if (iVar14 != 0) {
-          if (iVar14 == 0) {
-            iVar14 = 1;
+        *(int **)(blockCursor + 0x104) = newBitsetWords;
+        bitsetWordsLeft = *newBitsetWords;
+        if (bitsetWordsLeft != 0) {
+          if (bitsetWordsLeft == 0) {
+            bitsetWordsLeft = 1;
           }
           do {
-            puVar1 = puVar15 + 2;
-            puVar15 = puVar15 + 1;
-            piVar6[2] = piVar6[2] | *puVar1;
-            piVar6 = piVar6 + 1;
-            iVar14 = iVar14 + -1;
-          } while (iVar14 != 0);
+            oldBitsetNextWord = oldBitset + 2;
+            oldBitset = oldBitset + 1;
+            newBitsetWords[2] = newBitsetWords[2] | *oldBitsetNextWord;
+            newBitsetWords = newBitsetWords + 1;
+            bitsetWordsLeft = bitsetWordsLeft + -1;
+          } while (bitsetWordsLeft != 0);
         }
       }
-      iVar13 = *(int *)(iVar13 + 8);
-    } while (*(int *)(iVar13 + 8) != 0);
-    iVar5 = *param_4;
+      blockCursor = *(int *)(blockCursor + 8);
+    } while (*(int *)(blockCursor + 8) != 0);
+    registerCountAfter = *registerCountRef;
   }
-  if (0 < iVar5) {
+  if (0 < registerCountAfter) {
     loopIndex = 0;
-    iVar13 = 4;
+    rowBitLimit = 4;
     do {
-      uVar11 = loopIndex * 4;
-      iVar4 = iVar13 + loopIndex * -4;
+      laneBitIndex = loopIndex * 4;
+      bitsLeftInRow = rowBitLimit + loopIndex * -4;
       do {
-        if ((*(uint *)((uVar11 >> 3 & 0x1ffffffc) + *(int *)(block + 0x104) + 8) >>
-             (uVar11 & 0x1f) & 1) != 0) {
-          uVar7 = ((int (*)())FUN_00134bf0)(param_1,loopIndex,1);
-          ((int (*)())FUN_00135334)(param_1,iVar12,uVar7);
-          iVar5 = *param_4;
+        if ((*(uint *)((laneBitIndex >> 3 & 0x1ffffffc) + *(int *)(block + 0x104) + 8) >>
+             (laneBitIndex & 0x1f) & 1) != 0) {
+          rootRegister = ((int (*)())FUN_00134bf0)(allocator,loopIndex,1);
+          ((int (*)())FUN_00135334)(allocator,newRegister,rootRegister);
+          registerCountAfter = *registerCountRef;
           break;
         }
-        uVar11 = uVar11 + 1;
-        iVar4 = iVar4 + -1;
-      } while (iVar4 != 0);
+        laneBitIndex = laneBitIndex + 1;
+        bitsLeftInRow = bitsLeftInRow + -1;
+      } while (bitsLeftInRow != 0);
       loopIndex = loopIndex + 1;
-      iVar13 = iVar13 + 4;
-    } while (loopIndex < iVar5);
+      rowBitLimit = rowBitLimit + 4;
+    } while (loopIndex < registerCountAfter);
   }
   return;
 }
@@ -4452,116 +4456,126 @@ LAB_001382d4:
 }
 
 /* FUN_00138390 @ 0x138390 (772 bytes) */
-int FUN_00138390(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_00138390(block, usedBits)
+  int block;
+  int usedBits;
 {
+  int *nextInstAdvance;
+  int childLane;
+  int childQuery60;
+  int subBlock;
+  int defLane;
+  bool moreChildLanes;
+  uint defBitIndex;
+  uint usedBitIndex;
+  int defBitWordAddr;
+  int childBitWordAddr;
   int operandRecord2;
   int operandRecord;
   int *operandVReg;
   uint loopIndex;
-  uint *puVar1;
-  bool bVar2;
-  uint uVar3;
-  uint uVar4;
-  int *piVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
-  int *piVar9;
-  int iVar10;
-  int *piVar11;
-  undefined4 local_48;
-  int *local_44;
-  undefined4 local_38 [5];
+  uint *prevFlagsPtr;
+  bool moreDefLanes;
+  uint instFlags;
+  uint childBitIndex;
+  int *nextInstLink;
+  int usedBitWordAddr;
+  int operandCount;
+  int laneCountdown;
+  int *listHead;
+  int operandNumber;
+  int *inst;
+  undefined4 laneMaskWord;
+  int *childInst;
+  undefined4 laneMaskOut [5];
   
-  piVar9 = *(int **)(*(int *)(param_1 + 300) + 0x98);
-  piVar5 = (int *)piVar9[2];
-  if (piVar5 == (int *)0x0) {
+  listHead = *(int **)(*(int *)(block + 300) + 0x98);
+  nextInstLink = (int *)listHead[2];
+  if (nextInstLink == (int *)0x0) {
     return;
   }
   do {
-    piVar11 = piVar9;
-    if (piVar9 != (int *)0x0) {
+    inst = listHead;
+    if (listHead != (int *)0x0) {
       do {
-        uVar3 = piVar11[5];
-        if ((uVar3 & 1) != 0) {
-          for (iVar10 = 1; iVar7 = (**(code **)(*piVar11 + 0x14))(piVar11), iVar10 <= iVar7;
-              iVar10 = iVar10 + 1) {
-            operandVReg = (int *)IRInst__getOperandSource(piVar11,iVar10);
-            if ((((operandVReg[0x20] != 0) && (iVar7 = RegKind__flagBit0(operandVReg[0x26]), iVar7 != 0)) &&
+        instFlags = inst[5];
+        if ((instFlags & 1) != 0) {
+          for (operandNumber = 1; operandCount = (**(code **)(*inst + 0x14))(inst), operandNumber <= operandCount;
+              operandNumber = operandNumber + 1) {
+            operandVReg = (int *)IRInst__getOperandSource(inst,operandNumber);
+            if ((((operandVReg[0x20] != 0) && (operandCount = RegKind__flagBit0(operandVReg[0x26]), operandCount != 0)) &&
                 ((operandVReg[5] & 2U) == 0)) &&
-               (iVar7 = (**(code **)(*operandVReg + 0x50))(operandVReg), iVar7 == 0)) {
-              operandRecord = IRInst__getOperandRecord(piVar11,iVar10);
-              SelectWord__readMask(local_38,*(undefined4 *)(operandRecord + 0x10));
-              iVar7 = 0;
-              local_48 = local_38[0];
-              iVar8 = 4;
+               (operandCount = (**(code **)(*operandVReg + 0x50))(operandVReg), operandCount == 0)) {
+              operandRecord = IRInst__getOperandRecord(inst,operandNumber);
+              SelectWord__readMask(laneMaskOut,*(undefined4 *)(operandRecord + 0x10));
+              operandCount = 0;
+              laneMaskWord = laneMaskOut[0];
+              laneCountdown = 4;
               do {
-                if (*(char *)((int)&local_48 + iVar7) != '\0') {
-                  uVar3 = operandVReg[0x25] * 4 + iVar7;
-                  iVar6 = (uVar3 >> 3 & 0x1ffffffc) + param_2;
-                  *(uint *)(iVar6 + 8) = 1 << (uVar3 & 0x1f) | *(uint *)(iVar6 + 8);
+                if (*(char *)((int)&laneMaskWord + operandCount) != '\0') {
+                  usedBitIndex = operandVReg[0x25] * 4 + operandCount;
+                  usedBitWordAddr = (usedBitIndex >> 3 & 0x1ffffffc) + usedBits;
+                  *(uint *)(usedBitWordAddr + 8) = 1 << (usedBitIndex & 0x1f) | *(uint *)(usedBitWordAddr + 8);
                 }
-                iVar7 = iVar7 + 1;
-                iVar8 = iVar8 + -1;
-              } while (iVar8 != 0);
+                operandCount = operandCount + 1;
+                laneCountdown = laneCountdown + -1;
+              } while (laneCountdown != 0);
             }
           }
-          if (((piVar11[0x20] != 0) && (iVar10 = RegKind__flagBit0(piVar11[0x26]), iVar10 != 0)) &&
-             (((piVar11[5] & 2U) == 0 &&
-              (iVar10 = (**(code **)(*piVar11 + 0x50))(piVar11), iVar10 == 0)))) {
-            iVar10 = 0;
+          if (((inst[0x20] != 0) && (operandNumber = RegKind__flagBit0(inst[0x26]), operandNumber != 0)) &&
+             (((inst[5] & 2U) == 0 &&
+              (operandNumber = (**(code **)(*inst + 0x50))(inst), operandNumber == 0)))) {
+            defLane = 0;
             do {
-              operandRecord = IRInst__getOperandRecord(piVar11,0);
-              if (*(char *)(iVar10 + operandRecord + 0x10) != '\x01') {
-                uVar3 = piVar11[0x25] * 4 + iVar10;
-                iVar7 = (uVar3 >> 3 & 0x1ffffffc) + param_2;
-                *(uint *)(iVar7 + 8) = 1 << (uVar3 & 0x1f) | *(uint *)(iVar7 + 8);
+              operandRecord = IRInst__getOperandRecord(inst,0);
+              if (*(char *)(defLane + operandRecord + 0x10) != '\x01') {
+                defBitIndex = inst[0x25] * 4 + defLane;
+                defBitWordAddr = (defBitIndex >> 3 & 0x1ffffffc) + usedBits;
+                *(uint *)(defBitWordAddr + 8) = 1 << (defBitIndex & 0x1f) | *(uint *)(defBitWordAddr + 8);
               }
-              bVar2 = iVar10 != 3;
-              iVar10 = iVar10 + 1;
-            } while (bVar2);
+              moreDefLanes = defLane != 3;
+              defLane = defLane + 1;
+            } while (moreDefLanes);
           }
-          iVar10 = *(int *)(param_1 + 300);
-          iVar7 = 0;
-          local_44 = (int *)0x0;
-          for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(iVar10 + 300) + 4); loopIndex = loopIndex + 1) {
-            local_44 = *(int **)(iVar7 + *(int *)(*(int *)(iVar10 + 300) + 8));
-            if ((local_44[5] & 1U) != 0) {
-              iVar10 = (**(code **)(*local_44 + 0x60))(local_44);
-              if (iVar10 == 0) {
-                iVar10 = 0;
+          subBlock = *(int *)(block + 300);
+          operandCount = 0;
+          childInst = (int *)0x0;
+          for (loopIndex = 1; loopIndex <= *(uint *)(*(int *)(subBlock + 300) + 4); loopIndex = loopIndex + 1) {
+            childInst = *(int **)(operandCount + *(int *)(*(int *)(subBlock + 300) + 8));
+            if ((childInst[5] & 1U) != 0) {
+              childQuery60 = (**(code **)(*childInst + 0x60))(childInst);
+              if (childQuery60 == 0) {
+                childLane = 0;
                 do {
-                  operandRecord2 = IRInst__getOperandRecord(piVar11,0);
-                  if (*(char *)(iVar10 + operandRecord2 + 0x10) != '\x01') {
-                    uVar4 = local_44[0x25] * 4 + iVar10;
-                    iVar8 = (uVar4 >> 3 & 0x1ffffffc) + param_2;
-                    *(uint *)(iVar8 + 8) = 1 << (uVar4 & 0x1f) | *(uint *)(iVar8 + 8);
+                  operandRecord2 = IRInst__getOperandRecord(inst,0);
+                  if (*(char *)(childLane + operandRecord2 + 0x10) != '\x01') {
+                    childBitIndex = childInst[0x25] * 4 + childLane;
+                    childBitWordAddr = (childBitIndex >> 3 & 0x1ffffffc) + usedBits;
+                    *(uint *)(childBitWordAddr + 8) = 1 << (childBitIndex & 0x1f) | *(uint *)(childBitWordAddr + 8);
                   }
-                  bVar2 = iVar10 != 3;
-                  iVar10 = iVar10 + 1;
-                } while (bVar2);
+                  moreChildLanes = childLane != 3;
+                  childLane = childLane + 1;
+                } while (moreChildLanes);
               }
-              iVar10 = *(int *)(param_1 + 300);
+              subBlock = *(int *)(block + 300);
             }
-            iVar7 = iVar7 + 4;
+            operandCount = operandCount + 4;
           }
-          uVar3 = piVar11[5];
+          instFlags = inst[5];
         }
-        piVar11 = (int *)piVar11[2];
-      } while ((piVar11 != (int *)0x0) && ((uVar3 & 4) != 0));
-      piVar5 = (int *)piVar9[2];
+        inst = (int *)inst[2];
+      } while ((inst != (int *)0x0) && ((instFlags & 4) != 0));
+      nextInstLink = (int *)listHead[2];
     }
     do {
-      piVar11 = piVar5;
-      puVar1 = (uint *)(piVar9 + 5);
-      piVar5 = (int *)piVar11[2];
-      if (piVar5 == (int *)0x0) {
+      nextInstAdvance = nextInstLink;
+      prevFlagsPtr = (uint *)(listHead + 5);
+      nextInstLink = (int *)nextInstAdvance[2];
+      if (nextInstLink == (int *)0x0) {
         return;
       }
-      piVar9 = piVar11;
-    } while ((*puVar1 & 4) != 0);
+      listHead = nextInstAdvance;
+    } while ((*prevFlagsPtr & 4) != 0);
   } while( true );
 }
 

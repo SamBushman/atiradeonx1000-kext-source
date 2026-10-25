@@ -1080,20 +1080,32 @@ LAB_0012ce40:
 }
 
 /* FUN_0012cfa4 @ 0x12cfa4 (820 bytes) */
-int FUN_0012cfa4(param_1, param_2, param_3, param_4)
-  int param_1;
-  int *param_2;
-  undefined4 param_3;
-  int *param_4;
+int FUN_0012cfa4(program, headerBlock, deadRegionEntry, footerBlock)
+  int program;
+  int *headerBlock;
+  undefined4 deadRegionEntry;
+  int *footerBlock;
 {
-  uint uVar1;
-  int *piVar2;
-  int *piVar3;
-  undefined4 *puVar4;
-  int iVar5;
-  int iVar6;
-  uint uVar7;
-  int iVar8;
+  int deadBlock;
+  uint successorNumber;
+  uint lastWorkIndex;
+  int successorByteOffset;
+  int operandNumber;
+  undefined4 *workSlotRefB;
+  int *footerPhi;
+  int *nextInstLinkB;
+  int *operandSlotCursor;
+  int *footerInst;
+  int *successorBlock;
+  int *deadInst;
+  uint workCountAfterCheck;
+  int *workTopRef;
+  int *nextInstLinkA;
+  undefined4 *workSlotRefA;
+  int instQuery34;
+  int operandCountOrSuccessors;
+  uint workCountSnapshot;
+  int workByteOffset;
   /* issue #64 (auto): growable-vector header (capacity/count/data-pointer/arena) used with Vector__elementRefGrow - vecCapacity/vecCount/vecData/vecArena are its four words by their own hex offsets. Vector__elementRefGrow unconditionally reads all four on every call (even its "no grow needed" path reallocs+copies+frees), so they must be one contiguous buffer; left as four separate locals, an -O0 rebuild does not place them contiguously. Merged into one 0x10-byte buffer (part of the issue #64 live-differential sweep). */
   unsigned char local_54_buf [0x10];
   #define vecCapacity (*(uint *)(local_54_buf + 0x00))
@@ -1101,83 +1113,83 @@ int FUN_0012cfa4(param_1, param_2, param_3, param_4)
   #define vecData (*(int *)(local_54_buf + 0x08))
   #define vecArena (*(undefined4 *)(local_54_buf + 0x0c))
   
-  vecArena = *(undefined4 *)(*(int *)(param_1 + 8) + 0x378);
+  vecArena = *(undefined4 *)(*(int *)(program + 8) + 0x378);
   vecCount = 0;
   vecCapacity = 2;
   vecData = Arena__alloc(vecArena,8);
-  uVar7 = vecCount;
+  workCountSnapshot = vecCount;
   if (vecCount < vecCapacity) {
-    iVar8 = vecCount * 4;
-    _memset(vecData + iVar8,0,4);
-    vecCount = uVar7 + 1;
-    puVar4 = (undefined4 *)(iVar8 + vecData);
+    workByteOffset = vecCount * 4;
+    _memset(vecData + workByteOffset,0,4);
+    vecCount = workCountSnapshot + 1;
+    workSlotRefA = (undefined4 *)(workByteOffset + vecData);
   }
   else {
-    puVar4 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
+    workSlotRefA = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
   }
-  *puVar4 = param_3;
+  *workSlotRefA = deadRegionEntry;
   while (vecCount != 0) {
-    uVar7 = vecCount - 1;
-    piVar2 = (int *)0x0;
-    if (uVar7 < vecCount) {
-      piVar2 = (int *)(uVar7 * 4 + vecData);
+    lastWorkIndex = vecCount - 1;
+    workTopRef = (int *)0x0;
+    if (lastWorkIndex < vecCount) {
+      workTopRef = (int *)(lastWorkIndex * 4 + vecData);
     }
-    iVar8 = *piVar2;
-    Vector__removeAt(&vecCapacity,uVar7);
-    piVar2 = *(int **)(iVar8 + 0x98);
-    for (piVar3 = (int *)piVar2[2]; piVar3 != (int *)0x0; piVar3 = (int *)piVar3[2]) {
-      if ((piVar2[5] & 1U) != 0) {
-        iVar5 = (**(code **)(*piVar2 + 0x34))(piVar2);
-        if ((iVar5 == 0) && (iVar5 = (**(code **)(*piVar2 + 0x38))(piVar2), iVar5 == 0)) {
-          if (*(int *)(piVar2[0x22] + 8) != 0x8e) {
-            piVar3 = piVar2;
-            for (iVar5 = 1; iVar6 = (**(code **)(*piVar2 + 0x14))(piVar2), iVar5 <= iVar6;
-                iVar5 = iVar5 + 1) {
-              FUN_001234d8(piVar3[0x29],piVar2);
-              piVar3 = piVar3 + 6;
+    deadBlock = *workTopRef;
+    Vector__removeAt(&vecCapacity,lastWorkIndex);
+    deadInst = *(int **)(deadBlock + 0x98);
+    for (nextInstLinkA = (int *)deadInst[2]; nextInstLinkA != (int *)0x0; nextInstLinkA = (int *)nextInstLinkA[2]) {
+      if ((deadInst[5] & 1U) != 0) {
+        instQuery34 = (**(code **)(*deadInst + 0x34))(deadInst);
+        if ((instQuery34 == 0) && (instQuery34 = (**(code **)(*deadInst + 0x38))(deadInst), instQuery34 == 0)) {
+          if (*(int *)(deadInst[0x22] + 8) != 0x8e) {
+            operandSlotCursor = deadInst;
+            for (operandNumber = 1; operandCountOrSuccessors = (**(code **)(*deadInst + 0x14))(deadInst), operandNumber <= operandCountOrSuccessors;
+                operandNumber = operandNumber + 1) {
+              FUN_001234d8(operandSlotCursor[0x29],deadInst);
+              operandSlotCursor = operandSlotCursor + 6;
             }
           }
-          (**(code **)(*piVar2 + 0xc))(piVar2,0,*(undefined4 *)(param_1 + 8));
+          (**(code **)(*deadInst + 0xc))(deadInst,0,*(undefined4 *)(program + 8));
         }
-        piVar3 = (int *)piVar2[2];
+        nextInstLinkA = (int *)deadInst[2];
       }
-      piVar2 = piVar3;
+      deadInst = nextInstLinkA;
     }
-    iVar5 = 0;
-    for (uVar7 = 1; iVar6 = *(int *)(iVar8 + 0xd0), uVar7 <= *(uint *)(iVar6 + 4); uVar7 = uVar7 + 1
+    successorByteOffset = 0;
+    for (successorNumber = 1; operandCountOrSuccessors = *(int *)(deadBlock + 0xd0), successorNumber <= *(uint *)(operandCountOrSuccessors + 4); successorNumber = successorNumber + 1
         ) {
-      piVar2 = *(int **)(*(int *)(iVar6 + 8) + iVar5);
-      if ((((piVar2 != (int *)0x0) && (piVar2 != param_4)) && (piVar2 != param_2)) &&
-         (((iVar6 = (**(code **)(*piVar2 + 0x38))(piVar2), iVar6 == 0 &&
-           (iVar6 = (**(code **)(*piVar2 + 0x3c))(piVar2), iVar6 == 0)) &&
-          (iVar6 = DList__count(piVar2 + 0x24), uVar1 = vecCount, 2 < iVar6)))) {
+      successorBlock = *(int **)(*(int *)(operandCountOrSuccessors + 8) + successorByteOffset);
+      if ((((successorBlock != (int *)0x0) && (successorBlock != footerBlock)) && (successorBlock != headerBlock)) &&
+         (((operandCountOrSuccessors = (**(code **)(*successorBlock + 0x38))(successorBlock), operandCountOrSuccessors == 0 &&
+           (operandCountOrSuccessors = (**(code **)(*successorBlock + 0x3c))(successorBlock), operandCountOrSuccessors == 0)) &&
+          (operandCountOrSuccessors = DList__count(successorBlock + 0x24), workCountAfterCheck = vecCount, 2 < operandCountOrSuccessors)))) {
         if (vecCount < vecCapacity) {
-          iVar6 = vecCount * 4;
-          _memset(iVar6 + vecData,0,4);
-          vecCount = uVar1 + 1;
-          puVar4 = (undefined4 *)(iVar6 + vecData);
+          operandCountOrSuccessors = vecCount * 4;
+          _memset(operandCountOrSuccessors + vecData,0,4);
+          vecCount = workCountAfterCheck + 1;
+          workSlotRefB = (undefined4 *)(operandCountOrSuccessors + vecData);
         }
         else {
-          puVar4 = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
+          workSlotRefB = (undefined4 *)Vector__elementRefGrow(&vecCapacity,vecCount);
         }
-        *puVar4 = piVar2;
+        *workSlotRefB = successorBlock;
       }
-      iVar5 = iVar5 + 4;
+      successorByteOffset = successorByteOffset + 4;
     }
   }
   vecCount = 0;
-  piVar2 = (int *)param_4[0x26];
-  for (piVar3 = (int *)((int *)param_4[0x26])[2]; piVar3 != (int *)0x0; piVar3 = (int *)piVar3[2]) {
-    if ((piVar2[5] & 1U) != 0) {
-      piVar3 = (int *)(**(code **)(*piVar2 + 0x7c))(piVar2);
-      if (piVar3 != (int *)0x0) {
-        (**(code **)(*piVar3 + 0xc))(piVar3,0,*(undefined4 *)(param_1 + 8));
+  footerInst = (int *)footerBlock[0x26];
+  for (nextInstLinkB = (int *)((int *)footerBlock[0x26])[2]; nextInstLinkB != (int *)0x0; nextInstLinkB = (int *)nextInstLinkB[2]) {
+    if ((footerInst[5] & 1U) != 0) {
+      footerPhi = (int *)(**(code **)(*footerInst + 0x7c))(footerInst);
+      if (footerPhi != (int *)0x0) {
+        (**(code **)(*footerPhi + 0xc))(footerPhi,0,*(undefined4 *)(program + 8));
       }
-      piVar3 = (int *)piVar2[2];
+      nextInstLinkB = (int *)footerInst[2];
     }
-    piVar2 = piVar3;
+    footerInst = nextInstLinkB;
   }
-  DList__count(param_4 + 0x24);
+  DList__count(footerBlock + 0x24);
   return Arena__free(vecArena,vecData);
 }
 #undef vecCapacity

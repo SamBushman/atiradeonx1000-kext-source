@@ -1,0 +1,34 @@
+use	FUN_00123c08	iVar3	laneKindCursor	INFERRED	cursor over the per-lane default kinds (program + 4 * lane + 0x10)	^\s*iVar3\ =\ iVar10;$	+1
+use	FUN_00123c08	iVar3	laneKindCursor	INFERRED	cursor over the per-lane default kinds (program + 4 * lane + 0x10)	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x10\);$	+1
+use	FUN_00123c08	iVar3	laneKindCursor	INFERRED	cursor over the per-lane default kinds (program + 4 * lane + 0x10)	^\s*iVar3\ =\ iVar3\ \+\ 4;$	+1
+use	FUN_00123c08	iVar3	constRegister	INFERRED	virtual register of the default constant move result	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ COMP_arenaB\)\ \+\ 0xa4\);$	+2
+use	FUN_00123c08	iVar3	constRegister	INFERRED	virtual register of the default constant move result	^\s*if\ \(\*\(int\ \*\)\(\*\(int\ \*\)\(iVar3\ \+\ 0x2c\)\ \+\ 4\)\ ==\ 0\)\ \{$	+1
+use	FUN_00123c08	iVar3	constRegister	INFERRED	virtual register of the default constant move result	^\s*\(\(int\ \(\*\)\(\)\)FUN_00123424\)\(iVar3,param_2\[0x2c\],puVar6\);$	+1
+use	FUN_00123c08	iVar3	constRegister	INFERRED	virtual register of the default constant move result	^\s*\(\(int\ \(\*\)\(\)\)FUN_001236e4\)\(iVar3,1,uVar4\);$	+1
+use	FUN_00123c08	iVar3	newVRegIdB	INFERRED	freshly allocated virtual register id (compiler counter - 1)	^\s*iVar3\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 8\)\ \+\ 0x3ac\)\ \+\ \-1;$	+3
+use	FUN_00123c08	iVar3	newVRegIdB	INFERRED	freshly allocated virtual register id (compiler counter - 1)	^\s*\(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0xc\)\)\(param_2,\*\(undefined4\ \*\)\(param_1\ \+\ COMP_arenaB\),iVar3\);$	+1
+use	FUN_00123c08	bVar1	hasUndefinedLane	INFERRED	at least one lane has no default (kind 0)	^\s*bVar1\ =\ false;$	+1
+use	FUN_00123c08	bVar1	hasUndefinedLane	INFERRED	at least one lane has no default (kind 0)	^\s*bVar1\ =\ true;$	+1
+use	FUN_00123c08	bVar1	hasUndefinedLane	INFERRED	at least one lane has no default (kind 0)	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_00123c08	iVar2	laneDefaultKind	INFERRED	default kind of the lane: 0 undefined, 1 zero, 2 one	^\s*iVar2\ =\ \*\(int\ \*\)\(iVar3\ \+\ 0x10\);$	+2
+use	FUN_00123c08	iVar2	laneDefaultKind	INFERRED	default kind of the lane: 0 undefined, 1 zero, 2 one	^\s*else\ if\ \(iVar2\ ==\ 2\)\ \{$	+1
+use	FUN_00123c08	iVar2	laneDefaultKind	INFERRED	default kind of the lane: 0 undefined, 1 zero, 2 one	^\s*else\ if\ \(iVar2\ ==\ 0\)\ \{$	+1
+use	FUN_00123c08	uVar4	constMoveInst	INFERRED	IRMov created for the default constant	^\s*uVar4\ =\ FUN_001084b8\(0x31,iVar7\);$	+4
+use	FUN_00123c08	uVar4	constDefInst	INFERRED	first definition of the default register (from its definition vector)	^\s*uVar4\ =\ \*puVar6;$	+1
+use	FUN_00123c08	uVar4	constDefInst	INFERRED	first definition of the default register (from its definition vector)	^\s*FUN_00173938\(puVar6,uVar4,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_00123c08	uVar4	constDefInst	INFERRED	first definition of the default register (from its definition vector)	^\s*uVar13\ =\ uVar4;$	+2
+use	FUN_00123c08	uVar4	constDefInst	INFERRED	first definition of the default register (from its definition vector)	^\s*FUN_00106004\(\*\(undefined4\ \*\)\(param_1\ \+\ COMP_arenaB\),1,uVar4,0,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_00123c08	uVar4	constMoveDestReg	INFERRED	destination register stored at the move's +0x14c	^\s*uVar4\ =\ \*\(undefined4\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ COMP_arenaB\)\ \+\ 0x14c\);$	+1
+use	FUN_00123c08	uVar4	constMoveDestReg	INFERRED	destination register stored at the move's +0x14c	^\s*\*\(undefined4\ \*\)\(iVar3\ \+\ 8\)\ =\ uVar4;$	+1
+use	FUN_00123c08	uVar4	movResultVReg	INFERRED	virtual register defined by the final move	^\s*uVar4\ =\ FUN_00127608\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x3ac\),0,iVar3,0\);$	+3
+use	FUN_00123c08	uVar4	movResultVReg	INFERRED	virtual register defined by the final move	^\s*FUN_000e9c00\(param_2,uVar4,local_58\);$	+2
+use	FUN_00123c08	iVar8	laneByteOffset	INFERRED	byte offset into the lane constant array	^\s*iVar8\ =\ 0;$	+1
+use	FUN_00123c08	iVar8	laneByteOffset	INFERRED	byte offset into the lane constant array	^\s*\*\(undefined4\ \*\)\(\(int\)\&local_50\ \+\ iVar8\)\ =\ 0;$	+1
+use	FUN_00123c08	iVar8	laneByteOffset	INFERRED	byte offset into the lane constant array	^\s*\*\(undefined4\ \*\)\(\(int\)\&local_50\ \+\ iVar8\)\ =\ 0x3f800000;$	+1
+use	FUN_00123c08	iVar8	laneByteOffset	INFERRED	byte offset into the lane constant array	^\s*\*\(undefined4\ \*\)\(\(int\)\&local_50\ \+\ iVar8\)\ =\ 0;$@2	+1
+use	FUN_00123c08	iVar8	laneByteOffset	INFERRED	byte offset into the lane constant array	^\s*iVar8\ =\ iVar8\ \+\ 4;$	+1
+use	FUN_00123c08	iVar9	laneNumber	INFERRED	lane counter 0..3	^\s*iVar9\ =\ 0;$	+1
+use	FUN_00123c08	iVar9	laneNumber	INFERRED	lane counter 0..3	^\s*\*\(undefined1\ \*\)\(\(int\)\&local_54\ \+\ iVar9\)\ =\ 1;$	+1
+use	FUN_00123c08	iVar9	laneNumber	INFERRED	lane counter 0..3	^\s*iVar9\ =\ iVar9\ \+\ 1;$	+1
+use	FUN_00123c08	iVar16	laneCountdown	INFERRED	countdown from 4 over the lanes	^\s*iVar16\ =\ 4;$	+1
+use	FUN_00123c08	iVar16	laneCountdown	INFERRED	countdown from 4 over the lanes	^\s*iVar16\ =\ iVar16\ \+\ \-1;$	+2

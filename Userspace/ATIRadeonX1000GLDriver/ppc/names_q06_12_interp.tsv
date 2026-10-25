@@ -1,0 +1,114 @@
+local	Interpolator__ctor_1257b0	param_3	interpolatorKind	INFERRED	interpolant kind code (0x18 gets the extra color constant); stored at the load's word 0x144
+local	Interpolator__ctor_1257b0	param_4	baseCtorArg4	INFERRED	fourth argument forwarded unchanged to VRegInfo__ctor
+use	Interpolator__ctor_1257b0	uVar8	vregList	INFERRED	program word 0x3ac: virtual register list passed to FUN_001275a0	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0x3ac\);$	+1
+use	Interpolator__ctor_1257b0	uVar8	vregList	INFERRED	program word 0x3ac: virtual register list passed to FUN_001275a0	^\s*uVar8\ =\ FUN_001275a0\(uVar8,0,iVar2,0\);$	+2
+use	Interpolator__ctor_1257b0	uVar8	exportLaneKind	INFERRED	lane kind code chosen from the mapped kind (0xb,0xc,0xd,0xe or 5)	^\s*uVar8\ =\ 0xd;$	+1
+use	Interpolator__ctor_1257b0	uVar8	exportLaneKind	INFERRED	lane kind code chosen from the mapped kind (0xb,0xc,0xd,0xe or 5)	^\s*uVar8\ =\ 0xb;$	+1
+use	Interpolator__ctor_1257b0	uVar8	exportLaneKind	INFERRED	lane kind code chosen from the mapped kind (0xb,0xc,0xd,0xe or 5)	^\s*uVar8\ =\ 5;$	+1
+use	Interpolator__ctor_1257b0	uVar8	exportLaneKind	INFERRED	lane kind code chosen from the mapped kind (0xb,0xc,0xd,0xe or 5)	^\s*if\ \(\(local_48\ !=\ 0x40\)\ \&\&\ \(uVar8\ =\ 0xc,\ local_48\ !=\ 0x41\)\)\ goto\ LAB_001259d8;$	+1
+use	Interpolator__ctor_1257b0	uVar8	exportLaneKind	INFERRED	lane kind code chosen from the mapped kind (0xb,0xc,0xd,0xe or 5)	^\s*FUN_00104104\(param_1\[0xd\],iVar2,uVar8,local_44\[0\]\);$	+1
+use	Interpolator__ctor_1257b0	uVar8	exportLaneKind	INFERRED	lane kind code chosen from the mapped kind (0xb,0xc,0xd,0xe or 5)	^\s*uVar8\ =\ 0xe;$	+1
+use	Interpolator__ctor_1257b0	uVar8	laneKind0	INFERRED	lane kind for lane 0 (FUN_000ec2a0(FUN_000ec258(kind)))	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$	+3
+use	Interpolator__ctor_1257b0	uVar8	laneKind1	INFERRED	lane kind for lane 1	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$@2	+3
+use	Interpolator__ctor_1257b0	uVar8	laneKind2	INFERRED	lane kind for lane 2	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$@3	+3
+use	Interpolator__ctor_1257b0	uVar8	laneKind3	INFERRED	lane kind for lane 3	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$@4	+3
+use	Interpolator__ctor_1257b0	uVar8	colorConstantWord	INFERRED	constant word DAT_001afeec written into the swizzle of kind 0x18	^\s*uVar8\ =\ DAT_001afeec;$	+1
+use	Interpolator__ctor_1257b0	uVar8	colorConstantWord	INFERRED	constant word DAT_001afeec written into the swizzle of kind 0x18	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ 0x10\)\ =\ uVar8;$	+1
+use	Interpolator__ctor_1257b0	iVar7	program	INFERRED	compiler->currentProgram	^\s*iVar7\ =\ \*\(int\ \*\)\(param_5\ \+\ COMP_currentProgram\);$	+2
+use	Interpolator__ctor_1257b0	iVar7	program	INFERRED	compiler->currentProgram	^\s*\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(iVar7\ \+\ 0x3a0\)\ \+\ 0xc\)\)\(\*\(int\ \*\*\)\(iVar7\ \+\ 0x3a0\),puVar9\);$	+1
+use	Interpolator__ctor_1257b0	iVar7	program	INFERRED	compiler->currentProgram	^\s*if\ \(\(\*\(uint\ \*\)\(iVar7\ \+\ 0x30\)\ \&\ 1\)\ ==\ 0\)\ \{$	+1
+use	Interpolator__ctor_1257b0	iVar7	program	INFERRED	compiler->currentProgram	^\s*FUN_000e7688\(\*\(undefined4\ \*\)\(iVar7\ \+\ 0x3a8\),puVar9\);$	+1
+use	Interpolator__ctor_1257b0	iVar7	program	INFERRED	compiler->currentProgram	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0x3ac\);$	+1
+use	Interpolator__ctor_1257b0	iVar7	program	INFERRED	compiler->currentProgram	^\s*\(\*\(int\ \*\*\)\(param_5\ \+\ COMP_target\),iVar7,param_5\);$	+1
+use	Interpolator__ctor_1257b0	iVar7	program	INFERRED	compiler->currentProgram	^\s*iVar2\ =\ FUN_00127324\(\*\(undefined4\ \*\)\(iVar7\ \+\ 0x3ac\),param_1\[1\],param_2,\&local_48,local_44\);$	+1
+use	Interpolator__ctor_1257b0	iVar7	program	INFERRED	compiler->currentProgram	^\s*uVar4\ =\ FUN_001275a0\(\*\(undefined4\ \*\)\(iVar7\ \+\ 0x3ac\),local_48,local_44\[0\],0\);$	+1
+use	Interpolator__ctor_1257b0	iVar7	program	INFERRED	compiler->currentProgram	^\s*FUN_000e7688\(\*\(undefined4\ \*\)\(iVar7\ \+\ 0x3a8\),puVar10\);$	+1
+use	Interpolator__ctor_1257b0	iVar7	program	INFERRED	compiler->currentProgram	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$	+2
+use	Interpolator__ctor_1257b0	iVar7	program	INFERRED	compiler->currentProgram	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$@2	+2
+use	Interpolator__ctor_1257b0	iVar7	program	INFERRED	compiler->currentProgram	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$@3	+2
+use	Interpolator__ctor_1257b0	iVar7	program	INFERRED	compiler->currentProgram	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$@4	+2
+use	Interpolator__ctor_1257b0	iVar2	regKindFlag	INFERRED	RegKind flag test of this register's kind	^\s*iVar2\ =\ FUN_00126760\(param_1\[1\]\);$	+2
+use	Interpolator__ctor_1257b0	iVar2	streamCounter	INFERRED	compiler word 0x334: running stream number	^\s*iVar2\ =\ \*\(int\ \*\)\(param_5\ \+\ 0x334\);$	+3
+use	Interpolator__ctor_1257b0	iVar2	newVRegId	INFERRED	freshly allocated virtual register id (compiler counter - 1)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_5\ \+\ 0x3ac\)\ \+\ \-1;$	+3
+use	Interpolator__ctor_1257b0	iVar2	targetQuery120	INFERRED	target backend vtable slot 0x120 test	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_5\ \+\ COMP_target\)\ \+\ 0x120\)\)$	+1
+use	Interpolator__ctor_1257b0	iVar2	targetQuery120	INFERRED	target backend vtable slot 0x120 test	^\s*if\ \(iVar2\ ==\ 0\)\ goto\ LAB_00125ac0;$	+1
+use	Interpolator__ctor_1257b0	iVar2	mappingFound	INFERRED	FUN_00127324: a second export mapping exists	^\s*iVar2\ =\ FUN_00127324\(\*\(undefined4\ \*\)\(iVar7\ \+\ 0x3ac\),param_1\[1\],param_2,\&local_48,local_44\);$	+2
+use	Interpolator__ctor_1257b0	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*iVar2\ =\ 0;$	+1
+use	Interpolator__ctor_1257b0	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*FUN_00104104\(param_1\[0xd\],iVar2,uVar8,local_44\[0\]\);$	+3
+use	Interpolator__ctor_1257b0	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ iVar2\ !=\ 3;$	+1
+use	Interpolator__ctor_1257b0	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$	+1
+use	Interpolator__ctor_1257b0	uVar4	mappedVReg	INFERRED	virtual register of the mapped export target	^\s*uVar4\ =\ FUN_001275a0\(\*\(undefined4\ \*\)\(iVar7\ \+\ 0x3ac\),local_48,local_44\[0\],0\);$	+1
+use	Interpolator__ctor_1257b0	uVar4	mappedVReg	INFERRED	virtual register of the mapped export target	^\s*FUN_001046c8\(param_1\[0xd\],0,uVar4\);$	+1
+use	Interpolator__ctor_1257b0	uVar4	mappedVReg	INFERRED	virtual register of the mapped export target	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012306c\)\(uVar4,param_1\[0xd\]\);$	+1
+use	Interpolator__ctor_1257b0	puVar9	interpLoadInst	INFERRED	IRLoadInterp created for the PS-input path (allocation + 1)	^\s*puVar9\ =\ puVar3\ \+\ 1;$	+1
+use	Interpolator__ctor_1257b0	puVar9	interpLoadInst	INFERRED	IRLoadInterp created for the PS-input path (allocation + 1)	^\s*FUN_00109198\(puVar9,param_5\);$	+3
+use	Interpolator__ctor_1257b0	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*puVar9\ =\ puVar3\ \+\ 1;$@2	+1
+use	Interpolator__ctor_1257b0	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*FUN_00108918\(puVar9,param_5\);$	+5
+use	Interpolator__ctor_1257b0	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*FUN_001046c8\(puVar9,1,param_1\[0xf\]\);$	+2
+use	Interpolator__ctor_1257b0	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*FUN_00104104\(puVar9,0,uVar8,param_2\);$	+1
+use	Interpolator__ctor_1257b0	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*FUN_00104104\(puVar9,1,uVar8,param_2\);$	+1
+use	Interpolator__ctor_1257b0	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*FUN_00104104\(puVar9,2,uVar8,param_2\);$	+1
+use	Interpolator__ctor_1257b0	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*FUN_00104104\(puVar9,3,uVar8,param_2\);$	+1
+use	Interpolator__ctor_1257b0	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*iVar7\ =\ FUN_001054ec\(puVar9,1\);$	+1
+use	Interpolator__ctor_1257b0	puVar10	mappedExportInst	INFERRED	second IRExport for the mapped target (allocation + 1)	^\s*puVar10\ =\ puVar5\ \+\ 1;$	+1
+use	Interpolator__ctor_1257b0	puVar10	mappedExportInst	INFERRED	second IRExport for the mapped target (allocation + 1)	^\s*FUN_00108918\(puVar10,param_5\);$	+3
+local	Interpolator__ctor_1257b0	local_44	mappedIndexSlot	INFERRED	out parameter: index of the mapped export
+local	Interpolator__ctor_1257b0	local_48	mappedKind	INFERRED	out parameter: kind of the mapped export
+local	Interpolator__ctor_1257b0	local_38	defaultWordsOut	INFERRED	out parameter of target vtable slot 0x1c: default color words
+local	Interpolator__ctor_125350	param_3	interpolatorKind	INFERRED	interpolant kind code (0x18 gets the extra color constant); stored at the load's word 0x144
+local	Interpolator__ctor_125350	param_4	baseCtorArg4	INFERRED	fourth argument forwarded unchanged to VRegInfo__ctor
+use	Interpolator__ctor_125350	uVar8	vregList	INFERRED	program word 0x3ac: virtual register list passed to FUN_001275a0	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0x3ac\);$	+1
+use	Interpolator__ctor_125350	uVar8	vregList	INFERRED	program word 0x3ac: virtual register list passed to FUN_001275a0	^\s*uVar8\ =\ FUN_001275a0\(uVar8,0,iVar2,0\);$	+2
+use	Interpolator__ctor_125350	uVar8	exportLaneKind	INFERRED	lane kind code chosen from the mapped kind (0xb,0xc,0xd,0xe or 5)	^\s*uVar8\ =\ 0xd;$	+1
+use	Interpolator__ctor_125350	uVar8	exportLaneKind	INFERRED	lane kind code chosen from the mapped kind (0xb,0xc,0xd,0xe or 5)	^\s*uVar8\ =\ 0xb;$	+1
+use	Interpolator__ctor_125350	uVar8	exportLaneKind	INFERRED	lane kind code chosen from the mapped kind (0xb,0xc,0xd,0xe or 5)	^\s*uVar8\ =\ 5;$	+1
+use	Interpolator__ctor_125350	uVar8	exportLaneKind	INFERRED	lane kind code chosen from the mapped kind (0xb,0xc,0xd,0xe or 5)	^\s*if\ \(\(local_48\ !=\ 0x40\)\ \&\&\ \(uVar8\ =\ 0xc,\ local_48\ !=\ 0x41\)\)\ goto\ LAB_00125578;$	+1
+use	Interpolator__ctor_125350	uVar8	exportLaneKind	INFERRED	lane kind code chosen from the mapped kind (0xb,0xc,0xd,0xe or 5)	^\s*FUN_00104104\(param_1\[0xd\],iVar2,uVar8,local_44\[0\]\);$	+1
+use	Interpolator__ctor_125350	uVar8	exportLaneKind	INFERRED	lane kind code chosen from the mapped kind (0xb,0xc,0xd,0xe or 5)	^\s*uVar8\ =\ 0xe;$	+1
+use	Interpolator__ctor_125350	uVar8	laneKind0	INFERRED	lane kind for lane 0 (FUN_000ec2a0(FUN_000ec258(kind)))	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$	+3
+use	Interpolator__ctor_125350	uVar8	laneKind1	INFERRED	lane kind for lane 1	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$@2	+3
+use	Interpolator__ctor_125350	uVar8	laneKind2	INFERRED	lane kind for lane 2	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$@3	+3
+use	Interpolator__ctor_125350	uVar8	laneKind3	INFERRED	lane kind for lane 3	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$@4	+3
+use	Interpolator__ctor_125350	uVar8	colorConstantWord	INFERRED	constant word DAT_001afeec written into the swizzle of kind 0x18	^\s*uVar8\ =\ DAT_001afeec;$	+1
+use	Interpolator__ctor_125350	uVar8	colorConstantWord	INFERRED	constant word DAT_001afeec written into the swizzle of kind 0x18	^\s*\*\(undefined4\ \*\)\(iVar7\ \+\ 0x10\)\ =\ uVar8;$	+1
+use	Interpolator__ctor_125350	iVar7	program	INFERRED	compiler->currentProgram	^\s*iVar7\ =\ \*\(int\ \*\)\(param_5\ \+\ COMP_currentProgram\);$	+2
+use	Interpolator__ctor_125350	iVar7	program	INFERRED	compiler->currentProgram	^\s*\(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(iVar7\ \+\ 0x3a0\)\ \+\ 0xc\)\)\(\*\(int\ \*\*\)\(iVar7\ \+\ 0x3a0\),puVar9\);$	+1
+use	Interpolator__ctor_125350	iVar7	program	INFERRED	compiler->currentProgram	^\s*if\ \(\(\*\(uint\ \*\)\(iVar7\ \+\ 0x30\)\ \&\ 1\)\ ==\ 0\)\ \{$	+1
+use	Interpolator__ctor_125350	iVar7	program	INFERRED	compiler->currentProgram	^\s*FUN_000e7688\(\*\(undefined4\ \*\)\(iVar7\ \+\ 0x3a8\),puVar9\);$	+1
+use	Interpolator__ctor_125350	iVar7	program	INFERRED	compiler->currentProgram	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(iVar7\ \+\ 0x3ac\);$	+1
+use	Interpolator__ctor_125350	iVar7	program	INFERRED	compiler->currentProgram	^\s*\(\*\(int\ \*\*\)\(param_5\ \+\ COMP_target\),iVar7,param_5\);$	+1
+use	Interpolator__ctor_125350	iVar7	program	INFERRED	compiler->currentProgram	^\s*iVar2\ =\ FUN_00127324\(\*\(undefined4\ \*\)\(iVar7\ \+\ 0x3ac\),param_1\[1\],param_2,\&local_48,local_44\);$	+1
+use	Interpolator__ctor_125350	iVar7	program	INFERRED	compiler->currentProgram	^\s*uVar4\ =\ FUN_001275a0\(\*\(undefined4\ \*\)\(iVar7\ \+\ 0x3ac\),local_48,local_44\[0\],0\);$	+1
+use	Interpolator__ctor_125350	iVar7	program	INFERRED	compiler->currentProgram	^\s*FUN_000e7688\(\*\(undefined4\ \*\)\(iVar7\ \+\ 0x3a8\),puVar10\);$	+1
+use	Interpolator__ctor_125350	iVar7	program	INFERRED	compiler->currentProgram	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$	+2
+use	Interpolator__ctor_125350	iVar7	program	INFERRED	compiler->currentProgram	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$@2	+2
+use	Interpolator__ctor_125350	iVar7	program	INFERRED	compiler->currentProgram	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$@3	+2
+use	Interpolator__ctor_125350	iVar7	program	INFERRED	compiler->currentProgram	^\s*uVar8\ =\ FUN_000ec258\(iVar7,param_3\);$@4	+2
+use	Interpolator__ctor_125350	iVar2	regKindFlag	INFERRED	RegKind flag test of this register's kind	^\s*iVar2\ =\ FUN_00126760\(param_1\[1\]\);$	+2
+use	Interpolator__ctor_125350	iVar2	streamCounter	INFERRED	compiler word 0x334: running stream number	^\s*iVar2\ =\ \*\(int\ \*\)\(param_5\ \+\ 0x334\);$	+3
+use	Interpolator__ctor_125350	iVar2	newVRegId	INFERRED	freshly allocated virtual register id (compiler counter - 1)	^\s*iVar2\ =\ \*\(int\ \*\)\(param_5\ \+\ 0x3ac\)\ \+\ \-1;$	+3
+use	Interpolator__ctor_125350	iVar2	targetQuery120	INFERRED	target backend vtable slot 0x120 test	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*\*\(int\ \*\*\)\(param_5\ \+\ COMP_target\)\ \+\ 0x120\)\)$	+1
+use	Interpolator__ctor_125350	iVar2	targetQuery120	INFERRED	target backend vtable slot 0x120 test	^\s*if\ \(iVar2\ ==\ 0\)\ goto\ LAB_00125660;$	+1
+use	Interpolator__ctor_125350	iVar2	mappingFound	INFERRED	FUN_00127324: a second export mapping exists	^\s*iVar2\ =\ FUN_00127324\(\*\(undefined4\ \*\)\(iVar7\ \+\ 0x3ac\),param_1\[1\],param_2,\&local_48,local_44\);$	+2
+use	Interpolator__ctor_125350	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*iVar2\ =\ 0;$	+1
+use	Interpolator__ctor_125350	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*FUN_00104104\(param_1\[0xd\],iVar2,uVar8,local_44\[0\]\);$	+3
+use	Interpolator__ctor_125350	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ iVar2\ !=\ 3;$	+1
+use	Interpolator__ctor_125350	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$	+1
+use	Interpolator__ctor_125350	uVar4	mappedVReg	INFERRED	virtual register of the mapped export target	^\s*uVar4\ =\ FUN_001275a0\(\*\(undefined4\ \*\)\(iVar7\ \+\ 0x3ac\),local_48,local_44\[0\],0\);$	+1
+use	Interpolator__ctor_125350	uVar4	mappedVReg	INFERRED	virtual register of the mapped export target	^\s*FUN_001046c8\(param_1\[0xd\],0,uVar4\);$	+1
+use	Interpolator__ctor_125350	uVar4	mappedVReg	INFERRED	virtual register of the mapped export target	^\s*\(\(int\ \(\*\)\(\)\)FUN_0012306c\)\(uVar4,param_1\[0xd\]\);$	+1
+use	Interpolator__ctor_125350	puVar9	interpLoadInst	INFERRED	IRLoadInterp created for the PS-input path (allocation + 1)	^\s*puVar9\ =\ puVar3\ \+\ 1;$	+1
+use	Interpolator__ctor_125350	puVar9	interpLoadInst	INFERRED	IRLoadInterp created for the PS-input path (allocation + 1)	^\s*FUN_00109198\(puVar9,param_5\);$	+3
+use	Interpolator__ctor_125350	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*puVar9\ =\ puVar3\ \+\ 1;$@2	+1
+use	Interpolator__ctor_125350	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*FUN_00108918\(puVar9,param_5\);$	+5
+use	Interpolator__ctor_125350	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*FUN_001046c8\(puVar9,1,param_1\[0xf\]\);$	+2
+use	Interpolator__ctor_125350	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*FUN_00104104\(puVar9,0,uVar8,param_2\);$	+1
+use	Interpolator__ctor_125350	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*FUN_00104104\(puVar9,1,uVar8,param_2\);$	+1
+use	Interpolator__ctor_125350	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*FUN_00104104\(puVar9,2,uVar8,param_2\);$	+1
+use	Interpolator__ctor_125350	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*FUN_00104104\(puVar9,3,uVar8,param_2\);$	+1
+use	Interpolator__ctor_125350	puVar9	exportInst	INFERRED	IRExport created for the plain path (allocation + 1)	^\s*iVar7\ =\ FUN_001054ec\(puVar9,1\);$	+1
+use	Interpolator__ctor_125350	puVar10	mappedExportInst	INFERRED	second IRExport for the mapped target (allocation + 1)	^\s*puVar10\ =\ puVar5\ \+\ 1;$	+1
+use	Interpolator__ctor_125350	puVar10	mappedExportInst	INFERRED	second IRExport for the mapped target (allocation + 1)	^\s*FUN_00108918\(puVar10,param_5\);$	+3
+local	Interpolator__ctor_125350	local_44	mappedIndexSlot	INFERRED	out parameter: index of the mapped export
+local	Interpolator__ctor_125350	local_48	mappedKind	INFERRED	out parameter: kind of the mapped export
+local	Interpolator__ctor_125350	local_38	defaultWordsOut	INFERRED	out parameter of target vtable slot 0x1c: default color words

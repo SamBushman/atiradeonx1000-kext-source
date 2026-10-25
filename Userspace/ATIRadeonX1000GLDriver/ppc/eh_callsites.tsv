@@ -1456,9 +1456,9 @@ fd5c8	FUN_000fd5c8	103cf4	103cf8	-	no-handler
 18413c	FUN_0018413c	184214	184218	184290	cleanup
 18413c	FUN_0018413c	184274	184278	-	no-handler
 18413c	FUN_0018413c	1842ac	184a74	-	no-handler
-184ef0	FUN_00184ef0	184f28	185734	-	no-handler
-184ef0	FUN_00184ef0	185740	185744	185878	cleanup
-184ef0	FUN_00184ef0	185794	185964	-	no-handler
+184ef0	IRInst__foldResultScaleIntoUsers	184f28	185734	-	no-handler
+184ef0	IRInst__foldResultScaleIntoUsers	185740	185744	185878	cleanup
+184ef0	IRInst__foldResultScaleIntoUsers	185794	185964	-	no-handler
 1859bc	Inst__tryDp3Add	1859dc	185be4	-	no-handler
 1859bc	Inst__tryDp3Add	185bf0	185bf4	185c28	cleanup
 1859bc	Inst__tryDp3Add	185c28	185d90	-	no-handler

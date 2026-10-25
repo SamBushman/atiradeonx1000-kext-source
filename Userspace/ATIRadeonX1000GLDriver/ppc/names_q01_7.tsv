@@ -1,0 +1,168 @@
+func	FUN_0000a2f0	gld_textureVariantClass	INFERRED	maps a texture-format variant code 0x400..0x40b and a flag word to a small class number (0,1,2,3,7,8,9)
+func	FUN_0000a6e0	gld_computePixelStoreLayout	CONFIRMED	returns the unit size, the aligned row stride and the byte offset of the first pixel from the pixel-store block (row length, image height, skip rows/pixels/images, alignment)
+func	FUN_0000a820	gld_resolveBoundTextures	INFERRED	for each of the 16 texture units flagged in the mask picks the bound texture object (by target enable bits or the program's per-unit target), makes it resident and stores it in ctx unitObject[n]
+func	FUN_0000a9f0	gld_textureMemoryBytes	INFERRED	total size in bytes of a texture: sum over the mip chain of width*height*depth, times the base level's bytes per texel, scaled by FUN_00030f00
+local	FUN_0000a2f0	param_1	variantCode	INFERRED	switch selector 0x400..0x40b: a texture-format variant code (0x401/0x407 add 2 when flag 0x10 is set)
+local	FUN_0000a2f0	param_2	variantFlags	INFERRED	flag word tested with 0x10 / 0x300 / 0x400 to choose the returned class
+local	FUN_0000a6e0	param_2	format	INFERRED	pixel format passed to gldPixelUnitBytes / gldPixelRowBytes
+local	FUN_0000a6e0	param_6	rowBytesOut	CONFIRMED	receives the row stride in bytes, rounded up to the unpack alignment
+local	FUN_0000a6e0	param_7	unitBytesOut	CONFIRMED	receives gldPixelUnitBytes(format, pixelType)
+local	FUN_0000a6e0	param_9	pixelStore	CONFIRMED	pixel-store block: [0] row length, [1] image height, [2] skip rows, [3] skip pixels, [4] skip images, [5] alignment (NULL = defaults)
+local	FUN_0000a6e0	iVar2	unitBytes	CONFIRMED	bytes per pixel/unit for (format, pixelType)
+local	FUN_0000a6e0	uVar3	rowBytes	CONFIRMED	bytes per row before and after alignment rounding
+local	FUN_0000a6e0	uVar1	alignment	CONFIRMED	pixelStore[5], the unpack alignment
+use	FUN_0000a6e0	iVar4	rowLength	CONFIRMED	pixelStore[0]: row length in pixels (<= 0 means use width)	^\s*iVar4\ =\ \*param_9;$	+2
+use	FUN_0000a6e0	iVar4	rowLength	CONFIRMED	pixelStore[0]: row length in pixels (<= 0 means use width)	^\s*uVar3\ =\ iVar4\ \+\ 7\ >>\ 3;$	+1
+use	FUN_0000a6e0	iVar4	rowLength	CONFIRMED	pixelStore[0]: row length in pixels (<= 0 means use width)	^\s*uVar3\ =\ iVar2\ \*\ iVar4;$	+1
+use	FUN_0000a6e0	iVar4	alignRemainder	CONFIRMED	rowBytes % alignment	^\s*iVar4\ =\ uVar3\ \-\ \(uVar3\ /\ uVar1\)\ \*\ uVar1;$	+3
+use	FUN_0000a6e0	iVar4	imageHeight	CONFIRMED	pixelStore[1] (or the height argument when <= 0)	^\s*iVar4\ =\ param_9\[1\];$	+1
+use	FUN_0000a6e0	iVar4	imageHeight	CONFIRMED	pixelStore[1] (or the height argument when <= 0)	^\s*iVar4\ =\ param_5;$	+1
+use	FUN_0000a6e0	iVar4	imageHeight	CONFIRMED	pixelStore[1] (or the height argument when <= 0)	^\s*\*param_8\ =\ iVar2\ \+\ uVar3\ \*\ param_9\[2\]\ \+\ uVar3\ \*\ iVar4\ \*\ param_9\[4\];$	+1
+local	FUN_0000a820	param_2	unitMask	INFERRED	bit n set = texture unit n needs its bound texture resolved; shifted right per unit; forced to 0xffffffff when a program is bound
+local	FUN_0000a820	param_3	staleArgR5	INFERRED	forwarded to gldTextureMakeResident; unused
+local	FUN_0000a820	param_4	staleArgR6	INFERRED	forwarded to gldTextureMakeResident; unused
+local	FUN_0000a820	param_5	staleArgR7	INFERRED	forwarded to gldTextureMakeResident; unused
+local	FUN_0000a820	param_6	staleArgR8	INFERRED	forwarded to gldTextureMakeResident; unused
+local	FUN_0000a820	param_1	ctx	CONFIRMED	GLDContext (+0x10 engineState, +0x18 engineObjects, +0x18c unitObject0..)
+local	FUN_0000a820	bVar1	isLastUnit	INFERRED	unitIndex == 15
+local	FUN_0000a820	bVar2	noProgramMasks	INFERRED	no program bound: the unit's target is chosen from the engine-state enable bits instead of the program masks
+local	FUN_0000a820	piVar5	currentProgram	INFERRED	engineObjects+0x19c (current program object)
+local	FUN_0000a820	uVar7	programMaskHigh	INFERRED	first mask word of the bound program (nibble per unit)
+local	FUN_0000a820	uVar8	programMaskLow	INFERRED	second mask word of the bound program
+local	FUN_0000a820	iVar9	unitObjectOffset	INFERRED	unit * 0x14: offset of the unit's [5] target pointers in engineObjects
+local	FUN_0000a820	iVar10	unitStateOffset	INFERRED	unit * 0x7c: stride of the per-unit state in engineState
+local	FUN_0000a820	iVar11	unitIndex	CONFIRMED	texture unit 0..15
+local	FUN_0000a820	uVar3	targetSlot	INFERRED	texture target slot 0..4 selected for the unit (1D/2D/3D/cube/rect)
+local	FUN_0000a820	iVar4	makeResidentResult	INFERRED	gldTextureMakeResident result; 0 = not complete, the unit gets no texture
+use	FUN_0000a820	iVar6	engineObjects	CONFIRMED	ctx+0x18: the bound-object table	^\s*iVar6\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x18\);$	+2
+use	FUN_0000a820	iVar6	unitObjectCursor	INFERRED	address of ctx+0x18c+4*unit: the unit's bound-texture slot	^\s*iVar6\ =\ param_1;$	+1
+use	FUN_0000a820	iVar6	unitObjectCursor	INFERRED	address of ctx+0x18c+4*unit: the unit's bound-texture slot	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x18c\)\ =\ iVar12;$	+1
+use	FUN_0000a820	iVar6	unitObjectCursor	INFERRED	address of ctx+0x18c+4*unit: the unit's bound-texture slot	^\s*iVar6\ =\ iVar6\ \+\ 4;$	+1
+use	FUN_0000a820	iVar12	targetsLeft	INFERRED	countdown over the five target enable words	^\s*iVar12\ =\ 5;$	+1
+use	FUN_0000a820	iVar12	targetsLeft	INFERRED	countdown over the five target enable words	^\s*iVar12\ =\ iVar12\ \+\ \-1;$	+2
+use	FUN_0000a820	iVar12	texture	INFERRED	texture object bound to the unit (0 = none)	^\s*iVar12\ =\ 0;$	+1
+use	FUN_0000a820	iVar12	texture	INFERRED	texture object bound to the unit (0 = none)	^\s*iVar12\ =\ \*\(int\ \*\)\(iVar9\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x18\)\ \+\ uVar3\ \*\ 4\);$	+4
+use	FUN_0000a820	iVar12	texture	INFERRED	texture object bound to the unit (0 = none)	^\s*\*\(int\ \*\)\(iVar6\ \+\ 0x18c\)\ =\ iVar12;$	+1
+local	FUN_0000a9f0	iVar3	baseLevel	CONFIRMED	texture+0x30: the base level record (width +0xa4, height +0xa6, depth +0xa8, border +0xaa, format +0x5c)
+local	FUN_0000a9f0	uVar4	height	INFERRED	height of the current mip level (halved to a minimum of 1)
+local	FUN_0000a9f0	iVar6	levelsLeft	INFERRED	countdown of the 12 remaining mip levels
+use	FUN_0000a9f0	uVar5	width	INFERRED	width of the current mip level (halved to a minimum of 1)	^\s*uVar5\ =\ \(uint\)\*\(ushort\ \*\)\(iVar3\ \+\ 0xa4\)\ \+\ uVar1\ \*\ \-2;$	+1
+use	FUN_0000a9f0	uVar5	width	INFERRED	width of the current mip level (halved to a minimum of 1)	^\s*iVar2\ =\ uVar1\ \*\ uVar5\ \*\ uVar4;$	+1
+use	FUN_0000a9f0	uVar5	width	INFERRED	width of the current mip level (halved to a minimum of 1)	^\s*if\ \(\(\(\(uVar5\ ==\ 1\)\ \&\&\ \(uVar4\ ==\ 1\)\)\ \&\&\ \(uVar1\ ==\ 1\)\)\ \|\|\ \(\*\(ushort\ \*\)\(iVar3\ \+\ 0x5c\)\ <\ 0x2602\)\)$	+1
+use	FUN_0000a9f0	uVar5	width	INFERRED	width of the current mip level (halved to a minimum of 1)	^\s*uVar5\ =\ uVar5\ >>\ 1;$	+3
+use	FUN_0000a9f0	uVar5	width	INFERRED	width of the current mip level (halved to a minimum of 1)	^\s*iVar2\ =\ iVar2\ \+\ uVar1\ \*\ uVar5\ \*\ uVar4;$	+1
+use	FUN_0000a9f0	uVar5	totalBytes	INFERRED	texel total * bytes per texel * format scale: the texture's memory size	^\s*uVar5\ =\ \(uint\)\*\(byte\ \*\)\(iVar3\ \+\ 0x6c\)\ \*\ iVar2;$	+1
+use	FUN_0000a9f0	uVar5	totalBytes	INFERRED	texel total * bytes per texel * format scale: the texture's memory size	^\s*uVar5\ =\ uVar5\ /\ \(uint\)\-iVar2;$	+1
+use	FUN_0000a9f0	uVar5	totalBytes	INFERRED	texel total * bytes per texel * format scale: the texture's memory size	^\s*uVar5\ =\ uVar5\ \*\ iVar2;$	+1
+use	FUN_0000a9f0	uVar5	totalBytes	INFERRED	texel total * bytes per texel * format scale: the texture's memory size	^\s*return\ uVar5;$	+1
+use	FUN_0000a9f0	iVar2	totalTexels	INFERRED	sum of width*height*depth over the mip chain	^\s*iVar2\ =\ uVar1\ \*\ uVar5\ \*\ uVar4;$	+1
+use	FUN_0000a9f0	iVar2	totalTexels	INFERRED	sum of width*height*depth over the mip chain	^\s*iVar2\ =\ iVar2\ \+\ uVar1\ \*\ uVar5\ \*\ uVar4;$	+1
+use	FUN_0000a9f0	iVar2	bytesScale	INFERRED	FUN_00030f00 result: positive multiplier or negative divisor applied to the byte count	^\s*iVar2\ =\ FUN_00030f00\(param_1,param_2\);$	+3
+use	FUN_0000a9f0	iVar2	bytesScale	INFERRED	FUN_00030f00 result: positive multiplier or negative divisor applied to the byte count	^\s*uVar5\ =\ uVar5\ \*\ iVar2;$	+1
+local	FUN_0000b670	param_3	byteCount	INFERRED	length in bytes of the range to flush
+local	FUN_0000b670	uVar3	cacheLineSize	CONFIRMED	ctx+8 cacheLineSize
+local	FUN_0000b670	iVar1	lineOffset	INFERRED	byte offset of the cache line being flushed
+local	FUN_0000b670	iVar2	lastLineLimit	INFERRED	((surfaceBase & (line-1)) + byteCount) - line: offset past which the last line is flushed separately
+local	FUN_0000c500	param_1	cursor	INFERRED	the number string, advanced as the sign, integer digits, fraction and exponent are consumed; stored back through endPtr
+local	FUN_0000c500	param_2	endPtr	INFERRED	optional out-parameter receiving the address of the first unparsed character (strtod's endptr)
+local	FUN_0000c500	param_3	staleArgR5	INFERRED	forwarded unchanged to powerOfTenDouble; unused
+local	FUN_0000c500	param_4	staleArgR6	INFERRED	forwarded unchanged to powerOfTenDouble; unused
+local	FUN_0000c500	param_5	staleArgR7	INFERRED	forwarded unchanged to powerOfTenDouble; unused
+local	FUN_0000c500	param_6	staleArgR8	INFERRED	forwarded unchanged to powerOfTenDouble; unused
+local	FUN_0000c500	cVar5	ch	INFERRED	character under the cursor
+local	FUN_0000c500	iVar6	chCode	INFERRED	ch as an int: '.' (0x2e), 'e'/'E' (0x65/0x45) or a digit
+local	FUN_0000c500	bVar1	negative	CONFIRMED	a leading '-' was seen
+local	FUN_0000c500	bVar2	exponentNegative	CONFIRMED	the exponent has a '-' sign
+local	FUN_0000c500	dVar10	value	CONFIRMED	the parsed mantissa (integer part plus fraction), later multiplied by 10^exponent and negated
+local	FUN_0000c500	dVar3	exponentPlace	INFERRED	power of ten of the exponent digit being added
+local	FUN_0000c500	pcVar7	fractionDigitCursor	INFERRED	walks the fraction digits backwards
+local	FUN_0000c500	pcVar8	digitRunEnd	INFERRED	one past the end of the digit run being parsed (integer digits, fraction digits, then the exponent digits)
+use	FUN_0000c500	dVar9	fraction	INFERRED	fraction digits accumulated from the last to the first (Horner scheme), scaled by 0.1 at the end	^\s*dVar9\ =\ DOUBLE_001aa228;$	+1
+use	FUN_0000c500	dVar9	fraction	INFERRED	fraction digits accumulated from the last to the first (Horner scheme), scaled by 0.1 at the end	^\s*dVar9\ =\ dVar9\ \*\ DOUBLE_001aa220\ \+$	+1
+use	FUN_0000c500	dVar9	fraction	INFERRED	fraction digits accumulated from the last to the first (Horner scheme), scaled by 0.1 at the end	^\s*dVar9\ =\ dVar9\ \*\ DOUBLE_001aa220;$	+1
+use	FUN_0000c500	dVar9	fraction	INFERRED	fraction digits accumulated from the last to the first (Horner scheme), scaled by 0.1 at the end	^\s*dVar10\ =\ dVar10\ \+\ dVar9;$	+1
+use	FUN_0000c500	dVar9	placeValue	INFERRED	power of ten of the integer digit being added (1, 10, 100, ...)	^\s*dVar9\ =\ DOUBLE_001aa200;$	+1
+use	FUN_0000c500	dVar9	placeValue	INFERRED	power of ten of the integer digit being added (1, 10, 100, ...)	^\s*dVar10\ =\ dVar9\ \*\ \(\(double\)CONCAT44\(0x43300000,\(int\)\*pcVar4\ \-\ 0x30U\ \^\ 0x80000000\)\ \-$	+1
+use	FUN_0000c500	dVar9	placeValue	INFERRED	power of ten of the integer digit being added (1, 10, 100, ...)	^\s*dVar9\ =\ dVar9\ \*\ DOUBLE_001aa238;$	+1
+use	FUN_0000c500	dVar9	exponent	INFERRED	exponent digits accumulated from the least significant digit	^\s*while\ \(dVar9\ =\ DOUBLE_001aa228,\ dVar3\ =\ DOUBLE_001aa200,\ pcVar8\ =\ param_1,$	+1
+use	FUN_0000c500	dVar9	exponent	INFERRED	exponent digits accumulated from the least significant digit	^\s*dVar9\ =\ dVar3\ \*\ \(\(double\)CONCAT44\(0x43300000,\(int\)\*pcVar8\ \-\ 0x30U\ \^\ 0x80000000\)\ \-$	+2
+use	FUN_0000c500	dVar9	exponent	INFERRED	exponent digits accumulated from the least significant digit	^\s*dVar9\ =\ \-dVar9;$	+1
+use	FUN_0000c500	dVar9	powerOfTen	INFERRED	powerOfTenDouble(exponent): 10^exponent	^\s*dVar9\ =\ \(double\)\(\(double\ \(\*\)\(\)\)FUN_0000be70\)\(\(int\)dVar9,param_2,param_3,param_4,param_5,param_6,pcVar8\);$	+1	lhs	none
+use	FUN_0000c500	dVar9	powerOfTen	INFERRED	powerOfTenDouble(exponent): 10^exponent	^\s*dVar10\ =\ dVar10\ \*\ dVar9;$	+1
+use	FUN_0000c500	pcVar4	fractionStart	INFERRED	first character after the '.'	^\s*pcVar4\ =\ param_1\ \+\ 1;$	+1
+use	FUN_0000c500	pcVar4	fractionStart	INFERRED	first character after the '.'	^\s*pcVar8\ =\ pcVar4;$	+1
+use	FUN_0000c500	pcVar4	fractionStart	INFERRED	first character after the '.'	^\s*if\ \(pcVar4\ <=\ pcVar7\)\ \{$	+1
+use	FUN_0000c500	pcVar4	fractionStart	INFERRED	first character after the '.'	^\s*\}\ while\ \(pcVar4\ <=\ pcVar7\);$	+1
+use	FUN_0000c500	pcVar4	integerScan	INFERRED	cursor that finds the end of the integer digits and is then walked back over them	^\s*pcVar4\ =\ param_1;$	+1
+use	FUN_0000c500	pcVar4	integerScan	INFERRED	cursor that finds the end of the integer digits and is then walked back over them	^\s*pcVar4\ =\ pcVar4\ \+\ 1;$	+3
+use	FUN_0000c500	pcVar4	integerScan	INFERRED	cursor that finds the end of the integer digits and is then walked back over them	^\s*while\ \(pcVar4\ =\ pcVar4\ \+\ \-1,\ param_1\ <=\ pcVar4\)\ \{$	+1
+use	FUN_0000c500	pcVar4	exponentStart	INFERRED	first character of the exponent digits (after e/E and the sign)	^\s*pcVar4\ =\ pcVar8\ \+\ 1;$	+1
+use	FUN_0000c500	pcVar4	exponentStart	INFERRED	first character of the exponent digits (after e/E and the sign)	^\s*pcVar4\ =\ pcVar8\ \+\ 2;$	+1
+use	FUN_0000c500	pcVar4	exponentStart	INFERRED	first character of the exponent digits (after e/E and the sign)	^\s*pcVar4\ =\ pcVar8\ \+\ 2;$@2	+1
+use	FUN_0000c500	pcVar4	exponentStart	INFERRED	first character of the exponent digits (after e/E and the sign)	^\s*cVar5\ =\ \*pcVar4;$	+2
+use	FUN_0000c500	pcVar4	exponentStart	INFERRED	first character of the exponent digits (after e/E and the sign)	^\s*while\ \(pcVar8\ =\ pcVar8\ \+\ \-1,\ pcVar4\ <=\ pcVar8\)\ \{$	+1
+local	FUN_00016670	param_5	staleArgR7	INFERRED	incoming register, unused
+local	FUN_00016670	param_6	staleArgR8	INFERRED	incoming register, unused
+local	FUN_00016670	iVar21	engineStateAtRow	INFERRED	copy of ctx engineState used while the bitmap row layout is computed
+local	FUN_00016670	uVar11	staleArgR4Forward	INFERRED	r4 as left by the last ring submit, forwarded as the stale second argument of FUN_0009d3b0
+local	FUN_00016670	uVar15	gaPointSizeValue	INFERRED	GA_POINT_SIZE shadow (ring+0x1ccc) written into the trailing register pair 0x1087
+local	FUN_00016670	fVar4	cornerCoord	INFERRED	x/y of the second or third corner of the zoomed pixel quad
+func	FUN_0000c500	parseDecimalDouble	CONFIRMED	strtod-style parser: optional sign, integer digits, optional .fraction and e/E exponent (scaled with powerOfTenDouble); stores the end pointer through the second argument
+func	FUN_00017b20	gld_postDisplayNotification	CONFIRMED	stores the pid in ctx+0x2a60, registers the distributed-notification observer "ATI Displays"/"com.ati.ati_displays" and posts "ATI GL Driver"/"com.ati.ati_gl_driver" with {pid, gldisplaymask}
+func	FUN_00017ee0	gld_printApplicationPath	CONFIRMED	runs `ps -wwp <pid>`, extracts the executable path from the second output line and prints "  application path | "
+local	FUN_00017310	uVar1	returnCode	CONFIRMED	0 on success, 0x271e for NULL values, 0x271a for an unknown pname
+local	FUN_00017310	puVar4	writeCursor	INFERRED	ring write cursor (ctx+0x1dc), advanced past the packet just reserved
+local	FUN_00017310	puVar6	lastHeader	INFERRED	ctx+0x1d8: header word of the previous packet, patched with the packet length
+local	FUN_00017310	iVar5	dataCursor	INFERRED	ctx+0x1f4: write cursor inside the staging data buffer
+local	FUN_00017310	local_28	outputCount	CONFIRMED	in/out count (2) of kernel selector 18 get_data_buffer
+local	FUN_00017310	local_24	bufferBase	CONFIRMED	first output word of get_data_buffer: start of the new staging buffer
+local	FUN_00017310	local_20	bufferSize	CONFIRMED	second output word of get_data_buffer: size of the new staging buffer
+use	FUN_00017310	uVar3	dataLimit	INFERRED	ctx+0x1f8: end of the staging data buffer	^\s*uVar3\ =\ \*\(uint\ \*\)\(param_1\ \+\ 0x1f8\);$	+2
+use	FUN_00017310	uVar3	dataLimit	INFERRED	new staging buffer end: base + (size & ~3)	^\s*uVar3\ =\ local_24\ \+\ \(local_20\ \&\ 0xfffffffc\);$	+1
+use	FUN_00017310	uVar3	dataLimit	INFERRED	new staging buffer end: base + (size & ~3)	^\s*\*\(uint\ \*\)\(param_1\ \+\ 0x1f8\)\ =\ uVar3;$	+1
+use	FUN_00017310	uVar3	dataLimit	INFERRED	new staging buffer end: base + (size & ~3)	^\s*if\ \(uVar3\ <=\ iVar5\ \+\ 800U\)\ \{$	+1
+use	FUN_00017310	uVar3	refillCount	INFERRED	ctx+0x204 incremented per refill; above 2 the ring is submitted and it restarts at 1	^\s*uVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x204\)\ \+\ 1;$	+3
+use	FUN_00017310	uVar3	refillCount	INFERRED	ctx+0x204 incremented per refill; above 2 the ring is submitted and it restarts at 1	^\s*uVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x204\)\ \+\ 1;$@2	+3
+use	FUN_00017310	uVar3	refillCount	INFERRED	ctx+0x204 incremented per refill; above 2 the ring is submitted and it restarts at 1	^\s*uVar3\ =\ \*\(int\ \*\)\(param_1\ \+\ 0x204\)\ \+\ 1;$@3	+3
+local	FUN_00017750	sVar1	sampleCount	INFERRED	pixelFormat+0x26: samples per pixel of the format, stored at stateBlock[0x17]
+local	FUN_00017750	iVar3	pixelFormatHome	INFERRED	copy of pixelFormat kept across the first FUN_0000a180 call
+local	FUN_00017750	uVar2	depthStencilBitsValue	INFERRED	FUN_0000a0f0 result for the depth word (+0x18) and then the stencil word (+0x1c)
+local	FUN_00017750	uVar4	pixelFormatFlag1	INFERRED	(pixelFormat+0xc >> 1) & 1, stored at stateBlock+0x26; also forwarded as a stale argument
+local	FUN_00017750	local_58	channelBits0	INFERRED	first short written by FUN_0000a180 (channel size table, five shorts)
+local	FUN_00017750	local_56	channelBits1	INFERRED	second short written by FUN_0000a180
+local	FUN_00017750	local_54	channelBits2	INFERRED	third short written by FUN_0000a180
+local	FUN_00017750	local_52	channelBits3	INFERRED	fourth short written by FUN_0000a180
+local	FUN_00017750	local_50	channelBits4	INFERRED	fifth short written by FUN_0000a180
+local	FUN_00017b20	param_1	ctx	CONFIRMED	GLDContext: ctx+0x2a60 receives the process id, +0x2a64 the display mask
+local	FUN_00017b20	iVar1	distributedCenter	CONFIRMED	CFNotificationCenterGetDistributedCenter()
+local	FUN_00017b20	uVar2	pid	CONFIRMED	getpid(), stored in ctx+0x2a60 and sent as the "pid" value
+local	FUN_00017b20	iVar3	displaysNotificationName	CONFIRMED	CFString "ATI Displays": name the observer is added for
+local	FUN_00017b20	iVar4	displaysNotificationObject	CONFIRMED	CFString "com.ati.ati_displays": object the observer is added for
+local	FUN_00017b20	iVar5	pidKey	CONFIRMED	CFString "pid": key of the notification user-info dictionary
+local	FUN_00017b20	iVar6	displayMaskKey	CONFIRMED	CFString "gldisplaymask": key of the user-info dictionary
+local	FUN_00017b20	iVar7	driverNotificationName	CONFIRMED	CFString "ATI GL Driver": name of the notification posted
+local	FUN_00017b20	iVar8	driverNotificationObject	CONFIRMED	CFString "com.ati.ati_gl_driver": object of the notification posted
+local	FUN_00017b20	iVar9	userInfo	CONFIRMED	CFDictionary {pid, gldisplaymask} posted with the notification
+local	FUN_00017e10	iVar2	notificationName	CONFIRMED	CFString "ATI Displays"
+local	FUN_00017e10	iVar3	notificationObject	CONFIRMED	CFString "com.ati.ati_displays"
+local	FUN_00017ee0	uVar2	pid	CONFIRMED	getpid(), formatted into the "ps -wwp %d" command
+local	FUN_00017ee0	iVar3	psPipe	CONFIRMED	popen("ps -wwp <pid>", "r") stream
+local	FUN_00017ee0	puVar6	pathStart	INFERRED	first '/' of the ps line: start of the application path
+local	FUN_00017ee0	puVar1	scanPtr	INFERRED	cursor over the path looking for " /" which ends the path
+local	FUN_00017ee0	iVar7	pathLength	INFERRED	rindex('-') (or the string end) minus pathStart: length of the application path
+local	FUN_00017ee0	iVar8	scanLeft	INFERRED	countdown of the characters left to scan
+local	FUN_00017ee0	auStack_48	commandLine	CONFIRMED	"ps -wwp <pid>\n" formatted by printf_LDBLStub
+local	FUN_00018090	param_1	variantCode	INFERRED	texture-format variant code 7..11
+local	FUN_00018090	param_2	variantFlags	INFERRED	flag word: bit 0x2000 enables the check, bits 0x300 select the level
+use	FUN_0000a820	iVar6	engineObjects	CONFIRMED	ctx+0x18: the bound-object table	^\s*\(\*\(undefined4\ \*\*\)\(iVar6\ \+\ 400\)\ ==\ \(undefined4\ \*\)0x0\)\)\ \|\|$	+2
+use	FUN_0000a820	iVar6	engineObjects	CONFIRMED	ctx+0x18: the bound-object table	^\s*uVar7\ =\ \*\(uint\ \*\)\(\*\*\(int\ \*\*\)\(iVar6\ \+\ 400\)\ \+\ 8\);$	+2
+use	FUN_0000a9f0	iVar2	totalTexels	INFERRED	sum of width*height*depth over the mip chain	^\s*uVar5\ =\ \(uint\)\*\(byte\ \*\)\(iVar3\ \+\ 0x6c\)\ \*\ iVar2;$	+1
+use	FUN_0000c500	pcVar4	integerScan	INFERRED	cursor that finds the end of the integer digits and is then walked back over them	^\s*dVar10\ =\ dVar9\ \*\ \(\(double\)CONCAT44\(0x43300000,\(int\)\*pcVar4\ \-\ 0x30U\ \^\ 0x80000000\)\ \-$	+1
+use	FUN_0000c500	dVar9	exponent	INFERRED	exponent digits accumulated from the least significant digit	^\s*dVar9\ =\ \(double\)\(\(double\ \(\*\)\(\)\)FUN_0000be70\)\(\(int\)dVar9,param_2,param_3,param_4,param_5,param_6,pcVar8\);$	+1	rhs	none
+use	FUN_0000a9f0	uVar1	border	CONFIRMED	border byte at baseLevel+0xaa	^\s*uVar1\ =\ \(uint\)\*\(byte\ \*\)\(iVar3\ \+\ 0xaa\);$	+3
+use	FUN_0000a9f0	uVar1	border	CONFIRMED	border byte at baseLevel+0xaa	^\s*uVar1\ =\ \(uint\)\*\(ushort\ \*\)\(iVar3\ \+\ 0xa8\)\ \-\ uVar1\ \*\ \*\(byte\ \*\)\(iVar3\ \+\ 0x6f\);$	+1	rhs	none
+use	FUN_0000a9f0	uVar1	depth	INFERRED	depth of the current mip level (halved to a minimum of 1)	^\s*uVar1\ =\ \(uint\)\*\(ushort\ \*\)\(iVar3\ \+\ 0xa8\)\ \-\ uVar1\ \*\ \*\(byte\ \*\)\(iVar3\ \+\ 0x6f\);$	+1	lhs	none
+use	FUN_0000a9f0	uVar1	depth	INFERRED	depth of the current mip level (halved to a minimum of 1)	^\s*iVar2\ =\ uVar1\ \*\ uVar5\ \*\ uVar4;$	+1
+use	FUN_0000a9f0	uVar1	depth	INFERRED	depth of the current mip level (halved to a minimum of 1)	^\s*if\ \(\(\(\(uVar5\ ==\ 1\)\ \&\&\ \(uVar4\ ==\ 1\)\)\ \&\&\ \(uVar1\ ==\ 1\)\)\ \|\|\ \(\*\(ushort\ \*\)\(iVar3\ \+\ 0x5c\)\ <\ 0x2602\)\)$	+1
+use	FUN_0000a9f0	uVar1	depth	INFERRED	depth of the current mip level (halved to a minimum of 1)	^\s*uVar1\ =\ uVar1\ >>\ 1;$	+3
+use	FUN_0000a9f0	uVar1	depth	INFERRED	depth of the current mip level (halved to a minimum of 1)	^\s*iVar2\ =\ iVar2\ \+\ uVar1\ \*\ uVar5\ \*\ uVar4;$	+1

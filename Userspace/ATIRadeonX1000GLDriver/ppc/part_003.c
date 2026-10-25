@@ -2546,171 +2546,178 @@ code_r0x0001d6b4:
 /* floatToHalfBits @ 0x1d7c0 (148 bytes) */
 uint floatToHalfBits(double value)
 {
+  uint halfMantissa;
   float floatValue;
   int unbiasedExponent;
-  uint uVar3;
+  uint biasedExponent;
   int halfExponent;
   
   floatValue = (float)value;
-  uVar3 = (uint)GH_F2U(floatValue) >> 0x17 & 0xff;
-  unbiasedExponent = uVar3 - 0x7f;
+  biasedExponent = (uint)GH_F2U(floatValue) >> 0x17 & 0xff;
+  unbiasedExponent = biasedExponent - 0x7f;
   if (unbiasedExponent < 0x11) {
     if (unbiasedExponent < -0xe) {
       if (unbiasedExponent < -0x25) {
         halfExponent = 0;
-        uVar3 = 0;
+        halfMantissa = 0;
       }
       else {
         halfExponent = 0;
-        uVar3 = (((uint)GH_F2U(floatValue) & 0x7fffff | 0x800000) >> (-unbiasedExponent - 0xeU & 0x3f)) >> 0xd;
+        halfMantissa = (((uint)GH_F2U(floatValue) & 0x7fffff | 0x800000) >> (-unbiasedExponent - 0xeU & 0x3f)) >> 0xd;
       }
     }
     else {
-      halfExponent = uVar3 - 0x70;
-      uVar3 = ((uint)GH_F2U(floatValue) & 0x7fffff) >> 0xd;
+      halfExponent = biasedExponent - 0x70;
+      halfMantissa = ((uint)GH_F2U(floatValue) & 0x7fffff) >> 0xd;
     }
   }
   else {
     halfExponent = 0x1f;
-    uVar3 = 0x3ff;
+    halfMantissa = 0x3ff;
   }
-  return ((uint)GH_F2U(floatValue) >> 0x1f) << 0xf | halfExponent << 10 | uVar3;
+  return ((uint)GH_F2U(floatValue) >> 0x1f) << 0xf | halfExponent << 10 | halfMantissa;
 }
 
-/* FUN_0001d880 @ 0x1d880 (704 bytes) */
-int FUN_0001d880(param_1, param_2)
-  int *param_1;
-  int param_2;
+/* gld_validateVertexArrayStreams @ 0x1d880 (704 bytes) */
+int gld_validateVertexArrayStreams(vertexArray, updateMode)
+  int *vertexArray;
+  int updateMode;
 {
-  bool bVar1;
-  bool bVar2;
-  short sVar3;
-  bool bVar4;
-  uint uVar5;
-  int iVar6;
-  uint uVar7;
-  uint uVar8;
-  undefined1 *puVar9;
-  int iVar10;
-  uint uVar11;
-  int iVar12;
-  uint uVar13;
-  uint uVar14;
-  undefined4 uVar15;
-  int iVar16;
-  uint uVar17;
+  int typeSizeOffset;
+  int typeOffset;
+  uint signedFlag;
+  uint typeFlags;
+  uint fetchElementCount;
+  int dirtyState;
+  int arrayDesc;
+  bool isBaseMode;
+  bool nothingPending;
+  short rawTypeWord;
+  bool allDirty;
+  uint attrBit;
+  int attrEntry;
+  uint availableMask;
+  uint attrStride;
+  undefined1 *attrEnabledFlag;
+  int entryOffset;
+  uint typeIndex;
+  int componentsMinusOne;
+  uint attrAddress;
+  uint pendingMask;
+  undefined4 isValid;
+  int dataSize;
+  uint dataBase;
   int loopIndex;
-  int iVar19;
-  int iVar20;
+  int attrIndex;
   
-  bVar1 = param_2 == 0;
-  iVar19 = *param_1;
-  if (bVar1) {
-    uVar17 = *(uint *)(iVar19 + 0x314);
+  isBaseMode = updateMode == 0;
+  arrayDesc = *vertexArray;
+  if (isBaseMode) {
+    dataBase = *(uint *)(arrayDesc + 0x314);
   }
   else {
-    uVar17 = 0;
+    dataBase = 0;
   }
-  iVar16 = *(int *)(iVar19 + 0x318);
-  if (((*(uint *)(param_1[1] + 0x88) & 1) == 0) || (!bVar1)) {
-    bVar4 = false;
+  dataSize = *(int *)(arrayDesc + 0x318);
+  if (((*(uint *)(vertexArray[1] + 0x88) & 1) == 0) || (!isBaseMode)) {
+    allDirty = false;
   }
   else {
-    bVar4 = true;
+    allDirty = true;
   }
-  if (bVar1) {
-    if ((uVar17 == 0) || (uVar15 = 1, iVar16 == 0)) {
-      uVar15 = 0;
+  if (isBaseMode) {
+    if ((dataBase == 0) || (isValid = 1, dataSize == 0)) {
+      isValid = 0;
     }
-    if ((uVar17 & 3) != 0) {
-      uVar15 = 0;
+    if ((dataBase & 3) != 0) {
+      isValid = 0;
     }
   }
   else {
-    uVar15 = 1;
+    isValid = 1;
   }
-  uVar7 = *(uint *)(iVar19 + 0x304) & 0xffff0000;
-  if (!bVar4) {
-    uVar14 = *(uint *)(param_1[1] + 0x88) & 0xff7f0000;
+  availableMask = *(uint *)(arrayDesc + 0x304) & 0xffff0000;
+  if (!allDirty) {
+    pendingMask = *(uint *)(vertexArray[1] + 0x88) & 0xff7f0000;
   }
   else {
-    uVar14 = 0xff7f0000;
+    pendingMask = 0xff7f0000;
   }
-  bVar2 = uVar14 == 0;
-  iVar20 = 0;
+  nothingPending = pendingMask == 0;
+  attrIndex = 0;
   loopIndex = 0;
 LAB_0001dae4:
   do {
-    while (bVar2) {
-      uVar7 = *(uint *)(iVar19 + 0x300);
-      if (!bVar4) {
-        uVar14 = *(uint *)(param_1[1] + 0x84) & 0xffff;
+    while (nothingPending) {
+      availableMask = *(uint *)(arrayDesc + 0x300);
+      if (!allDirty) {
+        pendingMask = *(uint *)(vertexArray[1] + 0x84) & 0xffff;
       }
       else {
-        uVar14 = 0xffff;
+        pendingMask = 0xffff;
       }
       loopIndex = loopIndex + 1;
       if (1 < loopIndex) {
-        iVar19 = param_1[1];
-        *(undefined4 *)(iVar19 + 0x84) = 0;
-        *(uint *)(iVar19 + 0x88) = *(uint *)(iVar19 + 0x88) & 0xfffb;
-        return uVar15;
+        dirtyState = vertexArray[1];
+        *(undefined4 *)(dirtyState + 0x84) = 0;
+        *(uint *)(dirtyState + 0x88) = *(uint *)(dirtyState + 0x88) & 0xfffb;
+        return isValid;
       }
-      bVar2 = uVar14 == 0;
-      iVar20 = 0x10;
+      nothingPending = pendingMask == 0;
+      attrIndex = 0x10;
     }
-    uVar5 = *(uint *)(&DAT_001d91f0 + iVar20 * 4);
-    if ((uVar14 & uVar5) != 0) {
-      uVar14 = uVar14 & ~uVar5;
-      puVar9 = (undefined1 *)((int)param_1 + iVar20 + 8);
-      bVar2 = uVar14 == 0;
-      *(undefined1 *)((int)param_1 + iVar20 + 8) = 1;
-      if ((uVar7 & uVar5) != 0) {
-        iVar10 = iVar20 * 0x18;
-        iVar6 = iVar10 + iVar19;
-        uVar13 = *(uint *)(iVar10 + iVar19);
-        uVar5 = (uint)*(short *)(iVar6 + 10);
-        uVar8 = *(uint *)(iVar6 + 4);
-        iVar12 = uVar5 - 1;
-        uVar11 = (*(ushort *)(iVar6 + 8) & 0xffff7fff) - 0x1400;
-        if (((!bVar1) || (((uVar17 <= uVar13 && (uVar13 < iVar16 + uVar17)) && ((uVar13 & 3) == 0)))
-            ) && ((uVar5 < 5 && (uVar8 < 0x200)))) {
-          if ((uVar8 & 3) == 0) {
-            if ((uVar11 < 0xb) && (iVar6 = uVar11 * 4, *(int *)(&DAT_001d96f4 + iVar6) == 1)) {
-              if (uVar8 != 0) {
-                uVar5 = uVar8 >> 2;
+    attrBit = *(uint *)(&DAT_001d91f0 + attrIndex * 4);
+    if ((pendingMask & attrBit) != 0) {
+      pendingMask = pendingMask & ~attrBit;
+      attrEnabledFlag = (undefined1 *)((int)vertexArray + attrIndex + 8);
+      nothingPending = pendingMask == 0;
+      *(undefined1 *)((int)vertexArray + attrIndex + 8) = 1;
+      if ((availableMask & attrBit) != 0) {
+        entryOffset = attrIndex * 0x18;
+        attrEntry = entryOffset + arrayDesc;
+        attrAddress = *(uint *)(entryOffset + arrayDesc);
+        fetchElementCount = (uint)*(short *)(attrEntry + 10);
+        attrStride = *(uint *)(attrEntry + 4);
+        componentsMinusOne = fetchElementCount - 1;
+        typeIndex = (*(ushort *)(attrEntry + 8) & 0xffff7fff) - 0x1400;
+        if (((!isBaseMode) || (((dataBase <= attrAddress && (attrAddress < dataSize + dataBase)) && ((attrAddress & 3) == 0)))
+            ) && ((fetchElementCount < 5 && (attrStride < 0x200)))) {
+          if ((attrStride & 3) == 0) {
+            if ((typeIndex < 0xb) && (typeOffset = typeIndex * 4, *(int *)(&DAT_001d96f4 + typeOffset) == 1)) {
+              if (attrStride != 0) {
+                fetchElementCount = attrStride >> 2;
               }
-              bVar2 = uVar14 == 0;
-              iVar12 = (iVar6 + iVar12) * 4;
-              param_1[iVar20 + 10] =
-                   *(uint *)(&DAT_001d9644 + iVar12) & 0x7f |
-                   (uVar5 & 0x7f) << 8 | param_1[iVar20 + 10] & 0xffff8080U;
-              param_1[iVar20 + 0x2a] = uVar13 - uVar17;
-              uVar8 = *(uint *)(&DAT_001d9568 + iVar6);
-              uVar5 = *(uint *)(&DAT_001d9594 + iVar12);
-              sVar3 = *(short *)(iVar10 + iVar19 + 8);
-              param_1[iVar20 + 0x6a] =
-                   (*(uint *)(&DAT_001d92a8 + iVar12) & 7) << 9 |
-                   (*(uint *)(&DAT_001d9358 + iVar12) & 7) << 6 |
-                   (*(uint *)(&DAT_001d9408 + iVar12) & 7) << 3 |
-                   *(uint *)(&DAT_001d94b8 + iVar12) & 7 | param_1[iVar20 + 0x6a] & 0xfffff000U;
-              param_1[iVar20 + 0x4a] =
-                   (uint)(int)sVar3 >> 0x10 & 0x8000 |
-                   (uVar8 & 1) << 0xe | uVar5 & 0xf | param_1[iVar20 + 0x4a] & 0xffff3ff0U;
+              nothingPending = pendingMask == 0;
+              typeSizeOffset = (typeOffset + componentsMinusOne) * 4;
+              vertexArray[attrIndex + 10] =
+                   *(uint *)(&DAT_001d9644 + typeSizeOffset) & 0x7f |
+                   (fetchElementCount & 0x7f) << 8 | vertexArray[attrIndex + 10] & 0xffff8080U;
+              vertexArray[attrIndex + 0x2a] = attrAddress - dataBase;
+              signedFlag = *(uint *)(&DAT_001d9568 + typeOffset);
+              typeFlags = *(uint *)(&DAT_001d9594 + typeSizeOffset);
+              rawTypeWord = *(short *)(entryOffset + arrayDesc + 8);
+              vertexArray[attrIndex + 0x6a] =
+                   (*(uint *)(&DAT_001d92a8 + typeSizeOffset) & 7) << 9 |
+                   (*(uint *)(&DAT_001d9358 + typeSizeOffset) & 7) << 6 |
+                   (*(uint *)(&DAT_001d9408 + typeSizeOffset) & 7) << 3 |
+                   *(uint *)(&DAT_001d94b8 + typeSizeOffset) & 7 | vertexArray[attrIndex + 0x6a] & 0xfffff000U;
+              vertexArray[attrIndex + 0x4a] =
+                   (uint)(int)rawTypeWord >> 0x10 & 0x8000 |
+                   (signedFlag & 1) << 0xe | typeFlags & 0xf | vertexArray[attrIndex + 0x4a] & 0xffff3ff0U;
               goto LAB_0001dae0;
             }
-            bVar2 = uVar14 == 0;
-            *puVar9 = 0;
+            nothingPending = pendingMask == 0;
+            *attrEnabledFlag = 0;
             goto LAB_0001dae4;
           }
         }
-        bVar2 = uVar14 == 0;
-        *puVar9 = 0;
+        nothingPending = pendingMask == 0;
+        *attrEnabledFlag = 0;
         goto LAB_0001dae4;
       }
     }
 LAB_0001dae0:
-    iVar20 = iVar20 + 1;
+    attrIndex = attrIndex + 1;
   } while( true );
 }
 
@@ -2723,161 +2730,166 @@ int gldComputeVertexChunking(ctx, count, chunkVerts, chunkDwords, chunkCount, ta
   uint *chunkCount;
   int *tailMode;
 {
-  uint uVar1;
-  uint uVar2;
+  uint tailBytes;
+  uint maxChunkVerts;
+  uint chunkSize;
   
-  uVar1 = 0x7fe0;
+  maxChunkVerts = 0x7fe0;
   if (*(uint *)(ctx + 0x29d8) < 0x7ffd) {
-    uVar1 = *(uint *)(ctx + 0x29d8) & 0xffffffe0;
+    maxChunkVerts = *(uint *)(ctx + 0x29d8) & 0xffffffe0;
   }
   *chunkVerts = 0;
   *chunkCount = 0;
   *chunkDwords = 0;
   *tailMode = 0;
-  if (count < uVar1) {
+  if (count < maxChunkVerts) {
     *chunkVerts = count;
     if ((count & 0x1f) != 0) {
       *chunkVerts = count + 0x1f & 0xffffffe0;
     }
-    uVar1 = 0;
+    tailBytes = 0;
     *chunkCount = 1;
-    uVar2 = *chunkVerts;
+    chunkSize = *chunkVerts;
   }
   else {
-    *chunkVerts = uVar1;
-    *chunkCount = count / uVar1;
-    uVar2 = *chunkVerts;
-    uVar1 = (count - (count / uVar2) * uVar2) + 3 & 0xfffffffc;
+    *chunkVerts = maxChunkVerts;
+    *chunkCount = count / maxChunkVerts;
+    chunkSize = *chunkVerts;
+    tailBytes = (count - (count / chunkSize) * chunkSize) + 3 & 0xfffffffc;
   }
-  *chunkDwords = uVar2 >> 2;
+  *chunkDwords = chunkSize >> 2;
   if (0x1fff < *chunkCount) {
     return 0;
   }
-  *tailMode = 2 - (uint)(uVar1 == 0);
+  *tailMode = 2 - (uint)(tailBytes == 0);
   return 1;
 }
 
-/* FUN_0001dc10 @ 0x1dc10 (976 bytes) */
-int FUN_0001dc10(ctx, vertexArray)
+/* gld_prepareVertexArrayBacking @ 0x1dc10 (976 bytes) */
+int gld_prepareVertexArrayBacking(ctx, vertexArray)
   undefined4 ctx;
   int *vertexArray;
 {
+  int chunkingResult;
+  int validateResult;
+  uint tailBytes;
+  uint lineWordOffset;
+  uint vertexCount;
   int gld_setVertexArrayAgpRefBackingResult;
   int gld_setVertexArrayNewTextureBackingResult;
-  uint uVar1;
-  undefined4 *puVar2;
-  uint uVar3;
-  uint uVar4;
-  int iVar5;
-  int *piVar6;
-  int iVar7;
-  uint local_38;
-  int local_34;
-  uint local_30;
-  uint local_2c [3];
+  uint dataAddress;
+  undefined4 *packetEnd;
+  uint dirtyBits;
+  int dirtyState;
+  int *commandBuffer;
+  int arrayDesc;
+  uint tailMode;
+  int chunkCount;
+  uint chunkDwords;
+  uint chunkVerts [3];
   
-  iVar5 = vertexArray[1];
-  iVar7 = *vertexArray;
-  if (*(int *)(iVar5 + 0x84) != 0 || (*(uint *)(iVar5 + 0x88) & 0xfffffff5) != 0) {
-    iVar5 = ((int (*)())FUN_0001d880)(vertexArray,0);
-    if (iVar5 == 0) {
+  dirtyState = vertexArray[1];
+  arrayDesc = *vertexArray;
+  if (*(int *)(dirtyState + 0x84) != 0 || (*(uint *)(dirtyState + 0x88) & 0xfffffff5) != 0) {
+    validateResult = ((int (*)())gld_validateVertexArrayStreams)(vertexArray,0);
+    if (validateResult == 0) {
       return 0;
     }
-    iVar5 = vertexArray[1];
+    dirtyState = vertexArray[1];
   }
-  uVar4 = *(uint *)(iVar5 + 0x88);
-  if (*(int *)(iVar5 + 0x84) == 0 && uVar4 == 0) {
+  dirtyBits = *(uint *)(dirtyState + 0x88);
+  if (*(int *)(dirtyState + 0x84) == 0 && dirtyBits == 0) {
     return 1;
   }
-  if ((vertexArray[0x8a] != 0) && (((uVar4 ^ 1) & 1) != 0)) {
-    if (*(short *)(iVar7 + 0x312) == -0x7a42) {
+  if ((vertexArray[0x8a] != 0) && (((dirtyBits ^ 1) & 1) != 0)) {
+    if (*(short *)(arrayDesc + 0x312) == -0x7a42) {
       if (vertexArray[0x8c] == 7) {
-        if ((uVar4 & 2) != 0) {
+        if ((dirtyBits & 2) != 0) {
           *(undefined1 *)(vertexArray[0x8a] + 0x14) = 1;
           *(ushort *)(vertexArray[0x8a] + 0x1c) = *(ushort *)(vertexArray[0x8a] + 0x1c) | 1;
           *(ushort *)(vertexArray[0x8a] + 0x28) = *(ushort *)(vertexArray[0x8a] + 0x28) & 0xfffe;
-          iVar5 = vertexArray[1];
+          dirtyState = vertexArray[1];
         }
         goto LAB_0001dcf8;
       }
     }
     else if (vertexArray[0x8c] == 6) {
 LAB_0001dcf8:
-      *(undefined4 *)(iVar5 + 0x84) = 0;
-      *(undefined4 *)(iVar5 + 0x88) = 0;
+      *(undefined4 *)(dirtyState + 0x84) = 0;
+      *(undefined4 *)(dirtyState + 0x88) = 0;
       return 1;
     }
   }
-  local_2c[0] = 0;
-  local_38 = 0;
-  local_34 = 0;
-  local_30 = 0;
-  iVar5 = ((int (*)())gldComputeVertexChunking)(ctx,*(undefined4 *)(iVar7 + 0x318),local_2c,&local_30,&local_34,&local_38
+  chunkVerts[0] = 0;
+  tailMode = 0;
+  chunkCount = 0;
+  chunkDwords = 0;
+  chunkingResult = ((int (*)())gldComputeVertexChunking)(ctx,*(undefined4 *)(arrayDesc + 0x318),chunkVerts,&chunkDwords,&chunkCount,&tailMode
                       );
-  if (iVar5 != 0) {
-    if (local_38 < 2) {
-      uVar3 = *(uint *)(iVar7 + 0x318);
-      uVar4 = 0;
+  if (chunkingResult != 0) {
+    if (tailMode < 2) {
+      vertexCount = *(uint *)(arrayDesc + 0x318);
+      tailBytes = 0;
     }
     else {
-      uVar3 = *(uint *)(iVar7 + 0x318);
-      uVar4 = (uVar3 - (uVar3 / local_2c[0]) * local_2c[0]) + 3 & 0xfffffffc;
+      vertexCount = *(uint *)(arrayDesc + 0x318);
+      tailBytes = (vertexCount - (vertexCount / chunkVerts[0]) * chunkVerts[0]) + 3 & 0xfffffffc;
     }
-    if ((*(short *)(iVar7 + 0x312) == -0x7a42) && (local_38 < 0x4f)) {
-      gld_setVertexArrayNewTextureBackingResult = gld_setVertexArrayNewTextureBacking(ctx,vertexArray,(local_38 * 0x12 + 0xc) * 4,
-                           uVar4 + local_2c[0] * local_34,*(undefined4 *)(iVar7 + 0x314),uVar3);
+    if ((*(short *)(arrayDesc + 0x312) == -0x7a42) && (tailMode < 0x4f)) {
+      gld_setVertexArrayNewTextureBackingResult = gld_setVertexArrayNewTextureBacking(ctx,vertexArray,(tailMode * 0x12 + 0xc) * 4,
+                           tailBytes + chunkVerts[0] * chunkCount,*(undefined4 *)(arrayDesc + 0x314),vertexCount);
       if (gld_setVertexArrayNewTextureBackingResult != 0) goto LAB_0001ddc0;
-      uVar3 = *(uint *)(iVar7 + 0x318);
+      vertexCount = *(uint *)(arrayDesc + 0x318);
     }
-    gld_setVertexArrayAgpRefBackingResult = gld_setVertexArrayAgpRefBacking(ctx,vertexArray,*(undefined4 *)(iVar7 + 0x314),
-                         *(undefined4 *)(iVar7 + 0x314),uVar3);
+    gld_setVertexArrayAgpRefBackingResult = gld_setVertexArrayAgpRefBacking(ctx,vertexArray,*(undefined4 *)(arrayDesc + 0x314),
+                         *(undefined4 *)(arrayDesc + 0x314),vertexCount);
     if (gld_setVertexArrayAgpRefBackingResult != 0) {
 LAB_0001ddc0:
       if (vertexArray[0x8c] == 7) {
-        uVar3 = *(uint *)(iVar7 + 0x314);
+        lineWordOffset = *(uint *)(arrayDesc + 0x314);
         *(undefined1 *)(vertexArray[0x8a] + 0x15) = 0;
-        uVar3 = (uVar3 & 0xfff) - (uVar3 & 0xfe0) >> 2;
+        lineWordOffset = (lineWordOffset & 0xfff) - (lineWordOffset & 0xfe0) >> 2;
         *(undefined1 *)(vertexArray[0x8a] + 0x17) = 0;
         *(undefined1 *)(vertexArray[0x8a] + 0x34) = 1;
         *(undefined1 *)(vertexArray[0x8a] + 0x35) = 1;
-        piVar6 = (int *)vertexArray[0x8b];
-        piVar6[0x280] = (int)((unsigned char *)0x00001393U);
-        piVar6[8] = piVar6[8] & 0xafffffffU | 0xa0000000;
-        piVar6[0x281] = 10;
-        piVar6[0x287] = 2;
-        piVar6[0x285] = 2;
-        piVar6[0x283] = 0x20000;
-        piVar6[0x284] = 0x575;
-        piVar6[0x282] = 0x5c8;
-        piVar6[0x286] = 0x574;
-        *(short *)(piVar6 + 0x10) = (short)((int)(piVar6 + 0x288) - (int)(piVar6 + 0x280) >> 2);
-        uVar1 = *(uint *)(iVar7 + 0x314);
-        piVar6[0x12] = 0;
-        piVar6[0x11] = uVar1 & 0xfe0;
-        piVar6[0x13] = local_2c[0] * local_34;
-        piVar6[0x14] = local_2c[0] * local_34;
-        piVar6[0x15] = 0;
-        *(short *)((int)piVar6 + 0x42) = (short)local_38;
-        piVar6[0x17] = 0;
-        puVar2 = (undefined4 *)
-                 FUN_00030a60(piVar6 + 0x288,6,local_2c[0],local_2c[0],0,uVar3,
-                              local_34 << 0x10 | local_30);
-        if (uVar4 != 0) {
-          puVar2 = (undefined4 *)
-                   FUN_00030a60(puVar2,6,local_2c[0],local_2c[0],0,uVar3,uVar4 >> 2 | 0x10000);
+        commandBuffer = (int *)vertexArray[0x8b];
+        commandBuffer[0x280] = (int)((unsigned char *)0x00001393U);
+        commandBuffer[8] = commandBuffer[8] & 0xafffffffU | 0xa0000000;
+        commandBuffer[0x281] = 10;
+        commandBuffer[0x287] = 2;
+        commandBuffer[0x285] = 2;
+        commandBuffer[0x283] = 0x20000;
+        commandBuffer[0x284] = 0x575;
+        commandBuffer[0x282] = 0x5c8;
+        commandBuffer[0x286] = 0x574;
+        *(short *)(commandBuffer + 0x10) = (short)((int)(commandBuffer + 0x288) - (int)(commandBuffer + 0x280) >> 2);
+        dataAddress = *(uint *)(arrayDesc + 0x314);
+        commandBuffer[0x12] = 0;
+        commandBuffer[0x11] = dataAddress & 0xfe0;
+        commandBuffer[0x13] = chunkVerts[0] * chunkCount;
+        commandBuffer[0x14] = chunkVerts[0] * chunkCount;
+        commandBuffer[0x15] = 0;
+        *(short *)((int)commandBuffer + 0x42) = (short)tailMode;
+        commandBuffer[0x17] = 0;
+        packetEnd = (undefined4 *)
+                 FUN_00030a60(commandBuffer + 0x288,6,chunkVerts[0],chunkVerts[0],0,lineWordOffset,
+                              chunkCount << 0x10 | chunkDwords);
+        if (tailBytes != 0) {
+          packetEnd = (undefined4 *)
+                   FUN_00030a60(packetEnd,6,chunkVerts[0],chunkVerts[0],0,lineWordOffset,tailBytes >> 2 | 0x10000);
         }
         *(ushort *)(vertexArray[0x8a] + 0x1c) = *(ushort *)(vertexArray[0x8a] + 0x1c) | 1;
         *(ushort *)(vertexArray[0x8a] + 0x28) = *(ushort *)(vertexArray[0x8a] + 0x28) & 0xfffe;
-        *puVar2 = 0xd0b;
-        puVar2[2] = 0x5c8;
-        puVar2[1] = 5;
-        puVar2[3] = 0x10000;
-        *piVar6 = (int)puVar2 + (0x10 - (int)(piVar6 + 0x280)) >> 2;
+        *packetEnd = 0xd0b;
+        packetEnd[2] = 0x5c8;
+        packetEnd[1] = 5;
+        packetEnd[3] = 0x10000;
+        *commandBuffer = (int)packetEnd + (0x10 - (int)(commandBuffer + 0x280)) >> 2;
       }
       *(undefined1 *)(vertexArray[0x8a] + 0x14) = 1;
-      iVar5 = vertexArray[1];
-      *(undefined4 *)(iVar5 + 0x84) = 0;
-      *(undefined4 *)(iVar5 + 0x88) = 0;
+      dirtyState = vertexArray[1];
+      *(undefined4 *)(dirtyState + 0x84) = 0;
+      *(undefined4 *)(dirtyState + 0x88) = 0;
       return 1;
     }
   }
@@ -2974,240 +2986,240 @@ int returnZero_1e270()
   return 0;
 }
 
-/* FUN_0001e280 @ 0x1e280 (1184 bytes) */
-int FUN_0001e280(ctx, param_2, param_3)
+/* gld_prepareBufferBacking @ 0x1e280 (1184 bytes) */
+int gld_prepareBufferBacking(ctx, bufferObject, mode)
   int ctx;
-  undefined4 *param_2;
-  int param_3;
+  undefined4 *bufferObject;
+  int mode;
 {
   int gld_setBufferAgpRefBackingResult;
   int gld_setBufferNewTextureBackingResult;
-  bool bVar1;
+  bool isDefaultMode;
   undefined4 uVar2;
   uint uVar3;
   undefined4 staleArgR6;
   int iVar4;
   uint uVar5;
-  uint *puVar6;
+  uint *dirtyState;
   uint uVar7;
   int iVar8;
-  undefined4 *staleArgR10;
-  undefined4 *puVar9;
-  uint uVar10;
-  int *piVar11;
-  uint *puVar12;
-  uint local_48;
-  int local_44;
-  uint local_40;
-  uint local_3c [6];
+  undefined4 *packetEnd;
+  undefined4 *packetCursor;
+  uint tailBytes;
+  int *commandBuffer;
+  uint *bufferDesc;
+  uint tailMode;
+  int chunkCount;
+  uint chunkDwords;
+  uint chunkVerts [6];
   
-  bVar1 = param_3 == 0;
-  if (bVar1) {
-    *(undefined1 *)(param_2 + 3) = 1;
+  isDefaultMode = mode == 0;
+  if (isDefaultMode) {
+    *(undefined1 *)(bufferObject + 3) = 1;
   }
-  puVar12 = (uint *)*param_2;
-  if (*puVar12 == 0) {
+  bufferDesc = (uint *)*bufferObject;
+  if (*bufferDesc == 0) {
     return 0;
   }
-  if (((int *)param_2[2] == (int *)0x0) || (iVar4 = *(int *)param_2[2], iVar4 == 0)) {
+  if (((int *)bufferObject[2] == (int *)0x0) || (iVar4 = *(int *)bufferObject[2], iVar4 == 0)) {
 LAB_0001e3b0:
-    local_3c[0] = 0;
-    local_48 = 0;
-    local_44 = 0;
-    local_40 = 0;
-    iVar4 = ((int (*)())gldComputeVertexChunking)(ctx,puVar12[1],local_3c,&local_40,&local_44,&local_48);
+    chunkVerts[0] = 0;
+    tailMode = 0;
+    chunkCount = 0;
+    chunkDwords = 0;
+    iVar4 = ((int (*)())gldComputeVertexChunking)(ctx,bufferDesc[1],chunkVerts,&chunkDwords,&chunkCount,&tailMode);
     if (iVar4 == 0) {
       return 0;
     }
-    if (local_48 < 2) {
-      uVar7 = puVar12[1];
-      uVar10 = 0;
+    if (tailMode < 2) {
+      uVar7 = bufferDesc[1];
+      tailBytes = 0;
     }
     else {
-      uVar7 = puVar12[1];
-      uVar10 = (uVar7 - (uVar7 / local_3c[0]) * local_3c[0]) + 3 & 0xfffffffc;
+      uVar7 = bufferDesc[1];
+      tailBytes = (uVar7 - (uVar7 / chunkVerts[0]) * chunkVerts[0]) + 3 & 0xfffffffc;
     }
     uVar5 = uVar7;
-    if ((*(short *)(puVar12 + 3) == -0x771c) && (local_48 < 0x4f)) {
-      if (bVar1) {
+    if ((*(short *)(bufferDesc + 3) == -0x771c) && (tailMode < 0x4f)) {
+      if (isDefaultMode) {
         iVar4 = 0;
       }
       else {
         iVar4 = 0x49;
       }
-      uVar5 = *puVar12;
-      uVar3 = uVar10 + local_3c[0] * local_44;
-      gld_setBufferNewTextureBackingResult = gld_setBufferNewTextureBacking(ctx,param_2,iVar4 + (local_48 * 0x12 + 0xc) * 4,uVar3,uVar5,uVar7);
+      uVar5 = *bufferDesc;
+      uVar3 = tailBytes + chunkVerts[0] * chunkCount;
+      gld_setBufferNewTextureBackingResult = gld_setBufferNewTextureBacking(ctx,bufferObject,iVar4 + (tailMode * 0x12 + 0xc) * 4,uVar3,uVar5,uVar7);
       if (gld_setBufferNewTextureBackingResult == 0) {
-        uVar5 = puVar12[1];
+        uVar5 = bufferDesc[1];
         goto LAB_0001e440;
       }
     }
     else {
 LAB_0001e440:
-      uVar3 = *puVar12;
-      gld_setBufferAgpRefBackingResult = gld_setBufferAgpRefBacking(ctx,param_2,uVar3,uVar3,uVar5);
+      uVar3 = *bufferDesc;
+      gld_setBufferAgpRefBackingResult = gld_setBufferAgpRefBacking(ctx,bufferObject,uVar3,uVar3,uVar5);
       if (gld_setBufferAgpRefBackingResult == 0) {
         return 0;
       }
     }
-    if (param_2[4] == 7) {
-      uVar7 = *puVar12;
+    if (bufferObject[4] == 7) {
+      uVar7 = *bufferDesc;
       uVar5 = 0;
-      *(undefined1 *)(*(int *)param_2[2] + 0x15) = 0;
+      *(undefined1 *)(*(int *)bufferObject[2] + 0x15) = 0;
       uVar7 = (uVar7 & 0xfff) - (uVar7 & 0xfe0) >> 2;
-      *(undefined1 *)(*(int *)param_2[2] + 0x17) = 0;
-      *(undefined1 *)(*(int *)param_2[2] + 0x34) = 1;
-      *(undefined1 *)(*(int *)param_2[2] + 0x35) = 1;
-      piVar11 = *(int **)(param_2[2] + 4);
-      piVar11[0x280] = (int)((unsigned char *)0x00001393U);
-      piVar11[8] = piVar11[8] & 0xbfffffffU | 0xa0000000;
-      piVar11[0x281] = 10;
-      piVar11[0x283] = 0x20000;
-      piVar11[0x287] = 2;
-      piVar11[0x285] = 2;
-      piVar11[0x284] = 0x575;
-      piVar11[0x282] = 0x5c8;
-      piVar11[0x286] = 0x574;
-      *(short *)(piVar11 + 0x10) = (short)((int)(piVar11 + 0x288) - (int)(piVar11 + 0x280) >> 2);
-      uVar3 = *puVar12;
-      piVar11[0x12] = 0;
-      piVar11[0x11] = uVar3 & 0xfe0;
-      piVar11[0x13] = local_3c[0] * local_44;
-      piVar11[0x14] = local_3c[0] * local_44;
-      piVar11[0x17] = 0;
-      piVar11[0x15] = 0;
-      *(short *)((int)piVar11 + 0x42) = (short)local_48;
-      uVar3 = local_3c[0];
-      staleArgR10 = (undefined4 *)
-               FUN_00030a60(piVar11 + 0x288,6,local_3c[0],local_3c[0],0,uVar7,
-                            local_44 << 0x10 | local_40);
-      if (uVar10 != 0) {
+      *(undefined1 *)(*(int *)bufferObject[2] + 0x17) = 0;
+      *(undefined1 *)(*(int *)bufferObject[2] + 0x34) = 1;
+      *(undefined1 *)(*(int *)bufferObject[2] + 0x35) = 1;
+      commandBuffer = *(int **)(bufferObject[2] + 4);
+      commandBuffer[0x280] = (int)((unsigned char *)0x00001393U);
+      commandBuffer[8] = commandBuffer[8] & 0xbfffffffU | 0xa0000000;
+      commandBuffer[0x281] = 10;
+      commandBuffer[0x283] = 0x20000;
+      commandBuffer[0x287] = 2;
+      commandBuffer[0x285] = 2;
+      commandBuffer[0x284] = 0x575;
+      commandBuffer[0x282] = 0x5c8;
+      commandBuffer[0x286] = 0x574;
+      *(short *)(commandBuffer + 0x10) = (short)((int)(commandBuffer + 0x288) - (int)(commandBuffer + 0x280) >> 2);
+      uVar3 = *bufferDesc;
+      commandBuffer[0x12] = 0;
+      commandBuffer[0x11] = uVar3 & 0xfe0;
+      commandBuffer[0x13] = chunkVerts[0] * chunkCount;
+      commandBuffer[0x14] = chunkVerts[0] * chunkCount;
+      commandBuffer[0x17] = 0;
+      commandBuffer[0x15] = 0;
+      *(short *)((int)commandBuffer + 0x42) = (short)tailMode;
+      uVar3 = chunkVerts[0];
+      packetEnd = (undefined4 *)
+               FUN_00030a60(commandBuffer + 0x288,6,chunkVerts[0],chunkVerts[0],0,uVar7,
+                            chunkCount << 0x10 | chunkDwords);
+      if (tailBytes != 0) {
         uVar5 = 0;
-        uVar3 = local_3c[0];
-        staleArgR10 = (undefined4 *)
-                 FUN_00030a60(staleArgR10,6,local_3c[0],local_3c[0],0,uVar7,uVar10 >> 2 | 0x10000);
+        uVar3 = chunkVerts[0];
+        packetEnd = (undefined4 *)
+                 FUN_00030a60(packetEnd,6,chunkVerts[0],chunkVerts[0],0,uVar7,tailBytes >> 2 | 0x10000);
       }
-      puVar9 = staleArgR10 + 4;
-      *(ushort *)(*(int *)param_2[2] + 0x1c) = *(ushort *)(*(int *)param_2[2] + 0x1c) | 1;
-      *(ushort *)(*(int *)param_2[2] + 0x28) = *(ushort *)(*(int *)param_2[2] + 0x28) & 0xfffe;
-      *staleArgR10 = 0xd0b;
-      staleArgR10[2] = 0x5c8;
-      staleArgR10[1] = 5;
-      staleArgR10[3] = 0x10000;
-      if (!bVar1) {
+      packetCursor = packetEnd + 4;
+      *(ushort *)(*(int *)bufferObject[2] + 0x1c) = *(ushort *)(*(int *)bufferObject[2] + 0x1c) | 1;
+      *(ushort *)(*(int *)bufferObject[2] + 0x28) = *(ushort *)(*(int *)bufferObject[2] + 0x28) & 0xfffe;
+      *packetEnd = 0xd0b;
+      packetEnd[2] = 0x5c8;
+      packetEnd[1] = 5;
+      packetEnd[3] = 0x10000;
+      if (!isDefaultMode) {
         uVar2 = *(undefined4 *)(ctx + 0x1d74);
-        puVar9 = staleArgR10 + 5;
-        staleArgR10[4] = 0x4790b1;
+        packetCursor = packetEnd + 5;
+        packetEnd[4] = 0x4790b1;
         iVar4 = 0x48;
         do {
-          *puVar9 = uVar2;
-          puVar9 = puVar9 + 1;
+          *packetCursor = uVar2;
+          packetCursor = packetCursor + 1;
           iVar4 = iVar4 + -1;
         } while (iVar4 != 0);
       }
-      *piVar11 = (int)puVar9 - (int)(piVar11 + 0x280) >> 2;
+      *commandBuffer = (int)packetCursor - (int)(commandBuffer + 0x280) >> 2;
     }
-    iVar4 = *(int *)param_2[2];
+    iVar4 = *(int *)bufferObject[2];
     *(undefined1 *)(iVar4 + 0x14) = 1;
-    puVar6 = (uint *)param_2[1];
-    if (((*puVar6 & 2) == 0) || ((*(uint *)(ctx + 0x24) & 2) == 0)) goto LAB_0001e6e0;
-    gldFlushDataCacheRange(ctx,*puVar12,puVar12[2],uVar3,uVar5,puVar6,iVar4,staleArgR10);
+    dirtyState = (uint *)bufferObject[1];
+    if (((*dirtyState & 2) == 0) || ((*(uint *)(ctx + 0x24) & 2) == 0)) goto LAB_0001e6e0;
+    gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2],uVar3,uVar5,dirtyState,iVar4,packetEnd);
   }
   else {
-    puVar6 = (uint *)param_2[1];
-    uVar10 = *puVar6;
-    staleArgR10 = (undefined4 *)(uVar10 ^ 1);
-    if (((uint)staleArgR10 & 1) == 0) goto LAB_0001e3b0;
-    if (*(short *)(puVar12 + 3) != -0x771c) {
-      if (param_2[4] == 6) {
-        if (((uVar10 & 2) != 0) && ((*(uint *)(ctx + 0x24) & 2) != 0)) {
-          gldFlushDataCacheRange(ctx,*puVar12,puVar12[2],staleArgR6,iVar4,puVar6,0,uVar10 & 2);
-          puVar6 = (uint *)param_2[1];
+    dirtyState = (uint *)bufferObject[1];
+    tailBytes = *dirtyState;
+    packetEnd = (undefined4 *)(tailBytes ^ 1);
+    if (((uint)packetEnd & 1) == 0) goto LAB_0001e3b0;
+    if (*(short *)(bufferDesc + 3) != -0x771c) {
+      if (bufferObject[4] == 6) {
+        if (((tailBytes & 2) != 0) && ((*(uint *)(ctx + 0x24) & 2) != 0)) {
+          gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2],staleArgR6,iVar4,dirtyState,0,tailBytes & 2);
+          dirtyState = (uint *)bufferObject[1];
         }
         goto LAB_0001e6e0;
       }
       goto LAB_0001e3b0;
     }
-    if (param_2[4] != 7) goto LAB_0001e3b0;
-    if ((uVar10 & 2) == 0) goto LAB_0001e6e0;
+    if (bufferObject[4] != 7) goto LAB_0001e3b0;
+    if ((tailBytes & 2) == 0) goto LAB_0001e6e0;
     *(undefined1 *)(iVar4 + 0x14) = 1;
-    *(ushort *)(*(int *)param_2[2] + 0x1c) = *(ushort *)(*(int *)param_2[2] + 0x1c) | 1;
-    iVar8 = *(int *)param_2[2];
+    *(ushort *)(*(int *)bufferObject[2] + 0x1c) = *(ushort *)(*(int *)bufferObject[2] + 0x1c) | 1;
+    iVar8 = *(int *)bufferObject[2];
     *(ushort *)(iVar8 + 0x28) = *(ushort *)(iVar8 + 0x28) & 0xfffe;
     if ((*(uint *)(ctx + 0x24) & 2) != 0) {
-      gldFlushDataCacheRange(ctx,*puVar12,puVar12[2],staleArgR6,iVar4,puVar6,iVar8,uVar10 & 2);
-      puVar6 = (uint *)param_2[1];
+      gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2],staleArgR6,iVar4,dirtyState,iVar8,tailBytes & 2);
+      dirtyState = (uint *)bufferObject[1];
       goto LAB_0001e6e0;
     }
   }
-  puVar6 = (uint *)param_2[1];
+  dirtyState = (uint *)bufferObject[1];
 LAB_0001e6e0:
-  *puVar6 = 0;
+  *dirtyState = 0;
   return 1;
 }
 
-/* FUN_0001e730 @ 0x1e730 (332 bytes) */
-int FUN_0001e730(ctx, vertexArray)
+/* gld_prepareVertexArrayBuffers @ 0x1e730 (332 bytes) */
+int gld_prepareVertexArrayBuffers(ctx, vertexArray)
   undefined4 ctx;
   int *vertexArray;
 {
   int loopIndex;
-  bool bVar1;
-  undefined4 uVar2;
-  int iVar3;
+  bool nonePending;
+  undefined4 isReady;
+  int validateResult;
   int iVar4;
-  uint uVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
-  uint uVar9;
+  uint pendingMask;
+  int dirtyState;
+  int arrayDesc;
+  int attrIndex;
+  uint attrBit;
   
-  iVar7 = *vertexArray;
-  iVar6 = vertexArray[1];
-  uVar5 = *(uint *)(iVar7 + 0x304);
-  if ((*(uint *)(iVar7 + 0x300) & ~*(uint *)(iVar7 + 0x308)) == 0 &&
-      (uVar5 & ~*(uint *)(iVar7 + 0x30c)) == 0) {
-    if (*(int *)(iVar6 + 0x84) != 0 || (*(uint *)(iVar6 + 0x88) & 0xfffffff5) != 0) {
-      iVar3 = ((int (*)())FUN_0001d880)(vertexArray,1);
-      if (iVar3 == 0) goto LAB_0001e86c;
-      uVar5 = *(uint *)(iVar7 + 0x304);
+  arrayDesc = *vertexArray;
+  dirtyState = vertexArray[1];
+  pendingMask = *(uint *)(arrayDesc + 0x304);
+  if ((*(uint *)(arrayDesc + 0x300) & ~*(uint *)(arrayDesc + 0x308)) == 0 &&
+      (pendingMask & ~*(uint *)(arrayDesc + 0x30c)) == 0) {
+    if (*(int *)(dirtyState + 0x84) != 0 || (*(uint *)(dirtyState + 0x88) & 0xfffffff5) != 0) {
+      validateResult = ((int (*)())gld_validateVertexArrayStreams)(vertexArray,1);
+      if (validateResult == 0) goto LAB_0001e86c;
+      pendingMask = *(uint *)(arrayDesc + 0x304);
     }
-    uVar5 = uVar5 & 0xffff0000;
-    iVar8 = 0;
+    pendingMask = pendingMask & 0xffff0000;
+    attrIndex = 0;
     loopIndex = 0;
-    bVar1 = uVar5 == 0;
+    nonePending = pendingMask == 0;
     while( true ) {
-      while (!bVar1) {
-        uVar9 = *(uint *)(&DAT_001d91f0 + iVar8 * 4);
-        if ((uVar5 & uVar9) != 0) {
-          iVar4 = *(int *)(iVar8 * 4 + iVar6);
-          if ((iVar4 == 0) || (iVar4 = ((int (*)())FUN_0001e280)(ctx,iVar4,0), iVar4 == 0))
+      while (!nonePending) {
+        attrBit = *(uint *)(&DAT_001d91f0 + attrIndex * 4);
+        if ((pendingMask & attrBit) != 0) {
+          iVar4 = *(int *)(attrIndex * 4 + dirtyState);
+          if ((iVar4 == 0) || (iVar4 = ((int (*)())gld_prepareBufferBacking)(ctx,iVar4,0), iVar4 == 0))
           goto LAB_0001e86c;
-          uVar5 = uVar5 & ~uVar9;
-          bVar1 = uVar5 == 0;
+          pendingMask = pendingMask & ~attrBit;
+          nonePending = pendingMask == 0;
         }
-        iVar8 = iVar8 + 1;
+        attrIndex = attrIndex + 1;
       }
       loopIndex = loopIndex + 1;
-      uVar5 = *(uint *)(iVar7 + 0x300) & 0xffff;
+      pendingMask = *(uint *)(arrayDesc + 0x300) & 0xffff;
       if (1 < loopIndex) break;
-      bVar1 = uVar5 == 0;
-      iVar8 = 0x10;
+      nonePending = pendingMask == 0;
+      attrIndex = 0x10;
     }
-    if (*(int *)(iVar6 + 0x80) != 0) {
-      ((int (*)())FUN_0001e280)(ctx,*(int *)(iVar6 + 0x80),1);
+    if (*(int *)(dirtyState + 0x80) != 0) {
+      ((int (*)())gld_prepareBufferBacking)(ctx,*(int *)(dirtyState + 0x80),1);
     }
-    iVar6 = vertexArray[1];
-    uVar2 = 1;
-    *(undefined4 *)(iVar6 + 0x84) = 0;
-    *(undefined4 *)(iVar6 + 0x88) = 0;
+    dirtyState = vertexArray[1];
+    isReady = 1;
+    *(undefined4 *)(dirtyState + 0x84) = 0;
+    *(undefined4 *)(dirtyState + 0x88) = 0;
   }
   else {
 LAB_0001e86c:
-    uVar2 = 0;
+    isReady = 0;
   }
-  return uVar2;
+  return isReady;
 }
 
 /* copyIndices16Swapped_prefetch_entry @ 0x1e890 (16 bytes) */
@@ -4619,7 +4631,7 @@ int gldDisplayNotificationCallback(param_1, param_2, param_3, param_4, param_5, 
         if (((iVar9 != 0) && (iVar9 = _CFNumberGetValue(iVar9,3,&iStack_60), iVar9 != 0)) &&
            (iStack_60 != 0)) {
           _puts("\nATI R300 GL Driver Notification Callback");
-          FUN_00017ee0(param_2);
+          gld_printApplicationPath(param_2);
         }
         iVar9 = _CFDictionaryGetValue(param_5,iVar1);
         value2 = _CFDictionaryGetValue(param_5,iVar2);
