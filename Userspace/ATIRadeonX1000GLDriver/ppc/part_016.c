@@ -2739,6 +2739,7 @@ int FUN_000abd10(glContext, a12, param_3)
   int a12;
   uint *param_3;
 {
+  uint allocation;
   float *cursor2;
   float *cursor;
   int a12Ptr74_2;
@@ -2768,9 +2769,9 @@ int FUN_000abd10(glContext, a12, param_3)
   
   a12Ptr74_2 = *(int *)(a12 + 0x74);
   iVar9 = *(int *)(a12Ptr74_2 + 0x5c) + -10;
-  uVar2 = (**(code **)(glContext + 0xc))(*(int *)(a12Ptr74_2 + 0x5c) + -6,a12,param_3);
-  param_3[2] = uVar2;
-  _memcpy(uVar2,*(int *)(a12Ptr74_2 + 0x58) + 10,iVar9);
+  allocation = (**(code **)(glContext + 0xc))(*(int *)(a12Ptr74_2 + 0x5c) + -6,a12,param_3);
+  param_3[2] = allocation;
+  _memcpy(allocation,*(int *)(a12Ptr74_2 + 0x58) + 10,iVar9);
   uVar3 = param_3[2];
   pfVar10 = (float *)(uVar3 + 8);
   uVar2 = *(int *)(a12Ptr74_2 + 0x5c) - 10U >> 2;
@@ -3056,16 +3057,19 @@ int FUN_000ac540(glContext, param_2, param_3, param_4)
   uint param_3;
   uint param_4;
 {
+  uint allocation3;
+  uint allocation2;
+  uint allocation;
   uint uVar1;
   
   uVar1 = *param_2;
   if (param_2[1] <= uVar1) {
-    uVar1 = (**(code **)(glContext + 0xc))(param_2[1] * 4 + 0x200);
+    allocation = (**(code **)(glContext + 0xc))(param_2[1] * 4 + 0x200);
     if (param_2[2] != 0) {
-      _memcpy(uVar1,param_2[2],*param_2 << 2);
+      _memcpy(allocation,param_2[2],*param_2 << 2);
       (**(code **)(glContext + 0x18))(param_2[2]);
     }
-    param_2[2] = uVar1;
+    param_2[2] = allocation;
     uVar1 = *param_2;
     param_2[1] = param_2[1] + 0x80;
   }
@@ -3073,12 +3077,12 @@ int FUN_000ac540(glContext, param_2, param_3, param_4)
   uVar1 = *param_2 + 1;
   *param_2 = uVar1;
   if (param_2[1] <= uVar1) {
-    uVar1 = (**(code **)(glContext + 0xc))(param_2[1] * 4 + 0x200);
+    allocation2 = (**(code **)(glContext + 0xc))(param_2[1] * 4 + 0x200);
     if (param_2[2] != 0) {
-      _memcpy(uVar1,param_2[2],*param_2 << 2);
+      _memcpy(allocation2,param_2[2],*param_2 << 2);
       (**(code **)(glContext + 0x18))(param_2[2]);
     }
-    param_2[2] = uVar1;
+    param_2[2] = allocation2;
     uVar1 = *param_2;
     param_2[1] = param_2[1] + 0x80;
   }
@@ -3086,12 +3090,12 @@ int FUN_000ac540(glContext, param_2, param_3, param_4)
   uVar1 = *param_2 + 1;
   *param_2 = uVar1;
   if (param_2[1] <= uVar1) {
-    uVar1 = (**(code **)(glContext + 0xc))(param_2[1] * 4 + 0x200);
+    allocation3 = (**(code **)(glContext + 0xc))(param_2[1] * 4 + 0x200);
     if (param_2[2] != 0) {
-      _memcpy(uVar1,param_2[2],*param_2 << 2);
+      _memcpy(allocation3,param_2[2],*param_2 << 2);
       (**(code **)(glContext + 0x18))(param_2[2]);
     }
-    param_2[2] = uVar1;
+    param_2[2] = allocation3;
     uVar1 = *param_2;
     param_2[1] = param_2[1] + 0x80;
   }
@@ -3128,6 +3132,26 @@ int FUN_000ac720(glContext, a1Ptr74, wordVector, formatCode, formatDesc, flagBit
   undefined4 param_24;
   undefined4 param_25;
 {
+  uint allocation20;
+  uint allocation19;
+  uint allocation18;
+  uint allocation17;
+  uint allocation16;
+  uint allocation15;
+  uint allocation14;
+  uint allocation13;
+  uint allocation12;
+  uint allocation11;
+  uint allocation10;
+  uint allocation9;
+  uint allocation8;
+  uint allocation7;
+  uint allocation6;
+  uint allocation5;
+  uint allocation4;
+  uint allocation3;
+  uint allocation2;
+  uint allocation;
   int loopIndex8;
   int loopIndex7;
   int loopIndex6;
@@ -4213,12 +4237,12 @@ LAB_000ad33c:
     }
     uVar10 = *wordVector;
     if (wordVector[1] <= uVar10) {
-      uVar10 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+      allocation = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
       if (wordVector[2] != 0) {
-        _memcpy(uVar10,wordVector[2],*wordVector << 2);
+        _memcpy(allocation,wordVector[2],*wordVector << 2);
         (**(code **)(glContext + 0x18))(wordVector[2]);
       }
-      wordVector[2] = uVar10;
+      wordVector[2] = allocation;
       uVar10 = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
@@ -4226,12 +4250,12 @@ LAB_000ad33c:
     uVar10 = *wordVector + 1;
     *wordVector = uVar10;
     if (wordVector[1] <= uVar10) {
-      uVar10 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+      allocation2 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
       if (wordVector[2] != 0) {
-        _memcpy(uVar10,wordVector[2],*wordVector << 2);
+        _memcpy(allocation2,wordVector[2],*wordVector << 2);
         (**(code **)(glContext + 0x18))(wordVector[2]);
       }
-      wordVector[2] = uVar10;
+      wordVector[2] = allocation2;
       uVar10 = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
@@ -4239,12 +4263,12 @@ LAB_000ad33c:
     uVar10 = *wordVector + 1;
     *wordVector = uVar10;
     if (wordVector[1] <= uVar10) {
-      uVar10 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+      allocation3 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
       if (wordVector[2] != 0) {
-        _memcpy(uVar10,wordVector[2],*wordVector << 2);
+        _memcpy(allocation3,wordVector[2],*wordVector << 2);
         (**(code **)(glContext + 0x18))(wordVector[2]);
       }
-      wordVector[2] = uVar10;
+      wordVector[2] = allocation3;
       uVar10 = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
@@ -4252,12 +4276,12 @@ LAB_000ad33c:
     uVar6 = *wordVector + 1;
     *wordVector = uVar6;
     if (wordVector[1] <= uVar6) {
-      uVar6 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+      allocation14 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
       if (wordVector[2] != 0) {
-        _memcpy(uVar6,wordVector[2],*wordVector << 2);
+        _memcpy(allocation14,wordVector[2],*wordVector << 2);
         (**(code **)(glContext + 0x18))(wordVector[2]);
       }
-      wordVector[2] = uVar6;
+      wordVector[2] = allocation14;
       uVar6 = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
@@ -4265,12 +4289,12 @@ LAB_000ad33c:
     uVar6 = *wordVector + 1;
     *wordVector = uVar6;
     if (wordVector[1] <= uVar6) {
-      uVar6 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+      allocation15 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
       if (wordVector[2] != 0) {
-        _memcpy(uVar6,wordVector[2],*wordVector << 2);
+        _memcpy(allocation15,wordVector[2],*wordVector << 2);
         (**(code **)(glContext + 0x18))(wordVector[2]);
       }
-      wordVector[2] = uVar6;
+      wordVector[2] = allocation15;
       uVar6 = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
@@ -4278,12 +4302,12 @@ LAB_000ad33c:
     uVar6 = *wordVector + 1;
     *wordVector = uVar6;
     if (wordVector[1] <= uVar6) {
-      uVar6 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+      allocation16 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
       if (wordVector[2] != 0) {
-        _memcpy(uVar6,wordVector[2],*wordVector << 2);
+        _memcpy(allocation16,wordVector[2],*wordVector << 2);
         (**(code **)(glContext + 0x18))(wordVector[2]);
       }
-      wordVector[2] = uVar6;
+      wordVector[2] = allocation16;
       uVar6 = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
@@ -4291,12 +4315,12 @@ LAB_000ad33c:
     uVar6 = *wordVector + 1;
     *wordVector = uVar6;
     if (wordVector[1] <= uVar6) {
-      uVar6 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+      allocation17 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
       if (wordVector[2] != 0) {
-        _memcpy(uVar6,wordVector[2],*wordVector << 2);
+        _memcpy(allocation17,wordVector[2],*wordVector << 2);
         (**(code **)(glContext + 0x18))(wordVector[2]);
       }
-      wordVector[2] = uVar6;
+      wordVector[2] = allocation17;
       uVar6 = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
@@ -4304,12 +4328,12 @@ LAB_000ad33c:
     uVar6 = *wordVector + 1;
     *wordVector = uVar6;
     if (wordVector[1] <= uVar6) {
-      uVar6 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+      allocation18 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
       if (wordVector[2] != 0) {
-        _memcpy(uVar6,wordVector[2],*wordVector << 2);
+        _memcpy(allocation18,wordVector[2],*wordVector << 2);
         (**(code **)(glContext + 0x18))(wordVector[2]);
       }
-      wordVector[2] = uVar6;
+      wordVector[2] = allocation18;
       uVar6 = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
@@ -4317,12 +4341,12 @@ LAB_000ad33c:
     uVar6 = *wordVector + 1;
     *wordVector = uVar6;
     if (wordVector[1] <= uVar6) {
-      uVar6 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+      allocation19 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
       if (wordVector[2] != 0) {
-        _memcpy(uVar6,wordVector[2],*wordVector << 2);
+        _memcpy(allocation19,wordVector[2],*wordVector << 2);
         (**(code **)(glContext + 0x18))(wordVector[2]);
       }
-      wordVector[2] = uVar6;
+      wordVector[2] = allocation19;
       uVar6 = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
@@ -4330,12 +4354,12 @@ LAB_000ad33c:
     uVar6 = *wordVector + 1;
     *wordVector = uVar6;
     if (wordVector[1] <= uVar6) {
-      uVar6 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+      allocation20 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
       if (wordVector[2] != 0) {
-        _memcpy(uVar6,wordVector[2],*wordVector << 2);
+        _memcpy(allocation20,wordVector[2],*wordVector << 2);
         (**(code **)(glContext + 0x18))(wordVector[2]);
       }
-      wordVector[2] = uVar6;
+      wordVector[2] = allocation20;
       uVar6 = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
@@ -4343,12 +4367,12 @@ LAB_000ad33c:
     uVar11 = *wordVector + 1;
     *wordVector = uVar11;
     if (wordVector[1] <= uVar11) {
-      uVar11 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+      allocation4 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
       if (wordVector[2] != 0) {
-        _memcpy(uVar11,wordVector[2],*wordVector << 2);
+        _memcpy(allocation4,wordVector[2],*wordVector << 2);
         (**(code **)(glContext + 0x18))(wordVector[2]);
       }
-      wordVector[2] = uVar11;
+      wordVector[2] = allocation4;
       uVar11 = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
@@ -4465,12 +4489,12 @@ LAB_000ad33c:
 LAB_000ae47c:
     uVar11 = *wordVector;
     if (wordVector[1] <= uVar11) {
-      uVar11 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+      allocation5 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
       if (wordVector[2] != 0) {
-        _memcpy(uVar11,wordVector[2],*wordVector << 2);
+        _memcpy(allocation5,wordVector[2],*wordVector << 2);
         (**(code **)(glContext + 0x18))(wordVector[2]);
       }
-      wordVector[2] = uVar11;
+      wordVector[2] = allocation5;
       uVar11 = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
@@ -4479,12 +4503,12 @@ LAB_000ae47c:
     *wordVector = uVar11;
     glContextWord11e0 = *(int *)(((unsigned char *)0x000011e0) + glContext);
     if (wordVector[1] <= uVar11) {
-      uVar11 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+      allocation6 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
       if (wordVector[2] != 0) {
-        _memcpy(uVar11,wordVector[2],*wordVector << 2);
+        _memcpy(allocation6,wordVector[2],*wordVector << 2);
         (**(code **)(glContext + 0x18))(wordVector[2]);
       }
-      wordVector[2] = uVar11;
+      wordVector[2] = allocation6;
       uVar11 = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
@@ -4493,12 +4517,12 @@ LAB_000ae47c:
     uVar11 = *wordVector + 1;
     *wordVector = uVar11;
     if (wordVector[1] <= uVar11) {
-      uVar11 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+      allocation7 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
       if (wordVector[2] != 0) {
-        _memcpy(uVar11,wordVector[2],*wordVector << 2);
+        _memcpy(allocation7,wordVector[2],*wordVector << 2);
         (**(code **)(glContext + 0x18))(wordVector[2]);
       }
-      wordVector[2] = uVar11;
+      wordVector[2] = allocation7;
       uVar11 = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
@@ -4508,12 +4532,12 @@ LAB_000ae47c:
     *wordVector = uVar11;
     if ((local_88 & 0x400000) != 0) {
       if (wordVector[1] <= uVar11) {
-        uVar11 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+        allocation8 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
         if (wordVector[2] != 0) {
-          _memcpy(uVar11,wordVector[2],*wordVector << 2);
+          _memcpy(allocation8,wordVector[2],*wordVector << 2);
           (**(code **)(glContext + 0x18))(wordVector[2]);
         }
-        wordVector[2] = uVar11;
+        wordVector[2] = allocation8;
         uVar11 = *wordVector;
         wordVector[1] = wordVector[1] + 0x80;
       }
@@ -4560,12 +4584,12 @@ LAB_000ae47c:
   }
   uVar18 = *wordVector;
   if (wordVector[1] <= uVar18) {
-    uVar18 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+    allocation9 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
     if (wordVector[2] != 0) {
-      _memcpy(uVar18,wordVector[2],*wordVector << 2);
+      _memcpy(allocation9,wordVector[2],*wordVector << 2);
       (**(code **)(glContext + 0x18))(wordVector[2]);
     }
-    wordVector[2] = uVar18;
+    wordVector[2] = allocation9;
     uVar18 = *wordVector;
     wordVector[1] = wordVector[1] + 0x80;
   }
@@ -4573,12 +4597,12 @@ LAB_000ae47c:
   uVar18 = *wordVector + 1;
   *wordVector = uVar18;
   if (wordVector[1] <= uVar18) {
-    uVar18 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+    allocation10 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
     if (wordVector[2] != 0) {
-      _memcpy(uVar18,wordVector[2],*wordVector << 2);
+      _memcpy(allocation10,wordVector[2],*wordVector << 2);
       (**(code **)(glContext + 0x18))(wordVector[2]);
     }
-    wordVector[2] = uVar18;
+    wordVector[2] = allocation10;
     uVar18 = *wordVector;
     wordVector[1] = wordVector[1] + 0x80;
   }
@@ -4587,12 +4611,12 @@ LAB_000ae47c:
   *wordVector = uVar18;
   if ((uVar16 & 0x400000) != 0) {
     if (wordVector[1] <= uVar18) {
-      uVar18 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+      allocation11 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
       if (wordVector[2] != 0) {
-        _memcpy(uVar18,wordVector[2],*wordVector << 2);
+        _memcpy(allocation11,wordVector[2],*wordVector << 2);
         (**(code **)(glContext + 0x18))(wordVector[2]);
       }
-      wordVector[2] = uVar18;
+      wordVector[2] = allocation11;
       uVar18 = *wordVector;
       wordVector[1] = wordVector[1] + 0x80;
     }
@@ -4607,12 +4631,12 @@ LAB_000ae47c:
     do {
       uVar13 = *(undefined4 *)(loopIndex8 + (int)&local_88);
       if (wordVector[1] <= uVar18) {
-        uVar18 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+        allocation12 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
         if (wordVector[2] != 0) {
-          _memcpy(uVar18,wordVector[2],*wordVector << 2);
+          _memcpy(allocation12,wordVector[2],*wordVector << 2);
           (**(code **)(glContext + 0x18))(wordVector[2]);
         }
-        wordVector[2] = uVar18;
+        wordVector[2] = allocation12;
         uVar18 = *wordVector;
         wordVector[1] = wordVector[1] + 0x80;
       }
@@ -4622,12 +4646,12 @@ LAB_000ae47c:
       if ((*cursor & 0x400000) != 0) {
         uVar13 = *(undefined4 *)((int)local_7c + loopIndex8);
         if (wordVector[1] <= uVar18) {
-          uVar18 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
+          allocation13 = (**(code **)(glContext + 0xc))(wordVector[1] * 4 + 0x200);
           if (wordVector[2] != 0) {
-            _memcpy(uVar18,wordVector[2],*wordVector << 2);
+            _memcpy(allocation13,wordVector[2],*wordVector << 2);
             (**(code **)(glContext + 0x18))(wordVector[2]);
           }
-          wordVector[2] = uVar18;
+          wordVector[2] = allocation13;
           uVar18 = *wordVector;
           wordVector[1] = wordVector[1] + 0x80;
         }
@@ -4664,6 +4688,15 @@ int FUN_000aec40(glContext, a1Ptr74, param_3, param_4, param_5, param_6, param_7
   uint param_13;
   int param_14;
 {
+  uint allocation9;
+  uint allocation8;
+  uint allocation7;
+  uint allocation6;
+  uint allocation5;
+  uint allocation4;
+  uint allocation3;
+  uint allocation2;
+  uint allocation;
   int remaining2;
   int remaining;
   int loopIndex3;
@@ -4944,12 +4977,12 @@ int FUN_000aec40(glContext, a1Ptr74, param_3, param_4, param_5, param_6, param_7
     }
     uVar8 = *param_3;
     if (param_3[1] <= uVar8) {
-      uVar8 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
+      allocation7 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
       if (param_3[2] != 0) {
-        _memcpy(uVar8,param_3[2],*param_3 << 2);
+        _memcpy(allocation7,param_3[2],*param_3 << 2);
         (**(code **)(glContext + 0x18))(param_3[2]);
       }
-      param_3[2] = uVar8;
+      param_3[2] = allocation7;
       uVar8 = *param_3;
       param_3[1] = param_3[1] + 0x80;
     }
@@ -4957,12 +4990,12 @@ int FUN_000aec40(glContext, a1Ptr74, param_3, param_4, param_5, param_6, param_7
     uVar8 = *param_3 + 1;
     *param_3 = uVar8;
     if (param_3[1] <= uVar8) {
-      uVar8 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
+      allocation8 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
       if (param_3[2] != 0) {
-        _memcpy(uVar8,param_3[2],*param_3 << 2);
+        _memcpy(allocation8,param_3[2],*param_3 << 2);
         (**(code **)(glContext + 0x18))(param_3[2]);
       }
-      param_3[2] = uVar8;
+      param_3[2] = allocation8;
       uVar8 = *param_3;
       param_3[1] = param_3[1] + 0x80;
     }
@@ -4970,12 +5003,12 @@ int FUN_000aec40(glContext, a1Ptr74, param_3, param_4, param_5, param_6, param_7
     uVar8 = *param_3 + 1;
     *param_3 = uVar8;
     if (param_3[1] <= uVar8) {
-      uVar8 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
+      allocation9 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
       if (param_3[2] != 0) {
-        _memcpy(uVar8,param_3[2],*param_3 << 2);
+        _memcpy(allocation9,param_3[2],*param_3 << 2);
         (**(code **)(glContext + 0x18))(param_3[2]);
       }
-      param_3[2] = uVar8;
+      param_3[2] = allocation9;
       uVar8 = *param_3;
       param_3[1] = param_3[1] + 0x80;
     }
@@ -4983,12 +5016,12 @@ int FUN_000aec40(glContext, a1Ptr74, param_3, param_4, param_5, param_6, param_7
     uVar2 = *param_3 + 1;
     *param_3 = uVar2;
     if (param_3[1] <= uVar2) {
-      uVar2 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
+      allocation4 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
       if (param_3[2] != 0) {
-        _memcpy(uVar2,param_3[2],*param_3 << 2);
+        _memcpy(allocation4,param_3[2],*param_3 << 2);
         (**(code **)(glContext + 0x18))(param_3[2]);
       }
-      param_3[2] = uVar2;
+      param_3[2] = allocation4;
       uVar2 = *param_3;
       param_3[1] = param_3[1] + 0x80;
     }
@@ -5279,12 +5312,12 @@ LAB_000afabc:
   local_88 = (uint)(param_14 - 6U < 3) << 0x1a | (param_13 & 0x33ff) << 0x10 | local_88;
 LAB_000afb10:
   if (param_3[1] <= uVar2) {
-    uVar2 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
+    allocation5 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
     if (param_3[2] != 0) {
-      _memcpy(uVar2,param_3[2],*param_3 << 2);
+      _memcpy(allocation5,param_3[2],*param_3 << 2);
       (**(code **)(glContext + 0x18))(param_3[2]);
     }
-    param_3[2] = uVar2;
+    param_3[2] = allocation5;
     uVar2 = *param_3;
     param_3[1] = param_3[1] + 0x80;
   }
@@ -5293,12 +5326,12 @@ LAB_000afb10:
   *param_3 = uVar2;
   if (param_4 != 0xb) {
     if (param_3[1] <= uVar2) {
-      uVar2 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
+      allocation6 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
       if (param_3[2] != 0) {
-        _memcpy(uVar2,param_3[2],*param_3 << 2);
+        _memcpy(allocation6,param_3[2],*param_3 << 2);
         (**(code **)(glContext + 0x18))(param_3[2]);
       }
-      param_3[2] = uVar2;
+      param_3[2] = allocation6;
       uVar2 = *param_3;
       param_3[1] = param_3[1] + 0x80;
     }
@@ -5306,12 +5339,12 @@ LAB_000afb10:
     uVar11 = *param_3 + 1;
     *param_3 = uVar11;
     if (param_3[1] <= uVar11) {
-      uVar11 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
+      allocation = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
       if (param_3[2] != 0) {
-        _memcpy(uVar11,param_3[2],*param_3 << 2);
+        _memcpy(allocation,param_3[2],*param_3 << 2);
         (**(code **)(glContext + 0x18))(param_3[2]);
       }
-      param_3[2] = uVar11;
+      param_3[2] = allocation;
       uVar11 = *param_3;
       param_3[1] = param_3[1] + 0x80;
     }
@@ -5328,12 +5361,12 @@ LAB_000afb10:
     do {
       uVar3 = *(undefined4 *)((int)&local_84 + loopIndex4);
       if (param_3[1] <= uVar2) {
-        uVar12 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
+        allocation2 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
         if (param_3[2] != 0) {
-          _memcpy(uVar12,param_3[2],*param_3 << 2);
+          _memcpy(allocation2,param_3[2],*param_3 << 2);
           (**(code **)(glContext + 0x18))(param_3[2]);
         }
-        param_3[2] = uVar12;
+        param_3[2] = allocation2;
         uVar2 = *param_3;
         param_3[1] = param_3[1] + 0x80;
       }
@@ -5343,12 +5376,12 @@ LAB_000afb10:
       if ((*cursor & 0x400000) != 0) {
         uVar3 = *(undefined4 *)((int)local_7c + loopIndex4);
         if (param_3[1] <= uVar2) {
-          uVar12 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
+          allocation3 = (**(code **)(glContext + 0xc))(param_3[1] * 4 + 0x200);
           if (param_3[2] != 0) {
-            _memcpy(uVar12,param_3[2],*param_3 << 2);
+            _memcpy(allocation3,param_3[2],*param_3 << 2);
             (**(code **)(glContext + 0x18))(param_3[2]);
           }
-          param_3[2] = uVar12;
+          param_3[2] = allocation3;
           uVar2 = *param_3;
           param_3[1] = param_3[1] + 0x80;
         }
@@ -5370,6 +5403,32 @@ LAB_000afb10:
 /* FUN_000afe40 @ 0xafe40 (5932 bytes) */
 undefined4 FUN_000afe40(int glContext,int param_2,undefined4 param_3,uint *unused,double fpPassThrough1)
 {
+  undefined4 allocation26;
+  undefined4 allocation25;
+  int allocation24;
+  int allocation23;
+  int allocation22;
+  int allocation21;
+  int allocation20;
+  int allocation19;
+  int allocation18;
+  int allocation17;
+  int allocation16;
+  int allocation15;
+  int allocation14;
+  int allocation13;
+  int allocation12;
+  int allocation11;
+  int allocation10;
+  int allocation9;
+  int allocation8;
+  int allocation7;
+  int allocation6;
+  int allocation5;
+  int allocation4;
+  int allocation3;
+  int allocation2;
+  int allocation;
   uint loopIndex6;
   int loopIndex5;
   int loopIndex3;
@@ -5477,92 +5536,92 @@ undefined4 FUN_000afe40(int glContext,int param_2,undefined4 param_3,uint *unuse
     local_1e4 = 0;
     local_1ec = 0;
     local_1e8 = 0;
-    iVar11 = (**(code **)(glContext + 0xc))(0x200);
+    allocation = (**(code **)(glContext + 0xc))(0x200);
     if (local_1e4 != 0) {
-      _memcpy(iVar11,local_1e4,local_1ec << 2);
+      _memcpy(allocation,local_1e4,local_1ec << 2);
       (**(code **)(glContext + 0x18))(local_1e4);
     }
     local_1e8 = local_1e8 + 0x80;
-    *(undefined4 *)(iVar11 + local_1ec * 4) = 1;
+    *(undefined4 *)(allocation + local_1ec * 4) = 1;
     local_1ec = local_1ec + 1;
-    local_1e4 = iVar11;
+    local_1e4 = allocation;
     if (local_1e8 <= local_1ec) {
-      iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+      allocation2 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
       if (local_1e4 != 0) {
-        _memcpy(iVar11,local_1e4,local_1ec << 2);
+        _memcpy(allocation2,local_1e4,local_1ec << 2);
         (**(code **)(glContext + 0x18))(local_1e4);
       }
       local_1e8 = local_1e8 + 0x80;
-      local_1e4 = iVar11;
+      local_1e4 = allocation2;
     }
     *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x10200;
     local_1ec = local_1ec + 1;
     if (local_1e8 <= local_1ec) {
-      iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+      allocation3 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
       if (local_1e4 != 0) {
-        _memcpy(iVar11,local_1e4,local_1ec << 2);
+        _memcpy(allocation3,local_1e4,local_1ec << 2);
         (**(code **)(glContext + 0x18))(local_1e4);
       }
       local_1e8 = local_1e8 + 0x80;
-      local_1e4 = iVar11;
+      local_1e4 = allocation3;
     }
     *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x1ff0016;
     local_1ec = local_1ec + 1;
     if (local_1e8 <= local_1ec) {
-      iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+      allocation4 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
       if (local_1e4 != 0) {
-        _memcpy(iVar11,local_1e4,local_1ec << 2);
+        _memcpy(allocation4,local_1e4,local_1ec << 2);
         (**(code **)(glContext + 0x18))(local_1e4);
       }
       local_1e8 = local_1e8 + 0x80;
-      local_1e4 = iVar11;
+      local_1e4 = allocation4;
     }
     *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x120000;
     local_1ec = local_1ec + 1;
     if (*a1Ptr74_2 != '\0') {
       if (local_1e8 <= local_1ec) {
-        iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+        allocation5 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
         if (local_1e4 != 0) {
-          _memcpy(iVar11,local_1e4,local_1ec << 2);
+          _memcpy(allocation5,local_1e4,local_1ec << 2);
           (**(code **)(glContext + 0x18))(local_1e4);
         }
         local_1e8 = local_1e8 + 0x80;
-        local_1e4 = iVar11;
+        local_1e4 = allocation5;
       }
       *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x1ff0016;
       local_1ec = local_1ec + 1;
       if (local_1e8 <= local_1ec) {
-        iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+        allocation6 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
         if (local_1e4 != 0) {
-          _memcpy(iVar11,local_1e4,local_1ec << 2);
+          _memcpy(allocation6,local_1e4,local_1ec << 2);
           (**(code **)(glContext + 0x18))(local_1e4);
         }
         local_1e8 = local_1e8 + 0x80;
-        local_1e4 = iVar11;
+        local_1e4 = allocation6;
       }
       *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x130000;
       local_1ec = local_1ec + 1;
     }
     if (a1Ptr74_2[1] != '\0') {
       if (local_1e8 <= local_1ec) {
-        iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+        allocation7 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
         if (local_1e4 != 0) {
-          _memcpy(iVar11,local_1e4,local_1ec << 2);
+          _memcpy(allocation7,local_1e4,local_1ec << 2);
           (**(code **)(glContext + 0x18))(local_1e4);
         }
         local_1e8 = local_1e8 + 0x80;
-        local_1e4 = iVar11;
+        local_1e4 = allocation7;
       }
       *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x1ff0016;
       local_1ec = local_1ec + 1;
       if (local_1e8 <= local_1ec) {
-        iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+        allocation8 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
         if (local_1e4 != 0) {
-          _memcpy(iVar11,local_1e4,local_1ec << 2);
+          _memcpy(allocation8,local_1e4,local_1ec << 2);
           (**(code **)(glContext + 0x18))(local_1e4);
         }
         local_1e8 = local_1e8 + 0x80;
-        local_1e4 = iVar11;
+        local_1e4 = allocation8;
       }
       *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x100000;
       local_1ec = local_1ec + 1;
@@ -5570,24 +5629,24 @@ undefined4 FUN_000afe40(int glContext,int param_2,undefined4 param_3,uint *unuse
     if (a1Ptr74_2[2] != '\0') {
       uVar8 = 0x3ff0016;
       if (local_1e8 <= local_1ec) {
-        iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+        allocation9 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
         if (local_1e4 != 0) {
-          _memcpy(iVar11,local_1e4,local_1ec << 2);
+          _memcpy(allocation9,local_1e4,local_1ec << 2);
           (**(code **)(glContext + 0x18))(local_1e4);
         }
         local_1e8 = local_1e8 + 0x80;
-        local_1e4 = iVar11;
+        local_1e4 = allocation9;
       }
       *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x3ff0016;
       local_1ec = local_1ec + 1;
       if (local_1e8 <= local_1ec) {
-        iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+        allocation10 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
         if (local_1e4 != 0) {
-          _memcpy(iVar11,local_1e4,local_1ec << 2);
+          _memcpy(allocation10,local_1e4,local_1ec << 2);
           (**(code **)(glContext + 0x18))(local_1e4);
         }
         local_1e8 = local_1e8 + 0x80;
-        local_1e4 = iVar11;
+        local_1e4 = allocation10;
       }
       *(undefined **)(local_1ec * 4 + local_1e4) = ((unsigned char *)0x00160000);
       local_1ec = local_1ec + 1;
@@ -5622,14 +5681,14 @@ undefined4 FUN_000afe40(int glContext,int param_2,undefined4 param_3,uint *unuse
             uVar8 = loopIndex6 << 0x10 | 0x12000019;
           }
           if (local_1e8 <= uVar5) {
-            iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+            allocation11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
             if (local_1e4 != 0) {
-              _memcpy(iVar11,local_1e4,local_1ec << 2);
+              _memcpy(allocation11,local_1e4,local_1ec << 2);
               (**(code **)(glContext + 0x18))(local_1e4);
             }
             local_1e8 = local_1e8 + 0x80;
             uVar5 = local_1ec;
-            local_1e4 = iVar11;
+            local_1e4 = allocation11;
           }
           *(uint *)(uVar5 * 4 + local_1e4) = uVar8;
           uVar5 = local_1ec + 1;
@@ -5638,25 +5697,25 @@ undefined4 FUN_000afe40(int glContext,int param_2,undefined4 param_3,uint *unuse
         if (((int)loopIndex6 < (int)(uint)(byte)((unsigned char *)0x000013b0)[glContext]) &&
            ((uVar13 & *(uint *)(a1Ptr74_2 + 0xc)) != 0)) {
           if (local_1e8 <= uVar5) {
-            iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+            allocation12 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
             if (local_1e4 != 0) {
-              _memcpy(iVar11,local_1e4,local_1ec << 2);
+              _memcpy(allocation12,local_1e4,local_1ec << 2);
               (**(code **)(glContext + 0x18))(local_1e4);
             }
             local_1e8 = local_1e8 + 0x80;
             uVar5 = local_1ec;
-            local_1e4 = iVar11;
+            local_1e4 = allocation12;
           }
           *(undefined4 *)(uVar5 * 4 + local_1e4) = 0x1ff0016;
           local_1ec = local_1ec + 1;
           if (local_1e8 <= local_1ec) {
-            iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+            allocation13 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
             if (local_1e4 != 0) {
-              _memcpy(iVar11,local_1e4,local_1ec << 2);
+              _memcpy(allocation13,local_1e4,local_1ec << 2);
               (**(code **)(glContext + 0x18))(local_1e4);
             }
             local_1e8 = local_1e8 + 0x80;
-            local_1e4 = iVar11;
+            local_1e4 = allocation13;
           }
           *(uint *)(local_1ec * 4 + local_1e4) = loopIndex6 & 0xffff | 0x110000;
           uVar5 = local_1ec + 1;
@@ -5676,73 +5735,73 @@ undefined4 FUN_000afe40(int glContext,int param_2,undefined4 param_3,uint *unuse
         if (*(int *)(iVar17 + 8) == 0x34) {
           uVar8 = *(uint *)(iVar17 + 4) & 0xffff | uVar8 & 0xffff0000;
           if (local_1e8 <= uVar5) {
-            iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+            allocation14 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
             if (local_1e4 != 0) {
-              _memcpy(iVar11,local_1e4,local_1ec << 2);
+              _memcpy(allocation14,local_1e4,local_1ec << 2);
               (**(code **)(glContext + 0x18))(local_1e4);
             }
             local_1e8 = local_1e8 + 0x80;
             uVar5 = local_1ec;
-            local_1e4 = iVar11;
+            local_1e4 = allocation14;
           }
           *(undefined4 *)(uVar5 * 4 + local_1e4) = 0x1c;
           local_1ec = local_1ec + 1;
           if (local_1e8 <= local_1ec) {
-            iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+            allocation15 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
             if (local_1e4 != 0) {
-              _memcpy(iVar11,local_1e4,local_1ec << 2);
+              _memcpy(allocation15,local_1e4,local_1ec << 2);
               (**(code **)(glContext + 0x18))(local_1e4);
             }
             local_1e8 = local_1e8 + 0x80;
-            local_1e4 = iVar11;
+            local_1e4 = allocation15;
           }
           *(uint *)(local_1ec * 4 + local_1e4) = uVar8;
           local_1ec = local_1ec + 1;
           uVar4 = *(undefined4 *)(*(int *)(iVar17 + 0xc) * 0x10 + *(int *)(a1Ptr74_2 + 0x8c));
           if (local_1e8 <= local_1ec) {
-            iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+            allocation16 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
             if (local_1e4 != 0) {
-              _memcpy(iVar11,local_1e4,local_1ec << 2);
+              _memcpy(allocation16,local_1e4,local_1ec << 2);
               (**(code **)(glContext + 0x18))(local_1e4);
             }
             local_1e8 = local_1e8 + 0x80;
-            local_1e4 = iVar11;
+            local_1e4 = allocation16;
           }
           *(undefined4 *)(local_1ec * 4 + local_1e4) = uVar4;
           local_1ec = local_1ec + 1;
           uVar4 = *(undefined4 *)(*(int *)(iVar17 + 0xc) * 0x10 + *(int *)(a1Ptr74_2 + 0x8c) + 4);
           if (local_1e8 <= local_1ec) {
-            iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+            allocation17 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
             if (local_1e4 != 0) {
-              _memcpy(iVar11,local_1e4,local_1ec << 2);
+              _memcpy(allocation17,local_1e4,local_1ec << 2);
               (**(code **)(glContext + 0x18))(local_1e4);
             }
             local_1e8 = local_1e8 + 0x80;
-            local_1e4 = iVar11;
+            local_1e4 = allocation17;
           }
           *(undefined4 *)(local_1ec * 4 + local_1e4) = uVar4;
           local_1ec = local_1ec + 1;
           uVar4 = *(undefined4 *)(*(int *)(iVar17 + 0xc) * 0x10 + *(int *)(a1Ptr74_2 + 0x8c) + 8);
           if (local_1e8 <= local_1ec) {
-            iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+            allocation18 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
             if (local_1e4 != 0) {
-              _memcpy(iVar11,local_1e4,local_1ec << 2);
+              _memcpy(allocation18,local_1e4,local_1ec << 2);
               (**(code **)(glContext + 0x18))(local_1e4);
             }
             local_1e8 = local_1e8 + 0x80;
-            local_1e4 = iVar11;
+            local_1e4 = allocation18;
           }
           *(undefined4 *)(local_1ec * 4 + local_1e4) = uVar4;
           local_1ec = local_1ec + 1;
           uVar4 = *(undefined4 *)(*(int *)(iVar17 + 0xc) * 0x10 + *(int *)(a1Ptr74_2 + 0x8c) + 0xc);
           if (local_1e8 <= local_1ec) {
-            iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+            allocation19 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
             if (local_1e4 != 0) {
-              _memcpy(iVar11,local_1e4,local_1ec << 2);
+              _memcpy(allocation19,local_1e4,local_1ec << 2);
               (**(code **)(glContext + 0x18))(local_1e4);
             }
             local_1e8 = local_1e8 + 0x80;
-            local_1e4 = iVar11;
+            local_1e4 = allocation19;
           }
           *(undefined4 *)(local_1ec * 4 + local_1e4) = uVar4;
           uVar5 = local_1ec + 1;
@@ -5757,47 +5816,47 @@ undefined4 FUN_000afe40(int glContext,int param_2,undefined4 param_3,uint *unuse
       local_5c = &local_1ec;
 LAB_000b10a0:
       if (local_1e8 <= uVar5) {
-        iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+        allocation20 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
         if (local_1e4 != 0) {
-          _memcpy(iVar11,local_1e4,local_1ec << 2);
+          _memcpy(allocation20,local_1e4,local_1ec << 2);
           (**(code **)(glContext + 0x18))(local_1e4);
         }
         local_1e8 = local_1e8 + 0x80;
         uVar5 = local_1ec;
-        local_1e4 = iVar11;
+        local_1e4 = allocation20;
       }
       *(undefined4 *)(uVar5 * 4 + local_1e4) = 0x47;
       local_1ec = local_1ec + 1;
       if (local_1e8 <= local_1ec) {
-        iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+        allocation21 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
         if (local_1e4 != 0) {
-          _memcpy(iVar11,local_1e4,local_1ec << 2);
+          _memcpy(allocation21,local_1e4,local_1ec << 2);
           (**(code **)(glContext + 0x18))(local_1e4);
         }
         local_1e8 = local_1e8 + 0x80;
-        local_1e4 = iVar11;
+        local_1e4 = allocation21;
       }
       *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x570000;
       local_1ec = local_1ec + 1;
       if (local_1e8 <= local_1ec) {
-        iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+        allocation22 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
         if (local_1e4 != 0) {
-          _memcpy(iVar11,local_1e4,local_1ec << 2);
+          _memcpy(allocation22,local_1e4,local_1ec << 2);
           (**(code **)(glContext + 0x18))(local_1e4);
         }
         local_1e8 = local_1e8 + 0x80;
-        local_1e4 = iVar11;
+        local_1e4 = allocation22;
       }
       *(undefined4 *)(local_1ec * 4 + local_1e4) = 0;
       local_1ec = local_1ec + 1;
       if (local_1e8 <= local_1ec) {
-        iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+        allocation23 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
         if (local_1e4 != 0) {
-          _memcpy(iVar11,local_1e4,local_1ec << 2);
+          _memcpy(allocation23,local_1e4,local_1ec << 2);
           (**(code **)(glContext + 0x18))(local_1e4);
         }
         local_1e8 = local_1e8 + 0x80;
-        local_1e4 = iVar11;
+        local_1e4 = allocation23;
       }
       *(undefined4 *)(local_1ec * 4 + local_1e4) = 0x40000;
       local_1ec = local_1ec + 1;
@@ -5898,13 +5957,13 @@ LAB_000b0fbc:
       if (local_68 == 0) goto LAB_000b10a0;
     }
     if (local_1e8 <= local_1ec) {
-      iVar11 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
+      allocation24 = (**(code **)(glContext + 0xc))(local_1e8 * 4 + 0x200);
       if (local_1e4 != 0) {
-        _memcpy(iVar11,local_1e4,local_1ec << 2);
+        _memcpy(allocation24,local_1e4,local_1ec << 2);
         (**(code **)(glContext + 0x18))(local_1e4);
       }
       local_1e8 = local_1e8 + 0x80;
-      local_1e4 = iVar11;
+      local_1e4 = allocation24;
     }
     iVar11 = local_1ec * 4;
     *(undefined4 *)(iVar11 + local_1e4) = 0x28;
@@ -5926,9 +5985,9 @@ LAB_000b0fbc:
           (**(code **)(glContext + 0x18))(*(int *)(((unsigned char *)0x00001128) + glContext));
         }
         iVar11 = _strlen(auStack_170);
-        uVar6 = (**(code **)(glContext + 0xc))(iVar11 + 1);
-        *(undefined4 *)(((unsigned char *)0x00001128) + glContext) = uVar6;
-        _strcpy(uVar6,auStack_170);
+        allocation26 = (**(code **)(glContext + 0xc))(iVar11 + 1);
+        *(undefined4 *)(((unsigned char *)0x00001128) + glContext) = allocation26;
+        _strcpy(allocation26,auStack_170);
         glContextWord1130_2 = *(int *)(((unsigned char *)0x00001130) + glContext);
         a1Word70 = *(int *)(a1 + 0x70);
       }
@@ -5945,9 +6004,9 @@ LAB_000b1448:
       if (*(int *)(((unsigned char *)0x00001128) + glContext) != 0) {
         (**(code **)(glContext + 0x18))(*(int *)(((unsigned char *)0x00001128) + glContext));
       }
-      uVar4 = (**(code **)(glContext + 0xc))(0x22);
-      *(undefined4 *)(((unsigned char *)0x00001128) + glContext) = uVar4;
-      _memcpy(uVar4,"program had bad or unsupported IL",0x22);
+      allocation25 = (**(code **)(glContext + 0xc))(0x22);
+      *(undefined4 *)(((unsigned char *)0x00001128) + glContext) = allocation25;
+      _memcpy(allocation25,"program had bad or unsupported IL",0x22);
       return 0;
     }
     iVar11 = (**(code **)(((unsigned char *)0x00001288) + glContext))(glContext,a1,a2,unused);
@@ -8151,7 +8210,7 @@ int FUN_000b57a0(ctx, param_2)
   uint uVar1;
   int iVar2;
   uint uVar3;
-  undefined4 *puVar4;
+  undefined4 *allocation;
   int iVar5;
   uint uVar6;
   undefined4 *puVar7;
@@ -8162,33 +8221,33 @@ int FUN_000b57a0(ctx, param_2)
   if (*(int *)(param_2 + 0x14) != 0) {
     (**(code **)(ctx + 0x18))(*(int *)(param_2 + 0x14));
   }
-  puVar4 = (undefined4 *)(**(code **)(ctx + 0xc))(0x569c);
-  *(undefined4 **)(param_2 + 0x14) = puVar4;
-  puVar4[2] = 0;
+  allocation = (undefined4 *)(**(code **)(ctx + 0xc))(0x569c);
+  *(undefined4 **)(param_2 + 0x14) = allocation;
+  allocation[2] = 0;
   iVar5 = 0xe;
-  *puVar4 = *(undefined4 *)(param_2 + 0xc);
-  puVar4[1] = *(undefined4 *)(param_2 + 4);
-  puVar4[3] = *(undefined4 *)(ctx + 0x2454);
-  puVar4[4] = *(undefined4 *)(ctx + 0x2454);
+  *allocation = *(undefined4 *)(param_2 + 0xc);
+  allocation[1] = *(undefined4 *)(param_2 + 4);
+  allocation[3] = *(undefined4 *)(ctx + 0x2454);
+  allocation[4] = *(undefined4 *)(ctx + 0x2454);
   ctxWord44 = *(uint *)(ctx + 0x44);
-  puVar4[8] = 1;
-  puVar4[7] = 1;
-  puVar4[6] = ctxWord44 >> 7 & 1;
+  allocation[8] = 1;
+  allocation[7] = 1;
+  allocation[6] = ctxWord44 >> 7 & 1;
   if (*(char *)(ctx + 0x1869) != '\0') {
-    puVar7 = puVar4 + 9;
-    iVar5 = ilAssembleProgram(ctx,puVar4,puVar7);
+    puVar7 = allocation + 9;
+    iVar5 = ilAssembleProgram(ctx,allocation,puVar7);
     if (iVar5 == 0) {
-      iVar5 = puVar4[0x150b];
-      *(undefined1 *)((int)puVar4 + 0x5497) = 0;
-      iVar9 = puVar4[0x1009];
-      *(char *)((int)puVar4 + 0x5495) = (char)iVar5;
-      uVar1 = (iVar9 + -1) * 0x100000 & 0x3ff00000U | puVar4[0x1523] & 0xc00ffc00;
-      puVar4[0x1523] = uVar1;
-      if (*(int *)(((unsigned char *)0x00001240) + param_2) < (int)puVar4[0x1590]) {
-        *(undefined4 *)(((unsigned char *)0x00001240) + param_2) = puVar4[0x1590];
-        uVar1 = puVar4[0x1523];
-        iVar9 = puVar4[0x1009];
-        iVar5 = puVar4[0x150b];
+      iVar5 = allocation[0x150b];
+      *(undefined1 *)((int)allocation + 0x5497) = 0;
+      iVar9 = allocation[0x1009];
+      *(char *)((int)allocation + 0x5495) = (char)iVar5;
+      uVar1 = (iVar9 + -1) * 0x100000 & 0x3ff00000U | allocation[0x1523] & 0xc00ffc00;
+      allocation[0x1523] = uVar1;
+      if (*(int *)(((unsigned char *)0x00001240) + param_2) < (int)allocation[0x1590]) {
+        *(undefined4 *)(((unsigned char *)0x00001240) + param_2) = allocation[0x1590];
+        uVar1 = allocation[0x1523];
+        iVar9 = allocation[0x1009];
+        iVar5 = allocation[0x150b];
       }
       uVar3 = 0;
       iVar8 = iVar9;
@@ -8205,7 +8264,7 @@ int FUN_000b57a0(ctx, param_2)
         uVar3 = uVar3 & 0xffff;
       }
       uVar6 = 0;
-      puVar4[0x1523] = (uVar3 & 0x3ff) << 10 | uVar1 & 0xfff003ff;
+      allocation[0x1523] = (uVar3 & 0x3ff) << 10 | uVar1 & 0xfff003ff;
       if (iVar9 != 0) {
         puVar7 = puVar7 + iVar9 * 4;
         do {
@@ -8220,8 +8279,8 @@ int FUN_000b57a0(ctx, param_2)
       }
       *(int *)(((unsigned char *)0x00001038) + param_2) = iVar5;
       if (0 < iVar5) {
-        pcVar10 = (char *)(puVar4 + 0x100e);
-        cursor = puVar4 + 0x100a;
+        pcVar10 = (char *)(allocation + 0x100e);
+        cursor = allocation + 0x100a;
         loopIndex = 0;
         iVar9 = param_2;
         do {
@@ -8243,7 +8302,7 @@ int FUN_000b57a0(ctx, param_2)
         } while (iVar5 != 0);
       }
       iVar5 = 0;
-      puVar4[0x1524] = uVar6 & 0x3ff | puVar4[0x1524] & 0xfffffc00;
+      allocation[0x1524] = uVar6 & 0x3ff | allocation[0x1524] & 0xfffffc00;
       *(undefined1 *)(param_2 + 1) = 1;
     }
   }
@@ -8522,11 +8581,18 @@ int FUN_000b6020(glContext, param_2, param_3)
   int param_2;
   uint param_3;
 {
+  undefined4 allocation8;
+  undefined4 allocation7;
+  undefined4 allocation5;
+  undefined4 allocation4;
+  undefined4 allocation3;
+  undefined4 allocation2;
+  int allocation;
   bool bVar1;
   uint uVar2;
   undefined4 uVar3;
   int iVar4;
-  undefined4 uVar5;
+  undefined4 allocation6;
   uint uVar6;
   int iVar7;
   code *glContextPtr10;
@@ -8543,35 +8609,35 @@ int FUN_000b6020(glContext, param_2, param_3)
     *(undefined4 *)(iVar4 + 4) = 0;
     *(undefined4 *)(iVar4 + 0xc) = 0;
     *(undefined4 *)(iVar4 + 8) = 0;
-    iVar7 = (**(code **)(glContext + 0xc))(0x200);
+    allocation = (**(code **)(glContext + 0xc))(0x200);
     if (*(int *)(iVar4 + 0xc) != 0) {
-      _memcpy(iVar7,*(int *)(iVar4 + 0xc),*(int *)(iVar4 + 4) << 2);
+      _memcpy(allocation,*(int *)(iVar4 + 0xc),*(int *)(iVar4 + 4) << 2);
       (**(code **)(glContext + 0x18))(*(undefined4 *)(iVar4 + 0xc));
     }
-    *(int *)(iVar4 + 0xc) = iVar7;
+    *(int *)(iVar4 + 0xc) = allocation;
     *(int *)(iVar4 + 8) = *(int *)(iVar4 + 8) + 0x80;
-    *(undefined4 *)(*(int *)(iVar4 + 4) * 4 + iVar7) = 1;
+    *(undefined4 *)(*(int *)(iVar4 + 4) * 4 + allocation) = 1;
     uVar2 = *(int *)(iVar4 + 4) + 1;
     *(uint *)(iVar4 + 4) = uVar2;
     if (*(uint *)(iVar4 + 8) <= uVar2) {
-      uVar3 = (**(code **)(glContext + 0xc))(*(uint *)(iVar4 + 8) * 4 + 0x200);
+      allocation2 = (**(code **)(glContext + 0xc))(*(uint *)(iVar4 + 8) * 4 + 0x200);
       if (*(int *)(iVar4 + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(iVar4 + 0xc),*(int *)(iVar4 + 4) << 2);
+        _memcpy(allocation2,*(int *)(iVar4 + 0xc),*(int *)(iVar4 + 4) << 2);
         (**(code **)(glContext + 0x18))(*(undefined4 *)(iVar4 + 0xc));
       }
-      *(undefined4 *)(iVar4 + 0xc) = uVar3;
+      *(undefined4 *)(iVar4 + 0xc) = allocation2;
       *(int *)(iVar4 + 8) = *(int *)(iVar4 + 8) + 0x80;
     }
     *(undefined4 *)(*puVar9 * 4 + *(int *)(iVar4 + 0xc)) = 0x10200;
     uVar2 = *puVar9 + 1;
     *puVar9 = uVar2;
     if (*(uint *)(iVar4 + 8) <= uVar2) {
-      uVar3 = (**(code **)(glContext + 0xc))(*(uint *)(iVar4 + 8) * 4 + 0x200);
+      allocation3 = (**(code **)(glContext + 0xc))(*(uint *)(iVar4 + 8) * 4 + 0x200);
       if (*(int *)(iVar4 + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(iVar4 + 0xc),*puVar9 << 2);
+        _memcpy(allocation3,*(int *)(iVar4 + 0xc),*puVar9 << 2);
         (**(code **)(glContext + 0x18))(*(undefined4 *)(iVar4 + 0xc));
       }
-      *(undefined4 *)(iVar4 + 0xc) = uVar3;
+      *(undefined4 *)(iVar4 + 0xc) = allocation3;
       uVar2 = *puVar9;
       *(int *)(iVar4 + 8) = *(int *)(iVar4 + 8) + 0x80;
     }
@@ -8579,12 +8645,12 @@ int FUN_000b6020(glContext, param_2, param_3)
     uVar2 = *puVar9 + 1;
     *puVar9 = uVar2;
     if (*(uint *)(iVar4 + 8) <= uVar2) {
-      uVar3 = (**(code **)(glContext + 0xc))(*(uint *)(iVar4 + 8) * 4 + 0x200);
+      allocation4 = (**(code **)(glContext + 0xc))(*(uint *)(iVar4 + 8) * 4 + 0x200);
       if (*(int *)(iVar4 + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(iVar4 + 0xc),*puVar9 << 2);
+        _memcpy(allocation4,*(int *)(iVar4 + 0xc),*puVar9 << 2);
         (**(code **)(glContext + 0x18))(*(undefined4 *)(iVar4 + 0xc));
       }
-      *(undefined4 *)(iVar4 + 0xc) = uVar3;
+      *(undefined4 *)(iVar4 + 0xc) = allocation4;
       uVar2 = *puVar9;
       *(int *)(iVar4 + 8) = *(int *)(iVar4 + 8) + 0x80;
     }
@@ -8603,12 +8669,12 @@ int FUN_000b6020(glContext, param_2, param_3)
       if ((param_3 & 1 << (loopIndex & 0x3f)) != 0) {
         uVar6 = loopIndex & 0xffff | uVar6 & 0xffff0000;
         if (*(uint *)(iVar4 + 8) <= uVar2) {
-          uVar5 = (**(code **)(glContext + 0xc))(*(uint *)(iVar4 + 8) * 4 + 0x200);
+          allocation6 = (**(code **)(glContext + 0xc))(*(uint *)(iVar4 + 8) * 4 + 0x200);
           if (*(int *)(iVar4 + 0xc) != 0) {
-            _memcpy(uVar5,*(int *)(iVar4 + 0xc),*puVar9 << 2);
+            _memcpy(allocation6,*(int *)(iVar4 + 0xc),*puVar9 << 2);
             (**(code **)(glContext + 0x18))(*(undefined4 *)(iVar4 + 0xc));
           }
-          *(undefined4 *)(iVar4 + 0xc) = uVar5;
+          *(undefined4 *)(iVar4 + 0xc) = allocation6;
           uVar2 = *puVar9;
           *(int *)(iVar4 + 8) = *(int *)(iVar4 + 8) + 0x80;
         }
@@ -8616,12 +8682,12 @@ int FUN_000b6020(glContext, param_2, param_3)
         uVar2 = *puVar9 + 1;
         *puVar9 = uVar2;
         if (*(uint *)(iVar4 + 8) <= uVar2) {
-          uVar5 = (**(code **)(glContext + 0xc))(*(uint *)(iVar4 + 8) * 4 + 0x200);
+          allocation7 = (**(code **)(glContext + 0xc))(*(uint *)(iVar4 + 8) * 4 + 0x200);
           if (*(int *)(iVar4 + 0xc) != 0) {
-            _memcpy(uVar5,*(int *)(iVar4 + 0xc),*puVar9 << 2);
+            _memcpy(allocation7,*(int *)(iVar4 + 0xc),*puVar9 << 2);
             (**(code **)(glContext + 0x18))(*(undefined4 *)(iVar4 + 0xc));
           }
-          *(undefined4 *)(iVar4 + 0xc) = uVar5;
+          *(undefined4 *)(iVar4 + 0xc) = allocation7;
           uVar2 = *puVar9;
           *(int *)(iVar4 + 8) = *(int *)(iVar4 + 8) + 0x80;
         }
@@ -8629,12 +8695,12 @@ int FUN_000b6020(glContext, param_2, param_3)
         uVar2 = *puVar9 + 1;
         *puVar9 = uVar2;
         if (*(uint *)(iVar4 + 8) <= uVar2) {
-          uVar5 = (**(code **)(glContext + 0xc))(*(uint *)(iVar4 + 8) * 4 + 0x200);
+          allocation8 = (**(code **)(glContext + 0xc))(*(uint *)(iVar4 + 8) * 4 + 0x200);
           if (*(int *)(iVar4 + 0xc) != 0) {
-            _memcpy(uVar5,*(int *)(iVar4 + 0xc),*puVar9 << 2);
+            _memcpy(allocation8,*(int *)(iVar4 + 0xc),*puVar9 << 2);
             (**(code **)(glContext + 0x18))(*(undefined4 *)(iVar4 + 0xc));
           }
-          *(undefined4 *)(iVar4 + 0xc) = uVar5;
+          *(undefined4 *)(iVar4 + 0xc) = allocation8;
           uVar2 = *puVar9;
           *(int *)(iVar4 + 8) = *(int *)(iVar4 + 8) + 0x80;
         }
@@ -8646,12 +8712,12 @@ int FUN_000b6020(glContext, param_2, param_3)
       loopIndex = loopIndex + 1;
     } while (bVar1);
     if (*(uint *)(iVar4 + 8) <= uVar2) {
-      uVar3 = (**(code **)(glContext + 0xc))(*(uint *)(iVar4 + 8) * 4 + 0x200);
+      allocation5 = (**(code **)(glContext + 0xc))(*(uint *)(iVar4 + 8) * 4 + 0x200);
       if (*(int *)(iVar4 + 0xc) != 0) {
-        _memcpy(uVar3,*(int *)(iVar4 + 0xc),*puVar9 << 2);
+        _memcpy(allocation5,*(int *)(iVar4 + 0xc),*puVar9 << 2);
         (**(code **)(glContext + 0x18))(*(undefined4 *)(iVar4 + 0xc));
       }
-      *(undefined4 *)(iVar4 + 0xc) = uVar3;
+      *(undefined4 *)(iVar4 + 0xc) = allocation5;
       uVar2 = *puVar9;
       *(int *)(iVar4 + 8) = *(int *)(iVar4 + 8) + 0x80;
     }
@@ -8670,6 +8736,12 @@ int FUN_000b6580(glContext, param_2)
   int glContext;
   int param_2;
 {
+  undefined4 allocation6;
+  undefined4 allocation5;
+  undefined4 allocation4;
+  undefined4 allocation3;
+  undefined4 allocation2;
+  int allocation;
   int remaining2;
   int remaining;
   int loopIndex3;
@@ -8799,23 +8871,23 @@ LAB_000b66b8:
   *(uint *)(puVar7 + 0x1668) = glContextWord18a4 & 0x3fffc0 | *(uint *)(puVar7 + 0x1668) & 0xffc0003f;
   *(undefined4 *)(puVar7 + 0xc) = 0;
   *(undefined4 *)(puVar7 + 8) = 0;
-  iVar4 = (**(code **)(glContext + 0xc))(0x200,uVar9,staleArgR5,staleArgR6,staleArgR7,staleArgR8,0);
+  allocation = (**(code **)(glContext + 0xc))(0x200,uVar9,staleArgR5,staleArgR6,staleArgR7,staleArgR8,0);
   if (*(int *)(puVar7 + 0xc) != 0) {
-    _memcpy(iVar4,*(int *)(puVar7 + 0xc),*(int *)(puVar7 + 4) << 2);
+    _memcpy(allocation,*(int *)(puVar7 + 0xc),*(int *)(puVar7 + 4) << 2);
     (**(code **)(glContext + 0x18))(*(undefined4 *)(puVar7 + 0xc));
   }
-  *(int *)(puVar7 + 0xc) = iVar4;
+  *(int *)(puVar7 + 0xc) = allocation;
   *(int *)(puVar7 + 8) = *(int *)(puVar7 + 8) + 0x80;
-  *(undefined4 *)(*(int *)(puVar7 + 4) * 4 + iVar4) = 1;
+  *(undefined4 *)(*(int *)(puVar7 + 4) * 4 + allocation) = 1;
   iVar4 = *(int *)(puVar7 + 4);
   *(uint *)(puVar7 + 4) = iVar4 + 1U;
   if (*(uint *)(puVar7 + 8) <= iVar4 + 1U) {
-    uVar9 = (**(code **)(glContext + 0xc))(*(uint *)(puVar7 + 8) * 4 + 0x200);
+    allocation2 = (**(code **)(glContext + 0xc))(*(uint *)(puVar7 + 8) * 4 + 0x200);
     if (*(int *)(puVar7 + 0xc) != 0) {
-      _memcpy(uVar9,*(int *)(puVar7 + 0xc),*(int *)(puVar7 + 4) << 2);
+      _memcpy(allocation2,*(int *)(puVar7 + 0xc),*(int *)(puVar7 + 4) << 2);
       (**(code **)(glContext + 0x18))(*(undefined4 *)(puVar7 + 0xc));
     }
-    *(undefined4 *)(puVar7 + 0xc) = uVar9;
+    *(undefined4 *)(puVar7 + 0xc) = allocation2;
     *(int *)(puVar7 + 8) = *(int *)(puVar7 + 8) + 0x80;
   }
   loopIndex2 = 0;
@@ -8893,12 +8965,12 @@ LAB_000b66b8:
       if (((int)(*(uint *)(puVar7 + 0x1668) >> 6 & 0xffff) >> (loopIndex4 & 0x3f) & 1U) != 0) {
         uVar12 = loopIndex4 & 0xffff | uVar12 & 0xffff0000;
         if (*(uint *)(puVar7 + 8) <= uVar5) {
-          uVar9 = (**(code **)(glContext + 0xc))(*(uint *)(puVar7 + 8) * 4 + 0x200);
+          allocation3 = (**(code **)(glContext + 0xc))(*(uint *)(puVar7 + 8) * 4 + 0x200);
           if (*(int *)(puVar7 + 0xc) != 0) {
-            _memcpy(uVar9,*(int *)(puVar7 + 0xc),*puVar14 << 2);
+            _memcpy(allocation3,*(int *)(puVar7 + 0xc),*puVar14 << 2);
             (**(code **)(glContext + 0x18))(*(undefined4 *)(puVar7 + 0xc));
           }
-          *(undefined4 *)(puVar7 + 0xc) = uVar9;
+          *(undefined4 *)(puVar7 + 0xc) = allocation3;
           uVar5 = *puVar14;
           *(int *)(puVar7 + 8) = *(int *)(puVar7 + 8) + 0x80;
         }
@@ -8906,12 +8978,12 @@ LAB_000b66b8:
         uVar5 = *puVar14 + 1;
         *puVar14 = uVar5;
         if (*(uint *)(puVar7 + 8) <= uVar5) {
-          uVar9 = (**(code **)(glContext + 0xc))(*(uint *)(puVar7 + 8) * 4 + 0x200);
+          allocation4 = (**(code **)(glContext + 0xc))(*(uint *)(puVar7 + 8) * 4 + 0x200);
           if (*(int *)(puVar7 + 0xc) != 0) {
-            _memcpy(uVar9,*(int *)(puVar7 + 0xc),*puVar14 << 2);
+            _memcpy(allocation4,*(int *)(puVar7 + 0xc),*puVar14 << 2);
             (**(code **)(glContext + 0x18))(*(undefined4 *)(puVar7 + 0xc));
           }
-          *(undefined4 *)(puVar7 + 0xc) = uVar9;
+          *(undefined4 *)(puVar7 + 0xc) = allocation4;
           uVar5 = *puVar14;
           *(int *)(puVar7 + 8) = *(int *)(puVar7 + 8) + 0x80;
         }
@@ -8919,12 +8991,12 @@ LAB_000b66b8:
         uVar5 = *puVar14 + 1;
         *puVar14 = uVar5;
         if (*(uint *)(puVar7 + 8) <= uVar5) {
-          uVar9 = (**(code **)(glContext + 0xc))(*(uint *)(puVar7 + 8) * 4 + 0x200);
+          allocation5 = (**(code **)(glContext + 0xc))(*(uint *)(puVar7 + 8) * 4 + 0x200);
           if (*(int *)(puVar7 + 0xc) != 0) {
-            _memcpy(uVar9,*(int *)(puVar7 + 0xc),*puVar14 << 2);
+            _memcpy(allocation5,*(int *)(puVar7 + 0xc),*puVar14 << 2);
             (**(code **)(glContext + 0x18))(*(undefined4 *)(puVar7 + 0xc));
           }
-          *(undefined4 *)(puVar7 + 0xc) = uVar9;
+          *(undefined4 *)(puVar7 + 0xc) = allocation5;
           uVar5 = *puVar14;
           *(int *)(puVar7 + 8) = *(int *)(puVar7 + 8) + 0x80;
         }
@@ -8941,12 +9013,12 @@ LAB_000b66b8:
     uVar5 = *puVar14;
   }
   if (*(uint *)(puVar7 + 8) <= uVar5) {
-    uVar9 = (**(code **)(glContext + 0xc))(*(uint *)(puVar7 + 8) * 4 + 0x200);
+    allocation6 = (**(code **)(glContext + 0xc))(*(uint *)(puVar7 + 8) * 4 + 0x200);
     if (*(int *)(puVar7 + 0xc) != 0) {
-      _memcpy(uVar9,*(int *)(puVar7 + 0xc),*puVar14 << 2);
+      _memcpy(allocation6,*(int *)(puVar7 + 0xc),*puVar14 << 2);
       (**(code **)(glContext + 0x18))(*(undefined4 *)(puVar7 + 0xc));
     }
-    *(undefined4 *)(puVar7 + 0xc) = uVar9;
+    *(undefined4 *)(puVar7 + 0xc) = allocation6;
     uVar5 = *puVar14;
     *(int *)(puVar7 + 8) = *(int *)(puVar7 + 8) + 0x80;
   }
