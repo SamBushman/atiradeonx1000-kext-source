@@ -1,0 +1,9 @@
+local	FUN_000bde70	param_1	rsWords	INFERRED	word array whose fields (&0xf count, >>5 &7 -> program byte +0xd) are exactly the ones FUN_000bfed0 writes into its rsWords
+local	FUN_000bde70	param_2	programImage	INFERRED	encoded instruction words decoded into 0x48-byte records (fields >>6, >>0x11 masks per source/dest)
+local	FUN_000bde70	param_3	outProgram	INFERRED	*param_3 is the decoded program; allocated here with the callback allocator when it is still NULL
+local	FUN_000bde70	param_4	scCallbacks	INFERRED	callback block: magic word at [0xd] (0xABADF00D complement), allocator function at [0]
+local	FUN_000bfcc0	param_1	swizzleCode	INFERRED	read: selector code 0..; rewritten to its group (0, 1 or 2), bit 0x80 only clears itself (same scheme as FUN_000bf910)
+local	FUN_000bfcc0	param_2	channelSelect	INFERRED	output: channel select belonging to the code (0..3)
+local	FUN_000c8600	param_1	registerIndex	INFERRED	register number; widens the used range kept in usage[0]/usage[1] and indexes the per-kind flag arrays
+local	FUN_000c8600	param_2	registerKind	INFERRED	selector (0x10..0x18) of which per-kind flag array/usage slot is updated
+local	FUN_000c8600	param_3	usageInfo	INFERRED	usage record: [0]/[1] range bounds, flag arrays at +0x87c.. / +0x885.. / +0x887.. words

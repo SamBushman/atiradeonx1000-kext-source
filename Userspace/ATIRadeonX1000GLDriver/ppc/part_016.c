@@ -2542,29 +2542,29 @@ int FUN_000ab900(param_1)
 }
 
 /* FUN_000ab940 @ 0xab940 (96 bytes) */
-int FUN_000ab940(param_1, param_2, unusedArgR5, param_4, param_5, param_6)
-  int param_1;
-  int param_2;
+int FUN_000ab940(srcKind, srcValue, unusedArgR5, outOperand, outIsSpecial, altSrcValue)
+  int srcKind;
+  int srcValue;
   undefined4 unusedArgR5;
-  int *param_4;
-  undefined1 *param_5;
-  int param_6;
+  int *outOperand;
+  undefined1 *outIsSpecial;
+  int altSrcValue;
 {
-  if (param_1 == 3) {
-    if (param_2 == 1) {
-      param_4[1] = 0x18;
-      *param_4 = 0;
+  if (srcKind == 3) {
+    if (srcValue == 1) {
+      outOperand[1] = 0x18;
+      *outOperand = 0;
     }
     else {
-      *param_4 = param_6;
-      param_4[1] = 0x17;
+      *outOperand = altSrcValue;
+      outOperand[1] = 0x17;
     }
-    *param_5 = 1;
+    *outIsSpecial = 1;
     return;
   }
-  *param_4 = param_2;
-  param_4[1] = 4;
-  *param_5 = 0;
+  *outOperand = srcValue;
+  outOperand[1] = 4;
+  *outIsSpecial = 0;
   return;
 }
 

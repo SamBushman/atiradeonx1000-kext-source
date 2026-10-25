@@ -872,7 +872,7 @@ PTR_DAT_001e8994	0x1e8994	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_DAT_001e8998	0x1e8998	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8998 asm("PTR_DAT_001e8998");	pointer -> LD_1da65c	data.s
 PTR_DAT_001e899c	0x1e899c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e899c asm("PTR_DAT_001e899c");	pointer -> LD_1da6d0	data.s
 PTR_FUN_001e89a0	0x1e89a0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a0 asm("PTR_FUN_001e89a0");	pointer -> noop_70c50	data.s
-PTR_FUN_001e89a4	0x1e89a4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a4 asm("PTR_FUN_001e89a4");	pointer -> FUN_00064a10	data.s
+PTR_FUN_001e89a4	0x1e89a4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a4 asm("PTR_FUN_001e89a4");	pointer -> extvsUploadProgramConstants	data.s
 PTR_FUN_001e89a8	0x1e89a8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89a8 asm("PTR_FUN_001e89a8");	pointer -> evsFoldConstantMoves	data.s
 PTR_FUN_001e89ac	0x1e89ac	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89ac asm("PTR_FUN_001e89ac");	pointer -> vpStateSetConstantVector	data.s
 PTR_FUN_001e89b0	0x1e89b0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89b0 asm("PTR_FUN_001e89b0");	pointer -> FUN_00077030	data.s
@@ -890,7 +890,7 @@ PTR_FUN_001e89dc	0x1e89dc	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e89e0	0x1e89e0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e0 asm("PTR_FUN_001e89e0");	pointer -> FUN_00062940	data.s
 PTR_FUN_001e89e4	0x1e89e4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e4 asm("PTR_FUN_001e89e4");	pointer -> evsAssignVertexInputs	data.s
 PTR_FUN_001e89e8	0x1e89e8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89e8 asm("PTR_FUN_001e89e8");	pointer -> FUN_0005f540	data.s
-PTR_FUN_001e89ec	0x1e89ec	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89ec asm("PTR_FUN_001e89ec");	pointer -> FUN_00064850	data.s
+PTR_FUN_001e89ec	0x1e89ec	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89ec asm("PTR_FUN_001e89ec");	pointer -> extvsApplyStreamDescriptors	data.s
 PTR_FUN_001e89f0	0x1e89f0	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89f0 asm("PTR_FUN_001e89f0");	pointer -> atifsCompileCurrentShader	data.s
 PTR_FUN_001e89f4	0x1e89f4	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89f4 asm("PTR_FUN_001e89f4");	pointer -> FUN_0004c560	data.s
 PTR_FUN_001e89f8	0x1e89f8	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e89f8 asm("PTR_FUN_001e89f8");	pointer -> arbEmitRecord2Src_op4f	data.s
@@ -915,7 +915,7 @@ PTR_FUN_001e8a40	0x1e8a40	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8a44	0x1e8a44	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a44 asm("PTR_FUN_001e8a44");	pointer -> gldValidateState	data.s
 PTR_FUN_001e8a48	0x1e8a48	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a48 asm("PTR_FUN_001e8a48");	pointer -> gldCurrentAttributePacketHeader	data.s
 PTR_FUN_001e8a4c	0x1e8a4c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a4c asm("PTR_FUN_001e8a4c");	pointer -> arbEmitRecord2Src_op01	data.s
-PTR_FUN_001e8a50	0x1e8a50	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a50 asm("PTR_FUN_001e8a50");	pointer -> FUN_000659d0	data.s
+PTR_FUN_001e8a50	0x1e8a50	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a50 asm("PTR_FUN_001e8a50");	pointer -> vpFillConstantBank	data.s
 PTR_FUN_001e8a54	0x1e8a54	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a54 asm("PTR_FUN_001e8a54");	pointer -> arbEmitIlRcp	data.s
 PTR_001e8a58	0x1e8a58	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_001e8a58 asm("PTR_001e8a58");	pointer -> _realloc	data.s
 PTR_FUN_001e8a5c	0x1e8a5c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8a5c asm("PTR_FUN_001e8a5c");	pointer -> arbEmitRecord3Src_op0c	data.s
@@ -974,7 +974,7 @@ PTR_FUN_001e8b2c	0x1e8b2c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char 
 PTR_FUN_001e8b30	0x1e8b30	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b30 asm("PTR_FUN_001e8b30");	pointer -> arbEmitRecord2Src_op02	data.s
 PTR_FUN_001e8b34	0x1e8b34	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b34 asm("PTR_FUN_001e8b34");	pointer -> arbEmitIlEnd	data.s
 PTR_FUN_001e8b38	0x1e8b38	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b38 asm("PTR_FUN_001e8b38");	pointer -> FUN_000b5c00	data.s
-PTR_FUN_001e8b3c	0x1e8b3c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b3c asm("PTR_FUN_001e8b3c");	pointer -> FUN_00064f40	data.s
+PTR_FUN_001e8b3c	0x1e8b3c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b3c asm("PTR_FUN_001e8b3c");	pointer -> extvsValidateProgramState	data.s
 PTR_FUN_001e8b40	0x1e8b40	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_FUN_001e8b40 asm("PTR_FUN_001e8b40");	pointer -> FUN_00076c60	data.s
 PTR_DAT_001e8b48	0x1e8b48	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b48 asm("PTR_DAT_001e8b48");	pointer -> LD_1f1008	data.s
 PTR_DAT_001e8b4c	0x1e8b4c	__DATA,__nl_symbol_ptr	pointer	4	extern unsigned char *PTR_DAT_001e8b4c asm("PTR_DAT_001e8b4c");	pointer -> LD_1e9fc0	data.s

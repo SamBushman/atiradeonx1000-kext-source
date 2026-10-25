@@ -258,7 +258,7 @@ int ffvpBuildPassThroughProgram(ctx)
     }
   }
   else {
-    FUN_000656b0(ctx);
+    ffvpSelectPassThroughVariant(ctx);
   }
   return;
 }

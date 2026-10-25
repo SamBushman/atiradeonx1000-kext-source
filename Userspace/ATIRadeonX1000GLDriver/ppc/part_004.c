@@ -5793,7 +5793,7 @@ LAB_0002c610:
     if (*(char *)(iVar10 + 0x20) == '\0') {
       FUN_000a7d10(param_1);
     }
-    FUN_00065370(param_1);
+    ffvpSelectLitProgramVariant(param_1);
     FUN_00090960(param_1);
     uVar8 = *dirtyBits;
     if (((uVar8 & 0x20000000) != 0) || (*(char *)(iVar10 + 0x2a43) != '\0')) {

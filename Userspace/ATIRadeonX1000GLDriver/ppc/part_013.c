@@ -3751,7 +3751,7 @@ int FUN_0008fb70(ctx)
   *(undefined1 *)(ctx + 0x23ec) = 1;
   if (*(char *)(ctx + 0x1868) == '\0') {
     if ((*(uint *)(ctx + 0x44) & 0x100000) != 0) {
-      FUN_000651e0(ctx);
+      extvsFlushConstantUploads(ctx);
     }
   }
   else if ((*(uint *)(ctx + 0x44) & 0x100000) != 0) {
@@ -4137,7 +4137,7 @@ void gldValidateState(int glContext,undefined4 param_2,undefined4 param_3,undefi
       }
       if ((dirtyMask & 0x1000) != 0) {
         if (*(char *)(glContext + 0x1868) == '\0') {
-          FUN_00064f40(glContext,param_2);
+          extvsValidateProgramState(glContext,param_2);
           param_2 = extraout_r4_12;
         }
         else {

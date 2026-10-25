@@ -73,8 +73,8 @@ int ExportSlot__ctor_12622c(this, param_2, param_3, param_4, compiler)
   undefined4 arena;
   undefined4 *allocation;
   int operandRecord;
-  undefined4 *puVar3;
-  undefined4 uVar4;
+  undefined4 *exportInst;
+  undefined4 exportStreamValue;
   
   VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
   this[4] = param_2;
@@ -83,19 +83,19 @@ int ExportSlot__ctor_12622c(this, param_2, param_3, param_4, compiler)
   if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) != 0) {
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
-    puVar3 = allocation + 1;
+    exportInst = allocation + 1;
     *allocation = arena;
-    IRExport__ctor_108918(puVar3,compiler);
+    IRExport__ctor_108918(exportInst,compiler);
     allocation[0x28] = DAT_001afef0;
-    IRInst__setOperandRef(puVar3,0,this);
-    FUN_0012306c(this,puVar3);
-    IRInst__setOperandRef(puVar3,1,this);
-    uVar4 = DAT_001afeec;
-    operandRecord = IRInst__getOperandRecord(puVar3,1);
-    *(undefined4 *)(operandRecord + 0x10) = uVar4;
-    VReg__addUse(this,1,puVar3);
-    Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),puVar3);
-    Block__appendInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a8),puVar3);
+    IRInst__setOperandRef(exportInst,0,this);
+    FUN_0012306c(this,exportInst);
+    IRInst__setOperandRef(exportInst,1,this);
+    exportStreamValue = DAT_001afeec;
+    operandRecord = IRInst__getOperandRecord(exportInst,1);
+    *(undefined4 *)(operandRecord + 0x10) = exportStreamValue;
+    VReg__addUse(this,1,exportInst);
+    Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),exportInst);
+    Block__appendInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a8),exportInst);
   }
   return;
 }
@@ -111,8 +111,8 @@ int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
   undefined4 arena;
   undefined4 *allocation;
   int operandRecord;
-  undefined4 *puVar3;
-  undefined4 uVar4;
+  undefined4 *exportInst;
+  undefined4 exportStreamValue;
   
   VRegInfo__ctor_12379c(this,param_2,param_3,param_4,compiler);
   this[4] = param_2;
@@ -121,19 +121,19 @@ int ExportSlot__ctor_126378(this, param_2, param_3, param_4, compiler)
   if ((*(uint *)(*(int *)(compiler + COMP_currentProgram) + 0x30) & 0x4000) != 0) {
     arena = *(undefined4 *)(compiler + COMP_arenaA);
     allocation = (undefined4 *)Arena__alloc(arena,0x168);
-    puVar3 = allocation + 1;
+    exportInst = allocation + 1;
     *allocation = arena;
-    IRExport__ctor_108918(puVar3,compiler);
+    IRExport__ctor_108918(exportInst,compiler);
     allocation[0x28] = DAT_001afef0;
-    IRInst__setOperandRef(puVar3,0,this);
-    FUN_0012306c(this,puVar3);
-    IRInst__setOperandRef(puVar3,1,this);
-    uVar4 = DAT_001afeec;
-    operandRecord = IRInst__getOperandRecord(puVar3,1);
-    *(undefined4 *)(operandRecord + 0x10) = uVar4;
-    VReg__addUse(this,1,puVar3);
-    Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),puVar3);
-    Block__appendInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a8),puVar3);
+    IRInst__setOperandRef(exportInst,0,this);
+    FUN_0012306c(this,exportInst);
+    IRInst__setOperandRef(exportInst,1,this);
+    exportStreamValue = DAT_001afeec;
+    operandRecord = IRInst__getOperandRecord(exportInst,1);
+    *(undefined4 *)(operandRecord + 0x10) = exportStreamValue;
+    VReg__addUse(this,1,exportInst);
+    Program__addInst(*(undefined4 *)(compiler + COMP_currentProgram),exportInst);
+    Block__appendInst(*(undefined4 *)(*(int *)(compiler + COMP_currentProgram) + 0x3a8),exportInst);
   }
   return;
 }
@@ -881,22 +881,22 @@ int ConstKey__compare3(param_1, param_2)
 }
 
 /* ConstKey__compare4 @ 0x127778 (156 bytes) */
-int ConstKey__compare4(param_1, param_2)
-  int param_1;
-  int param_2;
+int ConstKey__compare4(keyA, keyB)
+  int keyA;
+  int keyB;
 {
-  uint uVar1;
-  uint uVar2;
+  uint keyBFlags;
+  uint keyAFlags;
   
-  uVar2 = (uint)*(char *)(param_1 + 0x15c);
-  uVar1 = (uint)*(char *)(param_2 + 0x15c);
-  if ((((((uVar2 & 1) == (uVar1 & 1)) && (*(int *)(param_1 + 0x20) == *(int *)(param_2 + 0x20))) &&
-       ((uVar2 >> 1 & 1) == (uVar1 >> 1 & 1))) &&
-      ((*(int *)(param_1 + 0x38) == *(int *)(param_2 + 0x38) &&
-       ((uVar2 >> 2 & 1) == (uVar1 >> 2 & 1))))) &&
-     ((*(int *)(param_1 + 0x50) == *(int *)(param_2 + 0x50) &&
-      (((uVar2 >> 3 & 1) == (uVar1 >> 3 & 1) &&
-       (*(int *)(param_1 + 0x68) == *(int *)(param_2 + 0x68))))))) {
+  keyAFlags = (uint)*(char *)(keyA + 0x15c);
+  keyBFlags = (uint)*(char *)(keyB + 0x15c);
+  if ((((((keyAFlags & 1) == (keyBFlags & 1)) && (*(int *)(keyA + 0x20) == *(int *)(keyB + 0x20))) &&
+       ((keyAFlags >> 1 & 1) == (keyBFlags >> 1 & 1))) &&
+      ((*(int *)(keyA + 0x38) == *(int *)(keyB + 0x38) &&
+       ((keyAFlags >> 2 & 1) == (keyBFlags >> 2 & 1))))) &&
+     ((*(int *)(keyA + 0x50) == *(int *)(keyB + 0x50) &&
+      (((keyAFlags >> 3 & 1) == (keyBFlags >> 3 & 1) &&
+       (*(int *)(keyA + 0x68) == *(int *)(keyB + 0x68))))))) {
     return 0;
   }
   return 0xffffffff;
@@ -916,35 +916,35 @@ int keyEqualsThreeWords(param_1, param_2)
 }
 
 /* FUN_00127850 @ 0x127850 (128 bytes) */
-int FUN_00127850(param_1)
-  int param_1;
+int FUN_00127850(owner)
+  int owner;
 {
-  int iVar1;
-  int iVar2;
+  int elementQuery18;
+  int matchCount;
   /* issue #64 live-repro: same iterator-object split as FUN_0011eaa0 (part_037.c), fixed earlier
-   * this session - auStack_38 is walked by FUN_00194938/FUN_00194a94 as param_1[0..4] (0x14 bytes)
-   * but declared only 16 bytes; local_28, the missing 5th word, is what this loop reads back as its
-   * own continuation value. Separated, FUN_00194938's real update never reached local_28, so the
-   * loop never saw it become null - not just a hang: the same (unchanging) local_28 object got
+   * this session - iteratorState is walked by FUN_00194938/FUN_00194a94 as owner[0..4] (0x14 bytes)
+   * but declared only 16 bytes; iteratorCurrent, the missing 5th word, is what this loop reads back as its
+   * own continuation value. Separated, FUN_00194938's real update never reached iteratorCurrent, so the
+   * loop never saw it become null - not just a hang: the same (unchanging) iteratorCurrent object got
    * re-passed to the vtable call on every spin instead of the real next node, repeatedly
    * re-processing/re-freeing one object - a plausible source of the unrelated heap corruption seen
    * elsewhere on this issue (FUN_00121000: an objects own vtable-like field changing under it
    * between two visits). Merged into one 0x14-byte buffer. */
-  unsigned char auStack_38 [0x14];
-#define local_28 (*(int **)(auStack_38 + 0x10))
+  unsigned char iteratorState [0x14];
+#define iteratorCurrent (*(int **)(iteratorState + 0x10))
   
-  FUN_00194a94(auStack_38,*(undefined4 *)(param_1 + 4));
-  iVar2 = 0;
-  while (local_28 != (int *)0x0) {
-    iVar1 = (**(code **)(*local_28 + 0x18))(local_28);
-    if (iVar1 != 0) {
-      iVar2 = iVar2 + 1;
+  FUN_00194a94(iteratorState,*(undefined4 *)(owner + 4));
+  matchCount = 0;
+  while (iteratorCurrent != (int *)0x0) {
+    elementQuery18 = (**(code **)(*iteratorCurrent + 0x18))(iteratorCurrent);
+    if (elementQuery18 != 0) {
+      matchCount = matchCount + 1;
     }
-    FUN_00194938(auStack_38);
+    FUN_00194938(iteratorState);
   }
-  return iVar2;
+  return matchCount;
 }
-#undef local_28
+#undef iteratorCurrent
 
 /* FUN_001278d0 @ 0x1278d0 (196 bytes) */
 int FUN_001278d0(owner)

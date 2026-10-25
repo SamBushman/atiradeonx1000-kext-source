@@ -3273,29 +3273,29 @@ int FUN_00130594(allocator, classNumber)
 }
 
 /* FUN_0013061c @ 0x13061c (116 bytes) */
-int FUN_0013061c(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_0013061c(allocator, classNumber)
+  int allocator;
+  int classNumber;
 {
-  int iVar1;
+  int classEnd;
   int callResult;
-  int iVar3;
-  int iVar4;
+  int classTableAddrThenReg;
+  int unassignedCount;
   
-  iVar3 = param_2 * 4 + param_1;
-  iVar4 = 0;
-  iVar1 = *(int *)(iVar3 + 0x448);
-  iVar3 = *(int *)(iVar3 + 0x43c);
-  if (iVar3 < iVar1) {
+  classTableAddrThenReg = classNumber * 4 + allocator;
+  unassignedCount = 0;
+  classEnd = *(int *)(classTableAddrThenReg + 0x448);
+  classTableAddrThenReg = *(int *)(classTableAddrThenReg + 0x43c);
+  if (classTableAddrThenReg < classEnd) {
     do {
-      callResult = ((int (*)())FUN_00130478)(param_1,iVar3);
+      callResult = ((int (*)())FUN_00130478)(allocator,classTableAddrThenReg);
       if (callResult == 0) {
-        iVar4 = iVar4 + 1;
+        unassignedCount = unassignedCount + 1;
       }
-      iVar3 = iVar3 + 1;
-    } while (iVar3 != iVar1);
+      classTableAddrThenReg = classTableAddrThenReg + 1;
+    } while (classTableAddrThenReg != classEnd);
   }
-  return iVar4;
+  return unassignedCount;
 }
 
 /* FUN_00130690 @ 0x130690 (152 bytes) */
@@ -3605,34 +3605,34 @@ int FUN_00130bd4(param_1, param_2)
 }
 
 /* FUN_00130bfc @ 0x130bfc (144 bytes) */
-int FUN_00130bfc(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_00130bfc(allocator, inst)
+  int allocator;
+  int inst;
 {
-  int iVar1;
-  int iVar2;
+  int classCount;
+  int classNumber;
   
-  iVar1 = *(int *)(*(int *)(*(int *)(param_1 + 8) + 0x30c) + 0x14);
-  if (*(int *)(param_2 + 0x98) != 0) {
-    if (*(int *)(param_2 + 0x98) == 1) {
+  classCount = *(int *)(*(int *)(*(int *)(allocator + 8) + 0x30c) + 0x14);
+  if (*(int *)(inst + 0x98) != 0) {
+    if (*(int *)(inst + 0x98) == 1) {
       return 1;
     }
     return -1;
   }
-  if ((*(uint *)(param_2 + 0x14) & 0x40) == 0) {
+  if ((*(uint *)(inst + 0x14) & 0x40) == 0) {
     return 0;
   }
-  if (0 < iVar1) {
-    iVar2 = 0;
+  if (0 < classCount) {
+    classNumber = 0;
     do {
-      if ((*(int *)(param_1 + 0x43c) <= *(int *)(param_2 + 0x94)) &&
-         (*(int *)(param_2 + 0x94) < *(int *)(param_1 + 0x448))) {
-        return iVar2;
+      if ((*(int *)(allocator + 0x43c) <= *(int *)(inst + 0x94)) &&
+         (*(int *)(inst + 0x94) < *(int *)(allocator + 0x448))) {
+        return classNumber;
       }
-      iVar2 = iVar2 + 1;
-      param_1 = param_1 + 4;
-      iVar1 = iVar1 + -1;
-    } while (iVar1 != 0);
+      classNumber = classNumber + 1;
+      allocator = allocator + 4;
+      classCount = classCount + -1;
+    } while (classCount != 0);
   }
   return -1;
 }
@@ -3823,40 +3823,42 @@ int FUN_00131008(maxDistance, inst, operandIndex)
 }
 
 /* FUN_001311cc @ 0x1311cc (88 bytes) */
-int FUN_001311cc(param_1, param_2, newSource, param_4, afterInst, compiler)
-  undefined4 param_1;
+int FUN_001311cc(destRegister, param_2, newSource, offsetSource, afterInst, compiler)
+  undefined4 destRegister;
   undefined4 param_2;
   undefined4 newSource;
-  undefined4 param_4;
+  undefined4 offsetSource;
   int afterInst;
   int compiler;
 {
+  undefined4 offsetSwizzleConstant;
+  undefined4 baseSwizzleConstant;
   undefined4 arena;
   undefined4 *allocation;
   int operandRecord;
-  undefined4 uVar3;
-  undefined4 *puVar4;
+  undefined4 writeMaskConstant;
+  undefined4 *loadInst;
   
   arena = *(undefined4 *)(compiler + COMP_arenaA);
   allocation = (undefined4 *)Arena__alloc(arena,0x168);
-  puVar4 = allocation + 1;
+  loadInst = allocation + 1;
   *allocation = arena;
-  IRMemLoad__ctor_107980(puVar4,0xfb,compiler);
-  uVar3 = UNK_001affe4;
+  IRMemLoad__ctor_107980(loadInst,0xfb,compiler);
+  writeMaskConstant = UNK_001affe4;
   allocation[0x27] = 0;
-  allocation[0x28] = uVar3;
-  allocation[0x26] = param_1;
-  IRInst__setOperandSource(puVar4,1,newSource,0,compiler);
-  uVar3 = UNK_001affe0;
-  operandRecord = IRInst__getOperandRecord(puVar4,1);
-  *(undefined4 *)(operandRecord + 0x10) = uVar3;
-  IRInst__setOperandSource(puVar4,2,param_4,0,compiler);
-  uVar3 = UNK_001affdc;
-  operandRecord = IRInst__getOperandRecord(puVar4,2);
-  *(undefined4 *)(operandRecord + 0x10) = uVar3;
-  Block__insertInstAfter(*(undefined4 *)(afterInst + 0x158),afterInst,puVar4);
+  allocation[0x28] = writeMaskConstant;
+  allocation[0x26] = destRegister;
+  IRInst__setOperandSource(loadInst,1,newSource,0,compiler);
+  baseSwizzleConstant = UNK_001affe0;
+  operandRecord = IRInst__getOperandRecord(loadInst,1);
+  *(undefined4 *)(operandRecord + 0x10) = baseSwizzleConstant;
+  IRInst__setOperandSource(loadInst,2,offsetSource,0,compiler);
+  offsetSwizzleConstant = UNK_001affdc;
+  operandRecord = IRInst__getOperandRecord(loadInst,2);
+  *(undefined4 *)(operandRecord + 0x10) = offsetSwizzleConstant;
+  Block__insertInstAfter(*(undefined4 *)(afterInst + 0x158),afterInst,loadInst);
   allocation[6] = allocation[6] | 0x8001000;
-  return puVar4;
+  return loadInst;
 }
 
 /* FUN_001312f4 @ 0x1312f4 (228 bytes) */

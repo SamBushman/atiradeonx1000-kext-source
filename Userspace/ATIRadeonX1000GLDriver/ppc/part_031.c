@@ -1813,28 +1813,28 @@ int FUN_0010e8e4(packEntry, sourceLaneCursor)
 }
 
 /* FUN_0010e95c @ 0x10e95c (116 bytes) */
-int FUN_0010e95c(param_1)
-  undefined4 *param_1;
+int FUN_0010e95c(packEntry)
+  undefined4 *packEntry;
 {
-  bool bVar1;
-  int iVar2;
-  int iVar3;
-  int iVar4;
-  undefined4 *puVar5;
+  bool moreLanes;
+  int destOperandRecord;
+  int activeLaneCount;
+  int laneIndex;
+  undefined4 *laneSlotCursor;
   
-  iVar3 = 0;
-  iVar4 = 0;
-  puVar5 = param_1;
+  activeLaneCount = 0;
+  laneIndex = 0;
+  laneSlotCursor = packEntry;
   do {
-    if ((puVar5[7] != 0) ||
-       (iVar2 = IRInst__getOperandRecord(*param_1,0), *(char *)(iVar4 + iVar2 + 0x10) == '\0')) {
-      iVar3 = iVar3 + 1;
+    if ((laneSlotCursor[7] != 0) ||
+       (destOperandRecord = IRInst__getOperandRecord(*packEntry,0), *(char *)(laneIndex + destOperandRecord + 0x10) == '\0')) {
+      activeLaneCount = activeLaneCount + 1;
     }
-    bVar1 = iVar4 != 3;
-    puVar5 = puVar5 + 1;
-    iVar4 = iVar4 + 1;
-  } while (bVar1);
-  return iVar3;
+    moreLanes = laneIndex != 3;
+    laneSlotCursor = laneSlotCursor + 1;
+    laneIndex = laneIndex + 1;
+  } while (moreLanes);
+  return activeLaneCount;
 }
 
 /* FUN_0010e9d0 @ 0x10e9d0 (96 bytes) */
