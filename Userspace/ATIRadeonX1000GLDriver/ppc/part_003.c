@@ -3614,9 +3614,9 @@ LAB_0001ecac:
 }
 
 /* gld_drawVertexArray @ 0x1ecd0 (696 bytes) */
-int gld_drawVertexArray(ctx, param_2, primitiveMode, first, count, indexType, drawFlags, currentAttribs)
+int gld_drawVertexArray(ctx, drawKind, primitiveMode, first, count, indexType, drawFlags, currentAttribs)
   int ctx;
-  int param_2;
+  int drawKind;
   int primitiveMode;
   int first;
   int count;
@@ -3636,7 +3636,7 @@ int gld_drawVertexArray(ctx, param_2, primitiveMode, first, count, indexType, dr
   int currentProgram;
   int currentVertexArray;
   byte *pbVar1;
-  bool bVar2;
+  bool hasVertices;
   bool hasElements;
   bool bVar4;
   byte bVar5;
@@ -3645,9 +3645,9 @@ int gld_drawVertexArray(ctx, param_2, primitiveMode, first, count, indexType, dr
   uint enabledArrays;
   bool keepStateCache;
   bool needStatePacket;
-  undefined4 *puVar10;
+  undefined4 *elementBufferRecord;
   undefined *indexWords;
-  int iVar12;
+  int casResult2;
   uint uVar13;
   uint *puVar15;
   uint *packetPtr;
@@ -3658,16 +3658,16 @@ int gld_drawVertexArray(ctx, param_2, primitiveMode, first, count, indexType, dr
   uint packetStateWords;
   int iVar22;
   uint uVar23;
-  uint uVar24;
+  uint casResult;
   byte *indexBytes;
   int arrayStateB;
-  code *pcVar27;
+  code *arrayRecordCursor;
   int *piVar28;
   uint uVar29;
   undefined4 *drawPacket;
   int arrayState;
   undefined *chunkCount;
-  uint *puVar33;
+  uint *refCountWord;
   int ring;
   char reservation;
   uint uVar35;
@@ -3680,9 +3680,9 @@ int gld_drawVertexArray(ctx, param_2, primitiveMode, first, count, indexType, dr
   double staleFpr6;
   double staleFpr7;
   double staleFpr8;
-  uint uStack00000030;
+  uint drawFlagsArg;
   double staleStackArg_ffffff68;
-  int iStack_60;
+  int clientDataBase;
   
   ring = ctx + GLD_commandStream;
   piVar28 = *(int **)(ctx + GLD_currentVertexArray);
@@ -3737,7 +3737,7 @@ LAB_0001ee2c:
     }
     puVar19 = (undefined *)(*(uint *)(arrayStateB + 0x308) | *(uint *)(arrayStateB + 0x30c));
     if ((((puVar19 != (undefined *)0x0) || ((*(uint *)(arrayStateB + 0x304) & 0x800000) == 0)) ||
-        (param_2 != 2)) || (indexType != ((unsigned char *)0x00001405))) goto LAB_0001ef10;
+        (drawKind != 2)) || (indexType != ((unsigned char *)0x00001405))) goto LAB_0001ef10;
     if ((drawFlags & 1) == 0) {
       if ((*(uint *)(arrayStateB + 0x314) <= *(uint *)(arrayStateB + 0xa8)) &&
          (*(uint *)(arrayStateB + 0xa8) < *(uint *)(arrayStateB + 0x314) + *(int *)(arrayStateB + 0x318))) {
@@ -3751,14 +3751,14 @@ LAB_0001ef30:
     chunkCount = ((unsigned char *)0x00003ffdU);
   }
 LAB_0001ef50:
-  uStack00000030 = drawFlags;
+  drawFlagsArg = drawFlags;
   /* hidden-argument defect (found auditing #70/gld_prepareDrawCount): this is the one real caller (of
    * 25) that supplies a genuine 7th argument - verified via real stock disassembly
    * (`lwz r9,0xa8(r10)`, matching this stack store just above). */
   puVar19 = (undefined *)
             ((uint (*)())gld_prepareDrawCount)(ctx,1,primitiveMode,count,count,puVar19,drawFlags,staleFpr1,staleFpr2,staleFpr3,staleFpr4,staleFpr5,
                          staleFpr6,staleFpr7,staleFpr8,staleStackArg_ffffff68);
-  bVar2 = 0 < (int)puVar19;
+  hasVertices = 0 < (int)puVar19;
   hasElements = puVar19 != (undefined *)0x0;
   needStatePacket = hasElements;
   switch(primitiveMode) {
@@ -3817,16 +3817,16 @@ LAB_0001f000:
     else {
       piVar28 = *(int **)(ctx + GLD_currentVertexArray);
     }
-    iStack_60 = 0;
-    puVar10 = *(undefined4 **)(piVar28[1] + 0x80);
+    clientDataBase = 0;
+    elementBufferRecord = *(undefined4 **)(piVar28[1] + 0x80);
     if (usesBuffers == 0) {
-      iStack_60 = *(int *)(arrayState + 0x314);
+      clientDataBase = *(int *)(arrayState + 0x314);
     }
     arrayPairs = enabledArrays + 1 >> 1;
     ringHeaderZero = (int *)0x0;
     drawPacket = (undefined4 *)0x0;
     chunkIndex = 0;
-    while (bVar2) {
+    while (hasVertices) {
       chunkFirst = first + chunkIndex * (int)chunkCount;
       if (puVar19 < chunkCount) {
         chunkCount = puVar19;
@@ -3900,37 +3900,37 @@ code_r0x0001f1ac:
           drawPacket[8] = *(undefined4 *)(*(int **)(ctx + GLD_currentVertexArray))[0x8a];
           piVar28 = (int *)(*(int *)(*(int *)(ctx + GLD_currentVertexArray) + 0x228) + 0x10);
           if (reservation != '\0') {
-            iVar12 = storeWordConditionalIndexed(*piVar28 + 0x10000,0,piVar28);
-            *piVar28 = iVar12;
+            casResult2 = storeWordConditionalIndexed(*piVar28 + 0x10000,0,piVar28);
+            *piVar28 = casResult2;
           }
           if (elementsInBuffer != 0) {
             packetPtr = drawPacket + 10;
             drawPacket[9] = **(undefined4 **)(*(int *)(ctx + GLD_currentVertexArray) + 0x228);
             piVar28 = (int *)(*(int *)(*(int *)(ctx + GLD_currentVertexArray) + 0x228) + 0x10);
             if (reservation != '\0') {
-              iVar12 = storeWordConditionalIndexed(*piVar28 + 0x10000,0,piVar28);
-              *piVar28 = iVar12;
+              casResult2 = storeWordConditionalIndexed(*piVar28 + 0x10000,0,piVar28);
+              *piVar28 = casResult2;
             }
           }
         }
         else {
           needStatePacket = false;
           if (enabledArrays != 0) {
-            pcVar27 = 0x00002728 + ctx;
+            arrayRecordCursor = 0x00002728 + ctx;
             uVar35 = enabledArrays;
             if (enabledArrays == 0) {
               uVar35 = 1;
             }
             do {
-              puVar15 = *(uint **)pcVar27;
-              pcVar27 = pcVar27 + 4;
-              puVar33 = puVar15 + 4;
+              puVar15 = *(uint **)arrayRecordCursor;
+              arrayRecordCursor = arrayRecordCursor + 4;
+              refCountWord = puVar15 + 4;
               *packetPtr = *puVar15;
               packetPtr = packetPtr + 1;
               do {
                 if (reservation != '\0') {
-                  uVar24 = storeWordConditionalIndexed(*puVar33 + 0x10000,0,puVar33);
-                  *puVar33 = uVar24;
+                  casResult = storeWordConditionalIndexed(*refCountWord + 0x10000,0,refCountWord);
+                  *refCountWord = casResult;
                   needStatePacket = true;
                 }
               } while (!needStatePacket);
@@ -3945,8 +3945,8 @@ code_r0x0001f1ac:
                                         8) + 0x10);
             do {
               if (reservation != '\0') {
-                iVar12 = storeWordConditionalIndexed(*piVar28 + 0x10000,0,piVar28);
-                *piVar28 = iVar12;
+                casResult2 = storeWordConditionalIndexed(*piVar28 + 0x10000,0,piVar28);
+                *piVar28 = casResult2;
                 needStatePacket = true;
               }
             } while (!needStatePacket);
@@ -3958,24 +3958,24 @@ code_r0x0001f1ac:
           *packetPtr = (arrayPairs * 3 + -1) * 0x10000 | 0x831;
           if (arrayPairs != 0) {
             piVar28 = (int *)(ctx + 0x278c);
-            iVar12 = ring;
+            casResult2 = ring;
             uVar35 = arrayPairs;
             do {
-              *puVar15 = *(uint *)(iVar12 + 0x2528);
+              *puVar15 = *(uint *)(casResult2 + 0x2528);
               if (piVar28[-1] == -1) {
                 puVar15[1] = 0xffffffff;
               }
               else {
-                puVar15[1] = piVar28[-1] + first * (*(uint *)(iVar12 + 0x2528) >> 8 & 0x7f) * 4;
+                puVar15[1] = piVar28[-1] + first * (*(uint *)(casResult2 + 0x2528) >> 8 & 0x7f) * 4;
               }
               if (*piVar28 == -1) {
                 puVar15[2] = 0xffffffff;
               }
               else {
-                puVar15[2] = *piVar28 + first * (*(byte *)(iVar12 + 0x2528) & 0x7f) * 4;
+                puVar15[2] = *piVar28 + first * (*(byte *)(casResult2 + 0x2528) & 0x7f) * 4;
               }
               puVar15 = puVar15 + 3;
-              iVar12 = iVar12 + 4;
+              casResult2 = casResult2 + 4;
               piVar28 = piVar28 + 2;
               uVar35 = uVar35 - 1;
             } while (uVar35 != 0);
@@ -4003,9 +4003,9 @@ code_r0x0001f1ac:
                 packetPtr[1] = *(uint *)(currentAttribs + 0x40);
                 packetPtr[2] = *(uint *)(currentAttribs + 0x44);
                 puVar15 = packetPtr + 5;
-                uVar24 = *(uint *)(currentAttribs + 0x48);
+                casResult = *(uint *)(currentAttribs + 0x48);
                 packetPtr[4] = 0x3f800000;
-                packetPtr[3] = uVar24;
+                packetPtr[3] = casResult;
               }
               if ((uVar35 & 4) != 0) {
                 *puVar15 = *(uint *)(currentAttribs + 0x30);
@@ -4017,32 +4017,32 @@ code_r0x0001f1ac:
               if ((uVar35 & 8) != 0) {
                 *puVar15 = *(uint *)(currentAttribs + 0x50);
                 puVar15[1] = *(uint *)(currentAttribs + 0x54);
-                uVar24 = *(uint *)(currentAttribs + 0x58);
+                casResult = *(uint *)(currentAttribs + 0x58);
                 puVar15[3] = 0x3f800000;
-                puVar15[2] = uVar24;
+                puVar15[2] = casResult;
                 puVar15 = puVar15 + 4;
               }
-              uVar24 = 0;
+              casResult = 0;
               iVar36 = 8;
-              iVar12 = currentAttribs;
+              casResult2 = currentAttribs;
               do {
-                if ((uVar35 & 0x400 << (uVar24 & 0x3f)) != 0) {
-                  *puVar15 = *(uint *)(iVar12 + 0x80);
-                  puVar15[1] = *(uint *)(iVar12 + 0x84);
-                  puVar15[2] = *(uint *)(iVar12 + 0x88);
-                  puVar15[3] = *(uint *)(iVar12 + 0x8c);
+                if ((uVar35 & 0x400 << (casResult & 0x3f)) != 0) {
+                  *puVar15 = *(uint *)(casResult2 + 0x80);
+                  puVar15[1] = *(uint *)(casResult2 + 0x84);
+                  puVar15[2] = *(uint *)(casResult2 + 0x88);
+                  puVar15[3] = *(uint *)(casResult2 + 0x8c);
                   puVar15 = puVar15 + 4;
                 }
-                uVar24 = uVar24 + 1;
-                iVar12 = iVar12 + 0x10;
+                casResult = casResult + 1;
+                casResult2 = casResult2 + 0x10;
                 iVar36 = iVar36 + -1;
               } while (iVar36 != 0);
               if ((uVar35 & 0x40000) != 0) {
-                uVar24 = *(uint *)(currentAttribs + 0x5c);
+                casResult = *(uint *)(currentAttribs + 0x5c);
                 puVar15[3] = 0x3f800000;
                 puVar15[1] = 0x3f800000;
                 puVar15[2] = 0x3f800000;
-                *puVar15 = uVar24;
+                *puVar15 = casResult;
                 puVar15 = puVar15 + 4;
               }
               packetPtr = puVar15;
@@ -4064,26 +4064,26 @@ code_r0x0001f1ac:
           packetPtr = puVar15;
           if ((currentProgram == 0) || (iVar36 = *(int *)(*(int *)(ctx + 0x29e8) + 0x28), iVar36 != 0))
           {
-            uVar24 = 0;
+            casResult = 0;
             puVar15 = (uint *)(ctx + 0x27dc);
             do {
-              uVar13 = 1 << (uVar24 & 0x3f);
+              uVar13 = 1 << (casResult & 0x3f);
               if ((uVar35 & uVar13) != 0) {
-                uVar23 = uVar24;
+                uVar23 = casResult;
                 if (iVar22 != 0) {
                   uVar23 = *puVar15;
                 }
                 uVar35 = uVar35 & ~uVar13;
-                iVar12 = currentAttribs + uVar23 * 0x10;
+                casResult2 = currentAttribs + uVar23 * 0x10;
                 bVar4 = uVar35 == 0;
                 *packetPtr = *(uint *)(currentAttribs + uVar23 * 0x10);
-                packetPtr[1] = *(uint *)(iVar12 + 4);
-                packetPtr[2] = *(uint *)(iVar12 + 8);
-                packetPtr[3] = *(uint *)(iVar12 + 0xc);
+                packetPtr[1] = *(uint *)(casResult2 + 4);
+                packetPtr[2] = *(uint *)(casResult2 + 8);
+                packetPtr[3] = *(uint *)(casResult2 + 0xc);
                 packetPtr = packetPtr + 4;
               }
               if (bVar4) break;
-              uVar24 = uVar24 + 1;
+              casResult = casResult + 1;
               puVar15 = puVar15 + 1;
               iVar36 = iVar36 + -1;
             } while (iVar36 != 0);
@@ -4093,17 +4093,17 @@ code_r0x0001f1ac:
 code_r0x0001f7c0:
       dataCacheBlockTouch(0x1d91c8);
       if (indexIsShort) {
-        puVar15 = (uint *)(chunkFirst * 2 + uStack00000030);
+        puVar15 = (uint *)(chunkFirst * 2 + drawFlagsArg);
         dataCacheBlockTouch(puVar15);
         dataCacheBlockTouch((int)puVar15 + (uint)*(byte *)(ctx + GLD_cacheLineSize));
         uVar35 = (int)chunkCount << 0x10 | *(uint *)(primitiveMode * 4 + 0x1d91c8) & 0xf | 0x10;
         if (elementsInBuffer == 0) {
           *packetPtr = 0x82c;
-          puVar33 = packetPtr + 4;
-          uVar24 = *(uint *)(GLD_vap_vte_cntl + ctx);
+          refCountWord = packetPtr + 4;
+          casResult = *(uint *)(GLD_vap_vte_cntl + ctx);
           packetPtr[2] = ((uint)(chunkCount + 1) >> 1) << 0x10 | 0xc0003600;
           packetPtr[3] = uVar35;
-          packetPtr[1] = uVar24;
+          packetPtr[1] = casResult;
           if (chunkCount < (undefined *)0x201) {
             uVar35 = (uint)chunkCount >> 3;
             packetPtr = puVar15;
@@ -4112,16 +4112,16 @@ code_r0x0001f7c0:
                 uVar35 = 1;
               }
               do {
-                uVar24 = *packetPtr;
+                casResult = *packetPtr;
                 uVar13 = packetPtr[1];
                 uVar23 = packetPtr[2];
                 uVar29 = packetPtr[3];
                 packetPtr = packetPtr + 4;
-                *puVar33 = uVar24 << 0x10 | uVar24 >> 0x10;
-                puVar33[1] = uVar13 << 0x10 | uVar13 >> 0x10;
-                puVar33[2] = uVar23 << 0x10 | uVar23 >> 0x10;
-                puVar33[3] = uVar29 << 0x10 | uVar29 >> 0x10;
-                puVar33 = puVar33 + 4;
+                *refCountWord = casResult << 0x10 | casResult >> 0x10;
+                refCountWord[1] = uVar13 << 0x10 | uVar13 >> 0x10;
+                refCountWord[2] = uVar23 << 0x10 | uVar23 >> 0x10;
+                refCountWord[3] = uVar29 << 0x10 | uVar29 >> 0x10;
+                refCountWord = refCountWord + 4;
                 uVar35 = uVar35 - 1;
               } while (uVar35 != 0);
             }
@@ -4131,136 +4131,136 @@ code_r0x0001f7c0:
                 uVar35 = 1;
               }
               do {
-                uVar24 = *packetPtr;
+                casResult = *packetPtr;
                 packetPtr = packetPtr + 1;
-                *puVar33 = uVar24 << 0x10 | uVar24 >> 0x10;
-                puVar33 = puVar33 + 1;
+                *refCountWord = casResult << 0x10 | casResult >> 0x10;
+                refCountWord = refCountWord + 1;
                 uVar35 = uVar35 - 1;
               } while (uVar35 != 0);
             }
             if (((uint)chunkCount & 1) != 0) {
-              *puVar33 = (uint)*(ushort *)((int)puVar15 + (int)chunkCount * 2 + -2);
-              puVar33 = puVar33 + 1;
+              *refCountWord = (uint)*(ushort *)((int)puVar15 + (int)chunkCount * 2 + -2);
+              refCountWord = refCountWord + 1;
             }
           }
           else {
             if (*(char *)(ctx + GLD_cacheLineSize) == -0x80) {
-              ((int (*)())copyIndices16Swapped_dcbz_entry)(puVar33,puVar15,chunkCount);
+              ((int (*)())copyIndices16Swapped_dcbz_entry)(refCountWord,puVar15,chunkCount);
             }
             else {
-              ((int (*)())copyIndices16Swapped_prefetch_entry)(puVar33,puVar15,chunkCount);
+              ((int (*)())copyIndices16Swapped_prefetch_entry)(refCountWord,puVar15,chunkCount);
             }
-            puVar33 = puVar33 + ((uint)(chunkCount + 1) >> 1);
+            refCountWord = refCountWord + ((uint)(chunkCount + 1) >> 1);
           }
         }
         else {
           *packetPtr = 0x82c;
-          uVar24 = *(uint *)(GLD_vap_vte_cntl + ctx);
+          casResult = *(uint *)(GLD_vap_vte_cntl + ctx);
           packetPtr[2] = 0xc0003600;
           packetPtr[3] = uVar35;
-          packetPtr[1] = uVar24;
+          packetPtr[1] = casResult;
           *ringHeaderZero = (int)packetPtr + (0x10 - (int)drawPacket) >> 2;
           ringHeaderZero = ringHeaderZero + 1;
           packetPtr[4] = 0xc0023300;
           packetPtr[5] = 0x80000810;
-          if (puVar10 == (undefined4 *)0x0) {
-            packetPtr[6] = (int)puVar15 - iStack_60;
+          if (elementBufferRecord == (undefined4 *)0x0) {
+            packetPtr[6] = (int)puVar15 - clientDataBase;
           }
           else {
-            packetPtr[6] = (int)puVar15 - *(int *)*puVar10;
+            packetPtr[6] = (int)puVar15 - *(int *)*elementBufferRecord;
           }
-          puVar33 = packetPtr + 8;
+          refCountWord = packetPtr + 8;
           packetPtr[7] = (uint)(chunkCount + 1) >> 1;
         }
       }
       else if (((unsigned char *)0x00001403) < indexType) {
         if (indexType == ((unsigned char *)0x00001405)) {
-          pvVar18 = (void *)(chunkFirst * 4 + uStack00000030);
+          pvVar18 = (void *)(chunkFirst * 4 + drawFlagsArg);
           uVar35 = (int)chunkCount << 0x10 | *(uint *)(primitiveMode * 4 + 0x1d91c8) & 0xf | 0x810;
           if (elementsInBuffer == 0) {
             *packetPtr = 0x82c;
-            puVar33 = packetPtr + 4 + (int)chunkCount;
-            uVar24 = *(uint *)(GLD_vap_vte_cntl + ctx);
+            refCountWord = packetPtr + 4 + (int)chunkCount;
+            casResult = *(uint *)(GLD_vap_vte_cntl + ctx);
             packetPtr[2] = (int)chunkCount << 0x10 | 0xc0003600;
             packetPtr[3] = uVar35;
-            packetPtr[1] = uVar24;
+            packetPtr[1] = casResult;
             _memcpy(packetPtr + 4,pvVar18,(int)chunkCount * 4);
           }
           else {
             *packetPtr = 0x82c;
-            uVar24 = *(uint *)(GLD_vap_vte_cntl + ctx);
+            casResult = *(uint *)(GLD_vap_vte_cntl + ctx);
             packetPtr[2] = 0xc0003600;
             packetPtr[3] = uVar35;
-            packetPtr[1] = uVar24;
+            packetPtr[1] = casResult;
             *ringHeaderZero = (int)packetPtr + (0x10 - (int)drawPacket) >> 2;
             packetPtr[4] = 0xc0023300;
             packetPtr[5] = 0x80000810;
             ringHeaderZero = ringHeaderZero + 1;
-            if (puVar10 == (undefined4 *)0x0) {
-              packetPtr[6] = (int)pvVar18 - iStack_60;
+            if (elementBufferRecord == (undefined4 *)0x0) {
+              packetPtr[6] = (int)pvVar18 - clientDataBase;
             }
             else {
-              packetPtr[6] = (int)pvVar18 - *(int *)*puVar10;
+              packetPtr[6] = (int)pvVar18 - *(int *)*elementBufferRecord;
             }
-            puVar33 = packetPtr + 8;
+            refCountWord = packetPtr + 8;
             packetPtr[7] = (uint)chunkCount;
           }
         }
         else {
           if (!notIndexed) goto LAB_0001f7f0;
-          puVar33 = packetPtr + 4;
-          uVar24 = *(uint *)(primitiveMode * 4 + 0x1d91c8);
+          refCountWord = packetPtr + 4;
+          casResult = *(uint *)(primitiveMode * 4 + 0x1d91c8);
           *packetPtr = 0x82c;
           first = first + (int)chunkCount;
           uVar35 = *(uint *)(GLD_vap_vte_cntl + ctx);
           packetPtr[2] = 0xc0003400;
           packetPtr[1] = uVar35;
-          packetPtr[3] = (int)chunkCount << 0x10 | uVar24 & 0xf | 0x820;
+          packetPtr[3] = (int)chunkCount << 0x10 | casResult & 0xf | 0x820;
         }
       }
       else {
         if (indexType != ((unsigned char *)0x00001401)) goto LAB_0001f7f0;
-        uVar24 = *(uint *)(primitiveMode * 4 + 0x1d91c8);
+        casResult = *(uint *)(primitiveMode * 4 + 0x1d91c8);
         *packetPtr = 0x82c;
-        puVar33 = packetPtr + 4;
+        refCountWord = packetPtr + 4;
         uVar35 = *(uint *)(GLD_vap_vte_cntl + ctx);
         packetPtr[2] = (int)(chunkCount + 1) * 0x8000 & 0xffff0000U | 0xc0003600;
         packetPtr[1] = uVar35;
-        packetPtr[3] = (int)chunkCount << 0x10 | uVar24 & 0xf | 0x10;
+        packetPtr[3] = (int)chunkCount << 0x10 | casResult & 0xf | 0x10;
         if (((uint)chunkCount & 0xfffffffe) != 0) {
           uVar35 = 0;
-          indexBytes = (byte *)(chunkFirst + uStack00000030);
+          indexBytes = (byte *)(chunkFirst + drawFlagsArg);
           do {
             pbVar1 = indexBytes + 1;
             uVar35 = uVar35 + 2;
             bVar5 = *indexBytes;
             indexBytes = indexBytes + 2;
-            *puVar33 = (uint)*pbVar1 << 0x10 | (uint)bVar5;
-            puVar33 = puVar33 + 1;
+            *refCountWord = (uint)*pbVar1 << 0x10 | (uint)bVar5;
+            refCountWord = refCountWord + 1;
           } while (uVar35 < ((uint)chunkCount & 0xfffffffe));
         }
         if (((uint)chunkCount & 1) != 0) {
-          *puVar33 = (uint)((byte *)(chunkFirst + uStack00000030))[(int)(chunkCount + -1)];
-          puVar33 = puVar33 + 1;
+          *refCountWord = (uint)((byte *)(chunkFirst + drawFlagsArg))[(int)(chunkCount + -1)];
+          refCountWord = refCountWord + 1;
         }
       }
       puVar19 = puVar19 + -(int)chunkCount;
-      *puVar33 = (uint)((unsigned char *)0x00001393U);
-      puVar33[1] = 0;
-      puVar33 = puVar33 + 2;
+      *refCountWord = (uint)((unsigned char *)0x00001393U);
+      refCountWord[1] = 0;
+      refCountWord = refCountWord + 2;
       chunkIndex = chunkIndex + 1;
-      *(uint **)(ctx + GLD_streamCurrent) = puVar33;
-      (**(code **)(ctx + GLD_streamSetCurrent))(ring,puVar33);
-      bVar2 = 0 < (int)puVar19;
-      if (*(uint **)(ctx + GLD_streamSoftLimit) <= puVar33) {
+      *(uint **)(ctx + GLD_streamCurrent) = refCountWord;
+      (**(code **)(ctx + GLD_streamSetCurrent))(ring,refCountWord);
+      hasVertices = 0 < (int)puVar19;
+      if (*(uint **)(ctx + GLD_streamSoftLimit) <= refCountWord) {
         retireCounter = *(byte **)(ctx + GLD_retireCounter);
         if (((uint)retireCounter[3] << 0x18 | (uint)retireCounter[2] << 0x10 | (uint)retireCounter[1] << 8 |
             (uint)*retireCounter) == *(uint *)(retireCounter + 0x20)) {
           ((int (*)())gld_submitRing)(ctx,0x1000000);
-          bVar2 = 0 < (int)puVar19;
+          hasVertices = 0 < (int)puVar19;
         }
         else {
-          bVar2 = 0 < (int)puVar19;
+          hasVertices = 0 < (int)puVar19;
           *(uint **)(ctx + GLD_streamSoftLimit) = *(uint **)(ctx + GLD_streamSoftLimit) + 0x1000;
         }
       }
