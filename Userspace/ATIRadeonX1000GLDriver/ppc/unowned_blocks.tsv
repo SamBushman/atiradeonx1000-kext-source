@@ -86,9 +86,9 @@ start	end	kind	owner	instructions	calls
 9538	9540	padding	_gldRelatePipelineProgram	2	
 9564	9570	padding	_gldGetPipelineProgramInfo	3	
 95d8	95e0	padding	_gldDestroyPipelineProgram	2	
-966c	9670	padding	FUN_000095e0	1	
-96a4	96b0	padding	FUN_000095e0	3	
-96f8	973c	table	FUN_000096b0	17	
+966c	9670	padding	gld_resolveProgramSlots	1	
+96a4	96b0	padding	gld_resolveProgramSlots	3	
+96f8	973c	table	gld_decodeProgramOperandOffset	17	
 9780	979c	table	FUN_00009750	7	
 980c	9810	padding	FUN_000097fc	1	
 98b0	98c8	table	FUN_00009880	6	
@@ -103,10 +103,10 @@ a004	a010	padding	_gldCreateQuery	3
 a098	a0a0	padding	_gldCreateQuery	2	
 a0e4	a0f0	padding	gldFormatBitsPerPixel	3	
 a17c	a180	padding	gldFormatAlphaBits	1	
-a1cc	a1d0	padding	FUN_0000a180	1	
-a1ec	a1f0	padding	FUN_0000a180	1	
-a20c	a210	padding	FUN_0000a180	1	
-a2e4	a2f0	padding	FUN_0000a180	3	
+a1cc	a1d0	padding	gld_channelBitsForFormat	1	
+a1ec	a1f0	padding	gld_channelBitsForFormat	1	
+a20c	a210	padding	gld_channelBitsForFormat	1	
+a2e4	a2f0	padding	gld_channelBitsForFormat	3	
 a328	a358	table	gld_textureVariantClass	12	
 a368	a370	padding	gld_textureVariantClass	2	
 a388	a390	padding	gld_textureVariantClass	2	

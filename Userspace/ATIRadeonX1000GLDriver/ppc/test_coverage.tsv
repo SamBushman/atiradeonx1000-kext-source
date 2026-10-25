@@ -72,7 +72,7 @@
 0x7c70	_gldCreateFramebuffer	104	no	calls an import (calloc)
 0x7ce0	_gldReclaimFramebuffer	4	no	tiny (4 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x7cf0	_gldDestroyFramebuffer	96	no	calls an import (free)
-0x7d50	FUN_00007d50	368	no	atomic / cache / barrier instruction
+0x7d50	gld_bindCurrentFramebuffer	368	no	atomic / cache / barrier instruction
 0x7ec0	gldDepthBitsToFormatMask	256	yes	
 0x7fc0	gldColorBitsToFormatMask	112	yes	
 0x8030	gldAlphaBitsToFormatMask	128	yes	
@@ -95,8 +95,8 @@
 0x94e0	_gldRelatePipelineProgram	84	yes	
 0x9540	_gldGetPipelineProgramInfo	36	yes	
 0x9570	_gldDestroyPipelineProgram	104	no	calls an import (free)
-0x95e0	FUN_000095e0	192	yes	
-0x96b0	FUN_000096b0	72	yes	
+0x95e0	gld_resolveProgramSlots	192	yes	
+0x96b0	gld_decodeProgramOperandOffset	72	yes	
 0x973c	FUN_0000973c	20	no	tiny (20 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x9750	FUN_00009750	48	no	tiny (48 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x979c	FUN_0000979c	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
@@ -118,7 +118,7 @@
 0xa0a0	gldFormatBitsPerPixel	68	yes	
 0xa0f0	FUN_0000a0f0	48	yes	
 0xa120	gldFormatAlphaBits	92	yes	
-0xa180	FUN_0000a180	344	yes	
+0xa180	gld_channelBitsForFormat	344	yes	
 0xa2f0	gld_textureVariantClass	184	yes	
 0xa3f0	gldPixelUnitBytes	592	yes	
 0xa670	gldPixelRowBytes	100	yes	

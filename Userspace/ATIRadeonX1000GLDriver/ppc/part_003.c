@@ -5303,7 +5303,7 @@ uint _gldUpdateDispatch(int ctx,int dispatch,uint *dirtyBits,undefined4 scratchR
   }
   dirtyBitsArg = dirtyBits;
   if ((int)*dirtyBits < 0) {
-    fpPassThrough1 = (double)FUN_00007d50(ctx,dispatch,dirtyBits,scratchR6,scratchR7,scratchR8);
+    fpPassThrough1 = (double)gld_bindCurrentFramebuffer(ctx,dispatch,dirtyBits,scratchR6,scratchR7,scratchR8);
   }
   framebufferObj = *(int **)(ctx + GLD_boundFramebuffer);
   if (((framebufferObj == (int *)0x0) || (*(ushort *)(*framebufferObj + 0x90) == 0)) ||
@@ -5483,7 +5483,7 @@ LAB_000225e8:
         _pthread_mutex_lock(*(undefined4 *)(ctx + GLD_mutex));
       }
       mutexHeld = mutexHeld && !noUnitUpdate;
-      fpPassThrough1 = (double)FUN_000095e0(ctx);
+      fpPassThrough1 = (double)gld_resolveProgramSlots(ctx);
       iVar8 = *(int *)(ctx + GLD_currentProgram);
       if (bVar27 != (iVar8 != 0)) {
         *(undefined1 *)(ctx + 0x26bd) = 1;
