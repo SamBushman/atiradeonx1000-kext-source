@@ -50,8 +50,8 @@ cec48	cec5c	FUN_000cea6c
 d9f34	d9f3c	FUN_000d9e98
 d9f78	d9f80	FUN_000d9f3c
 da880	da8a8	FUN_000da78c
-e2084	e208c	FUN_000e1fe4
-e208c	e2094	FUN_000e1fe4
+e2084	e208c	Compiler__releaseChipAndPools
+e208c	e2094	Compiler__releaseChipAndPools
 e2884	e28a8	Block__accept
 e28a8	e28cc	Block__accept
 e28cc	e28f0	Block__accept

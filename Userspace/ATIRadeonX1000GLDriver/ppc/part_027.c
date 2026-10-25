@@ -601,7 +601,7 @@ int Inst__isBeforeOrSame(instA, instB)
   undefined4 blockOrder;
   
   if (*(int *)(instA + 0x158) != *(int *)(instB + 0x158)) {
-    blockOrder = FUN_000e78f8(*(int *)(instA + 0x158),*(int *)(instB + 0x158));
+    blockOrder = Block__isAncestorOf(*(int *)(instA + 0x158),*(int *)(instB + 0x158));
     return blockOrder;
   }
   if (instA != instB) {
@@ -1187,33 +1187,34 @@ int IRInst__setOperandSourceRaw(inst, operandIndex, source, compiler)
   undefined4 source;
   int compiler;
 {
+  int *extraSlotRef;
   uint instVectorAt118Count;
   uint *instVectorAt118;
   undefined4 *allocation;
-  int *piVar2;
-  uint uVar3;
+  int *newExtraSlotRef;
+  uint extraVectorCount;
   undefined4 arena;
-  uint uVar5;
-  uint *puVar6;
+  uint extraSlotIndex;
+  uint *extraOperandVector;
   
   if (operandIndex < 5) {
     *(undefined4 *)(operandIndex * 0x18 + inst + 0x90) = source;
   }
   else {
-    puVar6 = *(uint **)(inst + 0x118);
-    if (puVar6 == (uint *)0x0) {
+    extraOperandVector = *(uint **)(inst + 0x118);
+    if (extraOperandVector == (uint *)0x0) {
       arena = *(undefined4 *)(compiler + COMP_arenaA);
       allocation = (undefined4 *)Arena__alloc(arena,0x14);
-      puVar6 = allocation + 1;
+      extraOperandVector = allocation + 1;
       *allocation = arena;
       allocation[1] = 2;
       allocation[2] = 0;
       allocation[4] = arena;
       arena = Arena__alloc(arena,8);
       allocation[3] = arena;
-      *(uint **)(inst + 0x118) = puVar6;
+      *(uint **)(inst + 0x118) = extraOperandVector;
     }
-    if ((int)puVar6[1] < (int)(operandIndex - 4U)) {
+    if ((int)extraOperandVector[1] < (int)(operandIndex - 4U)) {
       arena = *(undefined4 *)(compiler + COMP_arenaA);
       allocation = (undefined4 *)Arena__alloc(arena,0x1c);
       *allocation = arena;
@@ -1224,29 +1225,29 @@ int IRInst__setOperandSourceRaw(inst, operandIndex, source, compiler)
       instVectorAt118Count = instVectorAt118[1];
       if (instVectorAt118Count < *instVectorAt118) {
         _memset((void *)(instVectorAt118Count * 4 + instVectorAt118[2]),0,4);
-        piVar2 = (int *)(instVectorAt118Count * 4 + instVectorAt118[2]);
+        newExtraSlotRef = (int *)(instVectorAt118Count * 4 + instVectorAt118[2]);
         instVectorAt118[1] = instVectorAt118Count + 1;
       }
       else {
-        piVar2 = (int *)Vector__elementRefGrow(instVectorAt118,instVectorAt118Count);
+        newExtraSlotRef = (int *)Vector__elementRefGrow(instVectorAt118,instVectorAt118Count);
       }
-      *piVar2 = (int)(allocation + 1);
+      *newExtraSlotRef = (int)(allocation + 1);
       ((int (*)())setSelectedConstantWord)(allocation + 1,operandIndex);
-      puVar6 = *(uint **)(inst + 0x118);
+      extraOperandVector = *(uint **)(inst + 0x118);
     }
-    uVar5 = operandIndex - 5;
-    if (uVar5 < *puVar6) {
-      uVar3 = puVar6[1];
-      if (uVar3 <= uVar5) {
-        _memset((void *)(uVar3 * 4 + puVar6[2]),0,(uVar5 - uVar3) * 4 + 4);
-        puVar6[1] = operandIndex - 4U;
+    extraSlotIndex = operandIndex - 5;
+    if (extraSlotIndex < *extraOperandVector) {
+      extraVectorCount = extraOperandVector[1];
+      if (extraVectorCount <= extraSlotIndex) {
+        _memset((void *)(extraVectorCount * 4 + extraOperandVector[2]),0,(extraSlotIndex - extraVectorCount) * 4 + 4);
+        extraOperandVector[1] = operandIndex - 4U;
       }
-      piVar2 = (int *)(uVar5 * 4 + puVar6[2]);
+      extraSlotRef = (int *)(extraSlotIndex * 4 + extraOperandVector[2]);
     }
     else {
-      piVar2 = (int *)Vector__elementRefGrow(puVar6,uVar5);
+      extraSlotRef = (int *)Vector__elementRefGrow(extraOperandVector,extraSlotIndex);
     }
-    *(undefined4 *)(*piVar2 + 4) = source;
+    *(undefined4 *)(*extraSlotRef + 4) = source;
   }
   return;
 }

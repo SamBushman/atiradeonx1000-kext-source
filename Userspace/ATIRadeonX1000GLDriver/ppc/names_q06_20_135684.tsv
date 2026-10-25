@@ -1,0 +1,31 @@
+local	FUN_00135684	param_1	graph	INFERRED	register interference graph (+4 node vector); appends nodeB's entry to nodeA's list (node +0x10)
+local	FUN_00135684	param_2	nodeA	INFERRED	node whose list receives the entry
+local	FUN_00135684	param_3	nodeB	INFERRED	node whose entry is appended
+use	FUN_00135684	uVar1	nodeVectorCountA	INFERRED	filled count of the node vector, first lookup	^\s*uVar1\ =\ puVar5\[1\];$	+1
+use	FUN_00135684	uVar1	nodeVectorCountA	INFERRED	filled count of the node vector, first lookup	^\s*if\ \(uVar1\ <=\ param_2\)\ \{$	+2
+use	FUN_00135684	uVar1	nodeVectorCountB	INFERRED	filled count of the node vector, second lookup	^\s*uVar1\ =\ puVar6\[1\];$	+3
+use	FUN_00135684	uVar1	listCount	INFERRED	filled count of nodeA's list	^\s*uVar1\ =\ puVar5\[1\];$@2	+5
+use	FUN_00135684	uVar1	listCount	INFERRED	filled count of nodeA's list	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar5,uVar1\);$	+1
+use	FUN_00135684	piVar2	nodeARef	INFERRED	element reference of nodeA in the node vector	^\s*piVar2\ =\ \(int\ \*\)\(param_2\ \*\ 4\ \+\ puVar5\[2\]\);$	+1
+use	FUN_00135684	piVar2	nodeARef	INFERRED	element reference of nodeA in the node vector	^\s*piVar2\ =\ \(int\ \*\)FUN_0019423c\(puVar5,param_2\);$	+1
+use	FUN_00135684	piVar2	nodeARef	INFERRED	element reference of nodeA in the node vector	^\s*puVar5\ =\ \*\(uint\ \*\*\)\(\*piVar2\ \+\ 0x10\);$	+1
+use	FUN_00135684	puVar3	listSlotRef	INFERRED	new slot reference at the end of nodeA's list	^\s*puVar3\ =\ \(undefined4\ \*\)\(uVar1\ \*\ 4\ \+\ puVar5\[2\]\);$	+1
+use	FUN_00135684	puVar3	listSlotRef	INFERRED	new slot reference at the end of nodeA's list	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar5,uVar1\);$	+1
+use	FUN_00135684	puVar3	listSlotRef	INFERRED	new slot reference at the end of nodeA's list	^\s*\*puVar3\ =\ \*puVar4;$	+1
+use	FUN_00135684	puVar4	nodeBRef	INFERRED	element reference of nodeB in the node vector	^\s*puVar4\ =\ \(undefined4\ \*\)\(param_3\ \*\ 4\ \+\ puVar6\[2\]\);$	+1
+use	FUN_00135684	puVar4	nodeBRef	INFERRED	element reference of nodeB in the node vector	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar6,param_3\);$	+1
+use	FUN_00135684	puVar4	nodeBRef	INFERRED	element reference of nodeB in the node vector	^\s*\*puVar3\ =\ \*puVar4;$	+1
+use	FUN_00135684	puVar5	nodeVectorHeader	INFERRED	node vector header (graph +4)	^\s*puVar5\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$	+4
+use	FUN_00135684	puVar5	nodeVectorHeader	INFERRED	node vector header (graph +4)	^\s*_memset\(uVar1\ \*\ 4\ \+\ puVar5\[2\],0,\(param_2\ \-\ uVar1\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_00135684	puVar5	nodeVectorHeader	INFERRED	node vector header (graph +4)	^\s*piVar2\ =\ \(int\ \*\)\(param_2\ \*\ 4\ \+\ puVar5\[2\]\);$	+1
+use	FUN_00135684	puVar5	nodeVectorHeader	INFERRED	node vector header (graph +4)	^\s*piVar2\ =\ \(int\ \*\)FUN_0019423c\(puVar5,param_2\);$	+1
+use	FUN_00135684	puVar5	nodeAList	INFERRED	nodeA's list header (node +0x10)	^\s*puVar5\ =\ \*\(uint\ \*\*\)\(\*piVar2\ \+\ 0x10\);$	+1
+use	FUN_00135684	puVar5	nodeAList	INFERRED	nodeA's list header (node +0x10)	^\s*uVar1\ =\ puVar5\[1\];$@2	+5
+use	FUN_00135684	puVar5	nodeAList	INFERRED	nodeA's list header (node +0x10)	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar5,uVar1\);$	+1
+use	FUN_00135684	puVar6	nodeVectorAlias	INFERRED	node vector header kept for the second lookup	^\s*puVar6\ =\ puVar5;$	+1
+use	FUN_00135684	puVar6	nodeVectorAlias	INFERRED	node vector header kept for the second lookup	^\s*puVar6\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$	+1
+use	FUN_00135684	puVar6	nodeVectorAlias	INFERRED	node vector header kept for the second lookup	^\s*puVar6\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$@2	+1
+use	FUN_00135684	puVar6	nodeVectorAlias	INFERRED	node vector header kept for the second lookup	^\s*if\ \(param_3\ <\ \*puVar6\)\ \{$	+2
+use	FUN_00135684	puVar6	nodeVectorAlias	INFERRED	node vector header kept for the second lookup	^\s*_memset\(uVar1\ \*\ 4\ \+\ puVar6\[2\],0,\(param_3\ \-\ uVar1\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_00135684	puVar6	nodeVectorAlias	INFERRED	node vector header kept for the second lookup	^\s*puVar4\ =\ \(undefined4\ \*\)\(param_3\ \*\ 4\ \+\ puVar6\[2\]\);$	+1
+use	FUN_00135684	puVar6	nodeVectorAlias	INFERRED	node vector header kept for the second lookup	^\s*puVar4\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar6,param_3\);$	+1

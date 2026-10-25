@@ -180,7 +180,7 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
     } while (loopRemaining2 != 0);
     piVar3 = laneSwizzle;
     if (iVar6 == 0) {
-      loopRemaining2 = FUN_000f6a04(program,constants,*laneSwizzle);
+      loopRemaining2 = Program__findOrCreateConstInst(program,constants,*laneSwizzle);
     }
     else {
       puVar5 = (undefined *)0x4;
@@ -200,17 +200,17 @@ int FudoPs__vslot85_findOrEncodeConstantVector(this, program, constants, laneSwi
         loopRemaining2 = loopRemaining2 + 4;
         loopRemaining = loopRemaining + -1;
       } while (loopRemaining != 0);
-      loopRemaining2 = FUN_000f6a04(program,&local_38,0x10203);
+      loopRemaining2 = Program__findOrCreateConstInst(program,&local_38,0x10203);
     }
     if (loopRemaining2 != 0) {
       return loopRemaining2;
     }
     uVar8 = *(undefined4 *)(program + 0x3ac);
-    iVar6 = FUN_000f5f94(uVar8,constants,laneSwizzle,piVar3,puVar5,iVar6,loopPtr);
+    iVar6 = RegisterMap__findConstVectorExact(uVar8,constants,laneSwizzle,piVar3,puVar5,iVar6,loopPtr);
     if (iVar6 != 0) {
       return iVar6;
     }
-    iVar6 = FUN_000f57f0(uVar8,constants,laneSwizzle,piVar3);
+    iVar6 = RegisterMap__findConstVector(uVar8,constants,laneSwizzle,piVar3);
     if (iVar6 != 0) {
       return iVar6;
     }
@@ -2113,115 +2113,119 @@ int FUN_00194a94(param_1, param_2)
 }
 
 /* HashTable__grow @ 0x194aa8 (260 bytes) */
-int HashTable__grow(param_1)
-  uint *param_1;
+int HashTable__grow(table)
+  uint *table;
 {
+  uint highBucketSize;
+  uint lowBucketSize;
+  uint hashValue;
+  uint remainingCount;
   uint allocation3;
   uint allocation2;
   uint *allocation;
-  uint uVar3;
-  undefined4 *puVar4;
-  uint uVar5;
-  int iVar6;
+  uint vectorFilledCount;
+  undefined4 *elementRef;
+  uint oldBucketCount;
+  int bucketByteOffset;
   undefined4 *loopPtr;
   uint loopIndex3;
-  uint *puVar9;
-  uint uVar10;
+  uint *lowBucketVector;
+  uint oldBucketSize;
   uint loopIndex2;
-  int iVar12;
-  uint *puVar13;
-  uint *puVar14;
-  undefined4 uVar15;
-  uint uVar16;
-  uint uVar17;
+  int elementByteOffset;
+  uint *oldBucket;
+  uint *highBucketVector;
+  undefined4 entry;
+  uint prevIndex;
+  uint arena;
   
-  uVar5 = *param_1;
-  *param_1 = uVar5 << 1;
-  allocation2 = ((int (*)())Arena__alloc)(param_1[5],uVar5 << 3);
-  _memset(allocation2,0,*param_1 << 2);
-  if (0 < (int)uVar5) {
+  oldBucketCount = *table;
+  *table = oldBucketCount << 1;
+  allocation2 = ((int (*)())Arena__alloc)(table[5],oldBucketCount << 3);
+  _memset(allocation2,0,*table << 2);
+  if (0 < (int)oldBucketCount) {
     loopIndex3 = 0;
-    loopPtr = (undefined4 *)(allocation2 + uVar5 * 4);
-    iVar6 = 0;
+    loopPtr = (undefined4 *)(allocation2 + oldBucketCount * 4);
+    bucketByteOffset = 0;
     do {
-      puVar13 = *(uint **)(param_1[2] + iVar6);
-      if (puVar13 != (uint *)0x0) {
-        uVar17 = param_1[5];
-        allocation = (uint *)((int (*)())Arena__alloc)(uVar17,0x14);
-        *allocation = uVar17;
-        uVar17 = param_1[5];
+      oldBucket = *(uint **)(table[2] + bucketByteOffset);
+      if (oldBucket != (uint *)0x0) {
+        arena = table[5];
+        allocation = (uint *)((int (*)())Arena__alloc)(arena,0x14);
+        *allocation = arena;
+        arena = table[5];
         allocation[1] = 2;
-        allocation[4] = uVar17;
+        allocation[4] = arena;
         allocation[2] = 0;
-        allocation3 = ((int (*)())Arena__alloc)(uVar17,8);
+        allocation3 = ((int (*)())Arena__alloc)(arena,8);
         allocation[3] = allocation3;
-        *(uint **)(allocation2 + iVar6) = allocation + 1;
-        uVar17 = param_1[5];
-        allocation = (uint *)((int (*)())Arena__alloc)(uVar17,0x14);
-        *allocation = uVar17;
-        puVar14 = allocation + 1;
-        uVar17 = param_1[5];
+        *(uint **)(allocation2 + bucketByteOffset) = allocation + 1;
+        arena = table[5];
+        allocation = (uint *)((int (*)())Arena__alloc)(arena,0x14);
+        *allocation = arena;
+        highBucketVector = allocation + 1;
+        arena = table[5];
         allocation[1] = 2;
         allocation[2] = 0;
-        allocation[4] = uVar17;
-        allocation3 = ((int (*)())Arena__alloc)(uVar17,8);
+        allocation[4] = arena;
+        allocation3 = ((int (*)())Arena__alloc)(arena,8);
         allocation[3] = allocation3;
         loopIndex2 = 0;
-        *loopPtr = puVar14;
-        uVar10 = puVar13[1];
-        puVar9 = *(uint **)(allocation2 + iVar6);
-        iVar12 = uVar10 << 2;
-        uVar17 = uVar10;
+        *loopPtr = highBucketVector;
+        oldBucketSize = oldBucket[1];
+        lowBucketVector = *(uint **)(allocation2 + bucketByteOffset);
+        elementByteOffset = oldBucketSize << 2;
+        remainingCount = oldBucketSize;
         while( true ) {
-          iVar12 = iVar12 + -4;
-          uVar16 = uVar17 - 1;
-          if (uVar10 == loopIndex2) break;
-          if (uVar16 < *puVar13) {
-            uVar3 = puVar13[1];
-            if (uVar3 <= uVar16) {
-              _memset(uVar3 * 4 + puVar13[2],0,(uVar16 - uVar3) * 4 + 4);
-              puVar13[1] = uVar17;
+          elementByteOffset = elementByteOffset + -4;
+          prevIndex = remainingCount - 1;
+          if (oldBucketSize == loopIndex2) break;
+          if (prevIndex < *oldBucket) {
+            vectorFilledCount = oldBucket[1];
+            if (vectorFilledCount <= prevIndex) {
+              _memset(vectorFilledCount * 4 + oldBucket[2],0,(prevIndex - vectorFilledCount) * 4 + 4);
+              oldBucket[1] = remainingCount;
             }
-            puVar4 = (undefined4 *)(iVar12 + puVar13[2]);
+            elementRef = (undefined4 *)(elementByteOffset + oldBucket[2]);
           }
           else {
-            puVar4 = (undefined4 *)((int (*)())Vector__elementRefGrow)(puVar13,uVar16);
+            elementRef = (undefined4 *)((int (*)())Vector__elementRefGrow)(oldBucket,prevIndex);
           }
-          uVar15 = *puVar4;
-          uVar17 = (*(code *)param_1[4])(uVar15);
-          if (loopIndex3 == (uVar17 & *param_1 - 1)) {
-            uVar17 = puVar9[1];
-            if (uVar17 < *puVar9) {
-              _memset(uVar17 * 4 + puVar9[2],0,4);
-              puVar4 = (undefined4 *)(uVar17 * 4 + puVar9[2]);
-              puVar9[1] = uVar17 + 1;
+          entry = *elementRef;
+          hashValue = (*(code *)table[4])(entry);
+          if (loopIndex3 == (hashValue & *table - 1)) {
+            lowBucketSize = lowBucketVector[1];
+            if (lowBucketSize < *lowBucketVector) {
+              _memset(lowBucketSize * 4 + lowBucketVector[2],0,4);
+              elementRef = (undefined4 *)(lowBucketSize * 4 + lowBucketVector[2]);
+              lowBucketVector[1] = lowBucketSize + 1;
             }
             else {
-              puVar4 = (undefined4 *)((int (*)())Vector__elementRefGrow)(puVar9,uVar17);
+              elementRef = (undefined4 *)((int (*)())Vector__elementRefGrow)(lowBucketVector,lowBucketSize);
             }
           }
           else {
-            uVar17 = allocation[2];
-            if (uVar17 < *puVar14) {
-              _memset(uVar17 * 4 + allocation[3],0,4);
-              puVar4 = (undefined4 *)(uVar17 * 4 + allocation[3]);
-              allocation[2] = uVar17 + 1;
+            highBucketSize = allocation[2];
+            if (highBucketSize < *highBucketVector) {
+              _memset(highBucketSize * 4 + allocation[3],0,4);
+              elementRef = (undefined4 *)(highBucketSize * 4 + allocation[3]);
+              allocation[2] = highBucketSize + 1;
             }
             else {
-              puVar4 = (undefined4 *)((int (*)())Vector__elementRefGrow)(puVar14,uVar17);
+              elementRef = (undefined4 *)((int (*)())Vector__elementRefGrow)(highBucketVector,highBucketSize);
             }
           }
-          *puVar4 = uVar15;
+          *elementRef = entry;
           loopIndex2 = loopIndex2 + 1;
-          uVar17 = uVar16;
+          remainingCount = prevIndex;
         }
       }
       loopIndex3 = loopIndex3 + 1;
-      iVar6 = iVar6 + 4;
+      bucketByteOffset = bucketByteOffset + 4;
       loopPtr = loopPtr + 1;
-    } while (uVar5 != loopIndex3);
+    } while (oldBucketCount != loopIndex3);
   }
-  param_1[2] = allocation2;
+  table[2] = allocation2;
   return;
 }
 
@@ -2263,115 +2267,119 @@ int HashTable__insert(param_1, param_2)
 }
 
 /* HashTable__grow_194e44 @ 0x194e44 (260 bytes) */
-int HashTable__grow_194e44(param_1)
-  uint *param_1;
+int HashTable__grow_194e44(table)
+  uint *table;
 {
+  uint highBucketSize;
+  uint lowBucketSize;
+  uint hashValue;
+  uint remainingCount;
   uint allocation3;
   uint allocation2;
   uint *allocation;
-  uint uVar3;
-  undefined4 *puVar4;
-  undefined4 *puVar5;
-  uint uVar6;
-  int iVar7;
+  uint vectorFilledCount;
+  undefined4 *elementRef;
+  undefined4 *destElementRef;
+  uint oldBucketCount;
+  int bucketByteOffset;
   undefined4 *loopPtr;
   uint loopIndex3;
-  uint *puVar10;
-  uint uVar11;
+  uint *lowBucketVector;
+  uint oldBucketSize;
   uint loopIndex2;
-  int iVar13;
-  uint *puVar14;
-  uint *puVar15;
-  uint uVar16;
-  uint uVar17;
+  int elementByteOffset;
+  uint *oldBucket;
+  uint *highBucketVector;
+  uint prevIndex;
+  uint arena;
   
-  uVar6 = *param_1;
-  *param_1 = uVar6 << 1;
-  allocation2 = ((int (*)())Arena__alloc)(param_1[5],uVar6 << 3);
-  _memset(allocation2,0,*param_1 << 2);
-  if (uVar6 != 0) {
+  oldBucketCount = *table;
+  *table = oldBucketCount << 1;
+  allocation2 = ((int (*)())Arena__alloc)(table[5],oldBucketCount << 3);
+  _memset(allocation2,0,*table << 2);
+  if (oldBucketCount != 0) {
     loopIndex3 = 0;
-    loopPtr = (undefined4 *)(allocation2 + uVar6 * 4);
-    iVar7 = 0;
+    loopPtr = (undefined4 *)(allocation2 + oldBucketCount * 4);
+    bucketByteOffset = 0;
     do {
-      puVar14 = *(uint **)(param_1[2] + iVar7);
-      if (puVar14 != (uint *)0x0) {
-        uVar17 = param_1[5];
-        allocation = (uint *)((int (*)())Arena__alloc)(uVar17,0x14);
-        *allocation = uVar17;
-        uVar17 = param_1[5];
+      oldBucket = *(uint **)(table[2] + bucketByteOffset);
+      if (oldBucket != (uint *)0x0) {
+        arena = table[5];
+        allocation = (uint *)((int (*)())Arena__alloc)(arena,0x14);
+        *allocation = arena;
+        arena = table[5];
         allocation[1] = 2;
-        allocation[4] = uVar17;
+        allocation[4] = arena;
         allocation[2] = 0;
-        allocation3 = ((int (*)())Arena__alloc)(uVar17,8);
+        allocation3 = ((int (*)())Arena__alloc)(arena,8);
         allocation[3] = allocation3;
-        *(uint **)(allocation2 + iVar7) = allocation + 1;
-        uVar17 = param_1[5];
-        allocation = (uint *)((int (*)())Arena__alloc)(uVar17,0x14);
-        *allocation = uVar17;
-        puVar15 = allocation + 1;
-        uVar17 = param_1[5];
+        *(uint **)(allocation2 + bucketByteOffset) = allocation + 1;
+        arena = table[5];
+        allocation = (uint *)((int (*)())Arena__alloc)(arena,0x14);
+        *allocation = arena;
+        highBucketVector = allocation + 1;
+        arena = table[5];
         allocation[1] = 2;
         allocation[2] = 0;
-        allocation[4] = uVar17;
-        allocation3 = ((int (*)())Arena__alloc)(uVar17,8);
+        allocation[4] = arena;
+        allocation3 = ((int (*)())Arena__alloc)(arena,8);
         allocation[3] = allocation3;
         loopIndex2 = 0;
-        *loopPtr = puVar15;
-        uVar11 = puVar14[1];
-        puVar10 = *(uint **)(allocation2 + iVar7);
-        iVar13 = uVar11 << 2;
-        uVar17 = uVar11;
+        *loopPtr = highBucketVector;
+        oldBucketSize = oldBucket[1];
+        lowBucketVector = *(uint **)(allocation2 + bucketByteOffset);
+        elementByteOffset = oldBucketSize << 2;
+        remainingCount = oldBucketSize;
         while( true ) {
-          iVar13 = iVar13 + -4;
-          uVar16 = uVar17 - 1;
-          if (uVar11 == loopIndex2) break;
-          if (uVar16 < *puVar14) {
-            uVar3 = puVar14[1];
-            if (uVar3 <= uVar16) {
-              _memset(uVar3 * 4 + puVar14[2],0,(uVar16 - uVar3) * 4 + 4);
-              puVar14[1] = uVar17;
+          elementByteOffset = elementByteOffset + -4;
+          prevIndex = remainingCount - 1;
+          if (oldBucketSize == loopIndex2) break;
+          if (prevIndex < *oldBucket) {
+            vectorFilledCount = oldBucket[1];
+            if (vectorFilledCount <= prevIndex) {
+              _memset(vectorFilledCount * 4 + oldBucket[2],0,(prevIndex - vectorFilledCount) * 4 + 4);
+              oldBucket[1] = remainingCount;
             }
-            puVar4 = (undefined4 *)(iVar13 + puVar14[2]);
+            elementRef = (undefined4 *)(elementByteOffset + oldBucket[2]);
           }
           else {
-            puVar4 = (undefined4 *)((int (*)())Vector__elementRefGrow)(puVar14,uVar16);
+            elementRef = (undefined4 *)((int (*)())Vector__elementRefGrow)(oldBucket,prevIndex);
           }
-          puVar4 = (undefined4 *)*puVar4;
-          uVar17 = (*(code *)param_1[4])(*puVar4);
-          if (loopIndex3 == (uVar17 & *param_1 - 1)) {
-            uVar17 = puVar10[1];
-            if (uVar17 < *puVar10) {
-              _memset(uVar17 * 4 + puVar10[2],0,4);
-              puVar5 = (undefined4 *)(uVar17 * 4 + puVar10[2]);
-              puVar10[1] = uVar17 + 1;
+          elementRef = (undefined4 *)*elementRef;
+          hashValue = (*(code *)table[4])(*elementRef);
+          if (loopIndex3 == (hashValue & *table - 1)) {
+            lowBucketSize = lowBucketVector[1];
+            if (lowBucketSize < *lowBucketVector) {
+              _memset(lowBucketSize * 4 + lowBucketVector[2],0,4);
+              destElementRef = (undefined4 *)(lowBucketSize * 4 + lowBucketVector[2]);
+              lowBucketVector[1] = lowBucketSize + 1;
             }
             else {
-              puVar5 = (undefined4 *)((int (*)())Vector__elementRefGrow)(puVar10,uVar17);
+              destElementRef = (undefined4 *)((int (*)())Vector__elementRefGrow)(lowBucketVector,lowBucketSize);
             }
           }
           else {
-            uVar17 = allocation[2];
-            if (uVar17 < *puVar15) {
-              _memset(uVar17 * 4 + allocation[3],0,4);
-              puVar5 = (undefined4 *)(uVar17 * 4 + allocation[3]);
-              allocation[2] = uVar17 + 1;
+            highBucketSize = allocation[2];
+            if (highBucketSize < *highBucketVector) {
+              _memset(highBucketSize * 4 + allocation[3],0,4);
+              destElementRef = (undefined4 *)(highBucketSize * 4 + allocation[3]);
+              allocation[2] = highBucketSize + 1;
             }
             else {
-              puVar5 = (undefined4 *)((int (*)())Vector__elementRefGrow)(puVar15,uVar17);
+              destElementRef = (undefined4 *)((int (*)())Vector__elementRefGrow)(highBucketVector,highBucketSize);
             }
           }
-          *puVar5 = puVar4;
+          *destElementRef = elementRef;
           loopIndex2 = loopIndex2 + 1;
-          uVar17 = uVar16;
+          remainingCount = prevIndex;
         }
       }
       loopIndex3 = loopIndex3 + 1;
-      iVar7 = iVar7 + 4;
+      bucketByteOffset = bucketByteOffset + 4;
       loopPtr = loopPtr + 1;
-    } while (uVar6 != loopIndex3);
+    } while (oldBucketCount != loopIndex3);
   }
-  param_1[2] = allocation2;
+  table[2] = allocation2;
   return;
 }
 

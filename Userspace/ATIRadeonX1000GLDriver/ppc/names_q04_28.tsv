@@ -1,0 +1,3 @@
+use	FUN_000a9ac0	uVar20	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar20\ =\ 0;$	+1
+use	FUN_000a9ac0	uVar20	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*param_5\ =\ \(1\ <<\ \(\(byte\)\(\(unsigned\ char\ \*\)0x00004300\)\[iVar19\]\ \&\ 0x3f\)\)\ \-\ 1U\ \&\ 1\ <<\ \(uVar20\ \&\ 0x3f\);$	+1
+use	FUN_000a9ac0	uVar20	loopIndex3	INFERRED	only ever set to a start value and stepped (loopIndex)	^\s*uVar20\ =\ uVar20\ \+\ 1;$	+1

@@ -50,8 +50,8 @@
 0xd9f34	FUN_000d9e98
 0xd9f78	FUN_000d9f3c
 0xda880	FUN_000da78c
-0xe2084	FUN_000e1fe4
-0xe208c	FUN_000e1fe4
+0xe2084	Compiler__releaseChipAndPools
+0xe208c	Compiler__releaseChipAndPools
 0xe2884	Block__accept
 0xe28a8	Block__accept
 0xe28cc	Block__accept

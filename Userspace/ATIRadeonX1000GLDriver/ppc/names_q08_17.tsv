@@ -1,0 +1,115 @@
+local	FUN_00186a88	param_5	commitChange	INFERRED	forwarded to FUN_00185da4 as commitChange: nonzero performs the substitution
+local	FUN_00186a88	param_6	checkFits	INFERRED	forwarded to FUN_00185da4 as checkFits: re-verify the scheduling model after the change
+local	FUN_00186a88	param_7	replacementOut	INFERRED	forwarded to FUN_00185da4 as replacementOut: receives the replacing instruction
+local	FUN_00186a88	local_a4	constTable	INFERRED	stack record: [0] select word, [1] second source pointer, [2..9] float constants 0.5 / 1.0 (0x3f000000 / 0x3f800000)
+local	FUN_00186a88	local_a8	scratchInst	INFERRED	cloned instruction or first source pointer (address passed to FUN_00162dfc)
+use	FUN_00186a88	uVar9	checkFitsCopy	INFERRED	copy of checkFits (param_6) passed to the constant-vector lookup	^\s*uVar9\ =\ param_6;$	+1
+use	FUN_00186a88	uVar9	checkFitsCopy	INFERRED	copy of checkFits (param_6) passed to the constant-vector lookup	^\s*local_a8\ =\ \(int\ \*\)FUN_000f5f94\(uVar14,local_7c,local_a4,loopRemaining,uVar10,uVar9,loopPtr4\);$	+1
+use	FUN_00186a88	uVar9	checkFitsCopy	INFERRED	copy of checkFits (param_6) passed to the constant-vector lookup	^\s*local_a4\[1\]\ =\ \(int\ \*\)FUN_000f5f94\(uVar13,local_7c,local_a4,loopPtr4,uVar10,uVar9,piVar12\);$	+1
+local	FUN_0017ee68	local_58	laneValues	INFERRED	out-parameter of FUN_00178d78: lane constant values of operand n
+use	FUN_0017ee68	bVar1	isLastLane	INFERRED	lane counter == 2	^\s*bVar1\ =\ iVar17\ ==\ 2;$	+1
+use	FUN_0017ee68	bVar1	isLastLane	INFERRED	lane counter == 2	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_0017ee68	bVar1	hasExtraSource	INFERRED	inst flag 0x200: the instruction carries an extra source	^\s*bVar1\ =\ \(\*\(uint\ \*\)\(iVar5\ \+\ 0x14\)\ >>\ 9\ \&\ 1\)\ !=\ 0;$	+2
+use	FUN_0017ee68	bVar1	hasExtraSource	INFERRED	inst flag 0x200: the instruction carries an extra source	^\s*if\ \(bVar1\)\ \{$@3	+1
+use	FUN_0017ee68	iVar11	origOpcode	INFERRED	opcode of the original instruction (inst->+0x88->+8): 0x1c or 0x1d	^\s*iVar11\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar5\ \+\ 0x88\)\ \+\ 8\);$	+1
+use	FUN_0017ee68	iVar11	origOpcode	INFERRED	opcode of the original instruction (inst->+0x88->+8): 0x1c or 0x1d	^\s*if\ \(iVar11\ ==\ 0x1c\)\ \{$	+1
+use	FUN_0017ee68	iVar11	origOpcode	INFERRED	opcode of the original instruction (inst->+0x88->+8): 0x1c or 0x1d	^\s*else\ if\ \(iVar11\ ==\ 0x1d\)\ \{$	+1
+use	FUN_0017ee68	iVar18	rebuiltInst	INFERRED	the key instruction re-initialised as a binary add (0x12)	^\s*iVar18\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\);$	+3
+use	FUN_0017ee68	iVar18	rebuiltInst	INFERRED	the key instruction re-initialised as a binary add (0x12)	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x94\)\ =\ uVar15;$	+4
+use	FUN_0017ee68	iVar18	rebuiltInst	INFERRED	the key instruction re-initialised as a binary add (0x12)	^\s*FUN_000e7738\(uVar19,iVar18,iVar17\);$	+1
+use	FUN_0017ee68	iVar18	rebuiltInst	INFERRED	the key instruction re-initialised as a binary add (0x12)	^\s*\*\(uint\ \*\)\(iVar18\ \+\ 0x9c\)\ =\ DAT_001b01d0\ \&\ 0xffffff;$	+2
+use	FUN_0017ee68	iVar18	rebuiltInst	INFERRED	the key instruction re-initialised as a binary add (0x12)	^\s*iVar5\ =\ FUN_001054ec\(iVar18,2\);$	+1
+use	FUN_0017ee68	iVar18	rebuiltInst	INFERRED	the key instruction re-initialised as a binary add (0x12)	^\s*\*\(uint\ \*\)\(iVar18\ \+\ 0x9c\)\ =\ DAT_001b01d0\ \&\ 0xffff;$	+2
+use	FUN_0017ee68	iVar18	rebuiltInst	INFERRED	the key instruction re-initialised as a binary add (0x12)	^\s*iVar5\ =\ FUN_001054ec\(iVar18,2\);$@2	+1
+use	FUN_0017ee68	iVar5	newValueNumber	INFERRED	decremented temporary value number (program +0x3ac)	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar17\ \+\ 0x3ac\)\ \+\ \-1;$	+1
+use	FUN_0017ee68	iVar5	newValueNumber	INFERRED	decremented temporary value number (program +0x3ac)	^\s*\*\(int\ \*\)\(iVar17\ \+\ 0x3ac\)\ =\ iVar5;$	+2
+use	FUN_0017ee68	puVar4	selectTable	INFERRED	table of select words (PTR_DAT_001e8b8c)	^\s*puVar4\ =\ PTR_DAT_001e8b8c;$	+1
+use	FUN_0017ee68	puVar4	selectTable	INFERRED	table of select words (PTR_DAT_001e8b8c)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(puVar4\ \+\ \(uVar14\ >>\ 0xe\ \&\ 0x3fc\)\);$	+1
+use	FUN_0017ee68	puVar4	selectTable	INFERRED	table of select words (PTR_DAT_001e8b8c)	^\s*uVar7\ =\ \*\(undefined4\ \*\)puVar4;$	+1
+use	FUN_0017ee68	puVar4	selectTable	INFERRED	table of select words (PTR_DAT_001e8b8c)	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(puVar4\ \+\ \(uVar14\ >>\ 6\ \&\ 0x3fc\)\);$	+1
+use	FUN_0017ee68	puVar4	selectTable	INFERRED	table of select words (PTR_DAT_001e8b8c)	^\s*puVar4\ =\ PTR_DAT_001e8b8c;$@2	+1
+use	FUN_0017ee68	puVar4	selectTable	INFERRED	table of select words (PTR_DAT_001e8b8c)	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(puVar4\ \+\ 4\);$	+1
+use	FUN_0017ee68	uVar10	destSelectWord	INFERRED	select word of the destination operand of the original instruction	^\s*uVar10\ =\ \*\(undefined4\ \*\)\(iVar17\ \+\ 0x10\);$	+1
+use	FUN_0017ee68	uVar10	destSelectWord	INFERRED	select word of the destination operand of the original instruction	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ 0x9c\)\ =\ uVar10;$	+1
+use	FUN_0017ee68	uVar12	operandValueNumber	INFERRED	value number slot of operand n (ctx+0x210+n*4)	^\s*uVar12\ =\ \*\(undefined4\ \*\)\(iVar18\ \*\ 4\ \+\ param_1\ \+\ 0x210\);$	+1
+use	FUN_0017ee68	uVar12	operandValueNumber	INFERRED	value number slot of operand n (ctx+0x210+n*4)	^\s*\*\(undefined4\ \*\)\(param_1\ \+\ 0x218\)\ =\ uVar12;$	+2
+use	FUN_0017ee68	uVar14	operandSelect	INFERRED	select word of the other operand of the original instruction	^\s*uVar14\ =\ \*\(uint\ \*\)\(iVar17\ \+\ 0x10\);$	+1
+use	FUN_0017ee68	uVar14	operandSelect	INFERRED	select word of the other operand of the original instruction	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b8c\ \+\ \(uVar14\ >>\ 0x16\ \&\ 0x3fc\)\);$	+1
+use	FUN_0017ee68	uVar14	operandSelect	INFERRED	select word of the other operand of the original instruction	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(puVar4\ \+\ \(uVar14\ >>\ 0xe\ \&\ 0x3fc\)\);$	+1
+use	FUN_0017ee68	uVar14	operandSelect	INFERRED	select word of the other operand of the original instruction	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(puVar4\ \+\ \(uVar14\ >>\ 6\ \&\ 0x3fc\)\);$	+1
+use	FUN_0017ee68	uVar14	operandSelect	INFERRED	select word of the other operand of the original instruction	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar14\ \&\ 0xff0000\ \|\ uVar14\ \&\ 0xff000000\ \|\ uVar2\ \&\ 0xffff;$	+1
+use	FUN_0017ee68	uVar14	operandSelect	INFERRED	select word of the other operand of the original instruction	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x10\)\ =\ \(uVar14\ \&\ 0xff\)\ <<\ 0x10\ \|\ \(uVar14\ \&\ 0xff00\)\ <<\ 0x10\ \|\ uVar3\ \&\ 0xffff;$	+1
+use	FUN_0017ee68	uVar15	savedDestRegister	INFERRED	destination register field (+0x94)	^\s*uVar15\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x94\);$	+1
+use	FUN_0017ee68	uVar15	savedDestRegister	INFERRED	destination register field (+0x94)	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x94\)\ =\ uVar15;$	+1
+use	FUN_0017ee68	uVar15	savedDestRegister	INFERRED	destination register field (+0x94)	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ 0x94\)\ =\ uVar15;$	+1
+use	FUN_0017ee68	uVar16	savedDestRegisterOffset	INFERRED	destination register offset field (+0x98)	^\s*uVar16\ =\ \*\(undefined4\ \*\)\(iVar5\ \+\ 0x98\);$	+1
+use	FUN_0017ee68	uVar16	savedDestRegisterOffset	INFERRED	destination register offset field (+0x98)	^\s*\*\(undefined4\ \*\)\(iVar18\ \+\ 0x98\)\ =\ uVar16;$	+1
+use	FUN_0017ee68	uVar16	savedDestRegisterOffset	INFERRED	destination register offset field (+0x98)	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ 0x98\)\ =\ uVar16;$	+1
+use	FUN_0017ee68	uVar2	selectConstA	INFERRED	DAT_001b01d8 select constant	^\s*uVar2\ =\ DAT_001b01d8;$	+1
+use	FUN_0017ee68	uVar2	selectConstA	INFERRED	DAT_001b01d8 select constant	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar14\ \&\ 0xff0000\ \|\ uVar14\ \&\ 0xff000000\ \|\ uVar2\ \&\ 0xffff;$	+1
+use	FUN_0017ee68	uVar3	selectConstA2	INFERRED	DAT_001b01d8 select constant	^\s*uVar3\ =\ DAT_001b01d8;$	+1
+use	FUN_0017ee68	uVar3	selectConstA2	INFERRED	DAT_001b01d8 select constant	^\s*\*\(uint\ \*\)\(iVar5\ \+\ 0x10\)\ =\ \(uVar14\ \&\ 0xff\)\ <<\ 0x10\ \|\ \(uVar14\ \&\ 0xff00\)\ <<\ 0x10\ \|\ uVar3\ \&\ 0xffff;$	+1
+use	FUN_0017ee68	uVar7	selectTemp	INFERRED	select word read from selectTable	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(PTR_DAT_001e8b8c\ \+\ \(uVar14\ >>\ 0x16\ \&\ 0x3fc\)\);$	+1
+use	FUN_0017ee68	uVar7	selectTemp	INFERRED	select word read from selectTable	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar7;$	+1
+use	FUN_0017ee68	uVar7	selectTemp	INFERRED	select word read from selectTable	^\s*uVar7\ =\ \*\(undefined4\ \*\)puVar4;$	+1
+use	FUN_0017ee68	uVar7	selectTemp	INFERRED	select word read from selectTable	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar7;$@2	+1
+use	FUN_0017ee68	uVar7	selectTemp	INFERRED	select word read from selectTable	^\s*uVar7\ =\ \*\(undefined4\ \*\)\(puVar4\ \+\ \(uVar14\ >>\ 6\ \&\ 0x3fc\)\);$	+1
+use	FUN_0017ee68	uVar7	selectTemp	INFERRED	select word read from selectTable	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ 0x10\)\ =\ uVar7;$	+1
+use	FUN_0017ee68	uVar7	selectTemp	INFERRED	select word read from selectTable	^\s*uVar7\ =\ \*\(undefined4\ \*\)PTR_DAT_001e8b8c;$	+1
+use	FUN_0017ee68	uVar7	selectTemp	INFERRED	select word read from selectTable	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar7;$@3	+1
+use	FUN_0017ee68	uVar8	selectTemp2	INFERRED	select word read from selectTable	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(puVar4\ \+\ \(uVar14\ >>\ 0xe\ \&\ 0x3fc\)\);$	+1
+use	FUN_0017ee68	uVar8	selectTemp2	INFERRED	select word read from selectTable	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ 0x10\)\ =\ uVar8;$	+1
+use	FUN_0017ee68	uVar8	selectTemp2	INFERRED	select word read from selectTable	^\s*uVar8\ =\ \*\(undefined4\ \*\)\(puVar4\ \+\ 4\);$	+1
+use	FUN_0017ee68	uVar8	selectTemp2	INFERRED	select word read from selectTable	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ 0x10\)\ =\ uVar8;$	+1
+use	FUN_0017a3d4	bVar16	usedUniformConstant	INFERRED	true when an operand value came from a uniform (positive value number) constant	^\s*bVar16\ =\ false;$	+1
+use	FUN_0017a3d4	bVar16	usedUniformConstant	INFERRED	true when an operand value came from a uniform (positive value number) constant	^\s*bVar16\ =\ true;$	+1
+use	FUN_0017a3d4	bVar16	usedUniformConstant	INFERRED	true when an operand value came from a uniform (positive value number) constant	^\s*bVar16\ =\ true;$@2	+1
+use	FUN_0017a3d4	bVar16	usedUniformConstant	INFERRED	true when an operand value came from a uniform (positive value number) constant	^\s*if\ \(bVar16\)\ \{$	+1
+use	FUN_0017a3d4	bVar16	branchTaken	INFERRED	true when the folded compare result differs from the false constant FLOAT_001aa0d4	^\s*bVar16\ =\ fVar3\ !=\ FLOAT_001aa0d4;$	+1
+use	FUN_0017a3d4	bVar16	branchTaken	INFERRED	true when the folded compare result differs from the false constant FLOAT_001aa0d4	^\s*if\ \(bVar16\)\ \{$@2	+1
+use	FUN_0017a3d4	bVar16	branchTaken	INFERRED	true when the folded compare result differs from the false constant FLOAT_001aa0d4	^\s*if\ \(bVar16\)\ \{$@3	+1
+use	FUN_0017a3d4	bVar2	allOperandsFloatConst	INFERRED	true while every operand of the compare is a negative-numbered float constant	^\s*bVar2\ =\ true;$	+1
+use	FUN_0017a3d4	bVar2	allOperandsFloatConst	INFERRED	true while every operand of the compare is a negative-numbered float constant	^\s*bVar2\ =\ false;$	+1
+use	FUN_0017a3d4	bVar2	allOperandsFloatConst	INFERRED	true while every operand of the compare is a negative-numbered float constant	^\s*bVar2\ =\ false;$@2	+1
+use	FUN_0017a3d4	bVar2	allOperandsFloatConst	INFERRED	true while every operand of the compare is a negative-numbered float constant	^\s*if\ \(bVar2\)\ \{$	+1
+use	FUN_0017a3d4	bVar2	isLastLane	INFERRED	lane counter == 3	^\s*bVar2\ =\ iVar17\ ==\ 3;$	+1
+use	FUN_0017a3d4	bVar2	isLastLane	INFERRED	lane counter == 3	^\s*if\ \(bVar2\)\ \{$@2	+1
+use	FUN_0017a3d4	bVar1	moreOperands	INFERRED	operand counter != 2	^\s*bVar1\ =\ iVar8\ !=\ 2;$	+1
+use	FUN_0017a3d4	bVar1	moreOperands	INFERRED	operand counter != 2	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0017a3d4	fVar3	foldedResult	INFERRED	result common to all lanes (FLOAT_001aa114 until the first lane is folded)	^\s*fVar3\ =\ FLOAT_001aa114;$	+1
+use	FUN_0017a3d4	fVar3	foldedResult	INFERRED	result common to all lanes (FLOAT_001aa114 until the first lane is folded)	^\s*if\ \(fVar3\ ==\ FLOAT_001aa114\)\ \{$	+2
+use	FUN_0017a3d4	fVar3	foldedResult	INFERRED	result common to all lanes (FLOAT_001aa114 until the first lane is folded)	^\s*else\ if\ \(\*pfVar6\ !=\ fVar3\)\ \{$	+1
+use	FUN_0017a3d4	fVar3	foldedResult	INFERRED	result common to all lanes (FLOAT_001aa114 until the first lane is folded)	^\s*bVar16\ =\ fVar3\ !=\ FLOAT_001aa0d4;$	+1
+use	FUN_0017a3d4	fVar5	laneResult	INFERRED	compare folded to 1.0 or 0.0 for the lane	^\s*fVar5\ =\ 0\.0;$	+1
+use	FUN_0017a3d4	fVar5	laneResult	INFERRED	compare folded to 1.0 or 0.0 for the lane	^\s*fVar5\ =\ 1\.0;$	+1
+use	FUN_0017a3d4	fVar5	laneResult	INFERRED	compare folded to 1.0 or 0.0 for the lane	^\s*\*pfVar6\ =\ fVar5;$	+1
+use	FUN_0017a3d4	iVar10	compareClass	INFERRED	class of the operand found in the pointer set (+0xc)	^\s*iVar10\ =\ \*\(int\ \*\)\(iVar11\ \+\ 0xc\);$	+2
+use	FUN_0017a3d4	iVar10	compareClass	INFERRED	class of the operand found in the pointer set (+0xc)	^\s*\*piVar15\ =\ \(DAT_001e61d0\)\[iVar10\];$	+1
+use	FUN_0017a3d4	iVar10	firstOperandClass	INFERRED	class code of operand 1 (operandClasses[0])	^\s*iVar10\ =\ local_94\[0\];$	+1
+use	FUN_0017a3d4	iVar10	firstOperandClass	INFERRED	class code of operand 1 (operandClasses[0])	^\s*iVar8\ =\ \*\(int\ \*\)\(\&DAT_001e61e8\ \+\ \(iVar8\ \*\ 6\ \+\ iVar10\ \*\ 0x30\ \+\ local_94\[1\]\)\ \*\ 4\);$	+1
+use	FUN_0017a3d4	iVar11	valueNumber	INFERRED	value number of the operand for this lane	^\s*iVar11\ =\ \*piVar14;$	+3
+use	FUN_0017a3d4	iVar11	valueNumber	INFERRED	value number of the operand for this lane	^\s*if\ \(iVar11\ <\ 1\)\ \{$	+1
+use	FUN_0017a3d4	iVar11	valueNumber	INFERRED	value number of the operand for this lane	^\s*iVar11\ =\ FUN_00173330\(\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\),iVar11\);$	+2
+use	FUN_0017a3d4	iVar11	operandClass	INFERRED	class code of the operand constant	^\s*iVar11\ =\ FUN_00176324\(\*\(unsigned\ int\ \*\)pfVar9\);$	+2
+use	FUN_0017a3d4	iVar11	operandClass	INFERRED	class code of the operand constant	^\s*iVar11\ =\ \*piVar15;$	+1
+use	FUN_0017a3d4	iVar11	operandClass	INFERRED	class code of the operand constant	^\s*iVar11\ =\ \*\(int\ \*\)\(\&DAT_001e61b8\ \+\ \*piVar15\ \*\ 4\);$	+2
+use	FUN_0017a3d4	iVar11	operandClass	INFERRED	class code of the operand constant	^\s*if\ \(iVar11\ ==\ 0\)\ \{$	+1
+use	FUN_0017a3d4	iVar11	operandRecAddr	INFERRED	address of the operand record	^\s*iVar11\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ iVar13;$	+2
+use	FUN_0017a3d4	iVar11	operandRecAddr	INFERRED	address of the operand record	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar11\ \+\ 0x20\);$@2	+1
+use	FUN_0017a3d4	iVar13	operandRecOffset	INFERRED	byte offset 0x98 + 0x18*n of the operand record	^\s*iVar13\ =\ 0x98;$	+1
+use	FUN_0017a3d4	iVar13	operandRecOffset	INFERRED	byte offset 0x98 + 0x18*n of the operand record	^\s*iVar11\ =\ \*\(int\ \*\)\(param_1\ \+\ 0xb0\)\ \+\ iVar13;$	+1
+use	FUN_0017a3d4	iVar13	operandRecOffset	INFERRED	byte offset 0x98 + 0x18*n of the operand record	^\s*iVar13\ =\ iVar13\ \+\ 0x18;$	+1
+local	FUN_0017a3d4	local_68	lanesAgree	INFERRED	true while every folded lane has the same result
+local	FUN_0017a3d4	local_8c	laneConstants	INFERRED	stack record: operand constants (words 1..2 per operand) followed by the four lane results
+local	FUN_0017a3d4	local_94	operandClasses	INFERRED	class codes of operands 1 and 2
+use	FUN_0017a3d4	pfVar12	laneResults	INFERRED	address of the four lane results (laneConstants + 3)	^\s*pfVar12\ =\ local_8c\ \+\ 3;$	+2
+use	FUN_0017a3d4	pfVar12	laneResults	INFERRED	address of the four lane results (laneConstants + 3)	^\s*\*\(undefined4\ \*\)\(iVar17\ \+\ \(int\)pfVar12\)\ =\ 0;$	+1
+use	FUN_0017a3d4	pfVar12	laneResults	INFERRED	address of the four lane results (laneConstants + 3)	^\s*pfVar6\ =\ pfVar12;$@2	+1
+use	FUN_0017a3d4	pfVar12	laneResults	INFERRED	address of the four lane results (laneConstants + 3)	^\s*\}\ while\ \(pfVar12\ !=\ pfVar7\);$	+1
+use	FUN_0017a3d4	pfVar12	laneResults	INFERRED	address of the four lane results (laneConstants + 3)	^\s*\(\(int\ \(\*\)\(\)\)FUN_0017a294\)\(param_1,pfVar12,\*\(undefined4\ \*\)\(param_1\ \+\ 0x238\)\);$	+1
+use	FUN_0017a3d4	piVar14	valueNumberPtr	INFERRED	address of the lane value number of operand n (ctx+0x178, step 0x10)	^\s*piVar14\ =\ \(int\ \*\)\(iVar18\ \+\ 8\);$	+1
+use	FUN_0017a3d4	piVar14	valueNumberPtr	INFERRED	address of the lane value number of operand n (ctx+0x178, step 0x10)	^\s*iVar11\ =\ \*piVar14;$	+1
+use	FUN_0017a3d4	piVar14	valueNumberPtr	INFERRED	address of the lane value number of operand n (ctx+0x178, step 0x10)	^\s*piVar14\ =\ piVar14\ \+\ 4;$	+1
+use	FUN_0017a3d4	uVar4	operandFlags	INFERRED	flags word of the operand record	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar11\ \+\ 0x20\);$	+2
+use	FUN_0017a3d4	uVar4	operandFlags	INFERRED	flags word of the operand record	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar11\ \+\ 0x20\);$@2	+1
+use	FUN_0017a3d4	uVar4	operandFlags	INFERRED	flags word of the operand record	^\s*if\ \(\(uVar4\ \&\ 1\)\ ==\ 0\)\ \{$	+1

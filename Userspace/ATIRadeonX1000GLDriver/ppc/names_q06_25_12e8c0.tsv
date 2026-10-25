@@ -1,0 +1,12 @@
+local	FUN_0012e8c0	param_1	program	INFERRED	the Program (+8 compiler)
+local	FUN_0012e8c0	param_3	lastBlock	INFERRED	last block of the range; the walk stops after it
+use	FUN_0012e8c0	piVar1	successorBlock	INFERRED	first successor of the current block, also the loop's end test value	^\s*piVar1\ =\ param_2;$	+1
+use	FUN_0012e8c0	piVar1	successorBlock	INFERRED	first successor of the current block, also the loop's end test value	^\s*if\ \(piVar1\ ==\ param_3\)\ \{$	+1
+use	FUN_0012e8c0	piVar1	successorBlock	INFERRED	first successor of the current block, also the loop's end test value	^\s*piVar1\ =\ \(int\ \*\)FUN_000e920c\(param_2,0\);$	+2
+use	FUN_0012e8c0	iVar2	blockNeedsSplit	INFERRED	FUN_0012aef0 result: the edge to the successor was handled	^\s*iVar2\ =\ FUN_0012aef0\(param_1,param_2,piVar1\);$	+2
+use	FUN_0012e8c0	iVar2	blockQuery28	INFERRED	block vtable slot 0x28 test (if footer)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x28\)\)\(param_2\);$	+3
+use	FUN_0012e8c0	iVar2	blockQuery24	INFERRED	block vtable slot 0x24 test (if header)	^\s*iVar2\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x24\)\)\(param_2\);$	+3
+use	FUN_0012e8c0	puVar6	newSuccessorBlock	INFERRED	block inserted after the current block on its single outgoing edge (allocation + 1)	^\s*puVar6\ =\ puVar4\ \+\ 1;$	+2
+use	FUN_0012e8c0	puVar6	newSuccessorBlock	INFERRED	block inserted after the current block on its single outgoing edge (allocation + 1)	^\s*FUN_000ec3ac\(param_1,param_2,puVar6\);$	+2
+use	FUN_0012e8c0	puVar6	newPredecessorBlock	INFERRED	block inserted before the current block on its single incoming edge (allocation + 1)	^\s*puVar6\ =\ puVar4\ \+\ 1;$@2	+2
+use	FUN_0012e8c0	puVar6	newPredecessorBlock	INFERRED	block inserted before the current block on its single incoming edge (allocation + 1)	^\s*FUN_000ec370\(param_1,param_2,puVar6\);$	+2

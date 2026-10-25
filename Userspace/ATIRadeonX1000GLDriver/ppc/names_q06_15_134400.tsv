@@ -1,0 +1,70 @@
+local	FUN_00134400	param_1	allocator	INFERRED	register allocator object; +4 node vector, +0x2c compiler
+use	FUN_00134400	piVar1	nextInstLink	INFERRED	link following the list head	^\s*piVar1\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar7\ \+\ 0xa0\)\)\[1\];$	+1
+use	FUN_00134400	piVar1	nextInstLink	INFERRED	link following the list head	^\s*if\ \(piVar1\ !=\ \(int\ \*\)0x0\)\ \{$	+1
+use	FUN_00134400	piVar1	nextInstLink	INFERRED	link following the list head	^\s*piVar5\ =\ piVar1;$	+1
+use	FUN_00134400	piVar1	nextInstLink	INFERRED	link following the list head	^\s*piVar1\ =\ \(int\ \*\)piVar5\[1\];$	+1
+use	FUN_00134400	piVar1	inst	INFERRED	instruction being examined	^\s*if\ \(\(\(piVar9\ ==\ \*\(int\ \*\*\)\(iVar7\ \+\ 0x98\)\)\ \|\|\ \(\(piVar5\[5\]\ \&\ 4U\)\ ==\ 0\)\)\ \&\&$	+2
+use	FUN_00134400	piVar1	inst	INFERRED	instruction being examined	^\s*uVar2\ =\ piVar1\[5\];$	+1
+use	FUN_00134400	piVar1	inst	INFERRED	instruction being examined	^\s*if\ \(piVar1\[0x20\]\ !=\ 0\)\ \{$	+6
+use	FUN_00134400	piVar1	inst	INFERRED	instruction being examined	^\s*uVar2\ =\ piVar1\[0x25\];$	+1
+use	FUN_00134400	piVar1	inst	INFERRED	instruction being examined	^\s*iVar3\ =\ piVar1\[0x20\];$@2	+1
+use	FUN_00134400	piVar1	inst	INFERRED	instruction being examined	^\s*if\ \(\(iVar3\ ==\ 0\)\ \|\|\ \(iVar3\ =\ FUN_00126760\(piVar1\[0x26\]\),\ iVar3\ ==\ 0\)\)\ \{$	+1
+use	FUN_00134400	piVar1	inst	INFERRED	instruction being examined	^\s*uVar2\ =\ piVar1\[5\];$@2	+1
+use	FUN_00134400	piVar1	inst	INFERRED	instruction being examined	^\s*uVar2\ =\ piVar1\[5\];$@3	+1
+use	FUN_00134400	piVar1	inst	INFERRED	instruction being examined	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x50\)\)\(piVar1\);$	+1
+use	FUN_00134400	piVar1	inst	INFERRED	instruction being examined	^\s*uVar2\ =\ piVar1\[0x25\];$@2	+1
+use	FUN_00134400	piVar1	inst	INFERRED	instruction being examined	^\s*\(\(int\ \(\*\)\(\)\)FUN_00134aa8\)\(\*puVar6,piVar1\[0x1f\]\);$	+2
+use	FUN_00134400	piVar1	inst	INFERRED	instruction being examined	^\s*\}\ while\ \(\(\(int\ \*\)piVar1\[2\]\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(piVar1\ =\ \(int\ \*\)piVar1\[2\],\ \(uVar2\ \&\ 4\)\ !=\ 0\)$	+2
+use	FUN_00134400	uVar2	instFlags	INFERRED	instruction flag word (+0x14)	^\s*uVar2\ =\ piVar1\[5\];$	+2
+use	FUN_00134400	uVar2	instFlags	INFERRED	instruction flag word (+0x14)	^\s*uVar2\ =\ piVar1\[5\];$@2	+1
+use	FUN_00134400	uVar2	instFlags	INFERRED	instruction flag word (+0x14)	^\s*uVar2\ =\ piVar1\[5\];$@3	+2
+use	FUN_00134400	uVar2	instFlags	INFERRED	instruction flag word (+0x14)	^\s*uVar2\ =\ piVar1\[5\];$@4	+1
+use	FUN_00134400	uVar2	instFlags	INFERRED	instruction flag word (+0x14)	^\s*\}\ while\ \(\(\(int\ \*\)piVar1\[2\]\ !=\ \(int\ \*\)0x0\)\ \&\&\ \(piVar1\ =\ \(int\ \*\)piVar1\[2\],\ \(uVar2\ \&\ 4\)\ !=\ 0\)$	+2
+use	FUN_00134400	uVar2	destRegisterA	INFERRED	destination register number of the instruction	^\s*uVar2\ =\ piVar1\[0x25\];$	+2
+use	FUN_00134400	uVar2	destRegisterA	INFERRED	destination register number of the instruction	^\s*if\ \(uVar4\ <=\ uVar2\)\ \{$	+3
+use	FUN_00134400	uVar2	destRegisterA	INFERRED	destination register number of the instruction	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar8\[2\]\);$	+1
+use	FUN_00134400	uVar2	destRegisterA	INFERRED	destination register number of the instruction	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar8,uVar2\);$	+1
+use	FUN_00134400	uVar2	destRegisterB	INFERRED	destination register number of the instruction	^\s*uVar2\ =\ piVar1\[0x25\];$@2	+2
+use	FUN_00134400	uVar2	destRegisterB	INFERRED	destination register number of the instruction	^\s*if\ \(uVar4\ <=\ uVar2\)\ \{$@2	+3
+use	FUN_00134400	uVar2	destRegisterB	INFERRED	destination register number of the instruction	^\s*puVar6\ =\ \(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ puVar8\[2\]\);$	+1
+use	FUN_00134400	uVar2	destRegisterB	INFERRED	destination register number of the instruction	^\s*puVar6\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,uVar2\);$	+1
+use	FUN_00134400	iVar3	nextBlock	INFERRED	next block in the list	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar7\ \+\ 8\);$	+1
+use	FUN_00134400	iVar3	nextBlock	INFERRED	next block in the list	^\s*if\ \(iVar3\ ==\ 0\)\ \{$	+1
+use	FUN_00134400	iVar3	nextBlock	INFERRED	next block in the list	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar7\ \+\ 8\);$@2	+1
+use	FUN_00134400	iVar3	nextBlock	INFERRED	next block in the list	^\s*iVar7\ =\ iVar3;$	+2
+use	FUN_00134400	iVar3	hasDestination	INFERRED	instruction has a destination operand (word 0x20)	^\s*iVar3\ =\ 0;$	+1
+use	FUN_00134400	iVar3	hasDestination	INFERRED	instruction has a destination operand (word 0x20)	^\s*iVar3\ =\ piVar1\[0x20\];$	+1
+use	FUN_00134400	iVar3	hasDestination	INFERRED	instruction has a destination operand (word 0x20)	^\s*iVar3\ =\ piVar1\[0x20\];$@2	+1
+use	FUN_00134400	iVar3	hasDestination	INFERRED	instruction has a destination operand (word 0x20)	^\s*if\ \(\(iVar3\ ==\ 0\)\ \|\|\ \(iVar3\ =\ FUN_00126760\(piVar1\[0x26\]\),\ iVar3\ ==\ 0\)\)\ \{$	+1
+use	FUN_00134400	iVar3	regKindFlag	INFERRED	RegKind flag test of the destination kind	^\s*iVar3\ =\ FUN_00126760\(piVar1\[0x26\]\);$	+4
+use	FUN_00134400	iVar3	instQuery50	INFERRED	instruction vtable slot 0x50 test	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*piVar1\ \+\ 0x50\)\)\(piVar1\);$	+2
+use	FUN_00134400	uVar4	nodeVectorCountA	INFERRED	filled count of the node vector	^\s*uVar4\ =\ puVar8\[1\];$	+3
+use	FUN_00134400	uVar4	nodeVectorCountB	INFERRED	filled count of the node vector	^\s*uVar4\ =\ puVar8\[1\];$@2	+3
+use	FUN_00134400	piVar5	nextInstLinkB	INFERRED	link kept for advancing the list	^\s*piVar5\ =\ piVar1;$	+3
+use	FUN_00134400	piVar5	nextInstLinkB	INFERRED	link kept for advancing the list	^\s*piVar5\ =\ \(int\ \*\)piVar9\[1\];$	+1
+use	FUN_00134400	piVar5	nextInstLinkB	INFERRED	link kept for advancing the list	^\s*piVar1\ =\ \(int\ \*\)piVar5\[1\];$	+3
+use	FUN_00134400	piVar5	nodeRefA	INFERRED	element reference into the node vector	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar8\[2\]\);$	+1
+use	FUN_00134400	piVar5	nodeRefA	INFERRED	element reference into the node vector	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar8,uVar2\);$	+1
+use	FUN_00134400	piVar5	nodeRefA	INFERRED	element reference into the node vector	^\s*\*\(undefined4\ \*\)\(\*piVar5\ \+\ 0x18\)\ =\ 1;$	+1
+use	FUN_00134400	puVar6	nodeRefB	INFERRED	element reference into the node vector	^\s*puVar6\ =\ \(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ puVar8\[2\]\);$	+1
+use	FUN_00134400	puVar6	nodeRefB	INFERRED	element reference into the node vector	^\s*puVar6\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,uVar2\);$	+1
+use	FUN_00134400	puVar6	nodeRefB	INFERRED	element reference into the node vector	^\s*\(\(int\ \(\*\)\(\)\)FUN_00134aa8\)\(\*puVar6,piVar1\[0x1f\]\);$	+1
+use	FUN_00134400	iVar7	block	INFERRED	block being scanned	^\s*iVar7\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 0x2c\)\ \+\ 0x6c4\)\ \+\ 900\);$	+2
+use	FUN_00134400	iVar7	block	INFERRED	block being scanned	^\s*piVar1\ =\ \(int\ \*\)\(\*\(int\ \*\*\)\(iVar7\ \+\ 0xa0\)\)\[1\];$	+2
+use	FUN_00134400	iVar7	block	INFERRED	block being scanned	^\s*if\ \(\(\(piVar9\ ==\ \*\(int\ \*\*\)\(iVar7\ \+\ 0x98\)\)\ \|\|\ \(\(piVar5\[5\]\ \&\ 4U\)\ ==\ 0\)\)\ \&\&$	+2
+use	FUN_00134400	iVar7	block	INFERRED	block being scanned	^\s*iVar3\ =\ \*\(int\ \*\)\(iVar7\ \+\ 8\);$@2	+1
+use	FUN_00134400	iVar7	block	INFERRED	block being scanned	^\s*iVar7\ =\ iVar3;$	+1
+use	FUN_00134400	puVar8	nodeVectorA	INFERRED	allocator node vector header	^\s*puVar8\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$	+1
+use	FUN_00134400	puVar8	nodeVectorA	INFERRED	allocator node vector header	^\s*if\ \(uVar2\ <\ \*puVar8\)\ \{$	+2
+use	FUN_00134400	puVar8	nodeVectorA	INFERRED	allocator node vector header	^\s*_memset\(uVar4\ \*\ 4\ \+\ puVar8\[2\],0,\(uVar2\ \-\ uVar4\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_00134400	puVar8	nodeVectorA	INFERRED	allocator node vector header	^\s*piVar5\ =\ \(int\ \*\)\(uVar2\ \*\ 4\ \+\ puVar8\[2\]\);$	+1
+use	FUN_00134400	puVar8	nodeVectorA	INFERRED	allocator node vector header	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar8,uVar2\);$	+1
+use	FUN_00134400	puVar8	nodeVectorB	INFERRED	allocator node vector header	^\s*puVar8\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$@2	+1
+use	FUN_00134400	puVar8	nodeVectorB	INFERRED	allocator node vector header	^\s*if\ \(uVar2\ <\ \*puVar8\)\ \{$@2	+2
+use	FUN_00134400	puVar8	nodeVectorB	INFERRED	allocator node vector header	^\s*_memset\(uVar4\ \*\ 4\ \+\ puVar8\[2\],0,\(uVar2\ \-\ uVar4\)\ \*\ 4\ \+\ 4\);$@2	+2
+use	FUN_00134400	puVar8	nodeVectorB	INFERRED	allocator node vector header	^\s*puVar6\ =\ \(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ puVar8\[2\]\);$	+1
+use	FUN_00134400	puVar8	nodeVectorB	INFERRED	allocator node vector header	^\s*puVar6\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar8,uVar2\);$	+1
+use	FUN_00134400	piVar9	listHead	INFERRED	first instruction record of the block	^\s*piVar9\ =\ \*\(int\ \*\*\)\(iVar7\ \+\ 0xa0\);$	+1
+use	FUN_00134400	piVar9	listHead	INFERRED	first instruction record of the block	^\s*if\ \(\(\(piVar9\ ==\ \*\(int\ \*\*\)\(iVar7\ \+\ 0x98\)\)\ \|\|\ \(\(piVar5\[5\]\ \&\ 4U\)\ ==\ 0\)\)\ \&\&$	+2
+use	FUN_00134400	piVar9	listHead	INFERRED	first instruction record of the block	^\s*piVar5\ =\ \(int\ \*\)piVar9\[1\];$	+1
+use	FUN_00134400	piVar9	listHead	INFERRED	first instruction record of the block	^\s*piVar9\ =\ piVar5;$	+1

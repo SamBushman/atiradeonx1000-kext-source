@@ -1,0 +1,28 @@
+local	FUN_0013555c	param_1	graph	INFERRED	register interference graph (+4 node vector)
+local	FUN_0013555c	param_2	targetNode	INFERRED	node that receives edges to every neighbour of the source node
+local	FUN_0013555c	param_3	sourceNodeIndex	INFERRED	index of the node whose neighbour list is copied
+use	FUN_0013555c	bVar1	blockFull	INFERRED	the neighbour block's seven slots were used up	^\s*bVar1\ =\ iVar10\ ==\ 6;$	+1
+use	FUN_0013555c	bVar1	blockFull	INFERRED	the neighbour block's seven slots were used up	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_0013555c	uVar2	nodeVectorCount	INFERRED	filled count of the node vector	^\s*uVar2\ =\ puVar11\[1\];$	+3
+use	FUN_0013555c	piVar3	sourceNodeRef	INFERRED	element reference of the source node in the node vector	^\s*piVar3\ =\ \(int\ \*\)\(param_3\ \*\ 4\ \+\ puVar11\[2\]\);$	+1
+use	FUN_0013555c	piVar3	sourceNodeRef	INFERRED	element reference of the source node in the node vector	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar11,param_3\);$	+1
+use	FUN_0013555c	piVar3	sourceNodeRef	INFERRED	element reference of the source node in the node vector	^\s*iVar7\ =\ \*piVar3;$	+1
+use	FUN_0013555c	uVar4	addedEdge	INFERRED	return value: 1 when at least one new edge was added	^\s*uVar4\ =\ 0;$	+1
+use	FUN_0013555c	uVar4	addedEdge	INFERRED	return value: 1 when at least one new edge was added	^\s*uVar4\ =\ 0;$@2	+1
+use	FUN_0013555c	uVar4	addedEdge	INFERRED	return value: 1 when at least one new edge was added	^\s*uVar4\ =\ 1;$	+1
+use	FUN_0013555c	uVar4	addedEdge	INFERRED	return value: 1 when at least one new edge was added	^\s*return\ uVar4;$	+1
+use	FUN_0013555c	iVar6	alreadyInterfere	INFERRED	InterferenceMatrix__testPair: the edge already exists	^\s*if\ \(\(iVar5\ !=\ param_2\)\ \&\&\ \(iVar6\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134ba4\)\(param_1,param_2,iVar5\),\ iVar6\ ==\ 0\)\)\ \{$	+1
+use	FUN_0013555c	iVar7	sourceNode	INFERRED	node record of the source node (+4 neighbour count, +8 first block)	^\s*iVar7\ =\ \*piVar3;$	+1
+use	FUN_0013555c	iVar7	sourceNode	INFERRED	node record of the source node (+4 neighbour count, +8 first block)	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar7\ \+\ 8\);$	+2
+use	FUN_0013555c	iVar7	sourceNode	INFERRED	node record of the source node (+4 neighbour count, +8 first block)	^\s*\}\ while\ \(iVar8\ <\ \*\(int\ \*\)\(iVar7\ \+\ 4\)\);$	+1
+use	FUN_0013555c	iVar9	neighbourBlock	INFERRED	neighbour block being read (seven slots, next block at +0x1c)	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar7\ \+\ 8\);$	+1
+use	FUN_0013555c	iVar9	neighbourBlock	INFERRED	neighbour block being read (seven slots, next block at +0x1c)	^\s*iVar9\ =\ \*\(int\ \*\)\(iVar9\ \+\ 0x1c\);$	+1
+use	FUN_0013555c	iVar9	neighbourBlock	INFERRED	neighbour block being read (seven slots, next block at +0x1c)	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134bf0\)\(param_1,\*\(undefined4\ \*\)\(iVar9\ \+\ iVar10\ \*\ 4\),1\);$	+1
+use	FUN_0013555c	iVar10	slotInBlock	INFERRED	slot number 0..6 inside the neighbour block	^\s*iVar10\ =\ \-1;$	+1
+use	FUN_0013555c	iVar10	slotInBlock	INFERRED	slot number 0..6 inside the neighbour block	^\s*bVar1\ =\ iVar10\ ==\ 6;$	+2
+use	FUN_0013555c	iVar10	slotInBlock	INFERRED	slot number 0..6 inside the neighbour block	^\s*iVar10\ =\ 0;$	+1
+use	FUN_0013555c	iVar10	slotInBlock	INFERRED	slot number 0..6 inside the neighbour block	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_00134bf0\)\(param_1,\*\(undefined4\ \*\)\(iVar9\ \+\ iVar10\ \*\ 4\),1\);$	+1
+use	FUN_0013555c	puVar11	nodeVector	INFERRED	node vector header (graph +4)	^\s*puVar11\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 4\);$	+3
+use	FUN_0013555c	puVar11	nodeVector	INFERRED	node vector header (graph +4)	^\s*_memset\(uVar2\ \*\ 4\ \+\ puVar11\[2\],0,\(param_3\ \-\ uVar2\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_0013555c	puVar11	nodeVector	INFERRED	node vector header (graph +4)	^\s*piVar3\ =\ \(int\ \*\)\(param_3\ \*\ 4\ \+\ puVar11\[2\]\);$	+1
+use	FUN_0013555c	puVar11	nodeVector	INFERRED	node vector header (graph +4)	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar11,param_3\);$	+1

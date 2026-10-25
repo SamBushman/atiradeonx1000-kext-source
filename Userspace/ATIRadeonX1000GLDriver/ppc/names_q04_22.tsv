@@ -1,0 +1,46 @@
+use	FUN_000bfed0	bVar1	instBytec	INFERRED	every definition of this web is a load from inst+0xc (positional name; no field row)	^\s*bVar1\ =\ \*\(byte\ \*\)\(puVar60\ \+\ 0xc\);$	+1
+use	FUN_000bfed0	bVar1	instBytec	INFERRED	every definition of this web is a load from inst+0xc (positional name; no field row)	^\s*\(uint\)bVar1\ <<\ 0x1e\ \|$	+1
+use	FUN_000bfed0	bVar13	instByte10	INFERRED	every definition of this web is a load from inst+0x10 (positional name; no field row)	^\s*bVar13\ =\ \*\(byte\ \*\)\(puVar60\ \+\ 0x10\);$	+1
+use	FUN_000bfed0	bVar13	instByte10	INFERRED	every definition of this web is a load from inst+0x10 (positional name; no field row)	^\s*bVar13\ \&\ 0xf\ \|$	+1
+use	FUN_000bfed0	bVar14	instByte5	INFERRED	every definition of this web is a load from inst+0x5 (positional name; no field row)	^\s*bVar14\ =\ \*\(byte\ \*\)\(puVar60\ \+\ 5\);$	+1
+use	FUN_000bfed0	bVar14	instByte5	INFERRED	every definition of this web is a load from inst+0x5 (positional name; no field row)	^\s*\(bVar14\ \&\ 3\)\ <<\ 0x18\ \|$	+1
+use	FUN_000bfed0	bVar15	instByte6	INFERRED	every definition of this web is a load from inst+0x6 (positional name; no field row)	^\s*bVar15\ =\ \*\(byte\ \*\)\(puVar60\ \+\ 6\);$	+1
+use	FUN_000bfed0	bVar15	instByte6	INFERRED	every definition of this web is a load from inst+0x6 (positional name; no field row)	^\s*\(uint\)bVar12\ <<\ 0x1f\ \|\ \(uVar24\ \&\ 0x1ff\)\ <<\ 0x10\ \|\ \(bVar15\ \&\ 0x1f\)\ <<\ 8\ \|\ bVar11\ \&\ 0x1f;$	+1
+use	FUN_000bfed0	bVar3	instByte2	INFERRED	every definition of this web is a load from inst+0x2 (positional name; no field row)	^\s*bVar3\ =\ \*\(byte\ \*\)\(puVar60\ \+\ 2\);$	+1
+use	FUN_000bfed0	bVar3	instByte2	INFERRED	every definition of this web is a load from inst+0x2 (positional name; no field row)	^\s*\(bVar3\ \&\ 1\)\ <<\ 0x16\ \|$	+1
+use	FUN_000bfed0	bVar3	instByte4	INFERRED	every definition of this web is a load from inst+0x4 (positional name; no field row)	^\s*bVar3\ =\ \*\(byte\ \*\)\(puVar60\ \+\ 4\);$	+1
+use	FUN_000bfed0	bVar3	instByte4	INFERRED	every definition of this web is a load from inst+0x4 (positional name; no field row)	^\s*\(uint\)bVar5\ <<\ 8\ \|\ \(bVar4\ \&\ 3\)\ <<\ 6\ \|\ \(bVar3\ \&\ 1\)\ <<\ 5\ \|\ \(bVar2\ \&\ 1\)\ <<\ 4\ \|\ bVar1\ \&\ 7;$	+1
+use	FUN_000bfed0	bVar58	prevScanInstByte2	INFERRED	every definition of this web is a load from prevScanInst+0x2 (positional name; no field row)	^\s*bVar58\ =\ \*\(byte\ \*\)\(piVar52\ \+\ 2\);$	+3
+use	FUN_000bfed0	bVar7	instByte1	INFERRED	every definition of this web is a load from inst+0x1 (positional name; no field row)	^\s*bVar7\ =\ \*\(byte\ \*\)\(puVar60\ \+\ 1\);$	+1
+use	FUN_000bfed0	bVar7	instByte1	INFERRED	every definition of this web is a load from inst+0x1 (positional name; no field row)	^\s*uVar48\ =\ \(bVar10\ \&\ 1\)\ <<\ 10\ \|\ \(bVar9\ \&\ 1\)\ <<\ 6\ \|\ \(bVar8\ \&\ 7\)\ <<\ 3\ \|\ \(bVar7\ \&\ 1\)\ <<\ 2\ \|\ 2;$	+1
+use	FUN_000bfed0	bVar8	instByte1_2	INFERRED	every definition of this web is a load from inst+0x1 (positional name; no field row)	^\s*bVar8\ =\ \*\(byte\ \*\)\(puVar60\ \+\ 1\);$	+1
+use	FUN_000bfed0	bVar8	instByte1_2	INFERRED	every definition of this web is a load from inst+0x1 (positional name; no field row)	^\s*\(bVar1\ \&\ 1\)\ <<\ 6\ \|\ \(bVar9\ \&\ 7\)\ <<\ 3\ \|\ \(bVar8\ \&\ 1\)\ <<\ 2\ \|\ 3;$	+1
+use	FUN_000bfed0	bVar8	instBytef	INFERRED	every definition of this web is a load from inst+0xf (positional name; no field row)	^\s*bVar8\ =\ \*\(byte\ \*\)\(puVar60\ \+\ 0xf\);$	+1
+use	FUN_000bfed0	bVar8	instBytef	INFERRED	every definition of this web is a load from inst+0xf (positional name; no field row)	^\s*\(bVar8\ \&\ 3\)\ <<\ 0x11\ \|\ uVar35\ <<\ 0x15\ \|\ uVar34\ <<\ 0x13\ \|\ uVar33\ <<\ 0xe\ \|\ uVar32\ <<\ 0xc$	+1
+use	FUN_000bfed0	uVar17	instShort3	INFERRED	every definition of this web is a load from inst+0x3 (positional name; no field row)	^\s*uVar17\ =\ \*\(ushort\ \*\)\(puVar60\ \+\ 3\);$	+1
+use	FUN_000bfed0	uVar17	instShort3	INFERRED	every definition of this web is a load from inst+0x3 (positional name; no field row)	^\s*\(uVar17\ \&\ 0x4000\)\ <<\ 9\ \|$	+2
+use	FUN_000bfed0	uVar17	instShort4	INFERRED	every definition of this web is a load from inst+0x4 (positional name; no field row)	^\s*uVar17\ =\ \*\(ushort\ \*\)\(puVar60\ \+\ 4\);$	+1
+use	FUN_000bfed0	uVar17	instShort4	INFERRED	every definition of this web is a load from inst+0x4 (positional name; no field row)	^\s*if\ \(\(uVar17\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000bfed0	uVar17	instShort4	INFERRED	every definition of this web is a load from inst+0x4 (positional name; no field row)	^\s*\(uVar17\ \&\ 0x4000\)\ <<\ 5\ \|$	+3
+use	FUN_000bfed0	uVar18	instShort4_2	INFERRED	every definition of this web is a load from inst+0x4 (positional name; no field row)	^\s*uVar18\ =\ \*\(ushort\ \*\)\(puVar60\ \+\ 4\);$	+1
+use	FUN_000bfed0	uVar18	instShort4_2	INFERRED	every definition of this web is a load from inst+0x4 (positional name; no field row)	^\s*\(uVar19\ \&\ 0x7f\)\ <<\ 0x10\ \|\ uVar18\ >>\ 7\ \&\ 0x80\ \|\ uVar18\ \&\ 0x7f;$	+1
+use	FUN_000bfed0	uVar20	instShort7	INFERRED	every definition of this web is a load from inst+0x7 (positional name; no field row)	^\s*uVar20\ =\ \*\(ushort\ \*\)\(puVar60\ \+\ 7\);$	+1
+use	FUN_000bfed0	uVar20	instShort7	INFERRED	every definition of this web is a load from inst+0x7 (positional name; no field row)	^\s*if\ \(\(uVar20\ \&\ 0x2000\)\ ==\ 0\)\ \{$	+1
+use	FUN_000bfed0	uVar20	instShort7	INFERRED	every definition of this web is a load from inst+0x7 (positional name; no field row)	^\s*\(uVar20\ \&\ 0x4000\)\ <<\ 5\ \|$	+3
+use	FUN_000bfed0	uVar22	instShort3_2	INFERRED	every definition of this web is a load from inst+0x3 (positional name; no field row)	^\s*uVar22\ =\ \*\(ushort\ \*\)\(puVar60\ \+\ 3\);$	+1
+use	FUN_000bfed0	uVar22	instShort3_2	INFERRED	every definition of this web is a load from inst+0x3 (positional name; no field row)	^\s*uVar42\ <<\ 0xc\ \|\ uVar22\ >>\ 3\ \&\ 0x800\ \|\ \(uVar22\ \&\ 0x7f\)\ <<\ 4\ \|\ bVar14\ \&\ 0xf;$	+1
+use	FUN_000bfed0	uVar23	instShort6	INFERRED	every definition of this web is a load from inst+0x6 (positional name; no field row)	^\s*uVar23\ =\ \*\(ushort\ \*\)\(puVar60\ \+\ 6\);$	+1
+use	FUN_000bfed0	uVar23	instShort6	INFERRED	every definition of this web is a load from inst+0x6 (positional name; no field row)	^\s*uVar23\ >>\ 3\ \&\ 0x800\ \|$	+2
+use	FUN_000bfed0	uVar24	instShort3_3	INFERRED	every definition of this web is a load from inst+0x3 (positional name; no field row)	^\s*uVar24\ =\ \*\(ushort\ \*\)\(puVar60\ \+\ 3\);$	+1
+use	FUN_000bfed0	uVar24	instShort3_3	INFERRED	every definition of this web is a load from inst+0x3 (positional name; no field row)	^\s*\(uint\)bVar12\ <<\ 0x1f\ \|\ \(uVar24\ \&\ 0x1ff\)\ <<\ 0x10\ \|\ \(bVar15\ \&\ 0x1f\)\ <<\ 8\ \|\ bVar11\ \&\ 0x1f;$	+1
+use	FUN_000bfed0	uVar41	instWord24	INFERRED	every definition of this web is a load from inst+0x24 (positional name; no field row)	^\s*uVar41\ =\ puVar60\[9\];$	+4
+use	FUN_000bfed0	uVar42	instWord28	INFERRED	every definition of this web is a load from inst+0x28 (positional name; no field row)	^\s*uVar42\ =\ puVar60\[10\];$	+4
+use	FUN_000bfed0	uVar43	instWord0	INFERRED	every definition of this web is a load from inst+0x0 (positional name; no field row)	^\s*uVar43\ =\ \*puVar60;$	+1
+use	FUN_000bfed0	uVar43	instWord0	INFERRED	every definition of this web is a load from inst+0x0 (positional name; no field row)	^\s*if\ \(uVar43\ <\ 5\)\ \{$	+3
+use	FUN_000bfed0	uVar43	instWord0	INFERRED	every definition of this web is a load from inst+0x0 (positional name; no field row)	^\s*\(\*\(byte\ \*\)\(puVar60\ \+\ 1\)\ \&\ 1\)\ <<\ 2\ \|\ \(uint\)\(uVar43\ ==\ 3\);$	+1
+use	FUN_000bfed0	uVar43	instWord0	INFERRED	every definition of this web is a load from inst+0x0 (positional name; no field row)	^\s*else\ if\ \(uVar43\ ==\ 5\)\ \{$	+1
+use	FUN_000bfed0	uVar43	instWord14	INFERRED	every definition of this web is a load from inst+0x14 (positional name; no field row)	^\s*uVar43\ =\ puVar60\[5\];$	+1
+use	FUN_000bfed0	uVar43	instWord14	INFERRED	every definition of this web is a load from inst+0x14 (positional name; no field row)	^\s*\(uVar43\ \&\ 0x3000000\)\ <<\ 6\ \|$	+8
+use	FUN_000bfed0	uVar43	instWord14	INFERRED	every definition of this web is a load from inst+0x14 (positional name; no field row)	^\s*uVar43\ <<\ 0x1e\ \|$	+8
+use	FUN_000bfed0	uVar44	instWord24_2	INFERRED	every definition of this web is a load from inst+0x24 (positional name; no field row)	^\s*uVar44\ =\ puVar60\[9\];$	+1
+use	FUN_000bfed0	uVar44	instWord24_2	INFERRED	every definition of this web is a load from inst+0x24 (positional name; no field row)	^\s*local_6c\ =\ uVar44\ >>\ 7\ \&\ 7;$	+3

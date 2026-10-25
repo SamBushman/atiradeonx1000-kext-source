@@ -1,0 +1,37 @@
+local	FUN_0010f87c	param_1	program	INFERRED	the Program; +0x418 lane record vector
+use	FUN_0010f87c	uVar2	laneRecordCount	INFERRED	filled count of the lane record vector	^\s*uVar2\ =\ puVar11\[1\];$	+2
+use	FUN_0010f87c	uVar2	laneRecordCount	INFERRED	filled count of the lane record vector	^\s*if\ \(uVar2\ <=\ uVar10\)\ \{$	+2
+use	FUN_0010f87c	uVar2	laneRecordCount	INFERRED	filled count of the lane record vector	^\s*uVar2\ =\ puVar11\[1\];$@2	+2
+use	FUN_0010f87c	iVar4	laneKind	INFERRED	IRLoadInterp lane kind of the export's lane	^\s*iVar4\ =\ FUN_00104ee4\(iVar9,iVar8\);$	+4
+use	FUN_0010f87c	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ iVar8\ !=\ 3;$	+1
+use	FUN_0010f87c	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0010f87c	piVar5	laneRecordRef	INFERRED	element reference into the lane record vector	^\s*piVar5\ =\ \(int\ \*\)\(uVar10\ \*\ 4\ \+\ puVar11\[2\]\);$	+1
+use	FUN_0010f87c	piVar5	laneRecordRef	INFERRED	element reference into the lane record vector	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar11,uVar10\);$	+1
+use	FUN_0010f87c	piVar5	laneRecordRef	INFERRED	element reference into the lane record vector	^\s*iVar13\ =\ \*piVar5;$	+1
+use	FUN_0010f87c	uVar6	nextExportIndex	INFERRED	export index + 1	^\s*uVar6\ =\ uVar7\ \+\ 1;$	+1
+use	FUN_0010f87c	uVar6	nextExportIndex	INFERRED	export index + 1	^\s*uVar7\ =\ uVar6;$	+2
+use	FUN_0010f87c	uVar7	exportIndex	INFERRED	index of the export in the sorted export list = its new register number	^\s*uVar7\ =\ 0;$	+1
+use	FUN_0010f87c	uVar7	exportIndex	INFERRED	index of the export in the sorted export list = its new register number	^\s*if\ \(uVar7\ <\ \*param_3\)\ \{$	+4
+use	FUN_0010f87c	uVar7	exportIndex	INFERRED	index of the export in the sorted export list = its new register number	^\s*puVar3\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ param_3\[2\]\);$	+1
+use	FUN_0010f87c	uVar7	exportIndex	INFERRED	index of the export in the sorted export list = its new register number	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(param_3,uVar7\);$	+1
+use	FUN_0010f87c	uVar7	exportIndex	INFERRED	index of the export in the sorted export list = its new register number	^\s*uVar6\ =\ uVar7\ \+\ 1;$	+1
+use	FUN_0010f87c	uVar7	exportIndex	INFERRED	index of the export in the sorted export list = its new register number	^\s*if\ \(\*\(uint\ \*\)\(iVar9\ \+\ 0x94\)\ !=\ uVar7\)\ \{$	+1
+use	FUN_0010f87c	uVar7	exportIndex	INFERRED	index of the export in the sorted export list = its new register number	^\s*\*\(uint\ \*\)\(iVar4\ \+\ 8\)\ =\ uVar7;$	+1
+use	FUN_0010f87c	uVar7	exportIndex	INFERRED	index of the export in the sorted export list = its new register number	^\s*\*\(uint\ \*\)\(iVar13\ \+\ 0xc\)\ =\ uVar7;$	+2
+use	FUN_0010f87c	uVar7	exportIndex	INFERRED	index of the export in the sorted export list = its new register number	^\s*uVar7\ =\ uVar6;$	+1
+use	FUN_0010f87c	iVar8	laneNumber	INFERRED	lane counter 0..3	^\s*iVar8\ =\ 0;$	+1
+use	FUN_0010f87c	iVar8	laneNumber	INFERRED	lane counter 0..3	^\s*iVar4\ =\ FUN_00104ee4\(iVar9,iVar8\);$	+4
+use	FUN_0010f87c	iVar8	laneNumber	INFERRED	lane counter 0..3	^\s*bVar1\ =\ iVar8\ !=\ 3;$	+2
+use	FUN_0010f87c	iVar9	exportInst	INFERRED	instruction of the export being renumbered	^\s*iVar9\ =\ \*\(int\ \*\)\*puVar3;$	+3
+use	FUN_0010f87c	iVar9	exportInst	INFERRED	instruction of the export being renumbered	^\s*iVar4\ =\ FUN_00104ee4\(iVar9,iVar8\);$	+4
+use	FUN_0010f87c	puVar11	laneRecordVector	INFERRED	program lane record vector (+0x418)	^\s*puVar11\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x418\);$	+2
+use	FUN_0010f87c	puVar11	laneRecordVector	INFERRED	program lane record vector (+0x418)	^\s*if\ \(uVar10\ <\ \*puVar11\)\ \{$	+1
+use	FUN_0010f87c	puVar11	laneRecordVector	INFERRED	program lane record vector (+0x418)	^\s*_memset\(uVar2\ \*\ 4\ \+\ puVar11\[2\],0,\(uVar10\ \-\ uVar2\)\ \*\ 4\ \+\ 4\);$	+2
+use	FUN_0010f87c	puVar11	laneRecordVector	INFERRED	program lane record vector (+0x418)	^\s*piVar5\ =\ \(int\ \*\)\(uVar10\ \*\ 4\ \+\ puVar11\[2\]\);$	+1
+use	FUN_0010f87c	puVar11	laneRecordVector	INFERRED	program lane record vector (+0x418)	^\s*piVar5\ =\ \(int\ \*\)FUN_0019423c\(puVar11,uVar10\);$	+1
+use	FUN_0010f87c	puVar11	laneRecordVector	INFERRED	program lane record vector (+0x418)	^\s*puVar11\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x418\);$@2	+1
+use	FUN_0010f87c	puVar11	laneRecordVector	INFERRED	program lane record vector (+0x418)	^\s*uVar2\ =\ puVar11\[1\];$@2	+1
+use	FUN_0010f87c	iVar12	recordKindOrIndex	INFERRED	lane record kind word, then its index word (compared against the export's lane)	^\s*iVar12\ =\ \*\(int\ \*\)\(iVar13\ \+\ 4\);$	+1
+use	FUN_0010f87c	iVar12	recordKindOrIndex	INFERRED	lane record kind word, then its index word (compared against the export's lane)	^\s*if\ \(\(\(iVar12\ ==\ iVar4\)\ \&\&$	+3
+use	FUN_0010f87c	iVar13	laneRecord	INFERRED	lane record taken from the vector	^\s*iVar13\ =\ \*piVar5;$	+2
+use	FUN_0010f87c	iVar13	laneRecord	INFERRED	lane record taken from the vector	^\s*if\ \(\(\(iVar12\ ==\ iVar4\)\ \&\&$	+5

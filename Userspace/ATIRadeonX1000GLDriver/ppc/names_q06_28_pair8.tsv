@@ -1,0 +1,16 @@
+local	FUN_00127324	param_1	program	INFERRED	the Program; +0x4c..+0x60 hold the input virtual registers of the export kinds
+local	FUN_00127324	param_2	registerFileKind	INFERRED	register file kind of the virtual register; only 0x24 is mapped
+local	FUN_00127324	param_3	vregId	INFERRED	virtual register id looked up among the program's export registers
+local	FUN_00127324	param_4	kindOut	INFERRED	out: export kind (0x3e..0x41)
+local	FUN_00127324	param_5	indexOut	INFERRED	out: index of the register within its export kind
+local	VReg__pushDefinition	param_1	vreg	INFERRED	the virtual register (this); +0x28 block of the top definition, +0x2c definition stack
+local	VReg__pushDefinition	param_2	definingBlock	INFERRED	block that the new definition belongs to
+local	VReg__pushDefinition	param_3	definition	INFERRED	definition pushed on the stack (or replacing the top one)
+use	VReg__pushDefinition	puVar1	stackSlotRef	INFERRED	new element reference at the top of the definition stack	^\s*puVar1\ =\ \(undefined4\ \*\)\(uVar2\ \*\ 4\ \+\ puVar3\[2\]\);$	+1
+use	VReg__pushDefinition	puVar1	stackSlotRef	INFERRED	new element reference at the top of the definition stack	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	VReg__pushDefinition	puVar1	stackSlotRef	INFERRED	new element reference at the top of the definition stack	^\s*\*puVar1\ =\ param_3;$	+1
+use	VReg__pushDefinition	uVar2	stackCount	INFERRED	filled count of the definition stack	^\s*uVar2\ =\ puVar3\[1\];$	+5
+use	VReg__pushDefinition	uVar2	stackCount	INFERRED	filled count of the definition stack	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1
+use	VReg__pushDefinition	puVar3	definitionStack	INFERRED	definition stack vector header (vreg +0x2c)	^\s*puVar3\ =\ \*\(uint\ \*\*\)\(param_1\ \+\ 0x2c\);$	+2
+use	VReg__pushDefinition	puVar3	definitionStack	INFERRED	definition stack vector header (vreg +0x2c)	^\s*uVar2\ =\ puVar3\[1\];$	+5
+use	VReg__pushDefinition	puVar3	definitionStack	INFERRED	definition stack vector header (vreg +0x2c)	^\s*puVar1\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar3,uVar2\);$	+1

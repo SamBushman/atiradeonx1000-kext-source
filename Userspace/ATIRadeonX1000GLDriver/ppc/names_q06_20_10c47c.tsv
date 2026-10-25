@@ -1,0 +1,34 @@
+local	FUN_0010c47c	param_2	pass	INFERRED	pass object; +0x6c4 -> program (+0x228 instruction counter)
+use	FUN_0010c47c	iVar4	laneCountdown	INFERRED	countdown from 4 over the swizzle lane bytes	^\s*iVar4\ =\ 4;$	+1
+use	FUN_0010c47c	iVar4	laneCountdown	INFERRED	countdown from 4 over the swizzle lane bytes	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	FUN_0010c47c	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*bVar1\ =\ uVar9\ !=\ 3;$	+1
+use	FUN_0010c47c	bVar1	moreLanes	INFERRED	loop latch: lane index is not the last (3)	^\s*\}\ while\ \(bVar1\);$	+1
+use	FUN_0010c47c	bVar2	constantsAreZero	INFERRED	every constant operand lane that is selected holds 0.0	^\s*bVar2\ =\ true;$	+1
+use	FUN_0010c47c	bVar2	constantsAreZero	INFERRED	every constant operand lane that is selected holds 0.0	^\s*bVar2\ =\ true;$@2	+1
+use	FUN_0010c47c	bVar2	constantsAreZero	INFERRED	every constant operand lane that is selected holds 0.0	^\s*bVar2\ =\ false;$	+1
+use	FUN_0010c47c	bVar2	constantsAreZero	INFERRED	every constant operand lane that is selected holds 0.0	^\s*if\ \(\(!bVar2\)\ \&\&\ \(iVar3\ =\ FUN_0010bb14\(a0\),\ iVar3\ ==\ 0\)\)\ \{$	+1
+use	FUN_0010c47c	iVar3	sourceOpcode	INFERRED	opcode of the instruction defining source operand 1	^\s*iVar3\ =\ \*\(int\ \*\)\(a0\[0x22\]\ \+\ 8\);$	+7
+use	FUN_0010c47c	iVar3	sourceOpcode	INFERRED	opcode of the instruction defining source operand 1	^\s*iVar3\ =\ 2;$	+1
+use	FUN_0010c47c	iVar3	sourceOpcode	INFERRED	opcode of the instruction defining source operand 1	^\s*iVar7\ =\ FUN_00105594\(param_1,iVar3\);$	+1
+use	FUN_0010c47c	iVar3	sourceOpcode	INFERRED	opcode of the instruction defining source operand 1	^\s*iVar4\ =\ FUN_001054ec\(param_1,iVar3\);$	+1
+use	FUN_0010c47c	iVar3	sourceOpcode	INFERRED	opcode of the instruction defining source operand 1	^\s*iVar3\ =\ iVar3\ \+\ 1;$	+2
+use	FUN_0010c47c	iVar3	sourceOpcode	INFERRED	opcode of the instruction defining source operand 1	^\s*iVar3\ =\ FUN_001054ec\(param_1,1\);$	+4
+use	FUN_0010c47c	iVar3	sourceOpcode	INFERRED	opcode of the instruction defining source operand 1	^\s*if\ \(\(!bVar2\)\ \&\&\ \(iVar3\ =\ FUN_0010bb14\(a0\),\ iVar3\ ==\ 0\)\)\ \{$	+1
+use	FUN_0010c47c	a0	sourceInst	INFERRED	instruction defining source operand 1	^\s*a0\ =\ \(int\ \*\)\(\(ulonglong\)uVar10\ >>\ 0x20\);$	+8
+use	FUN_0010c47c	a0	sourceInst	INFERRED	instruction defining source operand 1	^\s*if\ \(\(a0\[5\]\ \&\ 0x200U\)\ !=\ 0\)\ \{$	+1
+use	FUN_0010c47c	a0	sourceInst	INFERRED	instruction defining source operand 1	^\s*if\ \(\(\(uVar8\ !=\ 4\)\ \&\&\ \(iVar3\ =\ FUN_001054ec\(a0,0\),\ \*\(char\ \*\)\(uVar9\ \+\ iVar3\ \+\ 0x10\)\ ==\ '\\x01'\)$	+2
+use	FUN_0010c47c	a0	sourceInst	INFERRED	instruction defining source operand 1	^\s*if\ \(\(!bVar2\)\ \&\&\ \(iVar3\ =\ FUN_0010bb14\(a0\),\ iVar3\ ==\ 0\)\)\ \{$	+1
+use	FUN_0010c47c	uVar5	canFold	INFERRED	return value: 1 when the source may be folded into this instruction	^\s*uVar5\ =\ 1;$	+1
+use	FUN_0010c47c	uVar5	canFold	INFERRED	return value: 1 when the source may be folded into this instruction	^\s*uVar5\ =\ 0;$	+1
+use	FUN_0010c47c	uVar5	canFold	INFERRED	return value: 1 when the source may be folded into this instruction	^\s*return\ uVar5;$	+1
+use	FUN_0010c47c	in_r5	staleArg5	INFERRED	r5 left over, forwarded to the vtable call	^\s*if\ \(\(\(\(\(iVar3\ \-\ 0x16U\ <\ 2\)\ \|\|\ \(iVar3\ ==\ 0x19\)\)\ \|\|\ \(iVar3\ ==\ 0x31\)\)\ \|\|$	+6
+use	FUN_0010c47c	in_r6	staleArg6	INFERRED	r6 left over, forwarded to the vtable call	^\s*if\ \(\(\(\(\(iVar3\ \-\ 0x16U\ <\ 2\)\ \|\|\ \(iVar3\ ==\ 0x19\)\)\ \|\|\ \(iVar3\ ==\ 0x31\)\)\ \|\|$	+6
+use	FUN_0010c47c	in_r7	staleArg7	INFERRED	r7 left over, forwarded to the vtable call	^\s*if\ \(\(\(\(\(iVar3\ \-\ 0x16U\ <\ 2\)\ \|\|\ \(iVar3\ ==\ 0x19\)\)\ \|\|\ \(iVar3\ ==\ 0x31\)\)\ \|\|$	+6
+use	FUN_0010c47c	in_r8	staleArg8	INFERRED	r8 left over, forwarded to the vtable call	^\s*if\ \(\(\(\(\(iVar3\ \-\ 0x16U\ <\ 2\)\ \|\|\ \(iVar3\ ==\ 0x19\)\)\ \|\|\ \(iVar3\ ==\ 0x31\)\)\ \|\|$	+6
+use	FUN_0010c47c	iVar6	laneByteIndex	INFERRED	lane byte counter 0..3 over the constant's swizzle	^\s*iVar6\ =\ 0;$	+1
+use	FUN_0010c47c	iVar6	laneByteIndex	INFERRED	lane byte counter 0..3 over the constant's swizzle	^\s*if\ \(\(\*\(byte\ \*\)\(\(int\)local_38\ \+\ iVar6\)\ !=\ 4\)\ \&\&$	+2
+use	FUN_0010c47c	iVar6	laneByteIndex	INFERRED	lane byte counter 0..3 over the constant's swizzle	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
+use	FUN_0010c47c	uVar8	selectedLane	INFERRED	swizzle byte of the lane in operand 1	^\s*uVar8\ =\ \(uint\)\*\(byte\ \*\)\(uVar9\ \+\ iVar3\ \+\ 0x10\);$	+3
+use	FUN_0010c47c	uVar9	laneNumber	INFERRED	lane counter 0..3	^\s*uVar9\ =\ 0;$	+1
+use	FUN_0010c47c	uVar9	laneNumber	INFERRED	lane counter 0..3	^\s*uVar8\ =\ \(uint\)\*\(byte\ \*\)\(uVar9\ \+\ iVar3\ \+\ 0x10\);$	+5
+local	FUN_0010c47c	local_38	swizzleWord	INFERRED	swizzle word of the constant operand (per-lane bytes)

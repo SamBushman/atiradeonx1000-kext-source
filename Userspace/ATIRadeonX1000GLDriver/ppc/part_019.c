@@ -38,7 +38,7 @@ int scDumpPixelProgram(sinkContext, shaderState, optionsArg, sinkFn, argR7, argR
   undefined4 param_7;
 {
   undefined4 sinkFnCopy;
-  undefined4 in_r10;
+  undefined4 staleArgR10;
   undefined4 sinkFnField;
   undefined4 sinkContextField;
   
@@ -46,7 +46,7 @@ int scDumpPixelProgram(sinkContext, shaderState, optionsArg, sinkFn, argR7, argR
   psnClearSinkRecord2(&sinkFnField);
   sinkFnField = sinkFn;
   sinkContextField = sinkContext;
-  ((int (*)())scDumpPixelProgramPsn)(&sinkFnField,shaderState,optionsArg,sinkFnCopy,argR7,argR8,param_7,in_r10);
+  ((int (*)())scDumpPixelProgramPsn)(&sinkFnField,shaderState,optionsArg,sinkFnCopy,argR7,argR8,param_7,staleArgR10);
   return 0;
 }
 
@@ -233,69 +233,70 @@ LAB_000d52a0:
 }
 
 /* FUN_000d5390 @ 0xd5390 (548 bytes) */
-int FUN_000d5390(param_1, param_2, param_3, param_4, param_5)
-  int param_1;
-  uint *param_2;
-  int param_3;
-  int param_4;
-  uint param_5;
+int FUN_000d5390(ctx, ilBuilder, isFirstUnit, previousUnit, componentMask)
+  int ctx;
+  uint *ilBuilder;
+  int isFirstUnit;
+  int previousUnit;
+  uint componentMask;
 {
+  uint newTokenBuffer;
   bool bVar1;
-  uint uVar2;
-  uint uVar3;
-  uint uVar4;
+  uint tokenIndex;
+  uint componentToken;
+  uint sourceToken;
   uint loopCounter;
   
-  uVar3 = 0x170000;
-  if (param_3 == 0) {
-    uVar4 = param_4 + (uint)(byte)((unsigned char *)0x000013b2)[param_1] & 0xffff | 0x40000;
+  componentToken = 0x170000;
+  if (isFirstUnit == 0) {
+    sourceToken = previousUnit + (uint)(byte)((unsigned char *)0x000013b2)[ctx] & 0xffff | 0x40000;
   }
   else {
-    uVar4 = 0x120000;
+    sourceToken = 0x120000;
   }
   loopCounter = 0;
   do {
-    if ((1 << (loopCounter & 0x3f) & param_5) != 0) {
-      uVar2 = *param_2;
-      uVar3 = loopCounter & 0xffff | uVar3 & 0xffff0000;
-      if (param_2[1] <= uVar2) {
-        uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-        if (param_2[2] != 0) {
-          _memcpy(uVar2,param_2[2],*param_2 << 2);
-          (**(code **)(param_1 + 0x18))(param_2[2]);
+    if ((1 << (loopCounter & 0x3f) & componentMask) != 0) {
+      tokenIndex = *ilBuilder;
+      componentToken = loopCounter & 0xffff | componentToken & 0xffff0000;
+      if (ilBuilder[1] <= tokenIndex) {
+        newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+        if (ilBuilder[2] != 0) {
+          _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+          (**(code **)(ctx + 0x18))(ilBuilder[2]);
         }
-        param_2[2] = uVar2;
-        uVar2 = *param_2;
-        param_2[1] = param_2[1] + 0x80;
+        ilBuilder[2] = newTokenBuffer;
+        tokenIndex = *ilBuilder;
+        ilBuilder[1] = ilBuilder[1] + 0x80;
       }
-      *(undefined4 *)(uVar2 * 4 + param_2[2]) = 0xe;
-      uVar2 = *param_2 + 1;
-      *param_2 = uVar2;
-      if (param_2[1] <= uVar2) {
-        uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-        if (param_2[2] != 0) {
-          _memcpy(uVar2,param_2[2],*param_2 << 2);
-          (**(code **)(param_1 + 0x18))(param_2[2]);
+      *(undefined4 *)(tokenIndex * 4 + ilBuilder[2]) = 0xe;
+      tokenIndex = *ilBuilder + 1;
+      *ilBuilder = tokenIndex;
+      if (ilBuilder[1] <= tokenIndex) {
+        newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+        if (ilBuilder[2] != 0) {
+          _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+          (**(code **)(ctx + 0x18))(ilBuilder[2]);
         }
-        param_2[2] = uVar2;
-        uVar2 = *param_2;
-        param_2[1] = param_2[1] + 0x80;
+        ilBuilder[2] = newTokenBuffer;
+        tokenIndex = *ilBuilder;
+        ilBuilder[1] = ilBuilder[1] + 0x80;
       }
-      *(uint *)(uVar2 * 4 + param_2[2]) = uVar3;
-      uVar2 = *param_2 + 1;
-      *param_2 = uVar2;
-      if (param_2[1] <= uVar2) {
-        uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-        if (param_2[2] != 0) {
-          _memcpy(uVar2,param_2[2],*param_2 << 2);
-          (**(code **)(param_1 + 0x18))(param_2[2]);
+      *(uint *)(tokenIndex * 4 + ilBuilder[2]) = componentToken;
+      tokenIndex = *ilBuilder + 1;
+      *ilBuilder = tokenIndex;
+      if (ilBuilder[1] <= tokenIndex) {
+        newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+        if (ilBuilder[2] != 0) {
+          _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+          (**(code **)(ctx + 0x18))(ilBuilder[2]);
         }
-        param_2[2] = uVar2;
-        uVar2 = *param_2;
-        param_2[1] = param_2[1] + 0x80;
+        ilBuilder[2] = newTokenBuffer;
+        tokenIndex = *ilBuilder;
+        ilBuilder[1] = ilBuilder[1] + 0x80;
       }
-      *(uint *)(uVar2 * 4 + param_2[2]) = uVar4;
-      *param_2 = *param_2 + 1;
+      *(uint *)(tokenIndex * 4 + ilBuilder[2]) = sourceToken;
+      *ilBuilder = *ilBuilder + 1;
     }
     bVar1 = loopCounter != 3;
     loopCounter = loopCounter + 1;
@@ -304,88 +305,89 @@ int FUN_000d5390(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* FUN_000d55c0 @ 0xd55c0 (832 bytes) */
-int FUN_000d55c0(param_1, param_2, param_3, param_4)
-  int param_1;
-  uint *param_2;
-  int param_3;
-  undefined4 param_4;
+int FUN_000d55c0(ctx, ilBuilder, isFirstUnit, previousUnit)
+  int ctx;
+  uint *ilBuilder;
+  int isFirstUnit;
+  undefined4 previousUnit;
 {
-  byte bVar1;
-  uint uVar2;
-  uint uVar3;
+  uint newTokenBuffer;
+  byte textureUnitCount;
+  uint tokenIndex;
+  uint sourceToken;
   
-  uVar2 = *param_2;
-  if (param_2[1] <= uVar2) {
-    uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-    if (param_2[2] != 0) {
-      _memcpy(uVar2,param_2[2],*param_2 << 2);
-      (**(code **)(param_1 + 0x18))(param_2[2]);
+  tokenIndex = *ilBuilder;
+  if (ilBuilder[1] <= tokenIndex) {
+    newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+    if (ilBuilder[2] != 0) {
+      _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+      (**(code **)(ctx + 0x18))(ilBuilder[2]);
     }
-    param_2[2] = uVar2;
-    uVar2 = *param_2;
-    param_2[1] = param_2[1] + 0x80;
+    ilBuilder[2] = newTokenBuffer;
+    tokenIndex = *ilBuilder;
+    ilBuilder[1] = ilBuilder[1] + 0x80;
   }
-  *(undefined4 *)(uVar2 * 4 + param_2[2]) = 3;
-  uVar2 = *param_2 + 1;
-  *param_2 = uVar2;
-  bVar1 = ((unsigned char *)0x000013b2)[param_1];
-  if (param_2[1] <= uVar2) {
-    uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-    if (param_2[2] != 0) {
-      _memcpy(uVar2,param_2[2],*param_2 << 2);
-      (**(code **)(param_1 + 0x18))(param_2[2]);
+  *(undefined4 *)(tokenIndex * 4 + ilBuilder[2]) = 3;
+  tokenIndex = *ilBuilder + 1;
+  *ilBuilder = tokenIndex;
+  textureUnitCount = ((unsigned char *)0x000013b2)[ctx];
+  if (ilBuilder[1] <= tokenIndex) {
+    newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+    if (ilBuilder[2] != 0) {
+      _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+      (**(code **)(ctx + 0x18))(ilBuilder[2]);
     }
-    param_2[2] = uVar2;
-    uVar2 = *param_2;
-    param_2[1] = param_2[1] + 0x80;
+    ilBuilder[2] = newTokenBuffer;
+    tokenIndex = *ilBuilder;
+    ilBuilder[1] = ilBuilder[1] + 0x80;
   }
-  *(uint *)(uVar2 * 4 + param_2[2]) = (int)(*(unsigned short *)((unsigned char *)&(param_4) + 2)) + (uint)bVar1 & 0xffff | 0x40000;
-  uVar2 = *param_2 + 1;
-  *param_2 = uVar2;
-  if (param_3 == 0) {
-    uVar3 = (int)(*(unsigned short *)((unsigned char *)&(param_4) + 2)) + (uint)(byte)((unsigned char *)0x000013b2)[param_1] & 0xffff | 0x40000;
+  *(uint *)(tokenIndex * 4 + ilBuilder[2]) = (int)(*(unsigned short *)((unsigned char *)&(previousUnit) + 2)) + (uint)textureUnitCount & 0xffff | 0x40000;
+  tokenIndex = *ilBuilder + 1;
+  *ilBuilder = tokenIndex;
+  if (isFirstUnit == 0) {
+    sourceToken = (int)(*(unsigned short *)((unsigned char *)&(previousUnit) + 2)) + (uint)(byte)((unsigned char *)0x000013b2)[ctx] & 0xffff | 0x40000;
   }
   else {
-    uVar3 = 0x120000;
+    sourceToken = 0x120000;
   }
-  if (param_2[1] <= uVar2) {
-    uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-    if (param_2[2] != 0) {
-      _memcpy(uVar2,param_2[2],*param_2 << 2);
-      (**(code **)(param_1 + 0x18))(param_2[2]);
+  if (ilBuilder[1] <= tokenIndex) {
+    newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+    if (ilBuilder[2] != 0) {
+      _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+      (**(code **)(ctx + 0x18))(ilBuilder[2]);
     }
-    param_2[2] = uVar2;
-    uVar2 = *param_2;
-    param_2[1] = param_2[1] + 0x80;
+    ilBuilder[2] = newTokenBuffer;
+    tokenIndex = *ilBuilder;
+    ilBuilder[1] = ilBuilder[1] + 0x80;
   }
-  *(uint *)(uVar2 * 4 + param_2[2]) = uVar3;
-  uVar2 = *param_2 + 1;
-  *param_2 = uVar2;
-  if (param_2[1] <= uVar2) {
-    uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-    if (param_2[2] != 0) {
-      _memcpy(uVar2,param_2[2],*param_2 << 2);
-      (**(code **)(param_1 + 0x18))(param_2[2]);
+  *(uint *)(tokenIndex * 4 + ilBuilder[2]) = sourceToken;
+  tokenIndex = *ilBuilder + 1;
+  *ilBuilder = tokenIndex;
+  if (ilBuilder[1] <= tokenIndex) {
+    newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+    if (ilBuilder[2] != 0) {
+      _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+      (**(code **)(ctx + 0x18))(ilBuilder[2]);
     }
-    param_2[2] = uVar2;
-    uVar2 = *param_2;
-    param_2[1] = param_2[1] + 0x80;
+    ilBuilder[2] = newTokenBuffer;
+    tokenIndex = *ilBuilder;
+    ilBuilder[1] = ilBuilder[1] + 0x80;
   }
-  *(undefined4 *)(uVar2 * 4 + param_2[2]) = 0x530000;
-  uVar2 = *param_2 + 1;
-  *param_2 = uVar2;
-  if (param_2[1] <= uVar2) {
-    uVar2 = (**(code **)(param_1 + 0xc))(param_2[1] * 4 + 0x200);
-    if (param_2[2] != 0) {
-      _memcpy(uVar2,param_2[2],*param_2 << 2);
-      (**(code **)(param_1 + 0x18))(param_2[2]);
+  *(undefined4 *)(tokenIndex * 4 + ilBuilder[2]) = 0x530000;
+  tokenIndex = *ilBuilder + 1;
+  *ilBuilder = tokenIndex;
+  if (ilBuilder[1] <= tokenIndex) {
+    newTokenBuffer = (**(code **)(ctx + 0xc))(ilBuilder[1] * 4 + 0x200);
+    if (ilBuilder[2] != 0) {
+      _memcpy(newTokenBuffer,ilBuilder[2],*ilBuilder << 2);
+      (**(code **)(ctx + 0x18))(ilBuilder[2]);
     }
-    param_2[2] = uVar2;
-    uVar2 = *param_2;
-    param_2[1] = param_2[1] + 0x80;
+    ilBuilder[2] = newTokenBuffer;
+    tokenIndex = *ilBuilder;
+    ilBuilder[1] = ilBuilder[1] + 0x80;
   }
-  *(undefined **)(uVar2 * 4 + param_2[2]) = ((unsigned char *)0x00004210);
-  *param_2 = *param_2 + 1;
+  *(undefined **)(tokenIndex * 4 + ilBuilder[2]) = ((unsigned char *)0x00004210);
+  *ilBuilder = *ilBuilder + 1;
   return;
 }
 
@@ -655,45 +657,48 @@ int ffpsEmitTexEnvCombine(ctx, ilBuilder, baseFormat, unit, textureObject, isFir
   undefined4 isFirstUnit;
   undefined4 previousUnit;
 {
+  uint alphaSourceSwizzle;
+  uint alphaSourceToken;
+  uint rgbSourceSwizzle;
   int loopCounter;
   uint tokenIndex;
-  bool bVar1;
+  bool notLastWord;
   byte textureUnitCount;
   float rgbScale;
-  ushort uVar4;
-  int iVar5;
+  ushort combineAlphaMode;
+  int argSlot;
   int unitState;
   undefined4 newTokenBuffer;
-  uint uVar8;
+  uint combineRgbMode;
   int iVar9;
   int argCount;
   undefined4 ilOpcode;
-  int *piVar12;
+  int *argOrderCursor;
   undefined4 dstWriteWord;
-  uint uVar14;
+  uint rgbSourceToken;
   uint *countPtr;
   uint srcTokens [2];
   undefined1 srcToken2 [4];
   uint srcSwizzles [2];
   undefined1 srcSwizzle2 [4];
-  uint local_80 [2];
-  undefined1 auStack_78 [4];
-  uint local_74;
-  uint local_70;
-  undefined1 auStack_6c [4];
+  uint alphaSrcTokens [2];
+  undefined1 alphaSrcToken2 [4];
+  uint alphaSwizzle0;
+  uint alphaSwizzle1;
+  undefined1 alphaSwizzle2 [4];
   int argOrder [4];
-  uint *local_58;
+  uint *alphaSwizzlesPtr;
   
   unitState = 0;
-  local_58 = &local_74;
+  alphaSwizzlesPtr = &alphaSwizzle0;
   do {
     *(undefined4 *)(unitState + (int)srcTokens) = 0;
     *(undefined4 *)(unitState + (int)srcSwizzles) = 0;
-    bVar1 = unitState != 8;
-    *(undefined4 *)(unitState + (int)local_80) = 0;
-    *(undefined4 *)(unitState + (int)local_58) = 0;
+    notLastWord = unitState != 8;
+    *(undefined4 *)(unitState + (int)alphaSrcTokens) = 0;
+    *(undefined4 *)(unitState + (int)alphaSwizzlesPtr) = 0;
     unitState = unitState + 4;
-  } while (bVar1);
+  } while (notLastWord);
   unitState = unit * 0xcc + ctx;
   countPtr = (uint *)(ilBuilder + 4);
   ilOpcode = 0;
@@ -703,30 +708,30 @@ int ffpsEmitTexEnvCombine(ctx, ilBuilder, baseFormat, unit, textureObject, isFir
                srcTokens + 1,srcSwizzles + 1,unit,baseFormat,isFirstUnit,previousUnit);
   ((int (*)())ffpsBuildRgbSourceOperand)(ctx,(uint)*(ushort *)(unitState + 0x45a),(uint)*(ushort *)(unitState + 0x466),srcToken2,
                srcSwizzle2,unit,baseFormat,isFirstUnit,previousUnit);
-  uVar8 = (uint)*(ushort *)(unitState + 0x454);
+  combineRgbMode = (uint)*(ushort *)(unitState + 0x454);
   rgbScale = *(float *)(unitState + 0x474);
-  if (uVar8 < 0x86b0) {
-    if (uVar8 < 0x86ae) {
-      if (uVar8 == 0x2100) {
+  if (combineRgbMode < 0x86b0) {
+    if (combineRgbMode < 0x86ae) {
+      if (combineRgbMode == 0x2100) {
         ilOpcode = 0x49;
 LAB_000d6560:
         argCount = 2;
         argOrder[0] = 0;
-        iVar9 = uVar8 - 0x10000;
+        iVar9 = combineRgbMode - 0x10000;
         argOrder[1] = 1;
       }
-      else if (uVar8 < 0x2101) {
-        if (uVar8 == 0x104) {
+      else if (combineRgbMode < 0x2101) {
+        if (combineRgbMode == 0x104) {
           ilOpcode = 3;
           goto LAB_000d6560;
         }
-        if (uVar8 != 0x1e01) goto LAB_000d6534;
+        if (combineRgbMode != 0x1e01) goto LAB_000d6534;
         argCount = 1;
         argOrder[0] = 0;
         iVar9 = -0xe1ff;
         ilOpcode = 0x47;
       }
-      else if (uVar8 == 0x8574) {
+      else if (combineRgbMode == 0x8574) {
         argOrder[0] = 0;
         ilOpcode = 3;
         argOrder[1] = 1;
@@ -738,7 +743,7 @@ LAB_000d6560:
         iVar9 = -0x7a8c;
         srcSwizzles[1] = srcSwizzles[1] | 0x20000;
       }
-      else if (uVar8 == 0x8575) {
+      else if (combineRgbMode == 0x8575) {
         argOrder[1] = 0;
         argCount = 3;
         ilOpcode = 0x3f;
@@ -747,7 +752,7 @@ LAB_000d6560:
         argOrder[0] = 2;
       }
       else {
-        if (uVar8 != 0x84e7) goto LAB_000d6534;
+        if (combineRgbMode != 0x84e7) goto LAB_000d6534;
         argCount = 2;
         argOrder[0] = 0;
         iVar9 = -0x7b19;
@@ -757,7 +762,7 @@ LAB_000d6560:
     }
     else {
 LAB_000d64e8:
-      iVar9 = uVar8 - 0x10000;
+      iVar9 = combineRgbMode - 0x10000;
       argOrder[0] = 0;
       ilOpcode = 0x22;
       argOrder[1] = 1;
@@ -774,7 +779,7 @@ LAB_000d64e8:
       srcSwizzles[1] = srcSwizzles[1] | 0x20000;
     }
   }
-  else if (uVar8 == 0x8744) {
+  else if (combineRgbMode == 0x8744) {
     argOrder[0] = 0;
     argCount = 3;
     ilOpcode = 0x40;
@@ -782,13 +787,13 @@ LAB_000d64e8:
     argOrder[2] = 1;
     argOrder[1] = 2;
   }
-  else if (uVar8 < 0x8745) {
-    if (uVar8 - 0x8740 < 2) goto LAB_000d64e8;
+  else if (combineRgbMode < 0x8745) {
+    if (combineRgbMode - 0x8740 < 2) goto LAB_000d64e8;
 LAB_000d6534:
-    iVar9 = uVar8 - 0x10000;
+    iVar9 = combineRgbMode - 0x10000;
     argCount = 0;
   }
-  else if (uVar8 == 0x8745) {
+  else if (combineRgbMode == 0x8745) {
     argOrder[0] = 0;
     argOrder[1] = 2;
     argOrder[2] = 1;
@@ -802,7 +807,7 @@ LAB_000d6534:
     srcSwizzles[1] = srcSwizzles[1] | 0x20000;
   }
   else {
-    if (uVar8 != 0x8746) goto LAB_000d6534;
+    if (combineRgbMode != 0x8746) goto LAB_000d6534;
     argOrder[0] = 0;
     argOrder[1] = 2;
     argOrder[2] = 1;
@@ -831,7 +836,7 @@ LAB_000d6840:
     }
   }
   else {
-    if (((rgbScale == FLOAT_001aa104) || (uVar8 == 0x8740)) || (uVar8 == 0x8741)) goto LAB_000d6840;
+    if (((rgbScale == FLOAT_001aa104) || (combineRgbMode == 0x8740)) || (combineRgbMode == 0x8741)) goto LAB_000d6840;
     if (rgbScale == FLOAT_001aa108) {
       dstWriteWord = 0x315;
     }
@@ -879,11 +884,11 @@ LAB_000d6840:
   *countPtr = tokenIndex;
   if (argCount != 0) {
     loopCounter = 0;
-    piVar12 = argOrder;
+    argOrderCursor = argOrder;
     do {
-      iVar5 = *piVar12;
-      piVar12 = piVar12 + 1;
-      uVar14 = srcTokens[iVar5];
+      argSlot = *argOrderCursor;
+      argOrderCursor = argOrderCursor + 1;
+      rgbSourceToken = srcTokens[argSlot];
       if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
         ilOpcode = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
         if (*(int *)(ilBuilder + 0xc) != 0) {
@@ -894,11 +899,11 @@ LAB_000d6840:
         tokenIndex = *countPtr;
         *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
       }
-      *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar14;
+      *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = rgbSourceToken;
       tokenIndex = *countPtr + 1;
       *countPtr = tokenIndex;
-      if ((srcTokens[iVar5] & 0x400000) != 0) {
-        uVar14 = srcSwizzles[iVar5];
+      if ((srcTokens[argSlot] & 0x400000) != 0) {
+        rgbSourceSwizzle = srcSwizzles[argSlot];
         if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
           ilOpcode = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
           if (*(int *)(ilBuilder + 0xc) != 0) {
@@ -909,7 +914,7 @@ LAB_000d6840:
           tokenIndex = *countPtr;
           *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
         }
-        *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar14;
+        *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = rgbSourceSwizzle;
         tokenIndex = *countPtr + 1;
         *countPtr = tokenIndex;
       }
@@ -988,45 +993,45 @@ LAB_000d6840:
     return;
   }
   ilOpcode = 0;
-  ((int (*)())ffpsBuildAlphaSourceOperand)(ctx,(uint)*(ushort *)(unitState + 0x45c),(uint)*(ushort *)(unitState + 0x468),local_80,
-               local_58,unit,baseFormat,isFirstUnit,previousUnit);
+  ((int (*)())ffpsBuildAlphaSourceOperand)(ctx,(uint)*(ushort *)(unitState + 0x45c),(uint)*(ushort *)(unitState + 0x468),alphaSrcTokens,
+               alphaSwizzlesPtr,unit,baseFormat,isFirstUnit,previousUnit);
   ((int (*)())ffpsBuildAlphaSourceOperand)(ctx,(uint)*(ushort *)(unitState + 0x45e),(uint)*(ushort *)(unitState + 0x46a),
-               local_80 + 1,&local_70,unit,baseFormat,isFirstUnit,previousUnit);
-  ((int (*)())ffpsBuildAlphaSourceOperand)(ctx,(uint)*(ushort *)(unitState + 0x460),(uint)*(ushort *)(unitState + 0x46c),auStack_78,
-               auStack_6c,unit,baseFormat,isFirstUnit,previousUnit);
-  uVar4 = *(ushort *)(unitState + 0x452);
+               alphaSrcTokens + 1,&alphaSwizzle1,unit,baseFormat,isFirstUnit,previousUnit);
+  ((int (*)())ffpsBuildAlphaSourceOperand)(ctx,(uint)*(ushort *)(unitState + 0x460),(uint)*(ushort *)(unitState + 0x46c),alphaSrcToken2,
+               alphaSwizzle2,unit,baseFormat,isFirstUnit,previousUnit);
+  combineAlphaMode = *(ushort *)(unitState + 0x452);
   rgbScale = *(float *)(unitState + 0x478);
-  if (uVar4 == 0x8574) {
+  if (combineAlphaMode == 0x8574) {
     argOrder[0] = 0;
     ilOpcode = 3;
     argOrder[1] = 1;
-    if ((local_80[1] & 0x400000) == 0) {
-      local_80[1] = local_80[1] | 0x400000;
-      local_70 = local_70 & 0xffff8fff | 0x3000;
+    if ((alphaSrcTokens[1] & 0x400000) == 0) {
+      alphaSrcTokens[1] = alphaSrcTokens[1] | 0x400000;
+      alphaSwizzle1 = alphaSwizzle1 & 0xffff8fff | 0x3000;
     }
     unitState = 2;
-    local_70 = local_70 | 0x20000;
+    alphaSwizzle1 = alphaSwizzle1 | 0x20000;
   }
-  else if (uVar4 < 0x8575) {
-    if (uVar4 == 0x1e01) {
+  else if (combineAlphaMode < 0x8575) {
+    if (combineAlphaMode == 0x1e01) {
       unitState = 1;
       argOrder[0] = 0;
       ilOpcode = 0x47;
     }
     else {
-      if (uVar4 < 0x1e02) {
-        if (uVar4 != 0x104) {
+      if (combineAlphaMode < 0x1e02) {
+        if (combineAlphaMode != 0x104) {
 LAB_000d6fbc:
           unitState = 0;
           goto LAB_000d7144;
         }
         ilOpcode = 3;
       }
-      else if (uVar4 == 0x2100) {
+      else if (combineAlphaMode == 0x2100) {
         ilOpcode = 0x49;
       }
       else {
-        if (uVar4 != 0x84e7) goto LAB_000d6fbc;
+        if (combineAlphaMode != 0x84e7) goto LAB_000d6fbc;
         ilOpcode = 0x5b;
       }
       unitState = 2;
@@ -1034,62 +1039,62 @@ LAB_000d6fbc:
       argOrder[1] = 1;
     }
   }
-  else if (uVar4 == 0x8744) {
+  else if (combineAlphaMode == 0x8744) {
     argOrder[0] = 0;
     unitState = 3;
     ilOpcode = 0x40;
     argOrder[2] = 1;
     argOrder[1] = 2;
   }
-  else if (uVar4 < 0x8745) {
-    if (uVar4 != 0x8575) goto LAB_000d6fbc;
+  else if (combineAlphaMode < 0x8745) {
+    if (combineAlphaMode != 0x8575) goto LAB_000d6fbc;
     argOrder[1] = 0;
     unitState = 3;
     ilOpcode = 0x3f;
     argOrder[2] = 1;
     argOrder[0] = 2;
   }
-  else if (uVar4 == 0x8745) {
+  else if (combineAlphaMode == 0x8745) {
     argOrder[0] = 0;
     ilOpcode = 0x40;
     argOrder[2] = 1;
     argOrder[1] = 2;
-    if ((local_80[1] & 0x400000) == 0) {
-      local_80[1] = local_80[1] | 0x400000;
-      local_70 = local_70 & 0xffff8fff | 0x3000;
+    if ((alphaSrcTokens[1] & 0x400000) == 0) {
+      alphaSrcTokens[1] = alphaSrcTokens[1] | 0x400000;
+      alphaSwizzle1 = alphaSwizzle1 & 0xffff8fff | 0x3000;
     }
     unitState = 3;
-    local_70 = local_70 | 0x20000;
+    alphaSwizzle1 = alphaSwizzle1 | 0x20000;
   }
   else {
-    if (uVar4 != 0x8746) goto LAB_000d6fbc;
+    if (combineAlphaMode != 0x8746) goto LAB_000d6fbc;
     argOrder[0] = 0;
     argOrder[1] = 2;
     ilOpcode = 0x40;
     argOrder[2] = 1;
-    if ((local_80[1] & 0x400000) == 0) {
-      local_80[1] = local_80[1] | 0x400000;
-      local_70 = local_70 & 0xffff8fff | 0x3000;
+    if ((alphaSrcTokens[1] & 0x400000) == 0) {
+      alphaSrcTokens[1] = alphaSrcTokens[1] | 0x400000;
+      alphaSwizzle1 = alphaSwizzle1 & 0xffff8fff | 0x3000;
     }
     unitState = 3;
-    local_70 = local_70 | 0x8000;
+    alphaSwizzle1 = alphaSwizzle1 | 0x8000;
   }
 LAB_000d7144:
   textureUnitCount = ((unsigned char *)0x000013b2)[ctx];
   dstWriteWord = 0x140;
-  if (uVar4 == 0x86af) {
+  if (combineAlphaMode == 0x86af) {
     if (rgbScale != FLOAT_001aa0e8) {
       if (rgbScale == FLOAT_001aa108) {
         dstWriteWord = 0x740;
       }
       else {
         dstWriteWord = 0x740;
-        local_74 = local_74 | 0x40000;
+        alphaSwizzle0 = alphaSwizzle0 | 0x40000;
       }
       goto LAB_000d7214;
     }
   }
-  else if ((rgbScale != FLOAT_001aa104) && (uVar4 != 0x8741)) {
+  else if ((rgbScale != FLOAT_001aa104) && (combineAlphaMode != 0x8741)) {
     if (rgbScale == FLOAT_001aa108) {
       dstWriteWord = 0x340;
     }
@@ -1140,11 +1145,11 @@ LAB_000d7214:
   *countPtr = tokenIndex;
   if (unitState != 0) {
     loopCounter = 0;
-    piVar12 = argOrder;
+    argOrderCursor = argOrder;
     do {
-      argCount = *piVar12;
-      piVar12 = piVar12 + 1;
-      uVar14 = local_80[argCount];
+      argCount = *argOrderCursor;
+      argOrderCursor = argOrderCursor + 1;
+      alphaSourceToken = alphaSrcTokens[argCount];
       if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
         ilOpcode = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
         if (*(int *)(ilBuilder + 0xc) != 0) {
@@ -1155,11 +1160,11 @@ LAB_000d7214:
         tokenIndex = *countPtr;
         *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
       }
-      *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar14;
+      *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = alphaSourceToken;
       tokenIndex = *countPtr + 1;
       *countPtr = tokenIndex;
-      if ((local_80[argCount] & 0x400000) != 0) {
-        uVar14 = local_58[argCount];
+      if ((alphaSrcTokens[argCount] & 0x400000) != 0) {
+        alphaSourceSwizzle = alphaSwizzlesPtr[argCount];
         if (*(uint *)(ilBuilder + 8) <= tokenIndex) {
           ilOpcode = (**(code **)(ctx + 0xc))(*(uint *)(ilBuilder + 8) * 4 + 0x200);
           if (*(int *)(ilBuilder + 0xc) != 0) {
@@ -1170,7 +1175,7 @@ LAB_000d7214:
           tokenIndex = *countPtr;
           *(int *)(ilBuilder + 8) = *(int *)(ilBuilder + 8) + 0x80;
         }
-        *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = uVar14;
+        *(uint *)(tokenIndex * 4 + *(int *)(ilBuilder + 0xc)) = alphaSourceSwizzle;
         tokenIndex = *countPtr + 1;
         *countPtr = tokenIndex;
       }
@@ -2242,7 +2247,7 @@ int FUN_000d9b58(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* scStoreConstantComponent @ 0xd9bac (228 bytes) */
-undefined4 scStoreConstantComponent(undefined4 param_1,int param_2,undefined4 param_3,int param_4,int param_5,int param_6,double fparam_1)
+undefined4 scStoreConstantComponent(undefined4 param_1,int param_2,undefined4 param_3,int param_4,int param_5,int param_6,double staleFprArg1)
 {
   int iVar1;
   uint uVar2;
@@ -2279,7 +2284,7 @@ LAB_000d9c0c:
         } while (*piVar5 != param_2);
       }
       *(int *)(iVar3 + (int)piVar4) = param_2;
-      *(float *)((int)piVar4 + param_4 * 4 + iVar3 + 4) = (float)fparam_1;
+      *(float *)((int)piVar4 + param_4 * 4 + iVar3 + 4) = (float)staleFprArg1;
       return 1;
     }
   }
@@ -2289,7 +2294,7 @@ LAB_000d9c0c:
       *(uint *)(param_5 + 0x54) = uVar2 + 1;
       iVar3 = uVar2 * 0x24 + *(int *)(param_5 + 0x60);
       *(int *)(uVar2 * 0x24 + *(int *)(param_5 + 0x60)) = param_2;
-      *(float *)(iVar3 + 0x14) = (float)fparam_1;
+      *(float *)(iVar3 + 0x14) = (float)staleFprArg1;
       *(int *)(iVar3 + 4) = param_4;
       *(undefined4 *)(iVar3 + 8) = 1;
       return 1;
@@ -2684,7 +2689,7 @@ int FUN_000da0c0(param_1, param_2)
   iVar4 = puStack0000001c[3];
   iVar5 = puStack0000001c[4];
   if (iVar1 == 2) {
-    FUN_000e1b70(puStack00000018[2],2);
+    Compiler__setHardwareFamily(puStack00000018[2],2);
     if (iVar5 - 1U < 0x20c) {
       *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
     }
@@ -2695,7 +2700,7 @@ int FUN_000da0c0(param_1, param_2)
   }
   else {
     if (iVar1 == 3) {
-      FUN_000e1b70(puStack00000018[2],4);
+      Compiler__setHardwareFamily(puStack00000018[2],4);
       if (iVar5 - 1U < 0x200) {
         *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
       }
@@ -2712,10 +2717,10 @@ code_r0x000da340:
     }
     if (iVar1 != 1) {
       *(undefined4 *)(puStack00000018[2] + 0x314) = 0xe;
-      FUN_000e1b70(puStack00000018[2],1);
+      Compiler__setHardwareFamily(puStack00000018[2],1);
       return;
     }
-    FUN_000e1b70(puStack00000018[2],1);
+    Compiler__setHardwareFamily(puStack00000018[2],1);
     if (iVar5 - 1U < 0x60) {
       *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
     }
@@ -2785,7 +2790,7 @@ int scDestroyCompilerObject(param_1, param_2)
   undefined4 param_2;
 {
   if (param_1[2] != 0) {
-    FUN_000e1fe4(param_1[2],param_2);
+    Compiler__releaseChipAndPools(param_1[2],param_2);
                     
                     
     (*(code *)*param_1)(param_1[1],param_1[2]);
@@ -2843,7 +2848,7 @@ int FUN_000da4b8(param_1, param_2)
   iVar4 = puStack0000001c[3];
   iVar5 = puStack0000001c[4];
   if (iVar1 == 2) {
-    FUN_000e1b70(puStack00000018[2],2);
+    Compiler__setHardwareFamily(puStack00000018[2],2);
     if (iVar5 - 1U < 0x20c) {
       *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
     }
@@ -2854,7 +2859,7 @@ int FUN_000da4b8(param_1, param_2)
   }
   else {
     if (iVar1 == 3) {
-      FUN_000e1b70(puStack00000018[2],4);
+      Compiler__setHardwareFamily(puStack00000018[2],4);
       if (iVar5 - 1U < 0x200) {
         *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
       }
@@ -2871,10 +2876,10 @@ code_r0x000da738:
     }
     if (iVar1 != 1) {
       *(undefined4 *)(puStack00000018[2] + 0x314) = 0xe;
-      FUN_000e1b70(puStack00000018[2],1);
+      Compiler__setHardwareFamily(puStack00000018[2],1);
       return;
     }
-    FUN_000e1b70(puStack00000018[2],1);
+    Compiler__setHardwareFamily(puStack00000018[2],1);
     if (iVar5 - 1U < 0x60) {
       *(int *)(*(int *)(*(int *)(puStack00000018[2] + 0x310) + 8) + 0x40) = iVar5;
     }
@@ -2891,7 +2896,7 @@ code_r0x000da738:
 }
 
 /* FUN_000da78c @ 0xda78c (244 bytes) */
-double FUN_000da78c(uint param_1,double fparam_1)
+double FUN_000da78c(uint param_1,double staleFprArg1)
 {
   uint uVar1;
   uint uVar2;
@@ -3543,7 +3548,7 @@ int ildisPrintUsage(disassembler, usageCode, passThroughR5, fmtArgR6, fmtArgR7, 
 }
 
 /* ildisPrintFixedPoint @ 0xdb574 (352 bytes) */
-void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBits,uint fractionBits,double fparam_1,double fparam_2,double fparam_3,double fparam_4,double fparam_5,double fparam_6,double fparam_7,double fparam_8,double fparam_9,double fparam_10,double fparam_11,double fparam_12)
+void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBits,uint fractionBits,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9,double staleFprArg10,double staleFprArg11,double staleFprArg12)
 {
   uint loopCounterB;
   float integerPart;
@@ -3551,10 +3556,10 @@ void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBit
   int iVar3;
   uint loopCounter;
   undefined1 *textBufferPtr;
-  undefined4 in_r7;
-  undefined4 in_r8;
+  undefined4 staleArgR7;
+  undefined4 staleArgR8;
   uint uVar6;
-  undefined4 in_r10;
+  undefined4 staleArgR10;
   uint uVar7;
   undefined1 textBuffer [256];
   undefined4 local_28;
@@ -3609,7 +3614,7 @@ void ildisPrintFixedPoint(undefined4 disassembler,uint fieldBits,uint integerBit
                (double)((float)(DOUBLE_001aa200 /
                                ((double)CONCAT44(0x43300000,fractionScale) - DOUBLE_001aa250)) *
                         (float)((double)CONCAT44(0x43300000,fractionField) - DOUBLE_001aa250) + integerPart));
-  ((int (*)())ildisAppendf)(disassembler,textBuffer,textBufferPtr,fractionBits,in_r7,in_r8,uVar6,in_r10);
+  ((int (*)())ildisAppendf)(disassembler,textBuffer,textBufferPtr,fractionBits,staleArgR7,staleArgR8,uVar6,staleArgR10);
   return;
 }
 
@@ -3627,35 +3632,35 @@ int ildisPrintTexelOffsets(disassembler, offsetsWord, passThroughR5, fmtArgR6, f
   undefined4 integerBitsArg;
   undefined4 fractionBitsArg;
   double dVar3;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffffa8;
-  double in_stack_ffffffb0;
-  double in_stack_ffffffb8;
-  double in_stack_ffffffc0;
+  double staleFpr2;
+  double staleFpr3;
+  double staleFpr4;
+  double staleFpr5;
+  double staleFpr6;
+  double staleFpr7;
+  double staleFpr8;
+  double staleStackArg_ffffffa8;
+  double staleStackArg_ffffffb0;
+  double staleStackArg_ffffffb8;
+  double staleStackArg_ffffffc0;
   
   dVar3 = (double)((int (*)())ildisAppendf)(disassembler,"_xoffset(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   integerBitsArg = 7;
   fractionBitsArg = 1;
-  ((void (*)())ildisPrintFixedPoint)(disassembler,offsetsWord & 0xff,7,1,dVar3,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-               in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8,in_stack_ffffffc0);
+  ((void (*)())ildisPrintFixedPoint)(disassembler,offsetsWord & 0xff,7,1,dVar3,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,
+               staleStackArg_ffffffa8,staleStackArg_ffffffb0,staleStackArg_ffffffb8,staleStackArg_ffffffc0);
   ((int (*)())ildisAppendf)(disassembler,")",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   dVar3 = (double)((int (*)())ildisAppendf)(disassembler,"_yoffset(",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   integerBitsArg = 7;
   fractionBitsArg = 1;
-  ((void (*)())ildisPrintFixedPoint)(disassembler,offsetsWord >> 8 & 0xff,7,1,dVar3,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-               in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8,in_stack_ffffffc0);
+  ((void (*)())ildisPrintFixedPoint)(disassembler,offsetsWord >> 8 & 0xff,7,1,dVar3,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,
+               staleStackArg_ffffffa8,staleStackArg_ffffffb0,staleStackArg_ffffffb8,staleStackArg_ffffffc0);
   ((int (*)())ildisAppendf)(disassembler,")",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   dVar3 = (double)((int (*)())ildisAppendf)(disassembler,"_zoffset(",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   integerBitsArg = 7;
   fractionBitsArg = 1;
-  ((void (*)())ildisPrintFixedPoint)(disassembler,offsetsWord >> 0x10 & 0xff,7,1,dVar3,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8,
-               in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8,in_stack_ffffffc0);
+  ((void (*)())ildisPrintFixedPoint)(disassembler,offsetsWord >> 0x10 & 0xff,7,1,dVar3,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8,
+               staleStackArg_ffffffa8,staleStackArg_ffffffb0,staleStackArg_ffffffb8,staleStackArg_ffffffc0);
   ((int (*)())ildisAppendf)(disassembler,")",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   return;
 }
@@ -3860,18 +3865,18 @@ int ildisPrintFilterModes(disassembler, filterWord, passThroughR5, fmtArgR6, fmt
 {
   undefined4 integerBitsArg;
   undefined4 fractionBitsArg;
-  double fparam_1;
-  double in_f2;
-  double in_f3;
-  double in_f4;
-  double in_f5;
-  double in_f6;
-  double in_f7;
-  double in_f8;
-  double in_stack_ffffffa8;
-  double in_stack_ffffffb0;
-  double in_stack_ffffffb8;
-  double in_stack_ffffffc0;
+  double staleFprArg1;
+  double staleFpr2;
+  double staleFpr3;
+  double staleFpr4;
+  double staleFpr5;
+  double staleFpr6;
+  double staleFpr7;
+  double staleFpr8;
+  double staleStackArg_ffffffa8;
+  double staleStackArg_ffffffb0;
+  double staleStackArg_ffffffb8;
+  double staleStackArg_ffffffc0;
   
   ((int (*)())ildisAppendf)(disassembler,"_mag(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   ((int (*)())ildisPrintFilterName)(disassembler,filterWord & 7,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9);
@@ -3887,12 +3892,12 @@ int ildisPrintFilterModes(disassembler, filterWord, passThroughR5, fmtArgR6, fmt
   ((int (*)())ildisAppendf)(disassembler,")",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   ((int (*)())ildisPrintMipFilter)(disassembler,filterWord >> 0xc & 7,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   ((int (*)())ildisPrintAnisoMode)(disassembler,filterWord >> 0xf & 7,passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
-  fparam_1 = (double)((int (*)())ildisAppendf)(disassembler,"_lodbias(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
+  staleFprArg1 = (double)((int (*)())ildisAppendf)(disassembler,"_lodbias(",passThroughR5,fmtArgR6,fmtArgR7,fmtArgR8,fmtArgR9,
                                   fmtArgR10);
   integerBitsArg = 3;
   fractionBitsArg = 4;
-  ((void (*)())ildisPrintFixedPoint)(disassembler,filterWord >> 0x12 & 0x7f,3,4,fparam_1,in_f2,in_f3,in_f4,in_f5,in_f6,in_f7,in_f8
-               ,in_stack_ffffffa8,in_stack_ffffffb0,in_stack_ffffffb8,in_stack_ffffffc0);
+  ((void (*)())ildisPrintFixedPoint)(disassembler,filterWord >> 0x12 & 0x7f,3,4,staleFprArg1,staleFpr2,staleFpr3,staleFpr4,staleFpr5,staleFpr6,staleFpr7,staleFpr8
+               ,staleStackArg_ffffffa8,staleStackArg_ffffffb0,staleStackArg_ffffffb8,staleStackArg_ffffffc0);
   ((int (*)())ildisAppendf)(disassembler,")",integerBitsArg,fractionBitsArg,fmtArgR7,fmtArgR8,fmtArgR9,fmtArgR10);
   return;
 }

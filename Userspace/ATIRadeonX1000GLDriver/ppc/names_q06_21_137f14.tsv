@@ -1,0 +1,24 @@
+local	FUN_00137f14	param_1	liveness	INFERRED	liveness state (+0x3b0 live-out bitset, +0x3b4 texture-source flag)
+local	FUN_00137f14	param_2	inst	INFERRED	instruction whose reads and writes update the live sets
+local	FUN_00137f14	param_3	liveBits	INFERRED	bitset of registers live before the instruction
+use	FUN_00137f14	iVar1	operandCountdown	INFERRED	operand count, counted down while the sources are visited last to first	^\s*iVar1\ =\ param_2\[0x21\];$	+3
+use	FUN_00137f14	iVar1	operandCountdown	INFERRED	operand count, counted down while the sources are visited last to first	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+2
+use	FUN_00137f14	iVar1	defBitWordAddr	INFERRED	address of the liveBits word for the destination register	^\s*iVar1\ =\ \(uVar4\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ param_3;$	+2
+use	FUN_00137f14	iVar1	instQuery78	INFERRED	instruction vtable slot 0x78 test	^\s*iVar1\ =\ \(\*\*\(code\ \*\*\)\(\*param_2\ \+\ 0x78\)\)\(param_2\);$	+2
+use	FUN_00137f14	iVar1	copySourceVReg	INFERRED	virtual register read by the copy (word 0x29)	^\s*iVar1\ =\ param_2\[0x29\];$	+2
+use	FUN_00137f14	iVar1	copySourceVReg	INFERRED	virtual register read by the copy (word 0x29)	^\s*\*\(uint\ \*\)\(iVar1\ \+\ 0x24\)\ =\ \*\(uint\ \*\)\(iVar1\ \+\ 0x24\)\ \|\ 1;$	+1
+use	FUN_00137f14	iVar2	liveOutWordAddr	INFERRED	address of the live-out bitset word for a source register	^\s*iVar2\ =\ uVar5\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x3b0\);$	+2
+use	FUN_00137f14	piVar3	operandSlotCursor	INFERRED	cursor over the instruction's operand slots, last to first	^\s*piVar3\ =\ param_2\ \+\ iVar1\ \*\ 6\ \+\ 0x23;$	+1
+use	FUN_00137f14	piVar3	operandSlotCursor	INFERRED	cursor over the instruction's operand slots, last to first	^\s*iVar6\ =\ \*piVar3;$	+1
+use	FUN_00137f14	piVar3	operandSlotCursor	INFERRED	cursor over the instruction's operand slots, last to first	^\s*piVar3\ =\ piVar3\ \+\ \-6;$	+1
+use	FUN_00137f14	uVar4	sourceRegisterId	INFERRED	register id of the source (word 0x1c), negative when untracked	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0x1c\);$	+2
+use	FUN_00137f14	uVar4	sourceRegisterId	INFERRED	register id of the source (word 0x1c), negative when untracked	^\s*uVar5\ =\ uVar4\ >>\ 3\ \&\ 0x1ffffffc;$	+2
+use	FUN_00137f14	uVar4	sourceRegisterId	INFERRED	register id of the source (word 0x1c), negative when untracked	^\s*\*\(uint\ \*\)\(iVar2\ \+\ 8\)\ =\ 1\ <<\ \(uVar4\ \&\ 0x1f\)\ \|\ \*\(uint\ \*\)\(iVar2\ \+\ 8\);$	+1
+use	FUN_00137f14	uVar4	sourceRegisterId	INFERRED	register id of the source (word 0x1c), negative when untracked	^\s*if\ \(\(\(0\ <\ param_2\[0x20\]\)\ \&\&\ \(\(param_2\[5\]\ \&\ 2U\)\ ==\ 0\)\)\ \&\&$	+4
+use	FUN_00137f14	uVar4	copySourceRegisterId	INFERRED	register id of the copy's source (word 0x1c)	^\s*uVar4\ =\ \*\(uint\ \*\)\(iVar1\ \+\ 0x1c\);$	+4
+use	FUN_00137f14	uVar5	bitWordOffset	INFERRED	bitset word offset of the register	^\s*uVar5\ =\ uVar4\ >>\ 3\ \&\ 0x1ffffffc;$	+3
+use	FUN_00137f14	iVar6	sourceVReg	INFERRED	virtual register read by the operand	^\s*iVar6\ =\ \*piVar3;$	+2
+use	FUN_00137f14	iVar6	sourceVReg	INFERRED	virtual register read by the operand	^\s*if\ \(\*\(int\ \*\)\(iVar6\ \+\ 4\)\ ==\ 0x2c\)\ \{$	+1
+use	FUN_00137f14	iVar6	sourceVReg	INFERRED	virtual register read by the operand	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x24\)\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0x24\)\ \|\ 1;$	+1
+use	FUN_00137f14	iVar6	sourceVReg	INFERRED	virtual register read by the operand	^\s*\*\(uint\ \*\)\(iVar6\ \+\ 0x24\)\ =\ \*\(uint\ \*\)\(iVar6\ \+\ 0x24\)\ \|\ 1;$@2	+1
+use	FUN_00137f14	iVar6	copyLiveOutWordAddr	INFERRED	address of the live-out bitset word for the copy's source	^\s*iVar6\ =\ \(uVar4\ >>\ 3\ \&\ 0x1ffffffc\)\ \+\ \*\(int\ \*\)\(param_1\ \+\ 0x3b0\);$	+2

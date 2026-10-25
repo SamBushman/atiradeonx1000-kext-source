@@ -1,0 +1,29 @@
+local	FUN_00131008	param_1	maxDistance	INFERRED	how many instructions down the chain the source may be traced (negative: unlimited, always safe)
+use	FUN_00131008	bVar1	atLastLane	INFERRED	loop latch: lane index equals 3	^\s*bVar1\ =\ iVar2\ ==\ 3;$	+1
+use	FUN_00131008	bVar1	atLastLane	INFERRED	loop latch: lane index equals 3	^\s*if\ \(bVar1\)\ \{$	+1
+use	FUN_00131008	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*iVar2\ =\ 0;$	+1
+use	FUN_00131008	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*if\ \(\(auStack_44\[iVar2\ \+\ \-4\]\ !=\ '\\0'\)\ \&\&$	+2
+use	FUN_00131008	iVar2	laneIndex	INFERRED	lane counter 0..3	^\s*bVar1\ =\ iVar2\ ==\ 3;$	+2
+use	FUN_00131008	uVar4	laneDefinition	INFERRED	FUN_001382b8: definition of the source lane	^\s*if\ \(\(auStack_44\[iVar2\ \+\ \-4\]\ !=\ '\\0'\)\ \&\&$	+2
+use	FUN_00131008	uVar4	laneDefinition	INFERRED	FUN_001382b8: definition of the source lane	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_00130a78\)\(a0,uVar4\);$	+1
+use	FUN_00131008	a0	chainInst	INFERRED	instruction reached by following the single-definition chain (FUN_001307cc)	^\s*a0\ =\ param_2;$	+1
+use	FUN_00131008	a0	chainInst	INFERRED	instruction reached by following the single-definition chain (FUN_001307cc)	^\s*a0\ =\ \(int\ \*\)\(\(int\ \(\*\)\(\)\)FUN_001307cc\)\(a0\);$	+7
+use	FUN_00131008	a0	chainInst	INFERRED	instruction reached by following the single-definition chain (FUN_001307cc)	^\s*if\ \(\(iVar5\ ==\ 0\)\ \&\&$	+3
+use	FUN_00131008	a0	chainInst	INFERRED	instruction reached by following the single-definition chain (FUN_001307cc)	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_00130a78\)\(a0,uVar4\);$	+1
+use	FUN_00131008	iVar5	instQuery34	INFERRED	instruction vtable slot 0x34 test	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*a0\ \+\ 0x34\)\)\(a0\);$	+5
+use	FUN_00131008	iVar5	blockQuery24	INFERRED	block vtable slot 0x24 test	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*\(int\ \*\)param_2\[0x56\]\ \+\ 0x24\)\)\(\(int\ \*\)param_2\[0x56\]\);$	+4
+use	FUN_00131008	iVar5	laneDependsOnChain	INFERRED	FUN_00130a78: the chain instruction depends on the lane definition	^\s*iVar5\ =\ \(\(int\ \(\*\)\(\)\)FUN_00130a78\)\(a0,uVar4\);$	+2
+local	FUN_00131008	local_48	laneMaskWord	INFERRED	four lane mask bytes of the operand (SelectWord__readMask)
+local	FUN_00131008	auStack_44	laneDefOut	INFERRED	out parameter record of FUN_001382b8
+local	FUN_00131008	local_38	laneMaskOut	INFERRED	SelectWord__readMask output buffer
+use	FUN_001307f8	piVar1	previousInst	INFERRED	instruction before the cursor, returned when the next one carries the 0x1000 flag	^\s*while\ \(piVar1\ =\ piVar2,\ uVar4\ ==\ 0\)\ \{$	+2
+use	FUN_001307f8	piVar1	previousInst	INFERRED	instruction before the cursor, returned when the next one carries the 0x1000 flag	^\s*param_1\ =\ piVar1;$	+1
+use	FUN_001307f8	piVar2	cursorInst	INFERRED	instruction cursor along the list	^\s*piVar2\ =\ param_1;$	+4
+use	FUN_001307f8	iVar3	instQuery38	INFERRED	instruction vtable slot 0x38 test	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x38\)\)\(param_1\);$	+2
+use	FUN_001307f8	iVar3	instQuery28	INFERRED	instruction vtable slot 0x28 test	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x28\)\)\(param_1\);$	+2
+use	FUN_001307f8	iVar3	instQuery74	INFERRED	instruction vtable slot 0x74 test	^\s*iVar3\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x74\)\)\(param_1\);$	+2
+use	FUN_001307f8	uVar4	instFlags	INFERRED	instruction flag word (+0x14), bit 4 continues the chain	^\s*uVar4\ =\ param_1\[5\];$	+2
+use	FUN_001307f8	uVar4	instFlags	INFERRED	instruction flag word (+0x14), bit 4 continues the chain	^\s*uVar4\ =\ param_1\[5\];$@2	+1
+use	FUN_001307f8	uVar4	nextHasMarkBit	INFERRED	vtable slot 0x78 result, then next instruction's flag 0x1000	^\s*uVar4\ =\ \(\*\*\(code\ \*\*\)\(\*param_1\ \+\ 0x78\)\)\(param_1\);$	+1
+use	FUN_001307f8	uVar4	nextHasMarkBit	INFERRED	vtable slot 0x78 result, then next instruction's flag 0x1000	^\s*while\ \(piVar1\ =\ piVar2,\ uVar4\ ==\ 0\)\ \{$	+1
+use	FUN_001307f8	uVar4	nextHasMarkBit	INFERRED	vtable slot 0x78 result, then next instruction's flag 0x1000	^\s*uVar4\ =\ piVar2\[5\]\ \&\ 0x1000;$	+1
