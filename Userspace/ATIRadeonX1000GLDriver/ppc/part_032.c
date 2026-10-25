@@ -269,28 +269,29 @@ int FUN_0010fb54(vector, nextSlotRef, program)
 }
 
 /* FUN_0010fc88 @ 0x10fc88 (272 bytes) */
-int FUN_0010fc88(param_1, vector, param_3, param_4)
-  undefined4 param_1;
+int FUN_0010fc88(bindContext, vector, param_3, program)
+  undefined4 bindContext;
   uint *vector;
   undefined4 param_3;
-  int param_4;
+  int program;
 {
-  int iVar1;
+  int exportInstB;
+  int assignedSlot;
   uint vectorCount;
-  int iVar3;
+  int exportInstA;
   undefined4 *vectorElementRef;
-  int iVar5;
+  int slotEnd;
   int *vectorElement;
-  int iVar7;
+  int outputBase;
   uint loopIndex;
-  undefined4 auStack_f8 [53];
+  undefined4 slotOwnerRegister [53];
   
   vectorCount = vector[1];
-  iVar7 = *(int *)(param_4 + 0x3f0);
-  iVar5 = 1;
+  outputBase = *(int *)(program + 0x3f0);
+  slotEnd = 1;
   if (0 < (int)vectorCount) {
     loopIndex = 0;
-    iVar5 = 0;
+    slotEnd = 0;
     do {
       if (loopIndex < *vector) {
         if (vectorCount <= loopIndex) {
@@ -304,20 +305,20 @@ int FUN_0010fc88(param_1, vector, param_3, param_4)
       }
       loopIndex = loopIndex + 1;
       vectorElement = (int *)*vectorElementRef;
-      iVar3 = *vectorElement;
-      iVar1 = iVar7 + *(int *)(iVar3 + 0x140);
-      auStack_f8[iVar1] = *(undefined4 *)(iVar3 + 0x94);
-      iVar3 = *vectorElement;
-      *(undefined4 *)(iVar3 + 0x98) = 5;
-      *(int *)(iVar3 + 0x94) = iVar1;
-      if (iVar5 < iVar1) {
-        iVar5 = iVar1;
+      exportInstA = *vectorElement;
+      assignedSlot = outputBase + *(int *)(exportInstA + 0x140);
+      slotOwnerRegister[assignedSlot] = *(undefined4 *)(exportInstA + 0x94);
+      exportInstB = *vectorElement;
+      *(undefined4 *)(exportInstB + 0x98) = 5;
+      *(int *)(exportInstB + 0x94) = assignedSlot;
+      if (slotEnd < assignedSlot) {
+        slotEnd = assignedSlot;
       }
       vectorCount = vector[1];
     } while ((int)loopIndex < (int)vectorCount);
-    iVar5 = iVar5 + 1;
+    slotEnd = slotEnd + 1;
   }
-  return ((int (*)())FUN_0010fa24)(param_1,auStack_f8,iVar7,iVar5,*(undefined4 *)(param_4 + 0x418));
+  return ((int (*)())FUN_0010fa24)(bindContext,slotOwnerRegister,outputBase,slotEnd,*(undefined4 *)(program + 0x418));
 }
 
 /* FUN_0010fd98 @ 0x10fd98 (396 bytes) */

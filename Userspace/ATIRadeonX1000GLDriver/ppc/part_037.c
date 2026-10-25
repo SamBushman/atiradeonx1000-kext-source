@@ -3148,42 +3148,42 @@ int VReg__pushDefinition(param_1, param_2, param_3)
 }
 
 /* FUN_001234d8 @ 0x1234d8 (224 bytes) */
-int FUN_001234d8(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_001234d8(owner, entry)
+  int owner;
+  int entry;
 {
-  uint uVar1;
-  int *piVar2;
+  uint vectorCount;
+  int *entryRef;
   uint loopIndex;
-  uint *puVar4;
-  uint *puVar5;
+  uint *entryVector;
+  uint *entryVectorAlias;
   
-  uVar1 = (*(uint **)(param_1 + 0x14))[1];
-  if (uVar1 != 0) {
+  vectorCount = (*(uint **)(owner + 0x14))[1];
+  if (vectorCount != 0) {
     loopIndex = 0;
-    puVar4 = *(uint **)(param_1 + 0x14);
+    entryVector = *(uint **)(owner + 0x14);
     do {
-      if (loopIndex < *puVar4) {
-        puVar5 = puVar4;
-        if (uVar1 <= loopIndex) {
-          _memset(uVar1 * 4 + puVar4[2],0,(loopIndex - uVar1) * 4 + 4);
-          puVar4[1] = loopIndex + 1;
-          puVar5 = *(uint **)(param_1 + 0x14);
+      if (loopIndex < *entryVector) {
+        entryVectorAlias = entryVector;
+        if (vectorCount <= loopIndex) {
+          _memset(vectorCount * 4 + entryVector[2],0,(loopIndex - vectorCount) * 4 + 4);
+          entryVector[1] = loopIndex + 1;
+          entryVectorAlias = *(uint **)(owner + 0x14);
         }
-        piVar2 = (int *)(loopIndex * 4 + puVar4[2]);
+        entryRef = (int *)(loopIndex * 4 + entryVector[2]);
       }
       else {
-        piVar2 = (int *)Vector__elementRefGrow(puVar4,loopIndex);
-        puVar5 = *(uint **)(param_1 + 0x14);
+        entryRef = (int *)Vector__elementRefGrow(entryVector,loopIndex);
+        entryVectorAlias = *(uint **)(owner + 0x14);
       }
-      if (*piVar2 == param_2) {
-        Vector__removeAt(puVar5,loopIndex);
+      if (*entryRef == entry) {
+        Vector__removeAt(entryVectorAlias,loopIndex);
         return;
       }
-      uVar1 = puVar5[1];
+      vectorCount = entryVectorAlias[1];
       loopIndex = loopIndex + 1;
-      puVar4 = puVar5;
-    } while (loopIndex < uVar1);
+      entryVector = entryVectorAlias;
+    } while (loopIndex < vectorCount);
   }
   return;
 }

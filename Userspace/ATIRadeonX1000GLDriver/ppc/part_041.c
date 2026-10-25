@@ -5110,43 +5110,43 @@ int FUN_0013905c(param_1, inst)
 }
 
 /* FUN_00139190 @ 0x139190 (156 bytes) */
-int FUN_00139190(param_1, param_2)
-  int param_1;
-  int param_2;
+int FUN_00139190(stack, laneCount)
+  int stack;
+  int laneCount;
 {
-  uint uVar1;
-  int *piVar2;
-  int iVar3;
-  int iVar4;
-  undefined4 local_28;
+  uint lastIndex;
+  int *lastRef;
+  int laneByteIndex;
+  int usedLaneCount;
+  undefined4 packedLaneWord;
   
-  uVar1 = *(uint *)(param_1 + 4) - 1;
-  piVar2 = (int *)0x0;
-  if (uVar1 < *(uint *)(param_1 + 4)) {
-    piVar2 = (int *)(uVar1 * 4 + *(int *)(param_1 + 8));
+  lastIndex = *(uint *)(stack + 4) - 1;
+  lastRef = (int *)0x0;
+  if (lastIndex < *(uint *)(stack + 4)) {
+    lastRef = (int *)(lastIndex * 4 + *(int *)(stack + 8));
   }
-  local_28 = *piVar2;
-  if ((char)local_28 == '\0') {
-    return local_28 == param_2;
+  packedLaneWord = *lastRef;
+  if ((char)packedLaneWord == '\0') {
+    return packedLaneWord == laneCount;
   }
-  if (param_2 < 5) {
-    iVar4 = 0;
-    if (param_2 < 1) goto LAB_00139218;
+  if (laneCount < 5) {
+    usedLaneCount = 0;
+    if (laneCount < 1) goto LAB_00139218;
   }
   else {
-    param_2 = 4;
+    laneCount = 4;
   }
-  iVar3 = 0;
-  iVar4 = 0;
+  laneByteIndex = 0;
+  usedLaneCount = 0;
   do {
-    if (*(char *)((int)&local_28 + iVar3) != -1) {
-      iVar4 = iVar4 + 1;
+    if (*(char *)((int)&packedLaneWord + laneByteIndex) != -1) {
+      usedLaneCount = usedLaneCount + 1;
     }
-    iVar3 = iVar3 + 1;
-    param_2 = param_2 + -1;
-  } while (param_2 != 0);
+    laneByteIndex = laneByteIndex + 1;
+    laneCount = laneCount + -1;
+  } while (laneCount != 0);
 LAB_00139218:
-  return iVar4 < 2;
+  return usedLaneCount < 2;
 }
 
 

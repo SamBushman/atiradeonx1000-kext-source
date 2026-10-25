@@ -2077,37 +2077,37 @@ int FUN_0012ae6c(param_1, param_2, param_3, param_4, param_5, param_6, param_7)
 }
 
 /* FUN_0012aef0 @ 0x12aef0 (248 bytes) */
-int FUN_0012aef0(param_1, param_2, block)
+int FUN_0012aef0(param_1, firstBlock, block)
   undefined4 param_1;
-  undefined4 param_2;
+  undefined4 firstBlock;
   int block;
 {
   undefined4 successor;
-  int iVar1;
-  undefined4 uVar2;
-  int *piVar3;
-  int *piVar4;
+  int isSimple;
+  undefined4 mergeResult;
+  int *nextInst;
+  int *inst;
   
-  iVar1 = Block__isSimple(param_2);
-  if ((((iVar1 == 0) || (iVar1 = Block__isSimple(block), iVar1 == 0)) ||
-      (iVar1 = Block__successorCount(param_2), iVar1 != 1)) ||
-     ((iVar1 = Block__predecessorCount(block), iVar1 != 1 || (iVar1 = Block__hasSuccessors(block), iVar1 == 0)))) {
-    uVar2 = 0;
+  isSimple = Block__isSimple(firstBlock);
+  if ((((isSimple == 0) || (isSimple = Block__isSimple(block), isSimple == 0)) ||
+      (isSimple = Block__successorCount(firstBlock), isSimple != 1)) ||
+     ((isSimple = Block__predecessorCount(block), isSimple != 1 || (isSimple = Block__hasSuccessors(block), isSimple == 0)))) {
+    mergeResult = 0;
   }
   else {
-    piVar3 = *(int **)(*(int *)(block + 200) + 8);
-    while (piVar4 = piVar3, iVar1 = (**(code **)(*piVar4 + 0x38))(piVar4), iVar1 == 0) {
-      piVar3 = (int *)piVar4[2];
-      if ((piVar4[5] & 1U) != 0) {
-        DList__unlink(piVar4);
-        Block__appendInst(param_2,piVar4);
+    nextInst = *(int **)(*(int *)(block + 200) + 8);
+    while (inst = nextInst, isSimple = (**(code **)(*inst + 0x38))(inst), isSimple == 0) {
+      nextInst = (int *)inst[2];
+      if ((inst[5] & 1U) != 0) {
+        DList__unlink(inst);
+        Block__appendInst(firstBlock,inst);
       }
     }
     successor = Block__getSuccessor(block,0);
-    Block__bypassAndDetach(block,param_2,successor);
-    uVar2 = 1;
+    Block__bypassAndDetach(block,firstBlock,successor);
+    mergeResult = 1;
   }
-  return uVar2;
+  return mergeResult;
 }
 
 /* FUN_0012afe8 @ 0x12afe8 (344 bytes) */
