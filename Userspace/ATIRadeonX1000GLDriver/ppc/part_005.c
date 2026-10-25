@@ -6826,7 +6826,7 @@ LAB_00037930:
   if (((((*(byte *)((int)texture + 0x39) & 7) != 0) &&
        (iVar22 = ((int (*)())gldTextureMakeResident)(ctx,texture,iVar22,*(byte *)((int)texture + 0x39) & 7,"",sizeOutPtr),
        iVar22 == 0)) ||
-      ((*(int *)sourceSurface[1] != 0 && (iVar22 = FUN_0001e280(ctx,sourceSurface,1), iVar22 == 0)))) ||
+      ((*(int *)sourceSurface[1] != 0 && (iVar22 = gld_prepareBufferBacking(ctx,sourceSurface,1), iVar22 == 0)))) ||
      (((int *)sourceSurface[2] == (int *)0x0 || (iVar22 = *(int *)sourceSurface[2], iVar22 == 0))))
   goto LAB_00037930;
   if (*(char *)(iVar22 + 0x16) != '\x06') {

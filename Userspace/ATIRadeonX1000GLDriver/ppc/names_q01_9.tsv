@@ -1,0 +1,22 @@
+func	FUN_0001e280	gld_prepareBufferBacking	INFERRED	gives a vertex/index buffer object a hardware backing (new-texture or AGP-ref), emits its register packets and flushes the data cache range; returns 1 on success
+func	FUN_0001e730	gld_prepareVertexArrayBuffers	INFERRED	validates the vertex array and prepares the buffer object of every attribute that is enabled in the pending masks (FUN_0001e280), then the element buffer
+local	FUN_0001e280	param_2	bufferObject	INFERRED	buffer object: [0] data descriptor {address, size, ..., kind short at +0xc}, [1] dirty-state word block, [2] backing record, [3] byte flag, [4] backing kind (6 = AGP ref, 7 = new texture)
+local	FUN_0001e280	param_3	mode	INFERRED	0 = default mode (marks the object used)
+local	FUN_0001e280	bVar1	isDefaultMode	INFERRED	mode == 0
+local	FUN_0001e280	puVar12	bufferDesc	INFERRED	*bufferObject: {[0] address, [1] size in bytes, [2] flush length, [3] kind}
+local	FUN_0001e280	puVar6	dirtyState	INFERRED	bufferObject[1]: dirty bit word, cleared on exit
+local	FUN_0001e280	piVar11	commandBuffer	INFERRED	backing record +4: private command buffer receiving the 0x1393 / 0x5c8 / 0x574 / 0x575 packets
+local	FUN_0001e280	puVar9	packetCursor	INFERRED	write cursor after the register packets (extended by the 0x48-word fill in non-default mode)
+local	FUN_0001e280	uVar10	tailBytes	INFERRED	size in bytes of the partial last chunk (0 = none)
+local	FUN_0001e280	local_48	tailMode	INFERRED	gldComputeVertexChunking tailMode output
+local	FUN_0001e280	local_44	chunkCount	INFERRED	number of full chunks
+local	FUN_0001e280	local_40	chunkDwords	INFERRED	chunk size in dwords
+local	FUN_0001e280	local_3c	chunkVerts	INFERRED	vertices (bytes) per chunk
+local	FUN_0001e730	iVar7	arrayDesc	INFERRED	vertexArray[0]: attribute masks at +0x300/+0x304 and available masks at +0x308/+0x30c
+local	FUN_0001e730	iVar6	dirtyState	INFERRED	vertexArray[1]: dirty words +0x84/+0x88, current buffer +0x80
+local	FUN_0001e730	uVar5	pendingMask	INFERRED	attributes whose buffer objects still have to be prepared
+local	FUN_0001e730	iVar8	attrIndex	INFERRED	attribute number (0..0x1f)
+local	FUN_0001e730	uVar9	attrBit	INFERRED	one-bit mask of the attribute (table at DAT_001d91f0)
+local	FUN_0001e730	bVar1	nonePending	INFERRED	pendingMask == 0
+local	FUN_0001e730	iVar3	validateResult	INFERRED	gld_validateVertexArrayStreams result
+local	FUN_0001e730	uVar2	isReady	INFERRED	1 when every attribute buffer is prepared

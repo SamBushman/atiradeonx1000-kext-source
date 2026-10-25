@@ -1075,7 +1075,7 @@ int FUN_0000b750(ctx)
   }
   else {
     if (*(int *)(vertexArray[1] + 0x84) == 0 && *(int *)(vertexArray[1] + 0x88) == 0) goto LAB_0000b830;
-    arrayState = FUN_0001e730(ctx,vertexArray);
+    arrayState = gld_prepareVertexArrayBuffers(ctx,vertexArray);
 joined_r0x0000b814:
     if (arrayState != 0) goto LAB_0000b830;
   }

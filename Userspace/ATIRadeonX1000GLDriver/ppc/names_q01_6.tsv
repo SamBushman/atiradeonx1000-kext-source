@@ -40,7 +40,7 @@ local	glDrawPixels_impl	extraout_r4	r4AfterCall	INFERRED	Ghidra pseudo-register:
 local	glDrawPixels_impl	extraout_r4_00	r4AfterCall2	INFERRED	Ghidra pseudo-register: extraout_r4_00 (a register the function reads without having written it; no source-level role)
 local	FUN_0001c380	in_xer_so	xerSummaryOverflow	INFERRED	Ghidra pseudo-register: in_xer_so (a register the function reads without having written it; no source-level role)
 local	FUN_0001e280	in_r6	staleArgR6	INFERRED	Ghidra pseudo-register: in_r6 (a register the function reads without having written it; no source-level role)
-local	FUN_0001e280	in_r10	staleArgR10	INFERRED	Ghidra pseudo-register: in_r10 (a register the function reads without having written it; no source-level role)
+local	FUN_0001e280	in_r10	packetEnd	INFERRED	Ghidra pseudo-register: in_r10 (a register the function reads without having written it; no source-level role)
 local	gld_drawVertexArray	in_f1	staleFpr1	INFERRED	Ghidra pseudo-register: in_f1 (a register the function reads without having written it; no source-level role)
 local	gld_drawVertexArray	in_f2	staleFpr2	INFERRED	Ghidra pseudo-register: in_f2 (a register the function reads without having written it; no source-level role)
 local	gld_drawVertexArray	in_f3	staleFpr3	INFERRED	Ghidra pseudo-register: in_f3 (a register the function reads without having written it; no source-level role)

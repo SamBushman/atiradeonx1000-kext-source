@@ -2813,7 +2813,7 @@ LAB_000284b0:
     _pthread_mutex_unlock(*(undefined4 *)(ctx + GLD_mutex));
     return 1;
   }
-  if (((((*(int *)surfaceInfo[1] != 0) && (prepareResult = FUN_0001e280(ctx,surfaceInfo,1), prepareResult == 0)) ||
+  if (((((*(int *)surfaceInfo[1] != 0) && (prepareResult = gld_prepareBufferBacking(ctx,surfaceInfo,1), prepareResult == 0)) ||
        ((formatTable = PTR_DAT_001e88c8, (int *)surfaceInfo[2] == (int *)0x0 ||
         ((prepareResult = *(int *)surfaceInfo[2], prepareResult == 0 ||
          (surfaceBase = *(uint *)*surfaceInfo, dstAddress != surfaceBase)))))) ||
@@ -4619,7 +4619,7 @@ LAB_0002a520:
     fVar5 = -rasterY + (FLOAT_001aa0d4 - (fVar11 + fVar4));
     fVar4 = -rasterY + (FLOAT_001aa0d4 - (fVar3 + fVar4));
     if ((fVar10 < fVar9) && (fVar3 < fVar11)) {
-      if (((((*(int *)surfaceInfo[1] != 0) && (prepareResult = FUN_0001e280(ctx,surfaceInfo,1), prepareResult == 0))
+      if (((((*(int *)surfaceInfo[1] != 0) && (prepareResult = gld_prepareBufferBacking(ctx,surfaceInfo,1), prepareResult == 0))
            || ((formatTable = PTR_DAT_001e88c8, (int *)surfaceInfo[2] == (int *)0x0 ||
                (prepareResult = *(int *)surfaceInfo[2], prepareResult == 0)))) ||
           ((*(char *)(prepareResult + 0x16) != '\x06' &&

@@ -213,8 +213,8 @@
 0x1dff0	gld_startPacket	140	no	indirect call (driver context / vtable / callback)
 0x1e080	_gldPageoffBuffer	480	no	calls an import (io_connect_method_scalarI_structureI); calls an import (pthread_mutex_lock); calls an import (pthread_mutex_unlock)
 0x1e270	returnZero_1e270	8	no	tiny (8 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x1e280	FUN_0001e280	1184	yes	
-0x1e730	FUN_0001e730	332	yes	
+0x1e280	gld_prepareBufferBacking	1184	yes	
+0x1e730	gld_prepareVertexArrayBuffers	332	yes	
 0x1e890	copyIndices16Swapped_prefetch_entry	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x1e8a0	copyIndices16Swapped_prefetch	564	no	no static blocker: a test could reach it (needs arguments / state no test builds)
 0x1eae0	copyIndices16Swapped_dcbz_entry	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises

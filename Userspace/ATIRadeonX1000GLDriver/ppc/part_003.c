@@ -2986,240 +2986,240 @@ int returnZero_1e270()
   return 0;
 }
 
-/* FUN_0001e280 @ 0x1e280 (1184 bytes) */
-int FUN_0001e280(ctx, param_2, param_3)
+/* gld_prepareBufferBacking @ 0x1e280 (1184 bytes) */
+int gld_prepareBufferBacking(ctx, bufferObject, mode)
   int ctx;
-  undefined4 *param_2;
-  int param_3;
+  undefined4 *bufferObject;
+  int mode;
 {
   int gld_setBufferAgpRefBackingResult;
   int gld_setBufferNewTextureBackingResult;
-  bool bVar1;
+  bool isDefaultMode;
   undefined4 uVar2;
   uint uVar3;
   undefined4 staleArgR6;
   int iVar4;
   uint uVar5;
-  uint *puVar6;
+  uint *dirtyState;
   uint uVar7;
   int iVar8;
-  undefined4 *staleArgR10;
-  undefined4 *puVar9;
-  uint uVar10;
-  int *piVar11;
-  uint *puVar12;
-  uint local_48;
-  int local_44;
-  uint local_40;
-  uint local_3c [6];
+  undefined4 *packetEnd;
+  undefined4 *packetCursor;
+  uint tailBytes;
+  int *commandBuffer;
+  uint *bufferDesc;
+  uint tailMode;
+  int chunkCount;
+  uint chunkDwords;
+  uint chunkVerts [6];
   
-  bVar1 = param_3 == 0;
-  if (bVar1) {
-    *(undefined1 *)(param_2 + 3) = 1;
+  isDefaultMode = mode == 0;
+  if (isDefaultMode) {
+    *(undefined1 *)(bufferObject + 3) = 1;
   }
-  puVar12 = (uint *)*param_2;
-  if (*puVar12 == 0) {
+  bufferDesc = (uint *)*bufferObject;
+  if (*bufferDesc == 0) {
     return 0;
   }
-  if (((int *)param_2[2] == (int *)0x0) || (iVar4 = *(int *)param_2[2], iVar4 == 0)) {
+  if (((int *)bufferObject[2] == (int *)0x0) || (iVar4 = *(int *)bufferObject[2], iVar4 == 0)) {
 LAB_0001e3b0:
-    local_3c[0] = 0;
-    local_48 = 0;
-    local_44 = 0;
-    local_40 = 0;
-    iVar4 = ((int (*)())gldComputeVertexChunking)(ctx,puVar12[1],local_3c,&local_40,&local_44,&local_48);
+    chunkVerts[0] = 0;
+    tailMode = 0;
+    chunkCount = 0;
+    chunkDwords = 0;
+    iVar4 = ((int (*)())gldComputeVertexChunking)(ctx,bufferDesc[1],chunkVerts,&chunkDwords,&chunkCount,&tailMode);
     if (iVar4 == 0) {
       return 0;
     }
-    if (local_48 < 2) {
-      uVar7 = puVar12[1];
-      uVar10 = 0;
+    if (tailMode < 2) {
+      uVar7 = bufferDesc[1];
+      tailBytes = 0;
     }
     else {
-      uVar7 = puVar12[1];
-      uVar10 = (uVar7 - (uVar7 / local_3c[0]) * local_3c[0]) + 3 & 0xfffffffc;
+      uVar7 = bufferDesc[1];
+      tailBytes = (uVar7 - (uVar7 / chunkVerts[0]) * chunkVerts[0]) + 3 & 0xfffffffc;
     }
     uVar5 = uVar7;
-    if ((*(short *)(puVar12 + 3) == -0x771c) && (local_48 < 0x4f)) {
-      if (bVar1) {
+    if ((*(short *)(bufferDesc + 3) == -0x771c) && (tailMode < 0x4f)) {
+      if (isDefaultMode) {
         iVar4 = 0;
       }
       else {
         iVar4 = 0x49;
       }
-      uVar5 = *puVar12;
-      uVar3 = uVar10 + local_3c[0] * local_44;
-      gld_setBufferNewTextureBackingResult = gld_setBufferNewTextureBacking(ctx,param_2,iVar4 + (local_48 * 0x12 + 0xc) * 4,uVar3,uVar5,uVar7);
+      uVar5 = *bufferDesc;
+      uVar3 = tailBytes + chunkVerts[0] * chunkCount;
+      gld_setBufferNewTextureBackingResult = gld_setBufferNewTextureBacking(ctx,bufferObject,iVar4 + (tailMode * 0x12 + 0xc) * 4,uVar3,uVar5,uVar7);
       if (gld_setBufferNewTextureBackingResult == 0) {
-        uVar5 = puVar12[1];
+        uVar5 = bufferDesc[1];
         goto LAB_0001e440;
       }
     }
     else {
 LAB_0001e440:
-      uVar3 = *puVar12;
-      gld_setBufferAgpRefBackingResult = gld_setBufferAgpRefBacking(ctx,param_2,uVar3,uVar3,uVar5);
+      uVar3 = *bufferDesc;
+      gld_setBufferAgpRefBackingResult = gld_setBufferAgpRefBacking(ctx,bufferObject,uVar3,uVar3,uVar5);
       if (gld_setBufferAgpRefBackingResult == 0) {
         return 0;
       }
     }
-    if (param_2[4] == 7) {
-      uVar7 = *puVar12;
+    if (bufferObject[4] == 7) {
+      uVar7 = *bufferDesc;
       uVar5 = 0;
-      *(undefined1 *)(*(int *)param_2[2] + 0x15) = 0;
+      *(undefined1 *)(*(int *)bufferObject[2] + 0x15) = 0;
       uVar7 = (uVar7 & 0xfff) - (uVar7 & 0xfe0) >> 2;
-      *(undefined1 *)(*(int *)param_2[2] + 0x17) = 0;
-      *(undefined1 *)(*(int *)param_2[2] + 0x34) = 1;
-      *(undefined1 *)(*(int *)param_2[2] + 0x35) = 1;
-      piVar11 = *(int **)(param_2[2] + 4);
-      piVar11[0x280] = (int)((unsigned char *)0x00001393U);
-      piVar11[8] = piVar11[8] & 0xbfffffffU | 0xa0000000;
-      piVar11[0x281] = 10;
-      piVar11[0x283] = 0x20000;
-      piVar11[0x287] = 2;
-      piVar11[0x285] = 2;
-      piVar11[0x284] = 0x575;
-      piVar11[0x282] = 0x5c8;
-      piVar11[0x286] = 0x574;
-      *(short *)(piVar11 + 0x10) = (short)((int)(piVar11 + 0x288) - (int)(piVar11 + 0x280) >> 2);
-      uVar3 = *puVar12;
-      piVar11[0x12] = 0;
-      piVar11[0x11] = uVar3 & 0xfe0;
-      piVar11[0x13] = local_3c[0] * local_44;
-      piVar11[0x14] = local_3c[0] * local_44;
-      piVar11[0x17] = 0;
-      piVar11[0x15] = 0;
-      *(short *)((int)piVar11 + 0x42) = (short)local_48;
-      uVar3 = local_3c[0];
-      staleArgR10 = (undefined4 *)
-               FUN_00030a60(piVar11 + 0x288,6,local_3c[0],local_3c[0],0,uVar7,
-                            local_44 << 0x10 | local_40);
-      if (uVar10 != 0) {
+      *(undefined1 *)(*(int *)bufferObject[2] + 0x17) = 0;
+      *(undefined1 *)(*(int *)bufferObject[2] + 0x34) = 1;
+      *(undefined1 *)(*(int *)bufferObject[2] + 0x35) = 1;
+      commandBuffer = *(int **)(bufferObject[2] + 4);
+      commandBuffer[0x280] = (int)((unsigned char *)0x00001393U);
+      commandBuffer[8] = commandBuffer[8] & 0xbfffffffU | 0xa0000000;
+      commandBuffer[0x281] = 10;
+      commandBuffer[0x283] = 0x20000;
+      commandBuffer[0x287] = 2;
+      commandBuffer[0x285] = 2;
+      commandBuffer[0x284] = 0x575;
+      commandBuffer[0x282] = 0x5c8;
+      commandBuffer[0x286] = 0x574;
+      *(short *)(commandBuffer + 0x10) = (short)((int)(commandBuffer + 0x288) - (int)(commandBuffer + 0x280) >> 2);
+      uVar3 = *bufferDesc;
+      commandBuffer[0x12] = 0;
+      commandBuffer[0x11] = uVar3 & 0xfe0;
+      commandBuffer[0x13] = chunkVerts[0] * chunkCount;
+      commandBuffer[0x14] = chunkVerts[0] * chunkCount;
+      commandBuffer[0x17] = 0;
+      commandBuffer[0x15] = 0;
+      *(short *)((int)commandBuffer + 0x42) = (short)tailMode;
+      uVar3 = chunkVerts[0];
+      packetEnd = (undefined4 *)
+               FUN_00030a60(commandBuffer + 0x288,6,chunkVerts[0],chunkVerts[0],0,uVar7,
+                            chunkCount << 0x10 | chunkDwords);
+      if (tailBytes != 0) {
         uVar5 = 0;
-        uVar3 = local_3c[0];
-        staleArgR10 = (undefined4 *)
-                 FUN_00030a60(staleArgR10,6,local_3c[0],local_3c[0],0,uVar7,uVar10 >> 2 | 0x10000);
+        uVar3 = chunkVerts[0];
+        packetEnd = (undefined4 *)
+                 FUN_00030a60(packetEnd,6,chunkVerts[0],chunkVerts[0],0,uVar7,tailBytes >> 2 | 0x10000);
       }
-      puVar9 = staleArgR10 + 4;
-      *(ushort *)(*(int *)param_2[2] + 0x1c) = *(ushort *)(*(int *)param_2[2] + 0x1c) | 1;
-      *(ushort *)(*(int *)param_2[2] + 0x28) = *(ushort *)(*(int *)param_2[2] + 0x28) & 0xfffe;
-      *staleArgR10 = 0xd0b;
-      staleArgR10[2] = 0x5c8;
-      staleArgR10[1] = 5;
-      staleArgR10[3] = 0x10000;
-      if (!bVar1) {
+      packetCursor = packetEnd + 4;
+      *(ushort *)(*(int *)bufferObject[2] + 0x1c) = *(ushort *)(*(int *)bufferObject[2] + 0x1c) | 1;
+      *(ushort *)(*(int *)bufferObject[2] + 0x28) = *(ushort *)(*(int *)bufferObject[2] + 0x28) & 0xfffe;
+      *packetEnd = 0xd0b;
+      packetEnd[2] = 0x5c8;
+      packetEnd[1] = 5;
+      packetEnd[3] = 0x10000;
+      if (!isDefaultMode) {
         uVar2 = *(undefined4 *)(ctx + 0x1d74);
-        puVar9 = staleArgR10 + 5;
-        staleArgR10[4] = 0x4790b1;
+        packetCursor = packetEnd + 5;
+        packetEnd[4] = 0x4790b1;
         iVar4 = 0x48;
         do {
-          *puVar9 = uVar2;
-          puVar9 = puVar9 + 1;
+          *packetCursor = uVar2;
+          packetCursor = packetCursor + 1;
           iVar4 = iVar4 + -1;
         } while (iVar4 != 0);
       }
-      *piVar11 = (int)puVar9 - (int)(piVar11 + 0x280) >> 2;
+      *commandBuffer = (int)packetCursor - (int)(commandBuffer + 0x280) >> 2;
     }
-    iVar4 = *(int *)param_2[2];
+    iVar4 = *(int *)bufferObject[2];
     *(undefined1 *)(iVar4 + 0x14) = 1;
-    puVar6 = (uint *)param_2[1];
-    if (((*puVar6 & 2) == 0) || ((*(uint *)(ctx + 0x24) & 2) == 0)) goto LAB_0001e6e0;
-    gldFlushDataCacheRange(ctx,*puVar12,puVar12[2],uVar3,uVar5,puVar6,iVar4,staleArgR10);
+    dirtyState = (uint *)bufferObject[1];
+    if (((*dirtyState & 2) == 0) || ((*(uint *)(ctx + 0x24) & 2) == 0)) goto LAB_0001e6e0;
+    gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2],uVar3,uVar5,dirtyState,iVar4,packetEnd);
   }
   else {
-    puVar6 = (uint *)param_2[1];
-    uVar10 = *puVar6;
-    staleArgR10 = (undefined4 *)(uVar10 ^ 1);
-    if (((uint)staleArgR10 & 1) == 0) goto LAB_0001e3b0;
-    if (*(short *)(puVar12 + 3) != -0x771c) {
-      if (param_2[4] == 6) {
-        if (((uVar10 & 2) != 0) && ((*(uint *)(ctx + 0x24) & 2) != 0)) {
-          gldFlushDataCacheRange(ctx,*puVar12,puVar12[2],staleArgR6,iVar4,puVar6,0,uVar10 & 2);
-          puVar6 = (uint *)param_2[1];
+    dirtyState = (uint *)bufferObject[1];
+    tailBytes = *dirtyState;
+    packetEnd = (undefined4 *)(tailBytes ^ 1);
+    if (((uint)packetEnd & 1) == 0) goto LAB_0001e3b0;
+    if (*(short *)(bufferDesc + 3) != -0x771c) {
+      if (bufferObject[4] == 6) {
+        if (((tailBytes & 2) != 0) && ((*(uint *)(ctx + 0x24) & 2) != 0)) {
+          gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2],staleArgR6,iVar4,dirtyState,0,tailBytes & 2);
+          dirtyState = (uint *)bufferObject[1];
         }
         goto LAB_0001e6e0;
       }
       goto LAB_0001e3b0;
     }
-    if (param_2[4] != 7) goto LAB_0001e3b0;
-    if ((uVar10 & 2) == 0) goto LAB_0001e6e0;
+    if (bufferObject[4] != 7) goto LAB_0001e3b0;
+    if ((tailBytes & 2) == 0) goto LAB_0001e6e0;
     *(undefined1 *)(iVar4 + 0x14) = 1;
-    *(ushort *)(*(int *)param_2[2] + 0x1c) = *(ushort *)(*(int *)param_2[2] + 0x1c) | 1;
-    iVar8 = *(int *)param_2[2];
+    *(ushort *)(*(int *)bufferObject[2] + 0x1c) = *(ushort *)(*(int *)bufferObject[2] + 0x1c) | 1;
+    iVar8 = *(int *)bufferObject[2];
     *(ushort *)(iVar8 + 0x28) = *(ushort *)(iVar8 + 0x28) & 0xfffe;
     if ((*(uint *)(ctx + 0x24) & 2) != 0) {
-      gldFlushDataCacheRange(ctx,*puVar12,puVar12[2],staleArgR6,iVar4,puVar6,iVar8,uVar10 & 2);
-      puVar6 = (uint *)param_2[1];
+      gldFlushDataCacheRange(ctx,*bufferDesc,bufferDesc[2],staleArgR6,iVar4,dirtyState,iVar8,tailBytes & 2);
+      dirtyState = (uint *)bufferObject[1];
       goto LAB_0001e6e0;
     }
   }
-  puVar6 = (uint *)param_2[1];
+  dirtyState = (uint *)bufferObject[1];
 LAB_0001e6e0:
-  *puVar6 = 0;
+  *dirtyState = 0;
   return 1;
 }
 
-/* FUN_0001e730 @ 0x1e730 (332 bytes) */
-int FUN_0001e730(ctx, vertexArray)
+/* gld_prepareVertexArrayBuffers @ 0x1e730 (332 bytes) */
+int gld_prepareVertexArrayBuffers(ctx, vertexArray)
   undefined4 ctx;
   int *vertexArray;
 {
   int loopIndex;
-  bool bVar1;
-  undefined4 uVar2;
-  int iVar3;
+  bool nonePending;
+  undefined4 isReady;
+  int validateResult;
   int iVar4;
-  uint uVar5;
-  int iVar6;
-  int iVar7;
-  int iVar8;
-  uint uVar9;
+  uint pendingMask;
+  int dirtyState;
+  int arrayDesc;
+  int attrIndex;
+  uint attrBit;
   
-  iVar7 = *vertexArray;
-  iVar6 = vertexArray[1];
-  uVar5 = *(uint *)(iVar7 + 0x304);
-  if ((*(uint *)(iVar7 + 0x300) & ~*(uint *)(iVar7 + 0x308)) == 0 &&
-      (uVar5 & ~*(uint *)(iVar7 + 0x30c)) == 0) {
-    if (*(int *)(iVar6 + 0x84) != 0 || (*(uint *)(iVar6 + 0x88) & 0xfffffff5) != 0) {
-      iVar3 = ((int (*)())gld_validateVertexArrayStreams)(vertexArray,1);
-      if (iVar3 == 0) goto LAB_0001e86c;
-      uVar5 = *(uint *)(iVar7 + 0x304);
+  arrayDesc = *vertexArray;
+  dirtyState = vertexArray[1];
+  pendingMask = *(uint *)(arrayDesc + 0x304);
+  if ((*(uint *)(arrayDesc + 0x300) & ~*(uint *)(arrayDesc + 0x308)) == 0 &&
+      (pendingMask & ~*(uint *)(arrayDesc + 0x30c)) == 0) {
+    if (*(int *)(dirtyState + 0x84) != 0 || (*(uint *)(dirtyState + 0x88) & 0xfffffff5) != 0) {
+      validateResult = ((int (*)())gld_validateVertexArrayStreams)(vertexArray,1);
+      if (validateResult == 0) goto LAB_0001e86c;
+      pendingMask = *(uint *)(arrayDesc + 0x304);
     }
-    uVar5 = uVar5 & 0xffff0000;
-    iVar8 = 0;
+    pendingMask = pendingMask & 0xffff0000;
+    attrIndex = 0;
     loopIndex = 0;
-    bVar1 = uVar5 == 0;
+    nonePending = pendingMask == 0;
     while( true ) {
-      while (!bVar1) {
-        uVar9 = *(uint *)(&DAT_001d91f0 + iVar8 * 4);
-        if ((uVar5 & uVar9) != 0) {
-          iVar4 = *(int *)(iVar8 * 4 + iVar6);
-          if ((iVar4 == 0) || (iVar4 = ((int (*)())FUN_0001e280)(ctx,iVar4,0), iVar4 == 0))
+      while (!nonePending) {
+        attrBit = *(uint *)(&DAT_001d91f0 + attrIndex * 4);
+        if ((pendingMask & attrBit) != 0) {
+          iVar4 = *(int *)(attrIndex * 4 + dirtyState);
+          if ((iVar4 == 0) || (iVar4 = ((int (*)())gld_prepareBufferBacking)(ctx,iVar4,0), iVar4 == 0))
           goto LAB_0001e86c;
-          uVar5 = uVar5 & ~uVar9;
-          bVar1 = uVar5 == 0;
+          pendingMask = pendingMask & ~attrBit;
+          nonePending = pendingMask == 0;
         }
-        iVar8 = iVar8 + 1;
+        attrIndex = attrIndex + 1;
       }
       loopIndex = loopIndex + 1;
-      uVar5 = *(uint *)(iVar7 + 0x300) & 0xffff;
+      pendingMask = *(uint *)(arrayDesc + 0x300) & 0xffff;
       if (1 < loopIndex) break;
-      bVar1 = uVar5 == 0;
-      iVar8 = 0x10;
+      nonePending = pendingMask == 0;
+      attrIndex = 0x10;
     }
-    if (*(int *)(iVar6 + 0x80) != 0) {
-      ((int (*)())FUN_0001e280)(ctx,*(int *)(iVar6 + 0x80),1);
+    if (*(int *)(dirtyState + 0x80) != 0) {
+      ((int (*)())gld_prepareBufferBacking)(ctx,*(int *)(dirtyState + 0x80),1);
     }
-    iVar6 = vertexArray[1];
-    uVar2 = 1;
-    *(undefined4 *)(iVar6 + 0x84) = 0;
-    *(undefined4 *)(iVar6 + 0x88) = 0;
+    dirtyState = vertexArray[1];
+    isReady = 1;
+    *(undefined4 *)(dirtyState + 0x84) = 0;
+    *(undefined4 *)(dirtyState + 0x88) = 0;
   }
   else {
 LAB_0001e86c:
-    uVar2 = 0;
+    isReady = 0;
   }
-  return uVar2;
+  return isReady;
 }
 
 /* copyIndices16Swapped_prefetch_entry @ 0x1e890 (16 bytes) */

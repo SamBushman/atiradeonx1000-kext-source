@@ -380,10 +380,10 @@ ffc4	ffd0	padding	arbProgramIrToText	3
 1e194	1e1a0	padding	_gldPageoffBuffer	3	
 1e26c	1e270	padding	glCopyPixels_impl	1	
 1e278	1e280	padding	returnZero_1e270	2	
-1e3a4	1e3b0	padding	FUN_0001e280	3	
-1e72c	1e730	padding	FUN_0001e280	1	
-1e7c4	1e7d0	padding	FUN_0001e730	3	
-1e888	1e890	padding	FUN_0001e730	2	
+1e3a4	1e3b0	padding	gld_prepareBufferBacking	3	
+1e72c	1e730	padding	gld_prepareBufferBacking	1	
+1e7c4	1e7d0	padding	gld_prepareVertexArrayBuffers	3	
+1e888	1e890	padding	gld_prepareVertexArrayBuffers	2	
 1ea84	1ea90	padding	copyIndices16Swapped_prefetch	3	
 1ec78	1ec80	padding	copyIndices16Swapped_dcbz	2	
 1eccc	1ecd0	padding	copyIndices16Swapped_dcbz	1	
