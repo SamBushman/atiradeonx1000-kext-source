@@ -2965,7 +2965,7 @@
 0x189be4	R300SchedModel__vslot15	64	yes	
 0x189c24	FUN_00189c24	188	no	indirect call (driver context / vtable / callback)
 0x189ce0	FUN_00189ce0	276	no	indirect call (driver context / vtable / callback)
-0x189df4	FUN_00189df4	480	no	indirect call (driver context / vtable / callback)
+0x189df4	SchedModel__classifySlotUse	480	no	indirect call (driver context / vtable / callback)
 0x189fd4	R300SchedModel__vslot19	172	no	indirect call (driver context / vtable / callback)
 0x18a080	R300SchedModel__vslot34	364	no	indirect call (driver context / vtable / callback)
 0x18a1ec	R300SchedModel__vslot26	596	no	indirect call (driver context / vtable / callback)
