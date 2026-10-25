@@ -834,193 +834,202 @@ int FUN_001781a4(param_1, valueKey, param_3)
 }
 
 /* FUN_00178338 @ 0x178338 (656 bytes) */
-int FUN_00178338(ctx, param_2, param_3)
+int FUN_00178338(ctx, lane, clampFlagsOut)
   int ctx;
-  int param_2;
-  int param_3;
+  int lane;
+  int clampFlagsOut;
 {
+  int valueNumber;
+  int resultClass;
+  int laneNode;
+  int keyInst;
   int findInPtrSetResult;
-  int iVar1;
-  uint uVar2;
+  int laneByteOffset;
+  uint operandFlags;
   float *exprRecord;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  int *piVar8;
+  int operandCount;
+  int operandRecAddr;
+  int operandRecOffset;
+  int operandNumber;
+  int *valueNumberPtr;
   int *loopPtr;
-  int local_54 [9];
+  int operandClass [9];
   
-  iVar1 = param_2 * 4;
-  if (*(int *)(iVar1 + ctx + 0x30) == 0) {
-    piVar8 = (int *)(iVar1 + ctx + 0x178);
-    loopPtr = local_54;
-    iVar6 = 0x98;
-    for (iVar7 = 1;
-        iVar4 = (**(code **)(**(int **)(ctx + 0xb0) + 0x14))(*(int **)(ctx + 0xb0)),
-        iVar7 <= iVar4; iVar7 = iVar7 + 1) {
-      iVar4 = *piVar8;
-      if (iVar4 < 0) {
-        exprRecord = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar4);
-        iVar4 = ((undefined4 (*)())classifyConstantRange)((double)*exprRecord);
-        *loopPtr = iVar4;
+  laneByteOffset = lane * 4;
+  if (*(int *)(laneByteOffset + ctx + 0x30) == 0) {
+    valueNumberPtr = (int *)(laneByteOffset + ctx + 0x178);
+    loopPtr = operandClass;
+    operandRecOffset = 0x98;
+    for (operandNumber = 1;
+        operandCount = (**(code **)(**(int **)(ctx + 0xb0) + 0x14))(*(int **)(ctx + 0xb0)),
+        operandNumber <= operandCount; operandNumber = operandNumber + 1) {
+      valueNumber = *valueNumberPtr;
+      if (valueNumber < 0) {
+        exprRecord = (float *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),valueNumber);
+        valueNumber = ((undefined4 (*)())classifyConstantRange)((double)*exprRecord);
+        *loopPtr = valueNumber;
       }
-      else if (iVar4 < 1) {
+      else if (valueNumber < 1) {
         *loopPtr = 0;
       }
       else {
-        findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar4);
-        iVar4 = *(int *)(findInPtrSetResult + 0x10);
-        *loopPtr = iVar4;
-        iVar5 = *(int *)(ctx + 0xb0) + iVar6;
-        uVar2 = *(uint *)(iVar5 + 0x20);
-        if ((uVar2 & 2) != 0) {
-          *loopPtr = *(int *)(&DAT_001e6188 + iVar4 * 4);
-          uVar2 = *(uint *)(iVar5 + 0x20);
+        findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),valueNumber);
+        valueNumber = *(int *)(findInPtrSetResult + 0x10);
+        *loopPtr = valueNumber;
+        operandRecAddr = *(int *)(ctx + 0xb0) + operandRecOffset;
+        operandFlags = *(uint *)(operandRecAddr + 0x20);
+        if ((operandFlags & 2) != 0) {
+          *loopPtr = *(int *)(&DAT_001e6188 + valueNumber * 4);
+          operandFlags = *(uint *)(operandRecAddr + 0x20);
         }
-        if ((uVar2 & 1) != 0) {
+        if ((operandFlags & 1) != 0) {
           *loopPtr = *(int *)(&DAT_001e6170 + *loopPtr * 4);
         }
       }
-      iVar6 = iVar6 + 0x18;
+      operandRecOffset = operandRecOffset + 0x18;
       loopPtr = loopPtr + 1;
-      piVar8 = piVar8 + 4;
+      valueNumberPtr = valueNumberPtr + 4;
     }
-    iVar6 = *(int *)(ctx + 0xb0);
-    switch(*(undefined4 *)(*(int *)(iVar6 + 0x88) + 8)) {
+    keyInst = *(int *)(ctx + 0xb0);
+    switch(*(undefined4 *)(*(int *)(keyInst + 0x88) + 8)) {
     case 0x12:
-      local_54[0] = *(int *)(&DAT_001e5bf4 + (local_54[0] * 6 + local_54[1]) * 4);
+      operandClass[0] = *(int *)(&DAT_001e5bf4 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     case 0x13:
-      local_54[0] = *(int *)(&DAT_001e5ad4 + (local_54[0] * 6 + local_54[1]) * 4);
+      operandClass[0] = *(int *)(&DAT_001e5ad4 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     default:
-      local_54[0] = 0;
+      operandClass[0] = 0;
       break;
     case 0x17:
-      local_54[0] = *(int *)(&DAT_001e5a44 + (local_54[0] * 6 + local_54[1]) * 4);
+      operandClass[0] = *(int *)(&DAT_001e5a44 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     case 0x19:
-      local_54[0] = *(int *)(&DAT_001e59b4 + (local_54[0] * 6 + local_54[1]) * 4);
+      operandClass[0] = *(int *)(&DAT_001e59b4 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     case 0x24:
     case 0x25:
     case 0x26:
-      local_54[0] = *(int *)(&DAT_001e5b64 + (local_54[1] * 6 + local_54[2]) * 4);
+      operandClass[0] = *(int *)(&DAT_001e5b64 + (operandClass[1] * 6 + operandClass[2]) * 4);
       break;
     case 0x31: ;
     }
-    if ((0 < *(int *)(iVar6 + 0x124)) && (local_54[0] != 2)) {
-      local_54[0] = 0;
+    if ((0 < *(int *)(keyInst + 0x124)) && (operandClass[0] != 2)) {
+      operandClass[0] = 0;
     }
-    iVar7 = local_54[0];
-    if (*(int *)(iVar6 + 0x120) != 0) {
-      iVar7 = (DAT_001e6158)[local_54[0]];
-      if (local_54[0] == iVar7) {
-        *(undefined4 *)(iVar1 + param_3) = 0;
-        iVar7 = local_54[0];
+    resultClass = operandClass[0];
+    if (*(int *)(keyInst + 0x120) != 0) {
+      resultClass = (DAT_001e6158)[operandClass[0]];
+      if (operandClass[0] == resultClass) {
+        *(undefined4 *)(laneByteOffset + clampFlagsOut) = 0;
+        resultClass = operandClass[0];
       }
       else {
-        *(undefined4 *)(iVar1 + param_3) = 1;
+        *(undefined4 *)(laneByteOffset + clampFlagsOut) = 1;
       }
     }
-    iVar6 = *(int *)(iVar1 + ctx + 0x40);
-    if (iVar6 == 0) {
-      iVar6 = FUN_00174ce0(*(undefined4 *)(ctx + 0x238),param_2,ctx);
-      *(int *)(iVar1 + ctx + 0x40) = iVar6;
+    laneNode = *(int *)(laneByteOffset + ctx + 0x40);
+    if (laneNode == 0) {
+      laneNode = FUN_00174ce0(*(undefined4 *)(ctx + 0x238),lane,ctx);
+      *(int *)(laneByteOffset + ctx + 0x40) = laneNode;
     }
-    *(int *)(iVar6 + 0x10) = iVar7;
+    *(int *)(laneNode + 0x10) = resultClass;
   }
   return;
 }
 
 /* FUN_00178648 @ 0x178648 (708 bytes) */
-int FUN_00178648(ctx, param_2)
+int FUN_00178648(ctx, lane)
   int ctx;
-  int param_2;
+  int lane;
 {
+  int valueNumber;
+  int laneEntryPtr2;
+  int laneNode;
+  int resultClass;
+  int operandRecOffset;
   int findInPtrSetResult;
-  uint uVar1;
-  int iVar2;
+  uint operandFlags;
+  int laneEntryPtr;
   undefined4 *exprRecord;
-  int iVar4;
-  int iVar5;
-  int iVar6;
-  int iVar7;
-  int *piVar8;
+  int operandCount;
+  int operandRecAddr;
+  int operandRecOffset2;
+  int operandNumber;
+  int *valueNumberPtr;
   int *loopPtr;
-  int local_54 [9];
+  int operandClass [9];
   
-  iVar2 = param_2 * 4 + ctx;
-  if (*(int *)(iVar2 + 0x30) == 0) {
-    piVar8 = (int *)(iVar2 + 0x178);
-    loopPtr = local_54;
-    iVar2 = 0x98;
-    iVar6 = 0x98;
-    for (iVar7 = 1;
-        iVar4 = (**(code **)(**(int **)(ctx + 0xb0) + 0x14))(*(int **)(ctx + 0xb0)),
-        iVar7 <= iVar4; iVar7 = iVar7 + 1) {
-      iVar4 = *piVar8;
-      if (iVar4 < 0) {
-        exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),iVar4);
-        iVar4 = signToCompareCode(*exprRecord);
-        *loopPtr = iVar4;
+  laneEntryPtr = lane * 4 + ctx;
+  if (*(int *)(laneEntryPtr + 0x30) == 0) {
+    valueNumberPtr = (int *)(laneEntryPtr + 0x178);
+    loopPtr = operandClass;
+    operandRecOffset = 0x98;
+    operandRecOffset2 = 0x98;
+    for (operandNumber = 1;
+        operandCount = (**(code **)(**(int **)(ctx + 0xb0) + 0x14))(*(int **)(ctx + 0xb0)),
+        operandNumber <= operandCount; operandNumber = operandNumber + 1) {
+      valueNumber = *valueNumberPtr;
+      if (valueNumber < 0) {
+        exprRecord = (undefined4 *)Compiler__exprRecordForValueNumber(*(undefined4 *)(ctx + 0x238),valueNumber);
+        valueNumber = signToCompareCode(*exprRecord);
+        *loopPtr = valueNumber;
       }
       else {
-        if (iVar4 < 1) {
+        if (valueNumber < 1) {
           *loopPtr = 0;
-          iVar4 = *(int *)(ctx + 0xb0) + iVar2;
-          uVar1 = *(uint *)(iVar4 + 0x20);
-          if ((uVar1 & 2) != 0) {
+          valueNumber = *(int *)(ctx + 0xb0) + operandRecOffset;
+          operandFlags = *(uint *)(valueNumber + 0x20);
+          if ((operandFlags & 2) != 0) {
             *loopPtr = DAT_001e61d0[0];
-            uVar1 = *(uint *)(iVar4 + 0x20);
+            operandFlags = *(uint *)(valueNumber + 0x20);
           }
         }
         else {
-          findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),iVar4);
-          iVar4 = *(int *)(findInPtrSetResult + 0xc);
-          *loopPtr = iVar4;
-          iVar5 = *(int *)(ctx + 0xb0) + iVar6;
-          uVar1 = *(uint *)(iVar5 + 0x20);
-          if ((uVar1 & 2) != 0) {
-            *loopPtr = (DAT_001e61d0)[iVar4];
-            uVar1 = *(uint *)(iVar5 + 0x20);
+          findInPtrSetResult = Compiler__findInPtrSet(*(undefined4 *)(ctx + 0x238),valueNumber);
+          valueNumber = *(int *)(findInPtrSetResult + 0xc);
+          *loopPtr = valueNumber;
+          operandRecAddr = *(int *)(ctx + 0xb0) + operandRecOffset2;
+          operandFlags = *(uint *)(operandRecAddr + 0x20);
+          if ((operandFlags & 2) != 0) {
+            *loopPtr = (DAT_001e61d0)[valueNumber];
+            operandFlags = *(uint *)(operandRecAddr + 0x20);
           }
         }
-        if ((uVar1 & 1) != 0) {
+        if ((operandFlags & 1) != 0) {
           *loopPtr = *(int *)(&DAT_001e61b8 + *loopPtr * 4);
         }
       }
-      iVar6 = iVar6 + 0x18;
-      iVar2 = iVar2 + 0x18;
+      operandRecOffset2 = operandRecOffset2 + 0x18;
+      operandRecOffset = operandRecOffset + 0x18;
       loopPtr = loopPtr + 1;
-      piVar8 = piVar8 + 4;
+      valueNumberPtr = valueNumberPtr + 4;
     }
     switch(*(undefined4 *)(*(int *)(*(int *)(ctx + 0xb0) + 0x88) + 8)) {
     case 0x12:
-      iVar2 = *(int *)(&DAT_001e5ec4 + (local_54[0] * 6 + local_54[1]) * 4);
+      resultClass = *(int *)(&DAT_001e5ec4 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     case 0x13:
-      iVar2 = *(int *)(&DAT_001e5c84 + (local_54[0] * 6 + local_54[1]) * 4);
+      resultClass = *(int *)(&DAT_001e5c84 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     case 0x14:
-      iVar2 = *(int *)(&DAT_001e5ec4 +
-                      (*(int *)(&DAT_001e5c84 + (local_54[0] * 6 + local_54[1]) * 4) * 6 +
-                      local_54[2]) * 4);
+      resultClass = *(int *)(&DAT_001e5ec4 +
+                      (*(int *)(&DAT_001e5c84 + (operandClass[0] * 6 + operandClass[1]) * 4) * 6 +
+                      operandClass[2]) * 4);
       break;
     default:
-      iVar2 = 0;
+      resultClass = 0;
       break;
     case 0x17:
-      iVar2 = *(int *)(&DAT_001e5da4 + (local_54[0] * 6 + local_54[1]) * 4);
+      resultClass = *(int *)(&DAT_001e5da4 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     case 0x19:
-      iVar2 = *(int *)(&DAT_001e5d14 + (local_54[0] * 6 + local_54[1]) * 4);
+      resultClass = *(int *)(&DAT_001e5d14 + (operandClass[0] * 6 + operandClass[1]) * 4);
       break;
     case 0x24:
     case 0x25:
     case 0x26:
-      iVar2 = *(int *)(&DAT_001e5e34 + (local_54[1] * 6 + local_54[2]) * 4);
+      resultClass = *(int *)(&DAT_001e5e34 + (operandClass[1] * 6 + operandClass[2]) * 4);
       break;
     case 0x31:
     case 0x3e:
@@ -1029,18 +1038,18 @@ int FUN_00178648(ctx, param_2)
     case 0x41:
     case 0x42:
     case 0x43:
-      iVar2 = local_54[0];
+      resultClass = operandClass[0];
     }
     if (*(int *)(*(int *)(ctx + 0xb0) + 0x120) != 0) {
-      iVar2 = (DAT_001e61a0)[iVar2];
+      resultClass = (DAT_001e61a0)[resultClass];
     }
-    iVar7 = param_2 * 4 + ctx;
-    iVar6 = *(int *)(iVar7 + 0x40);
-    if (iVar6 == 0) {
-      iVar6 = FUN_00174ce0(*(undefined4 *)(ctx + 0x238),param_2,ctx);
-      *(int *)(iVar7 + 0x40) = iVar6;
+    laneEntryPtr2 = lane * 4 + ctx;
+    laneNode = *(int *)(laneEntryPtr2 + 0x40);
+    if (laneNode == 0) {
+      laneNode = FUN_00174ce0(*(undefined4 *)(ctx + 0x238),lane,ctx);
+      *(int *)(laneEntryPtr2 + 0x40) = laneNode;
     }
-    *(int *)(iVar6 + 0xc) = iVar2;
+    *(int *)(laneNode + 0xc) = resultClass;
   }
   return;
 }
