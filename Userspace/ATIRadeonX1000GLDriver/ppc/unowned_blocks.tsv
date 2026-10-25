@@ -89,10 +89,10 @@ start	end	kind	owner	instructions	calls
 966c	9670	padding	gld_resolveProgramSlots	1	
 96a4	96b0	padding	gld_resolveProgramSlots	3	
 96f8	973c	table	gld_decodeProgramOperandOffset	17	
-9780	979c	table	FUN_00009750	7	
-980c	9810	padding	FUN_000097fc	1	
-98b0	98c8	table	FUN_00009880	6	
-98d8	9b70	other	FUN_000098c8	166	
+9780	979c	table	gld_decodeProgramOperandOffset_frag_00009750	7	
+980c	9810	padding	gld_decodeProgramOperandOffset_frag_000097fc	1	
+98b0	98c8	table	gld_decodeProgramOperandOffset_frag_00009880	6	
+98d8	9b70	other	gld_decodeProgramOperandOffset_frag_000098c8	166	
 9bc8	9bd0	padding	gldAllocQueryRecord	2	
 9c74	9c80	padding	gld_waitQueryStamp	3	
 9ccc	9cd0	padding	_gldDestroyQuery	1	

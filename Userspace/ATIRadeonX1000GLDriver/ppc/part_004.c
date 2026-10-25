@@ -1054,8 +1054,8 @@ int FUN_00025ec0(param_1, param_2)
   undefined4 uVar8;
   undefined4 staleArgR6;
   undefined4 staleArgR7;
-  int staleArgR8;
-  int staleArgR9;
+  int literalPool;
+  int rowsMinusOne;
   int iVar9;
   int iVar10;
   uint uVar11;
@@ -1073,8 +1073,8 @@ int FUN_00025ec0(param_1, param_2)
   iVar9 = param_2[6];
   piVar6[2] = param_1;
   piVar6[1] = (int)(param_2 + 8);
-  staleArgR9 = iVar9 + -1;
-  piVar6[4] = staleArgR9;
+  rowsMinusOne = iVar9 + -1;
+  piVar6[4] = rowsMinusOne;
   *piVar6 = param_2[8];
   param_2[8] = (int)piVar6;
   *(int **)(*piVar6 + 4) = piVar6;
@@ -1090,26 +1090,26 @@ LAB_000263d8:
   }
   else {
 LAB_00025fac:
-    glBindProgramARB_impl(piVar15,0x8804,iVar9,staleArgR6,staleArgR7,staleArgR8,staleArgR9);
+    glBindProgramARB_impl(piVar15,0x8804,iVar9,staleArgR6,staleArgR7,literalPool,rowsMinusOne);
     if (piVar6[3] == param_2[5]) {
       pbVar13 = (byte *)param_2[0xe];
       if (pbVar13 != (byte *)0x0) {
         uVar11 = *(uint *)(pbVar13 + 0x20);
         uVar5 = uVar11 >> 0x1b;
-        staleArgR8 = *(int *)(*param_2 + 0x18);
+        literalPool = *(int *)(*param_2 + 0x18);
         if (uVar5 == 0) {
 LAB_00026008:
           bVar3 = false;
         }
         else {
-          if ((uint)pbVar13[1] == *(uint *)(staleArgR8 + (uint)*pbVar13 * 0x10)) {
+          if ((uint)pbVar13[1] == *(uint *)(literalPool + (uint)*pbVar13 * 0x10)) {
             do {
               uVar5 = uVar5 - 1;
               if (uVar5 == 0) goto LAB_00026008;
               pbVar1 = pbVar13 + 2;
               pbVar2 = pbVar13 + 3;
               pbVar13 = pbVar13 + 2;
-            } while ((uint)*pbVar2 == *(uint *)(staleArgR8 + (uint)*pbVar1 * 0x10));
+            } while ((uint)*pbVar2 == *(uint *)(literalPool + (uint)*pbVar1 * 0x10));
           }
           bVar3 = true;
         }
@@ -1235,7 +1235,7 @@ LAB_000260dc:
             return 0;
           }
           length = _strlen(iVar9);
-          glProgramStringARB_impl(piVar15,0x8804,0x8875,length,iVar9,staleArgR8,iVar10,iVar12);
+          glProgramStringARB_impl(piVar15,0x8804,0x8875,length,iVar9,literalPool,iVar10,iVar12);
           _free(iVar9);
           bVar4 = *piVar15 != 0;
         }
@@ -5757,10 +5757,10 @@ int FUN_0002c230(param_1, dirtyBits)
   uint *puVar4;
   undefined4 uVar5;
   undefined4 *puVar6;
-  undefined4 *staleArgR5;
-  undefined4 staleArgR6;
-  undefined4 staleArgR7;
-  undefined4 staleArgR8;
+  undefined4 *scalarBlockPtr;
+  undefined4 scalarCount;
+  undefined4 structOutPtr;
+  undefined4 structOutSize;
   uint uVar7;
   uint uVar8;
   int iVar9;
@@ -5821,11 +5821,11 @@ LAB_0002c610:
         if (*(int *)(iVar9 + 0x1e4) + 0x28U < *(uint *)(iVar9 + 0x1dc)) {
           gld_submitRing(iVar9,0x1000000);
         }
-        staleArgR5 = &local_48;
-        staleArgR6 = 4;
+        scalarBlockPtr = &local_48;
+        scalarCount = 4;
         uVar7 = 0xffff3fc0;
-        staleArgR7 = 0;
-        staleArgR8 = 0;
+        structOutPtr = 0;
+        structOutSize = 0;
         uVar8 = *(uint *)(iVar9 + 0x3c) | 0x800;
         *(uint *)(iVar9 + 0x154) = uVar8;
         *(uint *)(iVar9 + 0x3c) = uVar8;
@@ -5833,12 +5833,12 @@ LAB_0002c610:
         local_44 = *(uint *)(iVar9 + 0x3c) & 0xffff3fc0;
         local_40 = *(undefined4 *)(iVar9 + 0xfc);
         local_3c = *(undefined4 *)(iVar9 + 0x100);
-        _io_connect_method_scalarI_structureI(*(undefined4 *)(iVar9 + 4),0,staleArgR5,4,0,0);
+        _io_connect_method_scalarI_structureI(*(undefined4 *)(iVar9 + 4),0,scalarBlockPtr,4,0,0);
         puVar6 = (undefined4 *)(**(code **)(param_1 + 0x2758))(param_1,0x22d);
         iVar12 = *(int *)(param_1 + 0x2460);
         *(undefined4 **)(0x00002748 + param_1 + 4) = puVar6;
       }
-      iVar12 = FUN_0001a010(iVar9,iVar12,staleArgR5,staleArgR6,staleArgR7,staleArgR8,uVar7);
+      iVar12 = FUN_0001a010(iVar9,iVar12,scalarBlockPtr,scalarCount,structOutPtr,structOutSize,uVar7);
       if (iVar12 == 0) {
         puVar4 = *(uint **)(iVar9 + 0x1d8);
         *puVar4 = (int)puVar6 - (int)puVar4 >> 2 | *puVar4;
@@ -6159,12 +6159,12 @@ uint gld_prepareDrawCount(int ctx,undefined4 closeFlag,uint primitiveMode,uint v
   int primitiveClassBits;
   uint modeForward;
   uint vertexCountForward;
-  uint staleArgR9;
+  uint drawFlagsOrModeBit;
   uint trimmedCount;
   double f1AfterCall;
   double staleStackArg_ffffffa8;
 
-  staleArgR9 = drawFlags;
+  drawFlagsOrModeBit = drawFlags;
   vertexCountForward = vertexCount;
   if ((int)vertexCount < 4) {
     trimmedCount = ((int (*)())gldTrimVertexCountToPrimitiveMin)(ctx,primitiveMode,vertexCount);
@@ -6172,8 +6172,8 @@ uint gld_prepareDrawCount(int ctx,undefined4 closeFlag,uint primitiveMode,uint v
     staleFprArg1 = f1AfterCall;
   }
   else {
-    staleArgR9 = primitiveMode & 1;
-    primitiveClassBits = (primitiveMode >> 3 & 1) + (primitiveMode >> 2 & 1) + (primitiveMode >> 1 & 1) + staleArgR9;
+    drawFlagsOrModeBit = primitiveMode & 1;
+    primitiveClassBits = (primitiveMode >> 3 & 1) + (primitiveMode >> 2 & 1) + (primitiveMode >> 1 & 1) + drawFlagsOrModeBit;
     modeForward = primitiveMode;
     trimmedCount = vertexCount;
     if (((primitiveClassBits == 2) || (primitiveClassBits == 0)) || (primitiveMode == 2)) goto LAB_0002cce8;
@@ -6192,10 +6192,10 @@ uint gld_prepareDrawCount(int ctx,undefined4 closeFlag,uint primitiveMode,uint v
   }
 LAB_0002cce8:
   if (((unsigned char *)0x00002b80)[ctx] != '\0') {
-    staleFprArg1 = (double)FUN_000a3be0(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,staleArgR9);
+    staleFprArg1 = (double)FUN_000a3be0(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,drawFlagsOrModeBit);
   }
   if (*(int *)(ctx + 0x1b68) != 0) {
-    ((void (*)())gld_revalidateStreamProgram)(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,
+    ((void (*)())gld_revalidateStreamProgram)(ctx + GLD_commandStream,primitiveMode,modeForward,vertexCountForward,extraArg4,extraArg5,drawFlagsOrModeBit,staleFprArg1,staleFprArg2,
                  staleFprArg3,staleFprArg4,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
   }
   *(undefined1 *)(ctx + GLD_inDrawPixels) = 1;

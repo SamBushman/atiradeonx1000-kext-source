@@ -97,18 +97,18 @@
 0x9570	_gldDestroyPipelineProgram	104	no	calls an import (free)
 0x95e0	gld_resolveProgramSlots	192	yes	
 0x96b0	gld_decodeProgramOperandOffset	72	yes	
-0x973c	FUN_0000973c	20	no	tiny (20 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x9750	FUN_00009750	48	no	tiny (48 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x979c	FUN_0000979c	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97ac	FUN_000097ac	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97bc	FUN_000097bc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97cc	FUN_000097cc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97dc	FUN_000097dc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97ec	FUN_000097ec	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x97fc	FUN_000097fc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x9810	FUN_00009810	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
-0x9880	FUN_00009880	48	no	tiny (48 bytes) crt / thunk fragment: reached only through a caller no test exercises
-0x98c8	FUN_000098c8	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x973c	gld_decodeProgramOperandOffset_frag_0000973c	20	no	tiny (20 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x9750	gld_decodeProgramOperandOffset_frag_00009750	48	no	tiny (48 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x979c	gld_decodeProgramOperandOffset_frag_0000979c	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ac	gld_decodeProgramOperandOffset_frag_000097ac	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97bc	gld_decodeProgramOperandOffset_frag_000097bc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97cc	gld_decodeProgramOperandOffset_frag_000097cc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97dc	gld_decodeProgramOperandOffset_frag_000097dc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97ec	gld_decodeProgramOperandOffset_frag_000097ec	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x97fc	gld_decodeProgramOperandOffset_frag_000097fc	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x9810	gld_decodeProgramOperandOffset_frag_00009810	112	no	no static blocker: a test could reach it (needs arguments / state no test builds)
+0x9880	gld_decodeProgramOperandOffset_frag_00009880	48	no	tiny (48 bytes) crt / thunk fragment: reached only through a caller no test exercises
+0x98c8	gld_decodeProgramOperandOffset_frag_000098c8	16	no	tiny (16 bytes) crt / thunk fragment: reached only through a caller no test exercises
 0x9b70	gldAllocQueryRecord	88	no	calls an import (calloc)
 0x9bd0	gld_waitQueryStamp	164	yes	
 0x9c80	_gldDestroyQuery	76	no	calls an import (free)
