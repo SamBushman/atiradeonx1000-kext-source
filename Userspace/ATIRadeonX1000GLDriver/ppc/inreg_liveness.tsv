@@ -238,13 +238,13 @@
 25ec0	FUN_00025ec0	r7	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
 25ec0	FUN_00025ec0	r8	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
 25ec0	FUN_00025ec0	r9	PASS-no	25f18 bl 0x1a3700	; symbol stub for: _calloc
-269a0	FUN_000269a0	r7	PASS-no	269d4 bl 0x1a3940	; symbol stub for: _pthread_mut
-269a0	FUN_000269a0	r8	PASS-no	269d4 bl 0x1a3940	; symbol stub for: _pthread_mut
+269a0	gld_getProgramParameter	r7	PASS-no	269d4 bl 0x1a3940	; symbol stub for: _pthread_mut
+269a0	gld_getProgramParameter	r8	PASS-no	269d4 bl 0x1a3940	; symbol stub for: _pthread_mut
 2c230	FUN_0002c230	r5	PASS-indirect	2c2f8 bl 0x90990
 2c230	FUN_0002c230	r6	PASS-indirect	2c2f8 bl 0x90990
 2c230	FUN_0002c230	r7	PASS-indirect	2c2f8 bl 0x90990
 2c230	FUN_0002c230	r8	PASS-indirect	2c2f8 bl 0x90990
-2cc30	FUN_0002cc30	r9	PASS-no	2ccd8 bl 0x2bf30
+2cc30	gld_prepareDrawCount	r9	PASS-no	2ccd8 bl 0x2bf30
 2ce40	FUN_0002ce40	r5	PASS-indirect	2cfb4 bctrl 
 2ce40	FUN_0002ce40	r6	PASS-indirect	2cfb4 bctrl 
 34200	glGenerateMipmap_impl	r8	PASS-no	34244 bl 0x1a3940	; symbol stub for: _pthread_mut

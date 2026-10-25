@@ -6,8 +6,8 @@ da180	da184	FUN_000da0c0
 da578	da57c	FUN_000da4b8
 e1a08	e1a0c	FUN_000e1920
 e1b30	e1b34	FUN_000e1a48
-e1bf0	e1bf4	FUN_000e1b70
-e1c20	e1c24	FUN_000e1b70
+e1bf0	e1bf4	Compiler__setHardwareFamily
+e1c20	e1c24	Compiler__setHardwareFamily
 e21b8	e21bc	FUN_000e2094
 e21cc	e21ec	FUN_000e2094
 e34c8	e34cc	FUN_000e33cc
@@ -24,7 +24,7 @@ e5ab8	e5ad4	ILReader__ctor_e59f0
 e5cf4	e5cf8	ILReader__ctor_e59f0
 e5df0	e5e0c	ILReader__ctor_e59f0
 e5e0c	e5e2c	ILReader__ctor_e59f0
-e89bc	e89dc	FUN_000e8938
+e89bc	e89dc	Block__createEntryExitInsts
 e8ad4	e8ad8	FUN_000e8a08
 e8b20	e8b24	FUN_000e8a08
 e8b6c	e8b70	FUN_000e8a08
@@ -109,9 +109,9 @@ f2960	f2974	FUN_000f1d7c
 f2984	f2998	FUN_000f1d7c
 f29b8	f29d0	FUN_000f1d7c
 f513c	f515c	Compiler__getOrCreateLoadConstN
-f6c50	f6c70	FUN_000f6a04
-f8258	f8278	FUN_000f816c
-f8430	f8450	FUN_000f83cc
+f6c50	f6c70	Program__findOrCreateConstInst
+f8258	f8278	DominatorTree__dfsNumber
+f8430	f8450	DominatorTree__compress
 f8908	f8928	FUN_000f88b4
 f95e4	f9600	FUN_000f94dc
 f97a8	f97c4	FUN_000f94dc

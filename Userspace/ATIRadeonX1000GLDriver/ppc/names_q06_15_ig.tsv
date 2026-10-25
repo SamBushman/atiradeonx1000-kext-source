@@ -1,0 +1,88 @@
+local	FUN_0013719c	param_1	this	INFERRED	register graph object being constructed (+0 edge bitset, +4 node vector, +8 owner, +0xc node count, +0x20..0x24 per-class arrays, +0x28 block bitset, +0x2c compiler)
+local	FUN_0013719c	param_2	ownerArg	INFERRED	owner word stored at this +8
+local	FUN_0013719c	param_3	nodeCount	INFERRED	number of graph nodes (stored at this +0xc)
+local	FUN_0013719c	param_4	ownerArg4	INFERRED	word stored at this +0x28
+use	FUN_0013719c	iVar1	nodeCountNow	INFERRED	node count re-read from the object	^\s*iVar1\ =\ param_1\[3\];$	+1
+use	FUN_0013719c	iVar1	nodeCountNow	INFERRED	node count re-read from the object	^\s*if\ \(0\ <\ iVar1\)\ \{$	+1
+use	FUN_0013719c	iVar1	nodeCountNow	INFERRED	node count re-read from the object	^\s*iVar1\ =\ param_1\[3\];$@2	+2
+use	FUN_0013719c	iVar1	nodeCountNow	INFERRED	node count re-read from the object	^\s*uVar7\ =\ iVar1\ \*\ iVar1\ \-\ iVar1;$	+1
+use	FUN_0013719c	iVar1	edgeBitCount	INFERRED	n * (n - 1) / 2: one bit per node pair	^\s*iVar1\ =\ \(\(int\)uVar7\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar7\ <\ 0\ \&\&\ \(uVar7\ \&\ 1\)\ !=\ 0\);$	+2
+use	FUN_0013719c	iVar1	edgeBitCount	INFERRED	n * (n - 1) / 2: one bit per node pair	^\s*puVar2\[2\]\ =\ iVar1;$	+1
+use	FUN_0013719c	iVar1	wordCountdown	INFERRED	countdown from 0x80 over the per-class table words	^\s*iVar1\ =\ 0x80;$	+1
+use	FUN_0013719c	iVar1	wordCountdown	INFERRED	countdown from 0x80 over the per-class table words	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+2
+use	FUN_0013719c	iVar4	classArrayBytes	INFERRED	first allocation of one word per register class	^\s*iVar4\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(param_1\[0xb\]\ \+\ 0x378\),iVar1\);$	+3
+use	FUN_0013719c	iVar4	classArrayB	INFERRED	second allocation of one word per register class	^\s*iVar4\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(param_1\[0xb\]\ \+\ 0x378\),iVar1\);$@2	+2
+use	FUN_0013719c	iVar4	compilerObj	INFERRED	compiler (this +0x2c)	^\s*iVar4\ =\ param_1\[0xb\];$	+1
+use	FUN_0013719c	iVar4	compilerObj	INFERRED	compiler (this +0x2c)	^\s*if\ \(0\ <\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ 0x30c\)\ \+\ 0x14\)\)\ \{$	+1
+use	FUN_0013719c	iVar4	compilerObj	INFERRED	compiler (this +0x2c)	^\s*iVar4\ =\ param_1\[0xb\];$@2	+2
+use	FUN_0013719c	iVar4	compilerObj	INFERRED	compiler (this +0x2c)	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x378\);$	+1
+use	FUN_0013719c	iVar4	classByteOffset	INFERRED	byte offset into the per-class arrays	^\s*iVar4\ =\ iVar1\ \*\ 4;$	+1
+use	FUN_0013719c	iVar4	classByteOffset	INFERRED	byte offset into the per-class arrays	^\s*\*\(undefined4\ \*\)\(param_1\[6\]\ \+\ iVar4\)\ =\ 0;$	+2
+use	FUN_0013719c	puVar2	bitsetClearCursor	INFERRED	cursor clearing the edge bitset words	^\s*puVar2\ =\ puVar3;$	+1
+use	FUN_0013719c	puVar2	bitsetClearCursor	INFERRED	cursor clearing the edge bitset words	^\s*puVar2\[2\]\ =\ 0;$@2	+2
+use	FUN_0013719c	puVar2	tableWordCursor	INFERRED	cursor clearing the 0x80-word table	^\s*puVar2\ =\ puVar3\ \+\ 1;$	+1
+use	FUN_0013719c	puVar2	tableWordCursor	INFERRED	cursor clearing the 0x80-word table	^\s*puVar2\[2\]\ =\ 0;$@3	+2
+use	FUN_0013719c	puVar3	nodeSlotRef	INFERRED	slot reference in the node vector	^\s*puVar3\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar5\[2\]\);$	+1
+use	FUN_0013719c	puVar3	nodeSlotRef	INFERRED	slot reference in the node vector	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar5,uVar7\);$	+1
+use	FUN_0013719c	puVar3	nodeSlotRef	INFERRED	slot reference in the node vector	^\s*\*puVar3\ =\ puVar2\ \+\ 1;$	+1
+use	FUN_0013719c	puVar3	edgeBitsetWords	INFERRED	edge bitset (allocation + 1)	^\s*puVar3\ =\ puVar2\ \+\ 1;$	+1
+use	FUN_0013719c	puVar3	edgeBitsetWords	INFERRED	edge bitset (allocation + 1)	^\s*puVar2\ =\ puVar3;$	+1
+use	FUN_0013719c	puVar3	edgeBitsetWords	INFERRED	edge bitset (allocation + 1)	^\s*\*param_1\ =\ \(int\)puVar3;$	+1
+use	FUN_0013719c	puVar3	tableAlloc	INFERRED	arena block (0x20c bytes) of the 0x80-word table	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar6,0x20c\);$	+2
+use	FUN_0013719c	puVar3	tableAlloc	INFERRED	arena block (0x20c bytes) of the 0x80-word table	^\s*\*puVar3\ =\ uVar6;$	+3
+use	FUN_0013719c	puVar3	tableAlloc	INFERRED	arena block (0x20c bytes) of the 0x80-word table	^\s*param_1\[9\]\ =\ \(int\)\(puVar3\ \+\ 1\);$	+1
+use	FUN_0013719c	puVar5	nodeVector	INFERRED	node vector header (this +4)	^\s*puVar5\ =\ \(uint\ \*\)param_1\[1\];$	+1
+use	FUN_0013719c	puVar5	nodeVector	INFERRED	node vector header (this +4)	^\s*uVar7\ =\ puVar5\[1\];$	+5
+use	FUN_0013719c	puVar5	nodeVector	INFERRED	node vector header (this +4)	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar5,uVar7\);$	+1
+use	FUN_0013719c	uVar7	nodeVectorCount	INFERRED	filled count of the node vector	^\s*uVar7\ =\ puVar5\[1\];$	+5
+use	FUN_0013719c	uVar7	nodeVectorCount	INFERRED	filled count of the node vector	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar5,uVar7\);$	+1
+use	FUN_0013719c	uVar7	nodePairProduct	INFERRED	n * n - n	^\s*uVar7\ =\ iVar1\ \*\ iVar1\ \-\ iVar1;$	+2
+use	FUN_0013719c	uVar7	edgeBitsetWordCount	INFERRED	(edge bits + 31) >> 5	^\s*uVar7\ =\ iVar1\ \+\ 0x1fU\ >>\ 5;$	+2
+use	FUN_0013719c	uVar7	edgeBitsetWordCount	INFERRED	(edge bits + 31) >> 5	^\s*puVar2\[1\]\ =\ uVar7;$	+1
+use	FUN_0013719c	uVar7	edgeBitsetWordCount	INFERRED	(edge bits + 31) >> 5	^\s*if\ \(uVar7\ !=\ 0\)\ \{$	+1
+use	FUN_0013719c	uVar7	edgeBitsetWordCount	INFERRED	(edge bits + 31) >> 5	^\s*if\ \(uVar7\ ==\ 0\)\ \{$	+2
+use	FUN_0013719c	uVar7	edgeBitsetWordCount	INFERRED	(edge bits + 31) >> 5	^\s*uVar7\ =\ uVar7\ \-\ 1;$	+2
+local	FUN_00136ec4	param_1	this	INFERRED	register graph object being constructed (+0 edge bitset, +4 node vector, +8 owner, +0xc node count, +0x20..0x24 per-class arrays, +0x28 block bitset, +0x2c compiler)
+local	FUN_00136ec4	param_2	ownerArg	INFERRED	owner word stored at this +8
+local	FUN_00136ec4	param_3	nodeCount	INFERRED	number of graph nodes (stored at this +0xc)
+local	FUN_00136ec4	param_4	ownerArg4	INFERRED	word stored at this +0x28
+use	FUN_00136ec4	iVar1	nodeCountNow	INFERRED	node count re-read from the object	^\s*iVar1\ =\ param_1\[3\];$	+1
+use	FUN_00136ec4	iVar1	nodeCountNow	INFERRED	node count re-read from the object	^\s*if\ \(0\ <\ iVar1\)\ \{$	+1
+use	FUN_00136ec4	iVar1	nodeCountNow	INFERRED	node count re-read from the object	^\s*iVar1\ =\ param_1\[3\];$@2	+2
+use	FUN_00136ec4	iVar1	nodeCountNow	INFERRED	node count re-read from the object	^\s*uVar7\ =\ iVar1\ \*\ iVar1\ \-\ iVar1;$	+1
+use	FUN_00136ec4	iVar1	edgeBitCount	INFERRED	n * (n - 1) / 2: one bit per node pair	^\s*iVar1\ =\ \(\(int\)uVar7\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar7\ <\ 0\ \&\&\ \(uVar7\ \&\ 1\)\ !=\ 0\);$	+2
+use	FUN_00136ec4	iVar1	edgeBitCount	INFERRED	n * (n - 1) / 2: one bit per node pair	^\s*puVar2\[2\]\ =\ iVar1;$	+1
+use	FUN_00136ec4	iVar1	wordCountdown	INFERRED	countdown from 0x80 over the per-class table words	^\s*iVar1\ =\ 0x80;$	+1
+use	FUN_00136ec4	iVar1	wordCountdown	INFERRED	countdown from 0x80 over the per-class table words	^\s*iVar1\ =\ iVar1\ \+\ \-1;$	+2
+use	FUN_00136ec4	iVar4	classArrayBytes	INFERRED	first allocation of one word per register class	^\s*iVar4\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(param_1\[0xb\]\ \+\ 0x378\),iVar1\);$	+3
+use	FUN_00136ec4	iVar4	classArrayB	INFERRED	second allocation of one word per register class	^\s*iVar4\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(param_1\[0xb\]\ \+\ 0x378\),iVar1\);$@2	+2
+use	FUN_00136ec4	iVar4	compilerObj	INFERRED	compiler (this +0x2c)	^\s*iVar4\ =\ param_1\[0xb\];$	+1
+use	FUN_00136ec4	iVar4	compilerObj	INFERRED	compiler (this +0x2c)	^\s*if\ \(0\ <\ \*\(int\ \*\)\(\*\(int\ \*\)\(iVar4\ \+\ 0x30c\)\ \+\ 0x14\)\)\ \{$	+1
+use	FUN_00136ec4	iVar4	compilerObj	INFERRED	compiler (this +0x2c)	^\s*iVar4\ =\ param_1\[0xb\];$@2	+2
+use	FUN_00136ec4	iVar4	compilerObj	INFERRED	compiler (this +0x2c)	^\s*uVar6\ =\ \*\(undefined4\ \*\)\(iVar4\ \+\ 0x378\);$	+1
+use	FUN_00136ec4	iVar4	classByteOffset	INFERRED	byte offset into the per-class arrays	^\s*iVar4\ =\ iVar1\ \*\ 4;$	+1
+use	FUN_00136ec4	iVar4	classByteOffset	INFERRED	byte offset into the per-class arrays	^\s*\*\(undefined4\ \*\)\(param_1\[6\]\ \+\ iVar4\)\ =\ 0;$	+2
+use	FUN_00136ec4	puVar2	bitsetClearCursor	INFERRED	cursor clearing the edge bitset words	^\s*puVar2\ =\ puVar3;$	+1
+use	FUN_00136ec4	puVar2	bitsetClearCursor	INFERRED	cursor clearing the edge bitset words	^\s*puVar2\[2\]\ =\ 0;$@2	+2
+use	FUN_00136ec4	puVar2	tableWordCursor	INFERRED	cursor clearing the 0x80-word table	^\s*puVar2\ =\ puVar3\ \+\ 1;$	+1
+use	FUN_00136ec4	puVar2	tableWordCursor	INFERRED	cursor clearing the 0x80-word table	^\s*puVar2\[2\]\ =\ 0;$@3	+2
+use	FUN_00136ec4	puVar3	nodeSlotRef	INFERRED	slot reference in the node vector	^\s*puVar3\ =\ \(undefined4\ \*\)\(uVar7\ \*\ 4\ \+\ puVar5\[2\]\);$	+1
+use	FUN_00136ec4	puVar3	nodeSlotRef	INFERRED	slot reference in the node vector	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar5,uVar7\);$	+1
+use	FUN_00136ec4	puVar3	nodeSlotRef	INFERRED	slot reference in the node vector	^\s*\*puVar3\ =\ puVar2\ \+\ 1;$	+1
+use	FUN_00136ec4	puVar3	edgeBitsetWords	INFERRED	edge bitset (allocation + 1)	^\s*puVar3\ =\ puVar2\ \+\ 1;$	+1
+use	FUN_00136ec4	puVar3	edgeBitsetWords	INFERRED	edge bitset (allocation + 1)	^\s*puVar2\ =\ puVar3;$	+1
+use	FUN_00136ec4	puVar3	edgeBitsetWords	INFERRED	edge bitset (allocation + 1)	^\s*\*param_1\ =\ \(int\)puVar3;$	+1
+use	FUN_00136ec4	puVar3	tableAlloc	INFERRED	arena block (0x20c bytes) of the 0x80-word table	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_00193e18\(uVar6,0x20c\);$	+2
+use	FUN_00136ec4	puVar3	tableAlloc	INFERRED	arena block (0x20c bytes) of the 0x80-word table	^\s*\*puVar3\ =\ uVar6;$	+3
+use	FUN_00136ec4	puVar3	tableAlloc	INFERRED	arena block (0x20c bytes) of the 0x80-word table	^\s*param_1\[9\]\ =\ \(int\)\(puVar3\ \+\ 1\);$	+1
+use	FUN_00136ec4	puVar5	nodeVector	INFERRED	node vector header (this +4)	^\s*puVar5\ =\ \(uint\ \*\)param_1\[1\];$	+1
+use	FUN_00136ec4	puVar5	nodeVector	INFERRED	node vector header (this +4)	^\s*uVar7\ =\ puVar5\[1\];$	+5
+use	FUN_00136ec4	puVar5	nodeVector	INFERRED	node vector header (this +4)	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar5,uVar7\);$	+1
+use	FUN_00136ec4	uVar7	nodeVectorCount	INFERRED	filled count of the node vector	^\s*uVar7\ =\ puVar5\[1\];$	+5
+use	FUN_00136ec4	uVar7	nodeVectorCount	INFERRED	filled count of the node vector	^\s*puVar3\ =\ \(undefined4\ \*\)FUN_0019423c\(puVar5,uVar7\);$	+1
+use	FUN_00136ec4	uVar7	nodePairProduct	INFERRED	n * n - n	^\s*uVar7\ =\ iVar1\ \*\ iVar1\ \-\ iVar1;$	+2
+use	FUN_00136ec4	uVar7	edgeBitsetWordCount	INFERRED	(edge bits + 31) >> 5	^\s*uVar7\ =\ iVar1\ \+\ 0x1fU\ >>\ 5;$	+2
+use	FUN_00136ec4	uVar7	edgeBitsetWordCount	INFERRED	(edge bits + 31) >> 5	^\s*puVar2\[1\]\ =\ uVar7;$	+1
+use	FUN_00136ec4	uVar7	edgeBitsetWordCount	INFERRED	(edge bits + 31) >> 5	^\s*if\ \(uVar7\ !=\ 0\)\ \{$	+1
+use	FUN_00136ec4	uVar7	edgeBitsetWordCount	INFERRED	(edge bits + 31) >> 5	^\s*if\ \(uVar7\ ==\ 0\)\ \{$	+2
+use	FUN_00136ec4	uVar7	edgeBitsetWordCount	INFERRED	(edge bits + 31) >> 5	^\s*uVar7\ =\ uVar7\ \-\ 1;$	+2

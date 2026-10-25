@@ -4630,7 +4630,7 @@ int Block__flattenAndRebuildAddMulTree(compiler, block, inst)
         elementRefB = (undefined4 *)Vector__elementRefGrow(vector2,prevIndex);
       }
       operandRecord2 = IRInst__getOperandRecord(inst5,*elementRefB);
-      FUN_000f33f8(&laneSelect3,*(undefined4 *)(operandRecord2 + 0x10));
+      SelectWord__fillUnusedWithFirstUsed(&laneSelect3,*(undefined4 *)(operandRecord2 + 0x10));
       lane1Select = laneSelect3 & 0xff;
       if (pairLoopIndex < *vector3) {
         vectorSize5 = vectorAlloc[2];
@@ -4656,7 +4656,7 @@ int Block__flattenAndRebuildAddMulTree(compiler, block, inst)
         elementRefB = (undefined4 *)Vector__elementRefGrow(vector2,pairLoopIndex);
       }
       operandRecord2 = IRInst__getOperandRecord(inst6,*elementRefB);
-      FUN_000f33f8(&laneSelect2,*(undefined4 *)(operandRecord2 + 0x10));
+      SelectWord__fillUnusedWithFirstUsed(&laneSelect2,*(undefined4 *)(operandRecord2 + 0x10));
       lane2Select = laneSelect2 & 0xff;
       operandRecord2 = IRInst__getOperandRecord(newInst,1);
       *(uint *)(operandRecord2 + 0x10) = lane1Select | 0x4040400;
@@ -4884,7 +4884,7 @@ int Block__flattenAndRebuildAddMulTree(compiler, block, inst)
       elementRefB = (undefined4 *)vectorAlloc2[3];
     }
     operandRecord6 = IRInst__getOperandRecord(inst8,*elementRefB);
-    FUN_000f33f8(&laneSelect1,*(undefined4 *)(operandRecord6 + 0x10));
+    SelectWord__fillUnusedWithFirstUsed(&laneSelect1,*(undefined4 *)(operandRecord6 + 0x10));
     operandRecord6 = IRInst__getOperandRecord(firstJoinInst,2);
     *(uint *)(operandRecord6 + 0x10) = laneSelect1 & 0xff | 0x4040400;
     if (*vector3 == 0) {
@@ -6462,7 +6462,7 @@ LAB_00185afc:
       IROperand__setModifierBits(inst + 0xd4,2,addendAbs);
       callResult = IRInst__getOperandRecord(inst,3);
       *(undefined4 *)(callResult + 0x10) = addendOperandSelect;
-      FUN_000f33f8(&addendSelect3,addendSelect);
+      SelectWord__fillUnusedWithFirstUsed(&addendSelect3,addendSelect);
       callResult = IRInst__getOperandRecord(inst,3);
       *(undefined4 *)(callResult + 0x10) = addendSelect3;
                     

@@ -421,9 +421,9 @@ LAB_001874d4:
           lanesLeft = lanesLeft + -1;
         } while (lanesLeft != 0);
         valueNumberTable = *(undefined4 *)(program + 0x3ac);
-        local_a8 = (int *)FUN_000f5f94(valueNumberTable,constLanes,local_a4,programCopy,compilerCtx,uVar9,laneCursor);
+        local_a8 = (int *)RegisterMap__findConstVectorExact(valueNumberTable,constLanes,local_a4,programCopy,compilerCtx,uVar9,laneCursor);
         if (local_a8 == (int *)0x0) {
-          local_a8 = (int *)FUN_000f57f0(valueNumberTable,constLanes,local_a4,programCopy);
+          local_a8 = (int *)RegisterMap__findConstVector(valueNumberTable,constLanes,local_a4,programCopy);
         }
         selectWord = local_a4[0];
         if (local_a8 == (int *)0x0) {
@@ -509,9 +509,9 @@ LAB_001874d4:
           lanesRemaining = lanesRemaining + -1;
         } while (lanesRemaining != 0);
         programValueTable = *(undefined4 *)(program + 0x3ac);
-        local_a4[1] = (int *)FUN_000f5f94(programValueTable,constLanes,local_a4,constantKindPtr,compilerCtx,uVar9,loopPtr3);
+        local_a4[1] = (int *)RegisterMap__findConstVectorExact(programValueTable,constLanes,local_a4,constantKindPtr,compilerCtx,uVar9,loopPtr3);
         if (local_a4[1] == (int *)0x0) {
-          local_a4[1] = (int *)FUN_000f57f0(programValueTable,constLanes,local_a4,constantKindPtr);
+          local_a4[1] = (int *)RegisterMap__findConstVector(programValueTable,constLanes,local_a4,constantKindPtr);
         }
         selectWord = local_a4[0];
         if (local_a4[1] == (int *)0x0) {

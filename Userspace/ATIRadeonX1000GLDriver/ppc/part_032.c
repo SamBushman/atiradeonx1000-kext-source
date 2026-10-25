@@ -450,120 +450,124 @@ int FUN_0010ff24(param_1, vector)
 }
 
 /* FUN_00110020 @ 0x110020 (204 bytes) */
-int FUN_00110020(program, param_2)
+int FUN_00110020(program, valueKey)
   int program;
-  int param_2;
+  int valueKey;
 {
+  int laneNumber;
+  int kindQuery690;
+  int kindQuery6e8;
+  int kindQuery744;
   uint vectorAt418Count;
   uint *vectorAt418;
   undefined4 *allocation;
   undefined4 arena;
   int valueNumberEnabled;
   int operandRecord2;
-  bool bVar1;
-  int iVar2;
-  undefined4 *puVar3;
+  bool moreLanes;
+  int isOutputInst;
+  undefined4 *exportListSlotRef;
   int operandRecord;
-  undefined4 uVar5;
-  undefined4 uVar6;
-  undefined4 *puVar7;
-  int *piVar8;
-  undefined4 uVar9;
-  uint uVar10;
-  undefined4 uVar11;
-  undefined4 uVar12;
+  undefined4 laneIndexValue;
+  undefined4 semanticCode;
+  undefined4 *laneRecordSlotRef;
+  int *exportRecord;
+  undefined4 laneValue;
+  uint exportListCount;
+  undefined4 destRegister;
+  undefined4 laneKind;
   undefined4 arenaAt374;
-  int *piVar14;
-  uint *puVar15;
+  int *outputInst;
+  uint *exportListVector;
   
-  piVar14 = *(int **)(param_2 + 0xb0);
-  iVar2 = FUN_0010e634(piVar14);
-  if (iVar2 == 0) {
+  outputInst = *(int **)(valueKey + 0xb0);
+  isOutputInst = FUN_0010e634(outputInst);
+  if (isOutputInst == 0) {
     return;
   }
-  operandRecord2 = IRInst__getOperandRecord(piVar14,0);
+  operandRecord2 = IRInst__getOperandRecord(outputInst,0);
   if (*(int *)(operandRecord2 + 0x10) == DAT_001afa14) {
-    Program__removeInst(program,piVar14);
+    Program__removeInst(program,outputInst);
                     
                     
-    (**(code **)(*piVar14 + 0xc))(piVar14,0,*(undefined4 *)(program + 8));
+    (**(code **)(*outputInst + 0xc))(outputInst,0,*(undefined4 *)(program + 8));
     return;
   }
   arena = *(undefined4 *)(*(int *)(program + 8) + 0x374);
   allocation = (undefined4 *)Arena__alloc(arena,0x30);
-  piVar8 = allocation + 1;
+  exportRecord = allocation + 1;
   *allocation = arena;
-  FUN_0010e814(piVar8,piVar14);
-  iVar2 = FUN_0010e744(piVar14);
-  if (iVar2 == 0) {
-    iVar2 = FUN_0010e6e8(piVar14);
-    if (iVar2 == 0) {
-      iVar2 = FUN_0010e690(piVar14);
-      if (iVar2 == 0) goto LAB_001101ac;
-      puVar15 = *(uint **)(program + 0x424);
-      uVar10 = puVar15[1];
-      if (uVar10 < *puVar15) goto LAB_00110170;
+  FUN_0010e814(exportRecord,outputInst);
+  kindQuery744 = FUN_0010e744(outputInst);
+  if (kindQuery744 == 0) {
+    kindQuery6e8 = FUN_0010e6e8(outputInst);
+    if (kindQuery6e8 == 0) {
+      kindQuery690 = FUN_0010e690(outputInst);
+      if (kindQuery690 == 0) goto LAB_001101ac;
+      exportListVector = *(uint **)(program + 0x424);
+      exportListCount = exportListVector[1];
+      if (exportListCount < *exportListVector) goto LAB_00110170;
     }
     else {
-      puVar15 = *(uint **)(program + 0x420);
-      uVar10 = puVar15[1];
-      if (uVar10 < *puVar15) goto LAB_00110170;
+      exportListVector = *(uint **)(program + 0x420);
+      exportListCount = exportListVector[1];
+      if (exportListCount < *exportListVector) goto LAB_00110170;
     }
 LAB_0011019c:
-    puVar3 = (undefined4 *)Vector__elementRefGrow(puVar15,uVar10);
+    exportListSlotRef = (undefined4 *)Vector__elementRefGrow(exportListVector,exportListCount);
   }
   else {
-    puVar15 = *(uint **)(program + 0x41c);
-    uVar10 = puVar15[1];
-    if (*puVar15 <= uVar10) goto LAB_0011019c;
+    exportListVector = *(uint **)(program + 0x41c);
+    exportListCount = exportListVector[1];
+    if (*exportListVector <= exportListCount) goto LAB_0011019c;
 LAB_00110170:
-    _memset((void *)(uVar10 * 4 + puVar15[2]),0,4);
-    puVar3 = (undefined4 *)(uVar10 * 4 + puVar15[2]);
-    puVar15[1] = uVar10 + 1;
+    _memset((void *)(exportListCount * 4 + exportListVector[2]),0,4);
+    exportListSlotRef = (undefined4 *)(exportListCount * 4 + exportListVector[2]);
+    exportListVector[1] = exportListCount + 1;
   }
-  *puVar3 = piVar8;
+  *exportListSlotRef = exportRecord;
 LAB_001101ac:
   valueNumberEnabled = Compiler__isOptionEnabled(*(undefined4 *)(program + 8),7);
   if (valueNumberEnabled != 0) {
-    ValueKey__initResultLaneValues(param_2);
-    FUN_0010e8e4(piVar8,param_2 + 0x20);
+    ValueKey__initResultLaneValues(valueKey);
+    FUN_0010e8e4(exportRecord,valueKey + 0x20);
   }
-  iVar2 = 0;
+  laneNumber = 0;
   do {
-    operandRecord = IRInst__getOperandRecord(*piVar8,0);
-    if (*(char *)(iVar2 + operandRecord + 0x10) != '\x01') {
-      uVar9 = *(undefined4 *)(param_2 + 0x20);
-      uVar12 = IRLoadInterp__laneKind_104ee4(*piVar8,iVar2);
-      uVar5 = IRLoadInterp__laneIndex_104180(*piVar8,iVar2);
-      uVar11 = *(undefined4 *)(*piVar8 + 0x94);
-      uVar6 = FUN_0010e368(*(undefined4 *)(*piVar8 + 0x13c));
+    operandRecord = IRInst__getOperandRecord(*exportRecord,0);
+    if (*(char *)(laneNumber + operandRecord + 0x10) != '\x01') {
+      laneValue = *(undefined4 *)(valueKey + 0x20);
+      laneKind = IRLoadInterp__laneKind_104ee4(*exportRecord,laneNumber);
+      laneIndexValue = IRLoadInterp__laneIndex_104180(*exportRecord,laneNumber);
+      destRegister = *(undefined4 *)(*exportRecord + 0x94);
+      semanticCode = FUN_0010e368(*(undefined4 *)(*exportRecord + 0x13c));
       arenaAt374 = *(undefined4 *)(*(int *)(program + 8) + 0x374);
       allocation = (undefined4 *)Arena__alloc(arenaAt374,0x24);
       *allocation = arenaAt374;
-      allocation[1] = uVar9;
-      allocation[2] = uVar12;
-      allocation[3] = uVar5;
-      allocation[6] = uVar11;
-      allocation[8] = uVar6;
-      allocation[4] = uVar11;
-      allocation[5] = iVar2;
-      allocation[7] = iVar2;
+      allocation[1] = laneValue;
+      allocation[2] = laneKind;
+      allocation[3] = laneIndexValue;
+      allocation[6] = destRegister;
+      allocation[8] = semanticCode;
+      allocation[4] = destRegister;
+      allocation[5] = laneNumber;
+      allocation[7] = laneNumber;
       vectorAt418 = *(uint **)(program + 0x418);
       vectorAt418Count = vectorAt418[1];
       if (vectorAt418Count < *vectorAt418) {
         _memset((void *)(vectorAt418Count * 4 + vectorAt418[2]),0,4);
-        puVar7 = (undefined4 *)(vectorAt418Count * 4 + vectorAt418[2]);
+        laneRecordSlotRef = (undefined4 *)(vectorAt418Count * 4 + vectorAt418[2]);
         vectorAt418[1] = vectorAt418Count + 1;
       }
       else {
-        puVar7 = (undefined4 *)Vector__elementRefGrow(vectorAt418,vectorAt418Count);
+        laneRecordSlotRef = (undefined4 *)Vector__elementRefGrow(vectorAt418,vectorAt418Count);
       }
-      *puVar7 = allocation + 1;
+      *laneRecordSlotRef = allocation + 1;
     }
-    bVar1 = iVar2 != 3;
-    param_2 = param_2 + 4;
-    iVar2 = iVar2 + 1;
-  } while (bVar1);
+    moreLanes = laneNumber != 3;
+    valueKey = valueKey + 4;
+    laneNumber = laneNumber + 1;
+  } while (moreLanes);
   return;
 }
 

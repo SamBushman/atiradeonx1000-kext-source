@@ -1768,7 +1768,7 @@ int _gldGetPipelineProgramInfo(arg0, arg1, arg2, arg3)
   undefined4 arg2;
   undefined4 arg3;
 {
-  FUN_000269a0(arg0,arg1,arg2,arg3);
+  gld_getProgramParameter(arg0,arg1,arg2,arg3);
   return 0;
 }
 

@@ -1,171 +1,184 @@
 #include "decls.h"
 
 /* FUN_0004c260 @ 0x4c260 (732 bytes) */
-int FUN_0004c260(param_1, param_2, param_3)
-  undefined4 *param_1;
-  int param_2;
-  int param_3;
+int FUN_0004c260(cmdCursor, programObj, stageSelect)
+  undefined4 *cmdCursor;
+  int programObj;
+  int stageSelect;
 {
+  uint dirtyBits;
+  uint registerPacketWord;
+  uint dirtyRegisterMask;
+  uint bitBase;
+  undefined4 bankWord3;
+  undefined4 bankWord2;
+  undefined4 bankWord1;
+  undefined4 *vectorOut;
+  undefined *registerAddr;
+  undefined *headerWordPtr;
+  undefined4 *vectorWordPtr;
+  int objCursor2;
+  int objCursor;
   int loopIndex;
-  bool bVar1;
-  char cVar2;
-  int iVar3;
-  uint uVar4;
-  undefined4 uVar5;
-  uint uVar6;
-  undefined4 *puVar7;
-  int iVar8;
-  undefined *puVar9;
-  int iVar10;
-  undefined4 *puVar11;
-  undefined *puVar12;
-  uint uVar13;
-  int iVar14;
-  uint uVar15;
-  int iVar16;
-  int iVar17;
+  bool moreBlocks;
+  char bankEmitted;
+  int wordByteOffset;
+  uint registerNumber;
+  undefined4 bankWord0;
+  uint headerCountWord;
+  undefined4 *packetOut;
+  int vectorCount;
+  undefined *bankHeaderPtr;
+  int registerBlock;
+  undefined4 *bankState;
+  undefined *bankBase;
+  uint headerPairCount;
+  int vectorByteOffset;
+  uint headerPairPos;
+  int wordIndex;
+  int wordsLeft;
   
-  if (param_3 == 0) {
-    cVar2 = ((unsigned char *)0x000010e9)[param_2];
-    iVar8 = *(int *)(((unsigned char *)0x000036a8) + param_2);
-    puVar11 = (undefined4 *)(param_2 + 4);
-    puVar12 = ((unsigned char *)0x000010ec);
+  if (stageSelect == 0) {
+    bankEmitted = ((unsigned char *)0x000010e9)[programObj];
+    vectorCount = *(int *)(((unsigned char *)0x000036a8) + programObj);
+    bankState = (undefined4 *)(programObj + 4);
+    bankBase = ((unsigned char *)0x000010ec);
   }
   else {
-    cVar2 = ((unsigned char *)0x000010ea)[param_2];
-    iVar8 = *(int *)(((unsigned char *)0x000036b4) + param_2);
-    puVar11 = (undefined4 *)(param_2 + 0x20);
-    puVar12 = ((unsigned char *)0x00001318);
+    bankEmitted = ((unsigned char *)0x000010ea)[programObj];
+    vectorCount = *(int *)(((unsigned char *)0x000036b4) + programObj);
+    bankState = (undefined4 *)(programObj + 0x20);
+    bankBase = ((unsigned char *)0x00001318);
   }
-  puVar12 = puVar12 + param_2;
-  if (iVar8 != 0) {
-    if (cVar2 == '\0') {
-      uVar15 = 0;
-      puVar9 = puVar12 + 0x44;
-      puVar7 = param_1 + 0xf;
-      *param_1 = ((unsigned char *)0x00001181U);
-      dataCacheBlockTouch(puVar9);
-      uVar5 = *puVar11;
-      param_1[2] = ((unsigned char *)0x00001189U);
-      param_1[1] = uVar5;
-      uVar5 = puVar11[1];
-      param_1[4] = ((unsigned char *)0x00001188U);
-      param_1[6] = ((unsigned char *)0x0000118cU);
-      param_1[5] = 0;
-      param_1[3] = uVar5;
-      uVar5 = puVar11[2];
-      param_1[8] = ((unsigned char *)0x0000118dU);
-      param_1[7] = uVar5;
-      uVar5 = puVar11[3];
-      param_1[10] = ((unsigned char *)0x0000118eU);
-      param_1[0xb] = 0;
-      param_1[0xc] = ((unsigned char *)0x000010c1U);
-      param_1[9] = uVar5;
-      param_1[0xd] = *(undefined4 *)(puVar12 + 0x44);
-      param_1[0xe] = (*(uint *)(puVar12 + 0x44) & 0xf) << 0x10 | 0x10c8;
-      uVar6 = *(uint *)(puVar12 + 0x44);
-      uVar13 = uVar6 & 0xf;
-      puVar12 = puVar9;
-      if (uVar13 == 0) {
-        uVar15 = 0;
+  bankBase = bankBase + programObj;
+  if (vectorCount != 0) {
+    if (bankEmitted == '\0') {
+      headerPairPos = 0;
+      bankHeaderPtr = bankBase + 0x44;
+      packetOut = cmdCursor + 0xf;
+      *cmdCursor = ((unsigned char *)0x00001181U);
+      dataCacheBlockTouch(bankHeaderPtr);
+      bankWord0 = *bankState;
+      cmdCursor[2] = ((unsigned char *)0x00001189U);
+      cmdCursor[1] = bankWord0;
+      bankWord1 = bankState[1];
+      cmdCursor[4] = ((unsigned char *)0x00001188U);
+      cmdCursor[6] = ((unsigned char *)0x0000118cU);
+      cmdCursor[5] = 0;
+      cmdCursor[3] = bankWord1;
+      bankWord2 = bankState[2];
+      cmdCursor[8] = ((unsigned char *)0x0000118dU);
+      cmdCursor[7] = bankWord2;
+      bankWord3 = bankState[3];
+      cmdCursor[10] = ((unsigned char *)0x0000118eU);
+      cmdCursor[0xb] = 0;
+      cmdCursor[0xc] = ((unsigned char *)0x000010c1U);
+      cmdCursor[9] = bankWord3;
+      cmdCursor[0xd] = *(undefined4 *)(bankBase + 0x44);
+      cmdCursor[0xe] = (*(uint *)(bankBase + 0x44) & 0xf) << 0x10 | 0x10c8;
+      headerCountWord = *(uint *)(bankBase + 0x44);
+      headerPairCount = headerCountWord & 0xf;
+      headerWordPtr = bankHeaderPtr;
+      if (headerPairCount == 0) {
+        headerPairPos = 0;
       }
       else {
         do {
-          uVar15 = uVar15 + 2;
-          *puVar7 = *(undefined4 *)(puVar12 + 4);
-          puVar7[1] = *(undefined4 *)(puVar12 + 8);
-          puVar7 = puVar7 + 2;
-          puVar12 = puVar12 + 8;
-        } while (uVar15 < uVar13);
+          headerPairPos = headerPairPos + 2;
+          *packetOut = *(undefined4 *)(headerWordPtr + 4);
+          packetOut[1] = *(undefined4 *)(headerWordPtr + 8);
+          packetOut = packetOut + 2;
+          headerWordPtr = headerWordPtr + 8;
+        } while (headerPairPos < headerPairCount);
       }
-      if ((uVar6 & 1) == 0) {
-        *puVar7 = *(undefined4 *)(puVar9 + uVar15 * 4 + 4);
-        puVar7 = puVar7 + 1;
+      if ((headerCountWord & 1) == 0) {
+        *packetOut = *(undefined4 *)(bankHeaderPtr + headerPairPos * 4 + 4);
+        packetOut = packetOut + 1;
       }
-      param_1 = puVar7 + 3;
-      puVar7[1] = 0;
-      *puVar7 = ((unsigned char *)0x00001094U);
-      puVar7[2] = (iVar8 * 6 + -1) * 0x10000 | 0x9095;
-      if (0 < iVar8) {
+      cmdCursor = packetOut + 3;
+      packetOut[1] = 0;
+      *packetOut = ((unsigned char *)0x00001094U);
+      packetOut[2] = (vectorCount * 6 + -1) * 0x10000 | 0x9095;
+      if (0 < vectorCount) {
         loopIndex = 0;
-        iVar14 = 0;
+        vectorByteOffset = 0;
         do {
-          iVar16 = 0;
-          iVar17 = 6;
-          puVar7 = param_1;
+          wordIndex = 0;
+          wordsLeft = 6;
+          vectorOut = cmdCursor;
           do {
-            iVar3 = iVar16 * 4;
-            iVar16 = iVar16 + 1;
-            *puVar7 = *(undefined4 *)(iVar3 + iVar14 + puVar11[4]);
-            puVar7 = puVar7 + 1;
-            iVar17 = iVar17 + -1;
-          } while (iVar17 != 0);
+            wordByteOffset = wordIndex * 4;
+            wordIndex = wordIndex + 1;
+            *vectorOut = *(undefined4 *)(wordByteOffset + vectorByteOffset + bankState[4]);
+            vectorOut = vectorOut + 1;
+            wordsLeft = wordsLeft + -1;
+          } while (wordsLeft != 0);
           loopIndex = loopIndex + 1;
-          param_1 = param_1 + 6;
-          iVar14 = iVar14 + 0x18;
-        } while (iVar8 != loopIndex);
+          cmdCursor = cmdCursor + 6;
+          vectorByteOffset = vectorByteOffset + 0x18;
+        } while (vectorCount != loopIndex);
       }
     }
-    if (((unsigned char *)0x000010eb)[param_2] == '\0') {
-      dataCacheBlockTouch(param_2);
-      uVar13 = 0x10000;
-      uVar6 = 0;
-      iVar10 = param_2 + 0x80;
-      iVar8 = param_2;
+    if (((unsigned char *)0x000010eb)[programObj] == '\0') {
+      dataCacheBlockTouch(programObj);
+      registerPacketWord = 0x10000;
+      bitBase = 0;
+      registerBlock = programObj + 0x80;
+      objCursor = programObj;
       do {
-        uVar15 = *(uint *)(((unsigned char *)0x000010b8) + iVar8);
-        if (uVar15 != 0) {
-          puVar11 = (undefined4 *)(iVar10 + 0xc);
-          uVar4 = uVar6;
+        dirtyBits = *(uint *)(((unsigned char *)0x000010b8) + objCursor);
+        if (dirtyBits != 0) {
+          vectorWordPtr = (undefined4 *)(registerBlock + 0xc);
+          registerNumber = bitBase;
           do {
-            if ((uVar15 & 1) != 0) {
-              uVar13 = uVar4 & 0x1ff | uVar13 & 0xfffffe00;
-              *param_1 = ((unsigned char *)0x00001094U);
-              param_1[2] = 0x39095;
-              param_1[1] = uVar13;
-              param_1[3] = *puVar11;
-              param_1[4] = puVar11[1];
-              param_1[5] = puVar11[2];
-              param_1[6] = puVar11[3];
-              param_1 = param_1 + 7;
+            if ((dirtyBits & 1) != 0) {
+              registerPacketWord = registerNumber & 0x1ff | registerPacketWord & 0xfffffe00;
+              *cmdCursor = ((unsigned char *)0x00001094U);
+              cmdCursor[2] = 0x39095;
+              cmdCursor[1] = registerPacketWord;
+              cmdCursor[3] = *vectorWordPtr;
+              cmdCursor[4] = vectorWordPtr[1];
+              cmdCursor[5] = vectorWordPtr[2];
+              cmdCursor[6] = vectorWordPtr[3];
+              cmdCursor = cmdCursor + 7;
             }
-            uVar15 = uVar15 >> 1;
-            uVar4 = (uVar4 & 0x1ff) + 1;
-            puVar11 = puVar11 + 4;
-          } while (uVar15 != 0);
+            dirtyBits = dirtyBits >> 1;
+            registerNumber = (registerNumber & 0x1ff) + 1;
+            vectorWordPtr = vectorWordPtr + 4;
+          } while (dirtyBits != 0);
         }
-        bVar1 = uVar6 != 0xe0;
-        iVar8 = iVar8 + 4;
-        iVar10 = iVar10 + 0x200;
-        uVar6 = uVar6 + 0x20;
-      } while (bVar1);
-      uVar6 = *(uint *)(((unsigned char *)0x00003748) + param_2);
-      if (uVar6 != 0) {
-        puVar12 = ((unsigned char *)0x00001300U);
-        iVar8 = param_2;
+        moreBlocks = bitBase != 0xe0;
+        objCursor = objCursor + 4;
+        registerBlock = registerBlock + 0x200;
+        bitBase = bitBase + 0x20;
+      } while (moreBlocks);
+      dirtyRegisterMask = *(uint *)(((unsigned char *)0x00003748) + programObj);
+      if (dirtyRegisterMask != 0) {
+        registerAddr = ((unsigned char *)0x00001300U);
+        objCursor2 = programObj;
         do {
-          if ((uVar6 & 1) != 0) {
-            *param_1 = puVar12;
-            param_1[1] = *(undefined4 *)(((unsigned char *)0x000036c8) + iVar8);
-            param_1 = param_1 + 2;
+          if ((dirtyRegisterMask & 1) != 0) {
+            *cmdCursor = registerAddr;
+            cmdCursor[1] = *(undefined4 *)(((unsigned char *)0x000036c8) + objCursor2);
+            cmdCursor = cmdCursor + 2;
           }
-          uVar6 = uVar6 >> 1;
-          puVar12 = puVar12 + 1;
-          iVar8 = iVar8 + 4;
-        } while (uVar6 != 0);
+          dirtyRegisterMask = dirtyRegisterMask >> 1;
+          registerAddr = registerAddr + 1;
+          objCursor2 = objCursor2 + 4;
+        } while (dirtyRegisterMask != 0);
       }
     }
-    if (param_3 == 0) {
-      ((unsigned char *)0x000010ea)[param_2] = 0;
-      ((unsigned char *)0x000010e9)[param_2] = 1;
+    if (stageSelect == 0) {
+      ((unsigned char *)0x000010ea)[programObj] = 0;
+      ((unsigned char *)0x000010e9)[programObj] = 1;
     }
     else {
-      ((unsigned char *)0x000010e9)[param_2] = 0;
-      ((unsigned char *)0x000010ea)[param_2] = 1;
+      ((unsigned char *)0x000010e9)[programObj] = 0;
+      ((unsigned char *)0x000010ea)[programObj] = 1;
     }
-    ((unsigned char *)0x000010eb)[param_2] = 1;
+    ((unsigned char *)0x000010eb)[programObj] = 1;
   }
-  return param_1;
+  return cmdCursor;
 }
 
 /* noop_4c540 @ 0x4c540 (4 bytes) */
@@ -175,90 +188,94 @@ int noop_4c540()
 }
 
 /* FUN_0004c560 @ 0x4c560 (440 bytes) */
-int FUN_0004c560(glContext, param_2)
+int FUN_0004c560(glContext, programObj)
   int glContext;
-  int param_2;
+  int programObj;
 {
+  undefined4 *cmdEnd;
+  undefined4 *ctxWordPtr;
+  int ctxWordOffset;
   int glContextWord1e68;
-  char cVar1;
-  undefined *puVar2;
-  int iVar3;
-  undefined4 uVar4;
-  undefined4 *puVar5;
-  uint a2;
+  char bankEmitted;
+  undefined *bankBase;
+  int vectorCount;
+  undefined4 cmdBuffer;
+  undefined4 *cmdAfterState;
+  uint stageFlag;
   undefined4 in_r6;
   undefined4 in_r7;
   undefined4 in_r8;
-  undefined4 *puVar6;
-  int iVar7;
+  undefined4 *cmdCursor;
+  int wordsLeft;
   
   glContextWord1e68 = *(int *)(glContext + 0x1e68);
-  if (glContextWord1e68 != param_2) {
+  if (glContextWord1e68 != programObj) {
     if (glContextWord1e68 != 0) {
       ((unsigned char *)0x000010e9)[glContextWord1e68] = 0;
       ((unsigned char *)0x000010ea)[*(int *)(glContext + 0x1e68)] = 0;
       ((unsigned char *)0x000010eb)[*(int *)(glContext + 0x1e68)] = 0;
     }
-    ((unsigned char *)0x000010eb)[param_2] = 0;
-    ((unsigned char *)0x000010e9)[param_2] = 0;
-    ((unsigned char *)0x000010ea)[param_2] = 0;
+    ((unsigned char *)0x000010eb)[programObj] = 0;
+    ((unsigned char *)0x000010e9)[programObj] = 0;
+    ((unsigned char *)0x000010ea)[programObj] = 0;
   }
-  *(int *)(glContext + 0x1e68) = param_2;
-  if ((glContextWord1e68 != param_2) && (*(int *)(((unsigned char *)0x000010d8) + param_2) != 0)) {
+  *(int *)(glContext + 0x1e68) = programObj;
+  if ((glContextWord1e68 != programObj) && (*(int *)(((unsigned char *)0x000010d8) + programObj) != 0)) {
     ((int (*)())gldValidateTexEnvColor)(glContext);
   }
   if (*(uint *)(glContext + 0x23e0) == 0) {
-    cVar1 = ((unsigned char *)0x000010e9)[param_2];
+    bankEmitted = ((unsigned char *)0x000010e9)[programObj];
   }
   else {
-    cVar1 = ((unsigned char *)0x000010ea)[param_2];
+    bankEmitted = ((unsigned char *)0x000010ea)[programObj];
   }
-  if ((cVar1 == '\0') || (((unsigned char *)0x000010eb)[param_2] == '\0')) {
+  if ((bankEmitted == '\0') || (((unsigned char *)0x000010eb)[programObj] == '\0')) {
     if ((*(uint *)(glContext + 0x23e0) & 0xff) == 0) {
-      iVar3 = *(int *)(((unsigned char *)0x000036a8) + param_2);
-      puVar2 = ((unsigned char *)0x000010ec);
+      vectorCount = *(int *)(((unsigned char *)0x000036a8) + programObj);
+      bankBase = ((unsigned char *)0x000010ec);
     }
     else {
-      iVar3 = *(int *)(((unsigned char *)0x000036b4) + param_2);
-      puVar2 = ((unsigned char *)0x00001318);
+      vectorCount = *(int *)(((unsigned char *)0x000036b4) + programObj);
+      bankBase = ((unsigned char *)0x00001318);
     }
-    uVar4 = (**(code **)(glContext + 0x2758))
-                      (glContext,iVar3 * 6 + (*(uint *)(puVar2 + param_2 + 0x44) & 0xf) + 0x910);
-    a2 = (uint)*(byte *)(glContext + 0x23e3);
-    *(undefined4 *)(0x00002748 + glContext + 4) = uVar4;
-    puVar5 = (undefined4 *)((int (*)())FUN_0004c260)(uVar4,param_2,a2);
-    *puVar5 = 0x7101d;
-    *(undefined4 **)(0x00002748 + glContext + 4) = puVar5 + 1;
-    iVar7 = 8;
-    iVar3 = glContext;
+    cmdBuffer = (**(code **)(glContext + 0x2758))
+                      (glContext,vectorCount * 6 + (*(uint *)(bankBase + programObj + 0x44) & 0xf) + 0x910);
+    stageFlag = (uint)*(byte *)(glContext + 0x23e3);
+    *(undefined4 *)(0x00002748 + glContext + 4) = cmdBuffer;
+    cmdAfterState = (undefined4 *)((int (*)())FUN_0004c260)(cmdBuffer,programObj,stageFlag);
+    *cmdAfterState = 0x7101d;
+    *(undefined4 **)(0x00002748 + glContext + 4) = cmdAfterState + 1;
+    wordsLeft = 8;
+    ctxWordOffset = glContext;
     do {
-      puVar6 = *(undefined4 **)(0x00002748 + glContext + 4);
-      puVar5 = (undefined4 *)(iVar3 + 0x1ee8);
-      iVar3 = iVar3 + 4;
-      *puVar6 = *puVar5;
-      *(undefined4 **)(0x00002748 + glContext + 4) = puVar6 + 1;
-      iVar7 = iVar7 + -1;
-    } while (iVar7 != 0);
-    puVar5 = puVar6 + 5;
-    puVar6[1] = ((unsigned char *)0x000011adU);
-    puVar6[2] = *(undefined4 *)(0x00002348 + glContext + 4);
-    puVar6[3] = ((unsigned char *)0x000010c0U);
-    puVar6[4] = *(undefined4 *)(glContext + 0x1f2c);
-    *(undefined4 **)(0x00002748 + glContext + 4) = puVar5;
-    (**(code **)(glContext + 0x275c))(glContext,puVar5,a2,in_r6,in_r7,in_r8,puVar5);
+      cmdCursor = *(undefined4 **)(0x00002748 + glContext + 4);
+      ctxWordPtr = (undefined4 *)(ctxWordOffset + 0x1ee8);
+      ctxWordOffset = ctxWordOffset + 4;
+      *cmdCursor = *ctxWordPtr;
+      *(undefined4 **)(0x00002748 + glContext + 4) = cmdCursor + 1;
+      wordsLeft = wordsLeft + -1;
+    } while (wordsLeft != 0);
+    cmdEnd = cmdCursor + 5;
+    cmdCursor[1] = ((unsigned char *)0x000011adU);
+    cmdCursor[2] = *(undefined4 *)(0x00002348 + glContext + 4);
+    cmdCursor[3] = ((unsigned char *)0x000010c0U);
+    cmdCursor[4] = *(undefined4 *)(glContext + 0x1f2c);
+    *(undefined4 **)(0x00002748 + glContext + 4) = cmdEnd;
+    (**(code **)(glContext + 0x275c))(glContext,cmdEnd,stageFlag,in_r6,in_r7,in_r8,cmdEnd);
   }
-  *(int *)(glContext + 0x1e64) = param_2;
+  *(int *)(glContext + 0x1e64) = programObj;
   return;
 }
 
 /* FUN_0004c720 @ 0x4c720 (1632 bytes) */
-int FUN_0004c720(glContext, param_2, param_3, param_4, param_5)
+int FUN_0004c720(glContext, param_2, unusedArg3, unusedArg4, unusedArg5)
   int glContext;
   int param_2;
-  undefined4 param_3;
-  undefined4 param_4;
-  undefined4 param_5;
+  undefined4 unusedArg3;
+  undefined4 unusedArg4;
+  undefined4 unusedArg5;
 {
+  uint componentStart;
   uint vapOutVtxFmt0;
   int glContextWord276c;
   int loopIndex;
@@ -268,10 +285,10 @@ int FUN_0004c720(glContext, param_2, param_3, param_4, param_5)
   uint uVar4;
   undefined4 uVar5;
   int iVar6;
-  undefined *puVar7;
+  undefined *stateBlock;
   uint uVar8;
   char cVar9;
-  undefined *puVar10;
+  undefined *streamRegEntry;
   uint uVar11;
   int iVar12;
   int iVar13;
@@ -279,8 +296,8 @@ int FUN_0004c720(glContext, param_2, param_3, param_4, param_5)
   uint uVar15;
   uint uVar16;
   undefined4 glContextWord1bb0;
-  int iVar18;
-  uint uVar19;
+  int outputFormatBitCount;
+  uint streamComponentCounts;
   int iVar20;
   
   uVar15 = *(uint *)(glContext + 0x44);
@@ -302,12 +319,12 @@ int FUN_0004c720(glContext, param_2, param_3, param_4, param_5)
 LAB_0004c770:
   glContextWord23e0 = *(int *)(glContext + 0x23e0) == 0;
   if (glContextWord23e0) {
-    puVar7 = ((unsigned char *)0x000010ec);
+    stateBlock = ((unsigned char *)0x000010ec);
   }
   else {
-    puVar7 = ((unsigned char *)0x00001318);
+    stateBlock = ((unsigned char *)0x00001318);
   }
-  puVar7 = puVar7 + iVar6;
+  stateBlock = stateBlock + iVar6;
   if ((uVar8 == 0) || ((uVar15 & 0x100000) == 0)) {
     iVar6 = 0;
   }
@@ -315,217 +332,217 @@ LAB_0004c770:
     iVar6 = *(int *)(((unsigned char *)0x00001168) + glContext);
   }
   uVar15 = -(uint)(uVar15 & 0x82000 ^ 0x2000) >> 0x1f;
-  if (((((param_2 != 0) || (iVar6 != 0)) || (uVar8 != *(uint *)(puVar7 + 0x228))) ||
-      ((*(uint *)(puVar7 + 0x218) != vapOutVtxFmt0 ||
-       (*(int *)(puVar7 + 0x220) != *(int *)(glContext + 0x1bb0))))) ||
-     ((*(int *)(puVar7 + 0x21c) != *(int *)(glContext + 0x1ba0) ||
-      (uVar15 != *(uint *)(puVar7 + 0x224))))) {
+  if (((((param_2 != 0) || (iVar6 != 0)) || (uVar8 != *(uint *)(stateBlock + 0x228))) ||
+      ((*(uint *)(stateBlock + 0x218) != vapOutVtxFmt0 ||
+       (*(int *)(stateBlock + 0x220) != *(int *)(glContext + 0x1bb0))))) ||
+     ((*(int *)(stateBlock + 0x21c) != *(int *)(glContext + 0x1ba0) ||
+      (uVar15 != *(uint *)(stateBlock + 0x224))))) {
     if ((glContextWord23e0) || (*(int *)(glContext + 0x2768) == 0)) {
-      uVar19 = *(uint *)(glContext + 0x1ba0);
+      streamComponentCounts = *(uint *)(glContext + 0x1ba0);
     }
     else {
-      uVar19 = *(uint *)(glContext + 0x1ba0) & ~(7 << (*(int *)(glContext + 0x276c) * 3 & 0x3fU));
-      *(uint *)(glContext + 0x1ba0) = uVar19;
+      streamComponentCounts = *(uint *)(glContext + 0x1ba0) & ~(7 << (*(int *)(glContext + 0x276c) * 3 & 0x3fU));
+      *(uint *)(glContext + 0x1ba0) = streamComponentCounts;
     }
-    uVar11 = *(uint *)(puVar7 + 0x228);
+    uVar11 = *(uint *)(stateBlock + 0x228);
     glContextWord1bb0 = *(undefined4 *)(glContext + 0x1bb0);
-    *(uint *)(puVar7 + 0x218) = vapOutVtxFmt0;
-    *(uint *)(puVar7 + 0x21c) = uVar19;
-    *(uint *)(puVar7 + 0x224) = uVar15;
-    *(undefined4 *)(puVar7 + 0x220) = glContextWord1bb0;
-    iVar18 = (vapOutVtxFmt0 >> 1 & 1) + (vapOutVtxFmt0 >> 2 & 1) + (vapOutVtxFmt0 >> 3 & 1) + (vapOutVtxFmt0 >> 4 & 1);
-    *(uint *)(puVar7 + 0x228) = uVar8 << 0x1f | uVar11 & 0x7fffffff;
+    *(uint *)(stateBlock + 0x218) = vapOutVtxFmt0;
+    *(uint *)(stateBlock + 0x21c) = streamComponentCounts;
+    *(uint *)(stateBlock + 0x224) = uVar15;
+    *(undefined4 *)(stateBlock + 0x220) = glContextWord1bb0;
+    outputFormatBitCount = (vapOutVtxFmt0 >> 1 & 1) + (vapOutVtxFmt0 >> 2 & 1) + (vapOutVtxFmt0 >> 3 & 1) + (vapOutVtxFmt0 >> 4 & 1);
+    *(uint *)(stateBlock + 0x228) = uVar8 << 0x1f | uVar11 & 0x7fffffff;
     uVar14 = (uint)(iVar6 != 0) * 0x40000000 |
              (uint)(*(int *)(glContext + 0x2768) != 0) * 0x20000000 |
              uVar8 << 0x1f | uVar11 & 0x1fffffff;
-    *(uint *)(puVar7 + 0x228) = uVar14;
-    if (iVar18 == 4) {
-      iVar18 = 2;
+    *(uint *)(stateBlock + 0x228) = uVar14;
+    if (outputFormatBitCount == 4) {
+      outputFormatBitCount = 2;
     }
     if (uVar14 == 4) {
-      uVar8 = 0;
+      componentStart = 0;
       uVar14 = 0;
       iVar6 = 0;
       iVar20 = 8;
-      puVar10 = puVar7 + 0xc0;
+      streamRegEntry = stateBlock + 0xc0;
       do {
         glContextWord276c = *(int *)(glContext + 0x276c);
-        cVar9 = (char)uVar8;
+        cVar9 = (char)componentStart;
         if (glContextWord276c == iVar6) {
           uVar11 = 0x3e;
-          *(uint *)(puVar10 + 8) =
-               (cVar9 + 1) * 0x40 & 0xfc0U | uVar8 & 0x3f | *(uint *)(puVar10 + 8) & 0xfffff000;
-          if (2 < *(int *)(puVar7 + 0x210)) {
+          *(uint *)(streamRegEntry + 8) =
+               (cVar9 + 1) * 0x40 & 0xfc0U | componentStart & 0x3f | *(uint *)(streamRegEntry + 8) & 0xfffff000;
+          if (2 < *(int *)(stateBlock + 0x210)) {
             uVar11 = (int)cVar9 + 2U & 0x3f;
           }
-          *(uint *)(puVar7 + glContextWord276c * 4 + 200) =
-               uVar11 << 0xc | *(uint *)(puVar7 + glContextWord276c * 4 + 200) & 0xff000fff | 0xfc0000;
-          uVar11 = *(uint *)(puVar7 + 0x210);
+          *(uint *)(stateBlock + glContextWord276c * 4 + 200) =
+               uVar11 << 0xc | *(uint *)(stateBlock + glContextWord276c * 4 + 200) & 0xff000fff | 0xfc0000;
+          uVar11 = *(uint *)(stateBlock + 0x210);
         }
         else {
           iVar12 = (int)cVar9;
-          uVar11 = uVar19 >> (uVar14 & 0x3f) & 7;
-          *(uint *)(puVar10 + 8) =
+          uVar11 = streamComponentCounts >> (uVar14 & 0x3f) & 7;
+          *(uint *)(streamRegEntry + 8) =
                (iVar12 + 3) * 0x40000 & 0xfc0000U |
                (iVar12 + 2) * 0x1000 & 0x3f000U |
-               (iVar12 + 1) * 0x40 & 0xfc0U | uVar8 & 0x3f | *(uint *)(puVar10 + 8) & 0xff000000;
+               (iVar12 + 1) * 0x40 & 0xfc0U | componentStart & 0x3f | *(uint *)(streamRegEntry + 8) & 0xff000000;
         }
-        uVar8 = uVar8 + uVar11;
+        componentStart = componentStart + uVar11;
         uVar14 = uVar14 + 3;
         iVar6 = iVar6 + 1;
-        puVar10 = puVar10 + 4;
+        streamRegEntry = streamRegEntry + 4;
         iVar20 = iVar20 + -1;
       } while (iVar20 != 0);
     }
     else if (iVar6 == 0) {
       if ((*(int *)(glContext + 0x23e0) == 0) || (*(int *)(glContext + 0x2768) == 0)) {
-        uVar8 = 0;
+        componentStart = 0;
         uVar14 = 0;
-        puVar10 = puVar7 + 0xc0;
+        streamRegEntry = stateBlock + 0xc0;
         iVar6 = 8;
         do {
-          iVar20 = (int)(char)uVar8;
+          iVar20 = (int)(char)componentStart;
           uVar11 = uVar14 & 0x3f;
           uVar14 = uVar14 + 3;
-          uVar16 = uVar8 & 0x3f;
-          uVar8 = uVar8 + (uVar19 >> uVar11 & 7);
-          *(uint *)(puVar10 + 8) =
+          uVar16 = componentStart & 0x3f;
+          componentStart = componentStart + (streamComponentCounts >> uVar11 & 7);
+          *(uint *)(streamRegEntry + 8) =
                (iVar20 + 3) * 0x40000 & 0xfc0000U |
                (iVar20 + 2) * 0x1000 & 0x3f000U |
-               (iVar20 + 1) * 0x40 & 0xfc0U | uVar16 | *(uint *)(puVar10 + 8) & 0xff000000;
-          puVar10 = puVar10 + 4;
+               (iVar20 + 1) * 0x40 & 0xfc0U | uVar16 | *(uint *)(streamRegEntry + 8) & 0xff000000;
+          streamRegEntry = streamRegEntry + 4;
           iVar6 = iVar6 + -1;
         } while (iVar6 != 0);
       }
       else {
-        uVar8 = 0;
+        componentStart = 0;
         uVar14 = 0;
         iVar6 = 0;
         iVar20 = 8;
-        puVar10 = puVar7 + 0xc0;
+        streamRegEntry = stateBlock + 0xc0;
         do {
           glContextWord276c = *(int *)(glContext + 0x276c);
-          cVar9 = (char)uVar8;
+          cVar9 = (char)componentStart;
           if (glContextWord276c == iVar6) {
             uVar11 = 0x3e;
-            *(uint *)(puVar10 + 8) =
-                 (cVar9 + 1) * 0x40 & 0xfc0U | uVar8 & 0x3f | *(uint *)(puVar10 + 8) & 0xfffff000;
-            if (2 < *(int *)(puVar7 + 0x210)) {
+            *(uint *)(streamRegEntry + 8) =
+                 (cVar9 + 1) * 0x40 & 0xfc0U | componentStart & 0x3f | *(uint *)(streamRegEntry + 8) & 0xfffff000;
+            if (2 < *(int *)(stateBlock + 0x210)) {
               uVar11 = (int)cVar9 + 2U & 0x3f;
             }
-            *(uint *)(puVar7 + glContextWord276c * 4 + 200) =
-                 uVar11 << 0xc | *(uint *)(puVar7 + glContextWord276c * 4 + 200) & 0xff000fff | 0xfc0000;
-            uVar11 = *(uint *)(puVar7 + 0x210);
+            *(uint *)(stateBlock + glContextWord276c * 4 + 200) =
+                 uVar11 << 0xc | *(uint *)(stateBlock + glContextWord276c * 4 + 200) & 0xff000fff | 0xfc0000;
+            uVar11 = *(uint *)(stateBlock + 0x210);
           }
           else {
             iVar12 = (int)cVar9;
-            uVar11 = uVar19 >> (uVar14 & 0x3f) & 7;
-            *(uint *)(puVar10 + 8) =
+            uVar11 = streamComponentCounts >> (uVar14 & 0x3f) & 7;
+            *(uint *)(streamRegEntry + 8) =
                  (iVar12 + 3) * 0x40000 & 0xfc0000U |
                  (iVar12 + 2) * 0x1000 & 0x3f000U |
-                 (iVar12 + 1) * 0x40 & 0xfc0U | uVar8 & 0x3f | *(uint *)(puVar10 + 8) & 0xff000000;
+                 (iVar12 + 1) * 0x40 & 0xfc0U | componentStart & 0x3f | *(uint *)(streamRegEntry + 8) & 0xff000000;
           }
-          uVar8 = uVar8 + uVar11;
+          componentStart = componentStart + uVar11;
           uVar14 = uVar14 + 3;
           iVar6 = iVar6 + 1;
-          puVar10 = puVar10 + 4;
+          streamRegEntry = streamRegEntry + 4;
           iVar20 = iVar20 + -1;
         } while (iVar20 != 0);
       }
     }
     else if (*(int *)(glContext + 0x23e0) == 0) {
       uVar14 = 0;
-      uVar8 = 0;
+      componentStart = 0;
       iVar20 = 8;
-      puVar10 = puVar7 + 0xc0;
+      streamRegEntry = stateBlock + 0xc0;
       do {
         bVar2 = *(byte *)(iVar6 + 0x71);
         if (bVar2 == 0) {
-          uVar16 = uVar8 + 3 & 0xff;
-          uVar11 = uVar8 + 2 & 0xff;
+          uVar16 = componentStart + 3 & 0xff;
+          uVar11 = componentStart + 2 & 0xff;
         }
         else {
           uVar11 = 0x3e;
           if ((bVar2 & 4) != 0) {
-            uVar11 = uVar8 + 2 & 0xff;
+            uVar11 = componentStart + 2 & 0xff;
           }
-          uVar16 = uVar8 + 3 & 0xff;
+          uVar16 = componentStart + 3 & 0xff;
           if ((bVar2 & 8) == 0) {
             uVar16 = 0x3f;
           }
         }
-        iVar12 = uVar8 + 1;
+        iVar12 = componentStart + 1;
         uVar3 = uVar14 & 0x3f;
         iVar6 = iVar6 + 1;
         uVar14 = uVar14 + 3;
-        uVar4 = uVar8 & 0x3f;
-        uVar8 = uVar8 + (uVar19 >> uVar3 & 7);
-        *(uint *)(puVar10 + 8) =
+        uVar4 = componentStart & 0x3f;
+        componentStart = componentStart + (streamComponentCounts >> uVar3 & 7);
+        *(uint *)(streamRegEntry + 8) =
              (uVar16 & 0x3f) << 0x12 |
              (uVar11 & 0x3f) << 0xc |
-             iVar12 * 0x40 & 0xfc0U | uVar4 | *(uint *)(puVar10 + 8) & 0xff000000;
-        puVar10 = puVar10 + 4;
+             iVar12 * 0x40 & 0xfc0U | uVar4 | *(uint *)(streamRegEntry + 8) & 0xff000000;
+        streamRegEntry = streamRegEntry + 4;
         iVar20 = iVar20 + -1;
       } while (iVar20 != 0);
     }
     else {
       uVar14 = 0;
-      uVar8 = 0;
+      componentStart = 0;
       iVar12 = 8;
       loopIndex = 0;
-      puVar10 = puVar7 + 0xc0;
+      streamRegEntry = stateBlock + 0xc0;
       do {
-        uVar4 = *(uint *)(puVar10 + 8);
-        iVar13 = (int)(char)uVar8;
+        uVar4 = *(uint *)(streamRegEntry + 8);
+        iVar13 = (int)(char)componentStart;
         uVar11 = uVar14 & 0x3f;
         uVar14 = uVar14 + 3;
-        uVar3 = uVar8 & 0x3f;
-        uVar8 = uVar8 + (uVar19 >> uVar11 & 7);
+        uVar3 = componentStart & 0x3f;
+        componentStart = componentStart + (streamComponentCounts >> uVar11 & 7);
         uVar11 = (iVar13 + 1) * 0x40 & 0xfc0;
         uVar16 = (iVar13 + 3) * 0x40000 & 0xfc0000;
-        *(uint *)(puVar10 + 8) =
+        *(uint *)(streamRegEntry + 8) =
              uVar16 | (iVar13 + 2) * 0x1000 & 0x3f000U | uVar11 | uVar3 | uVar4 & 0xff000000;
         bVar2 = *(byte *)(iVar6 + 0x71);
         if (bVar2 != 0) {
           if ((bVar2 & 4) == 0) {
-            *(uint *)(puVar10 + 8) = uVar16 | uVar11 | uVar3 | uVar4 & 0xff000000 | 0x3e000;
+            *(uint *)(streamRegEntry + 8) = uVar16 | uVar11 | uVar3 | uVar4 & 0xff000000 | 0x3e000;
           }
           if ((bVar2 & 8) == 0) {
-            *(uint *)(puVar10 + 8) = *(uint *)(puVar10 + 8) & 0xff03ffff | 0xfc0000;
+            *(uint *)(streamRegEntry + 8) = *(uint *)(streamRegEntry + 8) & 0xff03ffff | 0xfc0000;
           }
         }
         if (*(int *)(glContext + 0x276c) == loopIndex) {
-          if (*(int *)(puVar7 + 0x210) == 2) {
-            *(uint *)(puVar10 + 8) = *(uint *)(puVar10 + 8) & 0xfffc0fff | 0x3e000;
+          if (*(int *)(stateBlock + 0x210) == 2) {
+            *(uint *)(streamRegEntry + 8) = *(uint *)(streamRegEntry + 8) & 0xfffc0fff | 0x3e000;
           }
-          *(uint *)(puVar10 + 8) = *(uint *)(puVar10 + 8) & 0xff03ffff | 0xfc0000;
-          uVar8 = uVar8 + *(int *)(puVar7 + 0x210);
+          *(uint *)(streamRegEntry + 8) = *(uint *)(streamRegEntry + 8) & 0xff03ffff | 0xfc0000;
+          componentStart = componentStart + *(int *)(stateBlock + 0x210);
         }
         loopIndex = loopIndex + 1;
-        puVar10 = puVar10 + 4;
+        streamRegEntry = streamRegEntry + 4;
         iVar6 = iVar6 + 1;
         iVar12 = iVar12 + -1;
       } while (iVar12 != 0);
     }
-    iVar6 = iVar18;
-    if ((uVar8 == 0) && (iVar6 = 1, iVar18 != 0)) {
-      iVar6 = iVar18;
+    iVar6 = outputFormatBitCount;
+    if ((componentStart == 0) && (iVar6 = 1, outputFormatBitCount != 0)) {
+      iVar6 = outputFormatBitCount;
     }
-    uVar14 = iVar6 << 7 | uVar8 & 0x7f | 0x40000;
-    *(uint *)(puVar7 + 0x8c) = (uVar15 ^ 1) << 10 | *(uint *)(puVar7 + 0x8c) & 0xffffe1ff;
-    *(uint *)(puVar7 + 200) = *(uint *)(puVar7 + 200) & 0xf8ffffff;
-    *(uint *)(puVar7 + 0x208) = uVar14;
-    *(uint *)(puVar7 + 0xcc) = *(uint *)(puVar7 + 0xcc) & 0xf8ffffff | 0x1000000;
+    uVar14 = iVar6 << 7 | componentStart & 0x7f | 0x40000;
+    *(uint *)(stateBlock + 0x8c) = (uVar15 ^ 1) << 10 | *(uint *)(stateBlock + 0x8c) & 0xffffe1ff;
+    *(uint *)(stateBlock + 200) = *(uint *)(stateBlock + 200) & 0xf8ffffff;
+    *(uint *)(stateBlock + 0x208) = uVar14;
+    *(uint *)(stateBlock + 0xcc) = *(uint *)(stateBlock + 0xcc) & 0xf8ffffff | 0x1000000;
     *(uint *)(glContext + 0x1f2c) = uVar14;
-    *(undefined4 *)(glContext + 0x1ee8) = *(undefined4 *)(puVar7 + 200);
-    *(undefined4 *)(glContext + 0x1eec) = *(undefined4 *)(puVar7 + 0xcc);
-    *(undefined4 *)(glContext + 0x1ef0) = *(undefined4 *)(puVar7 + 0xd0);
-    *(undefined4 *)(glContext + 0x1ef4) = *(undefined4 *)(puVar7 + 0xd4);
-    *(undefined4 *)(glContext + 0x1ef8) = *(undefined4 *)(puVar7 + 0xd8);
-    *(undefined4 *)(glContext + 0x1efc) = *(undefined4 *)(puVar7 + 0xdc);
-    *(undefined4 *)(glContext + 0x1f00) = *(undefined4 *)(puVar7 + 0xe0);
-    uVar5 = *(undefined4 *)(puVar7 + 0xe4);
-    *(uint *)(glContext + 0x1ba4) = uVar19;
+    *(undefined4 *)(glContext + 0x1ee8) = *(undefined4 *)(stateBlock + 200);
+    *(undefined4 *)(glContext + 0x1eec) = *(undefined4 *)(stateBlock + 0xcc);
+    *(undefined4 *)(glContext + 0x1ef0) = *(undefined4 *)(stateBlock + 0xd0);
+    *(undefined4 *)(glContext + 0x1ef4) = *(undefined4 *)(stateBlock + 0xd4);
+    *(undefined4 *)(glContext + 0x1ef8) = *(undefined4 *)(stateBlock + 0xd8);
+    *(undefined4 *)(glContext + 0x1efc) = *(undefined4 *)(stateBlock + 0xdc);
+    *(undefined4 *)(glContext + 0x1f00) = *(undefined4 *)(stateBlock + 0xe0);
+    uVar5 = *(undefined4 *)(stateBlock + 0xe4);
+    *(uint *)(glContext + 0x1ba4) = streamComponentCounts;
     *(undefined4 *)(glContext + 0x1bb4) = glContextWord1bb0;
     *(undefined4 *)(glContext + 0x1f04) = uVar5;
     if ((*(uint *)(glContext + 0x44) & 0x20000000) != 0) {

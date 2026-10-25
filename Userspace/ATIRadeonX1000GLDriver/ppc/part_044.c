@@ -3593,7 +3593,7 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
         if ((((checkResult != 0) && ((operandVReg[5] & 0x200U) == 0)) && (operandVReg[0x48] == 0)) &&
            (((operandVReg[0x49] == 0 && ((operandVReg[0x2e] & 1U) == 0)) &&
             ((zeroWord = operandVReg[0x2e] & 2, zeroWord == 0 &&
-             (checkResult = FUN_000f5a0c(operandVReg,1,operandVReg,pass), checkResult != 0)))))) {
+             (checkResult = IRInst__canFoldConstantSource(operandVReg,1,operandVReg,pass), checkResult != 0)))))) {
           *(int *)(pass + 0x228) = *(int *)(pass + 0x228) + 1;
           prevNode = node[1];
           DList__unlink(node);
@@ -3677,7 +3677,7 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
       } while (moreLanes);
       if (noLaneOverlap) {
         passArgCopy = pass;
-        availableResult = FUN_000f5a0c(node,1,node,pass);
+        availableResult = IRInst__canFoldConstantSource(node,1,node,pass);
         if (availableResult == 0) {
           checkResult2 = (**(code **)(*operandVReg + 100))(operandVReg);
           if (checkResult2 == 0) {
@@ -3687,7 +3687,7 @@ int Inst__tryMix(consumer, consumerSrcIndex, node, pass)
           if (zeroWord != 0) {
             return 0;
           }
-          checkResult3 = FUN_000f5a0c(operandVReg,1,operandVReg,pass);
+          checkResult3 = IRInst__canFoldConstantSource(operandVReg,1,operandVReg,pass);
           if (checkResult3 == 0) {
             return 0;
           }
@@ -3965,7 +3965,7 @@ int FUN_0015f44c(inst, operandIndex7, node, pass)
       IRInst__setOperandSource(iVar11,1,node,0,*(undefined4 *)(pass + 8));
       operandRecord3 = IRInst__getOperandRecord(node,0);
       *(undefined4 *)(iVar11 + 0x9c) = *(undefined4 *)(operandRecord3 + 0x10);
-      FUN_000f4698(iVar11,1,pass);
+      IRInst__maskUnusedLanesOfOperand(iVar11,1,pass);
       Block__insertInstAfter(node[0x56],node,iVar11);
       *(uint *)(iVar11 + 0x14) = *(uint *)(iVar11 + 0x14) | 0x80000000;
       IRInst__setOperandSource(inst,operandIndex7,iVar11,0,*(undefined4 *)(pass + 8));
@@ -4247,7 +4247,7 @@ LAB_0015fa2c:
     sourceDef3 = IRInst__getOperandSource(node,node[0x21]);
     operandRecord3 = IRInst__getOperandRecord(sourceDef3,0);
     *(undefined4 *)(iVar11 + 0x9c) = *(undefined4 *)(operandRecord3 + 0x10);
-    FUN_000f4698(iVar11,1,pass);
+    IRInst__maskUnusedLanesOfOperand(iVar11,1,pass);
     operandIndex6 = node[0x21];
     *(uint *)(iVar11 + 0x14) = *(uint *)(iVar11 + 0x14) | 0x80000000;
     sourceDef4 = IRInst__getOperandSource(node,operandIndex6);
@@ -5651,9 +5651,9 @@ LAB_00162370:
       iVar7 = iVar7 + 1;
     } while (moreComponents);
     if ((bVar2) &&
-       ((iVar7 = FUN_000f5a0c(inst,1,inst,pass), iVar7 != 0 ||
+       ((iVar7 = IRInst__canFoldConstantSource(inst,1,inst,pass), iVar7 != 0 ||
         (((inst2[5] & 0x200U) == 0 &&
-         (iVar7 = FUN_000f5a0c(inst2,1,inst2,pass), iVar7 != 0)))))) {
+         (iVar7 = IRInst__canFoldConstantSource(inst2,1,inst2,pass), iVar7 != 0)))))) {
       return 0;
     }
   }
@@ -7480,7 +7480,7 @@ int Scheduler__computeBlockRegisterSets(scheduler)
     } while (*(int *)(iVar8 + 8) != 0);
     iVar8 = scheduler[1];
   }
-  blockArray = FUN_000ec5b8(iVar8);
+  blockArray = Program__getBlocksArray(iVar8);
   do {
     changed = false;
     for (blockNumber = 1; iVar8 = DList__count(scheduler[1] + 0x37c), blockNumber <= iVar8; blockNumber = blockNumber + 1)

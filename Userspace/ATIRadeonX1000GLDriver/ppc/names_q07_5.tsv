@@ -26,10 +26,6 @@ use	IfHeader__convertInnerIfToCmov	iVar5	countdown	INFERRED	role read off the we
 use	IfHeader__convertInnerIfToCmov	iVar5	countdown	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*iVar5\ =\ iVar5\ \+\ \-1;$@2	+2
 use	FUN_0013d3b8	bVar1	moreComponents	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*bVar1\ =\ iVar6\ !=\ 3;$	+1
 use	FUN_0013d3b8	bVar1	moreComponents	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*\}\ while\ \(bVar1\);$	+1
-use	FUN_0013d3b8	iVar6	loopIndex	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*iVar6\ =\ 0;$	+1
-use	FUN_0013d3b8	iVar6	loopIndex	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*if\ \(\*\(char\ \*\)\(iVar6\ \+\ iVar7\ \+\ 0x10\)\ !=\ '\\x01'\)\ \{$	+1
-use	FUN_0013d3b8	iVar6	loopIndex	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*bVar1\ =\ iVar6\ !=\ 3;$	+1
-use	FUN_0013d3b8	iVar6	loopIndex	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*iVar6\ =\ iVar6\ \+\ 1;$	+1
 use	FUN_0013d820	bVar1	moreComponents	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*bVar1\ =\ iVar8\ !=\ 3;$	+1
 use	FUN_0013d820	bVar1	moreComponents	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*\}\ while\ \(bVar1\);$	+1
 use	FUN_0013d820	iVar8	loopIndex	INFERRED	role read off the web: loop counter / continue flag of a counted loop	^\s*iVar8\ =\ 0;$	+1

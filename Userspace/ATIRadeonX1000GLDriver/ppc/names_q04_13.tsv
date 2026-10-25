@@ -1,0 +1,5 @@
+local	FUN_000ac720	param_3	wordVector	INFERRED	growable word buffer {count, capacity, data}: each emitter appends words at data[count++], growing by 0x80 words through the allocation hook at glContext+0xc and freeing the old data with the hook at glContext+0x18
+local	FUN_000ac720	param_4	formatCode	INFERRED	selector of the big switch (0..0x40): every case picks the bit-field encoding of one format/operand kind
+local	FUN_000ac720	param_5	formatDesc	INFERRED	two-word descriptor: word0 low 16 bits and word1 low 6 bits (<<16) are packed into the token header; word1 == 0x18 sets bit 8 of the flags
+local	FUN_000ac720	param_9	formatDesc2	INFERRED	second descriptor of the same shape as param_5, used by the multi-component cases (2, 0xe, 0xf, 0x23, 0x2e, 0x2f)
+local	FUN_000ac720	param_6	flagBits	INFERRED	four flag bits (bit0, bit1<<2, bit2<<4, bit3<<6) are repacked into the token flags

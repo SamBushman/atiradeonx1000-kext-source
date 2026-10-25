@@ -1,0 +1,13 @@
+use	FUN_0013d3b8	iVar5	nextBlock	INFERRED	block after the current one in the program block list	^\s*for\ \(iVar5\ =\ \*\(int\ \*\)\(\*\(int\ \*\)\(param_1\ \+\ 900\)\ \+\ 8\);\ iVar5\ !=\ 0;\ iVar5\ =\ \*\(int\ \*\)\(iVar5\ \+\ 8\)\)\ \{$	+1
+use	FUN_0013d3b8	iVar5	nextBlock	INFERRED	block after the current one in the program block list	^\s*iVar5\ =\ \*\(int\ \*\)\(iVar2\ \+\ 8\);$	+1
+use	FUN_0013d3b8	iVar5	nextBlock	INFERRED	block after the current one in the program block list	^\s*iVar2\ =\ iVar5;$	+1
+use	FUN_0013d3b8	iVar5	predicateResult	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*\(iVar5\ =\ FUN_00126760\(piVar3\[0x26\]\),\ iVar5\ !=\ 0\)\)\ \&\&$	+2
+use	FUN_0013d3b8	iVar5	predicateResult	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x24\)\)\(piVar10\);$	+3
+use	FUN_0013d3b8	iVar5	predicateResult	INFERRED	immediate result of a RegKind flag test or virtual predicate	^\s*\(iVar5\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x50\)\)\(piVar10\),\ iVar5\ ==\ 0\)\)\ \&\&$	+3
+use	FUN_0013d3b8	iVar5	splitRgbAlphaEnabled	INFERRED	Compiler__isOptionEnabled(compiler, 0x30) result	^\s*iVar5\ =\ FUN_000e07dc\(\*\(undefined4\ \*\)\(param_1\ \+\ 8\),0x30\);$	+2
+use	FUN_0013d3b8	iVar5	selectIsFullMask	INFERRED	FUN_000f2e18 test of the destination select word	^\s*iVar5\ =\ FUN_000f2e18\(uVar9\);$	+2
+use	FUN_0013d3b8	iVar5	operandIndex	INFERRED	1-based operand index	^\s*for\ \(iVar5\ =\ 1;\ iVar6\ =\ \(\*\*\(code\ \*\*\)\(\*piVar10\ \+\ 0x14\)\)\(piVar10\),\ iVar5\ <=\ iVar6;$	+3
+use	FUN_0013d3b8	iVar5	operandIndex	INFERRED	1-based operand index	^\s*FUN_00106004\(piVar10,iVar5,iVar6,0,\*\(undefined4\ \*\)\(param_1\ \+\ 8\)\);$	+1
+use	FUN_0013d3b8	iVar5	writtenCount	INFERRED	number of components the instruction still writes	^\s*iVar5\ =\ FUN_000f3a30\(piVar10\);$	+2
+use	FUN_0013d3b8	iVar5	writtenCount	INFERRED	number of components the instruction still writes	^\s*if\ \(iVar5\ <\ 2\)\ \{$	+1
+use	FUN_0013d3b8	iVar5	writtenCount	INFERRED	number of components the instruction still writes	^\s*iVar5\ =\ iVar5\ \+\ \-1;$	+1

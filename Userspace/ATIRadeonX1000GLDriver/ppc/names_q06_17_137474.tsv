@@ -1,0 +1,50 @@
+local	FUN_00137474	param_1	this	INFERRED	register graph object (+0 edge bitset, +4 node vector, +0xc node count, +0x20 node array, +0x2c compiler); adds one node
+use	FUN_00137474	puVar2	bitsetClearCursor	INFERRED	cursor clearing the new edge bitset	^\s*puVar2\ =\ puVar6;$	+1
+use	FUN_00137474	puVar2	bitsetClearCursor	INFERRED	cursor clearing the new edge bitset	^\s*puVar2\[2\]\ =\ 0;$	+2
+use	FUN_00137474	uVar1	nodePairProduct	INFERRED	n * n - n for the new node count	^\s*uVar1\ =\ iVar4\ \*\ iVar4\ \-\ iVar4;$	+2
+use	FUN_00137474	uVar1	edgeWordCount	INFERRED	(edge bits + 31) >> 5	^\s*uVar1\ =\ iVar4\ \+\ 0x1fU\ >>\ 5;$	+2
+use	FUN_00137474	uVar1	edgeWordCount	INFERRED	(edge bits + 31) >> 5	^\s*puVar2\[1\]\ =\ uVar1;$	+1
+use	FUN_00137474	uVar1	edgeWordCount	INFERRED	(edge bits + 31) >> 5	^\s*if\ \(uVar1\ !=\ 0\)\ \{$	+1
+use	FUN_00137474	uVar1	edgeWordCount	INFERRED	(edge bits + 31) >> 5	^\s*if\ \(uVar1\ ==\ 0\)\ \{$	+2
+use	FUN_00137474	uVar1	edgeWordCount	INFERRED	(edge bits + 31) >> 5	^\s*uVar1\ =\ uVar1\ \-\ 1;$	+2
+use	FUN_00137474	uVar1	nodeVectorCount	INFERRED	filled count of the node vector	^\s*uVar1\ =\ puVar11\[1\];$	+5
+use	FUN_00137474	uVar1	nodeVectorCount	INFERRED	filled count of the node vector	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar11,uVar1\);$	+1
+use	FUN_00137474	piVar3	nodeSlotRef	INFERRED	slot reference in the node vector	^\s*piVar3\ =\ \(int\ \*\)\(uVar1\ \*\ 4\ \+\ puVar11\[2\]\);$	+1
+use	FUN_00137474	piVar3	nodeSlotRef	INFERRED	slot reference in the node vector	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar11,uVar1\);$	+1
+use	FUN_00137474	piVar3	nodeSlotRef	INFERRED	slot reference in the node vector	^\s*\*piVar3\ =\ \(int\)\(puVar2\ \+\ 1\);$	+1
+use	FUN_00137474	iVar4	newNodeCount	INFERRED	node count after the node is added	^\s*iVar4\ =\ iVar8\ \+\ 1;$	+1
+use	FUN_00137474	iVar4	newNodeCount	INFERRED	node count after the node is added	^\s*param_1\[3\]\ =\ iVar4;$	+1
+use	FUN_00137474	iVar4	newNodeCount	INFERRED	node count after the node is added	^\s*uVar1\ =\ iVar4\ \*\ iVar4\ \-\ iVar4;$	+1
+use	FUN_00137474	iVar4	edgeBitCount	INFERRED	n * (n - 1) / 2 for the new node count	^\s*iVar4\ =\ \(\(int\)uVar1\ >>\ 1\)\ \+\ \(uint\)\(\(int\)uVar1\ <\ 0\ \&\&\ \(uVar1\ \&\ 1\)\ !=\ 0\);$	+2
+use	FUN_00137474	iVar4	edgeBitCount	INFERRED	n * (n - 1) / 2 for the new node count	^\s*puVar2\[2\]\ =\ iVar4;$	+1
+use	FUN_00137474	iVar4	edgeBitCount	INFERRED	n * (n - 1) / 2 for the new node count	^\s*if\ \(0\ <\ \(iVar4\ \-\ iVar5\)\ \+\ 1\)\ \{$	+1
+use	FUN_00137474	iVar4	edgeBitCount	INFERRED	n * (n - 1) / 2 for the new node count	^\s*\}\ while\ \(\(int\)uVar1\ <\ \(iVar4\ \-\ iVar5\)\ \+\ 1\);$	+1
+use	FUN_00137474	iVar4	newNodeArray	INFERRED	freshly allocated per-node array (this +0x20)	^\s*iVar4\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(param_1\[0xb\]\ \+\ 0x378\),iVar5\ <<\ 2\);$	+2
+use	FUN_00137474	iVar4	copyCountdown	INFERRED	countdown from the old node count	^\s*iVar4\ =\ iVar8;$	+1
+use	FUN_00137474	iVar4	copyCountdown	INFERRED	countdown from the old node count	^\s*iVar4\ =\ iVar4\ \+\ \-1;$	+2
+use	FUN_00137474	iVar5	nodeCountNow	INFERRED	node count re-read from the object	^\s*iVar5\ =\ param_1\[3\];$	+1
+use	FUN_00137474	iVar5	nodeCountNow	INFERRED	node count re-read from the object	^\s*if\ \(0\ <\ \(iVar4\ \-\ iVar5\)\ \+\ 1\)\ \{$	+1
+use	FUN_00137474	iVar5	nodeCountNow	INFERRED	node count re-read from the object	^\s*iVar5\ =\ param_1\[3\];$@2	+1
+use	FUN_00137474	iVar5	nodeCountNow	INFERRED	node count re-read from the object	^\s*\}\ while\ \(\(int\)uVar1\ <\ \(iVar4\ \-\ iVar5\)\ \+\ 1\);$	+1
+use	FUN_00137474	iVar5	nodeCountNow	INFERRED	node count re-read from the object	^\s*iVar5\ =\ param_1\[3\];$@3	+1
+use	FUN_00137474	iVar5	nodeCountNow	INFERRED	node count re-read from the object	^\s*iVar4\ =\ FUN_00193e18\(\*\(undefined4\ \*\)\(param_1\[0xb\]\ \+\ 0x378\),iVar5\ <<\ 2\);$	+1
+use	FUN_00137474	iVar5	newBitsetWordAddr	INFERRED	address of the new edge bitset word for a copied edge	^\s*iVar5\ =\ uVar7\ \+\ \*param_1;$	+2
+use	FUN_00137474	iVar5	copyByteOffset	INFERRED	byte offset while copying the per-node array	^\s*iVar5\ =\ 0;$	+1
+use	FUN_00137474	iVar5	copyByteOffset	INFERRED	byte offset while copying the per-node array	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ param_1\[8\]\)\ =\ \*\(undefined4\ \*\)\(iVar9\ \+\ iVar5\);$	+2
+use	FUN_00137474	puVar6	newEdgeBitset	INFERRED	new edge bitset (allocation + 1)	^\s*puVar6\ =\ puVar2\ \+\ 1;$	+1
+use	FUN_00137474	puVar6	newEdgeBitset	INFERRED	new edge bitset (allocation + 1)	^\s*puVar2\ =\ puVar6;$	+1
+use	FUN_00137474	puVar6	newEdgeBitset	INFERRED	new edge bitset (allocation + 1)	^\s*\*param_1\ =\ \(int\)puVar6;$	+1
+use	FUN_00137474	uVar7	pairWordOffset	INFERRED	bitset word offset of the bit being copied	^\s*uVar7\ =\ uVar1\ >>\ 3\ \&\ 0x1ffffffc;$	+3
+use	FUN_00137474	iVar8	oldNodeCount	INFERRED	node count before the node is added	^\s*iVar8\ =\ param_1\[3\];$	+2
+use	FUN_00137474	iVar8	oldNodeCount	INFERRED	node count before the node is added	^\s*if\ \(0\ <\ iVar8\)\ \{$	+1
+use	FUN_00137474	iVar8	oldNodeCount	INFERRED	node count before the node is added	^\s*iVar4\ =\ iVar8;$	+1
+use	FUN_00137474	iVar8	oldNodeCount	INFERRED	node count before the node is added	^\s*\(\(int\ \(\*\)\(\)\)FUN_001351c4\)\(puVar2\ \+\ 1,iVar8,0,param_1,param_1\[0xb\]\);$	+1
+use	FUN_00137474	iVar9	oldEdgeBitset	INFERRED	edge bitset before the node was added	^\s*iVar9\ =\ \*param_1;$	+1
+use	FUN_00137474	iVar9	oldEdgeBitset	INFERRED	edge bitset before the node was added	^\s*if\ \(\(\*\(uint\ \*\)\(uVar7\ \+\ iVar9\ \+\ 8\)\ >>\ \(uVar1\ \&\ 0x1f\)\ \&\ 1\)\ !=\ 0\)\ \{$	+1
+use	FUN_00137474	iVar9	oldEdgeBitset	INFERRED	edge bitset before the node was added	^\s*if\ \(iVar9\ !=\ 0\)\ \{$	+2
+use	FUN_00137474	iVar9	oldNodeArray	INFERRED	per-node array before the node was added	^\s*iVar9\ =\ param_1\[8\];$	+1
+use	FUN_00137474	iVar9	oldNodeArray	INFERRED	per-node array before the node was added	^\s*\*\(undefined4\ \*\)\(iVar5\ \+\ param_1\[8\]\)\ =\ \*\(undefined4\ \*\)\(iVar9\ \+\ iVar5\);$	+1
+use	FUN_00137474	iVar9	oldNodeArray	INFERRED	per-node array before the node was added	^\s*FUN_00193cc0\(\*\(undefined4\ \*\)\(param_1\[0xb\]\ \+\ 0x378\),iVar9\);$	+1
+use	FUN_00137474	puVar11	nodeVector	INFERRED	node vector header (this +4)	^\s*puVar11\ =\ \(uint\ \*\)param_1\[1\];$	+1
+use	FUN_00137474	puVar11	nodeVector	INFERRED	node vector header (this +4)	^\s*uVar1\ =\ puVar11\[1\];$	+5
+use	FUN_00137474	puVar11	nodeVector	INFERRED	node vector header (this +4)	^\s*piVar3\ =\ \(int\ \*\)FUN_0019423c\(puVar11,uVar1\);$	+1
