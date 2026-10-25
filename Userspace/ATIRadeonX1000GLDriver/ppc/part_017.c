@@ -10067,6 +10067,10 @@ int psnReallocateTemps(psnState, psnProgram, param_3, passThroughR6, sourceUsage
   undefined4 param_7;
   uint param_8;
 {
+  ushort instShort7;
+  ushort instShort3;
+  byte instByte10;
+  uint instKind;
   bool bVar1;
   byte bVar2;
   ushort uVar3;
@@ -10076,11 +10080,11 @@ int psnReallocateTemps(psnState, psnProgram, param_3, passThroughR6, sourceUsage
   int loopIndex;
   uint uVar8;
   byte bVar9;
-  uint uVar10;
+  uint collectedCount;
   int psnProgramWord8;
   int loopIndex2;
-  uint *puVar13;
-  uint *puVar14;
+  uint *lastVisitedInst;
+  uint *inst;
   ushort auStack_8b8 [4];
   undefined4 uStack_8b0;
   undefined4 uStack_8ac;
@@ -10130,115 +10134,115 @@ int psnReallocateTemps(psnState, psnProgram, param_3, passThroughR6, sourceUsage
   }
   psnProgramWord8 = *(int *)(psnProgram + 8);
   if (psnProgramWord8 != 0) {
-    uVar10 = 0;
+    collectedCount = 0;
     loopIndex2 = 0;
-    puVar13 = (uint *)0x0;
-    puVar14 = (uint *)(psnProgram + psnProgramWord8 * 0x48);
+    lastVisitedInst = (uint *)0x0;
+    inst = (uint *)(psnProgram + psnProgramWord8 * 0x48);
     do {
-      uVar5 = *puVar14;
-      if (uVar5 == 2) {
+      instKind = *inst;
+      if (instKind == 2) {
         uStack_89e = 0xf;
-        uStack_8a0 = *(ushort *)(puVar14 + 3);
-        if (*(char *)((int)puVar14 + 0x1a) == '\0') {
+        uStack_8a0 = *(ushort *)(inst + 3);
+        if (*(char *)((int)inst + 0x1a) == '\0') {
           uVar6 = 0;
-          *(undefined2 *)(puVar14 + 3) = 0;
-          *(undefined1 *)((int)puVar14 + 0x1f) = 0xf;
-          *(undefined1 *)((int)puVar14 + 0x19) = 0;
-          *(undefined2 *)((int)puVar14 + 0xe) = 0;
+          *(undefined2 *)(inst + 3) = 0;
+          *(undefined1 *)((int)inst + 0x1f) = 0xf;
+          *(undefined1 *)((int)inst + 0x19) = 0;
+          *(undefined2 *)((int)inst + 0xe) = 0;
         }
         else {
-          if (*(char *)((int)puVar14 + 0x1a) == '\x02') {
-            *(undefined2 *)(puVar14 + 3) = 0;
+          if (*(char *)((int)inst + 0x1a) == '\x02') {
+            *(undefined2 *)(inst + 3) = 0;
           }
           else {
             ((int (*)())psnRaReleaseUse)(&uStack_8a0,&puStack_898,&puStack_8a8);
-            *(ushort *)(puVar14 + 3) = uStack_8a0;
+            *(ushort *)(inst + 3) = uStack_8a0;
           }
-          uStack_87c = CONCAT22(*(undefined2 *)((int)puVar14 + 0xe),
-                                (ushort)*(byte *)((int)puVar14 + 0x1f)) ^ 0xf;
+          uStack_87c = CONCAT22(*(undefined2 *)((int)inst + 0xe),
+                                (ushort)*(byte *)((int)inst + 0x1f)) ^ 0xf;
           ((int (*)())psnRaAssignDefinition)(&uStack_87c,&puStack_898,&puStack_8a8,passThroughR6,sourceUsage,passThroughR8,uVar6,param_8);
           uVar6 = (uint)(*(unsigned short *)((unsigned char *)&(uStack_87c) + 0));
-          *(ushort *)((int)puVar14 + 0xe) = (*(unsigned short *)((unsigned char *)&(uStack_87c) + 0));
+          *(ushort *)((int)inst + 0xe) = (*(unsigned short *)((unsigned char *)&(uStack_87c) + 0));
         }
-        if (((puVar13 == (uint *)0x0) || (*puVar13 != 2)) || (*(char *)(puVar13 + 8) != '\0')) {
-          uVar10 = 0;
+        if (((lastVisitedInst == (uint *)0x0) || (*lastVisitedInst != 2)) || (*(char *)(lastVisitedInst + 8) != '\0')) {
+          collectedCount = 0;
         }
-        sourceUsage = (uint *)(uint)*(byte *)((int)puVar14 + 0x1a);
+        sourceUsage = (uint *)(uint)*(byte *)((int)inst + 0x1a);
         if (sourceUsage != (uint *)0x0) {
-          uVar5 = uVar10;
-          if (uVar10 == 0) {
-            uVar6 = (uint)*(ushort *)((int)puVar14 + 0xe);
+          uVar5 = collectedCount;
+          if (collectedCount == 0) {
+            uVar6 = (uint)*(ushort *)((int)inst + 0xe);
           }
           else {
-            uVar3 = *(ushort *)(puVar14 + 3);
-            passThroughR8 = (undefined4 *)(uint)uVar3;
-            uVar4 = *(ushort *)((int)puVar14 + 0xe);
+            instShort3 = *(ushort *)(inst + 3);
+            passThroughR8 = (undefined4 *)(uint)instShort3;
+            uVar4 = *(ushort *)((int)inst + 0xe);
             uVar6 = (uint)uVar4;
             param_8 = 0;
             passThroughR6 = auStack_864;
             do {
               uVar8 = passThroughR6[param_8];
-              if ((uVar3 == uVar8) && (sourceUsage != (uint *)((int)((unsigned char *)0x0) + 2))) {
+              if ((instShort3 == uVar8) && (sourceUsage != (uint *)((int)((unsigned char *)0x0) + 2))) {
                 uVar5 = 0;
-                *(undefined1 *)(puVar13 + 8) = 1;
+                *(undefined1 *)(lastVisitedInst + 8) = 1;
               }
               if (uVar8 == uVar4) {
-                uVar10 = param_8;
+                collectedCount = param_8;
               }
               param_8 = param_8 + 1;
             } while (param_8 < uVar5);
-            bVar1 = uVar10 < uVar5;
-            uVar10 = uVar5;
+            bVar1 = collectedCount < uVar5;
+            collectedCount = uVar5;
             if (bVar1) goto LAB_000c6e10;
           }
-          uVar10 = uVar5 + 1;
+          collectedCount = uVar5 + 1;
           auStack_864[uVar5] = uVar6;
         }
         goto LAB_000c6e10;
       }
-      if (uVar5 < 3) {
-        if (uVar5 == 1) {
-          uStack_8a0 = *(ushort *)((int)puVar14 + 6);
+      if (instKind < 3) {
+        if (instKind == 1) {
+          uStack_8a0 = *(ushort *)((int)inst + 6);
           uVar6 = 0xf;
           uStack_89e = 0xf;
           uStack_89a = 0xf;
-          uStack_89c = *(ushort *)(puVar14 + 1);
-          if (*(char *)((int)puVar14 + 0xb) == '\0') {
-            *(undefined2 *)((int)puVar14 + 6) = 0;
-            *(undefined1 *)((int)puVar14 + 0xf) = 0xf;
-            *(undefined1 *)((int)puVar14 + 0xd) = 0;
-            *(undefined1 *)((int)puVar14 + 10) = 0;
+          uStack_89c = *(ushort *)(inst + 1);
+          if (*(char *)((int)inst + 0xb) == '\0') {
+            *(undefined2 *)((int)inst + 6) = 0;
+            *(undefined1 *)((int)inst + 0xf) = 0xf;
+            *(undefined1 *)((int)inst + 0xd) = 0;
+            *(undefined1 *)((int)inst + 10) = 0;
           }
           else {
             ((int (*)())psnRaReleaseUse)(&uStack_8a0,&puStack_898,&puStack_8a8);
-            *(ushort *)((int)puVar14 + 6) = uStack_8a0;
-            *(byte *)((int)puVar14 + 0xf) = (byte)uStack_89e ^ 0xf;
+            *(ushort *)((int)inst + 6) = uStack_8a0;
+            *(byte *)((int)inst + 0xf) = (byte)uStack_89e ^ 0xf;
           }
-          if (*(char *)((int)puVar14 + 9) == '\0') {
-            *(ushort *)(puVar14 + 1) = 0;
-            *(undefined1 *)(puVar14 + 3) = 0;
-            *(undefined1 *)((int)puVar14 + 0xe) = 0xf;
-            *(undefined1 *)(puVar14 + 2) = 0;
+          if (*(char *)((int)inst + 9) == '\0') {
+            *(ushort *)(inst + 1) = 0;
+            *(undefined1 *)(inst + 3) = 0;
+            *(undefined1 *)((int)inst + 0xe) = 0xf;
+            *(undefined1 *)(inst + 2) = 0;
           }
           else {
             ((int (*)())psnRaReleaseUse)(&uStack_89c,&puStack_898,&puStack_8a8);
-            *(ushort *)(puVar14 + 1) = uStack_89c;
-            *(byte *)((int)puVar14 + 0xe) = (byte)uStack_89a ^ 0xf;
+            *(ushort *)(inst + 1) = uStack_89c;
+            *(byte *)((int)inst + 0xe) = (byte)uStack_89a ^ 0xf;
           }
         }
         goto LAB_000c6e10;
       }
-      if (4 < uVar5) goto LAB_000c6e10;
-      uStack_8a0 = *(ushort *)(puVar14 + 3);
-      uStack_89c = *(ushort *)(puVar14 + 6);
+      if (4 < instKind) goto LAB_000c6e10;
+      uStack_8a0 = *(ushort *)(inst + 3);
+      uStack_89c = *(ushort *)(inst + 6);
       uStack_89a = 0;
-      uStack_89e = (ushort)*(byte *)(puVar14 + 5);
-      if (*(char *)(puVar14 + 8) != '\0') {
+      uStack_89e = (ushort)*(byte *)(inst + 5);
+      if (*(char *)(inst + 8) != '\0') {
         uStack_89a = 8;
       }
       ((int (*)())psnRaReleaseUse)(&uStack_8a0,&puStack_898,&puStack_8a8);
-      *(ushort *)(puVar14 + 3) = uStack_8a0;
-      *(byte *)(puVar14 + 5) = (byte)uStack_89e;
+      *(ushort *)(inst + 3) = uStack_8a0;
+      *(byte *)(inst + 5) = (byte)uStack_89e;
       ((int (*)())psnRaReleaseUse)(&uStack_89c,&puStack_898,&puStack_8a8);
       uVar6 = 7;
       uStack_880 = 0;
@@ -10251,174 +10255,174 @@ int psnReallocateTemps(psnState, psnProgram, param_3, passThroughR6, sourceUsage
       uStack_88c = 0;
       uStack_888 = 0;
       uStack_884 = 0;
-      *(ushort *)(puVar14 + 6) = uStack_89c;
-      *(byte *)(puVar14 + 8) = (byte)(-(uint)uStack_89a >> 0x1f);
-      bVar9 = *(byte *)(puVar14 + 5) | *(byte *)((int)puVar14 + 0x15);
+      *(ushort *)(inst + 6) = uStack_89c;
+      *(byte *)(inst + 8) = (byte)(-(uint)uStack_89a >> 0x1f);
+      bVar9 = *(byte *)(inst + 5) | *(byte *)((int)inst + 0x15);
       if (bVar9 == 0) {
         uVar6 = 0;
       }
-      bVar2 = *(byte *)((int)puVar14 + 0x31);
-      uVar6 = -(uint)(byte)(*(byte *)(puVar14 + 8) | *(byte *)((int)puVar14 + 0x21) |
-                           *(byte *)((int)puVar14 + 0x23)) >> 0x1c & 8 | uVar6;
+      bVar2 = *(byte *)((int)inst + 0x31);
+      uVar6 = -(uint)(byte)(*(byte *)(inst + 8) | *(byte *)((int)inst + 0x21) |
+                           *(byte *)((int)inst + 0x23)) >> 0x1c & 8 | uVar6;
       if ((bVar2 < 10) && ((1 << ((int)(char)bVar2 & 0x3fU) & 0x3b1U) != 0)) {
         uVar6 = uVar6 & (bVar9 | 8);
       }
       if (((bVar2 == 10) || (bVar2 == 2)) && ((uVar6 & 7) != 0)) {
         uVar6 = uVar6 | 8;
       }
-      bVar9 = *(byte *)(puVar14 + 0x10);
-      if ((bVar9 == 1) && ((uVar6 & 8) != 0)) {
+      instByte10 = *(byte *)(inst + 0x10);
+      if ((instByte10 == 1) && ((uVar6 & 8) != 0)) {
         uVar6 = uVar6 | 7;
       }
       switch(bVar2) {
       case 0:
       case 7:
       case 8:
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)puVar14 + 0x2a),uVar6,(uint)*(byte *)(puVar14 + 0xc),
-                     (uint)*(byte *)((int)puVar14 + 0x3f),&uStack_87c,&uStack_88c);
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)puVar14 + 0x2b),uVar6,(uint)*(byte *)(puVar14 + 0xc),
-                     (uint)*(byte *)((int)puVar14 + 0x3f),&uStack_87c,&uStack_88c);
-        bVar9 = *(byte *)(puVar14 + 0xb);
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2a),uVar6,(uint)*(byte *)(inst + 0xc),
+                     (uint)*(byte *)((int)inst + 0x3f),&uStack_87c,&uStack_88c);
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2b),uVar6,(uint)*(byte *)(inst + 0xc),
+                     (uint)*(byte *)((int)inst + 0x3f),&uStack_87c,&uStack_88c);
+        bVar9 = *(byte *)(inst + 0xb);
         goto code_r0x000c6a30;
       case 1:
       case 4:
       case 5:
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)puVar14 + 0x2a),uVar6,(uint)*(byte *)(puVar14 + 0xc),
-                     (uint)*(byte *)((int)puVar14 + 0x3f),&uStack_87c,&uStack_88c);
-        bVar9 = *(byte *)((int)puVar14 + 0x2b);
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2a),uVar6,(uint)*(byte *)(inst + 0xc),
+                     (uint)*(byte *)((int)inst + 0x3f),&uStack_87c,&uStack_88c);
+        bVar9 = *(byte *)((int)inst + 0x2b);
 code_r0x000c6a30:
         passThroughR8 = &uStack_88c;
         sourceUsage = &uStack_87c;
-        passThroughR6 = (uint *)(uint)*(byte *)((int)puVar14 + 0x3f);
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)bVar9,uVar6,(uint)*(byte *)(puVar14 + 0xc),passThroughR6,sourceUsage,passThroughR8);
-        bVar9 = *(byte *)(puVar14 + 0x10);
+        passThroughR6 = (uint *)(uint)*(byte *)((int)inst + 0x3f);
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)bVar9,uVar6,(uint)*(byte *)(inst + 0xc),passThroughR6,sourceUsage,passThroughR8);
+        instByte10 = *(byte *)(inst + 0x10);
         break;
       case 2:
         sourceUsage = &uStack_87c;
         passThroughR8 = &uStack_88c;
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)puVar14 + 0x2a),uVar6,(uint)*(byte *)(puVar14 + 0xc),
-                     (uint)*(byte *)((int)puVar14 + 0x3f),sourceUsage,passThroughR8);
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)puVar14 + 0x2b),uVar6,(uint)*(byte *)(puVar14 + 0xc),
-                     (uint)*(byte *)((int)puVar14 + 0x3f),sourceUsage,passThroughR8);
-        ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)puVar14 + 0x39),uVar6,(uint)*(byte *)(puVar14 + 0xc),
-                     (uint)*(byte *)((int)puVar14 + 0x3f),sourceUsage,passThroughR8);
-        passThroughR6 = (uint *)(uint)*(byte *)((int)puVar14 + 0x3f);
-        ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)puVar14 + 0x3a),uVar6,(uint)*(byte *)(puVar14 + 0xc),
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2a),uVar6,(uint)*(byte *)(inst + 0xc),
+                     (uint)*(byte *)((int)inst + 0x3f),sourceUsage,passThroughR8);
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2b),uVar6,(uint)*(byte *)(inst + 0xc),
+                     (uint)*(byte *)((int)inst + 0x3f),sourceUsage,passThroughR8);
+        ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x39),uVar6,(uint)*(byte *)(inst + 0xc),
+                     (uint)*(byte *)((int)inst + 0x3f),sourceUsage,passThroughR8);
+        passThroughR6 = (uint *)(uint)*(byte *)((int)inst + 0x3f);
+        ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x3a),uVar6,(uint)*(byte *)(inst + 0xc),
                      passThroughR6,sourceUsage,passThroughR8);
-        bVar9 = *(byte *)(puVar14 + 0x10);
+        instByte10 = *(byte *)(inst + 0x10);
         break;
       case 3:
         sourceUsage = &uStack_87c;
         passThroughR8 = &uStack_88c;
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)puVar14 + 0x2a),uVar6 & 3,(uint)*(byte *)(puVar14 + 0xc),
-                     (uint)*(byte *)((int)puVar14 + 0x3f),sourceUsage,passThroughR8);
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)puVar14 + 0x2b),uVar6 & 3,(uint)*(byte *)(puVar14 + 0xc),
-                     (uint)*(byte *)((int)puVar14 + 0x3f),sourceUsage,passThroughR8);
-        passThroughR6 = (uint *)(uint)*(byte *)((int)puVar14 + 0x3f);
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)(puVar14 + 0xb),uVar6 & 4,(uint)*(byte *)(puVar14 + 0xc),passThroughR6
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2a),uVar6 & 3,(uint)*(byte *)(inst + 0xc),
+                     (uint)*(byte *)((int)inst + 0x3f),sourceUsage,passThroughR8);
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2b),uVar6 & 3,(uint)*(byte *)(inst + 0xc),
+                     (uint)*(byte *)((int)inst + 0x3f),sourceUsage,passThroughR8);
+        passThroughR6 = (uint *)(uint)*(byte *)((int)inst + 0x3f);
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)(inst + 0xb),uVar6 & 4,(uint)*(byte *)(inst + 0xc),passThroughR6
                      ,sourceUsage,passThroughR8);
-        bVar9 = *(byte *)(puVar14 + 0x10);
+        instByte10 = *(byte *)(inst + 0x10);
         break;
       case 6:
         break;
       case 9:
         sourceUsage = &uStack_87c;
-        passThroughR6 = (uint *)(uint)*(byte *)((int)puVar14 + 0x3f);
+        passThroughR6 = (uint *)(uint)*(byte *)((int)inst + 0x3f);
         passThroughR8 = &uStack_88c;
-        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)puVar14 + 0x2a),uVar6,(uint)*(byte *)(puVar14 + 0xc),
+        ((int (*)())psnAccumulateRgbSelectRead)((uint)*(byte *)((int)inst + 0x2a),uVar6,(uint)*(byte *)(inst + 0xc),
                      passThroughR6,sourceUsage,passThroughR8);
-        bVar9 = *(byte *)(puVar14 + 0x10);
+        instByte10 = *(byte *)(inst + 0x10);
       }
-      if (bVar9 < 0xc) {
-        uVar5 = 1 << ((int)(char)bVar9 & 0x3fU);
+      if (instByte10 < 0xc) {
+        uVar5 = 1 << ((int)(char)instByte10 & 0x3fU);
         if ((uVar5 & 0x61) == 0) {
           if ((uVar5 & 0xc) == 0) {
             if ((uVar5 & 0xf80) != 0) {
-              passThroughR6 = (uint *)(uint)*(byte *)((int)puVar14 + 0x3f);
+              passThroughR6 = (uint *)(uint)*(byte *)((int)inst + 0x3f);
               passThroughR8 = &uStack_88c;
               sourceUsage = &uStack_87c;
-              ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)puVar14 + 0x39),uVar6,(uint)*(byte *)(puVar14 + 0xc)
+              ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x39),uVar6,(uint)*(byte *)(inst + 0xc)
                            ,passThroughR6,&uStack_87c,passThroughR8);
             }
             goto code_r0x000c6c50;
           }
-          ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)puVar14 + 0x39),uVar6,(uint)*(byte *)(puVar14 + 0xc),
-                       (uint)*(byte *)((int)puVar14 + 0x3f),&uStack_87c,&uStack_88c);
-          bVar9 = *(byte *)((int)puVar14 + 0x3a);
+          ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x39),uVar6,(uint)*(byte *)(inst + 0xc),
+                       (uint)*(byte *)((int)inst + 0x3f),&uStack_87c,&uStack_88c);
+          bVar9 = *(byte *)((int)inst + 0x3a);
         }
         else {
-          ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)puVar14 + 0x39),uVar6,(uint)*(byte *)(puVar14 + 0xc),
-                       (uint)*(byte *)((int)puVar14 + 0x3f),&uStack_87c,&uStack_88c);
-          ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)puVar14 + 0x3a),uVar6,(uint)*(byte *)(puVar14 + 0xc),
-                       (uint)*(byte *)((int)puVar14 + 0x3f),&uStack_87c,&uStack_88c);
-          bVar9 = *(byte *)((int)puVar14 + 0x3b);
+          ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x39),uVar6,(uint)*(byte *)(inst + 0xc),
+                       (uint)*(byte *)((int)inst + 0x3f),&uStack_87c,&uStack_88c);
+          ((int (*)())psnAccumulateAlphaSelectRead)((uint)*(byte *)((int)inst + 0x3a),uVar6,(uint)*(byte *)(inst + 0xc),
+                       (uint)*(byte *)((int)inst + 0x3f),&uStack_87c,&uStack_88c);
+          bVar9 = *(byte *)((int)inst + 0x3b);
         }
         passThroughR8 = &uStack_88c;
-        passThroughR6 = (uint *)(uint)*(byte *)((int)puVar14 + 0x3f);
+        passThroughR6 = (uint *)(uint)*(byte *)((int)inst + 0x3f);
         sourceUsage = &uStack_87c;
-        ((int (*)())psnAccumulateAlphaSelectRead)((uint)bVar9,uVar6,(uint)*(byte *)(puVar14 + 0xc),passThroughR6,&uStack_87c,passThroughR8);
+        ((int (*)())psnAccumulateAlphaSelectRead)((uint)bVar9,uVar6,(uint)*(byte *)(inst + 0xc),passThroughR6,&uStack_87c,passThroughR8);
       }
 code_r0x000c6c50:
-      uVar3 = *(ushort *)((int)puVar14 + 0xe);
+      uVar3 = *(ushort *)((int)inst + 0xe);
       param_8 = (uint)uVar3;
       uStack_87c = CONCAT22(uVar3,(*(unsigned short *)((unsigned char *)&(uStack_87c) + 2)));
-      uStack_878 = CONCAT22(*(undefined2 *)(puVar14 + 4),(*(unsigned short *)((unsigned char *)&(uStack_878) + 2)));
-      uStack_874 = CONCAT22(*(undefined2 *)((int)puVar14 + 0x12),(*(unsigned short *)((unsigned char *)&(uStack_874) + 2)));
-      uStack_870 = CONCAT22(*(undefined2 *)((int)puVar14 + 0x1a),(*(unsigned short *)((unsigned char *)&(uStack_870) + 2)));
-      uVar4 = *(ushort *)(puVar14 + 7);
-      uVar6 = (uint)uVar4;
-      uStack_86c = CONCAT22(uVar4,(*(unsigned short *)((unsigned char *)&(uStack_86c) + 2)));
-      uStack_888 = CONCAT22(*(undefined2 *)(puVar14 + 4),(*(unsigned short *)((unsigned char *)&(uStack_888) + 2)));
-      uStack_884 = CONCAT22(*(undefined2 *)((int)puVar14 + 0x1a),(*(unsigned short *)((unsigned char *)&(uStack_884) + 2)));
+      uStack_878 = CONCAT22(*(undefined2 *)(inst + 4),(*(unsigned short *)((unsigned char *)&(uStack_878) + 2)));
+      uStack_874 = CONCAT22(*(undefined2 *)((int)inst + 0x12),(*(unsigned short *)((unsigned char *)&(uStack_874) + 2)));
+      uStack_870 = CONCAT22(*(undefined2 *)((int)inst + 0x1a),(*(unsigned short *)((unsigned char *)&(uStack_870) + 2)));
+      instShort7 = *(ushort *)(inst + 7);
+      uVar6 = (uint)instShort7;
+      uStack_86c = CONCAT22(instShort7,(*(unsigned short *)((unsigned char *)&(uStack_86c) + 2)));
+      uStack_888 = CONCAT22(*(undefined2 *)(inst + 4),(*(unsigned short *)((unsigned char *)&(uStack_888) + 2)));
+      uStack_884 = CONCAT22(*(undefined2 *)((int)inst + 0x1a),(*(unsigned short *)((unsigned char *)&(uStack_884) + 2)));
       uStack_88c = CONCAT22(uVar3,(*(unsigned short *)((unsigned char *)&(uStack_88c) + 2)));
-      uStack_880 = CONCAT22(uVar4,(*(unsigned short *)((unsigned char *)&(uStack_880) + 2)));
-      uStack_868 = CONCAT22(*(undefined2 *)((int)puVar14 + 0x1e),(*(unsigned short *)((unsigned char *)&(uStack_868) + 2)));
+      uStack_880 = CONCAT22(instShort7,(*(unsigned short *)((unsigned char *)&(uStack_880) + 2)));
+      uStack_868 = CONCAT22(*(undefined2 *)((int)inst + 0x1e),(*(unsigned short *)((unsigned char *)&(uStack_868) + 2)));
       ((int (*)())psnRaAssignDefinition)(&uStack_87c,&puStack_898,&puStack_8a8,passThroughR6,sourceUsage,passThroughR8,uVar6,param_8);
-      *(ushort *)((int)puVar14 + 0xe) = (*(unsigned short *)((unsigned char *)&(uStack_87c) + 0));
+      *(ushort *)((int)inst + 0xe) = (*(unsigned short *)((unsigned char *)&(uStack_87c) + 0));
       ((int (*)())psnRaAssignDefinition)(&uStack_878,&puStack_898,&puStack_8a8,passThroughR6,sourceUsage,passThroughR8,uVar6,param_8);
-      *(undefined2 *)(puVar14 + 4) = (*(unsigned short *)((unsigned char *)&(uStack_878) + 0));
+      *(undefined2 *)(inst + 4) = (*(unsigned short *)((unsigned char *)&(uStack_878) + 0));
       ((int (*)())psnRaAssignDefinition)(&uStack_874,&puStack_898,&puStack_8a8,passThroughR6,sourceUsage,passThroughR8,uVar6,param_8);
-      *(undefined2 *)((int)puVar14 + 0x12) = (*(unsigned short *)((unsigned char *)&(uStack_874) + 0));
+      *(undefined2 *)((int)inst + 0x12) = (*(unsigned short *)((unsigned char *)&(uStack_874) + 0));
       ((int (*)())psnRaAssignDefinition)(&uStack_870,&puStack_898,&puStack_8a8,passThroughR6,sourceUsage,passThroughR8,uVar6,param_8);
-      *(undefined2 *)((int)puVar14 + 0x1a) = (*(unsigned short *)((unsigned char *)&(uStack_870) + 0));
+      *(undefined2 *)((int)inst + 0x1a) = (*(unsigned short *)((unsigned char *)&(uStack_870) + 0));
       ((int (*)())psnRaAssignDefinition)(&uStack_86c,&puStack_898,&puStack_8a8,passThroughR6,sourceUsage,passThroughR8,uVar6,param_8);
-      *(undefined2 *)(puVar14 + 7) = (*(unsigned short *)((unsigned char *)&(uStack_86c) + 0));
+      *(undefined2 *)(inst + 7) = (*(unsigned short *)((unsigned char *)&(uStack_86c) + 0));
       ((int (*)())psnRaAssignDefinition)(&uStack_868,&puStack_898,&puStack_8a8,passThroughR6,sourceUsage,passThroughR8,uVar6,param_8);
-      *(undefined1 *)(puVar14 + 0xd) = 0;
-      *(undefined2 *)((int)puVar14 + 0x1e) = (*(unsigned short *)((unsigned char *)&(uStack_868) + 0));
-      if ((puVar13 != (uint *)0x0) && (*puVar13 - 3 < 2)) {
+      *(undefined1 *)(inst + 0xd) = 0;
+      *(undefined2 *)((int)inst + 0x1e) = (*(unsigned short *)((unsigned char *)&(uStack_868) + 0));
+      if ((lastVisitedInst != (uint *)0x0) && (*lastVisitedInst - 3 < 2)) {
         loopIndex = 0;
         passThroughR6 = (uint *)(auStack_8b8 + 4);
-        passThroughR8 = (undefined4 *)(uint)*(ushort *)(puVar14 + 3);
-        param_8 = (uint)*(ushort *)(puVar14 + 6);
+        passThroughR8 = (undefined4 *)(uint)*(ushort *)(inst + 3);
+        param_8 = (uint)*(ushort *)(inst + 6);
         sourceUsage = &uStack_8ac;
-        uVar6 = -(uint)*(byte *)(puVar14 + 8) >> 0x1c & 8 | (uint)*(byte *)(puVar14 + 5);
+        uVar6 = -(uint)*(byte *)(inst + 8) >> 0x1c & 8 | (uint)*(byte *)(inst + 5);
         do {
           if ((passThroughR8 == (undefined4 *)(uint)*(ushort *)(loopIndex + (int)passThroughR6)) &&
              ((uVar6 & *(ushort *)((int)auStack_8b8 + loopIndex)) != 0)) {
-            *(undefined1 *)(puVar14 + 0xd) = 1;
+            *(undefined1 *)(inst + 0xd) = 1;
           }
           if ((param_8 == *(ushort *)(loopIndex + (int)sourceUsage)) &&
              ((uVar6 & *(ushort *)((int)auStack_8b8 + loopIndex + 4)) != 0)) {
-            *(undefined1 *)(puVar14 + 0xd) = 1;
+            *(undefined1 *)(inst + 0xd) = 1;
           }
           bVar1 = loopIndex != 2;
           loopIndex = loopIndex + 2;
         } while (bVar1);
       }
-      (*(unsigned short *)((unsigned char *)&(uStack_8b0) + 0)) = *(undefined2 *)((int)puVar14 + 0xe);
-      (*(unsigned short *)((unsigned char *)&(uStack_8b0) + 2)) = *(undefined2 *)(puVar14 + 4);
-      (*(unsigned short *)((unsigned char *)&(uStack_8ac) + 0)) = *(undefined2 *)((int)puVar14 + 0x1a);
-      uVar6 = (uint)*(ushort *)(puVar14 + 7);
+      (*(unsigned short *)((unsigned char *)&(uStack_8b0) + 0)) = *(undefined2 *)((int)inst + 0xe);
+      (*(unsigned short *)((unsigned char *)&(uStack_8b0) + 2)) = *(undefined2 *)(inst + 4);
+      (*(unsigned short *)((unsigned char *)&(uStack_8ac) + 0)) = *(undefined2 *)((int)inst + 0x1a);
+      uVar6 = (uint)*(ushort *)(inst + 7);
       auStack_8b8[0] = (*(unsigned short *)((unsigned char *)&(uStack_88c) + 2));
       auStack_8b8[1] = (*(unsigned short *)((unsigned char *)&(uStack_888) + 2));
-      (*(unsigned short *)((unsigned char *)&(uStack_8ac) + 2)) = *(ushort *)(puVar14 + 7);
+      (*(unsigned short *)((unsigned char *)&(uStack_8ac) + 2)) = *(ushort *)(inst + 7);
       auStack_8b8[2] = (*(unsigned short *)((unsigned char *)&(uStack_884) + 2));
       auStack_8b8[3] = (*(unsigned short *)((unsigned char *)&(uStack_880) + 2));
 LAB_000c6e10:
       loopIndex2 = loopIndex2 + 1;
-      puVar13 = puVar14;
-      puVar14 = puVar14 + -0x12;
+      lastVisitedInst = inst;
+      inst = inst + -0x12;
     } while (psnProgramWord8 != loopIndex2);
   }
   ((int (*)())FUN_000c5e60)(psnProgram);
