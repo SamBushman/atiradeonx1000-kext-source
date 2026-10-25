@@ -7297,303 +7297,309 @@ int _gldGetString(ctx, name)
   return "ATI Radeon X1600 OpenGL Engine";
 }
 
-/* FUN_00039330 @ 0x39330 (724 bytes) */
-void FUN_00039330(int ctx,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gldPrimInlineLineStrip @ 0x39330 (724 bytes) */
+void gldPrimInlineLineStrip(int ctx,uint data,undefined4 elementCount,undefined4 primFlag,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 vap_vte_cntl;
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  int iVar5;
-  undefined4 *puVar6;
-  undefined4 *puVar7;
-  undefined4 uVar8;
+  undefined4 element1;
+  undefined4 element2;
+  undefined4 element3;
+  undefined4 weightWord;
+  int unitCount;
+  undefined4 *ringStart;
+  undefined4 *ringCursor;
+  undefined4 topology;
   uint loopIndex;
-  uint uVar10;
-  int iVar11;
-  undefined4 *puVar12;
-  int iVar13;
-  int iVar14;
+  uint dataEnd;
+  int vertexArrayInfo;
+  undefined4 *weightCursor;
+  int programState;
+  int vertexStride;
   double staleStackArg_ffffffa8;
   undefined4 staleArgR9;
   
-  uVar8 = 3;
-  iVar5 = ((uint (*)())FUN_0002cc30)(ctx,param_4,3,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4
+  topology = 3;
+  unitCount = ((uint (*)())FUN_0002cc30)(ctx,primFlag,3,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4
                        ,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
-  if (iVar5 != 0) {
-    iVar13 = *(int *)(ctx + 0x29e8);
-    iVar11 = *(int *)(**(int **)(ctx + 0x1cc) + 4);
-    iVar14 = *(int *)(iVar11 + 0x20);
-    puVar6 = (undefined4 *)
+  if (unitCount != 0) {
+    programState = *(int *)(ctx + 0x29e8);
+    vertexArrayInfo = *(int *)(**(int **)(ctx + 0x1cc) + 4);
+    vertexStride = *(int *)(vertexArrayInfo + 0x20);
+    ringStart = (undefined4 *)
              (**(code **)(ctx + 0x2998))
                        (ctx + 0x240,
-                        iVar14 * iVar5 * 5 + iVar5 * 2 +
-                        (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 0x16,uVar8,param_3,param_5,
-                        iVar5 * 2,iVar11,iVar13);
-    *(undefined4 **)(ctx + 0x298c) = puVar6;
+                        vertexStride * unitCount * 5 + unitCount * 2 +
+                        (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 0x16,topology,elementCount,extraArg4,
+                        unitCount * 2,vertexArrayInfo,programState);
+    *(undefined4 **)(ctx + 0x298c) = ringStart;
     if (*(code **)(ctx + 0x2680) != 0x00001e24 + ctx) {
       *(code **)(ctx + 0x2680) = 0x00001e24 + ctx;
       *(int *)(ctx + 0x2684) = ctx + 0x1e44;
       *(undefined4 *)(0x000026c8 + ctx + 4) = *(undefined4 *)(ctx + 0x1ee4);
-      puVar6 = (undefined4 *)FUN_0002c0c0(ctx,puVar6);
+      ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
     if (*(char *)(ctx + 0x2a42) == '\0') {
-      *puVar6 = 0x5c8;
-      puVar6[1] = 0x10000000;
-      puVar6 = puVar6 + 2;
+      *ringStart = 0x5c8;
+      ringStart[1] = 0x10000000;
+      ringStart = ringStart + 2;
       *(undefined1 *)(ctx + 0x2a42) = 1;
     }
-    puVar7 = puVar6 + 4;
-    *puVar6 = 0x82c;
-    uVar10 = param_2 + iVar5 * iVar14 * 4 * 4;
+    ringCursor = ringStart + 4;
+    *ringStart = 0x82c;
+    dataEnd = data + unitCount * vertexStride * 4 * 4;
     vap_vte_cntl = *(undefined4 *)(0x00001dc4 + ctx);
-    puVar6[2] = 0x821;
-    puVar6[3] = 3;
-    puVar6[1] = vap_vte_cntl;
-    iVar5 = *(int *)(iVar13 + 0x2c);
+    ringStart[2] = 0x821;
+    ringStart[3] = 3;
+    ringStart[1] = vap_vte_cntl;
+    unitCount = *(int *)(programState + 0x2c);
     *(undefined1 *)(ctx + 0x2a5e) = 1;
-    if (param_2 < uVar10) {
-      iVar11 = iVar14 + -1;
+    if (data < dataEnd) {
+      vertexArrayInfo = vertexStride + -1;
       loopIndex = 0;
       do {
-        *puVar7 = 0x917;
+        *ringCursor = 0x917;
         if (loopIndex < 0x20) {
-          puVar7[1] = (uint)((1 << (loopIndex & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex & 0x3f) &
                              **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8)) != 0);
         }
         else if (loopIndex < 0x40) {
-          puVar7[1] = (uint)((1 << (loopIndex - 0x20 & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex - 0x20 & 0x3f) &
                              *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 4
                                       )) != 0);
         }
         else if (loopIndex < 0x60) {
-          puVar7[1] = (uint)((1 << (loopIndex - 0x40 & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex - 0x40 & 0x3f) &
                              *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 8
                                       )) != 0);
         }
         else {
-          puVar7[1] = (uint)((1 << (loopIndex - 0x60 & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex - 0x60 & 0x3f) &
                              *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) +
                                       0xc)) != 0);
         }
-        puVar7 = puVar7 + 2;
-        if (-1 < iVar11) {
-          puVar12 = (undefined4 *)(iVar5 + iVar11 * 4);
-          puVar6 = (undefined4 *)(param_2 + iVar11 * 0x10);
-          iVar13 = iVar14;
+        ringCursor = ringCursor + 2;
+        if (-1 < vertexArrayInfo) {
+          weightCursor = (undefined4 *)(unitCount + vertexArrayInfo * 4);
+          ringStart = (undefined4 *)(data + vertexArrayInfo * 0x10);
+          programState = vertexStride;
           do {
-            uVar8 = *puVar6;
-            uVar1 = puVar6[1];
-            uVar2 = puVar6[2];
-            uVar3 = puVar6[3];
-            puVar6 = puVar6 + -4;
-            uVar4 = *puVar12;
-            puVar12 = puVar12 + -1;
-            puVar7[1] = uVar8;
-            puVar7[2] = uVar1;
-            puVar7[3] = uVar2;
-            *puVar7 = uVar4;
-            puVar7[4] = uVar3;
-            puVar7 = puVar7 + 5;
-            iVar13 = iVar13 + -1;
-          } while (iVar13 != 0);
+            topology = *ringStart;
+            element1 = ringStart[1];
+            element2 = ringStart[2];
+            element3 = ringStart[3];
+            ringStart = ringStart + -4;
+            weightWord = *weightCursor;
+            weightCursor = weightCursor + -1;
+            ringCursor[1] = topology;
+            ringCursor[2] = element1;
+            ringCursor[3] = element2;
+            *ringCursor = weightWord;
+            ringCursor[4] = element3;
+            ringCursor = ringCursor + 5;
+            programState = programState + -1;
+          } while (programState != 0);
         }
-        param_2 = param_2 + iVar14 * 0x10;
+        data = data + vertexStride * 0x10;
         loopIndex = loopIndex + 1;
-      } while (param_2 < uVar10);
+      } while (data < dataEnd);
     }
-    *puVar7 = 0x92b;
-    puVar7[3] = 0;
-    puVar7[2] = ((unsigned char *)0x00001393U);
-    puVar7[1] = 0;
-    *(undefined4 **)(ctx + 0x298c) = puVar7 + 4;
+    *ringCursor = 0x92b;
+    ringCursor[3] = 0;
+    ringCursor[2] = ((unsigned char *)0x00001393U);
+    ringCursor[1] = 0;
+    *(undefined4 **)(ctx + 0x298c) = ringCursor + 4;
                     
                     
-    (**(code **)(ctx + 0x299c))(ctx + 0x240,puVar7 + 4);
+    (**(code **)(ctx + 0x299c))(ctx + 0x240,ringCursor + 4);
     return;
   }
   return;
 }
 
-/* FUN_00039610 @ 0x39610 (1092 bytes) */
-void FUN_00039610(int ctx,uint param_2,uint param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gldPrimInlineTriangleFan @ 0x39610 (1092 bytes) */
+void gldPrimInlineTriangleFan(int ctx,uint fanCenterData,uint data,undefined4 elementCount,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
+  undefined4 *elementPtr;
+  int innerLeft2;
+  int weightTable;
+  int strideBytes;
+  int weightTableRest;
+  int unitCount;
+  int lastElementRest;
   undefined4 vap_vte_cntl;
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  int iVar4;
-  undefined4 uVar5;
-  int iVar6;
-  undefined4 *puVar7;
-  undefined4 *puVar8;
-  undefined4 uVar9;
-  uint uVar10;
-  int iVar11;
+  undefined4 element1;
+  undefined4 element2;
+  undefined4 element3;
+  int lastElementCenter;
+  undefined4 weightWord;
+  undefined4 *ringStart;
+  undefined4 *ringCursor;
+  undefined4 topology;
+  uint rangeEnd;
+  int programState;
   uint loopIndex;
-  int iVar13;
-  undefined4 *puVar14;
-  int iVar15;
-  int iVar16;
-  int iVar17;
+  int allocWords;
+  undefined4 *weightCursor;
+  int vertexArrayInfo;
+  int vertexStride;
+  int innerLeft;
   double staleStackArg_ffffff98;
   undefined4 staleArgR9;
   
-  uVar9 = 6;
-  iVar6 = ((uint (*)())FUN_0002cc30)(ctx,0,6,param_4,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+  topology = 6;
+  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,6,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
                        staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffff98);
-  if (iVar6 != 0) {
-    iVar11 = *(int *)(ctx + 0x29e8);
-    iVar15 = *(int *)(**(int **)(ctx + 0x1cc) + 4);
-    iVar16 = *(int *)(iVar15 + 0x20);
-    iVar13 = iVar16 * (iVar6 * 5 + 5);
-    puVar7 = (undefined4 *)
+  if (unitCount != 0) {
+    programState = *(int *)(ctx + 0x29e8);
+    vertexArrayInfo = *(int *)(**(int **)(ctx + 0x1cc) + 4);
+    vertexStride = *(int *)(vertexArrayInfo + 0x20);
+    allocWords = vertexStride * (unitCount * 5 + 5);
+    ringStart = (undefined4 *)
              (**(code **)(ctx + 0x2998))
                        (ctx + 0x240,
-                        iVar6 * 2 + iVar13 + (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 0x18,
-                        uVar9,param_4,param_5,iVar11,iVar13,iVar15);
-    *(undefined4 **)(ctx + 0x298c) = puVar7;
+                        unitCount * 2 + allocWords + (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 0x18,
+                        topology,elementCount,extraArg4,programState,allocWords,vertexArrayInfo);
+    *(undefined4 **)(ctx + 0x298c) = ringStart;
     if (*(code **)(ctx + 0x2680) != 0x00001e24 + ctx) {
       *(code **)(ctx + 0x2680) = 0x00001e24 + ctx;
       *(int *)(ctx + 0x2684) = ctx + 0x1e44;
       *(undefined4 *)(0x000026c8 + ctx + 4) = *(undefined4 *)(ctx + 0x1ee4);
-      puVar7 = (undefined4 *)FUN_0002c0c0(ctx,puVar7);
+      ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
     if (*(char *)(ctx + 0x2a42) == '\0') {
-      *puVar7 = 0x5c8;
-      puVar7[1] = 0x10000000;
-      puVar7 = puVar7 + 2;
+      *ringStart = 0x5c8;
+      ringStart[1] = 0x10000000;
+      ringStart = ringStart + 2;
       *(undefined1 *)(ctx + 0x2a42) = 1;
     }
-    iVar13 = iVar16 * 0x10;
-    puVar8 = puVar7 + 4;
-    *puVar7 = 0x82c;
-    uVar10 = param_2 + iVar13;
+    strideBytes = vertexStride * 0x10;
+    ringCursor = ringStart + 4;
+    *ringStart = 0x82c;
+    rangeEnd = fanCenterData + strideBytes;
     vap_vte_cntl = *(undefined4 *)(0x00001dc4 + ctx);
-    puVar7[2] = 0x821;
-    puVar7[3] = 5;
-    puVar7[1] = vap_vte_cntl;
-    iVar15 = *(int *)(iVar11 + 0x2c);
+    ringStart[2] = 0x821;
+    ringStart[3] = 5;
+    ringStart[1] = vap_vte_cntl;
+    weightTable = *(int *)(programState + 0x2c);
     *(undefined1 *)(ctx + 0x2a5e) = 1;
-    if (param_2 < uVar10) {
-      iVar4 = iVar16 + -1;
+    if (fanCenterData < rangeEnd) {
+      lastElementCenter = vertexStride + -1;
       loopIndex = 0;
       do {
-        *puVar8 = 0x917;
+        *ringCursor = 0x917;
         if (loopIndex < 0x20) {
-          puVar8[1] = (uint)((1 << (loopIndex & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex & 0x3f) &
                              **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8)) != 0);
         }
         else if (loopIndex < 0x40) {
-          puVar8[1] = (uint)((1 << (loopIndex - 0x20 & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex - 0x20 & 0x3f) &
                              *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 4
                                       )) != 0);
         }
         else if (loopIndex < 0x60) {
-          puVar8[1] = (uint)((1 << (loopIndex - 0x40 & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex - 0x40 & 0x3f) &
                              *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 8
                                       )) != 0);
         }
         else {
-          puVar8[1] = (uint)((1 << (loopIndex - 0x60 & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex - 0x60 & 0x3f) &
                              *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) +
                                       0xc)) != 0);
         }
-        puVar8 = puVar8 + 2;
-        if (-1 < iVar4) {
-          puVar14 = (undefined4 *)(iVar15 + iVar4 * 4);
-          puVar7 = (undefined4 *)(param_2 + iVar4 * 0x10);
-          iVar17 = iVar16;
+        ringCursor = ringCursor + 2;
+        if (-1 < lastElementCenter) {
+          weightCursor = (undefined4 *)(weightTable + lastElementCenter * 4);
+          elementPtr = (undefined4 *)(fanCenterData + lastElementCenter * 0x10);
+          innerLeft = vertexStride;
           do {
-            uVar9 = *puVar7;
-            uVar1 = puVar7[1];
-            uVar2 = puVar7[2];
-            uVar3 = puVar7[3];
-            puVar7 = puVar7 + -4;
-            uVar5 = *puVar14;
-            puVar14 = puVar14 + -1;
-            puVar8[1] = uVar9;
-            puVar8[2] = uVar1;
-            puVar8[3] = uVar2;
-            *puVar8 = uVar5;
-            puVar8[4] = uVar3;
-            puVar8 = puVar8 + 5;
-            iVar17 = iVar17 + -1;
-          } while (iVar17 != 0);
+            topology = *elementPtr;
+            element1 = elementPtr[1];
+            element2 = elementPtr[2];
+            element3 = elementPtr[3];
+            elementPtr = elementPtr + -4;
+            weightWord = *weightCursor;
+            weightCursor = weightCursor + -1;
+            ringCursor[1] = topology;
+            ringCursor[2] = element1;
+            ringCursor[3] = element2;
+            *ringCursor = weightWord;
+            ringCursor[4] = element3;
+            ringCursor = ringCursor + 5;
+            innerLeft = innerLeft + -1;
+          } while (innerLeft != 0);
         }
-        param_2 = param_2 + iVar13;
+        fanCenterData = fanCenterData + strideBytes;
         loopIndex = loopIndex + 1;
-      } while (param_2 < uVar10);
+      } while (fanCenterData < rangeEnd);
     }
-    iVar11 = *(int *)(iVar11 + 0x2c);
+    weightTableRest = *(int *)(programState + 0x2c);
     *(undefined1 *)(ctx + 0x2a5e) = 1;
-    uVar10 = param_3 + iVar16 * 4 * iVar6 * 4;
-    if (param_3 < uVar10) {
-      iVar6 = iVar16 + -1;
+    rangeEnd = data + vertexStride * 4 * unitCount * 4;
+    if (data < rangeEnd) {
+      lastElementRest = vertexStride + -1;
       loopIndex = 1;
       do {
-        *puVar8 = 0x917;
+        *ringCursor = 0x917;
         if (loopIndex < 0x20) {
-          puVar8[1] = (uint)((1 << (loopIndex & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex & 0x3f) &
                              **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8)) != 0);
         }
         else if (loopIndex < 0x40) {
-          puVar8[1] = (uint)((1 << (loopIndex - 0x20 & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex - 0x20 & 0x3f) &
                              *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 4
                                       )) != 0);
         }
         else if (loopIndex < 0x60) {
-          puVar8[1] = (uint)((1 << (loopIndex - 0x40 & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex - 0x40 & 0x3f) &
                              *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 8
                                       )) != 0);
         }
         else {
-          puVar8[1] = (uint)((1 << (loopIndex - 0x60 & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex - 0x60 & 0x3f) &
                              *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) +
                                       0xc)) != 0);
         }
-        puVar8 = puVar8 + 2;
-        if (-1 < iVar6) {
-          puVar14 = (undefined4 *)(iVar11 + iVar6 * 4);
-          puVar7 = (undefined4 *)(param_3 + iVar6 * 0x10);
-          iVar15 = iVar16;
+        ringCursor = ringCursor + 2;
+        if (-1 < lastElementRest) {
+          weightCursor = (undefined4 *)(weightTableRest + lastElementRest * 4);
+          elementPtr = (undefined4 *)(data + lastElementRest * 0x10);
+          innerLeft2 = vertexStride;
           do {
-            uVar9 = *puVar7;
-            uVar1 = puVar7[1];
-            uVar2 = puVar7[2];
-            uVar3 = puVar7[3];
-            puVar7 = puVar7 + -4;
-            uVar5 = *puVar14;
-            puVar14 = puVar14 + -1;
-            puVar8[1] = uVar9;
-            puVar8[2] = uVar1;
-            puVar8[3] = uVar2;
-            *puVar8 = uVar5;
-            puVar8[4] = uVar3;
-            puVar8 = puVar8 + 5;
-            iVar15 = iVar15 + -1;
-          } while (iVar15 != 0);
+            topology = *elementPtr;
+            element1 = elementPtr[1];
+            element2 = elementPtr[2];
+            element3 = elementPtr[3];
+            elementPtr = elementPtr + -4;
+            weightWord = *weightCursor;
+            weightCursor = weightCursor + -1;
+            ringCursor[1] = topology;
+            ringCursor[2] = element1;
+            ringCursor[3] = element2;
+            *ringCursor = weightWord;
+            ringCursor[4] = element3;
+            ringCursor = ringCursor + 5;
+            innerLeft2 = innerLeft2 + -1;
+          } while (innerLeft2 != 0);
         }
-        param_3 = param_3 + iVar13;
+        data = data + strideBytes;
         loopIndex = loopIndex + 1;
-      } while (param_3 < uVar10);
+      } while (data < rangeEnd);
     }
-    *puVar8 = 0x92b;
-    puVar8[3] = 0;
-    puVar8[2] = ((unsigned char *)0x00001393U);
-    puVar8[1] = 0;
-    *(undefined4 **)(ctx + 0x298c) = puVar8 + 4;
+    *ringCursor = 0x92b;
+    ringCursor[3] = 0;
+    ringCursor[2] = ((unsigned char *)0x00001393U);
+    ringCursor[1] = 0;
+    *(undefined4 **)(ctx + 0x298c) = ringCursor + 4;
                     
                     
-    (**(code **)(ctx + 0x299c))(ctx + 0x240,puVar8 + 4);
+    (**(code **)(ctx + 0x299c))(ctx + 0x240,ringCursor + 4);
     return;
   }
   return;
 }
 
-/* FUN_00039a60 @ 0x39a60 (724 bytes) */
-void FUN_00039a60(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gldPrimInlineTriangles @ 0x39a60 (724 bytes) */
+void gldPrimInlineTriangles(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 element1;
   undefined4 element2;
@@ -7710,8 +7716,8 @@ void FUN_00039a60(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
   return;
 }
 
-/* FUN_00039d40 @ 0x39d40 (724 bytes) */
-void FUN_00039d40(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gldPrimInlineTriangleStrip @ 0x39d40 (724 bytes) */
+void gldPrimInlineTriangleStrip(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 element1;
   undefined4 element2;
@@ -7828,8 +7834,8 @@ void FUN_00039d40(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
   return;
 }
 
-/* FUN_0003a020 @ 0x3a020 (724 bytes) */
-void FUN_0003a020(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gldPrimInlineQuads @ 0x3a020 (724 bytes) */
+void gldPrimInlineQuads(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 element1;
   undefined4 element2;
@@ -7946,8 +7952,8 @@ void FUN_0003a020(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
   return;
 }
 
-/* FUN_0003a300 @ 0x3a300 (724 bytes) */
-void FUN_0003a300(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gldPrimInlineQuadStrip @ 0x3a300 (724 bytes) */
+void gldPrimInlineQuadStrip(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 element1;
   undefined4 element2;
@@ -8064,8 +8070,8 @@ void FUN_0003a300(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
   return;
 }
 
-/* FUN_0003a5e0 @ 0x3a5e0 (724 bytes) */
-void FUN_0003a5e0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gldPrimInlinePolygon @ 0x3a5e0 (724 bytes) */
+void gldPrimInlinePolygon(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 element1;
   undefined4 element2;
@@ -8182,127 +8188,127 @@ void FUN_0003a5e0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
   return;
 }
 
-/* FUN_0003a8c0 @ 0x3a8c0 (724 bytes) */
-void FUN_0003a8c0(int ctx,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gldPrimInlinePoints @ 0x3a8c0 (724 bytes) */
+void gldPrimInlinePoints(int ctx,uint data,undefined4 elementCount,undefined4 primFlag,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 vap_vte_cntl;
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  int iVar5;
-  undefined4 *puVar6;
-  undefined4 *puVar7;
-  undefined4 uVar8;
+  undefined4 element1;
+  undefined4 element2;
+  undefined4 element3;
+  undefined4 weightWord;
+  int unitCount;
+  undefined4 *ringStart;
+  undefined4 *ringCursor;
+  undefined4 topology;
   uint loopIndex;
-  uint uVar10;
-  int iVar11;
-  undefined4 *puVar12;
-  int iVar13;
-  int iVar14;
+  uint dataEnd;
+  int vertexArrayInfo;
+  undefined4 *weightCursor;
+  int programState;
+  int vertexStride;
   double staleStackArg_ffffffa8;
   undefined4 staleArgR9;
   
-  uVar8 = 0;
-  iVar5 = ((uint (*)())FUN_0002cc30)(ctx,0,0,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
+  topology = 0;
+  unitCount = ((uint (*)())FUN_0002cc30)(ctx,0,0,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4,
                        staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
-  if (iVar5 != 0) {
-    iVar13 = *(int *)(ctx + 0x29e8);
-    iVar11 = *(int *)(**(int **)(ctx + 0x1cc) + 4);
-    iVar14 = *(int *)(iVar11 + 0x20);
-    puVar6 = (undefined4 *)
+  if (unitCount != 0) {
+    programState = *(int *)(ctx + 0x29e8);
+    vertexArrayInfo = *(int *)(**(int **)(ctx + 0x1cc) + 4);
+    vertexStride = *(int *)(vertexArrayInfo + 0x20);
+    ringStart = (undefined4 *)
              (**(code **)(ctx + 0x2998))
                        (ctx + 0x240,
-                        iVar14 * iVar5 * 5 + iVar5 * 2 +
-                        (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 0x16,uVar8,param_3,param_5,
-                        iVar5 * 2,iVar11,iVar13);
-    *(undefined4 **)(ctx + 0x298c) = puVar6;
+                        vertexStride * unitCount * 5 + unitCount * 2 +
+                        (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 0x16,topology,elementCount,extraArg4,
+                        unitCount * 2,vertexArrayInfo,programState);
+    *(undefined4 **)(ctx + 0x298c) = ringStart;
     if (*(code **)(ctx + 0x2680) != 0x00001e24 + ctx) {
       *(code **)(ctx + 0x2680) = 0x00001e24 + ctx;
       *(int *)(ctx + 0x2684) = ctx + 0x1e44;
       *(undefined4 *)(0x000026c8 + ctx + 4) = *(undefined4 *)(ctx + 0x1ee4);
-      puVar6 = (undefined4 *)FUN_0002c0c0(ctx,puVar6);
+      ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
     if (*(char *)(ctx + 0x2a42) == '\0') {
-      *puVar6 = 0x5c8;
-      puVar6[1] = 0x10000000;
-      puVar6 = puVar6 + 2;
+      *ringStart = 0x5c8;
+      ringStart[1] = 0x10000000;
+      ringStart = ringStart + 2;
       *(undefined1 *)(ctx + 0x2a42) = 1;
     }
-    *puVar6 = 0x82c;
-    puVar7 = puVar6 + 4;
-    uVar10 = param_2 + iVar5 * iVar14 * 4 * 4;
+    *ringStart = 0x82c;
+    ringCursor = ringStart + 4;
+    dataEnd = data + unitCount * vertexStride * 4 * 4;
     vap_vte_cntl = *(undefined4 *)(0x00001dc4 + ctx);
-    puVar6[2] = 0x821;
-    puVar6[3] = 1;
-    puVar6[1] = vap_vte_cntl;
-    iVar5 = *(int *)(iVar13 + 0x2c);
+    ringStart[2] = 0x821;
+    ringStart[3] = 1;
+    ringStart[1] = vap_vte_cntl;
+    unitCount = *(int *)(programState + 0x2c);
     *(undefined1 *)(ctx + 0x2a5e) = 1;
-    if (param_2 < uVar10) {
-      iVar11 = iVar14 + -1;
+    if (data < dataEnd) {
+      vertexArrayInfo = vertexStride + -1;
       loopIndex = 0;
       do {
-        *puVar7 = 0x917;
+        *ringCursor = 0x917;
         if (loopIndex < 0x20) {
-          puVar7[1] = (uint)((1 << (loopIndex & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex & 0x3f) &
                              **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8)) != 0);
         }
         else if (loopIndex < 0x40) {
-          puVar7[1] = (uint)((1 << (loopIndex - 0x20 & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex - 0x20 & 0x3f) &
                              *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 4
                                       )) != 0);
         }
         else if (loopIndex < 0x60) {
-          puVar7[1] = (uint)((1 << (loopIndex - 0x40 & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex - 0x40 & 0x3f) &
                              *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 8
                                       )) != 0);
         }
         else {
-          puVar7[1] = (uint)((1 << (loopIndex - 0x60 & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex - 0x60 & 0x3f) &
                              *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) +
                                       0xc)) != 0);
         }
-        puVar7 = puVar7 + 2;
-        if (-1 < iVar11) {
-          puVar12 = (undefined4 *)(iVar5 + iVar11 * 4);
-          puVar6 = (undefined4 *)(param_2 + iVar11 * 0x10);
-          iVar13 = iVar14;
+        ringCursor = ringCursor + 2;
+        if (-1 < vertexArrayInfo) {
+          weightCursor = (undefined4 *)(unitCount + vertexArrayInfo * 4);
+          ringStart = (undefined4 *)(data + vertexArrayInfo * 0x10);
+          programState = vertexStride;
           do {
-            uVar8 = *puVar6;
-            uVar1 = puVar6[1];
-            uVar2 = puVar6[2];
-            uVar3 = puVar6[3];
-            puVar6 = puVar6 + -4;
-            uVar4 = *puVar12;
-            puVar12 = puVar12 + -1;
-            puVar7[1] = uVar8;
-            puVar7[2] = uVar1;
-            puVar7[3] = uVar2;
-            *puVar7 = uVar4;
-            puVar7[4] = uVar3;
-            puVar7 = puVar7 + 5;
-            iVar13 = iVar13 + -1;
-          } while (iVar13 != 0);
+            topology = *ringStart;
+            element1 = ringStart[1];
+            element2 = ringStart[2];
+            element3 = ringStart[3];
+            ringStart = ringStart + -4;
+            weightWord = *weightCursor;
+            weightCursor = weightCursor + -1;
+            ringCursor[1] = topology;
+            ringCursor[2] = element1;
+            ringCursor[3] = element2;
+            *ringCursor = weightWord;
+            ringCursor[4] = element3;
+            ringCursor = ringCursor + 5;
+            programState = programState + -1;
+          } while (programState != 0);
         }
-        param_2 = param_2 + iVar14 * 0x10;
+        data = data + vertexStride * 0x10;
         loopIndex = loopIndex + 1;
-      } while (param_2 < uVar10);
+      } while (data < dataEnd);
     }
-    *puVar7 = 0x92b;
-    puVar7[3] = 0;
-    puVar7[2] = ((unsigned char *)0x00001393U);
-    puVar7[1] = 0;
-    *(undefined4 **)(ctx + 0x298c) = puVar7 + 4;
+    *ringCursor = 0x92b;
+    ringCursor[3] = 0;
+    ringCursor[2] = ((unsigned char *)0x00001393U);
+    ringCursor[1] = 0;
+    *(undefined4 **)(ctx + 0x298c) = ringCursor + 4;
                     
                     
-    (**(code **)(ctx + 0x299c))(ctx + 0x240,puVar7 + 4);
+    (**(code **)(ctx + 0x299c))(ctx + 0x240,ringCursor + 4);
     return;
   }
   return;
 }
 
-/* FUN_0003aba0 @ 0x3aba0 (724 bytes) */
-void FUN_0003aba0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gldPrimInlineLines @ 0x3aba0 (724 bytes) */
+void gldPrimInlineLines(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 element1;
   undefined4 element2;
@@ -8419,120 +8425,120 @@ void FUN_0003aba0(int ctx,uint data,undefined4 elementCount,undefined4 extraArg3
   return;
 }
 
-/* FUN_0003ae80 @ 0x3ae80 (724 bytes) */
-void FUN_0003ae80(int ctx,uint param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
+/* gldPrimInlineLineLoop @ 0x3ae80 (724 bytes) */
+void gldPrimInlineLineLoop(int ctx,uint data,undefined4 elementCount,undefined4 primFlag,undefined4 extraArg4,undefined4 extraArg5,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
 {
   undefined4 vap_vte_cntl;
-  undefined4 uVar1;
-  undefined4 uVar2;
-  undefined4 uVar3;
-  undefined4 uVar4;
-  int iVar5;
-  undefined4 *puVar6;
-  undefined4 *puVar7;
-  undefined4 uVar8;
+  undefined4 element1;
+  undefined4 element2;
+  undefined4 element3;
+  undefined4 weightWord;
+  int unitCount;
+  undefined4 *ringStart;
+  undefined4 *ringCursor;
+  undefined4 topology;
   uint loopIndex;
-  uint uVar10;
-  int iVar11;
-  undefined4 *puVar12;
-  int iVar13;
-  int iVar14;
+  uint dataEnd;
+  int vertexArrayInfo;
+  undefined4 *weightCursor;
+  int programState;
+  int vertexStride;
   double staleStackArg_ffffffa8;
   undefined4 staleArgR9;
   
-  uVar8 = 2;
-  iVar5 = ((uint (*)())FUN_0002cc30)(ctx,param_4,2,param_3,param_5,param_6,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4
+  topology = 2;
+  unitCount = ((uint (*)())FUN_0002cc30)(ctx,primFlag,2,elementCount,extraArg4,extraArg5,staleArgR9,staleFprArg1,staleFprArg2,staleFprArg3,staleFprArg4
                        ,staleFprArg5,staleFprArg6,staleFprArg7,staleFprArg8,staleStackArg_ffffffa8);
-  if (iVar5 != 0) {
-    iVar13 = *(int *)(ctx + 0x29e8);
-    iVar11 = *(int *)(**(int **)(ctx + 0x1cc) + 4);
-    iVar14 = *(int *)(iVar11 + 0x20);
-    puVar6 = (undefined4 *)
+  if (unitCount != 0) {
+    programState = *(int *)(ctx + 0x29e8);
+    vertexArrayInfo = *(int *)(**(int **)(ctx + 0x1cc) + 4);
+    vertexStride = *(int *)(vertexArrayInfo + 0x20);
+    ringStart = (undefined4 *)
              (**(code **)(ctx + 0x2998))
                        (ctx + 0x240,
-                        iVar14 * iVar5 * 5 + iVar5 * 2 +
-                        (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 0x16,uVar8,param_3,param_5,
-                        iVar5 * 2,iVar11,iVar13);
-    *(undefined4 **)(ctx + 0x298c) = puVar6;
+                        vertexStride * unitCount * 5 + unitCount * 2 +
+                        (*(int *)(ctx + 0x267c) + 1U & 0xfffffffe) + 0x16,topology,elementCount,extraArg4,
+                        unitCount * 2,vertexArrayInfo,programState);
+    *(undefined4 **)(ctx + 0x298c) = ringStart;
     if (*(code **)(ctx + 0x2680) != 0x00001e24 + ctx) {
       *(code **)(ctx + 0x2680) = 0x00001e24 + ctx;
       *(int *)(ctx + 0x2684) = ctx + 0x1e44;
       *(undefined4 *)(0x000026c8 + ctx + 4) = *(undefined4 *)(ctx + 0x1ee4);
-      puVar6 = (undefined4 *)FUN_0002c0c0(ctx,puVar6);
+      ringStart = (undefined4 *)FUN_0002c0c0(ctx,ringStart);
     }
     if (*(char *)(ctx + 0x2a42) == '\0') {
-      *puVar6 = 0x5c8;
-      puVar6[1] = 0x10000000;
-      puVar6 = puVar6 + 2;
+      *ringStart = 0x5c8;
+      ringStart[1] = 0x10000000;
+      ringStart = ringStart + 2;
       *(undefined1 *)(ctx + 0x2a42) = 1;
     }
-    puVar7 = puVar6 + 4;
-    *puVar6 = 0x82c;
-    uVar10 = param_2 + iVar5 * iVar14 * 4 * 4;
+    ringCursor = ringStart + 4;
+    *ringStart = 0x82c;
+    dataEnd = data + unitCount * vertexStride * 4 * 4;
     vap_vte_cntl = *(undefined4 *)(0x00001dc4 + ctx);
-    puVar6[2] = 0x821;
-    puVar6[3] = 0xc;
-    puVar6[1] = vap_vte_cntl;
-    iVar5 = *(int *)(iVar13 + 0x2c);
+    ringStart[2] = 0x821;
+    ringStart[3] = 0xc;
+    ringStart[1] = vap_vte_cntl;
+    unitCount = *(int *)(programState + 0x2c);
     *(undefined1 *)(ctx + 0x2a5e) = 1;
-    if (param_2 < uVar10) {
-      iVar11 = iVar14 + -1;
+    if (data < dataEnd) {
+      vertexArrayInfo = vertexStride + -1;
       loopIndex = 0;
       do {
-        *puVar7 = 0x917;
+        *ringCursor = 0x917;
         if (loopIndex < 0x20) {
-          puVar7[1] = (uint)((1 << (loopIndex & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex & 0x3f) &
                              **(uint **)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8)) != 0);
         }
         else if (loopIndex < 0x40) {
-          puVar7[1] = (uint)((1 << (loopIndex - 0x20 & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex - 0x20 & 0x3f) &
                              *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 4
                                       )) != 0);
         }
         else if (loopIndex < 0x60) {
-          puVar7[1] = (uint)((1 << (loopIndex - 0x40 & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex - 0x40 & 0x3f) &
                              *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) + 8
                                       )) != 0);
         }
         else {
-          puVar7[1] = (uint)((1 << (loopIndex - 0x60 & 0x3f) &
+          ringCursor[1] = (uint)((1 << (loopIndex - 0x60 & 0x3f) &
                              *(uint *)(*(int *)(((unsigned char *)0x00002d48) + *(int *)(ctx + 0x10) + 8) +
                                       0xc)) != 0);
         }
-        puVar7 = puVar7 + 2;
-        if (-1 < iVar11) {
-          puVar12 = (undefined4 *)(iVar5 + iVar11 * 4);
-          puVar6 = (undefined4 *)(param_2 + iVar11 * 0x10);
-          iVar13 = iVar14;
+        ringCursor = ringCursor + 2;
+        if (-1 < vertexArrayInfo) {
+          weightCursor = (undefined4 *)(unitCount + vertexArrayInfo * 4);
+          ringStart = (undefined4 *)(data + vertexArrayInfo * 0x10);
+          programState = vertexStride;
           do {
-            uVar8 = *puVar6;
-            uVar1 = puVar6[1];
-            uVar2 = puVar6[2];
-            uVar3 = puVar6[3];
-            puVar6 = puVar6 + -4;
-            uVar4 = *puVar12;
-            puVar12 = puVar12 + -1;
-            puVar7[1] = uVar8;
-            puVar7[2] = uVar1;
-            puVar7[3] = uVar2;
-            *puVar7 = uVar4;
-            puVar7[4] = uVar3;
-            puVar7 = puVar7 + 5;
-            iVar13 = iVar13 + -1;
-          } while (iVar13 != 0);
+            topology = *ringStart;
+            element1 = ringStart[1];
+            element2 = ringStart[2];
+            element3 = ringStart[3];
+            ringStart = ringStart + -4;
+            weightWord = *weightCursor;
+            weightCursor = weightCursor + -1;
+            ringCursor[1] = topology;
+            ringCursor[2] = element1;
+            ringCursor[3] = element2;
+            *ringCursor = weightWord;
+            ringCursor[4] = element3;
+            ringCursor = ringCursor + 5;
+            programState = programState + -1;
+          } while (programState != 0);
         }
-        param_2 = param_2 + iVar14 * 0x10;
+        data = data + vertexStride * 0x10;
         loopIndex = loopIndex + 1;
-      } while (param_2 < uVar10);
+      } while (data < dataEnd);
     }
-    *puVar7 = 0x92b;
-    puVar7[3] = 0;
-    puVar7[2] = ((unsigned char *)0x00001393U);
-    puVar7[1] = 0;
-    *(undefined4 **)(ctx + 0x298c) = puVar7 + 4;
+    *ringCursor = 0x92b;
+    ringCursor[3] = 0;
+    ringCursor[2] = ((unsigned char *)0x00001393U);
+    ringCursor[1] = 0;
+    *(undefined4 **)(ctx + 0x298c) = ringCursor + 4;
                     
                     
-    (**(code **)(ctx + 0x299c))(ctx + 0x240,puVar7 + 4);
+    (**(code **)(ctx + 0x299c))(ctx + 0x240,ringCursor + 4);
     return;
   }
   return;
@@ -10524,23 +10530,23 @@ asm(".globl FUN_000353a0");
 asm(".set FUN_000353a0, _FUN_000353a0");
 asm(".globl glTexSubImage_impl");
 asm(".set glTexSubImage_impl, _glTexSubImage_impl");
-asm(".globl FUN_00039330");
-asm(".set FUN_00039330, _FUN_00039330");
-asm(".globl FUN_00039610");
-asm(".set FUN_00039610, _FUN_00039610");
-asm(".globl FUN_00039a60");
-asm(".set FUN_00039a60, _FUN_00039a60");
-asm(".globl FUN_00039d40");
-asm(".set FUN_00039d40, _FUN_00039d40");
-asm(".globl FUN_0003a020");
-asm(".set FUN_0003a020, _FUN_0003a020");
-asm(".globl FUN_0003a300");
-asm(".set FUN_0003a300, _FUN_0003a300");
-asm(".globl FUN_0003a5e0");
-asm(".set FUN_0003a5e0, _FUN_0003a5e0");
-asm(".globl FUN_0003a8c0");
-asm(".set FUN_0003a8c0, _FUN_0003a8c0");
-asm(".globl FUN_0003aba0");
-asm(".set FUN_0003aba0, _FUN_0003aba0");
-asm(".globl FUN_0003ae80");
-asm(".set FUN_0003ae80, _FUN_0003ae80");
+asm(".globl gldPrimInlineLineStrip");
+asm(".set gldPrimInlineLineStrip, _gldPrimInlineLineStrip");
+asm(".globl gldPrimInlineTriangleFan");
+asm(".set gldPrimInlineTriangleFan, _gldPrimInlineTriangleFan");
+asm(".globl gldPrimInlineTriangles");
+asm(".set gldPrimInlineTriangles, _gldPrimInlineTriangles");
+asm(".globl gldPrimInlineTriangleStrip");
+asm(".set gldPrimInlineTriangleStrip, _gldPrimInlineTriangleStrip");
+asm(".globl gldPrimInlineQuads");
+asm(".set gldPrimInlineQuads, _gldPrimInlineQuads");
+asm(".globl gldPrimInlineQuadStrip");
+asm(".set gldPrimInlineQuadStrip, _gldPrimInlineQuadStrip");
+asm(".globl gldPrimInlinePolygon");
+asm(".set gldPrimInlinePolygon, _gldPrimInlinePolygon");
+asm(".globl gldPrimInlinePoints");
+asm(".set gldPrimInlinePoints, _gldPrimInlinePoints");
+asm(".globl gldPrimInlineLines");
+asm(".set gldPrimInlineLines, _gldPrimInlineLines");
+asm(".globl gldPrimInlineLineLoop");
+asm(".set gldPrimInlineLineLoop, _gldPrimInlineLineLoop");

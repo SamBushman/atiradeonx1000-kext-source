@@ -6508,7 +6508,7 @@ int FUN_00024190(param_1, param_2, param_3, param_4, param_5)
 }
 
 /* FUN_000242f0: same duplicated-body defect as #77: the real 116-byte wrapper had been overwritten with
- * unrelated FUN_00039330-family content. Rewritten from real stock disassembly. Also corrects an earlier
+ * unrelated gldPrimInlineLineStrip-family content. Rewritten from real stock disassembly. Also corrects an earlier
  * misreading of this function's own real 7th argument (see FUN_0002cc30): no real caller here sets r9
  * either, it just forwards garbage like the rest of the dispatch-wrapper family. */
 /* FUN_000242f0 @ 0x242f0 (116 bytes) */
@@ -6525,7 +6525,7 @@ void FUN_000242f0(int param_1,int param_2,undefined4 param_3,undefined4 param_4,
 }
 
 /* FUN_00024370: same duplicated-body defect as #77 (this file's copy of the bug: the real 112-byte wrapper
- * had been overwritten with unrelated FUN_00039330-family content). Rewritten from real stock disassembly,
+ * had been overwritten with unrelated gldPrimInlineLineStrip-family content). Rewritten from real stock disassembly,
  * same as the part_004.c siblings. */
 /* FUN_00024370 @ 0x24370 (112 bytes) */
 void FUN_00024370(int param_1,int param_2,undefined4 param_3,undefined4 param_4,undefined4 param_5,undefined4 param_6,double staleFprArg1,double staleFprArg2,double staleFprArg3,double staleFprArg4,double staleFprArg5,double staleFprArg6,double staleFprArg7,double staleFprArg8,double staleFprArg9)
