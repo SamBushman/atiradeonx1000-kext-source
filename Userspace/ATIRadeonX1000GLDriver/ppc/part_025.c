@@ -54,18 +54,18 @@ int laneBytes__mapTwoThreeToOne(param_1, param_2)
 {
   unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
-  int iVar2;
+  int loopCounter;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  iVar2 = 4;
+  loopCounter = 4;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   do {
     if ((byte)(*pcVar1 - 2U) < 2) {
       *pcVar1 = '\x01';
     }
     pcVar1 = pcVar1 + 1;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    loopCounter = loopCounter + -1;
+  } while (loopCounter != 0);
   *param_1 = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
   return param_1;
 }
@@ -75,6 +75,7 @@ int laneBytes__mergeOneAndTwo(param_1, param_2)
   undefined4 *param_1;
   undefined4 param_2;
 {
+  int loopCounter;
   unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   bool bVar2;
@@ -83,7 +84,7 @@ int laneBytes__mergeOneAndTwo(param_1, param_2)
   int iVar5;
   
   pcVar3 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
-  iVar5 = 4;
+  loopCounter = 4;
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
   bVar1 = false;
   bVar2 = false;
@@ -96,8 +97,8 @@ int laneBytes__mergeOneAndTwo(param_1, param_2)
       bVar1 = true;
     }
     pcVar4 = pcVar4 + 1;
-    iVar5 = iVar5 + -1;
-  } while (iVar5 != 0);
+    loopCounter = loopCounter + -1;
+  } while (loopCounter != 0);
   if ((bVar1) && (bVar2)) {
     iVar5 = (int)pcVar4 - (int)pcVar3;
     do {
@@ -121,10 +122,10 @@ int FUN_000f2f28(param_1, param_2, param_3)
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   char *pcVar2;
-  int iVar3;
+  int loopCounter;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  iVar3 = 4;
+  loopCounter = 4;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
@@ -134,8 +135,8 @@ int FUN_000f2f28(param_1, param_2, param_3)
     }
     pcVar1 = pcVar1 + 1;
     pcVar2 = pcVar2 + 1;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    loopCounter = loopCounter + -1;
+  } while (loopCounter != 0);
   *param_1 = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
   return param_1;
 }
@@ -149,10 +150,10 @@ int SelectWord__mergeWrittenLanes(param_1, param_2, param_3)
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   char *pcVar2;
-  int iVar3;
+  int loopCounter;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  iVar3 = 4;
+  loopCounter = 4;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
@@ -162,8 +163,8 @@ int SelectWord__mergeWrittenLanes(param_1, param_2, param_3)
     }
     pcVar1 = pcVar1 + 1;
     pcVar2 = pcVar2 + 1;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    loopCounter = loopCounter + -1;
+  } while (loopCounter != 0);
   *param_1 = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
   return param_1;
 }
@@ -177,10 +178,10 @@ int SelectWord__fillUnusedLanes(param_1, param_2, param_3)
   unsigned int ghidra_home[8] = { param_1, param_2, param_3, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   char *pcVar2;
-  int iVar3;
+  int loopCounter;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  iVar3 = 4;
+  loopCounter = 4;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
@@ -190,8 +191,8 @@ int SelectWord__fillUnusedLanes(param_1, param_2, param_3)
     }
     pcVar1 = pcVar1 + 1;
     pcVar2 = pcVar2 + 1;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    loopCounter = loopCounter + -1;
+  } while (loopCounter != 0);
   *param_1 = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
   return param_1;
 }
@@ -206,10 +207,10 @@ int FUN_000f302c(param_1, param_2, param_3)
   char cVar1;
   char *pcVar2;
   char *pcVar3;
-  int iVar4;
+  int loopCounter;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  iVar4 = 4;
+  loopCounter = 4;
   (*(unsigned int *)((unsigned char *)ghidra_home + 8)) = param_3;
   pcVar3 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 8));
@@ -220,8 +221,8 @@ int FUN_000f302c(param_1, param_2, param_3)
     }
     pcVar3 = pcVar3 + 1;
     pcVar2 = pcVar2 + 1;
-    iVar4 = iVar4 + -1;
-  } while (iVar4 != 0);
+    loopCounter = loopCounter + -1;
+  } while (loopCounter != 0);
   *param_1 = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
   return param_1;
 }
@@ -235,18 +236,18 @@ int laneBytes__commonSelect(param_1)
   byte *pbVar2;
   uint uVar3;
   uint uVar4;
-  int iVar5;
+  int loopCounter;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = param_1;
-  iVar5 = 4;
+  loopCounter = 4;
   pbVar2 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
   uVar3 = 0xffffffff;
   while (((uVar1 = (uint)*pbVar2, uVar4 = uVar3, uVar1 == 4 || (uVar4 = uVar1, (int)uVar3 < 0)) ||
          (uVar1 == uVar3))) {
     pbVar2 = pbVar2 + 1;
-    iVar5 = iVar5 + -1;
+    loopCounter = loopCounter + -1;
     uVar3 = uVar4;
-    if (iVar5 == 0) {
+    if (loopCounter == 0) {
       return uVar4;
     }
   }
@@ -259,21 +260,21 @@ int SelectWord__firstWrittenComponent(param_1)
 {
   unsigned int ghidra_home[8] = { param_1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
-  int iVar2;
-  int iVar3;
+  int loopCounter;
+  int loopCounterB;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = param_1;
-  iVar3 = 4;
-  iVar2 = 0;
+  loopCounterB = 4;
+  loopCounter = 0;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
   do {
     if (*pcVar1 != '\x01') {
-      return iVar2;
+      return loopCounter;
     }
-    iVar2 = iVar2 + 1;
+    loopCounter = loopCounter + 1;
     pcVar1 = pcVar1 + 1;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    loopCounterB = loopCounterB + -1;
+  } while (loopCounterB != 0);
   return -1;
 }
 
@@ -283,21 +284,21 @@ int SelectWord__firstUnwrittenComponent(param_1)
 {
   unsigned int ghidra_home[8] = { param_1, 0, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
-  int iVar2;
-  int iVar3;
+  int loopCounter;
+  int loopCounterB;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 0)) = param_1;
-  iVar3 = 4;
-  iVar2 = 0;
+  loopCounterB = 4;
+  loopCounter = 0;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 0));
   do {
     if (*pcVar1 == '\x01') {
-      return iVar2;
+      return loopCounter;
     }
-    iVar2 = iVar2 + 1;
+    loopCounter = loopCounter + 1;
     pcVar1 = pcVar1 + 1;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    loopCounterB = loopCounterB + -1;
+  } while (loopCounterB != 0);
   return -1;
 }
 
@@ -480,31 +481,31 @@ int FUN_000f33f8(param_1, param_2)
   unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   char *pcVar2;
-  int iVar3;
-  int iVar4;
+  int loopCounter;
+  int loopCounterB;
   
   pcVar2 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
-  iVar4 = 4;
+  loopCounterB = 4;
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  iVar3 = 0;
+  loopCounter = 0;
   pcVar1 = pcVar2;
   do {
     if (*pcVar1 != '\x04') {
-      iVar4 = 4;
+      loopCounterB = 4;
       do {
         if (*pcVar2 == '\x04') {
-          *pcVar2 = *(char *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 4)) + iVar3);
+          *pcVar2 = *(char *)((int)&(*(unsigned int *)((unsigned char *)ghidra_home + 4)) + loopCounter);
         }
         pcVar2 = pcVar2 + 1;
-        iVar4 = iVar4 + -1;
-      } while (iVar4 != 0);
+        loopCounterB = loopCounterB + -1;
+      } while (loopCounterB != 0);
       *param_1 = (*(unsigned int *)((unsigned char *)ghidra_home + 4));
       return;
     }
-    iVar3 = iVar3 + 1;
+    loopCounter = loopCounter + 1;
     pcVar1 = pcVar1 + 1;
-    iVar4 = iVar4 + -1;
-  } while (iVar4 != 0);
+    loopCounterB = loopCounterB + -1;
+  } while (loopCounterB != 0);
   *param_1 = param_2;
   return;
 }
@@ -514,6 +515,7 @@ int FUN_000f3470(param_1, param_2)
   uint *param_1;
   uint param_2;
 {
+  int loopCounter;
   unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   bool bVar2;
@@ -552,7 +554,7 @@ int FUN_000f3470(param_1, param_2)
   }
   else {
     bVar1 = false;
-    iVar8 = 4;
+    loopCounter = 4;
     bVar2 = true;
     pbVar6 = &(*(unsigned int *)((unsigned char *)ghidra_home + 4));
     do {
@@ -563,8 +565,8 @@ int FUN_000f3470(param_1, param_2)
         bVar2 = false;
       }
       pbVar6 = pbVar6 + 1;
-      iVar8 = iVar8 + -1;
-    } while (iVar8 != 0);
+      loopCounter = loopCounter + -1;
+    } while (loopCounter != 0);
     if (!bVar1) goto LAB_000f35b4;
   }
   if (bVar2) {
@@ -601,21 +603,21 @@ int IRInst__clearSourceSelectsOfUnwrittenComponents(inst)
   bool bVar1;
   int iVar2;
   int iVar3;
-  int iVar4;
+  int loopCounter;
   undefined4 local_38 [9];
   
-  iVar4 = 0;
+  loopCounter = 0;
   operandRecord = IRInst__getOperandRecord(inst,0);
   local_38[0] = *(undefined4 *)(operandRecord + 0x10);
   do {
     iVar2 = 1;
-    if (*(char *)((int)local_38 + iVar4) == '\x01') {
+    if (*(char *)((int)local_38 + loopCounter) == '\x01') {
       for (; iVar3 = (**(code **)(*inst + 0x14))(inst), iVar2 <= iVar3; iVar2 = iVar2 + 1) {
-        (**(code **)(*inst + 0x88))(inst,iVar2,iVar4,4);
+        (**(code **)(*inst + 0x88))(inst,iVar2,loopCounter,4);
       }
     }
-    bVar1 = iVar4 != 3;
-    iVar4 = iVar4 + 1;
+    bVar1 = loopCounter != 3;
+    loopCounter = loopCounter + 1;
   } while (bVar1);
   return;
 }
@@ -627,10 +629,10 @@ int FUN_000f366c(param_1, param_2)
 {
   unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   byte *pbVar1;
-  int iVar2;
+  int loopCounter;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
-  iVar2 = 4;
+  loopCounter = 4;
   *param_1 = DAT_001aa838;
   pbVar1 = (byte *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
   do {
@@ -638,8 +640,8 @@ int FUN_000f366c(param_1, param_2)
       *(undefined1 *)((int)param_1 + (uint)*pbVar1) = 0;
     }
     pbVar1 = pbVar1 + 1;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    loopCounter = loopCounter + -1;
+  } while (loopCounter != 0);
   return;
 }
 
@@ -650,11 +652,11 @@ int FUN_000f36b8(param_1, param_2)
 {
   unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
-  int iVar2;
+  int loopCounter;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
-  iVar2 = 4;
+  loopCounter = 4;
   *param_1 = DAT_001aa838;
   do {
     if (*pcVar1 != '\x04') {
@@ -662,8 +664,8 @@ int FUN_000f36b8(param_1, param_2)
     }
     pcVar1 = pcVar1 + 1;
     param_1 = (undefined4 *)((int)param_1 + 1);
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    loopCounter = loopCounter + -1;
+  } while (loopCounter != 0);
   return;
 }
 
@@ -675,12 +677,12 @@ int FUN_000f370c(param_1, param_2)
   unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
   char cVar2;
-  int iVar3;
+  int loopCounter;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
   cVar2 = '\0';
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
-  iVar3 = 4;
+  loopCounter = 4;
   *(undefined4 *)param_1 = DAT_001aa83c;
   do {
     if (*pcVar1 == '\0') {
@@ -689,8 +691,8 @@ int FUN_000f370c(param_1, param_2)
     cVar2 = cVar2 + '\x01';
     pcVar1 = pcVar1 + 1;
     param_1 = param_1 + 1;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    loopCounter = loopCounter + -1;
+  } while (loopCounter != 0);
   return;
 }
 
@@ -701,11 +703,11 @@ int laneBytes__clearSetLanes(param_1, param_2)
 {
   unsigned int ghidra_home[8] = { param_1, param_2, 0, 0, 0, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   char *pcVar1;
-  int iVar2;
+  int loopCounter;
   
   (*(unsigned int *)((unsigned char *)ghidra_home + 4)) = param_2;
   pcVar1 = (char *)&(*(unsigned int *)((unsigned char *)ghidra_home + 4));
-  iVar2 = 4;
+  loopCounter = 4;
   *param_1 = DAT_001aa838;
   do {
     if (*pcVar1 != '\0') {
@@ -713,8 +715,8 @@ int laneBytes__clearSetLanes(param_1, param_2)
     }
     pcVar1 = pcVar1 + 1;
     param_1 = (undefined4 *)((int)param_1 + 1);
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    loopCounter = loopCounter + -1;
+  } while (loopCounter != 0);
   return;
 }
 
@@ -862,20 +864,20 @@ int IRInst__countWrittenComponents(inst)
 {
   bool bVar1;
   int operandRecord;
-  int iVar3;
-  int iVar4;
+  int loopCounter;
+  int loopCounterB;
   
-  iVar3 = 0;
-  iVar4 = 0;
+  loopCounter = 0;
+  loopCounterB = 0;
   do {
     operandRecord = IRInst__getOperandRecord(inst,0);
-    if (*(char *)(iVar4 + operandRecord + 0x10) != '\x01') {
-      iVar3 = iVar3 + 1;
+    if (*(char *)(loopCounterB + operandRecord + 0x10) != '\x01') {
+      loopCounter = loopCounter + 1;
     }
-    bVar1 = iVar4 != 3;
-    iVar4 = iVar4 + 1;
+    bVar1 = loopCounterB != 3;
+    loopCounterB = loopCounterB + 1;
   } while (bVar1);
-  return iVar3;
+  return loopCounter;
 }
 
 /* FUN_000f3a90 @ 0xf3a90 (80 bytes) */
@@ -911,21 +913,21 @@ int FUN_000f3b10(inst, operandIndex)
   undefined4 operandIndex;
 {
   int operandRecord;
-  int iVar1;
-  int iVar2;
+  int loopCounter;
+  int loopCounterB;
   undefined4 local_28 [10];
   
   operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-  iVar1 = 0;
+  loopCounter = 0;
   local_28[0] = *(undefined4 *)(operandRecord + 0x10);
-  iVar2 = 4;
+  loopCounterB = 4;
   do {
-    if (*(byte *)((int)local_28 + iVar1) < 3) {
+    if (*(byte *)((int)local_28 + loopCounter) < 3) {
       return 1;
     }
-    iVar1 = iVar1 + 1;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    loopCounter = loopCounter + 1;
+    loopCounterB = loopCounterB + -1;
+  } while (loopCounterB != 0);
   return 0;
 }
 
@@ -935,21 +937,21 @@ int FUN_000f3b68(inst, operandIndex)
   undefined4 operandIndex;
 {
   int operandRecord;
-  int iVar1;
-  int iVar2;
+  int loopCounter;
+  int loopCounterB;
   undefined4 local_28 [10];
   
   operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-  iVar1 = 0;
+  loopCounter = 0;
   local_28[0] = *(undefined4 *)(operandRecord + 0x10);
-  iVar2 = 4;
+  loopCounterB = 4;
   do {
-    if (*(char *)((int)local_28 + iVar1) == '\x03') {
+    if (*(char *)((int)local_28 + loopCounter) == '\x03') {
       return 1;
     }
-    iVar1 = iVar1 + 1;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    loopCounter = loopCounter + 1;
+    loopCounterB = loopCounterB + -1;
+  } while (loopCounterB != 0);
   return 0;
 }
 
@@ -980,6 +982,9 @@ int FUN_000f3c30(param_1, inst, operandIndex, param_4, param_5)
   int param_4;
   undefined4 param_5;
 {
+  int loopCounterB;
+  int operandRecord;
+  int loopCounter;
   unsigned int ghidra_home[8] = { param_1, inst, operandIndex, param_4, param_5, 0, 0, 0 };   /* r3..r10 as spilled at entry-sp + 0x18..0x34 (fix_home_slots) */
   bool bVar1;
   uint uVar2;
@@ -987,7 +992,7 @@ int FUN_000f3c30(param_1, inst, operandIndex, param_4, param_5)
   int iVar4;
   undefined4 uVar5;
   char *pcVar6;
-  int iVar7;
+  int operandRecordB;
   undefined4 local_38;
   undefined4 local_34 [7];
   
@@ -1042,17 +1047,17 @@ LAB_000f3fe8:
     goto switchD_000f3cf4_caseD_5;
   case 6:
     if (operandIndex == 1) {
-      iVar4 = 0;
+      loopCounter = 0;
       pbVar3 = param_1;
       do {
-        iVar7 = IRInst__getOperandRecord(inst,0);
-        local_38 = *(undefined4 *)(iVar7 + 0x10);
-        if (*(char *)((int)local_34 + iVar4 + -4) != '\x01') {
+        operandRecordB = IRInst__getOperandRecord(inst,0);
+        local_38 = *(undefined4 *)(operandRecordB + 0x10);
+        if (*(char *)((int)local_34 + loopCounter + -4) != '\x01') {
           *pbVar3 = *pbVar3 | 1;
         }
-        bVar1 = iVar4 != 3;
+        bVar1 = loopCounter != 3;
         pbVar3 = pbVar3 + 1;
-        iVar4 = iVar4 + 1;
+        loopCounter = loopCounter + 1;
       } while (bVar1);
       return param_1;
     }
@@ -1097,21 +1102,21 @@ switchD_000f3cf4_caseD_4:
   case 0xb:
     goto switchD_000f3cf4_caseD_b;
   case 0xc:
-    iVar4 = IRInst__getOperandRecord(inst,operandIndex);
-    iVar7 = 0;
+    operandRecord = IRInst__getOperandRecord(inst,operandIndex);
+    loopCounterB = 0;
     pcVar6 = &(*(unsigned int *)((unsigned char *)ghidra_home + 16));
-    local_34[0] = *(undefined4 *)(iVar4 + 0x10);
-    iVar4 = 4;
+    local_34[0] = *(undefined4 *)(operandRecord + 0x10);
+    loopCounter = 4;
     pbVar3 = param_1;
     do {
-      if ((*pcVar6 == '\0') && (*(char *)((int)local_34 + iVar7) != '\x04')) {
+      if ((*pcVar6 == '\0') && (*(char *)((int)local_34 + loopCounterB) != '\x04')) {
         *pbVar3 = *pbVar3 | 1;
       }
-      iVar7 = iVar7 + 1;
+      loopCounterB = loopCounterB + 1;
       pcVar6 = pcVar6 + 1;
       pbVar3 = pbVar3 + 1;
-      iVar4 = iVar4 + -1;
-    } while (iVar4 != 0);
+      loopCounter = loopCounter + -1;
+    } while (loopCounter != 0);
     return param_1;
   case 0xd:
     if (operandIndex != 2) goto switchD_000f3cf4_caseD_5;
@@ -1167,6 +1172,7 @@ int FUN_000f403c(param_1, inst, operandIndex, param_4, param_5)
   undefined4 param_4;
   int param_5;
 {
+  int loopCounter;
   int operandRecord2;
   int operandRecord;
   bool bVar1;
@@ -1175,7 +1181,7 @@ int FUN_000f403c(param_1, inst, operandIndex, param_4, param_5)
   int iVar4;
   undefined4 uVar5;
   uint uVar6;
-  int iVar7;
+  int loopCounterB;
   undefined4 local_58;
   undefined4 local_54 [3];
   undefined4 local_48;
@@ -1198,17 +1204,17 @@ int FUN_000f403c(param_1, inst, operandIndex, param_4, param_5)
   case 0:
     operandRecord = IRInst__getOperandRecord(inst,0);
     ((int (*)())SelectWord__selectWhereMasked)(&local_44,*(undefined4 *)(operandRecord + 0x10),param_4);
-    iVar4 = 0;
+    loopCounter = 0;
     local_54[0] = local_44;
-    iVar7 = 4;
+    loopCounterB = 4;
     do {
-      if (*(char *)((int)local_54 + iVar4) != '\x01') {
-        uVar3 = (uint)*(byte *)((int)local_54 + iVar4 + -4);
+      if (*(char *)((int)local_54 + loopCounter) != '\x01') {
+        uVar3 = (uint)*(byte *)((int)local_54 + loopCounter + -4);
         *(byte *)((int)param_1 + uVar3) = *(byte *)((int)param_1 + uVar3) | 1;
       }
-      iVar4 = iVar4 + 1;
-      iVar7 = iVar7 + -1;
-    } while (iVar7 != 0);
+      loopCounter = loopCounter + 1;
+      loopCounterB = loopCounterB + -1;
+    } while (loopCounterB != 0);
     break;
   case 1:
     if (operandIndex == 2) goto switchD_000f40d0_caseD_b;
@@ -1246,15 +1252,15 @@ switchD_000f40d0_caseD_2:
     break;
   case 6:
     if (operandIndex == 1) {
-      iVar4 = 0;
+      loopCounter = 0;
       do {
         operandRecord2 = IRInst__getOperandRecord(inst,0);
-        if (*(char *)(iVar4 + operandRecord2 + 0x10) != '\x01') {
-          uVar3 = (uint)*(byte *)((int)local_54 + iVar4 + -4);
+        if (*(char *)(loopCounter + operandRecord2 + 0x10) != '\x01') {
+          uVar3 = (uint)*(byte *)((int)local_54 + loopCounter + -4);
           *(byte *)((int)param_1 + uVar3) = *(byte *)((int)param_1 + uVar3) | 1;
         }
-        bVar1 = iVar4 != 3;
-        iVar4 = iVar4 + 1;
+        bVar1 = loopCounter != 3;
+        loopCounter = loopCounter + 1;
       } while (bVar1);
     }
     else {
@@ -1305,16 +1311,16 @@ switchD_000f40d0_caseD_2:
         ((int (*)())SelectWord__selectWhereMasked)(&local_28,*(undefined4 *)(operandRecord + 0x10),param_4);
         local_54[0] = local_28;
         *param_1 = 0;
-        iVar4 = 0;
-        iVar7 = 4;
+        loopCounter = 0;
+        loopCounterB = 4;
         do {
-          pbVar2 = (byte *)((int)local_54 + iVar4);
-          uVar3 = (uint)*(byte *)((int)local_54 + iVar4 + -4);
-          iVar4 = iVar4 + 1;
+          pbVar2 = (byte *)((int)local_54 + loopCounter);
+          uVar3 = (uint)*(byte *)((int)local_54 + loopCounter + -4);
+          loopCounter = loopCounter + 1;
           *(byte *)((int)param_1 + uVar3) =
                (byte)(-(uint)(*pbVar2 ^ 1) >> 0x1f) | *(byte *)((int)param_1 + uVar3);
-          iVar7 = iVar7 + -1;
-        } while (iVar7 != 0);
+          loopCounterB = loopCounterB + -1;
+        } while (loopCounterB != 0);
         return param_1;
       }
       if (iVar4 != 0x6e) {
@@ -1353,16 +1359,16 @@ switchD_000f40d0_caseD_a:
     ((int (*)())SelectWord__selectWhereMasked)(local_24,*(undefined4 *)(operandRecord + 0x10),param_4);
     local_54[0] = local_24[0];
     *param_1 = 0;
-    iVar4 = 0;
-    iVar7 = 4;
+    loopCounter = 0;
+    loopCounterB = 4;
     do {
-      if ((*(char *)((int)local_54 + iVar4) == '\0') &&
-         (uVar3 = (uint)*(byte *)((int)local_54 + iVar4 + -4), uVar3 != 4)) {
+      if ((*(char *)((int)local_54 + loopCounter) == '\0') &&
+         (uVar3 = (uint)*(byte *)((int)local_54 + loopCounter + -4), uVar3 != 4)) {
         *(byte *)((int)param_1 + uVar3) = *(byte *)((int)param_1 + uVar3) | 1;
       }
-      iVar4 = iVar4 + 1;
-      iVar7 = iVar7 + -1;
-    } while (iVar7 != 0);
+      loopCounter = loopCounter + 1;
+      loopCounterB = loopCounterB + -1;
+    } while (loopCounterB != 0);
     break;
   case 0xd:
     if (operandIndex != 2) {
@@ -1378,16 +1384,16 @@ LAB_000f45a4:
     if (operandIndex == 1) {
       operandRecord = IRInst__getOperandRecord(inst,0);
       ((int (*)())SelectWord__selectWhereMasked)(&local_48,*(undefined4 *)(operandRecord + 0x10),param_4);
-      iVar4 = 0;
+      loopCounter = 0;
       local_54[0] = local_48;
-      iVar7 = 4;
+      loopCounterB = 4;
       do {
-        if (*(char *)((int)local_54 + iVar4) != '\x01') {
-          *(undefined1 *)((int)param_1 + (uint)*(byte *)((int)local_54 + iVar4 + -4)) = 1;
+        if (*(char *)((int)local_54 + loopCounter) != '\x01') {
+          *(undefined1 *)((int)param_1 + (uint)*(byte *)((int)local_54 + loopCounter + -4)) = 1;
         }
-        iVar4 = iVar4 + 1;
-        iVar7 = iVar7 + -1;
-      } while (iVar7 != 0);
+        loopCounter = loopCounter + 1;
+        loopCounterB = loopCounterB + -1;
+      } while (loopCounterB != 0);
       return param_1;
     }
     if (operandIndex != 2) {
@@ -1432,18 +1438,18 @@ int FUN_000f45f8(param_1, operandIndex, inst, param_4)
   undefined4 param_4;
 {
   bool bVar1;
-  int iVar2;
-  int iVar3;
+  int operandRecord;
+  int loopCounter;
   undefined4 local_28 [4];
   undefined4 local_18 [2];
   
   ((int (*)())FUN_000f403c)(local_18,param_1,operandIndex,DAT_001aa840,param_4);
-  iVar3 = 0;
+  loopCounter = 0;
   local_28[0] = local_18[0];
-  while ((*(char *)((int)local_28 + iVar3) == '\0' ||
-         (iVar2 = IRInst__getOperandRecord(inst,0), *(char *)(iVar3 + iVar2 + 0x10) != '\x01'))) {
-    bVar1 = iVar3 == 3;
-    iVar3 = iVar3 + 1;
+  while ((*(char *)((int)local_28 + loopCounter) == '\0' ||
+         (operandRecord = IRInst__getOperandRecord(inst,0), *(char *)(loopCounter + operandRecord + 0x10) != '\x01'))) {
+    bVar1 = loopCounter == 3;
+    loopCounter = loopCounter + 1;
     if (bVar1) {
       return 1;
     }
@@ -1481,24 +1487,24 @@ int FUN_000f472c(param_1, inst)
   undefined4 inst;
 {
   int operandRecord;
-  int iVar1;
-  int iVar2;
+  int loopCounter;
+  int loopCounterB;
   undefined4 local_28 [8];
   
   operandRecord = IRInst__getOperandRecord(inst,0);
-  iVar1 = 0;
+  loopCounter = 0;
   local_28[0] = *(undefined4 *)(operandRecord + 0x10);
-  iVar2 = 4;
+  loopCounterB = 4;
   do {
-    if (*(char *)((int)local_28 + iVar1) == '\x01') {
-      *(undefined1 *)((int)local_28 + iVar1) = 0;
+    if (*(char *)((int)local_28 + loopCounter) == '\x01') {
+      *(undefined1 *)((int)local_28 + loopCounter) = 0;
     }
     else {
-      *(undefined1 *)((int)local_28 + iVar1) = 1;
+      *(undefined1 *)((int)local_28 + loopCounter) = 1;
     }
-    iVar1 = iVar1 + 1;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    loopCounter = loopCounter + 1;
+    loopCounterB = loopCounterB + -1;
+  } while (loopCounterB != 0);
   *(undefined4 *)(param_1 + 0x9c) = local_28[0];
   return;
 }
@@ -1511,32 +1517,32 @@ int FUN_000f47a8(param_1, inst, inst2)
 {
   int operandRecord2;
   int operandRecord;
-  int iVar1;
-  int iVar2;
+  int loopCounter;
+  int loopCounterB;
   undefined4 local_28;
   undefined4 local_24 [6];
   
   operandRecord = IRInst__getOperandRecord(inst,0);
   local_28 = *(undefined4 *)(operandRecord + 0x10);
   operandRecord2 = IRInst__getOperandRecord(inst2,0);
-  iVar1 = 0;
+  loopCounter = 0;
   local_24[0] = *(undefined4 *)(operandRecord2 + 0x10);
-  iVar2 = 4;
+  loopCounterB = 4;
   do {
-    if ((*(char *)((int)local_24 + iVar1 + -4) != '\x01') &&
-       (*(char *)((int)local_24 + iVar1) != '\x01')) break;
-    iVar1 = iVar1 + 1;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
-  iVar1 = 0;
-  iVar2 = 4;
+    if ((*(char *)((int)local_24 + loopCounter + -4) != '\x01') &&
+       (*(char *)((int)local_24 + loopCounter) != '\x01')) break;
+    loopCounter = loopCounter + 1;
+    loopCounterB = loopCounterB + -1;
+  } while (loopCounterB != 0);
+  loopCounter = 0;
+  loopCounterB = 4;
   do {
-    if (*(char *)((int)local_24 + iVar1) != '\x01') {
-      *(char *)((int)local_24 + iVar1 + -4) = *(char *)((int)local_24 + iVar1);
+    if (*(char *)((int)local_24 + loopCounter) != '\x01') {
+      *(char *)((int)local_24 + loopCounter + -4) = *(char *)((int)local_24 + loopCounter);
     }
-    iVar1 = iVar1 + 1;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    loopCounter = loopCounter + 1;
+    loopCounterB = loopCounterB + -1;
+  } while (loopCounterB != 0);
   *(undefined4 *)(param_1 + 0x9c) = local_28;
   return;
 }
@@ -1550,17 +1556,17 @@ int FUN_000f485c(inst, operandIndex)
   byte bVar2;
   undefined4 operandVReg;
   int operandRecord;
-  int iVar5;
+  int loopCounter;
   undefined4 local_38 [9];
   
   operandVReg = IRInst__getOperandSource(inst,operandIndex);
   operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-  iVar5 = 0;
+  loopCounter = 0;
   local_38[0] = *(undefined4 *)(operandRecord + 0x10);
-  while ((bVar2 = *(byte *)((int)local_38 + iVar5), bVar2 == 4 ||
+  while ((bVar2 = *(byte *)((int)local_38 + loopCounter), bVar2 == 4 ||
          (operandRecord = IRInst__getOperandRecord(operandVReg,0), *(char *)((uint)bVar2 + operandRecord + 0x10) == '\x01'))) {
-    bVar1 = iVar5 == 3;
-    iVar5 = iVar5 + 1;
+    bVar1 = loopCounter == 3;
+    loopCounter = loopCounter + 1;
     if (bVar1) {
       return 1;
     }
@@ -1577,17 +1583,17 @@ int IRInst__sourceLanesAllWritten(inst, operandIndex)
   byte bVar2;
   undefined4 operandVReg;
   int operandRecord;
-  int iVar5;
+  int loopCounter;
   undefined4 local_38 [9];
   
   operandVReg = IRInst__getOperandSource(inst,operandIndex);
   operandRecord = IRInst__getOperandRecord(inst,operandIndex);
-  iVar5 = 0;
+  loopCounter = 0;
   local_38[0] = *(undefined4 *)(operandRecord + 0x10);
-  while ((bVar2 = *(byte *)((int)local_38 + iVar5), bVar2 == 4 ||
+  while ((bVar2 = *(byte *)((int)local_38 + loopCounter), bVar2 == 4 ||
          (operandRecord = IRInst__getOperandRecord(operandVReg,0), *(char *)((uint)bVar2 + operandRecord + 0x10) != '\x01'))) {
-    bVar1 = iVar5 == 3;
-    iVar5 = iVar5 + 1;
+    bVar1 = loopCounter == 3;
+    loopCounter = loopCounter + 1;
     if (bVar1) {
       return 1;
     }
@@ -1740,29 +1746,29 @@ int BitSet__findFirstSet(param_1, param_2)
   int param_2;
 {
   uint uVar1;
-  int iVar2;
+  int loopCounter;
   int loopIndex;
-  int iVar4;
+  int loopCounterB;
   
   if (0 < param_2) {
     loopIndex = 0;
-    iVar2 = 0;
+    loopCounter = 0;
     do {
       uVar1 = *param_1;
       param_1 = param_1 + 1;
       if (uVar1 == 0) {
-        iVar2 = iVar2 + 0x20;
+        loopCounter = loopCounter + 0x20;
       }
       else {
-        iVar4 = 0x20;
+        loopCounterB = 0x20;
         do {
           if ((uVar1 & 1) != 0) {
-            return iVar2;
+            return loopCounter;
           }
           uVar1 = uVar1 >> 1;
-          iVar2 = iVar2 + 1;
-          iVar4 = iVar4 + -1;
-        } while (iVar4 != 0);
+          loopCounter = loopCounter + 1;
+          loopCounterB = loopCounterB + -1;
+        } while (loopCounterB != 0);
       }
       loopIndex = loopIndex + 1;
     } while (param_2 != loopIndex);
@@ -1853,18 +1859,18 @@ int ConstKey__countPresentOperands(param_1, param_2, param_3, param_4, param_5, 
   undefined4 param_6;
   undefined4 param_7;
 {
-  uint uVar1;
-  int iVar2;
+  uint loopCounterB;
+  int loopCounter;
   
-  uVar1 = 0;
-  iVar2 = 4;
+  loopCounterB = 0;
+  loopCounter = 4;
   do {
-    if (((int)*(char *)(param_1 + 0x15c) >> (uVar1 & 0x3f) & 1U) == 0) {
+    if (((int)*(char *)(param_1 + 0x15c) >> (loopCounterB & 0x3f) & 1U) == 0) {
       return;
     }
-    uVar1 = uVar1 + 1;
-    iVar2 = iVar2 + -1;
-  } while (iVar2 != 0);
+    loopCounterB = loopCounterB + 1;
+    loopCounter = loopCounter + -1;
+  } while (loopCounter != 0);
   return;
 }
 
@@ -1873,9 +1879,9 @@ int FUN_000f4d80(param_1, param_2)
   int param_1;
   int param_2;
 {
-  uint uVar1;
+  uint loopCounterB;
   undefined4 *puVar2;
-  int iVar3;
+  int loopCounter;
   /* issue #64 live-repro (crash #4, past the case-0x28 fix): local_2c/local_28/local_24/
    * local_20/local_1c were 5 SEPARATELY declared locals that puVar2's pointer arithmetic
    * (`puVar2 = puVar2 + 1`, below) treats as one contiguous 5-word array - the same
@@ -1893,15 +1899,15 @@ int FUN_000f4d80(param_1, param_2)
    * established fix pattern for this exact defect class. */
   undefined4 local_cluster[5];
 
-  uVar1 = 0;
+  loopCounterB = 0;
   puVar2 = local_cluster;
-  iVar3 = 4;
+  loopCounter = 4;
   do {
-    if (((int)*(char *)(param_2 + 0x15c) >> (uVar1 & 0x3f) & 1U) == 0) break;
-    uVar1 = uVar1 + 1;
+    if (((int)*(char *)(param_2 + 0x15c) >> (loopCounterB & 0x3f) & 1U) == 0) break;
+    loopCounterB = loopCounterB + 1;
     puVar2 = puVar2 + 1;
-    iVar3 = iVar3 + -1;
-  } while (iVar3 != 0);
+    loopCounter = loopCounter + -1;
+  } while (loopCounter != 0);
   local_cluster[0] = *(undefined4 *)(param_1 + 4);
   local_cluster[1] = *(undefined4 *)(param_1 + 8);
   local_cluster[2] = *(undefined4 *)(param_1 + 0xc);
